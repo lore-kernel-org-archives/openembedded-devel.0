@@ -1,50 +1,50 @@
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web10.7274.1586164845135160585
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com [209.85.128.66])
+ by mx.groups.io with SMTP id smtpd.web11.7326.1586164846255071469
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Apr 2020 02:20:45 -0700
+ Mon, 06 Apr 2020 02:20:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=oOOtvr/H;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id p10so16507654wrt.6
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2020 02:20:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=gFQz4OFG;
+ spf=pass (domain: gmail.com, ip: 209.85.128.66, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wm1-f66.google.com with SMTP id r16so13887943wmg.5
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2020 02:20:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=OLrr7RSWIEa+ny1uOgvii0pJ0s0DtNlVJsTIQEDvRAQ=;
-        b=oOOtvr/Hg8vFxBKelaCNcM8NaUKdiMnsUmWDkDzQTLB4hD2uxb2e4WO1xAxLNK9u8h
-         LLJHFjSsBhEn02LrgA/7LIxq0TWpAhXZLoyq5tDtriK2il6CnXkpTFk5BntQ4goeRLDo
-         qHpzT2E+eOZqlANup0uRqOWTAn8jVpIrQ2qiQSAa2Q4DHbpZ0UYuyNf2EHB5I7RsAnms
-         whkBqlbF6hxI0P3WpEDCD0gNvZSLF6ZWy1ZZeiPeX+vnN88ZWhidTeSj1j+e6HSyqAq1
-         IPKlj9CcX8vJ5ZRBt9VVSCAX8KGPeaQPp9f9ZKZR5b1eUlvnIKOETsZk4ZO5Pcb7BUdS
-         /TxQ==
+        bh=VKB1h+Vpj98nFbT4u2crL1uH9ab7RjCl26PNgI+WqYo=;
+        b=gFQz4OFGAqp/9zmKYI18+/l/SfBVMV3q0HJx9mq/u4u32nXNCN7aMcdXk9b1ntMYRa
+         +MlxNmrnnK4psyBfzRub9urbOEco8uiviomM2txz/12KV5YSsOuZTioYeAQo6aT5e/vL
+         DfRjvfetzyfhjLui+MKYb5KAP2mjAMeCF+vSZ5pi9R5baXkvvRNyecJSWPNABYdG2l0E
+         Pk2U5Y6Athor5Nd+AOxqWLJcxU7GqkXeVjsm/seWnSLSDuGnK8N6BGYYaC3fz3pXyKc1
+         I8GFAsXb/emX5SX2BcgsVKmrXeoikCe0H1Ip4bR0ynadXiB2GdukNFbmiyN4ohNtQDcd
+         sMPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=OLrr7RSWIEa+ny1uOgvii0pJ0s0DtNlVJsTIQEDvRAQ=;
-        b=Y/C/lqgufw3Wlin1vBQvge9Wo5h4mMIV5RTUwkf+I0620hoMqFzpijRy6/TDY/Tr1Z
-         dqwGdqy3R2iqihJXS0gIT8fKY2KBEGP4yYv2GxiUv/Bahp3RktY0WUqKoJNNv7ycG2IX
-         HndTsiekpBtdxBB9JPVw7vOv8CszlpLROWwFNOHvC5DPs9RCP/ZdvYJpyjIAVwkH0bMS
-         aytJX/KdT4qKQMAUke/gHzluDprXLoY6K1zH3xC/H1bBgySKEh9F+AXhnHyVUwTfiCVT
-         ie7ZfUL/GFWESUt8vErsZ9x1USJjR0zLAwN/kjxYkp00IkItzA2Q7pv4ldKG5u5s3s5U
-         wQ1A==
-X-Gm-Message-State: AGi0PuYWIzpz+5nzZdNKaaZ/oBLTFFnJ27e6XemMzft2AKN8vIiPRMSI
-	Bfv+Az+wOD6ekis/yvkNDsSZw18Hb+8=
-X-Google-Smtp-Source: APiQypLkA8Dk6OlKQlnIV96ZgUK5CDUPWGfskMd2qtvzNkUiyd8o9R+N471WRirBSz553+TSklGHpw==
-X-Received: by 2002:a5d:4e09:: with SMTP id p9mr690551wrt.376.1586164843447;
-        Mon, 06 Apr 2020 02:20:43 -0700 (PDT)
+        bh=VKB1h+Vpj98nFbT4u2crL1uH9ab7RjCl26PNgI+WqYo=;
+        b=Ac2hMmRBBIHYqgTcGPQobzNlAWt4eeMMwsktia8ZpAAlCRbt2L0ZyNIX2smBLnkobp
+         +GonqLXXPECtbbGBzJlY/xdOqohnIdr9CFOOgLlPpV+BHyVWm91SHpbjkkUXa6h9rKHu
+         6yOcWQTtxQbTnreKBlDToZFVIGJhdf8JmEl+Y1H74QCzt9tPPS2eJPYviKvWYHSvjvaB
+         3zySui+xu8PWE2AkEZ40TGq2BfwoZLzYb+hixLkNJlsqOpkOtyAN4ZNXkMe2S0bWeXwg
+         xucyXFR86QGelqRb3vA1b5WD1UGmfi9cG3/oQwhctEOLeHTFfFNajo12/+uvoOthD9qj
+         nrNg==
+X-Gm-Message-State: AGi0PuZ5+rL+pv/3rtQOipnhSEok+HlU7A0sLvmxHj2NbgDTpnmXDacJ
+	COqdZMPI1+jBbe+rcaLVc3VHTqP1Dqs=
+X-Google-Smtp-Source: APiQypISPNAFR85b3OvQRwC/l8MMd1J2fu1yJo4V9FfSuVGHPYNWaoPIadS0wFvqjD2A8Jscz6pl9g==
+X-Received: by 2002:a1c:750a:: with SMTP id o10mr8175459wmc.124.1586164844328;
+        Mon, 06 Apr 2020 02:20:44 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300F07F295D58AB00388BFE597C49.dip0.t-ipconnect.de. [2003:f0:7f29:5d58:ab00:388b:fe59:7c49])
-        by smtp.gmail.com with ESMTPSA id h13sm207075wru.64.2020.04.06.02.20.42
+        by smtp.gmail.com with ESMTPSA id h13sm207075wru.64.2020.04.06.02.20.43
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Apr 2020 02:20:42 -0700 (PDT)
+        Mon, 06 Apr 2020 02:20:43 -0700 (PDT)
 From: "Andreas M?ller" <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 02/14] mutter: upgrade 3.34.4 -> 3.34.5
-Date: Mon,  6 Apr 2020 11:20:20 +0200
-Message-Id: <20200406092032.3574-3-schnitzeltony@gmail.com>
+Subject: [PATCH 03/14] gnome-shell: upgrade 3.34.4 -> 3.34.5
+Date: Mon,  6 Apr 2020 11:20:21 +0200
+Message-Id: <20200406092032.3574-4-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200406092032.3574-1-schnitzeltony@gmail.com>
 References: <20200406092032.3574-1-schnitzeltony@gmail.com>
@@ -54,42 +54,43 @@ Content-Transfer-Encoding: 8bit
 
 3.34.5
 ======
-* Fix visibility of initially hidden windows [Jonas; !1066]
-* Fix hardware cursor on GPU hotplug [Pekka; !1097]
-* Fix pasting images from wayland [Robert, Carlos; !1141, #1065]
-* Fixed crashes [Florian, Olivier, Jonas; #1029, !1073, !1121, !1120]
+* Leave overview when locking the screen [Jonas D.; !1043]
+* Avoid IO on the main thread [Christian; !1050]
+* Fix OSK layout fallback for unsupported variants [Florian; #2471]
+* Fix high-contrast/symbolic icon mix-up [Florian; #2414]
+* Misc. bug fixes and cleanups [Jonas Ã…., Florian; !1032, #2386]
 
 Contributors:
-  Olivier Fourdan, Carlos Garnacho, Robert Mader, Florian MÃ¼llner,
-  Pekka Paalanen, Jonas Ã…dahl
+  Jonas DreÃŸler, Christian Hergert, Florian MÃ¼llner, Jwtiyar Nariman,
+  Jonas Ã…dahl
 
 Translators:
-  Yi-Jyun Pan [zh_TW]
+  Jwtiyar Nariman [ckb]
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../mutter/{mutter_3.34.4.bb => mutter_3.34.5.bb}             | 4 ++--
+ .../{gnome-shell_3.34.4.bb => gnome-shell_3.34.5.bb}          | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/mutter/{mutter_3.34.4.bb => mutter_3.34.5.bb} (95%)
+ rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell_3.34.4.bb => gnome-shell_3.34.5.bb} (91%)
 
-diff --git a/meta-gnome/recipes-gnome/mutter/mutter_3.34.4.bb b/meta-gnome/recipes-gnome/mutter/mutter_3.34.5.bb
-similarity index 95%
-rename from meta-gnome/recipes-gnome/mutter/mutter_3.34.4.bb
-rename to meta-gnome/recipes-gnome/mutter/mutter_3.34.5.bb
-index c90559cae..00b89dad5 100644
---- a/meta-gnome/recipes-gnome/mutter/mutter_3.34.4.bb
-+++ b/meta-gnome/recipes-gnome/mutter/mutter_3.34.5.bb
-@@ -22,8 +22,8 @@ GNOMEBASEBUILDCLASS = "meson"
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34.4.bb b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34.5.bb
+similarity index 91%
+rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34.4.bb
+rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34.5.bb
+index 33dd7e459..9619628c8 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34.4.bb
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34.5.bb
+@@ -30,8 +30,8 @@ GTKDOC_MESON_OPTION = "gtk_doc"
+ REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
+ UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
  
- inherit gnomebase gsettings gobject-introspection gettext upstream-version-is-even features_check
+-SRC_URI[archive.md5sum] = "692181c1a98be9e5f5b7e8738fd428ce"
+-SRC_URI[archive.sha256sum] = "e99cfb151307e1d5e5dff57b7026cf8aeace9d595a8c9e62537e934d0f14a366"
++SRC_URI[archive.md5sum] = "4bd27c8a91d30fde78cb69b94677cf1f"
++SRC_URI[archive.sha256sum] = "d296f318a74a6d7883358a6ce1c4d8808b7903dbbb4f9c61ab4230f18e6d7550"
  
--SRC_URI[archive.md5sum] = "de19a6de98a2250dd7efdfca14359e39"
--SRC_URI[archive.sha256sum] = "0134513515f605dd0858154d0b54d2e23c5779d52590533e266d407251e20ba2"
-+SRC_URI[archive.md5sum] = "4a16dad1d93d5e1f81d555da35faf0e9"
-+SRC_URI[archive.sha256sum] = "d1d149b70ed7330771f4524886b98775fce5a11cf17f9683cba151075f2879c4"
- SRC_URI += "file://0001-EGL-Include-EGL-eglmesaext.h.patch"
- 
- # x11 is still manadatory - see meson.build
+ PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+ PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth"
 -- 
 2.21.1
 
