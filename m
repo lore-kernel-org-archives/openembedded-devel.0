@@ -1,53 +1,69 @@
-Received: from Henrys-MBP.localdomain (Henrys-MBP.localdomain [114.34.172.18])
- by mx.groups.io with SMTP id smtpd.web10.6111.1586156454271284037
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.7034.1586161920419250857
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Apr 2020 00:00:54 -0700
+ Mon, 06 Apr 2020 01:32:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: henrys-mbp.localdomain, ip: 114.34.172.18, mailfrom: jrhenry@henrys-mbp.localdomain)
-Received: by Henrys-MBP.localdomain (Postfix, from userid 501)
-	id 81E12778BBE; Tue, 10 Mar 2020 15:09:46 +0800 (CST)
-From: "Henry Chang" <mr.changyuheng@gmail.com>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=42224 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jLNAj-0004FY-1U; Mon, 06 Apr 2020 11:31:57 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Henry Chang <mr.changyuheng@gmail.com>
-Subject: [meta-python][PATCH] python-pandas: upgrade 0.23.4 -> 1.0.1
-Date: Tue, 10 Mar 2020 15:09:33 +0800
-Message-Id: <20200310070933.34089-1-mr.changyuheng@gmail.com>
-X-Mailer: git-send-email 2.25.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2 1/3] python-smbus2: Add new recipe
+Date: Mon,  6 Apr 2020 11:31:48 +0300
+Message-Id: <1586161910-31315-1-git-send-email-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.7.4
+X-OutGoing-Spam-Status: No, score=-1.0
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Signed-off-by: Henry Chang <mr.changyuheng@gmail.com>
+Drop-in replacement for smbus-cffi/smbus-python in pure Python.
+It is another implementation of the python-smbus package.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-python/recipes-devtools/python/python-pandas.inc         | 4 ++--
- .../{python3-pandas_0.23.4.bb =3D> python3-pandas_1.0.1.bb}     | 0
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pandas_0.23.4.bb =3D=
-> python3-pandas_1.0.1.bb} (100%)
+ .../recipes-devtools/python/python3-smbus2_0.3.0.bb | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-pandas.inc b/meta=
--python/recipes-devtools/python/python-pandas.inc
-index d6ca24317..9342cedfb 100644
---- a/meta-python/recipes-devtools/python/python-pandas.inc
-+++ b/meta-python/recipes-devtools/python/python-pandas.inc
-@@ -6,8 +6,8 @@ HOMEPAGE =3D "http://pandas.pydata.org/"
- LICENSE =3D "BSD-3-Clause"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dee0470f2de336c370a71c2f8d5e81=
-c11"
-=20
--SRC_URI[md5sum] =3D "7b597c7f989652e0c9af5f09a157e3ae"
--SRC_URI[sha256sum] =3D "5b24ca47acf69222e82530e89111dd9d14f9b970ab2cd3a1=
-c2c78f0c4fbba4f4"
-+SRC_URI[md5sum] =3D "628ffa1dd5768e0be70236596cee8d6b"
-+SRC_URI[sha256sum] =3D "3c07765308f091d81b6735d4f2242bb43c332cc3461cae60=
-543df6b10967fe27"
-=20
- inherit pypi
-=20
-diff --git a/meta-python/recipes-devtools/python/python3-pandas_0.23.4.bb=
- b/meta-python/recipes-devtools/python/python3-pandas_1.0.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pandas_0.23.4.bb
-rename to meta-python/recipes-devtools/python/python3-pandas_1.0.1.bb
---=20
-2.25.0
+diff --git a/meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb b/meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb
+new file mode 100644
+index 0000000..dee70a0
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "Drop-in replacement for smbus-cffi/smbus-python in pure Python"
++DESCRIPTION = "smbus2 is a drop-in replacement for smbus-cffi/smbus-python in pure Python"
++HOMEPAGE = "https://github.com/kplindegaard/smbus2"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
++
++inherit pypi setuptools3
++
++SRC_URI[md5sum] = "d5ed5acc889b4770a84cc932853ed20a"
++SRC_URI[sha256sum] = "210e66eebe4d0b1fe836b3ec2751841942e1c4918c0b429b20a0e20a222228b4"
++
++CLEANBROKEN = "1"
++
++PYPI_PACKAGE = "smbus2"
++
++RDEPENDS_${PN} = "${PYTHON_PN}-ctypes ${PYTHON_PN}-fcntl"
++
++RDEPENDS_${PN} += "\
++        ${PYTHON_PN}-ctypes \
++        ${PYTHON_PN}-fcntl \
++"
+-- 
+2.7.4
 
