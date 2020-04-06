@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.7034.1586161920419250857
+ by mx.groups.io with SMTP id smtpd.web12.7035.1586161920469566505
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 06 Apr 2020 01:32:00 -0700
 Authentication-Results: mx.groups.io;
@@ -8,14 +8,16 @@ Received: from [78.130.197.211] (port=42224 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jLNAj-0004FY-1U; Mon, 06 Apr 2020 11:31:57 +0300
+	id 1jLNAj-0004FY-RR; Mon, 06 Apr 2020 11:31:58 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCHv2 1/3] python-smbus2: Add new recipe
-Date: Mon,  6 Apr 2020 11:31:48 +0300
-Message-Id: <1586161910-31315-1-git-send-email-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2 2/3] python-luma-core: add new recipe
+Date: Mon,  6 Apr 2020 11:31:49 +0300
+Message-Id: <1586161910-31315-2-git-send-email-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1586161910-31315-1-git-send-email-leon.anavi@konsulko.com>
+References: <1586161910-31315-1-git-send-email-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-1.0
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,41 +30,42 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Drop-in replacement for smbus-cffi/smbus-python in pure Python.
-It is another implementation of the python-smbus package.
+Component library providing a Pillow-compatible drawing canvas,
+and other functionality to support drawing primitives and
+text-rendering capabilities for small displays on the Raspberry Pi
+and other single board computers.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python3-smbus2_0.3.0.bb | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb
+ .../python/python3-luma-core_1.12.0.bb               | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-luma-core_1.12.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb b/meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-luma-core_1.12.0.bb b/meta-python/recipes-devtools/python/python3-luma-core_1.12.0.bb
 new file mode 100644
-index 0000000..dee70a0
+index 0000000..cdb1ac8
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "Drop-in replacement for smbus-cffi/smbus-python in pure Python"
-+DESCRIPTION = "smbus2 is a drop-in replacement for smbus-cffi/smbus-python in pure Python"
-+HOMEPAGE = "https://github.com/kplindegaard/smbus2"
++++ b/meta-python/recipes-devtools/python/python3-luma-core_1.12.0.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "A component library to support SBC display drivers"
++DESCRIPTION = "A component library to support SBC display drivers"
++HOMEPAGE = "https://github.com/rm-hull/luma.core"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7"
 +
 +inherit pypi setuptools3
 +
-+SRC_URI[md5sum] = "d5ed5acc889b4770a84cc932853ed20a"
-+SRC_URI[sha256sum] = "210e66eebe4d0b1fe836b3ec2751841942e1c4918c0b429b20a0e20a222228b4"
++SRC_URI[md5sum] = "4378edb99cd12540b4e4a588969567ee"
++SRC_URI[sha256sum] = "864a427de78bcc16758f4f4402a9e61f31cc8857bfae9aba8041159aaec3a491"
 +
 +CLEANBROKEN = "1"
 +
-+PYPI_PACKAGE = "smbus2"
++PYPI_PACKAGE = "luma.core"
 +
-+RDEPENDS_${PN} = "${PYTHON_PN}-ctypes ${PYTHON_PN}-fcntl"
-+
-+RDEPENDS_${PN} += "\
-+        ${PYTHON_PN}-ctypes \
-+        ${PYTHON_PN}-fcntl \
++RDEPENDS_${PN} += " \
++	${PYTHON_PN}-pillow \
++	${PYTHON_PN}-threading \
++	${PYTHON_PN}-smbus2 \
 +"
 -- 
 2.7.4
