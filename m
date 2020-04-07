@@ -1,65 +1,55 @@
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com [209.85.221.67])
- by mx.groups.io with SMTP id smtpd.web12.5895.1586252404827864634
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+ by mx.groups.io with SMTP id smtpd.web12.6576.1586256688852229545
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Apr 2020 02:40:05 -0700
+ Tue, 07 Apr 2020 03:51:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nSqTH2ph;
- spf=pass (domain: gmail.com, ip: 209.85.221.67, mailfrom: andrey.z@gmail.com)
-Received: by mail-wr1-f67.google.com with SMTP id 31so3084881wre.5
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Apr 2020 02:40:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=APMLVq3FhIL3x2gJl0o2X94r/z/+L2mAc8xSeyI1QGE=;
-        b=nSqTH2phHK6g2HVdHNlcstp84Mx8nrJvo5EggaSOPjmhrrEHMQyAzrlaJ9Bg0T5zPG
-         6pAY1u1p6H7KMZt4aoQuEhob1CnRC42Rb1TdZenSFBEMboXROg7KdDk5+cioxH2Ev0gw
-         QqrE4FVMV3Bz+uz1Cq1rdfd/JmmFMzDoUpRN9SkdruOTOAxWu3UC2DVFd6c9O1slIYoz
-         uC12U1uXS+dC9sD2rSFNmAYe1CaxpkjNuI+mvw4rwq85UlQfQ2W5aOtITLdhgXTu3XwO
-         e4rpwla1auBBeFpIcXLTN/kGr6gaHizhJd3BmR8J0RbZYMggeOYHOvDb/LKX3C3GilnJ
-         OXjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=APMLVq3FhIL3x2gJl0o2X94r/z/+L2mAc8xSeyI1QGE=;
-        b=f13wvg/qvTv5dAzKjZ5rNBKQGAZk0FME5xeWtME2TyNOx8WAd6K7y8tU0A1vuGoHrv
-         xETdgq6nmeMJhRhalfsQXrn/qTatv/JEbhgZCac11oulRDUs0Gswxkr8W3UDX/X0Peb6
-         pQzqPs4EolQy5SMrFw+SvnoHHHX7uAXhap/PAEKl+T+Vx0uM0y7iaiFDPDBYkdxqXaKB
-         An+hFomzgz2Q6PjelKc8Dh6ffbvxWs2BIQRKhwrNNR6ytq+VK7tTXNEEX7rjXy4yTUDY
-         ailEjHyfzyJW5cgUJUVqmPRrB/voeXEZ83jzhOcVxOCP08D2ST8CLGN6lDMv2gxqgT/d
-         3IgQ==
-X-Gm-Message-State: AGi0PuY3wFfDtTWi73KY+WlSgLujLB1uvdNLSkGTq+59heB7mtoKssTD
-	7SDGQwFIBgL5Y+R04+ZIXT8ocuAqPKA=
-X-Google-Smtp-Source: APiQypLqxWYhb7J3dHvZmufZajHIdOE10gd7NiL0G+13l023zqZTzH8YJWzQmgZxLBWgXg00OFnMfA==
-X-Received: by 2002:a5d:6605:: with SMTP id n5mr1735312wru.303.1586252403195;
-        Tue, 07 Apr 2020 02:40:03 -0700 (PDT)
-Return-Path: <andrey.z@gmail.com>
-Received: from lab-linux-pc.tendawifi.com (cable-static2-2-7.rsnweb.ch. [146.185.2.7])
-        by smtp.gmail.com with ESMTPSA id f25sm1582720wml.11.2020.04.07.02.40.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Apr 2020 02:40:02 -0700 (PDT)
-From: "Andrey Zhizhikin" <andrey.z@gmail.com>
+ dkim=pass header.i=@koncepto.io header.s=default header.b=kErRX+Y0;
+ spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
+Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
+	by koncepto.io (Postfix) with ESMTPSA id EA31E6029D;
+	Tue,  7 Apr 2020 12:51:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1586256686;
+	bh=9yiB5zLzzo+BcXocfsJtzl8oYm9irOHxkg+rdx/xNi0=;
+	h=From:To:Cc:Subject:Date:From;
+	b=kErRX+Y0ue4UEc2Se8eRb5GsHY/VmEadko8I+c8JxKSqWiB9aoHvQPZtJnvM3ZDZ9
+	 3lIrG91syMUZ2BBF3byUgjv5jPRbqXj5X9zkgp52xcvVhoMeF5OR1ZUHot3aIIlibY
+	 LZ0/7aSj0TtvBSgriVk9Wew0+CIo83ebq2MLOBRhOqtOZ70tP6sD8AmhRXLtO7DGUV
+	 i1WSlTHXU3LbMjmnbw5uQj3MGSKIevBCYEv9sqj7q4ulcfaEqwIDo9sTZj8UFnkusw
+	 rjoQ8kv7MDR/WTJvXsKjn3CAhBdEBA1BLIpBktTbJOU8aMhAo2jje0hAc2qjCFlq5O
+	 /JKLeyR1h6lig==
+From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
-Cc: Andrey Zhizhikin <andrey.zhizhikin@leica-geosystems.com>
-Subject: [meta-python][PATCH] python3-pyscaffold: move recipe to proper location
-Date: Tue,  7 Apr 2020 09:39:52 +0000
-Message-Id: <20200407093952.8056-1-andrey.z@gmail.com>
-X-Mailer: git-send-email 2.17.1
+Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
+Subject: [meta-oe][PATCH] fmt: upgrade 6.1.2 -> 6.2.0
+Date: Tue,  7 Apr 2020 12:51:24 +0200
+Message-Id: <1586256684-29815-1-git-send-email-pjtexier@koncepto.io>
+X-Mailer: git-send-email 2.7.4
 
-From: Andrey Zhizhikin <andrey.zhizhikin@leica-geosystems.com>
+See full changelog https://github.com/fmtlib/fmt/releases/tag/6.2.0
 
-Initial submission was performed on incorrect path, move the recipe
-under [meta-python] folder.
-
-Signed-off-by: Andrey Zhizhikin <andrey.zhizhikin@leica-geosystems.com>
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- .../recipes-devtools}/python/python3-pyscaffold_3.2.3.bb          | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename {recipes-devtools => meta-python/recipes-devtools}/python/python3-pyscaffold_3.2.3.bb (100%)
+ meta-oe/recipes-support/fmt/{fmt_6.1.2.bb => fmt_6.2.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/fmt/{fmt_6.1.2.bb => fmt_6.2.0.bb} (89%)
 
-diff --git a/recipes-devtools/python/python3-pyscaffold_3.2.3.bb b/meta-python/recipes-devtools/python/python3-pyscaffold_3.2.3.bb
-similarity index 100%
-rename from recipes-devtools/python/python3-pyscaffold_3.2.3.bb
-rename to meta-python/recipes-devtools/python/python3-pyscaffold_3.2.3.bb
+diff --git a/meta-oe/recipes-support/fmt/fmt_6.1.2.bb b/meta-oe/recipes-support/fmt/fmt_6.2.0.bb
+similarity index 89%
+rename from meta-oe/recipes-support/fmt/fmt_6.1.2.bb
+rename to meta-oe/recipes-support/fmt/fmt_6.2.0.bb
+index ff9bd7d..05dc94a 100644
+--- a/meta-oe/recipes-support/fmt/fmt_6.1.2.bb
++++ b/meta-oe/recipes-support/fmt/fmt_6.2.0.bb
+@@ -5,7 +5,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b"
+ 
+ SRC_URI += "git://github.com/fmtlib/fmt"
+-SRCREV = "f94b7364b9409f05207c3af3fa4666730e11a854"
++SRCREV = "9bdd1596cef1b57b9556f8bef32dc4a32322ef3e"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.17.1
+2.7.4
 
