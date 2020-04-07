@@ -1,94 +1,65 @@
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
- by mx.groups.io with SMTP id smtpd.web11.5777.1586251445560839105
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com [209.85.221.67])
+ by mx.groups.io with SMTP id smtpd.web12.5895.1586252404827864634
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Apr 2020 02:24:05 -0700
+ Tue, 07 Apr 2020 02:40:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: intel.com, ip: 192.55.52.43, mailfrom: przemyslaw.hawrylewicz.czarnowski@intel.com)
-IronPort-SDR: Bys8bvyKr5/KPdHAC9X/QtCSny74VI/19ENgld1xIkC/Jv8mN9Hwds+dWT7oyNaCuTi5+zvrXp
- MYOMmMdxdBhA==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
-  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Apr 2020 02:24:05 -0700
-IronPort-SDR: tSqvtAfZ1bZGYnSu+uQ1nuMhYD66IGzIyA2onhwVYwOOnFhjatNMD1xoTcpgmMDljaRd2fN70M
- lUj11yeNA/5A==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.72,353,1580803200"; 
-   d="scan'208";a="452371934"
-Received: from opensps-ubuntu.igk.intel.com ([10.91.127.55])
-  by fmsmga006.fm.intel.com with ESMTP; 07 Apr 2020 02:24:04 -0700
-From: przemyslaw.hawrylewicz.czarnowski@intel.com
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=nSqTH2ph;
+ spf=pass (domain: gmail.com, ip: 209.85.221.67, mailfrom: andrey.z@gmail.com)
+Received: by mail-wr1-f67.google.com with SMTP id 31so3084881wre.5
+        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Apr 2020 02:40:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=APMLVq3FhIL3x2gJl0o2X94r/z/+L2mAc8xSeyI1QGE=;
+        b=nSqTH2phHK6g2HVdHNlcstp84Mx8nrJvo5EggaSOPjmhrrEHMQyAzrlaJ9Bg0T5zPG
+         6pAY1u1p6H7KMZt4aoQuEhob1CnRC42Rb1TdZenSFBEMboXROg7KdDk5+cioxH2Ev0gw
+         QqrE4FVMV3Bz+uz1Cq1rdfd/JmmFMzDoUpRN9SkdruOTOAxWu3UC2DVFd6c9O1slIYoz
+         uC12U1uXS+dC9sD2rSFNmAYe1CaxpkjNuI+mvw4rwq85UlQfQ2W5aOtITLdhgXTu3XwO
+         e4rpwla1auBBeFpIcXLTN/kGr6gaHizhJd3BmR8J0RbZYMggeOYHOvDb/LKX3C3GilnJ
+         OXjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=APMLVq3FhIL3x2gJl0o2X94r/z/+L2mAc8xSeyI1QGE=;
+        b=f13wvg/qvTv5dAzKjZ5rNBKQGAZk0FME5xeWtME2TyNOx8WAd6K7y8tU0A1vuGoHrv
+         xETdgq6nmeMJhRhalfsQXrn/qTatv/JEbhgZCac11oulRDUs0Gswxkr8W3UDX/X0Peb6
+         pQzqPs4EolQy5SMrFw+SvnoHHHX7uAXhap/PAEKl+T+Vx0uM0y7iaiFDPDBYkdxqXaKB
+         An+hFomzgz2Q6PjelKc8Dh6ffbvxWs2BIQRKhwrNNR6ytq+VK7tTXNEEX7rjXy4yTUDY
+         ailEjHyfzyJW5cgUJUVqmPRrB/voeXEZ83jzhOcVxOCP08D2ST8CLGN6lDMv2gxqgT/d
+         3IgQ==
+X-Gm-Message-State: AGi0PuY3wFfDtTWi73KY+WlSgLujLB1uvdNLSkGTq+59heB7mtoKssTD
+	7SDGQwFIBgL5Y+R04+ZIXT8ocuAqPKA=
+X-Google-Smtp-Source: APiQypLqxWYhb7J3dHvZmufZajHIdOE10gd7NiL0G+13l023zqZTzH8YJWzQmgZxLBWgXg00OFnMfA==
+X-Received: by 2002:a5d:6605:: with SMTP id n5mr1735312wru.303.1586252403195;
+        Tue, 07 Apr 2020 02:40:03 -0700 (PDT)
+Return-Path: <andrey.z@gmail.com>
+Received: from lab-linux-pc.tendawifi.com (cable-static2-2-7.rsnweb.ch. [146.185.2.7])
+        by smtp.gmail.com with ESMTPSA id f25sm1582720wml.11.2020.04.07.02.40.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 07 Apr 2020 02:40:02 -0700 (PDT)
+From: "Andrey Zhizhikin" <andrey.z@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Przemyslaw Czarnowski <przemyslaw.hawrylewicz.czarnowski@intel.com>
-Subject: [PATCH] Add nbdkit to extend backend possibilities of nbd.
-Date: Tue,  7 Apr 2020 11:23:47 +0200
-Message-Id: <20200407092347.5634-1-przemyslaw.hawrylewicz.czarnowski@intel.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Cc: Andrey Zhizhikin <andrey.zhizhikin@leica-geosystems.com>
+Subject: [meta-python][PATCH] python3-pyscaffold: move recipe to proper location
+Date: Tue,  7 Apr 2020 09:39:52 +0000
+Message-Id: <20200407093952.8056-1-andrey.z@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
-Nbdkit uses plugins to add more sources of data for nbd client.
-Nbdkit can also spawn nbd-client, uses unix or network socket to
-communicate with client, uses different plugins to serve data for nbd
-device eg. curl, file, custom plugins in many languages (perl, python)
-and some others.
+From: Andrey Zhizhikin <andrey.zhizhikin@leica-geosystems.com>
 
-Signed-off-by: Przemyslaw Czarnowski <przemyslaw.hawrylewicz.czarnowski@intel.com>
+Initial submission was performed on incorrect path, move the recipe
+under [meta-python] folder.
+
+Signed-off-by: Andrey Zhizhikin <andrey.zhizhikin@leica-geosystems.com>
 ---
- .../recipes-support/nbdkit/nbdkit_git.bb      | 43 +++++++++++++++++++
- 1 file changed, 43 insertions(+)
- create mode 100644 meta-networking/recipes-support/nbdkit/nbdkit_git.bb
+ .../recipes-devtools}/python/python3-pyscaffold_3.2.3.bb          | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename {recipes-devtools => meta-python/recipes-devtools}/python/python3-pyscaffold_3.2.3.bb (100%)
 
-diff --git a/meta-networking/recipes-support/nbdkit/nbdkit_git.bb b/meta-networking/recipes-support/nbdkit/nbdkit_git.bb
-new file mode 100644
-index 000000000..0f7653d9c
---- /dev/null
-+++ b/meta-networking/recipes-support/nbdkit/nbdkit_git.bb
-@@ -0,0 +1,43 @@
-+SUMMARY = "nbdkit is a toolkit for creating NBD servers."
-+DESCRIPTION = "NBD — Network Block Device — is a protocol \
-+for accessing Block Devices (hard disks and disk-like things) \
-+over a Network. \
-+\
-+nbdkit is a toolkit for creating NBD servers."
-+
-+HOMEPAGE = "https://github.com/libguestfs/nbdkit"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4332a97808994cf2133a65b6c6f33eaf"
-+
-+SRC_URI = "git://github.com/libguestfs/nbdkit.git;protocol=https"
-+
-+PV = "1.19.6+git${SRCPV}"
-+SRCREV = "257561bc9f2f01eb9f21686bcec4b863d17a26c4"
-+
-+S = "${WORKDIR}/git"
-+
-+DEPENDS = "curl xz e2fsprogs zlib"
-+
-+inherit pkgconfig python3native perlnative pythonnative autotools
-+# needed as nbdkit does not support build in external directory
-+inherit autotools-brokensep
-+
-+# Those are required to build standalone
-+EXTRA_OECONF = " --without-libvirt --without-libguestfs --disable-perl"
-+
-+# Old python2.x not suitable for nbdkit >= 1.16
-+EXTRA_OECONF += " --disable-python"
-+
-+# Disable some extended support (not desired for small embedded systems)
-+#EXTRA_OECONF += " --disable-ocaml"
-+#EXTRA_OECONF += " --disable-rust"
-+#EXTRA_OECONF += " --disable-ruby"
-+#EXTRA_OECONF += " --disable-tcl"
-+#EXTRA_OECONF += " --disable-lua"
-+#EXTRA_OECONF += " --disable-vddk"
-+
-+do_install_append() {
-+    rm -f ${D}/usr/share/bash-completion/completions/nbdkit
-+    rmdir ${D}/usr/share/bash-completion/completions
-+    rmdir ${D}/usr/share/bash-completion
-+}
+diff --git a/recipes-devtools/python/python3-pyscaffold_3.2.3.bb b/meta-python/recipes-devtools/python/python3-pyscaffold_3.2.3.bb
+similarity index 100%
+rename from recipes-devtools/python/python3-pyscaffold_3.2.3.bb
+rename to meta-python/recipes-devtools/python/python3-pyscaffold_3.2.3.bb
 -- 
-2.20.1
+2.17.1
 
