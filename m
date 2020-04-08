@@ -1,89 +1,117 @@
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com [209.85.210.193])
- by mx.groups.io with SMTP id smtpd.web12.3091.1586307260655028009
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com [209.85.210.194])
+ by mx.groups.io with SMTP id smtpd.web11.3866.1586310625522290825
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Apr 2020 17:54:20 -0700
+ Tue, 07 Apr 2020 18:50:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=RIXgaj81;
- spf=pass (domain: gmail.com, ip: 209.85.210.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f193.google.com with SMTP id f206so1607404pfa.10
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Apr 2020 17:54:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=eAbOm7o+;
+ spf=pass (domain: gmail.com, ip: 209.85.210.194, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f194.google.com with SMTP id f206so1667485pfa.10
+        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Apr 2020 18:50:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=KqUkyCDj9ZOCBPY3N8vjvqQNTkrzlfS7Z5wzeX5GQoQ=;
-        b=RIXgaj81SyDWa0lc1zMeSyEpzm4dtfYe/xo0zWtbh8/rUVrTUD/28bVZWRbr/9zR84
-         sUJW0tmaIhAATZja0mlTBr5919PKd7vdzC+Pzg7fbRfwifs4L+ksDnVDE7LvrkQyectz
-         CBLXVfPLP39lfZ29Scre7k6vEuAwfS/bpPuTSyUvN7xd3VT2UuwFMyWCObxbSj3IthmZ
-         hbsSHxW99OY0f1kh5xzaxpFc57PSkmPAmjVPVZAB5UqvvmcATtTvaz2g0+38/4G9m9YX
-         wpxqTTGPj+4Q/kpM+XNC3QvwW2wMNNkTdIm28cBfdW5Y98556rVfGvM0OZqZs2w+bkmv
-         w0xA==
+        bh=K++CA5KBF+KjjgnlUSGbi15Y4Sw4QK1V37MedE/oWVM=;
+        b=eAbOm7o+9XhTH0CuWaur/QEIbAOE1uMagHJKxl8xNQm532o2AZ3w49XuJO4fP5cXjH
+         FTCog0x4zyxU7XXu9vEAKDvqddyZVJvfB8sq1bsub6O9VfQ2ZYI7Tsx3I+b4o2Ij7AHD
+         /HSDBqNdAlgWLXZOPt/vUsjkFKwA+K97CzuYI8zvXP+6OfAg7qdmd5gMwZ4/PPaRrSga
+         xT1LyPIS9FneLSfR0IBWvv8Hvd7/qGahSkhDC08nzsuK54rk1JG1Z7uVAnR/qNGtAJvH
+         cNwM54iN1AmoW/7yH0T6XQ7/8uISsz9CEqLZTybWkSxFz+25GJUpzlkAqH/Hdg9Y1ioB
+         +e+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=KqUkyCDj9ZOCBPY3N8vjvqQNTkrzlfS7Z5wzeX5GQoQ=;
-        b=T/aod6pdViv7Mg0paI9ID2kTqtzHsJ4iuXPanb96Plg0cv/ej+9urTywunGgFsivAq
-         v/cLMgYZy9IeSMBJg6jUqTNpCk8RFMvFrntPQpdZ6MDvtLEA7d9kKHRUwr8H8trfeyXM
-         rOB1uzxrBevfudAIYypExh7jIWPXME55GJC3xk+qwvQAGhTIt7L11zjlpg8c3uG8hLYd
-         ad9NvhgppI91fIdBgDmuIZ+U7abxph/l/51bY8W08j7yhvOpCSDhDjnTJOZ6jhINBZY+
-         W1GJT3qGgG0BMuE+OL7k8P6ctz0wT6WEcGOoaEK7Zpmclgk16IEn+swNybK0kFH039Db
-         HvDA==
-X-Gm-Message-State: AGi0PuYssnUznvcq9Q0Gj91VkrRid4HTT+Lw7au8asvsxSmwIBkCV+6q
-	/Ybuwm7Wnf57JqQ9kPb3bZXxvzlUfQo=
-X-Google-Smtp-Source: APiQypK3O6u8UZ9hoyNNmaIxLM4LZ5zKJJ3zcjCqxMVlinOU2Dqy5hBqpquSF2JIw1axrlnO+Clyvw==
-X-Received: by 2002:a63:34c9:: with SMTP id b192mr3309057pga.275.1586307259554;
-        Tue, 07 Apr 2020 17:54:19 -0700 (PDT)
+        bh=K++CA5KBF+KjjgnlUSGbi15Y4Sw4QK1V37MedE/oWVM=;
+        b=W3DRF2iYUpAnDF7VIZCor9SeIlgoLxZxWOiFmYGSEKDLX1YAoIgFcKoq7LngT1r7/1
+         QyiO4QPfEcsHXRk6ChgVNGaVnuhjnt4QNdg15jiF1XPYRQGWUrPhd1asUqFOVjt2XOVD
+         WCfGyIDRBF9NZQJLMIqpgZezVzzMP5xzxUHoUJbp2nUx+KBT5h+QMaLyWOmYDbkeHcpg
+         s5VpZ1JTEY3WgXXsLSb1ei4P211aJ+TI9WPDUv0G9BMtGX3c3589r1wJ3uEheo8zqoI6
+         rDx+FbwD0dERtCBi+LKwUUE9wGUtl8EV/LY72bThfJ6SzOX4iilC5e1HohFY3+wVK+Mj
+         IVzw==
+X-Gm-Message-State: AGi0PubeVeThUCYFrEgjaKAVFQd702mwfs+Z2NMizwci/3EJw/9TR/vf
+	tOgH0xkNKLax7buEe9+NbM0oLnGhx7U=
+X-Google-Smtp-Source: APiQypLjxKALgHqN0d2MChrxXb+rPYHar7KRXa2t3A0zgK3/qOaTDyjHuNIz0S21GNaEj0eJiyyqDw==
+X-Received: by 2002:a63:4c1:: with SMTP id 184mr4759646pge.147.1586310624315;
+        Tue, 07 Apr 2020 18:50:24 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::493b])
-        by smtp.gmail.com with ESMTPSA id 6sm14033844pgm.51.2020.04.07.17.54.18
+        by smtp.gmail.com with ESMTPSA id m7sm2805203pjb.7.2020.04.07.18.50.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Apr 2020 17:54:19 -0700 (PDT)
+        Tue, 07 Apr 2020 18:50:23 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH v2] proj: Update to 7.0.0 release
-Date: Tue,  7 Apr 2020 17:54:33 -0700
-Message-Id: <20200408005433.1405755-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] wireguard: Upgrade to latest compat external module and tools
+Date: Tue,  7 Apr 2020 18:50:37 -0700
+Message-Id: <20200408015037.1432166-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.26.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-add dependency on libtiff and curl
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-v2: Add curl packageconfig and tiff dependency
+ ...ule_0.0.20191219.bb => wireguard-module_1.0.20200401.bb} | 4 ++++
+ ...ools_0.0.20191219.bb => wireguard-tools_1.0.20200319.bb} | 5 ++---
+ meta-networking/recipes-kernel/wireguard/wireguard.inc      | 6 +-----
+ 3 files changed, 7 insertions(+), 8 deletions(-)
+ rename meta-networking/recipes-kernel/wireguard/{wireguard-module_0.0.20191219.bb => wireguard-module_1.0.20200401.bb} (89%)
+ rename meta-networking/recipes-kernel/wireguard/{wireguard-tools_0.0.20191219.bb => wireguard-tools_1.0.20200319.bb} (81%)
 
- .../proj/{proj_6.2.0.bb => proj_7.0.0.bb}                | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-navigation/proj/{proj_6.2.0.bb => proj_7.0.0.bb} (62%)
-
-diff --git a/meta-oe/recipes-navigation/proj/proj_6.2.0.bb b/meta-oe/recipes-navigation/proj/proj_7.0.0.bb
-similarity index 62%
-rename from meta-oe/recipes-navigation/proj/proj_6.2.0.bb
-rename to meta-oe/recipes-navigation/proj/proj_7.0.0.bb
-index fa269d01b3..44674244ef 100644
---- a/meta-oe/recipes-navigation/proj/proj_6.2.0.bb
-+++ b/meta-oe/recipes-navigation/proj/proj_7.0.0.bb
-@@ -6,11 +6,14 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=74d9aaec5fa0cd734341e8c4dc91b608"
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20191219.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
+similarity index 89%
+rename from meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20191219.bb
+rename to meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
+index badc97a973..73199592c8 100644
+--- a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20191219.bb
++++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
+@@ -1,5 +1,9 @@
+ require wireguard.inc
  
- SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.gz"
--SRC_URI[md5sum] = "5cde556545828beaffbe50b1bb038480"
--SRC_URI[sha256sum] = "b300c0f872f632ad7f8eb60725edbf14f0f8f52db740a3ab23e7b94f1cd22a50"
-+SRC_URI[sha256sum] = "ee0e14c1bd2f9429b1a28999240304c0342ed739ebaea3d4ff44c585b1097be8"
- 
--DEPENDS = "sqlite3 sqlite3-native"
-+DEPENDS = "sqlite3 sqlite3-native tiff"
- 
- inherit autotools pkgconfig lib_package
- 
-+PACKAGECONFIG ?= "curl"
++SRCREV = "43f57dac7b8305024f83addc533c9eede6509129"
 +
-+PACKAGECONFIG[curl] = ",--without-curl,curl"
++SRC_URI = "git://git.zx2c4.com/wireguard-linux-compat"
 +
- FILES_${PN} += "${datadir}/proj"
+ inherit module kernel-module-split
+ 
+ DEPENDS = "virtual/kernel libmnl"
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20191219.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb
+similarity index 81%
+rename from meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20191219.bb
+rename to meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb
+index 267124a294..f698b9a9af 100644
+--- a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20191219.bb
++++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb
+@@ -1,13 +1,12 @@
+ require wireguard.inc
+ 
+-LIC_FILES_CHKSUM = "file://../../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++SRCREV = "a8063adc8ae9b4fc9848500e93f94bee8ad2e585"
++SRC_URI = "git://git.zx2c4.com/wireguard-tools"
+ 
+ inherit bash-completion systemd pkgconfig
+ 
+ DEPENDS += "wireguard-module libmnl"
+ 
+-S = "${WORKDIR}/WireGuard-${PV}/src/tools"
+-
+ do_install () {
+     oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \
+         SYSTEMDUNITDIR="${systemd_unitdir}" \
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+index 1ebe7cdfba..a3a7867c23 100644
+--- a/meta-networking/recipes-kernel/wireguard/wireguard.inc
++++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+@@ -10,8 +10,4 @@ LICENSE = "GPLv2"
+ 
+ LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+-SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz"
+-SRC_URI[md5sum] = "5175ca88850993dc88a4c9d924ee79d4"
+-SRC_URI[sha256sum] = "5aba6f0c38e97faa0b155623ba594bb0e4bd5e29deacd8d5ed8bda8d8283b0e7"
+-
+-S = "${WORKDIR}/WireGuard-${PV}/src/"
++S = "${WORKDIR}/git/src"
 -- 
 2.26.0
 
