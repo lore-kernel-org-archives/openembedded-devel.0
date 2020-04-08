@@ -1,322 +1,214 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web12.4869.1586314735434068979
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+ by mx.groups.io with SMTP id smtpd.web10.5997.1586321452042739653
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Apr 2020 19:58:56 -0700
+ Tue, 07 Apr 2020 21:50:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.72,357,1580745600"; 
-   d="scan'208";a="88662439"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 08 Apr 2020 10:58:53 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id A7104406AB15
-	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Apr 2020 10:48:27 +0800 (CST)
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) by
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Wed, 8 Apr 2020 10:58:50 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local ([fe80::15e2:f6f4:7314:fd88])
- by G08CNEXMBPEKD05.g08.fujitsu.local ([fe80::15e2:f6f4:7314:fd88%14]) with
- mapi id 15.00.1497.000; Wed, 8 Apr 2020 10:58:50 +0800
-From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][master][PATCH] php: CVE-2019-11045.patch CVE-2019-11046.patch CVE-2019-11047.patch CVE-2019-11050.patch
-Thread-Topic: [oe] [meta-oe][master][PATCH] php: CVE-2019-11045.patch
-  CVE-2019-11046.patch CVE-2019-11047.patch CVE-2019-11050.patch
-Thread-Index: AQHV/ZPX8DNoB1X5xUGLV2BjAEmkAahuqAyw
-Date: Wed, 8 Apr 2020 02:58:49 +0000
-Message-ID: <52bfd5700e284eefb04bc464b047b0a9@G08CNEXMBPEKD05.g08.fujitsu.local>
-References: <1584603557-43263-1-git-send-email-wangmy@cn.fujitsu.com>
-In-Reply-To: <1584603557-43263-1-git-send-email-wangmy@cn.fujitsu.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.167.225.33]
+ dkim=missing; spf=pass (domain: intel.com, ip: 192.55.52.151, mailfrom: anuj.mittal@intel.com)
+IronPort-SDR: agsfE7Y5lEnQhJvUrwaUYzZZsqGTUHkCB5GPahBbsPSx7FpRSSTLdLgInrvE96b/zDyd0nWqEE
+ AUGs+ZTMLIuw==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Apr 2020 21:50:51 -0700
+IronPort-SDR: 9Hr79iXdK8RL2Tj62X5aPWuLv/G2TJzzmv32c3KxPpL9+QnUS39dp41TfLceAENaoD1e9P0+e/
+ RQfDZz1R9qVA==
+X-IronPort-AV: E=Sophos;i="5.72,357,1580803200"; 
+   d="scan'208";a="398087773"
+Received: from anmitta2-mobl1.gar.corp.intel.com ([10.255.189.170])
+  by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Apr 2020 21:50:50 -0700
+From: "Anuj Mittal" <anuj.mittal@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] tbb: upgrade 2017 -> 2020.1
+Date: Wed,  8 Apr 2020 12:50:40 +0800
+Message-Id: <20200408045040.569849-1-anuj.mittal@intel.com>
+X-Mailer: git-send-email 2.25.2
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: A7104406AB15.AA411
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Content-Language: zh-CN
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 8bit
 
-UGluZw0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogV2Fu
-ZywgTWluZ3l1DQpTZW50OiBUaHVyc2RheSwgTWFyY2ggMTksIDIwMjAgMzoz
-OSBQTQ0KVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRk
-ZWQub3JnDQpDYzogV2FuZywgTWluZ3l1IDx3YW5nbXlAY24uZnVqaXRzdS5j
-b20+DQpTdWJqZWN0OiBbb2VdIFttZXRhLW9lXVttYXN0ZXJdW1BBVENIXSBw
-aHA6IENWRS0yMDE5LTExMDQ1LnBhdGNoIENWRS0yMDE5LTExMDQ2LnBhdGNo
-IENWRS0yMDE5LTExMDQ3LnBhdGNoIENWRS0yMDE5LTExMDUwLnBhdGNoDQoN
-ClNlY3VyaXR5IEFkdmlzb3J5DQoNClJlZmVyZW5jZXM6DQpodHRwczovL2N2
-ZS5taXRyZS5vcmcvY2dpLWJpbi9jdmVuYW1lLmNnaT9uYW1lPUNWRS0yMDE5
-LTExMDQ1DQpodHRwczovL2N2ZS5taXRyZS5vcmcvY2dpLWJpbi9jdmVuYW1l
-LmNnaT9uYW1lPUNWRS0yMDE5LTExMDQ2DQpodHRwczovL2N2ZS5taXRyZS5v
-cmcvY2dpLWJpbi9jdmVuYW1lLmNnaT9uYW1lPUNWRS0yMDE5LTExMDQ3DQpo
-dHRwczovL2N2ZS5taXRyZS5vcmcvY2dpLWJpbi9jdmVuYW1lLmNnaT9uYW1l
-PUNWRS0yMDE5LTExMDUwDQoNClNpZ25lZC1vZmYtYnk6IFdhbmcgTWluZ3l1
-IDx3YW5nbXlAY24uZnVqaXRzdS5jb20+DQotLS0NCiAuLi4vcGhwL3BocC9D
-VkUtMjAxOS0xMTA0NS5wYXRjaCAgICAgICAgICAgICAgfCA3OCArKysrKysr
-KysrKysrKysrKysrDQogLi4uL3BocC9waHAvQ1ZFLTIwMTktMTEwNDYucGF0
-Y2ggICAgICAgICAgICAgIHwgNTkgKysrKysrKysrKysrKysNCiAuLi4vcGhw
-L3BocC9DVkUtMjAxOS0xMTA0Ny5wYXRjaCAgICAgICAgICAgICAgfCA1NyAr
-KysrKysrKysrKysrKw0KIC4uLi9waHAvcGhwL0NWRS0yMDE5LTExMDUwLnBh
-dGNoICAgICAgICAgICAgICB8IDUzICsrKysrKysrKysrKysNCiBtZXRhLW9l
-L3JlY2lwZXMtZGV2dG9vbHMvcGhwL3BocF83LjMuMTEuYmIgICAgfCAgNCAr
-DQogNSBmaWxlcyBjaGFuZ2VkLCAyNTEgaW5zZXJ0aW9ucygrKQ0KIGNyZWF0
-ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvcGhwL3Bo
-cC9DVkUtMjAxOS0xMTA0NS5wYXRjaA0KIGNyZWF0ZSBtb2RlIDEwMDY0NCBt
-ZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvcGhwL3BocC9DVkUtMjAxOS0xMTA0
-Ni5wYXRjaA0KIGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMt
-ZGV2dG9vbHMvcGhwL3BocC9DVkUtMjAxOS0xMTA0Ny5wYXRjaA0KIGNyZWF0
-ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvcGhwL3Bo
-cC9DVkUtMjAxOS0xMTA1MC5wYXRjaA0KDQpkaWZmIC0tZ2l0IGEvbWV0YS1v
-ZS9yZWNpcGVzLWRldnRvb2xzL3BocC9waHAvQ1ZFLTIwMTktMTEwNDUucGF0
-Y2ggYi9tZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvcGhwL3BocC9DVkUtMjAx
-OS0xMTA0NS5wYXRjaA0KbmV3IGZpbGUgbW9kZSAxMDA2NDQNCmluZGV4IDAw
-MDAwMDAwMC4uM2IzYzE4N2E0DQotLS0gL2Rldi9udWxsDQorKysgYi9tZXRh
-LW9lL3JlY2lwZXMtZGV2dG9vbHMvcGhwL3BocC9DVkUtMjAxOS0xMTA0NS5w
-YXRjaA0KQEAgLTAsMCArMSw3OCBAQA0KK0Zyb20gYTVhMTU5NjVkYTIzYzhl
-OTc2NTcyNzhmYzhkZmJmMWRmYjIwYzAxNiBNb24gU2VwIDE3IDAwOjAwOjAw
-IDIwMDENCitGcm9tOiAiQ2hyaXN0b3BoIE0uIEJlY2tlciIgPGNtYmVja2Vy
-NjlAZ214LmRlPg0KK0RhdGU6IE1vbiwgMjUgTm92IDIwMTkgMTY6NTY6MzQg
-KzAxMDANCitTdWJqZWN0OiBbUEFUQ0hdIEZpeCAjNzg4NjM6IERpcmVjdG9y
-eUl0ZXJhdG9yIGNsYXNzIHNpbGVudGx5IHRydW5jYXRlcyANCithZnRlciAg
-YSBudWxsIGJ5dGUNCisNCitTaW5jZSB0aGUgY29uc3RydWN0b3Igb2YgRGly
-ZWN0b3J5SXRlcmF0b3IgYW5kIGZyaWVuZHMgaXMgc3VwcG9zZWQgdG8gDQor
-YWNjZXB0cyBwYXRocyAoaS5lLiBzdHJpbmdzIHdpdGhvdXQgTlVMIGJ5dGVz
-KSwgd2UgbXVzdCBub3QgYWNjZXB0IA0KK2FyYml0cmFyeSBzdHJpbmdzLg0K
-Kw0KK1Vwc3RyZWFtLVN0YXR1czogQWNjZXB0ZWQNCitDVkU6IENWRS0yMDE5
-LTExMDQ1DQorICAgDQorUmVmZXJlbmNlIHRvIHVwc3RyZWFtIHBhdGNoOg0K
-K2h0dHA6Ly9naXQucGhwLm5ldC8/cD1waHAtc3JjLmdpdDthPWNvbW1pdDto
-PWE1YTE1OTY1ZGEyM2M4ZTk3NjU3Mjc4ZmM4DQorZGZiZjFkZmIyMGMwMTYN
-CitodHRwOi8vZ2l0LnBocC5uZXQvP3A9cGhwLXNyYy5naXQ7YT1jb21taXQ7
-aD1kNzQ5MDdiODU3NWU2ZWRiODNiNzI4YzJhOQ0KKzRkZjQzNGMyM2UxZjc5
-DQorLS0tDQorIGV4dC9zcGwvc3BsX2RpcmVjdG9yeS5jICAgICB8ICA0ICsr
-LS0NCisgZXh0L3NwbC90ZXN0cy9idWc3ODg2My5waHB0IHwgMzEgKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKw0KKyAyIGZpbGVzIGNoYW5nZWQs
-IDMzIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pICBjcmVhdGUgbW9k
-ZSAxMDA2NDQgDQorZXh0L3NwbC90ZXN0cy9idWc3ODg2My5waHB0DQorDQor
-ZGlmZiAtLWdpdCBhL2V4dC9zcGwvc3BsX2RpcmVjdG9yeS5jIGIvZXh0L3Nw
-bC9zcGxfZGlyZWN0b3J5LmMgaW5kZXggDQorOTFlYTJlMDI2NS4uNTZlODA5
-YjFjNyAxMDA2NDQNCistLS0gYS9leHQvc3BsL3NwbF9kaXJlY3RvcnkuYw0K
-KysrKyBiL2V4dC9zcGwvc3BsX2RpcmVjdG9yeS5jDQorQEAgLTcwOCwxMCAr
-NzA4LDEwIEBAIHZvaWQgDQorc3BsX2ZpbGVzeXN0ZW1fb2JqZWN0X2NvbnN0
-cnVjdChJTlRFUk5BTF9GVU5DVElPTl9QQVJBTUVURVJTLCB6ZW5kX2xvbmcg
-DQorY3RvDQorIA0KKyAJaWYgKFNQTF9IQVNfRkxBRyhjdG9yX2ZsYWdzLCBE
-SVRfQ1RPUl9GTEFHUykpIHsNCisgCQlmbGFncyA9IFNQTF9GSUxFX0RJUl9L
-RVlfQVNfUEFUSE5BTUV8U1BMX0ZJTEVfRElSX0NVUlJFTlRfQVNfRklMRUlO
-Rk87DQorLQkJcGFyc2VkID0gemVuZF9wYXJzZV9wYXJhbWV0ZXJzKFpFTkRf
-TlVNX0FSR1MoKSwgInN8bCIsICZwYXRoLCAmbGVuLCAmZmxhZ3MpOw0KKysJ
-CXBhcnNlZCA9IHplbmRfcGFyc2VfcGFyYW1ldGVycyhaRU5EX05VTV9BUkdT
-KCksICJwfGwiLCAmcGF0aCwgJmxlbiwgDQorKyZmbGFncyk7DQorIAl9IGVs
-c2Ugew0KKyAJCWZsYWdzID0gU1BMX0ZJTEVfRElSX0tFWV9BU19QQVRITkFN
-RXxTUExfRklMRV9ESVJfQ1VSUkVOVF9BU19TRUxGOw0KKy0JCXBhcnNlZCA9
-IHplbmRfcGFyc2VfcGFyYW1ldGVycyhaRU5EX05VTV9BUkdTKCksICJzIiwg
-JnBhdGgsICZsZW4pOw0KKysJCXBhcnNlZCA9IHplbmRfcGFyc2VfcGFyYW1l
-dGVycyhaRU5EX05VTV9BUkdTKCksICJwIiwgJnBhdGgsICZsZW4pOw0KKyAJ
-fQ0KKyAJaWYgKFNQTF9IQVNfRkxBRyhjdG9yX2ZsYWdzLCBTUExfRklMRV9E
-SVJfU0tJUERPVFMpKSB7DQorIAkJZmxhZ3MgfD0gU1BMX0ZJTEVfRElSX1NL
-SVBET1RTOw0KK2RpZmYgLS1naXQgYS9leHQvc3BsL3Rlc3RzL2J1Zzc4ODYz
-LnBocHQgYi9leHQvc3BsL3Rlc3RzL2J1Zzc4ODYzLnBocHQgDQorbmV3IGZp
-bGUgbW9kZSAxMDA2NDQgaW5kZXggMDAwMDAwMDAwMC4uZGM4OGQ5OGRlZQ0K
-Ky0tLSAvZGV2L251bGwNCisrKysgYi9leHQvc3BsL3Rlc3RzL2J1Zzc4ODYz
-LnBocHQNCitAQCAtMCwwICsxLDMxIEBADQorKy0tVEVTVC0tDQorK0J1ZyAj
-Nzg4NjMgKERpcmVjdG9yeUl0ZXJhdG9yIGNsYXNzIHNpbGVudGx5IHRydW5j
-YXRlcyBhZnRlciBhIG51bGwgDQorK2J5dGUpDQorKy0tRklMRS0tDQorKzw/
-cGhwDQorKyRkaXIgPSBfX0RJUl9fIC4gJy9idWc3ODg2Myc7DQorK21rZGly
-KCRkaXIpOw0KKyt0b3VjaCgiJGRpci9iYWQiKTsNCisrbWtkaXIoIiRkaXIv
-c3ViIik7DQorK3RvdWNoKCIkZGlyL3N1Yi9nb29kIik7DQorKw0KKyskaXQg
-PSBuZXcgRGlyZWN0b3J5SXRlcmF0b3IoX19ESVJfXyAuICIvYnVnNzg4NjNc
-MC9zdWIiKTsgZm9yZWFjaCAoJGl0IA0KKythcyAkZmlsZWluZm8pIHsNCisr
-ICAgIGlmICghJGZpbGVpbmZvLT5pc0RvdCgpKSB7DQorKyAgICAgICAgdmFy
-X2R1bXAoJGZpbGVpbmZvLT5nZXRGaWxlbmFtZSgpKTsNCisrICAgIH0NCisr
-fQ0KKys/Pg0KKystLUVYUEVDVEYtLQ0KKytGYXRhbCBlcnJvcjogVW5jYXVn
-aHQgVW5leHBlY3RlZFZhbHVlRXhjZXB0aW9uOiANCisrRGlyZWN0b3J5SXRl
-cmF0b3I6Ol9fY29uc3RydWN0KCkgZXhwZWN0cyBwYXJhbWV0ZXIgMSB0byBi
-ZSBhIHZhbGlkIHBhdGgsIHN0cmluZyBnaXZlbiBpbiAlczolZCBTdGFjayB0
-cmFjZToNCisrIzAgJXMoJWQpOiBEaXJlY3RvcnlJdGVyYXRvci0+X19jb25z
-dHJ1Y3QoJyVzJykNCisrIzEge21haW59DQorKyAgdGhyb3duIGluICVzIG9u
-IGxpbmUgJWQNCisrLS1DTEVBTi0tDQorKzw/cGhwDQorKyRkaXIgPSBfX0RJ
-Ul9fIC4gJy9idWc3ODg2Myc7DQorK3VubGluaygiJGRpci9zdWIvZ29vZCIp
-Ow0KKytybWRpcigiJGRpci9zdWIiKTsNCisrdW5saW5rKCIkZGlyL2JhZCIp
-Ow0KKytybWRpcigkZGlyKTsNCisrPz4NCistLQ0KKzIuMTEuMA0KZGlmZiAt
-LWdpdCBhL21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9waHAvcGhwL0NWRS0y
-MDE5LTExMDQ2LnBhdGNoIGIvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL3Bo
-cC9waHAvQ1ZFLTIwMTktMTEwNDYucGF0Y2gNCm5ldyBmaWxlIG1vZGUgMTAw
-NjQ0DQppbmRleCAwMDAwMDAwMDAuLjcxMWI4NTI1YQ0KLS0tIC9kZXYvbnVs
-bA0KKysrIGIvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL3BocC9waHAvQ1ZF
-LTIwMTktMTEwNDYucGF0Y2gNCkBAIC0wLDAgKzEsNTkgQEANCitGcm9tIDJk
-MDdmMDBiNzNkOGY5NDA5OTg1MGUwZjU5ODNlMWNjNTgxN2MxOTYgTW9uIFNl
-cCAxNyAwMDowMDowMCAyMDAxDQorRnJvbTogIkNocmlzdG9waCBNLiBCZWNr
-ZXIiIDxjbWJlY2tlcjY5QGdteC5kZT4NCitEYXRlOiBTYXQsIDMwIE5vdiAy
-MDE5IDEyOjI2OjM3ICswMTAwDQorU3ViamVjdDogW1BBVENIXSBGaXggIzc4
-ODc4OiBCdWZmZXIgdW5kZXJmbG93IGluIGJjX3NoaWZ0X2FkZHN1Yg0KKw0K
-K1dlIG11c3Qgbm90IHJlbHkgb24gYGlzZGlnaXQoKWAgdG8gZGV0ZWN0IGRp
-Z2l0cywgc2luY2Ugd2Ugb25seSBzdXBwb3J0IA0KK2RlY2ltYWwgQVNDSUkg
-ZGlnaXRzIGluIHRoZSBmb2xsb3dpbmcgcHJvY2Vzc2luZy4NCisNCisoY2hl
-cnJ5IHBpY2tlZCBmcm9tIGNvbW1pdCBlYjIzYzYwMDg3NTNiMWNkYzUzNTlk
-ZWFkM2EwOTZkY2U0NmM5MDE4KQ0KKw0KK1Vwc3RyZWFtLVN0YXR1czogQWNj
-ZXB0ZWQNCitDVkU6IENWRS0yMDE5LTExMDQ2DQorICAgDQorUmVmZXJlbmNl
-IHRvIHVwc3RyZWFtIHBhdGNoOg0KK2h0dHA6Ly9naXQucGhwLm5ldC8/cD1w
-aHAtc3JjLmdpdDthPWNvbW1pdDtoPWViMjNjNjAwODc1M2IxY2RjNTM1OWRl
-YWQzDQorYTA5NmRjZTQ2YzkwMTgNCitodHRwOi8vZ2l0LnBocC5uZXQvP3A9
-cGhwLXNyYy5naXQ7YT1jb21taXQ7aD0yZDA3ZjAwYjczZDhmOTQwOTk4NTBl
-MGY1OQ0KKzgzZTFjYzU4MTdjMTk2DQorLS0tDQorIGV4dC9iY21hdGgvbGli
-YmNtYXRoL3NyYy9zdHIybnVtLmMgfCAgNCArKy0tDQorIGV4dC9iY21hdGgv
-dGVzdHMvYnVnNzg4NzgucGhwdCAgICAgfCAxMyArKysrKysrKysrKysrDQor
-IDIgZmlsZXMgY2hhbmdlZCwgMTUgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlv
-bnMoLSkgIGNyZWF0ZSBtb2RlIDEwMDY0NCANCitleHQvYmNtYXRoL3Rlc3Rz
-L2J1Zzc4ODc4LnBocHQNCisNCitkaWZmIC0tZ2l0IGEvZXh0L2JjbWF0aC9s
-aWJiY21hdGgvc3JjL3N0cjJudW0uYyANCitiL2V4dC9iY21hdGgvbGliYmNt
-YXRoL3NyYy9zdHIybnVtLmMNCitpbmRleCBmMzhkMzQxNTcwLi4wM2FlYzE1
-OTMwIDEwMDY0NA0KKy0tLSBhL2V4dC9iY21hdGgvbGliYmNtYXRoL3NyYy9z
-dHIybnVtLmMNCisrKysgYi9leHQvYmNtYXRoL2xpYmJjbWF0aC9zcmMvc3Ry
-Mm51bS5jDQorQEAgLTU3LDkgKzU3LDkgQEAgYmNfc3RyMm51bSAoYmNfbnVt
-ICpudW0sIGNoYXIgKnN0ciwgaW50IHNjYWxlKQ0KKyAgIHplcm9faW50ID0g
-RkFMU0U7DQorICAgaWYgKCAoKnB0ciA9PSAnKycpIHx8ICgqcHRyID09ICct
-JykpICBwdHIrKzsgIC8qIFNpZ24gKi8NCisgICB3aGlsZSAoKnB0ciA9PSAn
-MCcpIHB0cisrOwkJCS8qIFNraXAgbGVhZGluZyB6ZXJvcy4gKi8NCistICB3
-aGlsZSAoaXNkaWdpdCgoaW50KSpwdHIpKSBwdHIrKywgZGlnaXRzKys7CS8q
-IGRpZ2l0cyAqLw0KKysgIHdoaWxlICgqcHRyID49ICcwJyAmJiAqcHRyIDw9
-ICc5JykgcHRyKyssIGRpZ2l0cysrOwkvKiBkaWdpdHMgKi8NCisgICBpZiAo
-KnB0ciA9PSAnLicpIHB0cisrOwkJCS8qIGRlY2ltYWwgcG9pbnQgKi8NCist
-ICB3aGlsZSAoaXNkaWdpdCgoaW50KSpwdHIpKSBwdHIrKywgc3Ryc2NhbGUr
-KzsJLyogZGlnaXRzICovDQorKyAgd2hpbGUgKCpwdHIgPj0gJzAnICYmICpw
-dHIgPD0gJzknKSBwdHIrKywgc3Ryc2NhbGUrKzsJLyogZGlnaXRzICovDQor
-ICAgaWYgKCgqcHRyICE9ICdcMCcpIHx8IChkaWdpdHMrc3Ryc2NhbGUgPT0g
-MCkpDQorICAgICB7DQorICAgICAgICpudW0gPSBiY19jb3B5X251bSAoQkNH
-KF96ZXJvXykpOyBkaWZmIC0tZ2l0IA0KK2EvZXh0L2JjbWF0aC90ZXN0cy9i
-dWc3ODg3OC5waHB0IGIvZXh0L2JjbWF0aC90ZXN0cy9idWc3ODg3OC5waHB0
-IG5ldyANCitmaWxlIG1vZGUgMTAwNjQ0IGluZGV4IDAwMDAwMDAwMDAuLjJj
-OWQ3MmI5NDYNCistLS0gL2Rldi9udWxsDQorKysrIGIvZXh0L2JjbWF0aC90
-ZXN0cy9idWc3ODg3OC5waHB0DQorQEAgLTAsMCArMSwxMyBAQA0KKystLVRF
-U1QtLQ0KKytCdWcgIzc4ODc4IChCdWZmZXIgdW5kZXJmbG93IGluIGJjX3No
-aWZ0X2FkZHN1YikNCisrLS1TS0lQSUYtLQ0KKys8P3BocA0KKytpZiAoIWV4
-dGVuc2lvbl9sb2FkZWQoJ2JjbWF0aCcpKSBkaWUoJ3NraXAgYmNtYXRoIGV4
-dGVuc2lvbiBub3QgDQorK2F2YWlsYWJsZScpOyA/Pg0KKystLUZJTEUtLQ0K
-Kys8P3BocA0KKytwcmludCBAYmNtdWwoIlx4QjI2NDgzNjA1MTA1NTE5OTIy
-ODQxODQ5MzM1OTI4NzQyMDkyIiwgYmNwb3dtb2QoMiwgDQorKzY1NTM1LCAt
-NGUtNCkpOyA/Pg0KKystLUVYUEVDVC0tDQorK2JjIG1hdGggd2FybmluZzog
-bm9uLXplcm8gc2NhbGUgaW4gbW9kdWx1cw0KKyswDQorLS0NCisyLjExLjAN
-CmRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvcGhwL3Bo
-cC9DVkUtMjAxOS0xMTA0Ny5wYXRjaCBiL21ldGEtb2UvcmVjaXBlcy1kZXZ0
-b29scy9waHAvcGhwL0NWRS0yMDE5LTExMDQ3LnBhdGNoDQpuZXcgZmlsZSBt
-b2RlIDEwMDY0NA0KaW5kZXggMDAwMDAwMDAwLi5lMjkyMmJmOGYNCi0tLSAv
-ZGV2L251bGwNCisrKyBiL21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9waHAv
-cGhwL0NWRS0yMDE5LTExMDQ3LnBhdGNoDQpAQCAtMCwwICsxLDU3IEBADQor
-RnJvbSBkMzQ4Y2ZiOTZmMjU0MzU2NTY5MTAxMGFkZTVlMDM0NjMzOGJlNWE3
-IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQ0KK0Zyb206IFN0YW5pc2xhdiBN
-YWx5c2hldiA8c3Rhc0BwaHAubmV0Pg0KK0RhdGU6IE1vbiwgMTYgRGVjIDIw
-MTkgMDA6MTA6MzkgLTA4MDANCitTdWJqZWN0OiBbUEFUQ0hdIEZpeGVkIGJ1
-ZyAjNzg5MTANCisNCitVcHN0cmVhbS1TdGF0dXM6IEFjY2VwdGVkDQorQ1ZF
-LTIwMTktMTEwNDcNCisgICANCitSZWZlcmVuY2UgdG8gdXBzdHJlYW0gcGF0
-Y2g6DQoraHR0cDovL2dpdC5waHAubmV0Lz9wPXBocC1zcmMuZ2l0O2E9Y29t
-bWl0O2g9ZDM0OGNmYjk2ZjI1NDM1NjU2OTEwMTBhZGUNCis1ZTAzNDYzMzhi
-ZTVhNyANCitodHRwOi8vZ2l0LnBocC5uZXQvP3A9cGhwLXNyYy5naXQ7YT1j
-b21taXQ7aD01NzMyNTQ2MGQyYmRlZTAxYTEzZDhlNmNmMA0KKzMzNDVjOTA1
-NDNmZjRmDQorLS0tDQorIGV4dC9leGlmL2V4aWYuYyAgICAgICAgICAgICAg
-fCAgMyArKy0NCisgZXh0L2V4aWYvdGVzdHMvYnVnNzg5MTAucGhwdCB8IDE3
-ICsrKysrKysrKysrKysrKysrDQorIDIgZmlsZXMgY2hhbmdlZCwgMTkgaW5z
-ZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKSAgY3JlYXRlIG1vZGUgMTAwNjQ0
-IA0KK2V4dC9leGlmL3Rlc3RzL2J1Zzc4OTEwLnBocHQNCisNCitkaWZmIC0t
-Z2l0IGEvZXh0L2V4aWYvZXhpZi5jIGIvZXh0L2V4aWYvZXhpZi5jIGluZGV4
-IDI4MDQ4MDdlLi5hNTc4MDExMyANCisxMDA2NDQNCistLS0gYS9leHQvZXhp
-Zi9leGlmLmMNCisrKysgYi9leHQvZXhpZi9leGlmLmMNCitAQCAtMzEzOCw3
-ICszMTM4LDggQEAgc3RhdGljIGludCBleGlmX3Byb2Nlc3NfSUZEX2luX01B
-S0VSTk9URShpbWFnZV9pbmZvX3R5cGUgKkltYWdlSW5mbywgY2hhciAqIHZh
-bHUNCisgCQkvKmV4aWZfZXJyb3JfZG9jcmVmKE5VTEwgRVhJRkVSUl9DQywg
-SW1hZ2VJbmZvLCBFX05PVElDRSwgImNoZWNrICglcykiLCBtYWtlcl9ub3Rl
-LT5tYWtlP21ha2VyX25vdGUtPm1ha2U6IiIpOyovDQorIAkJaWYgKG1ha2Vy
-X25vdGUtPm1ha2UgJiYgKCFJbWFnZUluZm8tPm1ha2UgfHwgc3RyY21wKG1h
-a2VyX25vdGUtPm1ha2UsIEltYWdlSW5mby0+bWFrZSkpKQ0KKyAJCQljb250
-aW51ZTsNCistCQlpZiAobWFrZXJfbm90ZS0+aWRfc3RyaW5nICYmIHN0cm5j
-bXAobWFrZXJfbm90ZS0+aWRfc3RyaW5nLCB2YWx1ZV9wdHIsIG1ha2VyX25v
-dGUtPmlkX3N0cmluZ19sZW4pKQ0KKysJCWlmIChtYWtlcl9ub3RlLT5pZF9z
-dHJpbmcgJiYgdmFsdWVfbGVuID49IG1ha2VyX25vdGUtPmlkX3N0cmluZ19s
-ZW4NCisrCQkJCSYmIHN0cm5jbXAobWFrZXJfbm90ZS0+aWRfc3RyaW5nLCB2
-YWx1ZV9wdHIsIA0KKyttYWtlcl9ub3RlLT5pZF9zdHJpbmdfbGVuKSkNCisg
-CQkJY29udGludWU7DQorIAkJYnJlYWs7DQorIAl9DQorZGlmZiAtLWdpdCBh
-L2V4dC9leGlmL3Rlc3RzL2J1Zzc4OTEwLnBocHQgDQorYi9leHQvZXhpZi90
-ZXN0cy9idWc3ODkxMC5waHB0IG5ldyBmaWxlIG1vZGUgMTAwNjQ0IGluZGV4
-IA0KKzAwMDAwMDAwLi5mNWIxYzMyYw0KKy0tLSAvZGV2L251bGwNCisrKysg
-Yi9leHQvZXhpZi90ZXN0cy9idWc3ODkxMC5waHB0DQorQEAgLTAsMCArMSwx
-NyBAQA0KKystLVRFU1QtLQ0KKytCdWcgIzc4OTEwOiBIZWFwLWJ1ZmZlci1v
-dmVyZmxvdyBSRUFEIGluIGV4aWYgKE9TUy1GdXp6ICMxOTA0NCkNCisrLS1G
-SUxFLS0NCisrPD9waHANCisrDQorK3Zhcl9kdW1wKGV4aWZfcmVhZF9kYXRh
-KCdkYXRhOmltYWdlL2pwZztiYXNlNjQsVFUwQUtnQUFBQXdnSUNBZ0FBSUJE
-d0ENCisrRUFBQUFBZ0FBQUNLU2ZDQWdBQUFBQUVaVlNrbEdTVXhOJykpOw0K
-KysNCisrPz4NCisrLS1FWFBFQ1RGLS0NCisrTm90aWNlOiBleGlmX3JlYWRf
-ZGF0YSgpOiBSZWFkIGZyb20gVElGRjogdGFnKDB4OTI3QywgTWFrZXJOb3Rl
-ICApOiANCisrSWxsZWdhbCBmb3JtYXQgY29kZSAweDIwMjAsIHN3aXRjaGlu
-ZyB0byBCWVRFIGluICVzIG9uIGxpbmUgJWQNCisrDQorK1dhcm5pbmc6IGV4
-aWZfcmVhZF9kYXRhKCk6IFByb2Nlc3MgdGFnKHg5MjdDPU1ha2VyTm90ZSAg
-KTogSWxsZWdhbCANCisrZm9ybWF0IGNvZGUgMHgyMDIwLCBzdXBwb3NlIEJZ
-VEUgaW4gJXMgb24gbGluZSAlZA0KKysNCisrV2FybmluZzogZXhpZl9yZWFk
-X2RhdGEoKTogSUZEIGRhdGEgdG9vIHNob3J0OiAweDAwMDAgb2Zmc2V0IDB4
-MDAwQyBpbiANCisrJXMgb24gbGluZSAlZA0KKysNCisrV2FybmluZzogZXhp
-Zl9yZWFkX2RhdGEoKTogSW52YWxpZCBUSUZGIGZpbGUgaW4gJXMgb24gbGlu
-ZSAlZA0KKytib29sKGZhbHNlKQ0KKy0tDQorMi4xNy4xDQorDQpkaWZmIC0t
-Z2l0IGEvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL3BocC9waHAvQ1ZFLTIw
-MTktMTEwNTAucGF0Y2ggYi9tZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvcGhw
-L3BocC9DVkUtMjAxOS0xMTA1MC5wYXRjaA0KbmV3IGZpbGUgbW9kZSAxMDA2
-NDQNCmluZGV4IDAwMDAwMDAwMC4uNzAwYjk5YmQ5DQotLS0gL2Rldi9udWxs
-DQorKysgYi9tZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvcGhwL3BocC9DVkUt
-MjAxOS0xMTA1MC5wYXRjaA0KQEAgLTAsMCArMSw1MyBAQA0KK0Zyb20gYzE0
-ZWI4ZGU5NzRmYzhhNGQ3NGYzNTE1NDI0YzI5M2JjN2E0MGZiYSBNb24gU2Vw
-IDE3IDAwOjAwOjAwIDIwMDENCitGcm9tOiBTdGFuaXNsYXYgTWFseXNoZXYg
-PHN0YXNAcGhwLm5ldD4NCitEYXRlOiBNb24sIDE2IERlYyAyMDE5IDAxOjE0
-OjM4IC0wODAwDQorU3ViamVjdDogW1BBVENIXSBGaXggYnVnICM3ODc5Mw0K
-Kw0KK1Vwc3RyZWFtLVN0YXR1czogQWNjZXB0ZWQNCitDVkUtMjAxOS0xMTA1
-MA0KKyAgIA0KK1JlZmVyZW5jZSB0byB1cHN0cmVhbSBwYXRjaDoNCitodHRw
-Oi8vZ2l0LnBocC5uZXQvP3A9cGhwLXNyYy5naXQ7YT1jb21taXQ7aD1jMTRl
-YjhkZTk3NGZjOGE0ZDc0ZjM1MTU0Mg0KKzRjMjkzYmM3YTQwZmJhDQoraHR0
-cDovL2dpdC5waHAubmV0Lz9wPXBocC1zcmMuZ2l0O2E9Y29tbWl0O2g9MWIz
-YjRhMGQzNjdiNmYwYjY3ZTlmNzNkODINCitmNTNkYjZjNmI3MjJiMg0KKy0t
-LQ0KKyBleHQvZXhpZi9leGlmLmMgICAgICAgICAgICAgIHwgIDUgKysrLS0N
-CisgZXh0L2V4aWYvdGVzdHMvYnVnNzg3OTMucGhwdCB8IDEyICsrKysrKysr
-KysrKw0KKyAyIGZpbGVzIGNoYW5nZWQsIDE1IGluc2VydGlvbnMoKyksIDIg
-ZGVsZXRpb25zKC0pICBjcmVhdGUgbW9kZSAxMDA2NDQgDQorZXh0L2V4aWYv
-dGVzdHMvYnVnNzg3OTMucGhwdA0KKw0KK2RpZmYgLS1naXQgYS9leHQvZXhp
-Zi9leGlmLmMgYi9leHQvZXhpZi9leGlmLmMgaW5kZXggDQorYzBiZTA1OTIy
-Zi4uN2ZlMDU1ZjM4MSAxMDA2NDQNCistLS0gYS9leHQvZXhpZi9leGlmLmMN
-CisrKysgYi9leHQvZXhpZi9leGlmLmMNCitAQCAtMzI0MCw4ICszMjQwLDkg
-QEAgc3RhdGljIGludCBleGlmX3Byb2Nlc3NfSUZEX2luX01BS0VSTk9URShp
-bWFnZV9pbmZvX3R5cGUgKkltYWdlSW5mbywgY2hhciAqIHZhbHUNCisgCX0N
-CisgDQorIAlmb3IgKGRlPTA7ZGU8TnVtRGlyRW50cmllcztkZSsrKSB7DQor
-LQkJaWYgKCFleGlmX3Byb2Nlc3NfSUZEX1RBRyhJbWFnZUluZm8sIGRpcl9z
-dGFydCArIDIgKyAxMiAqIGRlLA0KKy0JCQkJCQkJCSAgb2Zmc2V0X2Jhc2Us
-IGRhdGFfbGVuLCBkaXNwbGFjZW1lbnQsIHNlY3Rpb25faW5kZXgsIDAsIG1h
-a2VyX25vdGUtPnRhZ190YWJsZSkpIHsNCisrCQlzaXplX3Qgb2Zmc2V0ID0g
-MiArIDEyICogZGU7DQorKwkJaWYgKCFleGlmX3Byb2Nlc3NfSUZEX1RBRyhJ
-bWFnZUluZm8sIGRpcl9zdGFydCArIG9mZnNldCwNCisrCQkJCQkJCQkgIG9m
-ZnNldF9iYXNlLCBkYXRhX2xlbiAtIG9mZnNldCwgZGlzcGxhY2VtZW50LCBz
-ZWN0aW9uX2luZGV4LCANCisrMCwgbWFrZXJfbm90ZS0+dGFnX3RhYmxlKSkg
-ew0KKyAJCQlyZXR1cm4gRkFMU0U7DQorIAkJfQ0KKyAJfQ0KK2RpZmYgLS1n
-aXQgYS9leHQvZXhpZi90ZXN0cy9idWc3ODc5My5waHB0IA0KK2IvZXh0L2V4
-aWYvdGVzdHMvYnVnNzg3OTMucGhwdCBuZXcgZmlsZSBtb2RlIDEwMDY0NCBp
-bmRleCANCiswMDAwMDAwMDAwLi4wMzNmMjU1YWNlDQorLS0tIC9kZXYvbnVs
-bA0KKysrKyBiL2V4dC9leGlmL3Rlc3RzL2J1Zzc4NzkzLnBocHQNCitAQCAt
-MCwwICsxLDEyIEBADQorKy0tVEVTVC0tDQorK0J1ZyAjNzg3OTM6IFVzZS1h
-ZnRlci1mcmVlIGluIGV4aWYgcGFyc2luZyB1bmRlciBtZW1vcnkgc2FuaXRp
-emVyDQorKy0tRklMRS0tDQorKzw/cGhwDQorKyRmID0gImV4dC9leGlmL3Rl
-c3RzL2J1Zzc3OTUwLnRpZmYiOw0KKytmb3IgKCRpID0gMDsgJGkgPCAxMDsg
-JGkrKykgew0KKysgICAgQGV4aWZfcmVhZF9kYXRhKCRmKTsNCisrfQ0KKys/
-Pg0KKys9PT1ET05FPT09DQorKy0tRVhQRUNULS0NCisrPT09RE9ORT09PQ0K
-Ky0tDQorMi4xMS4wDQpkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWRl
-dnRvb2xzL3BocC9waHBfNy4zLjExLmJiIGIvbWV0YS1vZS9yZWNpcGVzLWRl
-dnRvb2xzL3BocC9waHBfNy4zLjExLmJiDQppbmRleCA4ZGJhZjg5MjIuLjg4
-MGFjODM5YiAxMDA2NDQNCi0tLSBhL21ldGEtb2UvcmVjaXBlcy1kZXZ0b29s
-cy9waHAvcGhwXzcuMy4xMS5iYg0KKysrIGIvbWV0YS1vZS9yZWNpcGVzLWRl
-dnRvb2xzL3BocC9waHBfNy4zLjExLmJiDQpAQCAtMTksNiArMTksMTAgQEAg
-U1JDX1VSSSA9ICJodHRwOi8vcGhwLm5ldC9kaXN0cmlidXRpb25zL3BocC0k
-e1BWfS50YXIuYnoyIFwNCiAgICAgICAgICAgIGZpbGU6Ly9kZWJpYW4tcGhw
-LWZpeGhlYWRlci5wYXRjaCBcDQogICAgICAgICAgICBmaWxlOi8vQ1ZFLTIw
-MTktNjk3OC5wYXRjaCBcDQogICAgICAgICAgICBmaWxlOi8vQ1ZFLTIwMjAt
-NzA1OS5wYXRjaCBcDQorICAgICAgICAgICBmaWxlOi8vQ1ZFLTIwMTktMTEw
-NDUucGF0Y2ggXA0KKyAgICAgICAgICAgZmlsZTovL0NWRS0yMDE5LTExMDQ2
-LnBhdGNoIFwNCisgICAgICAgICAgIGZpbGU6Ly9DVkUtMjAxOS0xMTA0Ny5w
-YXRjaCBcDQorICAgICAgICAgICBmaWxlOi8vQ1ZFLTIwMTktMTEwNTAucGF0
-Y2ggXA0KICAgICAgICAgICAiDQogDQogU1JDX1VSSV9hcHBlbmRfY2xhc3Mt
-dGFyZ2V0ID0gIiBcDQotLQ0KMi4xNy4xDQoNCgoK
+Remove patches that are not needed anymore and fix the recipe to point
+to new source location. Also remove the compilation tweaks that don't
+seem to be required anymore.
+
+Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+---
+ .../0002-linux-Fix-gcc-version-check.patch    | 57 -------------------
+ .../tbb/tbb/cross-compile.patch               | 39 -------------
+ meta-oe/recipes-support/tbb/tbb/tbb.pc        |  4 +-
+ .../tbb/{tbb.bb => tbb_2020.2.bb}             | 22 ++-----
+ 4 files changed, 7 insertions(+), 115 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/tbb/tbb/0002-linux-Fix-gcc-version-check.patch
+ delete mode 100644 meta-oe/recipes-support/tbb/tbb/cross-compile.patch
+ rename meta-oe/recipes-support/tbb/{tbb.bb => tbb_2020.2.bb} (77%)
+
+diff --git a/meta-oe/recipes-support/tbb/tbb/0002-linux-Fix-gcc-version-check.patch b/meta-oe/recipes-support/tbb/tbb/0002-linux-Fix-gcc-version-check.patch
+deleted file mode 100644
+index 9824b61e9..000000000
+--- a/meta-oe/recipes-support/tbb/tbb/0002-linux-Fix-gcc-version-check.patch
++++ /dev/null
+@@ -1,57 +0,0 @@
+-From aee098f1bf0511c6b5544de3170a9e8b51673b60 Mon Sep 17 00:00:00 2001
+-From: Pierre Le Magourou <plemagourou@softbankrobotics.com>
+-Date: Tue, 23 Jan 2018 15:25:50 +0100
+-Subject: [PATCH] linux.gcc: Fix cross compilation error.
+-
+-When cross compiling on linux with gcc, the host gcc was used instead of
+-the cross gcc to set compilation flags according to gcc version.
+-
+-When the cross gcc was in version 5.X and the host gcc in version 7.X,
+-tbb was compiled with the -flifetime-dse=1 flag that does not exist on
+-gcc 5.X.
+----
+- build/linux.gcc.inc | 10 +++++-----
+- 1 file changed, 5 insertions(+), 5 deletions(-)
+-
+-diff --git a/build/linux.gcc.inc b/build/linux.gcc.inc
+-index 5c1889c..a4d6698 100644
+---- a/build/linux.gcc.inc
+-+++ b/build/linux.gcc.inc
+-@@ -41,29 +41,29 @@ LINK_FLAGS = -Wl,-rpath-link=. -rdynamic
+- C_FLAGS = $(CPLUS_FLAGS)
+- 
+- # gcc 4.2 and higher support OpenMP
+--ifneq (,$(shell gcc -dumpversion | egrep  "^(4\.[2-9]|[5-9])"))
+-+ifneq (,$(shell $(CC) -dumpversion | egrep  "^(4\.[2-9]|[5-9])"))
+-     OPENMP_FLAG = -fopenmp
+- endif
+- 
+- # gcc 4.8 and later support RTM intrinsics, but require command line switch to enable them
+--ifneq (,$(shell gcc -dumpversion | egrep  "^(4\.[8-9]|[5-9])"))
+-+ifneq (,$(shell $(CC) -dumpversion | egrep  "^(4\.[8-9]|[5-9])"))
+-     RTM_KEY = -mrtm
+- endif
+- 
+- # gcc 4.0 and later have -Wextra that is used by some our customers.
+--ifneq (,$(shell gcc -dumpversion | egrep  "^([4-9])"))
+-+ifneq (,$(shell $(CC) -dumpversion | egrep  "^([4-9])"))
+-     TEST_WARNING_KEY += -Wextra
+- endif
+- 
+- # gcc 5.0 and later have -Wsuggest-override option
+- # enable it via a pre-included header in order to limit to C++11 and above
+--ifneq (,$(shell gcc -dumpversion | egrep  "^([5-9])"))
+-+ifneq (,$(shell $(CC) -dumpversion | egrep  "^([5-9])"))
+-     INCLUDE_TEST_HEADERS = -include $(tbb_root)/src/test/harness_preload.h
+- endif
+- 
+- # gcc 6.0 and later have -flifetime-dse option that controls
+- # elimination of stores done outside the object lifetime
+--ifneq (,$(shell gcc -dumpversion | egrep  "^([6-9])"))
+-+ifneq (,$(shell $(CC) -dumpversion | egrep  "^([6-9])"))
+-     # keep pre-contruction stores for zero initialization
+-     DSE_KEY = -flifetime-dse=1
+- endif
+--- 
+-2.15.1
+-
+diff --git a/meta-oe/recipes-support/tbb/tbb/cross-compile.patch b/meta-oe/recipes-support/tbb/tbb/cross-compile.patch
+deleted file mode 100644
+index d54b307ee..000000000
+--- a/meta-oe/recipes-support/tbb/tbb/cross-compile.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-Author: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+-
+-Upstream-Status: unsuitable
+----
+- build/linux.gcc.inc |    5 +++--
+- 1 file changed, 3 insertions(+), 2 deletions(-)
+-
+-Index: tbb2017_20170118oss/build/linux.gcc.inc
+-===================================================================
+---- tbb2017_20170118oss.orig/build/linux.gcc.inc
+-+++ tbb2017_20170118oss/build/linux.gcc.inc
+-@@ -32,8 +32,9 @@ DYLIB_KEY = -shared
+- EXPORT_KEY = -Wl,--version-script,
+- LIBDL = -ldl
+- 
+--CPLUS = g++
+--CONLY = gcc
+-+CPLUS = $(CXX)
+-+CONLY = $(CC)
+-+CPLUS_FLAGS = $(CXXFLAGS)
+- LIB_LINK_FLAGS = $(DYLIB_KEY) -Wl,-soname=$(BUILDING_LIBRARY)
+- LIBS += -lpthread -lrt
+- LINK_FLAGS = -Wl,-rpath-link=. -rdynamic
+-Index: tbb2017_20170118oss/build/linux.clang.inc
+-===================================================================
+---- tbb2017_20170118oss.orig/build/linux.clang.inc
+-+++ tbb2017_20170118oss/build/linux.clang.inc
+-@@ -31,8 +31,9 @@ DYLIB_KEY = -shared
+- EXPORT_KEY = -Wl,--version-script,
+- LIBDL = -ldl
+- 
+--CPLUS = clang++
+--CONLY = clang
+-+CPLUS = $(CXX)
+-+CONLY = $(CC)
+-+CPLUS_FLAGS = $(CXXFLAGS)
+- LIB_LINK_FLAGS = $(DYLIB_KEY) -Wl,-soname=$(BUILDING_LIBRARY)
+- LIBS += -lpthread -lrt
+- LINK_FLAGS = -Wl,-rpath-link=. -rdynamic
+diff --git a/meta-oe/recipes-support/tbb/tbb/tbb.pc b/meta-oe/recipes-support/tbb/tbb/tbb.pc
+index 644b64fbf..4f9da1140 100644
+--- a/meta-oe/recipes-support/tbb/tbb/tbb.pc
++++ b/meta-oe/recipes-support/tbb/tbb/tbb.pc
+@@ -5,7 +5,7 @@ includedir=${prefix}/include
+ 
+ Name: Threading Building Blocks
+ Description: Intel's parallelism library for C++
+-URL: http://www.threadingbuildingblocks.org/
+-Version: 3.0+r018
++URL: https://software.intel.com/en-us/tbb
++Version: 2020.2
+ Libs: -L${libdir} -ltbb
+ Cflags: -I${includedir} 
+diff --git a/meta-oe/recipes-support/tbb/tbb.bb b/meta-oe/recipes-support/tbb/tbb_2020.2.bb
+similarity index 77%
+rename from meta-oe/recipes-support/tbb/tbb.bb
+rename to meta-oe/recipes-support/tbb/tbb_2020.2.bb
+index 911139b0d..67464ab72 100644
+--- a/meta-oe/recipes-support/tbb/tbb.bb
++++ b/meta-oe/recipes-support/tbb/tbb_2020.2.bb
+@@ -3,28 +3,18 @@ DESCRIPTION = "Parallelism library for C++ - runtime files \
+     performance without having to be a threading expert. It represents a \
+     higher-level, task-based parallelism that abstracts platform details \
+     and threading mechanism for performance and scalability."
+-HOMEPAGE = "http://threadingbuildingblocks.org/"
++HOMEPAGE = "https://software.intel.com/en-us/tbb"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+-PRDATE = "20170412"
+-BRANCH = "tbb_2017"
+-SRCREV = "a2cfdfe946933cbe38bffe1d8086ae36f06691a3"
+-PV = "${PRDATE}+${SRCPV}"
+-SRC_URI = "git://github.com/01org/tbb;branch=${BRANCH} \
+-           file://cross-compile.patch \
++BRANCH = "tbb_2020"
++SRCREV = "60b7d0a78f8910976678ba63a19fdaee22c0ef65"
++SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
+            file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
+-           file://0002-linux-Fix-gcc-version-check.patch \
+            file://tbb.pc \
+ "
+ 
+ S = "${WORKDIR}/git"
+-
+-COMPILER ?= "gcc"
+-COMPILER_toolchain-clang = "clang"
+-
+-do_compile() {
+-    oe_runmake compiler=${COMPILER} arch=${HOST_ARCH} runtime=cc4
+-}
++PE = "1"
+ 
+ do_install() {
+     install -d ${D}${includedir} ${D}${libdir}
+@@ -44,5 +34,3 @@ do_install() {
+ # ...
+ # | make[1]: *** [concurrent_queue.o] Error 1
+ ARM_INSTRUCTION_SET = "arm"
+-SECURITY_CFLAGS_append = " -fPIC"
+-
+-- 
+2.25.2
+
