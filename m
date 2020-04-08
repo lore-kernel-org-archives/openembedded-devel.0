@@ -1,86 +1,62 @@
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com [209.85.128.67])
- by mx.groups.io with SMTP id smtpd.web10.10468.1586349385840625062
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web10.12958.1586357101877981845
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Apr 2020 05:36:26 -0700
+ Wed, 08 Apr 2020 07:45:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=PPVnFjvG;
- spf=pass (domain: gmail.com, ip: 209.85.128.67, mailfrom: uvv.mail@gmail.com)
-Received: by mail-wm1-f67.google.com with SMTP id r26so5275463wmh.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Apr 2020 05:36:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=exe++TUtPI48Gx4ISe9noDbpPNCmb/srXFeHRs2Offc=;
-        b=PPVnFjvGKUrEkRQI4KMiQvIwvei4RLFEOcEMAA6PvBd9vKzwIfX3iM/0kQxUWE3qEC
-         9i1kgpumaWhLKIRAAIk2fE8kH+DEEEHQWa8YinMJXc1Xkd7W0GeBxi9huR+BT1WUcoXy
-         AuDxdaMlLJLjwvbaAeU69ivf6+JhXRbQqPW1S4tAxK0hyg1qTW8EwRtvBEnHOlY6yLZR
-         hCTYwmvEszqxU4ueX8iQTsVUE1brrZAPET/lF7y24NVOkZBZQI8x5mfVAoDspCn5jgZr
-         fvWkcohAEQyesEJyAMnuu6ND78DyIDvxE+PIA4HrITRTz/F3U89B1Ro867/gJk6ZBg98
-         b1SA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=exe++TUtPI48Gx4ISe9noDbpPNCmb/srXFeHRs2Offc=;
-        b=h4c4FiKGLzfgyiRtqHX2luAVAR1p68ZK2Zm/bu+2FArjdNv2KRHH7JlQC/q+3JigHk
-         ZvhQeL5rrlSmENk1yZsCgffUf2F4BVMwdhNPjwarYO7Ie+e0CPOiO2V8kX0s4qa9G3S5
-         nqcSIZZWz9oaVSDvo/yiGt8zK8wUZeY2JMzTne1N2Rxz4FJSgqrYqusHpDp2ioFSITB+
-         akiZEifQ+2hi5G9AfneJABZTc3iSg8dGuQ0qFCRbCtm2TPCw45o98LzkcTMbbReWbrDR
-         +u/uPpxSeq+d7OBAWB4Q1fw3rOGjkHLTJQWP+BxUj3sLdbMeSYy1dBSG3bWeJarn8Eyg
-         jpqw==
-X-Gm-Message-State: AGi0Pub3A8baFPLrcCjEvLM7VxwHktXgHRXxl60lODXir1ZpmF5NheMI
-	DrCerXFCfGCSP5nFDXTdesk7ZPmjkzQ=
-X-Google-Smtp-Source: APiQypLWENONQa1+lT5xtd7KKOdZgUtlv4BbFZMDZWvBOpyw8pxwGKskxuLtfYA/4jnAr5NDnXiUgQ==
-X-Received: by 2002:a1c:7f8e:: with SMTP id a136mr4612651wmd.33.1586349384032;
-        Wed, 08 Apr 2020 05:36:24 -0700 (PDT)
-Return-Path: <uvv.mail@gmail.com>
-Received: from localhost.localdomain (dslb-002-205-007-153.002.205.pools.vodafone-ip.de. [2.205.7.153])
-        by smtp.gmail.com with ESMTPSA id w7sm36107582wrr.60.2020.04.08.05.36.22
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 08 Apr 2020 05:36:23 -0700 (PDT)
-From: "Vyacheslav Yurkov" <uvv.mail@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
-Subject: [oe] [meta-python][PATCH] python3-arpeggio: add new recipe
-Date: Wed,  8 Apr 2020 14:35:51 +0200
-Message-Id: <20200408123551.44845-1-uvv.mail@gmail.com>
-X-Mailer: git-send-email 2.25.0
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: matthew.zeng@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 038EieU7021813
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 8 Apr 2020 07:44:50 -0700
+Received: from mt-manjaro (128.224.21.169) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 8 Apr
+ 2020 07:44:29 -0700
+User-agent: mu4e 1.2.0; emacs 28.0.50
+From: "Matthew" <matthew.zeng@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCHv2] wireshark: poppler: prevent PACKAGECONFIG change based on different layers
+Date: Wed, 8 Apr 2020 10:44:27 -0400
+Message-ID: <875zeanik4.fsf@windriver.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [128.224.21.169]
+Content-Type: text/plain
 
-From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+    As per discussed in a previous email under the subject "Regarding
+    poppler auto PACKAGECONFIG when qt5-layer exists", adding a layer
+    but not using it should not change PACKAGECONFIG automatically. It
+    may result unexpected error.
 
-Arpeggio is a recursive descent parser with memoization based on
-PEG grammars (aka Packrat parser)
-
-Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+Signed-off-by: Matthew Zeng <matthew.zeng@windriver.com>
 ---
- .../python/python3-arpeggio_1.9.2.bb              | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-arpeggio_1.9.2.bb
+ meta-networking/recipes-support/wireshark/wireshark_3.2.2.bb | 2 +-
+ meta-oe/recipes-support/poppler/poppler_0.86.1.bb            | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-arpeggio_1.9.2.bb b/meta-python/recipes-devtools/python/python3-arpeggio_1.9.2.bb
-new file mode 100644
-index 000000000..802a5b2ea
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-arpeggio_1.9.2.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "Arpeggio is a recursive descent parser with memoization based on PEG grammars (aka Packrat parser)"
-+HOMEPAGE = "https://pypi.org/project/Arpeggio/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=33b8d1ba459a2fa4d801acfd1d1b7ceb"
-+
-+SRC_URI[md5sum] = "39667a626217c670bc634444be6e904a"
-+SRC_URI[sha256sum] = "948ce06163a48a72c97f4fe79ad3d1c1330b6fec4f22ece182fb60ef60bd022b"
-+
-+PYPI_PACKAGE = "Arpeggio"
-+inherit pypi setuptools3
-+
-+# setup.py of Arpeggio needs this.
-+DEPENDS += "${PYTHON_PN}-pytest-runner-native"
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.25.0
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.2.2.bb b/meta-networking/recipes-support/wireshark/wireshark_3.2.2.bb
+index 91a7e1a36..db545028f 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.2.2.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.2.2.bb
+@@ -19,7 +19,7 @@ PE = "1"
 
+ inherit cmake pkgconfig python3native perlnative upstream-version-is-even mime mime-xdg
+
+-PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', 'qt5 plugins', '', d)}"
++PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc"
+
+ PACKAGECONFIG_class-native = "libpcap gnutls ssl libssh"
+
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.86.1.bb b/meta-oe/recipes-support/poppler/poppler_0.86.1.bb
+index 96006dc8d..073edef86 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.86.1.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.86.1.bb
+@@ -14,7 +14,7 @@ DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
+
+ inherit cmake pkgconfig gobject-introspection
+
+-PACKAGECONFIG ??= "jpeg openjpeg png tiff nss ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', 'qt5', '', d)}"
++PACKAGECONFIG ??= "jpeg openjpeg png tiff nss"
+ PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON -DENABLE_DCTDECODER=libjpeg,-DWITH_JPEG=OFF -DENABLE_DCTDECODER=none,jpeg"
+ PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng"
+ PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff"
+--
+2.24.0
