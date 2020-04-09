@@ -1,40 +1,32 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.3812.1586412422770354175
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web10.3975.1586413662204410151
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Apr 2020 23:07:03 -0700
+ Wed, 08 Apr 2020 23:27:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.72,361,1580745600"; 
-   d="scan'208";a="88733269"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 09 Apr 2020 14:07:00 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 087AA50A999E
-	for <openembedded-devel@lists.openembedded.org>; Thu,  9 Apr 2020 13:56:33 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 9 Apr 2020 14:06:56 +0800
-From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-networking][PATCH] ntp: upgrade 4.2.8p13 -> 4.2.8p14
-Date: Thu, 9 Apr 2020 22:51:19 +0800
-Message-ID: <1586443879-20929-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: xiao.zhang@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 0396Re44015177
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 8 Apr 2020 23:27:41 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.40) with Microsoft SMTP Server id 14.3.487.0; Wed, 8 Apr 2020
+ 23:27:40 -0700
+From: "ZhangXiao" <xiao.zhang@windriver.com>
+To: <xiao.zhang@windriver.com>, <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] ntp: upgrade 4.2.8p13 -> 4.2.8p14
+Date: Wed, 8 Apr 2020 23:27:29 -0700
+Message-ID: <20200409062729.124705-1-xiao.zhang@windriver.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
-X-yoursite-MailScanner-ID: 087AA50A999E.A6C95
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-1) remove reproducibility-respect-source-date-epoch.patch since it is included in 4.2.8p14
+License has been changed due to date time, no new stuff added.
 
-2) License-Update: Copyright year updated to 2020.
+delete source patch reproducibility-respect-source-date-epoch.patch
+for new version source tree contains it.
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
 ---
  ...producibility-respect-source-date-epoch.patch | 16 ----------------
  .../ntp/{ntp_4.2.8p13.bb => ntp_4.2.8p14.bb}     |  7 +++----
@@ -99,7 +91,5 @@ index e950fabe3..cdf66082f 100644
  inherit autotools update-rc.d useradd systemd pkgconfig
  
 -- 
-2.17.1
-
-
+2.23.0
 
