@@ -1,39 +1,39 @@
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
- by mx.groups.io with SMTP id smtpd.web10.12013.1586447415030545150
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+ by mx.groups.io with SMTP id smtpd.web11.12048.1586447577867882188
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Apr 2020 08:50:15 -0700
+ Thu, 09 Apr 2020 08:52:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@skidata.com header.s=selector1 header.b=ao28NiaR;
- spf=pass (domain: skidata.com, ip: 91.230.2.91, mailfrom: prvs=361225990=richard.leitner@skidata.com)
+ dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=uOlFh6qF;
+ spf=pass (domain: skidata.com, ip: 91.230.2.99, mailfrom: prvs=361225990=richard.leitner@skidata.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-  t=1586447415; x=1617983415;
+  t=1586447577; x=1617983577;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=RxZHvQJW91ehTL3L7c1UhQv6/VwY4ACNEp1o37K2hTU=;
-  b=ao28NiaRX5mojUM+YT+8cwuVxCy310bzXS0QZ9pvM6q5BF+iZCELlXCS
-   Lasbidu7SuG829YVB6YMHbJdGHsvyx+aGDk703xD1Dd15BAN/2GTHHxT6
-   xSa0DzKdbHHswsuj7RM82sqJl/gw1ydxoKv+WwH63tWr8i5cNwuyEMePA
-   G+XNBuVXv2fTcsvPb7oJc4YqH1xv0AK/tnabOt7+XBdNB7T2DbNUf1kr7
-   5ELvOL6C/OIfROrc6w+c2EMBS2OyctBANeZJYIOVzvRZyBBP+QTLaFT6B
-   kfgSjMBiy2+yI9gNguQiGqn5LxW5tBhvkQOlN4ZgyKBmD8qKqf7VF55KY
+  bh=9l1xO3qXEB8gPruKwHI8xC1Q7fvQUjKi30/Fgh1O53I=;
+  b=uOlFh6qF5orMizXQGmP3C/g5TjBDgCDnb07ISP061fwOHwOH7iJOsJvp
+   VBJAezO4lITi/gy3mH9wFeFmj1Fjl/i2ZQzbOCf9OUyoe+hV4AV8OUDjG
+   Wz8QpwS5FBK8tZwN/9TjeguY1v1CDY8HCx1ZrJ2SWYZbVkRR/V8czuBLk
+   mkuyZu9N+6kS9OzpoWmRVgnvNYTQjFda81XfdpTEkFtFx35kIjvj5qqxg
+   GiejV/QKQ4VohJSXloZo4tyH4SNz6aDPgw1Pz7dVvHulCChVtI8Qv/NZL
+   IyO+7R3pmAbuu3rZ4xBuTx/Z8pBI0oAIm05dacrFDMPhzSgkQtpF2wujP
    g==;
-IronPort-SDR: nnD0Nfn9dOaW6E2IZNDVTo0xiSFA/1KGkf9kFHp+4rX3adnNyfBz/qehg96xM+5NGM8JPxJouD
- BnXlJQBatbgatCbDyUqnKosRZ+4QesQX8zbvo8M4OKNrXpu640K8uFZlC8ylkqmA6c+53c8+KO
- +2AI94VxUmUgctFrujB1QofLKbJ+RUDD+fL0xql0vCH/7ihV3HTRwtMWuT5FQYN+amAnOswyr+
- T/fn9XsepOWjyKIAWm8BcsVlBsYJ+I296d/tG939Poz43eq+eITS9+teKBE84IMZhI7sd3Yymd
- DpQ=
+IronPort-SDR: gvLajV4h3FrXtj61HCAlRx8qpZpN+Cvh82N8NO9drOMclI6KrO75JmRjdTsgqpn53g6G5qTxVs
+ bK7zOKe/eaidqma71rXCnUiZFrGdkUCE9M2PQiPvo4jfdyVyyXJsHZVPnXD6ry0oTQYjxooAyt
+ OU0P0+pxxt+jFHO8TGeh6qIXdiYLYO+oZtfL9oFGSHDOgWD9OA4k2ehpbj5FoDkZv1b+VUHdFA
+ KFFaAtfXJvIwsgB2C3UcF0GL4WCUgG2ZRda4lzg7KG7NnGj4bkJXPXYr8mJcrGoL9mITneKYTU
+ dPw=
 X-IronPort-AV: E=Sophos;i="5.72,363,1580770800"; 
-   d="scan'208";a="2562256"
-Date: Thu, 9 Apr 2020 17:50:11 +0200
+   d="scan'208";a="23723627"
+Date: Thu, 9 Apr 2020 17:52:56 +0200
 From: "Richard Leitner" <richard.leitner@skidata.com>
-To: Jacob Kroon <jacob.kroon@gmail.com>
+To: Felix Wruck <felix.wruck@aisec.fraunhofer.de>
 CC: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-java][PATCH] layer.conf: Mark as compatible with dunfell
-Message-ID: <20200409155011.GB77653@pcleri>
-References: <20200331080704.947412-1-jacob.kroon@gmail.com>
+Subject: Re: [oe] [meta-java][PATCH] features_check.bbclass: Use distro_features_check instead
+Message-ID: <20200409155256.GC77653@pcleri>
+References: <20200401102525.25426-1-felix.wruck@aisec.fraunhofer.de>
 MIME-Version: 1.0
-In-Reply-To: <20200331080704.947412-1-jacob.kroon@gmail.com>
+In-Reply-To: <20200401102525.25426-1-felix.wruck@aisec.fraunhofer.de>
 Return-Path: richard.leitner@skidata.com
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
@@ -41,34 +41,81 @@ X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-Hi Jacob,
-thanks for the patch.
+Hi Felix,
 
-I've applied it to master{,-next}.
+On Wed, Apr 01, 2020 at 12:25:25PM +0200, Felix Wruck wrote:
+> The features_check.bbclass is not part of the zeus branch of poky.
+> Instead, distro_features_check.bbclass should be used with zeus.
+
+Thanks for the patch. Unfortunately Jacob sent already the same one
+which I applied to zeus currently as commit 95d56a6.
 
 regards;rl
 
-On Tue, Mar 31, 2020 at 10:07:04AM +0200, Jacob Kroon wrote:
-> Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
-> ---
->  conf/layer.conf | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/conf/layer.conf b/conf/layer.conf
-> index 0ddc5f9..294c319 100644
-> --- a/conf/layer.conf
-> +++ b/conf/layer.conf
-> @@ -7,7 +7,7 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
->  BBFILE_COLLECTIONS += "meta-java"
->  BBFILE_PATTERN_meta-java := "^${LAYERDIR}/"
->  BBFILE_PRIORITY_meta-java = "10"
-> -LAYERSERIES_COMPAT_meta-java = "zeus"
-> +LAYERSERIES_COMPAT_meta-java = "dunfell"
->  LAYERDEPENDS_meta-java += "openembedded-layer"
+> Upstream-Status: Pending
+> 
+> Signed-off-by: Felix Wruck <felix.wruck@aisec.fraunhofer.de>
+> ---
+>  recipes-core/cacao/cacao_2d6f6c14daf9.bb      | 2 +-
+>  recipes-core/classpath/classpath_0.99.bb      | 2 +-
+>  recipes-core/jamvm/jamvm.inc                  | 2 +-
+>  recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb | 2 +-
+>  4 files changed, 4 insertions(+), 4 deletions(-)
+> 
+> diff --git a/recipes-core/cacao/cacao_2d6f6c14daf9.bb b/recipes-core/cacao/cacao_2d6f6c14daf9.bb
+> index 0e50b68..6783894 100644
+> --- a/recipes-core/cacao/cacao_2d6f6c14daf9.bb
+> +++ b/recipes-core/cacao/cacao_2d6f6c14daf9.bb
+> @@ -19,7 +19,7 @@ S = "${WORKDIR}/cacaovm-cacao-staging-${PV}"
+>  SRC_URI[md5sum] = "5157d0bb9eb1332f7a6b6186eaac01aa"
+>  SRC_URI[sha256sum] = "34b51d660d69c2a83225fd75eab5e1fac002fb5974cb4a74b7478baf923a76cd"
 >  
->  LICENSE_PATH += "${LAYERDIR}/licenses"
+> -inherit java autotools-brokensep update-alternatives pkgconfig features_check
+> +inherit java autotools-brokensep update-alternatives pkgconfig distro_features_check
+>  
+>  REQUIRED_DISTRO_FEATURES = "x11"
+>  REQUIRED_DISTRO_FEATURES_class-native := ""
+> diff --git a/recipes-core/classpath/classpath_0.99.bb b/recipes-core/classpath/classpath_0.99.bb
+> index 5b9d904..714503a 100644
+> --- a/recipes-core/classpath/classpath_0.99.bb
+> +++ b/recipes-core/classpath/classpath_0.99.bb
+> @@ -1,6 +1,6 @@
+>  require classpath.inc
+>  
+> -inherit features_check
+> +inherit distro_features_check
+>  
+>  REQUIRED_DISTRO_FEATURES = "x11"
+>  
+> diff --git a/recipes-core/jamvm/jamvm.inc b/recipes-core/jamvm/jamvm.inc
+> index b03a5b9..d47b2f1 100644
+> --- a/recipes-core/jamvm/jamvm.inc
+> +++ b/recipes-core/jamvm/jamvm.inc
+> @@ -15,7 +15,7 @@ RPROVIDES_${PN}_class-native = ""
+>  
+>  BBCLASSEXTEND = "native"
+>  
+> -inherit java autotools update-alternatives pkgconfig relative_symlinks features_check
+> +inherit java autotools update-alternatives pkgconfig relative_symlinks distro_features_check
+>  
+>  REQUIRED_DISTRO_FEATURES_class-target = "x11"
+>  
+> diff --git a/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb b/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
+> index d774cc2..cb670cb 100644
+> --- a/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
+> +++ b/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
+> @@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+>  
+>  FILESPATH =. "${FILE_DIRNAME}/patches-openjdk-7:"
+>  
+> -inherit features_check
+> +inherit distro_features_check
+>  
+>  REQUIRED_DISTRO_FEATURES = "x11"
+>  
 > -- 
-> 2.25.1
+> 2.20.1
 > 
 
 > 
