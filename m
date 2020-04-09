@@ -1,122 +1,64 @@
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
- by mx.groups.io with SMTP id smtpd.web11.12048.1586447577867882188
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.14969.1586454714108965281
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Apr 2020 08:52:58 -0700
+ Thu, 09 Apr 2020 10:51:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=uOlFh6qF;
- spf=pass (domain: skidata.com, ip: 91.230.2.99, mailfrom: prvs=361225990=richard.leitner@skidata.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-  t=1586447577; x=1617983577;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=9l1xO3qXEB8gPruKwHI8xC1Q7fvQUjKi30/Fgh1O53I=;
-  b=uOlFh6qF5orMizXQGmP3C/g5TjBDgCDnb07ISP061fwOHwOH7iJOsJvp
-   VBJAezO4lITi/gy3mH9wFeFmj1Fjl/i2ZQzbOCf9OUyoe+hV4AV8OUDjG
-   Wz8QpwS5FBK8tZwN/9TjeguY1v1CDY8HCx1ZrJ2SWYZbVkRR/V8czuBLk
-   mkuyZu9N+6kS9OzpoWmRVgnvNYTQjFda81XfdpTEkFtFx35kIjvj5qqxg
-   GiejV/QKQ4VohJSXloZo4tyH4SNz6aDPgw1Pz7dVvHulCChVtI8Qv/NZL
-   IyO+7R3pmAbuu3rZ4xBuTx/Z8pBI0oAIm05dacrFDMPhzSgkQtpF2wujP
-   g==;
-IronPort-SDR: gvLajV4h3FrXtj61HCAlRx8qpZpN+Cvh82N8NO9drOMclI6KrO75JmRjdTsgqpn53g6G5qTxVs
- bK7zOKe/eaidqma71rXCnUiZFrGdkUCE9M2PQiPvo4jfdyVyyXJsHZVPnXD6ry0oTQYjxooAyt
- OU0P0+pxxt+jFHO8TGeh6qIXdiYLYO+oZtfL9oFGSHDOgWD9OA4k2ehpbj5FoDkZv1b+VUHdFA
- KFFaAtfXJvIwsgB2C3UcF0GL4WCUgG2ZRda4lzg7KG7NnGj4bkJXPXYr8mJcrGoL9mITneKYTU
- dPw=
-X-IronPort-AV: E=Sophos;i="5.72,363,1580770800"; 
-   d="scan'208";a="23723627"
-Date: Thu, 9 Apr 2020 17:52:56 +0200
-From: "Richard Leitner" <richard.leitner@skidata.com>
-To: Felix Wruck <felix.wruck@aisec.fraunhofer.de>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-java][PATCH] features_check.bbclass: Use distro_features_check instead
-Message-ID: <20200409155256.GC77653@pcleri>
-References: <20200401102525.25426-1-felix.wruck@aisec.fraunhofer.de>
-MIME-Version: 1.0
-In-Reply-To: <20200401102525.25426-1-felix.wruck@aisec.fraunhofer.de>
-Return-Path: richard.leitner@skidata.com
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
- sdex5srv.skidata.net (192.168.111.83)
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=40078 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jMbLD-0004dI-MC; Thu, 09 Apr 2020 20:51:52 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python2][PATCH] python-requests: Upgrade to 2.23.0
+Date: Thu,  9 Apr 2020 20:51:36 +0300
+Message-Id: <1586454696-12728-1-git-send-email-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.7.4
+X-OutGoing-Spam-Status: No, score=-0.2
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Hi Felix,
+Upgrade python-requests to version 2.23.0.
 
-On Wed, Apr 01, 2020 at 12:25:25PM +0200, Felix Wruck wrote:
-> The features_check.bbclass is not part of the zeus branch of poky.
-> Instead, distro_features_check.bbclass should be used with zeus.
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../python/{python-requests_2.22.0.bb => python-requests_2.23.0.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename recipes-devtools/python/{python-requests_2.22.0.bb => python-requests_2.23.0.bb} (79%)
 
-Thanks for the patch. Unfortunately Jacob sent already the same one
-which I applied to zeus currently as commit 95d56a6.
-
-regards;rl
-
-> 
-> Upstream-Status: Pending
-> 
-> Signed-off-by: Felix Wruck <felix.wruck@aisec.fraunhofer.de>
-> ---
->  recipes-core/cacao/cacao_2d6f6c14daf9.bb      | 2 +-
->  recipes-core/classpath/classpath_0.99.bb      | 2 +-
->  recipes-core/jamvm/jamvm.inc                  | 2 +-
->  recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb | 2 +-
->  4 files changed, 4 insertions(+), 4 deletions(-)
-> 
-> diff --git a/recipes-core/cacao/cacao_2d6f6c14daf9.bb b/recipes-core/cacao/cacao_2d6f6c14daf9.bb
-> index 0e50b68..6783894 100644
-> --- a/recipes-core/cacao/cacao_2d6f6c14daf9.bb
-> +++ b/recipes-core/cacao/cacao_2d6f6c14daf9.bb
-> @@ -19,7 +19,7 @@ S = "${WORKDIR}/cacaovm-cacao-staging-${PV}"
->  SRC_URI[md5sum] = "5157d0bb9eb1332f7a6b6186eaac01aa"
->  SRC_URI[sha256sum] = "34b51d660d69c2a83225fd75eab5e1fac002fb5974cb4a74b7478baf923a76cd"
->  
-> -inherit java autotools-brokensep update-alternatives pkgconfig features_check
-> +inherit java autotools-brokensep update-alternatives pkgconfig distro_features_check
->  
->  REQUIRED_DISTRO_FEATURES = "x11"
->  REQUIRED_DISTRO_FEATURES_class-native := ""
-> diff --git a/recipes-core/classpath/classpath_0.99.bb b/recipes-core/classpath/classpath_0.99.bb
-> index 5b9d904..714503a 100644
-> --- a/recipes-core/classpath/classpath_0.99.bb
-> +++ b/recipes-core/classpath/classpath_0.99.bb
-> @@ -1,6 +1,6 @@
->  require classpath.inc
->  
-> -inherit features_check
-> +inherit distro_features_check
->  
->  REQUIRED_DISTRO_FEATURES = "x11"
->  
-> diff --git a/recipes-core/jamvm/jamvm.inc b/recipes-core/jamvm/jamvm.inc
-> index b03a5b9..d47b2f1 100644
-> --- a/recipes-core/jamvm/jamvm.inc
-> +++ b/recipes-core/jamvm/jamvm.inc
-> @@ -15,7 +15,7 @@ RPROVIDES_${PN}_class-native = ""
->  
->  BBCLASSEXTEND = "native"
->  
-> -inherit java autotools update-alternatives pkgconfig relative_symlinks features_check
-> +inherit java autotools update-alternatives pkgconfig relative_symlinks distro_features_check
->  
->  REQUIRED_DISTRO_FEATURES_class-target = "x11"
->  
-> diff --git a/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb b/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
-> index d774cc2..cb670cb 100644
-> --- a/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
-> +++ b/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
-> @@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
->  
->  FILESPATH =. "${FILE_DIRNAME}/patches-openjdk-7:"
->  
-> -inherit features_check
-> +inherit distro_features_check
->  
->  REQUIRED_DISTRO_FEATURES = "x11"
->  
-> -- 
-> 2.20.1
-> 
-
-> 
+diff --git a/recipes-devtools/python/python-requests_2.22.0.bb b/recipes-devtools/python/python-requests_2.23.0.bb
+similarity index 79%
+rename from recipes-devtools/python/python-requests_2.22.0.bb
+rename to recipes-devtools/python/python-requests_2.23.0.bb
+index 25d4840..52df65c 100644
+--- a/recipes-devtools/python/python-requests_2.22.0.bb
++++ b/recipes-devtools/python/python-requests_2.23.0.bb
+@@ -5,12 +5,12 @@ your POST data. Keep-alive and HTTP connection pooling are 100% automatic, \
+ thanks to urllib3."
+ HOMEPAGE = "http://python-requests.org"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=a8d5a1d1c2d53025e2282c511033f6f7"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=19b6be66ed463d93fa88c29f7860bcd7"
+ 
+ FILESEXTRAPATHS_prepend := "${THISDIR}/python-requests:"
+ 
+-SRC_URI[md5sum] = "ee28bee2de76e9198fc41e48f3a7dd47"
+-SRC_URI[sha256sum] = "11e007a8a2aa0323f5a921e9e6a2d7e4e67d9877e85773fba9ba6419025cbeb4"
++SRC_URI[md5sum] = "abfdc28db1065bbd0bc32592ac9d27a6"
++SRC_URI[sha256sum] = "b3f43d496c6daba4493e7c431722aeb7dbc6288f52a6e04e7b6023b0247817e6"
+ 
+ inherit pypi setuptools
+ 
+-- 
+2.7.4
 
