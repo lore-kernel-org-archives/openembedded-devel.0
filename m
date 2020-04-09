@@ -1,140 +1,270 @@
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.web12.8542.1586438236438715884
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
+ by mx.groups.io with SMTP id smtpd.web12.10390.1586443629678352713
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Apr 2020 06:17:16 -0700
+ Thu, 09 Apr 2020 07:47:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Qoaezekv;
- spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-wr1-f52.google.com with SMTP id f13so5290072wrm.13
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2020 06:17:16 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=gtmrY2IJ;
+ spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f195.google.com with SMTP id i186so4197336qke.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2020 07:47:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=IdWk865pUzjAESCOQmAVBecO0N4WNh0i3K0dU4ZIjMc=;
-        b=QoaezekvU9Yu06/ExqYpDBHrCn37BIAVL60SnLPGJrxqom2Xt7I2yRFV10kfEhlZNG
-         LTLAyfMH2tTSfMa12mM7xz2VwErJmSkwiUMb09K24VeLhnX/zcOIBaMQiuZxARE2mW9G
-         QgnA3NZpFTdLH6ENcD6UJveiWQShxitMPThjL9Y6NPVJfMwB7+CrXfsW1G7JhRrDgRWE
-         cVwssTaYiCDkfln7zhtLSwp/S+V9l6j+ADHwdqCrCeB0TEC4vvcly9TVFRrWKqB0mYHx
-         Bi2zWyQ7Kq8Lr103zICH/Quzp/AA/XSf39Cyxrm7+HWgMaJU8jJcl2rG4Ou3F7dpbCNG
-         cFDA==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=SrTrwe+z5CMHOWZ7OT/tUV76XH43cufCVUqgjq4LaIU=;
+        b=gtmrY2IJGB1iFmL6D58qb6Z0l7j1ULNNko/eMo9Zlg3b7Gxd2mJFCJLvKG3HA0Er8V
+         0s75VkEkRHSzuhBch+sdvp82HIW24N7YQRn/pV0SGiH/9gR7TdVVTxHqKTOr4yFDqmdF
+         MjEY+HS6AsYuTJ5EXs0UOGg/yYYDD3kdEKlhGr9W52N31ZZBOqb2RhXC1Hoj0KJ0FW/m
+         +lslAWqiB+3bdoIGhISocM6LXmkO0DGf9Sjlka+eTOMlgyp2Z2EvOvrC4JxI8rvKeIk6
+         bASveznueetywNQAq1o53SywMp4cLES1PdldomayqEMQ4AM5Fub0wLaVTn/RVaqlLFVn
+         sGVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=IdWk865pUzjAESCOQmAVBecO0N4WNh0i3K0dU4ZIjMc=;
-        b=G7TmJdjVzu32fHrHOO1/z2nrqs7geqhQxkPeABjo+lfJCYWqNgWoLQw4CVk+087b7L
-         wMT7XeQ/iwx2dz4lMeiKN5Ni47Rr+Nuk1UKF7j3sDBedwuCVaQd5+4wYazax8ls2Jm4G
-         vtSLqiex1l1+Pk3jBV1uSL2LFSfpPT1OZXTuwfKQTXRZlrNBdUwyu8KPfDl5OS6q6zLQ
-         suDON9+nBkh95NsLj5tzuDVSC0PlE57NGNVEaFWp8x6erQISJ7DfjqZVaPu3QCjO2zV1
-         G6fJVVjYgYZzpjfXpaoHImpuLVQ0n0vblgbEKTkVewY9y8eW6QlK0d4L92uQqJ0ng3l9
-         O5EA==
-X-Gm-Message-State: AGi0Puac1ZA//s3eIdudqr/yBQU2vc1479wE5GSPtdxgFc8jA7ukXkCH
-	g9aaJ3cMt24bO6x2uMRv3zh31uBY
-X-Google-Smtp-Source: APiQypL0T4waVXBU7z9MkAcuQdsAsOeNwRNbQqVPPh/MxAJfP/tDEbnzCIAnJHu/KAKoGfM1rth75A==
-X-Received: by 2002:adf:9564:: with SMTP id 91mr5806388wrs.246.1586438234585;
-        Thu, 09 Apr 2020 06:17:14 -0700 (PDT)
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from localhost.localdomain ([5.171.137.150])
-        by smtp.gmail.com with ESMTPSA id u17sm45396123wra.63.2020.04.09.06.17.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Apr 2020 06:17:13 -0700 (PDT)
-From: "Gianfranco" <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Costamagna Gianfranco <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH] mongodb: Enable again building on 32bit arches from COMPATIBLE_HOST
-Date: Thu,  9 Apr 2020 15:17:11 +0200
-Message-Id: <20200409131711.21534-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.17.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=SrTrwe+z5CMHOWZ7OT/tUV76XH43cufCVUqgjq4LaIU=;
+        b=EB/rQWEt4L4i8/eahC9WT9s1Y5zBB/j1KQZ3PvYFoG5GxHrqmh217bnKdIKeU6Dw81
+         xL+y1Wp+MDsgWCUFdA3gQvSnNebBwoUcsTxLR+s6ddNiqDIACWdcSDnigpjyY4+3kBBL
+         yLw8A5NdvY0yPWYjjdFG5yjJtj7DWPbQjiWqHkWtNHXZZK6GmRJgiiU1FKc/O4BLgBfg
+         9D7JwcaVSfIVUP4R3mB9N1WJYYJp7+OrEemlQ4CFUkMi2xCc1n3h5PjZHWw2nzoYqoKx
+         Wf4mFzJpgNHul4IiFKHoIsTAYQhJvmjyYCx+atrlLc1DeDuLtIltvPD+6RTN7QwtRa+p
+         74bA==
+X-Gm-Message-State: AGi0PuYu8rNVI3CRhLr2JJQCxs1PP4H0ixplQqZaEXALD/1codVtqgtt
+	IawdPp13b4P3uK+jjyl1yfTHL2x4hpnWdI7Vxes=
+X-Google-Smtp-Source: APiQypIiBoIDRtw3yK5bxtCYwKnDgrgON1OO4HnMYPvGJY/hxx+auKHYqgnIwXtBvtoGg8/UW8OLang9q7BwZoGOQIQ=
+X-Received: by 2002:a37:bd81:: with SMTP id n123mr103395qkf.431.1586443628470;
+ Thu, 09 Apr 2020 07:47:08 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200409011922.625776-1-anuj.mittal@intel.com>
+In-Reply-To: <20200409011922.625776-1-anuj.mittal@intel.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 9 Apr 2020 07:46:42 -0700
+Message-ID: <CAMKF1soo7YEBmheZKHe0X4+D60RttqgtuEkgR9RpzbWuCcR6ow@mail.gmail.com>
+Subject: Re: [oe] [PATCH v2] tbb: upgrade 2017 -> 2020.2
+To: Anuj Mittal <anuj.mittal@intel.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-The upstream pending pull request seems to fix 32bit builds, tested with MACHINE=raspberrypi3
-Signed-off-by: Costamagna Gianfranco <costamagnagianfranco@yahoo.it>
-Signed-off-by: Costamagna Gianfranco <locutusofborg@debian.org>
----
- .../recipes-dbs/mongodb/mongodb/1296.patch    | 52 +++++++++++++++++++
- .../recipes-dbs/mongodb/mongodb_git.bb        |  3 +-
- 2 files changed, 54 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/1296.patch
+Failing on mips/musl
+http://errors.yoctoproject.org/Errors/Details/402039/
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/1296.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/1296.patch
-new file mode 100644
-index 000000000..ae84bcb56
---- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/1296.patch
-@@ -0,0 +1,52 @@
-+Upstream-Status: submitted https://github.com/mongodb/mongo/pull/1296
-+From 362be06fc16a5ad0f9e9aa90cc763c5242e8e35c Mon Sep 17 00:00:00 2001
-+From: Fabrice Fontaine <fontaine.fabrice@gmail.com>
-+Date: Sat, 9 Feb 2019 12:41:45 +0100
-+Subject: [PATCH] ssl_manager.cpp: fix build with gcc 7 and -fpermissive
-+
-+Change prototype of DERToken::parse function from
-+parse(ConstDataRange cdr, size_t* outLength);
-+to parse(ConstDataRange cdr, uint64_t* outLength);
-+
-+Otherwise, we got the following error:
-+
-+src/mongo/util/net/ssl_manager.cpp: In static member function 'static mongo::StatusWith<mongo::{anonymous}::DERToken> mongo::{anonymous}::DERToken::parse(mongo::ConstDataRange, size_t*)':
-+src/mongo/util/net/ssl_manager.cpp:575:79: error: invalid conversion from 'size_t* {aka unsigned int*}' to 'long unsigned int*' [-fpermissive]
-+  if (mongoUnsignedAddOverflow64(tagAndLengthByteCount, derLength, outLength) ||
-+
-+Signed-off-by: Fabrice Fontaine <fontaine.fabrice@gmail.com>
-+---
-+ src/mongo/util/net/ssl_manager.cpp | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/mongo/util/net/ssl_manager.cpp b/src/mongo/util/net/ssl_manager.cpp
-+index b93ebe84a4a3..3511eb5d998f 100644
-+--- a/src/mongo/util/net/ssl_manager.cpp
-++++ b/src/mongo/util/net/ssl_manager.cpp
-+@@ -782,7 +782,7 @@ class DERToken {
-+      *
-+      * Returns a DERToken which consists of the (tag, length, value) tuple.
-+      */
-+-    static StatusWith<DERToken> parse(ConstDataRange cdr, size_t* outLength);
-++    static StatusWith<DERToken> parse(ConstDataRange cdr, uint64_t* outLength);
-+ 
-+ private:
-+     DERType _type{DERType::EndOfContent};
-+@@ -799,7 +799,7 @@ struct DataType::Handler<DERToken> {
-+                        size_t length,
-+                        size_t* advanced,
-+                        std::ptrdiff_t debug_offset) {
-+-        size_t outLength;
-++        uint64_t outLength;
-+ 
-+         auto swPair = DERToken::parse(ConstDataRange(ptr, length), &outLength);
-+ 
-+@@ -844,7 +844,7 @@ StatusWith<std::string> readDERString(ConstDataRangeCursor& cdc) {
-+ }
-+ 
-+ 
-+-StatusWith<DERToken> DERToken::parse(ConstDataRange cdr, size_t* outLength) {
-++StatusWith<DERToken> DERToken::parse(ConstDataRange cdr, uint64_t* outLength) {
-+     const size_t kTagLength = 1;
-+     const size_t kTagLengthAndInitialLengthByteLength = kTagLength + 1;
-+ 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-index 6f460bf76..5c3b806f2 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-@@ -23,6 +23,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.2 \
-            file://0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch \
-            file://0001-Support-deprecated-resolver-functions.patch \
-            file://0003-Fix-unknown-prefix-env.patch \
-+           file://1296.patch \
-            "
- SRC_URI_append_libc-musl ="\
-            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
-@@ -36,7 +37,7 @@ SRC_URI_append_toolchain-clang = "\
- 
- S = "${WORKDIR}/git"
- 
--COMPATIBLE_HOST ?= '(x86_64|powerpc64|aarch64).*-linux'
-+COMPATIBLE_HOST ?= '(x86_64|i.86|powerpc64|arm|aarch64).*-linux'
- 
- PACKAGECONFIG ??= "tcmalloc system-pcre"
- # gperftools compilation fails for arm below v7 because of missing support of
--- 
-2.17.1
-
+On Wed, Apr 8, 2020 at 6:19 PM Anuj Mittal <anuj.mittal@intel.com> wrote:
+>
+> Remove patches that are not needed anymore and fix the recipe to point
+> to new source location. Also remove the compilation tweaks that don't
+> seem to be required anymore.
+>
+> Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+> ---
+> v2: Refresh cross-compile.patch and re-add code to pass compiler and
+> arch values to make.
+>
+>  .../0002-linux-Fix-gcc-version-check.patch    | 57 -----------------
+>  .../tbb/tbb/cross-compile.patch               | 62 +++++++++----------
+>  meta-oe/recipes-support/tbb/tbb/tbb.pc        |  4 +-
+>  .../tbb/{tbb.bb => tbb_2020.2.bb}             | 16 ++---
+>  4 files changed, 37 insertions(+), 102 deletions(-)
+>  delete mode 100644 meta-oe/recipes-support/tbb/tbb/0002-linux-Fix-gcc-version-check.patch
+>  rename meta-oe/recipes-support/tbb/{tbb.bb => tbb_2020.2.bb} (82%)
+>
+> diff --git a/meta-oe/recipes-support/tbb/tbb/0002-linux-Fix-gcc-version-check.patch b/meta-oe/recipes-support/tbb/tbb/0002-linux-Fix-gcc-version-check.patch
+> deleted file mode 100644
+> index 9824b61e9..000000000
+> --- a/meta-oe/recipes-support/tbb/tbb/0002-linux-Fix-gcc-version-check.patch
+> +++ /dev/null
+> @@ -1,57 +0,0 @@
+> -From aee098f1bf0511c6b5544de3170a9e8b51673b60 Mon Sep 17 00:00:00 2001
+> -From: Pierre Le Magourou <plemagourou@softbankrobotics.com>
+> -Date: Tue, 23 Jan 2018 15:25:50 +0100
+> -Subject: [PATCH] linux.gcc: Fix cross compilation error.
+> -
+> -When cross compiling on linux with gcc, the host gcc was used instead of
+> -the cross gcc to set compilation flags according to gcc version.
+> -
+> -When the cross gcc was in version 5.X and the host gcc in version 7.X,
+> -tbb was compiled with the -flifetime-dse=1 flag that does not exist on
+> -gcc 5.X.
+> ----
+> - build/linux.gcc.inc | 10 +++++-----
+> - 1 file changed, 5 insertions(+), 5 deletions(-)
+> -
+> -diff --git a/build/linux.gcc.inc b/build/linux.gcc.inc
+> -index 5c1889c..a4d6698 100644
+> ---- a/build/linux.gcc.inc
+> -+++ b/build/linux.gcc.inc
+> -@@ -41,29 +41,29 @@ LINK_FLAGS = -Wl,-rpath-link=. -rdynamic
+> - C_FLAGS = $(CPLUS_FLAGS)
+> -
+> - # gcc 4.2 and higher support OpenMP
+> --ifneq (,$(shell gcc -dumpversion | egrep  "^(4\.[2-9]|[5-9])"))
+> -+ifneq (,$(shell $(CC) -dumpversion | egrep  "^(4\.[2-9]|[5-9])"))
+> -     OPENMP_FLAG = -fopenmp
+> - endif
+> -
+> - # gcc 4.8 and later support RTM intrinsics, but require command line switch to enable them
+> --ifneq (,$(shell gcc -dumpversion | egrep  "^(4\.[8-9]|[5-9])"))
+> -+ifneq (,$(shell $(CC) -dumpversion | egrep  "^(4\.[8-9]|[5-9])"))
+> -     RTM_KEY = -mrtm
+> - endif
+> -
+> - # gcc 4.0 and later have -Wextra that is used by some our customers.
+> --ifneq (,$(shell gcc -dumpversion | egrep  "^([4-9])"))
+> -+ifneq (,$(shell $(CC) -dumpversion | egrep  "^([4-9])"))
+> -     TEST_WARNING_KEY += -Wextra
+> - endif
+> -
+> - # gcc 5.0 and later have -Wsuggest-override option
+> - # enable it via a pre-included header in order to limit to C++11 and above
+> --ifneq (,$(shell gcc -dumpversion | egrep  "^([5-9])"))
+> -+ifneq (,$(shell $(CC) -dumpversion | egrep  "^([5-9])"))
+> -     INCLUDE_TEST_HEADERS = -include $(tbb_root)/src/test/harness_preload.h
+> - endif
+> -
+> - # gcc 6.0 and later have -flifetime-dse option that controls
+> - # elimination of stores done outside the object lifetime
+> --ifneq (,$(shell gcc -dumpversion | egrep  "^([6-9])"))
+> -+ifneq (,$(shell $(CC) -dumpversion | egrep  "^([6-9])"))
+> -     # keep pre-contruction stores for zero initialization
+> -     DSE_KEY = -flifetime-dse=1
+> - endif
+> ---
+> -2.15.1
+> -
+> diff --git a/meta-oe/recipes-support/tbb/tbb/cross-compile.patch b/meta-oe/recipes-support/tbb/tbb/cross-compile.patch
+> index d54b307ee..36578543f 100644
+> --- a/meta-oe/recipes-support/tbb/tbb/cross-compile.patch
+> +++ b/meta-oe/recipes-support/tbb/tbb/cross-compile.patch
+> @@ -1,39 +1,35 @@
+>  Author: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+> -
+> +
+>  Upstream-Status: unsuitable
+>  ---
+> - build/linux.gcc.inc |    5 +++--
+> - 1 file changed, 3 insertions(+), 2 deletions(-)
+>
+> -Index: tbb2017_20170118oss/build/linux.gcc.inc
+> -===================================================================
+> ---- tbb2017_20170118oss.orig/build/linux.gcc.inc
+> -+++ tbb2017_20170118oss/build/linux.gcc.inc
+> -@@ -32,8 +32,9 @@ DYLIB_KEY = -shared
+> - EXPORT_KEY = -Wl,--version-script,
+> - LIBDL = -ldl
+> +diff --git a/build/linux.clang.inc b/build/linux.clang.inc
+> +index fe9b5c98..b0dcd68b 100644
+> +--- a/build/linux.clang.inc
+> ++++ b/build/linux.clang.inc
+> +@@ -12,8 +12,8 @@
+> + # See the License for the specific language governing permissions and
+> + # limitations under the License.
+>
+> --CPLUS = g++
+> --CONLY = gcc
+> -+CPLUS = $(CXX)
+> -+CONLY = $(CC)
+> -+CPLUS_FLAGS = $(CXXFLAGS)
+> - LIB_LINK_FLAGS = $(DYLIB_KEY) -Wl,-soname=$(BUILDING_LIBRARY)
+> - LIBS += -lpthread -lrt
+> - LINK_FLAGS = -Wl,-rpath-link=. -rdynamic
+> -Index: tbb2017_20170118oss/build/linux.clang.inc
+> -===================================================================
+> ---- tbb2017_20170118oss.orig/build/linux.clang.inc
+> -+++ tbb2017_20170118oss/build/linux.clang.inc
+> -@@ -31,8 +31,9 @@ DYLIB_KEY = -shared
+> - EXPORT_KEY = -Wl,--version-script,
+> - LIBDL = -ldl
+> +-CPLUS ?= clang++
+> +-CONLY ?= clang
+> ++CPLUS ?= $(CXX)
+> ++CONLY ?= $(CC)
+> + COMPILE_ONLY = -c -MMD
+> + PREPROC_ONLY = -E -x c++
+> + INCLUDE_KEY = -I
+> +diff --git a/build/linux.gcc.inc b/build/linux.gcc.inc
+> +index d820c15d..62c76afd 100644
+> +--- a/build/linux.gcc.inc
+> ++++ b/build/linux.gcc.inc
+> +@@ -12,8 +12,8 @@
+> + # See the License for the specific language governing permissions and
+> + # limitations under the License.
+>
+> --CPLUS = clang++
+> --CONLY = clang
+> -+CPLUS = $(CXX)
+> -+CONLY = $(CC)
+> -+CPLUS_FLAGS = $(CXXFLAGS)
+> - LIB_LINK_FLAGS = $(DYLIB_KEY) -Wl,-soname=$(BUILDING_LIBRARY)
+> - LIBS += -lpthread -lrt
+> - LINK_FLAGS = -Wl,-rpath-link=. -rdynamic
+> +-CPLUS ?= g++
+> +-CONLY ?= gcc
+> ++CPLUS ?= $(CXX)
+> ++CONLY ?= $(CC)
+> + COMPILE_ONLY = -c -MMD
+> + PREPROC_ONLY = -E -x c++
+> + INCLUDE_KEY = -I
+> diff --git a/meta-oe/recipes-support/tbb/tbb/tbb.pc b/meta-oe/recipes-support/tbb/tbb/tbb.pc
+> index 644b64fbf..4f9da1140 100644
+> --- a/meta-oe/recipes-support/tbb/tbb/tbb.pc
+> +++ b/meta-oe/recipes-support/tbb/tbb/tbb.pc
+> @@ -5,7 +5,7 @@ includedir=${prefix}/include
+>
+>  Name: Threading Building Blocks
+>  Description: Intel's parallelism library for C++
+> -URL: http://www.threadingbuildingblocks.org/
+> -Version: 3.0+r018
+> +URL: https://software.intel.com/en-us/tbb
+> +Version: 2020.2
+>  Libs: -L${libdir} -ltbb
+>  Cflags: -I${includedir}
+> diff --git a/meta-oe/recipes-support/tbb/tbb.bb b/meta-oe/recipes-support/tbb/tbb_2020.2.bb
+> similarity index 82%
+> rename from meta-oe/recipes-support/tbb/tbb.bb
+> rename to meta-oe/recipes-support/tbb/tbb_2020.2.bb
+> index 911139b0d..8fc2e78a5 100644
+> --- a/meta-oe/recipes-support/tbb/tbb.bb
+> +++ b/meta-oe/recipes-support/tbb/tbb_2020.2.bb
+> @@ -3,27 +3,25 @@ DESCRIPTION = "Parallelism library for C++ - runtime files \
+>      performance without having to be a threading expert. It represents a \
+>      higher-level, task-based parallelism that abstracts platform details \
+>      and threading mechanism for performance and scalability."
+> -HOMEPAGE = "http://threadingbuildingblocks.org/"
+> +HOMEPAGE = "https://software.intel.com/en-us/tbb"
+>  LICENSE = "Apache-2.0"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+> -PRDATE = "20170412"
+> -BRANCH = "tbb_2017"
+> -SRCREV = "a2cfdfe946933cbe38bffe1d8086ae36f06691a3"
+> -PV = "${PRDATE}+${SRCPV}"
+> -SRC_URI = "git://github.com/01org/tbb;branch=${BRANCH} \
+> +BRANCH = "tbb_2020"
+> +SRCREV = "60b7d0a78f8910976678ba63a19fdaee22c0ef65"
+> +SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
+>             file://cross-compile.patch \
+>             file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
+> -           file://0002-linux-Fix-gcc-version-check.patch \
+>             file://tbb.pc \
+>  "
+>
+>  S = "${WORKDIR}/git"
+> +PE = "1"
+>
+>  COMPILER ?= "gcc"
+>  COMPILER_toolchain-clang = "clang"
+>
+>  do_compile() {
+> -    oe_runmake compiler=${COMPILER} arch=${HOST_ARCH} runtime=cc4
+> +    oe_runmake compiler=${COMPILER} arch=${HOST_ARCH}
+>  }
+>
+>  do_install() {
+> @@ -44,5 +42,3 @@ do_install() {
+>  # ...
+>  # | make[1]: *** [concurrent_queue.o] Error 1
+>  ARM_INSTRUCTION_SET = "arm"
+> -SECURITY_CFLAGS_append = " -fPIC"
+> -
+> --
+> 2.25.2
+>
+> 
