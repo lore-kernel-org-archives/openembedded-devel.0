@@ -1,54 +1,51 @@
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web10.8449.1586438152094250410
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.web12.8542.1586438236438715884
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Apr 2020 06:15:52 -0700
+ Thu, 09 Apr 2020 06:17:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Y0N+Xr7j;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id t203so3856308wmt.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2020 06:15:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Qoaezekv;
+ spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-wr1-f52.google.com with SMTP id f13so5290072wrm.13
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2020 06:17:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
+        h=from:to:cc:subject:date:message-id;
         bh=IdWk865pUzjAESCOQmAVBecO0N4WNh0i3K0dU4ZIjMc=;
-        b=Y0N+Xr7jrknrwwteiVyXGwdjbDJYlop1tZjMojpmeimVX6lKg9QLqyag8mfmnIOzIl
-         aymWUQpIZysjocZjddkua8c+p7ryP09AoXQLuvqEI1xOyDns3mK0HQEsmkdWcjNtVsBV
-         FRJc5/HNB14haYH+SwmRn4FJhXE0M7JgMjCkLqnqTRNVIwxQaSDr/ZQmmtVD++MRwGZx
-         LY2CDRDs7tfH6NyDqANneyDc1XaVp166o2eoeeNNslMBRqhJR6cc2/aWw1jt39IoGn4R
-         9A/hGrKCH032Bp93PW8LdRoizso2JxvAf1ijmswwLafQKjX7M8cEqdGa+zPG58RT+av7
-         lDdg==
+        b=QoaezekvU9Yu06/ExqYpDBHrCn37BIAVL60SnLPGJrxqom2Xt7I2yRFV10kfEhlZNG
+         LTLAyfMH2tTSfMa12mM7xz2VwErJmSkwiUMb09K24VeLhnX/zcOIBaMQiuZxARE2mW9G
+         QgnA3NZpFTdLH6ENcD6UJveiWQShxitMPThjL9Y6NPVJfMwB7+CrXfsW1G7JhRrDgRWE
+         cVwssTaYiCDkfln7zhtLSwp/S+V9l6j+ADHwdqCrCeB0TEC4vvcly9TVFRrWKqB0mYHx
+         Bi2zWyQ7Kq8Lr103zICH/Quzp/AA/XSf39Cyxrm7+HWgMaJU8jJcl2rG4Ou3F7dpbCNG
+         cFDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
         bh=IdWk865pUzjAESCOQmAVBecO0N4WNh0i3K0dU4ZIjMc=;
-        b=Ocs9IN6a7k8xnRhE1e62cQJqhrVnUGmliVVpUO1gT8dP25Tc+mpd0FF2dq+exsF3YA
-         zWpaprrdhn5a+HJ5kb1tLk+cNPruUpIE1ZGqmrpMtMgbz9/4pLVcD5/bMPsHGlhwrRJE
-         IfvNWKWmfgvp3reUaqFTOhIdHv+IJ/ksQLZbXrowwuBwFOk2prS8lf1x3VD1cxpSNqbE
-         6Bt2w1lQSbBYEVYKLabC4kPLwoJXwpgqd9zC3Msn9pdJjZ+zY0A1j0W1y2ufgPKqjfHz
-         1eyOaeyNp4TaIYOe8ywFTEKuJhZPr1tg2/FobFpxKbHeaAydR74gDzOntFxCCu4N0Pf3
-         0/SQ==
-X-Gm-Message-State: AGi0PubAraAoybJlPskqTRsMe2Zzg0HVXN3e4WsRozDIVNZCDBTTZtiS
-	rlES70oeHK7GxYNDUwx9sW7bowlu
-X-Google-Smtp-Source: APiQypJFGb9RIuvZHxV159cUeSqljur1ohzkEGIh/tMTzA5NYKpmwmexZn2hsm4EOi+XkEJcwlQzSQ==
-X-Received: by 2002:a1c:4d18:: with SMTP id o24mr9523136wmh.141.1586438150144;
-        Thu, 09 Apr 2020 06:15:50 -0700 (PDT)
+        b=G7TmJdjVzu32fHrHOO1/z2nrqs7geqhQxkPeABjo+lfJCYWqNgWoLQw4CVk+087b7L
+         wMT7XeQ/iwx2dz4lMeiKN5Ni47Rr+Nuk1UKF7j3sDBedwuCVaQd5+4wYazax8ls2Jm4G
+         vtSLqiex1l1+Pk3jBV1uSL2LFSfpPT1OZXTuwfKQTXRZlrNBdUwyu8KPfDl5OS6q6zLQ
+         suDON9+nBkh95NsLj5tzuDVSC0PlE57NGNVEaFWp8x6erQISJ7DfjqZVaPu3QCjO2zV1
+         G6fJVVjYgYZzpjfXpaoHImpuLVQ0n0vblgbEKTkVewY9y8eW6QlK0d4L92uQqJ0ng3l9
+         O5EA==
+X-Gm-Message-State: AGi0Puac1ZA//s3eIdudqr/yBQU2vc1479wE5GSPtdxgFc8jA7ukXkCH
+	g9aaJ3cMt24bO6x2uMRv3zh31uBY
+X-Google-Smtp-Source: APiQypL0T4waVXBU7z9MkAcuQdsAsOeNwRNbQqVPPh/MxAJfP/tDEbnzCIAnJHu/KAKoGfM1rth75A==
+X-Received: by 2002:adf:9564:: with SMTP id 91mr5806388wrs.246.1586438234585;
+        Thu, 09 Apr 2020 06:17:14 -0700 (PDT)
 Return-Path: <costamagna.gianfranco@gmail.com>
 Received: from localhost.localdomain ([5.171.137.150])
-        by smtp.gmail.com with ESMTPSA id a2sm39912617wrp.13.2020.04.09.06.15.49
+        by smtp.gmail.com with ESMTPSA id u17sm45396123wra.63.2020.04.09.06.17.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Apr 2020 06:15:49 -0700 (PDT)
+        Thu, 09 Apr 2020 06:17:13 -0700 (PDT)
 From: "Gianfranco" <costamagna.gianfranco@gmail.com>
 X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
 Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
 	Costamagna Gianfranco <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH 2/2] mongodb: Enable again building on 32bit arches from COMPATIBLE_HOST
-Date: Thu,  9 Apr 2020 15:15:43 +0200
-Message-Id: <20200409131543.21108-2-costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH] mongodb: Enable again building on 32bit arches from COMPATIBLE_HOST
+Date: Thu,  9 Apr 2020 15:17:11 +0200
+Message-Id: <20200409131711.21534-1-costamagnagianfranco@yahoo.it>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200409131543.21108-1-costamagnagianfranco@yahoo.it>
-References: <20200409131543.21108-1-costamagnagianfranco@yahoo.it>
 
 The upstream pending pull request seems to fix 32bit builds, tested with MACHINE=raspberrypi3
 Signed-off-by: Costamagna Gianfranco <costamagnagianfranco@yahoo.it>
