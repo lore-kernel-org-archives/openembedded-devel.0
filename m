@@ -1,117 +1,91 @@
-Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com [209.85.210.196])
- by mx.groups.io with SMTP id smtpd.web12.18279.1586464123450754250
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com [209.85.210.194])
+ by mx.groups.io with SMTP id smtpd.web10.19351.1586466496063122921
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Apr 2020 13:28:43 -0700
+ Thu, 09 Apr 2020 14:08:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dFOizu+D;
- spf=pass (domain: gmail.com, ip: 209.85.210.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f196.google.com with SMTP id v23so49469pfm.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2020 13:28:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pt4VOkhj;
+ spf=pass (domain: gmail.com, ip: 209.85.210.194, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f194.google.com with SMTP id b8so81988pfp.8
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2020 14:08:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=/kGp8fad/Rud1Wqr+LlNZI9kqAPPi0do/cavm2sWG6o=;
-        b=dFOizu+Dba8dA5JzYlhS3jq2hJIyePLdWwapqliHmwN1cUpe1lw/UWa9luY6eIvhwI
-         5IaHH+thJmZj9X8GiF3hpns+fp3C2yNOu26P6o67qakTFQYI8JlfSbAyP53J5thkcquN
-         mLjeeuVn57yyPIeFtpwIWnY8p0yEmM48yhpEYEPnlOfHnzSTxVH72Yc49B0If7EcLqZt
-         lfWEaRs/dHW4XRzDVCujOb31KnJ6te0lbnsoTt/giPHoA9LJe+9+zGlzbU8Rk3l0V/7S
-         ZC5gdhuHKhfauhKZViLH9M2eEZuFVlBWA4/cdrJdgR2QJS4Z1MVTf8G5z4FRjoxjqm7Q
-         JOfQ==
+        bh=p039FWw/Lh3lN/iJISQMZuKwHsobNRNJhCzlDH4dVVE=;
+        b=pt4VOkhjkp/dw8m356lYactnBPbCxWuuZsn5e3kbXWhIIk+YpWu4r31SgpVZeuUwQR
+         pV2Ck19wYCK93NR/ACY7UqjE52kJ+qkJd0+9dbyA2jEXRJTmOF0F5V3B8Bz/IiDBuFar
+         5SWmDBLnuI5PQVtX/Rkz8Htc0W+PPiQxZnci0lvafI7/fjtnWWbZ2wN83j0aYO0nJQN/
+         kXUzEszO5ZHjHiWShMXELviQXnCYI1IqQYj/wMDE5CP57CiUbuPzpH4y20uK5Jues4hc
+         F3jyC0RelulLWkyKACVLCmIfBsLoPVcbyE21dkapgXzebib+TBAMWBCHNDo/ur18byL/
+         GMag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=/kGp8fad/Rud1Wqr+LlNZI9kqAPPi0do/cavm2sWG6o=;
-        b=SgNxYuE4zhF624HzuR+rb+a9KS9JXeDCVwER6W8Skleo2JOhihXXw9Gq0AU+IzO2+t
-         bwrFOIL3e+7mp6c/BBmXrTqLCPn08aGicRYX7bBXN6kPU+YjV1ouAdsBlu/8u99raEIm
-         Rw53Nkjye0J1CNAzfkFnVZootCyDgkBZjOsdHCC/VB7CgFNDva608Lv/WJaNMqu2i6Mj
-         K9lZc+iIILkY87yXQ60GYqFNinVtC3YnJSBwriThCz6D/w0Z6iNUqlSGa5iG6U3oMAm4
-         fZ1i7mEZUYRs5pTXEj3RXZhUd2SO60Cn7U8UWU6q07PkNR10fapgNaGL2ycgz+M5hrxo
-         ewNQ==
-X-Gm-Message-State: AGi0PuaTLZ/Lmh0ncwfCWoeAffFiwS95++7bCiuyJKpVsFCBwjfBCczI
-	fQkATwr90dvEbnsa4nuDBIxFgVHFEPA=
-X-Google-Smtp-Source: APiQypIkBgrd2QIGdOXfZfNAH+CbV6Y509qouEOII5HYkTCmqnqwvDBYI38uVsEmMQwo3jlLdpL6wA==
-X-Received: by 2002:a62:ed19:: with SMTP id u25mr1427276pfh.31.1586464122219;
-        Thu, 09 Apr 2020 13:28:42 -0700 (PDT)
+        bh=p039FWw/Lh3lN/iJISQMZuKwHsobNRNJhCzlDH4dVVE=;
+        b=VAtlbhzjNigAmz6kcW/6qon82xtpVXvfRKnTxjb/2qO5Su9/9MeQ8TBfIRWU2lEmjw
+         eqGtWkrWnbj6FlnhLOlT0utr+74fR2TEo51tkV/0bJyW8tiT0/KkB/Vo/ppTJR+XWytu
+         z7wgvfWyT4gUQQsm6fdKKNaxLLs6ejViD2tdJZGuMOjqdaFnRdYO3sd28DLpjlQu26Xx
+         zXIwkRHcabjdITmsP6XgWlsNWlzmzmbxQjsmnTsANWAux2fIg+tAp/TSEsJn7q28wwqF
+         AdzRfibdKw3oX7bosCP3hoCNNifF+VhUq9Wh7ZbUYSN9OYQTcFu6DckM2VrXPqylCTMI
+         lKRQ==
+X-Gm-Message-State: AGi0PuaFwKcG87qXtA8aYifeqKBtSuesjWDNkqJht8bKGuxDuXJTazvX
+	Lc7+t9XaQmPuRzV8n/wdNqqs0M6q4fk=
+X-Google-Smtp-Source: APiQypKEyw3PBoYZC1RVdjMd+iI/ePXHtiK14dnRDwAFxOBYWEuRRZ0Rz1i6A/oGozsPQsnWySTLNA==
+X-Received: by 2002:aa7:8815:: with SMTP id c21mr1547556pfo.86.1586466495095;
+        Thu, 09 Apr 2020 14:08:15 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::58e0])
-        by smtp.gmail.com with ESMTPSA id x4sm76114pfa.191.2020.04.09.13.28.41
+        by smtp.gmail.com with ESMTPSA id y131sm13082pfb.78.2020.04.09.14.08.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Apr 2020 13:28:41 -0700 (PDT)
+        Thu, 09 Apr 2020 14:08:14 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] abseil-cpp: Fix build on musl/mips
-Date: Thu,  9 Apr 2020 13:28:56 -0700
-Message-Id: <20200409202856.798178-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] nspr: Use _MIPS_SIM_ABI64 instead of _ABI64
+Date: Thu,  9 Apr 2020 14:08:09 -0700
+Message-Id: <20200409210809.891452-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.26.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+_ABI64 is glibc specific, to use a common define from asm/sgidefs.h will
+work in every case
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-absl-always-use-asm-sgidefs.h.patch  | 38 +++++++++++++++++++
- .../abseil-cpp/abseil-cpp_git.bb              |  1 +
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-always-use-asm-sgidefs.h.patch
+ .../nspr/nspr/0001-md-Fix-build-with-musl.patch    | 14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-always-use-asm-sgidefs.h.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-always-use-asm-sgidefs.h.patch
-new file mode 100644
-index 0000000000..6bb59d9336
---- /dev/null
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-always-use-asm-sgidefs.h.patch
-@@ -0,0 +1,38 @@
-+From 14229e8c6f42a96e4d725124193ceefa54e5e1a4 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 9 Apr 2020 13:06:27 -0700
-+Subject: [PATCH] absl: always use <asm/sgidefs.h>
-+
-+Fixes mips/musl build, since sgidefs.h is not present on all C libraries
-+but on linux asm/sgidefs.h is there and contains same definitions, using
-+that makes it portable.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ absl/base/internal/direct_mmap.h | 6 +-----
-+ 1 file changed, 1 insertion(+), 5 deletions(-)
-+
-+diff --git a/absl/base/internal/direct_mmap.h b/absl/base/internal/direct_mmap.h
-+index 2e5e422..c515325 100644
-+--- a/absl/base/internal/direct_mmap.h
-++++ b/absl/base/internal/direct_mmap.h
-+@@ -41,13 +41,9 @@
-+ 
-+ #ifdef __mips__
-+ // Include definitions of the ABI currently in use.
-+-#ifdef __BIONIC__
-+-// Android doesn't have sgidefs.h, but does have asm/sgidefs.h, which has the
-++// bionic/musl C libs don't have sgidefs.h, but do have asm/sgidefs.h, which has the
-+ // definitions we need.
-+ #include <asm/sgidefs.h>
-+-#else
-+-#include <sgidefs.h>
-+-#endif  // __BIONIC__
-+ #endif  // __mips__
-+ 
-+ // SYS_mmap and SYS_munmap are not defined in Android.
-+-- 
-+2.26.0
-+
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-index b6ea5fdecc..9a44133c56 100644
---- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}                \
-            file://0002-Add-forgotten-ABSL_HAVE_VDSO_SUPPORT-conditional.patch \
-            file://0003-Add-fPIC-option.patch                                  \
-            file://0001-Add-RISCV-support-to-GetProgramCounter.patch \
-+           file://0001-absl-always-use-asm-sgidefs.h.patch \
-           "
+diff --git a/meta-oe/recipes-support/nspr/nspr/0001-md-Fix-build-with-musl.patch b/meta-oe/recipes-support/nspr/nspr/0001-md-Fix-build-with-musl.patch
+index f3cd670026..d2b9bf6420 100644
+--- a/meta-oe/recipes-support/nspr/nspr/0001-md-Fix-build-with-musl.patch
++++ b/meta-oe/recipes-support/nspr/nspr/0001-md-Fix-build-with-musl.patch
+@@ -13,8 +13,6 @@ Upstream-Status: Pending
+  pr/include/md/_linux.cfg | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
  
- S = "${WORKDIR}/git"
+-diff --git a/pr/include/md/_linux.cfg b/pr/include/md/_linux.cfg
+-index 640b19c..31296a8 100644
+ --- a/pr/include/md/_linux.cfg
+ +++ b/pr/include/md/_linux.cfg
+ @@ -499,7 +499,7 @@
+@@ -26,6 +24,12 @@ index 640b19c..31296a8 100644
+  
+  #ifdef __MIPSEB__
+  #define IS_BIG_ENDIAN 1
+--- 
+-2.14.1
+-
++@@ -511,7 +511,7 @@
++ #error "Unknown MIPS endianness."
++ #endif
++ 
++-#if _MIPS_SIM == _ABI64
+++#if _MIPS_SIM == _MIPS_SIM_ABI64
++ 
++ #define IS_64
++ 
 -- 
 2.26.0
 
