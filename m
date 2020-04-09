@@ -1,57 +1,79 @@
-Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web12.8294.1586437520524083118
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com [209.85.221.65])
+ by mx.groups.io with SMTP id smtpd.web10.8448.1586438148252987212
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Apr 2020 06:05:21 -0700
+ Thu, 09 Apr 2020 06:15:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=uphKTwFr;
- spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 2317860307;
-	Thu,  9 Apr 2020 15:05:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1586437519;
-	bh=MlTtdMnF3Ey2XNX8Gj/DzWNXXDsu0pix/DTVHO5NCFc=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=uphKTwFr3i9QyGh+NCJ5/MTiOlfKC1IYRjzuGGU2BZeQN00WGjOtObGwh/Euf6u5y
-	 V6RuZCQHHTANMQMQgUEZvGoOLYc43/obv1PgyHI6gsSnYIKbMj/ye1hG7WrXHoGriq
-	 R8GOqDMbD+rdHlpkLGbr4sjuikWJnxhEpO842TuapjpkWqD9C5sv/+FFU2Saabozz7
-	 M5kRNmzg2NJ4gWoaaJxSMIa3XJbqPMt0iBk+9GgOgQoiIKyxsnZWpoFXqtRHXn0Dqd
-	 XZ/zAe4MtwHdXSEaGNemcPeroIjQw2yyN5YLY258UqYFUzKOIG0ccquVmCTicAKdpA
-	 EeT4fFCOIoD3w==
-From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=B3ErRj6O;
+ spf=pass (domain: gmail.com, ip: 209.85.221.65, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-wr1-f65.google.com with SMTP id h9so11870751wrc.8
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2020 06:15:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=IoEP2Y7ifblqRfb5xRYA+IHkecWGKRL591AHtdOnBLs=;
+        b=B3ErRj6OaPUW6RtUHiP6etgM1j+VTgbbxoo5DAO802XDZLFVxu5QKkmxMeek7dUFz3
+         RtNFa/udKDuiyRWfaLNf5CEbKKQ1nhh4jooUz6uH9kA3KFutPTfOshDcvMcbEZPsObnn
+         8RdjNs28luDr9jgHnJbfyJdF+yyVOSkNZS7IAaa9g+vAECDOYu/4b9Gv3iZGWYOFVeZ1
+         yQ3uINYWLcYhlJXgxjyfBI8Lepl2em9G9tSqWAys1rJ51ru186cWoaqgjcDR4cuRw6Mh
+         QQNGVW2pDnhTwrmakxcD4Svwj/ydBuRvrCta0+QLPXzJDoT0Vx5x1BoTS1eTMjaD1Reh
+         77rQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=IoEP2Y7ifblqRfb5xRYA+IHkecWGKRL591AHtdOnBLs=;
+        b=iqtiWjRBcvpEbZtsWTVX5WIP7xt+vM97NmZMhOUdFuZNhwxfWlXBxFWp5uzAWozGUB
+         pRqCfo3y8Si2sPXlxt63KbzB9mAzxXDaFGSQSE7jh9RdlNetMCSKcEFrnNikj/swrf1e
+         vWPw/ucoJTRzs9ZK9zgV6zOulkX/W7fpV1hkp/PD0HQl2Oljo6xZJyH1SwFyLWCAikeN
+         9Z7JFooLM10jYvDtH5xCyi65U4pp8Rqeb6L1v4Ekgvzxom8xG1J59XAI5ID/lOnk3v3Z
+         5J9Bv8gvjRR8GFBJZZeVDBnKFuGjVbFKdV9UEQWdeW7qrpo//6IWaGi0cbO23MVaY14m
+         WYCQ==
+X-Gm-Message-State: AGi0PuZsXf9tzxHkq4AM/1lZ12VeLYcUujEKr7d+XV2XPXqYJj0Mjtqj
+	1R4Qm0T9RdrqiiCFKTROE3S4tSlV
+X-Google-Smtp-Source: APiQypKve1NHbRclz9joslcokoWI5QeuY1ofxnqQ/CuyBE9RC10f/c13owqZive/Q+YP3sSFKahKtw==
+X-Received: by 2002:adf:e742:: with SMTP id c2mr14063386wrn.293.1586438146518;
+        Thu, 09 Apr 2020 06:15:46 -0700 (PDT)
+Return-Path: <costamagna.gianfranco@gmail.com>
+Received: from localhost.localdomain ([5.171.137.150])
+        by smtp.gmail.com with ESMTPSA id a2sm39912617wrp.13.2020.04.09.06.15.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 09 Apr 2020 06:15:45 -0700 (PDT)
+From: "Gianfranco" <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-python][PATCH 2/2] python3-dominate: upgrade 2.4.0 -> 2.5.1
-Date: Thu,  9 Apr 2020 15:05:10 +0200
-Message-Id: <1586437510-4405-2-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1586437510-4405-1-git-send-email-pjtexier@koncepto.io>
-References: <1586437510-4405-1-git-send-email-pjtexier@koncepto.io>
+Cc: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] fetchmail: upgrade 6.4.2 -> 6.4.3
+Date: Thu,  9 Apr 2020 15:15:42 +0200
+Message-Id: <20200409131543.21108-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.17.1
 
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/{python3-dominate_2.4.0.bb => python3-dominate_2.5.1.bb}   | 4 ++--
+ .../fetchmail/{fetchmail_6.4.2.bb => fetchmail_6.4.3.bb}      | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-dominate_2.4.0.bb => python3-dominate_2.5.1.bb} (69%)
+ rename meta-networking/recipes-support/fetchmail/{fetchmail_6.4.2.bb => fetchmail_6.4.3.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-dominate_2.4.0.bb b/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb
-similarity index 69%
-rename from meta-python/recipes-devtools/python/python3-dominate_2.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb
-index e76eefb..dd8c596 100644
---- a/meta-python/recipes-devtools/python/python3-dominate_2.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb
-@@ -2,8 +2,8 @@ SUMMARY = "Dominate is a Python library for creating and manipulating HTML docum
- LICENSE = "LGPLv3"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
+diff --git a/meta-networking/recipes-support/fetchmail/fetchmail_6.4.2.bb b/meta-networking/recipes-support/fetchmail/fetchmail_6.4.3.bb
+similarity index 86%
+rename from meta-networking/recipes-support/fetchmail/fetchmail_6.4.2.bb
+rename to meta-networking/recipes-support/fetchmail/fetchmail_6.4.3.bb
+index 236c32bdd..5e2d1be1e 100644
+--- a/meta-networking/recipes-support/fetchmail/fetchmail_6.4.2.bb
++++ b/meta-networking/recipes-support/fetchmail/fetchmail_6.4.3.bb
+@@ -9,8 +9,8 @@ DEPENDS = "openssl"
  
--SRC_URI[md5sum] = "27d3aa7e0d67902c505e248e705e5e2e"
--SRC_URI[sha256sum] = "a92474b4312bd8b4c1789792f3ec8c571cd8afa8e7502a2b1c64dd48cd67e59c"
-+SRC_URI[md5sum] = "35eeb6b5587c8c9a51cd22c83e07ac49"
-+SRC_URI[sha256sum] = "9b05481605ea8c0afd0a98c0156a9fb78d9c406368d66b3e6fedf36920fb9d78"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz \
+            "
+-SRC_URI[md5sum] = "039b49a4f41f8544a51d82d2f4599dfc"
+-SRC_URI[sha256sum] = "e21f6b3326f29fdb0c4786b5602aa4b9e668805424d0708eb42be6395c1ca630"
++SRC_URI[md5sum] = "614d5a05ac9a042bfc9317e5499bafd4"
++SRC_URI[sha256sum] = "b0360e14b9aa5d065eef8ff99ad0347ef6cbbfc934c8114908295a402a09d3e4"
  
- inherit pypi setuptools3
+ inherit autotools gettext python3-dir python3native
  
 -- 
-2.7.4
+2.17.1
 
