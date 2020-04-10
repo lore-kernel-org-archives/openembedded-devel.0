@@ -1,137 +1,95 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web10.1597.1586483030086587169
+Received: from mail-io1-f68.google.com (mail-io1-f68.google.com [209.85.166.68])
+ by mx.groups.io with SMTP id smtpd.web11.4490.1586501415805162256
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Apr 2020 18:43:50 -0700
+ Thu, 09 Apr 2020 23:50:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: mingli.yu@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 03A1hREb009426
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Apr 2020 18:43:39 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
- 14.3.487.0; Thu, 9 Apr 2020 18:43:17 -0700
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] mariadb: Upgrade to 10.4.12
-Date: Fri, 10 Apr 2020 09:43:16 +0800
-Message-ID: <1586482996-218656-1-git-send-email-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=KJlz1HMy;
+ spf=pass (domain: gmail.com, ip: 209.85.166.68, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-io1-f68.google.com with SMTP id u2so857439iop.10
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2020 23:50:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=0b/8myabYHvTcCxJ4b4snLioQWdAxY1fffpBYNWZeZI=;
+        b=KJlz1HMyVnsEaQkTfUuoOVFbva18DWmkH9xh+thiigpzRG2NH3fquMgQupkGEza4+F
+         sbLSdrTMRIrowxO1zxxXMXIZ6n96J7ygxrYT7V65BORPL/zZVH/vljxi+My1xxmVxuGg
+         7WhslUPCaF6fpIf82FwxTvQOUoUSe6lQ10tbuW4pPBPK7GuZBnXf+bdOHOk4AaB36oJp
+         Q4DwZjAnxA/K0qyzrbjChNDTj2YgwX6+JeScSngI+aY5HoGlEuU3Ql+sGk7sIvtRQqgg
+         s+GXfl7VCfq2ey84YHmOto3Uk19oVJwO8jTzEItqrp2XFfG6UiVgDxM0poe0SIctaKDL
+         ozNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=0b/8myabYHvTcCxJ4b4snLioQWdAxY1fffpBYNWZeZI=;
+        b=FdhhMVIjoYd02m7+IWCczdRPAHZXWbkDoCU11Qol+fKjnPzwFD364uSM6pYVtUCHJl
+         EUZrPfjekdLgYCfI6acfJu5RZ6FAZF93alQoi8jIurV/DYWg3fD2BMdbueA40foIfU9I
+         7fb5AKd5GdCFCEgNM0AKI5XPxA1PXo3MNkOrQPJjvNVm3DTD5gGTHpTdxz+zcgkYG7lo
+         N27SMo3CsjQv5qp7Pg7F+J0aUQrDptPWCXp/BdN44xiUBdNrabKlaFbRlD56IDDccbyV
+         KvkGUo/tPaPct2g+3A9ETZd1qYhCG+gRRDwDw6rNOm4RSZLP1FI/9Xp7fL1dt2kgcZ6X
+         NmmA==
+X-Gm-Message-State: AGi0PuY6roDfxsAJXpiz9aT4vHKDd5KosYeFkXCoChUex/pAQ5phZaWR
+	NtplskfWQH03MNGmRTSO46E5vpYx5wvc4kFedY0=
+X-Google-Smtp-Source: APiQypKZN518bVDEjxl7vUU3d1OeuZLvp4tpSGambmOgjIKsNb4ZaYdr339RADVgSjCwJ4URnj2RNnr7aXNMGshY37I=
+X-Received: by 2002:a5d:8742:: with SMTP id k2mr2982207iol.120.1586501415256;
+ Thu, 09 Apr 2020 23:50:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20200410011113.1300661-1-raj.khem@gmail.com>
+In-Reply-To: <20200410011113.1300661-1-raj.khem@gmail.com>
+From: "Andreas M?ller" <schnitzeltony@gmail.com>
+Date: Fri, 10 Apr 2020 08:50:04 +0200
+Message-ID: <CALbNGRRoooGE7vzTb-Gq9GgN+i=--3BWmDyV6dDw0EBkqT=LxA@mail.gmail.com>
+Subject: Re: [meta-gnome][PATCH] gimp: Disable vector icons generation on mips/armv7a
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Mingli Yu <mingli.yu@windriver.com>
+On Fri, Apr 10, 2020 at 3:11 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> Fixes errors like
+>
+> make[3]: *** [Makefile:2395: 24/document-print.svg] Segmentation fault (c=
+ore dumped)
+> make[3]: *** [Makefile:2395: 24/gimp-center.svg] Segmentation fault (core=
+ dumped)
+> make[3]: *** [Makefile:2395: 24/media-optical.svg] Segmentation fault (co=
+re dumped)
+> make[3]: *** [Makefile:2395: 24/gimp-channel-gray.svg] Segmentation fault=
+ (core dumped)
+> make[3]: *** [Makefile:2395: 24/gimp-channel-blue.svg] Segmentation fault=
+ (core dumped)
+> make[3]: *** [Makefile:2395: 24/gtk-select-color.svg] Segmentation fault =
+(core dumped)
+> make[3]: *** [Makefile:2395: 24/gimp-channel-alpha.svg] Segmentation faul=
+t (core dumped)
+> make[3]: *** [Makefile:2395: 24/media-floppy.svg] Segmentation fault (cor=
+e dumped)
+> make[3]: *** [Makefile:2395: 24/gimp-business-card.svg] Segmentation faul=
+t (core dumped)
+> make[3]: *** [Makefile:2395: 24/gimp-channel.svg] Segmentation fault (cor=
+e dumped)
+> make[3]: *** [Makefile:2395: 24/dialog-information.svg] Segmentation faul=
+t (core dumped)
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Cc: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> ---
+>  meta-gnome/recipes-gimp/gimp/gimp_2.10.18.bb | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.18.bb b/meta-gnome/re=
+cipes-gimp/gimp/gimp_2.10.18.bb
+> index 838bd374a1..5a58f48ec3 100644
+> --- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.18.bb
+> +++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.18.bb
+> @@ -45,6 +45,9 @@ EXTRA_OECONF =3D "--disable-python \
+>                  --without-webkit \
+>                  --without-wmf"
+>
+> +EXTRA_OECONF_append_libc-musl_mipsarch =3D " --disable-vector-icons"
+> +EXTRA_OECONF_append_libc-musl_armv7a =3D " --disable-vector-icons"
+Maybe you should mention musl in commit message?
 
-* Fixes for the following security vulnerabilities:
-  CVE-2020-2574
-  CVE-2020-7221
-
-* Rework fix-arm-atomic.patch to remove fuzz warnings
-
-* Fix the warning when pam is enabled in DISTRO_FEATURES:
-  WARNING: mariadb-10.4.12-r0 do_package_qa: QA Issue: mariadb-dbg: found library in wrong location: /lib/security/.debug/pam_user_map.so
-  mariadb-leftovers: found library in wrong location: /lib/security/pam_user_map.so [libdir]
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- ...ariadb-native_10.4.11.bb => mariadb-native_10.4.12.bb} |  0
- meta-oe/recipes-dbs/mysql/mariadb.inc                     |  9 +++++++--
- meta-oe/recipes-dbs/mysql/mariadb/fix-arm-atomic.patch    | 15 ++++++++++-----
- .../mysql/{mariadb_10.4.11.bb => mariadb_10.4.12.bb}      |  0
- 4 files changed, 17 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.4.11.bb => mariadb-native_10.4.12.bb} (100%)
- rename meta-oe/recipes-dbs/mysql/{mariadb_10.4.11.bb => mariadb_10.4.12.bb} (100%)
-
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.4.11.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.4.12.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.4.11.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.4.12.bb
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 6888c64..5ff273e 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -21,8 +21,8 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
-            file://0001-Fix-build-breakage-from-lock_guard-error-6161.patch \
-            file://0001-Fix-library-LZ4-lookup.patch \
-           "
--SRC_URI[md5sum] = "d0de881ab8ead46928cafb7d558535c1"
--SRC_URI[sha256sum] = "4c076232b99433b09eb3c6d62f607192b3474d022703699b8f6aef4e79de3fb9"
-+SRC_URI[md5sum] = "97d7c0f508c04a31c138fdb24e95dbc4"
-+SRC_URI[sha256sum] = "fef1e1d38aa253dd8a51006bd15aad184912fce31c446bb69434fcde735aa208"
- 
- UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
- 
-@@ -168,6 +168,9 @@ do_install() {
-     if [ -f ${D}${datadir}/doc/README ]; then
-         mv ${D}${datadir}/doc/README ${D}${datadir}/doc/${PN}/
-     fi
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
-+        mv ${D}/lib/security ${D}/${libdir}
-+    fi
- }
- 
- PACKAGES = "${PN}-dbg ${PN} \
-@@ -299,12 +302,14 @@ FILES_${PN}-server = "\
-     ${sbindir}/ndbd \
-     ${sbindir}/ndb_mgmd \
-     ${libdir}/plugin/*.so \
-+    ${libdir}/security/*.so \
-     ${libdir}/plugin/auth_pam_tool_dir/auth_pam_tool \
-     ${datadir}/mysql/ \
-     ${localstatedir}/mysql/ \
-     ${sysconfdir}/init.d/mysqld \
-     ${sysconfdir}/my.cnf \
-     ${sysconfdir}/my.cnf.d/server.cnf \
-+    ${sysconfdir}/security/user_map.conf \
-     ${sysconfdir}/tmpfiles.d"
- 
- DESCRIPTION_${PN}-leftovers = "unpackaged and probably unneeded files for ${PN}"
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/fix-arm-atomic.patch b/meta-oe/recipes-dbs/mysql/mariadb/fix-arm-atomic.patch
-index 185b7b7..05b0cf8 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/fix-arm-atomic.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/fix-arm-atomic.patch
-@@ -1,6 +1,6 @@
--From ffaaf4d43ebf2ef6d0229a60f407c1f5a06e5c53 Mon Sep 17 00:00:00 2001
-+From f447aca534d1a12809eeb146e8220d305cc3884d Mon Sep 17 00:00:00 2001
- From: Mingli Yu <mingli.yu@windriver.com>
--Date: Fri, 15 Mar 2019 01:46:05 -0700
-+Date: Thu, 9 Apr 2020 14:07:19 +0800
- Subject: [PATCH] build_rocksdb.cmake: fix atomic support on arm
- 
- Check to link with libatomic to enable C11 atomics support
-@@ -10,14 +10,16 @@ to fix below build error on arm:
- 
- Upstream-Status: Pending
- 
--Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
- ---
-  storage/rocksdb/build_rocksdb.cmake | 3 +++
-  1 file changed, 3 insertions(+)
- 
-+diff --git a/storage/rocksdb/build_rocksdb.cmake b/storage/rocksdb/build_rocksdb.cmake
-+index d7895b0..3bcd52a 100644
- --- a/storage/rocksdb/build_rocksdb.cmake
- +++ b/storage/rocksdb/build_rocksdb.cmake
--@@ -470,6 +470,9 @@ list(APPEND SOURCES ${CMAKE_CURRENT_BINA
-+@@ -470,6 +470,9 @@ list(APPEND SOURCES ${CMAKE_CURRENT_BINARY_DIR}/build_version.cc)
-  
-  ADD_CONVENIENCE_LIBRARY(rocksdblib ${SOURCES})
-  target_link_libraries(rocksdblib ${THIRDPARTY_LIBS} ${SYSTEM_LIBS})
-@@ -25,5 +27,8 @@ Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
- +  TARGET_LINK_LIBRARIES(rocksdblib atomic)
- +ENDIF()
-  IF(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
--   set_target_properties(rocksdblib PROPERTIES COMPILE_FLAGS "-fPIC -fno-builtin-memcmp")
-+   set_target_properties(rocksdblib PROPERTIES COMPILE_FLAGS "-fPIC -fno-builtin-memcmp -Wno-error")
-  endif()
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.4.11.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.4.12.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb_10.4.11.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb_10.4.12.bb
--- 
-2.7.4
-
+Andreas
