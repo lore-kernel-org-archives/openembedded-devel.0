@@ -1,83 +1,87 @@
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.web10.1910.1586556603157025717
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web11.234.1586563813789317865
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Apr 2020 15:10:03 -0700
+ Fri, 10 Apr 2020 17:10:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=BL91QpTV;
- spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f46.google.com with SMTP id w10so3879846wrm.4
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Apr 2020 15:10:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=neem93XOgvEl3L1fOWxCmW1Osd1CBeKAdv/BtOKfMZc=;
-        b=BL91QpTV4oHoIQYgIy0bzN5Pg6gApBq+P+Yq2ipLvtmnxKtlnhgOIM3FmOsAn+U9Gs
-         U+PPw8ps0aybFhG3f3Kb+iLG8GfN+Oopk3Fw9bcQb5vu9X8VVWHhdhSLk3g+N/kzgBE7
-         xL2sz7WPf45ZyNOmkYS2M9rfZe7di1WHlSXs9gXwmp02pzonq0T7YmgzD2IGorW0yWeL
-         tp9H05FSVfZYZvrz6tYPHQQy3BdXKYmjBqPHhCJdj4zijswUzTcr2AVX8rSnwcUl6Xrm
-         rRXsFsLlu66KbGv4DRfVG8se8VqDZKvViMrEzf+2MznYXEGDbmwzQlDHFDYf/7hRyk+Y
-         sF+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=neem93XOgvEl3L1fOWxCmW1Osd1CBeKAdv/BtOKfMZc=;
-        b=VsR3oY0ShSvBQMA7/e6HX6eOkQZ7zsqRP9H0cuNZDyNCnbVjv9khtAmMltut1ept58
-         yceUvzyvAkF6H8M6wk0DsMNV2rs+QEI01yhGnD7ky7+Ibq4fLW9Vd6+iPlz2XU1JU+T5
-         0Q4FdGgeJkPSywc1EfmtbMzBOgZ82RH1VPVoVo2GCyfJnNfnh/lzSDsr03lbEQxpx2YM
-         47pPl2no4J628bM6CmPCXrHnoN8v7AVhYcPr2mgBoOv/OB8aWphQDiF8A9LWMHCwlwdf
-         XLuE+LM6Czj7DK5g0elW5dJLwfZd/EXLdt9788lpanaStuoktpd3eA4RjQG1ZP3BPgNQ
-         py+A==
-X-Gm-Message-State: AGi0PuZ/fPXh0YgqjauWhtKUUNVqobyp9dJpOA9If8aAxMypg5c2TjCf
-	aDwSsKmR54yJFs/NA6DHz1XOoW5pkAk=
-X-Google-Smtp-Source: APiQypLR/SA9PKudLWV92hxIh8iPsygVchpfHnYD5CgNlPT0zyg3sQaRWknf0F1B38cBSJQ1ph5Ztg==
-X-Received: by 2002:a5d:69ca:: with SMTP id s10mr6676794wrw.260.1586556601530;
-        Fri, 10 Apr 2020 15:10:01 -0700 (PDT)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300F07F05DA42C8F51B0BBAC2F53F.dip0.t-ipconnect.de. [2003:f0:7f05:da42:c8f5:1b0b:bac2:f53f])
-        by smtp.gmail.com with ESMTPSA id i9sm4664773wrn.25.2020.04.10.15.10.00
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 10 Apr 2020 15:10:01 -0700 (PDT)
-From: "Andreas M?ller" <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 5/5] xfce4-closebutton-plugin: upgrade sources
-Date: Sat, 11 Apr 2020 00:09:45 +0200
-Message-Id: <20200410220945.23712-5-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.1
-In-Reply-To: <20200410220945.23712-1-schnitzeltony@gmail.com>
-References: <20200410220945.23712-1-schnitzeltony@gmail.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: randy.macleod@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 03B0ABYr006358
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Apr 2020 17:10:11 -0700 (PDT)
+Received: from vme.wrs.com (172.25.44.3) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.40) with Microsoft SMTP Server id 14.3.487.0; Fri, 10 Apr 2020
+ 17:10:10 -0700
+From: "Randy MacLeod" <randy.macleod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] rsyslog: 8.1911.0 -> 8.2002.0
+Date: Fri, 10 Apr 2020 20:10:10 -0400
+Message-ID: <20200411001010.2331-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-I ported it to GTK3
+Add some error handling to run-ptests.
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Fix up the new set-envvars script to that 36 new tests pass.
+On qemux86-64/kvm the ptest results with extra filesystem
+space and a timeout of 800 seconds are:
+         1911   2002
+ TOTAL:   389    408
+ PASS:    339    357
+ SKIP:     39     39
+ XFAIL:     0      0
+ FAIL:     11     12
+ XPASS:     0      0
+ ERROR:     0      0
+
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 ---
- .../closebutton/xfce4-closebutton-plugin_git.bb               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest          | 5 +++++
+ .../rsyslog/{rsyslog_8.1911.0.bb => rsyslog_8.2002.0.bb}    | 6 ++++--
+ 2 files changed, 9 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.1911.0.bb => rsyslog_8.2002.0.bb} (96%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git.bb b/meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git.bb
-index 3cd4ee65e..8dfb2e626 100644
---- a/meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git.bb
-+++ b/meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git.bb
-@@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b6952d9a47fc2ad0f315510e1290455f"
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest b/meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest
+index 3770a7506..aa698d85c 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest
+@@ -1,3 +1,8 @@
+ #!/bin/sh
+ #
++set -e
++set -o pipefail
++
++SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
++cd ${SCRIPTPATH}
+ make -C tests -k check-TESTS
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2002.0.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb
+rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.2002.0.bb
+index f82caf7b5..6a90614bf 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2002.0.bb
+@@ -29,8 +29,8 @@ SRC_URI_append_libc-musl = " \
+     file://0001-Include-sys-time-h.patch \
+ "
  
- inherit xfce-panel-plugin xfce-git gtk-icon-cache perlnative
+-SRC_URI[md5sum] = "154e33feb587216f2955050a8301104c"
+-SRC_URI[sha256sum] = "e1f4776b1c62ad7220f4d624a89a96b0c3d4738006899356eaaef0f1f91ee104"
++SRC_URI[md5sum] = "fbe6d18205170e22bad470954d0dc874"
++SRC_URI[sha256sum] = "fe86c14d860da1202c76616feac0539ea5a40a4ad182d74b7d6d2419cc2381f8"
  
--DEPENDS += "exo-native libwnck xfconf"
-+DEPENDS += "exo-native libwnck3 xfconf"
+ UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+@@ -131,6 +131,8 @@ do_install_ptest() {
+     # fix the module load path with runtime/.libs
+     find ${D}${PTEST_PATH}/${TESTDIR} -name "*.conf" -o -name "*.sh" -o -name "*.c" | xargs \
+         sed -i -e 's:../plugins/.*/.libs/:../runtime/.libs/:g'
++    # fix the python3 path for tests/set-envar
++    sed -i -e s:${HOSTTOOLS_DIR}:${bindir}:g ${D}${PTEST_PATH}/tests/set-envvars
+ }
  
- PV = "0.1.0+gitr${SRCPV}"
- 
- SRC_URI = "git://github.com/schnitzeltony/xfce4-closebutton-plugin.git;branch=master"
--SRCREV = "02b74f13ad6f639234c8db1854963038b2780a2c"
-+SRCREV = "6ed5c3ee1ba7103ca854c5e81fb2c1220b913a40"
- S = "${WORKDIR}/git"
- 
- EXTRA_OECONF += "--enable-maintainer-mode"
+ do_install_append() {
 -- 
-2.21.1
+2.20.1
 
