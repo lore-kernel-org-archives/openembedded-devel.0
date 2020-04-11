@@ -1,72 +1,52 @@
 Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web11.712.1586565558718297319
+ by mx.groups.io with SMTP id smtpd.web11.1099.1586582875136513189
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Apr 2020 17:39:19 -0700
+ Fri, 10 Apr 2020 22:27:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.72,368,1580745600"; 
-   d="scan'208";a="88837622"
+   d="scan'208";a="88846623"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 11 Apr 2020 08:39:15 +0800
+  by heian.cn.fujitsu.com with ESMTP; 11 Apr 2020 13:27:51 +0800
 Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 0D4F250A999E
-	for <openembedded-devel@lists.openembedded.org>; Sat, 11 Apr 2020 08:28:46 +0800 (CST)
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.85) by
+	by cn.fujitsu.com (Postfix) with ESMTP id 53446406AB15
+	for <openembedded-devel@lists.openembedded.org>; Sat, 11 Apr 2020 13:17:24 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
  G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Sat, 11 Apr 2020 08:39:11 +0800
-Received: from localhost.local (10.167.225.81) by
- G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP Server
- (TLS) id 14.3.439.0; Sat, 11 Apr 2020 08:39:12 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+ (TLS) id 15.0.1497.2; Sat, 11 Apr 2020 13:27:49 +0800
+From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-pyserial: Enable ptest
-Date: Sat, 11 Apr 2020 08:42:04 +0800
-Message-ID: <20200411004205.23402-4-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200411004205.23402-1-zangrc.fnst@cn.fujitsu.com>
-References: <20200411004205.23402-1-zangrc.fnst@cn.fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-pyasn1: Enable ptest
+Date: Sat, 11 Apr 2020 22:12:07 +0800
+Message-ID: <1586614327-56995-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 0D4F250A999E.AD8C4
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
+X-yoursite-MailScanner-ID: 53446406AB15.A39EF
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- .../python/python3-pyserial/run-ptest             |  3 +++
- .../python/python3-pyserial_3.4.bb                | 15 ++++++++++++++-
- 2 files changed, 17 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-pyserial/run-ptest
+ .../recipes-devtools/python/python-pyasn1.inc     | 15 +++++++++++++++
+ .../python/python3-pyasn1/run-ptest               |  3 +++
+ 2 files changed, 18 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyasn1/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyserial/run-ptest b/meta-python/recipes-devtools/python/python3-pyserial/run-ptest
-new file mode 100644
-index 000000000..5cec71169
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyserial/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
-+
-+pytest
-diff --git a/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb b/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
-index eee8eb2d1..d65c9a88b 100644
---- a/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d476d94926db6e0008a5b3860d1f5c0d"
- SRC_URI[md5sum] = "ed6183b15519a0ae96675e9c3330c69b"
- SRC_URI[sha256sum] = "6e2d401fdee0eab996cf734e67773a0143b932772ca8b42451440cfed942c627"
- 
--inherit pypi setuptools3
-+inherit pypi setuptools3 ptest
- 
- do_install_append() {
-     rm -f ${D}${bindir}/miniterm.py
-@@ -47,3 +47,16 @@ RDEPENDS_${PN} = "\
+diff --git a/meta-python/recipes-devtools/python/python-pyasn1.inc b/meta-python/recipes-devtools/python/python-pyasn1.inc
+index d74c2fec6..d9557646a 100644
+--- a/meta-python/recipes-devtools/python/python-pyasn1.inc
++++ b/meta-python/recipes-devtools/python/python-pyasn1.inc
+@@ -14,3 +14,18 @@ RDEPENDS_${PN}_class-target += " \
  "
  
  BBCLASSEXTEND = "native nativesdk"
++
++inherit ptest
 +
 +SRC_URI += " \
 +	file://run-ptest \
@@ -77,9 +57,18 @@ index eee8eb2d1..d65c9a88b 100644
 +"
 +
 +do_install_ptest() {
-+	install -d ${D}${PTEST_PATH}/test
-+	cp -rf ${S}/test/* ${D}${PTEST_PATH}/test/
++	install -d ${D}${PTEST_PATH}/tests
++	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 +}
+diff --git a/meta-python/recipes-devtools/python/python3-pyasn1/run-ptest b/meta-python/recipes-devtools/python/python3-pyasn1/run-ptest
+new file mode 100644
+index 000000000..5cec71169
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyasn1/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
++
++pytest
 -- 
 2.20.1
 
