@@ -1,82 +1,64 @@
-Received: from mail-qv1-f66.google.com (mail-qv1-f66.google.com [209.85.219.66])
- by mx.groups.io with SMTP id smtpd.web11.2481.1586643989774163421
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+ by mx.groups.io with SMTP id smtpd.web11.13046.1586703822395294647
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Apr 2020 15:26:29 -0700
+ Sun, 12 Apr 2020 08:03:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=LiyBPiup;
- spf=pass (domain: gmail.com, ip: 209.85.219.66, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f66.google.com with SMTP id w26so2682097qvd.10
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Apr 2020 15:26:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=weUFpAzEplWA9qDxMlW6KpoBpG/KvvXiaL/ZxT3eRhA=;
-        b=LiyBPiupqzWch1YLPdo6MhI+X3R/4ixK7fGg50nK1JqI3f4zxFWNznTWf67sxTLSj5
-         /ROEFPO6nMFNpyW4ewXb7TcBDvp6okITUY9mKQipYvPIzajq/TDpYNyRONFtOcKHuPZd
-         8cJWaamXdpqigqOK4XOqprfVJ8Awcska3vNGbcuczifl217oCuZE7yXIRHGbUrtW/QTV
-         UzXxVMu74eq8T1BSdWIEZI1TNZ9V4K+pqYQ2oRNWSD9v5jIWlINrgkv0oxEcTgMuYBJr
-         911uEHMUaNJ8r7Ljvl780ZEhuwn4++ABc0D2cpYBKkrEKfuXPiHV0mNqWdWhWw+/d4zz
-         VKPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=weUFpAzEplWA9qDxMlW6KpoBpG/KvvXiaL/ZxT3eRhA=;
-        b=U65oZDAehV+s0vek2T35f61KXQ5bbw9cN/q8JuQNt41shOMaApL76HzIN4IMdJ51MR
-         P5gKkhe3uYt9DcIvIgtbd3waHds2AiD35M+ozd4TkPrXp4bGEjYCPOLbpLSiLT/4YTkb
-         McdvbyrIXShwrkfZ2xXeESYqvPOpBoFJKBKT+AGW5Tk95jnUV45Yns03biCEi71nVgZt
-         8flLONEqYcF7AHMdiwBRQeNso4kq6MCGaHc/GtsOnRJ1wMj1Ga984nrmCdrDZ/eW+mrX
-         R/ysd4micca8sMKyRdFHOQ6eXSGwy4jx7Oxl80PTguc7CYQS1dd942UCz6IVsJPrGOPI
-         +EPw==
-X-Gm-Message-State: AGi0PuZv8KRKlhUH/SblSDJKvbhcJ3plM3tTJH3dleqzjcSL3gtbBhG1
-	LfTQIAcvxjSYr6qL/QIAb/Z70OlzEPKz00ivQM7isCPG
-X-Google-Smtp-Source: APiQypJWQPrlnUG0bnZxRv+6ZITb7xPI7r3CAVA3pq2zxtF7zxkj8LIC9Pq7XoqS04qZld+Zb/LGNzFQNdFG8a4G4V4=
-X-Received: by 2002:a0c:b78e:: with SMTP id l14mr11146419qve.4.1586643988646;
- Sat, 11 Apr 2020 15:26:28 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAMKF1so7NBe8eLiJmeR0aWcf+A8+624qwRoR_RMHVGSQ94Hz4A@mail.gmail.com>
- <7592.1586513853636817343@lists.openembedded.org>
-In-Reply-To: <7592.1586513853636817343@lists.openembedded.org>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sat, 11 Apr 2020 15:26:01 -0700
-Message-ID: <CAMKF1sr6sdqpa6KVMvTXWA3fKoCCFGR+UF-V7Z5wYVqkcR_DYQ@mail.gmail.com>
-Subject: Re: [oe] [PATCH v2] Add nbdkit to extend backend possibilities of nbd.
-To: przemyslaw.hawrylewicz.czarnowski@linux.intel.com
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ dkim=pass header.i=@koncepto.io header.s=default header.b=O3qw1bYL;
+ spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
+Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
+	by koncepto.io (Postfix) with ESMTPSA id A831F60386;
+	Sun, 12 Apr 2020 17:03:39 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1586703819;
+	bh=TDOthMdc8YXV7ky7wKzGY+dOo/px7p4ylpQra2ExzOo=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=O3qw1bYLFZcDbPZ5X3tRPngejF3+9qdPb4bB/RtJHfGMRLQKhB1oe4XEH57DuCBo+
+	 lUQ1YWTTcTVxxUXfyXHhkfnV1dj/uS7IESSQFyY4rDB3RikNERV2xud6FQq1UIKH+I
+	 NrC1TGsgrk49IlFm+rMfyhHLqplrb0qK0mMa2HHhBELUQuSKHtNNXfZy3IslGZO/0a
+	 4xWJpP9Q/ozqXLMTcCKHimUdYMeFiH4PZmI+dmcQ82q1+HjVAjEe4bCeorhFOWyiqj
+	 FWp6F0MI4SRKn6DGPyPt9zLO3d3UMqyPrwWW2cIZQSjI3onNIii5AZ10H5DcUKWszz
+	 NonkRfvsU1njw==
+From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
+Subject: [meta-python][PATCH 2/5] python3-waitress: upgrade 1.4.2 -> 1.4.3
+Date: Sun, 12 Apr 2020 17:03:31 +0200
+Message-Id: <1586703814-15536-2-git-send-email-pjtexier@koncepto.io>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1586703814-15536-1-git-send-email-pjtexier@koncepto.io>
+References: <1586703814-15536-1-git-send-email-pjtexier@koncepto.io>
 
-On Fri, Apr 10, 2020 at 3:17 AM
-<przemyslaw.hawrylewicz.czarnowski@linux.intel.com> wrote:
->
->  On Thursday, April 9, 2020 8:53 AM Khem Raj <raj.khem@gmail.com> wrote:
->
->
->
-> > clang find an interesting failure
->
-> >
->
-> > 22:42:57 | main.c:116:2: error: embedding a #include directive within =
-macro
->
-> > arguments is not supported
->
-> > 22:42:57 | #include "synopsis.c"
->
-> > 22:42:57 |  ^
->
-> Interesting indeed. This is not my sode, I am just using it in openBMC.
-> Is this something what prevents integration?
->
+This is a security release:
 
-I took a stab at it and fixed it with few more cleanups that I would
-have asked for. Sent a v3 with those changes in
+ - In Waitress version 1.4.2 a new regular expression was added to validate the
+   headers that Waitress receives to make sure that it matches RFC7230.
+   Unfortunately the regular expression was written in a way that with invalid
+   input it leads to catastrophic backtracking which allows for a Denial of
+   Service and CPU usage going to a 100%.
 
-> --
->
-> Best regards,
-> Przemys=C5=82aw Czarnowski
->
->=20
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+---
+ .../python/{python3-waitress_1.4.2.bb => python3-waitress_1.4.3.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-waitress_1.4.2.bb => python3-waitress_1.4.3.bb} (71%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-waitress_1.4.2.bb b/meta-python/recipes-devtools/python/python3-waitress_1.4.3.bb
+similarity index 71%
+rename from meta-python/recipes-devtools/python/python3-waitress_1.4.2.bb
+rename to meta-python/recipes-devtools/python/python3-waitress_1.4.3.bb
+index 257993f..8ac3e92 100644
+--- a/meta-python/recipes-devtools/python/python3-waitress_1.4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-waitress_1.4.3.bb
+@@ -6,7 +6,7 @@ SECTION = "devel/python"
+ LICENSE = "ZPL-2.1"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=78ccb3640dc841e1baecb3e27a6966b2"
+ 
+-SRC_URI[md5sum] = "fdeed7ec32bbba011e90801208378c89"
+-SRC_URI[sha256sum] = "67a60a376f0eb335ed88967c42b73983a58d66a2a72eb9009a42725f7453b142"
++SRC_URI[md5sum] = "4bffad7009d3824ae61ea6c0696e45f6"
++SRC_URI[sha256sum] = "045b3efc3d97c93362173ab1dfc159b52cfa22b46c3334ffc805dbdbf0e4309e"
+ 
+ inherit setuptools3 pypi
+-- 
+2.7.4
+
