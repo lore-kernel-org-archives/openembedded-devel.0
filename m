@@ -1,50 +1,50 @@
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com [209.85.221.66])
- by mx.groups.io with SMTP id smtpd.web12.1867.1586720026942210844
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web11.1962.1586720027189289374
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 12 Apr 2020 12:33:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=a4yt9zji;
- spf=pass (domain: gmail.com, ip: 209.85.221.66, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f66.google.com with SMTP id f13so8214397wrm.13
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=u1HfjUHz;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f48.google.com with SMTP id k1so1016568wrx.4
         for <openembedded-devel@lists.openembedded.org>; Sun, 12 Apr 2020 12:33:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=Ek6puR2R7tQET3GG27f5zgedJtiDwB56vE670Yxa0AA=;
-        b=a4yt9zjiPuwqsPfXVwbKVdDPiDo+PRLq8yjqe4HPuCBlBAHft6u+R/q4QZJmDZXKzw
-         wioZAW6q5CE3GCYVjbLijVhsHNfRow0XmDTju607R1gXfG1JKU/OtlUMK5zkiHYjxObh
-         CV60JMmDM/HmnucY+DEYzNuezTk2LGL1w+1ZPN3C93vlc+yNwmjVspHXfRbKP3psSs6g
-         iX132cFgGHr7yF1t3j9R5AOy9fpSkgdc797xI0YrefkBtuoy8CA6RZQ0fBdIw+rmvDEu
-         8+KdZNqAmA7kJa3TKNWuLvw0c13H5AMd2pESb7YOIje49/HuTxmRgK4aA3s5XJFdTxTM
-         qbpw==
+        bh=h3PynETRb42XVJfxba8rq+15k4A6k1Zqu+w+wpsHc6k=;
+        b=u1HfjUHznNes5b309dgXd/20LoMAFtFo6ZdYgtDI/4kP5OEPkovC1yxJLCHuNAhCGN
+         CRrV3eGrUshP74DeQVILy76IEaslh94ri5YTRUGNxRs4U8Yrz0eKJdCF5ekzw2JreAYU
+         xOQ+5HX8+ejU0CPkspj7QH5aIzDXGa19ROtxmzIPRsWR7cb2OpeLtvWmxGayKxPoTNK/
+         jswU3jumEU2aC2X/e2bXVsru9KsCyhikkU4l1GvnXhOQNHYjMiHLk7NR8uc+ULoz1GeZ
+         lI5AlvyZ3x+iQbd9i2toaOvPyVuHjPRMmttXv9adfHFCd5W+8yj/HN2bV1tK8ecJf6xb
+         tdPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Ek6puR2R7tQET3GG27f5zgedJtiDwB56vE670Yxa0AA=;
-        b=CgQthgJmndGVLAoYoiR+s6BVRXdMeF8gYD3zECiAnxL2PH+M5e0PEerrQsnzjicbF7
-         x2HjVKS1FcTeVvKHd1ob6WIzT/kYPur3RknL/24xQ6AhrTZF9iVDI60r/K35Y5+9wM8v
-         gPdlaHxxchamuUtYCfwTI4HJLZygl+P44Chl6RdfYJE9YCJiAtevf9piCX24+pJhMSTY
-         VGDalimlkkJsYrU5wG6nqZHsX3Hgu2m67CKxZHUOlKhJ3e6dgrI59QuyStT6DRU2RJWa
-         0CG8vXS8F+ul0NBgwwrzFm3cvBvaS+UBKuf+wUzDsjO/s2piVttyKdLHJXZl0eXvAZcp
-         wa1A==
-X-Gm-Message-State: AGi0PuaiQSKEjNHtO3ppuDyYPXayDdYDeD7Q4pHk7ON3mT9GFbRQCeLm
-	y+5GHLLCZSF3vm+hYQeTyeIO/vlgHPo=
-X-Google-Smtp-Source: APiQypIaPqrKJOlksmqwRolzpaSiwt0K1qmDOu3iY3/iBzMZIdm/4kRlP+avKJ5HuOsg6s1f/Ued6g==
-X-Received: by 2002:a5d:4041:: with SMTP id w1mr14667460wrp.137.1586720024907;
-        Sun, 12 Apr 2020 12:33:44 -0700 (PDT)
+        bh=h3PynETRb42XVJfxba8rq+15k4A6k1Zqu+w+wpsHc6k=;
+        b=RzBc0Bz8Ra5cx1hSqvf1NFuEHkC9IhtK814nA95ydCVu7qRMGSi58866Tzh+kCKc7g
+         x+SG8/KbBozy26yDHpkS86TnNSSw1HuUH3jB7apJuKCpO4g8jimdLKLDoj+YpSH9q7Tm
+         r/R/HRFh/YK3WhUciJBS44opZvvTOle00wb4uxJA0lszaUTDslUp7Hfw5fyvj6PZpVWO
+         /1LL+SdhW5GBow6K0cUsv2iSmHm51btd9B3e90DyQQ0ai4L6gcuC1EG6TjF526oXb9ij
+         15GLJrpqBwvWCMMZx8dbPB75rr1WZ1GiJXRW8735bazTNI2M7yZLe5gAFHnbw2XwahBu
+         assg==
+X-Gm-Message-State: AGi0PuYCTY2uX1vA5/HmQKIX6MpJVlafpHWhI2s72jBbS59CKpJHJvnV
+	HBItiYDIYQ7RlQ5WDOCDIvrmw6utCw8=
+X-Google-Smtp-Source: APiQypKGkdmjD9EBZjnE5Ht4fd2RaQzy8CkPM00rNmFH8HRpkAFBiAZ/LQRDkvIv2xndswukdkz48A==
+X-Received: by 2002:adf:a15d:: with SMTP id r29mr14479598wrr.134.1586720025632;
+        Sun, 12 Apr 2020 12:33:45 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300F07F05DA21F0F62E347B55C3B6.dip0.t-ipconnect.de. [2003:f0:7f05:da21:f0f6:2e34:7b55:c3b6])
         by smtp.gmail.com with ESMTPSA id c20sm12393341wmd.36.2020.04.12.12.33.44
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Apr 2020 12:33:44 -0700 (PDT)
+        Sun, 12 Apr 2020 12:33:45 -0700 (PDT)
 From: "Andreas M?ller" <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 2/3] xfce4-taskmanager: upgrade 1.2.2 -> 1.2.3
-Date: Sun, 12 Apr 2020 21:33:29 +0200
-Message-Id: <20200412193330.16380-2-schnitzeltony@gmail.com>
+Subject: [PATCH 3/3] poppler: Add splash PACKAGECONFIG and enable it by default
+Date: Sun, 12 Apr 2020 21:33:30 +0200
+Message-Id: <20200412193330.16380-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200412193330.16380-1-schnitzeltony@gmail.com>
 References: <20200412193330.16380-1-schnitzeltony@gmail.com>
@@ -52,43 +52,38 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes for 1.2.3
-=======================
-- Improve settings saving (bug #15213)
-- Fix closing taskman with Esc (Bug #16656)
-- Move legend from tooltip to hide-able statusbar (Bug #14131)
-- Update copyright
-- Translation Updates:
-  Albanian, Arabic, Armenian (Armenia), Asturian, Basque, Belarusian,
-  Bulgarian, Catalan, Chinese (China), Chinese (Hong Kong), Chinese
-  (Taiwan), Croatian, Czech, Danish, Dutch, English (Australia),
-  English (United Kingdom), Finnish, French, Galician, German, Greek,
-  Hebrew, Hungarian, Icelandic, Indonesian, Italian, Japanese, Kazakh,
-  Korean, Lithuanian, Malay, Norwegian Bokmål, Occitan (post 1500),
-  Polish, Portuguese, Portuguese (Brazil), Russian, Serbian, Slovak,
-  Spanish, Swedish, Telugu, Thai, Turkish, Uighur, Ukrainian
+Splash graphics option is enabled by default in CMakeLists.txt. So
+
+* add it to our defaults to keep situation as it was before
+* when using splash follow upstream's suggestion and add boost to depends:
+  | Warning: Use of boost is recommended for better performance.
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...{xfce4-taskmanager_1.2.2.bb => xfce4-taskmanager_1.2.3.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-apps/xfce4-taskmanager/{xfce4-taskmanager_1.2.2.bb => xfce4-taskmanager_1.2.3.bb} (61%)
+ meta-oe/recipes-support/poppler/poppler_0.86.1.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.2.2.bb b/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.2.3.bb
-similarity index 61%
-rename from meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.2.2.bb
-rename to meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.2.3.bb
-index f3a59c96c..256009485 100644
---- a/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.2.2.bb
-+++ b/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.2.3.bb
-@@ -6,5 +6,5 @@ inherit xfce-app
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.86.1.bb b/meta-oe/recipes-support/poppler/poppler_0.86.1.bb
+index 073edef86..a6067e634 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.86.1.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.86.1.bb
+@@ -14,7 +14,7 @@ DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
  
- DEPENDS += "gtk+3 cairo libwnck libxmu xfce4-dev-tools-native exo-native"
+ inherit cmake pkgconfig gobject-introspection
  
--SRC_URI[md5sum] = "6578625ffbe069b138533ff5e77df734"
--SRC_URI[sha256sum] = "e49a61c819a4fd9286a65ae61605984f327c8b26cf939289f644e656bfa20e13"
-+SRC_URI[md5sum] = "202928c8ff0678a9df949d22a43f1614"
-+SRC_URI[sha256sum] = "dcfc44da7c1f61d03e2c4bd1cdc8f92ce0d48b013bd0d140b3745d79b75dc3c4"
+-PACKAGECONFIG ??= "jpeg openjpeg png tiff nss"
++PACKAGECONFIG ??= "jpeg openjpeg png tiff nss splash"
+ PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON -DENABLE_DCTDECODER=libjpeg,-DWITH_JPEG=OFF -DENABLE_DCTDECODER=none,jpeg"
+ PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng"
+ PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff"
+@@ -22,6 +22,7 @@ PACKAGECONFIG[curl] = "-DENABLE_LIBCURL=ON,-DENABLE_LIBCURL=OFF,curl"
+ PACKAGECONFIG[openjpeg] = "-DENABLE_LIBOPENJPEG=openjpeg2,-DENABLE_LIBOPENJPEG=none,openjpeg"
+ PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON,-DENABLE_QT5=OFF,qtbase qttools-native"
+ PACKAGECONFIG[nss] = "-DWITH_NSS3=ON,-DWITH_NSS3=OFF,nss"
++PACKAGECONFIG[splash] = "-DENABLE_SPLASH=ON,-DENABLE_SPLASH=OFF,boost"
+ 
+ # surprise - did not expect this to work :)
+ inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
 -- 
 2.21.1
 
