@@ -1,88 +1,57 @@
 Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web11.13045.1586703822391650343
+ by mx.groups.io with SMTP id smtpd.web10.12750.1586703822393193614
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 12 Apr 2020 08:03:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=VdtJUbC7;
+ dkim=pass header.i=@koncepto.io header.s=default header.b=hln/zy8O;
  spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
 Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 6A43F60388;
-	Sun, 12 Apr 2020 17:03:40 +0200 (CEST)
+	by koncepto.io (Postfix) with ESMTPSA id 8737D600BB;
+	Sun, 12 Apr 2020 17:03:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1586703820;
-	bh=ovVUU0ggb/sYs+/31LO9IwvvbWMrkSZBOcXB5us3bec=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=VdtJUbC7rmLhDzwB616X7jinSM8JuPR8NRqupwSqgvcO6UPudbBSdPcjzn4IrRrIo
-	 KlIo6hQiSqkvYv9I8/btSBVHI7kxsnpK1MgOSI+BnZ8Y8rzadyqJjvKdh3yRmavqwm
-	 kb/Ox3muCmW2MiuMM8K8KIEBmYgpqd5bg2mG0PpFhsfqR9R9OIqFUzARAuScZUf0gR
-	 +yepwyWOkctloqCJdOedZqxhUS5XECptR5n7JqBiHVx8SfhWV9TYNd9lIDiT++CrvN
-	 j/Ya/SK05gOaBPorP+2vb+fgR7SVx9SLIqzz664imOLZKEq7zFp1WhyLZU8rZhLSee
-	 i6pz805MhVfaw==
+	s=default; t=1586703818;
+	bh=3IiISdocMhHqvoRHzvs18kW/t73x2cL7xZE0VgY7MhE=;
+	h=From:To:Cc:Subject:Date:From;
+	b=hln/zy8Oh8sot/xtEex7nV6W/Y6Y4Y7D7C8dtBnacp4/UoRi1heNgoebizcvQ1FFv
+	 xL5FAu7oP86aj+Nn8CazY5e2pcO0Sy6UV8WiC1QCrbp6qkbZKv8uE2VzJvc4rlw55x
+	 o+rDZBwlagpiOk3t6OPkAweMhqfgkD3VeJIcMpL+YF+8RJdUKThZ6oRGzq4KQjyWLu
+	 k4AyiaVLb40peCtSi1GTSEjTgkKfq1M/e9CzVYNnr+qnfqVMip4LmYy2wXx/PlPgYq
+	 BMBwDmbXNuh5WVFXPW/CKDJUqkVafAjv6x3/JZA0HsQDKf4gWqKcccaJ60oDN3t+rz
+	 Yxgkp0/nZAFsQ==
 From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-python][PATCH 3/5] python3-msgpack: consolidate into a single file
-Date: Sun, 12 Apr 2020 17:03:32 +0200
-Message-Id: <1586703814-15536-3-git-send-email-pjtexier@koncepto.io>
+Subject: [meta-python][PATCH 1/5] python3-pychromecast: upgrade 4.1.0 -> 4.2.3
+Date: Sun, 12 Apr 2020 17:03:30 +0200
+Message-Id: <1586703814-15536-1-git-send-email-pjtexier@koncepto.io>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1586703814-15536-1-git-send-email-pjtexier@koncepto.io>
-References: <1586703814-15536-1-git-send-email-pjtexier@koncepto.io>
 
-For details see [1]
+See full changelog https://github.com/balloob/pychromecast/releases
 
-[1] - https://lists.openembedded.org/g/openembedded-devel/topic/72718415
-
-Suggested-by: Tim Orling <ticotimo@gmail.com>
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- meta-python/recipes-devtools/python/python-msgpack.inc  | 15 ---------------
- .../recipes-devtools/python/python3-msgpack_0.6.2.bb    | 17 +++++++++++++++--
- 2 files changed, 15 insertions(+), 17 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-msgpack.inc
+ .../{python3-pychromecast_4.1.0.bb => python3-pychromecast_4.2.3.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pychromecast_4.1.0.bb => python3-pychromecast_4.2.3.bb} (66%)
 
-diff --git a/meta-python/recipes-devtools/python/python-msgpack.inc b/meta-python/recipes-devtools/python/python-msgpack.inc
-deleted file mode 100644
-index dba5dc4..0000000
---- a/meta-python/recipes-devtools/python/python-msgpack.inc
-+++ /dev/null
-@@ -1,15 +0,0 @@
--SUMMARY = "MessagePack (de)serializer"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
--
--PYPI_PACKAGE = "msgpack"
--inherit pypi
--
--SRC_URI[md5sum] = "ba46fdee995565f40e332bd7eea882f1"
--SRC_URI[sha256sum] = "ea3c2f859346fcd55fc46e96885301d9c2f7a36d453f5d8f2967840efa1e1830"
--
--RDEPENDS_${PN}_class-target += "\
--    ${PYTHON_PN}-io \
--"
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-msgpack_0.6.2.bb b/meta-python/recipes-devtools/python/python3-msgpack_0.6.2.bb
-index 096d7dd..7cfaf1c 100644
---- a/meta-python/recipes-devtools/python/python3-msgpack_0.6.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-msgpack_0.6.2.bb
-@@ -1,2 +1,15 @@
--require python-msgpack.inc
--inherit setuptools3
-+SUMMARY = "MessagePack (de)serializer"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
-+
-+PYPI_PACKAGE = "msgpack"
-+inherit pypi setuptools3
-+
-+SRC_URI[md5sum] = "ba46fdee995565f40e332bd7eea882f1"
-+SRC_URI[sha256sum] = "ea3c2f859346fcd55fc46e96885301d9c2f7a36d453f5d8f2967840efa1e1830"
-+
-+RDEPENDS_${PN}_class-target += "\
-+    ${PYTHON_PN}-io \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_4.1.0.bb b/meta-python/recipes-devtools/python/python3-pychromecast_4.2.3.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python3-pychromecast_4.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-pychromecast_4.2.3.bb
+index b79e795..f561753 100644
+--- a/meta-python/recipes-devtools/python/python3-pychromecast_4.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pychromecast_4.2.3.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
+ 
+-SRC_URI[md5sum] = "46fbd33212f3869c5dc2d8b4a1d667e5"
+-SRC_URI[sha256sum] = "b6979f1ddce1ff8760586aa6b8828290964b38f34c01aa1380ab1740330eeee2"
++SRC_URI[md5sum] = "56632e0d94f2648a29d89affddddaaec"
++SRC_URI[sha256sum] = "d7b7b35254203ab4617389061bee25b0fa67c6628c48bd6a75ccfefef74f1edb"
+ 
+ PYPI_PACKAGE = "PyChromecast"
+ 
 -- 
 2.7.4
 
