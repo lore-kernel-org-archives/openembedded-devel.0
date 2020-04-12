@@ -1,56 +1,68 @@
 Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web11.13549.1586705406045281597
+ by mx.groups.io with SMTP id smtpd.web10.323.1586714913156798482
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Apr 2020 08:30:06 -0700
+ Sun, 12 Apr 2020 11:08:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=SczeMyPF;
+ dkim=pass header.i=@koncepto.io header.s=default header.b=olL6A7YJ;
  spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
 Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id A76B5600BB;
-	Sun, 12 Apr 2020 17:30:01 +0200 (CEST)
+	by koncepto.io (Postfix) with ESMTPSA id B1FE3600BB;
+	Sun, 12 Apr 2020 20:08:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1586705401;
-	bh=OrQHJMAeATD1l+3S1fttWczHtEt8SWO4cIyFBZT7E0M=;
+	s=default; t=1586714909;
+	bh=jNP1OAguXIWM+BpTiZBNKq3+eV/JHpauC9Apa8WpzrQ=;
 	h=From:To:Cc:Subject:Date:From;
-	b=SczeMyPF14ZUeQij6q7RTmJaJ5SxAyXslNVfZ0vwo7jPGDlfzm8P9eKiTHNA2XlT6
-	 T2wH1UpgysnwDe2E/j8sOCI2Z1JsLBzfGeDgXAp1v9ry9MuEBJH/r+hUpzJDNB8X/K
-	 LtA5pY27AAL4ellgyQ0A6FaYyuB1O6haOIi0fO0Cnl4Njw2KM5r254PunzER3XgWKn
-	 yaid9b9+aJpYgaklyxKXLnZhlEWAONPI5Rdc4zpds/D9SJGnffV772Pjshdt2jfTbx
-	 jA9GJHR9APzIWs77YoIty7ZF0XQFMG84lv88b5dupp2xeTOW+QmJALKK3nkS1mpHB/
-	 rMgPEas5B//sQ==
+	b=olL6A7YJP9gAZMKDJq51DIaE/SyQpOPOwZwHIxW4jCBBoz+U1aLuEDU9VtX6OcFUu
+	 eaxPlN0G5yImGh9eLzd+Xm9bt5b4B20UI7L+VVuXcDnYj8pxELgwttuZMOqCV+XGco
+	 brgRKlbSCeUAKM9kfF5UFnBMe8rlBsRhsChhHDCrTJMXUMQCFgtENoyqavQ5K/E5vX
+	 +PKoJ5x6isBW1w4qNFidtvIWkhS1mjKFSEtZlMU2CqQCFIUjK3rZGfK6mxjvuMW2oA
+	 bt4xHZF2sBH7fmGarlulZRn3uHNfCC7JTDRWByhuFMPUPBJs3zIX2dndu5lCPLE1Tv
+	 GEiw+vxGcLoAg==
 From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH] nlohmann-fifo: use UPSTREAM_CHECK_COMMITS
-Date: Sun, 12 Apr 2020 17:29:59 +0200
-Message-Id: <1586705399-17347-1-git-send-email-pjtexier@koncepto.io>
+Subject: [meta-networking][PATCH] uftp: upgrade 4.10.1 -> 4.10.2
+Date: Sun, 12 Apr 2020 20:08:25 +0200
+Message-Id: <1586714905-21555-1-git-send-email-pjtexier@koncepto.io>
 X-Mailer: git-send-email 2.7.4
 
-Fixes:
+This includes:
 
-$: devtool check-upgrade-status nlohmann-fifo
-<...>
-
-INFO: nlohmann-fifo             1.0.0           UNKNOWN_BROKEN  None
+Version 4.10.2
+  Fixed security issue where using sha384 or sha512 would set encryption keys
+    to all bytes 0
+  When using ECDH key exchange with closed group membership, an incorrect
+    signature would be applied to the ANNOUCE message, causing the session
+    to fail.  Bug fixes.
+  Relaxed server side checks on the type of key supplied by a client when not
+    using public key signatures on all messages.  This will assist in the
+    upgrade process to the upcoming version 5.0.
+  Fixed various small memory leaks
 
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-support/uftp/{uftp_4.10.1.bb => uftp_4.10.2.bb}           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/uftp/{uftp_4.10.1.bb => uftp_4.10.2.bb} (77%)
 
-diff --git a/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb b/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb
-index 326a4ab..a97eb53 100644
---- a/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb
-+++ b/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb
-@@ -10,6 +10,8 @@ PV = "1.0.0+git${SRCPV}"
+diff --git a/meta-networking/recipes-support/uftp/uftp_4.10.1.bb b/meta-networking/recipes-support/uftp/uftp_4.10.2.bb
+similarity index 77%
+rename from meta-networking/recipes-support/uftp/uftp_4.10.1.bb
+rename to meta-networking/recipes-support/uftp/uftp_4.10.2.bb
+index a70fd4d..8e35ee1 100644
+--- a/meta-networking/recipes-support/uftp/uftp_4.10.1.bb
++++ b/meta-networking/recipes-support/uftp/uftp_4.10.2.bb
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/uftp-multicast/files/source-tar/"
  
- SRCREV = "0dfbf5dacbb15a32c43f912a7e66a54aae39d0f9"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/uftp-multicast/source-tar/uftp-${PV}.tar.gz"
+-SRC_URI[md5sum] = "a5c79c8e5a20d0646c9579fe1f339493"
+-SRC_URI[sha256sum] = "903353febf1b88f701198d956a60cec3d2be3cc251561a678061761aec6622f6"
++SRC_URI[md5sum] = "db0519bf7b1e0329449e81c1e68262f8"
++SRC_URI[sha256sum] = "ecab6ab07fe0ebaf7bfe35d99fe2da28ede3ddc6f21f825d3b259cf171258505"
  
-+UPSTREAM_CHECK_COMMITS = "1"
-+
- S = "${WORKDIR}/git"
+ DEPENDS = "openssl"
  
- # nlohmann-fifo is a header only C++ library, so the main package will be empty.
 -- 
 2.7.4
 
