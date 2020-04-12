@@ -1,102 +1,56 @@
 Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web11.13049.1586703823379249761
+ by mx.groups.io with SMTP id smtpd.web11.13549.1586705406045281597
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Apr 2020 08:03:43 -0700
+ Sun, 12 Apr 2020 08:30:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=SSG0LE2j;
+ dkim=pass header.i=@koncepto.io header.s=default header.b=SczeMyPF;
  spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
 Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id EB0D06039E;
-	Sun, 12 Apr 2020 17:03:41 +0200 (CEST)
+	by koncepto.io (Postfix) with ESMTPSA id A76B5600BB;
+	Sun, 12 Apr 2020 17:30:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1586703822;
-	bh=Y/TuQ1Bs5uxmAc0YCbpLCWhus3Hvt4VtoHPYGYmIB20=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=SSG0LE2jzqHPzxP6RhhvJi9BM/kc+3sZfC770c9S30JrA14Cu/LJLDw7vNn5zv46F
-	 iy+8/4euPSJU6CDOJCVVKHEmNN2OZiQCvfRbp8y0oqLk2mkzMNaAtyAl8l6TwmwIGm
-	 eKLIWOnorqxdndIz2QFcCF33WD+s8WVKtz2mWzbQPhSgBw6iGMtHgbu+TeKwgL/aP0
-	 fT2vsLsvqfFouou7/jKhRZrD5TCVTMNplmbabeA3mCy0a4gKpJa9/d2TJ6y5dkO9sv
-	 gDPWFV4K/OoIhMeiVyJ2Vb0ztY/iYZRqlxpnpAVuiOH5V6QGc1aL27giwRhgmahvkv
-	 JSdimn+Hw3ZNA==
+	s=default; t=1586705401;
+	bh=OrQHJMAeATD1l+3S1fttWczHtEt8SWO4cIyFBZT7E0M=;
+	h=From:To:Cc:Subject:Date:From;
+	b=SczeMyPF14ZUeQij6q7RTmJaJ5SxAyXslNVfZ0vwo7jPGDlfzm8P9eKiTHNA2XlT6
+	 T2wH1UpgysnwDe2E/j8sOCI2Z1JsLBzfGeDgXAp1v9ry9MuEBJH/r+hUpzJDNB8X/K
+	 LtA5pY27AAL4ellgyQ0A6FaYyuB1O6haOIi0fO0Cnl4Njw2KM5r254PunzER3XgWKn
+	 yaid9b9+aJpYgaklyxKXLnZhlEWAONPI5Rdc4zpds/D9SJGnffV772Pjshdt2jfTbx
+	 jA9GJHR9APzIWs77YoIty7ZF0XQFMG84lv88b5dupp2xeTOW+QmJALKK3nkS1mpHB/
+	 rMgPEas5B//sQ==
 From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-python][PATCH 5/5] python3-paho-mqtt: consolidate into a single file
-Date: Sun, 12 Apr 2020 17:03:34 +0200
-Message-Id: <1586703814-15536-5-git-send-email-pjtexier@koncepto.io>
+Subject: [meta-oe][PATCH] nlohmann-fifo: use UPSTREAM_CHECK_COMMITS
+Date: Sun, 12 Apr 2020 17:29:59 +0200
+Message-Id: <1586705399-17347-1-git-send-email-pjtexier@koncepto.io>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1586703814-15536-1-git-send-email-pjtexier@koncepto.io>
-References: <1586703814-15536-1-git-send-email-pjtexier@koncepto.io>
 
-For details see [1]
+Fixes:
 
-[1] - https://lists.openembedded.org/g/openembedded-devel/topic/72718415
+$: devtool check-upgrade-status nlohmann-fifo
+<...>
 
-Suggested-by: Tim Orling <ticotimo@gmail.com>
+INFO: nlohmann-fifo             1.0.0           UNKNOWN_BROKEN  None
+
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- .../recipes-devtools/python/python-paho-mqtt.inc   | 22 ---------------------
- .../python/python3-paho-mqtt_1.5.0.bb              | 23 ++++++++++++++++++++--
- 2 files changed, 21 insertions(+), 24 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-paho-mqtt.inc
+ meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-paho-mqtt.inc b/meta-python/recipes-devtools/python/python-paho-mqtt.inc
-deleted file mode 100644
-index 0a0e610..0000000
---- a/meta-python/recipes-devtools/python/python-paho-mqtt.inc
-+++ /dev/null
-@@ -1,22 +0,0 @@
--SUMMARY = "MQTT version 3.1/3.1.1 client library"
--LICENSE = "EPL-1.0 | EDL-1.0"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=eb48c6ee2cb9f5b8b9fe75e6f817bdfc \
--                    file://epl-v10;md5=8d383c379e91d20ba18a52c3e7d3a979 \
--                    file://edl-v10;md5=c09f121939f063aeb5235972be8c722c \
--"
--SRCNAME = "paho-mqtt"
--
--inherit pypi
--
--SRC_URI[md5sum] = "45e80d9b8066a8d0ba1ecfffe271bd3d"
--SRC_URI[sha256sum] = "e3d286198baaea195c8b3bc221941d25a3ab0e1507fc1779bdb7473806394be4"
--
--DEPENDS += "${PYTHON_PN}-pytest-runner-native"
--
--RDEPENDS_${PN} = "\
--    ${PYTHON_PN}-io \
--    ${PYTHON_PN}-logging \
--    ${PYTHON_PN}-math \
--    ${PYTHON_PN}-netclient \
--    ${PYTHON_PN}-threading \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-paho-mqtt_1.5.0.bb b/meta-python/recipes-devtools/python/python3-paho-mqtt_1.5.0.bb
-index 4981e61..cc6f4dc 100644
---- a/meta-python/recipes-devtools/python/python3-paho-mqtt_1.5.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-paho-mqtt_1.5.0.bb
-@@ -1,3 +1,22 @@
--inherit setuptools3
--require python-paho-mqtt.inc
-+SUMMARY = "MQTT version 3.1/3.1.1 client library"
-+LICENSE = "EPL-1.0 | EDL-1.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=eb48c6ee2cb9f5b8b9fe75e6f817bdfc \
-+                    file://epl-v10;md5=8d383c379e91d20ba18a52c3e7d3a979 \
-+                    file://edl-v10;md5=c09f121939f063aeb5235972be8c722c \
-+"
-+SRCNAME = "paho-mqtt"
+diff --git a/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb b/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb
+index 326a4ab..a97eb53 100644
+--- a/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb
++++ b/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb
+@@ -10,6 +10,8 @@ PV = "1.0.0+git${SRCPV}"
  
-+inherit pypi setuptools3
+ SRCREV = "0dfbf5dacbb15a32c43f912a7e66a54aae39d0f9"
+ 
++UPSTREAM_CHECK_COMMITS = "1"
 +
-+SRC_URI[md5sum] = "45e80d9b8066a8d0ba1ecfffe271bd3d"
-+SRC_URI[sha256sum] = "e3d286198baaea195c8b3bc221941d25a3ab0e1507fc1779bdb7473806394be4"
-+
-+DEPENDS += "${PYTHON_PN}-pytest-runner-native"
-+
-+RDEPENDS_${PN} = "\
-+    ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-logging \
-+    ${PYTHON_PN}-math \
-+    ${PYTHON_PN}-netclient \
-+    ${PYTHON_PN}-threading \
-+"
+ S = "${WORKDIR}/git"
+ 
+ # nlohmann-fifo is a header only C++ library, so the main package will be empty.
 -- 
 2.7.4
 
