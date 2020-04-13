@@ -1,89 +1,93 @@
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.web11.1962.1586720027189289374
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.web12.9987.1586757177433205560
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Apr 2020 12:33:47 -0700
+ Sun, 12 Apr 2020 22:52:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=u1HfjUHz;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id k1so1016568wrx.4
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Apr 2020 12:33:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=o25iT0QC;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id g32so4034171pgb.6
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Apr 2020 22:52:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=h3PynETRb42XVJfxba8rq+15k4A6k1Zqu+w+wpsHc6k=;
-        b=u1HfjUHznNes5b309dgXd/20LoMAFtFo6ZdYgtDI/4kP5OEPkovC1yxJLCHuNAhCGN
-         CRrV3eGrUshP74DeQVILy76IEaslh94ri5YTRUGNxRs4U8Yrz0eKJdCF5ekzw2JreAYU
-         xOQ+5HX8+ejU0CPkspj7QH5aIzDXGa19ROtxmzIPRsWR7cb2OpeLtvWmxGayKxPoTNK/
-         jswU3jumEU2aC2X/e2bXVsru9KsCyhikkU4l1GvnXhOQNHYjMiHLk7NR8uc+ULoz1GeZ
-         lI5AlvyZ3x+iQbd9i2toaOvPyVuHjPRMmttXv9adfHFCd5W+8yj/HN2bV1tK8ecJf6xb
-         tdPg==
+        bh=VuvudXEVKRKzmm5uvgihDFJ8B44SSd9C4QnW3Kt7Flc=;
+        b=o25iT0QCql1iZ3GjhKPtRDA4uvczvTNiQugjGEIUt9SK3us3gxIpCxjJBdxCtu4dxC
+         ZmYRINAJre8rwUXQ/+CzqeaNu96vYp3yy7qNqw/EW4XPC7QSsK3yiRLC/6QEqD7v9jSm
+         dL3KncVq8RDQzkXTdoCBZaa57wvGzvAJnCJESbAkvmN0Hvlo20VDlAlQ/qwu2oYtUrVc
+         VHExDzPqb2JhbiP4arhTD18vJ6EybSq5eOAT0M2VC2CbUZu6W2N/37/ialqgb3xFzNyP
+         lb4UzkPf63fVF5sPO1AvXrwMLNcio9LFPFkhreWoMobZ/FXghqTiRcfAXZtqb/L7yg8i
+         8umA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=h3PynETRb42XVJfxba8rq+15k4A6k1Zqu+w+wpsHc6k=;
-        b=RzBc0Bz8Ra5cx1hSqvf1NFuEHkC9IhtK814nA95ydCVu7qRMGSi58866Tzh+kCKc7g
-         x+SG8/KbBozy26yDHpkS86TnNSSw1HuUH3jB7apJuKCpO4g8jimdLKLDoj+YpSH9q7Tm
-         r/R/HRFh/YK3WhUciJBS44opZvvTOle00wb4uxJA0lszaUTDslUp7Hfw5fyvj6PZpVWO
-         /1LL+SdhW5GBow6K0cUsv2iSmHm51btd9B3e90DyQQ0ai4L6gcuC1EG6TjF526oXb9ij
-         15GLJrpqBwvWCMMZx8dbPB75rr1WZ1GiJXRW8735bazTNI2M7yZLe5gAFHnbw2XwahBu
-         assg==
-X-Gm-Message-State: AGi0PuYCTY2uX1vA5/HmQKIX6MpJVlafpHWhI2s72jBbS59CKpJHJvnV
-	HBItiYDIYQ7RlQ5WDOCDIvrmw6utCw8=
-X-Google-Smtp-Source: APiQypKGkdmjD9EBZjnE5Ht4fd2RaQzy8CkPM00rNmFH8HRpkAFBiAZ/LQRDkvIv2xndswukdkz48A==
-X-Received: by 2002:adf:a15d:: with SMTP id r29mr14479598wrr.134.1586720025632;
-        Sun, 12 Apr 2020 12:33:45 -0700 (PDT)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300F07F05DA21F0F62E347B55C3B6.dip0.t-ipconnect.de. [2003:f0:7f05:da21:f0f6:2e34:7b55:c3b6])
-        by smtp.gmail.com with ESMTPSA id c20sm12393341wmd.36.2020.04.12.12.33.44
-        for <openembedded-devel@lists.openembedded.org>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=VuvudXEVKRKzmm5uvgihDFJ8B44SSd9C4QnW3Kt7Flc=;
+        b=FCtpDHK8He3iRmIrBHOB0YdzwXdt/YSIrjfuKRIK6gbCJSRDphdtl7GvV4/c2FLoaJ
+         2K8cq/CamZcBKxhnqxa6lGs14T++CNkFlupt9BaUsKNkSViohc19Sd/zJxMepIvABEcs
+         KggzCnTF8wcVAO7kndSR6ZGguWuBHfZhrAmrm+9Y6Cksgo3gMdBN6riYt+f8Xt55jE4n
+         yvf+T5lBx43HpWxAAMUnLnY7LKFMVQrlWRkv7Tdj9O0aoLgV5pflRJVjSJ33TC4h5hkY
+         WMHJAXKZ4OBX1joPh1PO6Ve/zGdsDaNHVcfnjKvysnf1dW6VlfeQLqZblTCbuOQYiML6
+         90Rg==
+X-Gm-Message-State: AGi0PuYB9WcmKXlyMOeQfdKimPPeN9uUaUWhdZ3WHvFVKU+NqpUe+zOS
+	4ZpAjKR9a1/XuTVv0IfRdvEqxCd65hg=
+X-Google-Smtp-Source: APiQypIXQvUUfFf0LZvmBp0nGuttTsi7izrniFTSC5GO2O29+/zozPw77jHbD5zWccyhMozasMHfuA==
+X-Received: by 2002:aa7:96f8:: with SMTP id i24mr16351933pfq.321.1586757176402;
+        Sun, 12 Apr 2020 22:52:56 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::58e0])
+        by smtp.gmail.com with ESMTPSA id d8sm8125038pjx.12.2020.04.12.22.52.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Apr 2020 12:33:45 -0700 (PDT)
-From: "Andreas M?ller" <schnitzeltony@gmail.com>
+        Sun, 12 Apr 2020 22:52:55 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 3/3] poppler: Add splash PACKAGECONFIG and enable it by default
-Date: Sun, 12 Apr 2020 21:33:30 +0200
-Message-Id: <20200412193330.16380-3-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.1
-In-Reply-To: <20200412193330.16380-1-schnitzeltony@gmail.com>
-References: <20200412193330.16380-1-schnitzeltony@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH 1/2] remmina: Check for x11 in distro features
+Date: Sun, 12 Apr 2020 22:52:51 -0700
+Message-Id: <20200413055252.1399706-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.26.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Splash graphics option is enabled by default in CMakeLists.txt. So
+Add missing dependency on libxkbfile
+It cant be built without it since plugins CMake is asking for it
+unconditionally
 
-* add it to our defaults to keep situation as it was before
-* when using splash follow upstream's suggestion and add boost to depends:
-  | Warning: Use of boost is recommended for better performance.
+Fixes
+| -- Checking for module 'xkbfile'
+| --   No package 'xkbfile' found
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Martin Jansa <martin.jansa@gmail.com>
 ---
- meta-oe/recipes-support/poppler/poppler_0.86.1.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/remmina/remmina_1.3.6.bb | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_0.86.1.bb b/meta-oe/recipes-support/poppler/poppler_0.86.1.bb
-index 073edef86..a6067e634 100644
---- a/meta-oe/recipes-support/poppler/poppler_0.86.1.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_0.86.1.bb
-@@ -14,7 +14,7 @@ DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
+diff --git a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+index f9860a11fb..5b663489f8 100644
+--- a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
++++ b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://remmina.org"
+ SECTION = "Support"
+ LICENSE = "GPLv2 & openssl"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=dab7215512044d49037272ce1ac4ea8f file://LICENSE.OpenSSL;md5=c1eb3cee0a4dea27503c531267a69769"
+-DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi-ui libsodium libssh vte json-glib libsoup-2.4 libvncserver libsecret"
++DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi-ui libsodium libssh vte json-glib libsoup-2.4 libvncserver libsecret libxkbfile"
  
- inherit cmake pkgconfig gobject-introspection
  
--PACKAGECONFIG ??= "jpeg openjpeg png tiff nss"
-+PACKAGECONFIG ??= "jpeg openjpeg png tiff nss splash"
- PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON -DENABLE_DCTDECODER=libjpeg,-DWITH_JPEG=OFF -DENABLE_DCTDECODER=none,jpeg"
- PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng"
- PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff"
-@@ -22,6 +22,7 @@ PACKAGECONFIG[curl] = "-DENABLE_LIBCURL=ON,-DENABLE_LIBCURL=OFF,curl"
- PACKAGECONFIG[openjpeg] = "-DENABLE_LIBOPENJPEG=openjpeg2,-DENABLE_LIBOPENJPEG=none,openjpeg"
- PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON,-DENABLE_QT5=OFF,qtbase qttools-native"
- PACKAGECONFIG[nss] = "-DWITH_NSS3=ON,-DWITH_NSS3=OFF,nss"
-+PACKAGECONFIG[splash] = "-DENABLE_SPLASH=ON,-DENABLE_SPLASH=OFF,boost"
+ DEPENDS_append_libc-musl = " libexecinfo"
+@@ -17,9 +17,7 @@ SRC_URI[sha256sum] = "fbed745438bb0c21467b60cbd67c8148a9289b5ebc7482d06db443bea5
+ S = "${WORKDIR}/Remmina-v${PV}"
  
- # surprise - did not expect this to work :)
- inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
+ inherit cmake features_check mime-xdg
+-
+-# depends on avahi-ui with this restriction
+-ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
++REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ EXTRA_OECMAKE += "-DWITH_APPINDICATOR=OFF -DWITH_GETTEXT=OFF -DWITH_TRANSLATIONS=OFF"
+ 
 -- 
-2.21.1
+2.26.0
 
