@@ -1,181 +1,59 @@
-Received: from mailrelay2-3.pub.mailoutpod1-cph3.one.com (mailrelay2-3.pub.mailoutpod1-cph3.one.com [46.30.212.11])
- by mx.groups.io with SMTP id smtpd.web11.12845.1586775518062106480
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+ by mx.groups.io with SMTP id smtpd.web10.14243.1586781851648706447
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Apr 2020 03:58:38 -0700
+ Mon, 13 Apr 2020 05:44:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@embexus.com header.s=20191106 header.b=SDLOEl0Q;
- spf=none, err=permanent DNS error (domain: embexus.com, ip: 46.30.212.11, mailfrom: ayoub.zaki@embexus.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=embexus.com; s=20191106;
-	h=content-transfer-encoding:content-type:in-reply-to:mime-version:date:
-	 message-id:from:references:to:subject:from;
-	bh=Gcy8NaaWF9rVIyOQ/Fq4z7BCO4XBvbPLV4ZayHjSiPA=;
-	b=SDLOEl0QFWxJRSxOckD50Ftvm1Gx6smYEHbuiWDFdtpqdQNT/IhGiTh33CFJvmjl279Gyc06dUpWS
-	 GT21LU6G1jlR3cLqepdBma2oxxbGsygyrIAW67mQqmQwskYeVBAV2SQCEOxIjNyTgwJ7DhvDJQl4QL
-	 4ALh0opjsmv4RXz7dJfAEgZOnD6nblroBp3/+H8RkLLTjpyhrvINBFEI7NPM7bHJ2S3PHwa8oG6I32
-	 T1IoBwtGGqMMbucf4Lm6tbGZTQEWs21gB7oRVXvLsxXp2yc+THfKMk6OQ3ixZMVT0kvnhGiSIxYS8l
-	 z55MnX+VWs6GbPkTgN8dkINmr91uYLQ==
-X-HalOne-Cookie: 5fbfa2cf931dcfda71789e95b7bcd243d583ce36
-X-HalOne-ID: b8939b66-7d75-11ea-9551-d0431ea8a290
-Received: from [192.168.178.41] (x4db49fc3.dyn.telefonica.de [77.180.159.195])
-	by mailrelay2.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPSA
-	id b8939b66-7d75-11ea-9551-d0431ea8a290;
-	Mon, 13 Apr 2020 10:58:35 +0000 (UTC)
-Subject: Re: [oe] [meta-security][RFC 1/2] classes: provide a class for generating dm-verity meta-data images
+ dkim=pass header.i=@koncepto.io header.s=default header.b=oNdBJl6G;
+ spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
+Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
+	by koncepto.io (Postfix) with ESMTPSA id 2D98D6008F;
+	Mon, 13 Apr 2020 14:44:08 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1586781848;
+	bh=jr7hFOPmoD+Pre33dIxboHgE4U6CDhz9gsPb8aIJwbY=;
+	h=From:To:Cc:Subject:Date:From;
+	b=oNdBJl6GueYmC9TpQAHCRiSAXUJXqvRzKnnOqi7h8koCskj6GZ5odm6TVNB3pFdy/
+	 mwjt7Kxwq/4vdc0CjFFSHghwTncn1H4DwgBoFLD7jZmBlFOIlfHFx72aMwkW5UAo/E
+	 EWgDhKk2u8LwnTKVTj2f0Ob+4kri6jn0JLvfALMX73FIJA86+gy/SJL2DjIpq3pAeZ
+	 GqbszR+NMMCErsQF3bYmJC1WnKyfzFItqgevzR+FQcaStBt3xJ7VwhxGHW3rXZRioI
+	 yJRy9VEJg2cuous8s3SqA2kC9FIfYgcWwhOylLTwbSZcHqVUZfg2YymNeomDZrYTRw
+	 4mH3zyg3VC2WQ==
+From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
-References: <20200410124135.24217-1-brgl@bgdev.pl>
- <20200410124135.24217-2-brgl@bgdev.pl>
-From: "Ayoub Zaki" <ayoub.zaki@embexus.com>
-Organization: Embexus
-Message-ID: <34f4335a-c9ed-a790-c683-3b6db93eceb7@embexus.com>
-Date: Mon, 13 Apr 2020 12:58:34 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
-MIME-Version: 1.0
-In-Reply-To: <20200410124135.24217-2-brgl@bgdev.pl>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
+Subject: [meta-oe][PATCH] nss: upgrade 3.51 -> 3.51.1
+Date: Mon, 13 Apr 2020 14:44:02 +0200
+Message-Id: <1586781842-11513-1-git-send-email-pjtexier@koncepto.io>
+X-Mailer: git-send-email 2.7.4
 
-Hi,
+See full release notes:
 
+ - https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/NSS_3.51.1_release_notes
 
-On 10.04.20 14:41, Bartosz Golaszewski wrote:
-> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
->
-> This adds a class that allows to generate conversions of ext[234] and
-> btrfs partitions images with dm-verity hash data appended at the end as
-> well as a corresponding .env file containing the root hash and data
-> offset that can be stored in a secure location (e.g. signed fitImage)
-> or signed and verified at run-time on its own.
->
-> The class depends on two variables:
->    DM_VERITY_IMAGE:      defines the name of the main image (normally the
->                          one that is used with the bitbake command to
->                          build the main image)
->    DM_VERITY_IMAGE_TYPE: defines exactly one type for which to generate
->                          the protected image.
->
-> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> ---
->   classes/dm-verity-img.bbclass | 88 +++++++++++++++++++++++++++++++++++
->   1 file changed, 88 insertions(+)
->   create mode 100644 classes/dm-verity-img.bbclass
->
-> diff --git a/classes/dm-verity-img.bbclass b/classes/dm-verity-img.bbclass
-> new file mode 100644
-> index 0000000..1c0e29b
-> --- /dev/null
-> +++ b/classes/dm-verity-img.bbclass
-> @@ -0,0 +1,88 @@
-> +# SPDX-License-Identifier: MIT
-> +#
-> +# Copyright (C) 2020 BayLibre SAS
-> +# Author: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> +#
-> +# This bbclass allows creating of dm-verity protected partition images. It
-> +# generates a device image file with dm-verity hash data appended at the end
-> +# plus the corresponding .env file containing additional information needed
-> +# to mount the image such as the root hash in the form of ell variables. To
-> +# assure data integrity, the root hash must be stored in a trusted location
-> +# or cryptographically signed and verified.
-> +#
-> +# Usage:
-> +#     DM_VERITY_IMAGE = "core-image-full-cmdline" # or other image
-> +#     DM_VERITY_IMAGE_TYPE = "ext4" # or ext2, ext3 & btrfs
-> +#     IMAGE_CLASSES += "dm-verity-img"
-> +#
-> +# The resulting image can then be used to implement the device mapper block
-> +# integrity checking on the target device.
-> +
-> +# Process the output from veritysetup and generate the corresponding .env
-> +# file. The output from veritysetup is not very machine-friendly so we need to
-> +# convert it to some better format. Let's drop the first line (doesn't contain
-> +# any useful info) and feed the rest to a script.
-> +process_verity() {
-> +    local ENV="$OUTPUT.env"
-> +
-> +    # Each line contains a key and a value string delimited by ':'. Read the
-> +    # two parts into separate variables and process them separately. For the
-> +    # key part: convert the names to upper case and replace spaces with
-> +    # underscores to create correct shell variable names. For the value part:
-> +    # just trim all white-spaces.
-> +    IFS=":"
-> +    while read KEY VAL; do
-> +        echo -ne "$KEY" | tr '[:lower:]' '[:upper:]' | sed 's/ /_/g' >> $ENV
-> +        echo -ne "=" >> $ENV
-> +        echo "$VAL" | tr -d " \t" >> $ENV
-> +    done
-> +
-> +    # Add partition size
-> +    echo "DATA_SIZE=$SIZE" >> $ENV
-> +
-> +    ln -sf $ENV ${IMAGE_BASENAME}-${MACHINE}.$TYPE.verity.env
-> +}
-> +
-> +verity_setup() {
-> +    local TYPE=$1
-> +    local INPUT=${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.$TYPE
-> +    local SIZE=$(stat --printf="%s" $INPUT)
-> +    local OUTPUT=$INPUT.verity
-> +
-> +    cp -a $INPUT $OUTPUT
-> +
-> +    # Let's drop the first line of output (doesn't contain any useful info)
-> +    # and feed the rest to another function.
-> +    veritysetup --data-block-size=1024 --hash-offset=$SIZE format $OUTPUT $OUTPUT | tail -n +2 | process_verity
-> +}
-> +
-> +VERITY_TYPES = "ext2.verity ext3.verity ext4.verity btrfs.verity"
-> +IMAGE_TYPES += "${VERITY_TYPES}"
-> +CONVERSIONTYPES += "verity"
-> +CONVERSION_CMD_verity = "verity_setup ${type}"
-> +CONVERSION_DEPENDS_verity = "cryptsetup-native"
-> +
-> +python __anonymous() {
-> +    verity_image = d.getVar('DM_VERITY_IMAGE')
-> +    verity_type = d.getVar('DM_VERITY_IMAGE_TYPE')
-> +    image_fstypes = d.getVar('IMAGE_FSTYPES')
-> +    pn = d.getVar('PN')
-> +
-> +    if verity_image != pn:
-> +        return # This doesn't concern this image
-> +
-> +    if not verity_image or not verity_type:
-> +        bb.warn('dm-verity-img class inherited but not used')
-> +        return
-> +
-> +    if len(verity_type.split()) is not 1:
-> +        bb.fatal('DM_VERITY_IMAGE_TYPE must contain exactly one type')
-> +
-> +    d.appendVar('IMAGE_FSTYPES', ' %s.verity' % verity_type)
-> +
-> +    # If we're using wic: we'll have to use partition images and not the rootfs
-> +    # source plugin so add the appropriate dependency.
-> +    if 'wic' in image_fstypes:
-> +        dep = ' %s:do_image_%s' % (pn, verity_type)
-> +        d.appendVarFlag('do_image_wic', 'depends', dep)
-> +}
->
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+---
+ meta-oe/recipes-support/nss/{nss_3.51.bb => nss_3.51.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/nss/{nss_3.51.bb => nss_3.51.1.bb} (98%)
 
-basically this class generate a dm-verity hash that needs to be injected 
-inside the initramfs...it's a bit hacky.
-
-wouldn't be signing the hash, include the verifiication public key in 
-initramfs more portable ?
-
-
-Mit freundlichen Grüßen / Kind regards
-
+diff --git a/meta-oe/recipes-support/nss/nss_3.51.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+similarity index 98%
+rename from meta-oe/recipes-support/nss/nss_3.51.bb
+rename to meta-oe/recipes-support/nss/nss_3.51.1.bb
+index 889967c..755eb76 100644
+--- a/meta-oe/recipes-support/nss/nss_3.51.bb
++++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+@@ -34,8 +34,8 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
+            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
+            "
+ 
+-SRC_URI[md5sum] = "e59dc16965ef7713669c628d2640ebd1"
+-SRC_URI[sha256sum] = "75348b3b3229362486c57a880db917da1f96ef4eb639dc9cc2ff17d72268459c"
++SRC_URI[md5sum] = "6acaf1ddff69306ae30a908881c6f233"
++SRC_URI[sha256sum] = "085c5eaceef040eddea639e2e068e70f0e368f840327a678ef74ae3d6c15ca78"
+ 
+ UPSTREAM_CHECK_URI = "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/NSS_Releases"
+ UPSTREAM_CHECK_REGEX = "NSS_(?P<pver>.+)_release_notes"
 -- 
-Ayoub Zaki
-Embedded Systems Consultant
-
-Vaihinger Straße 2/1
-D-71634 Ludwigsburg
-
-Mobile   : +4917662901545
-Email    : ayoub.zaki@embexus.com
-Homepage : https://embexus.com
-VAT No.  : DE313902634
+2.7.4
 
