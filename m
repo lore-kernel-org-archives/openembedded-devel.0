@@ -1,38 +1,38 @@
-Received: from mailrelay3-3.pub.mailoutpod1-cph3.one.com (mailrelay3-3.pub.mailoutpod1-cph3.one.com [46.30.212.12])
- by mx.groups.io with SMTP id smtpd.web11.12783.1586775219452163748
+Received: from mailrelay2-3.pub.mailoutpod1-cph3.one.com (mailrelay2-3.pub.mailoutpod1-cph3.one.com [46.30.212.11])
+ by mx.groups.io with SMTP id smtpd.web11.12845.1586775518062106480
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Apr 2020 03:53:40 -0700
+ Mon, 13 Apr 2020 03:58:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@embexus.com header.s=20191106 header.b=fIFQFpC/;
- spf=none, err=permanent DNS error (domain: embexus.com, ip: 46.30.212.12, mailfrom: ayoub.zaki@embexus.com)
+ dkim=pass header.i=@embexus.com header.s=20191106 header.b=SDLOEl0Q;
+ spf=none, err=permanent DNS error (domain: embexus.com, ip: 46.30.212.11, mailfrom: ayoub.zaki@embexus.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=embexus.com; s=20191106;
 	h=content-transfer-encoding:content-type:in-reply-to:mime-version:date:
 	 message-id:from:references:to:subject:from;
-	bh=KGF05eOOIQTkRiBhek+RDqyf3uuxfRqmjWQXMGNKTM4=;
-	b=fIFQFpC/FqR2WEMfixVrPHGbUkiMA3N9Dh4bQ74PATjbbIGtNY2Db4P1PEfmyslp1l113fjPh7s12
-	 BD7tM5PyTAEIhrv0lo3jjkBtTdZ/NImH1rReKPn0E9YZMtxUl8/uGp6tLPdjI5wNFAZ3CeBNRXwI2u
-	 0UNJ10WRZd6FqWqW4XH62FdlpcwonsEvvVDaNsuvrUiLdXOQrQvUJL7aq4awcLQZhuRO1pgC4fKaTI
-	 xqoGg9mUaFztdBZjne9pQ4cRuwpqvuZ6zxAj6flYY4X2zoaeaCcsTENyebXIbAKUSHKf9tO/sdTIta
-	 WWDeHmAo4F7fgKtcGcY05jiJqYPopiQ==
-X-HalOne-Cookie: 56d7d120f583227893611e21514fe4ca141cfbf3
-X-HalOne-ID: 0602a911-7d75-11ea-9e61-d0431ea8bb03
+	bh=Gcy8NaaWF9rVIyOQ/Fq4z7BCO4XBvbPLV4ZayHjSiPA=;
+	b=SDLOEl0QFWxJRSxOckD50Ftvm1Gx6smYEHbuiWDFdtpqdQNT/IhGiTh33CFJvmjl279Gyc06dUpWS
+	 GT21LU6G1jlR3cLqepdBma2oxxbGsygyrIAW67mQqmQwskYeVBAV2SQCEOxIjNyTgwJ7DhvDJQl4QL
+	 4ALh0opjsmv4RXz7dJfAEgZOnD6nblroBp3/+H8RkLLTjpyhrvINBFEI7NPM7bHJ2S3PHwa8oG6I32
+	 T1IoBwtGGqMMbucf4Lm6tbGZTQEWs21gB7oRVXvLsxXp2yc+THfKMk6OQ3ixZMVT0kvnhGiSIxYS8l
+	 z55MnX+VWs6GbPkTgN8dkINmr91uYLQ==
+X-HalOne-Cookie: 5fbfa2cf931dcfda71789e95b7bcd243d583ce36
+X-HalOne-ID: b8939b66-7d75-11ea-9551-d0431ea8a290
 Received: from [192.168.178.41] (x4db49fc3.dyn.telefonica.de [77.180.159.195])
-	by mailrelay3.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPSA
-	id 0602a911-7d75-11ea-9e61-d0431ea8bb03;
-	Mon, 13 Apr 2020 10:53:36 +0000 (UTC)
-Subject: Re: [oe] [meta-security][RFC 2/2] dm-verity: add a working example for BeagleBone Black
+	by mailrelay2.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPSA
+	id b8939b66-7d75-11ea-9551-d0431ea8a290;
+	Mon, 13 Apr 2020 10:58:35 +0000 (UTC)
+Subject: Re: [oe] [meta-security][RFC 1/2] classes: provide a class for generating dm-verity meta-data images
 To: openembedded-devel@lists.openembedded.org
 References: <20200410124135.24217-1-brgl@bgdev.pl>
- <20200410124135.24217-3-brgl@bgdev.pl>
+ <20200410124135.24217-2-brgl@bgdev.pl>
 From: "Ayoub Zaki" <ayoub.zaki@embexus.com>
 Organization: Embexus
-Message-ID: <c4b7d539-f7ce-0ab6-7b53-3d7e07a93897@embexus.com>
-Date: Mon, 13 Apr 2020 12:53:35 +0200
+Message-ID: <34f4335a-c9ed-a790-c683-3b6db93eceb7@embexus.com>
+Date: Mon, 13 Apr 2020 12:58:34 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200410124135.24217-3-brgl@bgdev.pl>
+In-Reply-To: <20200410124135.24217-2-brgl@bgdev.pl>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
@@ -43,192 +43,126 @@ Hi,
 On 10.04.20 14:41, Bartosz Golaszewski wrote:
 > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 >
-> This adds various bits and pieces to enable generating a working example
-> of a full chain of trust up to dm-verity-protected rootfs level on Beagle
-> Bone Black.
+> This adds a class that allows to generate conversions of ext[234] and
+> btrfs partitions images with dm-verity hash data appended at the end as
+> well as a corresponding .env file containing the root hash and data
+> offset that can be stored in a secure location (e.g. signed fitImage)
+> or signed and verified at run-time on its own.
 >
-> The new initramfs is quite generic and should work for other SoCs as well
-> when using fitImage.
->
-> The following config can be used with current master poky,
-> meta-openembedded & meta-security to generate a BBB image using verified
-> boot and dm-verity.
->
->    UBOOT_SIGN_KEYDIR = "/tmp/test-keys/"
->    UBOOT_SIGN_KEYNAME = "dev"
->    UBOOT_SIGN_ENABLE = "1"
->    UBOOT_MKIMAGE_DTCOPTS = "-I dts -O dtb -p 2000"
->    UBOOT_MACHINE_beaglebone-yocto = "am335x_boneblack_vboot_config"
->
->    IMAGE_CLASSES += "dm-verity-img"
->    IMAGE_FSTYPES += "wic.xz ext4"
->
->    DM_VERITY_IMAGE = "core-image-full-cmdline"
->    DM_VERITY_IMAGE_TYPE = "ext4"
->
->    KERNEL_CLASSES += "kernel-fitimage"
->    KERNEL_IMAGETYPE_beaglebone-yocto = "fitImage"
->
->    IMAGE_INSTALL_remove = " kernel-image-zimage"
->    IMAGE_BOOT_FILES_remove = " zImage"
->    IMAGE_BOOT_FILES_append = " fitImage-${INITRAMFS_IMAGE}-${MACHINE}-${MACHINE};fitImage"
->
->    # Using systemd is not strictly needed but deals nicely with read-only
->    # filesystem by default.
->    DISTRO_FEATURES_append = " systemd"
->    DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
->    VIRTUAL-RUNTIME_init_manager = "systemd"
->    VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
->
->    INITRAMFS_IMAGE = "dm-verity-image-initramfs"
->    INITRAMFS_FSTYPES = "cpio.gz"
->    INITRAMFS_IMAGE_BUNDLE = "1"
->
->    WKS_FILE = "beaglebone-yocto-verity.wks.in"
->
->    KERNEL_FEATURES_append = " features/device-mapper/dm-verity.scc"
+> The class depends on two variables:
+>    DM_VERITY_IMAGE:      defines the name of the main image (normally the
+>                          one that is used with the bitbake command to
+>                          build the main image)
+>    DM_VERITY_IMAGE_TYPE: defines exactly one type for which to generate
+>                          the protected image.
 >
 > Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 > ---
->   .../images/dm-verity-image-initramfs.bb       | 26 +++++++++++
->   .../initrdscripts/initramfs-dm-verity.bb      | 13 ++++++
->   .../initramfs-dm-verity/init-dm-verity.sh     | 46 +++++++++++++++++++
->   wic/beaglebone-yocto-verity.wks.in            | 15 ++++++
->   4 files changed, 100 insertions(+)
->   create mode 100644 recipes-core/images/dm-verity-image-initramfs.bb
->   create mode 100644 recipes-core/initrdscripts/initramfs-dm-verity.bb
->   create mode 100644 recipes-core/initrdscripts/initramfs-dm-verity/init-dm-verity.sh
->   create mode 100644 wic/beaglebone-yocto-verity.wks.in
+>   classes/dm-verity-img.bbclass | 88 +++++++++++++++++++++++++++++++++++
+>   1 file changed, 88 insertions(+)
+>   create mode 100644 classes/dm-verity-img.bbclass
 >
-> diff --git a/recipes-core/images/dm-verity-image-initramfs.bb b/recipes-core/images/dm-verity-image-initramfs.bb
+> diff --git a/classes/dm-verity-img.bbclass b/classes/dm-verity-img.bbclass
 > new file mode 100644
-> index 0000000..f9ea376
+> index 0000000..1c0e29b
 > --- /dev/null
-> +++ b/recipes-core/images/dm-verity-image-initramfs.bb
-> @@ -0,0 +1,26 @@
-> +DESCRIPTION = "Simple initramfs image for mounting the rootfs over the verity device mapper."
-> +
-> +# We want a clean, minimal image.
-> +IMAGE_FEATURES = ""
-> +
-> +PACKAGE_INSTALL = " \
-> +    initramfs-dm-verity \
-> +    base-files \
-> +    busybox \
-> +    util-linux-mount \
-> +    udev \
-> +    cryptsetup \
-> +    lvm2-udevrules \
-> +"
-> +
-> +# Can we somehow inspect reverse dependencies to avoid these variables?
-> +do_rootfs[depends] += "${DM_VERITY_IMAGE}:do_image_${DM_VERITY_IMAGE_TYPE}"
-> +
-> +IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
-> +
-> +inherit core-image
-> +
-> +deploy_verity_hash() {
-> +    install -D -m 0644 ${DEPLOY_DIR_IMAGE}/${DM_VERITY_IMAGE}-${MACHINE}.${DM_VERITY_IMAGE_TYPE}.verity.env ${IMAGE_ROOTFS}/${datadir}/dm-verity.env
-> +}
-> +ROOTFS_POSTPROCESS_COMMAND += "deploy_verity_hash;"
-> diff --git a/recipes-core/initrdscripts/initramfs-dm-verity.bb b/recipes-core/initrdscripts/initramfs-dm-verity.bb
-> new file mode 100644
-> index 0000000..b614956
-> --- /dev/null
-> +++ b/recipes-core/initrdscripts/initramfs-dm-verity.bb
-> @@ -0,0 +1,13 @@
-> +SUMMARY = "Simple init script that uses devmapper to mount the rootfs in read-only mode protected by dm-verity"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-> +
-> +SRC_URI = "file://init-dm-verity.sh"
-> +
-> +do_install() {
-> +    install -m 0755 ${WORKDIR}/init-dm-verity.sh ${D}/init
-> +    install -d ${D}/dev
-> +    mknod -m 622 ${D}/dev/console c 5 1
-> +}
-> +
-> +FILES_${PN} = "/init /dev/console"
-> diff --git a/recipes-core/initrdscripts/initramfs-dm-verity/init-dm-verity.sh b/recipes-core/initrdscripts/initramfs-dm-verity/init-dm-verity.sh
-> new file mode 100644
-> index 0000000..307d2c7
-> --- /dev/null
-> +++ b/recipes-core/initrdscripts/initramfs-dm-verity/init-dm-verity.sh
-> @@ -0,0 +1,46 @@
-> +#!/bin/sh
-> +
-> +PATH=/sbin:/bin:/usr/sbin:/usr/bin
-> +RDEV=""
-> +ROOT_DIR="/new_root"
-> +
-> +mkdir -p /proc
-> +mkdir -p /sys
-> +mkdir -p /run
-> +mkdir -p /tmp
-> +mount -t proc proc /proc
-> +mount -t sysfs sysfs /sys
-> +mount -t devtmpfs none /dev
-> +
-> +udevd --daemon
-> +udevadm trigger --type=subsystems --action=add
-> +udevadm trigger --type=devices --action=add
-> +udevadm settle --timeout=10
-> +
-> +for PARAM in $(cat /proc/cmdline); do
-> +	case $PARAM in
-> +		root=*)
-> +			RDEV=${PARAM#root=}
-> +			;;
-> +	esac
-> +done
-> +
-> +if ! [ -b $RDEV ]; then
-> +	echo "Missing root command line argument!"
-> +	exit 1
-> +fi
-> +
-> +case $RDEV in
-> +	UUID=*)
-> +		RDEV=$(realpath /dev/disk/by-uuid/${RDEV#UUID=})
-> +		;;
-> +esac
-> +
-> +. /usr/share/dm-verity.env
-> +
-> +echo "Mounting $RDEV over dm-verity as the root filesystem"
-> +
-> +veritysetup --data-block-size=1024 --hash-offset=$DATA_SIZE create rootfs $RDEV $RDEV $ROOT_HASH
-> +mkdir -p $ROOT_DIR
-> +mount -o ro /dev/mapper/rootfs $ROOT_DIR
-> +exec switch_root $ROOT_DIR /sbin/init
-> diff --git a/wic/beaglebone-yocto-verity.wks.in b/wic/beaglebone-yocto-verity.wks.in
-> new file mode 100644
-> index 0000000..cd1702e
-> --- /dev/null
-> +++ b/wic/beaglebone-yocto-verity.wks.in
-> @@ -0,0 +1,15 @@
+> +++ b/classes/dm-verity-img.bbclass
+> @@ -0,0 +1,88 @@
 > +# SPDX-License-Identifier: MIT
 > +#
 > +# Copyright (C) 2020 BayLibre SAS
 > +# Author: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 > +#
-> +# A dm-verity variant of the regular wks for beaglebone black. We need to fetch
-> +# the partition images from the DEPLOY_DIR_IMAGE as the rootfs source plugin will
-> +# not recreate the exact block device corresponding with the hash tree. We must
-> +# not alter the label or any other setting on the image.
+> +# This bbclass allows creating of dm-verity protected partition images. It
+> +# generates a device image file with dm-verity hash data appended at the end
+> +# plus the corresponding .env file containing additional information needed
+> +# to mount the image such as the root hash in the form of ell variables. To
+> +# assure data integrity, the root hash must be stored in a trusted location
+> +# or cryptographically signed and verified.
 > +#
-> +# This .wks only works with the dm-verity-img class.
+> +# Usage:
+> +#     DM_VERITY_IMAGE = "core-image-full-cmdline" # or other image
+> +#     DM_VERITY_IMAGE_TYPE = "ext4" # or ext2, ext3 & btrfs
+> +#     IMAGE_CLASSES += "dm-verity-img"
+> +#
+> +# The resulting image can then be used to implement the device mapper block
+> +# integrity checking on the target device.
 > +
-> +part /boot --source bootimg-partition --ondisk mmcblk0 --fstype=vfat --label boot --active --align 4 --size 16 --sourceparams="loader=u-boot" --use-uuid
-> +part / --source rawcopy --ondisk mmcblk0 --sourceparams="file=${DEPLOY_DIR_IMAGE}/${DM_VERITY_IMAGE}-${MACHINE}.${DM_VERITY_IMAGE_TYPE}.verity"
-> +bootloader --append="console=ttyS0,115200"
+> +# Process the output from veritysetup and generate the corresponding .env
+> +# file. The output from veritysetup is not very machine-friendly so we need to
+> +# convert it to some better format. Let's drop the first line (doesn't contain
+> +# any useful info) and feed the rest to a script.
+> +process_verity() {
+> +    local ENV="$OUTPUT.env"
+> +
+> +    # Each line contains a key and a value string delimited by ':'. Read the
+> +    # two parts into separate variables and process them separately. For the
+> +    # key part: convert the names to upper case and replace spaces with
+> +    # underscores to create correct shell variable names. For the value part:
+> +    # just trim all white-spaces.
+> +    IFS=":"
+> +    while read KEY VAL; do
+> +        echo -ne "$KEY" | tr '[:lower:]' '[:upper:]' | sed 's/ /_/g' >> $ENV
+> +        echo -ne "=" >> $ENV
+> +        echo "$VAL" | tr -d " \t" >> $ENV
+> +    done
+> +
+> +    # Add partition size
+> +    echo "DATA_SIZE=$SIZE" >> $ENV
+> +
+> +    ln -sf $ENV ${IMAGE_BASENAME}-${MACHINE}.$TYPE.verity.env
+> +}
+> +
+> +verity_setup() {
+> +    local TYPE=$1
+> +    local INPUT=${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.$TYPE
+> +    local SIZE=$(stat --printf="%s" $INPUT)
+> +    local OUTPUT=$INPUT.verity
+> +
+> +    cp -a $INPUT $OUTPUT
+> +
+> +    # Let's drop the first line of output (doesn't contain any useful info)
+> +    # and feed the rest to another function.
+> +    veritysetup --data-block-size=1024 --hash-offset=$SIZE format $OUTPUT $OUTPUT | tail -n +2 | process_verity
+> +}
+> +
+> +VERITY_TYPES = "ext2.verity ext3.verity ext4.verity btrfs.verity"
+> +IMAGE_TYPES += "${VERITY_TYPES}"
+> +CONVERSIONTYPES += "verity"
+> +CONVERSION_CMD_verity = "verity_setup ${type}"
+> +CONVERSION_DEPENDS_verity = "cryptsetup-native"
+> +
+> +python __anonymous() {
+> +    verity_image = d.getVar('DM_VERITY_IMAGE')
+> +    verity_type = d.getVar('DM_VERITY_IMAGE_TYPE')
+> +    image_fstypes = d.getVar('IMAGE_FSTYPES')
+> +    pn = d.getVar('PN')
+> +
+> +    if verity_image != pn:
+> +        return # This doesn't concern this image
+> +
+> +    if not verity_image or not verity_type:
+> +        bb.warn('dm-verity-img class inherited but not used')
+> +        return
+> +
+> +    if len(verity_type.split()) is not 1:
+> +        bb.fatal('DM_VERITY_IMAGE_TYPE must contain exactly one type')
+> +
+> +    d.appendVar('IMAGE_FSTYPES', ' %s.verity' % verity_type)
+> +
+> +    # If we're using wic: we'll have to use partition images and not the rootfs
+> +    # source plugin so add the appropriate dependency.
+> +    if 'wic' in image_fstypes:
+> +        dep = ' %s:do_image_%s' % (pn, verity_type)
+> +        d.appendVarFlag('do_image_wic', 'depends', dep)
+> +}
+>
 
+basically this class generate a dm-verity hash that needs to be injected 
+inside the initramfs...it's a bit hacky.
 
-Not sure if it's a working example...so where does the fitImage goes ?
-
-How did you solve the circular dependency ?
+wouldn't be signing the hash, include the verifiication public key in 
+initramfs more portable ?
 
 
 Mit freundlichen Grüßen / Kind regards
