@@ -1,84 +1,247 @@
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com [209.85.215.196])
- by mx.groups.io with SMTP id smtpd.web11.10361.1586759598792225856
+Received: from mailrelay3-3.pub.mailoutpod1-cph3.one.com (mailrelay3-3.pub.mailoutpod1-cph3.one.com [46.30.212.12])
+ by mx.groups.io with SMTP id smtpd.web11.12783.1586775219452163748
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Apr 2020 23:33:18 -0700
+ Mon, 13 Apr 2020 03:53:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=FBxsmHi5;
- spf=pass (domain: gmail.com, ip: 209.85.215.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f196.google.com with SMTP id d17so4084987pgo.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Apr 2020 23:33:18 -0700 (PDT)
+ dkim=pass header.i=@embexus.com header.s=20191106 header.b=fIFQFpC/;
+ spf=none, err=permanent DNS error (domain: embexus.com, ip: 46.30.212.12, mailfrom: ayoub.zaki@embexus.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=NhyGPIkDWHPTdTGnWkPcSAgyhXO0PeZVDOGnWPzqQf8=;
-        b=FBxsmHi5QCPxbcjKxmOOocOgbkfkRpMAikpr6doE2glHP8nCzLjIqlFhx+cO99sHUc
-         wKk4KTi2Z+ZG0xmqBwLx2ZSUvc7WMsLg9whof4nIhf53cnvfIbnqDpDXFIi/m6ynvJuH
-         nXmdR87MVCG+L0A7aK0X18jIwazAUSb+WQF40zs3zJ3qe2JJKvEwU9g3grLBc45bJiPR
-         9dsUvU9a8ijkXVOtY/zOf1rGk7aZz2nRGJll5YdKi1iDBT1Eq+mly8M3mq/g5MFeazuz
-         kffD0B6ppLitYpJ92DJ3VcXU7tWnX/9z3egczdCsRvNZt6XNimsavZNAfpckmxjD1V2U
-         yvkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=NhyGPIkDWHPTdTGnWkPcSAgyhXO0PeZVDOGnWPzqQf8=;
-        b=HwfByT41ycI837j8/aDfR//JdaJSMLBjouxBUUZhghT87V0Eu6A1p6ZbLm2kAhF0mE
-         V2FsWKB6Ocx+U+TvUhYRETYi2jdS0t0Lz/qd6Rm2PlIRe28cDd1L1aGag8YygwCt5qod
-         CmLBqiVF67pxL1mseYonCwhE0CXNt6W8gA4Ufln6tKRMl2SOGxa/tbFLu3uJkvXQdcJj
-         MLHoyCtogYy81ynC/a93w/5oMvHtzOq2AFD7wmjaKtJFvXtguCBJFORgo+2W0hOqL2xP
-         XcNNdorhKHIL5MSSf7VdL9WgNYTLDOLI5SJ6B773R3aFfEHwCbj40tfZKD5JqmZaTFD6
-         /bpA==
-X-Gm-Message-State: AGi0PuZE3jUn4/vDilsYeXd7ZjzcKdKQRet6JVQlmAFS5mpsWiyY9lOK
-	GgUKU9bN9ueQfhewRLHfb1OjqaTCYTg=
-X-Google-Smtp-Source: APiQypJMGsw43MT41R8+sIKsTIU8whnlDW3NpMkymJc/0GqOvaFF8p8qbGKx3RwR0S23pPKQIIk24w==
-X-Received: by 2002:a62:e304:: with SMTP id g4mr928885pfh.286.1586759597744;
-        Sun, 12 Apr 2020 23:33:17 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::58e0])
-        by smtp.gmail.com with ESMTPSA id r9sm7557244pfg.2.2020.04.12.23.33.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Apr 2020 23:33:17 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+	d=embexus.com; s=20191106;
+	h=content-transfer-encoding:content-type:in-reply-to:mime-version:date:
+	 message-id:from:references:to:subject:from;
+	bh=KGF05eOOIQTkRiBhek+RDqyf3uuxfRqmjWQXMGNKTM4=;
+	b=fIFQFpC/FqR2WEMfixVrPHGbUkiMA3N9Dh4bQ74PATjbbIGtNY2Db4P1PEfmyslp1l113fjPh7s12
+	 BD7tM5PyTAEIhrv0lo3jjkBtTdZ/NImH1rReKPn0E9YZMtxUl8/uGp6tLPdjI5wNFAZ3CeBNRXwI2u
+	 0UNJ10WRZd6FqWqW4XH62FdlpcwonsEvvVDaNsuvrUiLdXOQrQvUJL7aq4awcLQZhuRO1pgC4fKaTI
+	 xqoGg9mUaFztdBZjne9pQ4cRuwpqvuZ6zxAj6flYY4X2zoaeaCcsTENyebXIbAKUSHKf9tO/sdTIta
+	 WWDeHmAo4F7fgKtcGcY05jiJqYPopiQ==
+X-HalOne-Cookie: 56d7d120f583227893611e21514fe4ca141cfbf3
+X-HalOne-ID: 0602a911-7d75-11ea-9e61-d0431ea8bb03
+Received: from [192.168.178.41] (x4db49fc3.dyn.telefonica.de [77.180.159.195])
+	by mailrelay3.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPSA
+	id 0602a911-7d75-11ea-9e61-d0431ea8bb03;
+	Mon, 13 Apr 2020 10:53:36 +0000 (UTC)
+Subject: Re: [oe] [meta-security][RFC 2/2] dm-verity: add a working example for BeagleBone Black
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] yad: Upgrade to 6.0
-Date: Sun, 12 Apr 2020 23:33:14 -0700
-Message-Id: <20200413063314.1421922-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.26.0
+References: <20200410124135.24217-1-brgl@bgdev.pl>
+ <20200410124135.24217-3-brgl@bgdev.pl>
+From: "Ayoub Zaki" <ayoub.zaki@embexus.com>
+Organization: Embexus
+Message-ID: <c4b7d539-f7ce-0ab6-7b53-3d7e07a93897@embexus.com>
+Date: Mon, 13 Apr 2020 12:53:35 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
+In-Reply-To: <20200410124135.24217-3-brgl@bgdev.pl>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Make it depend on x11 in distro features since it needs gtk/gtkx.h and
-gdk/gdkx.h headers
+Hi,
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-graphics/yad/{yad_5.0.bb => yad_6.0.bb} | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/yad/{yad_5.0.bb => yad_6.0.bb} (76%)
 
-diff --git a/meta-oe/recipes-graphics/yad/yad_5.0.bb b/meta-oe/recipes-graphics/yad/yad_6.0.bb
-similarity index 76%
-rename from meta-oe/recipes-graphics/yad/yad_5.0.bb
-rename to meta-oe/recipes-graphics/yad/yad_6.0.bb
-index e53c04bbc6..3760a37d31 100644
---- a/meta-oe/recipes-graphics/yad/yad_5.0.bb
-+++ b/meta-oe/recipes-graphics/yad/yad_6.0.bb
-@@ -6,9 +6,11 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- SRC_URI = "git://github.com/v1cont/yad.git"
--SRCREV = "c8eac89cc20d915cb5ed185f423091a291c8af24"
-+SRCREV = "a5b1a7a3867bc7dffbbc539f586f301687b6ec02"
- 
--inherit autotools gsettings
-+inherit autotools gsettings features_check
-+
-+REQUIRED_DISTRO_FEATURES = "x11"
- 
- DEPENDS = "gtk+3 glib-2.0-native intltool-native"
- 
+On 10.04.20 14:41, Bartosz Golaszewski wrote:
+> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+>
+> This adds various bits and pieces to enable generating a working example
+> of a full chain of trust up to dm-verity-protected rootfs level on Beagle
+> Bone Black.
+>
+> The new initramfs is quite generic and should work for other SoCs as well
+> when using fitImage.
+>
+> The following config can be used with current master poky,
+> meta-openembedded & meta-security to generate a BBB image using verified
+> boot and dm-verity.
+>
+>    UBOOT_SIGN_KEYDIR = "/tmp/test-keys/"
+>    UBOOT_SIGN_KEYNAME = "dev"
+>    UBOOT_SIGN_ENABLE = "1"
+>    UBOOT_MKIMAGE_DTCOPTS = "-I dts -O dtb -p 2000"
+>    UBOOT_MACHINE_beaglebone-yocto = "am335x_boneblack_vboot_config"
+>
+>    IMAGE_CLASSES += "dm-verity-img"
+>    IMAGE_FSTYPES += "wic.xz ext4"
+>
+>    DM_VERITY_IMAGE = "core-image-full-cmdline"
+>    DM_VERITY_IMAGE_TYPE = "ext4"
+>
+>    KERNEL_CLASSES += "kernel-fitimage"
+>    KERNEL_IMAGETYPE_beaglebone-yocto = "fitImage"
+>
+>    IMAGE_INSTALL_remove = " kernel-image-zimage"
+>    IMAGE_BOOT_FILES_remove = " zImage"
+>    IMAGE_BOOT_FILES_append = " fitImage-${INITRAMFS_IMAGE}-${MACHINE}-${MACHINE};fitImage"
+>
+>    # Using systemd is not strictly needed but deals nicely with read-only
+>    # filesystem by default.
+>    DISTRO_FEATURES_append = " systemd"
+>    DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
+>    VIRTUAL-RUNTIME_init_manager = "systemd"
+>    VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
+>
+>    INITRAMFS_IMAGE = "dm-verity-image-initramfs"
+>    INITRAMFS_FSTYPES = "cpio.gz"
+>    INITRAMFS_IMAGE_BUNDLE = "1"
+>
+>    WKS_FILE = "beaglebone-yocto-verity.wks.in"
+>
+>    KERNEL_FEATURES_append = " features/device-mapper/dm-verity.scc"
+>
+> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> ---
+>   .../images/dm-verity-image-initramfs.bb       | 26 +++++++++++
+>   .../initrdscripts/initramfs-dm-verity.bb      | 13 ++++++
+>   .../initramfs-dm-verity/init-dm-verity.sh     | 46 +++++++++++++++++++
+>   wic/beaglebone-yocto-verity.wks.in            | 15 ++++++
+>   4 files changed, 100 insertions(+)
+>   create mode 100644 recipes-core/images/dm-verity-image-initramfs.bb
+>   create mode 100644 recipes-core/initrdscripts/initramfs-dm-verity.bb
+>   create mode 100644 recipes-core/initrdscripts/initramfs-dm-verity/init-dm-verity.sh
+>   create mode 100644 wic/beaglebone-yocto-verity.wks.in
+>
+> diff --git a/recipes-core/images/dm-verity-image-initramfs.bb b/recipes-core/images/dm-verity-image-initramfs.bb
+> new file mode 100644
+> index 0000000..f9ea376
+> --- /dev/null
+> +++ b/recipes-core/images/dm-verity-image-initramfs.bb
+> @@ -0,0 +1,26 @@
+> +DESCRIPTION = "Simple initramfs image for mounting the rootfs over the verity device mapper."
+> +
+> +# We want a clean, minimal image.
+> +IMAGE_FEATURES = ""
+> +
+> +PACKAGE_INSTALL = " \
+> +    initramfs-dm-verity \
+> +    base-files \
+> +    busybox \
+> +    util-linux-mount \
+> +    udev \
+> +    cryptsetup \
+> +    lvm2-udevrules \
+> +"
+> +
+> +# Can we somehow inspect reverse dependencies to avoid these variables?
+> +do_rootfs[depends] += "${DM_VERITY_IMAGE}:do_image_${DM_VERITY_IMAGE_TYPE}"
+> +
+> +IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
+> +
+> +inherit core-image
+> +
+> +deploy_verity_hash() {
+> +    install -D -m 0644 ${DEPLOY_DIR_IMAGE}/${DM_VERITY_IMAGE}-${MACHINE}.${DM_VERITY_IMAGE_TYPE}.verity.env ${IMAGE_ROOTFS}/${datadir}/dm-verity.env
+> +}
+> +ROOTFS_POSTPROCESS_COMMAND += "deploy_verity_hash;"
+> diff --git a/recipes-core/initrdscripts/initramfs-dm-verity.bb b/recipes-core/initrdscripts/initramfs-dm-verity.bb
+> new file mode 100644
+> index 0000000..b614956
+> --- /dev/null
+> +++ b/recipes-core/initrdscripts/initramfs-dm-verity.bb
+> @@ -0,0 +1,13 @@
+> +SUMMARY = "Simple init script that uses devmapper to mount the rootfs in read-only mode protected by dm-verity"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+> +
+> +SRC_URI = "file://init-dm-verity.sh"
+> +
+> +do_install() {
+> +    install -m 0755 ${WORKDIR}/init-dm-verity.sh ${D}/init
+> +    install -d ${D}/dev
+> +    mknod -m 622 ${D}/dev/console c 5 1
+> +}
+> +
+> +FILES_${PN} = "/init /dev/console"
+> diff --git a/recipes-core/initrdscripts/initramfs-dm-verity/init-dm-verity.sh b/recipes-core/initrdscripts/initramfs-dm-verity/init-dm-verity.sh
+> new file mode 100644
+> index 0000000..307d2c7
+> --- /dev/null
+> +++ b/recipes-core/initrdscripts/initramfs-dm-verity/init-dm-verity.sh
+> @@ -0,0 +1,46 @@
+> +#!/bin/sh
+> +
+> +PATH=/sbin:/bin:/usr/sbin:/usr/bin
+> +RDEV=""
+> +ROOT_DIR="/new_root"
+> +
+> +mkdir -p /proc
+> +mkdir -p /sys
+> +mkdir -p /run
+> +mkdir -p /tmp
+> +mount -t proc proc /proc
+> +mount -t sysfs sysfs /sys
+> +mount -t devtmpfs none /dev
+> +
+> +udevd --daemon
+> +udevadm trigger --type=subsystems --action=add
+> +udevadm trigger --type=devices --action=add
+> +udevadm settle --timeout=10
+> +
+> +for PARAM in $(cat /proc/cmdline); do
+> +	case $PARAM in
+> +		root=*)
+> +			RDEV=${PARAM#root=}
+> +			;;
+> +	esac
+> +done
+> +
+> +if ! [ -b $RDEV ]; then
+> +	echo "Missing root command line argument!"
+> +	exit 1
+> +fi
+> +
+> +case $RDEV in
+> +	UUID=*)
+> +		RDEV=$(realpath /dev/disk/by-uuid/${RDEV#UUID=})
+> +		;;
+> +esac
+> +
+> +. /usr/share/dm-verity.env
+> +
+> +echo "Mounting $RDEV over dm-verity as the root filesystem"
+> +
+> +veritysetup --data-block-size=1024 --hash-offset=$DATA_SIZE create rootfs $RDEV $RDEV $ROOT_HASH
+> +mkdir -p $ROOT_DIR
+> +mount -o ro /dev/mapper/rootfs $ROOT_DIR
+> +exec switch_root $ROOT_DIR /sbin/init
+> diff --git a/wic/beaglebone-yocto-verity.wks.in b/wic/beaglebone-yocto-verity.wks.in
+> new file mode 100644
+> index 0000000..cd1702e
+> --- /dev/null
+> +++ b/wic/beaglebone-yocto-verity.wks.in
+> @@ -0,0 +1,15 @@
+> +# SPDX-License-Identifier: MIT
+> +#
+> +# Copyright (C) 2020 BayLibre SAS
+> +# Author: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> +#
+> +# A dm-verity variant of the regular wks for beaglebone black. We need to fetch
+> +# the partition images from the DEPLOY_DIR_IMAGE as the rootfs source plugin will
+> +# not recreate the exact block device corresponding with the hash tree. We must
+> +# not alter the label or any other setting on the image.
+> +#
+> +# This .wks only works with the dm-verity-img class.
+> +
+> +part /boot --source bootimg-partition --ondisk mmcblk0 --fstype=vfat --label boot --active --align 4 --size 16 --sourceparams="loader=u-boot" --use-uuid
+> +part / --source rawcopy --ondisk mmcblk0 --sourceparams="file=${DEPLOY_DIR_IMAGE}/${DM_VERITY_IMAGE}-${MACHINE}.${DM_VERITY_IMAGE_TYPE}.verity"
+> +bootloader --append="console=ttyS0,115200"
+
+
+Not sure if it's a working example...so where does the fitImage goes ?
+
+How did you solve the circular dependency ?
+
+
+Mit freundlichen Grüßen / Kind regards
+
 -- 
-2.26.0
+Ayoub Zaki
+Embedded Systems Consultant
+
+Vaihinger Straße 2/1
+D-71634 Ludwigsburg
+
+Mobile   : +4917662901545
+Email    : ayoub.zaki@embexus.com
+Homepage : https://embexus.com
+VAT No.  : DE313902634
 
