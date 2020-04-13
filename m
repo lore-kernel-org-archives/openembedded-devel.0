@@ -1,93 +1,89 @@
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
- by mx.groups.io with SMTP id smtpd.web12.9987.1586757177433205560
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com [209.85.215.195])
+ by mx.groups.io with SMTP id smtpd.web11.10059.1586757178032729515
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Apr 2020 22:52:57 -0700
+ Sun, 12 Apr 2020 22:52:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=o25iT0QC;
- spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f175.google.com with SMTP id g32so4034171pgb.6
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Apr 2020 22:52:57 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=iwXu66Ht;
+ spf=pass (domain: gmail.com, ip: 209.85.215.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f195.google.com with SMTP id t11so2085320pgg.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Apr 2020 22:52:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=VuvudXEVKRKzmm5uvgihDFJ8B44SSd9C4QnW3Kt7Flc=;
-        b=o25iT0QCql1iZ3GjhKPtRDA4uvczvTNiQugjGEIUt9SK3us3gxIpCxjJBdxCtu4dxC
-         ZmYRINAJre8rwUXQ/+CzqeaNu96vYp3yy7qNqw/EW4XPC7QSsK3yiRLC/6QEqD7v9jSm
-         dL3KncVq8RDQzkXTdoCBZaa57wvGzvAJnCJESbAkvmN0Hvlo20VDlAlQ/qwu2oYtUrVc
-         VHExDzPqb2JhbiP4arhTD18vJ6EybSq5eOAT0M2VC2CbUZu6W2N/37/ialqgb3xFzNyP
-         lb4UzkPf63fVF5sPO1AvXrwMLNcio9LFPFkhreWoMobZ/FXghqTiRcfAXZtqb/L7yg8i
-         8umA==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=qYWXlPCxrjAO4VDUFmwsEV+ZN8fORKei0k1xg6A8POg=;
+        b=iwXu66HtKOEQ/feOPRCtMliYEXa4xatOcYuGA1cLIrrlNIZ/7ESlzdkeT0dh12oPQp
+         2qaHAblPQQG+m9/Lmm8dRzvv02HL02Z2LkEh5z37LRlthl0zT9CU9BYgePt84Ff1V06q
+         och8D/I2frKmUq+arQKcOYJNiE1xoa8JhlIXQvBKYToigkLdogkQeiy9itkxNR3oRakw
+         Yi/Hl70VPRk2M1+mo//E/ofP47Zo3vjoMl340zlpL5XqQjvEK27K5JRwEDXIa9DMzF5v
+         GzWk/+GTfC5Dq012Mzw2W8hrxgG9OAvzlbeNZHxO4G2KqCohKMnn+jtjUou8PoWrUe4r
+         GXQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=VuvudXEVKRKzmm5uvgihDFJ8B44SSd9C4QnW3Kt7Flc=;
-        b=FCtpDHK8He3iRmIrBHOB0YdzwXdt/YSIrjfuKRIK6gbCJSRDphdtl7GvV4/c2FLoaJ
-         2K8cq/CamZcBKxhnqxa6lGs14T++CNkFlupt9BaUsKNkSViohc19Sd/zJxMepIvABEcs
-         KggzCnTF8wcVAO7kndSR6ZGguWuBHfZhrAmrm+9Y6Cksgo3gMdBN6riYt+f8Xt55jE4n
-         yvf+T5lBx43HpWxAAMUnLnY7LKFMVQrlWRkv7Tdj9O0aoLgV5pflRJVjSJ33TC4h5hkY
-         WMHJAXKZ4OBX1joPh1PO6Ve/zGdsDaNHVcfnjKvysnf1dW6VlfeQLqZblTCbuOQYiML6
-         90Rg==
-X-Gm-Message-State: AGi0PuYB9WcmKXlyMOeQfdKimPPeN9uUaUWhdZ3WHvFVKU+NqpUe+zOS
-	4ZpAjKR9a1/XuTVv0IfRdvEqxCd65hg=
-X-Google-Smtp-Source: APiQypIXQvUUfFf0LZvmBp0nGuttTsi7izrniFTSC5GO2O29+/zozPw77jHbD5zWccyhMozasMHfuA==
-X-Received: by 2002:aa7:96f8:: with SMTP id i24mr16351933pfq.321.1586757176402;
-        Sun, 12 Apr 2020 22:52:56 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=qYWXlPCxrjAO4VDUFmwsEV+ZN8fORKei0k1xg6A8POg=;
+        b=K5GuT1EW0iBmue9AQKoAg+QVAjLZgaj78eX5UJBiToFCLcTVpWl+7XCRPO6wpbglAA
+         ug29dSBIymEwW/zM/DFHtN7/hP4SGcJGBDa9QPiyxyuS2rVA1kzHK9RQvBh+J+kKtYdV
+         r1oamfI8tsMN7F1MK3G3dTIO+iHiktc/Zea+oK+fAVj6ikshVSdYDh3n7Immhu6uT6cm
+         Uy4fsTuoaWuDNMx9gPgnWsHly5KBJxE8cjs2MdYfk+tJSYGK2VDuHDIAgl4J4ukSUKZ6
+         vGCwoHuGlbzWxIQFXTY6CRS07gwpTWLsXwjj8PKcnhGlUcy2PSmLc+5At5rnaPxjt9U/
+         d5hA==
+X-Gm-Message-State: AGi0PuZhewQy4T8gfR99zUV+0eqbd0JsaBoo9bp/0ChmylknWV00B4I7
+	0cyYhOBGcRK69LePbNXDAOHORxF8vLk=
+X-Google-Smtp-Source: APiQypL9C9EOW3GdHryVhcCrStU0J7FIfHlFTGf44cJY41hprgQLglgCXYZIP3SUglJycFKpkX5qnQ==
+X-Received: by 2002:a62:d40b:: with SMTP id a11mr3185246pfh.92.1586757177169;
+        Sun, 12 Apr 2020 22:52:57 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::58e0])
-        by smtp.gmail.com with ESMTPSA id d8sm8125038pjx.12.2020.04.12.22.52.55
+        by smtp.gmail.com with ESMTPSA id d8sm8125038pjx.12.2020.04.12.22.52.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Apr 2020 22:52:55 -0700 (PDT)
+        Sun, 12 Apr 2020 22:52:56 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH 1/2] remmina: Check for x11 in distro features
-Date: Sun, 12 Apr 2020 22:52:51 -0700
-Message-Id: <20200413055252.1399706-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 2/2] vlc: Upgrade to 3.0.9.2
+Date: Sun, 12 Apr 2020 22:52:52 -0700
+Message-Id: <20200413055252.1399706-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.26.0
+In-Reply-To: <20200413055252.1399706-1-raj.khem@gmail.com>
+References: <20200413055252.1399706-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add missing dependency on libxkbfile
-It cant be built without it since plugins CMake is asking for it
-unconditionally
-
-Fixes
-| -- Checking for module 'xkbfile'
-| --   No package 'xkbfile' found
+Add packageconfig for enabling wayland support
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Martin Jansa <martin.jansa@gmail.com>
 ---
- meta-oe/recipes-support/remmina/remmina_1.3.6.bb | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ .../recipes-multimedia/vlc/{vlc_3.0.8.bb => vlc_3.0.9.2.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-multimedia/recipes-multimedia/vlc/{vlc_3.0.8.bb => vlc_3.0.9.2.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
-index f9860a11fb..5b663489f8 100644
---- a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
-+++ b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://remmina.org"
- SECTION = "Support"
- LICENSE = "GPLv2 & openssl"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dab7215512044d49037272ce1ac4ea8f file://LICENSE.OpenSSL;md5=c1eb3cee0a4dea27503c531267a69769"
--DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi-ui libsodium libssh vte json-glib libsoup-2.4 libvncserver libsecret"
-+DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi-ui libsodium libssh vte json-glib libsoup-2.4 libvncserver libsecret libxkbfile"
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.8.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb
+similarity index 96%
+rename from meta-multimedia/recipes-multimedia/vlc/vlc_3.0.8.bb
+rename to meta-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb
+index c15ff9a431..9e41512c3e 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.8.bb
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb
+@@ -23,8 +23,7 @@ SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
+            file://0007-use-vorbisidec.patch \
+            file://0008-fix-luaL-checkint.patch \
+ "
+-SRC_URI[md5sum] = "744442ec0c145453ea1d257914c8072e"
+-SRC_URI[sha256sum] = "e0149ef4a20a19b9ecd87309c2d27787ee3f47dfd47c6639644bc1f6fd95bdf6"
++SRC_URI[sha256sum] = "a9bdad293d81cd48516abad8d490d8ab4012964ae541ff19e00021e071e47601"
  
+ inherit autotools gettext pkgconfig features_check mime-xdg
  
- DEPENDS_append_libc-musl = " libexecinfo"
-@@ -17,9 +17,7 @@ SRC_URI[sha256sum] = "fbed745438bb0c21467b60cbd67c8148a9289b5ebc7482d06db443bea5
- S = "${WORKDIR}/Remmina-v${PV}"
+@@ -88,6 +87,7 @@ PACKAGECONFIG[vnc] = "--enable-vnc,--disable-vnc, libvncserver"
+ PACKAGECONFIG[x11] = "--with-x --enable-xcb,--without-x --disable-xcb,  xcb-util-keysyms libxpm libxinerama"
+ PACKAGECONFIG[png] = "--enable-png,--disable-png,libpng"
+ PACKAGECONFIG[vdpau] = "--enable-vdpau,--disable-vdpau,libvdpau"
++PACKAGECONFIG[wayland] = "--enable-wayland,--disable-wayland,wayland wayland-native"
  
- inherit cmake features_check mime-xdg
--
--# depends on avahi-ui with this restriction
--ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
-+REQUIRED_DISTRO_FEATURES = "x11"
- 
- EXTRA_OECMAKE += "-DWITH_APPINDICATOR=OFF -DWITH_GETTEXT=OFF -DWITH_TRANSLATIONS=OFF"
- 
+ do_configure_append() {
+     sed -i -e s:'${top_builddir_slash}libtool':'${top_builddir_slash}'${TARGET_SYS}-libtool:g ${B}/doltlibtool
 -- 
 2.26.0
 
