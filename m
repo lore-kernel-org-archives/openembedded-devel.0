@@ -1,82 +1,84 @@
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com [209.85.215.195])
- by mx.groups.io with SMTP id smtpd.web11.10256.1586758799309949944
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com [209.85.215.196])
+ by mx.groups.io with SMTP id smtpd.web11.10361.1586759598792225856
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Apr 2020 23:19:59 -0700
+ Sun, 12 Apr 2020 23:33:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=tYcUNdac;
- spf=pass (domain: gmail.com, ip: 209.85.215.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f195.google.com with SMTP id x26so2874223pgc.10
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Apr 2020 23:19:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=FBxsmHi5;
+ spf=pass (domain: gmail.com, ip: 209.85.215.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f196.google.com with SMTP id d17so4084987pgo.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Apr 2020 23:33:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Q6sFSo/U8B4/osjkWEIF1rPDoUkdFogi1GSs4e0lmo0=;
-        b=tYcUNdacB3cvpqbX6g/2pSaWCucmTPgFwA2Y2jnhPYCMu3tXbhTNFJGwd89bgrimAx
-         JT8nc97fLz1hGjtEMhzxFvteKJxNLmodNnYhnoeFsWfHbIYm/Jb4NBa4LfbUpCaKsxSA
-         hR686GO2pdJycbARoVUsO+47LZ+9dm0GTfIK9CT9JsKg/ONTBuzHEGbOhImmh669hT5P
-         ZM0O30UbSdFGHaZaoJnM5LOdu5327gYVVufSce3dGLABATg+/pzSLZ3Vl9Syz3y1kzP7
-         oeqV3OtAJyAg5EbjdbXFWBD2Y3FO7dHsJedJb6huF2q46fhvKUq06qmchjNwb6E+1D0S
-         OVZw==
+        bh=NhyGPIkDWHPTdTGnWkPcSAgyhXO0PeZVDOGnWPzqQf8=;
+        b=FBxsmHi5QCPxbcjKxmOOocOgbkfkRpMAikpr6doE2glHP8nCzLjIqlFhx+cO99sHUc
+         wKk4KTi2Z+ZG0xmqBwLx2ZSUvc7WMsLg9whof4nIhf53cnvfIbnqDpDXFIi/m6ynvJuH
+         nXmdR87MVCG+L0A7aK0X18jIwazAUSb+WQF40zs3zJ3qe2JJKvEwU9g3grLBc45bJiPR
+         9dsUvU9a8ijkXVOtY/zOf1rGk7aZz2nRGJll5YdKi1iDBT1Eq+mly8M3mq/g5MFeazuz
+         kffD0B6ppLitYpJ92DJ3VcXU7tWnX/9z3egczdCsRvNZt6XNimsavZNAfpckmxjD1V2U
+         yvkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Q6sFSo/U8B4/osjkWEIF1rPDoUkdFogi1GSs4e0lmo0=;
-        b=DdCa1Qy2Hz7zehmvcrJZof6WAApMOKmdw2SfDnalkBcS93jco6/ja5AxPNykPp9DDr
-         b9rcvG6T6MuRgO0FwgGIFe1QamniF+sfG+QTFmGdKCqCqHwKfWQ/nLAgME7DPqPN3tc7
-         kTBM9qBN7dx9C+6MQPtaawZ4Yx9dd+uObk5iBLt2GHKcsggKxGIUFjd9oSCNVdnZ3bsa
-         pWdbDOFiDww5Ud/CdDbq+72L3wG/d86EL+6zVDRsvsxfJM14b7YeS9+C1R175xfRvqCb
-         j0b0yTW/bjPv5cBx1i/LNAa2ihFWyzvWOsUQx+THnud2RBRLXF9FRhI+gsIYU/ya8hp0
-         9e+w==
-X-Gm-Message-State: AGi0PuZkChlUIUMcl3pKmR3wVf5rhCoKxTYLSfb7DRB6TfTjtq6cCGaR
-	1H/TDq9CLyPfVJYi8k4QA2u6Dc9TDaQ=
-X-Google-Smtp-Source: APiQypLwi1W2eWfAl0Bb0WHTr/t8syTG3VJG7D2vUQ91wruFONjbj5tP8KSgtRS+Y94gmm7bGu6FIA==
-X-Received: by 2002:a62:6503:: with SMTP id z3mr16790824pfb.232.1586758798108;
-        Sun, 12 Apr 2020 23:19:58 -0700 (PDT)
+        bh=NhyGPIkDWHPTdTGnWkPcSAgyhXO0PeZVDOGnWPzqQf8=;
+        b=HwfByT41ycI837j8/aDfR//JdaJSMLBjouxBUUZhghT87V0Eu6A1p6ZbLm2kAhF0mE
+         V2FsWKB6Ocx+U+TvUhYRETYi2jdS0t0Lz/qd6Rm2PlIRe28cDd1L1aGag8YygwCt5qod
+         CmLBqiVF67pxL1mseYonCwhE0CXNt6W8gA4Ufln6tKRMl2SOGxa/tbFLu3uJkvXQdcJj
+         MLHoyCtogYy81ynC/a93w/5oMvHtzOq2AFD7wmjaKtJFvXtguCBJFORgo+2W0hOqL2xP
+         XcNNdorhKHIL5MSSf7VdL9WgNYTLDOLI5SJ6B773R3aFfEHwCbj40tfZKD5JqmZaTFD6
+         /bpA==
+X-Gm-Message-State: AGi0PuZE3jUn4/vDilsYeXd7ZjzcKdKQRet6JVQlmAFS5mpsWiyY9lOK
+	GgUKU9bN9ueQfhewRLHfb1OjqaTCYTg=
+X-Google-Smtp-Source: APiQypJMGsw43MT41R8+sIKsTIU8whnlDW3NpMkymJc/0GqOvaFF8p8qbGKx3RwR0S23pPKQIIk24w==
+X-Received: by 2002:a62:e304:: with SMTP id g4mr928885pfh.286.1586759597744;
+        Sun, 12 Apr 2020 23:33:17 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::58e0])
-        by smtp.gmail.com with ESMTPSA id g197sm6177777pfb.54.2020.04.12.23.19.57
+        by smtp.gmail.com with ESMTPSA id r9sm7557244pfg.2.2020.04.12.23.33.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Apr 2020 23:19:57 -0700 (PDT)
+        Sun, 12 Apr 2020 23:33:17 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH] file-roller: Add packagekit support via packageconfig
-Date: Sun, 12 Apr 2020 23:19:54 -0700
-Message-Id: <20200413061954.1416321-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] yad: Upgrade to 6.0
+Date: Sun, 12 Apr 2020 23:33:14 -0700
+Message-Id: <20200413063314.1421922-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.26.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Enable packagekit support only when x11 is in distro features
-
-Fixes
-
-../file-roller-3.32.4/src/dlg-package-installer.c:26:10: fatal error: 'gdk/gdkx.h' file not found
-         ^~~~~~~~~~~~
-1 error generated.
+Make it depend on x11 in distro features since it needs gtk/gtkx.h and
+gdk/gdkx.h headers
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-graphics/yad/{yad_5.0.bb => yad_6.0.bb} | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/yad/{yad_5.0.bb => yad_6.0.bb} (76%)
 
-diff --git a/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb b/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb
-index 0e57848c5c..a95735c9b9 100644
---- a/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb
-+++ b/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb
-@@ -16,7 +16,10 @@ inherit gnomebase gsettings itstool gnome-help gettext upstream-version-is-even
- SRC_URI[archive.md5sum] = "21982b8d298cb2994a99494399dcb2d5"
- SRC_URI[archive.sha256sum] = "1b3b2cbfcb444e0d150bfd063add9d5181c8ab24f0593e5a8894399297214017"
+diff --git a/meta-oe/recipes-graphics/yad/yad_5.0.bb b/meta-oe/recipes-graphics/yad/yad_6.0.bb
+similarity index 76%
+rename from meta-oe/recipes-graphics/yad/yad_5.0.bb
+rename to meta-oe/recipes-graphics/yad/yad_6.0.bb
+index e53c04bbc6..3760a37d31 100644
+--- a/meta-oe/recipes-graphics/yad/yad_5.0.bb
++++ b/meta-oe/recipes-graphics/yad/yad_6.0.bb
+@@ -6,9 +6,11 @@ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagekit', '', d)}"
+ SRC_URI = "git://github.com/v1cont/yad.git"
+-SRCREV = "c8eac89cc20d915cb5ed185f423091a291c8af24"
++SRCREV = "a5b1a7a3867bc7dffbbc539f586f301687b6ec02"
+ 
+-inherit autotools gsettings
++inherit autotools gsettings features_check
 +
- PACKAGECONFIG[nautilus] = "-Dnautilus-actions=true,-Dnautilus-actions=false,nautilus"
-+PACKAGECONFIG[packagekit] = "-Dpackagekit=true,-Dpackagekit=false,"
++REQUIRED_DISTRO_FEATURES = "x11"
  
- FILES_${PN} += " \
-     ${datadir}/dbus-1 \
+ DEPENDS = "gtk+3 glib-2.0-native intltool-native"
+ 
 -- 
 2.26.0
 
