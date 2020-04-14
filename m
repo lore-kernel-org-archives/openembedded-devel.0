@@ -1,65 +1,88 @@
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web10.306.1586893775241114180
+Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
+ by mx.groups.io with SMTP id smtpd.web12.337.1586893776805699058
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Apr 2020 12:49:35 -0700
+ Tue, 14 Apr 2020 12:49:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: tgamblin@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 03EJnXCj005634
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 12:49:34 -0700 (PDT)
-Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Tue, 14 Apr 2020
- 12:49:33 -0700
-Received: by ala-lpggp3.wrs.com (Postfix, from userid 20958)	id 73915900D14;
- Tue, 14 Apr 2020 12:49:33 -0700 (PDT)
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-webserver][PATCH] apache2: upgrade 2.4.41 -> 2.4.43
-Date: Tue, 14 Apr 2020 12:49:33 -0700
-Message-ID: <20200414194933.31798-1-trevor.gamblin@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=MpVV17ZX;
+ spf=pass (domain: gmail.com, ip: 209.85.222.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f178.google.com with SMTP id b62so14733396qkf.6
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 12:49:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=G8RRpPy84qNF4DcBLGvKLYp1wKVOPcKx/5dp8mkjuvI=;
+        b=MpVV17ZX3PBjm2gjpIGzJhIw1K6kaDy3+yoNmufrsAFydU0s1D52kawM61BH6B2sqK
+         noyBv2HjmEAQrVEPGnMcbzdYTuaggSfbR8/g70wPPSWNIECrnlTsh1sScyknue6Zj0E9
+         9qEM906isarXSfcUsaTRsLv1m+oThICPqI14lbaaHGNF9mX+5qhrQ6WOGaP8QK1z6ulw
+         sz8FnyCigLvTPCwOxpIoj4/x//wy995ibk/Mxllls2hzLtx7nlm19aRveS8xkgPqIl0r
+         i5CULA7/q34WmYRNN1cqb9ixbzQHvpl08C7Ow9Pa+l7tyCxac/o7rEneg298huLHAPi9
+         2/FQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=G8RRpPy84qNF4DcBLGvKLYp1wKVOPcKx/5dp8mkjuvI=;
+        b=O7vp4nFI5hqaCtCc5P2Uyghym5IxmL/jQMx7Wj+plF0yr80cbbVCK+y6s7r/gxrRhs
+         916HA9PZbuDbKl7Ok+GTNCWxNmhqHlA1NL03SeA4NbR4KKKHbcnNq5WJXY7YYQ1zwN5G
+         Orti6v9UGhTmAmF5Wiym0wMsPRWMUdE7LVGdwNBbsKQ6MWjgoBHSrjpph9w1+cEoxMFs
+         K1+tcWAXZLHKzFeTIGot/oGqEnPITUyy1zywAN8x9uWY4MxYuLsLV5n5DWpnEHuhPrl2
+         9diBITnZNiN6kxk2zwZchKHaE2JKhe9bXziCUgdRtVbDk2LpSaICS1xmVIc/1dIOugOE
+         szWA==
+X-Gm-Message-State: AGi0PuY4Io/9cZ1IqH86GZ/blMCB1D0wULbuRt+ED5pK5VQHSAoUNtyW
+	mYuP5b1CjVLw8GAxkNJlcVG/qs+wuuiuagEcZIM=
+X-Google-Smtp-Source: APiQypK4Yx6PX+hZSi4O+NY1LMlNHnk6GgTyQJrAzt2Ne4c62CdyFORGVQ8FeImxS59+JmuecE4QAlFyApq3aqnZwQ4=
+X-Received: by 2002:a37:8d81:: with SMTP id p123mr21636596qkd.17.1586893775657;
+ Tue, 14 Apr 2020 12:49:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20200414185217.24503-1-abhishek.shah@broadcom.com> <20200414185217.24503-2-abhishek.shah@broadcom.com>
+In-Reply-To: <20200414185217.24503-2-abhishek.shah@broadcom.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Tue, 14 Apr 2020 12:49:09 -0700
+Message-ID: <CAMKF1sq7uOSsk5OeSeGjHZmZ_4d9ZPQKNgWK8V=YZsBEy=Em6g@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH v2 2/2] python3-pykwalify: Add recipe for v1.7.0
+To: abhishek.shah@broadcom.com
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-LICENSE file was updated due to a typo fix.
+it fails to build
 
-Note that this upgrade fixes two CVES affecting versions
-2.4.41 and earlier:
+http://errors.yoctoproject.org/Errors/Details/403673/
 
-CVE: CVE-2020-1927
-CVE: CVE-2020-1934
-
-See:
-https://nvd.nist.gov/vuln/detail/CVE-2020-1927
-https://nvd.nist.gov/vuln/detail/CVE-2020-1934
-
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
----
- .../apache2/{apache2_2.4.41.bb => apache2_2.4.43.bb}        | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.41.bb => apache2_2.4.43.bb} (97%)
-
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
-similarity index 97%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
-index a34734c20..2fff153fc 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
-@@ -24,9 +24,9 @@ SRC_URI_append_class-target = " \
-            file://volatiles.04_apache2 \
-            "
- 
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d52d0fd0bc788f068e647116c01ddfcd"
--SRC_URI[md5sum] = "dfc674f8f454e3bc2d4ccd73ad3b5f1e"
--SRC_URI[sha256sum] = "133d48298fe5315ae9366a0ec66282fa4040efa5d566174481077ade7d18ea40"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
-+SRC_URI[md5sum] = "791c986b1e70fe61eb44060aacc89a64"
-+SRC_URI[sha256sum] = "a497652ab3fc81318cdc2a203090a999150d86461acff97c1065dc910fe10f43"
- 
- S = "${WORKDIR}/httpd-${PV}"
- 
--- 
-2.17.1
-
+On Tue, Apr 14, 2020 at 11:52 AM Abhishek Shah via
+lists.openembedded.org
+<abhishek.shah=broadcom.com@lists.openembedded.org> wrote:
+>
+> Description of the package can be found at:
+> https://pypi.org/project/pykwalify/
+>
+> Signed-off-by: Abhishek Shah <abhishek.shah@broadcom.com>
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb b/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
+> new file mode 100644
+> index 000000000..1107502ca
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
+> @@ -0,0 +1,18 @@
+> +SUMMARY = "YAML/JSON validation library"
+> +DESCRIPTION = "pykwalify is a schema validator for YAML and JSON"
+> +HOMEPAGE = "https://pypi.org/project/pykwalify/"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=a72ea5159364a2cd7f45c6dcbee37872"
+> +
+> +SRC_URI[md5sum] = "58357f1d0f77de976e73dbd3660af75b"
+> +SRC_URI[sha256sum] = "7e8b39c5a3a10bc176682b3bd9a7422c39ca247482df198b402e8015defcceb2"
+> +
+> +PYPI_PACKAGE = "pykwalify"
+> +inherit setuptools3 pypi
+> +
+> +RDEPENDS_${PN} = "\
+> +    ${PYTHON_PN}-dateutil \
+> +    ${PYTHON_PN}-pyyaml \
+> +"
+> +
+> +BBCLASSEXTEND = "native"
+> --
+> 2.17.1
+>
+> 
