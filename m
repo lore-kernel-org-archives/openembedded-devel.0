@@ -1,122 +1,181 @@
-Received: from mail-il1-f196.google.com (mail-il1-f196.google.com [209.85.166.196])
- by mx.groups.io with SMTP id smtpd.web10.7522.1586855228045073911
+Received: from mailrelay4-3.pub.mailoutpod1-cph3.one.com (mailrelay4-3.pub.mailoutpod1-cph3.one.com [46.30.212.13])
+ by mx.groups.io with SMTP id smtpd.web11.7665.1586855861094699104
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Apr 2020 02:07:08 -0700
+ Tue, 14 Apr 2020 02:17:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=sVjPDyFX;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.166.196, mailfrom: brgl@bgdev.pl)
-Received: by mail-il1-f196.google.com with SMTP id c17so7511998ilk.6
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 02:07:07 -0700 (PDT)
+ dkim=pass header.i=@embexus.com header.s=20191106 header.b=NmMcAYc/;
+ spf=none, err=permanent DNS error (domain: embexus.com, ip: 46.30.212.13, mailfrom: ayoub.zaki@embexus.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=J+F6X2HhdewXiH4dQJFoTfe4HqmM0cu9EMeKB4wdsrQ=;
-        b=sVjPDyFX4qPzfRHZqXCoKWWRYvktET0whGjzqWMUn9QA4R/4V5D2Bn+QQVxsAem11J
-         s2neAEh7ViiPNK7nS3ZQLDadmYM1cDWNJra1buqaK1mGR4LeK40emkRfJI9yu5kbPRIS
-         ZCbH8bNnjZzVF6KPuLcj1tBpAJ3bIur4WKmGxq6vmgjhOeDO3uczyaQPsBtq7/BEy03o
-         6ondGLndv6NGEi2jCiZ2uleBzAn1iU1syqOphe8WpYI03SZIkcicmJOB5q7wsa3zahpm
-         n5mlZ4Ix/J6uokcAgh5QjMhB8ywYxsJRw8sJUmdlmfQ/j0RWSJb8l1PoCHhGnYCEKk7R
-         vQSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=J+F6X2HhdewXiH4dQJFoTfe4HqmM0cu9EMeKB4wdsrQ=;
-        b=CpYtd8d16YMpAgqHNqXBUeySCgNnPOazBDsZOXpSPvQPN4xpRrvuY67mfmzCBAmjSa
-         nb/5i/M+vMXjvXYv81j/7gSc0T1lxuh352a4UzE0ZgN3iZkaN503x8f6vNrTGm4URfbG
-         9a2ZMcxhD5sNBIQ7eBmOFDUm1fFpV6gQWnrJQow/nNpAqnbc0XuX/xomKC9g7y+mVBgg
-         OWw5FLrTeHviTyPPpHnJIA/86OeZKWCC2qOwK/Z91EgEFlwAQflUO8+BV2NBPcMCewVQ
-         U1zwz9lSJgTH38AYUgWmr2jpWj4TrY4kg4aQGKrd9Sni/Jv68UG0M3n1Exb7nAZf5hDj
-         bYIQ==
-X-Gm-Message-State: AGi0PubzrQZnLBIuFzHgjBqgZAtZd5PtKtzPYIpP83F2toMzqUeBsLTr
-	zHstIxAWHjv1Q+l9vC3K4G4dPdlCxUlqjZvG7bSZZbm3
-X-Google-Smtp-Source: APiQypJ79PQIdN9JpO9WeaMO3xcJ7YVBaiVUTGTcH6eD2Lqhf+jYJfRMi08C3e7TbgO79iUqzL9jrAaqWt4P40tz1j4=
-X-Received: by 2002:a92:ba87:: with SMTP id t7mr21514718ill.287.1586855227273;
- Tue, 14 Apr 2020 02:07:07 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200410124135.24217-1-brgl@bgdev.pl> <20200410124135.24217-3-brgl@bgdev.pl>
- <c4b7d539-f7ce-0ab6-7b53-3d7e07a93897@embexus.com>
-In-Reply-To: <c4b7d539-f7ce-0ab6-7b53-3d7e07a93897@embexus.com>
-From: "Bartosz Golaszewski" <brgl@bgdev.pl>
-Date: Tue, 14 Apr 2020 11:06:56 +0200
-Message-ID: <CAMRc=MdcQ7UsoPajv=fwLKdpGNX9RRK8SEb9+EUhs-qMUrbfLw@mail.gmail.com>
-Subject: Re: [oe] [meta-security][RFC 2/2] dm-verity: add a working example for BeagleBone Black
-To: Ayoub Zaki <ayoub.zaki@embexus.com>
+	d=embexus.com; s=20191106;
+	h=content-type:in-reply-to:mime-version:date:message-id:from:references:cc:to:
+	 subject:from;
+	bh=yUUtekRxMh3ADGVwdmgUWR045TlIFLZl8kSP5h5vTM8=;
+	b=NmMcAYc/NYSxIKATRVf/rmECHxb9BCFnZZHIGt6Lv8WRsQ0490NTRV/PGtM5CpVnzMiA0PCk9Lah0
+	 Heze62f/fiNsWEtooQDhaphhmsWkSdWNKBPpzDPxHFndFoUmB2ihP3nL71n8RaAoCTJS5vs6MsyJjZ
+	 /VUW2axih3XcgLmveTyyETZkTd2IT+O5AyT2xsiD0ikYy1clpjWmU4JPUkwZwGp1NuSrxMe/aC0vVP
+	 SOSsCEgrjO2Fo5O0PYvkvy0LTMV8T6ZSjingD/x+uKh9/zO2p+ohhmGYVwss1H/G/fgOnGAwWh9PVN
+	 VDSHxva5zCrBPcPO/Fsoucr0nEwj/fw==
+X-HalOne-Cookie: 3665905ab8f0124dbdd5db7d6e09198c810c42c1
+X-HalOne-ID: c8658ba8-7e30-11ea-8c7d-d0431ea8bb10
+Received: from [192.168.178.22] (x4dbe77ca.dyn.telefonica.de [77.190.119.202])
+	by mailrelay4.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPSA
+	id c8658ba8-7e30-11ea-8c7d-d0431ea8bb10;
+	Tue, 14 Apr 2020 09:17:37 +0000 (UTC)
+Subject: Re: [oe] [meta-security][RFC 1/2] classes: provide a class for generating dm-verity meta-data images
+To: Bartosz Golaszewski <brgl@bgdev.pl>
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20200410124135.24217-1-brgl@bgdev.pl>
+ <20200410124135.24217-2-brgl@bgdev.pl>
+ <34f4335a-c9ed-a790-c683-3b6db93eceb7@embexus.com>
+ <CAMRc=MeJOmwqPnZbgT-XugtQRU8okQMPGvgWx+cjnMw=1WyM=A@mail.gmail.com>
+From: "Ayoub Zaki" <ayoub.zaki@embexus.com>
+Message-ID: <8896403c-4f12-5d3c-5722-5b9b0a000067@embexus.com>
+Date: Tue, 14 Apr 2020 11:17:37 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
+MIME-Version: 1.0
+In-Reply-To: <CAMRc=MeJOmwqPnZbgT-XugtQRU8okQMPGvgWx+cjnMw=1WyM=A@mail.gmail.com>
+Content-Type: multipart/alternative;
+ boundary="------------FADA76ED155AE172E1DF34DA"
+Content-Language: en-US
 
-pon., 13 kwi 2020 o 12:53 Ayoub Zaki <ayoub.zaki@embexus.com> napisa=C5=82(=
-a):
->
-> Hi,
->
->
-> On 10.04.20 14:41, Bartosz Golaszewski wrote:
-> > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> >
-> > This adds various bits and pieces to enable generating a working exampl=
-e
-> > of a full chain of trust up to dm-verity-protected rootfs level on Beag=
-le
-> > Bone Black.
-> >
-> > The new initramfs is quite generic and should work for other SoCs as we=
-ll
-> > when using fitImage.
-> >
-> > The following config can be used with current master poky,
-> > meta-openembedded & meta-security to generate a BBB image using verifie=
-d
-> > boot and dm-verity.
-> >
-> >    UBOOT_SIGN_KEYDIR =3D "/tmp/test-keys/"
-> >    UBOOT_SIGN_KEYNAME =3D "dev"
-> >    UBOOT_SIGN_ENABLE =3D "1"
-> >    UBOOT_MKIMAGE_DTCOPTS =3D "-I dts -O dtb -p 2000"
-> >    UBOOT_MACHINE_beaglebone-yocto =3D "am335x_boneblack_vboot_config"
-> >
-> >    IMAGE_CLASSES +=3D "dm-verity-img"
-> >    IMAGE_FSTYPES +=3D "wic.xz ext4"
-> >
-> >    DM_VERITY_IMAGE =3D "core-image-full-cmdline"
-> >    DM_VERITY_IMAGE_TYPE =3D "ext4"
-> >
-> >    KERNEL_CLASSES +=3D "kernel-fitimage"
-> >    KERNEL_IMAGETYPE_beaglebone-yocto =3D "fitImage"
-> >
-> >    IMAGE_INSTALL_remove =3D " kernel-image-zimage"
-> >    IMAGE_BOOT_FILES_remove =3D " zImage"
-> >    IMAGE_BOOT_FILES_append =3D " fitImage-${INITRAMFS_IMAGE}-${MACHINE}=
--${MACHINE};fitImage"
-> >
-> >    # Using systemd is not strictly needed but deals nicely with read-on=
-ly
-> >    # filesystem by default.
-> >    DISTRO_FEATURES_append =3D " systemd"
-> >    DISTRO_FEATURES_BACKFILL_CONSIDERED +=3D "sysvinit"
-> >    VIRTUAL-RUNTIME_init_manager =3D "systemd"
-> >    VIRTUAL-RUNTIME_initscripts =3D "systemd-compat-units"
-> >
-> >    INITRAMFS_IMAGE =3D "dm-verity-image-initramfs"
-> >    INITRAMFS_FSTYPES =3D "cpio.gz"
-> >    INITRAMFS_IMAGE_BUNDLE =3D "1"
-> >
-> >    WKS_FILE =3D "beaglebone-yocto-verity.wks.in"
-> >
-> >    KERNEL_FEATURES_append =3D " features/device-mapper/dm-verity.scc"
-> >
-> > Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
->
->
-> Not sure if it's a working example...so where does the fitImage goes ?
->
-> How did you solve the circular dependency ?
->
->
+--------------FADA76ED155AE172E1DF34DA
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Please refer to the cover letter - it points to a patch series for
-OE-core where I fixed the problem in image and sstate bbclasses.
+Hi,
 
-Bart
+On 14.04.20 11:05, Bartosz Golaszewski wrote:
+> pon., 13 kwi 2020 o 12:58 Ayoub Zaki <ayoub.zaki@embexus.com> napisał(a):
+>>
+>> basically this class generate a dm-verity hash that needs to be injected
+>> inside the initramfs...it's a bit hacky.
+>>
+>> wouldn't be signing the hash, include the verifiication public key in
+>> initramfs more portable ?
+>>
+> Sorry, but I don't see how this is a better solution. You then have to
+> store two things somewhere: the hash and its signature. If the
+> fitImage is already signed - there's no reason to have a second
+> signature for the hash: it already comes from a trusted source.
+>
+> This would also inflate the size of the initramfs - not only would it
+> need to include the cryptsetup tools but also additional tools for
+> signature verification.
+
+
+The hash + signature doesn't need to be stored in initramfs in this case 
+but appended to the rootfs image.
+
+yes you would need in this case a signature verification tool inside 
+your initramfs and the corresponding public key.
+
+It is clearly much better than to poke around with circular dependencies.
+
+
+ From another point the veritysetup is not quite correct:
+
+veritysetup --data-block-size=1024 --hash-offset=$SIZE format $OUTPUT 
+$OUTPUT
+
+
+If the size of your image is not 1K multiple then you are excluding the 
+last block!
+
+Mit freundlichen Grüßen / Kind regards
+
+-- 
+Ayoub Zaki
+Embedded Systems Consultant
+
+Vaihinger Straße 2/1
+D-71634 Ludwigsburg
+
+
+Mobile   : +4917662901545
+Email    : ayoub.zaki@embexus.com
+Homepage : https://embexus.com
+VAT No.  : DE313902634
+
+
+--------------FADA76ED155AE172E1DF34DA
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p>Hi,<br>
+    </p>
+    <div class="moz-cite-prefix">On 14.04.20 11:05, Bartosz Golaszewski
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+cite="mid:CAMRc=MeJOmwqPnZbgT-XugtQRU8okQMPGvgWx+cjnMw=1WyM=A@mail.gmail.com">
+      <pre class="moz-quote-pre" wrap="">pon., 13 kwi 2020 o 12:58 Ayoub Zaki <a class="moz-txt-link-rfc2396E" href="mailto:ayoub.zaki@embexus.com">&lt;ayoub.zaki@embexus.com&gt;</a> napisał(a):
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">
+
+basically this class generate a dm-verity hash that needs to be injected
+inside the initramfs...it's a bit hacky.
+
+wouldn't be signing the hash, include the verifiication public key in
+initramfs more portable ?
+
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+Sorry, but I don't see how this is a better solution. You then have to
+store two things somewhere: the hash and its signature. If the
+fitImage is already signed - there's no reason to have a second
+signature for the hash: it already comes from a trusted source.
+
+This would also inflate the size of the initramfs - not only would it
+need to include the cryptsetup tools but also additional tools for
+signature verification.</pre>
+    </blockquote>
+    <p><br>
+    </p>
+    The hash + signature doesn't need to be stored in initramfs in this
+    case but appended to the rootfs image.<br>
+    <br>
+    yes you would need in this case a signature verification tool inside
+    your initramfs and the corresponding public key.<br>
+    <br>
+    It is clearly much better than to poke around with circular
+    dependencies.<br>
+    <br>
+    <br>
+    From another point the veritysetup is not quite correct:<br>
+    <br>
+    veritysetup --data-block-size=1024 --hash-offset=$SIZE format
+    $OUTPUT $OUTPUT <br>
+    <br>
+    <br>
+    If the size of your image is not 1K multiple then you are excluding
+    the last block!<br>
+    <p><span style="color: rgb(36, 41, 46); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, monospace; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(230, 255, 237); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">
+</span></p>
+    <p><span style="color: rgb(36, 41, 46); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, monospace; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(230, 255, 237); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">
+</span></p>
+    <pre class="moz-signature" cols="72">Mit freundlichen Grüßen / Kind regards
+
+-- 
+Ayoub Zaki
+Embedded Systems Consultant
+
+Vaihinger Straße 2/1
+D-71634 Ludwigsburg
+
+
+Mobile   : +4917662901545
+Email    : <a class="moz-txt-link-abbreviated" href="mailto:ayoub.zaki@embexus.com">ayoub.zaki@embexus.com</a>
+Homepage : <a class="moz-txt-link-freetext" href="https://embexus.com">https://embexus.com</a>
+VAT No.  : DE313902634</pre>
+  </body>
+</html>
+
+--------------FADA76ED155AE172E1DF34DA--
