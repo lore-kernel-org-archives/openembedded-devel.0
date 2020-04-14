@@ -1,97 +1,95 @@
-Received: from mail-il1-f182.google.com (mail-il1-f182.google.com [209.85.166.182])
- by mx.groups.io with SMTP id smtpd.web12.707.1586894785128806256
+Received: from mail-qv1-f43.google.com (mail-qv1-f43.google.com [209.85.219.43])
+ by mx.groups.io with SMTP id smtpd.web11.811.1586895065756216096
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Apr 2020 13:06:25 -0700
+ Tue, 14 Apr 2020 13:11:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@broadcom.com header.s=google header.b=bq3NlTRC;
- spf=pass (domain: broadcom.com, ip: 209.85.166.182, mailfrom: jonathan.richardson@broadcom.com)
-Received: by mail-il1-f182.google.com with SMTP id f82so999977ilh.8
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 13:06:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pMws+fnU;
+ spf=pass (domain: gmail.com, ip: 209.85.219.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f43.google.com with SMTP id 37so557533qvc.8
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 13:11:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=broadcom.com; s=google;
-        h=from:references:in-reply-to:mime-version:thread-index:date
-         :message-id:subject:to;
-        bh=NG/vs2lgDLLqbKTVSCDwt5QriisJ93EUZF5MRKx8aCQ=;
-        b=bq3NlTRC9FJorYjcm71i3lqQQwobUIwErsa9wX+dOaXhoW3xZI0gjtvt6CPfT42fPO
-         j47FvAQGptQ09YHLCU41z46f7L3U7HMzlsCMKtVjRmzrkOBOrEGey3lEkYgRga/oK7Gp
-         vgkAvfddZhFvDmq1K5WDBZRSx3j++Gq/Tt8xg=
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=JU4JDINrti7u7Q4gHJ9ZezjzJ2y+gCvsKu1CdcSHZR8=;
+        b=pMws+fnUUfhFpZ1DY8lG1LQCLUi/+5mqcoTo0UD3DAIEzjwp4mbxlO9X0iClHd9aO5
+         DzrqPK+81SvIVUcKm6lFXgtC0dU6UffZpLm5HMI8KslbldTvh2mMtuasJm2snpW7vwK1
+         pQgkPp/q+KLdcT5PRVryF5yuz4Uhf6uJSMcJgB5pZsAbbS1fw6NoI5b7+CIQLIxJHuLY
+         L0vfbLMcM6vtoqWhfXNoxuC4PgI1iqG+xyd3dR9ekCyOZO17aifpj1+e+78G9og+oisS
+         X1/J7cwln5zzRYWi8Q9DZztjj4wbSVRslLC/7sVKmhuXZtoOMx4B7R0FGsaA+kCgUwY9
+         xwpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:references:in-reply-to:mime-version
-         :thread-index:date:message-id:subject:to;
-        bh=NG/vs2lgDLLqbKTVSCDwt5QriisJ93EUZF5MRKx8aCQ=;
-        b=eTlRwvOW/4LxS1QU4Z/Q3WuFvrwYS6GDYYeD2hWGOyl4Xl8xeIwYfwaef8XvSCzGjM
-         DpCkugVlTbKDyty01t9C4t9zHWdRdu2F3D6XTY6YGfd9edVJYQZ7nQ5hxYEOFOvo/AMz
-         WL/UgY9m3UhIUBxtaXeGWQriPCkBj0lsgrg/ZYqvISiPu7QI/q6jytzToxWyINOmoPdd
-         QO/6OHcM6AfPTByJhIvQJYxtNFnTeIRMxFOB4OxG6bKZhWOvHBOG88cXqawknN0OCkN8
-         Dyh9hJZL/SW+yFnt7Lk1UXbIiQ+ZRtxm+yr4q0FhO4mL0gEFB6ASdmzbuhEjQYorcMTB
-         0/4g==
-X-Gm-Message-State: AGi0PubmrRdzeZFJXnVjerrBPIhnpRB/oB6DnQnqIkSUaiUTcKSG3Kid
-	cRlRF8M0DO938CITYraAwr2a0w7Mbd+SD91k4Moljw==
-X-Google-Smtp-Source: APiQypLvPIG5bney9XRtTcSjTzzuxk3NXBkg0V6opwZNE3lqpa1LGPKDBuTbdAUdtf83+LwRR4udb91TOtmn9VSrcz4=
-X-Received: by 2002:a05:6e02:c94:: with SMTP id b20mr2131094ile.39.1586894784559;
- Tue, 14 Apr 2020 13:06:24 -0700 (PDT)
-From: "Jonathan Richardson" <jonathan.richardson@broadcom.com>
-References: <20200414185217.24503-1-abhishek.shah@broadcom.com>
-In-Reply-To: <20200414185217.24503-1-abhishek.shah@broadcom.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=JU4JDINrti7u7Q4gHJ9ZezjzJ2y+gCvsKu1CdcSHZR8=;
+        b=qJCpTRgK+LfmE0EZ8tfr8QI636lnswPJGgtc1SRxeKJouchI+aYcmMsxUGX13Zw71g
+         uoeW7dTHcsZ8fGKl3yCrKBOd7RBw+LuAVfekwoKgt52ifpexaLOGSZZ2aQt92zF4uCzm
+         MJuyhr3y4gBrC6sFwcOeyDXj5yw8pTnqbnqVrqZbI0zeq3J+zT5vYJ0T4AqQHTkJUEuf
+         ka8K++OYmhPlcHeCdYxQUxP+yPJ7PrtmF1eiPRMsd49y2dafPr7aBZgH7leXso0JbhPI
+         Wxp0ljGxi45q6+4OA+aB+7WRPXWGVbN/YHE3lXVG+cxXCb4hqlnBZ7AI0jaicXPiwgbU
+         iwCQ==
+X-Gm-Message-State: AGi0PubLOT4iuS3foRj6yo/CHQ57w7ZPTQnhSwTjc2cOLnF58zoDjZLH
+	wrHw2AsGbQDgqNikFj9j1DmbLqft8zDWsGTYm40=
+X-Google-Smtp-Source: APiQypL+7BmBArjWw0jTP7jjxKD+RO+45JJFncek5DzM9k/v1MaVWcB1KYMy80KTs7+BonZ9SPzGUFvwqwEjTS2Ntng=
+X-Received: by 2002:ad4:4182:: with SMTP id e2mr1784019qvp.61.1586895064683;
+ Tue, 14 Apr 2020 13:11:04 -0700 (PDT)
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 14.0
-Thread-Index: AQH2CRpEPaFUZhpcm9qm7caE3L3Gl6g5HerQ
-Date: Tue, 14 Apr 2020 13:06:23 -0700
-Message-ID: <7fe36226fc767ae1af8e65448319d78c@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH v2 1/2] python-dateutil: Add six package as runtime dependency
-To: abhishek.shah@broadcom.com, openembedded-devel@lists.openembedded.org
+References: <20200414171527.29279-1-abhishek.shah@broadcom.com>
+In-Reply-To: <20200414171527.29279-1-abhishek.shah@broadcom.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Tue, 14 Apr 2020 13:10:38 -0700
+Message-ID: <CAMKF1spvWKVq1EaVjOKtg5WnK2Mjg3Okg0mgs=f9bSgY1B4tvg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/2] python-dateutil: Add six package as runtime dependency
+To: abhishek.shah@broadcom.com
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
------Original Message-----
-From: openembedded-devel@lists.openembedded.org
-[mailto:openembedded-devel@lists.openembedded.org] On Behalf Of Abhishek
-Shah via lists.openembedded.org
-Sent: Tuesday, April 14, 2020 11:52 AM
-To: openembedded-devel@lists.openembedded.org
-Cc: Abhishek Shah
-Subject: [oe] [meta-python][PATCH v2 1/2] python-dateutil: Add six package
-as runtime dependency
+On Tue, Apr 14, 2020 at 10:15 AM Abhishek Shah via
+lists.openembedded.org
+<abhishek.shah=broadcom.com@lists.openembedded.org> wrote:
+>
+> dateutil package has runtime dependency on "six" package for native version
+> as well, as shown in error log below, fix the same:
+>
+> |     File "poky/build/tmp/work/*/recipe-sysroot-native/usr/lib/python3.8/
+>                 site-packages/pykwalify/core.py", line 25, in <module>
+> |       from dateutil.parser import parse
+> |     File "poky/build/tmp/work/*/recipe-sysroot-native/usr/lib/python3.8/
+>                 site-packages/dateutil/parser/__init__.py", line 2, in <module>
+> |       from ._parser import parse, parser, parserinfo, ParserError
+> |     File "poky/build/tmp/work/*/recipe-sysroot-native/usr/lib/python3.8/
+>                 site-packages/dateutil/parser/_parser.py", line 42, in <module>
+> |       import six
+> |
+> |   ModuleNotFoundError: No module named 'six'
+>
+> Signed-off-by: Abhishek Shah <abhishek.shah@broadcom.com>
+>
+> diff --git a/meta-python/recipes-devtools/python/python-dateutil.inc b/meta-python/recipes-devtools/python/python-dateutil.inc
+> index 3c89cd62c..40f406f50 100644
+> --- a/meta-python/recipes-devtools/python/python-dateutil.inc
+> +++ b/meta-python/recipes-devtools/python/python-dateutil.inc
+> @@ -15,10 +15,13 @@ FILES_${PN}-zoneinfo = "${libdir}/${PYTHON_DIR}/site-packages/dateutil/zoneinfo"
+>
+>  DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+>
+> +RDEPENDS_${PN} = "\
+> +    ${PYTHON_PN}-six \
+> +"
+> +
+>  RDEPENDS_${PN}_class-target = "\
 
-dateutil package has runtime dependency on "six" package for native version
-as well, as shown in error log below, fix the same:
+This should perhaps be turned into RDEPENDS_${PN}_append_class-target
+with this change because we will still need it on target
 
-|     File
-| "poky/build/tmp/work/*/recipe-sysroot-native/usr/lib/python3.8/
-		site-packages/pykwalify/core.py", line 25, in <module>
-|       from dateutil.parser import parse
-|     File
-| "poky/build/tmp/work/*/recipe-sysroot-native/usr/lib/python3.8/
-		site-packages/dateutil/parser/__init__.py", line 2, in <module>
-|       from ._parser import parse, parser, parserinfo, ParserError
-|     File
-| "poky/build/tmp/work/*/recipe-sysroot-native/usr/lib/python3.8/
-		site-packages/dateutil/parser/_parser.py", line 42, in <module>
-|       import six
-|
-|   ModuleNotFoundError: No module named 'six'
-
-Signed-off-by: Abhishek Shah <abhishek.shah@broadcom.com>
-
-diff --git a/meta-python/recipes-devtools/python/python-dateutil.inc
-b/meta-python/recipes-devtools/python/python-dateutil.inc
-index 3c89cd62c..40f406f50 100644
---- a/meta-python/recipes-devtools/python/python-dateutil.inc
-+++ b/meta-python/recipes-devtools/python/python-dateutil.inc
-@@ -15,10 +15,13 @@ FILES_${PN}-zoneinfo =
-"${libdir}/${PYTHON_DIR}/site-packages/dateutil/zoneinfo"
-
- DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
-
-+RDEPENDS_${PN} = "\
-+    ${PYTHON_PN}-six \
-+"
-+
- RDEPENDS_${PN}_class-target = "\
-     ${PYTHON_PN}-datetime \
-     ${PYTHON_PN}-numbers \
--    ${PYTHON_PN}-six \
-     ${PYTHON_PN}-stringold \
- "
-
-These should probably all be RDEPENDS instead of class-target specific?
+>      ${PYTHON_PN}-datetime \
+>      ${PYTHON_PN}-numbers \
+> -    ${PYTHON_PN}-six \
+>      ${PYTHON_PN}-stringold \
+>  "
+>
+> --
+> 2.17.1
+>
+> 
