@@ -1,98 +1,96 @@
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web10.892.1586895479425918230
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
+ by mx.groups.io with SMTP id smtpd.web10.3677.1586903925202702990
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Apr 2020 13:17:59 -0700
+ Tue, 14 Apr 2020 15:38:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=lUbmOmad;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id g12so7964137wmh.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 13:17:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=S15POFpr;
+ spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f195.google.com with SMTP id x66so15241940qkd.9
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 15:38:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=241e7jOgS7BCGDMzJq5UQ0fF0Yc1WrUAgeFpPSsJg4A=;
-        b=lUbmOmadpCS5AzQNpaQmelk1aIi1KPwKzw5OZB8IQ6AmyHs8gmZbHpxITuDgawPA/m
-         6g+3DHfgEoVOzQMwL3za0Gx+3PV8mAsNp6Y4K4HaxQsElIaQqQrCO13d9w4aOfc7vOA7
-         /urN6+f3azYlYqWoQyyB6UsSN48BM8EvTwV8Gcfzh7aBcx03SMBa3ofESXeyW170W7un
-         BaaP/nhOQ6e8wL/MoOechaZgfAipX+VGQkhJf4JwRItviqyKrPzXZd3WnvbzF2MfWVVa
-         9bLPcoJNfXVSIlzPnKyvAb24KrF5+UwLRcaTeGTPdKGLAHbXIlu9Rmh+qOIheI2f/9gB
-         hzmg==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Qk55Hk+V0lDQrmZlvlOZVScr4zoeNyPHZx6Y38y9j7A=;
+        b=S15POFprelJu5qu7YwTcQvf9LVmzrhjARZ7oOuxcwwTzBqKh6GC74Bnpjre+m9uNNR
+         pwUVU7B7D58tNF/Fp8JdHghsHshT39tyb+gYTT+bEwTv+v8CkssZhgc4nj3yvWIOCBe8
+         72iNZHeEmg0L2IlbIWeUB2nrgA3GmTqcCD54eApjzh7WuiN0bucTnVtAs4/ZxDoBMaYd
+         njpcHcAFrxj9ufE0ZNYVseEDayJnrPIrCzvUaBugPdC4XLgIm1qjH8QvxQQR1VTWh6Jo
+         a7sfcqybuqacS+EJVAq1lFiN7gjfSq/ZjomuurDp5NaN9cQ5RLnvt3dZ3uNmkRPZZOmO
+         Wg7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=241e7jOgS7BCGDMzJq5UQ0fF0Yc1WrUAgeFpPSsJg4A=;
-        b=LeU1piMS9YRXwaXfw97GE9bwfx8AiSBPoH5JrHRy3C2VLi/6sLSgF2+gk2jxS1gIcM
-         oMe0rfJafAiDs1VcR+mpO6kGKlyFpqfOjdpNZWjuV6M/HjmAw2lyvhicux6LUs92sOAh
-         o9j0Vj1lCZNFss9L/d4KHdE0vLv+rKNjLC7MXHeE3NFLO6XhLnSJGzMfp8ctqHq/RZQg
-         wmN1+VIxej1Maf5ueAQH0vtExwvL3kbx9JMGkp/B5JILoE8t4HNNVByt2jbrr2sZFl3i
-         ail+Z5PKaU7SPWpsRBC2own9B+hrLHrTgaKBylnKQHUZGctGx2lLBz1au5F2ys6lKM4P
-         snRg==
-X-Gm-Message-State: AGi0PuafCq5kVc0PGirF+bgQy2UGHWD9X/TZmM0+gHYSNKF63T2Ee54K
-	3bMd60EWgvba6RcPh3bnSyqWkNW1Wa8=
-X-Google-Smtp-Source: APiQypLIeIVsX0MT08xAr66iDX2MabBaT0duP0Yzgu2gI/4RfcyaFQPblgjrBnNGL0iOLpJGbEVYeQ==
-X-Received: by 2002:a1c:4989:: with SMTP id w131mr1604307wma.137.1586895477766;
-        Tue, 14 Apr 2020 13:17:57 -0700 (PDT)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300F07F0C2E51E8849BADA5B2D5E3.dip0.t-ipconnect.de. [2003:f0:7f0c:2e51:e884:9bad:a5b2:d5e3])
-        by smtp.gmail.com with ESMTPSA id 145sm21115425wma.1.2020.04.14.13.17.56
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Apr 2020 13:17:57 -0700 (PDT)
-From: "Andreas M?ller" <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 4/4] xfce4-settings: upgrade 4.14.2 -> 4.14.3
-Date: Tue, 14 Apr 2020 22:17:45 +0200
-Message-Id: <20200414201745.19390-4-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.1
-In-Reply-To: <20200414201745.19390-1-schnitzeltony@gmail.com>
-References: <20200414201745.19390-1-schnitzeltony@gmail.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Qk55Hk+V0lDQrmZlvlOZVScr4zoeNyPHZx6Y38y9j7A=;
+        b=COkXkLWP4vF4x+q68JhIfuYmg5UStmZVBa0ckoGQ22pTJjOUCqwM1YFOIbRJXIuW86
+         SPPSpp7vieaaNf+9n98iIljZyHvMC981RSd0RFam4PTsGWEeBN8ikBRnj5nS6zQhf6/A
+         Xr5psAcn6713+ah7krFUHC/JB7GCwhOKfB9w2Zx7KxJEErbCqbXGqLYEILjqkZLsCy8W
+         dIk4s5ukxJAEQuNmaG9Y5xOpEWiaQnFEFCttlrB63fFsPUiAoyVDul0+jgAMpaPE3uXe
+         mrH1KGx7vKy27q7jmAcpS1UD7Stipe0Bxn2k/IfMxn5q7U9B56JIGvZc2A11DJ9a0tw/
+         h9Mw==
+X-Gm-Message-State: AGi0PuYmrgV9ohEw/Nd+GDp497eSmCLbIk+mYTYrTMsnkOrF2ROCqFxr
+	U12LGTtfjW8+S4q9bPW2d8PVy+1mlgKMLbum+sg=
+X-Google-Smtp-Source: APiQypLr/xZAj7CnZvanwMEvKUNmpa2mwq7Wg5fUozjh05FucFKmbr79zaIErVSoOzezaUXJ+3GwdnGitQ7MfsVtfyE=
+X-Received: by 2002:a37:7143:: with SMTP id m64mr11669378qkc.215.1586903924027;
+ Tue, 14 Apr 2020 15:38:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20200414194933.31798-1-trevor.gamblin@windriver.com>
+In-Reply-To: <20200414194933.31798-1-trevor.gamblin@windriver.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Tue, 14 Apr 2020 15:38:17 -0700
+Message-ID: <CAMKF1sps=ihwMcTFkSBTSdtZDbGEfotpjbje9hhdaAkv=g4X9w@mail.gmail.com>
+Subject: Re: [oe] [meta-webserver][PATCH] apache2: upgrade 2.4.41 -> 2.4.43
+To: Trevor Gamblin <trevor.gamblin@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Release notes for 4.14.3
-========================
-This is a bugfix release.
+apache-websockets does not like it
 
-General:
-- display: Allow resizing of minimal dialog (Bug #15450)
-- display: Use proper fallback configuration on "apply" and "toggle off"
-(Bug #16476)
-- keyboard: Fix crash when editing shortcut (Bug #15958)
-- keyboard: Fix log flood (bug #16521)
-- settings-manager: Make sure content determines size
-- xfsettingsd: Handle failure to get Xkl engine for display (Bug
+https://errors.yoctoproject.org/Errors/Details/403771/
 
-Translation Updates:
-Albanian, Asturian, Belarusian, Belarusian (Tarask), Catalan, Hebrew,
-Kazakh, Malay, Portuguese, Swedish, Ukrainian
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../{xfce4-settings_4.14.2.bb => xfce4-settings_4.14.3.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/xfce4-settings/{xfce4-settings_4.14.2.bb => xfce4-settings_4.14.3.bb} (89%)
-
-diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.14.2.bb b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.14.3.bb
-similarity index 89%
-rename from meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.14.2.bb
-rename to meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.14.3.bb
-index 8013b929f..08c612aa7 100644
---- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.14.2.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.14.3.bb
-@@ -11,8 +11,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
- SRC_URI += " \
-     file://0001-xsettings.xml-Set-default-themes.patch \
- "
--SRC_URI[md5sum] = "c4816eeb518414255ead805fe220acf1"
--SRC_URI[sha256sum] = "ebf70ff83e4fd0cb33fa0c3e871ca4df5127a505b30b83a6f780cf3f181b0af5"
-+SRC_URI[md5sum] = "fe8f7d4221be1467b85c8539344c3f07"
-+SRC_URI[sha256sum] = "cab1a4d5351f9871533700523570f86f92bbe6e4055f44e5df950eb4b4f48bb3"
- 
- EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
- 
--- 
-2.21.1
-
+On Tue, Apr 14, 2020 at 12:49 PM Trevor Gamblin
+<trevor.gamblin@windriver.com> wrote:
+>
+> LICENSE file was updated due to a typo fix.
+>
+> Note that this upgrade fixes two CVES affecting versions
+> 2.4.41 and earlier:
+>
+> CVE: CVE-2020-1927
+> CVE: CVE-2020-1934
+>
+> See:
+> https://nvd.nist.gov/vuln/detail/CVE-2020-1927
+> https://nvd.nist.gov/vuln/detail/CVE-2020-1934
+>
+> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>  .../apache2/{apache2_2.4.41.bb => apache2_2.4.43.bb}        | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.41.bb => apache2_2.4.43.bb} (97%)
+>
+> diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
+> similarity index 97%
+> rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
+> rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
+> index a34734c20..2fff153fc 100644
+> --- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
+> +++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
+> @@ -24,9 +24,9 @@ SRC_URI_append_class-target = " \
+>             file://volatiles.04_apache2 \
+>             "
+>
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=d52d0fd0bc788f068e647116c01ddfcd"
+> -SRC_URI[md5sum] = "dfc674f8f454e3bc2d4ccd73ad3b5f1e"
+> -SRC_URI[sha256sum] = "133d48298fe5315ae9366a0ec66282fa4040efa5d566174481077ade7d18ea40"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
+> +SRC_URI[md5sum] = "791c986b1e70fe61eb44060aacc89a64"
+> +SRC_URI[sha256sum] = "a497652ab3fc81318cdc2a203090a999150d86461acff97c1065dc910fe10f43"
+>
+>  S = "${WORKDIR}/httpd-${PV}"
+>
+> --
+> 2.17.1
+>
+> 
