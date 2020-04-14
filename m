@@ -1,81 +1,65 @@
-Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com [209.85.216.68])
- by mx.groups.io with SMTP id smtpd.web11.890.1586890363893570110
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web10.306.1586893775241114180
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Apr 2020 11:52:43 -0700
+ Tue, 14 Apr 2020 12:49:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@broadcom.com header.s=google header.b=f7QDdoiR;
- spf=pass (domain: broadcom.com, ip: 209.85.216.68, mailfrom: abhishek.shah@broadcom.com)
-Received: by mail-pj1-f68.google.com with SMTP id e16so5394806pjp.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 11:52:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=broadcom.com; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=OAY4e+NSNfYZ7abMicASy+LpaGc6pMmet+FMYR/4gHo=;
-        b=f7QDdoiRCdYoRDd3uIK4/uNsF0yobzciQ7fPr+ElI4Zzs62dKqgIbYep1fAVXGvK21
-         /yPEA6HbILdiPjKxoTpObhRD/1RnqBLd/Txq/QnFo0V1MunaDwGPZDVueRXPKhrwnw8W
-         SH8jFoNtfpGFD3DjPg29LbwzOI0WYXuo7WJlE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=OAY4e+NSNfYZ7abMicASy+LpaGc6pMmet+FMYR/4gHo=;
-        b=HgdxqJW+3QiG6GEg8xOHSCmvKBXEqk+Gz7invqglGTUwbkASRyG+BIBVFpl4jE/yeZ
-         jfxExbR+5UJGWuvNZJ36ED7MqdNPwqN7W+lJJcV8jNxRWgWPSGHs80reOnKpnHkA8JKa
-         lPO6MAmkXOC42qc+RQSeXx2f/60h5cPHqfZeKNaftRwxkckwXVnVJxem5L8iwLWrxiDa
-         vY0vveAusjGu0aO7eWzYmhgObMOjZQ0j8z6ZuqhxsNfr0s2QHliaJNk5OlADZgguYxZh
-         GnrfnIJG0zf5svm0gEvRI3PIwXKH0RXFca0jBSQLCAs02H4gH7MCVuq3GBWNJmPsufTz
-         mU4g==
-X-Gm-Message-State: AGi0PuZTrCqq5wkgsMDFnvvD1HnvE/0QSmLi6wMuzcXm7xgICuLUj+mZ
-	/OVwpHnra4GYcl5ryq51rmmcu5rKALJ+qKJP3MjkeBjLr/IYvlvW4txjIz+ZXbN5tIXq3xVjR3F
-	NdcdvnsS8oS42EUpUdDHEUtRae6pH735coAhPAtw0sVf8CT+e5JQLxDQQAFsUKXgbvXoZyjHzXA
-	OMT0Ha4pLIdiRFA/Zg0wTMkck=
-X-Google-Smtp-Source: APiQypKp/dj7m/GmwKJlNokWAqiWstLgZdB1VE9Z2MtmXDNdcoGORxNBmQKG6AuifbotmprjlgYlOw==
-X-Received: by 2002:a17:902:9f8f:: with SMTP id g15mr1236682plq.221.1586890362721;
-        Tue, 14 Apr 2020 11:52:42 -0700 (PDT)
-Return-Path: <abhishek.shah@broadcom.com>
-Received: from ashah1-OptiPlex-7010.ibn.broadcom.net ([192.19.234.250])
-        by smtp.gmail.com with ESMTPSA id c59sm12851301pje.10.2020.04.14.11.52.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Apr 2020 11:52:42 -0700 (PDT)
-From: "Abhishek Shah" <abhishek.shah@broadcom.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Abhishek Shah <abhishek.shah@broadcom.com>
-Subject: [meta-python][PATCH v2 2/2] python3-pykwalify: Add recipe for v1.7.0
-Date: Wed, 15 Apr 2020 00:22:17 +0530
-Message-Id: <20200414185217.24503-2-abhishek.shah@broadcom.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: tgamblin@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 03EJnXCj005634
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 12:49:34 -0700 (PDT)
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Tue, 14 Apr 2020
+ 12:49:33 -0700
+Received: by ala-lpggp3.wrs.com (Postfix, from userid 20958)	id 73915900D14;
+ Tue, 14 Apr 2020 12:49:33 -0700 (PDT)
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-webserver][PATCH] apache2: upgrade 2.4.41 -> 2.4.43
+Date: Tue, 14 Apr 2020 12:49:33 -0700
+Message-ID: <20200414194933.31798-1-trevor.gamblin@windriver.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200414185217.24503-1-abhishek.shah@broadcom.com>
-References: <20200414185217.24503-1-abhishek.shah@broadcom.com>
+MIME-Version: 1.0
+Content-Type: text/plain
 
-Description of the package can be found at:
-https://pypi.org/project/pykwalify/
+LICENSE file was updated due to a typo fix.
 
-Signed-off-by: Abhishek Shah <abhishek.shah@broadcom.com>
+Note that this upgrade fixes two CVES affecting versions
+2.4.41 and earlier:
 
-diff --git a/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb b/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
-new file mode 100644
-index 000000000..1107502ca
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "YAML/JSON validation library"
-+DESCRIPTION = "pykwalify is a schema validator for YAML and JSON"
-+HOMEPAGE = "https://pypi.org/project/pykwalify/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a72ea5159364a2cd7f45c6dcbee37872"
-+
-+SRC_URI[md5sum] = "58357f1d0f77de976e73dbd3660af75b"
-+SRC_URI[sha256sum] = "7e8b39c5a3a10bc176682b3bd9a7422c39ca247482df198b402e8015defcceb2"
-+
-+PYPI_PACKAGE = "pykwalify"
-+inherit setuptools3 pypi
-+
-+RDEPENDS_${PN} = "\
-+    ${PYTHON_PN}-dateutil \
-+    ${PYTHON_PN}-pyyaml \
-+"
-+
-+BBCLASSEXTEND = "native"
+CVE: CVE-2020-1927
+CVE: CVE-2020-1934
+
+See:
+https://nvd.nist.gov/vuln/detail/CVE-2020-1927
+https://nvd.nist.gov/vuln/detail/CVE-2020-1934
+
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+---
+ .../apache2/{apache2_2.4.41.bb => apache2_2.4.43.bb}        | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.41.bb => apache2_2.4.43.bb} (97%)
+
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
+similarity index 97%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
+index a34734c20..2fff153fc 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
+@@ -24,9 +24,9 @@ SRC_URI_append_class-target = " \
+            file://volatiles.04_apache2 \
+            "
+ 
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=d52d0fd0bc788f068e647116c01ddfcd"
+-SRC_URI[md5sum] = "dfc674f8f454e3bc2d4ccd73ad3b5f1e"
+-SRC_URI[sha256sum] = "133d48298fe5315ae9366a0ec66282fa4040efa5d566174481077ade7d18ea40"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
++SRC_URI[md5sum] = "791c986b1e70fe61eb44060aacc89a64"
++SRC_URI[sha256sum] = "a497652ab3fc81318cdc2a203090a999150d86461acff97c1065dc910fe10f43"
+ 
+ S = "${WORKDIR}/httpd-${PV}"
+ 
 -- 
 2.17.1
 
