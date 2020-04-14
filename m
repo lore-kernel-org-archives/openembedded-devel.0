@@ -1,85 +1,81 @@
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web10.847.1586890356299979856
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com [209.85.216.68])
+ by mx.groups.io with SMTP id smtpd.web11.890.1586890363893570110
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Apr 2020 11:52:36 -0700
+ Tue, 14 Apr 2020 11:52:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@broadcom.com header.s=google header.b=hRF+Lzz+;
- spf=pass (domain: broadcom.com, ip: 209.85.210.174, mailfrom: abhishek.shah@broadcom.com)
-Received: by mail-pf1-f174.google.com with SMTP id v23so360890pfm.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 11:52:36 -0700 (PDT)
+ dkim=pass header.i=@broadcom.com header.s=google header.b=f7QDdoiR;
+ spf=pass (domain: broadcom.com, ip: 209.85.216.68, mailfrom: abhishek.shah@broadcom.com)
+Received: by mail-pj1-f68.google.com with SMTP id e16so5394806pjp.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 11:52:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=broadcom.com; s=google;
-        h=from:to:cc:subject:date:message-id;
-        bh=cGjoFPzwP3z6qOIakGqNQ9Mnzr7Gk1vjFXoy8u3yagA=;
-        b=hRF+Lzz+WxsvtUOkW561tMbrq9tpyD2cEr4mvuYeP5tv2/cHvMC9WTdJIkwrnGrdbu
-         6OI6Bse8wWczonnu5rmXOdaNraby6IHHgrt2v82hXv5su8g3IfpYjgtfMe8aKeoPW+UA
-         fv6apLTjQIo4I5CtGS3qZeoO3E0AIOxgKYGyo=
+        h=from:to:cc:subject:date:message-id:in-reply-to:references;
+        bh=OAY4e+NSNfYZ7abMicASy+LpaGc6pMmet+FMYR/4gHo=;
+        b=f7QDdoiRCdYoRDd3uIK4/uNsF0yobzciQ7fPr+ElI4Zzs62dKqgIbYep1fAVXGvK21
+         /yPEA6HbILdiPjKxoTpObhRD/1RnqBLd/Txq/QnFo0V1MunaDwGPZDVueRXPKhrwnw8W
+         SH8jFoNtfpGFD3DjPg29LbwzOI0WYXuo7WJlE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=cGjoFPzwP3z6qOIakGqNQ9Mnzr7Gk1vjFXoy8u3yagA=;
-        b=GzonzgMN2fpn32XvnZKjpo2Z8NNjqMGLKxvOtDXqC5oIzj0X7UCLWJoQ0oeI0o23EK
-         aFswEybe+3XHQ1IjNGjrb/bcGIauJrI1WhMTKDHgPp1G6ZiNnrEvUQGNDBAAPtdRrUyv
-         6HWM1pasShjM0olBfNwv7k4gPGMaNAy4hLa1kCSE7kKqItpdq7gdxfaUL2lqTgTE3478
-         3Q0Y8iMUJlT9GAY2drq/BIKj9pTw4sKl9SpUmjkLDS4HcRvGKT0rPyzgblKD5tKeqqYa
-         rSvdwqckg16WOMj6OVM6koO07SpiYPXhq3NCNgjw9cWNtNkHZivOaAxfgJBFnjwm6O/F
-         LwKw==
-X-Gm-Message-State: AGi0PuYf+z+KkP37naTTt9NldtMMHR5rJ1t646IQ9MyA7E7SatVo6BAQ
-	sh09n496h3+FeDTraFRECprMhagek2DFXpuCTAAM2zjc/OTwxiBhuMPQhExmpLxgVfTnnw/heBh
-	2BPpEk21CupTliusYAv+UaSFagSnU84DBDUxcnu4k6Xdl1JSWz0Ima+cS2GMRCLB6lgJ6qo5CH6
-	RMi0n7Jqmc9HNdW/EbEKNuSvY=
-X-Google-Smtp-Source: APiQypIlpHx4K6cNfWPoWYe/dPfIOjqEn+YA/uwlHKX83JXky1ZwJKASQl/6EQqi+1t4d7atHcF2ZA==
-X-Received: by 2002:a63:1d52:: with SMTP id d18mr22452772pgm.443.1586890354946;
-        Tue, 14 Apr 2020 11:52:34 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references;
+        bh=OAY4e+NSNfYZ7abMicASy+LpaGc6pMmet+FMYR/4gHo=;
+        b=HgdxqJW+3QiG6GEg8xOHSCmvKBXEqk+Gz7invqglGTUwbkASRyG+BIBVFpl4jE/yeZ
+         jfxExbR+5UJGWuvNZJ36ED7MqdNPwqN7W+lJJcV8jNxRWgWPSGHs80reOnKpnHkA8JKa
+         lPO6MAmkXOC42qc+RQSeXx2f/60h5cPHqfZeKNaftRwxkckwXVnVJxem5L8iwLWrxiDa
+         vY0vveAusjGu0aO7eWzYmhgObMOjZQ0j8z6ZuqhxsNfr0s2QHliaJNk5OlADZgguYxZh
+         GnrfnIJG0zf5svm0gEvRI3PIwXKH0RXFca0jBSQLCAs02H4gH7MCVuq3GBWNJmPsufTz
+         mU4g==
+X-Gm-Message-State: AGi0PuZTrCqq5wkgsMDFnvvD1HnvE/0QSmLi6wMuzcXm7xgICuLUj+mZ
+	/OVwpHnra4GYcl5ryq51rmmcu5rKALJ+qKJP3MjkeBjLr/IYvlvW4txjIz+ZXbN5tIXq3xVjR3F
+	NdcdvnsS8oS42EUpUdDHEUtRae6pH735coAhPAtw0sVf8CT+e5JQLxDQQAFsUKXgbvXoZyjHzXA
+	OMT0Ha4pLIdiRFA/Zg0wTMkck=
+X-Google-Smtp-Source: APiQypKp/dj7m/GmwKJlNokWAqiWstLgZdB1VE9Z2MtmXDNdcoGORxNBmQKG6AuifbotmprjlgYlOw==
+X-Received: by 2002:a17:902:9f8f:: with SMTP id g15mr1236682plq.221.1586890362721;
+        Tue, 14 Apr 2020 11:52:42 -0700 (PDT)
 Return-Path: <abhishek.shah@broadcom.com>
 Received: from ashah1-OptiPlex-7010.ibn.broadcom.net ([192.19.234.250])
-        by smtp.gmail.com with ESMTPSA id c59sm12851301pje.10.2020.04.14.11.52.32
+        by smtp.gmail.com with ESMTPSA id c59sm12851301pje.10.2020.04.14.11.52.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Apr 2020 11:52:34 -0700 (PDT)
+        Tue, 14 Apr 2020 11:52:42 -0700 (PDT)
 From: "Abhishek Shah" <abhishek.shah@broadcom.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Abhishek Shah <abhishek.shah@broadcom.com>
-Subject: [meta-python][PATCH v2 1/2] python-dateutil: Add six package as runtime dependency
-Date: Wed, 15 Apr 2020 00:22:16 +0530
-Message-Id: <20200414185217.24503-1-abhishek.shah@broadcom.com>
+Subject: [meta-python][PATCH v2 2/2] python3-pykwalify: Add recipe for v1.7.0
+Date: Wed, 15 Apr 2020 00:22:17 +0530
+Message-Id: <20200414185217.24503-2-abhishek.shah@broadcom.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200414185217.24503-1-abhishek.shah@broadcom.com>
+References: <20200414185217.24503-1-abhishek.shah@broadcom.com>
 
-dateutil package has runtime dependency on "six" package for native version
-as well, as shown in error log below, fix the same:
-
-|     File "poky/build/tmp/work/*/recipe-sysroot-native/usr/lib/python3.8/
-		site-packages/pykwalify/core.py", line 25, in <module>
-|       from dateutil.parser import parse
-|     File "poky/build/tmp/work/*/recipe-sysroot-native/usr/lib/python3.8/
-		site-packages/dateutil/parser/__init__.py", line 2, in <module>
-|       from ._parser import parse, parser, parserinfo, ParserError
-|     File "poky/build/tmp/work/*/recipe-sysroot-native/usr/lib/python3.8/
-		site-packages/dateutil/parser/_parser.py", line 42, in <module>
-|       import six
-|
-|   ModuleNotFoundError: No module named 'six'
+Description of the package can be found at:
+https://pypi.org/project/pykwalify/
 
 Signed-off-by: Abhishek Shah <abhishek.shah@broadcom.com>
 
-diff --git a/meta-python/recipes-devtools/python/python-dateutil.inc b/meta-python/recipes-devtools/python/python-dateutil.inc
-index 3c89cd62c..40f406f50 100644
---- a/meta-python/recipes-devtools/python/python-dateutil.inc
-+++ b/meta-python/recipes-devtools/python/python-dateutil.inc
-@@ -15,10 +15,13 @@ FILES_${PN}-zoneinfo = "${libdir}/${PYTHON_DIR}/site-packages/dateutil/zoneinfo"
- 
- DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb b/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
+new file mode 100644
+index 000000000..1107502ca
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "YAML/JSON validation library"
++DESCRIPTION = "pykwalify is a schema validator for YAML and JSON"
++HOMEPAGE = "https://pypi.org/project/pykwalify/"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=a72ea5159364a2cd7f45c6dcbee37872"
++
++SRC_URI[md5sum] = "58357f1d0f77de976e73dbd3660af75b"
++SRC_URI[sha256sum] = "7e8b39c5a3a10bc176682b3bd9a7422c39ca247482df198b402e8015defcceb2"
++
++PYPI_PACKAGE = "pykwalify"
++inherit setuptools3 pypi
++
 +RDEPENDS_${PN} = "\
-+    ${PYTHON_PN}-six \
++    ${PYTHON_PN}-dateutil \
++    ${PYTHON_PN}-pyyaml \
 +"
 +
- RDEPENDS_${PN}_class-target = "\
-     ${PYTHON_PN}-datetime \
-     ${PYTHON_PN}-numbers \
--    ${PYTHON_PN}-six \
-     ${PYTHON_PN}-stringold \
- "
- 
++BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
