@@ -1,165 +1,70 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web11.4814.1586834302005717519
+Received: from mail-io1-f45.google.com (mail-io1-f45.google.com [209.85.166.45])
+ by mx.groups.io with SMTP id smtpd.web11.7560.1586855153902434947
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Apr 2020 20:18:22 -0700
+ Tue, 14 Apr 2020 02:05:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: mingli.yu@windriver.com)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 03E3IKBe023628
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Apr 2020 20:18:21 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
- 14.3.487.0; Mon, 13 Apr 2020 20:18:04 -0700
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] mce-test: switch to python3
-Date: Tue, 14 Apr 2020 11:18:03 +0800
-Message-ID: <20200414031803.425179-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.24.1
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=Eo+W9zMw;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.166.45, mailfrom: brgl@bgdev.pl)
+Received: by mail-io1-f45.google.com with SMTP id y17so12395896iow.9
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 02:05:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=jFHNLL+6t7HUM+pvYdd67hCCbjo3mpLIygMSHItLOZs=;
+        b=Eo+W9zMwRTYqTTBuvqn81fYIMcFbtzR12ysBRG6rNQtllBiNGsUOEP1uZE9jmXgvrU
+         GSrMVmVenAE2UrBK96A6Pcn3/smPjPZ+Ot6aPJT0isYgCMlEyiSLcsPZGHe33aHEEqYS
+         X379/Ny/yaAJSQDvddBh+Tsp5peLI9u73imJPDemd6mNo1FmziffUbGJGXk98ZuWjAFa
+         X8+UM2ETVKoKE+Th94iXBA7B5khKfCgxKm9gnU7VewcW3m7DB2ZC8+BMM2QBRrAHEDaM
+         1AR87LbE2kdAcnLYsePJ54M1u1/6pMF5k/glsQMti8G3626YOuQ+UvRqReZbYoVCkbeU
+         RAlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=jFHNLL+6t7HUM+pvYdd67hCCbjo3mpLIygMSHItLOZs=;
+        b=dGkGOPcdqpCUqsG4JiSUGDrlP4F7ZVGkgxhFU5whSDyFsW/+iY3cliooPRvTre4jSY
+         HqIlQ3+Y5IeYvu+/hlz81lwDLMzGGp7EYlFNMfYq4nNB523drCAPDZf7jYFCF5meq9Da
+         nJWmFBkKoQKU9kWQ5SC4gsbNu7EJ81jTZwBy4+5KqQ/Q34k0sFg787D12TNZ2QcZjizi
+         H0pCi3ivcab+niJhA7pW8gu8TKiGmX7bjbtXqTtlW1B4ZeCR/a9gwQ0n9ju5FsHn5o0E
+         XaoxOyRVhwwL0gnQKKiCuSNYoibm+KRwUunacGE4yXdobV4BCC2Qz7BoU5XpfbUSOrKo
+         iHPg==
+X-Gm-Message-State: AGi0PuaipTmwaHHL7o9K1PmDA1umTlQfZaX/UFDyhFckdrw8DBrqY5Jx
+	rTTYq6N49k9Qp/pOJCfYResCi8hmp2uuVlnP3KNeAFu5
+X-Google-Smtp-Source: APiQypI1M9X/bZKf7Gv5YXoMA/x6Inw5dcNqjo1dFoJf+QgZx544fn+pM6mK4Myn83VKjpfoih+tb16a8wg3A2DBQrg=
+X-Received: by 2002:a6b:248:: with SMTP id 69mr20497800ioc.130.1586855153133;
+ Tue, 14 Apr 2020 02:05:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+References: <20200410124135.24217-1-brgl@bgdev.pl> <20200410124135.24217-2-brgl@bgdev.pl>
+ <34f4335a-c9ed-a790-c683-3b6db93eceb7@embexus.com>
+In-Reply-To: <34f4335a-c9ed-a790-c683-3b6db93eceb7@embexus.com>
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+Date: Tue, 14 Apr 2020 11:05:42 +0200
+Message-ID: <CAMRc=MeJOmwqPnZbgT-XugtQRU8okQMPGvgWx+cjnMw=1WyM=A@mail.gmail.com>
+Subject: Re: [oe] [meta-security][RFC 1/2] classes: provide a class for generating dm-verity meta-data images
+To: Ayoub Zaki <ayoub.zaki@embexus.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Mingli Yu <mingli.yu@windriver.com>
+pon., 13 kwi 2020 o 12:58 Ayoub Zaki <ayoub.zaki@embexus.com> napisa=C5=82(=
+a):
+>
+>
+> basically this class generate a dm-verity hash that needs to be injected
+> inside the initramfs...it's a bit hacky.
+>
+> wouldn't be signing the hash, include the verifiication public key in
+> initramfs more portable ?
+>
 
-Make gcov_merge.py and scov_merge.py port to python3.
+Sorry, but I don't see how this is a better solution. You then have to
+store two things somewhere: the hash and its signature. If the
+fitImage is already signed - there's no reason to have a second
+signature for the hash: it already comes from a trusted source.
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- ...e.py-scov_merge.py-switch-to-python3.patch | 110 ++++++++++++++++++
- .../recipes-support/mcelog/mce-test_git.bb    |   1 +
- 2 files changed, 111 insertions(+)
- create mode 100644 meta-oe/recipes-support/mcelog/mce-test/0001-gcov_merge.py-scov_merge.py-switch-to-python3.patch
+This would also inflate the size of the initramfs - not only would it
+need to include the cryptsetup tools but also additional tools for
+signature verification.
 
-diff --git a/meta-oe/recipes-support/mcelog/mce-test/0001-gcov_merge.py-scov_merge.py-switch-to-python3.patch b/meta-oe/recipes-support/mcelog/mce-test/0001-gcov_merge.py-scov_merge.py-switch-to-python3.patch
-new file mode 100644
-index 000000000..969bfc17c
---- /dev/null
-+++ b/meta-oe/recipes-support/mcelog/mce-test/0001-gcov_merge.py-scov_merge.py-switch-to-python3.patch
-@@ -0,0 +1,110 @@
-+From 430982376a544bbccaef5006fab94bbc2f1d1711 Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Mon, 13 Apr 2020 07:12:44 +0000
-+Subject: [PATCH] gcov_merge.py/scov_merge.py: switch to python3
-+
-+Make gcov_merge.py and scov_merge.py port to python3.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ tools/scripts/gcov_merge.py | 12 ++++++------
-+ tools/scripts/scov_merge.py | 12 ++++++------
-+ 2 files changed, 12 insertions(+), 12 deletions(-)
-+
-+diff --git a/tools/scripts/gcov_merge.py b/tools/scripts/gcov_merge.py
-+index 0ac9bed..9f1cb8c 100644
-+--- a/tools/scripts/gcov_merge.py
-++++ b/tools/scripts/gcov_merge.py
-+@@ -1,4 +1,4 @@
-+-#!/usr/bin/env python
-++#!/usr/bin/env python3
-+ #
-+ # Merge gcov graph from several test cases. This can be used to check
-+ # the coverage of several test cases.
-+@@ -11,7 +11,7 @@
-+ import sys
-+ 
-+ def die(str):
-+-    print str
-++    print(str)
-+     sys.exit(-1)
-+ 
-+ def die_on(cond, str):
-+@@ -55,11 +55,11 @@ def merge(gcls1, gcls2):
-+         gcl1.merge(gcl2)
-+ 
-+ def gcov_merge(fns, of):
-+-    f = file(fns[0])
-++    f = open(fns[0])
-+     gcls_base = parse(f)
-+ 
-+     for fn in fns[1:]:
-+-        f = file(fn)
-++        f = open(fn)
-+         gcls = parse(f)
-+         merge(gcls_base, gcls)
-+ 
-+@@ -67,10 +67,10 @@ def gcov_merge(fns, of):
-+         gcl.write(of)
-+ 
-+ def usage():
-+-    print 'Usage: %s <gcov graph files>' % (sys.argv[0])
-++    print('Usage: %s <gcov graph files>' % (sys.argv[0]))
-+ 
-+ if __name__ == '__main__':
-+     if len(sys.argv) <= 1:
-+         usage()
-+-        exit -1
-++        sys.exit(-1)
-+     gcov_merge(sys.argv[1:], sys.stdout)
-+diff --git a/tools/scripts/scov_merge.py b/tools/scripts/scov_merge.py
-+index f83b922..bbcf760 100644
-+--- a/tools/scripts/scov_merge.py
-++++ b/tools/scripts/scov_merge.py
-+@@ -1,4 +1,4 @@
-+-#!/usr/bin/env python
-++#!/usr/bin/env python3
-+ #
-+ # Merge mce serverity coverage file from several test cases. This can
-+ # be used to check the coverage of several test cases.
-+@@ -11,7 +11,7 @@
-+ import sys
-+ 
-+ def die(str):
-+-    print str
-++    print(str)
-+     sys.exit(-1)
-+ 
-+ def die_on(cond, str):
-+@@ -47,11 +47,11 @@ def merge(gcls1, gcls2):
-+         gcl1.merge(gcl2)
-+ 
-+ def scov_merge(fns, of):
-+-    f = file(fns[0])
-++    f = open(fns[0])
-+     gcls_base = parse(f)
-+ 
-+     for fn in fns[1:]:
-+-        f = file(fn)
-++        f = open(fn)
-+         gcls = parse(f)
-+         merge(gcls_base, gcls)
-+ 
-+@@ -59,10 +59,10 @@ def scov_merge(fns, of):
-+         gcl.write(of)
-+ 
-+ def usage():
-+-    print 'Usage: %s <severities coverage files>' % (sys.argv[0])
-++    print('Usage: %s <severities coverage files>' % (sys.argv[0]))
-+ 
-+ if __name__ == '__main__':
-+     if len(sys.argv) <= 1:
-+         usage()
-+-        exit -1
-++        sys.exit(-1)
-+     scov_merge(sys.argv[1:], sys.stdout)
-+-- 
-+2.24.1
-+
-diff --git a/meta-oe/recipes-support/mcelog/mce-test_git.bb b/meta-oe/recipes-support/mcelog/mce-test_git.bb
-index 007b3944a..35fb94470 100644
---- a/meta-oe/recipes-support/mcelog/mce-test_git.bb
-+++ b/meta-oe/recipes-support/mcelog/mce-test_git.bb
-@@ -12,6 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- 
- SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mce-test.git;protocol=git \
-            file://makefile-remove-ldflags.patch \
-+           file://0001-gcov_merge.py-scov_merge.py-switch-to-python3.patch \
-           "
- SRCREV = "7643baf6c3919b3d727e6ba6c2e545dc6a653307"
- PV = "20190917+git${SRCPV}"
--- 
-2.24.1
-
+Bart
