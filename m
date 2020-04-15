@@ -1,98 +1,77 @@
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com [209.85.214.193])
- by mx.groups.io with SMTP id smtpd.web10.20744.1586975056315891509
+Received: from mail-vs1-f68.google.com (mail-vs1-f68.google.com [209.85.217.68])
+ by mx.groups.io with SMTP id smtpd.web11.24700.1586985310355878744
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Apr 2020 11:24:16 -0700
+ Wed, 15 Apr 2020 14:15:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=DZdQ4I6t;
- spf=pass (domain: gmail.com, ip: 209.85.214.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f193.google.com with SMTP id n24so308610plp.13
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2020 11:24:16 -0700 (PDT)
+ dkim=pass header.i=@northern.tech header.s=google header.b=QQaY2WXr;
+ spf=pass (domain: northern.tech, ip: 209.85.217.68, mailfrom: drew.moseley@northern.tech)
+Received: by mail-vs1-f68.google.com with SMTP id g184so998693vsc.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2020 14:15:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
+        d=northern.tech; s=google;
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=VX54iV9ZQCcermT6TyVuWfvnGbco/FR3R20TSxj9kGU=;
-        b=DZdQ4I6tUPZXX/NAywTZbU6XZD1FdrNk8r8d6/72nL4kZmgueaNeF+ry0Ppg0bh+AU
-         rcRdQj53GjqTE5SPvvlnQbjQZmRsC4WiwB1VvURFSjjsmSokWZrk0e+BCGSDTNtNF5jB
-         bom2G2GEVkauFyUakAJbDRLtgsMwL3TljGvZlULOiqUcqZEJ62v99VRYrd+IizSEqOxg
-         pgazexlXxAgdRXtHOWhUXzWbRpvf+QPHlzvkaSjreflKsQuUrW6D9PgwNM4JFAaMmnaB
-         E0KokWopglS/dM2RaI+ReiH1cGoGx/zZAlzwwHRgKZTcN7TV0Rp5EcmLQrCli7QZ3vR6
-         du7w==
+        bh=hgBQz5hQNa76Rmxkg84kvraTpjkSpB9+JOXnHCzcDYk=;
+        b=QQaY2WXr9wzY/cu8lMCNBq08xI80h/UrPTdWWUbRXMkT78+TWyzce1B+rV2l+y9pCq
+         /z/O5V1WomhbwUVdmQ13bYe5T/v8oZzmZhw2D+GOnVHgOs/BlX9+iO/3h3gb2N0XEpXI
+         zxLvRJ9WJVFZ9aS8a9iV6j/pXj+jTO9xqJ5NIlGpwij0SDA42/1csPMBWsP5X8LKvltk
+         7pt2ytkmYbkEW6rpOfl0f4xm+AsSQI7RUd327Gm6sGNyZLJQ5okajSP6tH2Hc7s+2y25
+         avtrbDJB19Wi7C+pN9jJRXKxkRBtsF1e25DEtkZnmxpUfbwgBpeRUmFlxWTSmhtkcq4O
+         jmSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=VX54iV9ZQCcermT6TyVuWfvnGbco/FR3R20TSxj9kGU=;
-        b=neWumTPj5SLryFT9w4SbFhHQdy1RYI/tFilUXNYZlVVVGfsHv2yZrF2baAJfZc8bzh
-         CR0N86+sDg2fFaYqRAvGPViT8aZZcawQAMQxkUp8y6J4GZHb44sPgc/mEkeay5DKzMzk
-         PUR8BGkD/PrZS+xnW3HUeYr9qJ3MQSPBjxLzpCICwjgMsWOBzweGgg7AsIuOTHRyxiDU
-         Wp6ts0YBB8ZA53792MBguWOyIWiF4WBO8cykp/mO9hP8V7USXIQ+hY90IzYEBC06xNUZ
-         WUSnjgg4Bil2/zHRAKpe3ExsPlGY0IvDJviXYhNrPpYAk3Al6YieDel8tW+t6UhcCHc3
-         C0ng==
-X-Gm-Message-State: AGi0PuYPSl9le7C2Kr7LkOmi6aPFv4lsN7uAjvJ2p/dgMwcuyvetOdDG
-	v7RG6+byGU4zRRHyplDSYzcMOxZpnZU=
-X-Google-Smtp-Source: APiQypLx8rWI5c6YFwTta5Ctlh6XVqVQC5Q2aZzFKg2Kmey6k78s7pr4SqNq01Gam+F5eJ9+ooAxKQ==
-X-Received: by 2002:a17:902:eed1:: with SMTP id h17mr1807852plb.206.1586975055191;
-        Wed, 15 Apr 2020 11:24:15 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::58e0])
-        by smtp.gmail.com with ESMTPSA id f3sm245564pjo.24.2020.04.15.11.24.13
+        bh=hgBQz5hQNa76Rmxkg84kvraTpjkSpB9+JOXnHCzcDYk=;
+        b=J/ui6WJNwQzPgFjbwtarUxYrbtViI5R8N3eBKebInHcliT0KHP4/QKQ8MlyMXYdyjp
+         at7XWuK4m+81FN1I1j38cbrIJXXoAQ1g8F0XbeWrDEPw0U7DmaU7de9EAdFR9qfhVbKp
+         AmyTuayihXrf37X+HDNqLt0VsUV7ZfjijzBDJG5Oe0A3QtgqrdO1o6TwyRo+WRzCD+9M
+         3mJB7RPiyo1aw9Yl05VrlbjJya9XDZzG6wqaqiUFGQo2dUFvpX7OmJqscz2InPtXIKBH
+         6a2MVCMJ3Xajpcemy4M8N6A7EUU/KqYHlMj+R1kQ1hO6gQ8THjRGjGt22US88h4wL6Xb
+         Ai0w==
+X-Gm-Message-State: AGi0PubDeyr5TVcN8U+UXJ0xAMF2Y1IH1wMMwcYXXbKZSDBaGOfanyIf
+	v1VV2UxtaiJkdFIDxrL2jNaEez28ajI=
+X-Google-Smtp-Source: APiQypJS7zI/x+8U+Am8BasxzKY+Yx+UpvOT88meRihM1CD4ZNKBFdWzZirZLfP/YSZrFTjS+Jkzlg==
+X-Received: by 2002:a67:3282:: with SMTP id y124mr6427092vsy.202.1586985309025;
+        Wed, 15 Apr 2020 14:15:09 -0700 (PDT)
+Return-Path: <drew.moseley@northern.tech>
+Received: from dmoseley-build.c.developers-build-hub.internal (189.109.211.35.bc.googleusercontent.com. [35.211.109.189])
+        by smtp.googlemail.com with ESMTPSA id t66sm2290095vkb.23.2020.04.15.14.15.08
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 15 Apr 2020 11:24:14 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Wed, 15 Apr 2020 14:15:08 -0700 (PDT)
+From: "Drew Moseley" <drew.moseley@northern.tech>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] nodejs: Fix -Wc++11-narrowing on mips
-Date: Wed, 15 Apr 2020 11:24:12 -0700
-Message-Id: <20200415182412.2176914-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.26.1
+Subject: [meta-networking][PATCH] memcached: Add aarch64 to COMPATIBLE_HOST.
+Date: Wed, 15 Apr 2020 21:15:08 +0000
+Message-Id: <20200415211508.22373-1-drew.moseley@northern.tech>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../nodejs/nodejs/mips-warnings.patch         | 19 +++++++++++++++++++
- .../recipes-devtools/nodejs/nodejs_12.14.1.bb |  1 +
- 2 files changed, 20 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/mips-warnings.patch
+From: Drew Moseley <drew.moseley@northern.tech>
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/mips-warnings.patch b/meta-oe/recipes-devtools/nodejs/nodejs/mips-warnings.patch
-new file mode 100644
-index 0000000000..1a773f23d8
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/mips-warnings.patch
-@@ -0,0 +1,19 @@
-+Add explicit static cast to fix narrowing warning
-+
-+Fixes
-+deps/v8/src/codegen/mips/assembler-mips.cc:3556:44: error: non-constant-expression cannot be narrowed from type 'int' to 'size_t' (aka 'unsigned int') in initializer list [-Wc++11-narrowing]
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+--- a/deps/v8/src/codegen/mips/assembler-mips.cc
-++++ b/deps/v8/src/codegen/mips/assembler-mips.cc
-+@@ -3553,7 +3553,7 @@ void Assembler::GrowBuffer() {
-+                                reloc_info_writer.last_pc() + pc_delta);
-+ 
-+   // Relocate runtime entries.
-+-  Vector<byte> instructions{buffer_start_, pc_offset()};
-++  Vector<byte> instructions{buffer_start_, static_cast<size_t>(pc_offset())};
-+   Vector<const byte> reloc_info{reloc_info_writer.pos(), reloc_size};
-+   for (RelocIterator it(instructions, reloc_info, 0); !it.done(); it.next()) {
-+     RelocInfo::Mode rmode = it.rinfo()->rmode();
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
-index 28b4136a5a..d468fb3ffa 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
-@@ -22,6 +22,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://big-endian.patch \
-            file://0001-build-allow-passing-multiple-libs-to-pkg_config.patch \
-            file://0002-build-allow-use-of-system-installed-brotli.patch \
-+           file://mips-warnings.patch \
-            "
- SRC_URI_append_class-target = " \
-            file://0002-Using-native-binaries.patch \
+This gets it in sync with libhugetlbfs which according to the comment,
+is supposed to be correct.
+
+Signed-off-by: Drew Moseley <drew.moseley@northern.tech>
+---
+ meta-networking/recipes-support/memcached/memcached_1.5.20.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-networking/recipes-support/memcached/memcached_1.5.20.bb b/meta-networking/recipes-support/memcached/memcached_1.5.20.bb
+index 37a77c364..feb4f3f14 100644
+--- a/meta-networking/recipes-support/memcached/memcached_1.5.20.bb
++++ b/meta-networking/recipes-support/memcached/memcached_1.5.20.bb
+@@ -26,7 +26,7 @@ SRC_URI[md5sum] = "4b64296ea0eeccdee9168c035e0488ab"
+ SRC_URI[sha256sum] = "cfd7b023a9cefe7ae8a67184f51d841dbbf97994ed0e8a55e31ee092320ea1e4"
+ 
+ # set the same COMPATIBLE_HOST as libhugetlbfs
+-COMPATIBLE_HOST = '(i.86|x86_64|powerpc|powerpc64|arm).*-linux'
++COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
+ 
+ python __anonymous () {
+     endianness = d.getVar('SITEINFO_ENDIANNESS')
 -- 
-2.26.1
+2.25.0
 
