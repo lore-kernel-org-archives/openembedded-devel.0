@@ -1,58 +1,98 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web10.13977.1586956686891002897
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com [209.85.214.193])
+ by mx.groups.io with SMTP id smtpd.web10.20744.1586975056315891509
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Apr 2020 06:18:07 -0700
+ Wed, 15 Apr 2020 11:24:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: mingli.yu@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 03FDI2Oe016823
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2020 06:18:02 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
- 14.3.487.0; Wed, 15 Apr 2020 06:18:01 -0700
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] mariadb: clean the empty /lib dir
-Date: Wed, 15 Apr 2020 21:18:00 +0800
-Message-ID: <1586956680-2704-1-git-send-email-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=DZdQ4I6t;
+ spf=pass (domain: gmail.com, ip: 209.85.214.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f193.google.com with SMTP id n24so308610plp.13
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2020 11:24:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=VX54iV9ZQCcermT6TyVuWfvnGbco/FR3R20TSxj9kGU=;
+        b=DZdQ4I6tUPZXX/NAywTZbU6XZD1FdrNk8r8d6/72nL4kZmgueaNeF+ry0Ppg0bh+AU
+         rcRdQj53GjqTE5SPvvlnQbjQZmRsC4WiwB1VvURFSjjsmSokWZrk0e+BCGSDTNtNF5jB
+         bom2G2GEVkauFyUakAJbDRLtgsMwL3TljGvZlULOiqUcqZEJ62v99VRYrd+IizSEqOxg
+         pgazexlXxAgdRXtHOWhUXzWbRpvf+QPHlzvkaSjreflKsQuUrW6D9PgwNM4JFAaMmnaB
+         E0KokWopglS/dM2RaI+ReiH1cGoGx/zZAlzwwHRgKZTcN7TV0Rp5EcmLQrCli7QZ3vR6
+         du7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=VX54iV9ZQCcermT6TyVuWfvnGbco/FR3R20TSxj9kGU=;
+        b=neWumTPj5SLryFT9w4SbFhHQdy1RYI/tFilUXNYZlVVVGfsHv2yZrF2baAJfZc8bzh
+         CR0N86+sDg2fFaYqRAvGPViT8aZZcawQAMQxkUp8y6J4GZHb44sPgc/mEkeay5DKzMzk
+         PUR8BGkD/PrZS+xnW3HUeYr9qJ3MQSPBjxLzpCICwjgMsWOBzweGgg7AsIuOTHRyxiDU
+         Wp6ts0YBB8ZA53792MBguWOyIWiF4WBO8cykp/mO9hP8V7USXIQ+hY90IzYEBC06xNUZ
+         WUSnjgg4Bil2/zHRAKpe3ExsPlGY0IvDJviXYhNrPpYAk3Al6YieDel8tW+t6UhcCHc3
+         C0ng==
+X-Gm-Message-State: AGi0PuYPSl9le7C2Kr7LkOmi6aPFv4lsN7uAjvJ2p/dgMwcuyvetOdDG
+	v7RG6+byGU4zRRHyplDSYzcMOxZpnZU=
+X-Google-Smtp-Source: APiQypLx8rWI5c6YFwTta5Ctlh6XVqVQC5Q2aZzFKg2Kmey6k78s7pr4SqNq01Gam+F5eJ9+ooAxKQ==
+X-Received: by 2002:a17:902:eed1:: with SMTP id h17mr1807852plb.206.1586975055191;
+        Wed, 15 Apr 2020 11:24:15 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::58e0])
+        by smtp.gmail.com with ESMTPSA id f3sm245564pjo.24.2020.04.15.11.24.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 15 Apr 2020 11:24:14 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] nodejs: Fix -Wc++11-narrowing on mips
+Date: Wed, 15 Apr 2020 11:24:12 -0700
+Message-Id: <20200415182412.2176914-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.26.1
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-From: Mingli Yu <mingli.yu@windriver.com>
-
-When usrmerge is enabled in DISTRO_FEATURES, there
-comes below error:
-ERROR: mariadb-10.4.12-r0 do_package_qa: QA Issue: mariadb-leftovers package is not obeying usrmerge distro feature. /lib should be relocated to /usr. [usrmerge]
-ERROR: mariadb-10.4.12-r0 do_package_qa: QA run found fatal errors. Please consider fixing them.
-
-It is because empty /lib dir exists in mariadb-leftovers
-as below:
- $ rpm -qpl mariadb-leftovers-10.4.12-r0.core2_64.rpm |grep ^/lib
- /lib
-
-So remove the empty /lib dir to fix the above error.
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-dbs/mysql/mariadb.inc | 3 +++
- 1 file changed, 3 insertions(+)
+ .../nodejs/nodejs/mips-warnings.patch         | 19 +++++++++++++++++++
+ .../recipes-devtools/nodejs/nodejs_12.14.1.bb |  1 +
+ 2 files changed, 20 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/mips-warnings.patch
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 5ff273e..2387c2a 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -170,6 +170,9 @@ do_install() {
-     fi
-     if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
-         mv ${D}/lib/security ${D}/${libdir}
-+        if [ "`ls -A ${D}/lib`" = "" ]; then
-+            rm -rf ${D}/lib
-+        fi
-     fi
- }
- 
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/mips-warnings.patch b/meta-oe/recipes-devtools/nodejs/nodejs/mips-warnings.patch
+new file mode 100644
+index 0000000000..1a773f23d8
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/mips-warnings.patch
+@@ -0,0 +1,19 @@
++Add explicit static cast to fix narrowing warning
++
++Fixes
++deps/v8/src/codegen/mips/assembler-mips.cc:3556:44: error: non-constant-expression cannot be narrowed from type 'int' to 'size_t' (aka 'unsigned int') in initializer list [-Wc++11-narrowing]
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++--- a/deps/v8/src/codegen/mips/assembler-mips.cc
+++++ b/deps/v8/src/codegen/mips/assembler-mips.cc
++@@ -3553,7 +3553,7 @@ void Assembler::GrowBuffer() {
++                                reloc_info_writer.last_pc() + pc_delta);
++ 
++   // Relocate runtime entries.
++-  Vector<byte> instructions{buffer_start_, pc_offset()};
+++  Vector<byte> instructions{buffer_start_, static_cast<size_t>(pc_offset())};
++   Vector<const byte> reloc_info{reloc_info_writer.pos(), reloc_size};
++   for (RelocIterator it(instructions, reloc_info, 0); !it.done(); it.next()) {
++     RelocInfo::Mode rmode = it.rinfo()->rmode();
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
+index 28b4136a5a..d468fb3ffa 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
+@@ -22,6 +22,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://big-endian.patch \
+            file://0001-build-allow-passing-multiple-libs-to-pkg_config.patch \
+            file://0002-build-allow-use-of-system-installed-brotli.patch \
++           file://mips-warnings.patch \
+            "
+ SRC_URI_append_class-target = " \
+            file://0002-Using-native-binaries.patch \
 -- 
-2.7.4
+2.26.1
 
