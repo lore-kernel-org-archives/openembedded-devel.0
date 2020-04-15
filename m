@@ -1,60 +1,119 @@
-Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web10.10718.1586940409269592104
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com [209.85.166.67])
+ by mx.groups.io with SMTP id smtpd.web11.11504.1586944191325069334
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Apr 2020 01:46:50 -0700
+ Wed, 15 Apr 2020 02:49:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=aqE/5CwS;
- spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id B2A886008F;
-	Wed, 15 Apr 2020 10:46:45 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1586940405;
-	bh=aUF9ueYh4YjDgoVmy5Q6qIj1vuFsLhAY1ObTeUJygtc=;
-	h=From:To:Cc:Subject:Date:From;
-	b=aqE/5CwSXm2l+HhiMffQEevqf5m1cWbB6+pShQ0Y2bEPNZGlggMhgNl1gmc79V6YL
-	 mecE4WLkCCJTOPumvM59nijcsFz+OLpdEca8XJ1uvG3dqwblN1nrWJmEAEYswuYlBC
-	 B2yMBycL2Oq4rOJN3Q27flRqRKhk8SrOQcZZZ1mqSRJyR0u2Ld3YIZjUtc3qAZTnC3
-	 iLeQnOf2S2lHySudZmCOHHdWDOeyOrwg0eluhl4OMT2E/M58Ucfw7WU+s6jDuFRtJz
-	 EE/u+3O2HOLQPmA8/yvG7R0TwRiuS8uxv7ViVh6+zavy5KVuaAXTRBvnvu+8iRQrOt
-	 /Vm8hPfN9uDQg==
-From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-networking][PATCH] mbedtls: upgrade 2.16.5 -> 2.16.6
-Date: Wed, 15 Apr 2020 10:46:42 +0200
-Message-Id: <1586940402-8197-1-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=URh8DGxT;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.166.67, mailfrom: brgl@bgdev.pl)
+Received: by mail-io1-f67.google.com with SMTP id y17so16416360iow.9
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2020 02:49:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=r36+cxNxfraYe4Kw7MCXoP9eQFeiZeM0yqQxehuEcrY=;
+        b=URh8DGxT7AsWvd3SrL0f/i0fWVO0QL6i7ZHygN1VE/Mt21IomsvLVt1E9XO8+6vF+U
+         q19qw49oRQdcanThp19OLOWZYJAKS0JMJqPCdeULKKtNaPsPHxcHrSXpVmWXPkaQOPIc
+         rnHWv5BUEC2XwvJPGjHb724V2HEvS6rUuWUbPP5PAOOYTgdEq7hlbV059wIJEGoclgAN
+         pkE8K0Hg21lTBhAtTkT2YSemNSZhTwXZQhUD6Sa8ojIuR9reK0ve7tgOCwKTJQYvnJeN
+         g350FBosg8cd+ZApZusjgQ2LJnEwMc6dqIvG+Q/9YyDDG4PDKqbnKF8RlcQ+Qt752hgt
+         z/Gg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=r36+cxNxfraYe4Kw7MCXoP9eQFeiZeM0yqQxehuEcrY=;
+        b=T0PxxLbPWnzt3pq8xxZji29CEoiBnJmf4yas+hh37K0QCgvtw3xAqQ7UkT1scSNLKD
+         mZox1LhxUq/F2NtOE/auW2tbB7I8+ByMUVY7ULQNPD6VH7O7tD7ursInYSvaKcsRGvt+
+         lYH19fYEbFEM/MulT98mgfgrCjL8u0UofaYZl//CuwbQ8ox+zo4e3/LCSCSnaGvwzb4d
+         4g6rFXs9MFgxhPI3vPmPgHSuWxrJQ/i7E1ErUXkHkB+0tbQJIe1SWErG2KD7BETw4iP5
+         YPBoQkXK4s1DUjHYXot0ayEgRU2q61r2KqbLaOcaO4cQ2kyuKwgnUdyPjpU6Wq6pf5s6
+         OpBw==
+X-Gm-Message-State: AGi0PuZMQeuSuNoIiM/3UcZjIy7ULbBmJknNAsU6RAlsJ+mratiMJQQT
+	K85U7q8UpEImWwCS+qr0vPFE4tvQCZIaedPlYOCy+RKcA4Y=
+X-Google-Smtp-Source: APiQypKARnuAD7/60+CENneEk31YCGB5O+NIPsrARY0HptBNuBe2tQOtGPmVQk9pX4mINwdgoL6da5FZskBbqkGJAoE=
+X-Received: by 2002:a5e:8616:: with SMTP id z22mr4996422ioj.130.1586944190714;
+ Wed, 15 Apr 2020 02:49:50 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200410124135.24217-1-brgl@bgdev.pl> <20200410124135.24217-2-brgl@bgdev.pl>
+ <34f4335a-c9ed-a790-c683-3b6db93eceb7@embexus.com> <CAMRc=MeJOmwqPnZbgT-XugtQRU8okQMPGvgWx+cjnMw=1WyM=A@mail.gmail.com>
+ <8896403c-4f12-5d3c-5722-5b9b0a000067@embexus.com> <CAMRc=MdO=x4FCEE2MVtFBZxr0sbChjMjHwOrMAYx23dkxKCJiw@mail.gmail.com>
+ <677ae603-2d39-e550-c4ee-6a2cbf41784b@embexus.com>
+In-Reply-To: <677ae603-2d39-e550-c4ee-6a2cbf41784b@embexus.com>
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+Date: Wed, 15 Apr 2020 11:49:39 +0200
+Message-ID: <CAMRc=Mfnt93Fczrm96yJ_zkDx6q-x03pGFeWn4D-_Gt0p0rMjA@mail.gmail.com>
+Subject: Re: [oe] [meta-security][RFC 1/2] classes: provide a class for generating dm-verity meta-data images
+To: Ayoub Zaki <ayoub.zaki@embexus.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Mbed TLS 2.16.6 is a maintenance release of the Mbed TLS 2.16 branch, and
-provides security fixes and bug fixes, see:
+wt., 14 kwi 2020 o 18:28 Ayoub Zaki <ayoub.zaki@embexus.com> napisa=C5=82(a=
+):
+>
+>
+> On 14.04.20 18:19, Bartosz Golaszewski wrote:
+> > wt., 14 kwi 2020 o 11:17 Ayoub Zaki <ayoub.zaki@embexus.com> napisa=C5=
+=82(a):
+> >> Hi,
+> >>
+> >> On 14.04.20 11:05, Bartosz Golaszewski wrote:
+> >>
+> >> pon., 13 kwi 2020 o 12:58 Ayoub Zaki <ayoub.zaki@embexus.com> napisa=
+=C5=82(a):
+> >>
+> >> basically this class generate a dm-verity hash that needs to be inject=
+ed
+> >> inside the initramfs...it's a bit hacky.
+> >>
+> >> wouldn't be signing the hash, include the verifiication public key in
+> >> initramfs more portable ?
+> >>
+> >> Sorry, but I don't see how this is a better solution. You then have to
+> >> store two things somewhere: the hash and its signature. If the
+> >> fitImage is already signed - there's no reason to have a second
+> >> signature for the hash: it already comes from a trusted source.
+> >>
+> >> This would also inflate the size of the initramfs - not only would it
+> >> need to include the cryptsetup tools but also additional tools for
+> >> signature verification.
+> >>
+> >>
+> >> The hash + signature doesn't need to be stored in initramfs in this ca=
+se but appended to the rootfs image.
+> >>
+> >> yes you would need in this case a signature verification tool inside y=
+our initramfs and the corresponding public key.
+> >>
+> > But how is this better? I know this is how Android does dm-verity, but
+> > it's not any simpler - I'd argue the actual implementation is more
+> > complicated.
+>
+>
+> In case you do OTA Update with your approach you will need to always
+> update kernel+initramfs and rootfs even nothing has changed in kernel
+> oder initramfs for example to make sure that the Hash inside the
+> initramfs is updated!
 
- - https://tls.mbed.org/tech-updates/releases/mbedtls-2.16.6-and-2.7.15-released
+This is negligible in terms of size and doesn't add to the
+complication. I know this, because we've been doing it like this in
+real-life applications.
 
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
----
- .../mbedtls/{mbedtls_2.16.5.bb => mbedtls_2.16.6.bb}                  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.16.5.bb => mbedtls_2.16.6.bb} (92%)
+>
+>
+> Another case is if your kernel+initramfs are part of the rootfs how you
+> will deal with it ? it's chicken/egg problem.
+>
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.5.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.6.bb
-similarity index 92%
-rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.5.bb
-rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.6.bb
-index 8dcfe91..12ad397 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.5.bb
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.6.bb
-@@ -23,8 +23,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=302d50a6369f5f22efdb674db908167a"
- SECTION = "libs"
- 
- SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
--SRC_URI[md5sum] = "339f0505323b29851ef3128a53d2de20"
--SRC_URI[sha256sum] = "65b4c6cec83e048fd1c675e9a29a394ea30ad0371d37b5742453f74084e7b04d"
-+SRC_URI[md5sum] = "1f629a43c166de2eca808f3e30aa961d"
-+SRC_URI[sha256sum] = "66455e23a6190a30142cdc1113f7418158839331a9d8e6b0778631d077281770"
- 
- inherit cmake
- 
--- 
-2.7.4
+Of course they're not. I never said that.
 
+It boils down to a matter of taste. If you want to implement a
+different approach - there's nothing stopping you from adding some
+switch that would result in a different way of storing the root hash.
+For now: I'm still waiting for reviews on the OE-code part.
+
+Bart
+
+PS Could you set up your e-mail client to properly format quoted
+parts? It's hard to tell who said what and what to respond to.
