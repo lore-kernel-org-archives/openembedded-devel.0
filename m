@@ -1,50 +1,50 @@
-Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com [209.85.215.193])
- by mx.groups.io with SMTP id smtpd.web11.8190.1586921368153538201
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com [209.85.215.194])
+ by mx.groups.io with SMTP id smtpd.web11.8524.1586923325295108510
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Apr 2020 20:29:28 -0700
+ Tue, 14 Apr 2020 21:02:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=G8btqBu6;
- spf=pass (domain: gmail.com, ip: 209.85.215.193, mailfrom: ticotimo@gmail.com)
-Received: by mail-pg1-f193.google.com with SMTP id 188so863343pgj.13
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 20:29:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=VAbRkAPV;
+ spf=pass (domain: gmail.com, ip: 209.85.215.194, mailfrom: ticotimo@gmail.com)
+Received: by mail-pg1-f194.google.com with SMTP id p8so912649pgi.5
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 21:02:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=1oouysV/ZH0UJRYyN2K5SeRjoptRtF4hhgctCMcRNmw=;
-        b=G8btqBu6u9x06LCogTjd5xbrR6up4fJyp6T9359QREWNzAmVz9YKtQ83FpeZFvmf66
-         lR0hG/z6VipIO3r1pbXdMl0RjNhH4KGXBPrt2wuf7om9FWbPRwJY87YGr2A8BrAjqmOx
-         4JzwnApZQQLqaqIA3DjikoDOqCcC4YDx5jb54z6NEwP/BOiPGEHjKdlcDi59ryB5lMkp
-         A40Mk/tLSA6Dolm897gyeYqVSDd0BulXMDNizKZfnRU8xCASie+Yp16igGp2b/IJp9SH
-         WZh61WsImhCQ1tRWrLev0G5Spafg8uiFJpPJfmrYEcKgN8b2J5kf0WPZl8WxddO1M+zF
-         OlLQ==
+        bh=x389di466Q4vs9T3V75qqo286wpTsj+JSl87dqHsSyM=;
+        b=VAbRkAPVA3zDCoZ2Fyt4BsXL/EM37aTTKX+j/KagRK3SWkawfW6b0ZCY7lIsM9il5B
+         z+VyA3EQ47AdW6rMKbPbwCXcQB2QKQWziOkArbQup6cTfB51D44uDj2rIGg4i8QoqDz5
+         RgrkilH6Qw44VGdZZbsLvZL8A2rBCFMFpi3A2IiU28ZhH/2iQnE18TD0Hk+EzBf9Avm4
+         STeNw+9np1cuJzZyugmzL5vDzXG9FEbpgmqT/GarEdFxfyaQ4zkPSEo8RobQj94rTgF/
+         7btjQcFZrgvBsg3SVrPFXb4FhF9lkDHDbp9RAXu1PCegOfDFJO8kfU7GYOSruE27tSpQ
+         yQWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=1oouysV/ZH0UJRYyN2K5SeRjoptRtF4hhgctCMcRNmw=;
-        b=bqstIgKNPoIpneoMOd3ZvnzVvzv0ju7hsnZ2gdGgYJyAKaPevg09k9mNTq/6LVkUcB
-         z1PRWWMgCDuZCHKqONdeCMj6r4HYmVC+hlkbozgJGcBx9YyiBpAoFOMpMoBbWtMc9xvc
-         FcKlfU7E7wg7Xtu0r6Yq88cHqAW7OURI49e2uHCi4px6G+hZEUh2gY7Q/p7DoLzsmNF4
-         eYvot3yzusXf26FX2AkQkIU4BV9umSTungtKGf2JDQPJaqMXmq3CK+hBVIAVlDN9QyxP
-         q9uj7mF7hqSvYRW0HJ8cXdrHvmw3IupySJkEtPa7rO4EN21rIPFoLv7JvMSEFV/nWJLf
-         DYuw==
-X-Gm-Message-State: AGi0PuYCLttb/6ZoJRbmIKNyehw7atwO9T0Kdj0OaHvNSO6ySlJU9+yi
-	hHtKYjwswVH42+Sz/mCQqQVfdqHiEvI=
-X-Google-Smtp-Source: APiQypKf7DQN1AXwd15xnVY6LffjELLDMCJBGYXPilPCvEiQHZrCrZ129Z+UMBsnr13y5q4J/8S7Bg==
-X-Received: by 2002:a62:7b93:: with SMTP id w141mr4692687pfc.158.1586921367066;
-        Tue, 14 Apr 2020 20:29:27 -0700 (PDT)
+        bh=x389di466Q4vs9T3V75qqo286wpTsj+JSl87dqHsSyM=;
+        b=dPX4GZN2OtqOIHW/KjmnCcCXJCGJx8IgeaHn15+ctwgeXQh7mnJQfN7OysfEA7BGdU
+         MAM72QfMxliC7lFiKUvtIuJMNLEHQtcVPCZ78fBC5b6D3lOahKf1EYk+1zv1jTRHiqVo
+         eGKhu2xZ3R6jmizgZMx21DOYdSFVn5AiWiGAWyYewCZRfmoDic2GQKyo2E8RFGNDblyy
+         SjmiUr/VamvY529v5qDfvpTGIO1jmPdMuarevo0INaLZ2XFwmsJkt7P8Payl/bNqR3z7
+         w/eLnmjbaWIy+SRkiRwQJReWd2Aj6imH0DrakT6Ab176RrxiFdj/WgzxIL3zycfAx67l
+         G0mw==
+X-Gm-Message-State: AGi0PuYTGycpPSrovA+ZEXZoEMphF2s/6Q4o6HyDBTSjnobZvNSTo0Xh
+	FHOSQqqc9qxTSI8wPhPigAKI2Hst474=
+X-Google-Smtp-Source: APiQypKOzBp+WwHn6J6J+22GY3RMmH45D/iwwOgcH3jHNE0EQzjtidXqOb5V+vNuTFccfLelIxA/oA==
+X-Received: by 2002:a62:7b56:: with SMTP id w83mr12048731pfc.97.1586923324333;
+        Tue, 14 Apr 2020 21:02:04 -0700 (PDT)
 Return-Path: <ticotimo@gmail.com>
 Received: from thetis.hsd1.or.comcast.net ([2601:1c0:6000:9640:a097:5ffb:4a26:b07b])
-        by smtp.gmail.com with ESMTPSA id y14sm3963321pff.205.2020.04.14.20.29.26
+        by smtp.gmail.com with ESMTPSA id t12sm7127699pgm.37.2020.04.14.21.02.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Apr 2020 20:29:26 -0700 (PDT)
+        Tue, 14 Apr 2020 21:02:03 -0700 (PDT)
 From: "Tim Orling" <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Tim Orling <ticotimo@gmail.com>
-Subject: [meta-python2][PATCH] packagegroup-meta-python2: add new recipes
-Date: Tue, 14 Apr 2020 20:29:13 -0700
-Message-Id: <20200415032913.30253-1-ticotimo@gmail.com>
+Subject: [meta-python2][PATCH v2] packagegroup-meta-python2: add new recipes
+Date: Tue, 14 Apr 2020 20:59:52 -0700
+Message-Id: <20200415035952.33995-1-ticotimo@gmail.com>
 X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -59,7 +59,7 @@ Signed-off-by: Tim Orling <ticotimo@gmail.com>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/recipes-core/packagegroups/packagegroup-meta-python2.bb b/recipes-core/packagegroups/packagegroup-meta-python2.bb
-index 9a8826ab..2cb57223 100644
+index 9a8826ab..0eb9b8db 100644
 --- a/recipes-core/packagegroups/packagegroup-meta-python2.bb
 +++ b/recipes-core/packagegroups/packagegroup-meta-python2.bb
 @@ -58,7 +58,8 @@ RDEPENDS_packagegroup-meta-python2 = "\
@@ -67,7 +67,7 @@ index 9a8826ab..2cb57223 100644
      python-futures python-jsmin python-pygobject python-pytoml python-six python-which \
      python-netifaces python-configargparse python-sqlparse python-soupsieve python-wrapt \
 -    python-deprecated python-booleanpy \
-+    python-deprecated python-booleanpy python-docker-pycreds python-websocket-client 
++    python-deprecated python-booleanpy python-docker-pycreds python-websocket-client \
 +    python-docker \
      ${@bb.utils.contains("DISTRO_FEATURES", "pam", "python-pam pamela", "", d)} \
      ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "python-systemd", "", d)} \
