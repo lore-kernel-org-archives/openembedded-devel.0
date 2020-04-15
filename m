@@ -1,77 +1,54 @@
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com [209.85.215.194])
- by mx.groups.io with SMTP id smtpd.web11.8524.1586923325295108510
- for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Apr 2020 21:02:05 -0700
+Received: from mail-io1-f44.google.com (mail-io1-f44.google.com [209.85.166.44])
+ by mx.groups.io with SMTP id smtpd.web10.8531.1586924555618566844
+ for <Openembedded-devel@lists.openembedded.org>;
+ Tue, 14 Apr 2020 21:22:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=VAbRkAPV;
- spf=pass (domain: gmail.com, ip: 209.85.215.194, mailfrom: ticotimo@gmail.com)
-Received: by mail-pg1-f194.google.com with SMTP id p8so912649pgi.5
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 21:02:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=HCF5EZJw;
+ spf=pass (domain: gmail.com, ip: 209.85.166.44, mailfrom: ticotimo@gmail.com)
+Received: by mail-io1-f44.google.com with SMTP id b12so15701656ion.8
+        for <Openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2020 21:22:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=x389di466Q4vs9T3V75qqo286wpTsj+JSl87dqHsSyM=;
-        b=VAbRkAPVA3zDCoZ2Fyt4BsXL/EM37aTTKX+j/KagRK3SWkawfW6b0ZCY7lIsM9il5B
-         z+VyA3EQ47AdW6rMKbPbwCXcQB2QKQWziOkArbQup6cTfB51D44uDj2rIGg4i8QoqDz5
-         RgrkilH6Qw44VGdZZbsLvZL8A2rBCFMFpi3A2IiU28ZhH/2iQnE18TD0Hk+EzBf9Avm4
-         STeNw+9np1cuJzZyugmzL5vDzXG9FEbpgmqT/GarEdFxfyaQ4zkPSEo8RobQj94rTgF/
-         7btjQcFZrgvBsg3SVrPFXb4FhF9lkDHDbp9RAXu1PCegOfDFJO8kfU7GYOSruE27tSpQ
-         yQWA==
+        h=mime-version:from:date:message-id:subject:to;
+        bh=keMgeZM3kJsJ1cWhxTRm5uw0nLASsNXR4JnZtoWJT+M=;
+        b=HCF5EZJwRWNDmwOU67di044nZtXsMOBx5RTPzltoSauieNwb2KKw0ng2E1IG4yPFRM
+         z+PHnBPAriXKowTsK+JNlEz/5vfStrLOQlZCEvBBKaFcdlYNlV2OvfHNcDy1FfDa7GeW
+         ot9CjtudlpE+clGxpw1AMx5piRXIA6jeUFAwJ5LgndeDILWOQxGElZ8vlgkt8OErVESg
+         MjNStCIHwcvXcSZ7kJ7Kpgt476W0t/1eyFs/9CPJ+vOqWg4r2kPbkD7mpKlKBEtK7tG3
+         n50rnIzorfN9rO1zZZQO2VAd6eipyQgwYpbf6LKDIKMKl1pNIkSYNUWmmCbwxKSKaAfj
+         UQAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=x389di466Q4vs9T3V75qqo286wpTsj+JSl87dqHsSyM=;
-        b=dPX4GZN2OtqOIHW/KjmnCcCXJCGJx8IgeaHn15+ctwgeXQh7mnJQfN7OysfEA7BGdU
-         MAM72QfMxliC7lFiKUvtIuJMNLEHQtcVPCZ78fBC5b6D3lOahKf1EYk+1zv1jTRHiqVo
-         eGKhu2xZ3R6jmizgZMx21DOYdSFVn5AiWiGAWyYewCZRfmoDic2GQKyo2E8RFGNDblyy
-         SjmiUr/VamvY529v5qDfvpTGIO1jmPdMuarevo0INaLZ2XFwmsJkt7P8Payl/bNqR3z7
-         w/eLnmjbaWIy+SRkiRwQJReWd2Aj6imH0DrakT6Ab176RrxiFdj/WgzxIL3zycfAx67l
-         G0mw==
-X-Gm-Message-State: AGi0PuYTGycpPSrovA+ZEXZoEMphF2s/6Q4o6HyDBTSjnobZvNSTo0Xh
-	FHOSQqqc9qxTSI8wPhPigAKI2Hst474=
-X-Google-Smtp-Source: APiQypKOzBp+WwHn6J6J+22GY3RMmH45D/iwwOgcH3jHNE0EQzjtidXqOb5V+vNuTFccfLelIxA/oA==
-X-Received: by 2002:a62:7b56:: with SMTP id w83mr12048731pfc.97.1586923324333;
-        Tue, 14 Apr 2020 21:02:04 -0700 (PDT)
-Return-Path: <ticotimo@gmail.com>
-Received: from thetis.hsd1.or.comcast.net ([2601:1c0:6000:9640:a097:5ffb:4a26:b07b])
-        by smtp.gmail.com with ESMTPSA id t12sm7127699pgm.37.2020.04.14.21.02.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Apr 2020 21:02:03 -0700 (PDT)
-From: "Tim Orling" <ticotimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <ticotimo@gmail.com>
-Subject: [meta-python2][PATCH v2] packagegroup-meta-python2: add new recipes
-Date: Tue, 14 Apr 2020 20:59:52 -0700
-Message-Id: <20200415035952.33995-1-ticotimo@gmail.com>
-X-Mailer: git-send-email 2.25.0
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=keMgeZM3kJsJ1cWhxTRm5uw0nLASsNXR4JnZtoWJT+M=;
+        b=gAdFmCMxF++4KoTlhqIzZlBhFNT+Oi38v9RXas742oJU/tGNhvjhT61gFFjQkLSV4S
+         MMJb/oYAf08KdaFfFu2hLY6UBNVK/X2g9wZTR6QGHQmj+QyVFBT+AAEqOi/MGv1KA7X/
+         GJGiFmEOtS06SlRLqo+/T0INQ2K7yf+fR6zJKrHaijQlCgdADZiPcONjq+mhXTr6kS+v
+         2Vg/OMWHUbrB2yjjz+hmUKf9OBXmnkq70ERdnUu9Xfm2ZMVqYem776xlM5O943P274mh
+         6IA/StnfiZUhg5TnMMVQRJWsgSZ4YYrNGorlJuSwg92LbfMP6jMpu4fMoP7M+NrL7UL9
+         ldmw==
+X-Gm-Message-State: AGi0PuY03hurIZm65KFGrU3muoEf0/LGYWc90E3kOvBbjbwmQTNAhHWx
+	nMgKumaKraPqzODFiNGvMjUQQAAl+Bd+CRtWTCo7NOC7NUc=
+X-Google-Smtp-Source: APiQypLY1HA3+VrQ37+JRHYgJxEYjvMQowdgnrHRssdqjcFFOkEJqyS6FZ+4NxV1fnnQJ5vOO2n535lsa8M9C7dm4XA=
+X-Received: by 2002:a02:9445:: with SMTP id a63mr23928975jai.10.1586924554827;
+ Tue, 14 Apr 2020 21:22:34 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: "Tim Orling" <ticotimo@gmail.com>
+Date: Tue, 14 Apr 2020 21:22:23 -0700
+Message-ID: <CANx9H-AC7H-MDV-CYQ_vu_GN_sm6be-tFdG1rv0qQd5ZAPrvHQ@mail.gmail.com>
+Subject: [meta-python2] Final python2 release candidate 2.7.18rc1
+To: "openembedded-devel@lists.openembedded.org" <Openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="00000000000060396505a34caadc"
 
-Add python-docker-pycreds
-Add python-websocket-client
-Add python-docker
+--00000000000060396505a34caadc
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Tim Orling <ticotimo@gmail.com>
----
- recipes-core/packagegroups/packagegroup-meta-python2.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Heads up that the final release of python2 has a release candidate:
+https://www.python.org/downloads/release/python-2718rc1/
 
-diff --git a/recipes-core/packagegroups/packagegroup-meta-python2.bb b/recipes-core/packagegroups/packagegroup-meta-python2.bb
-index 9a8826ab..0eb9b8db 100644
---- a/recipes-core/packagegroups/packagegroup-meta-python2.bb
-+++ b/recipes-core/packagegroups/packagegroup-meta-python2.bb
-@@ -58,7 +58,8 @@ RDEPENDS_packagegroup-meta-python2 = "\
-     python-parse-type python-ipaddress python-dbus python-cpuset python-distutils-extra \
-     python-futures python-jsmin python-pygobject python-pytoml python-six python-which \
-     python-netifaces python-configargparse python-sqlparse python-soupsieve python-wrapt \
--    python-deprecated python-booleanpy \
-+    python-deprecated python-booleanpy python-docker-pycreds python-websocket-client \
-+    python-docker \
-     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "python-pam pamela", "", d)} \
-     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "python-systemd", "", d)} \
- "
--- 
-2.25.0
+--00000000000060396505a34caadc
+Content-Type: text/html; charset="UTF-8"
 
+<div dir="ltr"><div>Heads up that the final release of python2 has a release candidate:<br></div><div><a href="https://www.python.org/downloads/release/python-2718rc1/">https://www.python.org/downloads/release/python-2718rc1/</a></div></div>
+
+--00000000000060396505a34caadc--
