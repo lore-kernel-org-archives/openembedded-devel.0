@@ -1,108 +1,180 @@
-Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
- by mx.groups.io with SMTP id smtpd.web11.640.1586991769063399225
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.web12.2200.1587001600427031294
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Apr 2020 16:02:50 -0700
+ Wed, 15 Apr 2020 18:46:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=U6FY+0dZ;
- spf=pass (domain: axis.com, ip: 195.60.68.18, mailfrom: peter.kjellerstedt@axis.com)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ceJGDXV6;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id b7so660948pju.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2020 18:46:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; l=4430; q=dns/txt; s=axis-central1;
-  t=1586991769; x=1618527769;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=4U4zG21aEU4Lf01ZNIgiDDPnepqSju+gvfrE1QomXvI=;
-  b=U6FY+0dZo19Dp9nU6vfFWryH36NESO1FG5aiqJ54I9B35XIGX/pYxOlo
-   9/Og1PPx/pDThmJxGrvD3dlT7NyZmMomfDRn+JfGv+3JO93t4thmGoPOX
-   CYLSlfs9oGDaCYz9sMPwa2mEhENCqhf0WWM8kPLxyo7ElzzvsEP1fzGuS
-   UqfmxYau30BL190ihiEXKaWJnErhkY0n6uaEr3XTHEL04yD3mir27wpIt
-   BAgWp7FhRr94sWG5XtACOXbQOoy+lHn/PJJE1B+z7j6wrHwTsAeqQ1BHO
-   4u4Lrvc5Sf6UG1LEET2J0WGeEBV/fYGeJFnISUQbmve7hnKJnsPxNg8/l
-   Q==;
-IronPort-SDR: CU2DCJa4O3hxInI7R86pTT6jzXwN8cO+fqRUvSzfW9ExAPJCn3zqsF5keYF1EN9ikzzDrRjkFd
- SwEJyDQ7xBA+uokUuVJsyhtIJVHPRoisnuvedoQInxkDDadjMvFZU+piXQr4rgIcyM5NVDwyuV
- yCO/JQ5P5SavW/rbw/tjtJSZxVqiPm3uF1U2fez+qCrRf9j86LiWUuEJdgKtFtLrv6LfZ+XbwE
- mdGN2Ys1s6H9rEGdFjwCT6LXDyLrPz5TM9t+l2PxsCFftTQ9NxvVMrcMDG1YL7U6/d0RrIbLIM
- T3k=
-X-IronPort-AV: E=Sophos;i="5.72,388,1580770800"; 
-   d="scan'208";a="7466619"
-From: "Peter Kjellerstedt" <peter.kjellerstedt@axis.com>
-To: Trevor Gamblin <trevor.gamblin@windriver.com>, Khem Raj
-	<raj.khem@gmail.com>
-CC: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-webserver][PATCH] apache2: upgrade 2.4.41 -> 2.4.43
-Thread-Topic: [oe] [meta-webserver][PATCH] apache2: upgrade 2.4.41 -> 2.4.43
-Thread-Index: AQHWEpXYxKygSqEqHUC20YBFrX3QUKh5FBWAgAAZiACAAZ2lkA==
-Date: Wed, 15 Apr 2020 23:02:44 +0000
-Message-ID: <07865a3bea714ee88fb74d336ab10831@XBOX03.axis.com>
-References: <20200414194933.31798-1-trevor.gamblin@windriver.com>
- <CAMKF1sps=ihwMcTFkSBTSdtZDbGEfotpjbje9hhdaAkv=g4X9w@mail.gmail.com>
- <695157d6-c8d1-dca0-df48-cd5d233da330@windriver.com>
-In-Reply-To: <695157d6-c8d1-dca0-df48-cd5d233da330@windriver.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=EBStl9Zu61u4Oh9p7qnn2tBkLPuHcxjt7VlKEHf8mF4=;
+        b=ceJGDXV6GhDjM4JUGekp+nkD2Ud6dhUuOuMcHBADZuEdt++pDG1Na+cr+x1e1mMVuV
+         xUnTvJLgC6V56RFEdjSSy31uQgmpn4UfsrwNx2BFw1GMoqmWFuVHWkZPpFLjaav9AK86
+         D3RwDxDpVqbms/9kBFwfKAzVoDlTRg7DM4gSpJ0BPmDbBCIj8t07PTzA93220XjWmxc4
+         U9f7p6YWmjxmkey4GbWz+tvokg6AumJvjXxcwjIfVPklL4v0/xwblphzAMWt4RjCVjFZ
+         WmdFM0wVoi9/k5bhh4bBBFARhJmyPAhIgvR3yIn3oP9sOukd+CWYksgC1v46pcQeb3nI
+         eq1Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=EBStl9Zu61u4Oh9p7qnn2tBkLPuHcxjt7VlKEHf8mF4=;
+        b=VWb1M2i2Gkx5OY/GgYD8dwIw1DfmI1qQdEpi5LOHkbDQLwl3WwGrkR46RQ3txOUL4u
+         nSWxyu7sHdRpAuVwRfh8yfut2UYIMm3KMuXZLorMDznWL2MVHG1Nnk8PoSiiae4EHaow
+         FhTtjJWdVVqfub1LID9zUT+WiRPZ3aIlnwvf6RO6MaiMYeH2gv1l46qUBZXKOTCYLeT7
+         iEGKIUYXxH5Mz+pAIM6PZe+M9/OdFjdNmMiG+rNXLQ+SRLYzt6qA1P9z8TRle+na/Xha
+         tRwxXBN4Tzv15y5qZGI/oxAr5JgrHLyoitBfclFNv3VqVE5RjJoyv/MQWiMc5t16dVoZ
+         pmDA==
+X-Gm-Message-State: AGi0Puabn48MIWlaqOs1FUlkWmX6nTsQDKngzw78Igq7ubgMqraPuKJJ
+	Cb5Ex7JWuguhJX6nxsjywqG16KYH4No=
+X-Google-Smtp-Source: APiQypK5y7OsThC/h88B7xPhpBQFv68lwL1Q3Il09UXk3/WPJV6cXVHGyhcQSWN03pCwtjUGVzs5VA==
+X-Received: by 2002:a17:902:8bc3:: with SMTP id r3mr7741188plo.220.1587001599144;
+        Wed, 15 Apr 2020 18:46:39 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::58e0])
+        by smtp.gmail.com with ESMTPSA id m2sm838347pjl.21.2020.04.15.18.46.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 15 Apr 2020 18:46:38 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Subject: [meta-multimedia][PATCH] vlc: Use pkgconfig to find userland graphics libs
+Date: Wed, 15 Apr 2020 18:46:36 -0700
+Message-Id: <20200416014636.1738216-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.26.1
 MIME-Version: 1.0
-Return-Path: peter.kjellerstedt@axis.com
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWxA
-bGlzdHMub3BlbmVtYmVkZGVkLm9yZyA8b3BlbmVtYmVkZGVkLQ0KPiBkZXZlbEBsaXN0cy5vcGVu
-ZW1iZWRkZWQub3JnPiBPbiBCZWhhbGYgT2YgVHJldm9yIEdhbWJsaW4NCj4gU2VudDogZGVuIDE1
-IGFwcmlsIDIwMjAgMDI6MTANCj4gVG86IEtoZW0gUmFqIDxyYWoua2hlbUBnbWFpbC5jb20+DQo+
-IENjOiBvcGVuZW1iZWRlZC1kZXZlbCA8b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJl
-ZGRlZC5vcmc+DQo+IFN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLXdlYnNlcnZlcl1bUEFUQ0hdIGFw
-YWNoZTI6IHVwZ3JhZGUgMi40LjQxIC0+DQo+IDIuNC40Mw0KPiANCj4gT24gNC8xNC8yMCA2OjM4
-IFBNLCBLaGVtIFJhaiB3cm90ZToNCj4gPiBhcGFjaGUtd2Vic29ja2V0cyBkb2VzIG5vdCBsaWtl
-IGl0DQo+ID4gDQo+ID4gaHR0cHM6Ly9lcnJvcnMueW9jdG9wcm9qZWN0Lm9yZy9FcnJvcnMvRGV0
-YWlscy80MDM3NzEvDQo+IA0KPiBUaGFua3MsIHdpbGwgdGFrZSBhIGxvb2sgYXQgaXQgYW5kIHJl
-LXNlbmQuDQoNCkl0IGFwcGVhcnMgdGhleSBoYXZlIGFkZGVkIGNyb3NzIGNvbXBpbGF0aW9uIHN1
-cHBvcnQgdG8gYXB4cywgYnV0IA0KaXQgY2xhc2hlcyB3aXRoIHRoZSBjaGFuZ2VzIGRvbmUgaW4g
-T0UgdG8gbWFrZSBpdCBzdXBwb3J0IGNyb3NzIA0KY29tcGlsYXRpb24uIEkgdHJpZWQgdG8gc29s
-dmUgaXQgYnkgYmFzaWNhbGx5IHJlbW92aW5nIHRoZSBPRSANCmNoYW5nZXMsIGJ1dCBpdCB3YXMg
-bm90IGFzIHNpbXBsZSBhcyB0aGF0LiBJbiB0aGUgZW5kIHdlIHdvcmtlZCANCmFyb3VuZCBpdCB3
-aXRoIHRoaXMgcXVpY2sgZml4Og0KDQphcGFjaGVfc3lzcm9vdF9wcmVwcm9jZXNzX2FwcGVuZCgp
-IHsNCiAgICAgICAgIyBEaXNhYmxlIGFweHMnIGJ1aWx0IGluIGNyb3NzIGNvbXBpbGF0aW9uIHN1
-cHBvcnQgYW5kIHJlbHkgb24gd2hhdCB0aGUNCiAgICAgICAgIyByZWNpcGUgc2V0cyB1cC4NCiAg
-ICAgICAgc2VkIC1pICdzISRkZXN0ZGlyID0gLiohJGRlc3RkaXIgPSAiIjshJyAke1NZU1JPT1Rf
-REVTVERJUn0ke2JpbmRpcl9jcm9zc3NjcmlwdHN9L2FweHMNCn0NCg0KSG93ZXZlciwgSSBob3Bl
-IHlvdSBjYW4gY29tZSB1cCB3aXRoIGEgYmV0dGVyIHNvbHV0aW9uIHRoYXQgDQphY3R1YWxseSBt
-YWtlcyB1c2Ugb2Ygd2hhdCB0aGV5IGRpZCB1cHN0cmVhbSBhbmQgdGh1cyBsZXNzZW4gDQp0aGUg
-Y2hhbmdlcyB0aGF0IGhhdmUgdG8gYmUgYXBwbGllZCBieSBPRS4NCg0KLy9QZXRlcg0KDQo+ID4g
-T24gVHVlLCBBcHIgMTQsIDIwMjAgYXQgMTI6NDkgUE0gVHJldm9yIEdhbWJsaW4NCj4gPiA8dHJl
-dm9yLmdhbWJsaW5Ad2luZHJpdmVyLmNvbT4gd3JvdGU6DQo+ID4+IExJQ0VOU0UgZmlsZSB3YXMg
-dXBkYXRlZCBkdWUgdG8gYSB0eXBvIGZpeC4NCj4gPj4NCj4gPj4gTm90ZSB0aGF0IHRoaXMgdXBn
-cmFkZSBmaXhlcyB0d28gQ1ZFUyBhZmZlY3RpbmcgdmVyc2lvbnMNCj4gPj4gMi40LjQxIGFuZCBl
-YXJsaWVyOg0KPiA+Pg0KPiA+PiBDVkU6IENWRS0yMDIwLTE5MjcNCj4gPj4gQ1ZFOiBDVkUtMjAy
-MC0xOTM0DQo+ID4+DQo+ID4+IFNlZToNCj4gPj4gaHR0cHM6Ly9udmQubmlzdC5nb3YvdnVsbi9k
-ZXRhaWwvQ1ZFLTIwMjAtMTkyNw0KPiA+PiBodHRwczovL252ZC5uaXN0Lmdvdi92dWxuL2RldGFp
-bC9DVkUtMjAyMC0xOTM0DQo+ID4+DQo+ID4+IFNpZ25lZC1vZmYtYnk6IFRyZXZvciBHYW1ibGlu
-IDx0cmV2b3IuZ2FtYmxpbkB3aW5kcml2ZXIuY29tPg0KPiA+PiAtLS0NCj4gPj4gICAuLi4vYXBh
-Y2hlMi97YXBhY2hlMl8yLjQuNDEuYmIgPT4gYXBhY2hlMl8yLjQuNDMuYmJ9ICAgICAgICB8IDYg
-KysrLQ0KPiAtLQ0KPiA+PiAgIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDMgZGVs
-ZXRpb25zKC0pDQo+ID4+ICAgcmVuYW1lIG1ldGEtd2Vic2VydmVyL3JlY2lwZXMtaHR0cGQvYXBh
-Y2hlMi97YXBhY2hlMl8yLjQuNDEuYmIgPT4NCj4gYXBhY2hlMl8yLjQuNDMuYmJ9ICg5NyUpDQo+
-ID4+DQo+ID4+IGRpZmYgLS1naXQgYS9tZXRhLXdlYnNlcnZlci9yZWNpcGVzLWh0dHBkL2FwYWNo
-ZTIvYXBhY2hlMl8yLjQuNDEuYmINCj4gYi9tZXRhLXdlYnNlcnZlci9yZWNpcGVzLWh0dHBkL2Fw
-YWNoZTIvYXBhY2hlMl8yLjQuNDMuYmINCj4gPj4gc2ltaWxhcml0eSBpbmRleCA5NyUNCj4gPj4g
-cmVuYW1lIGZyb20gbWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy1odHRwZC9hcGFjaGUyL2FwYWNoZTJf
-Mi40LjQxLmJiDQo+ID4+IHJlbmFtZSB0byBtZXRhLXdlYnNlcnZlci9yZWNpcGVzLWh0dHBkL2Fw
-YWNoZTIvYXBhY2hlMl8yLjQuNDMuYmINCj4gPj4gaW5kZXggYTM0NzM0YzIwLi4yZmZmMTUzZmMg
-MTAwNjQ0DQo+ID4+IC0tLSBhL21ldGEtd2Vic2VydmVyL3JlY2lwZXMtaHR0cGQvYXBhY2hlMi9h
-cGFjaGUyXzIuNC40MS5iYg0KPiA+PiArKysgYi9tZXRhLXdlYnNlcnZlci9yZWNpcGVzLWh0dHBk
-L2FwYWNoZTIvYXBhY2hlMl8yLjQuNDMuYmINCj4gPj4gQEAgLTI0LDkgKzI0LDkgQEAgU1JDX1VS
-SV9hcHBlbmRfY2xhc3MtdGFyZ2V0ID0gIiBcDQo+ID4+ICAgICAgICAgICAgICBmaWxlOi8vdm9s
-YXRpbGVzLjA0X2FwYWNoZTIgXA0KPiA+PiAgICAgICAgICAgICAgIg0KPiA+Pg0KPiA+PiAtTElD
-X0ZJTEVTX0NIS1NVTSA9DQo+ICJmaWxlOi8vTElDRU5TRTttZDU9ZDUyZDBmZDBiYzc4OGYwNjhl
-NjQ3MTE2YzAxZGRmY2QiDQo+ID4+IC1TUkNfVVJJW21kNXN1bV0gPSAiZGZjNjc0ZjhmNDU0ZTNi
-YzJkNGNjZDczYWQzYjVmMWUiDQo+ID4+IC1TUkNfVVJJW3NoYTI1NnN1bV0gPQ0KPiAiMTMzZDQ4
-Mjk4ZmU1MzE1YWU5MzY2YTBlYzY2MjgyZmE0MDQwZWZhNWQ1NjYxNzQ0ODEwNzdhZGU3ZDE4ZWE0
-MCINCj4gPj4gK0xJQ19GSUxFU19DSEtTVU0gPQ0KPiAiZmlsZTovL0xJQ0VOU0U7bWQ1PWJkZGVk
-ZGZhYzgwYjJjOWE4ODIyNDFkMDA4YmI0MWMzIg0KPiA+PiArU1JDX1VSSVttZDVzdW1dID0gIjc5
-MWM5ODZiMWU3MGZlNjFlYjQ0MDYwYWFjYzg5YTY0Ig0KPiA+PiArU1JDX1VSSVtzaGEyNTZzdW1d
-ID0NCj4gImE0OTc2NTJhYjNmYzgxMzE4Y2RjMmEyMDMwOTBhOTk5MTUwZDg2NDYxYWNmZjk3YzEw
-NjVkYzkxMGZlMTBmNDMiDQo+ID4+DQo+ID4+ICAgUyA9ICIke1dPUktESVJ9L2h0dHBkLSR7UFZ9
-Ig0KPiA+Pg0KPiA+PiAtLQ0KPiA+PiAyLjE3LjENCj4gPj4NCj4gPj4NCg==
+Add mmal, x264, fluidsynth as packageconfigs so it can be easily
+enabled/disabled by users
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andreas Müller <schnitzeltony@gmail.com>
+---
+ ...packageconfig-to-detect-mmal-support.patch | 61 +++++++++++++++++++
+ .../recipes-multimedia/vlc/vlc_3.0.9.2.bb     |  9 ++-
+ 2 files changed, 67 insertions(+), 3 deletions(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0001-Use-packageconfig-to-detect-mmal-support.patch
+
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0001-Use-packageconfig-to-detect-mmal-support.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0001-Use-packageconfig-to-detect-mmal-support.patch
+new file mode 100644
+index 0000000000..424aaa2815
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc/0001-Use-packageconfig-to-detect-mmal-support.patch
+@@ -0,0 +1,61 @@
++From e8716a7755eef93e1033bb913e1eb4faee54658f Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 15 Apr 2020 18:29:26 -0700
++Subject: [PATCH] Use packageconfig to detect mmal support
++
++This needs userland graphics libraries, because distros may install it
++in different locations, therefore its best to rely on pkgconf to find
++the libs and header locations instead of assuming /opt/vc which might
++work on some distros ( like raspbian ) but not everywhere
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ configure.ac | 31 +++++++++++--------------------
++ 1 file changed, 11 insertions(+), 20 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index d7cf692..f81b99d 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -3427,27 +3427,18 @@ AC_ARG_ENABLE(mmal,
++   AS_HELP_STRING([--enable-mmal],
++     [Multi-Media Abstraction Layer (MMAL) hardware plugin (default enable)]))
++ if test "${enable_mmal}" != "no"; then
++-  VLC_SAVE_FLAGS
++-  LDFLAGS="${LDFLAGS} -L/opt/vc/lib -lvchostif"
++-  CPPFLAGS="${CPPFLAGS} -isystem /opt/vc/include -isystem /opt/vc/include/interface/vcos/pthreads -isystem /opt/vc/include/interface/vmcs_host/linux"
++-  AC_CHECK_HEADERS(interface/mmal/mmal.h,
++-    [ AC_CHECK_LIB(bcm_host, vc_tv_unregister_callback_full, [
++-        have_mmal="yes"
++-        VLC_ADD_PLUGIN([mmal])
++-        VLC_ADD_LDFLAGS([mmal],[ -L/opt/vc/lib ])
++-        VLC_ADD_CFLAGS([mmal],[ -isystem /opt/vc/include -isystem /opt/vc/include/interface/vcos/pthreads -isystem /opt/vc/include/interface/vmcs_host/linux ])
++-        VLC_ADD_LIBS([mmal],[ -lbcm_host -lmmal -lmmal_core -lmmal_components -lmmal_util -lvchostif ]) ], [
++-          AS_IF([test "${enable_mmal}" = "yes"],
++-            [ AC_MSG_ERROR([Cannot find bcm library...]) ],
++-            [ AC_MSG_WARN([Cannot find bcm library...]) ])
++-          ],
++-        [])
++-    ] , [ AS_IF([test "${enable_mmal}" = "yes"],
++-      [ AC_MSG_ERROR([Cannot find development headers for mmal...]) ],
++-      [ AC_MSG_WARN([Cannot find development headers for mmal...]) ]) ])
++-  VLC_RESTORE_FLAGS
+++      PKG_CHECK_MODULES(BCMHOST, [bcm_host], [
+++      HAVE_BCMHOST=yes
+++      AC_DEFINE(HAVE_BCMHOST, 1, [Define this if you have have userlang graphics installed])
+++      VLC_ADD_LIBS([bcmhost],[$BCMHOST_LIBS])
+++      VLC_ADD_CFLAGS([bcmhost],[$BCMHOST_CFLAGS])
+++      ],:
+++      [AC_MSG_WARN([${BCMHOST_PKG_ERRORS}: userland graphics not available.])
+++      HAVE_BCMHOST=no])
+++
+++      AC_CHECK_HEADERS(interface/mmal/mmal.h)
++ fi
++-AM_CONDITIONAL([HAVE_MMAL], [test "${have_mmal}" = "yes"])
+++AM_CONDITIONAL([HAVE_MMAL], [test "${have_bcmhost}" = "yes"])
++ 
++ dnl
++ dnl evas plugin
++-- 
++2.26.1
++
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb
+index 556e79c7e6..35fda3f8b0 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ DEPENDS = "coreutils-native fribidi libtool libgcrypt libgcrypt-native \
+    dbus libxml2 gnutls \
+-   tremor faad2 ffmpeg flac fluidsynth alsa-lib \
++   tremor faad2 ffmpeg flac alsa-lib \
+    lua-native lua libidn \
+    avahi jpeg xz libmodplug mpeg2dec \
+    libmtp libopus orc libsamplerate0 libusb1 schroedinger taglib \
+@@ -22,6 +22,7 @@ SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
+            file://0006-make-opencv-configurable.patch \
+            file://0007-use-vorbisidec.patch \
+            file://0008-fix-luaL-checkint.patch \
++           file://0001-Use-packageconfig-to-detect-mmal-support.patch \
+ "
+ SRC_URI[sha256sum] = "a9bdad293d81cd48516abad8d490d8ab4012964ae541ff19e00021e071e47601"
+ 
+@@ -29,7 +30,6 @@ inherit autotools features_check gettext pkgconfig features_check mime-xdg
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+-ARM_INSTRUCTION_SET = "arm"
+ export BUILDCC = "${BUILD_CC}"
+ EXTRA_OECONF = "\
+     --enable-run-as-root \
+@@ -51,12 +51,15 @@ EXTRA_OECONF = "\
+ "
+ 
+ PACKAGECONFIG ?= " \
+-    live555 dc1394 dv1394 notify fontconfig freetype dvdread png \
++    live555 dc1394 dv1394 notify fontconfig fluidsynth freetype dvdread png \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
+ "
+ 
+ inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'qmake5_paths', '', d)}
+ 
++PACKAGECONFIG[mmal] = "        --enable-omxil --enable-omxil-vout --enable-rpi-omxil --enable-mmal,,userland"
++PACKAGECONFIG[x264] = "--enable-x264,--disable-x264,x264"
++PACKAGECONFIG[fluidsynth] = ",,fluidsynth"
+ PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
+ PACKAGECONFIG[a52] = "--enable-a52,--disable-a52,liba52"
+ PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
+-- 
+2.26.1
+
