@@ -1,92 +1,91 @@
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com [209.85.222.193])
- by mx.groups.io with SMTP id smtpd.web11.13097.1587062152175845700
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com [209.85.160.194])
+ by mx.groups.io with SMTP id smtpd.web10.13441.1587062332042884130
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Apr 2020 11:35:52 -0700
+ Thu, 16 Apr 2020 11:38:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dHQyshAK;
- spf=pass (domain: gmail.com, ip: 209.85.222.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f193.google.com with SMTP id j4so22382192qkc.11
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2020 11:35:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=tjKO/Z/e;
+ spf=pass (domain: gmail.com, ip: 209.85.160.194, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f194.google.com with SMTP id b10so17274125qtt.9
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2020 11:38:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=enh4o1+D41qXQE6v5UgSudenJxlJCiwzXcZJ7Vvi0gY=;
-        b=dHQyshAKU0AWktGUVxYqZDmzSAppL6+u2uuWL1hVQU0Pg0nvbsVjC8lIgmxV/Q5iba
-         xBMrucBM4JtQkdyAvlM8af+/+chVZ2oR3ZeuUiGZKEH4OmCFJQg5S6bZoArYIv5ufi48
-         deugWTU92FqYHidV7NeXG5DyaDh2IJDeZOQBceKUbtgwIbKEpib0NKEbMisJyXFhP4YP
-         WF5KhXzx+U2rinHFDoHvm+QmAptX4W7iahrYkhPO0OWaRytTMFFC6BgCYVeu1DDoWFCS
-         yBoXNKAf+rNlqZP61t3Zaxj6n5SQktPzxbETOR+eHmbC6tY0ymsML4al3Gli8s6LtMPz
-         xrTg==
+        bh=gUuqKGuXwmUeOBmIaC1inQPbi6bXJqT5pSNu2bAFFLM=;
+        b=tjKO/Z/e7+0Bh+nmvzydJ1s29zjruFfQLQVbkXXqLt49Q89dD1YKe0gK72UthLpOt7
+         2YBSMzzE1T3r5MnvaYhtDMsIrBz0EF/e2WojA0Yf8t4oZDyyZl8ZnVle0xvKMEFYK5mQ
+         6z9sMuuhs6Y5NhYYTleNXn8YdEThKHvvDgCkTsMiY3O6x4+xWFEDt78otbq6PddiJ4T+
+         feQN7MLHTOC4qommvzfdNgbIXSIetZ+IGHNWbLNjU9yqNfmOnLWjcJ93VeZf22Gf2cl4
+         M4i3PJQkGW213ZVrayaZTyqKlpco68XdAQcYgFsmlOwsC3Uk2v+qaqVeY9e4OvmUwU4D
+         j6MQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=enh4o1+D41qXQE6v5UgSudenJxlJCiwzXcZJ7Vvi0gY=;
-        b=um4obC9GOegV/5LSrFeKY55dd95OA2H0tCT6v9cQFSMK6mls2d9Luep/njsi/UeD+E
-         YTOvxdooJTLtBcv4goLLJE1Twsj+Xia+SsZgUJSdHRzm/obVC+85heCxJiiq0XO2R+Zd
-         41vtI0VQI+1cjTKA0zgYLABLZrFN0gh7KEpbOhF6GG8J4P8rzZ0MqxrgCPQBLKQA5WBF
-         FGrWcOgO4/nzRHOOu/zVOQs5kbP10wBvbUxE1fuI9zchsE7teIFym6RS28FmpyNMC970
-         1XQVvM+vf/HV7D2y97Iu4NfCxjLnFqs0ng8ZlJo6jtuaLkZhmm9l4aCicfGyHybnEKq8
-         P2Fg==
-X-Gm-Message-State: AGi0PuZluhAYngb1oGRa0PJY9JYM3aFLFWEIa76p2GMlHm9npqlwzuss
-	T4uuAGeZJ8ZfDf7e7WOcVuquEOb5tu5xdmBqYOg=
-X-Google-Smtp-Source: APiQypITiceu+eAzgJ2DHFrTKsifaVdfJ/z1B4D67B1NrEaUrnBcpRH06rfb2sh3eyr82GC9Srg5E2DJRCjJNHM3H34=
-X-Received: by 2002:a05:620a:16aa:: with SMTP id s10mr8566901qkj.225.1587062150931;
- Thu, 16 Apr 2020 11:35:50 -0700 (PDT)
+        bh=gUuqKGuXwmUeOBmIaC1inQPbi6bXJqT5pSNu2bAFFLM=;
+        b=elZWyZzoZSsracctmPoi1QWEa4Lgu3itZnbX0AIALsafNkqp8GiQ8Om69weop8LWjV
+         43Hh/8lxhkNT9z5d+yaOGdzHmync/GrhLY8mb34Zrt/aH1PWefE1FqYSDWMGj+WlTA3Y
+         BQomTlQMXBtwpMcyoxchan6h+U6q2DFfRbTTy47IIwmlUzOMeieOgbmUr8PGZ6QjNgIp
+         B44wFrZWwi6RkQcgcEN+uRWVwOXFgaku0Z9q7R8iik2o6+ybJCn6tGOywA/nuRSSuWSr
+         pzkwFO1GaPnHZjC6dBCMMB50D/wYNv+fdvV6qTahba0AbHfRD2eQZIgMX0MDazyIZLeI
+         zuXw==
+X-Gm-Message-State: AGi0PuZS9Bni0ueQ34pC3SYZV8ookCxQCBRcmIu7eKEWl+T04kFOx1wE
+	DhjQteIMPACEE44jhh+PRpT4aEM19SKlYPmz7+1UpyzeODo=
+X-Google-Smtp-Source: APiQypI/DxLBO2ZJYPdfNORcLciC2BkeoWf87VwlEcUP/k8Bbd+OxsmQMwoTrteYlN8ViZK006ods3idrRSZQFAStQI=
+X-Received: by 2002:ac8:a09:: with SMTP id b9mr21718051qti.190.1587062330954;
+ Thu, 16 Apr 2020 11:38:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200416102923.27122-1-Haseeb_Ashraf@mentor.com> <20200416102923.27122-2-Haseeb_Ashraf@mentor.com>
-In-Reply-To: <20200416102923.27122-2-Haseeb_Ashraf@mentor.com>
+References: <20200416141656.7900-1-gregory.vimont@softbankrobotics.com>
+In-Reply-To: <20200416141656.7900-1-gregory.vimont@softbankrobotics.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 16 Apr 2020 11:35:24 -0700
-Message-ID: <CAMKF1sq1nqJG54j0UMKpwQL_OGDQPNaRRao-9LyoVY+ok6Y0yQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 2/2] luaposix: add 33.4.0 version recipe which is compatible with lua5.3
-To: Haseeb Ashraf <haseeb_ashraf@mentor.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Date: Thu, 16 Apr 2020 11:38:24 -0700
+Message-ID: <CAMKF1sq0uK6F0h=MANR1kUNjwUzZOUO-RT+Gh2ACYqaJLkv9bA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/3] opencv: 4.1.0 -> 4.1.1
+To: Gregory Vimont <gregory.vimont@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Gregory Vimont <gregory.vimont@softbankrobotics.com>
 Content-Type: text/plain; charset="UTF-8"
 
-this is showing
+This fails on mips/glibc
 
-QA Issue: luaposix: SRC_URI uses unstable GitHub archives [src-uri-bad]
+https://errors.yoctoproject.org/Errors/Details/404685/
 
-so please use a release artifact or use git fetcher which is pinned to
-particular release
 
-On Thu, Apr 16, 2020 at 3:29 AM Haseeb Ashraf <haseeb_ashraf@mentor.com> wrote:
+On Thu, Apr 16, 2020 at 7:17 AM Gregory Vimont <gregory.vimont@gmail.com> wrote:
 >
-> Signed-off-by: Haseeb Ashraf <Haseeb_Ashraf@mentor.com>
+> Signed-off-by: Gregory Vimont <gregory.vimont@softbankrobotics.com>
 > ---
->  .../luaposix/luaposix_33.4.0.bb               | 21 +++++++++++++++++++
->  1 file changed, 21 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb
+>  .../opencv/{opencv_4.1.0.bb => opencv_4.1.1.bb}             | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-oe/recipes-support/opencv/{opencv_4.1.0.bb => opencv_4.1.1.bb} (98%)
 >
-> diff --git a/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb b/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb
-> new file mode 100644
-> index 000000000..869181848
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb
-> @@ -0,0 +1,21 @@
-> +DESCRIPTION = "luaposix is a POSIX binding for Lua."
-> +LICENSE = "MIT"
-> +HOMEPAGE = "https://github.com/luaposix/luaposix"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=7dd2aad04bb7ca212e69127ba8d58f9f"
-> +
-> +SRC_URI[md5sum] = "b36ff049095f28752caeb0b46144516c"
-> +SRC_URI[sha256sum] = "e66262f5b7fe1c32c65f17a5ef5ffb31c4d1877019b4870a5d373e2ab6526a21"
-> +
-> +DEPENDS += "lua-native lua"
-> +
-> +SRC_URI = "https://github.com/luaposix/luaposix/archive/release-v${PV}.tar.gz"
-> +S = "${WORKDIR}/luaposix-release-v${PV}"
-> +LUA_VDIR = "5.3"
-> +
-> +inherit autotools pkgconfig
-> +
-> +do_install() {
-> +    oe_runmake 'DESTDIR=${D}' 'luadir=${datadir}/lua/${LUA_VDIR}' 'luaexecdir=${libdir}/lua/${LUA_VDIR}' install
-> +}
-> +
-> +FILES_${PN} = "${datadir}/lua/${LUA_VDIR} ${libdir}/lua/${LUA_VDIR}"
+> diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-oe/recipes-support/opencv/opencv_4.1.1.bb
+> similarity index 98%
+> rename from meta-oe/recipes-support/opencv/opencv_4.1.0.bb
+> rename to meta-oe/recipes-support/opencv/opencv_4.1.1.bb
+> index d781da600..5074eb2fa 100644
+> --- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
+> +++ b/meta-oe/recipes-support/opencv/opencv_4.1.1.bb
+> @@ -10,8 +10,8 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
+>
+>  DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
+>
+> -SRCREV_opencv = "371bba8f54560b374fbcd47e7e02f015ac4969ad"
+> -SRCREV_contrib = "2c32791a9c500343568a21ea34bf2daeac2adae7"
+> +SRCREV_opencv = "ddbd10c0019f3ee5f43b7902d47e7fc4303a6574"
+> +SRCREV_contrib = "0915b7eaddba3c06d83e201c9a7595e73801f417"
+>  SRCREV_ipp = "32e315a5b106a7b89dbed51c28f8120a48b368b4"
+>  SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+>  SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
+> @@ -51,7 +51,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
+>             file://0001-carotene-Replace-ipcp-unit-growth-with-ipa-cp-unit-g.patch \
+>             file://download.patch \
+>             "
+> -PV = "4.1.0"
+> +PV = "4.1.1"
+>
+>  S = "${WORKDIR}/git"
+>
 > --
 > 2.17.1
 >
