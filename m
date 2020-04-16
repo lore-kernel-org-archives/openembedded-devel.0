@@ -1,100 +1,60 @@
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
- by mx.groups.io with SMTP id smtpd.web11.2837.1587005221778146091
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web12.1489.1587016281465528225
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Apr 2020 19:47:02 -0700
+ Wed, 15 Apr 2020 22:51:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=fHrDAx4w;
- spf=pass (domain: axis.com, ip: 195.60.68.17, mailfrom: peter.kjellerstedt@axis.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; l=3115; q=dns/txt; s=axis-central1;
-  t=1587005222; x=1618541222;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=GLmlHJKmWW/wBAOtZUReIR+61vRg29d5BQfaSICLr/U=;
-  b=fHrDAx4wzkQ3XyJqLF+uhkO7zy7RDfX8HHr1Gfqw+7rei/mWU6bnXGZ1
-   ZyUDinhUB1JQy7vUHfcVos/HYH02XBh5Man11cOz55d/d1e+ujQnS8YX6
-   bNFzPW3eMVEsiYk1aKs70zLpsHEzj3BxzKwxgO0FSXytSinV4mMaOyAlG
-   2CUM4PM1FXI5/swMw6u6y/WCUm5bijtPH39YccEbxyCj3cLXhYn26J9jd
-   AoId0F3150ufczEhOROIVUwNRqNEC9wiBx8FlraaUPktOZFeuxRkvdDUx
-   ERMp3bwHGYen+5Pxd3tWFABSkisFYl1A9fiKD3ukcXjdOwCUZ5cTZW+IL
-   g==;
-IronPort-SDR: aAVncXMZJ4zgLC9CuBId4cU2rPK3csVq5kRN/NACa7nSlcvAqzOkKC6LQFwttZzEodZezOv02u
- w5H5K9ahBVGZwuwMmAjUy5r1JQdHJEIr5Bw8A0M5aus7SYu8MeMbzKni8Xrodqu50K3IcWAERp
- GTyd84/cQBSj4iS0icb5Jm6+fhjFUXPG1L4mYoRirCgjnxKukKDabDOjHpMio5Awcq30V5vuPQ
- th77t7HNd4VbNGRAxIsSe98u4Go6FVrEPGvkcTFNKXAbJX3h4MkCPNJENEbVcvOXo4RPPQ+JYu
- SPE=
-X-IronPort-AV: E=Sophos;i="5.72,388,1580770800"; 
-   d="scan'208";a="7675419"
-From: "Peter Kjellerstedt" <peter.kjellerstedt@axis.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] syslog-ng: Don't install configuration files as executable
-Date: Thu, 16 Apr 2020 04:46:56 +0200
-Message-ID: <20200416024656.3797-1-pkj@axis.com>
-X-Mailer: git-send-email 2.21.1
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: mingli.yu@windriver.com)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 03G5pIlR025039
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
+	Wed, 15 Apr 2020 22:51:18 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+ 14.3.487.0; Wed, 15 Apr 2020 22:51:02 -0700
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH v2] mariadb: clean the empty /lib dir
+Date: Thu, 16 Apr 2020 13:51:00 +0800
+Message-ID: <1587016260-203798-1-git-send-email-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <160600B2F0BD635E.31800@lists.openembedded.org>
+References: <160600B2F0BD635E.31800@lists.openembedded.org>
 MIME-Version: 1.0
-Return-Path: pkj@axis.com
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Also remove unnecessary slashes before ${sysconfdir} and
-${localstatedir}.
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+When usrmerge is enabled in DISTRO_FEATURES, there
+comes below error:
+ERROR: mariadb-10.4.12-r0 do_package_qa: QA Issue: mariadb-leftovers package is not obeying usrmerge distro feature. /lib should be relocated to /usr. [usrmerge]
+ERROR: mariadb-10.4.12-r0 do_package_qa: QA run found fatal errors. Please consider fixing them.
+
+It is because empty /lib dir exists in mariadb-leftovers
+as below:
+ $ rpm -qpl mariadb-leftovers-10.4.12-r0.core2_64.rpm |grep ^/lib
+ /lib
+
+Considering the empty /lib dir is introduced when pam
+is enabled in DISTRO_FEATURES, so remove the empty /lib
+dir when pam is enabled to fix the above error.
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- .../recipes-support/syslog-ng/syslog-ng.inc   | 24 +++++++++----------
- 1 file changed, 12 insertions(+), 12 deletions(-)
+ meta-oe/recipes-dbs/mysql/mariadb.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-index 8e5368953..ff6d9d26a 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -73,26 +73,26 @@ do_configure_prepend() {
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 5ff273e..95f5acb 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -170,6 +170,7 @@ do_install() {
+     fi
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
+         mv ${D}/lib/security ${D}/${libdir}
++        rmdir --ignore-fail-on-non-empty ${D}/lib
+     fi
  }
  
- do_install_append() {
--    install -d ${D}/${sysconfdir}/${BPN}
--    install -d ${D}/${sysconfdir}/init.d
--    install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/syslog
-+    install -d ${D}${sysconfdir}/${BPN}
-+    install -d ${D}${sysconfdir}/init.d
-+    install -m 755 ${WORKDIR}/initscript ${D}${sysconfdir}/init.d/syslog
- 
--    install -d ${D}/${sysconfdir}/default/volatiles/
--    install -m 755 ${WORKDIR}/volatiles.03_syslog-ng ${D}/${sysconfdir}/default/volatiles/03_syslog-ng
--    install -d ${D}/${sysconfdir}/tmpfiles.d/
--    install -m 755 ${WORKDIR}/syslog-ng-tmp.conf ${D}/${sysconfdir}/tmpfiles.d/syslog-ng.conf
-+    install -d ${D}${sysconfdir}/default/volatiles/
-+    install -m 644 ${WORKDIR}/volatiles.03_syslog-ng ${D}${sysconfdir}/default/volatiles/03_syslog-ng
-+    install -d ${D}${sysconfdir}/tmpfiles.d/
-+    install -m 644 ${WORKDIR}/syslog-ng-tmp.conf ${D}${sysconfdir}/tmpfiles.d/syslog-ng.conf
- 
--    install -d ${D}/${localstatedir}/lib/${BPN}
-+    install -d ${D}${localstatedir}/lib/${BPN}
-     # Remove /var/run as it is created on startup
-     rm -rf ${D}${localstatedir}/run
- 
-     # support for systemd
-     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
--        install ${WORKDIR}/syslog-ng.conf.systemd ${D}${sysconfdir}/${BPN}/${BPN}.conf
-+        install -m 644 ${WORKDIR}/syslog-ng.conf.systemd ${D}${sysconfdir}/${BPN}/${BPN}.conf
- 
-         install -d ${D}${systemd_unitdir}/system/
--        install -m 0644 ${S}/contrib/systemd/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@.service
--        install -m 0644 ${S}/contrib/systemd/${BPN}@default ${D}${sysconfdir}/default/${BPN}@default
-+        install -m 644 ${S}/contrib/systemd/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@.service
-+        install -m 644 ${S}/contrib/systemd/${BPN}@default ${D}${sysconfdir}/default/${BPN}@default
- 
-         sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${sysconfdir}/default/${BPN}@default
-         sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${sysconfdir}/default/${BPN}@default
-@@ -101,7 +101,7 @@ do_install_append() {
-         install -d ${D}${systemd_unitdir}/system/multi-user.target.wants
-         ln -sf ../${BPN}@.service ${D}${systemd_unitdir}/system/multi-user.target.wants/${BPN}@default.service
-     else
--        install ${WORKDIR}/syslog-ng.conf.sysvinit ${D}${sysconfdir}/${BPN}/${BPN}.conf
-+        install -m 644 ${WORKDIR}/syslog-ng.conf.sysvinit ${D}${sysconfdir}/${BPN}/${BPN}.conf
-     fi
- 
-     oe_multilib_header syslog-ng/syslog-ng-config.h
 -- 
-2.21.1
+2.7.4
 
