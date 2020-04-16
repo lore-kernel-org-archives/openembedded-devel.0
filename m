@@ -1,71 +1,65 @@
-Received: from esa2.mentor.iphmx.com (esa2.mentor.iphmx.com [])
- by mx.groups.io with SMTP id smtpd.web10.3681.1587032985956034524
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.5819.1587043007822239487
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Apr 2020 03:29:49 -0700
+ Thu, 16 Apr 2020 06:16:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: mentor.com, ip: <nil>, mailfrom: haseeb_ashraf@mentor.com)
-IronPort-SDR: ozr/SkwFe+CUrF/03mWMj6fDt+OHDEJutyjpuBwFDAmzod8+IdE7HpFp72PtNXYXUtqg2F1eXp
- /SIS4OWmwgE+3Y7SDU81uHkkBXgFadUcDxQtnZeOdGJr3bYhmW9zD7Ups4ZbFTTcirdjPfVTvR
- EoHjVKSDCfhSGWt/kdjuxrmS/bXoFHTdtzV+tcFsTkm1OhFg4ZjUY5tYrUQT1YFcGtpsikosws
- ShnRHDczNnTQJsPP6s4ovTW2HWm1ksYrY5S4k0gwHdumig532gtfFvY6jPoOmP1dSkZq9u/nfo
- 2sA=
-X-IronPort-AV: E=Sophos;i="5.72,390,1580803200"; 
-   d="scan'208";a="47759024"
-Received: from orw-gwy-02-in.mentorg.com ([192.94.38.167])
-  by esa2.mentor.iphmx.com with ESMTP; 16 Apr 2020 02:29:49 -0800
-IronPort-SDR: 9RIS6o37TX0ALqPg/Mxe6YNOwBPHdCircAW5yVPdA3gl/C0sXyWts1jenh9PLZ/OcFgG/NNoi1
- NkjmLYA5vnirkaino0q2iLHM296auljHKStlwhG1fZKoTsZ0nVcEDur2jjjZemuUlCSNB7crmm
- hldjuGhbBh3JkIThvjfgThop35rYwtfhKc0pq7YDUrTS2vRdkJPAwwtKVsQAv48NcNy/hB91AW
- dF6GbDtLpSQngnzMyZMyTZF2IPBieZnIfVmtIdBCGTlgYphHA2cRS/6kurXz9mfUMKbIwpowHb
- r3g=
-From: "Haseeb Ashraf" <haseeb_ashraf@mentor.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: tgamblin@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 03GDGPu5016806
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2020 06:16:36 -0700
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Thu, 16 Apr 2020
+ 06:16:15 -0700
+Received: by ala-lpggp3.wrs.com (Postfix, from userid 20958)	id 2891C900D7F;
+ Thu, 16 Apr 2020 06:16:15 -0700 (PDT)
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH 2/2] luaposix: add 33.4.0 version recipe which is compatible with lua5.3
-Date: Thu, 16 Apr 2020 15:29:23 +0500
-Message-ID: <20200416102923.27122-2-Haseeb_Ashraf@mentor.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200416102923.27122-1-Haseeb_Ashraf@mentor.com>
-References: <20200416102923.27122-1-Haseeb_Ashraf@mentor.com>
+Subject: [meta-webserver][PATCH v2 1/2] apache2: upgrade 2.4.41 -> 2.4.43
+Date: Thu, 16 Apr 2020 06:16:14 -0700
+Message-ID: <20200416131615.164341-1-trevor.gamblin@windriver.com>
+X-Mailer: git-send-email 2.13.3
 MIME-Version: 1.0
-Return-Path: Haseeb_Ashraf@mentor.com
-X-Originating-IP: [137.202.0.90]
-X-ClientProxiedBy: SVR-IES-MBX-08.mgc.mentorg.com (139.181.222.8) To
- svr-ies-mbx-01.mgc.mentorg.com (139.181.222.1)
 Content-Type: text/plain
 
-Signed-off-by: Haseeb Ashraf <Haseeb_Ashraf@mentor.com>
----
- .../luaposix/luaposix_33.4.0.bb               | 21 +++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb
+LICENSE file was updated due to a typo fix.
 
-diff --git a/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb b/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb
-new file mode 100644
-index 000000000..869181848
---- /dev/null
-+++ b/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb
-@@ -0,0 +1,21 @@
-+DESCRIPTION = "luaposix is a POSIX binding for Lua."
-+LICENSE = "MIT"
-+HOMEPAGE = "https://github.com/luaposix/luaposix"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=7dd2aad04bb7ca212e69127ba8d58f9f"
-+
-+SRC_URI[md5sum] = "b36ff049095f28752caeb0b46144516c"
-+SRC_URI[sha256sum] = "e66262f5b7fe1c32c65f17a5ef5ffb31c4d1877019b4870a5d373e2ab6526a21"
-+
-+DEPENDS += "lua-native lua"
-+
-+SRC_URI = "https://github.com/luaposix/luaposix/archive/release-v${PV}.tar.gz"
-+S = "${WORKDIR}/luaposix-release-v${PV}"
-+LUA_VDIR = "5.3"
-+
-+inherit autotools pkgconfig
-+
-+do_install() {
-+    oe_runmake 'DESTDIR=${D}' 'luadir=${datadir}/lua/${LUA_VDIR}' 'luaexecdir=${libdir}/lua/${LUA_VDIR}' install
-+}
-+
-+FILES_${PN} = "${datadir}/lua/${LUA_VDIR} ${libdir}/lua/${LUA_VDIR}"
+Note that this upgrade fixes two CVES affecting versions
+2.4.41 and earlier:
+
+CVE: CVE-2020-1927
+CVE: CVE-2020-1934
+
+See:
+https://nvd.nist.gov/vuln/detail/CVE-2020-1927
+https://nvd.nist.gov/vuln/detail/CVE-2020-1934
+
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+---
+ .../recipes-httpd/apache2/{apache2_2.4.41.bb => apache2_2.4.43.bb}  | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.41.bb => apache2_2.4.43.bb} (97%)
+
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
+similarity index 97%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
+index a34734c20..2fff153fc 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
+@@ -24,9 +24,9 @@ SRC_URI_append_class-target = " \
+            file://volatiles.04_apache2 \
+            "
+ 
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=d52d0fd0bc788f068e647116c01ddfcd"
+-SRC_URI[md5sum] = "dfc674f8f454e3bc2d4ccd73ad3b5f1e"
+-SRC_URI[sha256sum] = "133d48298fe5315ae9366a0ec66282fa4040efa5d566174481077ade7d18ea40"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
++SRC_URI[md5sum] = "791c986b1e70fe61eb44060aacc89a64"
++SRC_URI[sha256sum] = "a497652ab3fc81318cdc2a203090a999150d86461acff97c1065dc910fe10f43"
+ 
+ S = "${WORKDIR}/httpd-${PV}"
+ 
 -- 
-2.17.1
+2.13.3
 
