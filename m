@@ -1,48 +1,56 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web11.9750.1587053640245536920
+Received: from esa2.mentor.iphmx.com (esa2.mentor.iphmx.com [68.232.141.98])
+ by mx.groups.io with SMTP id smtpd.web11.11481.1587058071699550674
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Apr 2020 09:14:00 -0700
+ Thu, 16 Apr 2020 10:27:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: joe.slater@windriver.com)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 03GGDxcC003378
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2020 09:13:59 -0700 (PDT)
-Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCB.corp.ad.wrs.com
- (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Thu, 16 Apr 2020
- 09:13:40 -0700
-From: "Joe Slater" <joe.slater@windriver.com>
+ dkim=missing; spf=pass (domain: mentor.com, ip: 68.232.141.98, mailfrom: haseeb_ashraf@mentor.com)
+IronPort-SDR: JiRhL1/a/oLeLiabPCugYBB9YIXVGG8WwjFGORLPKD8Z8MRdkJeNJtP+7op85wPGmpV23/Bfl/
+ 7VeDMf8IhtbcYuaLSFZuUY1YE/42zl+OfAYIMQcxksX6eJqq5Q/bv3JEMrMFY9f/QSvuJU80x1
+ rBXfezdoPIok/osERlYNmtrawfGQ5KLs+dXaf4c0cNoxLh/2Mtl76N0BVdrUprcX8iE5vF3xwS
+ BLZFj4Op7TOPf1PkjBNbwYBRh4J/itgqzUmDCr803CAVjZF6K+tX09IRz4Ss3nNBFSm0ml+d8B
+ AbQ=
+X-IronPort-AV: E=Sophos;i="5.72,391,1580803200"; 
+   d="scan'208";a="47780723"
+Received: from orw-gwy-01-in.mentorg.com ([192.94.38.165])
+  by esa2.mentor.iphmx.com with ESMTP; 16 Apr 2020 09:27:50 -0800
+IronPort-SDR: GdmZNUPttUTHaqZlhWm4X810Ob5+1eJooEYIqvtk9NEPqE2St9K6NOc78hbOU9l2B4fHqHq8KY
+ qIDCSJlwR4MM1T7ItKxQoUBAc95zhbKPrFYJhdPF901QArKhFnkz4ol/jtUyJWT35Ku62htYoD
+ w9/IQkEADl2zAr2IZ7NhFwHqDyc/kn2D7v1ARb97Y27weJI4XAKiS75l5sZOCjDk3NvAGxHckO
+ 1Cc7C5mO4UEAkSS3XUjMyFB+WFzNg22ZCxlybAkhLA0kSvXEe1Vo/X/im4VXAOA7PxnAmsCO/v
+ 58I=
+From: "Haseeb Ashraf" <haseeb_ashraf@mentor.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
-Subject: [meta-gnome][PATCH 1/1] libnma: allow building for mipsn32
-Date: Thu, 16 Apr 2020 09:13:40 -0700
-Message-ID: <20200416161340.24384-1-joe.slater@windriver.com>
-X-Mailer: git-send-email 2.24.1
+Subject: [meta-oe][PATCH v2] modify LUA_CPATH_DEFAULT for 64-bit architectures
+Date: Thu, 16 Apr 2020 22:27:29 +0500
+Message-ID: <20200416172729.21184-1-Haseeb_Ashraf@mentor.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Return-Path: Haseeb_Ashraf@mentor.com
+X-Originating-IP: [137.202.0.90]
+X-ClientProxiedBy: svr-ies-mbx-02.mgc.mentorg.com (139.181.222.2) To
+ svr-ies-mbx-01.mgc.mentorg.com (139.181.222.1)
 Content-Type: text/plain
 
-go object introspection is not support for mipsn32, so
-disable vapi for that architecture.
+LUA_CPATH_DEFAULT for *.so files should include
+LUA_ROOT/lib64/lua/LUA_VDIR not LUA_ROOT/lib/lua/LUA_VDIR
 
-Signed-off-by: Joe Slater <joe.slater@windriver.com>
+Signed-off-by: Haseeb Ashraf <Haseeb_Ashraf@mentor.com>
 ---
- meta-gnome/recipes-connectivity/libnma/libnma_1.8.28.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-oe/recipes-devtools/lua/lua_5.3.5.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-gnome/recipes-connectivity/libnma/libnma_1.8.28.bb b/meta-gnome/recipes-connectivity/libnma/libnma_1.8.28.bb
-index 267baff..8cb0bbc 100644
---- a/meta-gnome/recipes-connectivity/libnma/libnma_1.8.28.bb
-+++ b/meta-gnome/recipes-connectivity/libnma/libnma_1.8.28.bb
-@@ -18,4 +18,8 @@ PACKAGECONFIG[gcr] = "-Dgcr=true,-Dgcr=false,gcr"
- PACKAGECONFIG[iso_codes] = "-Diso_codes=true,-Diso_codes=false,iso-codes,iso-codes"
- PACKAGECONFIG[mobile_broadband_provider_info] = "-Dmobile_broadband_provider_info=true,-Dmobile_broadband_provider_info=false,mobile-broadband-provider-info,mobile-broadband-provider-info"
+diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
+index ae41e627f..a23a4a5da 100644
+--- a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
++++ b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
+@@ -35,6 +35,7 @@ EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -fPIC' MYLDFLAGS='${LDFLAGS
  
-+# go introspection is not supported for mipsn32, but vapi needs it
-+#
-+EXTRA_OEMESON_mipsarchn32_append = " -Dvapi=false"
-+
- GTKDOC_MESON_OPTION = "gtk_doc"
+ do_configure_prepend() {
+     sed -i -e s:/usr/local:${prefix}:g src/luaconf.h
++    sed -i -e s:lib/lua/:${baselib}/lua/:g src/luaconf.h
+ }
+ 
+ do_compile () {
 -- 
-2.7.4
+2.17.1
 
