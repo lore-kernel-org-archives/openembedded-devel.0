@@ -1,118 +1,84 @@
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com [209.85.221.65])
- by mx.groups.io with SMTP id smtpd.web10.6515.1587044289234200019
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.web10.7342.1587046624208483004
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Apr 2020 06:38:09 -0700
+ Thu, 16 Apr 2020 07:17:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=g7K3o0X5;
- spf=pass (domain: gmail.com, ip: 209.85.221.65, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f65.google.com with SMTP id b11so4861921wrs.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2020 06:38:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=tazlGrK+;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: gregory.vimont@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id z6so5082330wml.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2020 07:17:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:date:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=2SMxd8WFqm0f2fl+sHxTaYdSqxOO5PfwgxEf2j/Urg8=;
-        b=g7K3o0X5v1h5BFss1Icqhw9F7jBpTkxJYGszEv0iZ+G3LCIXx/dhE9ChP/ABTmK4hf
-         f2ShVRmxm8sEO+ZCs8GvSO6fm9yijTANGClNzPeu6uFiVMqlMYh56MbGzJcxe7yeCsKb
-         doQFIIWoGoKDhwr0eVxs4kU/8hF1HklJTzutpECaqo/UCym8r1ntdz/hQJeCyTuqQK6/
-         6L7ADhBsK1QUrmMU5elucyPDUzOPuQg6pzTk8+HZqI9dd96brzkv0nUQgVj+XoyH5w6v
-         L/iVrx04RKdBXnBg4KrhDFsUK1BfZ9c4pT0Va78WE6JObwMcl/OIWgA7iUH2NJCYD02Y
-         ey+A==
+        h=from:to:cc:subject:date:message-id;
+        bh=WdCybblsp93W7+sJnIgJ4+Jo4vYLxkv4AyStTnftVSQ=;
+        b=tazlGrK+scX/omMfr9guH9NxG8NXD8P+w7mz4WB78/4PbUxqh2At9Dptn7T0BCMQ0x
+         jX83gGzzTr4h+PFmQ3Zu4DnhFhcEftUbWccPbpSRqM3Sjstu8BgWi/OLG4K1FfW3gnP2
+         i5Q47fGn1+0nZOtnsq56ILGybsZL9wq/BvZghCIRwqMH5XL3gXkDt98U/2gjLw9NG0oV
+         WQWJqJR1j9PY5YF4VQVor5mDtm6FlO+4hx8yDJ8QPoVaykrsKuwWIrZ/od1KXOzJstNg
+         cmV7YlRYytnnyz5x6q+RPfpghtK2i7XegyneuI5AowQ8PkbWsRTdMQgHUd9El2Yz1fox
+         aLgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=2SMxd8WFqm0f2fl+sHxTaYdSqxOO5PfwgxEf2j/Urg8=;
-        b=JhsjE+wNda8HctVWZxcCFOu0Xs5Lk64WByyBKwNDMsGKWVMsyfHIcTq1kDHhd4AdQI
-         ApCtkOvtEO07prbXSdW4cOG+DJu55qLZuEGE8OukjgCHtqoTq/mYVvjxj6T3DVSkbW0u
-         6zQtcmUkmHMDk3zstmRbUEUbKm0LD42BdqUL26FYMl2z+s8qQtt5FhdlJXdgghZuaaaq
-         EX9rzz9R4FAQ2S2E47DN/poE1HnVv/A5toTnD1R8/vKRNmTNXYqSLegQ3Yswa6OUd7v4
-         bDwM8oOk1hxOFHRThuLP0kbWcud7wWSQThwNwT+03DFVuawGOAJsUR7FYxaX7NHTNLMy
-         +k7w==
-X-Gm-Message-State: AGi0PuamQgdYQU4RTodQr9vBYPKmBPz5Y4nAUjK+1maasamxWsD+KSnv
-	wD3RAkdlz6Hye8+zMVe5EGo=
-X-Google-Smtp-Source: APiQypIG8FVssx7OKxxfXFRcCVOio1+XWEe3rVtVlkn+cSFVYfrRA9JJ4tHLjagfQjpkP6e9Sc/72A==
-X-Received: by 2002:adf:97cc:: with SMTP id t12mr33265323wrb.261.1587044287712;
-        Thu, 16 Apr 2020 06:38:07 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost ([109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id j135sm3613510wmj.46.2020.04.16.06.38.06
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=WdCybblsp93W7+sJnIgJ4+Jo4vYLxkv4AyStTnftVSQ=;
+        b=UAWeOHD4Bii4DewwweP+aj17fvHoEPyo3f6V6B2YR9eOKnTVx5WDzkAy8IfBbSMeaF
+         +9hnppbl96O3QkQbE35R/1QW8WI1LNl2riHyyQCZlF4bCjkL3KB9dpAcQXXsdkfjdt2W
+         VqKSsTkUhKSkQEAKkp/leYUo/wyEgEme7WyM08PEDmXLGXknE2S8EwOlBCNeZ6HfX+DW
+         yreganUEZ57nUqwl2wkZJ/utYMYD2pFVSeWQWgfw6QmNsLiKo1wp+X9BFW+Ip7X5EjW4
+         OgLknpUIpS79M8Ix+hNQHSOk+NP9bJ1sAHRQG1LXwZKwNhTQ+obM1Kj61XpSE63iiRSV
+         77pA==
+X-Gm-Message-State: AGi0Pua2Tw6mFpLEe5M5R9588ivZI+mRz3bzXYc5syojYMDWc+12XFIk
+	7HwpUG/+LKNKiEwuw6MXI/hI5qgWRS4=
+X-Google-Smtp-Source: APiQypKpAYb6jLO9P01buXvInxOYRG0e1THLpeF+ylQFAAWZamD35djayFRsALlbxu4JwIT9zu4k+Q==
+X-Received: by 2002:a1c:3281:: with SMTP id y123mr5100401wmy.30.1587046622555;
+        Thu, 16 Apr 2020 07:17:02 -0700 (PDT)
+Return-Path: <gregory.vimont@gmail.com>
+Received: from ALD-1799-DE.aldebaran.lan (softbank-robotics-gw1.ter4.eqx2.par.cust.as8218.eu. [158.255.112.194])
+        by smtp.gmail.com with ESMTPSA id r27sm8640992wra.83.2020.04.16.07.17.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Apr 2020 06:38:06 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 16 Apr 2020 15:38:06 +0200
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-multimedia][PATCH 3/3] vlc: Add check to require X11
-Message-ID: <20200416133806.fo4gq6kmdjzkifeo@jama>
-References: <20200413214513.1793854-1-raj.khem@gmail.com>
- <20200413214513.1793854-3-raj.khem@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <20200413214513.1793854-3-raj.khem@gmail.com>
-X-Groupsio-MsgNum: 83957
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="iolixx4a2nrlmrxg"
-Content-Disposition: inline
+        Thu, 16 Apr 2020 07:17:01 -0700 (PDT)
+From: "Gregory Vimont" <gregory.vimont@gmail.com>
+X-Google-Original-From: Gregory Vimont <gregory.vimont@softbankrobotics.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Gregory Vimont <gregory.vimont@softbankrobotics.com>
+Subject: [meta-oe][PATCH 1/3] opencv: 4.1.0 -> 4.1.1
+Date: Thu, 16 Apr 2020 16:16:54 +0200
+Message-Id: <20200416141656.7900-1-gregory.vimont@softbankrobotics.com>
+X-Mailer: git-send-email 2.17.1
 
---iolixx4a2nrlmrxg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Gregory Vimont <gregory.vimont@softbankrobotics.com>
+---
+ .../opencv/{opencv_4.1.0.bb => opencv_4.1.1.bb}             | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/opencv/{opencv_4.1.0.bb => opencv_4.1.1.bb} (98%)
 
-On Mon, Apr 13, 2020 at 02:45:13PM -0700, Khem Raj wrote:
-> It needs X11 as of now to build. there is a possiblily to build it
-> without X11, but lets keep this check until that path is fixed
->=20
-> Also fixes
->=20
-> TOPDIR/build/tmp/work/aarch64-yoe-linux/vlc/3.0.9.2-r0/recipe-sysroot-na=
-tive/usr/bin/aarch64-yoe-linux/aarch64-yoe-linux-ld: cannot find -lGL
->=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->=20
-> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb b/met=
-a-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb
-> index 9e41512c3e..556e79c7e6 100644
-> --- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb
-> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb
-> @@ -25,7 +25,9 @@ SRC_URI =3D "http://download.videolan.org/pub/videolan=
-/${BPN}/${PV}/${BP}.tar.xz \
->  "
->  SRC_URI[sha256sum] =3D "a9bdad293d81cd48516abad8d490d8ab4012964ae541ff1=
-9e00021e071e47601"
->  
-> -inherit autotools gettext pkgconfig features_check mime-xdg
-> +inherit autotools features_check gettext pkgconfig features_check mime-=
-xdg
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-oe/recipes-support/opencv/opencv_4.1.1.bb
+similarity index 98%
+rename from meta-oe/recipes-support/opencv/opencv_4.1.0.bb
+rename to meta-oe/recipes-support/opencv/opencv_4.1.1.bb
+index d781da600..5074eb2fa 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.1.1.bb
+@@ -10,8 +10,8 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
+ 
+ DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
+ 
+-SRCREV_opencv = "371bba8f54560b374fbcd47e7e02f015ac4969ad"
+-SRCREV_contrib = "2c32791a9c500343568a21ea34bf2daeac2adae7"
++SRCREV_opencv = "ddbd10c0019f3ee5f43b7902d47e7fc4303a6574"
++SRCREV_contrib = "0915b7eaddba3c06d83e201c9a7595e73801f417"
+ SRCREV_ipp = "32e315a5b106a7b89dbed51c28f8120a48b368b4"
+ SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+ SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
+@@ -51,7 +51,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
+            file://0001-carotene-Replace-ipcp-unit-growth-with-ipa-cp-unit-g.patch \
+            file://download.patch \
+            "
+-PV = "4.1.0"
++PV = "4.1.1"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.17.1
 
-No big deal, but there already was features_check few words later (left
-over from REQUIRED_DISTRO_FEATURES removal in
-0f2b3139521570ad494a72399f8a9dae76e69b16 which made x11 optional)
-
-> +
-> +REQUIRED_DISTRO_FEATURES =3D "x11"
->  
->  ARM_INSTRUCTION_SET =3D "arm"
->  export BUILDCC =3D "${BUILD_CC}"
-> --=20
-> 2.26.0
->=20
-
->=20
-
-
---iolixx4a2nrlmrxg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXphfvQAKCRA3VSO3ZXaA
-HB2TAJ9pWqD/WSYWFQj3S8tWOJyDmc/NnwCdH5pisr8JVJomXhVbLh6peQm7Pdg=
-=bxx/
------END PGP SIGNATURE-----
-
---iolixx4a2nrlmrxg--
