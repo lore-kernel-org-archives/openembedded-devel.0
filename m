@@ -1,56 +1,93 @@
-Received: from esa2.mentor.iphmx.com (esa2.mentor.iphmx.com [68.232.141.98])
- by mx.groups.io with SMTP id smtpd.web11.11481.1587058071699550674
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com [209.85.222.193])
+ by mx.groups.io with SMTP id smtpd.web11.13097.1587062152175845700
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Apr 2020 10:27:51 -0700
+ Thu, 16 Apr 2020 11:35:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: mentor.com, ip: 68.232.141.98, mailfrom: haseeb_ashraf@mentor.com)
-IronPort-SDR: JiRhL1/a/oLeLiabPCugYBB9YIXVGG8WwjFGORLPKD8Z8MRdkJeNJtP+7op85wPGmpV23/Bfl/
- 7VeDMf8IhtbcYuaLSFZuUY1YE/42zl+OfAYIMQcxksX6eJqq5Q/bv3JEMrMFY9f/QSvuJU80x1
- rBXfezdoPIok/osERlYNmtrawfGQ5KLs+dXaf4c0cNoxLh/2Mtl76N0BVdrUprcX8iE5vF3xwS
- BLZFj4Op7TOPf1PkjBNbwYBRh4J/itgqzUmDCr803CAVjZF6K+tX09IRz4Ss3nNBFSm0ml+d8B
- AbQ=
-X-IronPort-AV: E=Sophos;i="5.72,391,1580803200"; 
-   d="scan'208";a="47780723"
-Received: from orw-gwy-01-in.mentorg.com ([192.94.38.165])
-  by esa2.mentor.iphmx.com with ESMTP; 16 Apr 2020 09:27:50 -0800
-IronPort-SDR: GdmZNUPttUTHaqZlhWm4X810Ob5+1eJooEYIqvtk9NEPqE2St9K6NOc78hbOU9l2B4fHqHq8KY
- qIDCSJlwR4MM1T7ItKxQoUBAc95zhbKPrFYJhdPF901QArKhFnkz4ol/jtUyJWT35Ku62htYoD
- w9/IQkEADl2zAr2IZ7NhFwHqDyc/kn2D7v1ARb97Y27weJI4XAKiS75l5sZOCjDk3NvAGxHckO
- 1Cc7C5mO4UEAkSS3XUjMyFB+WFzNg22ZCxlybAkhLA0kSvXEe1Vo/X/im4VXAOA7PxnAmsCO/v
- 58I=
-From: "Haseeb Ashraf" <haseeb_ashraf@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH v2] modify LUA_CPATH_DEFAULT for 64-bit architectures
-Date: Thu, 16 Apr 2020 22:27:29 +0500
-Message-ID: <20200416172729.21184-1-Haseeb_Ashraf@mentor.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=dHQyshAK;
+ spf=pass (domain: gmail.com, ip: 209.85.222.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f193.google.com with SMTP id j4so22382192qkc.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2020 11:35:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=enh4o1+D41qXQE6v5UgSudenJxlJCiwzXcZJ7Vvi0gY=;
+        b=dHQyshAKU0AWktGUVxYqZDmzSAppL6+u2uuWL1hVQU0Pg0nvbsVjC8lIgmxV/Q5iba
+         xBMrucBM4JtQkdyAvlM8af+/+chVZ2oR3ZeuUiGZKEH4OmCFJQg5S6bZoArYIv5ufi48
+         deugWTU92FqYHidV7NeXG5DyaDh2IJDeZOQBceKUbtgwIbKEpib0NKEbMisJyXFhP4YP
+         WF5KhXzx+U2rinHFDoHvm+QmAptX4W7iahrYkhPO0OWaRytTMFFC6BgCYVeu1DDoWFCS
+         yBoXNKAf+rNlqZP61t3Zaxj6n5SQktPzxbETOR+eHmbC6tY0ymsML4al3Gli8s6LtMPz
+         xrTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=enh4o1+D41qXQE6v5UgSudenJxlJCiwzXcZJ7Vvi0gY=;
+        b=um4obC9GOegV/5LSrFeKY55dd95OA2H0tCT6v9cQFSMK6mls2d9Luep/njsi/UeD+E
+         YTOvxdooJTLtBcv4goLLJE1Twsj+Xia+SsZgUJSdHRzm/obVC+85heCxJiiq0XO2R+Zd
+         41vtI0VQI+1cjTKA0zgYLABLZrFN0gh7KEpbOhF6GG8J4P8rzZ0MqxrgCPQBLKQA5WBF
+         FGrWcOgO4/nzRHOOu/zVOQs5kbP10wBvbUxE1fuI9zchsE7teIFym6RS28FmpyNMC970
+         1XQVvM+vf/HV7D2y97Iu4NfCxjLnFqs0ng8ZlJo6jtuaLkZhmm9l4aCicfGyHybnEKq8
+         P2Fg==
+X-Gm-Message-State: AGi0PuZluhAYngb1oGRa0PJY9JYM3aFLFWEIa76p2GMlHm9npqlwzuss
+	T4uuAGeZJ8ZfDf7e7WOcVuquEOb5tu5xdmBqYOg=
+X-Google-Smtp-Source: APiQypITiceu+eAzgJ2DHFrTKsifaVdfJ/z1B4D67B1NrEaUrnBcpRH06rfb2sh3eyr82GC9Srg5E2DJRCjJNHM3H34=
+X-Received: by 2002:a05:620a:16aa:: with SMTP id s10mr8566901qkj.225.1587062150931;
+ Thu, 16 Apr 2020 11:35:50 -0700 (PDT)
 MIME-Version: 1.0
-Return-Path: Haseeb_Ashraf@mentor.com
-X-Originating-IP: [137.202.0.90]
-X-ClientProxiedBy: svr-ies-mbx-02.mgc.mentorg.com (139.181.222.2) To
- svr-ies-mbx-01.mgc.mentorg.com (139.181.222.1)
-Content-Type: text/plain
+References: <20200416102923.27122-1-Haseeb_Ashraf@mentor.com> <20200416102923.27122-2-Haseeb_Ashraf@mentor.com>
+In-Reply-To: <20200416102923.27122-2-Haseeb_Ashraf@mentor.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 16 Apr 2020 11:35:24 -0700
+Message-ID: <CAMKF1sq1nqJG54j0UMKpwQL_OGDQPNaRRao-9LyoVY+ok6Y0yQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 2/2] luaposix: add 33.4.0 version recipe which is compatible with lua5.3
+To: Haseeb Ashraf <haseeb_ashraf@mentor.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-LUA_CPATH_DEFAULT for *.so files should include
-LUA_ROOT/lib64/lua/LUA_VDIR not LUA_ROOT/lib/lua/LUA_VDIR
+this is showing
 
-Signed-off-by: Haseeb Ashraf <Haseeb_Ashraf@mentor.com>
----
- meta-oe/recipes-devtools/lua/lua_5.3.5.bb | 1 +
- 1 file changed, 1 insertion(+)
+QA Issue: luaposix: SRC_URI uses unstable GitHub archives [src-uri-bad]
 
-diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-index ae41e627f..a23a4a5da 100644
---- a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-+++ b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-@@ -35,6 +35,7 @@ EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -fPIC' MYLDFLAGS='${LDFLAGS
- 
- do_configure_prepend() {
-     sed -i -e s:/usr/local:${prefix}:g src/luaconf.h
-+    sed -i -e s:lib/lua/:${baselib}/lua/:g src/luaconf.h
- }
- 
- do_compile () {
--- 
-2.17.1
+so please use a release artifact or use git fetcher which is pinned to
+particular release
 
+On Thu, Apr 16, 2020 at 3:29 AM Haseeb Ashraf <haseeb_ashraf@mentor.com> wrote:
+>
+> Signed-off-by: Haseeb Ashraf <Haseeb_Ashraf@mentor.com>
+> ---
+>  .../luaposix/luaposix_33.4.0.bb               | 21 +++++++++++++++++++
+>  1 file changed, 21 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb
+>
+> diff --git a/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb b/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb
+> new file mode 100644
+> index 000000000..869181848
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb
+> @@ -0,0 +1,21 @@
+> +DESCRIPTION = "luaposix is a POSIX binding for Lua."
+> +LICENSE = "MIT"
+> +HOMEPAGE = "https://github.com/luaposix/luaposix"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=7dd2aad04bb7ca212e69127ba8d58f9f"
+> +
+> +SRC_URI[md5sum] = "b36ff049095f28752caeb0b46144516c"
+> +SRC_URI[sha256sum] = "e66262f5b7fe1c32c65f17a5ef5ffb31c4d1877019b4870a5d373e2ab6526a21"
+> +
+> +DEPENDS += "lua-native lua"
+> +
+> +SRC_URI = "https://github.com/luaposix/luaposix/archive/release-v${PV}.tar.gz"
+> +S = "${WORKDIR}/luaposix-release-v${PV}"
+> +LUA_VDIR = "5.3"
+> +
+> +inherit autotools pkgconfig
+> +
+> +do_install() {
+> +    oe_runmake 'DESTDIR=${D}' 'luadir=${datadir}/lua/${LUA_VDIR}' 'luaexecdir=${libdir}/lua/${LUA_VDIR}' install
+> +}
+> +
+> +FILES_${PN} = "${datadir}/lua/${LUA_VDIR} ${libdir}/lua/${LUA_VDIR}"
+> --
+> 2.17.1
+>
+> 
