@@ -1,102 +1,152 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web11.6208.1587114854062347471
+Received: from esa2.mentor.iphmx.com (esa2.mentor.iphmx.com [68.232.141.98])
+ by mx.groups.io with SMTP id smtpd.web10.6684.1587116871935246371
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Apr 2020 02:14:14 -0700
+ Fri, 17 Apr 2020 02:47:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: yi.zhao@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 03H9ECHe015817
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2020 02:14:12 -0700 (PDT)
-Received: from localhost (128.224.162.174) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 17 Apr
- 2020 02:14:11 -0700
-From: "Yi Zhao" <yi.zhao@windriver.com>
+ dkim=missing; spf=pass (domain: mentor.com, ip: 68.232.141.98, mailfrom: haseeb_ashraf@mentor.com)
+IronPort-SDR: 4pH4/UX/Sygm7Uc7+Vc4RZzw/h3sZtI+lSoTY5pFfZs688md3QUOHq2iggNo8gpKU3hTgJXDJx
+ +ynnfLLoyuWHGMRwzvHlTE6hCFFITH/Le1UE+x8dyKPzpzrcb9NkuWH1IYXJkyDaZTziXw5zku
+ r5Es26D5V6rJYLp5Y6I2CaEvNF07wQffxc7ZqqKyNKebqDwyBDSbn+3LUYBk+RbwpmqQ9u77wH
+ SCgp6r8OGcv+YKCUGrIMQSYGc/OkFF+wuqD2T8ScuC83P5V1c22CCLEowTnS7QRf0ZPJSIcmlA
+ j0s=
+X-IronPort-AV: E=Sophos;i="5.72,394,1580803200"; 
+   d="scan'208";a="47814119"
+Received: from orw-gwy-02-in.mentorg.com ([192.94.38.167])
+  by esa2.mentor.iphmx.com with ESMTP; 17 Apr 2020 01:47:50 -0800
+IronPort-SDR: IiDYlPiyP4fRmab0VXzZrCQq2s3Uwzv5QKH9CImKjm7EsNJWX6anmJLiokpDSLi8B1pbuMumHr
+ Dm/3JJRpIMJtaTtpaoY82T5SsvDxcvwQ1ng9NUBY3fspCOPAKu5rlgOqrBA+Y4bXbWu3uG3Fsx
+ SzhWAXf38G9fLU14DPT9cFxoVdkrqjtFoEQPoh3papyOzsFH0uhpF0+HR4XwgysyChVzG6L5hZ
+ TSY5GXjWtcrLpkH8agA4VEUjbEUU6c5aAGkyFU23ev69hbunyNCMafWp67WlCf5c9Q0Bv+L3rH
+ fww=
+From: "Haseeb Ashraf" <haseeb_ashraf@mentor.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH] postfix: split ${PN}-bin from ${PN} to solve recursive dependency
-Date: Fri, 17 Apr 2020 17:14:09 +0800
-Message-ID: <20200417091409.27563-1-yi.zhao@windriver.com>
+Subject: [meta-oe][PATCH v2] luaposix: add 33.4.0 version recipe which is compatible with lua5.3
+Date: Fri, 17 Apr 2020 14:47:17 +0500
+Message-ID: <20200417094717.15898-1-Haseeb_Ashraf@mentor.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.174]
+Return-Path: Haseeb_Ashraf@mentor.com
+X-Originating-IP: [137.202.0.90]
+X-ClientProxiedBy: svr-ies-mbx-01.mgc.mentorg.com (139.181.222.1) To
+ svr-ies-mbx-01.mgc.mentorg.com (139.181.222.1)
 Content-Type: text/plain
 
-The commit 89d86b96f80d8a136d38113baf69d8ccad5a5ff6 which tries to fix
-the installation issue for ostree introduces a recursive dependency
-issue. When installing the postfix package on target via online
-repository, the postinst function for postfix-cfg package needs
-newaliases but this command is from postfix package which causes an
-error:
-  Configuring postfix-cfg.
-  /var/lib/opkg/info/postfix-cfg.postinst: line 9: newaliases: not found
-  pkg_run_script: package "postfix-cfg" postinst script returned status 127.
-
-Split a new package postfix-bin from postfix and make it as the runtime
-dependency for postfix-cfg.
-
-Set USERADD_PACKAGES to ${PN}-bin to avoid image do_rootfs warnings when
-installing postfix via IMAGE_INSTALL:
-  [log_check] warning: group postdrop does not exist - using root
-  [log_check] warning: user postfix does not exist - using root
-
-Set ALTERNATIVE to ${PN}-bin to make sure the newaliases symbolic link
-is installed before installing postfix-cfg.
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Haseeb Ashraf <Haseeb_Ashraf@mentor.com>
 ---
- .../recipes-daemons/postfix/postfix.inc          | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
+ ...ace-condition-between-test-and-mkdir.patch | 75 +++++++++++++++++++
+ .../luaposix/luaposix_33.4.0.bb               | 21 ++++++
+ 2 files changed, 96 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/luaposix/luaposix/0001-fix-avoid-race-condition-between-test-and-mkdir.patch
+ create mode 100644 meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb
 
-diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index 64c20d0f5..4b9940cc7 100644
---- a/meta-networking/recipes-daemons/postfix/postfix.inc
-+++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-@@ -20,16 +20,16 @@ CLEANBROKEN = "1"
- 
- BBCLASSEXTEND = "native"
- 
--inherit update-rc.d useradd update-alternatives systemd
-+inherit update-rc.d useradd update-alternatives systemd lib_package
- 
- INITSCRIPT_NAME = "postfix"
- INITSCRIPT_PARAMS = "start 58 3 4 5 . stop 13 0 1 6 ."
--USERADD_PACKAGES = "${PN}"
--USERADD_PARAM_${PN} = \
-+USERADD_PACKAGES = "${PN}-bin"
-+USERADD_PARAM_${PN}-bin = \
- "-d /var/spool/postfix -r -g postfix --shell /bin/false postfix; \
-  -d /var/spool/vmail -r -g vmail --shell /bin/false vmail \
- "
--GROUPADD_PARAM_${PN} = "--system postfix;--system postdrop;--system vmail"
-+GROUPADD_PARAM_${PN}-bin = "--system postfix;--system postdrop;--system vmail"
- 
- export SYSLIBS = "${LDFLAGS}"
- 
-@@ -185,9 +185,9 @@ do_install_append_class-native() {
-     ln -sf ../sbin/sendmail.postfix ${D}${bindir}/mailq
- }
- 
--ALTERNATIVE_${PN} = "sendmail mailq newaliases"
-+ALTERNATIVE_${PN}-bin = "sendmail mailq newaliases"
- # /usr/lib/sendmial is required by LSB core test
--ALTERNATIVE_${PN}_linuxstdbase = "sendmail mailq newaliases usr-lib-sendmail"
-+ALTERNATIVE_${PN}-bin_linuxstdbase = "sendmail mailq newaliases usr-lib-sendmail"
- ALTERNATIVE_TARGET[mailq] = "${bindir}/mailq"
- ALTERNATIVE_TARGET[newaliases] = "${bindir}/newaliases"
- ALTERNATIVE_TARGET[sendmail] = "${sbindir}/sendmail.postfix"
-@@ -212,9 +212,11 @@ pkg_postinst_ontarget_${PN}-cfg () {
- }
- 
- PACKAGES =+ "${PN}-cfg"
-+RDEPENDS_${PN}-cfg_class-target += "${PN}-bin"
- RDEPENDS_${PN}_class-target += "${PN}-cfg"
- # Exclude .debug directories from the main package
--FILES_${PN} = "${localstatedir} ${bindir}/* ${sbindir}/* \
-+FILES_${PN}-bin += "${localstatedir} ${bindir}/* ${sbindir}/* \
-                ${libexecdir}/* ${systemd_unitdir}/*"
- FILES_${PN}-cfg = "${sysconfdir}"
- FILES_${PN}-dbg += "${libexecdir}/postfix/.debug"
-+ALLOW_EMPTY_${PN} = "1"
+diff --git a/meta-oe/recipes-devtools/luaposix/luaposix/0001-fix-avoid-race-condition-between-test-and-mkdir.patch b/meta-oe/recipes-devtools/luaposix/luaposix/0001-fix-avoid-race-condition-between-test-and-mkdir.patch
+new file mode 100644
+index 000000000..d8a9e3d2b
+--- /dev/null
++++ b/meta-oe/recipes-devtools/luaposix/luaposix/0001-fix-avoid-race-condition-between-test-and-mkdir.patch
+@@ -0,0 +1,75 @@
++From 4dfca036c96071bd2a2c80ff84719c6d37858373 Mon Sep 17 00:00:00 2001
++From: Haseeb Ashraf <Haseeb_Ashraf@mentor.com>
++Date: Fri, 17 Apr 2020 14:36:50 +0500
++Subject: [PATCH 1/1] fix: avoid race condition between test and mkdir
++
++when building in parallel the race condition, when the directory
++is tested for existence and it is created, can break the build
++
++Signed-off-by: Haseeb Ashraf <Haseeb_Ashraf@mentor.com>
++---
++ Makefile.in            | 6 +++---
++ build-aux/rockspecs.mk | 2 +-
++ local.mk               | 2 +-
++ 3 files changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/Makefile.in b/Makefile.in
++index 9b51ef3..4722525 100644
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -1637,7 +1637,7 @@ distclean-tags:
++ 
++ distdir: $(DISTFILES)
++ 	$(am__remove_distdir)
++-	test -d "$(distdir)" || mkdir "$(distdir)"
+++	$(MKDIR_P) "$(distdir)"
++ 	@srcdirstrip=`echo "$(srcdir)" | sed 's/[].[^$$\\*]/\\\\&/g'`; \
++ 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's/[].[^$$\\*]/\\\\&/g'`; \
++ 	list='$(DISTFILES)'; \
++@@ -1975,7 +1975,7 @@ clean-local:
++ 	rm -f $(posix_submodules)
++ 
++ $(allhtml): $(EXTRA_ext_posix_posix_la_SOURCES) $(ext_posix_posix_la_SOURCES)
++-	test -d $(builddir)/doc || mkdir $(builddir)/doc
+++	$(MKDIR_P) $(builddir)/doc
++ @HAVE_LDOC_TRUE@	$(LDOC) -c build-aux/config.ld -d $(abs_srcdir)/doc .
++ @HAVE_LDOC_FALSE@	$(MKDIR_P) doc
++ @HAVE_LDOC_FALSE@	touch doc/index.html doc/ldoc.css
++@@ -1983,7 +1983,7 @@ $(allhtml): $(EXTRA_ext_posix_posix_la_SOURCES) $(ext_posix_posix_la_SOURCES)
++ doc: $(allhtml)
++ 
++ $(luarocks_config): Makefile.am
++-	@test -d build-aux || mkdir build-aux
+++	@$(MKDIR_P) build-aux
++ 	$(AM_V_GEN){						\
++ 	  $(set_LUA_BINDIR);					\
++ 	  echo 'rocks_trees = { "$(abs_srcdir)/luarocks" }';	\
++diff --git a/build-aux/rockspecs.mk b/build-aux/rockspecs.mk
++index ebd1dbf..c8fbdbc 100644
++--- a/build-aux/rockspecs.mk
+++++ b/build-aux/rockspecs.mk
++@@ -62,7 +62,7 @@ LUA_INCDIR = `cd $$LUA_BINDIR/../include && pwd`
++ LUA_LIBDIR = `cd $$LUA_BINDIR/../lib && pwd`
++ 
++ $(luarocks_config): Makefile.am
++-	@test -d build-aux || mkdir build-aux
+++	@$(MKDIR_P) build-aux
++ 	$(AM_V_GEN){						\
++ 	  $(set_LUA_BINDIR);					\
++ 	  echo 'rocks_trees = { "$(abs_srcdir)/luarocks" }';	\
++diff --git a/local.mk b/local.mk
++index d391ef7..80b22ce 100644
++--- a/local.mk
+++++ b/local.mk
++@@ -255,7 +255,7 @@ dist_examples_DATA +=				\
++ allhtml = $(dist_doc_DATA) $(dist_examples_DATA) $(dist_modules_DATA) $(dist_classes_DATA)
++ 
++ $(allhtml): $(EXTRA_ext_posix_posix_la_SOURCES) $(ext_posix_posix_la_SOURCES)
++-	test -d $(builddir)/doc || mkdir $(builddir)/doc
+++	$(MKDIR_P) $(builddir)/doc
++ if HAVE_LDOC
++ 	$(LDOC) -c build-aux/config.ld -d $(abs_srcdir)/doc .
++ else
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb b/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb
+new file mode 100644
+index 000000000..1bee9fe0b
+--- /dev/null
++++ b/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb
+@@ -0,0 +1,21 @@
++DESCRIPTION = "luaposix is a POSIX binding for Lua."
++LICENSE = "MIT"
++HOMEPAGE = "https://github.com/luaposix/luaposix"
++LIC_FILES_CHKSUM = "file://COPYING;md5=7dd2aad04bb7ca212e69127ba8d58f9f"
++
++DEPENDS += "lua-native lua"
++
++SRC_URI = "git://github.com/luaposix/luaposix.git;branch=release \
++           file://0001-fix-avoid-race-condition-between-test-and-mkdir.patch \
++"
++SRCREV = "8e4902ed81c922ed8f76a7ed85be1eaa3fd7e66d"
++S = "${WORKDIR}/git"
++LUA_VERSION = "5.3"
++
++inherit autotools pkgconfig
++
++do_install() {
++    oe_runmake 'DESTDIR=${D}' 'luadir=${datadir}/lua/${LUA_VERSION}' 'luaexecdir=${libdir}/lua/${LUA_VERSION}' install
++}
++
++FILES_${PN} = "${datadir}/lua/${LUA_VERSION} ${libdir}/lua/${LUA_VERSION}"
 -- 
 2.17.1
 
