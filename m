@@ -1,65 +1,55 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web11.1946.1587133347072473954
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+ by mx.groups.io with SMTP id smtpd.web10.2701.1587207456257583155
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Apr 2020 07:22:32 -0700
+ Sat, 18 Apr 2020 03:57:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: tgamblin@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 03HEM69R023117
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2020 07:22:16 -0700
-Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Fri, 17 Apr 2020
- 07:21:55 -0700
-Received: by ala-lpggp3.wrs.com (Postfix, from userid 20958)	id 77A98900D19;
- Fri, 17 Apr 2020 07:21:55 -0700 (PDT)
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-webserver][PATCH v3 1/2] apache2: upgrade 2.4.41 -> 2.4.43
-Date: Fri, 17 Apr 2020 07:21:54 -0700
-Message-ID: <20200417142155.62749-1-trevor.gamblin@windriver.com>
-X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain
+ dkim=pass header.i=@koncepto.io header.s=default header.b=Z6ghJf4q;
+ spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
+Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
+	by koncepto.io (Postfix) with ESMTPSA id 0BC6B6008F;
+	Sat, 18 Apr 2020 12:57:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1587207452;
+	bh=eBoENCjppp7ffmP/fTozyQoL1I6KM2+3oD/q6xMJ+zA=;
+	h=From:To:Cc:Subject:Date:From;
+	b=Z6ghJf4qGbnUJdhAFzc/Q51ruNl256op2+A/FlrgQbdUeeKWhVfwXmaTqC4dIcFSU
+	 6lgR1hlJRq25POVwj+AiXjmf/31oxpPRfKhm1DsBpLfaendwtdd7VR0Wl6hnkNGljJ
+	 LVOm5zVtUvR7nwB5jk6YgbV3HR7qdp82LbLFzVXGqBaDKYzSfIq+onGZm+Ij2M0vXo
+	 Fl0xm0Qom4B1ZZ85c/xB7r865TTyavbVgouJ2VaAYydMO6uYMhMEsTtgImDGLpMntj
+	 Y8ny2X5yVYKekH+M4BdTGYNZ+0WseK89qNzh1loV/E3AjXMyAWV4zvpf7zCB7MD7ts
+	 ILdus8LYKIWmw==
+From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
+Subject: [meta-oe][PATCH] fbgrab: upgrade 1.3.1 -> 1.3.3
+Date: Sat, 18 Apr 2020 12:57:26 +0200
+Message-Id: <1587207446-8939-1-git-send-email-pjtexier@koncepto.io>
+X-Mailer: git-send-email 2.7.4
 
-LICENSE file was updated due to a typo fix.
+See full changelog https://github.com/GunnarMonell/fbgrab/releases
 
-Note that this upgrade fixes two CVES affecting versions
-2.4.41 and earlier:
-
-CVE: CVE-2020-1927
-CVE: CVE-2020-1934
-
-See:
-https://nvd.nist.gov/vuln/detail/CVE-2020-1927
-https://nvd.nist.gov/vuln/detail/CVE-2020-1934
-
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- .../apache2/{apache2_2.4.41.bb => apache2_2.4.43.bb}        | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.41.bb => apache2_2.4.43.bb} (97%)
+ meta-oe/recipes-graphics/fbgrab/{fbgrab_1.3.1.bb => fbgrab_1.3.3.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-graphics/fbgrab/{fbgrab_1.3.1.bb => fbgrab_1.3.3.bb} (89%)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
-similarity index 97%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
-index a34734c20..2fff153fc 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
-@@ -24,9 +24,9 @@ SRC_URI_append_class-target = " \
-            file://volatiles.04_apache2 \
-            "
+diff --git a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.3.1.bb b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.3.3.bb
+similarity index 89%
+rename from meta-oe/recipes-graphics/fbgrab/fbgrab_1.3.1.bb
+rename to meta-oe/recipes-graphics/fbgrab/fbgrab_1.3.3.bb
+index 212ba12..e3dff91 100644
+--- a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.3.1.bb
++++ b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.3.3.bb
+@@ -6,7 +6,7 @@ SECTION = "console/utils"
+ DEPENDS = "libpng zlib"
+ SRC_URI = "git://github.com/GunnarMonell/fbgrab.git;protocol=https"
  
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d52d0fd0bc788f068e647116c01ddfcd"
--SRC_URI[md5sum] = "dfc674f8f454e3bc2d4ccd73ad3b5f1e"
--SRC_URI[sha256sum] = "133d48298fe5315ae9366a0ec66282fa4040efa5d566174481077ade7d18ea40"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
-+SRC_URI[md5sum] = "791c986b1e70fe61eb44060aacc89a64"
-+SRC_URI[sha256sum] = "a497652ab3fc81318cdc2a203090a999150d86461acff97c1065dc910fe10f43"
+-SRCREV = "d3a8b6b42b6b74228e92758a0b015d8b8c1e6fa0"
++SRCREV = "b179e2a42b8a5d72516b9c8d91713c9025cf6044"
+ S = "${WORKDIR}/git"
  
- S = "${WORKDIR}/httpd-${PV}"
- 
+ inherit autotools-brokensep
 -- 
-2.17.1
+2.7.4
 
