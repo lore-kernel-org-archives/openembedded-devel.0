@@ -1,55 +1,80 @@
-Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web10.3645.1587213033706334006
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com [209.85.216.68])
+ by mx.groups.io with SMTP id smtpd.web11.8704.1587253189781314243
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Apr 2020 05:30:34 -0700
+ Sat, 18 Apr 2020 16:39:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=SKyMKpXS;
- spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id C25216008F;
-	Sat, 18 Apr 2020 14:30:31 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1587213031;
-	bh=+zcLT06fbeDRxu1YCI/PFd/KtQUWjCoxEVENuxPCRqI=;
-	h=From:To:Cc:Subject:Date:From;
-	b=SKyMKpXS2UqceFwoeOGRCo9Y31VgmGWAhNuGaDAEjmadM4LAbnWrUURFvj5XAnj97
-	 JUGJrNyh5/gz+pcXcMtFvuby9YeiIkH3tTRrW0K6dRnqho3f29RsRyjnJeW0w2FWVl
-	 UWd7cR2quZgMR4gncLgL+0TQmWhlvgn6kgFrPqDmcc423GkZR9Qt+BhWg247iD5rc6
-	 3nENLbQwA7cenqP0uy4LmyjY5ZG3bgBS/Q6bgFTfB9ENWAFynFuS3B7lztPfrygnI+
-	 M1Gzbywl2L1D2pAORjxPYN/DcXYl+5sPpafvjFoeoBD9C1trKLpgoaPnenXwytyh5q
-	 UVV3IoqfZXCDA==
-From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=rEvwsD3x;
+ spf=pass (domain: gmail.com, ip: 209.85.216.68, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f68.google.com with SMTP id t40so2799366pjb.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Apr 2020 16:39:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GEr81+AJDtYzdaRfwDVX9j/ezd+KIAbXl1aGVIdTD5Q=;
+        b=rEvwsD3xRPswhRSIXjxxpo+11sf49EETn9tu+vTCwf3T58+7hTKme+CGLC50xp2LrQ
+         zdjZfFMzPN4mbJiIEBf7DM/CX5EGf465vXecS3KFZQfnOQcy+B9FJis4mdOnMe3s46sr
+         L0HPeIsPjVWqybyxNpnpWTwhll0ELXpU3mfrNof8QgJ31FrNzepceD08x/K1cuGUtEdC
+         /xFMDYXCT3ghWSXRzjpHJRIn/LLuvj4+lZ+Mz1lMp5OtmrZ83A2sFh01dDJ3O9xI3a1N
+         rw+SQAtAq38F+YpVaDQXv7J3qO7tsNMuC+J6/46r72G5BARuaS5m3UQRgeq1gPdawBzJ
+         j3Xg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GEr81+AJDtYzdaRfwDVX9j/ezd+KIAbXl1aGVIdTD5Q=;
+        b=h457p337VbbqfwYwlZ7DqgQd4DgnITjhq2yQWEjharDHfOthhAZBINRXP6ECFDokxN
+         Ee0qZD0OFhN5ZzXYO1nnomX4uhwCKET2KCqPzW18NckP8m4Gzw8z0PKQSqOa139Rvmgd
+         GaEYF3ozF+oN9yFWDh+KvVktGMGBO8BqpiPHDcLOlXxI2mSfyKfYDESZpqYfbM2VGM8q
+         o9gUx4qI98wb00atNyvP5HNAPitQJlBCOxdB9jR7KwuXaJ7s6TwxYWJxjeqa5gFCHZwG
+         Wk5Yo7fgqpnSB7mNmQ48eUITZPvwwlYMk6Qu6wLkuuNfehAYXEiq81VISvtuKJu9egXS
+         bH9g==
+X-Gm-Message-State: AGi0PuaazQEyvS3dVet1Tv4Uuj3/UUnYF99SPyEhqrCbBdblLIfU7Lei
+	kgCx/m/lLDM56onsvEPxNngwMV+NQrw=
+X-Google-Smtp-Source: APiQypJsjjIBRhojfhv/Dvql6pnOI4QPLf3wAoupxfBJhwIyeYPRT0iD4UQsjUmG2JBLCv2WtKzvyw==
+X-Received: by 2002:a17:90a:24e6:: with SMTP id i93mr13282188pje.13.1587253188753;
+        Sat, 18 Apr 2020 16:39:48 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::6cd1])
+        by smtp.gmail.com with ESMTPSA id i16sm14063717pfd.108.2020.04.18.16.39.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 18 Apr 2020 16:39:48 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH] libuv: upgrade 1.35.0 -> 1.36.0
-Date: Sat, 18 Apr 2020 14:30:02 +0200
-Message-Id: <1587213002-11638-1-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] sysdig: Do not depend on luaJIT for riscv
+Date: Sat, 18 Apr 2020 16:39:46 -0700
+Message-Id: <20200418233946.1755525-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.26.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-See full changelog https://github.com/libuv/libuv/releases/tag/v1.36.0
+LuaJIT is not porteed to riscv yet
 
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-connectivity/libuv/{libuv_1.35.0.bb => libuv_1.36.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/libuv/{libuv_1.35.0.bb => libuv_1.36.0.bb} (90%)
+ meta-oe/recipes-extended/sysdig/sysdig_git.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/libuv/libuv_1.35.0.bb b/meta-oe/recipes-connectivity/libuv/libuv_1.36.0.bb
-similarity index 90%
-rename from meta-oe/recipes-connectivity/libuv/libuv_1.35.0.bb
-rename to meta-oe/recipes-connectivity/libuv/libuv_1.36.0.bb
-index 21a8fce..deeaa2b 100644
---- a/meta-oe/recipes-connectivity/libuv/libuv_1.35.0.bb
-+++ b/meta-oe/recipes-connectivity/libuv/libuv_1.36.0.bb
-@@ -4,7 +4,7 @@ BUGTRACKER = "https://github.com/libuv/libuv/issues"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a68902a430e32200263d182d44924d47"
+diff --git a/meta-oe/recipes-extended/sysdig/sysdig_git.bb b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
+index 8074b2e0e1..04a022af4f 100644
+--- a/meta-oe/recipes-extended/sysdig/sysdig_git.bb
++++ b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
+@@ -12,6 +12,8 @@ inherit cmake pkgconfig
+ JIT ?= "jit"
+ JIT_mipsarchn32 = ""
+ JIT_mipsarchn64 = ""
++JIT_riscv64 = ""
++JIT_riscv32 = ""
  
--SRCREV = "e45f1ec38db882f8dc17b51f51a6684027034609"
-+SRCREV = "533b738838ad8407032e14b6772b29ef9af63cfa"
- SRC_URI = "git://github.com/libuv/libuv;branch=v1.x"
- 
- S = "${WORKDIR}/git"
+ DEPENDS += "lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp tbb jq openssl elfutils protobuf protobuf-native jq-native"
+ RDEPENDS_${PN} = "bash"
+@@ -48,3 +50,5 @@ FILES_${PN} += " \
+ # Something like this https://code.videolan.org/ePirat/vlc/-/commit/01fd9fe4c7f6c5558f7345f38abf0152e17853ab  is needed to fix it
+ COMPATIBLE_HOST_libc-musl = "null"
+ COMPATIBLE_HOST_mips = "null"
++COMPATIBLE_HOST_riscv64 = "null"
++COMPATIBLE_HOST_riscv32 = "null"
 -- 
-2.7.4
+2.26.1
 
