@@ -1,80 +1,83 @@
-Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com [209.85.216.68])
- by mx.groups.io with SMTP id smtpd.web11.8704.1587253189781314243
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com [209.85.128.66])
+ by mx.groups.io with SMTP id smtpd.web11.14260.1587292113425522496
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Apr 2020 16:39:49 -0700
+ Sun, 19 Apr 2020 03:28:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=rEvwsD3x;
- spf=pass (domain: gmail.com, ip: 209.85.216.68, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f68.google.com with SMTP id t40so2799366pjb.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Apr 2020 16:39:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ve/yzWIK;
+ spf=pass (domain: gmail.com, ip: 209.85.128.66, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wm1-f66.google.com with SMTP id v4so2261229wme.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 19 Apr 2020 03:28:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=GEr81+AJDtYzdaRfwDVX9j/ezd+KIAbXl1aGVIdTD5Q=;
-        b=rEvwsD3xRPswhRSIXjxxpo+11sf49EETn9tu+vTCwf3T58+7hTKme+CGLC50xp2LrQ
-         zdjZfFMzPN4mbJiIEBf7DM/CX5EGf465vXecS3KFZQfnOQcy+B9FJis4mdOnMe3s46sr
-         L0HPeIsPjVWqybyxNpnpWTwhll0ELXpU3mfrNof8QgJ31FrNzepceD08x/K1cuGUtEdC
-         /xFMDYXCT3ghWSXRzjpHJRIn/LLuvj4+lZ+Mz1lMp5OtmrZ83A2sFh01dDJ3O9xI3a1N
-         rw+SQAtAq38F+YpVaDQXv7J3qO7tsNMuC+J6/46r72G5BARuaS5m3UQRgeq1gPdawBzJ
-         j3Xg==
+        bh=6XhSCB013m9Gb6TRcWRBO5CVJf2bJl3MJrThuA4YTuw=;
+        b=Ve/yzWIKbhKPBuU6wtC6yyQQBNp+/DNQ6kVfxYok0YM2Onu4ZoaifoYoHwAEgWcD3K
+         BUnADfJFH1h9S9qqimofNO2U+ktATRwNuQDV3pGbRlOGvDI0/jrmE3ahc9RBhY2hRgIN
+         aAY9AZOEHNE6m6xgZ23DrFHby4rAN80BO2gLHq3J4XcehAAHdcDehZaD2K1eOeMKQfye
+         f7oF0M70zunsnLvuQK/mZpKYw0RN5s9YhWRoBEUaIbKdtfI7jAPj/p8Cox3sX/PP2ywh
+         8xCOood+Zk+QkirwGbj46Q5wVfM4qwx5HDL7gw6fURxEGVFO5+0YJmAIZ1gtjT6pm6Ub
+         W/fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=GEr81+AJDtYzdaRfwDVX9j/ezd+KIAbXl1aGVIdTD5Q=;
-        b=h457p337VbbqfwYwlZ7DqgQd4DgnITjhq2yQWEjharDHfOthhAZBINRXP6ECFDokxN
-         Ee0qZD0OFhN5ZzXYO1nnomX4uhwCKET2KCqPzW18NckP8m4Gzw8z0PKQSqOa139Rvmgd
-         GaEYF3ozF+oN9yFWDh+KvVktGMGBO8BqpiPHDcLOlXxI2mSfyKfYDESZpqYfbM2VGM8q
-         o9gUx4qI98wb00atNyvP5HNAPitQJlBCOxdB9jR7KwuXaJ7s6TwxYWJxjeqa5gFCHZwG
-         Wk5Yo7fgqpnSB7mNmQ48eUITZPvwwlYMk6Qu6wLkuuNfehAYXEiq81VISvtuKJu9egXS
-         bH9g==
-X-Gm-Message-State: AGi0PuaazQEyvS3dVet1Tv4Uuj3/UUnYF99SPyEhqrCbBdblLIfU7Lei
-	kgCx/m/lLDM56onsvEPxNngwMV+NQrw=
-X-Google-Smtp-Source: APiQypJsjjIBRhojfhv/Dvql6pnOI4QPLf3wAoupxfBJhwIyeYPRT0iD4UQsjUmG2JBLCv2WtKzvyw==
-X-Received: by 2002:a17:90a:24e6:: with SMTP id i93mr13282188pje.13.1587253188753;
-        Sat, 18 Apr 2020 16:39:48 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::6cd1])
-        by smtp.gmail.com with ESMTPSA id i16sm14063717pfd.108.2020.04.18.16.39.48
+        bh=6XhSCB013m9Gb6TRcWRBO5CVJf2bJl3MJrThuA4YTuw=;
+        b=hUpM4s2S25aTnMnpJVDMAou5srNqtzFpaDxTNvbVezS+YvI0QYJaXuz+4XqVgUiQxN
+         T+sXkp42kC6vDEdEBKk4qYVnxt97qx4XupEjaAfz79yuNHibIssdI0K+954/JhbUQVCH
+         YTn/YY/lCFVS9UPext5dd+s40ux3cJFYm/TtF3WF62LrC2ghOiiZCcAHo4yDC7K4jYyJ
+         CBRMsZKiKPo7PmSgwvi3fC9HB5Flh/ErRoFj3dA1xYEFaa3bzqJNqsrq0CxxlBRUvuzJ
+         j28tOlsYI3lSqyd104EZChrbyGtkFm06/z/SUiWo3LTRwv8WFjhGTt7wKcBSfNeoczI8
+         L4nQ==
+X-Gm-Message-State: AGi0Pub+sts778Cq4Enp3gdOfyEnnb1hd3zE9+93S61kDLJzsJGLrV5M
+	omYqktnUukNGxtoREZZZg6ifuB+f
+X-Google-Smtp-Source: APiQypKprjDwEAviOQEJuUyU8Q5KiUAR/g7MzIJHiQuBBDxOlixajGISEyNIQ1eJkWsDZTa8WelP0Q==
+X-Received: by 2002:a1c:23d4:: with SMTP id j203mr3643813wmj.49.1587292111568;
+        Sun, 19 Apr 2020 03:28:31 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from superandy.speedport.ip (p200300F07F307D87D57164A5D9C87CA2.dip0.t-ipconnect.de. [2003:f0:7f30:7d87:d571:64a5:d9c8:7ca2])
+        by smtp.gmail.com with ESMTPSA id h6sm14946789wmf.31.2020.04.19.03.28.30
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Apr 2020 16:39:48 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Sun, 19 Apr 2020 03:28:30 -0700 (PDT)
+From: "Andreas M?ller" <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] sysdig: Do not depend on luaJIT for riscv
-Date: Sat, 18 Apr 2020 16:39:46 -0700
-Message-Id: <20200418233946.1755525-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.26.1
+Subject: [PATCH] xcb-util-cursor: initial add 0.1.3
+Date: Sun, 19 Apr 2020 12:28:19 +0200
+Message-Id: <20200419102819.2849-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-LuaJIT is not porteed to riscv yet
+* Have it in meta-qt5-extra for a while
+* Now meta-musicians will depend on it
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+=> move to a more common layer
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-oe/recipes-extended/sysdig/sysdig_git.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ .../xorg-lib/xcb-util-cursor_0.1.3.bb                 | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/xorg-lib/xcb-util-cursor_0.1.3.bb
 
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig_git.bb b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-index 8074b2e0e1..04a022af4f 100644
---- a/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-+++ b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-@@ -12,6 +12,8 @@ inherit cmake pkgconfig
- JIT ?= "jit"
- JIT_mipsarchn32 = ""
- JIT_mipsarchn64 = ""
-+JIT_riscv64 = ""
-+JIT_riscv32 = ""
- 
- DEPENDS += "lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp tbb jq openssl elfutils protobuf protobuf-native jq-native"
- RDEPENDS_${PN} = "bash"
-@@ -48,3 +50,5 @@ FILES_${PN} += " \
- # Something like this https://code.videolan.org/ePirat/vlc/-/commit/01fd9fe4c7f6c5558f7345f38abf0152e17853ab  is needed to fix it
- COMPATIBLE_HOST_libc-musl = "null"
- COMPATIBLE_HOST_mips = "null"
-+COMPATIBLE_HOST_riscv64 = "null"
-+COMPATIBLE_HOST_riscv32 = "null"
+diff --git a/meta-oe/recipes-graphics/xorg-lib/xcb-util-cursor_0.1.3.bb b/meta-oe/recipes-graphics/xorg-lib/xcb-util-cursor_0.1.3.bb
+new file mode 100644
+index 000000000..f935edd6f
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xorg-lib/xcb-util-cursor_0.1.3.bb
+@@ -0,0 +1,11 @@
++require recipes-graphics/xorg-lib/xcb-util.inc
++
++SUMMARY = "XCB port of libXcursor"
++
++DEPENDS += "xcb-util xcb-util-renderutil xcb-util-image"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ce469b61c70ff8d7cce0547476891974"
++
++SRC_URI[md5sum] = "6ac3b17cba51aaaa36ba035a53527214"
++SRC_URI[sha256sum] = "05a10a0706a1a789a078be297b5fb663f66a71fb7f7f1b99658264c35926394f"
 -- 
-2.26.1
+2.21.1
 
