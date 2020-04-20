@@ -1,85 +1,125 @@
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
- by mx.groups.io with SMTP id smtpd.web10.6474.1587401953506989768
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com [209.85.221.66])
+ by mx.groups.io with SMTP id smtpd.web12.6624.1587402430028118411
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Apr 2020 09:59:13 -0700
+ Mon, 20 Apr 2020 10:07:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=j0ortJIz;
- spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f195.google.com with SMTP id b62so11390329qkf.6
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2020 09:59:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=NJyxF+1h;
+ spf=pass (domain: gmail.com, ip: 209.85.221.66, mailfrom: andrea.adami@gmail.com)
+Received: by mail-wr1-f66.google.com with SMTP id g13so11086429wrb.8
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2020 10:07:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=6wURsZH58aeIG8wr7We0gOc6AUzSBJ8p8JOKYkUu7VI=;
-        b=j0ortJIz1+K5wgISRt28RH1eJnfs1KhIyaIcdztOu/CfCTfdCw6rOTvRicQ/B9mjb/
-         7mXAI2OHncm4Y8A3ygry+Heq0bc1wNPJUz0FPTJfoRJtSp7+/MCiWytnHuHzeC4Z3CSB
-         cpKd4QjwjUyYudjuYYv/fRdd9utAMd21mEL0Sxue8dSM1gr6UKXRTCT4XDv25cNM26xc
-         x528/Fss+q9V9xX+XUFzJzDO0GQSvqtjfhHe6BHjS7e57Y69dRkzUYnAI9sanYikvAds
-         Twbu1XA0Vt2XfdVxSotRMRIrEYP9GibZxSVeEG837GShkrXScQOpYNVNgRMT+rCOhn7T
-         mHRA==
+        h=from:to:cc:subject:date:message-id;
+        bh=3TLLHFYCe/e97cg6gZaOQ3eN7TDsG8kkANWTrIJo+sU=;
+        b=NJyxF+1hWSQqPvcUglBL5RVxl2gslgxJwedb/5uynFTwly+Kwh+irfZkNeayfO2gww
+         QfiXVvMg4aiTb7bNRhhmFSjEX8V2hnq28dWAjernfQcSO2w4qzkDJwrxT8ucill3fc91
+         h4J7zlRSfjLYdYWgL8R9rFsTYj+0H/SYpJImgiLITRDwWGW1sNv6qI2/nHQDkfMX+vWx
+         0vta6HKBbutEfJjOGJTAKUjXQYFu8VETgGGBagUy1Ngk8JHmARkYo4lIvExmMS6kIkI8
+         YRaGhbbyVRaW0jTrgJYA1tf2gHjWnoQ5DNv606DaKs7JrPaqKcfQBPrQdPsH5xPzFRkE
+         KtaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=6wURsZH58aeIG8wr7We0gOc6AUzSBJ8p8JOKYkUu7VI=;
-        b=Kg4htrZ6YgIruyzsrLMLdWw6Sv/KY1IiUTAkzV72GT6I8OgXi8iEQ5e/dMn27gimzF
-         4IFaFDSqqMj1pekz7ejYyRYV7xVNmi3J7+yS8hVkq/Vc1yoz7ic/mTvMx2zfF/50CiZi
-         35iHDVTu1qAeU7104tfAkI+bZqwYj5zbjGuia73eW64QoQ21UsuRMLRvRX6MXm43FXVm
-         LsFXjCUZTFJvql3ANBRYclo/6e+ReRsBnZo3Q2WQSSMHzJoYNrqFWI2SgQNxfNrJeaTB
-         rsN2fhyYm6R7w0Y6aSty3jy1WA5GZ5ZvlybZriY18VNlOjLcTAzqUzRkAyUOZwdZBTS4
-         sNHQ==
-X-Gm-Message-State: AGi0PualB/x+brWzP0FjeB5gMn2l6C1sIe3oJBC7nKt220e0vePFODxL
-	CnvbEAymmBzAMPYmuU423P47UuR6fMMj8DI4M5Y=
-X-Google-Smtp-Source: APiQypKYiMxJyPoYtw7HoBUuCYVzHSRQyiOjFh12Nij9ytmRqPRZegDhhYPz+J9vNvbTogZKIZevmwheA3ZjQpcW3jM=
-X-Received: by 2002:a05:620a:16aa:: with SMTP id s10mr16785782qkj.225.1587401952452;
- Mon, 20 Apr 2020 09:59:12 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200420070739.29557-1-brgl@bgdev.pl>
-In-Reply-To: <20200420070739.29557-1-brgl@bgdev.pl>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 20 Apr 2020 09:58:46 -0700
-Message-ID: <CAMKF1spGCjO2vc0GaCOkUwZMRmTUwmrzhw9KsdH0WeWFMzDTdA@mail.gmail.com>
-Subject: Re: [PATCH] doxygen: update v1.8.17 -> v1.8.18
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: Armin Kuster <akuster808@gmail.com>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=3TLLHFYCe/e97cg6gZaOQ3eN7TDsG8kkANWTrIJo+sU=;
+        b=tIROB6w1zBvYrLdHhvramyPxU7JoU3jsXpdDYun0VU3yDaVhMfpKgFVU3kclRRaOeW
+         +waovBpbCIZd9YhO1qcbljHP69ix0YHkrQcGGe4nJbtLCgeVBIkdb9DJQGiLjreCjl9L
+         PZ3lOLMPcLIwZSfZpMSkoy7j3Lyi735jqH8JQE3kHre/GfBh7fUO3I17aIHNjHpVIWtW
+         ikLin6N4wvSgrrU6o6wZ517839usSmeZ4mxNpPw4w6H7d9dftxYCSG9ShCIkEPZYbXhw
+         dBiE6fkmQTTDDZlPXNaE/6Q7WWuSfXvHTgopGEugNhnl38AStzPEzGZenC+MyI36Hjic
+         ttgg==
+X-Gm-Message-State: AGi0Pua+wcC+kZrsATP3vLq69lSy4J8KBne7K+jiYubQWOMYam8k/mmo
+	9PBzApPjENExRUw6Q5tJpOBTF5+w
+X-Google-Smtp-Source: APiQypKtCelQ4I1lMKY3gAuSMaMbx3185k18yzfu6ISCXXQXgRSgIe6A9IP0c89GXIQLEGp8kLDncg==
+X-Received: by 2002:adf:8162:: with SMTP id 89mr18979217wrm.387.1587402428169;
+        Mon, 20 Apr 2020 10:07:08 -0700 (PDT)
+Return-Path: <andrea.adami@gmail.com>
+Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it (host220-224-dynamic.250-95-r.retail.telecomitalia.it. [95.250.224.220])
+        by smtp.googlemail.com with ESMTPSA id c10sm140366wru.48.2020.04.20.10.07.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 20 Apr 2020 10:07:07 -0700 (PDT)
+From: "Andrea Adami" <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Andrea Adami <andrea.adami@gmail.com>
+Subject: [meta-handheld][PATCH 1/4] zaurusd: fix build with kernels < 4.16 and newer libc headers
+Date: Mon, 20 Apr 2020 19:06:53 +0200
+Message-Id: <20200420170656.10895-1-andrea.adami@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
-hmmm I am seeing
-http://errors.yoctoproject.org/Errors/Details/405970/
+The Y2038 changes broke the build for older 32bit devices using
+older kernels.
 
-On Mon, Apr 20, 2020 at 12:07 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
->
-> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
->
-> Upgrade doxygen to the most recent release.
->
-> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> ---
->  .../doxygen/{doxygen_1.8.17.bb => doxygen_1.8.18.bb}          | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-devtools/doxygen/{doxygen_1.8.17.bb => doxygen_1.8.18.bb} (79%)
->
-> diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.18.bb
-> similarity index 79%
-> rename from meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb
-> rename to meta-oe/recipes-devtools/doxygen/doxygen_1.8.18.bb
-> index 45de71826..f3562b54f 100644
-> --- a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb
-> +++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.18.bb
-> @@ -10,8 +10,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
->             file://0001-build-don-t-look-for-Iconv.patch \
->  "
->  SRC_URI_append_class-native = " file://doxygen-native-only-check-python3.patch"
-> -SRC_URI[md5sum] = "7997a15c73a8bd6d003eaba5c2ee2b47"
-> -SRC_URI[sha256sum] = "2cba988af2d495541cbbe5541b3bee0ee11144dcb23a81eada19f5501fd8b599"
-> +SRC_URI[md5sum] = "eda8e82fcc58970894029b0399776cb5"
-> +SRC_URI[sha256sum] = "18173d9edc46d2d116c1f92a95d683ec76b6b4b45b817ac4f245bb1073d00656"
->
->  inherit cmake python3native
->
-> --
-> 2.25.0
->
+As seen on: https://sourceware.org/glibc/wiki/Y2038ProofnessDesign
+
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ .../zaurusd/zaurusd/add_64bit_time_t.patch    | 43 +++++++++++++++++++
+ recipes-bsp/zaurusd/zaurusd_git.bb            |  3 +-
+ 2 files changed, 45 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-bsp/zaurusd/zaurusd/add_64bit_time_t.patch
+
+diff --git a/recipes-bsp/zaurusd/zaurusd/add_64bit_time_t.patch b/recipes-bsp/zaurusd/zaurusd/add_64bit_time_t.patch
+new file mode 100644
+index 0000000..5f9587a
+--- /dev/null
++++ b/recipes-bsp/zaurusd/zaurusd/add_64bit_time_t.patch
+@@ -0,0 +1,43 @@
++From d15b20fd9e8927db5dc4303f2e6c11cfa8d6fe95 Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Mon, 20 Apr 2020 16:21:22 +0200
++Subject: [PATCH] tskeys.c: add support for 64bit time_t
++
++Upgrade the recipe to cope with the 64-bit time changes introduced in 4.16
++
++Fix:
++
++| tskeys.c: In function 'press_key':
++| tskeys.c:141:4: error: 'struct input_event' has no member named 'time'
++|   141 |  ev.time.tv_sec = time(0);
++|       |    ^
++| tskeys.c:142:4: error: 'struct input_event' has no member named 'time'
++|   142 |  ev.time.tv_usec = 0;
++|       |    ^
++
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++---
++ apps/tskeys/tskeys.c | 5 +++++
++ 1 file changed, 5 insertions(+)
++
++diff --git a/apps/tskeys/tskeys.c b/apps/tskeys/tskeys.c
++index 264dfb7..36e3bfd 100644
++--- a/apps/tskeys/tskeys.c
+++++ b/apps/tskeys/tskeys.c
++@@ -138,8 +138,13 @@ void press_key(int fd, int key, int pressed)
++ 	struct input_event ev;
++ 	int r;
++ 
+++#if !defined(__USE_TIME_BITS64)
++ 	ev.time.tv_sec = time(0);
++ 	ev.time.tv_usec = 0;
+++#else
+++	ev.input_event_sec = time(0);
+++	ev.input_event_usec = 0;
+++#endif
++ 	ev.type = EV_KEY;
++ 	ev.code = key;
++ 	ev.value = pressed;
++-- 
++2.17.1
++
+diff --git a/recipes-bsp/zaurusd/zaurusd_git.bb b/recipes-bsp/zaurusd/zaurusd_git.bb
+index d69805b..1f8e40b 100644
+--- a/recipes-bsp/zaurusd/zaurusd_git.bb
++++ b/recipes-bsp/zaurusd/zaurusd_git.bb
+@@ -24,7 +24,8 @@ SRC_URI = "git://git.yoctoproject.org/${BPN} \
+            file://01-check-toggle-portait \
+            file://use-ts-symlink-instead-of-hardcoding.diff \
+            file://0001-zaurusd-add-support-for-collie.patch \
+-           file://allow-newer-tslib.patch"
++           file://allow-newer-tslib.patch \
++           file://add_64bit_time_t.patch"
+ 
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.17.1
+
