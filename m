@@ -1,59 +1,59 @@
 Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com [209.85.222.173])
- by mx.groups.io with SMTP id smtpd.web12.6269.1587401586984972626
+ by mx.groups.io with SMTP id smtpd.web12.6348.1587401792616849226
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Apr 2020 09:53:07 -0700
+ Mon, 20 Apr 2020 09:56:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=g9l1LxBV;
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=vWzp0rUF;
  spf=pass (domain: gmail.com, ip: 209.85.222.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f173.google.com with SMTP id 20so11327692qkl.10
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2020 09:53:06 -0700 (PDT)
+Received: by mail-qk1-f173.google.com with SMTP id m67so11320735qke.12
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2020 09:56:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=je12lSkrg0igmQbaDAxG+jvYEkT9G47ffgnjATuFmFU=;
-        b=g9l1LxBVf2whji/MOqYJzTrrula4e5yONsoH9ZZSuygpo9P70wZopOdpFJQAlIfX0m
-         j9IrJNt0m43TUMiOipKIlWM0xtCsxjNxUAH8UmyCjFDLPmfWR2WWY4VyL6jWUTkfrSuK
-         P76zZrKhhja1QpHtR6PGcJRwTumKrrpa8Nl8ko37MJsYFV91fEIYCR/ULM6bDq0AvCbd
-         lVjN3infLPkTfxob3oSY57sM/RQBppszMw1Jyk/qIKySEuokdycwSIHSu3QI5xqITscA
-         nML2/2lIT2UeylciAcHul/dIEj8Cc6yDR0TMi1dhvp1hL4OYUBoC27UkbPSqIGp59NlG
-         q2HA==
+        bh=0MIUjcaO+tqEtf58DpxZ1beIUWe+Wgwtj4edvNwIqO8=;
+        b=vWzp0rUFFM45IfTRHcMbc6joeNCjFLcrqDJEOtal8kOw7UwZSVaNYzbPVkvDiiIvg5
+         LCqARx1oLql5Uq0sONxyyI0xdCGo4soHtEWCk2H3rfRzisu8LHs5oC7GDAZuFpdppS8B
+         JsKRFc5EXNaqfNw57FUVtPKFp6+iSKQDGxBpElSOysPAV01nTwMpN5+ZzNiygwRbs8fk
+         zXtqOhiTK8YEcNv2V1ENrLgXQiWyyjdJByPPuoX1Esf0FGzBxQkpZhPJNOT9hAVQFLuB
+         HGGN0SN+5Ghol5EN7Q4/kV6H90kvEVZbTR+eDe50K69G0uy6QejX+vTqWc7B6ZvFSfKd
+         uHNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=je12lSkrg0igmQbaDAxG+jvYEkT9G47ffgnjATuFmFU=;
-        b=r+l5zdaCZzUQ5TzOe1O7/xFkCbtyCuA03aCluBXPGQANMQVCMxVh20g++6BvT+V/ue
-         of5F9tPNlUQgqL26q3IspJt2xYaUop/SsI14Z6zDPCo6opfXUAYGUHR8wMKJGASJ0Oun
-         bi5mpZC6X6WywME5Kad8JFGrcWJG/6OI9aaojIIhA01v91fFT/3HtpsJ4anLrR8JS7u/
-         lF+5v4PArC2rGMNAQaXckU7wNzP49R/+M8Ze0s0D+OigdBoKgnFAeWkHvKfg5T3BOgeB
-         7YMLX004rTJp6oZAuiIXd25pOxSFjtBug2rbCmQW7jZkIVusg+wAdqfqQ8xArNT5dL7A
-         9Pmw==
-X-Gm-Message-State: AGi0Pubkd/dTZMo+peNDb6Be/lT4rlTmNfzsHNoP9XNvc3BJndP8Dm90
-	+jSi9L4v+xiNMfIkFPP+0r6pFzaPmwIRBELEwew=
-X-Google-Smtp-Source: APiQypK7VmD5KrtkUmCtgOj06vuPT55/5GErD+MeTVHH2oBi7uf7VJowLoXpRrXtoDwvJpsoJVwHwEBWVoxdexDHl7g=
-X-Received: by 2002:ae9:dc46:: with SMTP id q67mr14683795qkf.431.1587401585568;
- Mon, 20 Apr 2020 09:53:05 -0700 (PDT)
+        bh=0MIUjcaO+tqEtf58DpxZ1beIUWe+Wgwtj4edvNwIqO8=;
+        b=oZFmhDBgrRuGsq2HWtEJny2iIfKNd5Vd7dOauFk1hir2zYy4PC8j86Fv/5IkmOfucU
+         OhhuJ06l4CdfEC0EEgWkUy7mo+v4SoeAn+EEPfxFKm0V39h8CDpWM6kCwYk+z6cvYLKe
+         0l6arY1dBvSHYyMXn/Mldb6LHRfH1MfxRYDPSzrUnU2Scoo+U/6APEjaSdmzFtJPZwU9
+         gQdMryS1H3P2EZLTep4I5lxGUTa2BZF0AVwTX3zlOGL80ct5P92vgvluoVokkeem65Nw
+         xkufKfcCTxrqe0F/g3grY6LA96uiqwjaCV/1YlO9mdAnGJ366rqZrwUUD9zNzbkADjd+
+         751A==
+X-Gm-Message-State: AGi0PuZsyivZYbcjBEWvrPKXEc1TLLLlNKzit4ORM/hpLflFgPjZA0fv
+	6n4rcfeJsL6aFArYCZMzIAjOWumFBi9j2j0mzdznyj9X
+X-Google-Smtp-Source: APiQypI3YbZCBNsk5qkbW1+kS5F+n6XkXGWQS2BzfZHavQ1b7jhdaUJNGNhlFGbVD37qHLKCd+G+RUAnGpgLfKEc3NA=
+X-Received: by 2002:a37:8d81:: with SMTP id p123mr16324251qkd.17.1587401791200;
+ Mon, 20 Apr 2020 09:56:31 -0700 (PDT)
 MIME-Version: 1.0
 References: <1587376709-244063-1-git-send-email-changqing.li@windriver.com>
 In-Reply-To: <1587376709-244063-1-git-send-email-changqing.li@windriver.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 20 Apr 2020 09:52:39 -0700
-Message-ID: <CAMKF1sqmgg+phQCn_Pwpfd2FzKKoZ0Y=EXu_+NLNR=GLjy9hfQ@mail.gmail.com>
+Date: Mon, 20 Apr 2020 09:56:05 -0700
+Message-ID: <CAMKF1sphN=C75MML3KT8be+=9sDTMCCZE+RsaJaaktDLZzHr+w@mail.gmail.com>
 Subject: Re: [oe] [meta-oe][PATCH] php: Add 7.4.4
 To: Changqing Li <changqing.li@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
-
-can you also take a look at
-https://errors.yoctoproject.org/Errors/Details/405963/
-xdebug seems to be version sensitive.
 
 On Mon, Apr 20, 2020 at 2:59 AM Changqing Li <changqing.li@windriver.com> wrote:
 >
 > From: Changqing Li <changqing.li@windriver.com>
 >
 > * Add php 7.4, and also keep 7.3 existed.
+
+
+why do we need to keep 7.3 ?
+
 > refer:
 > https://www.php.net/migration74
 > https://www.php.net/supported-versions.php
@@ -891,6 +891,11 @@ On Mon, Apr 20, 2020 at 2:59 AM Changqing Li <changqing.li@windriver.com> wrote:
 > +# | {standard input}:3797: Error: unshifted register required -- `sub r2,r2,r0,asr#31'
 > +# | make: *** [ext/standard/math.lo] Error 1
 > +ARM_INSTRUCTION_SET = "arm"
+
+do we still need this ?, if needed for thumb1 perhaps we should mark
+it so with _armv5t and _armv4
+overrides so it can be built with thumb2 on newer arches
+
 > --
 > 2.7.4
 >
