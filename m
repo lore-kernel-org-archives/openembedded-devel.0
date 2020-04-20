@@ -1,290 +1,215 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web11.2042.1587372346666589704
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+ by mx.groups.io with SMTP id smtpd.web11.2052.1587372406288217232
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Apr 2020 01:45:53 -0700
+ Mon, 20 Apr 2020 01:46:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.72,406,1580745600"; 
-   d="scan'208";a="89270828"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 20 Apr 2020 16:45:36 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id EFFB850A9969;
-	Mon, 20 Apr 2020 16:34:59 +0800 (CST)
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) by
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Mon, 20 Apr 2020 16:45:35 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local ([fe80::15e2:f6f4:7314:fd88])
- by G08CNEXMBPEKD05.g08.fujitsu.local ([fe80::15e2:f6f4:7314:fd88%14]) with
- mapi id 15.00.1497.000; Mon, 20 Apr 2020 16:45:36 +0800
-From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
-To: Khem Raj <raj.khem@gmail.com>
-CC: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: =?UTF-8?B?562U5aSNOiBbb2VdIFttZXRhLW5ldHdvcmtpbmddW1BBVENIXSBwcm9mdHBkOiB1cGdyYWRlIDEuMy42IC0+IDEuMy43cmMz?=
-Thread-Topic: [oe] [meta-networking][PATCH] proftpd: upgrade 1.3.6 -> 1.3.7rc3
-Thread-Index: AQHWEshClfbyroKpjk6gOSox4Dze3ah47vsAgAjLF1A=
-Date: Mon, 20 Apr 2020 08:45:36 +0000
-Message-ID: <b8399771221347cd924e76edf47919c8@G08CNEXMBPEKD05.g08.fujitsu.local>
-References: <1586939501-29659-1-git-send-email-wangmy@cn.fujitsu.com>
- <CAMKF1srAggnr8G5k2CvOfEYekBKmvtFiiSkC3gFGJORSDLPKNQ@mail.gmail.com>
-In-Reply-To: <CAMKF1srAggnr8G5k2CvOfEYekBKmvtFiiSkC3gFGJORSDLPKNQ@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.167.225.33]
+ dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=kz+NLtyU;
+ spf=pass (domain: skidata.com, ip: 91.230.2.91, mailfrom: prvs=3724ac2bd=richard.leitner@skidata.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+  t=1587372406; x=1618908406;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=1VUyighhRgh9Z6lEEqmsKMdaMYjjoSmLMkvI78q8yfM=;
+  b=kz+NLtyUs3JPDS54mJ5oZzT6yjnpdqDGC6KpJGJ3RME4KlRzFfNLlTMO
+   ERjuAsu1t98iab6NCiS3c2Mfmq4qSZ3rYSQF/1582VaJPPyCDJpEs3s4r
+   cidqVFVy9tiNr5Y5HYGg+dcd0Gmi0TotWkUOhC2taDtKIKo1aHSdKw4Rp
+   BLVLmF62KY1CdqccgGbUDhmCGGa67OyNgBzZJ4GwzAuZ6E8vGilLrIL6K
+   HLGC1QB5AwoxKcLM5t+b7LZhm6RFdg8OtEW3X1tRCMGsUCIP6s/jC1SnT
+   pfsTbBXBG/8HQMxnIH1/G0gzHyjLBkElgfgoG5Pw+VDlAmlOPvr92O4sG
+   A==;
+IronPort-SDR: o0K/sG7hKXluTY1TCAecIu3C517dOSuVCb8FNT6TwqmpvqgDuXgv96QYD+znACW5QgQxDBY+9K
+ Yi/cDbCavNlHmgNGrjZDIE59BgaG9dow59FykNZ/qR6TrIeOXvu76eKgU7vHKtpzKRhtjEfJq9
+ rX5LFow6Nrdp7mm+yPU5pH08Bk8AIrXSVMkbkT5B8VxHLycL+KqNwcMfhkrDIzdMRgsKbLGgYd
+ LuYEVJunrEsk9W7G4E4iypcJoaCN5Lr2XBAobb4czGagUlLvWZCAro1fccflndGk68r4pA5OF+
+ P1Y=
+X-IronPort-AV: E=Sophos;i="5.72,406,1580770800"; 
+   d="scan'208";a="2566944"
+From: "Richard Leitner" <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Richard Leitner <richard.leitner@skidata.com>
+Subject: [meta-java][PATCH] openjdk-8: update to latest ga version 252
+Date: Mon, 20 Apr 2020 10:46:32 +0200
+Message-ID: <20200420084632.3229835-1-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.25.2
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: EFFB850A9969.A07D0
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Return-Path: richard.leitner@skidata.com
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+ sdex5srv.skidata.net (192.168.111.83)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-U29ycnksIGFsbCBmdXR1cmUgdXBkYXRlcyB3aWxsIGJlIHBlcmZvcm1lZCBv
-biB0aGUgc3RhYmxlIHZlcnNpb24sIHRoaXMgcHJvYmxlbSB3aWxsIG5vdCBi
-ZSByZXBlYXRlZC4NCg0KLS0tLS3pgq7ku7bljp/ku7YtLS0tLQ0K5Y+R5Lu2
-5Lq6OiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9y
-ZyA8b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc+
-IOS7o+ihqCBLaGVtIFJhag0K5Y+R6YCB5pe26Ze0OiAyMDIw5bm0NOaciDE1
-5pelIDEwOjI3DQrmlLbku7bkuro6IFdhbmcsIE1pbmd5dS/njosg6bij55Gc
-IDx3YW5nbXlAY24uZnVqaXRzdS5jb20+DQrmioTpgIE6IG9wZW5lbWJlZGVk
-LWRldmVsIDxvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZz4NCuS4u+mimDogUmU6IFtvZV0gW21ldGEtbmV0d29ya2luZ11bUEFU
-Q0hdIHByb2Z0cGQ6IHVwZ3JhZGUgMS4zLjYgLT4gMS4zLjdyYzMNCg0KT24g
-VHVlLCBBcHIgMTQsIDIwMjAgYXQgNjo1MCBQTSBXYW5nIE1pbmd5dSA8d2Fu
-Z215QGNuLmZ1aml0c3UuY29tPiB3cm90ZToNCj4NCj4gcmVmcmVzaCB0aGUg
-Zm9sbG93aW5nIHBhdGNoZXM6DQo+IGJ1aWxkX2ZpeHVwLnBhdGNoDQo+IGNv
-bnRyaWIucGF0Y2gNCj4NCg0KSSBhbSBhIGJpdCByZWx1Y3RhbnQgdG8gdGFr
-ZSBSQyB2ZXJzaW9ucy4gQ2FuIHlvdSBqdXN0aWZ5IHdoeSB3ZSBzaG91bGQg
-dXBncmFkZSB0byBSQyBpbiB0aGlzIGNhc2UgPw0KDQo+IFNpZ25lZC1vZmYt
-Ynk6IFdhbmcgTWluZ3l1IDx3YW5nbXlAY24uZnVqaXRzdS5jb20+DQo+IC0t
-LQ0KPiAgLi4uL3Byb2Z0cGQvZmlsZXMvYnVpbGRfZml4dXAucGF0Y2ggICAg
-ICAgICAgIHwgNzUgKysrKysrKysrLS0tLS0tLS0tLQ0KPiAgLi4uL3Byb2Z0
-cGQvZmlsZXMvY29udHJpYi5wYXRjaCAgICAgICAgICAgICAgIHwgMjkgKysr
-LS0tLQ0KPiAgLi4uL3twcm9mdHBkXzEuMy42LmJiID0+IHByb2Z0cGRfMS4z
-LjdyYzMuYmJ9IHwgIDQgKy0NCj4gIDMgZmlsZXMgY2hhbmdlZCwgNTIgaW5z
-ZXJ0aW9ucygrKSwgNTYgZGVsZXRpb25zKC0pICByZW5hbWUgDQo+IG1ldGEt
-bmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvcHJvZnRwZC97cHJvZnRwZF8x
-LjMuNi5iYiA9PiANCj4gcHJvZnRwZF8xLjMuN3JjMy5iYn0gKDk3JSkNCj4N
-Cj4gZGlmZiAtLWdpdCANCj4gYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1k
-YWVtb25zL3Byb2Z0cGQvZmlsZXMvYnVpbGRfZml4dXAucGF0Y2ggDQo+IGIv
-bWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9wcm9mdHBkL2ZpbGVz
-L2J1aWxkX2ZpeHVwLnBhdGNoDQo+IGluZGV4IDk4MTZkNGQyMi4uOWY0NWEx
-YzJmIDEwMDY0NA0KPiAtLS0gYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1k
-YWVtb25zL3Byb2Z0cGQvZmlsZXMvYnVpbGRfZml4dXAucGF0Y2gNCj4gKysr
-IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9wcm9mdHBkL2Zp
-bGVzL2J1aWxkX2ZpeHVwLnBhdGNoDQo+IEBAIC03LDEyICs3LDE3IEBAIG1v
-dmUgcGlkZmlsZSB0byAvdmFyL3J1biAgcmVkZWZpbmUgUFJfUlVOX0RJUiBh
-cyANCj4gJHtsb2NhbHN0YXRlZGlyfS9ydW4NCj4NCj4gIFNpZ25lZC1vZmYt
-Qnk6IEFybWluIEt1c3RlciA8YWt1c3RlcjgwOEBnbWFpbC5jb20+DQo+ICst
-LS0NCj4gKyBNYWtlLnJ1bGVzLmluIHwgNiArKystLS0NCj4gKyBNYWtlZmls
-ZS5pbiAgIHwgNiArKy0tLS0NCj4gKyBjb25maWd1cmUgICAgIHwgNCArKy0t
-DQo+ICsgY29uZmlndXJlLmluICB8IDQgKystLQ0KPiArIDQgZmlsZXMgY2hh
-bmdlZCwgOSBpbnNlcnRpb25zKCspLCAxMSBkZWxldGlvbnMoLSkNCj4NCj4g
-LQ0KPiAtSW5kZXg6IHByb2Z0cGQtMS4zLjYvTWFrZS5ydWxlcy5pbg0KPiAt
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PQ0KPiAtLS0tIHByb2Z0cGQtMS4zLjYu
-b3JpZy9NYWtlLnJ1bGVzLmluDQo+IC0rKysgcHJvZnRwZC0xLjMuNi9NYWtl
-LnJ1bGVzLmluDQo+ICtkaWZmIC0tZ2l0IGEvTWFrZS5ydWxlcy5pbiBiL01h
-a2UucnVsZXMuaW4gaW5kZXggYTUwMjhhYy4uY2NkNzgwNyANCj4gKzEwMDY0
-NA0KPiArLS0tIGEvTWFrZS5ydWxlcy5pbg0KPiArKysrIGIvTWFrZS5ydWxl
-cy5pbg0KPiAgQEAgLTMwLDkgKzMwLDkgQEAgSU5TVEFMTD1ASU5TVEFMTEAN
-Cj4gICBJTlNUQUxMX1NUUklQPUBJTlNUQUxMX1NUUklQQA0KPiAgIElOU1RB
-TExfVVNFUj1AaW5zdGFsbF91c2VyQA0KPiBAQCAtMjYsMTAgKzMxLDEwIEBA
-IEluZGV4OiBwcm9mdHBkLTEuMy42L01ha2UucnVsZXMuaW4NCj4NCj4gICBS
-TT1ybSAtZg0KPiAgIFNIRUxMPUBDT05GSUdfU0hFTExADQo+IC1JbmRleDog
-cHJvZnRwZC0xLjMuNi9NYWtlZmlsZS5pbg0KPiAtPT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PQ0KPiAtLS0tIHByb2Z0cGQtMS4zLjYub3JpZy9NYWtlZmlsZS5p
-bg0KPiAtKysrIHByb2Z0cGQtMS4zLjYvTWFrZWZpbGUuaW4NCj4gK2RpZmYg
-LS1naXQgYS9NYWtlZmlsZS5pbiBiL01ha2VmaWxlLmluIGluZGV4IGFiYWNj
-OWYuLmJlMjIzNTMgMTAwNjQ0DQo+ICstLS0gYS9NYWtlZmlsZS5pbg0KPiAr
-KysrIGIvTWFrZWZpbGUuaW4NCj4gIEBAIC0xMDUsNyArMTA1LDYgQEAgY2hl
-Y2s6IHByb2Z0cGQkKEVYRUVYVCkNCj4gICAkKERFU1RESVIpJChsb2NhbGVk
-aXIpICQoREVTVERJUikkKGluY2x1ZGVkaXIpICQoREVTVERJUikkKGluY2x1
-ZGVkaXIpL3Byb2Z0cGQgJChERVNURElSKSQobGliZGlyKSAkKERFU1RESVIp
-JChwa2djb25maWdkaXIpICQoREVTVERJUikkKGxpYmRpcikvcHJvZnRwZCAk
-KERFU1RESVIpJChsaWJleGVjZGlyKSAkKERFU1RESVIpJChsb2NhbHN0YXRl
-ZGlyKSAkKERFU1RESVIpJChzeXNjb25mZGlyKSAkKERFU1RESVIpJChiaW5k
-aXIpICQoREVTVERJUikkKHNiaW5kaXIpICQoREVTVERJUikkKG1hbmRpcikg
-JChERVNURElSKSQobWFuZGlyKS9tYW4xICQoREVTVERJUikkKG1hbmRpcikv
-bWFuNSAkKERFU1RESVIpJChtYW5kaXIpL21hbjg6DQo+ICAgICAgICAgQGlm
-IFsgISAtZCAkQCBdOyB0aGVuIFwNCj4gQEAgLTM4LDE5ICs0MywxOSBAQCBJ
-bmRleDogcHJvZnRwZC0xLjMuNi9NYWtlZmlsZS5pbg0KPiAgICAgICAgICAg
-ICAgICAgY2htb2QgMDc1NSAkQDsgXA0KPiAgICAgICAgIGZpDQo+DQo+IC1A
-QCAtMTE1LDcgKzExNCw2IEBAIGluc3RhbGwtcHJvZnRwZDogcHJvZnRwZCAk
-KERFU1RESVIpJChpbmMNCj4gK0BAIC0xMTUsNyArMTE0LDYgQEAgaW5zdGFs
-bC1wcm9mdHBkOiBwcm9mdHBkJChFWEVFWFQpIA0KPiArJChERVNURElSKSQo
-aW5jbHVkZWRpcikgJChERVNURElSKSQobG9jYWxzdGF0ZQ0KPiAgICAgICAg
-ICAgICAgICAgcm0gLWYgJChERVNURElSKSQoc2JpbmRpcikvaW4ucHJvZnRw
-ZCA7IFwNCj4gICAgICAgICBmaQ0KPiAtICAgICAgIGxuIC1zIHByb2Z0cGQg
-JChERVNURElSKSQoc2JpbmRpcikvaW4ucHJvZnRwZA0KPiArICAgICAgIGxu
-IC1zICQodG9wX2J1aWxkZGlyKS9wcm9mdHBkICQoREVTVERJUikkKHNiaW5k
-aXIpL2luLnByb2Z0cGQNCj4gIC0gICAgICAtY2hvd24gLWggJChJTlNUQUxM
-X1VTRVIpOiQoSU5TVEFMTF9HUk9VUCkgJChERVNURElSKSQoc2JpbmRpcikv
-aW4ucHJvZnRwZA0KPg0KPiAgIGluc3RhbGwtbGliczogJChERVNURElSKSQo
-bGliZGlyKS9wcm9mdHBkDQo+ICAgICAgICAgY2QgbGliLyAmJiAkKE1BS0Up
-IGluc3RhbGwNCj4gLUBAIC0xNTIsMTEgKzE1MCwxMSBAQCBpbnN0YWxsLXV0
-aWxzOiAkKERFU1RESVIpJChzYmluZGlyKSAkKERFDQo+IC0gICAgICAgJChJ
-TlNUQUxMX1NCSU4pIGZ0cHNodXQgICQoREVTVERJUikkKHNiaW5kaXIpL2Z0
-cHNodXQNCj4gLSAgICAgICAkKElOU1RBTExfQklOKSAgZnRwdG9wICAgJChE
-RVNURElSKSQoYmluZGlyKS9mdHB0b3ANCj4gLSAgICAgICAkKElOU1RBTExf
-QklOKSAgZnRwd2hvICAgJChERVNURElSKSQoYmluZGlyKS9mdHB3aG8NCj4g
-LS0gICAgICAkKElOU1RBTEwpIC1vICQoSU5TVEFMTF9VU0VSKSAtZyAkKElO
-U1RBTExfR1JPVVApIC1tIDA3NTUgc3JjL3ByeHMgJChERVNURElSKSQoYmlu
-ZGlyKS9wcnhzDQo+ICtAQCAtMTUyLDExICsxNTAsMTEgQEAgaW5zdGFsbC11
-dGlsczogJChERVNURElSKSQoc2JpbmRpcikgJChERVNURElSKSQoYmluZGly
-KQ0KPiArICAgICAgICQoSU5TVEFMTF9TQklOKSAkKHRvcF9idWlsZGRpcikv
-ZnRwc2h1dCAgJChERVNURElSKSQoc2JpbmRpcikvZnRwc2h1dA0KPiArICAg
-ICAgICQoSU5TVEFMTF9CSU4pICAkKHRvcF9idWlsZGRpcikvZnRwdG9wICAg
-JChERVNURElSKSQoYmluZGlyKS9mdHB0b3ANCj4gKyAgICAgICAkKElOU1RB
-TExfQklOKSAgJCh0b3BfYnVpbGRkaXIpL2Z0cHdobyAgICQoREVTVERJUikk
-KGJpbmRpcikvZnRwd2hvDQo+ICstICAgICAgJChJTlNUQUxMKSAtbyAkKElO
-U1RBTExfVVNFUikgLWcgJChJTlNUQUxMX0dST1VQKSAtbSAwNzU1ICQodG9w
-X2J1aWxkZGlyKS9zcmMvcHJ4cyAkKERFU1RESVIpJChiaW5kaXIpL3ByeHMN
-Cj4gICsgICAgICAkKElOU1RBTEwpIC1tIDA3NTUgc3JjL3ByeHMgJChERVNU
-RElSKSQoYmluZGlyKS9wcnhzDQo+DQo+ICAgaW5zdGFsbC1jb25mOiAkKERF
-U1RESVIpJChzeXNjb25mZGlyKSBAQCAtNjAsMTEgKzY1LDExIEBAIEluZGV4
-OiANCj4gcHJvZnRwZC0xLjMuNi9NYWtlZmlsZS5pbg0KPiAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAkKHRvcF9zcmNkaXIpL3NhbXBsZS1jb25maWd1
-cmF0aW9ucy9iYXNpYy5jb25mIFwNCj4gICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgJChERVNURElSKSQoc3lzY29uZmRpcikvcHJvZnRwZC5jb25mIDsg
-XA0KPiAgICAgICAgIGZpDQo+IC1JbmRleDogcHJvZnRwZC0xLjMuNi9jb25m
-aWd1cmUNCj4gLT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCj4gLS0tLSBwcm9m
-dHBkLTEuMy42Lm9yaWcvY29uZmlndXJlDQo+IC0rKysgcHJvZnRwZC0xLjMu
-Ni9jb25maWd1cmUNCj4gLUBAIC00MTc3Nyw3ICs0MTc3Nyw3IEBAIF9BQ0VP
-Rg0KPiArZGlmZiAtLWdpdCBhL2NvbmZpZ3VyZSBiL2NvbmZpZ3VyZQ0KPiAr
-aW5kZXggMDMzZjEyZi4uMjQyZDE4YiAxMDA3NTUNCj4gKy0tLSBhL2NvbmZp
-Z3VyZQ0KPiArKysrIGIvY29uZmlndXJlDQo+ICtAQCAtNDIzMDgsNyArNDIz
-MDgsNyBAQCBfQUNFT0YNCj4NCj4NCj4gICBjYXQgPj5jb25mZGVmcy5oIDw8
-X0FDRU9GDQo+IEBAIC03Myw3ICs3OCw3IEBAIEluZGV4OiBwcm9mdHBkLTEu
-My42L2NvbmZpZ3VyZQ0KPiAgIF9BQ0VPRg0KPg0KPg0KPiAtQEAgLTQxNzg3
-LDcgKzQxNzg3LDcgQEAgX0FDRU9GDQo+ICtAQCAtNDIzMTgsNyArNDIzMTgs
-NyBAQCBfQUNFT0YNCj4NCj4NCj4gICBjYXQgPj5jb25mZGVmcy5oIDw8X0FD
-RU9GDQo+IEBAIC04MiwxMSArODcsMTEgQEAgSW5kZXg6IHByb2Z0cGQtMS4z
-LjYvY29uZmlndXJlDQo+ICAgX0FDRU9GDQo+DQo+DQo+IC1JbmRleDogcHJv
-ZnRwZC0xLjMuNi9jb25maWd1cmUuaW4NCj4gLT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT0NCj4gLS0tLSBwcm9mdHBkLTEuMy42Lm9yaWcvY29uZmlndXJlLmlu
-DQo+IC0rKysgcHJvZnRwZC0xLjMuNi9jb25maWd1cmUuaW4NCj4gLUBAIC0z
-ODMzLDggKzM4MzMsOCBAQCBsb2NhbGVfZGlyPSJgZXZhbCBlY2hvICR7bG9j
-YWxlX2Rpcn1gIg0KPiArZGlmZiAtLWdpdCBhL2NvbmZpZ3VyZS5pbiBiL2Nv
-bmZpZ3VyZS5pbiBpbmRleCBhNGFmZmE5Li41NDQ5MDYwIA0KPiArMTAwNjQ0
-DQo+ICstLS0gYS9jb25maWd1cmUuaW4NCj4gKysrKyBiL2NvbmZpZ3VyZS5p
-bg0KPiArQEAgLTM5NTYsOCArMzk1Niw4IEBAIGxvY2FsZV9kaXI9ImBldmFs
-IGVjaG8gJHtsb2NhbGVfZGlyfWAiDQo+ICAgQUNfREVGSU5FX1VOUVVPVEVE
-KFBSX0xPQ0FMRV9ESVIsICJgZXZhbCBlY2hvICIke2xvY2FsZV9kaXJ9ImAi
-LCANCj4gW0RlZmluZSB0aGUgbG9jYWxlIGRpcmVjdG9yeV0pDQo+DQo+ICAg
-QUNfREVGSU5FX1VOUVVPVEVEKFBSX1JVTl9ESVIsICJgZXZhbCBlY2hvICIk
-e2xvY2Fsc3RhdGVkaXJ9ImAiLCANCj4gW0RlZmluZSB0aGUgcnVuIGRpcmVj
-dG9yeV0pIEBAIC05NywxNiArMTAyLDYgQEAgSW5kZXg6IA0KPiBwcm9mdHBk
-LTEuMy42L2NvbmZpZ3VyZS5pbg0KPg0KPiAgIHByZWZpeD0iJHByX3NhdmVk
-X3ByZWZpeCINCj4gICBleGVjX3ByZWZpeD0iJHByX3NhdmVkX2V4ZWNfcHJl
-Zml4Ig0KPiAtSW5kZXg6IHByb2Z0cGQtMS4zLjYvbGliL2xpYmNhcC9NYWtl
-ZmlsZSANCj4gLT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCj4gLS0tLSBwcm9m
-dHBkLTEuMy42Lm9yaWcvbGliL2xpYmNhcC9NYWtlZmlsZQ0KPiAtKysrIHBy
-b2Z0cGQtMS4zLjYvbGliL2xpYmNhcC9NYWtlZmlsZQ0KPiAtQEAgLTI2LDcg
-KzI2LDcgQEAgT0JKUz0kKGFkZHN1ZmZpeCAubywgJChGSUxFUykpDQo+IC0g
-YWxsOiAkKExJQk5BTUUpDQo+IC0NCj4gLSBfbWFrZW5hbWVzOiBfbWFrZW5h
-bWVzLmMgY2FwX25hbWVzLnNlZA0KPiAtLSAgICAgICQoQ0MpICQoQ0ZMQUdT
-KSAkKExERkxBR1MpICQ8IC1vICRADQo+IC0rICAgICAgJChCVUlMRF9DQykg
-JChDRkxBR1MpICQoTERGTEFHUykgJDwgLW8gJEANCj4gLQ0KPiAtIGNhcF9u
-YW1lcy5oOiBfbWFrZW5hbWVzDQo+IC0gICAgICAgLi9fbWFrZW5hbWVzID4g
-Y2FwX25hbWVzLmgNCj4gKy0tDQo+ICsyLjE3LjENCj4gKw0KPiBkaWZmIC0t
-Z2l0IA0KPiBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvcHJv
-ZnRwZC9maWxlcy9jb250cmliLnBhdGNoIA0KPiBiL21ldGEtbmV0d29ya2lu
-Zy9yZWNpcGVzLWRhZW1vbnMvcHJvZnRwZC9maWxlcy9jb250cmliLnBhdGNo
-DQo+IGluZGV4IDdlMmE4ZTNjZS4uZTRmZjUzOWRlIDEwMDY0NA0KPiAtLS0g
-YS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL3Byb2Z0cGQvZmls
-ZXMvY29udHJpYi5wYXRjaA0KPiArKysgYi9tZXRhLW5ldHdvcmtpbmcvcmVj
-aXBlcy1kYWVtb25zL3Byb2Z0cGQvZmlsZXMvY29udHJpYi5wYXRjaA0KPiBA
-QCAtNiwzNyArNiwzOCBAQCBVcHN0cmVhbS1TdGF0dXM6IFBlbmRpbmcNCj4N
-Cj4gIFNpZ25lZC1vZmYtYnk6IEtldmluIFN0cmFzc2VyIDxrZXZpbi5zdHJh
-c3NlckBsaW51eC5pbnRlbC5jb20+DQo+ICAtLS0NCj4gLSBNYWtlZmlsZS5p
-biAgICAgICAgIHwgICAgMiArLQ0KPiAtIGNvbnRyaWIvTWFrZWZpbGUuaW4g
-fCAgICA2ICsrKy0tLQ0KPiAtIDIgZmlsZXMgY2hhbmdlZCwgNCBpbnNlcnRp
-b25zKCspLCA0IGRlbGV0aW9ucygtKQ0KPiArIE1ha2VmaWxlLmluICAgICAg
-ICAgfCAyICstDQo+ICsgY29udHJpYi9NYWtlZmlsZS5pbiB8IDcgKysrKy0t
-LQ0KPiArIDIgZmlsZXMgY2hhbmdlZCwgNSBpbnNlcnRpb25zKCspLCA0IGRl
-bGV0aW9ucygtKQ0KPg0KPiAgZGlmZiAtLWdpdCBhL01ha2VmaWxlLmluIGIv
-TWFrZWZpbGUuaW4gLWluZGV4IDViMmU2ODMuLmVlNzJmZTEgMTAwNjQ0DQo+
-ICtpbmRleCAzZjMyNWU1Li5hYmFjYzlmIDEwMDY0NA0KPiAgLS0tIGEvTWFr
-ZWZpbGUuaW4NCj4gICsrKyBiL01ha2VmaWxlLmluDQo+IC1AQCAtMTIwLDcg
-KzEyMCw3IEBAIGluc3RhbGwtbW9kdWxlczogJChERVNURElSKSQobGliZXhl
-Y2RpcikgDQo+ICQoREVTVERJUikkKHN5c2NvbmZkaXIpDQo+ICtAQCAtMTQ1
-LDcgKzE0NSw3IEBAIGluc3RhbGwtbW9kdWxlczogJChERVNURElSKSQobGli
-ZXhlY2RpcikgDQo+ICskKERFU1RESVIpJChzeXNjb25mZGlyKQ0KPiAgICAg
-ICAgIHRlc3QgLXogIiQoU0hBUkVEX01PRFVMRV9PQkpTKSIgLWEgLXogIiQo
-U0hBUkVEX01PRFVMRV9ESVJTKSIgDQo+IC1hIC16ICIkKFNUQVRJQ19NT0RV
-TEVfRElSUykiIHx8IChjZCBtb2R1bGVzLyAmJiAkKE1BS0UpIGluc3RhbGwp
-DQo+DQo+ICAgaW5zdGFsbC11dGlsczogJChERVNURElSKSQoc2JpbmRpcikg
-JChERVNURElSKSQoYmluZGlyKQ0KPiAgLSAgICAgIGNkIGNvbnRyaWIvICYm
-ICQoTUFLRSkgaW5zdGFsbC11dGlscw0KPiAgKyAgICAgIGNkIGNvbnRyaWIv
-ICYmICQoTUFLRSkgREVTVERJUj0ke0RFU1RESVJ9IGluc3RhbGwtdXRpbHMN
-Cj4gLSAgICAgICAkKElOU1RBTExfQklOKSAgZnRwY291bnQgJChERVNURElS
-KSQoYmluZGlyKS9mdHBjb3VudA0KPiAtICAgICAgICQoSU5TVEFMTF9CSU4p
-ICBmdHBkY3RsICAkKERFU1RESVIpJChiaW5kaXIpL2Z0cGRjdGwNCj4gLSAg
-ICAgICAkKElOU1RBTExfU0JJTikgZnRwc2NydWIgJChERVNURElSKSQoc2Jp
-bmRpcikvZnRwc2NydWINCj4gKyAgICAgICAkKElOU1RBTExfQklOKSAgJCh0
-b3BfYnVpbGRkaXIpL2Z0cGNvdW50ICQoREVTVERJUikkKGJpbmRpcikvZnRw
-Y291bnQNCj4gKyAgICAgICAkKElOU1RBTExfQklOKSAgJCh0b3BfYnVpbGRk
-aXIpL2Z0cGRjdGwgICQoREVTVERJUikkKGJpbmRpcikvZnRwZGN0bA0KPiAr
-ICAgICAgICQoSU5TVEFMTF9TQklOKSAkKHRvcF9idWlsZGRpcikvZnRwc2Ny
-dWIgDQo+ICsgJChERVNURElSKSQoc2JpbmRpcikvZnRwc2NydWINCj4gIGRp
-ZmYgLS1naXQgYS9jb250cmliL01ha2VmaWxlLmluIGIvY29udHJpYi9NYWtl
-ZmlsZS5pbiAtaW5kZXggDQo+IDViY2MwMzguLjUxZDI0OGMgMTAwNjQ0DQo+
-ICtpbmRleCBkMWEzMWFmLi44NjVhNmZmIDEwMDY0NA0KPiAgLS0tIGEvY29u
-dHJpYi9NYWtlZmlsZS5pbg0KPiAgKysrIGIvY29udHJpYi9NYWtlZmlsZS5p
-bg0KPiAtQEAgLTE4LDYgKzE4LDYgQEAgTWFrZWZpbGU6IE1ha2VmaWxlLmlu
-IC4uL2NvbmZpZy5zdGF0dXMNCj4gK0BAIC0xNyw2ICsxNyw3IEBAIE1ha2Vm
-aWxlOiBNYWtlZmlsZS5pbiAuLi9jb25maWcuc3RhdHVzDQo+ICAgICAgICAg
-Y2QgLi4vICYmIC4vY29uZmlnLnN0YXR1cw0KPg0KPiAgIGluc3RhbGwtdXRp
-bHM6DQo+IC0tICAgICAgJChJTlNUQUxMKSAtbyAkKElOU1RBTExfVVNFUikg
-LWcgJChJTlNUQUxMX0dST1VQKSAtbSAwNzU1IGZ0cGFzc3dkICQoREVTVERJ
-UikkKGJpbmRpcikvZnRwYXNzd2QNCj4gLS0gICAgICAkKElOU1RBTEwpIC1v
-ICQoSU5TVEFMTF9VU0VSKSAtZyAkKElOU1RBTExfR1JPVVApIC1tIDA3NTUg
-ZnRwbWFpbCAkKERFU1RESVIpJChiaW5kaXIpL2Z0cG1haWwNCj4gLS0gICAg
-ICAkKElOU1RBTEwpIC1vICQoSU5TVEFMTF9VU0VSKSAtZyAkKElOU1RBTExf
-R1JPVVApIC1tIDA3NTUgZnRwcXVvdGEgJChERVNURElSKSQoYmluZGlyKS9m
-dHBxdW90YQ0KPiArLSAgICAgICQoSU5TVEFMTCkgLW8gJChJTlNUQUxMX1VT
-RVIpIC1nICQoSU5TVEFMTF9HUk9VUCkgLW0gMDc1NSAkKHNyY2RpcikvZnRw
-YXNzd2QgJChERVNURElSKSQoYmluZGlyKS9mdHBhc3N3ZA0KPiArLSAgICAg
-ICQoSU5TVEFMTCkgLW8gJChJTlNUQUxMX1VTRVIpIC1nICQoSU5TVEFMTF9H
-Uk9VUCkgLW0gMDc1NSAkKHNyY2RpcikvZnRwbWFpbCAkKERFU1RESVIpJChi
-aW5kaXIpL2Z0cG1haWwNCj4gKy0gICAgICAkKElOU1RBTEwpIC1vICQoSU5T
-VEFMTF9VU0VSKSAtZyAkKElOU1RBTExfR1JPVVApIC1tIDA3NTUgJChzcmNk
-aXIpL2Z0cHF1b3RhICQoREVTVERJUikkKGJpbmRpcikvZnRwcXVvdGENCj4g
-ICsgICAgICAkKElOU1RBTEwpIC1tIDA3NTUgZnRwYXNzd2QgJChERVNURElS
-KSQoYmluZGlyKS9mdHBhc3N3ZA0KPiAgKyAgICAgICQoSU5TVEFMTCkgLW0g
-MDc1NSBmdHBtYWlsICQoREVTVERJUikkKGJpbmRpcikvZnRwbWFpbA0KPiAg
-KyAgICAgICQoSU5TVEFMTCkgLW0gMDc1NSBmdHBxdW90YSAkKERFU1RESVIp
-JChiaW5kaXIpL2Z0cHF1b3RhDQo+ICsrDQo+ICAtLQ0KPiAtMS43LjkuNQ0K
-PiArMi4xNy4xDQo+DQo+IGRpZmYgLS1naXQgYS9tZXRhLW5ldHdvcmtpbmcv
-cmVjaXBlcy1kYWVtb25zL3Byb2Z0cGQvcHJvZnRwZF8xLjMuNi5iYiANCj4g
-Yi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL3Byb2Z0cGQvcHJv
-ZnRwZF8xLjMuN3JjMy5iYg0KPiBzaW1pbGFyaXR5IGluZGV4IDk3JQ0KPiBy
-ZW5hbWUgZnJvbSBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL3By
-b2Z0cGQvcHJvZnRwZF8xLjMuNi5iYg0KPiByZW5hbWUgdG8gbWV0YS1uZXR3
-b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9wcm9mdHBkL3Byb2Z0cGRfMS4zLjdy
-YzMuYmINCj4gaW5kZXggZDViYmRkMzc0Li4xMGE5MjE5ZDEgMTAwNjQ0DQo+
-IC0tLSBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvcHJvZnRw
-ZC9wcm9mdHBkXzEuMy42LmJiDQo+ICsrKyBiL21ldGEtbmV0d29ya2luZy9y
-ZWNpcGVzLWRhZW1vbnMvcHJvZnRwZC9wcm9mdHBkXzEuMy43cmMzLmJiDQo+
-IEBAIC0xMyw4ICsxMyw4IEBAIFNSQ19VUkkgPSAiZnRwOi8vZnRwLnByb2Z0
-cGQub3JnL2Rpc3RyaWIvc291cmNlLyR7QlBOfS0ke1BWfS50YXIuZ3ogXA0K
-PiAgICAgICAgICAgICBmaWxlOi8vYnVpbGRfZml4dXAucGF0Y2ggXA0KPiAg
-ICAgICAgICAgICBmaWxlOi8vcHJvZnRwZC5zZXJ2aWNlIFwNCj4gICAgICAg
-ICAgICAgIg0KPiAtaVNSQ19VUklbbWQ1c3VtXSA9ICIxMzI3MDkxMWM0MmFh
-Yzg0MjQzNWYxODIwNTU0NmExYiINCj4gLVNSQ19VUklbc2hhMjU2c3VtXSA9
-ICI5MWVmNzRiMTQzNDk1ZDVmZjk3YzRkNDc3MGM2ODA0MDcyYThjOGViMWFk
-MWVjYzhjYzU0MWI0MGUxNTJlY2FmIg0KPiArU1JDX1VSSVttZDVzdW1dID0g
-IjI0OTJiZWQxMDFmMmRkNzk4NDUzYjM4OTM3MGRhZGIxIg0KPiArU1JDX1VS
-SVtzaGEyNTZzdW1dID0gImFlMDZhOWRhMTAxNjU0MDdjYzUyNTk2NmNmNDcw
-NGIzYjU0Mjk1OTU3ZmU0MmEyMzRhZjUyOTQ0ODE1ZGM5ZWUiDQo+DQo+ICBp
-bmhlcml0IGF1dG90b29scy1icm9rZW5zZXAgdXNlcmFkZCB1cGRhdGUtcmMu
-ZCBzeXN0ZW1kIA0KPiBtdWx0aWxpYl9zY3JpcHQNCj4NCj4gLS0NCj4gMi4x
-Ny4xDQo+DQo+DQo+DQo+IA0KDQoNCgoK
+This patch also drops the md5 checksums as sha256 checksums are sufficient.
+
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+---
+ ...-native_242.bb => openjdk-8-native_252.bb} |  0
+ .../openjdk/openjdk-8-release-aarch32.inc     | 26 +++++++------------
+ .../openjdk/openjdk-8-release-aarch64.inc     | 26 +++++++------------
+ recipes-core/openjdk/openjdk-8-release.inc    | 24 ++++++-----------
+ .../{openjdk-8_242.bb => openjdk-8_252.bb}    |  0
+ 5 files changed, 26 insertions(+), 50 deletions(-)
+ rename recipes-core/openjdk/{openjdk-8-native_242.bb => openjdk-8-native_252.bb} (100%)
+ rename recipes-core/openjdk/{openjdk-8_242.bb => openjdk-8_252.bb} (100%)
+
+diff --git a/recipes-core/openjdk/openjdk-8-native_242.bb b/recipes-core/openjdk/openjdk-8-native_252.bb
+similarity index 100%
+rename from recipes-core/openjdk/openjdk-8-native_242.bb
+rename to recipes-core/openjdk/openjdk-8-native_252.bb
+diff --git a/recipes-core/openjdk/openjdk-8-release-aarch32.inc b/recipes-core/openjdk/openjdk-8-release-aarch32.inc
+index 686b562..62dc866 100644
+--- a/recipes-core/openjdk/openjdk-8-release-aarch32.inc
++++ b/recipes-core/openjdk/openjdk-8-release-aarch32.inc
+@@ -4,39 +4,31 @@ COMPATIBLE_HOST = "^$"
+ COMPATIBLE_HOST_armv7a = "arm"
+ COMPATIBLE_HOST_armv7ve = "arm"
+ 
+-CHANGESET_ID="200120"
++CHANGESET_ID="20200415"
+ 
+ CORBA_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+-SRC_URI[corba.md5sum]    = "2abf6d5394d9c5310af1e4ca6cec4355"
+-SRC_URI[corba.sha256sum] = "52e83dfa2fa4fcc8c71f3b2959cca2136099b9c575d3726148c02b9cf7d06324"
++SRC_URI[corba.sha256sum] = "e8dab3ffbc39fec724604b8c65408f32dcca1682769077c5b4f71b571938fe26"
+ 
+ HOTSPOT_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+-SRC_URI[hotspot.md5sum]    = "e252af6c20d6190e0613f39c6066e3cc"
+-SRC_URI[hotspot.sha256sum] = "bfff2ef23ee80acd73a0774e7011028c3598e75d2ee8b3271524ec8ea54801ae"
++SRC_URI[hotspot.sha256sum] = "7aebf690a05746e4fbcdcd75ac4e67acb2f0b087bba3bcb064675468626f5822"
+ 
+ JAXP_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+-SRC_URI[jaxp.md5sum]    = "56dc7a99589582b18bbbb5c4464022c8"
+-SRC_URI[jaxp.sha256sum] = "430e49ba485737c02312557f4deb8562853e58be19ed175ea63b396307f140ce"
++SRC_URI[jaxp.sha256sum] = "44883e0e836ee5fa2fcb4df936bafcfad69c57d05876d44ecefc5b3cb6b085c0"
+ 
+ JAXWS_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+-SRC_URI[jaxws.md5sum]    = "2bbcba759f24f5dcec0c33cd62382e4f"
+-SRC_URI[jaxws.sha256sum] = "c350716ff8782cc311ca17450e2d198d707d3fb71de9dc3394df39766979559f"
++SRC_URI[jaxws.sha256sum] = "34f6cf3eb34c0c310e0cc31b876b189fd6b2e2c2dcc1066af5347f3a0873d2d3"
+ 
+ JDK_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+-SRC_URI[jdk.md5sum]    = "e17f3f4ea8a409e4a1b09a12b3b5309d"
+-SRC_URI[jdk.sha256sum] = "dfa4a7e7f8ab8daf34343b1c33544b6209e422c74d5be1dbbd8ef80e2365c8aa"
++SRC_URI[jdk.sha256sum] = "f89688b5673ed75b1bebfd530a979788a4cbe942ce39eb38784f8c9e1303012b"
+ 
+ LANGTOOLS_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+-SRC_URI[langtools.md5sum]    = "06ca78c1d4e058f277876f4e6177d9b0"
+-SRC_URI[langtools.sha256sum] = "59ccafa433f5510c91835efcafbe9ff9c707034ec3305dc3a4c1a85fac65ab0c"
++SRC_URI[langtools.sha256sum] = "18357720e3b924dea2f171235ae06e753aeef7958a3ce7a2a8d41fa6e2c90454"
+ 
+ NASHORN_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+-SRC_URI[nashorn.md5sum]    = "1958e204f3984abeb2cf9e7c57aa7839"
+-SRC_URI[nashorn.sha256sum] = "e964721e539807a38bdcbce7259d235f873974a686badbc274b7368a288f0021"
++SRC_URI[nashorn.sha256sum] = "abd6ccf28278ce5775eebada339228fe2e3380d57d009179acdd7026adb21448"
+ 
+ OPENJDK_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+-SRC_URI[openjdk.md5sum]    = "9aceb3b4cd710cdda55be4fe6a5303c9"
+-SRC_URI[openjdk.sha256sum] = "9691291b26a650d854ce0feacf32dfb3b956165c5d2db6e1ff46dd44f4c517cf"
++SRC_URI[openjdk.sha256sum] = "06d141aa01b80aa0c167167081e2139b3edf5af764cf17bbe9e1b57bf4f585ab"
+ 
+ PACKAGECONFIG_append_armv7a = " client"
+ PACKAGECONFIG_append_armv7ve = " client"
+diff --git a/recipes-core/openjdk/openjdk-8-release-aarch64.inc b/recipes-core/openjdk/openjdk-8-release-aarch64.inc
+index d08892d..86dffff 100644
+--- a/recipes-core/openjdk/openjdk-8-release-aarch64.inc
++++ b/recipes-core/openjdk/openjdk-8-release-aarch64.inc
+@@ -2,36 +2,28 @@ require openjdk-8-release-common.inc
+ 
+ COMPATIBLE_HOST = "aarch64"
+ 
+-CHANGESET_ID="b07"
++CHANGESET_ID="b09"
+ 
+ CORBA_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+-SRC_URI[corba.md5sum]    = "d6dfd6f0c3bf4c6dc1f867dc7bcf8730"
+-SRC_URI[corba.sha256sum] = "e80dae94f21ca9de2269bc9de72f1098d417e9f7d6ff69d047e26669e31b1bc4"
++SRC_URI[corba.sha256sum] = "13ce2345dec4390a7ed61066275528c1d4fe246abb3ffc16bdfd93c0e8ead193"
+ 
+ HOTSPOT_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+-SRC_URI[hotspot.md5sum]    = "44731f82f6e2a0697f414ae62f9eff54"
+-SRC_URI[hotspot.sha256sum] = "3acb0bfa3eda0137e3c70ab10b59f139e0720116ed6ecf3f9c8633ebc36947b1"
++SRC_URI[hotspot.sha256sum] = "80dd8b1289905252f5f9d97ba2302fe4b77a76851709f10d429848750b709c66"
+ 
+ JAXP_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+-SRC_URI[jaxp.md5sum]    = "7fb4207ba9277e109439101961223fc7"
+-SRC_URI[jaxp.sha256sum] = "22616e56825c611c70968c34a229661d4cb910fdb0c3936ae3c75de2330abfb5"
++SRC_URI[jaxp.sha256sum] = "a52f5497318980f379ce05ff8e638a0ae0ce7265d8922ddfb731d26989faf161"
+ 
+ JAXWS_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+-SRC_URI[jaxws.md5sum]    = "a27379cbd6253408eee4aa0b8a551042"
+-SRC_URI[jaxws.sha256sum] = "b6eb69d867694002284712a28058770170d885e6de6872cba260061d001b77ae"
++SRC_URI[jaxws.sha256sum] = "1db8876408222a8eec8432bd9778559ea80cae36a2c6dead32723279d1622741"
+ 
+ JDK_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+-SRC_URI[jdk.md5sum]    = "2e64397ef1f35309aa7de00d46c2c751"
+-SRC_URI[jdk.sha256sum] = "d470d24eddc314e5c30035881f3af6f0c48a3360accc0644ec26d9d32d9ea0e6"
++SRC_URI[jdk.sha256sum] = "abc7a1eec87ac330bebfa8ec4a3db72c27b63aa50175abfade580a46b7f2d865"
+ 
+ LANGTOOLS_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+-SRC_URI[langtools.md5sum]    = "71c2ce819538b0acc443c0519dfa43c1"
+-SRC_URI[langtools.sha256sum] = "219919b7980d863cc26abd87341012f4802dd12a11a45f6627309ec365a9e838"
++SRC_URI[langtools.sha256sum] = "c4e3dd471372dad5a545ec038104c7706fa02da452275ce118ad7e38e418a57a"
+ 
+ NASHORN_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+-SRC_URI[nashorn.md5sum]    = "6ee9418598ca411fe0b2339fa1a3a272"
+-SRC_URI[nashorn.sha256sum] = "6d86c23301d2cbc1ea72474730336e089eb4c3d3014bdf0f3a9d3b5976a75f58"
++SRC_URI[nashorn.sha256sum] = "956ef3a52dc97fb28aeeeb9ccbd371c2b7f14e253fd63d1f98bb1bf87ddf1929"
+ 
+ OPENJDK_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+-SRC_URI[openjdk.md5sum]    = "188b5d7ef0976cfc1a4258d1dc8ccce0"
+-SRC_URI[openjdk.sha256sum] = "7c32399a85f56bda2c740fc6834b8b5d648e75271a5376c2fa968bd713e3fec8"
++SRC_URI[openjdk.sha256sum] = "b7b933ff2b8c0ee17eb6dbd02beb8769e7dfe15c50ab2fdeef55666e4b12cbe7"
+diff --git a/recipes-core/openjdk/openjdk-8-release.inc b/recipes-core/openjdk/openjdk-8-release.inc
+index 170338f..ddbd8c9 100644
+--- a/recipes-core/openjdk/openjdk-8-release.inc
++++ b/recipes-core/openjdk/openjdk-8-release.inc
+@@ -7,33 +7,25 @@ COMPATIBLE_HOST_armv7a = "^$"
+ COMPATIBLE_HOST_armv7ve = "^$"
+ 
+ CORBA_CHANGESET = "jdk8u${PV}-ga"
+-SRC_URI[corba.md5sum]    = "e269b1b01c00bec6c9f2684d7e3e6540"
+-SRC_URI[corba.sha256sum] = "45433c179dd5ee117b8097c75f475feb5a2d2fae052be3e582c59511696a5d0e"
++SRC_URI[corba.sha256sum] = "97513397015ca62953c6afa3ba925b1dabc0238d47f3a2b81c2bd5b683d4d050"
+ 
+ HOTSPOT_CHANGESET = "jdk8u${PV}-ga"
+-SRC_URI[hotspot.md5sum]    = "105c2a6bdfecc2f1fe09aac65748bf47"
+-SRC_URI[hotspot.sha256sum] = "08729033233b3a42bf1fa3d2a2c0cdf1c950c682cc27bd486f7c19ae28d34ef7"
++SRC_URI[hotspot.sha256sum] = "80a91f421bbe750f5e8c66b74f77fb79f31cce2f6e9e1cfe8407d773bb1ed57d"
+ 
+ JAXP_CHANGESET = "jdk8u${PV}-ga"
+-SRC_URI[jaxp.md5sum]    = "a9fb321b6c466e83b9ad23da0d9674c5"
+-SRC_URI[jaxp.sha256sum] = "8e52661976169fca3fe567b269be5852dff378cb2e66e9f8a4e9f40aaa8d89e4"
++SRC_URI[jaxp.sha256sum] = "ead123b56c1c5d4c381665da6c0858cd9b11c69b8afc7494f9831980bc71bc92"
+ 
+ JAXWS_CHANGESET = "jdk8u${PV}-ga"
+-SRC_URI[jaxws.md5sum]    = "6ee14ea4974b93bff075499cd820413b"
+-SRC_URI[jaxws.sha256sum] = "95a14275db59e0c1a8fa4ca4861b8761b1598f0ed7f3ef2f2cef7c619df1eb83"
++SRC_URI[jaxws.sha256sum] = "ef6532ac77e7e4333283c09c87b6923fbaa91b8bca6770f06494c3bb1643455e"
+ 
+ JDK_CHANGESET = "jdk8u${PV}-ga"
+-SRC_URI[jdk.md5sum]    = "57d2bc331d9506fa652fac686c6b64c1"
+-SRC_URI[jdk.sha256sum] = "3ecb62288df04d05f541a26da32464c04558a951b2962290f08b149d614ae020"
++SRC_URI[jdk.sha256sum] = "7203ded24a10843ac8e84269ad8ac347f29b1dd950f7e0bb9739ddcb8280b8fb"
+ 
+ LANGTOOLS_CHANGESET = "jdk8u${PV}-ga"
+-SRC_URI[langtools.md5sum]    = "5456b86c13a21c8e73a088af5723ba06"
+-SRC_URI[langtools.sha256sum] = "ffaf18753935cd03b2d581f17789172f4cfdc093d62ca764bf14068d7e30599c"
++SRC_URI[langtools.sha256sum] = "6e2329e3f15c0fd23da47cd8f454cb49cdae0b12c951eb2910061fa95acb8ea4"
+ 
+ NASHORN_CHANGESET = "jdk8u${PV}-ga"
+-SRC_URI[nashorn.md5sum]    = "0716fb438451ac45285a0cd8c17cc27b"
+-SRC_URI[nashorn.sha256sum] = "3a572a5d5c2e8b590c9ac2c65905069a991f7e168f5bbe15e7dbb924b10ab96d"
++SRC_URI[nashorn.sha256sum] = "195237fd89f34c27bf98c3a8bfda64bbc799a014e83907062a8b4e10bd4f2021"
+ 
+ OPENJDK_CHANGESET = "jdk8u${PV}-ga"
+-SRC_URI[openjdk.md5sum]    = "5f5cf2638bba1b4f9b4915be9973077e"
+-SRC_URI[openjdk.sha256sum] = "633f1d20d4d8d36fea1680140b5514ab153096a19c306b812fbbd19314c8dece"
++SRC_URI[openjdk.sha256sum] = "a83f8daa2afece63bf7ae95cfbca91ef765424c40b9f5b45e4a3c2d4da0f7a95"
+diff --git a/recipes-core/openjdk/openjdk-8_242.bb b/recipes-core/openjdk/openjdk-8_252.bb
+similarity index 100%
+rename from recipes-core/openjdk/openjdk-8_242.bb
+rename to recipes-core/openjdk/openjdk-8_252.bb
+-- 
+2.25.2
+
