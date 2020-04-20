@@ -1,70 +1,131 @@
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.web10.6749.1587402578529588621
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com [209.85.160.193])
+ by mx.groups.io with SMTP id smtpd.web10.7506.1587404652920539632
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Apr 2020 10:09:38 -0700
+ Mon, 20 Apr 2020 10:44:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=kBqz7xiE;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: andrea.adami@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id k1so13152965wrx.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2020 10:09:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=WScG7sSv;
+ spf=pass (domain: gmail.com, ip: 209.85.160.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f193.google.com with SMTP id s30so9281783qth.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2020 10:44:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=P05emrYCviQVQCmkk1H890pG7N4K7PlycBxy6TTHtp0=;
-        b=kBqz7xiESL6nQdhNP5AGkn3C1f2xJSIMIzZRGBsHXXKNQNONBKGL4yZL7UzY110Gjn
-         RH59etuMzhpBASDE/K46JQbJNu6jZxeUXcqZpNx8rv1QGihl3M9u+89dnQgohQIZgYrr
-         66MyFOSCdjgbakbuIGbAw8dXfywvocK25FFc2d4ZkvOxwkCCmy533Ddt53Ph0YJ2u9yj
-         oXv6uR/Qb8NHUszw0QA0iAyEfW1bMWWTB8n2MkBIr7rrksCr3ezzN31SEXIMgYgA1758
-         Tb96ZrGdzJZ3CajLFhhiNdBV9uR9RIyXppDhwkiHaCDRcnXpOBQNpsajr3vaeqciA1Hl
-         pmUg==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=lMbls6Vmw0NjeJ6+M6zffyAMP1vjxnHdZ/gp4bXbbGE=;
+        b=WScG7sSvc5nqEDofOAmKR2O+X+u7qpioa/P9PMUxOlE/0iVhrefzu6H/dWTeaBgulV
+         O1/EoiGeb8wtMcsuKzAvUfgwDI9/ZCr49vn2y9/qcmEAjs3AxlJM7Q8j6V1KV5DCkAWT
+         X5M3Q6+pSCCdM+uCCjd2uXMKYHnhGerBl9fGIV9H/WpFlNbYDr0mBd5LVb4gjTipF+aH
+         Xff5kZk+3EKVHTE7v5Utbn8BFMqk8mM0SaEZgM2R8Iv7r/RYgF2dLUK+mstYD2YJ/qLD
+         dyA0uVb7uhrCJp4ljih6RiG3nNvZExo+AxodaDa+pmiFL90mdn0UZ+psM+X6aOV5lNEO
+         WNuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=P05emrYCviQVQCmkk1H890pG7N4K7PlycBxy6TTHtp0=;
-        b=NJybRvXVLmyNkWmv+uhpG/l3UtxMKKHynaAntv2iifxKKM2xQXFiqzK8nMvwh9U99H
-         97xLGrP7mdepF4VINFo/xewGb77PH1qNjmQfbzTLxOikp7RbVYuAwcDIFIcVYP9AdXaJ
-         PI8M+EkLmMUD7DB6UiprLsEdYhiN9k2VOuWwt9T5NOMH+eCuaa1mmz66J1jN4wAGvDjg
-         4Pns1SAiPnU69oxbjRhmIOiU32PSwjnspr+abZsaq+lXKa1O8LPXDpJi2NxZu9CoAg/y
-         k/QT2nF634mWkTiR3Vm6k9R0MPe8IMfEN5gq6CcqCbqHh3xcLpyRRSGo5QUL5oz+2M+c
-         3Waw==
-X-Gm-Message-State: AGi0PuYtWe4bgBomDKlB46RD5VxymYNg26W4i1rSW0vYJ3nbIOGs2pRS
-	fNvCQ1jHdQqsmrIfUoeF+pt676vP
-X-Google-Smtp-Source: APiQypIUShUohVju150DyAG9CKdQnXXYjdvMJs9Uu0x7/Po2MpDRU3hBxMO+a45tsFBIdzeXMCAdzw==
-X-Received: by 2002:a5d:4404:: with SMTP id z4mr19384189wrq.316.1587402576903;
-        Mon, 20 Apr 2020 10:09:36 -0700 (PDT)
-Return-Path: <andrea.adami@gmail.com>
-Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it (host220-224-dynamic.250-95-r.retail.telecomitalia.it. [95.250.224.220])
-        by smtp.googlemail.com with ESMTPSA id z76sm99504wmc.9.2020.04.20.10.09.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Apr 2020 10:09:36 -0700 (PDT)
-From: "Andrea Adami" <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Andrea Adami <andrea.adami@gmail.com>
-Subject: [meta-initramfs][PATCH] kexecboot(-klibc): update recipe to master on github (5a5e04b)
-Date: Mon, 20 Apr 2020 19:09:23 +0200
-Message-Id: <20200420170923.11005-1-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.17.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=lMbls6Vmw0NjeJ6+M6zffyAMP1vjxnHdZ/gp4bXbbGE=;
+        b=oD4I9Djqv882/8Kb933IrOl6JfN78D5ktUpKDiuy8u/TXicNEDTxHvdAHZLIX7yWkk
+         ufraX+RKr1Pyn9PaujLla2dvrgsGifQpTSXK8RBXQs8bGy3ybWHgD/Nnx5wZ83Pbm3BH
+         PDF0LDK2eKD8qwEdS4iaWHO2Tbjy5dMyjXpVoM8oEtudouxBh+8NpxL1636yRdojI6V7
+         gEc/0fYYJ/AwJWeEvO9iZPJyU0RjA77G651Ny6cdM2WPxiWHMYAYrL0a0Bd1zVrCGSlh
+         fdttSz3vKR/2xlSdcGo8/QK408sPTDqQoE8C4GhQvULbHyJ6PH6sCgYXbrEQLBNo4T6t
+         Zvow==
+X-Gm-Message-State: AGi0PuaOdXsej6N1I0ERZmFDjFTs0XaRpsjlhDMV5KlVZ3IYXbJtxilP
+	leDbcPoLaajvAIL7fJh7MLRw4aZS6+0jF8yGTUw=
+X-Google-Smtp-Source: APiQypLudfs7nh+T4cjlMbEyuKR+EWvYNNi/I1N+wx7O+qazkROY+wJkutU4L0M2SaAAstMKwzzBHGUWcQeqbnlXvHM=
+X-Received: by 2002:ac8:668b:: with SMTP id d11mr7505007qtp.285.1587404651698;
+ Mon, 20 Apr 2020 10:44:11 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200420170656.10895-1-andrea.adami@gmail.com>
+In-Reply-To: <20200420170656.10895-1-andrea.adami@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Mon, 20 Apr 2020 10:43:45 -0700
+Message-ID: <CAMKF1sr+nAmaQzpN_eWvsS8_KdyfzHdF7AfgDdhsWRgmgO=3YA@mail.gmail.com>
+Subject: Re: [oe] [meta-handheld][PATCH 1/4] zaurusd: fix build with kernels < 4.16 and newer libc headers
+To: Andrea Adami <andrea.adami@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-fix injection of compiler flags (static and debug)
+On Mon, Apr 20, 2020 at 10:07 AM Andrea Adami <andrea.adami@gmail.com> wrote:
+>
+> The Y2038 changes broke the build for older 32bit devices using
+> older kernels.
+>
+> As seen on: https://sourceware.org/glibc/wiki/Y2038ProofnessDesign
+>
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  .../zaurusd/zaurusd/add_64bit_time_t.patch    | 43 +++++++++++++++++++
+>  recipes-bsp/zaurusd/zaurusd_git.bb            |  3 +-
+>  2 files changed, 45 insertions(+), 1 deletion(-)
+>  create mode 100644 recipes-bsp/zaurusd/zaurusd/add_64bit_time_t.patch
+>
+> diff --git a/recipes-bsp/zaurusd/zaurusd/add_64bit_time_t.patch b/recipes-bsp/zaurusd/zaurusd/add_64bit_time_t.patch
+> new file mode 100644
+> index 0000000..5f9587a
+> --- /dev/null
+> +++ b/recipes-bsp/zaurusd/zaurusd/add_64bit_time_t.patch
+> @@ -0,0 +1,43 @@
+> +From d15b20fd9e8927db5dc4303f2e6c11cfa8d6fe95 Mon Sep 17 00:00:00 2001
+> +From: Andrea Adami <andrea.adami@gmail.com>
+> +Date: Mon, 20 Apr 2020 16:21:22 +0200
+> +Subject: [PATCH] tskeys.c: add support for 64bit time_t
+> +
+> +Upgrade the recipe to cope with the 64-bit time changes introduced in 4.16
+> +
+> +Fix:
+> +
+> +| tskeys.c: In function 'press_key':
+> +| tskeys.c:141:4: error: 'struct input_event' has no member named 'time'
+> +|   141 |  ev.time.tv_sec = time(0);
+> +|       |    ^
+> +| tskeys.c:142:4: error: 'struct input_event' has no member named 'time'
+> +|   142 |  ev.time.tv_usec = 0;
+> +|       |    ^
+> +
+> +Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> +---
+> + apps/tskeys/tskeys.c | 5 +++++
+> + 1 file changed, 5 insertions(+)
+> +
+> +diff --git a/apps/tskeys/tskeys.c b/apps/tskeys/tskeys.c
+> +index 264dfb7..36e3bfd 100644
+> +--- a/apps/tskeys/tskeys.c
+> ++++ b/apps/tskeys/tskeys.c
+> +@@ -138,8 +138,13 @@ void press_key(int fd, int key, int pressed)
+> +       struct input_event ev;
+> +       int r;
+> +
+> ++#if !defined(__USE_TIME_BITS64)
+> +       ev.time.tv_sec = time(0);
+> +       ev.time.tv_usec = 0;
+> ++#else
+> ++      ev.input_event_sec = time(0);
+> ++      ev.input_event_usec = 0;
+> ++#endif
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+does this work with musl ?
 
-diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-index 4b20e1ed9..ed3dece3f 100644
---- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-+++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-@@ -8,7 +8,7 @@ S = "${WORKDIR}/git"
- SRC_URI = "git://github.com/kexecboot/kexecboot.git"
- SRC_URI_append_libc-klibc = " file://0001-kexecboot-Use-new-reboot-API-with-klibc.patch "
- 
--SRCREV = "7409a1e0aaea61af87c4eca0149cec18a9f58ab6"
-+SRCREV = "5a5e04be206140059f42ac786d424da1afaa04b6"
- inherit autotools
- 
- EXTRA_OECONF = "--enable-textui --enable-delay=2 --enable-evdev-rate=1000,250"
--- 
-2.17.1
-
+> +       ev.type = EV_KEY;
+> +       ev.code = key;
+> +       ev.value = pressed;
+> +--
+> +2.17.1
+> +
+> diff --git a/recipes-bsp/zaurusd/zaurusd_git.bb b/recipes-bsp/zaurusd/zaurusd_git.bb
+> index d69805b..1f8e40b 100644
+> --- a/recipes-bsp/zaurusd/zaurusd_git.bb
+> +++ b/recipes-bsp/zaurusd/zaurusd_git.bb
+> @@ -24,7 +24,8 @@ SRC_URI = "git://git.yoctoproject.org/${BPN} \
+>             file://01-check-toggle-portait \
+>             file://use-ts-symlink-instead-of-hardcoding.diff \
+>             file://0001-zaurusd-add-support-for-collie.patch \
+> -           file://allow-newer-tslib.patch"
+> +           file://allow-newer-tslib.patch \
+> +           file://add_64bit_time_t.patch"
+>
+>
+>  S = "${WORKDIR}/git"
+> --
+> 2.17.1
+>
+> 
