@@ -1,30 +1,30 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [])
  by mx.groups.io with SMTP id smtpd.web12.3540.1587448418129585285
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Apr 2020 22:53:38 -0700
+ Mon, 20 Apr 2020 22:53:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: <nil>, mailfrom: zhengrq.fnst@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.72,408,1580745600"; 
-   d="scan'208";a="89330550"
+   d="scan'208";a="89329955"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 21 Apr 2020 13:36:28 +0800
+  by heian.cn.fujitsu.com with ESMTP; 21 Apr 2020 13:28:26 +0800
 Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id C174B50A9984
-	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Apr 2020 13:25:53 +0800 (CST)
+	by cn.fujitsu.com (Postfix) with ESMTP id 2106746B5FAF
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Apr 2020 13:17:50 +0800 (CST)
 Received: from localhost.localdomain (10.167.225.35) by
  G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Tue, 21 Apr 2020 13:36:26 +0800
+ (TLS) id 15.0.1497.2; Tue, 21 Apr 2020 13:28:22 +0800
 From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-multidict: Enable ptest
-Date: Tue, 21 Apr 2020 13:36:49 +0800
-Message-ID: <1587447409-109868-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-jsmin: Enable ptest
+Date: Tue, 21 Apr 2020 22:12:33 +0800
+Message-ID: <1587478353-109692-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
  G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
-X-yoursite-MailScanner-ID: C174B50A9984.A6EE8
+X-yoursite-MailScanner-ID: 2106746B5FAF.A737C
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
@@ -32,33 +32,34 @@ Content-Type: text/plain
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- .../python/python3-multidict/run-ptest            |  3 +++
- .../python/python3-multidict_4.7.4.bb             | 15 ++++++++++++++-
- 2 files changed, 17 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-multidict/run-ptest
+ .../python/python3-jsmin/run-ptest                 |  3 +++
+ .../recipes-devtools/python/python3-jsmin_2.2.2.bb | 14 +++++++++++++-
+ 2 files changed, 16 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-jsmin/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python3-multidict/run-ptest b/meta-python/recipes-devtools/python/python3-multidict/run-ptest
+diff --git a/meta-python/recipes-devtools/python/python3-jsmin/run-ptest b/meta-python/recipes-devtools/python/python3-jsmin/run-ptest
 new file mode 100644
-index 000000000..5cec71169
+index 000000000..cbcfffda5
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-multidict/run-ptest
++++ b/meta-python/recipes-devtools/python/python3-jsmin/run-ptest
 @@ -0,0 +1,3 @@
 +#!/bin/sh
 +
-+pytest
-diff --git a/meta-python/recipes-devtools/python/python3-multidict_4.7.4.bb b/meta-python/recipes-devtools/python/python3-multidict_4.7.4.bb
-index f16a7be7a..0636972ec 100644
---- a/meta-python/recipes-devtools/python/python3-multidict_4.7.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-multidict_4.7.4.bb
-@@ -3,7 +3,20 @@ HOMEPAGE = "https://github.com/aio-libs/multidict/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a"
++python3 test.py
+diff --git a/meta-python/recipes-devtools/python/python3-jsmin_2.2.2.bb b/meta-python/recipes-devtools/python/python3-jsmin_2.2.2.bb
+index ab657e6f0..9b7a82408 100644
+--- a/meta-python/recipes-devtools/python/python3-jsmin_2.2.2.bb
++++ b/meta-python/recipes-devtools/python/python3-jsmin_2.2.2.bb
+@@ -4,8 +4,20 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3a3301ce2ad647e172f4a1016c67324d"
  
--inherit pypi setuptools3
-+inherit pypi setuptools3 ptest
+-inherit setuptools3 pypi
++inherit setuptools3 pypi ptest
+ SRC_URI[md5sum] = "00e7a3179a4591aab2ee707b3214e2fd"
+ SRC_URI[sha256sum] = "b6df99b2cd1c75d9d342e4335b535789b8da9107ec748212706ef7bbe5c2553b"
  
- SRC_URI[md5sum] = "22b46f759cf2cc3ca1d2c9f82cc9bb79"
- SRC_URI[sha256sum] = "d7d428488c67b09b26928950a395e41cc72bb9c3d5abfe9f0521940ee4f796d4"
+ BBCLASSEXTEND = "native nativesdk"
 +
 +SRC_URI += " \
 +	file://run-ptest \
@@ -69,8 +70,7 @@ index f16a7be7a..0636972ec 100644
 +"
 +
 +do_install_ptest() {
-+	install -d ${D}${PTEST_PATH}/tests
-+	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
++	cp -f ${S}/jsmin/test.py ${D}${PTEST_PATH}/
 +}
 -- 
 2.20.1
