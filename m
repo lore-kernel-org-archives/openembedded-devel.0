@@ -1,258 +1,327 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web12.3253.1587445887532274049
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com [209.85.160.193])
+ by mx.groups.io with SMTP id smtpd.web11.3351.1587446042797902063
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Apr 2020 22:11:49 -0700
+ Mon, 20 Apr 2020 22:14:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.72,408,1580745600"; 
-   d="scan'208";a="89328837"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 21 Apr 2020 13:11:14 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id CAC2350A997C;
-	Tue, 21 Apr 2020 13:00:38 +0800 (CST)
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) by
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Tue, 21 Apr 2020 13:11:12 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local ([fe80::15e2:f6f4:7314:fd88])
- by G08CNEXMBPEKD05.g08.fujitsu.local ([fe80::15e2:f6f4:7314:fd88%14]) with
- mapi id 15.00.1497.000; Tue, 21 Apr 2020 13:11:12 +0800
-From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
-To: Khem Raj <raj.khem@gmail.com>
-CC: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: =?UTF-8?B?562U5aSNOiBbb2VdIFttZXRhLXdlYnNlcnZlcl1bUEFUQ0hdIHdlYm1pbjogdXBncmFkZSAxLjg1MCAtPiAxLjk0MQ==?=
-Thread-Topic: [oe] [meta-webserver][PATCH] webmin: upgrade 1.850 -> 1.941
-Thread-Index: AQHWCJBvRH6/0fCQTkexGmr06sfkVahk2e2AgB5K22A=
-Date: Tue, 21 Apr 2020 05:11:12 +0000
-Message-ID: <18ba5de3462945d0853c1312000af085@G08CNEXMBPEKD05.g08.fujitsu.local>
-References: <1585818933-28648-1-git-send-email-wangmy@cn.fujitsu.com>
- <1585818933-28648-5-git-send-email-wangmy@cn.fujitsu.com>
- <CAMKF1spX8g-oSj7kBYvX-AxZsvL2Xx69GLp8jMaDOtDij8oTkQ@mail.gmail.com>
-In-Reply-To: <CAMKF1spX8g-oSj7kBYvX-AxZsvL2Xx69GLp8jMaDOtDij8oTkQ@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.167.225.33]
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=uoWaOzuO;
+ spf=pass (domain: gmail.com, ip: 209.85.160.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f193.google.com with SMTP id n20so4421791qtp.9
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2020 22:14:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=VPKq/LJFXyMSQu1nkjIsXHT5p8OT2ZRcZtdZJBtEMDc=;
+        b=uoWaOzuOdUGzSsmNvqdHgJ5OmJtqxS+1BbiCI/1JS3PoFsrhR7mnNMPARy0hu0/IG3
+         rSVNeLAcNx18ekt5DMLrg2eiwQpwyjzHbP5yLq+yBEhtd5pSXYwL9zGSDg6Hst3M95yZ
+         zW7dK9SzwxmhhOirhBqjQmJ/cxTzCMGjcdpD7cjK9JzxDhJaS17MB0l7OSVVc+A4nT8v
+         ptckk+lGcBa5krwKEYWyjQW8VhGSK5uQY5KRszLb34OMdLbNgqcAiGTK1lJMgnlSXT2h
+         gyB+QkKAv9/eBB5HQfOsuM4xc8s8+V9s3dt53gCBjYXaPOVYFqoGRvv5lu1lW6YL6/4a
+         4wzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=VPKq/LJFXyMSQu1nkjIsXHT5p8OT2ZRcZtdZJBtEMDc=;
+        b=YLqGD5ax10sLodvDKAbpZZ9uO6LloJOz12EHU8doj1/+NK/6GLqFKDkGPHhMixmjmk
+         ESm1q35mpFWSp1cATd6tQ5x7d1vqlfOIaBBN5X7zWXH971k1QNc0uWZr5GC79XNkwW2z
+         sgemcoG+UJxidOIZpj630qNUw9n03lFqz174eK5Z9KNWxlO49lCZxUBiY+tiZSkFRGrg
+         aKlfVRCJ+HqbqL6ft4BNBlQLr0TBy0Jg1Hl8VWULBRnW21r8ZVBe1UHVgI5AgFBstJ90
+         Ajs5pt2aMfEpusCqfA6LKZzjXjLLyBKhzACaTne2sibRCgq7rOzPMuZsOEU7Ti6wykG+
+         upWw==
+X-Gm-Message-State: AGi0Pubkj7ekFn1kCNPrPIBz9vMQc3aWpBmMOWjUohwa1lFXrHTcu3/s
+	k+01UoKcaW9f5nzpcMuir9uabLINZLp3WTAd7Ck=
+X-Google-Smtp-Source: APiQypJnAR+ROXUO9Q3OlhTmyM7/Q0ZvV3db1MLwV6BvYIkVCmVW7Hh45vLztBTTiDLWxysJRZJt3gaWwRtUP/NYvNM=
+X-Received: by 2002:ac8:31aa:: with SMTP id h39mr9391323qte.190.1587446041521;
+ Mon, 20 Apr 2020 22:14:01 -0700 (PDT)
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: CAC2350A997C.AE4CE
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+References: <1585818933-28648-1-git-send-email-wangmy@cn.fujitsu.com>
+ <1585818933-28648-5-git-send-email-wangmy@cn.fujitsu.com> <CAMKF1spX8g-oSj7kBYvX-AxZsvL2Xx69GLp8jMaDOtDij8oTkQ@mail.gmail.com>
+ <18ba5de3462945d0853c1312000af085@G08CNEXMBPEKD05.g08.fujitsu.local>
+In-Reply-To: <18ba5de3462945d0853c1312000af085@G08CNEXMBPEKD05.g08.fujitsu.local>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Mon, 20 Apr 2020 22:13:35 -0700
+Message-ID: <CAMKF1sqk=H5eLqGQCJEqDmXX5e3FFR_30WvWGGsLZ0xZtAk78A@mail.gmail.com>
+Subject: Re: [oe] [meta-webserver][PATCH] webmin: upgrade 1.850 -> 1.941
+To: Wang Mingyu <wangmy@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-RG8geW91IG1lYW4gSSBzaG91bGQgbWFrZSBhIHBhdGNoIG9uIG1hc3Rlci1u
-ZXh0IGFuZCB0aGVuIHN1Ym1pdCBpdCB0byB0aGUgbWFzdGVyIGJyYW5jaD8N
-Cg0KLS0tLS3pgq7ku7bljp/ku7YtLS0tLQ0K5Y+R5Lu25Lq6OiBvcGVuZW1i
-ZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyA8b3BlbmVtYmVk
-ZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc+IOS7o+ihqCBLaGVt
-IFJhag0K5Y+R6YCB5pe26Ze0OiAyMDIw5bm0NOaciDLml6UgMTQ6MzMNCuaU
-tuS7tuS6ujogV2FuZywgTWluZ3l1L+eOiyDpuKPnkZwgPHdhbmdteUBjbi5m
-dWppdHN1LmNvbT4NCuaKhOmAgTogb3BlbmVtYmVkZWQtZGV2ZWwgPG9wZW5l
-bWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPg0K5Li76aKY
-OiBSZTogW29lXSBbbWV0YS13ZWJzZXJ2ZXJdW1BBVENIXSB3ZWJtaW46IHVw
-Z3JhZGUgMS44NTAgLT4gMS45NDENCg0KcGxlYXNlIHJlYmFzZSBvbiBtYXN0
-ZXItbmV4dCBhbmQgcmVzZW5kDQoNCk9uIFdlZCwgQXByIDEsIDIwMjAgYXQg
-Njo0NSBQTSBXYW5nIE1pbmd5dSA8d2FuZ215QGNuLmZ1aml0c3UuY29tPiB3
-cm90ZToNCj4NCj4gcmVmcmVzaCB0aGUgZm9sbG9pbmcgcGF0Y2hlczoNCj4g
-ZGlzYWJsZS12ZXJzaW9uLWNoZWNrLnBhdGNoDQo+IG5ldC1nZW5lcmljLnBh
-dGNoDQo+IG5ldC1saWIucGwucGF0Y2gNCj4NCj4gLUxpY2Vuc2UtVXBkYXRl
-OiBhZGQgIkJTRCAzLUNsYXVzZSBMaWNlbnNlIiB0byBsaWNlbnNlIGZpbGUN
-Cj4NCj4gU2lnbmVkLW9mZi1ieTogV2FuZyBNaW5neXUgPHdhbmdteUBjbi5m
-dWppdHN1LmNvbT4NCj4gLS0tDQo+ICAuLi4vd2VibWluL2ZpbGVzL2Rpc2Fi
-bGUtdmVyc2lvbi1jaGVjay5wYXRjaCAgfCAyNCArKysrKysrLS0tLS0NCj4g
-IC4uLi93ZWJtaW4vZmlsZXMvbmV0LWdlbmVyaWMucGF0Y2ggICAgICAgICAg
-ICB8IDM3ICsrKysrKysrKystLS0tLS0tLS0NCj4gIC4uLi93ZWJtaW4vZmls
-ZXMvbmV0LWxpYi5wbC5wYXRjaCAgICAgICAgICAgICB8IDE3ICsrKysrKy0t
-LQ0KPiAgLi4uL3t3ZWJtaW5fMS44NTAuYmIgPT4gd2VibWluXzEuOTQxLmJi
-fSAgICAgIHwgIDYgKy0tDQo+ICA0IGZpbGVzIGNoYW5nZWQsIDQ5IGluc2Vy
-dGlvbnMoKyksIDM1IGRlbGV0aW9ucygtKSAgcmVuYW1lIA0KPiBtZXRhLXdl
-YnNlcnZlci9yZWNpcGVzLXdlYmFkbWluL3dlYm1pbi97d2VibWluXzEuODUw
-LmJiID0+IA0KPiB3ZWJtaW5fMS45NDEuYmJ9ICg5NyUpDQo+DQo+IGRpZmYg
-LS1naXQgDQo+IGEvbWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy13ZWJhZG1pbi93
-ZWJtaW4vZmlsZXMvZGlzYWJsZS12ZXJzaW9uLWNoZWNrLnANCj4gYXRjaCAN
-Cj4gYi9tZXRhLXdlYnNlcnZlci9yZWNpcGVzLXdlYmFkbWluL3dlYm1pbi9m
-aWxlcy9kaXNhYmxlLXZlcnNpb24tY2hlY2sucA0KPiBhdGNoDQo+IGluZGV4
-IDlhYWQ4OTRlMC4uNjFiNTZiZjVhIDEwMDY0NA0KPiAtLS0gDQo+IGEvbWV0
-YS13ZWJzZXJ2ZXIvcmVjaXBlcy13ZWJhZG1pbi93ZWJtaW4vZmlsZXMvZGlz
-YWJsZS12ZXJzaW9uLWNoZWNrLnANCj4gYXRjaA0KPiArKysgYi9tZXRhLXdl
-YnNlcnZlci9yZWNpcGVzLXdlYmFkbWluL3dlYm1pbi9maWxlcy9kaXNhYmxl
-LXZlcnNpb24tY2hlDQo+ICsrKyBjay5wYXRjaA0KPiBAQCAtNiwxMiArNiwx
-NSBAQCB0aGUgbW9tZW50Lg0KPiAgVXBzdHJlYW0tc3RhdHVzOiBJbmFwcHJv
-cHJpYXRlDQo+DQo+ICBTaWduZWQtb2ZmLWJ5OiBQYXVsIEVnZ2xldG9uIDxw
-YXVsLmVnZ2xldG9uQGxpbnV4LmludGVsLmNvbT4NCj4gKy0tLQ0KPiArIHdl
-Ym1pbi93ZWJtaW4tbGliLnBsIHwgNDQgDQo+ICsrKysrKysrKysrKysrKysr
-KysrKysrLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiArIDEgZmlsZSBjaGFu
-Z2VkLCAyMiBpbnNlcnRpb25zKCspLCAyMiBkZWxldGlvbnMoLSkNCj4NCj4g
-LUluZGV4OiB3ZWJtaW4tMS44NTAvd2VibWluL3dlYm1pbi1saWIucGwgDQo+
-IC09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09DQo+IC0tLS0gd2VibWluLTEuODUw
-Lm9yaWcvd2VibWluL3dlYm1pbi1saWIucGwNCj4gLSsrKyB3ZWJtaW4tMS44
-NTAvd2VibWluL3dlYm1pbi1saWIucGwNCj4gLUBAIC0xMTEyLDI4ICsxMTEy
-LDI4IEBAIG15ICVtaW5pc2VydjsNCj4gK2RpZmYgLS1naXQgYS93ZWJtaW4v
-d2VibWluLWxpYi5wbCBiL3dlYm1pbi93ZWJtaW4tbGliLnBsIGluZGV4IA0K
-PiArZGFkNmNmYy4uNzM4MjFmMCAxMDA3NTUNCj4gKy0tLSBhL3dlYm1pbi93
-ZWJtaW4tbGliLnBsDQo+ICsrKysgYi93ZWJtaW4vd2VibWluLWxpYi5wbA0K
-PiArQEAgLTExMzAsMjggKzExMzAsMjggQEAgbXkgJW1pbmlzZXJ2Ow0KPiAg
-ICZsb2FkX3RoZW1lX2xpYnJhcnkoKTsgICAgICAgICMgU28gdGhhdCBVSSBm
-dW5jdGlvbnMgd29yaw0KPg0KPiAgICMgTmVlZCBPUyB1cGdyYWRlDQo+IEBA
-IC0yNCwxMiArMjcsMTIgQEAgSW5kZXg6IHdlYm1pbi0xLjg1MC93ZWJtaW4v
-d2VibWluLWxpYi5wbA0KPiAgLSAgICAgIG15ICgkbWlub3IpID0gc3BsaXQo
-L1wuLywgJGdjb25maWd7J29zX3ZlcnNpb24nfSk7DQo+ICAtICAgICAgaWYg
-KCRyZWFsb3N7J29zX3R5cGUnfSBlcSAkZ2NvbmZpZ3snb3NfdHlwZSd9ICYm
-DQo+ICAtICAgICAgICAgICRyZWFsbWlub3IgPT0gJG1pbm9yKSB7DQo+IC0t
-ICAgICAgICAgICAgICAjIE9ubHkgdGhlIG1pbm9yIHZlcnNpb24gbnVtYmVy
-IGNoYW5nZWQgLSBubyBuZWVkIHRvIGFwcGx5DQo+ICstICAgICAgICAgICAg
-ICAjIE9ubHkgdGhlIG1pbm9yIHZlcnNpb24gbnVtYmVyIGNoYW5nZWQgLSBq
-dXN0IGFwcGx5IHNpbGVudGx5DQo+ICAtICAgICAgICAgICAgICAmYXBwbHlf
-bmV3X29zX3ZlcnNpb24oXCVyZWFsb3MpOw0KPiAgLSAgICAgICAgICAgICAg
-fQ0KPiAgLSAgICAgIGVsc2Ugew0KPiAgLSAgICAgICAgICAgICAgIyBMYXJn
-ZSBlbm91Z2ggY2hhbmdlIHRvIHRlbGwgdGhlIHVzZXINCj4gLS0gICAgICAg
-ICAgICAgIHB1c2goQG5vdGlmcywNCj4gKy0gICAgICAgICAgICAgIHB1c2go
-QG5vdGlmcywNCj4gIC0gICAgICAgICAgICAgICAgICAmdWlfZm9ybV9zdGFy
-dCgiJGdjb25maWd7J3dlYnByZWZpeCd9L3dlYm1pbi9maXhfb3MuY2dpIiku
-DQo+ICAtICAgICAgICAgICAgICAgICAgJnRleHQoJ29zX2luY29ycmVjdCcs
-ICRyZWFsb3N7J3JlYWxfb3NfdHlwZSd9LA0KPiAgLSAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAkcmVhbG9zeydyZWFsX29zX3Zl
-cnNpb24nfSkuIjxwPlxuIi4NCj4gQEAgLTQ2LDEyICs0OSwxMiBAQCBJbmRl
-eDogd2VibWluLTEuODUwL3dlYm1pbi93ZWJtaW4tbGliLnBsDQo+ICArIyAg
-ICAgbXkgKCRtaW5vcikgPSBzcGxpdCgvXC4vLCAkZ2NvbmZpZ3snb3NfdmVy
-c2lvbid9KTsNCj4gICsjICAgICBpZiAoJHJlYWxvc3snb3NfdHlwZSd9IGVx
-ICRnY29uZmlneydvc190eXBlJ30gJiYNCj4gICsjICAgICAgICAgJHJlYWxt
-aW5vciA9PSAkbWlub3IpIHsNCj4gLSsjICAgICAgICAgICAgICMgT25seSB0
-aGUgbWlub3IgdmVyc2lvbiBudW1iZXIgY2hhbmdlZCAtIG5vIG5lZWQgdG8g
-YXBwbHkNCj4gKysjICAgICAgICAgICAgICMgT25seSB0aGUgbWlub3IgdmVy
-c2lvbiBudW1iZXIgY2hhbmdlZCAtIGp1c3QgYXBwbHkgc2lsZW50bHkNCj4g
-ICsjICAgICAgICAgICAgICZhcHBseV9uZXdfb3NfdmVyc2lvbihcJXJlYWxv
-cyk7DQo+ICArIyAgICAgICAgICAgICB9DQo+ICArIyAgICAgZWxzZSB7DQo+
-ICArIyAgICAgICAgICAgICAjIExhcmdlIGVub3VnaCBjaGFuZ2UgdG8gdGVs
-bCB0aGUgdXNlcg0KPiAtKyMgICAgICAgICAgICAgcHVzaChAbm90aWZzLA0K
-PiArKyMgICAgICAgICAgICAgcHVzaChAbm90aWZzLA0KPiAgKyMgICAgICAg
-ICAgICAgICAgICZ1aV9mb3JtX3N0YXJ0KCIkZ2NvbmZpZ3snd2VicHJlZml4
-J30vd2VibWluL2ZpeF9vcy5jZ2kiKS4NCj4gICsjICAgICAgICAgICAgICAg
-ICAmdGV4dCgnb3NfaW5jb3JyZWN0JywgJHJlYWxvc3sncmVhbF9vc190eXBl
-J30sDQo+ICArIyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICRyZWFsb3N7J3JlYWxfb3NfdmVyc2lvbid9KS4iPHA+XG4iLg0KPiBA
-QCAtNjIsMyArNjUsNiBAQCBJbmRleDogd2VibWluLTEuODUwL3dlYm1pbi93
-ZWJtaW4tbGliLnBsDQo+DQo+ICAgIyBQYXNzd29yZCBjbG9zZSB0byBleHBp
-cnkNCj4gICBteSAkd2Fybl9kYXlzID0gJGNvbmZpZ3snd2Fybl9kYXlzJ307
-DQo+ICstLQ0KPiArMi4xNy4xDQo+ICsNCj4gZGlmZiAtLWdpdCANCj4gYS9t
-ZXRhLXdlYnNlcnZlci9yZWNpcGVzLXdlYmFkbWluL3dlYm1pbi9maWxlcy9u
-ZXQtZ2VuZXJpYy5wYXRjaCANCj4gYi9tZXRhLXdlYnNlcnZlci9yZWNpcGVz
-LXdlYmFkbWluL3dlYm1pbi9maWxlcy9uZXQtZ2VuZXJpYy5wYXRjaA0KPiBp
-bmRleCA1NTQ5MzkyODUuLmE5OTVkNGI5MyAxMDA2NDQNCj4gLS0tIGEvbWV0
-YS13ZWJzZXJ2ZXIvcmVjaXBlcy13ZWJhZG1pbi93ZWJtaW4vZmlsZXMvbmV0
-LWdlbmVyaWMucGF0Y2gNCj4gKysrIGIvbWV0YS13ZWJzZXJ2ZXIvcmVjaXBl
-cy13ZWJhZG1pbi93ZWJtaW4vZmlsZXMvbmV0LWdlbmVyaWMucGF0Y2gNCj4g
-QEAgLTEsMjUgKzEsMjYgQEANCj4gLSMgQWRkIHN1cHBvcnQgZm9yIGNvbmZp
-Z3VyaW5nIG5ldHdvcmsgaW50ZXJmYWNlcyBvbiBhIGdlbmVyaWMgbGludXgg
-DQo+IHN5c3RlbQ0KPiArIyBBZGQgc3VwcG9ydCBmb3IgY29uZmlndXJpbmcg
-bmV0d29yayBpbnRlcmZhY2VzIG9uIGEgZ2VuZXJpYyBsaW51eCAjIA0KPiAr
-c3lzdGVtDQo+ICAjDQo+ICAjIFVwc3RyZWFtLXN0YXR1czogTm90IGFwcHJv
-cHJpYXRlIFtjb25maWddICAjICAjIFNpZ25lZC1vZmYtYnk6IFBhdWwgDQo+
-IEVnZ2xldG9uIDxwYXVsLmVnZ2xldG9uQGxpbnV4LmludGVsLmNvbT4NCj4g
-LUluZGV4OiB3ZWJtaW4tMS44NTAvbmV0L21vZHVsZS5pbmZvDQo+IC09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09DQo+IC0tLS0gd2VibWluLTEuODUwLm9yaWcv
-bmV0L21vZHVsZS5pbmZvDQo+IC0rKysgd2VibWluLTEuODUwL25ldC9tb2R1
-bGUuaW5mbw0KPiAtQEAgLTE0LDcgKzE0LDcgQEAgZGVzY19rb19LUi5VVEYt
-OD3pm7Hjgo3lp7zpnpflsonkvIIg55SR7oSH5YqaDQo+ICstLS0NCj4gKyBu
-ZXQvbW9kdWxlLmluZm8gfCAyICstDQo+ICsgMSBmaWxlIGNoYW5nZWQsIDEg
-aW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pDQo+ICsNCj4gK2RpZmYgLS1n
-aXQgYS9uZXQvbW9kdWxlLmluZm8gYi9uZXQvbW9kdWxlLmluZm8gaW5kZXgg
-YjIzYmYyZC4uOGUzNjI4ZSANCj4gKzEwMDY0NA0KPiArLS0tIGEvbmV0L21v
-ZHVsZS5pbmZvDQo+ICsrKysgYi9uZXQvbW9kdWxlLmluZm8NCj4gK0BAIC0x
-LDcgKzEsNyBAQA0KPiArIHZlcnNpb249MS45NDENCj4gKyBsb25nZGVzYz1D
-b25maWd1cmUgYm9vdCB0aW1lIGFuZCBhY3RpdmUgaW50ZXJmYWNlcywgRE5T
-LCByb3V0aW5nIGFuZCAvZXRjL2hvc3RzLg0KPiAgIG5hbWU9TmV0d29ya2lu
-Zw0KPiAtIGRlc2NfdHI9QSBZYXDpvaZhbmTpvaxtYXMgDQo+IC0gZGVzY19k
-ZT1OZXR6d2Vya2tvbmZpZ3VyYXRpb24NCj4gIC1vc19zdXBwb3J0PXNvbGFy
-aXMgY29oZXJlbnQtbGludXggcmVkaGF0LWxpbnV4LzUuMC0qIG1hbmRyYWtl
-LWxpbnV4IA0KPiB1bml0ZWQtbGludXggc3VzZS1saW51eC82LjAtKiBvcGVu
-LWxpbnV4IHVuaXh3YXJlIHR1cmJvLWxpbnV4LzQuMCANCj4gZnJlZWJzZC8z
-LjItKiBvcGVuYnNkIGRlYmlhbi1saW51eC8yLjItKiBjb2JhbHQtbGludXgv
-Mi4yLSogbXNjLWxpbnV4IA0KPiBnZW50b28tbGludXggbWFjb3MvMS41LSog
-dHJ1c3RpeC1saW51eCBzbGFja3dhcmUtbGludXgvOC4wLSogDQo+IG9wZW5t
-YW1iYS1saW51eCBjeWd3aW4gd2luZG93cyBwYXJkdXMtbGludXggICtvc19z
-dXBwb3J0PWdlbmVyaWMtbGludXggDQo+IHNvbGFyaXMgY29oZXJlbnQtbGlu
-dXggcmVkaGF0LWxpbnV4LzUuMC0qIG1hbmRyYWtlLWxpbnV4IHVuaXRlZC1s
-aW51eCANCj4gc3VzZS1saW51eC82LjAtKiBvcGVuLWxpbnV4IHVuaXh3YXJl
-IHR1cmJvLWxpbnV4LzQuMCBmcmVlYnNkLzMuMi0qIA0KPiBvcGVuYnNkIGRl
-Ymlhbi1saW51eC8yLjItKiBjb2JhbHQtbGludXgvMi4yLSogbXNjLWxpbnV4
-IGdlbnRvby1saW51eCANCj4gbWFjb3MvMS41LSogdHJ1c3RpeC1saW51eCBz
-bGFja3dhcmUtbGludXgvOC4wLSogb3Blbm1hbWJhLWxpbnV4IGN5Z3dpbiAN
-Cj4gd2luZG93cyBwYXJkdXMtbGludXgNCj4gLSBkZXNjX3NrPUtvbmZpZ3Vy
-6YaVaWEgc2lldGUNCj4gLSBkZXNjX3poX0NOPee9kee7nOmFjee9rg0KPiAt
-IHJpc2s9bG93IG1lZGl1bSBoaWdoDQo+IC1JbmRleDogd2VibWluLTEuODUw
-L25ldC9nZW5lcmljLWxpbnV4LWxpYi5wbA0KPiAtPT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PQ0KPiAtLS0tIC9kZXYvbnVsbA0KPiAtKysrIHdlYm1pbi0xLjg1
-MC9uZXQvZ2VuZXJpYy1saW51eC1saWIucGwNCj4gLUBAIC0wLDAgKzEsMiBA
-QA0KPiAtK2RvICdsaW51eC1saWIucGwnOw0KPiAtKw0KPiArIHJlYWRvbmx5
-PTENCj4gKyBkZXNjPU5ldHdvcmsgQ29uZmlndXJhdGlvbg0KPiArIGNhdGVn
-b3J5PW5ldA0KPiArLS0NCj4gKzIuMTcuMQ0KPiArDQo+IGRpZmYgLS1naXQg
-DQo+IGEvbWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy13ZWJhZG1pbi93ZWJtaW4v
-ZmlsZXMvbmV0LWxpYi5wbC5wYXRjaCANCj4gYi9tZXRhLXdlYnNlcnZlci9y
-ZWNpcGVzLXdlYmFkbWluL3dlYm1pbi9maWxlcy9uZXQtbGliLnBsLnBhdGNo
-DQo+IGluZGV4IGJkYmE1ZTczZi4uYzljMGQzNTQ5IDEwMDY0NA0KPiAtLS0g
-YS9tZXRhLXdlYnNlcnZlci9yZWNpcGVzLXdlYmFkbWluL3dlYm1pbi9maWxl
-cy9uZXQtbGliLnBsLnBhdGNoDQo+ICsrKyBiL21ldGEtd2Vic2VydmVyL3Jl
-Y2lwZXMtd2ViYWRtaW4vd2VibWluL2ZpbGVzL25ldC1saWIucGwucGF0Y2gN
-Cj4gQEAgLTMsMTIgKzMsMTYgQEAgVXBzdHJlYW0tU3RhdHVzOiBJbmFwcHJv
-cHJpYXRlIFtjb25maWddDQo+ICBYWFg6IG5lZWQgdG8gd29yayBvdXQgYSBi
-ZXR0ZXIgZml4Lg0KPg0KPiAgU2lnbmVkLW9mZi1ieTogRGV4dWFuIEN1aSA8
-ZGV4dWFuLmN1aUBpbnRlbC5jb20+DQo+ICstLS0NCj4gKyBuZXQvbmV0LWxp
-Yi5wbCB8IDMgKystDQo+ICsgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9u
-cygrKSwgMSBkZWxldGlvbigtKQ0KPg0KPiAtZGlmZiAtTnJ1IHdlYm1pbi0x
-LjU3MC5vcmlnLy9uZXQvbmV0LWxpYi5wbCANCj4gd2VibWluLTEuNTcwL25l
-dC9uZXQtbGliLnBsDQo+IC0tLS0gd2VibWluLTEuNTcwLm9yaWcvL25ldC9u
-ZXQtbGliLnBsICAyMDExLTEwLTAzIDA5OjAxOjQ4LjAwMDAwMDAwMCANCj4g
-KzA4MDANCj4gLSsrKyB3ZWJtaW4tMS41NzAvbmV0L25ldC1saWIucGwgICAg
-ICAgIDIwMTEtMTAtMjggMTM6NTI6NTYuMTM4ODczNjY0ICswODAwDQo+IC1A
-QCAtMjEsNyArMjEsOCBAQA0KPiAtICAgICAgIGRvICIkZ2NvbmZpZ3snb3Nf
-dHlwZSd9LTkuMS1BTEwtbGliLnBsIjsNCj4gK2RpZmYgLS1naXQgYS9uZXQv
-bmV0LWxpYi5wbCBiL25ldC9uZXQtbGliLnBsIGluZGV4IGFmZmExZDEuLjY2
-NzE1MzYgDQo+ICsxMDA3NTUNCj4gKy0tLSBhL25ldC9uZXQtbGliLnBsDQo+
-ICsrKysgYi9uZXQvbmV0LWxpYi5wbA0KPiArQEAgLTI2LDcgKzI2LDggQEAg
-ZWxzaWYgKCRnY29uZmlneydvc190eXBlJ30gZXEgJ2RlYmlhbi1saW51eCcg
-JiYgLWQgIi9ldGMvbmV0cGxhbiIpIHsNCj4gKyAgICAgICBkbyAibmV0cGxh
-bi1saWIucGwiOw0KPiAgICAgICAgIH0NCj4gICBlbHNlIHsNCj4gIC0gICAg
-ICBkbyAiJGdjb25maWd7J29zX3R5cGUnfS1saWIucGwiOw0KPiBAQCAtMTcs
-MyArMjEsNiBAQCBkaWZmIC1OcnUgd2VibWluLTEuNTcwLm9yaWcvL25ldC9u
-ZXQtbGliLnBsIHdlYm1pbi0xLjU3MC9uZXQvbmV0LWxpYi5wbA0KPiAgICAg
-ICAgIH0NCj4NCj4gICAjIGxpc3RfaG9zdHMoKQ0KPiArLS0NCj4gKzIuMTcu
-MQ0KPiArDQo+IGRpZmYgLS1naXQgYS9tZXRhLXdlYnNlcnZlci9yZWNpcGVz
-LXdlYmFkbWluL3dlYm1pbi93ZWJtaW5fMS44NTAuYmIgDQo+IGIvbWV0YS13
-ZWJzZXJ2ZXIvcmVjaXBlcy13ZWJhZG1pbi93ZWJtaW4vd2VibWluXzEuOTQx
-LmJiDQo+IHNpbWlsYXJpdHkgaW5kZXggOTclDQo+IHJlbmFtZSBmcm9tIG1l
-dGEtd2Vic2VydmVyL3JlY2lwZXMtd2ViYWRtaW4vd2VibWluL3dlYm1pbl8x
-Ljg1MC5iYg0KPiByZW5hbWUgdG8gbWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy13
-ZWJhZG1pbi93ZWJtaW4vd2VibWluXzEuOTQxLmJiDQo+IGluZGV4IDExMjM2
-NWQ0Yi4uMDY3YzdiZjZkIDEwMDY0NA0KPiAtLS0gYS9tZXRhLXdlYnNlcnZl
-ci9yZWNpcGVzLXdlYmFkbWluL3dlYm1pbi93ZWJtaW5fMS44NTAuYmINCj4g
-KysrIGIvbWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy13ZWJhZG1pbi93ZWJtaW4v
-d2VibWluXzEuOTQxLmJiDQo+IEBAIC0xLDcgKzEsNyBAQA0KPiAgU1VNTUFS
-WSA9ICJXZWItYmFzZWQgYWRtaW5pc3RyYXRpb24gaW50ZXJmYWNlIg0KPiAg
-SE9NRVBBR0UgPSAiaHR0cDovL3d3dy53ZWJtaW4uY29tIg0KPiAgTElDRU5T
-RSA9ICJCU0QtMy1DbGF1c2UiDQo+IC1MSUNfRklMRVNfQ0hLU1VNID0gImZp
-bGU6Ly9MSUNFTkNFO21kNT0wMzczYWM5ZjYxMWU1NDJkZGViZTFlYzYzOTRh
-ZmMzYyINCj4gK0xJQ19GSUxFU19DSEtTVU0gPSAiZmlsZTovL0xJQ0VOQ0U7
-bWQ1PTBhNjQ0NjEwOGM5NmQwODE5ZDIxZTQwYjQ4MTA5NTA3Ig0KPg0KPiAg
-U1JDX1VSSSA9ICIke1NPVVJDRUZPUkdFX01JUlJPUn0vd2ViYWRtaW4vd2Vi
-bWluLSR7UFZ9LnRhci5neiBcDQo+ICAgICAgICAgICAgIGZpbGU6Ly9zZXR1
-cC5zaCBcDQo+IEBAIC0yMSw4ICsyMSw4IEBAIFNSQ19VUkkgPSAiJHtTT1VS
-Q0VGT1JHRV9NSVJST1J9L3dlYmFkbWluL3dlYm1pbi0ke1BWfS50YXIuZ3og
-XA0KPiAgICAgICAgICAgICBmaWxlOi8vd2VibWluLnNlcnZpY2UgXA0KPiAg
-ICAgICAgICAgICAgIg0KPg0KPiAtU1JDX1VSSVttZDVzdW1dID0gImNkNmVl
-OThmNzNmOTQxODU2MjE5NzY3NWI5NTJkODFiIg0KPiAtU1JDX1VSSVtzaGEy
-NTZzdW1dID0gImM2NmNhYTllNGNiNTBkNTQ0N2JjOGFjZWI3OTg5ZDIyODRk
-ZGUwNjAyNzhmNDA0YjEzZTE3MWM3Y2UxNjkwZTEiDQo+ICtTUkNfVVJJW21k
-NXN1bV0gPSAiYmI4ZjYzMDY4YTg2YTE0MjY5NzI2ZjRkOTM0YjhkMzgiDQo+
-ICtTUkNfVVJJW3NoYTI1NnN1bV0gPSAiM2ExOTIyOGQ5MjU1NmM3NzIyYzZm
-ZTU2YzlkNGI3M2Q0NzdhMTk4NDViMGRhZTNmMDE4ZmM3ZmMwMzA2YjI5YSIN
-Cj4NCj4gIFVQU1RSRUFNX0NIRUNLX1VSSSA9ICJodHRwOi8vd3d3LndlYm1p
-bi5jb20vZG93bmxvYWQuaHRtbCINCj4gIFVQU1RSRUFNX0NIRUNLX1JFR0VY
-ID0gIndlYm1pbi0oP1A8cHZlcj5cZCsoXC5cZCspKykudGFyLmd6Ig0KPiAt
-LQ0KPiAyLjE3LjENCj4NCj4NCj4NCj4gDQoNCg0KCgo=
+On Mon, Apr 20, 2020 at 10:11 PM Wang Mingyu <wangmy@cn.fujitsu.com> wrote:
+>
+> Do you mean I should make a patch on master-next and then submit it to t=
+he master branch?
+>
+> -----=E9=82=AE=E4=BB=B6=E5=8E=9F=E4=BB=B6-----
+> =E5=8F=91=E4=BB=B6=E4=BA=BA: openembedded-devel@lists.openembedded.org <=
+openembedded-devel@lists.openembedded.org> =E4=BB=A3=E8=A1=A8 Khem Raj
+> =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4: 2020=E5=B9=B44=E6=9C=882=E6=97=A5 =
+14:33
+> =E6=94=B6=E4=BB=B6=E4=BA=BA: Wang, Mingyu/=E7=8E=8B =E9=B8=A3=E7=91=9C <=
+wangmy@cn.fujitsu.com>
+> =E6=8A=84=E9=80=81: openembeded-devel <openembedded-devel@lists.openembe=
+dded.org>
+> =E4=B8=BB=E9=A2=98: Re: [oe] [meta-webserver][PATCH] webmin: upgrade 1.8=
+50 -> 1.941
+>
+> please rebase on master-next and resend
+>
+
+yes preferably but atleast rebase on top of master.
+
+> On Wed, Apr 1, 2020 at 6:45 PM Wang Mingyu <wangmy@cn.fujitsu.com> wrote=
+:
+> >
+> > refresh the folloing patches:
+> > disable-version-check.patch
+> > net-generic.patch
+> > net-lib.pl.patch
+> >
+> > -License-Update: add "BSD 3-Clause License" to license file
+> >
+> > Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+> > ---
+> >  .../webmin/files/disable-version-check.patch  | 24 +++++++-----
+> >  .../webmin/files/net-generic.patch            | 37 ++++++++++--------=
+-
+> >  .../webmin/files/net-lib.pl.patch             | 17 ++++++---
+> >  .../{webmin_1.850.bb =3D> webmin_1.941.bb}      |  6 +--
+> >  4 files changed, 49 insertions(+), 35 deletions(-)  rename
+> > meta-webserver/recipes-webadmin/webmin/{webmin_1.850.bb =3D>
+> > webmin_1.941.bb} (97%)
+> >
+> > diff --git
+> > a/meta-webserver/recipes-webadmin/webmin/files/disable-version-check.p
+> > atch
+> > b/meta-webserver/recipes-webadmin/webmin/files/disable-version-check.p
+> > atch
+> > index 9aad894e0..61b56bf5a 100644
+> > ---
+> > a/meta-webserver/recipes-webadmin/webmin/files/disable-version-check.p
+> > atch
+> > +++ b/meta-webserver/recipes-webadmin/webmin/files/disable-version-che
+> > +++ ck.patch
+> > @@ -6,12 +6,15 @@ the moment.
+> >  Upstream-status: Inappropriate
+> >
+> >  Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+> > +---
+> > + webmin/webmin-lib.pl | 44
+> > +++++++++++++++++++++++----------------------
+> > + 1 file changed, 22 insertions(+), 22 deletions(-)
+> >
+> > -Index: webmin-1.850/webmin/webmin-lib.pl
+> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > ---- webmin-1.850.orig/webmin/webmin-lib.pl
+> > -+++ webmin-1.850/webmin/webmin-lib.pl
+> > -@@ -1112,28 +1112,28 @@ my %miniserv;
+> > +diff --git a/webmin/webmin-lib.pl b/webmin/webmin-lib.pl index
+> > +dad6cfc..73821f0 100755
+> > +--- a/webmin/webmin-lib.pl
+> > ++++ b/webmin/webmin-lib.pl
+> > +@@ -1130,28 +1130,28 @@ my %miniserv;
+> >   &load_theme_library();        # So that UI functions work
+> >
+> >   # Need OS upgrade
+> > @@ -24,12 +27,12 @@ Index: webmin-1.850/webmin/webmin-lib.pl
+> >  -      my ($minor) =3D split(/\./, $gconfig{'os_version'});
+> >  -      if ($realos{'os_type'} eq $gconfig{'os_type'} &&
+> >  -          $realminor =3D=3D $minor) {
+> > --              # Only the minor version number changed - no need to a=
+pply
+> > +-              # Only the minor version number changed - just apply s=
+ilently
+> >  -              &apply_new_os_version(\%realos);
+> >  -              }
+> >  -      else {
+> >  -              # Large enough change to tell the user
+> > --              push(@notifs,
+> > +-              push(@notifs,
+> >  -                  &ui_form_start("$gconfig{'webprefix'}/webmin/fix_o=
+s.cgi").
+> >  -                  &text('os_incorrect', $realos{'real_os_type'},
+> >  -                                        $realos{'real_os_version'}).=
+"<p>\n".
+> > @@ -46,12 +49,12 @@ Index: webmin-1.850/webmin/webmin-lib.pl
+> >  +#     my ($minor) =3D split(/\./, $gconfig{'os_version'});
+> >  +#     if ($realos{'os_type'} eq $gconfig{'os_type'} &&
+> >  +#         $realminor =3D=3D $minor) {
+> > -+#             # Only the minor version number changed - no need to a=
+pply
+> > ++#             # Only the minor version number changed - just apply s=
+ilently
+> >  +#             &apply_new_os_version(\%realos);
+> >  +#             }
+> >  +#     else {
+> >  +#             # Large enough change to tell the user
+> > -+#             push(@notifs,
+> > ++#             push(@notifs,
+> >  +#                 &ui_form_start("$gconfig{'webprefix'}/webmin/fix_o=
+s.cgi").
+> >  +#                 &text('os_incorrect', $realos{'real_os_type'},
+> >  +#                                       $realos{'real_os_version'}).=
+"<p>\n".
+> > @@ -62,3 +65,6 @@ Index: webmin-1.850/webmin/webmin-lib.pl
+> >
+> >   # Password close to expiry
+> >   my $warn_days =3D $config{'warn_days'};
+> > +--
+> > +2.17.1
+> > +
+> > diff --git
+> > a/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
+> > b/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
+> > index 554939285..a995d4b93 100644
+> > --- a/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
+> > +++ b/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
+> > @@ -1,25 +1,26 @@
+> > -# Add support for configuring network interfaces on a generic linux
+> > system
+> > +# Add support for configuring network interfaces on a generic linux #
+> > +system
+> >  #
+> >  # Upstream-status: Not appropriate [config]  #  # Signed-off-by: Paul
+> > Eggleton <paul.eggleton@linux.intel.com>
+> > -Index: webmin-1.850/net/module.info
+> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > ---- webmin-1.850.orig/net/module.info
+> > -+++ webmin-1.850/net/module.info
+> > -@@ -14,7 +14,7 @@ desc_ko_KR.UTF-8=3D=E9=9B=B1=E3=82=8D=E5=A7=BC=E9=
+=9E=97=E5=B2=89=E4=BC=82 =E7=94=91=EE=84=87=E5=8A=9A
+> > +---
+> > + net/module.info | 2 +-
+> > + 1 file changed, 1 insertion(+), 1 deletion(-)
+> > +
+> > +diff --git a/net/module.info b/net/module.info index b23bf2d..8e3628e
+> > +100644
+> > +--- a/net/module.info
+> > ++++ b/net/module.info
+> > +@@ -1,7 +1,7 @@
+> > + version=3D1.941
+> > + longdesc=3DConfigure boot time and active interfaces, DNS, routing a=
+nd /etc/hosts.
+> >   name=3DNetworking
+> > - desc_tr=3DA Yap=E9=BD=A6and=E9=BD=ACmas
+> > - desc_de=3DNetzwerkkonfiguration
+> >  -os_support=3Dsolaris coherent-linux redhat-linux/5.0-* mandrake-linu=
+x
+> > united-linux suse-linux/6.0-* open-linux unixware turbo-linux/4.0
+> > freebsd/3.2-* openbsd debian-linux/2.2-* cobalt-linux/2.2-* msc-linux
+> > gentoo-linux macos/1.5-* trustix-linux slackware-linux/8.0-*
+> > openmamba-linux cygwin windows pardus-linux  +os_support=3Dgeneric-lin=
+ux
+> > solaris coherent-linux redhat-linux/5.0-* mandrake-linux united-linux
+> > suse-linux/6.0-* open-linux unixware turbo-linux/4.0 freebsd/3.2-*
+> > openbsd debian-linux/2.2-* cobalt-linux/2.2-* msc-linux gentoo-linux
+> > macos/1.5-* trustix-linux slackware-linux/8.0-* openmamba-linux cygwin
+> > windows pardus-linux
+> > - desc_sk=3DKonfigur=E9=86=95ia siete
+> > - desc_zh_CN=3D=E7=BD=91=E7=BB=9C=E9=85=8D=E7=BD=AE
+> > - risk=3Dlow medium high
+> > -Index: webmin-1.850/net/generic-linux-lib.pl
+> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > ---- /dev/null
+> > -+++ webmin-1.850/net/generic-linux-lib.pl
+> > -@@ -0,0 +1,2 @@
+> > -+do 'linux-lib.pl';
+> > -+
+> > + readonly=3D1
+> > + desc=3DNetwork Configuration
+> > + category=3Dnet
+> > +--
+> > +2.17.1
+> > +
+> > diff --git
+> > a/meta-webserver/recipes-webadmin/webmin/files/net-lib.pl.patch
+> > b/meta-webserver/recipes-webadmin/webmin/files/net-lib.pl.patch
+> > index bdba5e73f..c9c0d3549 100644
+> > --- a/meta-webserver/recipes-webadmin/webmin/files/net-lib.pl.patch
+> > +++ b/meta-webserver/recipes-webadmin/webmin/files/net-lib.pl.patch
+> > @@ -3,12 +3,16 @@ Upstream-Status: Inappropriate [config]
+> >  XXX: need to work out a better fix.
+> >
+> >  Signed-off-by: Dexuan Cui <dexuan.cui@intel.com>
+> > +---
+> > + net/net-lib.pl | 3 ++-
+> > + 1 file changed, 2 insertions(+), 1 deletion(-)
+> >
+> > -diff -Nru webmin-1.570.orig//net/net-lib.pl
+> > webmin-1.570/net/net-lib.pl
+> > ---- webmin-1.570.orig//net/net-lib.pl  2011-10-03 09:01:48.000000000
+> > +0800
+> > -+++ webmin-1.570/net/net-lib.pl        2011-10-28 13:52:56.138873664 =
++0800
+> > -@@ -21,7 +21,8 @@
+> > -       do "$gconfig{'os_type'}-9.1-ALL-lib.pl";
+> > +diff --git a/net/net-lib.pl b/net/net-lib.pl index affa1d1..6671536
+> > +100755
+> > +--- a/net/net-lib.pl
+> > ++++ b/net/net-lib.pl
+> > +@@ -26,7 +26,8 @@ elsif ($gconfig{'os_type'} eq 'debian-linux' && -d =
+"/etc/netplan") {
+> > +       do "netplan-lib.pl";
+> >         }
+> >   else {
+> >  -      do "$gconfig{'os_type'}-lib.pl";
+> > @@ -17,3 +21,6 @@ diff -Nru webmin-1.570.orig//net/net-lib.pl webmin-1=
+.570/net/net-lib.pl
+> >         }
+> >
+> >   # list_hosts()
+> > +--
+> > +2.17.1
+> > +
+> > diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
+> > b/meta-webserver/recipes-webadmin/webmin/webmin_1.941.bb
+> > similarity index 97%
+> > rename from meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
+> > rename to meta-webserver/recipes-webadmin/webmin/webmin_1.941.bb
+> > index 112365d4b..067c7bf6d 100644
+> > --- a/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
+> > +++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.941.bb
+> > @@ -1,7 +1,7 @@
+> >  SUMMARY =3D "Web-based administration interface"
+> >  HOMEPAGE =3D "http://www.webmin.com"
+> >  LICENSE =3D "BSD-3-Clause"
+> > -LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3D0373ac9f611e542ddebe1ec639=
+4afc3c"
+> > +LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3D0a6446108c96d0819d21e40b48=
+109507"
+> >
+> >  SRC_URI =3D "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
+> >             file://setup.sh \
+> > @@ -21,8 +21,8 @@ SRC_URI =3D "${SOURCEFORGE_MIRROR}/webadmin/webmin-$=
+{PV}.tar.gz \
+> >             file://webmin.service \
+> >              "
+> >
+> > -SRC_URI[md5sum] =3D "cd6ee98f73f9418562197675b952d81b"
+> > -SRC_URI[sha256sum] =3D "c66caa9e4cb50d5447bc8aceb7989d2284dde060278f4=
+04b13e171c7ce1690e1"
+> > +SRC_URI[md5sum] =3D "bb8f63068a86a14269726f4d934b8d38"
+> > +SRC_URI[sha256sum] =3D "3a19228d92556c7722c6fe56c9d4b73d477a19845b0da=
+e3f018fc7fc0306b29a"
+> >
+> >  UPSTREAM_CHECK_URI =3D "http://www.webmin.com/download.html"
+> >  UPSTREAM_CHECK_REGEX =3D "webmin-(?P<pver>\d+(\.\d+)+).tar.gz"
+> > --
+> > 2.17.1
+> >
+> >
+> >
+> >
+>
+>
+>
+>
+>=20
