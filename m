@@ -1,82 +1,63 @@
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.web10.1917.1587540280084988516
+Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com [209.85.208.195])
+ by mx.groups.io with SMTP id smtpd.web10.2734.1587545993644514438
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Apr 2020 00:24:40 -0700
+ Wed, 22 Apr 2020 01:59:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=LksFFY/+;
- spf=pass (domain: konsulko.com, ip: 209.85.221.50, mailfrom: pbarker@konsulko.com)
-Received: by mail-wr1-f50.google.com with SMTP id x18so1114662wrq.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2020 00:24:39 -0700 (PDT)
+ dkim=pass header.i=@burtonini-com.20150623.gappssmtp.com header.s=20150623 header.b=WWgRSoiw;
+ spf=pass (domain: burtonini.com, ip: 209.85.208.195, mailfrom: ross@burtonini.com)
+Received: by mail-lj1-f195.google.com with SMTP id w20so1460049ljj.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2020 01:59:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google;
-        h=date:from:to:cc:subject:message-id:in-reply-to:references
-         :organization:mime-version:content-transfer-encoding;
-        bh=3zQ6Kd+4DXEFCrZutCULgZZo+Cl5dE3poKW23XeWu9c=;
-        b=LksFFY/+Zpy70r1nBLDa/aY792UKb9cLfb7h4lpvSyI4Ut4EjghbGFRNxxvvkG5pzZ
-         CVpUMRnNPWr/eCzjep5btSbypeHwBsXeI+ZSq+WE9tPqpLB8OX5EBPmqE/9hIXak7OW+
-         JRq3H/iA3EgmEDL7xUbywlWV2cPAWSm037/TU=
+        d=burtonini-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=NSbuD3rLwOWfa4lh5LlDpb6hZWN+NBrANlsZFwJb2Og=;
+        b=WWgRSoiwEYZay1mKOLrRMRrF81NbxF6co8MXZi9zBwNtoF8joddCpBjhcR2OhIsypQ
+         V4t6ONYg7PjYxgnhOCdHWJ0bFSMHsYKUHsFDKTSrit3TJhqMHrv08oyT3d4I7BJdrBHb
+         XGSqJebuu6zsllTarrgHqy3js9Ryt2PG7OrsScS1esTBKgVCTN8Sh+9xgDPX5Ca4636R
+         WAYuL0yelM29lOTnDOkbitFYO5nH1Kv817J/P31o0Y7/qZaXdC/oztlWcWqbGRAGCgzj
+         EkvVpaeta4T7bdhZI3xXD1sjvcDKF1vYWkGTLMpBLdD9HqtMUd7ULk6YEDq1uOFlZy4Y
+         9BQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
-         :references:organization:mime-version:content-transfer-encoding;
-        bh=3zQ6Kd+4DXEFCrZutCULgZZo+Cl5dE3poKW23XeWu9c=;
-        b=j4CulQ8cYiNZzOg+bOxsojSh4KOJ/ew/pb6Z3Xfuoo5K19cvIwZoxX5a5LilYfUmKl
-         RKIQxGs0INAEC8VndU+nHdkIzcU5HityrBDRtCGOsP1fKqP3+vzdczCn5StKV0HlC47Q
-         q3U8wgi24SYOeuSHgF2AQPYpedg5bLBPFDRbA4qXU3xVGcCw1FAIlIL24Eh/ra2qwptn
-         RPYdir5OuPpIU79A9vQqSPvYm5znfh3pDoIyKCG6BirVtcArIIQeUs2JfXsaTsfND8m+
-         zyAeofPGqXHBOOYnyM7jC9/OfPy2UMJ8imrNo+fgN4tB/GVqd7BQKzYQRgMGlTstxAO9
-         jrSQ==
-X-Gm-Message-State: AGi0PubX4IwVefT3xr84RrqnlQFLvSqOf39B24jtP6ac0IB2FeIcipRb
-	SnWBtOqQxwVSqaW9rUDawIHTXw==
-X-Google-Smtp-Source: APiQypLYMkg1jX340729CP1vxSr1Y7hZAXqrYAax48HYEWO/OaP2LccDl6TYc9S5Fecpuh7+cNmEdQ==
-X-Received: by 2002:adf:fa41:: with SMTP id y1mr27322754wrr.131.1587540278605;
-        Wed, 22 Apr 2020 00:24:38 -0700 (PDT)
-Return-Path: <pbarker@konsulko.com>
-Received: from ub1910 ([213.48.11.149])
-        by smtp.gmail.com with ESMTPSA id g69sm6839758wmg.17.2020.04.22.00.24.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Apr 2020 00:24:38 -0700 (PDT)
-Date: Wed, 22 Apr 2020 08:24:35 +0100
-From: "Paul Barker" <pbarker@konsulko.com>
-To: "Philip Balister" <philip@balister.org>
-Cc: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>, openembedded-core
- <openembedded-core@lists.openembedded.org>, openembedded-architecture
- <openembedded-architecture@lists.openembedded.org>, Yocto Project
- <yocto@yoctoproject.org>
-Subject: Re: [yocto] OpenEmbedded developers virtual happy hour
-Message-ID: <20200422082435.151a49f1@ub1910>
-In-Reply-To: <98d30536-4d57-16f9-88f4-1a678fd75970@balister.org>
-References: <98d30536-4d57-16f9-88f4-1a678fd75970@balister.org>
-Organization: Konsulko Group
-X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=NSbuD3rLwOWfa4lh5LlDpb6hZWN+NBrANlsZFwJb2Og=;
+        b=SJmTXhWVogHwbgDNQEBx+V3r7xVJg/+qv9aj6r5hqFCXfi7mMnnt5zY3piGUBGeP7R
+         My1YOLVl0Nh3Al6fr8cHvK8wnayCdk65i6tQknikfyDRLveiI9V4kvHA+l0D00/ajhMu
+         IHsH7GJ02ganX+wLXnREN2C9o29brf3x70IyGRoZecZ1ojqxsOwVSrX2dWSO7OViGLeD
+         76fbvAsEPBpAqLtPKFZfJDdEVJ2+NB5rx8wxz/cYF1VFRCFbfP5/hoJvzDTzBCLxIB7U
+         d2jznEiDv7rOmb09XPmnt3OXADQqKp7/QSEXp8zTrXoYPGuIY25jBfCVB6Wz5pN6E1GC
+         dCkg==
+X-Gm-Message-State: AGi0Pub5jYyoSQFPobYVyoGMAWcCm64yj2oIv6DNRrqbIzbP2m4Gz+rT
+	KkJUz1AR17dVO1I+8fMDEsXY/dUkb96KGIHB1BGm8Q==
+X-Google-Smtp-Source: APiQypJQbYERN5SC5DtiXf7oge35ffKgKC9QszSgCn3B2D5IFP4Z4/r8Wgu00iipd7nfNbbewkKjBF8CMUtkEdIgFI0=
+X-Received: by 2002:a2e:b248:: with SMTP id n8mr14901698ljm.207.1587545991785;
+ Wed, 22 Apr 2020 01:59:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <20200421015855.7687-1-zangrc.fnst@cn.fujitsu.com>
+ <20200421015855.7687-7-zangrc.fnst@cn.fujitsu.com> <CAAnfSTuCwoNpG++OLKgoPWzfwuWPERGN3txDEfM-nghbed1zFg@mail.gmail.com>
+ <55ff716b-58fd-955d-13e2-ff2aaa595785@cn.fujitsu.com>
+In-Reply-To: <55ff716b-58fd-955d-13e2-ff2aaa595785@cn.fujitsu.com>
+From: "Ross Burton" <ross@burtonini.com>
+Date: Wed, 22 Apr 2020 09:59:40 +0100
+Message-ID: <CAAnfSTt5QgGwosDrjaxGpUR3ugNRFzpt+3xKZ15X5cfWuO24MQ@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH] python3-msgpack: Enable ptest
+To: zangrc <zangrc.fnst@cn.fujitsu.com>, openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 
-On Tue, 21 Apr 2020 15:34:57 -0400
-"Philip Balister" <philip@balister.org> wrote:
+[ Re-adding oe-devel to the CC list. ]
 
-> We (the OpenEmbedded board, with help from Automotive Grade Linux who
-> are providing the meeting "space") would like to invite you a a virtual
-> happy hour on April 29 at Noon EDT, 6PM CET (Is that the right TZ)
-> 
-> We'd like to come and show off their projects and give us all a chance
-> to say hello since so many of our chances to meet in person are not
-> happening for the foreseeable future. We would also like to discuss what
-> kind of events we should host in the future to help build the community.
-> 
-> Topic: OpenEmbedded Developer Happpy Hour
-> Time: Apr 29, 2020 06:00 PM Amsterdam, Berlin, Rome, Stockholm, Vienna
-> 
-> Join Zoom Meeting
-> https://zoom.us/j/94557245630
-> 
-> Meeting ID: 945 5724 5630
+On Wed, 22 Apr 2020 at 04:57, zangrc <zangrc.fnst@cn.fujitsu.com> wrote:
+> For the run-ptest file, I imitated the OSS with ptest enabled in meta-python, but for the test component of python, it is difficult to make the output format the same as automake.
 
-Sounds like an excellent idea, thanks for organising this! I'll see you
-all there.
+For code using unittest, it's actually fairly simple, you just need a
+new unittest reporter implementation (about 10 lines of code) and then
+run the tests with that instead.  Pytest has plugins for TAP output so
+automake-style output should be simple too.
 
--- 
-Paul Barker
-Konsulko Group
+I'd endorse putting a new unittest class into the python3 recipe and a
+pytest plugin into the pytest recipe so that they are available for
+everyone to use.
+
+
+Ross
