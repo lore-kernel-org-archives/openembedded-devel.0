@@ -1,82 +1,121 @@
-Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com [209.85.222.169])
- by mx.groups.io with SMTP id smtpd.web10.1161.1587586016982299631
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com [209.85.214.193])
+ by mx.groups.io with SMTP id smtpd.web12.4013.1587593629982196276
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Apr 2020 13:06:57 -0700
+ Wed, 22 Apr 2020 15:13:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@izotope.com header.s=google header.b=LkNbZQru;
- spf=permerror, err=parse error for token &{10 18 _spf.google.com}: limit exceeded (domain: izotope.com, ip: 209.85.222.169, mailfrom: mcampbell@izotope.com)
-Received: by mail-qk1-f169.google.com with SMTP id t3so3905006qkg.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2020 13:06:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=tvds5mUe;
+ spf=pass (domain: gmail.com, ip: 209.85.214.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f193.google.com with SMTP id n24so1491889plp.13
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2020 15:13:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=izotope.com; s=google;
+        d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=1gpeSS+NVtYRWuj49mqul1+PurEr/gA3XMe6oYQwGBc=;
-        b=LkNbZQru/p/w/rIfJ/sPb1/GQ7PcyFxeOMWXUmdSHiWYYToWTxNcKlFA6WlyFUdlfm
-         CYsFJBss5BksUJQriG1ib0aE2GPMBM8Esfsk6ZEfjUJHCBFLCJVE6PQ9WbiayW3BzhFn
-         E60USuujbOHqbW3WSRm6TmUGifjo8AKsuvsqw=
+        bh=bqJfXQyTbP0YyiM2sJosV5sBScK4ub04AyCXpenyk1s=;
+        b=tvds5mUe9IM7FO0hM/jmX7qKA1qzlV1Oq5Wd5sfTMjp/DB/rHWoYO4Wv3pcA2E6Nqn
+         ORay2M4ZRNztkkwVvMYius5JGO/CCpcvGrUKRlZXunJoUigrTZ7pHmL3gomzw/OXAHVg
+         bfIw7sLVY62UyVzj2zx9Mv8lv3jwkRt9JrmRmM6VQYN5YIwX+9ZtaEhn49j5qIgUlWkq
+         GcWf2iBWD/UtFLP0DwLO5jZJQJv5JeH0t8J4vTQaSDLHqHfWj2KADDm8uj7T/vsnYw4C
+         7v+9cHZWeMj4j3MI5vwy/wkJMGSYOY7NO8zgoQGhnl99Smi45+uVT3G0jzhN33/PHDrt
+         QxFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=1gpeSS+NVtYRWuj49mqul1+PurEr/gA3XMe6oYQwGBc=;
-        b=PjU68uYL22qfJR+PYdERY9QnNnBbbA4HntzXqCkSkZKCeqP3A9LokOJ0dGOQ5yTUHJ
-         UvljJSQVTekv5o1S+ONbL54/jQIMnJ5tkvhLEbqIVNQZSn1EzHMPDomQKadU2Zo4tpcw
-         AeKGZg2BY57mHKjmwi+ImL2E4Cr+RS/kxL8P+W8yEKhl6LIaduBjG3ymQ02TOBJdTBTM
-         Wm3GHEZPXw0reTxzsrzUXX1DlRsY9u2+Ft8+k2PJbpRK0hz9bsw7R1SwJJiAW5WgeZcJ
-         VE3rI8vWLISQClYbmChS0HlanSMYeBtO/UjCmatpOJxywzQUuUBh8CSVvpyf0oGi08tM
-         QB3A==
-X-Gm-Message-State: AGi0PuZsJP2zVO/k5Z/KXzB8fcv38XdL3uAqyEXOmgHsYiuzHwfxqaqC
-	gbNMq1rVic4Qy1fSpnHRARSzc1YgdaZyKw==
-X-Google-Smtp-Source: APiQypIizenB01yHkVVDTzwyKtPZvSZmXK+gpCwezggtwtEWXC97wcbzG12EY4UTXXKeMN9Tcmpgig==
-X-Received: by 2002:a37:5907:: with SMTP id n7mr28985828qkb.227.1587586015601;
-        Wed, 22 Apr 2020 13:06:55 -0700 (PDT)
-Return-Path: <mcampbell@izotope.com>
-Received: from ubuntu.localdomain (146-115-73-63.s5181.c3-0.arl-cbr1.sbo-arl.ma.cable.rcncustomer.com. [146.115.73.63])
-        by smtp.gmail.com with ESMTPSA id q6sm192069qtd.61.2020.04.22.13.06.54
+        bh=bqJfXQyTbP0YyiM2sJosV5sBScK4ub04AyCXpenyk1s=;
+        b=swmRx1Ei4R9uLSSHB+nibdsPn73/UHi0jqy4erBTOQzaH1YShXuLtqgQu8/UYIYvY3
+         UWHVk8AuavxAOhHtRcApyaRcF65u+WOus0uzPClYQSNTZOM8WhO+IMqdgOYyQVkqcKHt
+         UyqF8KTrZyBCt/nTGe8WT1G4J4Rr6388Ixyivc6qZVFiLPYcUZ7/dYXRpyKq64aXmImP
+         4mWwr+XvxhPCHtmORakBIc1AORAz1U5ETNTidW2qlC0oUIRyuk74G28eFn8Tvp+QgWiw
+         A9Iq/06OfGFS7FV/zTxYzBonk2Tnkn8CKXqNdMr18xmIggDIZC9X5L/7Yo0c4gDjo8jg
+         QWmw==
+X-Gm-Message-State: AGi0PuZ9kFeYxUp5FYqZiP2yZC6rAA6wP3YXcEWucjf2A1u1MSO/r3wI
+	AaEdg52NXfdBHamZBoFZvLbM4VBX0wU=
+X-Google-Smtp-Source: APiQypJborJP17m16jxC5F5ZidFugUnvZNKC8Bar5g/kkkoDmxv+AJkWcAeTOM8fPtbQR24GVMG4XA==
+X-Received: by 2002:a17:90a:37a3:: with SMTP id v32mr1009505pjb.2.1587593629051;
+        Wed, 22 Apr 2020 15:13:49 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::1a60])
+        by smtp.gmail.com with ESMTPSA id g2sm485729pfh.193.2020.04.22.15.13.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Apr 2020 13:06:54 -0700 (PDT)
-From: "Matt Campbell" <Mcampbell@izotope.com>
+        Wed, 22 Apr 2020 15:13:48 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Matthew Campbell <mcampbell@izotope.com>
-Subject: [meta-oe][PATCH v2] sdbus-c++-tools: add nativesdk
-Date: Wed, 22 Apr 2020 16:06:31 -0400
-Message-Id: <20200422200630.79513-1-mcampbell@izotope.com>
-X-Mailer: git-send-email 2.20.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] nss: Fix build on riscv64
+Date: Wed, 22 Apr 2020 15:13:46 -0700
+Message-Id: <20200422221346.1006384-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Changes from v1:
-Fix formatting of patch
-
-Signed-off-by: Matthew Campbell <mcampbell@izotope.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...bus-c++-tools-native_0.8.1.bb => sdbus-c++-tools_0.8.1.bb} | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
- rename meta-oe/recipes-core/sdbus-c++/{sdbus-c++-tools-native_0.8.1.bb => sdbus-c++-tools_0.8.1.bb} (89%)
+ meta-oe/recipes-support/nss/nss/riscv.patch | 36 +++++++++++++++++++++
+ meta-oe/recipes-support/nss/nss_3.51.1.bb   |  3 ++
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-oe/recipes-support/nss/nss/riscv.patch
 
-diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-native_0.8.1.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.1.bb
-similarity index 89%
-rename from meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-native_0.8.1.bb
-rename to meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.1.bb
-index e18b9903d..9eaec0f2a 100644
---- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-native_0.8.1.bb
-+++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.1.bb
-@@ -4,7 +4,7 @@ DESCRIPTION = "Native interface code generator for development with sdbus-c++"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=1803fa9c2c3ce8cb06b4861d75310742"
- 
--inherit cmake native
-+inherit cmake
- 
- DEPENDS += "expat"
- 
-@@ -12,3 +12,5 @@ SRCREV = "3a4f343fb924650e7639660efa5f143961162044"
- SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master;subpath=tools"
- 
- S = "${WORKDIR}/tools"
+diff --git a/meta-oe/recipes-support/nss/nss/riscv.patch b/meta-oe/recipes-support/nss/nss/riscv.patch
+new file mode 100644
+index 0000000000..aef91a7c37
+--- /dev/null
++++ b/meta-oe/recipes-support/nss/nss/riscv.patch
+@@ -0,0 +1,36 @@
++Enable uint128 on riscv64
 +
-+BBCLASSEXTEND = "native nativesdk"
++Fixes
++| verified/kremlin/kremlib/dist/minimal/LowStar_Endianness.h:29:37: error: 'load128_be' declared 'static' but never defined [-Werror=unused-function]
++|    29 | inline static FStar_UInt128_uint128 load128_be(uint8_t *x0);
++|       |                                     ^~~~~~~~~~
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++--- a/nss/lib/freebl/verified/kremlin/include/kremlin/internal/types.h
+++++ b/nss/lib/freebl/verified/kremlin/include/kremlin/internal/types.h
++@@ -56,7 +56,8 @@ typedef const char *Prims_string;
++ #include <emmintrin.h>
++ typedef __m128i FStar_UInt128_uint128;
++ #elif !defined(KRML_VERIFIED_UINT128) && !defined(_MSC_VER) && \
++-    (defined(__x86_64__) || defined(__x86_64) || defined(__aarch64__))
+++    (defined(__x86_64__) || defined(__x86_64) || defined(__aarch64__) || \
+++     (defined(__riscv) && __riscv_xlen == 64))
++ typedef unsigned __int128 FStar_UInt128_uint128;
++ #else
++ typedef struct FStar_UInt128_uint128_s {
++--- a/nss/lib/freebl/verified/kremlin/kremlib/dist/minimal/fstar_uint128_gcc64.h
+++++ b/nss/lib/freebl/verified/kremlin/kremlib/dist/minimal/fstar_uint128_gcc64.h
++@@ -23,9 +23,10 @@
++ #include "FStar_UInt128.h"
++ #include "FStar_UInt_8_16_32_64.h"
++ #include "LowStar_Endianness.h"
++-
+++#include <stdint.h>
++ #if !defined(KRML_VERIFIED_UINT128) && !defined(_MSC_VER) && \
++-    (defined(__x86_64__) || defined(__x86_64) || defined(__aarch64__))
+++    (defined(__x86_64__) || defined(__x86_64) || defined(__aarch64__) || \
+++     (defined(__riscv) && __riscv_xlen == 64))
++ 
++ /* GCC + using native unsigned __int128 support */
++ 
+diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+index 755eb76585..b107c1b178 100644
+--- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
++++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+@@ -32,6 +32,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
+            file://system-pkcs11.txt \
+            file://nss-fix-nsinstall-build.patch \
+            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
++           file://riscv.patch \
+            "
+ 
+ SRC_URI[md5sum] = "6acaf1ddff69306ae30a908881c6f233"
+@@ -271,3 +272,5 @@ FILES_${PN}-dev = "\
+ RDEPENDS_${PN}-smime = "perl"
+ 
+ BBCLASSEXTEND = "native nativesdk"
++
++TOOLCHAIN = "gcc"
 -- 
-2.20.1
+2.26.2
 
