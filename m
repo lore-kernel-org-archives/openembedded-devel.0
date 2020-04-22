@@ -1,59 +1,61 @@
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com [209.85.214.193])
- by mx.groups.io with SMTP id smtpd.web12.4013.1587593629982196276
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com [209.85.215.195])
+ by mx.groups.io with SMTP id smtpd.web12.4149.1587594035900433504
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Apr 2020 15:13:50 -0700
+ Wed, 22 Apr 2020 15:20:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=tvds5mUe;
- spf=pass (domain: gmail.com, ip: 209.85.214.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f193.google.com with SMTP id n24so1491889plp.13
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2020 15:13:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=WcrH4oso;
+ spf=pass (domain: gmail.com, ip: 209.85.215.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f195.google.com with SMTP id p8so1825443pgi.5
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2020 15:20:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=bqJfXQyTbP0YyiM2sJosV5sBScK4ub04AyCXpenyk1s=;
-        b=tvds5mUe9IM7FO0hM/jmX7qKA1qzlV1Oq5Wd5sfTMjp/DB/rHWoYO4Wv3pcA2E6Nqn
-         ORay2M4ZRNztkkwVvMYius5JGO/CCpcvGrUKRlZXunJoUigrTZ7pHmL3gomzw/OXAHVg
-         bfIw7sLVY62UyVzj2zx9Mv8lv3jwkRt9JrmRmM6VQYN5YIwX+9ZtaEhn49j5qIgUlWkq
-         GcWf2iBWD/UtFLP0DwLO5jZJQJv5JeH0t8J4vTQaSDLHqHfWj2KADDm8uj7T/vsnYw4C
-         7v+9cHZWeMj4j3MI5vwy/wkJMGSYOY7NO8zgoQGhnl99Smi45+uVT3G0jzhN33/PHDrt
-         QxFQ==
+        bh=5qxf7Ou2oMTJaPIwMTSs2f+phP27arYpgE7fNcxCkio=;
+        b=WcrH4osojXdrVWCmiaIMFkt93enCJvoaVkG4jkNm6rRhv1RCHl8OoFxkt60HJ0W4hM
+         magpJVoJ3+zy6NUtAxfGAJBlZfGgsR90t+Y9K7Zr0WdFT0m5yYnyFqDdSo4YcxRLRmqR
+         bfLY2y+E8RPPzHbgX4odRIkSg20ZktzcCjwTPj+7hIGY3KVT0qakWq83k0OxZKCVzcJv
+         Oku55gGMCYW7Q/sDHC/jGTkG5N2FynxuYPTpdVJwiAg0rA7jWXEkjQdAOJ6PT3RrV+uF
+         feCgg3u+vgY0Rhv1cYl6orXA0+A4Uhngw+s08Ny2R6gN1dTu69QszBwjXnmvPdAaP0/I
+         ZLTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=bqJfXQyTbP0YyiM2sJosV5sBScK4ub04AyCXpenyk1s=;
-        b=swmRx1Ei4R9uLSSHB+nibdsPn73/UHi0jqy4erBTOQzaH1YShXuLtqgQu8/UYIYvY3
-         UWHVk8AuavxAOhHtRcApyaRcF65u+WOus0uzPClYQSNTZOM8WhO+IMqdgOYyQVkqcKHt
-         UyqF8KTrZyBCt/nTGe8WT1G4J4Rr6388Ixyivc6qZVFiLPYcUZ7/dYXRpyKq64aXmImP
-         4mWwr+XvxhPCHtmORakBIc1AORAz1U5ETNTidW2qlC0oUIRyuk74G28eFn8Tvp+QgWiw
-         A9Iq/06OfGFS7FV/zTxYzBonk2Tnkn8CKXqNdMr18xmIggDIZC9X5L/7Yo0c4gDjo8jg
-         QWmw==
-X-Gm-Message-State: AGi0PuZ9kFeYxUp5FYqZiP2yZC6rAA6wP3YXcEWucjf2A1u1MSO/r3wI
-	AaEdg52NXfdBHamZBoFZvLbM4VBX0wU=
-X-Google-Smtp-Source: APiQypJborJP17m16jxC5F5ZidFugUnvZNKC8Bar5g/kkkoDmxv+AJkWcAeTOM8fPtbQR24GVMG4XA==
-X-Received: by 2002:a17:90a:37a3:: with SMTP id v32mr1009505pjb.2.1587593629051;
-        Wed, 22 Apr 2020 15:13:49 -0700 (PDT)
+        bh=5qxf7Ou2oMTJaPIwMTSs2f+phP27arYpgE7fNcxCkio=;
+        b=CPdIhW8B29xo86MqQWYNtKf0jWk4eO3eOo2iXBRyAj2vU6RV2MbfwLyPu4a5uuGOe8
+         z4BDPVbHB1/lOVoStbeXBJjfbbVwNFyj1Llv0j+GxENPKJU+KHI1t+cxVEZKsmikB1eB
+         4z/CkwzXKRLs9CHWyRzt0ZV1bSz7pHlxJGcM4kqSZvJYrbFt6viFGJA8IELTtojiAABO
+         U5QUt/SldocnnutYjSbSJw1VpQrrMwWG96ewOwqpwDN198mM1HW6mP5TtYQi6KP87Zvt
+         qxkt5WkSFagxUyk9KkIOJw1QOusQmqjInc7H80gdwixStSXsX1aUNP3OOHspUPkiSLg0
+         hvpQ==
+X-Gm-Message-State: AGi0PuYkBmwUjcQrpO3Nn0HIHvLUfinIXn2Z0F/cLPv9o+ycRChhv03N
+	eHiJ7WuppRvm6HKi01xmU0LckaoPKhk=
+X-Google-Smtp-Source: APiQypJqaVF714ax9h3Vvxk75/8x+8Y4IE1vpk+e2DQrZ5kTy1hFaY6YastI79ZEX45xNpIMTfghsQ==
+X-Received: by 2002:aa7:9e49:: with SMTP id z9mr676058pfq.225.1587594034842;
+        Wed, 22 Apr 2020 15:20:34 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::1a60])
-        by smtp.gmail.com with ESMTPSA id g2sm485729pfh.193.2020.04.22.15.13.48
+        by smtp.gmail.com with ESMTPSA id g22sm248307pju.21.2020.04.22.15.20.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Apr 2020 15:13:48 -0700 (PDT)
+        Wed, 22 Apr 2020 15:20:34 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] nss: Fix build on riscv64
-Date: Wed, 22 Apr 2020 15:13:46 -0700
-Message-Id: <20200422221346.1006384-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH V2] nss: Fix build on riscv64
+Date: Wed, 22 Apr 2020 15:20:31 -0700
+Message-Id: <20200422222031.1014636-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
+v2: Drop pinning to gcc alone
+
  meta-oe/recipes-support/nss/nss/riscv.patch | 36 +++++++++++++++++++++
- meta-oe/recipes-support/nss/nss_3.51.1.bb   |  3 ++
- 2 files changed, 39 insertions(+)
+ meta-oe/recipes-support/nss/nss_3.51.1.bb   |  1 +
+ 2 files changed, 37 insertions(+)
  create mode 100644 meta-oe/recipes-support/nss/nss/riscv.patch
 
 diff --git a/meta-oe/recipes-support/nss/nss/riscv.patch b/meta-oe/recipes-support/nss/nss/riscv.patch
@@ -99,7 +101,7 @@ index 0000000000..aef91a7c37
 + /* GCC + using native unsigned __int128 support */
 + 
 diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-index 755eb76585..b107c1b178 100644
+index 755eb76585..001124011e 100644
 --- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
 +++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
 @@ -32,6 +32,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
@@ -110,12 +112,6 @@ index 755eb76585..b107c1b178 100644
             "
  
  SRC_URI[md5sum] = "6acaf1ddff69306ae30a908881c6f233"
-@@ -271,3 +272,5 @@ FILES_${PN}-dev = "\
- RDEPENDS_${PN}-smime = "perl"
- 
- BBCLASSEXTEND = "native nativesdk"
-+
-+TOOLCHAIN = "gcc"
 -- 
 2.26.2
 
