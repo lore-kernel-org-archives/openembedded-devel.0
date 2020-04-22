@@ -1,90 +1,73 @@
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
- by mx.groups.io with SMTP id smtpd.web11.1470.1587513186749244997
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com [209.85.214.196])
+ by mx.groups.io with SMTP id smtpd.web10.1170.1587534709327071264
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Apr 2020 16:53:07 -0700
+ Tue, 21 Apr 2020 22:51:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: linux.intel.com, ip: 134.134.136.65, mailfrom: timothy.t.orling@linux.intel.com)
-IronPort-SDR: QB+neO4xiVv0S/NFgOeJkbY1G5KM/j5NFutsWyi4UIvDEcvUlO8vzwmkVCMylvbj8GFvjWZmQW
- R8J5rWxUozHg==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Apr 2020 16:53:05 -0700
-IronPort-SDR: 8zWhOa0QLQ4lbxJoc32ZbqrANbb4OES4MxmGx0nZ28T+2b8NbFj4KSsUhqag59DoN4qWNIQ7zz
- fgj+3YOk1nYg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.72,411,1580803200"; 
-   d="scan'208";a="255453852"
-Received: from wrath.jf.intel.com ([10.54.31.24])
-  by orsmga003.jf.intel.com with ESMTP; 21 Apr 2020 16:53:05 -0700
-From: "Tim Orling" <timothy.t.orling@linux.intel.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=HdkbO+J5;
+ spf=pass (domain: gmail.com, ip: 209.85.214.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f196.google.com with SMTP id n24so494587plp.13
+        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Apr 2020 22:51:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ORlsZgk0KvxKA/lCinnLTPYL3r35/xRYpR2QWNZB5uw=;
+        b=HdkbO+J5wlnAlu6kBOvdXKoy3RDhTAz5pPx9EK4BJlRdLYKtwWq44wT6SuRuihMZI+
+         eVw5cJzxUACUiBafeV4TAWwqahEY2XW7nODTn9RbXBLBnLh/apFVdwZ3FCJX4vvnnE+1
+         aCHvcxaZM3R/wV8nOK+wQRSOmeQJnj1ADXFfSb1yzuFGlolMYUK+wChAa1RhgoHdYiHK
+         UDuvpl9UBcMzpZQ93as6dfitJDgCZy4wUW3WzEF16/atdNSVhhlwiv+zs7AuuI8j2cWe
+         /5qSZ+WTo1Wc0sQYemwUx3lpqvwCHTkuDYV0p0Zt/0gftV/Db/v27gZOGf1qy6yvIT33
+         wPog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ORlsZgk0KvxKA/lCinnLTPYL3r35/xRYpR2QWNZB5uw=;
+        b=mP0ZdSF4sTyObzhmB4tKnEe8W9gPskfZttO8w0NtzNBIOInkQJX7hZW6XlfcGcd2UV
+         dbNebWgXLxrDpBHHMVUD8NOD8xLquetPI3nWN61mGg1gXKosGIyE428luVJwe3vZUG04
+         6pWGxUgE9Fn4tuml3i7dWR5uExmpVuwq5pT31yWnVjY0yG5EKAP/EUkhPzIX++WC6DqN
+         /+Xq6TStSpmf6NUZXD9FLE5desRsOqTOKe05JuaNuHJvOvOYXbnRpakGs+qwfV0Vh0HG
+         8SdkCQwkS5oMPMBSzsHXYH04teIeF5pl60UY6088jVSRIDnTUXbMslnKLsY+C9lzXiCj
+         SSOA==
+X-Gm-Message-State: AGi0PuYBFHnS+4eYo6GckjG7B1mc3AAuhFFMGefoIm8NcwUVdx+7x+G7
+	3eOGX+bVNK7yXhVnSORRLtWfTdmAk48=
+X-Google-Smtp-Source: APiQypJaQw5PIqvK+TcYOZDmOOnOl0t+TRKc5cw3GuwL5G7R6IpvkLooo00a+EFJ4LxUeXpBCwh6Hg==
+X-Received: by 2002:a17:90a:cb0b:: with SMTP id z11mr9608066pjt.62.1587534708427;
+        Tue, 21 Apr 2020 22:51:48 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::d473])
+        by smtp.gmail.com with ESMTPSA id c1sm4219080pfo.152.2020.04.21.22.51.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 21 Apr 2020 22:51:47 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <timothy.t.orling@linux.intel.com>
-Subject: [meta-oe][PATCH] icewm: upgrade 1.5.5 -> 1.6.5
-Date: Tue, 21 Apr 2020 16:52:50 -0700
-Message-Id: <20200421235250.3274-1-timothy.t.orling@linux.intel.com>
-X-Mailer: git-send-email 2.24.0
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] rocksdb: Link with pthreads on riscv
+Date: Tue, 21 Apr 2020 22:51:44 -0700
+Message-Id: <20200422055144.89937-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add additional DEPENDS on libxcomposite, libxfixes, libxdamage
-Add update-alternatives similar to xfce-session from meta-xfce
+Fixes
+ librocksdb.so.6.6.4: undefined reference to `__atomic_compare_exchange_1'
+collect2: error: ld returned 1 exit status
 
-For release notes and changes see:
-https://github.com/ice-wm/icewm/releases/
-
-Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../icewm/{icewm_1.5.5.bb => icewm_1.6.5.bb}      | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-extended/icewm/{icewm_1.5.5.bb => icewm_1.6.5.bb} (76%)
+ meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/icewm/icewm_1.5.5.bb b/meta-oe/recipes-extended/icewm/icewm_1.6.5.bb
-similarity index 76%
-rename from meta-oe/recipes-extended/icewm/icewm_1.5.5.bb
-rename to meta-oe/recipes-extended/icewm/icewm_1.6.5.bb
-index 887a32d52f..241a2b30f3 100644
---- a/meta-oe/recipes-extended/icewm/icewm_1.5.5.bb
-+++ b/meta-oe/recipes-extended/icewm/icewm_1.6.5.bb
-@@ -2,15 +2,14 @@ DESCRIPTION = "Ice Window Manager (IceWM)"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4a26952467ef79a7efca4a9cf52d417b"
- 
--SRC_URI = "https://github.com/ice-wm/${BPN}/releases/download/${PV}/${BPN}-${PV}.tar.xz \
-+SRC_URI = "https://github.com/ice-wm/${BPN}/releases/download/${PV}/${BPN}-${PV}.tar.lz \
-            file://0001-configure.ac-skip-running-test-program-when-cross-co.patch \
-            "
--SRC_URI[md5sum] = "6eba94a7935a0531d2c14eeb1426aeef"
--SRC_URI[sha256sum] = "f1c1344b20a9e8635143f70ee27930b55f813c15ca61f84d77584d311b6ac027"
-+SRC_URI[sha256sum] = "d41e6abf842ff3f8705a81d352be7c5b181c587549c183de0641c3820234a7b2"
- 
- UPSTREAM_CHECK_URI = "https://github.com/ice-wm/${BPN}/releases"
- 
--inherit autotools pkgconfig gettext perlnative features_check qemu
-+inherit autotools pkgconfig gettext perlnative features_check qemu update-alternatives
- REQUIRED_DISTRO_FEATURES = "x11"
- 
- EXTRA_OECONF += "--with-libdir=${datadir}/icewm \
-@@ -20,7 +19,9 @@ EXTRA_OECONF += "--with-libdir=${datadir}/icewm \
-                 --enable-xinerama \
-                 --enable-shape"
- 
--DEPENDS = "asciidoc-native fontconfig gdk-pixbuf libxft libxpm libxrandr libxinerama libice libsm libx11 libxext libxrender"
-+DEPENDS = "asciidoc-native fontconfig gdk-pixbuf libxft libxpm libxrandr \
-+    libxinerama libice libsm libx11 libxext libxrender libxcomposite libxdamage \
-+    libxfixes"
- DEPENDS_append = " qemu-native"
- RDEPENDS_${PN} = "perl fribidi"
- 
-@@ -38,4 +39,8 @@ EOF
-     ./qemuwrapper > src/preferences
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+index addf9552b5..b9038df81d 100644
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
++++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+@@ -39,3 +39,5 @@ do_install_append() {
+     # fix for qa check buildpaths
+     sed -i "s#${RECIPE_SYSROOT}##g" ${D}${libdir}/cmake/rocksdb/RocksDBTargets.cmake
  }
- 
-+ALTERNATIVE_${PN} = "x-session-manager"
-+ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/icewm-session"
-+ALTERNATIVE_PRIORITY_${PN} = "100"
 +
- FILES_${PN} += "${datadir}/xsessions"
++LDFLAGS_append_riscv64 = " -pthread"
 -- 
-2.24.0
+2.26.2
 
