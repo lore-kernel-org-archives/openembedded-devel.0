@@ -1,237 +1,167 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web12.86.1587556970102843210
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com (EUR05-AM6-obe.outbound.protection.outlook.com [40.107.22.79])
+ by mx.groups.io with SMTP id smtpd.web11.5996.1587573351207246791
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Apr 2020 05:02:54 -0700
+ Wed, 22 Apr 2020 09:35:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.72,414,1580745600"; 
-   d="scan'208";a="89494525"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 22 Apr 2020 20:02:38 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id ADF644BCC882
-	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2020 19:52:02 +0800 (CST)
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Wed, 22 Apr 2020 20:02:38 +0800
-Received: from localhost.localdomain (10.167.225.33) by
- G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP Server
- (TLS) id 14.3.439.0; Wed, 22 Apr 2020 20:02:45 +0800
-From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@cn.fujitsu.com>
-Subject: [oe] [meta-webserver][PATCH v2] webmin: upgrade 1.850 -> 1.941
-Date: Wed, 22 Apr 2020 13:02:28 -0700
-Message-ID: <20200422200228.84533-1-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=fail reason="body hash did not verify" header.i=@vaisala.com header.s=selector2 header.b=QtgEqM1L;
+ spf=pass (domain: vaisala.com, ip: 40.107.22.79, mailfrom: niko.mauno@vaisala.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jFeKst6/cXCDAX3/u5sYAyGGCFSlxGTPf+RnaPEkkMdZm38ZuxADH6J/yHgnfR8l8jG3Ydk0w7+nSXpRHmZNDMtykQnmoQyQyo7VHEY14fuUJPx130TLp35is10JJxr0sWkzEtPCYuV1IeK9dH55uXHVS3L/RXQUjXHUU9wS77XQmYuIDh1c1L/Z9Tmew5UQ0lC6hjgFPhk/MlSiH64K7V098CxmqwxbiGf4Ggt+4ASvDtwgGdTQSbKDQ9Wj4uYSA83MDMdkWl7bPN14T+XJsUqKcvOeDF1949R+HJMRD1GNbt1XjdOB94KxPzZNjZ5WIrw9F5kTgmXT86lELTG5wg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=R4hRmRsDUy97jKMmEELpnhD3tQ7UkwcMgMTmJiecJtA=;
+ b=WIFpvgWD6FK3vwFDWiteXI2Jj0wRfdosAQS/gyt+p/oBtN8+fAtKXoPjLRQO2A/apsb1ESuFX5yWaSJwQhyxpkuZjbfJk3vonWd/Mt62LvwgY2n2ZreqtHROeNP3NKia1tyvh02NMzdAbRQE8hV9k/KmnbLgBDtB7SWvQxLeGGyFCvDDDPldXtd66a8joIlpRYw5WvlJQJqHXY2hoqnqqFK9MQhg3Tex+dr3gbHhUnWDCLIuXi8RRQztLdBGJwTab2Z72Xs9kk4WIGxuERdfmDzCiGTKUjMwgndeHkSM0J5XY67jKFhMA+XvEW3B1zEmcb69lk3LYCfMGFgptNn2mg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
+ dkim=pass header.d=vaisala.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=R4hRmRsDUy97jKMmEELpnhD3tQ7UkwcMgMTmJiecJtA=;
+ b=QtgEqM1L08eMSOxWgLo7BpZKO7bVFmUSaPsDIDoxGFgYXb+i7PgnUGJpeNKioZsmqG83x9sKb2FpeVv2bdjiYEZtH/W63y/PWAI1VmltDX3E8BHY5GdlqKGqo91VSqvR3IJ9opJOCy6S9OXzH6ZB7oeVpHfhTrG9TgIJ40DIhXA=
+Authentication-Results: spf=none (sender IP is )
+ smtp.mailfrom=niko.mauno@vaisala.com; 
+Received: from AM6PR06MB6198.eurprd06.prod.outlook.com (2603:10a6:20b:ff::26)
+ by AM6PR06MB5222.eurprd06.prod.outlook.com (2603:10a6:20b:8d::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2921.29; Wed, 22 Apr
+ 2020 16:35:48 +0000
+Received: from AM6PR06MB6198.eurprd06.prod.outlook.com
+ ([fe80::a1db:6da:abd2:860d]) by AM6PR06MB6198.eurprd06.prod.outlook.com
+ ([fe80::a1db:6da:abd2:860d%5]) with mapi id 15.20.2921.030; Wed, 22 Apr 2020
+ 16:35:48 +0000
+From: "niko.mauno@vaisala.com" <niko.mauno@vaisala.com>
+To: openembedded-devel@lists.openembedded.org
+CC: Niko Mauno <niko.mauno@vaisala.com>
+Subject: [meta-oe][PATCH] zeromq: Fix host-specific path issue with libsodium
+Date: Wed, 22 Apr 2020 16:35:28 +0000
+Message-ID: <20200422163528.85683-1-niko.mauno@vaisala.com>
+X-Mailer: git-send-email 2.20.1
+X-ClientProxiedBy: FRYP281CA0006.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10::16)
+ To AM6PR06MB6198.eurprd06.prod.outlook.com (2603:10a6:20b:ff::26)
+Return-Path: niko.mauno@vaisala.com
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: ADF644BCC882.AD63E
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from hel-eptripper.corp.vaisala.com (193.143.230.131) by FRYP281CA0006.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10::16) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2937.13 via Frontend Transport; Wed, 22 Apr 2020 16:35:48 +0000
+X-Mailer: git-send-email 2.20.1
+X-Originating-IP: [193.143.230.131]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 0c612c21-9e4a-4ef4-bcff-08d7e6db36b0
+X-MS-TrafficTypeDiagnostic: AM6PR06MB5222:|AM6PR06MB5222:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: 
+	<AM6PR06MB522224A568C8DEB636FDEBFB81D20@AM6PR06MB5222.eurprd06.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4125;
+X-Forefront-PRVS: 03818C953D
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR06MB6198.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(10009020)(4636009)(396003)(39850400004)(136003)(366004)(376002)(346002)(316002)(478600001)(8936002)(5660300002)(2906002)(36756003)(186003)(4326008)(86362001)(6916009)(26005)(52116002)(7696005)(956004)(1076003)(2616005)(8676002)(6486002)(66476007)(81156014)(66556008)(6666004)(107886003)(44832011)(16526019)(66946007);DIR:OUT;SFP:1101;
+Received-SPF: None (protection.outlook.com: vaisala.com does not designate
+ permitted sender hosts)
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	TQLfuP/OoFh5FUoZyK6Xjdr1du8B0GShBQEHAPpXdaeMpElAdW3ENzQJBnBxfUtulJao6LEPJufRvvjv5ZjS7tlA/v/gT0k5hmbn/l5kF+8ITQCVTzEugADfs+ckX+1wO4l3tcGOZCR8zZ0cwkaKvHz6T4yYRo+EQ1hET39Y6ujmAfHGWEO1xe/4NMb38fLxoREZzpIUPnC+GxYD41559vAHAJLLXS9Tx2wFXVfUCKUJyYWn1RjbD07lNaRNBD6J+X3zlvrK1LDdMcxbQubQekJxG7FMDBZ5GJVcU1jrvliTEhebfo0WTLXfWiIyHJdFgZhr9NRR9YGa2MhFAg5U+l6ddWyanIgiC4JiOvA5OmqwJYKurso1WI3sBncZAhcNl08szZN+81euYr1bna0Bem5Rh5rDBcOOrizCnw9qpqSxaRYaoNB7+jqoDfT71FLioyhNmPxPZa8vaEUTnQhEFYjRfjCDyxB54YIdX/034ygjivknnGee0aCHgTI7vmJ1wPwdHbiKs/0DJ82inMGI2A==
+X-MS-Exchange-AntiSpam-MessageData: 
+	zIpxYpVA/mbqlLY2zt9PGFBz/8sxmMot2UZFRUQqKZxIYnZnE2GujugpTGh2wh80F7auJ0oHc5sJDyibzqxw5jzne2WSBYxpaY7wHQMuHAMgu8sOHx0eJW9U+D+bOrJtmDSKEsIqNDPuwd59B/OTPuNrnu4oGcQocMLJg4xR/XKyj7Zvp+5xvsBBH0WGdE31raM5MtamczJ2VjDD3+IHkB+fM8nquI6QXRr3MY0YmfqICFC6vuW60c9sCVm13NNTd5TV5wn6ddRzO0jPkf1cTsIgh3vKccphu+A1pKvDHst++oQfbL1WTJvz72a2OncjRMTQcP6j9KgGdMpSRXUrYhreg+BOTGbXfQuu8X1+uZbwbO0yFBvkyg7bZ/ZpM0e0V1ifLt8AZJ58Ad9a5AB1u64+CMCO6yG9CUF2yZOWwuDRep0I0xkpfPav04DoAtXITZkpbPbUstRgXJiz+O4CWd/GUYIrtnmjiLIEdLrnu9wL4L1hsGQ/P2IqT8TBLKc6UZ+WZYg7ELtKEwNBudSQrgD/HvYbSnKjJefXP6RoqvYle6cH7Y3Mk5ywGJFawqsMNz4KgcmkKNdxOKEgpD7J/TPhMn44QGJH80mHxZMnQfe63ebNK6rDwfYY+G+AILPOj3zTwckQfK93pydy4m+tA+K+JGez2OSUfdZNTrkoZV2FKs7u4bKTNYdmIP815WEPUgH0pB8rIFRa6un+bI3yJ4YZedh1fDEqb3BeIpLJ3i5LILq7U/txzo8S3Qz++XC+fBh1ZoJUQLWmJQI546ud4PeRObosuFK0rR+hb9iEVLbmTGBpDgawVqm+3+KL6v6i
+X-OriginatorOrg: vaisala.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0c612c21-9e4a-4ef4-bcff-08d7e6db36b0
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2020 16:35:48.8321
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: l61SWVsU8yXaoO6QcvrME8/elN2rDZSl5s6v6lQDKxinIlut48l1uWbBvGXJW1mxTWc9YIrNpYnJiyvlnN3nxg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR06MB5222
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
+Avoid propagation of full build host specific path into
+WORKDIR/sysroot-destdir/usr/share/cmake/ZeroMQ/ZeroMQTargets.cmake
+when building the recipe as this causes following-like breakage on
+sstate cache consumer hosts (with different build host specific path,
+than the host that populated sstate cache)
 
-refresh the folloing patches:
-disable-version-check.patch
-net-generic.patch
-net-lib.pl.patch
+  ninja: error: '/build/host/specific/path/to/zeromq/4.3.2-r0/recipe-sysroo=
+t/usr/lib/libsodium.so', needed by 'src/FooBar', missing and no known rule =
+to make it
 
--License-Update: add "BSD 3-Clause License" to license file
-
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 ---
- .../webmin/files/disable-version-check.patch  | 24 +++++++----
- .../webmin/files/net-generic.patch            | 43 +++++++++++--------
- .../webmin/files/net-lib.pl.patch             | 21 ++++++---
- .../{webmin_1.850.bb => webmin_1.941.bb}      |  6 +--
- 4 files changed, 58 insertions(+), 36 deletions(-)
- rename meta-webserver/recipes-webadmin/webmin/{webmin_1.850.bb => webmin_1.941.bb} (97%)
+ ...void-host-specific-path-to-libsodium.patch | 39 +++++++++++++++++++
+ .../zeromq/zeromq_4.3.2.bb                    |  1 +
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/zeromq/files/0001-CMakeLis=
+ts-txt-Avoid-host-specific-path-to-libsodium.patch
 
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/disable-version-check.patch b/meta-webserver/recipes-webadmin/webmin/files/disable-version-check.patch
-index 9aad894e0..dc2c0be6e 100644
---- a/meta-webserver/recipes-webadmin/webmin/files/disable-version-check.patch
-+++ b/meta-webserver/recipes-webadmin/webmin/files/disable-version-check.patch
-@@ -6,12 +6,15 @@ the moment.
- Upstream-status: Inappropriate
- 
- Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-+---
-+ webmin/webmin-lib.pl | 44 ++++++++++++++++++++++----------------------
-+ 1 file changed, 22 insertions(+), 22 deletions(-)
- 
--Index: webmin-1.850/webmin/webmin-lib.pl
--===================================================================
----- webmin-1.850.orig/webmin/webmin-lib.pl
--+++ webmin-1.850/webmin/webmin-lib.pl
--@@ -1112,28 +1112,28 @@ my %miniserv;
-+diff --git a/webmin/webmin-lib.pl b/webmin/webmin-lib.pl
-+index dad6cfc0..73821f01 100755
-+--- a/webmin/webmin-lib.pl
-++++ b/webmin/webmin-lib.pl
-+@@ -1130,28 +1130,28 @@ my %miniserv;
-  &load_theme_library();	# So that UI functions work
-  
-  # Need OS upgrade
-@@ -24,12 +27,12 @@ Index: webmin-1.850/webmin/webmin-lib.pl
- -	my ($minor) = split(/\./, $gconfig{'os_version'});
- -	if ($realos{'os_type'} eq $gconfig{'os_type'} &&
- -	    $realminor == $minor) {
---		# Only the minor version number changed - no need to apply
-+-		# Only the minor version number changed - just apply silently
- -		&apply_new_os_version(\%realos);
- -		}
- -	else {
- -		# Large enough change to tell the user
---		push(@notifs, 
-+-		push(@notifs,
- -		    &ui_form_start("$gconfig{'webprefix'}/webmin/fix_os.cgi").
- -		    &text('os_incorrect', $realos{'real_os_type'},
- -		    		          $realos{'real_os_version'})."<p>\n".
-@@ -46,12 +49,12 @@ Index: webmin-1.850/webmin/webmin-lib.pl
- +#	my ($minor) = split(/\./, $gconfig{'os_version'});
- +#	if ($realos{'os_type'} eq $gconfig{'os_type'} &&
- +#	    $realminor == $minor) {
--+#		# Only the minor version number changed - no need to apply
-++#		# Only the minor version number changed - just apply silently
- +#		&apply_new_os_version(\%realos);
- +#		}
- +#	else {
- +#		# Large enough change to tell the user
--+#		push(@notifs, 
-++#		push(@notifs,
- +#		    &ui_form_start("$gconfig{'webprefix'}/webmin/fix_os.cgi").
- +#		    &text('os_incorrect', $realos{'real_os_type'},
- +#		    		          $realos{'real_os_version'})."<p>\n".
-@@ -62,3 +65,6 @@ Index: webmin-1.850/webmin/webmin-lib.pl
-  
-  # Password close to expiry
-  my $warn_days = $config{'warn_days'};
-+-- 
-+2.17.1
+diff --git a/meta-oe/recipes-connectivity/zeromq/files/0001-CMakeLists-txt-=
+Avoid-host-specific-path-to-libsodium.patch b/meta-oe/recipes-connectivity/=
+zeromq/files/0001-CMakeLists-txt-Avoid-host-specific-path-to-libsodium.patc=
+h
+new file mode 100644
+index 000000000..eb3dee4d3
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/zeromq/files/0001-CMakeLists-txt-Avoid-h=
+ost-specific-path-to-libsodium.patch
+@@ -0,0 +1,39 @@
++From: Niko Mauno <niko.mauno@vaisala.com>
++Date: Wed Apr 22 09:00:00 2020 +0300
++Subject: CMakeLists.txt: Avoid host-specific path to libsodium
 +
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch b/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
-index 554939285..26e1239ae 100644
---- a/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
-+++ b/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
-@@ -3,23 +3,32 @@
- # Upstream-status: Not appropriate [config]
- #
- # Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
--Index: webmin-1.850/net/module.info
--===================================================================
----- webmin-1.850.orig/net/module.info
--+++ webmin-1.850/net/module.info
--@@ -14,7 +14,7 @@ desc_ko_KR.UTF-8=ÎÑ§Ìä∏ÏõåÌÅ¨ Íµ¨ÏÑ±
-+---
-+ net/generic-linux-lib.pl | 1 +
-+ net/module.info          | 2 +-
-+ 2 files changed, 2 insertions(+), 1 deletion(-)
-+ create mode 100644 net/generic-linux-lib.pl
++Avoid propagating full build host specific path to generated
++ZeroMQTargets.cmake when building with libsodium, which changes the
++content in generated ZeroMQTargets.cmake files followingly:
 +
-+diff --git a/net/generic-linux-lib.pl b/net/generic-linux-lib.pl
-+new file mode 100644
-+index 00000000..7cc502e6
-+--- /dev/null
-++++ b/net/generic-linux-lib.pl
-+@@ -0,0 +1 @@
-++do 'linux-lib.pl';
-+diff --git a/net/module.info b/net/module.info
-+index b23bf2d5..8e3628e1 100644
-+--- a/net/module.info
-++++ b/net/module.info
-+@@ -1,7 +1,7 @@
-+ version=1.941
-+ longdesc=Configure boot time and active interfaces, DNS, routing and /etc/hosts.
-  name=Networking
-- desc_tr=A Yap˝land˝rmas˝
-- desc_de=Netzwerkkonfiguration
- -os_support=solaris coherent-linux redhat-linux/5.0-* mandrake-linux united-linux suse-linux/6.0-* open-linux unixware turbo-linux/4.0 freebsd/3.2-* openbsd debian-linux/2.2-* cobalt-linux/2.2-* msc-linux gentoo-linux macos/1.5-* trustix-linux slackware-linux/8.0-* openmamba-linux cygwin windows pardus-linux
- +os_support=generic-linux solaris coherent-linux redhat-linux/5.0-* mandrake-linux united-linux suse-linux/6.0-* open-linux unixware turbo-linux/4.0 freebsd/3.2-* openbsd debian-linux/2.2-* cobalt-linux/2.2-* msc-linux gentoo-linux macos/1.5-* trustix-linux slackware-linux/8.0-* openmamba-linux cygwin windows pardus-linux
-- desc_sk=Konfigur·cia siete
-- desc_zh_CN=Õ¯¬Á≈‰÷√
-- risk=low medium high
--Index: webmin-1.850/net/generic-linux-lib.pl
--===================================================================
----- /dev/null
--+++ webmin-1.850/net/generic-linux-lib.pl
--@@ -0,0 +1,2 @@
--+do 'linux-lib.pl';
--+
-+ readonly=1
-+ desc=Network Configuration
-+ category=net
-+-- 
-+2.17.1
++  -INTERFACE_LINK_LIBRARIES "-lpthread;/build/host/specific/path/to/zeromq=
+/4.3.2-r0/recipe-sysroot/usr/lib/libsodium.so;-lrt"
++  +INTERFACE_LINK_LIBRARIES "-lpthread;-lsodium;-lrt"
 +
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/net-lib.pl.patch b/meta-webserver/recipes-webadmin/webmin/files/net-lib.pl.patch
-index bdba5e73f..64105b187 100644
---- a/meta-webserver/recipes-webadmin/webmin/files/net-lib.pl.patch
-+++ b/meta-webserver/recipes-webadmin/webmin/files/net-lib.pl.patch
-@@ -3,17 +3,24 @@ Upstream-Status: Inappropriate [config]
- XXX: need to work out a better fix.
- 
- Signed-off-by: Dexuan Cui <dexuan.cui@intel.com>
-+---
-+ net/net-lib.pl | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
- 
--diff -Nru webmin-1.570.orig//net/net-lib.pl webmin-1.570/net/net-lib.pl
----- webmin-1.570.orig//net/net-lib.pl	2011-10-03 09:01:48.000000000 +0800
--+++ webmin-1.570/net/net-lib.pl	2011-10-28 13:52:56.138873664 +0800
--@@ -21,7 +21,8 @@
-- 	do "$gconfig{'os_type'}-9.1-ALL-lib.pl";
-+diff --git a/net/net-lib.pl b/net/net-lib.pl
-+index affa1d11..5a47b9dd 100755
-+--- a/net/net-lib.pl
-++++ b/net/net-lib.pl
-+@@ -26,7 +26,8 @@ elsif ($gconfig{'os_type'} eq 'debian-linux' && -d "/etc/netplan") {
-+ 	do "netplan-lib.pl";
-  	}
-  else {
- -	do "$gconfig{'os_type'}-lib.pl";
--+	#do "$gconfig{'os_type'}-lib.pl";
--+	do "debian-linux-lib.pl";
-++        #do "$gconfig{'os_type'}-lib.pl";
-+++       do "debian-linux-lib.pl";
-  	}
-  
-  # list_hosts()
-+-- 
-+2.17.1
++This change mitigates an issue stemming from reuse of build artifacts
++where the path to libsodium.so does not match exactly between two
++different build hosts.
 +
-diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb b/meta-webserver/recipes-webadmin/webmin/webmin_1.941.bb
-similarity index 97%
-rename from meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
-rename to meta-webserver/recipes-webadmin/webmin/webmin_1.941.bb
-index 112365d4b..067c7bf6d 100644
---- a/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
-+++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.941.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "Web-based administration interface"
- HOMEPAGE = "http://www.webmin.com"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENCE;md5=0373ac9f611e542ddebe1ec6394afc3c"
-+LIC_FILES_CHKSUM = "file://LICENCE;md5=0a6446108c96d0819d21e40b48109507"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
-            file://setup.sh \
-@@ -21,8 +21,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
-            file://webmin.service \
-             "
- 
--SRC_URI[md5sum] = "cd6ee98f73f9418562197675b952d81b"
--SRC_URI[sha256sum] = "c66caa9e4cb50d5447bc8aceb7989d2284dde060278f404b13e171c7ce1690e1"
-+SRC_URI[md5sum] = "bb8f63068a86a14269726f4d934b8d38"
-+SRC_URI[sha256sum] = "3a19228d92556c7722c6fe56c9d4b73d477a19845b0dae3f018fc7fc0306b29a"
- 
- UPSTREAM_CHECK_URI = "http://www.webmin.com/download.html"
- UPSTREAM_CHECK_REGEX = "webmin-(?P<pver>\d+(\.\d+)+).tar.gz"
--- 
-2.17.1
-
-
++Upstream-Status: Pending
++
++Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
++
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -1210,7 +1210,7 @@
++   target_link_libraries(libzmq ${OPTIONAL_LIBRARIES} ${CMAKE_THREAD_LIBS_=
+INIT})
++=20
++   if(SODIUM_FOUND)
++-    target_link_libraries(libzmq ${SODIUM_LIBRARIES})
+++    target_link_libraries(libzmq -lsodium)
++     # On Solaris, libsodium depends on libssp
++     if(${CMAKE_SYSTEM_NAME} MATCHES "SunOS")
++       target_link_libraries(libzmq ssp)
++@@ -1240,7 +1240,7 @@
++   target_link_libraries(libzmq-static ${OPTIONAL_LIBRARIES} ${CMAKE_THREA=
+D_LIBS_INIT})
++=20
++   if(SODIUM_FOUND)
++-    target_link_libraries(libzmq-static ${SODIUM_LIBRARIES})
+++    target_link_libraries(libzmq-static -lsodium)
++     # On Solaris, libsodium depends on libssp
++     if(${CMAKE_SYSTEM_NAME} MATCHES "SunOS")
++       target_link_libraries(libzmq-static ssp)
+diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.2.bb b/meta-oe/=
+recipes-connectivity/zeromq/zeromq_4.3.2.bb
+index 49215f2cb..02a4c04fd 100644
+--- a/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.2.bb
++++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.2.bb
+@@ -7,6 +7,7 @@ PACKAGECONFIG ??=3D "libsodium"
+ PACKAGECONFIG[libsodium] =3D "-DWITH_LIBSODIUM=3DON,-DWITH_LIBSODIUM=3DOFF=
+, libsodium"
+=20
+ SRC_URI =3D "http://github.com/zeromq/libzmq/releases/download/v${PV}/zero=
+mq-${PV}.tar.gz \
++    file://0001-CMakeLists-txt-Avoid-host-specific-path-to-libsodium.patch=
+ \
+     file://run-ptest \
+ "
+ SRC_URI[md5sum] =3D "2047e917c2cc93505e2579bcba67a573"
+--=20
+2.20.1
 
