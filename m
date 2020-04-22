@@ -1,76 +1,77 @@
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web12.5246.1587597504102914153
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web12.5247.1587597505187923377
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Apr 2020 16:18:24 -0700
+ Wed, 22 Apr 2020 16:18:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=d81Yd/V4;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id h11so1557038plr.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2020 16:18:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=S9jhE9nq;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id 145so1915219pfw.13
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2020 16:18:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=BlWydyJEI8pwr2+8XM9Dc9luBB6XTRKvlggww+ZprLQ=;
-        b=d81Yd/V49wD+U/8GnVXf8iVXPiUpmni3U2fSq0qM6k8kfy5VsSEHH/UfQnb+fAF401
-         TKAEcGVsvj3KRyPMdBYdWHj9Xi2u+unsQVf9SrIkEzuJx8n4X96DExlXcVYxNQF9tKKz
-         O7qLnsW2nz+SI6swl2NlzZX1WMM/8ZMxry9QQwVX9nFnzFFjBkj23MtOr5KJG3gRZJSF
-         I0l0t+a2xbbwD8zWeIZsyYs/ncI/Te+EcTL5meag9/P3qrjx0TOO/1Mm2f7QVIVnc1hm
-         g/BdXemKNFAzezENo6fu9HKwJ1vb0/dE4EMDB3YF4yBxIv9sVYVB2i1FU4BxBlUuZ6lF
-         srEg==
+        bh=zCnE1jeWi8+OwReTYtZKrPArFCR1UlS4LS0YjdK9RG0=;
+        b=S9jhE9nqRi+jDdJ02kQpOUC7iL56BzOl9bqkz0UGcu/4krqhoUUGj36+xujS5ZsfyK
+         wqUYfB7t6H+sJO13gUSNvR+zkBoEEIydYIQPOiM6XDToelU9sGCKKNrQzpOEwNI3Jh27
+         viPgjhei9c6h6n2bvgW57A9vjUrgGPGokuZ6CMVQxIoMcpnhBXqoSazhsl1LDnrIXnMu
+         7gBz3nEWF1GcR/6OsZwB5eTvvOkstN7psKIvRhesCXnQGiQiFmLUTTGuQYvL/zzNgXqC
+         s4hn7uK4hb6F5CGOUkBJ7L7bNxIVZJF1GkJTi2phcYU5ZCI8KuK4H+pI4U8ht05He1WI
+         w08w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=BlWydyJEI8pwr2+8XM9Dc9luBB6XTRKvlggww+ZprLQ=;
-        b=fMU5Mdeyv/Thmyvo3oNvGbp4n8EmAGBX5YB0DraMBmbuzIE2EsJzZS98hYrxh+pzRV
-         Ey6c1mddTM5SB6ydn8LEIO8ZV4uH782CaMGDAQVMbt7LJ9FzhD8JySl95HiFjlpTVQMu
-         u61aTmjnpzpswODb6yrbXEL3wXtC9OaVC/K2U47VvywBUQ3OfV85P2JeFFkQ4NRwed8u
-         9yTZSq9ouC5WPdjjQUUlomnMibOUzsjddGkQrVPmnyt908Mj+NP1dzEUu4zFs3ngCrMr
-         vh1ShxmmFeejkM5b+A78KQ27vpq3Y4R9qz8dOvY79xOudAakEDVAV4XYP4LQu/aQdZ5+
-         SoFA==
-X-Gm-Message-State: AGi0PubzDh4RbGaRMJkPnePjwFURinOyx2sdcKHadiUrVnYtCfMB0AOT
-	Q0loQehbbtQ5b2k65P4HkfQPKYatRpA=
-X-Google-Smtp-Source: APiQypKMl6eH3ypi2ue49NNlcVTiuQd/nQwE4bDc84A6IfiBIcJbP6y+NlXXgkTvCSQFf7KBMTAu2w==
-X-Received: by 2002:a17:90a:7e4:: with SMTP id m91mr1173528pjm.155.1587597503326;
-        Wed, 22 Apr 2020 16:18:23 -0700 (PDT)
+        bh=zCnE1jeWi8+OwReTYtZKrPArFCR1UlS4LS0YjdK9RG0=;
+        b=QiEFHbPseGt/OJz3Ou4M/GGueDzkQn60udfqPVY7h35eWcV94EBd5bjAjZdQgcyM2z
+         5WPyhuxZkdbz0NmFmtNNpjd1+OT08qT+3/3au4x0Pf+Siws3umfQH8/cb7Bmi9GUyUaR
+         aWGp2eNMZcFRXpmr/gwa34oM6pKXU7FIrgBxp5AyoiWyixirig+y+SlfmnbTOYYxFvTk
+         qy0YKmvNA0aZ2DsZ3RozfqOeP6pZFyQF1v8eAx3r2eEmz4QVrvxnDOwUXyCxC8IPbFpD
+         jQ7UAcBYigvmjRwFyZWuq+worNHXAtrYo4fc+BGy7gTlYxhEDkdKDIYEJaDDkfo+kS5E
+         aYzw==
+X-Gm-Message-State: AGi0Pua4B7HXJJx6eLmPkzNhtMTVmduKG439LBm5SIHE3wFX6ScjT5Nl
+	ug6zAahPyzD1HTgGfHCJaxeArIE2b7Y=
+X-Google-Smtp-Source: APiQypLzSAHyW/jEyFrwQiHutm/zSCFd6i1drTQ3gN4oY+QHADO6U2tW4MBsFQiVxNzfnqmZWkRckQ==
+X-Received: by 2002:a63:d709:: with SMTP id d9mr1341846pgg.82.1587597504360;
+        Wed, 22 Apr 2020 16:18:24 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::1a60])
-        by smtp.gmail.com with ESMTPSA id g1sm311213pjt.25.2020.04.22.16.18.22
+        by smtp.gmail.com with ESMTPSA id g1sm311213pjt.25.2020.04.22.16.18.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Apr 2020 16:18:22 -0700 (PDT)
+        Wed, 22 Apr 2020 16:18:23 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/4] breakpad: Disable build on riscv
-Date: Wed, 22 Apr 2020 16:18:17 -0700
-Message-Id: <20200422231819.1029522-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/4] ltrace: Do not build on riscv
+Date: Wed, 22 Apr 2020 16:18:18 -0700
+Message-Id: <20200422231819.1029522-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200422231819.1029522-1-raj.khem@gmail.com>
 References: <20200422231819.1029522-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Unsupported arch as of now
+Does not have riscv port yet
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-devtools/breakpad/breakpad_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-devtools/ltrace/ltrace_git.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-index ff5acbeac2..daf262ed66 100644
---- a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-+++ b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-@@ -49,6 +49,8 @@ S = "${WORKDIR}/git"
- CXXFLAGS += "-D_GNU_SOURCE"
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+index 6b66c25297..5710943d74 100644
+--- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
++++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+@@ -38,6 +38,9 @@ PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
+ PACKAGECONFIG[unwind] = "--with-libunwind,--without-libunwind,libunwind"
+ PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,libselinux"
  
- COMPATIBLE_HOST_powerpc = "null"
 +COMPATIBLE_HOST_riscv64 = "null"
 +COMPATIBLE_HOST_riscv32 = "null"
- 
- do_install_append() {
-         install -d ${D}${includedir}
++
+ do_configure_prepend () {
+     ( cd ${S}; ./autogen.sh )
+ }
 -- 
 2.26.2
 
