@@ -1,171 +1,74 @@
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web11.1082.1587619647062599008
+Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com [66.111.4.28])
+ by mx.groups.io with SMTP id smtpd.web12.1293.1587621701731545665
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Apr 2020 22:27:27 -0700
+ Wed, 22 Apr 2020 23:01:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=fQmImrvJ;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id h11so1892746plr.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2020 22:27:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=SppVAA8TgRyiKoAjiQiWZ8DUod5MQtQ2ODmYIBkgpyo=;
-        b=fQmImrvJWZmZ1/FjTiQ8b3uftHbyKZ4PRjK5IWu+ChImMkrpeas8l8Ls3gUOJmbwEU
-         AM0oxV1p9sFy4lbn+L/50K2aIUjY8PSVXdkRKqML2hF1RvWtCm0N0J9UpheIhL5bOlYB
-         jIlGN7rkWVa7gy97YbCry0aiIL6YmmZwtMREGYIa74/6URSAjtfVX/NlL1YUPCeyvXUw
-         kkesNsXkRVVrKIlAXXLMANp9HjpWydjbb7BN2/CGiMc666BgDygmju/s3oTaAs196rIP
-         5GS8MqK6JdZPTNsmAyI4pRzvwr2bHfZMdY1WzobRhwrONRHf+9uiEchzLb217zvBJ2Kn
-         0bSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=SppVAA8TgRyiKoAjiQiWZ8DUod5MQtQ2ODmYIBkgpyo=;
-        b=skIdm1FhEDxAl0hSQYE3XgklvRuKkhFfPU96+G5uPdcClhDPcFw3RUOopE2wdkgBU7
-         +jZ9Gl5tb7hL6ys9VMs9j/1hy8ODzpfzOBIbjA3rjOot6kks8bnsU3pMdsUImLqEYN6+
-         l+vxRLY7/FuRjKcaEbXIhxywft6areRHC1L5+24KDmiVsWbraNn819Wq5n9wiAKtdnmv
-         KTXsBaVebP5yImta6eP+jc2pY3SW3jJbXp5N2Mcxz/3tfWf0+OyYuKfXp7NHXDfgNvMf
-         vk7YN3Zq2JorWNJU+GYphdXOoFWuyD7dtYsBVKnsUlKM2XbsVhRXW2/8QEerhwHA601U
-         XjJw==
-X-Gm-Message-State: AGi0PuaRWuyPu4BcX8Y6DR8QFyo5L6ti/WCB+6Oz/pmFKZfionzei27j
-	I533+vOqEdGksknu54jF4fKd0gHtz5c=
-X-Google-Smtp-Source: APiQypKUh2qMjaN+yOavFUWT6ySowuuEGgXynoMMwLNbYuvtYnUzaoF9K/5REJRC4m5QU+ugHbppOw==
-X-Received: by 2002:a17:90a:1503:: with SMTP id l3mr2381906pja.87.1587619645950;
-        Wed, 22 Apr 2020 22:27:25 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::1a60])
-        by smtp.gmail.com with ESMTPSA id w69sm1311691pff.168.2020.04.22.22.27.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Apr 2020 22:27:25 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=pass header.i=@alistair23.me header.s=fm3 header.b=iXUE8w9U;
+ spf=none, err=permanent DNS error (domain: alistair23.me, ip: 66.111.4.28, mailfrom: alistair@alistair23.me)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.nyi.internal (Postfix) with ESMTP id E07815C01FC;
+	Thu, 23 Apr 2020 02:01:40 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute3.internal (MEProxy); Thu, 23 Apr 2020 02:01:40 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+	 h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding; s=fm3; bh=7Bl6lwG3d+M+H7f+0d9y53dykA
+	HbucJgR2EO8/+ZFFY=; b=iXUE8w9UQ12DBlfXrsmSlL0WztRsPOAnIH+iIU0wC3
+	j24oRgIO2LgxxYPHynSNDabmIM2jGulebjOpruNPBcNh6rG8ErUMHbiqR4PWI3xn
+	IxBJVQ+vvCAe7GkcYQWaQL23xazpFR2zhrwcQ6rjguKuUo5Mkayl3j5UuQI5j2KT
+	1MJPyLu3+Mgl+apFgfIduc6tEB4iP3m3uDFs7r3f8G/asr92EIL9E6GjFk1ae/dC
+	7hyqDmeQJ3bdbs1nIGgudzxADjN7U6VPZx05GutcqssBM2iW6y5aSC0hAQrl34c0
+	V9b0U05OvYgf1T4dtGxzCwV1+/fDmRhJmcHFWRqmM6JA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-transfer-encoding:date:from
+	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=7Bl6lwG3d+M+H7f+0
+	d9y53dykAHbucJgR2EO8/+ZFFY=; b=IAkZKNqH6wJIddwpnvQU4dBDaWFR9Pw3z
+	tUUQo0PZ+a5zfl0hH7Zu8vWGOSCxpgitpOfjv+gwDtqQuwUxa+WlEdZXQh7xJn2K
+	q3jEhKIK3a8kcFVutvIDkgKa0gvoNdsCpJ+JrHp48aJWwmZZS0lqQgAI5bAgVLJc
+	FBfVtuJW9UKDiQbKLdAXHW1FyUwREJwJesALOlwLrQCQ2V9WmiUEWfWZKSbgN+QE
+	jONJKKsM50yvZBdLcgHsngP2RDyReyX/ijXeG3PQ0t4a0DqnsF/uKfNhqRonvYJw
+	+aKwUStj8ht6rXquuqSeIBlbMlGCs/htzLXSWK7aOnTGuA72/T6SQ==
+X-ME-Sender: <xms:RC-hXndilX3qjGUIZrXbYraPKNpwBBkG_I7e4I-53EBh13kgS0HjIg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduhedrgeekgdeliecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertdertd
+    dtnecuhfhrohhmpeetlhhishhtrghirhcuhfhrrghntghishcuoegrlhhishhtrghirhes
+    rghlihhsthgrihhrvdefrdhmvgeqnecukfhppeejfedrleefrdekgedrvddtkeenucevlh
+    hushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegrlhhishhtrghi
+    rhesrghlihhsthgrihhrvdefrdhmvg
+X-ME-Proxy: <xmx:RC-hXhfM6kd-7fgT00sY7OzXqGKhOxE4K1cXyCd9BZYHYPYP1ByOzw>
+    <xmx:RC-hXrh8NGtkr4Ef5bWWtSu65L2L73tiyQPlqFgs3jfPxTqKMLTLNg>
+    <xmx:RC-hXtRzBWZ3Kox60MlKcKDoI606NchaN2Ecv-HTOd3_Mv9YCn-DmA>
+    <xmx:RC-hXpHNDkZan57bHSViujsFCaySTz_rCZ76EoeEyw9e3xX-nBW3tg>
+Received: from alistair-xps-14z.alistair23.me (c-73-93-84-208.hsd1.ca.comcast.net [73.93.84.208])
+	by mail.messagingengine.com (Postfix) with ESMTPA id D96C73280068;
+	Thu, 23 Apr 2020 02:01:39 -0400 (EDT)
+From: "Alistair" <alistair@alistair23.me>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] recipes,packagegroups: Remove riscv non-building recipes and dependencies
-Date: Wed, 22 Apr 2020 22:27:22 -0700
-Message-Id: <20200423052722.956955-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.26.2
+Cc: Alistair Francis <alistair@alistair23.me>
+Subject: [PATCH] python3-obd: Add missing setuptools RDEPENDS
+Date: Wed, 22 Apr 2020 23:01:36 -0700
+Message-Id: <20200423060136.1369993-1-alistair@alistair23.me>
+X-Mailer: git-send-email 2.26.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-since libunwind is not buildable, it results in glog not being buildable
-and that results in ceres-solver and gperftools opencv needs glob to
-eenable libeigen
-
-Remove these packages from paackagegroup dependencies as well
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Alistair Francis <alistair@alistair23.me>
 ---
- .../packagegroups/packagegroup-meta-oe.bb          | 14 ++++++++++----
- .../ceres-solver/ceres-solver_1.14.0.bb            |  3 +++
- meta-oe/recipes-support/glog/glog_0.3.5.bb         |  3 +++
- .../gperftools/gperftools_2.7.90.bb                |  3 +++
- meta-oe/recipes-support/opencv/opencv_4.1.0.bb     |  3 +++
- 5 files changed, 22 insertions(+), 4 deletions(-)
+ meta-python/recipes-devtools/python/python3-obd_0.7.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index fabb45c88d..650809b625 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -129,8 +129,8 @@ RDEPENDS_packagegroup-meta-oe-devtools_remove_mips64el = "nodejs"
- RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc = "android-tools breakpad uftrace lshw"
- RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc64 = "android-tools uftrace lshw"
- RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc64le = "android-tools uftrace lshw"
--RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv64 = "nodejs uftrace lshw"
--RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv32 = "nodejs uftrace lshw"
-+RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv64 = "breakpad ltrace nodejs uftrace lshw"
-+RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv32 = "breakpad ltrace nodejs uftrace lshw"
+diff --git a/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb b/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb
+index 55131b333..eb8a5a747 100644
+--- a/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb
++++ b/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb
+@@ -7,4 +7,4 @@ SRC_URI[sha256sum] = "8b81ea5896157b6e861af12e173c10b001cb6cca6ebb04db2c01d32681
  
- RDEPENDS_packagegroup-meta-oe-extended ="\
-     byacc cfengine cfengine-masterfiles cmpi-bindings \
-@@ -203,6 +203,9 @@ RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "crash minicoredumper"
- RDEPENDS_packagegroup-meta-oe-kernel_remove_mips64 = "crash"
- RDEPENDS_packagegroup-meta-oe-kernel_remove_mips64el = "crash"
+ inherit setuptools3 pypi
  
-+RDEPENDS_packagegroup-meta-oe-kernel_remove_riscv64 = "crash oprofile"
-+RDEPENDS_packagegroup-meta-oe-kernel_remove_riscv32 = "crash oprofile"
-+
- RDEPENDS_packagegroup-meta-oe-multimedia ="\
-     alsa-oss audiofile cdrkit id3lib \
-     a2jmidid jack libass libburn libcdio libcdio-paranoia \
-@@ -272,8 +275,8 @@ RDEPENDS_packagegroup-meta-oe-support ="\
- 
- RDEPENDS_packagegroup-meta-oe-support_remove_arm ="numactl"
- RDEPENDS_packagegroup-meta-oe-support_remove_mipsarch = "gperftools"
--RDEPENDS_packagegroup-meta-oe-support_remove_riscv64 = "uim"
--RDEPENDS_packagegroup-meta-oe-support_remove_riscv32 = "uim"
-+RDEPENDS_packagegroup-meta-oe-support_remove_riscv64 = "ceres-solver glog gperftools uim"
-+RDEPENDS_packagegroup-meta-oe-support_remove_riscv32 = "ceres-solver glog gperftools uim"
- RDEPENDS_packagegroup-meta-oe-support_remove_powerpc = "ssiapi"
- 
- RDEPENDS_packagegroup-meta-oe-support-egl ="\
-@@ -304,6 +307,9 @@ RDEPENDS_packagegroup-meta-oe-ptest-packages = "\
-     libee-ptest \
-     poco-ptest \
-     "
-+RDEPENDS_packagegroup-meta-oe-ptest-packages_remove_riscv64 = "oprofile-ptest"
-+RDEPENDS_packagegroup-meta-oe-ptest-packages_remove_riscv32 = "oprofile-ptest"
-+
- RDEPENDS_packagegroup-meta-oe-ptest-packages_append_x86 = "\
-     mcelog-ptest \
- "
-diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.0.bb b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.0.bb
-index ac463038aa..651c110f75 100644
---- a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.0.bb
-+++ b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.0.bb
-@@ -13,6 +13,9 @@ S = "${WORKDIR}/git"
- 
- inherit cmake
- 
-+COMPATIBLE_HOST_riscv64 = "null"
-+COMPATIBLE_HOST_riscv32 = "null"
-+
- # We don't want path to eigen3 in ceres-solver RSS to be
- # used by components which use CeresConfig.cmake from their
- # own RSS
-diff --git a/meta-oe/recipes-support/glog/glog_0.3.5.bb b/meta-oe/recipes-support/glog/glog_0.3.5.bb
-index 70eef72057..3b416009a2 100644
---- a/meta-oe/recipes-support/glog/glog_0.3.5.bb
-+++ b/meta-oe/recipes-support/glog/glog_0.3.5.bb
-@@ -21,6 +21,9 @@ S = "${WORKDIR}/git"
- 
- inherit cmake
- 
-+COMPATIBLE_HOST_riscv64 = "null"
-+COMPATIBLE_HOST_riscv32 = "null"
-+
- RDEPENDS_${PN} += "libunwind"
- 
- EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
-diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.7.90.bb b/meta-oe/recipes-support/gperftools/gperftools_2.7.90.bb
-index 9dfb0d974f..dab34f2b04 100644
---- a/meta-oe/recipes-support/gperftools/gperftools_2.7.90.bb
-+++ b/meta-oe/recipes-support/gperftools/gperftools_2.7.90.bb
-@@ -20,6 +20,9 @@ S = "${WORKDIR}/git"
- #   do_page_fault(): sending SIGSEGV to ls for invalid read access from 00000008
- #   Segmentation fault (core dumped)
- COMPATIBLE_HOST_mipsarch = "null"
-+COMPATIBLE_HOST_riscv64 = "null"
-+COMPATIBLE_HOST_riscv32 = "null"
-+
- # Disable thumb1
- # {standard input}: Assembler messages:
- # {standard input}:434: Error: lo register required -- `ldr pc,[sp]'
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-index d781da6005..6fd7bf85ff 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-@@ -100,6 +100,9 @@ PACKAGECONFIG ??= "gapi python3 eigen jpeg png tiff v4l libv4l gstreamer samples
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
-     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libav", "", d)}"
- 
-+PACKAGECONFIG_remove_riscv64 = "eigen"
-+PACKAGECONFIG_remove_riscv32 = "eigen"
-+
- PACKAGECONFIG[gapi] = "-DWITH_ADE=ON -Dade_DIR=${STAGING_LIBDIR},-DWITH_ADE=OFF,ade"
- PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libclamdblas,"
- PACKAGECONFIG[amdfft] = "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft,"
+-RDEPENDS_${PN} = "${PYTHON_PN}-pyserial ${PYTHON_PN}-pint"
++RDEPENDS_${PN} += "${PYTHON_PN}-pyserial ${PYTHON_PN}-pint ${PYTHON_PN}-setuptools"
 -- 
-2.26.2
+2.26.0
 
