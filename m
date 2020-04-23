@@ -1,71 +1,97 @@
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com [209.85.214.193])
- by mx.groups.io with SMTP id smtpd.web10.1914.1587682453775779180
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com [209.85.128.68])
+ by mx.groups.io with SMTP id smtpd.web11.3020.1587686142142534857
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Apr 2020 15:54:13 -0700
+ Thu, 23 Apr 2020 16:55:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=untsaTLY;
- spf=pass (domain: gmail.com, ip: 209.85.214.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f193.google.com with SMTP id c21so2167172plz.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2020 15:54:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=FbHlelCx;
+ spf=pass (domain: gmail.com, ip: 209.85.128.68, mailfrom: andrea.adami@gmail.com)
+Received: by mail-wm1-f68.google.com with SMTP id v8so8675890wma.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2020 16:55:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=LMAwybacUmdGe6DIah6eF7zzqjjcTuFLX8rQWUYi4Ts=;
-        b=untsaTLY9pQILCDQ5pT3wnbAqqxQ4Xln92IzLMXP0/b13Yw3po0HXMPGnisBhiWynb
-         EV7LH5qNpZEz+99ZAflm8L9xZj10Ej3/6rCKfVHzCu0nXtP50k+AXOhHnK3zcGSuwp2c
-         f9iLywGwSL2GdnbbfApdyMsGGrZCtcp08t8T9cEpjfEjNNdQbm/BCNYb0KHiboq3mC0p
-         hv5o+YNMVAtSOTnDxXuhxi33DR/QYnFV7f9v47N9GMNKBPDBHcjcu3O4SwSC5zP5R1Tg
-         doF5q8vBkfWgeTgKyPXomtkQ/mAZ6qQoIBWiXBD7VBSz2w0xy5p9dgbqvuPWYbAUo6H4
-         snkw==
+        h=from:to:cc:subject:date:message-id;
+        bh=6jbcZaEWVuUoUV+lgew+aapeKr4YZ+j+I7efz/2FoqI=;
+        b=FbHlelCxytJLZLdLH9mqan1c6e6M8wYRfw7R3DbpRWScyVlrIvkcp1ldwFf5KpWrRs
+         cdlc3HSitXG6N3P/zTtwFRur3vEKKISKyP1KI89rdvpcYlsJVPhnSpGsJ5AQQG4htvTN
+         oW3aN21PnrmQGVJVIVK3kOXl7irUICtOd30d35xNcMq7VzqrqwSMK09S7ed5rbeZ4x3j
+         XchfJTlXrbwhCNEimSD/+8DbjbNPgN/p4h4RnCpxebyRhsXEIZiajkQWxVITWFCmqn6B
+         0H0GOO7i4zIJUHf8MiPxB0nE98DeWzeMeg+IMBp4J7Jdw6MAFqOxz6+F8t604VXXzI7G
+         UaTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=LMAwybacUmdGe6DIah6eF7zzqjjcTuFLX8rQWUYi4Ts=;
-        b=MojKmyShJo8+7hibNt34h2AnY/JYutmJdNvdQVkjTXpmr1iFhhQDz+UJnemMl4tVbI
-         D+1gQQSNgoAvwhN0lI0ke5VWHf76jY/BEtO9UjWdgt5PDgPfxfqANHr4Zcf5ojZ1HyRs
-         zOSyVStuykvrxNDxUtXtr+s5IEuSttS0dG62HqyEq0nmwHdSHR8FYqk4xWK+VZjxj7bE
-         XCOwNGbNI8gY/CG7dAXjFNBuL2HyeojoEpYHltdd/xFONe0ijxLwrAhepTRgYspeTuog
-         tsQpLjB1nsoeL8p87RYnGxq+IVe9uKRaTWzSCZcbye6yhMrWQQGZruKWvLTCGPRKKq5h
-         tZ8g==
-X-Gm-Message-State: AGi0PubKOjQMicmSHJBDeCPkByz1ZM5J8i0rc06pMDMOoMeJf1HWt6eO
-	Y7ufhMkuCWrkkiMuwZ+zItlI/pVuhB4=
-X-Google-Smtp-Source: APiQypJB1AuylR/bciwnVCs+NgItmtrI/bY7Ik3jyqz512uzdE7R6k0RjqaUQlZ7OIUUf7ahmB3o5g==
-X-Received: by 2002:a17:90a:5b:: with SMTP id 27mr3299743pjb.190.1587682452851;
-        Thu, 23 Apr 2020 15:54:12 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::1a60])
-        by smtp.gmail.com with ESMTPSA id 128sm3654153pfx.187.2020.04.23.15.54.11
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=6jbcZaEWVuUoUV+lgew+aapeKr4YZ+j+I7efz/2FoqI=;
+        b=Vt17DiNGs/a3gGO30Cdrmfnr/RpuRz4VTf3MEBPm5O+B1w+gzJzOp20Bzc5EwkLAq+
+         jXhlhZPwk/1skpvzoROHraK74WAxFqBb0+mZMYZxMLwdLgVvnp/kTRBjz+wdUpcyYtr8
+         I2q8LhJ+d4G+O2xSd19n8XsUa1SVNkt5BQBUFN1hklSj3PN9ou4wV5W0n81i3JXmlWMa
+         cFcOSQq7GX+QR7YnuNRIxo49QWtWHBFjKOzQzn+UGIq73qnUPOA+ViHrWaTRdI8XHfwj
+         5Y/zt4T7HHsKp5aDedJU7nJs7BWKEZ6cIyWVSRhgwL9HLeoXVQ61u7mOhPkeoyULtjVi
+         T5Mw==
+X-Gm-Message-State: AGi0PuYFALiyrTsp9H4snfbhdvq8ndkpNvchzpVKVaf9AmYFN5kVp+ds
+	YHeZrk7u5W/d8/Az9iLw0d8AYu9H
+X-Google-Smtp-Source: APiQypLTeuzIP7TiT6/XxWfj1Ja0k5VlgSG5frtoiAzdQOEiShYqGBtKhOtlek38EgGqpQ7lPPkhpA==
+X-Received: by 2002:a05:600c:22d3:: with SMTP id 19mr7093184wmg.110.1587686140054;
+        Thu, 23 Apr 2020 16:55:40 -0700 (PDT)
+Return-Path: <andrea.adami@gmail.com>
+Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it (host84-186-dynamic.249-95-r.retail.telecomitalia.it. [95.249.186.84])
+        by smtp.googlemail.com with ESMTPSA id t20sm595526wmi.2.2020.04.23.16.55.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Apr 2020 15:54:12 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Thu, 23 Apr 2020 16:55:39 -0700 (PDT)
+From: "Andrea Adami" <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] rsyslog: Disable valgrind dependency for riscv32
-Date: Thu, 23 Apr 2020 15:54:09 -0700
-Message-Id: <20200423225409.3180706-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.26.2
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Andrea Adami <andrea.adami@gmail.com>
+Subject: [meta-initramfs][PATCH] meta-initramfs-image: remove klibc utilities
+Date: Fri, 24 Apr 2020 01:55:35 +0200
+Message-Id: <20200423235535.6706-1-andrea.adami@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+klibc utils have no update-alternatives because these live ideally alone
+in th einitramfs. This image is not minimal having busybox, linux-utils,
+coreutils so to resolve the conflict we just remove the shared klibc utils
+and replace the klibc kexec and vmcore-dmesg.
+
+Finally, remove EXCLUDE_FROM_WORLD.
+
+Fix:
+ERROR: meta-initramfs-image-1.0-r0 do_rootfs:
+Postinstall scriptlets of ['busybox', 'util-linux-umount', 'util-linux-dmesg',
+ 'coreutils', 'util-linux-mount', 'cpio', 'util-linux-kill',
+ 'util-linux-losetup'] have failed.
+
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-oe/recipes-extended/rsyslog/rsyslog_8.2002.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../packagegroups/packagegroup-meta-initramfs.bb | 16 ++--------------
+ 1 file changed, 2 insertions(+), 14 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2002.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2002.0.bb
-index 6a90614bfd..8605145ebc 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2002.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2002.0.bb
-@@ -191,6 +191,7 @@ VALGRIND_libc-musl_powerpc64le = ''
+diff --git a/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
+index bfede5a74..dc4928b5a 100644
+--- a/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
++++ b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
+@@ -15,22 +15,10 @@ RDEPENDS_packagegroup-meta-initramfs = "\
+ "
  
- # RISC-V support for valgrind is not there yet
- VALGRIND_riscv64 = ""
-+VALGRIND_riscv32 = ""
+ RDEPENDS_packagegroup-meta-initramfs-devtools = "\
+-    libklibc  dracut \
+-    klibc-utils-cat klibc-utils-losetup klibc-utils-readlink klibc-utils-chroot \
+-    klibc-utils-ls klibc-utils-reboot klibc-utils-cpio klibc-utils-minips \
+-    klibc-utils-resume klibc-utils-dd klibc-utils-mkdir klibc-utils-run-init \
+-    klibc-utils-dmesg klibc-utils-mkfifo klibc-utils-sh.shared klibc-utils-false \
+-    klibc-utils-mknod klibc-utils-sleep klibc-utils-fstype klibc-utils-mount \
+-    klibc-utils-sync klibc-utils-halt klibc-utils-mv klibc-utils-true klibc-utils-ipconfig \
+-    klibc-utils-nfsmount klibc-utils-umount klibc-utils-kill klibc-utils-nuke klibc-utils-uname \
+-    mtdinfo-klibc ubiattach-klibc ubiblock-klibc ubicrc32-klibc ubidetach-klibc \
+-    ubiformat-klibc ubimkvol-klibc ubinfo-klibc ubinize-klibc ubirename-klibc \
+-    ubirmvol-klibc ubirsvol-klibc ubiupdatevol-klibc \
++    dracut \
+     ${@bb.utils.contains_any("TRANSLATED_TARGET_ARCH", "i586 x86-64", "grubby", "", d)} \
+     "
  
- RDEPENDS_${PN}-ptest += "\
-   make diffutils gzip bash gawk coreutils procps \
+ RDEPENDS_packagegroup-meta-initramfs-kernel = "\
+-    kexec-klibc vmcore-dmesg-klibc \
++    kexec vmcore-dmesg \
+     "
+-
+-EXCLUDE_FROM_WORLD = "1"
 -- 
-2.26.2
+2.17.1
 
