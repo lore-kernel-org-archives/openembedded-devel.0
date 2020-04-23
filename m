@@ -1,60 +1,71 @@
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
- by mx.groups.io with SMTP id smtpd.web11.2873.1587672278673024360
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com [209.85.214.193])
+ by mx.groups.io with SMTP id smtpd.web10.1914.1587682453775779180
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Apr 2020 13:04:39 -0700
+ Thu, 23 Apr 2020 15:54:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: siemens.com, ip: 192.35.17.2, mailfrom: martin.balik@siemens.com)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id 03NK4aru016320
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2020 22:04:36 +0200
-Received: from dev.vm7.ccp.siemens.com ([167.87.48.26])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id 03NK4atn007015;
-	Thu, 23 Apr 2020 22:04:36 +0200
-Received: from mail1.siemens.de (localhost [127.0.0.1])
-	by dev.vm7.ccp.siemens.com (Postfix) with ESMTP id B3DE55D77E3;
-	Thu, 23 Apr 2020 22:04:35 +0200 (CEST)
-From: "Martin Balik" <martin.balik@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=untsaTLY;
+ spf=pass (domain: gmail.com, ip: 209.85.214.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f193.google.com with SMTP id c21so2167172plz.4
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2020 15:54:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=LMAwybacUmdGe6DIah6eF7zzqjjcTuFLX8rQWUYi4Ts=;
+        b=untsaTLY9pQILCDQ5pT3wnbAqqxQ4Xln92IzLMXP0/b13Yw3po0HXMPGnisBhiWynb
+         EV7LH5qNpZEz+99ZAflm8L9xZj10Ej3/6rCKfVHzCu0nXtP50k+AXOhHnK3zcGSuwp2c
+         f9iLywGwSL2GdnbbfApdyMsGGrZCtcp08t8T9cEpjfEjNNdQbm/BCNYb0KHiboq3mC0p
+         hv5o+YNMVAtSOTnDxXuhxi33DR/QYnFV7f9v47N9GMNKBPDBHcjcu3O4SwSC5zP5R1Tg
+         doF5q8vBkfWgeTgKyPXomtkQ/mAZ6qQoIBWiXBD7VBSz2w0xy5p9dgbqvuPWYbAUo6H4
+         snkw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=LMAwybacUmdGe6DIah6eF7zzqjjcTuFLX8rQWUYi4Ts=;
+        b=MojKmyShJo8+7hibNt34h2AnY/JYutmJdNvdQVkjTXpmr1iFhhQDz+UJnemMl4tVbI
+         D+1gQQSNgoAvwhN0lI0ke5VWHf76jY/BEtO9UjWdgt5PDgPfxfqANHr4Zcf5ojZ1HyRs
+         zOSyVStuykvrxNDxUtXtr+s5IEuSttS0dG62HqyEq0nmwHdSHR8FYqk4xWK+VZjxj7bE
+         XCOwNGbNI8gY/CG7dAXjFNBuL2HyeojoEpYHltdd/xFONe0ijxLwrAhepTRgYspeTuog
+         tsQpLjB1nsoeL8p87RYnGxq+IVe9uKRaTWzSCZcbye6yhMrWQQGZruKWvLTCGPRKKq5h
+         tZ8g==
+X-Gm-Message-State: AGi0PubKOjQMicmSHJBDeCPkByz1ZM5J8i0rc06pMDMOoMeJf1HWt6eO
+	Y7ufhMkuCWrkkiMuwZ+zItlI/pVuhB4=
+X-Google-Smtp-Source: APiQypJB1AuylR/bciwnVCs+NgItmtrI/bY7Ik3jyqz512uzdE7R6k0RjqaUQlZ7OIUUf7ahmB3o5g==
+X-Received: by 2002:a17:90a:5b:: with SMTP id 27mr3299743pjb.190.1587682452851;
+        Thu, 23 Apr 2020 15:54:12 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::1a60])
+        by smtp.gmail.com with ESMTPSA id 128sm3654153pfx.187.2020.04.23.15.54.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 23 Apr 2020 15:54:12 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Balik <martin.balik@siemens.com>
-Subject: [oe][meta-oe][PATCH] libwebsockets: upgrade 3.2.2 -> 4.0.1
-Date: Thu, 23 Apr 2020 22:04:19 +0200
-Message-Id: <20200423200418.10856-1-martin.balik@siemens.com>
-X-Mailer: git-send-email 2.20.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] rsyslog: Disable valgrind dependency for riscv32
+Date: Thu, 23 Apr 2020 15:54:09 -0700
+Message-Id: <20200423225409.3180706-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Martin Balik <martin.balik@siemens.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{libwebsockets_3.2.2.bb => libwebsockets_4.0.1.bb}    | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-connectivity/libwebsockets/{libwebsockets_3.2.2.bb => libwebsockets_4.0.1.bb} (86%)
+ meta-oe/recipes-extended/rsyslog/rsyslog_8.2002.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.2.2.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.1.bb
-similarity index 86%
-rename from meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.2.2.bb
-rename to meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.1.bb
-index 32ba51db0..0d1f57ab8 100644
---- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.2.2.bb
-+++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.1.bb
-@@ -1,13 +1,13 @@
- SUMMARY = "Canonical libwebsockets.org websocket library"
- HOMEPAGE = "https://libwebsockets.org/"
--LICENSE = "LGPL-2.1"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=4ce87f3facb6f911c142c8bef9bfb380"
-+LICENSE = "MIT & Zlib & BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8c47b078124308a4e1354e8d59f606b7"
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2002.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2002.0.bb
+index 6a90614bfd..8605145ebc 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2002.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2002.0.bb
+@@ -191,6 +191,7 @@ VALGRIND_libc-musl_powerpc64le = ''
  
- DEPENDS = "zlib"
+ # RISC-V support for valgrind is not there yet
+ VALGRIND_riscv64 = ""
++VALGRIND_riscv32 = ""
  
- S = "${WORKDIR}/git"
--SRCREV = "d880fe233020b74e058cbca95b5fb67823bbf258"
--SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v3.2-stable"
-+SRCREV = "6eb39388f43f6e2a27f0efcbf8cb2391e38824e9"
-+SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.0-stable"
- 
- UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ RDEPENDS_${PN}-ptest += "\
+   make diffutils gzip bash gawk coreutils procps \
 -- 
-2.20.1
+2.26.2
 
