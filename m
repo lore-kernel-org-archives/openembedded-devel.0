@@ -1,88 +1,124 @@
-Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com [66.111.4.25])
- by mx.groups.io with SMTP id smtpd.web11.891.1587709895261510793
+Received: from EUR02-AM5-obe.outbound.protection.outlook.com (EUR02-AM5-obe.outbound.protection.outlook.com [40.107.0.75])
+ by mx.groups.io with SMTP id smtpd.web12.1089.1587711370682902602
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Apr 2020 23:31:35 -0700
+ Thu, 23 Apr 2020 23:56:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@alistair23.me header.s=fm3 header.b=pan5znAe;
- spf=none, err=permanent DNS error (domain: alistair23.me, ip: 66.111.4.25, mailfrom: alistair@alistair23.me)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-	by mailout.nyi.internal (Postfix) with ESMTP id B2F655C0A73;
-	Fri, 24 Apr 2020 02:31:33 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute3.internal (MEProxy); Fri, 24 Apr 2020 02:31:33 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding; s=fm3; bh=0pjAJFISka/9rD2r6xwFtn6O+O
-	7IqHisVfehDNYGlmw=; b=pan5znAeY1dJdkpR+SdWlzTtwUHmSBZnJqHu7mgIgp
-	oaAZnzorl2ndfagPKqLZelZF9zxbq06CLK/kIY9Q98j6ExmxEdRI32mWpbN0y6Sw
-	XCPETlzFcTkniJji+ccq1U0taBnDRudo/RPYfOqdLb1gA7xje3PmIiiZY2VjySej
-	Z7q0+lN551ezTnu/3lNbsEUGodIt8+of3cLyabJkzc3MdjJgwTb2laU1vdaVDkX9
-	780KcxkzH1+v8NWmaIZKrUEtVYJfmI1f7cFs2N1IDfCFxm6npkMkqh7Sg93CLU5a
-	sL1JZY63eP4OAQ+70zwj+KGkz2EPwhudX4toOdaB6gVQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-transfer-encoding:date:from
-	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=0pjAJFISka/9rD2r6
-	xwFtn6O+O7IqHisVfehDNYGlmw=; b=gpN1GAR5HxWYwVnUL1rHkPwIC63x2jyss
-	BXCJHJ4VnqpijPIwVOYAhlqqc56rg+b505Dy+AwAx979z3bQsCNjk7jaT03WTHTd
-	b7k/sEc9ikavUBPg4acvy4ADn7niwmKt3FEds6kAru30ZK/H/dLlE0IdxGEaXaWV
-	9s9vNiOqIu9EjYqhX5Cal4PVGvkCHKiIAybt00d8pfHmWB7IIhFanTZyVR4H7PDM
-	ISy98UEEsf57QkXupUoh4RoV0nSuI4yLLFjenK6WgF+8s8ZX4Y9cWlH7fpOOU00m
-	CxpX/OJvLMyuMiF/NNR94/yz3INZ8EEHQuOsEHwQd7TOcvj5Na2Kw==
-X-ME-Sender: <xms:xYeiXiBYYMf3pQzBWExEnUOLEo2Qk03BJd4reRA_oocENMrjxKzofQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduhedrhedtgdellecutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertdertd
-    dtnecuhfhrohhmpeetlhhishhtrghirhcuhfhrrghntghishcuoegrlhhishhtrghirhes
-    rghlihhsthgrihhrvdefrdhmvgeqnecuffhomhgrihhnpehgihhthhhusgdrtghomhenuc
-    fkphepjeefrdelfedrkeegrddvtdeknecuvehluhhsthgvrhfuihiivgeptdenucfrrghr
-    rghmpehmrghilhhfrhhomheprghlihhsthgrihhrsegrlhhishhtrghirhdvfedrmhgv
-X-ME-Proxy: <xmx:xYeiXgw71xEoXiqB0xLD_ZUDBoE2M2pXNjV5RHgCdqbd9YqReY6xxg>
-    <xmx:xYeiXgnZa5C0sQ1CdZDNCNqXSRBIkFYSTH0Hi3filATnlO8dNqoP3w>
-    <xmx:xYeiXlGINFR36OJ-bgXLOpJi8buufpG--GX1j96fcor7bPI_-6p10g>
-    <xmx:xYeiXt6MRTD7uMHfppEY6pTEIzSqN9S7JygEKbp5Fd59st6slKvxEg>
-Received: from alistair-xps-14z.alistair23.me (c-73-93-84-208.hsd1.ca.comcast.net [73.93.84.208])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 1DB31328005D;
-	Fri, 24 Apr 2020 02:31:33 -0400 (EDT)
-From: "Alistair" <alistair@alistair23.me>
+ dkim=fail reason="body hash did not verify" header.i=@nxp.com header.s=selector2 header.b=iCrddwEZ;
+ spf=pass (domain: nxp.com, ip: 40.107.0.75, mailfrom: ting.liu@nxp.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=D2xQoLOdiR/3BD5RFxRwtCXMjhbj7qgAigx9jctb4KndBI4+2Ifp54/ToWFvQfyYNiJgoXm7P39bFMavOld1LpEqt3sOTc+SzPvXtqjsnYIC59vAwtcntgK9RupVZn4kPJUBBMTbz/zJxYho37ci18rvsDJqlSomw6jwCuZ9BafLgPmgoLJT4fHxc3wG0m7g8Up98YJkaDTDCvjgChFtJNa+yIeGU+R8KQlpbmG8SiOUfOg0ZFwwcTP7G+PMY58qIcm9U4hXrsIsgMFEepIR26HVDXRE5layQ3Ec4mH+ZWRKbk7Ntg8TNBxkbe4sHexvOQ6MyiDPy26lucfEK/Kjfg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=D+3D0wUafnQEXzfmXt8MK9XYGXUWj+O4I3GV8CqOWyc=;
+ b=T0cvzkG2qfF1nrUOTVVB8447i3MNqsDQnKysDekAZ/vBaWK2smOLRn/DJKpkRgv3EEef9Iz/auF8ytRYlhFg0R4rcN8aL3nAaYcyHbwMBUIOxk01twEQw+keAUnmfXR08ZZ3xKmEBkNGLa61IQxM26wVoVVNrkxKONR3ip9a+uzosrv8XMvL6vmu6Qj2y4cIbcIBMj7inJShKYYCANxMCdRy7BoHNNoip2EPyvLTFGIpHBfP1eIJQ0b5ISEyhtDj3uquLZEZzlO7Pv6O57MwSH6pseH2boeO0SKTQ49DdvyLKNlpYI57Ajldg1jCFDvMBW4iN5haWEeuaWis4vzElg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=D+3D0wUafnQEXzfmXt8MK9XYGXUWj+O4I3GV8CqOWyc=;
+ b=iCrddwEZzX+BIjh79T9tKNr5tHikbZHHgvuqdFBM009KV1xRFthOVD5pqOVDQfozZrVzdULnQQX9ydm8NA1zx8SICqzI2jkVEUZUlw5NY303/ATtg79ECL4M0FYR4OwX5pqsHKpuLk5pIgJQ6SDcO2IRMLn2KsiBJ0YFp9NeqDg=
+Authentication-Results: spf=none (sender IP is )
+ smtp.mailfrom=ting.liu@nxp.com; 
+Received: from VI1PR0402MB3341.eurprd04.prod.outlook.com (2603:10a6:803:f::11)
+ by VI1PR0402MB3712.eurprd04.prod.outlook.com (2603:10a6:803:1c::25) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2921.29; Fri, 24 Apr
+ 2020 06:56:08 +0000
+Received: from VI1PR0402MB3341.eurprd04.prod.outlook.com
+ ([fe80::3832:d1ae:f6d6:aa1a]) by VI1PR0402MB3341.eurprd04.prod.outlook.com
+ ([fe80::3832:d1ae:f6d6:aa1a%4]) with mapi id 15.20.2937.020; Fri, 24 Apr 2020
+ 06:56:08 +0000
+From: "Ting Liu" <ting.liu@nxp.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alistair Francis <alistair@alistair23.me>
-Subject: [PATCH] libgit2: Update to v1.0.0
-Date: Thu, 23 Apr 2020 23:31:30 -0700
-Message-Id: <20200424063130.386675-1-alistair@alistair23.me>
-X-Mailer: git-send-email 2.26.0
+CC: Ting Liu <ting.liu@nxp.com>
+Subject: [oe] [meta-oe][PATCH] cjson: add recipe for v1.7.13
+Date: Fri, 24 Apr 2020 14:55:45 +0800
+Message-ID: <20200424065545.28012-1-ting.liu@nxp.com>
+X-Mailer: git-send-email 2.23.0
+X-Originating-IP: [119.31.174.73]
+X-ClientProxiedBy: SG2PR0401CA0016.apcprd04.prod.outlook.com
+ (2603:1096:3:1::26) To VI1PR0402MB3341.eurprd04.prod.outlook.com
+ (2603:10a6:803:f::11)
+Return-Path: ting.liu@nxp.com
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: 8e5254c4-58cf-4449-0570-08d7e81c905e
+X-MS-TrafficTypeDiagnostic: VI1PR0402MB3712:|VI1PR0402MB3712:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: 
+	<VI1PR0402MB37120D3F49B5D68D0A53C2BD99D00@VI1PR0402MB3712.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:663;
+X-Forefront-PRVS: 03838E948C
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR0402MB3341.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(10009020)(4636009)(366004)(346002)(376002)(396003)(136003)(39860400002)(66476007)(8676002)(316002)(6916009)(8936002)(81156014)(52116002)(36756003)(6666004)(5660300002)(6506007)(6486002)(66946007)(478600001)(4326008)(966005)(86362001)(66556008)(2616005)(1076003)(9686003)(2906002)(6512007)(186003)(26005);DIR:OUT;SFP:1101;
+Received-SPF: None (protection.outlook.com: nxp.com does not designate
+ permitted sender hosts)
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	ydYp/aJm3O/DHVeHqzHGfvtHvd/0s86Yu8eT2BOGfbjKUT6InNTD+zzcYSiTgxbqIjx0UzBuTLh3byOBdmfkTmjNTl5rWrprIgtMxNtKmn5A7bah+VtbpWq7lKUquR3QMw6gRDayrsLkaLfzp0NTxaWFWiokdp5SLOd6ZsdND6sETLeOFrwfCLNa9WfdptdU5/F76omTKJLUI3l5CbWU+el63G2F+6cEY9uvysFq26JNK1x8u6ISZm17NnZdQcck/rWtBzOrRhYL94e/tDfq3GDWYmbSCva82+3co1ySMZILcJyF98NSqI6Urh2k0ElbR4Qdmf244QfVJC53YHv8CS9e0Ljb9te4uYSKPtVLUOhaQPzTMvpGt52+2+xNgJdbMmurRU/lCHOK0f6LRxvFKKBpLaI4/Mis4X6IWN4BHonl/mcTPZBp7bW0n2B5FeOc6bjurb5wYrfB2BmpOtESfKYdhfLKcFpt4WSo6sGMOvgjFLZ0V0nE7xPZC4wkSXOrETpr0EXiNyIHjSm1HMuucg==
+X-MS-Exchange-AntiSpam-MessageData: 
+	NhRi4K0+7jzo+rRYRGufy7zoCWQD5obyoHHMeeUUHrR4MQvL3xUQpTcTKsFkdAxGQ2rty34h2v1oyU9vxIeDFZ8tCkUiWdI9Zpg0mFnpDvET7ElhdQ2DBiUe3FNlxQT7qChlRnG1A+Rxn8LkG6dr2g==
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8e5254c4-58cf-4449-0570-08d7e81c905e
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2020 06:56:07.8641
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: az7nfLDGu6ggee+XIDa4M/xyP7v8idPi8ydawYaPA7TTnXcalD1MYgkC8vOSzkW6qzzTQ4KqzBWsM8CxXZ2CDw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0402MB3712
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-Signed-off-by: Alistair Francis <alistair@alistair23.me>
+From: Ting Liu <ting.liu@nxp.com>
+
+cJSON aims to be the dumbest possible parser that you can get your
+job done with. It's a single file of C, and a single header file.
+
+Homepage: https://github.com/DaveGamble/cJSON
+
+Signed-off-by: Ting Liu <ting.liu@nxp.com>
 ---
- .../libgit2/{libgit2_0.28.4.bb => libgit2_1.0.0.bb}         | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/libgit2/{libgit2_0.28.4.bb => libgit2_1.0.0.bb} (64%)
+ meta-oe/recipes-devtools/cjson/cjson_git.bb | 23 +++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/cjson/cjson_git.bb
 
-diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb b/meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
-similarity index 64%
-rename from meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb
-rename to meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
-index 9b9c19104..fd26a0fe9 100644
---- a/meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb
-+++ b/meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
-@@ -1,12 +1,12 @@
- SUMMARY = "the Git linkable library"
- HOMEPAGE = "http://libgit2.github.com/"
- LICENSE = "GPL-2.0-with-GCC-exception & MIT"
--LIC_FILES_CHKSUM = "file://COPYING;md5=3f2cd5d3cccd71d62066ba619614592b"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=5b002a195fb7ea2d8d583f07eaff3a8e"
- 
- DEPENDS = "curl openssl zlib libssh2 libgcrypt"
- 
--SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.28"
--SRCREV = "106a5f27586504ea371528191f0ea3aac2ad432b"
-+SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v1.0"
-+SRCREV = "7d3c7057f0e774aecd6fc4ef8333e69e5c4873e0"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.26.0
+diff --git a/meta-oe/recipes-devtools/cjson/cjson_git.bb b/meta-oe/recipes-=
+devtools/cjson/cjson_git.bb
+new file mode 100644
+index 000000000..7a9ebf07b
+--- /dev/null
++++ b/meta-oe/recipes-devtools/cjson/cjson_git.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION =3D "Ultralightweight JSON parser in ANSI C"
++AUTHOR =3D "Dave Gamble"
++HOMEPAGE =3D "https://github.com/DaveGamble/cJSON"
++LICENSE =3D "MIT"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D218947f77e8cb8e2fa02918dc41c50d=
+0"
++
++SRC_URI =3D "git://github.com/DaveGamble/cJSON.git"
++SRCREV =3D "39853e5148dad8dc5d32ea2b00943cf4a0c6f120"
++
++S =3D "${WORKDIR}/git"
++
++inherit cmake pkgconfig
++
++EXTRA_OECMAKE +=3D "\
++    -DENABLE_CUSTOM_COMPILER_FLAGS=3DOFF \
++    -DBUILD_SHARED_AND_STATIC_LIBS=3DOn \
++"
++
++FILES_${PN}-dev +=3D "\
++    ${libdir}/cmake \
++"
++
++BBCLASSEXTEND =3D "native nativesdk"
+--=20
+2.25.0
 
