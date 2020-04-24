@@ -1,124 +1,77 @@
-Received: from EUR02-AM5-obe.outbound.protection.outlook.com (EUR02-AM5-obe.outbound.protection.outlook.com [40.107.0.75])
- by mx.groups.io with SMTP id smtpd.web12.1089.1587711370682902602
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.web12.2374.1587719768891345589
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Apr 2020 23:56:11 -0700
+ Fri, 24 Apr 2020 02:16:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@nxp.com header.s=selector2 header.b=iCrddwEZ;
- spf=pass (domain: nxp.com, ip: 40.107.0.75, mailfrom: ting.liu@nxp.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=D2xQoLOdiR/3BD5RFxRwtCXMjhbj7qgAigx9jctb4KndBI4+2Ifp54/ToWFvQfyYNiJgoXm7P39bFMavOld1LpEqt3sOTc+SzPvXtqjsnYIC59vAwtcntgK9RupVZn4kPJUBBMTbz/zJxYho37ci18rvsDJqlSomw6jwCuZ9BafLgPmgoLJT4fHxc3wG0m7g8Up98YJkaDTDCvjgChFtJNa+yIeGU+R8KQlpbmG8SiOUfOg0ZFwwcTP7G+PMY58qIcm9U4hXrsIsgMFEepIR26HVDXRE5layQ3Ec4mH+ZWRKbk7Ntg8TNBxkbe4sHexvOQ6MyiDPy26lucfEK/Kjfg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=D+3D0wUafnQEXzfmXt8MK9XYGXUWj+O4I3GV8CqOWyc=;
- b=T0cvzkG2qfF1nrUOTVVB8447i3MNqsDQnKysDekAZ/vBaWK2smOLRn/DJKpkRgv3EEef9Iz/auF8ytRYlhFg0R4rcN8aL3nAaYcyHbwMBUIOxk01twEQw+keAUnmfXR08ZZ3xKmEBkNGLa61IQxM26wVoVVNrkxKONR3ip9a+uzosrv8XMvL6vmu6Qj2y4cIbcIBMj7inJShKYYCANxMCdRy7BoHNNoip2EPyvLTFGIpHBfP1eIJQ0b5ISEyhtDj3uquLZEZzlO7Pv6O57MwSH6pseH2boeO0SKTQ49DdvyLKNlpYI57Ajldg1jCFDvMBW4iN5haWEeuaWis4vzElg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=D+3D0wUafnQEXzfmXt8MK9XYGXUWj+O4I3GV8CqOWyc=;
- b=iCrddwEZzX+BIjh79T9tKNr5tHikbZHHgvuqdFBM009KV1xRFthOVD5pqOVDQfozZrVzdULnQQX9ydm8NA1zx8SICqzI2jkVEUZUlw5NY303/ATtg79ECL4M0FYR4OwX5pqsHKpuLk5pIgJQ6SDcO2IRMLn2KsiBJ0YFp9NeqDg=
-Authentication-Results: spf=none (sender IP is )
- smtp.mailfrom=ting.liu@nxp.com; 
-Received: from VI1PR0402MB3341.eurprd04.prod.outlook.com (2603:10a6:803:f::11)
- by VI1PR0402MB3712.eurprd04.prod.outlook.com (2603:10a6:803:1c::25) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2921.29; Fri, 24 Apr
- 2020 06:56:08 +0000
-Received: from VI1PR0402MB3341.eurprd04.prod.outlook.com
- ([fe80::3832:d1ae:f6d6:aa1a]) by VI1PR0402MB3341.eurprd04.prod.outlook.com
- ([fe80::3832:d1ae:f6d6:aa1a%4]) with mapi id 15.20.2937.020; Fri, 24 Apr 2020
- 06:56:08 +0000
-From: "Ting Liu" <ting.liu@nxp.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Lf7g88H9;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id j2so9872554wrs.9
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2020 02:16:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=fpqAVQ52CSWivVwQ8m99THSYaJN87KMmyZcoJrxwrVQ=;
+        b=Lf7g88H9qq2aOVVLMxlmW5SwSEdXzuGOUzwSYNVDwN/TOjQS2cnaY8uwLQsNfv7cLH
+         0sUulTB/AJi2yk7cnCy0wwinp7DQAyhY5i9WnwWvcZXYOI6mk2LZ/fB1spUEU8Nm2qKn
+         ZHHZWHJLxJg+LUsKGscgBexh8rSm1P22Jg5TUgv1vL+vXb7K/FUWs1RnSWHu1z+Ny5r7
+         Xd82K5/c8RrXnyIax2lB2T/fKggG584EbHiaqb25j302VsbBaQoaHKPA46P0Aw6UGPW2
+         FWqbC8jVItCErdXy7Yq7eYQOHT5mx7uTPnb2VrVuTa8ihxbOfny4g6LzcsRBgExOP8XE
+         cOwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=fpqAVQ52CSWivVwQ8m99THSYaJN87KMmyZcoJrxwrVQ=;
+        b=EHKDqLwN6Mr9P2yBD3QUYGufFDMdu5niv6ambQKgbQJHU/6gLccaA4dD7Vb+5HwNZf
+         X5Y9ABEkwceQZdHCFB4S0i9upPFNJxf0tE9wKoIXlK+ZVuymrRB9aA4JvOoIkiyXawFL
+         PFamTfaEnUUVozRbAU1Fcb5NiwUhFEkwahNFOhqITlY7dVVDfWBdXDR4A+22/iFMgXzk
+         u3KPDQ8l5guMhU06kA1Agz91dJbOxnsGCIJa4YvNOziotuacIZ5trabCv2hnmdXZ5sLQ
+         GCl+NvY8E/COn4gDEbKTvp0cE9CFejLXVbv11eYI/yJPEvaNSfDVXsREUrz+C2JB6fKY
+         9WzA==
+X-Gm-Message-State: AGi0PuYC8LiX04zx8UMISL+VelZkVLfsk3Jxr0JYQjVDhDBqUTFWwQ8Z
+	Qjvtv1a+yod96cU3J/YJWrQTSZpJQwE=
+X-Google-Smtp-Source: APiQypLyDtQeso7+sokDX8gkyzDq7zUUHaXcPF1ne94lS9+EgkHSnuiDvgkfD7jvuMZ/N+j9FHEi2w==
+X-Received: by 2002:adf:ef8b:: with SMTP id d11mr10754962wro.340.1587719767091;
+        Fri, 24 Apr 2020 02:16:07 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from localhost ([109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id b12sm8324448wro.18.2020.04.24.02.16.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 24 Apr 2020 02:16:06 -0700 (PDT)
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-CC: Ting Liu <ting.liu@nxp.com>
-Subject: [oe] [meta-oe][PATCH] cjson: add recipe for v1.7.13
-Date: Fri, 24 Apr 2020 14:55:45 +0800
-Message-ID: <20200424065545.28012-1-ting.liu@nxp.com>
-X-Mailer: git-send-email 2.23.0
-X-Originating-IP: [119.31.174.73]
-X-ClientProxiedBy: SG2PR0401CA0016.apcprd04.prod.outlook.com
- (2603:1096:3:1::26) To VI1PR0402MB3341.eurprd04.prod.outlook.com
- (2603:10a6:803:f::11)
-Return-Path: ting.liu@nxp.com
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH] daemontools: use u-a for /usr/bin/svc and /usr/bin/svok
+Date: Fri, 24 Apr 2020 11:16:04 +0200
+Message-Id: <20200424091604.3945-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 8e5254c4-58cf-4449-0570-08d7e81c905e
-X-MS-TrafficTypeDiagnostic: VI1PR0402MB3712:|VI1PR0402MB3712:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<VI1PR0402MB37120D3F49B5D68D0A53C2BD99D00@VI1PR0402MB3712.eurprd04.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:663;
-X-Forefront-PRVS: 03838E948C
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR0402MB3341.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(10009020)(4636009)(366004)(346002)(376002)(396003)(136003)(39860400002)(66476007)(8676002)(316002)(6916009)(8936002)(81156014)(52116002)(36756003)(6666004)(5660300002)(6506007)(6486002)(66946007)(478600001)(4326008)(966005)(86362001)(66556008)(2616005)(1076003)(9686003)(2906002)(6512007)(186003)(26005);DIR:OUT;SFP:1101;
-Received-SPF: None (protection.outlook.com: nxp.com does not designate
- permitted sender hosts)
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	ydYp/aJm3O/DHVeHqzHGfvtHvd/0s86Yu8eT2BOGfbjKUT6InNTD+zzcYSiTgxbqIjx0UzBuTLh3byOBdmfkTmjNTl5rWrprIgtMxNtKmn5A7bah+VtbpWq7lKUquR3QMw6gRDayrsLkaLfzp0NTxaWFWiokdp5SLOd6ZsdND6sETLeOFrwfCLNa9WfdptdU5/F76omTKJLUI3l5CbWU+el63G2F+6cEY9uvysFq26JNK1x8u6ISZm17NnZdQcck/rWtBzOrRhYL94e/tDfq3GDWYmbSCva82+3co1ySMZILcJyF98NSqI6Urh2k0ElbR4Qdmf244QfVJC53YHv8CS9e0Ljb9te4uYSKPtVLUOhaQPzTMvpGt52+2+xNgJdbMmurRU/lCHOK0f6LRxvFKKBpLaI4/Mis4X6IWN4BHonl/mcTPZBp7bW0n2B5FeOc6bjurb5wYrfB2BmpOtESfKYdhfLKcFpt4WSo6sGMOvgjFLZ0V0nE7xPZC4wkSXOrETpr0EXiNyIHjSm1HMuucg==
-X-MS-Exchange-AntiSpam-MessageData: 
-	NhRi4K0+7jzo+rRYRGufy7zoCWQD5obyoHHMeeUUHrR4MQvL3xUQpTcTKsFkdAxGQ2rty34h2v1oyU9vxIeDFZ8tCkUiWdI9Zpg0mFnpDvET7ElhdQ2DBiUe3FNlxQT7qChlRnG1A+Rxn8LkG6dr2g==
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8e5254c4-58cf-4449-0570-08d7e81c905e
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2020 06:56:07.8641
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: az7nfLDGu6ggee+XIDa4M/xyP7v8idPi8ydawYaPA7TTnXcalD1MYgkC8vOSzkW6qzzTQ4KqzBWsM8CxXZ2CDw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0402MB3712
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-From: Ting Liu <ting.liu@nxp.com>
+* busybox provides the same, causing busybox postinst to fail when both packages
+  are installed in the same image:
+  update-alternatives: Error: not linking rootfs/usr/bin/svc to /usr/bin/busybox.nosuid since rootfs/usr/bin/svc exists and is not a link
+  update-alternatives: Error: not linking rootfs/usr/bin/svok to /usr/bin/busybox.nosuid since rootfs/usr/bin/svok exists and is not a link
 
-cJSON aims to be the dumbest possible parser that you can get your
-job done with. It's a single file of C, and a single header file.
-
-Homepage: https://github.com/DaveGamble/cJSON
-
-Signed-off-by: Ting Liu <ting.liu@nxp.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-devtools/cjson/cjson_git.bb | 23 +++++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/cjson/cjson_git.bb
+ meta-oe/recipes-support/daemontools/daemontools_0.76.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/cjson/cjson_git.bb b/meta-oe/recipes-=
-devtools/cjson/cjson_git.bb
-new file mode 100644
-index 000000000..7a9ebf07b
---- /dev/null
-+++ b/meta-oe/recipes-devtools/cjson/cjson_git.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION =3D "Ultralightweight JSON parser in ANSI C"
-+AUTHOR =3D "Dave Gamble"
-+HOMEPAGE =3D "https://github.com/DaveGamble/cJSON"
-+LICENSE =3D "MIT"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D218947f77e8cb8e2fa02918dc41c50d=
-0"
+diff --git a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
+index b99116da70..f0c5f7d7de 100644
+--- a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
++++ b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
+@@ -38,3 +38,7 @@ do_install() {
+ do_install_append_class-target() {
+     install -m755 ${S}/command/* ${D}/${bindir}
+ }
 +
-+SRC_URI =3D "git://github.com/DaveGamble/cJSON.git"
-+SRCREV =3D "39853e5148dad8dc5d32ea2b00943cf4a0c6f120"
-+
-+S =3D "${WORKDIR}/git"
-+
-+inherit cmake pkgconfig
-+
-+EXTRA_OECMAKE +=3D "\
-+    -DENABLE_CUSTOM_COMPILER_FLAGS=3DOFF \
-+    -DBUILD_SHARED_AND_STATIC_LIBS=3DOn \
-+"
-+
-+FILES_${PN}-dev +=3D "\
-+    ${libdir}/cmake \
-+"
-+
-+BBCLASSEXTEND =3D "native nativesdk"
---=20
-2.25.0
++inherit update-alternatives
++ALTERNATIVE_PRIORITY = "100"
++ALTERNATIVE_${PN} = "svc svok"
+-- 
+2.25.1
 
