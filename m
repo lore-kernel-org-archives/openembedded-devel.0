@@ -1,77 +1,65 @@
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
- by mx.groups.io with SMTP id smtpd.web12.2374.1587719768891345589
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web12.2851.1587723094710657046
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Apr 2020 02:16:09 -0700
+ Fri, 24 Apr 2020 03:11:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Lf7g88H9;
- spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f44.google.com with SMTP id j2so9872554wrs.9
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2020 02:16:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=fpqAVQ52CSWivVwQ8m99THSYaJN87KMmyZcoJrxwrVQ=;
-        b=Lf7g88H9qq2aOVVLMxlmW5SwSEdXzuGOUzwSYNVDwN/TOjQS2cnaY8uwLQsNfv7cLH
-         0sUulTB/AJi2yk7cnCy0wwinp7DQAyhY5i9WnwWvcZXYOI6mk2LZ/fB1spUEU8Nm2qKn
-         ZHHZWHJLxJg+LUsKGscgBexh8rSm1P22Jg5TUgv1vL+vXb7K/FUWs1RnSWHu1z+Ny5r7
-         Xd82K5/c8RrXnyIax2lB2T/fKggG584EbHiaqb25j302VsbBaQoaHKPA46P0Aw6UGPW2
-         FWqbC8jVItCErdXy7Yq7eYQOHT5mx7uTPnb2VrVuTa8ihxbOfny4g6LzcsRBgExOP8XE
-         cOwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=fpqAVQ52CSWivVwQ8m99THSYaJN87KMmyZcoJrxwrVQ=;
-        b=EHKDqLwN6Mr9P2yBD3QUYGufFDMdu5niv6ambQKgbQJHU/6gLccaA4dD7Vb+5HwNZf
-         X5Y9ABEkwceQZdHCFB4S0i9upPFNJxf0tE9wKoIXlK+ZVuymrRB9aA4JvOoIkiyXawFL
-         PFamTfaEnUUVozRbAU1Fcb5NiwUhFEkwahNFOhqITlY7dVVDfWBdXDR4A+22/iFMgXzk
-         u3KPDQ8l5guMhU06kA1Agz91dJbOxnsGCIJa4YvNOziotuacIZ5trabCv2hnmdXZ5sLQ
-         GCl+NvY8E/COn4gDEbKTvp0cE9CFejLXVbv11eYI/yJPEvaNSfDVXsREUrz+C2JB6fKY
-         9WzA==
-X-Gm-Message-State: AGi0PuYC8LiX04zx8UMISL+VelZkVLfsk3Jxr0JYQjVDhDBqUTFWwQ8Z
-	Qjvtv1a+yod96cU3J/YJWrQTSZpJQwE=
-X-Google-Smtp-Source: APiQypLyDtQeso7+sokDX8gkyzDq7zUUHaXcPF1ne94lS9+EgkHSnuiDvgkfD7jvuMZ/N+j9FHEi2w==
-X-Received: by 2002:adf:ef8b:: with SMTP id d11mr10754962wro.340.1587719767091;
-        Fri, 24 Apr 2020 02:16:07 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost ([109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id b12sm8324448wro.18.2020.04.24.02.16.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Apr 2020 02:16:06 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] daemontools: use u-a for /usr/bin/svc and /usr/bin/svok
-Date: Fri, 24 Apr 2020 11:16:04 +0200
-Message-Id: <20200424091604.3945-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.73,311,1583164800"; 
+   d="scan'208";a="90117577"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 24 Apr 2020 18:11:25 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id D9A964BCC895
+	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2020 18:00:45 +0800 (CST)
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Fri, 24 Apr 2020 18:11:22 +0800
+Received: from localhost.localdomain (10.167.225.33) by
+ G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP Server
+ (TLS) id 14.3.439.0; Fri, 24 Apr 2020 18:11:24 +0800
+From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@cn.fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] vboxguestdrivers: upgrade 6.1.4 -> 6.1.6
+Date: Fri, 24 Apr 2020 11:11:08 -0700
+Message-ID: <20200424181111.21063-1-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.33]
+X-yoursite-MailScanner-ID: D9A964BCC895.A3D37
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-* busybox provides the same, causing busybox postinst to fail when both packages
-  are installed in the same image:
-  update-alternatives: Error: not linking rootfs/usr/bin/svc to /usr/bin/busybox.nosuid since rootfs/usr/bin/svc exists and is not a link
-  update-alternatives: Error: not linking rootfs/usr/bin/svok to /usr/bin/busybox.nosuid since rootfs/usr/bin/svok exists and is not a link
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- meta-oe/recipes-support/daemontools/daemontools_0.76.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ .../{vboxguestdrivers_6.1.4.bb => vboxguestdrivers_6.1.6.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_6.1.4.bb => vboxguestdrivers_6.1.6.bb} (95%)
 
-diff --git a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
-index b99116da70..f0c5f7d7de 100644
---- a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
-+++ b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
-@@ -38,3 +38,7 @@ do_install() {
- do_install_append_class-target() {
-     install -m755 ${S}/command/* ${D}/${bindir}
- }
-+
-+inherit update-alternatives
-+ALTERNATIVE_PRIORITY = "100"
-+ALTERNATIVE_${PN} = "svc svok"
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.4.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.6.bb
+similarity index 95%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.4.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.6.bb
+index 1227e42ea..89b1ee11e 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.4.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.6.bb
+@@ -14,8 +14,8 @@ VBOX_NAME = "VirtualBox-${PV}"
+ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
+     file://Makefile.utils \
+ "
+-SRC_URI[md5sum] = "b3ffc51c1f082743f22bfcb71b75a396"
+-SRC_URI[sha256sum] = "59f8f5774473f593e3eb5940e2a337e0674bcd9854164b2578fd43f896260c99"
++SRC_URI[md5sum] = "fe6328d22dfb20ea372daa4b58b12374"
++SRC_URI[sha256sum] = "b031c30d770f28c5f884071ad933e8c1f83e65b93aaba03a4012077c1d90a54f"
+ 
+ S = "${WORKDIR}/vbox_module"
+ 
 -- 
-2.25.1
+2.17.1
+
+
 
