@@ -1,101 +1,91 @@
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
- by mx.groups.io with SMTP id smtpd.web12.60.1587756665414193093
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com [209.85.222.194])
+ by mx.groups.io with SMTP id smtpd.web10.199.1587763019415869767
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Apr 2020 12:31:06 -0700
+ Fri, 24 Apr 2020 14:16:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@axis.com header.s=axis-central1 header.b=BX83J/Ne;
- spf=pass (domain: axis.com, ip: 195.60.68.17, mailfrom: peter.kjellerstedt@axis.com)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=HEHO5Kgr;
+ spf=pass (domain: gmail.com, ip: 209.85.222.194, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f194.google.com with SMTP id 23so6880506qkf.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2020 14:16:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; l=1929; q=dns/txt; s=axis-central1;
-  t=1587756665; x=1619292665;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=O803NzmWVxDUP9iS5RLE0O0/b1GDFhQs2cyNv5ba8tg=;
-  b=BX83J/NeGVOpfZ60IKI8NAfDaTKuXmLqtTv6ZJeU5EY+Rke0k1C+cML4
-   Cf23d+UiUaslRZ8Z/gYCioi1hT+y+h6deT4gz7f/mMvkL96vgUDAvxxw6
-   GJSB1a3dhZ/EwL8dFPwFxPWSvQs2PnyKtlUVhzJNB9pFRSB31n0lx/9Q0
-   saSu1yzpOXIDdcTHtrs98zFzuUN31xXt632Dc9a+Aw705s9j33bf0Yeav
-   8lLSmGhSAxcIBNOs0MVoUUj7ryFwO0p1mkZr+HOAHYIKgIhSorfVFhEH0
-   qyNxzo8zvl+n7atyEiN4pwf0h0zBrXZ2GHeDbgtKzsLnjWSu/+VwYuJrp
-   Q==;
-IronPort-SDR: wRZP1Y9eRZDxY5Lx8QCRl8D++H2ZVv53bxvZjewqb53L2mlE/F92CuWEl8fH4aZuRalUGeVNGw
- c2/omFlzXRsiRZMaNHChaYwXYbx43jwvYEAl/3pqnmzVOXmseHZqqBUAb5QdWaxIN5h7Sm34Mu
- gKwwoH8Oyh3aL4Dc4IUHOf0Ruu4BVXX9bnYH4FFDVNQ65jI9xhhZ+7FktaJjEBdNfdLV2/mlWz
- BvHhAhci3PrRGUv+z3uoCtbHymZ0CCjSA0oLkhxDdaX7FD59DdbdPY3SXXna1sy6m71zkaV4Od
- YMM=
-X-IronPort-AV: E=Sophos;i="5.73,313,1583190000"; 
-   d="scan'208";a="8053030"
-From: "Peter Kjellerstedt" <peter.kjellerstedt@axis.com>
-To: Matt Campbell <Mcampbell@izotope.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][PATCH v2] sdbus-c++-tools: add nativesdk
-Thread-Topic: [oe] [meta-oe][PATCH v2] sdbus-c++-tools: add nativesdk
-Thread-Index: AQHWGOGWLn4XZq4KlkeRiOObdn0Tl6iIq3Eg
-Date: Fri, 24 Apr 2020 19:31:02 +0000
-Message-ID: <e4ac0a4da76740ed8a6919b6018cd2cc@XBOX03.axis.com>
-References: <20200422200630.79513-1-mcampbell@izotope.com>
-In-Reply-To: <20200422200630.79513-1-mcampbell@izotope.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=lMecQtPuLL/VlPi1kgSDRA4tbbZwu9+sXaOlNa/EYbs=;
+        b=HEHO5KgreS+q+YOpdiuqGa1fQysbyYIlKJxhN2kjltUoAMG4Mnbu8rJknqF+i9aWST
+         gmi4WPLM1cOOXk3uDINUGAzN2cLyzelXB7+j9Y2cziE2ziCK/LCR85NYJz2GSVPzlL3p
+         wz33dOpEodFcATD1HiAYt6WG+YTCAexm45bTVuLrJ3SS3vnu2s9K7NmR7p6Kt51Zpp4e
+         mKUsPnt+GnDOaYjJpByiz2qYAWzaOYO1iVjjhXo+jxdsfH8gCnkTDpO8/vD7UNLxWd6L
+         Vl9XhZCmFHhn/y7A1YYCywKy49y5rpVeABTA7LqU5nt4x60+5RnrzopUPIkKV0s2LHrM
+         bcRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=lMecQtPuLL/VlPi1kgSDRA4tbbZwu9+sXaOlNa/EYbs=;
+        b=mOsefLAudvELmVeFhtvPC4MImV0fjwQCAqvYse+LnOzBwdwT6Lg3mRX2cajPCcdUs/
+         A45yGiodNRshrKSvCP3X3RWhrF2q1xg0lmW3rQMxAJStE5FAr303PhIcLMfbcxq4niah
+         u8fMc5CqJNvLxPizM+In7puwdW3fQP53wxlGuuuZyOgsXpGl9EnM45Be9JU1C8bclPfX
+         DMB0AJ97a2qRhNxJdY/Y02de/BCPGYrchgxHFyDLJLXUi8XNa1mwZeOIixfuFprcPsJp
+         GMUFienOL1CRfuRFxhvRHCv4fEtB2V6dRB3ESBw3sxiAtamjOyQD82mkD2aqO2s6zzLt
+         zh8Q==
+X-Gm-Message-State: AGi0Pua0L/TUqNf+eBMXZbuwZU3fGmCkc7+hO6BAWDc4hYzKW18mIFC7
+	DfNxEWa89QGIVGmyy7ILqovtRhoXcAbbKbhT5Ow=
+X-Google-Smtp-Source: APiQypIQIzPbBsapotUVgfMYyKwCXr3KV2+8EsSzM/1d/YMHtHKmBO9yrQzzDk5RpLb+aWyQSbEMOnyJwBCT7Sq1VIw=
+X-Received: by 2002:ae9:dc46:: with SMTP id q67mr11029996qkf.431.1587763018365;
+ Fri, 24 Apr 2020 14:16:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+References: <20200424063130.386675-1-alistair@alistair23.me>
+In-Reply-To: <20200424063130.386675-1-alistair@alistair23.me>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 24 Apr 2020 14:16:32 -0700
+Message-ID: <CAMKF1srb+fSYRjhBjmA+dH7HN_M+rckXJj+f5y0T8JPn4fQ1hQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH] libgit2: Update to v1.0.0
+To: Alistair <alistair@alistair23.me>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-> -----Original Message-----
-> From: openembedded-devel@lists.openembedded.org <openembedded-
-> devel@lists.openembedded.org> On Behalf Of Matt Campbell
-> Sent: den 22 april 2020 22:07
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Matthew Campbell <mcampbell@izotope.com>
-> Subject: [oe] [meta-oe][PATCH v2] sdbus-c++-tools: add nativesdk
->=20
-> Changes from v1:
-> Fix formatting of patch
+This update has some issues
 
-The above should go below the --- line below as it relates to the=20
-review process rather than the change itself.
+Fails on qemux86/clang
+https://errors.yoctoproject.org/Errors/Details/407382/
 
-//Peter
+for glibc/musl there is another failure which is caused by this
 
-> Signed-off-by: Matthew Campbell <mcampbell@izotope.com>
+https://errors.yoctoproject.org/Errors/Details/407386/
+
+On Thu, Apr 23, 2020 at 11:31 PM Alistair <alistair@alistair23.me> wrote:
+>
+> Signed-off-by: Alistair Francis <alistair@alistair23.me>
 > ---
->  ...bus-c++-tools-native_0.8.1.bb =3D> sdbus-c++-tools_0.8.1.bb} | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->  rename meta-oe/recipes-core/sdbus-c++/{sdbus-c++-tools-native_0.8.1.bb
-> =3D> sdbus-c++-tools_0.8.1.bb} (89%)
->=20
-> diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-
-> native_0.8.1.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.1.bb
-> similarity index 89%
-> rename from meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-
-> native_0.8.1.bb
-> rename to meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.1.bb
-> index e18b9903d..9eaec0f2a 100644
-> --- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-native_0.8.1.bb
-> +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.1.bb
-> @@ -4,7 +4,7 @@ DESCRIPTION =3D "Native interface code generator for
-> development with sdbus-c++"
->  LICENSE =3D "LGPLv2.1"
->  LIC_FILES_CHKSUM =3D
-> "file://${S}/COPYING;md5=3D1803fa9c2c3ce8cb06b4861d75310742"
->=20
-> -inherit cmake native
-> +inherit cmake
->=20
->  DEPENDS +=3D "expat"
->=20
-> @@ -12,3 +12,5 @@ SRCREV =3D "3a4f343fb924650e7639660efa5f143961162044"
->  SRC_URI =3D "git://github.com/Kistler-Group/sdbus-
-> cpp.git;protocol=3Dhttps;branch=3Dmaster;subpath=3Dtools"
->=20
->  S =3D "${WORKDIR}/tools"
-> +
-> +BBCLASSEXTEND =3D "native nativesdk"
+>  .../libgit2/{libgit2_0.28.4.bb => libgit2_1.0.0.bb}         | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-oe/recipes-support/libgit2/{libgit2_0.28.4.bb => libgit2_1.0.0.bb} (64%)
+>
+> diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb b/meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
+> similarity index 64%
+> rename from meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb
+> rename to meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
+> index 9b9c19104..fd26a0fe9 100644
+> --- a/meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb
+> +++ b/meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
+> @@ -1,12 +1,12 @@
+>  SUMMARY = "the Git linkable library"
+>  HOMEPAGE = "http://libgit2.github.com/"
+>  LICENSE = "GPL-2.0-with-GCC-exception & MIT"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=3f2cd5d3cccd71d62066ba619614592b"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=5b002a195fb7ea2d8d583f07eaff3a8e"
+>
+>  DEPENDS = "curl openssl zlib libssh2 libgcrypt"
+>
+> -SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.28"
+> -SRCREV = "106a5f27586504ea371528191f0ea3aac2ad432b"
+> +SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v1.0"
+> +SRCREV = "7d3c7057f0e774aecd6fc4ef8333e69e5c4873e0"
+>
+>  S = "${WORKDIR}/git"
+>
 > --
-> 2.20.1
-
+> 2.26.0
+>
+> 
