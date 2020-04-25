@@ -1,131 +1,108 @@
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
- by mx.groups.io with SMTP id smtpd.web11.8163.1587828564088823139
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com [209.85.160.196])
+ by mx.groups.io with SMTP id smtpd.web10.8395.1587828823351277890
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Apr 2020 08:29:24 -0700
+ Sat, 25 Apr 2020 08:33:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=c6is5vwG;
- spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f195.google.com with SMTP id 20so13423534qkl.10
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2020 08:29:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=YcKl9lG1;
+ spf=pass (domain: gmail.com, ip: 209.85.160.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f196.google.com with SMTP id o10so10544450qtr.6
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2020 08:33:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=/VdipbpQ6BoSPZaUSsJFulyYdO7MsMDel/GkOAHhpWo=;
-        b=c6is5vwG1i2YagB7Gjp6tKultnEY//cQdTrItR7hS+aoN6l/OFUwttT3VaaLdaRx4a
-         1idXj8p0T9ScG0srlazOVmelibRJmJ7FjuwGeIvVE40VYdrLDovcIn1BFiO8KsV2q/t4
-         1nQR87znQPMHex9sN1LKF7nRzlOqrMFyKPz6EVTXi905+mIyd4KhlzhBGUDJlWDA0U0W
-         v2o0f8FiIVklul2qi5HOZcYs8AOLxc6ToSdsv3WUlyXR4a1/mGrynzMgllBe3fJYPgGi
-         xD9XuDJuelxmb5CEtC3Oc8jh6ulc6adiGjVSyL/A7XhU9b9A1uiHmvJuz3HBoBi23ayu
-         whlw==
+        bh=d9oTedK/7T26CRTETcY4/vZJw2BXyw1MN4NSJ7UPUjY=;
+        b=YcKl9lG1YSddWfQFN94cOEKQOLNQCuUuyKnDGslhSpHsmWudiOUoLNZakxTh803XXt
+         AR3hGNT7AWaINF8SKdhzJpqxOECLOh+F+IUbczpwfn35kyBEIR/bjZlYEu5mZuhbAkSH
+         iQJBhY0mnQJnm+gHMWTPOYF94Q9A22f1bimLh2g/Fkpp5DGaU0+5+h/dF4xmEfnpNzkV
+         QcKKCpI0WFECe3D9Ax1ua0X00NyrvZlffEosppoajMmCAxa2lDXtbPer+9oIxHm8T4bk
+         3NdfgnfYExi2unpydQ2vH50nUtnGIXWlP4F8xx+NAj4XHKgs4eak5l9YVulLcNX1XNrv
+         Fxew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=/VdipbpQ6BoSPZaUSsJFulyYdO7MsMDel/GkOAHhpWo=;
-        b=O+av3TMLTPO+qfQdGJHgvhe9ba7fC1RNlEwVxLb1Y5uxUqLHJibeAEurwRh2jlwkhJ
-         6pHT9cdoROPWoQ6+6HLOcqxeab72U0U3XS+/ixeEPGpAICYGubp723etUY8vE/vdb94b
-         +RGDnZ7XFfae3LkOxaU2yNX8tZ1KYV0MsGGx0tLTYXrZACE+PBldvzzcCQ9VGw/XxBM7
-         dT+erNHI8Vo0toGbtsKKroQDnTEjk3Axqd5Sat5RE+2f7IDZgEDJDInLqV7lWAjZ9v1n
-         tOZc+k3UVijjMjh0kLIqWpP9JSEC1cT/v1QH/b/h97kRZL37LYbbLU2bqrOR5vaJW+ny
-         panQ==
-X-Gm-Message-State: AGi0Pub9TZtqtwIlVlxSFvjoBRHMw7leYFTFgH6L/byetljVZ3XRrIZY
-	w34MemidC0tqOwlbGgPmNgORhC1JRKwZYoDRLyM=
-X-Google-Smtp-Source: APiQypJOXSfnm1XaYw+FWph5h6DWJ7NHZV1hg8oXwh2kGfuyKF+z3l/cWVFYMccq+z+wtP1OytZdgpnNTwSVQdpRR9A=
-X-Received: by 2002:a05:620a:4f0:: with SMTP id b16mr2859120qkh.165.1587828563037;
- Sat, 25 Apr 2020 08:29:23 -0700 (PDT)
+        bh=d9oTedK/7T26CRTETcY4/vZJw2BXyw1MN4NSJ7UPUjY=;
+        b=SfoeFc7ofRXmrxQkIN9s45Fkcyl5lBebZCh+9ajbC9bgaEiWAoVcgXtH2ExlR/KcYc
+         ZDqqZcH5+OsvNcnPH3/Aqp28FO5BVriX/IExUVbOzABVtY5R7QLaMWWSGx3vqAf1ov/i
+         WUOtkhQGtlAEqXiq7vLBuh7QGQqdD3BBbreLNFn9PG83VLTVRD2nxANuxJnMzmJAufgx
+         HpUNF1RhyLu74PoV+vbuuTaczB2TRKuShFgY2cqWcDHaicGxu+WGncmBByJIXF//yqZf
+         Lhk+e7ikRMwgyKTBMFmAR0IbN4ac8djAK2XKICN6wRpsrVRDgNn5i9rRR3maW9dMgTdb
+         epAw==
+X-Gm-Message-State: AGi0PuZKvW1Yi11SjJ8jCJs09mM9iGm69hKeIBAIMlshRZNR/iZ+0avf
+	4gmnrlyuzRfRGeHMYzRVucUKzQMp5sLcEp0QBBWkwMtX
+X-Google-Smtp-Source: APiQypIOavHuRKiDxbFfrmBdpdttSLG9QkYvuqvhBHWQ9jRD68UNixXe7M1j/K2vmkIhOoa+FlzxkkW8jss2d3kkD9s=
+X-Received: by 2002:ac8:668b:: with SMTP id d11mr14776134qtp.285.1587828822096;
+ Sat, 25 Apr 2020 08:33:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200424011328.191909-1-changqing.li@windriver.com>
- <bac9fe56-5f04-1cd4-6cc8-10c77ccfc4c8@gmail.com> <CANx9H-D81iMF76hRqrnPJEjNvkSq_JyTqqu9q+r-ZYqGUb-8Rw@mail.gmail.com>
-In-Reply-To: <CANx9H-D81iMF76hRqrnPJEjNvkSq_JyTqqu9q+r-ZYqGUb-8Rw@mail.gmail.com>
+References: <20200422200630.79513-1-mcampbell@izotope.com> <e4ac0a4da76740ed8a6919b6018cd2cc@XBOX03.axis.com>
+In-Reply-To: <e4ac0a4da76740ed8a6919b6018cd2cc@XBOX03.axis.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sat, 25 Apr 2020 08:28:57 -0700
-Message-ID: <CAMKF1srwjV4oUdGfq=vFBV78Swy1bw9u=LkrVWEuRnhwNe6U9g@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-pexpect: change shebang to python3
-To: Tim Orling <ticotimo@gmail.com>
-Cc: Changqing Li <changqing.li@windriver.com>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Date: Sat, 25 Apr 2020 08:33:16 -0700
+Message-ID: <CAMKF1sowV6rYshjjYxPsHDOwB7+nK3i2smSZ9cbgSBoj+vQaGQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v2] sdbus-c++-tools: add nativesdk
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Cc: Matt Campbell <Mcampbell@izotope.com>, 
+	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Apr 24, 2020 at 10:00 PM Tim Orling <ticotimo@gmail.com> wrote:
+On Fri, Apr 24, 2020 at 12:31 PM Peter Kjellerstedt
+<peter.kjellerstedt@axis.com> wrote:
 >
-> meta-python2 has zero connection the meta-python. So it will not depend on any inc files.
+> > -----Original Message-----
+> > From: openembedded-devel@lists.openembedded.org <openembedded-
+> > devel@lists.openembedded.org> On Behalf Of Matt Campbell
+> > Sent: den 22 april 2020 22:07
+> > To: openembedded-devel@lists.openembedded.org
+> > Cc: Matthew Campbell <mcampbell@izotope.com>
+> > Subject: [oe] [meta-oe][PATCH v2] sdbus-c++-tools: add nativesdk
+> >
+> > Changes from v1:
+> > Fix formatting of patch
+>
+> The above should go below the --- line below as it relates to the
+> review process rather than the change itself.
 >
 
-Thanks, perhaps this patch is ok then, merging inc and bb can be a
-different one.
+right, this time I fixed the commit msg before picking it up.
 
-> On Fri, Apr 24, 2020 at 6:57 PM Khem Raj <raj.khem@gmail.com> wrote:
->>
->>
->>
->> On 4/23/20 6:13 PM, Changqing Li wrote:
->> > From: Changqing Li <changqing.li@windriver.com>
->> >
->> > we have offcially dropped python2, so it is possible
->> > that our code run on python3 only host, so change
->> > shebang to python3 to avoid error like:
->> > python: command not found
->> >
->> > Signed-off-by: Changqing Li <changqing.li@windriver.com>
->> > ---
->> >  .../python/python-pexpect.inc                 |  2 ++
->> >  ...hange-shebang-from-python-to-python3.patch | 25 +++++++++++++++++++
->> >  2 files changed, 27 insertions(+)
->> >  create mode 100644 meta-python/recipes-devtools/python/python3-pexpect/0001-FSM.py-change-shebang-from-python-to-python3.patch
->> >
->> > diff --git a/meta-python/recipes-devtools/python/python-pexpect.inc b/meta-python/recipes-devtools/python/python-pexpect.inc
->> > index f02aa994e..c6230b2b5 100644
->> > --- a/meta-python/recipes-devtools/python/python-pexpect.inc
->> > +++ b/meta-python/recipes-devtools/python/python-pexpect.inc
->> > @@ -4,6 +4,8 @@ SECTION = "devel/python"
->> >  LICENSE = "ISC"
->> >  LIC_FILES_CHKSUM = "file://LICENSE;md5=1c7a725251880af8c6a148181665385b"
->> >
->> > +SRC_URI += "file://0001-FSM.py-change-shebang-from-python-to-python3.patch"
->> > +
->>
->> This .inc file should be merged into .bb, as well, also check if
->> meta-python2 depends on this .inc file, if it does then the patching
->> should happen inside py3 version of bb file and not .inc
->>
->> >  SRC_URI[md5sum] = "153eb25184249d6a85fde9acf4804085"
->> >  SRC_URI[sha256sum] = "fc65a43959d153d0114afe13997d439c22823a27cefceb5ff35c2178c6784c0c"
->> >
->> > diff --git a/meta-python/recipes-devtools/python/python3-pexpect/0001-FSM.py-change-shebang-from-python-to-python3.patch b/meta-python/recipes-devtools/python/python3-pexpect/0001-FSM.py-change-shebang-from-python-to-python3.patch
->> > new file mode 100644
->> > index 000000000..bee772da6
->> > --- /dev/null
->> > +++ b/meta-python/recipes-devtools/python/python3-pexpect/0001-FSM.py-change-shebang-from-python-to-python3.patch
->> > @@ -0,0 +1,25 @@
->> > +From 35462d7b778eea32fd0cc0bbc79d6e6f53d942b4 Mon Sep 17 00:00:00 2001
->> > +From: Changqing Li <changqing.li@windriver.com>
->> > +Date: Thu, 23 Apr 2020 08:01:42 +0000
->> > +Subject: [PATCH] FSM.py: change shebang from python to python3
->> > +
->> > +Upstream-Status: Pending
->> > +
->> > +Signed-off-by: Changqing Li <changqing.li@windriver.com>
->> > +---
->> > + pexpect/FSM.py | 2 +-
->> > + 1 file changed, 1 insertion(+), 1 deletion(-)
->> > +
->> > +diff --git a/pexpect/FSM.py b/pexpect/FSM.py
->> > +index 46b392e..4e77654 100644
->> > +--- a/pexpect/FSM.py
->> > ++++ b/pexpect/FSM.py
->> > +@@ -1,4 +1,4 @@
->> > +-#!/usr/bin/env python
->> > ++#!/usr/bin/env python3
->> > +
->> > + '''This module implements a Finite State Machine (FSM). In addition to state
->> > + this FSM also maintains a user defined "memory". So this FSM can be used as a
->> > +--
->> > +2.24.1
->> > +
->> >
->> >
->> >
->> >
->>
->> 
+> //Peter
+>
+> > Signed-off-by: Matthew Campbell <mcampbell@izotope.com>
+> > ---
+> >  ...bus-c++-tools-native_0.8.1.bb => sdbus-c++-tools_0.8.1.bb} | 4 +++-
+> >  1 file changed, 3 insertions(+), 1 deletion(-)
+> >  rename meta-oe/recipes-core/sdbus-c++/{sdbus-c++-tools-native_0.8.1.bb
+> > => sdbus-c++-tools_0.8.1.bb} (89%)
+> >
+> > diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-
+> > native_0.8.1.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.1.bb
+> > similarity index 89%
+> > rename from meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-
+> > native_0.8.1.bb
+> > rename to meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.1.bb
+> > index e18b9903d..9eaec0f2a 100644
+> > --- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-native_0.8.1.bb
+> > +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.1.bb
+> > @@ -4,7 +4,7 @@ DESCRIPTION = "Native interface code generator for
+> > development with sdbus-c++"
+> >  LICENSE = "LGPLv2.1"
+> >  LIC_FILES_CHKSUM =
+> > "file://${S}/COPYING;md5=1803fa9c2c3ce8cb06b4861d75310742"
+> >
+> > -inherit cmake native
+> > +inherit cmake
+> >
+> >  DEPENDS += "expat"
+> >
+> > @@ -12,3 +12,5 @@ SRCREV = "3a4f343fb924650e7639660efa5f143961162044"
+> >  SRC_URI = "git://github.com/Kistler-Group/sdbus-
+> > cpp.git;protocol=https;branch=master;subpath=tools"
+> >
+> >  S = "${WORKDIR}/tools"
+> > +
+> > +BBCLASSEXTEND = "native nativesdk"
+> > --
+> > 2.20.1
+>
+> 
