@@ -1,106 +1,121 @@
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com [209.85.222.196])
- by mx.groups.io with SMTP id smtpd.web10.1686.1587767447216877369
+Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com [66.111.4.27])
+ by mx.groups.io with SMTP id smtpd.web10.529.1587775674982867380
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Apr 2020 15:30:47 -0700
+ Fri, 24 Apr 2020 17:47:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=fquHGxRa;
- spf=pass (domain: gmail.com, ip: 209.85.222.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f196.google.com with SMTP id o19so11934784qkk.5
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2020 15:30:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=zQc+NzDOqzb3yUB3nlnv8Rq/GgCdyN17/21nf96C4Y4=;
-        b=fquHGxRaEZs1PZ8lTvKbVMGlG46W7NhPVH/J2BOYsnnFP3r4ktw0Mlm1iiJnD427mu
-         rH3VixnnQcDhv/d4l86S1tq9/WT3OoI+Y2i/JaCsQmEHcOU0R1W5m8bxK3DFpsv9jZdh
-         z+PjNMRGwfLeTAafMudVQwWhGIhYdczt50OlnL6xOVfXt82AWbmQmKsmOAQVSZgIzB/8
-         26SqCgM7dsB0810ygW3ec+I3BAgGLZMINA+aVB2mRrwQO81JNPMr92XHjgvVB6YJALbm
-         PnjtFO4Lxi5uz/8oTGhmCuWtzNYcqY9tcwvrbvSpanYpRu67C87BEXSWXkmfidAJzIrH
-         6/Sw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=zQc+NzDOqzb3yUB3nlnv8Rq/GgCdyN17/21nf96C4Y4=;
-        b=G/iHGYaRL8XTVZ35lK4lZJRhEssvoE3rUhebePlmOoh7lRs2msHzeilrb9BPWAd01g
-         d+QPiqmaHRGPxFxrCnOw7xEhPKGx5VcHa3TEY3B0VVpgQQLni4BHW1EAAYcDW4Ea2deA
-         56TFtAQLiSOyuw3+bBqJeCeesn7ZxOHRgHo/Lf6zcsXLK565YL6AaXkaxf9LirtIsley
-         VfQCmuO+PwRf46FBVTu7zOSEge6Bg7zAb+pmAbhgA9RA0UlN83+6KStACjKpmiFDBn03
-         2hrp+kaFu0usbDa5Mp4cfkSiXZncy8O9d7q/atuaW9yH0BEdhwq0yznqbcB9k9dZhNBJ
-         hslQ==
-X-Gm-Message-State: AGi0PuYvGjiRlzbUuKccgy/HZUwA+5/kZTX8HXYq2uIMSEQSnGv+qMZA
-	9hG3Nkmv0QfRj1kGG24/ng2Csh09DlMu9iG9Rgo=
-X-Google-Smtp-Source: APiQypLpDaj/HmzRKp1YF8r/bAU3U9K03jTSRExFxc4LbLu0Ayr18mdAcTGDsBfcwq+xAdYyD3rz3nrplkOF+63uJww=
-X-Received: by 2002:a37:8d81:: with SMTP id p123mr10755467qkd.17.1587767446139;
- Fri, 24 Apr 2020 15:30:46 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200423235535.6706-1-andrea.adami@gmail.com>
-In-Reply-To: <20200423235535.6706-1-andrea.adami@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Fri, 24 Apr 2020 15:30:18 -0700
-Message-ID: <CAMKF1sqKwNGX8uSV=HqgXQDEHJs3qSZ-5NKQeZaaNHBT-fMeVQ@mail.gmail.com>
-Subject: Re: [oe] [meta-initramfs][PATCH] meta-initramfs-image: remove klibc utilities
-To: Andrea Adami <andrea.adami@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+ dkim=pass header.i=@alistair23.me header.s=fm3 header.b=lUx7oymd;
+ spf=none, err=permanent DNS error (domain: alistair23.me, ip: 66.111.4.27, mailfrom: alistair@alistair23.me)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.nyi.internal (Postfix) with ESMTP id 7D36C5C01A4
+	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2020 20:47:53 -0400 (EDT)
+Received: from imap26 ([10.202.2.76])
+  by compute3.internal (MEProxy); Fri, 24 Apr 2020 20:47:53 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+	 h=mime-version:message-id:in-reply-to:references:date:from:to
+	:subject:content-type; s=fm3; bh=JxV0iB1Ty0bJYM1op7zeGwc31MjJoj9
+	n3SL7IMI32oU=; b=lUx7oymduod4l8QRMEovZmQ8u4JY+BLLJUJiCe7nRRMeNPH
+	bkuGliQujHMDW3whNRhyOVtc9q3luxhVTpFzcwzVq1g9hl4daMSVOir1QadOSBvB
+	bJTQ3rU1ELiym56xcUCJS3pjpik6t7y4eJC+VLd6CjTya1c1zW1B508fIyuKS8Lb
+	wJ5xEnG5qieV7+5Lv/iZo3TCsfdNJ/pHGgmVBMYUYffO9IplkhTeuUzvCfk7PUVM
+	9DyomW/f/2X/syvsBTNdjIcURTU3MLIo5+dVYbsaROZ22AwVscbI3xAU+b5nrfmp
+	KeihSHjTBOLKlkMGuKft9KcGEwwSKPsPB4hGrWg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=JxV0iB
+	1Ty0bJYM1op7zeGwc31MjJoj9n3SL7IMI32oU=; b=fj8FQbhehWdmIyERjM/BGJ
+	lKdBm5UibgZOeR9dWhLveUiPEK8IQN5epsPBLOyiYtRMVyOzz67b5Wz+EqtCdPrN
+	1YqUfS2QdnqFgQmKGfo/2lo+FZ+k2OyNkmpk1iL1UV7SU5TiCteC8200An8XyM7v
+	jzwyb2Le6Mx+y6xpb4DunJ26nmtsVs5tbtmT0oV/JD1gOGs7FJqXRdKAs/eG7urE
+	cAXVVK3o8+HLmXvkRHZWnn4PA6QSbIOKjzXzRMQf8ky8p41KEAWWNC/9fA22nAJx
+	+DnIDnk4XALWo+uv2dLjtP1b7BwcDAeXSTawulWvE5kL0yFO6UdIOxl8zyXk3VQA
+	==
+X-ME-Sender: <xms:uYijXtNVChUjpFgB2_ta_tXn0erfxJhX2RTNSKnEygOC-AFSuCRANg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduhedrhedvgdefkecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecunecujfgurhepofgfggfkjghffffhvffutgesthdtre
+    dtreertdenucfhrhhomheptehlihhsthgrihhruceorghlihhsthgrihhrsegrlhhishht
+    rghirhdvfedrmhgvqeenucffohhmrghinhephihotghtohhprhhojhgvtghtrdhorhhgpd
+    hgihhthhhusgdrtghomhdpohhpvghnvghmsggvugguvggurdhorhhgnecuvehluhhsthgv
+    rhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprghlihhsthgrihhrsegrlh
+    hishhtrghirhdvfedrmhgv
+X-ME-Proxy: <xmx:uYijXkO5ACV1SrnOmpkYxAV2dFW593CGjdmlJJvhn_48Qo2SM8V0CQ>
+    <xmx:uYijXv0G1k05z8klkFD0gvyH6mxZXrCpl31inJwe_BRfQE8VZMyXTw>
+    <xmx:uYijXo1Y0J0VbffElbeYNUfZL9FGxhx0bIuDr9ly0eG7Q3_gIOOH5w>
+    <xmx:uYijXizGA0ZxlRJL09uoSvBGYjSBkDZwR7-8PwallCaHo1TcLu7Lkg>
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+	id 4255814200A2; Fri, 24 Apr 2020 20:47:53 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.3.0-dev0-351-g9981f4f-fmstable-20200421v1
+Mime-Version: 1.0
+Message-Id: <ee033791-f139-45a9-b8b4-4cbd68962744@www.fastmail.com>
+In-Reply-To: 
+ <CAMKF1srb+fSYRjhBjmA+dH7HN_M+rckXJj+f5y0T8JPn4fQ1hQ@mail.gmail.com>
+References: <20200424063130.386675-1-alistair@alistair23.me>
+ <CAMKF1srb+fSYRjhBjmA+dH7HN_M+rckXJj+f5y0T8JPn4fQ1hQ@mail.gmail.com>
+Date: Fri, 24 Apr 2020 17:39:24 -0700
+From: "Alistair" <alistair@alistair23.me>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [PATCH] libgit2: Update to v1.0.0
+Content-Type: text/plain
 
-On Thu, Apr 23, 2020 at 4:55 PM Andrea Adami <andrea.adami@gmail.com> wrote:
->
-> klibc utils have no update-alternatives because these live ideally alone
-> in th einitramfs. This image is not minimal having busybox, linux-utils,
-> coreutils so to resolve the conflict we just remove the shared klibc utils
-> and replace the klibc kexec and vmcore-dmesg.
->
-> Finally, remove EXCLUDE_FROM_WORLD.
->
-> Fix:
-> ERROR: meta-initramfs-image-1.0-r0 do_rootfs:
-> Postinstall scriptlets of ['busybox', 'util-linux-umount', 'util-linux-dmesg',
->  'coreutils', 'util-linux-mount', 'cpio', 'util-linux-kill',
->  'util-linux-losetup'] have failed.
->
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> ---
->  .../packagegroups/packagegroup-meta-initramfs.bb | 16 ++--------------
->  1 file changed, 2 insertions(+), 14 deletions(-)
->
-> diff --git a/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
-> index bfede5a74..dc4928b5a 100644
-> --- a/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
-> +++ b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
-> @@ -15,22 +15,10 @@ RDEPENDS_packagegroup-meta-initramfs = "\
->  "
->
->  RDEPENDS_packagegroup-meta-initramfs-devtools = "\
-> -    libklibc  dracut \
-> -    klibc-utils-cat klibc-utils-losetup klibc-utils-readlink klibc-utils-chroot \
-> -    klibc-utils-ls klibc-utils-reboot klibc-utils-cpio klibc-utils-minips \
-> -    klibc-utils-resume klibc-utils-dd klibc-utils-mkdir klibc-utils-run-init \
-> -    klibc-utils-dmesg klibc-utils-mkfifo klibc-utils-sh.shared klibc-utils-false \
-> -    klibc-utils-mknod klibc-utils-sleep klibc-utils-fstype klibc-utils-mount \
-> -    klibc-utils-sync klibc-utils-halt klibc-utils-mv klibc-utils-true klibc-utils-ipconfig \
-> -    klibc-utils-nfsmount klibc-utils-umount klibc-utils-kill klibc-utils-nuke klibc-utils-uname \
-> -    mtdinfo-klibc ubiattach-klibc ubiblock-klibc ubicrc32-klibc ubidetach-klibc \
-> -    ubiformat-klibc ubimkvol-klibc ubinfo-klibc ubinize-klibc ubirename-klibc \
-> -    ubirmvol-klibc ubirsvol-klibc ubiupdatevol-klibc \
-> +    dracut \
->      ${@bb.utils.contains_any("TRANSLATED_TARGET_ARCH", "i586 x86-64", "grubby", "", d)} \
->      "
->
->  RDEPENDS_packagegroup-meta-initramfs-kernel = "\
-> -    kexec-klibc vmcore-dmesg-klibc \
-> +    kexec vmcore-dmesg \
+On Fri, Apr 24, 2020, at 2:16 PM, Khem Raj wrote:
+> This update has some issues
+> 
+> Fails on qemux86/clang
+> https://errors.yoctoproject.org/Errors/Details/407382/
 
-this creates a dependency on kexec-tools from oe-core, this however is
-not buildable on some arches e.g. riscv
-so this change does not work as such, I think you can only add it as
-dependency where its supported.
+I tried to reproduce this with:
 
->      "
-> -
-> -EXCLUDE_FROM_WORLD = "1"
-> --
-> 2.17.1
->
+MACHINE=qemux86 TOOLCHAIN="clang"  bitbake libgit2
+
+but it build for me. What am I missing?
+
+> 
+> for glibc/musl there is another failure which is caused by this
+> 
+> https://errors.yoctoproject.org/Errors/Details/407386/
+
+I have a patch for this. I'll send it out with v2.
+
+Alistair
+
+> 
+> On Thu, Apr 23, 2020 at 11:31 PM Alistair <alistair@alistair23.me> wrote:
+> >
+> > Signed-off-by: Alistair Francis <alistair@alistair23.me>
+> > ---
+> > .../libgit2/{libgit2_0.28.4.bb => libgit2_1.0.0.bb} | 6 +++---
+> > 1 file changed, 3 insertions(+), 3 deletions(-)
+> > rename meta-oe/recipes-support/libgit2/{libgit2_0.28.4.bb => libgit2_1.0.0.bb} (64%)
+> >
+> > diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb b/meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
+> > similarity index 64%
+> > rename from meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb
+> > rename to meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
+> > index 9b9c19104..fd26a0fe9 100644
+> > --- a/meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb
+> > +++ b/meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
+> > @@ -1,12 +1,12 @@
+> > SUMMARY = "the Git linkable library"
+> > HOMEPAGE = "http://libgit2.github.com/"
+> > LICENSE = "GPL-2.0-with-GCC-exception & MIT"
+> > -LIC_FILES_CHKSUM = "file://COPYING;md5=3f2cd5d3cccd71d62066ba619614592b"
+> > +LIC_FILES_CHKSUM = "file://COPYING;md5=5b002a195fb7ea2d8d583f07eaff3a8e"
+> >
+> > DEPENDS = "curl openssl zlib libssh2 libgcrypt"
+> >
+> > -SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.28"
+> > -SRCREV = "106a5f27586504ea371528191f0ea3aac2ad432b"
+> > +SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v1.0"
+> > +SRCREV = "7d3c7057f0e774aecd6fc4ef8333e69e5c4873e0"
+> >
+> > S = "${WORKDIR}/git"
+> >
+> > --
+> > 2.26.0
+> >
+> > 
+> 
+> 
 > 
