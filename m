@@ -1,132 +1,131 @@
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
- by mx.groups.io with SMTP id smtpd.web12.8266.1587828526790657894
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
+ by mx.groups.io with SMTP id smtpd.web11.8163.1587828564088823139
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Apr 2020 08:28:46 -0700
+ Sat, 25 Apr 2020 08:29:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=QDECNa0M;
- spf=pass (domain: gmail.com, ip: 209.85.160.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f195.google.com with SMTP id z90so10508461qtd.10
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2020 08:28:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=c6is5vwG;
+ spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f195.google.com with SMTP id 20so13423534qkl.10
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2020 08:29:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=XdGMLoZAA39myXrs6tE4NdxaHiwdAZULP9sTlA9ItZU=;
-        b=QDECNa0MtRKoDYhv+N6qLuV8n0tZwwE5WQqDejNGMJsGvSiEJEjQDA/hhVA3+20r/5
-         yvhu9tZIjbGjkm0nl0D2rCjv4RXNnJyGLEFeSoozXjbzHSwASqWN7xg1r+4Dq80Kl4HL
-         585fYQAmDxP+hmLVdXTGBGoyCy2d5wTvk258/g3fa5KMkGh1bKPzJux5NJm4iR9nVoLZ
-         VAp7j6egUilFHPBrOewYrMton6CWoEVyQVj1VwbAMtkhu3Tv8tEqBEal2bm8+PlxIJd+
-         M8pEeVH7FJacG36MEmqFRrm2MWhaTHyE4UGwwgZd13WvsZV3uTfO4b0w8mZcZK9Jr8El
-         lrmg==
+        bh=/VdipbpQ6BoSPZaUSsJFulyYdO7MsMDel/GkOAHhpWo=;
+        b=c6is5vwG1i2YagB7Gjp6tKultnEY//cQdTrItR7hS+aoN6l/OFUwttT3VaaLdaRx4a
+         1idXj8p0T9ScG0srlazOVmelibRJmJ7FjuwGeIvVE40VYdrLDovcIn1BFiO8KsV2q/t4
+         1nQR87znQPMHex9sN1LKF7nRzlOqrMFyKPz6EVTXi905+mIyd4KhlzhBGUDJlWDA0U0W
+         v2o0f8FiIVklul2qi5HOZcYs8AOLxc6ToSdsv3WUlyXR4a1/mGrynzMgllBe3fJYPgGi
+         xD9XuDJuelxmb5CEtC3Oc8jh6ulc6adiGjVSyL/A7XhU9b9A1uiHmvJuz3HBoBi23ayu
+         whlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=XdGMLoZAA39myXrs6tE4NdxaHiwdAZULP9sTlA9ItZU=;
-        b=bSnGnzM1OWT7gHTtPK6y4tPAXxH7qztizfxwa8D19OxLTpT/ylnT4cIpIZUa9EpLk8
-         32Tj5CtzhD7LJRdWvcnXHXSQrbJ7M4HXGmwa+PAGoaggFA4NyAmmo36pfjNBL6Zkd7+J
-         2AA0a632ZmWZ3g20AgVjVxHPd0hFEFWZePu9XwTqblbiKZhttvDuIWBIvSTAq5COBes6
-         5gXTBxPtoRD02PJKNFKme9mapOBeIYPyUU4jXIOJAIjDKqgY9go0nDIXyE+sGhMqPVc+
-         Gib6OljrgC8NANUY8XZ40iXvenyEcx2H4bIJsKcyoo6xYwcvcTEmf2CUuvVAsRx6RBjo
-         GchQ==
-X-Gm-Message-State: AGi0PuZSllBUMkVxrWnKnLw+63e3Dj+ReAMONd+Wr9NWoeFrKd7Yr5YL
-	FkVys9d5ML4a5UBn/KB7B1y0k1IZi/KvDylBk+w=
-X-Google-Smtp-Source: APiQypJ0ZGXrJf4MpfKnWWV8+vjTbrUkJp58Tkn3JQ14iXZ7jWngTXBB45Ropzqm2cYAslwHk+O7lfFoeKDdJERBVkk=
-X-Received: by 2002:ac8:66cf:: with SMTP id m15mr15060016qtp.146.1587828525784;
- Sat, 25 Apr 2020 08:28:45 -0700 (PDT)
+        bh=/VdipbpQ6BoSPZaUSsJFulyYdO7MsMDel/GkOAHhpWo=;
+        b=O+av3TMLTPO+qfQdGJHgvhe9ba7fC1RNlEwVxLb1Y5uxUqLHJibeAEurwRh2jlwkhJ
+         6pHT9cdoROPWoQ6+6HLOcqxeab72U0U3XS+/ixeEPGpAICYGubp723etUY8vE/vdb94b
+         +RGDnZ7XFfae3LkOxaU2yNX8tZ1KYV0MsGGx0tLTYXrZACE+PBldvzzcCQ9VGw/XxBM7
+         dT+erNHI8Vo0toGbtsKKroQDnTEjk3Axqd5Sat5RE+2f7IDZgEDJDInLqV7lWAjZ9v1n
+         tOZc+k3UVijjMjh0kLIqWpP9JSEC1cT/v1QH/b/h97kRZL37LYbbLU2bqrOR5vaJW+ny
+         panQ==
+X-Gm-Message-State: AGi0Pub9TZtqtwIlVlxSFvjoBRHMw7leYFTFgH6L/byetljVZ3XRrIZY
+	w34MemidC0tqOwlbGgPmNgORhC1JRKwZYoDRLyM=
+X-Google-Smtp-Source: APiQypJOXSfnm1XaYw+FWph5h6DWJ7NHZV1hg8oXwh2kGfuyKF+z3l/cWVFYMccq+z+wtP1OytZdgpnNTwSVQdpRR9A=
+X-Received: by 2002:a05:620a:4f0:: with SMTP id b16mr2859120qkh.165.1587828563037;
+ Sat, 25 Apr 2020 08:29:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200423235535.6706-1-andrea.adami@gmail.com> <CAMKF1sqKwNGX8uSV=HqgXQDEHJs3qSZ-5NKQeZaaNHBT-fMeVQ@mail.gmail.com>
- <CAAQYJAs8Q7Y9o_03gdj2VFTRZ-QvyOtHPY_HmBMkpOTCzP3NTw@mail.gmail.com>
-In-Reply-To: <CAAQYJAs8Q7Y9o_03gdj2VFTRZ-QvyOtHPY_HmBMkpOTCzP3NTw@mail.gmail.com>
+References: <20200424011328.191909-1-changqing.li@windriver.com>
+ <bac9fe56-5f04-1cd4-6cc8-10c77ccfc4c8@gmail.com> <CANx9H-D81iMF76hRqrnPJEjNvkSq_JyTqqu9q+r-ZYqGUb-8Rw@mail.gmail.com>
+In-Reply-To: <CANx9H-D81iMF76hRqrnPJEjNvkSq_JyTqqu9q+r-ZYqGUb-8Rw@mail.gmail.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sat, 25 Apr 2020 08:28:19 -0700
-Message-ID: <CAMKF1soQ4Sy-XR4uhq0CD2Jvwv8tAGru6pX75-jZ6zGucMTnXw@mail.gmail.com>
-Subject: Re: [oe] [meta-initramfs][PATCH] meta-initramfs-image: remove klibc utilities
-To: Andrea Adami <andrea.adami@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Date: Sat, 25 Apr 2020 08:28:57 -0700
+Message-ID: <CAMKF1srwjV4oUdGfq=vFBV78Swy1bw9u=LkrVWEuRnhwNe6U9g@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-pexpect: change shebang to python3
+To: Tim Orling <ticotimo@gmail.com>
+Cc: Changqing Li <changqing.li@windriver.com>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Sat, Apr 25, 2020 at 6:10 AM Andrea Adami <andrea.adami@gmail.com> wrote:
+On Fri, Apr 24, 2020 at 10:00 PM Tim Orling <ticotimo@gmail.com> wrote:
 >
-> On Sat, Apr 25, 2020 at 12:30 AM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > On Thu, Apr 23, 2020 at 4:55 PM Andrea Adami <andrea.adami@gmail.com> wrote:
-> > >
-> > > klibc utils have no update-alternatives because these live ideally alone
-> > > in th einitramfs. This image is not minimal having busybox, linux-utils,
-> > > coreutils so to resolve the conflict we just remove the shared klibc utils
-> > > and replace the klibc kexec and vmcore-dmesg.
-> > >
-> > > Finally, remove EXCLUDE_FROM_WORLD.
-> > >
-> > > Fix:
-> > > ERROR: meta-initramfs-image-1.0-r0 do_rootfs:
-> > > Postinstall scriptlets of ['busybox', 'util-linux-umount', 'util-linux-dmesg',
-> > >  'coreutils', 'util-linux-mount', 'cpio', 'util-linux-kill',
-> > >  'util-linux-losetup'] have failed.
-> > >
-> > > Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> > > ---
-> > >  .../packagegroups/packagegroup-meta-initramfs.bb | 16 ++--------------
-> > >  1 file changed, 2 insertions(+), 14 deletions(-)
-> > >
-> > > diff --git a/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
-> > > index bfede5a74..dc4928b5a 100644
-> > > --- a/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
-> > > +++ b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
-> > > @@ -15,22 +15,10 @@ RDEPENDS_packagegroup-meta-initramfs = "\
-> > >  "
-> > >
-> > >  RDEPENDS_packagegroup-meta-initramfs-devtools = "\
-> > > -    libklibc  dracut \
-> > > -    klibc-utils-cat klibc-utils-losetup klibc-utils-readlink klibc-utils-chroot \
-> > > -    klibc-utils-ls klibc-utils-reboot klibc-utils-cpio klibc-utils-minips \
-> > > -    klibc-utils-resume klibc-utils-dd klibc-utils-mkdir klibc-utils-run-init \
-> > > -    klibc-utils-dmesg klibc-utils-mkfifo klibc-utils-sh.shared klibc-utils-false \
-> > > -    klibc-utils-mknod klibc-utils-sleep klibc-utils-fstype klibc-utils-mount \
-> > > -    klibc-utils-sync klibc-utils-halt klibc-utils-mv klibc-utils-true klibc-utils-ipconfig \
-> > > -    klibc-utils-nfsmount klibc-utils-umount klibc-utils-kill klibc-utils-nuke klibc-utils-uname \
-> > > -    mtdinfo-klibc ubiattach-klibc ubiblock-klibc ubicrc32-klibc ubidetach-klibc \
-> > > -    ubiformat-klibc ubimkvol-klibc ubinfo-klibc ubinize-klibc ubirename-klibc \
-> > > -    ubirmvol-klibc ubirsvol-klibc ubiupdatevol-klibc \
-> > > +    dracut \
-> > >      ${@bb.utils.contains_any("TRANSLATED_TARGET_ARCH", "i586 x86-64", "grubby", "", d)} \
-> > >      "
-> > >
-> > >  RDEPENDS_packagegroup-meta-initramfs-kernel = "\
-> > > -    kexec-klibc vmcore-dmesg-klibc \
-> > > +    kexec vmcore-dmesg \
-> >
-> > this creates a dependency on kexec-tools from oe-core, this however is
-> > not buildable on some arches e.g. riscv
-> > so this change does not work as such, I think you can only add it as
-> > dependency where its supported.
-> >
->
-> Well, the problem was already there, kexec-tools klibc and oe-core both have
->
-> COMPATIBLE_HOST =
-> '(x86_64.*|i.86.*|arm.*|aarch64.*|powerpc.*|mips.*)-(linux|freebsd.*)'
->
->
-> I really have no idea about the image purposes, I see there is dracut
-> which seems to be buildable for most archs and does not have runtime
-> deps on kexec-tools.
-> Maybe we can just remove kexec and vmcore-dmesg
+> meta-python2 has zero connection the meta-python. So it will not depend on any inc files.
 >
 
-these were mainly for testing builds of the given layer. So I think
-removing kexec and vmcore-dmesg is ok
+Thanks, perhaps this patch is ok then, merging inc and bb can be a
+different one.
 
-> Cheers
-> Andrea
->
->
->
-> > >      "
-> > > -
-> > > -EXCLUDE_FROM_WORLD = "1"
-> > > --
-> > > 2.17.1
-> > >
-> > > 
+> On Fri, Apr 24, 2020 at 6:57 PM Khem Raj <raj.khem@gmail.com> wrote:
+>>
+>>
+>>
+>> On 4/23/20 6:13 PM, Changqing Li wrote:
+>> > From: Changqing Li <changqing.li@windriver.com>
+>> >
+>> > we have offcially dropped python2, so it is possible
+>> > that our code run on python3 only host, so change
+>> > shebang to python3 to avoid error like:
+>> > python: command not found
+>> >
+>> > Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>> > ---
+>> >  .../python/python-pexpect.inc                 |  2 ++
+>> >  ...hange-shebang-from-python-to-python3.patch | 25 +++++++++++++++++++
+>> >  2 files changed, 27 insertions(+)
+>> >  create mode 100644 meta-python/recipes-devtools/python/python3-pexpect/0001-FSM.py-change-shebang-from-python-to-python3.patch
+>> >
+>> > diff --git a/meta-python/recipes-devtools/python/python-pexpect.inc b/meta-python/recipes-devtools/python/python-pexpect.inc
+>> > index f02aa994e..c6230b2b5 100644
+>> > --- a/meta-python/recipes-devtools/python/python-pexpect.inc
+>> > +++ b/meta-python/recipes-devtools/python/python-pexpect.inc
+>> > @@ -4,6 +4,8 @@ SECTION = "devel/python"
+>> >  LICENSE = "ISC"
+>> >  LIC_FILES_CHKSUM = "file://LICENSE;md5=1c7a725251880af8c6a148181665385b"
+>> >
+>> > +SRC_URI += "file://0001-FSM.py-change-shebang-from-python-to-python3.patch"
+>> > +
+>>
+>> This .inc file should be merged into .bb, as well, also check if
+>> meta-python2 depends on this .inc file, if it does then the patching
+>> should happen inside py3 version of bb file and not .inc
+>>
+>> >  SRC_URI[md5sum] = "153eb25184249d6a85fde9acf4804085"
+>> >  SRC_URI[sha256sum] = "fc65a43959d153d0114afe13997d439c22823a27cefceb5ff35c2178c6784c0c"
+>> >
+>> > diff --git a/meta-python/recipes-devtools/python/python3-pexpect/0001-FSM.py-change-shebang-from-python-to-python3.patch b/meta-python/recipes-devtools/python/python3-pexpect/0001-FSM.py-change-shebang-from-python-to-python3.patch
+>> > new file mode 100644
+>> > index 000000000..bee772da6
+>> > --- /dev/null
+>> > +++ b/meta-python/recipes-devtools/python/python3-pexpect/0001-FSM.py-change-shebang-from-python-to-python3.patch
+>> > @@ -0,0 +1,25 @@
+>> > +From 35462d7b778eea32fd0cc0bbc79d6e6f53d942b4 Mon Sep 17 00:00:00 2001
+>> > +From: Changqing Li <changqing.li@windriver.com>
+>> > +Date: Thu, 23 Apr 2020 08:01:42 +0000
+>> > +Subject: [PATCH] FSM.py: change shebang from python to python3
+>> > +
+>> > +Upstream-Status: Pending
+>> > +
+>> > +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>> > +---
+>> > + pexpect/FSM.py | 2 +-
+>> > + 1 file changed, 1 insertion(+), 1 deletion(-)
+>> > +
+>> > +diff --git a/pexpect/FSM.py b/pexpect/FSM.py
+>> > +index 46b392e..4e77654 100644
+>> > +--- a/pexpect/FSM.py
+>> > ++++ b/pexpect/FSM.py
+>> > +@@ -1,4 +1,4 @@
+>> > +-#!/usr/bin/env python
+>> > ++#!/usr/bin/env python3
+>> > +
+>> > + '''This module implements a Finite State Machine (FSM). In addition to state
+>> > + this FSM also maintains a user defined "memory". So this FSM can be used as a
+>> > +--
+>> > +2.24.1
+>> > +
+>> >
+>> >
+>> >
+>> >
+>>
+>> 
