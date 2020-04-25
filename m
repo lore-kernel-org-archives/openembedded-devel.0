@@ -1,102 +1,83 @@
-Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com [209.85.216.66])
- by mx.groups.io with SMTP id smtpd.web11.2028.1587793486258843923
- for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Apr 2020 22:44:46 -0700
+Received: from mail-il1-f173.google.com (mail-il1-f173.google.com [209.85.166.173])
+ by mx.groups.io with SMTP id smtpd.web11.2080.1587794044029674446
+ for <Openembedded-devel@lists.openembedded.org>;
+ Fri, 24 Apr 2020 22:54:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=O0piCgyA;
- spf=pass (domain: gmail.com, ip: 209.85.216.66, mailfrom: ticotimo@gmail.com)
-Received: by mail-pj1-f66.google.com with SMTP id t9so4796985pjw.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2020 22:44:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=dMI88XnW;
+ spf=pass (domain: gmail.com, ip: 209.85.166.173, mailfrom: ticotimo@gmail.com)
+Received: by mail-il1-f173.google.com with SMTP id s10so11415587iln.11
+        for <Openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2020 22:54:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=6893TP5npMUctXDDpeu5eG24lqQlFJRCgqA2221Cniw=;
-        b=O0piCgyAeNvqjFJHvyPtZ677aSWgPWRwvqlHF6BcdTnfCxGOOrvw1W2v1AgigZIBKD
-         L7plBZDCdg4Zj8F9yR3rlX9TZ8bbYxmlLuMH9V5P/GyqE9B72Q8PZ97QbT4G/fn3AqON
-         eYSTr0ZGVRW9j+mN6appbKR2bzVXKgROlFD7l+Sn1zLzbExhBfPzvZALSkvIrVYwY+Qf
-         BiCwZAlTYP6C3pUKprOq+lx9d3E+A9oiFpoMhsgAy7iwHdlVWlwVt7OMVct0LTty2fLV
-         TMkqyzrc9OwHuAlN5YcySeSBUGM4mRWcuce6FNvCb6ArTEnpSgTHng/mMeRN++hhCCX2
-         B4pg==
+        h=mime-version:from:date:message-id:subject:to;
+        bh=6pVm0zU1PuO+lOFh3hi4OiOZ7LzljNOTYjlPfO+OuYw=;
+        b=dMI88XnWcZfxmG0ag7KD3RMFhoJaR1d8JRhiCVgkclf6gmOKrd3KTK99QJ44Zg+DGX
+         Bjj/jSBHANJGszzXteLPfF4REZEI3GDAAMPNIrOwj3J2Vvzx43gJfGKqFsn7ofz6H2B4
+         IuXrTy4FdHkeShw8zQJt0dP+9gkSDqkBmXvXEmJKXaszGrkh76Yhyuyc0IcrDM/wPqrv
+         uFu4p2Z9VmX8cwfRIEwCnsnBMDYHjUX+cR5ABMLmeg2PYFVHW7xi4RrAEp2n3X0vvpPM
+         rBACkSRpCHLkk5e3lzbpibYtdNvEZE4j7FEBkwhKTIemEBFplfFFpOD/uNDmXJ0/B2/w
+         azmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=6893TP5npMUctXDDpeu5eG24lqQlFJRCgqA2221Cniw=;
-        b=cS+jC/+SvxdD/mkBKIMtbf9RulwuHxJ7vNmeavPK2TweDFNezLsbrA0a7aNep77jdC
-         ZE3vfXmLqazFVXbb8SaP72LtDdOlfRiGd92ErJRwePMBtz2voJ7Ont6+haxRh+20sawc
-         5T6xZbssp28EMNo9fif6X+6OkEDoxL73iaoWg7WjB+xJea76blvM1NBNWr1Bu50zPi5y
-         cP+iT1NZ6FJt/eEMT39OsWEQ6DQ33QvIux/66OmruhG8Aj73wp2M4tk7BiXnVbGMldXV
-         D7qak90asuf84gNmulAirEeCt5JfFQRAs+nZg2GXXe12aGh8exKRnfBpXqUw8U24XkSF
-         Szaw==
-X-Gm-Message-State: AGi0Puaa3CRybt/YZkdTGlxRQENb97HNtzdC4S4hlpoahppknV5q+pq4
-	dW/uyM0WbTa49m91CEr0M5p2YgchyTc=
-X-Google-Smtp-Source: APiQypJI9tMGgQrprBrdCckhtIj2oRt2RVtcUcfain1tTnxr9YGZEhubAflT8tH9S6PO2IL65VjZDw==
-X-Received: by 2002:a17:90a:a414:: with SMTP id y20mr9169668pjp.45.1587793485461;
-        Fri, 24 Apr 2020 22:44:45 -0700 (PDT)
-Return-Path: <ticotimo@gmail.com>
-Received: from thetis.hsd1.or.comcast.net ([2601:1c0:6000:9640:dcf0:abab:3ebd:87c7])
-        by smtp.gmail.com with ESMTPSA id f3sm6102745pjo.24.2020.04.24.22.44.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Apr 2020 22:44:45 -0700 (PDT)
-From: "Tim Orling" <ticotimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <ticotimo@gmail.com>
-Subject: [meta-python2] python{-native}: upgrade 2.7.17 -> 2.7.18
-Date: Fri, 24 Apr 2020 22:43:46 -0700
-Message-Id: <20200425054346.36789-1-ticotimo@gmail.com>
-X-Mailer: git-send-email 2.25.0
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=6pVm0zU1PuO+lOFh3hi4OiOZ7LzljNOTYjlPfO+OuYw=;
+        b=Hwhn1GGZEjo/Zmrvg361Lf11hadjWxz31lm7+BZXfdJ8+NZfENkY/4cgUDz3X0RRAl
+         WymjTwWcPVRpHWggHknGTBzyPbwzZ9SQt8wMMgMwwer1Ky8BC12lnn+urKiiKQh4wenE
+         I49OSsYslDNVA6grcQczCHIkX/Vzgu9VIUGTNvsX1yGNqtgq1Yq3NDhD/5e/wVDly9mO
+         SRWkU8bwRnDyO5H3SGRn8Usa/ByP2a4wsL20LpZUTjTHGvRQ00pWzUOcZ4dc3c6ODYhQ
+         Qv9dUeRAV/PtBSn4HuIq6a8wteRyZxogG99cgJJL2q11w0J5HWeBfnFOWqzg9X9p123y
+         NKdQ==
+X-Gm-Message-State: AGi0Pub9BUYLOsADCFR+ZHZj8tUwUFztxuoVp7yqICVD1AqMPwPyMBOx
+	01Zc5qd0qJmplCoz8kDS4CLyxpl5QgtxzMFngWEoX92w
+X-Google-Smtp-Source: APiQypIyNxgcBuiilEXjNGTE3SSsuQA3QiRWHel2rdSKc+NPBfRwTYljG6tH8wXZ9g2nIBLPy/KeXAJL0NoJOFcr62E=
+X-Received: by 2002:a92:1b91:: with SMTP id f17mr12024957ill.142.1587794043245;
+ Fri, 24 Apr 2020 22:54:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: "Tim Orling" <ticotimo@gmail.com>
+Date: Fri, 24 Apr 2020 22:53:52 -0700
+Message-ID: <CANx9H-DP=9gYudOCC5LOFantGWGDwyGUQZtATUeDZ2WJLrbXGg@mail.gmail.com>
+Subject: [meta-python2] Final python2 release
+To: "openembedded-devel@lists.openembedded.org" <Openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000ec9bef05a4171b71"
 
-This is the FINAL 2.7 release. Upstream will
-not be supporting Python 2 any longer. You
-are STRONGLY encouraged to move to Python 3.
+--000000000000ec9bef05a4171b71
+Content-Type: text/plain; charset="UTF-8"
 
-You leave yourself at risk to vulnerabilities,
-security risks and fundamentally non-supported
-code. You are risking significant liability if
-you do not update to Python 3.
+The final, last, terminal, dead, deceased, never-any-more,
+move-to-python3-now release of python2 2.7.18 was released on April 19. I
+have posted a patch to upgrade meta-python2 to 2.7.18. Please test. If you
+care, test a lot.
 
-License-Update: Update copyright years
+I intend to also apply this release to the "dunfell" branch. Since it is
+the first Yocto Project LTS release and this 2.7 release is close enough
+for horse-shoes and tiddly-winks.
 
-Signed-off-by: Tim Orling <ticotimo@gmail.com>
----
- .../{python-native_2.7.17.bb => python-native_2.7.18.bb}     | 0
- recipes-devtools/python/python.inc                           | 5 ++---
- .../python/{python_2.7.17.bb => python_2.7.18.bb}            | 0
- 3 files changed, 2 insertions(+), 3 deletions(-)
- rename recipes-devtools/python/{python-native_2.7.17.bb => python-native_2.7.18.bb} (100%)
- rename recipes-devtools/python/{python_2.7.17.bb => python_2.7.18.bb} (100%)
+After this month (April 2020), I have no motivation to continue supporting
+python2. I do not use python2 and have not since bitbake was upgraded to
+use python3. My employer does not use python2. The meta-python2 layer will
+be best-effort only support unless other maintainers step up.
 
-diff --git a/recipes-devtools/python/python-native_2.7.17.bb b/recipes-devtools/python/python-native_2.7.18.bb
-similarity index 100%
-rename from recipes-devtools/python/python-native_2.7.17.bb
-rename to recipes-devtools/python/python-native_2.7.18.bb
-diff --git a/recipes-devtools/python/python.inc b/recipes-devtools/python/python.inc
-index 19a2f3e7..a4ba0c54 100644
---- a/recipes-devtools/python/python.inc
-+++ b/recipes-devtools/python/python.inc
-@@ -5,13 +5,12 @@ SECTION = "devel/python"
- # bump this on every change in contrib/python/generate-manifest-2.7.py
- INC_PR = "r1"
- 
--LIC_FILES_CHKSUM = "file://LICENSE;md5=e466242989bd33c1bd2b6a526a742498"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=203a6dbc802ee896020a47161e759642"
- 
- SRC_URI = "http://www.python.org/ftp/python/${PV}/Python-${PV}.tar.xz \
-            "
- 
--SRC_URI[md5sum] = "b3b6d2c92f42a60667814358ab9f0cfd"
--SRC_URI[sha256sum] = "4d43f033cdbd0aa7b7023c81b0e986fd11e653b5248dac9144d508f11812ba41"
-+SRC_URI[sha256sum] = "b62c0e7937551d0cc02b8fd5cb0f544f9405bafc9a54d3808ed4594812edef43"
- 
- # python recipe is actually python 2.x
- # also, exclude pre-releases for both python 2.x and 3.x
-diff --git a/recipes-devtools/python/python_2.7.17.bb b/recipes-devtools/python/python_2.7.18.bb
-similarity index 100%
-rename from recipes-devtools/python/python_2.7.17.bb
-rename to recipes-devtools/python/python_2.7.18.bb
--- 
-2.25.0
+If you want recipe upgrades, now is the time to send patches. Dead men tell
+no tales.
 
+--Tim
+
+--000000000000ec9bef05a4171b71
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>The final, last, terminal, dead, deceased, never-any-=
+more, move-to-python3-now release of python2 2.7.18 was released on April 1=
+9. I have posted a patch to upgrade meta-python2 to 2.7.18. Please test. If=
+ you care, test a lot.<br></div><div><br></div><div>I intend to also apply =
+this release to the &quot;dunfell&quot; branch. Since it is the first Yocto=
+ Project LTS release and this 2.7 release is close enough for horse-shoes a=
+nd tiddly-winks.<br></div><div><br></div><div>After this month (April 2020)=
+, I have no motivation to continue supporting python2. I do not use python2=
+ and have not since bitbake was upgraded to use python3. My employer does n=
+ot use python2. The meta-python2 layer will be best-effort only support unl=
+ess other maintainers step up.</div><div><br></div><div>If you want recipe =
+upgrades, now is the time to send patches. Dead men tell no tales.</div><di=
+v><br></div><div>--Tim<br></div></div>
+
+--000000000000ec9bef05a4171b71--
