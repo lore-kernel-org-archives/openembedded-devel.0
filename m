@@ -1,108 +1,171 @@
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com [209.85.160.196])
- by mx.groups.io with SMTP id smtpd.web10.8395.1587828823351277890
+Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com [66.111.4.27])
+ by mx.groups.io with SMTP id smtpd.web12.571.1587831902017832602
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Apr 2020 08:33:43 -0700
+ Sat, 25 Apr 2020 09:25:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=YcKl9lG1;
- spf=pass (domain: gmail.com, ip: 209.85.160.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f196.google.com with SMTP id o10so10544450qtr.6
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2020 08:33:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=d9oTedK/7T26CRTETcY4/vZJw2BXyw1MN4NSJ7UPUjY=;
-        b=YcKl9lG1YSddWfQFN94cOEKQOLNQCuUuyKnDGslhSpHsmWudiOUoLNZakxTh803XXt
-         AR3hGNT7AWaINF8SKdhzJpqxOECLOh+F+IUbczpwfn35kyBEIR/bjZlYEu5mZuhbAkSH
-         iQJBhY0mnQJnm+gHMWTPOYF94Q9A22f1bimLh2g/Fkpp5DGaU0+5+h/dF4xmEfnpNzkV
-         QcKKCpI0WFECe3D9Ax1ua0X00NyrvZlffEosppoajMmCAxa2lDXtbPer+9oIxHm8T4bk
-         3NdfgnfYExi2unpydQ2vH50nUtnGIXWlP4F8xx+NAj4XHKgs4eak5l9YVulLcNX1XNrv
-         Fxew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=d9oTedK/7T26CRTETcY4/vZJw2BXyw1MN4NSJ7UPUjY=;
-        b=SfoeFc7ofRXmrxQkIN9s45Fkcyl5lBebZCh+9ajbC9bgaEiWAoVcgXtH2ExlR/KcYc
-         ZDqqZcH5+OsvNcnPH3/Aqp28FO5BVriX/IExUVbOzABVtY5R7QLaMWWSGx3vqAf1ov/i
-         WUOtkhQGtlAEqXiq7vLBuh7QGQqdD3BBbreLNFn9PG83VLTVRD2nxANuxJnMzmJAufgx
-         HpUNF1RhyLu74PoV+vbuuTaczB2TRKuShFgY2cqWcDHaicGxu+WGncmBByJIXF//yqZf
-         Lhk+e7ikRMwgyKTBMFmAR0IbN4ac8djAK2XKICN6wRpsrVRDgNn5i9rRR3maW9dMgTdb
-         epAw==
-X-Gm-Message-State: AGi0PuZKvW1Yi11SjJ8jCJs09mM9iGm69hKeIBAIMlshRZNR/iZ+0avf
-	4gmnrlyuzRfRGeHMYzRVucUKzQMp5sLcEp0QBBWkwMtX
-X-Google-Smtp-Source: APiQypIOavHuRKiDxbFfrmBdpdttSLG9QkYvuqvhBHWQ9jRD68UNixXe7M1j/K2vmkIhOoa+FlzxkkW8jss2d3kkD9s=
-X-Received: by 2002:ac8:668b:: with SMTP id d11mr14776134qtp.285.1587828822096;
- Sat, 25 Apr 2020 08:33:42 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200422200630.79513-1-mcampbell@izotope.com> <e4ac0a4da76740ed8a6919b6018cd2cc@XBOX03.axis.com>
-In-Reply-To: <e4ac0a4da76740ed8a6919b6018cd2cc@XBOX03.axis.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sat, 25 Apr 2020 08:33:16 -0700
-Message-ID: <CAMKF1sowV6rYshjjYxPsHDOwB7+nK3i2smSZ9cbgSBoj+vQaGQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2] sdbus-c++-tools: add nativesdk
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Cc: Matt Campbell <Mcampbell@izotope.com>, 
-	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+ dkim=pass header.i=@alistair23.me header.s=fm3 header.b=Aw7e9qLn;
+ spf=none, err=permanent DNS error (domain: alistair23.me, ip: 66.111.4.27, mailfrom: alistair@alistair23.me)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.nyi.internal (Postfix) with ESMTP id 453D75C01A3
+	for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2020 12:25:01 -0400 (EDT)
+Received: from imap26 ([10.202.2.76])
+  by compute3.internal (MEProxy); Sat, 25 Apr 2020 12:25:01 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+	 h=mime-version:message-id:in-reply-to:references:date:from:to
+	:subject:content-type; s=fm3; bh=kaT3h9Xxa+M0SZSHDFWeVRmj0jJRNoX
+	Q+x9327hgIYs=; b=Aw7e9qLn1qry03yXzYZutJar1Ug+XMHIt8l3j9IHwkVJRXO
+	hVB/kSKeTgAL/DZ69hyGl12WAcfhENrHDTEMhYhlhkba0qAc2SzMUC59huPF7X0Z
+	FB3/dRrng4Cbt4BHrCkbGQrOx4L+J9ma1/U21ZvJgz0uLuCN6BD82wgoWX9b57Zk
+	eFvDTu7l/OYYLUzrBFG8+9XtKTMizkgHfW6+l/OkvB0nway4z2YrPmCflbEqME+K
+	ZM9KlMEq2fTZwkQRqW6X82qZLL6DUY4arB6XKIz1v/nHdCUc9xfi5Z72kwtCf3tw
+	X+SzdHEAzvqn7kEDwrXL7o6Pqfqv3f+yLS46StQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=kaT3h9
+	Xxa+M0SZSHDFWeVRmj0jJRNoXQ+x9327hgIYs=; b=EqxTx3yHBCef/cAA4OyDW1
+	dePNqE/syutp+MEglFqZJKxOyYeCCpTvZQDIEnyhoEL5an2GlbPDM5wRJg9DIAO9
+	MujUNtJYFKcct3MBY3f+hy+CRyog1pPbkwwDgWNtMAqieDAN0xoqmmagRdIzj8Bi
+	TSrW1mGnEmhJq9Jukg7GMRBAT9hlOwqMdCWS0ccCmOCRlgci0cXj1Z7EUcc8Oo9K
+	kmxXvxomSVxO//BRC3nmp98M44VWM9ocUoO58I1ZDBYcRNDhzLcKjuQEmM07fIop
+	oLt5sG106OvvZmZkNsaRsyfDQtJZLQk9ukDJDor5UTHXDNTWlaJ6Tay/C8gD7RiQ
+	==
+X-ME-Sender: <xms:XGSkXnO6APdwOJtMR-sVhFH53lFQRYZ5H0yUqNKpvEuiLAtNnr-UAw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduhedrheeggdejkecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecunecujfgurhepofgfggfkjghffffhvffutgesthdtre
+    dtreertdenucfhrhhomheptehlihhsthgrihhruceorghlihhsthgrihhrsegrlhhishht
+    rghirhdvfedrmhgvqeenucffohhmrghinhephihotghtohhprhhojhgvtghtrdhorhhgpd
+    hgihhthhhusgdrtghomhdpohhpvghnvghmsggvugguvggurdhorhhgnecuvehluhhsthgv
+    rhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprghlihhsthgrihhrsegrlh
+    hishhtrghirhdvfedrmhgv
+X-ME-Proxy: <xmx:XGSkXreXR6oTYRh9S_cor-f3UkBg-K9y2TEezcYxbFvKQg7aD2au-w>
+    <xmx:XGSkXqgvMZT1SR-pTPb_7pk-bL3GicQagGqF8r871b674IczN6-AzQ>
+    <xmx:XGSkXjSFH1c72U9gyKKHMD6yO-po5ShplkL0dE5npxMKYMLYk4YGzw>
+    <xmx:XWSkXtdyKkO-mfZ7dgzKPTFg8zIhIK-xoVGeGunHA7WeVZT78y3GwA>
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+	id C8CC614200A2; Sat, 25 Apr 2020 12:25:00 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.3.0-dev0-351-g9981f4f-fmstable-20200421v1
+Mime-Version: 1.0
+Message-Id: <f1b7f208-b5c1-4f4a-9bd6-2b2c13475b56@www.fastmail.com>
+In-Reply-To: <620ca6fb-ba03-0e57-aa7b-6d25e490a616@gmail.com>
+References: <20200424063130.386675-1-alistair@alistair23.me>
+ <CAMKF1srb+fSYRjhBjmA+dH7HN_M+rckXJj+f5y0T8JPn4fQ1hQ@mail.gmail.com>
+ <ee033791-f139-45a9-b8b4-4cbd68962744@www.fastmail.com>
+ <620ca6fb-ba03-0e57-aa7b-6d25e490a616@gmail.com>
+Date: Sat, 25 Apr 2020 09:16:32 -0700
+From: "Alistair" <alistair@alistair23.me>
+To: 
+ ";openembedded-devel@lists.openembedded.org;;;" <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [PATCH] libgit2: Update to v1.0.0
+Content-Type: text/plain
 
-On Fri, Apr 24, 2020 at 12:31 PM Peter Kjellerstedt
-<peter.kjellerstedt@axis.com> wrote:
->
-> > -----Original Message-----
-> > From: openembedded-devel@lists.openembedded.org <openembedded-
-> > devel@lists.openembedded.org> On Behalf Of Matt Campbell
-> > Sent: den 22 april 2020 22:07
-> > To: openembedded-devel@lists.openembedded.org
-> > Cc: Matthew Campbell <mcampbell@izotope.com>
-> > Subject: [oe] [meta-oe][PATCH v2] sdbus-c++-tools: add nativesdk
-> >
-> > Changes from v1:
-> > Fix formatting of patch
->
-> The above should go below the --- line below as it relates to the
-> review process rather than the change itself.
->
-
-right, this time I fixed the commit msg before picking it up.
-
-> //Peter
->
-> > Signed-off-by: Matthew Campbell <mcampbell@izotope.com>
-> > ---
-> >  ...bus-c++-tools-native_0.8.1.bb => sdbus-c++-tools_0.8.1.bb} | 4 +++-
-> >  1 file changed, 3 insertions(+), 1 deletion(-)
-> >  rename meta-oe/recipes-core/sdbus-c++/{sdbus-c++-tools-native_0.8.1.bb
-> > => sdbus-c++-tools_0.8.1.bb} (89%)
-> >
-> > diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-
-> > native_0.8.1.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.1.bb
-> > similarity index 89%
-> > rename from meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-
-> > native_0.8.1.bb
-> > rename to meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.1.bb
-> > index e18b9903d..9eaec0f2a 100644
-> > --- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-native_0.8.1.bb
-> > +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.1.bb
-> > @@ -4,7 +4,7 @@ DESCRIPTION = "Native interface code generator for
-> > development with sdbus-c++"
-> >  LICENSE = "LGPLv2.1"
-> >  LIC_FILES_CHKSUM =
-> > "file://${S}/COPYING;md5=1803fa9c2c3ce8cb06b4861d75310742"
-> >
-> > -inherit cmake native
-> > +inherit cmake
-> >
-> >  DEPENDS += "expat"
-> >
-> > @@ -12,3 +12,5 @@ SRCREV = "3a4f343fb924650e7639660efa5f143961162044"
-> >  SRC_URI = "git://github.com/Kistler-Group/sdbus-
-> > cpp.git;protocol=https;branch=master;subpath=tools"
-> >
-> >  S = "${WORKDIR}/tools"
-> > +
-> > +BBCLASSEXTEND = "native nativesdk"
-> > --
-> > 2.20.1
->
+On Fri, Apr 24, 2020, at 6:04 PM, Khem Raj wrote:
 > 
+> 
+> On 4/24/20 5:39 PM, Alistair wrote:
+> > On Fri, Apr 24, 2020, at 2:16 PM, Khem Raj wrote:
+> >> This update has some issues
+> >>
+> >> Fails on qemux86/clang
+> >> https://errors.yoctoproject.org/Errors/Details/407382/
+> > 
+> > I tried to reproduce this with:
+> > 
+> > MACHINE=qemux86 TOOLCHAIN="clang" bitbake libgit2
+> 
+> I think you need meta-clang in layer mix. and then set TOOLCHAIN =
+> "clang" in local.conf, I will try to see as well, it seems its finding a
+> library in native sysroot :( which should otherwise be in target sysroot
+
+Yep, I checked and I have meta-clang and set TOOLCHAIN.
+
+> 
+> and the reason is that its happily adding libraries in linker cmdline.
+> So something is in CMakefile which is not differentiating native sysroot
+> from target sysroot.
+
+Is it possible the build wasn't clean before hand? In my testing I saw some linker issues which was fixed by cleaning the build files.
+
+> 
+> -Wl,-rpath,TOPDIR/build/tmp/work/core2-32-yoe-linux/libgit2/1.0.0-r0/recipe-sysroot-native/usr/lib
+> ...
+> 
+> TOPDIR/build/tmp/work/core2-32-yoe-linux/libgit2/1.0.0-r0/recipe-sysroot-native/usr/lib/libpcre.so
+> TOPDIR/build/tmp/work/core2-32-yoe-linux/libgit2/1.0.0-r0/recipe-sysroot-native/usr/lib/libpcreposix.so
+> 
+> ...
+> 
+> 
+> core2-32-yoe-linux/libgit2/1.0.0-r0/recipe-sysroot-native/usr/lib/libpcre.so:
+> error adding symbols: file in wrong format
+
+I don't see the error and I'm not really sure what to do.
+
+Alistair
+
+> 
+> > 
+> > but it build for me. What am I missing?
+> > 
+> >>
+> >> for glibc/musl there is another failure which is caused by this
+> >>
+> >> https://errors.yoctoproject.org/Errors/Details/407386/
+> > 
+> > I have a patch for this. I'll send it out with v2.
+> > 
+> 
+> OK
+> 
+> > Alistair
+> > 
+> >>
+> >> On Thu, Apr 23, 2020 at 11:31 PM Alistair <alistair@alistair23.me> wrote:
+> >>>
+> >>> Signed-off-by: Alistair Francis <alistair@alistair23.me>
+> >>> ---
+> >>> .../libgit2/{libgit2_0.28.4.bb => libgit2_1.0.0.bb} | 6 +++---
+> >>> 1 file changed, 3 insertions(+), 3 deletions(-)
+> >>> rename meta-oe/recipes-support/libgit2/{libgit2_0.28.4.bb => libgit2_1.0.0.bb} (64%)
+> >>>
+> >>> diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb b/meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
+> >>> similarity index 64%
+> >>> rename from meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb
+> >>> rename to meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
+> >>> index 9b9c19104..fd26a0fe9 100644
+> >>> --- a/meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb
+> >>> +++ b/meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
+> >>> @@ -1,12 +1,12 @@
+> >>> SUMMARY = "the Git linkable library"
+> >>> HOMEPAGE = "http://libgit2.github.com/"
+> >>> LICENSE = "GPL-2.0-with-GCC-exception & MIT"
+> >>> -LIC_FILES_CHKSUM = "file://COPYING;md5=3f2cd5d3cccd71d62066ba619614592b"
+> >>> +LIC_FILES_CHKSUM = "file://COPYING;md5=5b002a195fb7ea2d8d583f07eaff3a8e"
+> >>>
+> >>> DEPENDS = "curl openssl zlib libssh2 libgcrypt"
+> >>>
+> >>> -SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.28"
+> >>> -SRCREV = "106a5f27586504ea371528191f0ea3aac2ad432b"
+> >>> +SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v1.0"
+> >>> +SRCREV = "7d3c7057f0e774aecd6fc4ef8333e69e5c4873e0"
+> >>>
+> >>> S = "${WORKDIR}/git"
+> >>>
+> >>> --
+> >>> 2.26.0
+> >>>
+> >>>
+> >>
+> >>
+> >>
+> >>
+> >> 
+> 
+> 
+> 
+> 
+> 
+> *Attachments:*
+>  * signature.asc
