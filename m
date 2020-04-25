@@ -1,48 +1,47 @@
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.web10.225.1587779831046647533
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com [209.85.214.196])
+ by mx.groups.io with SMTP id smtpd.web11.299.1587780158319417858
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Apr 2020 18:57:11 -0700
+ Fri, 24 Apr 2020 19:02:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=KBu+8oe+;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id t11so5519389pgg.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2020 18:57:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=lU/TpjdL;
+ spf=pass (domain: gmail.com, ip: 209.85.214.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f196.google.com with SMTP id d24so4429329pll.8
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2020 19:02:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:references:from:autocrypt:organization:message-id:date
          :user-agent:mime-version:in-reply-to;
-        bh=AZPVgC3gFa6T3vFx0XmXPptDy1Y6Bg1CczgflcqsdyE=;
-        b=KBu+8oe+Fh/krLg2sO/xKMthCmfliGHR+0pm4bbTaGTaodSL6cxKRjXzhQ9KjtGhRW
-         SblKE7Mma0P10YxjNl+KE5IuQb8eM1gmf0D7mWNPh2H2PRtLxbw/YjQhxovcB+cEkpDh
-         lZjbuPpy+KG2uj3Azoz2dlP4GyiEBypqaQhIEue4EEPg/TEyYbWE0PURI/Ds7+hhLQud
-         MMnKpTomgEdGuZsKstVS2WpixhbL6zUwOdECRTKKrJxhZBPB3SHXivo/ANrWE7iLtb7U
-         +unFBzzuXb370EAvHaU9e6TMXMkvr7TzFDD1yszVZqyniV2aB8pB/6+wfr2Y3akfugBv
-         tVZw==
+        bh=GsnGpqYZSFeJqBhzKhx0UDuYFj41G9U6eV64atVWviQ=;
+        b=lU/TpjdL+TWQRk3EW9bjVIC4S4ogQEozu5EWujdqyaNpv4fWwYY/o0mVh1neuYsRLe
+         FLnLVhi6EOzWdofz9RJxre9FFNl11/omLodU0SZUTKu4lzPpMbkor0yWh36ChthLZBUz
+         1axqEIiPvWHyY5FTvEcM8s2cO/+7rZi+HwuSgvosV+w7TNk9YQKE8ZbVBZh8zvUK6Gtj
+         eVZoTRNXMShf+EYQzYq/z+KMo9e4FSVNmNajDHdI4AI/ubD3IXX2kiu28HOoDsDz4Qym
+         KCghwrD0OZbnmG/Oz2Sk2Hj/yBAAkHyjCa9ZNm48pqfpe4f+2tSvBo/5TqF5GQTGjEL7
+         UAPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:references:from:autocrypt
          :organization:message-id:date:user-agent:mime-version:in-reply-to;
-        bh=AZPVgC3gFa6T3vFx0XmXPptDy1Y6Bg1CczgflcqsdyE=;
-        b=DW9wpedTCHq4Fd53uctdSXH69CP45mIH+oFUCSyZnH4Iu/dDPJGR1Trjf7D2I6MuMM
-         lx1ltlXZd5JJXwTq6eSHz1mFLqPDPRduGXfSZ0IRlUATt81Wvnwg3G6UFzn8F+AsLDdG
-         liIXi+UBOgocZuWU1sSMcYrRFjBrAp4APW4YRKLUNVoT49eoOUe0lSy0FhULkEbEYiwF
-         TbKnF+KRVK4xSmPc6wwunAYTE6EPLJZ4Su8eKoJ3gj7tDE5iS5zyuFs8s67RVV6tqGY3
-         tLOCbCMGi3CSL4WtaixSN3nIuifuOBS58AQ5S+oEOm4U6RnmGCEIj/32S+Um2HDbWFuM
-         2JDw==
-X-Gm-Message-State: AGi0PuaG786mqqmQJ6Pv9AQaq0xwIcW8a7S4nqPLE2Swmrs3uHI9Wexp
-	gASE07hqyaxby9Bjfy3ObiIKjCoge14=
-X-Google-Smtp-Source: APiQypLlfZ6BO8Ui5SHKQVGD/4i1Wu+9ryLGdcI3LdSrM9F0r6pr0zhLXMZTU19RlWnOO+Px9nQZOw==
-X-Received: by 2002:aa7:9683:: with SMTP id f3mr13126665pfk.278.1587779830169;
-        Fri, 24 Apr 2020 18:57:10 -0700 (PDT)
+        bh=GsnGpqYZSFeJqBhzKhx0UDuYFj41G9U6eV64atVWviQ=;
+        b=jEhA2XNpiFiNlMh8JNd7CwaCJrTpqEhxoCBM4DPh8LryMMBoST7FUj62TdIQ100UeS
+         LyDlm4llQwlWs0jRRQ94zqqSpkfl50Dj40YQtYh63rR7BeSehaomU6xFny28xYb0pzEw
+         5oxMmU7SpvIKIU8PpthXRPx7WvPUucsZxmMF+yDu58Cz4xTSZBYb2u/ooED/sS1ga5fS
+         foB7vi6u7i/45KnABAt4R2C6YFOi9EOu1q+E335q1H1vJMYmdu+FG0atZBw8+CswSYMU
+         1NpBLPqm9iYOhonNY8z3Pd21/+bXeC3j8JACQR/QgNbFgSOPf9BpnQfvG75RyZk6Mc0M
+         0jLQ==
+X-Gm-Message-State: AGi0PuYp/n1XYHvt0PzRK1aEcYeGWbJTkxqSPdLagUWVIrQn4UmpxbnN
+	Xydoag6wTnPB+Y0m5e4r3saOCdy/pVM=
+X-Google-Smtp-Source: APiQypKmmOUm9sBVym7dibx3O9DZm9xlmd3iQi2CzdaLSvGwr8zsS0iFScstyWI0OaIcJ1pficvJ7Q==
+X-Received: by 2002:a17:902:8485:: with SMTP id c5mr12683745plo.242.1587780157552;
+        Fri, 24 Apr 2020 19:02:37 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from ?IPv6:2601:646:9200:4e0::ac76? ([2601:646:9200:4e0::ac76])
-        by smtp.gmail.com with ESMTPSA id a19sm7183868pfd.91.2020.04.24.18.57.09
+        by smtp.gmail.com with ESMTPSA id t126sm6693950pfb.29.2020.04.24.19.02.36
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 24 Apr 2020 18:57:09 -0700 (PDT)
-Subject: Re: [oe] [meta-python][PATCH] python3-pexpect: change shebang to python3
-To: Changqing Li <changqing.li@windriver.com>,
- openembedded-devel@lists.openembedded.org
-References: <20200424011328.191909-1-changqing.li@windriver.com>
+        Fri, 24 Apr 2020 19:02:37 -0700 (PDT)
+Subject: Re: [oe] [meta-oe][PATCH] cjson: add recipe for v1.7.13
+To: Ting Liu <ting.liu@nxp.com>, openembedded-devel@lists.openembedded.org
+References: <20200424065545.28012-1-ting.liu@nxp.com>
 From: "Khem Raj" <raj.khem@gmail.com>
 Autocrypt: addr=raj.khem@gmail.com; keydata=
  mQGiBEqXaJERBACUvFofpD3FsxD9675wcPv+rzguIfsRWilrrpSZ61JHjLHwkUnmDLpLSdfv
@@ -77,129 +76,107 @@ Autocrypt: addr=raj.khem@gmail.com; keydata=
  XlQNlB5grwH9o6uNtPbV7q/uRqmKq5EiiEkEGBECAAkFAkqXaJECGwwACgkQuwUzVZGdMxR1
  VACcCkdaO3rb8/gRprldmAH6eR49eo4AnjD3h3aTwv/1bl+BAz1twmZmz8ul
 Organization: HIMVIS LLC
-Message-ID: <bac9fe56-5f04-1cd4-6cc8-10c77ccfc4c8@gmail.com>
-Date: Fri, 24 Apr 2020 18:57:02 -0700
+Message-ID: <8f6b2032-a2f4-2785-afdf-188ad9f3ec75@gmail.com>
+Date: Fri, 24 Apr 2020 19:02:32 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <20200424011328.191909-1-changqing.li@windriver.com>
-X-Groupsio-MsgNum: 84076
+In-Reply-To: <20200424065545.28012-1-ting.liu@nxp.com>
+X-Groupsio-MsgNum: 84077
 Content-Type: multipart/signed; micalg=pgp-sha1;
  protocol="application/pgp-signature";
- boundary="C0jqC9fXvAKkxkEdGNIU16VkgIVQdgB7S"
+ boundary="KhuDBoMV62D32OKZJygVOmwHgahNmILBa"
 
---C0jqC9fXvAKkxkEdGNIU16VkgIVQdgB7S
-Content-Type: multipart/mixed; boundary="pWTSRPi0bgTsOCzeZRIDgvGMUrJgJ6ylb";
+--KhuDBoMV62D32OKZJygVOmwHgahNmILBa
+Content-Type: multipart/mixed; boundary="JAgB3J0HByrGNLlw5kynR4TVW0QITnW6j";
  protected-headers="v1"
 From: Khem Raj <raj.khem@gmail.com>
-To: Changqing Li <changqing.li@windriver.com>,
- openembedded-devel@lists.openembedded.org
-Message-ID: <bac9fe56-5f04-1cd4-6cc8-10c77ccfc4c8@gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-pexpect: change shebang to
- python3
-References: <20200424011328.191909-1-changqing.li@windriver.com>
-In-Reply-To: <20200424011328.191909-1-changqing.li@windriver.com>
+To: Ting Liu <ting.liu@nxp.com>, openembedded-devel@lists.openembedded.org
+Message-ID: <8f6b2032-a2f4-2785-afdf-188ad9f3ec75@gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] cjson: add recipe for v1.7.13
+References: <20200424065545.28012-1-ting.liu@nxp.com>
+In-Reply-To: <20200424065545.28012-1-ting.liu@nxp.com>
 
---pWTSRPi0bgTsOCzeZRIDgvGMUrJgJ6ylb
+--JAgB3J0HByrGNLlw5kynR4TVW0QITnW6j
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
 
 
-On 4/23/20 6:13 PM, Changqing Li wrote:
-> From: Changqing Li <changqing.li@windriver.com>
+On 4/23/20 11:55 PM, Ting Liu wrote:
+> From: Ting Liu <ting.liu@nxp.com>
 >=20
-> we have offcially dropped python2, so it is possible
-> that our code run on python3 only host, so change
-> shebang to python3 to avoid error like:
-> python: command not found
+> cJSON aims to be the dumbest possible parser that you can get your
+> job done with. It's a single file of C, and a single header file.
 >=20
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> Homepage: https://github.com/DaveGamble/cJSON
+>=20
+> Signed-off-by: Ting Liu <ting.liu@nxp.com>
 > ---
->  .../python/python-pexpect.inc                 |  2 ++
->  ...hange-shebang-from-python-to-python3.patch | 25 +++++++++++++++++++
->  2 files changed, 27 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python3-pexpect/=
-0001-FSM.py-change-shebang-from-python-to-python3.patch
+>  meta-oe/recipes-devtools/cjson/cjson_git.bb | 23 +++++++++++++++++++++
+>  1 file changed, 23 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/cjson/cjson_git.bb
 >=20
-> diff --git a/meta-python/recipes-devtools/python/python-pexpect.inc b/me=
-ta-python/recipes-devtools/python/python-pexpect.inc
-> index f02aa994e..c6230b2b5 100644
-> --- a/meta-python/recipes-devtools/python/python-pexpect.inc
-> +++ b/meta-python/recipes-devtools/python/python-pexpect.inc
-> @@ -4,6 +4,8 @@ SECTION =3D "devel/python"
->  LICENSE =3D "ISC"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D1c7a725251880af8c6a148181665=
-385b"
->  
-> +SRC_URI +=3D "file://0001-FSM.py-change-shebang-from-python-to-python3.=
-patch"
-> +
-
-This .inc file should be merged into .bb, as well, also check if
-meta-python2 depends on this .inc file, if it does then the patching
-should happen inside py3 version of bb file and not .inc
-
->  SRC_URI[md5sum] =3D "153eb25184249d6a85fde9acf4804085"
->  SRC_URI[sha256sum] =3D "fc65a43959d153d0114afe13997d439c22823a27cefceb5=
-ff35c2178c6784c0c"
->  
-> diff --git a/meta-python/recipes-devtools/python/python3-pexpect/0001-FS=
-M.py-change-shebang-from-python-to-python3.patch b/meta-python/recipes-devt=
-ools/python/python3-pexpect/0001-FSM.py-change-shebang-from-python-to-pytho=
-n3.patch
+> diff --git a/meta-oe/recipes-devtools/cjson/cjson_git.bb b/meta-oe/recip=
+es-devtools/cjson/cjson_git.bb
 > new file mode 100644
-> index 000000000..bee772da6
+> index 000000000..7a9ebf07b
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-pexpect/0001-FSM.py-ch=
-ange-shebang-from-python-to-python3.patch
-> @@ -0,0 +1,25 @@
-> +From 35462d7b778eea32fd0cc0bbc79d6e6f53d942b4 Mon Sep 17 00:00:00 2001
-> +From: Changqing Li <changqing.li@windriver.com>
-> +Date: Thu, 23 Apr 2020 08:01:42 +0000
-> +Subject: [PATCH] FSM.py: change shebang from python to python3
+> +++ b/meta-oe/recipes-devtools/cjson/cjson_git.bb
+> @@ -0,0 +1,23 @@
+> +DESCRIPTION =3D "Ultralightweight JSON parser in ANSI C"
+> +AUTHOR =3D "Dave Gamble"
+> +HOMEPAGE =3D "https://github.com/DaveGamble/cJSON"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D218947f77e8cb8e2fa02918dc41c=
+50d0"
 > +
-> +Upstream-Status: Pending
+> +SRC_URI =3D "git://github.com/DaveGamble/cJSON.git"
+> +SRCREV =3D "39853e5148dad8dc5d32ea2b00943cf4a0c6f120"
 > +
-> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> +---
-> + pexpect/FSM.py | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Pleae set PV =3D "1.7.13" if thats what SRCREV is pointing to
+
+> +S =3D "${WORKDIR}/git"
 > +
-> +diff --git a/pexpect/FSM.py b/pexpect/FSM.py
-> +index 46b392e..4e77654 100644
-> +--- a/pexpect/FSM.py
-> ++++ b/pexpect/FSM.py
-> +@@ -1,4 +1,4 @@
-> +-#!/usr/bin/env python
-> ++#!/usr/bin/env python3
-> +=20
-> + '''This module implements a Finite State Machine (FSM). In addition to=
- state
-> + this FSM also maintains a user defined "memory". So this FSM can be us=
-ed as a
-> +--=20
-> +2.24.1
+> +inherit cmake pkgconfig
 > +
+> +EXTRA_OECMAKE +=3D "\
+> +    -DENABLE_CUSTOM_COMPILER_FLAGS=3DOFF \
+> +    -DBUILD_SHARED_AND_STATIC_LIBS=3DOn \
+> +"
+> +
+> +FILES_${PN}-dev +=3D "\
+> +    ${libdir}/cmake \
+> +"
+> +
+> +BBCLASSEXTEND =3D "native nativesdk"
 >=20
+
+There are few more implementations around see
+http://layers.openembedded.org/layerindex/branch/master/recipes/?q=3Dcjson
+
+please consolidate best changes from all of them so they can also use
+this version.
+
 >=20
 >=20
 >=20
 
 
---pWTSRPi0bgTsOCzeZRIDgvGMUrJgJ6ylb--
+--JAgB3J0HByrGNLlw5kynR4TVW0QITnW6j--
 
---C0jqC9fXvAKkxkEdGNIU16VkgIVQdgB7S
+--KhuDBoMV62D32OKZJygVOmwHgahNmILBa
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCXqOY7gAKCRC7BTNVkZ0z
-FAJ8AJ4hYuAwWxqzhmB4S/1SN6usiR7Y0ACfVcEP40gRby9UosbrLisVLNfI5gk=
-=qkXr
+iF0EARECAB0WIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCXqOaOAAKCRC7BTNVkZ0z
+FGHUAJwLBDIsA/iIH2nvkC39kq5hBrPRXQCeL05F67UtMif01GLr2f2pZdg2a1M=
+=HR6Y
 -----END PGP SIGNATURE-----
 
---C0jqC9fXvAKkxkEdGNIU16VkgIVQdgB7S--
+--KhuDBoMV62D32OKZJygVOmwHgahNmILBa--
