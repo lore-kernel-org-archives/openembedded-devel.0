@@ -1,120 +1,125 @@
-Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com [209.85.219.65])
- by mx.groups.io with SMTP id smtpd.web10.2814.1587800026850027703
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com [209.85.214.194])
+ by mx.groups.io with SMTP id smtpd.web12.5864.1587820205228927112
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Apr 2020 00:33:47 -0700
+ Sat, 25 Apr 2020 06:10:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=aWb3jcfo;
- spf=pass (domain: gmail.com, ip: 209.85.219.65, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f65.google.com with SMTP id t8so5889609qvw.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2020 00:33:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=PzhjoQ/w;
+ spf=pass (domain: gmail.com, ip: 209.85.214.194, mailfrom: andrea.adami@gmail.com)
+Received: by mail-pl1-f194.google.com with SMTP id g2so4837053plo.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2020 06:10:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=0w1mEreywY+33F28XytHB25cz0kcoYV20UQZc9+7vl0=;
-        b=aWb3jcfoLvNParyddoPyLmLCxAFaN36BOgzUuv1LN7SGrxlcZFJ7eI1tsFR0PTFYeh
-         TWcXviHbDP++C/hmLK54dLcUHifYHqrZ7xm1ABAFK4UYir2zKa7q/7gMmyC8avN3WcQt
-         7Z+1gGbGt7i1/3Y2qtGSM+IWI6OlOwHyQI9bsP7lGJHeHwbF7RGh1lknnY8qpV7JGxw0
-         AC3ijRxAp6wayP72mXtO/DHgBiuhfTqMzzeWv51mka2Wr6/5ghRg/IgYPn8rYhxwT+AU
-         qw5t9+eiWzOA9UPg891gbG6aQ+zuRinL4Y8vEwM6W6AyNt5crHNoLXfdlAoffEM1/oHE
-         yJOg==
+         :cc;
+        bh=TLz2S93KNMpyTTw9xItSsd5bcP7s33bG+5qA5OlZOx4=;
+        b=PzhjoQ/woKNyXp0lIh+6dVOqnR5jzm28bDsrRpH9JGbQo+TVW8ZuDGnOMV5U2mLdid
+         HzKBOAllSuhDcP6EWHL7b0fMhFY4yvbqHtLUBuLpCdRVojJ4C3ThlkqHpBvfgSE+5PAY
+         3uRFvD6nncjMDcNUhyBLZZ5zb2ostuo5MwSTsc1oupHUPGGaRZ6c4eCwoWn6enXF7nk8
+         BSsWY7800Nk4oczM51nsuCjxeiYiSoWtFtUWzyBVxpdAHgKICb9IF3GmjblSGLowenyD
+         V8oM1oGhDMmNwdheTeF8vCCmgpe1dDlq7ZFr/Qdd8b1RVecCczrsrIivy6xyHQVojS7O
+         zS5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=0w1mEreywY+33F28XytHB25cz0kcoYV20UQZc9+7vl0=;
-        b=AHnXxqfY/VSNJL5SaIZRl6kFjgk+IhLMBRYf/d5XY0VmvooQ6H4PukLD1u8JHZ+MxV
-         0CFB5CLUh9vkAoxgyvy3rODINXZPGJcuBa6/vA93aVi21sdPqqDzELXf0Gmcu18i85QP
-         CyQVm0snr4B+zDukp0XKlERCdMHz6sLJ+U4nbxIX2HB/dgyxl6MbAPQeuBRzReI+s/W3
-         luY9Rm/AbKhE/w4eSt9fb4ybykEYZ+WfpYAIb4JCJzH6TGyE/sWa3Y/WKfFt7vDjXoc6
-         iN50FGOD4P/w5bykja3H0nvOJPf+knBysfhZCahmu5kPfbCrZ0FB46kMKw7BuejVaoTS
-         4u8Q==
-X-Gm-Message-State: AGi0PubgLofDVzMFLFmr8ugipF/ScepirA+DiLuBcG3JAY+b5SqvXchw
-	QABzMpUNkCOKBpsyCtmTsrpN5T9Icg3dasWWjlU=
-X-Google-Smtp-Source: APiQypJ4XHd2DFCl0lrsBo88tgqQgybpPlJDgh+e/kbBctI1rj8afIx0zspMxlYAj2I7qAV/69w3yDeFTOKRu/AOuNw=
-X-Received: by 2002:ad4:4182:: with SMTP id e2mr13262141qvp.61.1587800025865;
- Sat, 25 Apr 2020 00:33:45 -0700 (PDT)
+         :message-id:subject:to:cc;
+        bh=TLz2S93KNMpyTTw9xItSsd5bcP7s33bG+5qA5OlZOx4=;
+        b=OmfsqleilHl9JlaSn+MrS5CnpuLWErMsIFAiOBk1aTvb9e14LaG+Td2JgnqIyMlfmb
+         iTPP/LtltnZZW0LeWImkt85HVPjlYx6V3eOwUoFVY+CGZ6Ldfonqw9A6J+qgB5cqIWDF
+         luAYp0de8FXAyC2IlUpBPu0DbrgzCt73FdLohYNPTpIH6QLxyfe0kmcwGWXZPExSto0D
+         jDV0yY78R0OKkn+Ru3Lz8jTbQahNA8odoPtHKYGizKK2h3KxRNgSIspobTDx75Kt2fvf
+         TLQZRRLYNFlPgFaYxyatKzsOQ4xAzjXRJ8aAjRzKhUAG7/j6NfoB/2m+BbIF0qiA+Z95
+         KNgQ==
+X-Gm-Message-State: AGi0PubS/9QLLBvtzdeOI8KZo78+5EeS4A76CfxnluaF8/ssIrkDKPyr
+	ZWJqlIqfk+8tm46NqDVUqLn8XkKnJLWT1Fbz7tY=
+X-Google-Smtp-Source: APiQypKab0BdFp7W2tNC+wdVAuSmt90CWe1G+NEOZTavdHBnv8CfJRmAuay4SIKcM4uQXoW9ZqDPIFpqZsChuL1/IqA=
+X-Received: by 2002:a17:90a:290f:: with SMTP id g15mr12418838pjd.93.1587820204674;
+ Sat, 25 Apr 2020 06:10:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200416141656.7900-1-gregory.vimont@softbankrobotics.com>
- <CAMKF1sq0uK6F0h=MANR1kUNjwUzZOUO-RT+Gh2ACYqaJLkv9bA@mail.gmail.com>
- <CANjKyuzzm8C-TzB1AJCC0YYX8TsiWEU+JiA9xQLBL0tYF30eWA@mail.gmail.com> <CANjKyuy-wtt6Pu_mEONy6QFm1jBa0wgK+Ps-pTaMHc51Fd0uow@mail.gmail.com>
-In-Reply-To: <CANjKyuy-wtt6Pu_mEONy6QFm1jBa0wgK+Ps-pTaMHc51Fd0uow@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sat, 25 Apr 2020 00:33:17 -0700
-Message-ID: <CAMKF1spRK42s4Fd5c0JVsm0r1w+UT357_e6up6B=rvfXshgLSg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/3] opencv: 4.1.0 -> 4.1.1
-To: =?UTF-8?Q?Gr=C3=A9gory_Vimont?= <gregory.vimont@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Gregory Vimont <gregory.vimont@softbankrobotics.com>
+References: <20200423235535.6706-1-andrea.adami@gmail.com> <CAMKF1sqKwNGX8uSV=HqgXQDEHJs3qSZ-5NKQeZaaNHBT-fMeVQ@mail.gmail.com>
+In-Reply-To: <CAMKF1sqKwNGX8uSV=HqgXQDEHJs3qSZ-5NKQeZaaNHBT-fMeVQ@mail.gmail.com>
+From: "Andrea Adami" <andrea.adami@gmail.com>
+Date: Sat, 25 Apr 2020 15:09:53 +0200
+Message-ID: <CAAQYJAs8Q7Y9o_03gdj2VFTRZ-QvyOtHPY_HmBMkpOTCzP3NTw@mail.gmail.com>
+Subject: Re: [oe] [meta-initramfs][PATCH] meta-initramfs-image: remove klibc utilities
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 21, 2020 at 5:51 AM Gr=C3=A9gory Vimont <gregory.vimont@gmail.c=
-om> wrote:
+On Sat, Apr 25, 2020 at 12:30 AM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> Hello,
-> How can I reproduce this build configuration ?
+> On Thu, Apr 23, 2020 at 4:55 PM Andrea Adami <andrea.adami@gmail.com> wrote:
+> >
+> > klibc utils have no update-alternatives because these live ideally alone
+> > in th einitramfs. This image is not minimal having busybox, linux-utils,
+> > coreutils so to resolve the conflict we just remove the shared klibc utils
+> > and replace the klibc kexec and vmcore-dmesg.
+> >
+> > Finally, remove EXCLUDE_FROM_WORLD.
+> >
+> > Fix:
+> > ERROR: meta-initramfs-image-1.0-r0 do_rootfs:
+> > Postinstall scriptlets of ['busybox', 'util-linux-umount', 'util-linux-dmesg',
+> >  'coreutils', 'util-linux-mount', 'cpio', 'util-linux-kill',
+> >  'util-linux-losetup'] have failed.
+> >
+> > Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> > ---
+> >  .../packagegroups/packagegroup-meta-initramfs.bb | 16 ++--------------
+> >  1 file changed, 2 insertions(+), 14 deletions(-)
+> >
+> > diff --git a/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
+> > index bfede5a74..dc4928b5a 100644
+> > --- a/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
+> > +++ b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
+> > @@ -15,22 +15,10 @@ RDEPENDS_packagegroup-meta-initramfs = "\
+> >  "
+> >
+> >  RDEPENDS_packagegroup-meta-initramfs-devtools = "\
+> > -    libklibc  dracut \
+> > -    klibc-utils-cat klibc-utils-losetup klibc-utils-readlink klibc-utils-chroot \
+> > -    klibc-utils-ls klibc-utils-reboot klibc-utils-cpio klibc-utils-minips \
+> > -    klibc-utils-resume klibc-utils-dd klibc-utils-mkdir klibc-utils-run-init \
+> > -    klibc-utils-dmesg klibc-utils-mkfifo klibc-utils-sh.shared klibc-utils-false \
+> > -    klibc-utils-mknod klibc-utils-sleep klibc-utils-fstype klibc-utils-mount \
+> > -    klibc-utils-sync klibc-utils-halt klibc-utils-mv klibc-utils-true klibc-utils-ipconfig \
+> > -    klibc-utils-nfsmount klibc-utils-umount klibc-utils-kill klibc-utils-nuke klibc-utils-uname \
+> > -    mtdinfo-klibc ubiattach-klibc ubiblock-klibc ubicrc32-klibc ubidetach-klibc \
+> > -    ubiformat-klibc ubimkvol-klibc ubinfo-klibc ubinize-klibc ubirename-klibc \
+> > -    ubirmvol-klibc ubirsvol-klibc ubiupdatevol-klibc \
+> > +    dracut \
+> >      ${@bb.utils.contains_any("TRANSLATED_TARGET_ARCH", "i586 x86-64", "grubby", "", d)} \
+> >      "
+> >
+> >  RDEPENDS_packagegroup-meta-initramfs-kernel = "\
+> > -    kexec-klibc vmcore-dmesg-klibc \
+> > +    kexec vmcore-dmesg \
+>
+> this creates a dependency on kexec-tools from oe-core, this however is
+> not buildable on some arches e.g. riscv
+> so this change does not work as such, I think you can only add it as
+> dependency where its supported.
 >
 
-MACHINE=3Dqemumips bitbake opencv
+Well, the problem was already there, kexec-tools klibc and oe-core both have
+
+COMPATIBLE_HOST =
+'(x86_64.*|i.86.*|arm.*|aarch64.*|powerpc.*|mips.*)-(linux|freebsd.*)'
 
 
->
-> Le ven. 17 avr. 2020 =C3=A0 09:57, Gr=C3=A9gory Vimont <gregory.vimont@g=
-mail.com> a =C3=A9crit :
->>
->> I don't know what went wrong, I see only Warnings there.
->>
->> Le jeu. 16 avr. 2020 =C3=A0 20:38, Khem Raj <raj.khem@gmail.com> a =C3=
-=A9crit :
->>>
->>> This fails on mips/glibc
->>>
->>> https://errors.yoctoproject.org/Errors/Details/404685/
->>>
->>>
->>> On Thu, Apr 16, 2020 at 7:17 AM Gregory Vimont <gregory.vimont@gmail.c=
-om> wrote:
->>> >
->>> > Signed-off-by: Gregory Vimont <gregory.vimont@softbankrobotics.com>
->>> > ---
->>> >  .../opencv/{opencv_4.1.0.bb =3D> opencv_4.1.1.bb}             | 6 +=
-++---
->>> >  1 file changed, 3 insertions(+), 3 deletions(-)
->>> >  rename meta-oe/recipes-support/opencv/{opencv_4.1.0.bb =3D> opencv_=
-4.1.1.bb} (98%)
->>> >
->>> > diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-o=
-e/recipes-support/opencv/opencv_4.1.1.bb
->>> > similarity index 98%
->>> > rename from meta-oe/recipes-support/opencv/opencv_4.1.0.bb
->>> > rename to meta-oe/recipes-support/opencv/opencv_4.1.1.bb
->>> > index d781da600..5074eb2fa 100644
->>> > --- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
->>> > +++ b/meta-oe/recipes-support/opencv/opencv_4.1.1.bb
->>> > @@ -10,8 +10,8 @@ ARM_INSTRUCTION_SET_armv5 =3D "arm"
->>> >
->>> >  DEPENDS =3D "libtool swig-native bzip2 zlib glib-2.0 libwebp"
->>> >
->>> > -SRCREV_opencv =3D "371bba8f54560b374fbcd47e7e02f015ac4969ad"
->>> > -SRCREV_contrib =3D "2c32791a9c500343568a21ea34bf2daeac2adae7"
->>> > +SRCREV_opencv =3D "ddbd10c0019f3ee5f43b7902d47e7fc4303a6574"
->>> > +SRCREV_contrib =3D "0915b7eaddba3c06d83e201c9a7595e73801f417"
->>> >  SRCREV_ipp =3D "32e315a5b106a7b89dbed51c28f8120a48b368b4"
->>> >  SRCREV_boostdesc =3D "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
->>> >  SRCREV_vgg =3D "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
->>> > @@ -51,7 +51,7 @@ SRC_URI =3D "git://github.com/opencv/opencv.git;na=
-me=3Dopencv \
->>> >             file://0001-carotene-Replace-ipcp-unit-growth-with-ipa-c=
-p-unit-g.patch \
->>> >             file://download.patch \
->>> >             "
->>> > -PV =3D "4.1.0"
->>> > +PV =3D "4.1.1"
->>> >
->>> >  S =3D "${WORKDIR}/git"
->>> >
->>> > --
->>> > 2.17.1
->>> >
->>> >=20
+I really have no idea about the image purposes, I see there is dracut
+which seems to be buildable for most archs and does not have runtime
+deps on kexec-tools.
+Maybe we can just remove kexec and vmcore-dmesg
+
+Cheers
+Andrea
+
+
+
+> >      "
+> > -
+> > -EXCLUDE_FROM_WORLD = "1"
+> > --
+> > 2.17.1
+> >
+> > 
