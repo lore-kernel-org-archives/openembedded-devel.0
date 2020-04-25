@@ -1,171 +1,77 @@
-Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com [66.111.4.27])
- by mx.groups.io with SMTP id smtpd.web12.571.1587831902017832602
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web10.563.1587832016827213048
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Apr 2020 09:25:02 -0700
+ Sat, 25 Apr 2020 09:26:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@alistair23.me header.s=fm3 header.b=Aw7e9qLn;
- spf=none, err=permanent DNS error (domain: alistair23.me, ip: 66.111.4.27, mailfrom: alistair@alistair23.me)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-	by mailout.nyi.internal (Postfix) with ESMTP id 453D75C01A3
-	for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2020 12:25:01 -0400 (EDT)
-Received: from imap26 ([10.202.2.76])
-  by compute3.internal (MEProxy); Sat, 25 Apr 2020 12:25:01 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
-	 h=mime-version:message-id:in-reply-to:references:date:from:to
-	:subject:content-type; s=fm3; bh=kaT3h9Xxa+M0SZSHDFWeVRmj0jJRNoX
-	Q+x9327hgIYs=; b=Aw7e9qLn1qry03yXzYZutJar1Ug+XMHIt8l3j9IHwkVJRXO
-	hVB/kSKeTgAL/DZ69hyGl12WAcfhENrHDTEMhYhlhkba0qAc2SzMUC59huPF7X0Z
-	FB3/dRrng4Cbt4BHrCkbGQrOx4L+J9ma1/U21ZvJgz0uLuCN6BD82wgoWX9b57Zk
-	eFvDTu7l/OYYLUzrBFG8+9XtKTMizkgHfW6+l/OkvB0nway4z2YrPmCflbEqME+K
-	ZM9KlMEq2fTZwkQRqW6X82qZLL6DUY4arB6XKIz1v/nHdCUc9xfi5Z72kwtCf3tw
-	X+SzdHEAzvqn7kEDwrXL7o6Pqfqv3f+yLS46StQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to:x-me-proxy
-	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=kaT3h9
-	Xxa+M0SZSHDFWeVRmj0jJRNoXQ+x9327hgIYs=; b=EqxTx3yHBCef/cAA4OyDW1
-	dePNqE/syutp+MEglFqZJKxOyYeCCpTvZQDIEnyhoEL5an2GlbPDM5wRJg9DIAO9
-	MujUNtJYFKcct3MBY3f+hy+CRyog1pPbkwwDgWNtMAqieDAN0xoqmmagRdIzj8Bi
-	TSrW1mGnEmhJq9Jukg7GMRBAT9hlOwqMdCWS0ccCmOCRlgci0cXj1Z7EUcc8Oo9K
-	kmxXvxomSVxO//BRC3nmp98M44VWM9ocUoO58I1ZDBYcRNDhzLcKjuQEmM07fIop
-	oLt5sG106OvvZmZkNsaRsyfDQtJZLQk9ukDJDor5UTHXDNTWlaJ6Tay/C8gD7RiQ
-	==
-X-ME-Sender: <xms:XGSkXnO6APdwOJtMR-sVhFH53lFQRYZ5H0yUqNKpvEuiLAtNnr-UAw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduhedrheeggdejkecutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecunecujfgurhepofgfggfkjghffffhvffutgesthdtre
-    dtreertdenucfhrhhomheptehlihhsthgrihhruceorghlihhsthgrihhrsegrlhhishht
-    rghirhdvfedrmhgvqeenucffohhmrghinhephihotghtohhprhhojhgvtghtrdhorhhgpd
-    hgihhthhhusgdrtghomhdpohhpvghnvghmsggvugguvggurdhorhhgnecuvehluhhsthgv
-    rhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprghlihhsthgrihhrsegrlh
-    hishhtrghirhdvfedrmhgv
-X-ME-Proxy: <xmx:XGSkXreXR6oTYRh9S_cor-f3UkBg-K9y2TEezcYxbFvKQg7aD2au-w>
-    <xmx:XGSkXqgvMZT1SR-pTPb_7pk-bL3GicQagGqF8r871b674IczN6-AzQ>
-    <xmx:XGSkXjSFH1c72U9gyKKHMD6yO-po5ShplkL0dE5npxMKYMLYk4YGzw>
-    <xmx:XWSkXtdyKkO-mfZ7dgzKPTFg8zIhIK-xoVGeGunHA7WeVZT78y3GwA>
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
-	id C8CC614200A2; Sat, 25 Apr 2020 12:25:00 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.3.0-dev0-351-g9981f4f-fmstable-20200421v1
-Mime-Version: 1.0
-Message-Id: <f1b7f208-b5c1-4f4a-9bd6-2b2c13475b56@www.fastmail.com>
-In-Reply-To: <620ca6fb-ba03-0e57-aa7b-6d25e490a616@gmail.com>
-References: <20200424063130.386675-1-alistair@alistair23.me>
- <CAMKF1srb+fSYRjhBjmA+dH7HN_M+rckXJj+f5y0T8JPn4fQ1hQ@mail.gmail.com>
- <ee033791-f139-45a9-b8b4-4cbd68962744@www.fastmail.com>
- <620ca6fb-ba03-0e57-aa7b-6d25e490a616@gmail.com>
-Date: Sat, 25 Apr 2020 09:16:32 -0700
-From: "Alistair" <alistair@alistair23.me>
-To: 
- ";openembedded-devel@lists.openembedded.org;;;" <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [PATCH] libgit2: Update to v1.0.0
-Content-Type: text/plain
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=erdiF2aP;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: max.oss.09@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id x25so14651817wmc.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2020 09:26:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=jYtIkJzaebn/3pOmOIkdH3yZ1aHWhx6GtS8gycKlha8=;
+        b=erdiF2aPjqw6IudAWKLNKbT5gc7EeHfGc5nC5a+CJXZQcPFxa4dy4vy1peRl2pqwOO
+         VImZ76PHYJjaVsnERKYz+bxRjb5O6qeNjt+6FO1C63S9gwjckDbH88lDz1DGfWnwh2Zz
+         GDp1luBZa1iuhkdOXLoBSvBr+eUraOR1MWiX5K9oz6QS3HB4gqC6u4aMo2Z6H/jCeHAC
+         DOyLX1oaXJ0CF8DFszNNg0t5UZ0L9LzoZgQk6bFEMqyauJCQkrhiM3iGeTer+biKK1Da
+         rxF7vnAdFOS7X/C0nfT6eg+ii67oGX1BLTDJFgpqE+FdR3GSkJmcjnQp5SovUCi4gmUO
+         7Okg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=jYtIkJzaebn/3pOmOIkdH3yZ1aHWhx6GtS8gycKlha8=;
+        b=EnMGDea0B+S+gEz20ehWI0EYxSYSBzMxl45ef2+wGU0RLv4tkKL2c7P+rLhGTorNR4
+         YLLJjomDemI08OmJYMy7qu9zN0OxV82bsOKApp/jcPqymsMoj2DdeJXNK0IBBiUcsgzd
+         PkUnB9Ts9wjCjy9+q3L6zH1FmMMwrfz419kqNiBBtdtYkSnrS50wlZ1EN3rXuIycxkUe
+         iBn0WtOmKB1StIbOefRFk0zwO8NrrAl0Wm7lbJzKaY5C2xcaVZn4lc0m9kbroYcIRbJ0
+         t2O7e+K3Vy/q2NnoLbI1nf+dJBoObfbr/LsZI/BEpI+BUJAlJG7FMWRwjMgshSMeWZ90
+         r0qg==
+X-Gm-Message-State: AGi0PuZ8e9nMNO6JtglGjn3M60hTCLKUu3geCqPblgsFrhg72/g+F6gq
+	VVll4WtmABfG4gkXRTlnaBdtLVWb
+X-Google-Smtp-Source: APiQypKo6KgbvS3Oyav4PSkHk/o79HWbgXc/YKecDYT9FuRHPeiWdsqgj5Dg9jL7g7ieTevo96ukpQ==
+X-Received: by 2002:a1c:5502:: with SMTP id j2mr17662819wmb.56.1587832015089;
+        Sat, 25 Apr 2020 09:26:55 -0700 (PDT)
+Return-Path: <max.oss.09@gmail.com>
+Received: from linuxdev2.toradex.int (31-10-206-124.static.upc.ch. [31.10.206.124])
+        by smtp.gmail.com with ESMTPSA id y9sm7396507wmm.26.2020.04.25.09.26.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 25 Apr 2020 09:26:54 -0700 (PDT)
+From: "Max Krummenacher" <max.oss.09@gmail.com>
+X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Max Krummenacher <max.krummenacher@toradex.com>
+Subject: [meta-oe][PATCH 1/2] freerdp: wayland: depend on wayland-native
+Date: Sat, 25 Apr 2020 18:25:41 +0200
+Message-Id: <20200425162542.3247-1-max.krummenacher@toradex.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-On Fri, Apr 24, 2020, at 6:04 PM, Khem Raj wrote:
-> 
-> 
-> On 4/24/20 5:39 PM, Alistair wrote:
-> > On Fri, Apr 24, 2020, at 2:16 PM, Khem Raj wrote:
-> >> This update has some issues
-> >>
-> >> Fails on qemux86/clang
-> >> https://errors.yoctoproject.org/Errors/Details/407382/
-> > 
-> > I tried to reproduce this with:
-> > 
-> > MACHINE=qemux86 TOOLCHAIN="clang" bitbake libgit2
-> 
-> I think you need meta-clang in layer mix. and then set TOOLCHAIN =
-> "clang" in local.conf, I will try to see as well, it seems its finding a
-> library in native sysroot :( which should otherwise be in target sysroot
+do_configure tests for wayland-scanner and silently drops the wayland
+configure option if not found. Adding wayland-native to depends fixes
+that.
 
-Yep, I checked and I have meta-clang and set TOOLCHAIN.
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+---
+ meta-oe/recipes-support/freerdp/freerdp_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> 
-> and the reason is that its happily adding libraries in linker cmdline.
-> So something is in CMakefile which is not differentiating native sysroot
-> from target sysroot.
+diff --git a/meta-oe/recipes-support/freerdp/freerdp_git.bb b/meta-oe/recipes-support/freerdp/freerdp_git.bb
+index 373c4979f..6fb9a738a 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp_git.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp_git.bb
+@@ -39,7 +39,7 @@ PACKAGECONFIG ??= " \
+ 
+ X11_DEPS = "virtual/libx11 libxinerama libxext libxcursor libxv libxi libxrender libxfixes libxdamage libxrandr libxkbfile"
+ PACKAGECONFIG[x11] = "-DWITH_X11=ON -DWITH_XINERAMA=ON -DWITH_XEXT=ON -DWITH_XCURSOR=ON -DWITH_XV=ON -DWITH_XI=ON -DWITH_XRENDER=ON -DWITH_XFIXES=ON -DWITH_XDAMAGE=ON -DWITH_XRANDR=ON -DWITH_XKBFILE=ON,-DWITH_X11=OFF,${X11_DEPS}"
+-PACKAGECONFIG[wayland] = "-DWITH_WAYLAND=ON,-DWITH_WAYLAND=OFF,wayland"
++PACKAGECONFIG[wayland] = "-DWITH_WAYLAND=ON,-DWITH_WAYLAND=OFF,wayland wayland-native"
+ PACKAGECONFIG[directfb] = "-DWITH_DIRECTFB=ON,-DWITH_DIRECTFB=OFF,directfb"
+ PACKAGECONFIG[pam] = "-DWITH_PAM=ON,-DWITH_PAM=OFF,libpam"
+ PACKAGECONFIG[pulseaudio] = "-DWITH_PULSEAUDIO=ON,-DWITH_PULSEAUDIO=OFF,pulseaudio"
+-- 
+2.20.1
 
-Is it possible the build wasn't clean before hand? In my testing I saw some linker issues which was fixed by cleaning the build files.
-
-> 
-> -Wl,-rpath,TOPDIR/build/tmp/work/core2-32-yoe-linux/libgit2/1.0.0-r0/recipe-sysroot-native/usr/lib
-> ...
-> 
-> TOPDIR/build/tmp/work/core2-32-yoe-linux/libgit2/1.0.0-r0/recipe-sysroot-native/usr/lib/libpcre.so
-> TOPDIR/build/tmp/work/core2-32-yoe-linux/libgit2/1.0.0-r0/recipe-sysroot-native/usr/lib/libpcreposix.so
-> 
-> ...
-> 
-> 
-> core2-32-yoe-linux/libgit2/1.0.0-r0/recipe-sysroot-native/usr/lib/libpcre.so:
-> error adding symbols: file in wrong format
-
-I don't see the error and I'm not really sure what to do.
-
-Alistair
-
-> 
-> > 
-> > but it build for me. What am I missing?
-> > 
-> >>
-> >> for glibc/musl there is another failure which is caused by this
-> >>
-> >> https://errors.yoctoproject.org/Errors/Details/407386/
-> > 
-> > I have a patch for this. I'll send it out with v2.
-> > 
-> 
-> OK
-> 
-> > Alistair
-> > 
-> >>
-> >> On Thu, Apr 23, 2020 at 11:31 PM Alistair <alistair@alistair23.me> wrote:
-> >>>
-> >>> Signed-off-by: Alistair Francis <alistair@alistair23.me>
-> >>> ---
-> >>> .../libgit2/{libgit2_0.28.4.bb => libgit2_1.0.0.bb} | 6 +++---
-> >>> 1 file changed, 3 insertions(+), 3 deletions(-)
-> >>> rename meta-oe/recipes-support/libgit2/{libgit2_0.28.4.bb => libgit2_1.0.0.bb} (64%)
-> >>>
-> >>> diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb b/meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
-> >>> similarity index 64%
-> >>> rename from meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb
-> >>> rename to meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
-> >>> index 9b9c19104..fd26a0fe9 100644
-> >>> --- a/meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb
-> >>> +++ b/meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
-> >>> @@ -1,12 +1,12 @@
-> >>> SUMMARY = "the Git linkable library"
-> >>> HOMEPAGE = "http://libgit2.github.com/"
-> >>> LICENSE = "GPL-2.0-with-GCC-exception & MIT"
-> >>> -LIC_FILES_CHKSUM = "file://COPYING;md5=3f2cd5d3cccd71d62066ba619614592b"
-> >>> +LIC_FILES_CHKSUM = "file://COPYING;md5=5b002a195fb7ea2d8d583f07eaff3a8e"
-> >>>
-> >>> DEPENDS = "curl openssl zlib libssh2 libgcrypt"
-> >>>
-> >>> -SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.28"
-> >>> -SRCREV = "106a5f27586504ea371528191f0ea3aac2ad432b"
-> >>> +SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v1.0"
-> >>> +SRCREV = "7d3c7057f0e774aecd6fc4ef8333e69e5c4873e0"
-> >>>
-> >>> S = "${WORKDIR}/git"
-> >>>
-> >>> --
-> >>> 2.26.0
-> >>>
-> >>>
-> >>
-> >>
-> >>
-> >>
-> >> 
-> 
-> 
-> 
-> 
-> 
-> *Attachments:*
->  * signature.asc
