@@ -1,49 +1,48 @@
-Received: from mail-pj1-f65.google.com (mail-pj1-f65.google.com [209.85.216.65])
- by mx.groups.io with SMTP id smtpd.web11.737.1587776710449484108
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com [209.85.215.195])
+ by mx.groups.io with SMTP id smtpd.web11.198.1587779647956828916
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Apr 2020 18:05:10 -0700
+ Fri, 24 Apr 2020 18:54:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=NN4cvDFt;
- spf=pass (domain: gmail.com, ip: 209.85.216.65, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f65.google.com with SMTP id a32so4598514pje.5
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2020 18:05:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=RzTgdqX+;
+ spf=pass (domain: gmail.com, ip: 209.85.215.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f195.google.com with SMTP id h69so5504533pgc.8
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2020 18:54:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=to:references:from:autocrypt:organization:subject:message-id:date
+        h=subject:to:references:from:autocrypt:organization:message-id:date
          :user-agent:mime-version:in-reply-to;
-        bh=CjWOoFcj1WHuhl7isOqJiHGenVC2h8CwRPL/AIEZxQw=;
-        b=NN4cvDFtmiW6vg7YeE4NM0EsZzRihp04pAivIb/zfPxdSdc1p9u+2yrMBJcYBMnncr
-         1iyQCGO1xsYVgIIHeDjQOwpwJPx3rlAHMkov6FKUv2/R9JLAmQfSLLk9/rc/xL8DRVH6
-         t440XLnsEWpy9Zvhj9UjVTg2QVsjf7g5ixEK+ybeiVsx6n2rUxdAzVNmGY//4kOwW5S8
-         Q7qTbZvbBh5V6xWRgUbg1+/nVwvvghNAQSNMInsiV75g1g7L8Q608HfTcivJs6qO23i1
-         V6LYgAHPR5RHw2jcwQ8cIsyjyh+uhRKFSS2EntHvWWJpSODqjwdw1eAbcwZgTrjn7hDt
-         h+1A==
+        bh=iYbQQ/S/ZMGopEnWnd8gHtcLVFhZNOX9Nc/ZwTc2XOU=;
+        b=RzTgdqX+QB+M1QfbAvnKo29HEuxX1wYbbaBVxhLzZFACvJ28UvnYc6RuB5jo0oDSAp
+         b2jkG/nLCiPwtfXH7Niey79DTp03fPVDdhUbIxO2OOVcxHqHWfhmqQr0V9qB1rsxrnns
+         hqUdUvsADusmwv8lBtbsYCV1EllAGh7IpM/gHaJ4rBQG0GfbJjJWIlaxJRX0Q1fWrAXi
+         Bsgp7ng8JUltp3YvlYCwxAGBLSMGavnXOBUloVi3W8ji369K1eT0Pu0Hpxi84d1wXo2+
+         UsTCCl/vM2hFJUIRnqT0dzDeJftVn+He+//rbd1Of3PMrOLnZE9Ccu41M+iKEXSV4Kih
+         pBCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:to:references:from:autocrypt:organization
-         :subject:message-id:date:user-agent:mime-version:in-reply-to;
-        bh=CjWOoFcj1WHuhl7isOqJiHGenVC2h8CwRPL/AIEZxQw=;
-        b=pY3fywi0WjHX3GQpZkPCuPDvmV2yd49U+ebNlQ7DJJin4Pe4BLJCSgADh3kBOTP+Wm
-         /cUSIkzOcLjf7Vr0SjxU+eP7OsaYmhNLLu1Dek/hPXYpBpGHtm5Ix9hfpJ3O2tOSB1xe
-         VtclaxdSJgquALDpy1ZpmGuyuHpCx2G9nW5vwWmRXm+UlzwwkfZXv212amOrRdLb9HmO
-         F1Q/ELRrcoUqaxvpmM0iJ8juUnHQFfoR1F+TM1ZCyZ37s/VYJz/UYXkGclnkzpMM+M8R
-         75bR2gyT0qCRf3TKzeybZQT8dhYLo8G+K2km42yQCYB+iqFNgvSy9wYi5Xqg7Ye81PoR
-         8wIg==
-X-Gm-Message-State: AGi0PuaVMdxLXAvmtPB7Uilylc9XURoGJOTP7lk1V4kpkuZaMtN+/mXK
-	VQiygUa1wIKhMyTft5ykH9iPsp9gud0=
-X-Google-Smtp-Source: APiQypIcKRn/hlxKtVY4jLem/ZNWVJWpq9YMMwkE0RHrM/d7JRYuPuwvchNjXFoXrEFUY1/H4CUKdA==
-X-Received: by 2002:a17:902:b598:: with SMTP id a24mr12016919pls.63.1587776709424;
-        Fri, 24 Apr 2020 18:05:09 -0700 (PDT)
+        h=x-gm-message-state:subject:to:references:from:autocrypt
+         :organization:message-id:date:user-agent:mime-version:in-reply-to;
+        bh=iYbQQ/S/ZMGopEnWnd8gHtcLVFhZNOX9Nc/ZwTc2XOU=;
+        b=BdOfdw5Qi+cdcJTHj7vvBr1i6teFPN6dedEZhQZXgXiDX4ny/wnbt4f0kmmt2VAG7D
+         1TvqmE4cZUDeL3e6CeINh8NK5IvbaEbZKabZwFsJiFFG2OQYdcRPVAHpj3mGhwTS7PIN
+         orPl2Xy5ftFJ3kkyLnaXOeo8NI9kuCucDGekLV9w16wnzvGSlq88vqGeLU/niTuUDwjh
+         LLaT/A7A5e0Ou789jMbmu/q0+Skia46O9qrq16vjbbraAeC4/uRRvo6u6D/rkkrVJbzJ
+         xWWPsG/T1H6Qa+j94urWVl3+xfL96NKW/MmHSmqm44zffp3MvG4Wur2WAhaNq4Wjmlpj
+         EZ4Q==
+X-Gm-Message-State: AGi0PuaNhhO87Y8zXeTZucJZIT1S6XjsUie1n188+YKb/zcjXJoCEv3p
+	P2w3sBaRKznSLp67m2jIV6cy86N7XyM=
+X-Google-Smtp-Source: APiQypJHtqkSeQdo8fMHX0DLiT+r8dtx/Sb437SGQqCa1Za6tJUBzjfOrDSNNTmm+22VCpaGfMM0EA==
+X-Received: by 2002:a62:38cc:: with SMTP id f195mr12641879pfa.85.1587779647055;
+        Fri, 24 Apr 2020 18:54:07 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from ?IPv6:2601:646:9200:4e0::ac76? ([2601:646:9200:4e0::ac76])
-        by smtp.gmail.com with ESMTPSA id b8sm6686945pft.11.2020.04.24.18.05.08
+        by smtp.gmail.com with ESMTPSA id i14sm5929642pgh.47.2020.04.24.18.54.05
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 24 Apr 2020 18:05:08 -0700 (PDT)
-To: Alistair <alistair@alistair23.me>,
+        Fri, 24 Apr 2020 18:54:06 -0700 (PDT)
+Subject: Re: [oe][meta-oe][PATCH] libwebsockets: upgrade 3.2.2 -> 4.0.1
+To: Martin Balik <martin.balik@siemens.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200424063130.386675-1-alistair@alistair23.me>
- <CAMKF1srb+fSYRjhBjmA+dH7HN_M+rckXJj+f5y0T8JPn4fQ1hQ@mail.gmail.com>
- <ee033791-f139-45a9-b8b4-4cbd68962744@www.fastmail.com>
+References: <20200423200418.10856-1-martin.balik@siemens.com>
 From: "Khem Raj" <raj.khem@gmail.com>
 Autocrypt: addr=raj.khem@gmail.com; keydata=
  mQGiBEqXaJERBACUvFofpD3FsxD9675wcPv+rzguIfsRWilrrpSZ61JHjLHwkUnmDLpLSdfv
@@ -78,150 +77,97 @@ Autocrypt: addr=raj.khem@gmail.com; keydata=
  XlQNlB5grwH9o6uNtPbV7q/uRqmKq5EiiEkEGBECAAkFAkqXaJECGwwACgkQuwUzVZGdMxR1
  VACcCkdaO3rb8/gRprldmAH6eR49eo4AnjD3h3aTwv/1bl+BAz1twmZmz8ul
 Organization: HIMVIS LLC
-Subject: Re: [oe] [PATCH] libgit2: Update to v1.0.0
-Message-ID: <620ca6fb-ba03-0e57-aa7b-6d25e490a616@gmail.com>
-Date: Fri, 24 Apr 2020 18:04:53 -0700
+Message-ID: <a1bd8357-97f7-f3cc-4b97-e63656c01452@gmail.com>
+Date: Fri, 24 Apr 2020 18:53:59 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <ee033791-f139-45a9-b8b4-4cbd68962744@www.fastmail.com>
-X-Groupsio-MsgNum: 84074
+In-Reply-To: <20200423200418.10856-1-martin.balik@siemens.com>
+X-Groupsio-MsgNum: 84075
 Content-Type: multipart/signed; micalg=pgp-sha1;
  protocol="application/pgp-signature";
- boundary="v9NFLZnYOWQcT2KVoM8nqu6SkNxKajgUB"
+ boundary="JWCxX335YyPcpZT0TKuQi7FHXzDwAXQTX"
 
---v9NFLZnYOWQcT2KVoM8nqu6SkNxKajgUB
-Content-Type: multipart/mixed; boundary="Khggb85rkYN0OrGa9Cx55zDnO67sACr4D";
+--JWCxX335YyPcpZT0TKuQi7FHXzDwAXQTX
+Content-Type: multipart/mixed; boundary="wKsLQtxGP8IkYWbGwsnlhJ0sJhtw7ipj3";
  protected-headers="v1"
 From: Khem Raj <raj.khem@gmail.com>
-To: Alistair <alistair@alistair23.me>,
+To: Martin Balik <martin.balik@siemens.com>,
  openembedded-devel@lists.openembedded.org
-Message-ID: <620ca6fb-ba03-0e57-aa7b-6d25e490a616@gmail.com>
-Subject: Re: [oe] [PATCH] libgit2: Update to v1.0.0
-References: <20200424063130.386675-1-alistair@alistair23.me>
- <CAMKF1srb+fSYRjhBjmA+dH7HN_M+rckXJj+f5y0T8JPn4fQ1hQ@mail.gmail.com>
- <ee033791-f139-45a9-b8b4-4cbd68962744@www.fastmail.com>
-In-Reply-To: <ee033791-f139-45a9-b8b4-4cbd68962744@www.fastmail.com>
+Message-ID: <a1bd8357-97f7-f3cc-4b97-e63656c01452@gmail.com>
+Subject: Re: [oe][meta-oe][PATCH] libwebsockets: upgrade 3.2.2 -> 4.0.1
+References: <20200423200418.10856-1-martin.balik@siemens.com>
+In-Reply-To: <20200423200418.10856-1-martin.balik@siemens.com>
 
---Khggb85rkYN0OrGa9Cx55zDnO67sACr4D
+--wKsLQtxGP8IkYWbGwsnlhJ0sJhtw7ipj3
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
 
 
-On 4/24/20 5:39 PM, Alistair wrote:
-> On Fri, Apr 24, 2020, at 2:16 PM, Khem Raj wrote:
->> This update has some issues
->>
->> Fails on qemux86/clang
->> https://errors.yoctoproject.org/Errors/Details/407382/
+On 4/23/20 1:04 PM, Martin Balik wrote:
+> Signed-off-by: Martin Balik <martin.balik@siemens.com>
+> ---
+>  .../{libwebsockets_3.2.2.bb =3D> libwebsockets_4.0.1.bb}    | 8 ++++---=
+-
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>  rename meta-oe/recipes-connectivity/libwebsockets/{libwebsockets_3.2.2.=
+bb =3D> libwebsockets_4.0.1.bb} (86%)
 >=20
-> I tried to reproduce this with:
+> diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.=
+2.2.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.1.bb
+> similarity index 86%
+> rename from meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.2=
+.2.bb
+> rename to meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.1=
+.bb
+> index 32ba51db0..0d1f57ab8 100644
+> --- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.2.2.bb
+> +++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.1.bb
+> @@ -1,13 +1,13 @@
+>  SUMMARY =3D "Canonical libwebsockets.org websocket library"
+>  HOMEPAGE =3D "https://libwebsockets.org/"
+> -LICENSE =3D "LGPL-2.1"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4ce87f3facb6f911c142c8bef9bf=
+b380"
+> +LICENSE =3D "MIT & Zlib & BSD-3-Clause"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D8c47b078124308a4e1354e8d59f6=
+06b7"
+
+why did checksum change ? perhaps mention the reason in commit message.
+
+>  
+>  DEPENDS =3D "zlib"
+>  
+>  S =3D "${WORKDIR}/git"
+> -SRCREV =3D "d880fe233020b74e058cbca95b5fb67823bbf258"
+> -SRC_URI =3D "git://github.com/warmcat/libwebsockets.git;protocol=3Dhttp=
+s;branch=3Dv3.2-stable"
+> +SRCREV =3D "6eb39388f43f6e2a27f0efcbf8cb2391e38824e9"
+> +SRC_URI =3D "git://github.com/warmcat/libwebsockets.git;protocol=3Dhttp=
+s;branch=3Dv4.0-stable"
+>  
+>  UPSTREAM_CHECK_URI =3D "https://github.com/warmcat/${BPN}/releases"
+>  UPSTREAM_CHECK_GITTAGREGEX =3D "v(?P<pver>\d+(\.\d+)+)"
 >=20
-> MACHINE=3Dqemux86 TOOLCHAIN=3D"clang"  bitbake libgit2
-
-I think you need meta-clang in layer mix. and then set TOOLCHAIN =3D
-"clang" in local.conf, I will try to see as well, it seems its finding a
-library in native sysroot :( which should otherwise be in target sysroot
-
-and the reason is that its happily adding libraries in linker cmdline.
-So something is in CMakefile which is not differentiating native sysroot
-from target sysroot.
-
--Wl,-rpath,TOPDIR/build/tmp/work/core2-32-yoe-linux/libgit2/1.0.0-r0/recip=
-e-sysroot-native/usr/lib
-...
-
-TOPDIR/build/tmp/work/core2-32-yoe-linux/libgit2/1.0.0-r0/recipe-sysroot-n=
-ative/usr/lib/libpcre.so
- TOPDIR/build/tmp/work/core2-32-yoe-linux/libgit2/1.0.0-r0/recipe-sysroot-=
-native/usr/lib/libpcreposix.so
-
-...
-
-
-core2-32-yoe-linux/libgit2/1.0.0-r0/recipe-sysroot-native/usr/lib/libpcre.=
-so:
-error adding symbols: file in wrong format
-
 >=20
-> but it build for me. What am I missing?
 >=20
->>
->> for glibc/musl there is another failure which is caused by this
->>
->> https://errors.yoctoproject.org/Errors/Details/407386/
->=20
-> I have a patch for this. I'll send it out with v2.
 >=20
 
-OK
 
-> Alistair
->=20
->>
->> On Thu, Apr 23, 2020 at 11:31 PM Alistair <alistair@alistair23.me> wrot=
-e:
->>>
->>> Signed-off-by: Alistair Francis <alistair@alistair23.me>
->>> ---
->>> .../libgit2/{libgit2_0.28.4.bb =3D> libgit2_1.0.0.bb} | 6 +++---
->>> 1 file changed, 3 insertions(+), 3 deletions(-)
->>> rename meta-oe/recipes-support/libgit2/{libgit2_0.28.4.bb =3D> libgit2=
-_1.0.0.bb} (64%)
->>>
->>> diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb b/meta-=
-oe/recipes-support/libgit2/libgit2_1.0.0.bb
->>> similarity index 64%
->>> rename from meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb
->>> rename to meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
->>> index 9b9c19104..fd26a0fe9 100644
->>> --- a/meta-oe/recipes-support/libgit2/libgit2_0.28.4.bb
->>> +++ b/meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
->>> @@ -1,12 +1,12 @@
->>> SUMMARY =3D "the Git linkable library"
->>> HOMEPAGE =3D "http://libgit2.github.com/"
->>> LICENSE =3D "GPL-2.0-with-GCC-exception & MIT"
->>> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D3f2cd5d3cccd71d62066ba6196=
-14592b"
->>> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D5b002a195fb7ea2d8d583f07ea=
-ff3a8e"
->>>
->>> DEPENDS =3D "curl openssl zlib libssh2 libgcrypt"
->>>
->>> -SRC_URI =3D "git://github.com/libgit2/libgit2.git;branch=3Dmaint/v0.2=
-8"
->>> -SRCREV =3D "106a5f27586504ea371528191f0ea3aac2ad432b"
->>> +SRC_URI =3D "git://github.com/libgit2/libgit2.git;branch=3Dmaint/v1.0=
-"
->>> +SRCREV =3D "7d3c7057f0e774aecd6fc4ef8333e69e5c4873e0"
->>>
->>> S =3D "${WORKDIR}/git"
->>>
->>> --
->>> 2.26.0
->>>
->>>
->>
->>
->>
->>
->>=20
+--wKsLQtxGP8IkYWbGwsnlhJ0sJhtw7ipj3--
 
-
---Khggb85rkYN0OrGa9Cx55zDnO67sACr4D--
-
---v9NFLZnYOWQcT2KVoM8nqu6SkNxKajgUB
+--JWCxX335YyPcpZT0TKuQi7FHXzDwAXQTX
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCXqOMvgAKCRC7BTNVkZ0z
-FOwiAJ40BKpynoCp1cbjTe3vjnAbyCxuVACggqIy2su6rmDfmYkjH6TwW6AI5zY=
-=pX3u
+iF0EARECAB0WIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCXqOYNwAKCRC7BTNVkZ0z
+FE3JAJ0QQ0Yf2/Q2iVNfpDRPW229a3COWQCfe7AzAqwJ8lVg3a3J5YF4A8GEBoQ=
+=fa+a
 -----END PGP SIGNATURE-----
 
---v9NFLZnYOWQcT2KVoM8nqu6SkNxKajgUB--
+--JWCxX335YyPcpZT0TKuQi7FHXzDwAXQTX--
