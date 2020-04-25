@@ -1,83 +1,120 @@
-Received: from mail-il1-f173.google.com (mail-il1-f173.google.com [209.85.166.173])
- by mx.groups.io with SMTP id smtpd.web11.2080.1587794044029674446
- for <Openembedded-devel@lists.openembedded.org>;
- Fri, 24 Apr 2020 22:54:04 -0700
+Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com [209.85.219.65])
+ by mx.groups.io with SMTP id smtpd.web10.2814.1587800026850027703
+ for <openembedded-devel@lists.openembedded.org>;
+ Sat, 25 Apr 2020 00:33:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dMI88XnW;
- spf=pass (domain: gmail.com, ip: 209.85.166.173, mailfrom: ticotimo@gmail.com)
-Received: by mail-il1-f173.google.com with SMTP id s10so11415587iln.11
-        for <Openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2020 22:54:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=aWb3jcfo;
+ spf=pass (domain: gmail.com, ip: 209.85.219.65, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f65.google.com with SMTP id t8so5889609qvw.5
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2020 00:33:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=6pVm0zU1PuO+lOFh3hi4OiOZ7LzljNOTYjlPfO+OuYw=;
-        b=dMI88XnWcZfxmG0ag7KD3RMFhoJaR1d8JRhiCVgkclf6gmOKrd3KTK99QJ44Zg+DGX
-         Bjj/jSBHANJGszzXteLPfF4REZEI3GDAAMPNIrOwj3J2Vvzx43gJfGKqFsn7ofz6H2B4
-         IuXrTy4FdHkeShw8zQJt0dP+9gkSDqkBmXvXEmJKXaszGrkh76Yhyuyc0IcrDM/wPqrv
-         uFu4p2Z9VmX8cwfRIEwCnsnBMDYHjUX+cR5ABMLmeg2PYFVHW7xi4RrAEp2n3X0vvpPM
-         rBACkSRpCHLkk5e3lzbpibYtdNvEZE4j7FEBkwhKTIemEBFplfFFpOD/uNDmXJ0/B2/w
-         azmg==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=0w1mEreywY+33F28XytHB25cz0kcoYV20UQZc9+7vl0=;
+        b=aWb3jcfoLvNParyddoPyLmLCxAFaN36BOgzUuv1LN7SGrxlcZFJ7eI1tsFR0PTFYeh
+         TWcXviHbDP++C/hmLK54dLcUHifYHqrZ7xm1ABAFK4UYir2zKa7q/7gMmyC8avN3WcQt
+         7Z+1gGbGt7i1/3Y2qtGSM+IWI6OlOwHyQI9bsP7lGJHeHwbF7RGh1lknnY8qpV7JGxw0
+         AC3ijRxAp6wayP72mXtO/DHgBiuhfTqMzzeWv51mka2Wr6/5ghRg/IgYPn8rYhxwT+AU
+         qw5t9+eiWzOA9UPg891gbG6aQ+zuRinL4Y8vEwM6W6AyNt5crHNoLXfdlAoffEM1/oHE
+         yJOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=6pVm0zU1PuO+lOFh3hi4OiOZ7LzljNOTYjlPfO+OuYw=;
-        b=Hwhn1GGZEjo/Zmrvg361Lf11hadjWxz31lm7+BZXfdJ8+NZfENkY/4cgUDz3X0RRAl
-         WymjTwWcPVRpHWggHknGTBzyPbwzZ9SQt8wMMgMwwer1Ky8BC12lnn+urKiiKQh4wenE
-         I49OSsYslDNVA6grcQczCHIkX/Vzgu9VIUGTNvsX1yGNqtgq1Yq3NDhD/5e/wVDly9mO
-         SRWkU8bwRnDyO5H3SGRn8Usa/ByP2a4wsL20LpZUTjTHGvRQ00pWzUOcZ4dc3c6ODYhQ
-         Qv9dUeRAV/PtBSn4HuIq6a8wteRyZxogG99cgJJL2q11w0J5HWeBfnFOWqzg9X9p123y
-         NKdQ==
-X-Gm-Message-State: AGi0Pub9BUYLOsADCFR+ZHZj8tUwUFztxuoVp7yqICVD1AqMPwPyMBOx
-	01Zc5qd0qJmplCoz8kDS4CLyxpl5QgtxzMFngWEoX92w
-X-Google-Smtp-Source: APiQypIyNxgcBuiilEXjNGTE3SSsuQA3QiRWHel2rdSKc+NPBfRwTYljG6tH8wXZ9g2nIBLPy/KeXAJL0NoJOFcr62E=
-X-Received: by 2002:a92:1b91:: with SMTP id f17mr12024957ill.142.1587794043245;
- Fri, 24 Apr 2020 22:54:03 -0700 (PDT)
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=0w1mEreywY+33F28XytHB25cz0kcoYV20UQZc9+7vl0=;
+        b=AHnXxqfY/VSNJL5SaIZRl6kFjgk+IhLMBRYf/d5XY0VmvooQ6H4PukLD1u8JHZ+MxV
+         0CFB5CLUh9vkAoxgyvy3rODINXZPGJcuBa6/vA93aVi21sdPqqDzELXf0Gmcu18i85QP
+         CyQVm0snr4B+zDukp0XKlERCdMHz6sLJ+U4nbxIX2HB/dgyxl6MbAPQeuBRzReI+s/W3
+         luY9Rm/AbKhE/w4eSt9fb4ybykEYZ+WfpYAIb4JCJzH6TGyE/sWa3Y/WKfFt7vDjXoc6
+         iN50FGOD4P/w5bykja3H0nvOJPf+knBysfhZCahmu5kPfbCrZ0FB46kMKw7BuejVaoTS
+         4u8Q==
+X-Gm-Message-State: AGi0PubgLofDVzMFLFmr8ugipF/ScepirA+DiLuBcG3JAY+b5SqvXchw
+	QABzMpUNkCOKBpsyCtmTsrpN5T9Icg3dasWWjlU=
+X-Google-Smtp-Source: APiQypJ4XHd2DFCl0lrsBo88tgqQgybpPlJDgh+e/kbBctI1rj8afIx0zspMxlYAj2I7qAV/69w3yDeFTOKRu/AOuNw=
+X-Received: by 2002:ad4:4182:: with SMTP id e2mr13262141qvp.61.1587800025865;
+ Sat, 25 Apr 2020 00:33:45 -0700 (PDT)
 MIME-Version: 1.0
-From: "Tim Orling" <ticotimo@gmail.com>
-Date: Fri, 24 Apr 2020 22:53:52 -0700
-Message-ID: <CANx9H-DP=9gYudOCC5LOFantGWGDwyGUQZtATUeDZ2WJLrbXGg@mail.gmail.com>
-Subject: [meta-python2] Final python2 release
-To: "openembedded-devel@lists.openembedded.org" <Openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000ec9bef05a4171b71"
-
---000000000000ec9bef05a4171b71
+References: <20200416141656.7900-1-gregory.vimont@softbankrobotics.com>
+ <CAMKF1sq0uK6F0h=MANR1kUNjwUzZOUO-RT+Gh2ACYqaJLkv9bA@mail.gmail.com>
+ <CANjKyuzzm8C-TzB1AJCC0YYX8TsiWEU+JiA9xQLBL0tYF30eWA@mail.gmail.com> <CANjKyuy-wtt6Pu_mEONy6QFm1jBa0wgK+Ps-pTaMHc51Fd0uow@mail.gmail.com>
+In-Reply-To: <CANjKyuy-wtt6Pu_mEONy6QFm1jBa0wgK+Ps-pTaMHc51Fd0uow@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Sat, 25 Apr 2020 00:33:17 -0700
+Message-ID: <CAMKF1spRK42s4Fd5c0JVsm0r1w+UT357_e6up6B=rvfXshgLSg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/3] opencv: 4.1.0 -> 4.1.1
+To: =?UTF-8?Q?Gr=C3=A9gory_Vimont?= <gregory.vimont@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Gregory Vimont <gregory.vimont@softbankrobotics.com>
 Content-Type: text/plain; charset="UTF-8"
-
-The final, last, terminal, dead, deceased, never-any-more,
-move-to-python3-now release of python2 2.7.18 was released on April 19. I
-have posted a patch to upgrade meta-python2 to 2.7.18. Please test. If you
-care, test a lot.
-
-I intend to also apply this release to the "dunfell" branch. Since it is
-the first Yocto Project LTS release and this 2.7 release is close enough
-for horse-shoes and tiddly-winks.
-
-After this month (April 2020), I have no motivation to continue supporting
-python2. I do not use python2 and have not since bitbake was upgraded to
-use python3. My employer does not use python2. The meta-python2 layer will
-be best-effort only support unless other maintainers step up.
-
-If you want recipe upgrades, now is the time to send patches. Dead men tell
-no tales.
-
---Tim
-
---000000000000ec9bef05a4171b71
-Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div>The final, last, terminal, dead, deceased, never-any-=
-more, move-to-python3-now release of python2 2.7.18 was released on April 1=
-9. I have posted a patch to upgrade meta-python2 to 2.7.18. Please test. If=
- you care, test a lot.<br></div><div><br></div><div>I intend to also apply =
-this release to the &quot;dunfell&quot; branch. Since it is the first Yocto=
- Project LTS release and this 2.7 release is close enough for horse-shoes a=
-nd tiddly-winks.<br></div><div><br></div><div>After this month (April 2020)=
-, I have no motivation to continue supporting python2. I do not use python2=
- and have not since bitbake was upgraded to use python3. My employer does n=
-ot use python2. The meta-python2 layer will be best-effort only support unl=
-ess other maintainers step up.</div><div><br></div><div>If you want recipe =
-upgrades, now is the time to send patches. Dead men tell no tales.</div><di=
-v><br></div><div>--Tim<br></div></div>
+On Tue, Apr 21, 2020 at 5:51 AM Gr=C3=A9gory Vimont <gregory.vimont@gmail.c=
+om> wrote:
+>
+> Hello,
+> How can I reproduce this build configuration ?
+>
 
---000000000000ec9bef05a4171b71--
+MACHINE=3Dqemumips bitbake opencv
+
+
+>
+> Le ven. 17 avr. 2020 =C3=A0 09:57, Gr=C3=A9gory Vimont <gregory.vimont@g=
+mail.com> a =C3=A9crit :
+>>
+>> I don't know what went wrong, I see only Warnings there.
+>>
+>> Le jeu. 16 avr. 2020 =C3=A0 20:38, Khem Raj <raj.khem@gmail.com> a =C3=
+=A9crit :
+>>>
+>>> This fails on mips/glibc
+>>>
+>>> https://errors.yoctoproject.org/Errors/Details/404685/
+>>>
+>>>
+>>> On Thu, Apr 16, 2020 at 7:17 AM Gregory Vimont <gregory.vimont@gmail.c=
+om> wrote:
+>>> >
+>>> > Signed-off-by: Gregory Vimont <gregory.vimont@softbankrobotics.com>
+>>> > ---
+>>> >  .../opencv/{opencv_4.1.0.bb =3D> opencv_4.1.1.bb}             | 6 +=
+++---
+>>> >  1 file changed, 3 insertions(+), 3 deletions(-)
+>>> >  rename meta-oe/recipes-support/opencv/{opencv_4.1.0.bb =3D> opencv_=
+4.1.1.bb} (98%)
+>>> >
+>>> > diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-o=
+e/recipes-support/opencv/opencv_4.1.1.bb
+>>> > similarity index 98%
+>>> > rename from meta-oe/recipes-support/opencv/opencv_4.1.0.bb
+>>> > rename to meta-oe/recipes-support/opencv/opencv_4.1.1.bb
+>>> > index d781da600..5074eb2fa 100644
+>>> > --- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
+>>> > +++ b/meta-oe/recipes-support/opencv/opencv_4.1.1.bb
+>>> > @@ -10,8 +10,8 @@ ARM_INSTRUCTION_SET_armv5 =3D "arm"
+>>> >
+>>> >  DEPENDS =3D "libtool swig-native bzip2 zlib glib-2.0 libwebp"
+>>> >
+>>> > -SRCREV_opencv =3D "371bba8f54560b374fbcd47e7e02f015ac4969ad"
+>>> > -SRCREV_contrib =3D "2c32791a9c500343568a21ea34bf2daeac2adae7"
+>>> > +SRCREV_opencv =3D "ddbd10c0019f3ee5f43b7902d47e7fc4303a6574"
+>>> > +SRCREV_contrib =3D "0915b7eaddba3c06d83e201c9a7595e73801f417"
+>>> >  SRCREV_ipp =3D "32e315a5b106a7b89dbed51c28f8120a48b368b4"
+>>> >  SRCREV_boostdesc =3D "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+>>> >  SRCREV_vgg =3D "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
+>>> > @@ -51,7 +51,7 @@ SRC_URI =3D "git://github.com/opencv/opencv.git;na=
+me=3Dopencv \
+>>> >             file://0001-carotene-Replace-ipcp-unit-growth-with-ipa-c=
+p-unit-g.patch \
+>>> >             file://download.patch \
+>>> >             "
+>>> > -PV =3D "4.1.0"
+>>> > +PV =3D "4.1.1"
+>>> >
+>>> >  S =3D "${WORKDIR}/git"
+>>> >
+>>> > --
+>>> > 2.17.1
+>>> >
+>>> >=20
