@@ -1,182 +1,241 @@
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com [209.85.214.196])
- by mx.groups.io with SMTP id smtpd.web11.299.1587780158319417858
+Received: from mail-io1-f65.google.com (mail-io1-f65.google.com [209.85.166.65])
+ by mx.groups.io with SMTP id smtpd.web12.1870.1587790831689839752
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Apr 2020 19:02:38 -0700
+ Fri, 24 Apr 2020 22:00:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=lU/TpjdL;
- spf=pass (domain: gmail.com, ip: 209.85.214.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f196.google.com with SMTP id d24so4429329pll.8
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2020 19:02:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=D2BmiKRa;
+ spf=pass (domain: gmail.com, ip: 209.85.166.65, mailfrom: ticotimo@gmail.com)
+Received: by mail-io1-f65.google.com with SMTP id o127so12765045iof.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2020 22:00:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:autocrypt:organization:message-id:date
-         :user-agent:mime-version:in-reply-to;
-        bh=GsnGpqYZSFeJqBhzKhx0UDuYFj41G9U6eV64atVWviQ=;
-        b=lU/TpjdL+TWQRk3EW9bjVIC4S4ogQEozu5EWujdqyaNpv4fWwYY/o0mVh1neuYsRLe
-         FLnLVhi6EOzWdofz9RJxre9FFNl11/omLodU0SZUTKu4lzPpMbkor0yWh36ChthLZBUz
-         1axqEIiPvWHyY5FTvEcM8s2cO/+7rZi+HwuSgvosV+w7TNk9YQKE8ZbVBZh8zvUK6Gtj
-         eVZoTRNXMShf+EYQzYq/z+KMo9e4FSVNmNajDHdI4AI/ubD3IXX2kiu28HOoDsDz4Qym
-         KCghwrD0OZbnmG/Oz2Sk2Hj/yBAAkHyjCa9ZNm48pqfpe4f+2tSvBo/5TqF5GQTGjEL7
-         UAPg==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Yd8BBximz1HrHEYYuYgUmAUweMLRELNJoRc/H9havwE=;
+        b=D2BmiKRatadp6l42+RvpcOTxEMUkUOASu3Ev2KcDPvmJX4MK8fPhFYzN5WFBz8ATyW
+         6tu9wFgP55J+4W4G8vCp6GJ8rQ8y+BSD/+6nDgD9nXK5O1ZJh/g/XYg9LHA3HqlAC8sV
+         xuU0t+19NqBqSR2bJ/C0FSz0rKnbGVpNcAi+dUefDzfrbhxKBIzaE/ooQBJiro6xLrru
+         DVALyW61KKZCL3xYqmptXthjGppQWZ+7lEppz7om6Syj4s6c+Yhe8y05S2u124RzewKI
+         xqyMVeSRDX82cq8hApcuT1lFm6hI9zCipD1XAFE5YdpXV5qLDQF0H4PjDzQb9qDOsucp
+         D5ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:autocrypt
-         :organization:message-id:date:user-agent:mime-version:in-reply-to;
-        bh=GsnGpqYZSFeJqBhzKhx0UDuYFj41G9U6eV64atVWviQ=;
-        b=jEhA2XNpiFiNlMh8JNd7CwaCJrTpqEhxoCBM4DPh8LryMMBoST7FUj62TdIQ100UeS
-         LyDlm4llQwlWs0jRRQ94zqqSpkfl50Dj40YQtYh63rR7BeSehaomU6xFny28xYb0pzEw
-         5oxMmU7SpvIKIU8PpthXRPx7WvPUucsZxmMF+yDu58Cz4xTSZBYb2u/ooED/sS1ga5fS
-         foB7vi6u7i/45KnABAt4R2C6YFOi9EOu1q+E335q1H1vJMYmdu+FG0atZBw8+CswSYMU
-         1NpBLPqm9iYOhonNY8z3Pd21/+bXeC3j8JACQR/QgNbFgSOPf9BpnQfvG75RyZk6Mc0M
-         0jLQ==
-X-Gm-Message-State: AGi0PuYp/n1XYHvt0PzRK1aEcYeGWbJTkxqSPdLagUWVIrQn4UmpxbnN
-	Xydoag6wTnPB+Y0m5e4r3saOCdy/pVM=
-X-Google-Smtp-Source: APiQypKmmOUm9sBVym7dibx3O9DZm9xlmd3iQi2CzdaLSvGwr8zsS0iFScstyWI0OaIcJ1pficvJ7Q==
-X-Received: by 2002:a17:902:8485:: with SMTP id c5mr12683745plo.242.1587780157552;
-        Fri, 24 Apr 2020 19:02:37 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:4e0::ac76? ([2601:646:9200:4e0::ac76])
-        by smtp.gmail.com with ESMTPSA id t126sm6693950pfb.29.2020.04.24.19.02.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 24 Apr 2020 19:02:37 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][PATCH] cjson: add recipe for v1.7.13
-To: Ting Liu <ting.liu@nxp.com>, openembedded-devel@lists.openembedded.org
-References: <20200424065545.28012-1-ting.liu@nxp.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Autocrypt: addr=raj.khem@gmail.com; keydata=
- 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
-Organization: HIMVIS LLC
-Message-ID: <8f6b2032-a2f4-2785-afdf-188ad9f3ec75@gmail.com>
-Date: Fri, 24 Apr 2020 19:02:32 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Yd8BBximz1HrHEYYuYgUmAUweMLRELNJoRc/H9havwE=;
+        b=FdeqwCnHCbsrRZYpudhtB/jWSSsLvDSO3YdUl1YfZ2jGBcYmmBYP7TJnTnlx1J8Zkq
+         0NiXH564HsfySDhrkllPpSNCQzNy/8PkUecbXRFXYieRRAxE/ZATe0KdvosZE4mVPMEk
+         5PpVPw4BeVJ+8cHLVcA2Uo/fvTtrJQzhA7ENrWvf3aY/azskwTxB2Z70XLDobHcLsnpJ
+         TjpyAWUnNqsJkDSg6LZmf0hBNGDbdONvAEJ9QmRNAi+lR0OERx5mCiYR1WObYcaQC0Mz
+         MEwT/rSqGnuG+lNt5GsjqRj+znlzi2RSaqZJRLqBZk8abkMuFOk50nl+Jg+rsP/U2sMw
+         zFfQ==
+X-Gm-Message-State: AGi0PuYu0V2IjcPcH/nym6ROlxh40nAtcOsEZIiWGoTeiqcWzXX4uHfC
+	dNzeJsJ0HbsmgGXnypINoPvqNGReB0fudxr7zZE=
+X-Google-Smtp-Source: APiQypJkBevm1+glcYX3/hLk6frntTN502PNv9oOk92ZvUg7qQILNijcCnLiNkyqCtzKCXcI509jwbh89bK/MtfkdZ4=
+X-Received: by 2002:a02:9445:: with SMTP id a63mr402340jai.10.1587790830935;
+ Fri, 24 Apr 2020 22:00:30 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200424065545.28012-1-ting.liu@nxp.com>
-X-Groupsio-MsgNum: 84077
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature";
- boundary="KhuDBoMV62D32OKZJygVOmwHgahNmILBa"
+References: <20200424011328.191909-1-changqing.li@windriver.com> <bac9fe56-5f04-1cd4-6cc8-10c77ccfc4c8@gmail.com>
+In-Reply-To: <bac9fe56-5f04-1cd4-6cc8-10c77ccfc4c8@gmail.com>
+From: "Tim Orling" <ticotimo@gmail.com>
+Date: Fri, 24 Apr 2020 22:00:20 -0700
+Message-ID: <CANx9H-D81iMF76hRqrnPJEjNvkSq_JyTqqu9q+r-ZYqGUb-8Rw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-pexpect: change shebang to python3
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Changqing Li <changqing.li@windriver.com>, openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000074a39905a4165cac"
 
---KhuDBoMV62D32OKZJygVOmwHgahNmILBa
-Content-Type: multipart/mixed; boundary="JAgB3J0HByrGNLlw5kynR4TVW0QITnW6j";
- protected-headers="v1"
-From: Khem Raj <raj.khem@gmail.com>
-To: Ting Liu <ting.liu@nxp.com>, openembedded-devel@lists.openembedded.org
-Message-ID: <8f6b2032-a2f4-2785-afdf-188ad9f3ec75@gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] cjson: add recipe for v1.7.13
-References: <20200424065545.28012-1-ting.liu@nxp.com>
-In-Reply-To: <20200424065545.28012-1-ting.liu@nxp.com>
+--00000000000074a39905a4165cac
+Content-Type: text/plain; charset="UTF-8"
 
---JAgB3J0HByrGNLlw5kynR4TVW0QITnW6j
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+meta-python2 has zero connection the meta-python. So it will not depend on
+any inc files.
+
+On Fri, Apr 24, 2020 at 6:57 PM Khem Raj <raj.khem@gmail.com> wrote:
+
+>
+>
+> On 4/23/20 6:13 PM, Changqing Li wrote:
+> > From: Changqing Li <changqing.li@windriver.com>
+> >
+> > we have offcially dropped python2, so it is possible
+> > that our code run on python3 only host, so change
+> > shebang to python3 to avoid error like:
+> > python: command not found
+> >
+> > Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> > ---
+> >  .../python/python-pexpect.inc                 |  2 ++
+> >  ...hange-shebang-from-python-to-python3.patch | 25 +++++++++++++++++++
+> >  2 files changed, 27 insertions(+)
+> >  create mode 100644
+> meta-python/recipes-devtools/python/python3-pexpect/0001-FSM.py-change-shebang-from-python-to-python3.patch
+> >
+> > diff --git a/meta-python/recipes-devtools/python/python-pexpect.inc
+> b/meta-python/recipes-devtools/python/python-pexpect.inc
+> > index f02aa994e..c6230b2b5 100644
+> > --- a/meta-python/recipes-devtools/python/python-pexpect.inc
+> > +++ b/meta-python/recipes-devtools/python/python-pexpect.inc
+> > @@ -4,6 +4,8 @@ SECTION = "devel/python"
+> >  LICENSE = "ISC"
+> >  LIC_FILES_CHKSUM = "file://LICENSE;md5=1c7a725251880af8c6a148181665385b"
+> >
+> > +SRC_URI +=
+> "file://0001-FSM.py-change-shebang-from-python-to-python3.patch"
+> > +
+>
+> This .inc file should be merged into .bb, as well, also check if
+> meta-python2 depends on this .inc file, if it does then the patching
+> should happen inside py3 version of bb file and not .inc
+>
+> >  SRC_URI[md5sum] = "153eb25184249d6a85fde9acf4804085"
+> >  SRC_URI[sha256sum] =
+> "fc65a43959d153d0114afe13997d439c22823a27cefceb5ff35c2178c6784c0c"
+> >
+> > diff --git
+> a/meta-python/recipes-devtools/python/python3-pexpect/0001-FSM.py-change-shebang-from-python-to-python3.patch
+> b/meta-python/recipes-devtools/python/python3-pexpect/0001-FSM.py-change-shebang-from-python-to-python3.patch
+> > new file mode 100644
+> > index 000000000..bee772da6
+> > --- /dev/null
+> > +++
+> b/meta-python/recipes-devtools/python/python3-pexpect/0001-FSM.py-change-shebang-from-python-to-python3.patch
+> > @@ -0,0 +1,25 @@
+> > +From 35462d7b778eea32fd0cc0bbc79d6e6f53d942b4 Mon Sep 17 00:00:00 2001
+> > +From: Changqing Li <changqing.li@windriver.com>
+> > +Date: Thu, 23 Apr 2020 08:01:42 +0000
+> > +Subject: [PATCH] FSM.py: change shebang from python to python3
+> > +
+> > +Upstream-Status: Pending
+> > +
+> > +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> > +---
+> > + pexpect/FSM.py | 2 +-
+> > + 1 file changed, 1 insertion(+), 1 deletion(-)
+> > +
+> > +diff --git a/pexpect/FSM.py b/pexpect/FSM.py
+> > +index 46b392e..4e77654 100644
+> > +--- a/pexpect/FSM.py
+> > ++++ b/pexpect/FSM.py
+> > +@@ -1,4 +1,4 @@
+> > +-#!/usr/bin/env python
+> > ++#!/usr/bin/env python3
+> > +
+> > + '''This module implements a Finite State Machine (FSM). In addition to
+> state
+> > + this FSM also maintains a user defined "memory". So this FSM can be
+> used as a
+> > +--
+> > +2.24.1
+> > +
+> >
+> >
+> >
+> >
+>
+> 
+>
+
+--00000000000074a39905a4165cac
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
+<div><div dir=3D"auto">meta-python2 has zero connection the meta-python. So=
+ it will not depend on any inc files.</div></div><div><br><div class=3D"gma=
+il_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Apr 24, 2020 at 6:5=
+7 PM Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.com<=
+/a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0=
+ 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><br>
+<br>
+On 4/23/20 6:13 PM, Changqing Li wrote:<br>
+&gt; From: Changqing Li &lt;<a href=3D"mailto:changqing.li@windriver.com" =
+target=3D"_blank">changqing.li@windriver.com</a>&gt;<br>
+&gt; <br>
+&gt; we have offcially dropped python2, so it is possible<br>
+&gt; that our code run on python3 only host, so change<br>
+&gt; shebang to python3 to avoid error like:<br>
+&gt; python: command not found<br>
+&gt; <br>
+&gt; Signed-off-by: Changqing Li &lt;<a href=3D"mailto:changqing.li@windri=
+ver.com" target=3D"_blank">changqing.li@windriver.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 .../python/python-pexpect.inc=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 2 ++<br>
+&gt;=C2=A0 ...hange-shebang-from-python-to-python3.patch | 25 ++++++++++++=
++++++++<br>
+&gt;=C2=A0 2 files changed, 27 insertions(+)<br>
+&gt;=C2=A0 create mode 100644 meta-python/recipes-devtools/python/python3-=
+pexpect/0001-FSM.py-change-shebang-from-python-to-python3.patch<br>
+&gt; <br>
+&gt; diff --git a/meta-python/recipes-devtools/python/python-pexpect.inc b=
+/meta-python/recipes-devtools/python/python-pexpect.inc<br>
+&gt; index f02aa994e..c6230b2b5 100644<br>
+&gt; --- a/meta-python/recipes-devtools/python/python-pexpect.inc<br>
+&gt; +++ b/meta-python/recipes-devtools/python/python-pexpect.inc<br>
+&gt; @@ -4,6 +4,8 @@ SECTION =3D &quot;devel/python&quot;<br>
+&gt;=C2=A0 LICENSE =3D &quot;ISC&quot;<br>
+&gt;=C2=A0 LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D1c7a725251880af=
+8c6a148181665385b&quot;<br>
+&gt;=C2=A0 <br>
+&gt; +SRC_URI +=3D &quot;file://0001-FSM.py-change-shebang-from-python-to-=
+python3.patch&quot;<br>
+&gt; +<br>
+<br>
+This .inc file should be merged into .bb, as well, also check if<br>
+meta-python2 depends on this .inc file, if it does then the patching<br>
+should happen inside py3 version of bb file and not .inc<br>
+<br>
+&gt;=C2=A0 SRC_URI[md5sum] =3D &quot;153eb25184249d6a85fde9acf4804085&quot=
+;<br>
+&gt;=C2=A0 SRC_URI[sha256sum] =3D &quot;fc65a43959d153d0114afe13997d439c22=
+823a27cefceb5ff35c2178c6784c0c&quot;<br>
+&gt;=C2=A0 <br>
+&gt; diff --git a/meta-python/recipes-devtools/python/python3-pexpect/0001=
+-FSM.py-change-shebang-from-python-to-python3.patch b/meta-python/recipes-d=
+evtools/python/python3-pexpect/0001-FSM.py-change-shebang-from-python-to-py=
+thon3.patch<br>
+&gt; new file mode 100644<br>
+&gt; index 000000000..bee772da6<br>
+&gt; --- /dev/null<br>
+&gt; +++ b/meta-python/recipes-devtools/python/python3-pexpect/0001-FSM.py=
+-change-shebang-from-python-to-python3.patch<br>
+&gt; @@ -0,0 +1,25 @@<br>
+&gt; +From 35462d7b778eea32fd0cc0bbc79d6e6f53d942b4 Mon Sep 17 00:00:00 20=
+01<br>
+&gt; +From: Changqing Li &lt;<a href=3D"mailto:changqing.li@windriver.com"=
+ target=3D"_blank">changqing.li@windriver.com</a>&gt;<br>
+&gt; +Date: Thu, 23 Apr 2020 08:01:42 +0000<br>
+&gt; +Subject: [PATCH] FSM.py: change shebang from python to python3<br>
+&gt; +<br>
+&gt; +Upstream-Status: Pending<br>
+&gt; +<br>
+&gt; +Signed-off-by: Changqing Li &lt;<a href=3D"mailto:changqing.li@windr=
+iver.com" target=3D"_blank">changqing.li@windriver.com</a>&gt;<br>
+&gt; +---<br>
+&gt; + pexpect/FSM.py | 2 +-<br>
+&gt; + 1 file changed, 1 insertion(+), 1 deletion(-)<br>
+&gt; +<br>
+&gt; +diff --git a/pexpect/FSM.py b/pexpect/FSM.py<br>
+&gt; +index 46b392e..4e77654 100644<br>
+&gt; +--- a/pexpect/FSM.py<br>
+&gt; ++++ b/pexpect/FSM.py<br>
+&gt; +@@ -1,4 +1,4 @@<br>
+&gt; +-#!/usr/bin/env python<br>
+&gt; ++#!/usr/bin/env python3<br>
+&gt; + <br>
+&gt; + &#39;&#39;&#39;This module implements a Finite State Machine (FSM).=
+ In addition to state<br>
+&gt; + this FSM also maintains a user defined &quot;memory&quot;. So this =
+FSM can be used as a<br>
+&gt; +-- <br>
+&gt; +2.24.1<br>
+&gt; +<br>
+&gt; <br>
+&gt; <br>
+&gt; <br>
+&gt; <br>
+<br>
+<br>
+</blockquote></div></div>
 
-
-On 4/23/20 11:55 PM, Ting Liu wrote:
-> From: Ting Liu <ting.liu@nxp.com>
->=20
-> cJSON aims to be the dumbest possible parser that you can get your
-> job done with. It's a single file of C, and a single header file.
->=20
-> Homepage: https://github.com/DaveGamble/cJSON
->=20
-> Signed-off-by: Ting Liu <ting.liu@nxp.com>
-> ---
->  meta-oe/recipes-devtools/cjson/cjson_git.bb | 23 +++++++++++++++++++++
->  1 file changed, 23 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/cjson/cjson_git.bb
->=20
-> diff --git a/meta-oe/recipes-devtools/cjson/cjson_git.bb b/meta-oe/recip=
-es-devtools/cjson/cjson_git.bb
-> new file mode 100644
-> index 000000000..7a9ebf07b
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/cjson/cjson_git.bb
-> @@ -0,0 +1,23 @@
-> +DESCRIPTION =3D "Ultralightweight JSON parser in ANSI C"
-> +AUTHOR =3D "Dave Gamble"
-> +HOMEPAGE =3D "https://github.com/DaveGamble/cJSON"
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D218947f77e8cb8e2fa02918dc41c=
-50d0"
-> +
-> +SRC_URI =3D "git://github.com/DaveGamble/cJSON.git"
-> +SRCREV =3D "39853e5148dad8dc5d32ea2b00943cf4a0c6f120"
-> +
-
-Pleae set PV =3D "1.7.13" if thats what SRCREV is pointing to
-
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit cmake pkgconfig
-> +
-> +EXTRA_OECMAKE +=3D "\
-> +    -DENABLE_CUSTOM_COMPILER_FLAGS=3DOFF \
-> +    -DBUILD_SHARED_AND_STATIC_LIBS=3DOn \
-> +"
-> +
-> +FILES_${PN}-dev +=3D "\
-> +    ${libdir}/cmake \
-> +"
-> +
-> +BBCLASSEXTEND =3D "native nativesdk"
->=20
-
-There are few more implementations around see
-http://layers.openembedded.org/layerindex/branch/master/recipes/?q=3Dcjson
-
-please consolidate best changes from all of them so they can also use
-this version.
-
->=20
->=20
->=20
-
-
---JAgB3J0HByrGNLlw5kynR4TVW0QITnW6j--
-
---KhuDBoMV62D32OKZJygVOmwHgahNmILBa
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCXqOaOAAKCRC7BTNVkZ0z
-FGHUAJwLBDIsA/iIH2nvkC39kq5hBrPRXQCeL05F67UtMif01GLr2f2pZdg2a1M=
-=HR6Y
------END PGP SIGNATURE-----
-
---KhuDBoMV62D32OKZJygVOmwHgahNmILBa--
+--00000000000074a39905a4165cac--
