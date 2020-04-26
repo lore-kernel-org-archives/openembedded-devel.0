@@ -1,116 +1,55 @@
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com [209.85.214.196])
- by mx.groups.io with SMTP id smtpd.web11.7166.1587883692206567207
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web10.7278.1587885550417745654
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Apr 2020 23:48:12 -0700
+ Sun, 26 Apr 2020 00:19:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=In+jQ3FS;
- spf=pass (domain: gmail.com, ip: 209.85.214.196, mailfrom: ticotimo@gmail.com)
-Received: by mail-pl1-f196.google.com with SMTP id h11so5600452plr.11
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2020 23:48:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=0fewEMkw3fsxI4eW43flwuzJWhConRQCEv6+zTGSgkI=;
-        b=In+jQ3FSmMyOS7fCtIM8U4FLEvbsaYtvzSPsRTQcU1jxxGqy91A+Z+VWOx8ggBQzPS
-         j+l2FIMyA3lAzUhTQhValYreJQGqKlyaOuJZhoSqc4M1Im7KSoUVyzENa6bG/EpfPFdD
-         VfrOT/Uuj34DUdSgu9bG4OfBesLARsmjPbk0ZHQoHf3/iR0daD0pEqmVPGU+oc2uJwun
-         lvxk8YDnV64OIZzICKWqqcnaxEzzNKsfBSfEzLN/wQXwxELLpwK5hgztZpLiNzaLyu6s
-         hqK9do1kJhh1Pq9uE7NhSeX7vDBofE4wGhEfegko+LOo6CC8oMleIgMcLTpzjj5cEb3T
-         t1hg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=0fewEMkw3fsxI4eW43flwuzJWhConRQCEv6+zTGSgkI=;
-        b=P4/uLQGkoBrmRxCptxycJvEkAP/nXwlwyGXURitgXkZsiY1m0tm5nRCcdSHG9u1hpZ
-         0CiKvec+Gwvfyay8Ra8BOwO3FsQlfLlkwPKJSETD9kAlW2jTsfgt/UyrXZL/LWYcWWqs
-         bjzUrkfRSRIwM7XQp7VEJnJz7cnKuMBNIHzZ4ZlfZDX5J7Vwr/c/G5Qe1jXS2Yks3d0n
-         7KVIVV9hq6BNb6R2LGppvVHNKmdElqjgPD4bimQW+7n+NvasZrpKhZWGUHPi3s6VzryT
-         hMNIQbEBS/bQbiVXUYJZ7gwXyYzqUz9EzfiIBKZKxyCvz4K64gR7TSjYb5sRNhvrFpOf
-         9BqQ==
-X-Gm-Message-State: AGi0PuZqbTbOZRGM1dHiHB+Pc76imiFvt9BwOOoArLsIF8XlJSVrrqUB
-	4ZNWAgkyWVdmnAhHE+fahePiNGqoFe0=
-X-Google-Smtp-Source: APiQypIwq5c1KowkubIjs8nYYP4jVAY/I7gaT8Txc239bxdCdSuMqA/PDUvXNay6Fi0hPlWHjvVxJw==
-X-Received: by 2002:a17:902:50d:: with SMTP id 13mr17246094plf.170.1587883691547;
-        Sat, 25 Apr 2020 23:48:11 -0700 (PDT)
-Return-Path: <ticotimo@gmail.com>
-Received: from thetis.hsd1.or.comcast.net ([2601:1c0:6000:9640:b0b6:9555:1795:f958])
-        by smtp.gmail.com with ESMTPSA id w2sm9390281pfc.194.2020.04.25.23.48.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 25 Apr 2020 23:48:11 -0700 (PDT)
-From: "Tim Orling" <ticotimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <ticotimo@gmail.com>
-Subject: [meta-python][PATCH 2/2] python3-cryptography-vectors: merge bb and inc
-Date: Sat, 25 Apr 2020 23:48:03 -0700
-Message-Id: <20200426064803.31911-2-ticotimo@gmail.com>
-X-Mailer: git-send-email 2.25.0
-In-Reply-To: <20200426064803.31911-1-ticotimo@gmail.com>
-References: <20200426064803.31911-1-ticotimo@gmail.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.73,319,1583164800"; 
+   d="scan'208";a="90456316"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 26 Apr 2020 15:19:03 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 1550D4BCC891
+	for <openembedded-devel@lists.openembedded.org>; Sun, 26 Apr 2020 15:08:24 +0800 (CST)
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.85) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Sun, 26 Apr 2020 15:19:05 +0800
+Received: from localhost.local (10.167.225.81) by
+ G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP Server
+ (TLS) id 14.3.439.0; Sun, 26 Apr 2020 15:19:03 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-python] [PATCH] python3-webcolors: Modify ptest output format
+Date: Sun, 26 Apr 2020 15:22:00 +0800
+Message-ID: <20200426072206.7992-3-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200426072206.7992-1-zangrc.fnst@cn.fujitsu.com>
+References: <20200426072206.7992-1-zangrc.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: 1550D4BCC891.AD55D
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-From: Tim Orling <ticotimo@gmail.com>
-
-Signed-off-by: Tim Orling <ticotimo@gmail.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../python/python-cryptography-vectors.inc    | 18 ----------------
- .../python3-cryptography-vectors_2.8.bb       | 21 ++++++++++++++++++-
- 2 files changed, 20 insertions(+), 19 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-cryptography-vectors.inc
+ .../recipes-devtools/python/python3-webcolors/run-ptest        | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-cryptography-vectors.inc b/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
-deleted file mode 100644
-index 10af48c9fb..0000000000
---- a/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
-+++ /dev/null
-@@ -1,18 +0,0 @@
--SUMMARY = "Test vectors for the cryptography package."
--HOMEPAGE = "https://cryptography.io/"
--SECTION = "devel/python"
--LICENSE = "Apache-2.0 | BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
--
--DEPENDS += " \
--    ${PYTHON_PN}-cryptography \
--"
--
--SRC_URI[md5sum] = "a744ed29bb9ef56b3a50317fea3b218e"
--SRC_URI[sha256sum] = "6cd32174c56a3eca72f64af43c1daacaae758cfa5ff9d280dfcf818fa11ef116"
--
--PYPI_PACKAGE = "cryptography_vectors"
--
--BBCLASSEXTEND = "native nativesdk"
--
--UPSTREAM_CHECK_REGEX = ""
-diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb
-index 58994ffffa..49a5664dcd 100644
---- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb
-@@ -1,2 +1,21 @@
--inherit pypi setuptools3
- require python-cryptography-vectors.inc
-+SUMMARY = "Test vectors for the cryptography package."
-+HOMEPAGE = "https://cryptography.io/"
-+SECTION = "devel/python"
-+LICENSE = "Apache-2.0 | BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
+diff --git a/meta-python/recipes-devtools/python/python3-webcolors/run-ptest b/meta-python/recipes-devtools/python/python3-webcolors/run-ptest
+index 40c284799..52d64ab52 100644
+--- a/meta-python/recipes-devtools/python/python3-webcolors/run-ptest
++++ b/meta-python/recipes-devtools/python/python3-webcolors/run-ptest
+@@ -1,2 +1,3 @@
+ #!/bin/sh
+-pytest
 +
-+SRC_URI[md5sum] = "a744ed29bb9ef56b3a50317fea3b218e"
-+SRC_URI[sha256sum] = "6cd32174c56a3eca72f64af43c1daacaae758cfa5ff9d280dfcf818fa11ef116"
-+
-+PYPI_PACKAGE = "cryptography_vectors"
-+
-+inherit pypi setuptools3
-+
-+DEPENDS += " \
-+    ${PYTHON_PN}-cryptography \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
-+
-+UPSTREAM_CHECK_REGEX = ""
++pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
 -- 
-2.25.0
+2.20.1
+
+
 
