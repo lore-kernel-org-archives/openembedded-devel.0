@@ -1,172 +1,1164 @@
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com (EUR04-VI1-obe.outbound.protection.outlook.com [40.107.8.79])
- by mx.groups.io with SMTP id smtpd.web10.6406.1587877392462635489
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.53])
+ by mx.groups.io with SMTP id smtpd.web12.6861.1587880387195757074
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Apr 2020 22:03:13 -0700
+ Sat, 25 Apr 2020 22:53:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@vaisala.com header.s=selector2 header.b=HDn7RIon;
- spf=pass (domain: vaisala.com, ip: 40.107.8.79, mailfrom: niko.mauno@vaisala.com)
+ dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=VHNAEJQF;
+ spf=pass (domain: windriver.com, ip: 40.107.223.53, mailfrom: changqing.li@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SmvxwSikI8RS/ts3thn1v+yy+xWb0QXqNEKhMRNKgOgCWwHWkal145PsLbWOvqF644Dr56e6Mi/bYNfjA939lgN7OX/5u5aM9YbkL3NYwHlH8FEt61i3/JjqI+L4tDAwjCqz9Azdwi4DtDNHKlnvqNu8WDF/JIU1Fp3+i4iUbdvN/80jvuNQOOLpVjkbjJNODbwRWQB+aIPyBxDtLKz7iNT3PojnLRg5u7Lx81mesl+lQ8ThXknxCeiUWN7/MuotYnOKOqGr327kKYwFQ0HSkDPthKwTR4XFXCTuzMIbw8CFOp6YQQ3MbwPOPFbS/v+U9ufaqKJoFGA4KW+yMB9kJQ==
+ b=ZC+FN/N+0MjOV7ci/B3G9eoXL6dQ4VDvf1V6Z1Y0YB8EST6FnMpbqoCrGgX+S71Kq2hzN38j4Seiw8+gtE/2hxUvK0C43Fgsr9OG52e9EeWTWHQMFz0lbKcL2po71O6mJgxJgDWSHmoQzO+SkhreZgcmGPhVMWot62uu7SepikWcw0jCvSwlqcW2ZKD1D4JdXyAY5II4Gg2BV3JEsgW8JwpOty578SgxtJbjbCx9Lsj5HyQ+5QX/DuMP+xZPDTfJyiae6mxMIqZh0tbEx9VHVi/kDHiXJzEnyDLuXaE054ds3C+3VMcY9yuzP7Pw6PCvKIB9RBBR/XCgBQHfhnlyLA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QYm4qr7SR2P76uHUB5Y8fDcmtTP79dhjAcFm4h4x6yc=;
- b=IPE5aE83yaS0uxA9cE3alZjJl3QEFQgKL4diu9J9Zr6dC60bk8OwZKWhwWtAp0toIeubqoWyjRGgjswNPTQXReYc5GfR90W86HVZkIAo1tviLpVk1dP/ebpxNY2jVA1pb+s4tr0OZnIvHTdo1Cg7pqjVq9w4P82ktXojVaWPih5Sl8QKZYKS92Pty563jVMW4nVMnAh+Djn1qmaGiH/P1MwA0pAbaFnNR/0Zs3Qxdny9+X0SqZBn7E/Zoyhu9uuzImLhfj5dGBa4TbKRRBH8geuI4DJJCJXihGTym2e3RqFbR87ogMfaZeFZSdjC8ezvys+nX3PDynsTbWuKrauZqQ==
+ bh=5vBnF9CCjQLgQRFUmCPxMXzee9Za8vYPhaXqbFG3138=;
+ b=QiJoKmDwN5oUksmjZKhl1H6vRjp/fijGqXy8FV+tbDT6E3YMu8iYa+G9Roc19QZQtqnaD49n/05W8eLW7J7V3DZ3GBG0vPPrjhmcUk920HEyLwPL0iMOrHhj3rFb6aZW5Z3r54PM8p5VPludzLJ63Pd+xJAu21wFuhSQ5k0x22tsmV+Gg4zzRGW8EsY69mHBbyOiwSIpjz7CoYJCZmdGIU7FW0/WEipoWezlhllGW4f5EpRyvcC8sVDpEMACiEGIbr8Zpr2rq5KOgv/Xsg3JdMgW4qUtXz17pRRqfrkQVavFps8NfLL7DoDO37j/Kx81aqw1faloxpfaSJo37yYvRQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
- dkim=pass header.d=vaisala.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
- s=selector2;
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QYm4qr7SR2P76uHUB5Y8fDcmtTP79dhjAcFm4h4x6yc=;
- b=HDn7RIon5Cyljv9jq3F0k4OlnefK3emPdi2MAUo/bjzDPHQTSQ3D6UQWcW9HHQnmpVO1QFnwQGZorTkRsHOAemmsfYIeCpq29/Z1vjueJXpBXDq36pxRxawpvcfbU0Vmtvp99zFaoBQZYpdSz6jNuTj2dDKNwNLbyX2k3YlGh7E=
+ bh=5vBnF9CCjQLgQRFUmCPxMXzee9Za8vYPhaXqbFG3138=;
+ b=VHNAEJQF43CP9NpLVAmWiUXLK8wT9PBLh+JCnLq+kk/NHBjGHBb+ZPYgca74Whl7kr574s68Pbx9NbIpgqIxdREbu8mf5VzZxVe5YMwEnEHzOpNZZOXedU9+fBzGNc5ZN6gmkFFpZdx+0E3fB+PV6CPLaVpkWbGrblS6Ge32qwM=
 Authentication-Results: spf=none (sender IP is )
- smtp.mailfrom=niko.mauno@vaisala.com; 
-Received: from AM6PR06MB6198.eurprd06.prod.outlook.com (20.179.247.154) by
- AM6PR06MB4647.eurprd06.prod.outlook.com (20.177.196.217) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2937.22; Sun, 26 Apr 2020 05:03:09 +0000
-Received: from AM6PR06MB6198.eurprd06.prod.outlook.com
- ([fe80::a1db:6da:abd2:860d]) by AM6PR06MB6198.eurprd06.prod.outlook.com
- ([fe80::a1db:6da:abd2:860d%5]) with mapi id 15.20.2937.020; Sun, 26 Apr 2020
- 05:03:09 +0000
-From: "niko.mauno@vaisala.com" <niko.mauno@vaisala.com>
-To: openembedded-devel@lists.openembedded.org
-CC: akuster808@gmail.com,
-	"niko.mauno@vaisala.com" <niko.mauno@vaisala.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][zeus][PATCH] zeromq: Fix host-specific path issue with libsodium
-Date: Sun, 26 Apr 2020 05:02:20 +0000
-Message-ID: <20200426050220.121532-1-niko.mauno@vaisala.com>
-X-Mailer: git-send-email 2.20.1
-X-ClientProxiedBy: AM3PR07CA0135.eurprd07.prod.outlook.com
- (2603:10a6:207:8::21) To AM6PR06MB6198.eurprd06.prod.outlook.com
- (2603:10a6:20b:ff::26)
-Return-Path: niko.mauno@vaisala.com
+ smtp.mailfrom=Changqing.Li@windriver.com; 
+Received: from SN6PR11MB2557.namprd11.prod.outlook.com (2603:10b6:805:56::33)
+ by SN6PR11MB2943.namprd11.prod.outlook.com (2603:10b6:805:d3::26) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2921.29; Sun, 26 Apr
+ 2020 05:53:04 +0000
+Received: from SN6PR11MB2557.namprd11.prod.outlook.com
+ ([fe80::3ce1:6359:35f0:ec2d]) by SN6PR11MB2557.namprd11.prod.outlook.com
+ ([fe80::3ce1:6359:35f0:ec2d%6]) with mapi id 15.20.2937.020; Sun, 26 Apr 2020
+ 05:53:04 +0000
+Subject: Re: [oe] [meta-oe][PATCH] php: upgrade 7.3.16 -> 7.4.4
+To: Khem Raj <raj.khem@gmail.com>
+CC: openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <20200424005711.188713-1-changqing.li@windriver.com>
+ <CAMKF1soLexrHJCrAQU855hg0RzH44cM7E+gA1K_ta_mJWyLhqQ@mail.gmail.com>
+From: "Changqing Li" <changqing.li@windriver.com>
+Message-ID: <c9ecfdd1-5907-a25c-8273-a7f5536818d4@windriver.com>
+Date: Sun, 26 Apr 2020 13:52:57 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
+In-Reply-To: <CAMKF1soLexrHJCrAQU855hg0RzH44cM7E+gA1K_ta_mJWyLhqQ@mail.gmail.com>
+X-ClientProxiedBy: HK2PR02CA0168.apcprd02.prod.outlook.com
+ (2603:1096:201:1f::28) To SN6PR11MB2557.namprd11.prod.outlook.com
+ (2603:10b6:805:56::33)
+Return-Path: changqing.li@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from hel-eptripper.corp.vaisala.com (193.143.230.131) by AM3PR07CA0135.eurprd07.prod.outlook.com (2603:10a6:207:8::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2958.7 via Frontend Transport; Sun, 26 Apr 2020 05:03:09 +0000
-X-Mailer: git-send-email 2.20.1
-X-Originating-IP: [193.143.230.131]
+Received: from [128.224.162.189] (60.247.85.82) by HK2PR02CA0168.apcprd02.prod.outlook.com (2603:1096:201:1f::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2937.13 via Frontend Transport; Sun, 26 Apr 2020 05:53:02 +0000
+X-Originating-IP: [60.247.85.82]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: d6f77fdf-1a50-4bdf-9a35-08d7e99f1d41
-X-MS-TrafficTypeDiagnostic: AM6PR06MB4647:|AM6PR06MB4647:
-X-MS-Exchange-Transport-Forked: True
+X-MS-Office365-Filtering-Correlation-Id: 1864da33-d0f0-439e-b0f9-08d7e9a615bd
+X-MS-TrafficTypeDiagnostic: SN6PR11MB2943:
 X-Microsoft-Antispam-PRVS: 
-	<AM6PR06MB4647799829D652E6D2A9A7A881AE0@AM6PR06MB4647.eurprd06.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:4125;
+	<SN6PR11MB29435841A6E5970FB99B514482AE0@SN6PR11MB2943.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:364;
 X-Forefront-PRVS: 03853D523D
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR06MB6198.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(4636009)(396003)(366004)(346002)(376002)(39850400004)(136003)(7696005)(5660300002)(16526019)(186003)(26005)(36756003)(52116002)(1076003)(44832011)(316002)(2616005)(956004)(6666004)(2906002)(54906003)(6916009)(6486002)(8936002)(81156014)(8676002)(86362001)(478600001)(66556008)(66476007)(66946007)(4326008);DIR:OUT;SFP:1101;
-Received-SPF: None (protection.outlook.com: vaisala.com does not designate
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN6PR11MB2557.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(10009020)(39840400004)(136003)(346002)(396003)(366004)(376002)(478600001)(2616005)(6486002)(19627235002)(2906002)(44832011)(36756003)(956004)(53546011)(30864003)(6706004)(81156014)(6916009)(52116002)(6666004)(66476007)(86362001)(26005)(4326008)(16799955002)(16526019)(8676002)(966005)(316002)(31686004)(5660300002)(31696002)(66946007)(66556008)(16576012)(8936002)(186003)(78286006);DIR:OUT;SFP:1101;
+Received-SPF: None (protection.outlook.com: windriver.com does not designate
  permitted sender hosts)
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	F/3Ccd1RxwCBdYX/ZGpomDsH0wVvMSX32+B5bgta8vaZwY2FCTaw4ZeAHw1AZmMCyAClfxRJd3pa/j8nepLdZ8vJLPuVDuLMxQE+YeEy+Th8G0zHZ+xtj5y1vmr9Xnyz0i/Ad+gP9SOKaAH1BUVOIya1+J/lCdMGJsjnJttfunG1KtfNQb0tGB1anyUkwqS+UFOYBUusSkshLaH/RMPmQqaJIx55oJVFKH9flFRSlE0SKLjpEs/80VCFyYowDR5gNXxmWOG/XYQ2K2lYSxXsTml7v6kZbQp+BHsl8lWXqWl0qJvjh4bjq2wnEAOSq9vxsu12jE/New/V5SEKn7/FsUEDA1UwmWF5NHerX4e1j4J9y1G9nt/tjcKkV+lV9K04K0xzjZkyiNyccWjVmS+kdtO0gCnPiVFknspJJDofetanuewVhZ1Iyn8xs3axlnkvkzvnZlXAWOccKD2QBKSXlbMv6tTKIC7P1/VQ19T5mwiP8fxd+DRSAOWk+hUWHEvldSAcfJgkuO+GdTC21BCH5Q==
+	efUUei5jatUi9ut1/YkAl4JS2/8OsMdGqpbZDW1DO59i+erFp6jwBovWCb+OfraGlwNUxbjf1xK5vbYKKTVTVWVuQX3taGdD44kDDlPrx9RAmsDpA9IEidkKpJJ9sN+S6iB13RFeF9vHcxNMsV2Qr8RiED3xnwJiSlYZ9xkhjfKbfj3ePaJVg0IVT0efzyfULbTgo7IaX1F/dUHNrsKEHy05ZXDrEdoM5RwMtWvkCc/h4Rt1zPZE2vMQT5Z6OMogHCa0R4oEirjKcOCDE3EuFXXy9UEi8VhcQ95ZeO8Rtn4MvMCkOUg695C/x3TKYVCcjzTHXytIAp96ZYhV8gahJTGxNcLxNd1934e2+Fgn8ulfUEHeNEHopUIdmyQe3LTq5KyPtHryqi2Sm83nYOXGEVIQgblxO/pfbG9jsxsUjbxmuWlP/Vgt1H3AOLwKBapQ2D8R7tXSQwiWMaWfkJB1yMjKgA0mMLKN7A9EohtOd13lhVX1R98ciIWZxZMM3G9A+4iHa4riKeNmHIrIw92xHjsMmWq4sXn05FBx+WO+Yulq49jIlUxVThtslZYNX6Lo4q/THYmuo8BlK2EfC+NIRlA8PGuv+BNQg1NaMiMVGUQ=
 X-MS-Exchange-AntiSpam-MessageData: 
-	tXp0FooWfIT5HnVYL2OhS4mXVkY6oHADH+r/XF9CtSim+RerPEySx4zIqde6gpl8YkMhUlErlVTlZif3MqedGgh/IK6GxCyzF877VvJdfDzhuwipUtXVTDh5iZk6L0rz4DKFecTlSMXrZUPrkdA42CfIc0meSCK50wuaenotBeqXyVXwH/65fs/ggs00sA2pxVlGbmHt5c9WcZwQy93z4vAhKHPDeeVl8R5U6QTyNCRs2eGi935P3lXmN1TwdlBligGpYIofYSfizaV04AJY/f8d0m53mbrNMlfoMYo7MiG/7KOGI0581rT35rAX2fy3rKnCfiQPI8+rf9LK0MK/odAmOzq9Upjq8PgqjEXDIBOPWes+RtWv1guyflx1CV8Cb1CAEnuGLz8iZ31DLgSWTdKXsrfbTHDS2nr2jEOZgKPmb3wTar2eLJ+HmyI5snMgVzvAieOpJAT/lllOHg76UEurtccxxXaI2uCSSeQDKlU73W7MMpqUlwMxZCxfbcDkysnwwU3HkHWhlQS4RhT8oOOomsbcSUNi62pxTlNWVuvsaLd96ZVp4Vo9nM5ktz+47PmbTn9DQa0xDqHFBn75N05CM3G6QwN/Crm30bBnm7P+vgXmGNah0RD2e4Kvdp5+45zD5V0MmQ7FVSO7ANRDSyST4kxONeWTyNwpleqzm008cg3a+jK+mW8DZYVzLztMNF9rPIJZekaDVa8nola1B+HFzamJwflb16YjY/T+nkjIqNYXJDlDHy5KjiMe9XfL3SEByAi44Ro52xP2amBFzG9ILFDXWPMZMH6gXkkni9VIfsWlqBpT/1kEbzGo4Ktr
-X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d6f77fdf-1a50-4bdf-9a35-08d7e99f1d41
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Apr 2020 05:03:09.7744
+	1ryQWum0ut6AXteKyfTKH6f42NU1rDiQyEuz1+fsbatwojHOwhse4/wAbulgWEoba1Hv3MOH1IvlKuOoQYVVzKKr18zm1Q0wvONgKnaA5a7BNZRt1xE3gyYKvpEPiqCIUCRVBKx+I3RI7yl+KT7agnieh3SQUcM0A+s2d0kpvEgO301MvNWhv9O9Ea2VjcHT/f+kk0TWUQncoqL1+SAiyM02UbOHwVhexeM8rjh0ziyvtTOJz8h06/q1D+KZ84noek5iMeWNqJb5RL3dZOePVzH/bVFJ6/QVpDWKJnatjEXm1v5aOU3FeaRvv9f9oSdtcWB/toDFnjtcR4P2CHY/tLMMmETjjxMMWY9XgF0ojAXht43Ncgv0LCEsSMeKwohxuPc3oyxnsp+lSKjAfLFR84rtFKA4CcxZtEKchejOVvYfP62PkFjXuKJn+P/cKvHyMqLYciH7g/0i6L0bxSmbOTS1DPpkA1TFuiOS29VMYHlIhXkX8TiOCoYOJfkOHGWCXh8WNbet8cFuBBMi69agp4Eb/sz8UNqQ6iRrG6baKm86/ha/+TI6jwUFYJoENFFZHf0MwKDfQsB2HUwjPLJ+ujraZ3AvcnjihWsPTuBWQMMw8YcOFQYS/2w0vTdOMV/S7iRCAhYg3YWWBQPNIG8+Gx3Py4glVSd9X6XC93hRbPzB7pOyFEEilEkQAIve8X3EqcKcb/rlWkgRaSmYktV4ntTnmiI4mXgnY+umtSpIaSAeRkgvwCrpr+X2Gtuh/de0v2JFO0jTFQD5p4RNxtuCU0xuOxCIJ8FsCmD8MNMvNu4=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1864da33-d0f0-439e-b0f9-08d7e9a615bd
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Apr 2020 05:53:04.0707
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qpsruOvpEerwU+UVbcobPBtqTrjUbXJFGG3bo2XBNZyLLr6+qDt51n3+xuXY1YY4hp3uuWwx7mtzr2Ro9Lgc6g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR06MB4647
+X-MS-Exchange-CrossTenant-UserPrincipalName: fwfC5+w/osYBns1sk4voTbewt/2V4Znq/Ar6yAPQW1kDimEClQRKpGLc/HzP7LsU+bc/jdgO5YUjHI1jWhFyM2RrqLBr8D/diiQLWkxrZW8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR11MB2943
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
+Content-Language: en-US
 
-From: "niko.mauno@vaisala.com" <niko.mauno@vaisala.com>
 
-Avoid propagation of full build host specific path into
-WORKDIR/sysroot-destdir/usr/share/cmake/ZeroMQ/ZeroMQTargets.cmake
-when building the recipe as this causes following-like breakage on
-sstate cache consumer hosts (with different build host specific path,
-than the host that populated sstate cache)
-
-  ninja: error: '/build/host/specific/path/to/zeromq/4.3.2-r0/recipe-sysroo=
-t/usr/lib/libsodium.so', needed by 'src/FooBar', missing and no known rule =
-to make it
-
-Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...void-host-specific-path-to-libsodium.patch | 39 +++++++++++++++++++
- .../zeromq/zeromq_4.3.2.bb                    |  1 +
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/zeromq/files/0001-CMakeLis=
-ts-txt-Avoid-host-specific-path-to-libsodium.patch
-
-diff --git a/meta-oe/recipes-connectivity/zeromq/files/0001-CMakeLists-txt-=
-Avoid-host-specific-path-to-libsodium.patch b/meta-oe/recipes-connectivity/=
-zeromq/files/0001-CMakeLists-txt-Avoid-host-specific-path-to-libsodium.patc=
-h
-new file mode 100644
-index 000000000..eb3dee4d3
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/zeromq/files/0001-CMakeLists-txt-Avoid-h=
-ost-specific-path-to-libsodium.patch
-@@ -0,0 +1,39 @@
-+From: Niko Mauno <niko.mauno@vaisala.com>
-+Date: Wed Apr 22 09:00:00 2020 +0300
-+Subject: CMakeLists.txt: Avoid host-specific path to libsodium
-+
-+Avoid propagating full build host specific path to generated
-+ZeroMQTargets.cmake when building with libsodium, which changes the
-+content in generated ZeroMQTargets.cmake files followingly:
-+
-+  -INTERFACE_LINK_LIBRARIES "-lpthread;/build/host/specific/path/to/zeromq=
-/4.3.2-r0/recipe-sysroot/usr/lib/libsodium.so;-lrt"
-+  +INTERFACE_LINK_LIBRARIES "-lpthread;-lsodium;-lrt"
-+
-+This change mitigates an issue stemming from reuse of build artifacts
-+where the path to libsodium.so does not match exactly between two
-+different build hosts.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
-+
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -1210,7 +1210,7 @@
-+   target_link_libraries(libzmq ${OPTIONAL_LIBRARIES} ${CMAKE_THREAD_LIBS_=
-INIT})
-+=20
-+   if(SODIUM_FOUND)
-+-    target_link_libraries(libzmq ${SODIUM_LIBRARIES})
-++    target_link_libraries(libzmq -lsodium)
-+     # On Solaris, libsodium depends on libssp
-+     if(${CMAKE_SYSTEM_NAME} MATCHES "SunOS")
-+       target_link_libraries(libzmq ssp)
-+@@ -1240,7 +1240,7 @@
-+   target_link_libraries(libzmq-static ${OPTIONAL_LIBRARIES} ${CMAKE_THREA=
-D_LIBS_INIT})
-+=20
-+   if(SODIUM_FOUND)
-+-    target_link_libraries(libzmq-static ${SODIUM_LIBRARIES})
-++    target_link_libraries(libzmq-static -lsodium)
-+     # On Solaris, libsodium depends on libssp
-+     if(${CMAKE_SYSTEM_NAME} MATCHES "SunOS")
-+       target_link_libraries(libzmq-static ssp)
-diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.2.bb b/meta-oe/=
-recipes-connectivity/zeromq/zeromq_4.3.2.bb
-index adf2c7ba5..fc8a987f2 100644
---- a/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.2.bb
-+++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.2.bb
-@@ -7,6 +7,7 @@ PACKAGECONFIG ??=3D "libsodium"
- PACKAGECONFIG[libsodium] =3D "-DWITH_LIBSODIUM=3DON,-DWITH_LIBSODIUM=3DOFF=
-, libsodium"
+On 4/25/20 12:59 AM, Khem Raj wrote:
+> This cause xdebug failures
+>
+> https://errors.yoctoproject.org/Errors/Details/407307/
+current xdebug don't support php7.4,=C2=A0 I will upgrade xdebug to latest=
+=
 =20
- SRC_URI =3D "http://github.com/zeromq/libzmq/releases/download/v${PV}/zero=
-mq-${PV}.tar.gz \
-+    file://0001-CMakeLists-txt-Avoid-host-specific-path-to-libsodium.patch=
- \
-     file://run-ptest \
- "
- SRC_URI[md5sum] =3D "2047e917c2cc93505e2579bcba67a573"
---=20
-2.20.1
-
+and resend the patch.
+>
+> On Thu, Apr 23, 2020 at 5:57 PM Changqing Li <changqing.li@windriver.com=
+> wrote:
+>> From: Changqing Li <changqing.li@windriver.com>
+>>
+>> License-Update: License updated (year updated)
+>>
+>> note: for 7.4, pear is disabled by default,
+>> and it will be deprecated in future.
+>>
+>> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>> ---
+>>   ...Use-pkg-config-for-libxml2-detection.patch |  23 ---
+>>   ...re.ac-don-t-include-build-libtool.m4.patch |  30 +++
+>>   ...001-opcache-config.m4-enable-opcache.patch | 170 +++-------------
+>>   ...p-don-t-use-broken-wrapper-for-mkdir.patch |  11 +-
+>>   ...-php.m4-don-t-unset-cache-variables.patch} |  23 +--
+>>   ...e-pkg-config-for-FreeType2-detection.patch |  53 -----
+>>   .../php/php/CVE-2019-6978.patch               | 192 -----------------=
+-
+>>   meta-oe/recipes-devtools/php/php/iconv.patch  |  36 ++--
+>>   .../php/php/imap-fix-autofoo.patch            |  36 ++--
+>>   .../php/php/phar-makefile.patch               |  18 +-
+>>   .../php/php/php_exec_native.patch             |  20 +-
+>>   .../php/{php_7.3.16.bb =3D> php_7.4.4.bb}       |  18 +-
+>>   12 files changed, 132 insertions(+), 498 deletions(-)
+>>   delete mode 100644 meta-oe/recipes-devtools/php/php/0001-Use-pkg-conf=
+ig-for-libxml2-detection.patch
+>>   create mode 100644 meta-oe/recipes-devtools/php/php/0001-configure.ac=
+-don-t-include-build-libtool.m4.patch
+>>   rename meta-oe/recipes-devtools/php/php/{0001-acinclude.m4-don-t-unse=
+t-cache-variables.patch =3D> 0001-php.m4-don-t-unset-cache-variables.patch}=
+ (50%)
+>>   delete mode 100644 meta-oe/recipes-devtools/php/php/0048-Use-pkg-conf=
+ig-for-FreeType2-detection.patch
+>>   delete mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-6978.pat=
+ch
+>>   rename meta-oe/recipes-devtools/php/{php_7.3.16.bb =3D> php_7.4.4.bb}=
+ (94%)
+>>
+>> diff --git a/meta-oe/recipes-devtools/php/php/0001-Use-pkg-config-for-l=
+ibxml2-detection.patch b/meta-oe/recipes-devtools/php/php/0001-Use-pkg-conf=
+ig-for-libxml2-detection.patch
+>> deleted file mode 100644
+>> index ccc6d4ede..000000000
+>> --- a/meta-oe/recipes-devtools/php/php/0001-Use-pkg-config-for-libxml2-=
+detection.patch
+>> +++ /dev/null
+>> @@ -1,23 +0,0 @@
+>> -Use pkg-config for libxml2 detection.
+>> -
+>> -xml2-config does not work. Use pkgconfig to set CPPFLAGS and LIBS.
+>> -
+>> -Upstream-Status: Inappropriate [configuration]
+>> -
+>> -Signed-off-by:  Khem Raj <raj.khem@gmail.com>
+>> ----
+>> - configure.in | 15 ++-------------
+>> - 1 file changed, 2 insertions(+), 13 deletions(-)
+>> ---- a/acinclude.m4
+>> -+++ b/acinclude.m4
+>> -@@ -2481,8 +2481,8 @@ AC_DEFUN([PHP_SETUP_LIBXML], [
+>> -     LIBXML_VERSION=3D`expr [$]1 \* 1000000 + [$]2 \* 1000 + [$]3`
+>> -     if test "$LIBXML_VERSION" -ge "2006011"; then
+>> -       found_libxml=3Dyes
+>> --      LIBXML_LIBS=3D`$XML2_CONFIG --libs`
+>> --      LIBXML_INCS=3D`$XML2_CONFIG --cflags`
+>> -+      LIBXML_LIBS=3D`pkg-config --libs libxml-2.0`
+>> -+      LIBXML_INCS=3D`pkg-config --cflags libxml-2.0`
+>> -     else
+>> -       AC_MSG_ERROR([libxml2 version 2.6.11 or greater required.])
+>> -     fi
+>> diff --git a/meta-oe/recipes-devtools/php/php/0001-configure.ac-don-t-i=
+nclude-build-libtool.m4.patch b/meta-oe/recipes-devtools/php/php/0001-confi=
+gure.ac-don-t-include-build-libtool.m4.patch
+>> new file mode 100644
+>> index 000000000..2861366a6
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-devtools/php/php/0001-configure.ac-don-t-include-=
+build-libtool.m4.patch
+>> @@ -0,0 +1,30 @@
+>> +From f5a34e771532b8433f307b679500c26af328ba35 Mon Sep 17 00:00:00 2001
+>> +From: Changqing Li <changqing.li@windriver.com>
+>> +Date: Fri, 17 Apr 2020 15:01:57 +0800
+>> +Subject: [PATCH] configure.ac: don't include build/libtool.m4
+>> +
+>> +we delete build/libtool.m4 before do_configure,
+>> +we will use libtool.m4 under ACLOCALDIR
+>> +
+>> +Upstream-Status: Inappropriate [oe-specific]
+>> +
+>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>> +---
+>> + configure.ac | 1 -
+>> + 1 file changed, 1 deletion(-)
+>> +
+>> +diff --git a/configure.ac b/configure.ac
+>> +index 06c6a27..f85144e 100644
+>> +--- a/configure.ac
+>> ++++ b/configure.ac
+>> +@@ -6,7 +6,6 @@ dnl --------------------------------------------------=
+--------------------------
+>> + m4_include([build/ax_check_compile_flag.m4])
+>> + m4_include([build/ax_func_which_gethostbyname_r.m4])
+>> + m4_include([build/ax_gcc_func_attribute.m4])
+>> +-m4_include([build/libtool.m4])
+>> + m4_include([build/php_cxx_compile_stdcxx.m4])
+>> + m4_include([build/php.m4])
+>> + m4_include([build/pkg.m4])
+>> +--
+>> +2.7.4
+>> +
+>> diff --git a/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-en=
+able-opcache.patch b/meta-oe/recipes-devtools/php/php/0001-opcache-config.m=
+4-enable-opcache.patch
+>> index 34f433f40..ee0d5edcd 100644
+>> --- a/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-op=
+cache.patch
+>> +++ b/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-op=
+cache.patch
+>> @@ -1,30 +1,27 @@
+>> -From 8de5ba69d20d049b8ca983a9470c7303142ec0b3 Mon Sep 17 00:00:00 2001
+>> -From: Changqing Li <changqing.li@windriver.com>
+>> -Date: Sun, 28 Apr 2019 16:55:13 +0800
+>> -Subject: [PATCH] From fb139d9707dabe1684b472a08a6eb5761ede4a3a Mon Sep=
+ 17
+>> - 00:00:00 2001 From: Changqing Li <changqing.li@windriver.com> Date: T=
+ue, 12
+>> - Feb 2019 14:56:16 +0800 Subject: [PATCH] opcache/config.m4: enable op=
+cache
+>> +opcache/config.m4: enable opcache
+>>
+>> -We can't use AC_TRY_RUN to run programs in a cross compile environment=
+. Set
+>> -the variables directly instead since we know that we'd be running on l=
+atest
+>> +We can't use AC_TRY_RUN to run programs in a cross compile environment=
+.
+>> +Set
+>> +the variables directly instead since we know that we'd be running on
+>> +latest
+>>   enough linux kernel.
+>>
+>>   Upstream-Status: Inappropriate [Configuration]
+>>
+>>   Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+>>
+>> -update patch to version 7.3.4
+>> +update patch to version 7.4.4
+>>   Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>>   ---
+>> - ext/opcache/config.m4 | 312 +----------------------------------------=
+---------
+>> - 1 file changed, 6 insertions(+), 306 deletions(-)
+>> + ext/opcache/config.m4 | 194 +----------------------------------------=
+---------
+>> + 1 file changed, 3 insertions(+), 191 deletions(-)
+>>
+>>   diff --git a/ext/opcache/config.m4 b/ext/opcache/config.m4
+>> -index 4810217..22c3d61 100644
+>> +index 6c40caf..84ddf1e 100644
+>>   --- a/ext/opcache/config.m4
+>>   +++ b/ext/opcache/config.m4
+>> -@@ -27,319 +27,19 @@ if test "$PHP_OPCACHE" !=3D "no"; then
+>> -   AC_CHECK_HEADERS([unistd.h sys/uio.h])
+>> +@@ -23,201 +23,13 @@ if test "$PHP_OPCACHE" !=3D "no"; then
+>> +   AC_CHECK_FUNCS([mprotect])
+>>
+>>      AC_MSG_CHECKING(for sysvipc shared memory support)
+>>   -  AC_RUN_IFELSE([AC_LANG_SOURCE([[
+>> @@ -95,9 +92,8 @@ index 4810217..22c3d61 100644
+>>   -    AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM supp=
+ort])
+>>   -    msg=3Dyes],[msg=3Dno],[msg=3Dno])
+>>   -  AC_MSG_RESULT([$msg])
+>> --
+>>   +  AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM suppor=
+t])
+>> -+
+>> +
+>>      AC_MSG_CHECKING(for mmap() using MAP_ANON shared memory support)
+>>   -  AC_RUN_IFELSE([AC_LANG_SOURCE([[
+>>   -#include <sys/types.h>
+>> @@ -114,7 +110,8 @@ index 4810217..22c3d61 100644
+>>   -#ifndef MAP_FAILED
+>>   -# define MAP_FAILED ((void*)-1)
+>>   -#endif
+>> --
+>> ++  AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_ANON)=
+ SHM support])
+>> +
+>>   -int main() {
+>>   -  pid_t pid;
+>>   -  int status;
+>> @@ -149,64 +146,8 @@ index 4810217..22c3d61 100644
+>>   -    AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_AN=
+ON) SHM support])
+>>   -    msg=3Dyes],[msg=3Dno],[msg=3Dno])
+>>   -  AC_MSG_RESULT([$msg])
+>> -+  AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_ANON)=
+ SHM support])
+>> -
+>> -   AC_MSG_CHECKING(for mmap() using /dev/zero shared memory support)
+>> --  AC_RUN_IFELSE([AC_LANG_SOURCE([[
+>> --#include <sys/types.h>
+>> --#include <sys/wait.h>
+>> --#include <sys/mman.h>
+>> --#include <sys/stat.h>
+>> --#include <fcntl.h>
+>> --#include <unistd.h>
+>> --#include <string.h>
+>> --
+>> --#ifndef MAP_FAILED
+>> --# define MAP_FAILED ((void*)-1)
+>> --#endif
+>> --
+>> --int main() {
+>> --  pid_t pid;
+>> --  int status;
+>> --  int fd;
+>> --  char *shm;
+>> --
+>> --  fd =3D open("/dev/zero", O_RDWR, S_IRUSR | S_IWUSR);
+>> --  if (fd =3D=3D -1) {
+>> --    return 1;
+>> --  }
+>> --
+>> --  shm =3D mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)=
+;
+>> --  if (shm =3D=3D MAP_FAILED) {
+>> --    return 2;
+>> --  }
+>> --
+>> --  strcpy(shm, "hello");
+>>   -
+>> --  pid =3D fork();
+>> --  if (pid < 0) {
+>> --    return 5;
+>> --  } else if (pid =3D=3D 0) {
+>> --    strcpy(shm, "bye");
+>> --    return 6;
+>> --  }
+>> --  if (wait(&status) !=3D pid) {
+>> --    return 7;
+>> --  }
+>> --  if (!WIFEXITED(status) || WEXITSTATUS(status) !=3D 6) {
+>> --    return 8;
+>> --  }
+>> --  if (strcmp(shm, "bye") !=3D 0) {
+>> --    return 9;
+>> --  }
+>> --  return 0;
+>> --}
+>> --]])],[dnl
+>> --    AC_DEFINE(HAVE_SHM_MMAP_ZERO, 1, [Define if you have mmap("/dev/z=
+ero") SHM support])
+>> --    msg=3Dyes],[msg=3Dno],[msg=3Dno])
+>> --  AC_MSG_RESULT([$msg])
+>> -+  AC_DEFINE(HAVE_SHM_MMAP_ZERO, 1, [Define if you have mmap("/dev/zer=
+o") SHM support])
+>> -
+>> +-  PHP_CHECK_FUNC_LIB(shm_open, rt)
+>>      AC_MSG_CHECKING(for mmap() using shm_open() shared memory support)
+>>   -  AC_RUN_IFELSE([AC_LANG_SOURCE([[
+>>   -#include <sys/types.h>
+>> @@ -230,7 +171,7 @@ index 4810217..22c3d61 100644
+>>   -  char *shm;
+>>   -  char tmpname[4096];
+>>   -
+>> --  sprintf(tmpname,"test.shm.%dXXXXXX", getpid());
+>> +-  sprintf(tmpname,"/opcache.test.shm.%dXXXXXX", getpid());
+>>   -  if (mktemp(tmpname) =3D=3D NULL) {
+>>   -    return 1;
+>>   -  }
+>> @@ -273,80 +214,15 @@ index 4810217..22c3d61 100644
+>>   -}
+>>   -]])],[dnl
+>>   -    AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap=
+() SHM support])
+>> --    msg=3Dyes],[msg=3Dno],[msg=3Dno])
+>> --  AC_MSG_RESULT([$msg])
+>> +-    AC_MSG_RESULT([yes])
+>> +-    PHP_CHECK_LIBRARY(rt, shm_unlink, [PHP_ADD_LIBRARY(rt,1,OPCACHE_S=
+HARED_LIBADD)])
+>> +-  ],[
+>> +-    AC_MSG_RESULT([no])
+>> +-  ],[
+>> +-    AC_MSG_RESULT([no])
+>> +-  ])
+>>   +  AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap()=
+ SHM support])
+>>
+>> -   AC_MSG_CHECKING(for mmap() using regular file shared memory support=
+)
+>> --  AC_RUN_IFELSE([AC_LANG_SOURCE([[
+>> --#include <sys/types.h>
+>> --#include <sys/wait.h>
+>> --#include <sys/mman.h>
+>> --#include <sys/stat.h>
+>> --#include <fcntl.h>
+>> --#include <unistd.h>
+>> --#include <string.h>
+>> --#include <stdlib.h>
+>> --#include <stdio.h>
+>> --
+>> --#ifndef MAP_FAILED
+>> --# define MAP_FAILED ((void*)-1)
+>> --#endif
+>> --
+>> --int main() {
+>> --  pid_t pid;
+>> --  int status;
+>> --  int fd;
+>> --  char *shm;
+>> --  char tmpname[4096];
+>> --
+>> --  sprintf(tmpname,"test.shm.%dXXXXXX", getpid());
+>> --  if (mktemp(tmpname) =3D=3D NULL) {
+>> --    return 1;
+>> --  }
+>> --  fd =3D open(tmpname, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+>> --  if (fd =3D=3D -1) {
+>> --    return 2;
+>> --  }
+>> --  if (ftruncate(fd, 4096) < 0) {
+>> --    close(fd);
+>> --    unlink(tmpname);
+>> --    return 3;
+>> --  }
+>> --
+>> --  shm =3D mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)=
+;
+>> --  if (shm =3D=3D MAP_FAILED) {
+>> --    return 4;
+>> --  }
+>> --  unlink(tmpname);
+>> --  close(fd);
+>> --
+>> --  strcpy(shm, "hello");
+>> --
+>> --  pid =3D fork();
+>> --  if (pid < 0) {
+>> --    return 5;
+>> --  } else if (pid =3D=3D 0) {
+>> --    strcpy(shm, "bye");
+>> --    return 6;
+>> --  }
+>> --  if (wait(&status) !=3D pid) {
+>> --    return 7;
+>> --  }
+>> --  if (!WIFEXITED(status) || WEXITSTATUS(status) !=3D 6) {
+>> --    return 8;
+>> --  }
+>> --  if (strcmp(shm, "bye") !=3D 0) {
+>> --    return 9;
+>> --  }
+>> --  return 0;
+>> --}
+>> --]])],[dnl
+>> --    AC_DEFINE(HAVE_SHM_MMAP_FILE, 1, [Define if you have mmap() SHM s=
+upport])
+>> --    msg=3Dyes],[msg=3Dno],[msg=3Dno])
+>> --  AC_MSG_RESULT([$msg])
+>> -+  AC_DEFINE(HAVE_SHM_MMAP_FILE, 1, [Define if you have mmap() SHM sup=
+port])
+>> -
+>>      PHP_NEW_EXTENSION(opcache,
+>>          ZendAccelerator.c \
+>>   --
+>> diff --git a/meta-oe/recipes-devtools/php/php/0001-php-don-t-use-broken=
+-wrapper-for-mkdir.patch b/meta-oe/recipes-devtools/php/php/0001-php-don-t-=
+use-broken-wrapper-for-mkdir.patch
+>> index 2f7d58155..d68737366 100644
+>> --- a/meta-oe/recipes-devtools/php/php/0001-php-don-t-use-broken-wrappe=
+r-for-mkdir.patch
+>> +++ b/meta-oe/recipes-devtools/php/php/0001-php-don-t-use-broken-wrappe=
+r-for-mkdir.patch
+>> @@ -4,17 +4,20 @@ Date: Thu, 3 Nov 2011 14:27:15 +0100
+>>   Subject: [PATCH 2/8] php: don't use broken wrapper for mkdir
+>>
+>>   Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>> +
+>> +update patch to version 7.4.4
+>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>>   ---
+>>
+>>   Upstream-Status: Inappropriate
+>>
+>> - Makefile.global | 2 +-
+>> + build/Makefile.global | 2 +-
+>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> -diff --git a/Makefile.global b/Makefile.global
+>> +diff --git a/build/Makefile.global b/build/Makefile.global
+>>   index ff858c2..ae554b4 100644
+>> ---- a/Makefile.global
+>> -+++ b/Makefile.global
+>> +--- a/build/Makefile.global
+>> ++++ b/build/Makefile.global
+>>   @@ -1,4 +1,4 @@
+>>   -mkinstalldirs =3D $(top_srcdir)/build/shtool mkdir -p
+>>   +mkinstalldirs =3D mkdir -p
+>> diff --git a/meta-oe/recipes-devtools/php/php/0001-acinclude.m4-don-t-u=
+nset-cache-variables.patch b/meta-oe/recipes-devtools/php/php/0001-php.m4-d=
+on-t-unset-cache-variables.patch
+>> similarity index 50%
+>> rename from meta-oe/recipes-devtools/php/php/0001-acinclude.m4-don-t-un=
+set-cache-variables.patch
+>> rename to meta-oe/recipes-devtools/php/php/0001-php.m4-don-t-unset-cach=
+e-variables.patch
+>> index 51dbe269c..0d721ec50 100644
+>> --- a/meta-oe/recipes-devtools/php/php/0001-acinclude.m4-don-t-unset-ca=
+che-variables.patch
+>> +++ b/meta-oe/recipes-devtools/php/php/0001-php.m4-don-t-unset-cache-va=
+riables.patch
+>> @@ -1,7 +1,4 @@
+>> -From d2679c89c0b15b90e5360b4863258a7955e5f4e5 Mon Sep 17 00:00:00 2001
+>> -From: Changqing Li <changqing.li@windriver.com>
+>> -Date: Tue, 12 Feb 2019 15:59:19 +0800
+>> -Subject: [PATCH] acinclude.m4: don't unset cache variables
+>> +php.m4: don't unset cache variables
+>>
+>>   Unsetting prevents cache variable from being passed to configure.
+>>
+>> @@ -9,17 +6,17 @@ Upstream-Status: Inappropriate [OE-specific]
+>>
+>>   Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+>>
+>> -update patch to version 7.3.2
+>> +update this patch to 7.4.4, acinclude.m4 move to build/php.m4
+>>   Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>>   ---
+>> - acinclude.m4 | 4 ----
+>> + build/php.m4 | 4 ----
+>>    1 file changed, 4 deletions(-)
+>>
+>> -diff --git a/acinclude.m4 b/acinclude.m4
+>> -index 25f900d..2641969 100644
+>> ---- a/acinclude.m4
+>> -+++ b/acinclude.m4
+>> -@@ -1921,8 +1921,6 @@ define([phpshift],[ifelse(index([$@],[,]),-1,,[s=
+ubstr([$@],incr(index([$@],[,]))
+>> +diff --git a/build/php.m4 b/build/php.m4
+>> +index 5c45d13..218ec47 100644
+>> +--- a/build/php.m4
+>> ++++ b/build/php.m4
+>> +@@ -1587,8 +1587,6 @@ dnl PHP_CHECK_FUNC_LIB
+>>    dnl
+>>    AC_DEFUN([PHP_CHECK_FUNC_LIB],[
+>>      ifelse($2,,:,[
+>> @@ -28,8 +25,8 @@ index 25f900d..2641969 100644
+>>      unset found
+>>      AC_CHECK_LIB($2, $1, [found=3Dyes], [
+>>        AC_CHECK_LIB($2, __$1, [found=3Dyes], [found=3Dno])
+>> -@@ -1954,8 +1952,6 @@ dnl in the default libraries and as a fall back =
+in the specified library.
+>> - dnl Defines HAVE_func and HAVE_library if found and adds the library =
+to LIBS.
+>> +@@ -1620,8 +1618,6 @@ dnl and as a fall back in the specified library.=
+ Defines HAVE_func and
+>> + dnl HAVE_library if found and adds the library to LIBS.
+>>    dnl
+>>    AC_DEFUN([PHP_CHECK_FUNC],[
+>>   -  unset ac_cv_func_$1
+>> diff --git a/meta-oe/recipes-devtools/php/php/0048-Use-pkg-config-for-F=
+reeType2-detection.patch b/meta-oe/recipes-devtools/php/php/0048-Use-pkg-co=
+nfig-for-FreeType2-detection.patch
+>> deleted file mode 100644
+>> index f36ddac26..000000000
+>> --- a/meta-oe/recipes-devtools/php/php/0048-Use-pkg-config-for-FreeType=
+2-detection.patch
+>> +++ /dev/null
+>> @@ -1,53 +0,0 @@
+>> -From: =3D?utf-8?b?T25kxZllaiBTdXLDvQ=3D=3D?=3D <ondrej@sury.org>
+>> -Date: Mon, 22 Oct 2018 06:54:31 +0000
+>> -Subject: Use pkg-config for FreeType2 detection
+>> -
+>> ----
+>> - ext/gd/config.m4 | 30 +++++++++++++++++++-----------
+>> - 1 file changed, 19 insertions(+), 11 deletions(-)
+>> -
+>> -diff --git a/ext/gd/config.m4 b/ext/gd/config.m4
+>> -index 498d870..d28c6ae 100644
+>> ---- a/ext/gd/config.m4
+>> -+++ b/ext/gd/config.m4
+>> -@@ -184,21 +184,29 @@ AC_DEFUN([PHP_GD_XPM],[
+>> - AC_DEFUN([PHP_GD_FREETYPE2],[
+>> -   if test "$PHP_FREETYPE_DIR" !=3D "no"; then
+>> -
+>> --    for i in $PHP_FREETYPE_DIR /usr/local /usr; do
+>> --      if test -f "$i/bin/freetype-config"; then
+>> --        FREETYPE2_DIR=3D$i
+>> --        FREETYPE2_CONFIG=3D"$i/bin/freetype-config"
+>> --        break
+>> -+    if test -z "$PKG_CONFIG"; then
+>> -+      AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
+>> -+    fi
+>> -+    if test -x "$PKG_CONFIG" && $PKG_CONFIG --exists freetype2 ; then
+>> -+      FREETYPE2_CFLAGS=3D`$PKG_CONFIG --cflags freetype2`
+>> -+      FREETYPE2_LIBS=3D`$PKG_CONFIG --libs freetype2`
+>> -+    else
+>> -+      for i in $PHP_FREETYPE_DIR /usr/local /usr; do
+>> -+        if test -f "$i/bin/freetype-config"; then
+>> -+          FREETYPE2_DIR=3D$i
+>> -+          FREETYPE2_CONFIG=3D"$i/bin/freetype-config"
+>> -+          break
+>> -+        fi
+>> -+      done
+>> -+
+>> -+      if test -z "$FREETYPE2_DIR"; then
+>> -+        AC_MSG_ERROR([freetype-config not found.])
+>> -       fi
+>> --    done
+>> -
+>> --    if test -z "$FREETYPE2_DIR"; then
+>> --      AC_MSG_ERROR([freetype-config not found.])
+>> -+      FREETYPE2_CFLAGS=3D`$FREETYPE2_CONFIG --cflags`
+>> -+      FREETYPE2_LIBS=3D`$FREETYPE2_CONFIG --libs`
+>> -     fi
+>> -
+>> --    FREETYPE2_CFLAGS=3D`$FREETYPE2_CONFIG --cflags`
+>> --    FREETYPE2_LIBS=3D`$FREETYPE2_CONFIG --libs`
+>> --
+>> -     PHP_EVAL_INCLINE($FREETYPE2_CFLAGS)
+>> -     PHP_EVAL_LIBLINE($FREETYPE2_LIBS, GD_SHARED_LIBADD)
+>> -     AC_DEFINE(HAVE_LIBFREETYPE,1,[ ])
+>> diff --git a/meta-oe/recipes-devtools/php/php/CVE-2019-6978.patch b/met=
+a-oe/recipes-devtools/php/php/CVE-2019-6978.patch
+>> deleted file mode 100644
+>> index b7cdfd964..000000000
+>> --- a/meta-oe/recipes-devtools/php/php/CVE-2019-6978.patch
+>> +++ /dev/null
+>> @@ -1,192 +0,0 @@
+>> -From 089f7c0bc28d399b0420aa6ef058e4c1c120b2ae Mon Sep 17 00:00:00 2001
+>> -From: "Christoph M. Becker" <cmbecker69@gmx.de>
+>> -Date: Sat, 19 Jan 2019 10:35:39 +0100
+>> -Subject: [PATCH] Sync with upstream
+>> -
+>> -Even though libgd/libgd#492 is not a relevant bug fix for PHP, since
+>> -the binding doesn't use the `gdImage*Ptr()` functions at all, we're
+>> -porting the fix to stay in sync here.
+>> ----
+>> - ext/gd/libgd/gd_gif_out.c | 20 +++++++++++++++++---
+>> - ext/gd/libgd/gd_jpeg.c    | 17 ++++++++++++++---
+>> - ext/gd/libgd/gd_wbmp.c    | 18 +++++++++++++++---
+>> - 3 files changed, 46 insertions(+), 9 deletions(-)
+>> -
+>> -Upstream-Status: Backport [http://git.php.net/?p=3Dphp-src.git;a=3Dcom=
+mit;h=3D089f7c0bc28d399b0420aa6ef058e4c1c120b2ae]
+>> -CVE: CVE-2019-6978
+>> -
+>> -Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+>> -
+>> -diff --git a/ext/gd/libgd/gd_gif_out.c b/ext/gd/libgd/gd_gif_out.c
+>> -index 1f2a6b936a..2e1f38af70 100644
+>> ---- a/ext/gd/libgd/gd_gif_out.c
+>> -+++ b/ext/gd/libgd/gd_gif_out.c
+>> -@@ -97,12 +97,18 @@ static void cl_hash (register count_int chsize, Gi=
+fCtx *ctx);
+>> - static void char_init (GifCtx *ctx);
+>> - static void char_out (int c, GifCtx *ctx);
+>> - static void flush_char (GifCtx *ctx);
+>> -+
+>> -+static int _gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out);
+>> -+
+>> - void * gdImageGifPtr (gdImagePtr im, int *size)
+>> - {
+>> -   void *rv;
+>> -   gdIOCtx *out =3D gdNewDynamicCtx (2048, NULL);
+>> --  gdImageGifCtx (im, out);
+>> --  rv =3D gdDPExtractData (out, size);
+>> -+      if (!_gdImageGifCtx(im, out)) {
+>> -+              rv =3D gdDPExtractData(out, size);
+>> -+      } else {
+>> -+              rv =3D NULL;
+>> -+      }
+>> -   out->gd_free (out);
+>> -   return rv;
+>> - }
+>> -@@ -115,6 +121,12 @@ void gdImageGif (gdImagePtr im, FILE * outFile)
+>> - }
+>> -
+>> - void gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
+>> -+{
+>> -+      _gdImageGifCtx(im, out);
+>> -+}
+>> -+
+>> -+/* returns 0 on success, 1 on failure */
+>> -+static int _gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
+>> - {
+>> -       gdImagePtr pim =3D 0, tim =3D im;
+>> -       int interlace, BitsPerPixel;
+>> -@@ -125,7 +137,7 @@ void gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
+>> -                       based temporary image. */
+>> -               pim =3D gdImageCreatePaletteFromTrueColor(im, 1, 256);
+>> -               if (!pim) {
+>> --                      return;
+>> -+                      return 1;
+>> -               }
+>> -               tim =3D pim;
+>> -       }
+>> -@@ -138,6 +150,8 @@ void gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
+>> -               /* Destroy palette based temporary image. */
+>> -               gdImageDestroy( pim);
+>> -       }
+>> -+
+>> -+    return 0;
+>> - }
+>> -
+>> - static int
+>> -diff --git a/ext/gd/libgd/gd_jpeg.c b/ext/gd/libgd/gd_jpeg.c
+>> -index 8cf71fcbc9..ef46c4a22c 100644
+>> ---- a/ext/gd/libgd/gd_jpeg.c
+>> -+++ b/ext/gd/libgd/gd_jpeg.c
+>> -@@ -132,6 +132,7 @@ const char * gdJpegGetVersionString()
+>> -       }
+>> - }
+>> -
+>> -+static int _gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quali=
+ty);
+>> -
+>> - /*
+>> -  * Write IM to OUTFILE as a JFIF-formatted JPEG image, using quality
+>> -@@ -153,8 +154,11 @@ void *gdImageJpegPtr (gdImagePtr im, int *size, i=
+nt quality)
+>> - {
+>> -       void *rv;
+>> -       gdIOCtx *out =3D gdNewDynamicCtx (2048, NULL);
+>> --      gdImageJpegCtx (im, out, quality);
+>> --      rv =3D gdDPExtractData (out, size);
+>> -+      if (!_gdImageJpegCtx(im, out, quality)) {
+>> -+              rv =3D gdDPExtractData(out, size);
+>> -+      } else {
+>> -+              rv =3D NULL;
+>> -+      }
+>> -       out->gd_free (out);
+>> -
+>> -       return rv;
+>> -@@ -163,6 +167,12 @@ void *gdImageJpegPtr (gdImagePtr im, int *size, i=
+nt quality)
+>> - void jpeg_gdIOCtx_dest (j_compress_ptr cinfo, gdIOCtx * outfile);
+>> -
+>> - void gdImageJpegCtx (gdImagePtr im, gdIOCtx * outfile, int quality)
+>> -+{
+>> -+      _gdImageJpegCtx(im, outfile, quality);
+>> -+}
+>> -+
+>> -+/* returns 0 on success, 1 on failure */
+>> -+static int _gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quali=
+ty)
+>> - {
+>> -       struct jpeg_compress_struct cinfo;
+>> -       struct jpeg_error_mgr jerr;
+>> -@@ -184,7 +194,7 @@ void gdImageJpegCtx (gdImagePtr im, gdIOCtx * outf=
+ile, int quality)
+>> -               if (row) {
+>> -                       gdFree (row);
+>> -               }
+>> --              return;
+>> -+              return 1;
+>> -       }
+>> -
+>> -       cinfo.err->error_exit =3D fatal_jpeg_error;
+>> -@@ -277,6 +287,7 @@ void gdImageJpegCtx (gdImagePtr im, gdIOCtx * outf=
+ile, int quality)
+>> -       jpeg_finish_compress (&cinfo);
+>> -       jpeg_destroy_compress (&cinfo);
+>> -       gdFree (row);
+>> -+      return 0;
+>> - }
+>> -
+>> - gdImagePtr gdImageCreateFromJpeg (FILE * inFile)
+>> -diff --git a/ext/gd/libgd/gd_wbmp.c b/ext/gd/libgd/gd_wbmp.c
+>> -index 55ced3443d..fd9edad2ca 100644
+>> ---- a/ext/gd/libgd/gd_wbmp.c
+>> -+++ b/ext/gd/libgd/gd_wbmp.c
+>> -@@ -82,6 +82,7 @@ int gd_getin (void *in)
+>> -       return (gdGetC((gdIOCtx *) in));
+>> - }
+>> -
+>> -+static int _gdImageWBMPCtx(gdImagePtr image, int fg, gdIOCtx *out);
+>> -
+>> - /*      gdImageWBMPCtx
+>> -    **  --------------
+>> -@@ -93,6 +94,12 @@ int gd_getin (void *in)
+>> -    **  out:    the stream where to write
+>> -  */
+>> - void gdImageWBMPCtx (gdImagePtr image, int fg, gdIOCtx * out)
+>> -+{
+>> -+      _gdImageWBMPCtx(image, fg, out);
+>> -+}
+>> -+
+>> -+/* returns 0 on success, 1 on failure */
+>> -+static int _gdImageWBMPCtx(gdImagePtr image, int fg, gdIOCtx *out)
+>> - {
+>> -       int x, y, pos;
+>> -       Wbmp *wbmp;
+>> -@@ -100,7 +107,7 @@ void gdImageWBMPCtx (gdImagePtr image, int fg, gdI=
+OCtx * out)
+>> -       /* create the WBMP */
+>> -       if ((wbmp =3D createwbmp (gdImageSX (image), gdImageSY (image),=
+ WBMP_WHITE)) =3D=3D NULL) {
+>> -               gd_error("Could not create WBMP");
+>> --              return;
+>> -+              return 1;
+>> -       }
+>> -
+>> -       /* fill up the WBMP structure */
+>> -@@ -116,7 +123,9 @@ void gdImageWBMPCtx (gdImagePtr image, int fg, gdI=
+OCtx * out)
+>> -
+>> -       /* write the WBMP to a gd file descriptor */
+>> -       if (writewbmp (wbmp, &gd_putout, out)) {
+>> -+              freewbmp(wbmp);
+>> -               gd_error("Could not save WBMP");
+>> -+              return 1;
+>> -       }
+>> -       /* des submitted this bugfix: gdFree the memory. */
+>> -       freewbmp(wbmp);
+>> -@@ -204,8 +213,11 @@ void * gdImageWBMPPtr (gdImagePtr im, int *size, =
+int fg)
+>> - {
+>> -       void *rv;
+>> -       gdIOCtx *out =3D gdNewDynamicCtx(2048, NULL);
+>> --      gdImageWBMPCtx(im, fg, out);
+>> --      rv =3D gdDPExtractData(out, size);
+>> -+      if (!_gdImageWBMPCtx(im, fg, out)) {
+>> -+              rv =3D gdDPExtractData(out, size);
+>> -+      } else {
+>> -+              rv =3D NULL;
+>> -+      }
+>> -       out->gd_free(out);
+>> -
+>> -       return rv;
+>> ---
+>> -2.17.1
+>> -
+>> diff --git a/meta-oe/recipes-devtools/php/php/iconv.patch b/meta-oe/rec=
+ipes-devtools/php/php/iconv.patch
+>> index ecf7d8720..9ec8a89b5 100644
+>> --- a/meta-oe/recipes-devtools/php/php/iconv.patch
+>> +++ b/meta-oe/recipes-devtools/php/php/iconv.patch
+>> @@ -1,32 +1,33 @@
+>> -From 17cc5645f3acf943a5a06465d09d0ebcfea987bd Mon Sep 17 00:00:00 2001
+>> -From: Koen Kooi <koen@dominion.thruhere.net>
+>> -Date: Wed, 2 Nov 2011 16:54:57 +0100
+>> -Subject: [PATCH] Upstream-Status: Pending
+>> +Subject: [PATCH] From 17cc5645f3acf943a5a06465d09d0ebcfea987bd Mon Sep=
+ 17
+>> + 00:00:00 2001 From: Koen Kooi <koen@dominion.thruhere.net> Date: Wed,=
+ 2 Nov
+>> + 2011 16:54:57 +0100 Subject: [PATCH] Upstream-Status: Pending
+>>
+>> +update patch to version 7.4.4
+>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>>   ---
+>> - acinclude.m4        | 3 ++-
+>> + build/php.m4        | 3 ++-
+>>    ext/iconv/config.m4 | 2 +-
+>>    2 files changed, 3 insertions(+), 2 deletions(-)
+>>
+>> -diff --git a/acinclude.m4 b/acinclude.m4
+>> -index d32766a..ad5166e 100644
+>> ---- a/acinclude.m4
+>> -+++ b/acinclude.m4
+>> -@@ -2445,7 +2445,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+>> -   dnl Check libc first if no path is provided in --with-iconv
+>> -   dnl
+>> +diff --git a/build/php.m4 b/build/php.m4
+>> +index 7392876..5c45d13 100644
+>> +--- a/build/php.m4
+>> ++++ b/build/php.m4
+>> +@@ -1950,7 +1950,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+>> +   echo > ext/iconv/php_iconv_supports_errno.h
+>>
+>> +   dnl Check libc first if no path is provided in --with-iconv.
+>>   -  if test "$PHP_ICONV" =3D "yes"; then
+>>   +  dnl must check against no, not against yes as PHP_ICONV can also i=
+nclude a path, which implies yes
+>>   +  if test "$PHP_ICONV" !=3D "no"; then
+>> -     dnl Reset LIBS temporarily as it may have already been included
+>> -     dnl -liconv in.
+>> +     dnl Reset LIBS temporarily as it may have already been included -=
+liconv in.
+>>        LIBS_save=3D"$LIBS"
+>> +     LIBS=3D
+>>   diff --git a/ext/iconv/config.m4 b/ext/iconv/config.m4
+>> -index 6a05697..973e750 100644
+>> +index fe9b47a..b6b632f 100644
+>>   --- a/ext/iconv/config.m4
+>>   +++ b/ext/iconv/config.m4
+>> -@@ -15,7 +15,7 @@ if test "$PHP_ICONV" !=3D "no"; then
+>> +@@ -14,7 +14,7 @@ if test "$PHP_ICONV" !=3D "no"; then
+>>
+>>      if test "$iconv_avail" !=3D "no"; then
+>>        if test -z "$ICONV_DIR"; then
+>> @@ -35,3 +36,6 @@ index 6a05697..973e750 100644
+>>            if test -f "$i/include/iconv.h" || test -f "$i/include/gicon=
+v.h"; then
+>>              PHP_ICONV_PREFIX=3D"$i"
+>>              break
+>> +--
+>> +2.7.4
+>> +
+>> diff --git a/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch b/=
+meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch
+>> index 16359af9f..ebe5f6a93 100644
+>> --- a/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch
+>> +++ b/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch
+>> @@ -1,32 +1,19 @@
+>> -From c084c8349d1780980e232cb28b60a109e3d89438 Mon Sep 17 00:00:00 2001
+>> -From: Koen Kooi <koen@dominion.thruhere.net>
+>> -Date: Wed, 2 Nov 2011 16:54:57 +0100
+>> -Subject: [PATCH] Upstream-Status: Pending
+>> +Subject: [PATCH] From c084c8349d1780980e232cb28b60a109e3d89438 Mon Sep=
+ 17
+>> + 00:00:00 2001 From: Koen Kooi <koen@dominion.thruhere.net> Date: Wed,=
+ 2 Nov
+>> + 2011 16:54:57 +0100 Subject: [PATCH] Upstream-Status: Pending
+>>
+>> +update patch to version 7.4.4
+>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>>   ---
+>> - acinclude.m4       |  2 +-
+>>    ext/imap/config.m4 | 10 ++--------
+>> - 2 files changed, 3 insertions(+), 9 deletions(-)
+>> + 1 file changed, 2 insertions(+), 8 deletions(-)
+>>
+>> -diff --git a/acinclude.m4 b/acinclude.m4
+>> -index ad5166e..f6a55ec 100644
+>> ---- a/acinclude.m4
+>> -+++ b/acinclude.m4
+>> -@@ -2350,7 +2350,7 @@ AC_DEFUN([PHP_SETUP_OPENSSL],[
+>> -       PHP_OPENSSL_DIR=3D"/usr/local/ssl /usr/local /usr /usr/local/op=
+enssl"
+>> -     fi
+>> -
+>> --    for i in $PHP_OPENSSL_DIR; do
+>> -+    for i in $PHP_OPENSSL_DIR $PHP_OPENSSL_DIR/usr; do
+>> -       if test -r $i/include/openssl/evp.h; then
+>> -         OPENSSL_INCDIR=3D$i/include
+>> -       fi
+>>   diff --git a/ext/imap/config.m4 b/ext/imap/config.m4
+>> -index badb6e2..8ff803c 100644
+>> +index 5086a31..0e938bd 100644
+>>   --- a/ext/imap/config.m4
+>>   +++ b/ext/imap/config.m4
+>> -@@ -109,7 +109,7 @@ if test "$PHP_IMAP" !=3D "no"; then
+>> -     PHP_NEW_EXTENSION(imap, php_imap.c, $ext_shared)
+>> +@@ -110,7 +110,7 @@ if test "$PHP_IMAP" !=3D "no"; then
+>> +     PHP_NEW_EXTENSION(imap, php_imap.c, $ext_shared,, -DZEND_ENABLE_S=
+TATIC_TSRMLS_CACHE=3D1)
+>>        AC_DEFINE(HAVE_IMAP,1,[ ])
+>>
+>>   -    for i in $PHP_IMAP /usr/local /usr; do
+>> @@ -34,7 +21,7 @@ index badb6e2..8ff803c 100644
+>>          IMAP_INC_CHK()
+>>          el[]IMAP_INC_CHK(/include/c-client)
+>>          el[]IMAP_INC_CHK(/include/imap)
+>> -@@ -198,13 +198,7 @@ if test "$PHP_IMAP" !=3D "no"; then
+>> +@@ -199,13 +199,7 @@ if test "$PHP_IMAP" !=3D "no"; then
+>>          AC_MSG_ERROR(Cannot find rfc822.h. Please check your c-client =
+installation.)
+>>        fi
+>>
+>> @@ -49,3 +36,6 @@ index badb6e2..8ff803c 100644
+>>          IMAP_LIB=3D$lib
+>>          IMAP_LIB_CHK($PHP_LIBDIR)
+>>          IMAP_LIB_CHK(c-client)
+>> +--
+>> +2.7.4
+>> +
+>> diff --git a/meta-oe/recipes-devtools/php/php/phar-makefile.patch b/met=
+a-oe/recipes-devtools/php/php/phar-makefile.patch
+>> index 336cf0d62..eb73bc440 100644
+>> --- a/meta-oe/recipes-devtools/php/php/phar-makefile.patch
+>> +++ b/meta-oe/recipes-devtools/php/php/phar-makefile.patch
+>> @@ -1,24 +1,25 @@
+>> -From 08962a56f69963e01892d98ca5b75de8354bd3f5 Mon Sep 17 00:00:00 2001
+>> -From: Koen Kooi <koen@dominion.thruhere.net>
+>> -Date: Wed, 2 Nov 2011 16:54:57 +0100
+>> -Subject: [PATCH] Fix phar packaging
+>> +Subject: [PATCH] From 08962a56f69963e01892d98ca5b75de8354bd3f5 Mon Sep=
+ 17
+>> + 00:00:00 2001 From: Koen Kooi <koen@dominion.thruhere.net> Date: Wed,=
+ 2 Nov
+>> + 2011 16:54:57 +0100 Subject: [PATCH] Fix phar packaging
+>>
+>>   Inherited from OE-Classic, with some additions to fix host paths leak=
+ing
+>>   into the target package.
+>>
+>>   Upstream-Status: Inappropriate [config]
+>>
+>> +update patch to version 7.4.4
+>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>>   ---
+>>    ext/phar/Makefile.frag | 17 +++--------------
+>>    1 file changed, 3 insertions(+), 14 deletions(-)
+>>
+>>   diff --git a/ext/phar/Makefile.frag b/ext/phar/Makefile.frag
+>> -index 0e3713f..22f7898 100644
+>> +index 6442f33..6145412 100644
+>>   --- a/ext/phar/Makefile.frag
+>>   +++ b/ext/phar/Makefile.frag
+>>   @@ -10,20 +10,9 @@ pharcmd: $(builddir)/phar.php $(builddir)/phar.pha=
+r
+>>
+>> - PHP_PHARCMD_SETTINGS =3D -n -d 'open_basedir=3D' -d 'output_buffering=
+=
+=3D0' -d 'memory_limit=3D-1' -d phar.readonly=3D0 -d 'safe_mode=3D0'
+>> + PHP_PHARCMD_SETTINGS =3D -n -d 'open_basedir=3D' -d 'output_buffering=
+=
+=3D0' -d 'memory_limit=3D-1' -d phar.readonly=3D0
+>>    PHP_PHARCMD_EXECUTABLE =3D ` \
+>>   -      if test -x "$(top_builddir)/$(SAPI_CLI_PATH)"; then \
+>>   -              $(top_srcdir)/build/shtool echo -n -- "$(top_builddir)=
+/$(SAPI_CLI_PATH) -n"; \
+>> @@ -34,9 +35,12 @@ index 0e3713f..22f7898 100644
+>>   -              $(top_srcdir)/build/shtool echo -n -- "$(PHP_EXECUTABL=
+E)"; \
+>>   -      fi;`
+>>   -PHP_PHARCMD_BANG =3D `$(top_srcdir)/build/shtool echo -n -- "$(INSTA=
+LL_ROOT)$(bindir)/$(program_prefix)php$(program_suffix)$(EXEEXT)";`
+>> -+              $(top_srcdir)/build/shtool echo -n -- "$(PHP_EXECUTABLE=
+)"; `
+>> ++               $(top_srcdir)/build/shtool echo -n -- "$(PHP_EXECUTABL=
+E)"; `
+>>   +
+>>   +PHP_PHARCMD_BANG =3D `$(top_srcdir)/build/shtool echo -n -- "$(bindi=
+r)/$(program_prefix)php$(program_suffix)$(EXEEXT)";`
+>>
+>>    $(builddir)/phar/phar.inc: $(srcdir)/phar/phar.inc
+>>          -@test -d $(builddir)/phar || mkdir $(builddir)/phar
+>> +--
+>> +2.7.4
+>> +
+>> diff --git a/meta-oe/recipes-devtools/php/php/php_exec_native.patch b/m=
+eta-oe/recipes-devtools/php/php/php_exec_native.patch
+>> index 80409000d..4aec4812f 100644
+>> --- a/meta-oe/recipes-devtools/php/php/php_exec_native.patch
+>> +++ b/meta-oe/recipes-devtools/php/php/php_exec_native.patch
+>> @@ -1,22 +1,26 @@
+>> -From d251b5aa3d23803d016ca16818e2e1d2f2b70a02 Mon Sep 17 00:00:00 2001
+>> -From: Koen Kooi <koen@dominion.thruhere.net>
+>> -Date: Wed, 2 Nov 2011 16:54:57 +0100
+>> -Subject: [PATCH] Upstream-Status: Inappriate
+>> +Subject: [PATCH] rom d251b5aa3d23803d016ca16818e2e1d2f2b70a02 Mon Sep =
+17
+>> + 00:00:00 2001 From: Koen Kooi <koen@dominion.thruhere.net> Date: Wed,=
+ 2 Nov
+>> + 2011 16:54:57 +0100 Subject: [PATCH] Upstream-Status: Inappriate
+>>
+>> +update patch to version 7.4.4
+>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>>   ---
+>>    sapi/cli/config.m4 | 2 +-
+>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>>   diff --git a/sapi/cli/config.m4 b/sapi/cli/config.m4
+>> -index 2168151..20a81db 100644
+>> +index 917d45f..aaf1e27 100644
+>>   --- a/sapi/cli/config.m4
+>>   +++ b/sapi/cli/config.m4
+>> -@@ -50,7 +50,7 @@ if test "$PHP_CLI" !=3D "no"; then
+>> +@@ -47,7 +47,7 @@ if test "$PHP_CLI" !=3D "no"; then
+>>      esac
+>>
+>> -   dnl Set executable for tests
+>> +   dnl Set executable for tests.
+>>   -  PHP_EXECUTABLE=3D"\$(top_builddir)/\$(SAPI_CLI_PATH)"
+>>   +  PHP_EXECUTABLE=3D"${PHP_NATIVE_DIR}/php"
+>>      PHP_SUBST(PHP_EXECUTABLE)
+>>
+>> -   dnl Expose to Makefile
+>> +   dnl Expose to Makefile.
+>> +--
+>> +2.7.4
+>> +
+>> diff --git a/meta-oe/recipes-devtools/php/php_7.3.16.bb b/meta-oe/recip=
+es-devtools/php/php_7.4.4.bb
+>> similarity index 94%
+>> rename from meta-oe/recipes-devtools/php/php_7.3.16.bb
+>> rename to meta-oe/recipes-devtools/php/php_7.4.4.bb
+>> index 050916bb3..ff4c28e13 100644
+>> --- a/meta-oe/recipes-devtools/php/php_7.3.16.bb
+>> +++ b/meta-oe/recipes-devtools/php/php_7.4.4.bb
+>> @@ -3,7 +3,7 @@ HOMEPAGE =3D "http://www.php.net"
+>>   SECTION =3D "console/network"
+>>
+>>   LICENSE =3D "PHP-3.0"
+>> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dfb07bfc51f6d5e0c30b65d97012=
+33b2e"
+>> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D7e571b888d585b31f9ef5edcc64=
+7fa30"
+>>
+>>   BBCLASSEXTEND =3D "native"
+>>   DEPENDS =3D "zlib bzip2 libxml2 virtual/libiconv php-native lemon-nat=
+ive"
+>> @@ -13,11 +13,9 @@ PHP_MAJOR_VERSION =3D "${@d.getVar('PV').split('.')[=
+0]}"
+>>
+>>   SRC_URI =3D "http://php.net/distributions/php-${PV}.tar.bz2 \
+>>              file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
+>> -           file://0001-acinclude.m4-don-t-unset-cache-variables.patch =
+\
+>> -           file://0048-Use-pkg-config-for-FreeType2-detection.patch \
+>> -           file://0001-Use-pkg-config-for-libxml2-detection.patch \
+>>              file://debian-php-fixheader.patch \
+>> -           file://CVE-2019-6978.patch \
+>> +           file://0001-configure.ac-don-t-include-build-libtool.m4.pat=
+ch \
+>> +           file://0001-php.m4-don-t-unset-cache-variables.patch \
+>>             "
+>>
+>>   SRC_URI_append_class-target =3D " \
+>> @@ -34,8 +32,8 @@ SRC_URI_append_class-target =3D " \
+>>               file://xfail_two_bug_tests.patch \
+>>             "
+>>   S =3D "${WORKDIR}/php-${PV}"
+>> -SRC_URI[md5sum] =3D "fc72fa1c2a6da38a5a7f8797eaa08c58"
+>> -SRC_URI[sha256sum] =3D "b8072d526a283182963b03960b7982392daa43cb31131e=
+ca4cf0b996764a042e"
+>> +SRC_URI[md5sum] =3D "262c258a3b8b5699fcca89a64e58758c"
+>> +SRC_URI[sha256sum] =3D "308e8f4182ec8a2767b0b1b8e1e7c69fb149b37cfb98ee=
+4a37475e082fa9829f"
+>>
+>>   inherit autotools pkgconfig python3native gettext
+>>
+>> @@ -55,7 +53,6 @@ COMMON_EXTRA_OECONF =3D "--enable-sockets \
+>>                          --libdir=3D${PHP_LIBDIR} \
+>>   "
+>>   EXTRA_OECONF =3D "--enable-mbstring \
+>> -                --enable-wddx \
+>>                   --enable-fpm \
+>>                   --with-libdir=3D${baselib} \
+>>                   --with-gettext=3D${STAGING_LIBDIR}/.. \
+>> @@ -107,6 +104,7 @@ PACKAGECONFIG[ipv6] =3D "--enable-ipv6,--disable-ip=
+v6,"
+>>   PACKAGECONFIG[opcache] =3D "--enable-opcache,--disable-opcache"
+>>   PACKAGECONFIG[openssl] =3D "--with-openssl,--without-openssl,openssl"
+>>   PACKAGECONFIG[valgrind] =3D "--with-valgrind=3D${STAGING_DIR_TARGET}/=
+usr,--with-valgrind=3Dno,valgrind"
+>> +PACKAGECONFIG[mbregex] =3D "--enable-mbregex, --disable-mbregex, onigu=
+ruma"
+>>
+>>   export PHP_NATIVE_DIR =3D "${STAGING_BINDIR_NATIVE}"
+>>   export PHP_PEAR_PHP_BIN =3D "${STAGING_BINDIR_NATIVE}/php"
+>> @@ -149,16 +147,12 @@ do_install_prepend_class-target() {
+>>   # fixme
+>>   do_install_append_class-target() {
+>>       install -d ${D}${sysconfdir}/
+>> -    if [ -d ${RECIPE_SYSROOT_NATIVE}${sysconfdir} ];then
+>> -         install -m 0644 ${RECIPE_SYSROOT_NATIVE}${sysconfdir}/pear.co=
+nf ${D}${sysconfdir}/
+>> -    fi
+>>       rm -rf ${D}/${TMPDIR}
+>>       rm -rf ${D}/.registry
+>>       rm -rf ${D}/.channels
+>>       rm -rf ${D}/.[a-z]*
+>>       rm -rf ${D}/var
+>>       rm -f  ${D}/${sysconfdir}/php-fpm.conf.default
+>> -    sed -i 's:${STAGING_DIR_NATIVE}::g' ${D}${sysconfdir}/pear.conf
+>>       install -m 0644 ${WORKDIR}/php-fpm.conf ${D}/${sysconfdir}/php-fp=
+m.conf
+>>       install -d ${D}/${sysconfdir}/apache2/conf.d
+>>       install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}=
+/apache2/conf.d/php-fpm.conf
+>> --
+>> 2.24.1
+>>
+>>=20
