@@ -1,211 +1,116 @@
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web10.7082.1587883687793507208
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com [209.85.214.196])
+ by mx.groups.io with SMTP id smtpd.web11.7166.1587883692206567207
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Apr 2020 23:48:07 -0700
+ Sat, 25 Apr 2020 23:48:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=p2VBW6ye;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: ticotimo@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id 18so7158444pfx.6
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2020 23:48:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=In+jQ3FS;
+ spf=pass (domain: gmail.com, ip: 209.85.214.196, mailfrom: ticotimo@gmail.com)
+Received: by mail-pl1-f196.google.com with SMTP id h11so5600452plr.11
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2020 23:48:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Q5QWfZXRi2RN5vGtjlzRxI0jPGnQr2XMf4erVlEi3t0=;
-        b=p2VBW6yerP/vBKrhb86i8WcgPE2Qbd4aNMcPdnV8FZePorFqZWwGKXX24a9xIskS/Z
-         /0Jy9QyRDVU0y14co8oa4G/Pr8s2Cp1Ed1APPLVsCG1FJsc3j+WB4A0XTghKHKMjzBgz
-         /sd2RUt/suRoeVNcU/+jWBcyPEFCxIUlumTphftqjr7XWZoQ3w/9IspVsNPCH84O7Fh/
-         QGPjYnAelGFTy7JkZdYNPdQjiyfArCRsprxIIkisBZhDBYSewWTcY43BiTYpZ4A26T9Y
-         2NBdrNfENm3IX3X+wvfprjwscokfK/Cvhi86f2AUbM3CM7y3EtErHmph9YyLj0ryn8y2
-         z+7w==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=0fewEMkw3fsxI4eW43flwuzJWhConRQCEv6+zTGSgkI=;
+        b=In+jQ3FSmMyOS7fCtIM8U4FLEvbsaYtvzSPsRTQcU1jxxGqy91A+Z+VWOx8ggBQzPS
+         j+l2FIMyA3lAzUhTQhValYreJQGqKlyaOuJZhoSqc4M1Im7KSoUVyzENa6bG/EpfPFdD
+         VfrOT/Uuj34DUdSgu9bG4OfBesLARsmjPbk0ZHQoHf3/iR0daD0pEqmVPGU+oc2uJwun
+         lvxk8YDnV64OIZzICKWqqcnaxEzzNKsfBSfEzLN/wQXwxELLpwK5hgztZpLiNzaLyu6s
+         hqK9do1kJhh1Pq9uE7NhSeX7vDBofE4wGhEfegko+LOo6CC8oMleIgMcLTpzjj5cEb3T
+         t1hg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Q5QWfZXRi2RN5vGtjlzRxI0jPGnQr2XMf4erVlEi3t0=;
-        b=SpwJKQ+BEMDIa7Wlseb/dfUW66rSrwWl9v0Vx1dlhvZDNZlr+SxdmVTmTq6pQnMC/p
-         faIHTZxf9WF9IRq0+PfmYO9kZkEz2hQcMbjs+yU++Ew296+COqgRgYvjtBeTeuX4twKi
-         M+KfPzmTKEG3G9s0Wgtt7IBpp054ggtPtDtoPg2KNqQFZHiLabRz9BpJbmITsUB6yYIh
-         HH4yp4EefgAzRqcq8VOHGp63bApExD9w1t5OYLWMQwC8cm1DWuWvHiopCb800OZg9ENm
-         qC0p7Obse5pMqi3JKMlHuWfiKUR1oZWDFrFcC9nNTma5PAKpFtJ0rYTcGgFaKlyk+1Js
-         LASg==
-X-Gm-Message-State: AGi0PuZ0Xuzkh3ZKXnlJzDuxjizYDl1cruquhoKl8R4EmZs2O7/nxv6P
-	ddjwlkwQKYiLwFMJI7p2QBn+IabZ7sU=
-X-Google-Smtp-Source: APiQypL0wForqxC/HP5drxTWD2v7ZXPSU02WoUqSnyX6owCsEXuJMGPe1F3Gxw09LMa5y0uC/IHJyg==
-X-Received: by 2002:a63:555c:: with SMTP id f28mr259451pgm.80.1587883686861;
-        Sat, 25 Apr 2020 23:48:06 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=0fewEMkw3fsxI4eW43flwuzJWhConRQCEv6+zTGSgkI=;
+        b=P4/uLQGkoBrmRxCptxycJvEkAP/nXwlwyGXURitgXkZsiY1m0tm5nRCcdSHG9u1hpZ
+         0CiKvec+Gwvfyay8Ra8BOwO3FsQlfLlkwPKJSETD9kAlW2jTsfgt/UyrXZL/LWYcWWqs
+         bjzUrkfRSRIwM7XQp7VEJnJz7cnKuMBNIHzZ4ZlfZDX5J7Vwr/c/G5Qe1jXS2Yks3d0n
+         7KVIVV9hq6BNb6R2LGppvVHNKmdElqjgPD4bimQW+7n+NvasZrpKhZWGUHPi3s6VzryT
+         hMNIQbEBS/bQbiVXUYJZ7gwXyYzqUz9EzfiIBKZKxyCvz4K64gR7TSjYb5sRNhvrFpOf
+         9BqQ==
+X-Gm-Message-State: AGi0PuZqbTbOZRGM1dHiHB+Pc76imiFvt9BwOOoArLsIF8XlJSVrrqUB
+	4ZNWAgkyWVdmnAhHE+fahePiNGqoFe0=
+X-Google-Smtp-Source: APiQypIwq5c1KowkubIjs8nYYP4jVAY/I7gaT8Txc239bxdCdSuMqA/PDUvXNay6Fi0hPlWHjvVxJw==
+X-Received: by 2002:a17:902:50d:: with SMTP id 13mr17246094plf.170.1587883691547;
+        Sat, 25 Apr 2020 23:48:11 -0700 (PDT)
 Return-Path: <ticotimo@gmail.com>
 Received: from thetis.hsd1.or.comcast.net ([2601:1c0:6000:9640:b0b6:9555:1795:f958])
-        by smtp.gmail.com with ESMTPSA id w2sm9390281pfc.194.2020.04.25.23.48.06
+        by smtp.gmail.com with ESMTPSA id w2sm9390281pfc.194.2020.04.25.23.48.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 25 Apr 2020 23:48:06 -0700 (PDT)
+        Sat, 25 Apr 2020 23:48:11 -0700 (PDT)
 From: "Tim Orling" <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Tim Orling <ticotimo@gmail.com>
-Subject: [meta-python][PATCH 1/2] python3-cryptography: merge bb and inc
-Date: Sat, 25 Apr 2020 23:48:02 -0700
-Message-Id: <20200426064803.31911-1-ticotimo@gmail.com>
+Subject: [meta-python][PATCH 2/2] python3-cryptography-vectors: merge bb and inc
+Date: Sat, 25 Apr 2020 23:48:03 -0700
+Message-Id: <20200426064803.31911-2-ticotimo@gmail.com>
 X-Mailer: git-send-email 2.25.0
+In-Reply-To: <20200426064803.31911-1-ticotimo@gmail.com>
+References: <20200426064803.31911-1-ticotimo@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Tim Orling <ticotimo@gmail.com>
 
-Drop python-cryptography/ not used anywhere.
-
 Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- .../python/python-cryptography.inc            | 58 ------------------
- .../python/python-cryptography/run-ptest      |  2 -
- .../python/python3-cryptography_2.8.bb        | 61 ++++++++++++++++++-
- 3 files changed, 59 insertions(+), 62 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-cryptography.inc
- delete mode 100644 meta-python/recipes-devtools/python/python-cryptography/run-ptest
+ .../python/python-cryptography-vectors.inc    | 18 ----------------
+ .../python3-cryptography-vectors_2.8.bb       | 21 ++++++++++++++++++-
+ 2 files changed, 20 insertions(+), 19 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-cryptography-vectors.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-cryptography.inc b/meta-python/recipes-devtools/python/python-cryptography.inc
+diff --git a/meta-python/recipes-devtools/python/python-cryptography-vectors.inc b/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
 deleted file mode 100644
-index 5acd02d67d..0000000000
---- a/meta-python/recipes-devtools/python/python-cryptography.inc
+index 10af48c9fb..0000000000
+--- a/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
 +++ /dev/null
-@@ -1,58 +0,0 @@
--SUMMARY = "Provides cryptographic recipes and primitives to python developers"
+@@ -1,18 +0,0 @@
+-SUMMARY = "Test vectors for the cryptography package."
 -HOMEPAGE = "https://cryptography.io/"
+-SECTION = "devel/python"
 -LICENSE = "Apache-2.0 | BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=097f805837700cfac572ac274cd38124"
--
--LDSHARED += "-pthread"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
 -
 -DEPENDS += " \
--    ${PYTHON_PN}-cffi \
--    ${PYTHON_PN}-cffi-native \
--    ${PYTHON_PN}-asn1crypto \
--    ${PYTHON_PN}-six \
+-    ${PYTHON_PN}-cryptography \
 -"
 -
--SRC_URI[md5sum] = "77730058b556c6d9838679a94c6229ce"
--SRC_URI[sha256sum] = "3cda1f0ed8747339bbdf71b9f38ca74c7b592f24f65cdb3ab3765e4b02871651"
+-SRC_URI[md5sum] = "a744ed29bb9ef56b3a50317fea3b218e"
+-SRC_URI[sha256sum] = "6cd32174c56a3eca72f64af43c1daacaae758cfa5ff9d280dfcf818fa11ef116"
 -
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-cffi \
--    ${PYTHON_PN}-idna \
--    ${PYTHON_PN}-asn1crypto \
--    ${PYTHON_PN}-setuptools \
--    ${PYTHON_PN}-six \
--"
--
--RDEPENDS_${PN}_class-target += " \
--    ${PYTHON_PN}-cffi \
--    ${PYTHON_PN}-idna \
--    ${PYTHON_PN}-numbers \
--    ${PYTHON_PN}-asn1crypto \
--    ${PYTHON_PN}-setuptools \
--    ${PYTHON_PN}-six \
--    ${PYTHON_PN}-threading \
--"
--
--RDEPENDS_${PN}-ptest += " \
--    ${PN} \
--    ${PYTHON_PN}-cryptography-vectors \
--    ${PYTHON_PN}-iso8601 \
--    ${PYTHON_PN}-pretend \
--    ${PYTHON_PN}-pytest \
--    ${PYTHON_PN}-pytz \
--"
--
--inherit ptest
--
--do_install_ptest() {
--    install -d ${D}${PTEST_PATH}/tests
--    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--    install -d ${D}${PTEST_PATH}/tests/hazmat
--    cp -rf ${S}/tests/hazmat/* ${D}${PTEST_PATH}/tests/hazmat/
--}
--
--FILES_${PN}-dbg += " \
--    ${libdir}/${PYTHON_PN}2.7/site-packages/${SRCNAME}/hazmat/bindings/.debug \
--"
+-PYPI_PACKAGE = "cryptography_vectors"
 -
 -BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-cryptography/run-ptest b/meta-python/recipes-devtools/python/python-cryptography/run-ptest
-deleted file mode 100644
-index 0ba239c2a4..0000000000
---- a/meta-python/recipes-devtools/python/python-cryptography/run-ptest
-+++ /dev/null
-@@ -1,2 +0,0 @@
--#!/bin/sh
--py.test
-diff --git a/meta-python/recipes-devtools/python/python3-cryptography_2.8.bb b/meta-python/recipes-devtools/python/python3-cryptography_2.8.bb
-index 195923343b..c75dabb974 100644
---- a/meta-python/recipes-devtools/python/python3-cryptography_2.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-cryptography_2.8.bb
-@@ -1,8 +1,65 @@
+-
+-UPSTREAM_CHECK_REGEX = ""
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb
+index 58994ffffa..49a5664dcd 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb
+@@ -1,2 +1,21 @@
 -inherit pypi setuptools3
--require python-cryptography.inc
-+SUMMARY = "Provides cryptographic recipes and primitives to python developers"
+ require python-cryptography-vectors.inc
++SUMMARY = "Test vectors for the cryptography package."
 +HOMEPAGE = "https://cryptography.io/"
 +SECTION = "devel/python"
 +LICENSE = "Apache-2.0 | BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=097f805837700cfac572ac274cd38124"
- 
- LDSHARED += "-pthread"
- 
-+SRC_URI[md5sum] = "77730058b556c6d9838679a94c6229ce"
-+SRC_URI[sha256sum] = "3cda1f0ed8747339bbdf71b9f38ca74c7b592f24f65cdb3ab3765e4b02871651"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
 +
- SRC_URI += " \
-     file://run-ptest \
- "
++SRC_URI[md5sum] = "a744ed29bb9ef56b3a50317fea3b218e"
++SRC_URI[sha256sum] = "6cd32174c56a3eca72f64af43c1daacaae758cfa5ff9d280dfcf818fa11ef116"
++
++PYPI_PACKAGE = "cryptography_vectors"
 +
 +inherit pypi setuptools3
 +
 +DEPENDS += " \
-+    ${PYTHON_PN}-cffi \
-+    ${PYTHON_PN}-cffi-native \
-+    ${PYTHON_PN}-asn1crypto \
-+    ${PYTHON_PN}-six \
-+"
-+
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-cffi \
-+    ${PYTHON_PN}-idna \
-+    ${PYTHON_PN}-asn1crypto \
-+    ${PYTHON_PN}-setuptools \
-+    ${PYTHON_PN}-six \
-+"
-+
-+RDEPENDS_${PN}_class-target += " \
-+    ${PYTHON_PN}-cffi \
-+    ${PYTHON_PN}-idna \
-+    ${PYTHON_PN}-numbers \
-+    ${PYTHON_PN}-asn1crypto \
-+    ${PYTHON_PN}-setuptools \
-+    ${PYTHON_PN}-six \
-+    ${PYTHON_PN}-threading \
-+"
-+
-+RDEPENDS_${PN}-ptest += " \
-+    ${PN} \
-+    ${PYTHON_PN}-cryptography-vectors \
-+    ${PYTHON_PN}-iso8601 \
-+    ${PYTHON_PN}-pretend \
-+    ${PYTHON_PN}-pytest \
-+    ${PYTHON_PN}-pytz \
-+"
-+
-+inherit ptest
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+    install -d ${D}${PTEST_PATH}/tests/hazmat
-+    cp -rf ${S}/tests/hazmat/* ${D}${PTEST_PATH}/tests/hazmat/
-+}
-+
-+FILES_${PN}-dbg += " \
-+    ${libdir}/${PYTHON_PN}2.7/site-packages/${SRCNAME}/hazmat/bindings/.debug \
++    ${PYTHON_PN}-cryptography \
 +"
 +
 +BBCLASSEXTEND = "native nativesdk"
++
++UPSTREAM_CHECK_REGEX = ""
 -- 
 2.25.0
 
