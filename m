@@ -1,107 +1,91 @@
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com [209.85.128.65])
- by mx.groups.io with SMTP id smtpd.web10.695.1588021589291148709
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web12.923.1588022133227305194
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Apr 2020 14:06:29 -0700
+ Mon, 27 Apr 2020 14:15:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=G4iKEVkw;
- spf=pass (domain: gmail.com, ip: 209.85.128.65, mailfrom: andrea.adami@gmail.com)
-Received: by mail-wm1-f65.google.com with SMTP id r26so516313wmh.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Apr 2020 14:06:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=bt94Jlc/;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: ticotimo@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id a32so161616pje.5
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Apr 2020 14:15:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=4ZfuENpd+zavvFGPp0s8OPiZJpFz2gcuTHH90YMUMyY=;
-        b=G4iKEVkw4fLZ+SVY/RfeZ2c5isK2obfvrO5UayIvI8FvD0IHqzClNVhfuxOjg6IuO/
-         +Vo2C4jza6mTm+9kf15vMwoujf/gxuSYHyjxQ+9S4XuQOSkeb7K1Im099gEGR8d2aL9B
-         CIcsBo+/QOCo3wFEIyDUEYAJCgb+8ofLeU4DlFthKPBeLShq4XacY4SgfhsLE27TfaBq
-         8Jeizg0gcutcBVpEjvSt96ij1oart2EM1A7VbPBYegCSg8x+3W4VjZhr+ogUJgbj6h7e
-         x9E6r34CiHxF+uLc5W3gaM8GVZfj0priSndNACvUibJBbLL3FbEm9j0T0tzjj1aUtQF+
-         id6w==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=XhRkP+kr7wcJEZymr8RMilRoHUTukiapTyslWBHAZ5w=;
+        b=bt94Jlc/oo1Jp7Oz7LWifGLRsMAnnBZmJ7n7ep+9tPk94P8lRXqtFJoyHDi9shyIfk
+         zuHNMBd+ppHEh3Y0jbziepwFeEc1twPQqyKI5NSQDEv2lavnfxeBTKzlpoZGskxbga8V
+         BLE+3E7cSiVSG7EQZcfntufgHZtssEEAS7MaX+hUCsa9GDPylgybitBIVx3soWXyIXZW
+         3XO3ThEZItG5M9zM4jeKfp0MbjASJ0EFx8tD1oR5hCNToFjhGcGL1A3TLLIRHcydXTpL
+         LsVyMomhN0Rt1XKZ6esK7GNMJk2sSelJQVQz+M4kK6iuRJU4IdCiU76yAZK8k+9rWwTh
+         gdRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=4ZfuENpd+zavvFGPp0s8OPiZJpFz2gcuTHH90YMUMyY=;
-        b=GzDu4A2QCVxqJDVoCIff9NnZrvq03S6R4QCu++KTz4eQe1P7VhvEtUYpqiNWszK125
-         PXE9dShW3wIJZzglumQehFrep8gKc6cXRL7P7GRlzW85PimloW4pdh9EougIEgaHLIJX
-         QH5rd2eqBe3SG69g41IlpayxGs0j5eCsrpzpgbZ5vMo7gsFxpRKrBOw9H7wm7AedpNz6
-         LOHNmAonTsIJNK8g1hKe4AbfbEPtdtji2UJ+Dlg81oA44o5kSXPyn/BVyEQTS8j7fuv2
-         s5wQ9Uzh9ec/9qUSuVjObIMsA9kiAMZk+nycNO3Y2YtrNaibSqRvk0D3EsiO8NQLY29e
-         TeQg==
-X-Gm-Message-State: AGi0PuYgUtNIUh43XobbYm6Uq+1s3PY3/mUkwimvc7dYP1Ze9QtMGZGp
-	Qh/nfuD6etQefrp3nc8+4mL71BWI
-X-Google-Smtp-Source: APiQypKDR+3ECdAxCteWMf59oA42e31BJqGQiKUBL9BIA3Cut9zdc0VbAf8JeYlkIeoQhoz57HrUQw==
-X-Received: by 2002:a1c:808c:: with SMTP id b134mr648388wmd.131.1588021587362;
-        Mon, 27 Apr 2020 14:06:27 -0700 (PDT)
-Return-Path: <andrea.adami@gmail.com>
-Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it (host84-186-dynamic.249-95-r.retail.telecomitalia.it. [95.249.186.84])
-        by smtp.googlemail.com with ESMTPSA id d13sm465697wmb.39.2020.04.27.14.06.26
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=XhRkP+kr7wcJEZymr8RMilRoHUTukiapTyslWBHAZ5w=;
+        b=dwt+lU09HM6DTBgV38UEVLLUFC+GrNHKUybpHA3IZTMZCwjr5AzevV2Woz9Ay61CYb
+         Q+wEPWVxLsRRSbDcuUbjaVbdVeeu+GAiJnP+dyU1Ax/NaeIN027JrcTgSYrxJYSK3a6d
+         ty8b8bi5HTTzDV7ZDZiYXFUt1GFs5K5FkLsRxjwWwG/Q1Vtrvjg/jD83AxEmYWJOeLdP
+         6y0hP6m8xOxSK2Eh0otuAEyBIJnT2zjSVkUyQ0fMkwW0rOnB2oWvMekYcXPUjPLrU7s5
+         1Yd2+2ufjTsui/TTsEdSnhm2MkhrdmAKZdfBgDxreSM0kSg7SJ/hKn/kTr2uf24Ku6K1
+         9L1w==
+X-Gm-Message-State: AGi0PuaB9bnasu0RWMXKduMgha7e/UpSVD30LkG8S5qdNQI1iP7iYX1f
+	jBrrwDQxoo6VANxeCqMs/oYFkSGuskY=
+X-Google-Smtp-Source: APiQypKK5Bu5CcbxZTjJ5wkdhe5JqUsm0pa3q8BDEhX/gas1VqNeyGKozT9i2/uEjUQ343JJSbtEdg==
+X-Received: by 2002:a17:90b:93:: with SMTP id bb19mr811896pjb.134.1588022132319;
+        Mon, 27 Apr 2020 14:15:32 -0700 (PDT)
+Return-Path: <ticotimo@gmail.com>
+Received: from thetis.hsd1.or.comcast.net ([2601:1c0:6000:9640:2152:6caa:5703:bc1])
+        by smtp.gmail.com with ESMTPSA id w12sm12999739pfq.133.2020.04.27.14.15.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Apr 2020 14:06:26 -0700 (PDT)
-From: "Andrea Adami" <andrea.adami@gmail.com>
+        Mon, 27 Apr 2020 14:15:31 -0700 (PDT)
+From: "Tim Orling" <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Andrea Adami <andrea.adami@gmail.com>
-Subject: [meta-initramfs][PATCH v2] packagegroup-meta-initramfs: remove klibc utilities and kexec-tools-klibc
-Date: Mon, 27 Apr 2020 23:06:24 +0200
-Message-Id: <20200427210624.3206-1-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.17.1
+Cc: Tim Orling <ticotimo@gmail.com>
+Subject: [meta-python2][PATCH] python-pbr: merge bb and inc files
+Date: Mon, 27 Apr 2020 14:15:19 -0700
+Message-Id: <20200427211519.33154-1-ticotimo@gmail.com>
+X-Mailer: git-send-email 2.25.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-klibc utils have no update-alternatives because these live ideally alone
-in the initramfs. mwta-initramfs image is not minimal having busybox, linux-
-utils,coreutils so to resolve the conflict we remove the shared klibc utils.
+Merge the contents of the inc file from oe-core to
+prevent collisions and getting out of sync.
 
-The image is mostly for build-tests and contains dracut, which does not have
-runtime dependencies on kexec-tools, so we can safely remove the klibc
-static version of kexec and vmcore-dmesg (not availaible on some archs).
-Doing this we can safely remove EXCLUDE_FROM_WORLD
-
-Fix:
-ERROR: meta-initramfs-image-1.0-r0 do_rootfs:
-Postinstall scriptlets of ['busybox', 'util-linux-umount',
-'util-linux-dmesg','coreutils', 'util-linux-mount', 'cpio',
-'util-linux-kill', 'util-linux-losetup'] have failed.
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- .../packagegroup-meta-initramfs.bb            | 20 +------------------
- 1 file changed, 1 insertion(+), 19 deletions(-)
+ recipes-devtools/python/python-pbr_5.4.4.bb | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
 
-diff --git a/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
-index bfede5a74..2955baea2 100644
---- a/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
-+++ b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
-@@ -6,31 +6,13 @@ PROVIDES = "${PACKAGES}"
- PACKAGES = ' \
-     packagegroup-meta-initramfs \
-     packagegroup-meta-initramfs-devtools \
--    packagegroup-meta-initramfs-kernel \
- '
+diff --git a/recipes-devtools/python/python-pbr_5.4.4.bb b/recipes-devtools/python/python-pbr_5.4.4.bb
+index 9d7d8d7b..fb0949eb 100644
+--- a/recipes-devtools/python/python-pbr_5.4.4.bb
++++ b/recipes-devtools/python/python-pbr_5.4.4.bb
+@@ -1,13 +1,21 @@
+-inherit setuptools
+-# The inc file is in oe-core
+-require recipes-devtools/python/python-pbr.inc
++SUMMARY = "Python Build Reasonableness"
++DESCRIPTION = "PBR is a library that injects some useful and sensible default behaviors into your setuptools run"
++HOMEPAGE = "https://pypi.python.org/pypi/pbr"
++SECTION = "devel/python"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
  
- RDEPENDS_packagegroup-meta-initramfs = "\
-     packagegroup-meta-initramfs-devtools \
--    packagegroup-meta-initramfs-kernel \
- "
+ SRC_URI[md5sum] = "65cdc32e1a1ff56d481fc15aa8caf988"
+ SRC_URI[sha256sum] = "139d2625547dbfa5fb0b81daebb39601c478c21956dc57e2e07b74450a8c506b"
  
- RDEPENDS_packagegroup-meta-initramfs-devtools = "\
--    libklibc  dracut \
--    klibc-utils-cat klibc-utils-losetup klibc-utils-readlink klibc-utils-chroot \
--    klibc-utils-ls klibc-utils-reboot klibc-utils-cpio klibc-utils-minips \
--    klibc-utils-resume klibc-utils-dd klibc-utils-mkdir klibc-utils-run-init \
--    klibc-utils-dmesg klibc-utils-mkfifo klibc-utils-sh.shared klibc-utils-false \
--    klibc-utils-mknod klibc-utils-sleep klibc-utils-fstype klibc-utils-mount \
--    klibc-utils-sync klibc-utils-halt klibc-utils-mv klibc-utils-true klibc-utils-ipconfig \
--    klibc-utils-nfsmount klibc-utils-umount klibc-utils-kill klibc-utils-nuke klibc-utils-uname \
--    mtdinfo-klibc ubiattach-klibc ubiblock-klibc ubicrc32-klibc ubidetach-klibc \
--    ubiformat-klibc ubimkvol-klibc ubinfo-klibc ubinize-klibc ubirename-klibc \
--    ubirmvol-klibc ubirsvol-klibc ubiupdatevol-klibc \
-+    dracut \
-     ${@bb.utils.contains_any("TRANSLATED_TARGET_ARCH", "i586 x86-64", "grubby", "", d)} \
-     "
--
--RDEPENDS_packagegroup-meta-initramfs-kernel = "\
--    kexec-klibc vmcore-dmesg-klibc \
--    "
--
--EXCLUDE_FROM_WORLD = "1"
++inherit pypi setuptools
++
++RDEPENDS_${PN} += "${PYTHON_PN}-pip"
++
+ do_install_append() {
+         if [ -f ${D}${bindir}/pbr ]; then
+                 mv ${D}${bindir}/pbr ${D}${bindir}/pbr-2
+         fi
+ }
+ 
++BBCLASSEXTEND = "native nativesdk"
 -- 
-2.17.1
+2.25.0
 
