@@ -1,444 +1,222 @@
-Received: from mail-il1-f193.google.com (mail-il1-f193.google.com [209.85.166.193])
- by mx.groups.io with SMTP id smtpd.web12.5807.1587934255502886877
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+ by mx.groups.io with SMTP id smtpd.web11.932.1587968859916053600
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Apr 2020 13:50:55 -0700
+ Sun, 26 Apr 2020 23:27:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=NVkBYj0b;
- spf=pass (domain: gmail.com, ip: 209.85.166.193, mailfrom: ticotimo@gmail.com)
-Received: by mail-il1-f193.google.com with SMTP id f82so14766223ilh.8
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Apr 2020 13:50:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
-        bh=wm3XWNfNCc0wl5A8Paobt1x6BfrTYTIdXkJYycvKzq8=;
-        b=NVkBYj0bFz5dv35W0Aeyjac3gKGQDUoSWYKCfxuK1xMZotaVAYZmWgx62x/DsBayc+
-         FKPDfvLLK4LYfFRIJjl9hRmRsawKrLRBbmhU1XkitOWmhzkMOESDlqE0/tUtpcYGigiw
-         TMWzc2bBbkcWOjGqDUO2O7rTlm6zNwTuBX7J4jd7epYtHD1I+eUs+Mh3x/8IPvXS9PGx
-         /nHqvADl9+n20xCM8Ji4460LYV1l+Qthd1DbJgEZ0DYXVgnx1+I32wIldM9KIe5vk7Xt
-         tapDGkrhpyHEq5SNUfFp4vCnrHHHSp2lkTdX3xpllPtJ7T7qs13HqEAPSZVln2t7wW/p
-         NSsw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to;
-        bh=wm3XWNfNCc0wl5A8Paobt1x6BfrTYTIdXkJYycvKzq8=;
-        b=eVLjEwHKStoqJUWygLIV8+tVJA/2k0s1NzGf1p04mXogikC4VXfQzJAKA17fDJqVUR
-         aswZWeh068vS0hnq3NK4i9n7uqoiHjdPKG0mtlGNo0JKmQIHaXvAduUYRG9LekWw9CU3
-         1/T/XOPPyQjoWrYBMrG9tRrrDcaMeAvu+hHinaSnKSuMHxIo0MOb3UBr5j3jjMeYBpud
-         xQP8V6Mkr4IWLh8LzddhT53NVh5cDK1zvTNOXpms/SfRYm9yTTu3LnlrGxbiAUeS2CB2
-         YOml8ENeWyjalOBm6mxmXmz+9Vs9FWy0vnEnYxNU9OaLS56H7397CXHRPOGOnsfcU1c8
-         i8cA==
-X-Gm-Message-State: AGi0PuYG86oTaoK2a0vFIl+ajVrJmWEu25Pj1BqDFvCj/gYcAm7OehgN
-	l8/EIw1CAPAIxZfuOQmEXHI0k1uC3AGSXQrw6uk=
-X-Google-Smtp-Source: APiQypI4DMFQw+jl5vHVT/FC7Y4eF/lSzfDMH7KJioH6TecysPe1Bd7IPrHSO8L5AdPoDbHBuRQg/sL+StjDEuj9GjM=
-X-Received: by 2002:a92:1b91:: with SMTP id f17mr18202659ill.142.1587934254797;
- Sun, 26 Apr 2020 13:50:54 -0700 (PDT)
+ dkim=pass header.i=@skidata.com header.s=selector1 header.b=eK1BWKgh;
+ spf=pass (domain: skidata.com, ip: 91.230.2.91, mailfrom: prvs=379551df9=richard.leitner@skidata.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+  t=1587968860; x=1619504860;
+  h=date:from:to:subject:message-id:references:mime-version:
+   in-reply-to;
+  bh=N5ohVePzGk8KUh3rVmkJCtAUCd6eZteNLOV8bRHvIqA=;
+  b=eK1BWKghDvCOX3+oVka0jPrCq0nnQt0PwkPepKPkoa95Uyp/6DgGb32B
+   MKzacxSdTR1oNwVidBWaCJ+DJ/3uYFG1bkdvSbAEI9JlR5wt+FPJWqR5R
+   ATJKcCGHHp/Na+G9FMriXwnFewCpFzpGELkPnCqqAtgEubJbs+tEHbX9O
+   KHodPnl6HfLI8j5iQA/LnfLbWh6YjMb9Hp7iIdPgxWFY/PKNAbuZXIExy
+   b3j+rAG7LIeJNKHv00vLkBNRDoYmlnWUM+kmRXyJ9MqcFMkvwTIzqi8w3
+   XUWcgrufK9/xih70o5KTqNrgE81KdNA7r9LIS3VayVMOjCU6b/f8pqykl
+   w==;
+IronPort-SDR: lLUQS+43IBUr9JJM0SdXKtBXt//TkjTK9CBrBcZi7pk3mlXCsI95TUgJooAKNn92NnVZfx7qfb
+ dzigSgNriS+4b3l7/Az4bYM+y1xXpZvT+x/1ARfaRGcFzN0XjuHnlsipugp8IJ5Lc1SPE1OIta
+ 7d4i9PY95UuRa8MPuQzXCYtlWuFznKxXAGdo7/VbqvIReR/eVk3sNl5IbcOo4RupqkcGlmCixL
+ I8KVzC0aI/OaqrwhXrvezibIa/cjIa9g+GqsUMsM1uC+TRlNxR7eJZCqlKEmhXhjJlf9XKZNnT
+ Joc=
+X-IronPort-AV: E=Sophos;i="5.73,323,1583190000"; 
+   d="scan'208";a="2570668"
+Date: Mon, 27 Apr 2020 08:27:36 +0200
+From: "Richard Leitner" <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java][PATCH] openjdk-8: update to latest ga version 252
+Message-ID: <20200427062736.GA6062@pcleri>
+References: <20200420084632.3229835-1-richard.leitner@skidata.com>
 MIME-Version: 1.0
-References: <16094BCD2252299B.10056@lists.openembedded.org>
-In-Reply-To: <16094BCD2252299B.10056@lists.openembedded.org>
-From: "Tim Orling" <ticotimo@gmail.com>
-Date: Sun, 26 Apr 2020 13:50:44 -0700
-Message-ID: <CANx9H-DwDY4UuY28U+dMPjW7-6jbUiZAxkpNgn3AgFD1TCoAqQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 1/2] python3-cryptography: merge bb and inc
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000002f171705a437c12b"
+In-Reply-To: <20200420084632.3229835-1-richard.leitner@skidata.com>
+Return-Path: richard.leitner@skidata.com
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+ sdex5srv.skidata.net (192.168.111.83)
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
---0000000000002f171705a437c12b
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+fyi: This patch has been added to master-next.
 
-For some reason patchwork didn=E2=80=99t pick up these two patches
+Any test results are welcome!
 
-On Sat, Apr 25, 2020 at 11:48 PM Tim Orling via lists.openembedded.org
-<ticotimo=3Dgmail.com@lists.openembedded.org> wrote:
+regards;rl
 
-> From: Tim Orling <ticotimo@gmail.com>
->
-> Drop python-cryptography/ not used anywhere.
->
-> Signed-off-by: Tim Orling <ticotimo@gmail.com>
+On Mon, Apr 20, 2020 at 10:46:32AM +0200, Richard Leitner wrote:
+> This patch also drops the md5 checksums as sha256 checksums are sufficient.
+> 
+> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
 > ---
->  .../python/python-cryptography.inc            | 58 ------------------
->  .../python/python-cryptography/run-ptest      |  2 -
->  .../python/python3-cryptography_2.8.bb        | 61 ++++++++++++++++++-
->  3 files changed, 59 insertions(+), 62 deletions(-)
->  delete mode 100644
-> meta-python/recipes-devtools/python/python-cryptography.inc
->  delete mode 100644
-> meta-python/recipes-devtools/python/python-cryptography/run-ptest
->
-> diff --git a/meta-python/recipes-devtools/python/python-cryptography.inc
-> b/meta-python/recipes-devtools/python/python-cryptography.inc
-> deleted file mode 100644
-> index 5acd02d67d..0000000000
-> --- a/meta-python/recipes-devtools/python/python-cryptography.inc
-> +++ /dev/null
-> @@ -1,58 +0,0 @@
-> -SUMMARY =3D "Provides cryptographic recipes and primitives to python
-> developers"
-> -HOMEPAGE =3D "https://cryptography.io/"
-> -LICENSE =3D "Apache-2.0 | BSD"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D097f805837700cfac572ac274cd3=
-8124"
-> -
-> -LDSHARED +=3D "-pthread"
-> -
-> -DEPENDS +=3D " \
-> -    ${PYTHON_PN}-cffi \
-> -    ${PYTHON_PN}-cffi-native \
-> -    ${PYTHON_PN}-asn1crypto \
-> -    ${PYTHON_PN}-six \
-> -"
-> -
-> -SRC_URI[md5sum] =3D "77730058b556c6d9838679a94c6229ce"
-> -SRC_URI[sha256sum] =3D
-> "3cda1f0ed8747339bbdf71b9f38ca74c7b592f24f65cdb3ab3765e4b02871651"
-> -
-> -RDEPENDS_${PN} +=3D " \
-> -    ${PYTHON_PN}-cffi \
-> -    ${PYTHON_PN}-idna \
-> -    ${PYTHON_PN}-asn1crypto \
-> -    ${PYTHON_PN}-setuptools \
-> -    ${PYTHON_PN}-six \
-> -"
-> -
-> -RDEPENDS_${PN}_class-target +=3D " \
-> -    ${PYTHON_PN}-cffi \
-> -    ${PYTHON_PN}-idna \
-> -    ${PYTHON_PN}-numbers \
-> -    ${PYTHON_PN}-asn1crypto \
-> -    ${PYTHON_PN}-setuptools \
-> -    ${PYTHON_PN}-six \
-> -    ${PYTHON_PN}-threading \
-> -"
-> -
-> -RDEPENDS_${PN}-ptest +=3D " \
-> -    ${PN} \
-> -    ${PYTHON_PN}-cryptography-vectors \
-> -    ${PYTHON_PN}-iso8601 \
-> -    ${PYTHON_PN}-pretend \
-> -    ${PYTHON_PN}-pytest \
-> -    ${PYTHON_PN}-pytz \
-> -"
-> -
-> -inherit ptest
-> -
-> -do_install_ptest() {
-> -    install -d ${D}${PTEST_PATH}/tests
-> -    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> -    install -d ${D}${PTEST_PATH}/tests/hazmat
-> -    cp -rf ${S}/tests/hazmat/* ${D}${PTEST_PATH}/tests/hazmat/
-> -}
-> -
-> -FILES_${PN}-dbg +=3D " \
-> -
-> ${libdir}/${PYTHON_PN}2.7/site-packages/${SRCNAME}/hazmat/bindings/.debu=
-g \
-> -"
-> -
-> -BBCLASSEXTEND =3D "native nativesdk"
-> diff --git
-> a/meta-python/recipes-devtools/python/python-cryptography/run-ptest
-> b/meta-python/recipes-devtools/python/python-cryptography/run-ptest
-> deleted file mode 100644
-> index 0ba239c2a4..0000000000
-> --- a/meta-python/recipes-devtools/python/python-cryptography/run-ptest
-> +++ /dev/null
-> @@ -1,2 +0,0 @@
-> -#!/bin/sh
-> -py.test
-> diff --git a/meta-python/recipes-devtools/python/
-> python3-cryptography_2.8.bb b/meta-python/recipes-devtools/python/
-> python3-cryptography_2.8.bb
-> index 195923343b..c75dabb974 100644
-> --- a/meta-python/recipes-devtools/python/python3-cryptography_2.8.bb
-> +++ b/meta-python/recipes-devtools/python/python3-cryptography_2.8.bb
-> @@ -1,8 +1,65 @@
-> -inherit pypi setuptools3
-> -require python-cryptography.inc
-> +SUMMARY =3D "Provides cryptographic recipes and primitives to python
-> developers"
-> +HOMEPAGE =3D "https://cryptography.io/"
-> +SECTION =3D "devel/python"
-> +LICENSE =3D "Apache-2.0 | BSD"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D097f805837700cfac572ac274cd3=
-8124"
->
->  LDSHARED +=3D "-pthread"
->
-> +SRC_URI[md5sum] =3D "77730058b556c6d9838679a94c6229ce"
-> +SRC_URI[sha256sum] =3D
-> "3cda1f0ed8747339bbdf71b9f38ca74c7b592f24f65cdb3ab3765e4b02871651"
-> +
->  SRC_URI +=3D " \
->      file://run-ptest \
->  "
-> +
-> +inherit pypi setuptools3
-> +
-> +DEPENDS +=3D " \
-> +    ${PYTHON_PN}-cffi \
-> +    ${PYTHON_PN}-cffi-native \
-> +    ${PYTHON_PN}-asn1crypto \
-> +    ${PYTHON_PN}-six \
-> +"
-> +
-> +RDEPENDS_${PN} +=3D " \
-> +    ${PYTHON_PN}-cffi \
-> +    ${PYTHON_PN}-idna \
-> +    ${PYTHON_PN}-asn1crypto \
-> +    ${PYTHON_PN}-setuptools \
-> +    ${PYTHON_PN}-six \
-> +"
-> +
-> +RDEPENDS_${PN}_class-target +=3D " \
-> +    ${PYTHON_PN}-cffi \
-> +    ${PYTHON_PN}-idna \
-> +    ${PYTHON_PN}-numbers \
-> +    ${PYTHON_PN}-asn1crypto \
-> +    ${PYTHON_PN}-setuptools \
-> +    ${PYTHON_PN}-six \
-> +    ${PYTHON_PN}-threading \
-> +"
-> +
-> +RDEPENDS_${PN}-ptest +=3D " \
-> +    ${PN} \
-> +    ${PYTHON_PN}-cryptography-vectors \
-> +    ${PYTHON_PN}-iso8601 \
-> +    ${PYTHON_PN}-pretend \
-> +    ${PYTHON_PN}-pytest \
-> +    ${PYTHON_PN}-pytz \
-> +"
-> +
-> +inherit ptest
-> +
-> +do_install_ptest() {
-> +    install -d ${D}${PTEST_PATH}/tests
-> +    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> +    install -d ${D}${PTEST_PATH}/tests/hazmat
-> +    cp -rf ${S}/tests/hazmat/* ${D}${PTEST_PATH}/tests/hazmat/
-> +}
-> +
-> +FILES_${PN}-dbg +=3D " \
-> +
-> ${libdir}/${PYTHON_PN}2.7/site-packages/${SRCNAME}/hazmat/bindings/.debu=
-g \
-> +"
-> +
-> +BBCLASSEXTEND =3D "native nativesdk"
-> --
-> 2.25.0
->
->=20
->
-
---0000000000002f171705a437c12b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><div dir=3D"auto">For some=C2=A0reason patchwork didn=E2=80=99t pick u=
-p these two patches</div></div><div><br><div class=3D"gmail_quote"><div dir=
-=
-=3D"ltr" class=3D"gmail_attr">On Sat, Apr 25, 2020 at 11:48 PM Tim Orling =
-via <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &l=
-t;ticotimo=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">gmail.com@=
-lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_q=
-uote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1e=
-x">From: Tim Orling &lt;<a href=3D"mailto:ticotimo@gmail.com" target=3D"_bl=
-ank">ticotimo@gmail.com</a>&gt;<br>
-<br>
-Drop python-cryptography/ not used anywhere.<br>
-<br>
-Signed-off-by: Tim Orling &lt;<a href=3D"mailto:ticotimo@gmail.com" target=
-=
-=3D"_blank">ticotimo@gmail.com</a>&gt;<br>
----<br>
-=C2=A0.../python/python-cryptography.inc=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 | 58 ------------------<br>
-=C2=A0.../python/python-cryptography/run-ptest=C2=A0 =C2=A0 =C2=A0 |=C2=A0=
- 2 -<br>
-=C2=A0.../python/<a href=3D"http://python3-cryptography_2.8.bb" rel=3D"nor=
-eferrer" target=3D"_blank">python3-cryptography_2.8.bb</a>=C2=A0 =C2=A0 =C2=
-=
-=A0 =C2=A0 | 61 ++++++++++++++++++-<br>
-=C2=A03 files changed, 59 insertions(+), 62 deletions(-)<br>
-=C2=A0delete mode 100644 meta-python/recipes-devtools/python/python-crypto=
-graphy.inc<br>
-=C2=A0delete mode 100644 meta-python/recipes-devtools/python/python-crypto=
-graphy/run-ptest<br>
-<br>
-diff --git a/meta-python/recipes-devtools/python/python-cryptography.inc b=
-/meta-python/recipes-devtools/python/python-cryptography.inc<br>
-deleted file mode 100644<br>
-index 5acd02d67d..0000000000<br>
---- a/meta-python/recipes-devtools/python/python-cryptography.inc<br>
-+++ /dev/null<br>
-@@ -1,58 +0,0 @@<br>
--SUMMARY =3D &quot;Provides cryptographic recipes and primitives to python=
- developers&quot;<br>
--HOMEPAGE =3D &quot;<a href=3D"https://cryptography.io/" rel=3D"noreferrer=
-" target=3D"_blank">https://cryptography.io/</a>&quot;<br>
--LICENSE =3D &quot;Apache-2.0 | BSD&quot;<br>
--LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D097f805837700cfac572ac274=
-cd38124&quot;<br>
--<br>
--LDSHARED +=3D &quot;-pthread&quot;<br>
--<br>
--DEPENDS +=3D &quot; \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-cffi \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-cffi-native \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-asn1crypto \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-six \<br>
--&quot;<br>
--<br>
--SRC_URI[md5sum] =3D &quot;77730058b556c6d9838679a94c6229ce&quot;<br>
--SRC_URI[sha256sum] =3D &quot;3cda1f0ed8747339bbdf71b9f38ca74c7b592f24f65c=
-db3ab3765e4b02871651&quot;<br>
--<br>
--RDEPENDS_${PN} +=3D &quot; \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-cffi \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-idna \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-asn1crypto \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-setuptools \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-six \<br>
--&quot;<br>
--<br>
--RDEPENDS_${PN}_class-target +=3D &quot; \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-cffi \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-idna \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-numbers \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-asn1crypto \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-setuptools \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-six \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-threading \<br>
--&quot;<br>
--<br>
--RDEPENDS_${PN}-ptest +=3D &quot; \<br>
--=C2=A0 =C2=A0 ${PN} \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-cryptography-vectors \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-iso8601 \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-pretend \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-pytest \<br>
--=C2=A0 =C2=A0 ${PYTHON_PN}-pytz \<br>
--&quot;<br>
--<br>
--inherit ptest<br>
--<br>
--do_install_ptest() {<br>
--=C2=A0 =C2=A0 install -d ${D}${PTEST_PATH}/tests<br>
--=C2=A0 =C2=A0 cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/<br>
--=C2=A0 =C2=A0 install -d ${D}${PTEST_PATH}/tests/hazmat<br>
--=C2=A0 =C2=A0 cp -rf ${S}/tests/hazmat/* ${D}${PTEST_PATH}/tests/hazmat/<=
-br>
--}<br>
--<br>
--FILES_${PN}-dbg +=3D &quot; \<br>
--=C2=A0 =C2=A0 ${libdir}/${PYTHON_PN}2.7/site-packages/${SRCNAME}/hazmat/b=
-indings/.debug \<br>
--&quot;<br>
--<br>
--BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
-diff --git a/meta-python/recipes-devtools/python/python-cryptography/run-p=
-test b/meta-python/recipes-devtools/python/python-cryptography/run-ptest<br=
->
-deleted file mode 100644<br>
-index 0ba239c2a4..0000000000<br>
---- a/meta-python/recipes-devtools/python/python-cryptography/run-ptest<br=
->
-+++ /dev/null<br>
-@@ -1,2 +0,0 @@<br>
--#!/bin/sh<br>
--py.test<br>
-diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3=
--cryptography_2.8.bb" rel=3D"noreferrer" target=3D"_blank">python3-cryptogr=
-aphy_2.8.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://pyt=
-hon3-cryptography_2.8.bb" rel=3D"noreferrer" target=3D"_blank">python3-cryp=
-tography_2.8.bb</a><br>
-index 195923343b..c75dabb974 100644<br>
---- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-crypto=
-graphy_2.8.bb" rel=3D"noreferrer" target=3D"_blank">python3-cryptography_2.=
-8.bb</a><br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-crypto=
-graphy_2.8.bb" rel=3D"noreferrer" target=3D"_blank">python3-cryptography_2.=
-8.bb</a><br>
-@@ -1,8 +1,65 @@<br>
--inherit pypi setuptools3<br>
--require python-cryptography.inc<br>
-+SUMMARY =3D &quot;Provides cryptographic recipes and primitives to python=
- developers&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://cryptography.io/" rel=3D"noreferrer=
-" target=3D"_blank">https://cryptography.io/</a>&quot;<br>
-+SECTION =3D &quot;devel/python&quot;<br>
-+LICENSE =3D &quot;Apache-2.0 | BSD&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D097f805837700cfac572ac274=
-cd38124&quot;<br>
-<br>
-=C2=A0LDSHARED +=3D &quot;-pthread&quot;<br>
-<br>
-+SRC_URI[md5sum] =3D &quot;77730058b556c6d9838679a94c6229ce&quot;<br>
-+SRC_URI[sha256sum] =3D &quot;3cda1f0ed8747339bbdf71b9f38ca74c7b592f24f65c=
-db3ab3765e4b02871651&quot;<br>
-+<br>
-=C2=A0SRC_URI +=3D &quot; \<br>
-=C2=A0 =C2=A0 =C2=A0file://run-ptest \<br>
-=C2=A0&quot;<br>
-+<br>
-+inherit pypi setuptools3<br>
-+<br>
-+DEPENDS +=3D &quot; \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-cffi \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-cffi-native \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-asn1crypto \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-six \<br>
-+&quot;<br>
-+<br>
-+RDEPENDS_${PN} +=3D &quot; \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-cffi \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-idna \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-asn1crypto \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-setuptools \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-six \<br>
-+&quot;<br>
-+<br>
-+RDEPENDS_${PN}_class-target +=3D &quot; \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-cffi \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-idna \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-numbers \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-asn1crypto \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-setuptools \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-six \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-threading \<br>
-+&quot;<br>
-+<br>
-+RDEPENDS_${PN}-ptest +=3D &quot; \<br>
-+=C2=A0 =C2=A0 ${PN} \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-cryptography-vectors \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-iso8601 \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-pretend \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-pytest \<br>
-+=C2=A0 =C2=A0 ${PYTHON_PN}-pytz \<br>
-+&quot;<br>
-+<br>
-+inherit ptest<br>
-+<br>
-+do_install_ptest() {<br>
-+=C2=A0 =C2=A0 install -d ${D}${PTEST_PATH}/tests<br>
-+=C2=A0 =C2=A0 cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/<br>
-+=C2=A0 =C2=A0 install -d ${D}${PTEST_PATH}/tests/hazmat<br>
-+=C2=A0 =C2=A0 cp -rf ${S}/tests/hazmat/* ${D}${PTEST_PATH}/tests/hazmat/<=
-br>
-+}<br>
-+<br>
-+FILES_${PN}-dbg +=3D &quot; \<br>
-+=C2=A0 =C2=A0 ${libdir}/${PYTHON_PN}2.7/site-packages/${SRCNAME}/hazmat/b=
-indings/.debug \<br>
-+&quot;<br>
-+<br>
-+BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
--- <br>
-2.25.0<br>
-<br>
-<br>
-</blockquote></div></div>
-
---0000000000002f171705a437c12b--
+>  ...-native_242.bb => openjdk-8-native_252.bb} |  0
+>  .../openjdk/openjdk-8-release-aarch32.inc     | 26 +++++++------------
+>  .../openjdk/openjdk-8-release-aarch64.inc     | 26 +++++++------------
+>  recipes-core/openjdk/openjdk-8-release.inc    | 24 ++++++-----------
+>  .../{openjdk-8_242.bb => openjdk-8_252.bb}    |  0
+>  5 files changed, 26 insertions(+), 50 deletions(-)
+>  rename recipes-core/openjdk/{openjdk-8-native_242.bb => openjdk-8-native_252.bb} (100%)
+>  rename recipes-core/openjdk/{openjdk-8_242.bb => openjdk-8_252.bb} (100%)
+> 
+> diff --git a/recipes-core/openjdk/openjdk-8-native_242.bb b/recipes-core/openjdk/openjdk-8-native_252.bb
+> similarity index 100%
+> rename from recipes-core/openjdk/openjdk-8-native_242.bb
+> rename to recipes-core/openjdk/openjdk-8-native_252.bb
+> diff --git a/recipes-core/openjdk/openjdk-8-release-aarch32.inc b/recipes-core/openjdk/openjdk-8-release-aarch32.inc
+> index 686b562..62dc866 100644
+> --- a/recipes-core/openjdk/openjdk-8-release-aarch32.inc
+> +++ b/recipes-core/openjdk/openjdk-8-release-aarch32.inc
+> @@ -4,39 +4,31 @@ COMPATIBLE_HOST = "^$"
+>  COMPATIBLE_HOST_armv7a = "arm"
+>  COMPATIBLE_HOST_armv7ve = "arm"
+>  
+> -CHANGESET_ID="200120"
+> +CHANGESET_ID="20200415"
+>  
+>  CORBA_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+> -SRC_URI[corba.md5sum]    = "2abf6d5394d9c5310af1e4ca6cec4355"
+> -SRC_URI[corba.sha256sum] = "52e83dfa2fa4fcc8c71f3b2959cca2136099b9c575d3726148c02b9cf7d06324"
+> +SRC_URI[corba.sha256sum] = "e8dab3ffbc39fec724604b8c65408f32dcca1682769077c5b4f71b571938fe26"
+>  
+>  HOTSPOT_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+> -SRC_URI[hotspot.md5sum]    = "e252af6c20d6190e0613f39c6066e3cc"
+> -SRC_URI[hotspot.sha256sum] = "bfff2ef23ee80acd73a0774e7011028c3598e75d2ee8b3271524ec8ea54801ae"
+> +SRC_URI[hotspot.sha256sum] = "7aebf690a05746e4fbcdcd75ac4e67acb2f0b087bba3bcb064675468626f5822"
+>  
+>  JAXP_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+> -SRC_URI[jaxp.md5sum]    = "56dc7a99589582b18bbbb5c4464022c8"
+> -SRC_URI[jaxp.sha256sum] = "430e49ba485737c02312557f4deb8562853e58be19ed175ea63b396307f140ce"
+> +SRC_URI[jaxp.sha256sum] = "44883e0e836ee5fa2fcb4df936bafcfad69c57d05876d44ecefc5b3cb6b085c0"
+>  
+>  JAXWS_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+> -SRC_URI[jaxws.md5sum]    = "2bbcba759f24f5dcec0c33cd62382e4f"
+> -SRC_URI[jaxws.sha256sum] = "c350716ff8782cc311ca17450e2d198d707d3fb71de9dc3394df39766979559f"
+> +SRC_URI[jaxws.sha256sum] = "34f6cf3eb34c0c310e0cc31b876b189fd6b2e2c2dcc1066af5347f3a0873d2d3"
+>  
+>  JDK_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+> -SRC_URI[jdk.md5sum]    = "e17f3f4ea8a409e4a1b09a12b3b5309d"
+> -SRC_URI[jdk.sha256sum] = "dfa4a7e7f8ab8daf34343b1c33544b6209e422c74d5be1dbbd8ef80e2365c8aa"
+> +SRC_URI[jdk.sha256sum] = "f89688b5673ed75b1bebfd530a979788a4cbe942ce39eb38784f8c9e1303012b"
+>  
+>  LANGTOOLS_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+> -SRC_URI[langtools.md5sum]    = "06ca78c1d4e058f277876f4e6177d9b0"
+> -SRC_URI[langtools.sha256sum] = "59ccafa433f5510c91835efcafbe9ff9c707034ec3305dc3a4c1a85fac65ab0c"
+> +SRC_URI[langtools.sha256sum] = "18357720e3b924dea2f171235ae06e753aeef7958a3ce7a2a8d41fa6e2c90454"
+>  
+>  NASHORN_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+> -SRC_URI[nashorn.md5sum]    = "1958e204f3984abeb2cf9e7c57aa7839"
+> -SRC_URI[nashorn.sha256sum] = "e964721e539807a38bdcbce7259d235f873974a686badbc274b7368a288f0021"
+> +SRC_URI[nashorn.sha256sum] = "abd6ccf28278ce5775eebada339228fe2e3380d57d009179acdd7026adb21448"
+>  
+>  OPENJDK_CHANGESET_arm = "jdk8u${PV}-ga-aarch32-${CHANGESET_ID}"
+> -SRC_URI[openjdk.md5sum]    = "9aceb3b4cd710cdda55be4fe6a5303c9"
+> -SRC_URI[openjdk.sha256sum] = "9691291b26a650d854ce0feacf32dfb3b956165c5d2db6e1ff46dd44f4c517cf"
+> +SRC_URI[openjdk.sha256sum] = "06d141aa01b80aa0c167167081e2139b3edf5af764cf17bbe9e1b57bf4f585ab"
+>  
+>  PACKAGECONFIG_append_armv7a = " client"
+>  PACKAGECONFIG_append_armv7ve = " client"
+> diff --git a/recipes-core/openjdk/openjdk-8-release-aarch64.inc b/recipes-core/openjdk/openjdk-8-release-aarch64.inc
+> index d08892d..86dffff 100644
+> --- a/recipes-core/openjdk/openjdk-8-release-aarch64.inc
+> +++ b/recipes-core/openjdk/openjdk-8-release-aarch64.inc
+> @@ -2,36 +2,28 @@ require openjdk-8-release-common.inc
+>  
+>  COMPATIBLE_HOST = "aarch64"
+>  
+> -CHANGESET_ID="b07"
+> +CHANGESET_ID="b09"
+>  
+>  CORBA_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+> -SRC_URI[corba.md5sum]    = "d6dfd6f0c3bf4c6dc1f867dc7bcf8730"
+> -SRC_URI[corba.sha256sum] = "e80dae94f21ca9de2269bc9de72f1098d417e9f7d6ff69d047e26669e31b1bc4"
+> +SRC_URI[corba.sha256sum] = "13ce2345dec4390a7ed61066275528c1d4fe246abb3ffc16bdfd93c0e8ead193"
+>  
+>  HOTSPOT_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+> -SRC_URI[hotspot.md5sum]    = "44731f82f6e2a0697f414ae62f9eff54"
+> -SRC_URI[hotspot.sha256sum] = "3acb0bfa3eda0137e3c70ab10b59f139e0720116ed6ecf3f9c8633ebc36947b1"
+> +SRC_URI[hotspot.sha256sum] = "80dd8b1289905252f5f9d97ba2302fe4b77a76851709f10d429848750b709c66"
+>  
+>  JAXP_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+> -SRC_URI[jaxp.md5sum]    = "7fb4207ba9277e109439101961223fc7"
+> -SRC_URI[jaxp.sha256sum] = "22616e56825c611c70968c34a229661d4cb910fdb0c3936ae3c75de2330abfb5"
+> +SRC_URI[jaxp.sha256sum] = "a52f5497318980f379ce05ff8e638a0ae0ce7265d8922ddfb731d26989faf161"
+>  
+>  JAXWS_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+> -SRC_URI[jaxws.md5sum]    = "a27379cbd6253408eee4aa0b8a551042"
+> -SRC_URI[jaxws.sha256sum] = "b6eb69d867694002284712a28058770170d885e6de6872cba260061d001b77ae"
+> +SRC_URI[jaxws.sha256sum] = "1db8876408222a8eec8432bd9778559ea80cae36a2c6dead32723279d1622741"
+>  
+>  JDK_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+> -SRC_URI[jdk.md5sum]    = "2e64397ef1f35309aa7de00d46c2c751"
+> -SRC_URI[jdk.sha256sum] = "d470d24eddc314e5c30035881f3af6f0c48a3360accc0644ec26d9d32d9ea0e6"
+> +SRC_URI[jdk.sha256sum] = "abc7a1eec87ac330bebfa8ec4a3db72c27b63aa50175abfade580a46b7f2d865"
+>  
+>  LANGTOOLS_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+> -SRC_URI[langtools.md5sum]    = "71c2ce819538b0acc443c0519dfa43c1"
+> -SRC_URI[langtools.sha256sum] = "219919b7980d863cc26abd87341012f4802dd12a11a45f6627309ec365a9e838"
+> +SRC_URI[langtools.sha256sum] = "c4e3dd471372dad5a545ec038104c7706fa02da452275ce118ad7e38e418a57a"
+>  
+>  NASHORN_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+> -SRC_URI[nashorn.md5sum]    = "6ee9418598ca411fe0b2339fa1a3a272"
+> -SRC_URI[nashorn.sha256sum] = "6d86c23301d2cbc1ea72474730336e089eb4c3d3014bdf0f3a9d3b5976a75f58"
+> +SRC_URI[nashorn.sha256sum] = "956ef3a52dc97fb28aeeeb9ccbd371c2b7f14e253fd63d1f98bb1bf87ddf1929"
+>  
+>  OPENJDK_CHANGESET_aarch64 = "aarch64-shenandoah-jdk8u${PV}-${CHANGESET_ID}"
+> -SRC_URI[openjdk.md5sum]    = "188b5d7ef0976cfc1a4258d1dc8ccce0"
+> -SRC_URI[openjdk.sha256sum] = "7c32399a85f56bda2c740fc6834b8b5d648e75271a5376c2fa968bd713e3fec8"
+> +SRC_URI[openjdk.sha256sum] = "b7b933ff2b8c0ee17eb6dbd02beb8769e7dfe15c50ab2fdeef55666e4b12cbe7"
+> diff --git a/recipes-core/openjdk/openjdk-8-release.inc b/recipes-core/openjdk/openjdk-8-release.inc
+> index 170338f..ddbd8c9 100644
+> --- a/recipes-core/openjdk/openjdk-8-release.inc
+> +++ b/recipes-core/openjdk/openjdk-8-release.inc
+> @@ -7,33 +7,25 @@ COMPATIBLE_HOST_armv7a = "^$"
+>  COMPATIBLE_HOST_armv7ve = "^$"
+>  
+>  CORBA_CHANGESET = "jdk8u${PV}-ga"
+> -SRC_URI[corba.md5sum]    = "e269b1b01c00bec6c9f2684d7e3e6540"
+> -SRC_URI[corba.sha256sum] = "45433c179dd5ee117b8097c75f475feb5a2d2fae052be3e582c59511696a5d0e"
+> +SRC_URI[corba.sha256sum] = "97513397015ca62953c6afa3ba925b1dabc0238d47f3a2b81c2bd5b683d4d050"
+>  
+>  HOTSPOT_CHANGESET = "jdk8u${PV}-ga"
+> -SRC_URI[hotspot.md5sum]    = "105c2a6bdfecc2f1fe09aac65748bf47"
+> -SRC_URI[hotspot.sha256sum] = "08729033233b3a42bf1fa3d2a2c0cdf1c950c682cc27bd486f7c19ae28d34ef7"
+> +SRC_URI[hotspot.sha256sum] = "80a91f421bbe750f5e8c66b74f77fb79f31cce2f6e9e1cfe8407d773bb1ed57d"
+>  
+>  JAXP_CHANGESET = "jdk8u${PV}-ga"
+> -SRC_URI[jaxp.md5sum]    = "a9fb321b6c466e83b9ad23da0d9674c5"
+> -SRC_URI[jaxp.sha256sum] = "8e52661976169fca3fe567b269be5852dff378cb2e66e9f8a4e9f40aaa8d89e4"
+> +SRC_URI[jaxp.sha256sum] = "ead123b56c1c5d4c381665da6c0858cd9b11c69b8afc7494f9831980bc71bc92"
+>  
+>  JAXWS_CHANGESET = "jdk8u${PV}-ga"
+> -SRC_URI[jaxws.md5sum]    = "6ee14ea4974b93bff075499cd820413b"
+> -SRC_URI[jaxws.sha256sum] = "95a14275db59e0c1a8fa4ca4861b8761b1598f0ed7f3ef2f2cef7c619df1eb83"
+> +SRC_URI[jaxws.sha256sum] = "ef6532ac77e7e4333283c09c87b6923fbaa91b8bca6770f06494c3bb1643455e"
+>  
+>  JDK_CHANGESET = "jdk8u${PV}-ga"
+> -SRC_URI[jdk.md5sum]    = "57d2bc331d9506fa652fac686c6b64c1"
+> -SRC_URI[jdk.sha256sum] = "3ecb62288df04d05f541a26da32464c04558a951b2962290f08b149d614ae020"
+> +SRC_URI[jdk.sha256sum] = "7203ded24a10843ac8e84269ad8ac347f29b1dd950f7e0bb9739ddcb8280b8fb"
+>  
+>  LANGTOOLS_CHANGESET = "jdk8u${PV}-ga"
+> -SRC_URI[langtools.md5sum]    = "5456b86c13a21c8e73a088af5723ba06"
+> -SRC_URI[langtools.sha256sum] = "ffaf18753935cd03b2d581f17789172f4cfdc093d62ca764bf14068d7e30599c"
+> +SRC_URI[langtools.sha256sum] = "6e2329e3f15c0fd23da47cd8f454cb49cdae0b12c951eb2910061fa95acb8ea4"
+>  
+>  NASHORN_CHANGESET = "jdk8u${PV}-ga"
+> -SRC_URI[nashorn.md5sum]    = "0716fb438451ac45285a0cd8c17cc27b"
+> -SRC_URI[nashorn.sha256sum] = "3a572a5d5c2e8b590c9ac2c65905069a991f7e168f5bbe15e7dbb924b10ab96d"
+> +SRC_URI[nashorn.sha256sum] = "195237fd89f34c27bf98c3a8bfda64bbc799a014e83907062a8b4e10bd4f2021"
+>  
+>  OPENJDK_CHANGESET = "jdk8u${PV}-ga"
+> -SRC_URI[openjdk.md5sum]    = "5f5cf2638bba1b4f9b4915be9973077e"
+> -SRC_URI[openjdk.sha256sum] = "633f1d20d4d8d36fea1680140b5514ab153096a19c306b812fbbd19314c8dece"
+> +SRC_URI[openjdk.sha256sum] = "a83f8daa2afece63bf7ae95cfbca91ef765424c40b9f5b45e4a3c2d4da0f7a95"
+> diff --git a/recipes-core/openjdk/openjdk-8_242.bb b/recipes-core/openjdk/openjdk-8_252.bb
+> similarity index 100%
+> rename from recipes-core/openjdk/openjdk-8_242.bb
+> rename to recipes-core/openjdk/openjdk-8_252.bb
+> -- 
+> 2.25.2
+> 
