@@ -1,49 +1,50 @@
-Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com [209.85.216.66])
- by mx.groups.io with SMTP id smtpd.web12.120.1587998691826120126
+Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com [209.85.214.195])
+ by mx.groups.io with SMTP id smtpd.web10.201.1587999422630748280
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Apr 2020 07:44:51 -0700
+ Mon, 27 Apr 2020 07:57:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=uq/xNmUU;
- spf=pass (domain: gmail.com, ip: 209.85.216.66, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f66.google.com with SMTP id e6so7520994pjt.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Apr 2020 07:44:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=qwaBL5gf;
+ spf=pass (domain: gmail.com, ip: 209.85.214.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f195.google.com with SMTP id t4so7061230plq.12
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Apr 2020 07:57:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:references:from:autocrypt:message-id:date:user-agent
          :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=UabroPFAKCW4WbesVOgkw1VM+SQb6p5b+1ysn7/Zg3Q=;
-        b=uq/xNmUUC69qPI8WysV/IY9EczCaU3dJdoI05d3N/EU0gfIBiDMsRr5arTC51IKe+0
-         QYH/3CbIePZH7B8zcCCIo0oHEc5wCuadZLWcB5/mes2voTYbpD3WplHMMdIO355rzN/U
-         VEc9DdNan6M2yhOhgxkmXTlIQOcQ0HsqonfvjEpYum9pyx1qFctHEm4DmGSRUyVoZ+cy
-         piBz2D5hPwnD4GxwQwESrov8Y23eUh002zny872XcWc+tANHAr8xrhozeVXthpz41lhn
-         WRmC4MvOT1xkt2Ht41jrmxcUcsuW4ETSOZoIzLFOoENsIhtceiolFZouMb0Wlqqvud16
-         eKGg==
+        bh=VLQDmMjHTmSilK1GZZTG0PloJIZ5b0lnBQPnAt/CCW4=;
+        b=qwaBL5gfAbN3AeVRVuyD9OYAbisi6nu/ZIWXRtclJGmeMYH9LZAfDYLvhEpfhsJ9na
+         jeybyHPk6zibOATre0NLpLCn/gaWUxWw7Y+x4+spJq6PErHfdeOX/WwNFcBq+vgnqx1J
+         BWJ6/oYCS1/Haswpm7MvH7luAEz1yBzzGsLmm1hn0tylF9neNtZ+AEc1p1dzY/82P+Or
+         usjAiOGdkCMvhIjwS5yi/OF/2mPqtcXUio+eGXoWa+7s28LnXv6KESY5aZB+K+FYRwyg
+         F56vIyDRUoSpWfuwnbu99eWw37nZ0yZyMYP2oJta0wkIDKQ7PmJJx26m7wXLjfMb9ugS
+         7WXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
          :date:user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=UabroPFAKCW4WbesVOgkw1VM+SQb6p5b+1ysn7/Zg3Q=;
-        b=S8jRcVLxDagc9s5Jxvr8C51UIB4C0dAL0U/8Ge/BEq56/2RiuaYV2mVXJjeJJOFlhv
-         m6btaoMThm9gp3CyX/j0MOLgyMsU4cMbPhZPCA3KoAavx5msxPjOTmuOZBkhtuAM1yAY
-         ERqaY7NLWdSC9VNH+OitIAsOtwBrHH2jff42YlOlZ/juMyyl6V1xDGoAOOMck96r7ORE
-         gNeWotSb5bUeZewQwJeNJxsJik8sU0fmSpTJhprtks1HU0AM7Jut8DMO1zKakljvCb5m
-         iW40zWwseYKGbr5csucvJ8SyiMqzhFEcLubbmLXle35z8fzOl/Hxi2U4gqCcgbkoXvuU
-         +KGg==
-X-Gm-Message-State: AGi0PuYKaZnFtnEypfw6s1zvIErafc6PfVjcKGPl7Wh9ATyb9j3Hddt6
-	BCp70IpKTimfOVp9e7b4TkQgfyyqzvI=
-X-Google-Smtp-Source: APiQypIZjMo1m6BLCrH1QEhRBNU3ddhs9uooRlFNTOX/Syz4PfxNg/glKGe5//VTL/B3d/mhDftHMA==
-X-Received: by 2002:a17:90b:3751:: with SMTP id ne17mr23743258pjb.114.1587998690853;
-        Mon, 27 Apr 2020 07:44:50 -0700 (PDT)
+        bh=VLQDmMjHTmSilK1GZZTG0PloJIZ5b0lnBQPnAt/CCW4=;
+        b=fGFhQodRq+gK/SvFuSN4MBq7XCqAimsnN9eiQzZlbyTUP7U2W3m/9kh8xDGqK9+cgX
+         h/hov989VEjfQ2CeJdMeqABW6TEZwEO37bStOgN8APOtph9WBmMM3tECftp9TwT5vfok
+         v+AdHnj0z6+h5HF975jMqtmBZwcn8SpgmyrfctT62NyLgg6PYvp0OPSMxGYXbS9W+7mD
+         C3mYT2QCnQKfb1oH1O3/qv6dYWgviC07Rwu/lk3X0sDArfCdNmQ+jT5Vzj/KRNBFt4lr
+         EwGBJFpH8LM3n6fPrHlbfmzddr+4eHnKnRVMlV1+Q6JmYJCVY9vUP6/PyS6XUXHPvBnJ
+         uIkQ==
+X-Gm-Message-State: AGi0PuZ2JvqEHE8/tV4VyOwds7PbkOxMgSvPOcu5u+aj4osCScBmUce2
+	iTb8QTmzeBBIKRhVTLbnu9raXM/RLmc=
+X-Google-Smtp-Source: APiQypLhKHEb9Xy/d9NOa4lKs9frmYt9ocGpFwgg9VRdnyKKzAp3TGMkQhJe5I15jCyVIclIXsUUVg==
+X-Received: by 2002:a17:90a:d3cc:: with SMTP id d12mr24009405pjw.158.1587999421528;
+        Mon, 27 Apr 2020 07:57:01 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from ?IPv6:2601:646:9200:4e0::e11c? ([2601:646:9200:4e0::e11c])
-        by smtp.gmail.com with ESMTPSA id 192sm12422168pfu.182.2020.04.27.07.44.49
+        by smtp.gmail.com with ESMTPSA id c1sm12359262pfo.152.2020.04.27.07.57.00
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 27 Apr 2020 07:44:50 -0700 (PDT)
-Subject: Re: [oe] [meta-python][PATCH 2/2] python3-cryptography-vectors: merge bb and inc
-To: Tim Orling <ticotimo@gmail.com>, openembedded-devel@lists.openembedded.org
-References: <20200426064803.31911-1-ticotimo@gmail.com>
- <20200426064803.31911-2-ticotimo@gmail.com>
+        Mon, 27 Apr 2020 07:57:01 -0700 (PDT)
+Subject: Re: [oe][meta-oe][PATCH v2] libwebsockets: upgrade 3.2.2 -> 4.0.1
+To: Martin Balik <martin.balik@siemens.com>,
+ openembedded-devel@lists.openembedded.org
+References: <a1bd8357-97f7-f3cc-4b97-e63656c01452@gmail.com>
+ <20200427115932.4479-1-martin.balik@siemens.com>
 From: "Khem Raj" <raj.khem@gmail.com>
 Autocrypt: addr=raj.khem@gmail.com; keydata=
  mQGiBEqXaJERBACUvFofpD3FsxD9675wcPv+rzguIfsRWilrrpSZ61JHjLHwkUnmDLpLSdfv
@@ -77,84 +78,53 @@ Autocrypt: addr=raj.khem@gmail.com; keydata=
  suq7Hnb7vszlFYdbzeqjY81LSyxA0kcpgJxdLv9o7UuCEnHDZLPbHdQ83PmyyBKSI31AKe7R
  XlQNlB5grwH9o6uNtPbV7q/uRqmKq5EiiEkEGBECAAkFAkqXaJECGwwACgkQuwUzVZGdMxR1
  VACcCkdaO3rb8/gRprldmAH6eR49eo4AnjD3h3aTwv/1bl+BAz1twmZmz8ul
-Message-ID: <72376e2e-7245-5457-1587-1cafb0bec4d8@gmail.com>
-Date: Mon, 27 Apr 2020 07:44:48 -0700
+Message-ID: <186786a0-a65c-391b-8c1b-e9522f050c1f@gmail.com>
+Date: Mon, 27 Apr 2020 07:57:00 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <20200426064803.31911-2-ticotimo@gmail.com>
+In-Reply-To: <20200427115932.4479-1-martin.balik@siemens.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
+v1 has been applied to master, if there is delta in v2 w.r.t. v1 then
+please rebase on latest master or master-next and send again please
 
-
-On 4/25/20 11:48 PM, Tim Orling wrote:
-> From: Tim Orling <ticotimo@gmail.com>
+On 4/27/20 4:59 AM, Martin Balik wrote:
+> License changed from "LGPL-2.1" to "MIT"
 > 
-> Signed-off-by: Tim Orling <ticotimo@gmail.com>
+> Signed-off-by: Martin Balik <martin.balik@siemens.com>
 > ---
->  .../python/python-cryptography-vectors.inc    | 18 ----------------
->  .../python3-cryptography-vectors_2.8.bb       | 21 ++++++++++++++++++-
->  2 files changed, 20 insertions(+), 19 deletions(-)
->  delete mode 100644 meta-python/recipes-devtools/python/python-cryptography-vectors.inc
+>  .../{libwebsockets_3.2.2.bb => libwebsockets_4.0.1.bb}    | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>  rename meta-oe/recipes-connectivity/libwebsockets/{libwebsockets_3.2.2.bb => libwebsockets_4.0.1.bb} (86%)
 > 
-> diff --git a/meta-python/recipes-devtools/python/python-cryptography-vectors.inc b/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
-> deleted file mode 100644
-> index 10af48c9fb..0000000000
-> --- a/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
-> +++ /dev/null
-> @@ -1,18 +0,0 @@
-> -SUMMARY = "Test vectors for the cryptography package."
-> -HOMEPAGE = "https://cryptography.io/"
-> -SECTION = "devel/python"
-> -LICENSE = "Apache-2.0 | BSD"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
-> -
-> -DEPENDS += " \
-> -    ${PYTHON_PN}-cryptography \
-> -"
-> -
-> -SRC_URI[md5sum] = "a744ed29bb9ef56b3a50317fea3b218e"
-> -SRC_URI[sha256sum] = "6cd32174c56a3eca72f64af43c1daacaae758cfa5ff9d280dfcf818fa11ef116"
-> -
-> -PYPI_PACKAGE = "cryptography_vectors"
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> -
-> -UPSTREAM_CHECK_REGEX = ""
-> diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb
-> index 58994ffffa..49a5664dcd 100644
-> --- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb
-> +++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb
-> @@ -1,2 +1,21 @@
-> -inherit pypi setuptools3
->  require python-cryptography-vectors.inc
-
-this require is no longer needed after merging the inc. I have fixed it
-locally this time.
-
-
-> +SUMMARY = "Test vectors for the cryptography package."
-> +HOMEPAGE = "https://cryptography.io/"
-> +SECTION = "devel/python"
-> +LICENSE = "Apache-2.0 | BSD"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
-> +
-> +SRC_URI[md5sum] = "a744ed29bb9ef56b3a50317fea3b218e"
-> +SRC_URI[sha256sum] = "6cd32174c56a3eca72f64af43c1daacaae758cfa5ff9d280dfcf818fa11ef116"
-> +
-> +PYPI_PACKAGE = "cryptography_vectors"
-> +
-> +inherit pypi setuptools3
-> +
-> +DEPENDS += " \
-> +    ${PYTHON_PN}-cryptography \
-> +"
-> +
-> +BBCLASSEXTEND = "native nativesdk"
-> +
-> +UPSTREAM_CHECK_REGEX = ""
+> diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.2.2.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.1.bb
+> similarity index 86%
+> rename from meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.2.2.bb
+> rename to meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.1.bb
+> index 32ba51db0..0d1f57ab8 100644
+> --- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.2.2.bb
+> +++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.1.bb
+> @@ -1,13 +1,13 @@
+>  SUMMARY = "Canonical libwebsockets.org websocket library"
+>  HOMEPAGE = "https://libwebsockets.org/"
+> -LICENSE = "LGPL-2.1"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=4ce87f3facb6f911c142c8bef9bfb380"
+> +LICENSE = "MIT & Zlib & BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=8c47b078124308a4e1354e8d59f606b7"
+>  
+>  DEPENDS = "zlib"
+>  
+>  S = "${WORKDIR}/git"
+> -SRCREV = "d880fe233020b74e058cbca95b5fb67823bbf258"
+> -SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v3.2-stable"
+> +SRCREV = "6eb39388f43f6e2a27f0efcbf8cb2391e38824e9"
+> +SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.0-stable"
+>  
+>  UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
+>  UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 > 
 > 
 > 
