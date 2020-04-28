@@ -1,79 +1,76 @@
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com [209.85.160.194])
- by mx.groups.io with SMTP id smtpd.web11.6936.1588079371670883923
+Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com [209.85.219.52])
+ by mx.groups.io with SMTP id smtpd.web11.6937.1588079373225254534
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Apr 2020 06:09:31 -0700
+ Tue, 28 Apr 2020 06:09:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=ZXvQCkP6;
- spf=pass (domain: ossystems.com.br, ip: 209.85.160.194, mailfrom: domarys.correa@ossystems.com.br)
-Received: by mail-qt1-f194.google.com with SMTP id 71so17120117qtc.12
-        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Apr 2020 06:09:31 -0700 (PDT)
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=HX+N46Bt;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.219.52, mailfrom: domarys.correa@ossystems.com.br)
+Received: by mail-qv1-f52.google.com with SMTP id y19so10287957qvv.4
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Apr 2020 06:09:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=0QACzDMYPsn49sEVPRUY4ZCgjAjWGFC9h7D6fIzpbMw=;
-        b=ZXvQCkP67IRA3/aOyL+fGlRPnhU83H/EzQayVvA2ZoZOo4Cff6bh4PUjDnDrUHQJd6
-         u4fU8IRMsXxMJE8imLULJd2sd7cu5+88QTgc1epuZJnpnoWenYrAljxDESA1N1D+xNKN
-         T+3ko7lz0WrMrMvoJYp4l/QoH93cjAEE3Lg142ENy4+7pRbk9X4abx/r/Q2O/viqKEWz
-         QuZzpTtZdjwXtQKlSY0C2AQBsS/0TeTyt2KBHZ3ec3DBEUEwOGktXBdCXKZVfeTjntVw
-         V4orkfbPuqYtCccvyF6UP4VSYsuH5IWXG2PbUUy0aoHoqyiS1YtC9BZxz0PpgRnb4amW
-         WzCA==
+        bh=xPjJRa3I3RR+UPY2cXLexf4/qp34kSl+rfpiAFXA5p8=;
+        b=HX+N46Btn8fMGDyHbXSQS70SoazaX8tFTAsOKhSOJYp9TmX4KTcr9oLLjNsvIhcwgn
+         XcMD+hg9DFKAqYpp/55NHpYGg5VFxGMwa+ZtQw+Hb24wlEzxLpR+HMXd7e8gbv70JQ5F
+         gwCvLXYblQ44r49flQOVEzz+PGOSX5W1tF8hXxquCWoB7hz4r4BrmxU8X5QEu0Ho+bU1
+         EXhDXywdHUJ6QladA5s9KrWF11DmHyuoz8oQmgmARgaYXFKwYfFzdYmAnb53cRTG+Hwi
+         hxT73fOGZephYrw1dImTiHDlaJ3wDtsWqi+XIr44CPIw8T9edAQOFqzLAcSPMBK+fR/S
+         pC0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=0QACzDMYPsn49sEVPRUY4ZCgjAjWGFC9h7D6fIzpbMw=;
-        b=p7uo52kZR3WGax6fy5r9Ou1yr9Dvv/9kTQ39QRzaFOms50zWuPcIHcnzSGtqW++psE
-         TrEe0qf8Agb+099ut2PyXUHhbgug3kQ27Z5mnq6h8Y+2ygAV5TGoX6cTXEnGSNrggeeu
-         XrbhE8nNQFwetqdODPFJ7Z/pHvJNygqDTmnkhILwI4ksxksq/FdsP79EQKAAyn6Xqv1A
-         0ihpejKdqtE9W4ngDMuJTNnFniBJvIy+tmTH/jqpez/Py9fC5K501JH7HqHis6mvbbmc
-         iVmUrQczr11bskc9OJRSwANNM9AkdC5ojJlcDytShHFxQ0xuXQj08dtUOgWMAJQyBW1Q
-         8aNg==
-X-Gm-Message-State: AGi0PuYV3Ysejf32RY3P+yD6CwUNXJyBD51XzvSdMFU3aj09Toqzke1y
-	3fXVMZ7ApmkBvfuLpYhSvL5tVCNEgnU=
-X-Google-Smtp-Source: APiQypK36DaxJxBkoD3EKnHYKw0zNaqLQsHDoGb12dWrOMQAiVIn7ZPCCe8AMuPrL70j39Uhh55OYg==
-X-Received: by 2002:ac8:2bce:: with SMTP id n14mr28234871qtn.18.1588079370697;
-        Tue, 28 Apr 2020 06:09:30 -0700 (PDT)
+        bh=xPjJRa3I3RR+UPY2cXLexf4/qp34kSl+rfpiAFXA5p8=;
+        b=dIEUUsehhJQPopNHO3Ashki0OMzGdQrB1u2x5lZ0S39NMKgmHRxzApQkRoBMmCY+bl
+         x2+DWvz7kt72qC+w1Us7jY4lz3Ems8htl/6pl887aOnpuqLt1xP3hvPSYL/gk9EuiJpw
+         Omcm3q0aD4quIOIrpMAWvmTai8A32MJYrYLiBJgFR/cnzmvqj+wtZDIE5BhHjqCkHH57
+         M5NJ/r/hOIQ9AvtLv6IT4u+TWuf3VXxZZsHXJZ74h3tto0u9xxzx838XYbv62X52jb+O
+         bgZfV6HK+OTAtjvqY153riGP85jK3y9DfyVgFRk/Fln6x9UPZArj8MylOWHqraqXq9pO
+         U5CQ==
+X-Gm-Message-State: AGi0Puad18n3BXpolnsI34ytZTloaURUt/VRZblVwtajbUYIpBao+fbs
+	/mPuOL6v5sMZ/E4UaKavCqwpCHCFmUs=
+X-Google-Smtp-Source: APiQypJ4yTNdoS28Q9lMTdeSN87sn+zIQiOh4tmmysCUb/GBoZyDyg5WQSGH0DuJ/Q+sCAP2l+k0Kg==
+X-Received: by 2002:ad4:452d:: with SMTP id l13mr11957980qvu.19.1588079372296;
+        Tue, 28 Apr 2020 06:09:32 -0700 (PDT)
 Return-Path: <domarys.correa@ossystems.com.br>
 Received: from localhost.localdomain ([2804:7f4:c193:1cf5:44ed:61e4:a25c:b4f0])
-        by smtp.gmail.com with ESMTPSA id a13sm13203103qkg.129.2020.04.28.06.09.29
+        by smtp.gmail.com with ESMTPSA id a13sm13203103qkg.129.2020.04.28.06.09.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Apr 2020 06:09:30 -0700 (PDT)
+        Tue, 28 Apr 2020 06:09:31 -0700 (PDT)
 From: "Domarys Correa" <domarys.correa@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 Cc: Domarys Correa <domarys.correa@ossystems.com.br>
-Subject: [meta-python][PATCH 2/8] python3-flask-jwt: Add recipe version 0.3.2
-Date: Tue, 28 Apr 2020 10:09:08 -0300
-Message-Id: <20200428130914.17398-2-domarys.correa@ossystems.com.br>
+Subject: [meta-python][PATCH 3/8] python3-gunicorn: Add recipe version 20.0.4
+Date: Tue, 28 Apr 2020 10:09:09 -0300
+Message-Id: <20200428130914.17398-3-domarys.correa@ossystems.com.br>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200428130914.17398-1-domarys.correa@ossystems.com.br>
 References: <20200428130914.17398-1-domarys.correa@ossystems.com.br>
 
 Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
 ---
- .../python/python3-flask-jwt_0.3.2.bb              | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-flask-jwt_0.3.2.bb
+ .../python/python3-gunicorn_20.0.4.bb                 | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask-jwt_0.3.2.bb b/meta-python/recipes-devtools/python/python3-flask-jwt_0.3.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb b/meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb
 new file mode 100644
-index 000000000..779a2e25e
+index 000000000..5bd8d51c0
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-flask-jwt_0.3.2.bb
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "JWT token authentication for Flask apps"
-+HOMEPAGE = "https://github.com/mattupstate/flask-jwt"
-+SECTION = "devel/python"
++++ b/meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "WSGI HTTP Server for UNIX"
++
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=ff00db41c47ec84b4567a8b3c246a959"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=f75f3fb94cdeab1d607e2adaa6077752"
 +
-+PYPI_PACKAGE = "Flask-JWT"
-+
-+SRC_URI[md5sum] = "878ad79a12afa70ad38a12d5ffd2dc1e"
-+SRC_URI[sha256sum] = "49c0672fbde0f1cd3374bd834918d28956e3c521c7e00089cdc5380d323bd0ad"
++SRC_URI[md5sum] = "543669fcbb5739ee2af77184c5e571a1"
++SRC_URI[sha256sum] = "1904bb2b8a43658807108d59c3f3d56c2b6121a701161de0ddf9ad140073c626"
 +
 +inherit pypi setuptools3
 +
-+RDEPENDS_${PN} += "${PYTHON_PN}-pyjwt ${PYTHON_PN}-flask"
++RDEPENDS_${PN} += "${PYTHON_PN}-setuptools ${PYTHON_PN}-fcntl"
 -- 
 2.17.1
 
