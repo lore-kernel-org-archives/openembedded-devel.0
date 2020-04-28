@@ -1,73 +1,76 @@
-Received: from mail-lf1-f68.google.com (mail-lf1-f68.google.com [209.85.167.68])
- by mx.groups.io with SMTP id smtpd.web11.3039.1588059757279910382
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com [209.85.160.194])
+ by mx.groups.io with SMTP id smtpd.web10.6896.1588079370296130213
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Apr 2020 00:42:37 -0700
+ Tue, 28 Apr 2020 06:09:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=qjvxnq0g;
- spf=pass (domain: gmail.com, ip: 209.85.167.68, mailfrom: jacob.kroon@gmail.com)
-Received: by mail-lf1-f68.google.com with SMTP id y3so436916lfy.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Apr 2020 00:42:37 -0700 (PDT)
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=MRkd6slF;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.160.194, mailfrom: domarys.correa@ossystems.com.br)
+Received: by mail-qt1-f194.google.com with SMTP id t20so5103107qtq.13
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Apr 2020 06:09:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:references:from:message-id:date:user-agent:mime-version
-         :in-reply-to:content-language:content-transfer-encoding;
-        bh=+jHOU3kNwJAcNseaKkkld/ORBovmfSifTLJWbcSBt9s=;
-        b=qjvxnq0gugKo94vki4oK+miOl3dlIeDl8Mbeu7zeZU5dutXOjDuEFg10r7XdGSa40W
-         +Vs0AxQHVA9j+i+IZbfu3VyBJ6+Uaq8yKjlPrR3WOobVt5wWjBnpECSpaM7m5mT0uTUe
-         4wg48adXtVhjVT7W5inCtD99Y4iLpHiR/JJa0xqU7Q3rWX3jQ2UsqvNhKw0hT8JhLZQe
-         PLLs4UlByKlrQnHQtlidDEt8POCN3MSXFPfziG8CMyqYQeV57P4CRdt+iqIPs3NJJhHS
-         0dpNI8eiPP2u5Zj9vOvIQMrdMtRYgE2CAJ0PFqDdSP6ZRb1p8NN4k0BdVPwcC20DRZO6
-         dmwQ==
+        d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id;
+        bh=3pDKOJXjcxdHLYTnrvMKYYTtllgzxB0FhceieB0FMZ4=;
+        b=MRkd6slF3MFCRo/LthYB1hCLIK3bj9Yzn9iwFGl+Q0r9QRSx+oB9CXLZKkwHccqPVs
+         7fWuYj4LT1BRFRmO+ncR9hFfZUW27JXaJnbeqklxQcODIEWhNB3sEG/o7tXP84m53v8U
+         iY/0VJ/o3mC5j0NFpeRTC2RrDqveusJcH6lwa6cHWsZ9C5/zBTPZX1KuT+Sy//Chaj20
+         woyVHC+vuCm+8Kw+ctpeXGZHH6QSGvE9Ri95F5eZl9OYtHP6oaY+jVWni/ewusXPDrYO
+         dLH3TBCTV1LbG1h2Wy9Iuqt1a7cQQg7VgDkEXhxm+H3Yat2JHywYUtsN4rO7cVwoEWF/
+         bq6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=+jHOU3kNwJAcNseaKkkld/ORBovmfSifTLJWbcSBt9s=;
-        b=CmzNYReV3SVaqN66/P4cVYWRk5dmddmp/BSppGbmojQrWf3Bq6S3tuwjmGyBFo521c
-         pYOpV452uyhX6NWZFHD+qurAMN5+WVWWZT5hnldqU/oYBdmBcCZmHISfvXaJh8Tgci/G
-         qoLyjr5z+nzPr/k4IdObnt6DLBVMiNqWMulCGNxmnvX0pTUpapE04h5arLHW5k7vqIMj
-         zMvfuuZk8Zc/34rAJMvpwp9PeA7oI0IL5krBrYqR5OxLHctSJPkGKLTgcc207js/PnD8
-         JonY0krTeMHhQefJAZTfj+X1ZfPfIez0xpJPjjzHLLBZim9juagKTTi221ivand97AnA
-         Et2g==
-X-Gm-Message-State: AGi0PuZHInfud/eWAGjlMryGOdlrHq5U+S5MAM6MTipYGoIZRJv8Pe4z
-	Micxf7ayxviFRofxC5bdK9awv8cd/Dg=
-X-Google-Smtp-Source: APiQypIMfu+1he9t497CEUTEfy4QeFQLfVKiUVb6j87/ek9pr7DybEuadUntFRY/XTVzb7Y+FbXjiQ==
-X-Received: by 2002:a19:c515:: with SMTP id w21mr1527234lfe.186.1588059754999;
-        Tue, 28 Apr 2020 00:42:34 -0700 (PDT)
-Return-Path: <jacob.kroon@gmail.com>
-Received: from localhost.localdomain ([213.185.29.22])
-        by smtp.gmail.com with ESMTPSA id x24sm13332718lfc.6.2020.04.28.00.42.33
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 28 Apr 2020 00:42:33 -0700 (PDT)
-Subject: Re: [meta-java][PATCH v2] openjdk-8: update to latest ga version 252
-To: Richard Leitner <richard.leitner@skidata.com>,
- openembedded-devel@lists.openembedded.org
-References: <20200428061402.106880-1-richard.leitner@skidata.com>
-From: "Jacob Kroon" <jacob.kroon@gmail.com>
-Message-ID: <4b95fde2-c74d-f000-ba03-ff523b95407c@gmail.com>
-Date: Tue, 28 Apr 2020 09:42:32 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
-MIME-Version: 1.0
-In-Reply-To: <20200428061402.106880-1-richard.leitner@skidata.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=3pDKOJXjcxdHLYTnrvMKYYTtllgzxB0FhceieB0FMZ4=;
+        b=qc/Jo2d7DtesM6jB433EU9usnzU0v29REE+ARzmwWLbG372iTSjReqpmntrxVFwux/
+         oxyydr5NdTLBr8jZ6G9KVQo/yYGijf+wTqfPbSwnyHDNaJk6313foOafzrKIAJppQZqD
+         8ERAdAmOAErZ36TAed7ged03luPBGWXhVHiLcDnZf9uxF7ExK9TPIsENqcrnil3BsUj0
+         LvfHHDzXu09+Hos+jtINKSLPCB2efKwB+H5aiEtXhLE2fU5IvNPA5iVQtOeMtsNTal28
+         OW7xSHNFDTMxkgFLw0aOMcv6f9x3RN2P2OgSygJZjalR04BKInrRiW5J7cBMHBPQRPoO
+         RDbg==
+X-Gm-Message-State: AGi0Puao5s+CoPb3rhQcOAU3CfOquoV6dSwFG/u8AYMQE2IblVIzuZxh
+	py21Rx9y++WRb+IoUTdpv7rGVtf+vsg=
+X-Google-Smtp-Source: APiQypLMPlLBQrWjWhyOwcHkzPaOlbIkVhR4gTsmSHBNQyMAFO6TmmXp+PSZhs/TzMkRCj5EAGZ1Dw==
+X-Received: by 2002:ac8:312e:: with SMTP id g43mr28543028qtb.256.1588079369080;
+        Tue, 28 Apr 2020 06:09:29 -0700 (PDT)
+Return-Path: <domarys.correa@ossystems.com.br>
+Received: from localhost.localdomain ([2804:7f4:c193:1cf5:44ed:61e4:a25c:b4f0])
+        by smtp.gmail.com with ESMTPSA id a13sm13203103qkg.129.2020.04.28.06.09.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 28 Apr 2020 06:09:28 -0700 (PDT)
+From: "Domarys Correa" <domarys.correa@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Cc: Domarys Correa <domarys.correa@ossystems.com.br>
+Subject: [meta-python][PATCH 1/8] python3-flask-jsonpify: Add recipe version 1.5.0
+Date: Tue, 28 Apr 2020 10:09:07 -0300
+Message-Id: <20200428130914.17398-1-domarys.correa@ossystems.com.br>
+X-Mailer: git-send-email 2.17.1
 
-Hi Richard,
+Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
+---
+ .../python/python3-flask-jsonpify_1.5.0.bb         | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask-jsonpify_1.5.0.bb
 
-On 4/28/20 8:14 AM, Richard Leitner wrote:
-> This patch also drops the md5 checksums as sha256 checksums are sufficient.
-> 
-> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-> ---
-> CHANGES v2:
->   + added missing openjre recipe update
-> ---
+diff --git a/meta-python/recipes-devtools/python/python3-flask-jsonpify_1.5.0.bb b/meta-python/recipes-devtools/python/python3-flask-jsonpify_1.5.0.bb
+new file mode 100644
+index 000000000..5d7e9b517
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-flask-jsonpify_1.5.0.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "A Flask extension adding a decorator for JSONP support"
++HOMEPAGE = "https://github.com/CoryDolphin/flask-jsonpify"
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://README.rst;md5=bd59445a234a0c8250b39178d42e3148"
++
++PYPI_PACKAGE = "Flask-Jsonpify"
++
++SRC_URI[md5sum] = "8a10e37942c43d93d107644a3fe77d98"
++SRC_URI[sha256sum] = "8ac4c732aa5b11d9f6c2de58065d3b669f139518ca8f529bce943817e2fedbfb"
++
++inherit pypi setuptools3
++
++RDEPENDS_${PN} += "${PYTHON_PN}-flask"
+-- 
+2.17.1
 
-<cut>
-
-Builds and runs fine on my setup.
-Thanks,
-Jacob
