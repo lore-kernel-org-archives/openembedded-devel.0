@@ -1,133 +1,90 @@
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com [209.85.128.65])
- by mx.groups.io with SMTP id smtpd.web10.513.1588106065318635756
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+ by mx.groups.io with SMTP id smtpd.web12.836.1588154585990099349
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Apr 2020 13:34:25 -0700
+ Wed, 29 Apr 2020 03:03:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=TzrhrARs;
- spf=pass (domain: gmail.com, ip: 209.85.128.65, mailfrom: andrea.adami@gmail.com)
-Received: by mail-wm1-f65.google.com with SMTP id z6so230332wml.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Apr 2020 13:34:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=e+NQb6Q+unH5o0iBOjdIeWJcrFz3bGdAr2Ogec8Sx+4=;
-        b=TzrhrARsK32XCSOQT6VvpLlbSSRLUcBNXSS+sPIaeeh+3iK1JvC0o2JSX0ASPm1jqU
-         kTH1ZgkgUKLjA8SDRNCvemyBkIVEttV9G2VDLa97a1UR9sO54vEFrciQ7dTtNEeuaYuz
-         fhp+sXXhgivKSQw4bP3RLVXHzHH5Z5Eqymdss08XI0aa5zFKKKtZ5/SKJIPGEK10s0RB
-         f7G7kc8bWl2uumMdSpITbcIRCG/qPX5Rf80L7xtA59g4YDuukEL8Q7VLQPnWu3m2ooWt
-         SmcXnNfrJPo03MVqVW2SKna6+Wnv4gd3Z5hCoNC9qcYewyX8+BPsb63q4dZkENimOM35
-         qKpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=e+NQb6Q+unH5o0iBOjdIeWJcrFz3bGdAr2Ogec8Sx+4=;
-        b=HLOFTWXYjCB3CMESYD0TE3iJQgG4mRcdwPIzN+6dgEDlqYV4beADhEJONb5EAdZm6x
-         v9+EfsQAOg0SPTvd5G+OaPdnhF6fyue4kgRwQvWew+7PY1UXSwFAFk8kqaGaigFPcFNb
-         N6LLTqI4K+ZJ+KhlpLcFNAeyL579jZkcwG+DUOSebjfOcuWIYl5OCq0YQcbhJGwSo85N
-         uYluTtNxCb8VBIQfe5i4COn/b+laRmxUfakPuIf3LoAgAUvwJKfRCLDkq9rlyk1JqmKo
-         F7tVYZVHdQzmFyiKrWi6d3Yb+LEs5ZTAFC0NJFftLN2LADmb6rXaocSMF6To2kMHCHJX
-         5Ihw==
-X-Gm-Message-State: AGi0PuaqkWwq7MgSysqLvNkafaNeRyWlF3e683yH+Jw7UTSbgmLdMl1p
-	SxRB31QjVR5j1vhgI8u1XBU3RWW3
-X-Google-Smtp-Source: APiQypIdK3x5VfN5N8bct/fzupCBAHdFWcGcJze9ysaEeulX+BDflb1k5iwYdZ93CoFriQyGQUppkw==
-X-Received: by 2002:a7b:c759:: with SMTP id w25mr7105985wmk.68.1588106062659;
-        Tue, 28 Apr 2020 13:34:22 -0700 (PDT)
-Return-Path: <andrea.adami@gmail.com>
-Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it (host84-186-dynamic.249-95-r.retail.telecomitalia.it. [95.249.186.84])
-        by smtp.googlemail.com with ESMTPSA id h137sm6513490wme.0.2020.04.28.13.34.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Apr 2020 13:34:22 -0700 (PDT)
-From: "Andrea Adami" <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Andrea Adami <andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH v2 1/4] zaurusd: fix build with kernels < 4.16 and newer libc headers
-Date: Tue, 28 Apr 2020 22:34:19 +0200
-Message-Id: <20200428203419.1322-1-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=g9XI7be5;
+ spf=pass (domain: skidata.com, ip: 91.230.2.99, mailfrom: prvs=381e85789=richard.leitner@skidata.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+  t=1588154585; x=1619690585;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=9tlC+379pDEWPnyc+NuvPSzTegl2Db2yKyygqRF+ME4=;
+  b=g9XI7be5zzRBOGb6VT/DKGJEBALmcA43A6/ODtzJv4a8xci1YS3R3d1E
+   sD30uyClbndoVQe/zy+pjq+NKbDvLZ1p8knKD7d708f0Zs9ywoQcmXt8E
+   ijjeqVmzcXMKc/QYXGH24YK9EOaOx3X3anazCvC2kKZRJ0VJ6vRv0p86/
+   qoSFuOGRNu6jBiVhLHJY3e/kqIOzHaL3PUfhMxaBLgNuHE1a/pFZukKNd
+   3T6kd7mG4y7IWZnpK5jtzlwr0FwALdr/jqU2hxkETclC4H/XIcE2AaqDv
+   Bj+W8oCjemf2XBqRTd2B6iVvk6NU3GYrZ5Eq5iiz7HZlbc1oOze/XH5sw
+   g==;
+IronPort-SDR: YLUbokqDB8zuWnJFI0Qa3C9ldkLIEXUKAvzAPsvrfbhfcLEPXbwVCfLVpIDPUkiYNZ/BlDsxgg
+ btAJ803feCysKdmbXpdf3m5a5BwUIoufyxAG9vEORgI8N11FpkRRMvDCjvdt+HwhR0feXMvI0w
+ l/2BgJjpe/aKf4bQd4LuUDkwnw91/SdbqCJqMUUwPvLnWcRhcHGhP9KY+gwq2AoyGlTGqLnHTK
+ JDya4M/kWtxCuR7hsuQM/Z+OCq/ST/9a4Ngctd5/r40aeEIm1A+RWx9RebLZO312Fu/AwZ0oQA
+ Nqg=
+X-IronPort-AV: E=Sophos;i="5.73,331,1583190000"; 
+   d="scan'208";a="24056417"
+Date: Wed, 29 Apr 2020 12:02:59 +0200
+From: "Richard Leitner" <richard.leitner@skidata.com>
+To: robert.berger.oe.devel <robert.berger.oe.devel@gmail.com>
+CC: <openembedded-devel@lists.openembedded.org>, Robert Berger
+	<robert.berger@reliableembeddedsystems.com>
+Subject: Re: [meta-java] host gcc-9, icetea-7 gcc-9 but how older gcc versions?
+Message-ID: <20200429100259.GA249641@pcleri>
+References: <7946cd8c-4a94-5e5a-7bdc-64963af21006@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <7946cd8c-4a94-5e5a-7bdc-64963af21006@gmail.com>
+Return-Path: richard.leitner@skidata.com
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+ sdex5srv.skidata.net (192.168.111.83)
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-The Y2038 changes broke the build for older 32bit devices using
-older kernels.
+Hi Robert,
+sorry for the delay.
 
-As seen on: https://sourceware.org/glibc/wiki/Y2038ProofnessDesign
+I pushed the "g0hl1n/jdk8-fix" branch to the meta-java git repository.
+It is a temporary test branch and it should fix the GCC version
+dependencies (as long as you have GCC >= v6).
 
-Re-use the same fix applied for tslib as of commit
-id 9201611 tslib: Fix build with 4.x kernel headers
+It would be great if you could do a quick test and give me feedback ;-)
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- .../zaurusd/zaurusd/64bit_time_t.patch        | 46 +++++++++++++++++++
- recipes-bsp/zaurusd/zaurusd_git.bb            |  5 +-
- 2 files changed, 49 insertions(+), 2 deletions(-)
- create mode 100644 recipes-bsp/zaurusd/zaurusd/64bit_time_t.patch
+thanks & regards;rl
 
-diff --git a/recipes-bsp/zaurusd/zaurusd/64bit_time_t.patch b/recipes-bsp/zaurusd/zaurusd/64bit_time_t.patch
-new file mode 100644
-index 0000000..a12c7bb
---- /dev/null
-+++ b/recipes-bsp/zaurusd/zaurusd/64bit_time_t.patch
-@@ -0,0 +1,46 @@
-+From e5bb568619c22d701e8fcd705563acbf7885f735 Mon Sep 17 00:00:00 2001
-+From: Andrea Adami <andrea.adami@gmail.com>
-+Date: Tue, 28 Apr 2020 21:21:29 +0200
-+Subject: [PATCH] tskeys.c: fix build with kernels < 4.16 and newer libc
-+ headers
-+
-+The Y2038 changes broke the build for legacy 32bit devices using
-+older kernels.
-+
-+Upgrade the recipe to cope with the 64-bit time changes introduced in 4.16
-+
-+Fix:
-+
-+ tskeys.c: In function 'press_key':
-+ tskeys.c:141:4: error: 'struct input_event' has no member named 'time'
-+   141 |  ev.time.tv_sec = time(0);
-+       |    ^
-+ tskeys.c:142:4: error: 'struct input_event' has no member named 'time'
-+   142 |  ev.time.tv_usec = 0;
-+       |    ^
-+
-+
-+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-+---
-+ apps/tskeys/tskeys.c | 5 +++++
-+ 1 file changed, 5 insertions(+)
-+
-+diff --git a/apps/tskeys/tskeys.c b/apps/tskeys/tskeys.c
-+index 264dfb7..0020012 100644
-+--- a/apps/tskeys/tskeys.c
-++++ b/apps/tskeys/tskeys.c
-+@@ -21,6 +21,11 @@
-+ 
-+ #define MAX_OFFSCREEN_KEYS  20
-+ 
-++#ifndef input_event_sec
-++#define input_event_sec time.tv_sec
-++#define input_event_usec time.tv_usec
-++#endif
-++
-+ struct rectangle {
-+ 	int16_t x1;
-+ 	int16_t y1;
-+-- 
-+2.17.1
-+
-diff --git a/recipes-bsp/zaurusd/zaurusd_git.bb b/recipes-bsp/zaurusd/zaurusd_git.bb
-index d69805b..663ef1b 100644
---- a/recipes-bsp/zaurusd/zaurusd_git.bb
-+++ b/recipes-bsp/zaurusd/zaurusd_git.bb
-@@ -24,8 +24,9 @@ SRC_URI = "git://git.yoctoproject.org/${BPN} \
-            file://01-check-toggle-portait \
-            file://use-ts-symlink-instead-of-hardcoding.diff \
-            file://0001-zaurusd-add-support-for-collie.patch \
--           file://allow-newer-tslib.patch"
--
-+           file://allow-newer-tslib.patch \
-+           file://64bit_time_t.patch \
-+"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.17.1
-
+On Fri, Mar 20, 2020 at 06:53:17PM +0200, robert.berger.oe.devel wrote:
+> Hi,
+> 
+> I tried to add support for a host gcc-9 and suggested this patch[1]
+> 
+> [1] https://github.com/RobertBerger/meta-java/commit/898a0ae33c9102387aae2e3427a007e3935e663e
+> 
+> and, as per your suggestion, since it restricts the host compiler to >= gcc9
+> I added "-Wno-unknown-warning".
+> 
+> https://github.com/RobertBerger/meta-java/commit/3d8ae5afb639ec7abcc48f15c74b42b373863c57
+> 
+> ... but it does not build:
+> 
+> https://pastebin.com/B1nxHcPH
+> 
+> cc1plus: error: unrecognized command line option ‘-Wno-unknown-warning’
+> [-Werror]
+> 
+> That's my host gcc:
+> 
+> pokyuser@3a469e7032d9:/workdir$ gcc --version
+> gcc (Ubuntu 9.2.1-17ubuntu1~16.04) 9.2.1 20191102
+> Copyright (C) 2019 Free Software Foundation, Inc.
+> This is free software; see the source for copying conditions.  There is NO
+> warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+> 
+> pokyuser@3a469e7032d9:/workdir$
+> 
+> Please advise.
+> 
+> Regards,
+> 
+> Robert
