@@ -1,78 +1,104 @@
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web10.1891.1588224718139539187
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web12.5816.1588249666614338030
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Apr 2020 22:31:58 -0700
+ Thu, 30 Apr 2020 05:27:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=LL+YH3cf;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id r14so2373899pfg.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Apr 2020 22:31:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=m9fQmpvZzSUZo6MKMCj4uX3Vyr0Ec+z5CyU4yZNJ9PU=;
-        b=LL+YH3cfmIPE/0LcFF8cJ9ZOa+HbP8nke7PmK9tdciqPO2LpKKXclo8ri8+a2/ehXm
-         ts/HexncA6Qa9lk+LJGqtdYfKnFCNfWQUAnhyWVBUdPHlfuG8ZyVFL9Fg5g4svXxfTOW
-         TAPwjnWvCW0I74yG/7IMnlre0v+3y1XCFTdB4an44Pg8/aToJTXOYKmJnikpoKKweMEJ
-         uKBf9DxhTizKXlOSdkd6QSi7A8jVcOJV0cWWt5YUp8FFx34GF7Q179ldxzuB/ixK4cHo
-         KmAYuVYz72Q9j/sTd0tGL7p9ITU6v9YUpZ5EWz9hmI/MAUMYw6IBVPkY7Ui+FvFfOPkS
-         hYug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=m9fQmpvZzSUZo6MKMCj4uX3Vyr0Ec+z5CyU4yZNJ9PU=;
-        b=EB+LOeuHTsn+KWOSVGT2OeiQoR0MsBWEdVrfzLKnpljbIBsNQ9K0+mS5uGsWZB4+t6
-         WOoyrKxgb4D0HrkgT/FIB81r78LgWIFoPaKUZgZiHBxfxtpIz0aFp21ZMl/gUnUyyEhF
-         30ND8Hix/g/djVXmNhk5y5htAfx/ywq744clWBxHba5e02C89+PkVpVB6xJ29N7CqKhr
-         pjfN9uJhpvEgpXGDAyv5SH40wMoJsRfc06Myjr69yGndWkA9z/RUb+0siQuowtZJewtc
-         0odqzzEtSYAyIL8hiDz8St7QGgvBTRmwpTNhXWGntYKWT6ox0pZFNgqgDazE74BjeZc3
-         dTRw==
-X-Gm-Message-State: AGi0PubQl4RAEOMb7A5PP/CqRTBfWvpfx6l4qw1t8ihkzRrt1JfOGSHF
-	oFGwMC1hMTEAS5q1XG2wnDnYSOFDnGA=
-X-Google-Smtp-Source: APiQypJR3Hs1E3DQgwzGIDalRYIfcg7qeMZZAhrMVJEC+GsAQi+e4E6aqo8StJCMPCwH1fkKSflUGA==
-X-Received: by 2002:a63:141:: with SMTP id 62mr1756913pgb.101.1588224717387;
-        Wed, 29 Apr 2020 22:31:57 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e11c])
-        by smtp.gmail.com with ESMTPSA id v26sm2418780pfe.121.2020.04.29.22.31.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Apr 2020 22:31:56 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 6/6] libnma: Fix build on riscv32
-Date: Wed, 29 Apr 2020 22:31:49 -0700
-Message-Id: <20200430053149.226494-6-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200430053149.226494-1-raj.khem@gmail.com>
-References: <20200430053149.226494-1-raj.khem@gmail.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: mingli.yu@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 03UCRDUE020270
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2020 05:27:35 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+ 14.3.487.0; Thu, 30 Apr 2020 05:27:09 -0700
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] nss: enable uint128 support on mips64
+Date: Thu, 30 Apr 2020 20:27:08 +0800
+Message-ID: <1588249628-347980-1-git-send-email-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Disable vapi which needs introspection
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Fix below build error:
+| verified/kremlin/kremlib/dist/minimal/FStar_UInt128.h:22:1: error: 'FStar_UInt128___proj__Mkuint128__item__low' declared 'static' but never defined [-Werror=unused-function]
+|   22 | FStar_UInt128___proj__Mkuint128__item__low(FStar_UInt128_uint128 projectee);
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-gnome/recipes-connectivity/libnma/libnma_1.8.28.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../nss/nss/0001-Enable-uint128-on-mips64.patch    | 48 ++++++++++++++++++++++
+ meta-oe/recipes-support/nss/nss_3.51.1.bb          |  1 +
+ 2 files changed, 49 insertions(+)
+ create mode 100644 meta-oe/recipes-support/nss/nss/0001-Enable-uint128-on-mips64.patch
 
-diff --git a/meta-gnome/recipes-connectivity/libnma/libnma_1.8.28.bb b/meta-gnome/recipes-connectivity/libnma/libnma_1.8.28.bb
-index 8cb0bbc857..3b1698e72e 100644
---- a/meta-gnome/recipes-connectivity/libnma/libnma_1.8.28.bb
-+++ b/meta-gnome/recipes-connectivity/libnma/libnma_1.8.28.bb
-@@ -18,8 +18,9 @@ PACKAGECONFIG[gcr] = "-Dgcr=true,-Dgcr=false,gcr"
- PACKAGECONFIG[iso_codes] = "-Diso_codes=true,-Diso_codes=false,iso-codes,iso-codes"
- PACKAGECONFIG[mobile_broadband_provider_info] = "-Dmobile_broadband_provider_info=true,-Dmobile_broadband_provider_info=false,mobile-broadband-provider-info,mobile-broadband-provider-info"
+diff --git a/meta-oe/recipes-support/nss/nss/0001-Enable-uint128-on-mips64.patch b/meta-oe/recipes-support/nss/nss/0001-Enable-uint128-on-mips64.patch
+new file mode 100644
+index 0000000..90ec379
+--- /dev/null
++++ b/meta-oe/recipes-support/nss/nss/0001-Enable-uint128-on-mips64.patch
+@@ -0,0 +1,48 @@
++From 8cf7afb5417e23cd3ebf8141239bf020f5dd2ac8 Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Thu, 30 Apr 2020 06:56:09 +0000
++Subject: [PATCH] Enable uint128 on mips64
++
++Fix below error:
++| verified/kremlin/kremlib/dist/minimal/FStar_UInt128.h:22:1: error: 'FStar_UInt128___proj__Mkuint128__item__low' declared 'static' but never defined [-Werror=unused-function]
++|   22 | FStar_UInt128___proj__Mkuint128__item__low(FStar_UInt128_uint128 projectee);
++
++Upstream-Status: Pending
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ .../freebl/verified/kremlin/include/kremlin/internal/types.h   | 3 ++-
++ .../kremlin/kremlib/dist/minimal/fstar_uint128_gcc64.h         | 3 ++-
++ 2 files changed, 4 insertions(+), 2 deletions(-)
++
++diff --git a/nss/lib/freebl/verified/kremlin/include/kremlin/internal/types.h b/nss/lib/freebl/verified/kremlin/include/kremlin/internal/types.h
++index 801e78f..cdac61e 100644
++--- a/nss/lib/freebl/verified/kremlin/include/kremlin/internal/types.h
+++++ b/nss/lib/freebl/verified/kremlin/include/kremlin/internal/types.h
++@@ -57,7 +57,8 @@ typedef const char *Prims_string;
++ typedef __m128i FStar_UInt128_uint128;
++ #elif !defined(KRML_VERIFIED_UINT128) && !defined(_MSC_VER) && \
++     (defined(__x86_64__) || defined(__x86_64) || defined(__aarch64__) || \
++-     (defined(__riscv) && __riscv_xlen == 64))
+++     (defined(__riscv) && __riscv_xlen == 64) || \
+++     defined(__mips64))
++ typedef unsigned __int128 FStar_UInt128_uint128;
++ #else
++ typedef struct FStar_UInt128_uint128_s {
++diff --git a/nss/lib/freebl/verified/kremlin/kremlib/dist/minimal/fstar_uint128_gcc64.h b/nss/lib/freebl/verified/kremlin/kremlib/dist/minimal/fstar_uint128_gcc64.h
++index f38fda3..7ca67d2 100644
++--- a/nss/lib/freebl/verified/kremlin/kremlib/dist/minimal/fstar_uint128_gcc64.h
+++++ b/nss/lib/freebl/verified/kremlin/kremlib/dist/minimal/fstar_uint128_gcc64.h
++@@ -26,7 +26,8 @@
++ #include <stdint.h>
++ #if !defined(KRML_VERIFIED_UINT128) && !defined(_MSC_VER) && \
++     (defined(__x86_64__) || defined(__x86_64) || defined(__aarch64__) || \
++-     (defined(__riscv) && __riscv_xlen == 64))
+++     (defined(__riscv) && __riscv_xlen == 64) || \
+++     defined(__mips64))
++ 
++ /* GCC + using native unsigned __int128 support */
++ 
++-- 
++2.24.1
++
+diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+index 0011240..fba80ce 100644
+--- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
++++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+@@ -33,6 +33,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
+            file://nss-fix-nsinstall-build.patch \
+            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
+            file://riscv.patch \
++           file://0001-Enable-uint128-on-mips64.patch \
+            "
  
--# go introspection is not supported for mipsn32, but vapi needs it
-+# go introspection is not supported for mipsn32/riscv32, but vapi needs it
- #
- EXTRA_OEMESON_mipsarchn32_append = " -Dvapi=false"
-+EXTRA_OEMESON_riscv32_append = " -Dvapi=false"
- 
- GTKDOC_MESON_OPTION = "gtk_doc"
+ SRC_URI[md5sum] = "6acaf1ddff69306ae30a908881c6f233"
 -- 
-2.26.2
+2.7.4
 
