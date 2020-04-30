@@ -1,82 +1,75 @@
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.web10.1720.1588274838967055561
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+ by mx.groups.io with SMTP id smtpd.web12.661.1588281022953868887
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Apr 2020 12:27:19 -0700
+ Thu, 30 Apr 2020 14:10:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=QyIXjKrN;
- spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: robert.berger.oe.devel@gmail.com)
-Received: by mail-wr1-f54.google.com with SMTP id o27so3216199wra.12
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2020 12:27:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=6k/o3yRc0C3M4RGDiB3E+QXR/FK5MWIRocnE0NKXpzM=;
-        b=QyIXjKrN+ZbiwbJckgZmYrVBJT0Q2WgniiADktDRrLuLxL2zg/qs2lotmOJHXgDPwu
-         xS2aY3ZL6BJWDwfTdRxA5mm/nDloYsCr3XWBglxSDop96PydwGRi8XpG88uhOYpARBdO
-         lrcEhy5xPkejYV0xjO11+84krRXq01i9DO9OGzhEWFQwptcbr+5Bf0zO1keVmb1EK+0j
-         WRiODEHBmOFWdwgFA0Qh7FdGbeno2qLJUGHqsbG5WOHLdWfS5Foy3p1xmzX+dZpx/Yk/
-         AirhHOFbgR+3QmylV96UCQnugcslM8w0HYJmIqA04T4vNLyAK3aaZRKlXxTPfjM5C2v8
-         IiQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=6k/o3yRc0C3M4RGDiB3E+QXR/FK5MWIRocnE0NKXpzM=;
-        b=OcxK2rko7vaAHeIMifJGISEt5pwLJeEEMtdsyp1oLkWAF8aQnVOHkE5rEoovl1OFVA
-         hTnpGnIQ/I64Q4EfV7tgdvyR2MKRYafgFNtcpMWn0KbMcG2BLxtvgUiEVmoxsdSCwm+O
-         kHfWo/7Hnr+6tiUEQL8wrjWrqSWltJ/n51Rf7uSON60PrFO1o+ozb+1hCHvzzoDJ8j6V
-         89E5ILdybzK7qEb4tek8Ug2Xec0JExHtOur8o1Sj63LJ9AOV9pj1/9rPciXnOPUeK2nW
-         nz/5nFOOjtE5VByLwz551h5sYji/5YTWSsmkywTxIkC1b2y1h3B0spqz5oFsEJybZm0B
-         /VWA==
-X-Gm-Message-State: AGi0PuYzDPC42oLeEweKyP60JUlt5FAG9uBTeJFNCOfidIx2ZHL8anH5
-	WrtJR92jyfQh38sUTRioD70pbyqo
-X-Google-Smtp-Source: APiQypKOi5GqgFBaMndXIAUDX11rLGl970Qcm8kAuQLZrdnXhrtg1XKgTB9dOrUdNqnc470Ee7nLyQ==
-X-Received: by 2002:adf:ab18:: with SMTP id q24mr119812wrc.214.1588274834974;
-        Thu, 30 Apr 2020 12:27:14 -0700 (PDT)
-Return-Path: <robert.berger.oe.devel@gmail.com>
-Received: from [192.168.42.52] (ppp-94-65-43-120.home.otenet.gr. [94.65.43.120])
-        by smtp.gmail.com with ESMTPSA id o3sm996207wru.68.2020.04.30.12.27.13
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Apr 2020 12:27:14 -0700 (PDT)
-Subject: Re: [meta-java] host gcc-9, icetea-7 gcc-9 but how older gcc versions?
-To: Robert Berger <oecore.mailinglist@gmail.com>,
- Richard Leitner <richard.leitner@skidata.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <7946cd8c-4a94-5e5a-7bdc-64963af21006@gmail.com>
- <20200429100259.GA249641@pcleri>
- <92bb1785-280d-ba90-9366-e2a7793d36d5@gmail.com>
- <20200429130233.GB249641@pcleri>
- <1550debd-8a7f-9a1a-0e12-9566b69405b4@gmail.com>
-From: "Robert Berger" <robert.berger.oe.devel@gmail.com>
-Message-ID: <cbc9dc58-61a7-8133-698c-6570f85f85f6@gmail.com>
-Date: Thu, 30 Apr 2020 22:27:12 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ dkim=pass header.i=@skidata.com header.s=selector1 header.b=lqkkHrZX;
+ spf=pass (domain: skidata.com, ip: 91.230.2.91, mailfrom: prvs=3828d1ea9=richard.leitner@skidata.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+  t=1588281023; x=1619817023;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=djzZ3RsS/ltciyECxc1A7tL+PCmqmw363hQ59gr2DTE=;
+  b=lqkkHrZX00GYXUeMO59mozjCRNHYkhUi9M83SFOURheatO/LM3ZO+55z
+   IE2zv5exfAAqITumn0Bfp7N+yRbl43H3l24M3bcRxTOaG0xGF0IaR489H
+   nQotNQgdjY5I0AO/bNYUrlh9oDvsbwIhCnxpZQCmrhlCU95s8viivrAej
+   znO8zzGn1t6OpMLz80pdATc+1VEjThHvwnJzupaLQh96NHaOX20TEg63u
+   yqxE0FHAs9G49VZuV+s2fRSFxCxacO8PaO55kqU6YQ8z6M37ppSoGZa45
+   j017dXpwJ3xi4VY50tK+aaCQYnniNFzJXqY2DbhnNkEOhWFskNmgPPCSz
+   g==;
+IronPort-SDR: dnQv9mz4YZ7v/n6KFMg4DadCoip2K0WvRMNbp2vpWdxsJdh4wbBJ+EEyyCy+DJ/6JhvjR3iZQz
+ 2O24MPlEkKaPj9EJXl6om1SokwSZvlvE5ntldxGxUFV1NsYipPmzz77+mXAC7F6gnWoQmFiJT+
+ 2ltQ5U6hGC4FgdXlyQPe4BI1odL+rne+dahxiZA0qFd1pBqmbtJcTVA/L2e47H42dTyWG4Qz/Y
+ /bENSrk3Kk7iNk4NNUCYLxyDkvxhjDJxezpa0X+d9vKBYHB91esiAI6gxXRnjbYqsG4CGtilIH
+ c/Y=
+X-IronPort-AV: E=Sophos;i="5.73,337,1583190000"; 
+   d="scan'208";a="2573306"
+Date: Thu, 30 Apr 2020 23:10:19 +0200
+From: "Richard Leitner" <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <jacob.kroon@gmail.com>
+Subject: Re: [oe] [PATCH][meta-java 3/3] openjdk-8: Fix building with GCC 10
+Message-ID: <20200430211019.GA410632@pcleri>
+References: <20200430131556.2150334-1-jacob.kroon@gmail.com>
+ <20200430131556.2150334-3-jacob.kroon@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1550debd-8a7f-9a1a-0e12-9566b69405b4@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <20200430131556.2150334-3-jacob.kroon@gmail.com>
+Return-Path: richard.leitner@skidata.com
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+ sdex5srv.skidata.net (192.168.111.83)
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Hi,
+Hi Jacob,
+thanks for the patch!
 
-I started to have a look into the icetea-native issue again and hope I 
-will be able to come up with some patch, which fixes it host-gcc dependent.
+On Thu, Apr 30, 2020 at 03:15:56PM +0200, Jacob Kroon wrote:
+> Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
+> ---
+>  recipes-core/openjdk/openjdk-8-common.inc | 4 ++++
+>  1 file changed, 4 insertions(+)
+> 
+> diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+> index d8b30b8..5228338 100644
+> --- a/recipes-core/openjdk/openjdk-8-common.inc
+> +++ b/recipes-core/openjdk/openjdk-8-common.inc
+> @@ -176,6 +176,10 @@ FLAGS_GCC6 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+>  FLAGS_GCC7 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+>  FLAGS_GCC8 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+>  FLAGS_GCC9 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+> +FLAGS_GCC10 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+> +
+> +# GCC 10 defaults to -fno-common, but OpenJDK 8 is not ready for this.
+> +FLAGS_GCC10_append = " -fcommon"
 
-The idea is to use a hacked version of this[1] and add it to [2].
+Does setting "-fcommon" also work for GCC version > 5 and < 10? In
+icedtea7-native you've appended it to CFLAGS it w/o GCC version.
 
-Like this I should be able to retrieve the host gcc version dynamically 
-and be able to add and remove CFLAGS e.g. depending on the major version 
-of the host gcc.
+Background of the question is that I'm currently planning to drop
+support for GCC versions < 6 in the recipes. If done so, we currently
+have no need for version specific flags. Just want to check if that
+would be an exception. Thanks.
 
-Regards,
-
-Robert
-
-[1] 
-http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta/lib/oe/utils.py?h=dunfell#n377
-
-[2] 
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/tree/classes/openjdk-build-helper.bbclass?h=g0hl1n/jdk8-fix
+regards;rl
