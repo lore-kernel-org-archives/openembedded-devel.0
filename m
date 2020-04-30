@@ -1,177 +1,109 @@
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web11.1898.1588224716043314945
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com [209.85.215.196])
+ by mx.groups.io with SMTP id smtpd.web11.1899.1588224717165498306
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Apr 2020 22:31:56 -0700
+ Wed, 29 Apr 2020 22:31:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=LCSX/z2j;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id d184so2366586pfd.4
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Apr 2020 22:31:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=dqgzHKfW;
+ spf=pass (domain: gmail.com, ip: 209.85.215.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f196.google.com with SMTP id d17so2248447pgo.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Apr 2020 22:31:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=+r08S7Zx3SRc7tTFkeuEgw08BYA13PS7K1fpnlvnATY=;
-        b=LCSX/z2jiMYow0McPQ2Bkh+fmjB9nZsxtgmJ1qgDPTX+2dKCeo+M+UtC8EAPKJXO7a
-         FoVYpZkYlR9HASPYK9lsoBc0akXktErTCJG5f+droE18oZ+WGsEtdcXqg7CAwumbsxEC
-         p/ZXr72ge9kP8X+30ciAq5HICPUbayKIPqmgDNtSoWavKs+VFvxy1tgstQR+m4lFtbpk
-         YyMysxXomH449iLF0HZn7gF/m/XECDza+wxQkdW/YTnT9MkIRfTbSrCg/ygpdhjFdgsn
-         XiZLRy6LP9gOgK7BE+iMrtL8GZlnz4bhmkuUDgGdCDf3jGRhmS4Nw2w2J4coZAANv8p9
-         /oyA==
+        bh=EfF8eOtO7JEWTVRFFjgw8n92gR2WuceRkIo2nOyYbcc=;
+        b=dqgzHKfWYGwK7DU7pLWpa/UV4EQgu++FURcXu5OljdTtALULS+WYaCkFs93N8vZ1xV
+         YaIiMI8+tK5qCxQb5gzCFXI3AgyZojDAIcAL5k+lHhOdP1YPsnd/cxIfZpi5T3zUUWh4
+         93cDxmoXAK2kMWbzrcp2oceucXeLCkm4sdDeU8+3ZNb5yLnj+X0OG0blmEhY+PNx1tuk
+         3erJHZRQjANsHJ+xke5c5Sd2m7Itte/94E9RZZDk/3+SQ1zaPTq2SLLvH4I5lluZPl5v
+         VL1lM2j1fULjQpsR7cbkNhFR1ELPGyR938xpjCyX5GOMYhQqavfN5+4vgNRTrDBPZEba
+         s/XA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=+r08S7Zx3SRc7tTFkeuEgw08BYA13PS7K1fpnlvnATY=;
-        b=iplxN2J8nI8Yya8Ao0U1Iyx34ep1MM5ZF0T3V+VuxYqk/APTSPxb4nOz8h/tkKSJVp
-         gniXmlXwX1bcEnIYzcYeghYKWI/n2MJ6/icqcnK5k6h2yz5o3jTWu59oKUzr28CEzpTU
-         sC62q3XKpvoJMgCfaXXQVzLdDJTNE0OzGW/HGRKN9zD/snICIt3JP5ttzf6EAFwWn+Ce
-         FLXWUdMcdQopc3/yWbuF2JZogtN0USryJrMQg6lH3JYJRWIx89Eyhhjxsj7Cyly6w2jB
-         PX1kyFM5OjcT104CSgeogjjCbii0ZsjF2CsCvZGf5L3LGHEntiDcq2gprpEym8E+FOAM
-         GDfw==
-X-Gm-Message-State: AGi0PuYa2glp0rIh8lF2mrxgne6apXFg7AaV6G/6uGW1VPtlzBhYsAs8
-	qr3pLjng6jUhZ1IZl7HBBCgsWlqHaus=
-X-Google-Smtp-Source: APiQypKYfqPEmTVJCD9ZPrCLlq0p0XaIgOkpVEb7ck7EFQen9rD/IbPRNQhkMDTCNzHDYKnFMe88ow==
-X-Received: by 2002:aa7:84c5:: with SMTP id x5mr1837618pfn.277.1588224715116;
-        Wed, 29 Apr 2020 22:31:55 -0700 (PDT)
+        bh=EfF8eOtO7JEWTVRFFjgw8n92gR2WuceRkIo2nOyYbcc=;
+        b=O6BD5mgOBOCCJSQ8jIlhDDxYpo5z+dj/yjq6u9kR/qKAYcczycg0R4xgVN2M8BNUN4
+         fYowyMn2MhPkbv05LrrgkJ2pRtUYAYBsofH8uVK/6SLcwN9g0PPKG0ist4qQm9SzkVF8
+         TaTLG8Pg7QTcE0sm4yiA70zxla6gwNmvKyP6iaiK6zg3qUqCL6UA6TkBWJkMHZLqbEKh
+         1YWOFyC3FXdOsORKM1hpI8ldEOgkTm/z+gIU8sjAdZqnbpF1trBrlfrc5khtHJmu2Lcp
+         qoQ/0p9uzmebua/YaWrYc6r8tpg3pj7Fb1WUAspmj0IhfTEZCE9fy8d3+nQVKBe/+lIS
+         VEhA==
+X-Gm-Message-State: AGi0Pubtqw+5Gr2CwcCFzCDw1sbSNzX6HgpRQe6byIX4orVAGVUMfU1Y
+	bMv84hA7VMUD5vKdg5DoKq6p8mFXYaI=
+X-Google-Smtp-Source: APiQypLt2jFx7AhYPHj0IOqeCjtC/mEiYVZOqd7Iqt0rlzCwgI1+fUwwbZzAwiGGsM++v2Ti/0Bs7w==
+X-Received: by 2002:aa7:8b12:: with SMTP id f18mr1850613pfd.81.1588224716297;
+        Wed, 29 Apr 2020 22:31:56 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e11c])
-        by smtp.gmail.com with ESMTPSA id v26sm2418780pfe.121.2020.04.29.22.31.54
+        by smtp.gmail.com with ESMTPSA id v26sm2418780pfe.121.2020.04.29.22.31.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Apr 2020 22:31:54 -0700 (PDT)
+        Wed, 29 Apr 2020 22:31:55 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 4/6] python3-grpcio: Fix build with riscv32
-Date: Wed, 29 Apr 2020 22:31:47 -0700
-Message-Id: <20200430053149.226494-4-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 5/6] waf: Add cross answers for riscv32
+Date: Wed, 29 Apr 2020 22:31:48 -0700
+Message-Id: <20200430053149.226494-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200430053149.226494-1-raj.khem@gmail.com>
 References: <20200430053149.226494-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Ensure libseil-cpp can build for rv32 and boringssl riscv patch
-considers rv32 separate from rv64
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Fix-build-on-riscv32.patch           | 65 +++++++++++++++++++
- .../python3-grpcio/riscv64_support.patch      | 13 ++--
- .../python/python3-grpcio_1.27.1.bb           |  1 +
- 3 files changed, 75 insertions(+), 4 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-grpcio/0001-Fix-build-on-riscv32.patch
+ .../cross-answers-riscv32.txt                 | 41 +++++++++++++++++++
+ 1 file changed, 41 insertions(+)
+ create mode 100644 meta-networking/files/waf-cross-answers/cross-answers-riscv32.txt
 
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio/0001-Fix-build-on-riscv32.patch b/meta-python/recipes-devtools/python/python3-grpcio/0001-Fix-build-on-riscv32.patch
+diff --git a/meta-networking/files/waf-cross-answers/cross-answers-riscv32.txt b/meta-networking/files/waf-cross-answers/cross-answers-riscv32.txt
 new file mode 100644
-index 0000000000..920fc1169d
+index 0000000000..759afe8f92
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-grpcio/0001-Fix-build-on-riscv32.patch
-@@ -0,0 +1,65 @@
-+From 04e28fdda03b545a0f7b446a784ec2fa7249cbb8 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 29 Apr 2020 15:37:40 -0700
-+Subject: [PATCH] Fix build on riscv32
-+
-+Define __NR_mmap in terms of __NR_mmap2 and __NR_futex interms of
-+__NR_futex_time64 for rv32, since there calls dont exist for rv32
-+
-+Also recognise rv32 as a new 32bit platform
-+
-+Upstream-Status: Submitted [https://github.com/abseil/abseil-cpp/pull/675]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ absl/base/internal/direct_mmap.h        | 5 +++++
-+ absl/base/internal/spinlock_linux.inc   | 4 ++++
-+ absl/synchronization/internal/waiter.cc | 4 ++++
-+ 3 files changed, 13 insertions(+)
-+
-+--- a/third_party/abseil-cpp/absl/base/internal/direct_mmap.h
-++++ b/third_party/abseil-cpp/absl/base/internal/direct_mmap.h
-+@@ -26,6 +26,10 @@
-+ 
-+ #ifdef __linux__
-+ 
-++#if !defined(__NR_mmap) && defined(__riscv) && __riscv_xlen == 32
-++# define __NR_mmap __NR_mmap2
-++#endif
-++
-+ #include <sys/types.h>
-+ #ifdef __BIONIC__
-+ #include <sys/syscall.h>
-+@@ -72,6 +76,7 @@ inline void* DirectMmap(void* start, siz
-+ #if defined(__i386__) || defined(__ARM_ARCH_3__) || defined(__ARM_EABI__) || \
-+     (defined(__mips__) && _MIPS_SIM == _MIPS_SIM_ABI32) ||                   \
-+     (defined(__PPC__) && !defined(__PPC64__)) ||                             \
-++    (defined(__riscv) && __riscv_xlen == 32)  ||                             \
-+     (defined(__s390__) && !defined(__s390x__))
-+   // On these architectures, implement mmap with mmap2.
-+   static int pagesize = 0;
-+--- a/third_party/abseil-cpp/absl/base/internal/spinlock_linux.inc
-++++ b/third_party/abseil-cpp/absl/base/internal/spinlock_linux.inc
-+@@ -14,6 +14,10 @@
-+ //
-+ // This file is a Linux-specific part of spinlock_wait.cc
-+ 
-++#if !defined(__NR_futex) && defined(__riscv) && __riscv_xlen == 32
-++# define __NR_futex __NR_futex_time64
-++#endif
-++
-+ #include <linux/futex.h>
-+ #include <sys/syscall.h>
-+ #include <unistd.h>
-+--- a/third_party/abseil-cpp/absl/synchronization/internal/waiter.cc
-++++ b/third_party/abseil-cpp/absl/synchronization/internal/waiter.cc
-+@@ -24,6 +24,10 @@
-+ #include <unistd.h>
-+ #endif
-+ 
-++#if !defined(__NR_futex) && defined(__riscv) && __riscv_xlen == 32
-++# define __NR_futex __NR_futex_time64
-++#endif
-++
-+ #ifdef __linux__
-+ #include <linux/futex.h>
-+ #include <sys/syscall.h>
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio/riscv64_support.patch b/meta-python/recipes-devtools/python/python3-grpcio/riscv64_support.patch
-index b55d50bde5..8c9ffa21b7 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio/riscv64_support.patch
-+++ b/meta-python/recipes-devtools/python/python3-grpcio/riscv64_support.patch
-@@ -4,13 +4,18 @@ Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- --- a/third_party/boringssl/include/openssl/base.h
- +++ b/third_party/boringssl/include/openssl/base.h
--@@ -108,6 +108,9 @@ extern "C" {
-+@@ -108,6 +108,14 @@ extern "C" {
-  #elif defined(__mips__) && defined(__LP64__)
-  #define OPENSSL_64_BIT
-  #define OPENSSL_MIPS64
--+#elif defined(__riscv) && defined(__riscv_xlen)
--+#define OPENSSL_64_BIT
--+#define OPENSSL_RISCV64
-++#elif defined(__riscv)
-++# if (__riscv_xlen == 64)
-++#  define OPENSSL_64_BIT
-++#  define OPENSSL_RISCV64
-++# elif(__riscv_xlen == 32)
-++#  define OPENSSL_32_BIT
-++#  define OPENSSL_RISCV32
-++# endif
-  #elif defined(__pnacl__)
-  #define OPENSSL_32_BIT
-  #define OPENSSL_PNACL
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb
-index 83d3671016..129bb35bcc 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb
-@@ -9,6 +9,7 @@ DEPENDS += "${PYTHON_PN}-protobuf"
- SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch"
- SRC_URI_append_class-target = " file://ppc-boringssl-support.patch \
-                                 file://riscv64_support.patch \
-+                                file://0001-Fix-build-on-riscv32.patch \
- "
- SRC_URI[md5sum] = "ccaf4e7eb4f031d926fb80035d193b98"
- SRC_URI[sha256sum] = "a899725d34769a498ecd3be154021c4368dd22bdc69473f6ec46779696f626c4"
++++ b/meta-networking/files/waf-cross-answers/cross-answers-riscv32.txt
+@@ -0,0 +1,41 @@
++Checking uname sysname type: "Linux"
++Checking uname version type: "# Wed May 20 10:34:39 UTC 2015"
++Checking simple C program: "hello world"
++rpath library support: OK
++-Wl,--version-script support: OK
++Checking getconf LFS_CFLAGS: NO
++Checking correct behavior of strtoll: NO
++Checking for working strptime: OK
++Checking for C99 vsnprintf: "1"
++Checking for HAVE_SHARED_MMAP: OK
++Checking for HAVE_MREMAP: OK
++Checking for HAVE_SECURE_MKSTEMP: OK
++Checking for HAVE_IFACE_GETIFADDRS: NO
++Checking for HAVE_IFACE_IFCONF: NO
++Checking for HAVE_IFACE_IFREQ: NO
++Checking for large file support without additional flags: NO
++Checking for -D_FILE_OFFSET_BITS=64: OK
++Checking for HAVE_INCOHERENT_MMAP: NO
++Checking value of NSIG: "65"
++Checking value of _NSIG: "65"
++Checking value of SIGRTMAX: "64"
++Checking value of SIGRTMIN: "34"
++Checking whether the WRFILE -keytab is supported: OK
++Checking for kernel change notify support: OK
++Checking for Linux kernel oplocks: OK
++Checking for kernel share modes: OK
++Checking whether POSIX capabilities are available: OK
++Checking if can we convert from CP850 to UCS-2LE: OK
++Checking if can we convert from UTF-8 to UCS-2LE: OK
++vfs_fileid checking for statfs() and struct statfs.f_fsid: OK
++Checking whether we can use Linux thread-specific credentials with 32-bit system calls: OK
++Checking whether fcntl locking is available: OK
++Checking for the maximum value of the 'time_t' type: NO
++Checking whether the realpath function allows a NULL argument: OK
++Checking for ftruncate extend: OK
++getcwd takes a NULL argument: OK
++Checking for small off_t: NO
++Checking whether blkcnt_t is 32 bit: NO
++Checking whether blkcnt_t is 64 bit: OK
++Checking whether fcntl lock supports open file description locks: OK
++Checking for a 64-bit host to support lmdb: NO
 -- 
 2.26.2
 
