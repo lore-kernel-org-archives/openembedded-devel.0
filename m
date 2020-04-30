@@ -1,40 +1,44 @@
 Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
- by mx.groups.io with SMTP id smtpd.web12.661.1588281022953868887
+ by mx.groups.io with SMTP id smtpd.web12.730.1588281235334192524
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Apr 2020 14:10:24 -0700
+ Thu, 30 Apr 2020 14:13:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@skidata.com header.s=selector1 header.b=lqkkHrZX;
+ dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=G/N9Sc9O;
  spf=pass (domain: skidata.com, ip: 91.230.2.91, mailfrom: prvs=3828d1ea9=richard.leitner@skidata.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-  t=1588281023; x=1619817023;
+  t=1588281235; x=1619817235;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=djzZ3RsS/ltciyECxc1A7tL+PCmqmw363hQ59gr2DTE=;
-  b=lqkkHrZX00GYXUeMO59mozjCRNHYkhUi9M83SFOURheatO/LM3ZO+55z
-   IE2zv5exfAAqITumn0Bfp7N+yRbl43H3l24M3bcRxTOaG0xGF0IaR489H
-   nQotNQgdjY5I0AO/bNYUrlh9oDvsbwIhCnxpZQCmrhlCU95s8viivrAej
-   znO8zzGn1t6OpMLz80pdATc+1VEjThHvwnJzupaLQh96NHaOX20TEg63u
-   yqxE0FHAs9G49VZuV+s2fRSFxCxacO8PaO55kqU6YQ8z6M37ppSoGZa45
-   j017dXpwJ3xi4VY50tK+aaCQYnniNFzJXqY2DbhnNkEOhWFskNmgPPCSz
-   g==;
-IronPort-SDR: dnQv9mz4YZ7v/n6KFMg4DadCoip2K0WvRMNbp2vpWdxsJdh4wbBJ+EEyyCy+DJ/6JhvjR3iZQz
- 2O24MPlEkKaPj9EJXl6om1SokwSZvlvE5ntldxGxUFV1NsYipPmzz77+mXAC7F6gnWoQmFiJT+
- 2ltQ5U6hGC4FgdXlyQPe4BI1odL+rne+dahxiZA0qFd1pBqmbtJcTVA/L2e47H42dTyWG4Qz/Y
- /bENSrk3Kk7iNk4NNUCYLxyDkvxhjDJxezpa0X+d9vKBYHB91esiAI6gxXRnjbYqsG4CGtilIH
- c/Y=
+  bh=QsoNCsvKAjJ6EuCXbE6FJCRT011YSwaLaZN61Q/UV+0=;
+  b=G/N9Sc9Okov1tpTMPx9JBhbui/Z3iIznObDpLDaPyAmUHKuCS0LIqaJY
+   oQq2lfRJ53HE5CyrRhJg7WTvkqRZ6kR54+ogx7k9i1ew01hwZEU0v2awu
+   KOQQ36acVZ514/cAPpadIEkKkaas8YcJP73Jg+gyF+aIxWfj5NhcfDjK8
+   41HAa2Bumj+YlV+9Ni9UmQ7RkmUh8Yucl67R6o7c+0YY9J8dsKmO8siAF
+   NAHH5pzZnNGGU14VPZ1F2FVNe5fnDGBAtfwpmV191yQ3UOOtg0iJCJwBm
+   Yv1+QFAy5HxJib8xbdkBCux7Jq5s1c1637G1/+rVjzXHrgrq3O6YCdfUL
+   Q==;
+IronPort-SDR: BhjrX2MjfY6zntEJZL9fWMZf5FD+B5fczJGe+AeHEvg1V8rNk4wU7tbPgjZr6lljehyz0SV+62
+ J+5Vua3GriIn4xulveKihEL/izixQw7T5SWfZyZ5RJDSWhODjidEkA/7d/HwBsVUTPbs/Py3EK
+ cdaUxV5QW3TuCBKxlzges+utAnGVXC3fZy5p7x4/Uq+whBDrH4ykuW6AxCMpch/Nfw3MVEmsv5
+ j9T+89zhuthvaGuEm2XAkX+aBI2oxRKnjAtbPXqlWIHlLa7DV1LwM5tCAwrkB4ZAIib4zW2WHH
+ Byc=
 X-IronPort-AV: E=Sophos;i="5.73,337,1583190000"; 
-   d="scan'208";a="2573306"
-Date: Thu, 30 Apr 2020 23:10:19 +0200
+   d="scan'208";a="2573307"
+Date: Thu, 30 Apr 2020 23:13:52 +0200
 From: "Richard Leitner" <richard.leitner@skidata.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <jacob.kroon@gmail.com>
-Subject: Re: [oe] [PATCH][meta-java 3/3] openjdk-8: Fix building with GCC 10
-Message-ID: <20200430211019.GA410632@pcleri>
-References: <20200430131556.2150334-1-jacob.kroon@gmail.com>
- <20200430131556.2150334-3-jacob.kroon@gmail.com>
+To: <oecore.mailinglist@gmail.com>
+CC: robert.berger.oe.devel <robert.berger.oe.devel@gmail.com>,
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java] host gcc-9, icetea-7 gcc-9 but how older gcc versions?
+Message-ID: <20200430211352.GB410632@pcleri>
+References: <7946cd8c-4a94-5e5a-7bdc-64963af21006@gmail.com>
+ <20200429100259.GA249641@pcleri>
+ <92bb1785-280d-ba90-9366-e2a7793d36d5@gmail.com>
+ <20200429130233.GB249641@pcleri>
+ <1550debd-8a7f-9a1a-0e12-9566b69405b4@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20200430131556.2150334-3-jacob.kroon@gmail.com>
+In-Reply-To: <1550debd-8a7f-9a1a-0e12-9566b69405b4@gmail.com>
 Return-Path: richard.leitner@skidata.com
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
@@ -42,34 +46,26 @@ X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-Hi Jacob,
-thanks for the patch!
-
-On Thu, Apr 30, 2020 at 03:15:56PM +0200, Jacob Kroon wrote:
-> Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
-> ---
->  recipes-core/openjdk/openjdk-8-common.inc | 4 ++++
->  1 file changed, 4 insertions(+)
+On Thu, Apr 30, 2020 at 06:43:46PM +0300, Robert Berger wrote:
+> Hi,
 > 
-> diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
-> index d8b30b8..5228338 100644
-> --- a/recipes-core/openjdk/openjdk-8-common.inc
-> +++ b/recipes-core/openjdk/openjdk-8-common.inc
-> @@ -176,6 +176,10 @@ FLAGS_GCC6 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
->  FLAGS_GCC7 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
->  FLAGS_GCC8 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
->  FLAGS_GCC9 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
-> +FLAGS_GCC10 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
-> +
-> +# GCC 10 defaults to -fno-common, but OpenJDK 8 is not ready for this.
-> +FLAGS_GCC10_append = " -fcommon"
+> Is this supposed to work with host gcc 9?
 
-Does setting "-fcommon" also work for GCC version > 5 and < 10? In
-icedtea7-native you've appended it to CFLAGS it w/o GCC version.
+Yes, for me it works with "gcc (GCC) 9.3.1 20200408 (Red Hat 9.3.1-2)"
 
-Background of the question is that I'm currently planning to drop
-support for GCC versions < 6 in the recipes. If done so, we currently
-have no need for version specific flags. Just want to check if that
-would be an exception. Thanks.
+> 
+> This was the first test I did and it bombed.
+> 
+> I used all upstream unmodified dunfell branches plus your branch.
+
+same did I on my Fedora box and it built and succeeded tests... That's
+strange.
+
+Have you a clean build?
 
 regards;rl
+
+> Regards,
+> 
+> Robert
+> 
