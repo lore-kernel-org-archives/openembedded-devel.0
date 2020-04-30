@@ -1,117 +1,82 @@
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.web12.9693.1588261431284455269
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+ by mx.groups.io with SMTP id smtpd.web10.1720.1588274838967055561
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Apr 2020 08:43:51 -0700
+ Thu, 30 Apr 2020 12:27:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gnrnD/j6;
- spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: oecore.mailinglist@gmail.com)
-Received: by mail-wr1-f43.google.com with SMTP id x18so7529802wrq.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2020 08:43:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=QyIXjKrN;
+ spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: robert.berger.oe.devel@gmail.com)
+Received: by mail-wr1-f54.google.com with SMTP id o27so3216199wra.12
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2020 12:27:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:cc:references:from:message-id:date:user-agent
          :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=YcutllWi+6eX+aibcUQVkpm02msHK3Dg0pVKP+fGFGA=;
-        b=gnrnD/j6XXI+KlmnRNA/Dlv+aHiu2Y2SZ5EqatDYUdt18sge4GB8XWfgzT7dMNDe33
-         rKI+yKBibkPK0t3vJ6awjZuQOTr5LEdjaBjf+3Fjtmr4dFCSOQhucZv4t1tJ9CakdlVg
-         0smq1N8U98s2OY+/xL0bnZ8LuJ4G101AYxdghgDRSjKG6eE9RH55IqfBmTGpVZIb9r2F
-         mp77kBEeGJPSgFSPpfXjxmSXQZvVa9ODaaisx3cMhgPgfI+w0lkjQi6eqT6Te6md+v0x
-         l3YAZWiWbLuh1yipjLpb+GyuQwyBcRETjInhEg3a3Ka4nJ8PXToSPMaI7zzWjwcidKY8
-         XJkw==
+        bh=6k/o3yRc0C3M4RGDiB3E+QXR/FK5MWIRocnE0NKXpzM=;
+        b=QyIXjKrN+ZbiwbJckgZmYrVBJT0Q2WgniiADktDRrLuLxL2zg/qs2lotmOJHXgDPwu
+         xS2aY3ZL6BJWDwfTdRxA5mm/nDloYsCr3XWBglxSDop96PydwGRi8XpG88uhOYpARBdO
+         lrcEhy5xPkejYV0xjO11+84krRXq01i9DO9OGzhEWFQwptcbr+5Bf0zO1keVmb1EK+0j
+         WRiODEHBmOFWdwgFA0Qh7FdGbeno2qLJUGHqsbG5WOHLdWfS5Foy3p1xmzX+dZpx/Yk/
+         AirhHOFbgR+3QmylV96UCQnugcslM8w0HYJmIqA04T4vNLyAK3aaZRKlXxTPfjM5C2v8
+         IiQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:cc:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=YcutllWi+6eX+aibcUQVkpm02msHK3Dg0pVKP+fGFGA=;
-        b=T9G6X1PGkekk7RrGWe8aASe9watKlsZpCQaJdcFLSqhU1sVYn1bna//LtYJ60d/sjU
-         Jp3lfiDr1zd4NAmbGp5jOf+1fwL/75pD196VWt+/LghIilAe3Qa7gdLNZAmHBHR0e4u5
-         pNLDZe+TkZMjYPDr3zR5l5qzIUMVJ4TdHFE9uuqUeRaVApPMCuizxgOcslhgpKJa5fqu
-         log2ODgTNN5L6xTP+KlMpQwradHJn6/me3n2+GmZaNcFvaY3JOzQSU42jnBFZDFnxJC9
-         f/lh7Bcogf8ij/Wf5lSQrBg9POO8kpMuMfuHYYDNiFjR5ESzQTIpGwwJYTkw556RTlMR
-         QpCQ==
-X-Gm-Message-State: AGi0PuZyLniZTs9wz1Vsr2CZIbMSCi8Kj5zBIeYi7FtnHIxPAQrSBXFk
-	cJ1MWKehWtiUGxUm9QnpQi6V5DBV
-X-Google-Smtp-Source: APiQypJPrTjc4gPTR5gqqxoKOsg1QNRVWETnNNyW+wIX7ScHF6hzAwNi52EjYnYY4v1I7Kryel7WFA==
-X-Received: by 2002:a5d:6ccb:: with SMTP id c11mr4729998wrc.416.1588261428459;
-        Thu, 30 Apr 2020 08:43:48 -0700 (PDT)
-Return-Path: <oecore.mailinglist@gmail.com>
+        bh=6k/o3yRc0C3M4RGDiB3E+QXR/FK5MWIRocnE0NKXpzM=;
+        b=OcxK2rko7vaAHeIMifJGISEt5pwLJeEEMtdsyp1oLkWAF8aQnVOHkE5rEoovl1OFVA
+         hTnpGnIQ/I64Q4EfV7tgdvyR2MKRYafgFNtcpMWn0KbMcG2BLxtvgUiEVmoxsdSCwm+O
+         kHfWo/7Hnr+6tiUEQL8wrjWrqSWltJ/n51Rf7uSON60PrFO1o+ozb+1hCHvzzoDJ8j6V
+         89E5ILdybzK7qEb4tek8Ug2Xec0JExHtOur8o1Sj63LJ9AOV9pj1/9rPciXnOPUeK2nW
+         nz/5nFOOjtE5VByLwz551h5sYji/5YTWSsmkywTxIkC1b2y1h3B0spqz5oFsEJybZm0B
+         /VWA==
+X-Gm-Message-State: AGi0PuYzDPC42oLeEweKyP60JUlt5FAG9uBTeJFNCOfidIx2ZHL8anH5
+	WrtJR92jyfQh38sUTRioD70pbyqo
+X-Google-Smtp-Source: APiQypKOi5GqgFBaMndXIAUDX11rLGl970Qcm8kAuQLZrdnXhrtg1XKgTB9dOrUdNqnc470Ee7nLyQ==
+X-Received: by 2002:adf:ab18:: with SMTP id q24mr119812wrc.214.1588274834974;
+        Thu, 30 Apr 2020 12:27:14 -0700 (PDT)
+Return-Path: <robert.berger.oe.devel@gmail.com>
 Received: from [192.168.42.52] (ppp-94-65-43-120.home.otenet.gr. [94.65.43.120])
-        by smtp.gmail.com with ESMTPSA id 91sm204836wra.37.2020.04.30.08.43.47
+        by smtp.gmail.com with ESMTPSA id o3sm996207wru.68.2020.04.30.12.27.13
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Apr 2020 08:43:47 -0700 (PDT)
+        Thu, 30 Apr 2020 12:27:14 -0700 (PDT)
 Subject: Re: [meta-java] host gcc-9, icetea-7 gcc-9 but how older gcc versions?
-To: Richard Leitner <richard.leitner@skidata.com>,
- "robert.berger.oe.devel" <robert.berger.oe.devel@gmail.com>
+To: Robert Berger <oecore.mailinglist@gmail.com>,
+ Richard Leitner <richard.leitner@skidata.com>
 Cc: openembedded-devel@lists.openembedded.org
 References: <7946cd8c-4a94-5e5a-7bdc-64963af21006@gmail.com>
  <20200429100259.GA249641@pcleri>
  <92bb1785-280d-ba90-9366-e2a7793d36d5@gmail.com>
  <20200429130233.GB249641@pcleri>
-From: "Robert Berger" <oecore.mailinglist@gmail.com>
-Message-ID: <1550debd-8a7f-9a1a-0e12-9566b69405b4@gmail.com>
-Date: Thu, 30 Apr 2020 18:43:46 +0300
+ <1550debd-8a7f-9a1a-0e12-9566b69405b4@gmail.com>
+From: "Robert Berger" <robert.berger.oe.devel@gmail.com>
+Message-ID: <cbc9dc58-61a7-8133-698c-6570f85f85f6@gmail.com>
+Date: Thu, 30 Apr 2020 22:27:12 +0300
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <20200429130233.GB249641@pcleri>
+In-Reply-To: <1550debd-8a7f-9a1a-0e12-9566b69405b4@gmail.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
 Hi,
 
-Is this supposed to work with host gcc 9?
+I started to have a look into the icetea-native issue again and hope I 
+will be able to come up with some patch, which fixes it host-gcc dependent.
 
-This was the first test I did and it bombed.
+The idea is to use a hacked version of this[1] and add it to [2].
 
-I used all upstream unmodified dunfell branches plus your branch.
-
-pokyuser@2f9b1db70cea:/workdir/build$ gcc --version
-gcc (Ubuntu 9.2.1-17ubuntu1~16.04) 9.2.1 20191102
-Copyright (C) 2019 Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
-pokyuser@2f9b1db70cea:/workdir/build$
-
-Build Configuration:
-BB_VERSION           = "1.46.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "ubuntu-16.04"
-TARGET_SYS           = "x86_64-resy-linux"
-MACHINE              = "container-x86-64"
-DISTRO               = "resy-container"
-DISTRO_VERSION       = "3.1"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta
-meta-poky
-meta-yocto-bsp       = 
-"2020-04-30-dunfell-3.1:5e44568d90cb9148253098f60a6aeb32c0e5cf5f"
-meta-resy            = "dunfell:572324800b1a33a30d6eba67ac343cbc67e9737a"
-meta-oe
-meta-python          = 
-"2020-04-30-dunfell-3.1:17fd382f3467e20308924499b7531ae8b789f056"
-meta-virtualization  = 
-"2020-04-30-dunfell-3.1:e319e746bffc4360229b2c926b8c5c9492ee52a7"
-meta-filesystems
-meta-networking      = 
-"2020-04-30-dunfell-3.1:17fd382f3467e20308924499b7531ae8b789f056"
-meta-java            = 
-"2020-04-30-g0hl1n/jdk8-fix_local:49b1405f5429a1470f28823d726fcb1b67d3bce3"
-
-...
-
-ERROR: Task 
-(/workdir/sources/poky/../meta-java/recipes-core/icedtea/icedtea7-native_2.1.3.bb:do_compile) 
-failed with exit code '1'
-
-here is the error:
-
-https://pastebin.com/x4c1Kduw
+Like this I should be able to retrieve the host gcc version dynamically 
+and be able to add and remove CFLAGS e.g. depending on the major version 
+of the host gcc.
 
 Regards,
 
 Robert
 
+[1] 
+http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta/lib/oe/utils.py?h=dunfell#n377
+
+[2] 
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/tree/classes/openjdk-build-helper.bbclass?h=g0hl1n/jdk8-fix
