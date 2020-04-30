@@ -1,44 +1,45 @@
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
- by mx.groups.io with SMTP id smtpd.web12.730.1588281235334192524
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+ by mx.groups.io with SMTP id smtpd.web12.813.1588281469500510625
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Apr 2020 14:13:56 -0700
+ Thu, 30 Apr 2020 14:17:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=G/N9Sc9O;
- spf=pass (domain: skidata.com, ip: 91.230.2.91, mailfrom: prvs=3828d1ea9=richard.leitner@skidata.com)
+ dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=mFcYvkZZ;
+ spf=pass (domain: skidata.com, ip: 91.230.2.99, mailfrom: prvs=3828d1ea9=richard.leitner@skidata.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-  t=1588281235; x=1619817235;
+  t=1588281469; x=1619817469;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=QsoNCsvKAjJ6EuCXbE6FJCRT011YSwaLaZN61Q/UV+0=;
-  b=G/N9Sc9Okov1tpTMPx9JBhbui/Z3iIznObDpLDaPyAmUHKuCS0LIqaJY
-   oQq2lfRJ53HE5CyrRhJg7WTvkqRZ6kR54+ogx7k9i1ew01hwZEU0v2awu
-   KOQQ36acVZ514/cAPpadIEkKkaas8YcJP73Jg+gyF+aIxWfj5NhcfDjK8
-   41HAa2Bumj+YlV+9Ni9UmQ7RkmUh8Yucl67R6o7c+0YY9J8dsKmO8siAF
-   NAHH5pzZnNGGU14VPZ1F2FVNe5fnDGBAtfwpmV191yQ3UOOtg0iJCJwBm
-   Yv1+QFAy5HxJib8xbdkBCux7Jq5s1c1637G1/+rVjzXHrgrq3O6YCdfUL
+  bh=mMn57FpyzwrgO3MFwsc4HnHOMEaFuj3E/ZeYER2z7To=;
+  b=mFcYvkZZqRGyMyWR+Wbc3Yl7F0Zm2qor6EmxgW0SnafWfCQclo0LYb+G
+   vCx7tCq3AaFfRWwwGIbeKSgQ31TUZZzu94eOaPLCaQnaTlE3OIn6lK8A1
+   +6F+ZPdIQsb/ZROTupfCN2NkXykh6KFTxyRE0MMAhTPjXYs81xmr2Gish
+   TNJt1nZoRPru8KWnvcyNjFvorKv4s97jA5uHCIpio9QDcUMeojwJ+0TGo
+   AYF44QD+rWDFBAcvtNJrfZ3MyHw9LxveO2mq4g4Zk+nBydXj5hfFaXEWh
+   tKp5k8w4T1AAqwoUdELX06djnjMmdXJIK4WI8WhNQNVtNqhWY+bsLDVmu
    Q==;
-IronPort-SDR: BhjrX2MjfY6zntEJZL9fWMZf5FD+B5fczJGe+AeHEvg1V8rNk4wU7tbPgjZr6lljehyz0SV+62
- J+5Vua3GriIn4xulveKihEL/izixQw7T5SWfZyZ5RJDSWhODjidEkA/7d/HwBsVUTPbs/Py3EK
- cdaUxV5QW3TuCBKxlzges+utAnGVXC3fZy5p7x4/Uq+whBDrH4ykuW6AxCMpch/Nfw3MVEmsv5
- j9T+89zhuthvaGuEm2XAkX+aBI2oxRKnjAtbPXqlWIHlLa7DV1LwM5tCAwrkB4ZAIib4zW2WHH
- Byc=
+IronPort-SDR: E3d+PMQwhJvnzxis2RdklgUfsV3FjzOwyCdVKZrbHr3KUdprGfOvKxvS3DI/KhHzrVfNEUi14r
+ FPuafq/qAGpSD24EpE6hwRQhK2Vtwb1rUxFf06r/KuyOi+04nYDOasGQ4EwXqai0DWV/ftXwlw
+ CxJjR2dS7OxCkRlIb4tFWvaNe8jX6S1fVHyQR0UK7zxncgKm6a73Jq5RhAJVnEFaJZOtHt7Oyy
+ sRMx/FYZ6LzY14Qc6wOg/BDt61EzwQyjiuGu0apDP/6HcyzbxQUTkHNWvqYxJ7UAjOy0TXtQkk
+ 1F0=
 X-IronPort-AV: E=Sophos;i="5.73,337,1583190000"; 
-   d="scan'208";a="2573307"
-Date: Thu, 30 Apr 2020 23:13:52 +0200
+   d="scan'208";a="24091770"
+Date: Thu, 30 Apr 2020 23:17:45 +0200
 From: "Richard Leitner" <richard.leitner@skidata.com>
-To: <oecore.mailinglist@gmail.com>
-CC: robert.berger.oe.devel <robert.berger.oe.devel@gmail.com>,
+To: robert.berger.oe.devel <robert.berger.oe.devel@gmail.com>
+CC: <oecore.mailinglist@gmail.com>,
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-java] host gcc-9, icetea-7 gcc-9 but how older gcc versions?
-Message-ID: <20200430211352.GB410632@pcleri>
+Message-ID: <20200430211745.GC410632@pcleri>
 References: <7946cd8c-4a94-5e5a-7bdc-64963af21006@gmail.com>
  <20200429100259.GA249641@pcleri>
  <92bb1785-280d-ba90-9366-e2a7793d36d5@gmail.com>
  <20200429130233.GB249641@pcleri>
  <1550debd-8a7f-9a1a-0e12-9566b69405b4@gmail.com>
+ <cbc9dc58-61a7-8133-698c-6570f85f85f6@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1550debd-8a7f-9a1a-0e12-9566b69405b4@gmail.com>
+In-Reply-To: <cbc9dc58-61a7-8133-698c-6570f85f85f6@gmail.com>
 Return-Path: richard.leitner@skidata.com
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
@@ -46,26 +47,34 @@ X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On Thu, Apr 30, 2020 at 06:43:46PM +0300, Robert Berger wrote:
+On Thu, Apr 30, 2020 at 10:27:12PM +0300, robert.berger.oe.devel wrote:
 > Hi,
 > 
-> Is this supposed to work with host gcc 9?
-
-Yes, for me it works with "gcc (GCC) 9.3.1 20200408 (Red Hat 9.3.1-2)"
-
+> I started to have a look into the icetea-native issue again and hope I will
+> be able to come up with some patch, which fixes it host-gcc dependent.
 > 
-> This was the first test I did and it bombed.
+> The idea is to use a hacked version of this[1] and add it to [2].
 > 
-> I used all upstream unmodified dunfell branches plus your branch.
+> Like this I should be able to retrieve the host gcc version dynamically and
+> be able to add and remove CFLAGS e.g. depending on the major version of the
+> host gcc.
 
-same did I on my Fedora box and it built and succeeded tests... That's
-strange.
+If I understand you correctly we have something like this already [3].
+Used for example at [4].
 
-Have you a clean build?
+Or did I got something wrong?
 
 regards;rl
 
+[3] https://git.yoctoproject.org/cgit/cgit.cgi/meta-java/tree/classes/openjdk-build-helper.bbclass?h=g0hl1n/jdk8-fix#n24
+
+[4] https://git.yoctoproject.org/cgit/cgit.cgi/meta-java/tree/recipes-core/openjdk/openjdk-8-common.inc#n178
+
+> 
 > Regards,
 > 
 > Robert
 > 
+> [1] http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta/lib/oe/utils.py?h=dunfell#n377
+> 
+> [2] http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/tree/classes/openjdk-build-helper.bbclass?h=g0hl1n/jdk8-fix
