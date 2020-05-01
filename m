@@ -1,50 +1,50 @@
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.web11.8207.1588332959617273400
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.web12.7984.1588332960744115837
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 May 2020 04:35:59 -0700
+ Fri, 01 May 2020 04:36:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=jMcKqrOV;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id k1so11230855wrx.4
-        for <openembedded-devel@lists.openembedded.org>; Fri, 01 May 2020 04:35:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=rr9Qyuvk;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id e26so5685219wmk.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 01 May 2020 04:36:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=vwDhdCmSoUEZgCuchmRMWZroqxTstCWa+SkpsZpdtRs=;
-        b=jMcKqrOVjJ5fg2de/D+P8vDlj9xat2BsTJXQBceO+x5GMaCN9gdsdjj2GEsRoUMzTc
-         7CbJBMMItwNPPqFUz6wqcS3378dssL4UowwFiAh0HNiX5A2/26dvfktniT2x/2lXPQMc
-         Ycww8Iz7NokZnN9ph7s0ciWiRVH+uBDZWa/yG4Mq/+0hh3uenu1pdRff1zbZyKSnZdS+
-         nGCN6Rfem/VCkeagv5QakZlJI0+l2z+2QS/O9jqSXU6tYKuBWwufVt4iW4OVvPalb6/F
-         uQeebSx8kRl/ra0DfgYAt08E16AhLTTWPpcBaGGRuYjlMcRRvH2r9aqz14WEimtUgJ8L
-         79mg==
+        bh=wbt4TzKr20ES/sdwCpugcaoO4gof7IbiDXONgh/ftys=;
+        b=rr9QyuvkTFaJWTuNJjuOIMfw76T9awSyl+zPiLAz6A9a7jubygOgaaWp/BcMUUfhlO
+         javOYbW+wOQuWsHYrsq3ymwKv+cR6p2aMc+vAm2Pi6KyvE4CqLAHr+h5BMhZzDNxMqU5
+         QWPJ5aB6H78l4B4l26ceHR9srEI6I46aTuLgTX5rZsdBiBTEVltTsyb0HvzpbTKlZtEM
+         p8SfCzdMLhfa5xIRM+fbQIpPM2JpZQwXcEnPJa9mo9Mr5IXMrFcVT7s+nXM5B23vqovx
+         vCnCO5H0m9dvT/q7yArqdr4WVEqutOe+2ZZ844HRUNPcldG6mMyzLIrR1h6rsJbvwBIR
+         XFCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=vwDhdCmSoUEZgCuchmRMWZroqxTstCWa+SkpsZpdtRs=;
-        b=Dn1Vqbu/573XS2xWQT3YUNGLSpGmh4wxSeFss5ReDaKsTfwQ1zO4Aa/+CpAqvXVNXe
-         5WmYbadjpb1zAo8BIQVfd2Ofh6Op0H3auhwB2ugUAoLvP2kGncCMfeKF+Zk4xTDLeSJh
-         SxeJoMWiZERpY9lDUxWhX6lI90cEAZpm7SczuFoxh18hvzi6MCQRSKnORoCr+8JxJQok
-         jbNLFMrvP+hAefy9eBbjjSGTnjSLk0tJ9ZfhyV9do/8nEpqqwRiFXxXNPHsFT8k8jfCv
-         VWUPSZmpmnyLkD+d5syOf9R4rvEadS9/afXrrMYQT/Kqtq0ZptWaTj1dlne7TCeNPiW+
-         QC9Q==
-X-Gm-Message-State: AGi0Pubi14ZDK04cYFrKCsbRn/Jc+l0PfXS4zzuXbXba0nvCSwDKxn3x
-	3acQnoaGAFMzXPLPYDO2JXLl/Zpr
-X-Google-Smtp-Source: APiQypL9NTbgkcOKSwr7mF3Bet34z6MtxP4Q7p72DBSVyionIotQu3ABEsPOJQXfhjlDapVLVt6HWA==
-X-Received: by 2002:adf:c7c3:: with SMTP id y3mr2664734wrg.196.1588332957943;
-        Fri, 01 May 2020 04:35:57 -0700 (PDT)
+        bh=wbt4TzKr20ES/sdwCpugcaoO4gof7IbiDXONgh/ftys=;
+        b=FLjVljjqd35XJ+TIJARG+cEoIi1403ecMdIo33ofhv9+nX9V0GjeU3Jf68vG1qSHJY
+         dlfEKORVEG6oRry/nmNgZtxZblBMKEusJeJEKza+ZR6d/o+hIc2l0CxPJDUT6XEcMUWV
+         9/EvtP1QzzIkUWZeCWB7qEtGSI5/5IdZdHCxTFC/sxU/DzxNdPf3+wVDGmm2/nrAryHn
+         fIVvS7dlA+plQYWdJG++O5qWkA8Ga1gx7ci0fhtz81VqhXGzgVByuLPKBk7yPkl4D8Pw
+         Lf7U8Q2kLGytFSIEK+k00CaEhTb5V7N0vl9/oxF01ItL4yiDKS6B7JKh94AzM1hvHaBf
+         BTRw==
+X-Gm-Message-State: AGi0PubRmGCxGQvJIG9rpbUOxcCJiGppYVhDmIBor4swbp6IgQhFoN2U
+	L6um5jgsLHs5T7/gQle3XXXp9jCP
+X-Google-Smtp-Source: APiQypIRoxZLyG57MQsmhlzWWBv/imGFtzIceVbxf3k4ZYCu8MZpHW9rizexoTNiCWVBiW6itT61+w==
+X-Received: by 2002:a7b:c7d6:: with SMTP id z22mr3833618wmk.73.1588332959067;
+        Fri, 01 May 2020 04:35:59 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300F07F0ED437E74431DA4B53FAAD.dip0.t-ipconnect.de. [2003:f0:7f0e:d437:e744:31da:4b53:faad])
-        by smtp.gmail.com with ESMTPSA id q10sm3960004wrv.95.2020.05.01.04.35.56
+        by smtp.gmail.com with ESMTPSA id q10sm3960004wrv.95.2020.05.01.04.35.58
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 01 May 2020 04:35:57 -0700 (PDT)
+        Fri, 01 May 2020 04:35:58 -0700 (PDT)
 From: "Andreas M?ller" <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 09/10] openvpn: upgrade 2.4.8 -> 2.4.9
-Date: Fri,  1 May 2020 13:35:32 +0200
-Message-Id: <20200501113534.16030-9-schnitzeltony@gmail.com>
+Subject: [PATCH 10/10] qpdf: upgrade 9.1.0 -> 10.0.1
+Date: Fri,  1 May 2020 13:35:33 +0200
+Message-Id: <20200501113534.16030-10-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200501113534.16030-1-schnitzeltony@gmail.com>
 References: <20200501113534.16030-1-schnitzeltony@gmail.com>
@@ -54,28 +54,28 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../openvpn/{openvpn_2.4.8.bb => openvpn_2.4.9.bb}            | 4 ++--
+ .../recipes-printing/qpdf/{qpdf_9.1.0.bb => qpdf_10.0.1.bb}   | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/openvpn/{openvpn_2.4.8.bb => openvpn_2.4.9.bb} (95%)
+ rename meta-oe/recipes-printing/qpdf/{qpdf_9.1.0.bb => qpdf_10.0.1.bb} (85%)
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.4.8.bb b/meta-networking/recipes-support/openvpn/openvpn_2.4.9.bb
-similarity index 95%
-rename from meta-networking/recipes-support/openvpn/openvpn_2.4.8.bb
-rename to meta-networking/recipes-support/openvpn/openvpn_2.4.9.bb
-index 09efa5700..529e3912b 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.4.8.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.4.9.bb
-@@ -14,8 +14,8 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
+diff --git a/meta-oe/recipes-printing/qpdf/qpdf_9.1.0.bb b/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
+similarity index 85%
+rename from meta-oe/recipes-printing/qpdf/qpdf_9.1.0.bb
+rename to meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
+index 44a5fea84..f04e437d3 100644
+--- a/meta-oe/recipes-printing/qpdf/qpdf_9.1.0.bb
++++ b/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
+@@ -7,8 +7,8 @@ DEPENDS = "libpcre zlib libjpeg-turbo"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/qpdf/qpdf-${PV}.tar.gz"
  
- UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
+ LIC_FILES_CHKSUM = "file://Artistic-2.0;md5=7806296b9fae874361e6fb10072b7ee3"
+-SRC_URI[md5sum] = "090d03ab179c281233f8240ade179d54"
+-SRC_URI[sha256sum] = "3abbbb7907f2e750336b9c97e67b6e806aca91ab537402ec080656d63940ed79"
++SRC_URI[md5sum] = "eb7fb7c6cd5d3036bf4f7a5e3f44d995"
++SRC_URI[sha256sum] = "5d2277c738188b7f4e3f01a6db7f2937ed6df54671f1fba834cd3d7ff865827b"
  
--SRC_URI[md5sum] = "e9cb40542e17ce295d80860690710aab"
--SRC_URI[sha256sum] = "65e1da3f3a08e7e900c175e7fc30d834881fd2dea0eb39b25325a861a9da0bc5"
-+SRC_URI[md5sum] = "52863fa9b98e5a3d7f8bec1d5785a2ba"
-+SRC_URI[sha256sum] = "46b268ef88e67ca6de2e9f19943eb9e5ac8544e55f5c1f3af677298d03e64b6e"
+ inherit autotools-brokensep gettext
  
- SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
- SYSTEMD_AUTO_ENABLE = "disable"
 -- 
 2.21.1
 
