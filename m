@@ -1,109 +1,114 @@
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com [209.85.221.66])
- by mx.groups.io with SMTP id smtpd.web10.11079.1588342644795818136
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com [209.85.221.67])
+ by mx.groups.io with SMTP id smtpd.web10.11697.1588344411015870359
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 May 2020 07:17:25 -0700
+ Fri, 01 May 2020 07:46:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=jx61TvXY;
- spf=pass (domain: gmail.com, ip: 209.85.221.66, mailfrom: sakoman@gmail.com)
-Received: by mail-wr1-f66.google.com with SMTP id o27so6362800wra.12
-        for <openembedded-devel@lists.openembedded.org>; Fri, 01 May 2020 07:17:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=HGI4x7F9;
+ spf=pass (domain: gmail.com, ip: 209.85.221.67, mailfrom: robert.berger.oe.devel@gmail.com)
+Received: by mail-wr1-f67.google.com with SMTP id x18so11788767wrq.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 01 May 2020 07:46:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
-        bh=6mFmL25N4foizWD1+uAzi80sG7JDnJqXd6DMu7G+T5Y=;
-        b=jx61TvXYYMZFpc7GAE5cR/2fUN3j7R4DP7N/4stApcQD5F+Xgc1poazmQTGavnhHAo
-         qFLbA9yTI8J0pMEh+gemYlIpPpJtONwgJzT5LQsIC2kwOGtsc/1OQKeJYhRO1RYcAP7T
-         Y4wf207gr3ocGFc0u0lZrXLVOEKxcekYS9dhMcqP6Dh3V9S5krdazijj/46DZUJKwdO7
-         wEfETZYhtI5lYt4IRlqwYlAOExPTfiE8WhwJB3TFJ8b0xSMn4f4lGNxT3wg319o1QwNf
-         XBgZeOs7NI9RtDkiZ6Scc4EnV0W1PKCaNnSQHYEED4DLNG1rBk1xTwFjWPaiXA23nSsm
-         5qrg==
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=JRJnn5xDBShsLq1tX4sYek2XSylL8h3W4rJCdy8dEk8=;
+        b=HGI4x7F9EfsCm6+VFbAGAwfYKTG4XFTKIuKEvAc4tvdAlr6Dw3G+sKNZRf4tszKqx6
+         RokeUqCFevWG5sd4zgnK4IoqRwqH0cSu3WR8DMYJK6QLWompM7Zsc7JLjXmw+ULrrmZI
+         dlDM3fjGv7fUeCv7t/L4GHrGLy0G+moEbX0CiUD9OsMrBi5Gj22y2DkO4LiFGAYmvZvv
+         6L77K9gAS92hgW+Os6rl7OGysG5Kkd1tguslmqgqz/0jlneRPX+aC+RpGBLlj669lolx
+         mZszrIZ5Wbe3FJV/sTdmGJH+qXXtT/aLk79YsBzEjm4v3Zvzc4UKKmim1p6/KCMLf+7q
+         /z9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to;
-        bh=6mFmL25N4foizWD1+uAzi80sG7JDnJqXd6DMu7G+T5Y=;
-        b=Bd9aW6eFxto0rCS3xo4YDraOPlLFhvqgDZBRViPiapwMwS8u2/aqzIakK5aGCx8w6Z
-         7YuQGbkBfmz6q9yJcWl9V7gyChdEyZIYzfWoKUjmpAAiU+2kprAQKxC77doqf62lE7pb
-         KCvsMf02guQkqd2buvnth9JHzIaNf+HQvD+i2qrh0ZOxxajEDUjLWacaKldFmQFS2Q8f
-         rtcqh9nKXZQeyz2dLmc+6u5kMxhp1Kz5JSOcE5L0APRGRNbAx6A0VvehyRTXE1xSVZ06
-         AoMLJ1gU4x6DtmmOD64WztzuW/YVk/98YRaAj9QxR0y1h4Wd1fntCmr4eerCOhCrkD7j
-         X28g==
-X-Gm-Message-State: AGi0PuakRMR0hcCyIyddbpnFDkWOdJYqQKRQbNI7yl9p8DqaqOYc0jig
-	EluPjFycvuLympOBVsb6OEnziQIMOReGa0DAn/TXIMqm
-X-Google-Smtp-Source: APiQypIP6CDpC6cCVnWLb+s+2jdc+unoasVG+rsicYxd60af+woRNeKV5hHyEmjNCMx9mcQ3G7lQHxfpDD4k1jmeQVw=
-X-Received: by 2002:adf:df04:: with SMTP id y4mr4404199wrl.413.1588342642946;
- Fri, 01 May 2020 07:17:22 -0700 (PDT)
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=JRJnn5xDBShsLq1tX4sYek2XSylL8h3W4rJCdy8dEk8=;
+        b=pQJqfb7pMygEtwHN4dhtMCIU9OtsZnCmac8guMTq6YHbS52DSN8RKSayfIo6ZDJ1x+
+         WtV+H/Wju2iAjcnO9ShNb3oCguenHzSogd8LqhGuVrjsXn1ByTraTTtrW/VdZYDh0Ab1
+         Jc0RQ5tvcJfn80ayATdrSPx38tNbesGgdfAfmIGhwnCUraWFbHP1PlOxzAmzGSfMaywA
+         txRTVkK1jl+exdN5TPviGjSu0PEtf3t7grRGYoqBfnFBUrh85vKBbdG57lqoi72f01xg
+         D7+3fT8/zwDeXuyuXKYNrOhNGTWF6+7l1AiigZdBZGMy4/L+Fgs8YTQhGCmL9XGuvp7E
+         0Pyg==
+X-Gm-Message-State: AGi0PubZ4r9F79xt7Hc9427QkqjBOfXI5FAkJiiC4IkRFSrStrtGpRC3
+	KSRJYwy7XVDqG6EO1d4Jwz8=
+X-Google-Smtp-Source: APiQypL5pgg6a5vgSxi3MCGpHnA3F9Php+H6qdMZsJg01qOvzmTLOqS66zF4/0oJf+6vAL66Dd8pYA==
+X-Received: by 2002:a5d:500b:: with SMTP id e11mr4452431wrt.272.1588344409532;
+        Fri, 01 May 2020 07:46:49 -0700 (PDT)
+Return-Path: <robert.berger.oe.devel@gmail.com>
+Received: from [192.168.42.52] (ppp-94-65-43-120.home.otenet.gr. [94.65.43.120])
+        by smtp.gmail.com with ESMTPSA id v16sm4185033wml.30.2020.05.01.07.46.48
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 01 May 2020 07:46:49 -0700 (PDT)
+Subject: Re: [oe] [meta-java] host gcc-9, icetea-7 gcc-9 but how older gcc versions?
+To: openembedded-devel@lists.openembedded.org,
+ Richard Leitner <richard.leitner@skidata.com>
+Cc: oecore.mailinglist@gmail.com
+References: <7946cd8c-4a94-5e5a-7bdc-64963af21006@gmail.com>
+ <20200429100259.GA249641@pcleri>
+ <92bb1785-280d-ba90-9366-e2a7793d36d5@gmail.com>
+ <20200429130233.GB249641@pcleri>
+ <1550debd-8a7f-9a1a-0e12-9566b69405b4@gmail.com>
+ <cbc9dc58-61a7-8133-698c-6570f85f85f6@gmail.com>
+ <20200430211745.GC410632@pcleri>
+ <160AE28F2E93B445.19580@lists.openembedded.org>
+From: "Robert Berger" <robert.berger.oe.devel@gmail.com>
+Message-ID: <0237cfe6-4162-a253-4799-678177dca1ab@gmail.com>
+Date: Fri, 1 May 2020 17:46:47 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-References: <20200501044509.13144-1-pkj@axis.com>
-In-Reply-To: <20200501044509.13144-1-pkj@axis.com>
-From: "Steve Sakoman" <sakoman@gmail.com>
-Date: Fri, 1 May 2020 04:17:11 -1000
-Message-ID: <CAGDS+nk1mmoOL==L7LbvUUmcx6zsNf=HKGPMoquYyr45=LeKXQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][master][dunfell][PATCH] paho-mqtt-c: Update to the real 1.3.2, and correct the license
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <160AE28F2E93B445.19580@lists.openembedded.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-On Thu, Apr 30, 2020 at 6:45 PM Peter Kjellerstedt
-<peter.kjellerstedt@axis.com> wrote:
->
-> In commit b0345e3f (paho-mqtt-c: upgrade 1.3.1 -> 1.3.2), paho-mqtt-c
-> was supposedly updated to 1.3.2. However, the SRCREV did not match the
-> v1.3.2 tag.
->
-> With the update to 1.3.2, the license was changed from EPL-1.0 | EDL-1.0
-> to EPL-2.0 | EDL-1.0. This was updated in commit b0345e3f for
-> LIC_FILES_CHKSUM, but not in LICENSE.
->
-> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> ---
->  .../paho-mqtt-c/paho-mqtt-c_1.3.2.bb             | 16 ++++++----------
->  1 file changed, 6 insertions(+), 10 deletions(-)
->
-> diff --git a/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.2.bb b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.2.bb
-> index fa8c714ce..071d51fc6 100644
-> --- a/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.2.bb
-> +++ b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.2.bb
-> @@ -2,19 +2,19 @@ SUMMARY = "Paho MQTT - C libraries for the MQTT and MQTT-SN protocols"
->  DESCRIPTION = "Client implementation of open and standard messaging protocols for Machine-to-Machine (M2M) and Internet of Things (IoT)."
->  HOMEPAGE = "http://www.eclipse.org/paho/"
->  SECTION = "console/network"
-> -LICENSE = "EPL-1.0 | EDL-1.0"
-> +LICENSE = "EPL-2.0 | EDL-1.0"
->
->  LIC_FILES_CHKSUM = " \
-> -        file://edl-v10;md5=3adfcc70f5aeb7a44f3f9b495aa1fbf3 \
-> -        file://epl-v20;md5=d9fc0efef5228704e7f5b37f27192723 \
-> -        file://notice.html;md5=943f861069889acecebf51dfa24478e2 \
-> -        file://about.html;md5=e5662cbb5f8fd5c9faac526e4077898e \
-> +    file://edl-v10;md5=3adfcc70f5aeb7a44f3f9b495aa1fbf3 \
-> +    file://epl-v20;md5=d9fc0efef5228704e7f5b37f27192723 \
-> +    file://notice.html;md5=943f861069889acecebf51dfa24478e2 \
-> +    file://about.html;md5=e5662cbb5f8fd5c9faac526e4077898e \
->  "
->
->  SRC_URI = "git://github.com/eclipse/paho.mqtt.c;protocol=http \
->             file://0001-Fix-bug-of-free-with-musl.patch"
->
-> -SRCREV = "fbe39064c4416f879308a8a5390b19d544970789"
-> +SRCREV = "3148fe2d5f4b87e16266dfe559c0764e16ca0546"
->
->  DEPENDS = "openssl"
->
-> @@ -29,7 +29,3 @@ do_install_append() {
->  }
->
->  EXTRA_OECMAKE = "-DPAHO_WITH_SSL=ON"
-> -
-> -do_configure_prepend_libc-musl() {
-> -    sed -i -e "s/SET(LIBS_SYSTEM c dl pthread anl rt)/SET(LIBS_SYSTEM c dl pthread rt)/g" ${S}/src/CMakeLists.txt
-> -}
-> --
+Hi,
 
-You are also removing do_configure_prepend_libc-musl(), but the reason
-for this isn't mentioned in the commit message.
+Just for completeness I tried with a
 
-Steve
+gcc (Ubuntu 9.3.0-10ubuntu2~16.04) 9.3.0
+Copyright (C) 2019 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-> 2.21.1
->
-> 
+same behavior. Compiler refuses to compile without my patch.
+
+Just looking at the code I believe the compiler should complain unless 
+you tell it otherwise.
+
+That's what it complains about:
+
+| In function ‘int fprintf(FILE*, const char*, ...)’,
+|     inlined from ‘FormatRule* ADLParser::template_parse()’ at 
+/workdir/build/container-x86-64-java/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/hotspot/src/share/vm/adlc/adlparse.cpp:3803:34:
+| /usr/include/x86_64-linux-gnu/bits/stdio2.h:97:24: error: ‘%s’ 
+directive argument is null [-Werror=format-overflow=]
+|    97 |   return __fprintf_chk (__stream, __USE_FORTIFY_LEVEL - 1, __fmt,
+|       |          ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|    98 |    __va_arg_pack ());
+|       |    ~~~~~~~~~~~~~~~~~
+
+
+If we look at the source code:
+
+vim 
+/workdir/build/container-x86-64-java/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/hotspot/src/share/vm/adlc/adlparse.cpp 
++3803
+
+   // Debug Stuff
+   if (_AD._adl_debug > 1) fprintf(stderr,"Format Rule: %s\n", desc);
+
+At the beginnig of this method you can see:
+
+//------------------------------template_parse-----------------------------------
+FormatRule* ADLParser::template_parse(void) {
+   char       *desc   = NULL;
+   FormatRule *format = (new FormatRule(desc));
+...
+
+So I guess the compiler is wrong to complain, since desc could be NULL.
+
+Regards,
+
+Robert
