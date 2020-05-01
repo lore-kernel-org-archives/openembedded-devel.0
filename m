@@ -1,62 +1,62 @@
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com [209.85.128.68])
- by mx.groups.io with SMTP id smtpd.web11.6903.1588325864303010116
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.web10.7761.1588330922680977551
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 May 2020 02:37:44 -0700
+ Fri, 01 May 2020 04:02:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Wsdo5xxj;
- spf=pass (domain: gmail.com, ip: 209.85.128.68, mailfrom: robert.berger.oe.devel@gmail.com)
-Received: by mail-wm1-f68.google.com with SMTP id g12so5743194wmh.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 01 May 2020 02:37:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=fx+SVIeL;
+ spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: robert.berger.oe.devel@gmail.com)
+Received: by mail-wr1-f50.google.com with SMTP id i10so11106443wrv.10
+        for <openembedded-devel@lists.openembedded.org>; Fri, 01 May 2020 04:02:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:cc:references:from:message-id:date:user-agent
          :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=cBRWT3+HD3rGpHoMq8epw6u3Xc8f7vPSStnzjLPJSmk=;
-        b=Wsdo5xxjnXyPFWrQZ6C4E0ZSRpOqfxsZB/WPbVXeMM+a2ZjMQjX3bFONW/nGco4TTp
-         2lSYitVRQ+XhxDYAHsJbpBeIcN5ZePfwkDzVzbWA6WMzhPHlOMT9o726weqvLSTCLTUN
-         DyDsBEW22IxemkXvB5772+b3NWo+et4sVbEfQkikfKZcUP7mBrDL4BCrFcUs34Vo/7eK
-         bFTYL+gF1HJBztUfEKHgXrhvVNIcCkjhpQnVjWExMo+rOYPMot0CTYuqbVQTfnyysNIx
-         ZjeKRxUS2tcZ1q3XwLv9WROimnCxxtkTHE5N0rBhQMQOAOWlxscaay+i8TU5AMvX6rDY
-         9ENw==
+        bh=PsBPNYvrin3dPp4UEaY3fCqBPrZ8k5WGxjQsEkr/nn8=;
+        b=fx+SVIeL+Z1KwJg+d3Ds2yzRjd0Mnz4YIRYXD2bIS2JVaqHA3nOTatT6Go8aZ2U+OG
+         aSlrZ27gkrZps60Lq1tAYrI/gs7pFjOY2xa2oPJVpBr5OTYCwWZJqQ+37CcYL/5m29yQ
+         WrBI1yDsHrKJNj88uWrFjJb33oZgWk9BsTv84MX3ODwcHBU2nG+lEF5F3C4b8NdYEZZl
+         uQQTZ9S3Z9GjcEuk4aHhdAXCxffkYph+T0rs1EnPulP3RiHNey7OIuplBKTEgU823NAR
+         NVYuJb+3KMISmYWa08n00v8m6evjfzKoVeDP7k7x78RWsnPeFI12z7nYtziV9I8UGxs4
+         Wh8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:cc:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=cBRWT3+HD3rGpHoMq8epw6u3Xc8f7vPSStnzjLPJSmk=;
-        b=lQHwacuHkR4WWQ03G3mYknUiBn1gZ5102s02J5NmScWJWLJnFKygKuveV5VYScHuZ9
-         OKN78nCa6AgPkTM8ZN1mlYr1C4pE01XILAahgi+qswcMM4KkQcqSDdwHV1GVlBqS1wgF
-         Mzw2/Ys8hhZ8D+Gg73iRQ/eqAfCGQWlviZanE0ySDgubiBrko3O2nlssqVRvXFzyYRqF
-         gAIb43/5Gt3wb+CRIPI1E7HUSRLisStez452GOjFpkx0S7CB3Lsfed/Xp3l37+jGM2n5
-         rmpPAd8iuJs7Slt2olE0amPMJPTsq54OC47sMKTVviWuyYHGwCAQnv9hALXPyLPuXHnf
-         XcKA==
-X-Gm-Message-State: AGi0PuaEAjdXYeDoH601IFm0t4UfE6RqiMMbFONc/a7jnzt+eCJ1KLqV
-	zOpmagkjaDw7hyVNu0aL7uJYMsDw
-X-Google-Smtp-Source: APiQypJ1H0EoT1vV7tH2KNWQiUeb43hAZowvujdmHU/aY/YhGr39uq65oPJ7VWgKCf9SN8LZ5DBUUw==
-X-Received: by 2002:a1c:5683:: with SMTP id k125mr3038636wmb.17.1588325862469;
-        Fri, 01 May 2020 02:37:42 -0700 (PDT)
+        bh=PsBPNYvrin3dPp4UEaY3fCqBPrZ8k5WGxjQsEkr/nn8=;
+        b=qEMlSKRC5555ChV+IHODNYs420EUI/OxEICC+9kgbupa3RIG+qbzhsXjUcdl0BL5y1
+         T3Ju5rIrcRKWdsrDa7lArrPCWguQl1V3mYXuvgib4Ya8FFwocB+ixZ632YCi7lMPGHcf
+         0o8W3CeRpcKQrTotCabwrZq8U5EnVyz0Ksa62L+U8bF+goyZKPsH8ZoLhapyNlZwckc2
+         s9r7lt6je3H295XQ5iTVqDvy2FB7izLcG8erNtvDL8dsQtnq4/bR7X4pPTR1dmafMT6O
+         uuH3rBE4YuLzne0/Rjps8B4G7acomAs594f0LIsBVvHYzyFHnicZR3hQXdgJ8faFlt1T
+         bMSQ==
+X-Gm-Message-State: AGi0PuYcCzdqNKnjGQ1dNwr8Efa576GEblY+La9J5TwIq1RIShAUUF7U
+	RVdFumhJw7GnxEVbUpHQjco0pQlm
+X-Google-Smtp-Source: APiQypJXxUkln9zGzJTrBMlAsym0/KRD/g2e5RIlDgTLVxD4tSWw1KNoRN17u6n3x8+opawPB/5XWA==
+X-Received: by 2002:a5d:554a:: with SMTP id g10mr3984453wrw.204.1588330920831;
+        Fri, 01 May 2020 04:02:00 -0700 (PDT)
 Return-Path: <robert.berger.oe.devel@gmail.com>
 Received: from [192.168.42.52] (ppp-94-65-43-120.home.otenet.gr. [94.65.43.120])
-        by smtp.gmail.com with ESMTPSA id h17sm3111612wmm.6.2020.05.01.02.37.41
+        by smtp.gmail.com with ESMTPSA id b82sm3728672wmh.1.2020.05.01.04.01.59
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 01 May 2020 02:37:42 -0700 (PDT)
+        Fri, 01 May 2020 04:02:00 -0700 (PDT)
 Subject: Re: [meta-java] host gcc-9, icetea-7 gcc-9 but how older gcc versions?
-To: Richard Leitner <richard.leitner@skidata.com>,
- oecore.mailinglist@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
+To: Richard Leitner <richard.leitner@skidata.com>
+Cc: oecore.mailinglist@gmail.com, openembedded-devel@lists.openembedded.org
 References: <7946cd8c-4a94-5e5a-7bdc-64963af21006@gmail.com>
  <20200429100259.GA249641@pcleri>
  <92bb1785-280d-ba90-9366-e2a7793d36d5@gmail.com>
  <20200429130233.GB249641@pcleri>
  <1550debd-8a7f-9a1a-0e12-9566b69405b4@gmail.com>
- <20200430211352.GB410632@pcleri>
+ <cbc9dc58-61a7-8133-698c-6570f85f85f6@gmail.com>
+ <20200430211745.GC410632@pcleri>
 From: "Robert Berger" <robert.berger.oe.devel@gmail.com>
-Message-ID: <2b20147c-2312-e230-a437-d6d59b7b1c66@gmail.com>
-Date: Fri, 1 May 2020 12:37:40 +0300
+Message-ID: <ee879f4e-3388-6734-ca7f-a5957af98639@gmail.com>
+Date: Fri, 1 May 2020 14:01:58 +0300
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <20200430211352.GB410632@pcleri>
+In-Reply-To: <20200430211745.GC410632@pcleri>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -65,56 +65,61 @@ Hi,
 
 Please see my comments in-line.
 
-On 01/05/2020 00:13, Richard Leitner wrote:
-> On Thu, Apr 30, 2020 at 06:43:46PM +0300, Robert Berger wrote:
->> Hi,
+On 01/05/2020 00:17, Richard Leitner wrote:
 >>
->> Is this supposed to work with host gcc 9?
+>> Like this I should be able to retrieve the host gcc version dynamically and
+>> be able to add and remove CFLAGS e.g. depending on the major version of the
+>> host gcc.
 > 
-> Yes, for me it works with "gcc (GCC) 9.3.1 20200408 (Red Hat 9.3.1-2)"
-
-Hmm for gcc (Ubuntu 9.2.1-17ubuntu1~16.04) 9.2.1 20191102
-
-it needs additional CFLAGS.
-
-Do we really need to distinguish also Distros and/or 9.3 vs. 9.2??
-
-Does it do any harm if you add this?
-
-https://github.com/RobertBerger/meta-java/commit/3db52ddcb7771e989cf39048a7b084d040d6b5b0
-
+> If I understand you correctly we have something like this already [3].
+> Used for example at [4].
 > 
->>
->> This was the first test I did and it bombed.
->>
->> I used all upstream unmodified dunfell branches plus your branch.
-> 
-> same did I on my Fedora box and it built and succeeded tests... That's
-> strange.
-> 
-> Have you a clean build?
+> Or did I got something wrong?
 
-Yes all fresh and also no SSTATE or SSTATE cache.
+I think this is along the lines of what I want.
 
-If you would like to reproduce the problem I can provide you with ssh 
-access to my build environment to show you quickly.
+... but ...
 
-The build docker container I use is this one:
+Why do we need to use "custom" meta-java stuff instead of what's already 
+available from OE out of the box?
 
-https://hub.docker.com/r/reliableembeddedsystems/poky-container/tags
+HOST_COMPILER_MAJOR="${@oe.utils.get_host_compiler_version(d)[1].split(".", 
+2)[0]}"
+CFLAGS_append = " ${@oe.utils.conditional('HOST_COMPILER_MAJOR', '9', 
+'-Wno-error=format-overflow', '', d)}"
 
-Tag: ubuntu-16.04-gcc-9
+works for me.
 
-Also I believe it can be easily reproduced with a "dirty" build as well, 
-if I remove my 2 lines and just build icedtea-native.
+... and ...
+
+It looks like your and my build environment with gcc-9 (RH) and gcc-9 
+(UB) behave differently?
+
+This is totally crazy. Not only do we have a host compiler dependency 
+with meta-java, but also 9.2 vs. 9.3 and maybe RH and UB hacked 
+different things there?
+
+Also we are just turning off warnings/errors, in this case buffer 
+overflows, instead of fixing them, which is not good as well. So the 
+problem might also be in some library/header or so. But I guess with 
+OpenJDK to fix those it's another cup of tea.
+
+... or ...
+
+somewhere magic host CFLAGS are being added.
+
+... one more thing ...
+
+Do you think it should work on one of those distros out of the box, so I 
+can try to reproduce what you have on my end?
+
+https://github.com/RobertBerger/yocto-dockerfiles/tree/master/dockerfiles
+
+How is meta-java usually tested?
 
 > 
 > regards;rl
 > 
->> Regards,
->>
->> Robert
->>
 
 Regards,
 
