@@ -1,68 +1,92 @@
-Received: from mail-il1-f170.google.com (mail-il1-f170.google.com [209.85.166.170])
- by mx.groups.io with SMTP id smtpd.web12.2599.1588413591300164521
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web11.2782.1588415828040080193
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 02 May 2020 02:59:51 -0700
+ Sat, 02 May 2020 03:37:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Sc0ySaJF;
- spf=pass (domain: gmail.com, ip: 209.85.166.170, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-il1-f170.google.com with SMTP id q10so6640703ile.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 02 May 2020 02:59:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=OsUc2zWi;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id k1so14835254wrx.4
+        for <openembedded-devel@lists.openembedded.org>; Sat, 02 May 2020 03:37:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
-        bh=HsO1zVROYDodkYc4IHOW5PAD17nKRXz4Zl4fRtls+ZA=;
-        b=Sc0ySaJF7TXiDK45MsjbT+ue/EwsIK81JSUmuaz+4OOgg0vwcOaozfkX7Mn9rKn+qJ
-         o1IvM5st645w8WlIPtaw0ksjLq+YkEFAXXlTVSO5yTTxFlGs97auVOM0lXN9wfy5VFCb
-         vr54EcOwXLaYefrKEdFsk36X1OZagzAy5bq29fidhTk+UgM8MJH3ub1cGFDDw6DC2u2s
-         Rnz2JpCCIs5pbECHVzGErj7OOP6d2DaeoR1y7G9RxpRjqp7sYBVX25CA+RkNPVHTxpGy
-         p6FEgDdjGE1IZ2UQPL5T01J66LUl472K0xuncgm8eQAFZbyOWyW5XscYfzMJm+2ZXYfL
-         j/hQ==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ObFGsdsOOFKZ5gEzpe2VSGi4nAMxk0jQ6B8uBOZW1Dw=;
+        b=OsUc2zWilRFcGSVm6WIH6ZB/AxDSLXYqb7N8FcNs5vn63dXn3UxlMZsajqhY3+KBCv
+         zO4GNkUFkxtsdbiBTSi7nDBDXcTAcxjyVEfIcseTTVszl0DhnXk9cPT8MG0vfqjOX7Gv
+         2yGboYxZEi67QhtatR6tME07HzaCrmCj0GitDmGnzDbMu7FcwoJBvyI50a0kNUSbBXvc
+         iFz6rboMMJJGlVaE992Bg/MF9+sN+hmVcmhjgd7aGV7MIVlkLLyCdThtYRnW6KKDyolR
+         08XBJT1QMn0SMbtLn0L00aV4ZpCDRMbvfCCIcLg6MUaFJiCzrd8pCYjRyKmIm6tI27Y7
+         FoAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to;
-        bh=HsO1zVROYDodkYc4IHOW5PAD17nKRXz4Zl4fRtls+ZA=;
-        b=c/+awKh49HCo++NZXu/Q6O6D+L8ATF+sJmxcTivau+D03gs0Hfb6d343MTvb+//keU
-         sS8nkq7z+HrjDei3jFHRjIYgNt+nJ0ax83R8IP/D4voEMOx1l1WJtHEBDvIvadRiZBZV
-         kS5y4wObfxdPzya8sj4PVwVoUMWlpv5K4EGXFkMUwGCiodambdgJqVY50wMIMHZvjXPG
-         qkvQcoqpw3hS83kU0O32pICQc18kHhNaP5r9iiW1KjLK7sDJFvKJLfub7khQaQw1tkaP
-         L3D+9s86UQdK8syjiO+fv2JyiZQ+ZjYHgfdzvVQQGJJ9xa8xdNMCH7n05sAcsPcy7yrG
-         f9iQ==
-X-Gm-Message-State: AGi0Puap5cVMJT7YXD/P2TiYwtJXAJHHgX1hW4yywpJDKiqisQPYIzp8
-	9pDnP9uiBvQLtJTbTD2D91nBh4coGFjTdXp8yPrSuyT9nkE=
-X-Google-Smtp-Source: APiQypLLPk4hP2Ff08h5LHIlpx4GDjCpOq3zyDpDSv/zgkodfg/EIJijkLuHXWPsz1bKfMFE9Y3TdskI/a9OxFfJke4=
-X-Received: by 2002:a92:cece:: with SMTP id z14mr7409350ilq.147.1588413590487;
- Sat, 02 May 2020 02:59:50 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200501113534.16030-1-schnitzeltony@gmail.com>
- <20200501113534.16030-10-schnitzeltony@gmail.com> <CAMKF1so0ve_FuQJafWSxtJ8Mz7M0vZkZNhd7oK76SEN4Xu_mew@mail.gmail.com>
-In-Reply-To: <CAMKF1so0ve_FuQJafWSxtJ8Mz7M0vZkZNhd7oK76SEN4Xu_mew@mail.gmail.com>
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ObFGsdsOOFKZ5gEzpe2VSGi4nAMxk0jQ6B8uBOZW1Dw=;
+        b=Ti3AacY5uVPzLbR5e2KQlSlP56ZZUS7WFB/nkJR/Yp8r57k8sW3qX2LRLDuXiDivCR
+         BUCCJKPkbX0VXZ/B534ShQN3p5HI6T8FgOZ2JG0Qqa4C1E1me1NFNC1anKIHMCamqM0j
+         RMPFREgKmKRtncWKWsS6xb8KWiwIc0HMs52670RpQR5W7122iKF6y93yIoJ7nxlhygH4
+         Jug5+F5rLZP9iIyrzNgcEo6cuJkAFaDrSzdeh6nMrJ+fLXBlGJgawzmBEXLkefJmDcfT
+         KCWMG8+DLAVa9z4p6CYNnUVddL03QQPhh2+osTaGyP4lNdfpDjy5EbCMbS87rHE3C6nG
+         k8Pg==
+X-Gm-Message-State: AGi0Pubq7oQ8N+xKF0O6+TEcUluG8uDPjfV+t/159uBq3MmjU2/BIVVe
+	8sZdQp/erZ7JKsYgqSw7tWmZKS5K
+X-Google-Smtp-Source: APiQypLTyCFD6z7pXzGYBWTnc6DcQQeH9fqp+AGokWMZSZF40yEAsVw44W6Ce0g0hxD0t2KGV0rYDw==
+X-Received: by 2002:a5d:6a85:: with SMTP id s5mr6968961wru.122.1588415826176;
+        Sat, 02 May 2020 03:37:06 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from superandy.speedport.ip (p200300F07F0ED486929800066C503824.dip0.t-ipconnect.de. [2003:f0:7f0e:d486:9298:6:6c50:3824])
+        by smtp.gmail.com with ESMTPSA id y70sm3804698wmc.36.2020.05.02.03.37.05
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 02 May 2020 03:37:05 -0700 (PDT)
 From: "Andreas M?ller" <schnitzeltony@gmail.com>
-Date: Sat, 2 May 2020 11:59:39 +0200
-Message-ID: <CALbNGRSUrqJgj-eZK0eJz0RLn4MzvgNsS=kHrfJkXOdKRwiUiA@mail.gmail.com>
-Subject: Re: [oe] [PATCH 10/10] qpdf: upgrade 9.1.0 -> 10.0.1
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH v2] file-roller: upgrade 3.32.4 -> 3.32.5
+Date: Sat,  2 May 2020 12:36:57 +0200
+Message-Id: <20200502103657.16172-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sat, May 2, 2020 at 7:26 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> fails on mips
->
-> https://errors.yoctoproject.org/Errors/Details/409858/
->
-> I think you need to perhaps link with -latomic on mips
-In other recipes adding -latomic it is usually not only for mips but e-g
+version 3.32.5
+--------------
 
-| meta-networking/recipes-daemons/squid/squid_4.9.bb:LDFLAGS_append_mipsarch
-= " -latomic"
-| meta-networking/recipes-daemons/squid/squid_4.9.bb:LDFLAGS_append_powerpc
-= " -latomic"
-| meta-networking/recipes-daemons/squid/squid_4.9.bb:LDFLAGS_append_riscv64
-= " -latomic"
-| meta-networking/recipes-daemons/squid/squid_4.9.bb:LDFLAGS_append_riscv32
-= " -latomic"
+ Bugs fixed:
 
-Do you still have this patch in - so we can see if other arches fail
-for same reason?
+  * libarchive: do not follow external links when extracting files.
+  * libarchive: overwrite symbolic links as well if requested by the user.
 
-Andreas
+ New or updated application translations:
+
+  * Kurdish (Sorani) (Jwtiyar Nariman)
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+v1 -> v2: set correct checksums
+ .../{file-roller_3.32.4.bb => file-roller_3.32.5.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-gnome/recipes-gnome/file-roller/{file-roller_3.32.4.bb => file-roller_3.32.5.bb} (81%)
+
+diff --git a/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb b/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.5.bb
+similarity index 81%
+rename from meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb
+rename to meta-gnome/recipes-gnome/file-roller/file-roller_3.32.5.bb
+index a95735c9b..2070f18a9 100644
+--- a/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb
++++ b/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.5.bb
+@@ -13,8 +13,8 @@ DEPENDS = " \
+ 
+ inherit gnomebase gsettings itstool gnome-help gettext upstream-version-is-even mime-xdg
+ 
+-SRC_URI[archive.md5sum] = "21982b8d298cb2994a99494399dcb2d5"
+-SRC_URI[archive.sha256sum] = "1b3b2cbfcb444e0d150bfd063add9d5181c8ab24f0593e5a8894399297214017"
++SRC_URI[archive.md5sum] = "2afc688ac66a50213f6c42ee99479a96"
++SRC_URI[archive.sha256sum] = "d53d30b4b45f61158b7e550b71a8a5556e877695f43a2ceb88be895960e54176"
+ 
+ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagekit', '', d)}"
+ 
+-- 
+2.21.1
+
