@@ -1,83 +1,54 @@
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
- by mx.groups.io with SMTP id smtpd.web10.750.1588397238545866159
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com [209.85.166.67])
+ by mx.groups.io with SMTP id smtpd.web12.2427.1588412399301882966
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 May 2020 22:27:18 -0700
+ Sat, 02 May 2020 02:39:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=HthNf5DD;
- spf=pass (domain: gmail.com, ip: 209.85.160.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f195.google.com with SMTP id x12so9620664qts.9
-        for <openembedded-devel@lists.openembedded.org>; Fri, 01 May 2020 22:27:18 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=fLR4X6N0;
+ spf=pass (domain: gmail.com, ip: 209.85.166.67, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-io1-f67.google.com with SMTP id 19so7162465ioz.10
+        for <openembedded-devel@lists.openembedded.org>; Sat, 02 May 2020 02:39:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=tCTgG+n0kxd6tYE3SPmbiot5IzvG9RlzjVN5e5rwkZc=;
-        b=HthNf5DDw/Lyr6fAPAPEna930guPFCWyPRXDrRxfcdRqQ18VPLy+cFhBYLPk1KLn5h
-         KcY1MF60W+qGfNyyrbTj+KemMfWp0RCUKDO5ikv7SN8QtRff/ZMYRt4aIaXCc7Gaey3H
-         nMi2lh5L+Bu7Xyv7InRxU69ivR/KhtLdjht6UKmBioFca+Xu0LieSYclfwQ9euGVqAV8
-         1hQ4b4nd+OZ5tGI4vlQW4a3wSveViS4hY/eteHg80M8PfkKrMdL/aVLAXNpCaUu03Awp
-         Frdk8bTiSocsOZdcOrVSQOJhdmhQSZUsQom25lJNwp4G+ChW+/RaGd+34moL38Tqh/uQ
-         3XGw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=0rKJY+FTwJf0Fg8+jpGaO4dnHUTX3aQHHBVq/KEbEhg=;
+        b=fLR4X6N0A74ct3Zzf6gr89zUC/t+G13l1Qq1ZuD5XuwQlN6YnM+6+28tI3myUpyjEv
+         enRRK8/Ex8SNWopgi+agNT3kMo9llsUSd02pNf3cDgm5gKRnnXwaIYUBMH7mWThVx54c
+         LpFwrEvUGi1sVhyd+ayGxtyfeAbrLE5SecJ7T8tHMQoZnzVHXekYy+UfBdaCFcVqyKB0
+         soW7C5W9cWHCoUzH6gfBPgBHYFZhnyY8rOiD8zplZhCK+nnuF0Hb2sKhk1NYlWU+4r5t
+         H2YBwx9zQ9MCwCNVRJOSR3uA3N9ljSYFhhlOXz4GgpIfApDAxxVg5B/j2vjkOcRuvL0n
+         RINg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:content-transfer-encoding;
-        bh=tCTgG+n0kxd6tYE3SPmbiot5IzvG9RlzjVN5e5rwkZc=;
-        b=dBpi2kaYMrVYPBhjPMM7AyPk4Dua5svu0IBt9yggYlJrl7Ale9rT6OLbq80DmaLmqQ
-         BUPqISEtx1aoeJmR5QUddk20V5po+Yz3ZM3MMFpBmLzmHChD5y9RREZL4A8I/vSy7hT0
-         eyhTfx/xWEQX32jp0OXD6WAQrdc0cmg5DV32RANRkdCSy2mM49tn25V51nBdzywv43y3
-         L4UKQKqJ4vyn1zqoEn8J9L1tF/L/0gUn24A3SKvLU/4Sq6oKQ+AXZQB76IwMWzuX4iCM
-         MRR9EyzJNEcQpqc6TfArbp/vxPWf46gvftO+Xljp2qTpERm4C+xpoBTiUPleDpb7dlX9
-         sFJg==
-X-Gm-Message-State: AGi0Puaf8pAAZ1mIYXEB10Iy/nv38mrnuzdMZx2xP+cTCR5fHCdYBQ+6
-	rOHJTDzhsjEaCEXErkF2nj+mLOdQg/B+0/YpQM581mo5AvQ=
-X-Google-Smtp-Source: APiQypLld8QLEcouuyB23ZIEJOoj16JihbzCSkiYW/faAI/7KlrAEmi7E5jjS8QdS2irvgtgz2EtrkuYqAg5nbn/H5s=
-X-Received: by 2002:ac8:4e8d:: with SMTP id 13mr7071589qtp.293.1588397237396;
- Fri, 01 May 2020 22:27:17 -0700 (PDT)
+         :message-id:subject:to;
+        bh=0rKJY+FTwJf0Fg8+jpGaO4dnHUTX3aQHHBVq/KEbEhg=;
+        b=L/H1Fdqazg2czE4NzEveYjNk4klefDizVD+uTImYyPeuBQ5gsEeae+pMSi6TZfixq6
+         ygd+1RKj18o6mT/R+oYO5VRQM43iIPOfHacJYoGEM6i9Y+440RM+xR7GbIbiI5qG9q68
+         aWA8PazKA9WB+S6MnN1fF6Xo01BwZ40RtYsgj503pzY3dDQ92ilEmPEZRPiXJ6hcG/GL
+         T6d1q20etVhNGFWPLNbAqbjBNzUuH5JogjuuAqvY84/jaNHLG4UPJRn1FQ1tH8l+m0hl
+         J+33nuv66dsOrvc4hNYVC7vbrsgCSd7MBDDtfPwujbYX3RgUNueqa+d4QvqyIG+O8eH4
+         Dh5Q==
+X-Gm-Message-State: AGi0PuYB80DN6ZhA3VuyrRtqxyJC/PdF5tSCHF3WireqgdVWP23pOhoM
+	5LvH/Lf212c1YQgqd65U1H5XwCX0nsx7lu3h59OSxZNV
+X-Google-Smtp-Source: APiQypLkOqQ9TjV/vblGNrBRFtLDMzjAWdhQCpKa+dbgj0uMs/fRxbv1RCIh1RNbYcDXdaSUoQcEyFcgxkrqFR9DskU=
+X-Received: by 2002:a02:5184:: with SMTP id s126mr6696346jaa.81.1588412398420;
+ Sat, 02 May 2020 02:39:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200501113534.16030-1-schnitzeltony@gmail.com> <20200501113534.16030-2-schnitzeltony@gmail.com>
-In-Reply-To: <20200501113534.16030-2-schnitzeltony@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Fri, 1 May 2020 22:26:51 -0700
-Message-ID: <CAMKF1sqAMsnsTqMrn_EGnL8J5qYrzD6N2rdnJcPY_uNhmS8pfA@mail.gmail.com>
+References: <20200501113534.16030-1-schnitzeltony@gmail.com>
+ <20200501113534.16030-2-schnitzeltony@gmail.com> <CAMKF1sqAMsnsTqMrn_EGnL8J5qYrzD6N2rdnJcPY_uNhmS8pfA@mail.gmail.com>
+In-Reply-To: <CAMKF1sqAMsnsTqMrn_EGnL8J5qYrzD6N2rdnJcPY_uNhmS8pfA@mail.gmail.com>
+From: "Andreas M?ller" <schnitzeltony@gmail.com>
+Date: Sat, 2 May 2020 11:39:46 +0200
+Message-ID: <CALbNGRRB65WxnSv6UkVk=PodhyjM8ETJJq2xmVZwPhu852Ofsg@mail.gmail.com>
 Subject: Re: [oe] [PATCH 02/10] file-roller: upgrade 3.32.4 -> 3.32.5
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-fails in fetch
+On Sat, May 2, 2020 at 7:27 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> fails in fetch
+>
+> https://errors.yoctoproject.org/Errors/Details/409857/
+Oops - and I thought I had built it - now got same - V2 is coming soon
 
-https://errors.yoctoproject.org/Errors/Details/409857/
-
-On Fri, May 1, 2020 at 4:35 AM Andreas M?ller <schnitzeltony@gmail.com> wr=
-ote:
->
-> version 3.32.5
-> --------------
->
->  Bugs fixed:
->
->   * libarchive: do not follow external links when extracting files.
->   * libarchive: overwrite symbolic links as well if requested by the use=
-r.
->
->  New or updated application translations:
->
->   * Kurdish (Sorani) (Jwtiyar Nariman)
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  .../file-roller/{file-roller_3.32.4.bb =3D> file-roller_3.32.5.bb}  | 0
->  1 file changed, 0 insertions(+), 0 deletions(-)
->  rename meta-gnome/recipes-gnome/file-roller/{file-roller_3.32.4.bb =3D>=
- file-roller_3.32.5.bb} (100%)
->
-> diff --git a/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb =
-b/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.5.bb
-> similarity index 100%
-> rename from meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb
-> rename to meta-gnome/recipes-gnome/file-roller/file-roller_3.32.5.bb
-> --
-> 2.21.1
->
->=20
+Andreas
