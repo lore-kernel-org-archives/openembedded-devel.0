@@ -1,92 +1,99 @@
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.web11.2782.1588415828040080193
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by mx.groups.io with SMTP id smtpd.web11.12255.1588451737980404361
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 02 May 2020 03:37:08 -0700
+ Sat, 02 May 2020 13:35:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=OsUc2zWi;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id k1so14835254wrx.4
-        for <openembedded-devel@lists.openembedded.org>; Sat, 02 May 2020 03:37:07 -0700 (PDT)
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=pw7zX7jw;
+ spf=pass (domain: axis.com, ip: 195.60.68.18, mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ObFGsdsOOFKZ5gEzpe2VSGi4nAMxk0jQ6B8uBOZW1Dw=;
-        b=OsUc2zWilRFcGSVm6WIH6ZB/AxDSLXYqb7N8FcNs5vn63dXn3UxlMZsajqhY3+KBCv
-         zO4GNkUFkxtsdbiBTSi7nDBDXcTAcxjyVEfIcseTTVszl0DhnXk9cPT8MG0vfqjOX7Gv
-         2yGboYxZEi67QhtatR6tME07HzaCrmCj0GitDmGnzDbMu7FcwoJBvyI50a0kNUSbBXvc
-         iFz6rboMMJJGlVaE992Bg/MF9+sN+hmVcmhjgd7aGV7MIVlkLLyCdThtYRnW6KKDyolR
-         08XBJT1QMn0SMbtLn0L00aV4ZpCDRMbvfCCIcLg6MUaFJiCzrd8pCYjRyKmIm6tI27Y7
-         FoAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ObFGsdsOOFKZ5gEzpe2VSGi4nAMxk0jQ6B8uBOZW1Dw=;
-        b=Ti3AacY5uVPzLbR5e2KQlSlP56ZZUS7WFB/nkJR/Yp8r57k8sW3qX2LRLDuXiDivCR
-         BUCCJKPkbX0VXZ/B534ShQN3p5HI6T8FgOZ2JG0Qqa4C1E1me1NFNC1anKIHMCamqM0j
-         RMPFREgKmKRtncWKWsS6xb8KWiwIc0HMs52670RpQR5W7122iKF6y93yIoJ7nxlhygH4
-         Jug5+F5rLZP9iIyrzNgcEo6cuJkAFaDrSzdeh6nMrJ+fLXBlGJgawzmBEXLkefJmDcfT
-         KCWMG8+DLAVa9z4p6CYNnUVddL03QQPhh2+osTaGyP4lNdfpDjy5EbCMbS87rHE3C6nG
-         k8Pg==
-X-Gm-Message-State: AGi0Pubq7oQ8N+xKF0O6+TEcUluG8uDPjfV+t/159uBq3MmjU2/BIVVe
-	8sZdQp/erZ7JKsYgqSw7tWmZKS5K
-X-Google-Smtp-Source: APiQypLTyCFD6z7pXzGYBWTnc6DcQQeH9fqp+AGokWMZSZF40yEAsVw44W6Ce0g0hxD0t2KGV0rYDw==
-X-Received: by 2002:a5d:6a85:: with SMTP id s5mr6968961wru.122.1588415826176;
-        Sat, 02 May 2020 03:37:06 -0700 (PDT)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300F07F0ED486929800066C503824.dip0.t-ipconnect.de. [2003:f0:7f0e:d486:9298:6:6c50:3824])
-        by smtp.gmail.com with ESMTPSA id y70sm3804698wmc.36.2020.05.02.03.37.05
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 02 May 2020 03:37:05 -0700 (PDT)
-From: "Andreas M?ller" <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v2] file-roller: upgrade 3.32.4 -> 3.32.5
-Date: Sat,  2 May 2020 12:36:57 +0200
-Message-Id: <20200502103657.16172-1-schnitzeltony@gmail.com>
+  d=axis.com; l=2371; q=dns/txt; s=axis-central1;
+  t=1588451738; x=1619987738;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=j799wBYjnu8WPtexSrYLXDmvTHf3CaGZdjTOuvtxT/w=;
+  b=pw7zX7jws7osPuzhq74ByUrJ/84QOXAH37jgfTu2EUVTlTnXOjV36n8W
+   zM+P3OTPdZud70rriQuH9nXLhSNnJKybR6k4dUZCb/SSzlstlSwhNp3Tk
+   axtR1h/OrsbpIBsEvcRCRNcAoz+P5nQrqmW3GIwTy1WRUDOns5kgqLPzE
+   rXyFJJ9cgXCg/UaooDC18gUjWRrRDLuqpM7DuiXjqxu86boutexeiAPXa
+   a7uwa+IvwIXEMD8mphAn9weck4jOeR8VGe7gnX2Toqju/rkJ+KJ2aYCpR
+   ywHJ0SRRbrKNru/KM22tNt+rh5MEYcUm5tQDl6l3CbzKme82Li1hS+CWZ
+   Q==;
+IronPort-SDR: LZBIqkPuxjGeKrVtHCIY+XzjxnhZpIs+c/KuWL7WfhRitO9CUfY0BcESAGIXsTvZ3f9S40xNGd
+ L5JgW9yadZesYrnjwHrKSvcAs29M6kGp6hEzoyEVSOpIFbcerguT+7B6/XEd2BHeQM3GJNZ6xi
+ KRJJ76ggShp/TydhMdhfC13C3iHkueh1J5T5tVPL88Ql89gVJ2vp0G7r9S8IJm9lsVaJjcp0TG
+ +IKYnj2gc9dPn05Q3qZYgS+rXhqpdz4NN4An/sHyldqhRBlO9r20+35j3SnHmRfELxNftaxnmX
+ MYQ=
+X-IronPort-AV: E=Sophos;i="5.73,345,1583190000"; 
+   d="scan'208";a="8092956"
+From: "Peter Kjellerstedt" <peter.kjellerstedt@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][master][dunfell][PATCH v2] paho-mqtt-c: Update to the real 1.3.2, and correct the license
+Date: Sat, 2 May 2020 22:35:33 +0200
+Message-ID: <20200502203533.15390-1-pkj@axis.com>
 X-Mailer: git-send-email 2.21.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Return-Path: pkj@axis.com
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-version 3.32.5
---------------
+In commit b0345e3f (paho-mqtt-c: upgrade 1.3.1 -> 1.3.2), paho-mqtt-c
+was supposedly updated to 1.3.2. However, the SRCREV did not match the
+v1.3.2 tag.
 
- Bugs fixed:
+With the update to 1.3.2, the license was changed from EPL-1.0 | EDL-1.0
+to EPL-2.0 | EDL-1.0. This was updated in commit b0345e3f for
+LIC_FILES_CHKSUM, but not in LICENSE.
 
-  * libarchive: do not follow external links when extracting files.
-  * libarchive: overwrite symbolic links as well if requested by the user.
+Remove do_configure_prepend_libc-musl() as this has now been fixed
+upstream.
 
- New or updated application translations:
-
-  * Kurdish (Sorani) (Jwtiyar Nariman)
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
-v1 -> v2: set correct checksums
- .../{file-roller_3.32.4.bb => file-roller_3.32.5.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/file-roller/{file-roller_3.32.4.bb => file-roller_3.32.5.bb} (81%)
 
-diff --git a/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb b/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.5.bb
-similarity index 81%
-rename from meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb
-rename to meta-gnome/recipes-gnome/file-roller/file-roller_3.32.5.bb
-index a95735c9b..2070f18a9 100644
---- a/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb
-+++ b/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.5.bb
-@@ -13,8 +13,8 @@ DEPENDS = " \
+PATCH v2: Add notice as to why do_configure_prepend_libc-musl() is
+removed.
+
+ .../paho-mqtt-c/paho-mqtt-c_1.3.2.bb             | 16 ++++++----------
+ 1 file changed, 6 insertions(+), 10 deletions(-)
+
+diff --git a/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.2.bb b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.2.bb
+index fa8c714ce..071d51fc6 100644
+--- a/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.2.bb
++++ b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.2.bb
+@@ -2,19 +2,19 @@ SUMMARY = "Paho MQTT - C libraries for the MQTT and MQTT-SN protocols"
+ DESCRIPTION = "Client implementation of open and standard messaging protocols for Machine-to-Machine (M2M) and Internet of Things (IoT)."
+ HOMEPAGE = "http://www.eclipse.org/paho/"
+ SECTION = "console/network"
+-LICENSE = "EPL-1.0 | EDL-1.0"
++LICENSE = "EPL-2.0 | EDL-1.0"
  
- inherit gnomebase gsettings itstool gnome-help gettext upstream-version-is-even mime-xdg
+ LIC_FILES_CHKSUM = " \
+-        file://edl-v10;md5=3adfcc70f5aeb7a44f3f9b495aa1fbf3 \
+-        file://epl-v20;md5=d9fc0efef5228704e7f5b37f27192723 \
+-        file://notice.html;md5=943f861069889acecebf51dfa24478e2 \
+-        file://about.html;md5=e5662cbb5f8fd5c9faac526e4077898e \
++    file://edl-v10;md5=3adfcc70f5aeb7a44f3f9b495aa1fbf3 \
++    file://epl-v20;md5=d9fc0efef5228704e7f5b37f27192723 \
++    file://notice.html;md5=943f861069889acecebf51dfa24478e2 \
++    file://about.html;md5=e5662cbb5f8fd5c9faac526e4077898e \
+ "
  
--SRC_URI[archive.md5sum] = "21982b8d298cb2994a99494399dcb2d5"
--SRC_URI[archive.sha256sum] = "1b3b2cbfcb444e0d150bfd063add9d5181c8ab24f0593e5a8894399297214017"
-+SRC_URI[archive.md5sum] = "2afc688ac66a50213f6c42ee99479a96"
-+SRC_URI[archive.sha256sum] = "d53d30b4b45f61158b7e550b71a8a5556e877695f43a2ceb88be895960e54176"
+ SRC_URI = "git://github.com/eclipse/paho.mqtt.c;protocol=http \
+            file://0001-Fix-bug-of-free-with-musl.patch"
  
- PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagekit', '', d)}"
+-SRCREV = "fbe39064c4416f879308a8a5390b19d544970789"
++SRCREV = "3148fe2d5f4b87e16266dfe559c0764e16ca0546"
  
+ DEPENDS = "openssl"
+ 
+@@ -29,7 +29,3 @@ do_install_append() {
+ }
+ 
+ EXTRA_OECMAKE = "-DPAHO_WITH_SSL=ON"
+-
+-do_configure_prepend_libc-musl() {
+-    sed -i -e "s/SET(LIBS_SYSTEM c dl pthread anl rt)/SET(LIBS_SYSTEM c dl pthread rt)/g" ${S}/src/CMakeLists.txt 
+-}
 -- 
 2.21.1
 
