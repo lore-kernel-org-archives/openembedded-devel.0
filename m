@@ -1,86 +1,69 @@
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com [209.85.128.67])
- by mx.groups.io with SMTP id smtpd.web10.31425.1588540437590994441
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web10.707.1588567350158606085
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 May 2020 14:13:57 -0700
+ Sun, 03 May 2020 21:42:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=FS/bOTes;
- spf=pass (domain: gmail.com, ip: 209.85.128.67, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-wm1-f67.google.com with SMTP id z6so6588875wml.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 03 May 2020 14:13:57 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=M5sNouE4;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id e6so3177284pjt.4
+        for <openembedded-devel@lists.openembedded.org>; Sun, 03 May 2020 21:42:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=an8LNiyTZ8xJFJ3QN7ybYFl5C9ehgZZQkjzA7jc7fKQ=;
-        b=FS/bOTesQZo9VbFfSWQZRCFiXf/OTzealb24+XS/gLorwI2pF1VN1ucbdpk3Sjvngq
-         5ON/0tNCq4hBRZ6Dt5CoaKg494p2Kq92stHUyKj/HSy9y3yJCFHAYKwCOWI2tIF7en/Y
-         KHfsRuvT50eeoPUs/o8yVbVjiYw2bnqFGXSfhTZOicXNa69kN3MZ14ISVOYftOwMbIpx
-         LMHdBwIvsxdsxkLFM+TQalxSjSuWCum1F/AmdQuPlsw7x6GPMoJ1Ii9mmBCSMzJH6XX+
-         kmmJNopCzLA2va52Y3CxPUOkolntRs7tc12o6F11LHJ+bgjaGG7G7/Z0t6Yxm3tmseBb
-         YPRQ==
+        h=from:to:subject:date:message-id;
+        bh=bjCS4zVzwIj+/Up+wVApzOqoxG7rnu9YHGa06h6xdGA=;
+        b=M5sNouE4ZGdo1hNfUalO2rDeMiMU2bc3v6VLSRAZ7SmmhtWhWBQ/OELEi9YGz+PfUs
+         uylHkbKp4HD89rZPpgv5ZjaI6YJiF9A+7FzGAusrx7XjU6fkufqHJ7Ahhj9KSAYURYoa
+         uEJ1Lew+Mvk/42NU/kPLHoLNct6EFvuAduguCOlg2q9aLgrxYg96ZJ7p8HhgE6MuiTJu
+         R6DqO0p9LwCzckABTXunbPc6w8CLt7k49/VZao92vDXGZWMqQSgtUpuKAcz2bb/hdxOA
+         mr7gteBP506yvCa9TQI8JmYJdaSFizJ2TvlbO0IEvadfIXbgaBxLucQScdnuQbqxUQGa
+         uaSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=an8LNiyTZ8xJFJ3QN7ybYFl5C9ehgZZQkjzA7jc7fKQ=;
-        b=B4pzFSr8YZSqfpH9Fu8cHEVWtQVXUGjAKQiRHkLldznhtJm2B5qbRg+NE7htVHmsa1
-         pB/BEt+hV4SK3Qj5ajW2JNWLup57Ikn7Ez8LbGbdO4ya+kED4lMU/X5RXV2+Y8DmiSBk
-         SRRcXL86zNlx3jTt+I8K99ndwj2UtUmtSZsMHlaWX3IqBYxD9nOkxo1e/LdyLNay/SPs
-         BM9ERrRj0twIKYSsHiv7zymqxhdzlcS8kBJZXPKKD1L8bLbWti3mVMiIstlfrgk236ma
-         n1cFNs52NyRml3RkFIpxHIUvKWwdTjum7AH+b97GoC+fSFByXR9RcGrlfxjfQyvvBHCL
-         6TGQ==
-X-Gm-Message-State: AGi0PuZcp3CmQxO3oYZ/vLA49SoDsMxfM/hNRWLLTKe9cFOyyDPhhX2q
-	8fVkCK4iOeM6ymgVYLYdyxa+Pnb6CNM=
-X-Google-Smtp-Source: APiQypKX5kgq3DwJt6memCFtJRzcGsSWtp+AaSkReYmCFhp2O/biFvGKfMsCksC2MoDAzOni7HhciQ==
-X-Received: by 2002:a1c:48c:: with SMTP id 134mr10291863wme.47.1588540435743;
-        Sun, 03 May 2020 14:13:55 -0700 (PDT)
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from localhost.localdomain ([5.170.12.105])
-        by smtp.gmail.com with ESMTPSA id r15sm3283391wrq.93.2020.05.03.14.13.54
+        h=x-gm-message-state:from:to:subject:date:message-id;
+        bh=bjCS4zVzwIj+/Up+wVApzOqoxG7rnu9YHGa06h6xdGA=;
+        b=mHa1BDcdMkpPadC4aRmdrYqvuj6mYYOOGEMi8zlVUIhqYPK0GOqar1Rw9J8wtjuQL2
+         VX4OpQDOeV8GXHbYPnA+chQawICSePvLP1CXDPYHJxhyi0m+9pFf46pfN/qCCe+tO0wR
+         7lcNaRy3BqqK8lsbABmfLjN+ivOkScLG4hKgjqu+7c8V7PNJ5wQL29dFLa1zkevxZXsz
+         cA9k/SNKYiwDSo4paogYWiG0HUFPlp5r4E0+rKLXtK7DSLDyh1WFjb0F4h7KIZy1AFQj
+         z97ymmmhSxHT+hPdxRiWoAxWkEsvCGeCWC4gTeOK3Zj5eVA8jgiiLdPQ61aqmd71+Upd
+         okwA==
+X-Gm-Message-State: AGi0PubBnJd/wxqJIFUg4izLZQIIkCLb1mrwcaS5FV9VXKT7Eao5P0cV
+	s9XLz1U5p3VgQ7cbf/6DtugIgCfv
+X-Google-Smtp-Source: APiQypL2X5ubXq+rILEyXLuX7+zdvda2UQlAAzPrhQckZOMqefSP5kVBl6jz4hiAPif16e7in4vpUA==
+X-Received: by 2002:a17:90a:2943:: with SMTP id x3mr14794562pjf.63.1588567349429;
+        Sun, 03 May 2020 21:42:29 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:d8cc:ac72:24b0:3118])
+        by smtp.gmail.com with ESMTPSA id w125sm6859273pgw.22.2020.05.03.21.42.28
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 03 May 2020 14:13:55 -0700 (PDT)
-From: "Gianfranco" <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+        Sun, 03 May 2020 21:42:28 -0700 (PDT)
+From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH] cpprest: Disable one more test requiring internet connection
-Date: Sun,  3 May 2020 23:13:52 +0200
-Message-Id: <20200503211352.25720-1-costamagnagianfranco@yahoo.it>
+Subject: [dunfell][PATCH 0/1] Submit branch Maintainer update
+Date: Sun,  3 May 2020 21:42:26 -0700
+Message-Id: <20200504044227.6314-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
----
- .../cpprest/disable-outside-tests.patch       | 20 +++++++++++++++++++
- 1 file changed, 20 insertions(+)
+Just throwing my hat in as normal with changes.
 
-diff --git a/meta-oe/recipes-support/cpprest/cpprest/disable-outside-tests.patch b/meta-oe/recipes-support/cpprest/cpprest/disable-outside-tests.patch
-index e108e0279..5f1f8a9f9 100644
---- a/meta-oe/recipes-support/cpprest/cpprest/disable-outside-tests.patch
-+++ b/meta-oe/recipes-support/cpprest/cpprest/disable-outside-tests.patch
-@@ -105,3 +105,23 @@ Index: cpprest/Release/tests/functional/http/client/connections_and_errors.cpp
-  
-  } // SUITE(connections_and_errors)
-  
-+--- cpprest-2.10.16.orig/Release/tests/functional/http/client/redirect_tests.cpp
-++++ cpprest-2.10.16/Release/tests/functional/http/client/redirect_tests.cpp
-+@@ -159,7 +159,7 @@ SUITE(redirect_tests)
-+             VERIFY_NO_THROWS(reply.get());
-+         }
-+     }
-+-
-++/*
-+     TEST(does_not_follow_https_to_http_by_default)
-+     {
-+         handle_timeout([] {
-+@@ -182,7 +182,7 @@ SUITE(redirect_tests)
-+             );
-+         });
-+     }
-+-
-++*/
-+     TEST_FIXTURE(uri_address, follows_permanent_redirect)
-+     {
-+ #if USING_WINHTTP
+Armin Kuster (1):
+  README: updated Maintainers list for Dunfell
+
+ README                      |  2 +-
+ meta-filesystems/README     | 10 +++++-----
+ meta-gnome/README           | 10 +++++-----
+ meta-initramfs/README       |  8 ++++----
+ meta-multimedia/README      | 10 +++++-----
+ meta-networking/MAINTAINERS | 32 +++-----------------------------
+ meta-networking/README      |  6 +++---
+ meta-oe/README              |  8 ++++----
+ meta-perl/README            | 10 ++++------
+ meta-python/README          | 12 +++++-------
+ meta-webserver/README       |  8 ++++----
+ meta-xfce/README            | 10 +++++-----
+ 12 files changed, 48 insertions(+), 78 deletions(-)
+
 -- 
 2.17.1
 
