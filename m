@@ -1,77 +1,88 @@
-Received: from mail-lf1-f68.google.com (mail-lf1-f68.google.com [209.85.167.68])
- by mx.groups.io with SMTP id smtpd.web11.9498.1588690542257034880
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
+ by mx.groups.io with SMTP id smtpd.web12.9602.1588690718211155611
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 May 2020 07:55:42 -0700
+ Tue, 05 May 2020 07:58:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=SdUCbQvz;
- spf=pass (domain: gmail.com, ip: 209.85.167.68, mailfrom: wickbergster@gmail.com)
-Received: by mail-lf1-f68.google.com with SMTP id z22so1620999lfd.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 May 2020 07:55:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=inxXCGRS;
+ spf=pass (domain: gmail.com, ip: 209.85.167.48, mailfrom: wickbergster@gmail.com)
+Received: by mail-lf1-f48.google.com with SMTP id j14so1601241lfg.9
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 May 2020 07:58:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=DdPBTKys6lI+1fVZ8ZOqfrHr5YtIFsbwAdvfEc5ZT2A=;
-        b=SdUCbQvzxLhxhVBRVhsSF2OyCbIbmPaHnjkmd1nzE0FzGUHj1CPDdHw8qpdYlNVS26
-         i95ul8ihJnBcQXN1tz9vyzTnB0QF/KlyxKFjmo9BKlPOQixhwCMgV4cst03Q3887zjMA
-         8+aH+Dg5I0jDM2UAXB685TMCrnq0Gm6nAUzPy5QlZjxFq5q6y7uEB1H9LTDu4hgWgGhi
-         JmUEzYYLi2rvq3uGtOONV8OBhSXbd5NaJU1Y5U91WjgYc9JaUia5K/8Ku1XCjYpGY7Cb
-         3aJOxxlmBmdAA6b/4QJbqgBodnb30BU5ccXBmCd5aksPD3jUUAOOAOxVK++8aCU8X+2q
-         IWCw==
+        bh=t53bNRtcU6DBx8iVSjMIQDzodoAPAjLvPk1jpfE+Jhw=;
+        b=inxXCGRSId9bn7HVl1M6Mg6mpGUgoeYNKvCTXJn29NwpcEhKbS/oTnvY9dNUgOGteL
+         Bdo1MOVuxEv0YOhLtFvCKzJHCwcTm4fUDeHx1rtJznBw87g42+C9F2wXwGJkWwtSI3Qz
+         lpwI0pq7Xc0Xam556+OEsCoH00vfYCNZwrkgqf0n55/H4+sTmm1nyAdjWqbCGOojS+9H
+         YIA4pAAYGiVlSEajicQN80UHlxpEF35CYACCQgQseTGR8PwQ9G1XF51pnDJWPfU3p+yE
+         T3S6r++7mR4+mnVM6KoDhf+YL9iEs+NcBNmE8N6ssA2nJYhL2PJ+qY+uKgRHJWPrFAo4
+         18Kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=DdPBTKys6lI+1fVZ8ZOqfrHr5YtIFsbwAdvfEc5ZT2A=;
-        b=YHg6XSCoEN+2Uk9RE2FFzWWdkztyvFjQ6KPWuTEn5P481pNlOAZcz8MqbCvujyU1PN
-         FHcjcBSEBplW4boypoyGtCDDSPV7h+x7paVH8k9jI9uyA49zRR5ZNMiSA4/aWiGMemDp
-         0umutFSBFoKzkW5AwTRV3Ba91FdRb352m42/6lmV8pNQW/ol1lTW6Nd+3oCqcd80vdTK
-         Se7FV23GVTRCS9xSYRrjHaxqTjvqvSAm8i6UzoR5EIkbp4HnN+rwJS3HpZFBjLuc7Plx
-         B4zOL+wvT7Dz+3YQoftBRqX/+7baobL+I9xIfTr70EfIfDp6uQd1PHJ8XVJZoVCeTkif
-         zxpA==
-X-Gm-Message-State: AGi0PuZVsWwXde/J1CvlrD8g3iRjmpv5ZCuWraJMKkbrHnp3R6Pqf7JC
-	xf1swceSWzkXdtslJd8zoVCvRc94kiQ=
-X-Google-Smtp-Source: APiQypK/TX0rtvb+xCCRErMlrHB87yGgzM3o3A8P/TtEXqXrpQEN9DdS6ku7oMfhYFk1SxGsGoUU0g==
-X-Received: by 2002:a19:f610:: with SMTP id x16mr1958671lfe.79.1588690540172;
-        Tue, 05 May 2020 07:55:40 -0700 (PDT)
+        bh=t53bNRtcU6DBx8iVSjMIQDzodoAPAjLvPk1jpfE+Jhw=;
+        b=DPRGoFdgGzh7PJNTrKUJg0xd7S7BidlNdZ6YZIkjVsWjKlh7pwPZKjmNJ0ONoY7pFB
+         qtZ7COKrhEI7zumwinphixeLE/fXBy3oX+0s9QzaFog32yvHB7JIlyAuIAZPzBdLz4dM
+         JcmM75dU73LSvASVmV+wmT4dfSvtJh/v6MzAjPlWiy6eUzcqEB/x33IIkKoM6pU+ufKY
+         1Ch5TmIIN2MmbxzBchexZB/GvkH7ePCjy7XzblzrZvhr9lWUYeEl6y1ttMRV46+rTTzi
+         cMPVjgGzH3LgoXZAfTqtmfzJznm0c2r5JzJYTooQr9V/YYYFMXf7nLBn5My0aVb5463e
+         2aKg==
+X-Gm-Message-State: AGi0PuZXuRyeK5/RInCbsw6jNJJFWAjyz2F2NxEm7zkUJCGXGbd7ZSbv
+	byKSkEC6HvP123FXm2BKppRNtNrep+w=
+X-Google-Smtp-Source: APiQypKEiS3gOwziXnEOMrX5gkq1fTO48ibxSARUshzwRvyLFLzHEsB00hbr91IA1T+HA6YkgSwBFA==
+X-Received: by 2002:ac2:4466:: with SMTP id y6mr1963855lfl.125.1588690716194;
+        Tue, 05 May 2020 07:58:36 -0700 (PDT)
 Return-Path: <wickbergster@gmail.com>
 Received: from localhost.localdomain (dyn-13-cust157.netit.se. [85.89.70.157])
-        by smtp.gmail.com with ESMTPSA id y21sm1876525ljg.66.2020.05.05.07.55.39
+        by smtp.gmail.com with ESMTPSA id c4sm1557738lfi.13.2020.05.05.07.58.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 May 2020 07:55:39 -0700 (PDT)
+        Tue, 05 May 2020 07:58:35 -0700 (PDT)
 From: "Alexander Vickberg" <wickbergster@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Vickberg <wickbergster@gmail.com>
-Subject: [meta-networking][PATCH v2] tcpdump: Fix PACKAGECONFIG for OpenSSL
-Date: Tue,  5 May 2020 16:54:43 +0200
-Message-Id: <20200505145442.2477988-1-wickbergster@gmail.com>
+Subject: [meta-oe][PATCH v2] iperf3: Add OpenSSL build option to PACKAGECONFIG
+Date: Tue,  5 May 2020 16:57:58 +0200
+Message-Id: <20200505145757.2478494-1-wickbergster@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This fixes building TCPDump without OpenSSL. Current version does not
-recognize the option --without-openssl.
+Make building with OpenSSL optional but enabled by default as today.
 
 Signed-off-by: Alexander Vickberg <wickbergster@gmail.com>
 ---
 Changes in v2: No changes. Resend with git send-email.
 
- meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-benchmark/iperf3/iperf3_3.7.bb | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
-index 05fc99bdc..94543dd1d 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
-@@ -27,7 +27,7 @@ inherit autotools-brokensep ptest
- PACKAGECONFIG ?= "openssl"
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.7.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.7.bb
+index 98d2faabf..c7ad91b24 100644
+--- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.7.bb
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.7.bb
+@@ -11,8 +11,6 @@ AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f9088fe7ffdccd042f7645f1012d7f70"
  
- PACKAGECONFIG[libcap-ng] = "--with-cap-ng,--without-cap-ng,libcap-ng"
--PACKAGECONFIG[openssl] = "--with-crypto,--without-openssl --without-crypto,openssl"
-+PACKAGECONFIG[openssl] = "--with-crypto,--without-crypto,openssl"
- PACKAGECONFIG[smi] = "--with-smi,--without-smi,libsmi"
- # Note: CVE-2018-10103 (SMB - partially fixed, but SMB printing disabled)
- PACKAGECONFIG[smb] = "--enable-smb,--disable-smb"
+-DEPENDS = "openssl"
+-
+ SRC_URI = "git://github.com/esnet/iperf.git \
+            file://0002-Remove-pg-from-profile_CFLAGS.patch \
+            "
+@@ -23,8 +21,9 @@ S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
++PACKAGECONFIG ?= "openssl"
++
+ PACKAGECONFIG[lksctp] = "ac_cv_header_netinet_sctp_h=yes,ac_cv_header_netinet_sctp_h=no,lksctp-tools"
++PACKAGECONFIG[openssl] = "--with-openssl=${RECIPE_SYSROOT}${prefix},--without-openssl,openssl"
+ 
+ CFLAGS += "-D_GNU_SOURCE"
+-
+-EXTRA_OECONF = "--with-openssl=${RECIPE_SYSROOT}${prefix}"
 -- 
 2.25.1
 
