@@ -1,72 +1,55 @@
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com [209.85.208.193])
- by mx.groups.io with SMTP id smtpd.web10.289.1588631083491831053
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by mx.groups.io with SMTP id smtpd.web12.20158.1588640089421564859
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 May 2020 15:24:43 -0700
+ Mon, 04 May 2020 17:54:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=asa4/mru;
- spf=pass (domain: gmail.com, ip: 209.85.208.193, mailfrom: bartlomiej.burdukiewicz@gmail.com)
-Received: by mail-lj1-f193.google.com with SMTP id j3so11358692ljg.8
-        for <openembedded-devel@lists.openembedded.org>; Mon, 04 May 2020 15:24:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=fyj6gbrQNPTlHTzWqAoI32R/X4uuFHgnWkLv78Y4Mi4=;
-        b=asa4/mruOVBNQHyryFSZSpJtr+AQUGTAweBaZO92apW7TMHNo6zqFVy17UV+rgGQ5W
-         Qly59wsXkoWehUk/ZUsJPEfSEmfUSBV8cBT6eYFiG0AYJQzCufBlqf3ol4uJBXf4HR5f
-         YyH5Gh9RFqC01PFycnNEM9j7bVGIf3ApgAlpsO1f+cW/qdFlYnaR8mD6zA5ZtzhX3e73
-         RVVDtPVei76ErR+ERhnx23+8QflZSeAGQWQd1kQ9adLQKhDQRPXiUaS68w2Spl54y25L
-         MQHfE4YTSbdGeSIGDYyf6V5OubZ8MkChH1/sz/Moj2RkKqoAOV3W4ha1BXuZA+Gb5hT6
-         TeQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=fyj6gbrQNPTlHTzWqAoI32R/X4uuFHgnWkLv78Y4Mi4=;
-        b=FVR7qj+Md6/FZV0v4F7qM8jxOuulwg0TvcuND0o5X6kpt7Mq9hGk1F8KfJcaurfHY9
-         LyrqjtbMYZZL0nFjfsGYUGkTvBjVWnQuMMPwH7BuxaJKWBY7X3V0dJVGVBGxqKUxsO3Z
-         QhYYIsup1aPqqE1ZAZ9CF8KNV9ubQjio7tYfqMfF4yedgqaSYJwATTAjxhCT/tUmkUsO
-         wXmTq/R0boDJlIOqrRwkDY2LNbUyRck9bUtXZe5coNqaweeccOVIGgl9tVim72IKDMOg
-         nfUFqE6UlA3rurNlSBdWsXk4zwUmQAGEKzGsGs3Tl9Wc2BM4dAmW5MndptA8t0xRrJjR
-         t+aA==
-X-Gm-Message-State: AGi0Pub1E88OueaBeqMde0aq21rtfk62ntiIRiPVFPhP25ixQnRGarwj
-	KmNPH796vaX8Q1l8LrbZJSIjYTpT19c=
-X-Google-Smtp-Source: APiQypLBSwngNYiWJT6cTAYZOuMM0QqDIZXCC1Yy2fEoZKs5/rGJLv6otLdOznqOCjlby1r5QYn2vA==
-X-Received: by 2002:a2e:6c08:: with SMTP id h8mr11125562ljc.48.1588631081539;
-        Mon, 04 May 2020 15:24:41 -0700 (PDT)
-Return-Path: <bartlomiej.burdukiewicz@gmail.com>
-Received: from localhost.localdomain (dynamic-78-8-50-212.ssp.dialog.net.pl. [78.8.50.212])
-        by smtp.gmail.com with ESMTPSA id g6sm147205ljj.78.2020.05.04.15.24.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 May 2020 15:24:40 -0700 (PDT)
-From: =?UTF-8?B?QmFydMWCb21pZWogQnVyZHVraWV3aWN6?= <bartlomiej.burdukiewicz@gmail.com>
+ dkim=pass header.i=@linux.microsoft.com header.s=default header.b=dmxqRfQJ;
+ spf=pass (domain: linux.microsoft.com, ip: 13.77.154.182, mailfrom: alhe@linux.microsoft.com)
+Received: from ALSAMON-X.corp.microsoft.com (unknown [131.107.159.250])
+	by linux.microsoft.com (Postfix) with ESMTPSA id BA1E620B717B
+	for <openembedded-devel@lists.openembedded.org>; Mon,  4 May 2020 17:54:48 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com BA1E620B717B
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+	s=default; t=1588640088;
+	bh=N1oeCpTYL6ld9RrUg9qyNYUMTL1F5DIvSr5v0rb/LtI=;
+	h=From:To:Subject:Date:From;
+	b=dmxqRfQJJvbQ6PdJlh9JnXgPjJ/4V7iFFNQU+Tgzub/n5MYjBVOWisvKVsmUCLF0L
+	 FYkfOZ4V3ibOQ7GrglQXkR2s4gRYebm4le8h6iQUWqJkFYFUrYKLgALXTXN+AAAnG2
+	 onlsDxNZdmI7h53NEeswJJL5hTrSUvxCwb1ckes8=
+From: "Alejandro Hernandez" <alhe@linux.microsoft.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Bart=C5=82omiej=20Burdukiewicz?= <bartlomiej.burdukiewicz@gmail.com>
-Subject: [meta-oe][PATCH 2/2] pugixml: add native and nativesdk BBCLASSEXTEND
-Date: Tue,  5 May 2020 00:24:30 +0200
-Message-Id: <20200504222430.388879-2-bartlomiej.burdukiewicz@gmail.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200504222430.388879-1-bartlomiej.burdukiewicz@gmail.com>
-References: <20200504222430.388879-1-bartlomiej.burdukiewicz@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Subject: [meta-oe][PATCH] remmina: Upgrade to version 1.4.3
+Date: Mon,  4 May 2020 17:54:29 -0700
+Message-Id: <20200505005429.4707-1-alhe@linux.microsoft.com>
+X-Mailer: git-send-email 2.17.1
 
-Signed-off-by: Bartłomiej Burdukiewicz <bartlomiej.burdukiewicz@gmail.com>
+From: Alejandro Hernandez Samaniego <alejandro@enedino.org>
+
+- Get rid of md5sum as well.
+
+Signed-off-by: Alejandro Hernandez Samaniego <alejandro@enedino.org>
 ---
- meta-oe/recipes-devtools/pugixml/pugixml_1.10.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../remmina/{remmina_1.3.6.bb => remmina_1.4.3.bb}             | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-support/remmina/{remmina_1.3.6.bb => remmina_1.4.3.bb} (89%)
 
-diff --git a/meta-oe/recipes-devtools/pugixml/pugixml_1.10.bb b/meta-oe/recipes-devtools/pugixml/pugixml_1.10.bb
-index 73ddf77d8..9a814de23 100644
---- a/meta-oe/recipes-devtools/pugixml/pugixml_1.10.bb
-+++ b/meta-oe/recipes-devtools/pugixml/pugixml_1.10.bb
-@@ -21,3 +21,5 @@ EXTRA_OECMAKE += "-DBUILD_PKGCONFIG=ON \
-                   -DBUILD_SHARED_LIBS=ON \
-                   -DCMAKE_BUILD_TYPE=Release \
-                   "
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb b/meta-oe/recipes-support/remmina/remmina_1.4.3.bb
+similarity index 89%
+rename from meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+rename to meta-oe/recipes-support/remmina/remmina_1.4.3.bb
+index 5b663489f..a05847429 100644
+--- a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
++++ b/meta-oe/recipes-support/remmina/remmina_1.4.3.bb
+@@ -11,8 +11,7 @@ LDFLAGS_append_libc-musl = " -lexecinfo"
+ 
+ SRC_URI = "https://gitlab.com/Remmina/Remmina/-/archive/v${PV}/Remmina-v${PV}.tar.bz2 \
+ "
+-SRC_URI[md5sum] = "6da599c3a5cab2df37a70f8fba2f5438"
+-SRC_URI[sha256sum] = "fbed745438bb0c21467b60cbd67c8148a9289b5ebc7482d06db443bea556af1a"
++SRC_URI[sha256sum] = "3ed23be326be0bf3c98428c1b4f4c948c1ded2048bd27f107380e12574797930"
+ 
+ S = "${WORKDIR}/Remmina-v${PV}"
+ 
 -- 
-2.26.2
+2.17.1
 
