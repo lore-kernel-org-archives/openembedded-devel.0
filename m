@@ -1,82 +1,86 @@
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com [209.85.128.68])
- by mx.groups.io with SMTP id smtpd.web10.259.1588771779841078174
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com [209.85.214.194])
+ by mx.groups.io with SMTP id smtpd.web10.496.1588806544333106820
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 May 2020 06:29:40 -0700
+ Wed, 06 May 2020 16:09:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=jbHtOBBK;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.68, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f68.google.com with SMTP id u16so2653460wmc.5
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 May 2020 06:29:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=WITH3Ouy;
+ spf=pass (domain: gmail.com, ip: 209.85.214.194, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f194.google.com with SMTP id t7so1274633plr.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 May 2020 16:09:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=+nygrohoC3XmdgebrcFnnfB1c7tN1EG6SJKbveh6NSY=;
-        b=jbHtOBBKUx0EaabyYULfUSTZQMi1uBrt6BxitDPh/B/hZznfBfBd9p2Mw7bW8Aj1+Y
-         YV8TxRcKlL60SGYOa/2DZAUqBaLd+QS4wBStJ3eV8UT6XS2gT6o0YLwsZ6nhfaoxxxgA
-         +WiMAG3haeVhISKPU5m+wL7u9bMxeAgK/ozpk43aLOjqkWn8Jdz3n/s5GeqXx3Lt3S37
-         MzOdGa3nE+LNl9qoG+Y4T0Te6soh+lZayrYFU6QH4d7bzgovFpo7p1RBpp5o8bQERe/1
-         avopYy4ivluPBovfIVtbmi06PhaoaH6UA10c0xxIOw9Urn3bErfXEuhP/M4HPRr4PLeA
-         m75A==
+        bh=/kcDU9A+GEoZX16z4hIkt6lX9QXR1EH4dmrEi19EH3s=;
+        b=WITH3OuyrTdq1pZe288XvSXO24oxlh1N04ihFOzlzTmnqeBJJVU9fOO2+V8b674RM/
+         q5DzO/O3modkXqAS9r1qiAiw3VJxO43rlFFYJiw2nz9EdcBaAQyfdBxYHGvwXmsg6xXi
+         J7VgbWezNY2s2r5LH7HQmype0uJqLD5R+/VTS70IigYMyJ9ASzhSL7RIZRCaNIik97Ha
+         7XTo/sDO8II+anVG2//kFyw1wTEPQdH9Yx+O3cWEQ/iPaHEZHzNzLYuLvBhg8itZJPzr
+         ieYmoBceedTwur1fMkdW3BkhDBmKLgvsD1mvezzqQ0tvRjpCtTzKeaD2BdG7MM2tPuaG
+         0qrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=+nygrohoC3XmdgebrcFnnfB1c7tN1EG6SJKbveh6NSY=;
-        b=Rz59MuP6uiwQug6r7bSiNOFruyLlErqYsDJSf0q+3oP5zYgTvRjCiXgi+N8Ctz+e4r
-         ruFeaea1TOtvi3EG4tv6XCzqlnQKQzTWMHHHRcJ81yxwmarK6UokjYyd9/k8NgHnCZBz
-         lvkb94uu2DZN+zu6Jrkh0NEYwglHNaxaT1hNc95HyxlK3HJn/p0hsPVU4fvYchBUzhw/
-         Z/p4cg6wNciHp1wE5Dgx8HV/Cz139Oun2B4e4M5cbz7p+rjA0lPx+X2x6akJzeXsnpCA
-         +jj8OOw5GZkMJDtq5MemgySMlf9ILeuErwR9rYrW+j0aGxHtZ3CvxTPqCn6JMW3x6lqs
-         1MUw==
-X-Gm-Message-State: AGi0PuabgnXbEo/IR+rhm9b6G7wTVIWvoSr+ek3LL7RHJKUbCDWTbD2b
-	dLJS701tN43rObSjk0SMe2pqBw==
-X-Google-Smtp-Source: APiQypL9mRiq4pgKkp9FPM5kG/Z2XXcuforpDfVpZ70EziXo+uxHmGTu+pih6LB4MiuDyfB9WWCK1w==
-X-Received: by 2002:a7b:c14b:: with SMTP id z11mr4278864wmi.44.1588771778346;
-        Wed, 06 May 2020 06:29:38 -0700 (PDT)
-Return-Path: <brgl@bgdev.pl>
-Received: from localhost.localdomain (lfbn-nic-1-65-232.w2-15.abo.wanadoo.fr. [2.15.156.232])
-        by smtp.gmail.com with ESMTPSA id d7sm2729211wrn.78.2020.05.06.06.29.37
+        bh=/kcDU9A+GEoZX16z4hIkt6lX9QXR1EH4dmrEi19EH3s=;
+        b=jSjKdH6UK+9FuxTnDvXLMfkIUsZQgUL7yShVYnnPDVtSw1vrBUyB/XQU4m0xsAfmVJ
+         gNg/g5P/ZzXg0O2lKIfYegJXgNL3EKh5vrKNwZjoiLEMt107Cje1CUQ8+kNmeicvCqHZ
+         6pLeZcEsKrGKRK3a04uBiKETuAdzRoXRPgaYr1aMo928c+99NhDNxJeDBk5Z+rlP62ju
+         I2B88ZR7AVjbQF0DECgKX1LjbI83ceUw8qPuVZEjVIkJtBED9NMBCiLfUsi44yfdmzHo
+         jK4xdiscKBnxbNn7Ylc/JmjSGAHyl9FE0jPHWnX1LEwZdCqg37nQ2zFokKoTBKV7Mjte
+         gZ5A==
+X-Gm-Message-State: AGi0PuY1jS21JrP+lORXh5qB7z3eWBggyGX7zfu5xA7hmpVVtwU8LWzT
+	2QZjUqb5wt09mDP1RtqzAPy/8rfS3U8=
+X-Google-Smtp-Source: APiQypJq9tVBOLA343GQZx4oEXWyVie6IShRqYNBz36gPXZjvS+k4e8JbVM2yjwKEJOjjyrWAA0wIg==
+X-Received: by 2002:a17:90b:601:: with SMTP id gb1mr10541288pjb.148.1588806543295;
+        Wed, 06 May 2020 16:09:03 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::d90d])
+        by smtp.gmail.com with ESMTPSA id f9sm2334102pgj.2.2020.05.06.16.09.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 May 2020 06:29:37 -0700 (PDT)
-From: "Bartosz Golaszewski" <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	Richard Purdie <richard.purdie@linuxfoundation.org>,
-	Armin Kuster <akuster808@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org,
-	yocto@lists.yoctoproject.org,
-	Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [OE-core][PATCH] busybox: disable i2ctransfer
-Date: Wed,  6 May 2020 15:29:32 +0200
-Message-Id: <20200506132932.19286-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.25.0
+        Wed, 06 May 2020 16:09:02 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] con2fbmap: Add recipe
+Date: Wed,  6 May 2020 16:08:57 -0700
+Message-Id: <20200506230857.886136-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+con2fbmap is handy for debugging OS bringup on
+TFT/LCD displays
 
-I2C tools are built by default in busybox. OE-core on the other hand
-disables them all in the busybox defconfig except i2ctransfer. Since
-this looks like an oversight, this patch proposes to disable this tool
-as well.
-
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta/recipes-core/busybox/busybox/defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb
 
-diff --git a/meta/recipes-core/busybox/busybox/defconfig b/meta/recipes-core/busybox/busybox/defconfig
-index 0b27fcd4b3..4334a9d738 100644
---- a/meta/recipes-core/busybox/busybox/defconfig
-+++ b/meta/recipes-core/busybox/busybox/defconfig
-@@ -785,6 +785,7 @@ CONFIG_FEATURE_CROND_DIR=""
- # CONFIG_I2CSET is not set
- # CONFIG_I2CDUMP is not set
- # CONFIG_I2CDETECT is not set
-+# CONFIG_I2CTRANSFER is not set
- # CONFIG_INOTIFYD is not set
- CONFIG_LESS=y
- CONFIG_FEATURE_LESS_MAXLINES=9999999
+diff --git a/meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb b/meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb
+new file mode 100644
+index 0000000000..45203f029b
+--- /dev/null
++++ b/meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb
+@@ -0,0 +1,17 @@
++# Copyright (C) 2020 Khem Raj <raj.khem@gmail.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
++
++SUMMARY = "Simple utility for swapping an fbtft-based device as the console."
++HOMEPAGE = "https://gitlab.com/pibox/con2fbmap"
++LICENSE = "GPL-3.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++SECTION = "console/utils"
++DEPENDS = ""
++
++SRCREV = "61ed2f28b294b1ebeb767df8cb5fcd391709c8e2"
++SRC_URI = "git://gitlab.com/pibox/con2fbmap.git;protocol=https"
++
++S = "${WORKDIR}/git"
++
++inherit autotools
++
 -- 
-2.25.0
+2.26.2
 
