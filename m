@@ -1,88 +1,77 @@
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
- by mx.groups.io with SMTP id smtpd.web12.9602.1588690718211155611
+Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com [209.85.208.174])
+ by mx.groups.io with SMTP id smtpd.web11.789.1588740289523003449
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 May 2020 07:58:38 -0700
+ Tue, 05 May 2020 21:44:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=inxXCGRS;
- spf=pass (domain: gmail.com, ip: 209.85.167.48, mailfrom: wickbergster@gmail.com)
-Received: by mail-lf1-f48.google.com with SMTP id j14so1601241lfg.9
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 May 2020 07:58:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=cnGIvW1o;
+ spf=pass (domain: gmail.com, ip: 209.85.208.174, mailfrom: jacob.kroon@gmail.com)
+Received: by mail-lj1-f174.google.com with SMTP id f11so924348ljp.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 May 2020 21:44:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=t53bNRtcU6DBx8iVSjMIQDzodoAPAjLvPk1jpfE+Jhw=;
-        b=inxXCGRSId9bn7HVl1M6Mg6mpGUgoeYNKvCTXJn29NwpcEhKbS/oTnvY9dNUgOGteL
-         Bdo1MOVuxEv0YOhLtFvCKzJHCwcTm4fUDeHx1rtJznBw87g42+C9F2wXwGJkWwtSI3Qz
-         lpwI0pq7Xc0Xam556+OEsCoH00vfYCNZwrkgqf0n55/H4+sTmm1nyAdjWqbCGOojS+9H
-         YIA4pAAYGiVlSEajicQN80UHlxpEF35CYACCQgQseTGR8PwQ9G1XF51pnDJWPfU3p+yE
-         T3S6r++7mR4+mnVM6KoDhf+YL9iEs+NcBNmE8N6ssA2nJYhL2PJ+qY+uKgRHJWPrFAo4
-         18Kg==
+        h=to:from:subject:message-id:date:user-agent:mime-version
+         :content-language:content-transfer-encoding;
+        bh=D0sK2bWXifRRTUQ6nFuc2HI1KvmGAK6SmcHS2xYHmEk=;
+        b=cnGIvW1oD0rIUeaeAYU1LYNy1hXgwDWQyDBonhKRlJL6mRSpnb9E3Sjj+q7L0Pyenh
+         JHKsUzPVjFzFyXoOBrCxNkGxGy/0eX8vWWW1acKreV8dIwWGmhVVc6i122TMo+yZDsDo
+         rlPtRq9/TPReciUaAEGZWoOfOBeYTDM6tcN0YnPIBI9yphOd0jwrymEhTR3WSe1XCF5j
+         +BfbjojOrJSmKCAfC401xt29FNkIA/IuEmw40DP46UsvoZIkO+3jv908InRYYfSscCKp
+         uVcdIuaKFVoicEkU3gfAQHgMyDcon8bmRr97Aep0H8tdzC4d/mG1DlJ4TMjyFStXdkYx
+         UEqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=t53bNRtcU6DBx8iVSjMIQDzodoAPAjLvPk1jpfE+Jhw=;
-        b=DPRGoFdgGzh7PJNTrKUJg0xd7S7BidlNdZ6YZIkjVsWjKlh7pwPZKjmNJ0ONoY7pFB
-         qtZ7COKrhEI7zumwinphixeLE/fXBy3oX+0s9QzaFog32yvHB7JIlyAuIAZPzBdLz4dM
-         JcmM75dU73LSvASVmV+wmT4dfSvtJh/v6MzAjPlWiy6eUzcqEB/x33IIkKoM6pU+ufKY
-         1Ch5TmIIN2MmbxzBchexZB/GvkH7ePCjy7XzblzrZvhr9lWUYeEl6y1ttMRV46+rTTzi
-         cMPVjgGzH3LgoXZAfTqtmfzJznm0c2r5JzJYTooQr9V/YYYFMXf7nLBn5My0aVb5463e
-         2aKg==
-X-Gm-Message-State: AGi0PuZXuRyeK5/RInCbsw6jNJJFWAjyz2F2NxEm7zkUJCGXGbd7ZSbv
-	byKSkEC6HvP123FXm2BKppRNtNrep+w=
-X-Google-Smtp-Source: APiQypKEiS3gOwziXnEOMrX5gkq1fTO48ibxSARUshzwRvyLFLzHEsB00hbr91IA1T+HA6YkgSwBFA==
-X-Received: by 2002:ac2:4466:: with SMTP id y6mr1963855lfl.125.1588690716194;
-        Tue, 05 May 2020 07:58:36 -0700 (PDT)
-Return-Path: <wickbergster@gmail.com>
-Received: from localhost.localdomain (dyn-13-cust157.netit.se. [85.89.70.157])
-        by smtp.gmail.com with ESMTPSA id c4sm1557738lfi.13.2020.05.05.07.58.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 May 2020 07:58:35 -0700 (PDT)
-From: "Alexander Vickberg" <wickbergster@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Alexander Vickberg <wickbergster@gmail.com>
-Subject: [meta-oe][PATCH v2] iperf3: Add OpenSSL build option to PACKAGECONFIG
-Date: Tue,  5 May 2020 16:57:58 +0200
-Message-Id: <20200505145757.2478494-1-wickbergster@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+         :mime-version:content-language:content-transfer-encoding;
+        bh=D0sK2bWXifRRTUQ6nFuc2HI1KvmGAK6SmcHS2xYHmEk=;
+        b=l6yvphK7Zkm3MV0p4huDZFFiwc5XevvFC15HDlD+02cxaBICy8vhHI9cbo+qrT/YUq
+         jTYWyZUt/8zFAmPSmDv1mAM3hMxXRJ8dvri33xCXDjZ5p1YFcgQXBtaa+29Ew68Y/AAz
+         bynLnHN4BGh4bFizY025zyxkHZ1YNKsKXEytkApyf4072QheN76bARCIx/NTdd89Vx2v
+         XJtg79tSqttdJjwTOcyVeUNuwXPijcF0uYqaiRj9L7oDgNkJRzOvh7oW1skrHGt9179Y
+         83poTZK83y5wkICKM6D7NIK9IqaWmmL2Da144eNFPYgNKH6Juv1VV1veeQRRW9y9CNgA
+         5PuQ==
+X-Gm-Message-State: AGi0PuZPbHXQ9zv3TKDOQirNBZCL2z11YLsNSb7p42ZeEOggMtZUwMoV
+	4cV1RtSB0yKpgPalL+q56hI=
+X-Google-Smtp-Source: APiQypJQBkrrkd60eEhzxhZLl34QG+CoowF+8RzslXYP/5LxYYExMOHW/EyFzgx1o8rjHth5Zap50Q==
+X-Received: by 2002:a2e:2245:: with SMTP id i66mr3804978lji.191.1588740287573;
+        Tue, 05 May 2020 21:44:47 -0700 (PDT)
+Return-Path: <jacob.kroon@gmail.com>
+Received: from localhost.localdomain ([213.185.29.22])
+        by smtp.gmail.com with ESMTPSA id m15sm444609lji.21.2020.05.05.21.44.46
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 05 May 2020 21:44:46 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org,
+ Richard Leitner <richard.leitner@skidata.com>
+From: "Jacob Kroon" <jacob.kroon@gmail.com>
+Subject: [meta-java] g0hl1n/jdk8-fix
+Message-ID: <b01c2189-5348-feaa-a545-fc5fabdeb072@gmail.com>
+Date: Wed, 6 May 2020 06:44:45 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Make building with OpenSSL optional but enabled by default as today.
+Hi Richard,
 
-Signed-off-by: Alexander Vickberg <wickbergster@gmail.com>
----
-Changes in v2: No changes. Resend with git send-email.
+Just a FYI, I successfully built branch g0hl1n/jdk8-fix, 
+00fa8f5e330679d00275010c7fda976caae44a00, on my Fedora 32 system with 
+gcc v10.
 
- meta-oe/recipes-benchmark/iperf3/iperf3_3.7.bb | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+I did notice a comment typo in commit, "openjdk-8: require GCC >= v6", 
+0207ab72c58662cf7ac60229a5e14879b73f461d:
 
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.7.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.7.bb
-index 98d2faabf..c7ad91b24 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.7.bb
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.7.bb
-@@ -11,8 +11,6 @@ AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f9088fe7ffdccd042f7645f1012d7f70"
- 
--DEPENDS = "openssl"
--
- SRC_URI = "git://github.com/esnet/iperf.git \
-            file://0002-Remove-pg-from-profile_CFLAGS.patch \
-            "
-@@ -23,8 +21,9 @@ S = "${WORKDIR}/git"
- 
- inherit autotools
- 
-+PACKAGECONFIG ?= "openssl"
-+
- PACKAGECONFIG[lksctp] = "ac_cv_header_netinet_sctp_h=yes,ac_cv_header_netinet_sctp_h=no,lksctp-tools"
-+PACKAGECONFIG[openssl] = "--with-openssl=${RECIPE_SYSROOT}${prefix},--without-openssl,openssl"
- 
- CFLAGS += "-D_GNU_SOURCE"
--
--EXTRA_OECONF = "--with-openssl=${RECIPE_SYSROOT}${prefix}"
--- 
-2.25.1
+> diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+> index 084ead9..c78bb2a 100644
+> --- a/recipes-core/openjdk/openjdk-8-common.inc
+> +++ b/recipes-core/openjdk/openjdk-8-common.inc
+> @@ -171,7 +171,7 @@ EXTRA_OECONF_append = "\
+>  
+>  # Since v6, GCC sets the default C++ standard to C++14 and introduces
+>  # dead store elimination by default.
+> -# Since v10, GCC defaults to -fcommon.
+> +# Since v10, GCC defaults to -fno-common.
+>  # OpenJDK 8 is not ready for either of these changes.
+>  GLOBAL_FLAGS = "-fno-lifetime-dse -fno-delete-null-pointer-checks -fcommon"
 
+/Jacob
