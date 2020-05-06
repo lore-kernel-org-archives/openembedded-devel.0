@@ -1,55 +1,56 @@
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
- by mx.groups.io with SMTP id smtpd.web11.1226.1588743849816608102
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web11.1748.1588748533242199249
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 May 2020 22:44:10 -0700
+ Wed, 06 May 2020 00:02:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=gVXQbHwY;
- spf=pass (domain: skidata.com, ip: 91.230.2.91, mailfrom: prvs=388eec6a1=richard.leitner@skidata.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-  t=1588743849; x=1620279849;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=o1Xx3jl+H4wgVGJbYW0t3HdkuMDux1Dmj0XwfCB9byk=;
-  b=gVXQbHwY54+O4rJTZtjOGOUckOG9cAlSoVqLRHkgKY+GOJDGKSnT/Ww1
-   egA9EQbrt7zBI9zdWvZDy0sf+N5nfBoxhfykKXj4/oMepOsPKXAqqzuly
-   wpO8kank+MMCIkD3Jj97mUP1lwjtLnpIzd4TfxbFrqrM7r+bYOElzHwIk
-   tqHJeMJy5moXSZMXN6Yu+DZ9L+Ku8fCBPWFb4UbU/yMcl6OjHuLkXhDFO
-   XR+p8NCmRsZfS4Bl9w9LSGYGBrzgHWx+HksoLDkPfyFSe0vWEbpN5qCL1
-   I5Z95pyebpyd8ERqAG4UoKvv75FvWLmGiQ/Uf8mmun8mNYAOUzlghWyno
-   A==;
-IronPort-SDR: h56XRC80PdIl8hzLPwqT1qmTG0YUxdCwlT4gdntV3w0BoCdorpNnsyK2auySq8gnc3s4was+qn
- HzOUqz0/aGq/jR+fVeK4tsJ04VKohHISopSfMV4PsI8D4tMaTWx9RA2EgueR/poGEx8IdumUiL
- EPHljPJ5XmoMjFy94887B7iAOiDZOwLiON1kqiI/1osB/tkGINrfnnFqCa7obNcjurQqjxOpdz
- ErfH3o0lH7W/adCf7vo9mj7ZZh8I6m69uxWIUmYT60oP4CFKpE9teuHLSqRIaJfFEidZBDQAey
- aOw=
-X-IronPort-AV: E=Sophos;i="5.73,358,1583190000"; 
-   d="scan'208";a="2575416"
-Date: Wed, 6 May 2020 07:44:07 +0200
-From: "Richard Leitner" <richard.leitner@skidata.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: yi.zhao@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 04672BiC014390
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 6 May 2020 00:02:12 -0700 (PDT)
+Received: from localhost (128.224.162.174) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 6 May
+ 2020 00:02:11 -0700
+From: "Yi Zhao" <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Jacob Kroon <jacob.kroon@gmail.com>
-Subject: Re: [meta-java][PATCH 1/2] openjdk-8: require GCC >= v6
-Message-ID: <20200506054407.GB250994@pcleri>
-References: <20200506053312.251699-1-richard.leitner@skidata.com>
+Subject: [meta-webserver][PATCH] nginx: remove /var/log/nginx when do_install
+Date: Wed, 6 May 2020 15:02:09 +0800
+Message-ID: <20200506070209.25338-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20200506053312.251699-1-richard.leitner@skidata.com>
-Return-Path: richard.leitner@skidata.com
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
- sdex5srv.skidata.net (192.168.111.83)
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-Originating-IP: [128.224.162.174]
+Content-Type: text/plain
 
-This series was applied to master-next and will be merged to master
-after some testing.
+Remove directory /var/log/nginx when do_install because it is created by
+volatiles file.
 
-regards;rl
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ meta-webserver/recipes-httpd/nginx/nginx.inc | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-On Wed, May 06, 2020 at 07:33:11AM +0200, Richard Leitner wrote:
-> As nobody should use older versions of GCC anymore this patch drops all
-> version dependent workarounds and requiers host gcc >=6 for building
-> openjdk-8.
-> 
-> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-> Tested-by: Jacob Kroon <jacob.kroon@gmail.com>
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
+index 2824c6652..de080a2b0 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx.inc
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -90,7 +90,7 @@ do_install () {
+         install -d ${D}${sysconfdir}/tmpfiles.d
+         echo "d /run/${BPN} - - - -" \
+             > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+-        echo "d /${localstatedir}/log/${BPN} 0755 root root -" \
++        echo "d ${localstatedir}/log/${BPN} 0755 root root -" \
+             >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+     fi
+     install -d ${D}${sysconfdir}/${BPN}
+@@ -139,6 +139,8 @@ do_install () {
+             -e 's,@BASE_BINDIR@,${base_bindir},g' \
+             ${D}${systemd_unitdir}/system/nginx.service
+     fi
++
++    rm -rf ${D}${localstatedir}/log/
+ }
+ 
+ pkg_postinst_${PN} () {
+-- 
+2.17.1
+
