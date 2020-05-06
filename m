@@ -1,64 +1,83 @@
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
- by mx.groups.io with SMTP id smtpd.web11.1964.1588750417326380078
+Received: from mail-io1-f68.google.com (mail-io1-f68.google.com [209.85.166.68])
+ by mx.groups.io with SMTP id smtpd.web10.2177.1588751499366755640
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 May 2020 00:33:37 -0700
+ Wed, 06 May 2020 00:51:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@stusta.de header.s=default header.b=BtZK4tOB;
- spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=fjce=6u=stusta.de=bunk@stusta.mhn.de)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49H7cb3tvLzd
-	for <openembedded-devel@lists.openembedded.org>; Wed,  6 May 2020 09:33:34 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1588750415;
-	bh=ft3I9c3mzR7YY0dWq4xqwkdMPfRzusOgkPDiIolvJ0M=;
-	h=From:To:Subject:Date:From;
-	b=BtZK4tOBLMih00w4PRJn9nFZVmbqmg+Z0zUPiY2KHJLW+dnum5dkkxVC/4KDyd9Wn
-	 aNN4phnzh5lBhTg3q+HW1gIAs1vX8beUswiIhbwrySw2VNIGMh8qBSjEnO2Wvo2oDx
-	 TUO819biK7qc4J3Wrx68bRrp2K7d8J1zOMmGLWbviOi6Wdg/F/iiWe27y7MAckmcd7
-	 WmGWQNahHn+1nTrwJGdcjdYB4TQE2ldMu3Zl/SrcCeMpCSpLwLJkJAMI5vwNh2VRfh
-	 WxSshcec1TiFg36rYGtc0nqUE9XplBa6PVEyEQmmtTo+YslybY5G1/6MxwMOH0fVH3
-	 6Z08fRcQA3V3rnAce1fDU11ero+4iDaMZMm8rzNmFpfu+iUHIXAJBr9+V7ZmRAZaXB
-	 0tvZHWQ0ZNI7u3NhaShJxVs1tHmJ/+eNytmI+gaWdmsZJxPDqm4F9torttvB3b+EDl
-	 ov3BEY2oCKo9jbdDRQZMLRXE9fVKBvmcnZcIXs4qU1ch1Rxolx68fnxaxR1kFRx3/U
-	 14f+zV1UfC2tYbxc9vqtAGY3JmnrChFSR+57CtfbTUHSTlMlQga1+fVsoKFpgKsvBQ
-	 2lFWvvITtB9sRi8cPlM5LxxO63bRig02TJ67sEMdTi2G/I6f2yW7b66GGI5wbPpLq1
-	 6axAm4rRtr11IX+e4Y3eSdjk=
-From: "Adrian Bunk" <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] uftrace: Fix PR
-Date: Wed,  6 May 2020 10:33:34 +0300
-Message-Id: <20200506073334.12115-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ebxqGAqp;
+ spf=pass (domain: gmail.com, ip: 209.85.166.68, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-io1-f68.google.com with SMTP id c2so1156521iow.7
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 May 2020 00:51:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=T0Z2FWni3HmwmuLlKPRw8GKmPJmFDG0TePcZHYDO3MU=;
+        b=ebxqGAqprVhUUAbMI3Ij4K9vwlzcQCmLchPg5z3ba1baiGR2VsBuUTBuSoOwT/cr4F
+         odhyLrNqu1GaQhKr8Uy6qgoy7CJclWXL3A/SA4qMw5JASvo162PVl+FZBodeaNu+pNwU
+         9G9+xQCXsm2Hg97YbDIXmTjVGpxe34NwMt21tFEAvPjh+FMeMgpAthBT44p585rHDlV0
+         FUpvKKJtPFSASCrsiN6YB9zD3N+niFzmnMkO2Me49Dhnh8r83TNeWYJKXBKpapftr7kH
+         MVhYjaf2UHPgZRDCPN2JM4oBCkYfaApcLTVYtg2fWFfAbEkMA0kd8oNnqxqdtIYm4O6u
+         5w2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=T0Z2FWni3HmwmuLlKPRw8GKmPJmFDG0TePcZHYDO3MU=;
+        b=lMzd2IWlXiK7U0aEOkh0/Zp/G1WHpNjfWVN3QhNia2YaA2sNZqFezdfMofDNwYQNKI
+         oDfvOYHmF24nxpw8IbNg1RQSqvLIKJJDfMkDjZiITLNz2kESg5zkIJ8gX2jVrziCnNn2
+         na2JreVy58h3s0TW+fce+hWWHaF1fkGY3muAfX4VS9l8mG/WYTzFxySoRSTF528Q/9Dr
+         eSJ2nf0RUZPZ01vCBUZCu62oGeFIoLv6h15MLSri2+GVj0USf+laNHg8AuiWErag9eRs
+         dyOeUfxTS4orMBTQvjjOap1WD/JBI5M6tIJqkSNeJJyFnhhQktW77Igpy+wUHa5mSiiE
+         Uhpg==
+X-Gm-Message-State: AGi0PuYkRNWCEYB5ewILEi84SdIYFLzdtZB2EAUHult05p3EHBJr/NOd
+	O1eIz4ALwH4LMcDVxYAyoMBd8o680RaEzY3EZdzHUQ==
+X-Google-Smtp-Source: APiQypLsIH8Vu8a43WYAl4krPQ5bd9AwU7sq+CBNlV1yJCk9ppvDGOypXD9FSKpNCK/OGEvSQMP5REawM5xjvS4f3WM=
+X-Received: by 2002:a5d:9c02:: with SMTP id 2mr7304515ioe.67.1588751498459;
+ Wed, 06 May 2020 00:51:38 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200506073334.12115-1-bunk@stusta.de>
+In-Reply-To: <20200506073334.12115-1-bunk@stusta.de>
+From: "Andreas M?ller" <schnitzeltony@gmail.com>
+Date: Wed, 6 May 2020 09:51:27 +0200
+Message-ID: <CALbNGRS4obaqVviaJO-4ZNVtNHo6Z9TK5AKnUihe_1B_=ExffA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] uftrace: Fix PR
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-The latest update moved uftrace from a stable release
-to a git snapshot.
+On Wed, May 6, 2020 at 9:33 AM Adrian Bunk <bunk@stusta.de> wrote:
+>
+> The latest update moved uftrace from a stable release
+> to a git snapshot.
+>
+> Adjust PR accordingly.
+Out of curiosity: Why not PN?
 
-Adjust PR accordingly.
-
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
----
- meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb b/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb
-index c33fa048c..732fe3b45 100644
---- a/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb
-+++ b/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb
-@@ -10,12 +10,13 @@ DEPENDS_append_libc-musl = " argp-standalone"
- 
- inherit autotools
- 
--# v0.9.4
- SRCREV = "d648bbffedef529220896283fb59e35531c13804"
- SRC_URI = "git://github.com/namhyung/${BPN} \
-            "
- S = "${WORKDIR}/git"
- 
-+PR .= "+git${SRCPV}"
-+
- LDFLAGS_append_libc-musl = " -largp"
- 
- def set_target_arch(d):
--- 
-2.17.1
-
+Andreas
+>
+> Signed-off-by: Adrian Bunk <bunk@stusta.de>
+> ---
+>  meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb b/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb
+> index c33fa048c..732fe3b45 100644
+> --- a/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb
+> +++ b/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb
+> @@ -10,12 +10,13 @@ DEPENDS_append_libc-musl = " argp-standalone"
+>
+>  inherit autotools
+>
+> -# v0.9.4
+>  SRCREV = "d648bbffedef529220896283fb59e35531c13804"
+>  SRC_URI = "git://github.com/namhyung/${BPN} \
+>             "
+>  S = "${WORKDIR}/git"
+>
+> +PR .= "+git${SRCPV}"
+> +
+>  LDFLAGS_append_libc-musl = " -largp"
+>
+>  def set_target_arch(d):
+> --
+> 2.17.1
+>
+> 
