@@ -1,78 +1,101 @@
 Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
- by mx.groups.io with SMTP id smtpd.web10.1115.1588742738357381539
+ by mx.groups.io with SMTP id smtpd.web12.1117.1588743206423492576
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 May 2020 22:25:39 -0700
+ Tue, 05 May 2020 22:33:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=rMQxUj9X;
+ dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=TzXN/TL9;
  spf=pass (domain: skidata.com, ip: 91.230.2.99, mailfrom: prvs=388eec6a1=richard.leitner@skidata.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-  t=1588742738; x=1620278738;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=7SDI65Vvh3YK/9zWxNSBQ71aJKJ4Gx32jsRP9yDGDJ0=;
-  b=rMQxUj9XQDOtvtQ8kWX1xvlnCx42BCZNaxa233JKPu5OW0LjDtoxGPPc
-   GdMU3bH7Xo99BKY2p/p3Js/3WoE1SR9hq/BNEjvB52QpcKJWumyoFslcK
-   e0dKmqT4Crgelcym3cFPSMDfZdq3uBisfXyeZlcm1UxSrQEcTKwWswh1L
-   K5eocWLQCQP65dlSx/8ACZ9Dt3fEI7aJYjnkQJQ9N39OtWGR3wT9JwRp6
-   Ls0VyBbETM992QIKgdBKc+wX6ecIDUeS/MNytXSret4sNY//cme4ufgU8
-   kuNoiMwq2HDtIwP8KvJjTgOam9XVrvh5hl3flVcp8/c9H4nRdaII+hW4Z
-   Q==;
-IronPort-SDR: io+WoL11PS5WRbBhRdLta7g9W2l5YzHVIy9NWPKBG3/1E00otd1Pf6vxTMUcs/ZAiACH3XNGAE
- ltxa30U2ua2xFfEUht7hiFm389gF8kd0i3NXLtv+dXOBGiNJ3hmJWtMANIVhSEU2g0nmeETvyh
- HOQrMqJasqbeoMV7yPiKOtXpbMYskIR92S5VluZEzjm08xl4gd5GxsaHVjMvD+SluxjFgo96Ht
- gnUBMoKqW2y/pVIqdrMZ5kMZGeAik3qI9Q0FFeeYwY8W8VR8pw+oxr4ivB/NgXS/cgeMIeqakV
- Zqg=
-X-IronPort-AV: E=Sophos;i="5.73,357,1583190000"; 
-   d="scan'208";a="24181689"
-Date: Wed, 6 May 2020 07:25:36 +0200
+  t=1588743206; x=1620279206;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=EziQlGwPRYI7lcbTIZ3O7Q2o6EUOpbPhIcH1FKyTt24=;
+  b=TzXN/TL9uf437hAtPtezHGJQKo3RD08tBj1YlclonaSTa8oGUDg8skuQ
+   hZhA/wViVJXRLqrOZDhILCdSHmaCz/QKmDMXhvM3I8qBmPWoaENbB/FW8
+   c0nY9Nu0Ewd8NAU9FpdFoTeleOvDjm/Vl2TSGYG0SZsAhfx482iK9xNww
+   Wmu9jpmFX8TAl51hlm0g9JjGhZuryJZuRURKH86G3By2Sc1O9cIU0o6hL
+   jngicXxOuwsN7gO/iHaciwRdYY1Jb47FbJlscj7hdzHap1RpSYhVY/y4c
+   Im7BAjERDsZKv811N4s6Km4RMfe0056lywze38WCYb7D4v3a07uGdE/AG
+   A==;
+IronPort-SDR: CGYna8hMaiun8ha2HDCMnV9vX51z2qNgign1HzMWSCa7y/5vck5KIr1gwDRgwbitWWSajir8A7
+ vdlWBchFkuIcitt07Lhg9uwZkKnu6+wS7mJbmkuwbyd5hUFF5izLETSbG3kIKnSknJiubP9VdU
+ fVg/Qi42NvAIYnqHeOfUoOJWqzel8XhaThQZ2iV9k0ByxBroPwkKi5A37DnmT0nIGROPMuTKsR
+ G8bjVbcQoXuySZwDTngd6wAIBXHRKl8aVHarLbrJJQ3f5OFLnCiRIOyElfwL6T39LABE15Qsnm
+ BEk=
+X-IronPort-AV: E=Sophos;i="5.73,358,1583190000"; 
+   d="scan'208";a="24181745"
 From: "Richard Leitner" <richard.leitner@skidata.com>
-To: Jacob Kroon <jacob.kroon@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java] g0hl1n/jdk8-fix
-Message-ID: <20200506052536.GA250994@pcleri>
-References: <b01c2189-5348-feaa-a545-fc5fabdeb072@gmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Richard Leitner <richard.leitner@skidata.com>, Jacob Kroon
+	<jacob.kroon@gmail.com>
+Subject: [meta-java][PATCH 1/2] openjdk-8: require GCC >= v6
+Date: Wed, 6 May 2020 07:33:11 +0200
+Message-ID: <20200506053312.251699-1-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <b01c2189-5348-feaa-a545-fc5fabdeb072@gmail.com>
 Return-Path: richard.leitner@skidata.com
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
  sdex5srv.skidata.net (192.168.111.83)
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Hi Jacob,
+As nobody should use older versions of GCC anymore this patch drops all
+version dependent workarounds and requiers host gcc >=6 for building
+openjdk-8.
 
-On Wed, May 06, 2020 at 06:44:45AM +0200, Jacob Kroon wrote:
-> Hi Richard,
-> 
-> Just a FYI, I successfully built branch g0hl1n/jdk8-fix,
-> 00fa8f5e330679d00275010c7fda976caae44a00, on my Fedora 32 system with gcc
-> v10.
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+Tested-by: Jacob Kroon <jacob.kroon@gmail.com>
+---
+ README                                    |  2 +-
+ recipes-core/openjdk/openjdk-8-common.inc | 22 ++++++++--------------
+ 2 files changed, 9 insertions(+), 15 deletions(-)
 
-Great! Thank you for testing!
+diff --git a/README b/README
+index d28da02..f97378d 100644
+--- a/README
++++ b/README
+@@ -133,5 +133,5 @@ BBLAYERS ?= " \
+ 
+ Build host dependencies
+ -----------------------
+- - gcc with c++14 support
++ - gcc >= v6
+  - libstdc++ static
+diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+index 5228338..c78bb2a 100644
+--- a/recipes-core/openjdk/openjdk-8-common.inc
++++ b/recipes-core/openjdk/openjdk-8-common.inc
+@@ -170,20 +170,14 @@ EXTRA_OECONF_append = "\
+ "
+ 
+ # Since v6, GCC sets the default C++ standard to C++14 and introduces
+-# dead store elimination by default. OpenJDK 8 is not ready for either
+-# of these changes.
+-FLAGS_GCC6 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+-FLAGS_GCC7 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+-FLAGS_GCC8 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+-FLAGS_GCC9 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+-FLAGS_GCC10 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+-
+-# GCC 10 defaults to -fno-common, but OpenJDK 8 is not ready for this.
+-FLAGS_GCC10_append = " -fcommon"
++# dead store elimination by default.
++# Since v10, GCC defaults to -fno-common.
++# OpenJDK 8 is not ready for either of these changes.
++GLOBAL_FLAGS = "-fno-lifetime-dse -fno-delete-null-pointer-checks -fcommon"
+ 
+ # flags for -native, and for bits that need a host-tool during -cross
+-BUILD_CFLAGS_append = " ${@openjdk_build_helper_get_build_cflags(d)}"
+-BUILD_CXXFLAGS_append = " ${@openjdk_build_helper_get_build_cflags(d)}"
++BUILD_CFLAGS_append = " ${GLOBAL_FLAGS}"
++BUILD_CXXFLAGS_append = " ${GLOBAL_FLAGS}"
+ # flags for -cross
+-TARGET_CFLAGS_append = " ${@openjdk_build_helper_get_target_cflags(d)}"
+-TARGET_CXXFLAGS_append = " ${@openjdk_build_helper_get_target_cflags(d)}"
++TARGET_CFLAGS_append = " ${GLOBAL_FLAGS}"
++TARGET_CXXFLAGS_append = " ${GLOBAL_FLAGS}"
+-- 
+2.26.2
 
-> 
-> I did notice a comment typo in commit, "openjdk-8: require GCC >= v6",
-> 0207ab72c58662cf7ac60229a5e14879b73f461d:
-> 
-> > diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
-> > index 084ead9..c78bb2a 100644
-> > --- a/recipes-core/openjdk/openjdk-8-common.inc
-> > +++ b/recipes-core/openjdk/openjdk-8-common.inc
-> > @@ -171,7 +171,7 @@ EXTRA_OECONF_append = "\
-> >  # Since v6, GCC sets the default C++ standard to C++14 and introduces
-> >  # dead store elimination by default.
-> > -# Since v10, GCC defaults to -fcommon.
-> > +# Since v10, GCC defaults to -fno-common.
-> >  # OpenJDK 8 is not ready for either of these changes.
-> >  GLOBAL_FLAGS = "-fno-lifetime-dse -fno-delete-null-pointer-checks -fcommon"
-
-Oh. Good catch. Thanks!
-
-I'll fix that and merge the patches to master-next soon.
-
-regards;rl
-
-> 
-> /Jacob
