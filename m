@@ -1,66 +1,55 @@
-Received: from mail.cybernetics.com (mail.cybernetics.com [173.71.130.66])
- by mx.groups.io with SMTP id smtpd.web10.9217.1588867172542857494
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web10.9592.1588868199082441190
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 May 2020 08:59:32 -0700
+ Thu, 07 May 2020 09:16:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: cybernetics.com, ip: 173.71.130.66, mailfrom: btv1==3967e7612ff==cbing@cybernetics.com)
-X-ASG-Debug-ID: 1588867153-0fb3b0649e64ce90001-aWHRdb
-Received: from cybernetics.com ([10.10.4.126]) by mail.cybernetics.com with ESMTP id bxWH6MH71LbT3Nnb for <openembedded-devel@lists.openembedded.org>; Thu, 07 May 2020 11:59:13 -0400 (EDT)
-X-Barracuda-Envelope-From: cbing@cybernetics.com
-X-ASG-Whitelist: Client
-Received: from [10.157.1.18] (HELO [192.168.184.100])
-  by cybernetics.com (CommuniGate Pro SMTP 5.1.14)
-  with ESMTP id 9945763 for openembedded-devel@lists.openembedded.org; Thu, 07 May 2020 11:59:13 -0400
-Subject: Re: [oe] [meta-oe] php: error running opcache
-From: "Claude Bing" <cbing@cybernetics.com>
-X-ASG-Orig-Subj: Re: [oe] [meta-oe] php: error running opcache
-To: openembedded-devel@lists.openembedded.org
-Reply-To: openembedded-devel@lists.openembedded.org
-References: <160CC6B663840241.1278@lists.openembedded.org>
-Message-ID: <bded3d1a-d0b0-0fd7-a023-0d358650a721@cybernetics.com>
-Date: Thu, 7 May 2020 11:59:54 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: tgamblin@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 047GGbpR023927
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 7 May 2020 09:16:38 -0700 (PDT)
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Thu, 7 May 2020
+ 09:16:37 -0700
+Received: by ala-lpggp3.wrs.com (Postfix, from userid 20958)	id 6ED1B900DB1;
+ Thu,  7 May 2020 09:16:37 -0700 (PDT)
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <trevor.gamblin@windriver.com>
+Subject: [meta-python][PATCH] python3-py: add python3-netclient to RDEPENDS
+Date: Thu, 7 May 2020 09:16:37 -0700
+Message-ID: <20200507161637.69223-1-trevor.gamblin@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <160CC6B663840241.1278@lists.openembedded.org>
-X-Barracuda-Connect: UNKNOWN[10.10.4.126]
-X-Barracuda-Start-Time: 1588867153
-X-Barracuda-URL: https://10.10.4.122:443/cgi-mod/mark.cgi
-X-Virus-Scanned: by bsmtpd at cybernetics.com
-X-Barracuda-Scan-Msg-Size: 1429
-X-Barracuda-BRTS-Status: 1
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 
-I think that I have fixed the issue by overriding the following line in
-php_7.4.4.bb:
+python3-py requires the uuid.py module, which is contained in
+python3-netclient. Without it:
 
-PACKAGECONFIG[opcache] = "--enable-opcache,--disable-opcache"
+root@qemux86-64:~# python3
 
-  to
+>>> import py._path.local
+Traceback (most recent call last):
+File "<stdin>", line 1, in <module>
+File "/usr/lib64/python3.8/site-packages/py/_path/local.py", line 7, in <module>
+import sys, os, atexit, io, uuid
+ModuleNotFoundError: No module named 'uuid'
 
-PACKAGECONFIG[opcache] = "--enable-opcache=shared,--disable-opcache"
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+---
+ meta-python/recipes-devtools/python/python3-py_1.8.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Regards,
+diff --git a/meta-python/recipes-devtools/python/python3-py_1.8.1.bb b/meta-python/recipes-devtools/python/python3-py_1.8.1.bb
+index 73aaf9e46..ff66aeaa2 100644
+--- a/meta-python/recipes-devtools/python/python3-py_1.8.1.bb
++++ b/meta-python/recipes-devtools/python/python3-py_1.8.1.bb
+@@ -11,3 +11,5 @@ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+ inherit pypi setuptools3
+ 
+ BBCLASSEXTEND = "native nativesdk"
++
++RDEPENDS_${PN} += "${PYTHON_PN}-netclient"
+-- 
+2.17.1
 
-Claude Bing
-
-On 5/7/20 10:53 AM, Claude Bing wrote:
-> Hello all.  I am in the process of upgrading our Yocto installation to
-> the Dunfell branch(es), and I came across a peculiar issue with PHP.  We
-> use the opcache extension, but it is emitting the following error on
-> startup:
-> 
-> Failed loading
-> /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so:
-> /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so: undefined
-> symbol: shm_unlink
-> 
-> Is anyone else having this issue in their environment?  I will continue
-> researching to see what caused the problem to appear between Zeus and
-> Dunfell, but I suspect it has something to do with the PHP 7.4 upgrade.
-> 
-> 
-> 
-> 
