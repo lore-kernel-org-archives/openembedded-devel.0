@@ -1,48 +1,48 @@
-Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com [209.85.210.196])
- by mx.groups.io with SMTP id smtpd.web11.3347.1588818903990977544
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com [209.85.214.194])
+ by mx.groups.io with SMTP id smtpd.web11.1644.1588836284688603223
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 May 2020 19:35:04 -0700
+ Thu, 07 May 2020 00:24:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@sifive.com header.s=google header.b=CJUDRiBH;
- spf=pass (domain: sifive.com, ip: 209.85.210.196, mailfrom: zong.li@sifive.com)
-Received: by mail-pf1-f196.google.com with SMTP id f7so2192359pfa.9
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 May 2020 19:35:03 -0700 (PDT)
+ dkim=pass header.i=@sifive.com header.s=google header.b=lGZAbPOS;
+ spf=pass (domain: sifive.com, ip: 209.85.214.194, mailfrom: zong.li@sifive.com)
+Received: by mail-pl1-f194.google.com with SMTP id t7so1739605plr.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 07 May 2020 00:24:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=sifive.com; s=google;
         h=from:to:cc:subject:date:message-id;
-        bh=OgYVPc+F5NpjdIsvnLi/HeSemLWwf8xF2axD7vyntmc=;
-        b=CJUDRiBHlHPxD7h0V6omuXsE4/PfGlOP2t7Awpaiz9Kv7PufyYMq/19tHrMok+OGFx
-         me89GBeHQAePAq0cBDAUfFVeLDqCuZoXLwhbFhdODrRY56bHB0qX1oFefm+SLk4ZpqGr
-         e9KZljoHOWGt6GI2uTogng35aZO67/zWS9bCfDlTTWvopZsrYlxsyc11VOy6wtnuCMk0
-         qgWll7T+ouQwB6FoAe6+JWljlf8y42eI2a1J0pXLrG731RtVlGGQRz3GXh6ryapIRSlH
-         zjSs+Q6BlsKsr6sx9OIC/GWv5SkJ9hRRYOUk+W4BsVCFqRzVgwVzfDcDr3NmUfs9cduN
-         Xwnw==
+        bh=pIYSJ6WXUZyjzQdhVA1kfWgrzTS9yf00fP7Sif+QLG0=;
+        b=lGZAbPOS8+NCch2kDyw2p1DvA5aIOyKLlVQIHFYZqzfrfqImNyIkM4yUiXmXRBvmPz
+         bLffemopqYjwRBTsyFIzQc50dVmPbDXf6F18C5+q5ZaaSWuLBnT+WfFJ3v2M6iaUV87v
+         0Yd8rut/1hrinN1v4p8Yq+QJC+0+HSEbi/8Pje7FHuVbrzHUhFdyoCgccVHsQBpuCOTi
+         5fbYK+N5Zx32VZGfHFa3mrCo1PF0aW922G9YvanVEKVUQP7xP3NzfgytOGTLSNHKelWu
+         wirrIuOTlAxI7bi/H6gYGLtxgCGYh8Knd+N26kLrYASGHEBV5lccjkpwt81MbVHUfi/P
+         GkyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=OgYVPc+F5NpjdIsvnLi/HeSemLWwf8xF2axD7vyntmc=;
-        b=bw5Yvwb9eNQ/hTebuYVKAQT+dhWLIK/FSyyw+yk+WvKftQBqaZnQKscgV4gKV0SIEW
-         kImVnaBkfZsHJZkI0wEy41JVgzc7m7D8x5IKFfRomDy1aCTG3CDyZpb8gA1G+k2aHgYm
-         wGoAb68ubxNSE9DbFuI3a/ERk8ttno3q7/cDApme884t80NBee17qhxaikmwxuZhr6x1
-         dwk548zB8su8+3XIvE9iWb3MayezvNFO/iYw93D1r9nrEJS/WQh9trsi07Vx5BYKZWAn
-         1XsYRI42TtS5zlO3z9QKLroWbRwZkjsgk0eAaVqssDxHKmJRFxzJ7ydjUPwVbucb7QG7
-         doXw==
-X-Gm-Message-State: AGi0PuYTeSmNEi9/pvNfLQ8qf9C+5aiBwWgyJWIY2gCq6yeqLwRzqPlO
-	uw5CkxZW//izsEv8xXBCvA2zp3TkkDg=
-X-Google-Smtp-Source: APiQypIX8tlAFo6aCgeOJ+kuCdXmCfV2GL254U6uKPhHSRKU9cdzpZDq155ng/9YwCYZR/qlKG3MDQ==
-X-Received: by 2002:a63:8d4b:: with SMTP id z72mr9385076pgd.376.1588818902416;
-        Wed, 06 May 2020 19:35:02 -0700 (PDT)
+        bh=pIYSJ6WXUZyjzQdhVA1kfWgrzTS9yf00fP7Sif+QLG0=;
+        b=JQ7hMs+Ts3Esd5ARH80TAk6g4lxpfC/uyBvdDJIurstkllL/CoEstEsNfPtbbapDSu
+         0qCzxdQdljU/m1qtz+Ju02RCdkzxbGg+eNKdmnUstPq0x9xHHyJGkuWUNEfbBk4cEy3o
+         bP9c8dmlSY9fwjwg14tZt0GeDIN4Rf5K0WdohUfoNjDOrxJfM88yT1d+4MEuPrU9cj+m
+         uYE76ax02qnNtZttp1vjefr+Fe4agwYfaIt8PUSB7fEAZ0ohI4fT4c4hLlnYrqAItXVF
+         qhiius7lpym4Ml148N2gh1SX9eVoa6+0E2UXiO/12pEl3H1K64jlTcvFLzCJeJ3V/g0d
+         Bk7Q==
+X-Gm-Message-State: AGi0PubSSrRIiP1gcZnEVrS+/FMl6niUVLPJEoZDJADaTYJQvlNgilrL
+	v2Xm8OhHlf9aNLLDkcMUCGN5p8qIWUt6OA==
+X-Google-Smtp-Source: APiQypKv0VG+itGq7d20lmMyGkL/AkbPERE/Vf9eJjCEn8oDIlmWWFHLz3G3lAhs1Q+Gk/8jJyfmpQ==
+X-Received: by 2002:a17:90a:2149:: with SMTP id a67mr14328193pje.43.1588836283209;
+        Thu, 07 May 2020 00:24:43 -0700 (PDT)
 Return-Path: <zong.li@sifive.com>
 Received: from gamma03.internal.sifive.com ([64.62.193.194])
-        by smtp.gmail.com with ESMTPSA id b16sm3152174pft.191.2020.05.06.19.35.01
+        by smtp.gmail.com with ESMTPSA id ml24sm6481052pjb.48.2020.05.07.00.24.42
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 06 May 2020 19:35:01 -0700 (PDT)
-From: zong.li@sifive.com
+        Thu, 07 May 2020 00:24:42 -0700 (PDT)
+From: "Zong Li" <zong.li@sifive.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Zong Li <zong.li@sifive.com>
-Subject: [meta-oe][PATCH] Upgrade testfloat to 3e version.
-Date: Wed,  6 May 2020 19:34:59 -0700
-Message-Id: <1588818899-10035-1-git-send-email-zong.li@sifive.com>
+Subject: [meta-oe][PATCH v2] Upgrade testfloat to 3e version.
+Date: Thu,  7 May 2020 00:24:40 -0700
+Message-Id: <1588836280-22803-1-git-send-email-zong.li@sifive.com>
 X-Mailer: git-send-email 2.7.4
 
 Upgrade TestFloat to 3e version.
@@ -644,7 +644,7 @@ index ace376e..0000000
 -}
 diff --git a/meta-oe/recipes-test/testfloat/testfloat_3e.bb b/meta-oe/recipes-test/testfloat/testfloat_3e.bb
 new file mode 100644
-index 0000000..2e44da4
+index 0000000..48f50d8
 --- /dev/null
 +++ b/meta-oe/recipes-test/testfloat/testfloat_3e.bb
 @@ -0,0 +1,36 @@
@@ -661,8 +661,8 @@ index 0000000..2e44da4
 +SRC_URI = "\
 +    http://www.jhauser.us/arithmetic/TestFloat-3e.zip;name=TestFloat \
 +    http://www.jhauser.us/arithmetic/SoftFloat-3e.zip;name=SoftFloat \
-+    file://0001-Makefile-for-cross-compile-SoftFloat-3e.patch \
-+    file://0002-Makefile-for-cross-compile-TestFloat-3e.patch \
++    file://0001-Makefile-for-cross-compile-SoftFloat.patch \
++    file://0002-Makefile-for-cross-compile-TestFloat.patch \
 +"
 +SRC_URI[TestFloat.md5sum] = "e70a1e6c6732abf79645a6dcca69a654"
 +SRC_URI[TestFloat.sha256sum] = "6d4bdf0096b48a653aa59fc203a9e5fe18b5a58d7a1b715107c7146776a0aad6"
