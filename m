@@ -1,21 +1,21 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web10.1199.1588832152307465890
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web12.1147.1588832565460165794
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 May 2020 23:15:52 -0700
+ Wed, 06 May 2020 23:22:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: mingli.yu@windriver.com)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: mingli.yu@windriver.com)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0476EmrT023929
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 0476MiOs017680
 	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 6 May 2020 23:15:40 -0700
+	for <openembedded-devel@lists.openembedded.org>; Wed, 6 May 2020 23:22:45 -0700 (PDT)
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
  ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
- 14.3.487.0; Wed, 6 May 2020 23:15:27 -0700
+ 14.3.487.0; Wed, 6 May 2020 23:22:34 -0700
 From: "Yu, Mingli" <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH] python3-ntplib: add missing python3-io RDEPENDS
-Date: Thu, 7 May 2020 14:15:26 +0800
-Message-ID: <1588832126-393701-1-git-send-email-mingli.yu@windriver.com>
+Subject: [meta-python][PATCH v2] python3-ntplib: add missing python3-io RDEPENDS
+Date: Thu, 7 May 2020 14:22:33 +0800
+Message-ID: <1588832553-58023-1-git-send-email-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -28,7 +28,7 @@ below error:
 Python 3.8.2 (default, Apr 27 2020, 08:51:00)
 [GCC 9.3.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
->>> import ntplib
+ >>> import ntplib
 Traceback (most recent call last):
 File "<stdin>", line 1, in <module>
 File "/usr/lib64/python3.8/site-packages/ntplib.py", line 32, in <module>
