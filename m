@@ -1,77 +1,129 @@
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com [209.85.214.195])
- by mx.groups.io with SMTP id smtpd.web11.2251.1588966476171544595
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web10.2282.1588966477601874590
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 08 May 2020 12:34:36 -0700
+ Fri, 08 May 2020 12:34:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=MeDT4W8B;
- spf=pass (domain: gmail.com, ip: 209.85.214.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f195.google.com with SMTP id k19so1163258pll.9
-        for <openembedded-devel@lists.openembedded.org>; Fri, 08 May 2020 12:34:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=F743dyfc;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id f6so1317422pgm.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 08 May 2020 12:34:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=xL8ZS/IEJNY4WX8GVhlgjm3TBfcsruFpAQA9vZ096ZA=;
-        b=MeDT4W8BUqA3qAtcf+ZlsRgNtlRa94Fu1I+TPBJp0/fRPx1vbX306GFPv0Uzsq+/hM
-         kZcAQQ7kRbdBE5pHnCspXMr2GC27ToITn08EbhDlETgUHwMrSZaYTdnlRyIT3ifaqd2r
-         IsI2AeyX01R9j/deyn+e1RC3S5ZRgRA2P25DRf3c/dkcWGVPIWExWd9eU49np570Fzl5
-         7SMmS+vb9E+AutaeEL0/Rxj3gOu9BlHBoAEk/zb/IvMzFn4osQd8Ti8WH6EAzZPH2DE9
-         DU92guXbYqYgiBdt7PUdTESk1WdD66x2OW87w5Xb7vCXFpvPS9/jRUincTKvOJFpSogQ
-         86iQ==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=KPnmO9apvGTBmXQktI2iLgC1ZxcEsU9EdJNcrYwqxBc=;
+        b=F743dyfcvlglJY8T1BqYQU7ZvSkGDMWoFj1Hv89onV+GSVOiBl7m4sPCQNPRk3jVDR
+         oP6iKj7iKDWzN5tblHCx+NPQtUjNQ56mrX3r/xp3JJ9D7edPy5CwKlexckD2nRE8W26l
+         wBnX2/uiwTTi5LO1lg8E5XvSEGinNVn/6ilYcMkWekbYEBefmkkp3iq1YPAnunDbIPG3
+         ucpBbryiyrL0mDlfp8aGuSoA8lRkkceK8MVyn6cCdXu2J55bLaJuL1h/YYx8qHMRsqpi
+         qjR0u1RSbCimuYp7010icj5EIYNRnU6aBLiVn4MnQgiIHKi8QN792Lg47gzWHaPbvHpr
+         XYxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=xL8ZS/IEJNY4WX8GVhlgjm3TBfcsruFpAQA9vZ096ZA=;
-        b=ftaktEKnJGPiT2ZcTMZzhwvDEMAFXF2NbsbLC3il7RlQWSOKt7vznPcbxgl/igBUZs
-         O2Cz0FmIGzjlj5lkiSi5bV5E/ytNsua/x107b2+b5QVypAIVI9iMBYpbwQbNhrwsnuOf
-         BrXDFveokntcFnifpeemYnYtZOcuvyH7rsxF8yPZ4vwRH7AbxjVflKh0jIyiGxnOQB9h
-         +tr58al4EugxrhwSynelXSHSJ6Ise8+qBgZcLRVEIqKkHGR9s0DfpxxvYMgTdR47bXHj
-         9r/Vqp1wUL6LfPBghQ2lDctbrVq2m61Rd03qb+jux51V1PsDk117Wk+dqL47965GZcQe
-         EsrQ==
-X-Gm-Message-State: AGi0PuaBHcFWvsuX6YZ61lxDxySVnk6yGsI6Ys37yFzoU3hkCzXc4wuN
-	8zCFOsWHUZgCi4wE9dH9Po2Des85qSo=
-X-Google-Smtp-Source: APiQypKfcUTr67GKK7/1liQ6254QSWaESlDl8aONdeyPdoOJRMvCog9w+Y1iuZwxpZ4Wfc/w6EASrQ==
-X-Received: by 2002:a17:902:421:: with SMTP id 30mr3787453ple.271.1588966475238;
-        Fri, 08 May 2020 12:34:35 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=KPnmO9apvGTBmXQktI2iLgC1ZxcEsU9EdJNcrYwqxBc=;
+        b=MPK/qkURu3TX5bc5ZOBP7aQHXHmp0T92HmH/RS99BjVxZjgYxI89p35vlT2LL3DPaP
+         S+ufrs3/oeJ0YRIP5RQkeQJAWghFuXc1mr2UiRzs9dqhOR+zjT311EUiQ9myX1VaFTOf
+         oOT3/AJzsU08ZFFlwLlftqyyKUPY9mMNA8TDLNZ3BdBRCoXmqWlEx+UbEMm9FhWi2OZM
+         bdxQn+T8fH2VN9qVnFZGAf1qp6tPCqnOfNxMPN5fc4h0RjyUJcCT9SmKyEieDaS9HGi3
+         5Jn4orOdgo+ZIe32q6rh3z29/gYgfxR+PDAGVaMEOIRvKH8sQdWM25hy0qnHbvo/IQjG
+         qnoA==
+X-Gm-Message-State: AGi0PubWs1AyeKtIisjG2C02xH9ohLKVhYhCWNvMLU4iDVjwBzO1Biqv
+	Ex8uMS0whHMXvXOnZ0HyO4Ds+9hZlGc=
+X-Google-Smtp-Source: APiQypJ1VffpRXJneP0knE2+XY9Itgr3HVlV9eiXsDSJOl9sZ5tbDJC/zNvkAiZtKrR0/fNErJQRFg==
+X-Received: by 2002:a62:6443:: with SMTP id y64mr4690547pfb.100.1588966476592;
+        Fri, 08 May 2020 12:34:36 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::2691])
-        by smtp.gmail.com with ESMTPSA id u11sm2650819pfc.208.2020.05.08.12.34.34
+        by smtp.gmail.com with ESMTPSA id u11sm2650819pfc.208.2020.05.08.12.34.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 08 May 2020 12:34:34 -0700 (PDT)
+        Fri, 08 May 2020 12:34:35 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/2] nss: Remove mcpu to avoid march conflicts
-Date: Fri,  8 May 2020 12:34:32 -0700
-Message-Id: <20200508193433.3952554-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Beniamin Sandu <beniaminsandu@gmail.com>
+Subject: [meta-oe][PATCH 2/2] rasdaemon: Include limits.h
+Date: Fri,  8 May 2020 12:34:33 -0700
+Message-Id: <20200508193433.3952554-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200508193433.3952554-1-raj.khem@gmail.com>
+References: <20200508193433.3952554-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Some files are compiled with armv8-a+crypto and when using cortex-a55
-the deduced march is armv8.2-a which then conflicts
+Fixes a build problem found with musl
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Beniamin Sandu <beniaminsandu@gmail.com>
 ---
- meta-oe/recipes-support/nss/nss_3.51.1.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ .../0001-Fix-system-header-includes.patch     | 44 +++++++++++++++++++
+ .../rasdaemon/rasdaemon_0.6.5.bb              |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-oe/recipes-support/rasdaemon/files/0001-Fix-system-header-includes.patch
 
-diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-index fba80ce2ab..36e6cd8fc5 100644
---- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-@@ -47,6 +47,10 @@ inherit siteinfo
- TD = "${S}/tentative-dist"
- TDS = "${S}/tentative-dist-staging"
- 
-+# cortex-a55 is ARMv8.2-a based but libatomic explicitly asks for -march=armv8.1-a
-+# which caused -march conflicts in gcc
-+TUNE_CCARGS_remove = "-mcpu=cortex-a55+crc -mcpu=cortex-a55 -mcpu=cortex-a55+crc+crypto"
+diff --git a/meta-oe/recipes-support/rasdaemon/files/0001-Fix-system-header-includes.patch b/meta-oe/recipes-support/rasdaemon/files/0001-Fix-system-header-includes.patch
+new file mode 100644
+index 0000000000..0164321312
+--- /dev/null
++++ b/meta-oe/recipes-support/rasdaemon/files/0001-Fix-system-header-includes.patch
+@@ -0,0 +1,44 @@
++From 18786db1ad03716267927d983c83275469a1478a Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 8 May 2020 12:27:19 -0700
++Subject: [PATCH] Fix system header includes
 +
- TARGET_CC_ARCH += "${LDFLAGS}"
++Use poll.h instead of sys/poll.h
++Fixes
++warning: #warning redirecting incorrect #include <sys/poll.h> to <poll.h> [-Wcpp]
++
++Include limits.h for PATH_MAX
++
++Fixes
++ras-events.c:359:16: error: 'PATH_MAX' undeclared (first use in this function)
++  359 |  char pipe_raw[PATH_MAX];
++      |                ^~~~~~~~
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ ras-events.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/ras-events.c b/ras-events.c
++index 511c93d..400e740 100644
++--- a/ras-events.c
+++++ b/ras-events.c
++@@ -18,13 +18,14 @@
++ #include <dirent.h>
++ #include <errno.h>
++ #include <fcntl.h>
+++#include <limits.h>
+++#include <poll.h>
++ #include <stdio.h>
++ #include <stdlib.h>
++ #include <string.h>
++ #include <unistd.h>
++ #include <sys/stat.h>
++ #include <sys/types.h>
++-#include <sys/poll.h>
++ #include <signal.h>
++ #include <sys/signalfd.h>
++ #include "libtrace/kbuffer.h"
++-- 
++2.26.2
++
+diff --git a/meta-oe/recipes-support/rasdaemon/rasdaemon_0.6.5.bb b/meta-oe/recipes-support/rasdaemon/rasdaemon_0.6.5.bb
+index 33b0d17d65..93f624882d 100644
+--- a/meta-oe/recipes-support/rasdaemon/rasdaemon_0.6.5.bb
++++ b/meta-oe/recipes-support/rasdaemon/rasdaemon_0.6.5.bb
+@@ -4,6 +4,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d3070efe0afa3dc41608bd82c00bb0dc"
  
- do_configure_prepend_libc-musl () {
+ SRC_URI = "git://git.infradead.org/users/mchehab/rasdaemon.git;branch=master \
++        file://0001-Fix-system-header-includes.patch \
+ 	file://rasdaemon.service \
+ 	file://init"
+ 
 -- 
 2.26.2
 
