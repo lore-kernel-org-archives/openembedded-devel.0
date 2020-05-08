@@ -1,73 +1,95 @@
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com [209.85.221.66])
- by mx.groups.io with SMTP id smtpd.web11.7290.1588931243675372637
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com [209.85.128.68])
+ by mx.groups.io with SMTP id smtpd.web12.7457.1588931353854459752
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 08 May 2020 02:47:24 -0700
+ Fri, 08 May 2020 02:49:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=c+3H7Ybm;
- spf=pass (domain: gmail.com, ip: 209.85.221.66, mailfrom: oecore.mailinglist@gmail.com)
-Received: by mail-wr1-f66.google.com with SMTP id s8so1106932wrt.9
-        for <openembedded-devel@lists.openembedded.org>; Fri, 08 May 2020 02:47:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ut2Kz5pN;
+ spf=pass (domain: gmail.com, ip: 209.85.128.68, mailfrom: oecore.mailinglist@gmail.com)
+Received: by mail-wm1-f68.google.com with SMTP id 188so9546282wmc.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 08 May 2020 02:49:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id;
-        bh=Qcg+eITBlueWfeNaqAL7L0BMAY9Z4DyuLIQLgHLcbag=;
-        b=c+3H7YbmTqaiVjwT5mzK26klBAkGrC/tJEt1CBfBtPZqvRzGfISejK72RVrdvY5Q3T
-         xMrXEUNyTH9NpEIFseTYFdE4iGEa/Al7LnSyIJG5TFob6oGl+f5GsoyZkgOkSqNX9Ipl
-         90CX6MxNwXhwGsPnnTIHb9cm7WeIfPqHoL+S8F8/ogfMpzs80U46DArAuOqxXuGHVsXa
-         vVNDHeGRX5bP6X/+HO/cU44Qflz3c95G1pqJ7wE6kfzc9PedjFbm6ovenmKpRzXdHOK1
-         rMXWT9k0rUUPon+JFf8NsLIRJe1J0LUc1Ac3ie1WxQlgsnS2CQtBq8Wknq/Sd1TS3Zc3
-         ijPg==
+        bh=SMcxmg4KGpQp9LtQLB46KA2RlzwuSRy9yc8AQ8e7Las=;
+        b=Ut2Kz5pNR9VlH2ZkJQbCMWGuI/fh8ZwqxdJwmbtcMM9W+/5Z2ynFWnobF6VZsW2AI8
+         whOkqK6ENJMWj3SFZKC6MVnFgrJoAvMpzwTijblO4xMFOHPqZo7iWZhqw2b8Iiy3QBLM
+         FLOxkoX6pZEgbEvJKfaFYot0WiXp9LV/ldz9VVZfjSytL6xNHTpS4eEa/DpE8NEFoOi9
+         uNnMegHHZvKm5MsY4WloSJqrmaNVlizuTNAtrBGu/8B20Qb8DLQqR1kPL2+yDUB2sNQZ
+         dplGTp2ECFMNa/iCAEwNX+sU7nbQGs6M1Fq5SF3DTKCKgQgvRKvzFn4w8aYBb2KRPwDD
+         kq8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=Qcg+eITBlueWfeNaqAL7L0BMAY9Z4DyuLIQLgHLcbag=;
-        b=TGfbjbQQjK+AerpFVMxYe1DN56lS6jx30JUYC+iPfiZOEvKQQiG16wtzu8nyRZc1TQ
-         zrzi/KnfHwvm1CMzepFQuaFb6rqqmQfADa8jzBEwbobcvvzs4lbmfMu5e8e76KG4Do1D
-         j5cfbQg4zQvPYH/6obID0iTXJfhbfV8ai+MyGFBly0rAb3Wd38vNf7VD7vTU/tESHaWP
-         /BCIkWxUGxnb4ewHeH8HLf9ufhJ5UM2441PXHdFutIK/tsfVqALQZxlL90EhNJ68ogUH
-         lhfmXdVPRmupc/mBnv8odAzI3ZWN0S8YokRmdZubWas0ar1KZCE1oMvovaWtvwFKUfu9
-         I5NA==
-X-Gm-Message-State: AGi0PuY9v6AfLTYEM2YugHaTplEQYXfFHgN5DZW9gamqLvV7VLi9JIPs
-	g8IlxFUNzT7r7x69psRNwv6e0tIfN0t1vUaY
-X-Google-Smtp-Source: APiQypIgSwWJ79yGJPRrj5Kzt9g8/L5AhBHPWBxjF+N9IxHRqRhows1HjnP4+7VWWkMjgYvYoWGtKA==
-X-Received: by 2002:a5d:4702:: with SMTP id y2mr1894182wrq.136.1588931241951;
-        Fri, 08 May 2020 02:47:21 -0700 (PDT)
+        bh=SMcxmg4KGpQp9LtQLB46KA2RlzwuSRy9yc8AQ8e7Las=;
+        b=Zy+Enhx+UQ/G2BtorvAl2EIQiEpoS7qlaMt98w4LOv4sUkdkq3aKiRks6v+Jombi5f
+         eUO7jKI+9Z22k+RcOMfZdrj/PINkeM1kuH52CELZo/on/U+en9U83ZuPoU48xplyo3gt
+         Cqu+u7ylrwRY/aXOAsPwz1RUV3wJlLYxB8Xb1yRxZawynlWhB9xqNs5pU8/2qBqM77Kt
+         03ZgEc80oZZuh01YbaHBFl206LbAGeNF+KVM+Uh8O3PLqy6NYnx2J1d5quBgtJX0QlAP
+         9SFtbrTvqKq+vUUZWOgCILaBjXdNnnDAXunra44VbHND/Ehb022lpRVaD/vDlQbRzHN5
+         dmpQ==
+X-Gm-Message-State: AGi0PuZUFkA3XfhTW1+AaY+NLjKiWBx5DY38M0PHgGGqXQvlpWa0nFz+
+	oLsyspfqR8HQCgdE1URXn4NBjik6Fl7qOFDd
+X-Google-Smtp-Source: APiQypKnHJpyHneJ6cXLj1VVMbGKtHIKtYygRy9k8QFAwxT8K0be4wOJ4whWOMRdyDS7fmPayNCWHQ==
+X-Received: by 2002:a1c:a58b:: with SMTP id o133mr14779333wme.5.1588931352283;
+        Fri, 08 May 2020 02:49:12 -0700 (PDT)
 Return-Path: <oecore.mailinglist@gmail.com>
 Received: from t460s-2.res.training (ppp-94-65-43-120.home.otenet.gr. [94.65.43.120])
-        by smtp.gmail.com with ESMTPSA id 2sm2085390wre.25.2020.05.08.02.47.20
+        by smtp.gmail.com with ESMTPSA id n25sm12366384wmk.9.2020.05.08.02.49.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 08 May 2020 02:47:21 -0700 (PDT)
+        Fri, 08 May 2020 02:49:11 -0700 (PDT)
 From: "Robert Berger" <oecore.mailinglist@gmail.com>
 X-Google-Original-From: Robert Berger <robert.berger@ReliableEmbeddedSystems.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: richard.leitner@skidata.com,
 	Robert Berger <robert.berger@ReliableEmbeddedSystems.com>
-Subject: [meta-java][PATCH] icedtea7-native: host gcc-9, extra CFLAGS needed
-Date: Fri,  8 May 2020 12:46:38 +0300
-Message-Id: <20200508094638.12915-1-robert.berger@ReliableEmbeddedSystems.com>
+Subject: [meta-java][PATCH] do_unpack_extract_submodules: WORKDIR and ARCHIVER_WORKDIR support
+Date: Fri,  8 May 2020 12:48:42 +0300
+Message-Id: <20200508094842.14312-1-robert.berger@ReliableEmbeddedSystems.com>
 X-Mailer: git-send-email 2.17.1
 
 Signed-off-by: Robert Berger <robert.berger@ReliableEmbeddedSystems.com>
 ---
- recipes-core/icedtea/icedtea7-native.inc | 5 +++++
- 1 file changed, 5 insertions(+)
+ recipes-core/openjdk/openjdk-8-common.inc | 26 +++++++++++++++++------
+ 1 file changed, 19 insertions(+), 7 deletions(-)
 
-diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
-index 8d0dc71..b9ad2bd 100644
---- a/recipes-core/icedtea/icedtea7-native.inc
-+++ b/recipes-core/icedtea/icedtea7-native.inc
-@@ -28,6 +28,11 @@ CXX_append = " -std=gnu++98"
- # WORKAROUND: ignore errors from new compilers
- CFLAGS_append = " -Wno-error=stringop-overflow -Wno-error=return-type"
+diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+index 5ea83ed..2166147 100644
+--- a/recipes-core/openjdk/openjdk-8-common.inc
++++ b/recipes-core/openjdk/openjdk-8-common.inc
+@@ -32,14 +32,26 @@ do_configure_prepend () {
  
-+# oe.utils.get_host_compiler_version returns "gcc, 9.2" and we want -> "9"
-+HOST_COMPILER_MAJOR="${@oe.utils.get_host_compiler_version(d)[1].split(".", 2)[0]}"
-+# if compiler version 9 detected, add more CFLAGS
-+CFLAGS_append = " ${@oe.utils.conditional('HOST_COMPILER_MAJOR', '9', '-Wno-error=format-overflow', '', d)}"
+ do_unpack_extract_submodules () {
+     cd "${S}"
 +
- inherit native java autotools pkgconfig
- inherit openjdk-build-helper
- inherit python3native
++    # default WORKDIR - __NOT__ called from archiver.bbclass:do_unpack_and_patch
++    # WORKDIR is __NOT_ modified:
++    SUBMOD_WORKDIR="${WORKDIR}"
++
++    # "special" WORKDIR - called from archiver.bbclass:do_unpack_and_patch
++    # archiver.bbclass set's WORKDIR to ARCHIVER_WORKDIR:
++    if [ "$WORKDIR" == "$ARCHIVER_WORKDIR" ]; then
++       bbwarn " --> Archiver mode <--"
++       SUBMOD_WORKDIR="${ARCHIVER_WORKDIR}/.."
++    fi
++
+     # tar --transform
+-    tar xjf ${WORKDIR}/${CORBA_FILE_LOCAL} --transform "s,-${CORBA_CHANGESET},,g"
+-    tar xjf ${WORKDIR}/${HOTSPOT_FILE_LOCAL} --transform "s,-${HOTSPOT_CHANGESET},,g"
+-    tar xjf ${WORKDIR}/${JAXP_FILE_LOCAL} --transform "s,-${JAXP_CHANGESET},,g"
+-    tar xjf ${WORKDIR}/${JAXWS_FILE_LOCAL} --transform "s,-${JAXWS_CHANGESET},,g"
+-    tar xjf ${WORKDIR}/${JDK_FILE_LOCAL} --transform "s,-${JDK_CHANGESET},,g"
+-    tar xjf ${WORKDIR}/${LANGTOOLS_FILE_LOCAL} --transform "s,-${LANGTOOLS_CHANGESET},,g"
+-    tar xjf ${WORKDIR}/${NASHORN_FILE_LOCAL} --transform "s,-${NASHORN_CHANGESET},,g"
++    tar xjf ${SUBMOD_WORKDIR}/${CORBA_FILE_LOCAL} --transform "s,-${CORBA_CHANGESET},,g"
++    tar xjf ${SUBMOD_WORKDIR}/${HOTSPOT_FILE_LOCAL} --transform "s,-${HOTSPOT_CHANGESET},,g"
++    tar xjf ${SUBMOD_WORKDIR}/${JAXP_FILE_LOCAL} --transform "s,-${JAXP_CHANGESET},,g"
++    tar xjf ${SUBMOD_WORKDIR}/${JAXWS_FILE_LOCAL} --transform "s,-${JAXWS_CHANGESET},,g"
++    tar xjf ${SUBMOD_WORKDIR}/${JDK_FILE_LOCAL} --transform "s,-${JDK_CHANGESET},,g"
++    tar xjf ${SUBMOD_WORKDIR}/${LANGTOOLS_FILE_LOCAL} --transform "s,-${LANGTOOLS_CHANGESET},,g"
++    tar xjf ${SUBMOD_WORKDIR}/${NASHORN_FILE_LOCAL} --transform "s,-${NASHORN_CHANGESET},,g"
+ }
+ 
+ do_unpack_delete_X11_wrappers() {
 -- 
 2.17.1
 
