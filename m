@@ -1,78 +1,83 @@
-Received: from mail.cybernetics.com (mail.cybernetics.com [173.71.130.66])
- by mx.groups.io with SMTP id smtpd.web11.11592.1588948918912702352
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com [209.85.222.196])
+ by mx.groups.io with SMTP id smtpd.web12.448.1588955854637711060
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 08 May 2020 07:41:59 -0700
+ Fri, 08 May 2020 09:37:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: cybernetics.com, ip: 173.71.130.66, mailfrom: btv1==397780a3020==cbing@cybernetics.com)
-X-ASG-Debug-ID: 1588948900-0fb3b0649e6959b0001-aWHRdb
-Received: from cybernetics.com ([10.10.4.126]) by mail.cybernetics.com with ESMTP id XK4euRE3oYX3yh1z; Fri, 08 May 2020 10:41:40 -0400 (EDT)
-X-Barracuda-Envelope-From: cbing@cybernetics.com
-X-ASG-Whitelist: Client
-Received: from [10.157.1.18] (HELO [192.168.184.100])
-  by cybernetics.com (CommuniGate Pro SMTP 5.1.14)
-  with ESMTP id 9947813; Fri, 08 May 2020 10:41:40 -0400
-Subject: Re: [oe] [meta-oe][PATCH] php: fix opcache link error in 7.4
-To: Adrian Bunk <bunk@stusta.de>
-X-ASG-Orig-Subj: Re: [oe] [meta-oe][PATCH] php: fix opcache link error in 7.4
-Cc: openembedded-devel@lists.openembedded.org
-References: <20200507142806.48643a47@cy-rd-cb>
- <20200508105610.GA8452@localhost>
-From: "Claude Bing" <cbing@cybernetics.com>
-Message-ID: <090c0075-c785-e3fd-1da4-c56518a64c0c@cybernetics.com>
-Date: Fri, 8 May 2020 10:42:22 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=sZRBAziX;
+ spf=pass (domain: gmail.com, ip: 209.85.222.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f196.google.com with SMTP id i14so1060357qka.10
+        for <openembedded-devel@lists.openembedded.org>; Fri, 08 May 2020 09:37:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=EuXlTOT6aU6M6xNxiBpBodEnN3bQfIpRmPtKBe6p0j8=;
+        b=sZRBAziXBoGCzgv/B11NVFdbR65DfVjP1XCDNpngrF0ebjyManXzhH02FYFNh8uCYT
+         1wqwd2sSq1PQVJ64y0GKxODtYVyed/EXL/s2/e8ZDKPQ43VHzxVysp2JQS0uQeFOXfO8
+         IlCxMQlX4L47BAaRtuJAkqANew45gXZx3v42eM8uI+EkdfoyqwERZ40pdwOtyjnWVUGr
+         e49sd7ACIcrLXwcuH/R2lKg+hylz8JKUaDWX/NIVa5Wxjua/U32O4Ainxza6a9y2GAfR
+         9vQEz58eDokJTrOQ8M/c7vwSFmAsqiVPeXGS2jQJieWMse6sbrTFB9/cNRx5GWGLbyPY
+         aG+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=EuXlTOT6aU6M6xNxiBpBodEnN3bQfIpRmPtKBe6p0j8=;
+        b=JCe4oddhiMTwMfNir5GEmwodFTi19euiSKBsmvJF+bgl5FqnnVMOTTCXpuIzL17USy
+         N6064yLtlqRnSIJntLAYRicWIAu5NgMN1X4xLXSTxhtrg4OS/3CC4yq4FYKeIZLp9Qim
+         T5qu2RJBNtYVNozEHV8SjJbE3rNg1LMDLifVZmYlN55HsT5sWW5Ots7hkeRNNb5PGpCO
+         adsUQ1ECh4sQigU9r1JOvuZ1wCTFhFyNZiXiZf+9SzLWtdG/V5S2OEepF8BnfVWvQH4T
+         ZVzx1ZS4A2aa9ZPE+DcgD8O1M+Lb7rfomi2jpVRzEPkvDJCp0GqXwffAdEZe+cQ5/09j
+         sSdA==
+X-Gm-Message-State: AGi0PuaVLfrM4oCu2XDD6vXX1wdkqUQ3QB8Uxlnsrd7BC4vNWaL6QZjq
+	AeOiXYKZakOzHxiDI+gq0V1JDc9PJ/dtNnSNpyPjF390
+X-Google-Smtp-Source: APiQypJagvviyBRMlFOjSg0V6TteZs6f0LSSfePy1EtMc/1/DCkpX8m31lOIldTK96ePQLi+5B+7hJl4Q7Bd+x9or4Q=
+X-Received: by 2002:a37:52c6:: with SMTP id g189mr3411576qkb.17.1588955853422;
+ Fri, 08 May 2020 09:37:33 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200508105610.GA8452@localhost>
-X-Barracuda-Connect: UNKNOWN[10.10.4.126]
-X-Barracuda-Start-Time: 1588948900
-X-Barracuda-URL: https://10.10.4.122:443/cgi-mod/mark.cgi
-X-Virus-Scanned: by bsmtpd at cybernetics.com
-X-Barracuda-Scan-Msg-Size: 1804
-X-Barracuda-BRTS-Status: 1
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <1588832553-58023-1-git-send-email-mingli.yu@windriver.com>
+In-Reply-To: <1588832553-58023-1-git-send-email-mingli.yu@windriver.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 8 May 2020 09:37:07 -0700
+Message-ID: <CAMKF1soM_GdprSjPuOoyN2PNxufsP1qJsE=k2RwaXB6G8mc89g@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH v2] python3-ntplib: add missing python3-io RDEPENDS
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-On 5/8/20 6:56 AM, Adrian Bunk wrote:
-> On Thu, May 07, 2020 at 02:28:06PM -0400, Claude Bing wrote:
->> Explicitly specifying -lrt is required for opcache to be linked against
->> the proper dependencies.  Additionally, PHP disables libdl when it
->> detects a cross-compilation environment for some reason.  In order to
->> load any type of extension, re-enabling libdl is required.
->> ...
->> +# link against librt (libc) if opcache is specified in order to avoid the
->> +# following error:
->> +# Failed loading /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so: /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so: undefined symbol: shm_unlink
->> +LDFLAGS += "${@ " -lrt " if bb.utils.contains('PACKAGECONFIG', 'opcache', 'true', 'false', d) else "" }"
-> 
-> Is this actually a bug in 0001-opcache-config.m4-enable-opcache.patch
-> and should instead be fixed there?
+I merged V1, so if v2 has differences please send a rebased patch on master.
 
-Yes, that does indeed fix the problem.  Would you like me to reply to
-this thread with a new patch, or create a different thread?
-
-> 
-> -    AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
-> -    AC_MSG_RESULT([yes])
-> -    PHP_CHECK_LIBRARY(rt, shm_unlink, [PHP_ADD_LIBRARY(rt,1,OPCACHE_SHARED_LIBADD)])
-> +  AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
-> 
-> I would guess re-adding the PHP_CHECK_LIBRARY fixes your problem?
-> 
->> +# Adding these flags enables dynamic library support, which is disabled by
->> +# default when cross compiling
->> +# See https://bugs.php.net/bug.php?id=60109
->> +CFLAGS += " -DHAVE_LIBDL "
->> +LDFLAGS += " -ldl "
->> +
->> ...
-> 
-> The linked PHP bug was closed in 2018 due to lack of feedback.
-
-I have now added a comment to hopefully reopen the issue.
-
-> 
-> cu
-> Adrian
+On Wed, May 6, 2020 at 11:22 PM Yu, Mingli <mingli.yu@windriver.com> wrote:
+>
+> From: Mingli Yu <mingli.yu@windriver.com>
+>
+> Add the missing python3-io RDEPENDS to fix
+> below error:
+>  # python3
+> Python 3.8.2 (default, Apr 27 2020, 08:51:00)
+> [GCC 9.3.0] on linux
+> Type "help", "copyright", "credits" or "license" for more information.
+>  >>> import ntplib
+> Traceback (most recent call last):
+> File "<stdin>", line 1, in <module>
+> File "/usr/lib64/python3.8/site-packages/ntplib.py", line 32, in <module>
+> import socket
+> ModuleNotFoundError: No module named 'socket'
+>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>  meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb b/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
+> index 93df83a..ce2618b 100644
+> --- a/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
+> +++ b/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
+> @@ -11,4 +11,4 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
+>
+>  inherit setuptools3 python3native pypi
+>
+> -RDEPENDS_${PN} += "${PYTHON_PN}-datetime"
+> +RDEPENDS_${PN} += "${PYTHON_PN}-datetime ${PYTHON_PN}-io"
+> --
+> 2.7.4
+>
 > 
