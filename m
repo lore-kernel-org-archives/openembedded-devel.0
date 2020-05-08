@@ -1,66 +1,77 @@
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
- by mx.groups.io with SMTP id smtpd.web11.1189.1588963296002993833
+Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com [209.85.214.195])
+ by mx.groups.io with SMTP id smtpd.web11.2251.1588966476171544595
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 08 May 2020 11:41:37 -0700
+ Fri, 08 May 2020 12:34:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@stusta.de header.s=default header.b=uQVU8jM5;
- spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=rc5n=6w=stusta.de=bunk@stusta.mhn.de)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49JfLM5qCHz4t;
-	Fri,  8 May 2020 20:41:31 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1588963292;
-	bh=SDFZCE29LwuCX3rdWfPsPS0eU5PKFwEpUetccuVcO7s=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=uQVU8jM5X7B77x6TJosHWPU4IEM8u5MNLo2oRnWWoncrR7pj9qY1g824udj8GL9Wb
-	 Xx/X/7yLFtsOyMmZvnq3qNTLmv99XJOB87ULbQ3u88hfk49OjK+O3W5bEDnSfp6AKr
-	 p7Jzkbzl2N/Xn4oQHOm9A6Udyb/jWCyOiYchAKRVn8c02Jzdgoa2pgGtLNmpBONESB
-	 tIgNE45RcqNc1ee4ihAx4Y8bvri9/lyqh77SGktymUgychnxKUQ2d4YTaD/txqfrT3
-	 IX+OPRnqmY0xfMGhrlKjEX7H8CFUxhL98kz4WCFaigVScTF1Y4iJ46p8fncfUPF5j7
-	 fA5uXmtB5/pXva+stIPgyFzF7ccSLSp7pQN1AmfcJ2vuX++vgt2CiXTRDbNK6MerDF
-	 lYM/7V6zo24qCG+fiLiBVt6NcG9NbZ9mcP/HDzRAeQCYd80OcgcO+bJO6rCuCNCVVC
-	 ogqwtcllN+F0Py9kwRp0ww8tGg9OpYsurTs83d8jC4GXB9b5fKV9o3lp5s1ZJ57ZqH
-	 FGTU0pxGPoAGavlnJbf9n/ElU6W8QMB4gU9aZEjNl9EX1iweUEadKVcABDDwd4q00V
-	 GlPlqAvkM+iMBOPsIdw2pjERB4ISf91ghrMpzB7/hjsR1LZm8d7wfgne7ZUxCdqnA8
-	 ZUIGWgx1C5SKSq3larAOSfhY=
-Date: Fri, 8 May 2020 21:41:29 +0300
-From: "Adrian Bunk" <bunk@stusta.de>
-To: Claude Bing <cbing@cybernetics.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-oe][PATCH] php: fix opcache link error in 7.4
-Message-ID: <20200508184129.GA7248@localhost>
-References: <20200507142806.48643a47@cy-rd-cb>
- <20200508105610.GA8452@localhost>
- <090c0075-c785-e3fd-1da4-c56518a64c0c@cybernetics.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=MeDT4W8B;
+ spf=pass (domain: gmail.com, ip: 209.85.214.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f195.google.com with SMTP id k19so1163258pll.9
+        for <openembedded-devel@lists.openembedded.org>; Fri, 08 May 2020 12:34:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=xL8ZS/IEJNY4WX8GVhlgjm3TBfcsruFpAQA9vZ096ZA=;
+        b=MeDT4W8BUqA3qAtcf+ZlsRgNtlRa94Fu1I+TPBJp0/fRPx1vbX306GFPv0Uzsq+/hM
+         kZcAQQ7kRbdBE5pHnCspXMr2GC27ToITn08EbhDlETgUHwMrSZaYTdnlRyIT3ifaqd2r
+         IsI2AeyX01R9j/deyn+e1RC3S5ZRgRA2P25DRf3c/dkcWGVPIWExWd9eU49np570Fzl5
+         7SMmS+vb9E+AutaeEL0/Rxj3gOu9BlHBoAEk/zb/IvMzFn4osQd8Ti8WH6EAzZPH2DE9
+         DU92guXbYqYgiBdt7PUdTESk1WdD66x2OW87w5Xb7vCXFpvPS9/jRUincTKvOJFpSogQ
+         86iQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=xL8ZS/IEJNY4WX8GVhlgjm3TBfcsruFpAQA9vZ096ZA=;
+        b=ftaktEKnJGPiT2ZcTMZzhwvDEMAFXF2NbsbLC3il7RlQWSOKt7vznPcbxgl/igBUZs
+         O2Cz0FmIGzjlj5lkiSi5bV5E/ytNsua/x107b2+b5QVypAIVI9iMBYpbwQbNhrwsnuOf
+         BrXDFveokntcFnifpeemYnYtZOcuvyH7rsxF8yPZ4vwRH7AbxjVflKh0jIyiGxnOQB9h
+         +tr58al4EugxrhwSynelXSHSJ6Ise8+qBgZcLRVEIqKkHGR9s0DfpxxvYMgTdR47bXHj
+         9r/Vqp1wUL6LfPBghQ2lDctbrVq2m61Rd03qb+jux51V1PsDk117Wk+dqL47965GZcQe
+         EsrQ==
+X-Gm-Message-State: AGi0PuaBHcFWvsuX6YZ61lxDxySVnk6yGsI6Ys37yFzoU3hkCzXc4wuN
+	8zCFOsWHUZgCi4wE9dH9Po2Des85qSo=
+X-Google-Smtp-Source: APiQypKfcUTr67GKK7/1liQ6254QSWaESlDl8aONdeyPdoOJRMvCog9w+Y1iuZwxpZ4Wfc/w6EASrQ==
+X-Received: by 2002:a17:902:421:: with SMTP id 30mr3787453ple.271.1588966475238;
+        Fri, 08 May 2020 12:34:35 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::2691])
+        by smtp.gmail.com with ESMTPSA id u11sm2650819pfc.208.2020.05.08.12.34.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 08 May 2020 12:34:34 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] nss: Remove mcpu to avoid march conflicts
+Date: Fri,  8 May 2020 12:34:32 -0700
+Message-Id: <20200508193433.3952554-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <090c0075-c785-e3fd-1da4-c56518a64c0c@cybernetics.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Fri, May 08, 2020 at 10:42:22AM -0400, Claude Bing wrote:
-> On 5/8/20 6:56 AM, Adrian Bunk wrote:
-> > On Thu, May 07, 2020 at 02:28:06PM -0400, Claude Bing wrote:
-> >> Explicitly specifying -lrt is required for opcache to be linked against
-> >> the proper dependencies.  Additionally, PHP disables libdl when it
-> >> detects a cross-compilation environment for some reason.  In order to
-> >> load any type of extension, re-enabling libdl is required.
-> >> ...
-> >> +# link against librt (libc) if opcache is specified in order to avoid the
-> >> +# following error:
-> >> +# Failed loading /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so: /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so: undefined symbol: shm_unlink
-> >> +LDFLAGS += "${@ " -lrt " if bb.utils.contains('PACKAGECONFIG', 'opcache', 'true', 'false', d) else "" }"
-> > 
-> > Is this actually a bug in 0001-opcache-config.m4-enable-opcache.patch
-> > and should instead be fixed there?
-> 
-> Yes, that does indeed fix the problem.  Would you like me to reply to
-> this thread with a new patch, or create a different thread?
->...
+Some files are compiled with armv8-a+crypto and when using cortex-a55
+the deduced march is armv8.2-a which then conflicts
 
-Your original patch is already in master, please submit a new patch in a 
-different thread that removes this workaround from php_7.4.4.bb and 
-fixes 0001-opcache-config.m4-enable-opcache.patch.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-support/nss/nss_3.51.1.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-Thanks
-Adrian
+diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+index fba80ce2ab..36e6cd8fc5 100644
+--- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
++++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+@@ -47,6 +47,10 @@ inherit siteinfo
+ TD = "${S}/tentative-dist"
+ TDS = "${S}/tentative-dist-staging"
+ 
++# cortex-a55 is ARMv8.2-a based but libatomic explicitly asks for -march=armv8.1-a
++# which caused -march conflicts in gcc
++TUNE_CCARGS_remove = "-mcpu=cortex-a55+crc -mcpu=cortex-a55 -mcpu=cortex-a55+crc+crypto"
++
+ TARGET_CC_ARCH += "${LDFLAGS}"
+ 
+ do_configure_prepend_libc-musl () {
+-- 
+2.26.2
+
