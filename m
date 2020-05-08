@@ -1,50 +1,42 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web11.6243.1588923382482684954
- for <openembedded-devel@lists.openembedded.org>;
- Fri, 08 May 2020 00:36:22 -0700
-Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: mingli.yu@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0487a0Ym013583
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 8 May 2020 00:36:11 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
- 14.3.487.0; Fri, 8 May 2020 00:35:50 -0700
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH] python3-pyudev: add the missing rdepends
-Date: Fri, 8 May 2020 15:35:48 +0800
-Message-ID: <1588923348-255260-1-git-send-email-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking] This version of TShark was not built with support for capturing packets
+To: openembedded-devel@lists.openembedded.org
+From: qaz79462008@gmail.com
+X-Originating-Location: Taipei, Taipei City, TW (175.98.141.254)
+X-Originating-Platform: Windows Chrome 81
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Type: text/plain
+Date: Fri, 08 May 2020 01:27:53 -0700
+Message-ID: <edvX.1588926473120380747.XE0J@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="oDFkbHfj9cJCTWGpMQQ9"
 
-From: Mingli Yu <mingli.yu@windriver.com>
+--oDFkbHfj9cJCTWGpMQQ9
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add the missing rdepends to fix below error:
- # python3
- [snip]
- >>> import pyudev
- [snip]
- ModuleNotFoundError: No module named 'fcntl'
+I build my Yocto with wireshark_1.12.4.bb ( https://git.congatec.com/yocto/=
+meta-openembedded/blob/fido/meta-networking/recipes-support/wireshark/wires=
+hark_1.12.4.bb )
+put it on my machine and run tshark, it shows "tshark: This version of TSh=
+ark was not built with support for capturing packets."
+one line of the recipe *EXTRA_OECONF +=3D "--with-qt=3Dno --enable-usr-loc=
+al=3Dno --enable-tshark --with-pcap=3Dno --enable-pcap-ng-default"
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+* So does this mean that I have tshark enable?
+How should I modify the recipe?
+Thanks
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb b/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
-index f39847f..49a3628 100644
---- a/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
-@@ -17,5 +17,6 @@ RDEPENDS_${PN} = "\
-     ${PYTHON_PN}-misc \
-     ${PYTHON_PN}-six \
-     ${PYTHON_PN}-threading \
-+    ${PYTHON_PN}-fcntl \
-     libudev \
- "
--- 
-2.7.4
+--oDFkbHfj9cJCTWGpMQQ9
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
+I build my Yocto with <a href=3D"https://git.congatec.com/yocto/meta-openem=
+bedded/blob/fido/meta-networking/recipes-support/wireshark/wireshark_1.12.4=
+.bb" target=3D"_blank" rel=3D"noopener">wireshark_1.12.4.bb</a><br />put it=
+ on my machine and run tshark, it shows "tshark: This version of TShark was=
+ not built with support for capturing packets."<br />one line of the recipe=
+&nbsp;<strong>EXTRA_OECONF +=3D "--with-qt=3Dno --enable-usr-local=3Dno --e=
+nable-tshark --with-pcap=3Dno --enable-pcap-ng-default"<br /><br /></strong=
+>So does this mean that I have tshark enable?<br />How should I modify the =
+recipe?<br />Thanks<br />
+
+--oDFkbHfj9cJCTWGpMQQ9--
