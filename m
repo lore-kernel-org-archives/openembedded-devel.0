@@ -1,78 +1,191 @@
-Received: from mail.cybernetics.com (mail.cybernetics.com [173.71.130.66])
- by mx.groups.io with SMTP id smtpd.web11.1526.1588973204978088372
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com [209.85.160.181])
+ by mx.groups.io with SMTP id smtpd.web11.4053.1588992832620560816
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 08 May 2020 14:26:45 -0700
+ Fri, 08 May 2020 19:53:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: cybernetics.com, ip: 173.71.130.66, mailfrom: btv1==397780a3020==cbing@cybernetics.com)
-X-ASG-Debug-ID: 1588973201-0fb3b0649e6ac7e0001-aWHRdb
-Received: from cybernetics.com ([10.10.4.126]) by mail.cybernetics.com with ESMTP id 9lZu2iJGFTb7BvS5 for <openembedded-devel@lists.openembedded.org>; Fri, 08 May 2020 17:26:41 -0400 (EDT)
-X-Barracuda-Envelope-From: cbing@cybernetics.com
-X-ASG-Whitelist: Client
-Received: from [10.157.1.18] (HELO [192.168.184.100])
-  by cybernetics.com (CommuniGate Pro SMTP 5.1.14)
-  with ESMTP id 9949201 for openembedded-devel@lists.openembedded.org; Fri, 08 May 2020 17:26:41 -0400
-Subject: Re: [oe] [meta-oe][PATCH] php: fix opcache link error in 7.4
-To: openembedded-devel@lists.openembedded.org
-X-ASG-Orig-Subj: Re: [oe] [meta-oe][PATCH] php: fix opcache link error in 7.4
-References: <20200507142806.48643a47@cy-rd-cb>
- <20200508105610.GA8452@localhost>
- <090c0075-c785-e3fd-1da4-c56518a64c0c@cybernetics.com>
- <20200508184129.GA7248@localhost>
-From: "Claude Bing" <cbing@cybernetics.com>
-Message-ID: <b2a74e1d-32f1-56f2-934c-58d2a6d25f64@cybernetics.com>
-Date: Fri, 8 May 2020 17:27:23 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Cz18TQnn;
+ spf=pass (domain: gmail.com, ip: 209.85.160.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f181.google.com with SMTP id b1so2451935qtt.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 08 May 2020 19:53:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=9SymPGUJyDLRUgWjBW5A21OBi8dngqFUrOptzCofykk=;
+        b=Cz18TQnns0u2Z6A+NuC91XqCao59GII5ttHalD4qJ/1B8Hrim5XriRLh/aGyujulSc
+         nGuf5/fb7UQDDeGGZPKy31LJ7IK51UyQGbfZhVSOG5hj2w/0Kp8BFUnitMNa7kdjuM8A
+         asBvU6WpQm7//zrGRJL/mVNRtRSX6YUp0d9+uaTEboci9INRkmYDBgDwsCWQU6WTViiw
+         /0zpHYSwqvMczvkGwEwLrUgmaKJiUfbbw/GEj5SQLJGx5G75hWXCMK1CMW13U8lKKtdR
+         i9SRWF712zbjli3fzDNILbKI/FSOI4Hkk5R1rKtl47NTLL/5vIiEXcd1PrCCG4IsJlIA
+         POVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=9SymPGUJyDLRUgWjBW5A21OBi8dngqFUrOptzCofykk=;
+        b=e6FknJhSC+6Ji7EnrFkBY4IpppAfLyqxfHrVajQ0BwBxdHmIfYAByRJgO59VNVt1rh
+         m8lyOmSPnbPjGpdsiC4DJBLidEvKbN1tAPWoIxjmxe7r7TBJX2zViXt6X0ukEv97ONGn
+         DYqdsyO91zDIdb6ikk67MiPybNR4LdhKtrvRY/lb58Felsmpl67QVtfUwJmO3vFruOob
+         gaDs7lOS39VImhs8xcut2LmGhFbw0Allf8nFSXbrO8yX9TLgDPOmEMlE4f8Sl+RDPU2T
+         5KpFsWhSPpZQ08bNOfYK/tdOAzCSPw3xQrYqIYmEuj4wRrDCQH4uf2pWE/Tn2SjF9y9/
+         7H/g==
+X-Gm-Message-State: AGi0PuYQ3FbKhycBtIT6FFDLY9zQhGMHShdFaKnMgZ2tmrwkdc1OMLtG
+	82Wf1JxD0DZ3UDqDRSQRbg0XSFj72m3FrrdmT0gKXjCmKCc=
+X-Google-Smtp-Source: APiQypKCKTE951bCQCJCMqw0P77xGj0HmDpjlyFxOzgsRXTkdYZB9gyKRYexryri5nBAJA1wblXolWTwX0EyGqwYZ1g=
+X-Received: by 2002:ac8:4311:: with SMTP id z17mr5757097qtm.316.1588992831332;
+ Fri, 08 May 2020 19:53:51 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200508184129.GA7248@localhost>
-X-Barracuda-Connect: UNKNOWN[10.10.4.126]
-X-Barracuda-Start-Time: 1588973201
-X-Barracuda-URL: https://10.10.4.122:443/cgi-mod/mark.cgi
-X-Virus-Scanned: by bsmtpd at cybernetics.com
-X-Barracuda-Scan-Msg-Size: 2111
-X-Barracuda-BRTS-Status: 1
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <20200507103712.3356068-1-beniaminsandu@gmail.com>
+In-Reply-To: <20200507103712.3356068-1-beniaminsandu@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 8 May 2020 19:53:25 -0700
+Message-ID: <CAMKF1soGerMVWqAbYS6Qwz7+RPGa9CgbRrtspHN9=awrS7KeEQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] rasdaemon: create recipe for version 0.6.5
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Beniamin Sandu <beniaminsandu@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 
-OK, I started a new patch thread.  Who/what determines which patches get
-included in the named release branches?  Specifically, we are using
-dunfell and would like these changes to show up in that branch.
+On Thu, May 7, 2020 at 3:37 AM Beni <beniaminsandu@gmail.com> wrote:
+>
+> Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+> ---
+>  meta-oe/recipes-support/rasdaemon/files/init  | 43 ++++++++++++++++
+>  .../rasdaemon/files/rasdaemon.service         | 12 +++++
+>  .../rasdaemon/rasdaemon_0.6.5.bb              | 51 +++++++++++++++++++
+>  3 files changed, 106 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/rasdaemon/files/init
+>  create mode 100644 meta-oe/recipes-support/rasdaemon/files/rasdaemon.service
+>  create mode 100644 meta-oe/recipes-support/rasdaemon/rasdaemon_0.6.5.bb
+>
+> diff --git a/meta-oe/recipes-support/rasdaemon/files/init b/meta-oe/recipes-support/rasdaemon/files/init
+> new file mode 100644
+> index 000000000..216677e73
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/rasdaemon/files/init
+> @@ -0,0 +1,43 @@
+> +#! /bin/sh
+> +# /etc/init.d/rasdaemon: start rasdaemon service
+> +
+> +. /etc/init.d/functions
+> +
+> +# Defaults
+> +PIDFILE=/var/run/rasdaemon.pid
+> +BINFILE=/usr/sbin/rasdaemon
+> +SCRIPTNAME=/etc/init.d/rasdaemon
+> +
+> +[ -x $BINFILE ] || exit 0
+> +
+> +case "$1" in
+> +       start)
+> +               echo -n "Starting RASdaemon services: "
+> +               if [ ! -f "$PIDFILE" ]; then
+> +                       start-stop-daemon --start --quiet --exec $BINFILE -- --enable &> /dev/null
+> +                       start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $BINFILE -- --record
+> +                       pidof $BINFILE > $PIDFILE
+> +               fi
+> +               [ -f $PIDFILE ] && echo "done." || echo "fail."
+> +               ;;
+> +       stop)
+> +               echo -n "Stopping RASdaemon services: "
+> +               if [ -f  "$PIDFILE" ] ; then
+> +                       start-stop-daemon --stop --quiet --pidfile $PIDFILE --exec $BINFILE -- --disable &> /dev/null
+> +                       killproc $BINFILE
+> +                       rm $PIDFILE
+> +               fi
+> +               [ ! -f $PIDFILE ] && echo "done." || echo "fail."
+> +               ;;
+> +       restart)
+> +               $0 stop
+> +               sleep 1
+> +               $0 start
+> +               ;;
+> +       status)
+> +               status $BINFILE
+> +               ;;
+> +       *)
+> +               echo "Usage: $SCRIPTNAME {start|stop|restart|status}"
+> +               exit 1
+> +esac
+> diff --git a/meta-oe/recipes-support/rasdaemon/files/rasdaemon.service b/meta-oe/recipes-support/rasdaemon/files/rasdaemon.service
+> new file mode 100644
+> index 000000000..4fbf23142
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/rasdaemon/files/rasdaemon.service
+> @@ -0,0 +1,12 @@
+> +[Unit]
+> +Description=RAS daemon to log the RAS events
+> +After=syslog.target
+> +
+> +[Service]
+> +ExecStart=/usr/sbin/rasdaemon -f -r
+> +ExecStartPost=/usr/sbin/rasdaemon --enable
+> +ExecStop=/usr/sbin/rasdaemon --disable
+> +Restart=on-abort
+> +
+> +[Install]
+> +WantedBy=multi-user.target
+> diff --git a/meta-oe/recipes-support/rasdaemon/rasdaemon_0.6.5.bb b/meta-oe/recipes-support/rasdaemon/rasdaemon_0.6.5.bb
+> new file mode 100644
+> index 000000000..c1b9fdbaa
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/rasdaemon/rasdaemon_0.6.5.bb
+> @@ -0,0 +1,51 @@
+> +DESCRIPTION = "Tools to provide a way to get Platform Reliability, Availability and Serviceability (RAS) reports made via the Kernel tracing events"
+> +HOMEPAGE = "http://git.infradead.org/users/mchehab/rasdaemon.git"
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=d3070efe0afa3dc41608bd82c00bb0dc"
+> +
+> +SRC_URI = "git://git.infradead.org/users/mchehab/rasdaemon.git;branch=master \
+> +       file://rasdaemon.service \
+> +       file://init"
+> +
+> +SRCREV = "25533c0c55426eeb2ad25dcbdb2b5e4ba4e83d80"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +RDEPENDS_${BPN} = "perl perl-module-file-basename perl-module-file-find perl-module-file-spec perl-module-getopt-long \
+> +       perl-module-posix perl-module-file-glob libdbi-perl libdbd-sqlite-perl"
+> +
 
-:)
+depending on libdbd-sqlite-perl will make meta-oe depend on meta-perl, so far
+we have avoided this dependency, is there a way to make this configurable ?
 
-Regards,
-
-Claude Bing
-
-On 5/8/20 2:41 PM, Adrian Bunk wrote:
-> On Fri, May 08, 2020 at 10:42:22AM -0400, Claude Bing wrote:
->> On 5/8/20 6:56 AM, Adrian Bunk wrote:
->>> On Thu, May 07, 2020 at 02:28:06PM -0400, Claude Bing wrote:
->>>> Explicitly specifying -lrt is required for opcache to be linked against
->>>> the proper dependencies.  Additionally, PHP disables libdl when it
->>>> detects a cross-compilation environment for some reason.  In order to
->>>> load any type of extension, re-enabling libdl is required.
->>>> ...
->>>> +# link against librt (libc) if opcache is specified in order to avoid the
->>>> +# following error:
->>>> +# Failed loading /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so: /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so: undefined symbol: shm_unlink
->>>> +LDFLAGS += "${@ " -lrt " if bb.utils.contains('PACKAGECONFIG', 'opcache', 'true', 'false', d) else "" }"
->>>
->>> Is this actually a bug in 0001-opcache-config.m4-enable-opcache.patch
->>> and should instead be fixed there?
->>
->> Yes, that does indeed fix the problem.  Would you like me to reply to
->> this thread with a new patch, or create a different thread?
->> ...
-> 
-> Your original patch is already in master, please submit a new patch in a 
-> different thread that removes this workaround from php_7.4.4.bb and 
-> fixes 0001-opcache-config.m4-enable-opcache.patch.
-> 
-> Thanks
-> Adrian
-> 
-> 
-> 
+> +inherit autotools pkgconfig update-rc.d systemd
+> +
+> +PACKAGECONFIG ??= "sqlite3 mce aer extlog devlink diskerror"
+> +PACKAGECONFIG[sqlite3] = "--enable-sqlite3,--disable-sqlite3,sqlite3"
+> +PACKAGECONFIG[mce] = "--enable-mce,--disable-mce"
+> +PACKAGECONFIG[aer] = "--enable-aer,--disable-aer"
+> +PACKAGECONFIG[extlog] = "--enable-extlog,--disable-extlog"
+> +PACKAGECONFIG[devlink] = "--enable-devlink,--disable-devlink"
+> +PACKAGECONFIG[diskerror] = "--enable-diskerror,--disable-diskerror"
+> +PACKAGECONFIG[arm] = "--enable-arm,--disable-arm"
+> +PACKAGECONFIG[hisi-ns-decode] = "--enable-hisi-ns-decode,--disable-hisi-ns-decode"
+> +PACKAGECONFIG[non-standard] = "--enable-non-standard,--disable-non-standard"
+> +PACKAGECONFIG[abrt-report] = "--enable-abrt-report,--disable-abrt-report"
+> +
+> +do_configure_prepend () {
+> +       ( cd ${S}; autoreconf -vfi )
+> +}
+> +
+> +do_install_append() {
+> +       install -d ${D}${sysconfdir}/init.d
+> +       install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rasdaemon
+> +       install -d ${D}${systemd_unitdir}/system
+> +       install -m 0644 ${WORKDIR}/rasdaemon.service ${D}${systemd_unitdir}/system
+> +}
+> +
+> +FILES_${PN} += "${sbindir}/rasdaemon \
+> +               ${sysconfdir}/init.d \
+> +               ${systemd_unitdir}/system/rasdaemon.service"
+> +
+> +SYSTEMD_SERVICE_${PN} = "rasdaemon.service"
+> +SYSTEMD_AUTO_ENABLE = "enable"
+> +
+> +INITSCRIPT_PACKAGES = "${PN}"
+> +INITSCRIPT_NAME_${PN} = "rasdaemon"
+> +INITSCRIPT_PARAMS_${PN} = "defaults 89"
+> --
+> 2.25.1
+>
 > 
