@@ -1,50 +1,50 @@
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com [209.85.221.68])
- by mx.groups.io with SMTP id smtpd.web10.13005.1589110145754167495
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com [209.85.221.67])
+ by mx.groups.io with SMTP id smtpd.web11.13128.1589110146831571533
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 May 2020 04:29:06 -0700
+ Sun, 10 May 2020 04:29:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=qMTqjKCy;
- spf=pass (domain: gmail.com, ip: 209.85.221.68, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f68.google.com with SMTP id y3so7243437wrt.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 10 May 2020 04:29:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=IQwkC2mm;
+ spf=pass (domain: gmail.com, ip: 209.85.221.67, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f67.google.com with SMTP id i15so7208369wrx.10
+        for <openembedded-devel@lists.openembedded.org>; Sun, 10 May 2020 04:29:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=NuPwoM5ROZX7ByVChl1AgXhrQS3CI1VvwLail5NYckg=;
-        b=qMTqjKCyE5iz24e0eTjIIZDN9Z4a2Y8g6PkngKwEJe5DO9xCNw3iVXWyYMCq/JP3BO
-         0p0cStbRywqNl7Xdrn3w+Vil8nejAf1yP+ROU2Xf8lTPcP98tNdb+jRz+AvQa7IC35JB
-         jOr9jJezcEy31q6Ic8TYv0q0vLEtEt9b1YbbsqgaNsQSzU3OWWN9U+w7YAb0f2r0hQHR
-         ExTpyzVWlBCqaGCMi8vB2ZrHqb/zbCtMwCWjWMeo1yN+8YCkz+u3XI+K5y5CzgFTsJea
-         euanKmuTiiviQ2qKaKcinsob3jM6Kli1VE8/uCT2rwAFFZqG6ktDDhWdGas7GNdOp2At
-         euRg==
+        bh=3gvdgsZDT2ZIMmYQoKKq3+OUz6BUfw2AYzezH1Mj94M=;
+        b=IQwkC2mmvupyIESWVWtY1ElPk6lRR3zgZz1NGnzo+oVeDcoWgwDlhHZCqUOiriZ53y
+         /n8R6JgOVgvn7mPs+QZsvbRQPng+mL4FdUZIMtdhOvVNDnImMLT48oz9ZZE892sQoNax
+         djSgtbafmMKSsIenUPtUwa5ewXjj9h6Hn9dLws6R/BRLQGQAe/shrD3prwx6NoOoEN8g
+         jcBVZV5p3lMgBjkEeEvSEYPpeBNgaqdIkgS2MqEoAB4LD6WX/hk8SOHG6cFmn0Xc4UBk
+         bxO1gFH7NXpsgWdJ0tRxIu2GB4gTXYEntCJ1qI/qIQ+Z/PBC4+MFBRVfkSvv/0KIiFtb
+         q3Ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=NuPwoM5ROZX7ByVChl1AgXhrQS3CI1VvwLail5NYckg=;
-        b=t4/Fe7KgUcRfRBPVeLxTKzJEIhWOmnq+3A3DZ18CQHd35XrAIg0pZ1YY6A2+mORtC0
-         u/wyTL6c2BDlIxAAJvUTvJw/hj8ZD84HpQLfqF6I/Um7Jl1CSiJUJFGKbD1/hTJYa/jn
-         UWhNEM6Lzc0fTgFldvKnd1h+wf7rYjPepv0MaDuqxkSd4vxmK7yFkWkvMHhgVAGADg/J
-         BxIh8bWX5sfLjTP2s1lbnlb27ef5CfbL/BdlVWC5EeO3jm+eGyhr2BKDvKKcPGTA9iwo
-         2yYZv+GLmoJNLTyaOly/MvUvewdO/WE7qTAHih590/uWObgeGxlByE0jkpkmJBYdCgmR
-         UdHA==
-X-Gm-Message-State: AGi0PuaQFTW5fwE6Y2VCnfkLVzEzxO5Zju44liznl15Azw/5PCFnad7e
-	KUh3Bm3ZVZozHsAW4D6dZVvT/ikQ
-X-Google-Smtp-Source: APiQypKuDWdBsT5xK47COjifHpOYPUAkM3TVcShC33Wdjlwuz1B/QRXykA9KRW+ae2uPrHeskcng5w==
-X-Received: by 2002:a5d:5490:: with SMTP id h16mr12920291wrv.250.1589110144142;
-        Sun, 10 May 2020 04:29:04 -0700 (PDT)
+        bh=3gvdgsZDT2ZIMmYQoKKq3+OUz6BUfw2AYzezH1Mj94M=;
+        b=Bx3kLIyq2/kj3s/58xoAIyv4MVOC+eaZCDrw6USPOBvmqQsN4TitBa0FUU81L76TOf
+         P7MYTJFxsZ2UmdOj5rczOXfPO221Y7Sfj25zDNx7Xa4AATQN0SkkT7/dcSrK/6zIU1Xn
+         4uR+4BZFNFTj+mvoZ5AwQrPNCUhJ/xXnQAMTc6deExN6rLyHUrXCPNJFpoy9EaBvy9sN
+         XtPNmJU445gIyNgIJrh4VUtzjwowe9LG9qizGcansio1sE88//oVVXZa0tmc9v1oP7yu
+         6T/4CdpdYqiBt9TWFnuHf51n/Lw1+u6v4rfl7MSZyfNec+EKBiXdq+OQe047BB2k6g4v
+         hMew==
+X-Gm-Message-State: AGi0PuZjM1hdb9dsnErLyWQjdJaF1I3YjoqwO0VQQj9XdwCshxqjmt4i
+	eLqZZYuyMeJDrkBscWDUSfMbiNnd
+X-Google-Smtp-Source: APiQypKZmYymy4YnrAu2MwhyEZRXSt0PhsjHsXfG+hkpGhWBukzM1xJ0HBuu8JCue8KQogq/tpxeQw==
+X-Received: by 2002:adf:a297:: with SMTP id s23mr13390572wra.54.1589110145148;
+        Sun, 10 May 2020 04:29:05 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300F07F085F042F904D54ECAC10E7.dip0.t-ipconnect.de. [2003:f0:7f08:5f04:2f90:4d54:ecac:10e7])
-        by smtp.gmail.com with ESMTPSA id k5sm11733319wrx.16.2020.05.10.04.29.03
+        by smtp.gmail.com with ESMTPSA id k5sm11733319wrx.16.2020.05.10.04.29.04
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 10 May 2020 04:29:03 -0700 (PDT)
+        Sun, 10 May 2020 04:29:04 -0700 (PDT)
 From: "Andreas M?ller" <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 2/5] xfconf: upgrade 4.14.1 -> 4.14.2
-Date: Sun, 10 May 2020 13:28:48 +0200
-Message-Id: <20200510112851.31218-2-schnitzeltony@gmail.com>
+Subject: [PATCH 3/5] xfwm4: upgrade 4.14.1 -> 4.14.2
+Date: Sun, 10 May 2020 13:28:49 +0200
+Message-Id: <20200510112851.31218-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200510112851.31218-1-schnitzeltony@gmail.com>
 References: <20200510112851.31218-1-schnitzeltony@gmail.com>
@@ -54,45 +54,47 @@ Content-Transfer-Encoding: 8bit
 
 Release notes for 4.14.2
 ========================
-This is a maintenance release of xfconf for Xfce 4.14
+4.14.2
+======
 
-Use 'gsettings' as a common channel name for the GSetting backend
-Bug #14789 Fix GSettings backend assertion error, when probed but not
-used.
-Bug #15960: Add some missing xfconf_shutdown() in xfconf-query
-Bug #15951: Fix 'xfconf_get_error_quark' introspecting warning
-Translation updates: gl, hr, zh_CN, sl, sq, be, da, el, es, hu, zh_TW,
-he.
-
-Although the GSetting backend is fixed with this release, it is still
-disabled by default on Xfce 4.14 branch, to maintain the same installed
-files. It can be enabled with --enable-gsettings-backend compile time
-tunable and used by setting GSETTINGS_BACKEND=xfconf.
+- Prefer GLX on AMD (Bug #16716)
+- Fix compositor without required X11 extensions (Bug #16713)
+- Fix window decorations without XRender extension (Bug #16713)
+- Avoid grabbing the keyboard with Alt-Tab to work around a bug in
+  Qt with XInput2 valuators (Bug #16708)
+- Automatically update window title fonts on scale change
+- Fix a regression with title font size at scale 2 (Bug #16711)
+- Fix an X error with XShape (Bug #16383)
+- I18n:
+  Update translations: ar, be, be@tarask, bg, bn, ca, cs, da, de, el,
+  en_AU, en_CA, en_GB, es, eu, fi, fr, gl, he, hr, hy_AM, id, ie, is,
+  it, ka, ko, lt, lv, nb, nl, nn, oc, pl, pt, pt_BR, ro, sk, sl, sq,
+  sv, th, ug, ur, ur_PK, zh_CN, zh_HK
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../xfconf/{xfconf_4.14.1.bb => xfconf_4.14.2.bb}             | 4 ++--
+ .../recipes-xfce/xfwm4/{xfwm4_4.14.1.bb => xfwm4_4.14.2.bb}   | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.14.1.bb => xfconf_4.14.2.bb} (83%)
+ rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.14.1.bb => xfwm4_4.14.2.bb} (90%)
 
-diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.14.1.bb b/meta-xfce/recipes-xfce/xfconf/xfconf_4.14.2.bb
-similarity index 83%
-rename from meta-xfce/recipes-xfce/xfconf/xfconf_4.14.1.bb
-rename to meta-xfce/recipes-xfce/xfconf/xfconf_4.14.2.bb
-index 8da96a420..893a32f42 100644
---- a/meta-xfce/recipes-xfce/xfconf/xfconf_4.14.1.bb
-+++ b/meta-xfce/recipes-xfce/xfconf/xfconf_4.14.2.bb
-@@ -8,8 +8,8 @@ inherit xfce gtk-doc gobject-introspection
+diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.1.bb b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.2.bb
+similarity index 90%
+rename from meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.1.bb
+rename to meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.2.bb
+index 617e14f8e..b6066a526 100644
+--- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.1.bb
++++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.2.bb
+@@ -9,8 +9,8 @@ inherit xfce update-alternatives features_check
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
+ SRC_URI += "file://0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch"
+-SRC_URI[md5sum] = "b20bd22bdbe1b17f76a139fd74e072a9"
+-SRC_URI[sha256sum] = "100781a18070762e8f34c1d450e767586576753d567f76a8c32818284f511428"
++SRC_URI[md5sum] = "6d61d07b6ea88a429c43e1b9c3293eb8"
++SRC_URI[sha256sum] = "b15b40342596a3b6ab5167a58371262adf5484e165cb25a31fef42f0aa8ffd92"
  
--SRC_URI[md5sum] = "cb51a59e2a89d05232f825ad8c74a7c0"
--SRC_URI[sha256sum] = "b893e0a329aee00902fec2f0509f56916c9dcc7844e1b1f9e3c7399458290d59"
-+SRC_URI[md5sum] = "769b74d354aa65e0013edc6823b78e48"
-+SRC_URI[sha256sum] = "1e7086cc5a63219e375c95a1dfd10ad7098c2586f55ac209e66aef61b969f255"
- 
- FILES_${PN} += "${libdir}/xfce4/xfconf/xfconfd \
-                 ${libdir}/gio/modules/libxfconfgsettingsbackend.so \
+ PACKAGECONFIG ?= " \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'epoxy', '', d)} \
 -- 
 2.21.1
 
