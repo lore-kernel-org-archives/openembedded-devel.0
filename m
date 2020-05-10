@@ -1,110 +1,91 @@
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com [209.85.128.66])
- by mx.groups.io with SMTP id smtpd.web10.2905.1589050500135735028
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.web11.13127.1589110145259808759
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 09 May 2020 11:55:00 -0700
+ Sun, 10 May 2020 04:29:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=PYeHhmdz;
- spf=pass (domain: gmail.com, ip: 209.85.128.66, mailfrom: sakoman@gmail.com)
-Received: by mail-wm1-f66.google.com with SMTP id m12so8645890wmc.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 09 May 2020 11:54:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=HBAzOUNn;
+ spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f43.google.com with SMTP id y16so41672wrs.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 10 May 2020 04:29:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=LFuFub7DBSBp2z+mP6vyFQ96I/hvhgMdZzeO3e5flCY=;
-        b=PYeHhmdzOsQQXSlOKXwVCyTAPsnZJbuzSGQnRdmTaTHUfjQZrq5CWp5SBlHShCsQZJ
-         tiXA6o9wu7sA2Ibcr/ijFvRXb6twJSZxIO+1QdrtnXMR7kUrGREQ5558aDkRTKvqqfE8
-         IS2Mc+I0h/pGdUHaf9zALZzkl3Og+7CwfCOPJxM5tcAWlr2dgpByI1TZx94trEcp/plc
-         dAY7sb0A2x40hJEamYEu/qpk4o9D+5eMpZ9QK+yDlH51MkE9nzOLAzTXew9RoKLjq8eR
-         Alu1w/hq5UrlRPzgc1qLU6O8fbxC6Iv/zfWeCD16hCq37ZPp9GC2x9sxkmwWVUQof/jr
-         xLIA==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ay6UDvoQoiGOwtguP5UbrUFw3PvSaBRpZsJ6imkzIkQ=;
+        b=HBAzOUNnw+8rtF7yOKe90UNwLH6PA+KdIF4dl2rJBFJNJRo5jNCiF3q6s+TiIbilcC
+         AUGqak5wPV/MijApFr97uc22oBAwqRkn05Jl3SnjwbXfcPr/ndVKTJEjWp5qNw0E5KtW
+         SMoXV/mpq+ue9tclC1g0FB4LQCTbfei+57Ajqvdo/9bxMcINQF9VXnup4Owum9hvxKha
+         +M5CpbTOJQwbRJO7rSEuhQKQOy+jNqmu14jc85q+WfG4+aqenqWNimykdCgSnI7CdspA
+         JJQpogKNeyKE7sEsIvHVd6MeuRkawkhkiQXauylPT/PU8aJ3FJxan7DpcXJGx7WREUdh
+         qFOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=LFuFub7DBSBp2z+mP6vyFQ96I/hvhgMdZzeO3e5flCY=;
-        b=lHyvLebDUnJFQqQlYZXjl1+spNGKFXMdNWUqM9j/RbCKH5WEhx8arASUNLeQGmO5cO
-         mZ3wSYNC46r066dC7cx11WoDuN+GYtA0n58QUQMdsJ8cEvKldsnPez8pX+8BE9F0FCXE
-         JJWcXdTsy5X49B2an+IJRC+YcdPqQpaXEmFLqKadh0J2pJy5e+lWYt2wEhzzrp/HXafH
-         /o/eF65unMYvAYtAAtXdWAT9yKad7+XBTESGdk04EocvuxB1QXVk7wl2SKEwhRBMatDj
-         2uO2uIPVCcxwqUXWXJ8n9hZVsNODel2cxj1V3kNlOj3VLyTYl2LgtmfPWIbsCWG6jiNU
-         1VYw==
-X-Gm-Message-State: AGi0PuYMlokCywUoCI4rkE55hdf575eMJqEjXYE0HUJBeLqhckex4kxh
-	1F1P0lbsc0OdstRGbRecOYVSZYpm/ICzLTAcNUk=
-X-Google-Smtp-Source: APiQypJHwhl0XbgCbMEg6tlf54ikTYOlvt14fL6WDocIuaCHPgg6kEDCTXFeHtedVNIVHZ699ZbB3qaP13R4Q98ecCs=
-X-Received: by 2002:a1c:4e16:: with SMTP id g22mr21403101wmh.157.1589050498614;
- Sat, 09 May 2020 11:54:58 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ay6UDvoQoiGOwtguP5UbrUFw3PvSaBRpZsJ6imkzIkQ=;
+        b=Irikf5tkNEPSAp9+1cReiECGXYhIhDTiq1PtmGEk/4uLooMJf4/Wz18xKJd6yyKBkW
+         xAaSYTkOBmDmSGz7MI5elit24T5LSpde4HuoJi3GSJ4qWbJy5nUYvZQCYukaIW/XphU3
+         3nLjQAhwtrKY+wwrXbDABTuY1ZU0Cyf0RGw5/WAzkPc9Y7jAp3MW0v1x2xjd4l0vCBWY
+         z50hXXQ8WfsBAmtUpAp3k2SJp48XJDlC5faB6SfEgvBx7etPoSginGFxzUMZ2fozzH8V
+         Zx8uRiVmncSxmOlw0o1KCu/UwGEY09/Ox745SFQrtdU29rU423SUv955rPyBJHQIzl2y
+         qBew==
+X-Gm-Message-State: AGi0PuYEpRstRmwhzR+v6UBqd3uZNuYFHHgl9SmN5xRCPYMA+NRm8i9u
+	aessdhsiqfitu/uPGo6saxeo2dKv
+X-Google-Smtp-Source: APiQypLf1x4E+2o0lXy3pTlucQhwhUCqS+qaeNjxr/KXTR/qJ98XD0jz2I+ZrtjyePNSfBCGJ9+CnA==
+X-Received: by 2002:adf:d091:: with SMTP id y17mr12780211wrh.418.1589110143399;
+        Sun, 10 May 2020 04:29:03 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from superandy.speedport.ip (p200300F07F085F042F904D54ECAC10E7.dip0.t-ipconnect.de. [2003:f0:7f08:5f04:2f90:4d54:ecac:10e7])
+        by smtp.gmail.com with ESMTPSA id k5sm11733319wrx.16.2020.05.10.04.29.02
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 10 May 2020 04:29:02 -0700 (PDT)
+From: "Andreas M?ller" <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 1/5] xfce4-notifyd: upgrade 0.6.0 -> 0.6.1
+Date: Sun, 10 May 2020 13:28:47 +0200
+Message-Id: <20200510112851.31218-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.1
 MIME-Version: 1.0
-References: <20200507142806.48643a47@cy-rd-cb> <20200508105610.GA8452@localhost>
- <090c0075-c785-e3fd-1da4-c56518a64c0c@cybernetics.com> <20200508184129.GA7248@localhost>
- <b2a74e1d-32f1-56f2-934c-58d2a6d25f64@cybernetics.com>
-In-Reply-To: <b2a74e1d-32f1-56f2-934c-58d2a6d25f64@cybernetics.com>
-From: "Steve Sakoman" <sakoman@gmail.com>
-Date: Sat, 9 May 2020 08:54:47 -1000
-Message-ID: <CAGDS+nmf3gjj6Nsp0+dRn-B=TXDF5tYOa2zN-MN-9s9ZNAJn6Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] php: fix opcache link error in 7.4
-To: Claude Bing <cbing@cybernetics.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi Claude,
+Release notes for 0.6.1
+=======================
+- Fix hover effect without compositing (Bug #16586)
+- Move from exo-csource to xdt-csource (Bug #16717)
+- Translation Updates:
+  Arabic, Armenian (Armenia), Bulgarian, Catalan, Chinese (China),
+  Chinese (Taiwan), Czech, Danish, Dutch, English (Australia), Finnish,
+  French, German, Greek, Hebrew, Hungarian, Icelandic, Indonesian,
+  Interlingue, Japanese, Kazakh, Korean, Lithuanian, Malay, Norwegian
+  Bokmål, Polish, Portuguese, Russian, Serbian, Spanish, Swedish, Thai,
+  Turkish, Ukrainian
 
-On Fri, May 8, 2020 at 11:26 AM Claude Bing <cbing@cybernetics.com> wrote:
->
-> OK, I started a new patch thread.  Who/what determines which patches get
-> included in the named release branches?  Specifically, we are using
-> dunfell and would like these changes to show up in that branch.
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ .../{xfce4-notifyd_0.6.0.bb => xfce4-notifyd_0.6.1.bb}        | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-apps/xfce4-notifyd/{xfce4-notifyd_0.6.0.bb => xfce4-notifyd_0.6.1.bb} (84%)
 
-Just submit a patch to this list tagged with [dunfell].  In general
-though I won't take a patch unless it is already in master, so a patch
-for both master and dunfell should be tagged with [master][dunfell]
+diff --git a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.6.0.bb b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.6.1.bb
+similarity index 84%
+rename from meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.6.0.bb
+rename to meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.6.1.bb
+index 5e0f44e29..aed5ce4dc 100644
+--- a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.6.0.bb
++++ b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.6.1.bb
+@@ -14,8 +14,8 @@ DEPENDS = " \
+ 
+ inherit xfce-app
+ 
+-SRC_URI[md5sum] = "1724fcb635bbab44c9f62c69734e446d"
+-SRC_URI[sha256sum] = "c1d126a81604ff967e4655f06427763bf559c338ba629c95cb9aa7f5d6dc8ba6"
++SRC_URI[md5sum] = "58e70621d6b9e0e66399ed41ab402a47"
++SRC_URI[sha256sum] = "9b5274999c89bf296a7de03b375e8233eef37940b7444502130b92dfb6a089b4"
+ 
+ # Avoid trouble with other desktops e.g KDE which also ships dbus service named
+ # org.freedesktop.Notifications
+-- 
+2.21.1
 
-If the issue is already fixed in master with a version bump, and a
-version bump in dunfell would be too dangerous (i.e. feature changes)
-then I'll take a patch to the current version in dunfell.  Again, tag
-it with [dunfell] and also mention the commit in master that fixes the
-issue.
-
-Thanks,
-
-Steve
-
->
-> :)
->
-> Regards,
->
-> Claude Bing
->
-> On 5/8/20 2:41 PM, Adrian Bunk wrote:
-> > On Fri, May 08, 2020 at 10:42:22AM -0400, Claude Bing wrote:
-> >> On 5/8/20 6:56 AM, Adrian Bunk wrote:
-> >>> On Thu, May 07, 2020 at 02:28:06PM -0400, Claude Bing wrote:
-> >>>> Explicitly specifying -lrt is required for opcache to be linked against
-> >>>> the proper dependencies.  Additionally, PHP disables libdl when it
-> >>>> detects a cross-compilation environment for some reason.  In order to
-> >>>> load any type of extension, re-enabling libdl is required.
-> >>>> ...
-> >>>> +# link against librt (libc) if opcache is specified in order to avoid the
-> >>>> +# following error:
-> >>>> +# Failed loading /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so: /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so: undefined symbol: shm_unlink
-> >>>> +LDFLAGS += "${@ " -lrt " if bb.utils.contains('PACKAGECONFIG', 'opcache', 'true', 'false', d) else "" }"
-> >>>
-> >>> Is this actually a bug in 0001-opcache-config.m4-enable-opcache.patch
-> >>> and should instead be fixed there?
-> >>
-> >> Yes, that does indeed fix the problem.  Would you like me to reply to
-> >> this thread with a new patch, or create a different thread?
-> >> ...
-> >
-> > Your original patch is already in master, please submit a new patch in a
-> > different thread that removes this workaround from php_7.4.4.bb and
-> > fixes 0001-opcache-config.m4-enable-opcache.patch.
-> >
-> > Thanks
-> > Adrian
-> >
-> >
-> >
-> >
-> 
