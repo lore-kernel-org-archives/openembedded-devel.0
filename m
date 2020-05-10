@@ -1,50 +1,50 @@
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com [209.85.221.67])
- by mx.groups.io with SMTP id smtpd.web11.13128.1589110146831571533
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.web11.13129.1589110147605111982
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 10 May 2020 04:29:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=IQwkC2mm;
- spf=pass (domain: gmail.com, ip: 209.85.221.67, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f67.google.com with SMTP id i15so7208369wrx.10
-        for <openembedded-devel@lists.openembedded.org>; Sun, 10 May 2020 04:29:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=iAMzezLc;
+ spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f43.google.com with SMTP id l11so1321364wru.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 10 May 2020 04:29:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=3gvdgsZDT2ZIMmYQoKKq3+OUz6BUfw2AYzezH1Mj94M=;
-        b=IQwkC2mmvupyIESWVWtY1ElPk6lRR3zgZz1NGnzo+oVeDcoWgwDlhHZCqUOiriZ53y
-         /n8R6JgOVgvn7mPs+QZsvbRQPng+mL4FdUZIMtdhOvVNDnImMLT48oz9ZZE892sQoNax
-         djSgtbafmMKSsIenUPtUwa5ewXjj9h6Hn9dLws6R/BRLQGQAe/shrD3prwx6NoOoEN8g
-         jcBVZV5p3lMgBjkEeEvSEYPpeBNgaqdIkgS2MqEoAB4LD6WX/hk8SOHG6cFmn0Xc4UBk
-         bxO1gFH7NXpsgWdJ0tRxIu2GB4gTXYEntCJ1qI/qIQ+Z/PBC4+MFBRVfkSvv/0KIiFtb
-         q3Ow==
+        bh=wbt4TzKr20ES/sdwCpugcaoO4gof7IbiDXONgh/ftys=;
+        b=iAMzezLckxxnDQKiIlDAoLo0f53NG+IGMSEXMQYmQbZc/O6r5E9t9SzYSPVIW4yqrV
+         SUH0kNe0OdB72k85lhc4gYX6GPIMWPVANIugqXbWS7uHEqQJ5Q6HfaKftUtkBwGtL0XB
+         07ocCBGAQyKbdMS4OiUfCQoz393qhuql3vQ6NUa9onz4FAa8VMUohno6npsTRB/qew48
+         qhGR9+TfxVr8Md1HUSW+XA5jGO+KvGzAIsE3bVvyZf3WOItkiBDXKd7fl5HBvN9k51+q
+         y3XPfVzqOBeju55IZAkRFu5LavN6Qc/HuRt9sPwL+Gz33JUETnbYA7/TVrxBctwZzB3T
+         qBLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=3gvdgsZDT2ZIMmYQoKKq3+OUz6BUfw2AYzezH1Mj94M=;
-        b=Bx3kLIyq2/kj3s/58xoAIyv4MVOC+eaZCDrw6USPOBvmqQsN4TitBa0FUU81L76TOf
-         P7MYTJFxsZ2UmdOj5rczOXfPO221Y7Sfj25zDNx7Xa4AATQN0SkkT7/dcSrK/6zIU1Xn
-         4uR+4BZFNFTj+mvoZ5AwQrPNCUhJ/xXnQAMTc6deExN6rLyHUrXCPNJFpoy9EaBvy9sN
-         XtPNmJU445gIyNgIJrh4VUtzjwowe9LG9qizGcansio1sE88//oVVXZa0tmc9v1oP7yu
-         6T/4CdpdYqiBt9TWFnuHf51n/Lw1+u6v4rfl7MSZyfNec+EKBiXdq+OQe047BB2k6g4v
-         hMew==
-X-Gm-Message-State: AGi0PuZjM1hdb9dsnErLyWQjdJaF1I3YjoqwO0VQQj9XdwCshxqjmt4i
-	eLqZZYuyMeJDrkBscWDUSfMbiNnd
-X-Google-Smtp-Source: APiQypKZmYymy4YnrAu2MwhyEZRXSt0PhsjHsXfG+hkpGhWBukzM1xJ0HBuu8JCue8KQogq/tpxeQw==
-X-Received: by 2002:adf:a297:: with SMTP id s23mr13390572wra.54.1589110145148;
+        bh=wbt4TzKr20ES/sdwCpugcaoO4gof7IbiDXONgh/ftys=;
+        b=Qn0Kl4bV15/urZ2BNoN7E/hUSGSai0NqH7NGysSjj9hYD0Mtd2cgfizkddT6awP0cu
+         9Q2rK5vZrL3u6ucF/M9zQjKnuYhJd/RTSMrmg1cXybPX1A5a4Zh8OGg2LTln7O1OLE/k
+         pu9aBr+K6uEsVPmbF3WpJh/9gmXZBRBlxPOnPaky9iMt0UIJd82LxseQV4UugMYCwZ6V
+         f8aTSarA4JPcSTNS63B7ANXvtTmMkI8zlbeOwP5wYWPeuSAjfeQR8e2Y0Pn9AQLOG0Qt
+         oQ1whXa7Pb3oljBwkdqvp5OTFfs+YwhMyp27LidgvK/KYJ/e/uFRIaJuxLWTt2BXIfbt
+         ORuQ==
+X-Gm-Message-State: AGi0Pua0OvEQtqGXIwK4md9MxNTgdKZxreVHTyUtyv1PE1UiSQrnTNE2
+	VrOCmhUqYSiBPFDlvAHQz10yc5Du
+X-Google-Smtp-Source: APiQypL2nC+LMVLmOCyl6NoUPqwrqMnbXCWLCwWmLUi/mvJ3sigaYwu3MUuUZtb9HolhNWDso/XZsQ==
+X-Received: by 2002:adf:f40a:: with SMTP id g10mr13914242wro.117.1589110145999;
         Sun, 10 May 2020 04:29:05 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300F07F085F042F904D54ECAC10E7.dip0.t-ipconnect.de. [2003:f0:7f08:5f04:2f90:4d54:ecac:10e7])
-        by smtp.gmail.com with ESMTPSA id k5sm11733319wrx.16.2020.05.10.04.29.04
+        by smtp.gmail.com with ESMTPSA id k5sm11733319wrx.16.2020.05.10.04.29.05
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 10 May 2020 04:29:04 -0700 (PDT)
+        Sun, 10 May 2020 04:29:05 -0700 (PDT)
 From: "Andreas M?ller" <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 3/5] xfwm4: upgrade 4.14.1 -> 4.14.2
-Date: Sun, 10 May 2020 13:28:49 +0200
-Message-Id: <20200510112851.31218-3-schnitzeltony@gmail.com>
+Subject: [PATCH 4/5] qpdf: upgrade 9.1.0 -> 10.0.1
+Date: Sun, 10 May 2020 13:28:50 +0200
+Message-Id: <20200510112851.31218-4-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200510112851.31218-1-schnitzeltony@gmail.com>
 References: <20200510112851.31218-1-schnitzeltony@gmail.com>
@@ -52,49 +52,30 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes for 4.14.2
-========================
-4.14.2
-======
-
-- Prefer GLX on AMD (Bug #16716)
-- Fix compositor without required X11 extensions (Bug #16713)
-- Fix window decorations without XRender extension (Bug #16713)
-- Avoid grabbing the keyboard with Alt-Tab to work around a bug in
-  Qt with XInput2 valuators (Bug #16708)
-- Automatically update window title fonts on scale change
-- Fix a regression with title font size at scale 2 (Bug #16711)
-- Fix an X error with XShape (Bug #16383)
-- I18n:
-  Update translations: ar, be, be@tarask, bg, bn, ca, cs, da, de, el,
-  en_AU, en_CA, en_GB, es, eu, fi, fr, gl, he, hr, hy_AM, id, ie, is,
-  it, ka, ko, lt, lv, nb, nl, nn, oc, pl, pt, pt_BR, ro, sk, sl, sq,
-  sv, th, ug, ur, ur_PK, zh_CN, zh_HK
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-xfce/xfwm4/{xfwm4_4.14.1.bb => xfwm4_4.14.2.bb}   | 4 ++--
+ .../recipes-printing/qpdf/{qpdf_9.1.0.bb => qpdf_10.0.1.bb}   | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.14.1.bb => xfwm4_4.14.2.bb} (90%)
+ rename meta-oe/recipes-printing/qpdf/{qpdf_9.1.0.bb => qpdf_10.0.1.bb} (85%)
 
-diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.1.bb b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.2.bb
-similarity index 90%
-rename from meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.1.bb
-rename to meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.2.bb
-index 617e14f8e..b6066a526 100644
---- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.1.bb
-+++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.2.bb
-@@ -9,8 +9,8 @@ inherit xfce update-alternatives features_check
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-oe/recipes-printing/qpdf/qpdf_9.1.0.bb b/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
+similarity index 85%
+rename from meta-oe/recipes-printing/qpdf/qpdf_9.1.0.bb
+rename to meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
+index 44a5fea84..f04e437d3 100644
+--- a/meta-oe/recipes-printing/qpdf/qpdf_9.1.0.bb
++++ b/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
+@@ -7,8 +7,8 @@ DEPENDS = "libpcre zlib libjpeg-turbo"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/qpdf/qpdf-${PV}.tar.gz"
  
- SRC_URI += "file://0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch"
--SRC_URI[md5sum] = "b20bd22bdbe1b17f76a139fd74e072a9"
--SRC_URI[sha256sum] = "100781a18070762e8f34c1d450e767586576753d567f76a8c32818284f511428"
-+SRC_URI[md5sum] = "6d61d07b6ea88a429c43e1b9c3293eb8"
-+SRC_URI[sha256sum] = "b15b40342596a3b6ab5167a58371262adf5484e165cb25a31fef42f0aa8ffd92"
+ LIC_FILES_CHKSUM = "file://Artistic-2.0;md5=7806296b9fae874361e6fb10072b7ee3"
+-SRC_URI[md5sum] = "090d03ab179c281233f8240ade179d54"
+-SRC_URI[sha256sum] = "3abbbb7907f2e750336b9c97e67b6e806aca91ab537402ec080656d63940ed79"
++SRC_URI[md5sum] = "eb7fb7c6cd5d3036bf4f7a5e3f44d995"
++SRC_URI[sha256sum] = "5d2277c738188b7f4e3f01a6db7f2937ed6df54671f1fba834cd3d7ff865827b"
  
- PACKAGECONFIG ?= " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'epoxy', '', d)} \
+ inherit autotools-brokensep gettext
+ 
 -- 
 2.21.1
 
