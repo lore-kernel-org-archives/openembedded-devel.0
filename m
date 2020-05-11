@@ -1,94 +1,112 @@
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.49])
- by mx.groups.io with SMTP id smtpd.web10.8729.1589188596862063394
+Received: from mail.cybernetics.com (mail.cybernetics.com [173.71.130.66])
+ by mx.groups.io with SMTP id smtpd.web11.13043.1589207304984187833
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 May 2020 02:16:37 -0700
+ Mon, 11 May 2020 07:28:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=TRCNGbbG;
- spf=pass (domain: windriver.com, ip: 40.107.236.49, mailfrom: zhe.he@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DcsY/80wXdMh5Ne5WNP2tHZyDyHHK2R/FnO5l1EkRJYYufv3UM9izVzRyqltlM1CDdkQ924B1eL3qQlyyUEjRz3XRGiZUwAoEf9CJ5VucrpShZijJjmjh1c6NcmQuGuzH1QvnHkz7k2HMX+abDKV4iufP10drtPwz5c0lPDnEFMNkC1yKqmlPLHL/kbs8AhBgLTPC82Bgok4CDhxMsE1RfKs3xNbSPSyMJO5GV3ojsfODObsP5yQPiDKUaUq+j4ZqBhrjgPU+B6eK6DOUYCpHaG4Xhj12O3iFXwF1ORrEg3e5SXyXt+l6+LatLrNEvo6PQrCtpkcxn08ySNpwuI8bw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=91JMqD73RinkaBSjX/tAstkD6kzAlhekizwjh789Ygk=;
- b=fVjgEG6BdDFWWijgT3TLmuegHT16JeyaIa/TX9l2PcKv+5L8/Mo1yUrogCKj6kxumbMprYWpFldAkIEYOIQYxl+hdvRo/9sePyHdGbkFk+lWqIdij+HvSaDRS/cx7hGTWPTWaZ0Timl4bfCv+k6s5bqfXTOhvhrNjK+iPVhW7EpXZn3KMdPO39pk88V5gyN6ugyWPocGSCo1xx5rGguwvUlByFu0YnR7KFLTbjXwNR6+0+zglN2jRNpsPOhyOv7fFgTIt5JL73/oTKhbfvI0XSNxji9BxGvzq2xFctUZZQQagKtW7pmZxPWCi23RVCiYVOvF4pfpfcSX+l88xuhX5g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=91JMqD73RinkaBSjX/tAstkD6kzAlhekizwjh789Ygk=;
- b=TRCNGbbGAg7SIBLC/pLKPWiw1KWNrKL+HG2EaWjAK+CZCQjncFBoFjJmLzhqJQYvk9aqgVntTVFAx7iZ+wVI9Y/swM/MdYalLWfiuEhM4NwArXUxRjcOD3lCMzEiFi4gGX0KsLxItMlskewvpghFy4+uaI8RxIKT3YCGWui6pk0=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from DM6PR11MB3355.namprd11.prod.outlook.com (2603:10b6:5:5d::21) by
- DM6PR11MB3291.namprd11.prod.outlook.com (2603:10b6:5:d::10) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2979.26; Mon, 11 May 2020 09:16:35 +0000
-Received: from DM6PR11MB3355.namprd11.prod.outlook.com
- ([fe80::2943:7826:91a0:8754]) by DM6PR11MB3355.namprd11.prod.outlook.com
- ([fe80::2943:7826:91a0:8754%5]) with mapi id 15.20.2979.033; Mon, 11 May 2020
- 09:16:35 +0000
-To: Khem Raj <raj.khem@gmail.com>,
- meta-oe <openembedded-devel@lists.openembedded.org>
-From: "He Zhe" <zhe.he@windriver.com>
-Subject: luajit for 32-bit BSPs
-Message-ID: <ef0bf1a9-c5de-5dd2-f00c-9704fc6101ba@windriver.com>
-Date: Mon, 11 May 2020 17:16:30 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
-X-ClientProxiedBy: BY3PR05CA0006.namprd05.prod.outlook.com
- (2603:10b6:a03:254::11) To DM6PR11MB3355.namprd11.prod.outlook.com
- (2603:10b6:5:5d::21)
-Return-Path: zhe.he@windriver.com
+ dkim=missing; spf=pass (domain: cybernetics.com, ip: 173.71.130.66, mailfrom: btv1==4003dd60f2f==cbing@cybernetics.com)
+X-ASG-Debug-ID: 1589207303-0fb3b0649e755170001-aWHRdb
+Received: from cybernetics.com ([10.10.4.126]) by mail.cybernetics.com with ESMTP id Zi38cmZpKPRW3aRD for <openembedded-devel@lists.openembedded.org>; Mon, 11 May 2020 10:28:23 -0400 (EDT)
+X-Barracuda-Envelope-From: cbing@cybernetics.com
+X-ASG-Whitelist: Client
+Received: from [10.157.1.18] (account cbing HELO cy-rd-cb)
+  by cybernetics.com (CommuniGate Pro SMTP 5.1.14)
+  with ESMTPA id 9950947 for openembedded-devel@lists.openembedded.org; Mon, 11 May 2020 10:28:22 -0400
+Date: Mon, 11 May 2020 10:29:07 -0400
+From: "Claude Bing" <cbing@cybernetics.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][dunfell][PATCH] php: fix opcache link issue in 7.4.4
+Message-ID: <20200511102907.34c93726@cy-rd-cb>
+X-ASG-Orig-Subj: [meta-oe][dunfell][PATCH] php: fix opcache link issue in 7.4.4
+Organization: Cybernetics
+X-Mailer: Claws Mail 3.16.0 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [128.224.162.175] (60.247.85.82) by BY3PR05CA0006.namprd05.prod.outlook.com (2603:10b6:a03:254::11) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3000.11 via Frontend Transport; Mon, 11 May 2020 09:16:33 +0000
-X-Originating-IP: [60.247.85.82]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 30bf5c10-4436-4793-cb99-08d7f58c008e
-X-MS-TrafficTypeDiagnostic: DM6PR11MB3291:
-X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB3291C77B05B34A7E3D0AE7D38FA10@DM6PR11MB3291.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
-X-Forefront-PRVS: 04004D94E2
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	nj23aU8ymT7fUnmmvfbzjXG9BOMUd1QSrdyvziBRKBK9G43o8FzxHEZYrxdARwbw+xA6gBnjMpPOJlDP85azJtAxyK2j+kk3jgYNWrqth4K3w66lPBg/aD8+7VC7UbrqJpkJA1XQERIApIjdePNRDarhlBTYoUAb3e/gJBRIKn3P3/zEdHJerW3jdMETPzRYxHIzu0cgfAb2fQcd6VPk05rHu7yisAdlqumtw5arMTIvnp85G79FCiM7tLo4EG6cLx9XZ90IGAwT9kBGsPS1A1EKX0/LzwcumftY/wdPbD26AL2g7Kje6R9TIz3h0gJKfeB/q003EpdH/pZXaLCmqoJrs+re3gEzSj70dBVtrO2l3qtCdgF/hHbFoxa9RrJYtYrde858Ts5c0AbiEZpzswhOUagyFfDit3rvPp/VcWAZRu5auQ0EwOkjfcKjag/VAky55Uliv8azzVpysQ8a4BYhsgEFgf4sMRoFX3VclyQ3NN24KjhBBhhA10pxr/0JcxkZzCFV5/BqjYJ/UBmILEcwDed7jRDB/KBDiuaEjcrSnbjcGy7k2p4V6MtNGw9K4iPdNCNP8OWObOhXLCIhyY3MuypHxXBBIYEU/MRkj59UPuNZctpzyWPvrIvXw7xG1rnoROpH3L+AAiwmrrQOqIYTEq/m8+eA4714cBq3TahdWCtN1zZXDUsjXVgQqegrravpx74Q6jB/RtUu49yFDrwQSaBVnA/bfamsHZhmaSzf8ddfMGNuTrD5vvgLaOhm
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3355.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(366004)(396003)(39850400004)(346002)(376002)(33430700001)(316002)(6486002)(478600001)(16576012)(33440700001)(966005)(31686004)(4744005)(8936002)(2906002)(31696002)(36756003)(86362001)(2616005)(6706004)(956004)(66476007)(8676002)(52116002)(26005)(66556008)(5660300002)(110136005)(186003)(66946007)(16526019)(78286006)(43740500002)(15302535012);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	hZZfQvGXdEvXjYgTEviilDExOcbhe7h4doISIx8vdPTfFJz4bomyQenkEj49K2SjK8JbKb22kM7wdpnigaH6CO+waGevxMDWj7LNtpI7KtUMJdr9C89AmWrH8P3AeDQjRmgmJbuBp0FpkQz/kjB9y0ihxeWLqCGCEtBqlnKb5gAFRrop4OMySZEwQklqAown6eP0NhPZvm5JScU87JJYQT0Cmhv72YbHzVG7xU+RayhcgGZ3W0mQOyvN+AJatJr41RWjDyVHOEDwQVRMwHMBS4pH31vH/4OJ5x8dpaPXTYJjxpx7L3ZmDKQCsVx/rvQhdwrBnqZQ1qmpPPr5HpfjFhSu9pECh8ofRq3+uH6pwPALulGTzIysXCkgHlSu1Ta01Bwmtm+lu+x/g7YHmUnpEyPmStOWfkv+htcS579X9hEWdFH8elxktcZaUbs94P9kqOMnuuZE3jgSaQIkMxuvfyUpzT83+KP9KMsKhQHO29U=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 30bf5c10-4436-4793-cb99-08d7f58c008e
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2020 09:16:35.2319
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: FNTtKBX1Sp6uuHfrq+I/L4Fdjy0uuuXzge6bLYm8MRKu0T87Q4wdsRb21KE/WMBRhPcUhKtgpUhr0WwSX159gQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB3291
-Content-Type: text/plain; charset=utf-8
+X-Barracuda-Connect: UNKNOWN[10.10.4.126]
+X-Barracuda-Start-Time: 1589207303
+X-Barracuda-URL: https://10.10.4.122:443/cgi-mod/mark.cgi
+X-Virus-Scanned: by bsmtpd at cybernetics.com
+X-Barracuda-Scan-Msg-Size: 3282
+X-Barracuda-BRTS-Status: 1
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Content-Language: en-US
 
-Hi,
+The source of this issue are the updates to
+0001-opcache-config.m4-enable-opcache.patch (commit 7cc7a9ec).  Instead
+of working around the issue in the recipe file, update the patch to
+restore the call to PHP_ADD_LIBRARY().
 
-As commented in luajit's recipe it requires libc6-dev-i386 on build machine so
-that it can build two 32-bit host programs(minilua and buildvm) which are used
-in the process of the target program building.
+  (cherry picked from commit 3cfd16be4e1b62efe8ac640cecc080709cf2b9f9)
 
-http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/recipes-devtools/luajit/luajit_git.bb?h=master#n19
+Signed-off-by: Claude Bing <cbing@cybernetics.com>
+---
+ ...001-opcache-config.m4-enable-opcache.patch | 19 +++++++++++++------
+ meta-oe/recipes-devtools/php/php_7.4.4.bb     |  6 ++++++
+ 2 files changed, 19 insertions(+), 6 deletions(-)
 
-This makes a target package depend on a build machine package. Not sure if the
-32-bit host part could possibly be done in luajit-native. Any idea or concern?
-Thanks.
-
-
-Regards,
-Zhe
+diff --git a/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch b/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
+index ee0d5edcd..1f3e683a0 100644
+--- a/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
++++ b/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
+@@ -1,4 +1,7 @@
+-opcache/config.m4: enable opcache
++From a74b42098aededd296ec6a3cd4cf5a17e59d6f29 Mon Sep 17 00:00:00 2001
++From: Claude Bing <cbing@cybernetics.com>
++Date: Fri, 8 May 2020 10:15:32 -0400
++Subject: [PATCH] opcache/config.m4: enable opcache
+ 
+ We can't use AC_TRY_RUN to run programs in a cross compile environment.
+ Set
+@@ -12,15 +15,18 @@ Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+ 
+ update patch to version 7.4.4
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
++fix issue linking with librt
++Signed-off-by: Claude Bing <cbing@cybernetics.com>
+ ---
+- ext/opcache/config.m4 | 194 +-------------------------------------------------
+- 1 file changed, 3 insertions(+), 191 deletions(-)
++ ext/opcache/config.m4 | 195 +-----------------------------------------
++ 1 file changed, 4 insertions(+), 191 deletions(-)
+ 
+ diff --git a/ext/opcache/config.m4 b/ext/opcache/config.m4
+-index 6c40caf..84ddf1e 100644
++index 6c40cafc1c..6569aa9e1c 100644
+ --- a/ext/opcache/config.m4
+ +++ b/ext/opcache/config.m4
+-@@ -23,201 +23,13 @@ if test "$PHP_OPCACHE" != "no"; then
++@@ -23,201 +23,14 @@ if test "$PHP_OPCACHE" != "no"; then
+    AC_CHECK_FUNCS([mprotect])
+  
+    AC_MSG_CHECKING(for sysvipc shared memory support)
+@@ -222,9 +228,10 @@ index 6c40caf..84ddf1e 100644
+ -    AC_MSG_RESULT([no])
+ -  ])
+ +  AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
+++  PHP_CHECK_LIBRARY(rt, shm_unlink, [PHP_ADD_LIBRARY(rt,1,OPCACHE_SHARED_LIBADD)])
+  
+    PHP_NEW_EXTENSION(opcache,
+  	ZendAccelerator.c \
+ -- 
+-2.7.4
++2.17.1
+ 
+diff --git a/meta-oe/recipes-devtools/php/php_7.4.4.bb b/meta-oe/recipes-devtools/php/php_7.4.4.bb
+index ff4c28e13..52bf87038 100644
+--- a/meta-oe/recipes-devtools/php/php_7.4.4.bb
++++ b/meta-oe/recipes-devtools/php/php_7.4.4.bb
+@@ -110,6 +110,12 @@ export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
+ export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
+ CFLAGS += " -D_GNU_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_INCDIR}/apache2"
+ 
++# Adding these flags enables dynamic library support, which is disabled by
++# default when cross compiling
++# See https://bugs.php.net/bug.php?id=60109
++CFLAGS += " -DHAVE_LIBDL "
++LDFLAGS += " -ldl "
++
+ EXTRA_OEMAKE = "INSTALL_ROOT=${D}"
+ 
+ acpaths = ""
+-- 
+2.17.1
 
