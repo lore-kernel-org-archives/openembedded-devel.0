@@ -1,246 +1,288 @@
-Received: from first.geanix.com (first.geanix.com [116.203.34.67])
- by mx.groups.io with SMTP id smtpd.web10.201.1589219174494219474
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com [209.85.160.179])
+ by mx.groups.io with SMTP id smtpd.web10.1244.1589222097026887100
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 May 2020 10:46:16 -0700
+ Mon, 11 May 2020 11:34:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@geanix.com header.s=first header.b=PAaF7uyN;
- spf=pass (domain: geanix.com, ip: 116.203.34.67, mailfrom: sean@geanix.com)
-Received: from zen.localdomain (unknown [85.184.140.241])
-	by first.geanix.com (Postfix) with ESMTPSA id CDB4A1F8071B;
-	Mon, 11 May 2020 17:46:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=geanix.com; s=first;
-	t=1589219167; bh=Ml7VqmzztZvXk8mOKcsE2vJ51R+MdijP49WPIsc0v6w=;
-	h=From:To:Cc:Subject:Date;
-	b=PAaF7uyNrVUC9b4+75EZe4flP2vs8IBC+ZGORPw+lZRiYbxcOd4OtLUIyAsLX3VIv
-	 s5MUljxJ+WdZOoMRUexJorBiieC/RlmzuAGu8JjtjSFq0c6rB0IXz90A3QeXu2XkpQ
-	 vqe5hoqoCtZs9SFGc5jFWxUVQ6DAjvSwQOs6m7rIIqyH6C2C692XuWoBTwPELBGwNP
-	 WkQ0uMDZsu7YpcGJpJbAWZeGtokopbgVQ0KOOtBq/wO1MIVYgWD1+BWsoKqZU3wM2u
-	 3iHp6CN2ytjkxmPifqH2qhmgwkl0cV7PSuJR2nKN/u9cGBWXHfQ9w+HsV02DO6VTiJ
-	 szfM0eyiSQKSA==
-From: "Sean Nyekjaer" <sean@geanix.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Sean Nyekjaer <sean@geanix.com>
-Subject: [[oe] [meta-oe] [PATCH]] gpsd: Upgrade 3.19 -> 3.20
-Date: Mon, 11 May 2020 19:45:05 +0200
-Message-Id: <20200511174505.2128564-1-sean@geanix.com>
-X-Mailer: git-send-email 2.26.2
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=LIB63j+s;
+ spf=pass (domain: gmail.com, ip: 209.85.160.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f179.google.com with SMTP id v4so7924485qte.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 11 May 2020 11:34:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=W2yKTiGDfyAGbc/LPYKLCchBLzpiuYCsXg421J2DGlA=;
+        b=LIB63j+sGEa6/Lhl6BerMI5pxItHpIEKYZKwD6EtbJbzh5ZWLMNZcV5JBZONX1/6e0
+         JhrMvY+IKp4TaLwbm5vLtMudNEvPhgQgnQZalSIimSL2hgyP5It1r6azTF1D9vsBzJZP
+         2QmdTOCfq54gMLN5x0BWj+rNqfj04RJUIQ22VPUXi1IuSEv9scoYYkRIjFSPiecE43Z9
+         4Y614JQbaZaWUEfAPeEbomJGHWtk3wL/F1sEbJv9ZmxrgvwmnIg4IiyMHV9GnHhHzBfJ
+         tnG3Te5xYiJAeILFcvo18dQqPC7GpgZTXYndN8D9h5N7yHUuy4bI9TAt2FDXRP8B3sLX
+         R17g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=W2yKTiGDfyAGbc/LPYKLCchBLzpiuYCsXg421J2DGlA=;
+        b=cY7vZ9WaeVmIq6Y27KHG958T1v324fli+X5J2U9Y9Njya4BE5f6BZOw1syGdpAr2Nc
+         9oX3poFXNOGZC5pt1htyRkXnOs2StHuQIR4Jrs+/B+TBHnk85qkyFDny73IW+c8dDz3z
+         /PaNknEj+WuikP7V/OHa1ABVuIbmHL05ug9drgG1HLmOdkzCynuieqpRKgQ7fGKBJ2eo
+         VFFxQXuYExFYJLQvrwCm0CJZr8s+LZ1N63B+wX330fsH2dBQfjBpfzSCmparJY/wgJLK
+         WJXVDxhAG7LU2QDTcjfBZFeBafyXl+5yGAYPwYFMkPar0vMToptgJZZJGBbo8N4jRKbF
+         Z7Lw==
+X-Gm-Message-State: AGi0PuYhvhNpBaUolV0304stNZbPNNv7RYNn/JaJBBBz4xdPSOtEhBpd
+	MjGUM1oXLWiuDxLOxsfUDA2zphHrskq6rSvuOdui0GG2bFs=
+X-Google-Smtp-Source: APiQypKYU73UE1SkiYWX0q/AfxR0bRM+/qUeM9MH9478ZG7FIuIrxMI9P1WjcBmAaj70TZ1/jzrXwMgbQDzBwguGQgQ=
+X-Received: by 2002:aed:308e:: with SMTP id 14mr17871134qtf.146.1589222095284;
+ Mon, 11 May 2020 11:34:55 -0700 (PDT)
 MIME-Version: 1.0
-X-Spam-Status: No, score=-0.4 required=4.0 tests=ALL_TRUSTED,BAYES_50,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,URIBL_BLOCKED
-	autolearn=disabled version=3.4.4
-X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on fdf6823a942a
-Content-Transfer-Encoding: quoted-printable
+References: <20200429170447.28554-1-leon.anavi@konsulko.com> <CAMKF1sp=18ZaiMK457ej9TQbkVr-qxDYBw9mU=_ZJpx-jaDVSA@mail.gmail.com>
+In-Reply-To: <CAMKF1sp=18ZaiMK457ej9TQbkVr-qxDYBw9mU=_ZJpx-jaDVSA@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Mon, 11 May 2020 11:34:29 -0700
+Message-ID: <CAMKF1sphfJwqHNd=q0sVQOKf7m3NktLoCVwNjPf=JCLS-uP_4g@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCHv2] lirc: upgrade 0.9.4d -> 0.10.1
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 
-Revert "SConstruct: Add test for sizeof(time_t), result in SIZEOF_TIME_T.=
-"
-Do not cross-compile a small for it to be executed on the host.
+happening again after re-adding
 
-Signed-off-by: Sean Nyekjaer <sean@geanix.com>
----
- ...t-Add-test-for-sizeof-time_t-result-.patch | 108 ++++++++++++++++++
- .../0001-gps_shm_close-Free-privdata.patch    |  37 ------
- .../gpsd/{gpsd_3.19.bb =3D> gpsd_3.20.bb}       |   6 +-
- 3 files changed, 111 insertions(+), 40 deletions(-)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/0001-Revert-SCon=
-struct-Add-test-for-sizeof-time_t-result-.patch
- delete mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_clo=
-se-Free-privdata.patch
- rename meta-oe/recipes-navigation/gpsd/{gpsd_3.19.bb =3D> gpsd_3.20.bb} =
-(95%)
+https://errors.yoctoproject.org/Errors/Details/411339/
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/0001-Revert-SConstruct-=
-Add-test-for-sizeof-time_t-result-.patch b/meta-oe/recipes-navigation/gps=
-d/gpsd/0001-Revert-SConstruct-Add-test-for-sizeof-time_t-result-.patch
-new file mode 100644
-index 000000000..b021d0b72
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd/0001-Revert-SConstruct-Add-tes=
-t-for-sizeof-time_t-result-.patch
-@@ -0,0 +1,108 @@
-+Subject: [PATCH] Revert "SConstruct: Add test for sizeof(time_t), result=
- in
-+ SIZEOF_TIME_T."
-+
-+This reverts commit b32ff1a86c44fa738dabaf63de1b5462e0071ad3.
-+
-+Upstream-Status: Inappropriate [cross-compile specific]
-+
-+---
-+ SConstruct             | 54 ++++--------------------------------------
-+ android/gpsd_config.in |  1 -
-+ 2 files changed, 5 insertions(+), 50 deletions(-)
-+
-+diff --git a/SConstruct b/SConstruct
-+index 33e0ff326..e3c62fa3c 100644
-+--- a/SConstruct
-++++ b/SConstruct
-+@@ -597,42 +597,6 @@ def CheckHeaderDefines(context, file, define):
-+     return ret
-+=20
-+=20
-+-def CheckSizeOf(context, type):
-+-    """Check sizeof 'type'"""
-+-    context.Message('Checking size of ' + type + '... ')
-+-
-+-    program =3D """
-+-#include <stdlib.h>
-+-#include <stdio.h>
-+-
-+-/*
-+- * The CheckSizeOf function does not have a way for the caller to
-+- * specify header files to be included to provide the type being
-+- * checked.  As a workaround until that is remedied, include the
-+- * header required for time_t, which is the sole current use of this
-+- * function.
-+- */
-+-#include <time.h>
-+-
-+-int main() {
-+-    printf("%d", (int)sizeof(""" + type + """));
-+-    return 0;
-+-}
-+-"""
-+-
-+-    # compile it
-+-    ret =3D context.TryCompile(program, '.c')
-+-    if 0 =3D=3D ret:
-+-        announce('ERROR: TryCompile failed\n')
-+-        # fall back to sizeof(time_t) is 8
-+-        return '8'
-+-
-+-    # run it
-+-    ret =3D context.TryRun(program, '.c')
-+-    context.Result(ret[0])
-+-    return ret[1]
-+-
-+-
-+ def CheckCompilerDefines(context, define):
-+     context.Message('Checking if compiler supplies %s... ' % (define,))
-+     ret =3D context.TryLink("""
-+@@ -703,15 +667,13 @@ env.Prepend(LIBPATH=3D[os.path.realpath(os.curdir)=
-])
-+=20
-+ # CheckXsltproc works, but result is incorrectly saved as "no"
-+ config =3D Configure(env, custom_tests=3D{
-+-    'CheckC11': CheckC11,
-+-    'CheckCompilerDefines': CheckCompilerDefines,
-+-    'CheckCompilerOption': CheckCompilerOption,
-+-    'CheckHeaderDefines': CheckHeaderDefines,
-+     'CheckPKG': CheckPKG,
-+-    'CheckSizeOf': CheckSizeOf,
-+     'CheckXsltproc': CheckXsltproc,
-+-    'GetPythonValue': GetPythonValue,
-+-    })
-++    'CheckCompilerOption': CheckCompilerOption,
-++    'CheckCompilerDefines': CheckCompilerDefines,
-++    'CheckC11': CheckC11,
-++    'CheckHeaderDefines': CheckHeaderDefines,
-++    'GetPythonValue': GetPythonValue})
-+=20
-+ # Use print, rather than announce, so we see it in -s mode.
-+ print("This system is: %s" % sys.platform)
-+@@ -1043,12 +1005,6 @@ else:
-+             confdefs.append("/* #undef HAVE_%s_H */\n"
-+                             % hdr.replace("/", "_").upper())
-+=20
-+-    sizeof_time_t =3D config.CheckSizeOf("time_t")
-+-    confdefs.append("#define SIZEOF_TIME_T %s\n" % sizeof_time_t)
-+-    announce("sizeof(time_t) is %s" % sizeof_time_t)
-+-    if 4 >=3D int(sizeof_time_t):
-+-        announce("WARNING: time_t is too small.  It will fail in 2038")
-+-
-+     # check function after libraries, because some function require lib=
-raries
-+     # for example clock_gettime() require librt on Linux glibc < 2.17
-+     for f in ("cfmakeraw", "clock_gettime", "daemon", "fcntl", "fork",
-+diff --git a/android/gpsd_config.in b/android/gpsd_config.in
-+index 758251986..d240f6d34 100644
-+--- a/android/gpsd_config.in
-++++ b/android/gpsd_config.in
-+@@ -19,7 +19,6 @@
-+ #define HAVE_ARPA_INET_H 1
-+ #define HAVE_SYSLOG_H 1
-+ #define HAVE_DAEMON 1
-+-#define SIZEOF_TIME_T 8
-+ #define HAVE_CLOCK_GETTIME 1
-+ #define HAVE_STRPTIME 1
-+ #define HAVE_GMTIME_R 1
-+--=20
-+2.26.2
-+
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free=
--privdata.patch b/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close=
--Free-privdata.patch
-deleted file mode 100644
-index 9b3801580..000000000
---- a/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privda=
-ta.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From 2a4b3bcde0d73a3a4a6644d5f944ac9d16023ba9 Mon Sep 17 00:00:00 2001
--From: Adrian Bunk <bunk@stusta.de>
--Date: Mon, 21 Oct 2019 13:53:25 +0300
--Subject: gps_shm_close: Free privdata
--
--Previously every open/close cycle leaked privdata.
--
--Signed-off-by: Adrian Bunk <bunk@stusta.de>
--Signed-off-by: Gary E. Miller <gem@rellim.com>
--
--Upstream-Status: Backport
-----
-- libgps_shm.c | 8 ++++++--
-- 1 file changed, 6 insertions(+), 2 deletions(-)
--
--diff --git a/libgps_shm.c b/libgps_shm.c
--index d93972bba..12bb3760b 100644
----- a/libgps_shm.c
--+++ b/libgps_shm.c
--@@ -163,8 +163,12 @@ int gps_shm_read(struct gps_data_t *gpsdata)
--=20
-- void gps_shm_close(struct gps_data_t *gpsdata)
-- {
---    if (PRIVATE(gpsdata) && PRIVATE(gpsdata)->shmseg !=3D NULL)
---	(void)shmdt((const void *)PRIVATE(gpsdata)->shmseg);
--+    if (PRIVATE(gpsdata)) {
--+        if (PRIVATE(gpsdata)->shmseg !=3D NULL)
--+	    (void)shmdt((const void *)PRIVATE(gpsdata)->shmseg);
--+        free(PRIVATE(gpsdata));
--+        gpsdata->privdata =3D NULL;
--+    }
-- }
--=20
-- int gps_shm_mainloop(struct gps_data_t *gpsdata, int timeout,
----=20
--2.20.1
--
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb b/meta-oe/recip=
-es-navigation/gpsd/gpsd_3.20.bb
-similarity index 95%
-rename from meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-rename to meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
-index f74ebda5f..0914f7ec2 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
-@@ -7,10 +7,10 @@ PROVIDES =3D "virtual/gpsd"
-=20
- SRC_URI =3D "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.pat=
-ch \
--    file://0001-gps_shm_close-Free-privdata.patch \
-+    file://0001-Revert-SConstruct-Add-test-for-sizeof-time_t-result-.pat=
-ch \
- "
--SRC_URI[md5sum] =3D "b3bf88706794eb8e5f2c2543bf7ba87b"
--SRC_URI[sha256sum] =3D "27dd24d45b2ac69baab7933da2bf6ae5fb0be90130f67e75=
-3c110a3477155f39"
-+SRC_URI[md5sum] =3D "cf7fdec7ce7221d20bee1a7246362b05"
-+SRC_URI[sha256sum] =3D "172a7805068eacb815a3c5225436fcb0be46e7e49a5001a9=
-4034eac43df85e50"
-=20
- inherit scons update-rc.d python3-dir python3native systemd update-alter=
-natives
-=20
---=20
-2.26.2
+I am dropping it. Unless we have clarity on why its happening. It
+might be some sort of race
 
+On Thu, May 7, 2020 at 5:59 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> seeing this error
+>
+> https://errors.yoctoproject.org/Errors/Details/410835/
+>
+> On Wed, Apr 29, 2020 at 10:05 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
+> >
+> > Upgrade Linux Infrared Remote Control (LIRC) to the latest version
+> > 0.10.1. Remove redundant old patches. Apply a new patch from Arch
+> > Linux FS#57792 that fixes build errors. Create tar.gz archive
+> > (PYTHON_TARBALL) which LIRC needs for install-nodist_pkgdataDATA.
+> > Add python3-setuptools-native as a dependency. Replace path to
+> > python3 in scripts based on a similar approach as in the recipe
+> > for blueman.
+> >
+> > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> > ---
+> >  .../lirc/lirc/fix_build_errors.patch          |  30 ++++++
+> >  .../lirc/lirc/pollfd.patch                    | 101 ------------------
+> >  .../lirc/{lirc_0.9.4d.bb => lirc_0.10.1.bb}   |  27 ++++-
+> >  3 files changed, 53 insertions(+), 105 deletions(-)
+> >  create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc/fix_build_errors.patch
+> >  delete mode 100644 meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc/pollfd.patch
+> >  rename meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/{lirc_0.9.4d.bb => lirc_0.10.1.bb} (74%)
+> >
+> > diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc/fix_build_errors.patch b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc/fix_build_errors.patch
+> > new file mode 100644
+> > index 000000000..41353dbbd
+> > --- /dev/null
+> > +++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc/fix_build_errors.patch
+> > @@ -0,0 +1,30 @@
+> > +diff --git a/configure.ac b/configure.ac
+> > +index 58347d8..8c7fca2 100644
+> > +--- a/configure.ac
+> > ++++ b/configure.ac
+> > +@@ -77,15 +77,10 @@ AC_TYPE_UINT64_T
+> > +
+> > + dnl AC_TYPE_GETGROUPS seems broken on recent MacOS, so:
+> > + AC_MSG_CHECKING([Figure out if getgrouplist() needs gid_t or int])
+> > +-oldcflags="$CFLAGS"
+> > +-export CFLAGS=-Werror
+> > + AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+> > + #include <unistd.h>
+> > +-#include <grp.h>
+> > +-  ]], [[
+> > +-gid_t groups[32]; int ngroups; const char* user = "root";
+> > +-getgrouplist(user, 1, groups, &ngroups);
+> > +-  ]])],[
+> > ++int getgroups(int gidsetsize, gid_t grouplist[]);
+> > ++  ]], [[  ]])],[
+> > +     AC_MSG_RESULT(gid_t)
+> > +     AC_DEFINE(GETGROUPS_T,[gid_t])
+> > +   ],[
+> > +@@ -93,7 +88,6 @@ getgrouplist(user, 1, groups, &ngroups);
+> > +     AC_DEFINE(GETGROUPS_T,[int])
+> > +   ]
+> > + )
+> > +-export CFLAGS="$oldcflags"
+> > +
+> > + dnl Checks for library functions.
+> > + AC_CHECK_FUNCS(gethostname gettimeofday mkfifo select socket strdup \
+> > diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc/pollfd.patch b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc/pollfd.patch
+> > deleted file mode 100644
+> > index 4feea8034..000000000
+> > --- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc/pollfd.patch
+> > +++ /dev/null
+> > @@ -1,101 +0,0 @@
+> > -Index: lirc-0.9.4d/daemons/lircrcd.cpp
+> > -===================================================================
+> > ---- lirc-0.9.4d.orig/daemons/lircrcd.cpp
+> > -+++ lirc-0.9.4d/daemons/lircrcd.cpp
+> > -@@ -29,10 +29,12 @@
+> > - #include <sys/un.h>
+> > - #include <sys/stat.h>
+> > - #include <sys/types.h>
+> > -+#include <poll.h>
+> > - #include <syslog.h>
+> > -
+> > - #include "lirc_client.h"
+> > - #include "lirc/lirc_log.h"
+> > -+#include "lirc/curl_poll.h"
+> > -
+> > - #define MAX_CLIENTS 100
+> > - #define WHITE_SPACE " \t"
+> > -Index: lirc-0.9.4d/lib/curl_poll.c
+> > -===================================================================
+> > ---- lirc-0.9.4d.orig/lib/curl_poll.c
+> > -+++ lirc-0.9.4d/lib/curl_poll.c
+> > -@@ -36,6 +36,7 @@
+> > - #include <stdlib.h>
+> > - #include <sys/time.h>
+> > - #include <sys/types.h>
+> > -+#include <sys/poll.h>
+> > -
+> > - #include "lirc_log.h"
+> > - #include "curl_poll.h"
+> > -@@ -67,7 +68,7 @@ static const logchannel_t logchannel = L
+> > -
+> > - #ifdef HAVE_POLL_FINE
+> > -
+> > --int curl_poll(struct pollfd ufds[], unsigned int nfds, int timeout_ms)
+> > -+int curl_poll(struct pollfd *ufds, unsigned int nfds, int timeout_ms)
+> > - {
+> > -       return poll(ufds, nfds, timeout_ms);
+> > - }
+> > -@@ -112,7 +113,7 @@ static int verify_sock(int s)
+> > - }
+> > -
+> > -
+> > --int curl_poll(struct pollfd ufds[], unsigned int nfds, int timeout_ms)
+> > -+int curl_poll(struct pollfd *ufds, unsigned int nfds, int timeout_ms)
+> > - {
+> > -       struct timeval pending_tv;
+> > -       struct timeval* ptimeout;
+> > -Index: lirc-0.9.4d/lib/curl_poll.h
+> > -===================================================================
+> > ---- lirc-0.9.4d.orig/lib/curl_poll.h
+> > -+++ lirc-0.9.4d/lib/curl_poll.h
+> > -@@ -1,5 +1,5 @@
+> > --#ifndef _POLL_H
+> > --#define _POLL_H
+> > -+#ifndef _LIB_CURL_POLL_H
+> > -+#define _LIB_CURL_POLL_H
+> > - /***************************************************************************
+> > -  *                                  _   _ ____  _
+> > -  *  Project                     ___| | | |  _ \| |
+> > -@@ -29,13 +29,9 @@
+> > - extern "C" {
+> > - #endif
+> > -
+> > --#ifdef HAVE_SYS_POLL_H
+> > --#include <sys/poll.h>
+> > --#else
+> > - #include <poll.h>
+> > --#endif
+> > -
+> > --int curl_poll(struct pollfd ufds[], unsigned int nfds, int timeout_ms);
+> > -+int curl_poll(struct pollfd *ufds, unsigned int nfds, int timeout_ms);
+> > -
+> > - #ifdef __cplusplus
+> > - }
+> > -Index: lirc-0.9.4d/lib/lirc/curl_poll.h
+> > -===================================================================
+> > ---- lirc-0.9.4d.orig/lib/lirc/curl_poll.h
+> > -+++ lirc-0.9.4d/lib/lirc/curl_poll.h
+> > -@@ -1,5 +1,5 @@
+> > --#ifndef _POLL_H
+> > --#define _POLL_H
+> > -+#ifndef _LIRC_CURL_POLL_H
+> > -+#define _LIRC_CURL_POLL_H
+> > - /***************************************************************************
+> > -  *                                  _   _ ____  _
+> > -  *  Project                     ___| | | |  _ \| |
+> > -@@ -29,13 +29,9 @@
+> > - extern "C" {
+> > - #endif
+> > -
+> > --#ifdef HAVE_SYS_POLL_H
+> > --#include <sys/poll.h>
+> > --#else
+> > - #include <poll.h>
+> > --#endif
+> > -
+> > --int curl_poll(struct pollfd ufds[], unsigned int nfds, int timeout_ms);
+> > -+int curl_poll(struct pollfd *ufds, unsigned int nfds, int timeout_ms);
+> > -
+> > - #ifdef __cplusplus
+> > - }
+> > diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.9.4d.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb
+> > similarity index 74%
+> > rename from meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.9.4d.bb
+> > rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb
+> > index f59969673..b29516576 100644
+> > --- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.9.4d.bb
+> > +++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb
+> > @@ -6,13 +6,13 @@ DESCRIPTION_append_lirc-nslu2example = " This package contains a working config
+> >  HOMEPAGE = "http://www.lirc.org"
+> >  SECTION = "console/network"
+> >  LICENSE = "GPLv2"
+> > -DEPENDS = "libxslt-native alsa-lib libftdi libusb1 libusb-compat jack portaudio-v19 python3-pyyaml"
+> > +DEPENDS = "libxslt-native alsa-lib libftdi libusb1 libusb-compat jack portaudio-v19 python3-pyyaml python3-setuptools-native"
+> >
+> >  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> >
+> >  SRC_URI = "http://prdownloads.sourceforge.net/lirc/lirc-${PV}.tar.bz2 \
+> > -    file://pollfd.patch \
+> >      file://0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
+> > +    file://fix_build_errors.patch \
+> >      file://lircd.service \
+> >      file://lircd.init \
+> >      file://lircexec.init \
+> > @@ -20,8 +20,8 @@ SRC_URI = "http://prdownloads.sourceforge.net/lirc/lirc-${PV}.tar.bz2 \
+> >      file://lirc_options.conf \
+> >      file://lirc.tmpfiles \
+> >  "
+> > -SRC_URI[md5sum] = "0d11679cbdd94a5a6da00a8e7231b4bf"
+> > -SRC_URI[sha256sum] = "c68f18c35b489b865c0a741d119b136e8702191538cd3551b977a7af6c4e41ab"
+> > +SRC_URI[md5sum] = "86c3f8e4efaba10571addb8313d1e040"
+> > +SRC_URI[sha256sum] = "8b753c60df2a7f5dcda2db72c38e448ca300c3b4f6000c1501fcb0bd5df414f2"
+> >
+> >  SYSTEMD_PACKAGES = "lirc lirc-exec"
+> >  SYSTEMD_SERVICE_${PN} = "lircd.service lircmd.service lircd-setup.service lircd-uinput.service"
+> > @@ -41,7 +41,26 @@ PACKAGECONFIG ?= " \
+> >  CACHED_CONFIGUREVARS = "HAVE_WORKING_POLL=yes"
+> >
+> >  #EXTRA_OEMAKE = 'SUBDIRS="lib daemons tools"'
+> > +
+> > +# Create PYTHON_TARBALL which LIRC needs for install-nodist_pkgdataDATA
+> > +do_install_prepend() {
+> > +    rm -rf ${WORKDIR}/${PN}-${PV}/python-pkg/dist/
+> > +    mkdir ${WORKDIR}/${PN}-${PV}/python-pkg/dist/
+> > +    tar --exclude='${WORKDIR}/${PN}-${PV}/python-pkg/*' -czf ${WORKDIR}/${PN}-${PV}/python-pkg/dist/${PN}-${PV}.tar.gz ${S}
+> > +}
+> > +
+> > +# In code, path to python is a variable that is replaced with path to native version of it
+> > +# during the configure stage, e.g ../recipe-sysroot-native/usr/bin/python3-native/python3.
+> > +# Replace it with #!/usr/bin/env python3
+> >  do_install_append() {
+> > +    sed -i '1c#!/usr/bin/env python3' ${D}${bindir}/lirc-setup \
+> > +                                      ${D}${PYTHON_SITEPACKAGES_DIR}/lirc-setup/lirc-setup \
+> > +                                      ${D}${bindir}/irtext2udp \
+> > +                                      ${D}${bindir}/lirc-init-db \
+> > +                                      ${D}${bindir}/irdb-get \
+> > +                                      ${D}${bindir}/pronto2lirc \
+> > +                                      ${D}${sbindir}/lircd-setup
+> > +
+> >      install -m 0755 -d ${D}${sysconfdir}
+> >      install -m 0755 -d ${D}${sysconfdir}/lirc
+> >      install -m 0755 -d ${D}${systemd_unitdir}/system
+> > --
+> > 2.17.1
+> >
+> > 
