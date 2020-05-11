@@ -1,112 +1,109 @@
 Received: from mail.cybernetics.com (mail.cybernetics.com [173.71.130.66])
- by mx.groups.io with SMTP id smtpd.web11.13043.1589207304984187833
+ by mx.groups.io with SMTP id smtpd.web12.13207.1589207558362654535
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 May 2020 07:28:25 -0700
+ Mon, 11 May 2020 07:32:38 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=pass (domain: cybernetics.com, ip: 173.71.130.66, mailfrom: btv1==4003dd60f2f==cbing@cybernetics.com)
-X-ASG-Debug-ID: 1589207303-0fb3b0649e755170001-aWHRdb
-Received: from cybernetics.com ([10.10.4.126]) by mail.cybernetics.com with ESMTP id Zi38cmZpKPRW3aRD for <openembedded-devel@lists.openembedded.org>; Mon, 11 May 2020 10:28:23 -0400 (EDT)
+X-ASG-Debug-ID: 1589207496-0fb3b0649e755330001-aWHRdb
+Received: from cybernetics.com ([10.10.4.126]) by mail.cybernetics.com with ESMTP id 9MEGGRSrO3P6JuCt for <openembedded-devel@lists.openembedded.org>; Mon, 11 May 2020 10:31:36 -0400 (EDT)
 X-Barracuda-Envelope-From: cbing@cybernetics.com
 X-ASG-Whitelist: Client
-Received: from [10.157.1.18] (account cbing HELO cy-rd-cb)
+Received: from [10.157.1.18] (HELO [192.168.184.100])
   by cybernetics.com (CommuniGate Pro SMTP 5.1.14)
-  with ESMTPA id 9950947 for openembedded-devel@lists.openembedded.org; Mon, 11 May 2020 10:28:22 -0400
-Date: Mon, 11 May 2020 10:29:07 -0400
-From: "Claude Bing" <cbing@cybernetics.com>
+  with ESMTP id 9950972 for openembedded-devel@lists.openembedded.org; Mon, 11 May 2020 10:31:36 -0400
+Subject: Re: [oe] [meta-oe][PATCH] php: fix opcache link error in 7.4
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][dunfell][PATCH] php: fix opcache link issue in 7.4.4
-Message-ID: <20200511102907.34c93726@cy-rd-cb>
-X-ASG-Orig-Subj: [meta-oe][dunfell][PATCH] php: fix opcache link issue in 7.4.4
-Organization: Cybernetics
-X-Mailer: Claws Mail 3.16.0 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+X-ASG-Orig-Subj: Re: [oe] [meta-oe][PATCH] php: fix opcache link error in 7.4
+References: <20200507142806.48643a47@cy-rd-cb>
+ <20200508105610.GA8452@localhost>
+ <090c0075-c785-e3fd-1da4-c56518a64c0c@cybernetics.com>
+ <20200508184129.GA7248@localhost>
+ <b2a74e1d-32f1-56f2-934c-58d2a6d25f64@cybernetics.com>
+ <CAGDS+nmf3gjj6Nsp0+dRn-B=TXDF5tYOa2zN-MN-9s9ZNAJn6Q@mail.gmail.com>
+From: "Claude Bing" <cbing@cybernetics.com>
+Message-ID: <96e159d5-dd18-37cf-8dba-65ef4474e2f9@cybernetics.com>
+Date: Mon, 11 May 2020 10:32:21 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
+In-Reply-To: <CAGDS+nmf3gjj6Nsp0+dRn-B=TXDF5tYOa2zN-MN-9s9ZNAJn6Q@mail.gmail.com>
 X-Barracuda-Connect: UNKNOWN[10.10.4.126]
-X-Barracuda-Start-Time: 1589207303
+X-Barracuda-Start-Time: 1589207496
 X-Barracuda-URL: https://10.10.4.122:443/cgi-mod/mark.cgi
-X-Virus-Scanned: by bsmtpd at cybernetics.com
-X-Barracuda-Scan-Msg-Size: 3282
 X-Barracuda-BRTS-Status: 1
-Content-Type: text/plain; charset=US-ASCII
+X-Barracuda-Scan-Msg-Size: 3073
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-The source of this issue are the updates to
-0001-opcache-config.m4-enable-opcache.patch (commit 7cc7a9ec).  Instead
-of working around the issue in the recipe file, update the patch to
-restore the call to PHP_ADD_LIBRARY().
+The patch is already present in master, so I opted to send a patch
+rebased for dunfell.  If there are any issues, please let me know.
 
-  (cherry picked from commit 3cfd16be4e1b62efe8ac640cecc080709cf2b9f9)
+Regards,
 
-Signed-off-by: Claude Bing <cbing@cybernetics.com>
----
- ...001-opcache-config.m4-enable-opcache.patch | 19 +++++++++++++------
- meta-oe/recipes-devtools/php/php_7.4.4.bb     |  6 ++++++
- 2 files changed, 19 insertions(+), 6 deletions(-)
+Claude Bing
 
-diff --git a/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch b/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
-index ee0d5edcd..1f3e683a0 100644
---- a/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
-+++ b/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
-@@ -1,4 +1,7 @@
--opcache/config.m4: enable opcache
-+From a74b42098aededd296ec6a3cd4cf5a17e59d6f29 Mon Sep 17 00:00:00 2001
-+From: Claude Bing <cbing@cybernetics.com>
-+Date: Fri, 8 May 2020 10:15:32 -0400
-+Subject: [PATCH] opcache/config.m4: enable opcache
- 
- We can't use AC_TRY_RUN to run programs in a cross compile environment.
- Set
-@@ -12,15 +15,18 @@ Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
- 
- update patch to version 7.4.4
- Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+
-+fix issue linking with librt
-+Signed-off-by: Claude Bing <cbing@cybernetics.com>
- ---
-- ext/opcache/config.m4 | 194 +-------------------------------------------------
-- 1 file changed, 3 insertions(+), 191 deletions(-)
-+ ext/opcache/config.m4 | 195 +-----------------------------------------
-+ 1 file changed, 4 insertions(+), 191 deletions(-)
- 
- diff --git a/ext/opcache/config.m4 b/ext/opcache/config.m4
--index 6c40caf..84ddf1e 100644
-+index 6c40cafc1c..6569aa9e1c 100644
- --- a/ext/opcache/config.m4
- +++ b/ext/opcache/config.m4
--@@ -23,201 +23,13 @@ if test "$PHP_OPCACHE" != "no"; then
-+@@ -23,201 +23,14 @@ if test "$PHP_OPCACHE" != "no"; then
-    AC_CHECK_FUNCS([mprotect])
-  
-    AC_MSG_CHECKING(for sysvipc shared memory support)
-@@ -222,9 +228,10 @@ index 6c40caf..84ddf1e 100644
- -    AC_MSG_RESULT([no])
- -  ])
- +  AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
-++  PHP_CHECK_LIBRARY(rt, shm_unlink, [PHP_ADD_LIBRARY(rt,1,OPCACHE_SHARED_LIBADD)])
-  
-    PHP_NEW_EXTENSION(opcache,
-  	ZendAccelerator.c \
- -- 
--2.7.4
-+2.17.1
- 
-diff --git a/meta-oe/recipes-devtools/php/php_7.4.4.bb b/meta-oe/recipes-devtools/php/php_7.4.4.bb
-index ff4c28e13..52bf87038 100644
---- a/meta-oe/recipes-devtools/php/php_7.4.4.bb
-+++ b/meta-oe/recipes-devtools/php/php_7.4.4.bb
-@@ -110,6 +110,12 @@ export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
- export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
- CFLAGS += " -D_GNU_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_INCDIR}/apache2"
- 
-+# Adding these flags enables dynamic library support, which is disabled by
-+# default when cross compiling
-+# See https://bugs.php.net/bug.php?id=60109
-+CFLAGS += " -DHAVE_LIBDL "
-+LDFLAGS += " -ldl "
-+
- EXTRA_OEMAKE = "INSTALL_ROOT=${D}"
- 
- acpaths = ""
--- 
-2.17.1
-
+On 5/9/20 2:54 PM, Steve Sakoman wrote:
+> Hi Claude,
+> 
+> On Fri, May 8, 2020 at 11:26 AM Claude Bing <cbing@cybernetics.com> wrote:
+>>
+>> OK, I started a new patch thread.  Who/what determines which patches get
+>> included in the named release branches?  Specifically, we are using
+>> dunfell and would like these changes to show up in that branch.
+> 
+> Just submit a patch to this list tagged with [dunfell].  In general
+> though I won't take a patch unless it is already in master, so a patch
+> for both master and dunfell should be tagged with [master][dunfell]
+> 
+> If the issue is already fixed in master with a version bump, and a
+> version bump in dunfell would be too dangerous (i.e. feature changes)
+> then I'll take a patch to the current version in dunfell.  Again, tag
+> it with [dunfell] and also mention the commit in master that fixes the
+> issue.
+> 
+> Thanks,
+> 
+> Steve
+> 
+>>
+>> :)
+>>
+>> Regards,
+>>
+>> Claude Bing
+>>
+>> On 5/8/20 2:41 PM, Adrian Bunk wrote:
+>>> On Fri, May 08, 2020 at 10:42:22AM -0400, Claude Bing wrote:
+>>>> On 5/8/20 6:56 AM, Adrian Bunk wrote:
+>>>>> On Thu, May 07, 2020 at 02:28:06PM -0400, Claude Bing wrote:
+>>>>>> Explicitly specifying -lrt is required for opcache to be linked against
+>>>>>> the proper dependencies.  Additionally, PHP disables libdl when it
+>>>>>> detects a cross-compilation environment for some reason.  In order to
+>>>>>> load any type of extension, re-enabling libdl is required.
+>>>>>> ...
+>>>>>> +# link against librt (libc) if opcache is specified in order to avoid the
+>>>>>> +# following error:
+>>>>>> +# Failed loading /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so: /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so: undefined symbol: shm_unlink
+>>>>>> +LDFLAGS += "${@ " -lrt " if bb.utils.contains('PACKAGECONFIG', 'opcache', 'true', 'false', d) else "" }"
+>>>>>
+>>>>> Is this actually a bug in 0001-opcache-config.m4-enable-opcache.patch
+>>>>> and should instead be fixed there?
+>>>>
+>>>> Yes, that does indeed fix the problem.  Would you like me to reply to
+>>>> this thread with a new patch, or create a different thread?
+>>>> ...
+>>>
+>>> Your original patch is already in master, please submit a new patch in a
+>>> different thread that removes this workaround from php_7.4.4.bb and
+>>> fixes 0001-opcache-config.m4-enable-opcache.patch.
+>>>
+>>> Thanks
+>>> Adrian
+>>>
+>>>
+>>>
+>>>
+>>
+>>
+>> 
