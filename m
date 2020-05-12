@@ -1,52 +1,55 @@
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
- by mx.groups.io with SMTP id smtpd.web12.6212.1589291726687583268
+ by mx.groups.io with SMTP id smtpd.web10.6073.1589291727132919706
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 12 May 2020 06:55:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@stusta.de header.s=default header.b=nRJxb7lG;
+ dkim=pass header.i=@stusta.de header.s=default header.b=ltedFSFU;
  spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=h6oi=62=stusta.de=bunk@stusta.mhn.de)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49LzpN6Fsgz4y
-	for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2020 15:55:24 +0200 (CEST)
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49LzpP2SQyz5R
+	for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2020 15:55:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
 	s=default; t=1589291725;
-	bh=9LPgK/xiqwIrOyQufjKyIRCa3EZWj6r4VtQ0Eo7n/lM=;
+	bh=bU/c67zdQbE674JwcRLl4jya1BzugbQJ/V07PCj4Nnw=;
 	h=From:To:Subject:Date:From;
-	b=nRJxb7lG9BRq+rkK2unG5ez1xjXAhyEX+MTFNo9g2ZfZUcE12caCi2qgE3PLEG5Q1
-	 4Q9d7c4vsD/02QX2708ai4LnB2/h82Jk18xLK31IQspt38Dqn9ScUM0ybPkaHiF45T
-	 1GpIYGQQ2cbGIiFNCyxhdiKLwYt72yTpHA/pDl49ZwNWHgRiQH0fAUjaOi95wSJ0qU
-	 FFf9uNF9F1bkvAlVebRpI16cKCm79SbR8FGmYABGJniWfc2pMpr3zwBiOecHOIFF/d
-	 82DMlILx16OjEN1+xzytGG9yyqL/JZTom28oBzQbYvxg1FLvLb+ovnMWdfuAsmbSrG
-	 eFqFb+InZtZi6o/CPc9rVRbbuUJK8aViMM4wewyfJlRTMJUyQBh2cK14Gaq2uHXl4F
-	 +BP33i70iUSyIlemlyIUJIZIRyE47jDxafQ5WazbCIBop9SLDfUOnXHr+dLzX1mEjd
-	 PKxe3GiYQNhcYi83736Vprz3MgsvbW8FVKA6KfS/HEiJFrzA9d5V8167QQVXJxr3qV
-	 BXlEGAGsyeD2OQDZRDOipv9qG5CCFEc16EE6njeeP3C5Kq7DYYWjGAw92RgAHsHel2
-	 01LWWd8Hwysq2c+vQHotrg7luKi83tySU5swgqLW6ouhrt8369ANSr8Wefbk0JSHWX
-	 yj3eYNMSPZzHEHAiK+y4fsSM=
+	b=ltedFSFUu0h6778l0Lj5gNlqsXIZgI+U8wzdglz5/9u7x93CQu+lY8XqMUfBslewy
+	 hMwvd5mhO1tSXjSFTnkPUU+GmwpHnxtpm9lkMPe1mjm3NnAxN4Bh18z9lSh8JMAWtN
+	 5a9530ogmRr+FEVOMJbZC3uGFeyYXbaxcRtSnZdIZ6LBVjA512RxgYU9jNRDzVmril
+	 WPi0s87sKHLX+hmhNnssI40palfRduNEsBDO5HJgBx2F9hyJpp6RM40Bq5ys0j5nl3
+	 TrvMh/ajWyUm2IXE5wgm3g2/aObaef9WhsDGiJ7DSZOCDvnttsbYTeO8k2kf7Mx1VU
+	 ZAf1eBsIzc2ATtcu12V4X3cbad7oggfldkWXPeYALhX2bj36pNf3f883QcKIGzI4EJ
+	 5uVH2cMxuDRp34TX9WETb0prGo9j6zGA1Pb8F40MbbYuBQrqebk8JYyTctzlW8oGZ6
+	 9Vh8KKPKBSR2dxad39MashD2PTNmigxdvTeZK7gOXhwcNMjPihGjaVO+dBRUUHJ5Fq
+	 P/trgUZx1VZEz6GzZv6kW6CFaDxhApbCFWMFNwjDWu9i6fZeKOhZNGM+SqhBZxe30h
+	 vBmLfLcbgPMLw1Az9UeLOOLo1pQoo/Ho+YEoEMXK/xnp9MYUAsjzsM3aSNTflg+YoB
+	 FEF6CyWK6seaAZ4pAwOKYQZ4=
 From: "Adrian Bunk" <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [OE-core][PATCH] iproute2: Remove -fcommon
-Date: Tue, 12 May 2020 16:55:16 +0300
-Message-Id: <20200512135523.19970-1-bunk@stusta.de>
+Subject: [OE-core][PATCH] libxcrypt2: Remove -fcommon
+Date: Tue, 12 May 2020 16:55:17 +0300
+Message-Id: <20200512135523.19970-2-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
 
-This was fixed in upstream version 5.5.0.
+This was fixed in upstream version 4.4.12.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- meta/recipes-connectivity/iproute2/iproute2_5.5.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta/recipes-core/libxcrypt/libxcrypt.inc | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta/recipes-connectivity/iproute2/iproute2_5.5.0.bb b/meta/recipes-connectivity/iproute2/iproute2_5.5.0.bb
-index ad0ab13c9a..7ad4b8eee6 100644
---- a/meta/recipes-connectivity/iproute2/iproute2_5.5.0.bb
-+++ b/meta/recipes-connectivity/iproute2/iproute2_5.5.0.bb
-@@ -9,4 +9,4 @@ SRC_URI[sha256sum] = "bac543435cac208a11db44c9cc8e35aa902befef8750594654ee71941c
+diff --git a/meta/recipes-core/libxcrypt/libxcrypt.inc b/meta/recipes-core/libxcrypt/libxcrypt.inc
+index bee1367c99..2d2a0b03e3 100644
+--- a/meta/recipes-core/libxcrypt/libxcrypt.inc
++++ b/meta/recipes-core/libxcrypt/libxcrypt.inc
+@@ -27,8 +27,6 @@ BUILD_CPPFLAGS = "-I${STAGING_INCDIR_NATIVE}"
+ TARGET_CPPFLAGS = "-I${STAGING_DIR_TARGET}${includedir} -Wno-error"
+ CPPFLAGS_append_class-nativesdk = " -Wno-error"
  
- # CFLAGS are computed in Makefile and reference CCOPTS
- #
--EXTRA_OEMAKE_append = " CCOPTS='${CFLAGS} -fcommon'"
-+EXTRA_OEMAKE_append = " CCOPTS='${CFLAGS}'"
+-CFLAGS += "-fcommon"
+-
+ API = "--disable-obsolete-api"
+ EXTRA_OECONF += "${API}"
+ 
 -- 
 2.17.1
 
