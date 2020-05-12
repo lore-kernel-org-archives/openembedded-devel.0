@@ -1,100 +1,243 @@
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
- by mx.groups.io with SMTP id smtpd.web11.10631.1589304266307510803
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web10.2422.1589312068795075626
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 May 2020 10:24:28 -0700
+ Tue, 12 May 2020 12:34:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@stusta.de header.s=default header.b=jSFeusTk;
- spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=h6oi=62=stusta.de=bunk@stusta.mhn.de)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49M4RV4Dspz4y
-	for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2020 19:24:22 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1589304262;
-	bh=Z5E6XDWHlY2yOo78l/GXiLnyxuu8xIirjMftVm/IQz8=;
-	h=From:To:Subject:Date:From;
-	b=jSFeusTkQd6oCKqqyv5K5vHE0y8zE7d4fzTsdd4TXsdKpMvRWMqUUn19kLCJqWnOT
-	 qX2t+8KEd1nt4sv7uFa6EJ3DtNnOf9pZ7OqQDe2b4Ht6sGFXnkqr7KXlEhn/omcTlc
-	 IWTYeHFR1JMNL3yzwwb+UXw2R3Gr0mhAP62rYqaabKzIoLQRnqewcGfyeq8MtkZcD+
-	 5w0pJ5cWhIs9vwvI5z/iEJpQMK7a+wGWy7AUTH7R26C8KNCkGnsu/7A9V7q0OJ95lb
-	 +RHpnlkK8mSJysKwSjf7GH4evQJa5k2fsMVU5ugLft6VWQjHrmoJ0hV88hkatE8Ehr
-	 kNJMPoPYt5EBMfqVBw73mOCFb7odZQ5G8sAidWsttqH1wYxwJQYhA1V4WOMr953jXE
-	 6OPADLtWj0r+LTPS1lm+1t1GzcoeWPcNzKMzzeeLwV5mVoYBRmyNgD+9XGSvv1QYkF
-	 nAxFuTQgC8el8RmlYUq3dp7GcbdTtzgb2A9SN36GWRrMGl28p4qI3n4DZuzgboNILP
-	 uQ/U3bAAEeiyRlidi9P8bsWO7FQTRBfoIjTiafWbKOYOMzHXQcxjA37r+M1RjjbElm
-	 CopdpYrKCMJhONJqCnc+FiO/fsDRZ4NiBj9gPsJuL+dofdn3zS2xyHmHYNWwcoGctY
-	 GhwFdv2aXdBaxfdqflMLUUtI=
-From: "Adrian Bunk" <bunk@stusta.de>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pJwOi8Xy;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id u10so5822570pls.8
+        for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2020 12:34:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zgONZSTcf6eIxv//688xxJHNoBKH9N+ogKG++wcUUhs=;
+        b=pJwOi8XyZAIvE0GQlqZGVdqjBBq+l97tLjTjmJcTrybcaI/ukuT4yMyOhrfkQpQok+
+         Djca2lYgaupW1oujzDiTm1pNqyb1wgJY3JMtrfbDMbZauq2hHhaHfgfty7TMNLP3kCvH
+         Hxa3TISrn9X8xkTtMnHpcoCSXe/huEGsLN4j25JW3wIKxpsxaOImH51afZVSnBFcTPNh
+         gWPCh99BouXLtCEwjn7uNd11hEmxIdOWfUTelSMqHwQ32EQW0eXuhJSpcLNGiaDCOx9k
+         zgIAJiadAg0OdQlDo7vnYCKI50597hhHldY3o4TozDlDn60URxjavcqE1fEhCrZki8+q
+         1d7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zgONZSTcf6eIxv//688xxJHNoBKH9N+ogKG++wcUUhs=;
+        b=pLaoLC+5PNg12XQ4tsLB+ceR3YlOKqm5nkzpQFq7LHIFJLf2JTQkNf8UZvGg6UWlLY
+         gOJ7dc2Z80kgaXRvvk4GlF1SmJ1hXsQHW5ir5sSv3Or7PC/mxWFGg3QHER1W29PbRWD+
+         pVq8ZTzxWi1sEvkjPin6C6ISkEK4b46g0IjERv8S0zwkA4RKWTB6wB6C3FWPgO8rtNDT
+         HP3OAkRobJA15UJeyZ2rowqvs/Rhq+17FZiDoszo+/y0WdsTYcGDyVBiAPXmTd32oEgQ
+         jyyFuv8lb0Usyy1juRZGzp3StXc//GvoM3mtcURqXbmiAlmhVVn5h4CY0XQbZk4FA9Lq
+         GnJw==
+X-Gm-Message-State: AOAM53211ghEoLVUCUZuUJu7XYkraCNY0lvN2jEBHg26i0CgGJK6WG7X
+	e7IhNPUn/ik6AEfva57Pafsp4Kv1wBE=
+X-Google-Smtp-Source: ABdhPJxEgRWuzStnzr3Y6lmPUEwLzW9IbrQLxXXMNKXPWq26GDG4bWDg31ykYZ1PfYH9pysK02r2pQ==
+X-Received: by 2002:a17:90a:bf08:: with SMTP id c8mr447875pjs.13.1589312067515;
+        Tue, 12 May 2020 12:34:27 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::8caf])
+        by smtp.gmail.com with ESMTPSA id kr1sm10141803pjb.26.2020.05.12.12.34.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 12 May 2020 12:34:26 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] mraa: Replace -fcommon with fix
-Date: Tue, 12 May 2020 20:24:21 +0300
-Message-Id: <20200512172421.8874-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH V2] pmdk: Update to 1.8
+Date: Tue, 12 May 2020 12:34:24 -0700
+Message-Id: <20200512193424.1602542-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.26.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Licence-Update: Update copyright headers and drop jeamalloc [1]
+
+* Drop upstreamed patch
+* Drop jemalloc patch, its no longer applicable
+* Fix build with gcc10
+
+[1] https://github.com/pmem/pmdk/commit/bd13816e7c784430343bcc2a7b53314ab998bf62#diff-9879d6db96fd29134fc802214163b95a
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...de-Declare-gVERSION-global-as-extern.patch | 31 +++++++++++++++++++
- meta-oe/recipes-extended/mraa/mraa_git.bb     |  3 +-
- 2 files changed, 32 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-extended/mraa/mraa/0001-include-Declare-gVERSION-global-as-extern.patch
+ .../0001-examples-Initialize-child_idx.patch  | 47 +++++++++++++++++++
+ ...c.cfg-Specify-the-host-when-building.patch | 29 ------------
+ ...reeBSD__-to-control-secure_getenv-de.patch | 33 -------------
+ .../pmdk/{pmdk_1.7.bb => pmdk_1.8.bb}         | 11 +++--
+ 4 files changed, 54 insertions(+), 66 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/pmdk/files/0001-examples-Initialize-child_idx.patch
+ delete mode 100644 meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
+ delete mode 100644 meta-oe/recipes-extended/pmdk/files/0001-os_posix-Use-__FreeBSD__-to-control-secure_getenv-de.patch
+ rename meta-oe/recipes-extended/pmdk/{pmdk_1.7.bb => pmdk_1.8.bb} (82%)
 
-diff --git a/meta-oe/recipes-extended/mraa/mraa/0001-include-Declare-gVERSION-global-as-extern.patch b/meta-oe/recipes-extended/mraa/mraa/0001-include-Declare-gVERSION-global-as-extern.patch
+diff --git a/meta-oe/recipes-extended/pmdk/files/0001-examples-Initialize-child_idx.patch b/meta-oe/recipes-extended/pmdk/files/0001-examples-Initialize-child_idx.patch
 new file mode 100644
-index 000000000..d1152ed64
+index 0000000000..8e2b3c7cbb
 --- /dev/null
-+++ b/meta-oe/recipes-extended/mraa/mraa/0001-include-Declare-gVERSION-global-as-extern.patch
-@@ -0,0 +1,31 @@
-+From dbb5961f106ec42cd70689d933674c9c37aedfe1 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Bj=C3=B6rn=20Esser?= <besser82@fedoraproject.org>
-+Date: Mon, 13 Apr 2020 20:12:11 +0200
-+Subject: include: Declare gVERSION global as 'extern'.
++++ b/meta-oe/recipes-extended/pmdk/files/0001-examples-Initialize-child_idx.patch
+@@ -0,0 +1,47 @@
++From 721a48e5397bd4ab454482041e55671eae7b189f Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 11 May 2020 18:01:11 -0700
++Subject: [PATCH] examples: Initialize child_idx
 +
-+Fixes build with '-fno-common'.
++Assign UINT_MAX and assert it
 +
-+Upstream-Status: Submitted [https://github.com/eclipse/mraa/pull/1012]
-+Signed-off-by: Adrian Bunk <bunk@stusta.de>
++Fixes warning
++rtree_map.c:358:12: error: 'child_idx' may be used uninitialized
++in this function [-Werror=maybe-uninitialized]
++
++Upstream-Status: Submitted [https://github.com/pmem/pmdk/pull/4802]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ include/version.h | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ src/examples/libpmemobj/tree_map/rtree_map.c | 4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
 +
-+diff --git a/include/version.h b/include/version.h
-+index 47366ef..3a567a1 100644
-+--- a/include/version.h
-++++ b/include/version.h
-+@@ -11,8 +11,8 @@
-+ extern "C" {
-+ #endif
++diff --git a/src/examples/libpmemobj/tree_map/rtree_map.c b/src/examples/libpmemobj/tree_map/rtree_map.c
++index 995e22bb9..6b3ead65c 100644
++--- a/src/examples/libpmemobj/tree_map/rtree_map.c
+++++ b/src/examples/libpmemobj/tree_map/rtree_map.c
++@@ -8,6 +8,7 @@
++ #include <ex_common.h>
++ #include <assert.h>
++ #include <errno.h>
+++#include <limits.h>
++ #include <stdlib.h>
++ #include <stdbool.h>
 + 
-+-const char* gVERSION;
-+-const char* gVERSION_SHORT;
-++extern const char* gVERSION;
-++extern const char* gVERSION_SHORT;
++@@ -320,12 +321,13 @@ has_only_one_child(TOID(struct tree_map_node) node, unsigned *child_idx)
++ static void
++ remove_extra_node(TOID(struct tree_map_node) *node)
++ {
++-	unsigned child_idx;
+++	unsigned child_idx = UINT_MAX;
++ 	TOID(struct tree_map_node) tmp, tmp_child;
 + 
-+ #ifdef __cplusplus
-+ }
++ 	/* Our node has child with only one child. */
++ 	tmp = *node;
++ 	has_only_one_child(tmp, &child_idx);
+++	assert(child_idx != UINT_MAX);
++ 	tmp_child = D_RO(tmp)->slots[child_idx];
++ 
++ 	/*
 +-- 
-+2.17.1
++2.26.2
 +
-diff --git a/meta-oe/recipes-extended/mraa/mraa_git.bb b/meta-oe/recipes-extended/mraa/mraa_git.bb
-index 403d641ee..7c2441632 100644
---- a/meta-oe/recipes-extended/mraa/mraa_git.bb
-+++ b/meta-oe/recipes-extended/mraa/mraa_git.bb
-@@ -10,6 +10,7 @@ PV = "2.1.0+git${SRCPV}"
- 
- SRC_URI = "git://github.com/eclipse/${BPN}.git;protocol=http \
-            file://0001-cmake-Use-a-regular-expression-to-match-x86-architec.patch \
-+           file://0001-include-Declare-gVERSION-global-as-extern.patch \
-            "
- 
- S = "${WORKDIR}/git"
-@@ -27,8 +28,6 @@ EXTRA_OECMAKE_append = " -DINSTALLTOOLS:BOOL=ON -DFIRMATA=ON -DCMAKE_SKIP_RPATH=
-                          -DPYTHON_INCLUDE_DIR=${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI} \
-                        "
- 
--CFLAGS += "-fcommon"
+diff --git a/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch b/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
+deleted file mode 100644
+index ca2a1f6430..0000000000
+--- a/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 231eb4c75fbfaaf90bca7702bdaf55cf701a3527 Mon Sep 17 00:00:00 2001
+-From: Alistair Francis <alistair.francis@wdc.com>
+-Date: Mon, 23 Jul 2018 11:23:39 -0700
+-Subject: [PATCH] jemalloc/jemalloc.cfg: Specify the host when building
+- jemalloc
 -
- # Prepend mraa-utils to make sure bindir ends up in there
- PACKAGES =+ "${PN}-utils"
+-To avoid this error:
+-    configure: error: cannot run C compiled programs.
+-    If you meant to cross compile, use `--host'.
+-when cross compiling specify the host when configuring jemalloc.
+-
+-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+-Upstream-Status: Inappropriate [configuration]
+----
+- src/jemalloc/jemalloc.cfg | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/src/jemalloc/jemalloc.cfg b/src/jemalloc/jemalloc.cfg
+-index 196129de6..79ebbab1c 100644
+---- a/src/jemalloc/jemalloc.cfg
+-+++ b/src/jemalloc/jemalloc.cfg
+-@@ -3,3 +3,4 @@
+- --with-private-namespace=je_vmem_
+- --disable-xmalloc
+- --disable-munmap
+-+--host=${HOST_SYS}
+--- 
+-2.14.4
+-
+diff --git a/meta-oe/recipes-extended/pmdk/files/0001-os_posix-Use-__FreeBSD__-to-control-secure_getenv-de.patch b/meta-oe/recipes-extended/pmdk/files/0001-os_posix-Use-__FreeBSD__-to-control-secure_getenv-de.patch
+deleted file mode 100644
+index 33f25b6a6b..0000000000
+--- a/meta-oe/recipes-extended/pmdk/files/0001-os_posix-Use-__FreeBSD__-to-control-secure_getenv-de.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From 7d0732d69a774e28bc46b8b487d9f61bdd8afbff Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sun, 6 Oct 2019 18:15:44 -0700
+-Subject: [PATCH] os_posix: Use __FreeBSD__ to control secure_getenv definition
+-
+-__USE_GNU does not cover all Linux platforms, e.g. when using musl as C
+-library, __USE_GNU may not be defined but it does provide secure_getenv
+-so instead of narrowing the else condition, lets speicifically check for
+-FreeBSD being the platform, since that seems to be the intention here
+-anyway
+-
+-Upstream-Status: Submitted [https://github.com/pmem/pmdk/pull/3999]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/common/os_posix.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/common/os_posix.c b/src/common/os_posix.c
+-index a9a37ef84..052db2383 100644
+---- a/src/common/os_posix.c
+-+++ b/src/common/os_posix.c
+-@@ -346,7 +346,7 @@ os_setenv(const char *name, const char *value, int overwrite)
+- /*
+-  * secure_getenv -- provide GNU secure_getenv for FreeBSD
+-  */
+--#ifndef __USE_GNU
+-+#if defined(__FreeBSD__)
+- static char *
+- secure_getenv(const char *name)
+- {
+--- 
+-2.23.0
+-
+diff --git a/meta-oe/recipes-extended/pmdk/pmdk_1.7.bb b/meta-oe/recipes-extended/pmdk/pmdk_1.8.bb
+similarity index 82%
+rename from meta-oe/recipes-extended/pmdk/pmdk_1.7.bb
+rename to meta-oe/recipes-extended/pmdk/pmdk_1.8.bb
+index f5066da0d8..fe7b760e22 100644
+--- a/meta-oe/recipes-extended/pmdk/pmdk_1.7.bb
++++ b/meta-oe/recipes-extended/pmdk/pmdk_1.8.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Persistent Memory Development Kit"
+ HOMEPAGE = "http://pmem.io"
+ SECTION = "libs"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=7db1106255a1baa80391fd2e21eebab7"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=1b8430f251523f1bff0c9fb95da7e0ca"
+ DEPENDS = "ndctl"
+ 
+ # Required to have the fts.h header for musl
+@@ -12,12 +12,11 @@ DEPENDS_append_libc-musl = " fts"
+ S = "${WORKDIR}/git"
+ 
+ SRC_URI = "git://github.com/pmem/pmdk.git \
+-           file://0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch \
++           file://0001-examples-Initialize-child_idx.patch \
+            file://0002-Makefile-Don-t-install-the-docs.patch \
+-           file://0001-os_posix-Use-__FreeBSD__-to-control-secure_getenv-de.patch \
+           "
+ 
+-SRCREV = "bc5e309485df61c452d08367e4b13ba9dfed5071"
++SRCREV = "0245d75eaf0f6106c86a7926a45fdf2149e37eaa"
+ 
+ inherit autotools-brokensep pkgconfig
+ 
+@@ -31,6 +30,10 @@ EXTRA_OEMAKE = "BUILD_EXAMPLES='n' HOST_SYS='${HOST_SYS}' EXTRA_CFLAGS='${SELECT
+ # Fix the missing fts libs when using musl
+ EXTRA_OEMAKE_append_libc-musl = " EXTRA_LIBS='-lfts'"
+ 
++do_configure_prepend() {
++	touch .skip-doc
++}
++
+ do_install() {
+ 	oe_runmake prefix=${prefix} DESTDIR=${D} install
  
 -- 
-2.17.1
+2.26.2
 
