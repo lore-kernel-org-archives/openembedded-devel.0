@@ -1,71 +1,52 @@
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web11.5470.1589289510438023972
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+ by mx.groups.io with SMTP id smtpd.web12.6212.1589291726687583268
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 May 2020 06:18:30 -0700
+ Tue, 12 May 2020 06:55:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linuxfoundation.org header.s=google header.b=Pj5sRKZ5;
- spf=pass (domain: linuxfoundation.org, ip: 209.85.221.41, mailfrom: richard.purdie@linuxfoundation.org)
-Received: by mail-wr1-f41.google.com with SMTP id l17so1781294wrr.4
-        for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2020 06:18:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google;
-        h=message-id:subject:from:to:date:user-agent:mime-version
-         :content-transfer-encoding;
-        bh=hq28x0DYhl9Q8t/jJwr8KHc5CtfuXKkb7w5kl/A63Gk=;
-        b=Pj5sRKZ5Yy3u3fBxBKG+bqLodIxvLqbOVv0nNzkMMjmtetp7cLKD1fJ4rSAKW5ihMF
-         umnxqViq+9iMdjRLiVTBjHgrrAn6Q92bEdf6Y7aBuy/JsnMAnse49vRN6kQJ1jJx4JWI
-         f2xOHNrROPKaoTZHFHGX1q6eiTkTUg2eVRnVs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:message-id:subject:from:to:date:user-agent
-         :mime-version:content-transfer-encoding;
-        bh=hq28x0DYhl9Q8t/jJwr8KHc5CtfuXKkb7w5kl/A63Gk=;
-        b=F+DnUFNmmJcNfJfioBEXKrsK27vf7xS68Iag+dKGZ774TOLDeX7YamI2Z1+CUD69eT
-         6USfdrzXbO/KtofSab4OulI7XMo9XC6HTGt2loood0iiitfs1M5R1njifUm9E+0FFYHj
-         4XhX3gkxFRW/19vMApz2SUwiDMtrWeabl2pTAXzzpmWJwXVnLPUk5Mbs+uO5gYCGHaSh
-         2OOUKi6XxZR+gOcfHPhE94m/ZyAoCdO8QVa5NRhL6HEuy1LGTCwUXH2EKUw28dwjcY8F
-         eLbiEY4GETm6V3M2hfZcbseDfpyQylIHgSQv034cSb/H2Z56bixP8ABESuJ82iETIbgH
-         FUPg==
-X-Gm-Message-State: AGi0PuZEAL/SCp3pYVxRDLjzZn92W6H8atTm1xGu0gg1Tg3RacCOoSYq
-	2Szzz8DQNfkaA7M2UuS+0R0AB3O62Cw=
-X-Google-Smtp-Source: APiQypKEN88pDK+lMPbs5uJgSAv5UlVDTXsyO3Qz+AENwTpKlDNIgBCFwf1ZW5A9ceu3vgNCegVszg==
-X-Received: by 2002:adf:fe07:: with SMTP id n7mr6846495wrr.259.1589289508476;
-        Tue, 12 May 2020 06:18:28 -0700 (PDT)
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from hex (5751f4a1.skybroadband.com. [87.81.244.161])
-        by smtp.gmail.com with ESMTPSA id n7sm13770187wro.94.2020.05.12.06.18.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 May 2020 06:18:27 -0700 (PDT)
-Message-ID: <b7017ef93f45a7a825d42d1ae3f4c5082ea45186.camel@linuxfoundation.org>
-Subject: meta-openembedded dunfell maintainer
-From: "Richard Purdie" <richard.purdie@linuxfoundation.org>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
- openembedded-architecture <openembedded-architecture@lists.openembedded.org>
-Date: Tue, 12 May 2020 14:18:26 +0100
-User-Agent: Evolution 3.36.1-2 
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+ dkim=pass header.i=@stusta.de header.s=default header.b=nRJxb7lG;
+ spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=h6oi=62=stusta.de=bunk@stusta.mhn.de)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49LzpN6Fsgz4y
+	for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2020 15:55:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1589291725;
+	bh=9LPgK/xiqwIrOyQufjKyIRCa3EZWj6r4VtQ0Eo7n/lM=;
+	h=From:To:Subject:Date:From;
+	b=nRJxb7lG9BRq+rkK2unG5ez1xjXAhyEX+MTFNo9g2ZfZUcE12caCi2qgE3PLEG5Q1
+	 4Q9d7c4vsD/02QX2708ai4LnB2/h82Jk18xLK31IQspt38Dqn9ScUM0ybPkaHiF45T
+	 1GpIYGQQ2cbGIiFNCyxhdiKLwYt72yTpHA/pDl49ZwNWHgRiQH0fAUjaOi95wSJ0qU
+	 FFf9uNF9F1bkvAlVebRpI16cKCm79SbR8FGmYABGJniWfc2pMpr3zwBiOecHOIFF/d
+	 82DMlILx16OjEN1+xzytGG9yyqL/JZTom28oBzQbYvxg1FLvLb+ovnMWdfuAsmbSrG
+	 eFqFb+InZtZi6o/CPc9rVRbbuUJK8aViMM4wewyfJlRTMJUyQBh2cK14Gaq2uHXl4F
+	 +BP33i70iUSyIlemlyIUJIZIRyE47jDxafQ5WazbCIBop9SLDfUOnXHr+dLzX1mEjd
+	 PKxe3GiYQNhcYi83736Vprz3MgsvbW8FVKA6KfS/HEiJFrzA9d5V8167QQVXJxr3qV
+	 BXlEGAGsyeD2OQDZRDOipv9qG5CCFEc16EE6njeeP3C5Kq7DYYWjGAw92RgAHsHel2
+	 01LWWd8Hwysq2c+vQHotrg7luKi83tySU5swgqLW6ouhrt8369ANSr8Wefbk0JSHWX
+	 yj3eYNMSPZzHEHAiK+y4fsSM=
+From: "Adrian Bunk" <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [OE-core][PATCH] iproute2: Remove -fcommon
+Date: Tue, 12 May 2020 16:55:16 +0300
+Message-Id: <20200512135523.19970-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
 
-The OE TSC would like to ask if there is anyone interested in stepping
-up to look after the dunfell branch of meta-openembedded?
+This was fixed in upstream version 5.5.0.
 
-dunfell is an LTS release for Yocto Project and it would be good to
-have some kind of plan for meta-openembedded as well.
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ meta/recipes-connectivity/iproute2/iproute2_5.5.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-We believe the 'policy' for the branch would be broadly similar to the
-one being used for openembedded-core, 
-https://wiki.yoctoproject.org/wiki/LTS.
-
-If anyone is interested, please reply here or talk to Khem in the first
-instance as the layer maintainer. He can no doubt answer questions if
-anyone does want to discuss what the role would involve. Its usually
-for the layer maintainer to choose the maintainer but the OE TSC would
-be the final decision maker if needed.
-
-Cheers,
-
-Richard
-(on behalf of Khem and the OE TSC)
-
+diff --git a/meta/recipes-connectivity/iproute2/iproute2_5.5.0.bb b/meta/recipes-connectivity/iproute2/iproute2_5.5.0.bb
+index ad0ab13c9a..7ad4b8eee6 100644
+--- a/meta/recipes-connectivity/iproute2/iproute2_5.5.0.bb
++++ b/meta/recipes-connectivity/iproute2/iproute2_5.5.0.bb
+@@ -9,4 +9,4 @@ SRC_URI[sha256sum] = "bac543435cac208a11db44c9cc8e35aa902befef8750594654ee71941c
+ 
+ # CFLAGS are computed in Makefile and reference CCOPTS
+ #
+-EXTRA_OEMAKE_append = " CCOPTS='${CFLAGS} -fcommon'"
++EXTRA_OEMAKE_append = " CCOPTS='${CFLAGS}'"
+-- 
+2.17.1
 
