@@ -1,77 +1,84 @@
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web10.1661.1589318710223187411
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web10.2158.1589320293678458120
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 May 2020 14:25:10 -0700
+ Tue, 12 May 2020 14:51:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linuxfoundation.org header.s=google header.b=JcFUiBhG;
- spf=pass (domain: linuxfoundation.org, ip: 209.85.128.48, mailfrom: richard.purdie@linuxfoundation.org)
-Received: by mail-wm1-f48.google.com with SMTP id g12so25588275wmh.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2020 14:25:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google;
-        h=message-id:subject:from:to:date:in-reply-to:references:user-agent
-         :mime-version:content-transfer-encoding;
-        bh=8UR1f2AF+AlUy9aLo/cZDl88feuHbeP4uO69AAQ9H48=;
-        b=JcFUiBhGbnHQF9VIaqaSkvVPsyEARJ1LpHOOS8kybZzuynCHSJ21+0yufjt2XjLoZf
-         CVKHe1hbrMLpcwxEoL63TfHFS758crl9gyoZOkt1U3kMZyPBWvW2v7ddHJHYAA5pjmpI
-         ljNx4XXD5J1Rck9UiuLlTOFCFb7M22z4so8nU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-         :references:user-agent:mime-version:content-transfer-encoding;
-        bh=8UR1f2AF+AlUy9aLo/cZDl88feuHbeP4uO69AAQ9H48=;
-        b=RGzNKBm9TALhVnxJJ2SWXNOJasrgnXDRu0UG7409Z0m0QVAWbTHcmWHcOlT46Y94cx
-         +9ueYEihAum+3Dxt3UqdcsaKctxKlqfD0xHzqLwInkGpTliYIEpYIj5Ls+g0aPtnkAIG
-         kqhEsIT2STzH52D5AJ4gsw2aqfaca+thzhRfvGAzRcNEAETKy2dF8l4A8e95J4VKFAe5
-         pxQn2awbYSL0Nt/f4P8tmxBe4sL9A2pPrE1BEB2jqZljKwvF22i7Rnp6fonKcKZ+qkW7
-         y3F6IeyYSX9BfDIkissV2rE4NrbYMxo8zkvo6QNkSSwi9Derae0Y1Vy993Ds3qJLHV0k
-         hR1w==
-X-Gm-Message-State: AGi0PuYOw3B9kBG3nY8x0jCGrvzcfFp9PyJykJE3jVVwp7BkcXPe6BF5
-	JyaX8+qMqMYJp8xpnHqKASEgDxcy+Vw=
-X-Google-Smtp-Source: APiQypKjiZLxzZwMCWtKUh/8n2nSu53BrTiZnyoFNm7Bdc5lU/dX0Lfslc6g+0W87uDbInIR9pn5JA==
-X-Received: by 2002:a1c:f312:: with SMTP id q18mr39057313wmq.175.1589318708468;
-        Tue, 12 May 2020 14:25:08 -0700 (PDT)
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from hex (5751f4a1.skybroadband.com. [87.81.244.161])
-        by smtp.gmail.com with ESMTPSA id t6sm8888850wma.4.2020.05.12.14.25.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 May 2020 14:25:07 -0700 (PDT)
-Message-ID: <3b88b310444e4e1d90014d9e647e9534af3d6b08.camel@linuxfoundation.org>
-Subject: Re: [oe] meta-openembedded dunfell maintainer
-From: "Richard Purdie" <richard.purdie@linuxfoundation.org>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
- openembedded-architecture <openembedded-architecture@lists.openembedded.org>
-Date: Tue, 12 May 2020 22:25:06 +0100
-In-Reply-To: <b7017ef93f45a7a825d42d1ae3f4c5082ea45186.camel@linuxfoundation.org>
-References: 
-	<b7017ef93f45a7a825d42d1ae3f4c5082ea45186.camel@linuxfoundation.org>
-User-Agent: Evolution 3.36.1-2 
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: trevor.gamblin@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 04CLpWDA014331
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2020 14:51:33 -0700 (PDT)
+Received: from yow-tgamblin-fedora2.wrs.com (128.224.56.206) by
+ ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+ 14.3.487.0; Tue, 12 May 2020 14:51:32 -0700
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <randy.macleod@windriver.com>
+Subject: [meta-python][PATCH] python3-dbusmock: re-add recipe and fix patch path
+Date: Tue, 12 May 2020 17:51:31 -0400
+Message-ID: <20200512215131.4000236-1-trevor.gamblin@windriver.com>
+X-Mailer: git-send-email 2.25.4
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Tue, 2020-05-12 at 14:18 +0100, Richard Purdie wrote:
-> The OE TSC would like to ask if there is anyone interested in stepping
-> up to look after the dunfell branch of meta-openembedded?
-> 
-> dunfell is an LTS release for Yocto Project and it would be good to
-> have some kind of plan for meta-openembedded as well.
-> 
-> We believe the 'policy' for the branch would be broadly similar to the
-> one being used for openembedded-core, 
-> https://wiki.yoctoproject.org/wiki/LTS.
-> 
-> If anyone is interested, please reply here or talk to Khem in the first
-> instance as the layer maintainer. He can no doubt answer questions if
-> anyone does want to discuss what the role would involve. Its usually
-> for the layer maintainer to choose the maintainer but the OE TSC would
-> be the final decision maker if needed.
+Running the "non-gpl3" builder in my local autobuilder fails
+almost immediately because python3-dbusmock is not available. It
+appears that during the creation of meta-python2 and cleanup of
+meta-python that the recipe for python3-dbusmock got removed
+entirely, so I've re-added it, and renamed the corresponding
+patch folder so that it can find the patches listed in the
+recipe.
 
-There was a little bad timing and after the TSC was asked to do this,
-Armin stepped forward to maintain dunfell but the TSC didn't realise.
-Thanks Armin!
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+---
+ ...y-to-add-own-objects-to-internal-obj.patch |  0
+ ...ty-to-import-templates-from-packages.patch |  0
+ .../python/python3-dbusmock_0.16.7.bb         | 25 +++++++++++++++++++
+ 3 files changed, 25 insertions(+)
+ rename meta-python/recipes-devtools/python/{python-dbusmock => python3-dbusmock}/0001-Add-functionality-to-add-own-objects-to-internal-obj.patch (100%)
+ rename meta-python/recipes-devtools/python/{python-dbusmock => python3-dbusmock}/0002-Add-possibility-to-import-templates-from-packages.patch (100%)
+ create mode 100644 meta-python/recipes-devtools/python/python3-dbusmock_0.16.7.bb
 
-Cheers,
-
-Richard
+diff --git a/meta-python/recipes-devtools/python/python-dbusmock/0001-Add-functionality-to-add-own-objects-to-internal-obj.patch b/meta-python/recipes-devtools/python/python3-dbusmock/0001-Add-functionality-to-add-own-objects-to-internal-obj.patch
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-dbusmock/0001-Add-functionality-to-add-own-objects-to-internal-obj.patch
+rename to meta-python/recipes-devtools/python/python3-dbusmock/0001-Add-functionality-to-add-own-objects-to-internal-obj.patch
+diff --git a/meta-python/recipes-devtools/python/python-dbusmock/0002-Add-possibility-to-import-templates-from-packages.patch b/meta-python/recipes-devtools/python/python3-dbusmock/0002-Add-possibility-to-import-templates-from-packages.patch
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-dbusmock/0002-Add-possibility-to-import-templates-from-packages.patch
+rename to meta-python/recipes-devtools/python/python3-dbusmock/0002-Add-possibility-to-import-templates-from-packages.patch
+diff --git a/meta-python/recipes-devtools/python/python3-dbusmock_0.16.7.bb b/meta-python/recipes-devtools/python/python3-dbusmock_0.16.7.bb
+new file mode 100644
+index 000000000..cd760ab89
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-dbusmock_0.16.7.bb
+@@ -0,0 +1,25 @@
++# Copyright (c) 2014 LG Electronics, Inc.
++
++SUMMARY = "With this program/Python library you can easily create mock objects on D-Bus"
++AUTHOR = "Martin Pitt <martin.pitt@ubuntu.com>"
++
++LICENSE = "GPL-3.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=e6a600fd5e1d9cbde2d983680233ad02"
++
++SRC_URI[md5sum] = "80f8caa838fad96483a8751e11d384f9"
++SRC_URI[sha256sum] = "2d2ea892fa4633c3ec6ac1e912120ec493047a5c6522849b7d1c95ad755bce75"
++
++SRC_URI += " \
++    file://0001-Add-functionality-to-add-own-objects-to-internal-obj.patch \
++    file://0002-Add-possibility-to-import-templates-from-packages.patch \
++"
++
++PYPI_PACKAGE = "python-dbusmock"
++
++inherit pypi setuptools3
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-dbus \
++    ${PYTHON_PN}-pygobject \
++    ${PYTHON_PN}-xml \
++    "
+-- 
+2.25.4
 
