@@ -1,84 +1,60 @@
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web10.2158.1589320293678458120
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.484.1589325644584924971
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 May 2020 14:51:33 -0700
+ Tue, 12 May 2020 16:20:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: trevor.gamblin@windriver.com)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: trevor.gamblin@windriver.com)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 04CLpWDA014331
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 04CNKCHf014978
 	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2020 14:51:33 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2020 16:20:33 -0700
 Received: from yow-tgamblin-fedora2.wrs.com (128.224.56.206) by
  ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
- 14.3.487.0; Tue, 12 May 2020 14:51:32 -0700
+ 14.3.487.0; Tue, 12 May 2020 16:20:17 -0700
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: <randy.macleod@windriver.com>
-Subject: [meta-python][PATCH] python3-dbusmock: re-add recipe and fix patch path
-Date: Tue, 12 May 2020 17:51:31 -0400
-Message-ID: <20200512215131.4000236-1-trevor.gamblin@windriver.com>
+Subject: [meta-python][PATCH] python3-pyyaml: add python3-netclient to RDEPENDS
+Date: Tue, 12 May 2020 19:20:16 -0400
+Message-ID: <20200512232016.4055077-1-trevor.gamblin@windriver.com>
 X-Mailer: git-send-email 2.25.4
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Running the "non-gpl3" builder in my local autobuilder fails
-almost immediately because python3-dbusmock is not available. It
-appears that during the creation of meta-python2 and cleanup of
-meta-python that the recipe for python3-dbusmock got removed
-entirely, so I've re-added it, and renamed the corresponding
-patch folder so that it can find the patches listed in the
-recipe.
+pyyaml relies on the base64 module (which is in python3-netclient),
+but it is not in RDEPENDS, so add it:
+
+|Python 3.8.2 (default, Apr 27 2020, 08:51:00)
+|[GCC 9.3.0] on linux
+|Type "help", "copyright", "credits" or "license" for more information.
+|>>> import yaml
+|Traceback (most recent call last):
+|File "<stdin>", line 1, in <module>
+|File "/usr/lib64/python3.8/site-packages/yaml/_init_.py", line 8, in <module>
+|from .loader import *
+|File "/usr/lib64/python3.8/site-packages/yaml/loader.py", line 8, in <module>
+|from .constructor import *
+|File "/usr/lib64/python3.8/site-packages/yaml/constructor.py", line 14, in <module>
+|import collections.abc, datetime, base64, binascii, re, sys, types
+|ModuleNotFoundError: No module named 'base64'
 
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 ---
- ...y-to-add-own-objects-to-internal-obj.patch |  0
- ...ty-to-import-templates-from-packages.patch |  0
- .../python/python3-dbusmock_0.16.7.bb         | 25 +++++++++++++++++++
- 3 files changed, 25 insertions(+)
- rename meta-python/recipes-devtools/python/{python-dbusmock => python3-dbusmock}/0001-Add-functionality-to-add-own-objects-to-internal-obj.patch (100%)
- rename meta-python/recipes-devtools/python/{python-dbusmock => python3-dbusmock}/0002-Add-possibility-to-import-templates-from-packages.patch (100%)
- create mode 100644 meta-python/recipes-devtools/python/python3-dbusmock_0.16.7.bb
+ meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-dbusmock/0001-Add-functionality-to-add-own-objects-to-internal-obj.patch b/meta-python/recipes-devtools/python/python3-dbusmock/0001-Add-functionality-to-add-own-objects-to-internal-obj.patch
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-dbusmock/0001-Add-functionality-to-add-own-objects-to-internal-obj.patch
-rename to meta-python/recipes-devtools/python/python3-dbusmock/0001-Add-functionality-to-add-own-objects-to-internal-obj.patch
-diff --git a/meta-python/recipes-devtools/python/python-dbusmock/0002-Add-possibility-to-import-templates-from-packages.patch b/meta-python/recipes-devtools/python/python3-dbusmock/0002-Add-possibility-to-import-templates-from-packages.patch
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-dbusmock/0002-Add-possibility-to-import-templates-from-packages.patch
-rename to meta-python/recipes-devtools/python/python3-dbusmock/0002-Add-possibility-to-import-templates-from-packages.patch
-diff --git a/meta-python/recipes-devtools/python/python3-dbusmock_0.16.7.bb b/meta-python/recipes-devtools/python/python3-dbusmock_0.16.7.bb
-new file mode 100644
-index 000000000..cd760ab89
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-dbusmock_0.16.7.bb
-@@ -0,0 +1,25 @@
-+# Copyright (c) 2014 LG Electronics, Inc.
-+
-+SUMMARY = "With this program/Python library you can easily create mock objects on D-Bus"
-+AUTHOR = "Martin Pitt <martin.pitt@ubuntu.com>"
-+
-+LICENSE = "GPL-3.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=e6a600fd5e1d9cbde2d983680233ad02"
-+
-+SRC_URI[md5sum] = "80f8caa838fad96483a8751e11d384f9"
-+SRC_URI[sha256sum] = "2d2ea892fa4633c3ec6ac1e912120ec493047a5c6522849b7d1c95ad755bce75"
-+
-+SRC_URI += " \
-+    file://0001-Add-functionality-to-add-own-objects-to-internal-obj.patch \
-+    file://0002-Add-possibility-to-import-templates-from-packages.patch \
-+"
-+
-+PYPI_PACKAGE = "python-dbusmock"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-dbus \
-+    ${PYTHON_PN}-pygobject \
-+    ${PYTHON_PN}-xml \
-+    "
+diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
+index b5425b8c9..17868a25d 100644
+--- a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
+@@ -13,6 +13,7 @@ SRC_URI[sha256sum] = "e9f45bd5b92c7974e59bcd2dcc8631a6b6cc380a904725fce7bc08872e
+ 
+ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-netclient \
+ "
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.25.4
 
