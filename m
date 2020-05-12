@@ -1,52 +1,55 @@
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
- by mx.groups.io with SMTP id smtpd.web12.6214.1589291729091172011
+ by mx.groups.io with SMTP id smtpd.web12.6215.1589291729384752926
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 12 May 2020 06:55:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@stusta.de header.s=default header.b=eOOGhxw7;
+ dkim=pass header.i=@stusta.de header.s=default header.b=qm5RfVAz;
  spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=h6oi=62=stusta.de=bunk@stusta.mhn.de)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49LzpR1gvkzL9
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49LzpR4MFMz4y
 	for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2020 15:55:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
 	s=default; t=1589291727;
-	bh=PUg6v4rtpbUvNikYotzPhZzBLJyjm5l+luBRnubIhPs=;
+	bh=7dXEm4J5++YGKTw0oqsWLIRGwPyTnUlL0g7wQ6OSeAY=;
 	h=From:To:Subject:Date:From;
-	b=eOOGhxw7lSyqqeIe5Ib1BIr6ANxqg5y3GsC1I0zGDrIJaCUKPNj7yjH9DLSSmpTx2
-	 wk4jmySP30rRu5JTdShCH8EUCmwT0J3mrB09Vu17aqTvcSK58vT2d7Y286BW/oX1Qa
-	 zLXyCKts6SM9gqfBI6UoYvTBFLEZlNLTgIJVh1bDs7kmiaANbqzk8ECDsuh4E4P1Wp
-	 eStD8IVp5RXrE7amCH0k8/8spqvSCYtqcFbMYItQVLje32bCbL8+PFLQrCL3YhPnLf
-	 TmIsbXGgDUJEiu8zRaHQI7FbrNYbFApzHcXE9hmLaGQrgRN8opiNT2JoDrI7NDchJH
-	 fMB6yTGkHkXV5p4Qyfrg3TSpDmVNUvvBpRsUA16H5dm5F427B83d7Rvh3QD64Gll9V
-	 Qj8sjwCziuy/PzKFqhDscR0TCQX1DuSawSd173W5C5c69IGwgQJhXiQwv87z/Meg6I
-	 TGi3Hy6RPqNwMD27drXEPX+infJRbbYkC+zAfO1tcxoYPl3NDTLyN0QWD3GUy+fJBf
-	 qaEQUSuF4awqrpYkK0NEl0kan6NSJIRAAYsvv8PG1DZHAIuy+3lWmKjLnjPjk4GAfs
-	 oZT1WIuezlzgCBeSJSqMhvr0yHwssX++fL8IlZNqMfOrpUq0e/XlQGoprAZHRyE6vf
-	 jbsacv3PfIDQkeIJzvPDyndE=
+	b=qm5RfVAzpae7ZZFlGHqwiA8u+oOguUWRKC87A8lYhq3D3d++a1T7bhTyIPbfz3gPP
+	 VCQJEUyuRFtaqVTuhIOk4uI4uxL+q6Qd+ng7YrALU8byFLJQowIUO4RN+620z6Bmk9
+	 OIL4ivHaKtMzptt4pYUTAyT9VcuTbWNV6Vrv491tUkudXNxfNTzCNnBWppjym234K6
+	 nim6PWE0Ggsh/322/HIRe7Duw/K1btZm7aRJL7OZNURt0pNORPIZDFbv5+WiI+ICEB
+	 DHPV0Oprlkz2ooRJJifVnxtzNcUXeEoa7VAdxAaGyKn24OGx/xcailP9e8TCfVdcJ3
+	 Gjca6rKhPIKM8+zPl3HAV/sCGPMNp+qkIZZdfCuh7J60ngPtD8S1dhvZEIO2tTG3wg
+	 yn50HHuJ5c7Q6OXc6FYLIcSoxH3ArhmPFiriYRsfcvHgJhP3DaRmSa2PgfIQgInl/T
+	 wyZ4Q2tCQQkfEhpm8t82AaO4pIdWIWNu+uJ2xhP5ILk2d13XGdn1skbrfm/wravvJJ
+	 vb0Kc2ckZ1W7vhxvhrMQj6rXQGcL8fpkQnvt+INEu87+uVpbdlvAkGMwDmBgH9/32D
+	 fAwRCgrGpBU4VUUw5OgfG6RfhVvYzSkCGe5Oe9ckFp0WofhwFlvWZICPiGArHmFCxj
+	 14Lz+mo2Z8E7VUH/fC5hJ3WA=
 From: "Adrian Bunk" <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [OE-core][PATCH] at-spi2-atk: Remove -fcommon
-Date: Tue, 12 May 2020 16:55:22 +0300
-Message-Id: <20200512135523.19970-7-bunk@stusta.de>
+Subject: [OE-core][PATCH] llvm: Remove -fcommon
+Date: Tue, 12 May 2020 16:55:23 +0300
+Message-Id: <20200512135523.19970-8-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
 
-This was fixed in upstream version 2.34.0.
+I cannot reproduce the problem.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- meta/recipes-support/atk/at-spi2-atk_2.34.2.bb | 2 --
+ meta/recipes-devtools/llvm/llvm_git.bb | 2 --
  1 file changed, 2 deletions(-)
 
-diff --git a/meta/recipes-support/atk/at-spi2-atk_2.34.2.bb b/meta/recipes-support/atk/at-spi2-atk_2.34.2.bb
-index db62ae8fac..107d312d14 100644
---- a/meta/recipes-support/atk/at-spi2-atk_2.34.2.bb
-+++ b/meta/recipes-support/atk/at-spi2-atk_2.34.2.bb
-@@ -17,5 +17,3 @@ FILES_${PN}-gnome = "${libdir}/gnome-settings-daemon-3.0/gtk-modules"
- FILES_${PN}-gtk2 = "${libdir}/gtk-2.0/modules/libatk-bridge.*"
+diff --git a/meta/recipes-devtools/llvm/llvm_git.bb b/meta/recipes-devtools/llvm/llvm_git.bb
+index a8607f5008..d24ed761bf 100644
+--- a/meta/recipes-devtools/llvm/llvm_git.bb
++++ b/meta/recipes-devtools/llvm/llvm_git.bb
+@@ -92,8 +92,6 @@ EXTRA_OECMAKE_append_class-nativesdk = "\
+                   -DLLVM_CONFIG_PATH=${STAGING_BINDIR_NATIVE}/llvm-config${PV} \
+                  "
  
- BBCLASSEXTEND = "native nativesdk"
--
 -CFLAGS += "-fcommon"
+-
+ do_configure_prepend() {
+ # Fix paths in llvm-config
+ 	sed -i "s|sys::path::parent_path(CurrentPath))\.str()|sys::path::parent_path(sys::path::parent_path(CurrentPath))).str()|g" ${S}/tools/llvm-config/llvm-config.cpp
 -- 
 2.17.1
 
