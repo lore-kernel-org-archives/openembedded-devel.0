@@ -1,55 +1,41 @@
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
- by mx.groups.io with SMTP id smtpd.web12.6215.1589291729384752926
+ by mx.groups.io with SMTP id smtpd.web10.6293.1589292368047895145
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 May 2020 06:55:29 -0700
+ Tue, 12 May 2020 07:06:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@stusta.de header.s=default header.b=qm5RfVAz;
+ dkim=pass header.i=@stusta.de header.s=default header.b=pYfVfZtV;
  spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=h6oi=62=stusta.de=bunk@stusta.mhn.de)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49LzpR4MFMz4y
-	for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2020 15:55:27 +0200 (CEST)
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49M02k2727z4y
+	for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2020 16:06:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1589291727;
-	bh=7dXEm4J5++YGKTw0oqsWLIRGwPyTnUlL0g7wQ6OSeAY=;
-	h=From:To:Subject:Date:From;
-	b=qm5RfVAzpae7ZZFlGHqwiA8u+oOguUWRKC87A8lYhq3D3d++a1T7bhTyIPbfz3gPP
-	 VCQJEUyuRFtaqVTuhIOk4uI4uxL+q6Qd+ng7YrALU8byFLJQowIUO4RN+620z6Bmk9
-	 OIL4ivHaKtMzptt4pYUTAyT9VcuTbWNV6Vrv491tUkudXNxfNTzCNnBWppjym234K6
-	 nim6PWE0Ggsh/322/HIRe7Duw/K1btZm7aRJL7OZNURt0pNORPIZDFbv5+WiI+ICEB
-	 DHPV0Oprlkz2ooRJJifVnxtzNcUXeEoa7VAdxAaGyKn24OGx/xcailP9e8TCfVdcJ3
-	 Gjca6rKhPIKM8+zPl3HAV/sCGPMNp+qkIZZdfCuh7J60ngPtD8S1dhvZEIO2tTG3wg
-	 yn50HHuJ5c7Q6OXc6FYLIcSoxH3ArhmPFiriYRsfcvHgJhP3DaRmSa2PgfIQgInl/T
-	 wyZ4Q2tCQQkfEhpm8t82AaO4pIdWIWNu+uJ2xhP5ILk2d13XGdn1skbrfm/wravvJJ
-	 vb0Kc2ckZ1W7vhxvhrMQj6rXQGcL8fpkQnvt+INEu87+uVpbdlvAkGMwDmBgH9/32D
-	 fAwRCgrGpBU4VUUw5OgfG6RfhVvYzSkCGe5Oe9ckFp0WofhwFlvWZICPiGArHmFCxj
-	 14Lz+mo2Z8E7VUH/fC5hJ3WA=
+	s=default; t=1589292366;
+	bh=iyhXsl16mOrdqVSOmaeAQUsZsIEcAgiDsHw70UMDuZA=;
+	h=Date:From:To:Subject:References:In-Reply-To:From;
+	b=pYfVfZtVYOsf+dtJBpGOBjWhGr+OLaGrOrz5KETJDJPEch9DbgwbRj4ydXib1j0qX
+	 rTenamz9+eTaMQcy+1f54N1Ey6KvpNDmSd7darAbHS7qpKlE4K2aMRdHTczJgbidHx
+	 xYk/FMjPlB0NDNzdNBzw9gtY91oNfyy6ocLttN3DFh4LoaKX7jr8rQw91VR+bFlByw
+	 NqPjPJs8BMWeahNCTZBsIhiZfCgarWzsF9/NS1WR2d4lpJUGftx0CE8XW9dMzBUv3Y
+	 4lwDMrwdnh+X6Xg7s+v9swtvpCvvUOnKi7HB9jXwGCMhPScMWT2tRMgyZ9xzK23rRz
+	 m3VTgcwdKXrmAmOo4qzepmR5983GA4Ncobcjo0YuVFfC9AELKjQaljFDOjFtnAz/j8
+	 t0GWfhRkfWjPUNESRkfxVTbbZqkHpLzM1JACZHON3hwqbwRFoQKnTvQtKk+vQTvVgU
+	 FBBmYxfnedlvdZDiTea2v6UyaMUhmLgauzi/OJzFsZJRcdn6reZxA8PhsaMj61iC9+
+	 nEvyZbgTBc7ewagbeUggfHRE7vdImXdukLUBUt30ubGfbumlwSILOWFGObhs/GYBNg
+	 rJXv7LfyT5fvPMIRKvCjlsuqLhl5lkEus1S3fP5USu7dx+UiQ1HkEAebLxTmBBPZO+
+	 38LXbRRZOBvrRP/9D8lYgCgc=
+Date: Tue, 12 May 2020 17:05:59 +0300
 From: "Adrian Bunk" <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [OE-core][PATCH] llvm: Remove -fcommon
-Date: Tue, 12 May 2020 16:55:23 +0300
-Message-Id: <20200512135523.19970-8-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
+Subject: Re: [oe] [OE-core][PATCH] iproute2: Remove -fcommon
+Message-ID: <20200512140559.GB11943@localhost>
+References: <160E4C67E260FD9C.10721@lists.openembedded.org>
+MIME-Version: 1.0
+In-Reply-To: <160E4C67E260FD9C.10721@lists.openembedded.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-I cannot reproduce the problem.
+Sorry, wrong list for these patches.
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
----
- meta/recipes-devtools/llvm/llvm_git.bb | 2 --
- 1 file changed, 2 deletions(-)
-
-diff --git a/meta/recipes-devtools/llvm/llvm_git.bb b/meta/recipes-devtools/llvm/llvm_git.bb
-index a8607f5008..d24ed761bf 100644
---- a/meta/recipes-devtools/llvm/llvm_git.bb
-+++ b/meta/recipes-devtools/llvm/llvm_git.bb
-@@ -92,8 +92,6 @@ EXTRA_OECMAKE_append_class-nativesdk = "\
-                   -DLLVM_CONFIG_PATH=${STAGING_BINDIR_NATIVE}/llvm-config${PV} \
-                  "
- 
--CFLAGS += "-fcommon"
--
- do_configure_prepend() {
- # Fix paths in llvm-config
- 	sed -i "s|sys::path::parent_path(CurrentPath))\.str()|sys::path::parent_path(sys::path::parent_path(CurrentPath))).str()|g" ${S}/tools/llvm-config/llvm-config.cpp
--- 
-2.17.1
-
+cu
+Adrian
