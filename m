@@ -1,64 +1,102 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web10.407.1589314968897943683
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+ by mx.groups.io with SMTP id smtpd.web10.1037.1589316743262652554
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 May 2020 13:22:49 -0700
+ Tue, 12 May 2020 13:52:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: trevor.gamblin@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 04CKMB3a009670
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2020 13:22:32 -0700
-Received: from yow-tgamblin-fedora2.wrs.com (128.224.56.206) by
- ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
- 14.3.487.0; Tue, 12 May 2020 13:22:14 -0700
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH] python3-pytoml: add datetime and stringold to RDEPENDS
-Date: Tue, 12 May 2020 16:22:13 -0400
-Message-ID: <20200512202213.3966452-1-trevor.gamblin@windriver.com>
-X-Mailer: git-send-email 2.25.4
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+ dkim=pass header.i=@stusta.de header.s=default header.b=OtlxSJLs;
+ spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=h6oi=62=stusta.de=bunk@stusta.mhn.de)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49M93T3NTzz4y
+	for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2020 22:52:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1589316741;
+	bh=/0cWJHLeda4ku0hDQHaJeYKLmN7zyaKjL0jv+Qvg+P0=;
+	h=From:To:Subject:Date:From;
+	b=OtlxSJLsHCaB/EGKjNhrGEA8hE7xgtHErVCXvrs3DdO+XoKrwdZNFPAkovbEHat6u
+	 DgFBGdoNSuDLSsFSh/59xT5K0H8r18T/tYlhy5NO5CUtaXpHzvyiuNVRr2FWdWIoh8
+	 K09+gv9JkXNWuCFWmuRv4NWciokvhB18Cp4EVOzDb49ctqZBM9caKb8XXM1JZpzD75
+	 RpePWdQwR+YTXFBYiOIxybKfDB/YiRzcnpVXU7XRDJdCvu4CycBQPW4xTDQTdhBPLM
+	 p6+WpnvrpCMkWvVMRcYz9iyFvr14DlLgUvDLhay22Q18cycIv+S2cVi3m051t6ntRy
+	 qAW64xYAVwZXjyYnWI+UXrejWe1N/qusecmyWfjuYEznsa4kX9lr4xiFoE9Etg5BMy
+	 D20wfzYwzTsJyHbLFqBYkRmvle8JY+f06o/yORcX6viLH3aRHlWCDh931gJtlSsSf3
+	 lTTRYWnKZQVjLfBu1Dae2oqEuTKr3P0Kdz6XyH7BkPU/B3d8hxE0ZrBZzc8H0h1/J0
+	 ObwlE6/u+w0+5crmshyuyyUxHDuZUdTrbODvmOcnA/1iT9qz5XWHN5ocOhsqa13BYU
+	 kP0US0no7jSXrhtJTsMX6wo5eewyGQzLwDMxodAnrMO7SRw6bOnXnYE6Aa+MaP/hYY
+	 /YFBzpIW4IU9e/vJP9uQUqE0=
+From: "Adrian Bunk" <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] mozjs: Remove workaround for gcc < 4.9
+Date: Tue, 12 May 2020 23:52:17 +0300
+Message-Id: <20200512205219.21168-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
 
-Error messages like the following are encountered if datetime and stringold
-are not in RDEPENDS for pytoml, so add them:
-
-|Python 3.8.2 (default, Apr 27 2020, 08:51:00)
-|[GCC 9.3.0] on linux
-|Type "help", "copyright", "credits" or "license" for more information.
-|>>> import pytoml
-|Traceback (most recent call last):
-|File "<stdin>", line 1, in <module>
-|File "/usr/lib64/python3.8/site-packages/pytoml/_init_.py", line 2, in <module>
-|from .parser import load, loads
-|File "/usr/lib64/python3.8/site-packages/pytoml/parser.py", line 3, in <module>
-|from .utils import rfc3339_re, parse_rfc3339_re
-|File "/usr/lib64/python3.8/site-packages/pytoml/utils.py", line 1, in <module>
-|import datetime
-|ModuleNotFoundError: No module named 'datetime'
-
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- meta-python/recipes-devtools/python/python3-pytoml_0.1.21.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ .../0014-fallback-to-2011-C++-standard.patch  | 42 -------------------
+ .../recipes-extended/mozjs/mozjs_60.9.0.bb    |  1 -
+ 2 files changed, 43 deletions(-)
+ delete mode 100644 meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs/0014-fallback-to-2011-C++-standard.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-pytoml_0.1.21.bb b/meta-python/recipes-devtools/python/python3-pytoml_0.1.21.bb
-index b09005ec9..1533a895f 100644
---- a/meta-python/recipes-devtools/python/python3-pytoml_0.1.21.bb
-+++ b/meta-python/recipes-devtools/python/python3-pytoml_0.1.21.bb
-@@ -15,6 +15,11 @@ SRC_URI += " \
- 	file://run-ptest \
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs/0014-fallback-to-2011-C++-standard.patch b/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs/0014-fallback-to-2011-C++-standard.patch
+deleted file mode 100644
+index 7a0d286e1..000000000
+--- a/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs/0014-fallback-to-2011-C++-standard.patch
++++ /dev/null
+@@ -1,42 +0,0 @@
+-Option '-std=gnu++14' has been supported from gcc 4.9. But on some build hosts
+-such as CentOS 7.6 which only has gcc 4.8.5 and fails to configure:
+-
+-| checking whether the host C compiler can be used... no
+-| ERROR: Only GCC 4.9 or newer is supported (found version 4.8.5).
+-
+-Fallback to 2011 C++ standard and lower required gcc version to 4.8.0 which is
+-the same as in previous version 52.9.1 of mozjs.
+-
+-Upstream-Status: Inappropriate [Workaround]
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+----
+-diff --git a/build/moz.configure/toolchain.configure b/build/moz.configure/toolchain.configure
+-index 9c772a8..fc640c7 100755
+---- a/build/moz.configure/toolchain.configure
+-+++ b/build/moz.configure/toolchain.configure
+-@@ -502,10 +502,8 @@ def check_compiler(compiler, language, target):
+-             append_flag('-std=c++14')
+-         # GCC 4.9 indicates that it implements draft C++14 features
+-         # instead of the full language.
+--        elif info.type == 'gcc' and \
+--                info.language_version not in (draft_cxx14_version,
+--                                              cxx14_version):
+--            append_flag('-std=gnu++14')
+-+        elif info.type == 'gcc' and info.language_version != 201103:
+-+            append_flag('-std=gnu++11')
+- 
+-     # We force clang-cl to emulate Visual C++ 2017 version 15.4
+-     if info.type == 'clang-cl' and info.version != '19.11.25547':
+-@@ -903,9 +901,9 @@ def compiler(language, host_or_target, c_compiler=None, other_compiler=None,
+-         # Check the compiler version here instead of in `compiler_version` so
+-         # that the `checking` message doesn't pretend the compiler can be used
+-         # to then bail out one line later.
+--        if info.type == 'gcc' and info.version < '4.9.0':
+-+        if info.type == 'gcc' and info.version < '4.8.0':
+-             raise FatalCheckError(
+--                'Only GCC 4.9 or newer is supported (found version %s).'
+-+                'Only GCC 4.8 or newer is supported (found version %s).'
+-                 % info.version)
+- 
+-         if info.type == 'gcc' and host_or_target.os == 'Android':
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs_60.9.0.bb b/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs_60.9.0.bb
+index 9466c62aa..f13a184b6 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs_60.9.0.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs_60.9.0.bb
+@@ -18,7 +18,6 @@ SRC_URI = " \
+     file://0011-To-fix-build-error-on-arm32BE.patch \
+     file://0012-JS_PUBLIC_API.patch \
+     file://0013-riscv-Disable-atomic-operations.patch \
+-    file://0014-fallback-to-2011-C++-standard.patch \
  "
- 
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-datetime \
-+    ${PYTHON_PN}-stringold \
-+    "
-+
- RDEPENDS_${PN}-ptest += " \
- 	${PYTHON_PN}-pytest \
- "
+ SRC_URI_append_libc-musl = " \
+     file://musl/0001-support-musl.patch \
 -- 
-2.25.4
+2.17.1
 
