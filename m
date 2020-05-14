@@ -1,61 +1,132 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web11.6674.1589433202445211599
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web10.8189.1589443442311299525
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 May 2020 22:13:24 -0700
+ Thu, 14 May 2020 01:04:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.73,390,1583164800"; 
-   d="scan'208";a="92037687"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 14 May 2020 13:13:21 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id 8D34650A999D
-	for <openembedded-devel@lists.openembedded.org>; Thu, 14 May 2020 13:13:19 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 14 May 2020 13:13:20 +0800
-From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: changqing.li@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 04E8412u005012
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 14 May 2020 01:04:02 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+ 14.3.487.0; Thu, 14 May 2020 01:04:01 -0700
+From: "Changqing Li" <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python][PATCH] python3-pyroute2: upgrade 0.5.11 -> 0.5.12
-Date: Thu, 14 May 2020 22:13:41 +0800
-Message-ID: <1589465621-3319-1-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+Subject: [PATCH] apache2: fix service start fail
+Date: Thu, 14 May 2020 16:03:56 +0800
+Message-ID: <20200514080356.16146-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
-X-yoursite-MailScanner-ID: 8D34650A999D.A4A36
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
 Content-Type: text/plain
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
----
- ...{python3-pyroute2_0.5.11.bb => python3-pyroute2_0.5.12.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pyroute2_0.5.11.bb => python3-pyroute2_0.5.12.bb} (85%)
+From: Changqing Li <changqing.li@windriver.com>
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.11.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.12.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-pyroute2_0.5.11.bb
-rename to meta-python/recipes-devtools/python/python3-pyroute2_0.5.12.bb
-index a4b8aa3988..440f8993c9 100644
---- a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.11.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.12.bb
-@@ -3,8 +3,8 @@ LICENSE = "GPLv2 & Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://LICENSE.Apache.v2;md5=34281e312165f843a2b7d1f114fe65ce"
+reproduce steps:
+1. boot up target
+2. scp apache2-2.4.41-r0.1.aarch64.rpm on target
+3. rpm -i apache2-2.4.41-r0.1.aarch64.rpm
+4. systemctl status apache2
+
+Error:
+httpd[7767]: (2)No such file or directory: AH02291: Cannot access directory '/var/log/apache2/' for main error log
+
+with the old way, /var/log/apache2/ is created by service
+systemd-tmpfiles-setup during boot, so only works when apache2
+already installed before boot, in above scenario,
+/var/log/apache2/ will not created. fix by creating it in the
+service file. similar fix for sysV system
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb    | 8 --------
+ .../recipes-httpd/apache2/files/apache2-volatile.conf     | 2 --
+ .../recipes-httpd/apache2/files/apache2.service           | 4 ++++
+ meta-webserver/recipes-httpd/apache2/files/init           | 5 +++++
+ .../recipes-httpd/apache2/files/volatiles.04_apache2      | 3 ---
+ 5 files changed, 9 insertions(+), 13 deletions(-)
+ delete mode 100644 meta-webserver/recipes-httpd/apache2/files/apache2-volatile.conf
+ delete mode 100644 meta-webserver/recipes-httpd/apache2/files/volatiles.04_apache2
+
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
+index 520011152..9b80bbff6 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
+@@ -20,9 +20,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
+ SRC_URI_append_class-target = " \
+            file://0008-apache2-do-not-use-relative-path-for-gen_test_char.patch \
+            file://init \
+-           file://apache2-volatile.conf \
+            file://apache2.service \
+-           file://volatiles.04_apache2 \
+            "
  
--SRC_URI[md5sum] = "7005db01604663fc2ecc089925980e05"
--SRC_URI[sha256sum] = "05e959f1a89d715158b91fe83b67946a4441e5e098cc225f4df78a3765ac4af2"
-+SRC_URI[md5sum] = "4370e9a5875486a1223705ea9b001eff"
-+SRC_URI[sha256sum] = "0157801c5496177856c3296b590065e691b041a3adde6fb8ffad2a8d05013ed3"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
+@@ -128,16 +126,10 @@ do_install_append_class-target() {
+            -e 's,".*/configure","configure",g' ${D}${datadir}/apache2/build/config.nice
  
- inherit setuptools3 pypi ptest
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+-        install -d ${D}${sysconfdir}/tmpfiles.d/
+-        install -m 0644 ${WORKDIR}/apache2-volatile.conf ${D}${sysconfdir}/tmpfiles.d/
+-
+         install -d ${D}${systemd_unitdir}/system
+         install -m 0644 ${WORKDIR}/apache2.service ${D}${systemd_unitdir}/system
+         sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/apache2.service
+         sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/apache2.service
+-    elif ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+-        install -d ${D}${sysconfdir}/default/volatiles
+-        install -m 0644 ${WORKDIR}/volatiles.04_apache2 ${D}${sysconfdir}/default/volatiles/04_apache2
+     fi
  
+     rm -rf ${D}${localstatedir} ${D}${sbindir}/envvars*
+diff --git a/meta-webserver/recipes-httpd/apache2/files/apache2-volatile.conf b/meta-webserver/recipes-httpd/apache2/files/apache2-volatile.conf
+deleted file mode 100644
+index ff2c58704..000000000
+--- a/meta-webserver/recipes-httpd/apache2/files/apache2-volatile.conf
++++ /dev/null
+@@ -1,2 +0,0 @@
+-d  /var/run/apache2 0755 root root -
+-d  /var/log/apache2 0755 root root -
+diff --git a/meta-webserver/recipes-httpd/apache2/files/apache2.service b/meta-webserver/recipes-httpd/apache2/files/apache2.service
+index 9b5548c76..25d43acf8 100644
+--- a/meta-webserver/recipes-httpd/apache2/files/apache2.service
++++ b/meta-webserver/recipes-httpd/apache2/files/apache2.service
+@@ -5,6 +5,10 @@ After=network.target remote-fs.target nss-lookup.target
+ [Service]
+ Type=simple
+ Environment=LANG=C
++ExecStartPre=mkdir -p /var/log/apache2
++ExecStartPre=mkdir -p /var/run/apache2
++ExecStartPre=chmod -R 0755 /var/log/apache2
++ExecStartPre=chmod -R 0755 /var/run/apache2
+ ExecStart=@SBINDIR@/httpd -DFOREGROUND -D SSL -D PHP5 -k start
+ ExecStop=@BASE_BINDIR@/kill -WINCH ${MAINPID}
+ KillSignal=SIGCONT
+diff --git a/meta-webserver/recipes-httpd/apache2/files/init b/meta-webserver/recipes-httpd/apache2/files/init
+index 758d133b9..80a7ebfcb 100644
+--- a/meta-webserver/recipes-httpd/apache2/files/init
++++ b/meta-webserver/recipes-httpd/apache2/files/init
+@@ -97,6 +97,11 @@ do_start()
+             return 1
+     fi
+ 
++    mkdir -p /var/log/apache2
++    chmod -R 0755 /var/log/apache2
++    mkdir -p /var/run/apache2
++    chmod -R 0755 /var/run/apache2
++
+     if apache_conftest ; then
+             $APACHECTL start
+             apache_wait_start $?
+diff --git a/meta-webserver/recipes-httpd/apache2/files/volatiles.04_apache2 b/meta-webserver/recipes-httpd/apache2/files/volatiles.04_apache2
+deleted file mode 100644
+index 922075b1b..000000000
+--- a/meta-webserver/recipes-httpd/apache2/files/volatiles.04_apache2
++++ /dev/null
+@@ -1,3 +0,0 @@
+-# <type> <owner> <group> <mode> <path> <linksource>
+-d root root 0755 /var/run/apache2 none
+-d root root 0755 /var/log/apache2 none
 -- 
 2.17.1
-
-
 
