@@ -1,140 +1,262 @@
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.web11.139.1589478005398390340
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.web11.253.1589478311803065337
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 May 2020 10:40:05 -0700
+ Thu, 14 May 2020 10:45:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=OijuCJrf;
- spf=pass (domain: konsulko.com, ip: 209.85.128.50, mailfrom: pbarker@konsulko.com)
-Received: by mail-wm1-f50.google.com with SMTP id n5so18978120wmd.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 14 May 2020 10:40:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ruceAPUg;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id b8so1526396pgi.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 14 May 2020 10:45:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google;
+        d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=+6ldpGyRE6JK0HIHLiSD7HNzRhwHjEmhLG5TGyG8xUY=;
-        b=OijuCJrfHEbJkZ2w07YIs/v1xteybKoYxcq1+1f2lhSAqsgrIClPXmpqt+4YLBEefG
-         sQvk4vJki591v8Rbr2Whqie13kGUpyhhs2ehP0IRwmgyTAUgyqhEglfYAOniRMihA/vT
-         inqu5ljIfGyujai+n+6BwTxlyqM8Loy7GLc6M=
+        bh=OozO/j0GZaqnSXuHJChuw3v0yfx7en8z9769fhfDViY=;
+        b=ruceAPUgDtYn3c74J3ub72RgA1N0CAFKTcKrLJ9Ac9CTSPoowGyKmWIfVSm1+0SkBb
+         S3u879TiaUFgD2j3wM/U+oU4Qa9McW91tFAa2P0mUJ/3qnQ2rkDFjgQ7uv9GCpkn6xmr
+         NIzUZ5z1zwNQfsMyrr6QCoUOz8FiGK2+lq3uyGaZkpb0uaZBs4KW8UK4xWhr747AR4d+
+         g788JBQExKfkd6aNkvXhTGjsqfXuen5ek29H+iWmJE3h7MQjhL2vNog1aHN3sVEfDDj1
+         4kJWDN4338eSipm/VIwxRXrINJ00sHSdavdHtuxjIjH7SQTHpSU8BJuFFL5shEmndGFz
+         piVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=+6ldpGyRE6JK0HIHLiSD7HNzRhwHjEmhLG5TGyG8xUY=;
-        b=sBTsMNH9+I7+3yRSVvJRvKUpSK6fK5joKGH7/4csQ7rysfnFBFMA++pNAcR5Ncuyvj
-         AkSpG0Ta8uby9I3lQQUE9RlmMFLj9VIQVZZRC+xej+BrUvb0bEyS7DW2GdBjCbAYuclW
-         /u58xsQ3fHSc6XT/NwsBxNlkZcmZP1qcax+NfZRaxYxhbyYC0z9jO3IBqg4V4VlIFIIj
-         umq23SghawHC/xNSUN9KyACuk4Hs8rDbBoJiAp0g3ygoEWxNtiQKrLZbcJft5qCS6i2d
-         /65vcAXmCsmELHMVHydgVAuu9c3b9yTfui3wPXbwDOj9xfSp3ztbsb9xBQg3NsyxObDZ
-         aiWg==
-X-Gm-Message-State: AGi0PuZIhfxM6Qejn1pbDHa3PJ/vKnVpyyq9hoCsbnMUpaL18FjZBeuo
-	bQhC9wXnv1yY69Zdi0hvgrd3PFhLgaVEoA==
-X-Google-Smtp-Source: APiQypLGjVcTfAEMQOGlJXFnInDgXPZd9IF3+TkAb3kg2nEqi5RVT6f1GGRBq3QZvIQEFiRl565Ryg==
-X-Received: by 2002:a1c:b354:: with SMTP id c81mr42232190wmf.136.1589478002769;
-        Thu, 14 May 2020 10:40:02 -0700 (PDT)
-Return-Path: <pbarker@konsulko.com>
-Received: from ar2.home.b5net.uk ([213.48.11.149])
-        by smtp.gmail.com with ESMTPSA id w82sm12619475wmg.28.2020.05.14.10.40.01
+        bh=OozO/j0GZaqnSXuHJChuw3v0yfx7en8z9769fhfDViY=;
+        b=nRiWu6YafbDFGVb7iM/s6Gr/9K0PhlpP5P9JIHEMW5tM8bl0FO7YZsWepHtfYkDR1e
+         FRUqITVBPcnZdQ80bF4DtaQAcqbgAkLmq67ggoUbt94eBB/6ETpGRtjn4sDMfvzK1IUk
+         9ZiE4gA6ZwyV7QgoGYrO4wkVZhaRAmA17NBB5IxQqCvGzubMbcjZu3AXds5RrJDX/RIg
+         WolG8tMJJzUil4po8kWs+JsxegeCSpoeEjs2EyyUNFcF4yOSZnTJ6brGe1qDWPA+UF72
+         pFHeuVSEqMvyL+PcQvDeNcEnpKHkgLyTwaQYdJOVbSa6eYtKUvlk90EwY0DmkoDOWCcD
+         Pq4w==
+X-Gm-Message-State: AOAM531ohqEz3qVlbUf98wk/DzxDouEgxFW4AACLVpZWNscHo76rVLD+
+	Exn1wE1RgiU14EQ9p8qBLJmAtqwde3E=
+X-Google-Smtp-Source: ABdhPJwKegeGXndNIVqh4cgg1MIiPt108smC1FSkwPEkl6yWVhTuH8u9h+C7xb6ZTPYy8ZV25/Chww==
+X-Received: by 2002:a63:3503:: with SMTP id c3mr4883750pga.371.1589478310746;
+        Thu, 14 May 2020 10:45:10 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::3cf8])
+        by smtp.gmail.com with ESMTPSA id v1sm17943524pjs.36.2020.05.14.10.45.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 14 May 2020 10:40:02 -0700 (PDT)
-From: "Paul Barker" <pbarker@konsulko.com>
+        Thu, 14 May 2020 10:45:10 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Paul Barker <pbarker@konsulko.com>
-Subject: [meta-oe][PATCH] mplayer-common: Drop obsolete recipe
-Date: Thu, 14 May 2020 18:39:59 +0100
-Message-Id: <20200514173959.1075-1-pbarker@konsulko.com>
+Cc: Beniamin Sandu <beniaminsandu@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH V3] rasdaemon: create recipe for version 0.6.5
+Date: Thu, 14 May 2020 10:45:06 -0700
+Message-Id: <20200514174506.4676-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This recipe hasn't been changed in any meaningful way since it was
-imported from oe-classic in 2011. There's no recipe for mplayer in
-meta-oe these days so it's probably time to drop it.
+From: Beniamin Sandu <beniaminsandu@gmail.com>
 
-Signed-off-by: Paul Barker <pbarker@konsulko.com>
+Link with libargp on musl
+Include limits.h
+Add to packagegroup-meta-oe
+
+Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/conf/layer.conf                       |  1 -
- .../packagegroups/packagegroup-meta-oe.bb     |  2 +-
- .../mplayer/mplayer-common.bb                 | 23 -------------------
- .../mplayer/mplayer-common/mplayer.conf       | 15 ------------
- 4 files changed, 1 insertion(+), 40 deletions(-)
- delete mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
- delete mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
+v3: Consolidate musl changes and move under perl dynamic layer setup
 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index adcec8302..5bf1f6cfd 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -43,7 +43,6 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
- PREFERRED_RPROVIDER_libdevmapper = "lvm2"
- 
- SIGGEN_EXCLUDERECIPES_ABISAFE += " \
--  mplayer-common \
-   fbset-modes \
-   gpsd-machine-conf \
-   distro-feed-configs \
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 8358e933d..0812da1af 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -210,7 +210,7 @@ RDEPENDS_packagegroup-meta-oe-multimedia ="\
-     alsa-oss audiofile cdrkit id3lib \
-     a2jmidid jack libass libburn libcdio libcdio-paranoia \
-     libdvdread libmms libmodplug libopus live555 \
--    mplayer-common opus-tools \
-+    opus-tools \
-     sound-theme-freedesktop v4l-utils yavta wavpack libvpx \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xpext pavucontrol xsp", "", d)} \
-     libmikmod \
-diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb b/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
-deleted file mode 100644
-index 829c3b243..000000000
---- a/meta-oe/recipes-multimedia/mplayer/mplayer-common.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--# Copyright Matthias Hentges <devel@hentges.net> (c) 2006
--# License: MIT (see COPYING.MIT)
--
--SUMMARY = "Preconfigured mplayer preferences"
--
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
--
--PV = "0.0.1"
--PR = "r1"
--
--SRC_URI = "file://mplayer.conf"
--
--# Yes, really /usr/etc!!!
--do_install() {
--    install -d "${D}/usr${sysconfdir}/mplayer"
--
--    install -m 0644 ${WORKDIR}/mplayer.conf "${D}/usr${sysconfdir}/mplayer"
--}
--
--FILES_${PN} = "/usr${sysconfdir}/mplayer"
--
--inherit allarch
-diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf b/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
-deleted file mode 100644
-index 37ad65fa2..000000000
---- a/meta-oe/recipes-multimedia/mplayer/mplayer-common/mplayer.conf
-+++ /dev/null
-@@ -1,15 +0,0 @@
--
--# You probably shouldn't touch these
--ac=mad,
--ao=alsa,
--
--# Required on SL-Cxxxx for correct rotation in the *VT*,
--# breaks rotation in X!
--# vf=rotate=1
--
--# Enable fullscreen display by default
--# fs=true
--
--# Drop frames to keep audio and video in sync
--framedrop=true
--
+ .../packagegroup-meta-oe.bbappend             |  2 +-
+ .../0001-Fix-system-header-includes.patch     | 44 +++++++++++++++
+ .../recipes-support/rasdaemon/files/init      | 43 +++++++++++++++
+ .../rasdaemon/files/rasdaemon.service         | 12 ++++
+ .../rasdaemon/rasdaemon_0.6.5.bb              | 55 +++++++++++++++++++
+ 5 files changed, 155 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-Fix-system-header-includes.patch
+ create mode 100644 meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/init
+ create mode 100644 meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/rasdaemon.service
+ create mode 100644 meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.5.bb
+
+diff --git a/meta-oe/dynamic-layers/perl-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend b/meta-oe/dynamic-layers/perl-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
+index 69bc788a86..2aee5975d7 100644
+--- a/meta-oe/dynamic-layers/perl-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
++++ b/meta-oe/dynamic-layers/perl-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
+@@ -1 +1 @@
+-RDEPENDS_packagegroup-meta-oe-support += "debsums"
++RDEPENDS_packagegroup-meta-oe-support += "debsums rasdaemon"
+diff --git a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-Fix-system-header-includes.patch b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-Fix-system-header-includes.patch
+new file mode 100644
+index 0000000000..0164321312
+--- /dev/null
++++ b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-Fix-system-header-includes.patch
+@@ -0,0 +1,44 @@
++From 18786db1ad03716267927d983c83275469a1478a Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 8 May 2020 12:27:19 -0700
++Subject: [PATCH] Fix system header includes
++
++Use poll.h instead of sys/poll.h
++Fixes
++warning: #warning redirecting incorrect #include <sys/poll.h> to <poll.h> [-Wcpp]
++
++Include limits.h for PATH_MAX
++
++Fixes
++ras-events.c:359:16: error: 'PATH_MAX' undeclared (first use in this function)
++  359 |  char pipe_raw[PATH_MAX];
++      |                ^~~~~~~~
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ ras-events.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/ras-events.c b/ras-events.c
++index 511c93d..400e740 100644
++--- a/ras-events.c
+++++ b/ras-events.c
++@@ -18,13 +18,14 @@
++ #include <dirent.h>
++ #include <errno.h>
++ #include <fcntl.h>
+++#include <limits.h>
+++#include <poll.h>
++ #include <stdio.h>
++ #include <stdlib.h>
++ #include <string.h>
++ #include <unistd.h>
++ #include <sys/stat.h>
++ #include <sys/types.h>
++-#include <sys/poll.h>
++ #include <signal.h>
++ #include <sys/signalfd.h>
++ #include "libtrace/kbuffer.h"
++-- 
++2.26.2
++
+diff --git a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/init b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/init
+new file mode 100644
+index 0000000000..216677e73e
+--- /dev/null
++++ b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/init
+@@ -0,0 +1,43 @@
++#! /bin/sh
++# /etc/init.d/rasdaemon: start rasdaemon service
++
++. /etc/init.d/functions
++
++# Defaults
++PIDFILE=/var/run/rasdaemon.pid
++BINFILE=/usr/sbin/rasdaemon
++SCRIPTNAME=/etc/init.d/rasdaemon
++
++[ -x $BINFILE ] || exit 0
++
++case "$1" in
++	start)
++		echo -n "Starting RASdaemon services: "
++		if [ ! -f "$PIDFILE" ]; then
++			start-stop-daemon --start --quiet --exec $BINFILE -- --enable &> /dev/null
++			start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $BINFILE -- --record
++			pidof $BINFILE > $PIDFILE
++		fi
++		[ -f $PIDFILE ] && echo "done." || echo "fail."
++		;;
++    	stop)
++		echo -n "Stopping RASdaemon services: "
++		if [ -f  "$PIDFILE" ] ; then
++			start-stop-daemon --stop --quiet --pidfile $PIDFILE --exec $BINFILE -- --disable &> /dev/null
++			killproc $BINFILE
++			rm $PIDFILE
++		fi
++		[ ! -f $PIDFILE ] && echo "done." || echo "fail."
++		;;
++	restart)
++		$0 stop
++		sleep 1
++		$0 start
++		;;
++	status)
++		status $BINFILE
++		;;
++	*)
++		echo "Usage: $SCRIPTNAME {start|stop|restart|status}"
++		exit 1
++esac
+diff --git a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/rasdaemon.service b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/rasdaemon.service
+new file mode 100644
+index 0000000000..4fbf23142a
+--- /dev/null
++++ b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/rasdaemon.service
+@@ -0,0 +1,12 @@
++[Unit]
++Description=RAS daemon to log the RAS events
++After=syslog.target
++
++[Service]
++ExecStart=/usr/sbin/rasdaemon -f -r
++ExecStartPost=/usr/sbin/rasdaemon --enable
++ExecStop=/usr/sbin/rasdaemon --disable
++Restart=on-abort
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.5.bb b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.5.bb
+new file mode 100644
+index 0000000000..93f624882d
+--- /dev/null
++++ b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.5.bb
+@@ -0,0 +1,55 @@
++DESCRIPTION = "Tools to provide a way to get Platform Reliability, Availability and Serviceability (RAS) reports made via the Kernel tracing events"
++HOMEPAGE = "http://git.infradead.org/users/mchehab/rasdaemon.git"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d3070efe0afa3dc41608bd82c00bb0dc"
++
++SRC_URI = "git://git.infradead.org/users/mchehab/rasdaemon.git;branch=master \
++        file://0001-Fix-system-header-includes.patch \
++	file://rasdaemon.service \
++	file://init"
++
++SRCREV = "25533c0c55426eeb2ad25dcbdb2b5e4ba4e83d80"
++
++S = "${WORKDIR}/git"
++
++RDEPENDS_${BPN} = "perl perl-module-file-basename perl-module-file-find perl-module-file-spec perl-module-getopt-long \
++	perl-module-posix perl-module-file-glob libdbi-perl libdbd-sqlite-perl"
++
++inherit autotools pkgconfig update-rc.d systemd
++
++PACKAGECONFIG ??= "sqlite3 mce aer extlog devlink diskerror"
++PACKAGECONFIG[sqlite3] = "--enable-sqlite3,--disable-sqlite3,sqlite3"
++PACKAGECONFIG[mce] = "--enable-mce,--disable-mce"
++PACKAGECONFIG[aer] = "--enable-aer,--disable-aer"
++PACKAGECONFIG[extlog] = "--enable-extlog,--disable-extlog"
++PACKAGECONFIG[devlink] = "--enable-devlink,--disable-devlink"
++PACKAGECONFIG[diskerror] = "--enable-diskerror,--disable-diskerror"
++PACKAGECONFIG[arm] = "--enable-arm,--disable-arm"
++PACKAGECONFIG[hisi-ns-decode] = "--enable-hisi-ns-decode,--disable-hisi-ns-decode"
++PACKAGECONFIG[non-standard] = "--enable-non-standard,--disable-non-standard"
++PACKAGECONFIG[abrt-report] = "--enable-abrt-report,--disable-abrt-report"
++
++DEPENDS_append_libc-musl = " argp-standalone"
++LDFLAGS_append_libc-musl = " -largp"
++
++do_configure_prepend () {
++	( cd ${S}; autoreconf -vfi )
++}
++
++do_install_append() {
++	install -d ${D}${sysconfdir}/init.d
++	install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rasdaemon
++	install -d ${D}${systemd_unitdir}/system
++	install -m 0644 ${WORKDIR}/rasdaemon.service ${D}${systemd_unitdir}/system
++}
++
++FILES_${PN} += "${sbindir}/rasdaemon \
++		${sysconfdir}/init.d \
++		${systemd_unitdir}/system/rasdaemon.service"
++
++SYSTEMD_SERVICE_${PN} = "rasdaemon.service"
++SYSTEMD_AUTO_ENABLE = "enable"
++
++INITSCRIPT_PACKAGES = "${PN}"
++INITSCRIPT_NAME_${PN} = "rasdaemon"
++INITSCRIPT_PARAMS_${PN} = "defaults 89"
 -- 
 2.26.2
 
