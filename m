@@ -1,132 +1,59 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web10.8189.1589443442311299525
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+ by mx.groups.io with SMTP id smtpd.web12.8859.1589448300092612255
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 May 2020 01:04:02 -0700
+ Thu, 14 May 2020 02:25:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: changqing.li@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 04E8412u005012
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 14 May 2020 01:04:02 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
- 14.3.487.0; Thu, 14 May 2020 01:04:01 -0700
-From: "Changqing Li" <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] apache2: fix service start fail
-Date: Thu, 14 May 2020 16:03:56 +0800
-Message-ID: <20200514080356.16146-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain
+ dkim=pass header.i=@koncepto.io header.s=default header.b=abAWjsku;
+ spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
+Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
+	by koncepto.io (Postfix) with ESMTPSA id D724F602A8;
+	Thu, 14 May 2020 11:24:53 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1589448293;
+	bh=IsGNt294tFK5UyYO9N7O+tikmPbMEoWqDYpIXc0DuB4=;
+	h=From:To:Cc:Subject:Date:From;
+	b=abAWjskuHTWc/r5nsBFSNCRU7YK7++UKziki60V9XsQTuapr2jOD3qwX/iMmuzPos
+	 CRW1vJ9c+KQsZXYESHb5BuhbEION71VUlE0O1RYQNTkSYBL1sVoj+dz4P5dnRL3RCC
+	 jO89MhtUC/mPxvBnDFpBN5LyMTWMguSEsAaXnGry2UM7jRC1Ra1i1YZW0r/qag2R4F
+	 5liAtamDb2k/K1j6xPpNLnnDQC4giMx0ExbrHE2ttWeLCk8HsU89uvCsSsRjoQiHb9
+	 Wg0DMJjt5+uD+rAC+4DJsuXBlBvgmANGqdrxN22DiydD5mavg8EbEOscqIUlAghzFH
+	 Ej0wXyuF1zEcQ==
+From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
+Subject: [meta-oe][PATCH] iwd: upgrade 1.6 -> 1.7
+Date: Thu, 14 May 2020 11:24:35 +0200
+Message-Id: <1589448275-10920-1-git-send-email-pjtexier@koncepto.io>
+X-Mailer: git-send-email 2.7.4
 
-From: Changqing Li <changqing.li@windriver.com>
+This includes the following changes:
 
-reproduce steps:
-1. boot up target
-2. scp apache2-2.4.41-r0.1.aarch64.rpm on target
-3. rpm -i apache2-2.4.41-r0.1.aarch64.rpm
-4. systemctl status apache2
+ver 1.7:
+	Fix issue with APs that send IGTK falsely in big endian.
+	Fix issue with setting linkmode & operstate for open networks.
 
-Error:
-httpd[7767]: (2)No such file or directory: AH02291: Cannot access directory '/var/log/apache2/' for main error log
-
-with the old way, /var/log/apache2/ is created by service
-systemd-tmpfiles-setup during boot, so only works when apache2
-already installed before boot, in above scenario,
-/var/log/apache2/ will not created. fix by creating it in the
-service file. similar fix for sysV system
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb    | 8 --------
- .../recipes-httpd/apache2/files/apache2-volatile.conf     | 2 --
- .../recipes-httpd/apache2/files/apache2.service           | 4 ++++
- meta-webserver/recipes-httpd/apache2/files/init           | 5 +++++
- .../recipes-httpd/apache2/files/volatiles.04_apache2      | 3 ---
- 5 files changed, 9 insertions(+), 13 deletions(-)
- delete mode 100644 meta-webserver/recipes-httpd/apache2/files/apache2-volatile.conf
- delete mode 100644 meta-webserver/recipes-httpd/apache2/files/volatiles.04_apache2
+ meta-oe/recipes-connectivity/iwd/{iwd_1.6.bb => iwd_1.7.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/iwd/{iwd_1.6.bb => iwd_1.7.bb} (96%)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
-index 520011152..9b80bbff6 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.43.bb
-@@ -20,9 +20,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
- SRC_URI_append_class-target = " \
-            file://0008-apache2-do-not-use-relative-path-for-gen_test_char.patch \
-            file://init \
--           file://apache2-volatile.conf \
-            file://apache2.service \
--           file://volatiles.04_apache2 \
-            "
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.6.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.7.bb
+similarity index 96%
+rename from meta-oe/recipes-connectivity/iwd/iwd_1.6.bb
+rename to meta-oe/recipes-connectivity/iwd/iwd_1.7.bb
+index 10ac03e..4911b3d 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd_1.6.bb
++++ b/meta-oe/recipes-connectivity/iwd/iwd_1.7.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
+ DEPENDS = "ell"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
-@@ -128,16 +126,10 @@ do_install_append_class-target() {
-            -e 's,".*/configure","configure",g' ${D}${datadir}/apache2/build/config.nice
+ SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
+-SRCREV = "ad97f4f945b828425ff288e905523e11b330d41d"
++SRCREV = "ef6084dcb4fe2e00327bb9c7b113ece204042c22"
+ S = "${WORKDIR}/git"
  
-     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
--        install -d ${D}${sysconfdir}/tmpfiles.d/
--        install -m 0644 ${WORKDIR}/apache2-volatile.conf ${D}${sysconfdir}/tmpfiles.d/
--
-         install -d ${D}${systemd_unitdir}/system
-         install -m 0644 ${WORKDIR}/apache2.service ${D}${systemd_unitdir}/system
-         sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/apache2.service
-         sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/apache2.service
--    elif ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
--        install -d ${D}${sysconfdir}/default/volatiles
--        install -m 0644 ${WORKDIR}/volatiles.04_apache2 ${D}${sysconfdir}/default/volatiles/04_apache2
-     fi
- 
-     rm -rf ${D}${localstatedir} ${D}${sbindir}/envvars*
-diff --git a/meta-webserver/recipes-httpd/apache2/files/apache2-volatile.conf b/meta-webserver/recipes-httpd/apache2/files/apache2-volatile.conf
-deleted file mode 100644
-index ff2c58704..000000000
---- a/meta-webserver/recipes-httpd/apache2/files/apache2-volatile.conf
-+++ /dev/null
-@@ -1,2 +0,0 @@
--d  /var/run/apache2 0755 root root -
--d  /var/log/apache2 0755 root root -
-diff --git a/meta-webserver/recipes-httpd/apache2/files/apache2.service b/meta-webserver/recipes-httpd/apache2/files/apache2.service
-index 9b5548c76..25d43acf8 100644
---- a/meta-webserver/recipes-httpd/apache2/files/apache2.service
-+++ b/meta-webserver/recipes-httpd/apache2/files/apache2.service
-@@ -5,6 +5,10 @@ After=network.target remote-fs.target nss-lookup.target
- [Service]
- Type=simple
- Environment=LANG=C
-+ExecStartPre=mkdir -p /var/log/apache2
-+ExecStartPre=mkdir -p /var/run/apache2
-+ExecStartPre=chmod -R 0755 /var/log/apache2
-+ExecStartPre=chmod -R 0755 /var/run/apache2
- ExecStart=@SBINDIR@/httpd -DFOREGROUND -D SSL -D PHP5 -k start
- ExecStop=@BASE_BINDIR@/kill -WINCH ${MAINPID}
- KillSignal=SIGCONT
-diff --git a/meta-webserver/recipes-httpd/apache2/files/init b/meta-webserver/recipes-httpd/apache2/files/init
-index 758d133b9..80a7ebfcb 100644
---- a/meta-webserver/recipes-httpd/apache2/files/init
-+++ b/meta-webserver/recipes-httpd/apache2/files/init
-@@ -97,6 +97,11 @@ do_start()
-             return 1
-     fi
- 
-+    mkdir -p /var/log/apache2
-+    chmod -R 0755 /var/log/apache2
-+    mkdir -p /var/run/apache2
-+    chmod -R 0755 /var/run/apache2
-+
-     if apache_conftest ; then
-             $APACHECTL start
-             apache_wait_start $?
-diff --git a/meta-webserver/recipes-httpd/apache2/files/volatiles.04_apache2 b/meta-webserver/recipes-httpd/apache2/files/volatiles.04_apache2
-deleted file mode 100644
-index 922075b1b..000000000
---- a/meta-webserver/recipes-httpd/apache2/files/volatiles.04_apache2
-+++ /dev/null
-@@ -1,3 +0,0 @@
--# <type> <owner> <group> <mode> <path> <linksource>
--d root root 0755 /var/run/apache2 none
--d root root 0755 /var/log/apache2 none
+ inherit autotools manpages pkgconfig python3native systemd
 -- 
-2.17.1
+2.7.4
 
