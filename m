@@ -1,99 +1,65 @@
-Received: from mail-io1-f43.google.com (mail-io1-f43.google.com [209.85.166.43])
- by mx.groups.io with SMTP id smtpd.web11.14775.1589553754357837601
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+ by mx.groups.io with SMTP id smtpd.web12.14693.1589553950233198529
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 May 2020 07:42:34 -0700
+ Fri, 15 May 2020 07:45:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=GxpfAUSq;
- spf=pass (domain: gmail.com, ip: 209.85.166.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-io1-f43.google.com with SMTP id s10so2971741iog.7
-        for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 07:42:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=wo7RQRdK0lc4JNhPlbconLVzx/47jEPn+ohCManLzNE=;
-        b=GxpfAUSqFtiuIj6tv1sHZOIARbVGQouvT8kQd8MsM8ih5mJCVsjF+EtLbkdFxz0NQ/
-         k5jvMN4uX654JqiuvY0whqNXXwU/Kjj0GWoSW1MkVdJEkvHwW+feXVWP3xQAsIVY0YDp
-         l0LplgD4qunPq4NGofPFhJRsvf0lHXJ3QxX1cZWul1prWikh46VFFUHqtwKgFgG9TMNq
-         +cU234v3j3jKE7GGeS0L3Q8xUPHt3e25uuez7F85a39Anig2gzD5z9rTLiLyRXHRv0io
-         gDmLmx+J4x++yx5z5Ynb79wk7QskeQmln7FuiCsUbOCKfayhGVqK9tm4ug8WEozuzLV8
-         SOfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=wo7RQRdK0lc4JNhPlbconLVzx/47jEPn+ohCManLzNE=;
-        b=bKah1PiBFyHVDnXJK2d7733BtFOWjVsJ/HUyCkq6x74fIFtRgvvxOK1FLzGTtg68HM
-         D2sw53nHLPdZSod+oTJeJfa0ByL8nuDwMPEH6a+KQDJNBfp+YMzOIQgk9XpgMPs6o5Eg
-         c547TsKkvjk866sP3r1Ir60717yCLTMNUZziug+evdSz+mx25aVMPEguy5QC4tKXiN8h
-         iJ/kSgS9s3/83KchZac/UZtxuKbwYcHUR/iSLV4E1A/baXBciD9KI9t7IDBUAp68MP+M
-         CIBlRuHB7bvfplB3vXAt7v6SysOjhdOA4TkdHvhPUhCwjBcXP01dOSQIzuZXJrs4VhTG
-         hUuQ==
-X-Gm-Message-State: AOAM532KLpIPZjtgl5viHNExKEH7VQhZFzmrnheWScXpdUbcixGldwvx
-	iwxQS8mtbgyG69Y5uHaQazc7+xuPEvw=
-X-Google-Smtp-Source: ABdhPJyOItg6JLx2MLsT88lp1WCMP8pgnryPa6i73z5SdncCU7Dpx/LRq7FcP+dQdx8M+DKVQbycPw==
-X-Received: by 2002:a02:2a47:: with SMTP id w68mr3516688jaw.76.1589553751382;
-        Fri, 15 May 2020 07:42:31 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:4e0:33:f6fe:2ae3:dbd8? ([2601:646:9200:4e0:33:f6fe:2ae3:dbd8])
-        by smtp.gmail.com with ESMTPSA id k5sm488484ilg.55.2020.05.15.07.42.30
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 15 May 2020 07:42:30 -0700 (PDT)
-Subject: Re: [[oe] [meta-oe] [PATCH]] gpsd: Upgrade 3.19 -> 3.20
-To: Alistair Francis <alistair23@gmail.com>, Sean Nyekjaer <sean@geanix.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-References: <20200511174505.2128564-1-sean@geanix.com>
- <CAKmqyKMtHjKwYpykOEAOCNp8YRqTsGQyKFfSv+ZnR+juxFfnww@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Message-ID: <2410d548-7b7d-6561-d7c1-87f168960757@gmail.com>
-Date: Fri, 15 May 2020 07:42:29 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.8.0
-MIME-Version: 1.0
-In-Reply-To: <CAKmqyKMtHjKwYpykOEAOCNp8YRqTsGQyKFfSv+ZnR+juxFfnww@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+ dkim=pass header.i=@stusta.de header.s=default header.b=bQGV1vel;
+ spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=vty/=65=stusta.de=bunk@stusta.mhn.de)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49Nrn83Jknz2k
+	for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 16:45:48 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1589553948;
+	bh=n10+ClJPv4Kv+xdP56LFFkf62odZKfg0NVeCxtHiQzs=;
+	h=From:To:Subject:Date:From;
+	b=bQGV1velI0+kci+mkrP2a/Jr8HXXszsfTxFP4sdOdaSz6tgYOuF63ITZkRqA8hjVT
+	 MlmR6qvhnTcTaOV7xlfb3O4i/MIhofLX/obzjJSlOCBn7OuPDGsNLezRWT7zaRDSZ8
+	 l8/+Tkw7hnTlOa3nTrBcPKOZzGyoPUnvsQWX+JQ4Fq/LWIIe1JkbFO6bdQFiwyZoW4
+	 Rx2QsG+HgHHE8QxZBeCh/3d4xlN5BFiCVJtmZsRidbDGFIS24j4Oa2+jHl9kEIIYfE
+	 +0B1l0fCYh7viDiKLjqxmVKcPoBfEkVbCRKlOktXbOC65NXInSR1gwUeN2byp2q2hS
+	 pc+MpE9x6aN/C2DRI6g3rB4kabn2/pZxgPILSCEYuPjLmNGErDFr0TYz5STowNZyIb
+	 wqXr0FsJju78AJhWfTkqLn/hg/eGdag6bysLy7eazGkhlYDcUZuSTIWSHpgPjOmxIF
+	 65n2rTOOGxirxZquThbsv++e2FdxyHWNUbw7uAJv4eZUq4LCuWGqId93Kz2VFh+PWZ
+	 vlho3NsA/A6JQ/6r9f4bZ4VWH3pTtY1sgBt/7yaIRE+xDsJvXPPJ+xI7fsD6aj3gt7
+	 uEXIfZANcpjuDKFusFHqJSWtOM0vByGzkdPd2+owgslGwxmKem/MCexFoOBIa/hpf0
+	 UqN53oO09uTzc3QiTo2V0wJA=
+From: "Adrian Bunk" <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][warrior][PATCH] wireless-regdb: Upgrade 2019.06.03 -> 2020.04.29
+Date: Fri, 15 May 2020 17:45:47 +0300
+Message-Id: <20200515144547.8912-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
 
+From: Adrian Bunk <bunk@kernel.org>
 
+(From OE-Core rev: 5b71a3f3d1bca6b52f53b97971131a6771618420)
 
-On 5/14/20 11:09 PM, Alistair Francis wrote:
-> On Mon, May 11, 2020 at 10:46 AM Sean Nyekjaer <sean@geanix.com> wrote:
->>
->> Revert "SConstruct: Add test for sizeof(time_t), result in SIZEOF_TIME_T."
->> Do not cross-compile a small for it to be executed on the host.
->>
->> Signed-off-by: Sean Nyekjaer <sean@geanix.com>
-> 
-> This causes gpsd to fail to build when cross compiling for Aarch64
-> with this error:
-> 
-> | aarch64-oe-linux-ld
-> --sysroot=/home/alistair/oe-master/build/tmp-glibc/work/aarch64-oe-linux/gpsd/3.20-r0/recipe-sysroot
-> -o libgps.so.25.0.0 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
-> --sysroot=/home/alistair/oe-master/build/tmp-glibc/work/aarch64-oe-linux/gpsd/3.20-r0/recipe-sysroot
-> -pthread -shared -Wl,-Bsymbolic -Wl,-soname=libgps.so.25 ais_json.os
-> bits.os gpsdclient.os gps_maskdump.os gpsutils.os hex.os json.os
-> libgps_core.os libgps_dbus.os libgps_json.os libgps_shm.os
-> libgps_sock.os netlib.os os_compat.os rtcm2_json.os rtcm3_json.os
-> shared_json.os timespec_str.os libgpsmm.os -L.
-> -L/home/alistair/oe-master/build/tmp-glibc/work/aarch64-oe-linux/gpsd/3.20-r0/recipe-sysroot/usr/lib
-> -lrt -lm -ldbus-1 -lbluetooth -ldbus-1 -lrt
-> | aarch64-oe-linux-ld: unrecognized option '-Wl,-O1'
-> | aarch64-oe-linux-ld: use the --help option for usage information
-> | scons: *** [libgps.so.25.0.0] Error 1
-> | scons: building terminated because of errors.
-> 
-> Reverting this patch fixes the issue.
-> 
+Signed-off-by: Adrian Bunk <bunk@kernel.org>
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+---
+Recipe moved to OE-core in zeus.
+---
+ ...reless-regdb_2019.06.03.bb => wireless-regdb_2020.04.29.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/wireless-regdb/{wireless-regdb_2019.06.03.bb => wireless-regdb_2020.04.29.bb} (91%)
 
-Stragely it does not show up on OE builders for qemuarm64, Somehow LD is 
-set to bare ld, perhaps setting LD from what bitbake brings into 
-environment should fix it.
+diff --git a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.06.03.bb b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2020.04.29.bb
+similarity index 91%
+rename from meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.06.03.bb
+rename to meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2020.04.29.bb
+index ded44b3d4..7c9c6e5c3 100644
+--- a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.06.03.bb
++++ b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2020.04.29.bb
+@@ -5,8 +5,7 @@ LICENSE = "ISC"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
+ 
+ SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz"
+-SRC_URI[md5sum] = "4b5ba3f089db7fdb7b9daae6a7c1f2cb"
+-SRC_URI[sha256sum] = "cd917ed86b63ce8d93947979f1f18948f03a4ac0ad89ec25227b36ac00dc54bf"
++SRC_URI[sha256sum] = "89fd031aed5977c219a71501e144375a10e7c90d1005d5d086ea7972886a2c7a"
+ 
+ inherit bin_package allarch
+ 
+-- 
+2.17.1
 
-> Alistair
-> 
-> 
-> 
-> 
