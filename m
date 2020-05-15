@@ -1,72 +1,63 @@
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
- by mx.groups.io with SMTP id smtpd.web12.16062.1589557777557147212
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+ by mx.groups.io with SMTP id smtpd.web10.16452.1589558194559330455
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 May 2020 08:49:39 -0700
+ Fri, 15 May 2020 08:56:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@stusta.de header.s=default header.b=rnxlllCX;
- spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=vty/=65=stusta.de=bunk@stusta.mhn.de)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49NtBj5hTxz2k
-	for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 17:49:33 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1589557773;
-	bh=Q8D2LGvBCA1Ko/rMRPRSb9RE0Uj+wZF+OHaaiPsBoW4=;
-	h=Resent-From:Resent-Date:Resent-To:Date:From:To:Cc:Subject:
-	 References:In-Reply-To:From;
-	b=rnxlllCXaavDKcUeDgE5ZfFazX5J2yPvGQAzal73luEUgXiMsLxKILDVHI0aMjTV+
-	 TRh80ji9QAvj/++NuovKxFSav1nPL7CGDbwETn8pYgpnQOkhahS0qZlcUyE2mNes/L
-	 ZGe43jFEfqFkm3UbiKNsokg30Nb8vq+uyJFFMYcCpSXpvIAX2ckEwib1f+WCGPn2j4
-	 w+Y+kt2l+HsODJulM+91ORyUFZkA9rzQVLT96u2mYWfTIFHDWfaoLkeE0bWEwKyP5E
-	 41NcK/nQijGKFF4HUESt3OlFVmSMkz5UgFpKQmLo6h+FfiJQgv8OKS8TllB7BGheiG
-	 g9J/8dQbiJcpK7CXTnaA2dzAkfJnNZkW1HJ+5izXYADeZ1JolLexsuAarTorjxVvH7
-	 L+kbYxHHGHanwKmNEi2TRVc/1QYs/WkilO222n7Qv9YED5/ToGqDdvAUDAbo4tNqh0
-	 IGw7+8Fzk5zqn9ipcPDMpbkw+H2QwPjSmtygyQ8KYs5Djqpzi0k6bi+/YhBc05YUW7
-	 Wh9Wx+6MS22MCsFRDiey3nPKDZlef+4K93lWaROuX6mrwqttsXd0EYWZj78U3Wu0xR
-	 L+loMfiWFoI3eMMUmvtirPBs5Cq24lORvYiIyOXsmlbYeOkXtpSHfaeWVD9jvs2aox
-	 ztnx94n+T5cTX4NO+6UCsklE=
-Resent-From: Adrian Bunk <bunk@stusta.de>
-Resent-Date: Fri, 15 May 2020 18:49:32 +0300
-Resent-Message-ID: <20200515154932.GB20323@localhost>
-Resent-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 May 2020 18:46:45 +0300
-From: "Adrian Bunk" <bunk@stusta.de>
-To: Martin Jansa <Martin.Jansa@gmail.com>
-Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>,
-	Sean Nyekjaer <sean@geanix.com>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Alistair Francis <alistair23@gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH] gpsd: fix build on aarch64
-Message-ID: <20200515154645.GA20323@localhost>
-References: <20200515121436.2078760-1-sean@geanix.com>
- <CAP71Wjw91K67Z2fV9AyySsapyjmg20WE4c3JY84kr5+i0=u-Og@mail.gmail.com>
- <CA+chaQeKWuojLcT8Hq+CwycKS9Apgf2kwwmTP+6R4Zwb9OqY1Q@mail.gmail.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: balister.org, ip: 216.168.135.166, mailfrom: philip@balister.org)
+Received: (qmail 6721 invoked by uid 1003); 15 May 2020 15:53:38 -0000
+Received: from unknown (HELO ?192.168.11.146?) (philip@opensdr.com@73.152.143.112)
+  by mail.geekisp.com with (ECDHE-RSA-AES128-GCM-SHA256 encrypted) SMTP; 15 May 2020 15:53:38 -0000
+To: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>,
+ openembedded-core <openembedded-core@lists.openembedded.org>,
+ "openembedded-members@lists.openembedded.org"
+ <openembedded-members@lists.openembedded.org>,
+ Yocto Project <yocto@yoctoproject.org>
+From: "Philip Balister" <philip@balister.org>
+Subject: OpenEmbedded Happy Hour
+Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
+ mQENBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
+ HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
+ rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
+ 2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
+ fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
+ AAG0JVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz6JAT4EEwECACgCGyMG
+ CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
+ nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
+ 3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
+ YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
+ 3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
+ yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4Yxi5AQ0ETo83gQEIAPs+ZC0R
+ gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
+ GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
+ uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
+ LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
+ gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAYkBJQQYAQIADwIbDAUC
+ WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
+ 1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
+ ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
+ icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
+ ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
+ 6eUfr0u7CwnEyqiQ
+Message-ID: <f756b087-c3e3-3a47-171e-bc72421ff48a@balister.org>
+Date: Fri, 15 May 2020 11:56:32 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQeKWuojLcT8Hq+CwycKS9Apgf2kwwmTP+6R4Zwb9OqY1Q@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
 Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-On Fri, May 15, 2020 at 05:07:37PM +0200, Martin Jansa wrote:
-> I was seeing this issue also on arm (raspberrypi4), so it's not specific to
-> aarch64 as subject says.
-> 
-> With this fix I'm still seeing build failure:
-> | ppsthread.c:1281: error: undefined reference to 'pthread_create'
-> 
-> going back to 3.19 fixes both issues (so it's not caused by my setup).
->...
+I've made a wiki page to track these:
 
-The root cause of all these problems is likely:
+https://www.openembedded.org/wiki/Happy_Hours
 
-...
-DEBUG: Executing shell function do_compile
-scons: Reading SConscript files ...
-This system is: linux
-Checking whether the C compiler works... no
-ERROR: CC doesn't work
-Checking if compiler accepts -pthread... no
-...
+Then next one is scheduled for 2100 UTC on May 27. This is late evening
+for Europe and morning for New Zealand, so hopefully we see some
+different faces. The meeting info is on the wiki page.
+
+There is no set agenda, so bring some projects to talk about with the
+community.
 
 
-cu
-Adrian
+Philip
