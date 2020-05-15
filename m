@@ -1,65 +1,209 @@
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
- by mx.groups.io with SMTP id smtpd.web12.14693.1589553950233198529
+Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com [209.85.218.68])
+ by mx.groups.io with SMTP id smtpd.web11.15319.1589555269607546464
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 May 2020 07:45:50 -0700
+ Fri, 15 May 2020 08:07:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@stusta.de header.s=default header.b=bQGV1vel;
- spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=vty/=65=stusta.de=bunk@stusta.mhn.de)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49Nrn83Jknz2k
-	for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 16:45:48 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1589553948;
-	bh=n10+ClJPv4Kv+xdP56LFFkf62odZKfg0NVeCxtHiQzs=;
-	h=From:To:Subject:Date:From;
-	b=bQGV1velI0+kci+mkrP2a/Jr8HXXszsfTxFP4sdOdaSz6tgYOuF63ITZkRqA8hjVT
-	 MlmR6qvhnTcTaOV7xlfb3O4i/MIhofLX/obzjJSlOCBn7OuPDGsNLezRWT7zaRDSZ8
-	 l8/+Tkw7hnTlOa3nTrBcPKOZzGyoPUnvsQWX+JQ4Fq/LWIIe1JkbFO6bdQFiwyZoW4
-	 Rx2QsG+HgHHE8QxZBeCh/3d4xlN5BFiCVJtmZsRidbDGFIS24j4Oa2+jHl9kEIIYfE
-	 +0B1l0fCYh7viDiKLjqxmVKcPoBfEkVbCRKlOktXbOC65NXInSR1gwUeN2byp2q2hS
-	 pc+MpE9x6aN/C2DRI6g3rB4kabn2/pZxgPILSCEYuPjLmNGErDFr0TYz5STowNZyIb
-	 wqXr0FsJju78AJhWfTkqLn/hg/eGdag6bysLy7eazGkhlYDcUZuSTIWSHpgPjOmxIF
-	 65n2rTOOGxirxZquThbsv++e2FdxyHWNUbw7uAJv4eZUq4LCuWGqId93Kz2VFh+PWZ
-	 vlho3NsA/A6JQ/6r9f4bZ4VWH3pTtY1sgBt/7yaIRE+xDsJvXPPJ+xI7fsD6aj3gt7
-	 uEXIfZANcpjuDKFusFHqJSWtOM0vByGzkdPd2+owgslGwxmKem/MCexFoOBIa/hpf0
-	 UqN53oO09uTzc3QiTo2V0wJA=
-From: "Adrian Bunk" <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][warrior][PATCH] wireless-regdb: Upgrade 2019.06.03 -> 2020.04.29
-Date: Fri, 15 May 2020 17:45:47 +0300
-Message-Id: <20200515144547.8912-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=MTRTthWJ;
+ spf=pass (domain: gmail.com, ip: 209.85.218.68, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f68.google.com with SMTP id h21so2488440ejq.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 08:07:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=zMtgxH6fvVEFM3hXyOWJBv7XkUAMfdFDzy3wwl3HMKY=;
+        b=MTRTthWJMa5m5PTHpEEh/rm8YtxgxGHYwPDV7IEzJcND3N1wjB/24gpQDcXxcLX8QI
+         7bPOMC+5QlV2Vbiz+IkskWI0zTkYRTNgI1Sfe8Qp2JrIct5mXpguhOcS4OPKjITXd9OC
+         J9PMMVyy5qPyzcyl1+0QF6mB0ezH54TmyZJ8ow+k6gELpRGEmsXw7rhdYlMPpKn9BP44
+         hlqjQjOoQDqrLFUMM9goZuR2SeSVlYHFgPB3V36lrd1uOo5U5Vq758IvYpUTKvBiRUpb
+         SKQgUQtas0o3B812WMtKsv6dfnDDqb3wM5xPOni1/zUcoDfUKd8DITD+GTJvstsDGvX3
+         XijQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=zMtgxH6fvVEFM3hXyOWJBv7XkUAMfdFDzy3wwl3HMKY=;
+        b=P20YEKJDq6uQ1OzHKNkR4M4rFjbfcwnz3mJyVAWBSsiS9zJ9Pk16viiKhY8ooqvHou
+         btSl3/IRaKjJDqCzfC1aj0thj0wuyIUjl6FRPtWYPEYGJvaPYjJ20ELCtlYzpLVmBKYm
+         1LuIv/MiQGdILDqkVX0RTduKAsveYfwDGTUJUpxbYT0KdB3zVNof52GNh+F71SzzxkHS
+         BTsHLwfnaFL2uS5J1Sadr6JpRve9VVtVfdEGzNTa6ITSwcnlu2Xu+PEJn6s9WLGGw8h3
+         QrtRChUBxeLDR0DxEArLinEfaCeBBuCysYWribzq7sl20OQ1ROsXvtf4qFpFyeh+tn97
+         dDMw==
+X-Gm-Message-State: AOAM531J36V2H9WdlCQUoRddGsUlmiLTw5aGfflf81Eo6Xlge+DfwEqw
+	GZJW90k1p5mIdHmwilR2QEi637XZqQuBw05QWbo=
+X-Google-Smtp-Source: ABdhPJxCQqmx4Ivn4wSmh4NSSXrKuiP2MkD02AekBNt15nIgqMGz4kOKEl/kc3ztKUPLdr75UhnzrnUcXARrxhNuZnM=
+X-Received: by 2002:a17:906:bc4c:: with SMTP id s12mr3294471ejv.285.1589555268118;
+ Fri, 15 May 2020 08:07:48 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200515121436.2078760-1-sean@geanix.com> <CAP71Wjw91K67Z2fV9AyySsapyjmg20WE4c3JY84kr5+i0=u-Og@mail.gmail.com>
+In-Reply-To: <CAP71Wjw91K67Z2fV9AyySsapyjmg20WE4c3JY84kr5+i0=u-Og@mail.gmail.com>
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+Date: Fri, 15 May 2020 17:07:37 +0200
+Message-ID: <CA+chaQeKWuojLcT8Hq+CwycKS9Apgf2kwwmTP+6R4Zwb9OqY1Q@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] gpsd: fix build on aarch64
+To: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Cc: Sean Nyekjaer <sean@geanix.com>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Alistair Francis <alistair23@gmail.com>
+Content-Type: multipart/alternative; boundary="0000000000001b6df405a5b12d09"
 
-From: Adrian Bunk <bunk@kernel.org>
+--0000000000001b6df405a5b12d09
+Content-Type: text/plain; charset="UTF-8"
 
-(From OE-Core rev: 5b71a3f3d1bca6b52f53b97971131a6771618420)
+I was seeing this issue also on arm (raspberrypi4), so it's not specific to
+aarch64 as subject says.
 
-Signed-off-by: Adrian Bunk <bunk@kernel.org>
-Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
----
-Recipe moved to OE-core in zeus.
----
- ...reless-regdb_2019.06.03.bb => wireless-regdb_2020.04.29.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/wireless-regdb/{wireless-regdb_2019.06.03.bb => wireless-regdb_2020.04.29.bb} (91%)
+With this fix I'm still seeing build failure:
+| ppsthread.c:1281: error: undefined reference to 'pthread_create'
 
-diff --git a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.06.03.bb b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2020.04.29.bb
-similarity index 91%
-rename from meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.06.03.bb
-rename to meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2020.04.29.bb
-index ded44b3d4..7c9c6e5c3 100644
---- a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.06.03.bb
-+++ b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2020.04.29.bb
-@@ -5,8 +5,7 @@ LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
- 
- SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz"
--SRC_URI[md5sum] = "4b5ba3f089db7fdb7b9daae6a7c1f2cb"
--SRC_URI[sha256sum] = "cd917ed86b63ce8d93947979f1f18948f03a4ac0ad89ec25227b36ac00dc54bf"
-+SRC_URI[sha256sum] = "89fd031aed5977c219a71501e144375a10e7c90d1005d5d086ea7972886a2c7a"
- 
- inherit bin_package allarch
- 
--- 
-2.17.1
+going back to 3.19 fixes both issues (so it's not caused by my setup).
 
+On Fri, May 15, 2020 at 2:24 PM Nicolas Dechesne <
+nicolas.dechesne@linaro.org> wrote:
+
+>
+>
+> On Fri, May 15, 2020 at 2:14 PM Sean Nyekjaer <sean@geanix.com> wrote:
+>
+>> Explicitly add ${CC} as linker, for it to understand -Wl option.
+>>
+>> Signed-off-by: Sean Nyekjaer <sean@geanix.com>
+>> ---
+>>
+>> Alistair please check in your setup :)
+>>
+>
+> I had found the same error on dragonboard/arm64. This patch fixes the
+> build problem. Note that I have only done build test, not run time.
+> thanks!
+>
+>
+>>
+>>  meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb | 3 +++
+>>  1 file changed, 3 insertions(+)
+>>
+>> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
+>> b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
+>> index 0914f7ec2..5463c8231 100644
+>> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
+>> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
+>> @@ -35,6 +35,7 @@ EXTRA_OESCONS = " \
+>>      systemd='${SYSTEMD_OESCONS}' \
+>>      libdir='${libdir}' \
+>>      manbuild='false' \
+>> +    LINK='${CC}' \
+>>      ${PACKAGECONFIG_CONFARGS} \
+>>  "
+>>  # this cannot be used, because then chrpath is not found and only static
+>> lib is built
+>> @@ -44,6 +45,7 @@ do_compile_prepend() {
+>>      export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
+>>      export
+>> PKG_CONFIG="PKG_CONFIG_SYSROOT_DIR=\"${PKG_CONFIG_SYSROOT_DIR}\" pkg-config"
+>>      export STAGING_PREFIX="${STAGING_DIR_HOST}/${prefix}"
+>> +    export LD="${CC}"
+>>      export LINKFLAGS="${LDFLAGS}"
+>>  }
+>>
+>> @@ -51,6 +53,7 @@ do_install() {
+>>      export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
+>>      export
+>> PKG_CONFIG="PKG_CONFIG_SYSROOT_DIR=\"${PKG_CONFIG_SYSROOT_DIR}\" pkg-config"
+>>      export STAGING_PREFIX="${STAGING_DIR_HOST}/${prefix}"
+>> +    export LD="${CC}"
+>>      export LINKFLAGS="${LDFLAGS}"
+>>
+>>      export DESTDIR="${D}"
+>> --
+>> 2.26.2
+>>
+>>
+>> 
+>
+
+--0000000000001b6df405a5b12d09
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">I was seeing this issue also on arm (raspberrypi4), so it&=
+#39;s not specific to aarch64 as subject says.<div><br></div><div>With this=
+ fix I&#39;m still seeing=C2=A0build failure:</div><div>| ppsthread.c:1281:=
+ error: undefined reference to &#39;pthread_create&#39;<br></div><div><br><=
+/div><div>going back to 3.19 fixes both issues (so it&#39;s not caused by m=
+y setup).</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Fri, May 15, 2020 at 2:24 PM Nicolas Dechesne &lt;<a hr=
+ef=3D"mailto:nicolas.dechesne@linaro.org">nicolas.dechesne@linaro.org</a>&g=
+t; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0p=
+x 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div d=
+ir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote"><div d=
+ir=3D"ltr" class=3D"gmail_attr">On Fri, May 15, 2020 at 2:14 PM Sean Nyekja=
+er &lt;<a href=3D"mailto:sean@geanix.com" target=3D"_blank">sean@geanix.com=
+</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
+0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
+Explicitly add ${CC} as linker, for it to understand -Wl option.<br>
+<br>
+Signed-off-by: Sean Nyekjaer &lt;<a href=3D"mailto:sean@geanix.com" target=
+=
+=3D"_blank">sean@geanix.com</a>&gt;<br>
+---<br>
+<br>
+Alistair please check in your setup :)<br></blockquote><div><br></div><div=
+>I had found the same error on dragonboard/arm64. This patch fixes the buil=
+d problem. Note that I have only done build test, not run time.</div><div>t=
+hanks!</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"mar=
+gin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1=
+ex">
+<br>
+=C2=A0meta-oe/recipes-navigation/gpsd/<a href=3D"http://gpsd_3.20.bb" rel=
+=3D"noreferrer" target=3D"_blank">gpsd_3.20.bb</a> | 3 +++<br>
+=C2=A01 file changed, 3 insertions(+)<br>
+<br>
+diff --git a/meta-oe/recipes-navigation/gpsd/<a href=3D"http://gpsd_3.20.b=
+b" rel=3D"noreferrer" target=3D"_blank">gpsd_3.20.bb</a> b/meta-oe/recipes-=
+navigation/gpsd/<a href=3D"http://gpsd_3.20.bb" rel=3D"noreferrer" target=
+=3D"_blank">gpsd_3.20.bb</a><br>
+index 0914f7ec2..5463c8231 100644<br>
+--- a/meta-oe/recipes-navigation/gpsd/<a href=3D"http://gpsd_3.20.bb" rel=
+=3D"noreferrer" target=3D"_blank">gpsd_3.20.bb</a><br>
++++ b/meta-oe/recipes-navigation/gpsd/<a href=3D"http://gpsd_3.20.bb" rel=
+=3D"noreferrer" target=3D"_blank">gpsd_3.20.bb</a><br>
+@@ -35,6 +35,7 @@ EXTRA_OESCONS =3D &quot; \<br>
+=C2=A0 =C2=A0 =C2=A0systemd=3D&#39;${SYSTEMD_OESCONS}&#39; \<br>
+=C2=A0 =C2=A0 =C2=A0libdir=3D&#39;${libdir}&#39; \<br>
+=C2=A0 =C2=A0 =C2=A0manbuild=3D&#39;false&#39; \<br>
++=C2=A0 =C2=A0 LINK=3D&#39;${CC}&#39; \<br>
+=C2=A0 =C2=A0 =C2=A0${PACKAGECONFIG_CONFARGS} \<br>
+=C2=A0&quot;<br>
+=C2=A0# this cannot be used, because then chrpath is not found and only st=
+atic lib is built<br>
+@@ -44,6 +45,7 @@ do_compile_prepend() {<br>
+=C2=A0 =C2=A0 =C2=A0export PKG_CONFIG_PATH=3D&quot;${PKG_CONFIG_PATH}&quot=
+;<br>
+=C2=A0 =C2=A0 =C2=A0export PKG_CONFIG=3D&quot;PKG_CONFIG_SYSROOT_DIR=3D\&q=
+uot;${PKG_CONFIG_SYSROOT_DIR}\&quot; pkg-config&quot;<br>
+=C2=A0 =C2=A0 =C2=A0export STAGING_PREFIX=3D&quot;${STAGING_DIR_HOST}/${pr=
+efix}&quot;<br>
++=C2=A0 =C2=A0 export LD=3D&quot;${CC}&quot;<br>
+=C2=A0 =C2=A0 =C2=A0export LINKFLAGS=3D&quot;${LDFLAGS}&quot;<br>
+=C2=A0}<br>
+<br>
+@@ -51,6 +53,7 @@ do_install() {<br>
+=C2=A0 =C2=A0 =C2=A0export PKG_CONFIG_PATH=3D&quot;${PKG_CONFIG_PATH}&quot=
+;<br>
+=C2=A0 =C2=A0 =C2=A0export PKG_CONFIG=3D&quot;PKG_CONFIG_SYSROOT_DIR=3D\&q=
+uot;${PKG_CONFIG_SYSROOT_DIR}\&quot; pkg-config&quot;<br>
+=C2=A0 =C2=A0 =C2=A0export STAGING_PREFIX=3D&quot;${STAGING_DIR_HOST}/${pr=
+efix}&quot;<br>
++=C2=A0 =C2=A0 export LD=3D&quot;${CC}&quot;<br>
+=C2=A0 =C2=A0 =C2=A0export LINKFLAGS=3D&quot;${LDFLAGS}&quot;<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0export DESTDIR=3D&quot;${D}&quot;<br>
+-- <br>
+2.26.2<br>
+<br>
+<br>
+</blockquote></div></div>
+<br>
+</blockquote></div>
+
+--0000000000001b6df405a5b12d09--
