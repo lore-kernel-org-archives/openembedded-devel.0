@@ -1,77 +1,76 @@
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
- by mx.groups.io with SMTP id smtpd.web11.14192.1589552216016689148
+Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
+ by mx.groups.io with SMTP id smtpd.web11.14193.1589552217655547786
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 May 2020 07:16:56 -0700
+ Fri, 15 May 2020 07:16:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=IVLRTBxP;
- spf=pass (domain: ossystems.com.br, ip: 209.85.160.195, mailfrom: domarys.correa@ossystems.com.br)
-Received: by mail-qt1-f195.google.com with SMTP id m44so2027350qtm.8
-        for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 07:16:55 -0700 (PDT)
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=KtJ/XcZB;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.160.178, mailfrom: domarys.correa@ossystems.com.br)
+Received: by mail-qt1-f178.google.com with SMTP id v4so2058533qte.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 07:16:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=Rkm8kzZKHWW1g7Zav+pJLdgPrT2e5JY3O3koEm8M6so=;
-        b=IVLRTBxPRFj9+d6/fEHWUFMFETyv5jUbSLhpikbH79kgHc1/LQIsSaMHd61JkEXogf
-         3iw2Dz2wIR9BvNL03yde4dSqTz4IwAFxD8AuXORCXbUlyQT8pg3VWjeSfsO9n18ct12E
-         dgXleJhxCZQtVBBUSF5M3F2x+X/ybcT2EPVu9Ds/l8cZ+MMRYE2JnDdpSetYWBldQYxC
-         ubRkiHKabPJlWssyeOpQGcrtf960PeCM3kVDPJ5xZpDarD7Ua96baBzpO3cPwFVCiphh
-         M4DKHLV+VNc1CldCCywq5ae96qrrXirniNmEC9yjdS/TCrmFAYGj932o/oJY9uhac6ql
-         EN8w==
+        bh=hoWw5zKe3PEvJWPOMhlOPpupZ4IoM1hpUiN7FJhOdRM=;
+        b=KtJ/XcZBIxoUOLCv6I0/R6zS5sCMOCimMj9DiiiXMx+iX1+0AJN4CKI+XkeVQTf9pa
+         eEx3nqFePStTEsPgACJJnwJJ+YfuWVg7ZNrziGlJ8dRYWtLjwb+3WRpd9nb4cNeQDN3M
+         Ox/NLXuBdvNTex/Eq86DwMkRciAIveJ4HeqLdwAqYDzDBuPN9xap9lcqJ/czt0X6xlph
+         SDeVRrjTW6kvp6v+w1y9Z5Qo/0PFTLWgJ0AiTfGnDm/Vdr5nLGmpS0yl/H7CJ4qc/YVs
+         fRDEsGiu+CBgBMTYtoqgdgrRKMqz2XBKFCSPSd2e/v7GGPfs4AZNsIqsyCwlEIV5Nv9/
+         /a0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=Rkm8kzZKHWW1g7Zav+pJLdgPrT2e5JY3O3koEm8M6so=;
-        b=PIvShJ/yiXsAci80IUEoDPNW2DbMBw6YWObuD5BlmILMCkuEn4NdoHWXcfivsbcdjV
-         4dVoLiqrdXfCTTijQK94XjVmI3TTYzbEp3J6bhLa7mbtRNF8I6udcCLy6+v0ULqWwD0P
-         MHx/L7wHcoLH8/nkY8NVX1oMej0b9aGYxUabMrcKtMRB+7l3h99Ohnc8shHCh/8mRFm2
-         u6AJavAUbqRW/cnBcEWlDi+uFGArdU/OK5uZaqDeJ8r7f3t3D0tFz/cygJPUxys9yMkZ
-         jn+ExhFB9RaqPhl5pjY09QOpRCrpWDgYAJgCk24DVebf8w1jji+hSQE70zh6EI+chR6U
-         iWWw==
-X-Gm-Message-State: AOAM530B1O0P+E9lLcWd4fsYSz1lCgG5hNKaw563Rag3aZT+YXdzz7ny
-	VWkeqrOzWsd4eB5NwBH62Y9fHVhWiug=
-X-Google-Smtp-Source: ABdhPJzVO2UmegLtn5dmdIqpCjHpFUaZhaXgxj2NlF1RWc/tUNc6PcSXjs0ZfCSdlssK8RZOQNE46A==
-X-Received: by 2002:ac8:1194:: with SMTP id d20mr3858672qtj.359.1589552215022;
-        Fri, 15 May 2020 07:16:55 -0700 (PDT)
+        bh=hoWw5zKe3PEvJWPOMhlOPpupZ4IoM1hpUiN7FJhOdRM=;
+        b=f6yCH6xEwzJ3miUZF257KVoY85f3ikskohMcoWyEo150cpv89en3fbC2Dmr6W4zRLK
+         hX9zz3ddYKuOgxh6VnO5uIe4tUaNC00JFhkcL444GWywwM5geUQ2X07YI5Z9cfhTxU5b
+         nFlWVe/nOBejTdz8zs/WYpxU4KHPQCaLLjIBUHjx/tU7VXwjH0yMFHDuD0dAfoqGl5be
+         QCPGDjG5BK/K8e/mo3nYNqcyznYp6Dy6cyf8rM+DgVlVFzdP1nAPJBWG7/ouh5heoHZ+
+         RuBW21SVXMK+hr5t1X03IdqvpFBBPd1hPSk1PFQWQUTcgNrbo/wPPGBppPu9QiaPl0Vq
+         Dy+w==
+X-Gm-Message-State: AOAM531tVDBKkASDrPIjXPvCmqhzmoCnwVp32+LjY+yW4VMqFYvRObIn
+	LCv+rWa9z8c88ru6n5cVr6tbZEHGz74=
+X-Google-Smtp-Source: ABdhPJwGLlvb0e9S6CoTd30+efbHG2iMozfW/02eB6FlHqMJ+I5A0HztFpj7HO1Lp6iwEXMOsUGy9A==
+X-Received: by 2002:ac8:1c67:: with SMTP id j36mr2582723qtk.34.1589552216706;
+        Fri, 15 May 2020 07:16:56 -0700 (PDT)
 Return-Path: <domarys.correa@ossystems.com.br>
 Received: from Monster.domain.name ([2804:7f4:c195:1db7:5434:711e:b23:e7fd])
-        by smtp.gmail.com with ESMTPSA id m33sm2170749qtb.88.2020.05.15.07.16.53
+        by smtp.gmail.com with ESMTPSA id m33sm2170749qtb.88.2020.05.15.07.16.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 15 May 2020 07:16:54 -0700 (PDT)
+        Fri, 15 May 2020 07:16:56 -0700 (PDT)
 From: "Domarys Correa" <domarys.correa@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 Cc: Domarys Correa <domarys.correa@ossystems.com.br>
-Subject: [PATCH 06/11] python3-trafaret-config: Add recipe version 2.0.2
-Date: Fri, 15 May 2020 11:16:25 -0300
-Message-Id: <20200515141630.27789-6-domarys.correa@ossystems.com.br>
+Subject: [PATCH 07/11] python3-txaio: Add recipe version 20.4.1
+Date: Fri, 15 May 2020 11:16:26 -0300
+Message-Id: <20200515141630.27789-7-domarys.correa@ossystems.com.br>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200515141630.27789-1-domarys.correa@ossystems.com.br>
 References: <20200515141630.27789-1-domarys.correa@ossystems.com.br>
 
 Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
 ---
- .../python/python3-trafaret-config_2.0.2.bb       | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-trafaret-config_2.0.2.bb
+ .../python/python3-txaio_20.4.1.bb                 | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-txaio_20.4.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-trafaret-config_2.0.2.bb b/meta-python/recipes-devtools/python/python3-trafaret-config_2.0.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-txaio_20.4.1.bb b/meta-python/recipes-devtools/python/python3-txaio_20.4.1.bb
 new file mode 100644
-index 000000000..b0f7548e4
+index 000000000..75a9395a2
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-trafaret-config_2.0.2.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "This is a wrapper that loads yaml and checks config using trafaret while keeping track of actual lines of file where error has happened."
++++ b/meta-python/recipes-devtools/python/python3-txaio_20.4.1.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "Compatibility API between asyncio/Twisted/Trollius"
 +
-+LICENSE = "Apache-2.0 & MIT"
-+LIC_FILES_CHKSUM = "file://README.rst;beginline=98;endline=106;md5=a15308789c3b7d0f3ef36b69048423e4"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98"
 +
-+SRC_URI[sha256sum] = "440b6b49e5e975f9a640a2519abb2feddd96eb2aeb1715f87f947a7a079f20be"
++SRC_URI[sha256sum] = "17938f2bca4a9cabce61346758e482ca4e600160cbc28e861493eac74a19539d"
 +
 +inherit pypi setuptools3
 +
 +RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-trafaret \
-+    ${PYTHON_PN}-pyyaml \
++    ${PYTHON_PN}-twisted \
 +"
 +
 +BBCLASSEXTEND = "native nativesdk"
