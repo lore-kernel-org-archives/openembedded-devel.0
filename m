@@ -1,147 +1,95 @@
-Received: from mail-io1-f66.google.com (mail-io1-f66.google.com [209.85.166.66])
- by mx.groups.io with SMTP id smtpd.web12.15454.1589556133924204007
+Received: from mail-il1-f194.google.com (mail-il1-f194.google.com [209.85.166.194])
+ by mx.groups.io with SMTP id smtpd.web11.16082.1589557305137703915
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 May 2020 08:22:14 -0700
+ Fri, 15 May 2020 08:41:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ojvD9MVR;
- spf=pass (domain: gmail.com, ip: 209.85.166.66, mailfrom: raj.khem@gmail.com)
-Received: by mail-io1-f66.google.com with SMTP id h10so3077036iob.10
-        for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 08:22:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=MuXZehgf;
+ spf=pass (domain: gmail.com, ip: 209.85.166.194, mailfrom: alistair23@gmail.com)
+Received: by mail-il1-f194.google.com with SMTP id w18so2935358ilm.13
+        for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 08:41:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=4shAyxyilaH4R2IjbYr7qj0dvCSDMD4/D2mNBpRKaWA=;
-        b=ojvD9MVRW1mW7C384Iq+FZ3RdSX+ttBIFID7DFzmC+MCnTIK6lBuPh2CwshNVDLtH7
-         i996IqTUOCQwC0O49jWVeDJDbqAm3GIWRrUxNWx+DlXEToRFFxCCOq8ZQZARQjEced3R
-         bkh8Acxpqr6HSD4dtrg7Ee+0gMVv0LSZj3LUN8Upv452BGHiiGELmGMCRPaiDePyGX7o
-         5cbNk3ObVBGpHw+neBAgoiB1VzjWqyz5qb/m6auTi+dGEjYjQWQBQCYKH/qeCepMgTgc
-         nwOZhsl1PVy8ilDjd5wuBeW5liylK+QgwygZ7tw6UHnKblqqzkGs9VWA7pCaq593ipJ3
-         qqJw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=AoRGYIFr5+MjolZd7WMlzuisi68uC9FUCAfTVgcTPDo=;
+        b=MuXZehgfCnLKas1ypbldFrIsNA9a8zzxDsE6SuyQf+U7eJoFO8+sSpi9k7R5+2ZU7X
+         u1BnmsjfZQh2R+Y36064TceG+8r6stH2Q0z6J7bKq2LrqDkGY3YtyAth0VnmLKXShGR7
+         CwAdbr2gqV9LFeAnRUX4ifWsjeC4ZhZq8QV/7jxt32dZyqC8FkZQ10Sro8YEk4rIlzPR
+         7NVZg1G4UI1rvDv8/fk81yA2ybM6dHjFH1VKvjr+Tvh5dCGxXY3tCH2ymhapOVO3pz5l
+         lalTNeGWO9Zvpg1wagKNOgHBQ/wdzivCmiKlz3D598Oz28WPjis6lo5dOc2OWYDK62u/
+         sEEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=4shAyxyilaH4R2IjbYr7qj0dvCSDMD4/D2mNBpRKaWA=;
-        b=aRxJY1+gN0wniTu9FXM627qpW/Gspz2Ejn54CvL/XHh18OAQvlzYaGabFK8grNfP4i
-         KSDAwW4RpFPkU+IQ2WQKrJTaSbE+AqCN31yC81WcP7dUSb8SYjLN7cShK/ZgWmHqwPqh
-         mGK/hOmrumMntMK6wtstCPNGMhU3ZAlGPjNqcFd5MD9KN+sIg9Qwfa/wfFZ7cQtOcKVa
-         zzsYm4YRR6pMIxLXgGqU4rH6Uzb0Ux13pQhskYWFYrtE606EOJsv/por2Vhai06yOREi
-         CLjKH/tDV9QqoEikJw69O9xMwcfLMM7D7RZXbdWCH9Vjk5T1cEW1mg9WoMYos3DScnrZ
-         djcQ==
-X-Gm-Message-State: AOAM533+oXCxVmYdnZoIDtaSYX5/f8gbtINcgxDOIJKYABy2xIvUlmpt
-	BuUM2oGPqtHJ6MTOeJF4/9U=
-X-Google-Smtp-Source: ABdhPJztp70kyz9lHup7OrRs5WKXvlmyxWsEpB3xK0VZClZ51b7QowD62BHNOuQK2Px5q3ss7WB2ig==
-X-Received: by 2002:a5d:8591:: with SMTP id f17mr3463191ioj.26.1589556133172;
-        Fri, 15 May 2020 08:22:13 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:4e0:33:f6fe:2ae3:dbd8? ([2601:646:9200:4e0:33:f6fe:2ae3:dbd8])
-        by smtp.gmail.com with ESMTPSA id 17sm1023771ill.14.2020.05.15.08.22.12
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 15 May 2020 08:22:12 -0700 (PDT)
-Subject: Re: [oe] [meta-oe] [PATCH] gpsd: fix build on aarch64
-To: Martin Jansa <Martin.Jansa@gmail.com>,
- Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Cc: Sean Nyekjaer <sean@geanix.com>,
- openembedded-devel <openembedded-devel@lists.openembedded.org>,
- Alistair Francis <alistair23@gmail.com>
-References: <20200515121436.2078760-1-sean@geanix.com>
- <CAP71Wjw91K67Z2fV9AyySsapyjmg20WE4c3JY84kr5+i0=u-Og@mail.gmail.com>
- <CA+chaQeKWuojLcT8Hq+CwycKS9Apgf2kwwmTP+6R4Zwb9OqY1Q@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Message-ID: <ee978f33-6598-d425-2ae9-1784690b7ec3@gmail.com>
-Date: Fri, 15 May 2020 08:22:11 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.8.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=AoRGYIFr5+MjolZd7WMlzuisi68uC9FUCAfTVgcTPDo=;
+        b=GmpRPQa1z0SrBL3hrX1xSeTrMph5jTsJ6FG8gUScZUwqf+QZKgpHznIVjdfAwVzN1R
+         eIpNrHzyWFLZAoIQYN1f6Vd75yiLNlUtS+F4V+tLwEkzP8Ci9yw1voLx9E6Xo5U2kn09
+         PxxW0PFe6wFxLYh5ZcfyJqA9TWMizIOiNBtX/Xw0KsPpxNbT0kTegs2lM60LFLNkJZm/
+         OnhRtF0KtbgIaSK0eFt67t3pknrat4OlGC5mbj6bDteb0X9LukJ0CseF+9ceiZP5ec5I
+         PoL75jIeDfd27Isa6bZ4J/bVrDoF5E7hzjL2ikvNzUNBm9ZP+1GwtN68InB/75m3Baha
+         wCxg==
+X-Gm-Message-State: AOAM533dhFbSzAcLHhJoX9ap69hyCdsoLlqqikrlSTo3E08YKmkZ8DDt
+	MfZthteQcPxkBhZujwfK8Hu7nSeKBzc3T7yOtEVXEiQP
+X-Google-Smtp-Source: ABdhPJy+gx8kK0gfHckTkcWqlWtfdzqr72VPko5X2Jb8W1Mf9uOzif9VFmc7Msxsc6p7oq1+ZuO71RCPxgKf0SA3Gag=
+X-Received: by 2002:a92:de02:: with SMTP id x2mr4094074ilm.267.1589557304481;
+ Fri, 15 May 2020 08:41:44 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQeKWuojLcT8Hq+CwycKS9Apgf2kwwmTP+6R4Zwb9OqY1Q@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+References: <20200515121436.2078760-1-sean@geanix.com>
+In-Reply-To: <20200515121436.2078760-1-sean@geanix.com>
+From: "Alistair Francis" <alistair23@gmail.com>
+Date: Fri, 15 May 2020 08:32:55 -0700
+Message-ID: <CAKmqyKNVJ6AgYnO=GCtm+4krQW_0+dS=-DLDQ9HnZh_mnxCrog@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] gpsd: fix build on aarch64
+To: Sean Nyekjaer <sean@geanix.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
+On Fri, May 15, 2020 at 5:14 AM Sean Nyekjaer <sean@geanix.com> wrote:
+>
+> Explicitly add ${CC} as linker, for it to understand -Wl option.
+>
+> Signed-off-by: Sean Nyekjaer <sean@geanix.com>
+> ---
+>
+> Alistair please check in your setup :)
 
+Thanks! This fixes the build for me.
 
-On 5/15/20 8:07 AM, Martin Jansa wrote:
-> I was seeing this issue also on arm (raspberrypi4), so it's not specific 
-> to aarch64 as subject says.
-> 
-> With this fix I'm still seeing build failure:
-> | ppsthread.c:1281: error: undefined reference to 'pthread_create'
-> 
+Alistair
 
-Perhaps also set LDFLAGS = "-pthread"
-
-> going back to 3.19 fixes both issues (so it's not caused by my setup).
-> 
-> On Fri, May 15, 2020 at 2:24 PM Nicolas Dechesne 
-> <nicolas.dechesne@linaro.org <mailto:nicolas.dechesne@linaro.org>> wrote:
-> 
-> 
-> 
->     On Fri, May 15, 2020 at 2:14 PM Sean Nyekjaer <sean@geanix.com
->     <mailto:sean@geanix.com>> wrote:
-> 
->         Explicitly add ${CC} as linker, for it to understand -Wl option.
-> 
->         Signed-off-by: Sean Nyekjaer <sean@geanix.com
->         <mailto:sean@geanix.com>>
->         ---
-> 
->         Alistair please check in your setup :)
-> 
-> 
->     I had found the same error on dragonboard/arm64. This patch fixes
->     the build problem. Note that I have only done build test, not run time.
->     thanks!
-> 
-> 
->           meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
->         <http://gpsd_3.20.bb> | 3 +++
->           1 file changed, 3 insertions(+)
-> 
->         diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
->         <http://gpsd_3.20.bb>
->         b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb <http://gpsd_3.20.bb>
->         index 0914f7ec2..5463c8231 100644
->         --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
->         <http://gpsd_3.20.bb>
->         +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
->         <http://gpsd_3.20.bb>
->         @@ -35,6 +35,7 @@ EXTRA_OESCONS = " \
->               systemd='${SYSTEMD_OESCONS}' \
->               libdir='${libdir}' \
->               manbuild='false' \
->         +    LINK='${CC}' \
->               ${PACKAGECONFIG_CONFARGS} \
->           "
->           # this cannot be used, because then chrpath is not found and
->         only static lib is built
->         @@ -44,6 +45,7 @@ do_compile_prepend() {
->               export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
->               export
->         PKG_CONFIG="PKG_CONFIG_SYSROOT_DIR=\"${PKG_CONFIG_SYSROOT_DIR}\"
->         pkg-config"
->               export STAGING_PREFIX="${STAGING_DIR_HOST}/${prefix}"
->         +    export LD="${CC}"
->               export LINKFLAGS="${LDFLAGS}"
->           }
-> 
->         @@ -51,6 +53,7 @@ do_install() {
->               export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
->               export
->         PKG_CONFIG="PKG_CONFIG_SYSROOT_DIR=\"${PKG_CONFIG_SYSROOT_DIR}\"
->         pkg-config"
->               export STAGING_PREFIX="${STAGING_DIR_HOST}/${prefix}"
->         +    export LD="${CC}"
->               export LINKFLAGS="${LDFLAGS}"
-> 
->               export DESTDIR="${D}"
->         -- 
->         2.26.2
-> 
-> 
-> 
-> 
-> 
-> 
+>
+>  meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
+> index 0914f7ec2..5463c8231 100644
+> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
+> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
+> @@ -35,6 +35,7 @@ EXTRA_OESCONS = " \
+>      systemd='${SYSTEMD_OESCONS}' \
+>      libdir='${libdir}' \
+>      manbuild='false' \
+> +    LINK='${CC}' \
+>      ${PACKAGECONFIG_CONFARGS} \
+>  "
+>  # this cannot be used, because then chrpath is not found and only static lib is built
+> @@ -44,6 +45,7 @@ do_compile_prepend() {
+>      export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
+>      export PKG_CONFIG="PKG_CONFIG_SYSROOT_DIR=\"${PKG_CONFIG_SYSROOT_DIR}\" pkg-config"
+>      export STAGING_PREFIX="${STAGING_DIR_HOST}/${prefix}"
+> +    export LD="${CC}"
+>      export LINKFLAGS="${LDFLAGS}"
+>  }
+>
+> @@ -51,6 +53,7 @@ do_install() {
+>      export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
+>      export PKG_CONFIG="PKG_CONFIG_SYSROOT_DIR=\"${PKG_CONFIG_SYSROOT_DIR}\" pkg-config"
+>      export STAGING_PREFIX="${STAGING_DIR_HOST}/${prefix}"
+> +    export LD="${CC}"
+>      export LINKFLAGS="${LDFLAGS}"
+>
+>      export DESTDIR="${D}"
+> --
+> 2.26.2
+>
