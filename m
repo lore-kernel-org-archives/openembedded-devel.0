@@ -1,181 +1,344 @@
-Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com [209.85.219.177])
- by mx.groups.io with SMTP id smtpd.web11.12068.1589545457910672801
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.12108.1589545974869586212
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 May 2020 05:24:18 -0700
+ Fri, 15 May 2020 05:32:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=fwV5KFqJ;
- spf=pass (domain: linaro.org, ip: 209.85.219.177, mailfrom: nicolas.dechesne@linaro.org)
-Received: by mail-yb1-f177.google.com with SMTP id o134so1039858ybg.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 05:24:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=+XP1APE1cjMoPJItLZCJwF4qUG1UEv7WSeXpc4TaGPE=;
-        b=fwV5KFqJ4XRldILPQ9SzVD9rj5gQg6EfY1wVkcEgGop1VDjF+SVKO7Yp4Q0JA3zGsy
-         fsfjRnemvkVqeGaHA+AENzScy5jnL6S4r6vTPdSgI9lRDbwzxm3g3eBqYPc7q6BM3Cjx
-         pvmXSwmiyO73RgLjxkqyPNi9ekk4cg5pqswuZvBBbCDiWqoCRLT9rV1XjbHckJTOYm1M
-         qlwMuhL5KM/mVzQIa9NbjUDK/KhY6C0F5eYOJhvZzJSpu7vkc8i+TuAe7ss0SNL3Pc20
-         aSshh3FsPVIY05F1ex4Db/tMmYG9XdGn6GcHA1vgcFhTH/W4Vb99Nn8Qi9QqnW9+OfTH
-         cLEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=+XP1APE1cjMoPJItLZCJwF4qUG1UEv7WSeXpc4TaGPE=;
-        b=FB5C+jSt/0Ghg6mnHvAj5ZzW425WtN6uiOAoAtdNyxdVa5IYfDhki5rBArga4B3ZVN
-         MwlncWyQLc4P3lmtmOka078XSAXdCKmgbQ6rs2h0mvdyoLHoIRctLQ42nfGtu0d3g1Q/
-         fSMkAntjlBYM/SCW7yoVodZZy70fq8OimImoHLSJoLq82XNxSmfx1EMe45E5xrB1s7fh
-         k1K2OUhXhJDo5nujfT/KIBd9ryMCL3kKFp+O1PmKNnxClz3a/4pc16j+aMYDvTSxZnP/
-         Tm62dmMfXFjWhIgog+w9LaD0++UH5tzhDJOVRy65ybghBJhr7jpcrWvWKkRZWdpdyZgr
-         bR5Q==
-X-Gm-Message-State: AOAM531ICkaMTGoW6eY0vitO947diZ3rFKe8v3uVzV/yTdj3M6MkzI+S
-	O4uQIB7FY/ChkoVWnPCAIEEOsbEi9XLaARjG55jmww==
-X-Google-Smtp-Source: ABdhPJztj8Rj08FrQAwPIJlhmsc91YAH0Y6qdqz55jMPbj5GZretGOnIzlTnvnCGF15XlT4gLvSJDZjNgPzFcKwzshQ=
-X-Received: by 2002:a5b:a8e:: with SMTP id h14mr4892480ybq.454.1589545456802;
- Fri, 15 May 2020 05:24:16 -0700 (PDT)
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=39948 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jZZWC-00057Z-6y; Fri, 15 May 2020 15:32:51 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH] transmission: Add version 2.94
+Date: Fri, 15 May 2020 15:32:42 +0300
+Message-Id: <20200515123242.12162-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20200515121436.2078760-1-sean@geanix.com>
-In-Reply-To: <20200515121436.2078760-1-sean@geanix.com>
-From: "Nicolas Dechesne" <nicolas.dechesne@linaro.org>
-Date: Fri, 15 May 2020 14:24:06 +0200
-Message-ID: <CAP71Wjw91K67Z2fV9AyySsapyjmg20WE4c3JY84kr5+i0=u-Og@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH] gpsd: fix build on aarch64
-To: Sean Nyekjaer <sean@geanix.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>, alistair23@gmail.com
-Content-Type: multipart/alternative; boundary="0000000000004eb04d05a5aee41e"
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---0000000000004eb04d05a5aee41e
-Content-Type: text/plain; charset="UTF-8"
+Transmission is a fast, easy, and free BitTorrent client. This
+recipe provides it as a GTK+ application for X11, headless daemon
+and a web user interface (UI).
 
-On Fri, May 15, 2020 at 2:14 PM Sean Nyekjaer <sean@geanix.com> wrote:
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ ...onfigure.ac-Fix-no-libsystemd-daemon.patch |  40 +++++
+ .../transmission/files/transmission-daemon    | 163 ++++++++++++++++++
+ .../transmission/transmission_git.bb          |  73 ++++++++
+ 3 files changed, 276 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/transmission/files/0001-configure.ac-Fix-no-libsystemd-daemon.patch
+ create mode 100644 meta-oe/recipes-connectivity/transmission/files/transmission-daemon
+ create mode 100644 meta-oe/recipes-connectivity/transmission/transmission_git.bb
 
-> Explicitly add ${CC} as linker, for it to understand -Wl option.
->
-> Signed-off-by: Sean Nyekjaer <sean@geanix.com>
-> ---
->
-> Alistair please check in your setup :)
->
+diff --git a/meta-oe/recipes-connectivity/transmission/files/0001-configure.ac-Fix-no-libsystemd-daemon.patch b/meta-oe/recipes-connectivity/transmission/files/0001-configure.ac-Fix-no-libsystemd-daemon.patch
+new file mode 100644
+index 000000000..130ead084
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/transmission/files/0001-configure.ac-Fix-no-libsystemd-daemon.patch
+@@ -0,0 +1,40 @@
++From 73ee7e68402a77287054df779f0e44ae1a4f9f0b Mon Sep 17 00:00:00 2001
++From: Leon Anavi <leon.anavi@konsulko.com>
++Date: Mon, 11 May 2020 17:01:35 +0000
++Subject: [PATCH] configure.ac: Fix no libsystemd-daemon
++
++Replace libsystemd-daemon with libsystemd.
++
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++---
++ configure.ac | 5 ++---
++ 1 file changed, 2 insertions(+), 3 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index df8cb5007..9a6fb9b2e 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -249,10 +249,10 @@ AC_ARG_WITH([systemd-daemon], AS_HELP_STRING([--with-systemd-daemon],
++             [Add support for systemd startup notification (default is autodetected)]),
++             [USE_SYSTEMD_DAEMON=$withval], [USE_SYSTEMD_DAEMON=auto])
++ AS_IF([test "x$USE_SYSTEMD_DAEMON" != "xno"], [
++-    PKG_CHECK_MODULES([SYSTEMD_DAEMON], [libsystemd-daemon],
+++    PKG_CHECK_MODULES([SYSTEMD_DAEMON], [libsystemd],
++         [AC_DEFINE(USE_SYSTEMD_DAEMON,1,[Use systemd startup notification])],
++         [AS_IF([test "x$USE_SYSTEMD_DAEMON" = "xyes"],
++-            [AC_MSG_ERROR([systemd startup notification support requested, but libsystemd-daemon not found.])]
+++            [AC_MSG_ERROR([systemd startup notification support requested, but libsystemd not found.])]
++         )]
++     )
++ ])
++@@ -558,7 +558,6 @@ if test "x$enable_nls" = "xyes" ; then
++     GETTEXT_PACKAGE=transmission-gtk
++     AC_SUBST(GETTEXT_PACKAGE)
++     AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[Gettext package])
++-    AM_GLIB_GNU_GETTEXT
++     transmissionlocaledir='${prefix}/${DATADIRNAME}/locale'
++     AC_SUBST(transmissionlocaledir)
++ fi
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-connectivity/transmission/files/transmission-daemon b/meta-oe/recipes-connectivity/transmission/files/transmission-daemon
+new file mode 100644
+index 000000000..d1ffff58b
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/transmission/files/transmission-daemon
+@@ -0,0 +1,163 @@
++#! /bin/sh
++### BEGIN INIT INFO
++# Provides:          transmission-daemon
++# Required-Start:    networking
++# Required-Stop:     networking
++# Default-Start:     2 3 5
++# Default-Stop:      0 1 6
++# Short-Description: Start the transmission BitTorrent daemon client.
++### END INIT INFO
++
++# Original Author: Lennart A. JÃŒtte, based on Rob Howell's script
++# Modified by Maarten Van Coile & others (on IRC)
++
++# Do NOT "set -e"
++
++#
++# ----- CONFIGURATION -----
++#
++# For the default location Transmission uses, visit:
++# http://trac.transmissionbt.com/wiki/ConfigFiles
++# For a guide on how set the preferences, visit:
++# http://trac.transmissionbt.com/wiki/EditConfigFiles
++# For the available environement variables, visit:
++# http://trac.transmissionbt.com/wiki/EnvironmentVariables
++#
++# The name of the user that should run Transmission.
++# It's RECOMENDED to run Transmission in it's own user,
++# by default, this is set to 'transmission'.
++# For the sake of security you shouldn't set a password
++# on this user
++USERNAME=transmission
++
++
++# ----- *ADVANCED* CONFIGURATION -----
++# Only change these options if you know what you are doing!
++#
++# The folder where Transmission stores the config & web files.
++# ONLY change this you have it at a non-default location
++#TRANSMISSION_HOME="/var/config/transmission-daemon"
++#TRANSMISSION_WEB_HOME="/usr/share/transmission/web"
++#
++# The arguments passed on to transmission-daemon.
++# ONLY change this you need to, otherwise use the
++# settings file as per above.
++#TRANSMISSION_ARGS=""
++
++
++# ----- END OF CONFIGURATION -----
++#
++# PATH should only include /usr/* if it runs after the mountnfs.sh script.
++PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++DESC="bittorrent client"
++NAME=transmission-daemon
++DAEMON=$(which $NAME)
++PIDFILE=/var/run/$NAME.pid
++SCRIPTNAME=/etc/init.d/$NAME
++
++# Exit if the package is not installed
++[ -x "$DAEMON" ] || exit 0
++
++# Read configuration variable file if it is present
++[ -r /etc/default/$NAME ] && . /etc/default/$NAME
++
++# Load the VERBOSE setting and other rcS variables
++[ -f /etc/default/rcS ] && . /etc/default/rcS
++
++#
++# Function that starts the daemon/service
++#
++
++do_start()
++{
++    # Export the configuration/web directory, if set
++    if [ -n "$TRANSMISSION_HOME" ]; then
++          export TRANSMISSION_HOME
++    fi
++    if [ -n "$TRANSMISSION_WEB_HOME" ]; then
++          export TRANSMISSION_WEB_HOME
++    fi
++
++    # Return
++    #   0 if daemon has been started
++    #   1 if daemon was already running
++    #   2 if daemon could not be started
++    start-stop-daemon --chuid $USERNAME --start --pidfile $PIDFILE --make-pidfile \
++            --exec $DAEMON --background --test -- -f $TRANSMISSION_ARGS > /dev/null \
++            || return 1
++    start-stop-daemon --chuid $USERNAME --start --pidfile $PIDFILE --make-pidfile \
++            --exec $DAEMON --background -- -f $TRANSMISSION_ARGS \
++            || return 2
++}
++
++#
++# Function that stops the daemon/service
++#
++do_stop()
++{
++        # Return
++        #   0 if daemon has been stopped
++        #   1 if daemon was already stopped
++        #   2 if daemon could not be stopped
++        #   other if a failure occurred
++        start-stop-daemon --stop --quiet --retry=TERM/10/KILL/5 --pidfile $PIDFILE --exec $DAEMON 
++        RETVAL="$?"
++        [ "$RETVAL" = 2 ] && return 2
++
++        # Wait for children to finish too if this is a daemon that forks
++        # and if the daemon is only ever run from this initscript.
++        # If the above conditions are not satisfied then add some other code
++        # that waits for the process to drop all resources that could be
++        # needed by services started subsequently.  A last resort is to
++        # sleep for some time.
++
++        start-stop-daemon --stop --quiet --oknodo --retry=0/30/KILL/5 --exec $DAEMON
++        [ "$?" = 2 ] && return 2
++
++        # Many daemons don't delete their pidfiles when they exit.
++        rm -f $PIDFILE
++
++        return "$RETVAL"
++}
++
++case "$1" in
++  start)
++        echo "Starting $DESC" "$NAME..."
++        do_start
++        case "$?" in
++                0|1) echo "   Starting $DESC $NAME succeeded" ;;
++                *)   echo "   Starting $DESC $NAME failed" ;;
++        esac
++        ;;
++  stop)
++        echo "Stopping $DESC $NAME..."
++        do_stop
++        case "$?" in
++                0|1) echo "   Stopping $DESC $NAME succeeded" ;;
++                *)   echo "   Stopping $DESC $NAME failed" ;;
++        esac
++        ;;
++  restart|force-reload)
++        #
++        # If the "reload" option is implemented then remove the
++        # 'force-reload' alias
++        #
++        echo "Restarting $DESC $NAME..."
++        do_stop
++        case "$?" in
++          0|1)
++                do_start
++                case "$?" in
++                    0|1) echo "   Restarting $DESC $NAME succeeded" ;;
++                    *)   echo "   Restarting $DESC $NAME failed: couldn't start $NAME" ;;
++                esac
++                ;;
++          *)
++                echo "   Restarting $DESC $NAME failed: couldn't stop $NAME" ;;
++        esac
++        ;;
++  *)
++        echo "Usage: $SCRIPTNAME {start|stop|restart|force-reload}" >&2
++        exit 3
++        ;;
++esac
+diff --git a/meta-oe/recipes-connectivity/transmission/transmission_git.bb b/meta-oe/recipes-connectivity/transmission/transmission_git.bb
+new file mode 100644
+index 000000000..ee5578f8b
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/transmission/transmission_git.bb
+@@ -0,0 +1,73 @@
++DESCRIPTION = "Transmission is a fast, easy, and free BitTorrent client"
++SECTION = "network"
++HOMEPAGE = "https://transmissionbt.com/"
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=0dd9fcdc1416ff123c41c785192a1895"
++
++DEPENDS = "curl libevent gnutls openssl libtool intltool-native glib-2.0-native"
++RDEPENDS_${PN}-web = "${PN}"
++
++SRC_URI = " \
++	git://github.com/transmission/transmission \
++	file://0001-configure.ac-Fix-no-libsystemd-daemon.patch \
++	file://transmission-daemon \
++"
++
++# Transmission release 2.94
++SRCREV = "d8e60ee44f4295935bd98bf741f85ed19f5a7dfb"
++PV = "2.94"
++
++S = "${WORKDIR}/git"
++
++inherit autotools gettext update-rc.d systemd mime-xdg features_check
++
++PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)} \
++                 ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
++
++PACKAGECONFIG[gtk] = " --with-gtk,--without-gtk,gtk+3,"
++PACKAGECONFIG[systemd] = "--with-systemd-daemon,--without-systemd-daemon,systemd,"
++
++# Weak default values for transmission user and group
++# Change them in bbappend if needed
++TRANSMISSION_USER ??= "root"
++TRANSMISSION_GROUP ??= "root"
++
++# Configure aborts with:
++# config.status: error: po/Makefile.in.in was not created by intltoolize.
++B = "${S}"
++do_configure_prepend() {
++	sed -i /AM_GLIB_GNU_GETTEXT/d ${S}/configure.ac
++	cd ${S}
++	./update-version-h.sh
++	intltoolize --copy --force --automake
++}
++
++do_install_append() {
++	if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
++		sed -i '/USERNAME=/c\USERNAME=${TRANSMISSION_USER}' ${WORKDIR}/transmission-daemon
++		install -d ${D}${sysconfdir}/init.d
++		install -m 0744 ${WORKDIR}/transmission-daemon ${D}${sysconfdir}/init.d/
++		chown ${TRANSMISSION_USER}:${TRANSMISSION_GROUP} ${D}${sysconfdir}/init.d/transmission-daemon
++	fi
++
++	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++		sed -i '/User=/c\User=${TRANSMISSION_USER}' ${S}/daemon/transmission-daemon.service
++		install -d ${D}${systemd_unitdir}/system
++		install -m 0644 ${S}/daemon/transmission-daemon.service ${D}${systemd_unitdir}/system
++	fi
++}
++
++PACKAGES += "${PN}-gtk ${PN}-client ${PN}-web"
++
++FILES_${PN}-client = "${bindir}/transmission-remote ${bindir}/transmission-cli ${bindir}/transmission-create ${bindir}/transmission-show ${bindir}/transmission-edit"
++FILES_${PN}-gtk += "${bindir}/transmission-gtk ${datadir}/icons ${datadir}/applications ${datadir}/pixmaps"
++FILES_${PN}-web = "${datadir}/transmission/web"
++FILES_${PN} = "${bindir}/transmission-daemon ${sysconfdir}/init.d/transmission-daemon"
++
++SYSTEMD_SERVICE_${PN} = "transmission-daemon.service"
++
++# Script transmission-daemon following the guidelines in:
++# https://trac.transmissionbt.com/wiki/Scripts/initd
++INITSCRIPT_PACKAGES = "transmission-daemon"
++INITSCRIPT_NAME = "transmission-daemon"
++INITSCRIPT_PARAMS = "start 99 5 3 2 . stop 10 0 1 6 ."
+-- 
+2.17.1
 
-I had found the same error on dragonboard/arm64. This patch fixes the build
-problem. Note that I have only done build test, not run time.
-thanks!
-
-
->
->  meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
-> b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
-> index 0914f7ec2..5463c8231 100644
-> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
-> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
-> @@ -35,6 +35,7 @@ EXTRA_OESCONS = " \
->      systemd='${SYSTEMD_OESCONS}' \
->      libdir='${libdir}' \
->      manbuild='false' \
-> +    LINK='${CC}' \
->      ${PACKAGECONFIG_CONFARGS} \
->  "
->  # this cannot be used, because then chrpath is not found and only static
-> lib is built
-> @@ -44,6 +45,7 @@ do_compile_prepend() {
->      export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
->      export
-> PKG_CONFIG="PKG_CONFIG_SYSROOT_DIR=\"${PKG_CONFIG_SYSROOT_DIR}\" pkg-config"
->      export STAGING_PREFIX="${STAGING_DIR_HOST}/${prefix}"
-> +    export LD="${CC}"
->      export LINKFLAGS="${LDFLAGS}"
->  }
->
-> @@ -51,6 +53,7 @@ do_install() {
->      export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
->      export
-> PKG_CONFIG="PKG_CONFIG_SYSROOT_DIR=\"${PKG_CONFIG_SYSROOT_DIR}\" pkg-config"
->      export STAGING_PREFIX="${STAGING_DIR_HOST}/${prefix}"
-> +    export LD="${CC}"
->      export LINKFLAGS="${LDFLAGS}"
->
->      export DESTDIR="${D}"
-> --
-> 2.26.2
->
-> 
->
-
---0000000000004eb04d05a5aee41e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Fri, May 15, 2020 at 2:14 PM Sean =
-Nyekjaer &lt;<a href=3D"mailto:sean@geanix.com">sean@geanix.com</a>&gt; wro=
-te:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
-0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Explicitly a=
-dd ${CC} as linker, for it to understand -Wl option.<br>
-<br>
-Signed-off-by: Sean Nyekjaer &lt;<a href=3D"mailto:sean@geanix.com" target=
-=
-=3D"_blank">sean@geanix.com</a>&gt;<br>
----<br>
-<br>
-Alistair please check in your setup :)<br></blockquote><div><br></div><div=
->I had found the same error on dragonboard/arm64. This patch fixes the buil=
-d problem. Note that I have only done build test, not run time.</div><div>t=
-hanks!</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"mar=
-gin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1=
-ex">
-<br>
-=C2=A0meta-oe/recipes-navigation/gpsd/<a href=3D"http://gpsd_3.20.bb" rel=
-=3D"noreferrer" target=3D"_blank">gpsd_3.20.bb</a> | 3 +++<br>
-=C2=A01 file changed, 3 insertions(+)<br>
-<br>
-diff --git a/meta-oe/recipes-navigation/gpsd/<a href=3D"http://gpsd_3.20.b=
-b" rel=3D"noreferrer" target=3D"_blank">gpsd_3.20.bb</a> b/meta-oe/recipes-=
-navigation/gpsd/<a href=3D"http://gpsd_3.20.bb" rel=3D"noreferrer" target=
-=3D"_blank">gpsd_3.20.bb</a><br>
-index 0914f7ec2..5463c8231 100644<br>
---- a/meta-oe/recipes-navigation/gpsd/<a href=3D"http://gpsd_3.20.bb" rel=
-=3D"noreferrer" target=3D"_blank">gpsd_3.20.bb</a><br>
-+++ b/meta-oe/recipes-navigation/gpsd/<a href=3D"http://gpsd_3.20.bb" rel=
-=3D"noreferrer" target=3D"_blank">gpsd_3.20.bb</a><br>
-@@ -35,6 +35,7 @@ EXTRA_OESCONS =3D &quot; \<br>
-=C2=A0 =C2=A0 =C2=A0systemd=3D&#39;${SYSTEMD_OESCONS}&#39; \<br>
-=C2=A0 =C2=A0 =C2=A0libdir=3D&#39;${libdir}&#39; \<br>
-=C2=A0 =C2=A0 =C2=A0manbuild=3D&#39;false&#39; \<br>
-+=C2=A0 =C2=A0 LINK=3D&#39;${CC}&#39; \<br>
-=C2=A0 =C2=A0 =C2=A0${PACKAGECONFIG_CONFARGS} \<br>
-=C2=A0&quot;<br>
-=C2=A0# this cannot be used, because then chrpath is not found and only st=
-atic lib is built<br>
-@@ -44,6 +45,7 @@ do_compile_prepend() {<br>
-=C2=A0 =C2=A0 =C2=A0export PKG_CONFIG_PATH=3D&quot;${PKG_CONFIG_PATH}&quot=
-;<br>
-=C2=A0 =C2=A0 =C2=A0export PKG_CONFIG=3D&quot;PKG_CONFIG_SYSROOT_DIR=3D\&q=
-uot;${PKG_CONFIG_SYSROOT_DIR}\&quot; pkg-config&quot;<br>
-=C2=A0 =C2=A0 =C2=A0export STAGING_PREFIX=3D&quot;${STAGING_DIR_HOST}/${pr=
-efix}&quot;<br>
-+=C2=A0 =C2=A0 export LD=3D&quot;${CC}&quot;<br>
-=C2=A0 =C2=A0 =C2=A0export LINKFLAGS=3D&quot;${LDFLAGS}&quot;<br>
-=C2=A0}<br>
-<br>
-@@ -51,6 +53,7 @@ do_install() {<br>
-=C2=A0 =C2=A0 =C2=A0export PKG_CONFIG_PATH=3D&quot;${PKG_CONFIG_PATH}&quot=
-;<br>
-=C2=A0 =C2=A0 =C2=A0export PKG_CONFIG=3D&quot;PKG_CONFIG_SYSROOT_DIR=3D\&q=
-uot;${PKG_CONFIG_SYSROOT_DIR}\&quot; pkg-config&quot;<br>
-=C2=A0 =C2=A0 =C2=A0export STAGING_PREFIX=3D&quot;${STAGING_DIR_HOST}/${pr=
-efix}&quot;<br>
-+=C2=A0 =C2=A0 export LD=3D&quot;${CC}&quot;<br>
-=C2=A0 =C2=A0 =C2=A0export LINKFLAGS=3D&quot;${LDFLAGS}&quot;<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0export DESTDIR=3D&quot;${D}&quot;<br>
--- <br>
-2.26.2<br>
-<br>
-<br>
-</blockquote></div></div>
-
---0000000000004eb04d05a5aee41e--
