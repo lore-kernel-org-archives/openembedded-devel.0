@@ -1,84 +1,85 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.20385.1589568448492017813
+Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com [209.85.219.47])
+ by mx.groups.io with SMTP id smtpd.web11.880.1589577098801813511
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 May 2020 11:47:29 -0700
+ Fri, 15 May 2020 14:11:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id E35C340AB5;
-	Fri, 15 May 2020 18:47:27 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id d12nEJLygjUI; Fri, 15 May 2020 18:47:27 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7F99D40A9E;
-	Fri, 15 May 2020 18:47:26 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 13EAC17314B; Fri, 15 May 2020 14:47:26 -0400 (EDT)
-Date: Fri, 15 May 2020 14:47:26 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-python][PATCH 0/2] remove pycryptodome(x) and pyelftools
-Message-ID: <20200515184726.GD11927@denix.org>
-References: <160F47A92CF7AFC2.6323@lists.openembedded.org>
- <20200515184114.GC11927@denix.org>
- <d67d77d6-d3bc-3635-06c0-09a58a1ed8db@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <d67d77d6-d3bc-3635-06c0-09a58a1ed8db@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=SkSgoy8v;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.219.47, mailfrom: domarys.correa@ossystems.com.br)
+Received: by mail-qv1-f47.google.com with SMTP id d1so1822173qvl.6
+        for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 14:11:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id;
+        bh=Mk+d+lKo8/baBinrTPqRJnYaRDm5mWsneZvKySL+wEM=;
+        b=SkSgoy8vZIyOqy/iyx5iWKgGAuCTK/mtWyJFDza0wSC7Sm6Tcw54LBofn/KezVfG4e
+         WBgHvfYtShB0gcLaLebesNQVIfkDXyuHi+zC1uNMpDvkpBxNa0CeZ1T3da3gM8theCru
+         EjexMBYI32/Up/gVAjPWeZUYVN5Fb785JnpF87wccRJ3EXjnyTN01gze/TCZU7Fniago
+         V3mLthJrmNuVy4bZIb8rx7PG2hmlk687kTuziEj9Gr0nusiBhxpvrmHXqdUbME9VgGRl
+         Pr9TdN3EiSQKEidSUqVR4nhZ47n9OivXxKCVAzca+apo6hi3z+jeZc/61fZOcTYVkSJ5
+         4m4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=Mk+d+lKo8/baBinrTPqRJnYaRDm5mWsneZvKySL+wEM=;
+        b=c0sz88gN4YGQThDRek/jW8at99tKm/BgrYwxv4S55+4t6TMWx8qU9dqtY1SMe1NjVu
+         /bBcObadoI+0E8Aw+dfMUFm1rtLriW32y5jPIT3zhqAMi8GalCORhqBACLr3Y8Oz1kIT
+         at6HL4AJ+NPGUlyM5hmXZ2pvTbPCK4Z50TI1+t0yFLRwnIp1qbZQVOE5Wd5Xz9oanuYZ
+         zdglBnRuejy7gxiGLCxQxkMqADHdojIPQLGvaynkofUfHzX6rAcnQmlV1+nwu/tNKluu
+         RsZk5OPYCAo7RPfAfv9x4hxkzdYuvgsKQ9t3Rw5ck0D57AHO/vioBaCoRwLMuAR8FEwX
+         JehQ==
+X-Gm-Message-State: AOAM532ONeKBFTs/UqHqCw6LyjaOZl7LROOqPOlRCaRPyq8zX1pOI0tn
+	ks7pKwUR4heLIV6jAVijMA8lVHzerC4=
+X-Google-Smtp-Source: ABdhPJzJ/c9dGWogg7BenWa/qVWYBvW3SPavGHIbnhoOjaD8MZz4DiOrb2fq1YZeu82NZbFrmQioUQ==
+X-Received: by 2002:a05:6214:526:: with SMTP id x6mr5548981qvw.15.1589577097674;
+        Fri, 15 May 2020 14:11:37 -0700 (PDT)
+Return-Path: <domarys.correa@ossystems.com.br>
+Received: from Monster.domain.name ([2804:7f4:c195:1db7:b83f:ce2d:1156:b223])
+        by smtp.gmail.com with ESMTPSA id h134sm2483276qke.6.2020.05.15.14.11.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 15 May 2020 14:11:37 -0700 (PDT)
+From: "Domarys Correa" <domarys.correa@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Cc: Domarys Correa <domarys.correa@ossystems.com.br>
+Subject: [PATCH 1/3] python3-autobahn: Add recipe version 20.4.3
+Date: Fri, 15 May 2020 18:10:41 -0300
+Message-Id: <20200515211043.10347-1-domarys.correa@ossystems.com.br>
+X-Mailer: git-send-email 2.17.1
 
-On Fri, May 15, 2020 at 11:42:13AM -0700, Khem Raj wrote:
-> 
-> 
-> On 5/15/20 11:41 AM, Denys Dmytriyenko wrote:
-> >Joshua,
-> >
-> >FYI
-> >
-> >
-> >On Fri, May 15, 2020 at 02:39:38PM -0400, Denys Dmytriyenko wrote:
-> >>From: Denys Dmytriyenko <denys@ti.com>
-> >>
-> >>python3-pycryptodome(x) and python3-pyelftools have been moved to OE-Core.
-> >>Remove from meta-python now.
-> >>
-> >>OE-Core changes are still in master-next, so may need to wait until merged
-> >>to master.
-> >>
-> 
-> thanks, if you are watching this please send a note once its in master.
+Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
+---
+ .../python/python3-autobahn_20.4.3.bb         | 23 +++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-autobahn_20.4.3.bb
 
-Sure, will do.
-
-
-> >>Denys Dmytriyenko (2):
-> >>   python3-pycryptodome(x): moved to OE-Core, remove from meta-python
-> >>   python3-pyelftools: moved to OE-Core, remove from meta-python
-> >>
-> >>  .../python/python-pycryptodome.inc                 | 29 ----------------------
-> >>  .../python/python3-pycryptodome_3.9.4.bb           |  2 --
-> >>  .../python/python3-pycryptodomex_3.9.4.bb          | 10 --------
-> >>  .../python/python3-pyelftools_0.25.bb              | 14 -----------
-> >>  4 files changed, 55 deletions(-)
-> >>  delete mode 100644 meta-python/recipes-devtools/python/python-pycryptodome.inc
-> >>  delete mode 100644 meta-python/recipes-devtools/python/python3-pycryptodome_3.9.4.bb
-> >>  delete mode 100644 meta-python/recipes-devtools/python/python3-pycryptodomex_3.9.4.bb
-> >>  delete mode 100644 meta-python/recipes-devtools/python/python3-pyelftools_0.25.bb
-> >>
-> >>-- 
-> >>2.7.4
-> >>
-> >
-> >>
-> >
-> >
-> >
-> >
-
-> 
+diff --git a/meta-python/recipes-devtools/python/python3-autobahn_20.4.3.bb b/meta-python/recipes-devtools/python/python3-autobahn_20.4.3.bb
+new file mode 100644
+index 000000000..60ef57d04
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-autobahn_20.4.3.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "WebSocket client & server library, WAMP real-time framework"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98"
++
++SRC_URI[sha256sum] = "c6fe745d52ba9f9eecf791cd31f558df42aebfc4f9ee558a8f1d18c707e1ae1f"
++
++inherit pypi setuptools3
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-twisted \
++    ${PYTHON_PN}-zopeinterface \
++    ${PYTHON_PN}-py-ubjson \
++    ${PYTHON_PN}-cbor2 \
++    ${PYTHON_PN}-u-msgpack-python \
++    ${PYTHON_PN}-lz4 \
++    ${PYTHON_PN}-snappy \
++    ${PYTHON_PN}-pyopenssl \
++    ${PYTHON_PN}-txaio \
++    ${PYTHON_PN}-six \
++"
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.17.1
 
