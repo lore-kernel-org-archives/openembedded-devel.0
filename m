@@ -1,78 +1,78 @@
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com [209.85.222.193])
- by mx.groups.io with SMTP id smtpd.web12.906.1589577100586048216
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com [209.85.160.196])
+ by mx.groups.io with SMTP id smtpd.web10.945.1589577102728038958
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 May 2020 14:11:40 -0700
+ Fri, 15 May 2020 14:11:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=nJ3CCrj3;
- spf=pass (domain: ossystems.com.br, ip: 209.85.222.193, mailfrom: domarys.correa@ossystems.com.br)
-Received: by mail-qk1-f193.google.com with SMTP id f13so4154476qkh.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 14:11:40 -0700 (PDT)
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=h7XmLait;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.160.196, mailfrom: domarys.correa@ossystems.com.br)
+Received: by mail-qt1-f196.google.com with SMTP id b1so3260083qtt.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 14:11:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=ib2w9w6UVtKAGK/QYuhR/AEnRitJ+aJBJuCXhW4NjBs=;
-        b=nJ3CCrj3VNKc74Z5cVkB0nJVNct49gVR18FLkFBARD+yJVOD2rOt4ZH6VpRG75be5h
-         8m/DSyX+/tI1gvRuhxtBBelCXMvbmqC6ZCR7tguVdfgGWgbEwXYPbwz6cjSeQsw+9m+e
-         exgIcfnwwuYCvG7k9ykOCGrsXBkvIO3nmgmduVY4efqVBlCJ8zAsouXl/CuHUUxMyDUp
-         awhJXaKS+2mMJ8sNTUJatQx28/8o6ia9/lElhFLHxH+qIlIcjxF7XCunsfyPdITrNhXx
-         SdZNrQp6Yv5niRlZiCzRlDFzk6KSxCEATETnBi31/+1+K/x98ljQuQywO9JfFwrJ4/qI
-         jc9w==
+        bh=OemOA5PetUMtLDfUuwk5PjqqoJs+ToXem2EnurS36eI=;
+        b=h7XmLaitNEY2N8nJwavt56iOTWdsJFXyMt5vrHoUkZ5EnSvDmErP8/PrbJMcL4E9MO
+         YGiiGEaNlSz3/ocgoO4ckONetUP6ePULW/lKqdyQmm6YXSDHWcFbConIFKTfifxngAEP
+         ytsMg4L7XT8aCY6nx6wscebgqC/d8+ZbZo7e/1XTDAiO9RWNmqH0W9DJqbEVSgfSpsib
+         gBPv7dJlcHaMyQLEvSFDl3wtALeQFJNI4odhsX6rcRSs7nTCSoJNqrO8ageJjjxxIBUb
+         1KHpMDDQNWEBOWORThIptoT6FII7ZTibgs/IMhP7Wyrz1cbc8dT/SmB8IC+fc7rOQd8z
+         OZqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=ib2w9w6UVtKAGK/QYuhR/AEnRitJ+aJBJuCXhW4NjBs=;
-        b=uY7KIY+uKmDg7nYAstQf2n5NsVITQ2uzsNho0BZgg+Gkvm1Vr37mzeSGOYWrSdVoSk
-         lAozQeGqJPo1awd0vLvpBXt05bCkS7YZP2ZfosXFA3qKz13Dic5QMoMsBwNbSAldPbW8
-         DJ5CUF3dSGSoQYa2nWxqdKHZyNxJ49UWeKCHHEdlK+P1Z1NT9zlfqAU9OvC3SSd+ZcxK
-         FXft8c4LZpPx2Zl8MdhreH7xwbRC/SDgekKwkPs61ZFF3sOHne9J7bNg7Zbx7r7Fr7E9
-         /d64Hoamz6UNCGjSDmMKjDi8X1PQkhAwvfNqAahOFclkUs3Yb6eKncJol2QmZBPp3q2c
-         iqRQ==
-X-Gm-Message-State: AOAM532RaOn3bJdMCWxeZsKIjpQIPYGec5z0JI8mpPGGuFhjQlhf5ZGX
-	ANel/ReVYHtdZVEvdRQLbDVCFkR3yY8=
-X-Google-Smtp-Source: ABdhPJwq/tAYbj3IXjad1qibyzbbdMyXV2ajDvoDEYSEL+jJM5RmWBa2MhykZ4G5wQA+weetterEgQ==
-X-Received: by 2002:a37:4e05:: with SMTP id c5mr5490988qkb.232.1589577099523;
-        Fri, 15 May 2020 14:11:39 -0700 (PDT)
+        bh=OemOA5PetUMtLDfUuwk5PjqqoJs+ToXem2EnurS36eI=;
+        b=nlZfNlqHzKd8/w20Qr+QEcECFdZTDkSJU14ncVu+tCSDZisI4nvQfAe0BCGj3DCEbl
+         PIGPrLeYRn7Ui9MLo/1rZfEK7W9WlfTlsBGZ/TuwvKMGh2EMuzKUERL88G8ggehucmd3
+         m1rJCZzvZGysYvyaUj9Efjpymrx/X0eQVkIlXh4Ffrzpep4Hl82aVc2ZMTqxttK4i67z
+         hYLtVHkvddqYLSDDqsMVmhFt7a2F5ptW6tLY532PPTDeXC9aVCWETSq1PX1qSGsbTQAL
+         uvgal0FUBq+Rd4lUVBAyVdGEFKNTd+e3oX1GDR/sLISAfrmf/ZZP+eLbwcjIbP6JHDgh
+         BV9w==
+X-Gm-Message-State: AOAM532asPRz9Dwr5yd16ioeTbe6d0K7IU9DhJP3j+EVjuRFXMML7AQ4
+	k8JFRg9QBTVTOnUkaXPB1GZx6S7cvqI=
+X-Google-Smtp-Source: ABdhPJw9Rs4MM0Gk3iQa7JNxD4oeqbvOfQCxKPvs639Gq9QqLwUf/G/ABCmhuEoHVo8F5kRDUN0kYw==
+X-Received: by 2002:aed:2142:: with SMTP id 60mr4139460qtc.177.1589577101308;
+        Fri, 15 May 2020 14:11:41 -0700 (PDT)
 Return-Path: <domarys.correa@ossystems.com.br>
 Received: from Monster.domain.name ([2804:7f4:c195:1db7:b83f:ce2d:1156:b223])
-        by smtp.gmail.com with ESMTPSA id h134sm2483276qke.6.2020.05.15.14.11.37
+        by smtp.gmail.com with ESMTPSA id h134sm2483276qke.6.2020.05.15.14.11.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 15 May 2020 14:11:38 -0700 (PDT)
+        Fri, 15 May 2020 14:11:40 -0700 (PDT)
 From: "Domarys Correa" <domarys.correa@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 Cc: Domarys Correa <domarys.correa@ossystems.com.br>
-Subject: [PATCH 2/3] python3-snappy: Add recipe version 0.5.4
-Date: Fri, 15 May 2020 18:10:42 -0300
-Message-Id: <20200515211043.10347-2-domarys.correa@ossystems.com.br>
+Subject: [PATCH 3/3] python3-cbor2: Add recipe version 5.1.0
+Date: Fri, 15 May 2020 18:10:43 -0300
+Message-Id: <20200515211043.10347-3-domarys.correa@ossystems.com.br>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200515211043.10347-1-domarys.correa@ossystems.com.br>
 References: <20200515211043.10347-1-domarys.correa@ossystems.com.br>
 
 Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
 ---
- .../python/python3-snappy_0.5.4.bb                | 15 +++++++++++++++
+ .../python/python3-cbor2_5.1.0.bb                 | 15 +++++++++++++++
  1 file changed, 15 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-snappy_0.5.4.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-cbor2_5.1.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-snappy_0.5.4.bb b/meta-python/recipes-devtools/python/python3-snappy_0.5.4.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cbor2_5.1.0.bb b/meta-python/recipes-devtools/python/python3-cbor2_5.1.0.bb
 new file mode 100644
-index 000000000..1836473b8
+index 000000000..b42516b7d
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-snappy_0.5.4.bb
++++ b/meta-python/recipes-devtools/python/python3-cbor2_5.1.0.bb
 @@ -0,0 +1,15 @@
-+DESCRIPTION = "Python library for the snappy compression library from Google"
-+DEPENDS += "snappy"
++DESCRIPTION = "An implementation of RFC 7049 - Concise Binary Object Representation (CBOR)."
++DEPENDS +="${PYTHON_PN}-setuptools-scm-native"
 +
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b3090152f53ee19f6a7b64b1a36384fb"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 +
-+SRC_URI[sha256sum] = "d9c26532cfa510f45e8d135cde140e8a5603d3fb254cfec273ebc0ecf9f668e2"
++SRC_URI[sha256sum] = "43ce11e8c2fe4971d386d1a60cf83bfa0a4a667b97668ba76acbf5e6398821aa"
 +
 +inherit pypi setuptools3
 +
-+PYPI_PACKAGE = "python-snappy"
-+
-+RDEPENDS_${PN} += "snappy"
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-datetime \
++"
 +
 +BBCLASSEXTEND = "native nativesdk"
 -- 
