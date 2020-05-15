@@ -1,65 +1,85 @@
-Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com [209.85.208.172])
- by mx.groups.io with SMTP id smtpd.web12.16518.1589558749690759670
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.17644.1589560884479154278
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 May 2020 09:05:50 -0700
+ Fri, 15 May 2020 09:41:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=i3fe2osW;
- spf=pass (domain: linaro.org, ip: 209.85.208.172, mailfrom: daniel.diaz@linaro.org)
-Received: by mail-lj1-f172.google.com with SMTP id e25so2822309ljg.5
-        for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 09:05:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=uPAUg1hqRcRY5R6N+giZ/EdWLpEifRyjheSZH9bmjT8=;
-        b=i3fe2osWMy51Q58EjaC3CSaoBXxXn3+wH3c4jhJcdFbb0EQAjYibVs4CnCn0X0gSjj
-         COBQjig99lPsI6hSL82K+VpCvxnVmqd4AmYNTsS4A2iWYFYXUaiaGyN2Pk9RtDMikoP8
-         ZZfMT2bn1S8vW/mPQkmMLdH6KYKN+QJ0bA+K5IOJJmLn2FlMqV5oiQ66MmlIX/51WrL9
-         m73zrRiAKY1w+skmlGkTfR9LrHGgBKJnbO66RU2H5j3leVeR2+CoeX4PJcpa9UhCnaRk
-         tVIs6B1wkyaI2P35ZeDsFgbz/rO5z5gHo/Crc37xBdjqgySb1yUhH3jvwnCyxCrbDkJo
-         DYuQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=uPAUg1hqRcRY5R6N+giZ/EdWLpEifRyjheSZH9bmjT8=;
-        b=kZl1J05BD38cUEwiZOWavgYqGSCvv9z5gkZZ73w3jlzVyynAFi4iGxgktOX+EuOo5H
-         MRoY1HaCzupFWJTZRVX7ZBz+727HNeUVT33dFn3Yfpr4Ti89Y2ckcv2wBTKOETEbdlKS
-         PSDtTzDaz32eehWE3jdEYtYhOcJrXLoZ0jZBljOgh67wylnOyN3YWDMnjStIO2QlpcKD
-         d9lvCvyhHcwDBbs6WUHJbpYmFA5gpXdYqIrpCUCK36xIActHx3JEri6RMRliNjc0dPMc
-         7FihdOMx1fNIYbs7O6/5LgHYEOWcebTMxjWb6dMR8uqZB6HCwc446NSuj0hkm7gtpqBt
-         qv1Q==
-X-Gm-Message-State: AOAM533XmVsAOoQRsAn38Gg/3oM7fb3AzbjUGmlXwEkjd9Zi40ZJeBXa
-	sigSTdf9PkYrQ4TkqTX3C7e6TroiHHCLFVbRMfAugg==
-X-Google-Smtp-Source: ABdhPJyCFW8wuyPVAAtPpR6XFyr23wRHYDs/NEkcGl4iJ5cn6VgAH9xG0UuRa6EGtMD6wCEtCtrxq0klLp4e2dX2lkk=
-X-Received: by 2002:a2e:6c08:: with SMTP id h8mr2656036ljc.48.1589558747511;
- Fri, 15 May 2020 09:05:47 -0700 (PDT)
-MIME-Version: 1.0
-References: <f756b087-c3e3-3a47-171e-bc72421ff48a@balister.org>
-In-Reply-To: <f756b087-c3e3-3a47-171e-bc72421ff48a@balister.org>
-From: "Daniel D?az" <daniel.diaz@linaro.org>
-Date: Fri, 15 May 2020 11:05:36 -0500
-Message-ID: <CAEUSe783rDYWD6we-OLpU2=eM1HTJ0=zars+RJOBYW0c8NFveQ@mail.gmail.com>
-Subject: Re: [OE-core] OpenEmbedded Happy Hour
-To: Philip Balister <philip@balister.org>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>, 
-	openembedded-core <openembedded-core@lists.openembedded.org>, 
-	"openembedded-members@lists.openembedded.org" <openembedded-members@lists.openembedded.org>, 
-	Yocto Project <yocto@yoctoproject.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=45910 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jZdOf-0003c8-CO; Fri, 15 May 2020 19:41:21 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH] pamela: Upgrade 0.3.0 -> 1.0.0
+Date: Fri, 15 May 2020 19:41:09 +0300
+Message-Id: <20200515164109.24082-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.2
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Hello!
+Upgrade to release 1.0.0.
 
-On Fri, 15 May 2020 at 10:56, Philip Balister <philip@balister.org> wrote:
-> I've made a wiki page to track these:
-> https://www.openembedded.org/wiki/Happy_Hours
-> Then next one is scheduled for 2100 UTC on May 27.
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../recipes-devtools/python/pamela_0.3.0.bb       | 15 ---------------
+ .../recipes-devtools/python/pamela_1.0.0.bb       | 15 +++++++++++++++
+ 2 files changed, 15 insertions(+), 15 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/pamela_0.3.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/pamela_1.0.0.bb
 
-Ah, just in time to watch live SpaceX's launch:
-https://blogs.nasa.gov/commercialcrew/
+diff --git a/meta-python/recipes-devtools/python/pamela_0.3.0.bb b/meta-python/recipes-devtools/python/pamela_0.3.0.bb
+deleted file mode 100644
+index b6bee0ca2..000000000
+--- a/meta-python/recipes-devtools/python/pamela_0.3.0.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-DESCRIPTION = "Pamela: yet another Python wrapper for PAM"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=bfb663f37eb99232bc8ccfa4ea8f1202"
+-
+-SRC_URI[md5sum] = "de6516118d51eb5fc97017f3b6d5c68b"
+-SRC_URI[sha256sum] = "1e198446a6cdd87704aa0def7621d62e7c20b0e6068e2788b9a866a8355e5d6b"
+-
+-PYPI_PACKAGE = "pamela"
+-
+-inherit pypi setuptools3
+-
+-RDEPENDS_${PN} = "libpam"
+-
+-inherit features_check
+-REQUIRED_DISTRO_FEATURES = "pam"
+diff --git a/meta-python/recipes-devtools/python/pamela_1.0.0.bb b/meta-python/recipes-devtools/python/pamela_1.0.0.bb
+new file mode 100644
+index 000000000..8ce95a5d0
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/pamela_1.0.0.bb
+@@ -0,0 +1,15 @@
++DESCRIPTION = "Pamela: yet another Python wrapper for PAM"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=3f9b78307cdde4e6a4976bfd82a0e7f3"
++
++SRC_URI[md5sum] = "5fc14f5275383ed8bdd509007af0323d"
++SRC_URI[sha256sum] = "65c9389bef7d1bb0b168813b6be21964df32016923aac7515bdf05366acbab6c"
++
++PYPI_PACKAGE = "pamela"
++
++inherit pypi setuptools3
++
++RDEPENDS_${PN} = "libpam"
++
++inherit features_check
++REQUIRED_DISTRO_FEATURES = "pam"
+-- 
+2.17.1
 
-Greetings!
-
-Daniel D=C3=ADaz
-daniel.diaz@linaro.org
