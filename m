@@ -1,53 +1,61 @@
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.20117.1589567984463483117
+ by mx.groups.io with SMTP id smtpd.web12.20118.1589567984610983396
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 15 May 2020 11:39:45 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 8FF7740AF3;
+	by mailout4.zoneedit.com (Postfix) with ESMTP id D14A140A9E;
 	Fri, 15 May 2020 18:39:43 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id BA7a_mVrxwtT; Fri, 15 May 2020 18:39:43 +0000 (UTC)
+	with ESMTP id C-nKqdd6EDqN; Fri, 15 May 2020 18:39:43 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7376840A46;
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B8F2540AB5;
 	Fri, 15 May 2020 18:39:42 +0000 (UTC)
 Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 8D3101730D6;
+	by mail.denix.org (Postfix) with ESMTP id A766917316D;
 	Fri, 15 May 2020 14:39:41 -0400 (EDT)
 From: "Denys Dmytriyenko" <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
 Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [meta-python][PATCH 0/2] remove pycryptodome(x) and pyelftools
-Date: Fri, 15 May 2020 14:39:38 -0400
-Message-Id: <1589567980-26597-1-git-send-email-denis@denix.org>
+Subject: [meta-python][PATCH 2/2] python3-pyelftools: moved to OE-Core, remove from meta-python
+Date: Fri, 15 May 2020 14:39:40 -0400
+Message-Id: <1589567980-26597-3-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1589567980-26597-1-git-send-email-denis@denix.org>
+References: <1589567980-26597-1-git-send-email-denis@denix.org>
 
 From: Denys Dmytriyenko <denys@ti.com>
 
-python3-pycryptodome(x) and python3-pyelftools have been moved to OE-Core.
-Remove from meta-python now.
-
-OE-Core changes are still in master-next, so may need to wait until merged
-to master.
-
-Denys Dmytriyenko (2):
-  python3-pycryptodome(x): moved to OE-Core, remove from meta-python
-  python3-pyelftools: moved to OE-Core, remove from meta-python
-
- .../python/python-pycryptodome.inc                 | 29 ----------------------
- .../python/python3-pycryptodome_3.9.4.bb           |  2 --
- .../python/python3-pycryptodomex_3.9.4.bb          | 10 --------
- .../python/python3-pyelftools_0.25.bb              | 14 -----------
- 4 files changed, 55 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pycryptodome.inc
- delete mode 100644 meta-python/recipes-devtools/python/python3-pycryptodome_3.9.4.bb
- delete mode 100644 meta-python/recipes-devtools/python/python3-pycryptodomex_3.9.4.bb
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ .../recipes-devtools/python/python3-pyelftools_0.25.bb     | 14 --------------
+ 1 file changed, 14 deletions(-)
  delete mode 100644 meta-python/recipes-devtools/python/python3-pyelftools_0.25.bb
 
+diff --git a/meta-python/recipes-devtools/python/python3-pyelftools_0.25.bb b/meta-python/recipes-devtools/python/python3-pyelftools_0.25.bb
+deleted file mode 100644
+index 03d96db..0000000
+--- a/meta-python/recipes-devtools/python/python3-pyelftools_0.25.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-DESCRIPTION = "pyelftools is a pure-Python library for parsing and analyzing ELF files and DWARF debugging information"
+-HOMEPAGE = "https://github.com/eliben/pyelftools"
+-SECTION = "devel/python"
+-LICENSE = "PD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=5ce2a2b07fca326bc7c146d10105ccfc"
+-
+-SRC_URI[md5sum] = "c5629b9a5d19c82107a946cce52eeec2"
+-SRC_URI[sha256sum] = "89c6da6f56280c37a5ff33468591ba9a124e17d71fe42de971818cbff46c1b24"
+-
+-PYPI_PACKAGE = "pyelftools"
+-
+-inherit pypi setuptools3
+-
+-BBCLASSEXTEND = "native"
 -- 
 2.7.4
 
