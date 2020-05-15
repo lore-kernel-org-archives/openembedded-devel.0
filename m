@@ -1,77 +1,86 @@
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com [209.85.222.194])
- by mx.groups.io with SMTP id smtpd.web11.14198.1589552221230236395
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com [209.85.222.196])
+ by mx.groups.io with SMTP id smtpd.web11.14201.1589552223509620628
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 May 2020 07:17:01 -0700
+ Fri, 15 May 2020 07:17:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=RIIei7zu;
- spf=pass (domain: ossystems.com.br, ip: 209.85.222.194, mailfrom: domarys.correa@ossystems.com.br)
-Received: by mail-qk1-f194.google.com with SMTP id s1so2626887qkf.9
-        for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 07:17:01 -0700 (PDT)
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=RIbtO/Yn;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.222.196, mailfrom: domarys.correa@ossystems.com.br)
+Received: by mail-qk1-f196.google.com with SMTP id n14so2634047qke.8
+        for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2020 07:17:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=RXVI/WLJLRyEqZ2NLcHaE42ra9KLITm64THCkZ5TCqg=;
-        b=RIIei7zu7T4Z6l1l+pomSGggLs81Z7foMeNnVQHQXD8sUMitU4hLjAKc91mQCDzVrE
-         qLOBtrTf9jI5b0bslThPVojGNp3ImeJ3PomVoNzW/GpoA4eeWW5lvhhM+WFO1KHiBwKa
-         BumDuRDHKIpkuklu1wT1ZgI6/bS2iNQekbNWBZE0GliJimaWHpoWDmi3icYmtFNL2YwL
-         BrCCSj+zqr2bETLrvkGRK5FH+HH6WPUak0Z0M3Yhnkg2LwBJ3TsTKCXJtjTibnBNMyZ+
-         SgT8jBxwv5YvJboiuyO6SojeY5xCgl0JKaoL97easPR9e0cfI3vu8CVRlvCiAKfrWRtT
-         /LfQ==
+        bh=0iM5Z83eHo2aC0fLgzFrLVEnjUv3Ta6bekjau/uvRjk=;
+        b=RIbtO/YnXsEowLVxLha6K9icsPedmZCDZ3Xll966irpWc31ZAMssAuLtc/AweZ3xbV
+         ocmccVvNcQhEi4yb13I/wkftsAE2issvnC8mq0uOVy/dXJ0cSvXaBvU0N1iiVgX86tGb
+         3bFFH1+PEmMQR66XiT766/RH37qWRRurUCFiahnnRPN8nYXCiqctwJ3hlgpzoFf58cG2
+         2Quz4mDMY0V2xDIVpvJ9uEa9qPxsIYha2Hsm7A+bO6kkCulj1lrGtTiOF1+k8DhVy30C
+         bh7T8xTNuAN4dkvt60ntIxkR3FhekB+Sn4McylGJ84FH+T67iaOujiaht30OKy8UmYBp
+         L69A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=RXVI/WLJLRyEqZ2NLcHaE42ra9KLITm64THCkZ5TCqg=;
-        b=NoA3MqdxksLqbrGW0TOIcVOCRWMIBcjukCc+tvam1VlzHeSJa3JUQgt6wdofWwbRSR
-         a8dMBjeJHJUsN9z46h3beNTBcHG65Q6p18HHhuLrNrq7JVbzt6CUuFJxIp/bv6WVXwfP
-         Fg2CZFSbZP66k75Vm+/OVZHZbbcoARueepnYy7YsTaBNVdqsXwEvN3ec3z1uUNeAA+Hf
-         wne5DXPpl72n5Vy1/bkIfO+/Mq5S2XZG+qKZ2ObGs9YjudiXWOYTXNkfEtI4VoU7Yf/B
-         MJcPKYRMcIA9qG96VPhRluTyKNuqlnMjkIpSWHMV3NlOo5i5BzcFS7frm92wMrvxCLi1
-         LNbg==
-X-Gm-Message-State: AOAM5324DAg+BxV4NZZ+QmpuBQIP2caysJjkOwZqkxaGmU1NAgi42R1i
-	pN08MfiAYQqhTdnnA94nMwiVin1Tp2Y=
-X-Google-Smtp-Source: ABdhPJw57DX5iZq86cPcUPKT0pNe5CqcVdWQoJRno68mgSFERDYcY4ffFFClkCI2h9REp8DqiCz2ug==
-X-Received: by 2002:ae9:edd8:: with SMTP id c207mr3639739qkg.347.1589552220275;
-        Fri, 15 May 2020 07:17:00 -0700 (PDT)
+        bh=0iM5Z83eHo2aC0fLgzFrLVEnjUv3Ta6bekjau/uvRjk=;
+        b=rBasPb9OzTp9yZk3OfI3yN7plqkPH5zYt+LML4Idrdapo2oglV0CLoWd97LKO5sr4C
+         6zJFcgPmtZHooOtbK1aRbNlT81p90PKerh+jsr3E2VpsRqwXFn8lf21s6uSVx3nzMRjY
+         tTnW/9F+mBamPtYc1Nq/4Kt7IzL5Vygd2iFOzjx9TpDqYBZ/Zkx/M2YF32DmHG+F+rAX
+         XOxK2hxdq0FaJ7Bllq645AmTQ3SwBPpdyuXcdEgOWfFI8Vdtbe7qFMTrv3MSeD4HUDZw
+         atnvP3nXGC9oGVmZsLmHHC50nEfFCsgM3Y/HDikQXdSiBxQX4ziOtzWdrrg6hxTskzk9
+         mZ9A==
+X-Gm-Message-State: AOAM530R3Iqa+quwo3+EkCvlUm8nAtqQPRGJxTSjZU9eiU6UGjLP0bxm
+	VX9spfy54TVN0tbcksOHocrr0FWIQv0=
+X-Google-Smtp-Source: ABdhPJxGwB+UD1HQrbek2ef2fruYWKBONRcyToavnUN30Bx9NLXwjsNlHAq1JzzlWecrOsCXGOGD+w==
+X-Received: by 2002:a05:620a:1305:: with SMTP id o5mr3590660qkj.318.1589552222346;
+        Fri, 15 May 2020 07:17:02 -0700 (PDT)
 Return-Path: <domarys.correa@ossystems.com.br>
 Received: from Monster.domain.name ([2804:7f4:c195:1db7:5434:711e:b23:e7fd])
-        by smtp.gmail.com with ESMTPSA id m33sm2170749qtb.88.2020.05.15.07.16.58
+        by smtp.gmail.com with ESMTPSA id m33sm2170749qtb.88.2020.05.15.07.17.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 15 May 2020 07:16:59 -0700 (PDT)
+        Fri, 15 May 2020 07:17:01 -0700 (PDT)
 From: "Domarys Correa" <domarys.correa@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 Cc: Domarys Correa <domarys.correa@ossystems.com.br>
-Subject: [PATCH 09/11] python3-xmodem: Add recipe version 0.4.6
-Date: Fri, 15 May 2020 11:16:28 -0300
-Message-Id: <20200515141630.27789-9-domarys.correa@ossystems.com.br>
+Subject: [PATCH 10/11] python3-multidict: Update 4.7.4 -> 4.7.5
+Date: Fri, 15 May 2020 11:16:29 -0300
+Message-Id: <20200515141630.27789-10-domarys.correa@ossystems.com.br>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200515141630.27789-1-domarys.correa@ossystems.com.br>
 References: <20200515141630.27789-1-domarys.correa@ossystems.com.br>
 
 Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
 ---
- .../python/python3-xmodem_0.4.6.bb                 | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb
+ ...hon3-multidict_4.7.4.bb => python3-multidict_4.7.5.bb} | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-multidict_4.7.4.bb => python3-multidict_4.7.5.bb} (76%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb b/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb
-new file mode 100644
-index 000000000..3fdd3e58c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "XMODEM protocol implementation"
+diff --git a/meta-python/recipes-devtools/python/python3-multidict_4.7.4.bb b/meta-python/recipes-devtools/python/python3-multidict_4.7.5.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-multidict_4.7.4.bb
+rename to meta-python/recipes-devtools/python/python3-multidict_4.7.5.bb
+index 0636972ec..30e10c251 100644
+--- a/meta-python/recipes-devtools/python/python3-multidict_4.7.4.bb
++++ b/meta-python/recipes-devtools/python/python3-multidict_4.7.5.bb
+@@ -1,12 +1,12 @@
+ SUMMARY = "Multidicts are useful for working with HTTP headers, URL query args etc."
+ HOMEPAGE = "https://github.com/aio-libs/multidict/"
 +
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
-+
-+SRC_URI[sha256sum] = "089737298f5738eabc43f2519efdc80b402693768f16383f7013b9e6f8f279d7"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-logging \
-+"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a"
+ 
+-inherit pypi setuptools3 ptest
++SRC_URI[sha256sum] = "aee283c49601fa4c13adc64c09c978838a7e812f85377ae130a24d7198c0331e"
+ 
+-SRC_URI[md5sum] = "22b46f759cf2cc3ca1d2c9f82cc9bb79"
+-SRC_URI[sha256sum] = "d7d428488c67b09b26928950a395e41cc72bb9c3d5abfe9f0521940ee4f796d4"
++inherit pypi setuptools3 ptest
+ 
+ SRC_URI += " \
+ 	file://run-ptest \
+@@ -20,3 +20,5 @@ do_install_ptest() {
+ 	install -d ${D}${PTEST_PATH}/tests
+ 	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+ }
 +
 +BBCLASSEXTEND = "native nativesdk"
 -- 
