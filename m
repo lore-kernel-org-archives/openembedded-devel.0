@@ -1,101 +1,99 @@
-Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
- by mx.groups.io with SMTP id smtpd.web12.11535.1589659560650047418
+Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com [209.85.219.68])
+ by mx.groups.io with SMTP id smtpd.web10.13414.1589666122537035301
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 16 May 2020 13:06:02 -0700
+ Sat, 16 May 2020 14:55:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=LSxUcTtN;
- spf=pass (domain: axis.com, ip: 195.60.68.18, mailfrom: peter.kjellerstedt@axis.com)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=rUVdhsJS;
+ spf=pass (domain: gmail.com, ip: 209.85.219.68, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f68.google.com with SMTP id fb16so2900128qvb.5
+        for <openembedded-devel@lists.openembedded.org>; Sat, 16 May 2020 14:55:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; l=1761; q=dns/txt; s=axis-central1;
-  t=1589659561; x=1621195561;
-  h=from:to:subject:date:message-id:references:in-reply-to:
-   content-transfer-encoding:mime-version;
-  bh=+PA9KLXuQwKxpY4OUXDLsOfBuURL2Ivg2vODg9msFzs=;
-  b=LSxUcTtNBxjyzeylROkld11bDNFu5g/IjsPCVRlVeAce4wQi0JC25ToG
-   uO4qv3Ci//uOvbVnWzqrov3CN8gUo91sLr0oJ6Lp+LQ6aTs7Ht97XTkzv
-   Gf4CuvctVNhjQtFe8jxjIGaRwp2xT1AjCVjruvSs7hB75nPaTxZg8tkV2
-   Tw9pf/gsiM9jOvXerqNI/STy8LQZc9mneQUBnC2fbNvqkStxMjyo9PGbW
-   fvRVRwnZcwIEyDRXYFzELSyX/JesbqeKVMXPrL9EJPcqnz/BwtZYqFi+d
-   ynhCzEXjj8iw1yr/AsKp1p9R3Vssg2eA4yavv5PQ8G7eykXQBFKidMDq8
-   Q==;
-IronPort-SDR: 9GcDoTSqKcy7pJvinGdGFsRaROBeX/Zcq5pAMP1cpYy085cn2m8cGQoxe2wWK/1Qlk7b8riZSo
- YdNG1B91rnjVZ+v/X8gbQFBdD4tZ/ms7txviRegEq2u8pmrNPhXLky+VkArFNJIICHelhAjxep
- TeWGoBvy2xh2PP3cL03RJ4rmMygLyk0c6QXWGBs04XjCZKGx/p9EtVBqq6UnB5JpLAWg1m+ujl
- Bb44qQp9Sr0bBvY8zeDv/TnSTDkETRA0DxBamoipgeqIDaINUIs/H8CIyrlp/LPaIpz6XljZHf
- 7wo=
-X-IronPort-AV: E=Sophos;i="5.73,400,1583190000"; 
-   d="scan'208";a="8551943"
-From: "Peter Kjellerstedt" <peter.kjellerstedt@axis.com>
-To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-networking][PATCH 1/3] netplan: Depend on systemd if its in distro
-Thread-Topic: [oe] [meta-networking][PATCH 1/3] netplan: Depend on systemd if
- its in distro
-Thread-Index: AQHWK57I6x/CQOrz3kqPlGhQVsxdQKirIoSg
-Date: Sat, 16 May 2020 20:05:56 +0000
-Message-ID: <401b0d008f8444da8613ba2102d614d4@XBOX03.axis.com>
-References: <20200516162631.1862339-1-raj.khem@gmail.com>
-In-Reply-To: <20200516162631.1862339-1-raj.khem@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=0XDikA+DQqCCC2J4b9070vPf5wmIt7nGG+8u8XtEPng=;
+        b=rUVdhsJS5nsYw5yDXOg9BkMpHfj7KhXsNz+EJZ9P7sGtcecuB6iyk3bA7jjrhtjHUV
+         fpFzSp32OZh7vPTssZRmolI15yIsXpUUg4tSiBKY14JSQKw1yZhbUUr2La9AXtb8QN+7
+         6CUFgzCeyzsA+qqLZHGTXymRu4cRhFihpjeFRXbiMs+ncc1sthie2OP5kfeiibBk3K9A
+         D8yns81b4Mxxi/2PwLWuGqlqCD5U4Q/It4YLkXKW/KwtbnNDqbd+3iiRRnkUDLkBAmgp
+         Qi1vDOsRdDZSfA6EoHHmGna9CR1OPq41nkJLQrr7RM9HbG6eTogbj8V9X6tadkXMp7PC
+         tDvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=0XDikA+DQqCCC2J4b9070vPf5wmIt7nGG+8u8XtEPng=;
+        b=Wdd1W7Nt9gahP9ibgTX5gaRD50s3mC8CT8hGWvqRPBzmECPRU3HmuSdvXeKUdiEtZh
+         hiS+hzXRxUZ1m4qzcj1zxdu5ZSUs0IpmUmrRyDTrnPZXyMq26qB1mtpHjJbOG2SvIjUF
+         55B93lj8qrIwe+KzarsI5HliD7pxdE+UloH1IAEuPATZBZE07cfAor8OdIYw4kRxae3n
+         /UmqFINCX+qetrdarOFxqpfVmE8ws0NgvydVHaEQ1DQzz71VNzQtZL4mt1eY0jFrC0Oy
+         d2FQnQTQLAxh4HuOzBbc1x+GBjxyl3/u5GphcUm5cSNeeFaDt6yRfwk9eIRz6VH+xbqW
+         KenQ==
+X-Gm-Message-State: AOAM533Lx77XvmiDn2irhv8iig5S21sHHqONZvzZi8ib1q7kKUe0GyS9
+	u2VYSxhnXKUt2vaRyoEBdRWd4QDZYJX50zhb2N2pCr//
+X-Google-Smtp-Source: ABdhPJzZrMft9+TfqYFENd+GyWj5rzU2WM9tDkpbJZ19EIokncOWT82towLE6Waf/Nj26/b/dsksuv7wC+QZkIQR2Z8=
+X-Received: by 2002:a05:6214:1506:: with SMTP id e6mr9671475qvy.61.1589666121388;
+ Sat, 16 May 2020 14:55:21 -0700 (PDT)
 MIME-Version: 1.0
-Return-Path: peter.kjellerstedt@axis.com
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+References: <20200516162631.1862339-1-raj.khem@gmail.com> <401b0d008f8444da8613ba2102d614d4@XBOX03.axis.com>
+In-Reply-To: <401b0d008f8444da8613ba2102d614d4@XBOX03.axis.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Sat, 16 May 2020 14:54:55 -0700
+Message-ID: <CAMKF1sra2Z9S5cQiTOzt84FPcNkFUDBwgjY+wGHTmv8BN8LigQ@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH 1/3] netplan: Depend on systemd if its in distro
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-> -----Original Message-----
-> From: openembedded-devel@lists.openembedded.org <openembedded-
-> devel@lists.openembedded.org> On Behalf Of Khem Raj
-> Sent: den 16 maj 2020 18:26
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Khem Raj <raj.khem@gmail.com>
-> Subject: [oe] [meta-networking][PATCH 1/3] netplan: Depend on systemd if =
-its in distro
+Updated.
 
-Change "its"  to "it is".
-
->=20
-> it needs to link with libsystemd when using systemd as init system
-> Fixes
-> Package libsystemd was not found in the pkg-config search path.
-> Perhaps you should add the directory containing `libsystemd.pc'
-> to the PKG_CONFIG_PATH environment variable
->=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-networking/recipes-connectivity/netplan/netplan_0.98.bb | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->=20
-> diff --git a/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
-> b/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
-> index db029a4b8a..15c4968132 100644
-> --- a/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
-> +++ b/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
-> @@ -18,7 +18,8 @@ SRC_URI =3D " \
->          git://github.com/CanonicalLtd/netplan.git \
->  "
->=20
-> -DEPENDS =3D "glib-2.0 libyaml"
-> +DEPENDS =3D "glib-2.0 libyaml ${@bb.utils.contains('DISTRO_FEATURES','sy=
-stemd','systemd','',d)}"
-
-That can be simplified to:
-
-DEPENDS =3D "glib-2.0 libyaml ${@bb.utils.filter('DISTRO_FEATURES', 'system=
-d', d)}"
-
-> +
->  RDEPENDS_${PN} =3D "python3 python3-core python3-pyyaml python3-netiface=
-s python3-nose python3-coverage python3-pycodestyle python3-pyflakes util-l=
-inux-libuuid"
->=20
->  inherit pkgconfig systemd
-> --
-> 2.26.2
-
-//Peter
-
+On Sat, May 16, 2020 at 1:05 PM Peter Kjellerstedt
+<peter.kjellerstedt@axis.com> wrote:
+>
+> > -----Original Message-----
+> > From: openembedded-devel@lists.openembedded.org <openembedded-
+> > devel@lists.openembedded.org> On Behalf Of Khem Raj
+> > Sent: den 16 maj 2020 18:26
+> > To: openembedded-devel@lists.openembedded.org
+> > Cc: Khem Raj <raj.khem@gmail.com>
+> > Subject: [oe] [meta-networking][PATCH 1/3] netplan: Depend on systemd if its in distro
+>
+> Change "its"  to "it is".
+>
+> >
+> > it needs to link with libsystemd when using systemd as init system
+> > Fixes
+> > Package libsystemd was not found in the pkg-config search path.
+> > Perhaps you should add the directory containing `libsystemd.pc'
+> > to the PKG_CONFIG_PATH environment variable
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >  meta-networking/recipes-connectivity/netplan/netplan_0.98.bb | 3 ++-
+> >  1 file changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
+> > b/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
+> > index db029a4b8a..15c4968132 100644
+> > --- a/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
+> > +++ b/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
+> > @@ -18,7 +18,8 @@ SRC_URI = " \
+> >          git://github.com/CanonicalLtd/netplan.git \
+> >  "
+> >
+> > -DEPENDS = "glib-2.0 libyaml"
+> > +DEPENDS = "glib-2.0 libyaml ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+>
+> That can be simplified to:
+>
+> DEPENDS = "glib-2.0 libyaml ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+>
+> > +
+> >  RDEPENDS_${PN} = "python3 python3-core python3-pyyaml python3-netifaces python3-nose python3-coverage python3-pycodestyle python3-pyflakes util-linux-libuuid"
+> >
+> >  inherit pkgconfig systemd
+> > --
+> > 2.26.2
+>
+> //Peter
+>
