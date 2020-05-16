@@ -1,56 +1,45 @@
-Received: from mail.koansoftware.com (mail.koansoftware.com [178.79.174.16])
- by mx.groups.io with SMTP id smtpd.web11.5804.1589639243793322124
+Received: from cpanel7.indieserve.net (cpanel7.indieserve.net [199.212.143.8])
+ by mx.groups.io with SMTP id smtpd.web10.6245.1589640963638790669
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 16 May 2020 07:27:25 -0700
+ Sat, 16 May 2020 07:56:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: koansoftware.com, ip: 178.79.174.16, mailfrom: m.cavallini@koansoftware.com)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.koansoftware.com (Postfix) with ESMTP id 18BE43F71B;
-	Sat, 16 May 2020 16:27:22 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail
-Received: from mail.koansoftware.com ([127.0.0.1])
-	by localhost (mail.koansoftware.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sNaNg1MtrCIt; Sat, 16 May 2020 16:27:20 +0200 (CEST)
-Reply-To: m.cavallini@koansoftware.com
-Subject: Re: OpenEmbedded Happy Hour
-To: Philip Balister <philip@balister.org>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>,
- openembedded-core <openembedded-core@lists.openembedded.org>,
- "openembedded-members@lists.openembedded.org"
- <openembedded-members@lists.openembedded.org>,
- Yocto Project <yocto@yoctoproject.org>
-References: <f756b087-c3e3-3a47-171e-bc72421ff48a@balister.org>
-From: "Marco Cavallini [KOAN]" <m.cavallini@koansoftware.com>
-Organization: Koan sas - Bergamo - Italia
-Message-ID: <3eaeb926-20f3-d032-c0fa-25c1af92a235@koansoftware.com>
-Date: Sat, 16 May 2020 16:27:17 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ dkim=missing; spf=pass (domain: crashcourse.ca, ip: 199.212.143.8, mailfrom: rpjday@crashcourse.ca)
+Received: from cpef81d0f814063-cmf81d0f814060.cpe.net.cable.rogers.com ([174.114.57.56]:41978 helo=localhost.localdomain)
+	by cpanel7.indieserve.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.93)
+	(envelope-from <rpjday@crashcourse.ca>)
+	id 1jZyEL-00Gwyy-K0
+	for openembedded-devel@lists.openembedded.org; Sat, 16 May 2020 10:56:02 -0400
+Date: Sat, 16 May 2020 10:55:58 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost.localdomain
+To: OpenEmbedded Development mailing list <openembedded-devel@lists.openembedded.org>
+Subject: why is python-mako recipe in OE, while python-mako.inc is in meta-oe?
+Message-ID: <alpine.LFD.2.21.2005161051310.10701@localhost.localdomain>
 MIME-Version: 1.0
-In-Reply-To: <f756b087-c3e3-3a47-171e-bc72421ff48a@balister.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: it-IT
+X-OutGoing-Spam-Status: No, score=-1.0
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel7.indieserve.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Get-Message-Sender-Via: cpanel7.indieserve.net: authenticated_id: rpjday+crashcourse.ca/only user confirmed/virtual account not confirmed
+X-Authenticated-Sender: cpanel7.indieserve.net: rpjday@crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Content-Type: text/plain; charset=US-ASCII
 
-On 15/05/20 17:56, Philip Balister wrote:
-> I've made a wiki page to track these:
->
-> https://www.openembedded.org/wiki/Happy_Hours
->
-> Then next one is scheduled for 2100 UTC on May 27. This is late evening
-> for Europe and morning for New Zealand, so hopefully we see some
-> different faces. The meeting info is on the wiki page.
->
-> There is no set agenda, so bring some projects to talk about with the
-> community.
->
->
-> Philip
->
 
-https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+May+27&iso=20200527T21&p1=%3A&ah=1
+  was just perusing some python recipes, trying to learn all the
+details of how python recipes work, and i noticed the following:
 
---
-Marco
+./openembedded-core/meta/recipes-devtools/python/python3-mako_1.1.1.bb
+./meta-openembedded/meta-python/recipes-devtools/python/python-mako.inc
 
+  as in, the recipe for mako is in oe-core, but the include file is in
+meta-oe, the recipe does not include the .inc file, and the git log
+just looks confusing. is there something clever going on here that i
+just don't get?
+
+rday
