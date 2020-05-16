@@ -1,77 +1,101 @@
-Received: from cpanel7.indieserve.net (cpanel7.indieserve.net [199.212.143.8])
- by mx.groups.io with SMTP id smtpd.web12.8891.1589649812176474359
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by mx.groups.io with SMTP id smtpd.web12.11535.1589659560650047418
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 16 May 2020 10:23:32 -0700
+ Sat, 16 May 2020 13:06:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: crashcourse.ca, ip: 199.212.143.8, mailfrom: rpjday@crashcourse.ca)
-Received: from cpef81d0f814063-cmf81d0f814060.cpe.net.cable.rogers.com ([174.114.57.56]:43034 helo=localhost.localdomain)
-	by cpanel7.indieserve.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.93)
-	(envelope-from <rpjday@crashcourse.ca>)
-	id 1ja0X4-00HFoA-5H
-	for openembedded-devel@lists.openembedded.org; Sat, 16 May 2020 13:23:31 -0400
-Date: Sat, 16 May 2020 13:23:27 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost.localdomain
-To: OpenEmbedded Development mailing list <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] meta-python: delete superfluous python-mako.inc
-Message-ID: <alpine.LFD.2.21.2005161320580.16966@localhost.localdomain>
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=LSxUcTtN;
+ spf=pass (domain: axis.com, ip: 195.60.68.18, mailfrom: peter.kjellerstedt@axis.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=axis.com; l=1761; q=dns/txt; s=axis-central1;
+  t=1589659561; x=1621195561;
+  h=from:to:subject:date:message-id:references:in-reply-to:
+   content-transfer-encoding:mime-version;
+  bh=+PA9KLXuQwKxpY4OUXDLsOfBuURL2Ivg2vODg9msFzs=;
+  b=LSxUcTtNBxjyzeylROkld11bDNFu5g/IjsPCVRlVeAce4wQi0JC25ToG
+   uO4qv3Ci//uOvbVnWzqrov3CN8gUo91sLr0oJ6Lp+LQ6aTs7Ht97XTkzv
+   Gf4CuvctVNhjQtFe8jxjIGaRwp2xT1AjCVjruvSs7hB75nPaTxZg8tkV2
+   Tw9pf/gsiM9jOvXerqNI/STy8LQZc9mneQUBnC2fbNvqkStxMjyo9PGbW
+   fvRVRwnZcwIEyDRXYFzELSyX/JesbqeKVMXPrL9EJPcqnz/BwtZYqFi+d
+   ynhCzEXjj8iw1yr/AsKp1p9R3Vssg2eA4yavv5PQ8G7eykXQBFKidMDq8
+   Q==;
+IronPort-SDR: 9GcDoTSqKcy7pJvinGdGFsRaROBeX/Zcq5pAMP1cpYy085cn2m8cGQoxe2wWK/1Qlk7b8riZSo
+ YdNG1B91rnjVZ+v/X8gbQFBdD4tZ/ms7txviRegEq2u8pmrNPhXLky+VkArFNJIICHelhAjxep
+ TeWGoBvy2xh2PP3cL03RJ4rmMygLyk0c6QXWGBs04XjCZKGx/p9EtVBqq6UnB5JpLAWg1m+ujl
+ Bb44qQp9Sr0bBvY8zeDv/TnSTDkETRA0DxBamoipgeqIDaINUIs/H8CIyrlp/LPaIpz6XljZHf
+ 7wo=
+X-IronPort-AV: E=Sophos;i="5.73,400,1583190000"; 
+   d="scan'208";a="8551943"
+From: "Peter Kjellerstedt" <peter.kjellerstedt@axis.com>
+To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-networking][PATCH 1/3] netplan: Depend on systemd if its in distro
+Thread-Topic: [oe] [meta-networking][PATCH 1/3] netplan: Depend on systemd if
+ its in distro
+Thread-Index: AQHWK57I6x/CQOrz3kqPlGhQVsxdQKirIoSg
+Date: Sat, 16 May 2020 20:05:56 +0000
+Message-ID: <401b0d008f8444da8613ba2102d614d4@XBOX03.axis.com>
+References: <20200516162631.1862339-1-raj.khem@gmail.com>
+In-Reply-To: <20200516162631.1862339-1-raj.khem@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
 MIME-Version: 1.0
-X-OutGoing-Spam-Status: No, score=-0.2
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel7.indieserve.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Get-Message-Sender-Via: cpanel7.indieserve.net: authenticated_id: rpjday+crashcourse.ca/only user confirmed/virtual account not confirmed
-X-Authenticated-Sender: cpanel7.indieserve.net: rpjday@crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Content-Type: text/plain; charset=US-ASCII
+Return-Path: peter.kjellerstedt@axis.com
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-The actual python-mako recipe is in OE, and apparently this .inc file
-is historical cruft left over after py2 recipes were moved into their
-own layer.
+> -----Original Message-----
+> From: openembedded-devel@lists.openembedded.org <openembedded-
+> devel@lists.openembedded.org> On Behalf Of Khem Raj
+> Sent: den 16 maj 2020 18:26
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Khem Raj <raj.khem@gmail.com>
+> Subject: [oe] [meta-networking][PATCH 1/3] netplan: Depend on systemd if =
+its in distro
 
-Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+Change "its"  to "it is".
 
----
+>=20
+> it needs to link with libsystemd when using systemd as init system
+> Fixes
+> Package libsystemd was not found in the pkg-config search path.
+> Perhaps you should add the directory containing `libsystemd.pc'
+> to the PKG_CONFIG_PATH environment variable
+>=20
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-networking/recipes-connectivity/netplan/netplan_0.98.bb | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
+> b/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
+> index db029a4b8a..15c4968132 100644
+> --- a/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
+> +++ b/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
+> @@ -18,7 +18,8 @@ SRC_URI =3D " \
+>          git://github.com/CanonicalLtd/netplan.git \
+>  "
+>=20
+> -DEPENDS =3D "glib-2.0 libyaml"
+> +DEPENDS =3D "glib-2.0 libyaml ${@bb.utils.contains('DISTRO_FEATURES','sy=
+stemd','systemd','',d)}"
 
-diff --git a/meta-python/recipes-devtools/python/python-mako.inc b/meta-python/recipes-devtools/python/python-mako.inc
-deleted file mode 100644
-index abcbb8841..000000000
---- a/meta-python/recipes-devtools/python/python-mako.inc
-+++ /dev/null
-@@ -1,21 +0,0 @@
--SUMMARY = "A super-fast templating language that borrows the best ideas from the existing templating languages"
--HOMEPAGE = "http://www.makotemplates.org/"
--SECTION = "devel/python"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=df7e6c7c82990acf0228a55e00d29bc9"
--
--PYPI_PACKAGE = "Mako"
--
--inherit pypi
--
--SRC_URI[md5sum] = "6c3f2da0b74af529a4c4a537d0848bf2"
--SRC_URI[sha256sum] = "a36919599a9b7dc5d86a7a8988f23a9a3a3d083070023bab23d64f7f1d1e0a4b"
--
--RDEPENDS_${PN} = " \
--    ${PYTHON_PN}-html \
--    ${PYTHON_PN}-netclient \
--    ${PYTHON_PN}-shell \
--    ${PYTHON_PN}-threading \
--"
--
--BBCLASSEXTEND = "native nativesdk"
+That can be simplified to:
 
--- 
+DEPENDS =3D "glib-2.0 libyaml ${@bb.utils.filter('DISTRO_FEATURES', 'system=
+d', d)}"
 
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                         http://crashcourse.ca
+> +
+>  RDEPENDS_${PN} =3D "python3 python3-core python3-pyyaml python3-netiface=
+s python3-nose python3-coverage python3-pycodestyle python3-pyflakes util-l=
+inux-libuuid"
+>=20
+>  inherit pkgconfig systemd
+> --
+> 2.26.2
 
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+//Peter
+
