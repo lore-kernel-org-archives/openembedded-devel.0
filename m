@@ -1,169 +1,84 @@
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
- by mx.groups.io with SMTP id smtpd.web12.22999.1589726102256787426
+ by mx.groups.io with SMTP id smtpd.web12.23001.1589726103024773881
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 17 May 2020 07:35:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@stusta.de header.s=default header.b=SyEFMmxF;
+ dkim=pass header.i=@stusta.de header.s=default header.b=I5/jtwqV;
  spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=5ztw=67=stusta.de=bunk@stusta.mhn.de)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49Q4Rk4MgNz3p
-	for <openembedded-devel@lists.openembedded.org>; Sun, 17 May 2020 16:34:58 +0200 (CEST)
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49Q4Rl2Mm2z4c
+	for <openembedded-devel@lists.openembedded.org>; Sun, 17 May 2020 16:34:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1589726098;
-	bh=xndmlh0J7jsoDXYhpSFx1VRP5UP/kE7AipBoH1F+x9k=;
+	s=default; t=1589726099;
+	bh=1NKvcknYo0o3AF95u0kbwu16d4JMVh4eyydIur5oHJA=;
 	h=From:To:Subject:Date:In-Reply-To:References:From;
-	b=SyEFMmxFgRsEonUL9JrCI7Wug8zocVFBwkGcS6rT84vlovJkcJK+NZLb3MFZRG8od
-	 QgXT02YBkEZm+Xku9OfB8m82mK10uxBpu7xS1tV1+SMySyJKDnW+c7CfmpwLwxWKnM
-	 uz/Se3QMZhNV1S27OblhF2fqWkmOzbVdGKzz6y899idywIzhBEH/8EKApXZI2Dvg8p
-	 nRLvWHY76jqIYVHUcuOq0+YFvuHfK+l0PNmLRwViCtv0erF8vfbIpPoKjZBsebVQp6
-	 c9+ZouGDAMgGsQNnICc/Do5mewqnEe2Dh2yORLwAKrbdXTEXF1//B60MGzf1fOCqUv
-	 4C/wEOk15+3BqqdbEg+W7wTZj3zMAdlledbwb1i6fsCEVaWmi61pSz1Q8j+z6eRtvi
-	 ki3haY7jaL5GAyQWSEUjbYpMoy1RO9UC7NMo5+ANqr8Ia1BIzANijul6KJLhmBw5fZ
-	 vYL30ae+kJyqDtKmgMx8FP8gJsZE3HFXHPLGrEpbeXBMCVp0uKqxvLJUthhDEogmVP
-	 QGWnpj9LoKaDUPkVNzFYndLezRMZXQyHKEmSvaR/sjF50vOv3BC2aEi8IEu5yo8XqT
-	 7yS3JM/pNVBNnC00306UgAEVN/uZFyXKpI8iei+BI5JF6zA2lT61JVMdLec9jIGpej
-	 onBOcPU1IwdIZ05mJVrsxMUo=
+	b=I5/jtwqVAMmXK7fI6/r5hTcVLRPv2nF4wlLlCswF1+2mzy7KIWe6LHeU1BwEYEL1R
+	 HTVIPJzvCwwGpBv/JUgH2ZQNnwnFQP1dVVTWKrluZcSBnGeDjqDGloOFKfdO3N5HSG
+	 BVgYAOoviS8mrvYXh/uyadNCjjLG4Bs12/UBeMNVFaqREQJ4t1wQg+pA0uwGnW6L5+
+	 Jw3uv+Q+lwk7P6K33fwJOQwsDvTq0H0zkcoF7Lg+s8Fl15+L9429r1rR0atXp7KAMr
+	 pd9qru2e0GzGiIBTu/rBt1x3TxdgwgHWcHHSsE2hMakJwIRp8FiuxSrmHzViN+VzXF
+	 TvjQoP2p+m9o62N5ctHJTss8MdZsHNCFjI+INI9WyEbE2UfU/Ghe+D/rKte34rkKfH
+	 jov0ML+Q86uk9o6rTPvPxIxst8lsS69Hs5IzKtkjOZImQZaZmsRhInx/vMSHgwImd4
+	 X4O1e47k7Gvi5uVtsc8Yc3NnLIVLYpD1RCAMp+oAYjqxAcUQIZUMCZVQNl8obPSd1M
+	 YxKfJ5AgKdupvBnZd5pPiNpGKShu1VqWMoMf1Yu2rAHqdiz0oGgzKRZmNq3dd0nni5
+	 pgKtIb09F+eydEoz6aenqHdAflbn0iE2nktQOPjhubAiY6aF1GzK5qa+7ZvPJDIttV
+	 84H/cpQ+a8vUukAuuih+SXGM=
 From: "Adrian Bunk" <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 2/4] python3-dbusmock: Remove, moved to OE-core
-Date: Sun, 17 May 2020 17:34:54 +0300
-Message-Id: <20200517143456.24873-2-bunk@stusta.de>
+Subject: [meta-python][PATCH 4/4] python3-pyparsing: Remove, moved to OE-core
+Date: Sun, 17 May 2020 17:34:56 +0300
+Message-Id: <20200517143456.24873-4-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200517143456.24873-1-bunk@stusta.de>
 References: <20200517143456.24873-1-bunk@stusta.de>
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- ...y-to-add-own-objects-to-internal-obj.patch | 52 -------------------
- ...ty-to-import-templates-from-packages.patch | 27 ----------
- .../python/python3-dbusmock_0.16.7.bb         | 25 ---------
- 3 files changed, 104 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-dbusmock/0001-Add-functionality-to-add-own-objects-to-internal-obj.patch
- delete mode 100644 meta-python/recipes-devtools/python/python3-dbusmock/0002-Add-possibility-to-import-templates-from-packages.patch
- delete mode 100644 meta-python/recipes-devtools/python/python3-dbusmock_0.16.7.bb
+ .../packagegroups/packagegroup-meta-python.bb |  2 +-
+ .../python/python3-pyparsing_2.4.6.bb         | 21 -------------------
+ 2 files changed, 1 insertion(+), 22 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pyparsing_2.4.6.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-dbusmock/0001-Add-functionality-to-add-own-objects-to-internal-obj.patch b/meta-python/recipes-devtools/python/python3-dbusmock/0001-Add-functionality-to-add-own-objects-to-internal-obj.patch
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index 596c20a8c..c03f610da 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -18,7 +18,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
+     python3-javaobj-py3 python3-sh python3-pycrypto python3-pyasn1 python3-pydbus python3-wtforms \
+     python3-pybluez python3-babel python3-parse-type python3-bitarray python3-django-south \
+     python3-pyusb python3-prctl python3-jinja2 python3-werkzeug python3-pyjks python3-requests-ftp \
+-    python3-behave python3-pyparsing python3-pyyaml python3-tzlocal python3-pretend python3-stevedore \
++    python3-behave python3-pyyaml python3-tzlocal python3-pretend python3-stevedore \
+     python3-sijax python3-langtable python3-requests-file python3-crcmod python3-robotframework \
+     python3-pint python3-coverage python3-iso8601 python3-ndg-httpsclient python3-yappi python3-twofish \
+     python3-speaklater python3-smbus python3-djangorestframework python3-msgpack python3-jsonpointer \
+diff --git a/meta-python/recipes-devtools/python/python3-pyparsing_2.4.6.bb b/meta-python/recipes-devtools/python/python3-pyparsing_2.4.6.bb
 deleted file mode 100644
-index c4d817849..000000000
---- a/meta-python/recipes-devtools/python/python3-dbusmock/0001-Add-functionality-to-add-own-objects-to-internal-obj.patch
+index a6ec1cb9c..000000000
+--- a/meta-python/recipes-devtools/python/python3-pyparsing_2.4.6.bb
 +++ /dev/null
-@@ -1,52 +0,0 @@
--From c4436fd42f2936e5fb0f95434d06e45aa9959ca0 Mon Sep 17 00:00:00 2001
--From: Simon Busch <simon.busch@lge.com>
--Date: Wed, 9 Apr 2014 13:18:33 +0200
--Subject: [PATCH] Add functionality to add own objects to internal object
+@@ -1,21 +0,0 @@
+-SUMMARY = "Python parsing module"
+-HOMEPAGE = "http://pyparsing.wikispaces.com/"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=657a566233888513e1f07ba13e2f47f1"
 -
-- list
--
--In some case the tests might want to create dynamically dbus objects which extended
--functionality from own class definitions within templates. In such cases we need to
--register those objects with the internal object manager of dbusmock.
--
--Signed-off-by: Simon Busch <simon.busch@lge.com>
--
-----
-- dbusmock/__init__.py   | 4 ++--
-- dbusmock/mockobject.py | 8 ++++++++
-- 2 files changed, 10 insertions(+), 2 deletions(-)
--
--diff --git a/dbusmock/__init__.py b/dbusmock/__init__.py
--index 8a482ab..3d5d71a 100644
----- a/dbusmock/__init__.py
--+++ b/dbusmock/__init__.py
--@@ -14,8 +14,8 @@ __license__ = 'LGPL 3+'
-- __version__ = '0.16.7'
-- 
-- from dbusmock.mockobject import (DBusMockObject, MOCK_IFACE,
---                                 OBJECT_MANAGER_IFACE, get_object, get_objects)
--+                                 OBJECT_MANAGER_IFACE, get_object, get_objects, add_object)
-- from dbusmock.testcase import DBusTestCase
-- 
-- __all__ = ['DBusMockObject', 'MOCK_IFACE', 'OBJECT_MANAGER_IFACE',
---           'DBusTestCase', 'get_object', 'get_objects']
--+           'DBusTestCase', 'get_object', 'get_objects', 'add_object']
--diff --git a/dbusmock/mockobject.py b/dbusmock/mockobject.py
--index 586dbad..e4f130f 100644
----- a/dbusmock/mockobject.py
--+++ b/dbusmock/mockobject.py
--@@ -688,6 +688,14 @@ dbus.service._method_lookup = _dbusmock_method_lookup
-- # Helper API for templates
-- #
-- 
--+def add_object(path, obj):
--+    if path in objects:
--+        raise dbus.exceptions.DBusException(
--+                'org.freedesktop.DBus.Mock.NameError',
--+                'object %s already exists' % path)
--+
--+    objects[path] = obj
--+
-- 
-- def get_objects():
--     '''Return all existing object paths'''
-diff --git a/meta-python/recipes-devtools/python/python3-dbusmock/0002-Add-possibility-to-import-templates-from-packages.patch b/meta-python/recipes-devtools/python/python3-dbusmock/0002-Add-possibility-to-import-templates-from-packages.patch
-deleted file mode 100644
-index 06ab1f05e..000000000
---- a/meta-python/recipes-devtools/python/python3-dbusmock/0002-Add-possibility-to-import-templates-from-packages.patch
-+++ /dev/null
-@@ -1,27 +0,0 @@
--From 03bd5cb77c54033857810bb17562859eefa41221 Mon Sep 17 00:00:00 2001
--From: Simon Busch <simon.busch@lge.com>
--Date: Wed, 9 Apr 2014 13:20:33 +0200
--Subject: [PATCH] Add possibility to import templates from packages
--
--Does not have any unit tests yet.
--
--Signed-off-by: Simon Busch <simon.busch@lge.com>
--
-----
-- dbusmock/mockobject.py | 3 +++
-- 1 file changed, 3 insertions(+)
--
--diff --git a/dbusmock/mockobject.py b/dbusmock/mockobject.py
--index e4f130f..389df70 100644
----- a/dbusmock/mockobject.py
--+++ b/dbusmock/mockobject.py
--@@ -46,6 +46,9 @@ def load_module(name):
--             exec(f.read(), mod.__dict__, mod.__dict__)
--         return mod
-- 
--+    if '.' in name:
--+        return importlib.import_module(name)
--+
--     return importlib.import_module('dbusmock.templates.' + name)
-- 
-- 
-diff --git a/meta-python/recipes-devtools/python/python3-dbusmock_0.16.7.bb b/meta-python/recipes-devtools/python/python3-dbusmock_0.16.7.bb
-deleted file mode 100644
-index cd760ab89..000000000
---- a/meta-python/recipes-devtools/python/python3-dbusmock_0.16.7.bb
-+++ /dev/null
-@@ -1,25 +0,0 @@
--# Copyright (c) 2014 LG Electronics, Inc.
--
--SUMMARY = "With this program/Python library you can easily create mock objects on D-Bus"
--AUTHOR = "Martin Pitt <martin.pitt@ubuntu.com>"
--
--LICENSE = "GPL-3.0"
--LIC_FILES_CHKSUM = "file://COPYING;md5=e6a600fd5e1d9cbde2d983680233ad02"
--
--SRC_URI[md5sum] = "80f8caa838fad96483a8751e11d384f9"
--SRC_URI[sha256sum] = "2d2ea892fa4633c3ec6ac1e912120ec493047a5c6522849b7d1c95ad755bce75"
--
--SRC_URI += " \
--    file://0001-Add-functionality-to-add-own-objects-to-internal-obj.patch \
--    file://0002-Add-possibility-to-import-templates-from-packages.patch \
--"
--
--PYPI_PACKAGE = "python-dbusmock"
+-SRC_URI[md5sum] = "29733ea8cbee0291aad121c69c6e51a1"
+-SRC_URI[sha256sum] = "4c830582a84fb022400b85429791bc551f1f4871c33f23e44f353119e92f969f"
 -
 -inherit pypi setuptools3
 -
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-dbus \
--    ${PYTHON_PN}-pygobject \
--    ${PYTHON_PN}-xml \
--    "
+-RDEPENDS_${PN} += " \
+-    ${PYTHON_PN}-datetime \
+-    ${PYTHON_PN}-debugger \
+-    ${PYTHON_PN}-json \
+-    ${PYTHON_PN}-netclient \
+-    ${PYTHON_PN}-pprint \
+-    ${PYTHON_PN}-stringold \
+-    ${PYTHON_PN}-threading \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
