@@ -1,129 +1,190 @@
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
- by mx.groups.io with SMTP id smtpd.web11.15290.1589673639881289252
+Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com [209.85.219.67])
+ by mx.groups.io with SMTP id smtpd.web10.18124.1589690278432214109
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 16 May 2020 17:00:40 -0700
+ Sat, 16 May 2020 21:37:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=TXqjkjOS;
- spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-ed1-f49.google.com with SMTP id e10so5385961edq.0;
-        Sat, 16 May 2020 17:00:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=kq1aqiVX;
+ spf=pass (domain: gmail.com, ip: 209.85.219.67, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f67.google.com with SMTP id z9so3148910qvi.12
+        for <openembedded-devel@lists.openembedded.org>; Sat, 16 May 2020 21:37:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=KxUwGa3D4o/62A1PwPjTHf36XwpbPEpimqfDiiJt+LM=;
-        b=TXqjkjOSDjWbe7jF2DVnIAG2zA7AMiy4y+wUhwiri4TTHgD/PCV/MmVhk8I3ELAGkI
-         Lg/vB1YsFZ4dOp96rSv6a5zTs9ks8FkimWFeGYEX4m7PvakRcEcK9E3h4/Go9kMVGpnG
-         uAbmZpTa3LOV5uWu9+1Kg6SrCvm/QGXMDqVhJ/DpyomiYe+rlaZwCVt5TkDGkUYGxg/4
-         Ov7gHLLEH8fC+IA+X/S7GNl63bONJi5cU/sjlY/4EiDiqjz4wdCoEtFSxWMSdoSm/RoA
-         7r9SbFtAbxcZj8/PeuAQccU8stB9uomByc2FgyTZdFWIJ9mYe0vqc1ySGdZ8pj/jxtzT
-         URZA==
+        bh=zR4D6FiA34IVA8h4XsFDNSaalFuH/+Q64Uc/rTuJ6Xc=;
+        b=kq1aqiVXus2sMYM0xoeVWeprATYkHZ8ZAdfcBopXYgI0PkACOU4aQDSysnuL/UvLtt
+         TA930x5ojLX7O25maKx8M5sOAaZ5/PFW9KbqUWNAK0jCdZW5bITN9P6px9u8OEO+FMcf
+         aUV0Rbb0qmneWvVBBtoqoGAH252VHUcJvCUZYLKYKM08aaAywrIwZovpxCjCJXXdY3mD
+         RhDnfljGZITadcniIBSKeYBWssxhis/qKMm2v+y0v0uKB8vSKrs8zao0z2nwZqK26GPC
+         UaoYRIb3PwpdfwkXKSxNOSICYwetR4zynHOtVb3mQrnEKZ+BVSvVJV9l7yDDbHHXfA+7
+         Rh0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=KxUwGa3D4o/62A1PwPjTHf36XwpbPEpimqfDiiJt+LM=;
-        b=oyz+xDHgz1OxBWfsOTvgdLCHR9IXY55XKTgr61GaP6j4pL3cGh32X7kW3zD9cteVg8
-         CMujDDfF75MYobA3du6u3EVmbPu+zzysWi/aCRsuf+9hxC1BM6wQC0U5kjRCiTJadj+p
-         306IxqTWS0pWFMIUcXx+JqETLYQ1eH+ARqcJdgL3UAgRb4+HZtwfincqhGFN7ak6fOed
-         OslwCHLto+/SsIm8mez6Rk8NpE3RXYIW30g+sRwT09SR+IGm4Tqk4NBN1z1/Ypau0XMT
-         YvnZltlo4S/ABK1eQ0wDwncgA8b1L4l9/Eh1W/IETh5luNXl4J6bNu++tf9H0aKKNcHV
-         zPeQ==
-X-Gm-Message-State: AOAM5303LUudfao/JOBvTeXgfwWS71hBWbcJIWPdmbuUOQGDXZ0FalE2
-	g8hZ4AJ4eMNBkmBCOwU5hQkUpI7W31xWGe5rjDo=
-X-Google-Smtp-Source: ABdhPJz/gg80aUypPLjngQ2650IyWutc6PNawDOFwnmqOo1OdWBUG63n0P/0r2yVELypsXJg4LJ515LPvgR9oD/2mnY=
-X-Received: by 2002:aa7:c312:: with SMTP id l18mr191412edq.161.1589673638381;
- Sat, 16 May 2020 17:00:38 -0700 (PDT)
+        bh=zR4D6FiA34IVA8h4XsFDNSaalFuH/+Q64Uc/rTuJ6Xc=;
+        b=TzRG1xkU9LrTiObByer5529E9BOi4DWtx+0+1ENBT+sZbxOCOhPptVDYe/i6EJVkgh
+         cqPrfjd1MglvirnTTPA3t6I428mVeSIKCD9JzssWbNobIkdBLEkiCaYTUV49v7nzYXb3
+         Euh1iAL/kcHya7wEy8ZwEcHuxpn0tFEJzUsVN2ZwDU8/ruCStK82VG+zDkQM82CjaVYS
+         RIe/wRTv6d4Dkl3EtFUYOLOiR1m9AVFQEo4v70XZ+T5DAUDVinD/I1+dHkXrR7sYQ79M
+         O2r010YFuoX+bI53oBHLkHXbO6u0em4vI5YJmNs0wxNVXTL6GlfHVZlC9gVKvxbq23xf
+         yoDQ==
+X-Gm-Message-State: AOAM530oq5aQLWC+pZxc5TJzi0qcKlpsN5UlhX1c5QVP/pR8spDD3lXx
+	aho2J/ZzkZoCwKYnuGoS23UOXv/bXNwu9rfkWQM=
+X-Google-Smtp-Source: ABdhPJzeA2KQPftq6we90ivZrNPEw+ssAq6BMW3kOzb3EU2+s4C9gldeAGMYTVlM5LPMZXo4V0wKBnWnc9oWzBMudK4=
+X-Received: by 2002:ad4:4b26:: with SMTP id s6mr3257115qvw.146.1589690277100;
+ Sat, 16 May 2020 21:37:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <f756b087-c3e3-3a47-171e-bc72421ff48a@balister.org> <3eaeb926-20f3-d032-c0fa-25c1af92a235@koansoftware.com>
-In-Reply-To: <3eaeb926-20f3-d032-c0fa-25c1af92a235@koansoftware.com>
-From: "Ankur Tyagi" <ankur.tyagi85@gmail.com>
-Date: Sun, 17 May 2020 12:02:26 +1200
-Message-ID: <CADySD0HZEAHjQZcfXJYL0L+33VTj9HOiATJwOT2ysiBy8Th=4w@mail.gmail.com>
-Subject: Re: [oe] OpenEmbedded Happy Hour
-To: m.cavallini@koansoftware.com
-Cc: Philip Balister <philip@balister.org>, openembedded-devel@lists.openembedded.org, 
-	openembedded-core <openembedded-core@lists.openembedded.org>, 
-	"openembedded-members@lists.openembedded.org" <openembedded-members@lists.openembedded.org>, 
-	Yocto Project <yocto@yoctoproject.org>
-Content-Type: multipart/alternative; boundary="000000000000864e0805a5ccbc59"
-
---000000000000864e0805a5ccbc59
+References: <20200514035648.85149-1-wak@google.com> <CAMKF1sqcq71=9z3DO1UQ9041c9VcmArMq54Jfdf3U0PMsyHeyA@mail.gmail.com>
+In-Reply-To: <CAMKF1sqcq71=9z3DO1UQ9041c9VcmArMq54Jfdf3U0PMsyHeyA@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Sat, 16 May 2020 21:37:31 -0700
+Message-ID: <CAMKF1sp9QjNRyeUm-q-BGRSvSdWjPXdn-neL=j=u9NW+4JyJQg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] cli11: upgrade 1.8.0 -> 1.9.0
+To: "William A. Kennington III" <wak@google.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-See you all from down under !
-
-Cheers
-Ankur
-
-On Sun, May 17, 2020, 2:27 AM Marco Cavallini [KOAN] <
-m.cavallini@koansoftware.com> wrote:
-
-> On 15/05/20 17:56, Philip Balister wrote:
-> > I've made a wiki page to track these:
+On Thu, May 14, 2020 at 8:34 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Wed, May 13, 2020 at 8:56 PM William A. Kennington III via
+> lists.openembedded.org <wak=google.com@lists.openembedded.org> wrote:
 > >
-> > https://www.openembedded.org/wiki/Happy_Hours
-> >
-> > Then next one is scheduled for 2100 UTC on May 27. This is late evening
-> > for Europe and morning for New Zealand, so hopefully we see some
-> > different faces. The meeting info is on the wiki page.
-> >
-> > There is no set agenda, so bring some projects to talk about with the
-> > community.
-> >
-> >
-> > Philip
+> > Variants of the patches are now included upstream so the local patching
+> > can be removed.
 > >
 >
+> Building with clang fails like below
 >
-> https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+May+27&iso=20200527T21&p1=%3A&ah=1
+> https://errors.yoctoproject.org/Errors/Details/412048/
 >
-> --
-> Marco
->
-> 
+> core2-32-yoe-linux/cli11/1.9.0+gitAUTOINC+13becaddb6-r0/git/include/CLI/Optional.hpp:6:10:
+> error: 'istream' file not found [clang-diagnostic-error]
+> #include <istream>
+>          ^
 >
 
---000000000000864e0805a5ccbc59
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This was a problem in clang-tidy invocation of cross-compiler as it
+was not passing -target option to clang
+it was silently ignoring the c++ system headers, this has now been
+fixed in meta-clang,  I am applied this
+patch as it is to master.
 
-<div dir=3D"auto">See you all from down under !<div dir=3D"auto"><br></div>=
-<div dir=3D"auto">Cheers</div><div dir=3D"auto">Ankur</div></div><br><div c=
-lass=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Sun, May 17, =
-2020, 2:27 AM Marco Cavallini [KOAN] &lt;<a href=3D"mailto:m.cavallini@koan=
-software.com">m.cavallini@koansoftware.com</a>&gt; wrote:<br></div><blockqu=
-ote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc s=
-olid;padding-left:1ex">On 15/05/20 17:56, Philip Balister wrote:<br>
-&gt; I&#39;ve made a wiki page to track these:<br>
-&gt;<br>
-&gt; <a href=3D"https://www.openembedded.org/wiki/Happy_Hours" rel=3D"nore=
-ferrer noreferrer" target=3D"_blank">https://www.openembedded.org/wiki/Happ=
-y_Hours</a><br>
-&gt;<br>
-&gt; Then next one is scheduled for 2100 UTC on May 27. This is late eveni=
-ng<br>
-&gt; for Europe and morning for New Zealand, so hopefully we see some<br>
-&gt; different faces. The meeting info is on the wiki page.<br>
-&gt;<br>
-&gt; There is no set agenda, so bring some projects to talk about with the=
-<br>
-&gt; community.<br>
-&gt;<br>
-&gt;<br>
-&gt; Philip<br>
-&gt;<br>
-<br>
-<a href=3D"https://www.timeanddate.com/worldclock/fixedtime.html?msg=3DOpe=
-nEmbedded+Happy+Hour+May+27&amp;iso=3D20200527T21&amp;p1=3D%3A&amp;ah=3D1" =
-rel=3D"noreferrer noreferrer" target=3D"_blank">https://www.timeanddate.com=
-/worldclock/fixedtime.html?msg=3DOpenEmbedded+Happy+Hour+May+27&amp;iso=3D2=
-0200527T21&amp;p1=3D%3A&amp;ah=3D1</a><br>
-<br>
---<br>
-Marco<br>
-<br>
-<br>
-</blockquote></div>
-
---000000000000864e0805a5ccbc59--
+>
+> > Signed-off-by: William A. Kennington III <wak@google.com>
+> > ---
+> >  .../cli11/{cli11_1.8.0.bb => cli11_1.9.0.bb}  |  8 +---
+> >  .../files/0001-Add-CLANG_TIDY-check.patch     | 25 ------------
+> >  ...stallDirs-instead-of-hard-coded-path.patch | 39 -------------------
+> >  3 files changed, 1 insertion(+), 71 deletions(-)
+> >  rename meta-oe/recipes-support/cli11/{cli11_1.8.0.bb => cli11_1.9.0.bb} (68%)
+> >  delete mode 100644 meta-oe/recipes-support/cli11/files/0001-Add-CLANG_TIDY-check.patch
+> >  delete mode 100644 meta-oe/recipes-support/cli11/files/0001-Use-GNUInstallDirs-instead-of-hard-coded-path.patch
+> >
+> > diff --git a/meta-oe/recipes-support/cli11/cli11_1.8.0.bb b/meta-oe/recipes-support/cli11/cli11_1.9.0.bb
+> > similarity index 68%
+> > rename from meta-oe/recipes-support/cli11/cli11_1.8.0.bb
+> > rename to meta-oe/recipes-support/cli11/cli11_1.9.0.bb
+> > index dd129cbec..151653b22 100644
+> > --- a/meta-oe/recipes-support/cli11/cli11_1.8.0.bb
+> > +++ b/meta-oe/recipes-support/cli11/cli11_1.9.0.bb
+> > @@ -6,18 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b73927b18d5c6cd8d2ed28a6ad539733"
+> >  SRCREV = "13becaddb657eacd090537719a669d66d393b8b2"
+> >  PV .= "+git${SRCPV}"
+> >
+> > -SRC_URI += "gitsm://github.com/CLIUtils/CLI11 \
+> > -            file://0001-Add-CLANG_TIDY-check.patch \
+> > -            file://0001-Use-GNUInstallDirs-instead-of-hard-coded-path.patch \
+> > -           "
+> > +SRC_URI += "gitsm://github.com/CLIUtils/CLI11"
+> >
+> >  S = "${WORKDIR}/git"
+> >
+> >  inherit cmake
+> >  inherit ptest
+> >
+> > -EXTRA_OECMAKE += "-DCLANG_TIDY=OFF"
+> > -DEPENDS += "boost"
+> > -
+> >  # cli11 is a header only C++ library, so the main package will be empty.
+> >  RDEPENDS_${PN}-dev = ""
+> > diff --git a/meta-oe/recipes-support/cli11/files/0001-Add-CLANG_TIDY-check.patch b/meta-oe/recipes-support/cli11/files/0001-Add-CLANG_TIDY-check.patch
+> > deleted file mode 100644
+> > index 02b3c9bd7..000000000
+> > --- a/meta-oe/recipes-support/cli11/files/0001-Add-CLANG_TIDY-check.patch
+> > +++ /dev/null
+> > @@ -1,25 +0,0 @@
+> > -From 902b251fd8d6408ee6623e7a92692948cf90187d Mon Sep 17 00:00:00 2001
+> > -From: Khem Raj <raj.khem@gmail.com>
+> > -Date: Tue, 12 Feb 2019 13:22:21 -0800
+> > -Subject: [PATCH] Add CLANG_TIDY check
+> > -
+> > -Upstream-Status: Pending
+> > -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > -
+> > ----
+> > - CMakeLists.txt | 2 +-
+> > - 1 file changed, 1 insertion(+), 1 deletion(-)
+> > -
+> > -diff --git a/CMakeLists.txt b/CMakeLists.txt
+> > -index 7073a0b..2dd2c02 100644
+> > ---- a/CMakeLists.txt
+> > -+++ b/CMakeLists.txt
+> > -@@ -60,7 +60,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+> > -         endif()
+> > -     endif()
+> > -
+> > --    if(CMAKE_VERSION VERSION_GREATER 3.6)
+> > -+    if(CMAKE_VERSION VERSION_GREATER 3.6 AND CLANG_TIDY)
+> > -         # Add clang-tidy if available
+> > -         option(CLANG_TIDY_FIX "Perform fixes for Clang-Tidy" OFF)
+> > -         find_program(
+> > diff --git a/meta-oe/recipes-support/cli11/files/0001-Use-GNUInstallDirs-instead-of-hard-coded-path.patch b/meta-oe/recipes-support/cli11/files/0001-Use-GNUInstallDirs-instead-of-hard-coded-path.patch
+> > deleted file mode 100644
+> > index 4541cd929..000000000
+> > --- a/meta-oe/recipes-support/cli11/files/0001-Use-GNUInstallDirs-instead-of-hard-coded-path.patch
+> > +++ /dev/null
+> > @@ -1,39 +0,0 @@
+> > -From 8c51221f748bca1483fe1141e584867d2ff34a07 Mon Sep 17 00:00:00 2001
+> > -From: Khem Raj <raj.khem@gmail.com>
+> > -Date: Thu, 19 Dec 2019 16:26:39 -0800
+> > -Subject: [PATCH] Use GNUInstallDirs instead of hard-coded path
+> > -
+> > -Upstream-Status: Submitted [https://github.com/CLIUtils/CLI11/pull/373]
+> > -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ----
+> > - CMakeLists.txt | 5 +++--
+> > - 1 file changed, 3 insertions(+), 2 deletions(-)
+> > -
+> > -diff --git a/CMakeLists.txt b/CMakeLists.txt
+> > -index 7073a0b..5236fd2 100644
+> > ---- a/CMakeLists.txt
+> > -+++ b/CMakeLists.txt
+> > -@@ -120,17 +120,18 @@ endif()
+> > - configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/CLI11ConfigVersion.cmake.in"
+> > -   "${CMAKE_CURRENT_BINARY_DIR}/CLI11ConfigVersion.cmake" @ONLY)
+> > -
+> > -+include(GNUInstallDirs)
+> > - # These installs only make sense for a local project
+> > - if(CUR_PROJ)
+> > -     # Make version available in the install
+> > -     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/CLI11ConfigVersion.cmake"
+> > --            DESTINATION lib/cmake/CLI11)
+> > -+            DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/CLI11)
+> > -
+> > -     # Install the export target as a file
+> > -     install(EXPORT CLI11Targets
+> > -             FILE CLI11Config.cmake
+> > -             NAMESPACE CLI11::
+> > --            DESTINATION lib/cmake/CLI11)
+> > -+            DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/CLI11)
+> > -
+> > -     # Use find_package on the installed package
+> > -     export(TARGETS CLI11
+> > ---
+> > -2.24.1
+> > -
+> > --
+> > 2.26.2.645.ge9eca65c58-goog
+> >
+> > 
