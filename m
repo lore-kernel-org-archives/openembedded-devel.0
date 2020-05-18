@@ -1,68 +1,75 @@
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
- by mx.groups.io with SMTP id smtpd.web12.40083.1589803140708839138
+ by mx.groups.io with SMTP id smtpd.web10.40625.1589803824020044472
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 May 2020 04:59:03 -0700
+ Mon, 18 May 2020 05:10:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@stusta.de header.s=default header.b=p0Ido4eW;
+ dkim=pass header.i=@stusta.de header.s=default header.b=efq7vOLZ;
  spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=l5hx=7a=stusta.de=bunk@stusta.mhn.de)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49QcxD5k9Jz2f
-	for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 13:58:56 +0200 (CEST)
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49QdBQ18Grz2f
+	for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 14:10:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1589803137;
-	bh=KniBH2rwXzEp+GK64HkDrpU4A9f/YdR7n6frQtTpeF8=;
+	s=default; t=1589803822;
+	bh=7IJCHfp6sGMsNSaOk+x1xZYknsPfyGhPY0UaeAPajew=;
 	h=From:To:Subject:Date:From;
-	b=p0Ido4eWfx7r2vYd2WC3ppn63s1qsQWyu7S4F8mBaGu08SFQLCxbbLgtJtU9k9ZP2
-	 rDYPFK2EyefcewI5Wq25hC2yjU8XBNsI4TKK2Y22E/Vylh6V+IP/R+EDi7isgUTaOF
-	 ZVZWf1bxykPJRMvVZa6SlkYEgP/GOMtZkWu2HPiEbf6ihjrrNW1+QOS8kzkEle/kCc
-	 sf4BzyRuVobfpRXdgHLjFvV5+tR1DHEO7xhlmUhma97T36ON0Sjcrb4vZgK2K5mC9k
-	 kw/cV+7HQ085lGGMFLbv92mO6tqpW/HaXG86ZuvNn41cKy1aN0h1gw0jDvAKT7S61r
-	 ZXFEm9zti5XJLKVmOhtSvZdt3r63kDsv+OYTtnOHK0u+D3M5dHgYV445yowpdOKOnx
-	 naZomhbvSqftymJD8hEq7UwaNbpM+Rg+WLEDLXhmpypCGOZZm4r1fZ4BEl8Lnyxiz5
-	 tlxy1zJKm8VxS8g1A7F1g+Ufhr2rDZSppmS6NaAZsoXX97nDcNMUQarrKVStOMOJv3
-	 9YWnak1e52DaXduTh79s2MHperBlFtRXAygxyWwripYxroIAB/OVZGR8aA6ZQB0VhN
-	 0Y4rXK/FqbPm/k5JuHPlag19AE4fFRK+ZgzPWNeNbLgP7A7Ns+T5UQ3AUJmCpxNju0
-	 WGLlUHmt7H97gqVzd2/+Nsfk=
+	b=efq7vOLZzjQLHMsdHJ9G7zfuXPXg5N4+UHNj6ZnF2dDmSrsjrquDCLdQjezqDX+ZO
+	 ZzYYYkqqtM8/OJfvGPxb6Ech95ml7hR9vQ440nfOXwg02hETLfDlwNkmblj6UO7CS5
+	 NMIOaMOoQGajPJYvbgNdnA2KedV1FL32AuRpp/lAC2uCCGnRpR99rzdbq0wPRnmMyf
+	 sBx+ZHrR9U0fz8BRsqn6AktcCX0zkL8k9YNktGUy6X+YAdNTn6an2FwqPSqgG8L2Fh
+	 FcvDh5VAWoMFggnLVUApnbRP3Wu1Uz5xhyjEowFZtu18yTyKtvi0v1AAqKEJAcCFvj
+	 DuEYbsnkwPGoDD1f1qscE4w9nBCMW/GT2NZTWnXAAxqEZ1gHN+Z92fDR46utoAwc3g
+	 VgUjJc/qaGZRJnAZ+5VdHyEh9Jzqia6IMo88KGXJR9kVUKMQXXFfjZ9+9jEnpIAbhV
+	 HtZZYwTYk05pE/+OaiBV3Ti2DOuT26n8HMBQaYqjh6olzxYJ03rJFD8UkSq3F4GLWK
+	 68rUgjWC5m8SLaBH86tXKqKFBbBJCpMbv+BpBbkhrbn7/T1y3Owi7JDP3xFL56g6YE
+	 bhrFTou7k/u3XOTTCS391r/lOy1RpMQ/NooJd5k1vW0w7P+nLsr1Qx0ua2xT9ul8p8
+	 WW1WNXEuvMeiPilzJoquF4Ak=
 From: "Adrian Bunk" <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] libhandy: Remove, moved to OE-core
-Date: Mon, 18 May 2020 14:58:54 +0300
-Message-Id: <20200518115854.9546-1-bunk@stusta.de>
+Subject: [meta-oe][PATCH] unicode-ucd: Remove pointless license check
+Date: Mon, 18 May 2020 15:10:21 +0300
+Message-Id: <20200518121021.11057-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
+
+WARNING: unicode-ucd-12.1.0-r0 do_fetch: Checksum mismatch for local file /home/bunk/yoctomaster/yocto-tmp/downloads/unicode.org.license.html
+Cleaning and trying again.
+WARNING: unicode-ucd-12.1.0-r0 do_fetch: Renaming /home/bunk/yoctomaster/yocto-tmp/downloads/unicode.org.license.html to /home/bunk/yoctomaster/yocto-tmp/downloads/unicode.org.license.html_bad-checksum_e9dd7d435db23241be3be21b5fca729b5cf883c8c039a70ea093031420d06abb
+WARNING: unicode-ucd-12.1.0-r0 do_fetch: Checksum failure encountered with download of https://www.unicode.org/license.html;name=license;subdir=unicode-ucd-12.1.0;downloadfilename=unicode.org.license.html - will attempt other sources if available
+
+This downloaded a license file from upstream.
+The upstream file did not match (copyright year changed).
+A stale copy was downloaded from a mirror instead and checked.
+The stale file with known contents never changes.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../recipes-support/libhandy/libhandy_git.bb  | 21 -------------------
- 1 file changed, 21 deletions(-)
- delete mode 100644 meta-gnome/recipes-support/libhandy/libhandy_git.bb
+ meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/meta-gnome/recipes-support/libhandy/libhandy_git.bb b/meta-gnome/recipes-support/libhandy/libhandy_git.bb
-deleted file mode 100644
-index 8c6159f99..000000000
---- a/meta-gnome/recipes-support/libhandy/libhandy_git.bb
-+++ /dev/null
-@@ -1,21 +0,0 @@
--SUMMARY = "A library full of GTK+ widgets for mobile phones"
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+diff --git a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb
+index 89ab565ce..dc1251777 100644
+--- a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb
++++ b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb
+@@ -1,18 +1,15 @@
+ SUMMARY = "Unicode Character Database"
+ HOMEPAGE = "https://unicode.org/ucd/"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://unicode.org.license.html;beginline=42;endline=85;md5=67619d0c52706853c0256514e7fd04cd"
++
++ERROR_QA_remove = "license-checksum"
+ 
+ SRC_URI = " \
+     https://www.unicode.org/Public/zipped/${PV}/UCD.zip;name=ucd;subdir=ucd \
+-    https://www.unicode.org/license.html;name=license;subdir=${BP};downloadfilename=unicode.org.license.html \
+ "
+ SRC_URI[ucd.md5sum] = "430cbdac2615451571dd69a976dd08f6"
+ SRC_URI[ucd.sha256sum] = "25ba51a0d4c6fa41047b7a5e5733068d4a734588f055f61e85f450097834a0a6"
+ 
+-SRC_URI[license.md5sum] = "f03bafb623258f85ff2032c1ce567b7c"
+-SRC_URI[license.sha256sum] = "983225207de8a707d0903a8d70fb7a4b28c5e0f64f2366e84a6192a2d618fed4"
 -
--SRC_URI = "git://source.puri.sm/Librem5/${BPN}.git;protocol=https"
--SRCREV = "ef7c4bf75ae239495141ada83d2fbaf034315563"
--S = "${WORKDIR}/git"
--PV = "0.0.12"
--
--GIR_MESON_ENABLE_FLAG = 'enabled'
--GIR_MESON_DISABLE_FLAG = 'disabled'
--GTKDOC_MESON_OPTION = 'gtk_doc'
--
--inherit meson gobject-introspection vala gettext gtk-doc features_check
--
--ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
--
--DEPENDS += "gtk+3"
--
--PACKAGES =+ "${PN}-examples"
--FILES_${PN}-examples = "${bindir}"
+ inherit allarch
+ 
+ do_configure[noexec] = "1"
 -- 
 2.17.1
 
