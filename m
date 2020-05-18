@@ -1,84 +1,113 @@
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.web10.43720.1589813427021833578
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web10.43721.1589813428172856695
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 May 2020 07:50:27 -0700
+ Mon, 18 May 2020 07:50:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=A44znGKt;
- spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id r10so4941458pgv.8
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=YJzfr2Kt;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id q8so3253915pfu.5
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=YxEmK5zpaTAlhh3xSkG7gMtNeQafoZSPk0AuE2QEnAY=;
-        b=A44znGKt3IcquNcWBYG3Vp8yoNKTiyI8n22a/qsQg8IgTRiZAFEh9qTbwx6LZ4BXzz
-         rBlNVcI9dNLqYI99ZcHrZ0VR3HxhrBnfkrVVzsR32X/Wwc4DfMew0yW16YNzl2O7IkrR
-         zKou6SVID6HBEcWxMQvQnNDK4p2H4cM8rcst3/AMnBqsY6nTp/5aSVosZO3ToSPPL5Ex
-         fZrUL6O+zIFMAFazjWErjqOPu/hhR3bnIzjRCLtfsWYe2y8P3D2b7nAdTZK8MXrqAbjG
-         pp0UUrSWV91rYEca+YUlbcxyt9dNN9AmL8w39YjgNemOsXa9e4J5ZVOexBBW5QeSFcHO
-         tCwA==
+        bh=OXyOlGIO/eMR/VJknmmCRlTpi6UCrxLOxp+XPGUdb40=;
+        b=YJzfr2KtChqFET4JI+IPHSNvntk5n8gnGScvWC5uiNgzjchN8bJr3kW258/IXjWCnK
+         6hYNs1RHoqXgUEH7d2VUFr7j7WFf6ojTAg/NRpv2Lgd7CpbZ09toQDxs2bpFaA3wmJhy
+         iYwyRcZ+FdgHwnutw90f9X7rGXNCe8p9sgrz0VwpSbJgNoo1X0uTIwgRPXGtlhLtytOt
+         IJUANQxrzqXBYBci/8jVFVvlYcI2A7yS3ePnrK/0Y8D+/LBUCGRDw7L7saq0X+CEHiqB
+         0bZ1cm2mkGsDgL2xPjGsPWHLhxgcRdl3XXqaPYDqWOEQngY6djvA4cs81Tl1YwjBdU2U
+         0b0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=YxEmK5zpaTAlhh3xSkG7gMtNeQafoZSPk0AuE2QEnAY=;
-        b=ZhsRDz+ya7uqKctAN1TLoN6+0jegybX+1uGtuR6Rj49ANrxzd6Bm2MfsKIOjmVLjqm
-         Uhrndw+M6xc2+ZLY+W4kdyeZJ920KvnS3iHL2tTB8bgl4HEM9vsWb/pZq4ENgUCBXO1l
-         4dmDjbt1wZeqYIcGieJfA78Bnt0OAPpcglDTr3R4d3NKiw8B7LRPQ+wQPc5L/AswhP9o
-         C1ubox0mEXe7iSJqdOxXv06MPj5Fr6r4ZA9Q9QC28d+gY2oPSWDzkjcAOFuGctcBCEQ2
-         G5s24pyH5jAP9y3ce/5pn8RChi37AFk9tYtM64TPDfd51Orw48Hd3jw1zKxVZlWcckhx
-         H8GQ==
-X-Gm-Message-State: AOAM532gMVpTT08QHVJqgRCDKarqKounLcHGJ6pJivic4rrO9NYANt7p
-	+aKZ63m2UqPw0iHNCS9zqH6ApC/J
-X-Google-Smtp-Source: ABdhPJxZi/oQaiuuQZHM+IFEKsJUOvUSyVjo7jRS7V6w/7+V1QMU62iSUR2vDLsMniMU9+Lg70vpjA==
-X-Received: by 2002:a62:7acf:: with SMTP id v198mr6065167pfc.166.1589813426400;
-        Mon, 18 May 2020 07:50:26 -0700 (PDT)
+        bh=OXyOlGIO/eMR/VJknmmCRlTpi6UCrxLOxp+XPGUdb40=;
+        b=gSr9AgFtcoqAbxzjXPd/O7r8BG9IQNxCRgCxL3jGEq/jcPL3m40q+uYYZbQ7CyyVfK
+         4zZiBsdMWrSFXEAcM0+0B2XXsgBlw92Q6GqOYAIIPxgN+uitXvytUyorTtrHhOb62ULf
+         zC77OOUrfWBrO0jeLxdmZ3G5fg3jIoJ6Symjy/dEHQTXbKfQqlEBCUxMAKExaBX660lA
+         c/YCHeozx3Eji4h5DYUMYacbvLm9py82VVv/gUX+dNgsUqJ0aOrN9aPneowK2YhtHF+2
+         QfeAHKqGwJjtVBN1OTcH8XI6bnuY/7PtI6CkRcpxEG1gDKqeU6ZcfqIN+IcvUCGtA8wJ
+         usCw==
+X-Gm-Message-State: AOAM530j+wxv1xdFoaxxREg/Fn0zkWe+Usjyo2S7GjD2lhKvvUFR6TUK
+	g8iYs3DcILWDBg19KA525BUzfGqc
+X-Google-Smtp-Source: ABdhPJyzVehweXg98Hw3aOKvHLuGV0guyjynZHoGsyArFOhS71YnOwHNvJGyELTdoULxlKffCzpSpw==
+X-Received: by 2002:a62:3c5:: with SMTP id 188mr16519612pfd.41.1589813427404;
+        Mon, 18 May 2020 07:50:27 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:4481:39b9:1b65:c59])
-        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.25
+        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.26
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 May 2020 07:50:25 -0700 (PDT)
+        Mon, 18 May 2020 07:50:26 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 19/57] python3-zipp: add the missing rdepends
-Date: Mon, 18 May 2020 07:49:24 -0700
-Message-Id: <07f1e0be8d428d0a643dad67adf81dd76ce53579.1589813083.git.akuster808@gmail.com>
+Subject: [dunfell 20/57] x11vnc: fix xfc NULL pointer dereference
+Date: Mon, 18 May 2020 07:49:25 -0700
+Message-Id: <7601fbcf5c3f5e44072b55656af161e7e64beb79.1589813083.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1589813083.git.akuster808@gmail.com>
 References: <cover.1589813083.git.akuster808@gmail.com>
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: Jonathan Liu <net147@gmail.com>
 
-Add the missing rdepends to fix below error:
- # python3
- [snip]
- >>> import zipp
- ModuleNotFoundError: No module named 'zipfile'
- ModuleNotFoundError: No module named 'random' python3-math
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Jonathan Liu <net147@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 16b524d00a1f0684093b278a45f98fa736dda1e2)
+(cherry picked from commit d8eecca63640b47d02665fa9c4caabc9776b830d)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-zipp_0.6.0.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ ...sor-fix-xfc-NULL-pointer-dereference.patch | 30 +++++++++++++++++++
+ .../recipes-graphics/x11vnc/x11vnc_0.9.16.bb  |  1 +
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/x11vnc/files/src-cursor-fix-xfc-NULL-pointer-dereference.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-zipp_0.6.0.bb b/meta-python/recipes-devtools/python/python3-zipp_0.6.0.bb
-index 1019081f38..40db3c071a 100644
---- a/meta-python/recipes-devtools/python/python3-zipp_0.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-zipp_0.6.0.bb
-@@ -10,6 +10,8 @@ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+diff --git a/meta-oe/recipes-graphics/x11vnc/files/src-cursor-fix-xfc-NULL-pointer-dereference.patch b/meta-oe/recipes-graphics/x11vnc/files/src-cursor-fix-xfc-NULL-pointer-dereference.patch
+new file mode 100644
+index 0000000000..a571ba2838
+--- /dev/null
++++ b/meta-oe/recipes-graphics/x11vnc/files/src-cursor-fix-xfc-NULL-pointer-dereference.patch
+@@ -0,0 +1,30 @@
++From 95a10ab64c2dbbec2c8dad91a5ffb73a0d68474b Mon Sep 17 00:00:00 2001
++From: Jonathan Liu <net147@gmail.com>
++Date: Mon, 16 Mar 2020 20:04:06 +1100
++Subject: [PATCH] src/cursor: fix xfc NULL pointer dereference
++
++xfc->width and xfc->height for the XFixes cursor image returned from
++XFixesGetCursorImage(dpy) are accessed without first checking that xfc
++is not NULL. This can result in the server sometimes crashing when
++moving a Google Chrome window.
++
++Fixes: 37c946191a0f ("Broken cursor bugfix for 64 bit systems (#49)")
++Upstream-Status: Accepted
++Signed-off-by: Jonathan Liu <net147@gmail.com>
++---
++ src/cursor.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/cursor.c b/src/cursor.c
++index 39e73a6..74a08c6 100644
++--- a/src/cursor.c
+++++ b/src/cursor.c
++@@ -1311,7 +1311,7 @@ static int get_exact_cursor(int init) {
++ 
++ 		/* retrieve the cursor info + pixels from server: */
++ 		xfc = XFixesGetCursorImage(dpy);
++-		{
+++		if (xfc) {
++ 			/* 2017-07-09, Stephan Fuhrmann: This fixes an implementation flaw for 64 bit systems.
++ 			 * The XFixesCursorImage structure says xfc->pixels is (unsigned long*) in the structure, but
++ 			 * the protocol spec says it's 32 bit per pixel
+diff --git a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
+index 0d84c420a1..e3a1914fef 100644
+--- a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
++++ b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
+@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/LibVNC/x11vnc \
+            file://starting-fix.patch \
+            file://0001-misc-Makefile.am-don-t-install-Xdummy-when-configure.patch \
+            file://0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
++           file://src-cursor-fix-xfc-NULL-pointer-dereference.patch \
+            "
+ S = "${WORKDIR}/git"
  
- inherit pypi setuptools3
- 
--RDEPENDS_${PN} += "${PYTHON_PN}-more-itertools"
-+RDEPENDS_${PN} += "${PYTHON_PN}-compression \
-+                   ${PYTHON_PN}-math \
-+                   ${PYTHON_PN}-more-itertools"
- 
- BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
