@@ -1,49 +1,49 @@
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
- by mx.groups.io with SMTP id smtpd.web10.43715.1589813420508311261
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web11.43854.1589813421841296664
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 May 2020 07:50:20 -0700
+ Mon, 18 May 2020 07:50:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=XCIfUq1z;
- spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f179.google.com with SMTP id r10so4941157pgv.8
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pdn8439b;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id x13so5054438pfn.11
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=vLIR/+pusgKyagKyMPifapbWiB6C+YvjtOy4E5/1nq4=;
-        b=XCIfUq1zKh5LLN0gvNVEnCOrsh31+Q0Vu6osi6MrARZKk5qf8x7MGl2yTyjaE6p6kk
-         /4I/6SbMRLIeM6PyZyAqcbx0MTk/uMY7kalOyoIWPh64vOMwAMXMF9G5TW1t62BTMYVF
-         d7ceAgtdWlx/hcSxDSP3abD0vAA/KpKeDsbJAX2wLFd6qHPfvwIl/LRzvAQT9c5vV+oB
-         QTxScUa26cqSMLKtD53UoC4wFHDifOKFLTpIsaTMyrMD1a632q9fBLnW3Qx31ZwTPQOL
-         rGiKREStZHvulHzikjeCrs7MY8EBRW4g89eOO0dDvfVzUM3+ZHCQGuSZPo71CAhiQNxI
-         oQ/Q==
+        bh=khWVdGDZ3mLuCI1f4frhuiTrtAcrk+6SpnZTEq6IFoA=;
+        b=pdn8439bkD6ONMQF9TB8wWhspyEsMgJh0D6ozhbseroohM39y0rwXTW2620CGrNheZ
+         MiFoPXHUccyBiF6D0QHrPgSbXp6NvRHNltV1E3U8TSMqwfIMYCS5X6Ymex6ZwsjYgW53
+         8fcj7PKpn9pzMwvRnzVNKhopa1JwPE1kVLx8ojf3hgusBKMQfOfM2Vp7gesDaeDhkQ59
+         3LhPheB/5VDmgDO4Mt433OYqluwgI1y/VPtESfZ1uwOUIABwX4R1/HyZi3tj1zfrzOfK
+         Xuu5zuoNm5TgXiIoheciyyHyTqTDevXhqn/E24kEeXIO9zCQmkrPzMKDXEDHrDwCcDb9
+         Pwow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=vLIR/+pusgKyagKyMPifapbWiB6C+YvjtOy4E5/1nq4=;
-        b=LPk+io5ZIObgxoBJy88oG7IffurR/bhP7PdPBwyG115jIRcmzGHIwq4VlCrIkYtpDp
-         cBgI8vImoSzpF5V2MH81XxSysNGzitskYLvZsybZh1MLsyoql7bU4SXAGlnZ0PmoTrZx
-         mhx5jtDAGksbTX8X1Kg0uixYZPT2+zd3a1w05QJ3IUWqM2Pw6Eyf9/Z173THzbHWgTfC
-         J0uM1JJUaZEcrGC3w+s1negDdVU/JZlt6zhZ6ztzjweH5zYMfbZIGlhmyCzz8vFCknmj
-         Yv4QoZ7zq9ojSp2PComvIQ8DjR1Vog4v7B84N/kv+K/iuqNafTee6WgQMYNLyTDGLQeZ
-         rKCQ==
-X-Gm-Message-State: AOAM531XJdzulFZLrirK9CJA82v0DBkU24xvUQCC3HrW9zwYxpDWnCHC
-	vG4ZswNaNzyYdsQUbl9lrsWHwUgR
-X-Google-Smtp-Source: ABdhPJzpp2DzqOXGODPTOl3uAg55S31lZhv6DCScgWDDIrLmWdUbzFYaFA5hO4cQjJRiYWE+ywxohQ==
-X-Received: by 2002:a62:1957:: with SMTP id 84mr14315280pfz.54.1589813419751;
-        Mon, 18 May 2020 07:50:19 -0700 (PDT)
+        bh=khWVdGDZ3mLuCI1f4frhuiTrtAcrk+6SpnZTEq6IFoA=;
+        b=OIOs3QdQmHEEOplrmYyXUoFL37JG5goHAHzFYFip+HUrNJRBY9bvzXXNfFR8tUL3bA
+         qn0vHoD7/FQ51OsSwYJovBPfthPHoLfN+CUZfbEdzUbkbWCQgIzlPkLe20Vh1tyFD5ta
+         FQWCbUQGQQtB8oCscVm2k1ZI72b26vduPhApZSsZUIyQWnQBIbFL97i5CLhyTa8EhT2H
+         txTlYq7aPkcC5AYXxPCEYaTiw+vQVj1JOSW5TvpGYcCqzvZsFmH1Wz+uTua8BGIGdmO+
+         /xTUYwtEMSbzpbAIo63g1ewAA7bBYNDrfkQWpTRT1DgypOsjvei8HXlizaLF6KbqJ24s
+         zOyw==
+X-Gm-Message-State: AOAM532Rkql13kw7VrxYm0eRZUOXv1h6snQ/Uu1RWeMi0r06/De6i8Wu
+	Uy82mWOCu8oCjCm8hwVndN9oqdPJ
+X-Google-Smtp-Source: ABdhPJyXRkBx/pCTYMcvYRQcyH0cIUdyHMAkySsNf0Rc5xrE106/Jh7ISnppImSOnC0XxDO83DZhPw==
+X-Received: by 2002:a62:1dd3:: with SMTP id d202mr5454550pfd.99.1589813421160;
+        Mon, 18 May 2020 07:50:21 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:4481:39b9:1b65:c59])
-        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.18
+        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.19
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 May 2020 07:50:19 -0700 (PDT)
+        Mon, 18 May 2020 07:50:20 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 13/57] python3-ptyprocess: add the missing rdepends
-Date: Mon, 18 May 2020 07:49:18 -0700
-Message-Id: <4cee153f598f4bc5fd2e1982a99b8c8937131e4e.1589813083.git.akuster808@gmail.com>
+Subject: [dunfell 14/57] python3-pydbus: add the missing rdepends
+Date: Mon, 18 May 2020 07:49:19 -0700
+Message-Id: <5d53a615098ec46c1180ea458b5ba99598db71a7.1589813083.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1589813083.git.akuster808@gmail.com>
 References: <cover.1589813083.git.akuster808@gmail.com>
@@ -53,34 +53,31 @@ From: Mingli Yu <mingli.yu@windriver.com>
 Add the missing rdepends to fix below error:
  # python3
  [snip]
- >>> import ptyprocess
+ >>> import pydbus
  [snip]
- ModuleNotFoundError: No module named 'fcntl'
- ModuleNotFoundError: No module named 'pty'
- ModuleNotFoundError: No module named 'resource'
+ ModuleNotFoundError: No module named 'socket'
+ ModuleNotFoundError: No module named 'logging'
 
 Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 07c7bacd997e9f593602acf840c10e9585cf5657)
+(cherry picked from commit 55190da2eba946319453531021089186bd2dd551)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-ptyprocess.inc | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-ptyprocess.inc b/meta-python/recipes-devtools/python/python-ptyprocess.inc
-index 0cc9114754..a6dc21cf11 100644
---- a/meta-python/recipes-devtools/python/python-ptyprocess.inc
-+++ b/meta-python/recipes-devtools/python/python-ptyprocess.inc
-@@ -15,6 +15,9 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
+diff --git a/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb b/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
+index 931bc6f7cb..807e7b2de5 100644
+--- a/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
+@@ -14,4 +14,6 @@ inherit pypi setuptools3
  
- RDEPENDS_${PN} = "\
-     ${PYTHON_PN}-core \
-+    ${PYTHON_PN}-fcntl \
-+    ${PYTHON_PN}-terminal \
-+    ${PYTHON_PN}-resource \
- "
+ S = "${WORKDIR}/pydbus-${PV}"
  
- BBCLASSEXTEND = "native nativesdk"
+-RDEPENDS_${PN} = "${PYTHON_PN}-pygobject"
++RDEPENDS_${PN} = "${PYTHON_PN}-pygobject \
++                  ${PYTHON_PN}-io \
++                  ${PYTHON_PN}-logging"
 -- 
 2.17.1
 
