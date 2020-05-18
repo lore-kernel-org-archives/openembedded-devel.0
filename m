@@ -1,79 +1,88 @@
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
- by mx.groups.io with SMTP id smtpd.web10.43709.1589813409681647124
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web12.43414.1589813410680788498
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 May 2020 07:50:09 -0700
+ Mon, 18 May 2020 07:50:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=r5NGZ8WI;
- spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f47.google.com with SMTP id s69so5329799pjb.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=UXuKtXiA;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id n15so5226177pjt.4
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=oSIxVdK4iN+Zy1mh0QPQXM/JGo8pT4g98GoIZgzpcYo=;
-        b=r5NGZ8WIWwU4ee0ErScfiHNhmcBjhe5AZ96RrPTfyQI12XafZVhO5/L6iPMaqW/byF
-         OVhoLsBzEMUqEe4OMkzqfzFweENPiLssz/vhM1BCqufuP4FPejo0IU9QoAwlqbnVmw7H
-         V4TTqLacq10Nk+FnGpJ1Dfv24CLf1EC3TOkFeAPKVc8JDvKaSh/ZTG4OFG6TfkIugcHR
-         970FHKHTUtazcIahrBLDe+D5GLU14j7DnA76/4rCykHlZ6GIKRIDeWR+Yq+Z4fF+jbqD
-         T9v85E0NDCf+9mqZgOoJ+lCBSxKbVPme/SY0Bsv9TMu39iHYF+rVaXiHOkLIOYs18D6I
-         bXPg==
+        bh=N3FT7hrxuC3i/jtJpa+Kai/i9dv1fGGHS5BBc1jq8lk=;
+        b=UXuKtXiAwM4GXxAkcZcY+woWh4fUeThzyEQzTr0Ltgn496RYoTRxGrpN8Aa3zg+OpA
+         KcwDypHB9ifpnqd8rZqamnWLewfc/oh4kSSURYUwJDMHKwch0vYuHyVLJHNSXySStMs0
+         OiCRotzEbOjSLDgEoLt0DJIRWbeq2aJ+ZueAncbQznf5bY3EX+UURuPqFdA9N5cdrSPE
+         tZy7oEknkPZobeuVXKQYU5POAHx409ghHjOzvczvc9trxljUpUEHFlklBFgVQRN9wBFH
+         yszGpl04mxTh+lRulF6WLXgZJj75Wzko3RZrK3Lg4g5SzQ6xrxor5pUgogH9hyknyLlI
+         THeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=oSIxVdK4iN+Zy1mh0QPQXM/JGo8pT4g98GoIZgzpcYo=;
-        b=OyqPcpADmBJG521VJvz6NKbmEgvgdQymbS0NBz78Mo62YmN/qRbOPLW6x4soabR8IR
-         mfmg6aS4aY7yRatJS5VCjFHiUI+9R7IA/heSdR9tU8lvanAX1JjagrtVJFHudeq+reQw
-         ChKxpOC9CzsM4C5IjCXsR2rsJgWQmndGTpqJLOzVXR7k3NmuVw+3qlSucZUfsoWxbjTo
-         Te8g8Rzj7KRvhncvxMtUEQrqAENItj5/cD7S/Fs13YhAAdDgjB5Tz6qr/qs6koBVveNX
-         G892gVmHZjnct4+gBx4PSq3mC39K/vOe88YbU6MOnCZzUT+Ohg5joZ5QWq9j9imDPqxj
-         uP4A==
-X-Gm-Message-State: AOAM5319Oyeb8l3mr7Z83RJWRAOzm3idQTFUGl2ZJ4R3kTCOzVylaXTS
-	zmmFV4FpQWvW62Y1OJhSq7t2ocLm
-X-Google-Smtp-Source: ABdhPJzjePsE8C5+anClBDbYb5eYwVrlO++5kdHEBe6Cl/TKtGoDB8B2CJz6qH+ZmpXLC2efMux0Hw==
-X-Received: by 2002:a17:902:7c16:: with SMTP id x22mr16547555pll.244.1589813408940;
-        Mon, 18 May 2020 07:50:08 -0700 (PDT)
+        bh=N3FT7hrxuC3i/jtJpa+Kai/i9dv1fGGHS5BBc1jq8lk=;
+        b=eFIpBhw3qONNoPi+AKnYE7ui4XNwu+B4ROe9ZgLr6NqGAGF/Y+aW5un4JELOBaFPpP
+         W4MWdQlzui6MDvRx1zaivMEkFiYMwguK6mqyWFAS+mbiHogaw0q9Y3Bz1VmtGp2Ey9ui
+         UmJm09sMEwHlRUOVw/CplC90J6ZQ3vlQh4GM4ygqcJGsf1lh3v4zbS+9/4EvhimHP/2u
+         JVSGASKrfRl6KiTm114FWE18osYtMMhq6yGPDMO65b9pFectZmK9sf6MYuhk3j6ZlePq
+         Ci8+fG11z2pIIA37t79wjm9LmOikgDSkAF/+ZF/5EqEfBMWYDDNT/BfudrVEJFb800uT
+         FiCw==
+X-Gm-Message-State: AOAM531dP+kW0JIAwFaSbEz5F5y3LPU9oIfidsUKzBUUJ7JY5Ppfsedr
+	5Ju0Rq2cgqa2RlyyToT2wPFiQxg3
+X-Google-Smtp-Source: ABdhPJw5H/Y8euPuhyc0Txnx3OqL6O9WZabBkQYLt+xr1e8AaxSsJdT3g+boY6L8SpZkHTYg+XaIVg==
+X-Received: by 2002:a17:90a:c253:: with SMTP id d19mr20768147pjx.210.1589813410090;
+        Mon, 18 May 2020 07:50:10 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:4481:39b9:1b65:c59])
-        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.07
+        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.09
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 May 2020 07:50:08 -0700 (PDT)
+        Mon, 18 May 2020 07:50:09 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 02/57] tcpdump: Fix PACKAGECONFIG for OpenSSL
-Date: Mon, 18 May 2020 07:49:07 -0700
-Message-Id: <26eeb83572ebd70de831ab724d254811e6b8912a.1589813083.git.akuster808@gmail.com>
+Subject: [dunfell 03/57] nginx: remove /var/log/nginx when do_install
+Date: Mon, 18 May 2020 07:49:08 -0700
+Message-Id: <775ad5a08ec9fa80c6e731d69ca45c22c6664d9e.1589813083.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1589813083.git.akuster808@gmail.com>
 References: <cover.1589813083.git.akuster808@gmail.com>
 
-From: Alexander Vickberg <wickbergster@gmail.com>
+From: Yi Zhao <yi.zhao@windriver.com>
 
-This fixes building TCPDump without OpenSSL. Current version does not
-recognize the option --without-openssl.
+Remove directory /var/log/nginx when do_install because it is created by
+volatiles file.
 
-Signed-off-by: Alexander Vickberg <wickbergster@gmail.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 5b7ed1a8730a6e2c17d4650ee140b306483a3d9c)
+(cherry picked from commit 6e9f393605eed1e5f4e317536b1463b83b978bad)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-webserver/recipes-httpd/nginx/nginx.inc | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
-index 05fc99bdc7..94543dd1da 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
-@@ -27,7 +27,7 @@ inherit autotools-brokensep ptest
- PACKAGECONFIG ?= "openssl"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
+index 2824c66529..de080a2b01 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx.inc
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -90,7 +90,7 @@ do_install () {
+         install -d ${D}${sysconfdir}/tmpfiles.d
+         echo "d /run/${BPN} - - - -" \
+             > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+-        echo "d /${localstatedir}/log/${BPN} 0755 root root -" \
++        echo "d ${localstatedir}/log/${BPN} 0755 root root -" \
+             >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+     fi
+     install -d ${D}${sysconfdir}/${BPN}
+@@ -139,6 +139,8 @@ do_install () {
+             -e 's,@BASE_BINDIR@,${base_bindir},g' \
+             ${D}${systemd_unitdir}/system/nginx.service
+     fi
++
++    rm -rf ${D}${localstatedir}/log/
+ }
  
- PACKAGECONFIG[libcap-ng] = "--with-cap-ng,--without-cap-ng,libcap-ng"
--PACKAGECONFIG[openssl] = "--with-crypto,--without-openssl --without-crypto,openssl"
-+PACKAGECONFIG[openssl] = "--with-crypto,--without-crypto,openssl"
- PACKAGECONFIG[smi] = "--with-smi,--without-smi,libsmi"
- # Note: CVE-2018-10103 (SMB - partially fixed, but SMB printing disabled)
- PACKAGECONFIG[smb] = "--enable-smb,--disable-smb"
+ pkg_postinst_${PN} () {
 -- 
 2.17.1
 
