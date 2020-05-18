@@ -1,81 +1,133 @@
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web12.43424.1589813422937292546
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.web12.43425.1589813423881963365
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 18 May 2020 07:50:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=AS2dhKa/;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id y18so5060407pfl.9
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:22 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=jWYacxFd;
+ spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f169.google.com with SMTP id f23so4943898pgj.4
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=AjIhZqYdx6Irr25qG4Q7GhZlKNclpkiABLa1j69zvnQ=;
-        b=AS2dhKa/JDaoirrS50QjqXkGpM1zU+nn09L6Zo532lLp8ekCUqicuEwrk28+LIxVK5
-         eCFIxchTJi/D9EAxvqo3MSo2xUy4wQzKn/41vCHXJYfFdq6iy15VVfQTVf5MJwpq+Mwu
-         W3wON3XnvKKfgAiERIGjl5kvxQiQXEZbZDNBNwV7pzmoxtApsvajEpcujiSO91hBV87m
-         Lvgr3lDbxmfW/Sz5yqd7wWVe0LLl+1cyaemNzovp7M4mlVtg1U2g/nGFjautJeq1nyQo
-         JQGvEmM9X1XEWXOWM5A4hVciG/gKRjdRiSsxXmXmseWbDfZyVfSaX+spIKSCrE4MD6IM
-         dMAA==
+        bh=V592fcuqtB/ZhoABL1llHOjIlyr/c5zJt9xvAeEwhq4=;
+        b=jWYacxFdcuuIQIR+u9jdHQ047abs1zg38zNFgrgVy5yDJtcGfTXjUVrGaDxzwX9pgy
+         lSsUUMZQZXxO5zzKZ7xdg7JuIK0KXtAwZB8J1Pc+BFTHDD5amlTksbd6Lr1cZExx5Vtk
+         b3o1Og72TjB7uYCuvIL0cJHBsWrI0rBs1EEqoE/l1kk7QpHckbtvdIr4OqRNcGWAk50G
+         MvNrv4fxGfzMtFuHc5R8Ebw8l5JUFf23+vqkbMbAftSAN5yb0CHRv4fL1V4HEkWJqRUf
+         DtkXXx0GjpqjWSCufJKJQwlW6RZP0JlrfrkcyPcWGNQ9SYa4mS/WFJSxoJT80KdGOCMd
+         7HbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=AjIhZqYdx6Irr25qG4Q7GhZlKNclpkiABLa1j69zvnQ=;
-        b=k78EjS9RKGTZRpL6b+HROyDhgc+pr2n80xEg4kvBukLD3uh0EQT8HOmRrVHpW/IBmy
-         ZwTpRpymukVgwjEOORT9S9mjZFJGxM8SN+qCMgwqiSxvOxhqyqQ84KR/u6jHTAG0nd0/
-         RyuIsQGdMSa87Bwkdf9+M7wIfY9dC9idz6iIJo1FI6TEsc+CmSxIXNQBA4xPNtn7BTtb
-         2a6kwjCoYj+sNPWp5xBxd0lkTRAaQMpvLuU2+iZ9qiO9cmgDvIUCTzPM5Qnkz0dTOA2b
-         A7oUPdr/RUipFXsW6p7WvO9esAgICHBXLnBcVmKxJJzPp+EC74GUL0AuxYKLi9hH2lbK
-         VCPA==
-X-Gm-Message-State: AOAM532dSkPi1tX0ssDHmNAaB7QhO1mEztXSU4Tu8zLzHQIvn3//rHjt
-	xhqLl8IudAkNkpoEVODZAU01suSL
-X-Google-Smtp-Source: ABdhPJzG4OMASDBfmDlqKl80YSLNisG+68XXx1gr03GnMk5tDpFI8p4oy4LeH4rRKivT0W5onLALpQ==
-X-Received: by 2002:aa7:96e7:: with SMTP id i7mr6063915pfq.114.1589813422302;
-        Mon, 18 May 2020 07:50:22 -0700 (PDT)
+        bh=V592fcuqtB/ZhoABL1llHOjIlyr/c5zJt9xvAeEwhq4=;
+        b=KYqCBsBooo3NXjpfRBCPPehcQwYS7SfyKFDWYWJ5g9qBrtIvO3Vywd88MtLsKJ2eJe
+         mBs5HSrob2AjaMB1uq3QVFzUfaMNGPQ9DspPNyZnIo1In/uhwgEyu0zRoc1aKQ4YuLJh
+         9NRiLE4OjTdgvrb+5WgfxjnKXYtcp01QXI/G+P5jNnymd0lIx/z5xt98KIfIff9nGN5j
+         YCKpAp2+PEsMGcHqWnEGjfIh8d48uI+EiSqitQB89BYYxTEu4VGrkTgvwtzHvVWLRjHz
+         b74UlroiwZiz8dTey+4NmHcKx6LVac/N3TpEAbtXxl7tE2Dspwexsq/iEdFpMzHt01/d
+         4RoA==
+X-Gm-Message-State: AOAM532HoXh3WdFQb4gqfGgYP88w1g6zWJ6LtWMIpmuZkJfhrf2fpn5X
+	CJzrorbUFloGENo/qzYJpfjAIZs9
+X-Google-Smtp-Source: ABdhPJzyoz/zve/0h/a23T9EMNWcyi7wsj/pQTtQFDqJc0GymUaF54LdKb2O70NEEr8HXB9I2J4Dyw==
+X-Received: by 2002:a62:1ccb:: with SMTP id c194mr16596794pfc.325.1589813423138;
+        Mon, 18 May 2020 07:50:23 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:4481:39b9:1b65:c59])
-        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.21
+        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.22
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 May 2020 07:50:21 -0700 (PDT)
+        Mon, 18 May 2020 07:50:22 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 15/57] python3-pyudev: add the missing rdepends
-Date: Mon, 18 May 2020 07:49:20 -0700
-Message-Id: <5c91e3aa46b7fa5427af584aefb51f22cf931917.1589813083.git.akuster808@gmail.com>
+Subject: [dunfell 16/57] php: update fix for opcache link issue in 7.4.4
+Date: Mon, 18 May 2020 07:49:21 -0700
+Message-Id: <a6c9ad397bfcf40c11d74d926b8fdd6c3dfb98eb.1589813083.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1589813083.git.akuster808@gmail.com>
 References: <cover.1589813083.git.akuster808@gmail.com>
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: Claude Bing <cbing@cybernetics.com>
 
-Add the missing rdepends to fix below error:
- # python3
- [snip]
- >>> import pyudev
- [snip]
- ModuleNotFoundError: No module named 'fcntl'
+The source of the issue is the update for PHP 7.4 support in
+0001-opcache-config.m4-enable-opcache.patch (commit 7cc7a9ec).  Instead
+of working around the issue in the recipe file, update the patch to
+restore the call to PHP_ADD_LIBRARY().
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Claude Bing <cbing@cybernetics.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 4e79bf9f1d11739389f0cc7c9e6360dcd156f16c)
+(cherry picked from commit 3cfd16be4e1b62efe8ac640cecc080709cf2b9f9)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ ...001-opcache-config.m4-enable-opcache.patch | 19 +++++++++++++------
+ meta-oe/recipes-devtools/php/php_7.4.4.bb     |  5 -----
+ 2 files changed, 13 insertions(+), 11 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb b/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
-index f39847ffa7..49a3628f41 100644
---- a/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
-@@ -17,5 +17,6 @@ RDEPENDS_${PN} = "\
-     ${PYTHON_PN}-misc \
-     ${PYTHON_PN}-six \
-     ${PYTHON_PN}-threading \
-+    ${PYTHON_PN}-fcntl \
-     libudev \
- "
+diff --git a/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch b/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
+index ee0d5edcdb..1f3e683a0f 100644
+--- a/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
++++ b/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
+@@ -1,4 +1,7 @@
+-opcache/config.m4: enable opcache
++From a74b42098aededd296ec6a3cd4cf5a17e59d6f29 Mon Sep 17 00:00:00 2001
++From: Claude Bing <cbing@cybernetics.com>
++Date: Fri, 8 May 2020 10:15:32 -0400
++Subject: [PATCH] opcache/config.m4: enable opcache
+ 
+ We can't use AC_TRY_RUN to run programs in a cross compile environment.
+ Set
+@@ -12,15 +15,18 @@ Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+ 
+ update patch to version 7.4.4
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
++fix issue linking with librt
++Signed-off-by: Claude Bing <cbing@cybernetics.com>
+ ---
+- ext/opcache/config.m4 | 194 +-------------------------------------------------
+- 1 file changed, 3 insertions(+), 191 deletions(-)
++ ext/opcache/config.m4 | 195 +-----------------------------------------
++ 1 file changed, 4 insertions(+), 191 deletions(-)
+ 
+ diff --git a/ext/opcache/config.m4 b/ext/opcache/config.m4
+-index 6c40caf..84ddf1e 100644
++index 6c40cafc1c..6569aa9e1c 100644
+ --- a/ext/opcache/config.m4
+ +++ b/ext/opcache/config.m4
+-@@ -23,201 +23,13 @@ if test "$PHP_OPCACHE" != "no"; then
++@@ -23,201 +23,14 @@ if test "$PHP_OPCACHE" != "no"; then
+    AC_CHECK_FUNCS([mprotect])
+  
+    AC_MSG_CHECKING(for sysvipc shared memory support)
+@@ -222,9 +228,10 @@ index 6c40caf..84ddf1e 100644
+ -    AC_MSG_RESULT([no])
+ -  ])
+ +  AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
+++  PHP_CHECK_LIBRARY(rt, shm_unlink, [PHP_ADD_LIBRARY(rt,1,OPCACHE_SHARED_LIBADD)])
+  
+    PHP_NEW_EXTENSION(opcache,
+  	ZendAccelerator.c \
+ -- 
+-2.7.4
++2.17.1
+ 
+diff --git a/meta-oe/recipes-devtools/php/php_7.4.4.bb b/meta-oe/recipes-devtools/php/php_7.4.4.bb
+index 07c3115060..1d93902e72 100644
+--- a/meta-oe/recipes-devtools/php/php_7.4.4.bb
++++ b/meta-oe/recipes-devtools/php/php_7.4.4.bb
+@@ -110,11 +110,6 @@ export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
+ export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
+ CFLAGS += " -D_GNU_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_INCDIR}/apache2"
+ 
+-# link against librt (libc) if opcache is specified in order to avoid the
+-# following error:
+-# Failed loading /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so: /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so: undefined symbol: shm_unlink
+-LDFLAGS += "${@ " -lrt " if bb.utils.contains('PACKAGECONFIG', 'opcache', 'true', 'false', d) else "" }"
+-
+ # Adding these flags enables dynamic library support, which is disabled by
+ # default when cross compiling
+ # See https://bugs.php.net/bug.php?id=60109
 -- 
 2.17.1
 
