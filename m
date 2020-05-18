@@ -1,82 +1,85 @@
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web10.43711.1589813415200542312
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+ by mx.groups.io with SMTP id smtpd.web11.43848.1589813416231135163
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 May 2020 07:50:15 -0700
+ Mon, 18 May 2020 07:50:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=TcMvDc0F;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id z1so5079234pfn.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=WEm7FK87;
+ spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f175.google.com with SMTP id z26so4940653pfk.12
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=DtZov9DSe05IO3nz8bAwMK8KaU+gwuSVqorjsa4NgSE=;
-        b=TcMvDc0F7sXnAPLKMQgimiJk0Q1dQ2SJc5LccqmKRgS1/iOuwIWIDlhpKtiJuVDE9M
-         Rmsck6eqxsEOPQ/MKA8PrapNBiR4yPGqvhhs+WDaubuve/pqu4zJxH2WsnIVfGIttEHf
-         3R4kZRw0rKKk6PI+8wJCKxBOWVzQPzoEjKagLF9ulvq0eW7/TlqAdl4Tsh/8bSbPSAyV
-         D7lCDfCOeUiQLApZxcUb/Pexr8uKtn/LWq4z8kIELwYn0fGdjHVVmFv8skQb3jI+XVJb
-         CZBKxBolCAiQbDtjwahwpkrkhXbzx6X5eagIRXxdM7V1jnxpzvQ66I1aOnRVCeWbM2BD
-         Bpnw==
+        bh=PsZPEGGdos1Jxe9ph7JWD9wFqn2OvCvnSYlg1tsUdkk=;
+        b=WEm7FK87QHEKF22xYawKR2dMJvS/n+p1YZmL6fmoqKtFKK6xXBGWZF8WkYGrVKryIe
+         fc89MlLICCeACADZxjXH5VbdACH0V0K2ccqomOV8XS4FgZ0UuNiGBHZJUTV3y9mmUlRc
+         UqBERFOw6s/GfCWwyIqJHkifLO98h0fU99XdKnLyrnxs6onbsxX2aRpFuFfMdzDbaE21
+         pfAkAb7GW33akDeGCcV4+wyqjpID5ER0+tpQVjF6BWQwr0S4Lwuf6d7eMFy5iUaDmqwi
+         pKSp6hjcGhJnVGZuaXKXQkctaGpCF/2M7gKtQ846d65ZEsurM0Qp5jJ3T1UYx7cRjJVX
+         w2tA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=DtZov9DSe05IO3nz8bAwMK8KaU+gwuSVqorjsa4NgSE=;
-        b=Ke0eLV04RUHXTN/Gp71BI5sqDl6y1digmpAxM1I6ex3fK46LWYI8ifZz1B7Tl39bEc
-         acIsFKqzi93W6iP3RbzYiS/IMocTFyNuLUrkKqau4Mj9CDDmVZzozGDNtQpmTs0Rjdeq
-         dywFAXh6zVwbdivEz7NUsRhsVqQ0zFjNoOPRhDW4fyKK7Fd15ZcwfXBu0S5abZbcPLW+
-         1fSN1edemF5Ct9WpGcza1Q99MToPW4dQvdMATpixPed8UvL3KYBSCxj6/S5sJujmyRiw
-         z/U9mUUPPIzk4Zxm+9FVxSx7r6YZzJplmjT3cG/JSDDq4aXqh5AqhVpjEFPXI7pA+0sK
-         RW+w==
-X-Gm-Message-State: AOAM533DE9SDvNdSbViyN25t5VEV9PZ1RYrV9Xecz6aBy9B5ToXpzBrs
-	uex5V4Z8BinwVYkFhvdxh3Fik5kt
-X-Google-Smtp-Source: ABdhPJw1U7WxMncAgU3wDdO4L2skKmGTGZFNsPLmHbDZ+TFm/WjSsD9ngz38Q7KovpDvZ9aBe3peSg==
-X-Received: by 2002:a63:5f41:: with SMTP id t62mr15546412pgb.252.1589813414563;
-        Mon, 18 May 2020 07:50:14 -0700 (PDT)
+        bh=PsZPEGGdos1Jxe9ph7JWD9wFqn2OvCvnSYlg1tsUdkk=;
+        b=kT20plTelRFT/eR3O3Ai0b1qC5wxZKMo+4p6M3quq7IrdahWOoNtzVUSgrVHcfmU2n
+         V9c/0yUVcPzsRXOkjvIZaVYWbq8fL8aaRlb+dfrRpt8ebduGlIvU2tqSCgk5n/7UxaxO
+         ry3a3fs2hEfyrwOjjhLdePwXawYXViEJF8TL+pUwSsQmOwVCYjazdQ7Bs1fx6sXQHzv1
+         l82vB0uTDnc3ImYzNMFF5C8LaEyIyLcYonNJWdNKN6R/Q4V9lQbyhdlf5llehHl78yOr
+         5UA0YGqwIMkRtkB0YgNnXXP9FkzCbkFT1k4uNu0t3yDi3cT7sQbFYNWQl3cYJLQCNwxd
+         vdTg==
+X-Gm-Message-State: AOAM532bCVKqWk2irn921Zi0vXtGFnZTDsRcHcPvZRVczMvPbWlRUBka
+	WhPbbhr1X//if9izW4/GkcPX63bf
+X-Google-Smtp-Source: ABdhPJyquO5XlI5QdqtnbCOccRlPzYW/nB8M5i5f0y+cQRkYatpv/wTKEsOgtomD6knFJXWBouMeDA==
+X-Received: by 2002:a63:3e0e:: with SMTP id l14mr15204284pga.187.1589813415608;
+        Mon, 18 May 2020 07:50:15 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:4481:39b9:1b65:c59])
-        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.13
+        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.14
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 May 2020 07:50:14 -0700 (PDT)
+        Mon, 18 May 2020 07:50:15 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 08/57] python3-pkgconfig: add missing rdepends
-Date: Mon, 18 May 2020 07:49:13 -0700
-Message-Id: <4ccf941dd26e15fa97524c5f13f9a00963e16985.1589813083.git.akuster808@gmail.com>
+Subject: [dunfell 09/57] python3-py: add python3-netclient to RDEPENDS
+Date: Mon, 18 May 2020 07:49:14 -0700
+Message-Id: <824b48dfdca6b1a602972691fb253f135f6e7657.1589813083.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1589813083.git.akuster808@gmail.com>
 References: <cover.1589813083.git.akuster808@gmail.com>
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: Trevor Gamblin <trevor.gamblin@windriver.com>
 
-Add missing rdepends to fix below error:
- # python3
- [snip]
- >>> import pkgconfig
- [snip]
- ModuleNotFoundError: No module named 'shlex'
+python3-py requires the uuid.py module, which is contained in
+python3-netclient. Without it:
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+root@qemux86-64:~# python3
+
+>>> import py._path.local
+Traceback (most recent call last):
+File "<stdin>", line 1, in <module>
+File "/usr/lib64/python3.8/site-packages/py/_path/local.py", line 7, in <module>
+import sys, os, atexit, io, uuid
+ModuleNotFoundError: No module named 'uuid'
+
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 47b063d1da919ca022cf76b721959cfa82f1b876)
+(cherry picked from commit 71bb82f31283398a6bc6e614444b8b73f2763591)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-pkgconfig_1.4.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-python/recipes-devtools/python/python3-py_1.8.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pkgconfig_1.4.0.bb b/meta-python/recipes-devtools/python/python3-pkgconfig_1.4.0.bb
-index 92eb8bfb55..fc7a47a43d 100644
---- a/meta-python/recipes-devtools/python/python3-pkgconfig_1.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pkgconfig_1.4.0.bb
-@@ -8,6 +8,7 @@ SRC_URI = "git://github.com/matze/pkgconfig.git"
- SRCREV ?= "8af0102346847e8873af8e76ab3f34ba9da806e2"
+diff --git a/meta-python/recipes-devtools/python/python3-py_1.8.1.bb b/meta-python/recipes-devtools/python/python3-py_1.8.1.bb
+index 73aaf9e46a..ff66aeaa2b 100644
+--- a/meta-python/recipes-devtools/python/python3-py_1.8.1.bb
++++ b/meta-python/recipes-devtools/python/python3-py_1.8.1.bb
+@@ -11,3 +11,5 @@ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+ inherit pypi setuptools3
  
- RDEPENDS_${PN} = "pkgconfig \
-+                 ${PYTHON_PN}-shell \
-                  "
- 
- inherit setuptools3
+ BBCLASSEXTEND = "native nativesdk"
++
++RDEPENDS_${PN} += "${PYTHON_PN}-netclient"
 -- 
 2.17.1
 
