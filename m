@@ -1,49 +1,49 @@
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web11.43855.1589813430381830975
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.web11.43857.1589813431743683927
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 May 2020 07:50:30 -0700
+ Mon, 18 May 2020 07:50:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Lx/lz4cn;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id k22so4321534pls.10
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=h3DPA3PC;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id t40so5227267pjb.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=kr8E23Xj2soeJfS37wa34i7yN/dazSKn+r5rlN+Knbs=;
-        b=Lx/lz4cnPqul63eTdmVzpYlOfpOoU3gDHDyIWsyH11AaHG1NDVG8jMU5WAxZfwm/Fm
-         x+DBusIlzwkT9xBvLBwvHvi2ihXJxhhVEmOH0auk/qf2LJxnLlIMH3WmyYmzoe/fvyrE
-         kHmtXLEZHBmMfPJ/PGtJYN8oPFfNVb61D39EX4+Z5RCWzG+GL8AwrQ8Uij83/khi/qrW
-         QuTWLhxIXJVIfT+9zfV3rEuT2n/fz1qeWpmFBucikqW6DBJCRDgd7iQZYQiQ8h6dEoV4
-         NjMshzGosWxka02A08IFHCm6vnbsJox1aTQeqs4pu0LU7qXtYK/7SSmAHh+VagWr4Lgn
-         BmCA==
+        bh=SKzjMOef2kq+/pkAnGCMtxZXTpPscJ/Nz6iPvKffnkw=;
+        b=h3DPA3PCEtL4T+Jmfkt/pRswZczqb7KIfFKPNBW/Cy/AGBzVyTPHtuHAGfYdMv+ITN
+         97hHzNTkY8nGxuS3LpDqTdbqIOziE9XI+1ZMvYdGFnX5fwvL2euLUZuvjjnSPXt4TcsY
+         +q83l9VzVvsYBrf+NnaYflZm2250PjXgX4eYI/2KnOp3UkIIew4jN9oJE7vkMpSkrKj7
+         wVez8pz8vhkqIJkOUHCOtIoS/CKyY3melEuTy5d2ODoalD4fg3GOa4dTIxcs2FW51bc/
+         8wB9rf+iZqoQ+2Ii6FPohMGu23QN9smeg3+VSaZSf8xpACPavsF6+qa/+Qu5OovxJ+1V
+         coWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=kr8E23Xj2soeJfS37wa34i7yN/dazSKn+r5rlN+Knbs=;
-        b=q7+kBawmRZ5/rafyKRDqRMnyDIohcRW9v4uWaDGk/UmJmGWmlzD3WSd4MFP25CtkpD
-         RQVSCNZ8k1+lfcuQoc3a1dkz1W2ia2TznCR2aIwV2ccrWcqav6uDNVDxpfQMauaUVtNv
-         RpZrC2t3PdSbNcgz3eW35Gb7nlw4U5JpSUxYsK4udUkDnhVyBtz8bbTFsgppxlqo6zEZ
-         fVE6AuODwfLgISlwJFMMdu44YAdoSyNAjUIr82mbjM5qQ7L8oU3sNimTkkJkaG7Tvh2b
-         pZuxOWJQ4lc5ScGNX6ZYZUTOLI3B16DCsf8pKzcHkz/Y3N/TsvXml8elngTMEBoIe0HC
-         W7aA==
-X-Gm-Message-State: AOAM531zH2bLia2GiW4N1CD8GporSU+qMbrW7+K6vga3jJRF4+U3xe8F
-	1EfjpAdmQ69N505zrUpuq5m+Ycj4
-X-Google-Smtp-Source: ABdhPJzXa2UBEJd9KOr1vgYL4b26qhi4YIPv27NsbxJimzfk0gItr7oo6uovgW2q/4IOJAdEKgerzg==
-X-Received: by 2002:a17:902:8c8f:: with SMTP id t15mr16386078plo.183.1589813429713;
-        Mon, 18 May 2020 07:50:29 -0700 (PDT)
+        bh=SKzjMOef2kq+/pkAnGCMtxZXTpPscJ/Nz6iPvKffnkw=;
+        b=COYSaIihp+/lNCNcs/uB6Ns5oOpx2sOaZVAcDqvC7EFAb3KHFg0a8nzMVOSjSyUJl1
+         tGwZz9abzt/pDpOSwZIuCZHYYKprNSabfaD++AOE1/n5mHgpu6hu6AbxFzSF2XSRis4Q
+         FwHIMx5iWR4oTbMFeTci0jQhJzge3PuFSJ66cr2dJWpq3ZqazH/cOaierjCH/awZlrpI
+         UMbkR/U9NCtaZMTMMUosZVvyC6HZXRlLSju4mDVsEiCU4xIIWb9JE/Y3Rdz1dltsXYCC
+         7E0/OWruGxiyg87Ruo/pgU6Ej7IUbx5vcaiciROGeTv7FS6IbkEUUDXzZzuDU5Eq/HWo
+         XhZA==
+X-Gm-Message-State: AOAM533/Jy3fg0Xs5fE59UWehto/LTe4aK2ejHJExpq/mN46u4TdFUNB
+	z0p8COb80HZHlSfEjj3lPvuq+uud
+X-Google-Smtp-Source: ABdhPJxlDLhz+ZeFODa+yrDEecY5ilzoGZchqUwPtqlaDAJpagxdbFy1SBDg+Kg3YnWyIX2C8x/mgQ==
+X-Received: by 2002:a17:902:d68b:: with SMTP id v11mr16698108ply.295.1589813430801;
+        Mon, 18 May 2020 07:50:30 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:4481:39b9:1b65:c59])
-        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.28
+        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.30
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 May 2020 07:50:29 -0700 (PDT)
+        Mon, 18 May 2020 07:50:30 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 22/57] python3-setuptools-scm: Add nativesdk to BBCLASSEXTEND
-Date: Mon, 18 May 2020 07:49:27 -0700
-Message-Id: <bb93e3c6ff622689ab08fda93bd2a129bc660ff5.1589813083.git.akuster808@gmail.com>
+Subject: [dunfell 23/57] python3-attrs: Add nativesdk to BBCLASSEXTEND
+Date: Mon, 18 May 2020 07:49:28 -0700
+Message-Id: <3ab088ccdc35e1ad04ceb44efbe240dbb7513945.1589813083.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1589813083.git.akuster808@gmail.com>
 References: <cover.1589813083.git.akuster808@gmail.com>
@@ -51,35 +51,31 @@ References: <cover.1589813083.git.akuster808@gmail.com>
 From: "niko.mauno@vaisala.com" <niko.mauno@vaisala.com>
 
 By doing so we mitigate failure when trying to bitbake recipe which
-rdepends on nativesdk-python3-setuptools-scm, such as following error
+rdepends on nativesdk-python3-attrs, such as following error
 when bitbaking nativesdk-python3-jsonschema:
 
-  ERROR: Nothing RPROVIDES 'nativesdk-python3-setuptools-scm' (but virtual:nativesdk:.../meta-openembedded/meta-python/recipes-devtools/python/python3-jsonschema_3.2.0.bb RDEPENDS on or otherwise requires it)
+  ERROR: Nothing RPROVIDES 'nativesdk-python3-attrs' (but virtual:nativesdk:.../meta-openembedded/meta-python/recipes-devtools/python/python3-jsonschema_3.2.0.bb RDEPENDS on or otherwise requires it)
 
 Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit c966d3f063a9f159fd8db532b8034435e1cf3964)
+(cherry picked from commit 129efc7fa0c04ee812a972fc5b63990fe74288ea)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-devtools/python/python3-setuptools-scm_3.3.3.bb   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-python/recipes-devtools/python/python3-attrs_19.3.0.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.bb b/meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.bb
-index c061ea2e63..a1fc3831fb 100644
---- a/meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.bb
-@@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "bd25e1fb5e4d603dcf490f1fde40fb4c595b357795674c3e5cb7f6217a
- PYPI_PACKAGE = "setuptools_scm"
- inherit pypi setuptools3
- 
--RDEPENDS_${PN}_class-target = "\
-+RDEPENDS_${PN} = "\
-     ${PYTHON_PN}-debugger \
-     ${PYTHON_PN}-json \
-     ${PYTHON_PN}-py \
-@@ -18,4 +18,4 @@ RDEPENDS_${PN}_class-native = "\
-     ${PYTHON_PN}-setuptools-native \
+diff --git a/meta-python/recipes-devtools/python/python3-attrs_19.3.0.bb b/meta-python/recipes-devtools/python/python3-attrs_19.3.0.bb
+index b3739fda8c..7ff8049e52 100644
+--- a/meta-python/recipes-devtools/python/python3-attrs_19.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-attrs_19.3.0.bb
+@@ -12,5 +12,9 @@ RDEPENDS_${PN}_class-target += " \
+     ${PYTHON_PN}-crypt \
+     ${PYTHON_PN}-ctypes \
  "
++RDEPENDS_${PN}_class-nativesdk += " \
++    ${PYTHON_PN}-crypt \
++    ${PYTHON_PN}-ctypes \
++"
  
 -BBCLASSEXTEND = "native"
 +BBCLASSEXTEND = "native nativesdk"
