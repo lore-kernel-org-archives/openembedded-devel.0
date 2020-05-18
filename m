@@ -1,113 +1,87 @@
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web10.43721.1589813428172856695
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web10.43723.1589813429324882590
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 May 2020 07:50:28 -0700
+ Mon, 18 May 2020 07:50:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=YJzfr2Kt;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id q8so3253915pfu.5
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=MuWh+DK3;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id q9so5232181pjm.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=OXyOlGIO/eMR/VJknmmCRlTpi6UCrxLOxp+XPGUdb40=;
-        b=YJzfr2KtChqFET4JI+IPHSNvntk5n8gnGScvWC5uiNgzjchN8bJr3kW258/IXjWCnK
-         6hYNs1RHoqXgUEH7d2VUFr7j7WFf6ojTAg/NRpv2Lgd7CpbZ09toQDxs2bpFaA3wmJhy
-         iYwyRcZ+FdgHwnutw90f9X7rGXNCe8p9sgrz0VwpSbJgNoo1X0uTIwgRPXGtlhLtytOt
-         IJUANQxrzqXBYBci/8jVFVvlYcI2A7yS3ePnrK/0Y8D+/LBUCGRDw7L7saq0X+CEHiqB
-         0bZ1cm2mkGsDgL2xPjGsPWHLhxgcRdl3XXqaPYDqWOEQngY6djvA4cs81Tl1YwjBdU2U
-         0b0g==
+        bh=fjO2Am7CtpJm64CaxINCGdG2wH8eqxaVrYpWbLWdQ8M=;
+        b=MuWh+DK362TipgcLtniG9j83bBaaTPgpKII9XvX766ATxbaSdOvxsgmEiYV/qjJ0p4
+         FbBubi3CUv1+ZMtiQBJL672PYTotgTIu2nxCnCfIqgcCUCSHrFaRRyrbuUnW2XEEBVR9
+         5FDpj1VSUnHgnxnMA0oPPjKJlyh9QPufSCuIU4N09DL3cp6Dtl8ZrKh+c18wds/fW/im
+         mKMr08FE6J77n/4nWlcHd1OIwgA2C/n6sEaC2sJRuERnvubu3RvpA0WrNQ2o7cdb8Zu6
+         bJfoU+zBwYENq1BN5Vz+vubg67hsDU211aXmM/wuPAB4UzwYZWD2hFkFj/YHfWrQ7P0K
+         QYSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=OXyOlGIO/eMR/VJknmmCRlTpi6UCrxLOxp+XPGUdb40=;
-        b=gSr9AgFtcoqAbxzjXPd/O7r8BG9IQNxCRgCxL3jGEq/jcPL3m40q+uYYZbQ7CyyVfK
-         4zZiBsdMWrSFXEAcM0+0B2XXsgBlw92Q6GqOYAIIPxgN+uitXvytUyorTtrHhOb62ULf
-         zC77OOUrfWBrO0jeLxdmZ3G5fg3jIoJ6Symjy/dEHQTXbKfQqlEBCUxMAKExaBX660lA
-         c/YCHeozx3Eji4h5DYUMYacbvLm9py82VVv/gUX+dNgsUqJ0aOrN9aPneowK2YhtHF+2
-         QfeAHKqGwJjtVBN1OTcH8XI6bnuY/7PtI6CkRcpxEG1gDKqeU6ZcfqIN+IcvUCGtA8wJ
-         usCw==
-X-Gm-Message-State: AOAM530j+wxv1xdFoaxxREg/Fn0zkWe+Usjyo2S7GjD2lhKvvUFR6TUK
-	g8iYs3DcILWDBg19KA525BUzfGqc
-X-Google-Smtp-Source: ABdhPJyzVehweXg98Hw3aOKvHLuGV0guyjynZHoGsyArFOhS71YnOwHNvJGyELTdoULxlKffCzpSpw==
-X-Received: by 2002:a62:3c5:: with SMTP id 188mr16519612pfd.41.1589813427404;
-        Mon, 18 May 2020 07:50:27 -0700 (PDT)
+        bh=fjO2Am7CtpJm64CaxINCGdG2wH8eqxaVrYpWbLWdQ8M=;
+        b=KnPGuce0pMUvb0N16OEPKqVqFjyE3KMCtTzEGF1u+Lx+H0mSizxgLXsd+np+BNAH21
+         fK57+6AnEJqRANSjq/8TmfUbd1h8bLRbf7b9FfspeW4Z/KlfKec2JeMU6q1niRqW5RYD
+         /QgZBOKwnd3yunMfrb3h5XS/2B0X4dn3Q+ftkjgHEbs4O9oo/nU7ZhGQqcyQ30G5DLla
+         t+kshSfh5u2SDkdn7ElJNJf3QmClIHvLfPp86hdqons/ZUTcQhUj2BY76LS2Qdi1IIQs
+         NcsKjeKe24CMUtxSsXbofIiAQqkyhQPj+PBYbKXXGzQWfmTjpgWDiFcPekhtueukcJYn
+         UYTA==
+X-Gm-Message-State: AOAM531eqS2cm5Y9+uO/bSq47GiSlN2df+eyYJT4YmcspbGGkTaA8EJ0
+	aNIew/HLbprfoZNM0zCXzjSUPLq3
+X-Google-Smtp-Source: ABdhPJypZMMaNbHLNlH9zyNwzVz5Ck9uxCpSM8LqbHRzfRVIvq4Rat24di1GHVGYYimXce1/E9Ua3A==
+X-Received: by 2002:a17:902:b289:: with SMTP id u9mr9539076plr.138.1589813428510;
+        Mon, 18 May 2020 07:50:28 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:4481:39b9:1b65:c59])
-        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.26
+        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.27
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 May 2020 07:50:26 -0700 (PDT)
+        Mon, 18 May 2020 07:50:28 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 20/57] x11vnc: fix xfc NULL pointer dereference
-Date: Mon, 18 May 2020 07:49:25 -0700
-Message-Id: <7601fbcf5c3f5e44072b55656af161e7e64beb79.1589813083.git.akuster808@gmail.com>
+Subject: [dunfell 21/57] python3-setuptools-scm: Cosmetic improvement
+Date: Mon, 18 May 2020 07:49:26 -0700
+Message-Id: <8734abd294e9363ae09fb45c71d6b5ed8548a806.1589813083.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1589813083.git.akuster808@gmail.com>
 References: <cover.1589813083.git.akuster808@gmail.com>
 
-From: Jonathan Liu <net147@gmail.com>
+From: "niko.mauno@vaisala.com" <niko.mauno@vaisala.com>
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
+Split values of RDEPENDS variables to individual lines in alphabetic
+order.
+
+Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d8eecca63640b47d02665fa9c4caabc9776b830d)
+(cherry picked from commit 99e3432c60606af1d37947b3fce002d679cfcb50)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...sor-fix-xfc-NULL-pointer-dereference.patch | 30 +++++++++++++++++++
- .../recipes-graphics/x11vnc/x11vnc_0.9.16.bb  |  1 +
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/x11vnc/files/src-cursor-fix-xfc-NULL-pointer-dereference.patch
+ .../python/python3-setuptools-scm_3.3.3.bb            | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/x11vnc/files/src-cursor-fix-xfc-NULL-pointer-dereference.patch b/meta-oe/recipes-graphics/x11vnc/files/src-cursor-fix-xfc-NULL-pointer-dereference.patch
-new file mode 100644
-index 0000000000..a571ba2838
---- /dev/null
-+++ b/meta-oe/recipes-graphics/x11vnc/files/src-cursor-fix-xfc-NULL-pointer-dereference.patch
-@@ -0,0 +1,30 @@
-+From 95a10ab64c2dbbec2c8dad91a5ffb73a0d68474b Mon Sep 17 00:00:00 2001
-+From: Jonathan Liu <net147@gmail.com>
-+Date: Mon, 16 Mar 2020 20:04:06 +1100
-+Subject: [PATCH] src/cursor: fix xfc NULL pointer dereference
-+
-+xfc->width and xfc->height for the XFixes cursor image returned from
-+XFixesGetCursorImage(dpy) are accessed without first checking that xfc
-+is not NULL. This can result in the server sometimes crashing when
-+moving a Google Chrome window.
-+
-+Fixes: 37c946191a0f ("Broken cursor bugfix for 64 bit systems (#49)")
-+Upstream-Status: Accepted
-+Signed-off-by: Jonathan Liu <net147@gmail.com>
-+---
-+ src/cursor.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/cursor.c b/src/cursor.c
-+index 39e73a6..74a08c6 100644
-+--- a/src/cursor.c
-++++ b/src/cursor.c
-+@@ -1311,7 +1311,7 @@ static int get_exact_cursor(int init) {
-+ 
-+ 		/* retrieve the cursor info + pixels from server: */
-+ 		xfc = XFixesGetCursorImage(dpy);
-+-		{
-++		if (xfc) {
-+ 			/* 2017-07-09, Stephan Fuhrmann: This fixes an implementation flaw for 64 bit systems.
-+ 			 * The XFixesCursorImage structure says xfc->pixels is (unsigned long*) in the structure, but
-+ 			 * the protocol spec says it's 32 bit per pixel
-diff --git a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
-index 0d84c420a1..e3a1914fef 100644
---- a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
-+++ b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
-@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/LibVNC/x11vnc \
-            file://starting-fix.patch \
-            file://0001-misc-Makefile.am-don-t-install-Xdummy-when-configure.patch \
-            file://0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
-+           file://src-cursor-fix-xfc-NULL-pointer-dereference.patch \
-            "
- S = "${WORKDIR}/git"
+diff --git a/meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.bb b/meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.bb
+index f8d28b33af..c061ea2e63 100644
+--- a/meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.bb
++++ b/meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.bb
+@@ -8,7 +8,14 @@ SRC_URI[sha256sum] = "bd25e1fb5e4d603dcf490f1fde40fb4c595b357795674c3e5cb7f6217a
+ PYPI_PACKAGE = "setuptools_scm"
+ inherit pypi setuptools3
  
+-RDEPENDS_${PN}_class-target = "${PYTHON_PN}-py ${PYTHON_PN}-setuptools ${PYTHON_PN}-debugger ${PYTHON_PN}-json"
+-RDEPENDS_${PN}_class-native = "${PYTHON_PN}-setuptools-native"
++RDEPENDS_${PN}_class-target = "\
++    ${PYTHON_PN}-debugger \
++    ${PYTHON_PN}-json \
++    ${PYTHON_PN}-py \
++    ${PYTHON_PN}-setuptools \
++"
++RDEPENDS_${PN}_class-native = "\
++    ${PYTHON_PN}-setuptools-native \
++"
+ 
+ BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
