@@ -1,89 +1,90 @@
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web11.43850.1589813417223497596
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web11.43851.1589813418074974379
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 May 2020 07:50:17 -0700
+ Mon, 18 May 2020 07:50:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=rzQdiLof;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id u22so4313059plq.12
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=nHCEC50m;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id y198so3485116pfb.4
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=E1/SRsip2hngb069WN/a01r71kbpTWltH8DTy9Qaf+4=;
-        b=rzQdiLof5EywHMCzUn0D1Cf3oHwfH7/kt4U7VrCgzFUR73cO/Ou2noZhkzoeXhxuLa
-         FnwY3CXE8KSjZWUoBtxlWtTEkSmx9GJoaDkAgHMJaqI5tzWedXSMIxa8KeSg8Op3ZAD4
-         28Qj5ZWS9edbv7FsHIA1hWavpHbWW39oz1BJN3a0HaIi8c10iktcg0VaI80vFCI6AcNn
-         DML9vegeCjmD4q3fvtqlRtA0hbvrbz2mwq4N7tKnwexOYT50Znykc34F7ocolb9/XXoW
-         U//BjTugkCmaWkcM5pacJTdleWCHHcanZUsR5yNX5/q1DsrO8SEhi1zM9J2y9c9ATzHb
-         j3rw==
+        bh=RHwtG9XEBGLPH4SkGDFRroN7zVpqAseNhPQXLjKyc70=;
+        b=nHCEC50mJbN06ysWQWp2WqUvclI/pZgh+7zc9dq2xHGkZkIVQ+ZRT0PJ3mLI2eY+3Y
+         CgA8ZbjmYeA8fj9J/UBJmLE4bdu46VgguB/8hpEDcfXRk4wLzTcgYbZruMVqmLD0rcGe
+         8aJYxp0aWsuJq7GtO6zUFpk/bixqmPaBotzdsMAaGSAI8fxUSWxDQmu+QZbOsONPwClK
+         rTVumgju+Tqx/VtOXtsWIHk6SWzleew8v5yDe25RU8hjCRVigZOtUlk//w0b9RxG1yxe
+         JFB+u8EqsJIrU/gDAVou9n8AG0ofWuVWIE3D5xACDrWUa6uE4pOV7wtuDexzlNUOzhaD
+         h8+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=E1/SRsip2hngb069WN/a01r71kbpTWltH8DTy9Qaf+4=;
-        b=BuINmawPJEcf6ZhDi5aLaV6iu4M4PeZ8Fy0RJD36gExBVEp3aFrswOu5wR9Naf9pvQ
-         LxIbO7OO1JryfEUp3UMjGu9BnyD2BokW7M6UUAniJuRYjRVC3OeIlUWRo935iznc77ts
-         72zY5dG1PzKdBjRpYSROR0bQpnVo1SQRENOU04b4IKKMfC4Z7dCy88Z7bBW964POA35/
-         f/i1jwPPMrA2IuWeL3fm2BzgzSi1Fki4WhDBxhE4eJGMi9wur1l4lDPWG4rlHcoY6K7K
-         5Rar1/XPElJ46z1y+Jg1MtMT3mFTwZ80pk6oQOcbzLClVVCDmlvCHlJVGU4VnTWGH63J
-         fYVw==
-X-Gm-Message-State: AOAM532DDk5fm+trGffPxbGB5vXPkYBRDHUEIhn9A/jmwHHEfqvpJc/3
-	Jgq8MP1TSIRQkUzzWVSDXlbNgy59
-X-Google-Smtp-Source: ABdhPJxcq+ahXWAYyxgyLGguUR0DsC4prFQiJx51ZHyfYKDlQQN+0yLi4km3m2rq/Kq3mrMXWzliqA==
-X-Received: by 2002:a17:90a:c296:: with SMTP id f22mr20219968pjt.137.1589813416474;
-        Mon, 18 May 2020 07:50:16 -0700 (PDT)
+        bh=RHwtG9XEBGLPH4SkGDFRroN7zVpqAseNhPQXLjKyc70=;
+        b=GvZDDVSowxLaBHBOhevopAylf858H6ISNLQlKhJSx+MLT2YQ1gXiJ0wpEdESCQ+H56
+         Wq7auL7oiW4fORAK2qQt3hvTjSDgyWddQd34g55aealu5v8SzFhnKfZ3AdlqlgMNnR97
+         awbVy14/ypxuVqM0MGvetxNHE4Fk72lhhmaJQyHl5lwAhlMaEma7w0sl6+7CwCd1Q9Kh
+         JLRdy3gkN/eEdx1rnW7C8JHjMFLGp9dsxStUoZNH8sL0GpnIKFk0YAPAP6cBrqd4j35k
+         /yNrjiuhPP4uqq48XzXBzn6k0qfsBtlUYrI5GUWAh6JHX7/2xRqOjVuE1xDG/odB7ZOd
+         nidA==
+X-Gm-Message-State: AOAM533X5PvLuUTAshz/TuUjaIfHkriVAHyVbKqQUEI+wrw27BBxtjRd
+	9Mwwv8d0eAFohtSWHy5JaZeZFW+8
+X-Google-Smtp-Source: ABdhPJzIZ+eEk/G07KZi65SlCw9leSmRyqPzctIEKHCOFR0desdDJrTpA+32bL73FjgV5DEEXhNYmQ==
+X-Received: by 2002:a63:658:: with SMTP id 85mr14864272pgg.181.1589813417405;
+        Mon, 18 May 2020 07:50:17 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:4481:39b9:1b65:c59])
-        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.15
+        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.16
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 May 2020 07:50:15 -0700 (PDT)
+        Mon, 18 May 2020 07:50:16 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 10/57] python3-markdown: add logging and setuptools to RDEPENDS
-Date: Mon, 18 May 2020 07:49:15 -0700
-Message-Id: <6740bf60955638d7e0ddf39c17184e342c1f9da7.1589813083.git.akuster808@gmail.com>
+Subject: [dunfell 11/57] php: fix opcache link error in 7.4
+Date: Mon, 18 May 2020 07:49:16 -0700
+Message-Id: <a009197ef469f9bfb2fd341329e9a2fa38667e61.1589813083.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1589813083.git.akuster808@gmail.com>
 References: <cover.1589813083.git.akuster808@gmail.com>
 
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
+From: Claude Bing <cbing@cybernetics.com>
 
-Importing the markdown module causes standard ModuleNotFoundErrors
-if the logging and pkg_resources modules are unavailable:
+Explicitly specifying -lrt is required for opcache to be linked against
+the proper dependencies.  Additionally, PHP disables libdl when it
+detects a cross-compilation environment for some reason.  In order to
+load any type of extension, re-enabling libdl is required.
 
-root@qemux86-64:~# python3
-Python 3.8.2 (default, Apr 27 2020, 08:51:00)
-[GCC 9.3.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import markdown
-Traceback (most recent call last):
-File "<stdin>", line 1, in <module>
-File "/usr/lib64/python3.8/site-packages/markdown/_init_.py", line 25, in <module>
-from .core import Markdown, markdown, markdownFromFile
-File "/usr/lib64/python3.8/site-packages/markdown/core.py", line 27, in <module>
-import logging
-ModuleNotFoundError: No module named 'logging'
-
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Signed-off-by: Claude Bing <cbing@cybernetics.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 17426020a8c296986857511e85e3551207db857d)
+(cherry picked from commit 0145cb4645b720efc36e4a034bb9e1077c191e5e)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-markdown_3.0.1.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-devtools/php/php_7.4.4.bb | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-markdown_3.0.1.bb b/meta-python/recipes-devtools/python/python3-markdown_3.0.1.bb
-index 68cd723acc..cdfe5496ad 100644
---- a/meta-python/recipes-devtools/python/python3-markdown_3.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-markdown_3.0.1.bb
-@@ -10,3 +10,5 @@ SRC_URI[md5sum] = "72219f46ca440b657bf227500731bdf1"
- SRC_URI[sha256sum] = "d02e0f9b04c500cde6637c11ad7c72671f359b87b9fe924b2383649d8841db7c"
+diff --git a/meta-oe/recipes-devtools/php/php_7.4.4.bb b/meta-oe/recipes-devtools/php/php_7.4.4.bb
+index a76dcaad37..07c3115060 100644
+--- a/meta-oe/recipes-devtools/php/php_7.4.4.bb
++++ b/meta-oe/recipes-devtools/php/php_7.4.4.bb
+@@ -110,6 +110,17 @@ export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
+ export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
+ CFLAGS += " -D_GNU_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_INCDIR}/apache2"
  
- BBCLASSEXTEND = "native"
++# link against librt (libc) if opcache is specified in order to avoid the
++# following error:
++# Failed loading /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so: /usr/lib/php7/extensions/no-debug-non-zts-20190902/opcache.so: undefined symbol: shm_unlink
++LDFLAGS += "${@ " -lrt " if bb.utils.contains('PACKAGECONFIG', 'opcache', 'true', 'false', d) else "" }"
 +
-+RDEPENDS_${PN} += "${PYTHON_PN}-logging ${PYTHON_PN}-setuptools"
++# Adding these flags enables dynamic library support, which is disabled by
++# default when cross compiling
++# See https://bugs.php.net/bug.php?id=60109
++CFLAGS += " -DHAVE_LIBDL "
++LDFLAGS += " -ldl "
++
+ EXTRA_OEMAKE = "INSTALL_ROOT=${D}"
+ 
+ acpaths = ""
 -- 
 2.17.1
 
