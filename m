@@ -1,88 +1,78 @@
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.web12.43414.1589813410680788498
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web11.43844.1589813411616935123
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 May 2020 07:50:10 -0700
+ Mon, 18 May 2020 07:50:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=UXuKtXiA;
- spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f50.google.com with SMTP id n15so5226177pjt.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=q9lTQl8q;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id s69so5329909pjb.4
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=N3FT7hrxuC3i/jtJpa+Kai/i9dv1fGGHS5BBc1jq8lk=;
-        b=UXuKtXiAwM4GXxAkcZcY+woWh4fUeThzyEQzTr0Ltgn496RYoTRxGrpN8Aa3zg+OpA
-         KcwDypHB9ifpnqd8rZqamnWLewfc/oh4kSSURYUwJDMHKwch0vYuHyVLJHNSXySStMs0
-         OiCRotzEbOjSLDgEoLt0DJIRWbeq2aJ+ZueAncbQznf5bY3EX+UURuPqFdA9N5cdrSPE
-         tZy7oEknkPZobeuVXKQYU5POAHx409ghHjOzvczvc9trxljUpUEHFlklBFgVQRN9wBFH
-         yszGpl04mxTh+lRulF6WLXgZJj75Wzko3RZrK3Lg4g5SzQ6xrxor5pUgogH9hyknyLlI
-         THeg==
+        bh=C9h8qpIBNnY6YH/mnrO+G38jlxnb0+fNMx5BiaD4hDw=;
+        b=q9lTQl8q3skNMa4Vm6IrhBZubhxOv8Vwc1OaNEKgNpBtwpkAcU5ZryD5rOiM0G+/cm
+         r0bn3Z4xACoi54oU+EctfImeD/Q9l0ZzXy9H1vuMJSCjl5DoYkLjZnUWu5kZfcJERv/O
+         mryYF3F+wGFqRFZnTo89YCxu6bQj9dI/wWfe1H5PoNYBgGlC1AVgoaEmhEyS0LLuhncI
+         sPy45rzn/TiT77PUj7d1zoQCmErKoQApjPnd9qyagE3Hv6Z5dZ7/a0hZueUI4dwDVnY/
+         UP5scOk66bt3UDaH/oB5E9cKpr1a5nASjN3zeQdvyWvIzmDvx3LDz/cIsa26Tu8EcEJS
+         sqhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=N3FT7hrxuC3i/jtJpa+Kai/i9dv1fGGHS5BBc1jq8lk=;
-        b=eFIpBhw3qONNoPi+AKnYE7ui4XNwu+B4ROe9ZgLr6NqGAGF/Y+aW5un4JELOBaFPpP
-         W4MWdQlzui6MDvRx1zaivMEkFiYMwguK6mqyWFAS+mbiHogaw0q9Y3Bz1VmtGp2Ey9ui
-         UmJm09sMEwHlRUOVw/CplC90J6ZQ3vlQh4GM4ygqcJGsf1lh3v4zbS+9/4EvhimHP/2u
-         JVSGASKrfRl6KiTm114FWE18osYtMMhq6yGPDMO65b9pFectZmK9sf6MYuhk3j6ZlePq
-         Ci8+fG11z2pIIA37t79wjm9LmOikgDSkAF/+ZF/5EqEfBMWYDDNT/BfudrVEJFb800uT
-         FiCw==
-X-Gm-Message-State: AOAM531dP+kW0JIAwFaSbEz5F5y3LPU9oIfidsUKzBUUJ7JY5Ppfsedr
-	5Ju0Rq2cgqa2RlyyToT2wPFiQxg3
-X-Google-Smtp-Source: ABdhPJw5H/Y8euPuhyc0Txnx3OqL6O9WZabBkQYLt+xr1e8AaxSsJdT3g+boY6L8SpZkHTYg+XaIVg==
-X-Received: by 2002:a17:90a:c253:: with SMTP id d19mr20768147pjx.210.1589813410090;
+        bh=C9h8qpIBNnY6YH/mnrO+G38jlxnb0+fNMx5BiaD4hDw=;
+        b=EpcPjhzijHQxETNdGFzgM7FMuukGup7m1pAmaZqGlpAlAm+hUd1mgYLIZQ7RPQHea5
+         ntn7BZUfbjsSeP1wluR3uHRR4NeAGeMEUBHK84KD4smjmAAWiK+wYmAjOyFY3gKf6SM4
+         skfmc9+l9+k7AVwxyRhTEqraTmHf+QlEEqD0ffBwnVh/1+zgtFIZba0by1HZagRf/0Br
+         Gd/F3dRbOHQ1i++CZkTYd1yhJpbhbRljcL1s43IOwv7DoMgBviVHHrGPAKxSnQ5r/IoK
+         x/U2s5J94uby/1RcCmapudeDe6Tl33xQ4BFYka6HbaUIPU40UErd9AAHlIS5a26kZlP5
+         fhZg==
+X-Gm-Message-State: AOAM533ip24cbwmxQ/Npa21ePukQvt7YKbfA4LUE4Iuff2k9gnCryHqA
+	4B8JC79laNrw3C4oBN6gFUZOqJ7h
+X-Google-Smtp-Source: ABdhPJzihyQjCivO1Iy+5BWxmWWRBgab5QTCFAKUuwtahJgoEsLf6dWNWsHAEsGh0pDRzTo1vL9iCQ==
+X-Received: by 2002:a17:902:c40c:: with SMTP id k12mr11644626plk.11.1589813410947;
         Mon, 18 May 2020 07:50:10 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:4481:39b9:1b65:c59])
-        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.09
+        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.10
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 May 2020 07:50:09 -0700 (PDT)
+        Mon, 18 May 2020 07:50:10 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 03/57] nginx: remove /var/log/nginx when do_install
-Date: Mon, 18 May 2020 07:49:08 -0700
-Message-Id: <775ad5a08ec9fa80c6e731d69ca45c22c6664d9e.1589813083.git.akuster808@gmail.com>
+Subject: [dunfell 04/57] php: fix PACKAGECONFIG for soap
+Date: Mon, 18 May 2020 07:49:09 -0700
+Message-Id: <ecce4fe695cc1ac6a7688e9579551683fbab0ca5.1589813083.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1589813083.git.akuster808@gmail.com>
 References: <cover.1589813083.git.akuster808@gmail.com>
 
-From: Yi Zhao <yi.zhao@windriver.com>
+From: Claude Bing <me@claudebing.com>
 
-Remove directory /var/log/nginx when do_install because it is created by
-volatiles file.
+PHP 7.4 enables libxml by default and removed it as a configurable
+option.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 6e9f393605eed1e5f4e317536b1463b83b978bad)
+(cherry picked from commit 7aeef522ff3522ccf76a6750846e235e7c80427a)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-webserver/recipes-httpd/nginx/nginx.inc | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-oe/recipes-devtools/php/php_7.4.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index 2824c66529..de080a2b01 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -90,7 +90,7 @@ do_install () {
-         install -d ${D}${sysconfdir}/tmpfiles.d
-         echo "d /run/${BPN} - - - -" \
-             > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
--        echo "d /${localstatedir}/log/${BPN} 0755 root root -" \
-+        echo "d ${localstatedir}/log/${BPN} 0755 root root -" \
-             >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
-     fi
-     install -d ${D}${sysconfdir}/${BPN}
-@@ -139,6 +139,8 @@ do_install () {
-             -e 's,@BASE_BINDIR@,${base_bindir},g' \
-             ${D}${systemd_unitdir}/system/nginx.service
-     fi
-+
-+    rm -rf ${D}${localstatedir}/log/
- }
- 
- pkg_postinst_${PN} () {
+diff --git a/meta-oe/recipes-devtools/php/php_7.4.4.bb b/meta-oe/recipes-devtools/php/php_7.4.4.bb
+index c1784a78d9..a76dcaad37 100644
+--- a/meta-oe/recipes-devtools/php/php_7.4.4.bb
++++ b/meta-oe/recipes-devtools/php/php_7.4.4.bb
+@@ -93,7 +93,7 @@ PACKAGECONFIG[sqlite3] = "--with-sqlite3=${STAGING_LIBDIR}/.. \
+                           ,--without-sqlite3 --without-pdo-sqlite \
+                           ,sqlite3"
+ PACKAGECONFIG[pgsql] = "--with-pgsql=${STAGING_DIR_TARGET}${exec_prefix},--without-pgsql,postgresql"
+-PACKAGECONFIG[soap] = "--enable-libxml --enable-soap, --disable-soap, libxml2"
++PACKAGECONFIG[soap] = "--enable-soap, --disable-soap, libxml2"
+ PACKAGECONFIG[apache2] = "--with-apxs2=${STAGING_BINDIR_CROSS}/apxs,,apache2-native apache2"
+ PACKAGECONFIG[pam] = ",,libpam"
+ PACKAGECONFIG[imap] = "--with-imap=${STAGING_DIR_HOST} \
 -- 
 2.17.1
 
