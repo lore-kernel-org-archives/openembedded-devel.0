@@ -1,64 +1,49 @@
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
- by mx.groups.io with SMTP id smtpd.web12.799.1589820547802493490
+ by mx.groups.io with SMTP id smtpd.web12.1392.1589821988622163911
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 May 2020 09:49:09 -0700
+ Mon, 18 May 2020 10:13:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@stusta.de header.s=default header.b=klLXU8qH;
+ dkim=pass header.i=@stusta.de header.s=default header.b=S6iWmjCi;
  spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=l5hx=7a=stusta.de=bunk@stusta.mhn.de)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49QlMz1n5vz43;
-	Mon, 18 May 2020 18:49:03 +0200 (CEST)
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49Qlvk2HhMz4H;
+	Mon, 18 May 2020 19:13:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1589820544;
-	bh=bmVK/RniZKEkwRM25czMegwqs+FunmdscNdquuNXpks=;
+	s=default; t=1589821986;
+	bh=hdNCPXM9mLNU9brPxYbLDJ6N1pBmtUTArYf2nqBxMjU=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=klLXU8qH8wx+Y1eJ143jUQbLHBtZ1aVUwix1Nua4ybFxzNInwztHwg5bFvMyY43L9
-	 6woygU013/78pJuxcae1cVApdOCwmg7A/wf3ATbnkLQIf5Lz/8/Ephp8NGrQZSwIA6
-	 04esig3CT2UX2bBqwxywehphrvBuefWq0iqZAZDuJgjGM73q9BSaOyaGAVEPAP5Su5
-	 rrbDxReivNVE4iKx/73NRekHR4xFscXdcrMouAJKmPBE8Gyesf07EkAFufmH7QB99Z
-	 ehNzYEnY5QMwywQ95Uw8EBrwunQzGOCdCwAFYGfoiBHrYMzA4q1STzvhDgpLg3QXHg
-	 pz0P4E5fqLbIlC5SzyRvUN46MhaovpJGEYtPR6MxHyrycg6HHBG0rYHBgmtkWuYN5J
-	 Xa73NWyl1RHkeZGlexUcxdedxh4iVLKDWNblQ3MFtc9rLX52QJt1Kolu/18w51mduf
-	 zaZVhibgZSrdH26O0dIC1SsswILetjXc55ZQLSF1c08q56+Xb1vNzo8NKdgTqtcYn1
-	 ToSue8fl3BkQxAqTJeT5bEWDuCKOWY2K6Q/dbH34YBIf9XImQUisZ0B7LFCvdaFmuf
-	 8/+fS4egl50gTLRAtSqLffuOgHM7WTta9rQ2YAw4Q7YZ2yqGLmiTfoG1ZFqvXAxRAL
-	 qq2sQQtwZADhx39yXIuKbTLg=
-Date: Mon, 18 May 2020 19:49:01 +0300
+	b=S6iWmjCiGE9GsE3qS7n5TJ6H1+APu3zdoY0szpIvg/HH8ySW70PD2yuS4krAqmhBo
+	 4ldxRdo2DVAbcGC3/nRfWyRY1P01mT/8yQ5xH7mi7np0/QxMIwB0cx0jt202uDoeww
+	 kKPDsbyRZPnI4kyPA57NTizrgVpXD4v2Kmgb8r+GgPpQFmVefExnn3/KhAiwdmUPI+
+	 nYcvBG2YJrVT2dBxzrYiR8iVfMyZnMtTXGsMAaSIM3fxAK8Ywc9VytfCvnN3e9iqSh
+	 QV22VdoSuh7CeLsB6TdNkWMbMy7M759lx7r00w8Sfdg7QvcfhcE14YjV1U1KJIvojD
+	 QJOQyDRuYf8QqR4mcsNnXbFItkf/OW3fWUECIyPvbbhyfIeTo/XfkuJje55SBVK8Jt
+	 FE/DpP2H+uVkzAqv8nMBJUocaD4C12BJUq7pO7hY3oKK2AZIRCgBRJvBTzKYQowJzp
+	 4xEyqYsO21jhYZvqzmK7wmqRhCKPwvGcc/uVTe4Qo9rq1abnKWS7ntzNLAzPuUn2jj
+	 WGRGt+I9JDQ0y9HOhLB3tT35YOBViGkkoHkakv9zuKiupDGAec3ns7BSguEg2qGa4b
+	 ZB6+Px9NF0dxrO17R+drGtyF6z7wxVkY8OTOjPC0rqgtQ7CAMFbgVWeONBI00wItaj
+	 qpCuB2X+VY++ND4BIga/kKxs=
+Date: Mon, 18 May 2020 20:13:04 +0300
 From: "Adrian Bunk" <bunk@stusta.de>
-To: Paul Barker <pbarker@konsulko.com>
-Cc: akuster <akuster808@gmail.com>,
-	openembedded-devel@lists.openembedded.org
+To: akuster <akuster808@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [oe] [dunfell 00/57] Patch review
-Message-ID: <20200518164901.GA32483@localhost>
-References: <161026DF21C4386A.31912@lists.openembedded.org>
- <b838142d-d955-add1-5bf5-a0f192d1e606@gmail.com>
- <CAM9ZRVuXMmD-1Xm6vwFmKw0P6sXyezXJmVvUBnBAiEhw9EYHjQ@mail.gmail.com>
+Message-ID: <20200518171304.GA1884@localhost>
+References: <cover.1589813083.git.akuster808@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CAM9ZRVuXMmD-1Xm6vwFmKw0P6sXyezXJmVvUBnBAiEhw9EYHjQ@mail.gmail.com>
+In-Reply-To: <cover.1589813083.git.akuster808@gmail.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 
-On Mon, May 18, 2020 at 05:38:21PM +0100, Paul Barker wrote:
-> On Mon, 18 May 2020 at 17:12, akuster <akuster808@gmail.com> wrote:
-> >
-> > Groups.io has a limit on the number of emails in a given time.
-> >
-> > this patch set exceeded that limit  so patches 39-57 got dropped.
-> >
-> >
-> > "500 We have received more than 40 messages in 30 minutes from you. To
-> > guard against autoresponder mail loops, we must reject additional
-> > messages from you temporarily. Please try again later. "
-> 
-> May be better just sending the pull request emails in the future if
-> groups.io chokes on large patch serieses.
+On Mon, May 18, 2020 at 07:49:05AM -0700, akuster wrote:
+>...
+> Adrian Bunk (1):
+>   mraa: Replace -fcommon with fix
+>...
 
-I do actually appreciate the patch sending since this makes it easier to 
-review the patches.
-
-> Thanks,
-> Paul
-
+I'd drop that one:
+Cleanup patch that replaces a harmless workaround with a trivial fix.
+ 
 cu
 Adrian
