@@ -1,49 +1,49 @@
 Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
- by mx.groups.io with SMTP id smtpd.web11.43852.1589813419204259672
+ by mx.groups.io with SMTP id smtpd.web10.43715.1589813420508311261
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 May 2020 07:50:19 -0700
+ Mon, 18 May 2020 07:50:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=vMW+5BSk;
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=XCIfUq1z;
  spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f179.google.com with SMTP id u35so4938984pgk.6
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:19 -0700 (PDT)
+Received: by mail-pg1-f179.google.com with SMTP id r10so4941157pgv.8
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=SIgM8z+Viq70qH9siocsS6tMrAVSx0I7Ww8jShstI4I=;
-        b=vMW+5BSk3GtwRO30hnCuVlywN3Cgi9uin550Q4OYbd4i0nHOmqvS735tc2Xj1l4BqY
-         bMjVgrZOQrBntnPOnx8qHqIhTmegOQNVe7AxkqQzSQXyjoDz07VC1caBmNZ1SVDY3e3v
-         kCP+6eVVhaon8dovAGyE5LtIiKVGvrC81k1TpVStZa1PFaAJcgYHJMvqFdiQNKVbNQ0d
-         +nnSf3OsMoczgWjnukNPVFFEpIbDXwcOazFxvi6f4KqifR3YlCbPOhJH9aiIsAx/O4ld
-         ltcHK4VzytXw3aDSZEz995szlB0DdrCSZan2OjEvSeSrgxe8x2NhX/E/VBIUfNFz0yVJ
-         02eA==
+        bh=vLIR/+pusgKyagKyMPifapbWiB6C+YvjtOy4E5/1nq4=;
+        b=XCIfUq1zKh5LLN0gvNVEnCOrsh31+Q0Vu6osi6MrARZKk5qf8x7MGl2yTyjaE6p6kk
+         /4I/6SbMRLIeM6PyZyAqcbx0MTk/uMY7kalOyoIWPh64vOMwAMXMF9G5TW1t62BTMYVF
+         d7ceAgtdWlx/hcSxDSP3abD0vAA/KpKeDsbJAX2wLFd6qHPfvwIl/LRzvAQT9c5vV+oB
+         QTxScUa26cqSMLKtD53UoC4wFHDifOKFLTpIsaTMyrMD1a632q9fBLnW3Qx31ZwTPQOL
+         rGiKREStZHvulHzikjeCrs7MY8EBRW4g89eOO0dDvfVzUM3+ZHCQGuSZPo71CAhiQNxI
+         oQ/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=SIgM8z+Viq70qH9siocsS6tMrAVSx0I7Ww8jShstI4I=;
-        b=JTpUnqDY3x8kYIHv7hozPLJn/9+A18qwyJCPQ/hCROgZMbVVcvpqovjMNAO2zhRK+a
-         SGuoVBO6Kz/JI+8gjkEU12k01Y3YPYyYx79KPem6XvFOEWF7sJC1BrxnOiTxXa+9Fl9b
-         ziZ4/kSyKOzJAEbilBGNKW2vmCMEAocau+OA5oi+HNHEqHAtvMDgnRekUo4sJHX7Jfoa
-         G/kH7CZ8g3Mps8CvkjR0XVy1+m6+83LfVmS+GWB1/RjpsVlCX/UVCcpSQQJuRJiJtUhv
-         kG7UyaXNJs6VRMuavpeCkuYxNVOk7p3bkBXqRR3+OSLI1jJDI0BPDl82e3256/8LXS3z
-         TZiw==
-X-Gm-Message-State: AOAM53344GISdtFOswrdA11ZF6J4pBS0l10TCFa6kPXugACDbzFTijvK
-	eC7IraZ86kOEJyC0mSZ1snLBVNqb
-X-Google-Smtp-Source: ABdhPJwTld0tpueLxEFq0YPMgHXIvaIPo8Z7xRDzH3DzjJrSolbClAht4p/N2qgsEDOwRwfAPfXgMg==
-X-Received: by 2002:a62:fc06:: with SMTP id e6mr15169010pfh.125.1589813418217;
-        Mon, 18 May 2020 07:50:18 -0700 (PDT)
+        bh=vLIR/+pusgKyagKyMPifapbWiB6C+YvjtOy4E5/1nq4=;
+        b=LPk+io5ZIObgxoBJy88oG7IffurR/bhP7PdPBwyG115jIRcmzGHIwq4VlCrIkYtpDp
+         cBgI8vImoSzpF5V2MH81XxSysNGzitskYLvZsybZh1MLsyoql7bU4SXAGlnZ0PmoTrZx
+         mhx5jtDAGksbTX8X1Kg0uixYZPT2+zd3a1w05QJ3IUWqM2Pw6Eyf9/Z173THzbHWgTfC
+         J0uM1JJUaZEcrGC3w+s1negDdVU/JZlt6zhZ6ztzjweH5zYMfbZIGlhmyCzz8vFCknmj
+         Yv4QoZ7zq9ojSp2PComvIQ8DjR1Vog4v7B84N/kv+K/iuqNafTee6WgQMYNLyTDGLQeZ
+         rKCQ==
+X-Gm-Message-State: AOAM531XJdzulFZLrirK9CJA82v0DBkU24xvUQCC3HrW9zwYxpDWnCHC
+	vG4ZswNaNzyYdsQUbl9lrsWHwUgR
+X-Google-Smtp-Source: ABdhPJzpp2DzqOXGODPTOl3uAg55S31lZhv6DCScgWDDIrLmWdUbzFYaFA5hO4cQjJRiYWE+ywxohQ==
+X-Received: by 2002:a62:1957:: with SMTP id 84mr14315280pfz.54.1589813419751;
+        Mon, 18 May 2020 07:50:19 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:4481:39b9:1b65:c59])
-        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.17
+        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.18
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 May 2020 07:50:17 -0700 (PDT)
+        Mon, 18 May 2020 07:50:19 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 12/57] python3-pathlib2: add the missing rdepends
-Date: Mon, 18 May 2020 07:49:17 -0700
-Message-Id: <691e34f773214083acd5fc8d39a99229be624353.1589813083.git.akuster808@gmail.com>
+Subject: [dunfell 13/57] python3-ptyprocess: add the missing rdepends
+Date: Mon, 18 May 2020 07:49:18 -0700
+Message-Id: <4cee153f598f4bc5fd2e1982a99b8c8937131e4e.1589813083.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1589813083.git.akuster808@gmail.com>
 References: <cover.1589813083.git.akuster808@gmail.com>
@@ -53,28 +53,32 @@ From: Mingli Yu <mingli.yu@windriver.com>
 Add the missing rdepends to fix below error:
  # python3
  [snip]
- >>> import pathlib2
+ >>> import ptyprocess
  [snip]
- ModuleNotFoundError: No module named 'ctypes'
+ ModuleNotFoundError: No module named 'fcntl'
+ ModuleNotFoundError: No module named 'pty'
+ ModuleNotFoundError: No module named 'resource'
 
 Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e65e8da5338ac71b7e5ca8b5a781978d4c319a34)
+(cherry picked from commit 07c7bacd997e9f593602acf840c10e9585cf5657)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-pathlib2.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-ptyprocess.inc | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-pathlib2.inc b/meta-python/recipes-devtools/python/python-pathlib2.inc
-index 3199b56a03..d69d5273ae 100644
---- a/meta-python/recipes-devtools/python/python-pathlib2.inc
-+++ b/meta-python/recipes-devtools/python/python-pathlib2.inc
-@@ -6,6 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=042856c23a3e903b33bf361ea1cbe29a"
- SRC_URI[md5sum] = "f2bd0a363eb0f8fa0556f35c1d9e66fb"
- SRC_URI[sha256sum] = "6cd9a47b597b37cc57de1c05e56fb1a1c9cc9fab04fe78c29acd090418529868"
+diff --git a/meta-python/recipes-devtools/python/python-ptyprocess.inc b/meta-python/recipes-devtools/python/python-ptyprocess.inc
+index 0cc9114754..a6dc21cf11 100644
+--- a/meta-python/recipes-devtools/python/python-ptyprocess.inc
++++ b/meta-python/recipes-devtools/python/python-ptyprocess.inc
+@@ -15,6 +15,9 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
  
--RDEPENDS_${PN} += "${PYTHON_PN}-six"
-+RDEPENDS_${PN} += "${PYTHON_PN}-six ${PYTHON_PN}-ctypes"
+ RDEPENDS_${PN} = "\
+     ${PYTHON_PN}-core \
++    ${PYTHON_PN}-fcntl \
++    ${PYTHON_PN}-terminal \
++    ${PYTHON_PN}-resource \
+ "
  
  BBCLASSEXTEND = "native nativesdk"
 -- 
