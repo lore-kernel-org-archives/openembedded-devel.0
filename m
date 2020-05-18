@@ -1,49 +1,49 @@
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web12.43437.1589813442760879836
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.web10.43731.1589813443731179741
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 May 2020 07:50:42 -0700
+ Mon, 18 May 2020 07:50:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=IqhbOpXb;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id f15so4329825plr.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=X+FEYNhz;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id n11so4932135pgl.9
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 May 2020 07:50:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=7+9kgoo+Y26LzUEaMw6Cv7A95ukIJZQTR1gQt8DdmtM=;
-        b=IqhbOpXb+Cs/boEhDbGGz6i25vo75EnIlhS3tXM7XOpPI6PWUhgoEY3vkDJydOZH/n
-         M0IHj2b2CP9R5hU+VK2EyHUoR5C3d2kHT2+X7cWM4yEuzRuv6OdzqK3WjywVDeSdqycs
-         Qy0dtdBFPUIH86TfCEFNbHMemhpj5rgUMHXTqGIjxstlRlzgT6LensACzNfh1LZ9R3zR
-         rF6URGrIiqt4kj9n2Gnx8W1itc/rlT3x7bxf0o9bEW2M59EsGUirq1GZYSouZ4bq65AW
-         gh/RMImMIAhWEtd3/EVfltLJJWwhi76i8UCF/cWzsAivwNTTlXSqB9TEyUn/4bGfKCnN
-         6Vbg==
+        bh=RBHshHPa49Gb/QoVPw16gnHPM7lrd8+ufomYHfJ5DMY=;
+        b=X+FEYNhzLnNa2RDffHYiHYbWMdGJCxae+zAEXbt5ZlHA2DMGfIM2P3zvcCRGzdUDfp
+         1+e4xwGYIgSxskhhY+ldriatta7vW0swnKTjB5olZAyyENfuYIbD/EMkKgD8mFQUwr48
+         8nqjJP9FG8lpVcHj3E45VljIXLQak4mz0UXSPM+YP/RcahbQvPCcLlhzeDb7tFuqgsoj
+         EXpekhkgbTbllKQApjly9b4cuOBOA1YA5kA3Hx1gQJ0d23DKnf8hWX/dD4LpjahGMRHo
+         MH/ASaccyG/OfE+VW64wtBwy/3k1XwjwV26eVMzAI1L/VKB2zPQwbaJgpWFWmUTIOu/i
+         lr9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=7+9kgoo+Y26LzUEaMw6Cv7A95ukIJZQTR1gQt8DdmtM=;
-        b=YxYqVGPsFx4Cu7+FisFb0AbOFe0aJO505rtdP1uR34ULHYo8+ClDOYVFYQBQ+QsM6Z
-         qqE4KzTOYAn1IzBMYvSWkLhUJoeBa7baxW7EGgUdZ3iuYz7TDsfK3eYnJoY4GhN4RKan
-         ToBqzvdk0z5n8gSbZ7kvFWMDBTm2RtIeN88WySsw0W+toEVqMBEucNnwzJKQQJ1E60u8
-         ou03wb1Ejqc/G97ynUrj4NILlw6c7XXDmRdUht6N6EFTB24wAKoixcmktJ79sS6o2olF
-         TztF73aUKznaMzC1e2p/cMdz3TON1N7W3wn3VcQVNy70rCCRQthvt+HuasffEuWik+sW
-         zYSw==
-X-Gm-Message-State: AOAM532A93yuq/oZZ/nrJF7NjP6+U/X/lVhZhLBtRh+S70wBPR71uRrl
-	lbwc3/TfmeuUdDO484zTGPBQtPKj
-X-Google-Smtp-Source: ABdhPJyXkouQWHgNOu/9ubM5VZBYF1mjZmX6QHYBkA/qbgakrctZngs7O2iuHMMGhQgBYOijv3P1gA==
-X-Received: by 2002:a17:90a:d307:: with SMTP id p7mr20148646pju.207.1589813442113;
-        Mon, 18 May 2020 07:50:42 -0700 (PDT)
+        bh=RBHshHPa49Gb/QoVPw16gnHPM7lrd8+ufomYHfJ5DMY=;
+        b=r27IJM7wMbpKn8V9yaUEpvNvjY++NaLBBcF5mSJMZt8WX1WfCWGPj9GHhq+pDNCniQ
+         Ny4o5i3HZ9B7kNuXFuuDjVEb5v/OvNp5Dz2j15689Mjf55v3JNo7K0HhMdPTh9QazvOr
+         eszumm9btwNcsBCCB3ire0xWU/VdGsGAIZMi+ZrlCRtyZGeowVl83e4MUvd2PDhRKdPQ
+         SbFmjW/gXbH6XwmJQVtict4m9edKESBlU1BFDdFH0wb0TAtbmWxtUEKyhJJ4G8t/HoOl
+         TRbcot06tPoACAJ784PboOPwW9QVjK6GV2TcBOwBJV6YUP7Fez1GcE+3bO2SnzcuTBqF
+         crxQ==
+X-Gm-Message-State: AOAM532B7h1zbpIS5JQmiqHJi9obfn4bJL784evEFdFr153UFtbOXbiL
+	kCt/fiCmaaK4AcbihsrdQR5vlrHj
+X-Google-Smtp-Source: ABdhPJzbpL72HSWvfGHwuYl1u4tm579Sac96Aw3Lx4I6cGJHV+/jFNiPDtvnXSDmXf+pZCtmqw0d0w==
+X-Received: by 2002:a63:f001:: with SMTP id k1mr15938769pgh.268.1589813443079;
+        Mon, 18 May 2020 07:50:43 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:4481:39b9:1b65:c59])
-        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.41
+        by smtp.gmail.com with ESMTPSA id b1sm8984694pfi.140.2020.05.18.07.50.42
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 May 2020 07:50:41 -0700 (PDT)
+        Mon, 18 May 2020 07:50:42 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 32/57] python3-polyline: Modify ptest output format
-Date: Mon, 18 May 2020 07:49:37 -0700
-Message-Id: <59ff7b6371ee9b3ce6d71ecc4c74d134b4707f84.1589813083.git.akuster808@gmail.com>
+Subject: [dunfell 33/57] python3-precise-runner: Modify ptest output format
+Date: Mon, 18 May 2020 07:49:38 -0700
+Message-Id: <1575e865b72cd2a38bdfc4720c1b901cd11a8ba3.1589813083.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1589813083.git.akuster808@gmail.com>
 References: <cover.1589813083.git.akuster808@gmail.com>
@@ -52,16 +52,16 @@ From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 6b69dab552ae2c00c8cc6d68b062dc0067eb690f)
+(cherry picked from commit 388d26db292e2fe158a0e993cfb84805c74630ce)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-polyline/run-ptest | 2 +-
+ .../recipes-devtools/python/python3-precise-runner/run-ptest    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-polyline/run-ptest b/meta-python/recipes-devtools/python/python3-polyline/run-ptest
+diff --git a/meta-python/recipes-devtools/python/python3-precise-runner/run-ptest b/meta-python/recipes-devtools/python/python3-precise-runner/run-ptest
 index 5cec711696..b63c4de0d9 100644
---- a/meta-python/recipes-devtools/python/python3-polyline/run-ptest
-+++ b/meta-python/recipes-devtools/python/python3-polyline/run-ptest
+--- a/meta-python/recipes-devtools/python/python3-precise-runner/run-ptest
++++ b/meta-python/recipes-devtools/python/python3-precise-runner/run-ptest
 @@ -1,3 +1,3 @@
  #!/bin/sh
  
