@@ -1,279 +1,117 @@
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
- by mx.groups.io with SMTP id smtpd.web12.28508.1589744437182346872
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web12.36512.1589782137867204898
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 May 2020 12:40:37 -0700
+ Sun, 17 May 2020 23:08:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=GNMgDdYp;
- spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f195.google.com with SMTP id g185so8101568qke.7
-        for <openembedded-devel@lists.openembedded.org>; Sun, 17 May 2020 12:40:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=Vdq8Ycp2OugdRSfjMbrs88BFjndSub8c04lI6fflRoE=;
-        b=GNMgDdYphe0j1PRCaDbSLLkab3nDv4r0Nl2c5ec5I1XAyrOzu4hDnTkZb9jdnx6j2b
-         KkemVuygAue6JzgQpAbh028GVh2NvpmrEHDs0qdInerP93yMK7E5GgLYWqqMl8VYBguH
-         pYILDma476C4ZTfMN002+2xiF5Ovnug5u15+QDT/E1t/rw7Z7A8ldJc6bqc4Iy1rP+TZ
-         MVAggUiXvBzslO07eTEcsD/hC/GVGI11McRK2DdE+ux7t7/P7JVJHiT8ypyN+SvYH9WI
-         gMqc/fu/PYX+KaDivS+v71+t2CBwF0glep5gReGYzGGgYZh8+Crm96yph9iVhk85E5sB
-         4GEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=Vdq8Ycp2OugdRSfjMbrs88BFjndSub8c04lI6fflRoE=;
-        b=Odub8uvgfaBmGcNbhx214zQbELXFzqxXXI95B8Cl4mi3D4oHSsH1JTAngps2kbcmVM
-         5IRIyNsM+umuWDEd2DoLbHC+AjYrTAMVQRZhs9eusQRcTlZzHD9fgat/o5LHobxWZXIq
-         fvR65m1QFemBogZ2P7Z0DWPhKYbSs3ZwW1To+gVykYlaclb94hWa38fw90sfkYX4YGvx
-         pkMWb0BqkM1ngr8KmYEKZUdwfbUaQTzVkot3qs1ZupHRF1IyDx06sEeSVcmNYUWwg+Ec
-         mgzrmFZYb2wgw/EneDJhXJLxotU1Nx/hfCaSFiD6f5wWkQh3FESVms0JG5U/Vvkyw5HV
-         x5MQ==
-X-Gm-Message-State: AOAM5314eyrZj6kOpVsLm4iMA5UQ3bUuRuyc21r+IzJU8+BB4pobfo0d
-	oYuqdWeaCDRUMzp2qG2hJxDDUYeIpzjwak9TfBU=
-X-Google-Smtp-Source: ABdhPJwyF6uVKVtUCT0EGmxB+YSQ857VFAXQeLyvmjYBZ5ZkDY51jlNnr7+Ug4XHxZJx/FNx1nTfFssWgF4EbOiSvu0=
-X-Received: by 2002:ae9:dc47:: with SMTP id q68mr12060926qkf.17.1589744436095;
- Sun, 17 May 2020 12:40:36 -0700 (PDT)
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.73,406,1583164800"; 
+   d="scan'208";a="92434531"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 18 May 2020 14:08:51 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id E1FC24BCC89E;
+	Mon, 18 May 2020 14:08:47 +0800 (CST)
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) by
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Mon, 18 May 2020 14:08:46 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local ([fe80::a02b:f831:342:223])
+ by G08CNEXMBPEKD04.g08.fujitsu.local ([fe80::a02b:f831:342:223%14]) with mapi
+ id 15.00.1497.006; Mon, 18 May 2020 14:08:49 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+CC: Tim Orling <ticotimo@gmail.com>
+Subject: =?UTF-8?B?562U5aSNOiBbb2VdIFttZXRhLXB5dGhvbl0gW1BBVENIXSBweXRob24zLXBhcnNlLXR5cGU6IE1vZGlmeSBwdGVzdCBvdXRwdXQgZm9ybWF0?=
+Thread-Topic: [oe] [meta-python] [PATCH] python3-parse-type: Modify ptest
+ output format
+Thread-Index: AQHWKKOQ6mI1993veEWp8imMjfO176itXZSA
+Date: Mon, 18 May 2020 06:08:49 +0000
+Message-ID: <c3f75d649f9742d68fd74a76236b2fab@G08CNEXMBPEKD04.g08.fujitsu.local>
+References: <1589293385-96425-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+ <717899d43ac1c6d9f7b4f334b705e10b0fbd1ae3.camel@linuxfoundation.org>
+In-Reply-To: <717899d43ac1c6d9f7b4f334b705e10b0fbd1ae3.camel@linuxfoundation.org>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.167.225.81]
 MIME-Version: 1.0
-References: <20200515121436.2078760-1-sean@geanix.com> <CAP71Wjw91K67Z2fV9AyySsapyjmg20WE4c3JY84kr5+i0=u-Og@mail.gmail.com>
- <CA+chaQeKWuojLcT8Hq+CwycKS9Apgf2kwwmTP+6R4Zwb9OqY1Q@mail.gmail.com>
- <ee978f33-6598-d425-2ae9-1784690b7ec3@gmail.com> <221fd505-64c2-bd32-31e7-54f4302da760@geanix.com>
- <CA+chaQfAJuh+8u8rz9ToPAjbhbe5MTh7jNSc4CF9_g4Wkm6hfw@mail.gmail.com>
-In-Reply-To: <CA+chaQfAJuh+8u8rz9ToPAjbhbe5MTh7jNSc4CF9_g4Wkm6hfw@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sun, 17 May 2020 12:40:10 -0700
-Message-ID: <CAMKF1soMYApEWGqSnNakWjva1BxdhfvmCKMFJuR9yAd15EMvvQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH] gpsd: fix build on aarch64
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: Sean Nyekjaer <sean@geanix.com>, Nicolas Dechesne <nicolas.dechesne@linaro.org>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Alistair Francis <alistair23@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-yoursite-MailScanner-ID: E1FC24BCC89E.AE90E
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Language: zh-CN
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Sun, May 17, 2020 at 11:56 AM Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
->
-> It looks like an issue when re-configuring in the same WORKDIR.
->
-
-Mark it CLEANBROKEN =3D "1"
-
-> Looking at config.log in failing build I see:
-> file BUILD/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/g=
-psd-3.20/SConstruct,line 669:
->         Configure(confdir =3D .sconf_temp)
-> scons: Configure: Checking whether the C compiler works...
-> scons: Configure: ".sconf_temp/conftest_0.c" is up to date.
-> scons: Configure: The original builder output was:
->   |.sconf_temp/conftest_0.c <-
->   |  |
->   |  |int main(void)
->   |  |{
->   |  |    return 0;
->   |  |}
->   |  |
->   |
-> arm-webos-linux-gnueabi-gcc -mthumb -mfpu=3Dneon-vfpv4 -mfloat-abi=3Dhard=
- -mcpu=3Dcortex-a7 -fstack-protector-strong -D_FORTIFY_SOURCE=3D2 -Wformat =
--Wformat-security -Werror=3Dformat-security -Werror=3Dreturn-type --sysroot=
-=3DBUILD/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/recip=
-e-sysroot -o .sconf_temp/conftest_0.o -c --sysroot=3DBUILD/tmp-glibc/work/r=
-aspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/recipe-sysroot -O2 -pipe -g -f=
-eliminate-unused-debug-types -fmacro-prefix-map=3DBUILD/tmp-glibc/work/rasp=
-berrypi4-webos-linux-gnueabi/gpsd/3.20-r0=3D/usr/src/debug/gpsd/3.20-r0 -fd=
-ebug-prefix-map=3DBUILD/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/gps=
-d/3.20-r0=3D/usr/src/debug/gpsd/3.20-r0 -fdebug-prefix-map=3DBUILD/tmp-glib=
-c/work/raspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/recipe-sysroot=3D -fde=
-bug-prefix-map=3DBUILD/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/gpsd=
-/3.20-r0/recipe-sysroot-native=3D -fvisibility-inlines-hidden -fstack-prote=
-ctor-strong -O2 .sconf_temp/conftest_0.c
-> arm-webos-linux-gnueabi-gcc: error: .sconf_temp/conftest_0.c: No such fil=
-e or directory
-> arm-webos-linux-gnueabi-gcc: fatal error: no input files
-> compilation terminated.
-> scons: Configure: no
->
-> scons: Configure: Checking if compiler accepts -pthread...
-> scons: Configure: ".sconf_temp/conftest_1.c" is up to date.
-> scons: Configure: The original builder output was:
->   |.sconf_temp/conftest_1.c <-
->   |  |
->   |  |        int main(int argc, char **argv) {
->   |  |            (void) argc; (void) argv;
->   |  |            return 0;
->   |  |        }
->   |  |
->   |
-> arm-webos-linux-gnueabi-gcc -mthumb -mfpu=3Dneon-vfpv4 -mfloat-abi=3Dhard=
- -mcpu=3Dcortex-a7 -fstack-protector-strong -D_FORTIFY_SOURCE=3D2 -Wformat =
--Wformat-security -Werror=3Dformat-security -Werror=3Dreturn-type --sysroot=
-=3DBUILD/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/recip=
-e-sysroot -o .sconf_temp/conftest_1.o -c --sysroot=3DBUILD/tmp-glibc/work/r=
-aspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/recipe-sysroot -pthread -O2 -p=
-ipe -g -feliminate-unused-debug-types -fmacro-prefix-map=3DBUILD/tmp-glibc/=
-work/raspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0=3D/usr/src/debug/gpsd/3.=
-20-r0 -fdebug-prefix-map=3DBUILD/tmp-glibc/work/raspberrypi4-webos-linux-gn=
-ueabi/gpsd/3.20-r0=3D/usr/src/debug/gpsd/3.20-r0 -fdebug-prefix-map=3DBUILD=
-/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/recipe-sysroo=
-t=3D -fdebug-prefix-map=3DBUILD/tmp-glibc/work/raspberrypi4-webos-linux-gnu=
-eabi/gpsd/3.20-r0/recipe-sysroot-native=3D -fvisibility-inlines-hidden -fst=
-ack-protector-strong -O2 .sconf_temp/conftest_1.c
-> arm-webos-linux-gnueabi-gcc: error: .sconf_temp/conftest_1.c: No such fil=
-e or directory
-> arm-webos-linux-gnueabi-gcc: fatal error: no input files
-> compilation terminated.
-> scons: Configure: no
->
-> If I clean it first with:
-> bitbake -c cleansstate gpsd; bitbake -c compile gpsd
-> then config.log looks OK and gpsd builds OK
->
-> file BUILD/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/g=
-psd-3.20/SConstruct,line 669:
->         Configure(confdir =3D .sconf_temp)
-> scons: Configure: Checking whether the C compiler works...
-> .sconf_temp/conftest_0.c <-
->   |
->   |int main(void)
->   |{
->   |    return 0;
->   |}
->   |
-> arm-webos-linux-gnueabi-gcc -mthumb -mfpu=3Dneon-vfpv4 -mfloat-abi=3Dhard=
- -mcpu=3Dcortex-a7 -fstack-protector-strong -D_FORTIFY_SOURCE=3D2 -Wformat =
--Wformat-security -Werror=3Dformat-security -Werror=3Dreturn-type --sysroot=
-=3DBUILD/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/recip=
-e-sysroot -o .sconf_temp/conftest_0.o -c --sysroot=3DBUILD/tmp-glibc/work/r=
-aspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/recipe-sysroot -O2 -pipe -g -f=
-eliminate-unused-debug-types -fmacro-prefix-map=3DBUILD/tmp-glibc/work/rasp=
-berrypi4-webos-linux-gnueabi/gpsd/3.20-r0=3D/usr/src/debug/gpsd/3.20-r0 -fd=
-ebug-prefix-map=3DBUILD/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/gps=
-d/3.20-r0=3D/usr/src/debug/gpsd/3.20-r0 -fdebug-prefix-map=3DBUILD/tmp-glib=
-c/work/raspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/recipe-sysroot=3D -fde=
-bug-prefix-map=3DBUILD/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/gpsd=
-/3.20-r0/recipe-sysroot-native=3D -fvisibility-inlines-hidden -fstack-prote=
-ctor-strong -O2 .sconf_temp/conftest_0.c
-> cc1: warning: command-line option '-fvisibility-inlines-hidden' is valid =
-for C++/ObjC++ but not for C
-> scons: Configure: yes
->
-> scons: Configure: Checking if compiler accepts -pthread...
-> .sconf_temp/conftest_1.c <-
->   |
->   |        int main(int argc, char **argv) {
->   |            (void) argc; (void) argv;
->   |            return 0;
->   |        }
->   |
-> arm-webos-linux-gnueabi-gcc -mthumb -mfpu=3Dneon-vfpv4 -mfloat-abi=3Dhard=
- -mcpu=3Dcortex-a7 -fstack-protector-strong -D_FORTIFY_SOURCE=3D2 -Wformat =
--Wformat-security -Werror=3Dformat-security -Werror=3Dreturn-type --sysroot=
-=3DBUILD/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/recip=
-e-sysroot -o .sconf_temp/conftest_1.o -c --sysroot=3DBUILD/tmp-glibc/work/r=
-aspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/recipe-sysroot -pthread -O2 -p=
-ipe -g -feliminate-unused-debug-types -fmacro-prefix-map=3DBUILD/tmp-glibc/=
-work/raspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0=3D/usr/src/debug/gpsd/3.=
-20-r0 -fdebug-prefix-map=3DBUILD/tmp-glibc/work/raspberrypi4-webos-linux-gn=
-ueabi/gpsd/3.20-r0=3D/usr/src/debug/gpsd/3.20-r0 -fdebug-prefix-map=3DBUILD=
-/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/recipe-sysroo=
-t=3D -fdebug-prefix-map=3DBUILD/tmp-glibc/work/raspberrypi4-webos-linux-gnu=
-eabi/gpsd/3.20-r0/recipe-sysroot-native=3D -fvisibility-inlines-hidden -fst=
-ack-protector-strong -O2 .sconf_temp/conftest_1.c
-> cc1: warning: command-line option '-fvisibility-inlines-hidden' is valid =
-for C++/ObjC++ but not for C
-> arm-webos-linux-gnueabi-gcc -mthumb -mfpu=3Dneon-vfpv4 -mfloat-abi=3Dhard=
- -mcpu=3Dcortex-a7 -fstack-protector-strong -D_FORTIFY_SOURCE=3D2 -Wformat =
--Wformat-security -Werror=3Dformat-security -Werror=3Dreturn-type --sysroot=
-=3DBUILD/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/recip=
-e-sysroot -o .sconf_temp/conftest_1 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as=
--needed -Wl,-z,relro,-z,now --sysroot=3DBUILD/tmp-glibc/work/raspberrypi4-w=
-ebos-linux-gnueabi/gpsd/3.20-r0/recipe-sysroot .sconf_temp/conftest_1.o -L.=
- -LBUILD/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/gpsd/3.20-r0/recip=
-e-sysroot/usr/lib
-> scons: Configure: yes
->
-> On Sun, May 17, 2020 at 4:13 PM Sean Nyekjaer <sean@geanix.com> wrote:
->>
->>
->>
->> On 15/05/2020 17.22, Khem Raj wrote:
->> >
->> >
->> > On 5/15/20 8:07 AM, Martin Jansa wrote:
->> >> I was seeing this issue also on arm (raspberrypi4), so it's not
->> >> specific to aarch64 as subject says.
->> >>
->> >> With this fix I'm still seeing build failure:
->> >> | ppsthread.c:1281: error: undefined reference to 'pthread_create'
->> >>
->> >
->> > Perhaps also set LDFLAGS =3D "-pthread"
->> >
->>
->> Seems fine in my builds:
->>
->> arm-oe-linux-gnueabi-gcc -mthumb -mfpu=3Dneon -mfloat-abi=3Dhard
->> -mcpu=3Dcortex-a7
->> --sysroot=3D/home/sean/development/cc/yoctobuild/tmp-glibc/work/cortexa7=
-t2hf-neon-oe-linux-gnueabi/gpsd/3.20-r0/recipe-sysroot
->> -o ppsthread.o -c
->> --sysroot=3D/home/sean/development/cc/yoctobuild/tmp-glibc/work/cortexa7=
-t2hf-neon-oe-linux-gnueabi/gpsd/3.20-r0/recipe-sysroot
->> -pthread -Wall -Wcast-align -Wextra -Wimplicit-fallthrough
->> -Wmissing-declarations -Wmissing-prototypes
->> -Wno-missing-field-initializers -Wno-uninitialized -Wpointer-arith
->> -Wreturn-type -Wstrict-prototypes -Wvla -pipe -g
->> -feliminate-unused-debug-types
->> -fmacro-prefix-map=3D/home/sean/development/cc/yoctobuild/tmp-glibc/work=
-/cortexa7t2hf-neon-oe-linux-gnueabi/gpsd/3.20-r0=3D/usr/src/debug/gpsd/3.20=
--r0
->> -fdebug-prefix-map=3D/home/sean/development/cc/yoctobuild/tmp-glibc/work=
-/cortexa7t2hf-neon-oe-linux-gnueabi/gpsd/3.20-r0=3D/usr/src/debug/gpsd/3.20=
--r0
->> -fdebug-prefix-map=3D/home/sean/development/cc/yoctobuild/tmp-glibc/work=
-/cortexa7t2hf-neon-oe-linux-gnueabi/gpsd/3.20-r0/recipe-sysroot=3D
->> -fdebug-prefix-map=3D/home/sean/development/cc/yoctobuild/tmp-glibc/work=
-/cortexa7t2hf-neon-oe-linux-gnueabi/gpsd/3.20-r0/recipe-sysroot-native=3D
->> -fvisibility-inlines-hidden -O2 -pthread
->> -I/home/sean/development/cc/yoctobuild/tmp-glibc/work/cortexa7t2hf-neon-=
-oe-linux-gnueabi/gpsd/3.20-r0/recipe-sysroot/usr/include/dbus-1.0
->> -I/home/sean/development/cc/yoctobuild/tmp-glibc/work/cortexa7t2hf-neon-=
-oe-linux-gnueabi/gpsd/3.20-r0/recipe-sysroot/usr/lib/dbus-1.0/include
->> -I/home/sean/development/cc/yoctobuild/tmp-glibc/work/cortexa7t2hf-neon-=
-oe-linux-gnueabi/gpsd/3.20-r0/recipe-sysroot/usr/include/libusb-1.0
->> ppsthread.c
->>
->> and
->>
->> aarch64-oe-linux-gcc -march=3Darmv8-a+crc
->> --sysroot=3D/home/sean/development/cc/yoctobuild/tmp-glibc/work/aarch64-=
-oe-linux/gpsd/3.20-r0/recipe-sysroot
->> -o ppsthread.o -c
->> --sysroot=3D/home/sean/development/cc/yoctobuild/tmp-glibc/work/aarch64-=
-oe-linux/gpsd/3.20-r0/recipe-sysroot
->> -pthread -Wall -Wcast-align -Wextra -Wimplicit-fallthrough
->> -Wmissing-declarations -Wmissing-prototypes
->> -Wno-missing-field-initializers -Wno-uninitialized -Wpointer-arith
->> -Wreturn-type -Wstrict-prototypes -Wvla -pipe -g
->> -feliminate-unused-debug-types
->> -fmacro-prefix-map=3D/home/sean/development/cc/yoctobuild/tmp-glibc/work=
-/aarch64-oe-linux/gpsd/3.20-r0=3D/usr/src/debug/gpsd/3.20-r0
->> -fdebug-prefix-map=3D/home/sean/development/cc/yoctobuild/tmp-glibc/work=
-/aarch64-oe-linux/gpsd/3.20-r0=3D/usr/src/debug/gpsd/3.20-r0
->> -fdebug-prefix-map=3D/home/sean/development/cc/yoctobuild/tmp-glibc/work=
-/aarch64-oe-linux/gpsd/3.20-r0/recipe-sysroot=3D
->> -fdebug-prefix-map=3D/home/sean/development/cc/yoctobuild/tmp-glibc/work=
-/aarch64-oe-linux/gpsd/3.20-r0/recipe-sysroot-native=3D
->> -fvisibility-inlines-hidden -O2 -pthread
->> -I/home/sean/development/cc/yoctobuild/tmp-glibc/work/aarch64-oe-linux/g=
-psd/3.20-r0/recipe-sysroot/usr/include/dbus-1.0
->> -I/home/sean/development/cc/yoctobuild/tmp-glibc/work/aarch64-oe-linux/g=
-psd/3.20-r0/recipe-sysroot/usr/lib/dbus-1.0/include
->> -I/home/sean/development/cc/yoctobuild/tmp-glibc/work/aarch64-oe-linux/g=
-psd/3.20-r0/recipe-sysroot/usr/include/libusb-1.0
->> ppsthread.c
->>
->> By now, Scons is my favorite build system :-D
->>
->> /Sean
+Tm93IEkgaGF2ZSBtb2RpZmllZCB0aGUgb3V0cHV0IG9mIHB5dGVzdCBieSBt
+b2RpZnlpbmcgcHRlc3QtcnVubmVyLiBNeSBzb2x1dGlvbiBpcyB0aGF0IGlm
+IE9TUyB1c2VzIHB5dGVzdCB0ZXN0aW5nLCBuYW1lIGl0cyBwdGVzdCBmaWxl
+IHJ1bi1wdGVzdC1weXRlc3QuDQoNClRoZSBjb250ZW50IG9mIHJ1bi1wdGVz
+dC1weXRlc3QgaXMgYXMgZm9sbG93czoNCnB5dGVzdCAtbyBsb2dfY2xpID0g
+dHJ1ZSAtbyBsb2dfY2xpX2xldmVsID0gSU5GTw0KDQpUaGUgdGVzdCBvdXRw
+dXQgaXMgYXMgZm9sbG93czoNClNUQVJUOiBwdGVzdC1ydW5uZXINCjIwMjAt
+MDUtMThUMDU6NDINCkJFR0lOOiAvdXNyL2xpYi9weXRob24zLXBhcnNlLXR5
+cGUvcHRlc3QNCj09PT09PT09PT09PT09PT09PT09PT09PT09PT09IHRlc3Qg
+c2Vzc2lvbiBzdGFydHMgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+DQpwbGF0Zm9ybSBsaW51eCAtLSBQeXRob24gMy44LjIsIHB5dGVzdC01LjMu
+NSwgcHktMS44LjEsIHBsdWdneS0wLjEzLjENCnJvb3RkaXI6IC91c3IvbGli
+L3B5dGhvbjMtcGFyc2UtdHlwZS9wdGVzdA0KY29sbGVjdGVkIDE5MiBpdGVt
+cw0KDQpQQVNTOiB0ZXN0cy90ZXN0X2J1aWxkZXIucHk6OlRlc3RUeXBlQnVp
+bGRlcjRFbnVtOjp0ZXN0X21ha2VfZW51bV93aXRoX2RpY3QgDQpQQVNTOiB0
+ZXN0cy90ZXN0X2J1aWxkZXIucHk6OlRlc3RUeXBlQnVpbGRlcjRFbnVtOjp0
+ZXN0X21ha2VfZW51bV93aXRoX2VudW1fY2xhc3MgDQpQQVNTOiB0ZXN0cy90
+ZXN0X2J1aWxkZXIucHk6OlRlc3RUeXBlQnVpbGRlcjRFbnVtOjp0ZXN0X3Bh
+cnNlX2VudW1feWVzbm8gDQouLi4NClBBU1M6IHRlc3RzL3Rlc3RfcGFyc2Vf
+dXRpbC5weTo6VGVzdEZpZWxkUGFyc2VyOjp0ZXN0X2V4dHJhY3RfdHlwZXMg
+DQpQQVNTOiB0ZXN0cy90ZXN0X3BhcnNlX3V0aWwucHk6OlRlc3RGaWVsZFBh
+cnNlcjo6dGVzdF9wYXJzZV9fcmFpc2VzX2Vycm9yX3dpdGhfbWlzc2luZ19v
+cl9wYXJ0aWFsX2JyIA0KUEFTUzogdGVzdHMvdGVzdF9wYXJzZV91dGlsLnB5
+OjpUZXN0RmllbGRQYXJzZXI6OnRlc3RfcGFyc2VfX3dpdGhfdmFsaWRfZmll
+bGRzIA0KDQoNCj09PT09PT09PT09PT09PT09PT09PT09PT09PT09IDE5MiBw
+YXNzZWQgaW4gMTguNDFzID09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+DQpTVE9QOiBwdGVzdC1ydW5uZXINCkRVUkFUSU9OOiAzMg0KRU5EOiAvdXNy
+L2xpYi9weXRob24zLXBhcnNlLXR5cGUvcHRlc3QNCjIwMjAtMDUtMThUMDU6
+NDINClNUT1A6IHB0ZXN0LXJ1bm5lcg0KDQotLS0tLemCruS7tuWOn+S7ti0t
+LS0tDQrlj5Hku7bkuro6IFJpY2hhcmQgUHVyZGllIDxyaWNoYXJkLnB1cmRp
+ZUBsaW51eGZvdW5kYXRpb24ub3JnPiANCuWPkemAgeaXtumXtDogMjAyMOW5
+tDXmnIgxM+aXpSA1OjIzDQrmlLbku7bkuro6IFphbmcsIFJ1b2NoZW4v6Ien
+IOiLpeWwmCA8emFuZ3JjLmZuc3RAY24uZnVqaXRzdS5jb20+OyBvcGVuZW1i
+ZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0K5oqE6YCBOiBU
+aW0gT3JsaW5nIDx0aWNvdGltb0BnbWFpbC5jb20+DQrkuLvpopg6IFJlOiBb
+b2VdIFttZXRhLXB5dGhvbl0gW1BBVENIXSBweXRob24zLXBhcnNlLXR5cGU6
+IE1vZGlmeSBwdGVzdCBvdXRwdXQgZm9ybWF0DQoNCk9uIFR1ZSwgMjAyMC0w
+NS0xMiBhdCAyMjoyMyArMDgwMCwgemFuZ3JjIHdyb3RlOg0KPiBTaWduZWQt
+b2ZmLWJ5OiBaYW5nIFJ1b2NoZW4gPHphbmdyYy5mbnN0QGNuLmZ1aml0c3Uu
+Y29tPg0KPiAtLS0NCj4gIC4uLi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9w
+eXRob24zLXBhcnNlLXR5cGUvcnVuLXB0ZXN0ICAgICAgICB8IDIgKy0NCj4g
+IDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigt
+KQ0KPiANCj4gZGlmZiAtLWdpdCANCj4gYS9tZXRhLXB5dGhvbi9yZWNpcGVz
+LWRldnRvb2xzL3B5dGhvbi9weXRob24zLXBhcnNlLXR5cGUvcnVuLXB0ZXN0
+IA0KPiBiL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5
+dGhvbjMtcGFyc2UtdHlwZS9ydW4tcHRlc3QNCj4gaW5kZXggNWNlYzcxMTY5
+Li5iNjNjNGRlMGQgMTAwNjQ0DQo+IC0tLSBhL21ldGEtcHl0aG9uL3JlY2lw
+ZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbjMtcGFyc2UtdHlwZS9ydW4tcHRl
+c3QNCj4gKysrIGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRo
+b24vcHl0aG9uMy1wYXJzZS10eXBlL3J1bi1wdGVzdA0KPiBAQCAtMSwzICsx
+LDMgQEANCj4gICMhL2Jpbi9zaA0KPiAgDQo+IC1weXRlc3QNCj4gK3B5dGVz
+dCAtbyBsb2dfY2xpPXRydWUgLW8gbG9nX2NsaV9sZXZlbD1JTkZPIHwgc2Vk
+IC1lICdzL1xbLi4uJVxdLy9nJ3wgc2VkIC1lICdzL1BBU1NFRC9QQVNTL2cn
+fCBzZWQgLWUgJ3MvRkFJTEVEL0ZBSUwvZyd8c2VkIC1lICdzL1NLSVBQRUQv
+U0tJUC9nJ3wgYXdrICd7aWYgKCRORj09IlBBU1MiIHx8ICRORj09IkZBSUwi
+IHx8ICRORj09IlNLSVAiIHx8ICRORj09IlhGQUlMIiB8fCAkTkY9PSJYUEFT
+UyIpe3ByaW50ZiAiJXM6ICVzXG4iLCAkTkYsICQwfWVsc2V7cHJpbnR9fSd8
+IGF3ayAne2lmICgkTkY9PSJQQVNTIiB8fCAkTkY9PSJGQUlMIiB8fCAkTkY9
+PSJTS0lQIiB8fCAkTkY9PSJYRkFJTCIgfHwgJE5GPT0iWFBBU1MiKSB7JE5G
+PSIiO3ByaW50ICQwfWVsc2V7cHJpbnR9fScNCg0KUmF0aGVyIHRoYW4gZG9p
+bmcgdGhpcyBmb3IgZXZlcnkgcHl0aG9uIG1vZHVsZSwgaXQgbWF5IGJlIGFu
+IGlkZWEgdG8NCmNvbnNpZGVyOg0KDQphKSB0ZWFjaGluZyBwdGVzdCBydW5u
+ZXIgaG93IHRvIGhhbmRsZSB0aGUgYWx0ZXJuYXRlIG91dHB1dCBmb3JtYXQg
+KHRyaWdnZXJlZCBieSBydW4tcHRlc3QtWFhYIGluc3RlYWQgb2YgcnVuLXB0
+ZXN0KQ0KDQpvcg0KDQpiKSBhZGRpbmcgYSBjb21tb24gcHl0aG9uIHNjcmlw
+dCB3aGljaCBjb3VsZCBhdm9pZCBhbGwgdGhpcyBzZWQvYXdrIG1hZ2ljIGFu
+ZCB0aGUgZXh0cmEgZGVwZW5kZW5jaWVzDQoNCm9yDQoNCmMpIHBhdGNoIGlu
+IGEgcGFyYW1ldGVyIHRvIHB5dGVzdCB3aGljaCBvdXRwdXRzIHRoZSBkYXRh
+IGluIHRoZSBmb3JtYXQgd2UgbmVlZC4NCg0KQ2hlZXJzLA0KDQpSaWNoYXJk
+DQoNCg0KDQoKCg==
