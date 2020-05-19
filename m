@@ -1,72 +1,56 @@
-Received: from esa1.hgst.iphmx.com (esa1.hgst.iphmx.com [68.232.141.245])
- by mx.groups.io with SMTP id smtpd.web10.1371.1589926673639334821
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+ by mx.groups.io with SMTP id smtpd.web12.1473.1589926709347769873
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 May 2020 15:17:53 -0700
+ Tue, 19 May 2020 15:18:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@wdc.com header.s=dkim.wdc.com header.b=djcAHDM+;
- spf=pass (domain: wdc.com, ip: 68.232.141.245, mailfrom: prvs=401675184=alistair.francis@wdc.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-  t=1589926673; x=1621462673;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=mLc4w3jO04BEb3El+06PTldTX24zBiQIe0pIOWA579M=;
-  b=djcAHDM+e/TUTa7MQbZxmwy8L/p0CZNEPvUtNdofdFE82QSJuHKrKUff
-   i5MwyFkSIdM5M+2hAAIOANbVMFdpn8dM+hdeX+iXpF9VLW03CyVO+IRMi
-   4DsIY8kmg8ES+UbroAM+bJNxYZVvvRaZt19g3zjjZvoZrQE3u9IKzeOPS
-   kM7INb3iVZ1mdP+yWpGL/aCOL87QPV+WRizyhrpnyDWkx05HbKkqOyRq9
-   L+4b+MagFupSXgvSQqXfXSFNXWyQ1RoBAWDFaQEakl/0YbFQtrJUSh1Oj
-   31C24tbCG00X4M9A0JGxaWLxm8hUlydCnFingErQe5nwlvmKce1xYcjD9
-   Q==;
-IronPort-SDR: L+RxZC0vEI03PFFSzL/EzUqlPlOujqaD1toVzXmrz2wDTY3dryA1vAn0OA0nZT9iKc7FZJbOFI
- Ch29C2J8OJlaiirCKE2QYtWhfJbs60FlbJ7+5XoFLY5h2Zzj1gLlw+AK5oEqOiRyATcP7TIqg1
- mT4ZhkHY+79gJ8Hx1ZFgaU7jFfTd/LsGPYBF6Rh8/T8MqUAi6DpKXirVZblksA7cu6rC1Qh/IO
- 8ridyppdAhDeGwAarInbL16TOASqrhd2FnpbqfUHnrAAUa0lGikOWo4xRIi3Iq3glO9bI4pRWt
- fyo=
-X-IronPort-AV: E=Sophos;i="5.73,411,1583164800"; 
-   d="scan'208";a="247064550"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com) ([199.255.45.15])
-  by ob1.hgst.iphmx.com with ESMTP; 20 May 2020 06:17:52 +0800
-IronPort-SDR: XVz5J6gU+BSuc8zR293REw4pdkV12PziCW+dY+dUci9D5rTL3HELQzh7600/24LraYm5aPpAuF
- Nurf1ZsGeXYMe/7eenpXWEOYDT4+5XKAY=
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
-  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 May 2020 15:07:23 -0700
-IronPort-SDR: 3Lii2Cz3qK9wi9zu3ZDnybbWGUE2oX9VNI3m57CKs5Q29B/MekGxoRMzUSxZEDyHG292h7hhlf
- qQt+QU4o918A==
-WDCIronportException: Internal
-Received: from usa003971.ad.shared (HELO risc6-mainframe.hgst.com) ([10.86.56.231])
-  by uls-op-cesaip01.wdc.com with ESMTP; 19 May 2020 15:17:53 -0700
-From: "Alistair Francis" <alistair.francis@wdc.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: alistair23@gmail.com,
-	Alistair Francis <alistair.francis@wdc.com>
-Subject: [OE][PATCH] openocd: Update libjaylink
-Date: Tue, 19 May 2020 15:09:25 -0700
-Message-Id: <20200519220925.1447384-1-alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.26.2
+ dkim=pass header.i=@stusta.de header.s=default header.b=HFmtr85/;
+ spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=ypzx=7b=stusta.de=bunk@stusta.mhn.de)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49RVdb1qQKz3r;
+	Wed, 20 May 2020 00:18:27 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1589926707;
+	bh=oxYQXLWkJOsJCZ+o+LotXnSQYbYj0132ASDsv6mSZEM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=HFmtr85/GUHtzt1VtSHA6e/jsibePTGcU05aTK0XV3vDEshfdHDZfQyl7480Ittd2
+	 dF9lnoCW7Fot2EMGM4QOThsoUpLI2KiVgjg7Yv7vAnWall0YwWkUc4LQid1Bb4iYq9
+	 5Qv2P7xVmtO7cDtRqV+udw8rxRKU2/e7gNTWl+lxYyaaP42xldPTKuBB2B3DKFaw60
+	 mvxyUltao4GqrcUSJrfDxYkcmBXXKpZ7ARxtsyDqaCKeFe7YG3avDnrupq1CqTYfuD
+	 gka8wsG7NcIXSyvtJQRBCrPumFzOmdMgNqkgJuhgApItNboYgczuRtOc2E181Lf7Pk
+	 3J4ZBdPkDM28NXCBQ65UpqMcCgFYKaOZcWY/8wtT+b7FW9sg+4R762IZ4jcViXZlpd
+	 LgI6pheLqOJt5sL4V7VPBd8iQMjWsvakCNU8tPccB0/MAMJLcDJAwqniv2My85t+bz
+	 388y+p9qRBQ9etuX5mjkPp1Bx6RRn4hd8rLMKEHOuZRiqQYnDQ5qMTf8Bii41WurlE
+	 B7RVuiogUIFdWtIeRsZxdk+ygzjgsNtek3GR/u4A6vNKNfUQg1yC+bU7ZikKMjD73/
+	 LtOf0DYoa0pfhaXdSxGKeRNJXtmUBZ7nl80e54JUvP0pDcnBEguykkrKYaH7L6i9lC
+	 l1thqtXAfuWTE/Chxlr9ZPnA=
+Date: Wed, 20 May 2020 01:18:25 +0300
+From: "Adrian Bunk" <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-oe][PATCH] unicode-ucd: Stop broken license downloading
+Message-ID: <20200519221825.GA32221@localhost>
+References: <16107FFC59C1A7DD.18971@lists.openembedded.org>
+ <20200519220009.GA31915@localhost>
+ <CAMKF1sqRNyoJzpPFicbTjjW8Vo4qsj16i2NaiF1LN51LeM54QQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAMKF1sqRNyoJzpPFicbTjjW8Vo4qsj16i2NaiF1LN51LeM54QQ@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Update the libjaylink SHA to the latest commit.
+On Tue, May 19, 2020 at 03:05:24PM -0700, Khem Raj wrote:
+> On Tue, May 19, 2020 at 3:00 PM Adrian Bunk <bunk@stusta.de> wrote:
+> >
+> > Hi Khem,
+> >
+> > it seems some kind of dos2unix was run when you applied my patch,
+> > which changed the license hash.
+> 
+> Thanks for noting, it is patchwork and git am, so I wonder what it
+> could be, I will take a look
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- meta-oe/recipes-devtools/openocd/openocd_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+git am seems to do that, I'll send a v2 with converted license.html
+and updated checksum.
 
-diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-index e95f1cfa5..f01b224fa 100644
---- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
-+++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-@@ -16,7 +16,7 @@ SRCREV_FORMAT = "openocd"
- SRCREV_openocd = "ded67990255cc1e63c77832ffd6e6bef9120873d"
- SRCREV_git2cl = "8373c9f74993e218a08819cbcdbab3f3564bbeba"
- SRCREV_jimtcl = "dc4ba7770d580800634f90b67a24e077b4a26d98"
--SRCREV_libjaylink = "cfccbc9d6763733f1d14dff3c2dc5b75aaef136b"
-+SRCREV_libjaylink = "3322dfa5e7aa56f5b12b7f2197e3e6b850b7b66e"
- 
- PV = "0.10+gitr${SRCPV}"
- S = "${WORKDIR}/git"
--- 
-2.26.2
-
+cu
+Adrian
