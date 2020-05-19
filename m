@@ -1,95 +1,88 @@
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com [209.85.210.193])
- by mx.groups.io with SMTP id smtpd.web10.12999.1589899426449040922
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com [209.85.210.194])
+ by mx.groups.io with SMTP id smtpd.web11.12943.1589899428109671265
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 May 2020 07:43:46 -0700
+ Tue, 19 May 2020 07:43:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=P+GWJfaW;
- spf=pass (domain: gmail.com, ip: 209.85.210.193, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f193.google.com with SMTP id z26so6515675pfk.12
-        for <openembedded-devel@lists.openembedded.org>; Tue, 19 May 2020 07:43:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=NugXllZf;
+ spf=pass (domain: gmail.com, ip: 209.85.210.194, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f194.google.com with SMTP id 23so6637485pfy.8
+        for <openembedded-devel@lists.openembedded.org>; Tue, 19 May 2020 07:43:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=anwZgMIA+d+HUqx4pMRQmH0Op0HOnc3AXuoAIzOG0gM=;
-        b=P+GWJfaWRSEWw+XHz1/0WyFDKXOIRO6LNj99lxssfiw3BhazaaxLi3Tosf4dm23GCi
-         5ebA7AROVxZaqy3uTxYDHgx++ke60O2fgjfN7UBntqnAFGmC8Rs37tN4IJwixzgaGg0l
-         nihZXlx847izV/YwiQJpIVKBjT2sBkzrOGbkrvRoMT6nhx6mdwZU2TXfQhq+WDUQJK/q
-         hxkDtrQIUJN85/ppaF+WTEBx9o1jbHJmWfHoafzH36iszf4HeQ87iK1qwB84uZYTMJg5
-         CdekmXQJWEtTlY0OoFVDTC2nigx04OrzNoDDLJMX4PzjgAiV3uzVY3nB1Q67Byxh/q7+
-         oguQ==
+        bh=JMvo0y2u9sFM7+mMZXT0a/z4AjBZyuDGjStzN17S+QE=;
+        b=NugXllZfRcnWKbS3XihA18+Cmh0St5MRaou7Fbsf4rycutjxz+n3pYqwOtw9rXDxKG
+         UmFSPTjIHfxPIlCCi9UFHS+GTEYp4WBGQJI4puxJgWgV22vQWnuaHvBPM+kDdwoTe0Va
+         NO2LBY4zaJVvFnOaBpc2t2rSwb93ysbl/HTRjv/4eJjAvN3yCBkFsfEeI46ydFK26qKd
+         ZeM0aS6h9wFHAaqJQV2g9Lxajvouiptgq4sjaayv7V5NfiNs/ki2o2tZGiMphNKm10B+
+         lV7Tl4jG2wPhCBBecG9lfEVROVpgn1xyXhoJqZOQycEny74q+WgbO2VO3e01AdnNHAX3
+         LRIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=anwZgMIA+d+HUqx4pMRQmH0Op0HOnc3AXuoAIzOG0gM=;
-        b=YpbMq02EkTUfu6Yd6qGzVpw/27gXu8Zt2G5SuSl0eWV/zq6ZHgJCYelTACCZFSmgT5
-         4+4ly46fAI+RBnILEFIa9j7g0rfPEuJMawTDuCZYZpAt+5GzK94VCIY1lZ6dEiNMWFKq
-         OgpKVmmZRb+uTTC3/8D3D5F8xWmRnh8DR7FtLMr3ijf9UzEak69w4KYoEslMhhg+19Wn
-         xvRVowQ3Q013f73h5MMekrRS+wAG56hLU0u1PhB7bajclSLhMgah0yAffZzKXLVF+fqM
-         kpx5CHyFty7m2Zc0GlL2sqRRp8beww8jw9iBFhtMhIuzOodR0T6MYkETdOKJ5KybO8CQ
-         RpjQ==
-X-Gm-Message-State: AOAM532oz9x5wc7iPhk5ZcFUx7ZQ5+0gXlDmppxJE2WLbLxr+rq5ptwO
-	vZSX8bJVilabU1sPaaH+HIUl7WcU
-X-Google-Smtp-Source: ABdhPJw+TEIoG29hr9mjBYUD4OVlxl80LOLcS6xYWuvvzO5G2SoFTRWpg+RKn8LvOLaFRUkyosaI6g==
-X-Received: by 2002:a63:c80e:: with SMTP id z14mr19666874pgg.170.1589899425783;
-        Tue, 19 May 2020 07:43:45 -0700 (PDT)
+        bh=JMvo0y2u9sFM7+mMZXT0a/z4AjBZyuDGjStzN17S+QE=;
+        b=c7ejq84Bcx59p58DFlTMpwCwxQTWu8VbufG8V71qgDiI+pa5jNNkbuWectdTOSyfsH
+         GVJRBWLvcNQQAzQYtiNX7WjDWiVb8JjXXN/Eo4MS9PxLmRW/UwtwyyDqnNwoFP0pNiiZ
+         501F1dmwmmeFq6ioxwNumw1HLgaWs+vdDgsQdSaBlRrxDzjWH5CjIj8KCC+LkbXtdIum
+         hO8ivx91OVZnLOMGrEExftw5qmopKpbIM949NTM3nu5jCr50t0903rUPAdNlqzXoID6f
+         1wqQZwsMIznrxmvqgffWvMMXfhast40YGHuhhWW1YdvcfxS9LMM84TejA7xsqTW6p4uX
+         gitQ==
+X-Gm-Message-State: AOAM531C4cUp6jcYuGMpvh0XbMlZFmgGzzgy8uKRxd7KAaeOyw8ROddy
+	AtfCBiYIHIUf+JMreX3b+u36OMWs
+X-Google-Smtp-Source: ABdhPJz2hjWmD2G3S4VuI47uqTp+tAsKi5F/wO8kPnKkY/3DHGd/oexQkidWePuGW60NaiMfIfurGA==
+X-Received: by 2002:a62:3856:: with SMTP id f83mr22168190pfa.2.1589899427248;
+        Tue, 19 May 2020 07:43:47 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:9de6:6921:ec78:716d])
-        by smtp.gmail.com with ESMTPSA id h3sm2382099pjk.10.2020.05.19.07.43.44
+        by smtp.gmail.com with ESMTPSA id h3sm2382099pjk.10.2020.05.19.07.43.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 19 May 2020 07:43:45 -0700 (PDT)
+        Tue, 19 May 2020 07:43:46 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>,
-	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>,
+Cc: Mingli Yu <mingli.yu@windriver.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [dunfell][PATCH 10/18] cpprest: Disable one more test requiring internet connection
-Date: Tue, 19 May 2020 07:43:24 -0700
-Message-Id: <20200519144332.12822-10-akuster808@gmail.com>
+Subject: [dunfell][PATCH 11/18] gnome-themes-extra: correct the recipe name
+Date: Tue, 19 May 2020 07:43:25 -0700
+Message-Id: <20200519144332.12822-11-akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200519144332.12822-1-akuster808@gmail.com>
 References: <20200519144332.12822-1-akuster808@gmail.com>
 
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+Per https://gitlab.gnome.org/GNOME/gnome-themes-extra/-/blob/master/README.md,
+gnome-themes-extra ever named as gnome-themes-standard.
+
+So rename the recipe name to reflect the
+current status to avoid confusion.
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 014c4d224aa186f69cf722a3874231474cf3e4e1)
+(cherry picked from commit 7c02c7d41175f62b7ef6859dfc069d83751b656d)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../cpprest/disable-outside-tests.patch       | 20 +++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ ...nome-themes-standard_3.28.bb => gnome-themes-extra_3.28.bb} | 3 ---
+ 1 file changed, 3 deletions(-)
+ rename meta-oe/recipes-gnome/gnome-themes/{gnome-themes-standard_3.28.bb => gnome-themes-extra_3.28.bb} (94%)
 
-diff --git a/meta-oe/recipes-support/cpprest/cpprest/disable-outside-tests.patch b/meta-oe/recipes-support/cpprest/cpprest/disable-outside-tests.patch
-index e108e0279d..5f1f8a9f9c 100644
---- a/meta-oe/recipes-support/cpprest/cpprest/disable-outside-tests.patch
-+++ b/meta-oe/recipes-support/cpprest/cpprest/disable-outside-tests.patch
-@@ -105,3 +105,23 @@ Index: cpprest/Release/tests/functional/http/client/connections_and_errors.cpp
-  
-  } // SUITE(connections_and_errors)
-  
-+--- cpprest-2.10.16.orig/Release/tests/functional/http/client/redirect_tests.cpp
-++++ cpprest-2.10.16/Release/tests/functional/http/client/redirect_tests.cpp
-+@@ -159,7 +159,7 @@ SUITE(redirect_tests)
-+             VERIFY_NO_THROWS(reply.get());
-+         }
-+     }
-+-
-++/*
-+     TEST(does_not_follow_https_to_http_by_default)
-+     {
-+         handle_timeout([] {
-+@@ -182,7 +182,7 @@ SUITE(redirect_tests)
-+             );
-+         });
-+     }
-+-
-++*/
-+     TEST_FIXTURE(uri_address, follows_permanent_redirect)
-+     {
-+ #if USING_WINHTTP
+diff --git a/meta-oe/recipes-gnome/gnome-themes/gnome-themes-standard_3.28.bb b/meta-oe/recipes-gnome/gnome-themes/gnome-themes-extra_3.28.bb
+similarity index 94%
+rename from meta-oe/recipes-gnome/gnome-themes/gnome-themes-standard_3.28.bb
+rename to meta-oe/recipes-gnome/gnome-themes/gnome-themes-extra_3.28.bb
+index 2fa754e79d..ac594711cd 100644
+--- a/meta-oe/recipes-gnome/gnome-themes/gnome-themes-standard_3.28.bb
++++ b/meta-oe/recipes-gnome/gnome-themes/gnome-themes-extra_3.28.bb
+@@ -6,9 +6,6 @@ SECTION = "x11/gnome"
+ LICENSE = "LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=2d5025d4aa3495befef8f17206a5b0a1"
+ 
+-# Upstream renamed this package to gnome-themes-extra at some point
+-BPN = "gnome-themes-extra"
+-
+ inherit gnomebase gettext gtk-icon-cache upstream-version-is-even features_check
+ 
+ ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
 -- 
 2.17.1
 
