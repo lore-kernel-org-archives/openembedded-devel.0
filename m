@@ -1,58 +1,57 @@
-Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web10.8700.1589881935109493143
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.12726.1589898641442497736
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 May 2020 02:52:16 -0700
+ Tue, 19 May 2020 07:30:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=qnQusRqv;
- spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 20A6E601E7;
-	Tue, 19 May 2020 11:52:12 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1589881932;
-	bh=vfJyOw9uzjdMnz5KZz4/dNe+WF6SuljMTGBR6tKGfzg=;
-	h=From:To:Cc:Subject:Date:From;
-	b=qnQusRqvvLI7c4wrTDdYpnNQLQiQy0yWXwMO9BUuAOwairQwSMtu/WHN9F9n7gkd5
-	 mLsC9sQDBgBO/wMKRanLjETT92Z61IHKCqiV2xkN94U/SmWpFp6y5ll3tersRlTlfd
-	 CFS6Bh9XtdY/Py9FBZ2IzosftoaLDG/aQGPOU0ZHy7mGFMS3HlCNFVuNIsgFQ+uYxW
-	 Dbyr+kNSIl9IzwsZbUNaV/qRXfQPwyP9HlqU3S+hDf7o0HTZCY0Nl+dDgtoaPmO0D+
-	 36iDVkR3cOFYjm+QhwKVv7ixXhue/6ynzlfHFKRBYt7t3gsNz8FlLC2wWcwKmpoxDO
-	 jmJ1AMtu24mzQ==
-From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=59232 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jb3GQ-0002nY-FN; Tue, 19 May 2020 17:30:38 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH] librsync: upgrade 2.3.0 -> 2.3.1
-Date: Tue, 19 May 2020 11:52:08 +0200
-Message-Id: <1589881928-11578-1-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH] python3-absl: Upgrade to 0.9.0
+Date: Tue, 19 May 2020 17:30:31 +0300
+Message-Id: <20200519143031.18358-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-This is a patch release that adds peformance improvements, updates and
-tidies documentation, and fixes two build/test bugs.
+Upgrade to release 0.9.0.
 
-See full changelog https://github.com/librsync/librsync/releases/tag/v2.3.1
-
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-support/librsync/{librsync_2.3.0.bb => librsync_2.3.1.bb}   | 2 +-
+ .../python/{python3-absl_0.7.0.bb => python3-absl_0.9.0.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/librsync/{librsync_2.3.0.bb => librsync_2.3.1.bb} (88%)
+ rename meta-python/recipes-devtools/python/{python3-absl_0.7.0.bb => python3-absl_0.9.0.bb} (86%)
 
-diff --git a/meta-oe/recipes-support/librsync/librsync_2.3.0.bb b/meta-oe/recipes-support/librsync/librsync_2.3.1.bb
-similarity index 88%
-rename from meta-oe/recipes-support/librsync/librsync_2.3.0.bb
-rename to meta-oe/recipes-support/librsync/librsync_2.3.1.bb
-index e9d34ee..004c93d 100644
---- a/meta-oe/recipes-support/librsync/librsync_2.3.0.bb
-+++ b/meta-oe/recipes-support/librsync/librsync_2.3.1.bb
-@@ -5,7 +5,7 @@ LICENSE = "LGPLv2.1+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
+diff --git a/meta-python/recipes-devtools/python/python3-absl_0.7.0.bb b/meta-python/recipes-devtools/python/python3-absl_0.9.0.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-absl_0.7.0.bb
+rename to meta-python/recipes-devtools/python/python3-absl_0.9.0.bb
+index c65a6d7da..a8f47ba4c 100644
+--- a/meta-python/recipes-devtools/python/python3-absl_0.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-absl_0.9.0.bb
+@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
- SRC_URI = "git://github.com/librsync/librsync.git"
--SRCREV = "028d9432d05ba4b75239e0ba35bcb36fbfc17e35"
-+SRCREV = "27f738650c20fef1285f11d85a34e5094a71c06f"
- S = "${WORKDIR}/git"
+ SRC_URI = "git://github.com/abseil/abseil-py.git"
+-SRCREV ?= "e3ce504183c57fc4eca52fe84732c11cda99d131"
++SRCREV ?= "06edd9c20592cec39178b94240b5e86f32e19768"
  
- DEPENDS = "popt"
+ inherit setuptools3
+ 
 -- 
-2.7.4
+2.17.1
 
