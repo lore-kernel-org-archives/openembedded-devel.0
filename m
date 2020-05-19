@@ -1,77 +1,81 @@
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com [209.85.215.195])
- by mx.groups.io with SMTP id smtpd.web10.13001.1589899429574727837
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web10.13004.1589899431181593618
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 May 2020 07:43:49 -0700
+ Tue, 19 May 2020 07:43:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=GwUKBBA8;
- spf=pass (domain: gmail.com, ip: 209.85.215.195, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f195.google.com with SMTP id p30so499420pgl.11
-        for <openembedded-devel@lists.openembedded.org>; Tue, 19 May 2020 07:43:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pABeRpgB;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id m7so5722479plt.5
+        for <openembedded-devel@lists.openembedded.org>; Tue, 19 May 2020 07:43:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=2f5+LhENuIgRVD7KqX19oqYRzv3Ba9Zrixenb+e0GVM=;
-        b=GwUKBBA89p0DKMIWF1l6Udl1FHZ3exoqxBTLUno3lx2VVoDxFLWyQ/3g/MtXAdOf8o
-         vvq1AaJVISxBhlppK60JtUL+zBwxEJuBrz4hK4WikWePpSn/JkTwjGmLJfnbowbPouU2
-         ZLsoFKf0vUclUsK2radzGm9n14WiZSMOeZIVRqVgebHwRqBFnlqmJ3PQWNNjvdwa/fhI
-         cD49SJQ/Bnl/A0LYpZYw6iT35VjFU93YncadMoRD7N6CsPzb5wjJiQP+6O8CXTtmpgc0
-         xumZhVKN7qjHH0/HwiE9dnnz/r+jRSkEFWL/H3WiRk26Vls0otLJB7Q1U/SyFiMEjDk2
-         p57g==
+        bh=Iij+7sKiWXahR07lD2vqGTEpnXtaPb1qqXMqimdcl2o=;
+        b=pABeRpgBZw6Bu13jG9AQEnfMrWMQJTt2HhcEr2sr/p5bAd25MKegulatcHju+7LhA7
+         dct/QvrxULwgLIx5/xZqAS1d5LC67KVfal11zEl1VZHnTwR0MZeg2H2YSgBEjNoynTzN
+         ehbFW2wwj76svIkRnAmzrC7aCCBFZVuS67DaFrcPrFKBO+KmOr+2MOCdQ0E8kq8x4BX+
+         dTO6k+8cSWIlGjb3OR8v1F/D9oZTEiDr9aeWS2I5rjbIcmxpStpL/qpInGzx1Wc430QU
+         j8OI/4nc7o1AOE07QaobY976AJVYl8cZ0PjaLIN51qjLAD+5nbh0uFZ7+wU6VBkXHpve
+         iYHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=2f5+LhENuIgRVD7KqX19oqYRzv3Ba9Zrixenb+e0GVM=;
-        b=QNk1HdcGJ3Q+JoF5IdTPaaftAZwiyVTL58Ni/EKZVnqqmsRDQLOm3C8NHmpD7mdE+x
-         2r+kyUIg8Y3/VhhLxbJQDoQdc4n9E8LMTPzXKd3Wm223s5Gy7ggmxWOqrr4ZSQCyuIq/
-         ncQ2U7z3/BS6HdATXP69qC1xyBRdhlogCBxaDmkwWAVV9DnnPYfFMI8rgfSFmgiVPsg1
-         G/is9qukM99Vy13m5YQAqw3tfRD/KGcPB/aS0wJoNS+N+BH6axxVHOJRL5P1ZrQrV3Rx
-         bltzGsOpufKSLVdMKVHJvpj5t5jDsQWD+fH70ld3euiA7zImwCgu7PRkfclah0DxqIJf
-         jnVw==
-X-Gm-Message-State: AOAM531SYFP0SFgAjiAl4HnFcDOiOev2UmfThF6G2NkkCKaLNta03f9O
-	3xwNvbp7AJ/JnNccWPtOu5D7PcM+
-X-Google-Smtp-Source: ABdhPJwBrC8Ucy4PGWSph7y22rnAA5CjlcLT6olQxBMicU/12HsOZa6wv011aMicy5S6s3SxY3u2sg==
-X-Received: by 2002:a62:7f92:: with SMTP id a140mr9846563pfd.240.1589899428371;
-        Tue, 19 May 2020 07:43:48 -0700 (PDT)
+        bh=Iij+7sKiWXahR07lD2vqGTEpnXtaPb1qqXMqimdcl2o=;
+        b=HFHAVtGW9dMkUUn/ZJhy9ZtGk8yGghiP1IC1kjNZCNPi14j9Nyrp98IKdi9DE6lPt8
+         yfU/apnxVYxslWq+vXpLPL9KSTFpAxPIAhZh6IWEkdK78BoGcNXkIDagB+wJfQqgWVKb
+         cHvuU4x38ua5/J92F4m/6FTP90KsKWVKRE9iSwdSQ7PrymQIfhlgpnrGGZ1AfSvBh5Gw
+         kvJQpi50AN8VOcEb71CSxouYlrm1bHyOQ8DW1pdUoXK1EISMWq1z8f7MGpqCcS1ZrNaC
+         SShjIzol0L8IJjyJSY00WMhJCqNDZwTfoiRIhgU5wqEruPsrxjqAZUKcxOMx88dcWFhv
+         eEOA==
+X-Gm-Message-State: AOAM531l5sC8FhwHseOtrP5JmIlMV/FF0/digUkg/hV+6uELscpfHQVP
+	1EjV+fjA738TY1WV7Wv2bQmVrPB5
+X-Google-Smtp-Source: ABdhPJxz5qkiBfgMKyLTSwGIEnRX1jkpDsa+scUSe5EYwBEfxdT91c9yp4MmDkG4TuwZ+qM6yl0i1Q==
+X-Received: by 2002:a17:902:bcc4:: with SMTP id o4mr19742479pls.275.1589899430443;
+        Tue, 19 May 2020 07:43:50 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:9de6:6921:ec78:716d])
-        by smtp.gmail.com with ESMTPSA id h3sm2382099pjk.10.2020.05.19.07.43.47
+        by smtp.gmail.com with ESMTPSA id h3sm2382099pjk.10.2020.05.19.07.43.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 19 May 2020 07:43:47 -0700 (PDT)
+        Tue, 19 May 2020 07:43:49 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [dunfell][PATCH 12/18] gtkwave: Disable mime update during install
-Date: Tue, 19 May 2020 07:43:26 -0700
-Message-Id: <20200519144332.12822-12-akuster808@gmail.com>
+Cc: Wang Mingyu <wangmy@cn.fujitsu.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [dunfell][PATCH 13/18] modemmanager: upgrade 1.12.8 -> 1.12.10
+Date: Tue, 19 May 2020 07:43:27 -0700
+Message-Id: <20200519144332.12822-13-akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200519144332.12822-1-akuster808@gmail.com>
 References: <20200519144332.12822-1-akuster808@gmail.com>
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
 
-Its not cross compile safe, and there is a post install step via mime
-bbclass which should take care of it
-
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 6105a7bd4dbb8f02d4c70335b3b3480df5268378)
+(cherry picked from commit 9108bf23cd0fedb1a3fed6800b1abf05c083b49a)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.104.bb | 2 +-
+ .../{modemmanager_1.12.8.bb => modemmanager_1.12.10.bb}         | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.12.8.bb => modemmanager_1.12.10.bb} (95%)
 
-diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.104.bb b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.104.bb
-index 6c06c30aaf..6c22f0e044 100644
---- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.104.bb
-+++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.104.bb
-@@ -18,6 +18,6 @@ RDEPENDS_${PN} += "tk-lib"
- inherit features_check
- ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.8.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.10.bb
+similarity index 95%
+rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.8.bb
+rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.10.bb
+index 47a86b9194..deab6f0466 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.8.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.10.bb
+@@ -14,7 +14,7 @@ DEPENDS = "glib-2.0 libgudev intltool-native libxslt-native"
+ SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz \
+            "
  
--EXTRA_OECONF = "--with-tcl=${STAGING_BINDIR_CROSS} --with-tk=${STAGING_BINDIR_CROSS} --with-tirpc"
-+EXTRA_OECONF = "--with-tcl=${STAGING_BINDIR_CROSS} --with-tk=${STAGING_BINDIR_CROSS} --with-tirpc --disable-mime-update"
+-SRC_URI[sha256sum] = "68b53d0615ba0d3e2bbf386ed029dfe644a6a30a79ab8d85523527bb4e713aff"
++SRC_URI[sha256sum] = "b2b3058bbb72adf98b24707fdbebe58e590644a38145e30d574f685f154bf8aa"
  
- FILES_${PN} = "${bindir} ${datadir}"
+ S = "${WORKDIR}/ModemManager-${PV}"
+ 
 -- 
 2.17.1
 
