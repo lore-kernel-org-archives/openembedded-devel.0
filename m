@@ -1,51 +1,46 @@
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
- by mx.groups.io with SMTP id smtpd.web12.2805.1589911396070819480
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.891.1589924892854808706
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 May 2020 11:03:16 -0700
+ Tue, 19 May 2020 14:48:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@stusta.de header.s=default header.b=rAU5ezut;
- spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=ypzx=7b=stusta.de=bunk@stusta.mhn.de)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49RNz61j4Qz3l;
-	Tue, 19 May 2020 20:03:14 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1589911394;
-	bh=YqzhDiGkUDWmi0PABI4s0YYwWcvxf3uqqB+B+nv8KPQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=rAU5ezut6FT3CbZUdhe0q67/ziMxotRKLhmB/lk2p3jaYAY9YD4KzLcp4nH4np0MS
-	 mJdcVQVrn0Z6dEf9tOEJJvCes/SzXCNLgGWruv/xn/MFxzDfKOElYlJrKpRwH6buwl
-	 PLUp9rgMSHdzvDv/SVTXeo79VTjT2FFLEXVr7GOqLWEwHVjxwGZm7PMpHDINcyXHEt
-	 jooRqqha7E914kb4K4ItLw4PKlQ4bO8rSY1OTp0pt2BRqd0vOSuok9LLDoa162OKir
-	 jFYgiF5D9hF+YCpoTy7UzM0QhlH9csojE+VFnHX6c/iyq+vYaltA7BhyW+/ECzzsBr
-	 edPocgUIxu02DavnSME4GvuTmX+8GxnAO91k4IW3k23DnmyyHJ8c6tSdTrlxG9337U
-	 gtWL//Aqwq1FwYMHQnvooctlBA3S0h8r3h5nvunOKEf4AL5NwOmh/k3HsVG5Ef26S6
-	 oQAVudTeIvt4KGGqnaicDDSq9ww3yOePahIaj0qLi9PNNQzb7Pxg9a8UB56KcKX2pe
-	 weanZmFjAR7xL0JA9fNRH8sc8t5QilXBSTfq/wm2qkgzbYRKlP5hV1mnAotwgSROQy
-	 prwjeUIz0xGQ+p9yYF7ltRYJCLWFzG6NFA+VxgCL8YRRTYjXZo6O9UZ4wCLJt5IxuI
-	 eeuDqBuprnjDYAPeQCBGQk8I=
-Date: Tue, 19 May 2020 21:03:12 +0300
-From: "Adrian Bunk" <bunk@stusta.de>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-oe][PATCH] unicode-ucd: Remove pointless license check
-Message-ID: <20200519180312.GB17566@localhost>
-References: <20200518121021.11057-1-bunk@stusta.de>
- <CAMKF1spFsuS3PTwzT8-m071-Y_DsGVcCdiwAr-Q1Q8qejsfHFg@mail.gmail.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: joe.slater@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 04JLlqSi008056
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 May 2020 14:48:02 -0700
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.40) with Microsoft SMTP Server id 14.3.487.0; Tue, 19 May 2020
+ 14:47:41 -0700
+From: "Joe Slater" <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
+Subject: [meta-networking][PATCH 1/1] postfix: gcc-10
+Date: Tue, 19 May 2020 14:47:41 -0700
+Message-ID: <20200519214741.15068-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spFsuS3PTwzT8-m071-Y_DsGVcCdiwAr-Q1Q8qejsfHFg@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-On Mon, May 18, 2020 at 08:10:21AM -0700, Khem Raj wrote:
->=20
-> Isn=E2=80=99t there any other file in archive to checksum ?
-> If not perhaps add one or compare against the MIT template from license=
-s
-> from OE-core having no entry can trip post processing tools
+Add -fcommon to CCARGS to avoid multiple definition errors for uninitialized variables.
 
-I've sent a new version that adds a local copy of the license.
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
+---
+ meta-networking/recipes-daemons/postfix/postfix.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-cu
-Adrian
+diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
+index 4b9940cc7..a8d55a6c9 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix.inc
++++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+@@ -61,7 +61,7 @@ export CCARGS-sasl_class-native = ""
+ export AUXLIBS-sasl_class-native = ""
+ 
+ # PCRE, TLS support default
+-export CCARGS  = "${CFLAGS} -DHAS_PCRE -DUSE_TLS -I${STAGING_INCDIR}/openssl ${CCARGS-ldap} ${CCARGS-sasl} ${CCARGS-nonis}"
++export CCARGS  = "${CFLAGS} -fcommon -DHAS_PCRE -DUSE_TLS -I${STAGING_INCDIR}/openssl ${CCARGS-ldap} ${CCARGS-sasl} ${CCARGS-nonis}"
+ export AUXLIBS = "-lpcre -lssl -lcrypto ${AUXLIBS-sasl} ${AUXLIBS-ldap}"
+ export POSTCONF = "${STAGING_DIR_NATIVE}${sbindir_native}/postconf"
+ 
+-- 
+2.26.2
+
