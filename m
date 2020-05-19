@@ -1,93 +1,93 @@
-Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com [209.85.216.66])
- by mx.groups.io with SMTP id smtpd.web10.12996.1589899423173925404
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.web11.12940.1589899424067699657
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 May 2020 07:43:43 -0700
+ Tue, 19 May 2020 07:43:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=WXY0xZ/4;
- spf=pass (domain: gmail.com, ip: 209.85.216.66, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f66.google.com with SMTP id k7so1450571pjs.5
-        for <openembedded-devel@lists.openembedded.org>; Tue, 19 May 2020 07:43:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=KJn6i4jl;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id r22so6495196pga.12
+        for <openembedded-devel@lists.openembedded.org>; Tue, 19 May 2020 07:43:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=KNiEoasWRNmaeQH/0XHgNeC6hn4ALAYpgijy9sVxLfQ=;
-        b=WXY0xZ/4BvOQeiTFFIUlTufbsfkNverWeF9EZ9h6mG4PZ6YJWe83DxnahBrbwFfNby
-         8c1AAA3e2VcLUw5MAm2TiT7dLHi7Rv3k2Vpb8XB0CFmXIMjVMizMyJt9uIO3SD7Xzzaz
-         Ue1Rjyy9ZQlfmiXdo8LMpldRyX94Zz8c5mvsRGpihVh1GbCXZcpSC+WPtMbHiP/UQSDP
-         RzSs5n7VnZ18SVw3oENZPW7cjQWuR5g7ktygBml2L6r/Iypk5Bf93XMThfe+zxJqm7ga
-         EIGTgtVt58DgFBYAu+Te+kh4Eugm/BEbNNB4ZdJV+Q0eIFK9JjxG+GV6IKKol2J1PmBZ
-         fACA==
+        bh=+H3cw+Q2+wUCWT1lgFpzBqw1Af/ibu2tD3oS0G8t/5U=;
+        b=KJn6i4jlAAXEJm7Ck0tfVorbvsLi3yJDUCP6rWjglq6JweQTrjqCxnRnk8xKmMYBDk
+         MP2aKHlQEtcZ0WaMrRXLGt7c6ZQWv6ciSrTtNoBx8nAeN/yRrg6euz0vuwCThSPHNODe
+         LNMJx6r3FOb0K7+XbrIvgnFkP+Z59NckopZ6jtkXiT/DoF7fHAO+wkjvLZqBI39Mgqby
+         +j9aS2cfvXH90wwQLAHxSt7vs0oF/gGKVm5kUFKfqkI+kM40gyHcCoB8mt6vwf5iKFXl
+         t9MUknEnM108OQkHu7R86WM/InPvirhEPbH6VFz8M4v2pQH41vuLaq0YhuRTsOfXFMqt
+         QuHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=KNiEoasWRNmaeQH/0XHgNeC6hn4ALAYpgijy9sVxLfQ=;
-        b=AulhDqbcAuAyrtmMf7fUmraGA8yKD9Ue3o8BedwOJQIaSM0vZLKgQWJ/ujmugqznRO
-         rzepG6NYYZYwZKZOwNft9NaLhsGSWPdC36Jer5RqB5Vuq42bkHgmZ1flKt3FUmeOudIY
-         zDmE25skt1OctGcj6n32Sd1wZXHd/w0gONnH39NtTzHBUSO1bEyU2U07O8Voao/tf+AQ
-         CBcOPf9u8kd7rc/A4fT8s5urtjhU/L+lRq2Lv0ajpQ4KDUN47L9Xfe0kHyv7AC5iUwm9
-         4AkPF9II1PIyS0E14k4G7xhZAq6/ZUQQi6smHPiLcTZCJvb08M/Y0MYvaOLS4NOGsgeN
-         DHqg==
-X-Gm-Message-State: AOAM531CugG4iK0UVWYpgdZHS3JUbiefJYh2VwAuCsjyoVEwnoYHRdF2
-	8EU4AoXCOL17fRf0HgBogM15cBYO
-X-Google-Smtp-Source: ABdhPJx0Y7rU9U64PmUtAbNoCU2XrOAbeXt9zatnSa/AhTHyu2zdlue2lajrvjFZKSTOPr7SOzIw2A==
-X-Received: by 2002:a17:90b:ed2:: with SMTP id gz18mr5588316pjb.22.1589899422347;
-        Tue, 19 May 2020 07:43:42 -0700 (PDT)
+        bh=+H3cw+Q2+wUCWT1lgFpzBqw1Af/ibu2tD3oS0G8t/5U=;
+        b=I/LYOEEaZKfSuhQxLNycPl6/GjBfN9FDNHl/w5dcoaiNliA0fEZXhiel24rF2K9Ttn
+         FV7+N+Hj3HudTZmAo+LrXSM2jcipB+fw7YkLPIWDIbVUENKDQEF1hNmBK2/WvP5nfIf9
+         RfRNUmgvTMpTNqj3BzqwE/r7407YefBJ8OnpHknjlB5mlqBmMAOFAcOBsSJbb2gVnWPc
+         vshSZP7cz7t9buV0IfnSfKlkL3hEvteyNAJgV2MI4M9qs5VAFh8u2C+6tTKx51Y0aBjI
+         NbQvgV/8NHUe+caA/gXHnZIqOe4EdWYmEi7HZnblCbqnQ06LlD7mvi/sJ+oH+OvGIG5Q
+         wJBg==
+X-Gm-Message-State: AOAM530UE3FaveUxJ2bekcn/hi37SEHGJfLbQru/O1xY1+YlOR/O+H/b
+	hTBRq21bnXK4DmSoedQrgZRMGubt
+X-Google-Smtp-Source: ABdhPJzx8kJUnprJiL6j6uWBk6EcbAeM0CQCfQbZIRUfsEMzMxfJdR5zz2mRzO8pNpB4fTZ6Dc9rug==
+X-Received: by 2002:a62:9256:: with SMTP id o83mr7660494pfd.216.1589899423365;
+        Tue, 19 May 2020 07:43:43 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:9de6:6921:ec78:716d])
-        by smtp.gmail.com with ESMTPSA id h3sm2382099pjk.10.2020.05.19.07.43.40
+        by smtp.gmail.com with ESMTPSA id h3sm2382099pjk.10.2020.05.19.07.43.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 19 May 2020 07:43:41 -0700 (PDT)
+        Tue, 19 May 2020 07:43:42 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Trevor Gamblin <trevor.gamblin@windriver.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [dunfell][PATCH 07/18] python3-pyyaml: add python3-netclient to RDEPENDS
-Date: Tue, 19 May 2020 07:43:21 -0700
-Message-Id: <20200519144332.12822-7-akuster808@gmail.com>
+Subject: [dunfell][PATCH 08/18] python3-werkzeug: add python3-logging to RDEPENDS
+Date: Tue, 19 May 2020 07:43:22 -0700
+Message-Id: <20200519144332.12822-8-akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200519144332.12822-1-akuster808@gmail.com>
 References: <20200519144332.12822-1-akuster808@gmail.com>
 
 From: Trevor Gamblin <trevor.gamblin@windriver.com>
 
-pyyaml relies on the base64 module (which is in python3-netclient),
-but it is not in RDEPENDS, so add it:
+werkzeug relies on the logging module, but it is not in RDEPENDS,
+so add it:
 
 |Python 3.8.2 (default, Apr 27 2020, 08:51:00)
 |[GCC 9.3.0] on linux
 |Type "help", "copyright", "credits" or "license" for more information.
-|>>> import yaml
+|>>> import werkzeug
 |Traceback (most recent call last):
 |File "<stdin>", line 1, in <module>
-|File "/usr/lib64/python3.8/site-packages/yaml/_init_.py", line 8, in <module>
-|from .loader import *
-|File "/usr/lib64/python3.8/site-packages/yaml/loader.py", line 8, in <module>
-|from .constructor import *
-|File "/usr/lib64/python3.8/site-packages/yaml/constructor.py", line 14, in <module>
-|import collections.abc, datetime, base64, binascii, re, sys, types
-|ModuleNotFoundError: No module named 'base64'
+|File "/usr/lib64/python3.8/site-packages/werkzeug/_init_.py", line 15, in <module>
+|from .serving import run_simple
+|File "/usr/lib64/python3.8/site-packages/werkzeug/serving.py", line 50, in <module>
+|from ._internal import _log
+|File "/usr/lib64/python3.8/site-packages/werkzeug/_internal.py", line 12, in <module>
+|import logging
+|ModuleNotFoundError: No module named 'logging'
 
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 5fceaa4964fdbc2a76aec6d774843914c57221ee)
+(cherry picked from commit f92b959f4a52ec7596aace92c8d37a370a132f30)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb | 1 +
+ meta-python/recipes-devtools/python/python3-werkzeug_1.0.1.bb | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
-index b5425b8c95..17868a25dd 100644
---- a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
-@@ -13,6 +13,7 @@ SRC_URI[sha256sum] = "e9f45bd5b92c7974e59bcd2dcc8631a6b6cc380a904725fce7bc08872e
- 
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-datetime \
-+    ${PYTHON_PN}-netclient \
- "
- 
- BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_1.0.1.bb b/meta-python/recipes-devtools/python/python3-werkzeug_1.0.1.bb
+index b54399e1c8..58735c1c02 100644
+--- a/meta-python/recipes-devtools/python/python3-werkzeug_1.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-werkzeug_1.0.1.bb
+@@ -26,6 +26,7 @@ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-html \
+     ${PYTHON_PN}-io \
+     ${PYTHON_PN}-json \
++    ${PYTHON_PN}-logging \
+     ${PYTHON_PN}-netclient \
+     ${PYTHON_PN}-netserver \
+     ${PYTHON_PN}-numbers \
 -- 
 2.17.1
 
