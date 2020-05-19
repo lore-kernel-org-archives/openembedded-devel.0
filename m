@@ -1,46 +1,45 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web11.891.1589924892854808706
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+ by mx.groups.io with SMTP id smtpd.web12.1106.1589925618801678611
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 May 2020 14:48:13 -0700
+ Tue, 19 May 2020 15:00:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: joe.slater@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 04JLlqSi008056
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 May 2020 14:48:02 -0700
-Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.40) with Microsoft SMTP Server id 14.3.487.0; Tue, 19 May 2020
- 14:47:41 -0700
-From: "Joe Slater" <joe.slater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
-Subject: [meta-networking][PATCH 1/1] postfix: gcc-10
-Date: Tue, 19 May 2020 14:47:41 -0700
-Message-ID: <20200519214741.15068-1-joe.slater@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@stusta.de header.s=default header.b=Krk09+x6;
+ spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=ypzx=7b=stusta.de=bunk@stusta.mhn.de)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49RVDb3RZRz3r;
+	Wed, 20 May 2020 00:00:15 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1589925615;
+	bh=J7XXrV6IWD5KVYEOqnFK+lCbdkwPVqW5kGm77+6wL64=;
+	h=Date:From:To:Subject:References:In-Reply-To:From;
+	b=Krk09+x6eQ30iy1to8lMoDL2voEMqOAI8mvOLQaedXaFyadgshB8ZVAhg/0qOZqhM
+	 FFzNV/Y4TfuPahA07Jz0X2BY7wGyOtE1bIN2nBK8wlTO53PQi7lp3itLqxZ+VP2kbG
+	 Q2VcMZGHcy5jvwXoMOCycVAMHCwWJtnjpx5qkxNXRPltplmIPxJyXcDgi38XDzTrM6
+	 khv9mo/CgSujgNJ1Rvw6eYVf1fhkIXwkQxJvnDXVU2aifKxSZos2prVCvw4opwDTVn
+	 aLzlSDmT2iUgHNR3XxSH9Tg4V8+AmVn2FkipmA0HBfD6NfGQiAy7bzLYo2vOLHvqsa
+	 dUdIsbERKxgh9maTqY/nhQ6joNOlys66ETYksJ6A4xvaUI6pYH+M0tiHOW+d4VbwNm
+	 LKbsB9aE4p8v6zRAN6AGvFYweBMNNeCV938765WjQEI6JObLuC7yDXdt42aJDK/5zY
+	 6dQdRgWGAI3+Dwr3uk/yloiMGtg905MQn+j7yZ6N/fhlfh9bxkuu66KCy/WJXBMClL
+	 EiRUdW7DabxNN0pm+b83pvB+txNMHIlxfAz1q7DO21Schlm6o1U0XhNN1aQEOrELTm
+	 ZsVQ3G3kI8u6VZqJwDv89xq2qd6ReR+485/r0L8vUVxkqROcmzYIk7ADEurug8BMNp
+	 Eep2wf/ae1mINgzEhivqSlhU=
+Date: Wed, 20 May 2020 01:00:09 +0300
+From: "Adrian Bunk" <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org,
+	Khem Raj <raj.khem@gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] unicode-ucd: Stop broken license downloading
+Message-ID: <20200519220009.GA31915@localhost>
+References: <16107FFC59C1A7DD.18971@lists.openembedded.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+In-Reply-To: <16107FFC59C1A7DD.18971@lists.openembedded.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Add -fcommon to CCARGS to avoid multiple definition errors for uninitialized variables.
+Hi Khem,
 
-Signed-off-by: Joe Slater <joe.slater@windriver.com>
----
- meta-networking/recipes-daemons/postfix/postfix.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+it seems some kind of dos2unix was run when you applied my patch,
+which changed the license hash.
 
-diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index 4b9940cc7..a8d55a6c9 100644
---- a/meta-networking/recipes-daemons/postfix/postfix.inc
-+++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-@@ -61,7 +61,7 @@ export CCARGS-sasl_class-native = ""
- export AUXLIBS-sasl_class-native = ""
- 
- # PCRE, TLS support default
--export CCARGS  = "${CFLAGS} -DHAS_PCRE -DUSE_TLS -I${STAGING_INCDIR}/openssl ${CCARGS-ldap} ${CCARGS-sasl} ${CCARGS-nonis}"
-+export CCARGS  = "${CFLAGS} -fcommon -DHAS_PCRE -DUSE_TLS -I${STAGING_INCDIR}/openssl ${CCARGS-ldap} ${CCARGS-sasl} ${CCARGS-nonis}"
- export AUXLIBS = "-lpcre -lssl -lcrypto ${AUXLIBS-sasl} ${AUXLIBS-ldap}"
- export POSTCONF = "${STAGING_DIR_NATIVE}${sbindir_native}/postconf"
- 
--- 
-2.26.2
-
+cu
+Adrian
