@@ -1,74 +1,68 @@
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com [209.85.222.196])
- by mx.groups.io with SMTP id smtpd.web12.1149.1590006764639547358
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.web10.847.1590010451591029905
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 May 2020 13:32:45 -0700
+ Wed, 20 May 2020 14:34:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=hqhrk+Cu;
- spf=pass (domain: ossystems.com.br, ip: 209.85.222.196, mailfrom: domarys.correa@ossystems.com.br)
-Received: by mail-qk1-f196.google.com with SMTP id i5so4963372qkl.12
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2020 13:32:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pHuUz+ck;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id c75so2066699pga.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2020 14:34:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id;
-        bh=0jAwGjXJ33ZQuTCtRSTBpuhDMMkr4km6Sf0cBA3jHhY=;
-        b=hqhrk+CufTztHzHq96K5SzJ0a5Nyik9apa2qHLgPPR4gxyXk77teKR0nJvO+KGcaiU
-         JvBjzxI6bx7skMMJaVSmtH6IwCrqa9AmDrTeBxE5BMGZginEmQ+kd3jnfGHneZPTa94U
-         JqXFBcoSws99PqGiS7BDOvycMxD5UEsH2GMLpdiLRUB6yRgbVQ2jbJb9ZwWpJ+LN8jbq
-         tMGXz0yjYYW9K7B994T2e2BSwjcAcvzrjgsIkVQ0gbAOyhFp8tiFp6hTqCJ/rlNJPc6V
-         GC6G/CuaRAddGL79//WUpcUqCEu7XBtS3knNPFVnesF1wNvmbPSHq/T5zlG8QjjkgJBP
-         NRZg==
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=laBAahZER+HiPLrNyukOtr17tDgRBwp8OyYPIoAswzw=;
+        b=pHuUz+ckJ0//VD8g4ll58j3S5+1sU6EpFbzJvNR+hJ84e0VprumsgitnmdKutyPOZW
+         Kr4PgG8RPSGL8ZrR7LUzfzWC+J2Ntx5UP/hwCTt3lO+NpomBOyt/z4jWeY2YU4h5Hy5r
+         PN9ZsUVx9C1tf8B6KLkux3k2o0DiSlUsYFRXQOcCKOTGLSJp9c+a7xvg3mTJfut1Gm6i
+         GQb1kyQSoRoJd5ynKgfFBO9Yx2JGYXyjX8mC7mVCzVnSpXDs0B7XSbWYM36zaa5VEtbh
+         9vShegRGDuugLoPGDwsczk2uObsBKeLhqUki28klXVs1HjbFgELWMzbfGQFJm/1/XNXb
+         pl8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=0jAwGjXJ33ZQuTCtRSTBpuhDMMkr4km6Sf0cBA3jHhY=;
-        b=Ia609EStqGAVnhgiG0odiL/JUveXHBUsNBDTmMSl1sC/4z5qqM75UOVyd60mVjfKqI
-         y/z5limklt9kasSHmA6FYuM/siTlxKxEC5CxhUubOEE8LHkhUfzk6gZg5FAONrMrWs47
-         +ZCmEi+DPD+dMmQd8Lqq1L7lANZAyBhfWKuGdcTIylo18vcnbsZBI/EYmV5Qd1grWudk
-         yNKNDHMQbEObVlxEQGNSybBaw3xQ/hgHejheL8N9hZ8DLBpSBSg0SkwaRduoV+Yv0PYd
-         GyXsPP8me5stnxOxhiZU3sjBT3YfwJBWy7ofUAafSVVdEn5XeJqQAR3lmFTJ/yoj05GB
-         IYsg==
-X-Gm-Message-State: AOAM532FKxIf5DKCICFoHBxU2g6dr8DIFeWad47UUQm7WwG2LttN2hP5
-	QRF7k5p5ccC0xKu34G1d+uidWfRTk4s=
-X-Google-Smtp-Source: ABdhPJy6E0U3/zrAFVaT0qunujtwSoWwxYLL5X/8GrMZpb0MX0xJ/LmQ18tLCG7/SNDLfYmDGtWQRg==
-X-Received: by 2002:a37:78c1:: with SMTP id t184mr6678642qkc.213.1590006763724;
-        Wed, 20 May 2020 13:32:43 -0700 (PDT)
-Return-Path: <domarys.correa@ossystems.com.br>
-Received: from Monster.domain.name ([2804:7f4:c195:1db7:2dc9:bb48:7a95:b828])
-        by smtp.gmail.com with ESMTPSA id l133sm3140178qke.105.2020.05.20.13.32.42
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=laBAahZER+HiPLrNyukOtr17tDgRBwp8OyYPIoAswzw=;
+        b=aOmWF8LOpFV2b+jpu6lINdrPVrPQDoITLytXPa1LgNIHeNQTRsyy1bjUbevvMv4pYR
+         P/Mo5qzx0bfBn0U+7rFL0UjBZg/bUHF9igy2HLOJod7UL073DWdET7yE/bfOaRruTaGk
+         PIG3FqdJyqFJ8jPaaA1TpbQyfRRX5hgsqOoA+LufjUO+rAmrAzrbCAG56k5m1oG+WvXX
+         Nf1e0X5IdjgXYDc1eZJ5UZq5fs6ZGvf/1xhszm/x3DTFkCcYJ7c1ufsPXpa+pFkD97ZX
+         hxl6ZWVKNZQAl24P/gdLL2fD/uHcUIA0RGB7YTuZ7l+OtLWaMzUpcHpjWj3QTg83Excv
+         LZZw==
+X-Gm-Message-State: AOAM530FxDbALCr08TI2uXHLLdGQquSBNC29fV1u3NZ8UgaynnUh2A5b
+	RvS4UmEdAZLJlGEVeJ/6iigoFB4qgWI=
+X-Google-Smtp-Source: ABdhPJzAVDAPeOfn0qrRCyXr5qssiAhzXMBLhHCHWqRM9YzKDnyNS4yDANFw+FWhupGrRTaDkZP/jw==
+X-Received: by 2002:a63:3c0a:: with SMTP id j10mr6035282pga.35.1590010450778;
+        Wed, 20 May 2020 14:34:10 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e62a])
+        by smtp.gmail.com with ESMTPSA id t188sm2608786pgc.3.2020.05.20.14.34.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 May 2020 13:32:43 -0700 (PDT)
-From: "Domarys Correa" <domarys.correa@ossystems.com.br>
+        Wed, 20 May 2020 14:34:10 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Domarys Correa <domarys.correa@ossystems.com.br>
-Subject: [PATCH] python3-ansicolors: Add recipe version 1.1.8
-Date: Wed, 20 May 2020 17:32:17 -0300
-Message-Id: <20200520203217.26010-1-domarys.correa@ossystems.com.br>
-X-Mailer: git-send-email 2.17.1
+Cc: Adam Miartus <adam.miartus@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] toybox: rename to prepare version bump
+Date: Wed, 20 May 2020 14:34:07 -0700
+Message-Id: <20200520213408.140096-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.26.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
+From: Adam Miartus <adam.miartus@gmail.com>
+
+Signed-off-by: Adam Miartus <adam.miartus@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/python3-ansicolors_1.1.8.bb               | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-ansicolors_1.1.8.bb
+ meta-oe/recipes-core/toybox/{toybox_0.7.5.bb => toybox_0.8.2.bb} | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/recipes-core/toybox/{toybox_0.7.5.bb => toybox_0.8.2.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ansicolors_1.1.8.bb b/meta-python/recipes-devtools/python/python3-ansicolors_1.1.8.bb
-new file mode 100644
-index 000000000..9ba710cb7
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-ansicolors_1.1.8.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "Add ANSI colors and decorations to your strings"
-+
-+LICENSE = "ISC"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=aef5566ac4fede9815eccf124c281317"
-+
-+SRC_URI[sha256sum] = "99f94f5e3348a0bcd43c82e5fc4414013ccc19d70bd939ad71e0133ce9c372e0"
-+
-+PYPI_PACKAGE_EXT = "zip"
-+
-+inherit pypi setuptools3
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-core/toybox/toybox_0.7.5.bb b/meta-oe/recipes-core/toybox/toybox_0.8.2.bb
+similarity index 100%
+rename from meta-oe/recipes-core/toybox/toybox_0.7.5.bb
+rename to meta-oe/recipes-core/toybox/toybox_0.8.2.bb
 -- 
-2.17.1
+2.26.2
 
