@@ -1,109 +1,119 @@
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web12.15488.1589989336462710720
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+ by mx.groups.io with SMTP id smtpd.web10.2770.1589997928556309344
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 May 2020 08:42:16 -0700
+ Wed, 20 May 2020 11:05:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=oLHGXKc1;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id a13so1481687pls.8
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2020 08:42:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:references:from:message-id:date:user-agent:mime-version
-         :in-reply-to:content-language:content-transfer-encoding;
-        bh=PjZmW3t8POxcmomC6kjyZvZ3pc54tW5+O09CV4F5/ps=;
-        b=oLHGXKc1D9n+t9QeiPC6dFYPES7sHF5Yvkae+NTiMJi8rCQSZV4LEbcYAkCAKVfuU3
-         GTbwrqVXKhkGWKbiEP9CqghCzDevzoVp/1RUHxT2t1gUhjZyb9U0JdIcPDM4RCbl61Zs
-         RcWSLOalc0SZVXgKy/uFhmS6fw+wjBD3sNjKHF2gacTpHXwoJHedYd9LZWPY39DRylnH
-         JoJ5RPSnwzRYKay7z2XRvNeOQ5AtXU8fwXY8ouMnaEwGy/KyPHS72TpvdK0mTB4d7zUh
-         xHZG+7Np2vUjhHokqTSmErfoVQd0y6oAhQnK6wLIrPuXyWx2v+DJGwgCqkPzlZl3qvmO
-         r9Hg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=PjZmW3t8POxcmomC6kjyZvZ3pc54tW5+O09CV4F5/ps=;
-        b=I4c4AcYOck2a1Qz68PB3rIzlLbQRfe7PLStajpZYMkBNETyBqCxPuANec/VuqLZfA/
-         fUZzD5Lf1heUbHTvfPJfCpSMRuWxYnFOGV0bcvXRM6Kj6YfysgQX6FyuXmt+q5WAqhzJ
-         InfNbobTPPoj4VSHe5YVwGcJ1iP8qJRDaVhWWpW829sgi10NsTh4xjT77CYND+gSIVIo
-         ErYBIVINO9m7OojW+d1k+t2w90UtAP5hQ0F8bhA9LyZiCPBAiRdAn+WcPmXE5cjtsT/n
-         w6f/9msxYFqnp/TuHavG7S9iKxXRyF9EV+PxvLvQK5oCDNyCRi5Aeku90/YzUpiX5VW+
-         4XNg==
-X-Gm-Message-State: AOAM532wRQSPLUX869IxZi4w6+QiQZt8AxjiTyQ1bUJvu5BKZ5An3Bs+
-	QVJI9giZBbABWvayOpsqeraspWwZMvE=
-X-Google-Smtp-Source: ABdhPJxqN2puQ4rZfmwKTMo9PJuEVm9g6MKjbHaBNorFZf1jXf33jryTutqZm/a0mL3aNynltc479g==
-X-Received: by 2002:a17:902:7488:: with SMTP id h8mr5294497pll.128.1589989335546;
-        Wed, 20 May 2020 08:42:15 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:4e0:2911:7230:fac5:7fd8? ([2601:646:9200:4e0:2911:7230:fac5:7fd8])
-        by smtp.gmail.com with ESMTPSA id m12sm2380093pjs.41.2020.05.20.08.42.14
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 20 May 2020 08:42:14 -0700 (PDT)
-Subject: Re: [oe] [meta-python][PATCH v2] python3-iso8601: add python3-numbers to RDEPENDS
+ dkim=pass header.i=@stusta.de header.s=default header.b=kPNlCh5c;
+ spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=s9d8=7c=stusta.de=bunk@stusta.mhn.de)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49S0z86bDpz4c
+	for <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2020 20:05:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1589997925;
+	bh=ItoxJoAO5WCD5p+5/VbsvO2aIqOVFMZeqSKR5HZesgQ=;
+	h=From:To:Subject:Date:From;
+	b=kPNlCh5cLc+nF+0lJNGcWltBGTI7ns+3TLW1FUGyXB8f/GYZzVadw+Kn0rEuw7qKq
+	 u4VsSy1EZ4LGqqFZlZuZ0xBSTIKI4qIDkSjE/jGg/0jThxA8meq9OcobFppZys5fyM
+	 fxZ+h6dAhtDxvg2O8PqbrQwPRJNA4X12z5YP0mqGAchXMONl8Z0+LSpevXOAC0Pdmq
+	 1HKUmGxMB7c5pvm0GHcN5EH4VwZ6M7+/w7kpbDDQQkFsSrB/z4JLEJG2ZKd9MBGzfs
+	 Ykg7QxTfCTUYIqQ+F9+QGLqBdCzHzqCx5nImRfajnHS0g3zcspqTTErcx5xlAfti2M
+	 eLuFUaNk+5sxVwdR1WDZzMIMEDkmjJuUlvld5jJrOY50V/7f+5AhWp6OE5zEwhq2tY
+	 qQw/j6UwHK37+RXAlYF8sQExbHXWyZ907TPlsFwd5cbpX1SqeyccO+5bmXOnByFqJv
+	 muBp5/bKCuKm49bnfxg7Q3dmFxs/vPk4Qfq+ubMEvZB9Xanz8nUjogG1jO3ytFGeDu
+	 So9quuMsXZrGrZ8zyIXWM3Wzp385otucVmGfCQoDVcM+hIj2BANAofaPPwXvl/+Ze9
+	 4geQtiPRcEn+oFQkgb8Fdm0e+LxkjB9mRyLKeLdIv9F7Jf8MDghFJcN+K6Ez9LHMfh
+	 zWgooGM471z15Lw66Oi5BQUs=
+From: "Adrian Bunk" <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-References: <160A5C4D5532F28F.26752@lists.openembedded.org>
- <34a335af-0e47-1efd-f0bf-db2da2702852@windriver.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Message-ID: <bf8a8b4a-36cc-3b5d-fc51-72688dc4802f@gmail.com>
-Date: Wed, 20 May 2020 08:42:13 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.8.0
-MIME-Version: 1.0
-In-Reply-To: <34a335af-0e47-1efd-f0bf-db2da2702852@windriver.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Subject: [meta-networking][PATCH] postfix: Upgrade 3.4.10 -> 3.4.12
+Date: Wed, 20 May 2020 21:05:19 +0300
+Message-Id: <20200520180519.21295-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
 
+Remove patch applied upstream.
+Manual -fcommon is no longer necessary.
 
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ ...ure-with-glibc-2.30-due-to-dropped-R.patch | 37 -------------------
+ .../recipes-daemons/postfix/postfix.inc       |  2 +-
+ .../{postfix_3.4.10.bb => postfix_3.4.12.bb}  |  3 +-
+ 3 files changed, 2 insertions(+), 40 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/postfix/files/0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch
+ rename meta-networking/recipes-daemons/postfix/{postfix_3.4.10.bb => postfix_3.4.12.bb} (80%)
 
-On 5/20/20 7:13 AM, Trevor Gamblin wrote:
-> Bump. I don't think this patch got picked up?
-> 
+diff --git a/meta-networking/recipes-daemons/postfix/files/0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch b/meta-networking/recipes-daemons/postfix/files/0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch
+deleted file mode 100644
+index 22adaff72..000000000
+--- a/meta-networking/recipes-daemons/postfix/files/0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch
++++ /dev/null
+@@ -1,37 +0,0 @@
+-From 8b3792830f4930fee7fbb00c854d9766f2b74dca Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 27 Jul 2019 11:35:38 -0700
+-Subject: [PATCH] Fixed build failure with glibc 2.30 due to dropped
+- RES_INSECURE1/2 macros
+-
+-see [1]
+-
+-[1] https://sourceware.org/git/?p=glibc.git;a=commit;h=333221862ecbebde60dd16e7ca17d26444e62f50
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/dns/dns_str_resflags.c | 6 ++++++
+- 1 file changed, 6 insertions(+)
+-
+-diff --git a/src/dns/dns_str_resflags.c b/src/dns/dns_str_resflags.c
+-index 5f2cce5..df32345 100644
+---- a/src/dns/dns_str_resflags.c
+-+++ b/src/dns/dns_str_resflags.c
+-@@ -60,10 +60,16 @@ static const LONG_NAME_MASK resflag_table[] = {
+-     "RES_DEFNAMES", RES_DEFNAMES,
+-     "RES_STAYOPEN", RES_STAYOPEN,
+-     "RES_DNSRCH", RES_DNSRCH,
+-+#ifdef RES_INSECURE1
+-     "RES_INSECURE1", RES_INSECURE1,
+-+#endif
+-+#ifdef RES_INSECURE2
+-     "RES_INSECURE2", RES_INSECURE2,
+-+#endif
+-     "RES_NOALIASES", RES_NOALIASES,
+-+#ifdef RES_USE_INET6
+-     "RES_USE_INET6", RES_USE_INET6,
+-+#endif
+- #ifdef RES_ROTATE
+-     "RES_ROTATE", RES_ROTATE,
+- #endif
+diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
+index a8d55a6c9..4b9940cc7 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix.inc
++++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+@@ -61,7 +61,7 @@ export CCARGS-sasl_class-native = ""
+ export AUXLIBS-sasl_class-native = ""
+ 
+ # PCRE, TLS support default
+-export CCARGS  = "${CFLAGS} -fcommon -DHAS_PCRE -DUSE_TLS -I${STAGING_INCDIR}/openssl ${CCARGS-ldap} ${CCARGS-sasl} ${CCARGS-nonis}"
++export CCARGS  = "${CFLAGS} -DHAS_PCRE -DUSE_TLS -I${STAGING_INCDIR}/openssl ${CCARGS-ldap} ${CCARGS-sasl} ${CCARGS-nonis}"
+ export AUXLIBS = "-lpcre -lssl -lcrypto ${AUXLIBS-sasl} ${AUXLIBS-ldap}"
+ export POSTCONF = "${STAGING_DIR_NATIVE}${sbindir_native}/postconf"
+ 
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.4.10.bb b/meta-networking/recipes-daemons/postfix/postfix_3.4.12.bb
+similarity index 80%
+rename from meta-networking/recipes-daemons/postfix/postfix_3.4.10.bb
+rename to meta-networking/recipes-daemons/postfix/postfix_3.4.12.bb
+index d0ef708c5..db5b41bfb 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix_3.4.10.bb
++++ b/meta-networking/recipes-daemons/postfix/postfix_3.4.12.bb
+@@ -13,7 +13,6 @@ SRC_URI += "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
+            file://postfix-install.patch \
+            file://icu-config.patch \
+            file://0001-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
+-           file://0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch \
+            "
+-SRC_URI[sha256sum] = "908a66fc38537a0047e8561e1bc0ef096c53357ffad16d2d728cd4fc8ae56654"
++SRC_URI[sha256sum] = "18555183ae8b52a9e76067799279c86f9f2770cdef3836deb8462ee0a0855dec"
+ UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.3(\.\d+)+).tar.gz"
+-- 
+2.17.1
 
-
-Please resend, so patchwork catches it again
-
-> On 4/29/20 2:01 PM, Trevor Gamblin wrote:
->> Sending v2 to fix commit message.
->>
->> python3-iso8601 relies on the decimal module from the standard
->> library, but it is not in iso8601's RDEPENDS:
->>
->> root@qemux86-64:~# python3
->> Python 3.8.2 (default, Feb 25 2020, 10:39:28)
->> [GCC 9.3.0] on linux
->> Type "help", "copyright", "credits" or "license" for more information.
->>>>> import iso8601
->> Traceback (most recent call last):
->>    File "<stdin>", line 1, in <module>
->>    File "/usr/lib/python3.8/site-packages/iso8601/__init__.py", line 1, in <module>
->>      from .iso8601 import *
->>    File "/usr/lib/python3.8/site-packages/iso8601/iso8601.py", line 12, in <module>
->>      from decimal import Decimal
->> ModuleNotFoundError: No module named 'decimal'
->>
->> Add it to RDEPENDS to fix the import error.
->>
->> Signed-off-by: Trevor Gamblin<trevor.gamblin@windriver.com>
->> ---
->>   meta-python/recipes-devtools/python/python-iso8601.inc | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/meta-python/recipes-devtools/python/python-iso8601.inc b/meta-python/recipes-devtools/python/python-iso8601.inc
->> index 61e9abbac..b6e021c5b 100644
->> --- a/meta-python/recipes-devtools/python/python-iso8601.inc
->> +++ b/meta-python/recipes-devtools/python/python-iso8601.inc
->> @@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "49c4b20e1f38aa5cf109ddcd39647ac419f928512c869dc01d5c7098ed
->>   
->>   RDEPENDS_${PN} += "\
->>       ${PYTHON_PN}-datetime \
->> +    ${PYTHON_PN}-numbers \
->>   "
->>   
->>   BBCLASSEXTEND = "native nativesdk"
->>
-> 
-> 
-> 
