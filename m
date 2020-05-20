@@ -1,188 +1,282 @@
-Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
- by mx.groups.io with SMTP id smtpd.web12.3759.1589934858747941971
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com [209.85.160.196])
+ by mx.groups.io with SMTP id smtpd.web10.7353.1589953059737673036
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 May 2020 17:34:21 -0700
+ Tue, 19 May 2020 22:37:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@axis.com header.s=axis-central1 header.b=ZmEOHuUf;
- spf=pass (domain: axis.com, ip: 195.60.68.18, mailfrom: peter.kjellerstedt@axis.com)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=caNDXNSb;
+ spf=pass (domain: gmail.com, ip: 209.85.160.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f196.google.com with SMTP id n22so1628805qtv.12
+        for <openembedded-devel@lists.openembedded.org>; Tue, 19 May 2020 22:37:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; l=10852; q=dns/txt; s=axis-central1;
-  t=1589934859; x=1621470859;
-  h=from:to:subject:date:message-id:references:in-reply-to:
-   content-transfer-encoding:mime-version;
-  bh=6Txc/amDgZ8kscaqZHBzZrwlsx7z66hj5If0muwo7J8=;
-  b=ZmEOHuUfs9ZqnR5wNjJqEPclCEpwBcO6m7xHqquEpIR81legQUck3DGG
-   VbO5DBgrwUpePsOcvnIf57SxneFa1XPlthfsJoquS1OA6xvMJNCWvRgWz
-   JRYDCRzi9cakZQ8cMKDDq4Q4SSDHj3LOqdr3MXb44AXe7F3Uzaw3xM0ck
-   e7Bore6nG7IeXMr3IdK5WeCeCzfwnzq7zixuANZse7jMgV6ZqJQCV6Iov
-   3K03aqsI4qT8PlBpl3QutPglqW/XJw35TrRhRuZVq8V7cBcMGWyZQCuz7
-   2HItQx+wumTv/GIgyd3o9A0M2NaaqUMvUph58kzrYEqODXvwhNARmpLz3
-   w==;
-IronPort-SDR: nMVdF5Xhz+rIIq+KYbZJZpeIzvbLjTlLJ9dlcRBSBnI41Njds0e5yv2FeCFqmB03YnUM/jFU/v
- CXrDJx0ES7owknWnVFsHhSzB3mPK+ZU2RqLCAVGPnlNvQ/5TBb0qiNVBSvqy4Cs/28qK4KyCkR
- 1hz+J7uDzRPV8diJmdzV0g9ROo+kAfjCPRwmlJkIGv8u45U5CcB11WSz+q6c0cRQeVeaqhjLBz
- uCT3Si612Q4Nw0QDFEMZbrla+ItvD5XnGUFWmwqZW7dd+j2TCWjM1HCAfWMDpETVtaqwQrXTIN
- 1mQ=
-X-IronPort-AV: E=Sophos;i="5.73,411,1583190000"; 
-   d="scan'208";a="8654842"
-From: "Peter Kjellerstedt" <peter.kjellerstedt@axis.com>
-To: Adrian Bunk <bunk@stusta.de>, "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][PATCH v2] unicode-ucd: Stop broken license downloading
-Thread-Topic: [oe] [meta-oe][PATCH v2] unicode-ucd: Stop broken license
- downloading
-Thread-Index: AQHWLiuJXSB40lwwYEGDzg5e3zt2XaiwHGMQ
-Date: Wed, 20 May 2020 00:34:14 +0000
-Message-ID: <b01fbc247323422e83f6234c97f5b56c@XBOX03.axis.com>
-References: <20200519221852.30350-1-bunk@stusta.de>
-In-Reply-To: <20200519221852.30350-1-bunk@stusta.de>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=ACiOjE0eCEH3SZF3k7SZNwXV+bfkXt76PUjL7kXh0Cs=;
+        b=caNDXNSbmzJ2FroQ5J1cRzBvBj0AsfiDwQkcFTgpanpoNg0UJ12sATr86z+Z0SCWHk
+         uIkxAl24hpQ9zbTK/bznZveJdeRCAKC8US4zCu2yS3a9R8VOXv2c4OumodGJMgEEoLIK
+         3cPUPvqjRaBw7exC98Q5jAXEpn2WtVn0PODZ1qPg7Xln8d1aBtGF3Vb6Jvo9sMTh8mrQ
+         a6se9nZfE7eY6iyKs7XlbRBemrOWQihI9kNts7bzHxquBcNqz7XvfCVfdq12qkGCizkR
+         3ZnEcJPKDjJ852YUAqBHq6C9LclpR0qxTOiynV03S15DgH0ze1EaVpyFPRyB1EFQbYKK
+         Hnww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=ACiOjE0eCEH3SZF3k7SZNwXV+bfkXt76PUjL7kXh0Cs=;
+        b=I+dW/VHL4CDl+iaFcI4e7HnZB+PCeC2FacHAQPOVyBfisoi6TH7Yf719dAVDihxe+8
+         li1QmPD/X+GSEzP9UGz6tmGCAEko2DswIEIvvznfnFD7Iys5pFN3+44zOOmLtX/c+l9v
+         3apEZ13jnD4hSoDxbhGP5LwpU1AlEEPmCI6lCbUL3/tmwTofBb3oaN7O555O3hHAdJVv
+         1jMEY4mBLNs0BKb9HX+CaXztBuyrdhLZBi/qIRcw2PVBKvizuLMj2nN7zBELilDDw008
+         lwUdUqkopSVxt5Db//8IZPPFyyjKoBJu9wj9rjwUadBqbVfsuUNdyzxmlyg9sm9d0Tcg
+         9fnw==
+X-Gm-Message-State: AOAM530MXOSY+bRfErv/083NlvEa3Q5U4gA9w37AfUINPpOp2cTeOafw
+	xjmEwWa2QDOm6g+eN4aKM4LHQX0kWa5xpp7tZa8=
+X-Google-Smtp-Source: ABdhPJxLhAKaQFfsAwk8XHxsWG9xGotyhb5q46kn1R6tTe5LENjd0+PXKZqHZzrb9faYBalVKlSzcRWHgwH+F0AIpZ0=
+X-Received: by 2002:ac8:4311:: with SMTP id z17mr3423681qtm.316.1589953058619;
+ Tue, 19 May 2020 22:37:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+References: <20200519221852.30350-1-bunk@stusta.de> <b01fbc247323422e83f6234c97f5b56c@XBOX03.axis.com>
+In-Reply-To: <b01fbc247323422e83f6234c97f5b56c@XBOX03.axis.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Tue, 19 May 2020 22:37:12 -0700
+Message-ID: <CAMKF1spgPnHHw6g4_d-L25=kHm2A1e61vyQL4MN3GzkK3kDURQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v2] unicode-ucd: Stop broken license downloading
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Cc: Adrian Bunk <bunk@stusta.de>, 
+	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWxA
-bGlzdHMub3BlbmVtYmVkZGVkLm9yZyA8b3BlbmVtYmVkZGVkLQ0KPiBkZXZlbEBsaXN0cy5vcGVu
-ZW1iZWRkZWQub3JnPiBPbiBCZWhhbGYgT2YgQWRyaWFuIEJ1bmsNCj4gU2VudDogZGVuIDIwIG1h
-aiAyMDIwIDAwOjE5DQo+IFRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZw0KPiBTdWJqZWN0OiBbb2VdIFttZXRhLW9lXVtQQVRDSCB2Ml0gdW5pY29kZS11Y2Q6IFN0
-b3AgYnJva2VuIGxpY2Vuc2UNCj4gZG93bmxvYWRpbmcNCj4gDQo+IFdBUk5JTkc6IHVuaWNvZGUt
-dWNkLTEyLjEuMC1yMCBkb19mZXRjaDogQ2hlY2tzdW0gbWlzbWF0Y2ggZm9yIGxvY2FsIGZpbGUN
-Cj4gL2hvbWUvYnVuay95b2N0b21hc3Rlci95b2N0by10bXAvZG93bmxvYWRzL3VuaWNvZGUub3Jn
-LmxpY2Vuc2UuaHRtbA0KPiBDbGVhbmluZyBhbmQgdHJ5aW5nIGFnYWluLg0KPiBXQVJOSU5HOiB1
-bmljb2RlLXVjZC0xMi4xLjAtcjAgZG9fZmV0Y2g6IFJlbmFtaW5nDQo+IC9ob21lL2J1bmsveW9j
-dG9tYXN0ZXIveW9jdG8tdG1wL2Rvd25sb2Fkcy91bmljb2RlLm9yZy5saWNlbnNlLmh0bWwgdG8N
-Cj4gL2hvbWUvYnVuay95b2N0b21hc3Rlci95b2N0by10bXAvZG93bmxvYWRzL3VuaWNvZGUub3Jn
-LmxpY2Vuc2UuaHRtbF9iYWQtDQo+IGNoZWNrc3VtX2U5ZGQ3ZDQzNWRiMjMyNDFiZTNiZTIxYjVm
-Y2E3MjliNWNmODgzYzhjMDM5YTcwZWEwOTMwMzE0MjBkMDZhYmINCj4gV0FSTklORzogdW5pY29k
-ZS11Y2QtMTIuMS4wLXIwIGRvX2ZldGNoOiBDaGVja3N1bSBmYWlsdXJlIGVuY291bnRlcmVkDQo+
-IHdpdGggZG93bmxvYWQgb2YNCj4gaHR0cHM6Ly93d3cudW5pY29kZS5vcmcvbGljZW5zZS5odG1s
-O25hbWU9bGljZW5zZTtzdWJkaXI9dW5pY29kZS11Y2QtDQo+IDEyLjEuMDtkb3dubG9hZGZpbGVu
-YW1lPXVuaWNvZGUub3JnLmxpY2Vuc2UuaHRtbCAtIHdpbGwgYXR0ZW1wdCBvdGhlcg0KPiBzb3Vy
-Y2VzIGlmIGF2YWlsYWJsZQ0KPiANCj4gVGhpcyBkb3dubG9hZGVkIGEgbGljZW5zZSBmaWxlIGZy
-b20gdXBzdHJlYW0uDQo+IFRoZSB1cHN0cmVhbSBmaWxlIGRpZCBub3QgbWF0Y2ggKGNvcHlyaWdo
-dCB5ZWFyIGNoYW5nZWQpLg0KPiBBIHN0YWxlIGNvcHkgd2FzIGRvd25sb2FkZWQgZnJvbSBhIG1p
-cnJvciBpbnN0ZWFkIGFuZCBjaGVja2VkLg0KPiBUaGUgc3RhbGUgZmlsZSB3aXRoIGtub3duIGNv
-bnRlbnRzIG5ldmVyIGNoYW5nZXMuDQo+IA0KPiBSZXBsYWNlIHdpdGggYSBkdW1teSBjaGVjayBv
-biBhIGxvY2FsIGNvcHkgb2YgdGhlIGxpY2Vuc2UgZmlsZS4NCg0KVGhpcyBkZWZlYXRzIHRoZSB3
-aG9sZSBwb2ludCBvZiBMSUNfRklMRVNfQ0hLU1VNLCB3aGljaCBpcyB0byBkZXRlY3QgDQpmdXR1
-cmUgY2hhbmdlcyB0byB0aGUgZmlsZXMgaW5jbHVkZWQgaW4gaXQuIElmIGEgbG9jYWwgY29weSBp
-cyB1c2VkLCANCml0IHdpbGwgbmV2ZXIgY2hhbmdlIGV2ZW4gaWYgdGhlIHJlYWwgbGljZW5zZSBp
-cyBjaGFuZ2VkIGFuZCB0aGUgDQpjaGFuZ2VkIGxpY2Vuc2Ugd2lsbCBtb3N0IGxpa2VseSBnbyB1
-bm5vdGljZWQuDQoNClRoaXMgbW9yZSBzZWVtcyB0byBiZSBhIHByb2JsZW0gd2l0aCBob3cgdGhl
-IGZldGNoZXIgd29ya3MuIElmIGEgZmlsZSANCmNhbiBiZSBkb3dubG9hZGVkIGZyb20gdGhlIHBy
-aW1hcnkgc291cmNlIGxpc3RlZCBpbiB0aGUgU1JDX1VSSSwgYnV0IA0KaXQgaGFzIHRoZSB3cm9u
-ZyBjaGVja3N1bSwgdGhlbiB0aGF0IHNob3VsZCBub3QgYmUgb3ZlcnJpZGRlbiBieSANCnJldHJp
-ZXZpbmcgdGhlIGZpbGUgZnJvbSBhIG1pcnJvciBpbnN0ZWFkIChhcyBpdCBjYW4gYmUgc3RhbGUp
-LiANCg0KRXhjZXB0IG9mIGNvdXJzZSB0aGluZ3MgYXJlIG5vdCB0aGF0IHNpbXBsZSwgc2luY2Ug
-dGhlIG1pcnJvciBtYXkgaGF2ZSANCmJlZW4gc2V0dXAgZm9yIGV4YWN0bHkgdGhpcyBwdXJwb3Nl
-IHdpdGggYSBiYmFwcGVuZCB0aGF0IGNoYW5nZXMgdGhlIA0KY2hlY2tzdW0gdG8gbWF0Y2ggdGhh
-dCBvZiB0aGUgZmlsZSBvbiB0aGUgbWlycm9yLiBEb2VzIGFueWJvZHkgZG8gc3VjaCANCnRoaW5n
-cz8gKFBlcnNvbmFsbHksIEkgd291bGQgcmF0aGVyIGNoYW5nZSBib3RoIHRoZSBTUkNfVVJJIGFu
-ZCB0aGUgDQpjaGVja3N1bSBpbiB0aGlzIGNhc2UgcmF0aGVyIHRoYW4gcmVseSBvbiBhIG1pcnJv
-ci4pDQoNCi8vUGV0ZXINCg0KPiBMaWNlbnNlIGNoZWNrc3VtIGNoYW5nZWQgZHVlIHRvIGRvczJ1
-bml4IGNvbnZlcnNpb24uDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBBZHJpYW4gQnVuayA8YnVua0Bz
-dHVzdGEuZGU+DQo+IC0tLQ0KPiAgLi4uL3VuaWNvZGUtdWNkL2ZpbGVzL2xpY2Vuc2UuaHRtbCAg
-ICAgICAgICAgIHwgOTggKysrKysrKysrKysrKysrKysrKw0KPiAgLi4uL3VuaWNvZGUtdWNkL3Vu
-aWNvZGUtdWNkXzEyLjEuMC5iYiAgICAgICAgIHwgIDcgKy0NCj4gIDIgZmlsZXMgY2hhbmdlZCwg
-MTAwIGluc2VydGlvbnMoKyksIDUgZGVsZXRpb25zKC0pDQo+ICBjcmVhdGUgbW9kZSAxMDA2NDQg
-bWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvdW5pY29kZS0NCj4gdWNkL2ZpbGVzL2xpY2Vuc2UuaHRt
-bA0KPiANCj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3VuaWNvZGUtdWNk
-L2ZpbGVzL2xpY2Vuc2UuaHRtbA0KPiBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3VuaWNvZGUt
-dWNkL2ZpbGVzL2xpY2Vuc2UuaHRtbA0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAw
-MDAwMDAwMDAuLmEwMjQ0MmFkOQ0KPiAtLS0gL2Rldi9udWxsDQo+ICsrKyBiL21ldGEtb2UvcmVj
-aXBlcy1zdXBwb3J0L3VuaWNvZGUtdWNkL2ZpbGVzL2xpY2Vuc2UuaHRtbA0KPiBAQCAtMCwwICsx
-LDk4IEBADQo+ICs8IWRvY3R5cGUgSFRNTCBQVUJMSUMgIi0vL1czQy8vRFREIEhUTUwgNC4wIFRy
-YW5zaXRpb25hbC8vRU4iPjxodG1sPg0KPiArDQo+ICsNCj4gKw0KPiArPGhlYWQ+DQo+ICsNCj4g
-KzxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0idGV4dC9odG1sOyBjaGFy
-c2V0PXV0Zi04Ij4NCj4gKzxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtTGFuZ3VhZ2UiIGNvbnRl
-bnQ9ImVuLXVzIj4NCj4gKzxtZXRhIG5hbWU9IlZJNjBfZGVmYXVsdENsaWVudFNjcmlwdCIgY29u
-dGVudD0iSmF2YVNjcmlwdCI+DQo+ICs8bWV0YSBuYW1lPSJHRU5FUkFUT1IiIGNvbnRlbnQ9Ik1p
-Y3Jvc29mdCBGcm9udFBhZ2UgMTIuMCI+DQo+ICs8bWV0YSBuYW1lPSJrZXl3b3JkcyIgY29udGVu
-dD0iVW5pY29kZSBTdGFuZGFyZCwgY29weXJpZ2h0Ij4NCj4gKzxtZXRhIG5hbWU9IlByb2dJZCIg
-Y29udGVudD0iRnJvbnRQYWdlLkVkaXRvci5Eb2N1bWVudCI+DQo+ICs8dGl0bGU+VW5pY29kZSBM
-aWNlbnNlIEFncmVlbWVudDwvdGl0bGU+DQo+ICs8bGluayByZWw9InN0eWxlc2hlZXQiIHR5cGU9
-InRleHQvY3NzIg0KPiArDQo+ICtocmVmPSJodHRwOi8vd3d3LnVuaWNvZGUub3JnL3dlYnNjcmlw
-dHMvc3RhbmRhcmRfc3R5bGVzLmNzcyI+DQo+ICsNCj4gKzxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+
-DQo+ICtwcmUgew0KPiArCUZPTlQtRkFNSUxZOiBBcmlhbCwgR2VuZXZhLCBzYW5zLXNlcmlmOw0K
-PiArfQ0KPiArPC9zdHlsZT4NCj4gKw0KPiArDQo+ICs8L2hlYWQ+DQo+ICsNCj4gKw0KPiArPGJv
-ZHkgdGV4dD0iIzMzMDAwMCI+DQo+ICsNCj4gKyAgPHRhYmxlIHdpZHRoPSIxMDAlIiBjZWxscGFk
-ZGluZz0iMCIgY2VsbHNwYWNpbmc9IjAiIGJvcmRlcj0iMCI+DQo+ICsgICAgPHRyPg0KPiArDQo+
-ICsgICAgICA8IS0tIEJFR0lOIENPTlRFTlRTIC0tPg0KPiArDQo+ICsgICAgICA8dGQ+DQo+ICsN
-Cj4gKw0KPiArPGJsb2NrcXVvdGU+DQo+ICs8aDI+PGEgbmFtZT0iTGljZW5zZSI+VU5JQ09ERSwg
-SU5DLiBMSUNFTlNFIEFHUkVFTUVOVCAtIERBVEEgRklMRVMgQU5EDQo+IFNPRlRXQVJFPC9hPjwv
-aDI+DQo+ICsNCj4gKzxwcmU+DQo+ICtTZWUgPGEgaHJlZj0iaHR0cHM6Ly93d3cudW5pY29kZS5v
-cmcvY29weXJpZ2h0Lmh0bWwiPlRlcm1zIG9mIFVzZTwvYT4NCj4gZm9yIGRlZmluaXRpb25zIG9m
-IFVuaWNvZGUgSW5jLidzDQo+ICtEYXRhIEZpbGVzIGFuZCBTb2Z0d2FyZS4NCj4gKw0KPiArTk9U
-SUNFIFRPIFVTRVI6IENhcmVmdWxseSByZWFkIHRoZSBmb2xsb3dpbmcgbGVnYWwgYWdyZWVtZW50
-Lg0KPiArQlkgRE9XTkxPQURJTkcsIElOU1RBTExJTkcsIENPUFlJTkcgT1IgT1RIRVJXSVNFIFVT
-SU5HIFVOSUNPREUgSU5DLidTDQo+ICtEQVRBIEZJTEVTICgiREFUQSBGSUxFUyIpLCBBTkQvT1Ig
-U09GVFdBUkUgKCJTT0ZUV0FSRSIpLA0KPiArWU9VIFVORVFVSVZPQ0FMTFkgQUNDRVBULCBBTkQg
-QUdSRUUgVE8gQkUgQk9VTkQgQlksIEFMTCBPRiBUSEUNCj4gK1RFUk1TIEFORCBDT05ESVRJT05T
-IE9GIFRISVMgQUdSRUVNRU5ULg0KPiArSUYgWU9VIERPIE5PVCBBR1JFRSwgRE8gTk9UIERPV05M
-T0FELCBJTlNUQUxMLCBDT1BZLCBESVNUUklCVVRFIE9SIFVTRQ0KPiArVEhFIERBVEEgRklMRVMg
-T1IgU09GVFdBUkUuDQo+ICsNCj4gK0NPUFlSSUdIVCBBTkQgUEVSTUlTU0lPTiBOT1RJQ0UNCj4g
-Kw0KPiArQ29weXJpZ2h0IMKpIDE5OTEtMjAxOSBVbmljb2RlLCBJbmMuIEFsbCByaWdodHMgcmVz
-ZXJ2ZWQuDQo+ICtEaXN0cmlidXRlZCB1bmRlciB0aGUgVGVybXMgb2YgVXNlIGluDQo+IGh0dHBz
-Oi8vd3d3LnVuaWNvZGUub3JnL2NvcHlyaWdodC5odG1sLg0KPiArDQo+ICtQZXJtaXNzaW9uIGlz
-IGhlcmVieSBncmFudGVkLCBmcmVlIG9mIGNoYXJnZSwgdG8gYW55IHBlcnNvbiBvYnRhaW5pbmcN
-Cj4gK2EgY29weSBvZiB0aGUgVW5pY29kZSBkYXRhIGZpbGVzIGFuZCBhbnkgYXNzb2NpYXRlZCBk
-b2N1bWVudGF0aW9uDQo+ICsodGhlICJEYXRhIEZpbGVzIikgb3IgVW5pY29kZSBzb2Z0d2FyZSBh
-bmQgYW55IGFzc29jaWF0ZWQgZG9jdW1lbnRhdGlvbg0KPiArKHRoZSAiU29mdHdhcmUiKSB0byBk
-ZWFsIGluIHRoZSBEYXRhIEZpbGVzIG9yIFNvZnR3YXJlDQo+ICt3aXRob3V0IHJlc3RyaWN0aW9u
-LCBpbmNsdWRpbmcgd2l0aG91dCBsaW1pdGF0aW9uIHRoZSByaWdodHMgdG8gdXNlLA0KPiArY29w
-eSwgbW9kaWZ5LCBtZXJnZSwgcHVibGlzaCwgZGlzdHJpYnV0ZSwgYW5kL29yIHNlbGwgY29waWVz
-IG9mDQo+ICt0aGUgRGF0YSBGaWxlcyBvciBTb2Z0d2FyZSwgYW5kIHRvIHBlcm1pdCBwZXJzb25z
-IHRvIHdob20gdGhlIERhdGEgRmlsZXMNCj4gK29yIFNvZnR3YXJlIGFyZSBmdXJuaXNoZWQgdG8g
-ZG8gc28sIHByb3ZpZGVkIHRoYXQgZWl0aGVyDQo+ICsoYSkgdGhpcyBjb3B5cmlnaHQgYW5kIHBl
-cm1pc3Npb24gbm90aWNlIGFwcGVhciB3aXRoIGFsbCBjb3BpZXMNCj4gK29mIHRoZSBEYXRhIEZp
-bGVzIG9yIFNvZnR3YXJlLCBvcg0KPiArKGIpIHRoaXMgY29weXJpZ2h0IGFuZCBwZXJtaXNzaW9u
-IG5vdGljZSBhcHBlYXIgaW4gYXNzb2NpYXRlZA0KPiArRG9jdW1lbnRhdGlvbi4NCj4gKw0KPiAr
-VEhFIERBVEEgRklMRVMgQU5EIFNPRlRXQVJFIEFSRSBQUk9WSURFRCAiQVMgSVMiLCBXSVRIT1VU
-IFdBUlJBTlRZIE9GDQo+ICtBTlkgS0lORCwgRVhQUkVTUyBPUiBJTVBMSUVELCBJTkNMVURJTkcg
-QlVUIE5PVCBMSU1JVEVEIFRPIFRIRQ0KPiArV0FSUkFOVElFUyBPRiBNRVJDSEFOVEFCSUxJVFks
-IEZJVE5FU1MgRk9SIEEgUEFSVElDVUxBUiBQVVJQT1NFIEFORA0KPiArTk9OSU5GUklOR0VNRU5U
-IE9GIFRISVJEIFBBUlRZIFJJR0hUUy4NCj4gK0lOIE5PIEVWRU5UIFNIQUxMIFRIRSBDT1BZUklH
-SFQgSE9MREVSIE9SIEhPTERFUlMgSU5DTFVERUQgSU4gVEhJUw0KPiArTk9USUNFIEJFIExJQUJM
-RSBGT1IgQU5ZIENMQUlNLCBPUiBBTlkgU1BFQ0lBTCBJTkRJUkVDVCBPUiBDT05TRVFVRU5USUFM
-DQo+ICtEQU1BR0VTLCBPUiBBTlkgREFNQUdFUyBXSEFUU09FVkVSIFJFU1VMVElORyBGUk9NIExP
-U1MgT0YgVVNFLA0KPiArREFUQSBPUiBQUk9GSVRTLCBXSEVUSEVSIElOIEFOIEFDVElPTiBPRiBD
-T05UUkFDVCwgTkVHTElHRU5DRSBPUiBPVEhFUg0KPiArVE9SVElPVVMgQUNUSU9OLCBBUklTSU5H
-IE9VVCBPRiBPUiBJTiBDT05ORUNUSU9OIFdJVEggVEhFIFVTRSBPUg0KPiArUEVSRk9STUFOQ0Ug
-T0YgVEhFIERBVEEgRklMRVMgT1IgU09GVFdBUkUuDQo+ICsNCj4gK0V4Y2VwdCBhcyBjb250YWlu
-ZWQgaW4gdGhpcyBub3RpY2UsIHRoZSBuYW1lIG9mIGEgY29weXJpZ2h0IGhvbGRlcg0KPiArc2hh
-bGwgbm90IGJlIHVzZWQgaW4gYWR2ZXJ0aXNpbmcgb3Igb3RoZXJ3aXNlIHRvIHByb21vdGUgdGhl
-IHNhbGUsDQo+ICt1c2Ugb3Igb3RoZXIgZGVhbGluZ3MgaW4gdGhlc2UgRGF0YSBGaWxlcyBvciBT
-b2Z0d2FyZSB3aXRob3V0IHByaW9yDQo+ICt3cml0dGVuIGF1dGhvcml6YXRpb24gb2YgdGhlIGNv
-cHlyaWdodCBob2xkZXIuDQo+ICs8L3ByZT4NCj4gKw0KPiArPC9ibG9ja3F1b3RlPg0KPiArDQo+
-ICsNCj4gKw0KPiArICAgICAgPC90ZD4NCj4gKw0KPiArICAgIDwvdHI+DQo+ICsNCj4gKyAgPC90
-YWJsZT4NCj4gKzwvYm9keT4NCj4gKzwvaHRtbD4NCj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVj
-aXBlcy1zdXBwb3J0L3VuaWNvZGUtdWNkL3VuaWNvZGUtdWNkXzEyLjEuMC5iYg0KPiBiL21ldGEt
-b2UvcmVjaXBlcy1zdXBwb3J0L3VuaWNvZGUtdWNkL3VuaWNvZGUtdWNkXzEyLjEuMC5iYg0KPiBp
-bmRleCA4OWFiNTY1Y2UuLmIyOWJiNzg0ZSAxMDA2NDQNCj4gLS0tIGEvbWV0YS1vZS9yZWNpcGVz
-LXN1cHBvcnQvdW5pY29kZS11Y2QvdW5pY29kZS11Y2RfMTIuMS4wLmJiDQo+ICsrKyBiL21ldGEt
-b2UvcmVjaXBlcy1zdXBwb3J0L3VuaWNvZGUtdWNkL3VuaWNvZGUtdWNkXzEyLjEuMC5iYg0KPiBA
-QCAtMSwxOCArMSwxNSBAQA0KPiAgU1VNTUFSWSA9ICJVbmljb2RlIENoYXJhY3RlciBEYXRhYmFz
-ZSINCj4gIEhPTUVQQUdFID0gImh0dHBzOi8vdW5pY29kZS5vcmcvdWNkLyINCj4gIExJQ0VOU0Ug
-PSAiTUlUIg0KPiAtTElDX0ZJTEVTX0NIS1NVTSA9DQo+ICJmaWxlOi8vdW5pY29kZS5vcmcubGlj
-ZW5zZS5odG1sO2JlZ2lubGluZT00MjtlbmRsaW5lPTg1O21kNT02NzYxOWQwYzUyNzANCj4gNjg1
-M2MwMjU2NTE0ZTdmZDA0Y2QiDQo+ICtMSUNfRklMRVNfQ0hLU1VNID0NCj4gImZpbGU6Ly8uLi9s
-aWNlbnNlLmh0bWw7YmVnaW5saW5lPTQyO2VuZGxpbmU9ODU7bWQ1PWRkY2FlYmNjMTdhYjYzMzk5
-NWYxMg0KPiBjMzgzNTk5ZjM3NyINCj4gDQo+ICBTUkNfVVJJID0gIiBcDQo+IA0KPiBodHRwczov
-L3d3dy51bmljb2RlLm9yZy9QdWJsaWMvemlwcGVkLyR7UFZ9L1VDRC56aXA7bmFtZT11Y2Q7c3Vi
-ZGlyPXVjZCBcDQo+IC0NCj4gaHR0cHM6Ly93d3cudW5pY29kZS5vcmcvbGljZW5zZS5odG1sO25h
-bWU9bGljZW5zZTtzdWJkaXI9JHtCUH07ZG93bmxvYWRmaQ0KPiBsZW5hbWU9dW5pY29kZS5vcmcu
-bGljZW5zZS5odG1sIFwNCj4gKyAgICBmaWxlOi8vbGljZW5zZS5odG1sIFwNCj4gICINCj4gIFNS
-Q19VUklbdWNkLm1kNXN1bV0gPSAiNDMwY2JkYWMyNjE1NDUxNTcxZGQ2OWE5NzZkZDA4ZjYiDQo+
-ICBTUkNfVVJJW3VjZC5zaGEyNTZzdW1dID0NCj4gIjI1YmE1MWEwZDRjNmZhNDEwNDdiN2E1ZTU3
-MzMwNjhkNGE3MzQ1ODhmMDU1ZjYxZTg1ZjQ1MDA5NzgzNGEwYTYiDQo+IA0KPiAtU1JDX1VSSVts
-aWNlbnNlLm1kNXN1bV0gPSAiZjAzYmFmYjYyMzI1OGY4NWZmMjAzMmMxY2U1NjdiN2MiDQo+IC1T
-UkNfVVJJW2xpY2Vuc2Uuc2hhMjU2c3VtXSA9DQo+ICI5ODMyMjUyMDdkZThhNzA3ZDA5MDNhOGQ3
-MGZiN2E0YjI4YzVlMGY2NGYyMzY2ZTg0YTYxOTJhMmQ2MThmZWQ0Ig0KPiAtDQo+ICBpbmhlcml0
-IGFsbGFyY2gNCj4gDQo+ICBkb19jb25maWd1cmVbbm9leGVjXSA9ICIxIg0KPiAtLQ0KPiAyLjE3
-LjENCg0K
+On Tue, May 19, 2020 at 5:34 PM Peter Kjellerstedt
+<peter.kjellerstedt@axis.com> wrote:
+>
+> > -----Original Message-----
+> > From: openembedded-devel@lists.openembedded.org <openembedded-
+> > devel@lists.openembedded.org> On Behalf Of Adrian Bunk
+> > Sent: den 20 maj 2020 00:19
+> > To: openembedded-devel@lists.openembedded.org
+> > Subject: [oe] [meta-oe][PATCH v2] unicode-ucd: Stop broken license
+> > downloading
+> >
+> > WARNING: unicode-ucd-12.1.0-r0 do_fetch: Checksum mismatch for local f=
+ile
+> > /home/bunk/yoctomaster/yocto-tmp/downloads/unicode.org.license.html
+> > Cleaning and trying again.
+> > WARNING: unicode-ucd-12.1.0-r0 do_fetch: Renaming
+> > /home/bunk/yoctomaster/yocto-tmp/downloads/unicode.org.license.html to
+> > /home/bunk/yoctomaster/yocto-tmp/downloads/unicode.org.license.html_ba=
+d-
+> > checksum_e9dd7d435db23241be3be21b5fca729b5cf883c8c039a70ea093031420d06=
+abb
+> > WARNING: unicode-ucd-12.1.0-r0 do_fetch: Checksum failure encountered
+> > with download of
+> > https://www.unicode.org/license.html;name=3Dlicense;subdir=3Dunicode-u=
+cd-
+> > 12.1.0;downloadfilename=3Dunicode.org.license.html - will attempt othe=
+r
+> > sources if available
+> >
+> > This downloaded a license file from upstream.
+> > The upstream file did not match (copyright year changed).
+> > A stale copy was downloaded from a mirror instead and checked.
+> > The stale file with known contents never changes.
+> >
+> > Replace with a dummy check on a local copy of the license file.
+>
+> This defeats the whole point of LIC_FILES_CHKSUM, which is to detect
+> future changes to the files included in it. If a local copy is used,
+> it will never change even if the real license is changed and the
+> changed license will most likely go unnoticed.
+>
+> This more seems to be a problem with how the fetcher works. If a file
+> can be downloaded from the primary source listed in the SRC_URI, but
+> it has the wrong checksum, then that should not be overridden by
+> retrieving the file from a mirror instead (as it can be stale).
+>
+> Except of course things are not that simple, since the mirror may have
+> been setup for exactly this purpose with a bbappend that changes the
+> checksum to match that of the file on the mirror. Does anybody do such
+> things? (Personally, I would rather change both the SRC_URI and the
+> checksum in this case rather than rely on a mirror.)
+
+if a license is being downloaded separate to sources, we already have
+the problem
+this patch we are implicitly taking over the maintenance of this file
+and ensuring
+that its uptodate, in this given situation this seems to be best we can do=
+.
+
+>
+> //Peter
+>
+> > License checksum changed due to dos2unix conversion.
+> >
+> > Signed-off-by: Adrian Bunk <bunk@stusta.de>
+> > ---
+> >  .../unicode-ucd/files/license.html            | 98 ++++++++++++++++++=
++
+> >  .../unicode-ucd/unicode-ucd_12.1.0.bb         |  7 +-
+> >  2 files changed, 100 insertions(+), 5 deletions(-)
+> >  create mode 100644 meta-oe/recipes-support/unicode-
+> > ucd/files/license.html
+> >
+> > diff --git a/meta-oe/recipes-support/unicode-ucd/files/license.html
+> > b/meta-oe/recipes-support/unicode-ucd/files/license.html
+> > new file mode 100644
+> > index 000000000..a02442ad9
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-support/unicode-ucd/files/license.html
+> > @@ -0,0 +1,98 @@
+> > +<!doctype HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html>
+> > +
+> > +
+> > +
+> > +<head>
+> > +
+> > +<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf=
+-8">
+> > +<meta http-equiv=3D"Content-Language" content=3D"en-us">
+> > +<meta name=3D"VI60_defaultClientScript" content=3D"JavaScript">
+> > +<meta name=3D"GENERATOR" content=3D"Microsoft FrontPage 12.0">
+> > +<meta name=3D"keywords" content=3D"Unicode Standard, copyright">
+> > +<meta name=3D"ProgId" content=3D"FrontPage.Editor.Document">
+> > +<title>Unicode License Agreement</title>
+> > +<link rel=3D"stylesheet" type=3D"text/css"
+> > +
+> > +href=3D"http://www.unicode.org/webscripts/standard_styles.css">
+> > +
+> > +<style type=3D"text/css">
+> > +pre {
+> > +     FONT-FAMILY: Arial, Geneva, sans-serif;
+> > +}
+> > +</style>
+> > +
+> > +
+> > +</head>
+> > +
+> > +
+> > +<body text=3D"#330000">
+> > +
+> > +  <table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=3D=
+"0">
+> > +    <tr>
+> > +
+> > +      <!-- BEGIN CONTENTS -->
+> > +
+> > +      <td>
+> > +
+> > +
+> > +<blockquote>
+> > +<h2><a name=3D"License">UNICODE, INC. LICENSE AGREEMENT - DATA FILES =
+AND
+> > SOFTWARE</a></h2>
+> > +
+> > +<pre>
+> > +See <a href=3D"https://www.unicode.org/copyright.html">Terms of Use</=
+a>
+> > for definitions of Unicode Inc.'s
+> > +Data Files and Software.
+> > +
+> > +NOTICE TO USER: Carefully read the following legal agreement.
+> > +BY DOWNLOADING, INSTALLING, COPYING OR OTHERWISE USING UNICODE INC.'S
+> > +DATA FILES ("DATA FILES"), AND/OR SOFTWARE ("SOFTWARE"),
+> > +YOU UNEQUIVOCALLY ACCEPT, AND AGREE TO BE BOUND BY, ALL OF THE
+> > +TERMS AND CONDITIONS OF THIS AGREEMENT.
+> > +IF YOU DO NOT AGREE, DO NOT DOWNLOAD, INSTALL, COPY, DISTRIBUTE OR US=
+E
+> > +THE DATA FILES OR SOFTWARE.
+> > +
+> > +COPYRIGHT AND PERMISSION NOTICE
+> > +
+> > +Copyright =C2=A9 1991-2019 Unicode, Inc. All rights reserved.
+> > +Distributed under the Terms of Use in
+> > https://www.unicode.org/copyright.html.
+> > +
+> > +Permission is hereby granted, free of charge, to any person obtaining
+> > +a copy of the Unicode data files and any associated documentation
+> > +(the "Data Files") or Unicode software and any associated documentati=
+on
+> > +(the "Software") to deal in the Data Files or Software
+> > +without restriction, including without limitation the rights to use,
+> > +copy, modify, merge, publish, distribute, and/or sell copies of
+> > +the Data Files or Software, and to permit persons to whom the Data Fi=
+les
+> > +or Software are furnished to do so, provided that either
+> > +(a) this copyright and permission notice appear with all copies
+> > +of the Data Files or Software, or
+> > +(b) this copyright and permission notice appear in associated
+> > +Documentation.
+> > +
+> > +THE DATA FILES AND SOFTWARE ARE PROVIDED "AS IS", WITHOUT WARRANTY OF
+> > +ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+> > +WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+> > +NONINFRINGEMENT OF THIRD PARTY RIGHTS.
+> > +IN NO EVENT SHALL THE COPYRIGHT HOLDER OR HOLDERS INCLUDED IN THIS
+> > +NOTICE BE LIABLE FOR ANY CLAIM, OR ANY SPECIAL INDIRECT OR CONSEQUENT=
+IAL
+> > +DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE,
+> > +DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHE=
+R
+> > +TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+> > +PERFORMANCE OF THE DATA FILES OR SOFTWARE.
+> > +
+> > +Except as contained in this notice, the name of a copyright holder
+> > +shall not be used in advertising or otherwise to promote the sale,
+> > +use or other dealings in these Data Files or Software without prior
+> > +written authorization of the copyright holder.
+> > +</pre>
+> > +
+> > +</blockquote>
+> > +
+> > +
+> > +
+> > +      </td>
+> > +
+> > +    </tr>
+> > +
+> > +  </table>
+> > +</body>
+> > +</html>
+> > diff --git a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb
+> > b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb
+> > index 89ab565ce..b29bb784e 100644
+> > --- a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb
+> > +++ b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb
+> > @@ -1,18 +1,15 @@
+> >  SUMMARY =3D "Unicode Character Database"
+> >  HOMEPAGE =3D "https://unicode.org/ucd/"
+> >  LICENSE =3D "MIT"
+> > -LIC_FILES_CHKSUM =3D
+> > "file://unicode.org.license.html;beginline=3D42;endline=3D85;md5=3D676=
+19d0c5270
+> > 6853c0256514e7fd04cd"
+> > +LIC_FILES_CHKSUM =3D
+> > "file://../license.html;beginline=3D42;endline=3D85;md5=3Dddcaebcc17ab=
+633995f12
+> > c383599f377"
+> >
+> >  SRC_URI =3D " \
+> >
+> > https://www.unicode.org/Public/zipped/${PV}/UCD.zip;name=3Ducd;subdir=
+=3Ducd \
+> > -
+> > https://www.unicode.org/license.html;name=3Dlicense;subdir=3D${BP};dow=
+nloadfi
+> > lename=3Dunicode.org.license.html \
+> > +    file://license.html \
+> >  "
+> >  SRC_URI[ucd.md5sum] =3D "430cbdac2615451571dd69a976dd08f6"
+> >  SRC_URI[ucd.sha256sum] =3D
+> > "25ba51a0d4c6fa41047b7a5e5733068d4a734588f055f61e85f450097834a0a6"
+> >
+> > -SRC_URI[license.md5sum] =3D "f03bafb623258f85ff2032c1ce567b7c"
+> > -SRC_URI[license.sha256sum] =3D
+> > "983225207de8a707d0903a8d70fb7a4b28c5e0f64f2366e84a6192a2d618fed4"
+> > -
+> >  inherit allarch
+> >
+> >  do_configure[noexec] =3D "1"
+> > --
+> > 2.17.1
+>
+>=20
