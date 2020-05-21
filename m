@@ -1,137 +1,62 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web12.2181.1590023042744853913
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web10.2479.1590024317768204761
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 May 2020 18:04:03 -0700
+ Wed, 20 May 2020 18:25:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.73,415,1583164800"; 
-   d="scan'208";a="92663247"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 21 May 2020 09:03:52 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id 026D94BCC8A5;
-	Thu, 21 May 2020 09:03:50 +0800 (CST)
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) by
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 21 May 2020 09:03:50 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local ([fe80::a02b:f831:342:223])
- by G08CNEXMBPEKD04.g08.fujitsu.local ([fe80::a02b:f831:342:223%14]) with mapi
- id 15.00.1497.006; Thu, 21 May 2020 09:03:50 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: "Zang, Ruochen" <zangrc.fnst@cn.fujitsu.com>, Richard Purdie
-	<richard.purdie@linuxfoundation.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-CC: Tim Orling <ticotimo@gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH] python3-parse-type: Modify ptest output format
-Thread-Topic: [oe] [meta-python] [PATCH] python3-parse-type: Modify ptest
- output format
-Thread-Index: AdYs2xOatmbo8LSHQZmURiz3V3O32ACMJLLg
-Date: Thu, 21 May 2020 01:03:50 +0000
-Message-ID: <047f518b0904400c8a171a69943d52a1@G08CNEXMBPEKD04.g08.fujitsu.local>
-References: <16100A98A66EDE53.23434@lists.openembedded.org>
-In-Reply-To: <16100A98A66EDE53.23434@lists.openembedded.org>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.167.225.81]
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: tgamblin@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 04L1PGV5013063
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2020 18:25:16 -0700 (PDT)
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Wed, 20 May 2020
+ 18:25:15 -0700
+Received: by ala-lpggp3.wrs.com (Postfix, from userid 20958)	id EBD8B90037B;
+ Wed, 20 May 2020 18:25:15 -0700 (PDT)
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python][PATCH v3] python3-iso8601: add python3-numbers to RDEPENDS
+Date: Wed, 20 May 2020 18:25:15 -0700
+Message-ID: <20200521012515.88402-1-trevor.gamblin@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 026D94BCC8A5.AE529
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain
 
-UGluZw0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogb3Bl
-bmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcgPG9wZW5l
-bWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPiBPbiBCZWhh
-bGYgT2YgemFuZ3JjDQpTZW50OiBNb25kYXksIE1heSAxOCwgMjAyMCAyOjEy
-IFBNDQpUbzogUmljaGFyZCBQdXJkaWUgPHJpY2hhcmQucHVyZGllQGxpbnV4
-Zm91bmRhdGlvbi5vcmc+OyBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3Bl
-bmVtYmVkZGVkLm9yZw0KQ2M6IFRpbSBPcmxpbmcgPHRpY290aW1vQGdtYWls
-LmNvbT4NClN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLXB5dGhvbl0gW1BBVENI
-XSBweXRob24zLXBhcnNlLXR5cGU6IE1vZGlmeSBwdGVzdCBvdXRwdXQgZm9y
-bWF0DQoNCklzIHRoaXMgc29sdXRpb24gZmVhc2libGUsIGFuZCBpZiBpdCBp
-cyBmZWFzaWJsZSwgd2hpY2ggbWFpbGluZyBsaXN0IHNob3VsZCBJIHN1Ym1p
-dCB0aGUgcGF0Y2ggdG/vvJ8NCg0KLS0tLS3pgq7ku7bljp/ku7YtLS0tLQ0K
-5Y+R5Lu25Lq6OiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVk
-ZGVkLm9yZyA8b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRl
-ZC5vcmc+IOS7o+ihqCB6YW5ncmMNCuWPkemAgeaXtumXtDogMjAyMOW5tDXm
-nIgxOOaXpSAxNDowOQ0K5pS25Lu25Lq6OiBSaWNoYXJkIFB1cmRpZSA8cmlj
-aGFyZC5wdXJkaWVAbGludXhmb3VuZGF0aW9uLm9yZz47IG9wZW5lbWJlZGRl
-ZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQrmioTpgIE6IFRpbSBP
-cmxpbmcgPHRpY290aW1vQGdtYWlsLmNvbT4NCuS4u+mimDog562U5aSNOiBb
-b2VdIFttZXRhLXB5dGhvbl0gW1BBVENIXSBweXRob24zLXBhcnNlLXR5cGU6
-IE1vZGlmeSBwdGVzdCBvdXRwdXQgZm9ybWF0DQoNCk5vdyBJIGhhdmUgbW9k
-aWZpZWQgdGhlIG91dHB1dCBvZiBweXRlc3QgYnkgbW9kaWZ5aW5nIHB0ZXN0
-LXJ1bm5lci4gTXkgc29sdXRpb24gaXMgdGhhdCBpZiBPU1MgdXNlcyBweXRl
-c3QgdGVzdGluZywgbmFtZSBpdHMgcHRlc3QgZmlsZSBydW4tcHRlc3QtcHl0
-ZXN0Lg0KDQpUaGUgY29udGVudCBvZiBydW4tcHRlc3QtcHl0ZXN0IGlzIGFz
-IGZvbGxvd3M6DQpweXRlc3QgLW8gbG9nX2NsaSA9IHRydWUgLW8gbG9nX2Ns
-aV9sZXZlbCA9IElORk8NCg0KVGhlIHRlc3Qgb3V0cHV0IGlzIGFzIGZvbGxv
-d3M6DQpTVEFSVDogcHRlc3QtcnVubmVyDQoyMDIwLTA1LTE4VDA1OjQyDQpC
-RUdJTjogL3Vzci9saWIvcHl0aG9uMy1wYXJzZS10eXBlL3B0ZXN0ID09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09IHRlc3Qgc2Vzc2lvbiBzdGFydHMg
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09IHBsYXRmb3JtIGxpbnV4
-IC0tIFB5dGhvbiAzLjguMiwgcHl0ZXN0LTUuMy41LCBweS0xLjguMSwgcGx1
-Z2d5LTAuMTMuMQ0Kcm9vdGRpcjogL3Vzci9saWIvcHl0aG9uMy1wYXJzZS10
-eXBlL3B0ZXN0IGNvbGxlY3RlZCAxOTIgaXRlbXMNCg0KUEFTUzogdGVzdHMv
-dGVzdF9idWlsZGVyLnB5OjpUZXN0VHlwZUJ1aWxkZXI0RW51bTo6dGVzdF9t
-YWtlX2VudW1fd2l0aF9kaWN0DQpQQVNTOiB0ZXN0cy90ZXN0X2J1aWxkZXIu
-cHk6OlRlc3RUeXBlQnVpbGRlcjRFbnVtOjp0ZXN0X21ha2VfZW51bV93aXRo
-X2VudW1fY2xhc3MNClBBU1M6IHRlc3RzL3Rlc3RfYnVpbGRlci5weTo6VGVz
-dFR5cGVCdWlsZGVyNEVudW06OnRlc3RfcGFyc2VfZW51bV95ZXNubw0KLi4u
-DQpQQVNTOiB0ZXN0cy90ZXN0X3BhcnNlX3V0aWwucHk6OlRlc3RGaWVsZFBh
-cnNlcjo6dGVzdF9leHRyYWN0X3R5cGVzDQpQQVNTOiB0ZXN0cy90ZXN0X3Bh
-cnNlX3V0aWwucHk6OlRlc3RGaWVsZFBhcnNlcjo6dGVzdF9wYXJzZV9fcmFp
-c2VzX2Vycm9yX3dpdGhfbWlzc2luZ19vcl9wYXJ0aWFsX2JyDQpQQVNTOiB0
-ZXN0cy90ZXN0X3BhcnNlX3V0aWwucHk6OlRlc3RGaWVsZFBhcnNlcjo6dGVz
-dF9wYXJzZV9fd2l0aF92YWxpZF9maWVsZHMgDQoNCg0KPT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT0gMTkyIHBhc3NlZCBpbiAxOC40MXMgPT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT0NClNUT1A6IHB0ZXN0LXJ1bm5lcg0K
-RFVSQVRJT046IDMyDQpFTkQ6IC91c3IvbGliL3B5dGhvbjMtcGFyc2UtdHlw
-ZS9wdGVzdA0KMjAyMC0wNS0xOFQwNTo0Mg0KU1RPUDogcHRlc3QtcnVubmVy
-DQoNCi0tLS0t6YKu5Lu25Y6f5Lu2LS0tLS0NCuWPkeS7tuS6ujogUmljaGFy
-ZCBQdXJkaWUgPHJpY2hhcmQucHVyZGllQGxpbnV4Zm91bmRhdGlvbi5vcmc+
-DQrlj5HpgIHml7bpl7Q6IDIwMjDlubQ15pyIMTPml6UgNToyMw0K5pS25Lu2
-5Lq6OiBaYW5nLCBSdW9jaGVuL+iHpyDoi6XlsJggPHphbmdyYy5mbnN0QGNu
-LmZ1aml0c3UuY29tPjsgb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5l
-bWJlZGRlZC5vcmcNCuaKhOmAgTogVGltIE9ybGluZyA8dGljb3RpbW9AZ21h
-aWwuY29tPg0K5Li76aKYOiBSZTogW29lXSBbbWV0YS1weXRob25dIFtQQVRD
-SF0gcHl0aG9uMy1wYXJzZS10eXBlOiBNb2RpZnkgcHRlc3Qgb3V0cHV0IGZv
-cm1hdA0KDQpPbiBUdWUsIDIwMjAtMDUtMTIgYXQgMjI6MjMgKzA4MDAsIHph
-bmdyYyB3cm90ZToNCj4gU2lnbmVkLW9mZi1ieTogWmFuZyBSdW9jaGVuIDx6
-YW5ncmMuZm5zdEBjbi5mdWppdHN1LmNvbT4NCj4gLS0tDQo+ICAuLi4vcmVj
-aXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1wYXJzZS10eXBlL3J1bi1w
-dGVzdCAgICAgICAgfCAyICstDQo+ICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNl
-cnRpb24oKyksIDEgZGVsZXRpb24oLSkNCj4gDQo+IGRpZmYgLS1naXQNCj4g
-YS9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24z
-LXBhcnNlLXR5cGUvcnVuLXB0ZXN0DQo+IGIvbWV0YS1weXRob24vcmVjaXBl
-cy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1wYXJzZS10eXBlL3J1bi1wdGVz
-dA0KPiBpbmRleCA1Y2VjNzExNjkuLmI2M2M0ZGUwZCAxMDA2NDQNCj4gLS0t
-IGEvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9u
-My1wYXJzZS10eXBlL3J1bi1wdGVzdA0KPiArKysgYi9tZXRhLXB5dGhvbi9y
-ZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXBhcnNlLXR5cGUvcnVu
-LXB0ZXN0DQo+IEBAIC0xLDMgKzEsMyBAQA0KPiAgIyEvYmluL3NoDQo+ICAN
-Cj4gLXB5dGVzdA0KPiArcHl0ZXN0IC1vIGxvZ19jbGk9dHJ1ZSAtbyBsb2df
-Y2xpX2xldmVsPUlORk8gfCBzZWQgLWUgJ3MvXFsuLi4lXF0vL2cnfCBzZWQg
-LWUgJ3MvUEFTU0VEL1BBU1MvZyd8IHNlZCAtZSAncy9GQUlMRUQvRkFJTC9n
-J3xzZWQgLWUgJ3MvU0tJUFBFRC9TS0lQL2cnfCBhd2sgJ3tpZiAoJE5GPT0i
-UEFTUyIgfHwgJE5GPT0iRkFJTCIgfHwgJE5GPT0iU0tJUCIgfHwgJE5GPT0i
-WEZBSUwiIHx8ICRORj09IlhQQVNTIil7cHJpbnRmICIlczogJXNcbiIsICRO
-RiwgJDB9ZWxzZXtwcmludH19J3wgYXdrICd7aWYgKCRORj09IlBBU1MiIHx8
-ICRORj09IkZBSUwiIHx8ICRORj09IlNLSVAiIHx8ICRORj09IlhGQUlMIiB8
-fCAkTkY9PSJYUEFTUyIpIHskTkY9IiI7cHJpbnQgJDB9ZWxzZXtwcmludH19
-Jw0KDQpSYXRoZXIgdGhhbiBkb2luZyB0aGlzIGZvciBldmVyeSBweXRob24g
-bW9kdWxlLCBpdCBtYXkgYmUgYW4gaWRlYSB0bw0KY29uc2lkZXI6DQoNCmEp
-IHRlYWNoaW5nIHB0ZXN0IHJ1bm5lciBob3cgdG8gaGFuZGxlIHRoZSBhbHRl
-cm5hdGUgb3V0cHV0IGZvcm1hdCAodHJpZ2dlcmVkIGJ5IHJ1bi1wdGVzdC1Y
-WFggaW5zdGVhZCBvZiBydW4tcHRlc3QpDQoNCm9yDQoNCmIpIGFkZGluZyBh
-IGNvbW1vbiBweXRob24gc2NyaXB0IHdoaWNoIGNvdWxkIGF2b2lkIGFsbCB0
-aGlzIHNlZC9hd2sgbWFnaWMgYW5kIHRoZSBleHRyYSBkZXBlbmRlbmNpZXMN
-Cg0Kb3INCg0KYykgcGF0Y2ggaW4gYSBwYXJhbWV0ZXIgdG8gcHl0ZXN0IHdo
-aWNoIG91dHB1dHMgdGhlIGRhdGEgaW4gdGhlIGZvcm1hdCB3ZSBuZWVkLg0K
-DQpDaGVlcnMsDQoNClJpY2hhcmQNCg0KDQoNCg0KDQoNCg0KCgo=
+python3-iso8601 relies on the decimal module from the standard
+library, but it is not in iso8601's RDEPENDS:
+
+|root@qemux86-64:~# python3
+|Python 3.8.2 (default, Apr 27 2020, 08:51:00)
+|[GCC 9.3.0] on linux
+|Type "help", "copyright", "credits" or "license" for more information.
+|>>> import iso8601
+|Traceback (most recent call last):
+|File "<stdin>", line 1, in <module>
+|File "/usr/lib64/python3.8/site-packages/iso8601/_init_.py", line 1, in <module>
+|from .iso8601 import *
+|File "/usr/lib64/python3.8/site-packages/iso8601/iso8601.py", line 12, in <module>
+|from decimal import Decimal
+|ModuleNotFoundError: No module named 'decimal'
+
+Add it to RDEPENDS to fix the import error.
+
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+---
+ meta-python/recipes-devtools/python/python-iso8601.inc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meta-python/recipes-devtools/python/python-iso8601.inc b/meta-python/recipes-devtools/python/python-iso8601.inc
+index 61e9abbac..a70843ead 100644
+--- a/meta-python/recipes-devtools/python/python-iso8601.inc
++++ b/meta-python/recipes-devtools/python/python-iso8601.inc
+@@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "49c4b20e1f38aa5cf109ddcd39647ac419f928512c869dc01d5c7098ed
+ 
+ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-numbers \
+ "
+ 
+ BBCLASSEXTEND = "native nativesdk"
+-- 
+2.17.1
+
