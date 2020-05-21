@@ -1,170 +1,162 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.45])
- by mx.groups.io with SMTP id smtpd.web11.8679.1590075235167366001
+Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com [209.85.210.68])
+ by mx.groups.io with SMTP id smtpd.web12.611.1590082754115111625
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 May 2020 08:33:55 -0700
+ Thu, 21 May 2020 10:39:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=lnIt+EEM;
- spf=pass (domain: windriver.com, ip: 40.107.237.45, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WA5DD/+A9B+kdTimoIAHz/IrJ/Nr5CuNEAZ3Tx8QISb2s9v9MAYaJY65Wk3xTv+O+oGg61OnJ2kP50lWHhJY7AGwjcbpqBkYW7zu3tIJbh/NGpsYKfHv/1VVGEQIuYkJOUnvu9Be3nfpPmMtyJAYCX9DsmHSwwdPaYcvTm4mvuJXNOJkqu9b0EHltlnF9CsIWlXBPDNVBc8Px64IVzXxdaE38R3kE075VtdPgpZEPuqfzJBSd4tkdLDp3aFT/ga8l7LdQCOFnIpZj8VASIHm1kbm6xXxRjpaT5t9CFOxBHBLPNiNZPuFgZ0zhelbQAAkGKE5e1KfGy4eXBVKmIBBrw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9s3QX0iE2MlqxEbNCr5doYHVb22hNmMjroiL25aCsBo=;
- b=DCJHOFyA5MWaMLwKsNDja2Yz7bz1vpCIXV0GhgyO7L+REbimFdTEP6cZwUlAgaH1PD7WypfvMaTwY/ZMk08/GxrMIo109qyIA8WMi2OBuS7qAcxdYGot0wSk4QyJJ0JZdr+Nly8Y2qExUDq04Wg6oWLF4zsJwdjYn1hipOJg6FCEogQsdfq4EZKRFbqIf5iseXGiTaH0yYMjPUW+8O6jXs27KkL+nkVfmmrLZjAAYOy+U0kEtoi2b/NfT3Dx8JjhVo47M98cwleqeoKNLqQeN2wR1uDbRLByy8tRWbAnold9e4QcXqosekPpwPXqMjKAYj0/TWIRq2COCjXQcmELdg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=LumZqXiu;
+ spf=pass (domain: gmail.com, ip: 209.85.210.68, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f68.google.com with SMTP id b18so6169733oti.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2020 10:39:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9s3QX0iE2MlqxEbNCr5doYHVb22hNmMjroiL25aCsBo=;
- b=lnIt+EEMt+GQ3F4FXrjQlBHka3Sm12V/4QKDpGi8jQFSN/aorkwdyDq5n/2lgML7FytK57FYnUvofkxTJ61+/5wpp+bSNfEJtIIiW/SMLkESJXnbDdcwgTLGJBp7WnlCkfxXo/KIaWxIeqzfOF4Njp9TyWyyp46ipQx2T8UhQOk=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB0002.namprd11.prod.outlook.com (2603:10b6:405:62::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3000.26; Thu, 21 May
- 2020 15:33:54 +0000
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3000.022; Thu, 21 May 2020
- 15:33:54 +0000
-Subject: Re: [oe] [meta-python][PATCH 1/4] python3-luma-core: Upgrade to 1.14.0
-To: Leon Anavi <leon.anavi@konsulko.com>,
- openembedded-devel@lists.openembedded.org
-References: <20200520141502.28254-1-leon.anavi@konsulko.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <88965611-2b40-67ec-f019-befd2db5d642@windriver.com>
-Date: Thu, 21 May 2020 11:33:51 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
-In-Reply-To: <20200520141502.28254-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0143.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::22) To BN6PR11MB0003.namprd11.prod.outlook.com
- (2603:10b6:405:61::26)
-Return-Path: trevor.gamblin@windriver.com
+        d=gmail.com; s=20161025;
+        h=subject:to:references:from:message-id:date:user-agent:mime-version
+         :in-reply-to:content-language:content-transfer-encoding;
+        bh=0CPI4Zk8Kl/A5mvYArwiNYVi9l1hfCYv4zlVYy7rnMw=;
+        b=LumZqXiutAr4u/XQ5ng/w6VQw4zOniLrj7Pkk7fR0g1SGXxfohcIegfLGEdGJ8ThHv
+         qxFe0PxQLxeVzMnSlJs2qmP55Oe/07lKf9x6ostoVDWI+vknRpaQwsoIQF46YLbx3d/e
+         2+UuRosTl2Ew2VOAhkOJadFfmpz1JCZmjlWMnYT63H5wt3JOLZchTRn+4G8+Z91A4690
+         YxJGRYX4FlCLgkfm1ecfaNkpX39lFXnzKNxhEcuEpF589ZZl7XDzzypM+df+A7kYr9qK
+         tQjUHKibB4cEDo1UV9X+gLZctOPsGZh5ya9Y/ugJL7Bi52waegqOIdn0++E3gZadEHCK
+         OVTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=0CPI4Zk8Kl/A5mvYArwiNYVi9l1hfCYv4zlVYy7rnMw=;
+        b=fAjmC1BAgLE9tWnbP5o1PKABIrr9iOJj3o2y3xyG5Rhs1C50Y6KgF3kWUQkaFkUL/m
+         I9Ul88rSKE4en8LuRwjONcZgxASkCVzeYo/V15ebLxCxzzh8m5/tFbDwHexnsK22p4rb
+         ZNU25ZFqHeGKJkSUtzoZ+nWj5ZUpgdGP9H1/AGMXcSt6NA1wMOXR7sLeknKdqIKJv8IU
+         /B1gZetPf8hTHY/UWT35bOhl+Z30M4tXxdICebbRo6JQ8tzZL9PfUgqh90S9pa9nCMY4
+         Z8LohpFXnXpVvVY5sxKAQxON46oaVjFmvgUuQMDVjb47WYFNad3b83mv5rxEBXxXVv1m
+         NMtA==
+X-Gm-Message-State: AOAM533wctmpD12iaNpOsFr3668bagmGWtgLpTxt4pj7W0fX+hnngI2U
+	9DJWvYrt+JJJq0vj6PbExvmUO34YaaI=
+X-Google-Smtp-Source: ABdhPJxR6iV28guyD5sU2K8NGqYCtLosgKzb7ghP07TxQ8BdWoJbPgelNzu00yMJsQZ+m0M5XINixA==
+X-Received: by 2002:a05:6830:91:: with SMTP id a17mr6900923oto.27.1590082753001;
+        Thu, 21 May 2020 10:39:13 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:4e0:603f:8403:c197:4cd1? ([2601:646:9200:4e0:603f:8403:c197:4cd1])
+        by smtp.gmail.com with ESMTPSA id c26sm1806490oov.13.2020.05.21.10.39.12
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 21 May 2020 10:39:12 -0700 (PDT)
+Subject: Re: [oe] [meta-python] [PATCH] python3-parse-type: Modify ptest output format
+To: openembedded-devel@lists.openembedded.org
+References: <16100A98A66EDE53.23434@lists.openembedded.org>
+ <047f518b0904400c8a171a69943d52a1@G08CNEXMBPEKD04.g08.fujitsu.local>
+From: "Khem Raj" <raj.khem@gmail.com>
+Message-ID: <57f22a6f-7eec-297f-f526-3dcad7ca1e24@gmail.com>
+Date: Thu, 21 May 2020 10:39:11 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.8.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0143.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3021.23 via Frontend Transport; Thu, 21 May 2020 15:33:53 +0000
-X-Originating-IP: [174.115.236.231]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 1b65aa75-c201-4520-99b2-08d7fd9c5e68
-X-MS-TrafficTypeDiagnostic: BN6PR11MB0002:
-X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB00020D4C2F4691655A2CB69C9FB70@BN6PR11MB0002.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:173;
-X-Forefront-PRVS: 041032FF37
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	K9Cmxr/FBEhcPAzZJZEfU7pGAqfSSdYgbINGEMCcXx092NDcQz/Xav+btSMFH7AJSkUH3Ap/0R91e9kXJlecEOTfdgFcHSLaLQtRTQHYncC4dh0UwRsZGxCQsLfWhNlHfA1D4I0+xyO2DJQbtYMLZq+MTCJpTBBlKgQNLtdXBrRfcx51iyq1qJxZjeaGQq28jIickXLNVCp8JAe8AMYT5cWKPV6hssQ+NffoACqLPCjeSaR+/tsk0xtFQkvYqV+IPRAPWr/ji3P2OtckRRzTLx4N5GU1L2D9sMd7cy64I97dBzexNhgYYQ24Gmlp3EVv7tIQgdGmIzrHpBaFyiLDvDAfv4EbIw0A0CRdAe5Lkpdcz9r0ZFx7BzbTxnCymXnUX5mWiz8zuZ5+Q5Q4UAhqV0Qn3EQk2nku4mTZQ8opIcRmmbJyX98F8FPP0NVsFZMOxeIuHAP2FYRe1BSifn8hKa8XWQu5WON6iSP0GBDKhlAQXk6UviZpHdSBTWXUoynW6Boh6+wk6W/Mljw/HcNo3eV/AJrsK6wI1oKdvZEq3ce2nFnyVeEzXN+lzSb+tpDSghZNVMHbJbsWa2r17sj/mg==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(136003)(39850400004)(346002)(376002)(366004)(36756003)(66556008)(66946007)(8676002)(186003)(53546011)(52116002)(33964004)(478600001)(31696002)(5660300002)(31686004)(966005)(26005)(86362001)(16526019)(66476007)(8936002)(316002)(2616005)(166002)(956004)(44832011)(16576012)(2906002)(6486002)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	85fPl5jMUyWCgac4lTLZbBgiYCVnSkg2+C+fh1MixCx00DV3m1c0jIlexXtAyZQLfURytLdW50YQuu82nclKh17bDi8tF4sfHzhNCoJCaNiLlhFlkX9XLwTdKXX9ZiNeLfpiv195QmgrLEKCQbjHJlBAZCXhpji418WhBHCCKkrtBapQrsdd/6OvkzwQkSShEPGG9seZgEo5pk9jk0VssK3AhbR6MOh/4E+5r3fQxfmgL9+CdJZ7OIWkgAF5P9qPwa8tR0NJGm4oKmdnq9UTZjmP1qaOOWcZaqZKA4PZbrNSdY2x3QGqRIzTPGmIxTt98Kx4nQcPuM+bGexpXaXxN4ABOwfmm4cEis57ZasR/1fSLbkuZxHFAgNL+UqHu8eKaSgBnJrqvyq/dDMS88M0BMpM2k8ue9sTG1+HrCv9PdTLlSHoq69c/FMGUJN6d1p6FE6BX3LCqHtN+yLeAJfk3d6APmaw6BbwBeJ0Zd6bBGYVCte8TtN2xoFbVNtV2Iwa
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1b65aa75-c201-4520-99b2-08d7fd9c5e68
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2020 15:33:53.8232
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fAhD8s3rgyIDor9/SlgwG03SLM7IFDJ6QjuGbZx1Apiuj+7sXXMaIupJk6roBY8wP3UdcRa9aWA5kYVfoC+93uJgBZhXLv/UzGIwlK+aNBA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB0002
-Content-Type: multipart/alternative;
- boundary="------------A09A698E5D53D720078EA204"
-Content-Language: en-US
-
---------------A09A698E5D53D720078EA204
+In-Reply-To: <047f518b0904400c8a171a69943d52a1@G08CNEXMBPEKD04.g08.fujitsu.local>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 
+check master, I think its already applied via
+https://git.openembedded.org/meta-openembedded/commit/?id=86d1c32a818abba71c5a52d21249759cf601ab2e
 
-On 5/20/20 10:14 AM, Leon Anavi wrote:
-> Upgrade to release 1.14.0.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   ...ython3-luma-core_1.12.0.bb => python3-luma-core_1.14.0.bb} | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-luma-core_1.12.0.bb => python3-luma-core_1.14.0.bb} (75%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-luma-core_1.12.0.bb b/meta-python/recipes-devtools/python/python3-luma-core_1.14.0.bb
-> similarity index 75%
-> rename from meta-python/recipes-devtools/python/python3-luma-core_1.12.0.bb
-> rename to meta-python/recipes-devtools/python/python3-luma-core_1.14.0.bb
-> index cdb1ac8b9..503acc824 100644
-> --- a/meta-python/recipes-devtools/python/python3-luma-core_1.12.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-luma-core_1.14.0.bb
-> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7"
->   
->   inherit pypi setuptools3
->   
-> -SRC_URI[md5sum] = "4378edb99cd12540b4e4a588969567ee"
-> -SRC_URI[sha256sum] = "864a427de78bcc16758f4f4402a9e61f31cc8857bfae9aba8041159aaec3a491"
-> +SRC_URI[md5sum] = "c049eabcdd50c4c1e630282c058e18f8"
-> +SRC_URI[sha256sum] = "1501901f08c279abb9a5f1b76347955d6a15238c1e86e055aef96acd3e2e4215"
->   
->   CLEANBROKEN = "1"
->   
->
+if not, please send a followup.
+
+On 5/20/20 6:03 PM, zangrc wrote:
+> Ping
 > 
-
---------------A09A698E5D53D720078EA204
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 5/20/20 10:14 AM, Leon Anavi wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20200520141502.28254-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.14.0.
-
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200520141502.28254-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">
----
- ...ython3-luma-core_1.12.0.bb =&gt; python3-luma-core_1.14.0.bb} | 4 &#43;&#43;--
- 1 file changed, 2 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-luma-core_1.12.0.bb =&gt; python3-luma-core_1.14.0.bb} (75%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-luma-core_1.12.0.bb b/meta-python/recipes-devtools/python/python3-luma-core_1.14.0.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-luma-core_1.12.0.bb
-rename to meta-python/recipes-devtools/python/python3-luma-core_1.14.0.bb
-index cdb1ac8b9..503acc824 100644
---- a/meta-python/recipes-devtools/python/python3-luma-core_1.12.0.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-luma-core_1.14.0.bb
-@@ -6,8 &#43;6,8 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7">&quot;file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7&quot;</a>
- 
- inherit pypi setuptools3
- 
--SRC_URI[md5sum] = &quot;4378edb99cd12540b4e4a588969567ee&quot;
--SRC_URI[sha256sum] = &quot;864a427de78bcc16758f4f4402a9e61f31cc8857bfae9aba8041159aaec3a491&quot;
-&#43;SRC_URI[md5sum] = &quot;c049eabcdd50c4c1e630282c058e18f8&quot;
-&#43;SRC_URI[sha256sum] = &quot;1501901f08c279abb9a5f1b76347955d6a15238c1e86e055aef96acd3e2e4215&quot;
- 
- CLEANBROKEN = &quot;1&quot;
- 
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------A09A698E5D53D720078EA204--
+> -----Original Message-----
+> From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.openembedded.org> On Behalf Of zangrc
+> Sent: Monday, May 18, 2020 2:12 PM
+> To: Richard Purdie <richard.purdie@linuxfoundation.org>; openembedded-devel@lists.openembedded.org
+> Cc: Tim Orling <ticotimo@gmail.com>
+> Subject: Re: [oe] [meta-python] [PATCH] python3-parse-type: Modify ptest output format
+> 
+> Is this solution feasible, and if it is feasible, which mailing list should I submit the patch to？
+> 
+> -----邮件原件-----
+> 发件人: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.openembedded.org> 代表 zangrc
+> 发送时间: 2020年5月18日 14:09
+> 收件人: Richard Purdie <richard.purdie@linuxfoundation.org>; openembedded-devel@lists.openembedded.org
+> 抄送: Tim Orling <ticotimo@gmail.com>
+> 主题: 答复: [oe] [meta-python] [PATCH] python3-parse-type: Modify ptest output format
+> 
+> Now I have modified the output of pytest by modifying ptest-runner. My solution is that if OSS uses pytest testing, name its ptest file run-ptest-pytest.
+> 
+> The content of run-ptest-pytest is as follows:
+> pytest -o log_cli = true -o log_cli_level = INFO
+> 
+> The test output is as follows:
+> START: ptest-runner
+> 2020-05-18T05:42
+> BEGIN: /usr/lib/python3-parse-type/ptest ============================= test session starts ============================== platform linux -- Python 3.8.2, pytest-5.3.5, py-1.8.1, pluggy-0.13.1
+> rootdir: /usr/lib/python3-parse-type/ptest collected 192 items
+> 
+> PASS: tests/test_builder.py::TestTypeBuilder4Enum::test_make_enum_with_dict
+> PASS: tests/test_builder.py::TestTypeBuilder4Enum::test_make_enum_with_enum_class
+> PASS: tests/test_builder.py::TestTypeBuilder4Enum::test_parse_enum_yesno
+> ...
+> PASS: tests/test_parse_util.py::TestFieldParser::test_extract_types
+> PASS: tests/test_parse_util.py::TestFieldParser::test_parse__raises_error_with_missing_or_partial_br
+> PASS: tests/test_parse_util.py::TestFieldParser::test_parse__with_valid_fields
+> 
+> 
+> ============================= 192 passed in 18.41s =============================
+> STOP: ptest-runner
+> DURATION: 32
+> END: /usr/lib/python3-parse-type/ptest
+> 2020-05-18T05:42
+> STOP: ptest-runner
+> 
+> -----邮件原件-----
+> 发件人: Richard Purdie <richard.purdie@linuxfoundation.org>
+> 发送时间: 2020年5月13日 5:23
+> 收件人: Zang, Ruochen/臧 若尘 <zangrc.fnst@cn.fujitsu.com>; openembedded-devel@lists.openembedded.org
+> 抄送: Tim Orling <ticotimo@gmail.com>
+> 主题: Re: [oe] [meta-python] [PATCH] python3-parse-type: Modify ptest output format
+> 
+> On Tue, 2020-05-12 at 22:23 +0800, zangrc wrote:
+>> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+>> ---
+>>   .../recipes-devtools/python/python3-parse-type/run-ptest        | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git
+>> a/meta-python/recipes-devtools/python/python3-parse-type/run-ptest
+>> b/meta-python/recipes-devtools/python/python3-parse-type/run-ptest
+>> index 5cec71169..b63c4de0d 100644
+>> --- a/meta-python/recipes-devtools/python/python3-parse-type/run-ptest
+>> +++ b/meta-python/recipes-devtools/python/python3-parse-type/run-ptest
+>> @@ -1,3 +1,3 @@
+>>   #!/bin/sh
+>>   
+>> -pytest
+>> +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
+> 
+> Rather than doing this for every python module, it may be an idea to
+> consider:
+> 
+> a) teaching ptest runner how to handle the alternate output format (triggered by run-ptest-XXX instead of run-ptest)
+> 
+> or
+> 
+> b) adding a common python script which could avoid all this sed/awk magic and the extra dependencies
+> 
+> or
+> 
+> c) patch in a parameter to pytest which outputs the data in the format we need.
+> 
+> Cheers,
+> 
+> Richard
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
