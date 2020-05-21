@@ -1,128 +1,160 @@
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web10.4827.1590064837531893813
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
+ by mx.groups.io with SMTP id smtpd.web12.7960.1590073577786977915
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 May 2020 05:40:37 -0700
+ Thu, 21 May 2020 08:06:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=C0ufM/Ga;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: david.banks.engineer@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id n24so8649882ejd.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2020 05:40:37 -0700 (PDT)
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=BmWZhwUM;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.222.195, mailfrom: domarys.correa@ossystems.com.br)
+Received: by mail-qk1-f195.google.com with SMTP id g185so7494974qke.7
+        for <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2020 08:06:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=vdFLo7QOZrGCtWvQX/mCCmb/ae6YGUrPmxk2X3jLLW8=;
-        b=C0ufM/GaJ04eV0ovZ50we3F4vKgDCfLq2ETCdDJpXUpIDBg2IXxMKIjEojTyx8CJrl
-         JCk9j+/h/5xtPOjs2+bnqxvk2uCJ4cR1wLa3y7qN1Tke4d+mUfJiWVHGIYx1keZSYeyp
-         RvTl17Tlwifs+dIrReapbwsC21T0Qyb5P+TpEPcn65UIpASXk/L3mucq3HP1qKi/V8r0
-         uf5GyzJHgLEZty0UmF4N0CxUV/nk9ilcqY6Tnt8OSFIUT0Ri6BupUkMab6Jhmo1+mbFe
-         7OWjnm+KKrrB3E6B+Rk4o5ZZi2505VnXUUCCr3HuoMbuOnomnmur+noW9pZfQOflwF/E
-         HA5A==
+        d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id;
+        bh=Pmp1iZffcFp4Ex2dUSQ7QzB+F+oEKPinRIqUdPX6NTY=;
+        b=BmWZhwUM758C73txHrl6quu1k0F8NKDv2uROSdtUSlsyLmFzTcCGdxDAQh+sHwa6zi
+         Ek5COngrrWagtJJ4+Owm/osID71+rUgzGBA3AzGILiME1JfNkuk2HYxBbt1S4uqlhCgl
+         EUnENM/zcFdgvUq1p5Z3zRmPtGw/uhGxGeKRKiWptrCY07qFR+BX9YNN3hyz7XXOGW9X
+         NBzEf/SidgrWuRVrdOoQ6F8Lx0wb7wcamjX/4GbxR+rASQUsD0K48mLvYWMjMDBC/Ff0
+         9ip40IrKncvK6NK2fZLmjZODkvF5IiXwt99KuqMzzMIrAuXGXQOdx76MjMpFVdIaAhVW
+         pvfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=vdFLo7QOZrGCtWvQX/mCCmb/ae6YGUrPmxk2X3jLLW8=;
-        b=W7/DQDwhOvOEBa08R9xHDBKJzPgaROdgj7iSQbItlm7WAWhWW5hCmMTBOJgFiEAxaB
-         DxMHNVoEu4/dkNygd7QMNUc7IxtXzPlXmnteE2iV3i8bw+uDKEzYEci2uIqb3EiOi/u4
-         OZyYJtNpJc0oLqb/0otlM9W269Oa2fqGrTvMYes9cwq6yWyAn5LaWQIj4MiR714/7FOC
-         LNyVwDAJDFVag5YcfmosiUBoGqOulHLn8LXmEK3YQKrZ/so5RUKbeawtZeXZ0UlNdUjE
-         m2fYuFr9QFeJBD3BZZoc0rtyyL6TrGXBvSbo/sxGLJMGBzI8WDQ6us8yXjIIiT3uQEd0
-         KdFg==
-X-Gm-Message-State: AOAM532pPtyaU0onWBEg8G00sSlKNeeqoaqzWyZAQDM9Q4kRm6oTEs/6
-	4bzMFMDaxemI1vA5+xD/y7C/dS0nGDcZNxHXhuU=
-X-Google-Smtp-Source: ABdhPJxwUB8/i8l501GUh0TS7lFKi8el/RmjKVcnLRQMd7QoBDTYqndVhA/Lihltfy8eAgbUljLSDutnpgijF410azg=
-X-Received: by 2002:a17:906:4d82:: with SMTP id s2mr3197716eju.542.1590064835984;
- Thu, 21 May 2020 05:40:35 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAB=WuyaS00Sp1KdA-O-2OMQdwPcx=6p-f03+ZAXVkh-MA9nO2w@mail.gmail.com>
- <CA+chaQcZvRO0UqeHPc4q2njLav0A8nnaNHnARpoRGROzHxsSmQ@mail.gmail.com>
-In-Reply-To: <CA+chaQcZvRO0UqeHPc4q2njLav0A8nnaNHnARpoRGROzHxsSmQ@mail.gmail.com>
-From: "David Banks" <david.banks.engineer@gmail.com>
-Date: Thu, 21 May 2020 08:40:24 -0400
-Message-ID: <CAB=WuyY-86PqJRO=LgZKnbG9g-Nds+woAMPhEoHaZnRKb1evuQ@mail.gmail.com>
-Subject: Re: [oe] Should meta-python2 include python-numpy?
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000b8011005a627d18e"
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=Pmp1iZffcFp4Ex2dUSQ7QzB+F+oEKPinRIqUdPX6NTY=;
+        b=XID8m7NjwPi6ElLHsaAY+bvZIwGOa0oTGNuP/ZeidHFc1H5/oGIY0SscguRy7j2oMy
+         E4gyGFzIceAP5uqueXQ+aJY9RnukVRUxOqFQnGDIymjmp/vSoP89cW6JxcbGihXTLiYd
+         /ONZ9XSyQPo/J4UZcM44t3dRg0WV2Zp/V4Nzb2wD+OerASj5lGE+ZmA68+1bBKf1hXF2
+         2CYTGra9bHpAF4PouMasxuXh3s8t54XBgQP1LhUESRAiktrzSqPXz0Z6Yo8Qggg9GXut
+         3fiEpwHZJOiLj4pPtZlpNe4WGHZseQVsGXpPWnKsoQjyez4mndIHWMN3/Ih6ukeTNtzm
+         etmA==
+X-Gm-Message-State: AOAM531Wlgt2k7H3BmFihqySKnOOiDN4m7DvYXCRE8zsoLZmygzbfSbw
+	BW100mNsP1akyiZ8ArvU+0zsef+Xadw=
+X-Google-Smtp-Source: ABdhPJyekzQFz5CmylC4zr6XTOTlNF3gvS1g+1Dci96T8BincoG3SWb2IMoLqzbwZxXr1vDDW2Di3g==
+X-Received: by 2002:a37:c8b:: with SMTP id 133mr10125936qkm.418.1590073576477;
+        Thu, 21 May 2020 08:06:16 -0700 (PDT)
+Return-Path: <domarys.correa@ossystems.com.br>
+Received: from Monster.domain.name ([2804:7f4:c195:1db7:48f3:4609:c8f3:958c])
+        by smtp.gmail.com with ESMTPSA id o13sm411625qtk.73.2020.05.21.08.06.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 21 May 2020 08:06:15 -0700 (PDT)
+From: "Domarys Correa" <domarys.correa@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Cc: Domarys Correa <domarys.correa@ossystems.com.br>
+Subject: [PATCH] python3-jinja2: Update 2.11.1 -> 2.11.2
+Date: Thu, 21 May 2020 12:06:03 -0300
+Message-Id: <20200521150603.6360-1-domarys.correa@ossystems.com.br>
+X-Mailer: git-send-email 2.17.1
 
---000000000000b8011005a627d18e
-Content-Type: text/plain; charset="UTF-8"
+Add .inc file to .bb, as updated to python3
 
-Martin,
+Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
+---
+ .../recipes-devtools/python/python-jinja2.inc | 33 --------------
+ .../python/python3-jinja2_2.11.1.bb           |  4 --
+ .../python/python3-jinja2_2.11.2.bb           | 43 +++++++++++++++++++
+ 3 files changed, 43 insertions(+), 37 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-jinja2.inc
+ delete mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
 
-Good to know I am not alone! I guess I didn't search thoroughly enough
-before my message. Thanks for the link!
+diff --git a/meta-python/recipes-devtools/python/python-jinja2.inc b/meta-python/recipes-devtools/python/python-jinja2.inc
+deleted file mode 100644
+index 927230515..000000000
+--- a/meta-python/recipes-devtools/python/python-jinja2.inc
++++ /dev/null
+@@ -1,33 +0,0 @@
+-DESCRIPTION = "Python Jinja2: A small but fast and easy to use stand-alone template engine written in pure python."
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462"
+-
+-PYPI_PACKAGE = "Jinja2"
+-
+-SRC_URI[md5sum] = "5d88c7e77aa63fc852a04f65dbfe5594"
+-SRC_URI[sha256sum] = "93187ffbc7808079673ef52771baa950426fd664d3aad1d0fa3e95644360e250"
+-
+-RDEPENDS_${PN} += "${PYTHON_PN}-io ${PYTHON_PN}-pickle ${PYTHON_PN}-crypt \
+-    ${PYTHON_PN}-math ${PYTHON_PN}-netclient \
+-    ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-markupsafe \
+-    ${PYTHON_PN}-json ${PYTHON_PN}-threading ${PYTHON_PN}-numbers"
+-
+-CLEANBROKEN = "1"
+-
+-BBCLASSEXTEND = "native nativesdk"
+-
+-inherit ptest
+-
+-SRC_URI += " \
+-	file://run-ptest \
+-"
+-
+-RDEPENDS_${PN}-ptest += " \
+-	${PYTHON_PN}-pytest \
+-	${PYTHON_PN}-unixadmin \
+-"
+-
+-do_install_ptest() {
+-	install -d ${D}${PTEST_PATH}/tests
+-	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-}
+diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb b/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
+deleted file mode 100644
+index 284f5f588..000000000
+--- a/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
++++ /dev/null
+@@ -1,4 +0,0 @@
+-inherit pypi setuptools3
+-require python-jinja2.inc
+-
+-RDEPENDS_${PN} += "${PYTHON_PN}-asyncio"
+diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb b/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
+new file mode 100644
+index 000000000..681acf8f1
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
+@@ -0,0 +1,43 @@
++DESCRIPTION = "Python Jinja2: A small but fast and easy to use stand-alone template engine written in pure python."
++
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462"
++
++SRC_URI[sha256sum] = "89aab215427ef59c34ad58735269eb58b1a5808103067f7bb9d5836c651b3bb0"
++
++PYPI_PACKAGE = "Jinja2"
++
++CLEANBROKEN = "1"
++
++inherit pypi setuptools3 ptest
++
++SRC_URI += " \
++	file://run-ptest \
++"
++
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}/tests
++    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
++}
++
++RDEPENDS_${PN}-ptest += " \
++	${PYTHON_PN}-pytest \
++	${PYTHON_PN}-unixadmin \
++"
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-asyncio \
++    ${PYTHON_PN}-crypt \
++    ${PYTHON_PN}-io \
++    ${PYTHON_PN}-json \
++    ${PYTHON_PN}-markupsafe \
++    ${PYTHON_PN}-math \
++    ${PYTHON_PN}-netclient \
++    ${PYTHON_PN}-numbers\
++    ${PYTHON_PN}-pickle \
++    ${PYTHON_PN}-pprint \
++    ${PYTHON_PN}-shell \
++    ${PYTHON_PN}-threading \
++"
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.17.1
 
--David
-
-On Mon, May 18, 2020 at 5:14 PM Martin Jansa <martin.jansa@gmail.com> wrote:
-
-> I've asked the same in December, see:
->
-> https://www.openembedded.org/pipermail/openembedded-devel/2019-December/203618.html
->
-> I've also included them in my layer:
->
-> https://github.com/ros/meta-ros/commit/630d755319c2bb5d33e2f5910877e153eaebc47d
-> because I don't want to include meta-python2/zeus branch into my builds,
-> I'm using meta-python2 in dunfell based builds (because that's where
-> python2 was removed from oe-core and meta-oe) for zeus it's still unclear
-> to me what meta-python2/zeus is supposed to be used for.
->
-> On Mon, May 18, 2020 at 10:26 PM David Banks <
-> david.banks.engineer@gmail.com> wrote:
->
->> Hi,
->>
->> I have a layer the requires python-numpy (specifically python2's numpy).
->> When upgrading to zeus, it no longer works because oe-core no longer
->> provides the python2 version of numpy. For now I just added numpy to my
->> broken layer, but I am wondering if it makes sense to add python2 numpy to
->> meta-python2.
->>
->> Thanks,
->> David
->> 
->>
->
-
---000000000000b8011005a627d18e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Martin,</div><div><br></div><div>Good to know I am no=
-t alone! I guess I didn&#39;t search thoroughly enough before my message. T=
-hanks for the link!<br></div><div><br></div><div>-David<br></div></div><br>=
-<div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Ma=
-y 18, 2020 at 5:14 PM Martin Jansa &lt;<a href=3D"mailto:martin.jansa@gmail=
-.com">martin.jansa@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"g=
-mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
-,204,204);padding-left:1ex"><div dir=3D"ltr">I&#39;ve asked the same in Dec=
-ember, see:<div><a href=3D"https://www.openembedded.org/pipermail/openembed=
-ded-devel/2019-December/203618.html" target=3D"_blank">https://www.openembe=
-dded.org/pipermail/openembedded-devel/2019-December/203618.html</a><br></di=
-v><div><br></div><div>I&#39;ve also included them in my layer:</div><div><a=
- href=3D"https://github.com/ros/meta-ros/commit/630d755319c2bb5d33e2f591087=
-7e153eaebc47d" target=3D"_blank">https://github.com/ros/meta-ros/commit/630=
-d755319c2bb5d33e2f5910877e153eaebc47d</a><br></div><div>because I don&#39;t=
- want to include meta-python2/zeus branch into my builds, I&#39;m using met=
-a-python2 in dunfell based builds (because that&#39;s where python2 was rem=
-oved from oe-core and meta-oe) for zeus it&#39;s still unclear to me what m=
-eta-python2/zeus is supposed to be used for.</div></div><br><div class=3D"g=
-mail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, May 18, 2020 at 1=
-0:26 PM David Banks &lt;<a href=3D"mailto:david.banks.engineer@gmail.com" t=
-arget=3D"_blank">david.banks.engineer@gmail.com</a>&gt; wrote:<br></div><bl=
-ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
-t:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div>Hi,</d=
-iv><div><br></div><div>I have a layer the requires python-numpy (specifical=
-ly python2&#39;s numpy). When upgrading to zeus, it no longer works because=
- oe-core no longer provides the python2 version of numpy. For now I just ad=
-ded numpy to my broken layer, but I am wondering if it makes sense to add p=
-ython2 numpy to meta-python2.</div><div><br></div><div>Thanks,</div><div>Da=
-vid<br></div></div>
-<br>
-</blockquote></div>
-</blockquote></div>
-
---000000000000b8011005a627d18e--
