@@ -1,17 +1,17 @@
-Received: from NAM04-CO1-obe.outbound.protection.outlook.com (NAM04-CO1-obe.outbound.protection.outlook.com [40.107.69.40])
- by mx.groups.io with SMTP id smtpd.web12.2297.1590098409331375249
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (NAM11-CO1-obe.outbound.protection.outlook.com [40.107.220.76])
+ by mx.groups.io with SMTP id smtpd.web12.2307.1590098437011833230
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 May 2020 15:00:09 -0700
+ Thu, 21 May 2020 15:00:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Ys15RVyj;
- spf=pass (domain: windriver.com, ip: 40.107.69.40, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=fozsX0XR;
+ spf=pass (domain: windriver.com, ip: 40.107.220.76, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EACAKt0B3mcl3syOdG0ZPVx0mqJ6JR7PgOecP7Ur8moRAJ2xz4vahFnVYIsW+Wkv8VzRJaiDw5hz4G5XLXr9szwxfQ9zBLetrPTiqKn3l5VOkImsgjPEQax54Qng0rdIE5nsr8XHykeAZ7VdQHhltrOenL6mHTnQfeZpAv4R85wJtyXsiB8OUOmt1f8iGIoefL27G3Lskii2kKICDTu9bCZ0DlSaqO55trKS7xOVzrOSE1Q+BPDuTzmFLy0dq0iFUOQyH3BDqfn8s9BHPDvCeQ3bpdNwL9fMuzut7cHRDqaL2k5HK7Rp042wJEaLdCeiQLiyRbqUBdqNyY9D7uzVUw==
+ b=QrxfziyRI11gD6cNKWR3cOJjWUXpw/k6YtEnuS9ObcZEo6BHSqSPedV7YJ7OTl2HgS2mCV8sKsQeQzf/Yn9ZLOylbbs11Gu6G69D30iVqUAOwY3q1pSTJygef3f2HslRn8QcH1fgZ6VW5B36vsgkwdy2CGApZv3TT46c220HUfi4oFdLwaeLCo4gbekP1vFNwsx6uFHBJ+dBPCrgVHKFfRrXBFhnW/3l9yppl7ZqusBTyLMwIEv/BWWHvTq5FdG0qe2dylo9EBecn1N64MHWxjTMGwwG8Kq6h857zs0yLmiUoxazIF5yrBhGtU2A26Bn/95T97S39M4wmrGhi821Yw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NwnFoa1ZxlbRlDBY/uDepx78LhAJAC/FcOvoRFA2jSg=;
- b=fNWpOdhrkOv0zZQn2w7RByN+n7L1iJO7LbQd8gYtZnjwfEDyE4q7M3l3Wij34SdI7E/dzyvO30mEc4UPXXDSGIYgxB9yel5PhmnRU6/MTsPXxjsyUGs5BbixqMsYQiM7uZluXor38qeXtmuLttxu8FuhiMoiyKykdMy5nIjLrCClhIPG3ce96vBhk0kkaIyqHi3aTTYY9pGRv0WescPu6hniDfJSPSckxkzt2BPAB73WB0FpUkGAFvUWQl5AJcgys9RuBgg+tJSPgynEZD+e8CjCU7xyfkk2M0KuZ3ciR1/pPJhlF+aOhZo+HEz49OxfeyQ58/1AhokzH+Bb1bXEbQ==
+ bh=2RTy+/VC0LE4WCYWuxT47rEcfw0KzwoSZKqLaGcLM1Y=;
+ b=keAipSMdQHjsyCYE8CSb79JJxdCXz+btHSVsh+983tsq4GEoTa+mHVDl43Cdu92XTRUBDu6t9XawUgfexOJGqgdBw4ALIspvDE3jMi8hC952vvBqsYY1PBzx2sNPboyJff1FyTYY2Jpvqp2Z+gXTZq0tXs+qMSkXJGyNSBAXs4gePUx1iJ7TY6G0UrPkJEf01VTyCGBwlWl4Vyq1g2EektbCSrvDlgaMtA5KX5Vo9ehc6/gbZiCFyiYFtwDmia3/sgsMMQLgVGLmip9gptqSM9Yis+LwZwTxEBNBzhHY89OpBWB99KIc1HcIUrAj97U358vCTcPk4sQJ/uFKyCrBzQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,101 +19,101 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NwnFoa1ZxlbRlDBY/uDepx78LhAJAC/FcOvoRFA2jSg=;
- b=Ys15RVyjKXAgJ1gVRzzwxA5WFrrP7m+qMdfb4/y0OgecoUKJEyXOtmXltOjGgpH8QwJ1B3kQNRvsbTsBpUjNCkRq6UvRP1/P/n3tC3vwllU+jDfyRQgCyzGfFHVXJPT5eNeiXXshG/5FIHiKRKRRI/IgnOBCk5gANusY7SQgyNM=
+ bh=2RTy+/VC0LE4WCYWuxT47rEcfw0KzwoSZKqLaGcLM1Y=;
+ b=fozsX0XRuCjwPzi/icD06neVkYvaWChABQmo521et9Q2h+E74Q5Cd4lIZBsgH+qkup67Q/014gcLSgnEfe0f4m9/4GLAAIxS2H3KW14/gsxDFVnp0Kmwef+WJar1xSkALbXEBNFjjl1CqKKMQjGuMPnWqns5HYP4hcSvvrSLVu0=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB1265.namprd11.prod.outlook.com (2603:10b6:404:48::12) with
+ by BN6PR11MB1780.namprd11.prod.outlook.com (2603:10b6:404:103::17) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3021.23; Thu, 21 May
- 2020 22:00:08 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3021.27; Thu, 21 May
+ 2020 22:00:35 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3000.022; Thu, 21 May 2020
- 22:00:08 +0000
-Subject: Re: [oe] [meta-python][PATCH] python3-pycparser: upgrade 2.19 -> 2.20
-To: Wang Mingyu <wangmy@cn.fujitsu.com>,
+ 22:00:35 +0000
+Subject: Re: [oe] [PATCH] python3-ansicolors: Add recipe version 1.1.8
+To: Domarys Correa <domarys.correa@ossystems.com.br>,
  openembedded-devel@lists.openembedded.org
-References: <1590057006-40833-1-git-send-email-wangmy@cn.fujitsu.com>
+References: <20200520203217.26010-1-domarys.correa@ossystems.com.br>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <d6897895-36a0-a535-42fc-ba2bd623dfdb@windriver.com>
-Date: Thu, 21 May 2020 18:00:05 -0400
+Message-ID: <69d25aad-d73d-27dc-89d1-af7b42a47dfc@windriver.com>
+Date: Thu, 21 May 2020 18:00:33 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <1590057006-40833-1-git-send-email-wangmy@cn.fujitsu.com>
-X-ClientProxiedBy: YT1PR01CA0142.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::21) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200520203217.26010-1-domarys.correa@ossystems.com.br>
+X-ClientProxiedBy: YT1PR01CA0128.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2f::7) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0142.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3021.25 via Frontend Transport; Thu, 21 May 2020 22:00:07 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0128.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::7) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3021.27 via Frontend Transport; Thu, 21 May 2020 22:00:35 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: c690d15b-ac5d-4f81-7393-08d7fdd2535d
-X-MS-TrafficTypeDiagnostic: BN6PR11MB1265:
+X-MS-Office365-Filtering-Correlation-Id: 80ad65c8-d1f3-4b36-1f28-08d7fdd263e2
+X-MS-TrafficTypeDiagnostic: BN6PR11MB1780:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB1265BB62B12B4117574AE2EF9FB70@BN6PR11MB1265.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:173;
+	<BN6PR11MB178003D1E6D47DF5CCD932379FB70@BN6PR11MB1780.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:247;
 X-Forefront-PRVS: 041032FF37
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	gzegwMlMPFTY5tOry4/RC2yGVqiLHcH/JAVTdmvYOHG+PFKiHek+QJjmhIJ3AmNQIN8eaJkgxnJQZFkKDsWgraLQQdehVuutfRYnXgcQGOmh/DdnkTC4nBO0MPec7p1EEHWF1aeVfJ6Ujge5SC0orSw726cW4w58toyLQJXTWjPDUzCVsamw+gYTZDbd/WyS1Dxlz70ED9JwB7O/3lzfmWpDH4Yqn9YTZCVXSLq6linSvLxyurq161Tw2FEAnPvhAAWYyGGkkXtDWAAn52qX0lR1O7P2srTq+ti0EU2proyYkro4VZJ+Jld8X+ylT+bNREEr1Bv5Ptvgyy62aW7fZNGNdIhcBOEebD5xH6Pz3JKTYuK2xTUfTlSFqEXe1qoRMoyf4gdcjpfNEo8f8/ITQ8p9V7H9AoLi0fr0bZNjqDkgTsaus5fNQ96bJjc6rXAQfKxGY0Bimh2cBKFPEDAXPw==
+	SGWCMAcSIWI/NQvI+2DJeEkJWsK57eoNJXQJuS5REWebg3yeMfproPAOy+l6MnYZK6aKr6T9thatKhY6Z8PXnf+T5Cwo7GFNPTaHium1SShtG3xl6PNyzaWnGBIJkClHTxuDayZ9hk1BS07pwglPdEfFe4cjzoC0C4m6F99xCZFJd9k0WwuD13xjlMpnnNUu0xMH8hnm3GmPGcheRGpWTraZOe6dszE1F3Jj6JXw8npgqN0ezsiQE/6Tso1u5NYDJv7AEEAfHouuQR8eCE/BOx4T/d21Xxe5rSY/BnyNxyz23p6dBsUQaCe9xX6mtZr/30ykrymFPJlymbg+DIphYOv9GWfWCJRmVrJmKKfz5AmS6ykPxcVXYsRc0UYqhzSiyuU/y7L7ZaJAUEJoJsTfFo0FTETCIzlKrgj7aNjMJeDocbUHvdNtCI2qrspUEpV5qMBzr3/y0GuBFf8OOZS1bw==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(366004)(346002)(136003)(376002)(396003)(39850400004)(66476007)(16576012)(2616005)(6486002)(52116002)(66556008)(966005)(956004)(36756003)(44832011)(316002)(166002)(31696002)(8676002)(2906002)(478600001)(33964004)(86362001)(5660300002)(53546011)(66946007)(16526019)(186003)(26005)(31686004)(8936002)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(376002)(136003)(39850400004)(366004)(396003)(8936002)(66476007)(66556008)(66946007)(36756003)(956004)(44832011)(966005)(2616005)(16526019)(31686004)(186003)(16576012)(5660300002)(8676002)(478600001)(316002)(26005)(31696002)(86362001)(6486002)(2906002)(52116002)(166002)(33964004)(53546011)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	ZhtdjhA51JRz3DlKh3ZoM+3+R7Uw4PanfjANeSSYIFAahk6HMcbYXKTYoKtRGCf9iy0TrSFkBHChJinxrArCZLfONv4KuXePs6Kif/fSo1eqN3hTnHjH4eQNr/iE9tjgQRDXwOgfXmSf2uPqAGBoMT0+T1myvQmRla4F8zUvPcLYIjRxImVRv1o17kfDNVLBVllezMLqmqgxrFCCIij3okAOHr+l9Vt7y8GjYOK4oJCjL+UQDdFFzLQmlUl2eGrfuyYsxgnl5VxSmwu72hw+MxxPgsNS+8zaXh3GAp2QebImL77+azkmv8SHH5cjyKcdRLXDKTmYVaUEXlyDFZ6nVZx+dOBxi6IV5Lr8BWG5RAId+fP9R6ql+idKObNrmKLIc4Z9TFnQXoICnpdIjPvv2VBBV7cRECwi5vA2K54nOzfoLDneU1eZS/CYrl6TQ9iyqhwyo+khgHNPvEEVrQdJoGEQa9OI0QoBJIFRF7sN9oyCLA5/LUCr07fenvxCVv/+
+	MV8XNfJZs/Wtbejor4qeIVK/IOxBRHfCBfY5GnRAAR2F2GRqGi/Xa7PsoKiS6GrJG7Jliy1+u6I69ctAKJcZT6z34IPMOvS50jl44wkJKpvlJ76kaJODmBpoevA522LsIzVCOWB6EogkuylhydK2U0N99zvsjtYyN433NSD2sL2MmvS9arUB53GB22nZlGrRKPDB6Pw9lrcwS/XlSMKssaaGqPRA6YRnDLZSMBi8B/hU6oP+m71pSawrmZHV6aIKHgrv2dZKbyByuZTxzgPEKpigzO0NBr+Cny3GhiFdq50rrLFk0O1ugzU1sZxeTxauW+bZ4nr2EITamgNVJQZa8Dz+Ficx+TEPkYr0G1pCStLeYCndAUUJQ91Fw1IzG+F0cFT0U9Eipj+qIHvZ7OjV3c0e1uqweh9Sf1EEqDpPng/JktkjvFagwYjASF8OToPIT2gyLkTxg3HR4aAljdd4pblUi8yROzlIH7Q4eekXnM9HVS4d4FByGMjmmGyk0l2m
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c690d15b-ac5d-4f81-7393-08d7fdd2535d
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2020 22:00:08.1296
+X-MS-Exchange-CrossTenant-Network-Message-Id: 80ad65c8-d1f3-4b36-1f28-08d7fdd263e2
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2020 22:00:35.9036
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Li+hUSSwGSil+gceHj20FKBWvrHbJ3LBPvdnyipaqLp1EYcyXVmlvvd5IqaVYCGm00yHHVTGTgRmRA7ox4KQWBUKpvWtm5KgzDCe3DZ2/Zc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1265
+X-MS-Exchange-CrossTenant-UserPrincipalName: b5x/Qa7srmwXQeRo8LbZNUaHjamxfjFpHMFvyI8abf4cTYlhUkxs59Qi5cb9dujQ2IZBIDxFILnOg0VXq9hnsQQLPcTfCjZTRqUrOW66hs0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1780
 Content-Type: multipart/alternative;
- boundary="------------0070D78B6F822A22D037E576"
+ boundary="------------A4012E2FFB47A18B84ECDE02"
 Content-Language: en-US
 
---------------0070D78B6F822A22D037E576
+--------------A4012E2FFB47A18B84ECDE02
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 5/21/20 6:30 AM, Wang Mingyu wrote:
-> Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+On 5/20/20 4:32 PM, Domarys Correa wrote:
+> Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../{python3-pycparser_2.19.bb => python3-pycparser_2.20.bb}  | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-pycparser_2.19.bb => python3-pycparser_2.20.bb} (74%)
+>   .../python/python3-ansicolors_1.1.8.bb               | 12 ++++++++++++
+>   1 file changed, 12 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-ansicolors_1.1.8.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pycparser_2.19.bb b/meta-python/recipes-devtools/python/python3-pycparser_2.20.bb
-> similarity index 74%
-> rename from meta-python/recipes-devtools/python/python3-pycparser_2.19.bb
-> rename to meta-python/recipes-devtools/python/python3-pycparser_2.20.bb
-> index 35ed93e09b..2a5f414b2f 100644
-> --- a/meta-python/recipes-devtools/python/python3-pycparser_2.19.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pycparser_2.20.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/eliben/pycparser"
->   LICENSE = "BSD-3-Clause"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=86f1cedb4e6410a88ce8e30b91079169"
->   
-> -SRC_URI[md5sum] = "76396762adc3fa769c83d8e202d36b6f"
-> -SRC_URI[sha256sum] = "a988718abfad80b6b157acce7bf130a30876d27603738ac39f140993246b25b3"
-> +SRC_URI[md5sum] = "b8f88de737db8c346ee8d31c07c7a25a"
-> +SRC_URI[sha256sum] = "2d475327684562c3a96cc71adf7dc8c4f0565175cf86b6d7a404ff4c771f15f0"
->   
->   inherit pypi setuptools3
->   
+> diff --git a/meta-python/recipes-devtools/python/python3-ansicolors_1.1.8.bb b/meta-python/recipes-devtools/python/python3-ansicolors_1.1.8.bb
+> new file mode 100644
+> index 000000000..9ba710cb7
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-ansicolors_1.1.8.bb
+> @@ -0,0 +1,12 @@
+> +DESCRIPTION = "Add ANSI colors and decorations to your strings"
+> +
+> +LICENSE = "ISC"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=aef5566ac4fede9815eccf124c281317"
+> +
+> +SRC_URI[sha256sum] = "99f94f5e3348a0bcd43c82e5fc4414013ccc19d70bd939ad71e0133ce9c372e0"
+> +
+> +PYPI_PACKAGE_EXT = "zip"
+> +
+> +inherit pypi setuptools3
+> +
+> +BBCLASSEXTEND = "native nativesdk"
 >
 > 
 
---------------0070D78B6F822A22D037E576
+--------------A4012E2FFB47A18B84ECDE02
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -123,37 +123,38 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 5/21/20 6:30 AM, Wang Mingyu wrote:<br>
+    <div class="moz-cite-prefix">On 5/20/20 4:32 PM, Domarys Correa
+      wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:1590057006-40833-1-git-send-email-wangmy@cn.fujitsu.com">
-      <pre class="moz-quote-pre" wrap="">Signed-off-by: Wang Mingyu <a class="moz-txt-link-rfc2396E" href="mailto:wangmy@cn.fujitsu.com">&lt;wangmy@cn.fujitsu.com&gt;</a></pre>
+    <blockquote type="cite" cite="mid:20200520203217.26010-1-domarys.correa@ossystems.com.br">
+      <pre class="moz-quote-pre" wrap="">Signed-off-by: Domarys Correa <a class="moz-txt-link-rfc2396E" href="mailto:domarys.correa@ossystems.com.br">&lt;domarys.correa@ossystems.com.br&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:1590057006-40833-1-git-send-email-wangmy@cn.fujitsu.com">
+    <blockquote type="cite" cite="mid:20200520203217.26010-1-domarys.correa@ossystems.com.br">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../{python3-pycparser_2.19.bb =&gt; python3-pycparser_2.20.bb}  | 4 &#43;&#43;--
- 1 file changed, 2 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pycparser_2.19.bb =&gt; python3-pycparser_2.20.bb} (74%)
+ .../python/python3-ansicolors_1.1.8.bb               | 12 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
+ 1 file changed, 12 insertions(&#43;)
+ create mode 100644 meta-python/recipes-devtools/python/python3-ansicolors_1.1.8.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-pycparser_2.19.bb b/meta-python/recipes-devtools/python/python3-pycparser_2.20.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-pycparser_2.19.bb
-rename to meta-python/recipes-devtools/python/python3-pycparser_2.20.bb
-index 35ed93e09b..2a5f414b2f 100644
---- a/meta-python/recipes-devtools/python/python3-pycparser_2.19.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-pycparser_2.20.bb
-@@ -3,8 &#43;3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/eliben/pycparser">&quot;https://github.com/eliben/pycparser&quot;</a>
- LICENSE = &quot;BSD-3-Clause&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=86f1cedb4e6410a88ce8e30b91079169">&quot;file://LICENSE;md5=86f1cedb4e6410a88ce8e30b91079169&quot;</a>
- 
--SRC_URI[md5sum] = &quot;76396762adc3fa769c83d8e202d36b6f&quot;
--SRC_URI[sha256sum] = &quot;a988718abfad80b6b157acce7bf130a30876d27603738ac39f140993246b25b3&quot;
-&#43;SRC_URI[md5sum] = &quot;b8f88de737db8c346ee8d31c07c7a25a&quot;
-&#43;SRC_URI[sha256sum] = &quot;2d475327684562c3a96cc71adf7dc8c4f0565175cf86b6d7a404ff4c771f15f0&quot;
- 
- inherit pypi setuptools3
- 
+diff --git a/meta-python/recipes-devtools/python/python3-ansicolors_1.1.8.bb b/meta-python/recipes-devtools/python/python3-ansicolors_1.1.8.bb
+new file mode 100644
+index 000000000..9ba710cb7
+--- /dev/null
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-ansicolors_1.1.8.bb
+@@ -0,0 &#43;1,12 @@
+&#43;DESCRIPTION = &quot;Add ANSI colors and decorations to your strings&quot;
+&#43;
+&#43;LICENSE = &quot;ISC&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=aef5566ac4fede9815eccf124c281317">&quot;file://LICENSE;md5=aef5566ac4fede9815eccf124c281317&quot;</a>
+&#43;
+&#43;SRC_URI[sha256sum] = &quot;99f94f5e3348a0bcd43c82e5fc4414013ccc19d70bd939ad71e0133ce9c372e0&quot;
+&#43;
+&#43;PYPI_PACKAGE_EXT = &quot;zip&quot;
+&#43;
+&#43;inherit pypi setuptools3
+&#43;
+&#43;BBCLASSEXTEND = &quot;native nativesdk&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -163,4 +164,4 @@ index 35ed93e09b..2a5f414b2f 100644
   </body>
 </html>
 
---------------0070D78B6F822A22D037E576--
+--------------A4012E2FFB47A18B84ECDE02--
