@@ -1,790 +1,339 @@
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
- by mx.groups.io with SMTP id smtpd.web11.2219.1590087503030920469
+Received: from NAM02-CY1-obe.outbound.protection.outlook.com (NAM02-CY1-obe.outbound.protection.outlook.com [40.107.76.79])
+ by mx.groups.io with SMTP id smtpd.web12.2274.1590098357681149252
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 May 2020 11:58:45 -0700
+ Thu, 21 May 2020 14:59:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=DGG5SZhL;
- spf=pass (domain: skidata.com, ip: 91.230.2.99, mailfrom: prvs=4038aa0db=richard.leitner@skidata.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-  t=1590087511; x=1621623511;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=avARELcL3JqBlJMAHKurXUzpf1XThT13XY55ScUToaI=;
-  b=DGG5SZhLzGnzcWwUFmXjSHswF+vPtWyk2aNAXKTQpzmqtzGdHfTf1rYJ
-   AJi4bSZ5kU2jlErxALOnkNWeGpXTD4PMKFw50aAEZvLeA4X/x05nG/bNA
-   tOds+qsuZaIC2PIlcar3sq3MAuqsjg2G7F0ETNbJCvxw8cCpc1FGC7GiQ
-   gPHCAwVP6f1935LBYf4YOV087Jn0BoKpUR73LoiRc+jhK3WvVCCsv9/D0
-   l1pjQzd3MN25GPlSw+eD5pFPeSCJY+32ZM1gmHDky+/CuFdFkLpBuZqnV
-   alIw4r26TOX5jK5bdNRkh1pIMmS3II3/dQ9sGqQ+DS4f4QGrv0Py65QPA
-   Q==;
-IronPort-SDR: asx/NmQwF+vDyZ/DolXV5UvIhPZbjcywKSMfj+oyNRkfn5suBuBowfep7BOXDXbkIlQinyHaz5
- SoxyWlnWdiGTRudvinSGjQb3O5QRl1Xak4uA+f5Nw8RP8Nb+78Tm/ihvy7eXtb9eMt9aDzDOvu
- NcKBiuNdacOfd/LUZVE+efpCCo2KnW0hVP+gf8K8Bw7WXVLMqpgkB5x6gm9ByREytsZvIobHU9
- g9IwmG8amG8dHz2Ke64Yi2qRyKTx4s2tC2I2+n1SblA1A7ztGbafYenMJqGGceSlh4JTwYATdm
- SXo=
-X-IronPort-AV: E=Sophos;i="5.73,418,1583190000"; 
-   d="scan'208";a="24457043"
-From: "Richard Leitner" <richard.leitner@skidata.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <uvv.mail@gmail.com>, <bkylerussell@gmail.com>, <jacob.kroon@gmail.com>,
-	<dev+oe@g0hl1n.net>, Richard Leitner <richard.leitner@skidata.com>
-Subject: [meta-java][RFC] openjdk-14: add 14.0.1
-Date: Thu, 21 May 2020 20:57:25 +0200
-Message-ID: <20200521185725.3200349-1-richard.leitner@skidata.com>
-X-Mailer: git-send-email 2.26.2
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=KygC7zgP;
+ spf=pass (domain: windriver.com, ip: 40.107.76.79, mailfrom: trevor.gamblin@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=OXZUJzKra++AiO5XVw2s2NHGWWwT7sOG84GY8BLIt5Bb71L4lthzeSMCAM08y6t9t/hkhA4C7n68z4sWTKpw67ZE22QYixJpLEnn+J+juN9nK5uo5YVKlsM00QARfoj6q2ljjV6GthDWQ7YLv/JeEMO2+5n+6Gl4G4+KgwUnrMHDCy7SeEtQwh+G2Ktc39Ba5mkLc01ePl71FvhSlRL7drdShijkFfV3z1rqDJm4mKaApYv75aGfTs9akmPK8wkyvBYdvPg11TLrRKHp7IRofMRanoTadJ56lle+q6mhGBSIoW5C/Sdtn2k8/KEb4Y4fhYyNkaOYBnUT3UODITW3iA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QOHvsOPmB57shh5Q1LULB8z630YnleOo1us1rya5It4=;
+ b=CTmH7I5/EZBRPz/mX3Xpi7TcKL1nAOwyze8S1vy1P5FZnlKEvbAzUsyCRH+c2YLEX/MY1TIstfA96eQjG1yyW1cmjHxpQSNx5q6TM3Q9EqgRbCMIoBWBV6J7AFa9Zw5Vva0oHphksVS7Bhoj6CogJ4+BFvTf3au93HxRhavskieiIM5CqAvQ3QnLS3MilG61JENxusdT74Q3e3JQfgbjtp9tf1lAXsSl3XViOEMqAtcneKDC+p0hIJYs0OAYjSfMlTN4genX5S+Dyyis87LFtTkaAE3mRPl7VzYHZSab1HmI/+f1VUSBkY76UlXOyfDSHKOew9LA1CZrdNLiPNLJEQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QOHvsOPmB57shh5Q1LULB8z630YnleOo1us1rya5It4=;
+ b=KygC7zgPktoPn5DuGFUkmWt8sxjOJ10rncSXY4VpMjQ/++IghcKnS8Lhj+dWB/Q/Hozg/EsQejnKA+/vhT923LnHwvMEBfByq+s9yWfGio5mO+GIgYy0l0UoQXgdaJkVQ3S+O6bQIBLrWsGI+3Q7uAZ81Czeex6D7jSJ1nTHrlw=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
+ by BN6PR11MB1780.namprd11.prod.outlook.com (2603:10b6:404:103::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3021.27; Thu, 21 May
+ 2020 21:59:14 +0000
+Received: from BN6PR11MB0003.namprd11.prod.outlook.com
+ ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
+ ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3000.022; Thu, 21 May 2020
+ 21:59:14 +0000
+Subject: Re: [oe] [PATCH] python3-jinja2: Update 2.11.1 -> 2.11.2
+To: Domarys Correa <domarys.correa@ossystems.com.br>,
+ openembedded-devel@lists.openembedded.org
+References: <20200521150603.6360-1-domarys.correa@ossystems.com.br>
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+Message-ID: <0f030e01-2222-c15a-33c6-b2544a4aa472@windriver.com>
+Date: Thu, 21 May 2020 17:59:12 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
+In-Reply-To: <20200521150603.6360-1-domarys.correa@ossystems.com.br>
+X-ClientProxiedBy: YT1PR01CA0127.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2f::6) To BN6PR11MB0003.namprd11.prod.outlook.com
+ (2603:10b6:405:61::26)
+Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
-Return-Path: richard.leitner@skidata.com
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
- sdex5srv.skidata.net (192.168.111.83)
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0127.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::6) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3021.23 via Frontend Transport; Thu, 21 May 2020 21:59:13 +0000
+X-Originating-IP: [174.115.236.231]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 161412fe-6d9a-4259-614d-08d7fdd2334c
+X-MS-TrafficTypeDiagnostic: BN6PR11MB1780:
+X-Microsoft-Antispam-PRVS: 
+	<BN6PR11MB1780CCE44B2F0908E89AE7869FB70@BN6PR11MB1780.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:248;
+X-Forefront-PRVS: 041032FF37
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	8dV/TQEZQIxlx+cR3PoBJWoh4pORgQm+qH34JQZmyi9G2sgkfNaxt032nugkK83vPxXR5x/axbPRaE+DbmZEWEUnZZy58uMoJdPyKLNWWebF3ITCoXGnPw7+oG+T1fKkvr2lXy1179E3zDzfAmwrDD7QWd9MiMDO4I6EiivZug2NONcqFXLGkR1/gfVK286DlX4l83+cOZtTj4Gb/7e+Ef2iTrMtNm7Aq44iZrQhZD2S/g4X7NJ8YengNMqd3FuGpwjD7lhf1M9Ls/7GyVTKRNmlwNCPLiRxIYvNOxqTyfPUI7lf0ZJhEC1RlWbYKRVor3ZO3NQxVnmkgm8MZEO2BkhTJztwGz8Fa0HzSJJCLCBXn64F834QsPj3zOnUqQgH/2PQFmazRUtTjPXrgtUAYG/SznM+c6n8wydFolcq4xeakU9AjpwkP5bdUVkn96bV5MjNrJFDbnj8O0hOpEXYmg==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(376002)(136003)(39850400004)(366004)(396003)(8936002)(66476007)(66556008)(66946007)(36756003)(956004)(44832011)(966005)(2616005)(16526019)(31686004)(186003)(15650500001)(16576012)(5660300002)(8676002)(478600001)(316002)(26005)(31696002)(86362001)(6486002)(2906002)(52116002)(166002)(33964004)(53546011)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	KkVzRJM6RaAVm1JJh5yuo3xvoW8m6tBf7PVfXUntYeNvGFpfav7PRcEss5wmfGSz29anZwES9LkevGZzVG0keXavpZ/bhKNkzcPtDPHTE3YNkNMdcR9ZFytrGfd9LBSI2CMaf4z7baU2YAGVUF0StUWfUNEJ4O7UAzVJtNk9TY7YJaUphc6zyjpH3LeM3OnO4pJxzjdZUGal87HCnBnVNOI2srZxb6BPJJt01Jst3Q4TkDVb/MUvqO1eaaNFOePZQJzWhe9vs7xqdQPpC4fuvzHNeT34M/VO278g35E4hMdJasCcijIFoQIFrIThJSB7vUsAGTCmnG/7SOLafTGUkjeGLLT/Finnqeyxxwi7nMBHNFVEpsBC8qcM39rcLPR5q0ad5pzD4HZFJKoV6PoWeg8fDoFs3p0m0TtqLWmhIBpEcd2Vr2hT/huKZHsC6Js8eD2OoDoCV8vcuH+Xm3c5APgLE0D+dy33WKgGy6hpxfumt4gd+oomorRkQX841eZp
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 161412fe-6d9a-4259-614d-08d7fdd2334c
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2020 21:59:14.4086
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: TG0Hy5hxckNIp+bDZ9nByvdI7/TagT4BoFgTIi5/AP0w1qJ02tP+osljRD7hPidxujDlAlNPUSMiUxl5zFbguEWRhmN9cHhjPYSjy/3utIg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1780
+Content-Type: multipart/alternative;
+ boundary="------------B74086A3FA6B46546C45F4D6"
+Content-Language: en-US
 
-Add support for OpenJDK and OpenJRE v14.0.1.
+--------------B74086A3FA6B46546C45F4D6
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-This version of OpenJDK is bootstrapped from a host-provided JDK. The
-host provided JDK is used to build openjdk-14-native. The native build
-is then used as build-jdk for the cross version.
 
-Built and runtime-tested for qemuarm, qemuarm64, qemux86 and qemux86-64
-on a fedora 32 host.
+On 5/21/20 11:06 AM, Domarys Correa wrote:
+> Add .inc file to .bb, as updated to python3
+>
+> Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>   .../recipes-devtools/python/python-jinja2.inc | 33 --------------
+>   .../python/python3-jinja2_2.11.1.bb           |  4 --
+>   .../python/python3-jinja2_2.11.2.bb           | 43 +++++++++++++++++++
+>   3 files changed, 43 insertions(+), 37 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python-jinja2.inc
+>   delete mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
+>   create mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python-jinja2.inc b/meta-python/recipes-devtools/python/python-jinja2.inc
+> deleted file mode 100644
+> index 927230515..000000000
+> --- a/meta-python/recipes-devtools/python/python-jinja2.inc
+> +++ /dev/null
+> @@ -1,33 +0,0 @@
+> -DESCRIPTION = "Python Jinja2: A small but fast and easy to use stand-alone template engine written in pure python."
+> -LICENSE = "BSD-3-Clause"
+> -LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462"
+> -
+> -PYPI_PACKAGE = "Jinja2"
+> -
+> -SRC_URI[md5sum] = "5d88c7e77aa63fc852a04f65dbfe5594"
+> -SRC_URI[sha256sum] = "93187ffbc7808079673ef52771baa950426fd664d3aad1d0fa3e95644360e250"
+> -
+> -RDEPENDS_${PN} += "${PYTHON_PN}-io ${PYTHON_PN}-pickle ${PYTHON_PN}-crypt \
+> -    ${PYTHON_PN}-math ${PYTHON_PN}-netclient \
+> -    ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-markupsafe \
+> -    ${PYTHON_PN}-json ${PYTHON_PN}-threading ${PYTHON_PN}-numbers"
+> -
+> -CLEANBROKEN = "1"
+> -
+> -BBCLASSEXTEND = "native nativesdk"
+> -
+> -inherit ptest
+> -
+> -SRC_URI += " \
+> -	file://run-ptest \
+> -"
+> -
+> -RDEPENDS_${PN}-ptest += " \
+> -	${PYTHON_PN}-pytest \
+> -	${PYTHON_PN}-unixadmin \
+> -"
+> -
+> -do_install_ptest() {
+> -	install -d ${D}${PTEST_PATH}/tests
+> -	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+> -}
+> diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb b/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
+> deleted file mode 100644
+> index 284f5f588..000000000
+> --- a/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
+> +++ /dev/null
+> @@ -1,4 +0,0 @@
+> -inherit pypi setuptools3
+> -require python-jinja2.inc
+> -
+> -RDEPENDS_${PN} += "${PYTHON_PN}-asyncio"
+> diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb b/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
+> new file mode 100644
+> index 000000000..681acf8f1
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
+> @@ -0,0 +1,43 @@
+> +DESCRIPTION = "Python Jinja2: A small but fast and easy to use stand-alone template engine written in pure python."
+> +
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462"
+> +
+> +SRC_URI[sha256sum] = "89aab215427ef59c34ad58735269eb58b1a5808103067f7bb9d5836c651b3bb0"
+> +
+> +PYPI_PACKAGE = "Jinja2"
+> +
+> +CLEANBROKEN = "1"
+> +
+> +inherit pypi setuptools3 ptest
+> +
+> +SRC_URI += " \
+> +	file://run-ptest \
+> +"
+> +
+> +do_install_ptest() {
+> +    install -d ${D}${PTEST_PATH}/tests
+> +    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+> +}
+> +
+> +RDEPENDS_${PN}-ptest += " \
+> +	${PYTHON_PN}-pytest \
+> +	${PYTHON_PN}-unixadmin \
+> +"
+> +
+> +RDEPENDS_${PN} += " \
+> +    ${PYTHON_PN}-asyncio \
+> +    ${PYTHON_PN}-crypt \
+> +    ${PYTHON_PN}-io \
+> +    ${PYTHON_PN}-json \
+> +    ${PYTHON_PN}-markupsafe \
+> +    ${PYTHON_PN}-math \
+> +    ${PYTHON_PN}-netclient \
+> +    ${PYTHON_PN}-numbers\
+> +    ${PYTHON_PN}-pickle \
+> +    ${PYTHON_PN}-pprint \
+> +    ${PYTHON_PN}-shell \
+> +    ${PYTHON_PN}-threading \
+> +"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+>
+> 
 
-Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+--------------B74086A3FA6B46546C45F4D6
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 5/21/20 11:06 AM, Domarys Correa
+      wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:20200521150603.6360-1-domarys.correa@ossystems.com.br">
+      <pre class="moz-quote-pre" wrap="">Add .inc file to .bb, as updated to python3
+
+Signed-off-by: Domarys Correa <a class="moz-txt-link-rfc2396E" href="mailto:domarys.correa@ossystems.com.br">&lt;domarys.correa@ossystems.com.br&gt;</a></pre>
+    </blockquote>
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
+    <blockquote type="cite" cite="mid:20200521150603.6360-1-domarys.correa@ossystems.com.br">
+      <pre class="moz-quote-pre" wrap="">
 ---
-Any test results, suggestions for improvement or general feedback is
-warmly welcome! Thanks!
----
- README                                        |  26 ++-
- .../{bootstrap-flow.txt => bootstrap-flow.md} |   8 +
- lib/oeqa/runtime/cases/java.py                |   4 +-
- recipes-core/openjdk/openjdk-14-common.inc    | 155 ++++++++++++++++++
- recipes-core/openjdk/openjdk-14-release.inc   |  12 ++
- recipes-core/openjdk/openjdk-14_14.0.1.bb     |   7 +
- recipes-core/openjdk/openjre-14_14.0.1.bb     |   5 +
- ...oconf-remove-hard-dependency-on-cups.patch | 154 +++++++++++++++++
- ...olchain-remove-invalid-compiler-chec.patch |  45 +++++
- ..._libsctp_link_errors_caused_by_GCC10.patch |  64 ++++++++
- ...le_definition_link_errors_with_GCC10.patch |  49 ++++++
- ...le_definition_link_errors_with_GCC10.patch |  48 ++++++
- .../images/openjdk-14-test-image.bb           |   3 +
- .../images/openjre-14-test-image.bb           |   3 +
- 14 files changed, 573 insertions(+), 10 deletions(-)
- rename docs/{bootstrap-flow.txt => bootstrap-flow.md} (94%)
- create mode 100644 recipes-core/openjdk/openjdk-14-common.inc
- create mode 100644 recipes-core/openjdk/openjdk-14-release.inc
- create mode 100644 recipes-core/openjdk/openjdk-14_14.0.1.bb
- create mode 100644 recipes-core/openjdk/openjre-14_14.0.1.bb
- create mode 100644 recipes-core/openjdk/patches-openjdk-14/0001-make-autoconf-remove-hard-dependency-on-cups.patch
- create mode 100644 recipes-core/openjdk/patches-openjdk-14/0002-make-autoconf-toolchain-remove-invalid-compiler-chec.patch
- create mode 100644 recipes-core/openjdk/patches-openjdk-14/fixed_libsctp_link_errors_caused_by_GCC10.patch
- create mode 100644 recipes-core/openjdk/patches-openjdk-14/libj2gss_NativeFunc_multiple_definition_link_errors_with_GCC10.patch
- create mode 100644 recipes-core/openjdk/patches-openjdk-14/libjava_childproc_multiple_definition_link_errors_with_GCC10.patch
- create mode 100644 recipes-images/images/openjdk-14-test-image.bb
- create mode 100644 recipes-images/images/openjre-14-test-image.bb
+ .../recipes-devtools/python/python-jinja2.inc | 33 --------------
+ .../python/python3-jinja2_2.11.1.bb           |  4 --
+ .../python/python3-jinja2_2.11.2.bb           | 43 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
+ 3 files changed, 43 insertions(&#43;), 37 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-jinja2.inc
+ delete mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
 
-diff --git a/README b/README
-index f97378d..d46bbc6 100644
---- a/README
-+++ b/README
-@@ -73,7 +73,6 @@ way is to add the following configuration to your local.conf:
- 
- SANITY_TESTED_DISTROS = ""
- INHERIT += "testimage"
--TESTIMAGE_AUTO = "1"
- 
- Then you should be able to use the open{jre,jdk}-{7,8}-test-image recipes.
- Furthermore you could also include the tests provided in lib/oeqa/runtime/cases
-@@ -110,6 +109,19 @@ list at openembedded-devel@lists.openembedded.org.
- Usage instructions
- ------------------
- 
-+Simply rely on openjdk-7-jre, openjdk-7, openjdk-8 or openjre-8.
-+
-+For conf/bblayers.conf you have to add
-+
-+BBLAYERS ?= " \
-+   ...
-+  path_to_source/meta-openembedded/meta-oe \
-+  path_to_source/sources/meta-java \
-+  "
-+
-+Extra usage instructions OpenJDK-7 & OpenJDK-8
-+----------------------------------------------
-+
- You should define at least the following variables in a distro include file or local.conf
- 
- # Possible provider: cacao-initial-native and jamvm-initial-native
-@@ -121,15 +133,13 @@ PREFERRED_PROVIDER_virtual/java-native = "jamvm-native"
- # Optional since there is only one provider for now
- PREFERRED_PROVIDER_virtual/javac-native = "ecj-bootstrap-native"
- 
--Simply rely on openjdk-7-jre, openjdk-7, openjdk-8 or openjre-8.
-+Extra usage instructions OpenJDK-14
-+-----------------------------------
- 
--For conf/bblayers.conf you have to add
-+You should define at least the following variables in a distro include file or local.conf
- 
--BBLAYERS ?= " \
--   ...
--  path_to_source/meta-openembedded/meta-oe \
--  path_to_source/sources/meta-java \
--  "
-+# The boot-jdk used to bootstrap openjdk-14-native (needs to be jdk v13 || v14)
-+OPENJDK14_BOOT_JDK = "/path/to/boot-jdk"
- 
- Build host dependencies
- -----------------------
-diff --git a/docs/bootstrap-flow.txt b/docs/bootstrap-flow.md
-similarity index 94%
-rename from docs/bootstrap-flow.txt
-rename to docs/bootstrap-flow.md
-index 602eab7..96d18e6 100644
---- a/docs/bootstrap-flow.txt
-+++ b/docs/bootstrap-flow.md
-@@ -1,3 +1,11 @@
-+# meta-java OpenJDK bootstrap workflow #
-+
-+## OpenJDK-14 ##
-+
-+ * TODO
-+
-+## OpenJDK-7 and OpenJDK-8 ##
-+
- * first jikes-native is compiled
-   * a Java 1.4-capable compiler that does not need a runtime or
-     (strictly) a class library to work
-diff --git a/lib/oeqa/runtime/cases/java.py b/lib/oeqa/runtime/cases/java.py
-index c1e1498..efee6e1 100644
---- a/lib/oeqa/runtime/cases/java.py
-+++ b/lib/oeqa/runtime/cases/java.py
-@@ -69,12 +69,12 @@ class JavaTest(OERuntimeTestCase):
- 
-     # As OpenJDK-8 doesn't support compiled mode (JIT) for arm yet we skip this
-     # test for now.
--    @OEHasPackage(["openjre-8", "openjdk-8"])
-+    @OEHasPackage(["!openjdk-7-jre", "!openjdk-7"])
-     @OETestDepends(['java.JavaTest.test_java_exists'])
-     @skipIfInDataVar('TUNE_FEATURES', 'armv4', 'OpenJDK 8 compiled mode not yet supported for armv4')
-     @skipIfInDataVar('TUNE_FEATURES', 'armv5', 'OpenJDK 8 compiled mode not yet supported for armv5')
-     @skipIfInDataVar('TUNE_FEATURES', 'armv6', 'OpenJDK 8 compiled mode not yet supported for armv6')
--    def test_java8_jar_comp_mode(self):
-+    def test_java_jar_comp_mode(self):
-         status, output = self.target.run('java -showversion -Xcomp -jar /tmp/test.jar')
-         msg = 'Exit status was not 0. Output: %s' % output
-         self.assertEqual(status, 0, msg=msg)
-diff --git a/recipes-core/openjdk/openjdk-14-common.inc b/recipes-core/openjdk/openjdk-14-common.inc
+diff --git a/meta-python/recipes-devtools/python/python-jinja2.inc b/meta-python/recipes-devtools/python/python-jinja2.inc
+deleted file mode 100644
+index 927230515..000000000
+--- a/meta-python/recipes-devtools/python/python-jinja2.inc
+&#43;&#43;&#43; /dev/null
+@@ -1,33 &#43;0,0 @@
+-DESCRIPTION = &quot;Python Jinja2: A small but fast and easy to use stand-alone template engine written in pure python.&quot;
+-LICENSE = &quot;BSD-3-Clause&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462">&quot;file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462&quot;</a>
+-
+-PYPI_PACKAGE = &quot;Jinja2&quot;
+-
+-SRC_URI[md5sum] = &quot;5d88c7e77aa63fc852a04f65dbfe5594&quot;
+-SRC_URI[sha256sum] = &quot;93187ffbc7808079673ef52771baa950426fd664d3aad1d0fa3e95644360e250&quot;
+-
+-RDEPENDS_${PN} &#43;= &quot;${PYTHON_PN}-io ${PYTHON_PN}-pickle ${PYTHON_PN}-crypt \
+-    ${PYTHON_PN}-math ${PYTHON_PN}-netclient \
+-    ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-markupsafe \
+-    ${PYTHON_PN}-json ${PYTHON_PN}-threading ${PYTHON_PN}-numbers&quot;
+-
+-CLEANBROKEN = &quot;1&quot;
+-
+-BBCLASSEXTEND = &quot;native nativesdk&quot;
+-
+-inherit ptest
+-
+-SRC_URI &#43;= &quot; \
+-	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
+-&quot;
+-
+-RDEPENDS_${PN}-ptest &#43;= &quot; \
+-	${PYTHON_PN}-pytest \
+-	${PYTHON_PN}-unixadmin \
+-&quot;
+-
+-do_install_ptest() {
+-	install -d ${D}${PTEST_PATH}/tests
+-	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-}
+diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb b/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
+deleted file mode 100644
+index 284f5f588..000000000
+--- a/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
+&#43;&#43;&#43; /dev/null
+@@ -1,4 &#43;0,0 @@
+-inherit pypi setuptools3
+-require python-jinja2.inc
+-
+-RDEPENDS_${PN} &#43;= &quot;${PYTHON_PN}-asyncio&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb b/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
 new file mode 100644
-index 0000000..3a570cc
+index 000000000..681acf8f1
 --- /dev/null
-+++ b/recipes-core/openjdk/openjdk-14-common.inc
-@@ -0,0 +1,155 @@
-+# Copyright (C) 2020 Richard Leitner <richard.leitner@skidata.com>
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+SUMMARY = "Java runtime based upon the OpenJDK Project"
-+HOMEPAGE = "http://openjdk.java.net/"
-+LICENSE  = "GPL-2.0-with-classpath-exception"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3e0b59f8fac05c3c03d4a26bbda13f8f"
-+
-+DEPENDS = "\
-+    alsa-lib \
-+    bash \
-+    fontconfig \
-+    freetype \
-+    giflib \
-+    jpeg \
-+    libpng \
-+    libx11 xorgproto libxt libxext libxrender libxtst libxrandr \
-+    unzip-native \
-+    zip-native \
-+    zlib \
-+    "
-+
-+DEPENDS_append_class-target = "\
-+    cups \
-+    openjdk-14-native \
-+    "
-+
-+SRC_URI = "\
-+    https://hg.openjdk.java.net/jdk-updates/jdk14u/archive/jdk-${PV}-ga.tar.bz2;name=jdk \
-+    file://0001-make-autoconf-remove-hard-dependency-on-cups.patch \
-+    file://0002-make-autoconf-toolchain-remove-invalid-compiler-chec.patch \
-+    "
-+
-+S = "${WORKDIR}/jdk14u-jdk-${PV}-ga"
-+
-+require openjdk-common.inc
-+
-+JAVA_HOME = "${libdir_jvm}/${PN}"
-+
-+AUTOTOOLS_SCRIPT_PATH = "${S}/make/autoconf"
-+
-+EXTRA_OECONF_append = "\
-+    --with-jobs=${@openjdk_build_helper_get_parallel_make(d)} \
-+    --with-tools-dir='${STAGING_DIR_NATIVE}' \
-+    --with-extra-cflags='${CFLAGS}' \
-+    --with-extra-cxxflags='${CXXFLAGS}' \
-+    --with-extra-ldflags='${LDFLAGS}' \
-+    --with-alsa-include='${STAGING_INCDIR}/alsa' \
-+    --with-alsa-lib='${STAGING_LIBDIR}' \
-+    --with-fontconfig-include='${STAGING_INCDIR}' \
-+    --with-freetype-include='${STAGING_INCDIR}/freetype2' \
-+    --with-freetype-lib='${STAGING_LIBDIR}' \
-+    --with-giflib=bundled \
-+    --with-libjpeg=bundled \
-+    --with-libpng=bundled \
-+    --with-zlib=bundled \
-+    --x-includes='${STAGING_INCDIR}/X11' \
-+    --x-libraries='${STAGING_LIBDIR}' \
-+    --with-vendor-name='meta-java' \
-+    --disable-manpages \
-+    --disable-warnings-as-errors \
-+    "
-+
-+CONFIGUREOPTS_remove_class-native = "--host=${HOST_SYS}"
-+CONFIGUREOPTS_remove_class-native = "--target=${TARGET_SYS}"
-+
-+EXTRA_OECONF_append_class-native = "\
-+    --with-boot-jdk='${OPENJDK14_BOOT_JDK}' \
-+    --enable-headless-only \
-+    --enable-openjdk-only \
-+    --without-cups \
-+    "
-+
-+EXTRA_OECONF_append_class-target = "\
-+    --with-sys-root='${STAGING_DIR_HOST}' \
-+    --with-boot-jdk='${STAGING_LIBDIR_NATIVE}/jvm/${PN}-native' \
-+    "
-+
-+do_patch_append() {
-+    bb.build.exec_func('do_fix_configure', d)
-+}
-+
-+do_fix_configure() {
-+    chmod a+x ${S}/configure
-+}
-+
-+do_configure_prepend () {
-+    export TOPDIR=${S}
-+    export CXXFILT="c++filt"
-+    unset CFLAGS CXXFLAGS LDFLAGS
-+}
-+
-+EXTRA_OEMAKE_append = '\
-+    STRIP_POLICY=no_strip \
-+    QUIETLY= \
-+    jdk-image \
-+    legacy-jre-image \
-+'
-+
-+do_install() {
-+    rm -rf ${D}${JAVA_HOME}
-+    mkdir -p ${D}${JAVA_HOME}
-+    if [[ "${PN}" = openjre* ]]; then
-+        cp -rp ${B}/images/jre/* ${D}${JAVA_HOME}
-+    else
-+        cp -rp ${B}/images/jdk/* ${D}${JAVA_HOME}
-+    fi
-+    chown -R root:root ${D}${JAVA_HOME}
-+    #install -m644 ${WORKDIR}/jvm.cfg  ${D}${JAVA_HOME}/jre/lib/${JDK_ARCH}/
-+    find ${D}${JAVA_HOME} -name "*.debuginfo" -exec rm {} \;
-+}
-+
-+PACKAGES_append = " \
-+    ${PN}-demo \
-+    ${PN}-jmods \
-+"
-+
-+FILES_${PN}-demo = " ${JAVA_HOME}/demo ${JAVA_HOME}/sample "
-+FILES_${PN}-jmods = " ${JAVA_HOME}/jmods "
-+
-+FILES_${PN}_append = "\
-+    ${JAVA_HOME}/bin/[a-z]* \
-+    ${JAVA_HOME}/lib/[a-z]* \
-+    ${JAVA_HOME}/jre/bin/[a-z]* \
-+    ${JAVA_HOME}/jre/lib/[a-z]* \
-+    ${JAVA_HOME}/LICENSE \
-+    ${JAVA_HOME}/jre/LICENSE \
-+    ${JAVA_HOME}/release \
-+    ${JAVA_HOME}/conf \
-+"
-+
-+FILES_${PN}-dev_append = "\
-+    ${JAVA_HOME}/include \
-+"
-+
-+FILES_${PN}-doc_append = "\
-+    ${JAVA_HOME}/man \
-+    ${JAVA_HOME}/ASSEMBLY_EXCEPTION \
-+    ${JAVA_HOME}/THIRD_PARTY_README \
-+    ${JAVA_HOME}/jre/ASSEMBLY_EXCEPTION \
-+    ${JAVA_HOME}/jre/THIRD_PARTY_README \
-+    ${JAVA_HOME}/legal \
-+"
-+
-+inherit update-alternatives
-+
-+ALTERNATIVE_PRIORITY = "100"
-+
-+ALTERNATIVE_openjdk-14 = "java javac"
-+ALTERNATIVE_openjre-14 = "java"
-+ALTERNATIVE_LINK_NAME[java] = "${bindir}/java"
-+ALTERNATIVE_TARGET[java] = "${JAVA_HOME}/bin/java"
-+ALTERNATIVE_LINK_NAME[javac] = "${bindir}/javac"
-+ALTERNATIVE_TARGET[javac] = "${JAVA_HOME}/bin/javac"
-diff --git a/recipes-core/openjdk/openjdk-14-release.inc b/recipes-core/openjdk/openjdk-14-release.inc
-new file mode 100644
-index 0000000..33b3966
---- /dev/null
-+++ b/recipes-core/openjdk/openjdk-14-release.inc
-@@ -0,0 +1,12 @@
-+# Copyright (C) 2020 Richard Leitner <richard.leitner@skidata.com>
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+SRC_URI[jdk.sha256sum] = "f9c4a55ac858f858222bc5fe6e4b890f9b4a3f942fd0211575b0418aec5c14d6"
-+
-+FILESPATH =. "${FILE_DIRNAME}/patches-openjdk-14:"
-+
-+SRC_URI_append = "\
-+    file://libjava_childproc_multiple_definition_link_errors_with_GCC10.patch \
-+    file://libj2gss_NativeFunc_multiple_definition_link_errors_with_GCC10.patch \
-+    file://fixed_libsctp_link_errors_caused_by_GCC10.patch \
-+    "
-diff --git a/recipes-core/openjdk/openjdk-14_14.0.1.bb b/recipes-core/openjdk/openjdk-14_14.0.1.bb
-new file mode 100644
-index 0000000..f94b25a
---- /dev/null
-+++ b/recipes-core/openjdk/openjdk-14_14.0.1.bb
-@@ -0,0 +1,7 @@
-+# Copyright (C) 2020 Richard Leitner <richard.leitner@skidata.com>
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+require openjdk-14-common.inc
-+require openjdk-14-release.inc
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/recipes-core/openjdk/openjre-14_14.0.1.bb b/recipes-core/openjdk/openjre-14_14.0.1.bb
-new file mode 100644
-index 0000000..04cd23e
---- /dev/null
-+++ b/recipes-core/openjdk/openjre-14_14.0.1.bb
-@@ -0,0 +1,5 @@
-+# Copyright (C) 2020 Richard Leitner <richard.leitner@skidata.com>
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+require openjdk-14-common.inc
-+require openjdk-14-release.inc
-diff --git a/recipes-core/openjdk/patches-openjdk-14/0001-make-autoconf-remove-hard-dependency-on-cups.patch b/recipes-core/openjdk/patches-openjdk-14/0001-make-autoconf-remove-hard-dependency-on-cups.patch
-new file mode 100644
-index 0000000..51999b6
---- /dev/null
-+++ b/recipes-core/openjdk/patches-openjdk-14/0001-make-autoconf-remove-hard-dependency-on-cups.patch
-@@ -0,0 +1,154 @@
-+From 3f77089a24c5073c59321d0ac5fdfe5057d8c06b Mon Sep 17 00:00:00 2001
-+From: Richard Leitner <richard.leitner@skidata.com>
-+Date: Wed, 13 May 2020 13:34:33 +0200
-+Subject: [PATCH 1/2] make: autoconf: remove hard dependency on cups
-+
-+In our native build we don't want to have a dependency on cups,
-+therefore enable --without-cups for all platforms.
-+
-+Upstream-Status: Inappropriate [disable feature]
-+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-+---
-+ make/autoconf/lib-cups.m4   | 30 ++++++++++++------------------
-+ make/autoconf/libraries.m4  |  8 --------
-+ make/autoconf/spec.gmk.in   |  1 +
-+ make/lib/Awt2dLibraries.gmk | 13 ++++++++++++-
-+ 4 files changed, 25 insertions(+), 27 deletions(-)
-+
-+diff --git a/make/autoconf/lib-cups.m4 b/make/autoconf/lib-cups.m4
-+index 0a7df8b381..e8b6a683a3 100644
-+--- a/make/autoconf/lib-cups.m4
-++++ b/make/autoconf/lib-cups.m4
-+@@ -34,25 +34,18 @@ AC_DEFUN_ONCE([LIB_SETUP_CUPS],
-+   AC_ARG_WITH(cups-include, [AS_HELP_STRING([--with-cups-include],
-+       [specify directory for the cups include files])])
-+ 
-+-  if test "x$NEEDS_LIB_CUPS" = xfalse; then
-+-    if (test "x${with_cups}" != x && test "x${with_cups}" != xno) || \
-+-        (test "x${with_cups_include}" != x && test "x${with_cups_include}" != xno); then
-+-      AC_MSG_WARN([[cups not used, so --with-cups[-*] is ignored]])
-+-    fi
-++
-++  WITH_CUPS="false"
-++  if test "x${with_cups}" = xno || test "x${with_cups_include}" = xno; then
-++    AC_MSG_WARN([Disable the use of cups.])
-+     CUPS_CFLAGS=
-+   else
-+-    CUPS_FOUND=no
-+-
-+-    if test "x${with_cups}" = xno || test "x${with_cups_include}" = xno; then
-+-      AC_MSG_ERROR([It is not possible to disable the use of cups. Remove the --without-cups option.])
-+-    fi
-+-
-+     if test "x${with_cups}" != x; then
-+       AC_MSG_CHECKING([for cups headers])
-+       if test -s "${with_cups}/include/cups/cups.h"; then
-+         CUPS_CFLAGS="-I${with_cups}/include"
-+-        CUPS_FOUND=yes
-+-        AC_MSG_RESULT([$CUPS_FOUND])
-++        WITH_CUPS="true"
-++        AC_MSG_RESULT([$WITH_CUPS])
-+       else
-+         AC_MSG_ERROR([Can't find 'include/cups/cups.h' under ${with_cups} given with the --with-cups option.])
-+       fi
-+@@ -61,25 +54,26 @@ AC_DEFUN_ONCE([LIB_SETUP_CUPS],
-+       AC_MSG_CHECKING([for cups headers])
-+       if test -s "${with_cups_include}/cups/cups.h"; then
-+         CUPS_CFLAGS="-I${with_cups_include}"
-+-        CUPS_FOUND=yes
-+-        AC_MSG_RESULT([$CUPS_FOUND])
-++        WITH_CUPS="true"
-++        AC_MSG_RESULT([$WITH_CUPS])
-+       else
-+         AC_MSG_ERROR([Can't find 'cups/cups.h' under ${with_cups_include} given with the --with-cups-include option.])
-+       fi
-+     fi
-+-    if test "x$CUPS_FOUND" = xno; then
-++    if test "x$WITH_CUPS" = "xfalse"; then
-+       # Are the cups headers installed in the default /usr/include location?
-+       AC_CHECK_HEADERS([cups/cups.h cups/ppd.h], [
-+-          CUPS_FOUND=yes
-++          WITH_CUPS="true"
-+           CUPS_CFLAGS=
-+           DEFAULT_CUPS=yes
-+       ])
-+     fi
-+-    if test "x$CUPS_FOUND" = xno; then
-++    if test "x$WITH_CUPS" = "xfalse"; then
-+       HELP_MSG_MISSING_DEPENDENCY([cups])
-+       AC_MSG_ERROR([Could not find cups! $HELP_MSG ])
-+     fi
-+   fi
-+ 
-+   AC_SUBST(CUPS_CFLAGS)
-++  AC_SUBST(WITH_CUPS)
-+ ])
-+diff --git a/make/autoconf/libraries.m4 b/make/autoconf/libraries.m4
-+index 5f16f08b20..8d64c6e8b7 100644
-+--- a/make/autoconf/libraries.m4
-++++ b/make/autoconf/libraries.m4
-+@@ -59,14 +59,6 @@ AC_DEFUN_ONCE([LIB_DETERMINE_DEPENDENCIES],
-+     NEEDS_LIB_FONTCONFIG=true
-+   fi
-+ 
-+-  # Check if cups is needed
-+-  if test "x$OPENJDK_TARGET_OS" = xwindows; then
-+-    # Windows have a separate print system
-+-    NEEDS_LIB_CUPS=false
-+-  else
-+-    NEEDS_LIB_CUPS=true
-+-  fi
-+-
-+   # A custom hook may have set this already
-+   if test "x$NEEDS_LIB_FREETYPE" = "x"; then
-+     NEEDS_LIB_FREETYPE=true
-+diff --git a/make/autoconf/spec.gmk.in b/make/autoconf/spec.gmk.in
-+index 3a85303e80..b1253daa5d 100644
-+--- a/make/autoconf/spec.gmk.in
-++++ b/make/autoconf/spec.gmk.in
-+@@ -370,6 +370,7 @@ FREETYPE_LIBS:=@FREETYPE_LIBS@
-+ FREETYPE_CFLAGS:=@FREETYPE_CFLAGS@
-+ FONTCONFIG_CFLAGS:=@FONTCONFIG_CFLAGS@
-+ CUPS_CFLAGS:=@CUPS_CFLAGS@
-++WITH_CUPS := @WITH_CUPS@
-+ ALSA_LIBS:=@ALSA_LIBS@
-+ ALSA_CFLAGS:=@ALSA_CFLAGS@
-+ LIBFFI_LIBS:=@LIBFFI_LIBS@
-+diff --git a/make/lib/Awt2dLibraries.gmk b/make/lib/Awt2dLibraries.gmk
-+index a38d416673..d0eeab35c6 100644
-+--- a/make/lib/Awt2dLibraries.gmk
-++++ b/make/lib/Awt2dLibraries.gmk
-+@@ -141,7 +141,11 @@ ifeq ($(call isTargetOs, windows), true)
-+ endif
-+ 
-+ ifeq ($(call isTargetOs, solaris linux macosx aix), true)
-+-  LIBAWT_EXFILES += awt_Font.c CUPSfuncs.c fontpath.c X11Color.c
-++  LIBAWT_EXFILES += awt_Font.c fontpath.c X11Color.c
-++endif
-++
-++ifeq ($(WITH_CUPS), false)
-++  LIBAWT_EXFILES += CUPSfuncs.c
-+ endif
-+ 
-+ ifeq ($(call isTargetOs, macosx), true)
-+@@ -461,10 +465,17 @@ ifeq ($(call isTargetOs, windows macosx), false)
-+   LIBAWT_HEADLESS_CFLAGS := $(CUPS_CFLAGS) $(FONTCONFIG_CFLAGS) $(X_CFLAGS) \
-+       -DHEADLESS=true
-+ 
-++
-++  LIBAWT_HEADLESS_EXFILES :=
-++  ifeq ($(WITH_CUPS), false)
-++    LIBAWT_HEADLESS_EXFILES += CUPSfuncs.c
-++  endif
-++
-+   $(eval $(call SetupJdkLibrary, BUILD_LIBAWT_HEADLESS, \
-+       NAME := awt_headless, \
-+       EXTRA_SRC := $(LIBAWT_HEADLESS_EXTRA_SRC), \
-+       EXCLUDES := $(LIBAWT_HEADLESS_EXCLUDES), \
-++      EXCLUDE_FILES := $(LIBAWT_HEADLESS_EXFILES), \
-+       OPTIMIZATION := LOW, \
-+       CFLAGS := $(CFLAGS_JDKLIB) \
-+           $(LIBAWT_HEADLESS_CFLAGS), \
-+-- 
-+2.26.2
-+
-diff --git a/recipes-core/openjdk/patches-openjdk-14/0002-make-autoconf-toolchain-remove-invalid-compiler-chec.patch b/recipes-core/openjdk/patches-openjdk-14/0002-make-autoconf-toolchain-remove-invalid-compiler-chec.patch
-new file mode 100644
-index 0000000..9997e70
---- /dev/null
-+++ b/recipes-core/openjdk/patches-openjdk-14/0002-make-autoconf-toolchain-remove-invalid-compiler-chec.patch
-@@ -0,0 +1,45 @@
-+From 93a94cd79b5657bc7954a23d6d3f9eda0addf773 Mon Sep 17 00:00:00 2001
-+From: Richard Leitner <richard.leitner@skidata.com>
-+Date: Wed, 13 May 2020 13:41:49 +0200
-+Subject: [PATCH 2/2] make: autoconf: toolchain: remove invalid compiler
-+ checking
-+
-+The checking of CC and CXX was faulty as it doesn't supported
-+program arguments.
-+To make things work remove the check and trust it is valid.
-+
-+Upstream-Status: Inappropriate [configuration]
-+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-+---
-+ make/autoconf/toolchain.m4 | 15 ---------------
-+ 1 file changed, 15 deletions(-)
-+
-+diff --git a/make/autoconf/toolchain.m4 b/make/autoconf/toolchain.m4
-+index 341b2d1786..24f9f03948 100644
-+--- a/make/autoconf/toolchain.m4
-++++ b/make/autoconf/toolchain.m4
-+@@ -526,21 +526,6 @@ AC_DEFUN([TOOLCHAIN_FIND_COMPILER],
-+   if test "x[$]$1" != x; then
-+     # User has supplied compiler name already, always let that override.
-+     AC_MSG_NOTICE([Will use user supplied compiler $1=[$]$1])
-+-    if test "x`basename [$]$1`" = "x[$]$1"; then
-+-      # A command without a complete path is provided, search $PATH.
-+-
-+-      AC_PATH_PROGS(POTENTIAL_$1, [$]$1)
-+-      if test "x$POTENTIAL_$1" != x; then
-+-        $1=$POTENTIAL_$1
-+-      else
-+-        AC_MSG_ERROR([User supplied compiler $1=[$]$1 could not be found])
-+-      fi
-+-    else
-+-      # Otherwise it might already be a complete path
-+-      if test ! -x "[$]$1"; then
-+-        AC_MSG_ERROR([User supplied compiler $1=[$]$1 does not exist])
-+-      fi
-+-    fi
-+   else
-+     # No user supplied value. Locate compiler ourselves.
-+ 
-+-- 
-+2.26.2
-+
-diff --git a/recipes-core/openjdk/patches-openjdk-14/fixed_libsctp_link_errors_caused_by_GCC10.patch b/recipes-core/openjdk/patches-openjdk-14/fixed_libsctp_link_errors_caused_by_GCC10.patch
-new file mode 100644
-index 0000000..8111fa7
---- /dev/null
-+++ b/recipes-core/openjdk/patches-openjdk-14/fixed_libsctp_link_errors_caused_by_GCC10.patch
-@@ -0,0 +1,64 @@
-+
-+# HG changeset patch
-+# User qpzhang
-+# Date 1580894055 -28800
-+# Node ID 8e6fa89397ca26bf9f573888755d89d7104afcd4
-+# Parent  eaefceb7f52e0b17c070c9388e2b2578d48dcf3e
-+8238386: (sctp) jdk.sctp/unix/native/libsctp/SctpNet.c "multiple definition" link errors with GCC10
-+Summary: Fixed libsctp link errors caused by GCC10 default -fno-common
-+Reviewed-by: chegar
-+
-+diff -r eaefceb7f52e -r 8e6fa89397ca src/jdk.sctp/unix/native/libsctp/Sctp.h
-+--- a/src/jdk.sctp/unix/native/libsctp/Sctp.h	Tue Feb 11 14:24:31 2020 +0530
-++++ b/src/jdk.sctp/unix/native/libsctp/Sctp.h	Wed Feb 05 17:14:15 2020 +0800
-+@@ -1,5 +1,5 @@
-+ /*
-+- * Copyright (c) 2009, 2012, Oracle and/or its affiliates. All rights reserved.
-++ * Copyright (c) 2009, 2020, Oracle and/or its affiliates. All rights reserved.
-+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
-+  *
-+  * This code is free software; you can redistribute it and/or modify it
-+@@ -322,12 +322,12 @@
-+ 
-+ #endif /* __linux__ */
-+ 
-+-sctp_getladdrs_func* nio_sctp_getladdrs;
-+-sctp_freeladdrs_func* nio_sctp_freeladdrs;
-+-sctp_getpaddrs_func* nio_sctp_getpaddrs;
-+-sctp_freepaddrs_func* nio_sctp_freepaddrs;
-+-sctp_bindx_func* nio_sctp_bindx;
-+-sctp_peeloff_func* nio_sctp_peeloff;
-++extern sctp_getladdrs_func* nio_sctp_getladdrs;
-++extern sctp_freeladdrs_func* nio_sctp_freeladdrs;
-++extern sctp_getpaddrs_func* nio_sctp_getpaddrs;
-++extern sctp_freepaddrs_func* nio_sctp_freepaddrs;
-++extern sctp_bindx_func* nio_sctp_bindx;
-++extern sctp_peeloff_func* nio_sctp_peeloff;
-+ 
-+ jboolean loadSocketExtensionFuncs(JNIEnv* env);
-+ 
-+diff -r eaefceb7f52e -r 8e6fa89397ca src/jdk.sctp/unix/native/libsctp/SctpNet.c
-+--- a/src/jdk.sctp/unix/native/libsctp/SctpNet.c	Tue Feb 11 14:24:31 2020 +0530
-++++ b/src/jdk.sctp/unix/native/libsctp/SctpNet.c	Wed Feb 05 17:14:15 2020 +0800
-+@@ -1,5 +1,5 @@
-+ /*
-+- * Copyright (c) 2009, 2019, Oracle and/or its affiliates. All rights reserved.
-++ * Copyright (c) 2009, 2020, Oracle and/or its affiliates. All rights reserved.
-+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
-+  *
-+  * This code is free software; you can redistribute it and/or modify it
-+@@ -43,6 +43,13 @@
-+ static const char* nativeSctpLib = "libsctp.so.1";
-+ static jboolean funcsLoaded = JNI_FALSE;
-+ 
-++sctp_getladdrs_func* nio_sctp_getladdrs;
-++sctp_freeladdrs_func* nio_sctp_freeladdrs;
-++sctp_getpaddrs_func* nio_sctp_getpaddrs;
-++sctp_freepaddrs_func* nio_sctp_freepaddrs;
-++sctp_bindx_func* nio_sctp_bindx;
-++sctp_peeloff_func* nio_sctp_peeloff;
-++
-+ JNIEXPORT jint JNICALL DEF_JNI_OnLoad
-+   (JavaVM *vm, void *reserved) {
-+     return JNI_VERSION_1_2;
-+
-diff --git a/recipes-core/openjdk/patches-openjdk-14/libj2gss_NativeFunc_multiple_definition_link_errors_with_GCC10.patch b/recipes-core/openjdk/patches-openjdk-14/libj2gss_NativeFunc_multiple_definition_link_errors_with_GCC10.patch
-new file mode 100644
-index 0000000..66d480e
---- /dev/null
-+++ b/recipes-core/openjdk/patches-openjdk-14/libj2gss_NativeFunc_multiple_definition_link_errors_with_GCC10.patch
-@@ -0,0 +1,49 @@
-+
-+# HG changeset patch
-+# User qpzhang
-+# Date 1580905869 -28800
-+# Node ID 9e54ea7d9cd9566d28cfcd9269118a1995fc361c
-+# Parent  932418820c80a87b77d96ad5f5525d282f00e82e
-+8238388: libj2gss/NativeFunc.o "multiple definition" link errors with GCC10
-+Summary: Fixed libj2gss link errors caused by GCC10 default -fno-common
-+Reviewed-by: weijun
-+
-+diff -r 932418820c80 -r 9e54ea7d9cd9 src/java.security.jgss/share/native/libj2gss/NativeFunc.c
-+--- a/src/java.security.jgss/share/native/libj2gss/NativeFunc.c	Wed Feb 05 10:45:39 2020 +0100
-++++ b/src/java.security.jgss/share/native/libj2gss/NativeFunc.c	Wed Feb 05 20:31:09 2020 +0800
-+@@ -1,5 +1,5 @@
-+ /*
-+- * Copyright (c) 2005, 2018, Oracle and/or its affiliates. All rights reserved.
-++ * Copyright (c) 2005, 2020, Oracle and/or its affiliates. All rights reserved.
-+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
-+  *
-+  * This code is free software; you can redistribute it and/or modify it
-+@@ -27,6 +27,9 @@
-+ #include <stdlib.h>
-+ #include "NativeFunc.h"
-+ 
-++/* global GSS function table */
-++GSS_FUNCTION_TABLE_PTR ftab;
-++
-+ /* standard GSS method names (ordering is from mapfile) */
-+ static const char RELEASE_NAME[]                = "gss_release_name";
-+ static const char IMPORT_NAME[]                 = "gss_import_name";
-+diff -r 932418820c80 -r 9e54ea7d9cd9 src/java.security.jgss/share/native/libj2gss/NativeFunc.h
-+--- a/src/java.security.jgss/share/native/libj2gss/NativeFunc.h	Wed Feb 05 10:45:39 2020 +0100
-++++ b/src/java.security.jgss/share/native/libj2gss/NativeFunc.h	Wed Feb 05 20:31:09 2020 +0800
-+@@ -1,5 +1,5 @@
-+ /*
-+- * Copyright (c) 2005, 2019, Oracle and/or its affiliates. All rights reserved.
-++ * Copyright (c) 2005, 2020, Oracle and/or its affiliates. All rights reserved.
-+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
-+  *
-+  * This code is free software; you can redistribute it and/or modify it
-+@@ -277,6 +277,6 @@
-+ typedef GSS_FUNCTION_TABLE *GSS_FUNCTION_TABLE_PTR;
-+ 
-+ /* global GSS function table */
-+-GSS_FUNCTION_TABLE_PTR ftab;
-++extern GSS_FUNCTION_TABLE_PTR ftab;
-+ 
-+ #endif
-+
-diff --git a/recipes-core/openjdk/patches-openjdk-14/libjava_childproc_multiple_definition_link_errors_with_GCC10.patch b/recipes-core/openjdk/patches-openjdk-14/libjava_childproc_multiple_definition_link_errors_with_GCC10.patch
-new file mode 100644
-index 0000000..a972bc6
---- /dev/null
-+++ b/recipes-core/openjdk/patches-openjdk-14/libjava_childproc_multiple_definition_link_errors_with_GCC10.patch
-@@ -0,0 +1,48 @@
-+
-+# HG changeset patch
-+# User qpzhang
-+# Date 1580822830 -28800
-+# Node ID 6925fca959590dd0f747a9cffa5f0664ec02c7b1
-+# Parent  8f6ffa575f63db3f07f96e52c97883fbaff459b4
-+8238380: java.base/unix/native/libjava/childproc.c "multiple definition" link errors with GCC10
-+Reviewed-by: stuefe, clanger, rriggs
-+Contributed-by: patrick@os.amperecomputing.com
-+
-+diff -r 8f6ffa575f63 -r 6925fca95959 src/java.base/unix/native/libjava/childproc.c
-+--- a/src/java.base/unix/native/libjava/childproc.c	Tue Feb 11 11:17:37 2020 +0800
-++++ b/src/java.base/unix/native/libjava/childproc.c	Tue Feb 04 21:27:10 2020 +0800
-+@@ -1,5 +1,5 @@
-+ /*
-+- * Copyright (c) 2013, 2019, Oracle and/or its affiliates. All rights reserved.
-++ * Copyright (c) 2013, 2020, Oracle and/or its affiliates. All rights reserved.
-+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
-+  *
-+  * This code is free software; you can redistribute it and/or modify it
-+@@ -34,6 +34,7 @@
-+ 
-+ #include "childproc.h"
-+ 
-++const char * const *parentPathv;
-+ 
-+ ssize_t
-+ restartableWrite(int fd, const void *buf, size_t count)
-+diff -r 8f6ffa575f63 -r 6925fca95959 src/java.base/unix/native/libjava/childproc.h
-+--- a/src/java.base/unix/native/libjava/childproc.h	Tue Feb 11 11:17:37 2020 +0800
-++++ b/src/java.base/unix/native/libjava/childproc.h	Tue Feb 04 21:27:10 2020 +0800
-+@@ -1,5 +1,5 @@
-+ /*
-+- * Copyright (c) 2013, 2015, Oracle and/or its affiliates. All rights reserved.
-++ * Copyright (c) 2013, 2020, Oracle and/or its affiliates. All rights reserved.
-+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
-+  *
-+  * This code is free software; you can redistribute it and/or modify it
-+@@ -126,7 +126,7 @@
-+  * The cached and split version of the JDK's effective PATH.
-+  * (We don't support putenv("PATH=...") in native code)
-+  */
-+-const char * const *parentPathv;
-++extern const char * const *parentPathv;
-+ 
-+ ssize_t restartableWrite(int fd, const void *buf, size_t count);
-+ int restartableDup2(int fd_from, int fd_to);
-+
-diff --git a/recipes-images/images/openjdk-14-test-image.bb b/recipes-images/images/openjdk-14-test-image.bb
-new file mode 100644
-index 0000000..62be748
---- /dev/null
-+++ b/recipes-images/images/openjdk-14-test-image.bb
-@@ -0,0 +1,3 @@
-+IMAGE_INSTALL_append = " openjdk-14 "
-+
-+inherit openjdk-test-image
-diff --git a/recipes-images/images/openjre-14-test-image.bb b/recipes-images/images/openjre-14-test-image.bb
-new file mode 100644
-index 0000000..e950fe3
---- /dev/null
-+++ b/recipes-images/images/openjre-14-test-image.bb
-@@ -0,0 +1,3 @@
-+IMAGE_INSTALL_append = " openjre-14 "
-+
-+inherit openjre-test-image
--- 
-2.26.2
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
+@@ -0,0 &#43;1,43 @@
+&#43;DESCRIPTION = &quot;Python Jinja2: A small but fast and easy to use stand-alone template engine written in pure python.&quot;
+&#43;
+&#43;LICENSE = &quot;BSD-3-Clause&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462">&quot;file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462&quot;</a>
+&#43;
+&#43;SRC_URI[sha256sum] = &quot;89aab215427ef59c34ad58735269eb58b1a5808103067f7bb9d5836c651b3bb0&quot;
+&#43;
+&#43;PYPI_PACKAGE = &quot;Jinja2&quot;
+&#43;
+&#43;CLEANBROKEN = &quot;1&quot;
+&#43;
+&#43;inherit pypi setuptools3 ptest
+&#43;
+&#43;SRC_URI &#43;= &quot; \
+&#43;	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
+&#43;&quot;
+&#43;
+&#43;do_install_ptest() {
+&#43;    install -d ${D}${PTEST_PATH}/tests
+&#43;    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+&#43;}
+&#43;
+&#43;RDEPENDS_${PN}-ptest &#43;= &quot; \
+&#43;	${PYTHON_PN}-pytest \
+&#43;	${PYTHON_PN}-unixadmin \
+&#43;&quot;
+&#43;
+&#43;RDEPENDS_${PN} &#43;= &quot; \
+&#43;    ${PYTHON_PN}-asyncio \
+&#43;    ${PYTHON_PN}-crypt \
+&#43;    ${PYTHON_PN}-io \
+&#43;    ${PYTHON_PN}-json \
+&#43;    ${PYTHON_PN}-markupsafe \
+&#43;    ${PYTHON_PN}-math \
+&#43;    ${PYTHON_PN}-netclient \
+&#43;    ${PYTHON_PN}-numbers\
+&#43;    ${PYTHON_PN}-pickle \
+&#43;    ${PYTHON_PN}-pprint \
+&#43;    ${PYTHON_PN}-shell \
+&#43;    ${PYTHON_PN}-threading \
+&#43;&quot;
+&#43;
+&#43;BBCLASSEXTEND = &quot;native nativesdk&quot;
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+    </blockquote>
+  </body>
+</html>
 
+--------------B74086A3FA6B46546C45F4D6--
