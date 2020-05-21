@@ -1,160 +1,171 @@
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
- by mx.groups.io with SMTP id smtpd.web12.7960.1590073577786977915
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.56])
+ by mx.groups.io with SMTP id smtpd.web11.8664.1590075195165301568
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 May 2020 08:06:18 -0700
+ Thu, 21 May 2020 08:33:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=BmWZhwUM;
- spf=pass (domain: ossystems.com.br, ip: 209.85.222.195, mailfrom: domarys.correa@ossystems.com.br)
-Received: by mail-qk1-f195.google.com with SMTP id g185so7494974qke.7
-        for <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2020 08:06:17 -0700 (PDT)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=aj1E9Nx8;
+ spf=pass (domain: windriver.com, ip: 40.107.94.56, mailfrom: trevor.gamblin@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Ik0TaEJAL2nEejwbLuXgLbD824WES7XBhkqpM8emVLUkvbfuaMycS6Nh6ehmwHCSsI9UUlUlrkQ0e/yk+QzPdFzNHVKS0ly7nWr/RLryQYhcnxv7d1KLwU650MIVyzwYn5F3Rn5MY8JZyPJF8oMLsll6U3pU2AWyjAGIatyC6BHdrOflKJhTNvJVNmHtXGmvCzLPJLhCyHQl0Hi2YizCf24GxGWz2WLz/qcziwtxgwEGk3M40uanKegOd+FzFGX2GwaFrJEgURw4Frbz0H9vEaJoeyslpU22OBXqy1/PHGyn7qOVEIXqAherM4HwLMGIsnAmlcyoCCtvM8q63RWHBg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=blzWVHr/xxX9cfchD8IcCRYtdHtNWVbYwZzKcbNXvSg=;
+ b=OmCJl3vEqryrOzkJhUZ1Vhlr17ktMqeHIiBrS2JwqwkBswrn/6DS4wizokJeKWCNHqKOL2SZ285cHG4jA8OZelg8wy2seQPw2LXJTU5UZjU4eWIeT2HaMveAgQFkNpmm8JEYsHj2dWFUzzG9aMfFyih7e5bt8HSTa6LVCD/ABo9aNgdFelDblcA0/GsFpGeh5dUHM3zqJqAYpkMLCCfN1di1tPd4CX9Wdj6vsfVISP8poImh9aKVW+pKWo7XFPk7oNU1tLlkTdZOCyJzZdqHSVvKsoYUDANIWSmbV9dXb6k7c0bYzHY3/d0kEh7vPIs7g2g/kS66HU+8PKDyN7sOUQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id;
-        bh=Pmp1iZffcFp4Ex2dUSQ7QzB+F+oEKPinRIqUdPX6NTY=;
-        b=BmWZhwUM758C73txHrl6quu1k0F8NKDv2uROSdtUSlsyLmFzTcCGdxDAQh+sHwa6zi
-         Ek5COngrrWagtJJ4+Owm/osID71+rUgzGBA3AzGILiME1JfNkuk2HYxBbt1S4uqlhCgl
-         EUnENM/zcFdgvUq1p5Z3zRmPtGw/uhGxGeKRKiWptrCY07qFR+BX9YNN3hyz7XXOGW9X
-         NBzEf/SidgrWuRVrdOoQ6F8Lx0wb7wcamjX/4GbxR+rASQUsD0K48mLvYWMjMDBC/Ff0
-         9ip40IrKncvK6NK2fZLmjZODkvF5IiXwt99KuqMzzMIrAuXGXQOdx76MjMpFVdIaAhVW
-         pvfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=Pmp1iZffcFp4Ex2dUSQ7QzB+F+oEKPinRIqUdPX6NTY=;
-        b=XID8m7NjwPi6ElLHsaAY+bvZIwGOa0oTGNuP/ZeidHFc1H5/oGIY0SscguRy7j2oMy
-         E4gyGFzIceAP5uqueXQ+aJY9RnukVRUxOqFQnGDIymjmp/vSoP89cW6JxcbGihXTLiYd
-         /ONZ9XSyQPo/J4UZcM44t3dRg0WV2Zp/V4Nzb2wD+OerASj5lGE+ZmA68+1bBKf1hXF2
-         2CYTGra9bHpAF4PouMasxuXh3s8t54XBgQP1LhUESRAiktrzSqPXz0Z6Yo8Qggg9GXut
-         3fiEpwHZJOiLj4pPtZlpNe4WGHZseQVsGXpPWnKsoQjyez4mndIHWMN3/Ih6ukeTNtzm
-         etmA==
-X-Gm-Message-State: AOAM531Wlgt2k7H3BmFihqySKnOOiDN4m7DvYXCRE8zsoLZmygzbfSbw
-	BW100mNsP1akyiZ8ArvU+0zsef+Xadw=
-X-Google-Smtp-Source: ABdhPJyekzQFz5CmylC4zr6XTOTlNF3gvS1g+1Dci96T8BincoG3SWb2IMoLqzbwZxXr1vDDW2Di3g==
-X-Received: by 2002:a37:c8b:: with SMTP id 133mr10125936qkm.418.1590073576477;
-        Thu, 21 May 2020 08:06:16 -0700 (PDT)
-Return-Path: <domarys.correa@ossystems.com.br>
-Received: from Monster.domain.name ([2804:7f4:c195:1db7:48f3:4609:c8f3:958c])
-        by smtp.gmail.com with ESMTPSA id o13sm411625qtk.73.2020.05.21.08.06.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 May 2020 08:06:15 -0700 (PDT)
-From: "Domarys Correa" <domarys.correa@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Cc: Domarys Correa <domarys.correa@ossystems.com.br>
-Subject: [PATCH] python3-jinja2: Update 2.11.1 -> 2.11.2
-Date: Thu, 21 May 2020 12:06:03 -0300
-Message-Id: <20200521150603.6360-1-domarys.correa@ossystems.com.br>
-X-Mailer: git-send-email 2.17.1
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=blzWVHr/xxX9cfchD8IcCRYtdHtNWVbYwZzKcbNXvSg=;
+ b=aj1E9Nx8f81nHoJ/V3g1yiBrnnvl5+WpOJuXWHl0vgSyVzRtiL193B+ndhHdSn0onFlUjQHSu3Ri0MPb0P9EPC8fMU6y14HqmLVuyX5JMoxSCFKmcyJtCaiIqIlFys+kXSCe/fsH94snxqo0Cdpqu3+Vb9XlDQsRSDtJVJURq/E=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
+ by BN6PR11MB1809.namprd11.prod.outlook.com (2603:10b6:404:102::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3021.24; Thu, 21 May
+ 2020 15:33:12 +0000
+Received: from BN6PR11MB0003.namprd11.prod.outlook.com
+ ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
+ ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3000.022; Thu, 21 May 2020
+ 15:33:12 +0000
+Subject: Re: [oe] [meta-python][PATCH 4/4] python3-appdirs: Upgrade to 1.4.4
+To: Leon Anavi <leon.anavi@konsulko.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20200520141502.28254-1-leon.anavi@konsulko.com>
+ <20200520141502.28254-4-leon.anavi@konsulko.com>
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+Message-ID: <59f3db1c-74b5-773c-d386-d34aef443716@windriver.com>
+Date: Thu, 21 May 2020 11:33:10 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
+In-Reply-To: <20200520141502.28254-4-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTXPR0101CA0057.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:1::34) To BN6PR11MB0003.namprd11.prod.outlook.com
+ (2603:10b6:405:61::26)
+Return-Path: trevor.gamblin@windriver.com
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.0.16] (174.115.236.231) by YTXPR0101CA0057.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:1::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3021.23 via Frontend Transport; Thu, 21 May 2020 15:33:12 +0000
+X-Originating-IP: [174.115.236.231]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 03fea419-24fa-4fe5-dce8-08d7fd9c45b8
+X-MS-TrafficTypeDiagnostic: BN6PR11MB1809:
+X-Microsoft-Antispam-PRVS: 
+	<BN6PR11MB180937E3285407B7EEF4C7529FB70@BN6PR11MB1809.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:173;
+X-Forefront-PRVS: 041032FF37
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	aKKwOo2Zo1++dusQ70xdrAQB7cWtXT0QjMwVm7kYUvDWZNOLNsl//H82CU/6ar+HSN0eMzzrIwsJREjBGq8SZKiOp8jtp5SLahO8mqXnzi9OzV6R4n8PIH74DZrWL1vGyILSgJLjwDxxQ+QUXhwEZeqNoEdrbJErSaZtRhSJfFYSQLKXTUHx2QugANnJafPYHctMKEYwVMYRoK9rGPHP18NxqK4V4FpyY/cyGRzr2iU7g13OJTWT+76lVapBicXnU1KwFp4uzQq7Phf+YwZbMHk5IquCEhCi9qltc/s3f2N7wweSmatbscdGAo9Z4FNQfn7HpWkJ8OeN7waudrEM0H76v2PcioXIwHyIcwVEqADKvMa0jq6inZ+UbK9Pw1054cEtlRQIklIa4pXprmK2VoRJtHusz4XDm2nB9UotMBPxa0tDb6cyb/l2UzA/4t0Huh/Qm8P//gyd7ZwRPXiVDw==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(39850400004)(136003)(366004)(396003)(346002)(376002)(31686004)(26005)(478600001)(5660300002)(53546011)(166002)(6486002)(186003)(16526019)(52116002)(66946007)(2906002)(33964004)(8676002)(316002)(8936002)(16576012)(36756003)(66476007)(66556008)(44832011)(31696002)(956004)(86362001)(966005)(2616005)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	1cJkflbivFNKkD+35uREaFODzZo4SxPA2zsUnMbCvJNnw0qSivSCFrPilhF/d0r5SdHtb33Pu75DCj3eD4VIi/AwiJfgJZOqVnkaTLdR6aefnLgDa3UCR7KcJMh3khuooVm+Y3A5lr39lgufIWAKSDiIh0JYobMvUucXLYRW9HFbVcaMgd+a7UfQ+fQj/va5RgCalgs14oHflowlsSmGY+fSWLValMiKrNxA41m+boCw2kRe6BK9tbcYt2PxA6FRHfDW0oRSHd4e/swF2d6qkAxFQHOG0+viXglFS3ROhKVDM80UcvjtXBAfD7Zbk6fanmtgK2DUoo59QislVGQbNFh3BxKm3l7edDlskW8pIIXeQ57RSVzzjBu0jOwmhBOWXE+bijagCY9l6oPMaliYWC9n6AExhEda3114qdFHOBMxuNLY6a7ojLuXaY4R5DH4Ro0L68r190GgmEaaOuHUfA9+qKjV96A8Osr/5oSZgGjdaPQuMGMObaNrGhzkcWvp
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 03fea419-24fa-4fe5-dce8-08d7fd9c45b8
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2020 15:33:12.4222
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8SzoapE4ETZWLaWEWKvLA4K2SwipzyKLo++NvgKXlOFzx9qIbIQzm+lKDUByCCruq2kAYgPCQxmKiix1L30OWAQJ2sfMvSjxMIEKM/cruCc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1809
+Content-Type: multipart/alternative;
+ boundary="------------58E9194DD9EC9FA528167C3F"
+Content-Language: en-US
 
-Add .inc file to .bb, as updated to python3
+--------------58E9194DD9EC9FA528167C3F
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
+
+On 5/20/20 10:15 AM, Leon Anavi wrote:
+> Upgrade to release 1.4.4.
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>   .../{python3-appdirs_1.4.3.bb => python3-appdirs_1.4.4.bb}    | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-appdirs_1.4.3.bb => python3-appdirs_1.4.4.bb} (75%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-appdirs_1.4.3.bb b/meta-python/recipes-devtools/python/python3-appdirs_1.4.4.bb
+> similarity index 75%
+> rename from meta-python/recipes-devtools/python/python3-appdirs_1.4.3.bb
+> rename to meta-python/recipes-devtools/python/python3-appdirs_1.4.4.bb
+> index 2e183d888..eef5c0273 100644
+> --- a/meta-python/recipes-devtools/python/python3-appdirs_1.4.3.bb
+> +++ b/meta-python/recipes-devtools/python/python3-appdirs_1.4.4.bb
+> @@ -6,8 +6,8 @@ SRC_URI += " \
+>   	file://run-ptest \
+>   "
+>   
+> -SRC_URI[md5sum] = "44c679904082a2133f5566c8a0d3ab42"
+> -SRC_URI[sha256sum] = "9e5896d1372858f8dd3344faf4e5014d21849c756c8d5701f78f8a103b372d92"
+> +SRC_URI[md5sum] = "d6bca12613174185dd9abc8a29f4f012"
+> +SRC_URI[sha256sum] = "7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41"
+>   
+>   inherit pypi setuptools3 ptest
+>   
+>
+> 
+
+--------------58E9194DD9EC9FA528167C3F
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 5/20/20 10:15 AM, Leon Anavi wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:20200520141502.28254-4-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.4.4.
+
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+    </blockquote>
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
+    <blockquote type="cite" cite="mid:20200520141502.28254-4-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python-jinja2.inc | 33 --------------
- .../python/python3-jinja2_2.11.1.bb           |  4 --
- .../python/python3-jinja2_2.11.2.bb           | 43 +++++++++++++++++++
- 3 files changed, 43 insertions(+), 37 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-jinja2.inc
- delete mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
+ .../{python3-appdirs_1.4.3.bb =&gt; python3-appdirs_1.4.4.bb}    | 4 &#43;&#43;--
+ 1 file changed, 2 insertions(&#43;), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-appdirs_1.4.3.bb =&gt; python3-appdirs_1.4.4.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python-jinja2.inc b/meta-python/recipes-devtools/python/python-jinja2.inc
-deleted file mode 100644
-index 927230515..000000000
---- a/meta-python/recipes-devtools/python/python-jinja2.inc
-+++ /dev/null
-@@ -1,33 +0,0 @@
--DESCRIPTION = "Python Jinja2: A small but fast and easy to use stand-alone template engine written in pure python."
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462"
--
--PYPI_PACKAGE = "Jinja2"
--
--SRC_URI[md5sum] = "5d88c7e77aa63fc852a04f65dbfe5594"
--SRC_URI[sha256sum] = "93187ffbc7808079673ef52771baa950426fd664d3aad1d0fa3e95644360e250"
--
--RDEPENDS_${PN} += "${PYTHON_PN}-io ${PYTHON_PN}-pickle ${PYTHON_PN}-crypt \
--    ${PYTHON_PN}-math ${PYTHON_PN}-netclient \
--    ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-markupsafe \
--    ${PYTHON_PN}-json ${PYTHON_PN}-threading ${PYTHON_PN}-numbers"
--
--CLEANBROKEN = "1"
--
--BBCLASSEXTEND = "native nativesdk"
--
--inherit ptest
--
--SRC_URI += " \
--	file://run-ptest \
--"
--
--RDEPENDS_${PN}-ptest += " \
--	${PYTHON_PN}-pytest \
--	${PYTHON_PN}-unixadmin \
--"
--
--do_install_ptest() {
--	install -d ${D}${PTEST_PATH}/tests
--	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--}
-diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb b/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
-deleted file mode 100644
-index 284f5f588..000000000
---- a/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--inherit pypi setuptools3
--require python-jinja2.inc
--
--RDEPENDS_${PN} += "${PYTHON_PN}-asyncio"
-diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb b/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
-new file mode 100644
-index 000000000..681acf8f1
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
-@@ -0,0 +1,43 @@
-+DESCRIPTION = "Python Jinja2: A small but fast and easy to use stand-alone template engine written in pure python."
-+
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462"
-+
-+SRC_URI[sha256sum] = "89aab215427ef59c34ad58735269eb58b1a5808103067f7bb9d5836c651b3bb0"
-+
-+PYPI_PACKAGE = "Jinja2"
-+
-+CLEANBROKEN = "1"
-+
-+inherit pypi setuptools3 ptest
-+
-+SRC_URI += " \
-+	file://run-ptest \
-+"
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
-+
-+RDEPENDS_${PN}-ptest += " \
-+	${PYTHON_PN}-pytest \
-+	${PYTHON_PN}-unixadmin \
-+"
-+
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-asyncio \
-+    ${PYTHON_PN}-crypt \
-+    ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-json \
-+    ${PYTHON_PN}-markupsafe \
-+    ${PYTHON_PN}-math \
-+    ${PYTHON_PN}-netclient \
-+    ${PYTHON_PN}-numbers\
-+    ${PYTHON_PN}-pickle \
-+    ${PYTHON_PN}-pprint \
-+    ${PYTHON_PN}-shell \
-+    ${PYTHON_PN}-threading \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.17.1
+diff --git a/meta-python/recipes-devtools/python/python3-appdirs_1.4.3.bb b/meta-python/recipes-devtools/python/python3-appdirs_1.4.4.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-appdirs_1.4.3.bb
+rename to meta-python/recipes-devtools/python/python3-appdirs_1.4.4.bb
+index 2e183d888..eef5c0273 100644
+--- a/meta-python/recipes-devtools/python/python3-appdirs_1.4.3.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-appdirs_1.4.4.bb
+@@ -6,8 &#43;6,8 @@ SRC_URI &#43;= &quot; \
+ 	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
+ &quot;
+ 
+-SRC_URI[md5sum] = &quot;44c679904082a2133f5566c8a0d3ab42&quot;
+-SRC_URI[sha256sum] = &quot;9e5896d1372858f8dd3344faf4e5014d21849c756c8d5701f78f8a103b372d92&quot;
+&#43;SRC_URI[md5sum] = &quot;d6bca12613174185dd9abc8a29f4f012&quot;
+&#43;SRC_URI[sha256sum] = &quot;7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41&quot;
+ 
+ inherit pypi setuptools3 ptest
+ 
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+    </blockquote>
+  </body>
+</html>
 
+--------------58E9194DD9EC9FA528167C3F--
