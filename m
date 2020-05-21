@@ -1,362 +1,137 @@
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com [209.85.214.196])
- by mx.groups.io with SMTP id smtpd.web10.316.1590014406491492916
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web12.2181.1590023042744853913
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 May 2020 15:40:06 -0700
+ Wed, 20 May 2020 18:04:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ay8UDNEt;
- spf=pass (domain: gmail.com, ip: 209.85.214.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f196.google.com with SMTP id m7so1965175plt.5
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2020 15:40:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=K5v5I4HzFDqCMKBm4MJBcP/B9D5bM4wEPK5/AnSaiqc=;
-        b=Ay8UDNEtWwtrNlsZWJLBWLpU9BPf2k6KiqJQunikecHwCnKmVRbZ6R9QYM3keMOIiv
-         bhIbQjv/f3tXUdwuLKZu51rtUoF5TuIvq7PoQHc8BwqZWz4sWkx+6nUwx2erNXFL3BXI
-         BvzEuR7ZP/XiWFztJILVOzkSEUPEsJu6nXOw8fo8i6JtPR+LdJL2mgGNjWb6ejAYdw8/
-         kEjs2oXyfe2dJVDtqGD6t4bKAB1IjNMqZpayqlME44IYF3QbFdMSvCaIaFvMXYEkZx7S
-         5RODyE4ZvF9bKmI3CRlKutrkvPACziYvPs2I6E6V8ExJ7rM7cJ8wTrNbjjt5OhJ/rGYg
-         MY/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=K5v5I4HzFDqCMKBm4MJBcP/B9D5bM4wEPK5/AnSaiqc=;
-        b=s23xaQn0t8LQw1D6Ho2C3DNDykky1mCcoAr4AI2Ty4Xdy0OEX5ejKYA0+P8fAK/pPT
-         j3byVbfTMGvaHHu9pphAEiVN4JUmlsregoqkjxCtkp9z+45ExDI+RAb0RKlxNcb9FBCA
-         shCzWFrKJFkY2DETjL8I14wt6DdDjHsJToOPtFdyMBhftmjtUSZi6I2TTWPGUW0r5mjc
-         DVTAVXkyflt2FfMj92inwfs5GlWBStLp5VSkituSiI/tZ10h18tPqS0Nl9dI31YLyTfJ
-         aMT3YdUA38pEn6aa1L6UxpTD4V79855m9UZL0CQV+EgrpruSI2ZK9ws/ExWEqrfsJXtw
-         1dsw==
-X-Gm-Message-State: AOAM5339vPqUqCjTDe2KOIAwMipi0buEsh9H0c75NmfmttFP0YnP2KUl
-	Fg/XvKz85gVeU78wUmFr7dnV/9MC0MA=
-X-Google-Smtp-Source: ABdhPJx3KHLRgSuNHRdsDlPHaPJf8xr74Kj6xITT3rC8guCJIUD394K7tXoTR9wz90plTwRParykIg==
-X-Received: by 2002:a17:90a:ad86:: with SMTP id s6mr244066pjq.193.1590014405075;
-        Wed, 20 May 2020 15:40:05 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e62a])
-        by smtp.gmail.com with ESMTPSA id c2sm3065617pjg.51.2020.05.20.15.40.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 May 2020 15:40:04 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Adam Miartus <adam.miartus@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH V2] toybox: bump version to 0.8.3
-Date: Wed, 20 May 2020 15:40:02 -0700
-Message-Id: <20200520224002.1235202-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.26.2
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.73,415,1583164800"; 
+   d="scan'208";a="92663247"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 21 May 2020 09:03:52 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id 026D94BCC8A5;
+	Thu, 21 May 2020 09:03:50 +0800 (CST)
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) by
+ G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Thu, 21 May 2020 09:03:50 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local ([fe80::a02b:f831:342:223])
+ by G08CNEXMBPEKD04.g08.fujitsu.local ([fe80::a02b:f831:342:223%14]) with mapi
+ id 15.00.1497.006; Thu, 21 May 2020 09:03:50 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: "Zang, Ruochen" <zangrc.fnst@cn.fujitsu.com>, Richard Purdie
+	<richard.purdie@linuxfoundation.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+CC: Tim Orling <ticotimo@gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH] python3-parse-type: Modify ptest output format
+Thread-Topic: [oe] [meta-python] [PATCH] python3-parse-type: Modify ptest
+ output format
+Thread-Index: AdYs2xOatmbo8LSHQZmURiz3V3O32ACMJLLg
+Date: Thu, 21 May 2020 01:03:50 +0000
+Message-ID: <047f518b0904400c8a171a69943d52a1@G08CNEXMBPEKD04.g08.fujitsu.local>
+References: <16100A98A66EDE53.23434@lists.openembedded.org>
+In-Reply-To: <16100A98A66EDE53.23434@lists.openembedded.org>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.167.225.81]
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-yoursite-MailScanner-ID: 026D94BCC8A5.AE529
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Language: zh-CN
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-From: Adam Miartus <adam.miartus@gmail.com>
-
-Fix build on glibc/mips
-
-remove OE-path-changes.patch as already applied to upstream
-
-fix CC, CFLAGS and CROSS_COMPILE variables as toybox is strict
-on what is expected to be filled in these variables:
-CC = should contain compiler name
-CROSS_COMPILE = should contain compiler prefix
-CFLAGS = should contain only compiler flags
-
-License wording changed due to commits:
- 8014d31278411e22655aeae47338e95f209e2907
- b31192fd73b382358b1deb33dc6c4cf4ce9c613f
-in toybox repository, type of license remains the same
-
-Signed-off-by: Adam Miartus <adam.miartus@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../toybox/toybox/OE-path-changes.patch       | 195 ------------------
- .../toybox/toybox/mips-no-STKFLT.patch        |  25 +++
- .../{toybox_0.7.5.bb => toybox_0.8.3.bb}      |  23 ++-
- 3 files changed, 43 insertions(+), 200 deletions(-)
- delete mode 100644 meta-oe/recipes-core/toybox/toybox/OE-path-changes.patch
- create mode 100644 meta-oe/recipes-core/toybox/toybox/mips-no-STKFLT.patch
- rename meta-oe/recipes-core/toybox/{toybox_0.7.5.bb => toybox_0.8.3.bb} (77%)
-
-diff --git a/meta-oe/recipes-core/toybox/toybox/OE-path-changes.patch b/meta-oe/recipes-core/toybox/toybox/OE-path-changes.patch
-deleted file mode 100644
-index e42c22ebd4..0000000000
---- a/meta-oe/recipes-core/toybox/toybox/OE-path-changes.patch
-+++ /dev/null
-@@ -1,195 +0,0 @@
--diff --git a/toys/net/microcom.c b/toys/net/microcom.c
--index d34e1fe..a369e6c 100644
----- a/toys/net/microcom.c
--+++ b/toys/net/microcom.c
--@@ -2,7 +2,7 @@
--  *
--  * Copyright 2017 The Android Open Source Project.
-- 
---USE_MICROCOM(NEWTOY(microcom, "<1>1s:X", TOYFLAG_BIN))
--+USE_MICROCOM(NEWTOY(microcom, "<1>1s:X", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config MICROCOM
--   bool "microcom"
--diff --git a/toys/other/blockdev.c b/toys/other/blockdev.c
--index 38e0993..c5d9fcd 100644
----- a/toys/other/blockdev.c
--+++ b/toys/other/blockdev.c
--@@ -4,7 +4,7 @@
--  *
--  * No Standard.
-- 
---USE_BLOCKDEV(NEWTOY(blockdev, "<1>1(setro)(setrw)(getro)(getss)(getbsz)(setbsz)#<0(getsz)(getsize)(getsize64)(flushbufs)(rereadpt)",TOYFLAG_USR|TOYFLAG_BIN))
--+USE_BLOCKDEV(NEWTOY(blockdev, "<1>1(setro)(setrw)(getro)(getss)(getbsz)(setbsz)#<0(getsz)(getsize)(getsize64)(flushbufs)(rereadpt)",TOYFLAG_SBIN))
-- 
-- config BLOCKDEV
--   bool "blockdev"
--diff --git a/toys/other/chrt.c b/toys/other/chrt.c
--index a1c37a0..d6db3a5 100644
----- a/toys/other/chrt.c
--+++ b/toys/other/chrt.c
--@@ -4,7 +4,7 @@
--  *
--  * Note: -ibrfo flags sorted to match SCHED positions for highest_bit()
-- 
---USE_CHRT(NEWTOY(chrt, "^mp#<0iRbrfo[!ibrfo]", TOYFLAG_USR|TOYFLAG_SBIN))
--+USE_CHRT(NEWTOY(chrt, "^mp#<0iRbrfo[!ibrfo]", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config CHRT
--   bool "chrt"
--diff --git a/toys/other/hwclock.c b/toys/other/hwclock.c
--index 1d313e3..412582d 100644
----- a/toys/other/hwclock.c
--+++ b/toys/other/hwclock.c
--@@ -4,7 +4,7 @@
--  *
--  * No standard, but see Documentation/rtc.txt in the linux kernel source..
--  *
---USE_HWCLOCK(NEWTOY(hwclock, ">0(fast)f(rtc):u(utc)l(localtime)t(systz)s(hctosys)r(show)w(systohc)[-ul][!rtsw]", TOYFLAG_USR|TOYFLAG_BIN))
--+USE_HWCLOCK(NEWTOY(hwclock, ">0(fast)f(rtc):u(utc)l(localtime)t(systz)s(hctosys)r(show)w(systohc)[-ul][!rtsw]", TOYFLAG_SBIN))
-- 
-- config HWCLOCK
--   bool "hwclock"
--diff --git a/toys/other/modinfo.c b/toys/other/modinfo.c
--index 1178d67..966a9de 100644
----- a/toys/other/modinfo.c
--+++ b/toys/other/modinfo.c
--@@ -4,7 +4,7 @@
--  *
--  * TODO: cleanup
-- 
---USE_MODINFO(NEWTOY(modinfo, "<1b:k:F:0", TOYFLAG_BIN))
--+USE_MODINFO(NEWTOY(modinfo, "<1b:k:F:0", TOYFLAG_SBIN))
-- 
-- config MODINFO
--   bool "modinfo"
--diff --git a/toys/other/pmap.c b/toys/other/pmap.c
--index abb0a33..2acef02 100644
----- a/toys/other/pmap.c
--+++ b/toys/other/pmap.c
--@@ -5,7 +5,7 @@
--  *
--  * No Standard.
-- 
---USE_PMAP(NEWTOY(pmap, "<1xq", TOYFLAG_BIN))
--+USE_PMAP(NEWTOY(pmap, "<1xq", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config PMAP
--   bool "pmap"
--diff --git a/toys/other/printenv.c b/toys/other/printenv.c
--index e8bcf29..65f62ed 100644
----- a/toys/other/printenv.c
--+++ b/toys/other/printenv.c
--@@ -2,7 +2,7 @@
--  *
--  * Copyright 2012 Georgi Chorbadzhiyski <georgi@unixsol.org>
-- 
---USE_PRINTENV(NEWTOY(printenv, "0(null)", TOYFLAG_USR|TOYFLAG_BIN))
--+USE_PRINTENV(NEWTOY(printenv, "0(null)", TOYFLAG_BIN))
-- 
-- config PRINTENV
--   bool "printenv"
--diff --git a/toys/other/taskset.c b/toys/other/taskset.c
--index 8ffdab7..89fd528 100644
----- a/toys/other/taskset.c
--+++ b/toys/other/taskset.c
--@@ -2,7 +2,7 @@
--  *
--  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
-- 
---USE_TASKSET(NEWTOY(taskset, "<1^pa", TOYFLAG_BIN|TOYFLAG_STAYROOT))
--+USE_TASKSET(NEWTOY(taskset, "<1^pa", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_STAYROOT))
-- USE_NPROC(NEWTOY(nproc, "(all)", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config NPROC
--diff --git a/toys/other/timeout.c b/toys/other/timeout.c
--index 9b93466..e1d0f4d 100644
----- a/toys/other/timeout.c
--+++ b/toys/other/timeout.c
--@@ -4,7 +4,7 @@
--  *
--  * No standard
-- 
---USE_TIMEOUT(NEWTOY(timeout, "<2^vk:s: ", TOYFLAG_BIN))
--+USE_TIMEOUT(NEWTOY(timeout, "<2^vk:s: ", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config TIMEOUT
--   bool "timeout"
--diff --git a/toys/other/truncate.c b/toys/other/truncate.c
--index 142d3c7..40eb1e5 100644
----- a/toys/other/truncate.c
--+++ b/toys/other/truncate.c
--@@ -2,7 +2,7 @@
--  *
--  * Copyright 2011 Rob Landley <rob@landley.net>
-- 
---USE_TRUNCATE(NEWTOY(truncate, "<1s:|c", TOYFLAG_BIN))
--+USE_TRUNCATE(NEWTOY(truncate, "<1s:|c", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config TRUNCATE
--   bool "truncate"
--diff --git a/toys/posix/nice.c b/toys/posix/nice.c
--index 4b587ee..9f7b119 100644
----- a/toys/posix/nice.c
--+++ b/toys/posix/nice.c
--@@ -4,7 +4,7 @@
--  *
--  * See http://opengroup.org/onlinepubs/9699919799/utilities/nice.html
-- 
---USE_NICE(NEWTOY(nice, "^<1n#", TOYFLAG_USR|TOYFLAG_BIN))
--+USE_NICE(NEWTOY(nice, "^<1n#", TOYFLAG_BIN))
-- 
-- config NICE
--   bool "nice"
--diff --git a/toys/posix/nl.c b/toys/posix/nl.c
--index 9b02bfa..41e1b89 100644
----- a/toys/posix/nl.c
--+++ b/toys/posix/nl.c
--@@ -7,7 +7,7 @@
--  * This implements a subset: only one logical page (-ip), no sections (-dfh).
--  * todo: -lv
-- 
---USE_NL(NEWTOY(nl, "v#<1=1l#b:n:s:w#<0=6E", TOYFLAG_BIN))
--+USE_NL(NEWTOY(nl, "v#<1=1l#b:n:s:w#<0=6E", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config NL
--   bool "nl"
--diff --git a/toys/posix/paste.c b/toys/posix/paste.c
--index ea04f02..8972f71 100644
----- a/toys/posix/paste.c
--+++ b/toys/posix/paste.c
--@@ -6,7 +6,7 @@
--  *
--  * Deviations from posix: the FILE argument isn't mandatory, none == '-'
-- 
---USE_PASTE(NEWTOY(paste, "d:s", TOYFLAG_BIN|TOYFLAG_LOCALE))
--+USE_PASTE(NEWTOY(paste, "d:s", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_LOCALE))
-- 
-- config PASTE
--   bool "paste"
--diff --git a/toys/posix/ps.c b/toys/posix/ps.c
--index aef2a7f..b559e09 100644
----- a/toys/posix/ps.c
--+++ b/toys/posix/ps.c
--@@ -44,7 +44,7 @@
--  * TODO: top: thread support and SMP
--  * TODO: pgrep -f only searches the amount of cmdline that fits in toybuf.
-- 
---USE_PS(NEWTOY(ps, "k(sort)*P(ppid)*aAdeflMno*O*p(pid)*s*t*Tu*U*g*G*wZ[!ol][+Ae][!oO]", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_LOCALE))
--+USE_PS(NEWTOY(ps, "k(sort)*P(ppid)*aAdeflMno*O*p(pid)*s*t*Tu*U*g*G*wZ[!ol][+Ae][!oO]", TOYFLAG_BIN|TOYFLAG_LOCALE))
-- // stayroot because iotop needs root to read other process' proc/$$/io
-- USE_TOP(NEWTOY(top, ">0m" "O*Hk*o*p*u*s#<1d#=3<1n#<1bq[!oO]", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_LOCALE))
-- USE_IOTOP(NEWTOY(iotop, ">0AaKO" "k*o*p*u*s#<1=7d#=3<1n#<1bq", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_STAYROOT|TOYFLAG_LOCALE))
--diff --git a/toys/posix/sed.c b/toys/posix/sed.c
--index cf7d15e..130ac08 100644
----- a/toys/posix/sed.c
--+++ b/toys/posix/sed.c
--@@ -10,7 +10,7 @@
--  * TODO: handle error return from emit(), error_msg/exit consistently
--  *       What's the right thing to do for -i when write fails? Skip to next?
-- 
---USE_SED(NEWTOY(sed, "(help)(version)e*f*inEr[+Er]", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_LOCALE|TOYFLAG_NOHELP))
--+USE_SED(NEWTOY(sed, "(help)(version)e*f*inEr[+Er]", TOYFLAG_BIN|TOYFLAG_LOCALE|TOYFLAG_NOHELP))
-- 
-- config SED
--   bool "sed"
-diff --git a/meta-oe/recipes-core/toybox/toybox/mips-no-STKFLT.patch b/meta-oe/recipes-core/toybox/toybox/mips-no-STKFLT.patch
-new file mode 100644
-index 0000000000..7ab95932cf
---- /dev/null
-+++ b/meta-oe/recipes-core/toybox/toybox/mips-no-STKFLT.patch
-@@ -0,0 +1,25 @@
-+glibc on mips is missing SIGSTKFLT
-+
-+Do not therefore assume it being available linuxwide
-+
-+Fixes
-+| lib/portability.c:433:3: error: use of undeclared identifier 'SIGSTKFLT'
-+|   SIGNIFY(STKFLT), SIGNIFY(POLL), SIGNIFY(PWR),
-+|   ^
-+
-+Upstream-Status: Submitted [https://github.com/landley/toybox/pull/195]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+--- a/lib/portability.c
-++++ b/lib/portability.c
-+@@ -430,7 +430,10 @@ static const struct signame signames[] =
-+   // Non-POSIX signals that cause termination
-+   SIGNIFY(PROF), SIGNIFY(IO),
-+ #ifdef __linux__
-+-  SIGNIFY(STKFLT), SIGNIFY(POLL), SIGNIFY(PWR),
-++# if !defined(__GLIBC__) && !defined(__mips__)
-++   SIGNIFY(STKFLT),
-++# endif
-++  SIGNIFY(POLL), SIGNIFY(PWR),
-+ #elif defined(__APPLE__)
-+   SIGNIFY(EMT), SIGNIFY(INFO),
-+ #endif
-diff --git a/meta-oe/recipes-core/toybox/toybox_0.7.5.bb b/meta-oe/recipes-core/toybox/toybox_0.8.3.bb
-similarity index 77%
-rename from meta-oe/recipes-core/toybox/toybox_0.7.5.bb
-rename to meta-oe/recipes-core/toybox/toybox_0.8.3.bb
-index 2f82978334..275263ffba 100644
---- a/meta-oe/recipes-core/toybox/toybox_0.7.5.bb
-+++ b/meta-oe/recipes-core/toybox/toybox_0.8.3.bb
-@@ -3,21 +3,34 @@ HOMEPAGE = "http://www.landley.net/toybox/"
- DEPENDS = "attr virtual/crypt"
- 
- LICENSE = "BSD-0-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=78659a599b9325da368f2f1eb88f19c7"
- 
- inherit cml1 update-alternatives
- 
- SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
--           file://OE-path-changes.patch \
-+           file://mips-no-STKFLT.patch \
-            "
--SRC_URI[md5sum] = "a8bb502a1be941f06dd2644fff25f547"
--SRC_URI[sha256sum] = "3ada450ac1eab1dfc352fee915ea6129b9a4349c1885f1394b61bd2d89a46c04"
-+SRC_URI[sha256sum] = "eab28fd29d19d4e61ef09704e5871940e6f35fd35a3bb1285e41f204504b5c01"
- 
- SECTION = "base"
- 
- TOYBOX_BIN = "generated/unstripped/toybox"
- 
--EXTRA_OEMAKE = 'HOSTCC="${BUILD_CC}" CPUS=${@oe.utils.cpu_count()}'
-+# Toybox is strict on what CC, CFLAGS and CROSS_COMPILE variables should contain.
-+# Fix CC, CFLAGS, CROSS_COMPILE to match expectations.
-+# CC = compiler name
-+# CFLAGS = only compiler flags
-+# CROSS_COMPILE = compiler prefix
-+CFLAGS += "${TOOLCHAIN_OPTIONS} ${TUNE_CCARGS}"
-+
-+COMPILER_toolchain-clang = "clang"
-+COMPILER  ?= "gcc"
-+
-+EXTRA_OEMAKE = 'CROSS_COMPILE="${HOST_PREFIX}" \
-+                CC="${COMPILER}" \
-+                STRIP="strip" \
-+                CFLAGS="${CFLAGS}" \
-+                HOSTCC="${BUILD_CC}" CPUS=${@oe.utils.cpu_count()} V=1'
- 
- do_configure() {
-     # allow user to define their own defconfig in bbappend, taken from kernel.bbclass
--- 
-2.26.2
-
+UGluZw0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogb3Bl
+bmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcgPG9wZW5l
+bWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPiBPbiBCZWhh
+bGYgT2YgemFuZ3JjDQpTZW50OiBNb25kYXksIE1heSAxOCwgMjAyMCAyOjEy
+IFBNDQpUbzogUmljaGFyZCBQdXJkaWUgPHJpY2hhcmQucHVyZGllQGxpbnV4
+Zm91bmRhdGlvbi5vcmc+OyBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3Bl
+bmVtYmVkZGVkLm9yZw0KQ2M6IFRpbSBPcmxpbmcgPHRpY290aW1vQGdtYWls
+LmNvbT4NClN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLXB5dGhvbl0gW1BBVENI
+XSBweXRob24zLXBhcnNlLXR5cGU6IE1vZGlmeSBwdGVzdCBvdXRwdXQgZm9y
+bWF0DQoNCklzIHRoaXMgc29sdXRpb24gZmVhc2libGUsIGFuZCBpZiBpdCBp
+cyBmZWFzaWJsZSwgd2hpY2ggbWFpbGluZyBsaXN0IHNob3VsZCBJIHN1Ym1p
+dCB0aGUgcGF0Y2ggdG/vvJ8NCg0KLS0tLS3pgq7ku7bljp/ku7YtLS0tLQ0K
+5Y+R5Lu25Lq6OiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVk
+ZGVkLm9yZyA8b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRl
+ZC5vcmc+IOS7o+ihqCB6YW5ncmMNCuWPkemAgeaXtumXtDogMjAyMOW5tDXm
+nIgxOOaXpSAxNDowOQ0K5pS25Lu25Lq6OiBSaWNoYXJkIFB1cmRpZSA8cmlj
+aGFyZC5wdXJkaWVAbGludXhmb3VuZGF0aW9uLm9yZz47IG9wZW5lbWJlZGRl
+ZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQrmioTpgIE6IFRpbSBP
+cmxpbmcgPHRpY290aW1vQGdtYWlsLmNvbT4NCuS4u+mimDog562U5aSNOiBb
+b2VdIFttZXRhLXB5dGhvbl0gW1BBVENIXSBweXRob24zLXBhcnNlLXR5cGU6
+IE1vZGlmeSBwdGVzdCBvdXRwdXQgZm9ybWF0DQoNCk5vdyBJIGhhdmUgbW9k
+aWZpZWQgdGhlIG91dHB1dCBvZiBweXRlc3QgYnkgbW9kaWZ5aW5nIHB0ZXN0
+LXJ1bm5lci4gTXkgc29sdXRpb24gaXMgdGhhdCBpZiBPU1MgdXNlcyBweXRl
+c3QgdGVzdGluZywgbmFtZSBpdHMgcHRlc3QgZmlsZSBydW4tcHRlc3QtcHl0
+ZXN0Lg0KDQpUaGUgY29udGVudCBvZiBydW4tcHRlc3QtcHl0ZXN0IGlzIGFz
+IGZvbGxvd3M6DQpweXRlc3QgLW8gbG9nX2NsaSA9IHRydWUgLW8gbG9nX2Ns
+aV9sZXZlbCA9IElORk8NCg0KVGhlIHRlc3Qgb3V0cHV0IGlzIGFzIGZvbGxv
+d3M6DQpTVEFSVDogcHRlc3QtcnVubmVyDQoyMDIwLTA1LTE4VDA1OjQyDQpC
+RUdJTjogL3Vzci9saWIvcHl0aG9uMy1wYXJzZS10eXBlL3B0ZXN0ID09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09IHRlc3Qgc2Vzc2lvbiBzdGFydHMg
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09IHBsYXRmb3JtIGxpbnV4
+IC0tIFB5dGhvbiAzLjguMiwgcHl0ZXN0LTUuMy41LCBweS0xLjguMSwgcGx1
+Z2d5LTAuMTMuMQ0Kcm9vdGRpcjogL3Vzci9saWIvcHl0aG9uMy1wYXJzZS10
+eXBlL3B0ZXN0IGNvbGxlY3RlZCAxOTIgaXRlbXMNCg0KUEFTUzogdGVzdHMv
+dGVzdF9idWlsZGVyLnB5OjpUZXN0VHlwZUJ1aWxkZXI0RW51bTo6dGVzdF9t
+YWtlX2VudW1fd2l0aF9kaWN0DQpQQVNTOiB0ZXN0cy90ZXN0X2J1aWxkZXIu
+cHk6OlRlc3RUeXBlQnVpbGRlcjRFbnVtOjp0ZXN0X21ha2VfZW51bV93aXRo
+X2VudW1fY2xhc3MNClBBU1M6IHRlc3RzL3Rlc3RfYnVpbGRlci5weTo6VGVz
+dFR5cGVCdWlsZGVyNEVudW06OnRlc3RfcGFyc2VfZW51bV95ZXNubw0KLi4u
+DQpQQVNTOiB0ZXN0cy90ZXN0X3BhcnNlX3V0aWwucHk6OlRlc3RGaWVsZFBh
+cnNlcjo6dGVzdF9leHRyYWN0X3R5cGVzDQpQQVNTOiB0ZXN0cy90ZXN0X3Bh
+cnNlX3V0aWwucHk6OlRlc3RGaWVsZFBhcnNlcjo6dGVzdF9wYXJzZV9fcmFp
+c2VzX2Vycm9yX3dpdGhfbWlzc2luZ19vcl9wYXJ0aWFsX2JyDQpQQVNTOiB0
+ZXN0cy90ZXN0X3BhcnNlX3V0aWwucHk6OlRlc3RGaWVsZFBhcnNlcjo6dGVz
+dF9wYXJzZV9fd2l0aF92YWxpZF9maWVsZHMgDQoNCg0KPT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT0gMTkyIHBhc3NlZCBpbiAxOC40MXMgPT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT0NClNUT1A6IHB0ZXN0LXJ1bm5lcg0K
+RFVSQVRJT046IDMyDQpFTkQ6IC91c3IvbGliL3B5dGhvbjMtcGFyc2UtdHlw
+ZS9wdGVzdA0KMjAyMC0wNS0xOFQwNTo0Mg0KU1RPUDogcHRlc3QtcnVubmVy
+DQoNCi0tLS0t6YKu5Lu25Y6f5Lu2LS0tLS0NCuWPkeS7tuS6ujogUmljaGFy
+ZCBQdXJkaWUgPHJpY2hhcmQucHVyZGllQGxpbnV4Zm91bmRhdGlvbi5vcmc+
+DQrlj5HpgIHml7bpl7Q6IDIwMjDlubQ15pyIMTPml6UgNToyMw0K5pS25Lu2
+5Lq6OiBaYW5nLCBSdW9jaGVuL+iHpyDoi6XlsJggPHphbmdyYy5mbnN0QGNu
+LmZ1aml0c3UuY29tPjsgb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5l
+bWJlZGRlZC5vcmcNCuaKhOmAgTogVGltIE9ybGluZyA8dGljb3RpbW9AZ21h
+aWwuY29tPg0K5Li76aKYOiBSZTogW29lXSBbbWV0YS1weXRob25dIFtQQVRD
+SF0gcHl0aG9uMy1wYXJzZS10eXBlOiBNb2RpZnkgcHRlc3Qgb3V0cHV0IGZv
+cm1hdA0KDQpPbiBUdWUsIDIwMjAtMDUtMTIgYXQgMjI6MjMgKzA4MDAsIHph
+bmdyYyB3cm90ZToNCj4gU2lnbmVkLW9mZi1ieTogWmFuZyBSdW9jaGVuIDx6
+YW5ncmMuZm5zdEBjbi5mdWppdHN1LmNvbT4NCj4gLS0tDQo+ICAuLi4vcmVj
+aXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1wYXJzZS10eXBlL3J1bi1w
+dGVzdCAgICAgICAgfCAyICstDQo+ICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNl
+cnRpb24oKyksIDEgZGVsZXRpb24oLSkNCj4gDQo+IGRpZmYgLS1naXQNCj4g
+YS9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24z
+LXBhcnNlLXR5cGUvcnVuLXB0ZXN0DQo+IGIvbWV0YS1weXRob24vcmVjaXBl
+cy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1wYXJzZS10eXBlL3J1bi1wdGVz
+dA0KPiBpbmRleCA1Y2VjNzExNjkuLmI2M2M0ZGUwZCAxMDA2NDQNCj4gLS0t
+IGEvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9u
+My1wYXJzZS10eXBlL3J1bi1wdGVzdA0KPiArKysgYi9tZXRhLXB5dGhvbi9y
+ZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXBhcnNlLXR5cGUvcnVu
+LXB0ZXN0DQo+IEBAIC0xLDMgKzEsMyBAQA0KPiAgIyEvYmluL3NoDQo+ICAN
+Cj4gLXB5dGVzdA0KPiArcHl0ZXN0IC1vIGxvZ19jbGk9dHJ1ZSAtbyBsb2df
+Y2xpX2xldmVsPUlORk8gfCBzZWQgLWUgJ3MvXFsuLi4lXF0vL2cnfCBzZWQg
+LWUgJ3MvUEFTU0VEL1BBU1MvZyd8IHNlZCAtZSAncy9GQUlMRUQvRkFJTC9n
+J3xzZWQgLWUgJ3MvU0tJUFBFRC9TS0lQL2cnfCBhd2sgJ3tpZiAoJE5GPT0i
+UEFTUyIgfHwgJE5GPT0iRkFJTCIgfHwgJE5GPT0iU0tJUCIgfHwgJE5GPT0i
+WEZBSUwiIHx8ICRORj09IlhQQVNTIil7cHJpbnRmICIlczogJXNcbiIsICRO
+RiwgJDB9ZWxzZXtwcmludH19J3wgYXdrICd7aWYgKCRORj09IlBBU1MiIHx8
+ICRORj09IkZBSUwiIHx8ICRORj09IlNLSVAiIHx8ICRORj09IlhGQUlMIiB8
+fCAkTkY9PSJYUEFTUyIpIHskTkY9IiI7cHJpbnQgJDB9ZWxzZXtwcmludH19
+Jw0KDQpSYXRoZXIgdGhhbiBkb2luZyB0aGlzIGZvciBldmVyeSBweXRob24g
+bW9kdWxlLCBpdCBtYXkgYmUgYW4gaWRlYSB0bw0KY29uc2lkZXI6DQoNCmEp
+IHRlYWNoaW5nIHB0ZXN0IHJ1bm5lciBob3cgdG8gaGFuZGxlIHRoZSBhbHRl
+cm5hdGUgb3V0cHV0IGZvcm1hdCAodHJpZ2dlcmVkIGJ5IHJ1bi1wdGVzdC1Y
+WFggaW5zdGVhZCBvZiBydW4tcHRlc3QpDQoNCm9yDQoNCmIpIGFkZGluZyBh
+IGNvbW1vbiBweXRob24gc2NyaXB0IHdoaWNoIGNvdWxkIGF2b2lkIGFsbCB0
+aGlzIHNlZC9hd2sgbWFnaWMgYW5kIHRoZSBleHRyYSBkZXBlbmRlbmNpZXMN
+Cg0Kb3INCg0KYykgcGF0Y2ggaW4gYSBwYXJhbWV0ZXIgdG8gcHl0ZXN0IHdo
+aWNoIG91dHB1dHMgdGhlIGRhdGEgaW4gdGhlIGZvcm1hdCB3ZSBuZWVkLg0K
+DQpDaGVlcnMsDQoNClJpY2hhcmQNCg0KDQoNCg0KDQoNCg0KCgo=
