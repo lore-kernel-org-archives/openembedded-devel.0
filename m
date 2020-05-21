@@ -1,61 +1,59 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [])
- by mx.groups.io with SMTP id smtpd.web12.1504.1590046522528645391
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.4680.1590064079355194007
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 May 2020 00:35:29 -0700
+ Thu, 21 May 2020 05:27:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: <nil>, mailfrom: wangmy@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.73,416,1583164800"; 
-   d="scan'208";a="92705691"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 21 May 2020 15:35:27 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id D82234BCC89E
-	for <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2020 15:35:25 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 21 May 2020 15:35:25 +0800
-From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe][PATCH] openldap: upgrade 2.4.49 -> 2.4.50
-Date: Fri, 22 May 2020 00:35:24 +0800
-Message-ID: <1590078924-3370-1-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
-X-yoursite-MailScanner-ID: D82234BCC89E.A2CF9
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=34608 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jbkIl-0002Km-TI; Thu, 21 May 2020 15:27:57 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH] python3-gmqtt: Upgrade to 0.6.5
+Date: Thu, 21 May 2020 15:27:50 +0300
+Message-Id: <20200521122750.25059-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+Upgrade to release 0.6.5.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../openldap/{openldap_2.4.49.bb => openldap_2.4.50.bb}       | 4 ++--
+ .../python/{python3-gmqtt_0.6.2.bb => python3-gmqtt_0.6.5.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/openldap/{openldap_2.4.49.bb => openldap_2.4.50.bb} (98%)
+ rename meta-python/recipes-devtools/python/{python3-gmqtt_0.6.2.bb => python3-gmqtt_0.6.5.bb} (74%)
 
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.49.bb b/meta-oe/recipes-support/openldap/openldap_2.4.50.bb
-similarity index 98%
-rename from meta-oe/recipes-support/openldap/openldap_2.4.49.bb
-rename to meta-oe/recipes-support/openldap/openldap_2.4.50.bb
-index 670c704e6f..b62b13a443 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.49.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.50.bb
-@@ -25,8 +25,8 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
-     file://remove-user-host-pwd-from-version.patch \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-gmqtt_0.6.2.bb b/meta-python/recipes-devtools/python/python3-gmqtt_0.6.5.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python3-gmqtt_0.6.2.bb
+rename to meta-python/recipes-devtools/python/python3-gmqtt_0.6.5.bb
+index 8d4ac8830..379c7679c 100644
+--- a/meta-python/recipes-devtools/python/python3-gmqtt_0.6.2.bb
++++ b/meta-python/recipes-devtools/python/python3-gmqtt_0.6.5.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/wialon/gmqtt"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=903f1792621a3b35ee546da75d139177"
  
--SRC_URI[md5sum] = "2a47a6bb4319357ea7b032c45283e79e"
--SRC_URI[sha256sum] = "e3b117944b4180f23befe87d0dcf47f29de775befbc469dcf4ac3dab3311e56e"
-+SRC_URI[md5sum] = "f9ed44ef373abed04c9e4c8586260f9e"
-+SRC_URI[sha256sum] = "5cb57d958bf5c55a678c6a0f06821e0e5504d5a92e6a33240841fbca1db586b8"
+-SRC_URI[md5sum] = "f763f12c5e6ba6f0fa0ec4a6dc8c3fd9"
+-SRC_URI[sha256sum] = "3b3c12cb62bbc3ee0bd81da3d9fbd78c5414098aaf58236c3663edfeda5237e0"
++SRC_URI[md5sum] = "9388ec09b6536c4e68c5ac5c31de3dc9"
++SRC_URI[sha256sum] = "c12b2d7d5a90f3304b7291b1d9d21df47e228dfb4ff990e965008fdd1a55ce60"
  
- DEPENDS = "util-linux groff-native"
+ inherit pypi setuptools3
  
 -- 
 2.17.1
-
-
 
