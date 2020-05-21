@@ -1,62 +1,61 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web10.2479.1590024317768204761
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web12.2577.1590024612793163689
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 May 2020 18:25:18 -0700
+ Wed, 20 May 2020 18:30:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: tgamblin@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 04L1PGV5013063
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2020 18:25:16 -0700 (PDT)
-Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Wed, 20 May 2020
- 18:25:15 -0700
-Received: by ala-lpggp3.wrs.com (Postfix, from userid 20958)	id EBD8B90037B;
- Wed, 20 May 2020 18:25:15 -0700 (PDT)
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.73,416,1583164800"; 
+   d="scan'208";a="92669735"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 21 May 2020 09:30:10 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id ACF814CE2E6A
+	for <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2020 09:30:09 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+ G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Thu, 21 May 2020 09:30:10 +0800
+From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH v3] python3-iso8601: add python3-numbers to RDEPENDS
-Date: Wed, 20 May 2020 18:25:15 -0700
-Message-ID: <20200521012515.88402-1-trevor.gamblin@windriver.com>
-X-Mailer: git-send-email 2.17.1
+Subject: [oe] [meta-python][PATCH] python3-pycparser: upgrade 2.19 -> 2.20
+Date: Thu, 21 May 2020 18:30:06 +0800
+Message-ID: <1590057006-40833-1-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
+ G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
+X-yoursite-MailScanner-ID: ACF814CE2E6A.A4375
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
 Content-Type: text/plain
 
-python3-iso8601 relies on the decimal module from the standard
-library, but it is not in iso8601's RDEPENDS:
-
-|root@qemux86-64:~# python3
-|Python 3.8.2 (default, Apr 27 2020, 08:51:00)
-|[GCC 9.3.0] on linux
-|Type "help", "copyright", "credits" or "license" for more information.
-|>>> import iso8601
-|Traceback (most recent call last):
-|File "<stdin>", line 1, in <module>
-|File "/usr/lib64/python3.8/site-packages/iso8601/_init_.py", line 1, in <module>
-|from .iso8601 import *
-|File "/usr/lib64/python3.8/site-packages/iso8601/iso8601.py", line 12, in <module>
-|from decimal import Decimal
-|ModuleNotFoundError: No module named 'decimal'
-
-Add it to RDEPENDS to fix the import error.
-
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-iso8601.inc | 1 +
- 1 file changed, 1 insertion(+)
+ .../{python3-pycparser_2.19.bb => python3-pycparser_2.20.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pycparser_2.19.bb => python3-pycparser_2.20.bb} (74%)
 
-diff --git a/meta-python/recipes-devtools/python/python-iso8601.inc b/meta-python/recipes-devtools/python/python-iso8601.inc
-index 61e9abbac..a70843ead 100644
---- a/meta-python/recipes-devtools/python/python-iso8601.inc
-+++ b/meta-python/recipes-devtools/python/python-iso8601.inc
-@@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "49c4b20e1f38aa5cf109ddcd39647ac419f928512c869dc01d5c7098ed
+diff --git a/meta-python/recipes-devtools/python/python3-pycparser_2.19.bb b/meta-python/recipes-devtools/python/python3-pycparser_2.20.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python3-pycparser_2.19.bb
+rename to meta-python/recipes-devtools/python/python3-pycparser_2.20.bb
+index 35ed93e09b..2a5f414b2f 100644
+--- a/meta-python/recipes-devtools/python/python3-pycparser_2.19.bb
++++ b/meta-python/recipes-devtools/python/python3-pycparser_2.20.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/eliben/pycparser"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=86f1cedb4e6410a88ce8e30b91079169"
  
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-datetime \
-+    ${PYTHON_PN}-numbers \
- "
+-SRC_URI[md5sum] = "76396762adc3fa769c83d8e202d36b6f"
+-SRC_URI[sha256sum] = "a988718abfad80b6b157acce7bf130a30876d27603738ac39f140993246b25b3"
++SRC_URI[md5sum] = "b8f88de737db8c346ee8d31c07c7a25a"
++SRC_URI[sha256sum] = "2d475327684562c3a96cc71adf7dc8c4f0565175cf86b6d7a404ff4c771f15f0"
  
- BBCLASSEXTEND = "native nativesdk"
+ inherit pypi setuptools3
+ 
 -- 
 2.17.1
+
+
 
