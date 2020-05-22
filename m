@@ -1,179 +1,267 @@
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.51])
- by mx.groups.io with SMTP id smtpd.web12.14235.1590158213289499480
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com [209.85.222.193])
+ by mx.groups.io with SMTP id smtpd.web10.15304.1590161865125965735
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 May 2020 07:36:53 -0700
+ Fri, 22 May 2020 08:37:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=dxeLfCLH;
- spf=pass (domain: windriver.com, ip: 40.107.92.51, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=oEBwEI30xeRd0Q6+C/6ixDMaIsa6Nkhx4Kf3lFgt5WVszrtYLqpOJ5mwhSzToQ/w57DCXRRkzIWxpUNFa209qTHnFwFXnFIUbqW/LQldQKMeCjwD7wCNUFZ83CDxWuCh9n2M3WGFZJndLgdFxc3iS2wOQRHweZYdSRoVMnmq1pdlks/8HWxPkvH4CwtyhZLzfreQCjWQy6GRvj3uNR9UiLrCNxwLihffwGqkIEebLm5y5WvB1fVHO0Z4l7iGPXiFYkfJPFaL0WCSQs0oS6f9jL7J5bt1DHL6lr2J3siEyoVLRQsghp5Jd714Ec4zE0pS3iVF+1NgTgrjWGKjks1/tw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lPFE/v1JdEBuEL+3eODAuvzx2lyl/DSI2Q+rW4pQfJI=;
- b=ny6580XyZH8hcn4xwpKnZENcntxQAWsVF/vM+XbBL6HlKup09gL5S5SoYXlgEU0CFH7yAKxx05QOiOKOwPUj3JaUAN954Rm7K0Xto15yVlpabygS5hmmfLRLPgG77L/V1SwoPAY2pdCgYDFQ80izhsD1/GbliAPw1eBYV9KNHkkR1Ht3QxSMbQ4qZ2BJ23d2I00rleWoAGlQRM5R2HqRAMKNVaOPXOCkSLEK8ZOCfDTiuubYDTW8a5bEJP6hW+cBe/n9Ck2DSadk/7p3OGvNQnbn5zbAyUEspzfx3KPVbL48NCqnUBPZiCcwdixJ17Rb0Mu1Pv96l24lVeXMbHdeWQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=uF9x5LxX;
+ spf=pass (domain: gmail.com, ip: 209.85.222.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f193.google.com with SMTP id b27so1113395qka.4
+        for <openembedded-devel@lists.openembedded.org>; Fri, 22 May 2020 08:37:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lPFE/v1JdEBuEL+3eODAuvzx2lyl/DSI2Q+rW4pQfJI=;
- b=dxeLfCLHLJG/jnSaShYRxneLKiXCQlntKkNK2QRFemC4rXnPHUQSuYdro2LDWYB5XF2Of/EsFUsDbT2OPaLtG4kIyOn+L9eGGLoiXquHfOyrRws7qJ3YR4+/yJMX0bpDJ5BX0h6fsL72ylBRfPFCD8AO7YUhiN+xQbKh1KYs72s=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB3876.namprd11.prod.outlook.com (2603:10b6:405:77::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3021.23; Fri, 22 May
- 2020 14:36:52 +0000
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3000.034; Fri, 22 May 2020
- 14:36:52 +0000
-Subject: Re: [oe] [meta-python][PATCH 3/3] python3-openpyxl: Upgrade 2.6.3 -> 3.0.3
-To: Leon Anavi <leon.anavi@konsulko.com>,
- openembedded-devel@lists.openembedded.org
-References: <20200521231325.685-1-leon.anavi@konsulko.com>
- <20200521231325.685-3-leon.anavi@konsulko.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <ef1022b5-cd3d-28d2-d0b5-39261b2dc7a4@windriver.com>
-Date: Fri, 22 May 2020 10:36:49 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
-In-Reply-To: <20200521231325.685-3-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTXPR0101CA0043.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:1::20) To BN6PR11MB0003.namprd11.prod.outlook.com
- (2603:10b6:405:61::26)
-Return-Path: trevor.gamblin@windriver.com
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=qLel6bVEU5GJX5ESVfrPEp9dEbrRp3oOR3LH8pQyrOw=;
+        b=uF9x5LxXznEL55GP8P5jE4SpLh0pOS3nE0Ek0UQIp8BBCq/hOlAqE+G7KFWa6SCpuO
+         QlkEZ7AobBLIs25RIrRR4fpp7Zxay8OPvNCLHSG+L2VIzFMadrNo19P/l1IPIzhSJQGc
+         FNjyhGfUTV3jmELJAvB4VL4YnXEKr+sB13f+9UWdB1ujMSPRuELIi/FaE/uwPSPGipQQ
+         9S+iLKGVtR9Xw1mxKxF09d2WfyHXpLqEboTERljGtDzysrzyrTiDcCQgDkmcxC1CeirY
+         B+HlzSUVVlFKm8OsV16C1GhN0YqZkpYFBo8PZhdZ2Gvd5NuDqNTSNxrcM/juBGVzVaYp
+         Ke4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=qLel6bVEU5GJX5ESVfrPEp9dEbrRp3oOR3LH8pQyrOw=;
+        b=EQZKB2xFzlcLdTpAEI2zh4T39lNzYgDx31WRaBzbTeLldRBI/KwTrcZfuuLlCLNqiq
+         xMpnspKPsFpMDpdZVd9mo5T5nh3CqA6i7N4kk2u3qdPuQuseSigLhpErTa0iHGXvg0rJ
+         TPf7FEQQ0UvPTf0xizX9VBXtOw5rl6ENvYYwOvttDlxKqJcJhAL1V9+xwuo3nNgwyXNI
+         ObyGXVDpf0DxGutkPDZe6JhGahpNtahsSl4Lo0NvgxZmC9MpBHcXRiZgX6nAdeYq2UAD
+         qCsrCZwPnKwy3misj9lxWNgNc00kAqRRil2W+fvFPWtVaEPBA4uZK2gQmr0PFrTf6lIy
+         WHeQ==
+X-Gm-Message-State: AOAM532DbBRBXV4SMUrKe+Kg3WseRii9kjZUQZEmecNeBj25q6Id+2hb
+	OSYIsBzitXB6g0181T5yLvlFMzYaoNzLIT+bXd8=
+X-Google-Smtp-Source: ABdhPJya362OGZTXE+Tkb6vEtAq7iVZTPsweN32MwSGBOO3wLsXJ2U39shg0hL5avvUMMgeqc2sfrKqAFxoIvTI5Lr4=
+X-Received: by 2002:a37:b847:: with SMTP id i68mr15040161qkf.431.1590161863971;
+ Fri, 22 May 2020 08:37:43 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YTXPR0101CA0043.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:1::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3021.23 via Frontend Transport; Fri, 22 May 2020 14:36:51 +0000
-X-Originating-IP: [174.115.236.231]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a2dfaf55-98af-4c42-8719-08d7fe5d9150
-X-MS-TrafficTypeDiagnostic: BN6PR11MB3876:
-X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB38760586BF079265F23543689FB40@BN6PR11MB3876.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2043;
-X-Forefront-PRVS: 04111BAC64
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	dReMhc/SiD66C2HCbHpEglAKmxpHh/LS94DbB9zbfND2WAdSu2Nz2GYKjGLi08oYN68XOKSy5XCrKGdiBo9VwjekD4jrJEQmlQWXU4jGYJN7ixNUn6zcb8nRqZH568jKhEfR989OFNNq7WR5dYeQpqV/pRuJxAKnIKUsuj5Q/F6Oj5frn8EOf7HHpsDipai5JhX1rI4HCKuAyqMvEaxjVZfmONjFpJ9mmQ3N6vkrKs2RURvjyxnFZZ2mxoaxb1lYKGqRzj1XrtRlLcCc2eqxCBJDx8Lsvt8axvbgiuYQbJ5nOP30v6p9ZXo0niBev2i8eDqJ4q36x3EnvmQe7ncBpSuFKBX1ztmdBIPSQKV+wVUnN20RwJvhjXFby/lE+wyrKJUP8D8Cu0ic6SMKnS+fYa3QgmwmlWbum1alUlL3rmKxZmZPuDVgDi5SPyvictvnBRs3Kce/dmOHiMs/QC8UBA==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(376002)(366004)(396003)(136003)(39850400004)(31696002)(966005)(86362001)(66476007)(66556008)(66946007)(5660300002)(36756003)(33964004)(16576012)(52116002)(2906002)(31686004)(316002)(44832011)(2616005)(956004)(16526019)(53546011)(478600001)(8676002)(166002)(186003)(26005)(6486002)(8936002)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	JiIJo9rbeFB5ownaxu7vg9WWecfVrIIgCVESaNcr6ohH3w1j0mPZpv1uuS7cS1+oiH05M6s3DYvJdEvZr/c+epI8IHGIz/5hvpjB9DdnDSwphLj4oUHfT2quZSe8eFUru0bwQSHlFt0jbF8TbnFYlLZ/aXLQjpChJ4dk3iwPHZDDKZCsCuUPl7QzKTuxFZtTjddGiBWqELxDT6DbCwR9phw2RmYWvImJX2c8e3DDZSIEllbWFFDiAtC6fQA3v2cOqc+SYL0/NOD7ewcmDZ3aVejnzJsldUZi5FbuvIQs3RxOUEtGNsATvX5y2/MO2H/13ljVALfgVSIxI/I+dd+Qj7rtiudBtj+n+GrImd+GYaSRHsmyQqCA7drVSQ38eHd5URzTfavh/5+qN6TpOiKcF5sPCtZp0XXXGX54GTFxwzW1xOIG6WjlVfFMzVdqTg+nBaw0nm3IVlFrsMunTmap2N642KZs32AlIA9pk+SsYSjg8NpFbGFyjbiUL10upjH3
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a2dfaf55-98af-4c42-8719-08d7fe5d9150
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2020 14:36:52.0441
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: IFQk0nXyqDF6BFMQClXyxRJ0HttRXi+E3QprpMkksni9dikC8x8jNmX+p06zbsL550nmyXjke4zB5JT2bKvDYxj9lTrW0B4QjpQqNvgStzE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB3876
-Content-Type: multipart/alternative;
- boundary="------------5FB55DCB3B6AE31B12373DAA"
-Content-Language: en-US
+References: <cover.1590156579.git.akuster808@gmail.com>
+In-Reply-To: <cover.1590156579.git.akuster808@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 22 May 2020 08:37:17 -0700
+Message-ID: <CAMKF1sp=twDYL50CUFYqwGXhdNQsqFdOsKV5_Eva+F-HsfL+Rg@mail.gmail.com>
+Subject: Re: [oe] [dunfell 00/55] pull request
+To: akuster <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
---------------5FB55DCB3B6AE31B12373DAA
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-
-On 5/21/20 7:13 PM, Leon Anavi wrote:
-> Upgrade to release 3.0.3.
+On Fri, May 22, 2020 at 7:11 AM akuster <akuster808@gmail.com> wrote:
 >
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   ...{python3-openpyxl_2.6.3.bb => python3-openpyxl_3.0.3.bb} | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-openpyxl_2.6.3.bb => python3-openpyxl_3.0.3.bb} (70%)
+> Please merge these changes into dunfell
+> Cover letter only
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-openpyxl_2.6.3.bb b/meta-python/recipes-devtools/python/python3-openpyxl_3.0.3.bb
-> similarity index 70%
-> rename from meta-python/recipes-devtools/python/python3-openpyxl_2.6.3.bb
-> rename to meta-python/recipes-devtools/python/python3-openpyxl_3.0.3.bb
-> index 87cb46ea9..018c4abe2 100644
-> --- a/meta-python/recipes-devtools/python/python3-openpyxl_2.6.3.bb
-> +++ b/meta-python/recipes-devtools/python/python3-openpyxl_3.0.3.bb
-> @@ -5,11 +5,11 @@ was initially based on PHPExcel."
->   
->   HOMEPAGE = "http://www.python-excel.org/"
->   LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://PKG-INFO;md5=3baf26d8abf08632beaf913ea973cb8a"
-> +LIC_FILES_CHKSUM = "file://PKG-INFO;md5=a6e506457afab4a25ecbaeb4bc3ed623"
->   
->   inherit pypi setuptools3
->   
-> -SRC_URI[md5sum] = "b067750e51f17a1a9cc6bacfdd668218"
-> -SRC_URI[sha256sum] = "72d1ed243972cad0b3c236230083cac00d9c72804e64a2ae93d7901aec1a8f1c"
-> +SRC_URI[md5sum] = "9583cea56b9d4441d96eb63a8a5c92a4"
-> +SRC_URI[sha256sum] = "547a9fc6aafcf44abe358b89ed4438d077e9d92e4f182c87e2dc294186dc4b64"
->   
->   RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-jdcal ${PYTHON_PN}-et-xmlfile"
+> The following changes since commit a62ad77973b16daac1cbaa03cbda3c6b9b91f=
+2ff:
 >
-> 
+>   README: updated Maintainers list for Dunfell (2020-05-05 16:47:34 -070=
+0)
+>
+> are available in the Git repository at:
+>
+>   https://git.openembedded.org/meta-openembedded dunfell-next
+>   http://cgit.openembedded.org/meta-openembedded/log/?h=3Ddunfell-next
+>
 
---------------5FB55DCB3B6AE31B12373DAA
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
+merged thank you.
 
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 5/21/20 7:13 PM, Leon Anavi wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20200521231325.685-3-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 3.0.3.
 
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200521231325.685-3-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">
----
- ...{python3-openpyxl_2.6.3.bb =&gt; python3-openpyxl_3.0.3.bb} | 6 &#43;&#43;&#43;---
- 1 file changed, 3 insertions(&#43;), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-openpyxl_2.6.3.bb =&gt; python3-openpyxl_3.0.3.bb} (70%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-openpyxl_2.6.3.bb b/meta-python/recipes-devtools/python/python3-openpyxl_3.0.3.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-openpyxl_2.6.3.bb
-rename to meta-python/recipes-devtools/python/python3-openpyxl_3.0.3.bb
-index 87cb46ea9..018c4abe2 100644
---- a/meta-python/recipes-devtools/python/python3-openpyxl_2.6.3.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-openpyxl_3.0.3.bb
-@@ -5,11 &#43;5,11 @@ was initially based on PHPExcel.&quot;
- 
- HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://www.python-excel.org/">&quot;http://www.python-excel.org/&quot;</a>
- LICENSE = &quot;MIT&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;md5=3baf26d8abf08632beaf913ea973cb8a">&quot;file://PKG-INFO;md5=3baf26d8abf08632beaf913ea973cb8a&quot;</a>
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;md5=a6e506457afab4a25ecbaeb4bc3ed623">&quot;file://PKG-INFO;md5=a6e506457afab4a25ecbaeb4bc3ed623&quot;</a>
- 
- inherit pypi setuptools3
- 
--SRC_URI[md5sum] = &quot;b067750e51f17a1a9cc6bacfdd668218&quot;
--SRC_URI[sha256sum] = &quot;72d1ed243972cad0b3c236230083cac00d9c72804e64a2ae93d7901aec1a8f1c&quot;
-&#43;SRC_URI[md5sum] = &quot;9583cea56b9d4441d96eb63a8a5c92a4&quot;
-&#43;SRC_URI[sha256sum] = &quot;547a9fc6aafcf44abe358b89ed4438d077e9d92e4f182c87e2dc294186dc4b64&quot;
- 
- RDEPENDS_${PN} &#43;= &quot;${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-jdcal ${PYTHON_PN}-et-xmlfile&quot;
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------5FB55DCB3B6AE31B12373DAA--
+> Alexander Vickberg (1):
+>   tcpdump: Fix PACKAGECONFIG for OpenSSL
+>
+> Andreas M=C3=BCller (5):
+>   xfce4-notifyd: upgrade 0.6.0 -> 0.6.1
+>   xfconf: upgrade 4.14.1 -> 4.14.2
+>   xfwm4: upgrade 4.14.1 -> 4.14.2
+>   qpdf: upgrade 9.1.0 -> 10.0.1
+>   qpdf: link libatomic explicitly on mips
+>
+> Changqing Li (1):
+>   apache2: fix service start fail
+>
+> Claude Bing (3):
+>   php: fix PACKAGECONFIG for soap
+>   php: fix opcache link error in 7.4
+>   php: update fix for opcache link issue in 7.4.4
+>
+> Emmanuel Roullit (1):
+>   appstream-glib: update 0.7.16 -> 0.7.17
+>
+> Gianfranco Costamagna (1):
+>   cpprest: Disable one more test requiring internet connection
+>
+> Jonathan Liu (1):
+>   x11vnc: fix xfc NULL pointer dereference
+>
+> Khem Raj (1):
+>   gtkwave: Disable mime update during install
+>
+> Konrad Weihmann (1):
+>   php: fix zip package config
+>
+> Mingli Yu (9):
+>   python3-ntplib: add missing python3-io RDEPENDS
+>   python3-pid: add the missing rdepends
+>   python3-parallax: add the missing rdepends
+>   python3-pkgconfig: add missing rdepends
+>   python3-pathlib2: add the missing rdepends
+>   python3-ptyprocess: add the missing rdepends
+>   python3-pydbus: add the missing rdepends
+>   python3-pyudev: add the missing rdepends
+>   python3-zipp: add the missing rdepends
+>
+> Slater, Joseph (2):
+>   python-pretty-table: add rdep's
+>   python3-pyhamcrest: add rdep
+>
+> Trevor Gamblin (7):
+>   python3-py: add python3-netclient to RDEPENDS
+>   python3-markdown: add logging and setuptools to RDEPENDS
+>   python3-pyrsistent: add python3-numbers to RDEPENDS
+>   python3-pytoml: add datetime and stringold to RDEPENDS
+>   python3-dbusmock: re-add recipe and fix patch path
+>   python3-pyyaml: add python3-netclient to RDEPENDS
+>   python3-werkzeug: add python3-logging to RDEPENDS
+>
+> Wang Mingyu (4):
+>   mailcap: upgrade 2.1.48 -> 2.1.49
+>   multipath-tools: upgrade 0.8.3 -> 0.8.4
+>   modemmanager: upgrade 1.12.8 -> 1.12.10
+>   python3-pyroute2: upgrade 0.5.11 -> 0.5.12
+>
+> Yi Zhao (3):
+>   nginx: remove /var/log/nginx when do_install
+>   libldb: upgrade 1.5.6 -> 1.5.7
+>   samba: upgrade 4.10.13 -> 4.10.15
+>
+> Zang Ruochen (8):
+>   python3-parse-type: Modify ptest output format
+>   python3-pluggy: Modify ptest output format
+>   python3-polyline: Modify ptest output format
+>   python3-precise-runner: Modify ptest output format
+>   python3-prettytable: Modify ptest output format
+>   python3-ptyprocess: Modify ptest output format
+>   python3-pyasn1: Modify ptest output format
+>   python3-pyasn1-modules: Modify ptest output format
+>
+> Zheng Ruoqin (4):
+>   python3-pyserial: Modify ptest output format
+>   python3-pyroute2: Modify ptest output format
+>   v4l-utils: upgrade 1.18.0 -> 1.18.1
+>   cpprest: upgrade 2.10.15 -> 2.10.16
+>
+> niko.mauno@vaisala.com (3):
+>   python3-setuptools-scm: Cosmetic improvement
+>   python3-setuptools-scm: Add nativesdk to BBCLASSEXTEND
+>   python3-attrs: Add nativesdk to BBCLASSEXTEND
+>
+>  ...lib_0.7.16.bb =3D> appstream-glib_0.7.17.bb} |  4 +-
+>  .../{samba_4.10.13.bb =3D> samba_4.10.15.bb}    |  4 +-
+>  .../{libldb_1.5.6.bb =3D> libldb_1.5.7.bb}      |  4 +-
+>  .../recipes-support/tcpdump/tcpdump_4.9.3.bb  |  2 +-
+>  ...ager_1.12.8.bb =3D> modemmanager_1.12.10.bb} |  2 +-
+>  ...001-opcache-config.m4-enable-opcache.patch | 19 ++--
+>  meta-oe/recipes-devtools/php/php_7.4.4.bb     | 10 +-
+>  .../gtkwave/gtkwave_3.3.104.bb                |  2 +-
+>  ...sor-fix-xfc-NULL-pointer-dereference.patch | 30 ++++++
+>  .../recipes-graphics/x11vnc/x11vnc_0.9.16.bb  |  1 +
+>  ...4l-utils_1.18.0.bb =3D> v4l-utils_1.18.1.bb} |  4 +-
+>  .../qpdf/{qpdf_9.1.0.bb =3D> qpdf_10.0.1.bb}    |  6 +-
+>  .../cpprest/disable-outside-tests.patch       | 20 ++++
+>  ...{cpprest_2.10.15.bb =3D> cpprest_2.10.16.bb} |  4 +-
+>  .../{mailcap_2.1.48.bb =3D> mailcap_2.1.49.bb}  |  6 +-
+>  ...fix-bug-of-do_compile-and-do_install.patch | 44 +++++++++
+>  .../0024-RH-use-rpm-optflags-if-present.patch | 33 ++++---
+>  ...om-kernel-cmdline-mpath.wwids-with-A.patch | 93 +++----------------
+>  ...ools_0.8.3.bb =3D> multipath-tools_0.8.4.bb} |  3 +-
+>  .../python/python-pathlib2.inc                |  2 +-
+>  .../python/python-prettytable.inc             |  5 +
+>  .../python/python-ptyprocess.inc              |  3 +
+>  .../python/python3-attrs_19.3.0.bb            |  6 +-
+>  ...y-to-add-own-objects-to-internal-obj.patch |  0
+>  ...ty-to-import-templates-from-packages.patch |  0
+>  .../python/python3-dbusmock_0.16.7.bb         | 25 +++++
+>  .../python/python3-markdown_3.0.1.bb          |  2 +
+>  .../python/python3-ntplib_0.3.3.bb            |  2 +-
+>  .../python/python3-parallax_1.0.5.bb          |  2 +
+>  .../python/python3-parse-type/run-ptest       |  2 +-
+>  .../python/python3-pid_2.2.5.bb               |  2 +
+>  .../python/python3-pkgconfig_1.4.0.bb         |  1 +
+>  .../python/python3-pluggy/run-ptest           |  3 +-
+>  .../python/python3-polyline/run-ptest         |  2 +-
+>  .../python/python3-precise-runner/run-ptest   |  2 +-
+>  .../python/python3-prettytable/run-ptest      |  2 +-
+>  .../python/python3-ptyprocess/run-ptest       |  2 +-
+>  .../python/python3-py_1.8.1.bb                |  2 +
+>  .../python/python3-pyasn1-modules/run-ptest   |  2 +-
+>  .../python/python3-pyasn1/run-ptest           |  2 +-
+>  .../python/python3-pydbus_0.6.0.bb            |  4 +-
+>  .../python/python3-pyhamcrest_1.9.0.bb        |  2 +
+>  .../python/python3-pyroute2/run-ptest         |  3 +-
+>  ...2_0.5.11.bb =3D> python3-pyroute2_0.5.12.bb} |  4 +-
+>  .../python/python3-pyrsistent_0.15.7.bb       |  1 +
+>  .../python/python3-pyserial/run-ptest         |  3 +-
+>  .../python/python3-pytoml_0.1.21.bb           |  5 +
+>  .../python/python3-pyudev_0.21.0.bb           |  1 +
+>  .../python/python3-pyyaml_5.3.bb              |  1 +
+>  .../python/python3-setuptools-scm_3.3.3.bb    | 13 ++-
+>  .../python/python3-werkzeug_1.0.1.bb          |  1 +
+>  .../python/python3-zipp_0.6.0.bb              |  4 +-
+>  .../recipes-httpd/apache2/apache2_2.4.43.bb   |  8 --
+>  .../apache2/files/apache2-volatile.conf       |  2 -
+>  .../apache2/files/apache2.service             |  4 +
+>  .../recipes-httpd/apache2/files/init          |  5 +
+>  .../apache2/files/volatiles.04_apache2        |  3 -
+>  meta-webserver/recipes-httpd/nginx/nginx.inc  |  4 +-
+>  ...otifyd_0.6.0.bb =3D> xfce4-notifyd_0.6.1.bb} |  4 +-
+>  .../{xfconf_4.14.1.bb =3D> xfconf_4.14.2.bb}    |  4 +-
+>  .../{xfwm4_4.14.1.bb =3D> xfwm4_4.14.2.bb}      |  4 +-
+>  61 files changed, 278 insertions(+), 162 deletions(-)
+>  rename meta-gnome/recipes-support/appstream-glib/{appstream-glib_0.7.16=
+.bb =3D> appstream-glib_0.7.17.bb} (84%)
+>  rename meta-networking/recipes-connectivity/samba/{samba_4.10.13.bb =3D=
+> samba_4.10.15.bb} (99%)
+>  rename meta-networking/recipes-support/libldb/{libldb_1.5.6.bb =3D> lib=
+ldb_1.5.7.bb} (95%)
+>  rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.12.8.b=
+b =3D> modemmanager_1.12.10.bb} (95%)
+>  create mode 100644 meta-oe/recipes-graphics/x11vnc/files/src-cursor-fix=
+-xfc-NULL-pointer-dereference.patch
+>  rename meta-oe/recipes-multimedia/v4l2apps/{v4l-utils_1.18.0.bb =3D> v4=
+l-utils_1.18.1.bb} (93%)
+>  rename meta-oe/recipes-printing/qpdf/{qpdf_9.1.0.bb =3D> qpdf_10.0.1.bb=
+} (82%)
+>  rename meta-oe/recipes-support/cpprest/{cpprest_2.10.15.bb =3D> cpprest=
+_2.10.16.bb} (91%)
+>  rename meta-oe/recipes-support/mailcap/{mailcap_2.1.48.bb =3D> mailcap_=
+2.1.49.bb} (81%)
+>  create mode 100644 meta-oe/recipes-support/multipath-tools/files/0001-f=
+ix-bug-of-do_compile-and-do_install.patch
+>  rename meta-oe/recipes-support/multipath-tools/{multipath-tools_0.8.3.b=
+b =3D> multipath-tools_0.8.4.bb} (97%)
+>  rename meta-python/recipes-devtools/python/{python-dbusmock =3D> python=
+3-dbusmock}/0001-Add-functionality-to-add-own-objects-to-internal-obj.patch=
+ (100%)
+>  rename meta-python/recipes-devtools/python/{python-dbusmock =3D> python=
+3-dbusmock}/0002-Add-possibility-to-import-templates-from-packages.patch (1=
+00%)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-dbusmock=
+_0.16.7.bb
+>  rename meta-python/recipes-devtools/python/{python3-pyroute2_0.5.11.bb =
+=
+=3D> python3-pyroute2_0.5.12.bb} (85%)
+>  delete mode 100644 meta-webserver/recipes-httpd/apache2/files/apache2-v=
+olatile.conf
+>  delete mode 100644 meta-webserver/recipes-httpd/apache2/files/volatiles=
+.04_apache2
+>  rename meta-xfce/recipes-apps/xfce4-notifyd/{xfce4-notifyd_0.6.0.bb =3D=
+> xfce4-notifyd_0.6.1.bb} (84%)
+>  rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.14.1.bb =3D> xfconf_4.14=
+.2.bb} (83%)
+>  rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.14.1.bb =3D> xfwm4_4.14.2.=
+bb} (90%)
+>
+> --
+> 2.17.1
+>
+>=20
