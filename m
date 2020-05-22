@@ -1,158 +1,92 @@
-Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
- by mx.groups.io with SMTP id smtpd.web11.11618.1590149622913573405
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com [209.85.222.194])
+ by mx.groups.io with SMTP id smtpd.web12.11768.1590149624581208247
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 May 2020 05:13:43 -0700
+ Fri, 22 May 2020 05:13:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=0MniyrGJ;
- spf=pass (domain: ossystems.com.br, ip: 209.85.222.178, mailfrom: domarys.correa@ossystems.com.br)
-Received: by mail-qk1-f178.google.com with SMTP id n11so4942767qkn.8
-        for <openembedded-devel@lists.openembedded.org>; Fri, 22 May 2020 05:13:42 -0700 (PDT)
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=rnHkmMQl;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.222.194, mailfrom: domarys.correa@ossystems.com.br)
+Received: by mail-qk1-f194.google.com with SMTP id z80so10485364qka.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 22 May 2020 05:13:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id;
-        bh=Pmp1iZffcFp4Ex2dUSQ7QzB+F+oEKPinRIqUdPX6NTY=;
-        b=0MniyrGJm2M6+hA6Zp/FNskYPfkXcKRkKw9rD/DBTq1oUgUCNE9BH8NZrO5WpVILlS
-         RyaTolCS8KFZ56KIzYMGpxiLqsqQkKZpcpoVjpNEcurlXCL6vaw+5JhHwd08gASnR0R+
-         VvlEiMJJ6cHRLp+e4XQcJWoMyZsSBNWeAhJWdyO2lm77dvDc1vEnlMlyyxRJBZ2+3GRG
-         ylshx+0PkTkwlG3Uo2RuVoBNq8JYYVrmOLp94TnoSn0NpJMXFxfqQmutRGd2355tJSd5
-         AhIdiiYMtEYckmbTM1tzrhTPKgEnVgQSuCpY4JT5MuW8RgkCgwLlDyRCGSvsuORQkhcU
-         G5zw==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references;
+        bh=y0usEcGrAKLWgPOLOzjTC/QsBgW97xfhYodJZTzkHS8=;
+        b=rnHkmMQlSzLP0x6FbY8pQ+RiZZX9H4j0Am0G1ojVmgegXCnE9Zu9k7tZ1UEcxpbq3b
+         rtxaffRJErqC8qI8gV7pWm+bgItIbq2WzasPbiMlWvyF9Rw4t6S7S7yHtP0r2ngi5Id8
+         lccYxtBaS/205jWGh20DyG3jls7TxSaGb+7OumnRashjyeOzuyP+aZxxVvOLxcqKEgyN
+         2YL4tzfqxHgSV1duLZnSny73CLujUKcupywQL8ArCmW/neu8s/mlxkEMnkmTjeQUb270
+         qW2mtDhSryN88AHz10ESsDuvgNYdamd0iRsoKEMsJJmllCcsYd/1QB63e97TQ+RPhm1b
+         Tkpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=Pmp1iZffcFp4Ex2dUSQ7QzB+F+oEKPinRIqUdPX6NTY=;
-        b=h8Ej0wpZ0F0jlaG0eYBK2/xcmge1ZSwZ0wcT9iv8SEyp5jZYS4Yoap6F/0lYy0Tspx
-         LR5JarH/dWgD0UVAk/ldaeSTaCyUamh6Yo1M9ClN9gF7pA3idqclfCTKcuD9gOGw2ydi
-         h+w/Fkoi+wExF5G+ps4ZGh7SSJ8dPo/589oZrPLYDQ7DrCK/YjqorncUyk5t/Jv8Rr/v
-         /wVIMXhYxBin15+tWjkLy+Aif5dhlRRYkXJ0t8YQ0SDtwp+zC8yE9K5+eKK3Vex4Qn6c
-         5j/WB7znfJsqmAHsJeZAThrGcLGp0+MuFVRZ0b7AqG3DRd99ucQfho8yiN8mLjTAnZOv
-         +0kA==
-X-Gm-Message-State: AOAM5322dyPh7aw7Ih4XkxIu/iHgF7HaBHqpOyHqlOd16kaU2e/Yv9xP
-	582gcL4ifLKOQbvmFz/JX8d62AaqgIk=
-X-Google-Smtp-Source: ABdhPJw6V6qrjqPq8pke4mOga0YcNMO1SQ0aPcAJCvUHVeDaNtqV/bESSY1BOJtJM4mLAY/V/tjxhw==
-X-Received: by 2002:a37:9dc5:: with SMTP id g188mr14041799qke.193.1590149621910;
-        Fri, 22 May 2020 05:13:41 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references;
+        bh=y0usEcGrAKLWgPOLOzjTC/QsBgW97xfhYodJZTzkHS8=;
+        b=mCkmwi+/eEDJQrfsxk93XRiOGz6ZLiqIftgDGm9ThulTqdcOjbDvf9w15SBgQy/WPa
+         sDG//0bJlN7xQRyAXZJc2sKrafdzLM2+Zses4JbGm97ipcCSLC43C9WL7rz196hjhx5w
+         d5T4hsxwfz8CAQ6Nj1JQssXmjgqJsPKmrCbOJFh1hd/HGbS/5Us16kH7k/NmBnchy7va
+         grGQh61V9Sg5iJsxdbsaZr8k7Sw5+uldGEhhqinrBZHE103FCRyQOVA4NMgC9AQIQ2tv
+         XGnxXCJOvpPL9NZpfl9tfYcevdDTQoQNfo3j11wjCpGHCP3CmQ7tCmdo47aXrefT1u83
+         5jpw==
+X-Gm-Message-State: AOAM531H0kcwP5EFclqEcGnH9dpL4OudPGGijASiImqIYpJG1omFl5Rv
+	LVFxCnmBVUlMmeZTDbaADAP9ko0sIDs=
+X-Google-Smtp-Source: ABdhPJxZbuVZhtJzH+igygpNpVx/Op69fT6bRC/dgT46GkrvClKG2mXk7HHS+PqvzJRjmrvGUdPP2g==
+X-Received: by 2002:a05:620a:1312:: with SMTP id o18mr14909263qkj.277.1590149623536;
+        Fri, 22 May 2020 05:13:43 -0700 (PDT)
 Return-Path: <domarys.correa@ossystems.com.br>
 Received: from Monster.domain.name ([2804:7f4:c195:1db7:24d8:1ecb:250c:14de])
-        by smtp.gmail.com with ESMTPSA id g7sm6309813qkk.44.2020.05.22.05.13.40
+        by smtp.gmail.com with ESMTPSA id g7sm6309813qkk.44.2020.05.22.05.13.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 22 May 2020 05:13:41 -0700 (PDT)
+        Fri, 22 May 2020 05:13:43 -0700 (PDT)
 From: "Domarys Correa" <domarys.correa@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 Cc: Domarys Correa <domarys.correa@ossystems.com.br>
-Subject: [PATCH 1/3] python3-jinja2: Update 2.11.1 -> 2.11.2
-Date: Fri, 22 May 2020 09:13:31 -0300
-Message-Id: <20200522121333.25045-1-domarys.correa@ossystems.com.br>
+Subject: [PATCH 2/3] python3-pyudev: Update 0.21.0 -> 0.22.0
+Date: Fri, 22 May 2020 09:13:32 -0300
+Message-Id: <20200522121333.25045-2-domarys.correa@ossystems.com.br>
 X-Mailer: git-send-email 2.17.1
-
-Add .inc file to .bb, as updated to python3
+In-Reply-To: <20200522121333.25045-1-domarys.correa@ossystems.com.br>
+References: <20200522121333.25045-1-domarys.correa@ossystems.com.br>
 
 Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
 ---
- .../recipes-devtools/python/python-jinja2.inc | 33 --------------
- .../python/python3-jinja2_2.11.1.bb           |  4 --
- .../python/python3-jinja2_2.11.2.bb           | 43 +++++++++++++++++++
- 3 files changed, 43 insertions(+), 37 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-jinja2.inc
- delete mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
+ ...hon3-pyudev_0.21.0.bb => python3-pyudev_0.22.0.bb} | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pyudev_0.21.0.bb => python3-pyudev_0.22.0.bb} (70%)
 
-diff --git a/meta-python/recipes-devtools/python/python-jinja2.inc b/meta-python/recipes-devtools/python/python-jinja2.inc
-deleted file mode 100644
-index 927230515..000000000
---- a/meta-python/recipes-devtools/python/python-jinja2.inc
-+++ /dev/null
-@@ -1,33 +0,0 @@
--DESCRIPTION = "Python Jinja2: A small but fast and easy to use stand-alone template engine written in pure python."
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462"
--
--PYPI_PACKAGE = "Jinja2"
--
--SRC_URI[md5sum] = "5d88c7e77aa63fc852a04f65dbfe5594"
--SRC_URI[sha256sum] = "93187ffbc7808079673ef52771baa950426fd664d3aad1d0fa3e95644360e250"
--
--RDEPENDS_${PN} += "${PYTHON_PN}-io ${PYTHON_PN}-pickle ${PYTHON_PN}-crypt \
--    ${PYTHON_PN}-math ${PYTHON_PN}-netclient \
--    ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-markupsafe \
--    ${PYTHON_PN}-json ${PYTHON_PN}-threading ${PYTHON_PN}-numbers"
--
--CLEANBROKEN = "1"
--
--BBCLASSEXTEND = "native nativesdk"
--
--inherit ptest
--
--SRC_URI += " \
--	file://run-ptest \
--"
--
--RDEPENDS_${PN}-ptest += " \
--	${PYTHON_PN}-pytest \
--	${PYTHON_PN}-unixadmin \
--"
--
--do_install_ptest() {
--	install -d ${D}${PTEST_PATH}/tests
--	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--}
-diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb b/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
-deleted file mode 100644
-index 284f5f588..000000000
---- a/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--inherit pypi setuptools3
--require python-jinja2.inc
--
--RDEPENDS_${PN} += "${PYTHON_PN}-asyncio"
-diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb b/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
-new file mode 100644
-index 000000000..681acf8f1
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
-@@ -0,0 +1,43 @@
-+DESCRIPTION = "Python Jinja2: A small but fast and easy to use stand-alone template engine written in pure python."
+diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb b/meta-python/recipes-devtools/python/python3-pyudev_0.22.0.bb
+similarity index 70%
+rename from meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
+rename to meta-python/recipes-devtools/python/python3-pyudev_0.22.0.bb
+index f39847ffa..d5bf058ed 100644
+--- a/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyudev_0.22.0.bb
+@@ -1,9 +1,9 @@
+ SUMMARY = "A libudev binding"
 +
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462"
-+
-+SRC_URI[sha256sum] = "89aab215427ef59c34ad58735269eb58b1a5808103067f7bb9d5836c651b3bb0"
-+
-+PYPI_PACKAGE = "Jinja2"
-+
-+CLEANBROKEN = "1"
-+
-+inherit pypi setuptools3 ptest
-+
-+SRC_URI += " \
-+	file://run-ptest \
-+"
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
-+
-+RDEPENDS_${PN}-ptest += " \
-+	${PYTHON_PN}-pytest \
-+	${PYTHON_PN}-unixadmin \
-+"
-+
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-asyncio \
-+    ${PYTHON_PN}-crypt \
-+    ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-json \
-+    ${PYTHON_PN}-markupsafe \
-+    ${PYTHON_PN}-math \
-+    ${PYTHON_PN}-netclient \
-+    ${PYTHON_PN}-numbers\
-+    ${PYTHON_PN}-pickle \
-+    ${PYTHON_PN}-pprint \
-+    ${PYTHON_PN}-shell \
-+    ${PYTHON_PN}-threading \
-+"
+ LICENSE = "LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
+ 
+-SRC_URI[md5sum] = "cf4d9db7d772622144ca1be6b5d9353b"
+-SRC_URI[sha256sum] = "094b7a100150114748aaa3b70663485dd360457a709bfaaafe5a977371033f2b"
++SRC_URI[sha256sum] = "69bb1beb7ac52855b6d1b9fe909eefb0017f38d917cba9939602c6880035b276"
+ 
+ inherit pypi setuptools3
+ 
+@@ -12,10 +12,13 @@ do_configure_prepend() {
+     sed -i "s/str(pyudev.__version__)/'${PV}'/g" ${S}/setup.py
+ }
+ 
+-RDEPENDS_${PN} = "\
++RDEPENDS_${PN} += "\
++    libudev \
+     ${PYTHON_PN}-ctypes \
++    ${PYTHON_PN}-fcntl \
+     ${PYTHON_PN}-misc \
+     ${PYTHON_PN}-six \
+     ${PYTHON_PN}-threading \
+-    libudev \
+ "
 +
 +BBCLASSEXTEND = "native nativesdk"
 -- 
