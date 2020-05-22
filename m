@@ -1,73 +1,59 @@
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web10.9205.1590135306031075752
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.9324.1590136425319972833
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 May 2020 01:15:06 -0700
+ Fri, 22 May 2020 01:33:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: yanfei.xu@windriver.com)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 04M8F1tT020077
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
-	Fri, 22 May 2020 01:15:02 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
- (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Fri, 22 May 2020
- 01:14:43 -0700
-From: "Xu, Yanfei" <yanfei.xu@windriver.com>
-To: <raj.khem@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] turbostat: fix the build failure for new v5.7-rc6 kernel
-Date: Fri, 22 May 2020 16:14:42 +0800
-Message-ID: <20200522081442.18902-1-yanfei.xu@windriver.com>
-X-Mailer: git-send-email 2.18.2
-MIME-Version: 1.0
-Content-Type: text/plain
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=53908 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jc37d-0000wd-97; Fri, 22 May 2020 11:33:41 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-setuptools-scm: Upgrade 3.3.3 -> 3.5.0
+Date: Fri, 22 May 2020 11:33:28 +0300
+Message-Id: <20200522083330.6934-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-From: Yanfei Xu <yanfei.xu@windriver.com>
+Upgrade to release 3.5.0.
 
-Due to the new v5.7-rc6 kernel has some modify in header
-files, turbostat build failed. Now match the files.
-
-Signed-off-by: Yanfei Xu <yanfei.xu@windriver.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-kernel/turbostat/turbostat_3.4.bb | 20 +++++++++++++++----
- 1 file changed, 16 insertions(+), 4 deletions(-)
+ ...etuptools-scm_3.3.3.bb => python3-setuptools-scm_3.5.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-setuptools-scm_3.3.3.bb => python3-setuptools-scm_3.5.0.bb} (77%)
 
-diff --git a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-index 60040a47a..48c72140c 100644
---- a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-+++ b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-@@ -42,16 +42,28 @@ do_configure_prepend() {
- 	mkdir -p ${S}
- 	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/msr-index.h ${S}
- 	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/intel-family.h ${S}
--	cp -r ${STAGING_KERNEL_DIR}/include/linux/bits.h ${S}
--	cp -r ${STAGING_KERNEL_DIR}/include/linux/const.h ${S}
-+	if [ -f "${STAGING_KERNEL_DIR}/include/vdso/bits.h" ]; then
-+		cp -r ${STAGING_KERNEL_DIR}/include/vdso/bits.h ${S}
-+		cp -r ${STAGING_KERNEL_DIR}/include/vdso/const.h ${S}
-+	else
-+		cp -r ${STAGING_KERNEL_DIR}/include/linux/bits.h ${S}
-+		cp -r ${STAGING_KERNEL_DIR}/include/linux/const.h ${S}
-+	fi
- 	cp -r ${STAGING_KERNEL_DIR}/tools/power/x86/turbostat/* ${S}
- 	cp -r ${WORKDIR}/COPYING ${S}
- }
+diff --git a/meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.bb b/meta-python/recipes-devtools/python/python3-setuptools-scm_3.5.0.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.bb
+rename to meta-python/recipes-devtools/python/python3-setuptools-scm_3.5.0.bb
+index a1fc3831f..036477d1e 100644
+--- a/meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.bb
++++ b/meta-python/recipes-devtools/python/python3-setuptools-scm_3.5.0.bb
+@@ -2,8 +2,8 @@ SUMMARY = "the blessed package to manage your versions by scm tags"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
  
-+
- do_compile() {
- 	sed -i 's#<linux/bits.h>#"bits.h"#' msr-index.h
--	sed -i 's#<linux/const.h>#"const.h"#' bits.h
--	sed -i -e 's#<uapi/linux/const.h>#<linux/const.h>#' -e 's#_LINUX_CONST_H#_LINUX_CONST_H_KERNEL#' const.h
-+	'TMPCHECK='grep "<vdso/const.h>" bits.h'' || true
-+	if [ -n $TMPCHECK ]; then
-+		sed -i 's#<vdso/const.h>#"const.h"#' bits.h
-+		sed -i 's#<uapi/linux/const.h>#<linux/const.h>#' const.h
-+	else
-+		sed -i 's#<linux/const.h>#"const.h"#' bits.h
-+		sed -i -e 's#<uapi/linux/const.h>#<linux/const.h>#' -e 's#_LINUX_CONST_H#_LINUX_CONST_H_KERNEL#' const.h
-+	fi
- 	sed -i 's#MSRHEADER#"msr-index.h"#' turbostat.c
- 	sed -i 's#INTEL_FAMILY_HEADER#"intel-family.h"#' turbostat.c
- 	sed -i 's#\$(CC) \$(CFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#\$(CC) \$(CFLAGS) \$(LDFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#' Makefile
+-SRC_URI[md5sum] = "50b2199082fe808d032ec1710c9d7415"
+-SRC_URI[sha256sum] = "bd25e1fb5e4d603dcf490f1fde40fb4c595b357795674c3e5cb7f6217ab39ea5"
++SRC_URI[md5sum] = "86ec1eb9ec02ba018b097787e98897c5"
++SRC_URI[sha256sum] = "5bdf21a05792903cafe7ae0c9501182ab52497614fa6b1750d9dbae7b60c1a87"
+ 
+ PYPI_PACKAGE = "setuptools_scm"
+ inherit pypi setuptools3
 -- 
-2.18.2
+2.17.1
 
