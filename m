@@ -1,280 +1,171 @@
-Received: from mail-io1-f44.google.com (mail-io1-f44.google.com [209.85.166.44])
- by mx.groups.io with SMTP id smtpd.web12.20312.1590175191204191722
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.68])
+ by mx.groups.io with SMTP id smtpd.web11.20103.1590175362373100970
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 May 2020 12:19:51 -0700
+ Fri, 22 May 2020 12:22:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=owTk4c34;
- spf=pass (domain: ossystems.com.br, ip: 209.85.166.44, mailfrom: domarys.correa@ossystems.com.br)
-Received: by mail-io1-f44.google.com with SMTP id o5so12495010iow.8
-        for <openembedded-devel@lists.openembedded.org>; Fri, 22 May 2020 12:19:51 -0700 (PDT)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=d8ieNRBP;
+ spf=pass (domain: windriver.com, ip: 40.107.237.68, mailfrom: trevor.gamblin@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Fak9cUDbaeiUTpEh9J4BbWjmTjjSS1kdiXIgKGN97kIbCbO2WFLAQwPWYASHyAdGXgRaJya0x/aNk3zETm8ijfyhIBa7kx1lM59eHUfgv8aupI5kB/sw7juQYeXUPEhXA8+nDzU1pgTDU/rEkH8Qr6y8iTcG9OPvC2ST0gBOCCVXCJE871iYumwJRleKMqV/p4hlVefuXcNAF8EdvwmlWpHkGzUedGBKD9rMy29fRoP/wzvRgFx099Y7ioz6l4DeZTumsaluhavJgEUizEJMA8T2MUllq0FKE8x4eUR7uXg+qD54bdUk37U4bW4T4Shq3Ln879jsP3YvPmM1vpObxQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sCBNEKf/5JL0S9bMCB+l+Bp1h3ypRXfU1EEOyyB3eiQ=;
+ b=bPFNyHCsEK95jM0os+zp4PHzkJJQKbl7gNqI4e3hTfYfJ2rT5GmGE07LN2+UfWbGP+DBbQTbCu5xO3ntHcl1JwFIc5fTJ8DdSzgDvqOc1837t0fKyY4ziIrCWtxs4cMuQ1wCWW3kz7xK5tdubwVtVm135Ysasy6m2TtxF5kOuDa34bSPlbl3FiMvESl3dlAOGCTjOWAmqkwTPJUmGVMDv12lSMXQC+Cdg4QW5DLS/cGjJXpebwZr4I4tt2YN5z88wkroGpUrJLKynEOiMUiG8HEd8HjU2+OR2QWAEh4RxRI9LxRdUvscDbDdAUi7pE3lTQKlfAJbPg28irTk94q1Ow==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=8o5ryEZtCae+4mZn6g0jrDSv2a0asldbYI3hNhOWh7g=;
-        b=owTk4c34P2uDTnkFXAhmPLMW2Tw2KBaJT7jLVjSMUIxjR1+XtOXFFzy+pL+ti2eExN
-         a/8uvP7Cl26816/JNceSzQ5PlhoNZpHOPFMBysx3raNEkHrvz/e4TZxb2n5vGtUYQaRW
-         NHBpwf6HW9z1KipNXYI6eMVdTka8DvT0RR07DN9KKv6X86YjxwoEsXCxnJeYdRQzwXAP
-         r0EpImLKZ+4cC3mhQXYEI3x+PvIUJrCdRq4P7WVj0Eyw/mT8/++m56au3egk4VIakh16
-         gBkdQUKVseIr4C1vhvJLppcXmZPMdre49M4TCf/591FgQLRLtiwaGSDp5CybNHYEZy6b
-         l/5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=8o5ryEZtCae+4mZn6g0jrDSv2a0asldbYI3hNhOWh7g=;
-        b=SxUAgkyyH0iRUdVZYQ7GfgtlEB8xCDqrcple4vpWOCVRlUYBEZ8RPis9mazjS+jQny
-         7aT8ZASyx5vMSAutu5BaXA56TY8p9uxjApF3gJBOcRacRSTltrlIcCT/G4CyJS8X3ONO
-         cVw9YQpMN36URIYujc9YB76SJe5/z/ECgqflcFSYknW4Z1ppbBHJWaJuH6TKoyjIBTHe
-         k2fGHG4zNPWzmkepC6uv3l9fpJoM6nAStHnKLWaq3AlL0xgJkdGGjkDbv0x1MVKwugp3
-         TaLGC4/PNkeuxcHVdA0RJE+qhksG9fROhHWmrKzxZ3Z0v+LjQH+/NZlmyZxpcbyvlBMX
-         NS6w==
-X-Gm-Message-State: AOAM5303JJgWFBCSRHQ65VYmzw6/XQNIO8JvL7oeJ6mq6hM7/xFMI1/G
-	KXe2lyWOtacQZVDnqM96TgdYGE1tiK6Ska6EgOiWAg==
-X-Google-Smtp-Source: ABdhPJxR7qJBCuCsO3eRMFZ8s8ZtscgYOi7YG7VTc5kqY2k/axiFLFuHm2prhxix6ZVZUpfPQDMF9WL1yRGZRx7yQqE=
-X-Received: by 2002:a5e:c817:: with SMTP id y23mr4389460iol.5.1590175190221;
- Fri, 22 May 2020 12:19:50 -0700 (PDT)
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sCBNEKf/5JL0S9bMCB+l+Bp1h3ypRXfU1EEOyyB3eiQ=;
+ b=d8ieNRBP93Z7LJU+PY6+2xxEyRH8JYN+6z7BDHzbcBPZvbA4IAHq1/EihhohO4QjaQSTiLhv31Zcroi+jpvguc0fl8iKwARUXpTEeOZGD6ObFRfTgQdgfHRkDRl77bb9RluxdrT6/9hg0wy73jlnxcoRDdXA7Gyw6sgFmLgOn+w=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
+ by BN6PR11MB4004.namprd11.prod.outlook.com (2603:10b6:405:7c::24) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3021.23; Fri, 22 May
+ 2020 19:22:40 +0000
+Received: from BN6PR11MB0003.namprd11.prod.outlook.com
+ ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
+ ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3000.034; Fri, 22 May 2020
+ 19:22:40 +0000
+Subject: Re: [oe] [meta-python][PATCH 3/3] python3-pid: Upgrade 2.2.5 -> 3.0.3
+To: Leon Anavi <leon.anavi@konsulko.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20200522134007.10925-1-leon.anavi@konsulko.com>
+ <20200522134007.10925-3-leon.anavi@konsulko.com>
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+Message-ID: <16f53515-f340-c650-1881-8ba43de21e5a@windriver.com>
+Date: Fri, 22 May 2020 15:22:37 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
+In-Reply-To: <20200522134007.10925-3-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTXPR0101CA0004.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00::17) To BN6PR11MB0003.namprd11.prod.outlook.com
+ (2603:10b6:405:61::26)
+Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
-References: <20200522121333.25045-1-domarys.correa@ossystems.com.br>
- <20200522121333.25045-3-domarys.correa@ossystems.com.br> <CAMKF1sqKE7o40GmqvShA1jX-bm-=sCtemuBq7UqEMiwGv+YnGg@mail.gmail.com>
-In-Reply-To: <CAMKF1sqKE7o40GmqvShA1jX-bm-=sCtemuBq7UqEMiwGv+YnGg@mail.gmail.com>
-From: "Domarys Correa" <domarys.correa@ossystems.com.br>
-Date: Fri, 22 May 2020 16:19:39 -0300
-Message-ID: <CAJA1DWsfRE_e36FnXuEWuOEuneKVcT1akoNxEBybFuJH3YO35Q@mail.gmail.com>
-Subject: Re: [oe] [PATCH 3/3] python3-pyyaml: Update 5.3 -> 5.3.1
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000581b2605a6418397"
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.0.16] (174.115.236.231) by YTXPR0101CA0004.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::17) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3021.23 via Frontend Transport; Fri, 22 May 2020 19:22:39 +0000
+X-Originating-IP: [174.115.236.231]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: b471ac16-7f28-4a29-abb5-08d7fe857e5f
+X-MS-TrafficTypeDiagnostic: BN6PR11MB4004:
+X-Microsoft-Antispam-PRVS: 
+	<BN6PR11MB400427FEFD68C81264C636819FB40@BN6PR11MB4004.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:173;
+X-Forefront-PRVS: 04111BAC64
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	ZrNDH8vQV8grnQOVCwduPUNjmwDW5oxLyFG2KOqrGAnd64KgOVmWsx9hWlQnXnhZHnJlsXg2TdaVETJ5V6xg+hRqECguqyw3gwGIKYqR77gQhZzhtsjhllwpFobK7uN+cfj1gFPCgyMcVsdmYHg2GZipVZ6kVCgIKpFH37JaN+3CIilnLr+etryV2x3WC9FIvPBWlx8xVS8uE15Nfi4vqRGggn5vdgHtHKuR35IYfZfzWyHxqRAs9RIY8tfG31SoliFJMyU5XV7q4o5h+YKDyAVJ5xqcXWegp81lMjJskkKSq+7E6OSyX4XtFo1E/p+fO4N8SpERXA8OVi+7w6k89MDaxAz/VyKMb9/BNc6rw6SXpYL5LAQlO3bMwE29nC4T0yJ0yHQqxEa+EcCMtbk7mnq8XnUm0blMFQZ67Arz80v3/dKfkWFOahFjVcpuucJMHyIsnNazXedCErp0w5CGPw==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(376002)(396003)(136003)(39850400004)(346002)(366004)(33964004)(31696002)(166002)(16526019)(53546011)(186003)(956004)(966005)(2616005)(31686004)(52116002)(5660300002)(44832011)(2906002)(26005)(36756003)(66556008)(86362001)(316002)(8676002)(66946007)(6486002)(16576012)(66476007)(478600001)(8936002)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	1sbzTe67/thSP3WIM3o2npIrz9KLK4nPZib4AhEoryaDRFtYD1tHlxp9QWA9tQKHyv6EsvQwlppQ/0noDLtiGR0k3fp7bfJ/Lqz3W0TCqNz8sJweehetCV5KiLIjP2p/d+oDQWXCbcgp1BFC5qMUvYUGYbQLbEKi+UVQO6BWuyUVeLyWsqBLZK/Uf3siEt7CKZY4Q95HhW4KNxZ9WhmoCBv795lYssxPvbl80W8LSBIoGHilqHRoBrWqxwYXsVRRd/NQB4Chz/gEDAnv+jWQwZdv75T6mKAwKtlKla1TVyGpw28sRjSX52KGvR0NF7jnfISB38k++2wq9MvKVkb+nK3bsveY6NU9IHlXV2qGzTWFd2xFabmBUWqdhp6+tl6ekhss6SLdpI/qoLUrvXkjDPz3q2raKmxJ27k+7j1DhIZ2ivlD1pk6H8pCtYcAIOn7VfsiYKb3SX1VAQFn7j0SXGPW6iXca4+Qfs0Oip0+OA5Sk1GrLpnj1k0yprwGsoL4
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b471ac16-7f28-4a29-abb5-08d7fe857e5f
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2020 19:22:40.1588
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Arlxn2uvrVO5cDKbLfgvusj11oPqGhDG0hyk+QmZ7q3Bu+xs/ByOT1OBLkHazwyTRfNK74i369B35GcnRSzLEnPVtLF/8RdrQ1bn5yiQJDQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB4004
+Content-Type: multipart/alternative;
+ boundary="------------4980E88392ED7AEF28F6ED9E"
+Content-Language: en-US
 
---000000000000581b2605a6418397
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+--------------4980E88392ED7AEF28F6ED9E
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello,
 
-I did the rebase, and tested it again successfully. Is there a specific
-point that I should review?
-
-att,
-
-On Fri, May 22, 2020 at 12:59 PM Khem Raj <raj.khem@gmail.com> wrote:
-
-> Please rebase on top of master or master-next,
+On 5/22/20 9:40 AM, Leon Anavi wrote:
+> Upgrade to release 3.0.3.
 >
-> Thanks
-> Khem
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>   .../python/{python3-pid_2.2.5.bb => python3-pid_3.0.3.bb}     | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-pid_2.2.5.bb => python3-pid_3.0.3.bb} (71%)
 >
-> On Fri, May 22, 2020 at 5:13 AM Domarys Correa
-> <domarys.correa@ossystems.com.br> wrote:
-> >
-> > Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
-> > ---
-> >  .../python/python3-pyyaml_5.3.1.bb             | 18 +++++++++++++++++=
-+
-> >  .../python/python3-pyyaml_5.3.bb               | 18 -----------------=
--
-> >  2 files changed, 18 insertions(+), 18 deletions(-)
-> >  create mode 100644 meta-python/recipes-devtools/python/
-> python3-pyyaml_5.3.1.bb
-> >  delete mode 100644 meta-python/recipes-devtools/python/
-> python3-pyyaml_5.3.bb
-> >
-> > diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.1.=
-bb
-> b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.1.bb
-> > new file mode 100644
-> > index 000000000..5efc2aa9e
-> > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.1.bb
-> > @@ -0,0 +1,18 @@
-> > +SUMMARY =3D "Python support for YAML"
-> > +DEPENDS =3D "libyaml ${PYTHON_PN}-cython-native"
-> > +
-> > +LICENSE =3D "MIT"
-> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D7bbd28caa69f81f5cd5f486472=
-36663d"
-> > +
-> > +SRC_URI[sha256sum] =3D
-> "b8eac752c5e14d3eca0e6dd9199cd627518cb5ec06add0de9d32baeee6fe645d"
-> > +
-> > +PYPI_PACKAGE =3D "PyYAML"
-> > +
-> > +inherit pypi setuptools3
-> > +
-> > +RDEPENDS_${PN} +=3D "\
-> > +    ${PYTHON_PN}-datetime \
-> > +    ${PYTHON_PN}-misc \
-> > +"
-> > +
-> > +BBCLASSEXTEND =3D "native nativesdk"
-> > diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
-> b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
-> > deleted file mode 100644
-> > index b5425b8c9..000000000
-> > --- a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
-> > +++ /dev/null
-> > @@ -1,18 +0,0 @@
-> > -SUMMARY =3D "Python support for YAML"
-> > -HOMEPAGE =3D "http://www.pyyaml.org"
-> > -SECTION =3D "devel/python"
-> > -LICENSE =3D "MIT"
-> > -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da76b4c69bfcf82313bbdc0393b=
-04438a"
-> > -DEPENDS =3D "libyaml ${PYTHON_PN}-cython-native ${PYTHON_PN}"
-> > -
-> > -PYPI_PACKAGE =3D "PyYAML"
-> > -inherit pypi setuptools3
-> > -
-> > -SRC_URI[md5sum] =3D "adbb0d336b509d6472d3b095a0f1cf30"
-> > -SRC_URI[sha256sum] =3D
-> "e9f45bd5b92c7974e59bcd2dcc8631a6b6cc380a904725fce7bc08872e691615"
-> > -
-> > -RDEPENDS_${PN} +=3D "\
-> > -    ${PYTHON_PN}-datetime \
-> > -"
-> > -
-> > -BBCLASSEXTEND =3D "native nativesdk"
-> > --
-> > 2.17.1
-> >
-> >=20
+> diff --git a/meta-python/recipes-devtools/python/python3-pid_2.2.5.bb b/meta-python/recipes-devtools/python/python3-pid_3.0.3.bb
+> similarity index 71%
+> rename from meta-python/recipes-devtools/python/python3-pid_2.2.5.bb
+> rename to meta-python/recipes-devtools/python/python3-pid_3.0.3.bb
+> index ef1947888..170c99b93 100644
+> --- a/meta-python/recipes-devtools/python/python3-pid_2.2.5.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pid_3.0.3.bb
+> @@ -4,8 +4,8 @@ HOMEPAGE = "https://github.com/trbs/pid/"
+>   LICENSE = "Apache-2.0"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=83d53cbd3105063f20305bc313464e29"
+>   
+> -SRC_URI[md5sum] = "ad352ee1dc28b9746a15451c0c53e9d7"
+> -SRC_URI[sha256sum] = "96eb7dba326b88f5164bc1afdc986c7793e0d32d7f62366256a3903c7b0614ef"
+> +SRC_URI[md5sum] = "5c011ebebbdfd529f6e85d2e0396dae8"
+> +SRC_URI[sha256sum] = "925b61c35b6f2bc6b43075f493e99792f1473575a0beeb85bcf7de1d6a4a3c7d"
+>   
+>   inherit pypi setuptools3
+>   
 >
+> 
 
+--------------4980E88392ED7AEF28F6ED9E
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
---=20
-*=E2=80=8BDomarys Corr=C3=AAa*
-(55) 5399100-2700
-domaryscorrea@gmail.com
-domarys.correa@ossystems.com.br
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 5/22/20 9:40 AM, Leon Anavi wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:20200522134007.10925-3-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 3.0.3.
 
---000000000000581b2605a6418397
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+    </blockquote>
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
+    <blockquote type="cite" cite="mid:20200522134007.10925-3-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">
+---
+ .../python/{python3-pid_2.2.5.bb =&gt; python3-pid_3.0.3.bb}     | 4 &#43;&#43;--
+ 1 file changed, 2 insertions(&#43;), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pid_2.2.5.bb =&gt; python3-pid_3.0.3.bb} (71%)
 
-<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"color:rgb(166,77,121=
-)">Hello, <br></div><div class=3D"gmail_default" style=3D"color:rgb(166,77,=
-121)"><br></div><div class=3D"gmail_default" style=3D"color:rgb(166,77,121)=
-"><span class=3D"gmail-tlid-translation gmail-translation" tabindex=3D"-1" =
-lang=3D"en"><span title=3D"" class=3D"gmail-">I did the rebase, and tested =
-it again successfully.</span> <span title=3D"" class=3D"gmail-">Is there a =
-specific point that I should review?</span></span></div><div class=3D"gmail=
-_default" style=3D"color:rgb(166,77,121)"><span class=3D"gmail-tlid-transla=
-tion gmail-translation" tabindex=3D"-1" lang=3D"en"><span title=3D"" class=
-=3D"gmail-"><br></span></span></div><div class=3D"gmail_default" style=3D"=
-color:rgb(166,77,121)"><span class=3D"gmail-tlid-translation gmail-translat=
-ion" tabindex=3D"-1" lang=3D"en"><span title=3D"" class=3D"gmail-">att,</sp=
-an></span></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=
-=3D"gmail_attr">On Fri, May 22, 2020 at 12:59 PM Khem Raj &lt;<a href=3D"m=
-ailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt; wrote:<br></div><block=
-quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
-px solid rgb(204,204,204);padding-left:1ex">Please rebase on top of master =
-or master-next,<br>
-<br>
-Thanks<br>
-Khem<br>
-<br>
-On Fri, May 22, 2020 at 5:13 AM Domarys Correa<br>
-&lt;<a href=3D"mailto:domarys.correa@ossystems.com.br" target=3D"_blank">d=
-omarys.correa@ossystems.com.br</a>&gt; wrote:<br>
-&gt;<br>
-&gt; Signed-off-by: Domarys Correa &lt;<a href=3D"mailto:domarys.correa@os=
-systems.com.br" target=3D"_blank">domarys.correa@ossystems.com.br</a>&gt;<b=
-r>
-&gt; ---<br>
-&gt;=C2=A0 .../python/<a href=3D"http://python3-pyyaml_5.3.1.bb" rel=3D"no=
-referrer" target=3D"_blank">python3-pyyaml_5.3.1.bb</a>=C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0| 18 ++++++++++++++++++<br>
-&gt;=C2=A0 .../python/<a href=3D"http://python3-pyyaml_5.3.bb" rel=3D"nore=
-ferrer" target=3D"_blank">python3-pyyaml_5.3.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
-=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 18 ------------------<br>
-&gt;=C2=A0 2 files changed, 18 insertions(+), 18 deletions(-)<br>
-&gt;=C2=A0 create mode 100644 meta-python/recipes-devtools/python/<a href=
-=3D"http://python3-pyyaml_5.3.1.bb" rel=3D"noreferrer" target=3D"_blank">p=
-ython3-pyyaml_5.3.1.bb</a><br>
-&gt;=C2=A0 delete mode 100644 meta-python/recipes-devtools/python/<a href=
-=3D"http://python3-pyyaml_5.3.bb" rel=3D"noreferrer" target=3D"_blank">pyt=
-hon3-pyyaml_5.3.bb</a><br>
-&gt;<br>
-&gt; diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://py=
-thon3-pyyaml_5.3.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-pyyaml_=
-5.3.1.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python=
-3-pyyaml_5.3.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-pyyaml_5.3.=
-1.bb</a><br>
-&gt; new file mode 100644<br>
-&gt; index 000000000..5efc2aa9e<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-p=
-yyaml_5.3.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-pyyaml_5.3.1.b=
-b</a><br>
-&gt; @@ -0,0 +1,18 @@<br>
-&gt; +SUMMARY =3D &quot;Python support for YAML&quot;<br>
-&gt; +DEPENDS =3D &quot;libyaml ${PYTHON_PN}-cython-native&quot;<br>
-&gt; +<br>
-&gt; +LICENSE =3D &quot;MIT&quot;<br>
-&gt; +LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D7bbd28caa69f81f5cd5f=
-48647236663d&quot;<br>
-&gt; +<br>
-&gt; +SRC_URI[sha256sum] =3D &quot;b8eac752c5e14d3eca0e6dd9199cd627518cb5e=
-c06add0de9d32baeee6fe645d&quot;<br>
-&gt; +<br>
-&gt; +PYPI_PACKAGE =3D &quot;PyYAML&quot;<br>
-&gt; +<br>
-&gt; +inherit pypi setuptools3<br>
-&gt; +<br>
-&gt; +RDEPENDS_${PN} +=3D &quot;\<br>
-&gt; +=C2=A0 =C2=A0 ${PYTHON_PN}-datetime \<br>
-&gt; +=C2=A0 =C2=A0 ${PYTHON_PN}-misc \<br>
-&gt; +&quot;<br>
-&gt; +<br>
-&gt; +BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
-&gt; diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://py=
-thon3-pyyaml_5.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-pyyaml_5.=
-3.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python3-py=
-yaml_5.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-pyyaml_5.3.bb</a>=
-<br>
-&gt; deleted file mode 100644<br>
-&gt; index b5425b8c9..000000000<br>
-&gt; --- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-p=
-yyaml_5.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-pyyaml_5.3.bb</a=
-><br>
-&gt; +++ /dev/null<br>
-&gt; @@ -1,18 +0,0 @@<br>
-&gt; -SUMMARY =3D &quot;Python support for YAML&quot;<br>
-&gt; -HOMEPAGE =3D &quot;<a href=3D"http://www.pyyaml.org" rel=3D"noreferr=
-er" target=3D"_blank">http://www.pyyaml.org</a>&quot;<br>
-&gt; -SECTION =3D &quot;devel/python&quot;<br>
-&gt; -LICENSE =3D &quot;MIT&quot;<br>
-&gt; -LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Da76b4c69bfcf82313bbd=
-c0393b04438a&quot;<br>
-&gt; -DEPENDS =3D &quot;libyaml ${PYTHON_PN}-cython-native ${PYTHON_PN}&qu=
-ot;<br>
-&gt; -<br>
-&gt; -PYPI_PACKAGE =3D &quot;PyYAML&quot;<br>
-&gt; -inherit pypi setuptools3<br>
-&gt; -<br>
-&gt; -SRC_URI[md5sum] =3D &quot;adbb0d336b509d6472d3b095a0f1cf30&quot;<br>
-&gt; -SRC_URI[sha256sum] =3D &quot;e9f45bd5b92c7974e59bcd2dcc8631a6b6cc380=
-a904725fce7bc08872e691615&quot;<br>
-&gt; -<br>
-&gt; -RDEPENDS_${PN} +=3D &quot;\<br>
-&gt; -=C2=A0 =C2=A0 ${PYTHON_PN}-datetime \<br>
-&gt; -&quot;<br>
-&gt; -<br>
-&gt; -BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
-&gt; --<br>
-&gt; 2.17.1<br>
-&gt;<br>
-&gt; <br>
-</blockquote></div><br clear=3D"all"><br>-- <br><div dir=3D"ltr" class=3D"=
-gmail_signature"><div dir=3D"ltr"><div><div dir=3D"ltr"><span><div><b><font=
- color=3D"#a64d79">=E2=80=8BDomarys Corr=C3=AAa</font></b></div><div><font =
-color=3D"#c27ba0">(55) 5399100-2700</font></div><div><font color=3D"#c27ba0=
-"><a href=3D"mailto:domaryscorrea@gmail.com" target=3D"_blank">domaryscorre=
-a@gmail.com</a><br></font></div><div><font color=3D"#c27ba0"><a href=3D"mai=
-lto:domarys.correa@ossystems.com.br" rel=3D"noopener noreferrer" target=3D"=
-_blank">domarys.correa@ossystems.com.br</a></font></div></span></div></div>=
-</div></div>
+diff --git a/meta-python/recipes-devtools/python/python3-pid_2.2.5.bb b/meta-python/recipes-devtools/python/python3-pid_3.0.3.bb
+similarity index 71%
+rename from meta-python/recipes-devtools/python/python3-pid_2.2.5.bb
+rename to meta-python/recipes-devtools/python/python3-pid_3.0.3.bb
+index ef1947888..170c99b93 100644
+--- a/meta-python/recipes-devtools/python/python3-pid_2.2.5.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-pid_3.0.3.bb
+@@ -4,8 &#43;4,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/trbs/pid/">&quot;https://github.com/trbs/pid/&quot;</a>
+ LICENSE = &quot;Apache-2.0&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=83d53cbd3105063f20305bc313464e29">&quot;file://LICENSE;md5=83d53cbd3105063f20305bc313464e29&quot;</a>
+ 
+-SRC_URI[md5sum] = &quot;ad352ee1dc28b9746a15451c0c53e9d7&quot;
+-SRC_URI[sha256sum] = &quot;96eb7dba326b88f5164bc1afdc986c7793e0d32d7f62366256a3903c7b0614ef&quot;
+&#43;SRC_URI[md5sum] = &quot;5c011ebebbdfd529f6e85d2e0396dae8&quot;
+&#43;SRC_URI[sha256sum] = &quot;925b61c35b6f2bc6b43075f493e99792f1473575a0beeb85bcf7de1d6a4a3c7d&quot;
+ 
+ inherit pypi setuptools3
+ 
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+    </blockquote>
+  </body>
+</html>
 
---000000000000581b2605a6418397--
+--------------4980E88392ED7AEF28F6ED9E--
