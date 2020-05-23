@@ -1,71 +1,145 @@
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com [209.85.214.194])
- by mx.groups.io with SMTP id smtpd.web12.1222.1590197910646236356
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com [209.85.160.196])
+ by mx.groups.io with SMTP id smtpd.web11.1656.1590200508577086626
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 May 2020 18:38:30 -0700
+ Fri, 22 May 2020 19:21:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=lvBW7AR9;
- spf=pass (domain: gmail.com, ip: 209.85.214.194, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f194.google.com with SMTP id t7so5118054plr.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 22 May 2020 18:38:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=HU8dOFTz;
+ spf=pass (domain: gmail.com, ip: 209.85.160.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f196.google.com with SMTP id z18so9947633qto.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 22 May 2020 19:21:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id;
-        bh=1ddeRNtMw9RG+ZqpOb04+3wMMNvC1AGt4ByRPXHThwk=;
-        b=lvBW7AR95NdVNTRWISBPIQizcqD8RZH+73HtktTQcgcvuo/vuGuL1cuwUb8Yt7g5K4
-         GlHXNzp8LVOHkn2aDSJgwMUJvE1mUgoAlSs/DYfBFIaWTrZ+7xW8pRHLDvRKHN+zYRTF
-         brwf8tPt6pkt/Cvv8+3ldZoBUjDor0+dHwBgJFCky8e8LUUEZqDLW9q6OotGKJj8D1Dp
-         c3Hcaz15XyQYtPniedfHs3fOBuNfCNQiYiGRTvKmEZoYXETz5rIudCcVGcmfVYydtd3c
-         XQypkpVW/EjSNrnpvqshZU4u0d4QcPg33H683Ov+VXK1vNjM52mAsspTLGwZLh9kVJLM
-         TIlA==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=k6swklEIU5TCgY0MXJ2DMXk07RBLiXq+pC4QBw945RY=;
+        b=HU8dOFTzfE3KP5RT44FvVrgPG00ol5vmNNo63FhKeI4QSsEmlZjNYoU+IfD3nrACY9
+         85xuKWR8cS6WECLTqTg2/dt6hv99IoJE1PARbL+WqSdie5Cn8DuIsf9yiBHRuSJgf0PX
+         yZ9VuNvwJFlY8cXqigcI6DCNsqkFHB3geZmNHsD2sG26QuuG6XwhjCQesE3lNYV9PBU6
+         XTO0Ag/k5f/2whJHIZpuhRwdVnlXBcjCXz5C4SiXwFn4uT/5u+s2Dvzar5DoFIHf3d3i
+         r5ncNUAz9QoRsrvv5t5KPyGJqrA0oqDt71qCNB3dMz4IM6p846aw/bs4D2FDNSG8tGNM
+         5vVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id;
-        bh=1ddeRNtMw9RG+ZqpOb04+3wMMNvC1AGt4ByRPXHThwk=;
-        b=rl8/dk8Stqqo8j5Iux0LmrNEG14xmF6G5jytF6ATyySG61UyKzXyUyK7uaVlKUAy+W
-         DJGDfdpBYwOADHOYucQ+Z2AebsA5KcJ/0ry2IH1kesP25ycpmwbp9bQI3UpIubGotYqD
-         aDGUCanatECCGlqRiTK6eC1oRxKhYTsFlnK/YrjdY4+YUhba6Ca+JGye00u1mSHI2Rcg
-         iZI5xAwiw3qRYiA/tt8ntuUGFzjJjKuI8Jb+buf3D17F3Izgsa/sMDt/qJrA5I8WnHV2
-         tqo5HZjR1XfCcSBw8XfVOS4DjZ+tGd9xCUIitiyykOby1Ppco6igQiN1W5KqJdXHLT9m
-         jQFA==
-X-Gm-Message-State: AOAM532bNytxTCrESG/w0LKlzzKa4u7wP40pr6OfkQcZe43kJMApwmO+
-	PhmwyrQIeuEMsa196qXUCh2/LMK+
-X-Google-Smtp-Source: ABdhPJyAdJdyDc8J7Ay+TY/gbQ6RJsS4qROMDj8MzNNnR/5VPHiFizIRR3EwF1xcX2PV8BWxmyXNog==
-X-Received: by 2002:a17:902:b289:: with SMTP id u9mr17801365plr.138.1590197909833;
-        Fri, 22 May 2020 18:38:29 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from localhost.localdomain (c-67-181-203-136.hsd1.ca.comcast.net. [67.181.203.136])
-        by smtp.gmail.com with ESMTPSA id y5sm8000463pjp.27.2020.05.22.18.38.28
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 22 May 2020 18:38:29 -0700 (PDT)
-From: "akuster" <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [master][dunfell][PATCH] tremor: update SRC_URI as project moved to gitlab
-Date: Sat, 23 May 2020 01:38:27 +0000
-Message-Id: <20200523013827.3218-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=k6swklEIU5TCgY0MXJ2DMXk07RBLiXq+pC4QBw945RY=;
+        b=J391cIkNT2PQtLY2z/KcUltVvNKPJMaLio0LNZxZbZDyfp/KTLzvvTf0Ak8z9rrlNw
+         pymMi0UyBSxoLQsuKfMdZQ3ZfNxAdNpycU67jtzbeZk0gcNlna2bcDNF/PFAg2L+x80J
+         PPBLCxT5hDPSH6XJo8rSaprfbzCTKNAS/vr4iH09WgT48NGFiK/r53anOeqaLykWWIc7
+         0n09MibWMVusRYsF/DzCymfpcO94bHJDNBEl0Wpy9aslxzZJm6t+zbsxDTVt2i9vvtjv
+         9na/3681R9bixqsgDtMilEvYCLfx/ylQtT6sQ42UrRXStVbQjTpLFO+K6KZRWCa6InlW
+         KwyQ==
+X-Gm-Message-State: AOAM532MeRPlYLUKJsF5cL8HPK0Vrgg5vQhuP5VvGmUhq36tbpubXguQ
+	gxBYtH7FNcQjz+oFQrRMu6MlMcZpRhJyt0/j2Sw=
+X-Google-Smtp-Source: ABdhPJzx3Ai3aWB84W83vOiQ8VTZ2aT3JblSMzPybtsVj1kL3aoyf4QCHQqNcdAPSKPPUJeL3xLFgaITOz5ciH+/TYI=
+X-Received: by 2002:aed:3f55:: with SMTP id q21mr5020960qtf.190.1590200507529;
+ Fri, 22 May 2020 19:21:47 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200523013827.3218-1-akuster808@gmail.com>
+In-Reply-To: <20200523013827.3218-1-akuster808@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 22 May 2020 19:21:36 -0700
+Message-ID: <CAMKF1somJV53JeyRWNpCBvYwOoh7S3-Fms4dGJ9-CGOMB8eWPQ@mail.gmail.com>
+Subject: Re: [oe] [master][dunfell][PATCH] tremor: update SRC_URI as project moved to gitlab
+To: akuster <akuster808@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000005f7e4c05a64768c3"
 
-It appears Xiph.Org is not on gitlab
-https://gitlab.xiph.org/xiph
+--0000000000005f7e4c05a64768c3
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Fri, May 22, 2020 at 6:38 PM akuster <akuster808@gmail.com> wrote:
 
-diff --git a/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb b/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
-index 28bb5d924..6abf6080b 100644
---- a/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
-+++ b/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=db1b7a668b2a6f47b2af88fb008ad555 \
-                     file://os.h;beginline=3;endline=14;md5=5c0af5e1bedef3ce8178c89f48cd6f1f"
- DEPENDS = "libogg"
- 
--SRC_URI = "git://git.xiph.org/tremor.git;protocol=https \
-+SRC_URI = "git://gitlab.xiph.org/xiph/tremor.git;protocol=https \
-            file://obsolete_automake_macros.patch;striplevel=0 \
-            file://tremor-arm-thumb2.patch \
- "
--- 
-2.17.1
+> It appears Xiph.Org is not on gitlab
 
+
+Typo not should be now I guess
+
+
+> https://gitlab.xiph.org/xiph
+>
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>  meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
+> b/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
+> index 28bb5d924..6abf6080b 100644
+> --- a/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
+> +++ b/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
+> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM =
+> "file://COPYING;md5=db1b7a668b2a6f47b2af88fb008ad555 \
+>
+>  file://os.h;beginline=3;endline=14;md5=5c0af5e1bedef3ce8178c89f48cd6f1f"
+>  DEPENDS = "libogg"
+>
+> -SRC_URI = "git://git.xiph.org/tremor.git;protocol=https \
+> +SRC_URI = "git://gitlab.xiph.org/xiph/tremor.git;protocol=https \
+>             file://obsolete_automake_macros.patch;striplevel=0 \
+>             file://tremor-arm-thumb2.patch \
+>  "
+> --
+> 2.17.1
+>
+> 
+>
+
+--0000000000005f7e4c05a64768c3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Fri, May 22, 2020 at 6:38 PM akuster &lt;<a href=3D"mai=
+lto:akuster808@gmail.com">akuster808@gmail.com</a>&gt; wrote:<br></div><blo=
+ckquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #c=
+cc solid;padding-left:1ex">It appears Xiph.Org is not on gitlab</blockquote=
+><div dir=3D"auto"><br></div><div dir=3D"auto">Typo not should be now I gue=
+ss=C2=A0</div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote"=
+ style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><b=
+r>
+<a href=3D"https://gitlab.xiph.org/xiph" rel=3D"noreferrer" target=3D"_bla=
+nk">https://gitlab.xiph.org/xiph</a><br>
+<br>
+Signed-off-by: Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail.com" ta=
+rget=3D"_blank">akuster808@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0meta-multimedia/recipes-multimedia/tremor/<a href=3D"http://tremor_2=
+0180319.bb" rel=3D"noreferrer" target=3D"_blank">tremor_20180319.bb</a> | 2=
+ +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/meta-multimedia/recipes-multimedia/tremor/<a href=3D"http://t=
+remor_20180319.bb" rel=3D"noreferrer" target=3D"_blank">tremor_20180319.bb<=
+/a> b/meta-multimedia/recipes-multimedia/tremor/<a href=3D"http://tremor_20=
+180319.bb" rel=3D"noreferrer" target=3D"_blank">tremor_20180319.bb</a><br>
+index 28bb5d924..6abf6080b 100644<br>
+--- a/meta-multimedia/recipes-multimedia/tremor/<a href=3D"http://tremor_2=
+0180319.bb" rel=3D"noreferrer" target=3D"_blank">tremor_20180319.bb</a><br>
++++ b/meta-multimedia/recipes-multimedia/tremor/<a href=3D"http://tremor_2=
+0180319.bb" rel=3D"noreferrer" target=3D"_blank">tremor_20180319.bb</a><br>
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3Ddb1b7a668b=
+2a6f47b2af88fb008ad555 \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0file://os.h;beginline=3D3;endline=3D14;md5=3D5c0af5e1bedef3ce8178c89f48=
+cd6f1f&quot;<br>
+=C2=A0DEPENDS =3D &quot;libogg&quot;<br>
+<br>
+-SRC_URI =3D &quot;git://<a href=3D"http://git.xiph.org/tremor.git;protoco=
+l=3Dhttps" rel=3D"noreferrer" target=3D"_blank">git.xiph.org/tremor.git;pro=
+tocol=3Dhttps</a> \<br>
++SRC_URI =3D &quot;git://<a href=3D"http://gitlab.xiph.org/xiph/tremor.git=
+;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">gitlab.xiph.org/xip=
+h/tremor.git;protocol=3Dhttps</a> \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://obsolete_automake_macros.=
+patch;striplevel=3D0 \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://tremor-arm-thumb2.patch \=
+<br>
+=C2=A0&quot;<br>
+-- <br>
+2.17.1<br>
+<br>
+<br>
+</blockquote></div></div>
+
+--0000000000005f7e4c05a64768c3--
