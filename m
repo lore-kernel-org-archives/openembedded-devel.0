@@ -1,102 +1,81 @@
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web10.21724.1590356936881849088
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.web10.21725.1590356937514583080
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 24 May 2020 14:48:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=tsAjKfSg;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id se13so18647072ejb.9
-        for <openembedded-devel@lists.openembedded.org>; Sun, 24 May 2020 14:48:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=N5JNCIVz;
+ spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f42.google.com with SMTP id s19so13519731edt.12
+        for <openembedded-devel@lists.openembedded.org>; Sun, 24 May 2020 14:48:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=NZwaS1ZElETi66hg7kbTORMATMZMB0DO0lkpKQ2V0MY=;
-        b=tsAjKfSgvDKYzceXdthblmEbeU8AEZ833Otso7rNTPb1m1d28g6MD2kO+qeuDdkxrA
-         6ULI2OCBuTx8t8PHQkj99c+KhDxJT+akaUvZ84rzPNzLN9vvLJevZTy38OK07hHXQsVO
-         UaQgsnbKLo6i1izpVRP0AAGDDbaCXZH+ZX1Bbc8kXlD86inyoH9lx4A+ckys69x9FS3O
-         gbfR6jDvwC8Ync/WlSNLVtosGk/Sl4AMjXkRVSDaNUf999jLg1R2mIx/05uIui0GFTE+
-         xtmCYxK/eUDmJfGg53mO8KS4roXOV8dgWb8yrd/UuGTIi0y0jsTYRS9j61zWZE//U5pR
-         bOgg==
+        bh=k6NWMXLJfDdSH8SWoqt3glIOBqWLbsuJb5Pd0v2ozQ0=;
+        b=N5JNCIVzc//fZLvqbGHTHGzkzeiRkXr5lHiO26aQIbCUHwy9WKnKYjH/ZUv1GBsfSY
+         byN6Wjnu4ZlvaCXKRCY66oWTeRjMoCA4WTXbsj5Nq11QARuC57d7s7XaGUTgRwKNoEIn
+         jEfyKVv7b41fQzz3trGq+uHlfTdyZUCwdH4zsqxw49cTrxv/VxS/t4yfPeXlHXL1FMZ8
+         kzUFZJ6H4AYUcyKyQ2saWoms2ksqf3doH6BqWaZEEkNhA4LvW5wVIWXUCZRjiY1OrVNm
+         6VpkMUeAayzJ0bhuThbvb7ITBu4QNOqHiEMlyZC19amLOf/1vJw/APG1h19rFN1cnkly
+         CNyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=NZwaS1ZElETi66hg7kbTORMATMZMB0DO0lkpKQ2V0MY=;
-        b=DJsyCXep0/9QCQuaCI33MjTT3t2rkhBfrhxPJTUuQrxyRxaQq2mf/Y6Cz6+fF0Rz86
-         a0bQch61A+Cdiv2YVZklcIr75PSoPQRu7lkX5VATZQZppLxUywqIODeWAgV8/qHcOQTf
-         DvGgNQgU+OUcTAf1Z5sGbiCBsB35JSPsjR3b2fBwwDEk+rhVZEVPxRbya0iZr0gmliB2
-         XZRLUXEHu4uqL506V+tqYQe3GeJNGCODKmpOVZapWAoBrbOQmoUa2tZDcVKTFH7Pyqs5
-         IbZ6P1Eyn+UMi1jGj5cQRCoslpvRbirWOodCOUttIJf8reVQshY7R5kdmcdsKl0Q0tjL
-         A+Kw==
-X-Gm-Message-State: AOAM531exoEN2dH9auftLhPgckmHzumcarh57xH1cVj8+xWLnQZkCEm3
-	U5i2Lu8yeMoV1Lo5cR9niHPqIv3B9jg=
-X-Google-Smtp-Source: ABdhPJzneI2HfEUO7l2HkzTFwe194H7tufyYOR7HkLgtF4e1XKQfRVTkSoRwN0EJePr8beRrOfyVOA==
-X-Received: by 2002:a17:906:f06:: with SMTP id z6mr16446006eji.105.1590356935016;
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=k6NWMXLJfDdSH8SWoqt3glIOBqWLbsuJb5Pd0v2ozQ0=;
+        b=Ot+MDLQIl3gjk5ssuIxP32TpoTgr0RObQzIekkpH94aR7RypL2uBGwjwMDV9iZ+wsu
+         nxYw3CGyVpx0dcyuSyAgJpw1ysC2jmo+TneZiJwzcmRWCrNnGzyc0cWELlkX68Y5jeHm
+         XuSxoLqfaYIRHO9cWQU8tfvub0aNuGIdwoK203pRra/oVNKZG6vYSXPyBryLLTqRZ1lH
+         4c2QcZprSGbDk5lnNg/k7/RI9t7xYBnOipa7R91p5cWiwXaDdRb9O12hy9KyVo8KL2KM
+         MoMi/Varp++YY2/HsjCgkTtn6KbobNyw+KnINmfyNtni0fXYHT6vsA3c3T7FN4L2Fn64
+         00ew==
+X-Gm-Message-State: AOAM5312OuNVhh92G7uo/LeayoaRsgYd5KL0s8BUf4JJyP74SDcQcWAW
+	h7teGZw+hTehpRbTAl76ZkBicy9ZgkI=
+X-Google-Smtp-Source: ABdhPJxxugwisBphxc56MkTe7Jr0Dqy/5uVfIKGWx6UIyrQzLdnh6R/5Hn5fsuqh/IxeBBl8KdWznw==
+X-Received: by 2002:a05:6402:709:: with SMTP id w9mr12128778edx.255.1590356935712;
         Sun, 24 May 2020 14:48:55 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f480647c75077471d25d12a.dip0.t-ipconnect.de. [2003:f0:7f48:647:c750:7747:1d25:d12a])
-        by smtp.gmail.com with ESMTPSA id z7sm3092092edq.38.2020.05.24.14.48.54
+        by smtp.gmail.com with ESMTPSA id z7sm3092092edq.38.2020.05.24.14.48.55
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 24 May 2020 14:48:54 -0700 (PDT)
+        Sun, 24 May 2020 14:48:55 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 1/2] gexiv2: upgrade 0.12.0 -> 0.12.1
-Date: Sun, 24 May 2020 23:48:41 +0200
-Message-Id: <20200524214842.30763-1-schnitzeltony@gmail.com>
+Subject: [PATCH 2/2] thunar: upgrade 1.8.14 -> 1.8.15
+Date: Sun, 24 May 2020 23:48:42 +0200
+Message-Id: <20200524214842.30763-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.1
+In-Reply-To: <20200524214842.30763-1-schnitzeltony@gmail.com>
+References: <20200524214842.30763-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-gexiv2 0.12.1 - 23 May 2020
-
- * Support macOS dylib versioning
- * Improve compatibility with current exiv2 development versions
- * Fix compiling on windows
- * Fix issue with problematic symbol visibility of exiv2
- * Fix issues with tests overwriting environment variables
- * Fix exception escaping on division by zero
- * Fix overflow in altitude fraction conversion
- * Fix crash with experimental GIO support
- * Documentation fixes
- * Add gexiv2_metadata_update_gps_info which will not remove all other GPS
-   information
-
-Bugs fixed in this release:
- - https://gitlab.gnome.org/GNOME/gexiv2/issues/41
- - https://gitlab.gnome.org/GNOME/gexiv2/issues/42
- - https://gitlab.gnome.org/GNOME/gexiv2/issues/45
- - https://gitlab.gnome.org/GNOME/gexiv2/issues/52
- - https://gitlab.gnome.org/GNOME/gexiv2/issues/53
- - https://gitlab.gnome.org/GNOME/gexiv2/issues/54
- - https://gitlab.gnome.org/GNOME/gexiv2/issues/55
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../gexiv2/{gexiv2_0.12.0.bb => gexiv2_0.12.1.bb}             | 4 ++--
+ .../thunar/{thunar_1.8.14.bb => thunar_1.8.15.bb}             | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/gexiv2/{gexiv2_0.12.0.bb => gexiv2_0.12.1.bb} (69%)
+ rename meta-xfce/recipes-xfce/thunar/{thunar_1.8.14.bb => thunar_1.8.15.bb} (84%)
 
-diff --git a/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.12.0.bb b/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.12.1.bb
-similarity index 69%
-rename from meta-gnome/recipes-gnome/gexiv2/gexiv2_0.12.0.bb
-rename to meta-gnome/recipes-gnome/gexiv2/gexiv2_0.12.1.bb
-index 458eaeaa1..12ea5938c 100644
---- a/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.12.0.bb
-+++ b/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.12.1.bb
-@@ -9,8 +9,8 @@ GTKDOC_MESON_OPTION = "gtk_doc"
+diff --git a/meta-xfce/recipes-xfce/thunar/thunar_1.8.14.bb b/meta-xfce/recipes-xfce/thunar/thunar_1.8.15.bb
+similarity index 84%
+rename from meta-xfce/recipes-xfce/thunar/thunar_1.8.14.bb
+rename to meta-xfce/recipes-xfce/thunar/thunar_1.8.15.bb
+index 499c83152..b1f1c967a 100644
+--- a/meta-xfce/recipes-xfce/thunar/thunar_1.8.14.bb
++++ b/meta-xfce/recipes-xfce/thunar/thunar_1.8.15.bb
+@@ -8,8 +8,8 @@ inherit xfce gobject-introspection features_check mime-xdg
  
- inherit gnomebase gobject-introspection gtk-doc
+ REQUIRED_DISTRO_FEATURES = "x11"
  
--SRC_URI[archive.md5sum] = "0a618c5b053106d1801d89cc77385419"
--SRC_URI[archive.sha256sum] = "58f539b0386f36300b76f3afea3a508de4914b27e78f58ee4d142486a42f926a"
-+SRC_URI[archive.md5sum] = "44a3cfeab1afd83a71e852835d24e656"
-+SRC_URI[archive.sha256sum] = "8aeafd59653ea88f6b78cb03780ee9fd61a2f993070c5f0d0976bed93ac2bd77"
+-SRC_URI[md5sum] = "24218474191ac4c7e907d5b6fd6f1831"
+-SRC_URI[sha256sum] = "8ac57b1f5842d5bd348bbb6dac4714f5ad1f22de651d8ec6a7099ceb19fa219f"
++SRC_URI[md5sum] = "303010f4959fa23f7c13c0ccd9b8527e"
++SRC_URI[sha256sum] = "7624560cf21f13869804947042610aab22075146b711593f11ceb9e494277c93"
  
- EXTRA_OEMESON = " \
-     -Dvapi=false \
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[pcre] = "--enable-pcre,--disable-pcre,libpcre"
 -- 
 2.21.1
 
