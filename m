@@ -1,109 +1,85 @@
-Received: from cpanel7.indieserve.net (cpanel7.indieserve.net [199.212.143.8])
- by mx.groups.io with SMTP id smtpd.web12.37467.1590434473977140956
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com [209.85.222.196])
+ by mx.groups.io with SMTP id smtpd.web12.39253.1590440523542561046
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 May 2020 12:21:14 -0700
+ Mon, 25 May 2020 14:02:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: crashcourse.ca, ip: 199.212.143.8, mailfrom: rpjday@crashcourse.ca)
-Received: from cpef81d0f814063-cmf81d0f814060.cpe.net.cable.rogers.com ([174.114.57.56]:34754 helo=localhost.localdomain)
-	by cpanel7.indieserve.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.93)
-	(envelope-from <rpjday@crashcourse.ca>)
-	id 1jdIeu-009cJh-7C
-	for openembedded-devel@lists.openembedded.org; Mon, 25 May 2020 15:21:13 -0400
-Date: Mon, 25 May 2020 15:21:09 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost.localdomain
-To: OpenEmbedded Development mailing list <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] use weak assignments for PNBLACKLIST in recipe files
-Message-ID: <alpine.LFD.2.21.2005251518590.6822@localhost.localdomain>
-MIME-Version: 1.0
-X-OutGoing-Spam-Status: No, score=-0.2
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel7.indieserve.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Get-Message-Sender-Via: cpanel7.indieserve.net: authenticated_id: rpjday+crashcourse.ca/only user confirmed/virtual account not confirmed
-X-Authenticated-Sender: cpanel7.indieserve.net: rpjday@crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Content-Type: text/plain; charset=US-ASCII
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=1AGKktRf;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.222.196, mailfrom: domarys.correa@ossystems.com.br)
+Received: by mail-qk1-f196.google.com with SMTP id s1so18558914qkf.9
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 May 2020 14:02:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id;
+        bh=x3GKflR1put//GxYDC+vuWvPyvD8rgkfxOq1w+NnXFA=;
+        b=1AGKktRfsPrcvHaSrr9QP7PgDaAg8kf/IXKkfbYIf7764WzPFmUmxdTQ4u3h4PjYex
+         us+EZx1WkqXZxf9WmxnsOGMBlLPOnCmM2Q48j4jcDL/yUTEEw4g4RTm865FuPEHhxK8x
+         843v2yDS6VVIphThDk/2XsZhqV2UJRi4iYjEQE50l6FwpuPbkSx8hfEEBYtMLu0qcQi+
+         WFQmSrG84R90yFthvPQZjyJzZiiRUJapEhYOH+cTsH6eVfh7bsYH/xAsQqS2bWdZEqd8
+         griCnboeRXC2Anm/I9+RvJlpgzircPQp8GksGyM5g5V715PweKJH5yQH4nfaEe524XSf
+         ik2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=x3GKflR1put//GxYDC+vuWvPyvD8rgkfxOq1w+NnXFA=;
+        b=gKrtPmELKbW/B71e2GLB7JurSvBCARjZXjTOuSUhYoAsCiswpp1qo+GBwuA6eXJcWm
+         c+5iQYfiIi+R4ellWthIvyEAlOJez9ifbafIRrVPjh0FdCrn0UDRpsVQSjSNvlqRB9hr
+         wVqwkPSZ7v1j9OLTP9EOvyaLtD8OJFT4cwCODu7nTv1P8f2Vcyxo7lsIlRQaTs48msnq
+         +14Nk0OZ1xqUmOK8DDRIT79C31hUV3uwJciVJdouebDNT7JDGB7ZNGlv1Jzu/5ZGHjl2
+         GOrKZrjFdHPiLkTXF2icQkj+Y/bVhqjH69bguZTyMvN4q3n7mbws86G7x7H1hNW22b5u
+         GrAg==
+X-Gm-Message-State: AOAM5312pFCXhOd4cfUAqs5likY2/9qpcDoCm8MVUS4iKp2ANlKzW5/z
+	LxS31xBKLrzwRVwp2ddRKat70r2hdDE=
+X-Google-Smtp-Source: ABdhPJxifjymZTIF/WXvMUO9Ey3QG32+uIkPMYcKXYKmq079Xxiu7acmDy20OXu7WUQO4ygweA36lA==
+X-Received: by 2002:a37:b5c3:: with SMTP id e186mr26576886qkf.158.1590440522636;
+        Mon, 25 May 2020 14:02:02 -0700 (PDT)
+Return-Path: <domarys.correa@ossystems.com.br>
+Received: from Monster.domain.name ([2804:7f4:c195:1db7:a8ac:fad9:36d6:4180])
+        by smtp.gmail.com with ESMTPSA id t74sm14897838qka.21.2020.05.25.14.02.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 25 May 2020 14:02:02 -0700 (PDT)
+From: "Domarys Correa" <domarys.correa@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Cc: Domarys Correa <domarys.correa@ossystems.com.br>
+Subject: [meta-oe][PATCH v2] python3-pyudev: Update 0.21.0 -> 0.22.0
+Date: Mon, 25 May 2020 18:01:51 -0300
+Message-Id: <20200525210151.13741-1-domarys.correa@ossystems.com.br>
+X-Mailer: git-send-email 2.17.1
 
-Make sure PNBLACKLIST assignments in recipe files use weak assignment,
-so they can be overridden in, for example, local.conf files.
-
-Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
-
+Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
 ---
+v1 had problems to be added to the master-next due to lack
+of rebase with it. The current version is fixed on the
+master-next and successfully tested.
 
-diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-index c39faef8d..eee96d865 100644
---- a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-@@ -69,4 +69,4 @@ RDEPENDS_${PN}-server += "tcp-wrappers xinetd rpcbind"
+.../{python3-pyudev_0.21.0.bb => python3-pyudev_0.22.0.bb}  | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pyudev_0.21.0.bb => python3-pyudev_0.22.0.bb} (76%)
 
- # http://errors.yoctoproject.org/Errors/Details/186962/
- COMPATIBLE_HOST_libc-musl = 'null'
--PNBLACKLIST[netkit-rusers] = "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or directory"
-+PNBLACKLIST[netkit-rusers] ?= "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or directory"
-diff --git a/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
-index 23fe2021b..c296c3bc1 100644
---- a/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
-+++ b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
-@@ -22,4 +22,4 @@ do_install () {
-     oe_runmake install DESTDIR="${D}"
- }
-
--PNBLACKLIST[drbd] = "Kernel module Needs forward porting to kernel 5.2+"
-+PNBLACKLIST[drbd] ?= "Kernel module Needs forward porting to kernel 5.2+"
-diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-index 5917cfb3e..4a1bbe620 100644
---- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-+++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-@@ -36,4 +36,4 @@ FILES_${PN}-dbg += "${libexecdir}/lowpan-tools/.debug/"
- PACKAGES =+ "${PN}-python"
- FILES_${PN}-python = "${libdir}/python*"
-
--PNBLACKLIST[lowpan-tools] = "WARNING these tools are deprecated! Use wpan-tools instead"
-+PNBLACKLIST[lowpan-tools] ?= "WARNING these tools are deprecated! Use wpan-tools instead"
-diff --git a/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb b/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
-index 21d110aee..2e3da7d4d 100644
---- a/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
-+++ b/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
-@@ -27,4 +27,4 @@ RDEPENDS_${PN} += "\
-
- BBCLASSEXTEND = "native nativesdk"
-
--PNBLACKLIST[nanopb] = "Needs forward porting to use python3"
-+PNBLACKLIST[nanopb] ?= "Needs forward porting to use python3"
-diff --git a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
-index e40e1cd26..eca8dfc7b 100644
---- a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
-+++ b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
-@@ -11,4 +11,4 @@ inherit module
-
- EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
-
--PNBLACKLIST[can-isotp] = "Kernel module Needs forward porting to kernel 5.2+"
-+PNBLACKLIST[can-isotp] ?= "Kernel module Needs forward porting to kernel 5.2+"
-diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-index 6683eccf2..1758430bc 100644
---- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
-+++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-@@ -32,4 +32,4 @@ python do_package_prepend() {
- }
-
- B = "${WORKDIR}/${BPN}-${PV}"
--PNBLACKLIST[bpftool] = "Needs forward porting to kernel 5.2+"
-+PNBLACKLIST[bpftool] ?= "Needs forward porting to kernel 5.2+"
-
+diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb b/meta-python/recipes-devtools/python/python3-pyudev_0.22.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
+rename to meta-python/recipes-devtools/python/python3-pyudev_0.22.0.bb
+index 49a3628f4..38c012843 100644
+--- a/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyudev_0.22.0.bb
+@@ -1,9 +1,9 @@
+ SUMMARY = "A libudev binding"
++
+ LICENSE = "LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
+ 
+-SRC_URI[md5sum] = "cf4d9db7d772622144ca1be6b5d9353b"
+-SRC_URI[sha256sum] = "094b7a100150114748aaa3b70663485dd360457a709bfaaafe5a977371033f2b"
++SRC_URI[sha256sum] = "69bb1beb7ac52855b6d1b9fe909eefb0017f38d917cba9939602c6880035b276"
+ 
+ inherit pypi setuptools3
+ 
+@@ -20,3 +20,5 @@ RDEPENDS_${PN} = "\
+     ${PYTHON_PN}-fcntl \
+     libudev \
+ "
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
+2.17.1
 
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                         http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
