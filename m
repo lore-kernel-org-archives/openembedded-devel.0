@@ -1,74 +1,109 @@
-Received: from mail-ej1-f66.google.com (mail-ej1-f66.google.com [209.85.218.66])
- by mx.groups.io with SMTP id smtpd.web12.28678.1590402369694636587
+Received: from cpanel7.indieserve.net (cpanel7.indieserve.net [199.212.143.8])
+ by mx.groups.io with SMTP id smtpd.web12.37467.1590434473977140956
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 May 2020 03:26:10 -0700
+ Mon, 25 May 2020 12:21:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=mM8Y0qlI;
- spf=pass (domain: gmail.com, ip: 209.85.218.66, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f66.google.com with SMTP id yc10so19916991ejb.12
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 May 2020 03:26:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=YeL1VQEAgntHILOhTKTsKu/yLJoKxPBVRanH/jBpJko=;
-        b=mM8Y0qlIIoT/g5YxtgRHLje4AiaWjCuX13vXMCir7wpxSLh+Jarkn5NcYi/gg/Rvaj
-         sftJTuzUdtPsC++1vqwNmgY+heKiSdz+HAkt8rttC1C3sKVxJGG31BRkjiuHtJQ28mqF
-         3Qvt9npHKowUHQtrQ3FrzUHtGxcKENoL3MiKNPmLvyS11jCyxEzZAyrpBQ+mJ979yqBl
-         rm6I+qJ11PQHmQbf7lgC2E6rzE5Knz36nST8VneOIeuI09F0RebkozahJxiGV7BkRDSm
-         fiE5RiX7pRIpMIPK27/ji3oHcJ3AWb8sc/Wnzgmc+cafbQGm6noH9NNn+9d52anaSvTF
-         0xVg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=YeL1VQEAgntHILOhTKTsKu/yLJoKxPBVRanH/jBpJko=;
-        b=KYvmGSg/Ghshryk9u2pW2Pyftgb9yBzqITkk107DyW6GnIyoNnRVsVvpItBEh5Ap8s
-         w9oc7XNDkzKvEsKlxKTEVI76N+a5HWAjnWOnd2ACPlwBG2gk/HS8h0OYfkxf362c7xYo
-         H82p7KIML3sccVfCZ6BxtLYCSCyAsJ7Ta+wQJ1UpDUCCzAN5b1bzd9AIFkcprH7kpLii
-         LfxHbvDG6+s9m14LcK7hF2OSwCM4rz5SV3U6HVY5Q29JOpTsL1medkfLdC+fXIXU7dDx
-         iHhoI9fyqeUrku+d91Ih/0CvTvox0Q+YBYoK9pAqK5YijjXWH8PyJrkXeGrKssc5yR54
-         Hd0g==
-X-Gm-Message-State: AOAM530WHkLOBD0QvQ4sL4eiOlZ5G5tkbnOh7x/ISNyDaaH6zcQDVlX8
-	7WftHlc1aJerSweete/LHvmGcaWj
-X-Google-Smtp-Source: ABdhPJxnH5S7khl7rkgJ541hczYtpUXyMUaF5HZqp1A3cuqjFR+P41g26fkEZel1/fUNez/ThELuBQ==
-X-Received: by 2002:a17:906:480f:: with SMTP id w15mr17767502ejq.381.1590402367768;
-        Mon, 25 May 2020 03:26:07 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost ([109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id r9sm15639614edg.13.2020.05.25.03.26.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 May 2020 03:26:06 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] irssi: package libirc_proxy.a in PN-staticdev
-Date: Mon, 25 May 2020 12:26:04 +0200
-Message-Id: <20200525102604.32209-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=missing; spf=pass (domain: crashcourse.ca, ip: 199.212.143.8, mailfrom: rpjday@crashcourse.ca)
+Received: from cpef81d0f814063-cmf81d0f814060.cpe.net.cable.rogers.com ([174.114.57.56]:34754 helo=localhost.localdomain)
+	by cpanel7.indieserve.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.93)
+	(envelope-from <rpjday@crashcourse.ca>)
+	id 1jdIeu-009cJh-7C
+	for openembedded-devel@lists.openembedded.org; Mon, 25 May 2020 15:21:13 -0400
+Date: Mon, 25 May 2020 15:21:09 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost.localdomain
+To: OpenEmbedded Development mailing list <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] use weak assignments for PNBLACKLIST in recipe files
+Message-ID: <alpine.LFD.2.21.2005251518590.6822@localhost.localdomain>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OutGoing-Spam-Status: No, score=-0.2
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel7.indieserve.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Get-Message-Sender-Via: cpanel7.indieserve.net: authenticated_id: rpjday+crashcourse.ca/only user confirmed/virtual account not confirmed
+X-Authenticated-Sender: cpanel7.indieserve.net: rpjday@crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Content-Type: text/plain; charset=US-ASCII
 
-* fixes:
-  ERROR: irssi-1.0.4-r0 do_package_qa: QA Issue:
-  non -staticdev package contains static .a library: irssi path '/work/core2-64-oe-linux/irssi/1.0.4-r0/packages-split/irssi/usr/lib/irssi/modules/libirc_proxy.a' [staticdev]
+Make sure PNBLACKLIST assignments in recipe files use weak assignment,
+so they can be overridden in, for example, local.conf files.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+
 ---
- meta-oe/recipes-connectivity/irssi/irssi_1.2.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/irssi/irssi_1.2.2.bb b/meta-oe/recipes-connectivity/irssi/irssi_1.2.2.bb
-index da5403e5c8..1c5a912f27 100644
---- a/meta-oe/recipes-connectivity/irssi/irssi_1.2.2.bb
-+++ b/meta-oe/recipes-connectivity/irssi/irssi_1.2.2.bb
-@@ -18,3 +18,5 @@ EXTRA_OECONF += "--with-textui \
-                  --with-bot \
-                  --with-perl=no \
-                  --enable-true-color"
-+
-+FILES_${PN}-staticdev += "${libdir}/${BPN}/modules/*.a"
+diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+index c39faef8d..eee96d865 100644
+--- a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+@@ -69,4 +69,4 @@ RDEPENDS_${PN}-server += "tcp-wrappers xinetd rpcbind"
+
+ # http://errors.yoctoproject.org/Errors/Details/186962/
+ COMPATIBLE_HOST_libc-musl = 'null'
+-PNBLACKLIST[netkit-rusers] = "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or directory"
++PNBLACKLIST[netkit-rusers] ?= "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or directory"
+diff --git a/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
+index 23fe2021b..c296c3bc1 100644
+--- a/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
++++ b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
+@@ -22,4 +22,4 @@ do_install () {
+     oe_runmake install DESTDIR="${D}"
+ }
+
+-PNBLACKLIST[drbd] = "Kernel module Needs forward porting to kernel 5.2+"
++PNBLACKLIST[drbd] ?= "Kernel module Needs forward porting to kernel 5.2+"
+diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+index 5917cfb3e..4a1bbe620 100644
+--- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
++++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+@@ -36,4 +36,4 @@ FILES_${PN}-dbg += "${libexecdir}/lowpan-tools/.debug/"
+ PACKAGES =+ "${PN}-python"
+ FILES_${PN}-python = "${libdir}/python*"
+
+-PNBLACKLIST[lowpan-tools] = "WARNING these tools are deprecated! Use wpan-tools instead"
++PNBLACKLIST[lowpan-tools] ?= "WARNING these tools are deprecated! Use wpan-tools instead"
+diff --git a/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb b/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
+index 21d110aee..2e3da7d4d 100644
+--- a/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
++++ b/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
+@@ -27,4 +27,4 @@ RDEPENDS_${PN} += "\
+
+ BBCLASSEXTEND = "native nativesdk"
+
+-PNBLACKLIST[nanopb] = "Needs forward porting to use python3"
++PNBLACKLIST[nanopb] ?= "Needs forward porting to use python3"
+diff --git a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+index e40e1cd26..eca8dfc7b 100644
+--- a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
++++ b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+@@ -11,4 +11,4 @@ inherit module
+
+ EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
+
+-PNBLACKLIST[can-isotp] = "Kernel module Needs forward porting to kernel 5.2+"
++PNBLACKLIST[can-isotp] ?= "Kernel module Needs forward porting to kernel 5.2+"
+diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+index 6683eccf2..1758430bc 100644
+--- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
++++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+@@ -32,4 +32,4 @@ python do_package_prepend() {
+ }
+
+ B = "${WORKDIR}/${BPN}-${PV}"
+-PNBLACKLIST[bpftool] = "Needs forward porting to kernel 5.2+"
++PNBLACKLIST[bpftool] ?= "Needs forward porting to kernel 5.2+"
+
 -- 
-2.25.1
 
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                         http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
