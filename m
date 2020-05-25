@@ -1,81 +1,61 @@
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
- by mx.groups.io with SMTP id smtpd.web10.21725.1590356937514583080
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web11.28635.1590400882303010116
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 24 May 2020 14:48:57 -0700
+ Mon, 25 May 2020 03:01:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=N5JNCIVz;
- spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f42.google.com with SMTP id s19so13519731edt.12
-        for <openembedded-devel@lists.openembedded.org>; Sun, 24 May 2020 14:48:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=k6NWMXLJfDdSH8SWoqt3glIOBqWLbsuJb5Pd0v2ozQ0=;
-        b=N5JNCIVzc//fZLvqbGHTHGzkzeiRkXr5lHiO26aQIbCUHwy9WKnKYjH/ZUv1GBsfSY
-         byN6Wjnu4ZlvaCXKRCY66oWTeRjMoCA4WTXbsj5Nq11QARuC57d7s7XaGUTgRwKNoEIn
-         jEfyKVv7b41fQzz3trGq+uHlfTdyZUCwdH4zsqxw49cTrxv/VxS/t4yfPeXlHXL1FMZ8
-         kzUFZJ6H4AYUcyKyQ2saWoms2ksqf3doH6BqWaZEEkNhA4LvW5wVIWXUCZRjiY1OrVNm
-         6VpkMUeAayzJ0bhuThbvb7ITBu4QNOqHiEMlyZC19amLOf/1vJw/APG1h19rFN1cnkly
-         CNyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=k6NWMXLJfDdSH8SWoqt3glIOBqWLbsuJb5Pd0v2ozQ0=;
-        b=Ot+MDLQIl3gjk5ssuIxP32TpoTgr0RObQzIekkpH94aR7RypL2uBGwjwMDV9iZ+wsu
-         nxYw3CGyVpx0dcyuSyAgJpw1ysC2jmo+TneZiJwzcmRWCrNnGzyc0cWELlkX68Y5jeHm
-         XuSxoLqfaYIRHO9cWQU8tfvub0aNuGIdwoK203pRra/oVNKZG6vYSXPyBryLLTqRZ1lH
-         4c2QcZprSGbDk5lnNg/k7/RI9t7xYBnOipa7R91p5cWiwXaDdRb9O12hy9KyVo8KL2KM
-         MoMi/Varp++YY2/HsjCgkTtn6KbobNyw+KnINmfyNtni0fXYHT6vsA3c3T7FN4L2Fn64
-         00ew==
-X-Gm-Message-State: AOAM5312OuNVhh92G7uo/LeayoaRsgYd5KL0s8BUf4JJyP74SDcQcWAW
-	h7teGZw+hTehpRbTAl76ZkBicy9ZgkI=
-X-Google-Smtp-Source: ABdhPJxxugwisBphxc56MkTe7Jr0Dqy/5uVfIKGWx6UIyrQzLdnh6R/5Hn5fsuqh/IxeBBl8KdWznw==
-X-Received: by 2002:a05:6402:709:: with SMTP id w9mr12128778edx.255.1590356935712;
-        Sun, 24 May 2020 14:48:55 -0700 (PDT)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300f07f480647c75077471d25d12a.dip0.t-ipconnect.de. [2003:f0:7f48:647:c750:7747:1d25:d12a])
-        by smtp.gmail.com with ESMTPSA id z7sm3092092edq.38.2020.05.24.14.48.55
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 24 May 2020 14:48:55 -0700 (PDT)
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 2/2] thunar: upgrade 1.8.14 -> 1.8.15
-Date: Sun, 24 May 2020 23:48:42 +0200
-Message-Id: <20200524214842.30763-2-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.1
-In-Reply-To: <20200524214842.30763-1-schnitzeltony@gmail.com>
-References: <20200524214842.30763-1-schnitzeltony@gmail.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: kai.kang@windriver.com)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 04PA1J31003360
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 25 May 2020 03:01:20 -0700 (PDT)
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+ 14.3.487.0; Mon, 25 May 2020 03:01:00 -0700
+From: "kai" <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] plymouth: disable systemd-integration for sysvinit
+Date: Mon, 25 May 2020 18:00:56 +0800
+Message-ID: <20200525100056.20209-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+From: Kai Kang <kai.kang@windriver.com>
+
+It fails to build plymouth for sysvinit:
+
+| ERROR: plymouth-0.9.4-r0 do_package: QA Issue: plymouth:
+   Files/directories were installed but not shipped in any package:
+|   /poweroff.target.wants
+|   ...
+|   /halt.target.wants/plymouth-halt.service
+| Please set FILES such that these items are packaged. Alternatively if
+   they are unneeded, avoid installing them or delete them within do_install.
+| plymouth: 17 installed and not shipped files. [installed-vs-shipped]
+
+Because systemd is not installed for sysvinit, the value of variable
+'SYSTEMD_UNIT_DIR' is empty and causes the failures.
+
+Disable systemd-integration if 'systemd' not in DISTRO_FEATURES.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../thunar/{thunar_1.8.14.bb => thunar_1.8.15.bb}             | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/thunar/{thunar_1.8.14.bb => thunar_1.8.15.bb} (84%)
+ meta-oe/recipes-core/plymouth/plymouth_0.9.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-xfce/thunar/thunar_1.8.14.bb b/meta-xfce/recipes-xfce/thunar/thunar_1.8.15.bb
-similarity index 84%
-rename from meta-xfce/recipes-xfce/thunar/thunar_1.8.14.bb
-rename to meta-xfce/recipes-xfce/thunar/thunar_1.8.15.bb
-index 499c83152..b1f1c967a 100644
---- a/meta-xfce/recipes-xfce/thunar/thunar_1.8.14.bb
-+++ b/meta-xfce/recipes-xfce/thunar/thunar_1.8.15.bb
-@@ -8,8 +8,8 @@ inherit xfce gobject-introspection features_check mime-xdg
+diff --git a/meta-oe/recipes-core/plymouth/plymouth_0.9.4.bb b/meta-oe/recipes-core/plymouth/plymouth_0.9.4.bb
+index 8b71c2bd6..78c1cb444 100644
+--- a/meta-oe/recipes-core/plymouth/plymouth_0.9.4.bb
++++ b/meta-oe/recipes-core/plymouth/plymouth_0.9.4.bb
+@@ -26,7 +26,7 @@ SRC_URI[sha256sum] = "4a197a4f1a05785d7453dd829b231352fb2d09171bd86c5ffaafbb2dd6
  
- REQUIRED_DISTRO_FEATURES = "x11"
+ EXTRA_OECONF += " --enable-shared --disable-static --disable-gtk --disable-documentation \
+     --with-logo=${LOGO} \
+-    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--enable-systemd-integration --with-systemd-tty-ask-password-agent=${base_bindir}/systemd-tty-ask-password-agent', '', d)} \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--enable-systemd-integration --with-systemd-tty-ask-password-agent=${base_bindir}/systemd-tty-ask-password-agent', '--disable-systemd-integration', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge','--without-system-root-install','--with-system-root-install',d)} \
+ "
  
--SRC_URI[md5sum] = "24218474191ac4c7e907d5b6fd6f1831"
--SRC_URI[sha256sum] = "8ac57b1f5842d5bd348bbb6dac4714f5ad1f22de651d8ec6a7099ceb19fa219f"
-+SRC_URI[md5sum] = "303010f4959fa23f7c13c0ccd9b8527e"
-+SRC_URI[sha256sum] = "7624560cf21f13869804947042610aab22075146b711593f11ceb9e494277c93"
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[pcre] = "--enable-pcre,--disable-pcre,libpcre"
 -- 
-2.21.1
+2.17.1
 
