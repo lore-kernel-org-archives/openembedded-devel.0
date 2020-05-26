@@ -1,62 +1,70 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.47054.1590482425182058647
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web11.50272.1590498965802468166
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 May 2020 01:40:26 -0700
+ Tue, 26 May 2020 06:16:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.73,435,1583164800"; 
-   d="scan'208";a="93113182"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 26 May 2020 16:40:18 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 0FA224BCC8A1
-	for <openembedded-devel@lists.openembedded.org>; Tue, 26 May 2020 16:40:15 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.227) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Tue, 26 May 2020 16:40:13 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-Subject: [OE-core] [PATCH] python3-pycairo:upgrade 1.19.0 -> 1.19.1
-Date: Wed, 27 May 2020 01:40:12 +0800
-Message-ID: <1590514812-29021-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZH+TiRwb;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: liu.ming50@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id e2so23709778eje.13
+        for <openembedded-devel@lists.openembedded.org>; Tue, 26 May 2020 06:16:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=HhSH5St5k5QSobMiIvrjivNyzxcHRzgloon5qqbm9mY=;
+        b=ZH+TiRwbOOBdB1aiy/H/PlOS1YiUaRAVSs/PVWKew3E1YTjIt6X2w/zpTLHgKcurgu
+         5bs0KU3KdqZ7BFzhqV6pzMVk+rAb8kk20GuwPrUbIe85/e25+PBCdl4lqaPi4L7+Nkqs
+         fsEqfoQv+erCukgxftkBkKnX4VLB/MV1ZbcFgwXb6RGu6OvNus8PatEWCpCTLAQs0z/G
+         VoYhyRf91JU2UTsyGOhGNsYSner8SWQscPqDl5t//DirGc7DKyh2GTA9uXxIQaLkkCIU
+         G+dOMbTLxYvZVBPVEq/O9eCXWFaoEFJwCz5MDNiClgVJKI6G7ybsS5Tps3IJM+nGBmBo
+         d6Kw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=HhSH5St5k5QSobMiIvrjivNyzxcHRzgloon5qqbm9mY=;
+        b=FbQsE7hbvKCK1aVQjXA0H4WDoHjmqWkBGZmtEjy667//dVjLqUBWY+ujYfrtxSvXoI
+         G9RKJLvzTO7e3ryxOsUyBq8TDmegIZpUpSOH/IulX8/MKZ2+oxw8GmI3Dmah/rmz11QE
+         /u9TE6Eao25ObkVkrOp8DCISzs9uSR984A8++vJmUBS5XWJzXuxKKoYWJsgDWec30g3m
+         QkPuzsdIxCAgtDkcqNrN+o+FgGpmdBDev63gpXdCeoh/oU45L3RTHBDr7qG43fMDQ4I7
+         izlkLYRk8admtM53s8+XXO4diK1c4WFqwt8zs56oI+n0Q9t5nRCBuGzzl91qJjyP8+JQ
+         u9PQ==
+X-Gm-Message-State: AOAM5323B5haR1NjiFC1cz87fGzQaGxISlNbPXiczfJXvcdSzcRM2nQx
+	rj5yeguvWOSJBkJzmboyvWjmOjIL
+X-Google-Smtp-Source: ABdhPJyNBJdFmF91oaDwVYDvuCQSWOyf7zpq8swhFYSepwKkWNSweIOvsdkkv3Fc2ZaMDp5ZAEkljg==
+X-Received: by 2002:a17:906:7c82:: with SMTP id w2mr1021595ejo.296.1590498964095;
+        Tue, 26 May 2020 06:16:04 -0700 (PDT)
+Return-Path: <liu.ming50@gmail.com>
+Received: from peterliu-Precision-7530.toradex.int ([2a00:801:42a:e319:603a:b692:6de3:bf7])
+        by smtp.gmail.com with ESMTPSA id wr20sm4330761ejb.27.2020.05.26.06.16.03
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Tue, 26 May 2020 06:16:03 -0700 (PDT)
+From: "Ming Liu" <liu.ming50@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: stefan.agner@toradex.com,
+	max.krummenacher@toradex.com,
+	Ming Liu <ming.liu@toradex.com>
+Subject: [OE-core] [PATCH V2 0/2] Introduce UBOOT_INITIAL_ENV/coding style fixes
+Date: Tue, 26 May 2020 15:16:47 +0200
+Message-Id: <20200526131649.6318-1-liu.ming50@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.227]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 0FA224BCC8A1.A33FB
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
----
- .../{python3-pycairo_1.19.0.bb => python3-pycairo_1.19.1.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta/recipes-devtools/python/{python3-pycairo_1.19.0.bb => python3-pycairo_1.19.1.bb} (84%)
+From: Ming Liu <ming.liu@toradex.com>
 
-diff --git a/meta/recipes-devtools/python/python3-pycairo_1.19.0.bb b/meta/recipes-devtools/python/python3-pycairo_1.19.1.bb
-similarity index 84%
-rename from meta/recipes-devtools/python/python3-pycairo_1.19.0.bb
-rename to meta/recipes-devtools/python/python3-pycairo_1.19.1.bb
-index 8f60834c17..34c8543bce 100644
---- a/meta/recipes-devtools/python/python3-pycairo_1.19.0.bb
-+++ b/meta/recipes-devtools/python/python3-pycairo_1.19.1.bb
-@@ -13,8 +13,8 @@ DEPENDS = "cairo python3"
- SRC_URI = "https://github.com/pygobject/pycairo/releases/download/v${PV}/pycairo-${PV}.tar.gz"
- UPSTREAM_CHECK_URI = "https://github.com/pygobject/pycairo/releases/"
- 
--SRC_URI[md5sum] = "38b84416021640b01250c8f8ec4c52d4"
--SRC_URI[sha256sum] = "4f5ba9374a46c98729dd3727d993f5e17ed0286fd6738ed464fe4efa0612d19c"
-+SRC_URI[md5sum] = "59bc5c5d1debc3af0f6791af9d612551"
-+SRC_URI[sha256sum] = "2c143183280feb67f5beb4e543fd49990c28e7df427301ede04fc550d3562e84"
- 
- S = "${WORKDIR}/pycairo-${PV}"
- 
+Changes in V2:
+
+1 Introduce UBOOT_INITIAL_ENV as suggested by Denys Dmytriyenko.
+2 Add fix for some inconsistent coding style.
+
+Ming Liu (2):
+  u-boot.inc: fix some inconsistent coding style
+  u-boot: introduce UBOOT_INITIAL_ENV
+
+ meta/recipes-bsp/u-boot/u-boot.inc | 76 +++++++++++++++---------------
+ 1 file changed, 39 insertions(+), 37 deletions(-)
+
 -- 
-2.17.1
-
-
+2.26.2
 
