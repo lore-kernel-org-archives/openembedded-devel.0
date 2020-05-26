@@ -1,104 +1,62 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web11.45907.1590474495883476575
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web10.47054.1590482425182058647
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 May 2020 23:28:16 -0700
+ Tue, 26 May 2020 01:40:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: hongxu.jia@windriver.com)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 04Q6RbBn022045
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
-	Mon, 25 May 2020 23:27:48 -0700
-Received: from ala-lpggp7.wrs.com (147.11.105.171) by ALA-HCB.corp.ad.wrs.com
- (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Mon, 25 May 2020
- 23:27:14 -0700
-From: "hongxu" <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] multipath-tools: fix compiling parallel issue
-Date: Mon, 25 May 2020 23:27:14 -0700
-Message-ID: <20200526062714.4000-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.21.0
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.73,435,1583164800"; 
+   d="scan'208";a="93113182"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 26 May 2020 16:40:18 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 0FA224BCC8A1
+	for <openembedded-devel@lists.openembedded.org>; Tue, 26 May 2020 16:40:15 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.227) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Tue, 26 May 2020 16:40:13 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Subject: [OE-core] [PATCH] python3-pycairo:upgrade 1.19.0 -> 1.19.1
+Date: Wed, 27 May 2020 01:40:12 +0800
+Message-ID: <1590514812-29021-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.227]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: 0FA224BCC8A1.A33FB
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
 Content-Type: text/plain
 
-Add explicit dependency on libraries
-[snip]
-gcc/i686-overc-linux/10.1.0/ld: cannot find -lmpathpersist
-collect2: error: ld returned 1 exit status
-Makefile:36: recipe for target 'multipathd' failed
-make[1]: *** [multipathd] Error 1
-make[1]: Leaving directory 'git/multipathd'
-Makefile:29: recipe for target 'multipathd' failed
-make: *** [multipathd] Error 2
-ln -sf libmpathpersist.so.0 libmpathpersist.so
-[snip]
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- ...add-explicit-dependency-on-libraries.patch | 40 +++++++++++++++++++
- .../multipath-tools/multipath-tools_0.8.4.bb  |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-oe/recipes-support/multipath-tools/files/0001-add-explicit-dependency-on-libraries.patch
+ .../{python3-pycairo_1.19.0.bb => python3-pycairo_1.19.1.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta/recipes-devtools/python/{python3-pycairo_1.19.0.bb => python3-pycairo_1.19.1.bb} (84%)
 
-diff --git a/meta-oe/recipes-support/multipath-tools/files/0001-add-explicit-dependency-on-libraries.patch b/meta-oe/recipes-support/multipath-tools/files/0001-add-explicit-dependency-on-libraries.patch
-new file mode 100644
-index 000000000..2827bb874
---- /dev/null
-+++ b/meta-oe/recipes-support/multipath-tools/files/0001-add-explicit-dependency-on-libraries.patch
-@@ -0,0 +1,40 @@
-+From 04884263d1de8c427a7a15bd1cf6466ea65d3a0b Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Mon, 25 May 2020 23:22:55 -0700
-+Subject: [PATCH] add explicit dependency on libraries
-+
-+[snip]
-+gcc/i686-overc-linux/10.1.0/ld: cannot find -lmpathpersist
-+collect2: error: ld returned 1 exit status
-+Makefile:36: recipe for target 'multipathd' failed
-+make[1]: *** [multipathd] Error 1
-+make[1]: Leaving directory 'git/multipathd'
-+Makefile:29: recipe for target 'multipathd' failed
-+make: *** [multipathd] Error 2
-+ln -sf libmpathpersist.so.0 libmpathpersist.so
-+[snip]
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ Makefile | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/Makefile b/Makefile
-+index bea0a0b2..37a77129 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -29,7 +29,8 @@ $(BUILDDIRS):
-+ 	$(MAKE) -C $@
-+ 
-+ multipath multipathd mpathpersist libmpathpersist : libmultipath
-+-mpathpersist:  libmpathpersist
-++mpathpersist multipathd:  libmpathpersist
-++libdmmp libmultipath mpathpersist multipath multipathd: libmpathcmd
-+ 
-+ DEPS_ON_MULTIPATH := \
-+ 	multipath \
-+-- 
-+2.21.0
-+
-diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-index 2795a8d09..af34a4b39 100644
---- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-+++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-@@ -44,6 +44,7 @@ SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http \
-            file://0030-Always-use-devmapper.patch \
-            file://0031-Always-use-devmapper-for-kpartx.patch \
-            file://0001-fix-bug-of-do_compile-and-do_install.patch \
-+           file://0001-add-explicit-dependency-on-libraries.patch \
-            "
+diff --git a/meta/recipes-devtools/python/python3-pycairo_1.19.0.bb b/meta/recipes-devtools/python/python3-pycairo_1.19.1.bb
+similarity index 84%
+rename from meta/recipes-devtools/python/python3-pycairo_1.19.0.bb
+rename to meta/recipes-devtools/python/python3-pycairo_1.19.1.bb
+index 8f60834c17..34c8543bce 100644
+--- a/meta/recipes-devtools/python/python3-pycairo_1.19.0.bb
++++ b/meta/recipes-devtools/python/python3-pycairo_1.19.1.bb
+@@ -13,8 +13,8 @@ DEPENDS = "cairo python3"
+ SRC_URI = "https://github.com/pygobject/pycairo/releases/download/v${PV}/pycairo-${PV}.tar.gz"
+ UPSTREAM_CHECK_URI = "https://github.com/pygobject/pycairo/releases/"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
+-SRC_URI[md5sum] = "38b84416021640b01250c8f8ec4c52d4"
+-SRC_URI[sha256sum] = "4f5ba9374a46c98729dd3727d993f5e17ed0286fd6738ed464fe4efa0612d19c"
++SRC_URI[md5sum] = "59bc5c5d1debc3af0f6791af9d612551"
++SRC_URI[sha256sum] = "2c143183280feb67f5beb4e543fd49990c28e7df427301ede04fc550d3562e84"
+ 
+ S = "${WORKDIR}/pycairo-${PV}"
+ 
 -- 
-2.21.0
+2.17.1
+
+
 
