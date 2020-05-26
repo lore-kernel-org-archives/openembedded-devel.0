@@ -1,157 +1,81 @@
 Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com [209.85.160.196])
- by mx.groups.io with SMTP id smtpd.web10.449.1590534989635769164
+ by mx.groups.io with SMTP id smtpd.web12.462.1590535001123791814
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 May 2020 16:16:29 -0700
+ Tue, 26 May 2020 16:16:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Jor5zLIw;
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=fWk44Ayh;
  spf=pass (domain: gmail.com, ip: 209.85.160.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f196.google.com with SMTP id c12so7851778qtq.11
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 May 2020 16:16:29 -0700 (PDT)
+Received: by mail-qt1-f196.google.com with SMTP id a23so17753520qto.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 26 May 2020 16:16:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=6MM+wvkJALBLioJoTtmBqhs7G3Tvyuux9BZtJZwRQiw=;
-        b=Jor5zLIwFBzB7ceUKZUb3ioEQhbE7H6VCC/uFgUSOh5D/TTB4fO/cNbkKVMWjn4U14
-         EOOJkcbQsr6zdbVFb3nRo12xwE6Nu7h5jigfeO1I0betK333mAURKqQ+MAWXZsHPsdTw
-         VKGEgwEX1Pt/7nRb8S0KyKfFB6R6H5gTT24IuGYKnDCNhSZ9iFognBbajRyP94BQv2z0
-         PWeB5FG32mSBauFkI2/dauBqaOYu0ZMXRJziyAD6LwQGupeD08XQ4PfGlmcJeUG4lSb/
-         Jjwtf4iD9biRW9drw9filuBsgizGfNlwsdyCQXMsayfsOF1XBfuBu87dp7RqZHA0ilOG
-         qtJA==
+        bh=3e+ov5TsysJbyOvCsP+CGdYBkh35hvNcg90wDUQETGg=;
+        b=fWk44AyhOuMbDKerdRIsGkT0jr09TaVVFA09METrilKVqXNfwzVlkEbjVUBQ0xqjaO
+         N4ePD6PIHRxV31vNLvCxaq7cIQfbIGZ76nt1WKdkTV9CDBpAJXjFs8L62CyuejYtraMs
+         t9X/eVAogHLiiSHhoMiSvmM1DJveWD/qPk7vlTrE5wDbcG1Tj2sdk/kCsjMO2cInV6as
+         94Rmnaajh33nXj+t7x2UFKUF5n84XU6I8Z1ST3BvpYPJ1gd3cY9VO3WPvqrNpuDDn3eb
+         BLWcEqqgw1Uoujm3XaMtYzY6gXe3GjaOERv+iKhMeBfSQGxj4rOuMSMpR9hm/o8CdqTB
+         kD3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=6MM+wvkJALBLioJoTtmBqhs7G3Tvyuux9BZtJZwRQiw=;
-        b=Vzb0DjQAFbd1nUwrogYtI+xrc9RYGtL99zzawlZyRaJeNzOlsCaAAtE7GizKhe733t
-         RR4r0MsYZRuzz6Q2UQNBS032mHHr/mrqX5V11QS7RCFua6JTrbLGA+Rl6HBwOQWpRxj5
-         aRxWhIoa2+O2VZOgDOEofUF7dorzycXnjLoA1NRViJzvD4iTpbM+RUmlXZf4yElOhhdA
-         yRMbKlaxifN5Se1bzx87s6o0REG8/jR5c6NKRA9NYlfzmgxV8L1ijuZSqyiZDFHJLesg
-         ZM2n3xefxrS9GwLzvR1dqPj5I8ROdjtJzRw1NSL94ccEPrNhtOQLrL2ty6w9oeBTBpwk
-         b/ig==
-X-Gm-Message-State: AOAM531wHF3HjXo+RbGX/LDbC8rME8+oDFRaQFoDNFfajXMZDOFfknhd
-	HYCOTisk5bEBJqI96sIVj36KoZrq371uJcGHKoc=
-X-Google-Smtp-Source: ABdhPJxVfRC1O8STvUqjKAXp1SBHNvqEZCswwyYVevd37kVwwhH/Tkoows36PRn01SQvpBed0M6apidzrzvegVd5uUU=
-X-Received: by 2002:aed:3b62:: with SMTP id q31mr1329822qte.293.1590534986743;
- Tue, 26 May 2020 16:16:26 -0700 (PDT)
+        bh=3e+ov5TsysJbyOvCsP+CGdYBkh35hvNcg90wDUQETGg=;
+        b=AAKmBj0BmGIfPLN7WJuCTjNony+I0hwA9YkAMjx+Ms3TRSHB7745pB4+fv6o/p4A/3
+         +KM/VGtUZ2056BtByyVx0eMdtZEKlh3pJsknF5ILmtfukUNqlv1CkmKcwtkNZhzQPzr9
+         LS4SbJG9hL57Cdd3EjtkZo6mn+mQqMX2SY0FY8BNuZAD5a4CWwENrU8o2PkfNi28SWdl
+         5WJPIOuMtwyr87/ia3mSXThB+ysXczAFALdoJOXpDJ3pG9C5T2R91sjGF+/Dqq81XXiz
+         3rY1TVaBJgpsOZKD3JFWAGCS4wHgGq1CEKnRs1IuqYtwrud1li6gvtEcxfUUSjyL95e5
+         0o8w==
+X-Gm-Message-State: AOAM530bbXUx9Z81N+rhpROOZ44MbDN0fTni6j0rB0ptFdZ60PMwEAd2
+	oAFSA1B6V2jnsKHZA5Uex25GisqMs6Y00nLgIAKXB8Ki
+X-Google-Smtp-Source: ABdhPJzwK1uMc0hxjtjBQ0td3Aw6v6J38+6WI9vVKh1G5rby9hBll3S/7YPOs456Y2Sfhqg6O7MGHEolhQQd98YCx/M=
+X-Received: by 2002:ac8:5148:: with SMTP id h8mr1295043qtn.316.1590535000151;
+ Tue, 26 May 2020 16:16:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200526131649.6318-1-liu.ming50@gmail.com> <20200526131649.6318-3-liu.ming50@gmail.com>
-In-Reply-To: <20200526131649.6318-3-liu.ming50@gmail.com>
+References: <1590514812-29021-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+In-Reply-To: <1590514812-29021-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Tue, 26 May 2020 16:16:00 -0700
-Message-ID: <CAMKF1soD4zu6ZgXj2WX0EWtNChVuMHfqZzzeUv=_LgOjkoYqeA@mail.gmail.com>
-Subject: Re: [oe] [OE-core] [PATCH V2 2/2] u-boot: introduce UBOOT_INITIAL_ENV
-To: Ming Liu <liu.ming50@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Stefan Agner <stefan.agner@toradex.com>, Max Krummenacher <max.krummenacher@toradex.com>, 
-	Ming Liu <ming.liu@toradex.com>
+Date: Tue, 26 May 2020 16:16:14 -0700
+Message-ID: <CAMKF1spiZ5EwNB0j51kDpgOxCZMpT0_ZO2ZArvvfO3wvZvf-aw@mail.gmail.com>
+Subject: Re: [oe] [OE-core] [PATCH] python3-pycairo:upgrade 1.19.0 -> 1.19.1
+To: zangrc <zangrc.fnst@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-send to oe-core ml please
+send to oe-core ml please.
 
-On Tue, May 26, 2020 at 6:16 AM Ming Liu <liu.ming50@gmail.com> wrote:
+On Tue, May 26, 2020 at 1:40 AM zangrc <zangrc.fnst@cn.fujitsu.com> wrote:
 >
-> From: Ming Liu <ming.liu@toradex.com>
->
-> It defaults to ${PN}-initial-env, no functional changes with current
-> implementation, but this allows it to be changed in individual u-boot
-> recipes.
->
-> The major purpose for introducing this, is that the users might have
-> some scripts on targets like:
-> ```
-> /sbin/fw_setenv -f /etc/u-boot-initial-env
-> ```
->
-> and it should be able to run against a identical path generated by
-> different u-boot recipes.
->
-> Signed-off-by: Ming Liu <ming.liu@toradex.com>
+> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 > ---
->  meta/recipes-bsp/u-boot/u-boot.inc | 32 +++++++++++++++++-------------
->  1 file changed, 18 insertions(+), 14 deletions(-)
+>  .../{python3-pycairo_1.19.0.bb => python3-pycairo_1.19.1.bb}  | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta/recipes-devtools/python/{python3-pycairo_1.19.0.bb => python3-pycairo_1.19.1.bb} (84%)
 >
-> diff --git a/meta/recipes-bsp/u-boot/u-boot.inc b/meta/recipes-bsp/u-boot/u-boot.inc
-> index 718435f13f..e408549424 100644
-> --- a/meta/recipes-bsp/u-boot/u-boot.inc
-> +++ b/meta/recipes-bsp/u-boot/u-boot.inc
-> @@ -60,6 +60,10 @@ UBOOT_ENV_BINARY ?= "${UBOOT_ENV}.${UBOOT_ENV_SUFFIX}"
->  UBOOT_ENV_IMAGE ?= "${UBOOT_ENV}-${MACHINE}-${PV}-${PR}.${UBOOT_ENV_SUFFIX}"
->  UBOOT_ENV_SYMLINK ?= "${UBOOT_ENV}-${MACHINE}.${UBOOT_ENV_SUFFIX}"
+> diff --git a/meta/recipes-devtools/python/python3-pycairo_1.19.0.bb b/meta/recipes-devtools/python/python3-pycairo_1.19.1.bb
+> similarity index 84%
+> rename from meta/recipes-devtools/python/python3-pycairo_1.19.0.bb
+> rename to meta/recipes-devtools/python/python3-pycairo_1.19.1.bb
+> index 8f60834c17..34c8543bce 100644
+> --- a/meta/recipes-devtools/python/python3-pycairo_1.19.0.bb
+> +++ b/meta/recipes-devtools/python/python3-pycairo_1.19.1.bb
+> @@ -13,8 +13,8 @@ DEPENDS = "cairo python3"
+>  SRC_URI = "https://github.com/pygobject/pycairo/releases/download/v${PV}/pycairo-${PV}.tar.gz"
+>  UPSTREAM_CHECK_URI = "https://github.com/pygobject/pycairo/releases/"
 >
-> +# Default name of u-boot initial env, but enable individual recipes to change
-> +# this value.
-> +UBOOT_INITIAL_ENV ?= "${PN}-initial-env"
-> +
->  # U-Boot EXTLINUX variables. U-Boot searches for /boot/extlinux/extlinux.conf
->  # to find EXTLINUX conf file.
->  UBOOT_EXTLINUX_INSTALL_DIR ?= "/boot/extlinux"
-> @@ -155,10 +159,10 @@ do_install () {
->                      ln -sf u-boot-${type}-${PV}-${PR}.${UBOOT_SUFFIX} ${D}/boot/${UBOOT_BINARY}
+> -SRC_URI[md5sum] = "38b84416021640b01250c8f8ec4c52d4"
+> -SRC_URI[sha256sum] = "4f5ba9374a46c98729dd3727d993f5e17ed0286fd6738ed464fe4efa0612d19c"
+> +SRC_URI[md5sum] = "59bc5c5d1debc3af0f6791af9d612551"
+> +SRC_URI[sha256sum] = "2c143183280feb67f5beb4e543fd49990c28e7df427301ede04fc550d3562e84"
 >
->                      # Install the uboot-initial-env
-> -                    install -D -m 644 ${B}/${config}/u-boot-initial-env-${type} ${D}/${sysconfdir}/${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR}
-> -                    ln -sf ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysconfdir}/${PN}-initial-env-${MACHINE}-${type}
-> -                    ln -sf ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysconfdir}/${PN}-initial-env-${type}
-> -                    ln -sf ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysconfdir}/${PN}-initial-env
-> +                    install -D -m 644 ${B}/${config}/u-boot-initial-env-${type} ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR}
-> +                    ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${MACHINE}-${type}
-> +                    ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${type}
-> +                    ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}
->                  fi
->              done
->              unset j
-> @@ -169,9 +173,9 @@ do_install () {
->          ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_BINARY}
+>  S = "${WORKDIR}/pycairo-${PV}"
 >
->          # Install the uboot-initial-env
-> -        install -D -m 644 ${B}/u-boot-initial-env ${D}/${sysconfdir}/${PN}-initial-env-${MACHINE}-${PV}-${PR}
-> -        ln -sf ${PN}-initial-env-${MACHINE}-${PV}-${PR} ${D}/${sysconfdir}/${PN}-initial-env-${MACHINE}
-> -        ln -sf ${PN}-initial-env-${MACHINE}-${PV}-${PR} ${D}/${sysconfdir}/${PN}-initial-env
-> +        install -D -m 644 ${B}/u-boot-initial-env ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}
-> +        ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR} ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${MACHINE}
-> +        ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR} ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}
->      fi
->
->      if [ -n "${UBOOT_ELF}" ]
-> @@ -243,7 +247,7 @@ PACKAGE_BEFORE_PN += "${PN}-env"
->
->  RPROVIDES_${PN}-env += "u-boot-default-env"
->  FILES_${PN}-env = " \
-> -    ${sysconfdir}/${PN}-initial-env* \
-> +    ${sysconfdir}/${UBOOT_INITIAL_ENV}* \
->      ${sysconfdir}/fw_env.config \
->  "
->
-> @@ -267,10 +271,10 @@ do_deploy () {
->                      ln -sf u-boot-${type}-${PV}-${PR}.${UBOOT_SUFFIX} ${UBOOT_BINARY}
->
->                      # Deploy the uboot-initial-env
-> -                    install -D -m 644 ${B}/${config}/u-boot-initial-env-${type} ${DEPLOYDIR}/${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR}
-> +                    install -D -m 644 ${B}/${config}/u-boot-initial-env-${type} ${DEPLOYDIR}/${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR}
->                      cd ${DEPLOYDIR}
-> -                    ln -sf ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${PN}-initial-env-${MACHINE}-${type}
-> -                    ln -sf ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${PN}-initial-env-${type}
-> +                    ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR} ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}
-> +                    ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR} ${UBOOT_INITIAL_ENV}-${type}
->                  fi
->              done
->              unset j
-> @@ -285,10 +289,10 @@ do_deploy () {
->          ln -sf ${UBOOT_IMAGE} ${UBOOT_BINARY}
->
->          # Deploy the uboot-initial-env
-> -        install -D -m 644 ${B}/u-boot-initial-env ${DEPLOYDIR}/${PN}-initial-env-${MACHINE}-${PV}-${PR}
-> +        install -D -m 644 ${B}/u-boot-initial-env ${DEPLOYDIR}/${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}
->          cd ${DEPLOYDIR}
-> -        ln -sf ${PN}-initial-env-${MACHINE}-${PV}-${PR} ${PN}-initial-env-${MACHINE}
-> -        ln -sf ${PN}-initial-env-${MACHINE}-${PV}-${PR} ${PN}-initial-env
-> +        ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR} ${UBOOT_INITIAL_ENV}-${MACHINE}
-> +        ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR} ${UBOOT_INITIAL_ENV}
->      fi
->
->      if [ -e ${WORKDIR}/fw_env.config ] ; then
 > --
-> 2.26.2
+> 2.17.1
+>
+>
 >
 > 
