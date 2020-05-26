@@ -1,158 +1,111 @@
-Received: from mail-ej1-f67.google.com (mail-ej1-f67.google.com [209.85.218.67])
- by mx.groups.io with SMTP id smtpd.web11.50275.1590498973057545358
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com [209.85.222.196])
+ by mx.groups.io with SMTP id smtpd.web11.54920.1590511674436391768
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 May 2020 06:16:13 -0700
+ Tue, 26 May 2020 09:47:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=fbKs6y5B;
- spf=pass (domain: gmail.com, ip: 209.85.218.67, mailfrom: liu.ming50@gmail.com)
-Received: by mail-ej1-f67.google.com with SMTP id n24so23769952ejd.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 May 2020 06:16:12 -0700 (PDT)
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=gnz8uA5i;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.222.196, mailfrom: domarys.correa@ossystems.com.br)
+Received: by mail-qk1-f196.google.com with SMTP id s1so21242225qkf.9
+        for <openembedded-devel@lists.openembedded.org>; Tue, 26 May 2020 09:47:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=MRcX0OPv4jMRPqlMxcyTBHwwUPYrQ0Y6fU1D2ucibfI=;
-        b=fbKs6y5BJtdLr4T/12KTc3e/CsFC4157VnwkVB/VMroajoPbNxJnjp3XvErLRN2HBz
-         YcOjNK43plBvgI9UxbJd3fN3MNntjw8rxQuUJOx7ThYb0iuTdQWNSNQSMSYYWPqTooPu
-         F1j//eVhLCP0U6SnFbBpfAAZ2YcjYzznxRqza/r52o2Cldkzj1sW3eIv9VRfodlLPndh
-         QmILtmX35E8NZU7hkZTuBe+I5lMirq6JXYfKeYEOHkrFmfoiOTA0RW6FviE/7f1JRTYT
-         fL8lcZajV4zWyKejnm15Q6Axfkk8SNvhMGSDralYBmLO2fWFRh85mmc7wnQKximoFc1h
-         ai6Q==
+        d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id;
+        bh=/vgr6MgBYhLBi/Xs9+JFxvfFuVzYw9A2XD1hY08swc4=;
+        b=gnz8uA5iyxBkoLvDjs50yGKfhmij3w56RUg3r9Tor9Z7AIp9TqMLfvDtPstv/PD6kQ
+         AcxlmxZTVTvtM+/VDhNHQ4Yzycx/qNe+gnLivY+w+5Y118DeBmS9Wy2PFDQJepnGF9V9
+         NHHfxY3ub6/FjmWO6RbwvTM5CI+YyVNC9HnLuV205Ane+nRkeL4hgnL+KC2QfN27xA5i
+         odD1+HHdZCEiwHrOFVxHfiBhmiMoWVsU+R+wuCzvunbE/TavQnncJSzF7061SDpXnKQE
+         kJ3wOVVanZjRIBSzzzq4wA44Bm0TA65hsUgPVCpQ0jp/UTpZHny+vUJzxrZ4pM0xNDCG
+         ZxtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=MRcX0OPv4jMRPqlMxcyTBHwwUPYrQ0Y6fU1D2ucibfI=;
-        b=W7+kyGlAmTlOxR714RpGOULG/7imwBsgWTxqf6lNI4dU+4pUqCBixx+zT8mn0/lJek
-         9gKxygjOMK1+5Ko0jc8qcNRBDiFkSxdcXnj18EOv+lSNQi0eqv8hYVbLkyeN8xhfLP2x
-         bN2k7vzk6U87QYKi2UntjBYnPwn67dKAQtCvhu3aEhcZ+iztd6YVITxNBnrFqD4MB5WS
-         TKz5AyTyS6Pc7avMuW0ZB+ylyaEA5FeuEFwcQYybHycjSYDbiDuK8jCKijOP5DkVO8xF
-         GNslaqQlMlZvkOnqSkU87/SMfzaO1LdHGRFzU19DmwAXL1gC7uBLb6TQaIKS3c2+6FRC
-         rUVw==
-X-Gm-Message-State: AOAM530hypCiCQhnj7nhkQrhYPfx01DvvXKl3PlNT8n0zNAYsnL11QeL
-	jRCsmpvhgxTz22ltQOMM+CACQbux
-X-Google-Smtp-Source: ABdhPJzjOATSpBGkRZiQxuXGfjkZTKesxaRkeK+GZXUu1TnxW4RvUjRHILiCvakU/Hw4nG3hdVjmMg==
-X-Received: by 2002:a17:906:27d4:: with SMTP id k20mr1074755ejc.261.1590498971397;
-        Tue, 26 May 2020 06:16:11 -0700 (PDT)
-Return-Path: <liu.ming50@gmail.com>
-Received: from peterliu-Precision-7530.toradex.int ([2a00:801:42a:e319:603a:b692:6de3:bf7])
-        by smtp.gmail.com with ESMTPSA id wr20sm4330761ejb.27.2020.05.26.06.16.10
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Tue, 26 May 2020 06:16:11 -0700 (PDT)
-From: "Ming Liu" <liu.ming50@gmail.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=/vgr6MgBYhLBi/Xs9+JFxvfFuVzYw9A2XD1hY08swc4=;
+        b=aNsTv0vOW11jc3WD2pfGL2ArREJegVxc/iiqs1Oiy21eOk1aBRz+5n3Y96TUWALbNi
+         g5arnHmZh4xbVnjeQWzHIP3T3zUZg/yZIbxMJEddOQ5Zjps+3eQQDYi0gXEsOknZ9mWn
+         PvB7nR5l8AW+Wf2do234E9QRd6o43saeE0gWGU2RDGwGSVdWGjysUxMSU1oyC0FY5FF3
+         HeiN1b66BGtnjRcOSzr4BgMPvq4QOQY3iY7kdln4q9NskaPcaUBS/JbPs316prnt45R7
+         AttndO07hVRUo2PCOspMTz00VsxXE2lgXREiRMS/owFk0BK9WNIJFnsq/YzMU6DT5+9D
+         pC9w==
+X-Gm-Message-State: AOAM5305BYyp6RE+jXC5eHR+3aqTtqjBF0W5GUarCCSQFfslxPyCauAl
+	+73CzAS1Uxbt9nME9IJ1+zUGLNGdLR0=
+X-Google-Smtp-Source: ABdhPJwGq/erBBOnHCPkuLN3hOtXEyKnQpD1pLilCON4UW4NqWzJeV7DGI4IyOHzTe5TrVCByAUqsQ==
+X-Received: by 2002:a37:e101:: with SMTP id c1mr2209433qkm.433.1590511673403;
+        Tue, 26 May 2020 09:47:53 -0700 (PDT)
+Return-Path: <domarys.correa@ossystems.com.br>
+Received: from Monster.domain.name ([2804:7f4:c195:1db7:4033:fb82:ae47:2b33])
+        by smtp.gmail.com with ESMTPSA id h22sm170070qtn.23.2020.05.26.09.47.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 26 May 2020 09:47:52 -0700 (PDT)
+From: "Domarys Correa" <domarys.correa@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Cc: stefan.agner@toradex.com,
-	max.krummenacher@toradex.com,
-	Ming Liu <ming.liu@toradex.com>
-Subject: [OE-core] [PATCH V2 2/2] u-boot: introduce UBOOT_INITIAL_ENV
-Date: Tue, 26 May 2020 15:16:49 +0200
-Message-Id: <20200526131649.6318-3-liu.ming50@gmail.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200526131649.6318-1-liu.ming50@gmail.com>
-References: <20200526131649.6318-1-liu.ming50@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Domarys Correa <domarys.correa@ossystems.com.br>
+Subject: [meta-oe][PATCH v2] python3-pyyaml: Update 5.3 -> 5.3.1
+Date: Tue, 26 May 2020 13:47:21 -0300
+Message-Id: <20200526164721.7901-1-domarys.correa@ossystems.com.br>
+X-Mailer: git-send-email 2.17.1
 
-From: Ming Liu <ming.liu@toradex.com>
-
-It defaults to ${PN}-initial-env, no functional changes with current
-implementation, but this allows it to be changed in individual u-boot
-recipes.
-
-The major purpose for introducing this, is that the users might have
-some scripts on targets like:
-```
-/sbin/fw_setenv -f /etc/u-boot-initial-env
-```
-
-and it should be able to run against a identical path generated by
-different u-boot recipes.
-
-Signed-off-by: Ming Liu <ming.liu@toradex.com>
+Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
 ---
- meta/recipes-bsp/u-boot/u-boot.inc | 32 +++++++++++++++++-------------
- 1 file changed, 18 insertions(+), 14 deletions(-)
+v1 had problems to be added to the master-next due to lack
+of rebase with it. The current version is fixed on the
+master-next and successfully tested.
 
-diff --git a/meta/recipes-bsp/u-boot/u-boot.inc b/meta/recipes-bsp/u-boot/u-boot.inc
-index 718435f13f..e408549424 100644
---- a/meta/recipes-bsp/u-boot/u-boot.inc
-+++ b/meta/recipes-bsp/u-boot/u-boot.inc
-@@ -60,6 +60,10 @@ UBOOT_ENV_BINARY ?= "${UBOOT_ENV}.${UBOOT_ENV_SUFFIX}"
- UBOOT_ENV_IMAGE ?= "${UBOOT_ENV}-${MACHINE}-${PV}-${PR}.${UBOOT_ENV_SUFFIX}"
- UBOOT_ENV_SYMLINK ?= "${UBOOT_ENV}-${MACHINE}.${UBOOT_ENV_SUFFIX}"
- 
-+# Default name of u-boot initial env, but enable individual recipes to change
-+# this value.
-+UBOOT_INITIAL_ENV ?= "${PN}-initial-env"
+.../python/python3-pyyaml_5.3.1.bb            | 18 ++++++++++++++++++
+ .../python/python3-pyyaml_5.3.bb              | 19 -------------------
+ 2 files changed, 18 insertions(+), 19 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyyaml_5.3.1.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
+
+diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.1.bb b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.1.bb
+new file mode 100644
+index 000000000..8cf909304
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.1.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Python support for YAML"
++DEPENDS += "libyaml ${PYTHON_PN}-cython-native"
 +
- # U-Boot EXTLINUX variables. U-Boot searches for /boot/extlinux/extlinux.conf
- # to find EXTLINUX conf file.
- UBOOT_EXTLINUX_INSTALL_DIR ?= "/boot/extlinux"
-@@ -155,10 +159,10 @@ do_install () {
-                     ln -sf u-boot-${type}-${PV}-${PR}.${UBOOT_SUFFIX} ${D}/boot/${UBOOT_BINARY}
- 
-                     # Install the uboot-initial-env
--                    install -D -m 644 ${B}/${config}/u-boot-initial-env-${type} ${D}/${sysconfdir}/${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR}
--                    ln -sf ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysconfdir}/${PN}-initial-env-${MACHINE}-${type}
--                    ln -sf ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysconfdir}/${PN}-initial-env-${type}
--                    ln -sf ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysconfdir}/${PN}-initial-env
-+                    install -D -m 644 ${B}/${config}/u-boot-initial-env-${type} ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR}
-+                    ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${MACHINE}-${type}
-+                    ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${type}
-+                    ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}
-                 fi
-             done
-             unset j
-@@ -169,9 +173,9 @@ do_install () {
-         ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_BINARY}
- 
-         # Install the uboot-initial-env
--        install -D -m 644 ${B}/u-boot-initial-env ${D}/${sysconfdir}/${PN}-initial-env-${MACHINE}-${PV}-${PR}
--        ln -sf ${PN}-initial-env-${MACHINE}-${PV}-${PR} ${D}/${sysconfdir}/${PN}-initial-env-${MACHINE}
--        ln -sf ${PN}-initial-env-${MACHINE}-${PV}-${PR} ${D}/${sysconfdir}/${PN}-initial-env
-+        install -D -m 644 ${B}/u-boot-initial-env ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}
-+        ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR} ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${MACHINE}
-+        ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR} ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}
-     fi
- 
-     if [ -n "${UBOOT_ELF}" ]
-@@ -243,7 +247,7 @@ PACKAGE_BEFORE_PN += "${PN}-env"
- 
- RPROVIDES_${PN}-env += "u-boot-default-env"
- FILES_${PN}-env = " \
--    ${sysconfdir}/${PN}-initial-env* \
-+    ${sysconfdir}/${UBOOT_INITIAL_ENV}* \
-     ${sysconfdir}/fw_env.config \
- "
- 
-@@ -267,10 +271,10 @@ do_deploy () {
-                     ln -sf u-boot-${type}-${PV}-${PR}.${UBOOT_SUFFIX} ${UBOOT_BINARY}
- 
-                     # Deploy the uboot-initial-env
--                    install -D -m 644 ${B}/${config}/u-boot-initial-env-${type} ${DEPLOYDIR}/${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR}
-+                    install -D -m 644 ${B}/${config}/u-boot-initial-env-${type} ${DEPLOYDIR}/${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR}
-                     cd ${DEPLOYDIR}
--                    ln -sf ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${PN}-initial-env-${MACHINE}-${type}
--                    ln -sf ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${PN}-initial-env-${type}
-+                    ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR} ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}
-+                    ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR} ${UBOOT_INITIAL_ENV}-${type}
-                 fi
-             done
-             unset j
-@@ -285,10 +289,10 @@ do_deploy () {
-         ln -sf ${UBOOT_IMAGE} ${UBOOT_BINARY}
- 
-         # Deploy the uboot-initial-env
--        install -D -m 644 ${B}/u-boot-initial-env ${DEPLOYDIR}/${PN}-initial-env-${MACHINE}-${PV}-${PR}
-+        install -D -m 644 ${B}/u-boot-initial-env ${DEPLOYDIR}/${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}
-         cd ${DEPLOYDIR}
--        ln -sf ${PN}-initial-env-${MACHINE}-${PV}-${PR} ${PN}-initial-env-${MACHINE}
--        ln -sf ${PN}-initial-env-${MACHINE}-${PV}-${PR} ${PN}-initial-env
-+        ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR} ${UBOOT_INITIAL_ENV}-${MACHINE}
-+        ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR} ${UBOOT_INITIAL_ENV}
-     fi
- 
-     if [ -e ${WORKDIR}/fw_env.config ] ; then
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=7bbd28caa69f81f5cd5f48647236663d"
++
++PYPI_PACKAGE = "PyYAML"
++
++inherit pypi setuptools3
++
++SRC_URI[sha256sum] = "b8eac752c5e14d3eca0e6dd9199cd627518cb5ec06add0de9d32baeee6fe645d"
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-netclient \
++"
++
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
+deleted file mode 100644
+index 17868a25d..000000000
+--- a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-SUMMARY = "Python support for YAML"
+-HOMEPAGE = "http://www.pyyaml.org"
+-SECTION = "devel/python"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=a76b4c69bfcf82313bbdc0393b04438a"
+-DEPENDS = "libyaml ${PYTHON_PN}-cython-native ${PYTHON_PN}"
+-
+-PYPI_PACKAGE = "PyYAML"
+-inherit pypi setuptools3
+-
+-SRC_URI[md5sum] = "adbb0d336b509d6472d3b095a0f1cf30"
+-SRC_URI[sha256sum] = "e9f45bd5b92c7974e59bcd2dcc8631a6b6cc380a904725fce7bc08872e691615"
+-
+-RDEPENDS_${PN} += "\
+-    ${PYTHON_PN}-datetime \
+-    ${PYTHON_PN}-netclient \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
 -- 
-2.26.2
+2.17.1
 
