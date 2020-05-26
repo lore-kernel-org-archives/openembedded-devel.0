@@ -1,81 +1,133 @@
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com [209.85.160.196])
- by mx.groups.io with SMTP id smtpd.web12.462.1590535001123791814
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
+ by mx.groups.io with SMTP id smtpd.web10.483.1590535113223490274
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 May 2020 16:16:41 -0700
+ Tue, 26 May 2020 16:18:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=fWk44Ayh;
- spf=pass (domain: gmail.com, ip: 209.85.160.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f196.google.com with SMTP id a23so17753520qto.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 May 2020 16:16:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=h5ueORnS;
+ spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f195.google.com with SMTP id 205so9475399qkg.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 26 May 2020 16:18:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=3e+ov5TsysJbyOvCsP+CGdYBkh35hvNcg90wDUQETGg=;
-        b=fWk44AyhOuMbDKerdRIsGkT0jr09TaVVFA09METrilKVqXNfwzVlkEbjVUBQ0xqjaO
-         N4ePD6PIHRxV31vNLvCxaq7cIQfbIGZ76nt1WKdkTV9CDBpAJXjFs8L62CyuejYtraMs
-         t9X/eVAogHLiiSHhoMiSvmM1DJveWD/qPk7vlTrE5wDbcG1Tj2sdk/kCsjMO2cInV6as
-         94Rmnaajh33nXj+t7x2UFKUF5n84XU6I8Z1ST3BvpYPJ1gd3cY9VO3WPvqrNpuDDn3eb
-         BLWcEqqgw1Uoujm3XaMtYzY6gXe3GjaOERv+iKhMeBfSQGxj4rOuMSMpR9hm/o8CdqTB
-         kD3A==
+        bh=Hi+en5EJXjAlY8f4tLRGJV4Qgnl65kVTVuz/i3Ua308=;
+        b=h5ueORnSYbNXgahxQ/pRbUqjksRHM9YfPOY2ojPvwueaDWmuwhJv+Hu2Dr1vEcm29l
+         UceKfNe3nbZFHQFeQd4DhBn8nGljmzx9PPp+0b0fy5WL7melS/gpn7AetZeirCrCUu1q
+         skMLwiZByvUqj+w05M+dgItbutaB9uqKmvwK/hVCkuPCGhO649MgCgNLWQ2EWKoV7l/G
+         CDofh7iQCPnIlGrmikCR7n7JAyf6D5UYQoY/9p+LajxKXzVNkB8GfGarKDcPnu5DOfpe
+         WgzxmwQVjaKVeZewvzQArTQB+NDA/jWki72cVKTflBt+lpmMxpEGQcRBpTfnQpTKNcYx
+         uV3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=3e+ov5TsysJbyOvCsP+CGdYBkh35hvNcg90wDUQETGg=;
-        b=AAKmBj0BmGIfPLN7WJuCTjNony+I0hwA9YkAMjx+Ms3TRSHB7745pB4+fv6o/p4A/3
-         +KM/VGtUZ2056BtByyVx0eMdtZEKlh3pJsknF5ILmtfukUNqlv1CkmKcwtkNZhzQPzr9
-         LS4SbJG9hL57Cdd3EjtkZo6mn+mQqMX2SY0FY8BNuZAD5a4CWwENrU8o2PkfNi28SWdl
-         5WJPIOuMtwyr87/ia3mSXThB+ysXczAFALdoJOXpDJ3pG9C5T2R91sjGF+/Dqq81XXiz
-         3rY1TVaBJgpsOZKD3JFWAGCS4wHgGq1CEKnRs1IuqYtwrud1li6gvtEcxfUUSjyL95e5
-         0o8w==
-X-Gm-Message-State: AOAM530bbXUx9Z81N+rhpROOZ44MbDN0fTni6j0rB0ptFdZ60PMwEAd2
-	oAFSA1B6V2jnsKHZA5Uex25GisqMs6Y00nLgIAKXB8Ki
-X-Google-Smtp-Source: ABdhPJzwK1uMc0hxjtjBQ0td3Aw6v6J38+6WI9vVKh1G5rby9hBll3S/7YPOs456Y2Sfhqg6O7MGHEolhQQd98YCx/M=
-X-Received: by 2002:ac8:5148:: with SMTP id h8mr1295043qtn.316.1590535000151;
- Tue, 26 May 2020 16:16:40 -0700 (PDT)
+        bh=Hi+en5EJXjAlY8f4tLRGJV4Qgnl65kVTVuz/i3Ua308=;
+        b=QWYtdLhkv/rsTZfTn/9DlaKznJomF6Mzq0gM7wsP6PS8pBGDjCxksg5C3th0iUcX9A
+         6hNrUWDkm9UYWeoBYJH/q1Ug8B+gdIpUdvY0AwqBMBPRoOWI6hXQ+H+SvgLGxvo1W7i6
+         vRgnXzDJTyrrZczOZN9cCuvSogRcfjvOPl5d/CC7sxDAWFWFmAlvK6A40TToMAfhR+uD
+         hvh39sY2nH7dsHMU6fpb+cVyFsWIyDEU+afQ1OqEd6iv9jKByftgYJTaQvUR2+lqV830
+         /A6OSToAybs+bApV+aijIbJ9V8bhwnyrTtTuTo58/zuoZiIPHMyEBIWDHdXaWbFXQJoQ
+         eZuA==
+X-Gm-Message-State: AOAM530czdYtw+kf8HoWlom56kxngZaCnsao7I335pnIKFAHKu27M4XR
+	Zz8PQ5z9qrNr5T4TSGRHlT9rZ8E+wsgnBkk1H9YIxzmE
+X-Google-Smtp-Source: ABdhPJxn8ox6R7WilPyp9UG/a1PxgeFmr7CwnrbmPtsU+CCI9E9H2rpYoIy7BMO8jqCQQy+9HjnyhmEOJlXQgPHVMnY=
+X-Received: by 2002:a37:7143:: with SMTP id m64mr1390274qkc.215.1590535110844;
+ Tue, 26 May 2020 16:18:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <1590514812-29021-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-In-Reply-To: <1590514812-29021-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+References: <alpine.LFD.2.21.2005251518590.6822@localhost.localdomain>
+In-Reply-To: <alpine.LFD.2.21.2005251518590.6822@localhost.localdomain>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Tue, 26 May 2020 16:16:14 -0700
-Message-ID: <CAMKF1spiZ5EwNB0j51kDpgOxCZMpT0_ZO2ZArvvfO3wvZvf-aw@mail.gmail.com>
-Subject: Re: [oe] [OE-core] [PATCH] python3-pycairo:upgrade 1.19.0 -> 1.19.1
-To: zangrc <zangrc.fnst@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Date: Tue, 26 May 2020 16:18:04 -0700
+Message-ID: <CAMKF1sq2UQaxxdjZYMQh-jXmG5L-kre=xLv3SuaAEOZfFzu+_w@mail.gmail.com>
+Subject: Re: [oe] [PATCH] use weak assignments for PNBLACKLIST in recipe files
+To: "Robert P. J. Day" <rpjday@crashcourse.ca>
+Cc: OpenEmbedded Development mailing list <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-send to oe-core ml please.
+On Mon, May 25, 2020 at 12:21 PM Robert P. J. Day <rpjday@crashcourse.ca> wrote:
+>
+> Make sure PNBLACKLIST assignments in recipe files use weak assignment,
+> so they can be overridden in, for example, local.conf files.
+>
 
-On Tue, May 26, 2020 at 1:40 AM zangrc <zangrc.fnst@cn.fujitsu.com> wrote:
+I would like contributions here when someone fixes one of the
+blacklisted recipes. This patch will let downstream users host it in
+bbappends or other places
+what is the intended use of this patch?
+
+> Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
 >
-> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 > ---
->  .../{python3-pycairo_1.19.0.bb => python3-pycairo_1.19.1.bb}  | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta/recipes-devtools/python/{python3-pycairo_1.19.0.bb => python3-pycairo_1.19.1.bb} (84%)
 >
-> diff --git a/meta/recipes-devtools/python/python3-pycairo_1.19.0.bb b/meta/recipes-devtools/python/python3-pycairo_1.19.1.bb
-> similarity index 84%
-> rename from meta/recipes-devtools/python/python3-pycairo_1.19.0.bb
-> rename to meta/recipes-devtools/python/python3-pycairo_1.19.1.bb
-> index 8f60834c17..34c8543bce 100644
-> --- a/meta/recipes-devtools/python/python3-pycairo_1.19.0.bb
-> +++ b/meta/recipes-devtools/python/python3-pycairo_1.19.1.bb
-> @@ -13,8 +13,8 @@ DEPENDS = "cairo python3"
->  SRC_URI = "https://github.com/pygobject/pycairo/releases/download/v${PV}/pycairo-${PV}.tar.gz"
->  UPSTREAM_CHECK_URI = "https://github.com/pygobject/pycairo/releases/"
+> diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+> index c39faef8d..eee96d865 100644
+> --- a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+> +++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+> @@ -69,4 +69,4 @@ RDEPENDS_${PN}-server += "tcp-wrappers xinetd rpcbind"
 >
-> -SRC_URI[md5sum] = "38b84416021640b01250c8f8ec4c52d4"
-> -SRC_URI[sha256sum] = "4f5ba9374a46c98729dd3727d993f5e17ed0286fd6738ed464fe4efa0612d19c"
-> +SRC_URI[md5sum] = "59bc5c5d1debc3af0f6791af9d612551"
-> +SRC_URI[sha256sum] = "2c143183280feb67f5beb4e543fd49990c28e7df427301ede04fc550d3562e84"
+>  # http://errors.yoctoproject.org/Errors/Details/186962/
+>  COMPATIBLE_HOST_libc-musl = 'null'
+> -PNBLACKLIST[netkit-rusers] = "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or directory"
+> +PNBLACKLIST[netkit-rusers] ?= "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or directory"
+> diff --git a/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
+> index 23fe2021b..c296c3bc1 100644
+> --- a/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
+> +++ b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
+> @@ -22,4 +22,4 @@ do_install () {
+>      oe_runmake install DESTDIR="${D}"
+>  }
 >
->  S = "${WORKDIR}/pycairo-${PV}"
+> -PNBLACKLIST[drbd] = "Kernel module Needs forward porting to kernel 5.2+"
+> +PNBLACKLIST[drbd] ?= "Kernel module Needs forward porting to kernel 5.2+"
+> diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+> index 5917cfb3e..4a1bbe620 100644
+> --- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+> +++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+> @@ -36,4 +36,4 @@ FILES_${PN}-dbg += "${libexecdir}/lowpan-tools/.debug/"
+>  PACKAGES =+ "${PN}-python"
+>  FILES_${PN}-python = "${libdir}/python*"
+>
+> -PNBLACKLIST[lowpan-tools] = "WARNING these tools are deprecated! Use wpan-tools instead"
+> +PNBLACKLIST[lowpan-tools] ?= "WARNING these tools are deprecated! Use wpan-tools instead"
+> diff --git a/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb b/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
+> index 21d110aee..2e3da7d4d 100644
+> --- a/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
+> +++ b/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
+> @@ -27,4 +27,4 @@ RDEPENDS_${PN} += "\
+>
+>  BBCLASSEXTEND = "native nativesdk"
+>
+> -PNBLACKLIST[nanopb] = "Needs forward porting to use python3"
+> +PNBLACKLIST[nanopb] ?= "Needs forward porting to use python3"
+> diff --git a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+> index e40e1cd26..eca8dfc7b 100644
+> --- a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+> +++ b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+> @@ -11,4 +11,4 @@ inherit module
+>
+>  EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
+>
+> -PNBLACKLIST[can-isotp] = "Kernel module Needs forward porting to kernel 5.2+"
+> +PNBLACKLIST[can-isotp] ?= "Kernel module Needs forward porting to kernel 5.2+"
+> diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+> index 6683eccf2..1758430bc 100644
+> --- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
+> +++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+> @@ -32,4 +32,4 @@ python do_package_prepend() {
+>  }
+>
+>  B = "${WORKDIR}/${BPN}-${PV}"
+> -PNBLACKLIST[bpftool] = "Needs forward porting to kernel 5.2+"
+> +PNBLACKLIST[bpftool] ?= "Needs forward porting to kernel 5.2+"
 >
 > --
-> 2.17.1
 >
+> ========================================================================
+> Robert P. J. Day                                 Ottawa, Ontario, CANADA
+>                          http://crashcourse.ca
 >
->
+> Twitter:                                       http://twitter.com/rpjday
+> LinkedIn:                               http://ca.linkedin.com/in/rpjday
+> ========================================================================
 > 
