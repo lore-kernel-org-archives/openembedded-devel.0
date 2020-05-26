@@ -1,111 +1,76 @@
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com [209.85.222.196])
- by mx.groups.io with SMTP id smtpd.web11.54920.1590511674436391768
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com [209.85.222.194])
+ by mx.groups.io with SMTP id smtpd.web12.2641.1590520821034621183
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 May 2020 09:47:55 -0700
+ Tue, 26 May 2020 12:20:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=gnz8uA5i;
- spf=pass (domain: ossystems.com.br, ip: 209.85.222.196, mailfrom: domarys.correa@ossystems.com.br)
-Received: by mail-qk1-f196.google.com with SMTP id s1so21242225qkf.9
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 May 2020 09:47:54 -0700 (PDT)
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=m020sPCA;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.222.194, mailfrom: domarys.correa@ossystems.com.br)
+Received: by mail-qk1-f194.google.com with SMTP id w3so16338739qkb.6
+        for <openembedded-devel@lists.openembedded.org>; Tue, 26 May 2020 12:20:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id;
-        bh=/vgr6MgBYhLBi/Xs9+JFxvfFuVzYw9A2XD1hY08swc4=;
-        b=gnz8uA5iyxBkoLvDjs50yGKfhmij3w56RUg3r9Tor9Z7AIp9TqMLfvDtPstv/PD6kQ
-         AcxlmxZTVTvtM+/VDhNHQ4Yzycx/qNe+gnLivY+w+5Y118DeBmS9Wy2PFDQJepnGF9V9
-         NHHfxY3ub6/FjmWO6RbwvTM5CI+YyVNC9HnLuV205Ane+nRkeL4hgnL+KC2QfN27xA5i
-         odD1+HHdZCEiwHrOFVxHfiBhmiMoWVsU+R+wuCzvunbE/TavQnncJSzF7061SDpXnKQE
-         kJ3wOVVanZjRIBSzzzq4wA44Bm0TA65hsUgPVCpQ0jp/UTpZHny+vUJzxrZ4pM0xNDCG
-         ZxtQ==
+        bh=VPoCe97AjEMEu75eLko0oA2QmNMfY9WF1yT9iF9Flz8=;
+        b=m020sPCAG8HX6i10DjyD+vwwo61xYvdLxAa3+ocvQ96UXo1xlHlhh5ylLf7XSxulRB
+         1x0NOlxsMJ8idhhKkKi6TgcInnSNQzdiFAfibnj9hPWuCieKBgRSi4ObP1e7O7opzlPn
+         GfxttN1IRNPhdBTAdC7GckGrG9gCckNioxu2lIP06IGaYqjeDhpN/opqaTKgwcA5HPZC
+         p17QLSLuwmECaztm8UEFuDgGdmdF8B6JkzbMfCefdKXGnL/dvup7Sad9NlKaw/iSFh1w
+         db5NVXa1fec7dcBl31x6TRU0UaqnUBuhAeDUZgXtD6NoxneWXne7Qn6idEN5A/y+E6vJ
+         9s8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=/vgr6MgBYhLBi/Xs9+JFxvfFuVzYw9A2XD1hY08swc4=;
-        b=aNsTv0vOW11jc3WD2pfGL2ArREJegVxc/iiqs1Oiy21eOk1aBRz+5n3Y96TUWALbNi
-         g5arnHmZh4xbVnjeQWzHIP3T3zUZg/yZIbxMJEddOQ5Zjps+3eQQDYi0gXEsOknZ9mWn
-         PvB7nR5l8AW+Wf2do234E9QRd6o43saeE0gWGU2RDGwGSVdWGjysUxMSU1oyC0FY5FF3
-         HeiN1b66BGtnjRcOSzr4BgMPvq4QOQY3iY7kdln4q9NskaPcaUBS/JbPs316prnt45R7
-         AttndO07hVRUo2PCOspMTz00VsxXE2lgXREiRMS/owFk0BK9WNIJFnsq/YzMU6DT5+9D
-         pC9w==
-X-Gm-Message-State: AOAM5305BYyp6RE+jXC5eHR+3aqTtqjBF0W5GUarCCSQFfslxPyCauAl
-	+73CzAS1Uxbt9nME9IJ1+zUGLNGdLR0=
-X-Google-Smtp-Source: ABdhPJwGq/erBBOnHCPkuLN3hOtXEyKnQpD1pLilCON4UW4NqWzJeV7DGI4IyOHzTe5TrVCByAUqsQ==
-X-Received: by 2002:a37:e101:: with SMTP id c1mr2209433qkm.433.1590511673403;
-        Tue, 26 May 2020 09:47:53 -0700 (PDT)
+        bh=VPoCe97AjEMEu75eLko0oA2QmNMfY9WF1yT9iF9Flz8=;
+        b=B4+UpsZiqeSNUBML8kcnKp9dATq4vKjIoblaEHXQspemf+QlKc2jLsS5FGIklldDCd
+         eJ8xgwH0RqtPzFqSMhC8ThPPeOYQ7gsCvQGhchF4YZc0H0XlfCBDkWzcO++UM9K8jfl2
+         9dZ8aLuoU9ujUt5aAWOuLIQHM3qGc4Pg+spvyPV8sAjCbunD8KdYfX24R800sTtnNQgh
+         gFFptxECt+oHqFo6Qs/irhvQzTX38hescbC1b/07x+x/D1DFcc9amwiw/VvcpAkqryHb
+         P9y5VC7sInC/Fl4DE3s60YL9f5xRxgxQndVgemSppeH4ps9RfTInVOH6oicM95SIlGrQ
+         AECA==
+X-Gm-Message-State: AOAM532HRJfTkQ4IM+CUucmvPhwuN1yinWkhg2F/05Gvyfeewqv6Pd6h
+	q1SWepU0AKF7TOi88QvQnZ5J/exvBVY=
+X-Google-Smtp-Source: ABdhPJwo+2c9MTn3GejKYVrdOo/a2m9ZcuogmMN/1fzlPOuKv+SgyYDZMDlX1I6jJqmT8EmCBNtT7A==
+X-Received: by 2002:a05:620a:2284:: with SMTP id o4mr393378qkh.24.1590520819980;
+        Tue, 26 May 2020 12:20:19 -0700 (PDT)
 Return-Path: <domarys.correa@ossystems.com.br>
-Received: from Monster.domain.name ([2804:7f4:c195:1db7:4033:fb82:ae47:2b33])
-        by smtp.gmail.com with ESMTPSA id h22sm170070qtn.23.2020.05.26.09.47.51
+Received: from Monster.domain.name ([2804:7f4:c195:1db7:d122:133e:cc4c:c1a0])
+        by smtp.gmail.com with ESMTPSA id c197sm434453qkg.133.2020.05.26.12.20.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 26 May 2020 09:47:52 -0700 (PDT)
+        Tue, 26 May 2020 12:20:19 -0700 (PDT)
 From: "Domarys Correa" <domarys.correa@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 Cc: Domarys Correa <domarys.correa@ossystems.com.br>
-Subject: [meta-oe][PATCH v2] python3-pyyaml: Update 5.3 -> 5.3.1
-Date: Tue, 26 May 2020 13:47:21 -0300
-Message-Id: <20200526164721.7901-1-domarys.correa@ossystems.com.br>
+Subject: [meta-oe][PATCH 1/4] python3-pytest: Update 5.3.5 -> 5.4.2
+Date: Tue, 26 May 2020 16:20:08 -0300
+Message-Id: <20200526192011.17024-1-domarys.correa@ossystems.com.br>
 X-Mailer: git-send-email 2.17.1
 
 Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
 ---
-v1 had problems to be added to the master-next due to lack
-of rebase with it. The current version is fixed on the
-master-next and successfully tested.
+ .../{python3-pytest_5.3.5.bb => python3-pytest_5.4.2.bb}     | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pytest_5.3.5.bb => python3-pytest_5.4.2.bb} (85%)
 
-.../python/python3-pyyaml_5.3.1.bb            | 18 ++++++++++++++++++
- .../python/python3-pyyaml_5.3.bb              | 19 -------------------
- 2 files changed, 18 insertions(+), 19 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-pyyaml_5.3.1.bb
- delete mode 100644 meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
-
-diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.1.bb b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.1.bb
-new file mode 100644
-index 000000000..8cf909304
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.1.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Python support for YAML"
-+DEPENDS += "libyaml ${PYTHON_PN}-cython-native"
+diff --git a/meta-python/recipes-devtools/python/python3-pytest_5.3.5.bb b/meta-python/recipes-devtools/python/python3-pytest_5.4.2.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-pytest_5.3.5.bb
+rename to meta-python/recipes-devtools/python/python3-pytest_5.4.2.bb
+index 8dad13a9e..9258c21ca 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest_5.3.5.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest_5.4.2.bb
+@@ -1,10 +1,9 @@
+ SUMMARY = "Simple powerful testing with python"
+-HOMEPAGE = "http://pytest.org"
 +
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=7bbd28caa69f81f5cd5f48647236663d"
-+
-+PYPI_PACKAGE = "PyYAML"
-+
-+inherit pypi setuptools3
-+
-+SRC_URI[sha256sum] = "b8eac752c5e14d3eca0e6dd9199cd627518cb5ec06add0de9d32baeee6fe645d"
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-datetime \
-+    ${PYTHON_PN}-netclient \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
-deleted file mode 100644
-index 17868a25d..000000000
---- a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
-+++ /dev/null
-@@ -1,19 +0,0 @@
--SUMMARY = "Python support for YAML"
--HOMEPAGE = "http://www.pyyaml.org"
--SECTION = "devel/python"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=a76b4c69bfcf82313bbdc0393b04438a"
--DEPENDS = "libyaml ${PYTHON_PN}-cython-native ${PYTHON_PN}"
--
--PYPI_PACKAGE = "PyYAML"
--inherit pypi setuptools3
--
--SRC_URI[md5sum] = "adbb0d336b509d6472d3b095a0f1cf30"
--SRC_URI[sha256sum] = "e9f45bd5b92c7974e59bcd2dcc8631a6b6cc380a904725fce7bc08872e691615"
--
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-datetime \
--    ${PYTHON_PN}-netclient \
--"
--
--BBCLASSEXTEND = "native nativesdk"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=81eb9f71d006c6b268cf4388e3c98f7b"
+ 
+-SRC_URI[md5sum] = "d5ef453f723be46d93e0795f3be86c88"
+-SRC_URI[sha256sum] = "0d5fe9189a148acc3c3eb2ac8e1ac0742cb7618c084f3d228baaec0c254b318d"
++SRC_URI[sha256sum] = "eb2b5e935f6a019317e455b6da83dd8650ac9ffd2ee73a7b657a30873d67a698"
+ 
+ SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch "
+ 
 -- 
 2.17.1
 
