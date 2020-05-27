@@ -1,411 +1,135 @@
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com [209.85.128.67])
- by mx.groups.io with SMTP id smtpd.web10.1047.1590561922601409545
+Received: from cpanel7.indieserve.net (cpanel7.indieserve.net [199.212.143.8])
+ by mx.groups.io with SMTP id smtpd.web12.3212.1590574500301483811
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 May 2020 23:45:22 -0700
+ Wed, 27 May 2020 03:15:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=MgYypjJL;
- spf=pass (domain: gmail.com, ip: 209.85.128.67, mailfrom: liu.ming50@gmail.com)
-Received: by mail-wm1-f67.google.com with SMTP id u188so1909041wmu.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 May 2020 23:45:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=DkD+hQh0ewyNyh3EHZ2V3qAhae1KoHLpMR6s0vsPXdw=;
-        b=MgYypjJLe4O4d3R5rO10AAQ0jvixd6f8E4zO9mU1Yd97C+DMImcJqLL0VOFb7I+NUR
-         37AFokmM2h3uzpZVRfRvxEYEv3AfNpymtJf42YJoNbsROglAGGV4JR3gXavGlTtO0ttz
-         dpVWZeRqWgxGu5dhZ0Pn03bxrM4M54j6UIKAiMHrGHDz7x88z9eADWXbcFkL/EsyDt2l
-         5w7nE0CNT0ZffWIoGjtNJ1i6jdfWYCkJHl/4w2nJ/4t/WU6Pf2OnYcvn3ys+VXzmsf4w
-         qXuc8G5Bru/jr9ztVsXc/8OxG/F2P0YhtjGF1KyEOnXtMdFQ0LtvIsUlM0rglnTfguFL
-         BfNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=DkD+hQh0ewyNyh3EHZ2V3qAhae1KoHLpMR6s0vsPXdw=;
-        b=tUVGlgVBGUqybkUtYclc0ZyUj8GX/y3/3ejcCBGztVuDa4nKaVIHs6FQIsvIh4glJ7
-         Dg1jEXvFLXn++65U2B+qp5zJBxO9Su391NRiTyNQGOduvFvDf0P2oD7KVg0a5UCzJDsg
-         KhUOBlH6RGV7LSDT6N3Ma9PGxbRqokBhZ8XByZLpyw+z5iFiCoeoi1Kde2+T65rhXMXD
-         WUEhbKiSxg/Ai7hpriKEzs8IxZwEbm8edye9KSa9VD90blNPb/IZ5iY07Ku1fOxSfSdI
-         +RtJiny9n/PeTNVyUBZl4+JWV1wpeIvXVIFCV4q9ovVeJvrdmjHcXnenTlGokok4Qidc
-         HiHA==
-X-Gm-Message-State: AOAM531G+dGj0x6ECEOQm74+DwiSqaMhnNU+CftlLiKp0zk8RsfA6+O7
-	qA8S50c5ha4NPdZcs5WZQSmQ7VSNjvepeCkLoHo=
-X-Google-Smtp-Source: ABdhPJz0KCh0/E4wO5PBDX6FqYDD7GaFw1TLUY+M/rF6lJPj2ZXm8SbOW0jyWqn9tGBd7J0X+/IfGMvr2syYfQrp7bE=
-X-Received: by 2002:a1c:a5d2:: with SMTP id o201mr2746200wme.27.1590561921211;
- Tue, 26 May 2020 23:45:21 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200526131649.6318-1-liu.ming50@gmail.com> <20200526131649.6318-3-liu.ming50@gmail.com>
- <CAMKF1soD4zu6ZgXj2WX0EWtNChVuMHfqZzzeUv=_LgOjkoYqeA@mail.gmail.com>
-In-Reply-To: <CAMKF1soD4zu6ZgXj2WX0EWtNChVuMHfqZzzeUv=_LgOjkoYqeA@mail.gmail.com>
-From: "Ming Liu" <liu.ming50@gmail.com>
-Date: Wed, 27 May 2020 08:46:06 +0200
-Message-ID: <CALatG=4igtJ1s_ZWxpdrFNWbZzAeRuMj6hcH7s942zEjFuyhXQ@mail.gmail.com>
-Subject: Re: [oe] [OE-core] [PATCH V2 2/2] u-boot: introduce UBOOT_INITIAL_ENV
+ dkim=missing; spf=pass (domain: crashcourse.ca, ip: 199.212.143.8, mailfrom: rpjday@crashcourse.ca)
+Received: from cpeac202e043973-cmac202e043970.sdns.net.rogers.com ([174.114.100.179]:43814 helo=localhost.localdomain)
+	by cpanel7.indieserve.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.93)
+	(envelope-from <rpjday@crashcourse.ca>)
+	id 1jdt5O-00F6y7-1K; Wed, 27 May 2020 06:14:59 -0400
+Date: Wed, 27 May 2020 06:14:55 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost.localdomain
 To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Stefan Agner <stefan.agner@toradex.com>, Max Krummenacher <max.krummenacher@toradex.com>, 
-	Ming Liu <ming.liu@toradex.com>
-Content-Type: multipart/alternative; boundary="0000000000004ea0ed05a69b8ea2"
+cc: OpenEmbedded Development mailing list <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [PATCH] use weak assignments for PNBLACKLIST in recipe files
+In-Reply-To: <CAMKF1sq2UQaxxdjZYMQh-jXmG5L-kre=xLv3SuaAEOZfFzu+_w@mail.gmail.com>
+Message-ID: <alpine.LFD.2.21.2005270613300.5432@localhost.localdomain>
+References: <alpine.LFD.2.21.2005251518590.6822@localhost.localdomain> <CAMKF1sq2UQaxxdjZYMQh-jXmG5L-kre=xLv3SuaAEOZfFzu+_w@mail.gmail.com>
+MIME-Version: 1.0
+X-OutGoing-Spam-Status: No, score=-0.2
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel7.indieserve.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Get-Message-Sender-Via: cpanel7.indieserve.net: authenticated_id: rpjday+crashcourse.ca/only user confirmed/virtual account not confirmed
+X-Authenticated-Sender: cpanel7.indieserve.net: rpjday@crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Content-Type: text/plain; charset=US-ASCII
 
---0000000000004ea0ed05a69b8ea2
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Tue, 26 May 2020, Khem Raj wrote:
 
-Sorry, my bad, will resend it to OE mail list.
-
-//Ming Liu
-
-Khem Raj <raj.khem@gmail.com> =E6=96=BC 2020=E5=B9=B45=E6=9C=8827=E6=97=A5=
- =E9=80=B1=E4=B8=89 =E4=B8=8A=E5=8D=881:16=E5=AF=AB=E9=81=93=EF=BC=9A
-
-> send to oe-core ml please
+> On Mon, May 25, 2020 at 12:21 PM Robert P. J. Day <rpjday@crashcourse.ca> wrote:
+> >
+> > Make sure PNBLACKLIST assignments in recipe files use weak
+> > assignment, so they can be overridden in, for example, local.conf
+> > files.
+> >
 >
-> On Tue, May 26, 2020 at 6:16 AM Ming Liu <liu.ming50@gmail.com> wrote:
+> I would like contributions here when someone fixes one of the
+> blacklisted recipes. This patch will let downstream users host it in
+> bbappends or other places what is the intended use of this patch?
+
+  i'm not sure what you're asking for here ... there is no claim that
+any of these recipes have been fixed in any way, only that weak
+assignment seems to be the default for blacklisting to at least allow
+for the possibility of overriding.
+
 > >
-> > From: Ming Liu <ming.liu@toradex.com>
+> > diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+> > index c39faef8d..eee96d865 100644
+> > --- a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+> > +++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+> > @@ -69,4 +69,4 @@ RDEPENDS_${PN}-server += "tcp-wrappers xinetd rpcbind"
 > >
-> > It defaults to ${PN}-initial-env, no functional changes with current
-> > implementation, but this allows it to be changed in individual u-boot
-> > recipes.
+> >  # http://errors.yoctoproject.org/Errors/Details/186962/
+> >  COMPATIBLE_HOST_libc-musl = 'null'
+> > -PNBLACKLIST[netkit-rusers] = "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or directory"
+> > +PNBLACKLIST[netkit-rusers] ?= "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or directory"
+> > diff --git a/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
+> > index 23fe2021b..c296c3bc1 100644
+> > --- a/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
+> > +++ b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
+> > @@ -22,4 +22,4 @@ do_install () {
+> >      oe_runmake install DESTDIR="${D}"
+> >  }
 > >
-> > The major purpose for introducing this, is that the users might have
-> > some scripts on targets like:
-> > ```
-> > /sbin/fw_setenv -f /etc/u-boot-initial-env
-> > ```
+> > -PNBLACKLIST[drbd] = "Kernel module Needs forward porting to kernel 5.2+"
+> > +PNBLACKLIST[drbd] ?= "Kernel module Needs forward porting to kernel 5.2+"
+> > diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+> > index 5917cfb3e..4a1bbe620 100644
+> > --- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+> > +++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+> > @@ -36,4 +36,4 @@ FILES_${PN}-dbg += "${libexecdir}/lowpan-tools/.debug/"
+> >  PACKAGES =+ "${PN}-python"
+> >  FILES_${PN}-python = "${libdir}/python*"
 > >
-> > and it should be able to run against a identical path generated by
-> > different u-boot recipes.
+> > -PNBLACKLIST[lowpan-tools] = "WARNING these tools are deprecated! Use wpan-tools instead"
+> > +PNBLACKLIST[lowpan-tools] ?= "WARNING these tools are deprecated! Use wpan-tools instead"
+> > diff --git a/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb b/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
+> > index 21d110aee..2e3da7d4d 100644
+> > --- a/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
+> > +++ b/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
+> > @@ -27,4 +27,4 @@ RDEPENDS_${PN} += "\
 > >
-> > Signed-off-by: Ming Liu <ming.liu@toradex.com>
-> > ---
-> >  meta/recipes-bsp/u-boot/u-boot.inc | 32 +++++++++++++++++------------=
--
-> >  1 file changed, 18 insertions(+), 14 deletions(-)
+> >  BBCLASSEXTEND = "native nativesdk"
 > >
-> > diff --git a/meta/recipes-bsp/u-boot/u-boot.inc
-> b/meta/recipes-bsp/u-boot/u-boot.inc
-> > index 718435f13f..e408549424 100644
-> > --- a/meta/recipes-bsp/u-boot/u-boot.inc
-> > +++ b/meta/recipes-bsp/u-boot/u-boot.inc
-> > @@ -60,6 +60,10 @@ UBOOT_ENV_BINARY ?=3D "${UBOOT_ENV}.${UBOOT_ENV_SUF=
-FIX}"
-> >  UBOOT_ENV_IMAGE ?=3D
-> "${UBOOT_ENV}-${MACHINE}-${PV}-${PR}.${UBOOT_ENV_SUFFIX}"
-> >  UBOOT_ENV_SYMLINK ?=3D "${UBOOT_ENV}-${MACHINE}.${UBOOT_ENV_SUFFIX}"
+> > -PNBLACKLIST[nanopb] = "Needs forward porting to use python3"
+> > +PNBLACKLIST[nanopb] ?= "Needs forward porting to use python3"
+> > diff --git a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+> > index e40e1cd26..eca8dfc7b 100644
+> > --- a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+> > +++ b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+> > @@ -11,4 +11,4 @@ inherit module
 > >
-> > +# Default name of u-boot initial env, but enable individual recipes t=
-o
-> change
-> > +# this value.
-> > +UBOOT_INITIAL_ENV ?=3D "${PN}-initial-env"
-> > +
-> >  # U-Boot EXTLINUX variables. U-Boot searches for
-> /boot/extlinux/extlinux.conf
-> >  # to find EXTLINUX conf file.
-> >  UBOOT_EXTLINUX_INSTALL_DIR ?=3D "/boot/extlinux"
-> > @@ -155,10 +159,10 @@ do_install () {
-> >                      ln -sf u-boot-${type}-${PV}-${PR}.${UBOOT_SUFFIX}
-> ${D}/boot/${UBOOT_BINARY}
+> >  EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
 > >
-> >                      # Install the uboot-initial-env
-> > -                    install -D -m 644
-> ${B}/${config}/u-boot-initial-env-${type}
-> ${D}/${sysconfdir}/${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR}
-> > -                    ln -sf
-> ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR}
-> ${D}/${sysconfdir}/${PN}-initial-env-${MACHINE}-${type}
-> > -                    ln -sf
-> ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR}
-> ${D}/${sysconfdir}/${PN}-initial-env-${type}
-> > -                    ln -sf
-> ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR}
-> ${D}/${sysconfdir}/${PN}-initial-env
-> > +                    install -D -m 644
-> ${B}/${config}/u-boot-initial-env-${type}
-> ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR}
-> > +                    ln -sf
-> ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR}
-> ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${MACHINE}-${type}
-> > +                    ln -sf
-> ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR}
-> ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${type}
-> > +                    ln -sf
-> ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR}
-> ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}
-> >                  fi
-> >              done
-> >              unset j
-> > @@ -169,9 +173,9 @@ do_install () {
-> >          ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_BINARY}
+> > -PNBLACKLIST[can-isotp] = "Kernel module Needs forward porting to kernel 5.2+"
+> > +PNBLACKLIST[can-isotp] ?= "Kernel module Needs forward porting to kernel 5.2+"
+> > diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+> > index 6683eccf2..1758430bc 100644
+> > --- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
+> > +++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+> > @@ -32,4 +32,4 @@ python do_package_prepend() {
+> >  }
 > >
-> >          # Install the uboot-initial-env
-> > -        install -D -m 644 ${B}/u-boot-initial-env
-> ${D}/${sysconfdir}/${PN}-initial-env-${MACHINE}-${PV}-${PR}
-> > -        ln -sf ${PN}-initial-env-${MACHINE}-${PV}-${PR}
-> ${D}/${sysconfdir}/${PN}-initial-env-${MACHINE}
-> > -        ln -sf ${PN}-initial-env-${MACHINE}-${PV}-${PR}
-> ${D}/${sysconfdir}/${PN}-initial-env
-> > +        install -D -m 644 ${B}/u-boot-initial-env
-> ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}
-> > +        ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}
-> ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${MACHINE}
-> > +        ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}
-> ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}
-> >      fi
+> >  B = "${WORKDIR}/${BPN}-${PV}"
+> > -PNBLACKLIST[bpftool] = "Needs forward porting to kernel 5.2+"
+> > +PNBLACKLIST[bpftool] ?= "Needs forward porting to kernel 5.2+"
 > >
-> >      if [ -n "${UBOOT_ELF}" ]
-> > @@ -243,7 +247,7 @@ PACKAGE_BEFORE_PN +=3D "${PN}-env"
-> >
-> >  RPROVIDES_${PN}-env +=3D "u-boot-default-env"
-> >  FILES_${PN}-env =3D " \
-> > -    ${sysconfdir}/${PN}-initial-env* \
-> > +    ${sysconfdir}/${UBOOT_INITIAL_ENV}* \
-> >      ${sysconfdir}/fw_env.config \
-> >  "
-> >
-> > @@ -267,10 +271,10 @@ do_deploy () {
-> >                      ln -sf u-boot-${type}-${PV}-${PR}.${UBOOT_SUFFIX}
-> ${UBOOT_BINARY}
-> >
-> >                      # Deploy the uboot-initial-env
-> > -                    install -D -m 644
-> ${B}/${config}/u-boot-initial-env-${type}
-> ${DEPLOYDIR}/${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR}
-> > +                    install -D -m 644
-> ${B}/${config}/u-boot-initial-env-${type}
-> ${DEPLOYDIR}/${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR}
-> >                      cd ${DEPLOYDIR}
-> > -                    ln -sf
-> ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR}
-> ${PN}-initial-env-${MACHINE}-${type}
-> > -                    ln -sf
-> ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${PN}-initial-env-${typ=
-e}
-> > +                    ln -sf
-> ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR}
-> ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}
-> > +                    ln -sf
-> ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR}
-> ${UBOOT_INITIAL_ENV}-${type}
-> >                  fi
-> >              done
-> >              unset j
-> > @@ -285,10 +289,10 @@ do_deploy () {
-> >          ln -sf ${UBOOT_IMAGE} ${UBOOT_BINARY}
-> >
-> >          # Deploy the uboot-initial-env
-> > -        install -D -m 644 ${B}/u-boot-initial-env
-> ${DEPLOYDIR}/${PN}-initial-env-${MACHINE}-${PV}-${PR}
-> > +        install -D -m 644 ${B}/u-boot-initial-env
-> ${DEPLOYDIR}/${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}
-> >          cd ${DEPLOYDIR}
-> > -        ln -sf ${PN}-initial-env-${MACHINE}-${PV}-${PR}
-> ${PN}-initial-env-${MACHINE}
-> > -        ln -sf ${PN}-initial-env-${MACHINE}-${PV}-${PR}
-> ${PN}-initial-env
-> > +        ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}
-> ${UBOOT_INITIAL_ENV}-${MACHINE}
-> > +        ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}
-> ${UBOOT_INITIAL_ENV}
-> >      fi
-> >
-> >      if [ -e ${WORKDIR}/fw_env.config ] ; then
 > > --
-> > 2.26.2
 > >
-> >=20
+> > ========================================================================
+> > Robert P. J. Day                                 Ottawa, Ontario, CANADA
+> >                          http://crashcourse.ca
+> >
+> > Twitter:                                       http://twitter.com/rpjday
+> > LinkedIn:                               http://ca.linkedin.com/in/rpjday
+> > ========================================================================
+> >
 >
 
---0000000000004ea0ed05a69b8ea2
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-- 
 
-<div dir=3D"ltr">Sorry, my bad, will resend it to OE mail list.<div><br></d=
-iv><div>//Ming Liu</div></div><br><div class=3D"gmail_quote"><div dir=3D"lt=
-r" class=3D"gmail_attr">Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">=
-raj.khem@gmail.com</a>&gt; =E6=96=BC 2020=E5=B9=B45=E6=9C=8827=E6=97=A5 =E9=
-=
-=80=B1=E4=B8=89 =E4=B8=8A=E5=8D=881:16=E5=AF=AB=E9=81=93=EF=BC=9A<br></div=
-><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
--left:1px solid rgb(204,204,204);padding-left:1ex">send to oe-core ml pleas=
-e<br>
-<br>
-On Tue, May 26, 2020 at 6:16 AM Ming Liu &lt;<a href=3D"mailto:liu.ming50@=
-gmail.com" target=3D"_blank">liu.ming50@gmail.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; From: Ming Liu &lt;<a href=3D"mailto:ming.liu@toradex.com" target=3D"=
-_blank">ming.liu@toradex.com</a>&gt;<br>
-&gt;<br>
-&gt; It defaults to ${PN}-initial-env, no functional changes with current<=
-br>
-&gt; implementation, but this allows it to be changed in individual u-boot=
-<br>
-&gt; recipes.<br>
-&gt;<br>
-&gt; The major purpose for introducing this, is that the users might have<=
-br>
-&gt; some scripts on targets like:<br>
-&gt; ```<br>
-&gt; /sbin/fw_setenv -f /etc/u-boot-initial-env<br>
-&gt; ```<br>
-&gt;<br>
-&gt; and it should be able to run against a identical path generated by<br=
->
-&gt; different u-boot recipes.<br>
-&gt;<br>
-&gt; Signed-off-by: Ming Liu &lt;<a href=3D"mailto:ming.liu@toradex.com" t=
-arget=3D"_blank">ming.liu@toradex.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 meta/recipes-bsp/u-boot/u-boot.inc | 32 +++++++++++++++++------=
--------<br>
-&gt;=C2=A0 1 file changed, 18 insertions(+), 14 deletions(-)<br>
-&gt;<br>
-&gt; diff --git a/meta/recipes-bsp/u-boot/u-boot.inc b/meta/recipes-bsp/u-=
-boot/u-boot.inc<br>
-&gt; index 718435f13f..e408549424 100644<br>
-&gt; --- a/meta/recipes-bsp/u-boot/u-boot.inc<br>
-&gt; +++ b/meta/recipes-bsp/u-boot/u-boot.inc<br>
-&gt; @@ -60,6 +60,10 @@ UBOOT_ENV_BINARY ?=3D &quot;${UBOOT_ENV}.${UBOOT_E=
-NV_SUFFIX}&quot;<br>
-&gt;=C2=A0 UBOOT_ENV_IMAGE ?=3D &quot;${UBOOT_ENV}-${MACHINE}-${PV}-${PR}.=
-${UBOOT_ENV_SUFFIX}&quot;<br>
-&gt;=C2=A0 UBOOT_ENV_SYMLINK ?=3D &quot;${UBOOT_ENV}-${MACHINE}.${UBOOT_EN=
-V_SUFFIX}&quot;<br>
-&gt;<br>
-&gt; +# Default name of u-boot initial env, but enable individual recipes =
-to change<br>
-&gt; +# this value.<br>
-&gt; +UBOOT_INITIAL_ENV ?=3D &quot;${PN}-initial-env&quot;<br>
-&gt; +<br>
-&gt;=C2=A0 # U-Boot EXTLINUX variables. U-Boot searches for /boot/extlinux=
-/extlinux.conf<br>
-&gt;=C2=A0 # to find EXTLINUX conf file.<br>
-&gt;=C2=A0 UBOOT_EXTLINUX_INSTALL_DIR ?=3D &quot;/boot/extlinux&quot;<br>
-&gt; @@ -155,10 +159,10 @@ do_install () {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=
-=C2=A0 ln -sf u-boot-${type}-${PV}-${PR}.${UBOOT_SUFFIX} ${D}/boot/${UBOOT=
-_BINARY}<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=
-=C2=A0 # Install the uboot-initial-env<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 install -D -m 644 ${B}/${config}/u-boot-initial-env-${type} ${D}/${sys=
-confdir}/${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR}<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 ln -sf ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysconf=
-dir}/${PN}-initial-env-${MACHINE}-${type}<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 ln -sf ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysconf=
-dir}/${PN}-initial-env-${type}<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 ln -sf ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysconf=
-dir}/${PN}-initial-env<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 install -D -m 644 ${B}/${config}/u-boot-initial-env-${type} ${D}/${sys=
-confdir}/${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysc=
-onfdir}/${UBOOT_INITIAL_ENV}-${MACHINE}-${type}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysc=
-onfdir}/${UBOOT_INITIAL_ENV}-${type}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR} ${D}/${sysc=
-onfdir}/${UBOOT_INITIAL_ENV}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 fi<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 done<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 unset j<br>
-&gt; @@ -169,9 +173,9 @@ do_install () {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ln -sf ${UBOOT_IMAGE} ${D}/boot/${U=
-BOOT_BINARY}<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 # Install the uboot-initial-env<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 install -D -m 644 ${B}/u-boot-initial-en=
-v ${D}/${sysconfdir}/${PN}-initial-env-${MACHINE}-${PV}-${PR}<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 ln -sf ${PN}-initial-env-${MACHINE}-${PV=
-}-${PR} ${D}/${sysconfdir}/${PN}-initial-env-${MACHINE}<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 ln -sf ${PN}-initial-env-${MACHINE}-${PV=
-}-${PR} ${D}/${sysconfdir}/${PN}-initial-env<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 install -D -m 644 ${B}/u-boot-initial-en=
-v ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-$=
-{PV}-${PR} ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}-${MACHINE}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-$=
-{PV}-${PR} ${D}/${sysconfdir}/${UBOOT_INITIAL_ENV}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 fi<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 if [ -n &quot;${UBOOT_ELF}&quot; ]<br>
-&gt; @@ -243,7 +247,7 @@ PACKAGE_BEFORE_PN +=3D &quot;${PN}-env&quot;<br>
-&gt;<br>
-&gt;=C2=A0 RPROVIDES_${PN}-env +=3D &quot;u-boot-default-env&quot;<br>
-&gt;=C2=A0 FILES_${PN}-env =3D &quot; \<br>
-&gt; -=C2=A0 =C2=A0 ${sysconfdir}/${PN}-initial-env* \<br>
-&gt; +=C2=A0 =C2=A0 ${sysconfdir}/${UBOOT_INITIAL_ENV}* \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 ${sysconfdir}/fw_env.config \<br>
-&gt;=C2=A0 &quot;<br>
-&gt;<br>
-&gt; @@ -267,10 +271,10 @@ do_deploy () {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=
-=C2=A0 ln -sf u-boot-${type}-${PV}-${PR}.${UBOOT_SUFFIX} ${UBOOT_BINARY}<b=
-r>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=
-=C2=A0 # Deploy the uboot-initial-env<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 install -D -m 644 ${B}/${config}/u-boot-initial-env-${type} ${DEPLOYDI=
-R}/${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 install -D -m 644 ${B}/${config}/u-boot-initial-env-${type} ${DEPLOYDI=
-R}/${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=
-=C2=A0 cd ${DEPLOYDIR}<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 ln -sf ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${PN}-initial-=
-env-${MACHINE}-${type}<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 ln -sf ${PN}-initial-env-${MACHINE}-${type}-${PV}-${PR} ${PN}-initial-=
-env-${type}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR} ${UBOOT_INI=
-TIAL_ENV}-${MACHINE}-${type}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-${type}-${PV}-${PR} ${UBOOT_INI=
-TIAL_ENV}-${type}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 fi<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 done<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 unset j<br>
-&gt; @@ -285,10 +289,10 @@ do_deploy () {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ln -sf ${UBOOT_IMAGE} ${UBOOT_BINAR=
-Y}<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 # Deploy the uboot-initial-env<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 install -D -m 644 ${B}/u-boot-initial-en=
-v ${DEPLOYDIR}/${PN}-initial-env-${MACHINE}-${PV}-${PR}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 install -D -m 644 ${B}/u-boot-initial-en=
-v ${DEPLOYDIR}/${UBOOT_INITIAL_ENV}-${MACHINE}-${PV}-${PR}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cd ${DEPLOYDIR}<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 ln -sf ${PN}-initial-env-${MACHINE}-${PV=
-}-${PR} ${PN}-initial-env-${MACHINE}<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 ln -sf ${PN}-initial-env-${MACHINE}-${PV=
-}-${PR} ${PN}-initial-env<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-$=
-{PV}-${PR} ${UBOOT_INITIAL_ENV}-${MACHINE}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ln -sf ${UBOOT_INITIAL_ENV}-${MACHINE}-$=
-{PV}-${PR} ${UBOOT_INITIAL_ENV}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 fi<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 if [ -e ${WORKDIR}/fw_env.config ] ; then<br>
-&gt; --<br>
-&gt; 2.26.2<br>
-&gt;<br>
-&gt; <br>
-</blockquote></div>
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                         http://crashcourse.ca
 
---0000000000004ea0ed05a69b8ea2--
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
