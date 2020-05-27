@@ -1,59 +1,78 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.4890.1590582165631003209
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com [216.168.135.167])
+ by mx.groups.io with SMTP id smtpd.web12.5814.1590585666604021680
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 May 2020 05:22:46 -0700
+ Wed, 27 May 2020 06:21:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=47738 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jdv51-0007ch-NH; Wed, 27 May 2020 15:22:44 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-dbussy: Upgrade 1.2.1 -> 1.3
-Date: Wed, 27 May 2020 15:22:29 +0300
-Message-Id: <20200527122229.24023-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200527122229.24023-1-leon.anavi@konsulko.com>
-References: <20200527122229.24023-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=missing; spf=none, err=permanent DNS error (domain: balister.org, ip: 216.168.135.167, mailfrom: philip@balister.org)
+Received: (qmail 22089 invoked by uid 1003); 27 May 2020 13:21:10 -0000
+Received: from unknown (HELO ?192.168.11.146?) (philip@opensdr.com@73.152.143.112)
+  by mail.geekisp.com with (ECDHE-RSA-AES128-GCM-SHA256 encrypted) SMTP; 27 May 2020 13:21:10 -0000
+Subject: Re: [OE-core] OpenEmbedded Happy Hour
+From: "Philip Balister" <philip@balister.org>
+To: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>,
+ openembedded-core <openembedded-core@lists.openembedded.org>,
+ "openembedded-members@lists.openembedded.org"
+ <openembedded-members@lists.openembedded.org>,
+ Yocto Project <yocto@yoctoproject.org>
+References: <160F3EC1CDCCEA98.6323@lists.openembedded.org>
+Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
+ mQENBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
+ HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
+ rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
+ 2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
+ fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
+ AAG0JVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz6JAT4EEwECACgCGyMG
+ CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
+ nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
+ 3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
+ YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
+ 3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
+ yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4Yxi5AQ0ETo83gQEIAPs+ZC0R
+ gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
+ GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
+ uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
+ LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
+ gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAYkBJQQYAQIADwIbDAUC
+ WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
+ 1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
+ ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
+ icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
+ ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
+ 6eUfr0u7CwnEyqiQ
+Message-ID: <612c03a9-0494-aa33-fb36-6067200e7d35@balister.org>
+Date: Wed, 27 May 2020 09:21:01 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
+MIME-Version: 1.0
+In-Reply-To: <160F3EC1CDCCEA98.6323@lists.openembedded.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Upgrade to release 1.3.
+Just a reminder this happens later "today". As always consult:
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../python/{python3-dbussy_1.2.1.bb => python3-dbussy_1.3.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-dbussy_1.2.1.bb => python3-dbussy_1.3.bb} (89%)
+https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+May+27&iso=20200527T21&p1=%3A&ah=1
 
-diff --git a/meta-python/recipes-devtools/python/python3-dbussy_1.2.1.bb b/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-dbussy_1.2.1.bb
-rename to meta-python/recipes-devtools/python/python3-dbussy_1.3.bb
-index ac4b8c2aa..08f5e940f 100644
---- a/meta-python/recipes-devtools/python/python3-dbussy_1.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
- 
- SRC_URI = "git://github.com/ldo/dbussy.git"
- 
--SRCREV = "d0ec0223f3797e1612d835e71694a1083881149f"
-+SRCREV = "37ede4242b48def73ada46c2747a4c5cae6abf45"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.17.1
+for the local day and time.
 
+Philip
+
+On 5/15/20 11:56 AM, Philip Balister wrote:
+> I've made a wiki page to track these:
+> 
+> https://www.openembedded.org/wiki/Happy_Hours
+> 
+> Then next one is scheduled for 2100 UTC on May 27. This is late evening
+> for Europe and morning for New Zealand, so hopefully we see some
+> different faces. The meeting info is on the wiki page.
+> 
+> There is no set agenda, so bring some projects to talk about with the
+> community.
+> 
+> 
+> Philip
+> 
+> 
+> 
+> 
