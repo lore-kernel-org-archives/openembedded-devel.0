@@ -1,180 +1,99 @@
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.71])
- by mx.groups.io with SMTP id smtpd.web11.1144.1590611517977511704
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+ by mx.groups.io with SMTP id smtpd.web11.1858.1590613517025292685
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 May 2020 13:31:58 -0700
+ Wed, 27 May 2020 14:05:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=NgHd2NaL;
- spf=pass (domain: windriver.com, ip: 40.107.244.71, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=iFdP44lpaLREnCp2TV4Ak6Ldsy20rHi0bIY1C2o4A4KZls3iDt5SL+0jSQdrva4blz7GNNPN0rDC+GyfB0vManx2zA5Ye2LnvU8gFjvnTgDRY/STLAdukhon16i/+CCi/XLXhhXIuO6cQ8VRhivhsEqKr/qUyEyesxwzSlQnwzenlOrTXgGTryDBYjuNeIpk7oecUiLRD7HCGpKYwucMPLzDIdV/C8dfUrleNWqWRQTDAuEqF3A/piYbbMamD6PtmU32DvJDxOI+0visjKNw+BhxHvi+cJ/ccXDafHZe0YO4/cTb3K/CTUtupGRmdXzxfxcad8sFLlQwAkJpicV9Ng==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8PnnEVu88pWMk5PA46qkYALhQR6m5IHd5WfrUaTNgUE=;
- b=k5RWUXD6ynFVq100PHUaeXYnPZ25Olw7v00q6J3N3Rd0T8Yito7RjWktRCSjj2JmAo066DlnJ8bsWsHrFk4Snyz9gs4tG+xqB1SGcOi+GmUAomekab7AFCL2J/HwlXK/Zs7dDui5zMtWy6N6kKoZ1B/4ww5crI55gsK5adlkFHI9ojAaoEdFxPD7qTo5pSBjr7I7g601ar5UFL5udVJ0ZaDVyf4ZygBIaM4HdM9Yr87vjPSucbpNElI10FS7TPk6hBhVjn6gPOZ8XbvsNTvVcf8N2lIqw/SOl2ewcz1E3lplqaGLPDpBbxPtfNsfLkH82OEujMvWX9jeHea0njqhGQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8PnnEVu88pWMk5PA46qkYALhQR6m5IHd5WfrUaTNgUE=;
- b=NgHd2NaL3Ccgz2HfyZB5DSLT1wAA5OJPrIr1l+v8xEbQLV2tggEOp1Lsfl2EcY6vTjI1A1UrnQ/1QWgATkmRP31Eo0vLwfViMyrov5w8VNneestxjXitI63g2+xkbZvohVbaaS7n0kYgVrVylxPLrVp6aLeI/EKnWWqBJnUzGeM=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB1473.namprd11.prod.outlook.com (2603:10b6:405:a::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3021.23; Wed, 27 May
- 2020 20:31:55 +0000
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3045.018; Wed, 27 May 2020
- 20:31:55 +0000
-Subject: Re: [oe] [meta-python][PATCH 1/2] python3-click: Upgrade 7.0 -> 7.1.2
-To: Leon Anavi <leon.anavi@konsulko.com>,
- openembedded-devel@lists.openembedded.org
-References: <20200527122229.24023-1-leon.anavi@konsulko.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <aa3a52da-85cb-b584-5fef-cd9504a8f987@windriver.com>
-Date: Wed, 27 May 2020 16:31:53 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
-In-Reply-To: <20200527122229.24023-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0119.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2c::28) To BN6PR11MB0003.namprd11.prod.outlook.com
- (2603:10b6:405:61::26)
-Return-Path: trevor.gamblin@windriver.com
-MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0119.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2c::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3045.19 via Frontend Transport; Wed, 27 May 2020 20:31:54 +0000
-X-Originating-IP: [174.115.236.231]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 49ad064b-e984-459d-d2eb-08d8027cfecf
-X-MS-TrafficTypeDiagnostic: BN6PR11MB1473:
-X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB1473A0FA0702E1BCAAA892149FB10@BN6PR11MB1473.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:923;
-X-Forefront-PRVS: 04163EF38A
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	F49S0Tl+7rtqYoh8gl26tzkSOxtS9wJY+VB2tXyO8P7qBo8jt0ghblhXhHTgEafwLUlzF9JnpZ//mnWac/Y1ixbRRwWM91SxtC3WHWpLj2M7CWT5UUz7fh5m0YsuvcxeHpaXcrlzSrMWOoD28RYJUr57GaTijXUq25hAkjB8aiQnhmJff0pNHhFV7QDrHiwWepFAK03g5DHfde5AnQZf9viWIUiX/KnQjesMvbD6YbMgC3jV7HGYZCOWDeQoc/eWSBFA/CXYbEQF9T2/acJKfNV5mXNriRPldboDPwlXAzXJ/L75rDqZuhCLtEwzQHAzWL8Ko/l86A3lxqrPveFKUBlNfRj8CW4d50ec/Cvnj1R19yzxiTvB8MKERZUFkL60vm6tPUtkYQGEnXB9Vs/N/rb4U+H3bB3ZLOtF46toevGyXgpdRirApW85ZuiAwiWx22jy5J2a7IGg4DJ/y7AiUA==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(366004)(136003)(346002)(39850400004)(376002)(396003)(8936002)(44832011)(6486002)(8676002)(33964004)(2616005)(66946007)(16576012)(316002)(186003)(166002)(956004)(2906002)(16526019)(83380400001)(66476007)(66556008)(26005)(5660300002)(52116002)(53546011)(86362001)(478600001)(31686004)(966005)(36756003)(31696002)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	0BtzZqUafGON0Ooj0Rt0lhcjkeaQOVXTkhEMSaUKkl9Gkr7N7TA9sa9J2SsxxgLgiO0E2hz8Y7VEMQCVVBLkDiJ3tljGMg2SI9tYwZyWJj2zDWwKC3bF51DSknCTSanwASLJjeIVexGFbFL7hRSIV5NHYw3EJzRIngNx2Fd6FEhnDPMcaPPLIDjEKShxIv65FaZYn3SfkeMTCCSU1ozPzRNf0z9wF8cpBSwjVgnJAbM8wmTB3j/mptS+xd8LiCRu125FCVR1dGohz1F9g+1g2CA1be3o4pgqLxL4HBUcsz4n73uSulZehpTpn8DBmfLgWMBz6cnE/LOtBVEVgRmJrdt+mWyjamWKiWg6Lxe205jjZiAubrZRd1iVj+df0MwM63sQKxJgnT9qAGZyNbqxK/aQr2PlLuuqZ5cj7a8aLj4y9HabpGr1m0axhQiopUjR8HCce7UDHFJ7xgz9Uoko1DyzNvNSzw4cLtWqWahYik0TVptylSf749TOs9X55IuE
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 49ad064b-e984-459d-d2eb-08d8027cfecf
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 May 2020 20:31:55.0382
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: h7D+eVTSNl58L3zBWb4MOd1L5nFsYzv3L5YuewzZAWR8Q2jGmrlWKVPrdPQouvl4ENPiVdpAxgMRKoQmp/1h913RK0cHDhRsTDNEgHRmpw8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1473
-Content-Type: multipart/alternative;
- boundary="------------8A0A37776FAD29F73F1BB885"
-Content-Language: en-US
+ dkim=pass header.i=@koncepto.io header.s=default header.b=WM5thLw0;
+ spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
+Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
+	by koncepto.io (Postfix) with ESMTPSA id 5426760046;
+	Wed, 27 May 2020 23:05:11 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1590613511;
+	bh=iX4bx7C8eK39UjX8yl2IsThniTp4otRIogtC1Jef2Hg=;
+	h=From:To:Cc:Subject:Date:From;
+	b=WM5thLw01skvpX9JqXSu5YjgupCoh60Qb/zSxRIYv0feImit9aKjcFN7mGjzVqKNa
+	 kDLju38binolMsg0dSQHEpRVnR5tOIU9c8JnLyF6ooAD0BLfDcROstEYfD6jVI5UzG
+	 CcFn4X8nDsVhBxSXvneVFDZv2oQy+22LoifjMMD6JB7KJaJjiZRYK0GqHiAXcQzNJI
+	 YiEHFMSAC2T5x2HbGXeIQM8TN1fBYsdrH/6mB991pNiLsQ85Ua83XU7rkEydfAGlRa
+	 v6IML4c3buAQTnRTn85GyCIcZEYVeyV9E07iemmeQhSUfgSwwtI55qz6jh3/UQhW1P
+	 gv/xag7F5jfbQ==
+From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
+Subject: [meta-networking][PATCH] uftp: upgrade 4.10.2 -> 5.0
+Date: Wed, 27 May 2020 23:05:08 +0200
+Message-Id: <1590613508-15935-1-git-send-email-pjtexier@koncepto.io>
+X-Mailer: git-send-email 2.7.4
 
---------------8A0A37776FAD29F73F1BB885
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Full changelog:
 
+Version 5.0 - 4/22/2020
+  Major security updates.  The key exchange and key derivation algorithms
+    were modified and supported algorithms were pruned using TLS 1.3 as a
+    basis.  This includes:
+  - HKDF used in multiple stages for key derivation from raw shared secrets.
+  - Included addtional context in key derivation and signatures to protect
+    against replay attacks and downgrade attacks.
+  - Reduced set of supported EC curves to those supported by TLS 1.3
+  - Removed RSA key exchange which does not provide perfect forward secrecy.
+    All key exchanges now use ECDH.
+  - Removed support for SHA-1 hashes in key exchanges.
+  - Supported symmetric ciphers are AES in AEAD mode (GCM or CCM).
+  - Increased supported RSA key sizes
+  Encrypted sessions are now enabled by default.  It can be disabled by
+    specifying "none" for the key type in the server's -Y option.
+  Backward compatibility retained for version 4.x in clients and proxies.
+    When communicating with a 4.x server, only allow algorithms and key
+    exchange modes permitted in the new version.
+  Clients and proxies no longer need to use signature keys that match the
+    type and size used by the server.  As a result, the -k and -K options to
+    the client now only accept a single key instead of multiple.  The proxy
+    still supports multiple keys for 4.x compatibility, however only the first
+    key listed is used for any version 5.x session.
+  Proxies now send their keys in a separate message instead of injecting them
+    in the ANNOUNCE sent by the server.  This allows clients to be fully
+    aware of proixes and allows them to authenticate servers and proxies
+    separately.
+  Format of client's server list modified to specify the proxy that a server
+    communicates through.  Fingerprints listed in this file now always
+    specify the server as opposed to having the proxy's key in some cases.
+  Added -R option to client to specify a list of proxies along with their
+    public key fingerprints.  The old use of -R to specify a version 4.x
+    response proxy has moved to -r.
+  Previously, using -S in the client or proxy to specify a server list would
+    automatically enable source specific multicast (SSM).  The use of SSM is
+    now enabled separately via the -o option on both the client and proxy.
+  Fixed a bug that caused ECDSA signatures created on Linux with curve
+    secp521r1 from being verified successfully on Windows.
+  Fixed cleanup on clients and proxies to prevent occasional crashes on
+    shutdown under Windows.
+  Update timstamps in messages to use 64-bit microseconds since the epoch,
+    addressing Y2038 issues.
 
-On 5/27/20 8:22 AM, Leon Anavi wrote:
-> Upgrade to release 7.1.2.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   .../{python3-click_7.0.bb => python3-click_7.1.2.bb}       | 7 +++----
->   1 file changed, 3 insertions(+), 4 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-click_7.0.bb => python3-click_7.1.2.bb} (72%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-click_7.0.bb b/meta-python/recipes-devtools/python/python3-click_7.1.2.bb
-> similarity index 72%
-> rename from meta-python/recipes-devtools/python/python3-click_7.0.bb
-> rename to meta-python/recipes-devtools/python/python3-click_7.1.2.bb
-> index cfa3e0fe4..fa29d11ab 100644
-> --- a/meta-python/recipes-devtools/python/python3-click_7.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-click_7.1.2.bb
-> @@ -6,12 +6,11 @@ Line Interface Creation Kit". It's highly configurable but comes with \
->   sensible defaults out of the box."
->   HOMEPAGE = "http://click.pocoo.org/"
->   LICENSE = "BSD-3-Clause"
-> -LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=c13ed890b210a882c1778216694c98c7"
-> +LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=1fa98232fd645608937a0fdc82e999b8"
->   
-> -SRC_URI[md5sum] = "7f53d50f7b7373ebc7963f9ff697450a"
-> -SRC_URI[sha256sum] = "5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7"
-> +SRC_URI[md5sum] = "53692f62cb99a1a10c59248f1776d9c0"
-> +SRC_URI[sha256sum] = "d2b5255c7c6349bc1bd1e59e08cd12acbbd63ce649f2588755783aa94dfb6b1a"
->   
-> -PYPI_PACKAGE = "Click"
->   inherit pypi setuptools3
->   
->   UPSTREAM_CHECK_REGEX = "click/(?P<pver>\d+(\.\d+)+)/"
->
-> 
-
---------------8A0A37776FAD29F73F1BB885
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 5/27/20 8:22 AM, Leon Anavi wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20200527122229.24023-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 7.1.2.
-
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
-    <blockquote type="cite" cite="mid:20200527122229.24023-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- .../{python3-click_7.0.bb =&gt; python3-click_7.1.2.bb}       | 7 &#43;&#43;&#43;----
- 1 file changed, 3 insertions(&#43;), 4 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-click_7.0.bb =&gt; python3-click_7.1.2.bb} (72%)
+ meta-networking/recipes-support/uftp/{uftp_4.10.2.bb => uftp_5.0.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-networking/recipes-support/uftp/{uftp_4.10.2.bb => uftp_5.0.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-click_7.0.bb b/meta-python/recipes-devtools/python/python3-click_7.1.2.bb
-similarity index 72%
-rename from meta-python/recipes-devtools/python/python3-click_7.0.bb
-rename to meta-python/recipes-devtools/python/python3-click_7.1.2.bb
-index cfa3e0fe4..fa29d11ab 100644
---- a/meta-python/recipes-devtools/python/python3-click_7.0.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-click_7.1.2.bb
-@@ -6,12 &#43;6,11 @@ Line Interface Creation Kit&quot;. It's highly configurable but comes with \
- sensible defaults out of the box.&quot;
- HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://click.pocoo.org/">&quot;http://click.pocoo.org/&quot;</a>
- LICENSE = &quot;BSD-3-Clause&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.rst;md5=c13ed890b210a882c1778216694c98c7">&quot;file://LICENSE.rst;md5=c13ed890b210a882c1778216694c98c7&quot;</a>
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.rst;md5=1fa98232fd645608937a0fdc82e999b8">&quot;file://LICENSE.rst;md5=1fa98232fd645608937a0fdc82e999b8&quot;</a>
+diff --git a/meta-networking/recipes-support/uftp/uftp_4.10.2.bb b/meta-networking/recipes-support/uftp/uftp_5.0.bb
+similarity index 77%
+rename from meta-networking/recipes-support/uftp/uftp_4.10.2.bb
+rename to meta-networking/recipes-support/uftp/uftp_5.0.bb
+index 8e35ee1..4eeb62d 100644
+--- a/meta-networking/recipes-support/uftp/uftp_4.10.2.bb
++++ b/meta-networking/recipes-support/uftp/uftp_5.0.bb
+@@ -7,8 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/uftp-multicast/files/source-tar/"
  
--SRC_URI[md5sum] = &quot;7f53d50f7b7373ebc7963f9ff697450a&quot;
--SRC_URI[sha256sum] = &quot;5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7&quot;
-&#43;SRC_URI[md5sum] = &quot;53692f62cb99a1a10c59248f1776d9c0&quot;
-&#43;SRC_URI[sha256sum] = &quot;d2b5255c7c6349bc1bd1e59e08cd12acbbd63ce649f2588755783aa94dfb6b1a&quot;
+ SRC_URI = "${SOURCEFORGE_MIRROR}/uftp-multicast/source-tar/uftp-${PV}.tar.gz"
+-SRC_URI[md5sum] = "db0519bf7b1e0329449e81c1e68262f8"
+-SRC_URI[sha256sum] = "ecab6ab07fe0ebaf7bfe35d99fe2da28ede3ddc6f21f825d3b259cf171258505"
++SRC_URI[sha256sum] = "562f71ea5a24b615eb491f5744bad01e9c2e58244c1d6252d5ae98d320d308e0"
  
--PYPI_PACKAGE = &quot;Click&quot;
- inherit pypi setuptools3
+ DEPENDS = "openssl"
  
- UPSTREAM_CHECK_REGEX = &quot;click/(?P&lt;pver&gt;\d&#43;(\.\d&#43;)&#43;)/&quot;
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-  </body>
-</html>
+-- 
+2.7.4
 
---------------8A0A37776FAD29F73F1BB885--
