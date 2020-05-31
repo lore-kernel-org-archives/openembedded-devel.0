@@ -1,94 +1,141 @@
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com [209.85.214.194])
- by mx.groups.io with SMTP id smtpd.web12.18129.1590941800187763992
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+ by mx.groups.io with SMTP id smtpd.web11.18020.1590941800841892803
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 31 May 2020 09:16:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ODR3X1/W;
- spf=pass (domain: gmail.com, ip: 209.85.214.194, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f194.google.com with SMTP id n9so119474plk.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=YKgc6k/J;
+ spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f177.google.com with SMTP id t7so1521442pgt.3
         for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:16:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=L0nK40X/IxBZwCvEUcf2z5EU9LDw6SPFj9LRdA7FD48=;
-        b=ODR3X1/WzSM5jpZf/ppOBiuIikw6G+zaF7uCyridy0kaQQG6Kj0lhA52Xdnxl+J8V7
-         fyG/gt1oOgr+nT8U/hFN2Gmtg6atnYxmT8K117DuKSF71vfr8lr26ryJ9fT8oskGNzGO
-         7wHEZjgfe9U7R0wwsp1U4YCqVZVaL8NXPRlKIeIIj8k1p2gPpGInxOcLBywmEAuTfFxw
-         qLxRI4ntKlr7126zg7f3y8aaTI7/1/oVNuB7Ot1JgVAI3PLK6N05Sr3krD6wvN5pWXCc
-         YgAwANjS+FnqFWjQVuhSTTWJmkVlWhEjZYXk4BW5ZpXrT+eHb21O6aIVjzg207HRgBD5
-         1cqQ==
+        bh=LVZzE2mxaWtMQhuSz9FKNb249YqsU6atyqa2mD7uKAQ=;
+        b=YKgc6k/JeELpyoV8q9k4riE1Ww8XGxEjd3QD74TALcEGtOOMba74Qdn9u71YDjwykA
+         JMbvH06671HVCjeJTakFNJBrL2qWkPoNCYuD8K1W/Ldx3jJxlQwU+1TvkdYlhYAi11Ac
+         gFg36tKnPJ/QATz5T39pduBOuukJvK0OPJsNn8daXGVM+r7RWzX5R4CoC3kdGXia8ZHR
+         Ol6k6Y/es50PuDVEArLCZ28Fm4eybsKdzBWQ8I+CYx4ojy1AfJ1jbUIVZE9DJRGkRTK/
+         OFM+3628Blcv0iU1XgirO64iifyfC2pN/+g0b8WYYWEt5vd3aOXj+yQLoIqVXqlVIIK6
+         yqyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=L0nK40X/IxBZwCvEUcf2z5EU9LDw6SPFj9LRdA7FD48=;
-        b=RlzsHZJU2VV6J4URGH/IquMgFl9pQsG54VC9zpFLD8fHd3Tip8zr+Yg4gPIYnsgsXc
-         U78u6cxpkZvQrugBmJ36n+J/4USmRlHTr3hsc15jrQr1FbxxKZXT5hedPPokUHILgSAT
-         sbcbssW0BpPFNl599ik4xnDnPLoJK8MFAJ1/XJilW4TGqweZjgaq0nD91ikYYJNWMseE
-         4t/MwzaF8SWNRuznMNL48wYO4mlJit0FoLD71oaGajStLgAE+jUrXKgB62e1Pnjrnr0j
-         mm3YBD1MHQjuv7vt8my8IutcEzapqZCp6dWg0zcIAsJO/jcWxMIaIz8rkxEpKw8iqzf9
-         Dl5A==
-X-Gm-Message-State: AOAM531+6ELnZ9+UmHy0b0WZ/2o+fKoMv2eO4BJxsd/fjouuNoW+aMWn
-	7v88lJRODDNP0J46xvPm/lk6UYVI
-X-Google-Smtp-Source: ABdhPJxtaLDaKliq3/3rug15vbrEtCY1+N9qBxc/JiOklo6FZlsqx7peARmTbmTaQ1Nu78odb+RoEw==
-X-Received: by 2002:a17:902:be0e:: with SMTP id r14mr9915159pls.30.1590941799322;
-        Sun, 31 May 2020 09:16:39 -0700 (PDT)
+        bh=LVZzE2mxaWtMQhuSz9FKNb249YqsU6atyqa2mD7uKAQ=;
+        b=jvMjNXU/QnP0FWDIRzkarFnmNvdkNEQmWW5aDz8hIr6uzEdpa9mCYLFyelmg0L0YOn
+         N94MdbioMT5KeVvkZDaV/4nMuHJBHXmFbKXQZOBwALmEmB8oxCL+Jytv3ewZcCkcPdHy
+         UvojKJXFYXLTQFLbZF1bZgrcpz7Hkwusbu+JHDcMLUSxq1SwtjkAcqlC2IS0i1iYbo4v
+         ewE9uSeG1qSAR01dy9OCu/1/Kf01G0iO43nvC2wXhT4FFECPh257R891GxlNJz3tiq/G
+         sEyZdDuO4i8daZAFgWIk4t5zEX1C5X1vVP1PxuY1AKigF2+O6fW5tdD3W7C4rCiTJ1qq
+         NQsg==
+X-Gm-Message-State: AOAM532xBMAF7vD1NiM7cEIzpUJUaVG0KFyWTmyEO+ne2DATZYOJqS53
+	sm7T+ODHY4qqY5qkCzM1tBD/PI5J
+X-Google-Smtp-Source: ABdhPJyZBVm+DzHxmSM361Curx+M+9+YpD0karI9fcjtzgmYo4SQt8io9k3kpirOg7YvgFICRzO1gA==
+X-Received: by 2002:a63:c407:: with SMTP id h7mr15794893pgd.174.1590941800173;
+        Sun, 31 May 2020 09:16:40 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:936:376a:3aad:6139])
-        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.16.38
+        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.16.39
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 May 2020 09:16:38 -0700 (PDT)
+        Sun, 31 May 2020 09:16:39 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 11/35] postfix: Upgrade to 3.4.10 and compile with -fcommon
-Date: Sun, 31 May 2020 09:15:58 -0700
-Message-Id: <08a5f058da2c6bf0221d1ee4bc7783270494b21a.1590941674.git.akuster808@gmail.com>
+Subject: [dunfell 12/35] postfix: Upgrade 3.4.10 -> 3.4.12
+Date: Sun, 31 May 2020 09:15:59 -0700
+Message-Id: <de5df836def1f2592b902c0d7b03d80a3e168105.1590941674.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1590941673.git.akuster808@gmail.com>
 References: <cover.1590941673.git.akuster808@gmail.com>
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Adrian Bunk <bunk@stusta.de>
 
-Ensures it can build with gcc10
+Remove patch applied upstream.
+Manual -fcommon is no longer necessary.
 
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d04f3a1be3a6d7f57b3cc26cb3159b1055a5ee22)
+(cherry picked from commit 3d81f6d013b21a5db8e71328648aa896177e40eb)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-daemons/postfix/postfix.inc           | 2 +-
- .../postfix/{postfix_3.4.8.bb => postfix_3.4.10.bb}           | 4 +---
- 2 files changed, 2 insertions(+), 4 deletions(-)
- rename meta-networking/recipes-daemons/postfix/{postfix_3.4.8.bb => postfix_3.4.10.bb} (84%)
+ ...ure-with-glibc-2.30-due-to-dropped-R.patch | 37 -------------------
+ .../recipes-daemons/postfix/postfix.inc       |  2 +-
+ .../{postfix_3.4.10.bb => postfix_3.4.12.bb}  |  3 +-
+ 3 files changed, 2 insertions(+), 40 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/postfix/files/0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch
+ rename meta-networking/recipes-daemons/postfix/{postfix_3.4.10.bb => postfix_3.4.12.bb} (80%)
 
+diff --git a/meta-networking/recipes-daemons/postfix/files/0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch b/meta-networking/recipes-daemons/postfix/files/0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch
+deleted file mode 100644
+index 22adaff729..0000000000
+--- a/meta-networking/recipes-daemons/postfix/files/0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch
++++ /dev/null
+@@ -1,37 +0,0 @@
+-From 8b3792830f4930fee7fbb00c854d9766f2b74dca Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 27 Jul 2019 11:35:38 -0700
+-Subject: [PATCH] Fixed build failure with glibc 2.30 due to dropped
+- RES_INSECURE1/2 macros
+-
+-see [1]
+-
+-[1] https://sourceware.org/git/?p=glibc.git;a=commit;h=333221862ecbebde60dd16e7ca17d26444e62f50
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/dns/dns_str_resflags.c | 6 ++++++
+- 1 file changed, 6 insertions(+)
+-
+-diff --git a/src/dns/dns_str_resflags.c b/src/dns/dns_str_resflags.c
+-index 5f2cce5..df32345 100644
+---- a/src/dns/dns_str_resflags.c
+-+++ b/src/dns/dns_str_resflags.c
+-@@ -60,10 +60,16 @@ static const LONG_NAME_MASK resflag_table[] = {
+-     "RES_DEFNAMES", RES_DEFNAMES,
+-     "RES_STAYOPEN", RES_STAYOPEN,
+-     "RES_DNSRCH", RES_DNSRCH,
+-+#ifdef RES_INSECURE1
+-     "RES_INSECURE1", RES_INSECURE1,
+-+#endif
+-+#ifdef RES_INSECURE2
+-     "RES_INSECURE2", RES_INSECURE2,
+-+#endif
+-     "RES_NOALIASES", RES_NOALIASES,
+-+#ifdef RES_USE_INET6
+-     "RES_USE_INET6", RES_USE_INET6,
+-+#endif
+- #ifdef RES_ROTATE
+-     "RES_ROTATE", RES_ROTATE,
+- #endif
 diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index 4b9940cc7a..a8d55a6c93 100644
+index a8d55a6c93..4b9940cc7a 100644
 --- a/meta-networking/recipes-daemons/postfix/postfix.inc
 +++ b/meta-networking/recipes-daemons/postfix/postfix.inc
 @@ -61,7 +61,7 @@ export CCARGS-sasl_class-native = ""
  export AUXLIBS-sasl_class-native = ""
  
  # PCRE, TLS support default
--export CCARGS  = "${CFLAGS} -DHAS_PCRE -DUSE_TLS -I${STAGING_INCDIR}/openssl ${CCARGS-ldap} ${CCARGS-sasl} ${CCARGS-nonis}"
-+export CCARGS  = "${CFLAGS} -fcommon -DHAS_PCRE -DUSE_TLS -I${STAGING_INCDIR}/openssl ${CCARGS-ldap} ${CCARGS-sasl} ${CCARGS-nonis}"
+-export CCARGS  = "${CFLAGS} -fcommon -DHAS_PCRE -DUSE_TLS -I${STAGING_INCDIR}/openssl ${CCARGS-ldap} ${CCARGS-sasl} ${CCARGS-nonis}"
++export CCARGS  = "${CFLAGS} -DHAS_PCRE -DUSE_TLS -I${STAGING_INCDIR}/openssl ${CCARGS-ldap} ${CCARGS-sasl} ${CCARGS-nonis}"
  export AUXLIBS = "-lpcre -lssl -lcrypto ${AUXLIBS-sasl} ${AUXLIBS-ldap}"
  export POSTCONF = "${STAGING_DIR_NATIVE}${sbindir_native}/postconf"
  
-diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.4.8.bb b/meta-networking/recipes-daemons/postfix/postfix_3.4.10.bb
-similarity index 84%
-rename from meta-networking/recipes-daemons/postfix/postfix_3.4.8.bb
-rename to meta-networking/recipes-daemons/postfix/postfix_3.4.10.bb
-index 5d7f8bc9f9..d0ef708c50 100644
---- a/meta-networking/recipes-daemons/postfix/postfix_3.4.8.bb
-+++ b/meta-networking/recipes-daemons/postfix/postfix_3.4.10.bb
-@@ -15,7 +15,5 @@ SRC_URI += "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.4.10.bb b/meta-networking/recipes-daemons/postfix/postfix_3.4.12.bb
+similarity index 80%
+rename from meta-networking/recipes-daemons/postfix/postfix_3.4.10.bb
+rename to meta-networking/recipes-daemons/postfix/postfix_3.4.12.bb
+index d0ef708c50..db5b41bfbd 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix_3.4.10.bb
++++ b/meta-networking/recipes-daemons/postfix/postfix_3.4.12.bb
+@@ -13,7 +13,6 @@ SRC_URI += "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
+            file://postfix-install.patch \
+            file://icu-config.patch \
             file://0001-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
-            file://0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch \
+-           file://0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch \
             "
--SRC_URI[md5sum] = "6944b946887077a28e3dcb375ff53701"
--SRC_URI[sha256sum] = "8d5d429737e0c64514028a82fc006cbb273d2cb98dc40eb1dbbfe102f29a8943"
--
-+SRC_URI[sha256sum] = "908a66fc38537a0047e8561e1bc0ef096c53357ffad16d2d728cd4fc8ae56654"
+-SRC_URI[sha256sum] = "908a66fc38537a0047e8561e1bc0ef096c53357ffad16d2d728cd4fc8ae56654"
++SRC_URI[sha256sum] = "18555183ae8b52a9e76067799279c86f9f2770cdef3836deb8462ee0a0855dec"
  UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.3(\.\d+)+).tar.gz"
 -- 
 2.17.1
