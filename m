@@ -1,145 +1,85 @@
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web12.18132.1590941805425476865
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web11.18023.1590941806473805369
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 May 2020 09:16:45 -0700
+ Sun, 31 May 2020 09:16:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=fuQfKBwe;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id fs4so3938655pjb.5
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:16:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=VcJiaYx1;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id m7so3265838plt.5
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:16:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=/O+3LCd29+Sj3R8ck7EZQpN23i11jzW1m6C3N9WabjE=;
-        b=fuQfKBweSS2IODurfrhRWR/8gHRL55YXijmuq9MigIPnHSrgc0Sjkf7DktA175iyoQ
-         9sTIL2lHrfgvSdxBeVHF7rkKRr3JYMl7F8/bc94Hf51QvhYuJJZmia3zKCLUN8+JpIR1
-         ApEumFZG4yrpsxPsE3PrwOt5Brz2wRFI+lPPZqnAbu3Hot2WWqEhJ6Rpi+NkKq0ZBK7Z
-         Jpc1vleKd+gxg9wvCPMU1oS5fFPYBc2qN1eFTOhF9vKcFcmtE78dFR0vnpQjE6Bp2n6X
-         K7BnSW16Tvc2U23Na4vOnMVgI3zgHt7dnFl/oBiK1ifF/nZfiKAMHVRQhncn3sHRznlC
-         E+bA==
+        bh=T2XWGaTIew7u+RaCtMnaEixf6alV3FG2I5w7xF7iVnM=;
+        b=VcJiaYx1rmQ/R2jJtELe0zILk9s3+TZOrw4ZLBhwOSk2Rj9hqJFe2ZvH0kEEc+meT/
+         kKFJ+txBRXyglQbkfRS4kd+KPuFv9MVhQCjyu4XJ0YVc9HskiD2OPsgKIRAXAuEP8RKy
+         A/f84/fXx0fJSGCQ6XlCNaS4XC6shGONNjdNipCAWdXegmrb96dZod+vagxFBoDZ5AJW
+         X6im/wJDN09LJWHNKrPFQLwEnkR/ATGDjEiGuUmPmKEpR8h0DKDyZNHsZBtLdWUoUfL/
+         tnMSJnBEW4bNRBPv47lycc0Y8rHnuT93iivG89AoFhO2g854Lwr6ih1tCDT6sqCswaYi
+         /Teg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=/O+3LCd29+Sj3R8ck7EZQpN23i11jzW1m6C3N9WabjE=;
-        b=K6aOdVboaGcx/D/ctEmlUNSnZYz9eKVp564nHc4S9WhEd9hhPHjqsfamn1L1nKhuhs
-         TaRvxbnxsZITisv+L0DioAhMkgDR5VO5H+o9k5/Wz4vBRrKkel86S98sSCP1X95cgnVE
-         /645IpWj7e2aZd0NygcO67JYZ9DdkJ4A0FLbiUN0av1+uzYIzclxRnyEt9mbAaabOvye
-         6Qacr3ZEgv7P6EGzyuHG/KrzaMdVVtoazaNxDiM4XP+huNpqPnmaBAFNpHLS/yEJ4TSH
-         8WAd5oQZ6OOdmaCiXM543w1oX2z8q+mo0VXeIqvFc6QoawyfMqbAWVzxpuBK+brKiYSZ
-         AbHg==
-X-Gm-Message-State: AOAM533j7lZat2RZEKzlpH9QdSRrP0HKZ3Hg23DsawM93r6zkTvf56xN
-	Y0IHaG+jCqgv2mx2eu0FbWXySQEH
-X-Google-Smtp-Source: ABdhPJwYkD09kMdRutqp5cRL8nEwfBlbYXSIaAlki0Wv1jurhWFIjVErAo51I6NHAyUUyzUm4MKSZA==
-X-Received: by 2002:a17:902:d34a:: with SMTP id l10mr4185451plk.69.1590941804794;
-        Sun, 31 May 2020 09:16:44 -0700 (PDT)
+        bh=T2XWGaTIew7u+RaCtMnaEixf6alV3FG2I5w7xF7iVnM=;
+        b=nQ5unoW3ERaN1ZEaa2o67Dxs3yjj9qQYPTILK+daCegrBi+fBCCo9jGRF2J1oQgzfO
+         L5ir5eVe3TcneCz53x/6mXyOUoSQtG1TgSbepZWsQiZfTRxmOKMteSy/JOZ6obqapAqY
+         xw1QODC3eacZWlkS8lH5MjzVGoF+4ssf4Ji3so5z7N7t44Wa3mSH0gfChCcYn6cNnZw5
+         jsqvwWIU/ufKti2UR9HkusO+fIzgJh8kwl7EGZ6Y4PWc0F/3Y5Hvb+iPz85OEiuDdh/7
+         e8rBBRoCLV9YkuJ0AbNYrwJcybbgEoRU19DbXGoD0n3YO3QjmORCHBf7I3EgDXRcrz0K
+         z+ow==
+X-Gm-Message-State: AOAM5337G/Bx16CAKHIMM9jAJ6BD/RUYlamYwQabNS95NTldHeIBCfEi
+	kkmX8TRAeCyMIbg8T0iNV2T9TQxB
+X-Google-Smtp-Source: ABdhPJzocZ7BE+Ui4sMeEieWg4DEV6Ob1WLQQoLFEipe+AfsOF13JoscieCHieG8jYv+iMfoUIcu+g==
+X-Received: by 2002:a17:902:c111:: with SMTP id 17mr5502414pli.319.1590941805855;
+        Sun, 31 May 2020 09:16:45 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:936:376a:3aad:6139])
-        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.16.43
+        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.16.45
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 May 2020 09:16:44 -0700 (PDT)
+        Sun, 31 May 2020 09:16:45 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 16/35] python3-jinja2: Update 2.11.1 -> 2.11.2
-Date: Sun, 31 May 2020 09:16:03 -0700
-Message-Id: <31b5e4109ab7af37f6c31164b6acb5b1e6649d2a.1590941674.git.akuster808@gmail.com>
+Subject: [dunfell 17/35] python3-gmqtt: Upgrade to 0.6.5
+Date: Sun, 31 May 2020 09:16:04 -0700
+Message-Id: <f32671264b38139a1b8a63a73b4101056700670e.1590941674.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1590941673.git.akuster808@gmail.com>
 References: <cover.1590941673.git.akuster808@gmail.com>
 
-From: Domarys Correa <domarys.correa@ossystems.com.br>
+From: Leon Anavi <leon.anavi@konsulko.com>
 
-Add .inc file to .bb, as updated to python3
+Upgrade to release 0.6.5.
 
-Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 0a7a998120c930e427b02de73bc48b78a0022dd2)
+(cherry picked from commit 6575f2f016a777ea5d0592facb551c8ffcf6dd6b)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../python/python3-jinja2_2.11.1.bb           |  4 --
- ...on-jinja2.inc => python3-jinja2_2.11.2.bb} | 40 ++++++++++++-------
- 2 files changed, 25 insertions(+), 19 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
- rename meta-python/recipes-devtools/python/{python-jinja2.inc => python3-jinja2_2.11.2.bb} (44%)
+ .../python/{python3-gmqtt_0.6.2.bb => python3-gmqtt_0.6.5.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-gmqtt_0.6.2.bb => python3-gmqtt_0.6.5.bb} (74%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb b/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
-deleted file mode 100644
-index 284f5f588c..0000000000
---- a/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--inherit pypi setuptools3
--require python-jinja2.inc
--
--RDEPENDS_${PN} += "${PYTHON_PN}-asyncio"
-diff --git a/meta-python/recipes-devtools/python/python-jinja2.inc b/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
-similarity index 44%
-rename from meta-python/recipes-devtools/python/python-jinja2.inc
-rename to meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
-index 9272305156..681acf8f1c 100644
---- a/meta-python/recipes-devtools/python/python-jinja2.inc
-+++ b/meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
-@@ -1,33 +1,43 @@
- DESCRIPTION = "Python Jinja2: A small but fast and easy to use stand-alone template engine written in pure python."
-+
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462"
+diff --git a/meta-python/recipes-devtools/python/python3-gmqtt_0.6.2.bb b/meta-python/recipes-devtools/python/python3-gmqtt_0.6.5.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python3-gmqtt_0.6.2.bb
+rename to meta-python/recipes-devtools/python/python3-gmqtt_0.6.5.bb
+index 8d4ac88301..379c7679c6 100644
+--- a/meta-python/recipes-devtools/python/python3-gmqtt_0.6.2.bb
++++ b/meta-python/recipes-devtools/python/python3-gmqtt_0.6.5.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/wialon/gmqtt"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=903f1792621a3b35ee546da75d139177"
  
--PYPI_PACKAGE = "Jinja2"
--
--SRC_URI[md5sum] = "5d88c7e77aa63fc852a04f65dbfe5594"
--SRC_URI[sha256sum] = "93187ffbc7808079673ef52771baa950426fd664d3aad1d0fa3e95644360e250"
-+SRC_URI[sha256sum] = "89aab215427ef59c34ad58735269eb58b1a5808103067f7bb9d5836c651b3bb0"
+-SRC_URI[md5sum] = "f763f12c5e6ba6f0fa0ec4a6dc8c3fd9"
+-SRC_URI[sha256sum] = "3b3c12cb62bbc3ee0bd81da3d9fbd78c5414098aaf58236c3663edfeda5237e0"
++SRC_URI[md5sum] = "9388ec09b6536c4e68c5ac5c31de3dc9"
++SRC_URI[sha256sum] = "c12b2d7d5a90f3304b7291b1d9d21df47e228dfb4ff990e965008fdd1a55ce60"
  
--RDEPENDS_${PN} += "${PYTHON_PN}-io ${PYTHON_PN}-pickle ${PYTHON_PN}-crypt \
--    ${PYTHON_PN}-math ${PYTHON_PN}-netclient \
--    ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-markupsafe \
--    ${PYTHON_PN}-json ${PYTHON_PN}-threading ${PYTHON_PN}-numbers"
-+PYPI_PACKAGE = "Jinja2"
+ inherit pypi setuptools3
  
- CLEANBROKEN = "1"
- 
--BBCLASSEXTEND = "native nativesdk"
--
--inherit ptest
-+inherit pypi setuptools3 ptest
- 
- SRC_URI += " \
- 	file://run-ptest \
- "
- 
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
-+
- RDEPENDS_${PN}-ptest += " \
- 	${PYTHON_PN}-pytest \
- 	${PYTHON_PN}-unixadmin \
- "
- 
--do_install_ptest() {
--	install -d ${D}${PTEST_PATH}/tests
--	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--}
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-asyncio \
-+    ${PYTHON_PN}-crypt \
-+    ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-json \
-+    ${PYTHON_PN}-markupsafe \
-+    ${PYTHON_PN}-math \
-+    ${PYTHON_PN}-netclient \
-+    ${PYTHON_PN}-numbers\
-+    ${PYTHON_PN}-pickle \
-+    ${PYTHON_PN}-pprint \
-+    ${PYTHON_PN}-shell \
-+    ${PYTHON_PN}-threading \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
