@@ -1,196 +1,82 @@
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web10.18202.1590941811325715385
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.web11.18026.1590941812372732813
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 May 2020 09:16:51 -0700
+ Sun, 31 May 2020 09:16:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=NCvN91mt;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id y17so1456553plb.8
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:16:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=UbkIhV15;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id f3so2290926pfd.11
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:16:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=Iqby+GgltiNv7ojHRPpW3i8uDvb5WTTBUTQgyiQkkeA=;
-        b=NCvN91mtoI5t3BGXb3OP5CZCvZDlCFfVizdq+E5cW6Xx/a0f3rLxww88AzYd8ifJQd
-         DUOmhOIcOC6n9/tWhWQWshDl8/30g40WMXz+jioAvFG2Ebi4xFB4mYHlfPRDod2JYhVp
-         znb1u3Zj8nKXjPjHqucR/jwrX2I7iKdHLC/t6NPyW84eZKBXfpWFHZaAg1WJSuXOI2z1
-         IM/yZBF4aPa99PQwyFxv1Yoebo6qU6iL4PXCDlm3WeCUmY6aUPuoA1N8eRKvuZHviHH4
-         1BNHFa0aJbTQP5Xfgm6LNQ/Vthq0Ia3gMCkgcrv/bOFXlebQMaH9NL0Xs3Jrj0AxjMwG
-         fDPw==
+        bh=pvqpo9Bb6cmncAzK6BEQ4aKuU5+0tjD6JjYLC5GwBEU=;
+        b=UbkIhV15Q8G0udi8DywUeZmLmYHPiBBwbydHjx78k1F4jcPO6Hn70TYnNcMJc1b+pb
+         aVCVUoZE9Z2jzAVDpaG9YeizEIBLAS/BLOgfbCHYO+57+tkV1md18oP8hyyTkInBx7mN
+         XIBxDBgqwCsGU6D4KxMAkWWQVVKXMrXog+DYK23So4AproGqL3FftaA47DPjMf3A98xU
+         6ESpMbZpQ50CinFJybLV2ZGbu9J5Z8wj4qejc8SQ7rDDeh9NWO7qI+YFpWoY5k8c6sSa
+         33T0TW2TBsy6acaBTn9WkskGFTG56aeKcvo965qJ8/S/ftZkO0RH5bm2XwyXiAaD9D9n
+         MG/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=Iqby+GgltiNv7ojHRPpW3i8uDvb5WTTBUTQgyiQkkeA=;
-        b=tjGzV85klBxhSAH20yRd2f7o511kLhn6YTwyGXPqcr/BR9XZWYa92SzGIlCL48lNBG
-         nSU9X0rLQhEIOHZGdDTx9LYwR/7S0o7ZyLTzgtaSuDxDGihjMCe2uSuYSc7wPEBBuXob
-         sQRpsR62+ShIRcxnxypF4a7j0Bx7ZDQj9zhw0EuiPMODSXCjDjaRxO2OTV84Paw5iYun
-         Jz3zmRrj9cRwi4eH3C9jFJWFGnF1KVWpBX0cEkFWBn2zfKzCqg9rfu0bPSbw3CMdNqku
-         P2p0r0UIVHiKJPL6EhD7BrD2a65KIbMFAmqy52wGOalMBeKfdjbIHRw48ByqzuUy8e18
-         j3cw==
-X-Gm-Message-State: AOAM530nl5BgDCcwrRuKgH9GzGE2HCRzEz/mN5PqtH5I8KiqDrKKtcRk
-	S4WLgXLUlcJihCNC2T0w/WJe0dxh
-X-Google-Smtp-Source: ABdhPJySNKnm9S1Lq9oj2k6Hk3Kxb7rGhvn6xndUog9yZdzNw4Ca0EtnM5RVofvtME36iydd4HSNGw==
-X-Received: by 2002:a17:90a:c791:: with SMTP id gn17mr19454577pjb.46.1590941810519;
-        Sun, 31 May 2020 09:16:50 -0700 (PDT)
+        bh=pvqpo9Bb6cmncAzK6BEQ4aKuU5+0tjD6JjYLC5GwBEU=;
+        b=NZYSkEiLkv5e/xWvcRyt2RI6Q9c5hA/qXIcgYK27GfJxHJFBGAcqy0+kFP8Z65F+ET
+         FV094ynx7M/Azo4R2o0cU+KvhdCW7/AoQ3eMlPs5XrqXvcCU2kJEwxcTDSknq7Vwfw9F
+         O8tpyIAyq2ianGcMZ+AvpEK1paJL94MxneEfkOz/MItLXhxRoxUxVyLM6AmnDzmPQ02J
+         a2iLcpgq4FI5sWM4iBt2uptNph27mQpOioT53w2DEknJpLo7mousabSsspeJitoS1lsQ
+         U2Epw7GXFJ/cz5POIdHvTP4EBGLmpZkhH3g9aiw1BTC81pexgn9Rp/GQrSXln26upxtC
+         GyRw==
+X-Gm-Message-State: AOAM531VYKYpnRYAmooyMeIYVVnkqOnpsu3kt4yB2ppAfeSvC1xt92fy
+	l+26PIYlxrQsuH1dg0+a0EJoRDop
+X-Google-Smtp-Source: ABdhPJyJKoeZ5OPGUFp3EcIZRs7rT/5Wkh9b/qMTa0baj2TUTI4113LRzfyZV9RhloF2FsqRZyl0qA==
+X-Received: by 2002:a62:1dd3:: with SMTP id d202mr15966280pfd.99.1590941811750;
+        Sun, 31 May 2020 09:16:51 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:936:376a:3aad:6139])
-        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.16.49
+        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.16.50
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 May 2020 09:16:50 -0700 (PDT)
+        Sun, 31 May 2020 09:16:51 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 21/35] dnsmasq: upgrade 2.80 -> 2.81
-Date: Sun, 31 May 2020 09:16:08 -0700
-Message-Id: <3cd83be02d871c549a815301578b0d29dec1510f.1590941674.git.akuster808@gmail.com>
+Subject: [dunfell 22/35] fetchmail: upgrade 6.4.3 -> 6.4.4
+Date: Sun, 31 May 2020 09:16:09 -0700
+Message-Id: <d8fbd6140f6585260595e020e53e90a6d481d6a7.1590941674.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1590941673.git.akuster808@gmail.com>
 References: <cover.1590941673.git.akuster808@gmail.com>
 
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 
--dnsmasq/0001-dnsmasq-fix-build-against-5.2-headers.patch
--dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
- Removed since these are included in 2.81
-
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 36ece5c83f20f4fc923f1606979ea911ecb93da8)
+(cherry picked from commit e8a43da0cb4631d4302ec84a0dd54ea1b74ddc92)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...nsmasq-fix-build-against-5.2-headers.patch | 31 ------------
- ...-dnsmasq-fix-memory-leak-in-helper-c.patch | 49 -------------------
- .../recipes-support/dnsmasq/dnsmasq_2.80.bb   | 10 ----
- .../recipes-support/dnsmasq/dnsmasq_2.81.bb   |  8 +++
- 4 files changed, 8 insertions(+), 90 deletions(-)
- delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-build-against-5.2-headers.patch
- delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
- delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
- create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb
+ .../fetchmail/{fetchmail_6.4.3.bb => fetchmail_6.4.4.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/fetchmail/{fetchmail_6.4.3.bb => fetchmail_6.4.4.bb} (86%)
 
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-build-against-5.2-headers.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-build-against-5.2-headers.patch
-deleted file mode 100644
-index 844a709856..0000000000
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-build-against-5.2-headers.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From 52f4b58c14a2788ca08b7d8884d586724d86fc66 Mon Sep 17 00:00:00 2001
--From: Bruce Ashfield <bruce.ashfield@gmail.com>
--Date: Mon, 19 Aug 2019 14:46:02 +0000
--Subject: [PATCH] dnsmasq: fix build against 5.2 headers
--
--Upstream linux y2038 work has moved some definitions SIOCGSTAMP is
--defined in linux/sockios.h, not asm/sockios.h now. So we need to
--add that include to fix the build.
--
--Upstream-status: backport of http://thekelleys.org.uk/gitweb/?p=dnsmasq.git;a=commit;h=3052ce208acf602f0163166dcefb7330d537cedb
--
--Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
-----
-- a/src/dnsmasq.h                   | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/build/tmp/work/core2-64-poky-linux/dnsmasq/2.80-r0/dnsmasq-2.80/src/dnsmasq.h b/build/tmp/work/core2-64-poky-linux/dnsmasq/2.80-r0/dnsmasq-2.80/src/dnsmasq.h
--index f53e9a5be6..d9225ea473 100644
----- a/src/dnsmasq.h
--+++ b/src/dnsmasq.h
--@@ -138,6 +138,7 @@ typedef unsigned long long u64;
-- #endif
-- 
-- #if defined(HAVE_LINUX_NETWORK)
--+#include <linux/sockios.h>
-- #include <linux/capability.h>
-- /* There doesn't seem to be a universally-available 
--    userspace header for these. */
---- 
--2.19.1
--
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
-deleted file mode 100644
-index ccd6f82ae8..0000000000
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
-+++ /dev/null
-@@ -1,49 +0,0 @@
--From 69bc94779c2f035a9fffdb5327a54c3aeca73ed5 Mon Sep 17 00:00:00 2001
--From: Simon Kelley <simon@thekelleys.org.uk>
--Date: Wed, 14 Aug 2019 20:44:50 +0100
--Subject: [PATCH] Fix memory leak in helper.c
--
--Thanks to Xu Mingjie <xumingjie1995@outlook.com> for spotting this.
--
--CVE: CVE-2019-14834
--Upstream-Status: Backport
--Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
-----
-- src/helper.c |   12 +++++++++---
-- 1 file changed, 9 insertions(+), 3 deletions(-)
--
--diff --git a/src/helper.c b/src/helper.c
--index 33ba120..c392eec 100644
----- a/src/helper.c
--+++ b/src/helper.c
--@@ -82,7 +82,8 @@ int create_helper(int event_fd, int err_fd, uid_t uid, gid_t gid, long max_fd)
--   pid_t pid;
--   int i, pipefd[2];
--   struct sigaction sigact;
---
--+  unsigned char *alloc_buff = NULL;
--+  
--   /* create the pipe through which the main program sends us commands,
--      then fork our process. */
--   if (pipe(pipefd) == -1 || !fix_fd(pipefd[1]) || (pid = fork()) == -1)
--@@ -188,11 +189,16 @@ int create_helper(int event_fd, int err_fd, uid_t uid, gid_t gid, long max_fd)
--       struct script_data data;
--       char *p, *action_str, *hostname = NULL, *domain = NULL;
--       unsigned char *buf = (unsigned char *)daemon->namebuff;
---      unsigned char *end, *extradata, *alloc_buff = NULL;
--+      unsigned char *end, *extradata;
--       int is6, err = 0;
--       int pipeout[2];
-- 
---      free(alloc_buff);
--+      /* Free rarely-allocated memory from previous iteration. */
--+      if (alloc_buff)
--+	{
--+	  free(alloc_buff);
--+	  alloc_buff = NULL;
--+	}
--       
--       /* we read zero bytes when pipe closed: this is our signal to exit */ 
--       if (!read_write(pipefd[0], (unsigned char *)&data, sizeof(data), 1))
---- 
--1.7.10.4
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
-deleted file mode 100644
-index 827565051d..0000000000
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require dnsmasq.inc
--
--SRC_URI[dnsmasq-2.80.md5sum] = "1f071fd11454e1cffea73bdadcf70b21"
--SRC_URI[dnsmasq-2.80.sha256sum] = "9e4a58f816ce0033ce383c549b7d4058ad9b823968d352d2b76614f83ea39adc"
--SRC_URI += "\
--    file://lua.patch \
--    file://0001-dnsmasq-fix-build-against-5.2-headers.patch \
--    file://0001-dnsmasq-fix-memory-leak-in-helper-c.patch \
--"
--
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb
-new file mode 100644
-index 0000000000..92415386c2
---- /dev/null
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb
-@@ -0,0 +1,8 @@
-+require dnsmasq.inc
-+
-+SRC_URI[dnsmasq-2.81.md5sum] = "e43808177a773014b5892ccba238f7a8"
-+SRC_URI[dnsmasq-2.81.sha256sum] = "3c28c68c6c2967c3a96e9b432c0c046a5df17a426d3a43cffe9e693cf05804d0"
-+SRC_URI += "\
-+    file://lua.patch \
-+"
-+
+diff --git a/meta-networking/recipes-support/fetchmail/fetchmail_6.4.3.bb b/meta-networking/recipes-support/fetchmail/fetchmail_6.4.4.bb
+similarity index 86%
+rename from meta-networking/recipes-support/fetchmail/fetchmail_6.4.3.bb
+rename to meta-networking/recipes-support/fetchmail/fetchmail_6.4.4.bb
+index 5e2d1be1e4..efab0c808d 100644
+--- a/meta-networking/recipes-support/fetchmail/fetchmail_6.4.3.bb
++++ b/meta-networking/recipes-support/fetchmail/fetchmail_6.4.4.bb
+@@ -9,8 +9,8 @@ DEPENDS = "openssl"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz \
+            "
+-SRC_URI[md5sum] = "614d5a05ac9a042bfc9317e5499bafd4"
+-SRC_URI[sha256sum] = "b0360e14b9aa5d065eef8ff99ad0347ef6cbbfc934c8114908295a402a09d3e4"
++SRC_URI[md5sum] = "53d52179c8bf8e2f57489538b49bfda9"
++SRC_URI[sha256sum] = "511b60daabf7543a01de06af07c8772290c6807cd53c42a8504960e978f3abea"
+ 
+ inherit autotools gettext python3-dir python3native
+ 
 -- 
 2.17.1
 
