@@ -1,83 +1,81 @@
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web12.18144.1590941822636034626
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web11.18037.1590941823410144063
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 May 2020 09:17:02 -0700
+ Sun, 31 May 2020 09:17:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=rhZEYZL1;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id q16so3257982plr.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:17:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=HB/29VID;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id o6so2375110pgh.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:17:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=CLePfOrPEheOCYfX8vtrvLF7R8dfMziFre3/KLmqSGc=;
-        b=rhZEYZL1rIwaPjYpE/IHbdo+UlvncgK1Rs+92tEgeSZwSQqRj2hoB1tPKBWvz2uaI0
-         ThlTigz37JxiGBO8yHzHVZDmNi0i/yA/jdZIH6ZmJN0ZQCjJahrCdjWIAvI/hT+Y5sf7
-         wpb9Nm05gfmU1s2x1aeeIoI0eRaqs5J4PCy8mBfwtjT0q/GZ063r1unJC3bR5jadn6Jt
-         EfNkdTtbY3G6QmK5vdnxg+NAKdFzPhi760U12G4gWR80j8K+ckV0BJW6Bm66MTAU/vSC
-         JrFGhVuKSEsSJRh5eLX04a80PU1902CBTYDnkNfqcQwoZeIlCNntAQtiETf8+K2CH8rh
-         HYQQ==
+        bh=IYnzTeZ4dY2wHhyZXFvpCRmzvVCnWyeBPi4PC0hVhMI=;
+        b=HB/29VIDEQ5VRbJ+BVg+W6Veaa1P6tD+O7GF7TKvcNie4HX+M4g4VvjQ5KeWueNLka
+         VsanELkWsa+F5qM7cajCMlLJbm2Ew2d5KljDQoPPiGgPvPtA2sbh7686H2734rHvDxk3
+         ABiiPXQNzBLZSW1E/eJKRPw+z0JTI3lPimKiiGZr1cdBvloris2CtJw1vSuzB3YS9yyM
+         pCYslPCafAFfkhvpWBhBydCzwx+OqRwZedQ0RHwiFtEJKP2yHhkHND0lV6PEwoKrzmPO
+         JrZus/s949o3LWKILKDkGMgz0FRG3INlFFVUfztcBzsstFo0SBzx4vmd8J4tScf8ruej
+         QFTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=CLePfOrPEheOCYfX8vtrvLF7R8dfMziFre3/KLmqSGc=;
-        b=JG1TmAWdcOKh2LrchUG8FPbsahQINoMuUAKrU+0IY7ONf+d5YegT20gBK4cQwbg4hq
-         h0GehFMoG9LBBDZIpt80liI+hz9enRkABJlJ9F9BtLfqB+oykSEwHwZBHAnrT7AhED8z
-         NIxxY1sOJNYh2EXuRZ8utEEKk6ZXPEau1cnQ2s7U4DU6L1RfZCqUh2KJS9uikfhkQHR1
-         9knrLJ5OOhlCbJQ7//CAc+LwNVsZZ+BjxNqmrl8KrY1V6+4ThbuQkkZoPxyw66jk9kex
-         pHyHPzY96jqNo3v8TYQDlo+4bk7JY/jhLEUhpBeSLTeq9MesBwDRQEEd/rawQ0E8OVpd
-         N+Fw==
-X-Gm-Message-State: AOAM530JpD1vLWVqLK+DhhBBDotnmaHnPHyWYFPIbj5AXCucLrWAtUv1
-	abrHDj1mlDrEf2AWt08qT0lF8uM5
-X-Google-Smtp-Source: ABdhPJzdn1+oSwF6fe+Pxr+ut374ObGnupD1dO4+UkWnzKZ2lyEY5+SoWWTev3X91qrJIw9a7I7sZw==
-X-Received: by 2002:a17:90b:1046:: with SMTP id gq6mr18034147pjb.203.1590941822038;
+        bh=IYnzTeZ4dY2wHhyZXFvpCRmzvVCnWyeBPi4PC0hVhMI=;
+        b=UzyH64kpK9+4eqsEbNzsPArVUrgVlZdvLCjnS5vy3vuTR5c9A/vDQkNnXpxYv3+ftM
+         CzcVLTJWRSmIjLIAE2fyDMxQbOaPMFXL2OyxyconEHX8AtZwihD8aHk6ekGuV8WyCufg
+         P9KjTD0hk9aAsoxYromJa4NfCrdYVGxsoVk9mmbgRjaji/HmjN6UY7jYkcjN45Q/J6jO
+         lh+mfdw5DEVIv0ILShmipJFrEZ67shDteZsnsGQEml62k/8odKee2TU5f1NfSM4dMVym
+         NifhOMs3j7+5SI+QUXSmodUJfgf5pFJEOgn1gkAP/vzCgtgBcsHqlPe9csOmkrWX8f0Q
+         6jOw==
+X-Gm-Message-State: AOAM5327qwMa1RxBQHKdzkhD5zrg24NqdOXRXINVyoH9jiwJBGuVguF6
+	Xdz8YaJ4mtZLi6p/sM8572tt+dcq
+X-Google-Smtp-Source: ABdhPJySpfFVAZv2W/5UoaydzY0NKU1c3CSDbNWH5j3MRdgtcmvnob2hIJYc2sFKNijXZpbdSqA6EQ==
+X-Received: by 2002:a63:5506:: with SMTP id j6mr16125116pgb.121.1590941822841;
         Sun, 31 May 2020 09:17:02 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:936:376a:3aad:6139])
-        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.17.01
+        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.17.02
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 May 2020 09:17:01 -0700 (PDT)
+        Sun, 31 May 2020 09:17:02 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 32/35] ser2net: fix upstream check URL
-Date: Sun, 31 May 2020 09:16:19 -0700
-Message-Id: <5d228320ff79817ddc51f95038e66178573eb86a.1590941674.git.akuster808@gmail.com>
+Subject: [dunfell 33/35] ser2net: upgrade 4.1.5 -> 4.1.8
+Date: Sun, 31 May 2020 09:16:20 -0700
+Message-Id: <6a44b89c82e52719d3db1fd361226325b2e55337.1590941674.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1590941673.git.akuster808@gmail.com>
 References: <cover.1590941673.git.akuster808@gmail.com>
 
 From: Pierre-Jean Texier <pjtexier@koncepto.io>
 
-Fixes:
-
-$: devtool check-upgrade-status ser2net
-<...>
-
-INFO: ser2net                   4.1.5           UNKNOWN_BROKEN  None
-
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 3cdb571edfe12b387b1c9e40bf1a9b542dbe4c83)
+(cherry picked from commit ace7342bddc68b486d16739f431710bb4edca202)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-connectivity/ser2net/ser2net_4.1.5.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../ser2net/{ser2net_4.1.5.bb => ser2net_4.1.8.bb}             | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/ser2net/{ser2net_4.1.5.bb => ser2net_4.1.8.bb} (76%)
 
-diff --git a/meta-oe/recipes-connectivity/ser2net/ser2net_4.1.5.bb b/meta-oe/recipes-connectivity/ser2net/ser2net_4.1.5.bb
-index 0df134eca6..05d1ffed5f 100644
+diff --git a/meta-oe/recipes-connectivity/ser2net/ser2net_4.1.5.bb b/meta-oe/recipes-connectivity/ser2net/ser2net_4.1.8.bb
+similarity index 76%
+rename from meta-oe/recipes-connectivity/ser2net/ser2net_4.1.5.bb
+rename to meta-oe/recipes-connectivity/ser2net/ser2net_4.1.8.bb
+index 05d1ffed5f..4a91fa4f4d 100644
 --- a/meta-oe/recipes-connectivity/ser2net/ser2net_4.1.5.bb
-+++ b/meta-oe/recipes-connectivity/ser2net/ser2net_4.1.5.bb
-@@ -12,6 +12,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/ser2net/ser2net/ser2net-${PV}.tar.gz"
- SRC_URI[md5sum] = "52c5e56d2d54ced0cdeb764a7e8fec92"
- SRC_URI[sha256sum] = "df904d271eb161c265c956f0cb938dd0a375dda4a919a344f73b08bc50b9f308"
++++ b/meta-oe/recipes-connectivity/ser2net/ser2net_4.1.8.bb
+@@ -9,8 +9,7 @@ DEPENDS = "gensio libyaml"
  
-+UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/ser2net/files/ser2net"
-+
- inherit autotools pkgconfig
+ SRC_URI = "${SOURCEFORGE_MIRROR}/project/ser2net/ser2net/ser2net-${PV}.tar.gz"
  
- BBCLASSEXTEND = "native nativesdk"
+-SRC_URI[md5sum] = "52c5e56d2d54ced0cdeb764a7e8fec92"
+-SRC_URI[sha256sum] = "df904d271eb161c265c956f0cb938dd0a375dda4a919a344f73b08bc50b9f308"
++SRC_URI[sha256sum] = "cffb5147021202b064eb0a9389d0db63d1bb2dcde5a896f7785f97b1b5f51a72"
+ 
+ UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/ser2net/files/ser2net"
+ 
 -- 
 2.17.1
 
