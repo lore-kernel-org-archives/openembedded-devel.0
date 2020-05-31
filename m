@@ -1,82 +1,77 @@
-Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
- by mx.groups.io with SMTP id smtpd.web12.18141.1590941820783287122
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web10.18209.1590941821821908501
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 May 2020 09:17:00 -0700
+ Sun, 31 May 2020 09:17:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=EZUXZKrM;
- spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f178.google.com with SMTP id e9so1190058pgo.9
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:17:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=GmAFZVLI;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id m1so2377801pgk.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:17:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=YDuqX2hZYvsWvRcfcz0LXx3QdK1Tm4ewUOk0rsr7wr4=;
-        b=EZUXZKrM+VMen0xCKDd0ioGMUIUF0dJ3m4fS8nnFCN3jeYcGRmBZqKKCNarh368AZP
-         A0fos+4u2d+sU5iq9dP9xTo6p++oQYWOWllFpq737H1I9m5TsBgGonokvA8PvFuWU8G2
-         EBKHNs7bjBgVoV1XTvTTDEsxMDFyzDVqxoqtG+7KYNiBMSB69QILPYtzkkwIs83dqBF2
-         jFhcvD36pj6Yrbf9U3OO/CZ0d0WTPhKocfLbt0VA/mxJJ0gA9AgRvBI+36fw6dFye8Dz
-         R/vIds5J6+bf5khjl+HG7qTF0xr4Mmu7tVqhf/Llr/9Syxo6byxm+qs42dcN0Fnw5gKD
-         48yg==
+        bh=3/8urO7toVgszGksN1+vR9O/V45CnYZQdJ7Z0IRBVLc=;
+        b=GmAFZVLInekDf7mmTdSfomgR9Qz4ZxgMXyhU/QJQ/rfi8J/auhFG1HSObZrw6uQKff
+         T9dSSlRyNL9a/orZnKIR99HNzeFpXFP3oWEb8oUQdHUM86mDG/7/1tytVeRTWuN7rS2J
+         j+jCuNyW8COryeJpj571aCbWKkxEJVw59R2/syAGNqepWpCQD8wHUOeaqjVtODq52ZU5
+         EFoDd35pFOHDYEDwnZLCLXrihdEufN2HxwD9AWEvNNYh8ZrRCk9PSpayImE6TeEx7Jue
+         kdzupvBZYSAO1mqbmR/NqMOMSzobqwevHC35A/pxBFnSvXJGmaejdHbOvebwyUcgNhj9
+         2wJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=YDuqX2hZYvsWvRcfcz0LXx3QdK1Tm4ewUOk0rsr7wr4=;
-        b=CyW+4gXvkZo5TM6f/MdE6DZb5SZCGAMmgTm+u9CiNg+pipC8ju0ttoFUD7uDZI6xhP
-         zl/U7xVKB1oVo64IJFI/He5DkhVVAmuzz1LPZbBCj882gjR23QBN0Z6v0Jy58KsV7BgU
-         Eq1hCVmzR3ogmaF654H23tj6A/hQhqS440W6VmigLGFZ4O3B1ClewaKG1uPNh/J28ga5
-         Z/uvwFR7BZ3uegVs2lmOQpC8IY3jp6JqdSpZ8TpEUF7A/LMyAHtdR+kv5l+NrSzQs3Ku
-         YFyWl1+S5vgobIje50KT0giK6XSVe5l6X2iV9BDvtQbCbiMtCI6yCXFyOnzVWzi+ESEI
-         yGtg==
-X-Gm-Message-State: AOAM533L4pbJXj3rsrwuVOFbxMSuxG6eJh2VBh4W2SYnyxWYmVXVpN8f
-	Q0BAg1pjJp6ydwgNIlaRnHxE+zRa
-X-Google-Smtp-Source: ABdhPJzUNH5g9xSeloWNrq/c5QtL3dG6KS8mo/ROHVlPreTx3/HY5LGDCiN1grc/ADGWzegxQkOmog==
-X-Received: by 2002:a63:4504:: with SMTP id s4mr15675193pga.175.1590941820057;
-        Sun, 31 May 2020 09:17:00 -0700 (PDT)
+        bh=3/8urO7toVgszGksN1+vR9O/V45CnYZQdJ7Z0IRBVLc=;
+        b=bFYz2iTMY6bT14G8Dgh0NCe0sR3lUSZm6As9aw0MQzhjR/KFL2eZLqUUcKqMgISH91
+         08rIa2hUdfyPzm0l0MN/39IaMwmy2L0aRBpcR7++s6LC6XC3iuJpXRSOtuRXBOJUQmWL
+         PDcIia3x+6SYLk67lNO5zm6SxQLziSlWyjeXoiImFum1QjTIPe7EQa91HMye9R3+XLEs
+         3zB18dre/jl9tfstyHbh1nMPmQjsPlXu3R2xPs6kRbAk0r6EFTasvri9e9yDGSOswxIO
+         bK6jj3BEKMKf0llViudV2M15WtbgwcK5DCXeEmkDZAjYJjr0bbFhYo0fjqVqt+Boxh+F
+         vrzg==
+X-Gm-Message-State: AOAM533Di7kriOG6TEVWfsLNIVkxV23ZNqT+C0uhFWkI7I1J5kEJCs8/
+	QpQ7l+MSrKrHC90zfKNYpXTKtvyV
+X-Google-Smtp-Source: ABdhPJwREq2YjnPDKSeZ/GPrr4cxVvY8W49U74EQNpIE53JoAFpmR6eCf/zpFdPseHw9Jni/FWvwvw==
+X-Received: by 2002:a63:9513:: with SMTP id p19mr16588599pgd.101.1590941821166;
+        Sun, 31 May 2020 09:17:01 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:936:376a:3aad:6139])
-        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.16.59
+        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.17.00
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 May 2020 09:16:59 -0700 (PDT)
+        Sun, 31 May 2020 09:17:00 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 30/35] cryptsetup: upgrade 2.3.1 -> 2.3.2
-Date: Sun, 31 May 2020 09:16:17 -0700
-Message-Id: <17391b2160b23710b49adcc4a3e02af0e05dadce.1590941674.git.akuster808@gmail.com>
+Subject: [dunfell 31/35] tremor: update SRC_URI as project moved to gitlab
+Date: Sun, 31 May 2020 09:16:18 -0700
+Message-Id: <3c79f7f3ec20616f457289978acc777854979b2c.1590941674.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1590941673.git.akuster808@gmail.com>
 References: <cover.1590941673.git.akuster808@gmail.com>
 
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
+It appears Xiph.Org is now on gitlab
+https://gitlab.xiph.org/xiph
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 4dacdef41c27eacd1aa46401b00ccd3b65381d67)
+(cherry picked from commit cc6e59fdff71e47ef5b9b40aab3bcd9438960ea4)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../cryptsetup/{cryptsetup_2.3.1.bb => cryptsetup_2.3.2.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.3.1.bb => cryptsetup_2.3.2.bb} (96%)
+ meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.1.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.2.bb
-similarity index 96%
-rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.1.bb
-rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.2.bb
-index ec375fed9d..b9668eb099 100644
---- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.1.bb
-+++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.2.bb
-@@ -21,8 +21,8 @@ RDEPENDS_${PN} = " \
+diff --git a/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb b/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
+index 28bb5d924a..6abf6080bd 100644
+--- a/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
++++ b/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=db1b7a668b2a6f47b2af88fb008ad555 \
+                     file://os.h;beginline=3;endline=14;md5=5c0af5e1bedef3ce8178c89f48cd6f1f"
+ DEPENDS = "libogg"
+ 
+-SRC_URI = "git://git.xiph.org/tremor.git;protocol=https \
++SRC_URI = "git://gitlab.xiph.org/xiph/tremor.git;protocol=https \
+            file://obsolete_automake_macros.patch;striplevel=0 \
+            file://tremor-arm-thumb2.patch \
  "
- 
- SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
--SRC_URI[md5sum] = "cef482c0579f34d9524311ac70c0875f"
--SRC_URI[sha256sum] = "92aba4d559a2cf7043faed92e0f22c5addea36bd63f8c039ba5a8f3a159fe7d2"
-+SRC_URI[md5sum] = "6e4ffb6d35a73f7539a5d0c1354654cd"
-+SRC_URI[sha256sum] = "a89e13dff0798fd0280e801d5f0cc8cfdb2aa5b1929bec1b7322e13d3eca95fb"
- 
- inherit autotools gettext pkgconfig
- 
 -- 
 2.17.1
 
