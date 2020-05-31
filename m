@@ -1,85 +1,177 @@
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com [209.85.210.193])
- by mx.groups.io with SMTP id smtpd.web11.18017.1590941795567787465
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web11.18019.1590941797119746300
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 May 2020 09:16:35 -0700
+ Sun, 31 May 2020 09:16:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Okc9P7SU;
- spf=pass (domain: gmail.com, ip: 209.85.210.193, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f193.google.com with SMTP id w68so1503177pfb.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:16:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=KESdQK7r;
+ spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f179.google.com with SMTP id a4so2301655pfo.4
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:16:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=3BVA2RaKRUnRycsj2vXyL6wXYKMQsqw1EsbdjVV33go=;
-        b=Okc9P7SUEd7Q0fVsmJziW8tF9EoqclIA5/P+bZD7en11Cc1xTRczKSo1+2oVMYdwjL
-         KefJ12R1cK3F8C+zECV0C1Jz7lf61Ygq96pzMOE4IPHidMIzFTO8wN28UoEZxFMsjHJW
-         P0AG07UslYw9fK+dl4tnb5OhKMiIf4cBznVVPUpEQBn0X7P1dmWuAGrQ6LF0u/mcDzzw
-         Vi/TGpEzvZxU3wc8TuGRabEePyqQRI/f0695IFgWBo3UIOF1Ehh4iXmeRVDdTvsheQRF
-         cl7adR2CLXJRSnSUy3e9TiZHR7iAxGD3tDXHdN8chgO7UqEJIk5ib6x8XdPIVkr5xw5S
-         asDA==
+        bh=YIZatb4roa1GDW7bfgvu2sDrAvEjDZIPwllC3UTSPKU=;
+        b=KESdQK7rAEBFpSTpTFvoeaAvd1daICB2uGbJ2iyVnlOYcJ3a/dEImoGJMqzkzLqodB
+         34msbaalLuvg2+cTL6+s38n+QLITs+4vgzO+f27JMPeEbpbPC2ulX0x05vfL68c+U1NM
+         8EEOUl5AJIW2PsRs9p1l89ASFoQIVSLmNYNGC43pQN2nXh7lgLNs8ouGr2xrIuOlfo8L
+         8vGW2bSfoc27Mpr2mgipS6Loo/7hRinax9jfhQjta+aG4mMSuSomKQU3920WIthtAKqk
+         95xjaYs+HWNtNH1cgG7yQ7rjXtzSISajRsiKRId7A33TqwfBUqkjC0Y5jSpZhKNReOox
+         A/PA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=3BVA2RaKRUnRycsj2vXyL6wXYKMQsqw1EsbdjVV33go=;
-        b=pLxPxzq+5+fmM5k6XTLliyZHataQLtmW1u32mBiCtM9S+iituUv2WR8iy2sf4K8Ayq
-         xHmnS7hCuub6CWwwaGru2j6pp92oxr2LFu2hE9f1PeGqUQWDsPxYIYn/3iEldPvBMlsh
-         9FfKY5x2SCy6BMM7vD1SgBDIqEgm4K9xxPkFlvsBJaJM0OzkyDuWVzS2Lz0WptxMOOtH
-         d433yGRJ0iL/Ln6+2wcPXpnZxkdAGRa1mJIzWQUsFiwGSelQw82bdYRhUI/HkFxUEvR8
-         tkNCxDx9s5piBw/cMXkJML6Iv4deuB5k1oIeR8zmlaCEhg6BhDMtU9faL1r/uXSYjFBo
-         DSXw==
-X-Gm-Message-State: AOAM532/JLieXcrxhdyfqxdQbQmBYH0kDTUq/TKllDxwBg1PdjAo4/qS
-	KJLJ97oriLQFSWiiOIn6Wo3+MsPX
-X-Google-Smtp-Source: ABdhPJxXsBzvp/QxWfd9dWFB+Oyl8I6DI9NIeuSTA0tuQFi12gco6ZT5ImElIWo6uB0qfKL7OIU0GA==
-X-Received: by 2002:a62:fc52:: with SMTP id e79mr4719522pfh.5.1590941794944;
-        Sun, 31 May 2020 09:16:34 -0700 (PDT)
+        bh=YIZatb4roa1GDW7bfgvu2sDrAvEjDZIPwllC3UTSPKU=;
+        b=la9FEpiCOib5gmsUO8gplaebsZV2W/OgXGojrxpgZjwennOWrXWUhTglremY2ik4cm
+         UeORst0fQb+PoRddgfEbbHOMyu4MlHE9Qk7DuRNw1PaGMF24k0UYRn9MaINFgNIhj8QB
+         urv13WzO5KUM3CDRVM7J9NJtYltx1hfYKPe73wIsvoKE7+7TyfqIVjShz3MQEuszShDJ
+         dn7UN0kVUbNN2boM665oi5AGOnqXyIwtWav+5lAtueDVvUSe4YWG896ghafIdwucMEvC
+         ERT/LTMLQpV/ouYrlITnwtpMbDKseDzV16+n2J9O61NKmBzifUTy3blRax6x19YLu0Jq
+         hZwA==
+X-Gm-Message-State: AOAM530OpA4reF0ecRkLAOgPtYhN5MTXLxEGWdtlWoO2k1sNbkhkFtL/
+	RGoSW/g3eE91yZyMFLl4FJ3GhFf2
+X-Google-Smtp-Source: ABdhPJwzrXV2Xc/lu2CQBQKAW4X5FYE97IaRtuC5fsPrUYFqhOr4C2wka4uyhhNxiwJR+bsyOJdKQw==
+X-Received: by 2002:a63:77c6:: with SMTP id s189mr15880566pgc.267.1590941795767;
+        Sun, 31 May 2020 09:16:35 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:936:376a:3aad:6139])
-        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.16.33
+        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.16.35
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 May 2020 09:16:34 -0700 (PDT)
+        Sun, 31 May 2020 09:16:35 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 07/35] librsync: upgrade 2.3.0 -> 2.3.1
-Date: Sun, 31 May 2020 09:15:54 -0700
-Message-Id: <65cd3aa82ef673258ac4760ec860d3cb9bc1f6f8.1590941674.git.akuster808@gmail.com>
+Subject: [dunfell 08/35] dstat: Fix runtime error that depend python.
+Date: Sun, 31 May 2020 09:15:55 -0700
+Message-Id: <6fbfbc4b1239b4b2f492b45103fa7a3f6e4b2f18.1590941674.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1590941673.git.akuster808@gmail.com>
 References: <cover.1590941673.git.akuster808@gmail.com>
 
-From: Pierre-Jean Texier <pjtexier@koncepto.io>
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 
-This is a patch release that adds peformance improvements, updates and
-tidies documentation, and fixes two build/test bugs.
+Make dstat to depend python3.
 
-See full changelog https://github.com/librsync/librsync/releases/tag/v2.3.1
-
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit c8d1042a9892c38cefab8c6f4a9cce6dcad19db4)
+(cherry picked from commit 5a825b5ce781aef64f347a6c9a76307406a4f295)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../librsync/{librsync_2.3.0.bb => librsync_2.3.1.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/librsync/{librsync_2.3.0.bb => librsync_2.3.1.bb} (88%)
+ .../dstat/0001-change-dstat-to-python3.patch  | 89 +++++++++++++++++++
+ meta-oe/recipes-support/dstat/dstat_0.7.4.bb  |  4 +-
+ 2 files changed, 92 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/dstat/dstat/0001-change-dstat-to-python3.patch
 
-diff --git a/meta-oe/recipes-support/librsync/librsync_2.3.0.bb b/meta-oe/recipes-support/librsync/librsync_2.3.1.bb
-similarity index 88%
-rename from meta-oe/recipes-support/librsync/librsync_2.3.0.bb
-rename to meta-oe/recipes-support/librsync/librsync_2.3.1.bb
-index e9d34ee66a..004c93d0f9 100644
---- a/meta-oe/recipes-support/librsync/librsync_2.3.0.bb
-+++ b/meta-oe/recipes-support/librsync/librsync_2.3.1.bb
-@@ -5,7 +5,7 @@ LICENSE = "LGPLv2.1+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
+diff --git a/meta-oe/recipes-support/dstat/dstat/0001-change-dstat-to-python3.patch b/meta-oe/recipes-support/dstat/dstat/0001-change-dstat-to-python3.patch
+new file mode 100644
+index 0000000000..06a8498f3c
+--- /dev/null
++++ b/meta-oe/recipes-support/dstat/dstat/0001-change-dstat-to-python3.patch
+@@ -0,0 +1,89 @@
++From ce0528cb48666843fed2ad10ece5ecb0ac0b8cf8 Mon Sep 17 00:00:00 2001
++From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
++Date: Fri, 15 May 2020 12:38:49 +0900
++Subject: [PATCH] change dstat to python3.
++
++Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
++---
++ dstat               | 2 +-
++ examples/curstest   | 2 +-
++ examples/devtest.py | 2 +-
++ examples/mmpipe.py  | 2 +-
++ examples/mstat.py   | 2 +-
++ examples/read.py    | 2 +-
++ examples/tdbtest    | 2 +-
++ 7 files changed, 7 insertions(+), 7 deletions(-)
++
++diff --git a/dstat b/dstat
++index 9359965..f250f06 100755
++--- a/dstat
+++++ b/dstat
++@@ -1,4 +1,4 @@
++-#!/usr/bin/env python
+++#!/usr/bin/env python3
++ 
++ ### This program is free software; you can redistribute it and/or
++ ### modify it under the terms of the GNU General Public License
++diff --git a/examples/curstest b/examples/curstest
++index afc4e70..d720cca 100755
++--- a/examples/curstest
+++++ b/examples/curstest
++@@ -1,4 +1,4 @@
++-#!/usr/bin/python
+++#!/usr/bin/python3
++ import curses, sys
++ 
++ #c = curses.wrapper(s)
++diff --git a/examples/devtest.py b/examples/devtest.py
++index 0e9e969..e53babd 100755
++--- a/examples/devtest.py
+++++ b/examples/devtest.py
++@@ -1,4 +1,4 @@
++-#!/usr/bin/python
+++#!/usr/bin/python3
++ 
++ import sys
++ sys.path.insert(0, '/usr/share/dstat/')
++diff --git a/examples/mmpipe.py b/examples/mmpipe.py
++index 5c93567..f91515f 100755
++--- a/examples/mmpipe.py
+++++ b/examples/mmpipe.py
++@@ -1,4 +1,4 @@
++-#!/usr/bin/python
+++#!/usr/bin/python3
++ import select, sys, os
++ 
++ def readpipe(file, tmout = 0.001):
++diff --git a/examples/mstat.py b/examples/mstat.py
++index abf4d07..ac157e4 100755
++--- a/examples/mstat.py
+++++ b/examples/mstat.py
++@@ -1,4 +1,4 @@
++-#!/usr/bin/python
+++#!/usr/bin/python3
++ 
++ ### Example2: simple sub-second monitor (ministat)
++ 
++diff --git a/examples/read.py b/examples/read.py
++index 556b7ae..a925109 100755
++--- a/examples/read.py
+++++ b/examples/read.py
++@@ -1,4 +1,4 @@
++-#!/usr/bin/python
+++#!/usr/bin/python3
++ 
++ ### Example 1: Direct accessing stats
++ ### This is a quick example showing how you can access dstat data
++diff --git a/examples/tdbtest b/examples/tdbtest
++index 528a8ea..ae7fef9 100755
++--- a/examples/tdbtest
+++++ b/examples/tdbtest
++@@ -1,4 +1,4 @@
++-#!/usr/bin/python
+++#!/usr/bin/python3
++ import sys, tdb
++ 
++ db = tdb.tdb('/var/cache/samba/connections.tdb')
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-support/dstat/dstat_0.7.4.bb b/meta-oe/recipes-support/dstat/dstat_0.7.4.bb
+index 2e37dd72eb..74af54ca53 100644
+--- a/meta-oe/recipes-support/dstat/dstat_0.7.4.bb
++++ b/meta-oe/recipes-support/dstat/dstat_0.7.4.bb
+@@ -9,7 +9,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- SRC_URI = "git://github.com/librsync/librsync.git"
--SRCREV = "028d9432d05ba4b75239e0ba35bcb36fbfc17e35"
-+SRCREV = "27f738650c20fef1285f11d85a34e5094a71c06f"
- S = "${WORKDIR}/git"
+ DEPENDS += "asciidoc-native xmlto-native"
  
- DEPENDS = "popt"
+-SRC_URI = "git://github.com/dagwieers/dstat.git"
++SRC_URI = "git://github.com/dagwieers/dstat.git \
++           file://0001-change-dstat-to-python3.patch \
++          "
+ 
+ SRCREV = "6f5db0aed26bf8cf2700d4ffe90a9bd3436ac728"
+ 
 -- 
 2.17.1
 
