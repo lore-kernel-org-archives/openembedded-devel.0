@@ -1,103 +1,82 @@
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com [209.85.214.194])
- by mx.groups.io with SMTP id smtpd.web10.18208.1590941819794452905
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
+ by mx.groups.io with SMTP id smtpd.web12.18141.1590941820783287122
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 May 2020 09:16:59 -0700
+ Sun, 31 May 2020 09:17:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=XVfjD/gx;
- spf=pass (domain: gmail.com, ip: 209.85.214.194, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f194.google.com with SMTP id n9so119704plk.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:16:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=EZUXZKrM;
+ spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f178.google.com with SMTP id e9so1190058pgo.9
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:17:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=cSDIg2mNfCsv2NucBejI0BLWwR8AtmeRXvvsS4sTr80=;
-        b=XVfjD/gxct2c6bqV90SHKiLeiubJpWFEBVQlMty7u2Zu8BbDSB29gzm0+UdqMkM9im
-         gMYVMiQEyYiMmXHL382H+OuaoChcQWfxZQS0TZutCGdZ58ihKNVV513eqWVN1gQu7FJA
-         1PGjfyDSGLrsWXnbzuszmNXUQLqVz/FVcVVJpnGjYhkod5V2fuhcJwako3NwXdcxFYkk
-         aCmRPPNK7i2vJtdlsRg2d6v16wRw29NsaHw1oa7zxiOS4Qh8NH7TOHa5zDkiDXf25b+s
-         IOYAO4kiE8pKj/oR1Mw1edcmUNttIm13s+nOskv4yDAKr7uThQ+jiZPCCMs8XGZ94VUR
-         +BYA==
+        bh=YDuqX2hZYvsWvRcfcz0LXx3QdK1Tm4ewUOk0rsr7wr4=;
+        b=EZUXZKrM+VMen0xCKDd0ioGMUIUF0dJ3m4fS8nnFCN3jeYcGRmBZqKKCNarh368AZP
+         A0fos+4u2d+sU5iq9dP9xTo6p++oQYWOWllFpq737H1I9m5TsBgGonokvA8PvFuWU8G2
+         EBKHNs7bjBgVoV1XTvTTDEsxMDFyzDVqxoqtG+7KYNiBMSB69QILPYtzkkwIs83dqBF2
+         jFhcvD36pj6Yrbf9U3OO/CZ0d0WTPhKocfLbt0VA/mxJJ0gA9AgRvBI+36fw6dFye8Dz
+         R/vIds5J6+bf5khjl+HG7qTF0xr4Mmu7tVqhf/Llr/9Syxo6byxm+qs42dcN0Fnw5gKD
+         48yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=cSDIg2mNfCsv2NucBejI0BLWwR8AtmeRXvvsS4sTr80=;
-        b=E7ylZkbbLWebn3T6Jn+galCvKulwATpGWKIu/9kF6g9W+nWY19y/3STmKn1fzHQ+Ns
-         /vvOniWQjpKaUxmlaSnPaaiMVs0bhYSyzylGNGq8+Fhcm4Bh9t8Ze1q/aaCQAF8p/+D2
-         qyPcQvGuZo9qGjY5HvzYdiU/sBT4VJxaLI73hmzf+/WT7SAeA6dRfT3xOuE06KnTzOom
-         KtWOb84bi8Oqa2zHEOwqcleX3CsT8B1p1RwadORwUyFSVeQIBENau4bWtkKM7BkA0fZY
-         HgAB0mlB8XTdgpcjTJVlp76ES4GbirfgAVAE1Q+2lWw5/s6RLUheud0BaWJ5gbZ8bb3f
-         6Xow==
-X-Gm-Message-State: AOAM532Ynpa5iCoEr9MK6vG2lLovAMhfGRCQLoT+RNJ3Du16IkdH2DwM
-	jm3tVfh5fYGGLdIH799Ki5nmKah8
-X-Google-Smtp-Source: ABdhPJwBv0+TgFPowrdzvsz44KhRTrWziFsuLUfdNyCWlp5Pc3TjbZ15O/AFBDrfLbNUBpubRbbkgg==
-X-Received: by 2002:a17:90a:730a:: with SMTP id m10mr19742911pjk.196.1590941819193;
-        Sun, 31 May 2020 09:16:59 -0700 (PDT)
+        bh=YDuqX2hZYvsWvRcfcz0LXx3QdK1Tm4ewUOk0rsr7wr4=;
+        b=CyW+4gXvkZo5TM6f/MdE6DZb5SZCGAMmgTm+u9CiNg+pipC8ju0ttoFUD7uDZI6xhP
+         zl/U7xVKB1oVo64IJFI/He5DkhVVAmuzz1LPZbBCj882gjR23QBN0Z6v0Jy58KsV7BgU
+         Eq1hCVmzR3ogmaF654H23tj6A/hQhqS440W6VmigLGFZ4O3B1ClewaKG1uPNh/J28ga5
+         Z/uvwFR7BZ3uegVs2lmOQpC8IY3jp6JqdSpZ8TpEUF7A/LMyAHtdR+kv5l+NrSzQs3Ku
+         YFyWl1+S5vgobIje50KT0giK6XSVe5l6X2iV9BDvtQbCbiMtCI6yCXFyOnzVWzi+ESEI
+         yGtg==
+X-Gm-Message-State: AOAM533L4pbJXj3rsrwuVOFbxMSuxG6eJh2VBh4W2SYnyxWYmVXVpN8f
+	Q0BAg1pjJp6ydwgNIlaRnHxE+zRa
+X-Google-Smtp-Source: ABdhPJzUNH5g9xSeloWNrq/c5QtL3dG6KS8mo/ROHVlPreTx3/HY5LGDCiN1grc/ADGWzegxQkOmog==
+X-Received: by 2002:a63:4504:: with SMTP id s4mr15675193pga.175.1590941820057;
+        Sun, 31 May 2020 09:17:00 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:936:376a:3aad:6139])
-        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.16.58
+        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.16.59
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 May 2020 09:16:58 -0700 (PDT)
+        Sun, 31 May 2020 09:16:59 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 29/35] turbostat: fix the build failure for new v5.7-rc6 kernel
-Date: Sun, 31 May 2020 09:16:16 -0700
-Message-Id: <abc3111d46124fb9cb12506f65e4f7d9fe4e7bf2.1590941674.git.akuster808@gmail.com>
+Subject: [dunfell 30/35] cryptsetup: upgrade 2.3.1 -> 2.3.2
+Date: Sun, 31 May 2020 09:16:17 -0700
+Message-Id: <17391b2160b23710b49adcc4a3e02af0e05dadce.1590941674.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1590941673.git.akuster808@gmail.com>
 References: <cover.1590941673.git.akuster808@gmail.com>
 
-From: Yanfei Xu <yanfei.xu@windriver.com>
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
 
-Due to the new v5.7-rc6 kernel has some modify in header
-files, turbostat build failed. Now match the files.
-
-Signed-off-by: Yanfei Xu <yanfei.xu@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 90bcc2bd494c2c7a0a43e1d0c4943cdd061e929d)
+(cherry picked from commit 4dacdef41c27eacd1aa46401b00ccd3b65381d67)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-kernel/turbostat/turbostat_3.4.bb | 20 +++++++++++++++----
- 1 file changed, 16 insertions(+), 4 deletions(-)
+ .../cryptsetup/{cryptsetup_2.3.1.bb => cryptsetup_2.3.2.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.3.1.bb => cryptsetup_2.3.2.bb} (96%)
 
-diff --git a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-index 60040a47af..48c72140c8 100644
---- a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-+++ b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-@@ -42,16 +42,28 @@ do_configure_prepend() {
- 	mkdir -p ${S}
- 	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/msr-index.h ${S}
- 	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/intel-family.h ${S}
--	cp -r ${STAGING_KERNEL_DIR}/include/linux/bits.h ${S}
--	cp -r ${STAGING_KERNEL_DIR}/include/linux/const.h ${S}
-+	if [ -f "${STAGING_KERNEL_DIR}/include/vdso/bits.h" ]; then
-+		cp -r ${STAGING_KERNEL_DIR}/include/vdso/bits.h ${S}
-+		cp -r ${STAGING_KERNEL_DIR}/include/vdso/const.h ${S}
-+	else
-+		cp -r ${STAGING_KERNEL_DIR}/include/linux/bits.h ${S}
-+		cp -r ${STAGING_KERNEL_DIR}/include/linux/const.h ${S}
-+	fi
- 	cp -r ${STAGING_KERNEL_DIR}/tools/power/x86/turbostat/* ${S}
- 	cp -r ${WORKDIR}/COPYING ${S}
- }
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.1.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.2.bb
+similarity index 96%
+rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.1.bb
+rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.2.bb
+index ec375fed9d..b9668eb099 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.1.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.2.bb
+@@ -21,8 +21,8 @@ RDEPENDS_${PN} = " \
+ "
  
-+
- do_compile() {
- 	sed -i 's#<linux/bits.h>#"bits.h"#' msr-index.h
--	sed -i 's#<linux/const.h>#"const.h"#' bits.h
--	sed -i -e 's#<uapi/linux/const.h>#<linux/const.h>#' -e 's#_LINUX_CONST_H#_LINUX_CONST_H_KERNEL#' const.h
-+	'TMPCHECK='grep "<vdso/const.h>" bits.h'' || true
-+	if [ -n $TMPCHECK ]; then
-+		sed -i 's#<vdso/const.h>#"const.h"#' bits.h
-+		sed -i 's#<uapi/linux/const.h>#<linux/const.h>#' const.h
-+	else
-+		sed -i 's#<linux/const.h>#"const.h"#' bits.h
-+		sed -i -e 's#<uapi/linux/const.h>#<linux/const.h>#' -e 's#_LINUX_CONST_H#_LINUX_CONST_H_KERNEL#' const.h
-+	fi
- 	sed -i 's#MSRHEADER#"msr-index.h"#' turbostat.c
- 	sed -i 's#INTEL_FAMILY_HEADER#"intel-family.h"#' turbostat.c
- 	sed -i 's#\$(CC) \$(CFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#\$(CC) \$(CFLAGS) \$(LDFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#' Makefile
+ SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
+-SRC_URI[md5sum] = "cef482c0579f34d9524311ac70c0875f"
+-SRC_URI[sha256sum] = "92aba4d559a2cf7043faed92e0f22c5addea36bd63f8c039ba5a8f3a159fe7d2"
++SRC_URI[md5sum] = "6e4ffb6d35a73f7539a5d0c1354654cd"
++SRC_URI[sha256sum] = "a89e13dff0798fd0280e801d5f0cc8cfdb2aa5b1929bec1b7322e13d3eca95fb"
+ 
+ inherit autotools gettext pkgconfig
+ 
 -- 
 2.17.1
 
