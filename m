@@ -1,83 +1,98 @@
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.web11.18028.1590941814069782315
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.web10.18205.1590941815558971868
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 May 2020 09:16:54 -0700
+ Sun, 31 May 2020 09:16:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Sr/xgK5/;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id a4so2301865pfo.4
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:16:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=HeUZT32G;
+ spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f170.google.com with SMTP id r10so2358744pgv.8
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:16:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=b4kQpUgxrErKuqC/NC3dGNm96Dz+LAi+GuHO6CC8y2o=;
-        b=Sr/xgK5//GoVCt0u0EkaFuKvnaMSS3fvIWLoVW/kuqoTmzWzYwCf+9IzdvYep6GOsY
-         GqoSywmz0LbE0CxL8uuehaq17Lc70Gbw+SHQ86vdEPDuv6auBqP8G/cm/WWNyIGVo9Cg
-         OHY+pKN/A9zDW7u75i7DI4pbmYJ3VWVReoMMwocAba7/5M1mJNInPzqVOgrr7ref4UFc
-         KixuoY8FY2yNj0iIUF0cScyVAH2bHGqMJeEKFCLrg97lrPiOQyekW5AN31KS54SyrkL9
-         VfsHMpqi52+KJCd/KO4lag2TNnvIjPxkAr8FS4w4D/8CLpDV2VXML3+/Pwe+cO0x03VZ
-         UR8g==
+        bh=XOs/8eO5BbvJhP53q0rArVlUeyzXk8iCcfbEFZiLsDI=;
+        b=HeUZT32G7pKutqwMnpVvP7i8g2xw+OhqBPOQhrtyqSVV8U1d9BiP8LJ9Jn3Q/ZOVqs
+         hHZMWxaDhx67/2q+Tqx5O61ipTJBk/c8/hRsZS1JvjbCk5O3/TmLTbzHkGBbgRbnbvID
+         sGTiH/zbUXLmd8fZ3DoJhsOpui40reYUH91NseNKcfe/uoEl+6eznObvXS8CCJOj8loe
+         I+65ourf+56gD5aQF4hIrL22NZgbYq8UtU60n+/rEW4bExDbvwYKHxpBFqK4961KUVoe
+         qJ7snIabFb8eN+cbKQA0F11ZiJQ2W/GPndanpePKkilwHvKymeCNAF3u6SFZ1ucA48Ft
+         arUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=b4kQpUgxrErKuqC/NC3dGNm96Dz+LAi+GuHO6CC8y2o=;
-        b=kaiOFl6hT18lD88Uo0vp/K0tKalt1VRri3YcRgpdsolAwW+iIFi6T26+cvlfW7/7Pe
-         yTqnopQZ6s4PWEw4ZsquAK0Fy7K+DkognDanpG7laQsG7tP7KNqcFK+JxEC2VyNz+OaS
-         tl+OB46XqPfXzVKgEkG6K5sRNXulNDDdEU45F+M37FlhaTYWUOrfnHlNLYR9BardrKNF
-         y2YY7Mvzh44n8IwoZg2WzA4E+VVHf71VbYyR4OKsTWOz/cZ7WdQ/y4xmRdVbnV3G+Ddz
-         p7ipVm7J95gesifnBW5nBrMwJDARoiwhrczhqV7sJgXn05FlpUMpmdMrivR/MQ7K6lHa
-         qpiw==
-X-Gm-Message-State: AOAM532f+Pmg4DK0YJXf29xI+2sicVy3zmKurke3c/VeGwW/Tz/kgyaA
-	8ciX91CSrlRQfmCLeiDRQLfZPkHT
-X-Google-Smtp-Source: ABdhPJzASIG3BxdL8/Kcf8OEKwXo+pVBI2GEZTSHSHU6QIw3xTALPMcitRuN2RMSqjf4wSCZE4YKOQ==
-X-Received: by 2002:a62:1d48:: with SMTP id d69mr17334658pfd.27.1590941813470;
-        Sun, 31 May 2020 09:16:53 -0700 (PDT)
+        bh=XOs/8eO5BbvJhP53q0rArVlUeyzXk8iCcfbEFZiLsDI=;
+        b=F4vYNJTWVB2kUWvL31BzvhrLuV/dQfyTMR6xrwKFeJzB1GpDN0W2IMkZWxRYu9+5zs
+         1zrMjPWi/ZgVwfARIOeqHbJlVV4XIh9epbItfBsbc5EiRoQ7T6UZB6iYxHZmpPxziZtW
+         Qqf2IwQyOeL+ytIwL1L687Qz218qesvEVSA/gDKqsjxw1oO4fZLLY3gSBTdxyyVGhMJe
+         Wc2qAOmQObr14Dmx2mpUWzHCWFqUeY9U/LhciiOW162EE1Ozeo/LFXYD5F+J7iLYgVqF
+         isxO9bX65LGmVYIsNly5sGlfoELCue2PDiYfcqGtCejyOd9kvZ/gveJ/E4iSnWHQa/LY
+         3Ivw==
+X-Gm-Message-State: AOAM5324nY9LPZicdkyXp90YIfMVInrDzm/MUUc2CKbn7KHbYSXo/Les
+	A7sKaCFrDyyajF9USOuPmmD+1xKi
+X-Google-Smtp-Source: ABdhPJymRNac+RB+kgawfGb7MjoJtfG2te44B7PYA6cvk96xxn9aUXiO4VMvbr4/NAMRpA1IjYOG6w==
+X-Received: by 2002:a65:6247:: with SMTP id q7mr8554646pgv.353.1590941814882;
+        Sun, 31 May 2020 09:16:54 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:936:376a:3aad:6139])
-        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.16.52
+        by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.16.53
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 May 2020 09:16:53 -0700 (PDT)
+        Sun, 31 May 2020 09:16:54 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 24/35] libqmi: upgrade 1.24.8 -> 1.24.12
-Date: Sun, 31 May 2020 09:16:11 -0700
-Message-Id: <1403b138925e8fd2bf46d68fb7e9e1f5b27b84ee.1590941674.git.akuster808@gmail.com>
+Subject: [dunfell 25/35] python3-pandas: Upgrade 1.0.1 -> 1.0.3
+Date: Sun, 31 May 2020 09:16:12 -0700
+Message-Id: <cea2919b2f002e0c9e1ba98337498ed767317c4b.1590941674.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1590941673.git.akuster808@gmail.com>
 References: <cover.1590941673.git.akuster808@gmail.com>
 
-From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+From: Leon Anavi <leon.anavi@konsulko.com>
 
-Add md5 check.
+Upgrade to release 1.0.3 and consolidate into a single file.
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d59503a02e510b60d3fe5f8dfb870d7578036c24)
+(cherry picked from commit 9b1a1c270ae43d06e1399cdda6f81c062e78b690)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../libqmi/{libqmi_1.24.8.bb => libqmi_1.24.12.bb}             | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.24.8.bb => libqmi_1.24.12.bb} (85%)
+ meta-python/recipes-devtools/python/python3-pandas_1.0.1.bb | 2 --
+ .../python/{python-pandas.inc => python3-pandas_1.0.3.bb}   | 6 +++---
+ 2 files changed, 3 insertions(+), 5 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pandas_1.0.1.bb
+ rename meta-python/recipes-devtools/python/{python-pandas.inc => python3-pandas_1.0.3.bb} (78%)
 
-diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.8.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.12.bb
-similarity index 85%
-rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.24.8.bb
-rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.24.12.bb
-index 124b0f1b00..6f8638544e 100644
---- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.8.bb
-+++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.12.bb
-@@ -14,7 +14,8 @@ inherit autotools pkgconfig bash-completion
- SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
-            "
+diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.0.1.bb b/meta-python/recipes-devtools/python/python3-pandas_1.0.1.bb
+deleted file mode 100644
+index b5dd5e0924..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pandas_1.0.1.bb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-inherit setuptools3
+-require python-pandas.inc
+diff --git a/meta-python/recipes-devtools/python/python-pandas.inc b/meta-python/recipes-devtools/python/python3-pandas_1.0.3.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python-pandas.inc
+rename to meta-python/recipes-devtools/python/python3-pandas_1.0.3.bb
+index 9342cedfbc..099e035e14 100644
+--- a/meta-python/recipes-devtools/python/python-pandas.inc
++++ b/meta-python/recipes-devtools/python/python3-pandas_1.0.3.bb
+@@ -6,10 +6,10 @@ HOMEPAGE = "http://pandas.pydata.org/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ee0470f2de336c370a71c2f8d5e81c11"
  
--SRC_URI[sha256sum] = "c793db2c91d7928160341b357b26315d9c879ecb36699cb7a6b36054cba60893"
-+SRC_URI[md5sum] = "7e6e49fddb9ae2b6fcde14619d6cfe49"
-+SRC_URI[sha256sum] = "2d3b91a2b8a882b17b16403c9ef7bdce522db4f0ceaa3e4dff76033885428b69"
+-SRC_URI[md5sum] = "628ffa1dd5768e0be70236596cee8d6b"
+-SRC_URI[sha256sum] = "3c07765308f091d81b6735d4f2242bb43c332cc3461cae60543df6b10967fe27"
++SRC_URI[md5sum] = "a3ea90326c5b55944d369bef87740a72"
++SRC_URI[sha256sum] = "32f42e322fb903d0e189a4c10b75ba70d90958cc4f66a1781ed027f1a1d14586"
  
- PACKAGECONFIG ??= "udev mbim"
- PACKAGECONFIG[udev] = ",--without-udev,libgudev"
+-inherit pypi
++inherit pypi setuptools3
+ 
+ DEPENDS += " \
+     ${PYTHON_PN}-numpy-native ${PYTHON_PN}-cython-native \
 -- 
 2.17.1
 
