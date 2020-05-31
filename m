@@ -1,82 +1,84 @@
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web12.18133.1590941807429057073
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com [209.85.215.195])
+ by mx.groups.io with SMTP id smtpd.web10.18199.1590941808370935840
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 May 2020 09:16:47 -0700
+ Sun, 31 May 2020 09:16:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=cJpLa9gH;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id h185so1297581pfg.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:16:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=VAq12Bul;
+ spf=pass (domain: gmail.com, ip: 209.85.215.195, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f195.google.com with SMTP id j21so2362655pgb.7
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 09:16:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=yuRaInD89LNEEIZ5tdYvpJ8NOkmv8JJn49PzdeF60WY=;
-        b=cJpLa9gHuPE48eKyoVJ3PFsCcjUEc+U8zWh6Hscm5lrIdcmIxe7lOBvpIotM9dvlbM
-         M00gqsUYHVeeKHhSTfg+/tW+njf1TBtk38cHWAP3FYSNoAqgi9xq1BMUBj3AW6TMhdA+
-         2S/Bm508dZEHHpVWBrym/kh3jR22an23co0JW0z3ywxDzmXqyPCQPJQBFPdNoT0dT5Mg
-         HiaL254LipP9FZmqySETglEIfWkVmoeplY/ObB11wxo9GKMfom9+WscxrpfErLKcHkQ3
-         tC6wuFwynVk2u6o4AfqaU6Yt9DZiC2YzqId6XCRgFIglGZROabPImLfo0VtUsYlY90rC
-         kbMw==
+        bh=G9pALOF4KLmkhvp1ev3He6xI5Y6+z2knvuOaE8qATj4=;
+        b=VAq12BulWihm1CB0HjTISBF+EFGYHs43mV67YvfyT5SC4jnZM5UuTNWdTjneBtGIDX
+         er8K1Ek/f+iBKh2pTAynOSWSJQbVdHUAglsybt2yKTwlbOgcoMThGK/rKnnNfyUKrkBC
+         gneMYlFfcGTfI9ByqKmkHjnc18rIQlObyaXBBSroeA2ENKucOtGuhJg65x28IiQ70FyJ
+         sPKdsSrdk6D5ZxGEMb1DoArkkpP5QQ9thA72QmktUaQbScS3liTgMLjKKCVw9xN9CPl5
+         47x7ip1DRkZkbM+Y70WTFWwo6ZjlIfF5Hzc9WOqkmsUpfsF0Teb3Z2XXn0zyYokRGrit
+         Qfbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=yuRaInD89LNEEIZ5tdYvpJ8NOkmv8JJn49PzdeF60WY=;
-        b=YcsCIPnFEUK9hEQCdeVr1twk0UMysBT7WTdPnW0ZggnCXg+2aC62pCzuG0KKR/ylEN
-         2657OfVCmGo3SARcQXJI79gt5Zm9in4JGp7ByYT0pBtgnd1rvGwGlDavWlgTGuAtU6JP
-         bo4Bt6GXkVohDD93267sXdThxe7VxnoMoRkTfnFYjZ5TWNWnPmnMsMOgJWUIp4ZZN0vi
-         lslIV0svwVDLVaKQVAHYwdc6a3cpTniwSoZjW0NvsTo4ov1T3RkwpmGn2IosGo6NGJDq
-         PCyGgFjNCoXD+dNIcxs5yh706JN+8areGF0E7jtxwhPLF3Bu449j2lCU/jmXXm5j0Dmf
-         N+jg==
-X-Gm-Message-State: AOAM531VuO0Q3JAg9r1iCxYkWUDEUoxEQHC5o+yLbmIB9hStPP/IjBc2
-	ITpAKj+DG4N8hfJqzERWwVdbWZdP
-X-Google-Smtp-Source: ABdhPJzFSzrtXAPVu7ic+5yZd+lFPTHAVDfHcmIxqSdisBikDrhR25zGXIM3xOX1iw+3m3qOVcBdJQ==
-X-Received: by 2002:a63:ae44:: with SMTP id e4mr16130185pgp.428.1590941806787;
-        Sun, 31 May 2020 09:16:46 -0700 (PDT)
+        bh=G9pALOF4KLmkhvp1ev3He6xI5Y6+z2knvuOaE8qATj4=;
+        b=qNI/8Z8qDRFigapTM9VHSBV8TGp2KoROeH88my2fiDzVk0Rac2DR/d10RJ5JMNHrL1
+         1v9lHyqS86HE0lgLCzHZF9zu6p0v7pLAHImKb8WWq1PK6I13/HPwWNasdpXmuIdMJNbY
+         jnmvEG6fUhutTO5VcQxb5Er9cOYBW2YqEn4HQDNB5ufCmHU/nufQPkeDtilleCyDpn4N
+         zrDj6kazC3nBehnuJN4uftW3BZtSyZoyoU3KISAfNFIc6DDtaStFC2h8PxDIWGV0G2LQ
+         6vsojL7uwdCtGprk25uxZnNT1gymBNJFIXynlzCpzKb5MErMutjVy5S5MQu0e24QBNMb
+         AmQg==
+X-Gm-Message-State: AOAM531VV+9+cB4bdXF+xoDFMcQ9jhht4gky9Du/JVl4JIHlVDvRVEaE
+	IB4m/Yr0FPAQw8HYhcr4rLleXpGn
+X-Google-Smtp-Source: ABdhPJzcnUQtsdpdc+2l9tgilnZB/xNzE/mSv/POp0BtVgPSVMtLHbzGB8tzNmYz6WPoKPtvv1zPBA==
+X-Received: by 2002:a62:b40b:: with SMTP id h11mr16395785pfn.183.1590941807590;
+        Sun, 31 May 2020 09:16:47 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:936:376a:3aad:6139])
         by smtp.gmail.com with ESMTPSA id b16sm9188871pfd.111.2020.05.31.09.16.46
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 May 2020 09:16:46 -0700 (PDT)
+        Sun, 31 May 2020 09:16:47 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 18/35] python3-pycparser: upgrade 2.19 -> 2.20
-Date: Sun, 31 May 2020 09:16:05 -0700
-Message-Id: <95c120173e720cb968e197330d85b551648eef6c.1590941674.git.akuster808@gmail.com>
+Subject: [dunfell 19/35] python3-appdirs: Upgrade to 1.4.4
+Date: Sun, 31 May 2020 09:16:06 -0700
+Message-Id: <222ff0f9dc44058cfd959881bc787da09b6d602a.1590941674.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1590941673.git.akuster808@gmail.com>
 References: <cover.1590941673.git.akuster808@gmail.com>
 
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
+From: Leon Anavi <leon.anavi@konsulko.com>
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+Upgrade to release 1.4.4.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit a99312d03a4ac8785a7770309664d2eb05ae08d3)
+(cherry picked from commit 9108c29005f416315d9cfe9f61bd17e0b1163806)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{python3-pycparser_2.19.bb => python3-pycparser_2.20.bb}  | 4 ++--
+ .../{python3-appdirs_1.4.3.bb => python3-appdirs_1.4.4.bb}    | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pycparser_2.19.bb => python3-pycparser_2.20.bb} (74%)
+ rename meta-python/recipes-devtools/python/{python3-appdirs_1.4.3.bb => python3-appdirs_1.4.4.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pycparser_2.19.bb b/meta-python/recipes-devtools/python/python3-pycparser_2.20.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-pycparser_2.19.bb
-rename to meta-python/recipes-devtools/python/python3-pycparser_2.20.bb
-index 35ed93e09b..2a5f414b2f 100644
---- a/meta-python/recipes-devtools/python/python3-pycparser_2.19.bb
-+++ b/meta-python/recipes-devtools/python/python3-pycparser_2.20.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/eliben/pycparser"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86f1cedb4e6410a88ce8e30b91079169"
+diff --git a/meta-python/recipes-devtools/python/python3-appdirs_1.4.3.bb b/meta-python/recipes-devtools/python/python3-appdirs_1.4.4.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-appdirs_1.4.3.bb
+rename to meta-python/recipes-devtools/python/python3-appdirs_1.4.4.bb
+index 2e183d888c..eef5c02735 100644
+--- a/meta-python/recipes-devtools/python/python3-appdirs_1.4.3.bb
++++ b/meta-python/recipes-devtools/python/python3-appdirs_1.4.4.bb
+@@ -6,8 +6,8 @@ SRC_URI += " \
+ 	file://run-ptest \
+ "
  
--SRC_URI[md5sum] = "76396762adc3fa769c83d8e202d36b6f"
--SRC_URI[sha256sum] = "a988718abfad80b6b157acce7bf130a30876d27603738ac39f140993246b25b3"
-+SRC_URI[md5sum] = "b8f88de737db8c346ee8d31c07c7a25a"
-+SRC_URI[sha256sum] = "2d475327684562c3a96cc71adf7dc8c4f0565175cf86b6d7a404ff4c771f15f0"
+-SRC_URI[md5sum] = "44c679904082a2133f5566c8a0d3ab42"
+-SRC_URI[sha256sum] = "9e5896d1372858f8dd3344faf4e5014d21849c756c8d5701f78f8a103b372d92"
++SRC_URI[md5sum] = "d6bca12613174185dd9abc8a29f4f012"
++SRC_URI[sha256sum] = "7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41"
  
- inherit pypi setuptools3
+ inherit pypi setuptools3 ptest
  
 -- 
 2.17.1
