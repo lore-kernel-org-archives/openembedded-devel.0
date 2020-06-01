@@ -1,50 +1,50 @@
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com [209.85.221.67])
- by mx.groups.io with SMTP id smtpd.web10.48767.1591047942633526375
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.web11.48688.1591047943432023729
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jun 2020 14:45:42 -0700
+ Mon, 01 Jun 2020 14:45:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=g8v7YVtR;
- spf=pass (domain: gmail.com, ip: 209.85.221.67, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f67.google.com with SMTP id x13so1329909wrv.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2020 14:45:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=UMBVbo6X;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id r15so1008806wmh.5
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2020 14:45:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=iyWtrYyEWGyqiJu/OqBDMxoTBsqcNQPbMSFdkGnSO6g=;
-        b=g8v7YVtRuHltkT0zaMu0gTMa8wrVJAuMsbblJSzwZTM4iMwyINJRr4uiwEIapLvXpH
-         HGPA9ot1uilwKKu85zFcH2ZboQd2RbsUiGlY6JWXCmSWnKrAhnV187D44HiSmrDnlYIR
-         8TewMYdAQboZyTHh3L89dw3mr8H5QHZ0s/n6d34OuBMijToIAyCc66lFhltGkTxBlbVF
-         sw3KqgtjaT6AUskyzVk2A/LHFmwDmQWtfV00+q6D554SCTwOQqCjvjHL3Zgws/ks6hz0
-         P/cZ7IkfgGU2t9ANbAwbIzTziqw23/uR4m6bMULA+qlPvQiL1CyTtl/mD6nFcGOYGtrz
-         IkAw==
+        bh=T0d2bf880Jo0pnq4cGiTaWXpLkmFiL5RnBSM0wwKkjg=;
+        b=UMBVbo6XB42v6YqFxybdvZCe2zxKcSZqjs9o+CmfXqu0vje2bm+Wlft7v5IXJ+JoiY
+         9rUAJNU8BJR0q8IzN8CdL5bufkmSoK0efsuO+q4kxoK8kEscCaHh6w17NMdS1Myvt74a
+         1ZecQ7Pg5ZjA/YpAdHxEmuFdHhea8Qf/sZwO/oeLmdRh2Op3LNBzOj0m7qzarf74Q3hC
+         XKsMddyfPYJSSHS/m8Bm5FWOP78EpE/67m7KDZPCl4PUF65fA3ms0bYIC9AXdC5RxkHY
+         j3F5dVt4xfxpWLxkSa+oDCByQmsO6XjwS9LkbSiiD/Up3RK6GOmJpFLE+EZm3hzznY5G
+         mjjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=iyWtrYyEWGyqiJu/OqBDMxoTBsqcNQPbMSFdkGnSO6g=;
-        b=IbtSTWiU059CumF21QA+d7hsvXhEQTdvzny4iHxKuuXqa/PSUXRAC9pHQX7NTZ0SUp
-         r4kqibXFUO0Su8wHmjEuIKUsUgP1O+4xU2LeN2eB1Fx2wUXVhuPyQfaD/4PxHxDboRH+
-         BVsmrdWFOyxPikV7u8pOgicxnHm4JPOw4zZ/JIMi5z2WgrEa2UEvoIcQWVrIv94mv/1W
-         7sXD+IOLEzB9Hh45KpSdJBnqhMKg29gJwYWupZo2CYe4xSxUs5tl+5bbaoTThJ4RDco9
-         BrMXPYcd7nyBJ5CBYw7iNk3g5r4iFhwD4pekZS09QWJlJrq2Fd+7+9W2NoB7GHTmRQZR
-         NQAw==
-X-Gm-Message-State: AOAM531yvC1MT2wxWKdHqsQTSQg8K7nNqmgz47QiYQRBJA0xItGvGVQ0
-	jjCb0cnJBd+XLutGy3K2lOUCancnbtw=
-X-Google-Smtp-Source: ABdhPJzvX2yHXJ2lvV7AojRcEqb7665KNw+8IGC6v06KRgbZ0E7kHCadaDJGdEh1LzUA0YjSErhAtw==
-X-Received: by 2002:a5d:6986:: with SMTP id g6mr24320032wru.27.1591047940911;
-        Mon, 01 Jun 2020 14:45:40 -0700 (PDT)
+        bh=T0d2bf880Jo0pnq4cGiTaWXpLkmFiL5RnBSM0wwKkjg=;
+        b=fND96DO3pXat6CPxAjTCvwc1ry/n9Q1KiCp9kt5jBS9PoLrmdhvFLGh+BTCLzRMhrt
+         Uya2ntJc0ItiOOomiy465ONPQ7d9gC0q8qg1DMA/E7PIqgqYVkzEsn1BcyTbqrwiRJEx
+         H4LDvD7Uy6AzkCy/f5EvMMfe7Fu81l5E48Qun5X0Pw9JP1Rxe+Tb5s3sS6+mgjyvWJHk
+         jkJmG0hs9ErZixwEIdsnfhYGPyWokO3J5iuanUuyO34Eh1LtR+rKFMAEFp/4l++Lmxfm
+         PRQz8GfLyu0a7o0GObDxYybuSnwzQdjz9/Zea6c7pouL/atbLGfNo2Xawp9UYhFxXKD1
+         ykfQ==
+X-Gm-Message-State: AOAM532XqDT1I+IMN+29I8eFeaCYbYCFFkMQgi4Q9z+aFb2LNfYPcVlN
+	BBe7jYBJedkGNg2+WLVt51UaTXH3RwY=
+X-Google-Smtp-Source: ABdhPJx8myMU1USiN5MWaB6pPqmQnwx5clwaCL6SKw+3Ql/OeodzYZZIamTZoXbbJig7ZlXxFW13Ng==
+X-Received: by 2002:a05:600c:22c1:: with SMTP id 1mr1245239wmg.50.1591047941815;
+        Mon, 01 Jun 2020 14:45:41 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f06ad34da2c69d11ac2eac0.dip0.t-ipconnect.de. [2003:f0:7f06:ad34:da2c:69d1:1ac2:eac0])
-        by smtp.gmail.com with ESMTPSA id 40sm1050119wrc.15.2020.06.01.14.45.39
+        by smtp.gmail.com with ESMTPSA id 40sm1050119wrc.15.2020.06.01.14.45.41
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Jun 2020 14:45:40 -0700 (PDT)
+        Mon, 01 Jun 2020 14:45:41 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 13/38] gedit: upgradde 3.34.1 -> 3.36.2
-Date: Mon,  1 Jun 2020 23:44:51 +0200
-Message-Id: <20200601214516.26624-14-schnitzeltony@gmail.com>
+Subject: [PATCH 14/38] gdm: upgrade 3.34.1 -> 3.36.2
+Date: Mon,  1 Jun 2020 23:44:52 +0200
+Message-Id: <20200601214516.26624-15-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200601214516.26624-1-schnitzeltony@gmail.com>
 References: <20200601214516.26624-1-schnitzeltony@gmail.com>
@@ -52,98 +52,41 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Took a look into meson.build to reduce dependencies
-
-News in 3.36.2, 2020-04-25
---------------------------
-* Misc bug fixes.
-* Translation updates.
-
-News in 3.36.1, 2020-03-20
---------------------------
-* File chooser dialog: use text files filter by default.
-* Fix compilation on macOS.
-* Fix External Tools plugin.
-* Fix Snippets plugin.
-* Other bug fixes.
-* Translation updates.
-
-News in 3.36.0, 2020-03-06
---------------------------
-* Fix a bug in the quickopen plugin.
-* Updates to the user manual.
-* Translation updates.
-
-News in 3.35.90, 2020-01-31
----------------------------
-* Remove text centering when in fullscreen mode and when a right margin was
-  set. For the explanation see: commit 8710e89d847b0bfc65d7833255090e304cf7c890
-* Make the scrollbars always visible around the main text area. For the
-  explanation see: commit 5e0909c19f267b4023131881fac89c58a2a17453
-* Remove the overview map. For the explanation see:
-  commit 26899e0ba7c1390c098b61fc7a901d700c4e745c
-* File chooser dialog: re-add the feature to be able to customize the list of
-  character encodings.
-* Open a file from the headerbar: re-implement the previous user interface: two
-  buttons, "Open" to open the dialog window, and an arrow to open the recent
-  menu. For the explanation see: commit 27f54a9aed82109a512743b5e819b18004c19de7
-* GSettings schema: enable more features by default (auto-indent,
-  display-line-numbers, highlight-current-line and bracket-matching) and set
-  default style scheme to 'tango'.
-* Bug fixes.
-* Code refactorings.
-* Lots of small improvements to the build system.
-* The libsoup dependency is required only on Windows for the checkupdate plugin.
-* Translation updates.
+==============
+Version 3.36.2
+==============
+- Fixes for when GDM isn't started on its configured initial VT
+- Don't hardcode path to plymouth
+- keyutils has a .pc file so use it
+- Chrome remote desktop fix
+- Always use separate session bus for greeter sessions
+  This runs dbus-run-session, so the binary needs to be available
+- Translation updates
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../gedit/{gedit_3.34.1.bb => gedit_3.36.2.bb}     | 14 ++++----------
- 1 file changed, 4 insertions(+), 10 deletions(-)
- rename meta-gnome/recipes-gnome/gedit/{gedit_3.34.1.bb => gedit_3.36.2.bb} (63%)
+ meta-gnome/recipes-gnome/gdm/{gdm_3.34.1.bb => gdm_3.36.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-gnome/recipes-gnome/gdm/{gdm_3.34.1.bb => gdm_3.36.2.bb} (89%)
 
-diff --git a/meta-gnome/recipes-gnome/gedit/gedit_3.34.1.bb b/meta-gnome/recipes-gnome/gedit/gedit_3.36.2.bb
-similarity index 63%
-rename from meta-gnome/recipes-gnome/gedit/gedit_3.34.1.bb
-rename to meta-gnome/recipes-gnome/gedit/gedit_3.36.2.bb
-index 850ba4df9..75f1737c6 100644
---- a/meta-gnome/recipes-gnome/gedit/gedit_3.34.1.bb
-+++ b/meta-gnome/recipes-gnome/gedit/gedit_3.36.2.bb
-@@ -6,30 +6,24 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
- GNOMEBASEBUILDCLASS = "meson"
+diff --git a/meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb b/meta-gnome/recipes-gnome/gdm/gdm_3.36.2.bb
+similarity index 89%
+rename from meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb
+rename to meta-gnome/recipes-gnome/gdm/gdm_3.36.2.bb
+index a47bf6fcf..fbf25a30c 100644
+--- a/meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb
++++ b/meta-gnome/recipes-gnome/gdm/gdm_3.36.2.bb
+@@ -14,8 +14,8 @@ REQUIRED_DISTRO_FEATURES = "x11 systemd pam"
  
- DEPENDS = " \
--    yelp-tools-native \
--    libxml2-native \
-     gdk-pixbuf-native \
--    iso-codes \
-     gtk+3 \
-     gsettings-desktop-schemas \
--    gtksourceview4 \
-     libpeas \
-     libsoup-2.4 \
-     gspell \
-     gtksourceview4 \
-+    tepl \
- "
+ inherit gnomebase gsettings gobject-introspection gettext systemd useradd upstream-version-is-even features_check
  
- inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc vala gettext features_check upstream-version-is-even mime-xdg
+-SRC_URI[archive.md5sum] = "65d1fd4bb85e8b133d1cbffb80ecf62e"
+-SRC_URI[archive.sha256sum] = "e85df657aa8d9361af4fb122014d8f123a93bfe45a7662fba2b373d839dbd8d3"
++SRC_URI[archive.md5sum] = "18384eb8345dbee5a8219916debf7e43"
++SRC_URI[archive.sha256sum] = "3f561c10ae2e5942b03026f02c0aa7d8712e382708b17a0970874df8175b83a8"
+ SRC_URI += "file://0001-Ensure-pam-file-installation.patch"
  
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI[archive.md5sum] = "4bca1d0a13db186cd84619b4bff42238"
--SRC_URI[archive.sha256sum] = "ebf9ef4e19831699d26bb93ce029edfed65416d7c11147835fc370d73428d5c6"
--
--GTKDOC_MESON_OPTION = "documentation"
-+SRC_URI[archive.md5sum] = "438217bbbcf92a17c4f259b4a5426b03"
-+SRC_URI[archive.sha256sum] = "6887554643c5b1b3862ac364d97b7b50224bff95e6758aeaa08f4a482b554197"
- 
--PACKAGECONFIG ??= "gvfs"
--PACKAGECONFIG[gvfs] = "-Denable-gvfs-metadata=yes,-Denable-gvfs-metadata=no,,gvfs"
-+GTKDOC_MESON_OPTION = "gtk_doc"
- 
- PACKAGES += "${PN}-python"
- 
+ EXTRA_OECONF = " \
 -- 
 2.21.3
 
