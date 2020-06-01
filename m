@@ -1,81 +1,225 @@
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
- by mx.groups.io with SMTP id smtpd.web12.26901.1590971276577232337
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web10.28445.1590977224582434417
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 May 2020 17:27:56 -0700
+ Sun, 31 May 2020 19:07:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ONO+RrSV;
- spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f175.google.com with SMTP id f21so2680811pgg.12
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 17:27:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=qXZL6waMELSyFptWJ+IO4UCtHPuu+k04Xq1QgvIhwKQ=;
-        b=ONO+RrSVIHc20O3sesGiIrervzM1quESuTC8zTFs54BbLbhsqQtXeLdqr1wFbdzsZl
-         Nha+U8zFdCpH34JOjcN9sEhhp5nO9miMj+vhLzlVCADnz+bspJx1kh3boXTyJUlqZmdA
-         OHgx213rY/JGvr3Jdj8n0aWdONRxGz5dCmKbBb5tzZuh+FEC+GscPFMhyGdmdhV/Jqo1
-         /I22hYhFnqFRgdJrC/lOYHdlEt9DoQHuH1EeNGHC2JZSTVPZseMc65HJ2YQ3oIslscFQ
-         3DIUxZssrwBvYO81M1GlvWkeHryhkCb0cGgf3BxM13kCMPhlb9zWqedd2zd1mYqJ6KtO
-         QVsQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=qXZL6waMELSyFptWJ+IO4UCtHPuu+k04Xq1QgvIhwKQ=;
-        b=Bvfs4MJ4n7Blve1RPCuDASJr2Zn4t4leuGeBCi5ncjEF9GuMrUXVN/wWIXhE4XC2YP
-         zA/j1IBynFu/+/VhvhYLtVTclC5gNEK6pVB3g2lpL/C+XOTP/1eIWPC9VRxXOHsL1o35
-         iBNlKM6ef8Wyisf+OhfCTMj0pEwkvwGApOufQvwZOzBvn7gUf4W7JVYCE4OzbY+mwfnG
-         F8DPJ70Wbgg25PPrjNu8c7u0ka53M0aZJtBxdG5WzbYkVxPxWK47BC+wh22eNxSH3CDP
-         QgKY/e9odqviRz7Q1/KW0OFggyeH2CgaZ4wHulXmSBgoJxRnw3ivQoDIdOqyG+0ev2Bz
-         O4EQ==
-X-Gm-Message-State: AOAM533zw9DD46GqeHdZ5FdpDdM1ceZSew2srJfxVl7aGXYWT+9QxSj9
-	U3gqS2rR3ePovev/+HYauYcvtOJUMc0=
-X-Google-Smtp-Source: ABdhPJzumQnarxgkOY0rUkgTWvTjXFM4UQ5OSLxhrXpQ/rxCetUxLJXindsRUOULN9rHKKdM0elXQA==
-X-Received: by 2002:a63:3f8a:: with SMTP id m132mr17091004pga.225.1590971275683;
-        Sun, 31 May 2020 17:27:55 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::86f0])
-        by smtp.gmail.com with ESMTPSA id s11sm2034950pfh.204.2020.05.31.17.27.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 May 2020 17:27:55 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] python3-zopeinterface: Upgrade to 5.1.0
-Date: Sun, 31 May 2020 17:27:52 -0700
-Message-Id: <20200601002752.927933-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.26.2
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: yi.zhao@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 05126CML009117
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 19:06:53 -0700
+Received: from localhost (128.224.162.174) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.487.0; Sun, 31 May
+ 2020 19:06:39 -0700
+From: "Yi Zhao" <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] gpsd: add new init script
+Date: Mon, 1 Jun 2020 10:06:25 +0800
+Message-ID: <20200601020625.17417-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [128.224.162.174]
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+The current init script can not start/stop gpsd daemon with the
+following errors:
+gpsd: line 48: /lib/init/vars.sh: No such file or directory
+gpsd: line 52: /lib/lsb/init-functions: No such file or directory
+
+Add a new init script to fix the issue.
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- ...-zopeinterface_4.7.1.bb => python3-zopeinterface_5.1.0.bb} | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-zopeinterface_4.7.1.bb => python3-zopeinterface_5.1.0.bb} (84%)
+ .../recipes-navigation/gpsd/gpsd/gpsd.init    | 158 ++++++++++++++++++
+ meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb  |   3 +-
+ 2 files changed, 160 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/gpsd.init
 
-diff --git a/meta-python/recipes-devtools/python/python3-zopeinterface_4.7.1.bb b/meta-python/recipes-devtools/python/python3-zopeinterface_5.1.0.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-zopeinterface_4.7.1.bb
-rename to meta-python/recipes-devtools/python/python3-zopeinterface_5.1.0.bb
-index 6b65924c21..a66735b8a7 100644
---- a/meta-python/recipes-devtools/python/python3-zopeinterface_4.7.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-zopeinterface_5.1.0.bb
-@@ -2,12 +2,10 @@ SUMMARY = "Interface definitions for Zope products"
- LICENSE = "ZPL-2.1"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e54fd776274c1b7423ec128974bd9d46"
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/gpsd.init b/meta-oe/recipes-navigation/gpsd/gpsd/gpsd.init
+new file mode 100644
+index 000000000..c9db0bb5c
+--- /dev/null
++++ b/meta-oe/recipes-navigation/gpsd/gpsd/gpsd.init
+@@ -0,0 +1,158 @@
++#! /bin/sh
++### BEGIN INIT INFO
++# Provides:          gpsd
++# Required-Start:    $remote_fs $syslog $network
++# Should-Start:      bluetooth dbus udev
++# Required-Stop:     $remote_fs $syslog $network
++# Should-Stop:
++# Default-Start:     2 3 4 5
++# Default-Stop:      0 1 6
++# X-Start-Before:    ntp
++# Short-Description: GPS (Global Positioning System) daemon start/stop script
++# Description:       Start/Stop script for the gpsd service daemon,
++#                    which is able to monitor one or more GPS devices
++#                    connected to a host computer, making all data on
++#                    the location and movements of the sensors available
++#                    to be queried on TCP port 2947.
++### END INIT INFO
++
++
++# PATH should only include /usr/* if it runs after the mountnfs.sh script
++PATH=/sbin:/usr/sbin:/bin:/usr/bin
++
++DESC="GPS (Global Positioning System) daemon"
++NAME="gpsd"
++DAEMON=/usr/sbin/$NAME
++PIDFILE=/var/run/$NAME.pid
++
++. /etc/init.d/functions || exit 1
++
++# Exit if the package is not installed
++[ -x "$DAEMON" ] || exit 0
++
++# Read configuration variable file if it is present
++[ -r /etc/default/$NAME ] && . /etc/default/$NAME
++
++if [ -z "$GPSD_SOCKET" ] && [ -z "$DEVICES" ]; then
++	GPSD_SOCKET=/var/run/gpsd.sock
++fi
++
++if [ -n "$GPSD_SOCKET" ]; then
++	GPSD_OPTIONS="$GPSD_OPTIONS -F $GPSD_SOCKET"
++fi
++
++DAEMON_ARGS="$GPSD_OPTIONS $DEVICES"
++
++#
++# Function that starts the daemon/service
++#
++do_start() {
++	local status pid
++
++	status=0
++	pid=`pidofproc $NAME` || status=$?
++	case $status in
++	0)
++		echo "$DESC already running ($pid)."
++		exit 1
++		;;
++	*)
++		echo "Starting $DESC ..."
++		exec $DAEMON $DAEMON_ARGS >/dev/null 2>&1 || status=$?
++		echo "ERROR: Failed to start $DESC."
++		exit $status
++		;;
++	esac
++}
++
++#
++# Function that stops the daemon/service
++#
++do_stop() {
++	local pid status
++
++	status=0
++	pid=`pidofproc $NAME` || status=$?
++	case $status in
++	0)
++		# Exit when fail to stop, the kill would complain when fail
++		kill -s 15 $pid >/dev/null && rm -f $PIDFILE && \
++			echo "Stopped $DESC ($pid)." || exit $?
++		;;
++	*)
++		echo "$DESC is not running; none killed." >&2
++		;;
++	esac
++
++	return $status
++}
++
++#
++# Function that sends a SIGHUP to the daemon/service
++#
++do_reload() {
++	local pid status
++
++	status=0
++	# If the daemon can reload its configuration without
++	# restarting (for example, when it is sent a SIGHUP),
++	# then implement that here.
++	pid=`pidofproc $NAME` || status=$?
++	case $status in
++	0)
++		echo "Reloading $DESC ..."
++		kill -s 1 $pid || exit $?
++		;;
++	*)
++		echo "$DESC is not running; none reloaded." >&2
++		;;
++	esac
++	exit $status
++}
++
++
++#
++# Function that shows the daemon/service status
++#
++status_of_proc () {
++	local pid status
++
++	status=0
++	# pidof output null when no program is running, so no "2>/dev/null".
++	pid=`pidofproc $NAME` || status=$?
++	case $status in
++	0)
++		echo "$DESC is running ($pid)."
++		exit 0
++		;;
++	*)
++		echo "$DESC is not running." >&2
++		exit $status
++		;;
++	esac
++}
++
++case "$1" in
++start)
++	do_start
++	;;
++stop)
++	do_stop || exit $?
++	;;
++status)
++	status_of_proc
++	;;
++restart)
++	# Always start the service regardless the status of do_stop
++	do_stop
++	do_start
++	;;
++force-reload)
++	# Only start the service when do_stop succeeds
++	do_stop && do_start
++	;;
++*)
++	echo "Usage: $0 {start|stop|status|restart|force-reload}" >&2
++	exit 3
++	;;
++esac
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
+index 390e6a8c3..3888ad8fa 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
+@@ -8,6 +8,7 @@ PROVIDES = "virtual/gpsd"
+ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
+     file://0001-Revert-SConstruct-Add-test-for-sizeof-time_t-result-.patch \
++    file://gpsd.init \
+ "
+ SRC_URI[md5sum] = "cf7fdec7ce7221d20bee1a7246362b05"
+ SRC_URI[sha256sum] = "172a7805068eacb815a3c5225436fcb0be46e7e49a5001a94034eac43df85e50"
+@@ -66,7 +67,7 @@ do_install() {
  
--SRC_URI[md5sum] = "1bc66758275c5eb66d169acba3c8e50e"
--SRC_URI[sha256sum] = "4bb937e998be9d5e345f486693e477ba79e4344674484001a0b646be1d530487"
--
- PYPI_PACKAGE = "zope.interface"
- 
- inherit pypi setuptools3
-+SRC_URI[sha256sum] = "40e4c42bd27ed3c11b2c983fecfb03356fae1209de10686d03c02c8696a1d90e"
- 
- PACKAGES =. "${PN}-test "
+ do_install_append() {
+     install -d ${D}/${sysconfdir}/init.d
+-    install -m 0755 ${S}/packaging/deb/etc_init.d_gpsd ${D}/${sysconfdir}/init.d/gpsd
++    install -m 0755 ${WORKDIR}/gpsd.init ${D}/${sysconfdir}/init.d/gpsd
+     install -d ${D}/${sysconfdir}/default
+     install -m 0644 ${S}/packaging/deb/etc_default_gpsd ${D}/${sysconfdir}/default/gpsd.default
  
 -- 
-2.26.2
+2.17.1
 
