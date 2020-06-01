@@ -1,206 +1,74 @@
-Subject: #oe Embedded Systems and Applications Publication Announcements -Volume 10, Issue 2, June 2020.
-To: openembedded-devel@lists.openembedded.org
-From: skareem29684@aol.com
-X-Originating-Location: Thornton Heath, England, GB (80.235.154.71)
-X-Originating-Platform: Windows Chrome 83
-User-Agent: GROUPS.IO Web Poster
+Received: from mail-il1-f180.google.com (mail-il1-f180.google.com [209.85.166.180])
+ by mx.groups.io with SMTP id smtpd.web11.34562.1591010421109441465
+ for <openembedded-devel@lists.openembedded.org>;
+ Mon, 01 Jun 2020 04:20:21 -0700
+Authentication-Results: mx.groups.io;
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=sOVsVFwc;
+ spf=pass (domain: gmail.com, ip: 209.85.166.180, mailfrom: jonatan.p@gmail.com)
+Received: by mail-il1-f180.google.com with SMTP id b5so2814992iln.5
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2020 04:20:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=3sPKOG+BzH1r6u7aPhoypc65bFUrUzsSScApYgEGfh4=;
+        b=sOVsVFwcYuZvXqH78K9vsHxZcgBRFfy+G81ntqvATXoIruRzB+DjuhceMO7kdW3mrP
+         6vyc9d7edUwSkUwjTwYo0AKfC+iIvrywSNyXstQFr/07k44hDIZaCSqJA6zaATExMSVk
+         H7RuqS1O77yH6z0Q4rjQauO6v1H3oFAwHanfQqN8wWf9ZbwqB8YQ6xACnV2oL7udlSwo
+         cDBPglFGhBlMm8gEEfe3fMB0iR/4QyENEB1OHtlqKnXPTjGgcodvkhxDLNVrwdhGa1uf
+         DVVoMOfBXTDqv4iQ69J461QkLx9/ujsMxU6U6r24sF0hcT+MRX+flisd63hb2rzQKr9e
+         SBnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=3sPKOG+BzH1r6u7aPhoypc65bFUrUzsSScApYgEGfh4=;
+        b=GHXjS6JjldA2P0V8yv8UkCPnR0/zgslr7nnyp4uAgP2avcCxf6gTOAbIsUIwJx47EJ
+         hY5Maq4UKJPdb9tgRNHJZsP4uk5/f9w60Trq0GUnP1lAK2E+6Nl/7md8BilLj2B8aSGi
+         wYycJLpSo6QjXvViAWumZaPCzgaFPwPv8lwEy3Yae6rG4geEKYGcnuNB016RvqFYmD32
+         NUso9gk3ZYav/3sPWG+wyB4YzKnP/tlOBMa79WjGhp0+wlCK6nwZz7J3hVyNXKLN0pha
+         kpXc8HVd9tJMVnPkwnEcItkyXpVz1qTBj7FE6gGirHC23bB3lmUzc2ia9QoVXXVs56Jh
+         kgLw==
+X-Gm-Message-State: AOAM532LJB0Mu6X6OqAYrWrKHBbhKBeaNlTF0Ec6gNaVpx3eqtgMDWDA
+	GwP5KaYpwfyRxO3YgvWsU8H+gkR8qYQKHTFB0fAXNucB
+X-Google-Smtp-Source: ABdhPJwPM+wy9lSv0/RCqgm5+pgguDF3+3xY13gBjn2sJYHgfKLLpyAfI7CKNmPsNA6m/MTS641s5idrYZOnhEKSqyY=
+X-Received: by 2002:a92:cd0e:: with SMTP id z14mr19620602iln.307.1591010420281;
+ Mon, 01 Jun 2020 04:20:20 -0700 (PDT)
 MIME-Version: 1.0
-Date: Sun, 31 May 2020 23:13:36 -0700
-Message-ID: <XmzV.1590992016371418942.l9in@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="FRMmwJqgz8zx4wM9AxvD"
+From: =?UTF-8?B?Sm9uYXRhbiBQw6Vsc3Nvbg==?= <jonatan.p@gmail.com>
+Date: Mon, 1 Jun 2020 13:20:09 +0200
+Message-ID: <CAKm+giO0HyHER+MkPyiN0GQou9j2Jsc6AuGTp6TyVBeHQSZ9qg@mail.gmail.com>
+Subject: Rootfs conflicts when using multilib and doc-pkgs
+To: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 
---FRMmwJqgz8zx4wM9AxvD
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Hello,
 
-To All openembedded-devel community members,
+I have a Yocto 2.6 build with multilib enabled. I also have the
+doc-pkgs IMAGE_FEATURE enabled. I have issues with lib32-foo-doc and
+foo-doc both installing manpages into the same location in the rootfs,
+which causes conflicts during do_rootfs of my image recipe.
 
-We are pleased to announce the publication invitation of IJESA Volume 10, =
-Issue 2, June=C2=A0 2020.
+The way I understand it, there shouldn't be any issues with having
+lib32-foo-doc and foo-doc installing the same manpage, as long as the
+manpages from both packages are identical. My problem is that in some
+cases, the foo package is cached in sstate, but the lib32-foo package
+is not, and the manpage contains a timestamp of when it was built.
+This if course gives two different versions of the manpage.
 
-Scope & Topics
+When the doc-pkgs IMAGE_FEATURE is enabled,
+IMAGE_INSTALL_COMPLEMENTARY is populated with "*-doc", which matches
+both lib32-foo-doc and foo-doc. This happens in image.bbclass. My
+current work-around for this is to set PACKAGE_EXCLUDE_COMPLEMENTARY
+to "lib32-*-doc" - which filters out all lib32 versions of the
+manpages. In the vast majority of cases, I suspect that the lib32
+version of the docs and the "normal" version should have the same
+contents, which means that keeping only one version of the manpages
+would work.
 
-International Journal of Embedded Systems and Applications (IJESA) is a qu=
-arterly open access peer-reviewed journal that publishes articles which con=
-tribute new results in all areas of the Embedded Systems and applications. =
-The goal of this journal is to bring together researchers and practitioners=
- from academia and industry to focus on understanding Embedded Systems and =
-establishing new collaborations in these areas.Authors are solicited to con=
-tribute to the journal by submitting articles that illustrate research resu=
-lts, projects, surveying works and industrial experiences that describe sig=
-nificant advances in the areas of Embedded Systems & applications.
-
-Topics of interest
-
-=E2=80=A2 Application-specific processors and devices
-=E2=80=A2 Business Applications
-=E2=80=A2 Component and binding models
-=E2=80=A2 Embedded computing education
-=E2=80=A2 Embedded hardware support
-=E2=80=A2 Embedded system architecture
-=E2=80=A2 Hardware and software co-design
-=E2=80=A2 Integration with SOA
-=E2=80=A2 Middleware
-=E2=80=A2 Programming abstractions
-=E2=80=A2 Real-time systems
-=E2=80=A2 Service-Oriented Architectures
-=E2=80=A2 Testing techniques
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Volume 9 -=C2=A0 *URL: * https://wireilla.com/ijesa/vol9.html
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D
-@Energy-Efficient Low Dropout Regulator with Switching Mechanism and Cours=
-e Regulator for Internet of Things (IOT) Devices
-
-@Analysis of System on Chip Design Using Artificial Intelligence
-
-@IOT-Enabled Green Campus Energy Management System
-
-@Steganography Based Asymmetric Key Cryptosystem Using Trellis Coded Genet=
-ic Algorithm Random Key Generator
-
-@Enhanced Embedded Linux Board Support Package Field Upgrade =E2=80=93 A C=
-ost Effective Approach
-
-@A VLSI Architecture Realisation of an Wireless Endoscopy System
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D
-Volume 8 - *URL: * https://wireilla.com/ijesa/vol8.html
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D
-@Design and Implementation of IOT Based Smart Power Monitoring and Managem=
-ent System Using WSNS
-
-@Performance Evaluation of Fuzzy Logic and Back Propagation Neural Network=
- for Hand Written Character Recognition
-
-@Fingerprint Classification Based on Orientation Field
-
-@Design of an Autonomous Smart Shower With Sensors and Actuators
-
-@Dynamut: A Mutation Testing Tool for Industry-Level Embedded System Appli=
-cations
+Is the inclusion of both lib32-foo-doc and foo-doc intentional in
+IMAGE_INSTALL_COMPLEMENTARY, or is this a mistake? If it is a mistake,
+do you have any suggestions on what the correct behavior would be?
+Excluding all packages with the MLPREFIX seems to work in my case, but
+it seems like an inelegant approach.
 
 Thanks,
-Secretary
-*Stay in touch with International Journal of Embedded Systems and Applicat=
-ions (IJESA)
-ISSN : 1839-5171
-Upcoming issue : June 2020,Vol 10 No 2
-https://wireilla.com/ijesa/index.html
-
---FRMmwJqgz8zx4wM9AxvD
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-
-<h5>To All openembedded-devel community members,</h5>
-<div>&nbsp;</div>
-<div>We are pleased to announce the publication invitation of IJESA Volume=
- 10, Issue 2, June&nbsp; 2020.</div>
-<div>&nbsp;</div>
-<div>Scope &amp; Topics</div>
-<div>&nbsp;</div>
-<div>International Journal of Embedded Systems and Applications (IJESA) is=
- a quarterly open access peer-reviewed journal that publishes articles whic=
-h contribute new results in all areas of the Embedded Systems and applicati=
-ons. The goal of this journal is to bring together researchers and practiti=
-oners from academia and industry to focus on understanding Embedded Systems=
- and establishing new collaborations in these areas.Authors are solicited t=
-o contribute to the journal by submitting articles that illustrate research=
- results, projects, surveying works and industrial experiences that describ=
-e significant advances in the areas of Embedded Systems &amp; applications.=
-</div>
-<div>&nbsp;</div>
-<div>Topics of interest</div>
-<div>&nbsp;</div>
-<div>&bull;<span style=3D"white-space: pre;"> </span>Application-specific =
-processors and devices</div>
-<div>&bull;<span style=3D"white-space: pre;"> </span>Business Applications=
-</div>
-<div>&bull;<span style=3D"white-space: pre;"> </span>Component and binding=
- models</div>
-<div>&bull;<span style=3D"white-space: pre;"> </span>Embedded computing ed=
-ucation</div>
-<div>&bull;<span style=3D"white-space: pre;"> </span>Embedded hardware sup=
-port</div>
-<div>&bull;<span style=3D"white-space: pre;"> </span>Embedded system archi=
-tecture</div>
-<div>&bull;<span style=3D"white-space: pre;"> </span>Hardware and software=
- co-design</div>
-<div>&bull;<span style=3D"white-space: pre;"> </span>Integration with SOA<=
-/div>
-<div>&bull;<span style=3D"white-space: pre;"> </span>Middleware</div>
-<div>&bull;<span style=3D"white-space: pre;"> </span>Programming abstracti=
-ons</div>
-<div>&bull;<span style=3D"white-space: pre;"> </span>Real-time systems</di=
-v>
-<div>&bull;<span style=3D"white-space: pre;"> </span>Service-Oriented Arch=
-itectures</div>
-<div>&bull;<span style=3D"white-space: pre;"> </span>Testing techniques</d=
-iv>
-<div>&nbsp;</div>
-<div>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D</div>
-<div>Volume 9 -&nbsp; *URL: * https://wireilla.com/ijesa/vol9.html</div>
-<div>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D</div>
-<div>@Energy-Efficient Low Dropout Regulator with Switching Mechanism and =
-Course Regulator for Internet of Things (IOT) Devices</div>
-<div>&nbsp;</div>
-<div>@Analysis of System on Chip Design Using Artificial Intelligence</div=
->
-<div>&nbsp;</div>
-<div>@IOT-Enabled Green Campus Energy Management System</div>
-<div>&nbsp;</div>
-<div>@Steganography Based Asymmetric Key Cryptosystem Using Trellis Coded =
-Genetic Algorithm Random Key Generator</div>
-<div>&nbsp;</div>
-<div>@Enhanced Embedded Linux Board Support Package Field Upgrade &ndash; =
-A Cost Effective Approach</div>
-<div>&nbsp;</div>
-<div>@A VLSI Architecture Realisation of an Wireless Endoscopy System</div=
->
-<div>&nbsp;</div>
-<div>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D</div>
-<div>Volume 8 - *URL: * https://wireilla.com/ijesa/vol8.html</div>
-<div>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D</div>
-<div>@Design and Implementation of IOT Based Smart Power Monitoring and Ma=
-nagement System Using WSNS</div>
-<div>&nbsp;</div>
-<div>@Performance Evaluation of Fuzzy Logic and Back Propagation Neural Ne=
-twork for Hand Written Character Recognition</div>
-<div>&nbsp;</div>
-<div>@Fingerprint Classification Based on Orientation Field</div>
-<div>&nbsp;</div>
-<div>@Design of an Autonomous Smart Shower With Sensors and Actuators</div=
->
-<div>&nbsp;</div>
-<div>@Dynamut: A Mutation Testing Tool for Industry-Level Embedded System =
-Applications</div>
-<div>&nbsp;</div>
-<div>Thanks,</div>
-<div>Secretary</div>
-<div>*Stay in touch with International Journal of Embedded Systems and App=
-lications (IJESA)</div>
-<div>ISSN : 1839-5171</div>
-<div>Upcoming issue : June 2020,Vol 10 No 2</div>
-<div>https://wireilla.com/ijesa/index.html</div>
-
---FRMmwJqgz8zx4wM9AxvD--
+Jonatan
