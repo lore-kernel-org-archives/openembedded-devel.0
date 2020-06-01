@@ -1,23 +1,21 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.35236.1591013081898601694
+ by mx.groups.io with SMTP id smtpd.web10.36566.1591016745602360647
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jun 2020 05:04:42 -0700
+ Mon, 01 Jun 2020 06:05:46 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=39878 helo=localhost.localdomain)
+Received: from [78.130.197.211] (port=41354 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jfjBI-00086p-5c; Mon, 01 Jun 2020 15:04:41 +0300
+	id 1jfk8N-0005Vi-EB; Mon, 01 Jun 2020 16:05:44 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/4] python3-python-vlc: Upgrade 3.0.7110 -> 3.0.9113
-Date: Mon,  1 Jun 2020 15:04:19 +0300
-Message-Id: <20200601120419.13396-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-gast: Upgrade 0.2.2 -> 0.3.3
+Date: Mon,  1 Jun 2020 16:05:30 +0300
+Message-Id: <20200601130531.27509-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200601120419.13396-1-leon.anavi@konsulko.com>
-References: <20200601120419.13396-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -30,31 +28,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.0.9113.
+Upgrade to release 0.3.3.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...-python-vlc_3.0.7110.bb => python3-python-vlc_3.0.9113.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-python-vlc_3.0.7110.bb => python3-python-vlc_3.0.9113.bb} (65%)
+ .../{python3-gast_0.2.2.bb => python3-gast_0.3.3.bb}      | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-gast_0.2.2.bb => python3-gast_0.3.3.bb} (63%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.7110.bb b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.9113.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-python-vlc_3.0.7110.bb
-rename to meta-python/recipes-devtools/python/python3-python-vlc_3.0.9113.bb
-index be63fed02..6d53e3381 100644
---- a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.7110.bb
-+++ b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.9113.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "wiki.videolan.org/PythonBinding"
- LICENSE = "LGPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+diff --git a/meta-python/recipes-devtools/python/python3-gast_0.2.2.bb b/meta-python/recipes-devtools/python/python3-gast_0.3.3.bb
+similarity index 63%
+rename from meta-python/recipes-devtools/python/python3-gast_0.2.2.bb
+rename to meta-python/recipes-devtools/python/python3-gast_0.3.3.bb
+index 6e08a1994..9d24ddc3e 100644
+--- a/meta-python/recipes-devtools/python/python3-gast_0.2.2.bb
++++ b/meta-python/recipes-devtools/python/python3-gast_0.3.3.bb
+@@ -4,11 +4,9 @@ SECTION = "devel/python"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a3ad9b6802e713fc5e307e1230f1ea90"
  
--SRC_URI[md5sum] = "e128abf7115d6513582bd460c0e74485"
--SRC_URI[sha256sum] = "821bca0dbe08fbff97a65e56ff2318ad7d499330876579c39f01f3fb38c7b679"
-+SRC_URI[md5sum] = "a3a7d64bb4c6c1cd5569173ceef9cb67"
-+SRC_URI[sha256sum] = "5422b79d347b6419008ee91cfd9663edc37eaf2a0bd8fb9017d4cc2e5f249dda"
+-SRC_URI = "git://github.com/serge-sans-paille/gast.git"
+-SRCREV ?= "ed82e2a507505c6b18eb665d3738b6c0602da5e7"
++SRC_URI[md5sum] = "213b1820f576db14ed4fdf57efbfa67f"
++SRC_URI[sha256sum] = "b881ef288a49aa81440d2c5eb8aeefd4c2bb8993d5f50edae7413a85bfdb3b57"
  
- inherit pypi setuptools3
+-inherit setuptools3
+-
+-S = "${WORKDIR}/git"
++inherit pypi setuptools3
+ 
+ BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
