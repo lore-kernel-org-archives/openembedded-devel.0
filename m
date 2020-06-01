@@ -1,50 +1,50 @@
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
- by mx.groups.io with SMTP id smtpd.web12.48687.1591047961004400598
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.web10.48783.1591047962005229050
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jun 2020 14:46:01 -0700
+ Mon, 01 Jun 2020 14:46:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=UB6MMFfa;
- spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f45.google.com with SMTP id e1so1320869wrt.5
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2020 14:46:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=taA8M28b;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id k26so1013342wmi.4
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2020 14:46:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=fDHzqfjYN0MzfCYLzDH5pxTVci9j2rvGixlcER6YnCI=;
-        b=UB6MMFfaR6AKmMVZRke9KhLBuHBbllx7dmNRP9MCc9yQ6d34DuHM3F3QINdIAxxOKM
-         uL0bGxCp6ANQZZzlqihRIybSlRgq3stxJlml9tWAziX81q1OLGS1m9053zCSZHNee6HD
-         mCGjJWUjx2eXS888MW/ZzvuR6SMpQSyHivj54YsBkpG80+1LSoh11s9r7VqybVzxVbVd
-         ecCMdQKWtg67wLzncFJYCiZZJgOJu4IlV8VKca3w86akpppqjxfeNQBsbQQK3gqTDgR0
-         AxooxJJoM/itcgYOrxcZ6tw+6V79IyZCAndObbLwB3SL6Li2R6ZL0jRXf/vxh4KMzL4f
-         2ktA==
+        bh=Jzy2tN63kr5WArpjFXmhr/nHf6m47rbWvoUW4cb++E8=;
+        b=taA8M28bxSd9i/J6YreSkFNASEwK6AgFiiVfa8ZfWA0m9H61IfPJ0gUC8HX3s5OVyj
+         6IaWuHWJEN/kWrwCFXy+M3B6UqWBhk+gFHE0jPC66JgbI7v4/CosVAlRV+yuKTjBic55
+         cysP0Nb1LTFYgQlfsMNGcqESWaPpwFAozaAmiUgZruAF7p1WKFlJPpEQ+5njCumLwuVh
+         7D8KBumGB3xGOC3N9jm2uHc9u+ogwp8dnlZSnUPtd3T4uJHcvfGlMimW/528OqYAfgHK
+         nTZ2bCF5ArIC011f01F11ajAEhJZXHgfh66/VUnsE2mj80AcB6GTv13ClJHuZRqbhP43
+         ePXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=fDHzqfjYN0MzfCYLzDH5pxTVci9j2rvGixlcER6YnCI=;
-        b=IZXCPfwAXUQPG+uickOb5d84jj5Z7CJu4/X0sJAsjEybJPLosqZA5ixyLUECXtQ8uJ
-         z56v4Clm3AXFEL+tX6Ro9WqqKIV56hACdpbqfwrWRfzENU94uAhNT6qp6qiSMStxKpBh
-         A6QSshMRP3KAEWJOjP4PB3482+LKYFmzpuSacBoi1CqruxYDf+JBzH93uxwkc/P9mxnr
-         oaaxoUy7UWpLTyGXt3OuVympQwHgL3QWmFSgJYvyN+dmMbxuAiK82n1xOKI/q/8rNXQq
-         fd99SNwYuOxOYceL5bXEB7wIDIDuxyzDoYF9iVOzWCJkBYVHuTGlLCFKzUWFxawpOoTR
-         yGMg==
-X-Gm-Message-State: AOAM532IdBii6gLZSb3rQoqHx2JJmE/aE6e38uq65T3rmUnx0i0qk3n7
-	aWHG4gRkeMgybeJ6tYwLyzfBTd9C2bc=
-X-Google-Smtp-Source: ABdhPJy4JwC3U+ztVJSqWv+tpcriPuTkx0478wzGZhVQNaoQsqiiRxjtVWw4AWErYlWkPFoL8iMmtA==
-X-Received: by 2002:a5d:4b85:: with SMTP id b5mr23120813wrt.8.1591047959366;
-        Mon, 01 Jun 2020 14:45:59 -0700 (PDT)
+        bh=Jzy2tN63kr5WArpjFXmhr/nHf6m47rbWvoUW4cb++E8=;
+        b=fckbnzCxLKAxdqLSrNF8jnv0W2mszavvIwICM6JDGGwWHdXGWp9L5o90cmIKS3V19n
+         /nMNO22QScFMeIDAwqAi8G0y3TaKBSVswmC0pVRqBa6gZHQ9VGLLCQLEMM3ENVjCXwor
+         +DUP+8lP993Zvouv1x09yJe2kg5AjrVkdwJ0/JUAU6v0HVS5zMsdQ7Fxy/dwagIHbiEH
+         erb8p34Ln2FtMySENzRJ8bvPUqvbsRJ8kCKbbIFthoAQUZQVb0e28pAaJHwkTupgWam4
+         c4xSfK9K8h477QRyncpZ3/0nl4Yt/KRPl4y8Z/RzpSb4Xx2mHaaJnDCzf/vIQ2ubrcut
+         7qsA==
+X-Gm-Message-State: AOAM530qvY3LZiUuPaSRmyATlf5cQCK74PZMpwYU/4ahU33E562jHfQB
+	+0hunq3E2vji7uEhhI6PoHyKCQe286Q=
+X-Google-Smtp-Source: ABdhPJxqfEhDeTkoiCaFiiNqNsQr94BK3AG9r/8Ps02oLRgFfOjdY6Se9aoXOOMGfoBXrh3qdyJLFw==
+X-Received: by 2002:a7b:c10c:: with SMTP id w12mr1062256wmi.132.1591047960381;
+        Mon, 01 Jun 2020 14:46:00 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f06ad34da2c69d11ac2eac0.dip0.t-ipconnect.de. [2003:f0:7f06:ad34:da2c:69d1:1ac2:eac0])
-        by smtp.gmail.com with ESMTPSA id 40sm1050119wrc.15.2020.06.01.14.45.58
+        by smtp.gmail.com with ESMTPSA id 40sm1050119wrc.15.2020.06.01.14.45.59
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Jun 2020 14:45:58 -0700 (PDT)
+        Mon, 01 Jun 2020 14:45:59 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 32/38] libwnck3: upgrade 3.32.0 -> 3.36.0
-Date: Mon,  1 Jun 2020 23:45:10 +0200
-Message-Id: <20200601214516.26624-33-schnitzeltony@gmail.com>
+Subject: [PATCH 33/38] metacity: upgrade 3.34.1 -> 3.36.1
+Date: Mon,  1 Jun 2020 23:45:11 +0200
+Message-Id: <20200601214516.26624-34-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200601214516.26624-1-schnitzeltony@gmail.com>
 References: <20200601214516.26624-1-schnitzeltony@gmail.com>
@@ -52,42 +52,56 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Version 3.36.1
 ==============
+- Fix fullscreen regression. (#8)
+- Do not unfocus on new window.
+- Updated translations.
+
 Version 3.36.0
 ==============
+- Fix fullscreen regression.
+- Remove some dead code.
 
-  Fixes
+Version 3.35.92
+===============
+- Use ARGB visual for window frame.
 
-  * Add a weak reference callback to window to disconnect obsolete signal
-    handlers (Alberts MuktupÄvels) [GNOME/libwnck#141]
-  * pager: Add scroll modes [GNOME/libwnck#134]
-  * meson build fixes (Jan Alexander Steffens, Jan Tojnar, Victor Kareh)
-    [GNOME/libwnck#139]
+Version 3.35.1
+==============
+- Add support for _GTK_WORKAREAS_Dn. (!3)
+- Add support for _GNOME_WM_STRUT_AREA.
+- Clip shape region to window size. (#627879)
+- Don't move focus to fullscreen window that is on other monitor.
+- Fix blurry titlebar font. (#2)
+- Fix shadow regression with Metacity theme.
+- Fix some memory leaks.
+- Updated translations.
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../libwnck/{libwnck3_3.32.0.bb => libwnck3_3.36.0.bb}        | 4 ++--
+ .../metacity/{metacity_3.34.1.bb => metacity_3.36.1.bb}       | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/libwnck/{libwnck3_3.32.0.bb => libwnck3_3.36.0.bb} (81%)
+ rename meta-gnome/recipes-gnome/metacity/{metacity_3.34.1.bb => metacity_3.36.1.bb} (86%)
 
-diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck3_3.32.0.bb b/meta-gnome/recipes-gnome/libwnck/libwnck3_3.36.0.bb
-similarity index 81%
-rename from meta-gnome/recipes-gnome/libwnck/libwnck3_3.32.0.bb
-rename to meta-gnome/recipes-gnome/libwnck/libwnck3_3.36.0.bb
-index d88161a3d..8bca93f6d 100644
---- a/meta-gnome/recipes-gnome/libwnck/libwnck3_3.32.0.bb
-+++ b/meta-gnome/recipes-gnome/libwnck/libwnck3_3.36.0.bb
-@@ -17,8 +17,8 @@ GIR_MESON_DISABLE_FLAG = 'disabled'
+diff --git a/meta-gnome/recipes-gnome/metacity/metacity_3.34.1.bb b/meta-gnome/recipes-gnome/metacity/metacity_3.36.1.bb
+similarity index 86%
+rename from meta-gnome/recipes-gnome/metacity/metacity_3.34.1.bb
+rename to meta-gnome/recipes-gnome/metacity/metacity_3.36.1.bb
+index d8c8b5389..0cb59cdc9 100644
+--- a/meta-gnome/recipes-gnome/metacity/metacity_3.34.1.bb
++++ b/meta-gnome/recipes-gnome/metacity/metacity_3.36.1.bb
+@@ -21,8 +21,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
  
- inherit gnomebase gobject-introspection gtk-doc gettext features_check
+ inherit gnomebase gsettings gettext upstream-version-is-even features_check
  
--SRC_URI[archive.md5sum] = "89dbe5a1843fd3745b8b64b34a2ef55d"
--SRC_URI[archive.sha256sum] = "9595835cf28d0fc6af5526a18f77f2fcf3ca8c09e36741bb33915b6e69b8e3ca"
-+SRC_URI[archive.md5sum] = "00bb40dc6fab76af0da33e88a34b6378"
-+SRC_URI[archive.sha256sum] = "bc508150b3ed5d22354b0e6774ad4eee465381ebc0ace45eb0e2d3a4186c925f"
+-SRC_URI[archive.md5sum] = "c0c10204e4d6d024cb413042c1de316b"
+-SRC_URI[archive.sha256sum] = "31c7d1045c390afb3bf405735b0b26c459197cbf43af37c469eb8918ce3a453d"
++SRC_URI[archive.md5sum] = "d1171705829bbebd42ac08ec49a9a90a"
++SRC_URI[archive.sha256sum] = "11f07693e2b266840759063a4bc807346070e8e7fec8f53cd0757f6662c1b323"
+ SRC_URI += "file://0001-drop-zenity-detection.patch"
  
- # libxres means x11 only
- REQUIRED_DISTRO_FEATURES = "x11"
+ PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama"
 -- 
 2.21.3
 
