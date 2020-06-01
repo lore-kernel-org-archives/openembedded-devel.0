@@ -1,50 +1,50 @@
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.web11.48706.1591047966104045040
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+ by mx.groups.io with SMTP id smtpd.web11.48707.1591047967021808556
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jun 2020 14:46:06 -0700
+ Mon, 01 Jun 2020 14:46:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=NT6jxuHn;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id j198so873552wmj.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2020 14:46:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=CHIwcWUV;
+ spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f54.google.com with SMTP id e1so1321258wrt.5
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2020 14:46:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=jN0KS7U4o93ia8cuDH/oHR/rN8YiScO53kHd2Pt8rWc=;
-        b=NT6jxuHnQl+8i9zL0/cYWsQad82qwctqB4t+9jdJIRUDbcODtIcGvWpqdOTJa7WXVW
-         O0+5UJHcdPAeI8QUhOBXLtaMtLWN/MzuO3thL4R+3NHfjj53Wlaid9GmkeSz5qRFXJoZ
-         H0za7bj1ZvZ4dGbAHPNnZyGzkyH+6Uv7+/eouq9AdPvjdpDVBX2wgzpNAGOB3v1veuXf
-         2iksSt01k7MuoMVwkGbN1ZM91Hq19IPm+TI9nDoyzNIgnNNqf8aRjNkoZldVC979hkJm
-         17f0eZ6qR6DXEVtny2ewcImCAw+CJhBvctXUGDWLEODEK6Hduxp+WS8TZyl+sLNdIa+P
-         vUMg==
+        bh=a4ebZ1oVG+ToqQFWRo3oLvz40cDzsEKQUkhk06SqLqo=;
+        b=CHIwcWUVGRp6wjAf1823TXruthh8L0w8Ts99ZRlmR2uW0ylgndEF7e0AvkTxCLTE0H
+         X62z4AUi1aWkM05/0EojTj88Nyx4rzbpznk1OqtdRRRgbCsxj25LbIqNqmx7UyJV/UdX
+         KQGTJ827ovL4LlhTztyvYcFIkmhK4VW0kkDHMrhXCTXa1tmnnF0ti2+ho53SNj4gbRrM
+         latzddNyxiNh0OXQk7iRa3Hnw00X1T5N8oxJ0B1ABnP39yuSxSlhwMX61I483uinEoi2
+         cWY9m4vC7LlJS2xWv9ZrGzIL55DTBy6lW06kFAfamLs9ZkfrCcDv1Q0eD4M1OIyKHSoB
+         U04Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=jN0KS7U4o93ia8cuDH/oHR/rN8YiScO53kHd2Pt8rWc=;
-        b=T2BELZgG1ZPUO0VJ7IttD3n7JSEKSvExJn0ChSDOIetax865EfNdH3wyWiIQgWb1Gp
-         jxmYwWrRm75Ee4dG0RwBTQvzP+4ez2cqJuXWFPSusMHt536r0Gs79BXX8bgxtOCAOwHU
-         70ECRI7sOUhMhIv2BrtYb3tMhcOYtmbs3tmE2lAGmflex34lBborY7LA+fMKcRdo8Re1
-         rqbqiBsjbubRtHSgOTWhJiyGxlyMrLh6yQ4Nuqyep5NLFpl/oMJjpsKXNQ+T0EUTotBR
-         qQxuDJh8a33H9BK0gUvUP5BmjAcZAKh6lRxzBQdaSQtjdYRBZZvDPvddLbNxM8lcSkXO
-         ACnA==
-X-Gm-Message-State: AOAM531Ovhj/rgW9VhZ4wo2kjfr5i22lGQLbKKSWkOApg519hTrsiw4A
-	Y8hYkQma3gFUuASpVd3r9mXvnxB6714=
-X-Google-Smtp-Source: ABdhPJwvWqeraRuH1XJEQ72M7H6CdXSmlWR4ns1un5r4HNJ5fxwL+cPxNOgWgki7Nknbk5NpKlxaxA==
-X-Received: by 2002:a7b:c8d6:: with SMTP id f22mr1152718wml.188.1591047964188;
-        Mon, 01 Jun 2020 14:46:04 -0700 (PDT)
+        bh=a4ebZ1oVG+ToqQFWRo3oLvz40cDzsEKQUkhk06SqLqo=;
+        b=FJaAqhI+IordYjJ0WuuzbHZeIeJUbfBQmRvScHsHJWMVGT55m7GxzvqSR/aiSmy+kT
+         2+BFmnwaZagNmN+JVYEZI536tTDDiAccvbGNjINGnQ9qfAPcaq6YNrWO950X83d+as7t
+         mI946DEbDcuKaFMupvmk8Sz8Cn50/fKphwtSG4tv+yUmpddokhtHr7n/QUtEbPs7/dQo
+         6Hwqv5wcMgetJ2mqG30IW3iq29lwcI487NYwqNLpl1VFwsBRsXjnltODh3ps6NyJMtXf
+         JIOcDnoBoJ56PBllcb8OYnSQAf1dMnkHOAvQLxBRMBRvOjQ+MQvCKpUcJrs4cxlNaSC2
+         dVqw==
+X-Gm-Message-State: AOAM532CjMC9Ox9zHPf9xRArgsycEyCba/f/q/+DtuLYcLcvr9FCSa3g
+	DFTuBMuj33WonDvgSetz/Q/3SEPmaQE=
+X-Google-Smtp-Source: ABdhPJyKqlKkWtovSVLAooaYqnJ2UaHQ17tH4Y3Hs+fTz++XZO8cLlwmGxalcX8OtWbqElBAFeBhNg==
+X-Received: by 2002:a5d:5001:: with SMTP id e1mr25420067wrt.56.1591047965303;
+        Mon, 01 Jun 2020 14:46:05 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f06ad34da2c69d11ac2eac0.dip0.t-ipconnect.de. [2003:f0:7f06:ad34:da2c:69d1:1ac2:eac0])
-        by smtp.gmail.com with ESMTPSA id 40sm1050119wrc.15.2020.06.01.14.46.03
+        by smtp.gmail.com with ESMTPSA id 40sm1050119wrc.15.2020.06.01.14.46.04
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Jun 2020 14:46:03 -0700 (PDT)
+        Mon, 01 Jun 2020 14:46:04 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 37/38] sysprof: upgrade 3.34.1 -> 3.36.0
-Date: Mon,  1 Jun 2020 23:45:15 +0200
-Message-Id: <20200601214516.26624-38-schnitzeltony@gmail.com>
+Subject: [PATCH 38/38] gnome-control-center: upgrade 3.34.5 -> 3.36.2
+Date: Mon,  1 Jun 2020 23:45:16 +0200
+Message-Id: <20200601214516.26624-39-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200601214516.26624-1-schnitzeltony@gmail.com>
 References: <20200601214516.26624-1-schnitzeltony@gmail.com>
@@ -52,264 +52,154 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* Move recipe recipes-kernel ->  recipes-gnome
-* 0001-libsysprof-ui-Rename-environ-to-sys_environ.patch can go: upstream did
-  raname variable differently
-* We can build help files these days
-* reworder patches / recipe cleanup
+================
+Version 3.36.2
+================
 
-Overview of changes in Sysprof 3.36.0
-=====================================
+- Updated translations
 
- * Preload library has been moved to $libdir from $libexecdir
- * Build system improvements
- * Fix whole-system capture setting when using "Record Again" feature
- * New SysprofCollector interfaces for samples, marks, and logs to
-   sit alongside allocations
- * Translation updates
+CI
+- Update Flatpak libnma, mobile-broadband-provider-info, libhandy build depends
 
-Overview of changes in Sysprof 3.35.92
-======================================
+Applications
+- Fix only connected snap interfaces showing
 
- * A new profiler for tracking memory allocations within processes
-   that are spawned by Sysprof. Select "Track Allocations" to use
-   an LD_PRELOAD module which monitors allocations within the target
-   process. A callgraph is provided with allocations and their stack
-   traces. This brings the main features of the venerable "Memprof"
-   into Sysprof.
- * Port Sysprof to work on RHEL 7
- * Improvements to marks and counters displays
- * A new data frame in libsysprof-capture for memory allocations
-   with stack traces.
- * sysprof-cli --merge can now be used to merge multiple syscap
-   files together.
- * sysprof <program-path> can now be used to open Sysprof directly
-   to a program to execute.
- * Sysprof now builds with additional security protections and
-   optimization flags such as -Bsymbolic, -Wl,-z,defs, -Wl,-z,now,
-   and -Wl,-z,relro.
- * Fixes for macOS
- * The ELF symbol resolver is faster
- * sysprof-cli now properly adds supplemental information to the
-   capture file such as decoded symbols. This makes sharing syscap
-   files across machines easier and more reliable.
- * A new mmap()'d ring buffer can be shared between processes for
-   faster data transfer to sysprof. We expect more features around
-   this SysprofCollector interface in future releases.
- * A new set if icons has been provided for the collectors
- * Translation updates
+Background
+- Allow adding multiple files to backgrounds
 
-Overview of changes in Sysprof 3.35.2
-=====================================
+Printers
+- Add whitespace between top right buttons
 
- * Build and test fixes
- * Track changes to gdbus-codegen
- * Include additional pkg-config variable for access to D-Bus data
- * Translation updates
+Sharing
+- Set label for checkbox properly
+
+Sound
+- Fix translation of "System Sounds"
+
+Info:
+- Verify data coming from switcheroo-control
+
+================
+Version 3.36.1
+================
+
+- Update man page for info panel change
+- Updated translations
+
+Display
+- Fix resolution options getting stuck in a low resolution
+
+Sound
+- Remove unused files
+
+================
+Version 3.35.92
+================
+
+- Updated translations
+
+Applications
+- Update icon
+
+Background
+- Remove split desktop and lock screen wallpapers
+- Improve visuals of the background icons
+
+Network
+- Make VPN gear buttons consistent with oter buttons
+
+================
+Version 3.35.91
+================
+
+- Share GCancellable code
+- Updated translations
+
+Background
+- Remove unused GCancellable
+
+Power
+- Fix mobile broadband switch logic
+
+Sharing
+- Remember password on remote desktop sharing
+
+Thunderbolt
+- Fix GCancellable leak
+
+User Accounts
+- Always generate user avatars
+
+================
+Version 3.35.90
+================
+
+- New sidebar panel order and grouping
+- Introduce CcPermissionInfoBar
+- More code style updates
+- Updated translations
+
+Applications
+- Add "Run in Background" switch
+- Add "Set Desktop Background" switch
+- Show snap packages
+
+Network
+- Add SAE support
+- Many code refactorings
+- Switch to use GtkTemplate
+
+Power
+- Hide power button the chassis is handset
+
+Printers
+- Use CcPermissionInfoBar
+
+Region & Language
+- New design for the Formats dialog
+
+User Accounts
+- Use CcPermissionInfoBar
+- Improved layout
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...-Define-NT_GNU_BUILD_ID-if-undefined.patch |  0
- ...t-hardcode-linux-as-host_machine-.s.patch} |  2 +-
- ...E_FORMAT-instead-of-G_GUINT64_FORMAT.patch | 31 +++++++++
- .../sysprof/sysprof_3.36.0.bb}                | 39 +++++++-----
- ...rof-ui-Rename-environ-to-sys_environ.patch | 63 -------------------
- 5 files changed, 54 insertions(+), 81 deletions(-)
- rename meta-gnome/{recipes-kernel/sysprof/files => recipes-gnome/sysprof/sysprof}/0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch (100%)
- rename meta-gnome/{recipes-kernel/sysprof/files/0001-meson.build-do-not-hardcode-linux-as-host_machine-.s.patch => recipes-gnome/sysprof/sysprof/0002-meson.build-do-not-hardcode-linux-as-host_machine-.s.patch} (99%)
- create mode 100644 meta-gnome/recipes-gnome/sysprof/sysprof/0003-tests-use-G_GSIZE_FORMAT-instead-of-G_GUINT64_FORMAT.patch
- rename meta-gnome/{recipes-kernel/sysprof/sysprof_3.34.1.bb => recipes-gnome/sysprof/sysprof_3.36.0.bb} (50%)
- delete mode 100644 meta-gnome/recipes-kernel/sysprof/files/0001-libsysprof-ui-Rename-environ-to-sys_environ.patch
+ .../0001-Add-meson-option-to-pass-sysroot.patch               | 2 +-
+ ...ontrol-center_3.34.5.bb => gnome-control-center_3.36.2.bb} | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-control-center/{gnome-control-center_3.34.5.bb => gnome-control-center_3.36.2.bb} (89%)
 
-diff --git a/meta-gnome/recipes-kernel/sysprof/files/0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch b/meta-gnome/recipes-gnome/sysprof/sysprof/0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch
-similarity index 100%
-rename from meta-gnome/recipes-kernel/sysprof/files/0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch
-rename to meta-gnome/recipes-gnome/sysprof/sysprof/0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch
-diff --git a/meta-gnome/recipes-kernel/sysprof/files/0001-meson.build-do-not-hardcode-linux-as-host_machine-.s.patch b/meta-gnome/recipes-gnome/sysprof/sysprof/0002-meson.build-do-not-hardcode-linux-as-host_machine-.s.patch
-similarity index 99%
-rename from meta-gnome/recipes-kernel/sysprof/files/0001-meson.build-do-not-hardcode-linux-as-host_machine-.s.patch
-rename to meta-gnome/recipes-gnome/sysprof/sysprof/0002-meson.build-do-not-hardcode-linux-as-host_machine-.s.patch
-index 235489226..9db111e8e 100644
---- a/meta-gnome/recipes-kernel/sysprof/files/0001-meson.build-do-not-hardcode-linux-as-host_machine-.s.patch
-+++ b/meta-gnome/recipes-gnome/sysprof/sysprof/0002-meson.build-do-not-hardcode-linux-as-host_machine-.s.patch
-@@ -19,7 +19,7 @@ index 3449961..3c2d186 100644
- --- a/src/libsysprof/meson.build
- +++ b/src/libsysprof/meson.build
- @@ -84,7 +84,7 @@ libsysprof_deps = [
--   polkit_dep,
-+   librax_dep,
-  ]
-  
- -if host_machine.system() == 'linux'
-diff --git a/meta-gnome/recipes-gnome/sysprof/sysprof/0003-tests-use-G_GSIZE_FORMAT-instead-of-G_GUINT64_FORMAT.patch b/meta-gnome/recipes-gnome/sysprof/sysprof/0003-tests-use-G_GSIZE_FORMAT-instead-of-G_GUINT64_FORMAT.patch
-new file mode 100644
-index 000000000..d8fffbb7e
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/sysprof/sysprof/0003-tests-use-G_GSIZE_FORMAT-instead-of-G_GUINT64_FORMAT.patch
-@@ -0,0 +1,31 @@
-+From 5dea152c7728f5a37370ad8a229115833e36b4f6 Mon Sep 17 00:00:00 2001
-+From: Rasmus Thomsen <oss@cogitri.dev>
-+Date: Sat, 7 Mar 2020 10:44:16 +0100
-+Subject: [PATCH] tests: use G_GSIZE_FORMAT instead of G_GUINT64_FORMAT for
-+ gsize
-+
-+This fixes the build on 32-bit platforms with -Werror-format
-+
-+fixes #32
-+
-+Upstream-Status: Applied[https://gitlab.gnome.org/GNOME/sysprof/-/commit/5dea152c7728f5a37370ad8a229115833e36b4f6]
-+---
-+ src/tests/allocs-by-size.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/tests/allocs-by-size.c b/src/tests/allocs-by-size.c
-+index 666113a..6260d4b 100644
-+--- a/src/tests/allocs-by-size.c
-++++ b/src/tests/allocs-by-size.c
-+@@ -109,7 +109,7 @@ allocs_by_size (SysprofCaptureReader *reader)
-+     {
-+       const Item *item = &g_array_index (ar, Item, i);
-+ 
-+-      g_print ("%"G_GUINT64_FORMAT",%"G_GUINT64_FORMAT",%"G_GUINT64_FORMAT"\n",
-++      g_print ("%"G_GSIZE_FORMAT",%"G_GSIZE_FORMAT",%"G_GSIZE_FORMAT"\n",
-+                item->size, item->cmp, item->count);
-+     }
-+ }
-+-- 
-+2.21.3
-+
-diff --git a/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb b/meta-gnome/recipes-gnome/sysprof/sysprof_3.36.0.bb
-similarity index 50%
-rename from meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb
-rename to meta-gnome/recipes-gnome/sysprof/sysprof_3.36.0.bb
-index ad69ab68c..a769dbf7d 100644
---- a/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb
-+++ b/meta-gnome/recipes-gnome/sysprof/sysprof_3.36.0.bb
-@@ -5,24 +5,29 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-                     file://src/sysprof/sysprof-application.c;endline=17;md5=a3de8df3b0f8876dd01e1388d2d4b607"
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-pass-sysroot.patch b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-pass-sysroot.patch
+index 7f82a152c..8170f514e 100644
+--- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-pass-sysroot.patch
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-pass-sysroot.patch
+@@ -26,7 +26,7 @@ index a347168..2cd8121 100644
+ +option('oe_sysroot', type: 'string', value: '', description: 'Directory for OE-sysroot')
+  option('cheese', type: 'boolean', value: true, description: 'build with cheese webcam support')
+  option('documentation', type: 'boolean', value: false, description: 'build documentation')
+- option('gnome_session_libexecdir', type: 'string', value: '', description: 'Directory for gnome-session\'s libexecdir')
++ option('ibus', type: 'boolean', value: true, description: 'build with IBus support')
+ diff --git a/panels/background/meson.build b/panels/background/meson.build
+ index bb34b69..f22722e 100644
+ --- a/panels/background/meson.build
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.34.5.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.36.2.bb
+similarity index 89%
+rename from meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.34.5.bb
+rename to meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.36.2.bb
+index bf8ec3355..d3673a1fd 100644
+--- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.34.5.bb
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.36.2.bb
+@@ -30,8 +30,8 @@ DEPENDS = " \
  
- GNOMEBASEBUILDCLASS = "meson"
--inherit gnomebase gettext systemd upstream-version-is-even gsettings mime mime-xdg
--
--DEPENDS += "glib-2.0 libxml2-native glib-2.0-native"
--
--SRC_URI[archive.md5sum] = "cc32455277b31afb1965d627ae3e3629"
--SRC_URI[archive.sha256sum] = "844bbb8d8b65071b3bca96f8e921319ceef81f2d2c51fcc9da63a4b355c893d0"
--SRC_URI += "file://0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch \
--            file://0001-meson.build-do-not-hardcode-linux-as-host_machine-.s.patch \
--            file://0001-libsysprof-ui-Rename-environ-to-sys_environ.patch \
--            "
-+inherit gnomebase gnome-help gettext systemd upstream-version-is-even gsettings mime mime-xdg
-+
-+DEPENDS += " \
-+    glib-2.0-native \
-+    yelp-tools-native \
-+    libxml2-native \
-+    glib-2.0 \
-+"
-+
-+SRC_URI[archive.md5sum] = "3956e82b8744715006dde59e0ce8910b"
-+SRC_URI[archive.sha256sum] = "8670db4dacf7b219d30c575c465b17c8ed6724dbade347f2cde9548bff039108"
-+SRC_URI += " \
-+    file://0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch \
-+    file://0002-meson.build-do-not-hardcode-linux-as-host_machine-.s.patch \
-+    file://0003-tests-use-G_GSIZE_FORMAT-instead-of-G_GUINT64_FORMAT.patch \
-+"
+ REQUIRED_DISTRO_FEATURES += "polkit pulseaudio systemd x11"
  
- PACKAGECONFIG ?= "sysprofd libsysprof ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'gtk', '', d)}"
- PACKAGECONFIG[gtk] = "-Denable_gtk=true,-Denable_gtk=false,gtk+3 libdazzle"
- PACKAGECONFIG[sysprofd] = "-Dwith_sysprofd=bundled,-Dwith_sysprofd=none,polkit"
- PACKAGECONFIG[libsysprof] = "-Dlibsysprof=true,-Dlibsysprof=false,polkit"
+-SRC_URI[archive.md5sum] = "ca92151a2a58cc3e0a73e88379e96ce2"
+-SRC_URI[archive.sha256sum] = "b30d0afb99252f150e37d5ca4bc83b89bf4aa6d18c5d367230053278634e0c47"
++SRC_URI[archive.md5sum] = "45832b7217c8d5fa5e2dbc214972c12d"
++SRC_URI[archive.sha256sum] = "e0a5eff0c6d6c22db0c54fd070460de874d367ef3f9072e1559b70f28b847817"
+ SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
  
--# Enablig this requries yelp
--EXTRA_OEMESON += "-Dhelp=false -Dsystemdunitdir=${systemd_unitdir}/system"
-+EXTRA_OEMESON += "-Dsystemdunitdir=${systemd_unitdir}/system"
- 
- SOLIBS = ".so"
- FILES_SOLIBSDEV = ""
-@@ -30,8 +35,8 @@ FILES_SOLIBSDEV = ""
- SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'sysprofd', 'sysprof2.service sysprof3.service', '', d)}"
- 
- FILES_${PN} += " \
--               ${datadir}/dbus-1/system-services \
--               ${datadir}/dbus-1/system.d \
--               ${datadir}/dbus-1/interfaces \
--               ${datadir}/metainfo \
--               "
-+    ${datadir}/dbus-1/system-services \
-+    ${datadir}/dbus-1/system.d \
-+    ${datadir}/dbus-1/interfaces \
-+    ${datadir}/metainfo \
-+"
-diff --git a/meta-gnome/recipes-kernel/sysprof/files/0001-libsysprof-ui-Rename-environ-to-sys_environ.patch b/meta-gnome/recipes-kernel/sysprof/files/0001-libsysprof-ui-Rename-environ-to-sys_environ.patch
-deleted file mode 100644
-index 1e2b3c92b..000000000
---- a/meta-gnome/recipes-kernel/sysprof/files/0001-libsysprof-ui-Rename-environ-to-sys_environ.patch
-+++ /dev/null
-@@ -1,63 +0,0 @@
--From 4bd0d5d5dd6841fbac8385527617d18e7731244d Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 15 Jan 2020 13:17:58 -0800
--Subject: [PATCH] libsysprof-ui: Rename environ to sys_environ
--
--This helps avoid namesapace conflict with glibc headers
--
--Fixes
--/usr/include/unistd.h:545:15: note: previous declaration is here
--
--extern char **environ;
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/libsysprof-ui/sysprof-profiler-assistant.c | 10 +++++-----
-- 1 file changed, 5 insertions(+), 5 deletions(-)
--
--diff --git a/src/libsysprof-ui/sysprof-profiler-assistant.c b/src/libsysprof-ui/sysprof-profiler-assistant.c
--index 22e3e24..c55d551 100644
----- a/src/libsysprof-ui/sysprof-profiler-assistant.c
--+++ b/src/libsysprof-ui/sysprof-profiler-assistant.c
--@@ -235,7 +235,7 @@ sysprof_profiler_assistant_record_clicked_cb (SysprofProfilerAssistant *self,
--     {
--       g_auto(GStrv) argv = NULL;
--       g_auto(GStrv) env = NULL;
---      SysprofEnviron *environ;
--+      SysprofEnviron *sys_environ;
--       const gchar *command;
--       gint argc;
-- 
--@@ -245,8 +245,8 @@ sysprof_profiler_assistant_record_clicked_cb (SysprofProfilerAssistant *self,
--       sysprof_profiler_set_spawn (profiler, TRUE);
--       sysprof_profiler_set_spawn_argv (profiler, (const gchar * const *)argv);
-- 
---      environ = sysprof_environ_editor_get_environ (self->environ_editor);
---      env = sysprof_environ_get_environ (environ);
--+      sys_environ = sysprof_environ_editor_get_environ (self->environ_editor);
--+      env = sysprof_environ_get_environ (sys_environ);
--       sysprof_profiler_set_spawn_env (profiler, (const gchar * const *)env);
-- 
--       sysprof_profiler_set_spawn_inherit_environ (profiler,
--@@ -405,7 +405,7 @@ sysprof_profiler_assistant_class_init (SysprofProfilerAssistantClass *klass)
-- static void
-- sysprof_profiler_assistant_init (SysprofProfilerAssistant *self)
-- {
---  g_autoptr(SysprofEnviron) environ = sysprof_environ_new ();
--+  g_autoptr(SysprofEnviron) sys_environ = sysprof_environ_new ();
-- 
--   gtk_widget_init_template (GTK_WIDGET (self));
-- 
--@@ -445,7 +445,7 @@ sysprof_profiler_assistant_init (SysprofProfilerAssistant *self)
--                            self,
--                            G_CONNECT_SWAPPED);
-- 
---  sysprof_environ_editor_set_environ (self->environ_editor, environ);
--+  sysprof_environ_editor_set_environ (self->environ_editor, sys_environ);
-- }
-- 
-- void
---- 
--2.25.0
--
+ PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 -- 
 2.21.3
 
