@@ -1,50 +1,50 @@
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web11.48691.1591047949112564693
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.web11.48692.1591047950265949647
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jun 2020 14:45:49 -0700
+ Mon, 01 Jun 2020 14:45:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=tqEBEaag;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id v19so955404wmj.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2020 14:45:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=M++PBxeq;
+ spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wm1-f52.google.com with SMTP id v19so955423wmj.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2020 14:45:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=2SP+W1dtmYOPFGydo9NxKMjBfdxh7AbM6S3qbcvoCU0=;
-        b=tqEBEaag0ha88DAN4V+M0Se4JOqtyhMzJV2jqLsJSy2rbcVykE9hElLhbEC1ofMqYm
-         FIU2BeK1vRJyMLGIgbU8K8g0RTmz5cu7BnLiidkoR8+jq4Jo2abZfurHWEzDtQR62qEi
-         sohJpLt6QiyfZYpMxhU3Q4U1N0UU0Z5R9FIvJp3R6qh+3UdU7UzTb6eOIR3XJKBjikEH
-         +MVUfzfsRAedIfPGWwyz9RIXM8JGx4zDI52cKExydqB0YhMnIQGzuBjwC78JR9G5EPAq
-         MsWXimmXjEzRQLpwEhjXKRA+EsEvDWoC1fh34bdZ9RC3t/pGBpmLIVS/giGYP3xnUJrB
-         X/bQ==
+        bh=Xoajb3koxsCrCz59Q047pJcu68YtxnXCjfyUDAjmDhU=;
+        b=M++PBxeqDYFlcpkphQWTOrmcA4NgAk39y9vaAcSnbL2mjaXzIEZkE+0WcSych0KLja
+         LfzgU3KmHyvNkDJzKaNjnd8fl0hZwSLX18dzQnZoEzHtkEJROryZ0OUjuV6O4kja1fUO
+         jSk5iVhRwg9w74rvzOVEQ0t6Nam7QLdXvleu06F2CB2GHuEkZEn0/J1iXy0YMFVHdj5t
+         0MmOGH1xdYtlLd3B+Ws7DxCMc6lXGQgXRij31izrPxzP0oxtOVGt7pw1XrkpdE8POYgH
+         4edwHfEiZB0xNB81qCDE/D1gHCRwKsuDMxOyAkWFnj5OCWnRJ0yWQCtjWcv1Zxzib5LY
+         PCZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=2SP+W1dtmYOPFGydo9NxKMjBfdxh7AbM6S3qbcvoCU0=;
-        b=pEk1Jxzwg3GagRvE0EAhj/HQzhuYxzkDPGYCWR2hxadfYfyg/SWKvrxS8bP7024rLm
-         Bu0QBHpFz+6Wex0eTi+ugRvZtxzw6B1mC7ygTSjtpVN5mn+vrPLOb4ugy3nzocmApYc+
-         CKubF7r8MnQHHhC/ZXbw3CFfXW85afcMYsx35ogos48Y/s6506Dpek8gFKwCA850DJls
-         guheFU2dJjq8hJQs9w+lHTExrTuq2dh1qnnxqDkNpQ840NFopkFfjhsv2CnHZhDcCEHp
-         legKP68PKbVph8zp/Boyk6KZzOS3OvySEQsJt8a2Logu904sttIabHp9k+zRZAsxuTf/
-         5T+A==
-X-Gm-Message-State: AOAM5331Zizh95xhpVRXn0dvyEYGao9Uom0V09DnzF5WHcTKX5fM/EU6
-	G2T6HEY1eei3fGuvBrVCA1BHejDe9qs=
-X-Google-Smtp-Source: ABdhPJz6a2VcIDpHnyQtLpmOOucjfIQzP40/1Jg4HEHwKndt/nXW0we91fGz1XcZXFPR/4hBeF5baw==
-X-Received: by 2002:a7b:cf2c:: with SMTP id m12mr1150789wmg.70.1591047947465;
-        Mon, 01 Jun 2020 14:45:47 -0700 (PDT)
+        bh=Xoajb3koxsCrCz59Q047pJcu68YtxnXCjfyUDAjmDhU=;
+        b=UW9ZV/datFuUIt9X2kyoN0OZiohjtIvAMp972Qv3n0sSdYYoPmZU4CfJ1ePqEN5lwq
+         o7uMa321sfzFq2yJ5pI1fTH3PBU2leTpI301y3Q/EE7+2yZFRBxyeJ6dudlf8tSDgLPi
+         JQVY75kEdO2HcSRIsq6BLLDF/uIKk4iiCyRjyyP4El7YpKGQAQcUpKebvUWAN2QDEPmP
+         u3CrZqh+dG+KCEbqGc/HXaqO7a6GRZv9F998ZcHjsKZE1pBftzOQ12W0pPOV5zyAciwM
+         YlIW8m5C3ksf0dXwpBBYAPrzcOKdFtTksiEPDJkLAT8QR71dEFxqyXGfYYF70RpXt97m
+         6fjw==
+X-Gm-Message-State: AOAM530K+ig+J7T+bvQcH4o0mqg5zS2Hokpkr8YvSCHLjVntYK5rGWND
+	m/jwfGW3gndFKampnwYC8R7vvl5+SvQ=
+X-Google-Smtp-Source: ABdhPJxeh2trGCYFEH8K++6T1Mcl22XFVVylvOIYRuf3sQzH7AqInf5dORT+XUuqRVOB4KCb5n1/kA==
+X-Received: by 2002:a7b:cb91:: with SMTP id m17mr1213261wmi.126.1591047948502;
+        Mon, 01 Jun 2020 14:45:48 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f06ad34da2c69d11ac2eac0.dip0.t-ipconnect.de. [2003:f0:7f06:ad34:da2c:69d1:1ac2:eac0])
-        by smtp.gmail.com with ESMTPSA id 40sm1050119wrc.15.2020.06.01.14.45.46
+        by smtp.gmail.com with ESMTPSA id 40sm1050119wrc.15.2020.06.01.14.45.47
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Jun 2020 14:45:46 -0700 (PDT)
+        Mon, 01 Jun 2020 14:45:48 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 20/38] gnome-desktop3; upgrade 3.34.5 -> 3.36.2
-Date: Mon,  1 Jun 2020 23:44:58 +0200
-Message-Id: <20200601214516.26624-21-schnitzeltony@gmail.com>
+Subject: [PATCH 21/38] gnome-panel: upgrade 3.34.1 -> 3.36.1
+Date: Mon,  1 Jun 2020 23:44:59 +0200
+Message-Id: <20200601214516.26624-22-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200601214516.26624-1-schnitzeltony@gmail.com>
 References: <20200601214516.26624-1-schnitzeltony@gmail.com>
@@ -52,80 +52,112 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-===============
-Version 3.36.2
-===============
+AX_ZONEINFO is gone -> 0001-Do-not-try-to-find-ZONEINFO-it-tries-to-run-compiled.patch
+can go
 
-- Translation updates
-
-===============
 Version 3.36.1
-===============
+==============
+- Fix build with gettext 0.20+. (!15)
+- Fix critical warning in fish applet.
+- Fix XML namespace URI in svg icons.
+- Load modules only with so suffix.
+- Fix critical warnings when changing monitor configuration.
+- Improve Adwaita theme. (!16)
 
-- Translation updates
-
-===============
 Version 3.36.0
-===============
-
-- Translation updates
-
-===============
-Version 3.35.91
-===============
-
-- Translation updates
-
-===============
-Version 3.35.90
-===============
-
-- Fix crash in idle monitor
-
 ==============
-Version 3.35.4
-==============
+- Add support for _GNOME_WM_STRUT_AREA.
+- Fix build warnings.
+- Updated translations.
 
-- Remove unused API not compatible with wayland
-
-==============
-Version 3.35.3
-==============
-
-- Add utility function to start a transient systemd scope
-- Blacklist seccomp on riscv64 architecture as its not supported yet
-- Honor XKB_CONFIG_ROOT environment variable
-
-==============
 Version 3.35.2
 ==============
+- Add libgnome-panel documentation.
+- Add prefer-symbolic-icons setting.
+- Add HighContrastInverse, Yaru, Yaru-light and Yaru-dark as supported themes.
+- Make GpImageMenuItem derivable.
+- Updated translations.
 
-- Fix time display issue with Japanese translation (Tianhao Chai)
+Version 3.35.1
+==============
+- Fix crashes with libgweather 3.32 in some locations.
+- Make new libgnome-panel library public (it will replace libpanel-applet).
+- Default layout now can be configured from org.gnome.gnome-panel.general schema.
+- Change default layout location, layout now must be in layouts subdirectory.
+- Updated translations.
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{gnome-desktop3_3.34.5.bb => gnome-desktop3_3.36.2.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-desktop/{gnome-desktop3_3.34.5.bb => gnome-desktop3_3.36.2.bb} (88%)
+ ...nd-ZONEINFO-it-tries-to-run-compiled.patch | 37 -------------------
+ ...-panel_3.34.1.bb => gnome-panel_3.36.1.bb} |  7 +---
+ 2 files changed, 2 insertions(+), 42 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/gnome-panel/gnome-panel/0001-Do-not-try-to-find-ZONEINFO-it-tries-to-run-compiled.patch
+ rename meta-gnome/recipes-gnome/gnome-panel/{gnome-panel_3.34.1.bb => gnome-panel_3.36.1.bb} (68%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.34.5.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.2.bb
-similarity index 88%
-rename from meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.34.5.bb
-rename to meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.2.bb
-index 63a96c8ee..1f5acd8d0 100644
---- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.34.5.bb
-+++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.2.bb
-@@ -14,8 +14,8 @@ inherit gnomebase itstool pkgconfig upstream-version-is-even gobject-introspecti
- REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
- UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
+diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel/0001-Do-not-try-to-find-ZONEINFO-it-tries-to-run-compiled.patch b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel/0001-Do-not-try-to-find-ZONEINFO-it-tries-to-run-compiled.patch
+deleted file mode 100644
+index 6ab4daf02..000000000
+--- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel/0001-Do-not-try-to-find-ZONEINFO-it-tries-to-run-compiled.patch
++++ /dev/null
+@@ -1,37 +0,0 @@
+-From d4b2f0922dfdd6040e5e9f62a2565452cf855c42 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+-Date: Mon, 21 Oct 2019 22:10:56 +0200
+-Subject: [PATCH] Do not try to find ZONEINFO - it tries to run compiled code
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-Missing configutation does not cause issues: The fallback in modules/clock/system-timezone.c
+-matches our default.
+-
+-Inappropriate [embedded specific]
+-
+-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+----
+- configure.ac | 5 -----
+- 1 file changed, 5 deletions(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index c75a9fa..0c9d945 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -249,11 +249,6 @@ dnl yelp-tools stuff
+- 
+- YELP_HELP_INIT
+- 
+--dnl **************************************************************************
+--dnl Find zoneinfo directory
+--dnl **************************************************************************
+--
+--AX_ZONEINFO
+- 
+- dnl **************************************************************************
+- dnl Process .in files
+--- 
+-2.21.0
+-
+diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_3.34.1.bb b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_3.36.1.bb
+similarity index 68%
+rename from meta-gnome/recipes-gnome/gnome-panel/gnome-panel_3.34.1.bb
+rename to meta-gnome/recipes-gnome/gnome-panel/gnome-panel_3.36.1.bb
+index 4d5fdb65a..8fe4e1311 100644
+--- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_3.34.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_3.36.1.bb
+@@ -17,11 +17,8 @@ DEPENDS += " \
+     gdm \
+ "
  
--SRC_URI[archive.md5sum] = "1cbcb9d9a5159447b9a45079c6157ca5"
--SRC_URI[archive.sha256sum] = "ef13203bed721d271227d9928d91937733c312ef79b6f5c00b6c02e8e0b2fa21"
-+SRC_URI[archive.md5sum] = "9fa17a6e2eacde3f9dd0df6be10091b2"
-+SRC_URI[archive.sha256sum] = "38f994dcb1e1ae093d1c929c7acc4f88e39111e43b5fdc13125b0f6e2311c789"
+-SRC_URI[archive.md5sum] = "cfd5d3fd548a2afdd8bd3bbdf9646bbd"
+-SRC_URI[archive.sha256sum] = "a6bc0255252eeb4b964bcbe55fd7908b69f914c062c5ec8dff5ac0262d29b90d"
+-SRC_URI += " \
+-    file://0001-Do-not-try-to-find-ZONEINFO-it-tries-to-run-compiled.patch \
+-"
++SRC_URI[archive.md5sum] = "b6bb185ce1724f4b19699042d90282a6"
++SRC_URI[archive.sha256sum] = "1e21b726dd397523ae79d29eb538bcae09e3427e23ccd63f28eb25ef3552abd3"
  
- SRC_URI += " \
-     file://gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch \
+ PACKAGECONFIG[eds] = "--enable-eds,--disable-eds,evolution-data-server"
+ 
 -- 
 2.21.3
 
