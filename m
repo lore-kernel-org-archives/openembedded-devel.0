@@ -1,50 +1,50 @@
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.web10.48773.1591047951209902801
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.web10.48776.1591047952059879130
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jun 2020 14:45:51 -0700
+ Mon, 01 Jun 2020 14:45:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=VVDke5Od;
- spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id x6so1269087wrm.13
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2020 14:45:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=n6ofmKzL;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id k26so1012987wmi.4
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2020 14:45:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=yCJ6RRIpEAflGKinTc69Je8642c3SEcmTXxwtmDdjio=;
-        b=VVDke5OdI++oJ8kayqLHhElo7xU96k37esPmWaXs1pJzoAV2EWEELAXp4A2la5gEPX
-         6yIyAWLy6ADRqpckCNDL0x4cJ6a2ClBpdrTWyQXxIo8sKY2QzSM5E445z0He6Z6Gv02g
-         fDwR6mT3m8WMauuvwqXxMuRTaHrnbzyrdzzXa5YPV7kD7nH1Km0W1WKOilKCznSHTe1p
-         88vazWX6u6rNuzvIYOHlui5fVvW6XKp7deA9Blw7c31dpuN+IZdc6o2mbYhMHPNtc/Rc
-         qPs+QzK9YU+rSBC1DGPqtaoWIJg+e3SGQJD29t96CQ6J8sWrlA8LYcyRN9tYDwJ38TB4
-         RvUA==
+        bh=G3hokJZOT1vETifo3+HpQJTNURARxvGB9YUGDEnHDFY=;
+        b=n6ofmKzLvdItc+0OIBTU/U75WTETHQzzz3S1dshCxSfbmMXmNm6mmyOraqJg/sIZXg
+         dAf2YdpUbUTCnGYT7SqO+ikt1ODUs+XMHH6anJItD/LIUxGJOCoFC5XcL0pbvY7HMjMQ
+         o8mB8thjl5UC/dRxdb1/IO6SVHWPC82VC5HtCvaclnundQJzCbrdup+TACUrqZK6ZxOR
+         ZBOmYnzunS2mim/ls4ijDNS1+it/kpmlbMXeqEiL81R1P4w+2N6w8RQOMy7eSCk5CAgy
+         mXk9ea76+W/nQPO6JyVutK/bVGc31Nrsr3cFtMFOyiIYH7qOgGDSEsQVvDUW5IPtNVA0
+         8AYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=yCJ6RRIpEAflGKinTc69Je8642c3SEcmTXxwtmDdjio=;
-        b=QFYHi0yNY/WT746rzBkKjBH4wAKxp3QJ8Emy1p6ZIgf2mSZYESBoYLL5xeXsi1ZOCT
-         RHvDd/aQSNCw4PbUoL+CFBQvfW/2IU+nVoMJqetu42+5biI3oW00d4h79rzn3Pvit/pY
-         6CnVkSHi2JD2sM04SP1AaiMETlOGOpf/6/HzVO8Ztcqq65MmmOak0mOGuAkRvSoGtqQY
-         KbiWmdKiHtP2niMX4vBcAxC4Znwn79hPrZU/tSn+s2hQRgkW8kBj1ik8NFuMsgNVVRzK
-         7bNpaoyM1Ld7imPbuXf8DjpNflqq07dxl9Gu7nQM7y81SXOVfb4GhBgQ8o1XpizE7J00
-         KSYg==
-X-Gm-Message-State: AOAM530MoYQh49KTymS/df7QhQQoaXlX3sgFouBTz+zQerFFaa6EeMsZ
-	wC5FEJdrrc5fIyEvMibo6I6PaYaDSzc=
-X-Google-Smtp-Source: ABdhPJxmiR2wrwJ1vFG/2E2REeIJ5jtIxsyB0VlSWFk5hS+9AmwpQgMRcaCoAJwrzxbT8/dsrrh3lg==
-X-Received: by 2002:adf:f907:: with SMTP id b7mr24114827wrr.203.1591047949432;
-        Mon, 01 Jun 2020 14:45:49 -0700 (PDT)
+        bh=G3hokJZOT1vETifo3+HpQJTNURARxvGB9YUGDEnHDFY=;
+        b=kcxrufbipLgcgyA3EnixU/7s+9qvWcyEsbRxHy1C49Cymfy7pXb/IgZVAU4BXzZFd9
+         AZZOgn1LiBh2D7W13tKpzk1Xy2HSov0TYsb20NdG2GryKjvCUGCnPplEWC7ClNd1O5lt
+         5qjXF1VdCbV64SvdSIVYm+ybaFzwdWn1hSDXWPSwKYkFTKXu7LS9MyxAPHELe4rKsnYk
+         4pCg1jXcsJovA8JW7ip9EX9I0eKIi5fnLyFC6NTnsQCm4nJxW0ESd7WiKsx/W/595m7S
+         aaRcMB+Bz1+15olh0bhePmrG0/vNdUCQAZDDozJ0sVhsZrFVVRG88qsBqoRKPRF5G5Vt
+         7xkQ==
+X-Gm-Message-State: AOAM530GE1Xb4s6FxUOHTEucVPR2CsMFvCPIbodEYUuCV5nBsiIx7cEA
+	H9vJn/8AxlFT0e0XeMeOujS7uH2XyeM=
+X-Google-Smtp-Source: ABdhPJybSLZb6iltuyF7n5wfXO0r4jccPkn8i+TKv4vzfL/ksjBDlbWdiHcqEe+kDtR5eS5ql1cJTA==
+X-Received: by 2002:a1c:a943:: with SMTP id s64mr1105303wme.103.1591047950359;
+        Mon, 01 Jun 2020 14:45:50 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f06ad34da2c69d11ac2eac0.dip0.t-ipconnect.de. [2003:f0:7f06:ad34:da2c:69d1:1ac2:eac0])
-        by smtp.gmail.com with ESMTPSA id 40sm1050119wrc.15.2020.06.01.14.45.48
+        by smtp.gmail.com with ESMTPSA id 40sm1050119wrc.15.2020.06.01.14.45.49
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Jun 2020 14:45:48 -0700 (PDT)
+        Mon, 01 Jun 2020 14:45:49 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 22/38] gnome-flashback: upgrade 3.34.2 -> 3.36.3
-Date: Mon,  1 Jun 2020 23:45:00 +0200
-Message-Id: <20200601214516.26624-23-schnitzeltony@gmail.com>
+Subject: [PATCH 23/38] gnome-keyring: upgrade 3.34.0 -> 3.36.0
+Date: Mon,  1 Jun 2020 23:45:01 +0200
+Message-Id: <20200601214516.26624-24-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200601214516.26624-1-schnitzeltony@gmail.com>
 References: <20200601214516.26624-1-schnitzeltony@gmail.com>
@@ -52,100 +52,53 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Version 3.36.3
-==============
-- Fix enum type generation. (#52)
+Changes in version 3.36.0 are:
+ * Updated translations
 
-Version 3.36.2
-==============
-- Fix screensaver unlock problems. (#46)
-- Fix few small memory leaks.
-- Fix screenshot saving to clipboard. (#50)
-- Active desktop icon rename with F2 key. (LP:#1875703)
-- Fix creating new desktop icons. (LP:#1875317)
-- Updated translations.
+Changes in version 3.35.90 are:
+ * Use shorter strings for prompt titles [!30]
+ * pam: Provide more insight from pam_gnome_keyring about unlocking [!28]
+ * Don't use GTimeVal/g_get_current_time() [!26]
+ * Don't use g_type_class_add_private() [!26]
+ * Build fixes [!29]
+ * Updated translations
 
-Version 3.36.1
-==============
-- Disable unimplemented icon placement modes. (#41)
-- Fix lock screen button in end session dialog. (#43)
-- Exclude Extensions application from menu. (#42)
-- Fix visibility of input source button in lock screen. (#45)
-- Do no close/destroy desktop window. (gnome-applets#15)
-- Fix use after free in System Indicators. (gnome-panel#21)
-
-Version 3.36.0
-==============
-- Save screenshot to clipboard when filename is empty.
-- Show password box on key presses. (#36)
-- Fix system indicators localisation. (#39)
-- Fix build with gettext 0.20+. (!25)
-- Add UsbProtection plugin to required components.
-- Disable screen locking without PAM configuration file. (#38)
-- Updated translations.
-
-Version 3.35.2
-==============
-- Add Yaru as supported theme. (#31)
-- Screensaver based on gnome-screensaver. (#18)
-- Fix crash and memory leaks in notifications module.
-- New system indicators applet for gnome-panel.
-- Install gnome panel layout for GNOME Flashback session.
-- Updated translations.
-
-Version 3.35.1
-==============
-- Remove desktop-background module.
-- Add root-background module, disabled by default.
-- Add new desktop module for icons and background. (#7)
-- Install compiz configuration. (!16)
-- Add support for shift_caps_switch XKB option. (#24)
+Changes in version 3.35.1 are:
+ * dbus: Implement secret portal backend [!18]
+ * Updated translations
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...flashback_3.34.2.bb => gnome-flashback_3.36.3.bb} | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-flashback/{gnome-flashback_3.34.2.bb => gnome-flashback_3.36.3.bb} (72%)
+ .../{gnome-keyring_3.34.0.bb => gnome-keyring_3.36.0.bb}     | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-keyring/{gnome-keyring_3.34.0.bb => gnome-keyring_3.36.0.bb} (88%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-flashback/gnome-flashback_3.34.2.bb b/meta-gnome/recipes-gnome/gnome-flashback/gnome-flashback_3.36.3.bb
-similarity index 72%
-rename from meta-gnome/recipes-gnome/gnome-flashback/gnome-flashback_3.34.2.bb
-rename to meta-gnome/recipes-gnome/gnome-flashback/gnome-flashback_3.36.3.bb
-index 3da8629c6..6dd989415 100644
---- a/meta-gnome/recipes-gnome/gnome-flashback/gnome-flashback_3.34.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-flashback/gnome-flashback_3.36.3.bb
-@@ -12,12 +12,14 @@ DEPENDS += " \
-     libxkbfile \
-     polkit \
-     metacity \
-+    gdm \
-     gnome-desktop3 \
-     gnome-bluetooth \
-+    gnome-panel \
- "
+diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.34.0.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.36.0.bb
+similarity index 88%
+rename from meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.34.0.bb
+rename to meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.36.0.bb
+index 52c254b28..8f318bb15 100644
+--- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.34.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.36.0.bb
+@@ -21,8 +21,8 @@ inherit gnomebase gsettings features_check remove-libtool gettext upstream-versi
  
--SRC_URI[archive.md5sum] = "251b51bad322c41d34d06fdb8f1799d4"
--SRC_URI[archive.sha256sum] = "3be65388cd2c8f39741bcc05da87ef40035183a9a39502d67696242c2aeb469c"
-+SRC_URI[archive.md5sum] = "690b0d78c7d9265183ef18387b12fa50"
-+SRC_URI[archive.sha256sum] = "2dba9ea40f2da81c22954a8ccc29f8f1fa4ca8395a6bb552506635832751c1a7"
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- do_install_append() {
-     # no oe-layer has compiz -> remove dead session
-@@ -25,10 +27,12 @@ do_install_append() {
- }
- 
+-SRC_URI[archive.md5sum] = "7c8fd85e46ed4ba1add0288b2ead9aec"
+-SRC_URI[archive.sha256sum] = "e9cda9542a3e37c61636145e7e9e2513c569092ea8020752a834e1f40ad41943"
++SRC_URI[archive.md5sum] = "38f0732845a510a8dff4f154c3406f65"
++SRC_URI[archive.sha256sum] = "a264b57a8d1a71fdf0d66e8cd6033d013fb828be279c35766545eb9bb3734f87"
+ SRC_URI += " \
+     file://0001-Set-paths-to-ssh-agent-and-ssh-add-by-configure-opti.patch \
+     file://musl.patch \
+@@ -39,6 +39,7 @@ EXTRA_OECONF = " \
  FILES_${PN} += " \
--    ${datadir}/xsessions \
-     ${datadir}/desktop-directories \
-+    ${datadir}/gnome-panel \
-     ${datadir}/gnome-session \
-+    ${datadir}/xsessions \
-+    ${libdir}/gnome-panel \
-     ${systemd_user_unitdir} \
+     ${datadir}/dbus-1/services \
+     ${datadir}/p11-kit \
++    ${datadir}/xdg-desktop-portal \
+     ${base_libdir}/security/*${SOLIBSDEV} \
+     ${libdir}/pkcs11/gnome-keyring-pkcs11.so \
  "
- 
--RDEPENDS_${PN} += "metacity gnome-panel"
-+RDEPENDS_${PN} += "metacity"
 -- 
 2.21.3
 
