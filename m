@@ -1,225 +1,206 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web10.28445.1590977224582434417
- for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 May 2020 19:07:04 -0700
-Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: yi.zhao@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 05126CML009117
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2020 19:06:53 -0700
-Received: from localhost (128.224.162.174) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.487.0; Sun, 31 May
- 2020 19:06:39 -0700
-From: "Yi Zhao" <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] gpsd: add new init script
-Date: Mon, 1 Jun 2020 10:06:25 +0800
-Message-ID: <20200601020625.17417-1-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.17.1
+Subject: #oe Embedded Systems and Applications Publication Announcements -Volume 10, Issue 2, June 2020.
+To: openembedded-devel@lists.openembedded.org
+From: skareem29684@aol.com
+X-Originating-Location: Thornton Heath, England, GB (80.235.154.71)
+X-Originating-Platform: Windows Chrome 83
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.174]
-Content-Type: text/plain
+Date: Sun, 31 May 2020 23:13:36 -0700
+Message-ID: <XmzV.1590992016371418942.l9in@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="FRMmwJqgz8zx4wM9AxvD"
 
-The current init script can not start/stop gpsd daemon with the
-following errors:
-gpsd: line 48: /lib/init/vars.sh: No such file or directory
-gpsd: line 52: /lib/lsb/init-functions: No such file or directory
+--FRMmwJqgz8zx4wM9AxvD
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add a new init script to fix the issue.
+To All openembedded-devel community members,
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- .../recipes-navigation/gpsd/gpsd/gpsd.init    | 158 ++++++++++++++++++
- meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb  |   3 +-
- 2 files changed, 160 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/gpsd.init
+We are pleased to announce the publication invitation of IJESA Volume 10, =
+Issue 2, June=C2=A0 2020.
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/gpsd.init b/meta-oe/recipes-navigation/gpsd/gpsd/gpsd.init
-new file mode 100644
-index 000000000..c9db0bb5c
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd/gpsd.init
-@@ -0,0 +1,158 @@
-+#! /bin/sh
-+### BEGIN INIT INFO
-+# Provides:          gpsd
-+# Required-Start:    $remote_fs $syslog $network
-+# Should-Start:      bluetooth dbus udev
-+# Required-Stop:     $remote_fs $syslog $network
-+# Should-Stop:
-+# Default-Start:     2 3 4 5
-+# Default-Stop:      0 1 6
-+# X-Start-Before:    ntp
-+# Short-Description: GPS (Global Positioning System) daemon start/stop script
-+# Description:       Start/Stop script for the gpsd service daemon,
-+#                    which is able to monitor one or more GPS devices
-+#                    connected to a host computer, making all data on
-+#                    the location and movements of the sensors available
-+#                    to be queried on TCP port 2947.
-+### END INIT INFO
-+
-+
-+# PATH should only include /usr/* if it runs after the mountnfs.sh script
-+PATH=/sbin:/usr/sbin:/bin:/usr/bin
-+
-+DESC="GPS (Global Positioning System) daemon"
-+NAME="gpsd"
-+DAEMON=/usr/sbin/$NAME
-+PIDFILE=/var/run/$NAME.pid
-+
-+. /etc/init.d/functions || exit 1
-+
-+# Exit if the package is not installed
-+[ -x "$DAEMON" ] || exit 0
-+
-+# Read configuration variable file if it is present
-+[ -r /etc/default/$NAME ] && . /etc/default/$NAME
-+
-+if [ -z "$GPSD_SOCKET" ] && [ -z "$DEVICES" ]; then
-+	GPSD_SOCKET=/var/run/gpsd.sock
-+fi
-+
-+if [ -n "$GPSD_SOCKET" ]; then
-+	GPSD_OPTIONS="$GPSD_OPTIONS -F $GPSD_SOCKET"
-+fi
-+
-+DAEMON_ARGS="$GPSD_OPTIONS $DEVICES"
-+
-+#
-+# Function that starts the daemon/service
-+#
-+do_start() {
-+	local status pid
-+
-+	status=0
-+	pid=`pidofproc $NAME` || status=$?
-+	case $status in
-+	0)
-+		echo "$DESC already running ($pid)."
-+		exit 1
-+		;;
-+	*)
-+		echo "Starting $DESC ..."
-+		exec $DAEMON $DAEMON_ARGS >/dev/null 2>&1 || status=$?
-+		echo "ERROR: Failed to start $DESC."
-+		exit $status
-+		;;
-+	esac
-+}
-+
-+#
-+# Function that stops the daemon/service
-+#
-+do_stop() {
-+	local pid status
-+
-+	status=0
-+	pid=`pidofproc $NAME` || status=$?
-+	case $status in
-+	0)
-+		# Exit when fail to stop, the kill would complain when fail
-+		kill -s 15 $pid >/dev/null && rm -f $PIDFILE && \
-+			echo "Stopped $DESC ($pid)." || exit $?
-+		;;
-+	*)
-+		echo "$DESC is not running; none killed." >&2
-+		;;
-+	esac
-+
-+	return $status
-+}
-+
-+#
-+# Function that sends a SIGHUP to the daemon/service
-+#
-+do_reload() {
-+	local pid status
-+
-+	status=0
-+	# If the daemon can reload its configuration without
-+	# restarting (for example, when it is sent a SIGHUP),
-+	# then implement that here.
-+	pid=`pidofproc $NAME` || status=$?
-+	case $status in
-+	0)
-+		echo "Reloading $DESC ..."
-+		kill -s 1 $pid || exit $?
-+		;;
-+	*)
-+		echo "$DESC is not running; none reloaded." >&2
-+		;;
-+	esac
-+	exit $status
-+}
-+
-+
-+#
-+# Function that shows the daemon/service status
-+#
-+status_of_proc () {
-+	local pid status
-+
-+	status=0
-+	# pidof output null when no program is running, so no "2>/dev/null".
-+	pid=`pidofproc $NAME` || status=$?
-+	case $status in
-+	0)
-+		echo "$DESC is running ($pid)."
-+		exit 0
-+		;;
-+	*)
-+		echo "$DESC is not running." >&2
-+		exit $status
-+		;;
-+	esac
-+}
-+
-+case "$1" in
-+start)
-+	do_start
-+	;;
-+stop)
-+	do_stop || exit $?
-+	;;
-+status)
-+	status_of_proc
-+	;;
-+restart)
-+	# Always start the service regardless the status of do_stop
-+	do_stop
-+	do_start
-+	;;
-+force-reload)
-+	# Only start the service when do_stop succeeds
-+	do_stop && do_start
-+	;;
-+*)
-+	echo "Usage: $0 {start|stop|status|restart|force-reload}" >&2
-+	exit 3
-+	;;
-+esac
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
-index 390e6a8c3..3888ad8fa 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
-@@ -8,6 +8,7 @@ PROVIDES = "virtual/gpsd"
- SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
-     file://0001-Revert-SConstruct-Add-test-for-sizeof-time_t-result-.patch \
-+    file://gpsd.init \
- "
- SRC_URI[md5sum] = "cf7fdec7ce7221d20bee1a7246362b05"
- SRC_URI[sha256sum] = "172a7805068eacb815a3c5225436fcb0be46e7e49a5001a94034eac43df85e50"
-@@ -66,7 +67,7 @@ do_install() {
- 
- do_install_append() {
-     install -d ${D}/${sysconfdir}/init.d
--    install -m 0755 ${S}/packaging/deb/etc_init.d_gpsd ${D}/${sysconfdir}/init.d/gpsd
-+    install -m 0755 ${WORKDIR}/gpsd.init ${D}/${sysconfdir}/init.d/gpsd
-     install -d ${D}/${sysconfdir}/default
-     install -m 0644 ${S}/packaging/deb/etc_default_gpsd ${D}/${sysconfdir}/default/gpsd.default
- 
--- 
-2.17.1
+Scope & Topics
 
+International Journal of Embedded Systems and Applications (IJESA) is a qu=
+arterly open access peer-reviewed journal that publishes articles which con=
+tribute new results in all areas of the Embedded Systems and applications. =
+The goal of this journal is to bring together researchers and practitioners=
+ from academia and industry to focus on understanding Embedded Systems and =
+establishing new collaborations in these areas.Authors are solicited to con=
+tribute to the journal by submitting articles that illustrate research resu=
+lts, projects, surveying works and industrial experiences that describe sig=
+nificant advances in the areas of Embedded Systems & applications.
+
+Topics of interest
+
+=E2=80=A2 Application-specific processors and devices
+=E2=80=A2 Business Applications
+=E2=80=A2 Component and binding models
+=E2=80=A2 Embedded computing education
+=E2=80=A2 Embedded hardware support
+=E2=80=A2 Embedded system architecture
+=E2=80=A2 Hardware and software co-design
+=E2=80=A2 Integration with SOA
+=E2=80=A2 Middleware
+=E2=80=A2 Programming abstractions
+=E2=80=A2 Real-time systems
+=E2=80=A2 Service-Oriented Architectures
+=E2=80=A2 Testing techniques
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Volume 9 -=C2=A0 *URL: * https://wireilla.com/ijesa/vol9.html
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
+@Energy-Efficient Low Dropout Regulator with Switching Mechanism and Cours=
+e Regulator for Internet of Things (IOT) Devices
+
+@Analysis of System on Chip Design Using Artificial Intelligence
+
+@IOT-Enabled Green Campus Energy Management System
+
+@Steganography Based Asymmetric Key Cryptosystem Using Trellis Coded Genet=
+ic Algorithm Random Key Generator
+
+@Enhanced Embedded Linux Board Support Package Field Upgrade =E2=80=93 A C=
+ost Effective Approach
+
+@A VLSI Architecture Realisation of an Wireless Endoscopy System
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D
+Volume 8 - *URL: * https://wireilla.com/ijesa/vol8.html
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D
+@Design and Implementation of IOT Based Smart Power Monitoring and Managem=
+ent System Using WSNS
+
+@Performance Evaluation of Fuzzy Logic and Back Propagation Neural Network=
+ for Hand Written Character Recognition
+
+@Fingerprint Classification Based on Orientation Field
+
+@Design of an Autonomous Smart Shower With Sensors and Actuators
+
+@Dynamut: A Mutation Testing Tool for Industry-Level Embedded System Appli=
+cations
+
+Thanks,
+Secretary
+*Stay in touch with International Journal of Embedded Systems and Applicat=
+ions (IJESA)
+ISSN : 1839-5171
+Upcoming issue : June 2020,Vol 10 No 2
+https://wireilla.com/ijesa/index.html
+
+--FRMmwJqgz8zx4wM9AxvD
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<h5>To All openembedded-devel community members,</h5>
+<div>&nbsp;</div>
+<div>We are pleased to announce the publication invitation of IJESA Volume=
+ 10, Issue 2, June&nbsp; 2020.</div>
+<div>&nbsp;</div>
+<div>Scope &amp; Topics</div>
+<div>&nbsp;</div>
+<div>International Journal of Embedded Systems and Applications (IJESA) is=
+ a quarterly open access peer-reviewed journal that publishes articles whic=
+h contribute new results in all areas of the Embedded Systems and applicati=
+ons. The goal of this journal is to bring together researchers and practiti=
+oners from academia and industry to focus on understanding Embedded Systems=
+ and establishing new collaborations in these areas.Authors are solicited t=
+o contribute to the journal by submitting articles that illustrate research=
+ results, projects, surveying works and industrial experiences that describ=
+e significant advances in the areas of Embedded Systems &amp; applications.=
+</div>
+<div>&nbsp;</div>
+<div>Topics of interest</div>
+<div>&nbsp;</div>
+<div>&bull;<span style=3D"white-space: pre;"> </span>Application-specific =
+processors and devices</div>
+<div>&bull;<span style=3D"white-space: pre;"> </span>Business Applications=
+</div>
+<div>&bull;<span style=3D"white-space: pre;"> </span>Component and binding=
+ models</div>
+<div>&bull;<span style=3D"white-space: pre;"> </span>Embedded computing ed=
+ucation</div>
+<div>&bull;<span style=3D"white-space: pre;"> </span>Embedded hardware sup=
+port</div>
+<div>&bull;<span style=3D"white-space: pre;"> </span>Embedded system archi=
+tecture</div>
+<div>&bull;<span style=3D"white-space: pre;"> </span>Hardware and software=
+ co-design</div>
+<div>&bull;<span style=3D"white-space: pre;"> </span>Integration with SOA<=
+/div>
+<div>&bull;<span style=3D"white-space: pre;"> </span>Middleware</div>
+<div>&bull;<span style=3D"white-space: pre;"> </span>Programming abstracti=
+ons</div>
+<div>&bull;<span style=3D"white-space: pre;"> </span>Real-time systems</di=
+v>
+<div>&bull;<span style=3D"white-space: pre;"> </span>Service-Oriented Arch=
+itectures</div>
+<div>&bull;<span style=3D"white-space: pre;"> </span>Testing techniques</d=
+iv>
+<div>&nbsp;</div>
+<div>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D</div>
+<div>Volume 9 -&nbsp; *URL: * https://wireilla.com/ijesa/vol9.html</div>
+<div>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D</div>
+<div>@Energy-Efficient Low Dropout Regulator with Switching Mechanism and =
+Course Regulator for Internet of Things (IOT) Devices</div>
+<div>&nbsp;</div>
+<div>@Analysis of System on Chip Design Using Artificial Intelligence</div=
+>
+<div>&nbsp;</div>
+<div>@IOT-Enabled Green Campus Energy Management System</div>
+<div>&nbsp;</div>
+<div>@Steganography Based Asymmetric Key Cryptosystem Using Trellis Coded =
+Genetic Algorithm Random Key Generator</div>
+<div>&nbsp;</div>
+<div>@Enhanced Embedded Linux Board Support Package Field Upgrade &ndash; =
+A Cost Effective Approach</div>
+<div>&nbsp;</div>
+<div>@A VLSI Architecture Realisation of an Wireless Endoscopy System</div=
+>
+<div>&nbsp;</div>
+<div>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D</div>
+<div>Volume 8 - *URL: * https://wireilla.com/ijesa/vol8.html</div>
+<div>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D</div>
+<div>@Design and Implementation of IOT Based Smart Power Monitoring and Ma=
+nagement System Using WSNS</div>
+<div>&nbsp;</div>
+<div>@Performance Evaluation of Fuzzy Logic and Back Propagation Neural Ne=
+twork for Hand Written Character Recognition</div>
+<div>&nbsp;</div>
+<div>@Fingerprint Classification Based on Orientation Field</div>
+<div>&nbsp;</div>
+<div>@Design of an Autonomous Smart Shower With Sensors and Actuators</div=
+>
+<div>&nbsp;</div>
+<div>@Dynamut: A Mutation Testing Tool for Industry-Level Embedded System =
+Applications</div>
+<div>&nbsp;</div>
+<div>Thanks,</div>
+<div>Secretary</div>
+<div>*Stay in touch with International Journal of Embedded Systems and App=
+lications (IJESA)</div>
+<div>ISSN : 1839-5171</div>
+<div>Upcoming issue : June 2020,Vol 10 No 2</div>
+<div>https://wireilla.com/ijesa/index.html</div>
+
+--FRMmwJqgz8zx4wM9AxvD--
