@@ -1,86 +1,59 @@
-Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web11.35021.1591012314979677939
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.35455.1591013069796347626
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jun 2020 04:51:56 -0700
+ Mon, 01 Jun 2020 05:04:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=fz0FZlfa;
- spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 933D360144;
-	Mon,  1 Jun 2020 13:51:52 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1591012312;
-	bh=9aL64ekrD1Rz1x0AYhy7FTqdAqsmKOZU7rAR2w/7Eko=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=fz0FZlfaBH3LmLUCkvwMZ33R4Ik0DuunnjLboieENtISahMGTiZdqM9eCCt/Nh+1Y
-	 BQBFSjFwNNJrTTeFkr4Q7dKt1EajJ0/fcPhRI+5d+ff3/s7hgmoixi1eFhX22fsxPr
-	 /9914dAIrJzzmzgQicE+ge7Hd/Q3g2gHtvhS3YYHbyRZwsdn6+VTTLYjUYjjJKNwoa
-	 tCT2W9IamJO6VD95L0DWlOGVW0fFrAbpCE8JF8wtnnVzqp8TuUmdi84q52QqDT+4hj
-	 AXMfS5+RfyHLN1dyoxS3cqIpU1brHuNzGVQzKxMD7qruzHf1uGpAoIuTevCK72Ha2i
-	 oGnLQrewWoH+A==
-From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=39878 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jfjB4-00086p-GT; Mon, 01 Jun 2020 15:04:27 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH 2/2] uriparser: upgrade 0.9.3 -> 0.9.4
-Date: Mon,  1 Jun 2020 13:51:15 +0200
-Message-Id: <1591012275-14454-2-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1591012275-14454-1-git-send-email-pjtexier@koncepto.io>
-References: <1591012275-14454-1-git-send-email-pjtexier@koncepto.io>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/4] python3-unidiff: Upgrade 0.5.5 -> 0.6.0
+Date: Mon,  1 Jun 2020 15:04:16 +0300
+Message-Id: <20200601120419.13396-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-License-Update: copyright years updated
+Upgrade to release 0.6.0.
 
-Changelog:
-
-2020-05-31 -- 0.9.4
-
-  * Fixed: testrunner: No longer crashes when compiled with NDEBUG (GitHub #67)
-  * Fixed: CMake: Support GTest 1.8.0 (GitHub #68)
-      Thanks to Ryan Schmidt for the related report!
-  * Fixed: CMake: Use variable GTEST_INCLUDE_DIRS (with plural "S") rather than
-      GTEST_INCLUDE_DIR (GitHub #79, #81)
-      Thanks to Wouter Beek for the related report!
-  * Improved: CMake: Send config summary to stdout, not stderr (GitHub #72)
-      Thanks to Scott Donelan for the patch!
-  * Improved: Make -DURIPARSER_BUILD_TESTS=OFF unlock compilation without
-      a C++ compiler; thanks to Fabrice Fontaine for the patch! (GitHub #69)
-  * Added: Functions to make UriUri[AW] instances independent of the original
-      URI string (GitHub #77 and #78)
-      New functions:
-        uriMakeOwner[AW]
-        uriMakeOwnerMm[AW]
-  * Added: CMake option URIPARSER_ENABLE_INSTALL to toggle installation of
-      files, defaults to "ON" (GitHub #74, #75)
-      Thanks to Scott Donelan for the patch!
-  * Soname: 1:26:0
-
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../uriparser/{uriparser_0.9.3.bb => uriparser_0.9.4.bb}             | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/uriparser/{uriparser_0.9.3.bb => uriparser_0.9.4.bb} (64%)
+ .../{python3-unidiff_0.5.5.bb => python3-unidiff_0.6.0.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-unidiff_0.5.5.bb => python3-unidiff_0.6.0.bb} (68%)
 
-diff --git a/meta-oe/recipes-support/uriparser/uriparser_0.9.3.bb b/meta-oe/recipes-support/uriparser/uriparser_0.9.4.bb
-similarity index 64%
-rename from meta-oe/recipes-support/uriparser/uriparser_0.9.3.bb
-rename to meta-oe/recipes-support/uriparser/uriparser_0.9.4.bb
-index da52bb5..d02cf5d 100644
---- a/meta-oe/recipes-support/uriparser/uriparser_0.9.3.bb
-+++ b/meta-oe/recipes-support/uriparser/uriparser_0.9.4.bb
-@@ -2,11 +2,10 @@ SUMMARY = "RFC 3986 compliant URI parsing library"
- HOMEPAGE = "https://uriparser.github.io"
+diff --git a/meta-python/recipes-devtools/python/python3-unidiff_0.5.5.bb b/meta-python/recipes-devtools/python/python3-unidiff_0.6.0.bb
+similarity index 68%
+rename from meta-python/recipes-devtools/python/python3-unidiff_0.5.5.bb
+rename to meta-python/recipes-devtools/python/python3-unidiff_0.6.0.bb
+index ded66f06f..75aa1bf79 100644
+--- a/meta-python/recipes-devtools/python/python3-unidiff_0.5.5.bb
++++ b/meta-python/recipes-devtools/python/python3-unidiff_0.6.0.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://github.com/matiasb/python-unidiff"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=4c434b08ef42fea235bb019b5e5a97b3"
  
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://COPYING;md5=fc3bbde670fc6e95392a0e23bf57bda0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fcc5a53146c2401f4b4f6a3bdf3f0168"
+-SRC_URI[md5sum] = "47f669d7273541fec45e4cc0fba8d8e9"
+-SRC_URI[sha256sum] = "9c9ab5fb96b6988b4cd5def6b275492442c04a570900d33aa6373105780025bc"
++SRC_URI[md5sum] = "ae9524079753df7b1239f0378ed326b7"
++SRC_URI[sha256sum] = "90c5214e9a357ff4b2fee19d91e77706638e3e00592a732d9405ea4e93da981f"
  
- SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${BP}/${BP}.tar.gz"
--SRC_URI[md5sum] = "9874b64f6f4ff656f3f69598e38f12b7"
--SRC_URI[sha256sum] = "6cef39d6eaf1a48504ee0264ce85f078758057dafb1edd0a898183b55ff76014"
-+SRC_URI[sha256sum] = "095e8a358a9ccbbef9d1f10d40495ca0fcb3d4490a948ba6449b213a66e08ef0"
- 
- UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
+ inherit pypi setuptools3
  
 -- 
-2.7.4
+2.17.1
 
