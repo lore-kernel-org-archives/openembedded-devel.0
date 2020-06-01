@@ -1,50 +1,50 @@
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.web12.48683.1591047958438385707
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web11.48700.1591047959307574947
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jun 2020 14:45:58 -0700
+ Mon, 01 Jun 2020 14:45:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=NSQ58gm0;
- spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f52.google.com with SMTP id c3so1272046wru.12
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2020 14:45:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=RU7thnK4;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id l11so1348374wru.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2020 14:45:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=I1kVJXmEkhjuEL96gZEdJUen3FYKxh6TVIiEpj0DDcM=;
-        b=NSQ58gm0kv5oxOdhwx0kQ+6g91ClahxHvPcntn3yrxsYq1vE3OQCZOLvVA3+6oI4wP
-         HKrKOgDaXCKCgc5mqpTIXRzFf4TGu5yGUqSU0oDTSvjsKzWTeG47jzIEx9R7wuhoR6zz
-         gSdob+UJv/2IiTbrFzft+3BkfOJiCi3ZCbUPMlMFD7Pqp0kMk3TugnK49Ibec79KK7it
-         xG7FvCmBy7kLfQiaMN0g0UHtUvcvjmphQ4by/svudlOfwxBgwH5V2FV4hFpjVP11EnLO
-         aURHqgDh6o/mvhiIO07ca4LKMb3rz+tZy8k86tNtGn3zReLh8mAOz14MMTg4+Z+k0lFO
-         2wYA==
+        bh=00qANzZOXclhJ4K0Unam82DUBayh6ghTCCT1XHIWrtw=;
+        b=RU7thnK492KtmYMcyOleS9Ioxph2sGHFUA0iH09+n/XZIKVyZ9ZtNCdpEr32KM0m3G
+         Zvji30+jFEwCMH4E/yQX8gy6u7Vrol2Yhd/m6yGqGrrxG3Os3gPFSeYO1NqMvoZncKEP
+         mgD+YIYk5ErHGwR0FWi9z2LVASbeY7H7bBjVnwRF9dFpneHiLiifC94P27a72xpdwLeq
+         oeSs697yTtYEhtfRlNMfIt24dV5PyBlS8QG5iGyPYvq1SHr368XAEa7d21kBJ4An8QT3
+         b+kX8dGYlvaju7AUwJy0p0Apr611aDAvIHTDVBI7BD3kYM/zSMUPRIuavsqy7r47J5Uk
+         KbZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=I1kVJXmEkhjuEL96gZEdJUen3FYKxh6TVIiEpj0DDcM=;
-        b=KFV160oGPWoelOWRLpEV3gieS4ny8iJGwhwLtCBJZJsJUusky2ZLCl1UJ7wh7cKzYr
-         zyhn2kq1zd0QSuL3dvBtZIzIgYEUVkdYv7r1Lc2zlcRJn4wWmFQHNNv8FS/7TEYa2plg
-         ViAS8ZNgIf8FmmF07DsHZyIWgs4jPBHyCnTx32v3gPBLK7BAh4Jq5ye4wOx/G/qvoNn9
-         sA9CIcvEN2fWIQoOkZDPVYFRHavYjaNw0+yFm/WQ3ExLZV5pEFujk0mTc7Bp9AeJcQOW
-         3yLjYo+geB7KcgxtfkYLhUTp+0iZ/Qh4O8gaQ7X2wFi0OWknpgmjSORgpd/noz3jBcxM
-         DyXA==
-X-Gm-Message-State: AOAM533USl6o0+un+/l4xNebmG9hLQ0uNrnJhSFyhh/Y3AfJ6TVe9h2s
-	B8fkBHdadOcXz/irXEEUWbvM6aB3PGw=
-X-Google-Smtp-Source: ABdhPJwrk5dgjqWvO205GeX3j/QGnmnlQ64ls5VtGC2RVBk75bY2dH901TANlqX9W6+Pa/KiLPBYcw==
-X-Received: by 2002:a5d:4390:: with SMTP id i16mr22507676wrq.186.1591047956827;
-        Mon, 01 Jun 2020 14:45:56 -0700 (PDT)
+        bh=00qANzZOXclhJ4K0Unam82DUBayh6ghTCCT1XHIWrtw=;
+        b=b3SmuZ0lPKigdXxX1AnyQOwIMFsfiB/G5itzsRbo4Fa+dpai/rxB3+eoETUMamaWXl
+         VzEZpYWNQYQAnk0w/StaMvzD/dbbqXAeEI6f92nC3jzDeL47gh+zYRRa3OxvaRH7bQ6g
+         S7YuVP+poAsD0apqmEPZKuWU2Id99MC4zYMUQijTLWpGwMXpQld06aAhLs/YWPDZ0xi9
+         fvViD5M6Jmsjep+qKckyTRyxvAf33VB8HDwH8DI1q84dEdizmpwINSVhBxFVuabnhf41
+         qbMLAusrAXJfanzHo/DUZDCv7oJvoejnsOc2sYGYQelLQME1uUUVh6Z1BdXA8WdrsFbh
+         DvIg==
+X-Gm-Message-State: AOAM532JRS61YQhSwKZ1JXmARslJYof+pLL0SKKoVPn9imsT9hp9X+/G
+	ZN1eWkZSHgsT164/YrHXOk7wFUJw3Dw=
+X-Google-Smtp-Source: ABdhPJxM4StnnhhI87PglomLI9yXYH2XGObLRmX9nMyvMhpjS5qxDKVSnnBg52IdEvI8hJ7pofaGjQ==
+X-Received: by 2002:adf:9507:: with SMTP id 7mr23355580wrs.63.1591047957548;
+        Mon, 01 Jun 2020 14:45:57 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f06ad34da2c69d11ac2eac0.dip0.t-ipconnect.de. [2003:f0:7f06:ad34:da2c:69d1:1ac2:eac0])
-        by smtp.gmail.com with ESMTPSA id 40sm1050119wrc.15.2020.06.01.14.45.55
+        by smtp.gmail.com with ESMTPSA id 40sm1050119wrc.15.2020.06.01.14.45.56
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Jun 2020 14:45:55 -0700 (PDT)
+        Mon, 01 Jun 2020 14:45:57 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 29/38] grilo: upgrade 0.3.10 -> 0.3.12
-Date: Mon,  1 Jun 2020 23:45:07 +0200
-Message-Id: <20200601214516.26624-30-schnitzeltony@gmail.com>
+Subject: [PATCH 30/38] libgnomekbd: remove
+Date: Mon,  1 Jun 2020 23:45:08 +0200
+Message-Id: <20200601214516.26624-31-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200601214516.26624-1-schnitzeltony@gmail.com>
 References: <20200601214516.26624-1-schnitzeltony@gmail.com>
@@ -52,51 +52,35 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-NEW in 0.3.12
-=============
-  * #107 grl-source: Fix reference count in the bindings
-
-  * Updated translations
-    * Japanese
-    * British English
-
-  * Contributors to this release:
-    Jean Felder <jfelder@gnome.org>
-
-NEW in 0.3.11
-=============
-  * !52 pls: Support totem-pl-parser 3.26.4
-  * !51 build: Add a Meson dependency variable for libgrlpls
-  * !50 build: Avoid using meson.source_root()
-
-  * Contributors to this release:
-    Sam Thursfield <sam@afuera.me.uk>
-    Bastien Nocera <hadess@hadess.net>
+* last release was Feb 2019
+* nothing depends on libgnomekbd
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-gnome/grilo/{grilo_0.3.10.bb => grilo_0.3.12.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/grilo/{grilo_0.3.10.bb => grilo_0.3.12.bb} (84%)
+ .../recipes-gnome/libgnome/libgnomekbd_3.26.1.bb   | 14 --------------
+ 1 file changed, 14 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
 
-diff --git a/meta-gnome/recipes-gnome/grilo/grilo_0.3.10.bb b/meta-gnome/recipes-gnome/grilo/grilo_0.3.12.bb
-similarity index 84%
-rename from meta-gnome/recipes-gnome/grilo/grilo_0.3.10.bb
-rename to meta-gnome/recipes-gnome/grilo/grilo_0.3.12.bb
-index e3fd67172..0338455bc 100644
---- a/meta-gnome/recipes-gnome/grilo/grilo_0.3.10.bb
-+++ b/meta-gnome/recipes-gnome/grilo/grilo_0.3.12.bb
-@@ -11,8 +11,8 @@ GNOMEBASEBUILDCLASS = "meson"
- 
- inherit gnomebase gobject-introspection gtk-doc gettext vala
- 
--SRC_URI[archive.md5sum] = "f02bf585d1a48dc65be8b90ae3b08330"
--SRC_URI[archive.sha256sum] = "7e44b2e74c31ed24eb97e43265a9e41effe8660287b02295111805c7bda7f1e8"
-+SRC_URI[archive.md5sum] = "b464ce84db6f9354996a1d47b3c613da"
-+SRC_URI[archive.sha256sum] = "dbfbd6082103288592af97568180b9cc81a336a274ed5160412f87675ec11a71"
- 
- GIR_MESON_OPTION = "enable-introspection"
- GTKDOC_MESON_OPTION = "enable-gtk-doc"
+diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
+deleted file mode 100644
+index 2a2db9c19..000000000
+--- a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-SUMMARY = "GNOME keyboard library"
+-LICENSE = "LGPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=6e29c688d912da12b66b73e32b03d812"
+-
+-SECTION = "x11/gnome/libs"
+-
+-DEPENDS = "glib-2.0 gtk+3 libxklavier"
+-
+-inherit features_check gnomebase gobject-introspection gsettings gettext
+-
+-REQUIRED_DISTRO_FEATURES = "x11"
+-
+-SRC_URI[archive.md5sum] = "98040022484406e7ebe25f82cef93344"
+-SRC_URI[archive.sha256sum] = "f7ca02631576e9b88aee1b1bae37ac1488b80ee7975f20a97f29e761a7172679"
 -- 
 2.21.3
 
