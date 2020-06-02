@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.7254.1591091388256721197
+ by mx.groups.io with SMTP id smtpd.web10.7717.1591094090949889761
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Jun 2020 02:49:48 -0700
+ Tue, 02 Jun 2020 03:34:55 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=41014 helo=localhost.localdomain)
+Received: from [78.130.197.211] (port=42088 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jg3YE-0000dl-Pk; Tue, 02 Jun 2020 12:49:43 +0300
+	id 1jg4Fb-0004A7-HJ; Tue, 02 Jun 2020 13:34:32 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH] python3-automat: Upgrade 0.8.0 -> 20.2.0
-Date: Tue,  2 Jun 2020 12:49:01 +0300
-Message-Id: <20200602094901.29564-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2] python3-humanize: Upgrade 0.5.1 -> 2.4.0
+Date: Tue,  2 Jun 2020 13:34:26 +0300
+Message-Id: <20200602103426.14541-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -28,69 +28,74 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 20.2.0. Rebase the patch that removes
-dependency on on m2r for the new release.
+Upgrade to release 2.4.0 and consolidate into a single file.
+The year in file LICENCE has been recently updated therefore the
+checksum has been chaned but it still remains a MIT License.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../0001-setup.py-remove-the-dependency-on-m2r.patch  | 11 +++++++----
- ...on3-automat_0.8.0.bb => python3-automat_20.2.0.bb} |  4 ++--
- 2 files changed, 9 insertions(+), 6 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-automat_0.8.0.bb => python3-automat_20.2.0.bb} (76%)
+ .../python/python-humanize.inc                | 14 -------------
+ .../python/python3-humanize_0.5.1.bb          |  2 --
+ .../python/python3-humanize_2.4.0.bb          | 20 +++++++++++++++++++
+ 3 files changed, 20 insertions(+), 16 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-humanize.inc
+ delete mode 100644 meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-automat/0001-setup.py-remove-the-dependency-on-m2r.patch b/meta-python/recipes-devtools/python/python3-automat/0001-setup.py-remove-the-dependency-on-m2r.patch
-index c29b659bc..b83b7f380 100644
---- a/meta-python/recipes-devtools/python/python3-automat/0001-setup.py-remove-the-dependency-on-m2r.patch
-+++ b/meta-python/recipes-devtools/python/python3-automat/0001-setup.py-remove-the-dependency-on-m2r.patch
-@@ -1,4 +1,4 @@
--From 33b70266930c9093712173c4e0c419815b55e313 Mon Sep 17 00:00:00 2001
-+From 4fb6bbfbc53428fe5d38ec3e04bb4fd187b2fd45 Mon Sep 17 00:00:00 2001
- From: Derek Straka <derek@asterius.io>
- Date: Fri, 22 Dec 2017 09:07:00 -0500
- Subject: [PATCH] setup.py: remove the dependency on m2r
-@@ -11,13 +11,13 @@ value in this case
- Upstream-Status: Inappropriate (OE specific)
- 
- Signed-off-by: Derek Straka <derek@asterius.io>
+diff --git a/meta-python/recipes-devtools/python/python-humanize.inc b/meta-python/recipes-devtools/python/python-humanize.inc
+deleted file mode 100644
+index 17a3449e7..000000000
+--- a/meta-python/recipes-devtools/python/python-humanize.inc
++++ /dev/null
+@@ -1,14 +0,0 @@
+-SUMMARY = "Python humanize utilities"
+-HOMEPAGE = "http://github.com/jmoiron/humanize"
 -
-+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
- ---
-  setup.py | 10 ----------
-  1 file changed, 10 deletions(-)
- 
- diff --git a/setup.py b/setup.py
--index d360c64..7b4180a 100644
-+index 3fb7fdb..245d69a 100644
- --- a/setup.py
- +++ b/setup.py
- @@ -4,14 +4,6 @@ Setup file for automat
-@@ -47,4 +47,7 @@ index d360c64..7b4180a 100644
- -        'm2r',
-      ],
-      install_requires=[
--         "attrs>=16.1.0",
-+         "attrs>=19.2.0",
-+-- 
-+2.17.1
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENCE;md5=d2eff82fc25dd07c919a02465884f02e"
+-
+-SRC_URI[md5sum] = "e8473d9dc1b220911cac2edd53b1d973"
+-SRC_URI[sha256sum] = "a43f57115831ac7c70de098e6ac46ac13be00d69abbf60bdcac251344785bb19"
+-
+-RDEPENDS_${PN} += "\
+-    ${PYTHON_PN}-datetime \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb b/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
+deleted file mode 100644
+index 04464ac59..000000000
+--- a/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-inherit pypi setuptools3
+-require python-humanize.inc
+diff --git a/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb b/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
+new file mode 100644
+index 000000000..6bb6946ff
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "Python humanize utilities"
++HOMEPAGE = "http://github.com/jmoiron/humanize"
 +
-diff --git a/meta-python/recipes-devtools/python/python3-automat_0.8.0.bb b/meta-python/recipes-devtools/python/python3-automat_20.2.0.bb
-similarity index 76%
-rename from meta-python/recipes-devtools/python/python3-automat_0.8.0.bb
-rename to meta-python/recipes-devtools/python/python3-automat_20.2.0.bb
-index f8981bcb1..bddc5be69 100644
---- a/meta-python/recipes-devtools/python/python3-automat_0.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-automat_20.2.0.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/glyph/Automat"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=4ad213bcca81688e94593e5f60c87477"
- 
--SRC_URI[md5sum] = "47e980a48201a1dabe37fa11f0187013"
--SRC_URI[sha256sum] = "269a09dfb063a3b078983f4976d83f0a0d3e6e7aaf8e27d8df1095e09dc4a484"
-+SRC_URI[md5sum] = "d6cef9886b037b8857bfbc686f3ae30a"
-+SRC_URI[sha256sum] = "7979803c74610e11ef0c0d68a2942b152df52da55336e0c9d58daf1831cbdf33"
- 
- DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
- 
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
++
++SRC_URI[md5sum] = "010e86a4196ed6030112e7bc681e7353"
++SRC_URI[sha256sum] = "42ae7d54b398c01bd100847f6cb0fc9e381c21be8ad3f8e2929135e48dbff026"
++
++inherit pypi setuptools3
++
++DEPENDS += "\
++    ${PYTHON_PN}-setuptools-scm-native \
++"
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-datetime \
++"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
