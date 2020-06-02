@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.7717.1591094090949889761
+ by mx.groups.io with SMTP id smtpd.web11.7836.1591094306286936420
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Jun 2020 03:34:55 -0700
+ Tue, 02 Jun 2020 03:38:26 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=42088 helo=localhost.localdomain)
+Received: from [78.130.197.211] (port=42184 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jg4Fb-0004A7-HJ; Tue, 02 Jun 2020 13:34:32 +0300
+	id 1jg4JI-0006SM-8B; Tue, 02 Jun 2020 13:38:21 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCHv2] python3-humanize: Upgrade 0.5.1 -> 2.4.0
-Date: Tue,  2 Jun 2020 13:34:26 +0300
-Message-Id: <20200602103426.14541-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv3] python3-humanize: Upgrade 0.5.1 -> 2.4.0
+Date: Tue,  2 Jun 2020 13:38:15 +0300
+Message-Id: <20200602103815.21809-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -30,7 +30,7 @@ X-Source-Dir:
 
 Upgrade to release 2.4.0 and consolidate into a single file.
 The year in file LICENCE has been recently updated therefore the
-checksum has been chaned but it still remains a MIT License.
+checksum has been changed but it still remains a MIT License.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
