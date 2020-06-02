@@ -1,109 +1,254 @@
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (EUR05-AM6-obe.outbound.protection.outlook.com [40.92.91.48])
- by mx.groups.io with SMTP id smtpd.web12.886.1591131291456477935
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.71])
+ by mx.groups.io with SMTP id smtpd.web10.2292.1591139748499947310
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Jun 2020 13:54:51 -0700
+ Tue, 02 Jun 2020 16:15:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@outlook.com header.s=selector1 header.b=haK8t+Um;
- spf=pass (domain: outlook.com, ip: 40.92.91.48, mailfrom: kweihmann@outlook.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=gTP78vrm;
+ spf=pass (domain: windriver.com, ip: 40.107.237.71, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LQeJv9N4FwOkqG5H7FFqPrBoiVcE2G5LzyLjslBaXn0t6Ov+XwG2t5DXTevMTfo5+UavljblqkK7UQVgW1OOJ4aKninf2ygdPocLK5oKpAS8eyP3/EEjV3T37X/DEmjSGH4CuRN9vPqJB+1jbUEdCKlWSeeEsNBaOGVV0Sk3cGIzJaN9fdlRoxEtSX/NOvf3dc7zjbRiRbEXRRzWAgaX/PinM+zwb45JyMOBcKoSWYz6w92fl34l6pOhblIg8DQlQDOsUCLIQmo4f432WLLcwy8+sropRaqGvFkWXrUwzGJmZEiP4Xgz9/ujxh2dTSuJcNnBTkTeZ7EDM7dXV23Z1Q==
+ b=AP5OvAI45GRMXz7ZuFfg3TaaJfY2UcXiJGxVlmmhHTl1e9s6gzSY6rTrxgW2EHh7P/nEVvEEJoU80K9OyWMfbAKMaE9Vbs7LloPrQTSf7yB8Aq1KUTcsTVlXvjovm61F4hs7zUF3OXVJlLRoZ3vw830OnPMKTFZGNnQb6C0JBKDtC/wGivBaJ+wZsJH5smMNBcZbl+MwF97HIG/0AIZHlSUTEMB7pF9wvWDZAFGuoLzHsxdspz6MWnQ1KsiuDHeHognsFlFgvdudsIcrKnCETU3xJyE5tfP4B7bfTkSB22YUehJkWU2sMrUa77fMyzpKAIokNw9Vo0WQvobhBssGGA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=H5DYvR/d+z7EvHkK44E5374Dm0iQzfBYVmOAQhX4pqI=;
- b=P7kubTZuh2RWR5SLZ1O85dhdoZkXhid5/NcFdJfbhhxVrIKeJnViY6jMJZz0a+05/gD7L65itT8bop+y4yvbLCKeoyRA3gcp3rS1PFQIKE5of2548c9Msd0bVJ9dQ47ztXhtTsTXkRZlMfUFWZFRmH3wtpVCfatz0bl/ucmTOeeGa+mlkq+sEb8nD0ejhpIL897VDQp2vf4fFL8J94wxc0gXAewsNnesLwgvvthmUz88y8wrnHC8r1yYWPBRdj4FvTOM3w5Y3L3eTORtZg8aRNW9CNFZyJIWLwj1Ol18P8e7SBKYMMOqXgG8TLMzCW8asaUVu+ERhzKzxfuOqBGvOw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
+ bh=S3gpojkRhyXtnS/EHIw9IFaVDDFroX9gY5CPaY5VPpQ=;
+ b=bBua6beFECftzySphJfg8LkPu4q234qgAVvvu+sLj56cTFnVTFYGgIiKJnixUgfjGghGeLd5oDt/5qCqDcuOsw8mPhkHW+sP0HZN2/vy5TrYgg6ScbS6X8mEBNnT3qK3tbnyscQCTqiRJR29vnmbhAea7BUWFUstvxCR3wD6gMIPqjaTSa8xy0QbWc6eKoSZ2uwbaLztHpg64HoIipUib/EDPrIju4irg5Jd1AL8v/rLYh4eXeTntAzNzPMRtaMUB9vhS159/7x5Xx+Cg1YZ8AKBqi2FhOss+KIljRr6YFJrBZzJ7ABDBtcaLsgS0kB3IrR5zyXe42L5xUuqge9cBg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=H5DYvR/d+z7EvHkK44E5374Dm0iQzfBYVmOAQhX4pqI=;
- b=haK8t+UmdN5LeUxz9oJ3wASW1EdMOYee1xVfZGjTnTiIZvwoD9/sv8xK0AhNYlHFKvn5Ht49uDbonq/gJLSO7LJljl6LEd2jzyUP81Ry11v2jWZ8OWi2pxNXfJQ7wTGKwkf2Z1Eqa87Hf+dm+1MBA7H0Jpufzh381x13fFPwBaBhKUM8AhQFzwTUANy5JAq4Rayh/SJ0XYOd439dOxmwa5zKm87AtAK1Kbx58gMyMuZCX5eSPhNTBccD3SslGZQI/CWuYvlvBHK8/GQ8OXjxlZNcfSdeNicSgSQ3t7hLwE04PBSgtUxVQXj7wTkN3i/uC1OdtqRsB3OyeHEWCxmgKg==
-Received: from AM6EUR05FT060.eop-eur05.prod.protection.outlook.com
- (2a01:111:e400:fc11::4c) by
- AM6EUR05HT233.eop-eur05.prod.protection.outlook.com (2a01:111:e400:fc11::308)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3045.17; Tue, 2 Jun
- 2020 20:54:49 +0000
-Received: from AM7PR05MB6881.eurprd05.prod.outlook.com
- (2a01:111:e400:fc11::45) by AM6EUR05FT060.mail.protection.outlook.com
- (2a01:111:e400:fc11::236) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3045.17 via Frontend
- Transport; Tue, 2 Jun 2020 20:54:49 +0000
-X-IncomingTopHeaderMarker: OriginalChecksum:0E8DB61B266D0EE0D2C71E581C113295EF623349D746D18453A374561D3FB143;UpperCasedChecksum:9E98FF2F9FD45DFCFC5CD5AB15A3D1C5E25B203374B27D39CB3F9D5E8B801344;SizeAsReceived:7467;Count:48
-Received: from AM7PR05MB6881.eurprd05.prod.outlook.com
- ([fe80::2c81:794e:63ae:e722]) by AM7PR05MB6881.eurprd05.prod.outlook.com
- ([fe80::2c81:794e:63ae:e722%5]) with mapi id 15.20.3066.018; Tue, 2 Jun 2020
- 20:54:49 +0000
-From: "Konrad Weihmann" <kweihmann@outlook.com>
-To: openembedded-devel@lists.openembedded.org
-CC: Konrad Weihmann <kweihmann@outlook.com>
-Subject: [meta-oe][PATCH] zile: properly append PACKAGECONFIG
-Date: Tue,  2 Jun 2020 22:54:36 +0200
-Message-ID: <AM7PR05MB68815C59B656945C3D8953B4A88B0@AM7PR05MB6881.eurprd05.prod.outlook.com>
-X-Mailer: git-send-email 2.20.1
-X-ClientProxiedBy: AM5PR0202CA0013.eurprd02.prod.outlook.com
- (2603:10a6:203:69::23) To AM7PR05MB6881.eurprd05.prod.outlook.com
- (2603:10a6:20b:1a9::19)
-Return-Path: kweihmann@outlook.com
-X-Microsoft-Original-Message-ID: <20200602205436.27888-1-kweihmann@outlook.com>
+ bh=S3gpojkRhyXtnS/EHIw9IFaVDDFroX9gY5CPaY5VPpQ=;
+ b=gTP78vrmIqmmG1/dZ+heHJ+D1K/E/9u4UtDZxR01ZcH0HNqNVhBynL60SOF8GKnO4DWURl2xRxdQrwikkFpS8zVz1y8z2h0v8eAiK8LECCe51NpTq/N5Tk1aQfMElk/WZncQYvvPHvJRnPdX0E8KNOhafY9r26x/ddvFG0Xfn84=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
+ by BN6PR11MB4099.namprd11.prod.outlook.com (2603:10b6:405:82::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3045.19; Tue, 2 Jun
+ 2020 23:15:47 +0000
+Received: from BN6PR11MB0003.namprd11.prod.outlook.com
+ ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
+ ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3045.024; Tue, 2 Jun 2020
+ 23:15:47 +0000
+Subject: Re: [oe] [meta-python][PATCHv3] python3-humanize: Upgrade 0.5.1 -> 2.4.0
+To: Leon Anavi <leon.anavi@konsulko.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20200602103815.21809-1-leon.anavi@konsulko.com>
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+Message-ID: <27a6170d-1b33-faed-3bc9-a89b0d253878@windriver.com>
+Date: Tue, 2 Jun 2020 19:15:43 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
+In-Reply-To: <20200602103815.21809-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: BY3PR05CA0023.namprd05.prod.outlook.com
+ (2603:10b6:a03:254::28) To BN6PR11MB0003.namprd11.prod.outlook.com
+ (2603:10b6:405:61::26)
+Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from ICKE-EDGE.fritz.box (87.150.33.251) by AM5PR0202CA0013.eurprd02.prod.outlook.com (2603:10a6:203:69::23) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18 via Frontend Transport; Tue, 2 Jun 2020 20:54:49 +0000
-X-Mailer: git-send-email 2.20.1
-X-Microsoft-Original-Message-ID: <20200602205436.27888-1-kweihmann@outlook.com>
-X-TMN: [j1jFsgQeQrbNu8UNqASLDEPgV52fSZto]
+Received: from [192.168.0.16] (174.115.236.231) by BY3PR05CA0023.namprd05.prod.outlook.com (2603:10b6:a03:254::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.7 via Frontend Transport; Tue, 2 Jun 2020 23:15:46 +0000
+X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-IncomingHeaderCount: 48
-X-EOPAttributedMessage: 0
-X-MS-Office365-Filtering-Correlation-Id: d6fa0c50-8d75-4a8c-a188-08d8073730aa
-X-MS-Exchange-SLBlob-MailProps: 
-	gjx25WM8ZNWDLNYE12708/BbGTepinvyy0SnWn5KcDbl2pI7p4DwuG1bwJ2xm2GKre7qLWFjFkXZLdFQgBEgLK+5iMZXpSpW918lsKqwlCWQk0w/2lsJ5QeILL8OqcTNFkXs0+CjGW6kwoNvT4HklMzMJv0338uWOxOZdYuSuFM8iel5bZjx+6X7arJc7rzWhYY9bZuPPC+qvmLSKgpWjZyX1/C5SwBqbNPS3J/0O2U4o6X/jVYO3uTcXENyF4x78cchyr+xNmCtbJlPPPZdjFYQmWe6vuQuHhINLPN6ROU4y/UrqyRO3ooyG78gSlYQT1KVvVDrVT8psNIRHask5bGmnWu4AtMlVwfn7jpMvQqPJQXjXgpDoXK4aNg+pmCPhG/M/ZCQ8iPH6if5Gj9CbiCh2wQcavssIExHFY0BZIwgDf4stfqE6UZqB3EK/r9oQyG8r6qotqlsFj/g8E6WUapbygyw3X8NWsEYfRZkistyh1xaTRhayKgSNKcjZJBTUYH5chQM/OB7KrW/viKmXuRKmaGbtAXE2vwjuMYKRLavmXnpW0ZXZpTBnnvNzzGWyJIDxlX8rNnxWjnVrv+URkUKFvvo/AiwnSiuz9Tm1rQcYl+zWR8e4KjBg4j3UFv5VUv9pXxk0MlzHhGA8QytGlXhNmr9iESxC2r3qJIMSb+nTy42PAD79Ry+Qw2lNbdA5ODdw/PSWUoOLaRgRzGjtqHjYZQcRVPwAYYgRBDpBT0=
-X-MS-TrafficTypeDiagnostic: AM6EUR05HT233:
+X-MS-Office365-Filtering-Correlation-Id: e74e897a-c53a-4b50-a101-08d8074ae1a7
+X-MS-TrafficTypeDiagnostic: BN6PR11MB4099:
+X-Microsoft-Antispam-PRVS: 
+	<BN6PR11MB4099DBEE829294A6572932509F8B0@BN6PR11MB4099.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1201;
+X-Forefront-PRVS: 0422860ED4
+X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	bcGct5qwj7ntY8njhLu+cDKgoUgVwIFPxYxjoap1St30W8uZFye4oOdIxzKLw5cimCa1cSQN9/OHy0eBhdsbReOhbBBN1Ghke7eoxbt5Qelr0REIrc/bRljsg187Qr2ZHRoFuR5y/nlb6pMn7B1UngWDqxCBXfqZmTakINKJB+21MW/zxCnDHbRxQ5XjlwH2eReW2xSOmrbLYHVORnh+8A==
+	nfGLb7JlrDm6NRP6iy/vF+UIX96eksBmIKITk/IQcVkn7wKZXxPHombOX/Q67WNC3UTqd2R1GQ8GAx85hIcrgM9aQ2jKlAP54cbsU6aTwLeKDtWMms1FVSU/bjYyWwkkd8N5upvVgxdrfcJeeTuv8IjRCqsnVUkjkTjhVxSGYqahrBKk01Xe4TGXKR7f3B7ADhPeM5/0ROZSRjt+uziAn38kn9wD/zPgfE/jyqw/tODPIZXCqUb8yb3iYzTtNTP23U9TMaajUzWVyALmr7+z11sU8Roo7XySCj7i0npGQZn+NxpZkzzQZWk0YmYwwNqJx5nR2fXLTWNm5Q2urmnpTw0fyioYArYrCOPNJjEsuJ7Culz0XS0eIoEn7d3bbfHrG0XZJlsjx9pDBFdjRBiBcakt1Iy6HoaeffrAWyPBrUZf007TXi0eIU5qEJpCGVYxjfSuJ3YzzBSQ+FLdmTNyn/SjvSJuNFX/RKrbSn2Cucg=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:0;SRV:;IPV:NLI;SFV:NSPM;H:AM7PR05MB6881.eurprd05.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:;DIR:OUT;SFP:1901;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(376002)(366004)(136003)(39850400004)(396003)(26005)(16576012)(956004)(2616005)(6486002)(53546011)(31686004)(6666004)(31696002)(316002)(166002)(83380400001)(8676002)(36756003)(33964004)(44832011)(8936002)(52116002)(86362001)(186003)(2906002)(966005)(66476007)(478600001)(5660300002)(19273905006)(66946007)(16526019)(66556008)(43740500002)(563064011);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	zetAOim52o3Zg72sl/Rgi0Pz8EFMC/jThuxrlOi9npxqK2XsHYnG2EudqOmlgPFoYGnDanXj5gRjJZ5ZROeLDREKNjIRvVj2guXfSMutmcOlUy6p2A1lMhAznjyuTMfNckw8fm97aekXRN48Sk0BPQ==
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d6fa0c50-8d75-4a8c-a188-08d8073730aa
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jun 2020 20:54:49.6060
+	zttzPHChIMLP39B7I24muXmAcpBvBhrcImAVByQZeebzuEUYAKDkI96PWH2tmfsNefgV2aFVSwcXY+jRhSJF0PwcbuKYiyghMeXNoLn8Wrnbw4m9eBu2/pa0O/IvCix01RQxv9YZjIw9cag/sI13sQL8VyCZAZEeOqFmR1u6IdT3nNJP3yNJPqK6CqjrlZj5tv87sHuB3ulLu7ogvXBFv9x8CLQfD/GjmJ3fnVrlHbD5xfSJv8r+cIsGtTMLdu4rfkdYUJPQeDsV+MI6zqurmYTsKTJLM6SrwuksARGgPVfiZ/jgqk9sGCTxegn0mttg0K8bnxe3YIDBWltZtGAfJ1gvxA/uswf9IybVPIDnjnvSxEfjWsGjrq8eO6J/lVpwnGvfD3zDzPVu+Z1dwNcYgFbBiVSWzqTIOrqDVaujXkcsOPgZI4P7MmZl7qbasJRQGY08LDfI62HNmVSNXroRSrPl8ZQsi6fToEPPZO4lV9yzU7pSrQMmT/Su0rEeYz19
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e74e897a-c53a-4b50-a101-08d8074ae1a7
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jun 2020 23:15:47.0523
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 
-	00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6EUR05HT233
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: U00qYzFhFYcJjxPgKpXwRqdoILyUCfZGwFaxan+x+QTrUq+E1HHOfwpK+SOtbpewchJAmm4MPXLNKCdbVGDmS2Pce3J63/GSDJGX52rCT8g=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB4099
+Content-Type: multipart/alternative;
+ boundary="------------BC6635BE745BC70A642FE00C"
+Content-Language: en-US
 
-As ??=3D assignment will be overwritten by +=3D in any case,
-one can't define a default of PACKAGECONFIG in this recipe.
-Using _append instead mitigates chances of accidental overwriting
-the default
+--------------BC6635BE745BC70A642FE00C
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Konrad Weihmann <kweihmann@outlook.com>
+
+On 6/2/20 6:38 AM, Leon Anavi wrote:
+> Upgrade to release 2.4.0 and consolidate into a single file.
+> The year in file LICENCE has been recently updated therefore the
+> checksum has been changed but it still remains a MIT License.
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>   .../python/python-humanize.inc                | 14 -------------
+>   .../python/python3-humanize_0.5.1.bb          |  2 --
+>   .../python/python3-humanize_2.4.0.bb          | 20 +++++++++++++++++++
+>   3 files changed, 20 insertions(+), 16 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python-humanize.inc
+>   delete mode 100644 meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
+>   create mode 100644 meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python-humanize.inc b/meta-python/recipes-devtools/python/python-humanize.inc
+> deleted file mode 100644
+> index 17a3449e7..000000000
+> --- a/meta-python/recipes-devtools/python/python-humanize.inc
+> +++ /dev/null
+> @@ -1,14 +0,0 @@
+> -SUMMARY = "Python humanize utilities"
+> -HOMEPAGE = "http://github.com/jmoiron/humanize"
+> -
+> -LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://LICENCE;md5=d2eff82fc25dd07c919a02465884f02e"
+> -
+> -SRC_URI[md5sum] = "e8473d9dc1b220911cac2edd53b1d973"
+> -SRC_URI[sha256sum] = "a43f57115831ac7c70de098e6ac46ac13be00d69abbf60bdcac251344785bb19"
+> -
+> -RDEPENDS_${PN} += "\
+> -    ${PYTHON_PN}-datetime \
+> -"
+> -
+> -BBCLASSEXTEND = "native nativesdk"
+> diff --git a/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb b/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
+> deleted file mode 100644
+> index 04464ac59..000000000
+> --- a/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
+> +++ /dev/null
+> @@ -1,2 +0,0 @@
+> -inherit pypi setuptools3
+> -require python-humanize.inc
+> diff --git a/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb b/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
+> new file mode 100644
+> index 000000000..6bb6946ff
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
+> @@ -0,0 +1,20 @@
+> +SUMMARY = "Python humanize utilities"
+> +HOMEPAGE = "http://github.com/jmoiron/humanize"
+> +
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
+> +
+> +SRC_URI[md5sum] = "010e86a4196ed6030112e7bc681e7353"
+> +SRC_URI[sha256sum] = "42ae7d54b398c01bd100847f6cb0fc9e381c21be8ad3f8e2929135e48dbff026"
+> +
+> +inherit pypi setuptools3
+> +
+> +DEPENDS += "\
+> +    ${PYTHON_PN}-setuptools-scm-native \
+> +"
+> +
+> +RDEPENDS_${PN} += "\
+> +    ${PYTHON_PN}-datetime \
+> +"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+>
+> 
+
+--------------BC6635BE745BC70A642FE00C
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 6/2/20 6:38 AM, Leon Anavi wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:20200602103815.21809-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 2.4.0 and consolidate into a single file.
+The year in file LICENCE has been recently updated therefore the
+checksum has been changed but it still remains a MIT License.
+
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+    </blockquote>
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
+    <blockquote type="cite" cite="mid:20200602103815.21809-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">
 ---
- meta-oe/recipes-support/zile/zile_2.4.14.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../python/python-humanize.inc                | 14 -------------
+ .../python/python3-humanize_0.5.1.bb          |  2 --
+ .../python/python3-humanize_2.4.0.bb          | 20 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
+ 3 files changed, 20 insertions(&#43;), 16 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-humanize.inc
+ delete mode 100644 meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
 
-diff --git a/meta-oe/recipes-support/zile/zile_2.4.14.bb b/meta-oe/recipes-=
-support/zile/zile_2.4.14.bb
-index 3b846c151..acd491498 100644
---- a/meta-oe/recipes-support/zile/zile_2.4.14.bb
-+++ b/meta-oe/recipes-support/zile/zile_2.4.14.bb
-@@ -20,6 +20,6 @@ do_install_append() {
- }
-=20
- PACKAGECONFIG ??=3D ""
--PACKAGECONFIG +=3D "${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)}"
-+PACKAGECONFIG_append =3D " ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)=
-}"
-=20
- PACKAGECONFIG[acl] =3D "--enable-acl,--disable-acl,acl,"
---=20
-2.20.1
+diff --git a/meta-python/recipes-devtools/python/python-humanize.inc b/meta-python/recipes-devtools/python/python-humanize.inc
+deleted file mode 100644
+index 17a3449e7..000000000
+--- a/meta-python/recipes-devtools/python/python-humanize.inc
+&#43;&#43;&#43; /dev/null
+@@ -1,14 &#43;0,0 @@
+-SUMMARY = &quot;Python humanize utilities&quot;
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://github.com/jmoiron/humanize">&quot;http://github.com/jmoiron/humanize&quot;</a>
+-
+-LICENSE = &quot;MIT&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENCE;md5=d2eff82fc25dd07c919a02465884f02e">&quot;file://LICENCE;md5=d2eff82fc25dd07c919a02465884f02e&quot;</a>
+-
+-SRC_URI[md5sum] = &quot;e8473d9dc1b220911cac2edd53b1d973&quot;
+-SRC_URI[sha256sum] = &quot;a43f57115831ac7c70de098e6ac46ac13be00d69abbf60bdcac251344785bb19&quot;
+-
+-RDEPENDS_${PN} &#43;= &quot;\
+-    ${PYTHON_PN}-datetime \
+-&quot;
+-
+-BBCLASSEXTEND = &quot;native nativesdk&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb b/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
+deleted file mode 100644
+index 04464ac59..000000000
+--- a/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
+&#43;&#43;&#43; /dev/null
+@@ -1,2 &#43;0,0 @@
+-inherit pypi setuptools3
+-require python-humanize.inc
+diff --git a/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb b/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
+new file mode 100644
+index 000000000..6bb6946ff
+--- /dev/null
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
+@@ -0,0 &#43;1,20 @@
+&#43;SUMMARY = &quot;Python humanize utilities&quot;
+&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://github.com/jmoiron/humanize">&quot;http://github.com/jmoiron/humanize&quot;</a>
+&#43;
+&#43;LICENSE = &quot;MIT&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d">&quot;file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d&quot;</a>
+&#43;
+&#43;SRC_URI[md5sum] = &quot;010e86a4196ed6030112e7bc681e7353&quot;
+&#43;SRC_URI[sha256sum] = &quot;42ae7d54b398c01bd100847f6cb0fc9e381c21be8ad3f8e2929135e48dbff026&quot;
+&#43;
+&#43;inherit pypi setuptools3
+&#43;
+&#43;DEPENDS &#43;= &quot;\
+&#43;    ${PYTHON_PN}-setuptools-scm-native \
+&#43;&quot;
+&#43;
+&#43;RDEPENDS_${PN} &#43;= &quot;\
+&#43;    ${PYTHON_PN}-datetime \
+&#43;&quot;
+&#43;
+&#43;BBCLASSEXTEND = &quot;native nativesdk&quot;
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+    </blockquote>
+  </body>
+</html>
 
+--------------BC6635BE745BC70A642FE00C--
