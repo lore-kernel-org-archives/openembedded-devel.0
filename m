@@ -1,205 +1,252 @@
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.web11.48707.1591047967021808556
+Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
+ by mx.groups.io with SMTP id smtpd.web10.3286.1591070050933237181
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jun 2020 14:46:07 -0700
+ Mon, 01 Jun 2020 20:54:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=CHIwcWUV;
- spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f54.google.com with SMTP id e1so1321258wrt.5
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2020 14:46:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=MBEI1Uoe;
+ spf=pass (domain: gmail.com, ip: 209.85.160.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f178.google.com with SMTP id e16so9632906qtg.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2020 20:54:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=a4ebZ1oVG+ToqQFWRo3oLvz40cDzsEKQUkhk06SqLqo=;
-        b=CHIwcWUVGRp6wjAf1823TXruthh8L0w8Ts99ZRlmR2uW0ylgndEF7e0AvkTxCLTE0H
-         X62z4AUi1aWkM05/0EojTj88Nyx4rzbpznk1OqtdRRRgbCsxj25LbIqNqmx7UyJV/UdX
-         KQGTJ827ovL4LlhTztyvYcFIkmhK4VW0kkDHMrhXCTXa1tmnnF0ti2+ho53SNj4gbRrM
-         latzddNyxiNh0OXQk7iRa3Hnw00X1T5N8oxJ0B1ABnP39yuSxSlhwMX61I483uinEoi2
-         cWY9m4vC7LlJS2xWv9ZrGzIL55DTBy6lW06kFAfamLs9ZkfrCcDv1Q0eD4M1OIyKHSoB
-         U04Q==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=xEttjPEBmah8dPw8qA96QV6D09WX1+fsCorYcGvUqMA=;
+        b=MBEI1UoeqDX8nCFCdzcPmkjXant3pKREU4N+//Hsu1zUIKDVJvZqtCR7qZ/nq07Zna
+         XgBQGjJP6l6yJ9su3w0Vd9azawQXvYzDYZwLaWM52PMsDtA26pdLiztQXmY6J8uGHCfQ
+         Y/zE7pZSe10FnFB9lQQt3dcBhSVfBGIpuukTA7ynRcvqxSgy/UK65sXQYE3f8dClDvba
+         9iheEV5WJOQncNDMfwNgODxRlmUvzUox0WLRUw6YoIMuqqXe/SsVYrGzL/4szEZkMtUJ
+         Xo3lsJzHL+Eh+VvhD4uWDUmFOEshOR/cn3KKWVMryHd8saczGqN/OJCgdxZvcyfh/urm
+         6smg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=a4ebZ1oVG+ToqQFWRo3oLvz40cDzsEKQUkhk06SqLqo=;
-        b=FJaAqhI+IordYjJ0WuuzbHZeIeJUbfBQmRvScHsHJWMVGT55m7GxzvqSR/aiSmy+kT
-         2+BFmnwaZagNmN+JVYEZI536tTDDiAccvbGNjINGnQ9qfAPcaq6YNrWO950X83d+as7t
-         mI946DEbDcuKaFMupvmk8Sz8Cn50/fKphwtSG4tv+yUmpddokhtHr7n/QUtEbPs7/dQo
-         6Hwqv5wcMgetJ2mqG30IW3iq29lwcI487NYwqNLpl1VFwsBRsXjnltODh3ps6NyJMtXf
-         JIOcDnoBoJ56PBllcb8OYnSQAf1dMnkHOAvQLxBRMBRvOjQ+MQvCKpUcJrs4cxlNaSC2
-         dVqw==
-X-Gm-Message-State: AOAM532CjMC9Ox9zHPf9xRArgsycEyCba/f/q/+DtuLYcLcvr9FCSa3g
-	DFTuBMuj33WonDvgSetz/Q/3SEPmaQE=
-X-Google-Smtp-Source: ABdhPJyKqlKkWtovSVLAooaYqnJ2UaHQ17tH4Y3Hs+fTz++XZO8cLlwmGxalcX8OtWbqElBAFeBhNg==
-X-Received: by 2002:a5d:5001:: with SMTP id e1mr25420067wrt.56.1591047965303;
-        Mon, 01 Jun 2020 14:46:05 -0700 (PDT)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300f07f06ad34da2c69d11ac2eac0.dip0.t-ipconnect.de. [2003:f0:7f06:ad34:da2c:69d1:1ac2:eac0])
-        by smtp.gmail.com with ESMTPSA id 40sm1050119wrc.15.2020.06.01.14.46.04
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Jun 2020 14:46:04 -0700 (PDT)
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 38/38] gnome-control-center: upgrade 3.34.5 -> 3.36.2
-Date: Mon,  1 Jun 2020 23:45:16 +0200
-Message-Id: <20200601214516.26624-39-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.3
-In-Reply-To: <20200601214516.26624-1-schnitzeltony@gmail.com>
-References: <20200601214516.26624-1-schnitzeltony@gmail.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=xEttjPEBmah8dPw8qA96QV6D09WX1+fsCorYcGvUqMA=;
+        b=caPyXS08mCA+xSjSzR0shV9bpLfsXe8jNud6UEv8AcCF1UgNGD60RGwYA5es1XR0T2
+         6t3lrccWyNsRJPxf3Mv8+3vRqSpDWnTZ6J4di52BMh/21pu+NlL+KrxloKGZ4f6ai4jn
+         6kqssTu0jU24Y5G8qvFCwcf6mLZbaD0G8PCkd4jacK5Qc8sfK4vi0v+w31n5XHJqSw1w
+         4LRp1sjNDejANQIXSbwqJxOh7+YCWKwaiL9a7qtnpP0trt5TXqFqASddQejkz8cK84VA
+         npYh8GKUCUBcLpYwplt5gxuLfFEd7Cx9taXTtvW706DKgOPGoP3GOE0vGItMKx2o9Lrr
+         tf8A==
+X-Gm-Message-State: AOAM532NBD7jIhtT1cnK6WrG9ZNSYxyEC9BD5dxhLu3vkcwNSZFdDpQK
+	8r3hMmJ+l/c1Fu3Wx+QGjd8lJG60Y+KSYIcjX1/a4+Ov
+X-Google-Smtp-Source: ABdhPJyS0ACERnBCwVN+8jX57wYvLD4jz3Gndihk3peM+5sTBfLfv215IQBooF5j0XFtk9psMWULACnRVyP3GF0iKOw=
+X-Received: by 2002:ac8:44b3:: with SMTP id a19mr25128861qto.285.1591070049960;
+ Mon, 01 Jun 2020 20:54:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20200601135308.18379-1-leon.anavi@konsulko.com>
+In-Reply-To: <20200601135308.18379-1-leon.anavi@konsulko.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Mon, 1 Jun 2020 20:53:59 -0700
+Message-ID: <CAMKF1so7X3xT-WXhrAhVC0Ex4sY3QCpxtKa9LhhDNGemvzxeDg@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-humanize: Upgrade 0.5.1 -> 2.4.0
+To: Leon Anavi <leon.anavi@konsulko.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000002407c205a711dd27"
 
-================
-Version 3.36.2
-================
+--0000000000002407c205a711dd27
+Content-Type: text/plain; charset="UTF-8"
 
-- Updated translations
+Did the license checksum
+Change ? If so perhaps document it in commit
 
-CI
-- Update Flatpak libnma, mobile-broadband-provider-info, libhandy build depends
+On Mon, Jun 1, 2020 at 6:53 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
 
-Applications
-- Fix only connected snap interfaces showing
+> Upgrade to release 2.4.0 and consolidate into a single file.
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> ---
+>  .../python/python-humanize.inc                | 14 -------------
+>  .../python/python3-humanize_0.5.1.bb          |  2 --
+>  .../python/python3-humanize_2.4.0.bb          | 20 +++++++++++++++++++
+>  3 files changed, 20 insertions(+), 16 deletions(-)
+>  delete mode 100644 meta-python/recipes-devtools/python/python-humanize.inc
+>  delete mode 100644 meta-python/recipes-devtools/python/
+> python3-humanize_0.5.1.bb
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python3-humanize_2.4.0.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python-humanize.inc
+> b/meta-python/recipes-devtools/python/python-humanize.inc
+> deleted file mode 100644
+> index 17a3449e7..000000000
+> --- a/meta-python/recipes-devtools/python/python-humanize.inc
+> +++ /dev/null
+> @@ -1,14 +0,0 @@
+> -SUMMARY = "Python humanize utilities"
+> -HOMEPAGE = "http://github.com/jmoiron/humanize"
+> -
+> -LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://LICENCE;md5=d2eff82fc25dd07c919a02465884f02e"
+> -
+> -SRC_URI[md5sum] = "e8473d9dc1b220911cac2edd53b1d973"
+> -SRC_URI[sha256sum] =
+> "a43f57115831ac7c70de098e6ac46ac13be00d69abbf60bdcac251344785bb19"
+> -
+> -RDEPENDS_${PN} += "\
+> -    ${PYTHON_PN}-datetime \
+> -"
+> -
+> -BBCLASSEXTEND = "native nativesdk"
+> diff --git a/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
+> b/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
+> deleted file mode 100644
+> index 04464ac59..000000000
+> --- a/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
+> +++ /dev/null
+> @@ -1,2 +0,0 @@
+> -inherit pypi setuptools3
+> -require python-humanize.inc
+> diff --git a/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
+> b/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
+> new file mode 100644
+> index 000000000..6bb6946ff
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
+> @@ -0,0 +1,20 @@
+> +SUMMARY = "Python humanize utilities"
+> +HOMEPAGE = "http://github.com/jmoiron/humanize"
+> +
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
+> +
+> +SRC_URI[md5sum] = "010e86a4196ed6030112e7bc681e7353"
+> +SRC_URI[sha256sum] =
+> "42ae7d54b398c01bd100847f6cb0fc9e381c21be8ad3f8e2929135e48dbff026"
+> +
+> +inherit pypi setuptools3
+> +
+> +DEPENDS += "\
+> +    ${PYTHON_PN}-setuptools-scm-native \
+> +"
+> +
+> +RDEPENDS_${PN} += "\
+> +    ${PYTHON_PN}-datetime \
+> +"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> --
+> 2.17.1
+>
+> 
+>
 
-Background
-- Allow adding multiple files to backgrounds
+--0000000000002407c205a711dd27
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Printers
-- Add whitespace between top right buttons
+<div><div dir=3D"auto">Did the license checksum</div></div><div dir=3D"auto=
+">Change ? If so perhaps document it in commit=C2=A0</div><div><br><div cla=
+ss=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Jun 1, 202=
+0 at 6:53 AM Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com">leon=
+.anavi@konsulko.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quot=
+e" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">=
+Upgrade to release 2.4.0 and consolidate into a single file.<br>
+<br>
+Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" t=
+arget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
+---<br>
+=C2=A0.../python/python-humanize.inc=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=
+=A0 =C2=A0 =C2=A0 | 14 -------------<br>
+=C2=A0.../python/<a href=3D"http://python3-humanize_0.5.1.bb" rel=3D"noref=
+errer" target=3D"_blank">python3-humanize_0.5.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =
+=
+=C2=A0 =C2=A0 |=C2=A0 2 --<br>
+=C2=A0.../python/<a href=3D"http://python3-humanize_2.4.0.bb" rel=3D"noref=
+errer" target=3D"_blank">python3-humanize_2.4.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =
+=
+=C2=A0 =C2=A0 | 20 +++++++++++++++++++<br>
+=C2=A03 files changed, 20 insertions(+), 16 deletions(-)<br>
+=C2=A0delete mode 100644 meta-python/recipes-devtools/python/python-humani=
+ze.inc<br>
+=C2=A0delete mode 100644 meta-python/recipes-devtools/python/<a href=3D"ht=
+tp://python3-humanize_0.5.1.bb" rel=3D"noreferrer" target=3D"_blank">python=
+3-humanize_0.5.1.bb</a><br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/<a href=3D"ht=
+tp://python3-humanize_2.4.0.bb" rel=3D"noreferrer" target=3D"_blank">python=
+3-humanize_2.4.0.bb</a><br>
+<br>
+diff --git a/meta-python/recipes-devtools/python/python-humanize.inc b/met=
+a-python/recipes-devtools/python/python-humanize.inc<br>
+deleted file mode 100644<br>
+index 17a3449e7..000000000<br>
+--- a/meta-python/recipes-devtools/python/python-humanize.inc<br>
++++ /dev/null<br>
+@@ -1,14 +0,0 @@<br>
+-SUMMARY =3D &quot;Python humanize utilities&quot;<br>
+-HOMEPAGE =3D &quot;<a href=3D"http://github.com/jmoiron/humanize" rel=3D"=
+noreferrer" target=3D"_blank">http://github.com/jmoiron/humanize</a>&quot;<=
+br>
+-<br>
+-LICENSE =3D &quot;MIT&quot;<br>
+-LIC_FILES_CHKSUM =3D &quot;file://LICENCE;md5=3Dd2eff82fc25dd07c919a02465=
+884f02e&quot;<br>
+-<br>
+-SRC_URI[md5sum] =3D &quot;e8473d9dc1b220911cac2edd53b1d973&quot;<br>
+-SRC_URI[sha256sum] =3D &quot;a43f57115831ac7c70de098e6ac46ac13be00d69abbf=
+60bdcac251344785bb19&quot;<br>
+-<br>
+-RDEPENDS_${PN} +=3D &quot;\<br>
+-=C2=A0 =C2=A0 ${PYTHON_PN}-datetime \<br>
+-&quot;<br>
+-<br>
+-BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3=
+-humanize_0.5.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-humanize_0=
+.5.1.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python3=
+-humanize_0.5.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-humanize_0=
+.5.1.bb</a><br>
+deleted file mode 100644<br>
+index 04464ac59..000000000<br>
+--- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-humani=
+ze_0.5.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-humanize_0.5.1.bb=
+</a><br>
++++ /dev/null<br>
+@@ -1,2 +0,0 @@<br>
+-inherit pypi setuptools3<br>
+-require python-humanize.inc<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3=
+-humanize_2.4.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-humanize_2=
+.4.0.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python3=
+-humanize_2.4.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-humanize_2=
+.4.0.bb</a><br>
+new file mode 100644<br>
+index 000000000..6bb6946ff<br>
+--- /dev/null<br>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-humani=
+ze_2.4.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-humanize_2.4.0.bb=
+</a><br>
+@@ -0,0 +1,20 @@<br>
++SUMMARY =3D &quot;Python humanize utilities&quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"http://github.com/jmoiron/humanize" rel=3D"=
+noreferrer" target=3D"_blank">http://github.com/jmoiron/humanize</a>&quot;<=
+br>
++<br>
++LICENSE =3D &quot;MIT&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENCE;md5=3D4ecc42519e84f6f3e23529464=
+df7bd1d&quot;<br>
++<br>
++SRC_URI[md5sum] =3D &quot;010e86a4196ed6030112e7bc681e7353&quot;<br>
++SRC_URI[sha256sum] =3D &quot;42ae7d54b398c01bd100847f6cb0fc9e381c21be8ad3=
+f8e2929135e48dbff026&quot;<br>
++<br>
++inherit pypi setuptools3<br>
++<br>
++DEPENDS +=3D &quot;\<br>
++=C2=A0 =C2=A0 ${PYTHON_PN}-setuptools-scm-native \<br>
++&quot;<br>
++<br>
++RDEPENDS_${PN} +=3D &quot;\<br>
++=C2=A0 =C2=A0 ${PYTHON_PN}-datetime \<br>
++&quot;<br>
++<br>
++BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
+-- <br>
+2.17.1<br>
+<br>
+<br>
+</blockquote></div></div>
 
-Sharing
-- Set label for checkbox properly
-
-Sound
-- Fix translation of "System Sounds"
-
-Info:
-- Verify data coming from switcheroo-control
-
-================
-Version 3.36.1
-================
-
-- Update man page for info panel change
-- Updated translations
-
-Display
-- Fix resolution options getting stuck in a low resolution
-
-Sound
-- Remove unused files
-
-================
-Version 3.35.92
-================
-
-- Updated translations
-
-Applications
-- Update icon
-
-Background
-- Remove split desktop and lock screen wallpapers
-- Improve visuals of the background icons
-
-Network
-- Make VPN gear buttons consistent with oter buttons
-
-================
-Version 3.35.91
-================
-
-- Share GCancellable code
-- Updated translations
-
-Background
-- Remove unused GCancellable
-
-Power
-- Fix mobile broadband switch logic
-
-Sharing
-- Remember password on remote desktop sharing
-
-Thunderbolt
-- Fix GCancellable leak
-
-User Accounts
-- Always generate user avatars
-
-================
-Version 3.35.90
-================
-
-- New sidebar panel order and grouping
-- Introduce CcPermissionInfoBar
-- More code style updates
-- Updated translations
-
-Applications
-- Add "Run in Background" switch
-- Add "Set Desktop Background" switch
-- Show snap packages
-
-Network
-- Add SAE support
-- Many code refactorings
-- Switch to use GtkTemplate
-
-Power
-- Hide power button the chassis is handset
-
-Printers
-- Use CcPermissionInfoBar
-
-Region & Language
-- New design for the Formats dialog
-
-User Accounts
-- Use CcPermissionInfoBar
-- Improved layout
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../0001-Add-meson-option-to-pass-sysroot.patch               | 2 +-
- ...ontrol-center_3.34.5.bb => gnome-control-center_3.36.2.bb} | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-control-center/{gnome-control-center_3.34.5.bb => gnome-control-center_3.36.2.bb} (89%)
-
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-pass-sysroot.patch b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-pass-sysroot.patch
-index 7f82a152c..8170f514e 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-pass-sysroot.patch
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-pass-sysroot.patch
-@@ -26,7 +26,7 @@ index a347168..2cd8121 100644
- +option('oe_sysroot', type: 'string', value: '', description: 'Directory for OE-sysroot')
-  option('cheese', type: 'boolean', value: true, description: 'build with cheese webcam support')
-  option('documentation', type: 'boolean', value: false, description: 'build documentation')
-- option('gnome_session_libexecdir', type: 'string', value: '', description: 'Directory for gnome-session\'s libexecdir')
-+ option('ibus', type: 'boolean', value: true, description: 'build with IBus support')
- diff --git a/panels/background/meson.build b/panels/background/meson.build
- index bb34b69..f22722e 100644
- --- a/panels/background/meson.build
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.34.5.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.36.2.bb
-similarity index 89%
-rename from meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.34.5.bb
-rename to meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.36.2.bb
-index bf8ec3355..d3673a1fd 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.34.5.bb
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.36.2.bb
-@@ -30,8 +30,8 @@ DEPENDS = " \
- 
- REQUIRED_DISTRO_FEATURES += "polkit pulseaudio systemd x11"
- 
--SRC_URI[archive.md5sum] = "ca92151a2a58cc3e0a73e88379e96ce2"
--SRC_URI[archive.sha256sum] = "b30d0afb99252f150e37d5ca4bc83b89bf4aa6d18c5d367230053278634e0c47"
-+SRC_URI[archive.md5sum] = "45832b7217c8d5fa5e2dbc214972c12d"
-+SRC_URI[archive.sha256sum] = "e0a5eff0c6d6c22db0c54fd070460de874d367ef3f9072e1559b70f28b847817"
- SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
- 
- PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
--- 
-2.21.3
-
+--0000000000002407c205a711dd27--
