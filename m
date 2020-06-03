@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.10653.1591178932418374372
+ by mx.groups.io with SMTP id smtpd.web11.11551.1591183007124025962
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Jun 2020 03:08:52 -0700
+ Wed, 03 Jun 2020 04:16:47 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=42106 helo=localhost.localdomain)
+Received: from [78.130.197.211] (port=43742 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jgQKF-0006VY-PF; Wed, 03 Jun 2020 13:08:48 +0300
+	id 1jgRNx-0000yU-0h; Wed, 03 Jun 2020 14:16:44 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH] python-pyaudio: Consolidate in a single file
-Date: Wed,  3 Jun 2020 13:08:36 +0300
-Message-Id: <20200603100836.18456-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH] python3-isort: Consolidate in a single file
+Date: Wed,  3 Jun 2020 14:16:29 +0300
+Message-Id: <20200603111629.12516-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 X-OutGoing-Spam-Status: No, score=-0.7
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -32,51 +32,58 @@ Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python-pyaudio.inc    | 13 -------------
- .../python/python3-pyaudio_0.2.11.bb              | 15 ++++++++++++++-
- 2 files changed, 14 insertions(+), 14 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pyaudio.inc
+ .../recipes-devtools/python/python-isort.inc  | 17 -----------------
+ .../python/python3-isort_4.3.21.bb            | 19 +++++++++++++++++--
+ 2 files changed, 17 insertions(+), 19 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-isort.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-pyaudio.inc b/meta-python/recipes-devtools/python/python-pyaudio.inc
+diff --git a/meta-python/recipes-devtools/python/python-isort.inc b/meta-python/recipes-devtools/python/python-isort.inc
 deleted file mode 100644
-index 0d3ddb1a5..000000000
---- a/meta-python/recipes-devtools/python/python-pyaudio.inc
+index 324d4cf10..000000000
+--- a/meta-python/recipes-devtools/python/python-isort.inc
 +++ /dev/null
-@@ -1,13 +0,0 @@
--SUMMARY = "PyAudio provides Python bindings for PortAudio, the cross-platform audio I/O library"
--SECTION = "devel/python"
+@@ -1,17 +0,0 @@
+-SUMMARY = "A Python utility / library to sort Python imports."
+-HOMEPAGE = "https://pypi.python.org/pypi/isort"
 -LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://README;md5=288793c2b9b05bd67abbd2a8f5d144f7"
+-SECTION = "devel/python"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
 -
--PYPI_PACKAGE = "PyAudio"
+-SRC_URI[md5sum] = "05d66f2eb7ce2c2d702e86bac24bf9e4"
+-SRC_URI[sha256sum] = "54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1"
 -
--SRC_URI[md5sum] = "7e4c88139284033f67b4336c74eda3b8"
--SRC_URI[sha256sum] = "93bfde30e0b64e63a46f2fd77e85c41fd51182a4a3413d9edfaf9ffaa26efb74"
+-inherit pypi
 -
--DEPENDS += "portaudio-v19"
+-RDEPENDS_${PN} += "\
+-    ${PYTHON_PN}-datetime \
+-    ${PYTHON_PN}-shell \
+-"
 -
--RDEPENDS_${PN} += "portaudio-v19"
-diff --git a/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb b/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb
-index abb01bf69..b2c890659 100644
---- a/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb
-@@ -1,2 +1,15 @@
--require python-pyaudio.inc
-+SUMMARY = "PyAudio provides Python bindings for PortAudio, the cross-platform audio I/O library"
-+SECTION = "devel/python"
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
+index 755b3e2f2..e0b21ab55 100644
+--- a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
++++ b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
+@@ -1,2 +1,17 @@
+-inherit setuptools3
+-require python-isort.inc
++SUMMARY = "A Python utility / library to sort Python imports."
++HOMEPAGE = "https://pypi.python.org/pypi/isort"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://README;md5=288793c2b9b05bd67abbd2a8f5d144f7"
++SECTION = "devel/python"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
 +
-+PYPI_PACKAGE = "PyAudio"
++SRC_URI[md5sum] = "05d66f2eb7ce2c2d702e86bac24bf9e4"
++SRC_URI[sha256sum] = "54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1"
 +
-+SRC_URI[md5sum] = "7e4c88139284033f67b4336c74eda3b8"
-+SRC_URI[sha256sum] = "93bfde30e0b64e63a46f2fd77e85c41fd51182a4a3413d9edfaf9ffaa26efb74"
++inherit pypi setuptools3
 +
- inherit pypi setuptools3
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-shell \
++"
 +
-+DEPENDS += "portaudio-v19"
-+
-+RDEPENDS_${PN} += "portaudio-v19"
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
