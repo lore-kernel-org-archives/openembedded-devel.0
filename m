@@ -1,254 +1,229 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.71])
- by mx.groups.io with SMTP id smtpd.web10.2292.1591139748499947310
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+ by mx.groups.io with SMTP id smtpd.web12.5320.1591150853779158405
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Jun 2020 16:15:48 -0700
+ Tue, 02 Jun 2020 19:20:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=gTP78vrm;
- spf=pass (domain: windriver.com, ip: 40.107.237.71, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AP5OvAI45GRMXz7ZuFfg3TaaJfY2UcXiJGxVlmmhHTl1e9s6gzSY6rTrxgW2EHh7P/nEVvEEJoU80K9OyWMfbAKMaE9Vbs7LloPrQTSf7yB8Aq1KUTcsTVlXvjovm61F4hs7zUF3OXVJlLRoZ3vw830OnPMKTFZGNnQb6C0JBKDtC/wGivBaJ+wZsJH5smMNBcZbl+MwF97HIG/0AIZHlSUTEMB7pF9wvWDZAFGuoLzHsxdspz6MWnQ1KsiuDHeHognsFlFgvdudsIcrKnCETU3xJyE5tfP4B7bfTkSB22YUehJkWU2sMrUa77fMyzpKAIokNw9Vo0WQvobhBssGGA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=S3gpojkRhyXtnS/EHIw9IFaVDDFroX9gY5CPaY5VPpQ=;
- b=bBua6beFECftzySphJfg8LkPu4q234qgAVvvu+sLj56cTFnVTFYGgIiKJnixUgfjGghGeLd5oDt/5qCqDcuOsw8mPhkHW+sP0HZN2/vy5TrYgg6ScbS6X8mEBNnT3qK3tbnyscQCTqiRJR29vnmbhAea7BUWFUstvxCR3wD6gMIPqjaTSa8xy0QbWc6eKoSZ2uwbaLztHpg64HoIipUib/EDPrIju4irg5Jd1AL8v/rLYh4eXeTntAzNzPMRtaMUB9vhS159/7x5Xx+Cg1YZ8AKBqi2FhOss+KIljRr6YFJrBZzJ7ABDBtcaLsgS0kB3IrR5zyXe42L5xUuqge9cBg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=S3gpojkRhyXtnS/EHIw9IFaVDDFroX9gY5CPaY5VPpQ=;
- b=gTP78vrmIqmmG1/dZ+heHJ+D1K/E/9u4UtDZxR01ZcH0HNqNVhBynL60SOF8GKnO4DWURl2xRxdQrwikkFpS8zVz1y8z2h0v8eAiK8LECCe51NpTq/N5Tk1aQfMElk/WZncQYvvPHvJRnPdX0E8KNOhafY9r26x/ddvFG0Xfn84=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB4099.namprd11.prod.outlook.com (2603:10b6:405:82::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3045.19; Tue, 2 Jun
- 2020 23:15:47 +0000
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3045.024; Tue, 2 Jun 2020
- 23:15:47 +0000
-Subject: Re: [oe] [meta-python][PATCHv3] python3-humanize: Upgrade 0.5.1 -> 2.4.0
-To: Leon Anavi <leon.anavi@konsulko.com>,
- openembedded-devel@lists.openembedded.org
-References: <20200602103815.21809-1-leon.anavi@konsulko.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <27a6170d-1b33-faed-3bc9-a89b0d253878@windriver.com>
-Date: Tue, 2 Jun 2020 19:15:43 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
-In-Reply-To: <20200602103815.21809-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: BY3PR05CA0023.namprd05.prod.outlook.com
- (2603:10b6:a03:254::28) To BN6PR11MB0003.namprd11.prod.outlook.com
- (2603:10b6:405:61::26)
-Return-Path: trevor.gamblin@windriver.com
-MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by BY3PR05CA0023.namprd05.prod.outlook.com (2603:10b6:a03:254::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.7 via Frontend Transport; Tue, 2 Jun 2020 23:15:46 +0000
-X-Originating-IP: [174.115.236.231]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: e74e897a-c53a-4b50-a101-08d8074ae1a7
-X-MS-TrafficTypeDiagnostic: BN6PR11MB4099:
-X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB4099DBEE829294A6572932509F8B0@BN6PR11MB4099.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1201;
-X-Forefront-PRVS: 0422860ED4
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	nfGLb7JlrDm6NRP6iy/vF+UIX96eksBmIKITk/IQcVkn7wKZXxPHombOX/Q67WNC3UTqd2R1GQ8GAx85hIcrgM9aQ2jKlAP54cbsU6aTwLeKDtWMms1FVSU/bjYyWwkkd8N5upvVgxdrfcJeeTuv8IjRCqsnVUkjkTjhVxSGYqahrBKk01Xe4TGXKR7f3B7ADhPeM5/0ROZSRjt+uziAn38kn9wD/zPgfE/jyqw/tODPIZXCqUb8yb3iYzTtNTP23U9TMaajUzWVyALmr7+z11sU8Roo7XySCj7i0npGQZn+NxpZkzzQZWk0YmYwwNqJx5nR2fXLTWNm5Q2urmnpTw0fyioYArYrCOPNJjEsuJ7Culz0XS0eIoEn7d3bbfHrG0XZJlsjx9pDBFdjRBiBcakt1Iy6HoaeffrAWyPBrUZf007TXi0eIU5qEJpCGVYxjfSuJ3YzzBSQ+FLdmTNyn/SjvSJuNFX/RKrbSn2Cucg=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(376002)(366004)(136003)(39850400004)(396003)(26005)(16576012)(956004)(2616005)(6486002)(53546011)(31686004)(6666004)(31696002)(316002)(166002)(83380400001)(8676002)(36756003)(33964004)(44832011)(8936002)(52116002)(86362001)(186003)(2906002)(966005)(66476007)(478600001)(5660300002)(19273905006)(66946007)(16526019)(66556008)(43740500002)(563064011);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	zttzPHChIMLP39B7I24muXmAcpBvBhrcImAVByQZeebzuEUYAKDkI96PWH2tmfsNefgV2aFVSwcXY+jRhSJF0PwcbuKYiyghMeXNoLn8Wrnbw4m9eBu2/pa0O/IvCix01RQxv9YZjIw9cag/sI13sQL8VyCZAZEeOqFmR1u6IdT3nNJP3yNJPqK6CqjrlZj5tv87sHuB3ulLu7ogvXBFv9x8CLQfD/GjmJ3fnVrlHbD5xfSJv8r+cIsGtTMLdu4rfkdYUJPQeDsV+MI6zqurmYTsKTJLM6SrwuksARGgPVfiZ/jgqk9sGCTxegn0mttg0K8bnxe3YIDBWltZtGAfJ1gvxA/uswf9IybVPIDnjnvSxEfjWsGjrq8eO6J/lVpwnGvfD3zDzPVu+Z1dwNcYgFbBiVSWzqTIOrqDVaujXkcsOPgZI4P7MmZl7qbasJRQGY08LDfI62HNmVSNXroRSrPl8ZQsi6fToEPPZO4lV9yzU7pSrQMmT/Su0rEeYz19
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e74e897a-c53a-4b50-a101-08d8074ae1a7
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jun 2020 23:15:47.0523
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: U00qYzFhFYcJjxPgKpXwRqdoILyUCfZGwFaxan+x+QTrUq+E1HHOfwpK+SOtbpewchJAmm4MPXLNKCdbVGDmS2Pce3J63/GSDJGX52rCT8g=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB4099
-Content-Type: multipart/alternative;
- boundary="------------BC6635BE745BC70A642FE00C"
-Content-Language: en-US
+ dkim=missing; spf=pass (domain: intel.com, ip: 134.134.136.65, mailfrom: naveen.kumar.saini@intel.com)
+IronPort-SDR: /SYh8RHG1r3J+50Vz7WRR//siCYjlHHcasDvFu3QVGAK7fRgEuYfemEArBakWi/p+GFm1twUI3
+ UFyWnE8JTldw==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Jun 2020 19:20:53 -0700
+IronPort-SDR: qDK9qAbKrmWVv6VEEiOwHZa9o2TYc0kYRpeORcv9h86jtjYGn5ixXxXKhoEQlAQN0bJePW3HFX
+ 57j/VCRgutdw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.73,466,1583222400"; 
+   d="scan'208";a="304446208"
+Received: from saininav-desk1.png.intel.com ([172.30.199.23])
+  by orsmga008.jf.intel.com with ESMTP; 02 Jun 2020 19:20:52 -0700
+From: "Naveen Saini" <naveen.kumar.saini@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] ace: add new recipe
+Date: Wed,  3 Jun 2020 10:27:39 +0800
+Message-Id: <20200603022739.504-1-naveen.kumar.saini@intel.com>
+X-Mailer: git-send-email 2.17.1
 
---------------BC6635BE745BC70A642FE00C
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+The ADAPTIVE Communication Environment library.
+Sources: http://download.dre.vanderbilt.edu/
+Homepage: http://www.dre.vanderbilt.edu/~schmidt/ACE-overview.html
 
+Object-oriented (OO) framework that implements many core patterns
+for concurrent communication software.
 
-On 6/2/20 6:38 AM, Leon Anavi wrote:
-> Upgrade to release 2.4.0 and consolidate into a single file.
-> The year in file LICENCE has been recently updated therefore the
-> checksum has been changed but it still remains a MIT License.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   .../python/python-humanize.inc                | 14 -------------
->   .../python/python3-humanize_0.5.1.bb          |  2 --
->   .../python/python3-humanize_2.4.0.bb          | 20 +++++++++++++++++++
->   3 files changed, 20 insertions(+), 16 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python-humanize.inc
->   delete mode 100644 meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
->   create mode 100644 meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python-humanize.inc b/meta-python/recipes-devtools/python/python-humanize.inc
-> deleted file mode 100644
-> index 17a3449e7..000000000
-> --- a/meta-python/recipes-devtools/python/python-humanize.inc
-> +++ /dev/null
-> @@ -1,14 +0,0 @@
-> -SUMMARY = "Python humanize utilities"
-> -HOMEPAGE = "http://github.com/jmoiron/humanize"
-> -
-> -LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://LICENCE;md5=d2eff82fc25dd07c919a02465884f02e"
-> -
-> -SRC_URI[md5sum] = "e8473d9dc1b220911cac2edd53b1d973"
-> -SRC_URI[sha256sum] = "a43f57115831ac7c70de098e6ac46ac13be00d69abbf60bdcac251344785bb19"
-> -
-> -RDEPENDS_${PN} += "\
-> -    ${PYTHON_PN}-datetime \
-> -"
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb b/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
-> deleted file mode 100644
-> index 04464ac59..000000000
-> --- a/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
-> +++ /dev/null
-> @@ -1,2 +0,0 @@
-> -inherit pypi setuptools3
-> -require python-humanize.inc
-> diff --git a/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb b/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
-> new file mode 100644
-> index 000000000..6bb6946ff
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
-> @@ -0,0 +1,20 @@
-> +SUMMARY = "Python humanize utilities"
-> +HOMEPAGE = "http://github.com/jmoiron/humanize"
-> +
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
-> +
-> +SRC_URI[md5sum] = "010e86a4196ed6030112e7bc681e7353"
-> +SRC_URI[sha256sum] = "42ae7d54b398c01bd100847f6cb0fc9e381c21be8ad3f8e2929135e48dbff026"
-> +
-> +inherit pypi setuptools3
-> +
-> +DEPENDS += "\
-> +    ${PYTHON_PN}-setuptools-scm-native \
-> +"
-> +
-> +RDEPENDS_${PN} += "\
-> +    ${PYTHON_PN}-datetime \
-> +"
-> +
-> +BBCLASSEXTEND = "native nativesdk"
->
-> 
-
---------------BC6635BE745BC70A642FE00C
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 6/2/20 6:38 AM, Leon Anavi wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20200602103815.21809-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 2.4.0 and consolidate into a single file.
-The year in file LICENCE has been recently updated therefore the
-checksum has been changed but it still remains a MIT License.
-
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
-    <blockquote type="cite" cite="mid:20200602103815.21809-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">
+Signed-off-by: Alexander Usyskin <alexander.usyskin@intel.com>
+Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
 ---
- .../python/python-humanize.inc                | 14 -------------
- .../python/python3-humanize_0.5.1.bb          |  2 --
- .../python/python3-humanize_2.4.0.bb          | 20 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
- 3 files changed, 20 insertions(&#43;), 16 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-humanize.inc
- delete mode 100644 meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
+ meta-oe/licenses/ACE-TAO-CIAO                 | 111 ++++++++++++++++++
+ meta-oe/recipes-connectivity/ace/ace_6.5.8.bb |  40 +++++++
+ .../ace/files/ace_config.patch                |  12 ++
+ 3 files changed, 163 insertions(+)
+ create mode 100644 meta-oe/licenses/ACE-TAO-CIAO
+ create mode 100644 meta-oe/recipes-connectivity/ace/ace_6.5.8.bb
+ create mode 100644 meta-oe/recipes-connectivity/ace/files/ace_config.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-humanize.inc b/meta-python/recipes-devtools/python/python-humanize.inc
-deleted file mode 100644
-index 17a3449e7..000000000
---- a/meta-python/recipes-devtools/python/python-humanize.inc
-&#43;&#43;&#43; /dev/null
-@@ -1,14 &#43;0,0 @@
--SUMMARY = &quot;Python humanize utilities&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://github.com/jmoiron/humanize">&quot;http://github.com/jmoiron/humanize&quot;</a>
--
--LICENSE = &quot;MIT&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENCE;md5=d2eff82fc25dd07c919a02465884f02e">&quot;file://LICENCE;md5=d2eff82fc25dd07c919a02465884f02e&quot;</a>
--
--SRC_URI[md5sum] = &quot;e8473d9dc1b220911cac2edd53b1d973&quot;
--SRC_URI[sha256sum] = &quot;a43f57115831ac7c70de098e6ac46ac13be00d69abbf60bdcac251344785bb19&quot;
--
--RDEPENDS_${PN} &#43;= &quot;\
--    ${PYTHON_PN}-datetime \
--&quot;
--
--BBCLASSEXTEND = &quot;native nativesdk&quot;
-diff --git a/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb b/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
-deleted file mode 100644
-index 04464ac59..000000000
---- a/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
-&#43;&#43;&#43; /dev/null
-@@ -1,2 &#43;0,0 @@
--inherit pypi setuptools3
--require python-humanize.inc
-diff --git a/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb b/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
+diff --git a/meta-oe/licenses/ACE-TAO-CIAO b/meta-oe/licenses/ACE-TAO-CIAO
 new file mode 100644
-index 000000000..6bb6946ff
+index 000000000..67fc56322
 --- /dev/null
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
-@@ -0,0 &#43;1,20 @@
-&#43;SUMMARY = &quot;Python humanize utilities&quot;
-&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://github.com/jmoiron/humanize">&quot;http://github.com/jmoiron/humanize&quot;</a>
-&#43;
-&#43;LICENSE = &quot;MIT&quot;
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d">&quot;file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d&quot;</a>
-&#43;
-&#43;SRC_URI[md5sum] = &quot;010e86a4196ed6030112e7bc681e7353&quot;
-&#43;SRC_URI[sha256sum] = &quot;42ae7d54b398c01bd100847f6cb0fc9e381c21be8ad3f8e2929135e48dbff026&quot;
-&#43;
-&#43;inherit pypi setuptools3
-&#43;
-&#43;DEPENDS &#43;= &quot;\
-&#43;    ${PYTHON_PN}-setuptools-scm-native \
-&#43;&quot;
-&#43;
-&#43;RDEPENDS_${PN} &#43;= &quot;\
-&#43;    ${PYTHON_PN}-datetime \
-&#43;&quot;
-&#43;
-&#43;BBCLASSEXTEND = &quot;native nativesdk&quot;
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-  </body>
-</html>
++++ b/meta-oe/licenses/ACE-TAO-CIAO
+@@ -0,0 +1,111 @@
++
++     _________________________________________________________________
++
++  Copyright and Licensing Information for ACE(TM), TAO(TM), CIAO(TM),
++  DAnCE(TM), and CoSMIC(TM)
++
++   [1]ACE(TM), [2]TAO(TM), [3]CIAO(TM), DAnCE(TM), and [4]CoSMIC(TM)
++   (henceforth referred to as "DOC software") are copyrighted by
++   [5]Douglas C. Schmidt and his [6]research group at [7]Washington
++   University, [8]University of California, Irvine, and [9]Vanderbilt
++   University, Copyright (c) 1993-2018, all rights reserved. Since DOC
++   software is open-source, freely available software, you are free to
++   use, modify, copy, and distribute--perpetually and irrevocably--the
++   DOC software source code and object code produced from the source, as
++   well as copy and distribute modified versions of this software. You
++   must, however, include this copyright statement along with any code
++   built using DOC software that you release. No copyright statement
++   needs to be provided if you just ship binary executables of your
++   software products.
++
++   You can use DOC software in commercial and/or binary software releases
++   and are under no obligation to redistribute any of your source code
++   that is built using DOC software. Note, however, that you may not
++   misappropriate the DOC software code, such as copyrighting it yourself
++   or claiming authorship of the DOC software code, in a way that will
++   prevent DOC software from being distributed freely using an
++   open-source development model. You needn't inform anyone that you're
++   using DOC software in your software, though we encourage you to let
++   [10]us know so we can promote your project in the [11]DOC software
++   success stories.
++
++   The [12]ACE, [13]TAO, [14]CIAO, [15]DAnCE, and [16]CoSMIC web sites
++   are maintained by the [17]DOC Group at the [18]Institute for Software
++   Integrated Systems (ISIS) and the [19]Center for Distributed Object
++   Computing of Washington University, St. Louis for the development of
++   open-source software as part of the open-source software community.
++   Submissions are provided by the submitter ``as is'' with no warranties
++   whatsoever, including any warranty of merchantability, noninfringement
++   of third party intellectual property, or fitness for any particular
++   purpose. In no event shall the submitter be liable for any direct,
++   indirect, special, exemplary, punitive, or consequential damages,
++   including without limitation, lost profits, even if advised of the
++   possibility of such damages. Likewise, DOC software is provided as is
++   with no warranties of any kind, including the warranties of design,
++   merchantability, and fitness for a particular purpose,
++   noninfringement, or arising from a course of dealing, usage or trade
++   practice. Washington University, UC Irvine, Vanderbilt University,
++   their employees, and students shall have no liability with respect to
++   the infringement of copyrights, trade secrets or any patents by DOC
++   software or any part thereof. Moreover, in no event will Washington
++   University, UC Irvine, or Vanderbilt University, their employees, or
++   students be liable for any lost revenue or profits or other special,
++   indirect and consequential damages.
++
++   DOC software is provided with no support and without any obligation on
++   the part of Washington University, UC Irvine, Vanderbilt University,
++   their employees, or students to assist in its use, correction,
++   modification, or enhancement. A [20]number of companies around the
++   world provide commercial support for DOC software, however. DOC
++   software is Y2K-compliant, as long as the underlying OS platform is
++   Y2K-compliant. Likewise, DOC software is compliant with the new US
++   daylight savings rule passed by Congress as "The Energy Policy Act of
++   2005," which established new daylight savings times (DST) rules for
++   the United States that expand DST as of March 2007. Since DOC software
++   obtains time/date and calendaring information from operating systems
++   users will not be affected by the new DST rules as long as they
++   upgrade their operating systems accordingly.
++
++   The names ACE(TM), TAO(TM), CIAO(TM), DAnCE(TM), CoSMIC(TM),
++   Washington University, UC Irvine, and Vanderbilt University, may not
++   be used to endorse or promote products or services derived from this
++   source without express written permission from Washington University,
++   UC Irvine, or Vanderbilt University. This license grants no permission
++   to call products or services derived from this source ACE(TM),
++   TAO(TM), CIAO(TM), DAnCE(TM), or CoSMIC(TM), nor does it grant
++   permission for the name Washington University, UC Irvine, or
++   Vanderbilt University to appear in their names.
++
++   If you have any suggestions, additions, comments, or questions, please
++   let [21]me know.
++
++   [22]Douglas C. Schmidt
++     _________________________________________________________________
++
++   Back to the [23]ACE home page.
++
++References
++
++   1. http://www.dre.vanderbilt.edu/~schmidt/ACE.html
++   2. http://www.dre.vanderbilt.edu/~schmidt/TAO.html
++   3. http://www.dre.vanderbilt.edu/CIAO/
++   4. http://www.dre.vanderbilt.edu/cosmic/
++   5. http://www.dre.vanderbilt.edu/~schmidt/
++   6. http://www.dre.vanderbilt.edu/~schmidt/ACE-members.html
++   7. http://www.wustl.edu/
++   8. http://www.uci.edu/
++   9. http://www.vanderbilt.edu/
++  10. mailto:doc_group@cs.wustl.edu
++  11. http://www.dre.vanderbilt.edu/~schmidt/ACE-users.html
++  12. http://www.dre.vanderbilt.edu/~schmidt/ACE.html
++  13. http://www.dre.vanderbilt.edu/~schmidt/TAO.html
++  14. http://www.dre.vanderbilt.edu/CIAO/
++  15. http://www.dre.vanderbilt.edu/~schmidt/DOC_ROOT/DAnCE/
++  16. http://www.dre.vanderbilt.edu/cosmic/
++  17. http://www.dre.vanderbilt.edu/
++  18. http://www.isis.vanderbilt.edu/
++  19. http://www.cs.wustl.edu/~schmidt/doc-center.html
++  20. http://www.dre.vanderbilt.edu/~schmidt/commercial-support.html
++  21. mailto:d.schmidt@vanderbilt.edu
++  22. http://www.dre.vanderbilt.edu/~schmidt/
++  23. http://www.dre.vanderbilt.edu/~schmidt/ACE.html
+diff --git a/meta-oe/recipes-connectivity/ace/ace_6.5.8.bb b/meta-oe/recipes-connectivity/ace/ace_6.5.8.bb
+new file mode 100644
+index 000000000..24315320e
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/ace/ace_6.5.8.bb
+@@ -0,0 +1,40 @@
++SUMMARY = "C++ framework for implementing distributed and networked applications"
++DESCRIPTION = "C++ network programming framework that implements many core \
++patterns for concurrent communication software"
++LICENSE = "ACE-TAO-CIAO"
++HOMEPAGE = "http://www.dre.vanderbilt.edu/~schmidt/ACE.html"
++LIC_FILES_CHKSUM = "file://COPYING;md5=96ef88a5529594698e8ceabdd47df92c"
++
++DEPENDS += "openssl gperf-native"
++
++SRC_URI = "https://github.com/DOCGroup/ACE_TAO/releases/download/ACE%2BTAO-6_5_8/ACE-${PV}.tar.bz2 \
++           file://ace_config.patch \
++          "
++
++SRC_URI[md5sum] = "a6ba6a944612fe0696c90cbb5c3078ee"
++SRC_URI[sha256sum] = "cda2a960dbb9970a907663627711b2e2b14b3484a2859ae936370bcad0b16923"
++
++COMPATIBLE_HOST_libc-musl = "null"
++
++S = "${WORKDIR}/ACE_wrappers"
++B = "${WORKDIR}/ACE_wrappers/ace"
++export ACE_ROOT="${WORKDIR}/ACE_wrappers"
++
++inherit pkgconfig
++
++CXXFLAGS_append = " -fpermissive -Wnodeprecated-declarations"
++
++do_install() {
++    export D="${D}"
++    oe_runmake install
++
++    for i in $(find ${D} -name "*.pc") ; do
++        sed -i -e s:${D}::g \
++               -e s:/${TARGET_SYS}::g \
++                  $i
++    done
++
++    rm -r ${D}/usr/share
++}
++
++UPSTREAM_CHECK_URI = "https://github.com/DOCGroup/ACE_TAO/releases"
+diff --git a/meta-oe/recipes-connectivity/ace/files/ace_config.patch b/meta-oe/recipes-connectivity/ace/files/ace_config.patch
+new file mode 100644
+index 000000000..207b85ab9
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/ace/files/ace_config.patch
+@@ -0,0 +1,12 @@
++diff -ruN ACE_wrappers1/ace/config.h ACE_wrappers/ace/config.h
++--- ACE_wrappers1/ace/config.h	1970-01-01 02:00:00.000000000 +0200
+++++ ACE_wrappers/ace/config.h	2019-01-10 13:36:52.698012477 +0200
++@@ -0,0 +1,1 @@
+++#include "ace/config-linux.h"
++diff -ruN ACE_wrappers1/include/makeinclude/platform_macros.GNU ACE_wrappers/include/makeinclude/platform_macros.GNU
++--- ACE_wrappers1/include/makeinclude/platform_macros.GNU	1970-01-01 02:00:00.000000000 +0200
+++++ ACE_wrappers/include/makeinclude/platform_macros.GNU	2018-10-31 15:11:18.265392460 +0200
++@@ -0,0 +1,3 @@
+++INSTALL_PREFIX = $(D)$(exec_prefix)
+++INSTALL_LIB = $(base_libdir)
+++include $(ACE_ROOT)/include/makeinclude/platform_linux.GNU
+-- 
+2.17.1
 
---------------BC6635BE745BC70A642FE00C--
