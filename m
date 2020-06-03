@@ -1,89 +1,62 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.11551.1591183007124025962
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web10.13020.1591188806356751223
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Jun 2020 04:16:47 -0700
+ Wed, 03 Jun 2020 05:53:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=43742 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jgRNx-0000yU-0h; Wed, 03 Jun 2020 14:16:44 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH] python3-isort: Consolidate in a single file
-Date: Wed,  3 Jun 2020 14:16:29 +0300
-Message-Id: <20200603111629.12516-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.7
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.73,467,1583164800"; 
+   d="scan'208";a="93762369"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 03 Jun 2020 20:53:22 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id EF73A4BCC8AC
+	for <openembedded-devel@lists.openembedded.org>; Wed,  3 Jun 2020 20:53:21 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Wed, 3 Jun 2020 20:53:21 +0800
+From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@cn.fujitsu.com>
+Subject: [oe] [meta-networking][PATCH] opensaf: upgrade 5.19.10 -> 5.20.05
+Date: Wed, 3 Jun 2020 20:53:10 +0800
+Message-ID: <1591188793-15698-1-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+ G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
+X-yoursite-MailScanner-ID: EF73A4BCC8AC.A7400
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-Consolidate inc and bb files into a single bb file.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- .../recipes-devtools/python/python-isort.inc  | 17 -----------------
- .../python/python3-isort_4.3.21.bb            | 19 +++++++++++++++++--
- 2 files changed, 17 insertions(+), 19 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-isort.inc
+ .../opensaf/{opensaf_5.19.10.bb => opensaf_5.20.05.bb}        | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-daemons/opensaf/{opensaf_5.19.10.bb => opensaf_5.20.05.bb} (95%)
 
-diff --git a/meta-python/recipes-devtools/python/python-isort.inc b/meta-python/recipes-devtools/python/python-isort.inc
-deleted file mode 100644
-index 324d4cf10..000000000
---- a/meta-python/recipes-devtools/python/python-isort.inc
-+++ /dev/null
-@@ -1,17 +0,0 @@
--SUMMARY = "A Python utility / library to sort Python imports."
--HOMEPAGE = "https://pypi.python.org/pypi/isort"
--LICENSE = "MIT"
--SECTION = "devel/python"
--LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
--
--SRC_URI[md5sum] = "05d66f2eb7ce2c2d702e86bac24bf9e4"
--SRC_URI[sha256sum] = "54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1"
--
--inherit pypi
--
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-datetime \
--    ${PYTHON_PN}-shell \
--"
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
-index 755b3e2f2..e0b21ab55 100644
---- a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
-+++ b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
-@@ -1,2 +1,17 @@
--inherit setuptools3
--require python-isort.inc
-+SUMMARY = "A Python utility / library to sort Python imports."
-+HOMEPAGE = "https://pypi.python.org/pypi/isort"
-+LICENSE = "MIT"
-+SECTION = "devel/python"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
-+
-+SRC_URI[md5sum] = "05d66f2eb7ce2c2d702e86bac24bf9e4"
-+SRC_URI[sha256sum] = "54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-datetime \
-+    ${PYTHON_PN}-shell \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.10.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.20.05.bb
+similarity index 95%
+rename from meta-networking/recipes-daemons/opensaf/opensaf_5.19.10.bb
+rename to meta-networking/recipes-daemons/opensaf/opensaf_5.20.05.bb
+index 3ab4757c3..f11df49f8 100644
+--- a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.10.bb
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.20.05.bb
+@@ -28,8 +28,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
+            file://0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch \
+            file://0001-immom_python-convert-to-python3.patch \
+            "
+-SRC_URI[md5sum] = "9b61df01d1a092101c4a626692edae19"
+-SRC_URI[sha256sum] = "6da9af96e8ee58d11031d305bf4804a00deb6108e12e422722882a2091bd34bd"
++SRC_URI[md5sum] = "d56bacf4c234c134e60e9b25f6f26671"
++SRC_URI[sha256sum] = "2478e298c0bce3b2cfdeb20875022cc11d7d3b53ecd3255422d22eb64c04953b"
+ 
+ UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/opensaf/files/releases"
+ 
 -- 
 2.17.1
+
+
 
