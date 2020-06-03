@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.13837.1591191764787789130
+ by mx.groups.io with SMTP id smtpd.web12.13838.1591191766683635109
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Jun 2020 06:42:45 -0700
+ Wed, 03 Jun 2020 06:42:47 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=47258 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jgTfH-00009o-Ir; Wed, 03 Jun 2020 16:42:44 +0300
+	id 1jgTfJ-00009o-Bn; Wed, 03 Jun 2020 16:42:46 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-engineio: Upgrade 3.12.1 -> 3.13.0
-Date: Wed,  3 Jun 2020 16:42:31 +0300
-Message-Id: <20200603134232.22336-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-feedformatter: Consolidate in a single file
+Date: Wed,  3 Jun 2020 16:42:32 +0300
+Message-Id: <20200603134232.22336-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200603134232.22336-1-leon.anavi@konsulko.com>
 References: <20200603134232.22336-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-1.0
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,45 +30,61 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.13.0 and consolidate inc and bb files into
-a single bb file.
+Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python3-engineio_3.12.1.bb      | 2 --
- .../{python-engineio.inc => python3-engineio_3.13.0.bb}     | 6 +++---
- 2 files changed, 3 insertions(+), 5 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-engineio_3.12.1.bb
- rename meta-python/recipes-devtools/python/{python-engineio.inc => python3-engineio_3.13.0.bb} (59%)
+ .../python/python-feedformatter.inc            | 16 ----------------
+ .../python/python3-feedformatter_0.4.bb        | 18 +++++++++++++++++-
+ 2 files changed, 17 insertions(+), 17 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-feedformatter.inc
 
-diff --git a/meta-python/recipes-devtools/python/python3-engineio_3.12.1.bb b/meta-python/recipes-devtools/python/python3-engineio_3.12.1.bb
+diff --git a/meta-python/recipes-devtools/python/python-feedformatter.inc b/meta-python/recipes-devtools/python/python-feedformatter.inc
 deleted file mode 100644
-index 028d1104a..000000000
---- a/meta-python/recipes-devtools/python/python3-engineio_3.12.1.bb
+index 6ddcaa98e..000000000
+--- a/meta-python/recipes-devtools/python/python-feedformatter.inc
 +++ /dev/null
-@@ -1,2 +0,0 @@
--inherit setuptools3
--require python-engineio.inc
-diff --git a/meta-python/recipes-devtools/python/python-engineio.inc b/meta-python/recipes-devtools/python/python3-engineio_3.13.0.bb
-similarity index 59%
-rename from meta-python/recipes-devtools/python/python-engineio.inc
-rename to meta-python/recipes-devtools/python/python3-engineio_3.13.0.bb
-index 965f42014..51f853390 100644
---- a/meta-python/recipes-devtools/python/python-engineio.inc
-+++ b/meta-python/recipes-devtools/python/python3-engineio_3.13.0.bb
-@@ -5,9 +5,9 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=42d0a9e728978f0eeb759c3be91536b8"
- 
--inherit pypi
-+inherit pypi setuptools3
- 
- PYPI_PACKAGE = "python-engineio"
- 
--SRC_URI[md5sum] = "e6ea8b3f2f32eeeb02014c46092f2adb"
--SRC_URI[sha256sum] = "2481732d93646998f7372ef0ecf003af7817b82720b881db173c3d50b4887916"
-+SRC_URI[md5sum] = "822b5dba0308dde6b8cbfd022daae0e4"
-+SRC_URI[sha256sum] = "2da5e1e5565e170a17169d1a76eb6a099cc96f0a25a5b1e0f9785f151485daea"
+@@ -1,16 +0,0 @@
+-DESCRIPTION = "A Python library for generating news feeds in RSS and Atom formats"
+-HOMEPAGE = "http://code.google.com/p/feedformatter/"
+-SECTION = "devel/python"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=258e3f39e2383fbd011035d04311008d"
+-SRCREV = "7391193c83e10420b5a2d8ef846d23fc368c6d85"
+-
+-SRC_URI = "git://github.com/marianoguerra/feedformatter.git"
+-
+-S = "${WORKDIR}/git"
+-
+-RDEPENDS_${PN} += "\
+-    ${PYTHON_PN}-datetime \
+-    ${PYTHON_PN}-io \
+-    ${PYTHON_PN}-xml \
+-    "
+diff --git a/meta-python/recipes-devtools/python/python3-feedformatter_0.4.bb b/meta-python/recipes-devtools/python/python3-feedformatter_0.4.bb
+index 95a5405f3..81c5fde13 100644
+--- a/meta-python/recipes-devtools/python/python3-feedformatter_0.4.bb
++++ b/meta-python/recipes-devtools/python/python3-feedformatter_0.4.bb
+@@ -1,2 +1,18 @@
++DESCRIPTION = "A Python library for generating news feeds in RSS and Atom formats"
++HOMEPAGE = "http://code.google.com/p/feedformatter/"
++SECTION = "devel/python"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://COPYING;md5=258e3f39e2383fbd011035d04311008d"
++
++SRC_URI = "git://github.com/marianoguerra/feedformatter.git"
++SRCREV = "7391193c83e10420b5a2d8ef846d23fc368c6d85"
++
++S = "${WORKDIR}/git"
++
+ inherit setuptools3
+-require python-feedformatter.inc
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-io \
++    ${PYTHON_PN}-xml \
++    "
 -- 
 2.17.1
 
