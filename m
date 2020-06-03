@@ -1,69 +1,73 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web11.13118.1591188816663221566
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.14039.1591191761732389211
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Jun 2020 05:53:37 -0700
+ Wed, 03 Jun 2020 06:42:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.73,467,1583164800"; 
-   d="scan'208";a="93762382"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 03 Jun 2020 20:53:34 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id 23A6B46B5FAD
-	for <openembedded-devel@lists.openembedded.org>; Wed,  3 Jun 2020 20:53:30 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Wed, 3 Jun 2020 20:53:30 +0800
-From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@cn.fujitsu.com>
-Subject: [oe] [meta-python][PATCH] python3-pycodestyle: upgrade 2.5.0 -> 2.6.0
-Date: Wed, 3 Jun 2020 20:53:13 +0800
-Message-ID: <1591188793-15698-4-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1591188793-15698-1-git-send-email-wangmy@cn.fujitsu.com>
-References: <1591188793-15698-1-git-send-email-wangmy@cn.fujitsu.com>
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
-X-yoursite-MailScanner-ID: 23A6B46B5FAD.A52D0
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=47258 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jgTfD-00009o-CK; Wed, 03 Jun 2020 16:42:39 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-editor: Consolidate in a single file
+Date: Wed,  3 Jun 2020 16:42:30 +0300
+Message-Id: <20200603134232.22336-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.7
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
--License-Update: Copyright year updated to 2020.
+Consolidate inc and bb files into a single bb file.
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...n3-pycodestyle_2.5.0.bb => python3-pycodestyle_2.6.0.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pycodestyle_2.5.0.bb => python3-pycodestyle_2.6.0.bb} (50%)
+ meta-python/recipes-devtools/python/python-editor.inc  |  9 ---------
+ .../recipes-devtools/python/python3-editor_1.0.4.bb    | 10 +++++++++-
+ 2 files changed, 9 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-editor.inc
 
-diff --git a/meta-python/recipes-devtools/python/python3-pycodestyle_2.5.0.bb b/meta-python/recipes-devtools/python/python3-pycodestyle_2.6.0.bb
-similarity index 50%
-rename from meta-python/recipes-devtools/python/python3-pycodestyle_2.5.0.bb
-rename to meta-python/recipes-devtools/python/python3-pycodestyle_2.6.0.bb
-index 7f00ab629..4ad1f5493 100644
---- a/meta-python/recipes-devtools/python/python3-pycodestyle_2.5.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pycodestyle_2.6.0.bb
-@@ -2,10 +2,10 @@ SUMMARY = "Python style guide checker (formly called pep8)"
- HOMEPAGE = "https://pypi.org/project/pycodestyle"
- LICENSE = "MIT"
- SECTION = "devel/python"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=01831ddbaf398471da3cc87f5037e822"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a8546d0e77f416fb05a26acd89c8b3bd"
- 
--SRC_URI[md5sum] = "40e7a76f364a18f531aaba11a4476e21"
--SRC_URI[sha256sum] = "e40a936c9a450ad81df37f549d676d127b1b66000a6c500caa2b085bc0ca976c"
-+SRC_URI[md5sum] = "e2fcdace728267d5fa3aa98e08ee40db"
-+SRC_URI[sha256sum] = "c58a7d2815e0e8d7972bf1803331fb0152f867bd89adf8a01dfd55085434192e"
- 
+diff --git a/meta-python/recipes-devtools/python/python-editor.inc b/meta-python/recipes-devtools/python/python-editor.inc
+deleted file mode 100644
+index 734ce2bd7..000000000
+--- a/meta-python/recipes-devtools/python/python-editor.inc
++++ /dev/null
+@@ -1,9 +0,0 @@
+-DESCRIPTION = "Programmatically open and editor, capture the result"
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
+-
+-SRC_URI[md5sum] = "0e52648a4a6e7c89e3be44e9456530b4"
+-SRC_URI[sha256sum] = "51fda6bcc5ddbbb7063b2af7509e43bd84bfc32a4ff71349ec7847713882327b"
+-
+-PYPI_PACKAGE = "python-editor"
+-
+diff --git a/meta-python/recipes-devtools/python/python3-editor_1.0.4.bb b/meta-python/recipes-devtools/python/python3-editor_1.0.4.bb
+index 8ad2b869d..c7a6cd8f0 100644
+--- a/meta-python/recipes-devtools/python/python3-editor_1.0.4.bb
++++ b/meta-python/recipes-devtools/python/python3-editor_1.0.4.bb
+@@ -1,2 +1,10 @@
++DESCRIPTION = "Programmatically open and editor, capture the result"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
++
++SRC_URI[md5sum] = "0e52648a4a6e7c89e3be44e9456530b4"
++SRC_URI[sha256sum] = "51fda6bcc5ddbbb7063b2af7509e43bd84bfc32a4ff71349ec7847713882327b"
++
++PYPI_PACKAGE = "python-editor"
++
  inherit pypi setuptools3
- 
+-require python-editor.inc
 -- 
 2.17.1
-
-
 
