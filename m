@@ -1,79 +1,65 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.4431.1591232760321777258
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+ by mx.groups.io with SMTP id smtpd.web11.9792.1591260783897635526
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Jun 2020 18:06:00 -0700
+ Thu, 04 Jun 2020 01:53:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id ABDB040BCC;
-	Thu,  4 Jun 2020 01:05:59 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id cs7WrR9UB1-Q; Thu,  4 Jun 2020 01:05:59 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 57CDB40A13;
-	Thu,  4 Jun 2020 01:05:57 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 52AD7173209; Wed,  3 Jun 2020 21:05:57 -0400 (EDT)
-Date: Wed, 3 Jun 2020 21:05:57 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: Martin Jansa <Martin.Jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-oe][PATCHv2] meta-python: depend on core version 12 or higher
-Message-ID: <20200604010557.GA17660@denix.org>
-References: <20200604004157.742720-1-Martin.Jansa@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <20200604004157.742720-1-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+ dkim=missing; spf=pass (domain: intel.com, ip: 192.55.52.43, mailfrom: naveen.kumar.saini@intel.com)
+IronPort-SDR: CWN7nRIi2WlITQLypgE0MfrHE+7sIJkYbsOjOPnJ2quXDcZOfmq/dgFTz43HELdZqGso/GvR+8
+ FnYkhlvO1rNg==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Jun 2020 01:53:00 -0700
+IronPort-SDR: waZiOQ5eorc3wVZwmQrRClGBp2qy+epKvHbGBXcjDF18fnWd/IAZxliEwniT7vvdXaXybwV70f
+ C1IKOCcRfmZw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.73,471,1583222400"; 
+   d="scan'208";a="269350764"
+Received: from saininav-desk1.png.intel.com ([172.30.199.23])
+  by orsmga003.jf.intel.com with ESMTP; 04 Jun 2020 01:52:57 -0700
+From: "Naveen Saini" <naveen.kumar.saini@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] ocl-icd_git.bb: Add recipe for OpenCL ICD loaders
+Date: Thu,  4 Jun 2020 16:59:45 +0800
+Message-Id: <20200604085945.10990-1-naveen.kumar.saini@intel.com>
+X-Mailer: git-send-email 2.17.1
 
-On Thu, Jun 04, 2020 at 02:41:57AM +0200, Martin Jansa wrote:
-> * python3-pyelftools and python3-pycryptodome(x) recipes were recently
->   moved from meta-python to oe-core in:
->   https://git.openembedded.org/meta-openembedded/commit/?id=7aee545a61c4f91d5e462d5b46b1b8f9a8bad1e3
->   https://git.openembedded.org/meta-openembedded/commit/?id=a8f3c00d8d113b46a49584682e10435157d516ca
-> * core version was bumped now:
->   https://git.openembedded.org/openembedded-core/commit/?id=2d503b27e7c88cee9a37c79c4605c77b11f230b6
-> * this dependency will make sure that people do upgrade oe-core when they do
->   upgrade meta-python past these revisions, so the recipes won't suddenly
->   disappear as a bonus they will get slightly newer versionw which are now
+This recipe creates package which aims at creating an Open Source
+alternative to vendor specific OpenCL ICD loaders.
 
-Typo: versionw
+Signed-off-by: Min Ma <min.ma@xilinx.com>
+Signed-off-by: Manjukumar Matha <manjukumar.harthikote-matha@xilinx.com>
+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+---
+ meta-oe/recipes-core/ocl-icd/ocl-icd_git.bb | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-core/ocl-icd/ocl-icd_git.bb
 
->   in oe-core
->   python3-pycryptodome(x) from 3.9.4 to 3.9.7:
->   https://www.pycryptodome.org/en/latest/src/changelog.html#february-2020
->   python2-pyelftools from 0.25 to 0.26:
->   https://github.com/eliben/pyelftools/commit/8a40f295bc36f96efeb8633dc4a5314f6077d0bf#diff-e4eb329834da3d36278b1b7d943b3bc9
-> 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-
-Reviewed-by: Denys Dmytriyenko <denys@ti.com>
-
-
-> ---
->  meta-python/conf/layer.conf | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-python/conf/layer.conf b/meta-python/conf/layer.conf
-> index 7cfeafe599..0dbc4296eb 100644
-> --- a/meta-python/conf/layer.conf
-> +++ b/meta-python/conf/layer.conf
-> @@ -12,7 +12,7 @@ BBFILE_PRIORITY_meta-python = "7"
->  # cause compatibility issues with other layers
->  LAYERVERSION_meta-python = "1"
->  
-> -LAYERDEPENDS_meta-python = "core openembedded-layer"
-> +LAYERDEPENDS_meta-python = "core (>= 12) openembedded-layer"
->  
->  LAYERSERIES_COMPAT_meta-python = "thud warrior zeus dunfell"
->  
-> -- 
-> 2.25.1
-> 
-
-> 
+diff --git a/meta-oe/recipes-core/ocl-icd/ocl-icd_git.bb b/meta-oe/recipes-core/ocl-icd/ocl-icd_git.bb
+new file mode 100644
+index 000000000..d14ec53e3
+--- /dev/null
++++ b/meta-oe/recipes-core/ocl-icd/ocl-icd_git.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "OpenCL ICD library"
++DESCRIPTION = "Open Source alternative to vendor specific OpenCL ICD loaders."
++
++# The LICENSE is BSD 2-Clause "Simplified" License
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://COPYING;md5=232257bbf7320320725ca9529d3782ab"
++
++SRC_URI = "git://github.com/OCL-dev/ocl-icd.git;protocol=https"
++
++PV = "2.2.12+git${SRCPV}"
++SRCREV = "af79aebe4649f30dbd711c1bf6fc661eac6e5f01"
++
++S = "${WORKDIR}/git"
++
++inherit autotools
++
++DEPENDS = "ruby-native"
++
++BBCLASSEXTEND = "native"
+-- 
+2.17.1
 
