@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.12400.1591272761704368898
+ by mx.groups.io with SMTP id smtpd.web10.12643.1591272764960457769
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Jun 2020 05:12:42 -0700
+ Thu, 04 Jun 2020 05:12:45 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=50342 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jgoje-0002zK-T2; Thu, 04 Jun 2020 15:12:40 +0300
+	id 1jgoji-0002zK-U6; Thu, 04 Jun 2020 15:12:43 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/6] python3-dnspython: Consolidate in a single file
-Date: Thu,  4 Jun 2020 15:12:19 +0300
-Message-Id: <20200604121223.3818-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/6] python3-future: Consolidate in a single file
+Date: Thu,  4 Jun 2020 15:12:20 +0300
+Message-Id: <20200604121223.3818-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200604121223.3818-1-leon.anavi@konsulko.com>
 References: <20200604121223.3818-1-leon.anavi@konsulko.com>
@@ -34,64 +34,50 @@ Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python-dnspython.inc               | 20 -----------------
- .../python/python3-dnspython_1.16.0.bb        | 22 +++++++++++++++++--
- 2 files changed, 20 insertions(+), 22 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-dnspython.inc
+ .../recipes-devtools/python/python-future.inc     | 13 -------------
+ .../python/python3-future_0.18.2.bb               | 15 +++++++++++++--
+ 2 files changed, 13 insertions(+), 15 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-future.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-dnspython.inc b/meta-python/recipes-devtools/python/python-dnspython.inc
+diff --git a/meta-python/recipes-devtools/python/python-future.inc b/meta-python/recipes-devtools/python/python-future.inc
 deleted file mode 100644
-index 84502affe..000000000
---- a/meta-python/recipes-devtools/python/python-dnspython.inc
+index c0a2b39ba..000000000
+--- a/meta-python/recipes-devtools/python/python-future.inc
 +++ /dev/null
-@@ -1,20 +0,0 @@
--DESCRIPTION = "DNS toolkit for Python"
--HOMEPAGE = "http://www.dnspython.org/"
--LICENSE = "ISC"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=5af50906b5929837f667dfe31052bd34"
+@@ -1,13 +0,0 @@
+-DESCRIPTION = "Clean single-source support for Python 3 and 2"
+-HOMEPAGE = "https://python-future.org"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a253924061f8ecc41ad7a2ba1560e8e7"
 -
--SRC_URI[md5sum] = "bc9ca3b3a82164667d5730ec6d5248a2"
--SRC_URI[sha256sum] = "36c5e8e38d4369a08b6780b7f27d790a292b2b08eea01607865bf0936c558e01"
+-SRC_URI[md5sum] = "e4579c836b9c025872efe230f6270349"
+-SRC_URI[sha256sum] = "b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d"
 -
--PYPI_PACKAGE_EXT = "zip"
+-PYPI_PACKAGE_HASH = "99abde815842bc6e97d5a7806ad51236630da14ca2f3b1fce94c0bb94d3d"
 -
 -inherit pypi
 -
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-crypt \
--    ${PYTHON_PN}-io \
--    ${PYTHON_PN}-math \
--    ${PYTHON_PN}-netclient \
--    ${PYTHON_PN}-numbers \
--    ${PYTHON_PN}-threading \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-dnspython_1.16.0.bb b/meta-python/recipes-devtools/python/python3-dnspython_1.16.0.bb
-index ce4dfdc74..cb255442f 100644
---- a/meta-python/recipes-devtools/python/python3-dnspython_1.16.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-dnspython_1.16.0.bb
-@@ -1,2 +1,20 @@
+-BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python3-future_0.18.2.bb b/meta-python/recipes-devtools/python/python3-future_0.18.2.bb
+index f059186bf..90d1661d4 100644
+--- a/meta-python/recipes-devtools/python/python3-future_0.18.2.bb
++++ b/meta-python/recipes-devtools/python/python3-future_0.18.2.bb
+@@ -1,2 +1,13 @@
 -inherit setuptools3
--require python-dnspython.inc
-+DESCRIPTION = "DNS toolkit for Python"
-+HOMEPAGE = "http://www.dnspython.org/"
-+LICENSE = "ISC"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=5af50906b5929837f667dfe31052bd34"
+-require python-future.inc
++DESCRIPTION = "Clean single-source support for Python 3 and 2"
++HOMEPAGE = "https://python-future.org"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a253924061f8ecc41ad7a2ba1560e8e7"
 +
-+SRC_URI[md5sum] = "bc9ca3b3a82164667d5730ec6d5248a2"
-+SRC_URI[sha256sum] = "36c5e8e38d4369a08b6780b7f27d790a292b2b08eea01607865bf0936c558e01"
++SRC_URI[md5sum] = "e4579c836b9c025872efe230f6270349"
++SRC_URI[sha256sum] = "b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d"
 +
-+PYPI_PACKAGE_EXT = "zip"
++PYPI_PACKAGE_HASH = "99abde815842bc6e97d5a7806ad51236630da14ca2f3b1fce94c0bb94d3d"
 +
 +inherit pypi setuptools3
 +
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-crypt \
-+    ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-math \
-+    ${PYTHON_PN}-netclient \
-+    ${PYTHON_PN}-numbers \
-+    ${PYTHON_PN}-threading \
-+"
++BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
