@@ -1,121 +1,86 @@
-Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com [209.85.210.196])
- by mx.groups.io with SMTP id smtpd.web12.2351.1591225718344570853
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.web11.3938.1591230778401252899
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Jun 2020 16:08:38 -0700
+ Wed, 03 Jun 2020 17:32:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=p2ZMPe63;
- spf=pass (domain: gmail.com, ip: 209.85.210.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f196.google.com with SMTP id b201so2486968pfb.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Jun 2020 16:08:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=LphxEd+g;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id x6so4172231wrm.13
+        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Jun 2020 17:32:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=hYQWSjBRGd6fH5ZX6lVosi/OavkznuiSXIFA3J5dvYI=;
-        b=p2ZMPe63ROQAe2PcdRsAa7e4qVXNSiG16HLbUQKsTNd6IcBcJyKgZRO0oON7C++g4l
-         mI9UkLgbLMvscHAPWWnbUYeBNzcWdCos08PJALI00rZhqpVcyMN7Y6zB5k4NBTuXvSqw
-         clLlqX2DaIXPuC7k5iqbi4jF8no37KOTz26242F43jx1X7RNZTGwJOhjesECK1SILqN7
-         SqGtvWoP+K+Kd34xaVNh2PCmqE/oDa3A7qw77H3FTNkJslV1tj2+B/E4w1vXyRphij6N
-         lioKAnB5D0hSPrVosxj7araVXoqgCcX29puOx1vviK8iE3GxlDyUERcuBN3i4HbD9xGY
-         ZL/g==
+        bh=LA2TyPE8dEA3UTsk44wYrbjCtUXeTAnqBvrGXBi9NfI=;
+        b=LphxEd+gj9dl07V3SI+yRk0Vpl1wY2MOm/Wmb5ax1TeptqCNaM23XTvQX15wxngqAM
+         yo2VeXV/amSJKL/O9bUAzDljeb+o97U1Wx8czIcyCtVeXShLTcxR6N5nGMb0dsY34Rup
+         iZp3x8GY18vofEDgRXoT6+ILRhT+WziDoEkS5E9glawR6PLPkcGcNi/0Uii76X4Foid2
+         CRyVrNrZShVyQva2snGX2x2Xf8spuM4hOvjgdzdFQ5EFrljYMfCdsqmInG5Rkg2JUMfO
+         ZKkx7ZAO/Kignl62p5lGM9hZJfr57ni8estiEWp5y1Pv0Hy9vSJwAOZDtB7v9FY2muFi
+         8ZLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=hYQWSjBRGd6fH5ZX6lVosi/OavkznuiSXIFA3J5dvYI=;
-        b=cDN34NqwFfV0G2eEv0vJNpoUAjixSVqw3QBjyQdffsMJs5ied4nkv9fQMLPxbhOit5
-         Q3pr0uvG7Zx/gA9N4lC7tb5przmDAyDr+zcEt1HiN443Ei7hUolDT6v9o5jnuT66NCqJ
-         HrQCC2IM0cQTC4HLjT5cjIWqm3WfUlArbqeXSR86EPEtmpCVKZcjc3VK5hhHISvgTFaV
-         6wrD+osU2WjcfZXIjixS9zS2CCQa0BS13UZbJ1TggkaEd3HGxPwOzki4NEqmknaZIXRX
-         ku56Pau9/KG5Vgco8BfRDEKBsWECUVSGLqOxZcNfkVN96KelmSlA/ujvB+GJXHJzf/+W
-         KM7A==
-X-Gm-Message-State: AOAM532HlGYDvHOO15wImQ6adbSRmEYh2Kegpx47THsYs+Be7DCP3AnQ
-	v9ZqRFlsoy2ThFOykmvKFGyHYKIUjB8=
-X-Google-Smtp-Source: ABdhPJxABWXDaxXp6xK6ZWEKDoBy8/oMumdd3UoRBBzzGqlxSaWENUnpsSN9oezTo6GouijVcuKjGg==
-X-Received: by 2002:aa7:868f:: with SMTP id d15mr1471477pfo.166.1591225717307;
-        Wed, 03 Jun 2020 16:08:37 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net (c-73-63-224-124.hsd1.ca.comcast.net. [73.63.224.124])
-        by smtp.gmail.com with ESMTPSA id nl5sm3777863pjb.36.2020.06.03.16.08.36
+        bh=LA2TyPE8dEA3UTsk44wYrbjCtUXeTAnqBvrGXBi9NfI=;
+        b=LvUnPww/cPGZAZmwSRP60/XLKI8OkynLVTgli+uSyPyVxBlRrTbBNXDZhWe1EuY6TY
+         WeF2rLvD3RJLftxlR3XKzFQ9Qge7vxvoBQsIzggO0Wf+DyTFy6F5DNDyy7wipcFr8bRt
+         n09M99roOdfuF/Lbcel81+2edwyrtkZXE5JUg39/Ijjf2dgabui8BLrh4P/on7mQP0JG
+         xsYQdWpU799lgZq3X01YD1yRhy3AOvwIqx7rtcckSAaa15GZNWQcoTtKm620OgfgLROt
+         h4i43t6qcqXhUtUC0SRbJLkNTSc+KjLts2FVkD1Aiq2JKGXPiz7wMyE3Bm5Ltg0KgAmD
+         OteA==
+X-Gm-Message-State: AOAM5339IXwV5Zw1YUtAvaNJcJ13J+oCWJHPWZ++66QK3RUzY7vfouUr
+	tT3GX2KVN9pP2ES8JGPyECzf7vgp
+X-Google-Smtp-Source: ABdhPJybeFrGaqA7N6D6BXc7GZkSJWyYy/E4X9qgyxi0SqcmJY3Dqf7JikaJC1RQ6BTcbbPrl6CyAw==
+X-Received: by 2002:adf:f003:: with SMTP id j3mr1605174wro.228.1591230776545;
+        Wed, 03 Jun 2020 17:32:56 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from localhost ([109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id q11sm5375723wrv.67.2020.06.03.17.32.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Jun 2020 16:08:36 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Wed, 03 Jun 2020 17:32:55 -0700 (PDT)
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] multipath-tools: Fix build with json-c 0.14 and newer
-Date: Wed,  3 Jun 2020 16:08:32 -0700
-Message-Id: <20200603230832.2322617-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.27.0
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH] meta-python: depend on core version 11 or higher
+Date: Thu,  4 Jun 2020 02:32:53 +0200
+Message-Id: <20200604003253.741903-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...1-fix-boolean-value-with-json-c-0.14.patch | 42 +++++++++++++++++++
- .../multipath-tools/multipath-tools_0.8.4.bb  |  1 +
- 2 files changed, 43 insertions(+)
- create mode 100644 meta-oe/recipes-support/multipath-tools/files/0001-fix-boolean-value-with-json-c-0.14.patch
+* python3-pyelftools and python3-pycryptodome(x) recipes were recently
+  moved from meta-python to oe-core in:
+  https://git.openembedded.org/meta-openembedded/commit/?id=7aee545a61c4f91d5e462d5b46b1b8f9a8bad1e3
+  https://git.openembedded.org/meta-openembedded/commit/?id=a8f3c00d8d113b46a49584682e10435157d516ca
+* this dependency will make sure that people do upgrade oe-core when they do
+  upgrade meta-python past these revisions, so the recipes won't suddenly
+  disappear as a bonus they will get slightly newer versionw which are now
+  in oe-core
+  python3-pycryptodome(x) from 3.9.4 to 3.9.7:
+  https://www.pycryptodome.org/en/latest/src/changelog.html#february-2020
+  python2-pyelftools from 0.25 to 0.26:
+  https://github.com/eliben/pyelftools/commit/8a40f295bc36f96efeb8633dc4a5314f6077d0bf#diff-e4eb329834da3d36278b1b7d943b3bc9
 
-diff --git a/meta-oe/recipes-support/multipath-tools/files/0001-fix-boolean-value-with-json-c-0.14.patch b/meta-oe/recipes-support/multipath-tools/files/0001-fix-boolean-value-with-json-c-0.14.patch
-new file mode 100644
-index 0000000000..cf97b491e1
---- /dev/null
-+++ b/meta-oe/recipes-support/multipath-tools/files/0001-fix-boolean-value-with-json-c-0.14.patch
-@@ -0,0 +1,42 @@
-+From 5ae81386a8cfea4180738c261cd3f7944a631199 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 3 Jun 2020 16:03:56 -0700
-+Subject: [PATCH] fix boolean value with json-c 0.14
-+
-+Patch from Christian Hesse posted here
-+https://www.spinics.net/lists/dm-devel/msg40646.html
-+
-+Upstream json-c 0.14+ removed the TRUE and FALSE defines in commit
-+0992aac61f8b087efd7094e9ac2b84fa9c040fcd.
-+
-+Upstream-Status: Submitted [https://www.spinics.net/lists/dm-devel/msg40646.html]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ libdmmp/libdmmp_private.h | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/libdmmp/libdmmp_private.h b/libdmmp/libdmmp_private.h
-+index ac85b63f..29400826 100644
-+--- a/libdmmp/libdmmp_private.h
-++++ b/libdmmp/libdmmp_private.h
-+@@ -82,7 +82,7 @@ static out_type func_name(struct dmmp_context *ctx, const char *var_name) { \
-+ do { \
-+ 	json_type j_type = json_type_null; \
-+ 	json_object *j_obj_tmp = NULL; \
-+-	if (json_object_object_get_ex(j_obj, key, &j_obj_tmp) != TRUE) { \
-++	if (json_object_object_get_ex(j_obj, key, &j_obj_tmp) != 1) { \
-+ 		_error(ctx, "Invalid JSON output from multipathd IPC: " \
-+ 		       "key '%s' not found", key); \
-+ 		rc = DMMP_ERR_IPC_ERROR; \
-+@@ -90,7 +90,7 @@ do { \
-+ 	} \
-+ 	if (j_obj_tmp == NULL) { \
-+ 		_error(ctx, "BUG: Got NULL j_obj_tmp from " \
-+-		       "json_object_object_get_ex() while it return TRUE"); \
-++		       "json_object_object_get_ex() while it return 1"); \
-+ 		rc = DMMP_ERR_BUG; \
-+ 		goto out; \
-+ 	} \
-+-- 
-+2.27.0
-+
-diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-index af34a4b392..0d03191373 100644
---- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-+++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-@@ -45,6 +45,7 @@ SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http \
-            file://0031-Always-use-devmapper-for-kpartx.patch \
-            file://0001-fix-bug-of-do_compile-and-do_install.patch \
-            file://0001-add-explicit-dependency-on-libraries.patch \
-+           file://0001-fix-boolean-value-with-json-c-0.14.patch \
-            "
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-python/conf/layer.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-python/conf/layer.conf b/meta-python/conf/layer.conf
+index 7cfeafe599..3dcd7b3021 100644
+--- a/meta-python/conf/layer.conf
++++ b/meta-python/conf/layer.conf
+@@ -12,7 +12,7 @@ BBFILE_PRIORITY_meta-python = "7"
+ # cause compatibility issues with other layers
+ LAYERVERSION_meta-python = "1"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
+-LAYERDEPENDS_meta-python = "core openembedded-layer"
++LAYERDEPENDS_meta-python = "core (>= 11) openembedded-layer"
+ 
+ LAYERSERIES_COMPAT_meta-python = "thud warrior zeus dunfell"
+ 
 -- 
-2.27.0
+2.25.1
 
