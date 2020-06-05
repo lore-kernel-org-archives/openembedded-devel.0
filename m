@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.325.1591378326623534957
+ by mx.groups.io with SMTP id smtpd.web12.354.1591378328761735658
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Jun 2020 10:32:07 -0700
+ Fri, 05 Jun 2020 10:32:09 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=50784 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jhGCH-0000HW-EI; Fri, 05 Jun 2020 20:32:02 +0300
+	id 1jhGCK-0000HW-Vb; Fri, 05 Jun 2020 20:32:06 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/2] python3-jsonpatch: Consolidate in a single file
-Date: Fri,  5 Jun 2020 20:31:51 +0300
-Message-Id: <20200605173152.2360-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-jsonschema: Consolidate in a single file
+Date: Fri,  5 Jun 2020 20:31:52 +0300
+Message-Id: <20200605173152.2360-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200605173152.2360-1-leon.anavi@konsulko.com>
+References: <20200605173152.2360-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.7
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -32,47 +34,119 @@ Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python-jsonpatch.inc    | 12 ------------
- .../python/python3-jsonpatch_1.25.bb                | 13 +++++++++++--
- 2 files changed, 11 insertions(+), 14 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-jsonpatch.inc
+ .../python/python-jsonschema.inc              | 48 -------------------
+ .../python/python3-jsonschema_3.2.0.bb        | 48 ++++++++++++++++++-
+ 2 files changed, 47 insertions(+), 49 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-jsonschema.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-jsonpatch.inc b/meta-python/recipes-devtools/python/python-jsonpatch.inc
+diff --git a/meta-python/recipes-devtools/python/python-jsonschema.inc b/meta-python/recipes-devtools/python/python-jsonschema.inc
 deleted file mode 100644
-index e23f96b61..000000000
---- a/meta-python/recipes-devtools/python/python-jsonpatch.inc
+index 8135b0fe6..000000000
+--- a/meta-python/recipes-devtools/python/python-jsonschema.inc
 +++ /dev/null
-@@ -1,12 +0,0 @@
--SUMMARY  = "Appling JSON patches in Python 2.6+ and 3.x"
--HOMEPAGE = "https://github.com/stefankoegl/python-json-patch"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
+@@ -1,48 +0,0 @@
+-SUMMARY = "An implementation of JSON Schema validation for Python"
+-HOMEPAGE = "https://github.com/Julian/jsonschema"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=7a60a81c146ec25599a3e1dabb8610a8 \
+-                    file://json/LICENSE;md5=9d4de43111d33570c8fe49b4cb0e01af"
+-DEPENDS += "${PYTHON_PN}-vcversioner-native ${PYTHON_PN}-setuptools-scm-native"
 -
--inherit pypi
+-FILESEXTRAPATHS_prepend := "${THISDIR}/python-jsonschema:"
 -
--SRC_URI[md5sum] = "fcc546892414bef2f7f89f0e2a618a9e"
--SRC_URI[sha256sum] = "ddc0f7628b8bfdd62e3cbfbc24ca6671b0b6265b50d186c2cf3659dc0f78fd6a"
+-SRC_URI[md5sum] = "f1a0b5011f05a02a8dee1070cd10a26d"
+-SRC_URI[sha256sum] = "c8a85b28d377cc7737e46e2d9f2b4f44ee3c0e1deac6bf46ddefc7187d30797a"
 -
--RDEPENDS_${PN} += "${PYTHON_PN}-json ${PYTHON_PN}-jsonpointer ${PYTHON_PN}-netclient ${PYTHON_PN}-stringold"
+-PACKAGECONFIG ??= "format"
+-PACKAGECONFIG[format] = ",,,\
+-    ${PYTHON_PN}-idna \
+-    ${PYTHON_PN}-jsonpointer \
+-    ${PYTHON_PN}-webcolors \
+-    ${PYTHON_PN}-rfc3987 \
+-    ${PYTHON_PN}-strict-rfc3339 \
+-"
+-PACKAGECONFIG[nongpl] = ",,,\
+-    ${PYTHON_PN}-idna \
+-    ${PYTHON_PN}-jsonpointer \
+-    ${PYTHON_PN}-webcolors \
+-    ${PYTHON_PN}-rfc3986-validator \
+-    ${PYTHON_PN}-rfc3339-validator \
+-"
 -
-diff --git a/meta-python/recipes-devtools/python/python3-jsonpatch_1.25.bb b/meta-python/recipes-devtools/python/python3-jsonpatch_1.25.bb
-index 73efceeed..8ec21ff11 100644
---- a/meta-python/recipes-devtools/python/python3-jsonpatch_1.25.bb
-+++ b/meta-python/recipes-devtools/python/python3-jsonpatch_1.25.bb
-@@ -1,2 +1,11 @@
--inherit setuptools3
--require python-jsonpatch.inc
-+SUMMARY  = "Appling JSON patches in Python 2.6+ and 3.x"
-+HOMEPAGE = "https://github.com/stefankoegl/python-json-patch"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
+-RDEPENDS_${PN} += " \
+-    ${PYTHON_PN}-attrs \
+-    ${PYTHON_PN}-core \
+-    ${PYTHON_PN}-datetime \
+-    ${PYTHON_PN}-importlib-metadata \
+-    ${PYTHON_PN}-io \
+-    ${PYTHON_PN}-json \
+-    ${PYTHON_PN}-netclient \
+-    ${PYTHON_PN}-numbers \
+-    ${PYTHON_PN}-pkgutil \
+-    ${PYTHON_PN}-pprint \
+-    ${PYTHON_PN}-pyrsistent \
+-    ${PYTHON_PN}-shell \
+-    ${PYTHON_PN}-six \
+-    ${PYTHON_PN}-unittest \
+-    ${PYTHON_PN}-setuptools-scm \
+-    ${PYTHON_PN}-zipp \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-jsonschema_3.2.0.bb b/meta-python/recipes-devtools/python/python3-jsonschema_3.2.0.bb
+index 926990747..2705dd3ba 100644
+--- a/meta-python/recipes-devtools/python/python3-jsonschema_3.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-jsonschema_3.2.0.bb
+@@ -1,2 +1,48 @@
++SUMMARY = "An implementation of JSON Schema validation for Python"
++HOMEPAGE = "https://github.com/Julian/jsonschema"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=7a60a81c146ec25599a3e1dabb8610a8 \
++                    file://json/LICENSE;md5=9d4de43111d33570c8fe49b4cb0e01af"
++DEPENDS += "${PYTHON_PN}-vcversioner-native ${PYTHON_PN}-setuptools-scm-native"
 +
-+inherit pypi setuptools3
++SRC_URI[md5sum] = "f1a0b5011f05a02a8dee1070cd10a26d"
++SRC_URI[sha256sum] = "c8a85b28d377cc7737e46e2d9f2b4f44ee3c0e1deac6bf46ddefc7187d30797a"
 +
-+SRC_URI[md5sum] = "fcc546892414bef2f7f89f0e2a618a9e"
-+SRC_URI[sha256sum] = "ddc0f7628b8bfdd62e3cbfbc24ca6671b0b6265b50d186c2cf3659dc0f78fd6a"
+ inherit pypi setuptools3
+-require python-jsonschema.inc
 +
-+RDEPENDS_${PN} += "${PYTHON_PN}-json ${PYTHON_PN}-jsonpointer ${PYTHON_PN}-netclient ${PYTHON_PN}-stringold"
++PACKAGECONFIG ??= "format"
++PACKAGECONFIG[format] = ",,,\
++    ${PYTHON_PN}-idna \
++    ${PYTHON_PN}-jsonpointer \
++    ${PYTHON_PN}-webcolors \
++    ${PYTHON_PN}-rfc3987 \
++    ${PYTHON_PN}-strict-rfc3339 \
++"
++PACKAGECONFIG[nongpl] = ",,,\
++    ${PYTHON_PN}-idna \
++    ${PYTHON_PN}-jsonpointer \
++    ${PYTHON_PN}-webcolors \
++    ${PYTHON_PN}-rfc3986-validator \
++    ${PYTHON_PN}-rfc3339-validator \
++"
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-attrs \
++    ${PYTHON_PN}-core \
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-importlib-metadata \
++    ${PYTHON_PN}-io \
++    ${PYTHON_PN}-json \
++    ${PYTHON_PN}-netclient \
++    ${PYTHON_PN}-numbers \
++    ${PYTHON_PN}-pkgutil \
++    ${PYTHON_PN}-pprint \
++    ${PYTHON_PN}-pyrsistent \
++    ${PYTHON_PN}-shell \
++    ${PYTHON_PN}-six \
++    ${PYTHON_PN}-unittest \
++    ${PYTHON_PN}-setuptools-scm \
++    ${PYTHON_PN}-zipp \
++"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
