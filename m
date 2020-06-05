@@ -1,17 +1,17 @@
-Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.51])
- by mx.groups.io with SMTP id smtpd.web12.1022.1591380928335866468
+Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.53])
+ by mx.groups.io with SMTP id smtpd.web12.1029.1591380938374578831
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Jun 2020 11:15:28 -0700
+ Fri, 05 Jun 2020 11:15:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=NyJeqiPD;
- spf=pass (domain: windriver.com, ip: 40.107.75.51, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=mJuUqFFJ;
+ spf=pass (domain: windriver.com, ip: 40.107.75.53, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=V8G4RB0wZ34fYFe8QOs2sPHY5LY/VWskF+SpvuFf48IuVtmdl3T2Z6BtMgp6Dnh2rzpz5u16pnFBUQrW9aT8TeqimS5B7s1hHCimOV6sUernQkEBpprJ7y4huefgg2CB/B+ZIawR7mKN8Z6jvORihBJmjRwwNOW350Pfpr5Dnnf6ghYdRnOXI9xlEKn+EhWYUbIy3XCxxv6dOSXEghYr7oOpE8dHf6mI8oqMrFfFPb5Tlar2m+Xpd+oEpq7ZP0UXJv4+7VrM6xypop24Ay8eawkWN4EYM+bUOfKTNLxlL1B5TN3y23C9vuaV0m3ABd3SZi0rusGnttVCcPMjTw3oiA==
+ b=A5UXY6JUgwhx5hcoAv1op3pll6imS6GGwSTO09/xd/H16grqkBTQ0huxL8OKor199gFIJX/PujutuY+J0Q8+03Teunx0pIGrunMGgm6HPLGeCMkUEBtC96VT0NFZQt2mkijYUWA2ZW6ntcvN50tuX7fG2hXcszEy6r+g+Vg/wD9ADWM1n/a/wJLoTK5e/dJ6834KAY6ICdly9r0oUv+hjQpXRzCAgl1aw85Dmjdh74g2mp0PoG4pmRbCnnUfPRYxDOs0j9tJQE7QJjA1JsnDnXFYrypdTk1GhLljKUSisFZYkEHOZsyEywOIt7YTZpZMLkIgGCocD8HyqdMhlTByLQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QSV4LGKgfKU2S1me6mXnnEph74ToFjv/8gAB1sBquR4=;
- b=aRG1s0B8zEibfZGHBw65EU2gNRfEuNcWuE3n3C1skgNBLFXtij4TauLKkjdVvmLiH3euE9PTAz3cSDXLWGw1GfvcpwhhZiSAe7IYgPKnpVD7sLdG/8RluP9zk1CCzpmlpGwQJ6/tw4Lk96eYnRnr3vmnAyNlRqLUSwS+GVes2CWAGgz+VQlue+x/31oUgGYaKWT0AzUyJ4xsx5EMvsqdw6+gF3aRRcyhklYlyr2JttyQ6Bm0/6gSyl7f5T2egvkTuN73zoCyqIhj1yBGC7RTpnvIRqDywPBy9eMkSysem71A3vKh7pD6krZqH0i2IkJ2qRGJmPvdKw2AaLRj0Fbrsg==
+ bh=v9KXRoXZ1K8O5m4k6s3VxQ9pfqd0K1C+b5OkC2Mw1RE=;
+ b=LHF2ieTRwoizqiMUqGWCmnDSFRW/O2omS7427mwjl11o0EHUpDU2QgzGosAfqkK3S2iR0tC8NOptSu1qG0UQIltpxNgxsctKawJzu8mAuxn/H4sHJzrSpnyaE6XUn+KA37lj8uheiZUEBr8McUMNKz/sXyZCjbOMNdAdwzdMoCb9S9dDN1K8kQgBbh75VS2ylgmzPxF2rk47CSL4vO2iAgD8G3GObXRQ65ZQ+8A8BZpOOXZIRD5cnSLV6q+QZqASm6ew69Eeq40rpG6PCRVNgPJX9OC7PSsOVyt2xmPOMYfKK/CKGbkCQQnZvatRhvNolxQE7wqdbF3SLgADeLsV1A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QSV4LGKgfKU2S1me6mXnnEph74ToFjv/8gAB1sBquR4=;
- b=NyJeqiPDTTok/bQCfzUlOkM344Nx/tRiGbJV48tlEbvoY6g9uRKnEk4vghmoo4PJgu8ys4ynOEAtAWJPfhCq4rQcZo32YtlchEZpQ6Xt+cHDcEbVIjaMuYJnF1nFmKkXfX1QkSK8MUkb34GjEdl+xaYyHTlk2ib/atO7Fm7rtRg=
+ bh=v9KXRoXZ1K8O5m4k6s3VxQ9pfqd0K1C+b5OkC2Mw1RE=;
+ b=mJuUqFFJfK1em+hsJPYDpvvXsmF4YtA82xv8+a0de9n6Unf3uski+n5lTNzdsi4YkAHG5YNW1wBIxSBMjSJe/q1nmcimS1yZA4Gtb4gf4o1Qsfz64O7OdRclzhug2DAbw2D03SRvjoDgs3pnXMc/wc5JJoPMfMmnYVBlLuVmVNQ=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,108 +28,95 @@ Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
  by BN6PR11MB1236.namprd11.prod.outlook.com (2603:10b6:404:48::7) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18; Fri, 5 Jun
- 2020 18:15:26 +0000
+ 2020 18:15:37 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3066.019; Fri, 5 Jun 2020
- 18:15:26 +0000
-Subject: Re: [oe] [meta-python][PATCH 6/6] python3-html2text: Upgrade 2019.8.11 -> 2020.1.16
-To: Leon Anavi <leon.anavi@konsulko.com>,
+ 18:15:37 +0000
+Subject: Re: [oe] [meta-python][PATCH] python3-webcolors: add the missing rdepends
+To: "Yu, Mingli" <mingli.yu@windriver.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200604121223.3818-1-leon.anavi@konsulko.com>
- <20200604121223.3818-6-leon.anavi@konsulko.com>
+References: <20200605033209.2999925-1-mingli.yu@windriver.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <5610ab48-4135-347a-5509-78455ff51b3f@windriver.com>
-Date: Fri, 5 Jun 2020 14:15:23 -0400
+Message-ID: <4b2b1acd-8b66-28cd-9544-cefd62e5ce9c@windriver.com>
+Date: Fri, 5 Jun 2020 14:15:35 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200604121223.3818-6-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTBPR01CA0031.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:14::44) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200605033209.2999925-1-mingli.yu@windriver.com>
+X-ClientProxiedBy: YTBPR01CA0021.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:14::34) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YTBPR01CA0031.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:14::44) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18 via Frontend Transport; Fri, 5 Jun 2020 18:15:25 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YTBPR01CA0021.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:14::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18 via Frontend Transport; Fri, 5 Jun 2020 18:15:36 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: acc38bb5-fe0f-4996-1bcd-08d8097c6b8b
+X-MS-Office365-Filtering-Correlation-Id: fe836537-4fba-46f0-d589-08d8097c7219
 X-MS-TrafficTypeDiagnostic: BN6PR11MB1236:
+X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB1236519643F9CECE5E5266799F860@BN6PR11MB1236.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:173;
+	<BN6PR11MB1236B984FC4BAE1A76AEE1029F860@BN6PR11MB1236.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1201;
 X-Forefront-PRVS: 0425A67DEF
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	mYBLWp+a9DkGFJivkVMO16NPC3t+qfh9xJ1HlPCu+6sL7XxDcp/aEochoW1uAJ9rHkpaaSTbgTGN2ONozjZo8Xhq3n1DxLeZhdBoN6cFdngIto7t/nT2pKofcxUJPOXn0dE4aeP3/YJLFuWUCCQhT7xVRNDOwIBZfAjBRkLpBpQLYEp4NovWiOADF5/vaHAqNrTT68UXvENt9BlpXjJtjXx41YzRb04RYKvwrwG0TICXl2YUTQKgY+9QoIVCrUr+d1c8IXyqgEqzV6v+K2wJss+NaoFq8c/8fUJjGLC7YZ8bcybrDTVTZj0CO44ZRYwFxM/PPfb+QzXs82y76nwHuUnyI9kR1/W/wx20lhLMchgQju7C3Ut4O91Ity2r20esHYs4QXQn6nfofV3nSm1meLLQfkUqU2afaYZkzlKvkRP/pBQd6/m93khg/wKuPNci0jHZJzU50chSUo452pxnyQ==
+	gIjgHdvbA4j3bry6WfRijEDT8ZdUDCprFhkHRyHMwbD8Hk1NVrWx+u83gm917li0DpTAILyqU7/WU1oVBZEJm92K+5m/YyOWLXsv1ckOZshED3opKmdk6MJpmOhylIL7dFgSTfqIQ43VP4GHu0OpeAntgXr55lUSPu3Q7p/IeBLuN5kX9R+2b0x3M60y9x1r3NphFteLEJbksPczIvsBlwZy+lJ37bQD8zSPC8ZMGvkQ2ErAsnk5xxpVQFCPMhgH4wdqPNnozFL4cHfA3Siid3fNWXmFb23/UGnMr2s/Y0IcH6gknxqw98dAJqp3YFo9A9Z38QmnxaN38Xk9wiALEvsANi9XPbz93t+y1frt3v2voRTk14lWdGMCCNWJdG9/MUC/fltXbiLFgnR++wldpuYpDgWqGc2T+0A7chZqf6Jx0AS1DQbztA27c28qvWXnvDmwM6I+qUITC3mY5kVi+Q==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(39850400004)(376002)(136003)(346002)(366004)(52116002)(166002)(33964004)(53546011)(26005)(186003)(16526019)(6486002)(8676002)(83380400001)(31686004)(16576012)(316002)(8936002)(44832011)(956004)(86362001)(2616005)(31696002)(2906002)(966005)(478600001)(36756003)(66946007)(66476007)(5660300002)(66556008)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	N5EB2uBB6+aJCh46/8FCHHySd42DeFRVIc6jXLQnZhT2lhBbX2/qGBSTzWZ6TJ/GVmSEk6dSPVN95JCThGfEflVWxvgK5Nf05vqhZJI1EnDdC5Aj7XETEE7ErqSho1PuZiXzxxMb2tve3SQWTfn9WQZJTAzlD5ipXHsYTPWjQUL4gm/7/oQiqn4daSsxwdEKuz8yEcbPCRV0K9uHVw31EiQaVWbbl5t6c5/gsQ05xMGdX+l5ZRDke0MlHotkn5wGHV61t+q5B11/Eq82CNQhm0bz4yzSDshNIuinUuSkeHa1dShG9sQA7OmqLn4V8uo5C82oZcnwM1/LJishAbpYrKbIOUwGXBRKeeF1ArczEME5FN+pLv4hMmCzOnt+3Mhmv0t4cQsPgwJqTOGi0+UMpjPByWGZxv8ZkaDG2Pf4+DSzb2z/cIQzbMBqdLWNTivKnptfAE3J1UeHEsRG1XKR4c1v7jEhsIJaKHO9P2JzhgYYMY5/NFaxOyKtPWMIdULe
+	YLAeZiJc3vez6j71yXS/zITVFOVFpEaqWk38OSswPi50TBORRJHUTpaGnSX9cag2cuA/XYkgwUY0bJErOcETto2y2LYZXVpfFI7ZKcB/TUqXru0+GmSMOha4nxE3SHo+u6FseRC2rXiQQsm4QIlA/24HRhhbcg78LOx20hOIkLFrTpSYBRiZtNEeffDn//dn7m7O6V8zillRKa0ftksJCvljrp66uoiFXWQwANHU9faomoPdZ1eYg/Siadh2o1A5Y/F/s6RUvU+qtjVKfSAlACF/PsfuATezPMqV1rPEE3TW/84uU3/xDftIm9glqXv+Orx/uPjCoCuEr3WLMuhQXwO8cjOWfdVmWps0hD3tYcUQPBObyoVYQoXbpByY7AwLVW4jbQa3KGCtGqDOYjTv3OQgwMZZs9AR6yZiSSeZKWJlHcJ+UOBwV/CeXvtfXk7L4cfH8iIO7vFWbXysh1yYtHiFCmJ1rbijumV37+xEqz212Aj/XN+sm8M9l65LXlqU
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: acc38bb5-fe0f-4996-1bcd-08d8097c6b8b
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2020 18:15:25.9507
+X-MS-Exchange-CrossTenant-Network-Message-Id: fe836537-4fba-46f0-d589-08d8097c7219
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2020 18:15:36.9584
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hIVaNuQY3smf3P+87rM2l/CP5FRb8khu5C12Gm0deG2Ohkrm5P9MoqhbDUJEh8QkPa0nXOOAAtrrY9TX3uu4zMHge16BgdWPkG9frzefI/M=
+X-MS-Exchange-CrossTenant-UserPrincipalName: s39mm5uw91yUG3oR2zhMBCAVZ+3CiXo7dZm/rcjdTrZf1VfWHlwJlmZM3954j+wC+94ZFOdWGzTlNZKuvyWsGMhFi7jNjG2nxuiHh88WoWg=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1236
 Content-Type: multipart/alternative;
- boundary="------------C60CBBE46ECDAD84D872FE85"
+ boundary="------------7F2BF146E7D7C6A58CFA1755"
 Content-Language: en-US
 
---------------C60CBBE46ECDAD84D872FE85
+--------------7F2BF146E7D7C6A58CFA1755
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 6/4/20 8:12 AM, Leon Anavi wrote:
-> Upgrade to release 2020.1.16. Consolidate inc and bb files
-> into a single bb file.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+On 6/4/20 11:32 PM, Yu, Mingli wrote:
+> From: Mingli Yu <mingli.yu@windriver.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   .../recipes-devtools/python/python3-html2text_2019.8.11.bb  | 2 --
->   ...{python-html2text.inc => python3-html2text_2020.1.16.bb} | 6 +++---
->   2 files changed, 3 insertions(+), 5 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python3-html2text_2019.8.11.bb
->   rename meta-python/recipes-devtools/python/{python-html2text.inc => python3-html2text_2020.1.16.bb} (58%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-html2text_2019.8.11.bb b/meta-python/recipes-devtools/python/python3-html2text_2019.8.11.bb
-> deleted file mode 100644
-> index 9cb5b01eb..000000000
-> --- a/meta-python/recipes-devtools/python/python3-html2text_2019.8.11.bb
-> +++ /dev/null
-> @@ -1,2 +0,0 @@
-> -inherit setuptools3
-> -require python-html2text.inc
-> diff --git a/meta-python/recipes-devtools/python/python-html2text.inc b/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb
-> similarity index 58%
-> rename from meta-python/recipes-devtools/python/python-html2text.inc
-> rename to meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb
-> index 678dcef3f..565b31d97 100644
-> --- a/meta-python/recipes-devtools/python/python-html2text.inc
-> +++ b/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb
-> @@ -4,9 +4,9 @@ HOMEPAGE = "https://github.com/Alir3z4/html2text"
->   LICENSE = "GPL-3.0"
->   LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+> Add the missing rdepends to fix below error:
+>   # python3
+>   [snip]
+>   >>> import webcolors
+>   [snip]
+>   ModuleNotFoundError: No module named 'typing'
+>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>   meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb | 1 +
+>   1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb b/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
+> index e567e0ba2..b950d6f63 100644
+> --- a/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
+> @@ -9,6 +9,7 @@ inherit pypi setuptools3 ptest
 >   
-> -SRC_URI[md5sum] = "21aad7ec95b70606024b783c8253899c"
-> -SRC_URI[sha256sum] = "f516b9c10284174e2a974d86f91cab02b3cf983a17752075da751af0e895ef5e"
-> +SRC_URI[md5sum] = "c77b580c94d1a9e0145f23cc4472993d"
-> +SRC_URI[sha256sum] = "e296318e16b059ddb97f7a8a1d6a5c1d7af4544049a01e261731d2d5cc277bbb"
+>   RDEPENDS_${PN}_class-target = "\
+>       ${PYTHON_PN}-stringold \
+> +    ${PYTHON_PN}-typing \
+>   "
 >   
-> -inherit pypi
-> +inherit pypi setuptools3
->   
->   BBCLASSEXTEND = "native nativesdk"
+>   SRC_URI += " \
 >
 > 
 
---------------C60CBBE46ECDAD84D872FE85
+--------------7F2BF146E7D7C6A58CFA1755
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -139,52 +126,39 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 6/4/20 8:12 AM, Leon Anavi wrote:<br>
+    <div class="moz-cite-prefix">On 6/4/20 11:32 PM, Yu, Mingli wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200604121223.3818-6-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 2020.1.16. Consolidate inc and bb files
-into a single bb file.
-
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+    <blockquote type="cite" cite="mid:20200605033209.2999925-1-mingli.yu@windriver.com">
+      <pre class="moz-quote-pre" wrap="">From: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a></pre>
     </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
-    <blockquote type="cite" cite="mid:20200604121223.3818-6-leon.anavi@konsulko.com">
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
+    <blockquote type="cite" cite="mid:20200605033209.2999925-1-mingli.yu@windriver.com">
       <pre class="moz-quote-pre" wrap="">
----
- .../recipes-devtools/python/python3-html2text_2019.8.11.bb  | 2 --
- ...{python-html2text.inc =&gt; python3-html2text_2020.1.16.bb} | 6 &#43;&#43;&#43;---
- 2 files changed, 3 insertions(&#43;), 5 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-html2text_2019.8.11.bb
- rename meta-python/recipes-devtools/python/{python-html2text.inc =&gt; python3-html2text_2020.1.16.bb} (58%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-html2text_2019.8.11.bb b/meta-python/recipes-devtools/python/python3-html2text_2019.8.11.bb
-deleted file mode 100644
-index 9cb5b01eb..000000000
---- a/meta-python/recipes-devtools/python/python3-html2text_2019.8.11.bb
-&#43;&#43;&#43; /dev/null
-@@ -1,2 &#43;0,0 @@
--inherit setuptools3
--require python-html2text.inc
-diff --git a/meta-python/recipes-devtools/python/python-html2text.inc b/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb
-similarity index 58%
-rename from meta-python/recipes-devtools/python/python-html2text.inc
-rename to meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb
-index 678dcef3f..565b31d97 100644
---- a/meta-python/recipes-devtools/python/python-html2text.inc
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb
-@@ -4,9 &#43;4,9 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/Alir3z4/html2text">&quot;https://github.com/Alir3z4/html2text&quot;</a>
- LICENSE = &quot;GPL-3.0&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=d32239bcb673463ab874e80d47fae504">&quot;file://COPYING;md5=d32239bcb673463ab874e80d47fae504&quot;</a>
+Add the missing rdepends to fix below error:
+ # python3
+ [snip]
+ &gt;&gt;&gt; import webcolors
+ [snip]
+ ModuleNotFoundError: No module named 'typing'
+
+Signed-off-by: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a>
+---
+ meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb | 1 &#43;
+ 1 file changed, 1 insertion(&#43;)
+
+diff --git a/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb b/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
+index e567e0ba2..b950d6f63 100644
+--- a/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
+@@ -9,6 &#43;9,7 @@ inherit pypi setuptools3 ptest
  
--SRC_URI[md5sum] = &quot;21aad7ec95b70606024b783c8253899c&quot;
--SRC_URI[sha256sum] = &quot;f516b9c10284174e2a974d86f91cab02b3cf983a17752075da751af0e895ef5e&quot;
-&#43;SRC_URI[md5sum] = &quot;c77b580c94d1a9e0145f23cc4472993d&quot;
-&#43;SRC_URI[sha256sum] = &quot;e296318e16b059ddb97f7a8a1d6a5c1d7af4544049a01e261731d2d5cc277bbb&quot;
+ RDEPENDS_${PN}_class-target = &quot;\
+     ${PYTHON_PN}-stringold \
+&#43;    ${PYTHON_PN}-typing \
+ &quot;
  
--inherit pypi
-&#43;inherit pypi setuptools3
- 
- BBCLASSEXTEND = &quot;native nativesdk&quot;
+ SRC_URI &#43;= &quot; \
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -194,4 +168,4 @@ index 678dcef3f..565b31d97 100644
   </body>
 </html>
 
---------------C60CBBE46ECDAD84D872FE85--
+--------------7F2BF146E7D7C6A58CFA1755--
