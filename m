@@ -1,17 +1,17 @@
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.69])
- by mx.groups.io with SMTP id smtpd.web10.121.1591377850754877037
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.84])
+ by mx.groups.io with SMTP id smtpd.web10.129.1591377863495767103
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Jun 2020 10:24:11 -0700
+ Fri, 05 Jun 2020 10:24:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=PHcBrskm;
- spf=pass (domain: windriver.com, ip: 40.107.92.69, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=WMltT4VL;
+ spf=pass (domain: windriver.com, ip: 40.107.92.84, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cJpHmJ4J29c29D2yxw+DhnTKElpkIiyo6Gv9yFAZNijUr3Itxz+vu4DIK794LBlLNNvRaKjoyosHOcb7rJxt1vuUBCIT61vBbTOe0D29hd3jcAJnUFPmXRueYl6LE35rCsBWPK8FBpbNKQSWK0AqwtjmfH7vy+fDwWhzuSCAnx5JB7J516K8sjXux+0Ty9NlYW03gg3u1kwYKvw6Aa1h+MeF+dp4itOWPlilpwBkx1Kqeguu/fMEmwadUVJMWIO0ovtZVAmhIsKMRD1y7cl9K5PThZxoadwi4etKH5d/zzg6FqivboNFXT8tcVGZAtlkp7Yp+v4yGJbALuvbM+ivpQ==
+ b=D/GdbGqdvbSR5ndgkbUkgDBqN7m1L+qgPampOLNLXjcXuuWWBUUGz5TJ7IGjS6JBMI9H1snHfyqYZ2SahbmbkpfA+PcwcwNNCwHUY1rk2pbnqgXsO18hEAU4AJQmcs2PAT1+RQgNGs+BGzEyh4SfoDmTua/wjgVU5M1i7u3wcSUrVQpLDo4K/nc5AhdZl3Bm04+UXwVenMzvPM7+hDRpxcrNW9n1pESwAOBGzCbR+0bUIEZ0gfw7pir/O/YTRN5lcuRuJ+IPOhS8vRZ1IR/MDfLuml2iUYT3FYEbLimc2Kbn/Apj1gyqLr7jimM2OlfdIyjyoEyjDd35emGudCOrcg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A9iemv/2UiYwSm59G3Ns9u+FvgJ6UrKcVSF/sz+IKFE=;
- b=b1rmiBd1rIRp/dseIP4Ln0uMJrkhbh5k9oHv+uwyYrhsFXEENpC1w+Mivy37poU5Fl/rp/O1zfbA05TJEwDFxbRtbYUvt1wg4/TyFiLSRPRBzFTlnkH44GmB/FIaf4aohnyanZ9PWPM3K6wo30RIxf5t/uDqR3lXAFKgboME2SkihT56PlRRhbsria+AJ1tXLSm2p50DeAcxOikPgkUHVc1DEb8gk8YGbdxheoRO4pGfnswma+RdnkyZOM1Z0ft/ka1wa7WXvYNXxlmnRf9wq/Us4x+bpLe1UB1/cJmcFQQOGsviCoNtbuU+z9hLcNsXkF45wORdFzxcZxgnxy10xg==
+ bh=/Ghos3+MoTjNaWklS1VUk9XNqgfA5Lcmp+/MkBA38OI=;
+ b=fo9Tb8J/NR3hGOwQRTBQm1BtpzEN2rmCUR7ezhrKojbfQTTfc6YEWCrVn8jmSuxeNj/ObewgjcqrjyqS7+7XTT+HS/iXmR1vSmaMGFUP6JqguB0TJ5MybpaNxiqWXwAEEKAdzPsifQfhJ+4Apj0YMsuIVR1xPh9GNoaCCKX2Bd46ni2Ll3L47Wh5b9N39TQlGekFPA+HIV5qHAqrb0i7RyYs6AX/hd7RUhS126Of8Zjhgmk8+rEj8Jab/yk2ZSif/CIDHPxoOaJZek9JEkR608aMjjSXG1BlJSP6K5e8RrRU0VmcjbQ7+/mEIRmT8eachR94HKZ7h7NG9ReLDQLERA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A9iemv/2UiYwSm59G3Ns9u+FvgJ6UrKcVSF/sz+IKFE=;
- b=PHcBrskmcojl1xuMtqOqy6HzSd4n7Nl9kcIYvXSW1H7PL0p3g5q/FIFD2DtZRlUCaUUJMIpB9ZjYl7Y2a8pwsEkqd4hT/ByBRYLf1jvTtsmEjtxpUm7HOtXv/2ubBYmTQQ7WrOtiMc52W1rDHcbFdRVfK92lBzbfq6YxzaPp93E=
+ bh=/Ghos3+MoTjNaWklS1VUk9XNqgfA5Lcmp+/MkBA38OI=;
+ b=WMltT4VLVCjx8T/OOc9vYJjfxB1Ww/WwQ/O8xTYMZvxiQ95jTeLsNvcuaIihJt8IcUDUzsOlywKJBLx2M2mRlObLXABuBvBRMmSew1WEjLaZ/afatk7ii4G1dYQ0iNAWGp5QYYPmrSSF+XcjLtuA7R2LNQzhWVwev6wJtokyc7k=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,124 +28,98 @@ Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
  by BN6PR11MB1908.namprd11.prod.outlook.com (2603:10b6:404:103::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18; Fri, 5 Jun
- 2020 17:24:09 +0000
+ 2020 17:24:22 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3066.019; Fri, 5 Jun 2020
- 17:24:09 +0000
-Subject: Re: [oe] [meta-python][PATCH] python3-isort: Consolidate in a single file
-To: Leon Anavi <leon.anavi@konsulko.com>,
+ 17:24:22 +0000
+Subject: Re: [oe] [meta-python][PATCH] python3-pycodestyle: upgrade 2.5.0 -> 2.6.0
+To: Wang Mingyu <wangmy@cn.fujitsu.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200603111629.12516-1-leon.anavi@konsulko.com>
+References: <1591188793-15698-1-git-send-email-wangmy@cn.fujitsu.com>
+ <1591188793-15698-4-git-send-email-wangmy@cn.fujitsu.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <5792cca8-06a5-a304-2fd6-4b0acb0f83e2@windriver.com>
-Date: Fri, 5 Jun 2020 13:24:07 -0400
+Message-ID: <9bd01372-4237-7929-3d28-d02822891b2b@windriver.com>
+Date: Fri, 5 Jun 2020 13:24:20 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200603111629.12516-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTXPR0101CA0036.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00::49) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <1591188793-15698-4-git-send-email-wangmy@cn.fujitsu.com>
+X-ClientProxiedBy: YTXPR0101CA0029.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00::42) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YTXPR0101CA0036.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::49) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18 via Frontend Transport; Fri, 5 Jun 2020 17:24:08 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YTXPR0101CA0029.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::42) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18 via Frontend Transport; Fri, 5 Jun 2020 17:24:21 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 6cfe89ab-5c49-4b81-11cc-08d8097541c3
+X-MS-Office365-Filtering-Correlation-Id: e1828519-4314-40d9-8a77-08d80975497e
 X-MS-TrafficTypeDiagnostic: BN6PR11MB1908:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB1908C29757AE8E7E741CE1599F860@BN6PR11MB1908.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:341;
+	<BN6PR11MB19084FAE5FB907C04D8AF4649F860@BN6PR11MB1908.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:173;
 X-Forefront-PRVS: 0425A67DEF
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	hrLLlHv+BD4u8ATLYQlyVEcHwc4WiBGCMKUu5Ta/zl5JC9fj5QgP8+HEYueWoh4C2WmHS4aFTDQS8Llu+kVWv1kV2RoSU/nPbrHM/QmEva7cchrWgjoemIy3GvydxeIucARA7YexBbbeUSXqK88dH3kll3BwvXuq45sPwHYNUGO26CgTy0Q0nEjgJY5tUuZmzyxOFz+hfJHLaMWq4uJD/abNju+lh4MDBqTN1MY8Vj/hfsQuACPalU3VI/BnTumK5XjhF1AcHECII/9/qLul/D817vLkPS5R066i7Qc0jcZWjuay0XDyY9wBIrz+7SMz4U0XlVYJiW0k6VAJDptyvZ3wsPBQ5rZYuu69M5OVEK33Q0dYNN/sqsOz4xgCwYnBWGL6+GFxHNfJ8zkEl6V2M5gUxbJSocou2KsFlaEzaLlpGXweTSAflqmyZ544BeVDmw2uAPT0Q4AQ6n8VjOZLKA==
+	2Az+RI2tQgFV5eOi6LuYXyJVjaUyyUyWTbD8dO0YsBRMXf0zrAn1dm8qhtW38NRQHZC7ZPU1slC4css/8wTomYpVzrfaSdrR8uIZ3q0/76MMSMfMT5oF7Zf6nNDLJcsfWFedCUbcekmI83aqtz1lzoMvjRGKhjRMXDsUDWL6SBX68fycb+GoPfeAXoAt31AzuG9ufmV6JT8fMinJfsASx31w0rR1T0f1/OoVV1UrPxZzfl4BuxMyf4jlN1VqENSMhJ7hv41fzIRtRoM71tfr8iaiOfMi3tOn6S2WfHYwDniw6AsuXe6eV8H1NAa+2l4byyNkZbsoRfPAWejiLdHGSkszhXqbQ/ndaBVBAMcyp1KomQLeWwU4m7osidIkhkJeFWfQvbIwdtIcOjhfSSZn/LUWzOT6tGbg/ynjKph6s0UafROSiygpkkHuubrWWL+n0k2FvV97bWiJVm8nMEkaIA==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(376002)(346002)(136003)(39850400004)(396003)(366004)(44832011)(8676002)(31686004)(53546011)(2616005)(66476007)(66556008)(186003)(16526019)(956004)(66946007)(2906002)(16576012)(26005)(36756003)(316002)(33964004)(31696002)(966005)(478600001)(8936002)(5660300002)(52116002)(166002)(6486002)(83380400001)(86362001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	OLVtlFhMF1/xGiovGEYjjBwgFOIFdRGVyeJ6wf5CAVXpYX7iNvVZNBVaL034yX7wFz+EEpuvk61YVavSrCdiPi3ZIBVicsfm5c9bZuxjwoC+7A10kyEvcb/ckeSTn3ZZlNjqOYSrKWid2cuHqSc/R8nRA2z8idwCfrlDYAEImermyKj3KpJBIhlc/dNtYl837rMyRytL6wbV9xkjCGW1HTjv9WVsgV0N9ofz9/IINt8BYLR679TMSPlDMjH1Ak1AI2y1Edl28/uOtH02XD+47OON9BTi6choR02NEvwjrbuVSgEwSS/qker+tiCnMvc4Y8oYWrIAw2Ic7arI9DR5d/gElKDJMFrEqN78Y93R6jV4O2q2ol9Sp7T5sXqvpeFu4dxNpCTPnm2etnfo5F9AZLOWHzO/bbzsj4nv0zLfHk3dR7IPgBp/CN4n3UH/OEdPS7ZzQQ18Zh6PSevlXe0SdzDNNDd+DcoEeSIKyJyFfgI=
+	Gm5qDVSNS8u9jo8odO3OGGZBATE4t2WdKDV3qwtgK7hxKGbF2dXKFo7CcKGv1+e/ufJKTRM2FMRPEg598SxBMIhp0GAKo7BJQvVIDrY/7lgLmZvVQEy5z3YbmcDzdYzKnK1N9GpGsXCqmNQyx/fLHTiTQmJIiDf7ZBZVZVzdd6Fmre6y7M5kcFum8krjzC1jkGNc3fH8fXSaprG7K5okXhaW2nzZVK5aq2sk2wd5g+G9Lac1RulLkYgUX5uKH7uLYxTcnaULMPuas1S/dA70G+3gQGTuAsgzQYHz8QvXymMq9w31jzW0KU1EPdiVMA4PwYm8Iq0mXI8CSp5NawjLNETpIpmuZ5E/X/PXHXUIu6y3JQZUcSqOOOMH43HVoDJBEd9nhLvpboRsPS/SIcWlWsIfC4qFJXHcgspdt+uHnoN0tztg9c1lSSH4vgYEVo1paZua/NyiRZS7t54910qTD8u5JE9yV3py5SUMMqBBDHs=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6cfe89ab-5c49-4b81-11cc-08d8097541c3
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2020 17:24:09.4450
+X-MS-Exchange-CrossTenant-Network-Message-Id: e1828519-4314-40d9-8a77-08d80975497e
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2020 17:24:22.3817
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LbMmIB3yEDWQt7RCaz6Y31x0Zsrp03Yh+kMhXmcj+3LBvPBUYxHTmgtCplT/ByL4MzrXPK9aiggVFfxupZWMrz3ioZ4NBYQKbrSwNKE7MzM=
+X-MS-Exchange-CrossTenant-UserPrincipalName: /LNPxlMPj1QsdT/Rwt0g3in68lljn2IUIiz2ucd23vf7F3uHuOpBcQ65ttIdV92R02tJDFD9zmoDcoI5IIJy/Uz8G6DdC0dLSoCrlRt1vxk=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1908
 Content-Type: multipart/alternative;
- boundary="------------1528985411B3BDE153F4DDBA"
+ boundary="------------918ED82FD4AD27291D6F48E6"
 Content-Language: en-US
 
---------------1528985411B3BDE153F4DDBA
+--------------918ED82FD4AD27291D6F48E6
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 6/3/20 7:16 AM, Leon Anavi wrote:
-> Consolidate inc and bb files into a single bb file.
+On 6/3/20 8:53 AM, Wang Mingyu wrote:
+> -License-Update: Copyright year updated to 2020.
 >
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-devtools/python/python-isort.inc  | 17 -----------------
->   .../python/python3-isort_4.3.21.bb            | 19 +++++++++++++++++--
->   2 files changed, 17 insertions(+), 19 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python-isort.inc
+>   ...n3-pycodestyle_2.5.0.bb => python3-pycodestyle_2.6.0.bb} | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-pycodestyle_2.5.0.bb => python3-pycodestyle_2.6.0.bb} (50%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python-isort.inc b/meta-python/recipes-devtools/python/python-isort.inc
-> deleted file mode 100644
-> index 324d4cf10..000000000
-> --- a/meta-python/recipes-devtools/python/python-isort.inc
-> +++ /dev/null
-> @@ -1,17 +0,0 @@
-> -SUMMARY = "A Python utility / library to sort Python imports."
-> -HOMEPAGE = "https://pypi.python.org/pypi/isort"
-> -LICENSE = "MIT"
-> -SECTION = "devel/python"
-> -LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
-> -
-> -SRC_URI[md5sum] = "05d66f2eb7ce2c2d702e86bac24bf9e4"
-> -SRC_URI[sha256sum] = "54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1"
-> -
-> -inherit pypi
-> -
-> -RDEPENDS_${PN} += "\
-> -    ${PYTHON_PN}-datetime \
-> -    ${PYTHON_PN}-shell \
-> -"
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
-> index 755b3e2f2..e0b21ab55 100644
-> --- a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
-> +++ b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
-> @@ -1,2 +1,17 @@
-> -inherit setuptools3
-> -require python-isort.inc
-> +SUMMARY = "A Python utility / library to sort Python imports."
-> +HOMEPAGE = "https://pypi.python.org/pypi/isort"
-> +LICENSE = "MIT"
-> +SECTION = "devel/python"
-> +LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
-> +
-> +SRC_URI[md5sum] = "05d66f2eb7ce2c2d702e86bac24bf9e4"
-> +SRC_URI[sha256sum] = "54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1"
-> +
-> +inherit pypi setuptools3
-> +
-> +RDEPENDS_${PN} += "\
-> +    ${PYTHON_PN}-datetime \
-> +    ${PYTHON_PN}-shell \
-> +"
-> +
-> +BBCLASSEXTEND = "native nativesdk"
+> diff --git a/meta-python/recipes-devtools/python/python3-pycodestyle_2.5.0.bb b/meta-python/recipes-devtools/python/python3-pycodestyle_2.6.0.bb
+> similarity index 50%
+> rename from meta-python/recipes-devtools/python/python3-pycodestyle_2.5.0.bb
+> rename to meta-python/recipes-devtools/python/python3-pycodestyle_2.6.0.bb
+> index 7f00ab629..4ad1f5493 100644
+> --- a/meta-python/recipes-devtools/python/python3-pycodestyle_2.5.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pycodestyle_2.6.0.bb
+> @@ -2,10 +2,10 @@ SUMMARY = "Python style guide checker (formly called pep8)"
+>   HOMEPAGE = "https://pypi.org/project/pycodestyle"
+>   LICENSE = "MIT"
+>   SECTION = "devel/python"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=01831ddbaf398471da3cc87f5037e822"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=a8546d0e77f416fb05a26acd89c8b3bd"
+>   
+> -SRC_URI[md5sum] = "40e7a76f364a18f531aaba11a4476e21"
+> -SRC_URI[sha256sum] = "e40a936c9a450ad81df37f549d676d127b1b66000a6c500caa2b085bc0ca976c"
+> +SRC_URI[md5sum] = "e2fcdace728267d5fa3aa98e08ee40db"
+> +SRC_URI[sha256sum] = "c58a7d2815e0e8d7972bf1803331fb0152f867bd89adf8a01dfd55085434192e"
+>   
+>   inherit pypi setuptools3
+>   
 >
 > 
 
---------------1528985411B3BDE153F4DDBA
+--------------918ED82FD4AD27291D6F48E6
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -155,69 +129,42 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 6/3/20 7:16 AM, Leon Anavi wrote:<br>
+    <div class="moz-cite-prefix">On 6/3/20 8:53 AM, Wang Mingyu wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200603111629.12516-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Consolidate inc and bb files into a single bb file.
+    <blockquote type="cite" cite="mid:1591188793-15698-4-git-send-email-wangmy@cn.fujitsu.com">
+      <pre class="moz-quote-pre" wrap="">-License-Update: Copyright year updated to 2020.
 
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+Signed-off-by: Wang Mingyu <a class="moz-txt-link-rfc2396E" href="mailto:wangmy@cn.fujitsu.com">&lt;wangmy@cn.fujitsu.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200603111629.12516-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:1591188793-15698-4-git-send-email-wangmy@cn.fujitsu.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python-isort.inc  | 17 -----------------
- .../python/python3-isort_4.3.21.bb            | 19 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;--
- 2 files changed, 17 insertions(&#43;), 19 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-isort.inc
+ ...n3-pycodestyle_2.5.0.bb =&gt; python3-pycodestyle_2.6.0.bb} | 6 &#43;&#43;&#43;---
+ 1 file changed, 3 insertions(&#43;), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pycodestyle_2.5.0.bb =&gt; python3-pycodestyle_2.6.0.bb} (50%)
 
-diff --git a/meta-python/recipes-devtools/python/python-isort.inc b/meta-python/recipes-devtools/python/python-isort.inc
-deleted file mode 100644
-index 324d4cf10..000000000
---- a/meta-python/recipes-devtools/python/python-isort.inc
-&#43;&#43;&#43; /dev/null
-@@ -1,17 &#43;0,0 @@
--SUMMARY = &quot;A Python utility / library to sort Python imports.&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pypi.python.org/pypi/isort">&quot;https://pypi.python.org/pypi/isort&quot;</a>
--LICENSE = &quot;MIT&quot;
--SECTION = &quot;devel/python&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489">&quot;file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489&quot;</a>
--
--SRC_URI[md5sum] = &quot;05d66f2eb7ce2c2d702e86bac24bf9e4&quot;
--SRC_URI[sha256sum] = &quot;54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1&quot;
--
--inherit pypi
--
--RDEPENDS_${PN} &#43;= &quot;\
--    ${PYTHON_PN}-datetime \
--    ${PYTHON_PN}-shell \
--&quot;
--
--BBCLASSEXTEND = &quot;native nativesdk<a class="moz-txt-link-rfc2396E" href="mailto:diff--gita/meta-python/recipes-devtools/python/python3-isort_4.3.21.bbb/meta-python/recipes-devtools/python/python3-isort_4.3.21.bbindex755b3e2f2..e0b21ab55100644---a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb&#43;&#43;&#43;b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb@@-1,2&#43;1,17@@-inheritsetuptools3-requirepython-isort.inc&#43;SUMMARY=">&quot;
-diff --git a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
-index 755b3e2f2..e0b21ab55 100644
---- a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
-@@ -1,2 &#43;1,17 @@
--inherit setuptools3
--require python-isort.inc
-&#43;SUMMARY = &quot;</a>A Python utility / library to sort Python imports.&quot;
-&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pypi.python.org/pypi/isort">&quot;https://pypi.python.org/pypi/isort&quot;</a>
-&#43;LICENSE = &quot;MIT&quot;
-&#43;SECTION = &quot;devel/python&quot;
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489">&quot;file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489&quot;</a>
-&#43;
-&#43;SRC_URI[md5sum] = &quot;05d66f2eb7ce2c2d702e86bac24bf9e4&quot;
-&#43;SRC_URI[sha256sum] = &quot;54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1&quot;
-&#43;
-&#43;inherit pypi setuptools3
-&#43;
-&#43;RDEPENDS_${PN} &#43;= &quot;\
-&#43;    ${PYTHON_PN}-datetime \
-&#43;    ${PYTHON_PN}-shell \
-&#43;&quot;
-&#43;
-&#43;BBCLASSEXTEND = &quot;native nativesdk&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-pycodestyle_2.5.0.bb b/meta-python/recipes-devtools/python/python3-pycodestyle_2.6.0.bb
+similarity index 50%
+rename from meta-python/recipes-devtools/python/python3-pycodestyle_2.5.0.bb
+rename to meta-python/recipes-devtools/python/python3-pycodestyle_2.6.0.bb
+index 7f00ab629..4ad1f5493 100644
+--- a/meta-python/recipes-devtools/python/python3-pycodestyle_2.5.0.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-pycodestyle_2.6.0.bb
+@@ -2,10 &#43;2,10 @@ SUMMARY = &quot;Python style guide checker (formly called pep8)&quot;
+ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pypi.org/project/pycodestyle">&quot;https://pypi.org/project/pycodestyle&quot;</a>
+ LICENSE = &quot;MIT&quot;
+ SECTION = &quot;devel/python&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=01831ddbaf398471da3cc87f5037e822">&quot;file://LICENSE;md5=01831ddbaf398471da3cc87f5037e822&quot;</a>
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=a8546d0e77f416fb05a26acd89c8b3bd">&quot;file://LICENSE;md5=a8546d0e77f416fb05a26acd89c8b3bd&quot;</a>
+ 
+-SRC_URI[md5sum] = &quot;40e7a76f364a18f531aaba11a4476e21&quot;
+-SRC_URI[sha256sum] = &quot;e40a936c9a450ad81df37f549d676d127b1b66000a6c500caa2b085bc0ca976c&quot;
+&#43;SRC_URI[md5sum] = &quot;e2fcdace728267d5fa3aa98e08ee40db&quot;
+&#43;SRC_URI[sha256sum] = &quot;c58a7d2815e0e8d7972bf1803331fb0152f867bd89adf8a01dfd55085434192e&quot;
+ 
+ inherit pypi setuptools3
+ 
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -227,4 +174,4 @@ index 755b3e2f2..e0b21ab55 100644
   </body>
 </html>
 
---------------1528985411B3BDE153F4DDBA--
+--------------918ED82FD4AD27291D6F48E6--
