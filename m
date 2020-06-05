@@ -1,17 +1,17 @@
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.44])
- by mx.groups.io with SMTP id smtpd.web12.144.1591377842575150605
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.69])
+ by mx.groups.io with SMTP id smtpd.web10.121.1591377850754877037
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Jun 2020 10:24:03 -0700
+ Fri, 05 Jun 2020 10:24:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=kbULQ7HD;
- spf=pass (domain: windriver.com, ip: 40.107.92.44, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=PHcBrskm;
+ spf=pass (domain: windriver.com, ip: 40.107.92.69, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fsAMZjq3mmRUpfkyoEGACLrV9qacad6dmeh4X0KEUnnHmm5BAWaUa01ek4UF3OlllOtbQXwGEXoRA2DRc1eryUolLdmR8A09DIO5Rdt69v1N65bQgE9gEnkbzZnIP+YWlhgtsKRiDYxOauV323GrqcAqkeqAsrc40g+GLfhFXf8bvIZn2E8wAQLdrg2mDp2Gli5452L4hHOY5wEaSU56t0N40PYIg6Rrd580UjmZCgfqnMSKQciutGS5aknSJsjaGGpruAbgEr+nIU9rOKBwMmVSrqXu9GpMhqfLsM3xM5nwvOqta4jQM2LwozKCvZKV7zPf7jSBOJadNI4/wxJmYA==
+ b=cJpHmJ4J29c29D2yxw+DhnTKElpkIiyo6Gv9yFAZNijUr3Itxz+vu4DIK794LBlLNNvRaKjoyosHOcb7rJxt1vuUBCIT61vBbTOe0D29hd3jcAJnUFPmXRueYl6LE35rCsBWPK8FBpbNKQSWK0AqwtjmfH7vy+fDwWhzuSCAnx5JB7J516K8sjXux+0Ty9NlYW03gg3u1kwYKvw6Aa1h+MeF+dp4itOWPlilpwBkx1Kqeguu/fMEmwadUVJMWIO0ovtZVAmhIsKMRD1y7cl9K5PThZxoadwi4etKH5d/zzg6FqivboNFXT8tcVGZAtlkp7Yp+v4yGJbALuvbM+ivpQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ePJ6olAl5/zvdJXkbAZbd9/a9YiuLWAyG7i/Q/xN/aM=;
- b=aapvUowXHQMR5oXWDHaDRvuTAeJQ3lxjzN6p+MFDKxqCgRGBx+/6U87TD15g3WJMKIXQY3b977M1Wm7IMyNJyVNqCiMvU5ahPYinNBFPqwmJccylX0/9+p0zFhROEaXz91tbQVHRcV+VsoRL2KO6ZTVn2M6jVL3ls7D3LiUx0Q9S4QRs7xLKv9+HLtwtDVJkndJVuHTQaap2hmtj7bzcMloTj+Ux4P56AuZwzgYtQayVeoWEufH/iDTyGRqb0+WAUrsGTBG0v26HexRIeKIlQGriufhy1YWzPe6Iijai2zuXG5kflKmnoD+8C+42dxM33s2znuQ+WVWJ5Sit9q/Mag==
+ bh=A9iemv/2UiYwSm59G3Ns9u+FvgJ6UrKcVSF/sz+IKFE=;
+ b=b1rmiBd1rIRp/dseIP4Ln0uMJrkhbh5k9oHv+uwyYrhsFXEENpC1w+Mivy37poU5Fl/rp/O1zfbA05TJEwDFxbRtbYUvt1wg4/TyFiLSRPRBzFTlnkH44GmB/FIaf4aohnyanZ9PWPM3K6wo30RIxf5t/uDqR3lXAFKgboME2SkihT56PlRRhbsria+AJ1tXLSm2p50DeAcxOikPgkUHVc1DEb8gk8YGbdxheoRO4pGfnswma+RdnkyZOM1Z0ft/ka1wa7WXvYNXxlmnRf9wq/Us4x+bpLe1UB1/cJmcFQQOGsviCoNtbuU+z9hLcNsXkF45wORdFzxcZxgnxy10xg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ePJ6olAl5/zvdJXkbAZbd9/a9YiuLWAyG7i/Q/xN/aM=;
- b=kbULQ7HDmQ6MaAbQ4kwC84gxKF3Cp8FR0UWLon1YcHd07mjHnbH2q8DXoZk4QChGjdkLQR6ddpo3lCuUFhdArkWU1OSpGcixuuRloUtnp/ZEuQ6dKY3G58HNUDBZ2CiolReOcd+s4Y0v2hVQkwuc+jnc3r5ZlFiEizhglC1LbO8=
+ bh=A9iemv/2UiYwSm59G3Ns9u+FvgJ6UrKcVSF/sz+IKFE=;
+ b=PHcBrskmcojl1xuMtqOqy6HzSd4n7Nl9kcIYvXSW1H7PL0p3g5q/FIFD2DtZRlUCaUUJMIpB9ZjYl7Y2a8pwsEkqd4hT/ByBRYLf1jvTtsmEjtxpUm7HOtXv/2ubBYmTQQ7WrOtiMc52W1rDHcbFdRVfK92lBzbfq6YxzaPp93E=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,117 +28,124 @@ Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
  by BN6PR11MB1908.namprd11.prod.outlook.com (2603:10b6:404:103::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18; Fri, 5 Jun
- 2020 17:23:59 +0000
+ 2020 17:24:09 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3066.019; Fri, 5 Jun 2020
- 17:23:59 +0000
-Subject: Re: [oe] [meta-python][PATCH] python-pyaudio: Consolidate in a single file
+ 17:24:09 +0000
+Subject: Re: [oe] [meta-python][PATCH] python3-isort: Consolidate in a single file
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200603100836.18456-1-leon.anavi@konsulko.com>
+References: <20200603111629.12516-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <0245e945-cde3-848d-7d24-7ceca02d563f@windriver.com>
-Date: Fri, 5 Jun 2020 13:23:57 -0400
+Message-ID: <5792cca8-06a5-a304-2fd6-4b0acb0f83e2@windriver.com>
+Date: Fri, 5 Jun 2020 13:24:07 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200603100836.18456-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTXPR0101CA0030.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00::43) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200603111629.12516-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTXPR0101CA0036.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00::49) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YTXPR0101CA0030.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::43) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18 via Frontend Transport; Fri, 5 Jun 2020 17:23:59 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YTXPR0101CA0036.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::49) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18 via Frontend Transport; Fri, 5 Jun 2020 17:24:08 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a2b9914a-0d09-44da-bd85-08d809753be8
+X-MS-Office365-Filtering-Correlation-Id: 6cfe89ab-5c49-4b81-11cc-08d8097541c3
 X-MS-TrafficTypeDiagnostic: BN6PR11MB1908:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB1908F79D9706A0C9221471F39F860@BN6PR11MB1908.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1388;
+	<BN6PR11MB1908C29757AE8E7E741CE1599F860@BN6PR11MB1908.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:341;
 X-Forefront-PRVS: 0425A67DEF
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	rO79bXDjUg8bGLZACQAoTDta/uO4/ZMqME7POIu9xzTRAoYkCO7BFqQmsZdEbV/o4DyonJDTxL2UnaZd4xJYruh51oNa6aCMaBDe0PrYpCOuHDPOfMV8Fr+hribyeOyUM81oX61w3hG+SFwjTAcoRQXk4h1xnvgK9+qOxv6uR1sQ9qKZyl/GTurOh9ihbMv/cSjZdmr98fsxtNfd1ncCYtmawwZLwySfAHZsvIIVpCL5/8IE6kDksPXfwg3x9ZjzXivxo9SLuh/zZoQ57O3/4ieHth3bs4S4p8Wtk/N67AM8i8QbbeDqHUXhWzeN/n+k3IJejwwiwXH04QT3Zk8X3MYFJRUhODAufy7VKGH6GXWRg9EuqM8W1q60ekPhpBE2MYyoc8IqImpl7oaJ/kyOSKbiHg4ug1QjwuJO83TxenxfOo1bXZqdmudOUikdn0BdzG1oSZf1So74XZEqWW9tAA==
+	hrLLlHv+BD4u8ATLYQlyVEcHwc4WiBGCMKUu5Ta/zl5JC9fj5QgP8+HEYueWoh4C2WmHS4aFTDQS8Llu+kVWv1kV2RoSU/nPbrHM/QmEva7cchrWgjoemIy3GvydxeIucARA7YexBbbeUSXqK88dH3kll3BwvXuq45sPwHYNUGO26CgTy0Q0nEjgJY5tUuZmzyxOFz+hfJHLaMWq4uJD/abNju+lh4MDBqTN1MY8Vj/hfsQuACPalU3VI/BnTumK5XjhF1AcHECII/9/qLul/D817vLkPS5R066i7Qc0jcZWjuay0XDyY9wBIrz+7SMz4U0XlVYJiW0k6VAJDptyvZ3wsPBQ5rZYuu69M5OVEK33Q0dYNN/sqsOz4xgCwYnBWGL6+GFxHNfJ8zkEl6V2M5gUxbJSocou2KsFlaEzaLlpGXweTSAflqmyZ544BeVDmw2uAPT0Q4AQ6n8VjOZLKA==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(376002)(346002)(136003)(39850400004)(396003)(366004)(44832011)(8676002)(31686004)(53546011)(2616005)(66476007)(66556008)(186003)(16526019)(956004)(66946007)(2906002)(16576012)(26005)(36756003)(316002)(33964004)(31696002)(966005)(478600001)(8936002)(5660300002)(52116002)(166002)(6486002)(83380400001)(86362001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	dUJZBOJcMiTHSeSZCSujSrBErICquccM1W3gy6g16jIuZlR6QPGkTCKtKlR5At3v6xpgk+1lpE9MWY64zXpMhdkvtjSS7MDDqHkqINEQ4xCD42ZMYDXUNNUM1P02Xrg+wv3hwsoV9z94sru3BUVXW/5XFM9IjGNDyGL040xs72SNZFNDr6vJ+50ziOC2j5ABevfWWaiPV+jGCzgU9Joi/14SypH+rGIl2b79Sgxx6op/MCVNLnRz3O4UezsfqhInQLaCOGj6aAbdFffrj3hGHwtvTok/Dl8acKkB6f5OcedejGz9OwMVJABqG2klTiuonl3HU7qU1fywW7VY6mdMOqhx126j6AmHuW0C+KEK8GHB2FeyrwcwD1hLGdP8IRYrxtfGmV76pt/DWiiJ68ZwPQmvbN4MhlFeESfK/BZ3JNXwuiD6c4Q0/Pu0t+p6oUIhLzKNeSZzEk322dx9gdvVQmuLgDOzq977oHRWoIzc/dY=
+	OLVtlFhMF1/xGiovGEYjjBwgFOIFdRGVyeJ6wf5CAVXpYX7iNvVZNBVaL034yX7wFz+EEpuvk61YVavSrCdiPi3ZIBVicsfm5c9bZuxjwoC+7A10kyEvcb/ckeSTn3ZZlNjqOYSrKWid2cuHqSc/R8nRA2z8idwCfrlDYAEImermyKj3KpJBIhlc/dNtYl837rMyRytL6wbV9xkjCGW1HTjv9WVsgV0N9ofz9/IINt8BYLR679TMSPlDMjH1Ak1AI2y1Edl28/uOtH02XD+47OON9BTi6choR02NEvwjrbuVSgEwSS/qker+tiCnMvc4Y8oYWrIAw2Ic7arI9DR5d/gElKDJMFrEqN78Y93R6jV4O2q2ol9Sp7T5sXqvpeFu4dxNpCTPnm2etnfo5F9AZLOWHzO/bbzsj4nv0zLfHk3dR7IPgBp/CN4n3UH/OEdPS7ZzQQ18Zh6PSevlXe0SdzDNNDd+DcoEeSIKyJyFfgI=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a2b9914a-0d09-44da-bd85-08d809753be8
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2020 17:23:59.6356
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6cfe89ab-5c49-4b81-11cc-08d8097541c3
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2020 17:24:09.4450
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HUCBVpQohRpzUJwv56xcmM64yakOeCts0+2xoMTVNxPFecQWvBwmjDcuGu9EqXnKhveNKPZzq4mOeMaY/ABYMLAmqa371mMMgE0aJcraDFM=
+X-MS-Exchange-CrossTenant-UserPrincipalName: LbMmIB3yEDWQt7RCaz6Y31x0Zsrp03Yh+kMhXmcj+3LBvPBUYxHTmgtCplT/ByL4MzrXPK9aiggVFfxupZWMrz3ioZ4NBYQKbrSwNKE7MzM=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1908
 Content-Type: multipart/alternative;
- boundary="------------3E23309249C01BC297BD74F0"
+ boundary="------------1528985411B3BDE153F4DDBA"
 Content-Language: en-US
 
---------------3E23309249C01BC297BD74F0
+--------------1528985411B3BDE153F4DDBA
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 6/3/20 6:08 AM, Leon Anavi wrote:
+On 6/3/20 7:16 AM, Leon Anavi wrote:
 > Consolidate inc and bb files into a single bb file.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-devtools/python/python-pyaudio.inc    | 13 -------------
->   .../python/python3-pyaudio_0.2.11.bb              | 15 ++++++++++++++-
->   2 files changed, 14 insertions(+), 14 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python-pyaudio.inc
+>   .../recipes-devtools/python/python-isort.inc  | 17 -----------------
+>   .../python/python3-isort_4.3.21.bb            | 19 +++++++++++++++++--
+>   2 files changed, 17 insertions(+), 19 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python-isort.inc
 >
-> diff --git a/meta-python/recipes-devtools/python/python-pyaudio.inc b/meta-python/recipes-devtools/python/python-pyaudio.inc
+> diff --git a/meta-python/recipes-devtools/python/python-isort.inc b/meta-python/recipes-devtools/python/python-isort.inc
 > deleted file mode 100644
-> index 0d3ddb1a5..000000000
-> --- a/meta-python/recipes-devtools/python/python-pyaudio.inc
+> index 324d4cf10..000000000
+> --- a/meta-python/recipes-devtools/python/python-isort.inc
 > +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -SUMMARY = "PyAudio provides Python bindings for PortAudio, the cross-platform audio I/O library"
-> -SECTION = "devel/python"
+> @@ -1,17 +0,0 @@
+> -SUMMARY = "A Python utility / library to sort Python imports."
+> -HOMEPAGE = "https://pypi.python.org/pypi/isort"
 > -LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://README;md5=288793c2b9b05bd67abbd2a8f5d144f7"
+> -SECTION = "devel/python"
+> -LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
 > -
-> -PYPI_PACKAGE = "PyAudio"
+> -SRC_URI[md5sum] = "05d66f2eb7ce2c2d702e86bac24bf9e4"
+> -SRC_URI[sha256sum] = "54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1"
 > -
-> -SRC_URI[md5sum] = "7e4c88139284033f67b4336c74eda3b8"
-> -SRC_URI[sha256sum] = "93bfde30e0b64e63a46f2fd77e85c41fd51182a4a3413d9edfaf9ffaa26efb74"
+> -inherit pypi
 > -
-> -DEPENDS += "portaudio-v19"
+> -RDEPENDS_${PN} += "\
+> -    ${PYTHON_PN}-datetime \
+> -    ${PYTHON_PN}-shell \
+> -"
 > -
-> -RDEPENDS_${PN} += "portaudio-v19"
-> diff --git a/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb b/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb
-> index abb01bf69..b2c890659 100644
-> --- a/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb
-> @@ -1,2 +1,15 @@
-> -require python-pyaudio.inc
-> +SUMMARY = "PyAudio provides Python bindings for PortAudio, the cross-platform audio I/O library"
-> +SECTION = "devel/python"
+> -BBCLASSEXTEND = "native nativesdk"
+> diff --git a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
+> index 755b3e2f2..e0b21ab55 100644
+> --- a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
+> +++ b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
+> @@ -1,2 +1,17 @@
+> -inherit setuptools3
+> -require python-isort.inc
+> +SUMMARY = "A Python utility / library to sort Python imports."
+> +HOMEPAGE = "https://pypi.python.org/pypi/isort"
 > +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://README;md5=288793c2b9b05bd67abbd2a8f5d144f7"
+> +SECTION = "devel/python"
+> +LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
 > +
-> +PYPI_PACKAGE = "PyAudio"
+> +SRC_URI[md5sum] = "05d66f2eb7ce2c2d702e86bac24bf9e4"
+> +SRC_URI[sha256sum] = "54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1"
 > +
-> +SRC_URI[md5sum] = "7e4c88139284033f67b4336c74eda3b8"
-> +SRC_URI[sha256sum] = "93bfde30e0b64e63a46f2fd77e85c41fd51182a4a3413d9edfaf9ffaa26efb74"
+> +inherit pypi setuptools3
 > +
->   inherit pypi setuptools3
+> +RDEPENDS_${PN} += "\
+> +    ${PYTHON_PN}-datetime \
+> +    ${PYTHON_PN}-shell \
+> +"
 > +
-> +DEPENDS += "portaudio-v19"
-> +
-> +RDEPENDS_${PN} += "portaudio-v19"
+> +BBCLASSEXTEND = "native nativesdk"
 >
 > 
 
---------------3E23309249C01BC297BD74F0
+--------------1528985411B3BDE153F4DDBA
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -148,62 +155,69 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 6/3/20 6:08 AM, Leon Anavi wrote:<br>
+    <div class="moz-cite-prefix">On 6/3/20 7:16 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200603100836.18456-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200603111629.12516-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
-    <blockquote type="cite" cite="mid:20200603100836.18456-1-leon.anavi@konsulko.com">
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
+    <blockquote type="cite" cite="mid:20200603111629.12516-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python-pyaudio.inc    | 13 -------------
- .../python/python3-pyaudio_0.2.11.bb              | 15 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
- 2 files changed, 14 insertions(&#43;), 14 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pyaudio.inc
+ .../recipes-devtools/python/python-isort.inc  | 17 -----------------
+ .../python/python3-isort_4.3.21.bb            | 19 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;--
+ 2 files changed, 17 insertions(&#43;), 19 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-isort.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-pyaudio.inc b/meta-python/recipes-devtools/python/python-pyaudio.inc
+diff --git a/meta-python/recipes-devtools/python/python-isort.inc b/meta-python/recipes-devtools/python/python-isort.inc
 deleted file mode 100644
-index 0d3ddb1a5..000000000
---- a/meta-python/recipes-devtools/python/python-pyaudio.inc
+index 324d4cf10..000000000
+--- a/meta-python/recipes-devtools/python/python-isort.inc
 &#43;&#43;&#43; /dev/null
-@@ -1,13 &#43;0,0 @@
--SUMMARY = &quot;PyAudio provides Python bindings for PortAudio, the cross-platform audio I/O library&quot;
--SECTION = &quot;devel/python&quot;
+@@ -1,17 &#43;0,0 @@
+-SUMMARY = &quot;A Python utility / library to sort Python imports.&quot;
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pypi.python.org/pypi/isort">&quot;https://pypi.python.org/pypi/isort&quot;</a>
 -LICENSE = &quot;MIT&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://README;md5=288793c2b9b05bd67abbd2a8f5d144f7">&quot;file://README;md5=288793c2b9b05bd67abbd2a8f5d144f7&quot;</a>
+-SECTION = &quot;devel/python&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489">&quot;file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489&quot;</a>
 -
--PYPI_PACKAGE = &quot;PyAudio&quot;
+-SRC_URI[md5sum] = &quot;05d66f2eb7ce2c2d702e86bac24bf9e4&quot;
+-SRC_URI[sha256sum] = &quot;54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1&quot;
 -
--SRC_URI[md5sum] = &quot;7e4c88139284033f67b4336c74eda3b8&quot;
--SRC_URI[sha256sum] = &quot;93bfde30e0b64e63a46f2fd77e85c41fd51182a4a3413d9edfaf9ffaa26efb74&quot;
+-inherit pypi
 -
--DEPENDS &#43;= &quot;portaudio-v19&quot;
+-RDEPENDS_${PN} &#43;= &quot;\
+-    ${PYTHON_PN}-datetime \
+-    ${PYTHON_PN}-shell \
+-&quot;
 -
--RDEPENDS_${PN} &#43;= &quot;portaudio-v19<a class="moz-txt-link-rfc2396E" href="mailto:diff--gita/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bbb/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bbindexabb01bf69..b2c890659100644---a/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb&#43;&#43;&#43;b/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb@@-1,2&#43;1,15@@-requirepython-pyaudio.inc&#43;SUMMARY=">&quot;
-diff --git a/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb b/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb
-index abb01bf69..b2c890659 100644
---- a/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb
-@@ -1,2 &#43;1,15 @@
--require python-pyaudio.inc
-&#43;SUMMARY = &quot;</a>PyAudio provides Python bindings for PortAudio, the cross-platform audio I/O library&quot;
-&#43;SECTION = &quot;devel/python&quot;
+-BBCLASSEXTEND = &quot;native nativesdk<a class="moz-txt-link-rfc2396E" href="mailto:diff--gita/meta-python/recipes-devtools/python/python3-isort_4.3.21.bbb/meta-python/recipes-devtools/python/python3-isort_4.3.21.bbindex755b3e2f2..e0b21ab55100644---a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb&#43;&#43;&#43;b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb@@-1,2&#43;1,17@@-inheritsetuptools3-requirepython-isort.inc&#43;SUMMARY=">&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
+index 755b3e2f2..e0b21ab55 100644
+--- a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
+@@ -1,2 &#43;1,17 @@
+-inherit setuptools3
+-require python-isort.inc
+&#43;SUMMARY = &quot;</a>A Python utility / library to sort Python imports.&quot;
+&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pypi.python.org/pypi/isort">&quot;https://pypi.python.org/pypi/isort&quot;</a>
 &#43;LICENSE = &quot;MIT&quot;
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://README;md5=288793c2b9b05bd67abbd2a8f5d144f7">&quot;file://README;md5=288793c2b9b05bd67abbd2a8f5d144f7&quot;</a>
+&#43;SECTION = &quot;devel/python&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489">&quot;file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489&quot;</a>
 &#43;
-&#43;PYPI_PACKAGE = &quot;PyAudio&quot;
+&#43;SRC_URI[md5sum] = &quot;05d66f2eb7ce2c2d702e86bac24bf9e4&quot;
+&#43;SRC_URI[sha256sum] = &quot;54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1&quot;
 &#43;
-&#43;SRC_URI[md5sum] = &quot;7e4c88139284033f67b4336c74eda3b8&quot;
-&#43;SRC_URI[sha256sum] = &quot;93bfde30e0b64e63a46f2fd77e85c41fd51182a4a3413d9edfaf9ffaa26efb74&quot;
+&#43;inherit pypi setuptools3
 &#43;
- inherit pypi setuptools3
+&#43;RDEPENDS_${PN} &#43;= &quot;\
+&#43;    ${PYTHON_PN}-datetime \
+&#43;    ${PYTHON_PN}-shell \
+&#43;&quot;
 &#43;
-&#43;DEPENDS &#43;= &quot;portaudio-v19&quot;
-&#43;
-&#43;RDEPENDS_${PN} &#43;= &quot;portaudio-v19&quot;
+&#43;BBCLASSEXTEND = &quot;native nativesdk&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -213,4 +227,4 @@ index abb01bf69..b2c890659 100644
   </body>
 </html>
 
---------------3E23309249C01BC297BD74F0--
+--------------1528985411B3BDE153F4DDBA--
