@@ -1,17 +1,17 @@
-Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.53])
- by mx.groups.io with SMTP id smtpd.web12.1029.1591380938374578831
+Received: from NAM02-CY1-obe.outbound.protection.outlook.com (NAM02-CY1-obe.outbound.protection.outlook.com [40.107.76.70])
+ by mx.groups.io with SMTP id smtpd.web11.212.1591385290050076107
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Jun 2020 11:15:38 -0700
+ Fri, 05 Jun 2020 12:28:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=mJuUqFFJ;
- spf=pass (domain: windriver.com, ip: 40.107.75.53, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=TfFd/noU;
+ spf=pass (domain: windriver.com, ip: 40.107.76.70, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=A5UXY6JUgwhx5hcoAv1op3pll6imS6GGwSTO09/xd/H16grqkBTQ0huxL8OKor199gFIJX/PujutuY+J0Q8+03Teunx0pIGrunMGgm6HPLGeCMkUEBtC96VT0NFZQt2mkijYUWA2ZW6ntcvN50tuX7fG2hXcszEy6r+g+Vg/wD9ADWM1n/a/wJLoTK5e/dJ6834KAY6ICdly9r0oUv+hjQpXRzCAgl1aw85Dmjdh74g2mp0PoG4pmRbCnnUfPRYxDOs0j9tJQE7QJjA1JsnDnXFYrypdTk1GhLljKUSisFZYkEHOZsyEywOIt7YTZpZMLkIgGCocD8HyqdMhlTByLQ==
+ b=EhP9Mbe1Jp9FsdgakBx/b6kos4dpdjx7EsN6QgMomYtAf2nj/bSH2FwrJEZbIZ993xHM5ylHNPLd3sOUaArgrLo4dCkogOhV0/lYq8Vgmn4EYwox6J5e2XpK0IF5YsCX78owlL3lMYb0qCzEX3OD9zYmzG//JjNS8y5gB/486NDEZVHY5F6XrmQAlBREQ7r2KLBBRl3WqMhJTXWQK+onagpQN/2hhNgi0T4Hy5aOKRuk/AE/PpTL+2t1qXlHtU2V/E/1nbSQ6fks4E9sdjIvckVICA/Di8737LNj9WOy1Kmz0X4hbrAHejcsjFhBH8vsXI+5Z+uK3xBUJNlSayjuJA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=v9KXRoXZ1K8O5m4k6s3VxQ9pfqd0K1C+b5OkC2Mw1RE=;
- b=LHF2ieTRwoizqiMUqGWCmnDSFRW/O2omS7427mwjl11o0EHUpDU2QgzGosAfqkK3S2iR0tC8NOptSu1qG0UQIltpxNgxsctKawJzu8mAuxn/H4sHJzrSpnyaE6XUn+KA37lj8uheiZUEBr8McUMNKz/sXyZCjbOMNdAdwzdMoCb9S9dDN1K8kQgBbh75VS2ylgmzPxF2rk47CSL4vO2iAgD8G3GObXRQ65ZQ+8A8BZpOOXZIRD5cnSLV6q+QZqASm6ew69Eeq40rpG6PCRVNgPJX9OC7PSsOVyt2xmPOMYfKK/CKGbkCQQnZvatRhvNolxQE7wqdbF3SLgADeLsV1A==
+ bh=GgoxxgOvyzhIotVoE6E1n1Zs9BpPln0ZSYdVCYHxIF8=;
+ b=gky206ULQ49taZBShtngxZEUuuNN0B9TrKSECb6V4dJEqlj4akhCWgqytZx3EuR7mWtV7GEukXe2x2HL3jO2ALWVY2pzt5YPk2oGW91FazNeUMviFGD5z97TFXzQD1EPSwlZZWMoneVaBu6RSQAtlR0eYYi1YJlXaw776PKBqNy28Qepo2I0mSmIx7k8B9UvUrseazidDEmuJZnOfgT+hGe1zVeHKzl8zVkGQ48iNDg2nIr13/G+rzARmBp7a3JuAcD9XMnIRPB+eBHa42GA6NXmJpdyEKfbKuJns+eM8ARFdRRMFFkiR5vhEMQ5FFPLhjOmiW0Ps1xouYtP7p421A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,104 +19,122 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=v9KXRoXZ1K8O5m4k6s3VxQ9pfqd0K1C+b5OkC2Mw1RE=;
- b=mJuUqFFJfK1em+hsJPYDpvvXsmF4YtA82xv8+a0de9n6Unf3uski+n5lTNzdsi4YkAHG5YNW1wBIxSBMjSJe/q1nmcimS1yZA4Gtb4gf4o1Qsfz64O7OdRclzhug2DAbw2D03SRvjoDgs3pnXMc/wc5JJoPMfMmnYVBlLuVmVNQ=
+ bh=GgoxxgOvyzhIotVoE6E1n1Zs9BpPln0ZSYdVCYHxIF8=;
+ b=TfFd/noUF5pXE9WGFRWUw1CxlQ/FKiuy57Vx2YVfXq3DA+xzr0nyLfLo5LhB3MdkQljkRMPt2yF6zMuR6E+DhNr+9g/9tQ+uqwiPxURAv1eN8Tdbm7qj6BKfInHaQ40x7+EWA1R7NMCynK659BHoLo6aHe+yZ6hU5dE6uQbpkSc=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB1236.namprd11.prod.outlook.com (2603:10b6:404:48::7) with
+ by BN6PR11MB4033.namprd11.prod.outlook.com (2603:10b6:405:78::25) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18; Fri, 5 Jun
- 2020 18:15:37 +0000
+ 2020 19:28:08 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3066.019; Fri, 5 Jun 2020
- 18:15:37 +0000
-Subject: Re: [oe] [meta-python][PATCH] python3-webcolors: add the missing rdepends
-To: "Yu, Mingli" <mingli.yu@windriver.com>,
+ 19:28:08 +0000
+Subject: Re: [oe] [meta-python][PATCH 1/2] python3-jsonpatch: Consolidate in a single file
+To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200605033209.2999925-1-mingli.yu@windriver.com>
+References: <20200605173152.2360-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <4b2b1acd-8b66-28cd-9544-cefd62e5ce9c@windriver.com>
-Date: Fri, 5 Jun 2020 14:15:35 -0400
+Message-ID: <a48b1153-9354-1933-7f0a-28f30cc6369d@windriver.com>
+Date: Fri, 5 Jun 2020 15:28:05 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200605033209.2999925-1-mingli.yu@windriver.com>
-X-ClientProxiedBy: YTBPR01CA0021.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:14::34) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200605173152.2360-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTOPR0101CA0010.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:15::23) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YTBPR01CA0021.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:14::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18 via Frontend Transport; Fri, 5 Jun 2020 18:15:36 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YTOPR0101CA0010.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::23) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18 via Frontend Transport; Fri, 5 Jun 2020 19:28:07 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: fe836537-4fba-46f0-d589-08d8097c7219
-X-MS-TrafficTypeDiagnostic: BN6PR11MB1236:
-X-MS-Exchange-Transport-Forked: True
+X-MS-Office365-Filtering-Correlation-Id: 8c515055-b573-4e8b-632f-08d809869375
+X-MS-TrafficTypeDiagnostic: BN6PR11MB4033:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB1236B984FC4BAE1A76AEE1029F860@BN6PR11MB1236.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1201;
+	<BN6PR11MB40333303C02A7490B16241E79F860@BN6PR11MB4033.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:324;
 X-Forefront-PRVS: 0425A67DEF
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	gIjgHdvbA4j3bry6WfRijEDT8ZdUDCprFhkHRyHMwbD8Hk1NVrWx+u83gm917li0DpTAILyqU7/WU1oVBZEJm92K+5m/YyOWLXsv1ckOZshED3opKmdk6MJpmOhylIL7dFgSTfqIQ43VP4GHu0OpeAntgXr55lUSPu3Q7p/IeBLuN5kX9R+2b0x3M60y9x1r3NphFteLEJbksPczIvsBlwZy+lJ37bQD8zSPC8ZMGvkQ2ErAsnk5xxpVQFCPMhgH4wdqPNnozFL4cHfA3Siid3fNWXmFb23/UGnMr2s/Y0IcH6gknxqw98dAJqp3YFo9A9Z38QmnxaN38Xk9wiALEvsANi9XPbz93t+y1frt3v2voRTk14lWdGMCCNWJdG9/MUC/fltXbiLFgnR++wldpuYpDgWqGc2T+0A7chZqf6Jx0AS1DQbztA27c28qvWXnvDmwM6I+qUITC3mY5kVi+Q==
+	I3SO8UhotNCEp8bdl+gwCVT+0W8eIL/uphIPammr1uPDhlrV9jXI1WfOqvFHqxQH5FbtCRvDWf+dh1eZFFinQggC41rpIC1o2GBO+geL5c7VHU/skjdBtXOSfVXufxAMiDZU47VShqXVR+VLnOlcEDBXSEe5lNXHqrmSrk8r0PU25L61cPDicY7hbgR8UwZCXoC96GharlI6Gq/woS/Oo/SNcIf9LGpcubPOTrbOevCtFdFE1iRO6Z/KIm/esFfPS1pE3pqsh4EjkuQYbTGjFYQyUIxD18dXeHUvDR6cC/5MJ0vjjxvI6xHC8ySjlfSk/zLUHJUT+ecAnhFdxWHhdCD1dCANwpSd8mgPiHKM/WzpzAGqnH3kHdtFDrq+NtNscKZ/iMtHhvcUzMWryEiogxnCW2bBH2009BhXakdeFBAnGfPMiGaPgV1lFKyJZ/DpYA7J//w1VkR2sLzUpBSAAQ==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(39850400004)(376002)(136003)(346002)(366004)(52116002)(166002)(33964004)(53546011)(26005)(186003)(16526019)(6486002)(8676002)(83380400001)(31686004)(16576012)(316002)(8936002)(44832011)(956004)(86362001)(2616005)(31696002)(2906002)(966005)(478600001)(36756003)(66946007)(66476007)(5660300002)(66556008)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(39850400004)(376002)(136003)(396003)(366004)(346002)(16576012)(16526019)(86362001)(66556008)(186003)(53546011)(66476007)(44832011)(66946007)(316002)(956004)(26005)(6486002)(83380400001)(2616005)(36756003)(31696002)(478600001)(52116002)(8936002)(966005)(33964004)(5660300002)(166002)(2906002)(31686004)(8676002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	YLAeZiJc3vez6j71yXS/zITVFOVFpEaqWk38OSswPi50TBORRJHUTpaGnSX9cag2cuA/XYkgwUY0bJErOcETto2y2LYZXVpfFI7ZKcB/TUqXru0+GmSMOha4nxE3SHo+u6FseRC2rXiQQsm4QIlA/24HRhhbcg78LOx20hOIkLFrTpSYBRiZtNEeffDn//dn7m7O6V8zillRKa0ftksJCvljrp66uoiFXWQwANHU9faomoPdZ1eYg/Siadh2o1A5Y/F/s6RUvU+qtjVKfSAlACF/PsfuATezPMqV1rPEE3TW/84uU3/xDftIm9glqXv+Orx/uPjCoCuEr3WLMuhQXwO8cjOWfdVmWps0hD3tYcUQPBObyoVYQoXbpByY7AwLVW4jbQa3KGCtGqDOYjTv3OQgwMZZs9AR6yZiSSeZKWJlHcJ+UOBwV/CeXvtfXk7L4cfH8iIO7vFWbXysh1yYtHiFCmJ1rbijumV37+xEqz212Aj/XN+sm8M9l65LXlqU
+	IF7ffveVrOc0iMCQmtyP5854XPv3sBKkdsTjTaXxojdEIpsyrABzhSGLE2Oa6hXJeVPRRyqqA670S7PJhJMOOvsHBjlBKZG2HNpy0+eatEWIFj3H1JTcdLgHWDV0yvawooWUsZ2kvDeJgE6ocYawfpXxjyJtpTV5h3QrkEprQmqkObIRimyjyCPAY2hD3+coSCDZKDTSsRNsUHRsmuG71Gq7P2u2URwYjjZWqGJ5xMwvhkXNuviWnA3QZU2AE1gy9RpS95K0CMefK/cQApvCNKcTVxsk9Z4aTI5L0ZpI9hUkU/iYOEVApA8fES0n+/YjA7sggeABp3mlahBH83rqyZ5c6EUDIuMj//JlpC3KR8RyCEDJUyBDJye0vUXgix6UHIXguMNwMQ5tSCkuQk5HfQOTgAxbWbRH9+KnYhukct91wAdgoG8O434H0s+4fOum7EyNip9pUTBq8Bip4lAQdg/OPQw7a9ay5GTvRNFYWOiFKt/JXWUNis+GhMiLGoxQ
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fe836537-4fba-46f0-d589-08d8097c7219
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2020 18:15:36.9584
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8c515055-b573-4e8b-632f-08d809869375
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2020 19:28:07.8246
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: s39mm5uw91yUG3oR2zhMBCAVZ+3CiXo7dZm/rcjdTrZf1VfWHlwJlmZM3954j+wC+94ZFOdWGzTlNZKuvyWsGMhFi7jNjG2nxuiHh88WoWg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1236
+X-MS-Exchange-CrossTenant-UserPrincipalName: aAELkrcV0NYvmyylwuX8Am02gVdz+LdZ3MLzl8De459r17to7Onm9IPziE4o0q+YAnuKEFKO2d80Z6pAExbY932l1yn8mRDIdpJ3vS4k2DU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB4033
 Content-Type: multipart/alternative;
- boundary="------------7F2BF146E7D7C6A58CFA1755"
+ boundary="------------D3EEBE7ABA4C1B138E374DD8"
 Content-Language: en-US
 
---------------7F2BF146E7D7C6A58CFA1755
+--------------D3EEBE7ABA4C1B138E374DD8
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 6/4/20 11:32 PM, Yu, Mingli wrote:
-> From: Mingli Yu <mingli.yu@windriver.com>
+On 6/5/20 1:31 PM, Leon Anavi wrote:
+> Consolidate inc and bb files into a single bb file.
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
->
-> Add the missing rdepends to fix below error:
->   # python3
->   [snip]
->   >>> import webcolors
->   [snip]
->   ModuleNotFoundError: No module named 'typing'
->
-> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 > ---
->   meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb | 1 +
->   1 file changed, 1 insertion(+)
+>   .../recipes-devtools/python/python-jsonpatch.inc    | 12 ------------
+>   .../python/python3-jsonpatch_1.25.bb                | 13 +++++++++++--
+>   2 files changed, 11 insertions(+), 14 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python-jsonpatch.inc
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb b/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
-> index e567e0ba2..b950d6f63 100644
-> --- a/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
-> @@ -9,6 +9,7 @@ inherit pypi setuptools3 ptest
->   
->   RDEPENDS_${PN}_class-target = "\
->       ${PYTHON_PN}-stringold \
-> +    ${PYTHON_PN}-typing \
->   "
->   
->   SRC_URI += " \
+> diff --git a/meta-python/recipes-devtools/python/python-jsonpatch.inc b/meta-python/recipes-devtools/python/python-jsonpatch.inc
+> deleted file mode 100644
+> index e23f96b61..000000000
+> --- a/meta-python/recipes-devtools/python/python-jsonpatch.inc
+> +++ /dev/null
+> @@ -1,12 +0,0 @@
+> -SUMMARY  = "Appling JSON patches in Python 2.6+ and 3.x"
+> -HOMEPAGE = "https://github.com/stefankoegl/python-json-patch"
+> -LICENSE = "BSD-3-Clause"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
+> -
+> -inherit pypi
+> -
+> -SRC_URI[md5sum] = "fcc546892414bef2f7f89f0e2a618a9e"
+> -SRC_URI[sha256sum] = "ddc0f7628b8bfdd62e3cbfbc24ca6671b0b6265b50d186c2cf3659dc0f78fd6a"
+> -
+> -RDEPENDS_${PN} += "${PYTHON_PN}-json ${PYTHON_PN}-jsonpointer ${PYTHON_PN}-netclient ${PYTHON_PN}-stringold"
+> -
+> diff --git a/meta-python/recipes-devtools/python/python3-jsonpatch_1.25.bb b/meta-python/recipes-devtools/python/python3-jsonpatch_1.25.bb
+> index 73efceeed..8ec21ff11 100644
+> --- a/meta-python/recipes-devtools/python/python3-jsonpatch_1.25.bb
+> +++ b/meta-python/recipes-devtools/python/python3-jsonpatch_1.25.bb
+> @@ -1,2 +1,11 @@
+> -inherit setuptools3
+> -require python-jsonpatch.inc
+> +SUMMARY  = "Appling JSON patches in Python 2.6+ and 3.x"
+> +HOMEPAGE = "https://github.com/stefankoegl/python-json-patch"
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
+> +
+> +inherit pypi setuptools3
+> +
+> +SRC_URI[md5sum] = "fcc546892414bef2f7f89f0e2a618a9e"
+> +SRC_URI[sha256sum] = "ddc0f7628b8bfdd62e3cbfbc24ca6671b0b6265b50d186c2cf3659dc0f78fd6a"
+> +
+> +RDEPENDS_${PN} += "${PYTHON_PN}-json ${PYTHON_PN}-jsonpointer ${PYTHON_PN}-netclient ${PYTHON_PN}-stringold"
 >
 > 
 
---------------7F2BF146E7D7C6A58CFA1755
+--------------D3EEBE7ABA4C1B138E374DD8
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -126,39 +144,58 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 6/4/20 11:32 PM, Yu, Mingli wrote:<br>
+    <div class="moz-cite-prefix">On 6/5/20 1:31 PM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200605033209.2999925-1-mingli.yu@windriver.com">
-      <pre class="moz-quote-pre" wrap="">From: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a></pre>
+    <blockquote type="cite" cite="mid:20200605173152.2360-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Consolidate inc and bb files into a single bb file.
+
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200605033209.2999925-1-mingli.yu@windriver.com">
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
+    <blockquote type="cite" cite="mid:20200605173152.2360-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
-
-Add the missing rdepends to fix below error:
- # python3
- [snip]
- &gt;&gt;&gt; import webcolors
- [snip]
- ModuleNotFoundError: No module named 'typing'
-
-Signed-off-by: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a>
 ---
- meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb | 1 &#43;
- 1 file changed, 1 insertion(&#43;)
+ .../recipes-devtools/python/python-jsonpatch.inc    | 12 ------------
+ .../python/python3-jsonpatch_1.25.bb                | 13 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;--
+ 2 files changed, 11 insertions(&#43;), 14 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-jsonpatch.inc
 
-diff --git a/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb b/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
-index e567e0ba2..b950d6f63 100644
---- a/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
-@@ -9,6 &#43;9,7 @@ inherit pypi setuptools3 ptest
- 
- RDEPENDS_${PN}_class-target = &quot;\
-     ${PYTHON_PN}-stringold \
-&#43;    ${PYTHON_PN}-typing \
- &quot;
- 
- SRC_URI &#43;= &quot; \
+diff --git a/meta-python/recipes-devtools/python/python-jsonpatch.inc b/meta-python/recipes-devtools/python/python-jsonpatch.inc
+deleted file mode 100644
+index e23f96b61..000000000
+--- a/meta-python/recipes-devtools/python/python-jsonpatch.inc
+&#43;&#43;&#43; /dev/null
+@@ -1,12 &#43;0,0 @@
+-SUMMARY  = &quot;Appling JSON patches in Python 2.6&#43; and 3.x&quot;
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/stefankoegl/python-json-patch">&quot;https://github.com/stefankoegl/python-json-patch&quot;</a>
+-LICENSE = &quot;BSD-3-Clause&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3">&quot;file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3&quot;</a>
+-
+-inherit pypi
+-
+-SRC_URI[md5sum] = &quot;fcc546892414bef2f7f89f0e2a618a9e&quot;
+-SRC_URI[sha256sum] = &quot;ddc0f7628b8bfdd62e3cbfbc24ca6671b0b6265b50d186c2cf3659dc0f78fd6a&quot;
+-
+-RDEPENDS_${PN} &#43;= &quot;${PYTHON_PN}-json ${PYTHON_PN}-jsonpointer ${PYTHON_PN}-netclient ${PYTHON_PN}-stringold&quot;
+-
+diff --git a/meta-python/recipes-devtools/python/python3-jsonpatch_1.25.bb b/meta-python/recipes-devtools/python/python3-jsonpatch_1.25.bb
+index 73efceeed..8ec21ff11 100644
+--- a/meta-python/recipes-devtools/python/python3-jsonpatch_1.25.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-jsonpatch_1.25.bb
+@@ -1,2 &#43;1,11 @@
+-inherit setuptools3
+-require python-jsonpatch.inc
+&#43;SUMMARY  = &quot;Appling JSON patches in Python 2.6&#43; and 3.x&quot;
+&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/stefankoegl/python-json-patch">&quot;https://github.com/stefankoegl/python-json-patch&quot;</a>
+&#43;LICENSE = &quot;BSD-3-Clause&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3">&quot;file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3&quot;</a>
+&#43;
+&#43;inherit pypi setuptools3
+&#43;
+&#43;SRC_URI[md5sum] = &quot;fcc546892414bef2f7f89f0e2a618a9e&quot;
+&#43;SRC_URI[sha256sum] = &quot;ddc0f7628b8bfdd62e3cbfbc24ca6671b0b6265b50d186c2cf3659dc0f78fd6a&quot;
+&#43;
+&#43;RDEPENDS_${PN} &#43;= &quot;${PYTHON_PN}-json ${PYTHON_PN}-jsonpointer ${PYTHON_PN}-netclient ${PYTHON_PN}-stringold&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -168,4 +205,4 @@ index e567e0ba2..b950d6f63 100644
   </body>
 </html>
 
---------------7F2BF146E7D7C6A58CFA1755--
+--------------D3EEBE7ABA4C1B138E374DD8--
