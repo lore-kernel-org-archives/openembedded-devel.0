@@ -1,17 +1,17 @@
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com (NAM11-CO1-obe.outbound.protection.outlook.com [40.107.220.77])
- by mx.groups.io with SMTP id smtpd.web11.172.1591377979759065641
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (NAM11-CO1-obe.outbound.protection.outlook.com [40.107.220.54])
+ by mx.groups.io with SMTP id smtpd.web11.177.1591377989362000726
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Jun 2020 10:26:20 -0700
+ Fri, 05 Jun 2020 10:26:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=A57HiebH;
- spf=pass (domain: windriver.com, ip: 40.107.220.77, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=HGWM60DO;
+ spf=pass (domain: windriver.com, ip: 40.107.220.54, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Z+HpRYEE9KrfmlQE0Kxez3vnBQIF8TB6RZQXrSHnW4rFBYS3oJqX9OmdrM0zTxkbeuxC4I454s3Bz/XC2lkXYPA87mOKeJSYzw3PLnkJFIEoFLnXi4zjLWk+J/P/t70DOGyo9ER3rPyzvbTpoGIIV7VieScYcfuTfP4h6QbyPcxbuziMARvGfg6iKOmfQOWxzK6gSdnSSb8I40iiV88FY8aW8QNffGqZlhD0/RtL5Gs0CWzyJJVgsZedMLJ61ThaDCffl8+A8IMjPZssqxS+LkksnP5DGymIrYcM/+6dbmcv0jIF/hzVSpnR3YcKrXa7YP9vmaQbKnpqiz2ZE1wxtg==
+ b=oJOr9XW+avfj30R09iGvLmpJG+NRGB74huA0X57o1+Paf/IgXs+oSgdr1Dh3QEcbSp05v+RNhtvlnwoRLPJaUBQaia/pLtxkA4BGKtBSDY1LnXsfpWL6OoEVQfRp6DPA/UbCSr89mI6XRppoVM1jNcEH10vpk32oZrOsNtljd+qNmF7l4TKswGgqsELtVKu43JX7aeR9KD0iun+7UDNpaq+9vZi+7cszXvY5B+Rx8F594zS9ggsspB9MlAGi8GJNknS/+32nG0Zm7qqLtYxViWnvIg+oFMAOEo+ZhnQD1Qrvnjflw+TJlmvu1Q17UQkLcBGfkEYVn5LPmTXN3sYVUg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=L4Kxzz2FVeYX+KUCFxvTZh4mb5+J2IR9JQDktLTeSZU=;
- b=biaMnKmGrkWjN1VBtXjxXhi2mhoqX8DOpFQrbcySwK8PLgZaQA7WQ762V+d34QstGfC1/g3lXkJO2AOBAELhM3G+nm4cVdS/sO8V/Yvt+cbyRcuIMpzko3KqjlsvGddkcrPh6MZqwUhghdalIQsOCol6oTA3DukA/y6YweGrBkdWXnph3WRzBQEpPr6jCstWQ0/VwWGg4NJ/qWw0yvgozDK5G4n+eX/Dauk9Q/IJ4tQM+ZDhh0uTtrFzH2kUdjaCZYzqMcRLK8plqVMn238LFARK7z2OrX0xyJn1ryEDlwjUYojv+ogkDypf4eqUoT6KFVCDfny5Q9wk70KCGQgj/w==
+ bh=0WWNyfcxMpaALFP0oytiZQ3wWF9zyNRSlS5OCotcZLM=;
+ b=UO3G9unWmuf2h+Iz5+sfZc5/sRtyldwbfkxqh3HSdtr1W3BxhcBk41zAIs3fZYYJxyfU7OYrmY2uBr5W7QrNpYa1NlqZJmaxIj/TJkYYU8EHjwkVv/Q9H6Y/hX2IVt2FCeeuafQUovNUOQmfLnIQA0WXBfph3R0jao/3Ehy8/SWj+DXRzJYwJOMxShZFkGXUKdUyw/PFnYzkfaYa7txioVP7Ufcf4FrdGLkh9al+ysEHKfNtvCvrzU0DaeIaoi2mpin3RfhnDpgVYaDPjZOVgM5VPw/+8VyqaoiqEH1pLrirARXHl/XzJ91y2uWL/nG5ZOXiDxr8jqf5eNXd9EwNQw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=L4Kxzz2FVeYX+KUCFxvTZh4mb5+J2IR9JQDktLTeSZU=;
- b=A57HiebHLl9+zr9JzIld9RmZqs9FdGJgEhQQZB2AMeGYp5PRDDP+I0HawIlEgdejlnUGPP2doR4vl+gpqhmEKpJxazmdUvuyjT9v0jyTIql0VZ7P+B+vf+Zz/l4J7D2oTMmqjqS4prz2qakLuP+itHmto/ZH3nswOgaUJnv2+BQ=
+ bh=0WWNyfcxMpaALFP0oytiZQ3wWF9zyNRSlS5OCotcZLM=;
+ b=HGWM60DO7M6PgHzuzXo/ujQtzWA4U7vxPVu9HWVs7k1UoFz2d0EszP98D8MdUcdLENOrRp8kKHzcjLtB/YOWIh61Pj3DmzwG0/RUoLoTDWd06pOxjbAlya2RRGu70WRU1UPZAppedZLV/YbbraNjvj3EhHB3T1YVZQYwa6XQR9g=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,117 +28,94 @@ Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
  by BN6PR11MB1874.namprd11.prod.outlook.com (2603:10b6:404:107::15) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.19; Fri, 5 Jun
- 2020 17:26:18 +0000
+ 2020 17:26:28 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3066.019; Fri, 5 Jun 2020
- 17:26:18 +0000
-Subject: Re: [oe] [meta-python][PATCH 3/6] python3-future: Consolidate in a single file
+ 17:26:28 +0000
+Subject: Re: [oe] [meta-python][PATCH 4/6] python3-requests-futures: Upgrade 0.9.5 -> 1.0.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200604121223.3818-1-leon.anavi@konsulko.com>
- <20200604121223.3818-3-leon.anavi@konsulko.com>
+ <20200604121223.3818-4-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <0cf72bf8-611a-6de2-3e29-987ed3cd7b50@windriver.com>
-Date: Fri, 5 Jun 2020 13:26:16 -0400
+Message-ID: <f7ec7d08-1d95-cda6-4b07-be1a5ea48639@windriver.com>
+Date: Fri, 5 Jun 2020 13:26:26 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200604121223.3818-3-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTOPR0101CA0011.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:15::24) To BN6PR11MB0003.namprd11.prod.outlook.com
- (2603:10b6:405:61::26)
+In-Reply-To: <20200604121223.3818-4-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0004.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::17)
+ To BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YTOPR0101CA0011.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::24) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18 via Frontend Transport; Fri, 5 Jun 2020 17:26:17 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0004.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::17) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18 via Frontend Transport; Fri, 5 Jun 2020 17:26:27 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: e7d4d802-8f80-47be-f7aa-08d809758ea5
+X-MS-Office365-Filtering-Correlation-Id: 26cabdb2-16a1-4665-5b38-08d80975948a
 X-MS-TrafficTypeDiagnostic: BN6PR11MB1874:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB1874278C35A199DDABE57E6D9F860@BN6PR11MB1874.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:207;
+	<BN6PR11MB1874509327C415573814A7B39F860@BN6PR11MB1874.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:173;
 X-Forefront-PRVS: 0425A67DEF
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	UhjbdnJ5MDLCwP0V33Ylna7rrc0uUNNC5cmUJdz+x/KZj2ibQ7a6CX10f3W+kHu64blxcZt1TxQ0ECCaEmMZlbpV5f9qo+vVPzIjlFUwzL3yrVgE1DxSPrAAVyVpw0JJ1WR9dLHDEWdvB+QwEyJsEnExh80nfp8GbWuL5Z6bHUtNEoiOTufidQ/OVqs/p81ZLbp01IxI/kq/ZLnS2Kk11GDTbtZwloYOVOXC7MV12p/ZD1YKZdNTLxrb1WG6q78Ef8RyN7QfL2s6r2LrcYzmq6wHqrwDWd4daCNSAwq3aYFhzXkEJOa+UqWkanqKFRAyIsNFuePSsw3LTSRaqhhwsrdX8GFvAU4ryD+k9TDDXlVCfUloW7b4OxmCOBDopsbvTHZv+DUcG1Ha0gcIIUlerpnlHH9854jLitmPfpyrv0Qd/G60mk1Iz1qejoJZJ5Y0HJhFuvn8U8dGAWj7oVQlaQ==
+	3AXC5jWKT/MnEQfIQFLI3eYyrhEUlQyt+31LSsdg0VecgyAembj4/i7VkQdwT6OJBPfMMX7GnWZjIEGPYUijmdhGP5PiJehN6V5+ISucIJ37wndeWyqYZeN2aEEaI4PEyWyM776uImt2ahYY6y8QkkILsCa7mOuWSkvl7/p3URpf63lAofxeoIt++9uB0vmyk91UAoCFDBIiF6xYo3aKPVhqABCi5cHmUay7tQXz+4mpiLZS9e+4ik23DK3PErHn6egNSHRxnTnTJbMITQeTNMeP0FDgmlRp2prtlCQhZ57n7DuUyaug+GfzT7LyaMygVaUdxEC7T5ZZXvsGHBnvLl5iOIszzAq/HF9egW7RaoPRkMDK2mSGArlAc5P0SFm/0vontuy4wkFJwaIZTzdvEXNlaLj7rVukztpqe5M4tgz1uxY8YXEyjxz7KYbqdI+p6ikRF84iSF4AA9ongnxnyQ==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(366004)(376002)(136003)(396003)(39850400004)(2616005)(66476007)(186003)(66946007)(86362001)(16526019)(316002)(16576012)(8936002)(26005)(52116002)(44832011)(6486002)(53546011)(33964004)(956004)(31686004)(8676002)(31696002)(36756003)(2906002)(66556008)(966005)(166002)(83380400001)(5660300002)(478600001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	1/3mDOQDAWnrUCRbHMboIawfeEBC+cbuhW791qQHSjIR7N02KB7CIkFfJiQynXMTZEuX2qMpTBXlnnnAVeV3hMfAvL272aYEDKtkP5K8Y96DsB/7h/YTwG+KDDpDqcSCs1pPINv5KeZlkAtTlTo02PuSkab4vxsN/6gSwrf4kugHUxodw6RaL611Tbo4rUNf3hpeYnbS8ZI8z6YuuqZhRrzlZdrzqU24B+Jp24TFfnK6Lnt3JQot5HFxbPPhGKUoUX8J2gw1m5YLpu2DGfRVgM+FEHN3qWbhUc3vIL9XCSyfnAum7KQe+Y/gX4GbLZtWMeOIEDCtFz5N9lG1+CK1Ay7fErgpVud6TEDhKh7rodAwIPDkZYNSijAaLckZKgcW4b2QAqzB6GkrPIOisCpFLvh1qc1EUWOvRXZ1gFy5an5h55Ttb5ZwcNn5EjnKgMjnuCn9BDOaq5NKmg3UHSAqDQ0I5ngWVtk9BF4fL+itkP8=
+	NBOhzp3EwG3ANayVFd1ZE6YEVEQ377Fj2qoihe4CYoNaihKWssJZ9miHpSPYJaH1q9vnOVaVDwDi3VbHV5OIw48Jp4xJXIrq8To70yflAjZVXyKMb9g8nve1xF00QSDLjftHkSo9yMoQD3fTzxbQfZOvOdeylMBmU6pTKktrGX2GTO+O6bYsyP4Ef4LD/vbnUFrKWOO36L+1Ybg5eoFkQgL1JUUQZeYu1b4osZJQ/khJzMjI6D169B/mtk4rO06kZBt8SZeKB+QO5VcwCn3OauxBUh7SXw/Ml7dcoYZd9VRo/OntqgTg1BQdoJ5TdijKfxw71Snmc/HIBfAgxMYMTV8XlMaHwtZLqSScT1Ki9aaFtBgc45yVSVL8YMtQ/Ammx9zFaS1WXvRBCIsfolpzQcZN7+23PbruWP5YqsBaMGIr4Z5oQ8JQFqxLvGUWI8pyGdUGJ48COp5aHDELs+FNtERRxPi7IE0cYPQsKyEQWOE=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e7d4d802-8f80-47be-f7aa-08d809758ea5
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2020 17:26:18.4798
+X-MS-Exchange-CrossTenant-Network-Message-Id: 26cabdb2-16a1-4665-5b38-08d80975948a
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2020 17:26:28.3312
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WmdyuWNb9mHcDYtR/PSveP7wLHwQUDgmE8sWwWs7HxZhaq1YpXWnJYbZwUA2xLRsh1Z5peKczZS25AKtcDJvQh0GPXdCgIuj8j5uXRpodoc=
+X-MS-Exchange-CrossTenant-UserPrincipalName: Ec8gjYa5uTdcqc9etFGGikvC10lz4rRd5ZX28U6oneGAv4E91WzJfOhbfYzjcgZuSA9nwz7TgiCVlbVeGZiECBLRTdQZ3LxAKlp71lAuPEU=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1874
 Content-Type: multipart/alternative;
- boundary="------------80141DD52D129E9616A2C7B0"
+ boundary="------------471244323804A9017BE96B8B"
 Content-Language: en-US
 
---------------80141DD52D129E9616A2C7B0
+--------------471244323804A9017BE96B8B
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 6/4/20 8:12 AM, Leon Anavi wrote:
-> Consolidate inc and bb files into a single bb file.
+> Upgrade to release 1.0.0.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-devtools/python/python-future.inc     | 13 -------------
->   .../python/python3-future_0.18.2.bb               | 15 +++++++++++++--
->   2 files changed, 13 insertions(+), 15 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python-future.inc
+>   ...sts-futures_0.9.5.bb => python3-requests-futures_1.0.0.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-requests-futures_0.9.5.bb => python3-requests-futures_1.0.0.bb} (73%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python-future.inc b/meta-python/recipes-devtools/python/python-future.inc
-> deleted file mode 100644
-> index c0a2b39ba..000000000
-> --- a/meta-python/recipes-devtools/python/python-future.inc
-> +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -DESCRIPTION = "Clean single-source support for Python 3 and 2"
-> -HOMEPAGE = "https://python-future.org"
-> -LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a253924061f8ecc41ad7a2ba1560e8e7"
-> -
-> -SRC_URI[md5sum] = "e4579c836b9c025872efe230f6270349"
-> -SRC_URI[sha256sum] = "b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d"
-> -
-> -PYPI_PACKAGE_HASH = "99abde815842bc6e97d5a7806ad51236630da14ca2f3b1fce94c0bb94d3d"
-> -
-> -inherit pypi
-> -
-> -BBCLASSEXTEND = "native"
-> diff --git a/meta-python/recipes-devtools/python/python3-future_0.18.2.bb b/meta-python/recipes-devtools/python/python3-future_0.18.2.bb
-> index f059186bf..90d1661d4 100644
-> --- a/meta-python/recipes-devtools/python/python3-future_0.18.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-future_0.18.2.bb
-> @@ -1,2 +1,13 @@
-> -inherit setuptools3
-> -require python-future.inc
-> +DESCRIPTION = "Clean single-source support for Python 3 and 2"
-> +HOMEPAGE = "https://python-future.org"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a253924061f8ecc41ad7a2ba1560e8e7"
-> +
-> +SRC_URI[md5sum] = "e4579c836b9c025872efe230f6270349"
-> +SRC_URI[sha256sum] = "b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d"
-> +
-> +PYPI_PACKAGE_HASH = "99abde815842bc6e97d5a7806ad51236630da14ca2f3b1fce94c0bb94d3d"
-> +
-> +inherit pypi setuptools3
-> +
-> +BBCLASSEXTEND = "native"
+> diff --git a/meta-python/recipes-devtools/python/python3-requests-futures_0.9.5.bb b/meta-python/recipes-devtools/python/python3-requests-futures_1.0.0.bb
+> similarity index 73%
+> rename from meta-python/recipes-devtools/python/python3-requests-futures_0.9.5.bb
+> rename to meta-python/recipes-devtools/python/python3-requests-futures_1.0.0.bb
+> index b94929d8c..2372ffa45 100644
+> --- a/meta-python/recipes-devtools/python/python3-requests-futures_0.9.5.bb
+> +++ b/meta-python/recipes-devtools/python/python3-requests-futures_1.0.0.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/ross/requests-futures"
+>   LICENSE = "Apache-2.0"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=e1e50798d0afe0e1f87594c6619a2fa5"
+>   
+> -SRC_URI[md5sum] = "e20dc6f063c70888a7f8225e349b6682"
+> -SRC_URI[sha256sum] = "33aa8a3b7892850701707d7e094b1e1ce7c4f7a36ff2a1dcc2da4e01a1a00f7e"
+> +SRC_URI[md5sum] = "601b5e90413bb00e06148752d31f0cc7"
+> +SRC_URI[sha256sum] = "35547502bf1958044716a03a2f47092a89efe8f9789ab0c4c528d9c9c30bc148"
+>   
+>   inherit pypi setuptools3
+>   
 >
 > 
 
---------------80141DD52D129E9616A2C7B0
+--------------471244323804A9017BE96B8B
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -150,59 +127,37 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/4/20 8:12 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200604121223.3818-3-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Consolidate inc and bb files into a single bb file.
+    <blockquote type="cite" cite="mid:20200604121223.3818-4-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.0.0.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200604121223.3818-3-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200604121223.3818-4-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python-future.inc     | 13 -------------
- .../python/python3-future_0.18.2.bb               | 15 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;--
- 2 files changed, 13 insertions(&#43;), 15 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-future.inc
+ ...sts-futures_0.9.5.bb =&gt; python3-requests-futures_1.0.0.bb} | 4 &#43;&#43;--
+ 1 file changed, 2 insertions(&#43;), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-requests-futures_0.9.5.bb =&gt; python3-requests-futures_1.0.0.bb} (73%)
 
-diff --git a/meta-python/recipes-devtools/python/python-future.inc b/meta-python/recipes-devtools/python/python-future.inc
-deleted file mode 100644
-index c0a2b39ba..000000000
---- a/meta-python/recipes-devtools/python/python-future.inc
-&#43;&#43;&#43; /dev/null
-@@ -1,13 &#43;0,0 @@
--DESCRIPTION = &quot;Clean single-source support for Python 3 and 2&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://python-future.org">&quot;https://python-future.org&quot;</a>
--LICENSE = &quot;MIT&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=a253924061f8ecc41ad7a2ba1560e8e7">&quot;file://LICENSE.txt;md5=a253924061f8ecc41ad7a2ba1560e8e7&quot;</a>
--
--SRC_URI[md5sum] = &quot;e4579c836b9c025872efe230f6270349&quot;
--SRC_URI[sha256sum] = &quot;b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d&quot;
--
--PYPI_PACKAGE_HASH = &quot;99abde815842bc6e97d5a7806ad51236630da14ca2f3b1fce94c0bb94d3d&quot;
--
--inherit pypi
--
--BBCLASSEXTEND = &quot;native<a class="moz-txt-link-rfc2396E" href="mailto:diff--gita/meta-python/recipes-devtools/python/python3-future_0.18.2.bbb/meta-python/recipes-devtools/python/python3-future_0.18.2.bbindexf059186bf..90d1661d4100644---a/meta-python/recipes-devtools/python/python3-future_0.18.2.bb&#43;&#43;&#43;b/meta-python/recipes-devtools/python/python3-future_0.18.2.bb@@-1,2&#43;1,13@@-inheritsetuptools3-requirepython-future.inc&#43;DESCRIPTION=">&quot;
-diff --git a/meta-python/recipes-devtools/python/python3-future_0.18.2.bb b/meta-python/recipes-devtools/python/python3-future_0.18.2.bb
-index f059186bf..90d1661d4 100644
---- a/meta-python/recipes-devtools/python/python3-future_0.18.2.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-future_0.18.2.bb
-@@ -1,2 &#43;1,13 @@
--inherit setuptools3
--require python-future.inc
-&#43;DESCRIPTION = &quot;</a>Clean single-source support for Python 3 and 2&quot;
-&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://python-future.org">&quot;https://python-future.org&quot;</a>
-&#43;LICENSE = &quot;MIT&quot;
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=a253924061f8ecc41ad7a2ba1560e8e7">&quot;file://LICENSE.txt;md5=a253924061f8ecc41ad7a2ba1560e8e7&quot;</a>
-&#43;
-&#43;SRC_URI[md5sum] = &quot;e4579c836b9c025872efe230f6270349&quot;
-&#43;SRC_URI[sha256sum] = &quot;b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d&quot;
-&#43;
-&#43;PYPI_PACKAGE_HASH = &quot;99abde815842bc6e97d5a7806ad51236630da14ca2f3b1fce94c0bb94d3d&quot;
-&#43;
-&#43;inherit pypi setuptools3
-&#43;
-&#43;BBCLASSEXTEND = &quot;native&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-requests-futures_0.9.5.bb b/meta-python/recipes-devtools/python/python3-requests-futures_1.0.0.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-requests-futures_0.9.5.bb
+rename to meta-python/recipes-devtools/python/python3-requests-futures_1.0.0.bb
+index b94929d8c..2372ffa45 100644
+--- a/meta-python/recipes-devtools/python/python3-requests-futures_0.9.5.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-requests-futures_1.0.0.bb
+@@ -3,8 &#43;3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/ross/requests-futures">&quot;https://github.com/ross/requests-futures&quot;</a>
+ LICENSE = &quot;Apache-2.0&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=e1e50798d0afe0e1f87594c6619a2fa5">&quot;file://LICENSE;md5=e1e50798d0afe0e1f87594c6619a2fa5&quot;</a>
+ 
+-SRC_URI[md5sum] = &quot;e20dc6f063c70888a7f8225e349b6682&quot;
+-SRC_URI[sha256sum] = &quot;33aa8a3b7892850701707d7e094b1e1ce7c4f7a36ff2a1dcc2da4e01a1a00f7e&quot;
+&#43;SRC_URI[md5sum] = &quot;601b5e90413bb00e06148752d31f0cc7&quot;
+&#43;SRC_URI[sha256sum] = &quot;35547502bf1958044716a03a2f47092a89efe8f9789ab0c4c528d9c9c30bc148&quot;
+ 
+ inherit pypi setuptools3
+ 
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -212,4 +167,4 @@ index f059186bf..90d1661d4 100644
   </body>
 </html>
 
---------------80141DD52D129E9616A2C7B0--
+--------------471244323804A9017BE96B8B--
