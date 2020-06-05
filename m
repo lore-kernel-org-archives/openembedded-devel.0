@@ -1,85 +1,81 @@
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
- by mx.groups.io with SMTP id smtpd.web12.8840.1591356500069219123
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+ by mx.groups.io with SMTP id smtpd.web11.8797.1591356500863110923
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Jun 2020 04:28:20 -0700
+ Fri, 05 Jun 2020 04:28:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=lrb+LpEl;
- spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f44.google.com with SMTP id gl26so9679823ejb.11
-        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Jun 2020 04:28:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=bgmjs1ss;
+ spf=pass (domain: gmail.com, ip: 209.85.208.50, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f50.google.com with SMTP id c35so7190783edf.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Jun 2020 04:28:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=ugMgMNZ1iMzlFS7awjHrbQloO3ptDjxkE25d99Uu5bg=;
-        b=lrb+LpEltxGtjFOLmMgAwYcQIhU3iY9X2h4ZxoUMQKN/ssUG0pUuqTLOaspc+Vfd4O
-         WubECquqz7woQr0G3zyzBp5ioNxuCfp5BYjDtO+rwGOjo913NA6anh3txeCuPCmAVDNe
-         q7XQkXgObnfECNxxvsCyLaXkUfstbQKiSVvV7ffLnLFKk4+Ck0ApsIz+3eLIxJGBuT5D
-         lekNllD+rVtXM2GXss0Y8FyzWT/D1TK6WnP0LakHPaIZlWgO7jLp9CihlZlr7gdhX3m0
-         w9ATlhKyF1R6q58jJhkdh+4Y86ZvhH+bcOyftFZU1U/NiMx92l6EENxvHpV0gBjRt+e+
-         ykdg==
+        bh=+mPoZMGQhEN8ExzCUPrtEVgu6JsbhUrNUuK+Bxc2vs4=;
+        b=bgmjs1ssNQEbJPf+VzcfUnohNlOJzgWkAHZKKHdU8cWViDyO+i2NdotzBMTQ6KGgpb
+         YqbrPzTyvOWM5S+5oteJOvBW5jU/9YFwgb4+g3uH39it58M3nXJ4Y9LWxQ+DI2y+S/kr
+         +9nwjVlRiqS1ZqmiFk7PCP5XCgeiUoxNA3j/MGwAlVyYeF2A9icmufR35254hLyRr7Lq
+         x0xCtiHwMvONd3WWNfs6d0aTS7i9XkwBsQu4zT9wWzh7SEYAfeb3w/Cdp+rWIoLCk7Uv
+         Z/t8DE2a7ylBWl3vBV1tghrc32lCcnu06zmH7nduupDRUzQEnzm9Lde4okAV//t6v99y
+         QXSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ugMgMNZ1iMzlFS7awjHrbQloO3ptDjxkE25d99Uu5bg=;
-        b=oAsW5LwNPWTP+waw8j9LYVsEfyFyq3YVw9ppumsHrRj1Z6Tomb055f8K2hkUJdtR9a
-         plTU2hlowlmPIepdLGUawXbhJps4/lro38ndfCjBjif2dy7+h91DWfZkP+PVd3eYDjYJ
-         Jga6rpz3L+rLyPRwOdjhHgAKwqnF9KKcrIqAWMxFwKo6HFW1OS/FWaSez+oWoHTiF7RO
-         AohZbzEfzc4OTAdSj0wBIaG86MgiynX6+WIKLEjanRX0HpOjZmsWDSkZlm2a49YCisa6
-         ctGTZL0oWByqPVPmjDYqOBVLnDruaQMRAou2U8dFNFk3QGrNUdr33Q5+4tWFjvTZIorm
-         PyBg==
-X-Gm-Message-State: AOAM531UiQNnclAXr3+J69as2IirY2R5U3ZLW6of35z+AzrRTEYIOaIj
-	CgJv8olD/PJMAbjIQeEUeBmVejC/
-X-Google-Smtp-Source: ABdhPJwbpo0d0HYP3LMiVBDFkYx7bdjm2z8U3bq3nGDFLZ2dNoAwUMeTi1ncxQpdJRY1JsI16nz88Q==
-X-Received: by 2002:a17:907:4240:: with SMTP id oi24mr8028970ejb.127.1591356498087;
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=+mPoZMGQhEN8ExzCUPrtEVgu6JsbhUrNUuK+Bxc2vs4=;
+        b=SG9+fc0ErZzXueZaBUZx0ji+Iek9vdfk/2L1Q9KzU428UU5ubpFp+25ouEuuESaZJk
+         QkTpMW+QBPKRGIrFo5awpCWrvT0ahYjYlJTDDhC7mq79JGhKTbkSqE934gKc93kpHiPF
+         QutjLB14KcX5osZxtMHECkm5P9aDphNhFinjVP2n08OpJgUrIgVpoC91ijD+I4yO6KM4
+         mDgOEq5arrJuP3pBixGkTKc75Nu7h19E91/XvyYppyJ+0qJzj51K74LPfPjw/t/DQr1/
+         pj4xm+LuzCaxGkNVG23acuvzQic0vLRqhxMfOleM1HudHT74XuWsjbT9MStKyPxJIszq
+         LWhQ==
+X-Gm-Message-State: AOAM531BjEuAnZTuzP44mUtwvcRe204fhvNl+LrnLNwTzIUFXC2BoXK5
+	sYOqVc1QEXHxk2RidDZNDbMqcncA
+X-Google-Smtp-Source: ABdhPJzS9TyWMxl8afcxXbfAbsOmXdm0o8Pesn/ItpRCCLiXKZ8zV0XnBDGPdvq0kkzEGW4ekzTCtQ==
+X-Received: by 2002:aa7:d2d9:: with SMTP id k25mr5217041edr.43.1591356498832;
         Fri, 05 Jun 2020 04:28:18 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f0816493dd1634773746530.dip0.t-ipconnect.de. [2003:f0:7f08:1649:3dd1:6347:7374:6530])
-        by smtp.gmail.com with ESMTPSA id 63sm4391444edm.48.2020.06.05.04.28.17
+        by smtp.gmail.com with ESMTPSA id 63sm4391444edm.48.2020.06.05.04.28.18
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 05 Jun 2020 04:28:17 -0700 (PDT)
+        Fri, 05 Jun 2020 04:28:18 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 1/3] libblockdev: upgrade 2.23 -> 2.24
-Date: Fri,  5 Jun 2020 13:28:06 +0200
-Message-Id: <20200605112808.220963-1-schnitzeltony@gmail.com>
+Subject: [PATCH 2/3] poppler: upgrade 0.88.0 -> 0.89.0
+Date: Fri,  5 Jun 2020 13:28:07 +0200
+Message-Id: <20200605112808.220963-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200605112808.220963-1-schnitzeltony@gmail.com>
+References: <20200605112808.220963-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Change SRC_URI: all udisks related sources moved to
-https://github.com/storaged-project
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{libblockdev_2.23.bb => libblockdev_2.24.bb}           | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-extended/libblockdev/{libblockdev_2.23.bb => libblockdev_2.24.bb} (94%)
+ .../poppler/{poppler_0.88.0.bb => poppler_0.89.0.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/poppler/{poppler_0.88.0.bb => poppler_0.89.0.bb} (93%)
 
-diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_2.23.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_2.24.bb
-similarity index 94%
-rename from meta-oe/recipes-extended/libblockdev/libblockdev_2.23.bb
-rename to meta-oe/recipes-extended/libblockdev/libblockdev_2.24.bb
-index 3f4eec274..99cdee5bb 100644
---- a/meta-oe/recipes-extended/libblockdev/libblockdev_2.23.bb
-+++ b/meta-oe/recipes-extended/libblockdev/libblockdev_2.24.bb
-@@ -10,11 +10,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.88.0.bb b/meta-oe/recipes-support/poppler/poppler_0.89.0.bb
+similarity index 93%
+rename from meta-oe/recipes-support/poppler/poppler_0.88.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_0.89.0.bb
+index d6a27f923..f8b7c075a 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.88.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.89.0.bb
+@@ -7,8 +7,8 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://basename-include.patch \
+            "
+-SRC_URI[md5sum] = "d9aafddce4c079c9ebc7405e42ac25ba"
+-SRC_URI[sha256sum] = "b4453804e9a5a519e6ceee0ac8f5efc229e3b0bf70419263c239124474d256c7"
++SRC_URI[md5sum] = "92ac57f60ae8c3a1f8bfe01c9530b7b5"
++SRC_URI[sha256sum] = "fba230364537782cc5d43b08d693ef69c36586286349683c7b127156a8ef9b5c"
  
- inherit autotools gobject-introspection
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
  
--SRCREV = "f5d2458e9e52d8c55b609ae8cf46ef0673b4a02a"
--SRC_URI = " \
--    git://github.com/rhinstaller/libblockdev;branch=master \
--"
--
-+SRC_URI = "git://github.com/storaged-project/libblockdev;branch=2.x-branch"
-+SRCREV = "f5a4ba8bb298f8cbc435707d0b19b4b2ff836a8e"
- S = "${WORKDIR}/git"
- 
- FILES_${PN} += "${libdir}/python2.7/dist-packages ${libdir}/python3.*/site-packages"
 -- 
 2.26.2
 
