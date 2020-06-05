@@ -1,78 +1,52 @@
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com [209.85.210.195])
- by mx.groups.io with SMTP id smtpd.web11.20776.1591295334010526933
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web12.3612.1591328031967169064
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Jun 2020 11:28:54 -0700
+ Thu, 04 Jun 2020 20:33:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista-com.20150623.gappssmtp.com header.s=20150623 header.b=SCk1nIXV;
- spf=permerror, err=parse error for token &{10 18 websitewelcome.com}: parse error for token &{10 18 _spf.google.com}: limit exceeded (domain: mvista.com, ip: 209.85.210.195, mailfrom: rahulk@mvista.com)
-Received: by mail-pf1-f195.google.com with SMTP id a127so3630922pfa.12
-        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Jun 2020 11:28:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id;
-        bh=HSK08U+muU/joXr3MEuspOPpv911yvbfpkv1+xsBO7k=;
-        b=SCk1nIXV8E6L2QWQfMtrnT2XoYXXEy6+dJBziZbgyugdzwEM5kfJcI+riYktsAc5Sf
-         OGB1khfIhJVIqRpGRHGneJIhHpHYurmLD3xz/W5dMPbqSqBBvzBMV3S4ZPseez3eWEj4
-         zYlEeZyaVFeVk/ltpz6Wg9dPKVDUezz9dJOF64czCSj0tCDMb1KQmWx8yhZuJpiaKJZd
-         7WXZWgBW6njntBb5SOrh3jwx2MFXRa7J4ngn4J2hBODoyJpQXkhmgkl7J+2C/7RzOyjM
-         lWS829Lnah/8gWCqRY9EIS75vBnHILu70QssCEVkt0F96URrqbSIKfzdcXZFspdq2H8w
-         ROFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=HSK08U+muU/joXr3MEuspOPpv911yvbfpkv1+xsBO7k=;
-        b=iunrP504AhLBMuktJWQfGxZHSYmyvqgLYdkFTuP4AYi1uo2Jz+bw35JFqLUN/tQjf1
-         988UkXWwUkIhjdK+IW9Cq7W74ibtW/Uma3gSPv1H8Jfwqsah3t/hzkZTwl1XldaywVaV
-         fAsuBhRRmOSalFN5aPvx7sJJ14yEZU0lIGCXtCobHdTBFVdLSFZqpVsozTdZhNHKCiKt
-         CMC47CUgO05aOBN2JQdFCCS82dmuIzN+PSuz0zNCjIdDfG3l4kYi97Xx+ngklXT9ME2E
-         oiGnDVtGt2oHEaaNM75MYNsTwz7XFTtOVFgM8qljM4wh7senKMEX/+XuiHsktjL3jD3i
-         MjfA==
-X-Gm-Message-State: AOAM533rfCTPsri2aoK+Om5+7GHhs50rUP23kD0xe7IfiOSeceiwEeCO
-	IQk+C30crpdkMj3/yPyiqyuD8cB3jZgFsw==
-X-Google-Smtp-Source: ABdhPJwMp3pviXX73YHaknArqTj8737lEReVnO8TLddoyNzHDeKkaZFJ6DZjouHAx0RMzr/Q7u4Kkg==
-X-Received: by 2002:a63:1d08:: with SMTP id d8mr5598234pgd.306.1591295332969;
-        Thu, 04 Jun 2020 11:28:52 -0700 (PDT)
-Return-Path: <rahulk@mvista.com>
-Received: from CelSys065.mvista.com ([36.255.87.199])
-        by smtp.gmail.com with ESMTPSA id z23sm4551383pga.86.2020.06.04.11.28.50
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 04 Jun 2020 11:28:52 -0700 (PDT)
-From: "Rahul Kumar" <rahulk@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Armin Kuster <akuster808@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Rahul Kumar <rahulk@mvista.com>
-Subject: [meta-multimedia][zeus][PATCH] tremor: update SRC_URI as project moved to gitlab
-Date: Thu,  4 Jun 2020 23:58:28 +0530
-Message-Id: <1591295308-26420-1-git-send-email-rahulk@mvista.com>
-X-Mailer: git-send-email 2.7.4
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: mingli.yu@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0553XK1x010375
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 4 Jun 2020 20:33:41 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+ 14.3.487.0; Thu, 4 Jun 2020 20:33:19 -0700
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python][PATCH] python3-webcolors: add the missing rdepends
+Date: Fri, 5 Jun 2020 11:32:09 +0800
+Message-ID: <20200605033209.2999925-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.24.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-From: Armin Kuster <akuster808@gmail.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
-It appears Xiph.Org is now on gitlab
-https://gitlab.xiph.org/xiph
+Add the missing rdepends to fix below error:
+ # python3
+ [snip]
+ >>> import webcolors
+ [snip]
+ ModuleNotFoundError: No module named 'typing'
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit cc6e59fdff71e47ef5b9b40aab3bcd9438960ea4)
-Signed-off-by: Rahul Kumar <rahulk@mvista.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb b/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
-index beeb23a..d2ad961 100644
---- a/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
-+++ b/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=db1b7a668b2a6f47b2af88fb008ad555 \
-                     file://os.h;beginline=3;endline=14;md5=5c0af5e1bedef3ce8178c89f48cd6f1f"
- DEPENDS = "libogg"
+diff --git a/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb b/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
+index e567e0ba2..b950d6f63 100644
+--- a/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
++++ b/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
+@@ -9,6 +9,7 @@ inherit pypi setuptools3 ptest
  
--SRC_URI = "git://git.xiph.org/tremor.git;protocol=https \
-+SRC_URI = "git://gitlab.xiph.org/xiph/tremor.git;protocol=https \
-            file://obsolete_automake_macros.patch;striplevel=0 \
-            file://tremor-arm-thumb2.patch \
+ RDEPENDS_${PN}_class-target = "\
+     ${PYTHON_PN}-stringold \
++    ${PYTHON_PN}-typing \
  "
+ 
+ SRC_URI += " \
 -- 
-2.7.4
+2.24.1
 
