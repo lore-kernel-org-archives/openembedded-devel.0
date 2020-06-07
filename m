@@ -1,76 +1,127 @@
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web11.1351.1591500307249233458
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web12.1304.1591500308663981843
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Jun 2020 20:25:07 -0700
+ Sat, 06 Jun 2020 20:25:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=L1EAfQTd;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id t16so5277520plo.7
-        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Jun 2020 20:25:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=YXp6OouC;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id ga6so4306978pjb.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Jun 2020 20:25:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=85va3vwGPaIA5ejl2bzM9V/8zzZzGKPUMv7AIjCOtBw=;
-        b=L1EAfQTdIJPVDjPjS8hpkadKq3cI0PzOe/QsxO1tDNul3JuaUObDZS7nOaZOfDxg3D
-         7BCC4BOPdsQzVNnZSfQyrHkN6Y5VxDogjPSHgY6++/ZRV9LpUluFx+axWKJqhH28/bXA
-         N636d97urI5DFAD/6+NBa1+EcenDPpQDwUhH5goJ5V18w+/nErMiO6LKy0esObgfCJ3O
-         sIrSUCv4UQJgK5kdjC3VdygbOIYYz3L77xTypt4z78OC/KNOcuXhPtFCWs9jQjCdNUKh
-         XMNqx3TfEzfzswS7Dyya0ajKsMnTMm4KHq/0AR/46Ru67DPpcJsR/X1IheD1GsAEIRJg
-         68fw==
+        bh=pjNUzcfapJZUOdWe7YonBSaeSsJJfMpAV6IOqkQgIlU=;
+        b=YXp6OouCaz3AAM68QYbLA58bb1vkN/akwnmjM7oPZMMEW3/F6htZBa334SYqZdaadh
+         H2hCwxISB8oynVZyvWlUOZG/XwCzSh//u8+zW7ovP7TCdiEOt5xb6Y3ASRf0oPduoTmP
+         kFMCeYuDrc9hLWuTJmDQYjiNgmFItyN2CAO5IULLSMu2Rs/5fw/Anr20G19gebB9pijd
+         6nceWIXsFvWeRiHGnjmMlKBz66q1aqkW1loxWwYEaJZuv8rXb+LEyJgE8rdfEGKY+iGD
+         LSy7lSHQeFSRzlSwNHKDGAdCCfyWw6KS8EvaBCu0B+VacDnHjykHnTcdUR1TS1Wvml6X
+         t0vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=85va3vwGPaIA5ejl2bzM9V/8zzZzGKPUMv7AIjCOtBw=;
-        b=FkVOKvoqut9i54KCSf4BdZnIb2+3COgoZGfSHXwHJW4t3uWbFryDutRsJM972cM61b
-         oF3J+CUCuRXtGSf3txY31iHkFX2XO8H+Ps1vlib898ht4kehiz58SCFNAe2mrme5cS2C
-         mKcUhNIPgY1PZZkHANnaQ779XSEoJPBOkRLdxv/pWhE+nvh0uH8LoDbLZ4eYklBAbbGg
-         MAnOmnKJU7vxc0i1EjHWFWFF+mP4vd1JY7w1wYWZGHx+hD2cDftgEAXE2SrxedcKM6mj
-         TsIKC5xKMq/gWrB2SBLKqp9sPnPQVzKQk9cjWfvH04gIBxKABJvQi49ytlIzWuFt/toS
-         I9lQ==
-X-Gm-Message-State: AOAM530w/OvhtFfLhLp2C85YoKp/5nJYEPQ05vUUXcntNJUc5Tnn5Vl4
-	6+L6UOum5vEZjTTSbuVzvD3NhrcQ
-X-Google-Smtp-Source: ABdhPJwJSmVcnLJWAcbrGVMBHPZS1b87SoP6YnCBstfrn/BsKmAveupAPfWslveTiJaukNorOTSIYQ==
-X-Received: by 2002:a17:902:b686:: with SMTP id c6mr14176017pls.303.1591500306618;
-        Sat, 06 Jun 2020 20:25:06 -0700 (PDT)
+        bh=pjNUzcfapJZUOdWe7YonBSaeSsJJfMpAV6IOqkQgIlU=;
+        b=UN+RcV46ekamaj47G2s4nFIaPEO0Hi4zYaH0hNFm2SMsjIbQgnD2yLdPybogkb4sgd
+         GW2fUJvTbRx84HLOiovumckDbNwD2I/KqCu5aDHgwpIX10/3lJzv9BR8vN2ypNtWSeeg
+         aWgrOD4w2w3FO6Kxh/6rajGhhZPcrv1XX0T0o5B6tVILvXVXTzhjyTIEqsNCAcgN/Dxm
+         SrNslsABR5tqr4XRpwO9VjlixTBicNcg/41++Y3l+tCDg1a/n5qHwaQXOqJ1U2/0IMz5
+         cS4oOVz4aOJLhGlxjcV8oUT9YNXcyok3ZiIO9lPHi2gyqQrceWPEHsHnVqLs82v1/tMp
+         YiGg==
+X-Gm-Message-State: AOAM533Ida1MjPLgE26Shu4gP/eDQtnhxj0EgspRdpi366j6KXtv9OX+
+	+pMkZ/IRmVVlv2tQkem46wsiWCUq
+X-Google-Smtp-Source: ABdhPJyTDaMEvNX0AU2FIxyFylIMt8hHh2E0UuYI3dZ7Blo5JwwRam76m/i7TdmfnOMQTgJEuXfhfA==
+X-Received: by 2002:a17:90a:fe10:: with SMTP id ck16mr11247285pjb.147.1591500307961;
+        Sat, 06 Jun 2020 20:25:07 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:590a:7b35:9222:2f9])
-        by smtp.gmail.com with ESMTPSA id m7sm3372463pfb.1.2020.06.06.20.25.05
+        by smtp.gmail.com with ESMTPSA id m7sm3372463pfb.1.2020.06.06.20.25.06
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Jun 2020 20:25:05 -0700 (PDT)
+        Sat, 06 Jun 2020 20:25:07 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 23/26] proftpd: Fix typo for SRC_URI[md5sum]
-Date: Sat,  6 Jun 2020 20:24:33 -0700
-Message-Id: <13c2bd53bb952da06bf920f4a6580fdc639f9dd5.1591500140.git.akuster808@gmail.com>
+Subject: [dunfell 24/26] python3-pycryptodome(x): moved to OE-Core, remove from meta-python
+Date: Sat,  6 Jun 2020 20:24:34 -0700
+Message-Id: <9e2686e3d1a7a7e0126657ea81246ee9f52d080b.1591500140.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1591500139.git.akuster808@gmail.com>
 References: <cover.1591500139.git.akuster808@gmail.com>
 
-From: Konrad Weihmann <kweihmann@outlook.com>
+From: Denys Dmytriyenko <denys@ti.com>
 
-Signed-off-by: Konrad Weihmann <kweihmann@outlook.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 5caca0f7bdefd28b9ecc446aea4177e2e297aa20)
+(cherry picked from commit a8f3c00d8d113b46a49584682e10435157d516ca)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../python/python-pycryptodome.inc            | 29 -------------------
+ .../python/python3-pycryptodome_3.9.4.bb      |  2 --
+ .../python/python3-pycryptodomex_3.9.4.bb     | 10 -------
+ 3 files changed, 41 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pycryptodome.inc
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pycryptodome_3.9.4.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pycryptodomex_3.9.4.bb
 
-diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
-index d5bbdd3745..1e4697a633 100644
---- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
-+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
-@@ -13,7 +13,7 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
-            file://build_fixup.patch \
-            file://proftpd.service \
-            "
--iSRC_URI[md5sum] = "13270911c42aac842435f18205546a1b"
-+SRC_URI[md5sum] = "13270911c42aac842435f18205546a1b"
- SRC_URI[sha256sum] = "91ef74b143495d5ff97c4d4770c6804072a8c8eb1ad1ecc8cc541b40e152ecaf"
- 
- inherit autotools-brokensep useradd update-rc.d systemd multilib_script
+diff --git a/meta-python/recipes-devtools/python/python-pycryptodome.inc b/meta-python/recipes-devtools/python/python-pycryptodome.inc
+deleted file mode 100644
+index 63b4a4abb4..0000000000
+--- a/meta-python/recipes-devtools/python/python-pycryptodome.inc
++++ /dev/null
+@@ -1,29 +0,0 @@
+-SUMMARY = "Cryptographic library for Python"
+-DESCRIPTION = "PyCryptodome is a self-contained Python package of low-level\
+- cryptographic primitives."
+-HOMEPAGE = "http://www.pycryptodome.org"
+-LICENSE = "PD & BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=6dc0e2a13d2f25d6f123c434b761faba"
+-
+-SRC_URI[md5sum] = "f990716b49add7b14ea8b8a961fb3746"
+-SRC_URI[sha256sum] = "a168e73879619b467072509a223282a02c8047d932a48b74fbd498f27224aa04"
+-
+-inherit pypi
+-
+-RDEPENDS_${PN} += " \
+-    ${PYTHON_PN}-io \
+-    ${PYTHON_PN}-math \
+-"
+-
+-RDEPENDS_${PN}-tests += " \
+-    ${PYTHON_PN}-unittest \
+-"
+-
+-PACKAGES =+ "${PN}-tests"
+-
+-FILES_${PN}-tests = " \
+-    ${PYTHON_SITEPACKAGES_DIR}/Crypto/SelfTest/ \
+-    ${PYTHON_SITEPACKAGES_DIR}/Crypto/SelfTest/__pycache__/ \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pycryptodome_3.9.4.bb b/meta-python/recipes-devtools/python/python3-pycryptodome_3.9.4.bb
+deleted file mode 100644
+index 0c062dddf8..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pycryptodome_3.9.4.bb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-require python-pycryptodome.inc
+-inherit setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-pycryptodomex_3.9.4.bb b/meta-python/recipes-devtools/python/python3-pycryptodomex_3.9.4.bb
+deleted file mode 100644
+index e41c14b142..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pycryptodomex_3.9.4.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require python-pycryptodome.inc
+-inherit setuptools3
+-
+-SRC_URI[md5sum] = "46ba513d95b6e323734074d960a7d57b"
+-SRC_URI[sha256sum] = "22d970cee5c096b9123415e183ae03702b2cd4d3ba3f0ced25c4e1aba3967167"
+-
+-FILES_${PN}-tests = " \
+-    ${PYTHON_SITEPACKAGES_DIR}/Cryptodome/SelfTest/ \
+-    ${PYTHON_SITEPACKAGES_DIR}/Cryptodome/SelfTest/__pycache__/ \
+-"
 -- 
 2.17.1
 
