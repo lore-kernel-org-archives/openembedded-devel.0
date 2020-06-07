@@ -1,88 +1,76 @@
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web11.1350.1591500305984126866
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.web11.1351.1591500307249233458
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Jun 2020 20:25:06 -0700
+ Sat, 06 Jun 2020 20:25:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=DabigqmY;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id x22so6921406pfn.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Jun 2020 20:25:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=L1EAfQTd;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id t16so5277520plo.7
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Jun 2020 20:25:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=eqQdRuEmjxvCBvqA4czJJWbFLtaN79EZHzm/GyOewYI=;
-        b=DabigqmYWnv3lAoLjpQn/awlxai+MMXXrHTzhYU089FgRucs2zz81fxEbZnPNX7W6M
-         MguFFoSVELNy1ToW4Mt1mwIP6d1dphW6XSaD5BVaLFKN118/LrQ1P4E27Do+TxR7Ww9H
-         T3MRjb8ta6EM8k8ZwXV+1vhZDPkgzgromzwElQyioM2/L3i9SP3k1F8sJ6KrVbpREIqc
-         llnUgPOpmU+zR6U1iQc4qNuwlK33z1GrtL+kiPA5yhXi2mIjt6TeCRpIPTt9UTch8Zjl
-         vUyP3IgB+zbEPFXYBhevclNOocSmq1+EtEbQZGakWZ0c2TGu4jDfpayPV+RjLCd7/8RH
-         cq3w==
+        bh=85va3vwGPaIA5ejl2bzM9V/8zzZzGKPUMv7AIjCOtBw=;
+        b=L1EAfQTdIJPVDjPjS8hpkadKq3cI0PzOe/QsxO1tDNul3JuaUObDZS7nOaZOfDxg3D
+         7BCC4BOPdsQzVNnZSfQyrHkN6Y5VxDogjPSHgY6++/ZRV9LpUluFx+axWKJqhH28/bXA
+         N636d97urI5DFAD/6+NBa1+EcenDPpQDwUhH5goJ5V18w+/nErMiO6LKy0esObgfCJ3O
+         sIrSUCv4UQJgK5kdjC3VdygbOIYYz3L77xTypt4z78OC/KNOcuXhPtFCWs9jQjCdNUKh
+         XMNqx3TfEzfzswS7Dyya0ajKsMnTMm4KHq/0AR/46Ru67DPpcJsR/X1IheD1GsAEIRJg
+         68fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=eqQdRuEmjxvCBvqA4czJJWbFLtaN79EZHzm/GyOewYI=;
-        b=sae+eQ//N0Ah4RsDSAlsMTy8F3DLDO5CkMt99ktP/kuOgB/NK4DFTXV7lKA533OHWK
-         g9UrUQ7HFy90/s1H+n9y8iVelXCgk1TPD5PAT6yxWWCVTWvtDRC0QNcUY+sSFYS0w5vp
-         kGFnBnLjyouNkM4iAWlhmGu/MtuQlkiFT4oGlHVPqV4oNz1PiaDpGOfbgco5ehtccsUD
-         Sbil33V8lp75tYXam1faxuj8jZjnFl/cQqDSjMuinSu52/RcqKmjzAXXOuD3H91+og2Z
-         g0PbjCCnGda8Qp01ZgcK+O3yoSOkgB5pC3+HXAD8+Zuhdfws/fwuDi5GCPbLrPor0ROc
-         8PDw==
-X-Gm-Message-State: AOAM530v2PhC86wwEch56v6AccbGhKeQq/7Duz433x1TbxjWQ0mE0pHd
-	t1WrAGTt4Q29PZ6ohQgGqcVJPuRq
-X-Google-Smtp-Source: ABdhPJwDbAPW1Du4zTLaNsaKJKievH7xQLx6J2InkO9fEJbXxbGJb2KQGBPxv60UgmglkboLG9gxCg==
-X-Received: by 2002:a05:6a00:1494:: with SMTP id v20mr16209471pfu.150.1591500305294;
-        Sat, 06 Jun 2020 20:25:05 -0700 (PDT)
+        bh=85va3vwGPaIA5ejl2bzM9V/8zzZzGKPUMv7AIjCOtBw=;
+        b=FkVOKvoqut9i54KCSf4BdZnIb2+3COgoZGfSHXwHJW4t3uWbFryDutRsJM972cM61b
+         oF3J+CUCuRXtGSf3txY31iHkFX2XO8H+Ps1vlib898ht4kehiz58SCFNAe2mrme5cS2C
+         mKcUhNIPgY1PZZkHANnaQ779XSEoJPBOkRLdxv/pWhE+nvh0uH8LoDbLZ4eYklBAbbGg
+         MAnOmnKJU7vxc0i1EjHWFWFF+mP4vd1JY7w1wYWZGHx+hD2cDftgEAXE2SrxedcKM6mj
+         TsIKC5xKMq/gWrB2SBLKqp9sPnPQVzKQk9cjWfvH04gIBxKABJvQi49ytlIzWuFt/toS
+         I9lQ==
+X-Gm-Message-State: AOAM530w/OvhtFfLhLp2C85YoKp/5nJYEPQ05vUUXcntNJUc5Tnn5Vl4
+	6+L6UOum5vEZjTTSbuVzvD3NhrcQ
+X-Google-Smtp-Source: ABdhPJwJSmVcnLJWAcbrGVMBHPZS1b87SoP6YnCBstfrn/BsKmAveupAPfWslveTiJaukNorOTSIYQ==
+X-Received: by 2002:a17:902:b686:: with SMTP id c6mr14176017pls.303.1591500306618;
+        Sat, 06 Jun 2020 20:25:06 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:590a:7b35:9222:2f9])
-        by smtp.gmail.com with ESMTPSA id m7sm3372463pfb.1.2020.06.06.20.25.04
+        by smtp.gmail.com with ESMTPSA id m7sm3372463pfb.1.2020.06.06.20.25.05
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Jun 2020 20:25:04 -0700 (PDT)
+        Sat, 06 Jun 2020 20:25:05 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 22/26] python3-twisted: remove double var modification
-Date: Sat,  6 Jun 2020 20:24:32 -0700
-Message-Id: <c7430c99daae9d6212f5ea4d90d7193063e8f72e.1591500140.git.akuster808@gmail.com>
+Subject: [dunfell 23/26] proftpd: Fix typo for SRC_URI[md5sum]
+Date: Sat,  6 Jun 2020 20:24:33 -0700
+Message-Id: <13c2bd53bb952da06bf920f4a6580fdc639f9dd5.1591500140.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1591500139.git.akuster808@gmail.com>
 References: <cover.1591500139.git.akuster808@gmail.com>
 
 From: Konrad Weihmann <kweihmann@outlook.com>
 
-It is either append or +=, but not both.
-Pick append to be the correct one
-
 Signed-off-by: Konrad Weihmann <kweihmann@outlook.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 19867269bacd2676369b1f92c9103c8eb0b882db)
+(cherry picked from commit 5caca0f7bdefd28b9ecc446aea4177e2e297aa20)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-devtools/python/python3-twisted_19.10.0.bb        | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-twisted_19.10.0.bb b/meta-python/recipes-devtools/python/python3-twisted_19.10.0.bb
-index dfb9d4a4cc..c12d1cc04e 100644
---- a/meta-python/recipes-devtools/python/python3-twisted_19.10.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-twisted_19.10.0.bb
-@@ -1,7 +1,7 @@
- inherit pypi setuptools3
- require python-twisted.inc
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
+index d5bbdd3745..1e4697a633 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
+@@ -13,7 +13,7 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
+            file://build_fixup.patch \
+            file://proftpd.service \
+            "
+-iSRC_URI[md5sum] = "13270911c42aac842435f18205546a1b"
++SRC_URI[md5sum] = "13270911c42aac842435f18205546a1b"
+ SRC_URI[sha256sum] = "91ef74b143495d5ff97c4d4770c6804072a8c8eb1ad1ecc8cc541b40e152ecaf"
  
--FILES_${PN}-core_append += " \
-+FILES_${PN}-core_append = " \
-   ${libdir}/${PYTHON_DIR}/site-packages/twisted/__pycache__ \
-   ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/__pycache__/*pyc \
-   ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/__init__*.pyc \
-@@ -29,7 +29,7 @@ FILES_${PN}-news_append = " \
-   ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_news*.pyc \
- "
- 
--FILES_${PN}-protocols_append += " \
-+FILES_${PN}-protocols_append = " \
-   ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/__pycache__/*pyc \
- "
- 
+ inherit autotools-brokensep useradd update-rc.d systemd multilib_script
 -- 
 2.17.1
 
