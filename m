@@ -1,71 +1,93 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.26440.1591609256866341766
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+ by mx.groups.io with SMTP id smtpd.web11.27344.1591613626514696912
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jun 2020 02:41:00 -0700
+ Mon, 08 Jun 2020 03:53:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.73,487,1583164800"; 
-   d="scan'208";a="94081305"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 08 Jun 2020 17:40:12 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id A710950A9975
-	for <openembedded-devel@lists.openembedded.org>; Mon,  8 Jun 2020 17:40:09 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Mon, 8 Jun 2020 17:40:13 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] mksh: upgrade 58 -> 59
-Date: Tue, 9 Jun 2020 05:40:07 +0800
-Message-ID: <1591652407-3373-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: A710950A9975.A19E1
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+ dkim=pass header.i=@koncepto.io header.s=default header.b=GWO5ne2J;
+ spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
+Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
+	by koncepto.io (Postfix) with ESMTPSA id 8472A60250;
+	Mon,  8 Jun 2020 12:53:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1591613624;
+	bh=waR8W6nq+sZWMYVbdv1fgxRHIddDYyquy3DC87Qpzlg=;
+	h=From:To:Cc:Subject:Date:From;
+	b=GWO5ne2J+jKjUVCISmN1nB3Ma8krH4b3PEpW+dQDDjsliOIhDtFqjr3alFuqdOhiu
+	 CCI3sRl4flkWiIfAtomT7Pxu2mQbRK7u1wpEMyRVRO1Srkj1+uIvgxtj4suc8i87jZ
+	 QjLFxoOIud8zuUQv3mp4DToOv5ZEyfIkB9mHbwVBdVT/cFtiMAcOp+huMEtevM/Hi1
+	 ulKyJ3euJjAp7WDP1ca0LQNOcJ5cZ04/qsrB8r+FCdVLHYUTui5JWi0qicDn+qwTEY
+	 9O5zzGZlWf0pFQibB9UniuhPJx8zpAbPsjUvRUnRUGhxayd3rAAyOnlCTyUL0HS917
+	 XlXXEUGevfvMg==
+From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
+Subject: [meta-oe][PATCH] libnfc: upgrade 1.7.1 -> 1.8.0
+Date: Mon,  8 Jun 2020 12:52:56 +0200
+Message-Id: <1591613576-15268-1-git-send-email-pjtexier@koncepto.io>
+X-Mailer: git-send-email 2.7.4
 
--License-Update: Copyright year updated to 2020.
+See full changelog https://github.com/nfc-tools/libnfc/blob/master/ChangeLog#L1
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Also remove patch applied upstream
+
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- meta-oe/recipes-shells/mksh/{mksh_58.bb => mksh_59.bb} | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-shells/mksh/{mksh_58.bb => mksh_59.bb} (74%)
+ .../0001-usbbus-Include-stdint.h-for-uintX_t.patch | 24 ----------------------
+ meta-oe/recipes-core/libnfc/libnfc_git.bb          |  8 +++-----
+ 2 files changed, 3 insertions(+), 29 deletions(-)
+ delete mode 100644 meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
 
-diff --git a/meta-oe/recipes-shells/mksh/mksh_58.bb b/meta-oe/recipes-shells/mksh/mksh_59.bb
-similarity index 74%
-rename from meta-oe/recipes-shells/mksh/mksh_58.bb
-rename to meta-oe/recipes-shells/mksh/mksh_59.bb
-index a9940f88a..110e793b0 100644
---- a/meta-oe/recipes-shells/mksh/mksh_58.bb
-+++ b/meta-oe/recipes-shells/mksh/mksh_59.bb
-@@ -3,14 +3,14 @@ HOMEPAGE = "http://www.mirbsd.org/mksh.htm"
- SECTION = "base/shell"
+diff --git a/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch b/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
+deleted file mode 100644
+index b8ed87a..0000000
+--- a/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
++++ /dev/null
+@@ -1,24 +0,0 @@
+-From cb2a3991545ba9e885704226ed3e831bd5e4cb27 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 20 May 2019 22:10:05 -0700
+-Subject: [PATCH] usbbus: Include stdint.h for uintX_t
+-
+-stdint.h is needed for uintX_t typedefs which are
+-used to replace u_intX_t in libusb API headers in the cmake files
+-
+-Upstream-Status: Submitted [https://github.com/nfc-tools/libnfc/pull/544]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- libnfc/buses/usbbus.h | 2 ++
+- 1 file changed, 2 insertions(+)
+-
+---- a/libnfc/buses/usbbus.h
+-+++ b/libnfc/buses/usbbus.h
+-@@ -35,6 +35,7 @@
+- 
+- #ifndef _WIN32
+- // Under POSIX system, we use libusb (>= 0.1.12)
+-+#include <stdint.h>
+- #include <usb.h>
+- #define USB_TIMEDOUT ETIMEDOUT
+- #define _usb_strerror( X ) strerror(-X)
+diff --git a/meta-oe/recipes-core/libnfc/libnfc_git.bb b/meta-oe/recipes-core/libnfc/libnfc_git.bb
+index 2851ecf..9e602f1 100644
+--- a/meta-oe/recipes-core/libnfc/libnfc_git.bb
++++ b/meta-oe/recipes-core/libnfc/libnfc_git.bb
+@@ -7,13 +7,11 @@ SECTION = "libs"
  
- LICENSE = "${@bb.utils.contains("TCLIBC", "glibc", "MirOS & ISC", "MirOS", d)}"
--LIC_FILES_CHKSUM = "file://main.c;beginline=6;endline=26;md5=0651e575e39d1a3e884562e25d491fc7 \
-+LIC_FILES_CHKSUM = "file://main.c;beginline=6;endline=26;md5=6efc2c249328e4d2bd3e595d5b1f9d31 \
-                     file://strlcpy.c;beginline=1;endline=17;md5=d953f28f0c43ee29e238ec9bc15df2a0 \
-                    "
+ inherit autotools pkgconfig
  
--SRC_URI = "http://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-R58.tgz"
-+SRC_URI = "http://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-R59b.tgz"
+-PV = "1.7.1+git${SRCPV}"
++PV = "1.8.0+git${SRCPV}"
  
--SRC_URI[md5sum] = "6922a3e2228de2f0e78ff25398ccf8df"
--SRC_URI[sha256sum] = "608beb7b71870b23309ba1da8ca828da0e4540f2b9bd981eb39e04f8b7fc678c"
-+SRC_URI[md5sum] = "dce6abffc2036288540b9ba11dfb2ec8"
-+SRC_URI[sha256sum] = "907ed1a9586e7f18bdefdd4a763aaa8397b755e15034aa54f4d753bfb272e0e6"
+ S = "${WORKDIR}/git"
+-SRCREV = "2d4543673e9b76c02679ca8b89259659f1afd932"
+-SRC_URI = "git://github.com/nfc-tools/libnfc.git \
+-           file://0001-usbbus-Include-stdint.h-for-uintX_t.patch \
+-          "
++SRCREV = "f02ff51449240102c27a97173dc495e8e7789046"
++SRC_URI = "git://github.com/nfc-tools/libnfc.git"
  
- inherit update-alternatives
- 
+ CFLAGS_append_libc-musl = " -D_GNU_SOURCE"
+ DEPENDS = "libusb"
 -- 
-2.17.1
-
-
+2.7.4
 
