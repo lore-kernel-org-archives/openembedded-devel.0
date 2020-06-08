@@ -1,88 +1,71 @@
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com [209.85.160.196])
- by mx.groups.io with SMTP id smtpd.web12.25169.1591602276453419675
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web10.26440.1591609256866341766
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jun 2020 00:44:36 -0700
+ Mon, 08 Jun 2020 02:41:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bytedance-com.20150623.gappssmtp.com header.s=20150623 header.b=KLId+l28;
- spf=pass (domain: bytedance.com, ip: 209.85.160.196, mailfrom: yulei.sh@bytedance.com)
-Received: by mail-qt1-f196.google.com with SMTP id d27so13938589qtg.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jun 2020 00:44:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id;
-        bh=M+EWjE94HzsXjr/xs+lxIKMTy1taEXaSSXhy53oHsV0=;
-        b=KLId+l28jvLDXcLMm5LT8C+LIY5DMsyiDvJPb6kS0VgSNi+tiOVOtR9TY+FtX60eaq
-         B5mWQJV9Siusf24rLsigzswSs1kFREiHUcoye7ms+TNhRDnpw7r91O2WJPRuSq+teOUG
-         vFwEOwUDt0+BHibSAIOkceJadBM0KIz1NkvQuXddR0cvTVaSRIGrn0jF2JBtCwojn8rF
-         JI9PjSvlC5BM8KtnRKgNy1pjCqm0IiCGOlZDLvbZuutLmNdFgqdwA8RXMkSpvSmS+QuG
-         e/tkT3dp9yH37zQFScA0tw/Z+Tynu2Wyi+DgD7qScnggC3VkxMasbl7Wo0dmoZ8ik9fz
-         fzDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=M+EWjE94HzsXjr/xs+lxIKMTy1taEXaSSXhy53oHsV0=;
-        b=j3rOxBo4nzkMDDMfuWTMSaaZXCW4V9Bd89w+4g8Zr0NgR/2cv8Xw43/0G2qsp8TGPo
-         HIbvhO5CfPV7Ng2MBPUmJU9nKg1K36UHPR7zq0aFcf0veT7k8bMX/nInMhP2LXyk6Log
-         QSG5fzlvLh9wmHz89fjTl7XJAb1BYP6yCMVuIpfJa5O6rRT1cECzXGLkQ/5LsDJzGL0f
-         hSlfRYU5UWIEZJjvyU4e/H9fnMOIHkRG4wtvAb/AZR3DInRebI1hSTVlawiZMQ+q1Vzg
-         n2UO+gjGqpSdsTNqclFbFoh3yxMnJg2LSk603qKE+HLygtZdyZHt1KBH7C1wcHZs48rD
-         gHEA==
-X-Gm-Message-State: AOAM533/IackjrWSgg8ZzWZ90m9w70bf1EiGOgNWGrxNtOGwLJ66LF1o
-	pO6ACuI5HqQ+IN2nSXtw8Zj11QwcRkecfVk/
-X-Google-Smtp-Source: ABdhPJzDXPxnmAjP/nC0isOb92qmtmLSD2zOmbO82c9cZRZpc5HC6Fcb1iBa4g4Gk53uqbkf9eXVgg==
-X-Received: by 2002:aed:3b0d:: with SMTP id p13mr22794171qte.263.1591602275257;
-        Mon, 08 Jun 2020 00:44:35 -0700 (PDT)
-Return-Path: <yulei.sh@bytedance.com>
-Received: from n189-046-153.byted.org ([130.44.212.121])
-        by smtp.gmail.com with ESMTPSA id l188sm6128240qke.127.2020.06.08.00.44.34
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Mon, 08 Jun 2020 00:44:34 -0700 (PDT)
-From: yulei.sh@bytedance.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Lei YU <yulei.sh@bytedance.com>,
-	raj.khem@gmail.com
-Subject: [meta-filesystems][PATCH] httpfs2: mount a http url as a file based on FUSE
-Date: Mon,  8 Jun 2020 07:44:25 +0000
-Message-Id: <20200608074425.3149491-1-yulei.sh@bytedance.com>
-X-Mailer: git-send-email 2.11.0
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.73,487,1583164800"; 
+   d="scan'208";a="94081305"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 08 Jun 2020 17:40:12 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id A710950A9975
+	for <openembedded-devel@lists.openembedded.org>; Mon,  8 Jun 2020 17:40:09 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Mon, 8 Jun 2020 17:40:13 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-oe] [PATCH] mksh: upgrade 58 -> 59
+Date: Tue, 9 Jun 2020 05:40:07 +0800
+Message-ID: <1591652407-3373-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: A710950A9975.A19E1
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-Signed-off-by: Lei YU <yulei.sh@bytedance.com>
+-License-Update: Copyright year updated to 2020.
+
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../httpfs2-fuse/httpfs2_0.1.5.bb                  | 25 ++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-filesystems/recipes-filesystems/httpfs2-fuse/httpfs2_0.1.5.bb
+ meta-oe/recipes-shells/mksh/{mksh_58.bb => mksh_59.bb} | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-shells/mksh/{mksh_58.bb => mksh_59.bb} (74%)
 
-diff --git a/meta-filesystems/recipes-filesystems/httpfs2-fuse/httpfs2_0.1.5.bb b/meta-filesystems/recipes-filesystems/httpfs2-fuse/httpfs2_0.1.5.bb
-new file mode 100644
-index 000000000..2fa5ec1fb
---- /dev/null
-+++ b/meta-filesystems/recipes-filesystems/httpfs2-fuse/httpfs2_0.1.5.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "This is a filesystem client based on the HTTP using FUSE"
-+HOMEPAGE = "http://httpfs.sourceforge.net"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://debian/copyright;md5=83f224c5182f148ec92e0b9f84b3c6c7"
-+
-+inherit pkgconfig
-+
-+DEPENDS += "fuse"
-+RDEPENDS_${PN} += "fuse"
-+
-+SRC_URI += "https://astuteinternet.dl.sourceforge.net/project/httpfs/httpfs2/httpfs2-${PV}.tar.gz"
-+SRC_URI[sha256sum] = "01cb4bb38deb344f540da6f1464dc7edbdeb51213ad810b8c9c282c1e17e0fc1"
-+
-+S = "${WORKDIR}/httpfs2-${PV}"
-+
-+do_compile() {
-+    cd ${S}
-+    oe_runmake httpfs2
-+}
-+
-+do_install() {
-+    cd ${S}
-+    install -d ${D}${bindir}
-+    install -m 0755 httpfs2 ${D}${bindir}
-+}
+diff --git a/meta-oe/recipes-shells/mksh/mksh_58.bb b/meta-oe/recipes-shells/mksh/mksh_59.bb
+similarity index 74%
+rename from meta-oe/recipes-shells/mksh/mksh_58.bb
+rename to meta-oe/recipes-shells/mksh/mksh_59.bb
+index a9940f88a..110e793b0 100644
+--- a/meta-oe/recipes-shells/mksh/mksh_58.bb
++++ b/meta-oe/recipes-shells/mksh/mksh_59.bb
+@@ -3,14 +3,14 @@ HOMEPAGE = "http://www.mirbsd.org/mksh.htm"
+ SECTION = "base/shell"
+ 
+ LICENSE = "${@bb.utils.contains("TCLIBC", "glibc", "MirOS & ISC", "MirOS", d)}"
+-LIC_FILES_CHKSUM = "file://main.c;beginline=6;endline=26;md5=0651e575e39d1a3e884562e25d491fc7 \
++LIC_FILES_CHKSUM = "file://main.c;beginline=6;endline=26;md5=6efc2c249328e4d2bd3e595d5b1f9d31 \
+                     file://strlcpy.c;beginline=1;endline=17;md5=d953f28f0c43ee29e238ec9bc15df2a0 \
+                    "
+ 
+-SRC_URI = "http://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-R58.tgz"
++SRC_URI = "http://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-R59b.tgz"
+ 
+-SRC_URI[md5sum] = "6922a3e2228de2f0e78ff25398ccf8df"
+-SRC_URI[sha256sum] = "608beb7b71870b23309ba1da8ca828da0e4540f2b9bd981eb39e04f8b7fc678c"
++SRC_URI[md5sum] = "dce6abffc2036288540b9ba11dfb2ec8"
++SRC_URI[sha256sum] = "907ed1a9586e7f18bdefdd4a763aaa8397b755e15034aa54f4d753bfb272e0e6"
+ 
+ inherit update-alternatives
+ 
 -- 
-2.11.0
+2.17.1
+
+
 
