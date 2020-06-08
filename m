@@ -1,148 +1,97 @@
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.89])
- by mx.groups.io with SMTP id smtpd.web10.505.1591650317988791856
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.70])
+ by mx.groups.io with SMTP id smtpd.web10.3582.1591658779935261213
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jun 2020 14:05:18 -0700
+ Mon, 08 Jun 2020 16:26:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=pMomOcuM;
- spf=pass (domain: windriver.com, ip: 40.107.93.89, mailfrom: yongxin.liu@windriver.com)
+ dkim=fail reason="body hash did not verify" header.i=@uievolution.onmicrosoft.com header.s=selector2-uievolution-onmicrosoft-com header.b=WOUntL5b;
+ spf=pass (domain: xevo.com, ip: 40.107.92.70, mailfrom: mkelly@xevo.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ae6c4BLEzRoC+Rry+QqFlbaPFK/7vg7fVA6w534tjkoPFeI+gFwBD7hquPDEc2vT/7vHEnyqbsWfE7xNHHQ9G9DDCExyBCW/3fi43/vOwwk5WenU1mV5Jr1j907Tb1FCXiW0CGlVt1fDqIr8ey7qqOiwzrhb2VjZUUUetJ3Hp80YoqMXn/msUYie7pmEJAn0qN23jJODYJOGG+0p99qSSFpTYWZHja91qOMQl1Eb1z+flPUIQMa1Qd6ZK7drGwWCLGJKQ+BG9ve3ls4tW3xjfci9cwGCasyonlMJd6yJfLVEedndxbVEjvlWhuVQ9DmkS2pFThZF7hHjjik3M+H5cA==
+ b=YhliUzx/9ik9+piOet0B45/Ehdpb/imNmbIP5/2cYwFEIhPhYA9mREYDqbk3WwApYDb+C1xTwevsyRZ8c9exTbatXWFtBlOJ7KR2jRIgYh+rwTKM/2uiTiPL75xGhCL1Us+dkR1n4jvZibFsg/HXa3fR3i8h8nbgZV+w0rbWAEDQo3W6536WB+eOeTZDJUZImCDyYEMXbPqLuzj8eYVk8fEADaR8MI3+8gs4WAofy4zL4Iko1MKR5s0Bm4j3l5zVfYj1TrDEFTYrWckRF5oW7HkosEu4zRxYxlPC1XvuViRTRd3UyqghreFvh36R1mvpRObbdEBwYI9308aVDWixsQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hpI12rfAiKMSKuIjTkRUUmoP0gKuvQP58J5iisaSXbM=;
- b=hCbuAX5HZb7LGDDzvxGZRVmQvTPqAGtwGs2nOyDXwXwh/p9ba87RzQxQvVNFwNJFlyVtSoG9npa/UgYj1Dx2upiroFoNjp34XFcCN/O4gE518iHhCQW7g6oC5Ix4JcalS0iJj2XqIIjMETrus2N+9wnZ/4iWW3W3c8Re6i3agiWKOC2hXulk1N3BQMhlLguRNaHbuiBvEe9rg5UES9FgPUGk8rQFDcMqK/hfPiPetLrpNk9Qsevfn5hhug4J5x/UMbkdRJEH1U5YkPVlDwZ+ZHNAmIb2Mygz/fZ5AUh/Qrsr8wfp4gcvWjzo/43eHxOm4tlWsjsYXGgXcHK2hfFCaA==
+ bh=vIy0kQj7qe8CFtUh1f1S2hu7W7piFxCzibrqiSC3efw=;
+ b=gjwo7kk7G9HbOPWpzhZHeibFzlCyEK9qp7X0x78uvPN/l52aVrO2egkVdvzyq7oevUdrmRzmMiojBUzApYmkqIqu+OgCVtQH3F3LifvgOOiXOaPcM0lq25bNqTPF757qQTuj5GIwUu8DdeTW9npqmTLsGSY1zoSIMPFMttoyN17K37LaCr3XBFjlrUKHmN99RRbgxMAWJ3P/x6TOkSKwNlbOZicqbqb+br8OO1XwzVMlRErvWxEd371t/NDut2iAF+P5Yf2uCP5x+n7mM8kN4d0k/i2gCDY9dQauNETxlkpODmMOBLZmEi8WeRmPLYMCtlAzsSmZmKz1AleezJfY/A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ smtp.mailfrom=xevo.com; dmarc=pass action=none header.from=xevo.com;
+ dkim=pass header.d=xevo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
+ d=uievolution.onmicrosoft.com; s=selector2-uievolution-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hpI12rfAiKMSKuIjTkRUUmoP0gKuvQP58J5iisaSXbM=;
- b=pMomOcuMbJnWAZNBj0nDIxV7FVcGC8wUyJ5eHyDdQKMNmNOLE8PqyFAN1brZZnzGEMufPtpWRvGOzIYy0D0xZTPc3b8rlgeKKRW8/glMfymhv2Y/NT4amTs8EJMud5S46wSR7hTWp3GjLHnJk7rTCYCafzzII7oHary3StMcLtA=
-Received: from DM6PR11MB4409.namprd11.prod.outlook.com (2603:10b6:5:1df::30)
- by DM6PR11MB3116.namprd11.prod.outlook.com (2603:10b6:5:6b::29) with
+ bh=vIy0kQj7qe8CFtUh1f1S2hu7W7piFxCzibrqiSC3efw=;
+ b=WOUntL5bdqfjQnTJC/ETQ3WIkKL4tvo20lUqYggWK4LVlZeqO3kxuCFmbIgkbNZ/lTPzo0LYzEJ4zRps7vQpOE4K66TDncR43FGiGODRb+vUPceHao+PXSgqkA54dgCoiw2uVEzEsaxZ7hYfjr33r4lKJxjiZISh/l6KM6NLiEY=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=xevo.com;
+Received: from MWHPR18MB1183.namprd18.prod.outlook.com (2603:10b6:320:26::22)
+ by MWHPR18MB1167.namprd18.prod.outlook.com (2603:10b6:300:a3::18) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.19; Mon, 8 Jun
- 2020 21:05:17 +0000
-Received: from DM6PR11MB4409.namprd11.prod.outlook.com
- ([fe80::1def:a9ab:efd4:90dc]) by DM6PR11MB4409.namprd11.prod.outlook.com
- ([fe80::1def:a9ab:efd4:90dc%5]) with mapi id 15.20.3066.023; Mon, 8 Jun 2020
- 21:05:17 +0000
-From: "Yongxin Liu" <yongxin.liu@windriver.com>
-To: "Liu, Yongxin" <Yongxin.Liu@windriver.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe][meta-oe][PATCH V2] intel-speed-select: Add new recipe for the tool to validate Intel SST
-Thread-Topic: [oe][meta-oe][PATCH V2] intel-speed-select: Add new recipe for
- the tool to validate Intel SST
-Thread-Index: AQHWPdg4LY+atKJ4FUW0g8iILft+MqjPNMtA
-Date: Mon, 8 Jun 2020 21:05:17 +0000
-Message-ID: 
- <DM6PR11MB4409C6B794E21CAA984D4112E5850@DM6PR11MB4409.namprd11.prod.outlook.com>
-References: <1616AD5F60C5F964.2507@lists.openembedded.org>
-In-Reply-To: <1616AD5F60C5F964.2507@lists.openembedded.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: windriver.com; dkim=none (message not signed)
- header.d=none;windriver.com; dmarc=none action=none
- header.from=windriver.com;
-x-originating-ip: [60.247.85.82]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 6fd1fc4d-f0e9-4325-58a0-08d80befa549
-x-ms-traffictypediagnostic: DM6PR11MB3116:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: 
- <DM6PR11MB311684C55B61D63F713866C0E5850@DM6PR11MB3116.namprd11.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:277;
-x-forefront-prvs: 042857DBB5
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- VqtPgTiebE5w7Rsmc0V4o/8gtEy3OF75LOySpm+XfYVhhFjhThAIkmSZxlr8Um30mYlm8MYe/mQtTWetIy6Sk+4LfDR7GjxOhcZyV8yNYaAUIZqnVL5a41Jm8fxNsVcBrMogKaKaXQqVxAFJ8RYcc/Jwlyf2qOfvHPwV2eOeZDA8nQ5zex9RJ3prhEsujN0azakceEhtHoWLOABQYrQ6EeleHwl1lqLFQSKxtpdEumqcDlCq74R2KWX+QF7smklUON3ZRqK4BsdI8aWs7UbXF3SqJ0xeOg8ZNcGRJ+NvWnKHNhwD4qszDiSd/vhLTHMv
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB4409.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(376002)(366004)(346002)(396003)(39850400004)(26005)(52536014)(186003)(55016002)(7696005)(6506007)(9686003)(5660300002)(8936002)(53546011)(86362001)(110136005)(83380400001)(478600001)(66476007)(316002)(76116006)(2906002)(66446008)(66556008)(15650500001)(8676002)(64756008)(66946007)(71200400001)(33656002);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata: 
- guvKqFdTnH5r8i7Ej43XsqeZ/yQKA+ZzrvjqYfTcZFirDcddfC0wU53y115kie8+Vyo56Lny5o46+3I1m9/PtuQvsHCiZhTb2JApV40CYFzLClygr5iwZKrUoWSZmF856tFhxd7X5h3s0ex94FF29V6ESR9z5l2jqKEzRZep+VEVo8OMnzEc9fodAouCCLAx47of+7CJycGDOQjr8lfCfoQnAurvbgD2XoqMPXWnBk8vTiP+hzdxiUSB0/QvPosHB9f6Du0yGtke/cWdQYgzl8VyzaeTt5FU5pQrB5e+yhVnJFi56sAJvWBxiE41rMD5N5bWAGKihgivE6kpMQI3rLR51sTU/Q5uON1CAKpjSaKCpKUh61M/84kjmoyRks+/fk8fkqo6HuFqrC14oHc/EBfC8XypOW167auT9Eqe+bOCbSyXTaoi0/AuoyFwwRniHRoVhODb2NUmYhMfW+qJCgfmLFSDfOZn1HM7seabTFw=
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.22; Mon, 8 Jun
+ 2020 23:26:18 +0000
+Received: from MWHPR18MB1183.namprd18.prod.outlook.com
+ ([fe80::f183:20e6:b346:a1ca]) by MWHPR18MB1183.namprd18.prod.outlook.com
+ ([fe80::f183:20e6:b346:a1ca%8]) with mapi id 15.20.3066.023; Mon, 8 Jun 2020
+ 23:26:18 +0000
+From: "Martin Kelly" <mkelly@xevo.com>
+To: openembedded-devel@lists.openembedded.org
+CC: Martin Kelly <mkelly@xevo.com>
+Subject: [meta-python][PATCH] python3-paho-mqtt: add native,nativesdk support
+Date: Mon,  8 Jun 2020 16:25:58 -0700
+Message-ID: <20200608232558.1179770-1-mkelly@xevo.com>
+X-Mailer: git-send-email 2.26.2
+X-ClientProxiedBy: CO1PR15CA0114.namprd15.prod.outlook.com
+ (2603:10b6:101:21::34) To MWHPR18MB1183.namprd18.prod.outlook.com
+ (2603:10b6:320:26::22)
+Return-Path: mkelly@xevo.com
 MIME-Version: 1.0
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6fd1fc4d-f0e9-4325-58a0-08d80befa549
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Jun 2020 21:05:17.0742
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from columbia.corp.xevo.com (50.35.86.191) by CO1PR15CA0114.namprd15.prod.outlook.com (2603:10b6:101:21::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.19 via Frontend Transport; Mon, 8 Jun 2020 23:26:17 +0000
+X-Mailer: git-send-email 2.26.2
+X-Originating-IP: [50.35.86.191]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 81e72df2-1b1f-41cb-8f78-08d80c03582a
+X-MS-TrafficTypeDiagnostic: MWHPR18MB1167:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: 
+	<MWHPR18MB1167C41FE889764457753D43AB850@MWHPR18MB1167.namprd18.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:296;
+X-Forefront-PRVS: 042857DBB5
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	dntkQ7BeQTotRAxmrmEQhXAxCORU2EaDj/vyhF270XrIUN0p61XbEkBBJjyWfh0H7atuQYHpQ7ZzGp0A/yAI0wyKkD9cwy2+/sEQWIOL5LeMgzLTjd4a2qQMUd1FCNOizVTcRT8OKg+VhAQkMMwFawBAOsTwT7uRBQ0ufI2LG4LwM9IcPUxmtnVTUnW5+fBhvH9wKPAWqJ45qnNtT3Qc3AVHaIsKEMJAu4tCaGrNLHa1LiM6znTBIMCw2DB0KhBvMXxeXNVRXx9mkS50gpQ69JdlEaiJP2AFujOM5FcPuE4nbyqILFCdPUJFKIQw0+L8HzfzSz44cpGVZ7Dm7Cel24jMO/g9y48Xp3IPBZWGumOeqOu5nfmaSkPKWrUTOMzG
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MWHPR18MB1183.namprd18.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(39840400004)(366004)(346002)(396003)(376002)(8936002)(5660300002)(6486002)(66556008)(4326008)(1076003)(66476007)(66946007)(36756003)(4744005)(107886003)(2616005)(956004)(6916009)(86362001)(478600001)(26005)(316002)(8676002)(2906002)(6666004)(7696005)(52116002)(186003)(16526019)(142933001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	p+2XyEFIRf4mKpuRFHE62h1vNLdJVsEbfN7y0145l2od5ldIJjvxd/wyThwXmU/PXeG2eOZ5lWS0oWBQw3o1N+Rx6SHxebja9beA2mM1slTgCn2nPh1x4MHo30dRulyySYyWP3T19epTsAmCXxWlaBbWapq/8xS9YoN0Pvbew6grnse2+GxlmkDFn4HNyE0kAt1iMl6txGlXbePFaxlhObxlH7fjEVynaiX6SvsGmHCWryeVvTeesZg0A5iCWJzgMQn0ag6SMojgycDOTNISaYJk2lVFT4dtm5TkbM3+QGyH1m2SZoGr9cG1To5fwiDp9IDPRncedw+Q1S6XedAASz+Y5nGL5F+6HRCiijtm4o+oD9Yrwm2Yh5Ajv7bD6d5MBmHTPSvjiVGeWBegio04Z/ewM32C0uQrDx4hz352YBooPIQIjQ/4wUvDEB7TRzDK1Z65lVHh0v/iRtWnzlUi9rm9RzhyV/LG5vTSevmx53A=
+X-OriginatorOrg: xevo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 81e72df2-1b1f-41cb-8f78-08d80c03582a
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2020 23:26:17.9373
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: qrC/qKqr6dlN6wZ/vgZb07RpvS7qkGpRterhJ2MgL0FG4B2IdawzXtHNUNZHNGz1emhTFjOHueyQeXm4rlnlX5431n9Hk8R8VkOk9aNkPN4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB3116
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e0a7ca1f-2458-4cd6-a7c7-d733c07495ab
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: MThEcy7NP/7pbt8xELgdt96BZIGyx3G3vk66LBzqZBKd0bXz6zDiN1JOBJOZeJYF
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR18MB1167
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-V1->V2:
-1) Fix typo in commit log. "valid" -> "validate"
-2) Add "COMPATIBLE_HOST" in bb file.
+Signed-off-by: Martin Kelly <mkelly@xevo.com>
+---
+ meta-python/recipes-devtools/python/python3-paho-mqtt_1.5.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Thanks,
-Yongxin
-
-> -----Original Message-----
-> From: openembedded-devel@lists.openembedded.org <openembedded-
-> devel@lists.openembedded.org> On Behalf Of Yongxin Liu
-> Sent: Tuesday, June 9, 2020 05:00
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe][meta-oe][PATCH V2] intel-speed-select: Add new recipe for
-> the tool to validate Intel SST
->=20
-> Signed-off-by: Yongxin Liu <yongxin.liu@windriver.com>
-> ---
->  .../intel-speed-select/intel-speed-select.bb       | 29
-> ++++++++++++++++++++++
->  1 file changed, 29 insertions(+)
->  create mode 100644 meta-oe/recipes-kernel/intel-speed-select/intel-speed=
--
-> select.bb
->=20
-> diff --git a/meta-oe/recipes-kernel/intel-speed-select/intel-speed-
-> select.bb b/meta-oe/recipes-kernel/intel-speed-select/intel-speed-
-> select.bb
-> new file mode 100644
-> index 000000000..a34f379b4
-> --- /dev/null
-> +++ b/meta-oe/recipes-kernel/intel-speed-select/intel-speed-select.bb
-> @@ -0,0 +1,29 @@
-> +SUMMARY =3D "A tool to validate Intel Speed Select commands"
-> +
-> +DESCRIPTION =3D "The Intel Speed Select Technology (Intel SST) is a
-> +powerful new \ collection of features giving you more granular control
-> +over CPU performance \ for optimized total cost of ownership."
-> +
-> +LICENSE =3D "GPLv2"
-> +
-> +inherit kernelsrc
-> +
-> +COMPATIBLE_HOST =3D '(x86_64|i.86).*-linux'
-> +
-> +do_populate_lic[depends] +=3D "virtual/kernel:do_patch"
-> +
-> +B =3D "${WORKDIR}/${BPN}-${PV}"
-> +
-> +EXTRA_OEMAKE =3D "-C ${S}/tools/power/x86/intel-speed-select O=3D${B}
-> CROSS=3D${TARGET_PREFIX} CC=3D"${CC}" LD=3D"${LD}" AR=3D${AR} ARCH=3D${AR=
-CH}"
-> +
-> +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
-> +
-> +do_configure[depends] +=3D "virtual/kernel:do_shared_workdir"
-> +
-> +do_compile() {
-> +	oe_runmake
-> +}
-> +
-> +do_install() {
-> +	oe_runmake DESTDIR=3D${D} install
-> +}
-> --
-> 2.14.4
+diff --git a/meta-python/recipes-devtools/python/python3-paho-mqtt_1.5.0.bb=
+ b/meta-python/recipes-devtools/python/python3-paho-mqtt_1.5.0.bb
+index cc6f4dc8c..8bf80e601 100644
+--- a/meta-python/recipes-devtools/python/python3-paho-mqtt_1.5.0.bb
++++ b/meta-python/recipes-devtools/python/python3-paho-mqtt_1.5.0.bb
+@@ -20,3 +20,5 @@ RDEPENDS_${PN} =3D "\
+     ${PYTHON_PN}-netclient \
+     ${PYTHON_PN}-threading \
+ "
++
++BBCLASSEXTEND =3D "native nativesdk"
+--=20
+2.26.2
 
