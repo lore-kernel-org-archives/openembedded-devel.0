@@ -1,93 +1,64 @@
-Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web11.27344.1591613626514696912
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.28207.1591617174947391578
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jun 2020 03:53:47 -0700
+ Mon, 08 Jun 2020 04:52:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=GWO5ne2J;
- spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 8472A60250;
-	Mon,  8 Jun 2020 12:53:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1591613624;
-	bh=waR8W6nq+sZWMYVbdv1fgxRHIddDYyquy3DC87Qpzlg=;
-	h=From:To:Cc:Subject:Date:From;
-	b=GWO5ne2J+jKjUVCISmN1nB3Ma8krH4b3PEpW+dQDDjsliOIhDtFqjr3alFuqdOhiu
-	 CCI3sRl4flkWiIfAtomT7Pxu2mQbRK7u1wpEMyRVRO1Srkj1+uIvgxtj4suc8i87jZ
-	 QjLFxoOIud8zuUQv3mp4DToOv5ZEyfIkB9mHbwVBdVT/cFtiMAcOp+huMEtevM/Hi1
-	 ulKyJ3euJjAp7WDP1ca0LQNOcJ5cZ04/qsrB8r+FCdVLHYUTui5JWi0qicDn+qwTEY
-	 9O5zzGZlWf0pFQibB9UniuhPJx8zpAbPsjUvRUnRUGhxayd3rAAyOnlCTyUL0HS917
-	 XlXXEUGevfvMg==
-From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH] libnfc: upgrade 1.7.1 -> 1.8.0
-Date: Mon,  8 Jun 2020 12:52:56 +0200
-Message-Id: <1591613576-15268-1-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: yongxin.liu@windriver.com)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 058BqXwa005897
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 8 Jun 2020 04:52:43 -0700
+Received: from pek-lpggp6.wrs.com (128.224.153.40) by ALA-HCB.corp.ad.wrs.com
+ (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Mon, 8 Jun 2020
+ 04:52:04 -0700
+From: "Yongxin Liu" <yongxin.liu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][PATCH] intel-speed-select: Add new recipe for the tool to valid Intel SST
+Date: Mon, 8 Jun 2020 19:49:30 +0800
+Message-ID: <20200608114930.8870-1-yongxin.liu@windriver.com>
+X-Mailer: git-send-email 2.14.4
+MIME-Version: 1.0
+Content-Type: text/plain
 
-See full changelog https://github.com/nfc-tools/libnfc/blob/master/ChangeLog#L1
-
-Also remove patch applied upstream
-
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Yongxin Liu <yongxin.liu@windriver.com>
 ---
- .../0001-usbbus-Include-stdint.h-for-uintX_t.patch | 24 ----------------------
- meta-oe/recipes-core/libnfc/libnfc_git.bb          |  8 +++-----
- 2 files changed, 3 insertions(+), 29 deletions(-)
- delete mode 100644 meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
+ .../intel-speed-select/intel-speed-select.bb       | 27 ++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/intel-speed-select/intel-speed-select.bb
 
-diff --git a/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch b/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
-deleted file mode 100644
-index b8ed87a..0000000
---- a/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
-+++ /dev/null
-@@ -1,24 +0,0 @@
--From cb2a3991545ba9e885704226ed3e831bd5e4cb27 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 20 May 2019 22:10:05 -0700
--Subject: [PATCH] usbbus: Include stdint.h for uintX_t
--
--stdint.h is needed for uintX_t typedefs which are
--used to replace u_intX_t in libusb API headers in the cmake files
--
--Upstream-Status: Submitted [https://github.com/nfc-tools/libnfc/pull/544]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- libnfc/buses/usbbus.h | 2 ++
-- 1 file changed, 2 insertions(+)
--
----- a/libnfc/buses/usbbus.h
--+++ b/libnfc/buses/usbbus.h
--@@ -35,6 +35,7 @@
-- 
-- #ifndef _WIN32
-- // Under POSIX system, we use libusb (>= 0.1.12)
--+#include <stdint.h>
-- #include <usb.h>
-- #define USB_TIMEDOUT ETIMEDOUT
-- #define _usb_strerror( X ) strerror(-X)
-diff --git a/meta-oe/recipes-core/libnfc/libnfc_git.bb b/meta-oe/recipes-core/libnfc/libnfc_git.bb
-index 2851ecf..9e602f1 100644
---- a/meta-oe/recipes-core/libnfc/libnfc_git.bb
-+++ b/meta-oe/recipes-core/libnfc/libnfc_git.bb
-@@ -7,13 +7,11 @@ SECTION = "libs"
- 
- inherit autotools pkgconfig
- 
--PV = "1.7.1+git${SRCPV}"
-+PV = "1.8.0+git${SRCPV}"
- 
- S = "${WORKDIR}/git"
--SRCREV = "2d4543673e9b76c02679ca8b89259659f1afd932"
--SRC_URI = "git://github.com/nfc-tools/libnfc.git \
--           file://0001-usbbus-Include-stdint.h-for-uintX_t.patch \
--          "
-+SRCREV = "f02ff51449240102c27a97173dc495e8e7789046"
-+SRC_URI = "git://github.com/nfc-tools/libnfc.git"
- 
- CFLAGS_append_libc-musl = " -D_GNU_SOURCE"
- DEPENDS = "libusb"
+diff --git a/meta-oe/recipes-kernel/intel-speed-select/intel-speed-select.bb b/meta-oe/recipes-kernel/intel-speed-select/intel-speed-select.bb
+new file mode 100644
+index 000000000..e62c227ed
+--- /dev/null
++++ b/meta-oe/recipes-kernel/intel-speed-select/intel-speed-select.bb
+@@ -0,0 +1,27 @@
++SUMMARY = "A tool to validate Intel Speed Select commands"
++
++DESCRIPTION = "The Intel Speed Select Technology (Intel SST) is a powerful new \
++collection of features giving you more granular control over CPU performance \
++for optimized total cost of ownership."
++
++LICENSE = "GPLv2"
++
++inherit kernelsrc
++
++do_populate_lic[depends] += "virtual/kernel:do_patch"
++
++B = "${WORKDIR}/${BPN}-${PV}"
++
++EXTRA_OEMAKE = "-C ${S}/tools/power/x86/intel-speed-select O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++do_configure[depends] += "virtual/kernel:do_shared_workdir"
++
++do_compile() {
++	oe_runmake
++}
++
++do_install() {
++	oe_runmake DESTDIR=${D} install
++}
 -- 
-2.7.4
+2.14.4
 
