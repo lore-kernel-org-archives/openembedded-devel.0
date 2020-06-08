@@ -1,137 +1,144 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.28589.1591618485902636618
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.83])
+ by mx.groups.io with SMTP id smtpd.web12.147.1591649265370603763
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jun 2020 05:14:46 -0700
+ Mon, 08 Jun 2020 13:47:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=50432 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jiGfo-0005b8-Rn; Mon, 08 Jun 2020 15:14:45 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 7/7] python3-prettytable: Consolidate in a single file
-Date: Mon,  8 Jun 2020 15:14:10 +0300
-Message-Id: <20200608121410.5814-7-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200608121410.5814-1-leon.anavi@konsulko.com>
-References: <20200608121410.5814-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.7
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=PpzS464z;
+ spf=pass (domain: windriver.com, ip: 40.107.94.83, mailfrom: yongxin.liu@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=esMS63QwU2QQvJPeJc0pVIRst7d2u8XEzU7Uyu4d5R5hFDMyhsjF97Hz1URlIk7XgxMDCUrknmuqcSVDo7U2l0aYHHe5sxZxWBgfu3rPfKyGdyjh9qWEpxKCBNN8iCJxG7+O8F/ltX4+i9IO01TpQBE0qslDDdbRsTjvc0w/8aIGr72o4zOv42L6MVdY5zQxJczxa80IM/5wBdpqdxjicdGG9TEDteJX8MXG4z8z1jBoz0YfhHeliqXOr3/yGLV3NR7ODCst8gNqEXXiNXSDSToPAekXlktLa9JtJSB9HXFGUtoOSXgjfNh+sSAXle+KQy4926s2UpgDSpgqnNUh0w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jsQG9l23GBVIr52F18/HjfinjMg+HoKWAndinOU3fdI=;
+ b=ihY21o1cAGaF7SPKFt952AryYmDuIswm4G/tzPeYUU5RzDiqXISs81x/MufaKGmUK+g6rvW5ruO8iYqhoRWN+OAVTA8Qk9Eiq+XrqSbjWqH8mvzu6w7veP9K/o6ZK2LOif86o5jw/sHEuhwCQ4bKTmdBOMmiqJSUd/BJ9m//hAuvsO7l/gC7bQim1I7PGrmtvBzmFGrSZLG7S4eWqZegjDqX/FojxYL+yutcDIFvzHiLwVfTpCniI7HbGecND7kCz3nYicTCRPu9Rb/Aea73P/KoFrhOlDMgRfDUpcbp/o8ESYR/9/U3dgJhDk242ephxwNFBdmKklgm+JtLfKyBdA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jsQG9l23GBVIr52F18/HjfinjMg+HoKWAndinOU3fdI=;
+ b=PpzS464zRhpmhgSJASJqAzbhB4C4yffA/YZIWLaSoJrurPT1CEJgiYaWaCt/ejdFc539/Rq4OE9qQvL8ceWZ5v2XU2vIgLU7MkJ1WcEUKGhIde2Ga4T3j1T2smEK4Daoa3Q4YzaX5WyI860M3Ugy8dSfhG6EDw7ikq5F69YzPZc=
+Received: from DM6PR11MB4409.namprd11.prod.outlook.com (2603:10b6:5:1df::30)
+ by DM6PR11MB4348.namprd11.prod.outlook.com (2603:10b6:5:1db::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18; Mon, 8 Jun
+ 2020 20:47:42 +0000
+Received: from DM6PR11MB4409.namprd11.prod.outlook.com
+ ([fe80::1def:a9ab:efd4:90dc]) by DM6PR11MB4409.namprd11.prod.outlook.com
+ ([fe80::1def:a9ab:efd4:90dc%5]) with mapi id 15.20.3066.023; Mon, 8 Jun 2020
+ 20:47:42 +0000
+From: "Yongxin Liu" <yongxin.liu@windriver.com>
+To: "Liu, Yongxin" <Yongxin.Liu@windriver.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe][meta-oe][PATCH] intel-speed-select: Add new recipe for the tool to valid Intel SST
+Thread-Topic: [oe][meta-oe][PATCH] intel-speed-select: Add new recipe for the
+ tool to valid Intel SST
+Thread-Index: AQHWPYtqsDqKbfzyb0GNEQhokaOsSqjPMNKg
+Date: Mon, 8 Jun 2020 20:47:42 +0000
+Message-ID: 
+ <DM6PR11MB440914D8BAE8E62F1374A8D0E5850@DM6PR11MB4409.namprd11.prod.outlook.com>
+References: <16168F6369AB6DE4.1219@lists.openembedded.org>
+In-Reply-To: <16168F6369AB6DE4.1219@lists.openembedded.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: windriver.com; dkim=none (message not signed)
+ header.d=none;windriver.com; dmarc=none action=none
+ header.from=windriver.com;
+x-originating-ip: [60.247.85.82]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 32433712-d17a-4859-4572-08d80bed30ca
+x-ms-traffictypediagnostic: DM6PR11MB4348:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: 
+ <DM6PR11MB4348467236E86629C0736015E5850@DM6PR11MB4348.namprd11.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:6430;
+x-forefront-prvs: 042857DBB5
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ 0BC1U+EG6bA0+Bbu1PWqa7W/pzsw5k/WkPIw1p2OGf/Z/4gqYnyq7JnkXrOJ+ocd/T090V7fBJ3DURd1Br3E5nwYBysl22pZlhPHg0fLnwF2U8IHjwVobOXkx69ycWJRBAVvY+vKW0UJ4VlFhyc+XmrbRhidx/dl+vQNzl8egp9jJ1GSu///BR+yBgLArDv56qwfEPHKku/pgExRJg+exMYDtnCc8Cyrdnv8ueZm9BQncv/3z38zbSVyP1HV48XjsTBlRtF+xVT5oZ9fJuByssumNIiqqoLYTX8UXUL7dqtLDgFXaQlRfPpNAPJrWQpl
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB4409.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(346002)(376002)(39850400004)(366004)(136003)(33656002)(478600001)(53546011)(110136005)(8936002)(316002)(7696005)(6506007)(8676002)(5660300002)(83380400001)(26005)(9686003)(55016002)(66476007)(66556008)(64756008)(66946007)(186003)(2906002)(66446008)(71200400001)(52536014)(76116006)(86362001);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata: 
+ kixoZ15AW30URKjVoyYTwSN4iP76aASV3ino+GWbbUOKLIY1nSXz6o4iuxzn9v8JFPowCMk+g80rtKqoLw1mj3rGXkja6RoBV41iVlScsfbX5kgfYJc4A+4GGsmeeGb2DzF+ym5EjW3vkJMDPGKm0jpu4QM1PNbTigeVXt5ylv4/SrX0nbv0M5ZdIo0JUc+SKt83m2SEvwXy9GwjesB5yPW8ea3MGb/G8qeCQB2QGby9aMOtz1BgnYToLERuHA4y81BPt3cydkSH2l38wWqd3SMD694jxe2pDnWcb5YIocu/PM1/d4uUDx4XLzEodINmXs2UvPVKLDioBdHDO7j25e/VT/3LoApo3o8jeMtJrAfGG7I2a+F/KDORz9H3m7p6mcy1oIBdp5EmH1zOmqRneBxLfxreiozt2ONjCcKTq2l9krss1yrU5AF7vrobCTJnnD9pBoOGFTjF8LhVlFXCcxaF8g8pTq9dv9ann4I8Ovw=
+MIME-Version: 1.0
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 32433712-d17a-4859-4572-08d80bed30ca
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Jun 2020 20:47:42.5652
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: aAGuDKWTdfXWZ3PeLIKVPuqbFn7oxSN+A2SyIN1l+RZTJdaV2+R9K8XQTadOit4qPZqeu0zdrFBu+z0wcy7HJkmi6EIGUbgK8DjpdJ6WeGo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB4348
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Consolidate inc and bb files into a single bb file. Inherit pypi.
+Please ignore this. Will send V2.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../python/python-prettytable.inc             | 43 -------------------
- .../python/python3-prettytable_0.7.2.bb       | 38 +++++++++++++++-
- 2 files changed, 36 insertions(+), 45 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-prettytable.inc
+Thanks,
+Yongxin
 
-diff --git a/meta-python/recipes-devtools/python/python-prettytable.inc b/meta-python/recipes-devtools/python/python-prettytable.inc
-deleted file mode 100644
-index c77a49191..000000000
---- a/meta-python/recipes-devtools/python/python-prettytable.inc
-+++ /dev/null
-@@ -1,43 +0,0 @@
--SUMMARY = "Python library for displaying tabular data in a ASCII table format"
--HOMEPAGE = "http://code.google.com/p/prettytable"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://COPYING;md5=3e73500ffa52de5071cff65990055282"
+> -----Original Message-----
+> From: openembedded-devel@lists.openembedded.org <openembedded-
+> devel@lists.openembedded.org> On Behalf Of Yongxin Liu
+> Sent: Monday, June 8, 2020 19:50
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe][meta-oe][PATCH] intel-speed-select: Add new recipe for the
+> tool to valid Intel SST
+>=20
+> Signed-off-by: Yongxin Liu <yongxin.liu@windriver.com>
+> ---
+>  .../intel-speed-select/intel-speed-select.bb       | 27
+> ++++++++++++++++++++++
+>  1 file changed, 27 insertions(+)
+>  create mode 100644 meta-oe/recipes-kernel/intel-speed-select/intel-speed=
 -
--SRC_URI[md5sum] = "0c1361104caff8b09f220748f9d69899"
--SRC_URI[sha256sum] = "a53da3b43d7a5c229b5e3ca2892ef982c46b7923b51e98f0db49956531211c4f"
--
--SRCNAME = "prettytable"
--
--SRC_URI = "https://pypi.python.org/packages/source/P/PrettyTable/${SRCNAME}-${PV}.zip"
--
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--do_install_append() {
--    perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
--    for f in $perm_files; do
--        chmod 644 "${f}"
--    done
--}
--
--UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/PrettyTable/"
--UPSTREAM_CHECK_REGEX = "/PrettyTable/(?P<pver>(\d+[\.\-_]*)+)"
--
--BBCLASSEXTEND = "native nativesdk"
--inherit ptest
--
--SRC_URI += " \
--	file://run-ptest \
--"
--
--RDEPENDS_${PN} += " \
--	${PYTHON_PN}-math \
--	${PYTHON_PN}-html \
--"
--
--RDEPENDS_${PN}-ptest += " \
--	${PYTHON_PN}-pytest \
--"
--
--do_install_ptest() {
--	cp -f ${S}/prettytable_test.py ${D}${PTEST_PATH}/
--}
-diff --git a/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb b/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
-index 5445f1019..18f339061 100644
---- a/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
-@@ -1,3 +1,37 @@
--inherit setuptools3
--require python-prettytable.inc
-+SUMMARY = "Python library for displaying tabular data in a ASCII table format"
-+HOMEPAGE = "http://code.google.com/p/prettytable"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=3e73500ffa52de5071cff65990055282"
- 
-+SRC_URI[md5sum] = "a6b80afeef286ce66733d54a0296b13b"
-+SRC_URI[sha256sum] = "2d5460dc9db74a32bcc8f9f67de68b2c4f4d2f01fa3bd518764c69156d9cacd9"
-+
-+do_install_append() {
-+    perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
-+    for f in $perm_files; do
-+        chmod 644 "${f}"
-+    done
-+}
-+
-+UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/PrettyTable/"
-+UPSTREAM_CHECK_REGEX = "/PrettyTable/(?P<pver>(\d+[\.\-_]*)+)"
-+
-+BBCLASSEXTEND = "native nativesdk"
-+inherit pypi ptest setuptools3
-+
-+SRC_URI += " \
-+	file://run-ptest \
-+"
-+
-+RDEPENDS_${PN} += " \
-+	${PYTHON_PN}-math \
-+	${PYTHON_PN}-html \
-+"
-+
-+RDEPENDS_${PN}-ptest += " \
-+	${PYTHON_PN}-pytest \
-+"
-+
-+do_install_ptest() {
-+	cp -f ${S}/prettytable_test.py ${D}${PTEST_PATH}/
-+}
--- 
-2.17.1
+> select.bb
+>=20
+> diff --git a/meta-oe/recipes-kernel/intel-speed-select/intel-speed-
+> select.bb b/meta-oe/recipes-kernel/intel-speed-select/intel-speed-
+> select.bb
+> new file mode 100644
+> index 000000000..e62c227ed
+> --- /dev/null
+> +++ b/meta-oe/recipes-kernel/intel-speed-select/intel-speed-select.bb
+> @@ -0,0 +1,27 @@
+> +SUMMARY =3D "A tool to validate Intel Speed Select commands"
+> +
+> +DESCRIPTION =3D "The Intel Speed Select Technology (Intel SST) is a
+> +powerful new \ collection of features giving you more granular control
+> +over CPU performance \ for optimized total cost of ownership."
+> +
+> +LICENSE =3D "GPLv2"
+> +
+> +inherit kernelsrc
+> +
+> +do_populate_lic[depends] +=3D "virtual/kernel:do_patch"
+> +
+> +B =3D "${WORKDIR}/${BPN}-${PV}"
+> +
+> +EXTRA_OEMAKE =3D "-C ${S}/tools/power/x86/intel-speed-select O=3D${B}
+> CROSS=3D${TARGET_PREFIX} CC=3D"${CC}" LD=3D"${LD}" AR=3D${AR} ARCH=3D${AR=
+CH}"
+> +
+> +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+> +
+> +do_configure[depends] +=3D "virtual/kernel:do_shared_workdir"
+> +
+> +do_compile() {
+> +	oe_runmake
+> +}
+> +
+> +do_install() {
+> +	oe_runmake DESTDIR=3D${D} install
+> +}
+> --
+> 2.14.4
 
