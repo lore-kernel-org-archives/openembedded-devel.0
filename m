@@ -1,66 +1,61 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.3243.1591693894504976825
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web10.3513.1591695130914069582
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jun 2020 02:11:34 -0700
+ Tue, 09 Jun 2020 02:32:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=59396 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jiaI8-0004oW-OA; Tue, 09 Jun 2020 12:11:33 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-oauthlib: Upgrade 2.0.6 -> 3.1.0
-Date: Tue,  9 Jun 2020 12:11:21 +0300
-Message-Id: <20200609091121.23832-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200609091121.23832-1-leon.anavi@konsulko.com>
-References: <20200609091121.23832-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.73,491,1583164800"; 
+   d="scan'208";a="94160361"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 09 Jun 2020 17:32:06 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id B76AC50A9975
+	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Jun 2020 17:32:02 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Tue, 9 Jun 2020 17:32:01 +0800
+From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-networking] [PATCH] nghttp2: upgrade 1.40.0 -> 1.41.0
+Date: Wed, 10 Jun 2020 02:32:00 +0800
+Message-ID: <1591727520-3358-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
+X-yoursite-MailScanner-ID: B76AC50A9975.A76D1
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-Upgrade to release 3.1.0. The year in file LICENCE has been
-updated therefore the checksum has been changed but it still
-remains a BSD license.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- ...{python3-oauthlib_2.0.6.bb => python3-oauthlib_3.1.0.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-oauthlib_2.0.6.bb => python3-oauthlib_3.1.0.bb} (82%)
+ .../nghttp2/{nghttp2_1.40.0.bb => nghttp2_1.41.0.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/nghttp2/{nghttp2_1.40.0.bb => nghttp2_1.41.0.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-oauthlib_2.0.6.bb b/meta-python/recipes-devtools/python/python3-oauthlib_3.1.0.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-oauthlib_2.0.6.bb
-rename to meta-python/recipes-devtools/python/python3-oauthlib_3.1.0.bb
-index 73fd30cb3..fe27e8e50 100644
---- a/meta-python/recipes-devtools/python/python3-oauthlib_2.0.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-oauthlib_3.1.0.bb
-@@ -2,10 +2,10 @@ SUMMARY = "A generic, spec-compliant, thorough implementation of the OAuth reque
- HOMEPAGE = "https://github.com/idan/oauthlib"
+diff --git a/meta-networking/recipes-support/nghttp2/nghttp2_1.40.0.bb b/meta-networking/recipes-support/nghttp2/nghttp2_1.41.0.bb
+similarity index 90%
+rename from meta-networking/recipes-support/nghttp2/nghttp2_1.40.0.bb
+rename to meta-networking/recipes-support/nghttp2/nghttp2_1.41.0.bb
+index 9ed8c5642..29ab0b75a 100644
+--- a/meta-networking/recipes-support/nghttp2/nghttp2_1.40.0.bb
++++ b/meta-networking/recipes-support/nghttp2/nghttp2_1.41.0.bb
+@@ -11,8 +11,8 @@ SRC_URI = "\
+     https://github.com/nghttp2/nghttp2/releases/download/v${PV}/nghttp2-${PV}.tar.xz \
+     file://0001-fetch-ocsp-response-use-python3.patch \
+ "
+-SRC_URI[md5sum] = "8d1a6b96760254e4dd142d7176e8fb7c"
+-SRC_URI[sha256sum] = "09fc43d428ff237138733c737b29fb1a7e49d49de06d2edbed3bc4cdcee69073"
++SRC_URI[md5sum] = "549db3507a7637b28ca467c7f3e9e023"
++SRC_URI[sha256sum] = "abc25b8dc601f5b3fefe084ce50fcbdc63e3385621bee0cbfa7b57f9ec3e67c2"
  
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=5ba9ce41463615e082609806255bce1b"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=abd2675e944a2011aed7e505290ba482"
- 
--SRC_URI[md5sum] = "277a9a966cc8c72e492b4eeb41332445"
--SRC_URI[sha256sum] = "ce57b501e906ff4f614e71c36a3ab9eacbb96d35c24d1970d2539bbc3ec70ce1"
-+SRC_URI[md5sum] = "43cb2b5bac983712ee55076b61181cc2"
-+SRC_URI[sha256sum] = "bee41cc35fcca6e988463cacc3bcb8a96224f470ca547e697b604cc697b2f889"
- 
- inherit pypi setuptools3
- 
+ inherit cmake manpages python3native
+ PACKAGECONFIG[manpages] = ""
 -- 
 2.17.1
+
+
 
