@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.6460.1591707370777417061
+ by mx.groups.io with SMTP id smtpd.web12.6463.1591707373598848331
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jun 2020 05:56:11 -0700
+ Tue, 09 Jun 2020 05:56:13 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=37164 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jidnT-0002LY-MQ; Tue, 09 Jun 2020 15:56:08 +0300
+	id 1jidnW-0002LY-IS; Tue, 09 Jun 2020 15:56:12 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/2] python3-wcwidth: Upgrade 0.1.8 -> 0.2.4
-Date: Tue,  9 Jun 2020 15:55:59 +0300
-Message-Id: <20200609125600.17773-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-twine: Upgrade 1.13.0 -> 3.1.1
+Date: Tue,  9 Jun 2020 15:56:00 +0300
+Message-Id: <20200609125600.17773-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200609125600.17773-1-leon.anavi@konsulko.com>
+References: <20200609125600.17773-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,52 +30,56 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.2.4. The license file has been renamed but
-the source code remains avaiable under MIT. Add a description
-and a homepage.
+Upgrade to release 3.1.1. Fix homepage, summary and license which
+is Apache-2.0. It seems that previously there was a mismatch and
+this information was referencing python six package, not twine.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python3-wcwidth_0.1.8.bb | 10 ----------
- .../recipes-devtools/python/python3-wcwidth_0.2.4.bb | 12 ++++++++++++
- 2 files changed, 12 insertions(+), 10 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-wcwidth_0.1.8.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-wcwidth_0.2.4.bb
+ .../python/python3-twine_1.13.0.bb                | 11 -----------
+ .../python/python3-twine_3.1.1.bb                 | 15 +++++++++++++++
+ 2 files changed, 15 insertions(+), 11 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-twine_1.13.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-twine_3.1.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-wcwidth_0.1.8.bb b/meta-python/recipes-devtools/python/python3-wcwidth_0.1.8.bb
+diff --git a/meta-python/recipes-devtools/python/python3-twine_1.13.0.bb b/meta-python/recipes-devtools/python/python3-twine_1.13.0.bb
 deleted file mode 100644
-index f9f6474ad..000000000
---- a/meta-python/recipes-devtools/python/python3-wcwidth_0.1.8.bb
+index f5cc70f98..000000000
+--- a/meta-python/recipes-devtools/python/python3-twine_1.13.0.bb
 +++ /dev/null
-@@ -1,10 +0,0 @@
--SUMMARY = "Library for building powerful interactive command lines in Python"
+@@ -1,11 +0,0 @@
+-DESCRIPTION = "Six is a Python 2 and 3 compatibility library"
+-HOMEPAGE = "https://github.com/benjaminp/six"
 -LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=11fba47286258744a6bc6e43530c32a1"
+-LIC_FILES_CHKSUM = "file://README.rst;md5=3963bdcee7562bedae1effa09e7542b2"
 -
--SRC_URI[md5sum] = "dc6677d099e6f49c0f6fbc310de261e9"
--SRC_URI[sha256sum] = "f28b3e8a6483e5d49e7f8949ac1a78314e740333ae305b4ba5defd3e74fb37a8"
+-SRC_URI[md5sum] = "6fb4da0c7d81ddfd48f619b8caa1493c"
+-SRC_URI[sha256sum] = "d6c29c933ecfc74e9b1d9fa13aa1f87c5d5770e119f5a4ce032092f0ff5b14dc"
 -
 -inherit pypi setuptools3
 -
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-wcwidth_0.2.4.bb b/meta-python/recipes-devtools/python/python3-wcwidth_0.2.4.bb
+-BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python3-twine_3.1.1.bb b/meta-python/recipes-devtools/python/python3-twine_3.1.1.bb
 new file mode 100644
-index 000000000..48ff37654
+index 000000000..31b55302a
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-wcwidth_0.2.4.bb
-@@ -0,0 +1,12 @@
-+SUMMARY = "Library for building powerful interactive command lines in Python"
-+DESCRIPTION = "Measures the displayed width of unicode strings in a terminal"
-+HOMEPAGE = "https://github.com/jquast/wcwidth"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b15979c39a2543892fca8cd86b4b52cb"
++++ b/meta-python/recipes-devtools/python/python3-twine_3.1.1.bb
+@@ -0,0 +1,15 @@
++DESCRIPTION = "Utilities for interacting with PyPI"
++HOMEPAGE = "https://twine.readthedocs.io/"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=a3d1106b253a8d50dd82a4202a045b4c"
 +
-+SRC_URI[md5sum] = "5e6cd8cd008a7ad2c2578ac49a9d87a1"
-+SRC_URI[sha256sum] = "8c6b5b6ee1360b842645f336d9e5d68c55817c26d3050f46b235ef2bc650e48f"
++SRC_URI[md5sum] = "faf033a3458de37df6cdecceb6da2c2b"
++SRC_URI[sha256sum] = "d561a5e511f70275e5a485a6275ff61851c16ffcb3a95a602189161112d9f160"
 +
 +inherit pypi setuptools3
 +
-+BBCLASSEXTEND = "native nativesdk"
++DEPENDS += "\
++    ${PYTHON_PN}-setuptools-scm-native \
++"
++
++BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
