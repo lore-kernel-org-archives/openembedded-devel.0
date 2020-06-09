@@ -1,56 +1,56 @@
-Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com [209.85.222.169])
- by mx.groups.io with SMTP id smtpd.web11.324.1591714696055240455
+Received: from mail-qv1-f49.google.com (mail-qv1-f49.google.com [209.85.219.49])
+ by mx.groups.io with SMTP id smtpd.web10.300.1591714697339428599
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jun 2020 07:58:16 -0700
+ Tue, 09 Jun 2020 07:58:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=IhxSzTNN;
- spf=pass (domain: ossystems.com.br, ip: 209.85.222.169, mailfrom: fabio.berton@ossystems.com.br)
-Received: by mail-qk1-f169.google.com with SMTP id v79so21005316qkb.10
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2020 07:58:15 -0700 (PDT)
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=J3npISyu;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.219.49, mailfrom: fabio.berton@ossystems.com.br)
+Received: by mail-qv1-f49.google.com with SMTP id x16so4513701qvr.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2020 07:58:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-        h=from:to:subject:date:message-id:mime-version:organization
-         :content-transfer-encoding;
-        bh=h6tCbJL2m9nXLuRAlL0FWlAkWW0m822sFExFky1D4YU=;
-        b=IhxSzTNNyqr/tbI1xTAg6eNfEQDY69lWiPXdEDCp0fjdwp5BUHLFhDyMZY/OoVtxxT
-         L/N7ov2VwhSppy/eS5cK0nzrIufkqu13I8qlhumfVsSB8DFw7JgtyS0RuHQSnuBtqo42
-         h+3FCmU+azynxPuEjip88dJk3vb88sLHYz1/SheIEQDRex6K3+K6nhX+UXePWO6LYKYr
-         VLazcAynJ1DwN5hHwbOyqatGquD40EbnqnmSvxf/JcM9nRS+cFSxP4CPyCbnXwRxCBk4
-         BNcM43B06ezTM6JelYnjcVfzKs+UkTGlEUuJdEW7Y+JUMdnDP9mbxrT/C/CA21rs5HRT
-         YxiQ==
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+         :organization:content-transfer-encoding;
+        bh=+YZNh++KQvRLT0u8ops/rKgT+dd4Ij8VLiisk8cWQxQ=;
+        b=J3npISyuTR5irCO0fHiOFIvvxal24Bf1rXdZCtBdPNWel/9U/boNLJdqpi1XXFmH9+
+         mMkpI+BXM2MQwXpPn3xufiEy17zJpdkWKmljD1bLHgkv43ni1AsZPQtsiHGqZOUOMlqQ
+         saDAGfilgTAVsO6stoSkq5E4p1P0+uvndc9n62qTnWUVHB9nr3LaYDaRxAkBSZRKFwic
+         Y3aK5ZSPLoJr+fAFjvryYLPkwPiFCkeudkJ8eey86x2Il9Oejwsps7eIklXGhwkauaAV
+         CTs23WmNVxnP6IpU8sZ0mroYnpR3DNHagQ1WSOOlcaEU7X4S986TLxIE+oqsFYIWeEzT
+         2L/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :organization:content-transfer-encoding;
-        bh=h6tCbJL2m9nXLuRAlL0FWlAkWW0m822sFExFky1D4YU=;
-        b=SYzgdu6Lp1M24g5Q4ZNi/eUWvBLQQxyRBveT3QEFF6RltyfDWUnI/McL89US5yrfM8
-         4vON6BoChJnD+ClvKgGEDRhzta2qGlCty85l7dHUifHVMtEcVZGg82UIJP/ZVPk0yV0c
-         wcs/eoPDQ9qEzAiy7/1yCsmBSF9mjOdiYmO0d24ehXrU4Pv18BvS+uQC0ikJ6nfouiS5
-         ZIFlrswGCa/Eh5jzqD+MSAcdT/7H5yQ2yyDLPBeCJIGZT4hf4GqIR9IbtR4SWR0CV+PR
-         LSPqhmPjZO/TnsP/hsyzqKwMRtQXNhlJsdldcKUohPhekfxOslHBlWMtra8RBkUwKH5k
-         vsXw==
-X-Gm-Message-State: AOAM5302ksfiQ3S49uva3giWvqpvPnF9kxM3miD0KnQvMtIdo/2yfrQA
-	nDi7PE8UHX1bVlxoMo4nhyufl0iBdKA=
-X-Google-Smtp-Source: ABdhPJw16OptKc3iLQtifdnh5rlaFLavBPzosE3myxLYxi5dUqgMDAozN9MA6mv/gsUA8xJSpwpH4g==
-X-Received: by 2002:a37:64c2:: with SMTP id y185mr29266470qkb.186.1591714694309;
-        Tue, 09 Jun 2020 07:58:14 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references:mime-version:organization:content-transfer-encoding;
+        bh=+YZNh++KQvRLT0u8ops/rKgT+dd4Ij8VLiisk8cWQxQ=;
+        b=jELz4DgvvRGRs2tA9kYCZnY3q4mkTaAPsX8engaY0XKNRtMrXmQPOOZrmnZJ/PUmn4
+         +gMBaPWuhbr2cKe4o9aoGG5UvDuO0bthqSW6ETC/9F9GIf/CXFWf4c3q9F7inkiBhZYp
+         DR2SiLzqDPESXsqITBQd38u+Tgk1WRN487T70lqiD5nzPr3mn+kkqGt5OSyh1hsJgdd/
+         OaCWBHkET+OdN0P1J1e9v2XrkyexAn1Ws7bT8fGRWXReSI0vvqB4q9iFv4iFSmNRCO2O
+         BsyCKYbKGq/Lc783jvHe9gsuopD9t8aqxCI3c0aHp7of1xOxFiHtvb/qnqzNmU3L9p7M
+         E9EQ==
+X-Gm-Message-State: AOAM530VBegOGQFIzTIT0HUM3BvEeArBSo02tBJgIbXHULScy+/jEtr7
+	WTGyJwUNTw6QoUvYoLxAox4St1zRdxc=
+X-Google-Smtp-Source: ABdhPJw/eGNQzByNAbcZ9AEoc9/zUXQ57+u+qusNkuGzuWo+X4UpSIHLdCLfxNNOwmZ5HJBIbAVpNw==
+X-Received: by 2002:a05:6214:313:: with SMTP id i19mr4375771qvu.183.1591714696158;
+        Tue, 09 Jun 2020 07:58:16 -0700 (PDT)
 Return-Path: <fabio.berton@ossystems.com.br>
 Received: from pikachu.lab.ossystems ([181.220.84.90])
-        by smtp.gmail.com with ESMTPSA id j5sm10557995qtr.73.2020.06.09.07.58.12
+        by smtp.gmail.com with ESMTPSA id j5sm10557995qtr.73.2020.06.09.07.58.14
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 Jun 2020 07:58:13 -0700 (PDT)
+        Tue, 09 Jun 2020 07:58:15 -0700 (PDT)
 From: "Fabio Berton" <fabio.berton@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-java][PATCH 1/2] openjdk-8-native: Add libxtst-native to x11 packageconfig
-Date: Tue,  9 Jun 2020 11:58:09 -0300
-Message-Id: <20200609145810.4058137-1-fabio.berton@ossystems.com.br>
+Subject: [meta-java][PATCH 2/2] openjdk-8-native: Build cups-native when using cups packageconfig
+Date: Tue,  9 Jun 2020 11:58:10 -0300
+Message-Id: <20200609145810.4058137-2-fabio.berton@ossystems.com.br>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200609145810.4058137-1-fabio.berton@ossystems.com.br>
+References: <20200609145810.4058137-1-fabio.berton@ossystems.com.br>
 MIME-Version: 1.0
 Organization: O.S. Systems Software LTDA.
 Content-Transfer-Encoding: 8bit
-
-libxtst-native it's needed to build openjdk-8-native.
 
 Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 ---
@@ -58,16 +58,16 @@ Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/recipes-core/openjdk/openjdk-8-native.inc b/recipes-core/openjdk/openjdk-8-native.inc
-index 321a43d..f6d617a 100644
+index f6d617a..24b6f20 100644
 --- a/recipes-core/openjdk/openjdk-8-native.inc
 +++ b/recipes-core/openjdk/openjdk-8-native.inc
 @@ -8,8 +8,8 @@ DEPENDS = "\
  "
  
  PACKAGECONFIG ??= "gif jpeg png zlib"
--PACKAGECONFIG[x11] = "--with-x,,libx11-native xorgproto-native libxt-native libxext-native libxrender-native"
- PACKAGECONFIG[cups] = "--with-cups,,cups"
-+PACKAGECONFIG[x11] = "--with-x,,libx11-native xorgproto-native libxt-native libxext-native libxrender-native libxtst-native"
+-PACKAGECONFIG[cups] = "--with-cups,,cups"
+ PACKAGECONFIG[x11] = "--with-x,,libx11-native xorgproto-native libxt-native libxext-native libxrender-native libxtst-native"
++PACKAGECONFIG[cups] = "--with-cups,,cups-native"
  PACKAGECONFIG[alsa] = "--with-alsa,,alsa-lib-native"
  PACKAGECONFIG[gif] = "--with-giflib=system,--with-giflib=bundled,giflib-native"
  PACKAGECONFIG[jce] = "--enable-unlimited-crypto,,"
