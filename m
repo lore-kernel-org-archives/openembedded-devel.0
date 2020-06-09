@@ -1,56 +1,56 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web11.1421.1591683621111717601
+Received: from mailout08.rmx.de (mailout08.rmx.de [94.199.90.85])
+ by mx.groups.io with SMTP id smtpd.web11.2315.1591688942323407201
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jun 2020 23:20:21 -0700
+ Tue, 09 Jun 2020 00:49:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: changqing.li@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0596JdE7010414
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 8 Jun 2020 23:20:10 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
- 14.3.487.0; Mon, 8 Jun 2020 23:19:51 -0700
-From: "Changqing Li" <changqing.li@windriver.com>
+ dkim=missing; spf=pass (domain: arri.de, ip: 94.199.90.85, mailfrom: ceggers@arri.de)
+Received: from kdin01.retarus.com (kdin01.dmz1.retloc [172.19.17.48])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout08.rmx.de (Postfix) with ESMTPS id 49h2Lf0y6NzMqyT
+	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Jun 2020 09:48:58 +0200 (CEST)
+Received: from ppmail.arri.de (unknown [217.111.95.7])
+	(using TLSv1 with cipher AES128-SHA (128/128 bits))
+	(No client certificate requested)
+	by kdin01.retarus.com (Postfix) with ESMTPS id 49h2Ld2FS3z2xbl
+	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Jun 2020 09:48:57 +0200 (CEST)
+Received: from mta.arri.de ([192.168.100.141]) by ppmail.arri.de over TLS secured channel with Microsoft SMTPSVC(7.0.6002.18264);
+	 Tue, 9 Jun 2020 09:48:56 +0200
+Received: from N95HX1G2.wgnetz.xx (192.168.54.29) by mta.arri.de
+ (192.168.100.104) with Microsoft SMTP Server (TLS) id 14.3.408.0; Tue, 9 Jun
+ 2020 09:48:56 +0200
+From: "Christian Eggers" <ceggers@arri.de>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH 2/2] python-m2crypto: Add RDEPENDS
-Date: Tue, 9 Jun 2020 14:18:06 +0800
-Message-ID: <20200609061806.310291-2-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200609061806.310291-1-changqing.li@windriver.com>
-References: <20200609061806.310291-1-changqing.li@windriver.com>
+Subject: [meta-oe][PATCH 0/4] Extend graphviz and mscgen for nativesdk
+Date: Tue, 9 Jun 2020 09:48:40 +0200
+Message-ID: <20200609074844.6139-1-ceggers@arri.de>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
+X-Originating-IP: [192.168.54.29]
+X-OriginalArrivalTime: 09 Jun 2020 07:48:56.0828 (UTC) FILETIME=[6DF83BC0:01D63E32]
+X-RMX-ID: 20200609-094857-49h2Ld2FS3z2xbl-0@kdin01
+X-RMX-SOURCE: 217.111.95.7
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 
-From: Changqing Li <changqing.li@windriver.com>
+doxygen (which is already available for native/nativesdk), is often used
+together with the 'dot' tool (graphviz package) and mscgen.
 
-fix errors:
-ModuleNotFoundError: No module named 'distutils'
-ModuleNotFoundError: No module named 'asyncore'
-ModuleNotFoundError: No module named 'xmlrpc'
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- meta-python/recipes-devtools/python/python-m2crypto.inc | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+________________________________
+ [http://assets.arri.com/media/sign/2020-04-03-E-mail-signature-Stellar2_V1=
+.jpg] <https://microsites.arri.com/stellar/>
 
-diff --git a/meta-python/recipes-devtools/python/python-m2crypto.inc b/meta-python/recipes-devtools/python/python-m2crypto.inc
-index 76dd58ce0..881fdf1cc 100644
---- a/meta-python/recipes-devtools/python/python-m2crypto.inc
-+++ b/meta-python/recipes-devtools/python/python-m2crypto.inc
-@@ -17,7 +17,11 @@ PYPI_PACKAGE = "M2Crypto"
- inherit pypi siteinfo
- 
- DEPENDS += "openssl swig-native"
--RDEPENDS_${PN} += "${PYTHON_PN}-typing"
-+RDEPENDS_${PN} += "${PYTHON_PN}-typing \
-+                   ${PYTHON_PN}-distutils \
-+                   ${PYTHON_PN}-smtpd \
-+                   ${PYTHON_PN}-xmlrpc \
-+"
- 
- DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR} -I${STAGING_INCDIR}"
- DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR}"
--- 
-2.17.1
+Get all the latest information from www.arri.com<https://www.arri.com/>, Fa=
+cebook<https://www.facebook.com/TeamARRI>, Twitter<https://twitter.com/ARRI=
+Channel>, Instagram<https://instagram.com/arri> and YouTube<https://www.you=
+tube.com/user/ARRIChannel>.
 
+Arnold & Richter Cine Technik GmbH & Co. Betriebs KG
+Sitz: M=FCnchen - Registergericht: Amtsgericht M=FCnchen - Handelsregistern=
+ummer: HRA 57918
+Pers=F6nlich haftender Gesellschafter: Arnold & Richter Cine Technik GmbH
+Sitz: M=FCnchen - Registergericht: Amtsgericht M=FCnchen - Handelsregistern=
+ummer: HRB 54477
+Gesch=E4ftsf=FChrer: Dr. Michael Neuh=E4user; Stephan Schenk; Walter Trauni=
+nger; Markus Zeiler
