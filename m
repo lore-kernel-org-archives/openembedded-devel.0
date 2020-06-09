@@ -1,22 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.7510.1591710207148216724
+ by mx.groups.io with SMTP id smtpd.web11.7489.1591710210119501398
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jun 2020 06:43:27 -0700
+ Tue, 09 Jun 2020 06:43:30 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=38336 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jieXE-0005lr-MA; Tue, 09 Jun 2020 16:43:25 +0300
+	id 1jieXI-0005lr-Il; Tue, 09 Jun 2020 16:43:29 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/3] python3-beautifulsoup4: Upgrade 4.8.2 -> 4.9.1
-Date: Tue,  9 Jun 2020 16:43:09 +0300
-Message-Id: <20200609134311.13299-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/3] python3-bitarray: Upgrade 1.2.1 -> 1.2.2
+Date: Tue,  9 Jun 2020 16:43:10 +0300
+Message-Id: <20200609134311.13299-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.5
+In-Reply-To: <20200609134311.13299-1-leon.anavi@konsulko.com>
+References: <20200609134311.13299-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -28,32 +30,51 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 4.9.1.
+Upgrade to release 1.2.2. Change license checksum because of the
+updated metadata stored in PKG-INFO. The license remains PSF.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...eautifulsoup4_4.8.2.bb => python3-beautifulsoup4_4.9.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-beautifulsoup4_4.8.2.bb => python3-beautifulsoup4_4.9.1.bb} (71%)
+ .../recipes-devtools/python/python3-bitarray_1.2.1.bb | 11 -----------
+ .../recipes-devtools/python/python3-bitarray_1.2.2.bb | 11 +++++++++++
+ 2 files changed, 11 insertions(+), 11 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.2.bb b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.2.bb
-rename to meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb
-index 63fbd0958..910de12f8 100644
---- a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1"
- 
--SRC_URI[md5sum] = "5dbdb56c009e4632bae7bed1b385804b"
--SRC_URI[sha256sum] = "05fd825eb01c290877657a56df4c6e4c311b3965bda790c613a3d6fb01a5462a"
-+SRC_URI[md5sum] = "57502b5b34ccfd97b180260071f5799a"
-+SRC_URI[sha256sum] = "73cc4d115b96f79c7d77c1c7f7a0a8d4c57860d1041df407dd1aae7f07a77fd7"
- 
- inherit pypi setuptools3
- 
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
+deleted file mode 100644
+index 2bf2937d1..000000000
+--- a/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
+-HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+-LICENSE = "PSF"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=dc301a25ebe210dcc53b0a2d5a038eae"
+-
+-SRC_URI[md5sum] = "a46bf869f6adf34f5b0dc82b469793b7"
+-SRC_URI[sha256sum] = "2ed675f460bb0d3d66fd8042a6f1f0d36cf213e52e72a745283ddb245da7b9cf"
+-
+-inherit setuptools3 pypi
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
+new file mode 100644
+index 000000000..c495738c4
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
++HOMEPAGE = "https://github.com/ilanschnell/bitarray"
++LICENSE = "PSF"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=d331e1d54f5e78247388f5416c2ab928"
++
++SRC_URI[md5sum] = "81c48852b0bc538ac3ed25fae020360c"
++SRC_URI[sha256sum] = "27a69ffcee3b868abab3ce8b17c69e02b63e722d4d64ffd91d659f81e9984954"
++
++inherit setuptools3 pypi
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
