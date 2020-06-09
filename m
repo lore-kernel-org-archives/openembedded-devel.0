@@ -1,61 +1,115 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.7552.1591710211955822205
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com [209.85.210.196])
+ by mx.groups.io with SMTP id smtpd.web12.8587.1591713002282679757
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jun 2020 06:43:32 -0700
+ Tue, 09 Jun 2020 07:30:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=38336 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jieXK-0005lr-If; Tue, 09 Jun 2020 16:43:31 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=pass header.i=@linaro.org header.s=google header.b=SGIyljcM;
+ spf=pass (domain: linaro.org, ip: 209.85.210.196, mailfrom: arthur.she@linaro.org)
+Received: by mail-pf1-f196.google.com with SMTP id a127so10131745pfa.12
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2020 07:30:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=a0hf2SQ9uTzgJioDWIEI68M9UHevoX+bZ3ZigNTzYKA=;
+        b=SGIyljcMQU7T/xMxn4s8avfx4RHmrzOmK4reM35HcRTxXy2Z+VdZkzwVDPpe2Ut+O6
+         eUrDoyDTt3ffKCFCPAMPmd0etfBms7Ki5RIY4/O+lQFJnCtnNcpJcR0qFu4LpzKhXO0I
+         js7cTlH5bz54bt1U/Cx881rRBJe4eIrNfxscGKfE6E3fz4iPGrn1GuXWScm7lgJNYO3N
+         uwEU7n/HOSnqOhaA9x+HE6VFcmmFWuaDmJxK9VYUylAu87gQ4MIM3bOhTJoPKfXaJv+/
+         fcT6HlMItk+Fft0/T2eoC0VMhGBz/NAsTY2XIvCpPdKBHfShx6pGXF/OxgWhl45U8ADG
+         nbLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=a0hf2SQ9uTzgJioDWIEI68M9UHevoX+bZ3ZigNTzYKA=;
+        b=ORoThwmVmllVf+6qC3b8lWLEmlWMa74fY6d2mo9/X++/Q/lTFoObfWt3uB+zNQxfNM
+         mIUELyc5LHhcC9PXSSy+f0a+OoIPDpMlMYcy0VhuhsFnnIJtXi9afS6Ec4xAoE4nzMpH
+         g+M+/O3j6qdZZZz+A+e5LsPJub4oh5rvyBwMjJUJhsi75fgRNXLB2VyxPBYpZYP4f3nJ
+         HE+f4hs4rV2+vo4yDrbyIjKczGou//LR4H4jYO140MafuHCjDpJ48cyrX8QpIz1AkBIP
+         chnzTFcgnxC8xyCRDVhWHK+TeWLLcZvJ3Umb9wNDyA3kc8jt+rU77iaSa60EPo2bmAYX
+         uS+A==
+X-Gm-Message-State: AOAM531Rmej0f+Rk5yilBthcdGW2jWR38XZzwLMV2c0FxhjvsU/E5z5N
+	6h8uKCLv0SGcqbBt58nl/+GCj975wMD/sw==
+X-Google-Smtp-Source: ABdhPJxBqxZbseeo/Z9CuC/CV0uqNlTrwPQI19gZ5Pse76TUV4ENJse528duX0plzG0bzUAMjyKcrA==
+X-Received: by 2002:a63:7016:: with SMTP id l22mr24519829pgc.284.1591713001326;
+        Tue, 09 Jun 2020 07:30:01 -0700 (PDT)
+Return-Path: <arthur.she@linaro.org>
+Received: from arthur-X1E.hitronhub.home (S0106a84e3f840fe3.vn.shawcable.net. [50.68.230.12])
+        by smtp.gmail.com with ESMTPSA id m2sm2752560pjl.45.2020.06.09.07.30.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 09 Jun 2020 07:30:00 -0700 (PDT)
+From: "Arthur She" <arthur.she@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-soupsieve: Upgrade 1.9.4 -> 2.0.1
-Date: Tue,  9 Jun 2020 16:43:11 +0300
-Message-Id: <20200609134311.13299-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200609134311.13299-1-leon.anavi@konsulko.com>
-References: <20200609134311.13299-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Cc: Arthur She <arthur.she@linaro.org>
+Subject: [meta-oe][PATCH] igt-gpu-tools: add new package
+Date: Tue,  9 Jun 2020 07:29:57 -0700
+Message-Id: <20200609142957.187352-1-arthur.she@linaro.org>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 2.0.1.
+igt-gpu-tools is a collection of tools for development and testing of the DRM
+drivers. (https://gitlab.freedesktop.org/drm/igt-gpu-tools)
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Arthur She <arthur.she@linaro.org>
 ---
- ...{python3-soupsieve_1.9.4.bb => python3-soupsieve_2.0.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-soupsieve_1.9.4.bb => python3-soupsieve_2.0.1.bb} (65%)
+ .../igt-gpu-tools/igt-gpu-tools_git.bb        | 46 +++++++++++++++++++
+ 1 file changed, 46 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/igt-gpu-tools/igt-gpu-tools_git.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-soupsieve_1.9.4.bb b/meta-python/recipes-devtools/python/python3-soupsieve_2.0.1.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-soupsieve_1.9.4.bb
-rename to meta-python/recipes-devtools/python/python3-soupsieve_2.0.1.bb
-index df69e007f..aa087c920 100644
---- a/meta-python/recipes-devtools/python/python3-soupsieve_1.9.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-soupsieve_2.0.1.bb
-@@ -4,8 +4,8 @@ HOMEPAGE = "https://github.com/facelessuser/soupsieve"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5a6fd3b0c24fc5a041a3d1bbb22c81b5"
- 
--SRC_URI[md5sum] = "43d8ea20c58494446aa65ba5cc6320fe"
--SRC_URI[sha256sum] = "605f89ad5fdbfefe30cdc293303665eff2d188865d4dbe4eb510bba1edfbfce3"
-+SRC_URI[md5sum] = "62a7481c7dbf6d8cc21e4e3a79c72034"
-+SRC_URI[sha256sum] = "a59dc181727e95d25f781f0eb4fd1825ff45590ec8ff49eadfd7f1a537cc0232"
- 
- inherit pypi setuptools3
- 
+diff --git a/meta-oe/recipes-graphics/igt-gpu-tools/igt-gpu-tools_git.bb b/meta-oe/recipes-graphics/igt-gpu-tools/igt-gpu-tools_git.bb
+new file mode 100644
+index 000000000..761df1cbb
+--- /dev/null
++++ b/meta-oe/recipes-graphics/igt-gpu-tools/igt-gpu-tools_git.bb
+@@ -0,0 +1,46 @@
++SUMMARY = "IGT GPU Tools"
++DESCRIPTION = "IGT GPU Tools is a collection of tools for development and testing of the DRM drivers"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=67bfee4df38fa6ecbe3a675c552d4c08"
++
++LICENSE_append = " & ISC"
++
++inherit meson gtk-doc
++
++SRCREV = "${AUTOREV}"
++
++SRC_URI = "git://gitlab.freedesktop.org/drm/igt-gpu-tools.git;protocol=https"
++
++S = "${WORKDIR}/git"
++
++DEPENDS += "libdrm libpciaccess cairo udev glib-2.0 procps libunwind kmod openssl xmlrpc-c gsl elfutils alsa-lib json-c bison-native"
++RDEPENDS_${PN} += "bash python3-mako python3-six git net-snmp"
++
++PACKAGE_BEFORE_PN = "${PN}-benchmarks"
++
++EXTRA_OEMESON = "-Ddocs=disabled -Drunner=enabled -Dchamelium=enabled"
++COMPATIBLE_HOST = "(x86_64.*|i.86.*|arm.*|aarch64).*-linux"
++COMPATIBLE_HOST_libc-musl_class-target = "null"
++
++gputools_sysroot_preprocess() {
++	rm -f ${SYSROOT_DESTDIR}${libdir}/pkgconfig/intel-gen4asm.pc
++}
++SYSROOT_PREPROCESS_FUNCS += "gputools_sysroot_preprocess"
++
++do_install_append() {
++    install -d ${D}/usr/share/${BPN}/scripts
++    install ${S}/scripts/run-tests.sh ${D}/usr/share/${BPN}/scripts
++    install -d ${D}/usr/share/${BPN}/runner
++    install -D ${B}/runner/igt_runner ${D}/usr/share/${BPN}/runner
++    install -D ${B}/runner/igt_resume ${D}/usr/share/${BPN}/runner
++}
++
++FILES_${PN} += "\
++        ${libexecdir}/${BPN}/*\
++        ${libdir}/intel_aubdump.so \
++        ${datadir}/${BPN}/1080p-right.png \
++        ${datadir}/${BPN}/1080p-left.png \
++        ${datadir}/${BPN}/pass.png \
++        ${datadir}/${BPN}/test-list.txt \
++        ${libexecdir}/${BPN}/benchmarks \
++        "
 -- 
-2.17.1
+2.25.1
 
