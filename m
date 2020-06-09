@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.4808.1591701075519440337
+ by mx.groups.io with SMTP id smtpd.web11.4826.1591701081628570623
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jun 2020 04:11:15 -0700
+ Tue, 09 Jun 2020 04:11:22 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=34040 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jic9y-00081E-8F; Tue, 09 Jun 2020 14:11:14 +0300
+	id 1jicA3-00081E-V7; Tue, 09 Jun 2020 14:11:20 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/6] python3-waitress: Upgrade 1.4.3 -> 1.4.4
-Date: Tue,  9 Jun 2020 14:10:47 +0300
-Message-Id: <20200609111050.32307-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/6] python3-urllib3: Upgrade 1.25.7 -> 1.25.9
+Date: Tue,  9 Jun 2020 14:10:48 +0300
+Message-Id: <20200609111050.32307-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200609111050.32307-1-leon.anavi@konsulko.com>
 References: <20200609111050.32307-1-leon.anavi@konsulko.com>
@@ -30,31 +30,32 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.4.4.
+Upgrade to release 1.25.9.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-waitress_1.4.3.bb => python3-waitress_1.4.4.bb}  | 4 ++--
+ .../{python3-urllib3_1.25.7.bb => python3-urllib3_1.25.9.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-waitress_1.4.3.bb => python3-waitress_1.4.4.bb} (71%)
+ rename meta-python/recipes-devtools/python/{python3-urllib3_1.25.7.bb => python3-urllib3_1.25.9.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-waitress_1.4.3.bb b/meta-python/recipes-devtools/python/python3-waitress_1.4.4.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python3-waitress_1.4.3.bb
-rename to meta-python/recipes-devtools/python/python3-waitress_1.4.4.bb
-index 8ac3e928e..3e207de4f 100644
---- a/meta-python/recipes-devtools/python/python3-waitress_1.4.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-waitress_1.4.4.bb
-@@ -6,7 +6,7 @@ SECTION = "devel/python"
- LICENSE = "ZPL-2.1"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=78ccb3640dc841e1baecb3e27a6966b2"
+diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb
+rename to meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
+index 34c15b6c2..8cbc1f9f9 100644
+--- a/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb
++++ b/meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=65715c2eb961313d71b297dd5a04f85e"
  
--SRC_URI[md5sum] = "4bffad7009d3824ae61ea6c0696e45f6"
--SRC_URI[sha256sum] = "045b3efc3d97c93362173ab1dfc159b52cfa22b46c3334ffc805dbdbf0e4309e"
-+SRC_URI[md5sum] = "079c3c4902b1cb5d0a917276ee70f1df"
-+SRC_URI[sha256sum] = "1bb436508a7487ac6cb097ae7a7fe5413aefca610550baf58f0940e51ecfb261"
+-SRC_URI[md5sum] = "85e1e3925f8c1095172bff343f3312ed"
+-SRC_URI[sha256sum] = "f3c5fd51747d450d4dcf6f923c81f78f811aab8205fda64b0aba34a4e48b0745"
++SRC_URI[md5sum] = "dbf9b868b90880b24b1ac278094e912e"
++SRC_URI[sha256sum] = "3018294ebefce6572a474f0604c2021e33b3fd8006ecd11d62107a5d2a963527"
  
- inherit setuptools3 pypi
+ inherit pypi setuptools3
+ 
 -- 
 2.17.1
 
