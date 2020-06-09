@@ -1,24 +1,22 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.4789.1591701089477899093
+ by mx.groups.io with SMTP id smtpd.web12.6460.1591707370777417061
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jun 2020 04:11:29 -0700
+ Tue, 09 Jun 2020 05:56:11 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=34040 helo=localhost.localdomain)
+Received: from [78.130.197.211] (port=37164 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jicAA-00081E-MK; Tue, 09 Jun 2020 14:11:28 +0300
+	id 1jidnT-0002LY-MQ; Tue, 09 Jun 2020 15:56:08 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 6/6] python3-wheel: Upgrade 0.33.6 -> 0.34.2
-Date: Tue,  9 Jun 2020 14:10:50 +0300
-Message-Id: <20200609111050.32307-6-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-wcwidth: Upgrade 0.1.8 -> 0.2.4
+Date: Tue,  9 Jun 2020 15:55:59 +0300
+Message-Id: <20200609125600.17773-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200609111050.32307-1-leon.anavi@konsulko.com>
-References: <20200609111050.32307-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,38 +28,52 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.34.2 and inherit pypi.
+Upgrade to release 0.2.4. The license file has been renamed but
+the source code remains avaiable under MIT. Add a description
+and a homepage.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-wheel_0.33.6.bb => python3-wheel_0.34.2.bb} | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-wheel_0.33.6.bb => python3-wheel_0.34.2.bb} (60%)
+ .../recipes-devtools/python/python3-wcwidth_0.1.8.bb | 10 ----------
+ .../recipes-devtools/python/python3-wcwidth_0.2.4.bb | 12 ++++++++++++
+ 2 files changed, 12 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-wcwidth_0.1.8.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-wcwidth_0.2.4.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-wheel_0.33.6.bb b/meta-python/recipes-devtools/python/python3-wheel_0.34.2.bb
-similarity index 60%
-rename from meta-python/recipes-devtools/python/python3-wheel_0.33.6.bb
-rename to meta-python/recipes-devtools/python/python3-wheel_0.34.2.bb
-index 025b2eea9..8633a4fc9 100644
---- a/meta-python/recipes-devtools/python/python3-wheel_0.33.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-wheel_0.34.2.bb
-@@ -4,13 +4,10 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9d66b41bc2a080e7174acc5dffecd752"
- 
--SRC_URI = "git://github.com/pypa/wheel.git"
--SRCREV ?= "b227ddd5beaba49294017d061d501f6d433393b0"
-+SRC_URI[md5sum] = "ce2a27f99c130a927237b5da1ff5ceaf"
-+SRC_URI[sha256sum] = "8788e9155fe14f54164c1b9eb0a319d98ef02c160725587ad60f14ddc57b6f96"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-wcwidth_0.1.8.bb b/meta-python/recipes-devtools/python/python3-wcwidth_0.1.8.bb
+deleted file mode 100644
+index f9f6474ad..000000000
+--- a/meta-python/recipes-devtools/python/python3-wcwidth_0.1.8.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-SUMMARY = "Library for building powerful interactive command lines in Python"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=11fba47286258744a6bc6e43530c32a1"
 -
--inherit setuptools3
+-SRC_URI[md5sum] = "dc6677d099e6f49c0f6fbc310de261e9"
+-SRC_URI[sha256sum] = "f28b3e8a6483e5d49e7f8949ac1a78314e740333ae305b4ba5defd3e74fb37a8"
 -
--S = "${WORKDIR}/git"
+-inherit pypi setuptools3
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-wcwidth_0.2.4.bb b/meta-python/recipes-devtools/python/python3-wcwidth_0.2.4.bb
+new file mode 100644
+index 000000000..48ff37654
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-wcwidth_0.2.4.bb
+@@ -0,0 +1,12 @@
++SUMMARY = "Library for building powerful interactive command lines in Python"
++DESCRIPTION = "Measures the displayed width of unicode strings in a terminal"
++HOMEPAGE = "https://github.com/jquast/wcwidth"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b15979c39a2543892fca8cd86b4b52cb"
++
++SRC_URI[md5sum] = "5e6cd8cd008a7ad2c2578ac49a9d87a1"
++SRC_URI[sha256sum] = "8c6b5b6ee1360b842645f336d9e5d68c55817c26d3050f46b235ef2bc650e48f"
++
 +inherit pypi setuptools3
- 
- BBCLASSEXTEND = "native"
- 
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
