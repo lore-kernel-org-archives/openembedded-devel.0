@@ -1,59 +1,119 @@
-Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com [209.85.167.66])
- by mx.groups.io with SMTP id smtpd.web10.813.1591715946175436671
+Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com [209.85.208.195])
+ by mx.groups.io with SMTP id smtpd.web11.857.1591715984024520226
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jun 2020 08:19:06 -0700
+ Tue, 09 Jun 2020 08:19:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@burtonini-com.20150623.gappssmtp.com header.s=20150623 header.b=yAs21k2K;
- spf=pass (domain: burtonini.com, ip: 209.85.167.66, mailfrom: ross@burtonini.com)
-Received: by mail-lf1-f66.google.com with SMTP id h188so12717199lfd.7
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2020 08:19:05 -0700 (PDT)
+ dkim=pass header.i=@burtonini-com.20150623.gappssmtp.com header.s=20150623 header.b=KFpMFprt;
+ spf=pass (domain: burtonini.com, ip: 209.85.208.195, mailfrom: ross@burtonini.com)
+Received: by mail-lj1-f195.google.com with SMTP id q19so2848232lji.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2020 08:19:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=burtonini-com.20150623.gappssmtp.com; s=20150623;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=BHbmpVnSz88M+LA5XfnVyqw/xV05mMXeaHZ7+SJ+d1Q=;
-        b=yAs21k2K8czdXTF03sbgi2d+3zjiGb+kqBv7j8avNEI2l0CahE8XvucUqXyhtkVx04
-         +eQ/0FHG76BaR19VdwdZeYKZaGw5Cyxi6+EI/g3PBZ3SGQ3PCmITqhnofHrE8f+ALWBb
-         G3VCNhq4yvdpDGj2QAdp8EdCUVqF0ryHteykr4HJn8VJUuNxjLEuNhlQPYgIWSEEN6Ow
-         dJaCEbvuUmy/uMhtAtep9L5x1+NcBSL5BoH4+8QRfP98vlh8pPMNyFAhwBjn6QZRlB25
-         Fb8PSIfOxJwvNOZJ93O8C7war5FD552fiUeIGWRIPgUxm9jcGRczTri2yKOSftyTS4WL
-         WMGw==
+        bh=zMoVbLC/zmg+Yqgwkcpie3wG3QPR6ikfOaavnEGuoh4=;
+        b=KFpMFprtXsYK3r3EDDQqmzboQsnG5kOi3pK7cE7s3YoxUE5Vd2JsY0wrHiom/4wdQI
+         NKbdCvrLdnvWJaI62A6kRIcEpIToESbS3LCJ0Dccj/UcoYrWHjtbCsFYXgnKRp+ftjhM
+         /htGlzNRiplYxLsV96Yd4OR5tcVLSfS80ed0GWV4sEvWpnMH3X5By2cNFnnmnN1BvjrD
+         cuoQhLh88pfsBKZOFFQ6U/VJs5nhqHkVApZhdS1sMHBIrwHvBF6Y4ikKDAZael/Mw3Xs
+         QHbsMmqklaMbh+2SzF+3ZJO62bAQ417xlBdOHmy80QC3Q0jU6tA5ro3fHUWjHBVnH3jE
+         qqHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=BHbmpVnSz88M+LA5XfnVyqw/xV05mMXeaHZ7+SJ+d1Q=;
-        b=BJ+3QUl2eJmXMtsThp14e4SMLz4MikQ2vX2QY7/ri/cZyyY40DzhkusWIcXKP8pGH1
-         6YGoR+F8Zy7qhjFlF/UvPqepn8E+Ph8uQLpG2PAWejT5J3O7VYkXgfn9Cf59+ATKKiBQ
-         PE1ja4sQ3F2T/Cqxw4pucfSkSLyyJzCbEFE8xt5gcAn+KusYt5+8+2IDcjd/siWUEh8I
-         g9GgegEYuO+h5WFVDv0DomubB/f1w8SKrYuL/jywaq8LiumQusGK8t+9nbEkCnbFTJK8
-         yzwVrGJpmO/v+Z6PTTOKsZeI9XlB1K/GK62ekoU0VoU4tnH9Q1azF4jjDLTmjoUDgBfi
-         O4VA==
-X-Gm-Message-State: AOAM530XuCGUtNM+ehbvMv16G1WMZqE4hHtxBaYy2+nR6xiWuy2tO3IG
-	kMt7pkqxbAvBo1DolZILrK3w/OoRQ7NWJ6/pp/0WSA==
-X-Google-Smtp-Source: ABdhPJyrRQ4U1IO+V00tFSdYY3+Gq35D6hK6yIPZVNBtzVYILoT2ZUA2s7L7mFxI9PYX5QeG2wx3+194yIdOmPANr58=
-X-Received: by 2002:a05:6512:108f:: with SMTP id j15mr15849311lfg.19.1591715943037;
- Tue, 09 Jun 2020 08:19:03 -0700 (PDT)
+        bh=zMoVbLC/zmg+Yqgwkcpie3wG3QPR6ikfOaavnEGuoh4=;
+        b=rPvSbIAdBq/357WDXl/KW3oR980HoRtk/lg1smxzPckbL4nU61XeGYhMgxoSSnuCYW
+         6qbWjWjyBM1oIa8S3+kGSLWAv5Nf+ldaNpObYHjPRKwrQOjQxXV7rWhMnLl2sQjBQol2
+         bcsH0VqDGNv0pzJoCmhEDA8l2LtamK1pe9Ry0ENPfYf+d4j9ojmSG+GOpZ5sY9E9ODWz
+         lytkQeXTOPosq4MECsbRoqc/4FgJK9lO8bG0PaDKnmTJ7/bUovoOdZPv8JDRZbyqFDJx
+         0Nc4gem0TwkYFjzBHRK3RgnXB1FJDq1R9zcLW/IEHHIA8qag1DOUDiwrMFaAAjaeJNlM
+         mv0A==
+X-Gm-Message-State: AOAM531RIy4cLWOahG+9OmzJv689tst+HNefzgyXtvLNPyBpgkNKi6lh
+	T1ieAM4zW8ec2zQJ6lEqclaXSxLa48iJmp4t90k/DA==
+X-Google-Smtp-Source: ABdhPJwcF8pn9ZaQonwkrprORMVF1bqEseLqsjqxsx8M6LyyOpI4enTQh47pnEfWRngXh01SMQTeyM6cEegjkpcpKUQ=
+X-Received: by 2002:a2e:9a55:: with SMTP id k21mr1955048ljj.340.1591715982225;
+ Tue, 09 Jun 2020 08:19:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200609142957.187352-1-arthur.she@linaro.org>
 In-Reply-To: <20200609142957.187352-1-arthur.she@linaro.org>
 From: "Ross Burton" <ross@burtonini.com>
-Date: Tue, 9 Jun 2020 16:18:51 +0100
-Message-ID: <CAAnfSTsWiS2FSXsyFbN894_vBExYY_Bxnwwi9OTqYNCr6n9_Sg@mail.gmail.com>
+Date: Tue, 9 Jun 2020 16:19:31 +0100
+Message-ID: <CAAnfSTsaMMCGGnGGYHf6dQ3Kdjtzf-NnPy7VoXDjffC-BFPHGw@mail.gmail.com>
 Subject: Re: [oe] [meta-oe][PATCH] igt-gpu-tools: add new package
 To: Arthur She <arthur.she@linaro.org>
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, 9 Jun 2020 at 15:30, Arthur She <arthur.she@linaro.org> wrote:
-> +SRCREV = "${AUTOREV}"
-
-No.
-
-Either use a release tag, of if you really need git HEAD then use a
-specific SHA instead of autorev.
-
-AUTOREV means a network operation on every parse, and reproducible
-builds become impossible.
+Also I guess you should mention that this is basically copied from
+meta-intel, and talk about how to handle duplicate recipes.
 
 Ross
+
+On Tue, 9 Jun 2020 at 15:30, Arthur She <arthur.she@linaro.org> wrote:
+>
+> igt-gpu-tools is a collection of tools for development and testing of the DRM
+> drivers. (https://gitlab.freedesktop.org/drm/igt-gpu-tools)
+>
+> Signed-off-by: Arthur She <arthur.she@linaro.org>
+> ---
+>  .../igt-gpu-tools/igt-gpu-tools_git.bb        | 46 +++++++++++++++++++
+>  1 file changed, 46 insertions(+)
+>  create mode 100644 meta-oe/recipes-graphics/igt-gpu-tools/igt-gpu-tools_git.bb
+>
+> diff --git a/meta-oe/recipes-graphics/igt-gpu-tools/igt-gpu-tools_git.bb b/meta-oe/recipes-graphics/igt-gpu-tools/igt-gpu-tools_git.bb
+> new file mode 100644
+> index 000000000..761df1cbb
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/igt-gpu-tools/igt-gpu-tools_git.bb
+> @@ -0,0 +1,46 @@
+> +SUMMARY = "IGT GPU Tools"
+> +DESCRIPTION = "IGT GPU Tools is a collection of tools for development and testing of the DRM drivers"
+> +
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=67bfee4df38fa6ecbe3a675c552d4c08"
+> +
+> +LICENSE_append = " & ISC"
+> +
+> +inherit meson gtk-doc
+> +
+> +SRCREV = "${AUTOREV}"
+> +
+> +SRC_URI = "git://gitlab.freedesktop.org/drm/igt-gpu-tools.git;protocol=https"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +DEPENDS += "libdrm libpciaccess cairo udev glib-2.0 procps libunwind kmod openssl xmlrpc-c gsl elfutils alsa-lib json-c bison-native"
+> +RDEPENDS_${PN} += "bash python3-mako python3-six git net-snmp"
+> +
+> +PACKAGE_BEFORE_PN = "${PN}-benchmarks"
+> +
+> +EXTRA_OEMESON = "-Ddocs=disabled -Drunner=enabled -Dchamelium=enabled"
+> +COMPATIBLE_HOST = "(x86_64.*|i.86.*|arm.*|aarch64).*-linux"
+> +COMPATIBLE_HOST_libc-musl_class-target = "null"
+> +
+> +gputools_sysroot_preprocess() {
+> +       rm -f ${SYSROOT_DESTDIR}${libdir}/pkgconfig/intel-gen4asm.pc
+> +}
+> +SYSROOT_PREPROCESS_FUNCS += "gputools_sysroot_preprocess"
+> +
+> +do_install_append() {
+> +    install -d ${D}/usr/share/${BPN}/scripts
+> +    install ${S}/scripts/run-tests.sh ${D}/usr/share/${BPN}/scripts
+> +    install -d ${D}/usr/share/${BPN}/runner
+> +    install -D ${B}/runner/igt_runner ${D}/usr/share/${BPN}/runner
+> +    install -D ${B}/runner/igt_resume ${D}/usr/share/${BPN}/runner
+> +}
+> +
+> +FILES_${PN} += "\
+> +        ${libexecdir}/${BPN}/*\
+> +        ${libdir}/intel_aubdump.so \
+> +        ${datadir}/${BPN}/1080p-right.png \
+> +        ${datadir}/${BPN}/1080p-left.png \
+> +        ${datadir}/${BPN}/pass.png \
+> +        ${datadir}/${BPN}/test-list.txt \
+> +        ${libexecdir}/${BPN}/benchmarks \
+> +        "
+> --
+> 2.25.1
+>
+> 
