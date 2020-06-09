@@ -1,119 +1,480 @@
-Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com [209.85.208.195])
- by mx.groups.io with SMTP id smtpd.web11.857.1591715984024520226
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+ by mx.groups.io with SMTP id smtpd.web11.1519.1591717568611176394
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jun 2020 08:19:44 -0700
+ Tue, 09 Jun 2020 08:46:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@burtonini-com.20150623.gappssmtp.com header.s=20150623 header.b=KFpMFprt;
- spf=pass (domain: burtonini.com, ip: 209.85.208.195, mailfrom: ross@burtonini.com)
-Received: by mail-lj1-f195.google.com with SMTP id q19so2848232lji.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2020 08:19:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=XGo7dNb+;
+ spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f181.google.com with SMTP id bg4so8195015plb.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2020 08:46:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=burtonini-com.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=zMoVbLC/zmg+Yqgwkcpie3wG3QPR6ikfOaavnEGuoh4=;
-        b=KFpMFprtXsYK3r3EDDQqmzboQsnG5kOi3pK7cE7s3YoxUE5Vd2JsY0wrHiom/4wdQI
-         NKbdCvrLdnvWJaI62A6kRIcEpIToESbS3LCJ0Dccj/UcoYrWHjtbCsFYXgnKRp+ftjhM
-         /htGlzNRiplYxLsV96Yd4OR5tcVLSfS80ed0GWV4sEvWpnMH3X5By2cNFnnmnN1BvjrD
-         cuoQhLh88pfsBKZOFFQ6U/VJs5nhqHkVApZhdS1sMHBIrwHvBF6Y4ikKDAZael/Mw3Xs
-         QHbsMmqklaMbh+2SzF+3ZJO62bAQ417xlBdOHmy80QC3Q0jU6tA5ro3fHUWjHBVnH3jE
-         qqHw==
+        d=gmail.com; s=20161025;
+        h=subject:to:references:from:autocrypt:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language;
+        bh=AxuBVKbgC7SieLf6ZcdG9H0sunVERL1o25kavh8x0hI=;
+        b=XGo7dNb+imPv9RvKHuKEcOKPJ5h5kh6a5VtWklxt/SH1QUx4HUhNjbxZnwwD/m6CV0
+         F97oxtBw66YAvUlVIYjzfxcLz/HESqi8m0y8n5USRNKgl6gqR/ORZkvz1NlCV0qvEBnQ
+         gX8D695YJnSUOQLBCD6xCvAoTuVGSZdGqUopFSnUVWRQUOe3S1RNDwRt2+2ogzNdQOxA
+         ITbXg9B032cql4kC7Z/0uWFR6H+BrrX1wu+6x+YeTlnp0/koEGBCI9YIYIHCFYiaerjh
+         wQDauqfBwOo+n7eliKZvIE/P8fMop+mZr4X2OMMLfqYrOolhz+N+D3WewEcYbDKpeXsX
+         O87w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=zMoVbLC/zmg+Yqgwkcpie3wG3QPR6ikfOaavnEGuoh4=;
-        b=rPvSbIAdBq/357WDXl/KW3oR980HoRtk/lg1smxzPckbL4nU61XeGYhMgxoSSnuCYW
-         6qbWjWjyBM1oIa8S3+kGSLWAv5Nf+ldaNpObYHjPRKwrQOjQxXV7rWhMnLl2sQjBQol2
-         bcsH0VqDGNv0pzJoCmhEDA8l2LtamK1pe9Ry0ENPfYf+d4j9ojmSG+GOpZ5sY9E9ODWz
-         lytkQeXTOPosq4MECsbRoqc/4FgJK9lO8bG0PaDKnmTJ7/bUovoOdZPv8JDRZbyqFDJx
-         0Nc4gem0TwkYFjzBHRK3RgnXB1FJDq1R9zcLW/IEHHIA8qag1DOUDiwrMFaAAjaeJNlM
-         mv0A==
-X-Gm-Message-State: AOAM531RIy4cLWOahG+9OmzJv689tst+HNefzgyXtvLNPyBpgkNKi6lh
-	T1ieAM4zW8ec2zQJ6lEqclaXSxLa48iJmp4t90k/DA==
-X-Google-Smtp-Source: ABdhPJwcF8pn9ZaQonwkrprORMVF1bqEseLqsjqxsx8M6LyyOpI4enTQh47pnEfWRngXh01SMQTeyM6cEegjkpcpKUQ=
-X-Received: by 2002:a2e:9a55:: with SMTP id k21mr1955048ljj.340.1591715982225;
- Tue, 09 Jun 2020 08:19:42 -0700 (PDT)
+        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
+         :date:user-agent:mime-version:in-reply-to:content-language;
+        bh=AxuBVKbgC7SieLf6ZcdG9H0sunVERL1o25kavh8x0hI=;
+        b=P+41HO+eylBDOsKjRPTsfGFbg4Jpxsu541Oe5tcJOeka1b26CyvvSbS/Qid8Xdjn6H
+         V5K223QEYOx0McHRCsjuQwSU37XFdOxl0/jtEAFaMRMtOH3XaoEub8aQ8csmoJGUPNv8
+         UkvxG9gq4F0Ivxzs2Abccu9wt+Y7HXYmUln7ZyvG4h3HcwpA2Moe0mIFCfvfwvNvnv9N
+         QDrOS3EKx8FJMO9PEe+ula6LoUc9Z3ry9f8iASkLhVtpNanlrDhX+CayJEATbJVdm20o
+         BOmHpfZkkJdhsS0HKcmM63wMwQEE6AQNxi3KWyaXYRMiRvoMQwvwW7qpHLNPBLztjDLz
+         zDCA==
+X-Gm-Message-State: AOAM530kLxThCno2ltyQdB29mRFXyrH6aj/e6/fAJEkHyRiqV2zutkim
+	2qhrhB6EEbwvsa6XiNqbrGOoJXYI
+X-Google-Smtp-Source: ABdhPJznMpXPVzQa4zh9dmuKuZ064IlqYQCRTpQU28gl+HWXwoDKHy4crTqmNvg/iH9A68mNgkb2kQ==
+X-Received: by 2002:a17:90a:f40e:: with SMTP id ch14mr5873831pjb.197.1591717567562;
+        Tue, 09 Jun 2020 08:46:07 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:40c8:e68d:70bd:3b6? ([2601:202:4180:a5c0:40c8:e68d:70bd:3b6])
+        by smtp.gmail.com with ESMTPSA id 12sm10226268pfj.149.2020.06.09.08.46.06
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 09 Jun 2020 08:46:06 -0700 (PDT)
+Subject: Re: [oe] [dunfell 00/35] Merge Request
+To: openembedded-devel@lists.openembedded.org
+References: <16158ACEBF1AD616.29014@lists.openembedded.org>
+From: "akuster" <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+ 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
+ 8CS2NxU=
+Message-ID: <32b06ca1-94ba-0717-b070-d85865aae0fa@gmail.com>
+Date: Tue, 9 Jun 2020 08:46:05 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-References: <20200609142957.187352-1-arthur.she@linaro.org>
-In-Reply-To: <20200609142957.187352-1-arthur.she@linaro.org>
-From: "Ross Burton" <ross@burtonini.com>
-Date: Tue, 9 Jun 2020 16:19:31 +0100
-Message-ID: <CAAnfSTsaMMCGGnGGYHf6dQ3Kdjtzf-NnPy7VoXDjffC-BFPHGw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] igt-gpu-tools: add new package
-To: Arthur She <arthur.she@linaro.org>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <16158ACEBF1AD616.29014@lists.openembedded.org>
+Content-Type: multipart/alternative;
+ boundary="------------82677819E750531CA89C8E00"
+Content-Language: en-US
 
-Also I guess you should mention that this is basically copied from
-meta-intel, and talk about how to handle duplicate recipes.
+--------------82677819E750531CA89C8E00
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-Ross
 
-On Tue, 9 Jun 2020 at 15:30, Arthur She <arthur.she@linaro.org> wrote:
+
+On 6/4/20 9:16 PM, akuster via lists.openembedded.org wrote:
+
+Ping.
+
+any issue with this merge request?
+
+-armin
+> Please merge these changes to Dunfell
 >
-> igt-gpu-tools is a collection of tools for development and testing of the DRM
-> drivers. (https://gitlab.freedesktop.org/drm/igt-gpu-tools)
+> Cover letter only
 >
-> Signed-off-by: Arthur She <arthur.she@linaro.org>
-> ---
->  .../igt-gpu-tools/igt-gpu-tools_git.bb        | 46 +++++++++++++++++++
->  1 file changed, 46 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/igt-gpu-tools/igt-gpu-tools_git.bb
+> The following changes since commit e413c1ef621688e69bb7830bb3151ed23b30b73e:
 >
-> diff --git a/meta-oe/recipes-graphics/igt-gpu-tools/igt-gpu-tools_git.bb b/meta-oe/recipes-graphics/igt-gpu-tools/igt-gpu-tools_git.bb
-> new file mode 100644
-> index 000000000..761df1cbb
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/igt-gpu-tools/igt-gpu-tools_git.bb
-> @@ -0,0 +1,46 @@
-> +SUMMARY = "IGT GPU Tools"
-> +DESCRIPTION = "IGT GPU Tools is a collection of tools for development and testing of the DRM drivers"
-> +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=67bfee4df38fa6ecbe3a675c552d4c08"
-> +
-> +LICENSE_append = " & ISC"
-> +
-> +inherit meson gtk-doc
-> +
-> +SRCREV = "${AUTOREV}"
-> +
-> +SRC_URI = "git://gitlab.freedesktop.org/drm/igt-gpu-tools.git;protocol=https"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +DEPENDS += "libdrm libpciaccess cairo udev glib-2.0 procps libunwind kmod openssl xmlrpc-c gsl elfutils alsa-lib json-c bison-native"
-> +RDEPENDS_${PN} += "bash python3-mako python3-six git net-snmp"
-> +
-> +PACKAGE_BEFORE_PN = "${PN}-benchmarks"
-> +
-> +EXTRA_OEMESON = "-Ddocs=disabled -Drunner=enabled -Dchamelium=enabled"
-> +COMPATIBLE_HOST = "(x86_64.*|i.86.*|arm.*|aarch64).*-linux"
-> +COMPATIBLE_HOST_libc-musl_class-target = "null"
-> +
-> +gputools_sysroot_preprocess() {
-> +       rm -f ${SYSROOT_DESTDIR}${libdir}/pkgconfig/intel-gen4asm.pc
-> +}
-> +SYSROOT_PREPROCESS_FUNCS += "gputools_sysroot_preprocess"
-> +
-> +do_install_append() {
-> +    install -d ${D}/usr/share/${BPN}/scripts
-> +    install ${S}/scripts/run-tests.sh ${D}/usr/share/${BPN}/scripts
-> +    install -d ${D}/usr/share/${BPN}/runner
-> +    install -D ${B}/runner/igt_runner ${D}/usr/share/${BPN}/runner
-> +    install -D ${B}/runner/igt_resume ${D}/usr/share/${BPN}/runner
-> +}
-> +
-> +FILES_${PN} += "\
-> +        ${libexecdir}/${BPN}/*\
-> +        ${libdir}/intel_aubdump.so \
-> +        ${datadir}/${BPN}/1080p-right.png \
-> +        ${datadir}/${BPN}/1080p-left.png \
-> +        ${datadir}/${BPN}/pass.png \
-> +        ${datadir}/${BPN}/test-list.txt \
-> +        ${libexecdir}/${BPN}/benchmarks \
-> +        "
-> --
-> 2.25.1
+>   samba: upgrade 4.10.13 -> 4.10.15 (2020-05-20 16:50:45 +0000)
+>
+> are available in the Git repository at:
+>
+>   git://git.openembedded.org/meta-openembedded dunfell-next
+>   http://cgit.openembedded.org/meta-openembedded/log/?h=dunfell-next
+>
+> Adrian Bunk (2):
+>   unicode-ucd: Stop broken license downloading
+>   postfix: Upgrade 3.4.10 -> 3.4.12
+>
+> Andreas Müller (2):
+>   gexiv2: upgrade 0.12.0 -> 0.12.1
+>   thunar: upgrade 1.8.14 -> 1.8.15
+>
+> Andrew Geissler (1):
+>   nlohmann-json: backport gcc10 fix
+>
+> Armin Kuster (1):
+>   tremor: update SRC_URI as project moved to gitlab
+>
+> Christoph Steiger (1):
+>   python-periphery: Add python-mmap to RDEPENDS
+>
+> Domarys Correa (1):
+>   python3-jinja2: Update 2.11.1 -> 2.11.2
+>
+> Kai Kang (3):
+>   xfconf: 4.14.2 -> 4.14.3
+>   thunar: 1.8.12 -> 1.8.14
+>   catfish: 1.4.11 -> 1.4.13
+>
+> Khem Raj (4):
+>   netplan: Depend on systemd if it is in distro
+>   uim: Add patch to fix -fno-common link error
+>   postfix: Upgrade to 3.4.10 and compile with -fcommon
+>   safec: Update to latest on 3.5.1 release tags
+>
+> Leon Anavi (5):
+>   python3-gmqtt: Upgrade to 0.6.5
+>   python3-appdirs: Upgrade to 1.4.4
+>   python3-pandas: Upgrade 1.0.1 -> 1.0.3
+>   python3-parallax: Upgrade 1.0.5 -> 1.0.6
+>   python3-openpyxl: Upgrade 2.6.3 -> 3.0.3
+>
+> Pierre-Jean Texier (3):
+>   librsync: upgrade 2.3.0 -> 2.3.1
+>   ser2net: fix upstream check URL
+>   ser2net: upgrade 4.1.5 -> 4.1.8
+>
+> Trevor Gamblin (1):
+>   python3-iso8601: add python3-numbers to RDEPENDS
+>
+> Wang Mingyu (4):
+>   jansson: upgrade 2.12 -> 2.13.1
+>   openldap: upgrade 2.4.49 -> 2.4.50
+>   python3-pycparser: upgrade 2.19 -> 2.20
+>   cryptsetup: upgrade 2.3.1 -> 2.3.2
+>
+> Yanfei Xu (1):
+>   turbostat: fix the build failure for new v5.7-rc6 kernel
+>
+> Yi Zhao (1):
+>   apache2: create log/run directory via pkg_postinst
+>
+> Zang Ruochen (2):
+>   dnsmasq: upgrade 2.80 -> 2.81
+>   fetchmail: upgrade 6.4.3 -> 6.4.4
+>
+> Zheng Ruoqin (3):
+>   dstat: Fix runtime error that depend python.
+>   kea: upgrade 1.7.6 -> 1.7.7
+>   libqmi: upgrade 1.24.8 -> 1.24.12
+>
+>  .../{gexiv2_0.12.0.bb => gexiv2_0.12.1.bb}    |  4 +-
+>  .../tremor/tremor_20180319.bb                 |  2 +-
+>  .../kea/{kea_1.7.6.bb => kea_1.7.7.bb}        |  4 +-
+>  .../netplan/netplan_0.98.bb                   |  3 +-
+>  ...ure-with-glibc-2.30-due-to-dropped-R.patch | 37 -------
+>  .../{postfix_3.4.8.bb => postfix_3.4.12.bb}   |  5 +-
+>  ...nsmasq-fix-build-against-5.2-headers.patch | 31 ------
+>  ...-dnsmasq-fix-memory-leak-in-helper-c.patch | 49 ---------
+>  .../recipes-support/dnsmasq/dnsmasq_2.80.bb   | 10 --
+>  .../recipes-support/dnsmasq/dnsmasq_2.81.bb   |  8 ++
+>  ...{fetchmail_6.4.3.bb => fetchmail_6.4.4.bb} |  4 +-
+>  .../{libqmi_1.24.8.bb => libqmi_1.24.12.bb}   |  3 +-
+>  .../{ser2net_4.1.5.bb => ser2net_4.1.8.bb}    |  5 +-
+>  ...r-Use-_ISOC11_SOURCE-only-with-glibc.patch | 30 ------
+>  .../safec/{safec_3.5.bb => safec_3.5.1.bb}    |  8 +-
+>  ...ryptsetup_2.3.1.bb => cryptsetup_2.3.2.bb} |  4 +-
+>  ...latize-basic_json-ctor-from-json_ref.patch | 99 +++++++++++++++++++
+>  .../nlohmann-json/0001-typo-fix.patch         | 43 ++++++++
+>  .../nlohmann-json/nlohmann-json_3.7.3.bb      |  5 +-
+>  .../{jansson_2.12.bb => jansson_2.13.1.bb}    |  6 +-
+>  .../recipes-kernel/turbostat/turbostat_3.4.bb | 20 +++-
+>  .../dstat/0001-change-dstat-to-python3.patch  | 89 +++++++++++++++++
+>  meta-oe/recipes-support/dstat/dstat_0.7.4.bb  |  4 +-
+>  .../{librsync_2.3.0.bb => librsync_2.3.1.bb}  |  2 +-
+>  ...{openldap_2.4.49.bb => openldap_2.4.50.bb} |  4 +-
+>  .../uim/uim/JMP_BUF_GC_jmp_buf.patch          | 15 +++
+>  meta-oe/recipes-support/uim/uim_1.8.8.bb      |  1 +
+>  .../unicode-ucd/files/license.html            | 98 ++++++++++++++++++
+>  .../unicode-ucd/unicode-ucd_12.1.0.bb         |  7 +-
+>  .../python/python-iso8601.inc                 |  1 +
+>  .../python/python-periphery.inc               |  2 +
+>  ...dirs_1.4.3.bb => python3-appdirs_1.4.4.bb} |  4 +-
+>  ...-gmqtt_0.6.2.bb => python3-gmqtt_0.6.5.bb} |  4 +-
+>  .../python/python3-jinja2_2.11.1.bb           |  4 -
+>  ...on-jinja2.inc => python3-jinja2_2.11.2.bb} | 40 +++++---
+>  ...yxl_2.6.3.bb => python3-openpyxl_3.0.3.bb} |  6 +-
+>  .../python/python3-pandas_1.0.1.bb            |  2 -
+>  ...hon-pandas.inc => python3-pandas_1.0.3.bb} |  6 +-
+>  ...lax_1.0.5.bb => python3-parallax_1.0.6.bb} |  4 +-
+>  ...rser_2.19.bb => python3-pycparser_2.20.bb} |  4 +-
+>  .../recipes-httpd/apache2/apache2_2.4.43.bb   | 18 ++++
+>  .../apache2/files/apache2-volatile.conf       |  2 +
+>  .../apache2/files/apache2.service             |  4 -
+>  .../recipes-httpd/apache2/files/init          |  5 -
+>  .../apache2/files/volatiles.04_apache2        |  3 +
+>  .../{catfish_1.4.11.bb => catfish_1.4.13.bb}  |  4 +-
+>  .../{thunar_1.8.12.bb => thunar_1.8.15.bb}    |  4 +-
+>  .../{xfconf_4.14.2.bb => xfconf_4.14.3.bb}    |  4 +-
+>  48 files changed, 475 insertions(+), 246 deletions(-)
+>  rename meta-gnome/recipes-gnome/gexiv2/{gexiv2_0.12.0.bb => gexiv2_0.12.1.bb} (69%)
+>  rename meta-networking/recipes-connectivity/kea/{kea_1.7.6.bb => kea_1.7.7.bb} (94%)
+>  delete mode 100644 meta-networking/recipes-daemons/postfix/files/0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch
+>  rename meta-networking/recipes-daemons/postfix/{postfix_3.4.8.bb => postfix_3.4.12.bb} (75%)
+>  delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-build-against-5.2-headers.patch
+>  delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
+>  delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
+>  create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb
+>  rename meta-networking/recipes-support/fetchmail/{fetchmail_6.4.3.bb => fetchmail_6.4.4.bb} (86%)
+>  rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.24.8.bb => libqmi_1.24.12.bb} (85%)
+>  rename meta-oe/recipes-connectivity/ser2net/{ser2net_4.1.5.bb => ser2net_4.1.8.bb} (69%)
+>  delete mode 100644 meta-oe/recipes-core/safec/safec/0001-memrchr-Use-_ISOC11_SOURCE-only-with-glibc.patch
+>  rename meta-oe/recipes-core/safec/{safec_3.5.bb => safec_3.5.1.bb} (59%)
+>  rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.3.1.bb => cryptsetup_2.3.2.bb} (96%)
+>  create mode 100644 meta-oe/recipes-devtools/nlohmann-json/nlohmann-json/0001-Templatize-basic_json-ctor-from-json_ref.patch
+>  create mode 100644 meta-oe/recipes-devtools/nlohmann-json/nlohmann-json/0001-typo-fix.patch
+>  rename meta-oe/recipes-extended/jansson/{jansson_2.12.bb => jansson_2.13.1.bb} (60%)
+>  create mode 100644 meta-oe/recipes-support/dstat/dstat/0001-change-dstat-to-python3.patch
+>  rename meta-oe/recipes-support/librsync/{librsync_2.3.0.bb => librsync_2.3.1.bb} (88%)
+>  rename meta-oe/recipes-support/openldap/{openldap_2.4.49.bb => openldap_2.4.50.bb} (98%)
+>  create mode 100644 meta-oe/recipes-support/uim/uim/JMP_BUF_GC_jmp_buf.patch
+>  create mode 100644 meta-oe/recipes-support/unicode-ucd/files/license.html
+>  rename meta-python/recipes-devtools/python/{python3-appdirs_1.4.3.bb => python3-appdirs_1.4.4.bb} (75%)
+>  rename meta-python/recipes-devtools/python/{python3-gmqtt_0.6.2.bb => python3-gmqtt_0.6.5.bb} (74%)
+>  delete mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
+>  rename meta-python/recipes-devtools/python/{python-jinja2.inc => python3-jinja2_2.11.2.bb} (44%)
+>  rename meta-python/recipes-devtools/python/{python3-openpyxl_2.6.3.bb => python3-openpyxl_3.0.3.bb} (70%)
+>  delete mode 100644 meta-python/recipes-devtools/python/python3-pandas_1.0.1.bb
+>  rename meta-python/recipes-devtools/python/{python-pandas.inc => python3-pandas_1.0.3.bb} (78%)
+>  rename meta-python/recipes-devtools/python/{python3-parallax_1.0.5.bb => python3-parallax_1.0.6.bb} (72%)
+>  rename meta-python/recipes-devtools/python/{python3-pycparser_2.19.bb => python3-pycparser_2.20.bb} (74%)
+>  create mode 100644 meta-webserver/recipes-httpd/apache2/files/apache2-volatile.conf
+>  create mode 100644 meta-webserver/recipes-httpd/apache2/files/volatiles.04_apache2
+>  rename meta-xfce/recipes-apps/catfish/{catfish_1.4.11.bb => catfish_1.4.13.bb} (72%)
+>  rename meta-xfce/recipes-xfce/thunar/{thunar_1.8.12.bb => thunar_1.8.15.bb} (84%)
+>  rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.14.2.bb => xfconf_4.14.3.bb} (83%)
+>
 >
 > 
+
+
+--------------82677819E750531CA89C8E00
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <br>
+    <br>
+    <div class="moz-cite-prefix">On 6/4/20 9:16 PM, akuster via
+      lists.openembedded.org wrote:<br>
+      <br>
+      Ping.<br>
+      <br>
+      any issue with this merge request?<br>
+      <br>
+      -armin</div>
+    <blockquote type="cite"
+      cite="mid:16158ACEBF1AD616.29014@lists.openembedded.org">
+      <pre class="moz-quote-pre" wrap="">Please merge these changes to Dunfell
+
+Cover letter only
+
+The following changes since commit e413c1ef621688e69bb7830bb3151ed23b30b73e:
+
+  samba: upgrade 4.10.13 -&gt; 4.10.15 (2020-05-20 16:50:45 +0000)
+
+are available in the Git repository at:
+
+  git://git.openembedded.org/meta-openembedded dunfell-next
+  <a class="moz-txt-link-freetext" href="http://cgit.openembedded.org/meta-openembedded/log/?h=dunfell-next">http://cgit.openembedded.org/meta-openembedded/log/?h=dunfell-next</a>
+
+Adrian Bunk (2):
+  unicode-ucd: Stop broken license downloading
+  postfix: Upgrade 3.4.10 -&gt; 3.4.12
+
+Andreas Müller (2):
+  gexiv2: upgrade 0.12.0 -&gt; 0.12.1
+  thunar: upgrade 1.8.14 -&gt; 1.8.15
+
+Andrew Geissler (1):
+  nlohmann-json: backport gcc10 fix
+
+Armin Kuster (1):
+  tremor: update SRC_URI as project moved to gitlab
+
+Christoph Steiger (1):
+  python-periphery: Add python-mmap to RDEPENDS
+
+Domarys Correa (1):
+  python3-jinja2: Update 2.11.1 -&gt; 2.11.2
+
+Kai Kang (3):
+  xfconf: 4.14.2 -&gt; 4.14.3
+  thunar: 1.8.12 -&gt; 1.8.14
+  catfish: 1.4.11 -&gt; 1.4.13
+
+Khem Raj (4):
+  netplan: Depend on systemd if it is in distro
+  uim: Add patch to fix -fno-common link error
+  postfix: Upgrade to 3.4.10 and compile with -fcommon
+  safec: Update to latest on 3.5.1 release tags
+
+Leon Anavi (5):
+  python3-gmqtt: Upgrade to 0.6.5
+  python3-appdirs: Upgrade to 1.4.4
+  python3-pandas: Upgrade 1.0.1 -&gt; 1.0.3
+  python3-parallax: Upgrade 1.0.5 -&gt; 1.0.6
+  python3-openpyxl: Upgrade 2.6.3 -&gt; 3.0.3
+
+Pierre-Jean Texier (3):
+  librsync: upgrade 2.3.0 -&gt; 2.3.1
+  ser2net: fix upstream check URL
+  ser2net: upgrade 4.1.5 -&gt; 4.1.8
+
+Trevor Gamblin (1):
+  python3-iso8601: add python3-numbers to RDEPENDS
+
+Wang Mingyu (4):
+  jansson: upgrade 2.12 -&gt; 2.13.1
+  openldap: upgrade 2.4.49 -&gt; 2.4.50
+  python3-pycparser: upgrade 2.19 -&gt; 2.20
+  cryptsetup: upgrade 2.3.1 -&gt; 2.3.2
+
+Yanfei Xu (1):
+  turbostat: fix the build failure for new v5.7-rc6 kernel
+
+Yi Zhao (1):
+  apache2: create log/run directory via pkg_postinst
+
+Zang Ruochen (2):
+  dnsmasq: upgrade 2.80 -&gt; 2.81
+  fetchmail: upgrade 6.4.3 -&gt; 6.4.4
+
+Zheng Ruoqin (3):
+  dstat: Fix runtime error that depend python.
+  kea: upgrade 1.7.6 -&gt; 1.7.7
+  libqmi: upgrade 1.24.8 -&gt; 1.24.12
+
+ .../{gexiv2_0.12.0.bb =&gt; gexiv2_0.12.1.bb}    |  4 +-
+ .../tremor/tremor_20180319.bb                 |  2 +-
+ .../kea/{kea_1.7.6.bb =&gt; kea_1.7.7.bb}        |  4 +-
+ .../netplan/netplan_0.98.bb                   |  3 +-
+ ...ure-with-glibc-2.30-due-to-dropped-R.patch | 37 -------
+ .../{postfix_3.4.8.bb =&gt; postfix_3.4.12.bb}   |  5 +-
+ ...nsmasq-fix-build-against-5.2-headers.patch | 31 ------
+ ...-dnsmasq-fix-memory-leak-in-helper-c.patch | 49 ---------
+ .../recipes-support/dnsmasq/dnsmasq_2.80.bb   | 10 --
+ .../recipes-support/dnsmasq/dnsmasq_2.81.bb   |  8 ++
+ ...{fetchmail_6.4.3.bb =&gt; fetchmail_6.4.4.bb} |  4 +-
+ .../{libqmi_1.24.8.bb =&gt; libqmi_1.24.12.bb}   |  3 +-
+ .../{ser2net_4.1.5.bb =&gt; ser2net_4.1.8.bb}    |  5 +-
+ ...r-Use-_ISOC11_SOURCE-only-with-glibc.patch | 30 ------
+ .../safec/{safec_3.5.bb =&gt; safec_3.5.1.bb}    |  8 +-
+ ...ryptsetup_2.3.1.bb =&gt; cryptsetup_2.3.2.bb} |  4 +-
+ ...latize-basic_json-ctor-from-json_ref.patch | 99 +++++++++++++++++++
+ .../nlohmann-json/0001-typo-fix.patch         | 43 ++++++++
+ .../nlohmann-json/nlohmann-json_3.7.3.bb      |  5 +-
+ .../{jansson_2.12.bb =&gt; jansson_2.13.1.bb}    |  6 +-
+ .../recipes-kernel/turbostat/turbostat_3.4.bb | 20 +++-
+ .../dstat/0001-change-dstat-to-python3.patch  | 89 +++++++++++++++++
+ meta-oe/recipes-support/dstat/dstat_0.7.4.bb  |  4 +-
+ .../{librsync_2.3.0.bb =&gt; librsync_2.3.1.bb}  |  2 +-
+ ...{openldap_2.4.49.bb =&gt; openldap_2.4.50.bb} |  4 +-
+ .../uim/uim/JMP_BUF_GC_jmp_buf.patch          | 15 +++
+ meta-oe/recipes-support/uim/uim_1.8.8.bb      |  1 +
+ .../unicode-ucd/files/license.html            | 98 ++++++++++++++++++
+ .../unicode-ucd/unicode-ucd_12.1.0.bb         |  7 +-
+ .../python/python-iso8601.inc                 |  1 +
+ .../python/python-periphery.inc               |  2 +
+ ...dirs_1.4.3.bb =&gt; python3-appdirs_1.4.4.bb} |  4 +-
+ ...-gmqtt_0.6.2.bb =&gt; python3-gmqtt_0.6.5.bb} |  4 +-
+ .../python/python3-jinja2_2.11.1.bb           |  4 -
+ ...on-jinja2.inc =&gt; python3-jinja2_2.11.2.bb} | 40 +++++---
+ ...yxl_2.6.3.bb =&gt; python3-openpyxl_3.0.3.bb} |  6 +-
+ .../python/python3-pandas_1.0.1.bb            |  2 -
+ ...hon-pandas.inc =&gt; python3-pandas_1.0.3.bb} |  6 +-
+ ...lax_1.0.5.bb =&gt; python3-parallax_1.0.6.bb} |  4 +-
+ ...rser_2.19.bb =&gt; python3-pycparser_2.20.bb} |  4 +-
+ .../recipes-httpd/apache2/apache2_2.4.43.bb   | 18 ++++
+ .../apache2/files/apache2-volatile.conf       |  2 +
+ .../apache2/files/apache2.service             |  4 -
+ .../recipes-httpd/apache2/files/init          |  5 -
+ .../apache2/files/volatiles.04_apache2        |  3 +
+ .../{catfish_1.4.11.bb =&gt; catfish_1.4.13.bb}  |  4 +-
+ .../{thunar_1.8.12.bb =&gt; thunar_1.8.15.bb}    |  4 +-
+ .../{xfconf_4.14.2.bb =&gt; xfconf_4.14.3.bb}    |  4 +-
+ 48 files changed, 475 insertions(+), 246 deletions(-)
+ rename meta-gnome/recipes-gnome/gexiv2/{gexiv2_0.12.0.bb =&gt; gexiv2_0.12.1.bb} (69%)
+ rename meta-networking/recipes-connectivity/kea/{kea_1.7.6.bb =&gt; kea_1.7.7.bb} (94%)
+ delete mode 100644 meta-networking/recipes-daemons/postfix/files/0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch
+ rename meta-networking/recipes-daemons/postfix/{postfix_3.4.8.bb =&gt; postfix_3.4.12.bb} (75%)
+ delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-build-against-5.2-headers.patch
+ delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
+ delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb
+ rename meta-networking/recipes-support/fetchmail/{fetchmail_6.4.3.bb =&gt; fetchmail_6.4.4.bb} (86%)
+ rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.24.8.bb =&gt; libqmi_1.24.12.bb} (85%)
+ rename meta-oe/recipes-connectivity/ser2net/{ser2net_4.1.5.bb =&gt; ser2net_4.1.8.bb} (69%)
+ delete mode 100644 meta-oe/recipes-core/safec/safec/0001-memrchr-Use-_ISOC11_SOURCE-only-with-glibc.patch
+ rename meta-oe/recipes-core/safec/{safec_3.5.bb =&gt; safec_3.5.1.bb} (59%)
+ rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.3.1.bb =&gt; cryptsetup_2.3.2.bb} (96%)
+ create mode 100644 meta-oe/recipes-devtools/nlohmann-json/nlohmann-json/0001-Templatize-basic_json-ctor-from-json_ref.patch
+ create mode 100644 meta-oe/recipes-devtools/nlohmann-json/nlohmann-json/0001-typo-fix.patch
+ rename meta-oe/recipes-extended/jansson/{jansson_2.12.bb =&gt; jansson_2.13.1.bb} (60%)
+ create mode 100644 meta-oe/recipes-support/dstat/dstat/0001-change-dstat-to-python3.patch
+ rename meta-oe/recipes-support/librsync/{librsync_2.3.0.bb =&gt; librsync_2.3.1.bb} (88%)
+ rename meta-oe/recipes-support/openldap/{openldap_2.4.49.bb =&gt; openldap_2.4.50.bb} (98%)
+ create mode 100644 meta-oe/recipes-support/uim/uim/JMP_BUF_GC_jmp_buf.patch
+ create mode 100644 meta-oe/recipes-support/unicode-ucd/files/license.html
+ rename meta-python/recipes-devtools/python/{python3-appdirs_1.4.3.bb =&gt; python3-appdirs_1.4.4.bb} (75%)
+ rename meta-python/recipes-devtools/python/{python3-gmqtt_0.6.2.bb =&gt; python3-gmqtt_0.6.5.bb} (74%)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
+ rename meta-python/recipes-devtools/python/{python-jinja2.inc =&gt; python3-jinja2_2.11.2.bb} (44%)
+ rename meta-python/recipes-devtools/python/{python3-openpyxl_2.6.3.bb =&gt; python3-openpyxl_3.0.3.bb} (70%)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pandas_1.0.1.bb
+ rename meta-python/recipes-devtools/python/{python-pandas.inc =&gt; python3-pandas_1.0.3.bb} (78%)
+ rename meta-python/recipes-devtools/python/{python3-parallax_1.0.5.bb =&gt; python3-parallax_1.0.6.bb} (72%)
+ rename meta-python/recipes-devtools/python/{python3-pycparser_2.19.bb =&gt; python3-pycparser_2.20.bb} (74%)
+ create mode 100644 meta-webserver/recipes-httpd/apache2/files/apache2-volatile.conf
+ create mode 100644 meta-webserver/recipes-httpd/apache2/files/volatiles.04_apache2
+ rename meta-xfce/recipes-apps/catfish/{catfish_1.4.11.bb =&gt; catfish_1.4.13.bb} (72%)
+ rename meta-xfce/recipes-xfce/thunar/{thunar_1.8.12.bb =&gt; thunar_1.8.15.bb} (84%)
+ rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.14.2.bb =&gt; xfconf_4.14.3.bb} (83%)
+
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+    </blockquote>
+    <br>
+  </body>
+</html>
+
+--------------82677819E750531CA89C8E00--
