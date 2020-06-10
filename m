@@ -1,17 +1,17 @@
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.67])
- by mx.groups.io with SMTP id smtpd.web11.2825.1591818649723782171
+Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.58])
+ by mx.groups.io with SMTP id smtpd.web12.3026.1591818667353374436
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jun 2020 12:50:49 -0700
+ Wed, 10 Jun 2020 12:51:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=c8OE1KCR;
- spf=pass (domain: windriver.com, ip: 40.107.92.67, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=YamKCS3Y;
+ spf=pass (domain: windriver.com, ip: 40.107.75.58, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=f4n6hjT1+fkdo+mwaUyoznJNH40YJTr4g7zbc6NaeWf/n4cBZP2gzRxWDM5ENVmCOWEFTYHR0yBbB+GV1KDwZgOq+2DW5ySDNaUIYSVVOwEXt+aLFlRzqKw/5YM8NW0vUIoDVA8uz/HFsrUBcAykc1q2jbfFjl7NJk+ugtZrIA+o32fGcXuMdPjv04fK1cSIsrE/i8BVWMBn1fscrTioBmM0hgbPN8xSEh1Yj6xdjOb2t28tNk5csyxbYsXNdO4CyP4mJRUlBN7W5e9f1QeTz058md+GVhiCqRgWw4qy2/18dC/NZsU2L+33ch+cskFNTWSWEI3X5MYgbLsfsFzN0g==
+ b=HyL53qVunPlnn9nW37c5TiNrXYRqnmDWC/WV76aXKM3ridLRIQJTTQ0qOW5vem0y8sguoNSOxrR7wpopDwWS+EITeEZ/056OCR6FujVqTS4c3dr/I4fpDXUoFJMCEn9glNfyiBdHTW99exqEoUoY1P2c3n5hIgQQ8TW7sM3l9qmamp5uj80VzC+5blgkirmORzZPxS7pujUAUX9HSbSCArgdVrdm5p5aGhpzKLsHjX3ONI6tSEbhejtPabRFe+HNFmOYRBMSumfBCpMIgXjAuCRpA3QlkOl4pUB8UzGh9zkxq8qYKnoCaMe3Jsg79FqPsbrp7hkI9a158LWvsvcLlA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fLuGtjbWBzTbNwiS5f5JlnPf1kmF+CpwK9Pvwsa1ZAo=;
- b=g/wP0Pa3U6YuB2/I9qTW1aSWehce4QxpP1l4J/ABLVXtZrEhATicXPyPANtaQe75rhaFiP3NS9/dn2nI8Ndb6ZNxayOAj5WZit1f3ISw7AGCHNxfmo2H5RvRrAFd+Avlo1V/aS/v/oxf+BUaheaJhM5w712qMzRXiXk8ptu2xJulQzIHsemM73UZu2LxHCeMy436NPZcDWuXBZs9S9sMmUFI38eR6LmHa43/LabXlx2JDhC0TN+dabKQZ0TlS5j9ZpTMaHiOkChyMX+BGN657GIqbqZlZ1KFUvblemuWAZ6dyUG8k5hDZLPaSAZt/TNpBc6Jj8ExQxKtc1QYuSJu7g==
+ bh=4m++7YEQLk0ldOApkF5cPbCX/JzCOutQ1Yoe0NbAgdE=;
+ b=Zzz0p2585WPUV2M0Yuhfx3QR20/OAXCMKZWoViYJbZqbu5CKWaEgxfzkiiyatzJfyY6/Y9p0KBvKlrPOlcg6m98y161EuiIffOtl0CykTvz+Y/0FXJ+LckXjo3wZxigJ/bNDpIlBmXBWwZ+SZb+FPXURf3i+nmeAqecaPc+2WV839A/uLb3VyNkK7Jv0Db5MSvygYQcRTUBY7Mwb0C1pc5ATz1r51oqTb0rAUl+eGFpjilxwEyqkvzOMICtTiOdbci48TyK5uqsJhEz6QSBE8qkSN9NiWDl839GTHKyO+t3eQWgBJ5piBnPVZrkFf6MXcx8igxSzUF5bO3s2eeEvxw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fLuGtjbWBzTbNwiS5f5JlnPf1kmF+CpwK9Pvwsa1ZAo=;
- b=c8OE1KCRc9/VBHWQ7v750fxtwaOdSN9pV/X+il5/fsa72ixnKcyMIiAEKLuLtF52eCjIEYIUNKPkxAgWmNb+x2/8twpzOb9TP9MlOLJqCZNzxqy7xaowM2vqOMMcbQenzH9td8KLWuh2CK0So+Ij1ziM1d2+NKdnLO1yl3SwoNo=
+ bh=4m++7YEQLk0ldOApkF5cPbCX/JzCOutQ1Yoe0NbAgdE=;
+ b=YamKCS3YSWmu8cC/opGGKLpnb3mbXqJ9cf9b3VcVZZlf2jOMxeHrYjbPGlGHO82+sCLX9MBK/1M2faN/OK+TK8mr81vwzx6+CJsXmYOhk002DHdNZFz58vfivb79ikvFcj56Bzs6uDJMKVfsj1D0M30zdKkj8WZsS+9lY3oJ8Q4=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,99 +28,137 @@ Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
  by BN6PR11MB3924.namprd11.prod.outlook.com (2603:10b6:405:7a::23) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.18; Wed, 10 Jun
- 2020 19:50:48 +0000
+ 2020 19:51:06 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3088.021; Wed, 10 Jun 2020
- 19:50:48 +0000
-Subject: Re: [oe] [PATCH 2/2] python-m2crypto: Add RDEPENDS
-To: Changqing Li <changqing.li@windriver.com>,
+ 19:51:06 +0000
+Subject: Re: [oe] [meta-python][PATCH 1/3] python3-evdev: Consolidate in a single file
+To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200609061806.310291-1-changqing.li@windriver.com>
- <20200609061806.310291-2-changqing.li@windriver.com>
+References: <20200609091121.23832-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <c9b8c46b-bdbd-26aa-5ed7-32e0a53bff49@windriver.com>
-Date: Wed, 10 Jun 2020 15:50:46 -0400
+Message-ID: <e59c0ea0-87e3-6a3c-da0d-c53bc43bee83@windriver.com>
+Date: Wed, 10 Jun 2020 15:51:03 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200609061806.310291-2-changqing.li@windriver.com>
-X-ClientProxiedBy: YTBPR01CA0036.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:14::49) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200609091121.23832-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTBPR01CA0028.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:14::41) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YTBPR01CA0036.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:14::49) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.19 via Frontend Transport; Wed, 10 Jun 2020 19:50:48 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YTBPR01CA0028.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:14::41) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.19 via Frontend Transport; Wed, 10 Jun 2020 19:51:05 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 8d051803-1333-4a3d-ec19-08d80d779270
+X-MS-Office365-Filtering-Correlation-Id: 1ce99450-fc6a-463f-0d95-08d80d779cf1
 X-MS-TrafficTypeDiagnostic: BN6PR11MB3924:
-X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB3924B07F68158A096F6C1CE89F830@BN6PR11MB3924.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:146;
+	<BN6PR11MB3924ADFD22E031403535435E9F830@BN6PR11MB3924.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:138;
 X-Forefront-PRVS: 0430FA5CB7
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	MMkO6kuB4NG/aF3+H6OvuOkmbfvWGjBTJ12oaWMKmHBW7Hmq6WkhcUu4XlOMiv8DhGxm4pDu0jjGvUORf8bTwGwAJ2iB6mipkqbWSat0iLgrD4n0fJpK0v3TsTzYjrFkqSdIB10RXBG/Qv5l1vkWQLiqAQp5VYO/SIsfihOcinIpptiWvblBx5mjawwOZt1F8nBLVCk9npH2FI0giIp6ry21uNti5o3f5GJow7zQpJBp9kXNCWLf/39yDXeWwQQ7+o7u5XNtGZKRVmr8y2LX3Ft+gO8+41sw/DlAdJOXtWvRXGjORin4ohqwQAYMp7FsQcQMp9TkGBH4TspmZHDEBhhvn3fRlBo0wNGCbDQx0rDsfebWFCnyL89zLgjS0NMtNCVhLgnxK/Cu1MWy3pMSSK/Ybp/H1a5t0pLVFTBKa8notVPO5GZCVGqhWjiRXU709HYsv09+Ysae1BvMHDllgw==
+	si2TLTYwDvcS7oRWBmClvHh8w/KRRH44EkC+F1VnfFbnPkvfGFVRRuI2bKI+5WPpiCY3f2m7XO50PXwDhOG7wiWW+9eknkImjCQ0r7W403VhyRSf609fNXlWchlXON7T6v2D2Ec/JlX2taItYxr9lsvVxAGTVk7oEnJSYb1BAxM++XZY4O623GtSxz2RXRUp8B31zXXi8SO7eXp1Kda10uF9kNsEMgSi9ffg2mXVGQnZ7wvb5q7CwCDuS5cgRd+T1v57XMGn9gTR2BzRwy6Y4O8wiE6TEP+R+/E8ZOeq/8/5QiK7JS+5fWCNcGt7QQErFe23tGQWBY2Vy1HAa2h+RUx484g4FaSvwN1KWeqrOvmiSRhzmEDVsCvKKLZ9ItR8YWzjMjzcdOKNiow0r3nnXvDxORehtPL1O6lZyApjMqglZiQ7oGg/EqbaILZ5CR+RCx3+DwJwzKrw48XfO20Lpg==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(346002)(39850400004)(136003)(366004)(376002)(316002)(6486002)(8936002)(16576012)(166002)(2616005)(956004)(31696002)(86362001)(31686004)(44832011)(83380400001)(966005)(66946007)(66556008)(5660300002)(53546011)(8676002)(16526019)(66476007)(36756003)(2906002)(478600001)(33964004)(186003)(52116002)(26005)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	ROxLItTLFkLGPAVjgIOmRCIj0DENBKDLqzDQrc3EOnemrH6dvFyj2nlq5VHfo38dPd0+a35iKWdlE7VgioLKr2EGDGt1CzAbDxCMOfqVl+v7mDUXZAD8pIyQDqWesgs5WghG++x1mlH7zCfymHbRQu/EfFid3D/137QL+j+q49Ey0GmHf3+dUGVEyz4mrOyBnNnhtkL6rbD0bL0qLq14xGH1/zIaQcec87rBEPnxCwIqEUjvm03iVqcG+OIdWXT1CoFCnz9XGtH6wzNNLOhc7Ny71bvwo1YxfvwjkRiYrMzE+6bXxHSJclmye31JArbJAD7i1sb4neS/fEJdEvpfv3o3onhnGHkwtt+FRXIPcC+Io5+BkkFCaAglfEI63ritYP9/HY0JYVxcdFEGY41yUGQxe9b48AbHgUQRCeAsf3LT53v8MfVG86oD5m9F5uepjOxqAOu7qDf8lPwbyV06U4l01C+km8f8LHNkR61XP7w=
+	crbLDGcCMW5vK6Xn7r3NWoQyyM+efJWPpS2ogRNlFmRTWH3YViFiv8pGvrh+avNy3oZDPakihl8sRpb252x7gVeDDQCQrEFDRDj43InGO/HSluY6aF9kbdx1gSut/OGC9rDBnwwRTfa9dtjq3OxMdQQphYNummnX81zLpLl5NJyAPEuWf1b2sGesgKXFYsdVkhh5d14UABWPKiLPmrlIDN/NvSSfILM0ZUSi7IcWJXznpGa6MD53cCUdEvzIUmnlewuORMAeRUcKEqUDMpgT8HEPiYVWFo2LB9Q6e8opLTen74N64WQwwg3Di95qvOByWYNwY30liV+uCWCgjI13EaJXv1/hi8kfQtMJhFmYU9I1idDsez9TfEb3ESLE0PhrOfiAew071FRIbTevfqYV6vUsTo6W9AZ4PQZSyByBBKT4nFLe/UCAjZT/9ZmmAa0wKpOMcGuB7OHhPe+sQJr5QXMzDmmRiMTvYkWWsfvCnmgQKwNbF2Qi+qn+91l++394
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8d051803-1333-4a3d-ec19-08d80d779270
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2020 19:50:48.3767
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1ce99450-fc6a-463f-0d95-08d80d779cf1
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2020 19:51:05.9517
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fVHG+g10cIU1GO3vnBxDZ5muA6/TK8v5gToyhpix7Nur/yJsGMa6872x5hzBkx0Fr1Td/jtgzCnKtIWt27SCqYxBnIr1NajI9es7k/7IktU=
+X-MS-Exchange-CrossTenant-UserPrincipalName: mO6FvDT+oyPJ4WX5F5ZhGaQiZEZG2VM22UnpV6HUheWYIKCKqEfYiffBI8qBkZZ3UZ5qDp5ztgLJDEcsVTcgsQK9cvV1OK3rkH8vrYOhOGw=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB3924
 Content-Type: multipart/alternative;
- boundary="------------21A3EA3D0F0B97D61ECF961B"
+ boundary="------------DCD6FE5767E3F6B7168885FA"
 Content-Language: en-US
 
---------------21A3EA3D0F0B97D61ECF961B
+--------------DCD6FE5767E3F6B7168885FA
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 6/9/20 2:18 AM, Changqing Li wrote:
-> From: Changqing Li <changqing.li@windriver.com>
+On 6/9/20 5:11 AM, Leon Anavi wrote:
+> Consolidate inc and bb files into a single bb file.
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
->
-> fix errors:
-> ModuleNotFoundError: No module named 'distutils'
-> ModuleNotFoundError: No module named 'asyncore'
-> ModuleNotFoundError: No module named 'xmlrpc'
->
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
 > ---
->   meta-python/recipes-devtools/python/python-m2crypto.inc | 6 +++++-
->   1 file changed, 5 insertions(+), 1 deletion(-)
+>   .../recipes-devtools/python/python-evdev.inc  | 25 -------------------
+>   .../python/python3-evdev_1.3.0.bb             | 22 +++++++++++++++-
+>   2 files changed, 21 insertions(+), 26 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python-evdev.inc
 >
-> diff --git a/meta-python/recipes-devtools/python/python-m2crypto.inc b/meta-python/recipes-devtools/python/python-m2crypto.inc
-> index 76dd58ce0..881fdf1cc 100644
-> --- a/meta-python/recipes-devtools/python/python-m2crypto.inc
-> +++ b/meta-python/recipes-devtools/python/python-m2crypto.inc
-> @@ -17,7 +17,11 @@ PYPI_PACKAGE = "M2Crypto"
->   inherit pypi siteinfo
+> diff --git a/meta-python/recipes-devtools/python/python-evdev.inc b/meta-python/recipes-devtools/python/python-evdev.inc
+> deleted file mode 100644
+> index 5f5426aac..000000000
+> --- a/meta-python/recipes-devtools/python/python-evdev.inc
+> +++ /dev/null
+> @@ -1,25 +0,0 @@
+> -SUMMARY = "Python evdev lib"
+> -HOMEPAGE = "https://github.com/gvalkov/python-evdev"
+> -LICENSE = "BSD-3-Clause"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=18debddbb3f52c661a129724a883a8e2"
+> -
+> -FILESEXTRAPATHS_prepend := "${THISDIR}/python-evdev:"
+> -
+> -SRC_URI = "${PYPI_SRC_URI}"
+> -
+> -SRC_URI[md5sum] = "05f9e900d6e11e1674475d2dd2668f0d"
+> -SRC_URI[sha256sum] = "b1c649b4fed7252711011da235782b2c260b32e004058d62473471e5cd30634d"
+> -
+> -do_compile_prepend() {
+> -    rm -rf ${S}/evdev/ecodes.c
+> -}
+> -
+> -DISTUTILS_BUILD_ARGS = "build_ecodes --evdev-headers ${STAGING_DIR_TARGET}/usr/include/linux/input.h:${STAGING_DIR_TARGET}/usr/include/linux/input-event-codes.h"
+> -
+> -RDEPENDS_${PN} += "\
+> -    ${PYTHON_PN}-ctypes \
+> -    ${PYTHON_PN}-fcntl \
+> -    ${PYTHON_PN}-io \
+> -    ${PYTHON_PN}-shell \
+> -    ${PYTHON_PN}-stringold \
+> -    "
+> diff --git a/meta-python/recipes-devtools/python/python3-evdev_1.3.0.bb b/meta-python/recipes-devtools/python/python3-evdev_1.3.0.bb
+> index d87bf2fec..fe11049ad 100644
+> --- a/meta-python/recipes-devtools/python/python3-evdev_1.3.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-evdev_1.3.0.bb
+> @@ -1,3 +1,23 @@
+> +SUMMARY = "Python evdev lib"
+> +HOMEPAGE = "https://github.com/gvalkov/python-evdev"
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=18debddbb3f52c661a129724a883a8e2"
+> +
+> +SRC_URI[md5sum] = "05f9e900d6e11e1674475d2dd2668f0d"
+> +SRC_URI[sha256sum] = "b1c649b4fed7252711011da235782b2c260b32e004058d62473471e5cd30634d"
+> +
+>   inherit pypi setuptools3
+> -require python-evdev.inc
 >   
->   DEPENDS += "openssl swig-native"
-> -RDEPENDS_${PN} += "${PYTHON_PN}-typing"
-> +RDEPENDS_${PN} += "${PYTHON_PN}-typing \
-> +                   ${PYTHON_PN}-distutils \
-> +                   ${PYTHON_PN}-smtpd \
-> +                   ${PYTHON_PN}-xmlrpc \
-> +"
->   
->   DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR} -I${STAGING_INCDIR}"
->   DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR}"
+> +do_compile_prepend() {
+> +    rm -rf ${S}/evdev/ecodes.c
+> +}
+> +
+> +DISTUTILS_BUILD_ARGS = "build_ecodes --evdev-headers ${STAGING_DIR_TARGET}/usr/include/linux/input.h:${STAGING_DIR_TARGET}/usr/include/linux/input-event-codes.h"
+> +
+> +RDEPENDS_${PN} += "\
+> +    ${PYTHON_PN}-ctypes \
+> +    ${PYTHON_PN}-fcntl \
+> +    ${PYTHON_PN}-io \
+> +    ${PYTHON_PN}-shell \
+> +    ${PYTHON_PN}-stringold \
+> +    "
 >
 > 
 
---------------21A3EA3D0F0B97D61ECF961B
+--------------DCD6FE5767E3F6B7168885FA
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -130,42 +168,82 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 6/9/20 2:18 AM, Changqing Li wrote:<br>
+    <div class="moz-cite-prefix">On 6/9/20 5:11 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200609061806.310291-2-changqing.li@windriver.com">
-      <pre class="moz-quote-pre" wrap="">From: Changqing Li <a class="moz-txt-link-rfc2396E" href="mailto:changqing.li@windriver.com">&lt;changqing.li@windriver.com&gt;</a></pre>
+    <blockquote type="cite" cite="mid:20200609091121.23832-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Consolidate inc and bb files into a single bb file.
+
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200609061806.310291-2-changqing.li@windriver.com">
+    <blockquote type="cite" cite="mid:20200609091121.23832-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
-
-fix errors:
-ModuleNotFoundError: No module named 'distutils'
-ModuleNotFoundError: No module named 'asyncore'
-ModuleNotFoundError: No module named 'xmlrpc'
-
-Signed-off-by: Changqing Li <a class="moz-txt-link-rfc2396E" href="mailto:changqing.li@windriver.com">&lt;changqing.li@windriver.com&gt;</a>
 ---
- meta-python/recipes-devtools/python/python-m2crypto.inc | 6 &#43;&#43;&#43;&#43;&#43;-
- 1 file changed, 5 insertions(&#43;), 1 deletion(-)
+ .../recipes-devtools/python/python-evdev.inc  | 25 -------------------
+ .../python/python3-evdev_1.3.0.bb             | 22 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
+ 2 files changed, 21 insertions(&#43;), 26 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-evdev.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-m2crypto.inc b/meta-python/recipes-devtools/python/python-m2crypto.inc
-index 76dd58ce0..881fdf1cc 100644
---- a/meta-python/recipes-devtools/python/python-m2crypto.inc
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python-m2crypto.inc
-@@ -17,7 &#43;17,11 @@ PYPI_PACKAGE = &quot;M2Crypto&quot;
- inherit pypi siteinfo
+diff --git a/meta-python/recipes-devtools/python/python-evdev.inc b/meta-python/recipes-devtools/python/python-evdev.inc
+deleted file mode 100644
+index 5f5426aac..000000000
+--- a/meta-python/recipes-devtools/python/python-evdev.inc
+&#43;&#43;&#43; /dev/null
+@@ -1,25 &#43;0,0 @@
+-SUMMARY = &quot;Python evdev lib&quot;
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/gvalkov/python-evdev">&quot;https://github.com/gvalkov/python-evdev&quot;</a>
+-LICENSE = &quot;BSD-3-Clause&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=18debddbb3f52c661a129724a883a8e2">&quot;file://LICENSE;md5=18debddbb3f52c661a129724a883a8e2&quot;</a>
+-
+-FILESEXTRAPATHS_prepend := &quot;${THISDIR}/python-evdev:&quot;
+-
+-SRC_URI = &quot;${PYPI_SRC_URI}&quot;
+-
+-SRC_URI[md5sum] = &quot;05f9e900d6e11e1674475d2dd2668f0d&quot;
+-SRC_URI[sha256sum] = &quot;b1c649b4fed7252711011da235782b2c260b32e004058d62473471e5cd30634d&quot;
+-
+-do_compile_prepend() {
+-    rm -rf ${S}/evdev/ecodes.c
+-}
+-
+-DISTUTILS_BUILD_ARGS = &quot;build_ecodes --evdev-headers ${STAGING_DIR_TARGET}/usr/include/linux/input.h:${STAGING_DIR_TARGET}/usr/include/linux/input-event-codes.h&quot;
+-
+-RDEPENDS_${PN} &#43;= &quot;\
+-    ${PYTHON_PN}-ctypes \
+-    ${PYTHON_PN}-fcntl \
+-    ${PYTHON_PN}-io \
+-    ${PYTHON_PN}-shell \
+-    ${PYTHON_PN}-stringold \
+-    &quot;
+diff --git a/meta-python/recipes-devtools/python/python3-evdev_1.3.0.bb b/meta-python/recipes-devtools/python/python3-evdev_1.3.0.bb
+index d87bf2fec..fe11049ad 100644
+--- a/meta-python/recipes-devtools/python/python3-evdev_1.3.0.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-evdev_1.3.0.bb
+@@ -1,3 &#43;1,23 @@
+&#43;SUMMARY = &quot;Python evdev lib&quot;
+&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/gvalkov/python-evdev">&quot;https://github.com/gvalkov/python-evdev&quot;</a>
+&#43;LICENSE = &quot;BSD-3-Clause&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=18debddbb3f52c661a129724a883a8e2">&quot;file://LICENSE;md5=18debddbb3f52c661a129724a883a8e2&quot;</a>
+&#43;
+&#43;SRC_URI[md5sum] = &quot;05f9e900d6e11e1674475d2dd2668f0d&quot;
+&#43;SRC_URI[sha256sum] = &quot;b1c649b4fed7252711011da235782b2c260b32e004058d62473471e5cd30634d&quot;
+&#43;
+ inherit pypi setuptools3
+-require python-evdev.inc
  
- DEPENDS &#43;= &quot;openssl swig-native&quot;
--RDEPENDS_${PN} &#43;= &quot;${PYTHON_PN}-typing&quot;
-&#43;RDEPENDS_${PN} &#43;= &quot;${PYTHON_PN}-typing \
-&#43;                   ${PYTHON_PN}-distutils \
-&#43;                   ${PYTHON_PN}-smtpd \
-&#43;                   ${PYTHON_PN}-xmlrpc \
-&#43;&quot;
- 
- DISTUTILS_BUILD_ARGS &#43;= &quot;build_ext --openssl=${STAGING_EXECPREFIXDIR} -I${STAGING_INCDIR}&quot;
- DISTUTILS_INSTALL_ARGS &#43;= &quot;build_ext --openssl=${STAGING_EXECPREFIXDIR}&quot;
+&#43;do_compile_prepend() {
+&#43;    rm -rf ${S}/evdev/ecodes.c
+&#43;}
+&#43;
+&#43;DISTUTILS_BUILD_ARGS = &quot;build_ecodes --evdev-headers ${STAGING_DIR_TARGET}/usr/include/linux/input.h:${STAGING_DIR_TARGET}/usr/include/linux/input-event-codes.h&quot;
+&#43;
+&#43;RDEPENDS_${PN} &#43;= &quot;\
+&#43;    ${PYTHON_PN}-ctypes \
+&#43;    ${PYTHON_PN}-fcntl \
+&#43;    ${PYTHON_PN}-io \
+&#43;    ${PYTHON_PN}-shell \
+&#43;    ${PYTHON_PN}-stringold \
+&#43;    &quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -175,4 +253,4 @@ index 76dd58ce0..881fdf1cc 100644
   </body>
 </html>
 
---------------21A3EA3D0F0B97D61ECF961B--
+--------------DCD6FE5767E3F6B7168885FA--
