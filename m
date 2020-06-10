@@ -1,47 +1,47 @@
 Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com [209.85.210.193])
- by mx.groups.io with SMTP id smtpd.web11.11840.1591798614551029658
+ by mx.groups.io with SMTP id smtpd.web11.11851.1591798639969403341
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jun 2020 07:16:54 -0700
+ Wed, 10 Jun 2020 07:17:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=geS4Ja93;
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=U+X3za3q;
  spf=pass (domain: gmail.com, ip: 209.85.210.193, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f193.google.com with SMTP id d66so1164520pfd.6
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jun 2020 07:16:54 -0700 (PDT)
+Received: by mail-pf1-f193.google.com with SMTP id j1so1172962pfe.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jun 2020 07:17:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:references:from:autocrypt:message-id:date:user-agent
          :mime-version:in-reply-to:content-language;
-        bh=eB8MPsLar6JwY1axWirxvhNUXamZ0jG/TleJNHb/5eY=;
-        b=geS4Ja93jl48eAx7Sx9RMQPcb2XO2R8XMMPJd/Ynp0CEOB7JvsnYl4MhBVjT7VLbEk
-         QKP+o+HPtva6iu6Dflpy67ih3TaWHvnvJ0des4nOPw66z7WpsS9CRglsHsmZqF0akWDN
-         EMp9DQalXR08d00D1ZAEP+EfKAnecrAaLMfZI5PN1xsGlTpJ8znp9SLBAw1qiiKEqNry
-         MeispOG+V1e7M9mraCCUQkYHHdscAMkt/zh2CBgZAu3IyM2j15+GGyO+KjG2L6X/+dQ0
-         I5BB1LupsMb75BNkrCIwEy4jCAllzP1d/EsGRbdLHATHET4Kqn4X1NbXz16JHBNvW3+q
-         t9ug==
+        bh=l2WUZsp6vk+7wiAS1rIXkyeiNzgi4qZaR8JjlsS0CE0=;
+        b=U+X3za3qOlmbV9ZhEMfscOGXGVw8ik+c3Jng0nz1Cv2v8O4It6+fZetVIkDUEBGV9C
+         /fdWbS0Avj2JiIUZIawa8aiQagT3QPeQCtqjHmXIpyn/ssfCxpSqRa5do/7azKTL2Yf3
+         I62NPqmlbdqUct4ZpowiFgLBY6rKQgGK8Bfm1LSYOKHm8Vz2t/yOq46HlVpYaV7y3YQi
+         YW4FR2Lrpu63eWWBeD/F6GIXcAyHgp9bsdo+HDPB89wEliyeI+EI6KRzCTHrRJkn8+ol
+         jHVwltMxKoxkAevtGzRCE0OMCHnR/0tiZNBvebi9BJ8KYDowio3HXmr0WXOKlA6jNGP/
+         qrOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
          :date:user-agent:mime-version:in-reply-to:content-language;
-        bh=eB8MPsLar6JwY1axWirxvhNUXamZ0jG/TleJNHb/5eY=;
-        b=aKSRKlxrTwVPtTyz+NxpjBFiQazipfVkSgt7D1Z6FnHGC4ExGyAxErQ88HeiSHkLxE
-         U3VGu67ZI0Fs+AcqY0vFosnexC1bIDsTs6LVkjwOgypV6YG5+KaG6mE0tnCFdcsUMgBs
-         kuWxnCJShDeKjnFAwpi1smdWL2LXewEdMBg5hLPHRGqRQ2ZrjoDWCBIcGCyE4+9rb7W3
-         87YLPb8NVDuUyoBWjbBqGrOJ+N3x9iAXigJi2cTdvSNXMP5X5CbPhYKWXdBuVusropiq
-         ch/OLgzYXgktBSuph/zyzLi5Zl9VHzkoOPFS5h5A7RF8IlgS8IPpLkJ4Ecdq2Ev7O0d3
-         XTjQ==
-X-Gm-Message-State: AOAM5318h++aAbVUYz1jWICuVe0BUBI0ifiNFXwuLGlwcFvyjtHnh8yw
-	2YnmHaddiFbPpUeSrHfjvBqmL9qZ
-X-Google-Smtp-Source: ABdhPJwoWGY5/GMN20hPNOH6tszMEMweZTowVtFcUSSn8GvvxFy/Ejy0Qwqy9ZQmNW6vokqaDzY2UQ==
-X-Received: by 2002:a62:3382:: with SMTP id z124mr2931870pfz.263.1591798613817;
-        Wed, 10 Jun 2020 07:16:53 -0700 (PDT)
+        bh=l2WUZsp6vk+7wiAS1rIXkyeiNzgi4qZaR8JjlsS0CE0=;
+        b=NtENC8X9PMqfa7yh7FynMPhJeDAXU7TL3wa3aA1hLOWwAdYe4g+GC8H8W/LpOTVxrw
+         cI3aAH2Qbefoe08PXdvev3TtfL7FtKyOAQa5cWMI7jKVPL7UMh5UyxnWi/Q3snCd6yXS
+         mPpHoA1LnqZcOLVsMA3JPhs3Zo5QNsQHI1P1gj9UmaHhwbfaB0gaHYriH47hN8koUY/I
+         ZD7agvhRzFA3dgMXQI8joxd4+kQ6VdNKG9a9f/IvBABaeu9UGt0nrIUsqn9HFTseSONP
+         6Xuu1D9xNuxpsDctlBC5M2yNkyUDhP93XQd32v2YpbPMc9G2717TsN9Th0qfauXJhr3u
+         ZIxw==
+X-Gm-Message-State: AOAM5326jwhonj93RUGgnrHRIdFvE4hyXd43EsZgcKttbJD/IguAeC62
+	qO6g6WlHB+8AHpLSGih9SCVU0Wep
+X-Google-Smtp-Source: ABdhPJyJvSMmkV9e7OC/+6+Z5HD+Ta3zHLahNJTmOCYlE6vLP7gxr35vSTFpCQ8x6+rhKegA8ISIlQ==
+X-Received: by 2002:a05:6a00:1486:: with SMTP id v6mr2837582pfu.83.1591798639260;
+        Wed, 10 Jun 2020 07:17:19 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from ?IPv6:2601:202:4180:a5c0:254a:4327:67e1:d5be? ([2601:202:4180:a5c0:254a:4327:67e1:d5be])
-        by smtp.gmail.com with ESMTPSA id i7sm67405pgr.86.2020.06.10.07.16.52
+        by smtp.gmail.com with ESMTPSA id 77sm102528pfu.139.2020.06.10.07.17.17
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 10 Jun 2020 07:16:53 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][dunfell][PATCH] qpdf: fix typo in RDEPENDS
+        Wed, 10 Jun 2020 07:17:18 -0700 (PDT)
+Subject: Re: [oe] [meta-python][dunfell][PATCH] python3-docutils: Remove, moved to OE-core
 To: Adrian Bunk <bunk@stusta.de>, openembedded-devel@lists.openembedded.org
-References: <20200610070254.9851-3-bunk@stusta.de>
+References: <20200610070458.10008-1-bunk@stusta.de>
 From: "akuster" <akuster808@gmail.com>
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
@@ -86,51 +86,62 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
  ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
  8CS2NxU=
-Message-ID: <123e4d1f-d840-6a86-4a3f-c376ab1b8173@gmail.com>
-Date: Wed, 10 Jun 2020 07:16:52 -0700
+Message-ID: <dd13b4bf-d4e2-854e-207d-9119f6140e4e@gmail.com>
+Date: Wed, 10 Jun 2020 07:17:17 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200610070254.9851-3-bunk@stusta.de>
+In-Reply-To: <20200610070458.10008-1-bunk@stusta.de>
 Content-Type: multipart/alternative;
- boundary="------------81CA73533F8EF5EF2D645AF9"
+ boundary="------------8F09A88B5CC33ACD6C107251"
 Content-Language: en-US
 
---------------81CA73533F8EF5EF2D645AF9
+--------------8F09A88B5CC33ACD6C107251
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
 
 
-On 6/10/20 12:02 AM, Adrian Bunk wrote:
-> From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
->
-> Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+On 6/10/20 12:04 AM, Adrian Bunk wrote:
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> [ python3-docutils was already in the Yocto 3.1 release of OE-core ]
 > Signed-off-by: Adrian Bunk <bunk@stusta.de>
-> ---
->  meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb b/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
-> index 3883a8dcf..600508097 100644
-> --- a/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
-> +++ b/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
-> @@ -32,4 +32,4 @@ DEBIAN_NOAUTONAME_libqpdf = "1"
->  PACKAGES =+ "libqpdf"
->  FILES_libqpdf = "${libdir}/libqpdf.so.*"
->  
-> -RDEPEND_${PN} = "libqpdf"
-> +RDEPENDS_${PN} = "libqpdf"
-Ah, now I see it.
+
+Good catch,
 
 thanks,
-armin
+Armin
+> ---
+>  .../python/python3-docutils_0.15.2.bb             | 15 ---------------
+>  1 file changed, 15 deletions(-)
+>  delete mode 100644 meta-python/recipes-devtools/python/python3-docutils_0.15.2.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-docutils_0.15.2.bb b/meta-python/recipes-devtools/python/python3-docutils_0.15.2.bb
+> deleted file mode 100644
+> index 321f55572..000000000
+> --- a/meta-python/recipes-devtools/python/python3-docutils_0.15.2.bb
+> +++ /dev/null
+> @@ -1,15 +0,0 @@
+> -SUMMARY = "Text processing system for documentation"
+> -HOMEPAGE = "http://docutils.sourceforge.net"
+> -SECTION = "devel/python"
+> -LICENSE = "PSF & BSD-2-Clause & GPLv3"
+> -LIC_FILES_CHKSUM = "file://COPYING.txt;md5=7a4646907ab9083c826280b19e103106"
+> -
+> -inherit pypi setuptools3
+> -
+> -PYPI_PACKAGE = "docutils"
+> -
+> -SRC_URI[md5sum] = "e26a308d8000b0bed7416a633217c676"
+> -SRC_URI[sha256sum] = "a2aeea129088da402665e92e0b25b04b073c04b2dce4ab65caaa38b7ce2e1a99"
+> -
+> -BBCLASSEXTEND = "native"
+> -
 >
 > 
 
 
---------------81CA73533F8EF5EF2D645AF9
+--------------8F09A88B5CC33ACD6C107251
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -141,37 +152,48 @@ Content-Transfer-Encoding: 7bit
   <body>
     <br>
     <br>
-    <div class="moz-cite-prefix">On 6/10/20 12:02 AM, Adrian Bunk wrote:<br>
+    <div class="moz-cite-prefix">On 6/10/20 12:04 AM, Adrian Bunk wrote:<br>
     </div>
     <blockquote type="cite"
-      cite="mid:20200610070254.9851-3-bunk@stusta.de">
-      <pre class="moz-quote-pre" wrap="">From: Maciej Pijanowski <a class="moz-txt-link-rfc2396E" href="mailto:maciej.pijanowski@3mdeb.com">&lt;maciej.pijanowski@3mdeb.com&gt;</a>
-
-Signed-off-by: Maciej Pijanowski <a class="moz-txt-link-rfc2396E" href="mailto:maciej.pijanowski@3mdeb.com">&lt;maciej.pijanowski@3mdeb.com&gt;</a>
-Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a>
-Signed-off-by: Adrian Bunk <a class="moz-txt-link-rfc2396E" href="mailto:bunk@stusta.de">&lt;bunk@stusta.de&gt;</a>
----
- meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb b/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
-index 3883a8dcf..600508097 100644
---- a/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
-+++ b/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
-@@ -32,4 +32,4 @@ DEBIAN_NOAUTONAME_libqpdf = "1"
- PACKAGES =+ "libqpdf"
- FILES_libqpdf = "${libdir}/libqpdf.so.*"
- 
--RDEPEND_${PN} = "libqpdf"
-+RDEPENDS_${PN} = "libqpdf"</pre>
+      cite="mid:20200610070458.10008-1-bunk@stusta.de">
+      <pre class="moz-quote-pre" wrap="">Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a>
+[ python3-docutils was already in the Yocto 3.1 release of OE-core ]
+Signed-off-by: Adrian Bunk <a class="moz-txt-link-rfc2396E" href="mailto:bunk@stusta.de">&lt;bunk@stusta.de&gt;</a></pre>
     </blockquote>
-    Ah, now I see it.<br>
+    <br>
+    Good catch,<br>
     <br>
     thanks,<br>
-    armin<br>
+    Armin<br>
     <blockquote type="cite"
-      cite="mid:20200610070254.9851-3-bunk@stusta.de">
+      cite="mid:20200610070458.10008-1-bunk@stusta.de">
       <pre class="moz-quote-pre" wrap="">
+---
+ .../python/python3-docutils_0.15.2.bb             | 15 ---------------
+ 1 file changed, 15 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-docutils_0.15.2.bb
+
+diff --git a/meta-python/recipes-devtools/python/python3-docutils_0.15.2.bb b/meta-python/recipes-devtools/python/python3-docutils_0.15.2.bb
+deleted file mode 100644
+index 321f55572..000000000
+--- a/meta-python/recipes-devtools/python/python3-docutils_0.15.2.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-SUMMARY = "Text processing system for documentation"
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://docutils.sourceforge.net">"http://docutils.sourceforge.net"</a>
+-SECTION = "devel/python"
+-LICENSE = "PSF &amp; BSD-2-Clause &amp; GPLv3"
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING.txt;md5=7a4646907ab9083c826280b19e103106">"file://COPYING.txt;md5=7a4646907ab9083c826280b19e103106"</a>
+-
+-inherit pypi setuptools3
+-
+-PYPI_PACKAGE = "docutils"
+-
+-SRC_URI[md5sum] = "e26a308d8000b0bed7416a633217c676"
+-SRC_URI[sha256sum] = "a2aeea129088da402665e92e0b25b04b073c04b2dce4ab65caaa38b7ce2e1a99"
+-
+-BBCLASSEXTEND = "native"
+-
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -182,4 +204,4 @@ index 3883a8dcf..600508097 100644
   </body>
 </html>
 
---------------81CA73533F8EF5EF2D645AF9--
+--------------8F09A88B5CC33ACD6C107251--
