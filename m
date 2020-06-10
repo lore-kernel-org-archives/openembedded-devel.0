@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.10460.1591794954413998689
+ by mx.groups.io with SMTP id smtpd.web12.10463.1591794957500637295
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jun 2020 06:15:54 -0700
+ Wed, 10 Jun 2020 06:15:57 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=40010 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jj0a9-0005hT-Bi; Wed, 10 Jun 2020 16:15:54 +0300
+	id 1jj0aC-0005hT-B8; Wed, 10 Jun 2020 16:15:57 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/7] python3-markupsafe: Consolidate in a single file
-Date: Wed, 10 Jun 2020 16:15:32 +0300
-Message-Id: <20200610131536.31426-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/7] python3-more-itertools: Consolidate in a single file
+Date: Wed, 10 Jun 2020 16:15:33 +0300
+Message-Id: <20200610131536.31426-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200610131536.31426-1-leon.anavi@konsulko.com>
 References: <20200610131536.31426-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.7
+X-OutGoing-Spam-Status: No, score=-1.0
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -34,31 +34,25 @@ Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python-markupsafe.inc              | 27 -----------------
- .../python/python3-markupsafe_1.1.1.bb        | 29 +++++++++++++++++--
- 2 files changed, 27 insertions(+), 29 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-markupsafe.inc
+ .../python/python-more-itertools.inc          | 21 -----------------
+ .../python/python3-more-itertools_8.2.0.bb    | 23 +++++++++++++++++--
+ 2 files changed, 21 insertions(+), 23 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-more-itertools.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-markupsafe.inc b/meta-python/recipes-devtools/python/python-markupsafe.inc
+diff --git a/meta-python/recipes-devtools/python/python-more-itertools.inc b/meta-python/recipes-devtools/python/python-more-itertools.inc
 deleted file mode 100644
-index 480876268..000000000
---- a/meta-python/recipes-devtools/python/python-markupsafe.inc
+index 0b684c1b1..000000000
+--- a/meta-python/recipes-devtools/python/python-more-itertools.inc
 +++ /dev/null
-@@ -1,27 +0,0 @@
--DESCRIPTION = "Implements a XML/HTML/XHTML Markup safe string for Python"
--HOMEPAGE = "http://github.com/mitsuhiko/markupsafe"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
--
--SRC_URI[md5sum] = "43fd756864fe42063068e092e220c57b"
--SRC_URI[sha256sum] = "29872e92839765e546828bb7754a68c418d927cd064fd4708fab9fe9c8bb116b"
--
--PYPI_PACKAGE = "MarkupSafe"
--inherit pypi ptest
--
--RDEPENDS_${PN} += "${PYTHON_PN}-stringold"
+@@ -1,21 +0,0 @@
+-DESCRIPTION = "More routines for operating on iterables, beyond itertools"
+-HOMEPAGE = "https://github.com/erikrose/more-itertools"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=3396ea30f9d21389d7857719816f83b5"
 -
 -BBCLASSEXTEND = "native nativesdk"
+-
+-inherit ptest
 -
 -SRC_URI += " \
 -	file://run-ptest \
@@ -70,27 +64,24 @@ index 480876268..000000000
 -
 -do_install_ptest() {
 -	install -d ${D}${PTEST_PATH}/tests
--	cp -f ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 -}
-diff --git a/meta-python/recipes-devtools/python/python3-markupsafe_1.1.1.bb b/meta-python/recipes-devtools/python/python3-markupsafe_1.1.1.bb
-index 765e3c906..7de57cbd6 100644
---- a/meta-python/recipes-devtools/python/python3-markupsafe_1.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-markupsafe_1.1.1.bb
-@@ -1,2 +1,27 @@
--inherit setuptools3
--require python-markupsafe.inc
-+DESCRIPTION = "Implements a XML/HTML/XHTML Markup safe string for Python"
-+HOMEPAGE = "http://github.com/mitsuhiko/markupsafe"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
+diff --git a/meta-python/recipes-devtools/python/python3-more-itertools_8.2.0.bb b/meta-python/recipes-devtools/python/python3-more-itertools_8.2.0.bb
+index c3b34d364..1718fdf93 100644
+--- a/meta-python/recipes-devtools/python/python3-more-itertools_8.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-more-itertools_8.2.0.bb
+@@ -1,5 +1,24 @@
+-inherit pypi setuptools3
+-require python-more-itertools.inc
++DESCRIPTION = "More routines for operating on iterables, beyond itertools"
++HOMEPAGE = "https://github.com/erikrose/more-itertools"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3396ea30f9d21389d7857719816f83b5"
+ 
+ SRC_URI[md5sum] = "55e7e0a5eabc5a57bc8353c65c6f9965"
+ SRC_URI[sha256sum] = "b1ddb932186d8a6ac451e1d95844b382f55e12686d51ca0c68b6f61f2ab7a507"
 +
-+SRC_URI[md5sum] = "43fd756864fe42063068e092e220c57b"
-+SRC_URI[sha256sum] = "29872e92839765e546828bb7754a68c418d927cd064fd4708fab9fe9c8bb116b"
-+
-+PYPI_PACKAGE = "MarkupSafe"
-+inherit pypi ptest setuptools3
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-stringold"
++inherit pypi setuptools3 ptest
 +
 +BBCLASSEXTEND = "native nativesdk"
 +
@@ -104,7 +95,7 @@ index 765e3c906..7de57cbd6 100644
 +
 +do_install_ptest() {
 +	install -d ${D}${PTEST_PATH}/tests
-+	cp -f ${S}/tests/* ${D}${PTEST_PATH}/tests/
++	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 +}
 -- 
 2.17.1
