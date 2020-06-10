@@ -1,47 +1,47 @@
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com [209.85.215.194])
- by mx.groups.io with SMTP id smtpd.web10.11683.1591798490834941540
+Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com [209.85.210.193])
+ by mx.groups.io with SMTP id smtpd.web11.11840.1591798614551029658
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jun 2020 07:14:50 -0700
+ Wed, 10 Jun 2020 07:16:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=eHBjHQIl;
- spf=pass (domain: gmail.com, ip: 209.85.215.194, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f194.google.com with SMTP id e18so1045793pgn.7
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jun 2020 07:14:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=geS4Ja93;
+ spf=pass (domain: gmail.com, ip: 209.85.210.193, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f193.google.com with SMTP id d66so1164520pfd.6
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jun 2020 07:16:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:references:from:autocrypt:message-id:date:user-agent
          :mime-version:in-reply-to:content-language;
-        bh=b3TM8EwQzmZBOF0w4wrcBUyEU9CP6lpIRo81DNOO918=;
-        b=eHBjHQIlHwuQNFjd5aG7BJi4n5VIH+ddGY3P3fFSWQH3tXU7IZpfyPcWhnHbpJM9dk
-         W5caw9yU8mqhR/f33uHI9zN7OrZZZHlTn35tsMfGXieoXveZi+DoojeqGmV1CQRs2Qhw
-         wT2+SXjMRFu2YGFTpHisfXNnwrZ4scLh3FtYOwmB+naQhpXowXOHdlRKyTJjfbsBgEUh
-         S8aNTBWz2dGw5phQ0AHenjr8w0hChcZVB6CT0hjC62QAZflyFngAUvav84D0V4MYmSLL
-         vR4+gGmH0/uqN7y8RNBCRor8q6d6ZId9TpWRNHa2igx/XjizJ0qk7Xppn5aoviT+43n1
-         arhg==
+        bh=eB8MPsLar6JwY1axWirxvhNUXamZ0jG/TleJNHb/5eY=;
+        b=geS4Ja93jl48eAx7Sx9RMQPcb2XO2R8XMMPJd/Ynp0CEOB7JvsnYl4MhBVjT7VLbEk
+         QKP+o+HPtva6iu6Dflpy67ih3TaWHvnvJ0des4nOPw66z7WpsS9CRglsHsmZqF0akWDN
+         EMp9DQalXR08d00D1ZAEP+EfKAnecrAaLMfZI5PN1xsGlTpJ8znp9SLBAw1qiiKEqNry
+         MeispOG+V1e7M9mraCCUQkYHHdscAMkt/zh2CBgZAu3IyM2j15+GGyO+KjG2L6X/+dQ0
+         I5BB1LupsMb75BNkrCIwEy4jCAllzP1d/EsGRbdLHATHET4Kqn4X1NbXz16JHBNvW3+q
+         t9ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
          :date:user-agent:mime-version:in-reply-to:content-language;
-        bh=b3TM8EwQzmZBOF0w4wrcBUyEU9CP6lpIRo81DNOO918=;
-        b=J2bS1oLDS72CzMqm3veQU4OFl400ESq+AE+luu5MKNi1OoxlyHxDYmCk/ftG171VVT
-         5rfGb2v1Y0XFVTwa8JcrWijFc2O5cwJpcX4F8HDHWoWMU23gTvyCSPjCRPisMKr5g1uN
-         eoa3CLTzMwa71QFAFSennqfybIqTFt0p1oPG3xJ9yFQIK/Q8kGzc/Z6FZWyA5nnWkeA6
-         NNkts1fRwoIqdb/ubuPSOeVFzqZZrbfBiivlCTkzcTCb9DFJJ43zG4k5KAMeqiLVdk7s
-         U9UfF3AAw43aMYyly4WLqWZh6I/wg73JVnlcE+ykk88/QlZdyP6oX6VXT5YZE/CXozc9
-         X7sQ==
-X-Gm-Message-State: AOAM53155yLWJXtBWHZAkQp77SleCtcUccr0+/smXXEN/H1pCZfjPT5u
-	eDFueBeYLR4u9fJRj8I6X2A8SWYk
-X-Google-Smtp-Source: ABdhPJys2NXW0J3M2gtk28xObLikmkpNAVRZoqv/1QoWwr68EjSUEk47XltNK0U+ZTTxUatFr8WwBw==
-X-Received: by 2002:a63:a19:: with SMTP id 25mr2749852pgk.98.1591798490023;
-        Wed, 10 Jun 2020 07:14:50 -0700 (PDT)
+        bh=eB8MPsLar6JwY1axWirxvhNUXamZ0jG/TleJNHb/5eY=;
+        b=aKSRKlxrTwVPtTyz+NxpjBFiQazipfVkSgt7D1Z6FnHGC4ExGyAxErQ88HeiSHkLxE
+         U3VGu67ZI0Fs+AcqY0vFosnexC1bIDsTs6LVkjwOgypV6YG5+KaG6mE0tnCFdcsUMgBs
+         kuWxnCJShDeKjnFAwpi1smdWL2LXewEdMBg5hLPHRGqRQ2ZrjoDWCBIcGCyE4+9rb7W3
+         87YLPb8NVDuUyoBWjbBqGrOJ+N3x9iAXigJi2cTdvSNXMP5X5CbPhYKWXdBuVusropiq
+         ch/OLgzYXgktBSuph/zyzLi5Zl9VHzkoOPFS5h5A7RF8IlgS8IPpLkJ4Ecdq2Ev7O0d3
+         XTjQ==
+X-Gm-Message-State: AOAM5318h++aAbVUYz1jWICuVe0BUBI0ifiNFXwuLGlwcFvyjtHnh8yw
+	2YnmHaddiFbPpUeSrHfjvBqmL9qZ
+X-Google-Smtp-Source: ABdhPJwoWGY5/GMN20hPNOH6tszMEMweZTowVtFcUSSn8GvvxFy/Ejy0Qwqy9ZQmNW6vokqaDzY2UQ==
+X-Received: by 2002:a62:3382:: with SMTP id z124mr2931870pfz.263.1591798613817;
+        Wed, 10 Jun 2020 07:16:53 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from ?IPv6:2601:202:4180:a5c0:254a:4327:67e1:d5be? ([2601:202:4180:a5c0:254a:4327:67e1:d5be])
-        by smtp.gmail.com with ESMTPSA id a3sm106317pfi.77.2020.06.10.07.14.49
+        by smtp.gmail.com with ESMTPSA id i7sm67405pgr.86.2020.06.10.07.16.52
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 10 Jun 2020 07:14:49 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][dunfell][PATCH] gpsd: mark CLEANBROKEN
+        Wed, 10 Jun 2020 07:16:53 -0700 (PDT)
+Subject: Re: [oe] [meta-oe][dunfell][PATCH] qpdf: fix typo in RDEPENDS
 To: Adrian Bunk <bunk@stusta.de>, openembedded-devel@lists.openembedded.org
-References: <20200610070254.9851-2-bunk@stusta.de>
+References: <20200610070254.9851-3-bunk@stusta.de>
 From: "akuster" <akuster808@gmail.com>
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
@@ -86,52 +86,51 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
  ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
  8CS2NxU=
-Message-ID: <28d6cdd6-fdbb-9351-da8f-0abf83318a6b@gmail.com>
-Date: Wed, 10 Jun 2020 07:14:48 -0700
+Message-ID: <123e4d1f-d840-6a86-4a3f-c376ab1b8173@gmail.com>
+Date: Wed, 10 Jun 2020 07:16:52 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200610070254.9851-2-bunk@stusta.de>
+In-Reply-To: <20200610070254.9851-3-bunk@stusta.de>
 Content-Type: multipart/alternative;
- boundary="------------D6321A342ED754B1EE03BFF5"
+ boundary="------------81CA73533F8EF5EF2D645AF9"
 Content-Language: en-US
 
---------------D6321A342ED754B1EE03BFF5
+--------------81CA73533F8EF5EF2D645AF9
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
 
 
 On 6/10/20 12:02 AM, Adrian Bunk wrote:
-> From: Sean Nyekjaer <sean@geanix.com>
+> From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
 >
-> Signed-off-by: Sean Nyekjaer <sean@geanix.com>
+> Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > Signed-off-by: Adrian Bunk <bunk@stusta.de>
 > ---
->  meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb | 2 ++
->  1 file changed, 2 insertions(+)
+>  meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-> index f74ebda5f..05fbed622 100644
-> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-> @@ -23,6 +23,8 @@ SYSTEMD_OESCONS = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'f
->  export STAGING_INCDIR
->  export STAGING_LIBDIR
+> diff --git a/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb b/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
+> index 3883a8dcf..600508097 100644
+> --- a/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
+> +++ b/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
+> @@ -32,4 +32,4 @@ DEBIAN_NOAUTONAME_libqpdf = "1"
+>  PACKAGES =+ "libqpdf"
+>  FILES_libqpdf = "${libdir}/libqpdf.so.*"
 >  
-> +CLEANBROKEN = "1"
+> -RDEPEND_${PN} = "libqpdf"
+> +RDEPENDS_${PN} = "libqpdf"
+Ah, now I see it.
 
-So this affects the version in dunfell?
-> +
->  PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)} usb"
->  PACKAGECONFIG[bluez] = "bluez='true',bluez='false',bluez5"
->  PACKAGECONFIG[qt] = "qt='yes' qt_versioned=5,qt='no',qtbase"
+thanks,
+armin
 >
 > 
 
 
---------------D6321A342ED754B1EE03BFF5
+--------------81CA73533F8EF5EF2D645AF9
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -145,35 +144,34 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 6/10/20 12:02 AM, Adrian Bunk wrote:<br>
     </div>
     <blockquote type="cite"
-      cite="mid:20200610070254.9851-2-bunk@stusta.de">
-      <pre class="moz-quote-pre" wrap="">From: Sean Nyekjaer <a class="moz-txt-link-rfc2396E" href="mailto:sean@geanix.com">&lt;sean@geanix.com&gt;</a>
+      cite="mid:20200610070254.9851-3-bunk@stusta.de">
+      <pre class="moz-quote-pre" wrap="">From: Maciej Pijanowski <a class="moz-txt-link-rfc2396E" href="mailto:maciej.pijanowski@3mdeb.com">&lt;maciej.pijanowski@3mdeb.com&gt;</a>
 
-Signed-off-by: Sean Nyekjaer <a class="moz-txt-link-rfc2396E" href="mailto:sean@geanix.com">&lt;sean@geanix.com&gt;</a>
+Signed-off-by: Maciej Pijanowski <a class="moz-txt-link-rfc2396E" href="mailto:maciej.pijanowski@3mdeb.com">&lt;maciej.pijanowski@3mdeb.com&gt;</a>
 Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a>
 Signed-off-by: Adrian Bunk <a class="moz-txt-link-rfc2396E" href="mailto:bunk@stusta.de">&lt;bunk@stusta.de&gt;</a>
 ---
- meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-index f74ebda5f..05fbed622 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-@@ -23,6 +23,8 @@ SYSTEMD_OESCONS = <a class="moz-txt-link-rfc2396E" href="mailto:${@bb.utils.contains('DISTRO_FEATURES','systemd','true','fexportSTAGING_INCDIRexportSTAGING_LIBDIR+CLEANBROKEN=">"${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'f
- export STAGING_INCDIR
- export STAGING_LIBDIR
+diff --git a/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb b/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
+index 3883a8dcf..600508097 100644
+--- a/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
++++ b/meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb
+@@ -32,4 +32,4 @@ DEBIAN_NOAUTONAME_libqpdf = "1"
+ PACKAGES =+ "libqpdf"
+ FILES_libqpdf = "${libdir}/libqpdf.so.*"
  
-+CLEANBROKEN = "</a>1"</pre>
+-RDEPEND_${PN} = "libqpdf"
++RDEPENDS_${PN} = "libqpdf"</pre>
     </blockquote>
+    Ah, now I see it.<br>
     <br>
-    So this affects the version in dunfell?<br>
+    thanks,<br>
+    armin<br>
     <blockquote type="cite"
-      cite="mid:20200610070254.9851-2-bunk@stusta.de">
+      cite="mid:20200610070254.9851-3-bunk@stusta.de">
       <pre class="moz-quote-pre" wrap="">
-+
- PACKAGECONFIG ??= <a class="moz-txt-link-rfc2396E" href="mailto:${@bb.utils.contains('DISTRO_FEATURES','bluetooth','bluez','',d)}usb">"${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)} usb"</a>
- PACKAGECONFIG[bluez] = "bluez='true',bluez='false',bluez5"
- PACKAGECONFIG[qt] = "qt='yes' qt_versioned=5,qt='no',qtbase"
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -184,4 +182,4 @@ index f74ebda5f..05fbed622 100644
   </body>
 </html>
 
---------------D6321A342ED754B1EE03BFF5--
+--------------81CA73533F8EF5EF2D645AF9--
