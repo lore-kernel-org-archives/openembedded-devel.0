@@ -1,101 +1,97 @@
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com [209.85.160.196])
- by mx.groups.io with SMTP id smtpd.web12.2104.1591816221090652353
+Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com [209.85.208.68])
+ by mx.groups.io with SMTP id smtpd.web12.2983.1591818561667069330
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jun 2020 12:10:21 -0700
+ Wed, 10 Jun 2020 12:49:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dmVtkr1v;
- spf=pass (domain: gmail.com, ip: 209.85.160.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f196.google.com with SMTP id c12so2656966qtq.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jun 2020 12:10:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=CiT/x6DR;
+ spf=pass (domain: gmail.com, ip: 209.85.208.68, mailfrom: jacob.kroon@gmail.com)
+Received: by mail-ed1-f68.google.com with SMTP id x93so2265872ede.9
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jun 2020 12:49:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=G8ihCwryQUbUDpMERGpmtJnIgEuk5TF4V8OVfLXkXV4=;
-        b=dmVtkr1vBPAPy/WRCy+RuK2k3WCcOayqsm39poYOGtBop1LzaHDwcDHtPHyP/KjRCp
-         8XOEFRBapG65FYN2uVDpstPiCIIbfbeLaxbVeZHMx5cWJ+4ap4tILVbaUrDil2/X2Qwq
-         5VeUpOl6vd0/WLvtZnSXyCk8VVeiMpLb9HBZt6dga1DMWLx2+F8oMsl7GrMcqpYrnx1G
-         0D1LOBkABtOPIKIJDQenqepg6UIfUJ3d98H/KOuzHI6oDyASZXtbfMsEwAP9So2E5aEI
-         T9T/9ckpzv4A31W9PvsIMfvyrQlumtn3SFiDu64u5w/20gdf0VBGg+UkIhdCFmxl5mnf
-         PKgw==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=YnChMsI6yNA7VFcO3R+WuTkD1eh5Zt/xfKEYpTZ1tIg=;
+        b=CiT/x6DR0AJ+QKbQgmNQtUrrT6G/RfhbY0eCFo26JG+56TPdR79EqDQVmI8VBhwwUS
+         /gl+i0VLrA+Rb6JwmR0Apg4l8W1U2GdIBj/aIWXNhjVHhDF0NzXwFVO7XmjoUv4iJl9N
+         fqmcvGm5o1f4oXg5yfizabkwShLOwfndiaN3ixx3dChV0FEONovbKigjIbZ5v9BLUGAk
+         z+a53BeZV9CaQhFfqPEOeCMBskmMTPv48Lry5jijv6WBAKGC67YuzL3GQeQPZBG+uGMS
+         3XgOaoQ7+CsMmFbCrivPF8DWflwqun50zArp+TmxSDFjTcSDKzzus23ocwwBAcuA7JlJ
+         CBIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=G8ihCwryQUbUDpMERGpmtJnIgEuk5TF4V8OVfLXkXV4=;
-        b=h0W7OEApokz5dTMKsdWQ1IdVweCeuRDN2c3gzBge/seMEUwJ3BpZB2nfeZb7YEfnvT
-         qbnn/wA7lrftd4bdvf75QjJ9UKlox5lXan2aoSvrW6uDpVGKnLSjKeDeRp2/bhFw4c7N
-         OQ6+6SVYsesPqF9IGUNdjYMLOge32B85hvQlGTMbsnyo3IJNh02KIwSbqw9HkKuW//1A
-         l0trfuoV/XMeUMoFvE2Atits+/YVMJvtUqyWDi8ZmFGYo8L7JvXP/PwS79BdcQL5JEZI
-         xX8SmH/OiAzVuZnUR7Yw0caFwlIYhCQXgXG22gaLZX4AnkkUoOBXqitUzI0TjlWsbkgt
-         nQ5A==
-X-Gm-Message-State: AOAM5328rjBsqMXtqGHpF228uO0HYXdkkCezn1fVB2NVsbwf6vyrMEJ8
-	8EQt/SK4Fc/wa6wiXBpPf/5b0InVF3V7CgfGcbQ=
-X-Google-Smtp-Source: ABdhPJxOLGVz/ANKQc68kJCTE5gmM4RtmM+tq4oHyU4cMdn9YQm0UdPvnXIALJ0VlfD/Ee5mlDxwsIBCnI5Hql/ajgI=
-X-Received: by 2002:aed:3f55:: with SMTP id q21mr4857578qtf.190.1591816220040;
- Wed, 10 Jun 2020 12:10:20 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=YnChMsI6yNA7VFcO3R+WuTkD1eh5Zt/xfKEYpTZ1tIg=;
+        b=IT2fC1OPh8+8FoFovvHZjvRxEyhpS+yQzXkCCWgz8LXs7cI5blm8sSvnUgRl8Eu08n
+         ihW5qd4MhBIm7AjPTxeFpYzgs24YaEV9bJpczuQwmO+YOLd/EL1FQljdX+cJgyo/VxK9
+         cdNRC0q8OTbUIK3cFaBlGHqmomQOAa/pTBoeZVr33t+wccUvORtFY4lKDC/hJIXz5u9H
+         AwRwLI7Gqr+VcWsPFsVRy1HmYDvwzLcWQl8esxNxjLA0po11SYDwuqHPyw9Zw4Ai0aI3
+         YRDErD1KwSM4Mnz+ucdr8FRPUMpTQmh7kwawnfnrHvLrVqArT7HpNdufZWSyzyYWDGum
+         6KvA==
+X-Gm-Message-State: AOAM532RF+ClTOGlMBpMf52hzPsM3HTiBc37riUYex4PF2ESyyhNIenL
+	BcwamOxwRuC9wcbPZVrkJpAkBYao
+X-Google-Smtp-Source: ABdhPJxD/E0pkgyG7vOKhopn21jJKUK7JpFbL5Z06y8rWjo7PXzO+QsPj/48avoLDCc8/kPjDsyMjQ==
+X-Received: by 2002:aa7:d6c1:: with SMTP id x1mr3824208edr.154.1591818559525;
+        Wed, 10 Jun 2020 12:49:19 -0700 (PDT)
+Return-Path: <jacob.kroon@gmail.com>
+Received: from localhost.localdomain (37-247-29-68.customers.ownit.se. [37.247.29.68])
+        by smtp.gmail.com with ESMTPSA id fw16sm512505ejb.55.2020.06.10.12.49.18
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 10 Jun 2020 12:49:18 -0700 (PDT)
+From: "Jacob Kroon" <jacob.kroon@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] meta-oe: Don't inherit 'features_check' in recipes that don't utilize it
+Date: Wed, 10 Jun 2020 21:49:01 +0200
+Message-Id: <20200610194901.3082-1-jacob.kroon@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-References: <20200607160532.415655-1-offougajoris@gmail.com> <20200607192848.GS17660@denix.org>
-In-Reply-To: <20200607192848.GS17660@denix.org>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 10 Jun 2020 12:09:54 -0700
-Message-ID: <CAMKF1sqY-rhLWpNNYKfix138-7bo60fjpNQnVPsVMK_WTnHOGQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] c-periphery: add recipe
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: Joris Offouga <offougajoris@gmail.com>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Sun, Jun 7, 2020 at 12:29 PM Denys Dmytriyenko <denis@denix.org> wrote:
->
-> On Sun, Jun 07, 2020 at 06:05:32PM +0200, Joris Offouga wrote:
-> > Signed-off-by: Joris Offouga <offougajoris@gmail.com>
-> > ---
-> >  .../c-periphery/c-periphery_2.2.1.bb          | 21 +++++++++++++++++++
-> >  1 file changed, 21 insertions(+)
-> >  create mode 100644 meta-oe/recipes-devtools/c-periphery/c-periphery_2.2.1.bb
-> >
-> > diff --git a/meta-oe/recipes-devtools/c-periphery/c-periphery_2.2.1.bb b/meta-oe/recipes-devtools/c-periphery/c-periphery_2.2.1.bb
-> > new file mode 100644
-> > index 000000000..b53cd6b19
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-devtools/c-periphery/c-periphery_2.2.1.bb
-> > @@ -0,0 +1,21 @@
-> > +SUMMURY = "C-Periphery lib used to access GPIO, LED, PWM, SPI, I2C, MMIO, Serial"
-> > +DESCRIPTION = "A C library for peripheral I/O (GPIO, LED, PWM, SPI, I2C, MMIO, Serial) in Linux"
->
-> libsoc?
->
-> If this one gets in, should probably go to recipes-support where libsoc
-> lives...
+Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
+---
+ meta-oe/recipes-connectivity/transmission/transmission_git.bb | 2 +-
+ meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb         | 2 +-
+ meta-oe/recipes-support/upower/upower_0.99.11.bb              | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-Good feedback. I have added a patch to move it to recipes-support to
-master-next
-
->
->
-> > +HOMEPAGE = "https://github.com/vsergeev/c-periphery"
-> > +
-> > +SECTION = "libs"
-> > +
-> > +LICENSE = "MIT"
-> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=4097ec544cf01e9c7cfc4bdf8e4ed887"
-> > +
-> > +SRC_URI = "git://github.com/vsergeev/c-periphery;protocol=https"
-> > +SRCREV = "c2aa7d164f87b807077daeeb3443a56b89e1d1c9"
-> > +
-> > +S = "${WORKDIR}/git"
-> > +
-> > +inherit cmake
-> > +
-> > +EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON"
-> > +
-> > +BBCLASSEXTEND = "native nativesdk"
-> > +
-> > --
-> > 2.25.1
-> >
->
-> >
->
-> 
+diff --git a/meta-oe/recipes-connectivity/transmission/transmission_git.bb b/meta-oe/recipes-connectivity/transmission/transmission_git.bb
+index ee5578f8b..412bd9d3f 100644
+--- a/meta-oe/recipes-connectivity/transmission/transmission_git.bb
++++ b/meta-oe/recipes-connectivity/transmission/transmission_git.bb
+@@ -19,7 +19,7 @@ PV = "2.94"
+ 
+ S = "${WORKDIR}/git"
+ 
+-inherit autotools gettext update-rc.d systemd mime-xdg features_check
++inherit autotools gettext update-rc.d systemd mime-xdg
+ 
+ PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)} \
+                  ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
+index 06895a03a..21d13ac93 100644
+--- a/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
+@@ -52,7 +52,7 @@ EXTRA_OECMAKE_append_riscv64 = " -DFLB_DEPS='atomic'"
+ # DEPENDS += "openssl "
+ # EXTRA_OECMAKE += "-DFLB_OUT_KAFKA=On "
+ 
+-inherit cmake systemd features_check
++inherit cmake systemd
+ 
+ SYSTEMD_SERVICE_${PN} = "td-agent-bit.service"
+ TARGET_CC_ARCH_append = " ${SELECTED_OPTIMIZATION}"
+diff --git a/meta-oe/recipes-support/upower/upower_0.99.11.bb b/meta-oe/recipes-support/upower/upower_0.99.11.bb
+index 640841792..d6c89a65d 100644
+--- a/meta-oe/recipes-support/upower/upower_0.99.11.bb
++++ b/meta-oe/recipes-support/upower/upower_0.99.11.bb
+@@ -10,7 +10,7 @@ SRC_URI = " \
+ SRC_URI[md5sum] = "abe6acb617f11f2e8dbd9846fcf86e24"
+ SRC_URI[sha256sum] = "64b5ffbfccd5bdb15d925777979a4dbee1a957f9eaeb158dc76175267eddbdef"
+ 
+-inherit autotools pkgconfig gettext gobject-introspection systemd features_check
++inherit autotools pkgconfig gettext gobject-introspection systemd
+ 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+ PACKAGECONFIG[idevice] = "--with-idevice,--without-idevice,libimobiledevice libplist"
