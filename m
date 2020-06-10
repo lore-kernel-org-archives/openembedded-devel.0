@@ -1,17 +1,17 @@
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.72])
- by mx.groups.io with SMTP id smtpd.web10.2966.1591818640096021590
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.67])
+ by mx.groups.io with SMTP id smtpd.web11.2825.1591818649723782171
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jun 2020 12:50:40 -0700
+ Wed, 10 Jun 2020 12:50:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=WVJk4/IA;
- spf=pass (domain: windriver.com, ip: 40.107.93.72, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=c8OE1KCR;
+ spf=pass (domain: windriver.com, ip: 40.107.92.67, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FqqcoEU1N6i7EFyxpYFn67vMQSVhzrFLXVTFYYcE+gVQTVeL9iiaCpyJ6msI811BvWiZHhsZlm9aLWVOufLup8ZW+JsuqeVcbZvK52DoZrb5Am1N5jvYXWLRss7KN94WnzihbAdcirkhdGoMBMxqQKET4Koyk/MDPzkQt1QYYkf8QfmeGfcASWJMo/HjChoqQJlCQ+j5wt5z4MR8GT4RY39zoyNeNIf4C+Rzn6ofyq5QexhOYPTw02DCrizrex1i7OziYisI8nIApSNsutGeO9ruu2AFiXY7WsYZkFTHirP17tDn63bNwctVzyknSsNLYbwuXq1EheEqFFFN3bFloA==
+ b=f4n6hjT1+fkdo+mwaUyoznJNH40YJTr4g7zbc6NaeWf/n4cBZP2gzRxWDM5ENVmCOWEFTYHR0yBbB+GV1KDwZgOq+2DW5ySDNaUIYSVVOwEXt+aLFlRzqKw/5YM8NW0vUIoDVA8uz/HFsrUBcAykc1q2jbfFjl7NJk+ugtZrIA+o32fGcXuMdPjv04fK1cSIsrE/i8BVWMBn1fscrTioBmM0hgbPN8xSEh1Yj6xdjOb2t28tNk5csyxbYsXNdO4CyP4mJRUlBN7W5e9f1QeTz058md+GVhiCqRgWw4qy2/18dC/NZsU2L+33ch+cskFNTWSWEI3X5MYgbLsfsFzN0g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oDRnTL9/4MqNpoDQn5Ya8nta30/LMJe4JwJpgtDREwQ=;
- b=KcsBKylfdSXT9Zp/OJzCmoD2sAxjOxA2kMdlA6VtPPE9wyQ5n4pjfxovtoEnet7CXRSgOszSr3cI9ihdoxurH+1879aC3S6JH4dy7RHUDPnEtVqCruycr9Y3ceN8ADPFdVTKF0AJ9u+9fARww9aXAOXlo2PL33rwCGGvCaFUH3sVD7q/+imk6B3eM0yvG/7r9iVHatnNFHuUSx48VZ5ZDyEtQNDlQwJz4+gGudBC9kycACVgx8JrgmemsZ2an4nLz/H4uPVBt+ueEQeA4GNCf+udoM1yZMOep/KoORRyWQQjs3BTpZqHBLt50lS6qEar/g+FYCKseNlf6y9UlVgchw==
+ bh=fLuGtjbWBzTbNwiS5f5JlnPf1kmF+CpwK9Pvwsa1ZAo=;
+ b=g/wP0Pa3U6YuB2/I9qTW1aSWehce4QxpP1l4J/ABLVXtZrEhATicXPyPANtaQe75rhaFiP3NS9/dn2nI8Ndb6ZNxayOAj5WZit1f3ISw7AGCHNxfmo2H5RvRrAFd+Avlo1V/aS/v/oxf+BUaheaJhM5w712qMzRXiXk8ptu2xJulQzIHsemM73UZu2LxHCeMy436NPZcDWuXBZs9S9sMmUFI38eR6LmHa43/LabXlx2JDhC0TN+dabKQZ0TlS5j9ZpTMaHiOkChyMX+BGN657GIqbqZlZ1KFUvblemuWAZ6dyUG8k5hDZLPaSAZt/TNpBc6Jj8ExQxKtc1QYuSJu7g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oDRnTL9/4MqNpoDQn5Ya8nta30/LMJe4JwJpgtDREwQ=;
- b=WVJk4/IAUnun6+Kmu+TLHeDL04ZAyJl7K7PuT5e21R5vyxr/DJjiI0TybPDckXiGFsLqWwq3hsN/rEswoqzYakDCWa1PnwSvU/68ysLRZbust3vhBwNeyaGu/G0jSW9v7fgoF/iuS4Dav5kVtQ0bWXJryZtOkgvWIQ0KAm/Y6OM=
+ bh=fLuGtjbWBzTbNwiS5f5JlnPf1kmF+CpwK9Pvwsa1ZAo=;
+ b=c8OE1KCRc9/VBHWQ7v750fxtwaOdSN9pV/X+il5/fsa72ixnKcyMIiAEKLuLtF52eCjIEYIUNKPkxAgWmNb+x2/8twpzOb9TP9MlOLJqCZNzxqy7xaowM2vqOMMcbQenzH9td8KLWuh2CK0So+Ij1ziM1d2+NKdnLO1yl3SwoNo=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,59 +28,60 @@ Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
  by BN6PR11MB3924.namprd11.prod.outlook.com (2603:10b6:405:7a::23) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.18; Wed, 10 Jun
- 2020 19:50:38 +0000
+ 2020 19:50:48 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3088.021; Wed, 10 Jun 2020
- 19:50:36 +0000
-Subject: Re: [oe] [PATCH 1/2] python-django: add RDEPENDS
+ 19:50:48 +0000
+Subject: Re: [oe] [PATCH 2/2] python-m2crypto: Add RDEPENDS
 To: Changqing Li <changqing.li@windriver.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200609061806.310291-1-changqing.li@windriver.com>
+ <20200609061806.310291-2-changqing.li@windriver.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <0eadb331-f181-9d48-aae6-a0cac6d1eb79@windriver.com>
-Date: Wed, 10 Jun 2020 15:50:32 -0400
+Message-ID: <c9b8c46b-bdbd-26aa-5ed7-32e0a53bff49@windriver.com>
+Date: Wed, 10 Jun 2020 15:50:46 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200609061806.310291-1-changqing.li@windriver.com>
-X-ClientProxiedBy: YTBPR01CA0027.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:14::40) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200609061806.310291-2-changqing.li@windriver.com>
+X-ClientProxiedBy: YTBPR01CA0036.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:14::49) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YTBPR01CA0027.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:14::40) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.19 via Frontend Transport; Wed, 10 Jun 2020 19:50:34 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YTBPR01CA0036.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:14::49) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.19 via Frontend Transport; Wed, 10 Jun 2020 19:50:48 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 5587981d-6ae4-4e37-b463-08d80d778a65
+X-MS-Office365-Filtering-Correlation-Id: 8d051803-1333-4a3d-ec19-08d80d779270
 X-MS-TrafficTypeDiagnostic: BN6PR11MB3924:
 X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB3924578116F29A6C6E2DA27A9F830@BN6PR11MB3924.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:138;
+	<BN6PR11MB3924B07F68158A096F6C1CE89F830@BN6PR11MB3924.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:146;
 X-Forefront-PRVS: 0430FA5CB7
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	mltMQp0toEhswZaCcVXWhA/2cdUuWBKVUlMRGR8f//bodvzKyGzTl0ZH2YjBoYr+B0NXNVCFoYYl5Ck4+9FxcsK05DC4WloCXxsWCPJbE5bQBzJ448xiGqAgLS5ezfkVPjlDn4MBZX8CxOCyAE3wVgA/mC1wPGWg6DB58vb4Z4ba8Ma7J97wru+brrERCjeKAuIShnnebtljSq5b/TLfZEvzA9chBRD+UoVdFxf8d7IPOuNPQRKRJaW8Dxzxd+hmrpbB8nekJcWqeFJdz69RPewy5ixho1qqFbhSs4uGxNS+qnD4jV3hopywNrX0bu3gQCDEOmA2giYa1sUOvfTu+I+7mhZKXEPARLh2rvrJkaKDZW3zMmccvEvnGQJgj45ng2h7UU2fQ7k00Ey4BsX0P90/nuZZEuHJQKZUPkJwuLzWYX1QA1+zOFwtcfniWgSUigAy+JG5B1EUBbUvgKX29A==
+	MMkO6kuB4NG/aF3+H6OvuOkmbfvWGjBTJ12oaWMKmHBW7Hmq6WkhcUu4XlOMiv8DhGxm4pDu0jjGvUORf8bTwGwAJ2iB6mipkqbWSat0iLgrD4n0fJpK0v3TsTzYjrFkqSdIB10RXBG/Qv5l1vkWQLiqAQp5VYO/SIsfihOcinIpptiWvblBx5mjawwOZt1F8nBLVCk9npH2FI0giIp6ry21uNti5o3f5GJow7zQpJBp9kXNCWLf/39yDXeWwQQ7+o7u5XNtGZKRVmr8y2LX3Ft+gO8+41sw/DlAdJOXtWvRXGjORin4ohqwQAYMp7FsQcQMp9TkGBH4TspmZHDEBhhvn3fRlBo0wNGCbDQx0rDsfebWFCnyL89zLgjS0NMtNCVhLgnxK/Cu1MWy3pMSSK/Ybp/H1a5t0pLVFTBKa8notVPO5GZCVGqhWjiRXU709HYsv09+Ysae1BvMHDllgw==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(346002)(39850400004)(136003)(366004)(376002)(316002)(6486002)(8936002)(16576012)(166002)(2616005)(956004)(31696002)(86362001)(31686004)(44832011)(83380400001)(966005)(66946007)(66556008)(5660300002)(53546011)(8676002)(16526019)(66476007)(36756003)(2906002)(478600001)(33964004)(186003)(52116002)(26005)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	H/CxL22rH9LBU0YcxGBMUJQz5/z899CqC8sJYqmQt8+AUrbkv7t6tPBNh/559Op7nUakM0TgkTHgnwzvlCLIdcQViZPQU3FsKO/IVmjZp6xNhiSS7dy+sUafeedQnH+ZfljKy/m5PeB/r6cYDJJqr9/WXB7oS4dcO6SVWu/mdzW6aAMq6bxiVK9FpNeOEJFUw9XT4N/oMurHTxyArKFc6+8X9ExyEvnr8Qt29B9mVPCFZGTSa7+i3IKso4rWvR7tVXoOezpjDdfghJkbg9WMoahCwDPSo9ZvsgxniGtDr2yit7KffvZoWovdFH9C1BLiVnoJ5a8B5F5Iy48E82ttBU2dHiuQL9yzSdhgLbqqimm5MOzy6F3EVa7ft7H0Vv+0PGi744BURhQHT6u85dEBn2hbPRR16SLDTruLak4jBBJ8nRYZbZNakoIUtO4paEXFHDQDODkz/2dkpJzqdcsaT0dkPuuhrOLYNFnw6ZeZFCDvJIiR82eDtjGTcC3o3aaB
+	ROxLItTLFkLGPAVjgIOmRCIj0DENBKDLqzDQrc3EOnemrH6dvFyj2nlq5VHfo38dPd0+a35iKWdlE7VgioLKr2EGDGt1CzAbDxCMOfqVl+v7mDUXZAD8pIyQDqWesgs5WghG++x1mlH7zCfymHbRQu/EfFid3D/137QL+j+q49Ey0GmHf3+dUGVEyz4mrOyBnNnhtkL6rbD0bL0qLq14xGH1/zIaQcec87rBEPnxCwIqEUjvm03iVqcG+OIdWXT1CoFCnz9XGtH6wzNNLOhc7Ny71bvwo1YxfvwjkRiYrMzE+6bXxHSJclmye31JArbJAD7i1sb4neS/fEJdEvpfv3o3onhnGHkwtt+FRXIPcC+Io5+BkkFCaAglfEI63ritYP9/HY0JYVxcdFEGY41yUGQxe9b48AbHgUQRCeAsf3LT53v8MfVG86oD5m9F5uepjOxqAOu7qDf8lPwbyV06U4l01C+km8f8LHNkR61XP7w=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5587981d-6ae4-4e37-b463-08d80d778a65
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2020 19:50:35.7059
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8d051803-1333-4a3d-ec19-08d80d779270
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2020 19:50:48.3767
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /CjoShCMAaOX96gNBYKl5Hap/X4Nn0RMq+Rs4AG6Ru9WikO8f/WlBPIa7BYlTcp678OXhDaCkg+qrSH1G9oA6YkQ/Fn+dGR8WdjW4oVzVFw=
+X-MS-Exchange-CrossTenant-UserPrincipalName: fVHG+g10cIU1GO3vnBxDZ5muA6/TK8v5gToyhpix7Nur/yJsGMa6872x5hzBkx0Fr1Td/jtgzCnKtIWt27SCqYxBnIr1NajI9es7k/7IktU=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB3924
 Content-Type: multipart/alternative;
- boundary="------------574B33FF742606E3FBF7B026"
+ boundary="------------21A3EA3D0F0B97D61ECF961B"
 Content-Language: en-US
 
---------------574B33FF742606E3FBF7B026
+--------------21A3EA3D0F0B97D61ECF961B
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -89,28 +90,37 @@ On 6/9/20 2:18 AM, Changqing Li wrote:
 > From: Changqing Li <changqing.li@windriver.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 >
-> fix error:
+> fix errors:
 > ModuleNotFoundError: No module named 'distutils'
+> ModuleNotFoundError: No module named 'asyncore'
+> ModuleNotFoundError: No module named 'xmlrpc'
 >
 > Signed-off-by: Changqing Li <changqing.li@windriver.com>
 > ---
->   meta-python/recipes-devtools/python/python-django.inc | 1 +
->   1 file changed, 1 insertion(+)
+>   meta-python/recipes-devtools/python/python-m2crypto.inc | 6 +++++-
+>   1 file changed, 5 insertions(+), 1 deletion(-)
 >
-> diff --git a/meta-python/recipes-devtools/python/python-django.inc b/meta-python/recipes-devtools/python/python-django.inc
-> index 54c77c827..73b7ac99f 100644
-> --- a/meta-python/recipes-devtools/python/python-django.inc
-> +++ b/meta-python/recipes-devtools/python/python-django.inc
-> @@ -28,4 +28,5 @@ RDEPENDS_${PN} += "\
->       ${PYTHON_PN}-threading \
->       ${PYTHON_PN}-unixadmin \
->       ${PYTHON_PN}-xml \
-> +    ${PYTHON_PN}-distutils \
->   "
+> diff --git a/meta-python/recipes-devtools/python/python-m2crypto.inc b/meta-python/recipes-devtools/python/python-m2crypto.inc
+> index 76dd58ce0..881fdf1cc 100644
+> --- a/meta-python/recipes-devtools/python/python-m2crypto.inc
+> +++ b/meta-python/recipes-devtools/python/python-m2crypto.inc
+> @@ -17,7 +17,11 @@ PYPI_PACKAGE = "M2Crypto"
+>   inherit pypi siteinfo
+>   
+>   DEPENDS += "openssl swig-native"
+> -RDEPENDS_${PN} += "${PYTHON_PN}-typing"
+> +RDEPENDS_${PN} += "${PYTHON_PN}-typing \
+> +                   ${PYTHON_PN}-distutils \
+> +                   ${PYTHON_PN}-smtpd \
+> +                   ${PYTHON_PN}-xmlrpc \
+> +"
+>   
+>   DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR} -I${STAGING_INCDIR}"
+>   DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR}"
 >
 > 
 
---------------574B33FF742606E3FBF7B026
+--------------21A3EA3D0F0B97D61ECF961B
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -122,31 +132,40 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/9/20 2:18 AM, Changqing Li wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200609061806.310291-1-changqing.li@windriver.com">
+    <blockquote type="cite" cite="mid:20200609061806.310291-2-changqing.li@windriver.com">
       <pre class="moz-quote-pre" wrap="">From: Changqing Li <a class="moz-txt-link-rfc2396E" href="mailto:changqing.li@windriver.com">&lt;changqing.li@windriver.com&gt;</a></pre>
     </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
-    <blockquote type="cite" cite="mid:20200609061806.310291-1-changqing.li@windriver.com">
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
+    <blockquote type="cite" cite="mid:20200609061806.310291-2-changqing.li@windriver.com">
       <pre class="moz-quote-pre" wrap="">
 
-fix error:
+fix errors:
 ModuleNotFoundError: No module named 'distutils'
+ModuleNotFoundError: No module named 'asyncore'
+ModuleNotFoundError: No module named 'xmlrpc'
 
 Signed-off-by: Changqing Li <a class="moz-txt-link-rfc2396E" href="mailto:changqing.li@windriver.com">&lt;changqing.li@windriver.com&gt;</a>
 ---
- meta-python/recipes-devtools/python/python-django.inc | 1 &#43;
- 1 file changed, 1 insertion(&#43;)
+ meta-python/recipes-devtools/python/python-m2crypto.inc | 6 &#43;&#43;&#43;&#43;&#43;-
+ 1 file changed, 5 insertions(&#43;), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-django.inc b/meta-python/recipes-devtools/python/python-django.inc
-index 54c77c827..73b7ac99f 100644
---- a/meta-python/recipes-devtools/python/python-django.inc
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python-django.inc
-@@ -28,4 &#43;28,5 @@ RDEPENDS_${PN} &#43;= &quot;\
-     ${PYTHON_PN}-threading \
-     ${PYTHON_PN}-unixadmin \
-     ${PYTHON_PN}-xml \
-&#43;    ${PYTHON_PN}-distutils \
- &quot;
+diff --git a/meta-python/recipes-devtools/python/python-m2crypto.inc b/meta-python/recipes-devtools/python/python-m2crypto.inc
+index 76dd58ce0..881fdf1cc 100644
+--- a/meta-python/recipes-devtools/python/python-m2crypto.inc
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python-m2crypto.inc
+@@ -17,7 &#43;17,11 @@ PYPI_PACKAGE = &quot;M2Crypto&quot;
+ inherit pypi siteinfo
+ 
+ DEPENDS &#43;= &quot;openssl swig-native&quot;
+-RDEPENDS_${PN} &#43;= &quot;${PYTHON_PN}-typing&quot;
+&#43;RDEPENDS_${PN} &#43;= &quot;${PYTHON_PN}-typing \
+&#43;                   ${PYTHON_PN}-distutils \
+&#43;                   ${PYTHON_PN}-smtpd \
+&#43;                   ${PYTHON_PN}-xmlrpc \
+&#43;&quot;
+ 
+ DISTUTILS_BUILD_ARGS &#43;= &quot;build_ext --openssl=${STAGING_EXECPREFIXDIR} -I${STAGING_INCDIR}&quot;
+ DISTUTILS_INSTALL_ARGS &#43;= &quot;build_ext --openssl=${STAGING_EXECPREFIXDIR}&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -156,4 +175,4 @@ index 54c77c827..73b7ac99f 100644
   </body>
 </html>
 
---------------574B33FF742606E3FBF7B026--
+--------------21A3EA3D0F0B97D61ECF961B--
