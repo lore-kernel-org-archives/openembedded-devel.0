@@ -1,61 +1,84 @@
-Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com [209.85.208.196])
- by mx.groups.io with SMTP id smtpd.web10.8989.1591790396378449477
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.10459.1591794946656655936
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jun 2020 04:59:56 -0700
+ Wed, 10 Jun 2020 06:15:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@burtonini-com.20150623.gappssmtp.com header.s=20150623 header.b=MMoYGx0A;
- spf=pass (domain: burtonini.com, ip: 209.85.208.196, mailfrom: ross@burtonini.com)
-Received: by mail-lj1-f196.google.com with SMTP id c17so2085184lji.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jun 2020 04:59:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=burtonini-com.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=0olgg+Eml9CAtG/CIFKbAsc7+nTuN7PNDe9rrMqQ8Rs=;
-        b=MMoYGx0AwqzdDPmemT7yiaNMbvT2cV49q6uqr/WYqqQNIUZiM7PPt9DzIyHfFzUzXT
-         02bxGUcyxBTEJP3Qe02vdxmi7oeDYohZnxtSCScipU33oY7u8GzxMQkFnvJ7n22LtVC9
-         8e1gnADdZNQnnXvIebMbI1N9ePI5VE8bQCu+VAzWDAvj8LQiA5wPWTzaL4zN8jRqnq7d
-         /EicOQKDNQDRTsGZwR6KiAUkt4zF5E6MLnU4g8SnAbmiO63+d9dlzYWw/GzNcQJj2JIA
-         SrJDGdSskRh4sSVUmtxQpU1caNXDeIgIrYOFlTv6xEfT0HEG7X78CaMlNoJDF4mhmLO6
-         rtCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=0olgg+Eml9CAtG/CIFKbAsc7+nTuN7PNDe9rrMqQ8Rs=;
-        b=by9F2IwLG6jnbou7yKBloA+Eg0VGOSvZLAoamNhdpgfdd9EF4MkAnOjIc0IdmNyBcS
-         UYsHRh3+MX2hOgAwufp0LV0sudS6ruW6ZyluFMmwzHEnHnHDb1ARA7GsokwDtmelHd6I
-         EoAxD/oa5YwQCTlcrBrE22wuUZaTVALzXZLFRaHBX9Wpngs8hfvEOXjN2h5O9VOM7RTf
-         Sf5DZts8H4V/hAr6PeodzQ1Iqd9eeYFRzEpu3PFBstenbvdIShW+KZfMa0gTUQ0QtE8X
-         EWMzgFunjv+OnM70IY2dW6u6dEFXJbdG7Sq4tUjjouHLu7/HTjBuwTObF1DZ1J4TMqWE
-         d8YA==
-X-Gm-Message-State: AOAM531bVHKEZ6+9looNB4C5QWBBYXr9tJNX2CD3kIZy3gtQ84iruvmo
-	/Zr88PPnbXr+akQxCSwWLvzUcHDuNatNwRjg4LlqTQ==
-X-Google-Smtp-Source: ABdhPJx/q/XSb/D5RM+E+Vd4z+N2rhtwc11bhn2LcOgDnQQgJlhEEB+FcLUX5sDBuxg9eyUho7murA2B5Wa533XNYY4=
-X-Received: by 2002:a2e:9a55:: with SMTP id k21mr1697511ljj.340.1591790394518;
- Wed, 10 Jun 2020 04:59:54 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200609142957.187352-1-arthur.she@linaro.org>
- <CAAnfSTsaMMCGGnGGYHf6dQ3Kdjtzf-NnPy7VoXDjffC-BFPHGw@mail.gmail.com> <20200609215534.GW17660@denix.org>
-In-Reply-To: <20200609215534.GW17660@denix.org>
-From: "Ross Burton" <ross@burtonini.com>
-Date: Wed, 10 Jun 2020 12:59:43 +0100
-Message-ID: <CAAnfSTupFtc44EX0O6f=1xGX8TLeNhTk9w5J-y0WGPhdA3ZgAw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] igt-gpu-tools: add new package
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: Arthur She <arthur.she@linaro.org>, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=40010 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jj0Zy-0005hT-HK; Wed, 10 Jun 2020 16:15:43 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/7] python3-meld3: Consolidate in a single file
+Date: Wed, 10 Jun 2020 16:15:30 +0300
+Message-Id: <20200610131536.31426-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.7
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-On Tue, 9 Jun 2020 at 22:55, Denys Dmytriyenko <denis@denix.org> wrote:
-> Huh?
+Consolidate inc and bb files into a single bb file.
 
-So that was the line that told me the recipe was basically copied from
-the file in meta-intel:
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../recipes-devtools/python/python-meld3.inc     | 15 ---------------
+ .../python/python3-meld3_1.0.2.bb                | 16 ++++++++++++++--
+ 2 files changed, 14 insertions(+), 17 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-meld3.inc
 
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-intel/tree/recipes-graphics/igt-gpu-tools/igt-gpu-tools_1.25.bb
+diff --git a/meta-python/recipes-devtools/python/python-meld3.inc b/meta-python/recipes-devtools/python/python-meld3.inc
+deleted file mode 100644
+index 558e436c9..000000000
+--- a/meta-python/recipes-devtools/python/python-meld3.inc
++++ /dev/null
+@@ -1,15 +0,0 @@
+-SUMMARY = "meld3 templating system used by Supervisor"
+-DESCRIPTION = "\
+-meld3 is an HTML/XML templating system for Python which keeps \
+-template markup and dynamic rendering logic separate from one \
+-another.  See http://www.entrian.com/PyMeld for a treatise on the \
+-benefits of this pattern."
+-HOMEPAGE = "https://github.com/supervisor/meld3"
+-LICENSE = "BSD-4-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9e7581cef5645475fcefebdc15ed7abf"
+-
+-SRC_URI[md5sum] = "3ccc78cd79cffd63a751ad7684c02c91"
+-SRC_URI[sha256sum] = "f7b754a0fde7a4429b2ebe49409db240b5699385a572501bb0d5627d299f9558"
+-
+-PYPI_PACKAGE = "meld3"
+-inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python3-meld3_1.0.2.bb b/meta-python/recipes-devtools/python/python3-meld3_1.0.2.bb
+index f69591629..b3e68c1a9 100644
+--- a/meta-python/recipes-devtools/python/python3-meld3_1.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-meld3_1.0.2.bb
+@@ -1,2 +1,14 @@
+-inherit setuptools3
+-require python-meld3.inc
++SUMMARY = "meld3 templating system used by Supervisor"
++DESCRIPTION = "\
++meld3 is an HTML/XML templating system for Python which keeps \
++template markup and dynamic rendering logic separate from one \
++another.  See http://www.entrian.com/PyMeld for a treatise on the \
++benefits of this pattern."
++HOMEPAGE = "https://github.com/supervisor/meld3"
++LICENSE = "BSD-4-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9e7581cef5645475fcefebdc15ed7abf"
++
++SRC_URI[md5sum] = "3ccc78cd79cffd63a751ad7684c02c91"
++SRC_URI[sha256sum] = "f7b754a0fde7a4429b2ebe49409db240b5699385a572501bb0d5627d299f9558"
++
++inherit pypi setuptools3
+-- 
+2.17.1
 
-But it appears that the inclusion of the xorg-app.inc file has been
-removed. If the recipe has been made standalone then cruft like that
-needs to be fixed.
-
-Ross
