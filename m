@@ -1,47 +1,47 @@
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.web10.11549.1591798154189473250
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com [209.85.215.194])
+ by mx.groups.io with SMTP id smtpd.web10.11683.1591798490834941540
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jun 2020 07:09:14 -0700
+ Wed, 10 Jun 2020 07:14:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=hpawbjbt;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id d6so932679pjs.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jun 2020 07:09:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=eHBjHQIl;
+ spf=pass (domain: gmail.com, ip: 209.85.215.194, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f194.google.com with SMTP id e18so1045793pgn.7
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jun 2020 07:14:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:references:from:autocrypt:message-id:date:user-agent
          :mime-version:in-reply-to:content-language;
-        bh=uJfZaGuKS/u1ITJFKlqvn5CA9oG0hqshA8ZXNzQvnnE=;
-        b=hpawbjbtFpFvUsdtW30wgldp9zu2fNFerTs3ERfpJ9A6maCJoyDaUVRR+8yCJshdRx
-         KBY3OPzBxds431t0F3D0gryO/UE2G7TrWFOlMcNta4FudxGzPDb681q8ENt6qobn2gf1
-         st0n0Q/HFSorjNuzbmjSYJ2UsyLKiIWwkBaPmnihibNx+cRAvwPJqXy8B+0AzXsxYMv4
-         7m2dm5K9j55vS8REl3Qtc5+V0gKocPR37Xe5Zw79c3kWAWmBJ71B6qII6if1VfUTZrBg
-         7tSMAxIShai3AFw2MpJBolSouYX+81rAnZUK4xRzrMEfOcXT5anKsyz2lpPt5U71CYqV
-         pPjw==
+        bh=b3TM8EwQzmZBOF0w4wrcBUyEU9CP6lpIRo81DNOO918=;
+        b=eHBjHQIlHwuQNFjd5aG7BJi4n5VIH+ddGY3P3fFSWQH3tXU7IZpfyPcWhnHbpJM9dk
+         W5caw9yU8mqhR/f33uHI9zN7OrZZZHlTn35tsMfGXieoXveZi+DoojeqGmV1CQRs2Qhw
+         wT2+SXjMRFu2YGFTpHisfXNnwrZ4scLh3FtYOwmB+naQhpXowXOHdlRKyTJjfbsBgEUh
+         S8aNTBWz2dGw5phQ0AHenjr8w0hChcZVB6CT0hjC62QAZflyFngAUvav84D0V4MYmSLL
+         vR4+gGmH0/uqN7y8RNBCRor8q6d6ZId9TpWRNHa2igx/XjizJ0qk7Xppn5aoviT+43n1
+         arhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
          :date:user-agent:mime-version:in-reply-to:content-language;
-        bh=uJfZaGuKS/u1ITJFKlqvn5CA9oG0hqshA8ZXNzQvnnE=;
-        b=i4kLQXPHN8AI6yNl8yHnZevZgyb+1+gtNzQHnVPfKF/0wWsrD3NAdM0EGdh04stcMB
-         cYH3ZmooPSN0jYrzV81MtH3Fyz9JBKYWxdF2WMts94zFIs3EgWB9sptv/r5cqnHXpPxh
-         TRmn7P34P0xQwx6Ebsi3We+hYi6srLL4nnDM+CMQXisiTNOrTqFSpCZ+H8dq5cbhsB25
-         GAgpqPMF4cj/LlWf8UnBUmf1qODNLu65kRJ2oGvXUMDh90kIkKG4UrAmJLsiHa9MzAuG
-         bmeYwUtEGik2ECAdhZTTWAlLWB9TiLXFVR4y6XQWFkYvkdjULbdV/hY48Wjs5+wuUyJM
-         WLgA==
-X-Gm-Message-State: AOAM531/LAQH2E7XxIkb2gL/UJmuXkRH7KQ/jrVlsZ7taGzhNzjfPBeh
-	wNKEI6CTLWiXOUClXsflWlofJfWe
-X-Google-Smtp-Source: ABdhPJwlr1RhfBeSbkXtUfB6JCJL8uFuoDE0RaYaBB8Yb65U3J2oicrkyqiLpspZop+Ilcz4mXfZsg==
-X-Received: by 2002:a17:902:6b01:: with SMTP id o1mr3216920plk.266.1591798153268;
-        Wed, 10 Jun 2020 07:09:13 -0700 (PDT)
+        bh=b3TM8EwQzmZBOF0w4wrcBUyEU9CP6lpIRo81DNOO918=;
+        b=J2bS1oLDS72CzMqm3veQU4OFl400ESq+AE+luu5MKNi1OoxlyHxDYmCk/ftG171VVT
+         5rfGb2v1Y0XFVTwa8JcrWijFc2O5cwJpcX4F8HDHWoWMU23gTvyCSPjCRPisMKr5g1uN
+         eoa3CLTzMwa71QFAFSennqfybIqTFt0p1oPG3xJ9yFQIK/Q8kGzc/Z6FZWyA5nnWkeA6
+         NNkts1fRwoIqdb/ubuPSOeVFzqZZrbfBiivlCTkzcTCb9DFJJ43zG4k5KAMeqiLVdk7s
+         U9UfF3AAw43aMYyly4WLqWZh6I/wg73JVnlcE+ykk88/QlZdyP6oX6VXT5YZE/CXozc9
+         X7sQ==
+X-Gm-Message-State: AOAM53155yLWJXtBWHZAkQp77SleCtcUccr0+/smXXEN/H1pCZfjPT5u
+	eDFueBeYLR4u9fJRj8I6X2A8SWYk
+X-Google-Smtp-Source: ABdhPJys2NXW0J3M2gtk28xObLikmkpNAVRZoqv/1QoWwr68EjSUEk47XltNK0U+ZTTxUatFr8WwBw==
+X-Received: by 2002:a63:a19:: with SMTP id 25mr2749852pgk.98.1591798490023;
+        Wed, 10 Jun 2020 07:14:50 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from ?IPv6:2601:202:4180:a5c0:254a:4327:67e1:d5be? ([2601:202:4180:a5c0:254a:4327:67e1:d5be])
-        by smtp.gmail.com with ESMTPSA id 205sm67501pfc.206.2020.06.10.07.09.12
+        by smtp.gmail.com with ESMTPSA id a3sm106317pfi.77.2020.06.10.07.14.49
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 10 Jun 2020 07:09:12 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][dunfell][PATCH] uftrace: add PV to update the package version
+        Wed, 10 Jun 2020 07:14:49 -0700 (PDT)
+Subject: Re: [oe] [meta-oe][dunfell][PATCH] gpsd: mark CLEANBROKEN
 To: Adrian Bunk <bunk@stusta.de>, openembedded-devel@lists.openembedded.org
-References: <20200610070254.9851-1-bunk@stusta.de>
+References: <20200610070254.9851-2-bunk@stusta.de>
 From: "akuster" <akuster808@gmail.com>
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
@@ -86,65 +86,54 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
  ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
  8CS2NxU=
-Message-ID: <bf52e942-c934-6767-d000-1d81cb42265e@gmail.com>
-Date: Wed, 10 Jun 2020 07:09:11 -0700
+Message-ID: <28d6cdd6-fdbb-9351-da8f-0abf83318a6b@gmail.com>
+Date: Wed, 10 Jun 2020 07:14:48 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200610070254.9851-1-bunk@stusta.de>
+In-Reply-To: <20200610070254.9851-2-bunk@stusta.de>
 Content-Type: multipart/alternative;
- boundary="------------4E780CC2CB1CD106AC63FE67"
+ boundary="------------D6321A342ED754B1EE03BFF5"
 Content-Language: en-US
 
---------------4E780CC2CB1CD106AC63FE67
+--------------D6321A342ED754B1EE03BFF5
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
 
 
 On 6/10/20 12:02 AM, Adrian Bunk wrote:
-> From: Honggyu Kim <honggyu.kp@gmail.com>
+> From: Sean Nyekjaer <sean@geanix.com>
 >
-> uftrace_0.9.4.bb now doesn't actually use exact 0.9.4 version, so it has
-> to add a PV value to update the package version.
-
-I remember looking at this one. As I could not see how this had any
-bearing on the function of the package I skipped it.
-
-Why does it have merit?
-
--armin
-
-
->
-> Signed-off-by: Honggyu Kim <honggyu.kp@gmail.com>
+> Signed-off-by: Sean Nyekjaer <sean@geanix.com>
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > Signed-off-by: Adrian Bunk <bunk@stusta.de>
 > ---
->  meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb | 2 ++
+>  1 file changed, 2 insertions(+)
 >
-> diff --git a/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb b/meta-oe=
-/recipes-devtools/uftrace/uftrace_0.9.4.bb
-> index c33fa048c..a3d060218 100644
-> --- a/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb
-> +++ b/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb
-> @@ -10,7 +10,7 @@ DEPENDS_append_libc-musl =3D " argp-standalone"
+> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+> index f74ebda5f..05fbed622 100644
+> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+> @@ -23,6 +23,8 @@ SYSTEMD_OESCONS = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'f
+>  export STAGING_INCDIR
+>  export STAGING_LIBDIR
 >  
->  inherit autotools
->  
-> -# v0.9.4
-> +PV .=3D "+git${SRCPV}"
->  SRCREV =3D "d648bbffedef529220896283fb59e35531c13804"
->  SRC_URI =3D "git://github.com/namhyung/${BPN} \
->             "
+> +CLEANBROKEN = "1"
+
+So this affects the version in dunfell?
+> +
+>  PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)} usb"
+>  PACKAGECONFIG[bluez] = "bluez='true',bluez='false',bluez5"
+>  PACKAGECONFIG[qt] = "qt='yes' qt_versioned=5,qt='no',qtbase"
 >
->=20
+> 
 
 
---------------4E780CC2CB1CD106AC63FE67
+--------------D6321A342ED754B1EE03BFF5
 Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
 <html>
   <head>
@@ -156,45 +145,35 @@ Content-Transfer-Encoding: 8bit
     <div class="moz-cite-prefix">On 6/10/20 12:02 AM, Adrian Bunk wrote:<br>
     </div>
     <blockquote type="cite"
-      cite="mid:20200610070254.9851-1-bunk@stusta.de">
-      <pre class="moz-quote-pre" wrap="">From: Honggyu Kim <a class="moz-txt-link-rfc2396E" href="mailto:honggyu.kp@gmail.com">&lt;honggyu.kp@gmail.com&gt;</a>
+      cite="mid:20200610070254.9851-2-bunk@stusta.de">
+      <pre class="moz-quote-pre" wrap="">From: Sean Nyekjaer <a class="moz-txt-link-rfc2396E" href="mailto:sean@geanix.com">&lt;sean@geanix.com&gt;</a>
 
-uftrace_0.9.4.bb now doesn't actually use exact 0.9.4 version, so it has
-to add a PV value to update the package version.</pre>
-    </blockquote>
-    <br>
-    I remember looking at this one. As I could not see how this had any
-    bearing on the function of the package I skipped it.<br>
-    <br>
-    Why does it have merit?<br>
-    <br>
-    -armin<br>
-    <br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:20200610070254.9851-1-bunk@stusta.de">
-      <pre class="moz-quote-pre" wrap="">
-
-Signed-off-by: Honggyu Kim <a class="moz-txt-link-rfc2396E" href="mailto:honggyu.kp@gmail.com">&lt;honggyu.kp@gmail.com&gt;</a>
+Signed-off-by: Sean Nyekjaer <a class="moz-txt-link-rfc2396E" href="mailto:sean@geanix.com">&lt;sean@geanix.com&gt;</a>
 Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a>
 Signed-off-by: Adrian Bunk <a class="moz-txt-link-rfc2396E" href="mailto:bunk@stusta.de">&lt;bunk@stusta.de&gt;</a>
 ---
- meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb b/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb
-index c33fa048c..a3d060218 100644
---- a/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb
-+++ b/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb
-@@ -10,7 +10,7 @@ DEPENDS_append_libc-musl = " argp-standalone"
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+index f74ebda5f..05fbed622 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+@@ -23,6 +23,8 @@ SYSTEMD_OESCONS = <a class="moz-txt-link-rfc2396E" href="mailto:${@bb.utils.contains('DISTRO_FEATURES','systemd','true','fexportSTAGING_INCDIRexportSTAGING_LIBDIR+CLEANBROKEN=">"${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'f
+ export STAGING_INCDIR
+ export STAGING_LIBDIR
  
- inherit autotools
- 
--# v0.9.4
-+PV .= "+git${SRCPV}"
- SRCREV = "d648bbffedef529220896283fb59e35531c13804"
- SRC_URI = "git://github.com/namhyung/${BPN} \
-            "
++CLEANBROKEN = "</a>1"</pre>
+    </blockquote>
+    <br>
+    So this affects the version in dunfell?<br>
+    <blockquote type="cite"
+      cite="mid:20200610070254.9851-2-bunk@stusta.de">
+      <pre class="moz-quote-pre" wrap="">
++
+ PACKAGECONFIG ??= <a class="moz-txt-link-rfc2396E" href="mailto:${@bb.utils.contains('DISTRO_FEATURES','bluetooth','bluez','',d)}usb">"${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)} usb"</a>
+ PACKAGECONFIG[bluez] = "bluez='true',bluez='false',bluez5"
+ PACKAGECONFIG[qt] = "qt='yes' qt_versioned=5,qt='no',qtbase"
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -205,4 +184,4 @@ index c33fa048c..a3d060218 100644
   </body>
 </html>
 
---------------4E780CC2CB1CD106AC63FE67--
+--------------D6321A342ED754B1EE03BFF5--
