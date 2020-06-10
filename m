@@ -1,17 +1,17 @@
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.54])
- by mx.groups.io with SMTP id smtpd.web11.2888.1591818808883326133
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.67])
+ by mx.groups.io with SMTP id smtpd.web10.3048.1591818826311348248
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jun 2020 12:53:29 -0700
+ Wed, 10 Jun 2020 12:53:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=M8UqdSS4;
- spf=pass (domain: windriver.com, ip: 40.107.92.54, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=hS8Ya/54;
+ spf=pass (domain: windriver.com, ip: 40.107.237.67, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Tjvn2OabP8eaBffySfRiL9whzIsbDBRUVIy4zyrkQrczA2uGdmv5N0lMYLdjUO23R5mvwgDT2FvTEZdJ5A4pkbpPYOHiRM5acXZf8IT+VrzsvZv2SST0LCU2YB55evvctldjiynmmsc+ayKj4J9B4f2wWVeXFNBPR9v/G+yMLKYGLvAFC1rrEeSwIQ6t13gKsZd6Vuzwac+Nd3fRILpEIMBQarC3s/7Hv991rpHbSk2Cg4huu+5QyDJSEGWhfNBaG0tDXRATUv8RrOLAePMrqqDaAP9nKpSV4pBWl0AICVN4nlzLq2Z0jqPUSP9RIEHJoaluuDP5xNcyrwTudgkKfQ==
+ b=NwRzHp8mJWsRdJjyVL3tk+yTkDEw63UebzRovUscdAm8ey6xunhZShuKRr8zH78ocQM/v9o6604BirjYj4TbvT0cK+AvD3yJGRyVl19d+J06XNW+m3/med9nUsNofhdTM7d2HPorXK1ZduJJiP6GOpvu2hIM42Sx4E2C5TqW+k5lgdKzDtWmmRetiCR/q5Lpm1Tw6oK2SNXG4LevbvWWIgec9DEU9Uc3onbcjrhTUGk1JLT1NAN++0VvFpX3TXsUUFmKxoMx1oBA8+8XLuBLuTToQ76VToR1Gr6mayG1w7K2MHco+1IEJZFEJDD2zyMq2bC8sZLq/zmVw8v6oKTY6Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PsUDqfVnxVRUkjAmmBHjjYKILr3sgFKoFckYkBQRTqQ=;
- b=cx7TL3XHPCcOrP6ylnr9EQX9+faZ5FXjAu7xCnqUlGlee8Y3pU3Tx88e+9H362jN5WOMFPL/96UHAdYb5hxMHKAKCbadzJwvOdLLJl0c3V9Q2085a55YcLqZch+4yrPnjJYINrCdQblek8gr1RKUnR4mXgWcCHmBbuiNEBm0ITp2C8CavG0FztqasztKNXnfe5Z9dPRiYrh+DDgQUVCN/N8FrakbvkBi6fX2NaQu+UlL0jcRilsCKZyRJmFldLf5JzwCHVtQK25a0+WCKlXpfw9IOQtI8cQbZLIHFTmzWXg67bBJfX9xqZFuhwZZsAGgerXhU57E3VB95t4w6MbTCQ==
+ bh=Rfq5UQfJuoff83ejVZJ044/xnn7gpxQ+sh5YCVmyFDg=;
+ b=B5F7F0hVG7/LpBJ5aeduLoyY77f1/7HCuVuYDTNI/CzKnf6MsSG1O++jrRzDYxfYv+6C+B5WzOvWxnZVdp5E4j5lee4YooY0saOC4SG7xS1xDCIwYH9qwTyJ9znrBe7pp1+PamY7VvgB5FIrqlTbrYPFFH4HlxEFCssxmq434p4p+5xPPZLGtw0sh4RolqXSTZvNLnWjSpVaB2XNrunS0qjZbCmGZjnbeV1d9SDyZ4YvZFkpxz6ZoTHmkvyQcBibHtdJeGwbznOrZ5hRQj+ipXoCAtNGrOXBevuVly8IgVSO68LgQ5LL/KCX9bSpueZtX8bgk5XNBBhYHvBDRo8xqA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,103 +19,123 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PsUDqfVnxVRUkjAmmBHjjYKILr3sgFKoFckYkBQRTqQ=;
- b=M8UqdSS4jJH1WioSO3vAKMncJ+/RYHZrdc3c/4ugCwnly4TsJARKK8YnLNsdGyE2DOf6p0uv7AHkw73rscRy8RvdlmEwRcq0T3eX49Z1+co2pMcg5r5pgZ0f+FsQK/yiOQ0pxyRSR2akaGrXCgP0GXTnV5XwXfGzERIrygZmcE4=
+ bh=Rfq5UQfJuoff83ejVZJ044/xnn7gpxQ+sh5YCVmyFDg=;
+ b=hS8Ya/54dZL3ojNkzura43tbwqCNmbGdVTjsV/iZyDrAkoiTpJ9ILgTdMUX6sg0wH1/utBHO1JmRBgqxTxa4emOTiPRzykLtuYJRGR+Mg1DawfpAHKC9iT/MgkUL4242j0pgoH/CoQW7lJizkYWOK9+wIMp7+CjGTvPRaeMQnJk=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB3924.namprd11.prod.outlook.com (2603:10b6:405:7a::23) with
+ by BN6PR11MB1700.namprd11.prod.outlook.com (2603:10b6:404:47::20) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.18; Wed, 10 Jun
- 2020 19:53:27 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.22; Wed, 10 Jun
+ 2020 19:53:45 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3088.021; Wed, 10 Jun 2020
- 19:53:27 +0000
-Subject: Re: [oe] [meta-python][PATCH 1/3] python3-beautifulsoup4: Upgrade 4.8.2 -> 4.9.1
+ 19:53:44 +0000
+Subject: Re: [oe] [meta-python][PATCH 2/3] python3-bitarray: Upgrade 1.2.1 -> 1.2.2
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200609134311.13299-1-leon.anavi@konsulko.com>
+ <20200609134311.13299-2-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <d65a1e21-8413-29de-0742-ade991008540@windriver.com>
-Date: Wed, 10 Jun 2020 15:53:25 -0400
+Message-ID: <e79e260f-17e9-a64b-26ca-d17b113c1848@windriver.com>
+Date: Wed, 10 Jun 2020 15:53:38 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200609134311.13299-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0101.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2c::10) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200609134311.13299-2-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0115.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2c::24) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0101.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2c::10) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.19 via Frontend Transport; Wed, 10 Jun 2020 19:53:26 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0115.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2c::24) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.18 via Frontend Transport; Wed, 10 Jun 2020 19:53:40 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 4328448d-759c-4b35-a90c-08d80d77f0ef
-X-MS-TrafficTypeDiagnostic: BN6PR11MB3924:
+X-MS-Office365-Filtering-Correlation-Id: f2d8e4b7-ab53-4703-8370-08d80d77f91b
+X-MS-TrafficTypeDiagnostic: BN6PR11MB1700:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB3924CEC5C11EA6F81DCC8F839F830@BN6PR11MB3924.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:173;
+	<BN6PR11MB17007B54E885D5351D5DFCB59F830@BN6PR11MB1700.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2582;
 X-Forefront-PRVS: 0430FA5CB7
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	qjVjpARFHTyfHK0tUeJqbYtAIYM2tEMYBCJTBcH7Q+fvtJPLXRz2yUTPC/ygdETieGpC196+zM6FNLEzWxh+P8ybYTc4XCXk84Vj8XevkdqKRCj9K+v1QUFwrhKspRu6CPh3QAyu2MJwlRL0er7NXninFbms0IsrdBoIfVGM1VZchod1VqumR8YhAvnkhHTJgx1UC+3GHWhsyE9piwnsY5W6L0VvuUAITeUfnnplXF4B5X+MiG6mzQdfYbrdT+DTEy5Pg+6OEB77LV2M69XVTclZwOaapok1N2wTJxIf9arqzB1zZd3BIYq4Q8ShZYAoKrt0mKHMyZp2SOkmOW8+9ann4d7FuQ0mcpcRzL3CK+m1Hxwt0xDN/tdLPcuO31bhEfqtaZkmIXl5VhAmEaRXK2xJWPE1dSshcuhNuE+se5JXMQfwR/NKepD3X/N1VsZWuq6l4xzsJGn3bj40o/iWnw==
+	48lKwKBR+9c+d1SF9h1gum/wEYLx01P9Iqo/eitr36r/rRHwFZSvbHDR/NQV5qtWVq9H55SC8qjQyxWx2/2KgmOfPxeqPvVKRKUQTXgeUyg5mIpZG3PRqtaqIUgkQSM6ZK1WWDvniW9EfDWNe2jOCmm4cHn7j+jtMnbskaBye81VvVICtHrCmA5qkGXwcMWb45KVxWT6rHGVdoOHhEBHLnaREenkdZGOd1rO1/HOY+zjg3yljfmB7PkN5BTen+ORz0tfm2E/+99l9sNkCnVpidTcWl4+6o9OB5dxLWKjtpEHKOumVpJ4ustDVc9l1hm3ZgZSs0Vhnt5Xl7NbetTi2/Sh7uHQPUtSEEyW7n0s/2M8rDQeogHF2kmJs6QCWP+T3W2TmH8PxIQ7xB4FGLjXc7+DiNmALyurOKwxv6lnbq0lXcx0wJst38US5ZAcCd+lNR//ppyMNxJOQzXQxF3q4A==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(346002)(39850400004)(136003)(366004)(376002)(316002)(6486002)(8936002)(16576012)(166002)(2616005)(956004)(31696002)(86362001)(31686004)(44832011)(83380400001)(966005)(66946007)(66556008)(5660300002)(53546011)(8676002)(16526019)(66476007)(36756003)(2906002)(478600001)(33964004)(186003)(52116002)(26005)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(366004)(396003)(376002)(136003)(39850400004)(66556008)(52116002)(66946007)(2906002)(33964004)(66476007)(31696002)(31686004)(53546011)(86362001)(186003)(956004)(966005)(16576012)(83380400001)(8936002)(2616005)(6486002)(8676002)(36756003)(5660300002)(26005)(16526019)(44832011)(166002)(316002)(478600001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	rzAcjwRGO7mspleT0uc2AnrdAHVMxGTIp3pTbbXQWMRS4L/DaOtTdG9SGEVEq/q7wIGDsfdAAtCCsBG8qjYshwUkzp38G1gdlrzsd+x5YEAmPaGNMW9LvONt/I1pBC4A/MnDovIEpoQI9Vvs4r+XT5aCxSj5JgLjoCbqFQYn6Kv0f+OJEFIekdXTMXekC7IY2KBHyKq3GnkHyzYu+qC93zj3KqJBmiThE+lru4SkdbEm062VQvoT9vTjOk9aC4rT/bnsUTmKArVDf+SYVBgDIlACWx8naCmLXxTPfPwMJs0GtlddihZnceRZQE7gvq/XqiRT9Qco5kYu0PVR3FRKlgsTI0YNHSbi6xnJPSxUyinJnYmJwrCmcHbTFh9Q7MljDYwexZAtPfzmy+JjsAHKA7d4Kh3t2o4VFYNuXoQJME+3zxeRfDdy78UjEEVelZRte2HlGCQn4lizdTYZLpkO4su4A1syeYz4ODu4vcnwOgRT4tW5bWTUmtynPLe2AdkV
+	kR38s1ZVrJ0YT4yVEjvaDezPxTGQPmBdddYUcXI3uO/HYZjGopELz3v3/K7dbpI0OcoS80UnMEm6eld1WNYkJNflVQXOGBb+CL75JL4cxFJ/TC+5eX09542LaI3FwaluiRQsvSF8leVKkJ7Pf2WggH76+li2FHmEn1YJsf29enR8yCx1RNONK71FDSoax5Z0jEW4ZnPP09BqNDAuhSMW7A9zt09/N6hiou4XIdy90ZnhD5aNsvSHWan0jNZYqJMJcNIs6+a+jj1PDgP8u6F7Y2ZR1ghX6ENv0M5KinEBVxhcOglWe+YwX3IM15HgCuePaj3P3uFkTuqNtPmo2W88puF0GhCwAEPGNgmH5ExsWvLcqEu4aOT9C38RTTrnuiO9fWPJSKDzQUjmF9eYfZL+W+yLivvYjE1SgVsS8ID19AnN7awG2s1ljezGoDqc0kTMnFqsLbuPLu44a7FXyc9Hg+p0C6OHDL/G1FfQuOj57ndm3+BcOwXz+d5VVkDlQXg5
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4328448d-759c-4b35-a90c-08d80d77f0ef
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2020 19:53:27.5658
+X-MS-Exchange-CrossTenant-Network-Message-Id: f2d8e4b7-ab53-4703-8370-08d80d77f91b
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2020 19:53:43.0309
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ECtdk3e0ocfr9kY3AH80Hr/HnE1gieVqVK2q18k0/SbO2/cx7Kn+zKYRQrW6Iamsz5WDWFqoW2bdOcAGY50IF1Yk35K0VJmZvWGssdCeDZc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB3924
+X-MS-Exchange-CrossTenant-UserPrincipalName: GY2ZTrzuZnGfrbULfwPRBjVCB3Jp+T1L9o3uUJDb46BHRFFYoX+ujE0QoN/DmPwyWyRghNvBRixW0YtelsedTX1UfRbRBQcIKUBBAG27iIw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1700
 Content-Type: multipart/alternative;
- boundary="------------F51C97B700D87B76FD62E83C"
+ boundary="------------6EEDD56FF5C39D38437D5BAA"
 Content-Language: en-US
 
---------------F51C97B700D87B76FD62E83C
+--------------6EEDD56FF5C39D38437D5BAA
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 6/9/20 9:43 AM, Leon Anavi wrote:
-> Upgrade to release 4.9.1.
+> Upgrade to release 1.2.2. Change license checksum because of the
+> updated metadata stored in PKG-INFO. The license remains PSF.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...eautifulsoup4_4.8.2.bb => python3-beautifulsoup4_4.9.1.bb} | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-beautifulsoup4_4.8.2.bb => python3-beautifulsoup4_4.9.1.bb} (71%)
+>   .../recipes-devtools/python/python3-bitarray_1.2.1.bb | 11 -----------
+>   .../recipes-devtools/python/python3-bitarray_1.2.2.bb | 11 +++++++++++
+>   2 files changed, 11 insertions(+), 11 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
+>   create mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.2.bb b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb
-> similarity index 71%
-> rename from meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.2.bb
-> rename to meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb
-> index 63fbd0958..910de12f8 100644
-> --- a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
->   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1"
->   
-> -SRC_URI[md5sum] = "5dbdb56c009e4632bae7bed1b385804b"
-> -SRC_URI[sha256sum] = "05fd825eb01c290877657a56df4c6e4c311b3965bda790c613a3d6fb01a5462a"
-> +SRC_URI[md5sum] = "57502b5b34ccfd97b180260071f5799a"
-> +SRC_URI[sha256sum] = "73cc4d115b96f79c7d77c1c7f7a0a8d4c57860d1041df407dd1aae7f07a77fd7"
->   
->   inherit pypi setuptools3
->   
+> diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
+> deleted file mode 100644
+> index 2bf2937d1..000000000
+> --- a/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
+> +++ /dev/null
+> @@ -1,11 +0,0 @@
+> -SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
+> -HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+> -LICENSE = "PSF"
+> -LIC_FILES_CHKSUM = "file://PKG-INFO;md5=dc301a25ebe210dcc53b0a2d5a038eae"
+> -
+> -SRC_URI[md5sum] = "a46bf869f6adf34f5b0dc82b469793b7"
+> -SRC_URI[sha256sum] = "2ed675f460bb0d3d66fd8042a6f1f0d36cf213e52e72a745283ddb245da7b9cf"
+> -
+> -inherit setuptools3 pypi
+> -
+> -BBCLASSEXTEND = "native nativesdk"
+> diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
+> new file mode 100644
+> index 000000000..c495738c4
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
+> @@ -0,0 +1,11 @@
+> +SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
+> +HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+> +LICENSE = "PSF"
+> +LIC_FILES_CHKSUM = "file://PKG-INFO;md5=d331e1d54f5e78247388f5416c2ab928"
+> +
+> +SRC_URI[md5sum] = "81c48852b0bc538ac3ed25fae020360c"
+> +SRC_URI[sha256sum] = "27a69ffcee3b868abab3ce8b17c69e02b63e722d4d64ffd91d659f81e9984954"
+> +
+> +inherit setuptools3 pypi
+> +
+> +BBCLASSEXTEND = "native nativesdk"
 >
 > 
 
---------------F51C97B700D87B76FD62E83C
+--------------6EEDD56FF5C39D38437D5BAA
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -127,37 +147,56 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/9/20 9:43 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200609134311.13299-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 4.9.1.
+    <blockquote type="cite" cite="mid:20200609134311.13299-2-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.2.2. Change license checksum because of the
+updated metadata stored in PKG-INFO. The license remains PSF.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200609134311.13299-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200609134311.13299-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...eautifulsoup4_4.8.2.bb =&gt; python3-beautifulsoup4_4.9.1.bb} | 4 &#43;&#43;--
- 1 file changed, 2 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-beautifulsoup4_4.8.2.bb =&gt; python3-beautifulsoup4_4.9.1.bb} (71%)
+ .../recipes-devtools/python/python3-bitarray_1.2.1.bb | 11 -----------
+ .../recipes-devtools/python/python3-bitarray_1.2.2.bb | 11 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
+ 2 files changed, 11 insertions(&#43;), 11 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.2.bb b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.2.bb
-rename to meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb
-index 63fbd0958..910de12f8 100644
---- a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.2.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb
-@@ -3,8 &#43;3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://www.crummy.com/software/BeautifulSoup/bs4">&quot; https://www.crummy.com/software/BeautifulSoup/bs4&quot;</a>
- LICENSE = &quot;MIT&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1">&quot;file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1&quot;</a>
- 
--SRC_URI[md5sum] = &quot;5dbdb56c009e4632bae7bed1b385804b&quot;
--SRC_URI[sha256sum] = &quot;05fd825eb01c290877657a56df4c6e4c311b3965bda790c613a3d6fb01a5462a&quot;
-&#43;SRC_URI[md5sum] = &quot;57502b5b34ccfd97b180260071f5799a&quot;
-&#43;SRC_URI[sha256sum] = &quot;73cc4d115b96f79c7d77c1c7f7a0a8d4c57860d1041df407dd1aae7f07a77fd7&quot;
- 
- inherit pypi setuptools3
- 
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
+deleted file mode 100644
+index 2bf2937d1..000000000
+--- a/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
+&#43;&#43;&#43; /dev/null
+@@ -1,11 &#43;0,0 @@
+-SUMMARY = &quot;A high-level Python efficient arrays of booleans -- C extension&quot;
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/ilanschnell/bitarray">&quot;https://github.com/ilanschnell/bitarray&quot;</a>
+-LICENSE = &quot;PSF&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;md5=dc301a25ebe210dcc53b0a2d5a038eae">&quot;file://PKG-INFO;md5=dc301a25ebe210dcc53b0a2d5a038eae&quot;</a>
+-
+-SRC_URI[md5sum] = &quot;a46bf869f6adf34f5b0dc82b469793b7&quot;
+-SRC_URI[sha256sum] = &quot;2ed675f460bb0d3d66fd8042a6f1f0d36cf213e52e72a745283ddb245da7b9cf&quot;
+-
+-inherit setuptools3 pypi
+-
+-BBCLASSEXTEND = &quot;native nativesdk&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
+new file mode 100644
+index 000000000..c495738c4
+--- /dev/null
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
+@@ -0,0 &#43;1,11 @@
+&#43;SUMMARY = &quot;A high-level Python efficient arrays of booleans -- C extension&quot;
+&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/ilanschnell/bitarray">&quot;https://github.com/ilanschnell/bitarray&quot;</a>
+&#43;LICENSE = &quot;PSF&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;md5=d331e1d54f5e78247388f5416c2ab928">&quot;file://PKG-INFO;md5=d331e1d54f5e78247388f5416c2ab928&quot;</a>
+&#43;
+&#43;SRC_URI[md5sum] = &quot;81c48852b0bc538ac3ed25fae020360c&quot;
+&#43;SRC_URI[sha256sum] = &quot;27a69ffcee3b868abab3ce8b17c69e02b63e722d4d64ffd91d659f81e9984954&quot;
+&#43;
+&#43;inherit setuptools3 pypi
+&#43;
+&#43;BBCLASSEXTEND = &quot;native nativesdk&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -167,4 +206,4 @@ index 63fbd0958..910de12f8 100644
   </body>
 </html>
 
---------------F51C97B700D87B76FD62E83C--
+--------------6EEDD56FF5C39D38437D5BAA--
