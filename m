@@ -1,64 +1,69 @@
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
- by mx.groups.io with SMTP id smtpd.web11.5402.1591772709246071276
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.5539.1591773461040071109
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jun 2020 00:05:09 -0700
+ Wed, 10 Jun 2020 00:17:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@stusta.de header.s=default header.b=afpMx4oQ;
- spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=0vpq=7x=stusta.de=bunk@stusta.mhn.de)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49hdKb3fwWz45
-	for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jun 2020 09:05:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1591772707;
-	bh=dInfOUw2ammQsbk0F3w5J/ACvNDYIfPDRub2DuXQGJk=;
-	h=From:To:Subject:Date:From;
-	b=afpMx4oQ6UVF/B2ksXx01o+3pUz2imol3/r1iCuAca7ndvpvZF8eNt3WVuEX1+PRi
-	 vgXeHvrBVB0Ur01MFstdn+Ewa9H3ed1MBWL5iGGuFlyaCQ1iPN5TfUShO2K/o8pXEw
-	 HLQY8nkPCgAwMCWOlmTTw36Skg5XayKsPGtFo8KcejGt0OTinKV5W+9i7NNTdU1RDd
-	 Xc8gcmpjYQwNPAz9+mFaBxOZMyhVSnG+FqnwUqNs21s0LVQZo1fqGwEJZeoZ1OwJVv
-	 dftEKeh16DNp2YTJsoUigzp90aWVA0I6Bxi4P4LuzbIAsmdohdl3uSQAzOm4SoI6q8
-	 zAq+vk3Nqr5MuL9b8Zo9Yic+KLV2FkLKtkjzDSLnUoVVzh+cusV9qjbU3q/7Pu0ejU
-	 3R9ygQHMZEsUlk/knrGNo9uUwe+LmUwtFEjrRGkIwxQCWyZq5QCHzgayXxBOX2kLC4
-	 Bpw+h6gYdoTBrIViyLLgnWTc1mAhHgQvM8YrPJFTGef/boh6BCiwZH1kTKE1HQysmb
-	 xnU5S/c1ND5LLTvZztSebJH21imEGBS8GgVGGUni2SyvsxHNaSwoRHdw/tXOR5bYzg
-	 k4wvE4rTotewXHrjOspG0EDnpI8u968tLP8ySdwLFvSjmDQwIv0pqXZncHqaiU6mpB
-	 wlt1Mh5pwIn4DyYVxtJKlUoQ=
-From: "Adrian Bunk" <bunk@stusta.de>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=59624 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jiuzR-0005yt-JY; Wed, 10 Jun 2020 10:17:38 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][dunfell][PATCH] python3-docutils: Remove, moved to OE-core
-Date: Wed, 10 Jun 2020 10:04:58 +0300
-Message-Id: <20200610070458.10008-1-bunk@stusta.de>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2] python3-soupsieve: Upgrade 1.9.4 -> 2.0.1
+Date: Wed, 10 Jun 2020 10:17:30 +0300
+Message-Id: <20200610071730.20966-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-[ python3-docutils was already in the Yocto 3.1 release of OE-core ]
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Upgrade to release 2.0.1 which brings the following new features
+and bug fixes:
+
+NEW: SelectorSyntaxError is derived from Exception not SyntaxError.
+NEW: Remove deprecated comments and icomments from the API.
+NEW: Drop support for EOL Python versions.
+FIX: Corner case with splitting namespace and tag name.
+FIX: Prune dead code.
+FIX: Remove unused code.
+FIX: :placeholder-shown should not match if the element has
+content that overrides the placeholder.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python3-docutils_0.15.2.bb             | 15 ---------------
- 1 file changed, 15 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-docutils_0.15.2.bb
+ ...{python3-soupsieve_1.9.4.bb => python3-soupsieve_2.0.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-soupsieve_1.9.4.bb => python3-soupsieve_2.0.1.bb} (65%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-docutils_0.15.2.bb b/meta-python/recipes-devtools/python/python3-docutils_0.15.2.bb
-deleted file mode 100644
-index 321f55572..000000000
---- a/meta-python/recipes-devtools/python/python3-docutils_0.15.2.bb
-+++ /dev/null
-@@ -1,15 +0,0 @@
--SUMMARY = "Text processing system for documentation"
--HOMEPAGE = "http://docutils.sourceforge.net"
--SECTION = "devel/python"
--LICENSE = "PSF & BSD-2-Clause & GPLv3"
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=7a4646907ab9083c826280b19e103106"
--
--inherit pypi setuptools3
--
--PYPI_PACKAGE = "docutils"
--
--SRC_URI[md5sum] = "e26a308d8000b0bed7416a633217c676"
--SRC_URI[sha256sum] = "a2aeea129088da402665e92e0b25b04b073c04b2dce4ab65caaa38b7ce2e1a99"
--
--BBCLASSEXTEND = "native"
--
+diff --git a/meta-python/recipes-devtools/python/python3-soupsieve_1.9.4.bb b/meta-python/recipes-devtools/python/python3-soupsieve_2.0.1.bb
+similarity index 65%
+rename from meta-python/recipes-devtools/python/python3-soupsieve_1.9.4.bb
+rename to meta-python/recipes-devtools/python/python3-soupsieve_2.0.1.bb
+index df69e007f..aa087c920 100644
+--- a/meta-python/recipes-devtools/python/python3-soupsieve_1.9.4.bb
++++ b/meta-python/recipes-devtools/python/python3-soupsieve_2.0.1.bb
+@@ -4,8 +4,8 @@ HOMEPAGE = "https://github.com/facelessuser/soupsieve"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5a6fd3b0c24fc5a041a3d1bbb22c81b5"
+ 
+-SRC_URI[md5sum] = "43d8ea20c58494446aa65ba5cc6320fe"
+-SRC_URI[sha256sum] = "605f89ad5fdbfefe30cdc293303665eff2d188865d4dbe4eb510bba1edfbfce3"
++SRC_URI[md5sum] = "62a7481c7dbf6d8cc21e4e3a79c72034"
++SRC_URI[sha256sum] = "a59dc181727e95d25f781f0eb4fd1825ff45590ec8ff49eadfd7f1a537cc0232"
+ 
+ inherit pypi setuptools3
+ 
 -- 
 2.17.1
 
