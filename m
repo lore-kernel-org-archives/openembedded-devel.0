@@ -1,40 +1,39 @@
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
- by mx.groups.io with SMTP id smtpd.web12.6729.1591780224393190529
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+ by mx.groups.io with SMTP id smtpd.web10.6630.1591780230907242005
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jun 2020 02:10:25 -0700
+ Wed, 10 Jun 2020 02:10:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=eFahnIyv;
- spf=pass (domain: skidata.com, ip: 91.230.2.91, mailfrom: prvs=4237cd248=richard.leitner@skidata.com)
+ dkim=pass header.i=@skidata.com header.s=selector1 header.b=jth5l9WD;
+ spf=pass (domain: skidata.com, ip: 91.230.2.99, mailfrom: prvs=4237cd248=richard.leitner@skidata.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-  t=1591780224; x=1623316224;
+  t=1591780231; x=1623316231;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=LdhLw4oq3kOyMvCxs26g7NqV8CNAcaEWdq/vEB6cD0M=;
-  b=eFahnIyvoEuG/p6BZnMleISAEtwwIsuVy4529CbqpMtx/StIu+hCFz1F
-   w6kjpLwRcNuTyzcnR6cA9y60Uce3CzuuA++LWRzMZiuOvrZapKAKKXtX4
-   oS8/MoEMBo9A9uAB0JW56jqtuF9y9fdCPzxpO0AhakLSD5akK4WUcsglR
-   O8IpT0NCgSsajXZnW0OxjpwbaLmlCvKjPqj+MpH6jEHM+NUJb0WLWxoeu
-   8Sm+tDS8o//0mnWO9NhogoOpZYF9RwBCd+LmMyDNJ2RRYiS5krHw2E8fl
-   O1UQxgi8nDfxhlfxCkmr92bgiX1ab5d0hAUxNC2eLG/N9E6/b3dbRoZdE
-   A==;
-IronPort-SDR: dtmkiQlsKTlOPIsjwf/+sWsjFbmXFQwvum03Eds+zLg2mAihdjiB0ZHIBCSKR62k2ZBMgw1UtL
- 3/g0mrwEsSkOvWt9kdwvL7Qcr0eKUxfXNG3/9pr578gUqmrMUlOHkUx9cZiwX+IozTzqJHbMxL
- m2YPNHE9GsPY5kh8FSZIQuC+pN4WBhQhXafTPPxsFWDhQYKF/mmCu7YecH+uCzRNIN/c0Ca9ye
- 1XOuhcXhTCC1MToOX5Pin05/p8c7YypCL63QA3Bt0w8xJxC03p7n73bv2V1VUqEegowOug+o4i
- KAk=
+  bh=cBIie/r/+5tnMHggXAhoM8Gn4plSKrFke77UpvxLHFM=;
+  b=jth5l9WDW7EdMXdLpMEV+aG3gV4RN72wweHrg4OB+X8r1fXgYd0X658G
+   21W33U3Co4NbaJzpiJyInGZAfM6xfTRIWA1rGbWgn8ETHiDPnaLR0l7W8
+   8uXDyBVqgqJy1OBkE0+gT4gY9YNi86beaF0WXDTgiNYvicjM1IviP4eKE
+   ipzNsYsD52MJq/4bpXDZupChNyhwpFlkm8pIezDdRjVHlRfeji78K7yl3
+   j7zkNhNcJTAjo5IToAn9cgdCGnPzi4U3b1r5VZ6AbseGaagylQP0yZcSz
+   qp3zTSSHMh/uLKaWyP3Rahf+ErBUed50ogCtyGb5k+PwDM9ngaUnxSAfL
+   g==;
+IronPort-SDR: kfP0KWBF+J+0YpXLlND628JVY2ZqbC6hEHjeY/RZFiNiA6bipzK84GszCsxCYRT+mmUBrK4Wvl
+ Pwkh0oIKx8od4gtNU7NRXZEtpcSOzXg5MjMKEwhjvzDwSeL3NKCQdqOEjfPSFpiu1+67FvNnDR
+ l8qsWMrUNzUXdBsT2N5+C26EFduoJdrx5RXwf3g16PcbNorjDruSoF/IG5iX5EiODFIjuVYNgh
+ 2Az6A0b9S4XRJAmi42dIWTbsSD5GJfa2cJHG6VHhDTTHkJfNNPa6TixUyCkHxtmNS2mChF1vr9
+ 6+c=
 X-IronPort-AV: E=Sophos;i="5.73,495,1583190000"; 
-   d="scan'208";a="2594982"
-Date: Wed, 10 Jun 2020 11:10:20 +0200
+   d="scan'208";a="24817689"
+Date: Wed, 10 Jun 2020 11:10:27 +0200
 From: "Richard Leitner" <richard.leitner@skidata.com>
 To: Fabio Berton <fabio.berton@ossystems.com.br>
 CC: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-java][PATCH 2/2] openjdk-8-native: Build cups-native when using cups packageconfig
-Message-ID: <20200610091020.GA144887@pcleri>
+Subject: Re: [oe] [meta-java][PATCH 1/2] openjdk-8-native: Add libxtst-native to x11 packageconfig
+Message-ID: <20200610091027.GB144887@pcleri>
 References: <20200609145810.4058137-1-fabio.berton@ossystems.com.br>
- <20200609145810.4058137-2-fabio.berton@ossystems.com.br>
 MIME-Version: 1.0
-In-Reply-To: <20200609145810.4058137-2-fabio.berton@ossystems.com.br>
+In-Reply-To: <20200609145810.4058137-1-fabio.berton@ossystems.com.br>
 Return-Path: richard.leitner@skidata.com
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
@@ -56,23 +55,25 @@ If you have any questions, please let me know.
 
 regards;rl
 
-On Tue, Jun 09, 2020 at 11:58:10AM -0300, Fabio Berton wrote:
+On Tue, Jun 09, 2020 at 11:58:09AM -0300, Fabio Berton wrote:
+> libxtst-native it's needed to build openjdk-8-native.
+> 
 > Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 > ---
 >  recipes-core/openjdk/openjdk-8-native.inc | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
 > diff --git a/recipes-core/openjdk/openjdk-8-native.inc b/recipes-core/openjdk/openjdk-8-native.inc
-> index f6d617a..24b6f20 100644
+> index 321a43d..f6d617a 100644
 > --- a/recipes-core/openjdk/openjdk-8-native.inc
 > +++ b/recipes-core/openjdk/openjdk-8-native.inc
 > @@ -8,8 +8,8 @@ DEPENDS = "\
 >  "
 >  
 >  PACKAGECONFIG ??= "gif jpeg png zlib"
-> -PACKAGECONFIG[cups] = "--with-cups,,cups"
->  PACKAGECONFIG[x11] = "--with-x,,libx11-native xorgproto-native libxt-native libxext-native libxrender-native libxtst-native"
-> +PACKAGECONFIG[cups] = "--with-cups,,cups-native"
+> -PACKAGECONFIG[x11] = "--with-x,,libx11-native xorgproto-native libxt-native libxext-native libxrender-native"
+>  PACKAGECONFIG[cups] = "--with-cups,,cups"
+> +PACKAGECONFIG[x11] = "--with-x,,libx11-native xorgproto-native libxt-native libxext-native libxrender-native libxtst-native"
 >  PACKAGECONFIG[alsa] = "--with-alsa,,alsa-lib-native"
 >  PACKAGECONFIG[gif] = "--with-giflib=system,--with-giflib=bundled,giflib-native"
 >  PACKAGECONFIG[jce] = "--enable-unlimited-crypto,,"
