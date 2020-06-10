@@ -1,125 +1,74 @@
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
- by mx.groups.io with SMTP id smtpd.web12.6734.1591780235126378494
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.7580.1591784365833611190
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jun 2020 02:10:35 -0700
+ Wed, 10 Jun 2020 03:19:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=Wj1ZC0be;
- spf=pass (domain: skidata.com, ip: 91.230.2.91, mailfrom: prvs=4237cd248=richard.leitner@skidata.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-  t=1591780234; x=1623316234;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=ag2PjgOLYldpkCBdTieaRhDv9QSbfLh/9nCp4RyxgbU=;
-  b=Wj1ZC0bexgsnlBsTsGqwHaVXqtTKeZqM7LkRQ52hXkLJ7ghjklODOHtE
-   9KXbYwtfQdgu9nZk/RrmcDlFhKcpLN+zd37yOo04+2DmuvAdnHM5NR5py
-   6Pu+7witAeRFgPm/zuafIzFsmkzzMCp3IxlOeI5qNGQDUD/itsBO2PA0R
-   D9ARyuNxLlVgbazzm+5ydaQcC9XG/uydV7Ml+AYMByL4y00FUSCGgcwhU
-   kFlCikiUm+55OOQgLwXiYdzNLe6k+6lznFIN+tnR5VcLqAQzbqKE/iv/S
-   yc0JTBbhX783qDSm27x7FOMmzct2YadhjRJZnSoy4LEhEPjqTL/Y0Tt1r
-   w==;
-IronPort-SDR: iGaQzDedU4drDvb8XZ55DU/HwjgUYMefpDq83x9CwgWqtYbWnq03FN5OEejFZWdFP5EkzMs5TK
- 1OjSYMV2rW6BKVn9KxavVklPhd/mdJCikqq5EEZ5vkTeFl2gHBTq5Y4pf5X9ShQ1G57HNkIOH1
- l5YfgMf2x8doG2gvf85MuxVCJArk+kcDtV13jf1TlItYE/BZ9nQQIcyZBsGHyZpxK2JG3RKwMb
- TaxaD/pQvWqbR9/BGKsROiCG+OinjIvCi0e2ElyKBzLlE/MrEkSEqNNDPXnak18KfgJZiPX2fY
- Bng=
-X-IronPort-AV: E=Sophos;i="5.73,495,1583190000"; 
-   d="scan'208";a="2594983"
-Date: Wed, 10 Jun 2020 11:10:33 +0200
-From: "Richard Leitner" <richard.leitner@skidata.com>
-To: <oecore.mailinglist@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>, Robert Berger
-	<robert.berger@reliableembeddedsystems.com>
-Subject: Re: [meta-java][PATCH v3] WORKDIR and ARCHIVER_WORKDIR support
-Message-ID: <20200610091033.GC144887@pcleri>
-References: <20200509095010.25808-1-robert.berger@ReliableEmbeddedSystems.com>
-MIME-Version: 1.0
-In-Reply-To: <20200509095010.25808-1-robert.berger@ReliableEmbeddedSystems.com>
-Return-Path: richard.leitner@skidata.com
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
- sdex5srv.skidata.net (192.168.111.83)
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=35750 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jixpJ-0002HQ-JX; Wed, 10 Jun 2020 13:19:23 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2] python3-lxml: Upgrade 4.5.0 -> 4.5.1
+Date: Wed, 10 Jun 2020 13:19:14 +0300
+Message-Id: <20200610101914.14595-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Hi,
-thank you for your patch!
+Upgrade to release 4.5.1. With this release we no longer need to
+specify --with-xml2-config='pkg-config libxml-2.0' or equivalent
+for libxslt. Following the recent modifications of setupinfo.py
+to use pkg-config, we just need build without flags.
 
-This is a note to let you know that I've just added this patch to the
-master-next branch of the meta-java repository at
-	git://git.yoctoproject.org/meta-java
+Suggested-by: Stefan Behnel <stefan_ml@behnel.de>
+Suggested-by: Hugh McMaster <hugh.mcmaster@outlook.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ ...python3-lxml_4.5.0.bb => python3-lxml_4.5.1.bb} | 14 ++------------
+ 1 file changed, 2 insertions(+), 12 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-lxml_4.5.0.bb => python3-lxml_4.5.1.bb} (80%)
 
-As soon as it has gone through some more testing it will likely be
-merged to the master branch.
+diff --git a/meta-python/recipes-devtools/python/python3-lxml_4.5.0.bb b/meta-python/recipes-devtools/python/python3-lxml_4.5.1.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-lxml_4.5.0.bb
+rename to meta-python/recipes-devtools/python/python3-lxml_4.5.1.bb
+index e3cfa46d1..a4198b029 100644
+--- a/meta-python/recipes-devtools/python/python3-lxml_4.5.0.bb
++++ b/meta-python/recipes-devtools/python/python3-lxml_4.5.1.bb
+@@ -18,18 +18,8 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
+ 
+ DEPENDS += "libxml2 libxslt"
+ 
+-SRC_URI[md5sum] = "f088e452ed45b030b6f84269f1e84d11"
+-SRC_URI[sha256sum] = "8620ce80f50d023d414183bf90cc2576c2837b88e00bea3f33ad2630133bbb60"
+-
+-DISTUTILS_BUILD_ARGS += " \
+-                     --with-xslt-config='pkg-config libxslt' \
+-                     --with-xml2-config='pkg-config libxml-2.0' \
+-"
+-
+-DISTUTILS_INSTALL_ARGS += " \
+-                     --with-xslt-config='pkg-config libxslt' \
+-                     --with-xml2-config='pkg-config libxml-2.0' \
+-"
++SRC_URI[md5sum] = "4d3cca9c0018dd98f39e0ac54fcc3d14"
++SRC_URI[sha256sum] = "27ee0faf8077c7c1a589573b1450743011117f1aa1a91d5ae776bbc5ca6070f2"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.17.1
 
-If you have any questions, please let me know.
-
-regards;rl
-
-On Sat, May 09, 2020 at 12:50:10PM +0300, oecore.mailinglist@gmail.com wrote:
-> From: Robert Berger <robert.berger@ReliableEmbeddedSystems.com>
-> 
-> do_unpack_extract_submodules was called via postfuncs[do_unpack].
-> This breaks the build when the archiver.bbclass is used in a way
-> where do_unpack_and_patch is called by it. In this mode the archiver
-> class modifies WORKDIR, S, B,... and those modifications are lost 
-> via postfuncs.
-> 
-> In order to pick up WORKDIR, S, B,... (potentially modified by 
-> archiver.bbclass) do_patch_prepend is used instead of pre/postfuncs 
-> and calls do_unpack_extract_submodules now.
-> 
-> Without this patch the build will break when you add this to local.conf:
-> 
-> INHERIT += "archiver"
-> ARCHIVER_MODE[src] = "original"
-> ARCHIVER_MODE[diff] = "1"
-> ARCHIVER_MODE[dumpdata] = "1"
-> ARCHIVER_MODE[recipe] = "1"
-> COPYLEFT_LICENSE_INCLUDE = "GPL* LGPL*"
-> 
-> Signed-off-by: Robert Berger <robert.berger@ReliableEmbeddedSystems.com>
-> ---
->  recipes-core/openjdk/openjdk-8-common.inc | 19 +++++++++++++++++--
->  1 file changed, 17 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
-> index c78bb2a..04acc59 100644
-> --- a/recipes-core/openjdk/openjdk-8-common.inc
-> +++ b/recipes-core/openjdk/openjdk-8-common.inc
-> @@ -42,6 +42,21 @@ do_unpack_extract_submodules () {
->      tar xjf ${WORKDIR}/${NASHORN_FILE_LOCAL} --transform "s,-${NASHORN_CHANGESET},,g"
->  }
->  
-> +do_patch_prepend() {
-> +    # use do_patch_prepend syntax and not pre/postfuncs to
-> +    # call do_unpack_extract_submodules
-> +    # *) the archiver.bbclass modifies WORKDIR, S, B,...
-> +    #    and those modifications are lost otherwise,
-> +    #    which leads to build failures in do_unpack_and_patch -> do_patch
-> +    func = 'do_unpack_extract_submodules'
-> +    bb.build.exec_func(func, d)
-> +
-> +    # delete X11 wrappers if x11 is not part of PACKAGECONFIG
-> +    if bb.utils.contains('PACKAGECONFIG', 'x11', False, True, d):
-> +       func_delete = 'do_unpack_delete_X11_wrappers'
-> +       bb.build.exec_func(func_delete, d)
-> +}
-> +
->  do_unpack_delete_X11_wrappers() {
->      find ${S}/jdk/src/solaris/classes/sun/awt/X11 -maxdepth 1 -name '*.java' -delete
->  }
-> @@ -155,8 +170,8 @@ def jdk_configure_options(d):
->      options = package_config_option_cleanup(d)
->      return options[3]
->  
-> -do_unpack[postfuncs] += "do_unpack_extract_submodules"
-> -do_unpack[postfuncs] += "${@bb.utils.contains('PACKAGECONFIG', 'x11', '', 'do_unpack_delete_X11_wrappers', d)}"
-> +#do_unpack[postfuncs] += "do_unpack_extract_submodules"
-> +#do_unpack[postfuncs] += "${@bb.utils.contains('PACKAGECONFIG', 'x11', '', 'do_unpack_delete_X11_wrappers', d)}"
->  
->  export DEBUG_BINARIES = "true"
->  
-> -- 
-> 2.17.1
-> 
