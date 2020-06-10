@@ -1,17 +1,17 @@
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.73])
- by mx.groups.io with SMTP id smtpd.web10.12055.1591799400886760943
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.43])
+ by mx.groups.io with SMTP id smtpd.web12.12197.1591799412461268540
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jun 2020 07:30:01 -0700
+ Wed, 10 Jun 2020 07:30:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=osvKxOzT;
- spf=pass (domain: windriver.com, ip: 40.107.93.73, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=aMAtjjPP;
+ spf=pass (domain: windriver.com, ip: 40.107.243.43, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZWLW3IWa1FT3g7C9T4dXDo20yGlUDUVZmrUTGI22X80vYSpcEcSHnPbMHwyh+gQAPc5jXxJhyEAWNAtrMutM5QIoRfYEf1qSXKcZ5qxGvqtDwzF7ew3FR04zN4YmvD98Dg1vfCxNFRpoLjG91eYzHNBm1VediTO4679yoMnIhZR53+F2djO8Pi1yyrvAZHofnW5mhaCLHKZ+CyUMEq2+YOqAURE7AZxkjUmWqMesRcb+GZmodEaeeclsIMoS+0nR0Kvarub1bg+6bTTrDT5iwHPVj1A8zSciAIvLaUxzMmOfAXL0RUh1pE/XCpSK+SYmGD7hJvQMnvbp4p09rZUzDw==
+ b=CtYhYMbghUSOCSnGatAap1hEE6/yu/7euAFUrTIuUqhd8yrPlTFSvCuqz35kVGn7tAPGsn3EGgl1YOAgslQXUIJrU54n/pHbGf4pSJKj3zb/XtWs0VYuzpS6ZYpJ3ZIHSNYr7dvJVxRNB0k9va2lO4E54SfrqOIbG/if8+i8YjrFtml7cHkSRVmrLSGQrD++VOmKn+Fl3UEuZ6khnJ3G4f/vnr3IYzMrR4JcLDDNzXG+SFGz5qXLePAkckid168q38jfNPolU6l+3RsHd4NRHXBpejT5on0UxmTY7MfomSUmsI6wuDrM+80bckbD6wWzLoVEXFvjtAtJtNPXKJHDLg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=X1G1rS+wzTZ8ztWJKRYnqJoq5QzXljUOsh4vhkPzdQk=;
- b=TflUZprD2HbXs3GEVWSix7p+BzJs2i2pHmJfUUqiHhPOHWjoeh0JOxGHfqDP1NW7bFpw5dxduLQC3QeHvDXz0xu8glxmPj5rXfenhuHm+xypbxNbwEqBUfNSkkifP45YpwteD4OfRFgyfgqh6cKz+LsEPeXCNiof07gyfvvzejAL9l1oUJbvpvJKLYeCkwjgVX8Xsakj8aKNf29Q5qkvLslAlu4vr9JV0Th7nup5c6IGDqSBBXJ/HtW0R4r2yWz8v/VRJSoM6l2JRqVjPVLP5NyVPfiKcXXGsfBI+Kq4JTSK50mIQ8cyydap/MWPFlfFer9jISaWYR6TOz9lDFK4Kw==
+ bh=mhTlKLOuabK8dkWTnCcVYNa265HXtBrvMbwJiBJCf98=;
+ b=QwWoh5H2soeVNYB19D6AsUedjjaembrrmCMrXHNaemdvMs8+ujJTzwMestZ7Q9ePHEWKjrR6e3mI/WdvmqEUjiN4NYIykhDnxrGEDBzWSpRjbKeawVdIA8GnNDYf7rBfJ9sVj7Ot+HirTKe9L/Ngezw5QvISqllcN2l7Lvh2cShWkgwYFcTVjCkM5VwZ57QqyRFdyZLxI5QiB7OB5WIKTq0nFJ/B1r1x6OgwYroj7t9UFyIKlFI/oa+NfMsAz4ocxF12mLpXerQCrXJE4u17bkspf/4MnrrePtkBloQQKKx3dSU6frYG0aSgshTpo7pwpR1cmDsTFHugNiZkUZ47jw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,129 +19,180 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=X1G1rS+wzTZ8ztWJKRYnqJoq5QzXljUOsh4vhkPzdQk=;
- b=osvKxOzTGQ6Ffw4/cgzpWt90Doo69N3rl/Sg6uqG7CDtjUMqiTSPjQIrmN7v04oJzDLVpFpBi6XfwcHKJ4xaXgW3VurAj5hVch5q8BAAyIIFX+aZdYJtxeGrCZtZ+0DtH/eVMO/yX/z38gmrWXzR16up0tCljKRr1E3r5dNoeSE=
+ bh=mhTlKLOuabK8dkWTnCcVYNa265HXtBrvMbwJiBJCf98=;
+ b=aMAtjjPPL/07tz/YBjRUitSby4w5KcwnHJsVedGXDnhA6mddEiaDUDg/izKyTbWNewpvxEobkS2aItuB77aGGQFTMenYG28QmTD1gMOJTpPLClAaw0FjcHY0SLLVnys5IpRCFbfuVHozP6gQ5Zbd/454PRnNxw6qPZB9fAfpvQU=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB3953.namprd11.prod.outlook.com (2603:10b6:405:7f::24) with
+ by BN6PR11MB1393.namprd11.prod.outlook.com (2603:10b6:404:3c::12) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.19; Wed, 10 Jun
- 2020 14:29:59 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18; Wed, 10 Jun
+ 2020 14:30:10 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3088.021; Wed, 10 Jun 2020
- 14:29:59 +0000
-Subject: Re: [oe] [meta-python][PATCH 6/7] python3-progress: Consolidate in a single file
+ 14:30:10 +0000
+Subject: Re: [oe] [meta-python][PATCH 7/7] python3-prettytable: Consolidate in a single file
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200608121410.5814-1-leon.anavi@konsulko.com>
- <20200608121410.5814-6-leon.anavi@konsulko.com>
+ <20200608121410.5814-7-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <960ed76b-ddb2-48f8-1f65-7a767eedd9e1@windriver.com>
-Date: Wed, 10 Jun 2020 10:29:57 -0400
+Message-ID: <094b85d3-cfd3-6406-5a71-0507324824c7@windriver.com>
+Date: Wed, 10 Jun 2020 10:30:08 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200608121410.5814-6-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0069.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2d::8) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200608121410.5814-7-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0096.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2d::35) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0069.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::8) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.18 via Frontend Transport; Wed, 10 Jun 2020 14:29:59 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0096.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::35) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.19 via Frontend Transport; Wed, 10 Jun 2020 14:30:10 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 0c1deb48-a85f-42b0-5baf-08d80d4ac15a
-X-MS-TrafficTypeDiagnostic: BN6PR11MB3953:
+X-MS-Office365-Filtering-Correlation-Id: e465ce78-4efa-453c-7d79-08d80d4ac7bb
+X-MS-TrafficTypeDiagnostic: BN6PR11MB1393:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB3953CEA92EEFA407597ED8169F830@BN6PR11MB3953.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:207;
+	<BN6PR11MB13932B57092B73EF4A54D9749F830@BN6PR11MB1393.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:913;
 X-Forefront-PRVS: 0430FA5CB7
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	l6gIlbh/805WyrYsVfODXZBRRpbTZ0ht4KpWyxRz+fcyplaxM/JN8lPqeMcT5gh6sTA0JdT+ob7k8dBaOaOMlDj3cAEZ4nGHK/LDX0SLggW3V4OipWtxLOw7ryUdoS5LOOJHse7k2ezcansidqDsTMN97RQea9RbdnJX4zcdP5EqjhaLQcC/44WIwkgkA8PKSjVieToYmbJy33g2mBBIojYAI9uoy/aDBpU+Z9MssjaMuxxLmKv9LwjWGMF8O5jw7prx07S4dSyiu+D1JqqQ+u3hBwSVs4Se94ENIuBHh0JO2tI1WZjjORpSTUpKyT0kGi9VZB6FoiANcSNtu/gBfcQLJ2O0hp35J3P+zPVjT2RGmEL6ISmAIQMA1os0bKf8+ZQ97+Fm6PFyRQgP3q1ykJWhW4Jv0qivh5DX5SZ79JBp4przvIZiaCHEBztBDvkJDXDIpLNOd596p4miqyn+Mg==
+	tIbYngiqKPZQT1Ag+PjToofmN6cyXDyiXag/28wR4Bf9OZxUPNtnSW2LMIfW6ywa4E9KANqt80gwpzHqPW11uAM3prbtEuIN2P7v9lq+FhUcGIhL3m/gSld7f1uaOWQHLu/UZPuVr+4Gbiy0VzyzTbs3KX0juxaaO4cYfuPnlIVE98CHgX2tvMW0rMbOqvlpbpx6aM6exZ36v4ey8S4cYZnFzK7vtDLnjzZm8bblgds1LEkmbi65h8pWrj9QohG5AmvXSYHbOpQ84zykkyHNS/Fv16CvT+ijqBRdvh582GdbgYpHEiN/f8OAia8Qe9HOax/fL7GKpH4B0NXNPInP4rgPfhXc0XHoFYZz/FwQjUl6XQR0EwdUVfR/4t9l/xH1yw9D6OZxqH/4vJwUeyw52U3GXPXrl2evzS2QVGsxKH4AI2HSxUtdW0rNUQPTKOcj4foRyDSkpEz9RU6cZC6U5Krx3tcrsCjAIuIwJQEL2Ik=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(39850400004)(376002)(366004)(346002)(136003)(8676002)(8936002)(66556008)(66946007)(66476007)(5660300002)(31696002)(86362001)(31686004)(966005)(33964004)(36756003)(316002)(6486002)(166002)(478600001)(2906002)(2616005)(186003)(26005)(44832011)(83380400001)(53546011)(956004)(16576012)(16526019)(52116002)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(39850400004)(136003)(376002)(346002)(396003)(366004)(44832011)(2616005)(2906002)(478600001)(956004)(86362001)(31686004)(16576012)(316002)(31696002)(36756003)(8936002)(966005)(5660300002)(16526019)(66556008)(66946007)(19273905006)(66476007)(83380400001)(166002)(8676002)(186003)(33964004)(26005)(53546011)(6486002)(52116002)(43740500002)(563064011);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	U8BQrETrUXwFDILnyOP4eRjgSl45sbr9XdpoXfdk7s+ydU1Nt7HMdrg+y4TLY++/voAX5b53Unz/9t46W62fXWk9DJAfyQGfVyRh7D1gdtoupPgs2ppXjEWKE4Gj6+zcg40zdvoD5veByKGIqenl8UwGXjaX376BY6RyfmV/aOfjnzEiYIVrAgPGWj4G9VTIYKT6kmuYuqBken/jd1A3FJcmJ+5uKiLBu6q5W/YOYmWxzZkITw3khFDzxFliv0ZI2hEj8u5hgd9LApZI0nKMhVLNPKm3H78m7qiLFKh6Lfx/LNLDYtYAx23wAejGNMF146n8fzjM0XJ2PRWpouNwJxPXXMPyr7ehGuRHibE6OB1rbnsjqZ4h5s/9HVc5At49l0qXfkPGEeaZj7bTvrj5tV5QKSDARS6NZab+Rl6ls6e6R3jGVK/0NnkP0920ggGGSzTTZPMlbqcS4Gp8qpjX6YXN/R4jJt2JZS7H3yE0lEg=
+	vWQVg6Wa3l4d/eYgH/7CKSbGhgT52v6BbONlnk9tSm9qJTH9HIWBT4u3pCsXdvgzp0WxsSZWA1cI+ORdkaAn9sTH/XIbAVE8x3YBaKLZwoK4Q9tAgEav0Hs1VkiLAtSnFxSsEslkM4IyWssll/lLg9eCl2hSl2YdqkZYG3TNCLVDkUS/5U12NwFWp0FvB9dwSlRYHWEOx07d20Icj4V0srjv4MiB8qYzL8718vFcmvGAFj2GXD6iDrOsOglmitdQCml2kxUz9aSo9xSNb43GLIftgSGVTiXXIbgxrhGkpjLeaV7EZxGY+pP5pHngIJD+S4T50wDvxkEb1kkfwgYgpunkeej2C2cIKvm+L0C7Zmc3RYmnXAMhguitSg8QFQ0p40LAXWTjIVqDWSovp2YZUoMO6Cqe36LvihmqiK1pIU5ej0wJzEhJMKIRTKECl6v/572LjnoQuU6FCKsfRVVXWwTXe6Vigd/80p4yH7Ah3mA=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0c1deb48-a85f-42b0-5baf-08d80d4ac15a
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2020 14:29:59.8339
+X-MS-Exchange-CrossTenant-Network-Message-Id: e465ce78-4efa-453c-7d79-08d80d4ac7bb
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2020 14:30:10.4508
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: oulNc5f4I3glS9kxsG7wsZXmn6NalXtkgUYDwf2pGiCaaZKdrDKwhCmQuCl0IE/u1tj6s8zsTfUOmnoOz5D30q+7JBvjWER0fS1cbyvNyvE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB3953
+X-MS-Exchange-CrossTenant-UserPrincipalName: XHfwMBSqXULNXRk96baHXGJDwd/cCae3pCqTR/0qB2gdlg0R/L5AX5GS4FgU1xw9Yc2j2UUPdxlZ75RUE3l/TPJXDKayDUoItmtSWy0STow=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1393
 Content-Type: multipart/alternative;
- boundary="------------3550049E090047A5873542A9"
+ boundary="------------B63C87DC694C6D61144F7144"
 Content-Language: en-US
 
---------------3550049E090047A5873542A9
+--------------B63C87DC694C6D61144F7144
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 6/8/20 8:14 AM, Leon Anavi wrote:
-> Consolidate inc and bb files into a single bb file.
+> Consolidate inc and bb files into a single bb file. Inherit pypi.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-devtools/python/python-progress.inc  | 14 --------------
->   .../python/python3-progress_1.5.bb               | 16 +++++++++++++++-
->   2 files changed, 15 insertions(+), 15 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python-progress.inc
+>   .../python/python-prettytable.inc             | 43 -------------------
+>   .../python/python3-prettytable_0.7.2.bb       | 38 +++++++++++++++-
+>   2 files changed, 36 insertions(+), 45 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python-prettytable.inc
 >
-> diff --git a/meta-python/recipes-devtools/python/python-progress.inc b/meta-python/recipes-devtools/python/python-progress.inc
+> diff --git a/meta-python/recipes-devtools/python/python-prettytable.inc b/meta-python/recipes-devtools/python/python-prettytable.inc
 > deleted file mode 100644
-> index d59ba2cc5..000000000
-> --- a/meta-python/recipes-devtools/python/python-progress.inc
+> index c77a49191..000000000
+> --- a/meta-python/recipes-devtools/python/python-prettytable.inc
 > +++ /dev/null
-> @@ -1,14 +0,0 @@
-> -SUMMARY = "Easy progress reporting for Python"
-> -HOMEPAGE = "http://github.com/verigak/progress/"
-> -LICENSE = "ISC"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=aef5566ac4fede9815eccf124c281317"
+> @@ -1,43 +0,0 @@
+> -SUMMARY = "Python library for displaying tabular data in a ASCII table format"
+> -HOMEPAGE = "http://code.google.com/p/prettytable"
+> -LICENSE = "BSD-3-Clause"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=3e73500ffa52de5071cff65990055282"
 > -
-> -SRC_URI[md5sum] = "408df0e3db0ad4b74f19f6beec814ae4"
-> -SRC_URI[sha256sum] = "69ecedd1d1bbe71bf6313d88d1e6c4d2957b7f1d4f71312c211257f7dae64372"
+> -SRC_URI[md5sum] = "0c1361104caff8b09f220748f9d69899"
+> -SRC_URI[sha256sum] = "a53da3b43d7a5c229b5e3ca2892ef982c46b7923b51e98f0db49956531211c4f"
 > -
-> -RDEPENDS_${PN}_class-target += " \
-> -    ${PYTHON_PN}-datetime \
-> -    ${PYTHON_PN}-math \
-> -"
+> -SRCNAME = "prettytable"
+> -
+> -SRC_URI = "https://pypi.python.org/packages/source/P/PrettyTable/${SRCNAME}-${PV}.zip"
+> -
+> -S = "${WORKDIR}/${SRCNAME}-${PV}"
+> -
+> -do_install_append() {
+> -    perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
+> -    for f in $perm_files; do
+> -        chmod 644 "${f}"
+> -    done
+> -}
+> -
+> -UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/PrettyTable/"
+> -UPSTREAM_CHECK_REGEX = "/PrettyTable/(?P<pver>(\d+[\.\-_]*)+)"
 > -
 > -BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-progress_1.5.bb b/meta-python/recipes-devtools/python/python3-progress_1.5.bb
-> index 45e264213..1f299dbed 100644
-> --- a/meta-python/recipes-devtools/python/python3-progress_1.5.bb
-> +++ b/meta-python/recipes-devtools/python/python3-progress_1.5.bb
-> @@ -1,2 +1,16 @@
-> +SUMMARY = "Easy progress reporting for Python"
-> +HOMEPAGE = "http://github.com/verigak/progress/"
-> +LICENSE = "ISC"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=aef5566ac4fede9815eccf124c281317"
+> -inherit ptest
+> -
+> -SRC_URI += " \
+> -	file://run-ptest \
+> -"
+> -
+> -RDEPENDS_${PN} += " \
+> -	${PYTHON_PN}-math \
+> -	${PYTHON_PN}-html \
+> -"
+> -
+> -RDEPENDS_${PN}-ptest += " \
+> -	${PYTHON_PN}-pytest \
+> -"
+> -
+> -do_install_ptest() {
+> -	cp -f ${S}/prettytable_test.py ${D}${PTEST_PATH}/
+> -}
+> diff --git a/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb b/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
+> index 5445f1019..18f339061 100644
+> --- a/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
+> @@ -1,3 +1,37 @@
+> -inherit setuptools3
+> -require python-prettytable.inc
+> +SUMMARY = "Python library for displaying tabular data in a ASCII table format"
+> +HOMEPAGE = "http://code.google.com/p/prettytable"
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=3e73500ffa52de5071cff65990055282"
+>   
+> +SRC_URI[md5sum] = "a6b80afeef286ce66733d54a0296b13b"
+> +SRC_URI[sha256sum] = "2d5460dc9db74a32bcc8f9f67de68b2c4f4d2f01fa3bd518764c69156d9cacd9"
 > +
-> +SRC_URI[md5sum] = "408df0e3db0ad4b74f19f6beec814ae4"
-> +SRC_URI[sha256sum] = "69ecedd1d1bbe71bf6313d88d1e6c4d2957b7f1d4f71312c211257f7dae64372"
+> +do_install_append() {
+> +    perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
+> +    for f in $perm_files; do
+> +        chmod 644 "${f}"
+> +    done
+> +}
 > +
->   inherit pypi setuptools3
-> -require python-progress.inc
-> +
-> +RDEPENDS_${PN}_class-target += " \
-> +    ${PYTHON_PN}-datetime \
-> +    ${PYTHON_PN}-math \
-> +"
+> +UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/PrettyTable/"
+> +UPSTREAM_CHECK_REGEX = "/PrettyTable/(?P<pver>(\d+[\.\-_]*)+)"
 > +
 > +BBCLASSEXTEND = "native nativesdk"
+> +inherit pypi ptest setuptools3
+> +
+> +SRC_URI += " \
+> +	file://run-ptest \
+> +"
+> +
+> +RDEPENDS_${PN} += " \
+> +	${PYTHON_PN}-math \
+> +	${PYTHON_PN}-html \
+> +"
+> +
+> +RDEPENDS_${PN}-ptest += " \
+> +	${PYTHON_PN}-pytest \
+> +"
+> +
+> +do_install_ptest() {
+> +	cp -f ${S}/prettytable_test.py ${D}${PTEST_PATH}/
+> +}
 >
 > 
 
---------------3550049E090047A5873542A9
+--------------B63C87DC694C6D61144F7144
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -153,62 +204,113 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/8/20 8:14 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200608121410.5814-6-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Consolidate inc and bb files into a single bb file.
+    <blockquote type="cite" cite="mid:20200608121410.5814-7-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Consolidate inc and bb files into a single bb file. Inherit pypi.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200608121410.5814-6-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200608121410.5814-7-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python-progress.inc  | 14 --------------
- .../python/python3-progress_1.5.bb               | 16 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
- 2 files changed, 15 insertions(&#43;), 15 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-progress.inc
+ .../python/python-prettytable.inc             | 43 -------------------
+ .../python/python3-prettytable_0.7.2.bb       | 38 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
+ 2 files changed, 36 insertions(&#43;), 45 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-prettytable.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-progress.inc b/meta-python/recipes-devtools/python/python-progress.inc
+diff --git a/meta-python/recipes-devtools/python/python-prettytable.inc b/meta-python/recipes-devtools/python/python-prettytable.inc
 deleted file mode 100644
-index d59ba2cc5..000000000
---- a/meta-python/recipes-devtools/python/python-progress.inc
+index c77a49191..000000000
+--- a/meta-python/recipes-devtools/python/python-prettytable.inc
 &#43;&#43;&#43; /dev/null
-@@ -1,14 &#43;0,0 @@
--SUMMARY = &quot;Easy progress reporting for Python&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://github.com/verigak/progress/">&quot;http://github.com/verigak/progress/&quot;</a>
--LICENSE = &quot;ISC&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=aef5566ac4fede9815eccf124c281317">&quot;file://LICENSE;md5=aef5566ac4fede9815eccf124c281317&quot;</a>
+@@ -1,43 &#43;0,0 @@
+-SUMMARY = &quot;Python library for displaying tabular data in a ASCII table format&quot;
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://code.google.com/p/prettytable">&quot;http://code.google.com/p/prettytable&quot;</a>
+-LICENSE = &quot;BSD-3-Clause&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=3e73500ffa52de5071cff65990055282">&quot;file://COPYING;md5=3e73500ffa52de5071cff65990055282&quot;</a>
 -
--SRC_URI[md5sum] = &quot;408df0e3db0ad4b74f19f6beec814ae4&quot;
--SRC_URI[sha256sum] = &quot;69ecedd1d1bbe71bf6313d88d1e6c4d2957b7f1d4f71312c211257f7dae64372&quot;
+-SRC_URI[md5sum] = &quot;0c1361104caff8b09f220748f9d69899&quot;
+-SRC_URI[sha256sum] = &quot;a53da3b43d7a5c229b5e3ca2892ef982c46b7923b51e98f0db49956531211c4f&quot;
 -
--RDEPENDS_${PN}_class-target &#43;= &quot; \
--    ${PYTHON_PN}-datetime \
--    ${PYTHON_PN}-math \
--&quot;
+-SRCNAME = &quot;prettytable&quot;
+-
+-SRC_URI = <a class="moz-txt-link-rfc2396E" href="https://pypi.python.org/packages/source/P/PrettyTable/${SRCNAME}-${PV}.zip">&quot;https://pypi.python.org/packages/source/P/PrettyTable/${SRCNAME}-${PV}.zip&quot;</a>
+-
+-S = &quot;${WORKDIR}/${SRCNAME}-${PV}&quot;
+-
+-do_install_append() {
+-    perm_files=`find &quot;${D}${PYTHON_SITEPACKAGES_DIR}/&quot; -name &quot;*.txt&quot; -o -name &quot;PKG-INFO&quot;`
+-    for f in $perm_files; do
+-        chmod 644 &quot;${f}&quot;
+-    done
+-}
+-
+-UPSTREAM_CHECK_URI = <a class="moz-txt-link-rfc2396E" href="https://pypi.python.org/pypi/PrettyTable/">&quot;https://pypi.python.org/pypi/PrettyTable/&quot;</a>
+-UPSTREAM_CHECK_REGEX = &quot;/PrettyTable/(?P&lt;pver&gt;(\d&#43;[\.\-_]*)&#43;)&quot;
 -
 -BBCLASSEXTEND = &quot;native nativesdk&quot;
-diff --git a/meta-python/recipes-devtools/python/python3-progress_1.5.bb b/meta-python/recipes-devtools/python/python3-progress_1.5.bb
-index 45e264213..1f299dbed 100644
---- a/meta-python/recipes-devtools/python/python3-progress_1.5.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-progress_1.5.bb
-@@ -1,2 &#43;1,16 @@
-&#43;SUMMARY = &quot;Easy progress reporting for Python&quot;
-&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://github.com/verigak/progress/">&quot;http://github.com/verigak/progress/&quot;</a>
-&#43;LICENSE = &quot;ISC&quot;
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=aef5566ac4fede9815eccf124c281317">&quot;file://LICENSE;md5=aef5566ac4fede9815eccf124c281317&quot;</a>
+-inherit ptest
+-
+-SRC_URI &#43;= &quot; \
+-	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
+-&quot;
+-
+-RDEPENDS_${PN} &#43;= &quot; \
+-	${PYTHON_PN}-math \
+-	${PYTHON_PN}-html \
+-&quot;
+-
+-RDEPENDS_${PN}-ptest &#43;= &quot; \
+-	${PYTHON_PN}-pytest \
+-&quot;
+-
+-do_install_ptest() {
+-	cp -f ${S}/prettytable_test.py ${D}${PTEST_PATH}/
+-}
+diff --git a/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb b/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
+index 5445f1019..18f339061 100644
+--- a/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
+@@ -1,3 &#43;1,37 @@
+-inherit setuptools3
+-require python-prettytable.inc
+&#43;SUMMARY = &quot;Python library for displaying tabular data in a ASCII table format&quot;
+&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://code.google.com/p/prettytable">&quot;http://code.google.com/p/prettytable&quot;</a>
+&#43;LICENSE = &quot;BSD-3-Clause&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=3e73500ffa52de5071cff65990055282">&quot;file://COPYING;md5=3e73500ffa52de5071cff65990055282&quot;</a>
+ 
+&#43;SRC_URI[md5sum] = &quot;a6b80afeef286ce66733d54a0296b13b&quot;
+&#43;SRC_URI[sha256sum] = &quot;2d5460dc9db74a32bcc8f9f67de68b2c4f4d2f01fa3bd518764c69156d9cacd9&quot;
 &#43;
-&#43;SRC_URI[md5sum] = &quot;408df0e3db0ad4b74f19f6beec814ae4&quot;
-&#43;SRC_URI[sha256sum] = &quot;69ecedd1d1bbe71bf6313d88d1e6c4d2957b7f1d4f71312c211257f7dae64372&quot;
+&#43;do_install_append() {
+&#43;    perm_files=`find &quot;${D}${PYTHON_SITEPACKAGES_DIR}/&quot; -name &quot;*.txt&quot; -o -name &quot;PKG-INFO&quot;`
+&#43;    for f in $perm_files; do
+&#43;        chmod 644 &quot;${f}&quot;
+&#43;    done
+&#43;}
 &#43;
- inherit pypi setuptools3
--require python-progress.inc
-&#43;
-&#43;RDEPENDS_${PN}_class-target &#43;= &quot; \
-&#43;    ${PYTHON_PN}-datetime \
-&#43;    ${PYTHON_PN}-math \
-&#43;&quot;
+&#43;UPSTREAM_CHECK_URI = <a class="moz-txt-link-rfc2396E" href="https://pypi.python.org/pypi/PrettyTable/">&quot;https://pypi.python.org/pypi/PrettyTable/&quot;</a>
+&#43;UPSTREAM_CHECK_REGEX = &quot;/PrettyTable/(?P&lt;pver&gt;(\d&#43;[\.\-_]*)&#43;)&quot;
 &#43;
 &#43;BBCLASSEXTEND = &quot;native nativesdk&quot;
+&#43;inherit pypi ptest setuptools3
+&#43;
+&#43;SRC_URI &#43;= &quot; \
+&#43;	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
+&#43;&quot;
+&#43;
+&#43;RDEPENDS_${PN} &#43;= &quot; \
+&#43;	${PYTHON_PN}-math \
+&#43;	${PYTHON_PN}-html \
+&#43;&quot;
+&#43;
+&#43;RDEPENDS_${PN}-ptest &#43;= &quot; \
+&#43;	${PYTHON_PN}-pytest \
+&#43;&quot;
+&#43;
+&#43;do_install_ptest() {
+&#43;	cp -f ${S}/prettytable_test.py ${D}${PTEST_PATH}/
+&#43;}
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -218,4 +320,4 @@ index 45e264213..1f299dbed 100644
   </body>
 </html>
 
---------------3550049E090047A5873542A9--
+--------------B63C87DC694C6D61144F7144--
