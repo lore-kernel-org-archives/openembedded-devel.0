@@ -1,17 +1,17 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.67])
- by mx.groups.io with SMTP id smtpd.web10.3048.1591818826311348248
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.84])
+ by mx.groups.io with SMTP id smtpd.web12.3107.1591818839773846987
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jun 2020 12:53:46 -0700
+ Wed, 10 Jun 2020 12:53:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=hS8Ya/54;
- spf=pass (domain: windriver.com, ip: 40.107.237.67, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=bJtmXu8K;
+ spf=pass (domain: windriver.com, ip: 40.107.237.84, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NwRzHp8mJWsRdJjyVL3tk+yTkDEw63UebzRovUscdAm8ey6xunhZShuKRr8zH78ocQM/v9o6604BirjYj4TbvT0cK+AvD3yJGRyVl19d+J06XNW+m3/med9nUsNofhdTM7d2HPorXK1ZduJJiP6GOpvu2hIM42Sx4E2C5TqW+k5lgdKzDtWmmRetiCR/q5Lpm1Tw6oK2SNXG4LevbvWWIgec9DEU9Uc3onbcjrhTUGk1JLT1NAN++0VvFpX3TXsUUFmKxoMx1oBA8+8XLuBLuTToQ76VToR1Gr6mayG1w7K2MHco+1IEJZFEJDD2zyMq2bC8sZLq/zmVw8v6oKTY6Q==
+ b=gw2FmA0o0iOm9+6trblceO3m9pMyiQHsgJEHg9BYeVhUKnb0wSjTzI10adIVhl8AhXW/TDKOG4rOAorEVnSKTkmgz7coKBdvUxW8Xwj7rg4FpZEftI09L/sXJ11fBBxVZgjkRAYcDiGsmExuUntaBXv0VlwaCOU1i/FKryRdc9rl/duVuQylrO+IAkYG1yfYibubCotuyQXVc2PXBx/505Socv+mH/RdQHwEQmRoLfd3T1IpAKzycHa56iDmmi255qOzuoJdRmMT0tOWpVGWeEmcGiODZM8qs94weeSAdszLxxY9FPkZnBfxH0vxlM4hmMt/xsMflhk8vouZJNAt9Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Rfq5UQfJuoff83ejVZJ044/xnn7gpxQ+sh5YCVmyFDg=;
- b=B5F7F0hVG7/LpBJ5aeduLoyY77f1/7HCuVuYDTNI/CzKnf6MsSG1O++jrRzDYxfYv+6C+B5WzOvWxnZVdp5E4j5lee4YooY0saOC4SG7xS1xDCIwYH9qwTyJ9znrBe7pp1+PamY7VvgB5FIrqlTbrYPFFH4HlxEFCssxmq434p4p+5xPPZLGtw0sh4RolqXSTZvNLnWjSpVaB2XNrunS0qjZbCmGZjnbeV1d9SDyZ4YvZFkpxz6ZoTHmkvyQcBibHtdJeGwbznOrZ5hRQj+ipXoCAtNGrOXBevuVly8IgVSO68LgQ5LL/KCX9bSpueZtX8bgk5XNBBhYHvBDRo8xqA==
+ bh=HMssuo5F0IRFFYaXDK7vkmJ37Dcjj2V1Gf+ekTX64LI=;
+ b=OvhIosYmIaTaZfW9i+KFsvU88+g9umVcIXicV7MLAxrBoJrri52L33IIa8gShJw2HCnKm3evlOo/fDWDcwPnmocHVfYtdmvLk9Qw6KGcK6PCYAahwdh2qi52MuNJwX9DHZhyLubjEft4uClQTBEdH4MjNmJE4GwyON4HAtflK14RXAzTAp5jYEiMMkkPVsa8Ckkyx8bYpMT6rJK2HI5vHYlD/3t0xWiUbMXGdZf7scoSfkC2Lru9xvGtYxbDZ+gNSYru0u3iCl/PkSogr6YMNZQFc4mBLDuQIJh3iZu2vnBUuGcvJRypZSekVRIPDF+N/mPjGdMC1H8I4+gXfJuJ9Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Rfq5UQfJuoff83ejVZJ044/xnn7gpxQ+sh5YCVmyFDg=;
- b=hS8Ya/54dZL3ojNkzura43tbwqCNmbGdVTjsV/iZyDrAkoiTpJ9ILgTdMUX6sg0wH1/utBHO1JmRBgqxTxa4emOTiPRzykLtuYJRGR+Mg1DawfpAHKC9iT/MgkUL4242j0pgoH/CoQW7lJizkYWOK9+wIMp7+CjGTvPRaeMQnJk=
+ bh=HMssuo5F0IRFFYaXDK7vkmJ37Dcjj2V1Gf+ekTX64LI=;
+ b=bJtmXu8KbMEPhMloiXSoGlt1gfxY+mLZ5Kl/vNVmNjMCS+C5vYtEyP+HahqVO4WAY0+LssUplP8+tHBwsHrlEBQ3GfoddEcMIeapnSP47aPfZ+QvIbnFW0WyCFvfFdEeRAILOfGUaFiwsrYu/Q/A4I2EzgU4zUFmAjo1fvoaKIs=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,114 +28,95 @@ Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
  by BN6PR11MB1700.namprd11.prod.outlook.com (2603:10b6:404:47::20) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.22; Wed, 10 Jun
- 2020 19:53:45 +0000
+ 2020 19:53:58 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3088.021; Wed, 10 Jun 2020
- 19:53:44 +0000
-Subject: Re: [oe] [meta-python][PATCH 2/3] python3-bitarray: Upgrade 1.2.1 -> 1.2.2
+ 19:53:58 +0000
+Subject: Re: [oe] [meta-python][PATCH 3/3] python3-soupsieve: Upgrade 1.9.4 -> 2.0.1
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200609134311.13299-1-leon.anavi@konsulko.com>
- <20200609134311.13299-2-leon.anavi@konsulko.com>
+ <20200609134311.13299-3-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <e79e260f-17e9-a64b-26ca-d17b113c1848@windriver.com>
-Date: Wed, 10 Jun 2020 15:53:38 -0400
+Message-ID: <0a46c9ea-0a18-dbc9-0117-5024650db27f@windriver.com>
+Date: Wed, 10 Jun 2020 15:53:56 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200609134311.13299-2-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0115.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2c::24) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200609134311.13299-3-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0109.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2c::18) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0115.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2c::24) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.18 via Frontend Transport; Wed, 10 Jun 2020 19:53:40 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0109.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2c::18) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.18 via Frontend Transport; Wed, 10 Jun 2020 19:53:58 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: f2d8e4b7-ab53-4703-8370-08d80d77f91b
+X-MS-Office365-Filtering-Correlation-Id: 8dacd88c-a996-4ac4-d6e8-08d80d7803b9
 X-MS-TrafficTypeDiagnostic: BN6PR11MB1700:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB17007B54E885D5351D5DFCB59F830@BN6PR11MB1700.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2582;
+	<BN6PR11MB170073FBBEF594B33CF765DF9F830@BN6PR11MB1700.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:173;
 X-Forefront-PRVS: 0430FA5CB7
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	48lKwKBR+9c+d1SF9h1gum/wEYLx01P9Iqo/eitr36r/rRHwFZSvbHDR/NQV5qtWVq9H55SC8qjQyxWx2/2KgmOfPxeqPvVKRKUQTXgeUyg5mIpZG3PRqtaqIUgkQSM6ZK1WWDvniW9EfDWNe2jOCmm4cHn7j+jtMnbskaBye81VvVICtHrCmA5qkGXwcMWb45KVxWT6rHGVdoOHhEBHLnaREenkdZGOd1rO1/HOY+zjg3yljfmB7PkN5BTen+ORz0tfm2E/+99l9sNkCnVpidTcWl4+6o9OB5dxLWKjtpEHKOumVpJ4ustDVc9l1hm3ZgZSs0Vhnt5Xl7NbetTi2/Sh7uHQPUtSEEyW7n0s/2M8rDQeogHF2kmJs6QCWP+T3W2TmH8PxIQ7xB4FGLjXc7+DiNmALyurOKwxv6lnbq0lXcx0wJst38US5ZAcCd+lNR//ppyMNxJOQzXQxF3q4A==
+	MXbIz//uB2QzeHQr1IWqvcr63r5MiSpOfUXyMbYuXhb+0KIsLiYvt0hSEpwEL9cEgtOHxWpadQuytzNOt11buL4hZvIE73IFkNdrqHlpo2NG6s2Pe3lznyaxi9H1QW7A9KF3VEPVNFvgVHJuP9qw3nvMO21oe2NS/vh4ru91JbSJZRTypXB1jtlWdXs1hqL+rD3dBBdVW9yqGozHrf9liElAUuz4ROygiKJoseqx659i36INTJstQywlxOGecMyDRU9yNvxvuULYyDQyh8EIi/y+6eYgflGXLhqyIVWWqimaWhN4/wtdSCrESTpz+xNJdv0o4sHsGjxZtoo+l5qHPcUD7Us7B58SH0+E7jfwWhkbAJiQ0NNrJT1yMlQDhVF07UF2VoVRYIuZfCialKHUC/Z/fKb63vzQPHXWnLVsmdyK2GATcEBCFDPYJeHLGwCql7VP/Lge2Y5aH7q6viNJlA==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(366004)(396003)(376002)(136003)(39850400004)(66556008)(52116002)(66946007)(2906002)(33964004)(66476007)(31696002)(31686004)(53546011)(86362001)(186003)(956004)(966005)(16576012)(83380400001)(8936002)(2616005)(6486002)(8676002)(36756003)(5660300002)(26005)(16526019)(44832011)(166002)(316002)(478600001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	kR38s1ZVrJ0YT4yVEjvaDezPxTGQPmBdddYUcXI3uO/HYZjGopELz3v3/K7dbpI0OcoS80UnMEm6eld1WNYkJNflVQXOGBb+CL75JL4cxFJ/TC+5eX09542LaI3FwaluiRQsvSF8leVKkJ7Pf2WggH76+li2FHmEn1YJsf29enR8yCx1RNONK71FDSoax5Z0jEW4ZnPP09BqNDAuhSMW7A9zt09/N6hiou4XIdy90ZnhD5aNsvSHWan0jNZYqJMJcNIs6+a+jj1PDgP8u6F7Y2ZR1ghX6ENv0M5KinEBVxhcOglWe+YwX3IM15HgCuePaj3P3uFkTuqNtPmo2W88puF0GhCwAEPGNgmH5ExsWvLcqEu4aOT9C38RTTrnuiO9fWPJSKDzQUjmF9eYfZL+W+yLivvYjE1SgVsS8ID19AnN7awG2s1ljezGoDqc0kTMnFqsLbuPLu44a7FXyc9Hg+p0C6OHDL/G1FfQuOj57ndm3+BcOwXz+d5VVkDlQXg5
+	k8Ux5ZoYBJGS2/ZC9h7w6mk2C5aq3ngXxt80kSBDSLL6McDXMvP63ChzAvqVvaGxLIsyUIL0zdBpOOUpSMbMfUk5B94C2SfIjdueQ7XIbAwY2sBg6lfse8+GYTsBolypbUZGGbLitZhQUCJ2Un2tolbpy/jvQu+D2kV4yBTQDLgvaY0ytA0A5WdWFbtdRPnyEB/Ai67vfetQaMkKKUzT6z6ho33yC6nB58WTi4nIWuzESWJC6TPC07YPdwY27MCCRGUfZqCgA9jZUg9E0dOyD45pE8G/lN5/P5emnortR5xUh+C3o7ikzXdHxDe/d98XjW/ug8JxRiB3+Hu2xMARZT+YhRdJAiZCbfugaUPnPy8eyuwrfdtJtUPIOsAVS8SMMQS4O9zdEwjmq8cz8fm1X9RCsJ7kauU0a2mAm6yFynvpsC93K1+eMO95ex0u8FmDymC2WIFhfIQkcKvnS3QiN86zRRWBkeMMC2Rsyoqj+S0PbVioLN7Z8yA0eahjftdW
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f2d8e4b7-ab53-4703-8370-08d80d77f91b
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2020 19:53:43.0309
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8dacd88c-a996-4ac4-d6e8-08d80d7803b9
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2020 19:53:58.3712
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GY2ZTrzuZnGfrbULfwPRBjVCB3Jp+T1L9o3uUJDb46BHRFFYoX+ujE0QoN/DmPwyWyRghNvBRixW0YtelsedTX1UfRbRBQcIKUBBAG27iIw=
+X-MS-Exchange-CrossTenant-UserPrincipalName: /PAqFYYBsPA+JEOKxGFDIXvlbXuUibJND57fOZwUlEMh1DKMPLzDXM7ML8aXViMtAdLeAN1LqTqhN2ChLvtgPkU/jbAkA2i/8kwUMLUiweI=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1700
 Content-Type: multipart/alternative;
- boundary="------------6EEDD56FF5C39D38437D5BAA"
+ boundary="------------80840E6A0ADE22C4DA993A97"
 Content-Language: en-US
 
---------------6EEDD56FF5C39D38437D5BAA
+--------------80840E6A0ADE22C4DA993A97
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 6/9/20 9:43 AM, Leon Anavi wrote:
-> Upgrade to release 1.2.2. Change license checksum because of the
-> updated metadata stored in PKG-INFO. The license remains PSF.
+> Upgrade to release 2.0.1.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-devtools/python/python3-bitarray_1.2.1.bb | 11 -----------
->   .../recipes-devtools/python/python3-bitarray_1.2.2.bb | 11 +++++++++++
->   2 files changed, 11 insertions(+), 11 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
->   create mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
+>   ...{python3-soupsieve_1.9.4.bb => python3-soupsieve_2.0.1.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-soupsieve_1.9.4.bb => python3-soupsieve_2.0.1.bb} (65%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
-> deleted file mode 100644
-> index 2bf2937d1..000000000
-> --- a/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
-> +++ /dev/null
-> @@ -1,11 +0,0 @@
-> -SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
-> -HOMEPAGE = "https://github.com/ilanschnell/bitarray"
-> -LICENSE = "PSF"
-> -LIC_FILES_CHKSUM = "file://PKG-INFO;md5=dc301a25ebe210dcc53b0a2d5a038eae"
-> -
-> -SRC_URI[md5sum] = "a46bf869f6adf34f5b0dc82b469793b7"
-> -SRC_URI[sha256sum] = "2ed675f460bb0d3d66fd8042a6f1f0d36cf213e52e72a745283ddb245da7b9cf"
-> -
-> -inherit setuptools3 pypi
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
-> new file mode 100644
-> index 000000000..c495738c4
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
-> @@ -0,0 +1,11 @@
-> +SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
-> +HOMEPAGE = "https://github.com/ilanschnell/bitarray"
-> +LICENSE = "PSF"
-> +LIC_FILES_CHKSUM = "file://PKG-INFO;md5=d331e1d54f5e78247388f5416c2ab928"
-> +
-> +SRC_URI[md5sum] = "81c48852b0bc538ac3ed25fae020360c"
-> +SRC_URI[sha256sum] = "27a69ffcee3b868abab3ce8b17c69e02b63e722d4d64ffd91d659f81e9984954"
-> +
-> +inherit setuptools3 pypi
-> +
-> +BBCLASSEXTEND = "native nativesdk"
+> diff --git a/meta-python/recipes-devtools/python/python3-soupsieve_1.9.4.bb b/meta-python/recipes-devtools/python/python3-soupsieve_2.0.1.bb
+> similarity index 65%
+> rename from meta-python/recipes-devtools/python/python3-soupsieve_1.9.4.bb
+> rename to meta-python/recipes-devtools/python/python3-soupsieve_2.0.1.bb
+> index df69e007f..aa087c920 100644
+> --- a/meta-python/recipes-devtools/python/python3-soupsieve_1.9.4.bb
+> +++ b/meta-python/recipes-devtools/python/python3-soupsieve_2.0.1.bb
+> @@ -4,8 +4,8 @@ HOMEPAGE = "https://github.com/facelessuser/soupsieve"
+>   LICENSE = "MIT"
+>   LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5a6fd3b0c24fc5a041a3d1bbb22c81b5"
+>   
+> -SRC_URI[md5sum] = "43d8ea20c58494446aa65ba5cc6320fe"
+> -SRC_URI[sha256sum] = "605f89ad5fdbfefe30cdc293303665eff2d188865d4dbe4eb510bba1edfbfce3"
+> +SRC_URI[md5sum] = "62a7481c7dbf6d8cc21e4e3a79c72034"
+> +SRC_URI[sha256sum] = "a59dc181727e95d25f781f0eb4fd1825ff45590ec8ff49eadfd7f1a537cc0232"
+>   
+>   inherit pypi setuptools3
+>   
 >
 > 
 
---------------6EEDD56FF5C39D38437D5BAA
+--------------80840E6A0ADE22C4DA993A97
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -147,56 +128,37 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/9/20 9:43 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200609134311.13299-2-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.2.2. Change license checksum because of the
-updated metadata stored in PKG-INFO. The license remains PSF.
+    <blockquote type="cite" cite="mid:20200609134311.13299-3-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 2.0.1.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200609134311.13299-2-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200609134311.13299-3-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python3-bitarray_1.2.1.bb | 11 -----------
- .../recipes-devtools/python/python3-bitarray_1.2.2.bb | 11 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
- 2 files changed, 11 insertions(&#43;), 11 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
+ ...{python3-soupsieve_1.9.4.bb =&gt; python3-soupsieve_2.0.1.bb} | 4 &#43;&#43;--
+ 1 file changed, 2 insertions(&#43;), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-soupsieve_1.9.4.bb =&gt; python3-soupsieve_2.0.1.bb} (65%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
-deleted file mode 100644
-index 2bf2937d1..000000000
---- a/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
-&#43;&#43;&#43; /dev/null
-@@ -1,11 &#43;0,0 @@
--SUMMARY = &quot;A high-level Python efficient arrays of booleans -- C extension&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/ilanschnell/bitarray">&quot;https://github.com/ilanschnell/bitarray&quot;</a>
--LICENSE = &quot;PSF&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;md5=dc301a25ebe210dcc53b0a2d5a038eae">&quot;file://PKG-INFO;md5=dc301a25ebe210dcc53b0a2d5a038eae&quot;</a>
--
--SRC_URI[md5sum] = &quot;a46bf869f6adf34f5b0dc82b469793b7&quot;
--SRC_URI[sha256sum] = &quot;2ed675f460bb0d3d66fd8042a6f1f0d36cf213e52e72a745283ddb245da7b9cf&quot;
--
--inherit setuptools3 pypi
--
--BBCLASSEXTEND = &quot;native nativesdk&quot;
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
-new file mode 100644
-index 000000000..c495738c4
---- /dev/null
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
-@@ -0,0 &#43;1,11 @@
-&#43;SUMMARY = &quot;A high-level Python efficient arrays of booleans -- C extension&quot;
-&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/ilanschnell/bitarray">&quot;https://github.com/ilanschnell/bitarray&quot;</a>
-&#43;LICENSE = &quot;PSF&quot;
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;md5=d331e1d54f5e78247388f5416c2ab928">&quot;file://PKG-INFO;md5=d331e1d54f5e78247388f5416c2ab928&quot;</a>
-&#43;
-&#43;SRC_URI[md5sum] = &quot;81c48852b0bc538ac3ed25fae020360c&quot;
-&#43;SRC_URI[sha256sum] = &quot;27a69ffcee3b868abab3ce8b17c69e02b63e722d4d64ffd91d659f81e9984954&quot;
-&#43;
-&#43;inherit setuptools3 pypi
-&#43;
-&#43;BBCLASSEXTEND = &quot;native nativesdk&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-soupsieve_1.9.4.bb b/meta-python/recipes-devtools/python/python3-soupsieve_2.0.1.bb
+similarity index 65%
+rename from meta-python/recipes-devtools/python/python3-soupsieve_1.9.4.bb
+rename to meta-python/recipes-devtools/python/python3-soupsieve_2.0.1.bb
+index df69e007f..aa087c920 100644
+--- a/meta-python/recipes-devtools/python/python3-soupsieve_1.9.4.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-soupsieve_2.0.1.bb
+@@ -4,8 &#43;4,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/facelessuser/soupsieve">&quot;https://github.com/facelessuser/soupsieve&quot;</a>
+ LICENSE = &quot;MIT&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.md;md5=5a6fd3b0c24fc5a041a3d1bbb22c81b5">&quot;file://LICENSE.md;md5=5a6fd3b0c24fc5a041a3d1bbb22c81b5&quot;</a>
+ 
+-SRC_URI[md5sum] = &quot;43d8ea20c58494446aa65ba5cc6320fe&quot;
+-SRC_URI[sha256sum] = &quot;605f89ad5fdbfefe30cdc293303665eff2d188865d4dbe4eb510bba1edfbfce3&quot;
+&#43;SRC_URI[md5sum] = &quot;62a7481c7dbf6d8cc21e4e3a79c72034&quot;
+&#43;SRC_URI[sha256sum] = &quot;a59dc181727e95d25f781f0eb4fd1825ff45590ec8ff49eadfd7f1a537cc0232&quot;
+ 
+ inherit pypi setuptools3
+ 
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -206,4 +168,4 @@ index 000000000..c495738c4
   </body>
 </html>
 
---------------6EEDD56FF5C39D38437D5BAA--
+--------------80840E6A0ADE22C4DA993A97--
