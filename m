@@ -1,167 +1,185 @@
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.87])
- by mx.groups.io with SMTP id smtpd.web10.9189.1591887212279718092
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.1787.1591896710768760844
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Jun 2020 07:53:32 -0700
+ Thu, 11 Jun 2020 10:31:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=C/O8+whu;
- spf=pass (domain: windriver.com, ip: 40.107.244.87, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hRbE+lSUTWReIw5OudHJbj+Os++wgLMxwkr6wggUfI/YO/+aqMxheo5Hi/zr/M30vLUAVAcP9NfXowdRskbz/0nhwKs+4IxqQi5oOQMPzV3bKg6SDokgqk+qp3qPD1KD3E1j5xepFmdTuya/Q4NkPrBVmxE46VcAFdUQThzyOMCt4SgppG5VYdHU1TKG8a+bUFiMxc3yIpYPYTwi9d4NJiqa+6/1kd0gERwGH9J6OY/8L2tmdpdyXv7B642I6f9UbHkvMaflKXXQg31uml90Zt3XVjQSNQezL9T+pOOIJcYD8GR168fRcpwzEQUOL/YmzcOpShpZXI/WGw9Yi9dOVw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kfCoLu1lqUhkEvXB1fNjELMFJSTDyVDtzwEbKFsGPlk=;
- b=VnmFlYQyA6u02mtwD8oN77WWuZYmDKbpFoaFnWn9Jg5jjMCBlqu0TUU2CgVvHa+BfnDy08v7A3gZ5DHEAaI6JwLwRZvpcGLb6XQU+CqcHgOjWdy/AVmxeRU/3EFi409cvdogwes4dhaAuadLjQLUAnRitnSBTN2ncwoUjIigVZX1lxjOPg/KFum8o4F6JGUQgBymALtYjxoNR9eTR18qmkejlM7STKJYsT5ieUqxkk/sU4YmVhrjPdO3yU9kCWolBJRYRboYcY849SbWn5tl9fyN8rC0L3srFLVvqvdPN1NCU8mHQnwCWFqmpJ3JnWz0f1vOE6lmzljL/hxAwB1hfQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kfCoLu1lqUhkEvXB1fNjELMFJSTDyVDtzwEbKFsGPlk=;
- b=C/O8+whuTuFpNLn8dcQ9SYuV1QryHvXHgJpsqQVwWWk31jBrBL83eSTx/FpQ/jhe/kWdHMuLxbKFmTzFklbrVo7zIZvrQOCey3jXZEacG/lPZWWhBrKGp36leAWoXBhwfnycF7dHTid5YSDvBzBlcYYkrG+z6Q3PFR4DZoDQk1w=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB3954.namprd11.prod.outlook.com (2603:10b6:405:79::35) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.21; Thu, 11 Jun
- 2020 14:53:31 +0000
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3088.021; Thu, 11 Jun 2020
- 14:53:31 +0000
-Subject: Re: [oe][meta-python][PATCH V2] python-django: set CVE_PRODUCT to be django
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-To: Chen Qi <Qi.Chen@windriver.com>, openembedded-devel@lists.openembedded.org
-References: <20200611060741.24132-1-Qi.Chen@windriver.com>
- <161784DC9FF68DAF.3794@lists.openembedded.org>
-Message-ID: <1df86a15-d48e-790d-351e-802abf10cdf9@windriver.com>
-Date: Thu, 11 Jun 2020 10:53:26 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
-In-Reply-To: <161784DC9FF68DAF.3794@lists.openembedded.org>
-X-ClientProxiedBy: BYAPR05CA0070.namprd05.prod.outlook.com
- (2603:10b6:a03:74::47) To BN6PR11MB0003.namprd11.prod.outlook.com
- (2603:10b6:405:61::26)
-Return-Path: trevor.gamblin@windriver.com
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 10EE140C1C;
+	Thu, 11 Jun 2020 17:31:50 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 363hDyocCTj2; Thu, 11 Jun 2020 17:31:50 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id EBECB40BB1;
+	Thu, 11 Jun 2020 17:31:48 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 4A988173217; Thu, 11 Jun 2020 13:31:48 -0400 (EDT)
+Date: Thu, 11 Jun 2020 13:31:48 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: akuster <akuster808@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [dunfell 00/27] Merge request #3
+Message-ID: <20200611173148.GA17660@denix.org>
+References: <cover.1591886131.git.akuster808@gmail.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by BYAPR05CA0070.namprd05.prod.outlook.com (2603:10b6:a03:74::47) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.9 via Frontend Transport; Thu, 11 Jun 2020 14:53:29 +0000
-X-Originating-IP: [174.115.236.231]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 4d3b5515-92b7-45f9-207b-08d80e1734c2
-X-MS-TrafficTypeDiagnostic: BN6PR11MB3954:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB3954805BF8FC8FCC381F14319F800@BN6PR11MB3954.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2399;
-X-Forefront-PRVS: 0431F981D8
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	cdLBgQVn/25XoewUYQomkvueN7642tceDuYa5mBopSVhy18cztqPfOHzqPLZzNZQcIge9ZKJyvBSf5bfqOSVdiuoY7UZpAtAaRUTuG3vXkSjp02i4143DCCuI2r26UrlgaK1W8PnzRII0xKfVmTX6RbieH5iIlNQVXmgTilwxGLrbLQNhToFQH2FTjxNgydLoYo1jsrOFNoeqy7POQjpA3r+Dy/GjmXnNTlxvo2eoAKRu5w4/azMxW4nB32QU+vxCEk12SKRszvt75+INss/x9du/fQY39ImCCYsEmwYoQIHBjRQxfxvxsef9sKysNWwVlIFEAHNDi3kjb6Pg/aT965NPt0aNb8uS591FgDhqWGHtk78S8c1vY+jNK0Xd/8KV+g8pIx/Gr0WbklsH7YyZpnuYC2nzFvHwb6gW89gW7PiKIVatB/Ayic+mYlu3h4pWrdaOLx6Cb1j8UJZ5AfMqg==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(366004)(39850400004)(396003)(346002)(376002)(956004)(2616005)(186003)(16576012)(5660300002)(16526019)(316002)(2906002)(36756003)(33964004)(52116002)(6486002)(44832011)(8676002)(6666004)(53546011)(26005)(8936002)(166002)(66946007)(478600001)(966005)(31686004)(31696002)(83380400001)(86362001)(66556008)(66476007)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	jBd108u8ojPPFOj5cox+iJBfOQjVhUkMrbfISDxAvnuJuNyJ2eqSM5ZWvWpcL8K2NpAJHojNwgs93AvRm/XZJF+ur5TwTefGhs6vi/bpYAL6YYWLckqptJsTSiUpPr730cbr37eiaymGAXIPm8h1jjAAPI5LwZZXvdFUHDw59tcStkt04tTuBz7q+LyhSs9hMWbAkf/eOdGf8Rz+34+ZAHrHmykrGDe8Gm7ozgz/2r686UFFtbfSRPKWJWZ5ZbLf62fNl1aWnZvH2Imd6+mdirhPaM4/J+lXE7s8BzjtVKnDHQFPP4qKEW4Ifc5b4VNSZdSveEDI/xR3I9Q63dCzAo5cXULAVE8fKxh2gTPAER+0puESBgnjCkJ474Fw70mCKeIhEUlzbfW7nQcB+joU9t/x6OoWygZZuMMQMhQbteh1lWrmEHtYSamfGa8/7SqYSz+2IWywUopafjss0RnF/S3Jm3A+JvbxkQE7lEPX0WBjKcmy+GqxwEP4+cAV6PzZ
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4d3b5515-92b7-45f9-207b-08d80e1734c2
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2020 14:53:30.8947
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: rdp76d+F95HpdVHJayJhcAarAHvhCUNYeTBARs0fnsoHuA3pGbBBf9rWOYlbA+Dx5zdWsQa7T026NnIc09dkjiIgvB8apYgKmyZzRNcBcM0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB3954
-Content-Type: multipart/alternative;
- boundary="------------5168DF8B60B6D6E3A0071F7D"
-Content-Language: en-US
+In-Reply-To: <cover.1591886131.git.akuster808@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
---------------5168DF8B60B6D6E3A0071F7D
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+On Thu, Jun 11, 2020 at 07:38:00AM -0700, akuster wrote:
+> Please merge these changes to dunfell
+> Cover letter only
+
+Thanks, LGTM!
 
 
-On 6/11/20 10:51 AM, Trevor Gamblin wrote:
->
->
-> On 6/11/20 2:07 AM, Chen Qi wrote:
->> Signed-off-by: Chen Qi<Qi.Chen@windriver.com>
->> ---
->>   meta-python/recipes-devtools/python/python-django.inc | 2 ++
->>   1 file changed, 2 insertions(+)
->>
->> diff --git a/meta-python/recipes-devtools/python/python-django.inc b/meta-python/recipes-devtools/python/python-django.inc
->> index 73b7ac99f..c02b3fa52 100644
->> --- a/meta-python/recipes-devtools/python/python-django.inc
->> +++ b/meta-python/recipes-devtools/python/python-django.inc
->> @@ -30,3 +30,5 @@ RDEPENDS_${PN} += "\
->>       ${PYTHON_PN}-xml \
->>       ${PYTHON_PN}-distutils \
->>   "
->> +
->> +CVE_PRODUCT = "django"
-> This still looks off - it won't apply for me. I don't see distutils in 
-> the RDEPENDS list in my version of the .inc file. Can you double-check?
-My mistake. It's on my queue now.
->>
->
-> 
+> The following changes since commit cc155826b0b4f202a8fa4ac103b7c38368d32=
+734:
+>=20
+>   thunar: upgrade 1.8.14 -> 1.8.15 (2020-05-28 21:50:13 -0700)
+>=20
+> are available in the Git repository at:
+>=20
+>   git://git.openembedded.org/meta-openembedded dunfell-next
+>   http://cgit.openembedded.org/meta-openembedded/log/?h=3Ddunfell-next
+>=20
+> Adrian Bunk (1):
+>   python3-docutils: Remove, moved to OE-core
+>=20
+> Andreas M=FCller (1):
+>   fluidsynth: upgrade 2.1.2 -> 2.1.3
+>=20
+> Denys Dmytriyenko (2):
+>   python3-pycryptodome(x): moved to OE-Core, remove from meta-python
+>   python3-pyelftools: moved to OE-Core, remove from meta-python
+>=20
+> Domarys Correa (1):
+>   python3-pyyaml: Update 5.3 -> 5.3.1
+>=20
+> Hongxu Jia (1):
+>   multipath-tools: fix compiling parallel issue
+>=20
+> Kai Kang (1):
+>   plymouth: disable systemd-integration for sysvinit
+>=20
+> Khem Raj (1):
+>   dfu-util-native: Remove DEPLOY_DIR_TOOLS from sstate-outputdirs
+>=20
+> Konrad Weihmann (6):
+>   passwdqc: remove double modify operation
+>   sound-theme-freedesktop: remove double depends
+>   python3-cmd2: remove double colorama in RDEPENDS
+>   python3-smbus2: remove duplicate RDEPENDS settings
+>   python3-twisted: remove double var modification
+>   proftpd: Fix typo for SRC_URI[md5sum]
+>=20
+> Leon Anavi (1):
+>   python3-colorama: Upgrade 0.4.1 -> 0.4.3
+>=20
+> Maciej Pijanowski (1):
+>   qpdf: fix typo in RDEPENDS
+>=20
+> Martin Jansa (2):
+>   irssi: package libirc_proxy.a in PN-staticdev
+>   meta-python: depend on core version 12 or higher
+>=20
+> Patrick Williams (1):
+>   net-snmp: refresh patches
+>=20
+> Zang Ruochen (4):
+>   libgphoto2: upgrade 2.5.24 -> 2.5.25
+>   mosquitto: upgrade 1.6.9 -> 1.6.10
+>   snort: upgrade 2.9.15 -> 2.9.16
+>   wireshark: upgrade 3.2.2 -> 3.2.4
+>=20
+> Zheng Ruoqin (4):
+>   nano: upgrade 4.9.2 -> 4.9.3
+>   gsoap: upgrade 2.8.100 -> 2.8.103
+>   logwatch: upgrade 7.5.1 -> 7.5.3
+>   libnet-dns-perl: upgrade 1.23 -> 1.24
+>=20
+>  .../fluidsynth/fluidsynth.inc                 |  4 +-
+>  ...tables-helper-we-have-to-use-native-.patch | 32 +++++++++----
+>  ...mosquitto_1.6.9.bb =3D> mosquitto_1.6.10.bb} |  4 +-
+>  ...deck-for-gettid-API-during-configure.patch | 48 -------------------
+>  .../{snort_2.9.15.bb =3D> snort_2.9.16.bb}      |  5 +-
+>  .../recipes-daemons/proftpd/proftpd_1.3.6.bb  |  2 +-
+>  ...upport-for-building-applications-and.patch | 24 +++++-----
+>  .../0001-config_os_headers-Error-Fix.patch    | 10 ++--
+>  ...t-snmp-fix-compile-error-disable-des.patch | 14 +++---
+>  ...add-knob-whether-nlist.h-are-checked.patch | 15 +++---
+>  ...{wireshark_3.2.2.bb =3D> wireshark_3.2.4.bb} |  4 +-
+>  .../recipes-connectivity/irssi/irssi_1.2.2.bb |  2 +
+>  .../recipes-core/plymouth/plymouth_0.9.4.bb   |  2 +-
+>  .../{logwatch_7.5.1.bb =3D> logwatch_7.5.3.bb}  |  4 +-
+>  ...gphoto2_2.5.24.bb =3D> libgphoto2_2.5.25.bb} |  4 +-
+>  .../sound-theme-freedesktop_0.8.bb            |  2 +-
+>  meta-oe/recipes-printing/qpdf/qpdf_10.0.1.bb  |  2 +-
+>  .../passwdqc/passwdqc_1.3.1.bb                |  2 +-
+>  .../dfu-util/dfu-util-native_0.9.bb           |  1 -
+>  .../{gsoap_2.8.100.bb =3D> gsoap_2.8.103.bb}    |  4 +-
+>  ...add-explicit-dependency-on-libraries.patch | 40 ++++++++++++++++
+>  .../multipath-tools/multipath-tools_0.8.4.bb  |  1 +
+>  .../nano/{nano_4.9.2.bb =3D> nano_4.9.3.bb}     |  4 +-
+>  ...s-perl_1.23.bb =3D> libnet-dns-perl_1.24.bb} |  4 +-
+>  meta-python/conf/layer.conf                   |  2 +-
+>  .../python/python-pycryptodome.inc            | 29 -----------
+>  .../python/python3-cmd2_0.9.23.bb             |  1 -
+>  ...ama_0.4.1.bb =3D> python3-colorama_0.4.3.bb} |  4 +-
+>  .../python/python3-docutils_0.15.2.bb         | 15 ------
+>  .../python/python3-pycryptodome_3.9.4.bb      |  2 -
+>  .../python/python3-pycryptodomex_3.9.4.bb     | 10 ----
+>  .../python/python3-pyelftools_0.25.bb         | 14 ------
+>  .../python/python3-pyyaml_5.3.1.bb            | 18 +++++++
+>  .../python/python3-pyyaml_5.3.bb              | 19 --------
+>  .../python/python3-smbus2_0.3.0.bb            |  2 -
+>  .../python/python3-twisted_19.10.0.bb         |  4 +-
+>  36 files changed, 144 insertions(+), 210 deletions(-)
+>  rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_1.6.9.=
+bb =3D> mosquitto_1.6.10.bb} (95%)
+>  delete mode 100644 meta-networking/recipes-connectivity/snort/snort/000=
+1-chdeck-for-gettid-API-during-configure.patch
+>  rename meta-networking/recipes-connectivity/snort/{snort_2.9.15.bb =3D>=
+ snort_2.9.16.bb} (95%)
+>  rename meta-networking/recipes-support/wireshark/{wireshark_3.2.2.bb =
+=3D> wireshark_3.2.4.bb} (95%)
+>  rename meta-oe/recipes-extended/logwatch/{logwatch_7.5.1.bb =3D> logwat=
+ch_7.5.3.bb} (95%)
+>  rename meta-oe/recipes-graphics/gphoto2/{libgphoto2_2.5.24.bb =3D> libg=
+photo2_2.5.25.bb} (91%)
+>  rename meta-oe/recipes-support/gsoap/{gsoap_2.8.100.bb =3D> gsoap_2.8.1=
+03.bb} (89%)
+>  create mode 100644 meta-oe/recipes-support/multipath-tools/files/0001-a=
+dd-explicit-dependency-on-libraries.patch
+>  rename meta-oe/recipes-support/nano/{nano_4.9.2.bb =3D> nano_4.9.3.bb} =
+(80%)
+>  rename meta-perl/recipes-perl/libnet/{libnet-dns-perl_1.23.bb =3D> libn=
+et-dns-perl_1.24.bb} (92%)
+>  delete mode 100644 meta-python/recipes-devtools/python/python-pycryptod=
+ome.inc
+>  rename meta-python/recipes-devtools/python/{python3-colorama_0.4.1.bb =
+=3D> python3-colorama_0.4.3.bb} (61%)
+>  delete mode 100644 meta-python/recipes-devtools/python/python3-docutils=
+_0.15.2.bb
+>  delete mode 100644 meta-python/recipes-devtools/python/python3-pycrypto=
+dome_3.9.4.bb
+>  delete mode 100644 meta-python/recipes-devtools/python/python3-pycrypto=
+domex_3.9.4.bb
+>  delete mode 100644 meta-python/recipes-devtools/python/python3-pyelftoo=
+ls_0.25.bb
+>  create mode 100644 meta-python/recipes-devtools/python/python3-pyyaml_5=
+.3.1.bb
+>  delete mode 100644 meta-python/recipes-devtools/python/python3-pyyaml_5=
+.3.bb
+>=20
+> --=20
+> 2.17.1
+>=20
 
---------------5168DF8B60B6D6E3A0071F7D
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
+>=20
 
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 6/11/20 10:51 AM, Trevor Gamblin
-      wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:161784DC9FF68DAF.3794@lists.openembedded.org">
-      
-      <p><br>
-      </p>
-      <div class="moz-cite-prefix">On 6/11/20 2:07 AM, Chen Qi wrote:<br>
-      </div>
-      <blockquote type="cite" cite="mid:20200611060741.24132-1-Qi.Chen@windriver.com">
-        <pre class="moz-quote-pre" wrap="">Signed-off-by: Chen Qi <a class="moz-txt-link-rfc2396E" href="mailto:Qi.Chen@windriver.com" moz-do-not-send="true">&lt;Qi.Chen@windriver.com&gt;</a>
----
- meta-python/recipes-devtools/python/python-django.inc | 2 &#43;&#43;
- 1 file changed, 2 insertions(&#43;)
-
-diff --git a/meta-python/recipes-devtools/python/python-django.inc b/meta-python/recipes-devtools/python/python-django.inc
-index 73b7ac99f..c02b3fa52 100644
---- a/meta-python/recipes-devtools/python/python-django.inc
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python-django.inc
-@@ -30,3 &#43;30,5 @@ RDEPENDS_${PN} &#43;= &quot;\
-     ${PYTHON_PN}-xml \
-     ${PYTHON_PN}-distutils \
- &quot;
-&#43;
-&#43;CVE_PRODUCT = &quot;django&quot;</pre>
-      </blockquote>
-      This still looks off - it won't apply for me. I don't see
-      distutils in the RDEPENDS list in my version of the .inc file. Can
-      you double-check?<br>
-    </blockquote>
-    My mistake. It's on my queue now.<br>
-    <blockquote type="cite" cite="mid:161784DC9FF68DAF.3794@lists.openembedded.org">
-      <blockquote type="cite" cite="mid:20200611060741.24132-1-Qi.Chen@windriver.com"> <br>
-        <fieldset class="mimeAttachmentHeader"></fieldset>
-      </blockquote>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------5168DF8B60B6D6E3A0071F7D--
