@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.3491.1591866585248490175
+ by mx.groups.io with SMTP id smtpd.web12.3523.1591866587261542436
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Jun 2020 02:09:45 -0700
+ Thu, 11 Jun 2020 02:09:47 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=38022 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jjJDT-0007qt-CZ; Thu, 11 Jun 2020 12:09:44 +0300
+	id 1jjJDV-0007qt-Ct; Thu, 11 Jun 2020 12:09:46 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/7] python3-pluggy: Consolidate in a single file
-Date: Thu, 11 Jun 2020 12:09:01 +0300
-Message-Id: <20200611090904.29772-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/7] python3-ply: Consolidate in a single file
+Date: Thu, 11 Jun 2020 12:09:02 +0300
+Message-Id: <20200611090904.29772-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200611090904.29772-1-leon.anavi@konsulko.com>
 References: <20200611090904.29772-1-leon.anavi@konsulko.com>
@@ -34,78 +34,60 @@ Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python-pluggy.inc | 27 -----------------
- .../python/python3-pluggy_0.13.1.bb           | 29 +++++++++++++++++--
- 2 files changed, 27 insertions(+), 29 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pluggy.inc
+ .../recipes-devtools/python/python-ply.inc    | 18 -----------------
+ .../python/python3-ply_3.11.bb                | 20 +++++++++++++++++--
+ 2 files changed, 18 insertions(+), 20 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-ply.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-pluggy.inc b/meta-python/recipes-devtools/python/python-pluggy.inc
+diff --git a/meta-python/recipes-devtools/python/python-ply.inc b/meta-python/recipes-devtools/python/python-ply.inc
 deleted file mode 100644
-index 1198d5f74..000000000
---- a/meta-python/recipes-devtools/python/python-pluggy.inc
+index 149fe058f..000000000
+--- a/meta-python/recipes-devtools/python/python-ply.inc
 +++ /dev/null
-@@ -1,27 +0,0 @@
--SUMMARY = "Plugin and hook calling mechanisms for python"
--HOMEPAGE = "https://github.com/pytest-dev/pluggy"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=1c8206d16fd5cc02fa9b0bb98955e5c2"
+@@ -1,18 +0,0 @@
+-SUMMARY = "Python Lex and Yacc"
+-DESCRIPTION = "Python ply: PLY is yet another implementation of lex and yacc for Python"
+-HOMEPAGE = "https://pypi.python.org/pypi/ply"
+-SECTION = "devel/python"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://README.md;beginline=5;endline=32;md5=f5ee5c355c0e6719c787a71b8f0fa96c"
 -
--SRC_URI[md5sum] = "7f610e28b8b34487336b585a3dfb803d"
--SRC_URI[sha256sum] = "15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0"
+-SRC_URI[md5sum] = "6465f602e656455affcd7c5734c638f8"
+-SRC_URI[sha256sum] = "00c7c1aaa88358b9c765b6d3000c6eec0ba42abca5351b095321aef446081da3"
 -
--DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
--RDEPENDS_${PN} += "${PYTHON_PN}-importlib-metadata \
--                   ${PYTHON_PN}-more-itertools \
+-inherit pypi
+-
+-RDEPENDS_${PN}_class-target += "\
+-    ${PYTHON_PN}-netclient \
+-    ${PYTHON_PN}-shell \
 -"
 -
--inherit pypi ptest
--
--SRC_URI += " \
--	file://run-ptest \
--"
--
--RDEPENDS_${PN}-ptest += " \
--	${PYTHON_PN}-pytest \
--"
--
--do_install_ptest() {
--	install -d ${D}${PTEST_PATH}/testing
--	cp -rf ${S}/testing/* ${D}${PTEST_PATH}/testing/
--}
-diff --git a/meta-python/recipes-devtools/python/python3-pluggy_0.13.1.bb b/meta-python/recipes-devtools/python/python3-pluggy_0.13.1.bb
-index 941e8e3d8..d3e0365ca 100644
---- a/meta-python/recipes-devtools/python/python3-pluggy_0.13.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pluggy_0.13.1.bb
-@@ -1,2 +1,27 @@
+-BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python3-ply_3.11.bb b/meta-python/recipes-devtools/python/python3-ply_3.11.bb
+index 72410baeb..3aa010fac 100644
+--- a/meta-python/recipes-devtools/python/python3-ply_3.11.bb
++++ b/meta-python/recipes-devtools/python/python3-ply_3.11.bb
+@@ -1,2 +1,18 @@
+-require python-ply.inc
 -inherit setuptools3
--require python-pluggy.inc
-+SUMMARY = "Plugin and hook calling mechanisms for python"
-+HOMEPAGE = "https://github.com/pytest-dev/pluggy"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1c8206d16fd5cc02fa9b0bb98955e5c2"
++SUMMARY = "Python Lex and Yacc"
++DESCRIPTION = "Python ply: PLY is yet another implementation of lex and yacc for Python"
++HOMEPAGE = "https://pypi.python.org/pypi/ply"
++SECTION = "devel/python"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://README.md;beginline=5;endline=32;md5=f5ee5c355c0e6719c787a71b8f0fa96c"
 +
-+SRC_URI[md5sum] = "7f610e28b8b34487336b585a3dfb803d"
-+SRC_URI[sha256sum] = "15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0"
++SRC_URI[md5sum] = "6465f602e656455affcd7c5734c638f8"
++SRC_URI[sha256sum] = "00c7c1aaa88358b9c765b6d3000c6eec0ba42abca5351b095321aef446081da3"
 +
-+DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
-+RDEPENDS_${PN} += "${PYTHON_PN}-importlib-metadata \
-+                   ${PYTHON_PN}-more-itertools \
++inherit pypi setuptools3
++
++RDEPENDS_${PN}_class-target += "\
++    ${PYTHON_PN}-netclient \
++    ${PYTHON_PN}-shell \
 +"
 +
-+inherit pypi ptest setuptools3
-+
-+SRC_URI += " \
-+	file://run-ptest \
-+"
-+
-+RDEPENDS_${PN}-ptest += " \
-+	${PYTHON_PN}-pytest \
-+"
-+
-+do_install_ptest() {
-+	install -d ${D}${PTEST_PATH}/testing
-+	cp -rf ${S}/testing/* ${D}${PTEST_PATH}/testing/
-+}
++BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
