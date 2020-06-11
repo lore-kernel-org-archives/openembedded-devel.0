@@ -1,75 +1,92 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.1787.1591896710768760844
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
+ by mx.groups.io with SMTP id smtpd.web10.3568.1591901573770852912
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Jun 2020 10:31:51 -0700
+ Thu, 11 Jun 2020 11:52:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 10EE140C1C;
-	Thu, 11 Jun 2020 17:31:50 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 363hDyocCTj2; Thu, 11 Jun 2020 17:31:50 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id EBECB40BB1;
-	Thu, 11 Jun 2020 17:31:48 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 4A988173217; Thu, 11 Jun 2020 13:31:48 -0400 (EDT)
-Date: Thu, 11 Jun 2020 13:31:48 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: akuster <akuster808@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [dunfell 00/27] Merge request #3
-Message-ID: <20200611173148.GA17660@denix.org>
-References: <cover.1591886131.git.akuster808@gmail.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=K9V0xXiI;
+ spf=pass (domain: gmail.com, ip: 209.85.160.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f195.google.com with SMTP id k22so5371383qtm.6
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Jun 2020 11:52:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=v2HCbrnblu7nXZg1eY9m1/SFsPaps87GaC/TS6BewBc=;
+        b=K9V0xXiI/IsltawCZlI3nq9WobkZ3i+X5q0AuHs0GOqNPFbUYchlQHHvoZsOybqNSP
+         yXbAao1c8++2EunoIkYBeubpbPT4OnxJfdjXhRXCl02r5T6RvPKs1IS++3F5RTtEr/uY
+         Rw1d4gsc01JkvZXxEHR04QZ0rPyUHfhkl3m5HDimZNhlnWtY4K0Fz8oGZRFZpLUB9sjT
+         XAobWci//wtjANq1IXm6jysgrsrYdsfixkERswq78yiqpueRjH/wKSRryuzfT4wlMRft
+         R3/mKh9vKwFaWH9q6wfGY0U+DPy+eFFGqZuVfo9/IKShXjeCMkbd5aBltRVKA2j5D4EV
+         z5bg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=v2HCbrnblu7nXZg1eY9m1/SFsPaps87GaC/TS6BewBc=;
+        b=SIoG51OyCI/Oa+R0nhrG7JKIxKJmWkmPglZBDW68bfHg0Q+TmieRbBI4ku+Yyt2XSF
+         oP7eE7qDAiyE/N2rp4unDTWW5rirVjjWrwQGPLK/wqJ6gDYa9wfE8PkbJU78v7XRU1pU
+         Pl1lobtCFY19tonhGZvYeKLiwnXHIZysOFlBk7SxFfDdzEYriXPhIotSiLfFWyo5iGOq
+         QddvwVDB8w4hwwC5+dwVjYT7Qy1uD1iigtr9SK/rFZqnoIRCN3WUhQu5YBpkCPlqYG2R
+         kE1C+kcn7130OhkLXNRZWxmOUYIfZ3yTkhdF9EemBQJy0WxXlaHBwFORGSVUHCvIQA0x
+         UHgQ==
+X-Gm-Message-State: AOAM530XLIHok78hMEP/WuvJi6FcCm6Of+Ej7yZgBywEY06hnZwwNlX5
+	iZAKgR6ZTGAmlhfePWfADah2MXRA38gUa4GOTq8=
+X-Google-Smtp-Source: ABdhPJx1iu91wUOKoiakGEOoybMVdWsjs9vystk8Vsvlbho4LQhMhSNnwMNuG0AVwS+ArJ7aQliCCRCngMQQN8cSzm4=
+X-Received: by 2002:ac8:44b3:: with SMTP id a19mr10047680qto.285.1591901572530;
+ Thu, 11 Jun 2020 11:52:52 -0700 (PDT)
 MIME-Version: 1.0
+References: <cover.1591886131.git.akuster808@gmail.com>
 In-Reply-To: <cover.1591886131.git.akuster808@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 11 Jun 2020 11:52:26 -0700
+Message-ID: <CAMKF1so4fDkW6eitZgDgPua2MdxAk5Q8tMLTXbySMT3+=XYzKQ@mail.gmail.com>
+Subject: Re: [oe] [dunfell 00/27] Merge request #3
+To: akuster <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 11, 2020 at 07:38:00AM -0700, akuster wrote:
+On Thu, Jun 11, 2020 at 7:38 AM akuster <akuster808@gmail.com> wrote:
+>
 > Please merge these changes to dunfell
 > Cover letter only
-
-Thanks, LGTM!
-
-
+>
 > The following changes since commit cc155826b0b4f202a8fa4ac103b7c38368d32=
 734:
->=20
+>
 >   thunar: upgrade 1.8.14 -> 1.8.15 (2020-05-28 21:50:13 -0700)
->=20
+>
 > are available in the Git repository at:
->=20
+>
 >   git://git.openembedded.org/meta-openembedded dunfell-next
 >   http://cgit.openembedded.org/meta-openembedded/log/?h=3Ddunfell-next
->=20
+>
 > Adrian Bunk (1):
 >   python3-docutils: Remove, moved to OE-core
->=20
-> Andreas M=FCller (1):
+>
+> Andreas M=C3=BCller (1):
 >   fluidsynth: upgrade 2.1.2 -> 2.1.3
->=20
+>
 > Denys Dmytriyenko (2):
 >   python3-pycryptodome(x): moved to OE-Core, remove from meta-python
 >   python3-pyelftools: moved to OE-Core, remove from meta-python
->=20
+>
 > Domarys Correa (1):
 >   python3-pyyaml: Update 5.3 -> 5.3.1
->=20
+>
 > Hongxu Jia (1):
 >   multipath-tools: fix compiling parallel issue
->=20
+>
 > Kai Kang (1):
 >   plymouth: disable systemd-integration for sysvinit
->=20
+>
 > Khem Raj (1):
 >   dfu-util-native: Remove DEPLOY_DIR_TOOLS from sstate-outputdirs
->=20
+
+this is not needed. Since relevant change in core is going to reverted
+I plan to revert it in master of meta-oe too.
+
+>
 > Konrad Weihmann (6):
 >   passwdqc: remove double modify operation
 >   sound-theme-freedesktop: remove double depends
@@ -77,32 +94,32 @@ Thanks, LGTM!
 >   python3-smbus2: remove duplicate RDEPENDS settings
 >   python3-twisted: remove double var modification
 >   proftpd: Fix typo for SRC_URI[md5sum]
->=20
+>
 > Leon Anavi (1):
 >   python3-colorama: Upgrade 0.4.1 -> 0.4.3
->=20
+>
 > Maciej Pijanowski (1):
 >   qpdf: fix typo in RDEPENDS
->=20
+>
 > Martin Jansa (2):
 >   irssi: package libirc_proxy.a in PN-staticdev
 >   meta-python: depend on core version 12 or higher
->=20
+>
 > Patrick Williams (1):
 >   net-snmp: refresh patches
->=20
+>
 > Zang Ruochen (4):
 >   libgphoto2: upgrade 2.5.24 -> 2.5.25
 >   mosquitto: upgrade 1.6.9 -> 1.6.10
 >   snort: upgrade 2.9.15 -> 2.9.16
 >   wireshark: upgrade 3.2.2 -> 3.2.4
->=20
+>
 > Zheng Ruoqin (4):
 >   nano: upgrade 4.9.2 -> 4.9.3
 >   gsoap: upgrade 2.8.100 -> 2.8.103
 >   logwatch: upgrade 7.5.1 -> 7.5.3
 >   libnet-dns-perl: upgrade 1.23 -> 1.24
->=20
+>
 >  .../fluidsynth/fluidsynth.inc                 |  4 +-
 >  ...tables-helper-we-have-to-use-native-.patch | 32 +++++++++----
 >  ...mosquitto_1.6.9.bb =3D> mosquitto_1.6.10.bb} |  4 +-
@@ -176,10 +193,8 @@ ls_0.25.bb
 .3.1.bb
 >  delete mode 100644 meta-python/recipes-devtools/python/python3-pyyaml_5=
 .3.bb
->=20
-> --=20
+>
+> --
 > 2.17.1
+>
 >=20
-
->=20
-
