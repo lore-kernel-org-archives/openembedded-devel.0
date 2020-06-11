@@ -1,69 +1,65 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.3499.1591866621466372897
+Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
+ by mx.groups.io with SMTP id smtpd.web10.5458.1591875695308207572
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Jun 2020 02:10:21 -0700
+ Thu, 11 Jun 2020 04:41:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=38022 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jjJE3-0007qt-Nd; Thu, 11 Jun 2020 12:10:20 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=missing; spf=pass (domain: siemens.com, ip: 192.35.17.28, mailfrom: andrej.valek@siemens.com)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id 05BBfWZT024329
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 11 Jun 2020 13:41:33 +0200
+Received: from dev.vm6.ccp.siemens.com ([144.145.220.53])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id 05BBfW3t012803;
+	Thu, 11 Jun 2020 13:41:32 +0200
+Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id CAC367FCDE8;
+	Thu, 11 Jun 2020 13:41:31 +0200 (CEST)
+From: "Andrej Valek" <andrej.valek@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 7/7] python3-pocketsphinx: 0.1.0 -> 0.1.15
-Date: Thu, 11 Jun 2020 12:09:04 +0300
-Message-Id: <20200611090904.29772-7-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200611090904.29772-1-leon.anavi@konsulko.com>
-References: <20200611090904.29772-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Cc: Andrej Valek <andrej.valek@siemens.com>
+Subject: [oe][meta-oe][PATCH] thrift: drop unsupported features
+Date: Thu, 11 Jun 2020 13:40:30 +0200
+Message-Id: <20200611114030.589-1-andrej.valek@siemens.com>
+X-Mailer: git-send-email 2.11.0
 
-Add pulseaudio as a dependency and required distro feature because
-libsphinxad requires it. Upgrade to release 0.1.15:
+- QT4 support was dropped
+- Feature for switching between boost and std pointer was dropped
+ - only std pointers are supported since version 0.13.0
 
-- Add all travis osx
-- Remove bdist_egg and bdist_msi
-- Bug fixes
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
 ---
- ...ocketsphinx_0.1.0.bb => python3-pocketsphinx_0.1.15.bb} | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pocketsphinx_0.1.0.bb => python3-pocketsphinx_0.1.15.bb} (65%)
+ meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pocketsphinx_0.1.0.bb b/meta-python/recipes-devtools/python/python3-pocketsphinx_0.1.15.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-pocketsphinx_0.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-pocketsphinx_0.1.15.bb
-index cb22040df..5aa0eb6bc 100644
---- a/meta-python/recipes-devtools/python/python3-pocketsphinx_0.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pocketsphinx_0.1.15.bb
-@@ -5,9 +5,10 @@ SECTION = "devel/python"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=826ebda787eb48e78aec2624f9faba72"
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb
+index 92bcb21bf..e3880b357 100644
+--- a/meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb
++++ b/meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb
+@@ -24,7 +24,6 @@ export BUILD_SYS
+ export HOST_SYS
  
--SRC_URI[md5sum] = "c0f2bfd54bc4c438c3bb64825f57d575"
--SRC_URI[sha256sum] = "2cc493ed48c1301e0d2e69b137dc646c2f8caca190ef4bce61836eac96d1796f"
-+SRC_URI[md5sum] = "94d008eebea16acb60a9ffe614575dee"
-+SRC_URI[sha256sum] = "34d290745c7dbe6fa2cac9815b5c19d10f393e528ecd70e779c21ebc448f9b63"
+ EXTRA_OECMAKE = " \
+-    -DENABLE_PRECOMPILED_HEADERS=OFF \
+     -DBUILD_LIBRARIES=ON \
+     -DBUILD_COMPILER=ON \
+     -DBUILD_TESTING=OFF \
+@@ -36,15 +35,12 @@ EXTRA_OECMAKE = " \
+     -DWITH_STATIC_LIB=ON \
+     -DWITH_SHARED_LIB=ON \
+     -DWITH_OPENSSL=ON \
+-    -DWITH_QT4=OFF \
+     -DWITH_QT5=OFF \
+-    -DWITH_BOOST_FUNCTIONAL=OFF \
+ "
  
- inherit pypi setuptools3
+-PACKAGECONFIG ??= "libevent glib boost-smart-ptr"
++PACKAGECONFIG ??= "libevent glib"
+ PACKAGECONFIG[libevent] = "-DWITH_LIBEVENT=ON,-DWITH_LIBEVENT=OFF,libevent"
+ PACKAGECONFIG[glib] = "-DWITH_C_GLIB=ON,-DWITH_C_GLIB=OFF,glib-2.0"
+-PACKAGECONFIG[boost-smart-ptr] = "-DWITH_BOOST_SMART_PTR=ON,-DWITH_BOOST_SMART_PTR=OFF,boost"
  
--DEPENDS += "swig-native"
-+DEPENDS += "swig-native pulseaudio"
-+REQUIRED_DISTRO_FEATURES += "pulseaudio"
+ do_install_append () {
+     ln -sf thrift ${D}/${bindir}/thrift-compiler
 -- 
-2.17.1
+2.11.0
 
