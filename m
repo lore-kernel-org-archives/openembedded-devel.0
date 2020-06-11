@@ -1,148 +1,305 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.45])
- by mx.groups.io with SMTP id smtpd.web11.8810.1591916807620855761
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com [209.85.160.194])
+ by mx.groups.io with SMTP id smtpd.web11.8966.1591917286539134788
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Jun 2020 16:06:47 -0700
+ Thu, 11 Jun 2020 16:14:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=XFMej7kg;
- spf=pass (domain: windriver.com, ip: 40.107.243.45, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=k9Khogi113wk6jyZGJLc4PUAdrGjpd5U8/ZzTvBzLbsVpW/jk4gvr1ZbEZWxAqK7WmCjKY4/1Pa9seRJ9NjOo91H+kn6vl/gR0agG6H4Ob3oK3Be2RwbLOFfE7ZjpPaIt1/VfCvkaYEoscxhk91FGPH7PWNNgzQarOjISGGYA7+RymcEuRplQMrRqn9e4a5lOCg2TDHzH1bYd/5yLYU7Ba4AVfuihEJqh4ajl0Z8nqKaPTkQtdH6uZDiYvfc0QpuFTpsKalPe7i9Jh+CIMo8qtJdf8mBscl6ylCI4nBrYv37iPFlxTIwOMpauB4sez7s3Qrm2mhkrD35iFUFaIuNuA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7XPtGxZgUsNB3CKCTSK7zhO7mqj8ydNHm2tJyovcw/Q=;
- b=FLewJdmHHmYQdlYO7a+TxKci0VAAyhznQYI6ZdSEL/jqI6ydNieFmjdKgvsYI+yQ+8IPszq0SXzW5ChFPkiOsLF4u2sOSXV02/abWrhxdPY9+11USmceOGtPCH32D11BclyWMUNx8mqqjC9096xggcdpn3PjJ/PgWTxiVU0M4mwnbxJzUIi5XAL9P5ckrNwK2FMLVGDj5EuXsB0W6OSNghfAy3HRjbUnFPVhz5X8bClJ/+8y8U5csBXb5gGkvIBAPtrq+XPnL7G6wJglyySQvRijM2USNfRqjKtDtHUNZgds2TWEV9hozI2KHJNM4AOPw11T1vW3NwW9XvIC3ZmGdg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=KQX4a0Pn;
+ spf=pass (domain: gmail.com, ip: 209.85.160.194, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f194.google.com with SMTP id w9so5841417qtv.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Jun 2020 16:14:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7XPtGxZgUsNB3CKCTSK7zhO7mqj8ydNHm2tJyovcw/Q=;
- b=XFMej7kg0IVCCvVw8hoB0rkejo++8+fNzrLvaoAvFf4A2+Lou7ADLzoUFiseJ6Qaaq01Gm9w4bo8wN/4MHqdU4oL/eYLSKtT+s0AZciz57mihbWfFLbjl48biqDCFNSSzJVECqo+MLasPLiTKOsQP1qpMSLZ/25Cv0kAUrbMR9M=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB3955.namprd11.prod.outlook.com (2603:10b6:405:82::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.21; Thu, 11 Jun
- 2020 23:06:46 +0000
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3088.021; Thu, 11 Jun 2020
- 23:06:46 +0000
-Subject: Re: [oe][meta-python][PATCH V2] python-django: set CVE_PRODUCT to be django
-To: Chen Qi <Qi.Chen@windriver.com>, openembedded-devel@lists.openembedded.org
-References: <20200611060741.24132-1-Qi.Chen@windriver.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <590bb41b-42b2-ccf2-92d5-f6c732cb8fc1@windriver.com>
-Date: Thu, 11 Jun 2020 19:06:44 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
-In-Reply-To: <20200611060741.24132-1-Qi.Chen@windriver.com>
-X-ClientProxiedBy: YTOPR0101CA0050.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:14::27) To BN6PR11MB0003.namprd11.prod.outlook.com
- (2603:10b6:405:61::26)
-Return-Path: trevor.gamblin@windriver.com
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=dzTh9uZgoqpkW99cgVkZyBGxnLP5tWpCYYDRO5tLq04=;
+        b=KQX4a0PnUhznXuAzA6ohONC4AwTfd3063YOyl4iJ05WQNJR3LRZF0omSxusSNF21Vt
+         ZXY4GMqImHvg4sr03XtU+LZ1mJ82GvYEG5cwf7rv+Xd69Gu0j5ugPBBrSKTCzLN+qBCC
+         2klKWlVPdRHseZGq0LZPHXI806+Mn2o8EzVP//9GWBptw50tDmffzvJBJ6d1suOjaBQd
+         F0fDQL61HtRp4iiGEzd3K25TWA4QwjI5LIEKtd8KgsRM6+zzt/DMMdU/1Sgh8znaqz8c
+         2vZ/9EWzNsjE/H9AZsdR4nlC8Lg/1JDE5NGLVnsvTFFHu2dxHYIrB6JpeUiuNFPzRWQC
+         F6Ew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=dzTh9uZgoqpkW99cgVkZyBGxnLP5tWpCYYDRO5tLq04=;
+        b=JKlTAAP0iGUbE1vcym5xqhffsIwYWEHtY6+0b6U7I/Vfj7VROWmqLTYru3yT8LZGxJ
+         NMYRTl5BPvApLnRBcQE07+oeyyOXzT4hj7m6m/utCLUefC7H8fiCtWtNIVcwExrmpP5b
+         gLR9Nw+2lMBpQJYAt/VzHRi4biBRH+R89v18jOVggxc1dLE+KY3OHUChAeGTG+vAieCa
+         S02vbzb0MaVahzIgeZosj6YNd4ajDKe1fdHCaEWXM3H6/hUEfzYGJ6BC9fcL7dO03jVM
+         P6wK67fay5S+hUINJaxXBQxenQR3swbgqbdbIHnhkIELK00iHhbxvpLlghWYPPUlKq6D
+         Ehag==
+X-Gm-Message-State: AOAM531sUWB0iML5FtCfdHxMKXBaGQUjdarkG8rhkbaqAsVlQ3gtSmTx
+	ofsi0x4Ai0RnbIRJL5CjP+gyDsVF4zPBXN347t8=
+X-Google-Smtp-Source: ABdhPJzz2ijJhV+fagQa1LiAi+qfjrtW67BjoLM4TkafMfp46S2zPLE6YOCD5ff0mbzFddR6q6FUKDzCBoLtLTSh2YY=
+X-Received: by 2002:ac8:5148:: with SMTP id h8mr365355qtn.316.1591917285451;
+ Thu, 11 Jun 2020 16:14:45 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YTOPR0101CA0050.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:14::27) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.18 via Frontend Transport; Thu, 11 Jun 2020 23:06:46 +0000
-X-Originating-IP: [174.115.236.231]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: ce53132c-90bc-49f3-6aa2-08d80e5c1d3d
-X-MS-TrafficTypeDiagnostic: BN6PR11MB3955:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB3955022BB088B9F5E73A30009F800@BN6PR11MB3955.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:138;
-X-Forefront-PRVS: 0431F981D8
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	H24zF42WryI/rVJ2PNwkjiD/mYs1A+kv0/fGGx4XaeDiXiJKWqn+EZmwJcvQoBAfxJKz+Mt/evgoiXgnbwAbAShcAQa9Ha5um0Tlz51UuR0UKiOAdPAY/yOWoJPpVoEklJa1W+/xWu1Vv3tL1H1tIVqvtmkMSh6qKMHm3zWn03JwPz802gVUFGnJEFQgGQ8Xo8LSgbFQGIWsp3pp9hzqDQXLy1d5x2z0jOubRgjTutKoTP17NY4CN9j+xH9bKCW9qjwEGF8PeS7KTMQBphqF5XlqM2HMz2Lkgt9lMOv2w98j6M8jptYueRypyAlYvBXC7BvbagAYYbGzMQh+rgm0iCZl8y0UGNF/4yN9YrlmH/lmzyqriFHtL9iSXya5CcZjAxCvtmJXj3Y5I47Kn5oRGOH7qOfgDQgK3JxwbLorLr4y/8TyEy1ntWs8cJQ7SmBhw8Y/HAoIzKEsCjw4OFVJqQ==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(396003)(39850400004)(376002)(346002)(366004)(66946007)(2616005)(36756003)(66556008)(66476007)(44832011)(956004)(316002)(83380400001)(31696002)(166002)(16526019)(5660300002)(26005)(52116002)(2906002)(16576012)(33964004)(186003)(53546011)(86362001)(966005)(8676002)(8936002)(31686004)(6486002)(478600001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	QiiKILRZYDlpaOAvH0FegYV54oH+xMC4HOsNOUSeiL3sHwAYV6Et1DvocsQIqxpGHAWwQpi6SG2jg4HSA4bqLRplkjCrvNBbWnIQJZPFZG6RXeQasio331+fEu9iBM5FHCrgNfu1/uoPu3ER6mihB6tEOqhGgALZ7hpQE4Wr12B0tOYmlwkvE8wXLXg9GYCFbWRiaUO5JvVwvNIAHtDHVq4GINSu2Ph5VeZyOI2KVgIpat5mdmaIZA4R+7bavMi8Bmv2tGc3PsYrmbSyjkTDZxETCzOVbfUYY2Fpf6SSBUjv0Ro2ZBJKjOUfkhCMG5Wkf8HySTquHhzFkfXNfsgzqILXeEKTMyJurkqUWtqqkBvWVH+IDhR4iXuf+/k/6nkxoxqXKtuO4D+IUtBW0NnPGu1S87Nwz4wMfHcDIJ7dz8MePPdhdOIVYaX4SfGBsxTDPFoHgk1Khvbdc1zNzVuhq0pTYEtClKM22axv+Mw9Pszf+6XYjFXpcum3tYv9NruG
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ce53132c-90bc-49f3-6aa2-08d80e5c1d3d
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2020 23:06:46.5318
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8otfQjrN+6Tlv6epAeRz+2UPTZWO7+bxZ1nn/77eF26XRN7xQt1/rkEZcWJH3fp7AmDaS/dRY0qOjZTi0ySXfJtoWVWgCycCnAADJd4lOao=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB3955
-Content-Type: multipart/alternative;
- boundary="------------A76154E659F7CFFF63734B3B"
-Content-Language: en-US
+References: <1591915305-19739-1-git-send-email-denis@denix.org>
+In-Reply-To: <1591915305-19739-1-git-send-email-denis@denix.org>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 11 Jun 2020 16:14:19 -0700
+Message-ID: <CAMKF1srcQ_JGBAe31FAHPgteH7sFD13EbiDy5gxbVEEJcXFbnw@mail.gmail.com>
+Subject: Re: [oe] [PATCH] serialcheck: switch to a fork and update to the latest
+To: Denys Dmytriyenko <denis@denix.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Denys Dmytriyenko <denys@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 
---------------A76154E659F7CFFF63734B3B
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-
-On 6/11/20 2:07 AM, Chen Qi wrote:
-> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   meta-python/recipes-devtools/python/python-django.inc | 2 ++
->   1 file changed, 2 insertions(+)
+On Thu, Jun 11, 2020 at 3:41 PM Denys Dmytriyenko <denis@denix.org> wrote:
 >
-> diff --git a/meta-python/recipes-devtools/python/python-django.inc b/meta-python/recipes-devtools/python/python-django.inc
-> index 73b7ac99f..c02b3fa52 100644
-> --- a/meta-python/recipes-devtools/python/python-django.inc
-> +++ b/meta-python/recipes-devtools/python/python-django.inc
-> @@ -30,3 +30,5 @@ RDEPENDS_${PN} += "\
->       ${PYTHON_PN}-xml \
->       ${PYTHON_PN}-distutils \
->   "
-> +
-> +CVE_PRODUCT = "django"
+> From: Denys Dmytriyenko <denys@ti.com>
+>
+> Original serialcheck at https://git.breakpoint.cc/cgit/bigeasy/serialcheck.git/
+> hasn't been updated since early 2015 and has been forked and continued at
+> https://github.com/nsekhar/serialcheck
+>
+> Switch to the fork and update to the latest, while dropping merged and unneeded
+> patches.
+>
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> ---
+>  ...01-Add-option-to-enable-internal-loopback.patch | 81 ----------------------
+>  .../0001-Makefile-Change-order-of-link-flags.patch | 34 ---------
+>  .../0002-Restore-original-loopback-config.patch    | 49 -------------
+>  .../serialcheck/serialcheck_1.0.0.bb               | 25 +++----
+>  4 files changed, 11 insertions(+), 178 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Add-option-to-enable-internal-loopback.patch
+>  delete mode 100644 meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Makefile-Change-order-of-link-flags.patch
+>  delete mode 100644 meta-oe/recipes-devtools/serialcheck/serialcheck/0002-Restore-original-loopback-config.patch
+>
+> diff --git a/meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Add-option-to-enable-internal-loopback.patch b/meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Add-option-to-enable-internal-loopback.patch
+> deleted file mode 100644
+> index f69254a..0000000
+> --- a/meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Add-option-to-enable-internal-loopback.patch
+> +++ /dev/null
+> @@ -1,81 +0,0 @@
+> -From 059d5512e840fe68e2bb37add6c9208fa9c34d15 Mon Sep 17 00:00:00 2001
+> -From: Sekhar Nori <nsekhar@ti.com>
+> -Date: Tue, 24 Feb 2015 22:16:37 +0530
+> -Subject: [PATCH 1/2] Add option to enable internal loopback
+> -
+> -Upstream-status: Pending
+> ----
+> - serialcheck.c | 23 +++++++++++++++++++++++
+> - 1 file changed, 23 insertions(+)
+> -
+> -diff --git a/serialcheck.c b/serialcheck.c
+> -index 4f5b747..4100c37 100644
+> ---- a/serialcheck.c
+> -+++ b/serialcheck.c
+> -@@ -12,6 +12,8 @@
+> - #include <sys/ioctl.h>
+> - #include <linux/serial.h>
+> -
+> -+#define TIOCM_LOOP    0x8000
+> -+
+> - #define __same_type(a, b)     __builtin_types_compatible_p(typeof(a), typeof(b))
+> - #define BUILD_BUG_ON_ZERO(e)  (sizeof(struct { int:-!!(e); }))
+> - #define __must_be_array(a)    BUILD_BUG_ON_ZERO(__same_type((a), &(a)[0]))
+> -@@ -40,6 +42,7 @@ struct g_opt {
+> -       unsigned char hflow;
+> -       unsigned char do_termios;
+> -       unsigned char *cmp_buff;
+> -+      unsigned char loopback;
+> - };
+> -
+> - /* name, key, arg, flags, doc, group */
+> -@@ -51,6 +54,7 @@ static struct argp_option options[] = {
+> -       {"mode",        'm', "M",    0, "transfer mode (d = duplex, t = send r = receive)", 0},
+> -       {"loops",       'l', "NUM",  0, "loops to perform (0 => wait fot CTRL-C", 0},
+> -       {"no-termios",  'n', NULL,   0, "No termios change (baud rate etc. remains unchanged)", 0},
+> -+      {"loopback",    'k', NULL,   0, "loopback mode", 0},
+> -       {NULL, 0, NULL, 0, NULL, 0}
+> - };
+> -
+> -@@ -67,6 +71,7 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state)
+> -               go->baudrate = 115200;
+> -               go->loops = UINT_MAX;
+> -               go->do_termios = 1;
+> -+              go->loopback = 0;
+> -               break;
+> -       case ARGP_KEY_ARG:
+> -               ret =  ARGP_ERR_UNKNOWN;
+> -@@ -113,6 +118,9 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state)
+> -               } else
+> -                       go->loops = num;
+> -               break;
+> -+      case 'k':
+> -+              go->loopback = 1;
+> -+              break;
+> -       default:
+> -               ret = ARGP_ERR_UNKNOWN;
+> -       }
+> -@@ -487,6 +495,21 @@ int main(int argc, char *argv[])
+> -                       die("tcflush failed: %m\n");
+> -       }
+> -
+> -+      if (opts.loopback) {
+> -+              unsigned int mcr;
+> -+
+> -+              ret = ioctl(fd, TIOCMGET, &mcr);
+> -+              if (ret < 0)
+> -+                      die("mcr get failed: %m\n");
+> -+
+> -+              mcr |= TIOCM_LOOP;
+> -+
+> -+              ret = ioctl(fd, TIOCMSET, &mcr);
+> -+              if (ret < 0)
+> -+                      die ("mcr set failed: %m\n");
+> -+
+> -+      }
+> -+
+> -       ret = fcntl(fd, F_SETFL, 0);
+> -       if (ret)
+> -               printf("Failed to remove nonblock mode\n");
+> ---
+> -1.9.1
+> diff --git a/meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Makefile-Change-order-of-link-flags.patch b/meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Makefile-Change-order-of-link-flags.patch
+> deleted file mode 100644
+> index 2ab4834..0000000
+> --- a/meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Makefile-Change-order-of-link-flags.patch
+> +++ /dev/null
+> @@ -1,34 +0,0 @@
+> -From efc8a4e717ba919c869c2da1c7de2d08bc976926 Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Wed, 24 Feb 2016 18:48:07 +0000
+> -Subject: [PATCH] Makefile: Change order of link flags
+> -
+> -This helps in injectcting LDFLAGS from env to take effect
+> -as it appears last on cmdline now
+> -
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ----
+> -Upstream-Status: Pending
+> -
+> - Makefile | 10 ++++++++--
+> - 1 file changed, 8 insertions(+), 2 deletions(-)
+> -
+> -diff --git a/Makefile b/Makefile
+> -index ba2bfbb..6d13e68 100644
+> ---- a/Makefile
+> -+++ b/Makefile
+> -@@ -1,3 +1,9 @@
+> --CFLAGS=-O2 -Wall -Wextra -g -Wno-sign-compare -Wno-pointer-sign
+> --CC=gcc
+> -+CFLAGS?=-O2 -Wall -Wextra -g -Wno-sign-compare -Wno-pointer-sign
+> -+CC?=gcc
+> - all: serialcheck
+> -+serialcheck : serialcheck.o
+> -+      $(CC) -o serialcheck serialcheck.o $(CFLAGS) $(LDFLAGS)
+> -+
+> -+%.o : %.c
+> -+      $(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+> -+
+> ---
+> -1.9.1
+> -
+> diff --git a/meta-oe/recipes-devtools/serialcheck/serialcheck/0002-Restore-original-loopback-config.patch b/meta-oe/recipes-devtools/serialcheck/serialcheck/0002-Restore-original-loopback-config.patch
+> deleted file mode 100644
+> index 1b8c95b..0000000
+> --- a/meta-oe/recipes-devtools/serialcheck/serialcheck/0002-Restore-original-loopback-config.patch
+> +++ /dev/null
+> @@ -1,49 +0,0 @@
+> -From a6e5813d2f8402bf3a311c8bcda02623bfb76882 Mon Sep 17 00:00:00 2001
+> -From: Carlos Hernandez <ceh@ti.com>
+> -Date: Tue, 24 Feb 2015 16:00:34 -0500
+> -Subject: [PATCH 2/2] Restore original loopback config
+> -
+> -If loopback option is enabled, disable it at the end of the test.
+> -
+> -Signed-off-by: Carlos Hernandez <ceh@ti.com>
+> -Upstream-status: Pending
+> ----
+> - serialcheck.c | 9 +++++++--
+> - 1 file changed, 7 insertions(+), 2 deletions(-)
+> -
+> -diff --git a/serialcheck.c b/serialcheck.c
+> -index 4100c37..06470f7 100644
+> ---- a/serialcheck.c
+> -+++ b/serialcheck.c
+> -@@ -427,6 +427,7 @@ int main(int argc, char *argv[])
+> -       unsigned char *data;
+> -       unsigned int open_mode;
+> -       off_t data_len;
+> -+      unsigned int mcr;
+> -
+> -       argp_parse(&argp, argc, argv, 0, NULL, &opts);
+> -       if (!opts.file_trans)
+> -@@ -496,8 +497,6 @@ int main(int argc, char *argv[])
+> -       }
+> -
+> -       if (opts.loopback) {
+> --              unsigned int mcr;
+> --
+> -               ret = ioctl(fd, TIOCMGET, &mcr);
+> -               if (ret < 0)
+> -                       die("mcr get failed: %m\n");
+> -@@ -535,6 +534,12 @@ int main(int argc, char *argv[])
+> -       ret = tcsetattr(fd, TCSAFLUSH, &old_term);
+> -       if (ret)
+> -               printf("tcsetattr() of old ones failed: %m\n");
+> -+      if (opts.loopback) {
+> -+              mcr &= ~(TIOCM_LOOP);
+> -+              ret = ioctl(fd, TIOCMSET, &mcr);
+> -+      }
+> -+      if (ret)
+> -+              printf("disabling loopback failed: %m\n");
+> -
+> -       close(fd);
+> -       return status;
+> ---
+> -1.9.1
+> diff --git a/meta-oe/recipes-devtools/serialcheck/serialcheck_1.0.0.bb b/meta-oe/recipes-devtools/serialcheck/serialcheck_1.0.0.bb
+> index cd5e0a4..0ec96ab 100644
+> --- a/meta-oe/recipes-devtools/serialcheck/serialcheck_1.0.0.bb
+> +++ b/meta-oe/recipes-devtools/serialcheck/serialcheck_1.0.0.bb
+> @@ -1,30 +1,27 @@
+>  SUMMARY = "Application to verify operation of serial ports"
+> -HOMEPAGE = "http://git.breakpoint.cc/cgit/bigeasy/serialcheck.git/"
+> +HOMEPAGE = "https://github.com/nsekhar/serialcheck"
+>  LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>
+> -SRC_URI = "git://git.breakpoint.cc/bigeasy/serialcheck.git \
+> -           file://0001-Add-option-to-enable-internal-loopback.patch \
+> -           file://0002-Restore-original-loopback-config.patch \
+> -           file://0001-Makefile-Change-order-of-link-flags.patch \
+> -           "
+> +SRC_URI = " \
+> +    git://github.com/nsekhar/serialcheck.git \
+> +"
+>
+> -SRCREV = "63854a2d0c0129efab132ec328a75279e013fb84"
+> +SRCREV = "45eb2ffa5378396e85432872833890b0a1cba872"
+>
+>  S = "${WORKDIR}/git"
+>
+> -DEPENDS_append_libc-musl = " argp-standalone"
+> -EXTRA_OEMAKE = "-e MAKEFLAGS="
+> +inherit autotools
+>
+> -CFLAGS_prepend = "-Wall -Wextra -Wno-sign-compare -Wno-pointer-sign "
+> -LDFLAGS_append_libc-musl = " -largp"
+> +DEPENDS_append_libc-musl = " argp-standalone"
+> +EXTRA_OEMAKE_append_libc-musl = " LIBS='-largp'"
+>
+>  do_install() {
+>      install -d ${D}${bindir}
+> -    install ${S}/serialcheck ${D}${bindir}
+> +    install ${B}/serialcheck ${D}${bindir}
+> +    install ${B}/serialstats ${D}${bindir}
+
+should this be packaged into a package of its own ?
+
+>      install -d ${D}${docdir}/${BP}
+> -    install ${S}/Readme.txt ${D}${docdir}/${BP}
+> +    install ${S}/README ${D}${docdir}/${BP}
+>  }
+> -CLEANBROKEN = "1"
+>
+>  BBCLASSEXTEND = "nativesdk"
+> --
+> 2.7.4
 >
 > 
-
---------------A76154E659F7CFFF63734B3B
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 6/11/20 2:07 AM, Chen Qi wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20200611060741.24132-1-Qi.Chen@windriver.com">
-      <pre class="moz-quote-pre" wrap="">Signed-off-by: Chen Qi <a class="moz-txt-link-rfc2396E" href="mailto:Qi.Chen@windriver.com">&lt;Qi.Chen@windriver.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200611060741.24132-1-Qi.Chen@windriver.com">
-      <pre class="moz-quote-pre" wrap="">
----
- meta-python/recipes-devtools/python/python-django.inc | 2 &#43;&#43;
- 1 file changed, 2 insertions(&#43;)
-
-diff --git a/meta-python/recipes-devtools/python/python-django.inc b/meta-python/recipes-devtools/python/python-django.inc
-index 73b7ac99f..c02b3fa52 100644
---- a/meta-python/recipes-devtools/python/python-django.inc
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python-django.inc
-@@ -30,3 &#43;30,5 @@ RDEPENDS_${PN} &#43;= &quot;\
-     ${PYTHON_PN}-xml \
-     ${PYTHON_PN}-distutils \
- &quot;
-&#43;
-&#43;CVE_PRODUCT = &quot;django&quot;
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------A76154E659F7CFFF63734B3B--
