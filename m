@@ -1,279 +1,250 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.8198.1591915309123799894
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.67])
+ by mx.groups.io with SMTP id smtpd.web10.8551.1591916608435999209
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Jun 2020 15:41:49 -0700
+ Thu, 11 Jun 2020 16:03:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 6DEC040C1C;
-	Thu, 11 Jun 2020 22:41:48 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Yp-X-ym0-LMR; Thu, 11 Jun 2020 22:41:48 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4F08240BB1;
-	Thu, 11 Jun 2020 22:41:47 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 9BB5217320C;
-	Thu, 11 Jun 2020 18:41:46 -0400 (EDT)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [PATCH] serialcheck: switch to a fork and update to the latest
-Date: Thu, 11 Jun 2020 18:41:45 -0400
-Message-Id: <1591915305-19739-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=EAMP8F3g;
+ spf=pass (domain: windriver.com, ip: 40.107.243.67, mailfrom: trevor.gamblin@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=QfeD4h6Jft7r0zy4w2AzopNCzO5YpkrJ/9NKpiziyN/LhrEZ5jQhxq3UQiELOlErwHUfOu0Xu2iGxV/SNHYf1j/omewB6TPoWCs/OcYh/uqKfFrC7Qq2aUMgVCwehT8/xvKSnNsUVmsG4h8ghRL4gaTD2Y01lhHlFno43jDKgHYIAo16EyUxniSUjPnQo5IrzaabMMYCjyXraMHMTqtwfWM+vhEvs85kPeOWrtkKbX715RhWIARbsU5YcewdwDNfuIbjLk7fiAPS8mDFfhw0U4AlaBD185r4GlwiJw2YFPmklNqSMeT0AB+L4Zv3Fznm4SwLuEoNhQovIaH8jNMu9w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5V63NGQNMOsB/6wqtzieOupMwbRRdWYysOaoepHbPus=;
+ b=HWbAcxbmncarFEvND9reh+VLb6/vmIIUGuvoO3BnYT6BOHSus+7Wh0pPd/EQBRx6w7qdiySfr9eeEiRviEpqqIqBVRvXMYo6F8owlvyVSRLqA1eEEmfsdhxRNsb2cQ+NL4oCrW7B8VEMy/f6dejicCvy/pqtb1HAvH9LaiUc0xsvBWloobIDVS29+nWFUf1zuXi15i7GVjuDYa3bVKdLowgBlpkQV9oV16dMZBinIBZYfR4r7M9Od/xxqwJF5TrXagBsCmVQk9/tW/niBZHij8RoMuvY0sQygtgqlhaSJQS+8Tdy7Xcc4m+DHP2N1/oR7IWxZuxob6uJy8hZKgVQhQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5V63NGQNMOsB/6wqtzieOupMwbRRdWYysOaoepHbPus=;
+ b=EAMP8F3gbevMvfDbZg1st8apbme2At13eOHzmUq93eI5oAcBczjZ0hjzVvdIADTSfhhqL6CbxeYHrRe6zpkcfZXGoJlHB5ryn7N7iExNDWly0fWZW7iWEaguwdGrDDsTuMiTmkmJ+LRXf8gu5FfUw/earGh50z743ydEF6z7chs=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
+ by BN6PR11MB3955.namprd11.prod.outlook.com (2603:10b6:405:82::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.21; Thu, 11 Jun
+ 2020 23:03:25 +0000
+Received: from BN6PR11MB0003.namprd11.prod.outlook.com
+ ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
+ ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3088.021; Thu, 11 Jun 2020
+ 23:03:24 +0000
+Subject: Re: [oe] [meta-python][PATCH 1/7] python3-pika: Consolidate in a single file
+To: Leon Anavi <leon.anavi@konsulko.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20200611090904.29772-1-leon.anavi@konsulko.com>
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+Message-ID: <7fff5bdb-3841-460d-830c-fc0e8809a70e@windriver.com>
+Date: Thu, 11 Jun 2020 19:03:20 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
+In-Reply-To: <20200611090904.29772-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0142.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2f::21) To BN6PR11MB0003.namprd11.prod.outlook.com
+ (2603:10b6:405:61::26)
+Return-Path: trevor.gamblin@windriver.com
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0142.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.22 via Frontend Transport; Thu, 11 Jun 2020 23:03:24 +0000
+X-Originating-IP: [174.115.236.231]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 01d6f97a-495b-4b8c-32c8-08d80e5ba4eb
+X-MS-TrafficTypeDiagnostic: BN6PR11MB3955:
+X-Microsoft-Antispam-PRVS: 
+	<BN6PR11MB39553D07766AD60D9D3DE0E39F800@BN6PR11MB3955.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1443;
+X-Forefront-PRVS: 0431F981D8
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	LX2VJec0/7NfKnKLYbEDmikj1Md/gMxy2IqFyImrFYZF2zS6x40YodE7GlyyPaTnYTjA8myla9KrvmRJHvJXiZ4f9kge/p7Gp7CvL8HJ5akFq7YP5NetELMoyeXcAs3KFnoW3ta3VJoWB8I9L56TSDqKrHC8zy7pW7WApdP6c+3/W7KcNv0NmZIDt1eL+/DqWQhdE8H8Ja46Rn2gy9kqpz1QbNMJiXwtlla2jhHaLnhxctRdAy5dV5945SUkJT2eihPs0PX2xXnhfg3LHgKaVMkv1Puq6jtVMCMqgMEfccfPbO+t9rVIsz6tRt7hKE6nk4IUZI54wnltkL2vNGSvJuH/KEIpS0IQB1JEQnMedC9RMdRUSIxAH8UEoWZUBKcBLbWR7nktDXEt4dYUK+4hZ/8BnT8fnHjVrGmWD48wRscofKNc8HL7ANtbaJxEFHWG1ZYjdhdOnsSXbDzL9dRUKw==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(366004)(346002)(376002)(136003)(39850400004)(396003)(6486002)(8936002)(31686004)(966005)(8676002)(478600001)(31696002)(316002)(166002)(2616005)(36756003)(66946007)(44832011)(956004)(66556008)(66476007)(83380400001)(33964004)(53546011)(86362001)(186003)(6666004)(16526019)(5660300002)(16576012)(26005)(52116002)(2906002)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	GGdACLitPw5psrDcHXQcgx+T/NMgjecc7LRwGB6QRrwG7R7tM06uMipKoo2kFE/ydWoHeu0SMUvVGfUdITNiWmt4y6FzkmkQ8AYhkV7TXnImLjKiwteRiQoBQ5LQwNWXvUh9PGZ5XHKJMWWyptVqTDwd9PnMHQ9n13KULki+dn2ecSOpwHX2vaTTs7fZm2jieRou+z8P3e+rEJQxodGS+KnG74NPHu7jO1jrTUois5GKiEyPEfXVUYBAuc3JXJ5R5AunWZv3J0ZBCjwaGWMr6k99j4HGISooxrV1iT1bp1TWnh4EwQ3DEt/LzUQrF8f4HOhED/aCPhYzYM510B6YO35NzqLefAGc/oDILm+EIlKNeFUEZx+MTkws4YgBZQtzzYWH9A/Pzly4qQoIK7eiFqPnMejh9mktpYCKXlm08JagUPiqYOxGb2Ja2erlldpbSqcJxPPLtJ1Bv5Mx/6t8Xo27EN4bnRpbQhRWGXdMvf46+2cy9Gd4LYiLyOaKBYpu
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 01d6f97a-495b-4b8c-32c8-08d80e5ba4eb
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2020 23:03:24.6494
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: eHPrpfjU118wq+RIJW0aminpZCV3hgJqihV++cmsZ1VBeJI0S+8Ot7i5V4Gc1FuUdsTENeL537LchjcHngr7N1j+4OAUsDYTUg5KE0jm4WI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB3955
+Content-Type: multipart/alternative;
+ boundary="------------DE78393558F5B8574F790922"
+Content-Language: en-US
 
-From: Denys Dmytriyenko <denys@ti.com>
+--------------DE78393558F5B8574F790922
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Original serialcheck at https://git.breakpoint.cc/cgit/bigeasy/serialcheck.git/
-hasn't been updated since early 2015 and has been forked and continued at
-https://github.com/nsekhar/serialcheck
 
-Switch to the fork and update to the latest, while dropping merged and unneeded
-patches.
+On 6/11/20 5:08 AM, Leon Anavi wrote:
+> Consolidate inc and bb files into a single bb file.
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>   .../recipes-devtools/python/python-pika.inc   | 22 -----------------
+>   .../python/python3-pika_1.1.0.bb              | 24 +++++++++++++++++--
+>   2 files changed, 22 insertions(+), 24 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python-pika.inc
+>
+> diff --git a/meta-python/recipes-devtools/python/python-pika.inc b/meta-python/recipes-devtools/python/python-pika.inc
+> deleted file mode 100644
+> index bde154fe7..000000000
+> --- a/meta-python/recipes-devtools/python/python-pika.inc
+> +++ /dev/null
+> @@ -1,22 +0,0 @@
+> -SUMMARY = "Pika is a RabbitMQ (AMQP 0-9-1) client library for Python."
+> -DESCRIPTION = " \
+> -Pika is a pure-Python implementation of the AMQP 0-9-1 protocol \
+> -including RabbitMQ’s extensions. \
+> -"
+> -SECTION = "devel/python"
+> -HOMEPAGE = "https://pika.readthedocs.io"
+> -LICENSE = "BSD-3-Clause"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=535836bf0a5de515a7bfee026075701d"
+> -
+> -SRC_URI[md5sum] = "6002400cdd33bf85ec8680ece72910d4"
+> -SRC_URI[sha256sum] = "9fa76ba4b65034b878b2b8de90ff8660a59d925b087c5bb88f8fdbb4b64a1dbf"
+> -
+> -inherit pypi
+> -
+> -PYPI_PACKAGE = "pika"
+> -
+> -RDEPENDS_${PN} += " \
+> -    ${PYTHON_PN}-logging \
+> -    ${PYTHON_PN}-tornado \
+> -    ${PYTHON_PN}-twisted \
+> -"
+> diff --git a/meta-python/recipes-devtools/python/python3-pika_1.1.0.bb b/meta-python/recipes-devtools/python/python3-pika_1.1.0.bb
+> index a1515881f..c61d47c47 100644
+> --- a/meta-python/recipes-devtools/python/python3-pika_1.1.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pika_1.1.0.bb
+> @@ -1,2 +1,22 @@
+> -inherit setuptools3
+> -require python-pika.inc
+> +SUMMARY = "Pika is a RabbitMQ (AMQP 0-9-1) client library for Python."
+> +DESCRIPTION = " \
+> +Pika is a pure-Python implementation of the AMQP 0-9-1 protocol \
+> +including RabbitMQ’s extensions. \
+> +"
+> +SECTION = "devel/python"
+> +HOMEPAGE = "https://pika.readthedocs.io"
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=535836bf0a5de515a7bfee026075701d"
+> +
+> +SRC_URI[md5sum] = "6002400cdd33bf85ec8680ece72910d4"
+> +SRC_URI[sha256sum] = "9fa76ba4b65034b878b2b8de90ff8660a59d925b087c5bb88f8fdbb4b64a1dbf"
+> +
+> +inherit pypi setuptools3
+> +
+> +PYPI_PACKAGE = "pika"
+> +
+> +RDEPENDS_${PN} += " \
+> +    ${PYTHON_PN}-logging \
+> +    ${PYTHON_PN}-tornado \
+> +    ${PYTHON_PN}-twisted \
+> +"
+>
+> 
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+--------------DE78393558F5B8574F790922
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 6/11/20 5:08 AM, Leon Anavi wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:20200611090904.29772-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Consolidate inc and bb files into a single bb file.
+
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+    </blockquote>
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
+    <blockquote type="cite" cite="mid:20200611090904.29772-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">
 ---
- ...01-Add-option-to-enable-internal-loopback.patch | 81 ----------------------
- .../0001-Makefile-Change-order-of-link-flags.patch | 34 ---------
- .../0002-Restore-original-loopback-config.patch    | 49 -------------
- .../serialcheck/serialcheck_1.0.0.bb               | 25 +++----
- 4 files changed, 11 insertions(+), 178 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Add-option-to-enable-internal-loopback.patch
- delete mode 100644 meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Makefile-Change-order-of-link-flags.patch
- delete mode 100644 meta-oe/recipes-devtools/serialcheck/serialcheck/0002-Restore-original-loopback-config.patch
+ .../recipes-devtools/python/python-pika.inc   | 22 -----------------
+ .../python/python3-pika_1.1.0.bb              | 24 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;--
+ 2 files changed, 22 insertions(&#43;), 24 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pika.inc
 
-diff --git a/meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Add-option-to-enable-internal-loopback.patch b/meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Add-option-to-enable-internal-loopback.patch
+diff --git a/meta-python/recipes-devtools/python/python-pika.inc b/meta-python/recipes-devtools/python/python-pika.inc
 deleted file mode 100644
-index f69254a..0000000
---- a/meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Add-option-to-enable-internal-loopback.patch
-+++ /dev/null
-@@ -1,81 +0,0 @@
--From 059d5512e840fe68e2bb37add6c9208fa9c34d15 Mon Sep 17 00:00:00 2001
--From: Sekhar Nori <nsekhar@ti.com>
--Date: Tue, 24 Feb 2015 22:16:37 +0530
--Subject: [PATCH 1/2] Add option to enable internal loopback
+index bde154fe7..000000000
+--- a/meta-python/recipes-devtools/python/python-pika.inc
+&#43;&#43;&#43; /dev/null
+@@ -1,22 &#43;0,0 @@
+-SUMMARY = &quot;Pika is a RabbitMQ (AMQP 0-9-1) client library for Python.&quot;
+-DESCRIPTION = &quot; \
+-Pika is a pure-Python implementation of the AMQP 0-9-1 protocol \
+-including RabbitMQ’s extensions. \
+-&quot;
+-SECTION = &quot;devel/python&quot;
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pika.readthedocs.io">&quot;https://pika.readthedocs.io&quot;</a>
+-LICENSE = &quot;BSD-3-Clause&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=535836bf0a5de515a7bfee026075701d">&quot;file://LICENSE;md5=535836bf0a5de515a7bfee026075701d&quot;</a>
 -
--Upstream-status: Pending
-----
-- serialcheck.c | 23 +++++++++++++++++++++++
-- 1 file changed, 23 insertions(+)
+-SRC_URI[md5sum] = &quot;6002400cdd33bf85ec8680ece72910d4&quot;
+-SRC_URI[sha256sum] = &quot;9fa76ba4b65034b878b2b8de90ff8660a59d925b087c5bb88f8fdbb4b64a1dbf&quot;
 -
--diff --git a/serialcheck.c b/serialcheck.c
--index 4f5b747..4100c37 100644
----- a/serialcheck.c
--+++ b/serialcheck.c
--@@ -12,6 +12,8 @@
-- #include <sys/ioctl.h>
-- #include <linux/serial.h>
+-inherit pypi
 -
--+#define TIOCM_LOOP	0x8000
--+
-- #define __same_type(a, b)	__builtin_types_compatible_p(typeof(a), typeof(b))
-- #define BUILD_BUG_ON_ZERO(e)	(sizeof(struct { int:-!!(e); }))
-- #define __must_be_array(a)	BUILD_BUG_ON_ZERO(__same_type((a), &(a)[0]))
--@@ -40,6 +42,7 @@ struct g_opt {
--	unsigned char hflow;
--	unsigned char do_termios;
--	unsigned char *cmp_buff;
--+	unsigned char loopback;
-- };
+-PYPI_PACKAGE = &quot;pika&quot;
 -
-- /* name, key, arg, flags, doc, group */
--@@ -51,6 +54,7 @@ static struct argp_option options[] = {
--	{"mode",	'm', "M",    0, "transfer mode (d = duplex, t = send r = receive)", 0},
--	{"loops",	'l', "NUM",  0, "loops to perform (0 => wait fot CTRL-C", 0},
--	{"no-termios",	'n', NULL,   0, "No termios change (baud rate etc. remains unchanged)", 0},
--+	{"loopback",	'k', NULL,   0, "loopback mode", 0},
--	{NULL, 0, NULL, 0, NULL, 0}
-- };
--
--@@ -67,6 +71,7 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state)
--		go->baudrate = 115200;
--		go->loops = UINT_MAX;
--		go->do_termios = 1;
--+		go->loopback = 0;
--		break;
--	case ARGP_KEY_ARG:
--		ret =  ARGP_ERR_UNKNOWN;
--@@ -113,6 +118,9 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state)
--		} else
--			go->loops = num;
--		break;
--+	case 'k':
--+		go->loopback = 1;
--+		break;
--	default:
--		ret = ARGP_ERR_UNKNOWN;
--	}
--@@ -487,6 +495,21 @@ int main(int argc, char *argv[])
--			die("tcflush failed: %m\n");
--	}
--
--+	if (opts.loopback) {
--+		unsigned int mcr;
--+
--+		ret = ioctl(fd, TIOCMGET, &mcr);
--+		if (ret < 0)
--+			die("mcr get failed: %m\n");
--+
--+		mcr |= TIOCM_LOOP;
--+
--+		ret = ioctl(fd, TIOCMSET, &mcr);
--+		if (ret < 0)
--+			die ("mcr set failed: %m\n");
--+
--+	}
--+
--	ret = fcntl(fd, F_SETFL, 0);
--	if (ret)
--		printf("Failed to remove nonblock mode\n");
----
--1.9.1
-diff --git a/meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Makefile-Change-order-of-link-flags.patch b/meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Makefile-Change-order-of-link-flags.patch
-deleted file mode 100644
-index 2ab4834..0000000
---- a/meta-oe/recipes-devtools/serialcheck/serialcheck/0001-Makefile-Change-order-of-link-flags.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From efc8a4e717ba919c869c2da1c7de2d08bc976926 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 24 Feb 2016 18:48:07 +0000
--Subject: [PATCH] Makefile: Change order of link flags
--
--This helps in injectcting LDFLAGS from env to take effect
--as it appears last on cmdline now
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
--Upstream-Status: Pending
--
-- Makefile | 10 ++++++++--
-- 1 file changed, 8 insertions(+), 2 deletions(-)
--
--diff --git a/Makefile b/Makefile
--index ba2bfbb..6d13e68 100644
----- a/Makefile
--+++ b/Makefile
--@@ -1,3 +1,9 @@
---CFLAGS=-O2 -Wall -Wextra -g -Wno-sign-compare -Wno-pointer-sign
---CC=gcc
--+CFLAGS?=-O2 -Wall -Wextra -g -Wno-sign-compare -Wno-pointer-sign
--+CC?=gcc
-- all: serialcheck
--+serialcheck : serialcheck.o
--+	$(CC) -o serialcheck serialcheck.o $(CFLAGS) $(LDFLAGS)
--+
--+%.o : %.c
--+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
--+
---- 
--1.9.1
--
-diff --git a/meta-oe/recipes-devtools/serialcheck/serialcheck/0002-Restore-original-loopback-config.patch b/meta-oe/recipes-devtools/serialcheck/serialcheck/0002-Restore-original-loopback-config.patch
-deleted file mode 100644
-index 1b8c95b..0000000
---- a/meta-oe/recipes-devtools/serialcheck/serialcheck/0002-Restore-original-loopback-config.patch
-+++ /dev/null
-@@ -1,49 +0,0 @@
--From a6e5813d2f8402bf3a311c8bcda02623bfb76882 Mon Sep 17 00:00:00 2001
--From: Carlos Hernandez <ceh@ti.com>
--Date: Tue, 24 Feb 2015 16:00:34 -0500
--Subject: [PATCH 2/2] Restore original loopback config
--
--If loopback option is enabled, disable it at the end of the test.
--
--Signed-off-by: Carlos Hernandez <ceh@ti.com>
--Upstream-status: Pending
-----
-- serialcheck.c | 9 +++++++--
-- 1 file changed, 7 insertions(+), 2 deletions(-)
--
--diff --git a/serialcheck.c b/serialcheck.c
--index 4100c37..06470f7 100644
----- a/serialcheck.c
--+++ b/serialcheck.c
--@@ -427,6 +427,7 @@ int main(int argc, char *argv[])
--	unsigned char *data;
--	unsigned int open_mode;
--	off_t data_len;
--+	unsigned int mcr;
--
--	argp_parse(&argp, argc, argv, 0, NULL, &opts);
--	if (!opts.file_trans)
--@@ -496,8 +497,6 @@ int main(int argc, char *argv[])
--	}
--
--	if (opts.loopback) {
---		unsigned int mcr;
---
--		ret = ioctl(fd, TIOCMGET, &mcr);
--		if (ret < 0)
--			die("mcr get failed: %m\n");
--@@ -535,6 +534,12 @@ int main(int argc, char *argv[])
--	ret = tcsetattr(fd, TCSAFLUSH, &old_term);
--	if (ret)
--		printf("tcsetattr() of old ones failed: %m\n");
--+	if (opts.loopback) {
--+		mcr &= ~(TIOCM_LOOP);
--+		ret = ioctl(fd, TIOCMSET, &mcr);
--+	}
--+	if (ret)
--+		printf("disabling loopback failed: %m\n");
--
--	close(fd);
--	return status;
----
--1.9.1
-diff --git a/meta-oe/recipes-devtools/serialcheck/serialcheck_1.0.0.bb b/meta-oe/recipes-devtools/serialcheck/serialcheck_1.0.0.bb
-index cd5e0a4..0ec96ab 100644
---- a/meta-oe/recipes-devtools/serialcheck/serialcheck_1.0.0.bb
-+++ b/meta-oe/recipes-devtools/serialcheck/serialcheck_1.0.0.bb
-@@ -1,30 +1,27 @@
- SUMMARY = "Application to verify operation of serial ports"
--HOMEPAGE = "http://git.breakpoint.cc/cgit/bigeasy/serialcheck.git/"
-+HOMEPAGE = "https://github.com/nsekhar/serialcheck"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
--SRC_URI = "git://git.breakpoint.cc/bigeasy/serialcheck.git \
--           file://0001-Add-option-to-enable-internal-loopback.patch \
--           file://0002-Restore-original-loopback-config.patch \
--           file://0001-Makefile-Change-order-of-link-flags.patch \
--           "
-+SRC_URI = " \
-+    git://github.com/nsekhar/serialcheck.git \
-+"
- 
--SRCREV = "63854a2d0c0129efab132ec328a75279e013fb84"
-+SRCREV = "45eb2ffa5378396e85432872833890b0a1cba872"
- 
- S = "${WORKDIR}/git"
- 
--DEPENDS_append_libc-musl = " argp-standalone"
--EXTRA_OEMAKE = "-e MAKEFLAGS="
-+inherit autotools
- 
--CFLAGS_prepend = "-Wall -Wextra -Wno-sign-compare -Wno-pointer-sign "
--LDFLAGS_append_libc-musl = " -largp"
-+DEPENDS_append_libc-musl = " argp-standalone"
-+EXTRA_OEMAKE_append_libc-musl = " LIBS='-largp'"
- 
- do_install() {
-     install -d ${D}${bindir}
--    install ${S}/serialcheck ${D}${bindir}
-+    install ${B}/serialcheck ${D}${bindir}
-+    install ${B}/serialstats ${D}${bindir}
-     install -d ${D}${docdir}/${BP}
--    install ${S}/Readme.txt ${D}${docdir}/${BP}
-+    install ${S}/README ${D}${docdir}/${BP}
- }
--CLEANBROKEN = "1"
- 
- BBCLASSEXTEND = "nativesdk"
--- 
-2.7.4
+-RDEPENDS_${PN} &#43;= &quot; \
+-    ${PYTHON_PN}-logging \
+-    ${PYTHON_PN}-tornado \
+-    ${PYTHON_PN}-twisted \
+-<a class="moz-txt-link-rfc2396E" href="mailto:diff--gita/meta-python/recipes-devtools/python/python3-pika_1.1.0.bbb/meta-python/recipes-devtools/python/python3-pika_1.1.0.bbindexa1515881f..c61d47c47100644---a/meta-python/recipes-devtools/python/python3-pika_1.1.0.bb&#43;&#43;&#43;b/meta-python/recipes-devtools/python/python3-pika_1.1.0.bb@@-1,2&#43;1,22@@-inheritsetuptools3-requirepython-pika.inc&#43;SUMMARY=">&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-pika_1.1.0.bb b/meta-python/recipes-devtools/python/python3-pika_1.1.0.bb
+index a1515881f..c61d47c47 100644
+--- a/meta-python/recipes-devtools/python/python3-pika_1.1.0.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-pika_1.1.0.bb
+@@ -1,2 &#43;1,22 @@
+-inherit setuptools3
+-require python-pika.inc
+&#43;SUMMARY = &quot;</a>Pika is a RabbitMQ (AMQP 0-9-1) client library for Python.&quot;
+&#43;DESCRIPTION = &quot; \
+&#43;Pika is a pure-Python implementation of the AMQP 0-9-1 protocol \
+&#43;including RabbitMQ’s extensions. \
+&#43;&quot;
+&#43;SECTION = &quot;devel/python&quot;
+&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pika.readthedocs.io">&quot;https://pika.readthedocs.io&quot;</a>
+&#43;LICENSE = &quot;BSD-3-Clause&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=535836bf0a5de515a7bfee026075701d">&quot;file://LICENSE;md5=535836bf0a5de515a7bfee026075701d&quot;</a>
+&#43;
+&#43;SRC_URI[md5sum] = &quot;6002400cdd33bf85ec8680ece72910d4&quot;
+&#43;SRC_URI[sha256sum] = &quot;9fa76ba4b65034b878b2b8de90ff8660a59d925b087c5bb88f8fdbb4b64a1dbf&quot;
+&#43;
+&#43;inherit pypi setuptools3
+&#43;
+&#43;PYPI_PACKAGE = &quot;pika&quot;
+&#43;
+&#43;RDEPENDS_${PN} &#43;= &quot; \
+&#43;    ${PYTHON_PN}-logging \
+&#43;    ${PYTHON_PN}-tornado \
+&#43;    ${PYTHON_PN}-twisted \
+&#43;&quot;
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+    </blockquote>
+  </body>
+</html>
 
+--------------DE78393558F5B8574F790922--
