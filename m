@@ -1,108 +1,98 @@
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.web12.23730.1591978489523547638
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web12.23757.1591978587045612620
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Jun 2020 09:14:49 -0700
+ Fri, 12 Jun 2020 09:16:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ll5+f9Nq;
- spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wr1-f52.google.com with SMTP id h5so10323785wrc.7
-        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 09:14:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=C/3x/HE/;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id y20so8824520wmi.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 09:16:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id;
-        bh=pANHNligV6E3Q4LLgrmJbwq5GX2WUvqDuvBYhehRHro=;
-        b=ll5+f9NqcFRYn3NKBbcMPzjnP/IIYbyGZD8Vgp2rfQHyH+w7LG0OWjbsfQx/XGBWwG
-         IW9JoKC0eSi983ply5ZlynCjNgoVcReR8biSyWrf9VH7OhbLQxxDQ/vaDDwxBLRcXjzG
-         SccMskSaTUcblGBYzNQOsKS2e7zfbYMXitg4rrhnDUyfImC8KPKG6/KB4StNG6eN9Xn2
-         ygKTkY4VsclsUzQm4s77DYPsDbDfd///sC7tQo/TU/YSCKH4VdYeK0lplbEdWkFJlVS1
-         spwjwvCuSHnJkww7dpQiYH0K9ppcyXLz8jXGpjHBEblnNbL5dFrNtw0IZ3/6jKGfMnON
-         Fg5g==
+        bh=Jyv2J8GskJGMGjx+w0SPcnYzz6laErbusqQ09GwF5TU=;
+        b=C/3x/HE/qfNRyL2c+UI5oYFOBu1qMh4sNXPaH6u7GaYa1FMgZXrkJrrKtf3rvhvxLh
+         z1I9y57vg45e4D2i73lAGjFw/99vxJuGAWi7VL/duXaJIkYMvzivQwgn6uStDNI5Wxtw
+         zNjOsA0tm1e5OfVFUAlEK87zC+gnesD6jnix62ofFnmWsDJZTD7N51a5ZBhCP9GeS7AX
+         l0K5c5IGU4/723DuXfaiHYJa1VGk6RvhEOZjjboWbqCk4v4VDwkvMEJQt7ybNY7QMb/L
+         2BqpqyvkDqU84brXVgGKxsAT68f0Qy8OwjkiUIy1t7cUlPjxKQwPyOrevgWEcdnhvgNb
+         xBwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=pANHNligV6E3Q4LLgrmJbwq5GX2WUvqDuvBYhehRHro=;
-        b=M622rT5ah0+daL1eCJxVfEt5sxJ3qBNwZiUZKkdwhY3iUhRUkv5jhhQu1Cxm7plcxz
-         BWxp1m5xFTDXqlWWr9fJNuKE+Z+uv/iC4tl3TbF5MoA8JudMuANVq5B7sL3gDpt94vUb
-         38oWu64HP3Zva2E1FsUlXy+eMKQTJIMTuQFRW3dXlCAESKeBP77hujLl2Pa5M66Rs8gR
-         IG5EHQJT7HM0lXpZpQ1ny0grxnkxOT9AaV+GIp5PEZ7dH9azHve/q64oHZ/EVbqhJoff
-         d1Q2O3gUMAFAqqYn1TCwEm+qBX4Rp9yO1DZUeAHRcMZgQsPVAR20im5rOj4LML4mzVAw
-         i6zQ==
-X-Gm-Message-State: AOAM531+7tB6tPwNgiaYYFOqqWwSIewFE1wGYyVQLyfkBXNQzoLkspGJ
-	GixO89GViu218LuZ0xgy5qTq6rUzhWk=
-X-Google-Smtp-Source: ABdhPJwk0qW0NPEOkFnY24yKMlqH7zR7lEv7s+iLhvpOeRKaGQwAa7h1kq+IE5TX5YCPpbq8jbtA/w==
-X-Received: by 2002:a05:6000:1003:: with SMTP id a3mr15384191wrx.111.1591978487766;
-        Fri, 12 Jun 2020 09:14:47 -0700 (PDT)
+        bh=Jyv2J8GskJGMGjx+w0SPcnYzz6laErbusqQ09GwF5TU=;
+        b=PQ+KrGMd/A/N0WHGP3NuRKydONl+RTR9fFPeezCqGS+3RzcfKIzqdg4qN+8m2N1Sm4
+         x4zsPKJxGe0bjG/qfmbDSOLy9jy48Wy/5+wew9Xvfz34AITs4WEuOgY9tZ/FGfbiz6z7
+         KPZnQquJgIY+7zm//arXYM/s91A8WauRKW7NaqWGzK3CI09xOm9Q+YQdnGHPKa8BxQmz
+         8sltH/fiq2cdIlfA+nNok1Il6t8oZtv4thDHliQ5EvyTyjFl4GJpqWiwl0PC9imd9BUo
+         QzwFROlJ0q/D13IpNumoKuq1srnqJBa6/3R3VvxnuKkvt7M21jOsnoFGfwUlOQ+vgWXa
+         Y3lQ==
+X-Gm-Message-State: AOAM533d3Zbyoe8/iDM1T5PReYXbnGdn04P/L7J24QpkdnbMKXulfury
+	qCXXGswk1A0HxhlFXuNBiXekpbrS
+X-Google-Smtp-Source: ABdhPJw5UzLlFO6JNHvJOpy9+5D5c5BoWoi045KB4ofwDXUReLSUUGz6ALkWY5VJhZFhS8XrIR23dQ==
+X-Received: by 2002:a1c:9993:: with SMTP id b141mr4133324wme.113.1591978585272;
+        Fri, 12 Jun 2020 09:16:25 -0700 (PDT)
 Return-Path: <alex.kiernan@gmail.com>
 Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net. [91.135.6.246])
-        by smtp.gmail.com with ESMTPSA id 125sm9858145wmc.23.2020.06.12.09.14.46
+        by smtp.gmail.com with ESMTPSA id u3sm9790622wmg.38.2020.06.12.09.16.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Jun 2020 09:14:47 -0700 (PDT)
+        Fri, 12 Jun 2020 09:16:24 -0700 (PDT)
 From: "Alex Kiernan" <alex.kiernan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-oe][PATCH] libjcat: Add recipe
-Date: Fri, 12 Jun 2020 17:13:39 +0100
-Message-Id: <20200612161340.7373-1-alex.kiernan@gmail.com>
+Subject: [meta-oe][PATCH] gcab: Add recipe
+Date: Fri, 12 Jun 2020 17:15:17 +0100
+Message-Id: <20200612161517.7438-1-alex.kiernan@gmail.com>
 X-Mailer: git-send-email 2.17.1
 
 Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
 
- .../recipes-gnome/libjcat/libjcat/run-ptest   |  3 ++
- .../recipes-gnome/libjcat/libjcat_0.1.2.bb    | 34 +++++++++++++++++++
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-oe/recipes-gnome/libjcat/libjcat/run-ptest
- create mode 100644 meta-oe/recipes-gnome/libjcat/libjcat_0.1.2.bb
+ meta-oe/recipes-gnome/gcab/gcab/run-ptest |  3 +++
+ meta-oe/recipes-gnome/gcab/gcab_1.4.bb    | 24 +++++++++++++++++++++++
+ 2 files changed, 27 insertions(+)
+ create mode 100644 meta-oe/recipes-gnome/gcab/gcab/run-ptest
+ create mode 100644 meta-oe/recipes-gnome/gcab/gcab_1.4.bb
 
-diff --git a/meta-oe/recipes-gnome/libjcat/libjcat/run-ptest b/meta-oe/recipes-gnome/libjcat/libjcat/run-ptest
+diff --git a/meta-oe/recipes-gnome/gcab/gcab/run-ptest b/meta-oe/recipes-gnome/gcab/gcab/run-ptest
 new file mode 100644
-index 000000000000..14980a7d06a9
+index 000000000000..0cdb48ea33fc
 --- /dev/null
-+++ b/meta-oe/recipes-gnome/libjcat/libjcat/run-ptest
++++ b/meta-oe/recipes-gnome/gcab/gcab/run-ptest
 @@ -0,0 +1,3 @@
 +#! /bin/sh
 +
-+gnome-desktop-testing-runner libjcat
-diff --git a/meta-oe/recipes-gnome/libjcat/libjcat_0.1.2.bb b/meta-oe/recipes-gnome/libjcat/libjcat_0.1.2.bb
++gnome-desktop-testing-runner libgcab
+diff --git a/meta-oe/recipes-gnome/gcab/gcab_1.4.bb b/meta-oe/recipes-gnome/gcab/gcab_1.4.bb
 new file mode 100644
-index 000000000000..10f5a800bd42
+index 000000000000..68f52bf92d53
 --- /dev/null
-+++ b/meta-oe/recipes-gnome/libjcat/libjcat_0.1.2.bb
-@@ -0,0 +1,34 @@
-+SUMMARY = "Library for reading and writing Jcat files"
++++ b/meta-oe/recipes-gnome/gcab/gcab_1.4.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "A GObject library to create cabinet files"
++HOMEPAGE = "https://gitlab.gnome.org/GNOME/gcab"
 +LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 +
-+DEPENDS = "\
-+    glib-2.0 \
-+    json-glib \
-+"
++DEPENDS = "glib-2.0"
 +
 +SRC_URI = "\
-+    git://github.com/hughsie/libjcat.git \
++    ${GNOME_MIRROR}/gcab/${PV}/gcab-${PV}.tar.xz \
 +    file://run-ptest \
 +"
-+SRCREV = "1a509ac60b7446254c3bd1f45ea53e6cffba30ac"
-+S = "${WORKDIR}/git"
++SRC_URI[sha256sum] = "67a5fa9be6c923fbc9197de6332f36f69a33dadc9016a2b207859246711c048f"
 +
-+inherit gobject-introspection gtk-doc meson ptest-gnome vala
++inherit gobject-introspection gtk-doc manpages meson ptest-gnome vala
 +
 +PACKAGECONFIG ??= "\
-+    gpg \
-+    pkcs7 \
++    ${@bb.utils.contains('USE_NLS', 'yes', 'nls', '', d)} \
 +    ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
 +"
-+PACKAGECONFIG[gpg] = "-Dgpg=true,-Dgpg=false,gpgme"
-+PACKAGECONFIG[pkcs7] = "-Dpkcs7=true,-Dpkcs7=false,gnutls gnutls-native"
-+PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false"
++PACKAGECONFIG[manpages] = ""
++PACKAGECONFIG[nls] = "-Dnls=true,-Dnls=false"
++PACKAGECONFIG[tests] = "-Dtests=true -Dinstalled_tests=true,-Dtests=false -Dinstalled_tests=false"
 +
-+# manpage generation is broken because help2man needs to run the target binary on the host...
-+EXTRA_OEMESON = "-Dman=false"
-+GTKDOC_MESON_OPTION = "gtkdoc"
-+
-+RDEPENDS_${PN}_class-target = "\
-+    ${@bb.utils.contains('PACKAGECONFIG', 'gpg', 'gnupg', '', d)} \
-+"
++BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
