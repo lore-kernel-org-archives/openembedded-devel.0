@@ -1,113 +1,93 @@
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com [209.85.221.66])
- by mx.groups.io with SMTP id smtpd.web10.23437.1591978252758736060
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.web12.23697.1591978390309604713
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Jun 2020 09:10:53 -0700
+ Fri, 12 Jun 2020 09:13:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=oKhrCKNB;
- spf=pass (domain: gmail.com, ip: 209.85.221.66, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wr1-f66.google.com with SMTP id x6so10251008wrm.13
-        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 09:10:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=uzWPOS8g;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id c71so8669910wmd.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 09:13:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id;
-        bh=40oM6Ga/C5jluJiXLHAONTiDHr5bNgGFDVMNUYF9csk=;
-        b=oKhrCKNBhBYWMAJ8e6JhxwiKc9FM2d+G025WufNHjJttm0G2aIGtTuRamzCsAnSg2S
-         NAwfX1lw8TPKSRgsTSv7BVNhPCVKDkUjldgOxMsr1IbWmDtozIrDEnCijsuWyKwujj14
-         ugJeOrqmPj5s6QzuZeSqAXsIRuH+4Zx3gq1oqJMxhPnmCSJzBaJKntkMJ7j9U+tDG7mr
-         jhFFEoea7dB0eNWpKqQKNsTF8ZKrLjq90F3BcODjbTY27i/qorwkMS+kAw5DEFYoADRq
-         yClizkkgKYzdl7zwjVtDttxtEIZ0VssoEfuj7dK+5tbRW9qAqNxdKxO9CSsNbLiLqtyD
-         AwKQ==
+        bh=3Ezig/LEvNf05s/k12Cd3vPFeJdgm2+MBOdYTqaXIhM=;
+        b=uzWPOS8g0tvvFdwzv++gzcY5LRYZMmH5A+Bsdooq1DcipCZkPorMnijxpphaojgUeu
+         EQzDtFfdwRfn4zhjLkvy7Qcg9Sl70xtEt0dU3BmlfLSWl5OCus30wctupmFDdOx3ZOn7
+         xNjYAGtimaFAkwo36s6hbbeHD4EV4tb3AIPKYtjYT27kDIZi2BOyBr1RLK6JCb6dfKz/
+         sw8frWBzBGbE+v67Fomhp5rTPQ7o0h0vxiVBaZ9faXaQhcnf+5+dNcxlJVCqhzjDwSTN
+         9GU6snHto+zBlqdlzWCOwmDwtHFdkrBC873BYGHmW5JEPsp4OQtOuds3/tzHoeN9Wg5Y
+         3Eyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=40oM6Ga/C5jluJiXLHAONTiDHr5bNgGFDVMNUYF9csk=;
-        b=t3Cq/+hfBdFoK4FtJdu/WzmSLH7pKJieS+xE1/FudWwx6G2/eN32EFkdBbGJbTvoj9
-         fueUKf0vhHxOkHdM2H6/xL2K8KJld6CIychlCIRLgEe4LQtiucwoKsJb/39ZGbhbHY68
-         8QbSRIpx0wr/IvJoGCs5NrrX6Qw1GD7zyaehXklGeLUVxu4cDwBbnfKRfvQ16Is+2Y1X
-         WVX5MkWvkXOFk4jASkHcTFTCTpybcXD+oqiMZ63m1xEY5WQD+xSFzYcgum0ioT9r1+4r
-         DGnqoxsyy85/FTVfHA3Bg7JELR3LY09QVNkudBHyVBQaaESKYm4hJzNSay7w0KLerxXG
-         TyQw==
-X-Gm-Message-State: AOAM533lwXNXqYKSHc56dq/DQ2TWzviajB8JMCtVaH1/c2Eh7wrFU/iX
-	JbAxKa1SVJ5Ty4Zt//Zg3fF1mvqdIug=
-X-Google-Smtp-Source: ABdhPJwcuyow8LzyaoiqIygXgOntZEZaf5Uc9TAI0llSZDV9wkgMDfoU+O3nbytSNlpi+eVECJ2b6A==
-X-Received: by 2002:adf:fd81:: with SMTP id d1mr16135185wrr.96.1591978250848;
-        Fri, 12 Jun 2020 09:10:50 -0700 (PDT)
+        bh=3Ezig/LEvNf05s/k12Cd3vPFeJdgm2+MBOdYTqaXIhM=;
+        b=Hrkjc0XWdlsAXIVSuB2mbe47ONZntbehIEOo99G1SVpl41YVCv9rJ2/vw7hthSHpOf
+         MtTPOPQK/N3Aj4chPHAOYBETA85Cr7nPBp1zEmEEjzQaRnp1l4EJdRkeooaghyx52J4s
+         bv4cjWF10i3Siw0HBTgQvP/IMgEfC/pK3lXl59kKOg4VnQGw29jKJGnBOU6H2c0PIaMA
+         zncE2pAqGhSdKOgHBMiw/S90vV3TC0KVg5dcQTAVRGZq+3SbBFq0mLiDUq8KUaPPoPht
+         k8k5rEGbqll9x8pODGyG42WmI+TBXcaS2cMQuVAI7VqvKOGgxTeSoXx7CyzUoX7puh94
+         pq7Q==
+X-Gm-Message-State: AOAM533velcckWZyex9iVkdqbBj0SMjMHBQoxtAYjyXQF9J0criLH6v9
+	wvpzDWDYgZwIoqeSjDHKGsloGHzWWPU=
+X-Google-Smtp-Source: ABdhPJzbt1jVnQg/r3hxPBrklBdQuAy7jPv1CojYmrti1LSXGz4u5vtOUf9hn+DOPZXLLKm9SeKfdQ==
+X-Received: by 2002:a7b:c385:: with SMTP id s5mr15057105wmj.121.1591978387642;
+        Fri, 12 Jun 2020 09:13:07 -0700 (PDT)
 Return-Path: <alex.kiernan@gmail.com>
 Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net. [91.135.6.246])
-        by smtp.gmail.com with ESMTPSA id o15sm9311340wmm.31.2020.06.12.09.10.49
+        by smtp.gmail.com with ESMTPSA id u7sm10933134wrm.23.2020.06.12.09.13.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Jun 2020 09:10:50 -0700 (PDT)
+        Fri, 12 Jun 2020 09:13:07 -0700 (PDT)
 From: "Alex Kiernan" <alex.kiernan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-oe][PATCH] zstd: Upgrade 1.4.4 -> 1.4.5
-Date: Fri, 12 Jun 2020 17:09:42 +0100
-Message-Id: <20200612160942.7224-1-alex.kiernan@gmail.com>
+Subject: [meta-oe][PATCH] libxmlb: Add recipe
+Date: Fri, 12 Jun 2020 17:11:58 +0100
+Message-Id: <20200612161158.7296-1-alex.kiernan@gmail.com>
 X-Mailer: git-send-email 2.17.1
 
 Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
 
- .../0001-Fix-legacy-build-after-2103.patch    | 27 +++++++++++++++++++
- .../zstd/{zstd_1.4.4.bb => zstd_1.4.5.bb}     |  6 +++--
- 2 files changed, 31 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-extended/zstd/zstd/0001-Fix-legacy-build-after-2103.patch
- rename meta-oe/recipes-extended/zstd/{zstd_1.4.4.bb => zstd_1.4.5.bb} (85%)
+ .../recipes-gnome/libxmlb/libxmlb/run-ptest   |  3 +++
+ .../recipes-gnome/libxmlb/libxmlb_0.1.15.bb   | 19 +++++++++++++++++++
+ 2 files changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-gnome/libxmlb/libxmlb/run-ptest
+ create mode 100644 meta-oe/recipes-gnome/libxmlb/libxmlb_0.1.15.bb
 
-diff --git a/meta-oe/recipes-extended/zstd/zstd/0001-Fix-legacy-build-after-2103.patch b/meta-oe/recipes-extended/zstd/zstd/0001-Fix-legacy-build-after-2103.patch
+diff --git a/meta-oe/recipes-gnome/libxmlb/libxmlb/run-ptest b/meta-oe/recipes-gnome/libxmlb/libxmlb/run-ptest
 new file mode 100644
-index 000000000000..c701554b8b0c
+index 000000000000..6d0bb95d3aec
 --- /dev/null
-+++ b/meta-oe/recipes-extended/zstd/zstd/0001-Fix-legacy-build-after-2103.patch
-@@ -0,0 +1,27 @@
-+From 93cec0c1d6d0be8dd3a9d01d3e7f2099f1728df7 Mon Sep 17 00:00:00 2001
-+From: Orivej Desh <orivej@gmx.fr>
-+Date: Fri, 22 May 2020 12:48:02 +0000
-+Subject: [PATCH] Fix legacy build after #2103
++++ b/meta-oe/recipes-gnome/libxmlb/libxmlb/run-ptest
+@@ -0,0 +1,3 @@
++#! /bin/sh
 +
-+Upstream-Status: Backport
-+Signed-of-by: Alex Kiernan <alex.kiernan@gmail.com>
-+---
-+ lib/legacy/zstd_v04.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++gnome-desktop-testing-runner libxmlb
+diff --git a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.1.15.bb b/meta-oe/recipes-gnome/libxmlb/libxmlb_0.1.15.bb
+new file mode 100644
+index 000000000000..c545993174de
+--- /dev/null
++++ b/meta-oe/recipes-gnome/libxmlb/libxmlb_0.1.15.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "A library to help create and query binary XML blobs"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742"
 +
-+diff --git a/lib/legacy/zstd_v04.c b/lib/legacy/zstd_v04.c
-+index 56bf45222498..19fda8980abf 100644
-+--- a/lib/legacy/zstd_v04.c
-++++ b/lib/legacy/zstd_v04.c
-+@@ -74,7 +74,7 @@ extern "C" {
-+ /*-*************************************
-+ *  Debug
-+ ***************************************/
-+-#include "debug.h"
-++#include "../common/debug.h"
-+ #ifndef assert
-+ #  define assert(condition) ((void)0)
-+ #endif
-+-- 
-+2.17.1
++SRC_URI = "\
++    git://github.com/hughsie/libxmlb.git \
++    file://run-ptest \
++"
++SRCREV = "ee4aafdd97844f1c73021a4978a43460f0835d5c"
++S = "${WORKDIR}/git"
 +
-diff --git a/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb b/meta-oe/recipes-extended/zstd/zstd_1.4.5.bb
-similarity index 85%
-rename from meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
-rename to meta-oe/recipes-extended/zstd/zstd_1.4.5.bb
-index eb201f41396e..cd0b471e179b 100644
---- a/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
-+++ b/meta-oe/recipes-extended/zstd/zstd_1.4.5.bb
-@@ -9,9 +9,11 @@ LICENSE = "BSD-3-Clause & GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c7f0b161edbe52f5f345a3d1311d0b32 \
-                     file://COPYING;md5=39bba7d2cf0ba1036f2a6e2be52fe3f0"
- 
--SRC_URI = "git://github.com/facebook/zstd.git;nobranch=1"
-+SRC_URI = "git://github.com/facebook/zstd.git;nobranch=1 \
-+           file://0001-Fix-legacy-build-after-2103.patch \
-+           "
- 
--SRCREV = "10f0e6993f9d2f682da6d04aa2385b7d53cbb4ee"
-+SRCREV = "b706286adbba780006a47ef92df0ad7a785666b6"
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
- 
- S = "${WORKDIR}/git"
++inherit gobject-introspection gtk-doc meson ptest-gnome
++
++PACKAGECONFIG ??= "\
++    ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
++"
++PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false"
++
++GTKDOC_MESON_OPTION = "gtkdoc"
 -- 
 2.17.1
 
