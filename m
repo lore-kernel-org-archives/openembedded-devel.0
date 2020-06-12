@@ -1,59 +1,91 @@
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
- by mx.groups.io with SMTP id smtpd.web12.14049.1591940333961531883
+Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com [209.85.219.67])
+ by mx.groups.io with SMTP id smtpd.web10.13801.1591940458546292827
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Jun 2020 22:38:55 -0700
+ Thu, 11 Jun 2020 22:40:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: intel.com, ip: 134.134.136.100, mailfrom: anuj.mittal@intel.com)
-IronPort-SDR: CRi3ZFxbcLYBwSOlvYg9aDfLw520kcVzYXhevyLHS5QL7QRM14MZuUtJsIpA2rZ7eT0kJAU3zE
- VqA10vgPlmcQ==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jun 2020 22:38:52 -0700
-IronPort-SDR: zE5szNDUdE2fEO9zmO6J51VrY4Jt1ygUmOhjEK8P2BrwuoUVTnUFcBIb1F314iEQRs76/OkeVL
- ewm/usY2d7tw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.73,501,1583222400"; 
-   d="scan'208";a="474085963"
-Received: from pgsmsx111.gar.corp.intel.com ([10.108.55.200])
-  by fmsmga005.fm.intel.com with ESMTP; 11 Jun 2020 22:38:51 -0700
-Received: from pgsmsx101.gar.corp.intel.com ([169.254.1.74]) by
- PGSMSX111.gar.corp.intel.com ([169.254.2.204]) with mapi id 14.03.0439.000;
- Fri, 12 Jun 2020 13:38:50 +0800
-From: "Anuj Mittal" <anuj.mittal@intel.com>
-To: "ross@burtonini.com" <ross@burtonini.com>, "denis@denix.org"
-	<denis@denix.org>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, "arthur.she@linaro.org"
-	<arthur.she@linaro.org>
-Subject: Re: [oe] [meta-oe][PATCH] igt-gpu-tools: add new package
-Thread-Topic: [oe] [meta-oe][PATCH] igt-gpu-tools: add new package
-Thread-Index: AQHWPmp6KO+sRIz9OUiN4HpAQOIHOKjP382AgABuqACAAOvagIACuj0A
-Date: Fri, 12 Jun 2020 05:38:49 +0000
-Message-ID: <394872f63a9f700f8abcf7054662f2cbc2f8d56f.camel@intel.com>
-References: <20200609142957.187352-1-arthur.she@linaro.org>
-	 <CAAnfSTsaMMCGGnGGYHf6dQ3Kdjtzf-NnPy7VoXDjffC-BFPHGw@mail.gmail.com>
-	 <20200609215534.GW17660@denix.org>
-	 <CAAnfSTupFtc44EX0O6f=1xGX8TLeNhTk9w5J-y0WGPhdA3ZgAw@mail.gmail.com>
-In-Reply-To: <CAAnfSTupFtc44EX0O6f=1xGX8TLeNhTk9w5J-y0WGPhdA3ZgAw@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.255.145.38]
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=hIGYGBl5;
+ spf=pass (domain: gmail.com, ip: 209.85.219.67, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f67.google.com with SMTP id d12so1054185qvn.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Jun 2020 22:40:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=FlpQDpgfzYO8bkfh4cMszg0/T78Fhsl1RltJ87TAlRU=;
+        b=hIGYGBl5P9tA/BzmcW2Tq81o++4w+nnZVX1iVGqjP9OFW+InKgAFNgDgk1cIJV79B9
+         +vWaGViwr5MJmkxImak/HXMa8OOowY5FZ8uYoFTGJb2HLi7cfvCxEQMRgQVF1tQcI1ao
+         ZJb8IprG7OjDwI4zoMzlL5tHSJq3VnSohJkiSqZZyxen+ib+IwLdbCJY2yCF+P96qGiN
+         LC0Uer4vt+VJgM6NrZcH6hNqugwzH+9RWmzRSm8h4Cnb3fSHiMR7jpTRNDCiIrj0nfFl
+         gKbPpfZxGrPhCnwG8IOg0H63uFNH3zrWkNqugA7V7yWmu64o1rAAFOjw+sDnLJ2hWADQ
+         736g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=FlpQDpgfzYO8bkfh4cMszg0/T78Fhsl1RltJ87TAlRU=;
+        b=Jpu+Ff8cA9HIj6u54owcWjGocNr27n7PlkFPI9UldTJLqIo8fY+OkID5QSsN8+pzIt
+         Ss70wLfj+6WWpASP5/rQz8H8FvEVWpUJhWT+JPsMCY2C1q3xOaUFp0N2L0fyiHFzkcJ0
+         9inqT74icxigOjL3HTAmeqUeBvAKoRm4Zgcs9UPmZ4qIkc5Uqexcr4x2bnA76INqap0Z
+         7h/ZnuOyZjHSn0getGFeKrhnNbrRWJkydRNY8Se4ZVC+pgQkOJaxpvPjOC22aNeXTESv
+         m8zci59NLF2mAkjm6geMwBGcGbu0xmkhEtwWJ3GrzrwhfIGrRK1clVorB6Ej12Q70p7S
+         JLaQ==
+X-Gm-Message-State: AOAM530AIBOila4Kku/fH0oiPrJ6Y7lTBm1TG75Kn8/UZ5q1QvbqCvvF
+	0kfW8b3+NJCeFn2+DedqaipW4g+v7Jx70Cel/QI=
+X-Google-Smtp-Source: ABdhPJwDMebJlAtKUHDZCHSo+ws2+YUxxqQ7XbPLrbLq6kPNgWiQRshMWFU3IZuz1ZqVVHTXQ5dZm5+HnWb6NnRygRw=
+X-Received: by 2002:a0c:ba0c:: with SMTP id w12mr11447891qvf.4.1591940457439;
+ Thu, 11 Jun 2020 22:40:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <44C333231E450044BE40285BF8B31C73@intel.com>
-Content-Transfer-Encoding: base64
+References: <20200611090904.29772-1-leon.anavi@konsulko.com> <20200611090904.29772-7-leon.anavi@konsulko.com>
+In-Reply-To: <20200611090904.29772-7-leon.anavi@konsulko.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 11 Jun 2020 22:40:31 -0700
+Message-ID: <CAMKF1soGT84aAF9Swywx7XQ+cUpfK44GvnEM+C0xNYcJJjQstQ@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 7/7] python3-pocketsphinx: 0.1.0 -> 0.1.15
+To: Leon Anavi <leon.anavi@konsulko.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-T24gV2VkLCAyMDIwLTA2LTEwIGF0IDEyOjU5ICswMTAwLCBSb3NzIEJ1cnRvbiB3cm90ZToNCj4g
-T24gVHVlLCA5IEp1biAyMDIwIGF0IDIyOjU1LCBEZW55cyBEbXl0cml5ZW5rbyA8ZGVuaXNAZGVu
-aXgub3JnPg0KPiB3cm90ZToNCj4gPiBIdWg/DQo+IA0KPiBTbyB0aGF0IHdhcyB0aGUgbGluZSB0
-aGF0IHRvbGQgbWUgdGhlIHJlY2lwZSB3YXMgYmFzaWNhbGx5IGNvcGllZA0KPiBmcm9tDQo+IHRo
-ZSBmaWxlIGluIG1ldGEtaW50ZWw6DQo+IA0KPiBodHRwOi8vZ2l0LnlvY3RvcHJvamVjdC5vcmcv
-Y2dpdC9jZ2l0LmNnaS9tZXRhLWludGVsL3RyZWUvcmVjaXBlcy1ncmFwaGljcy9pZ3QtZ3B1LXRv
-b2xzL2lndC1ncHUtdG9vbHNfMS4yNS5iYg0KPiANCj4gQnV0IGl0IGFwcGVhcnMgdGhhdCB0aGUg
-aW5jbHVzaW9uIG9mIHRoZSB4b3JnLWFwcC5pbmMgZmlsZSBoYXMgYmVlbg0KPiByZW1vdmVkLiBJ
-ZiB0aGUgcmVjaXBlIGhhcyBiZWVuIG1hZGUgc3RhbmRhbG9uZSB0aGVuIGNydWZ0IGxpa2UgdGhh
-dA0KPiBuZWVkcyB0byBiZSBmaXhlZC4NCj4gDQoNCklzIHRoaXMgcmVjaXBlIHNvbWV0aGluZyB0
-aGF0IGNhbiBiZSBpbmNsdWRlZCBpbiBvZS1jb3JlPw0KDQpUaGFua3MsDQoNCkFudWoNCg==
+On Thu, Jun 11, 2020 at 2:10 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
+>
+> Add pulseaudio as a dependency and required distro feature because
+> libsphinxad requires it. Upgrade to release 0.1.15:
+>
+> - Add all travis osx
+> - Remove bdist_egg and bdist_msi
+> - Bug fixes
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> ---
+>  ...ocketsphinx_0.1.0.bb => python3-pocketsphinx_0.1.15.bb} | 7 ++++---
+>  1 file changed, 4 insertions(+), 3 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python3-pocketsphinx_0.1.0.bb => python3-pocketsphinx_0.1.15.bb} (65%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-pocketsphinx_0.1.0.bb b/meta-python/recipes-devtools/python/python3-pocketsphinx_0.1.15.bb
+> similarity index 65%
+> rename from meta-python/recipes-devtools/python/python3-pocketsphinx_0.1.0.bb
+> rename to meta-python/recipes-devtools/python/python3-pocketsphinx_0.1.15.bb
+> index cb22040df..5aa0eb6bc 100644
+> --- a/meta-python/recipes-devtools/python/python3-pocketsphinx_0.1.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pocketsphinx_0.1.15.bb
+> @@ -5,9 +5,10 @@ SECTION = "devel/python"
+>  LICENSE = "BSD-2-Clause"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=826ebda787eb48e78aec2624f9faba72"
+>
+> -SRC_URI[md5sum] = "c0f2bfd54bc4c438c3bb64825f57d575"
+> -SRC_URI[sha256sum] = "2cc493ed48c1301e0d2e69b137dc646c2f8caca190ef4bce61836eac96d1796f"
+> +SRC_URI[md5sum] = "94d008eebea16acb60a9ffe614575dee"
+> +SRC_URI[sha256sum] = "34d290745c7dbe6fa2cac9815b5c19d10f393e528ecd70e779c21ebc448f9b63"
+>
+>  inherit pypi setuptools3
+>
+> -DEPENDS += "swig-native"
+> +DEPENDS += "swig-native pulseaudio"
+> +REQUIRED_DISTRO_FEATURES += "pulseaudio"
+
+this also needs to inherit feature_check
+please send a followup since I have applied the original patch.
+
+> --
+> 2.17.1
+>
+> 
