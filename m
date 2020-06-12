@@ -1,40 +1,40 @@
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
- by mx.groups.io with SMTP id smtpd.web12.1224.1591987006234919170
+Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com [209.85.219.45])
+ by mx.groups.io with SMTP id smtpd.web11.1357.1591987009465864838
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Jun 2020 11:36:46 -0700
+ Fri, 12 Jun 2020 11:36:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.160.195, mailfrom: otavio.salvador@gmail.com)
-Received: by mail-qt1-f195.google.com with SMTP id i16so7876215qtr.7
-        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 11:36:46 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.219.45, mailfrom: otavio.salvador@gmail.com)
+Received: by mail-qv1-f45.google.com with SMTP id d12so2001419qvn.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 11:36:49 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:organization:content-transfer-encoding;
-        bh=5VGS/DuLuV0FXCaSTknVZVak4MlsZnVExX0/WsfrJ5E=;
-        b=X1jGCWi7K+baZr5eZl03USMSK04fCRYMbinZIhAjNgJT7u/TUtuQ3wz7Caqs+iG6yK
-         8hAXLqIO2kUfAGa1X19ClV2lcHOhT3d9nG8dJ0e4ynvvlKcmmD2CXoexhB01eDrAv03L
-         et/FYeuGrA7S0GRtu48hisHAQfKMZrxPkZXccXXK8DesUH6jXku2OWCq6I1qoZ3A6lSI
-         x5U2ZqFrvYoIRcWQQBuGb5TfD99JvH6gRs91QcqUm/0jmyMfVV/5Ktm9nEmZzIc5DQVM
-         e5FVW7y1A+jIOHj57GygkfgkByJrw0/jYHEROMZdqceeIdNQ0/PFCMzxXTTr1QR2FOb5
-         soHw==
-X-Gm-Message-State: AOAM531DJyA5BkfiTIBQ+Di78+cbx5ay4kZTA8sxAeB2hHSLGrijvHG5
-	T3duWQPCb2L50DF1K0Ntn6VT/A+TBes=
-X-Google-Smtp-Source: ABdhPJzmz9VLP/Cgw1yTIRQmBwYQsmVaw4aTBESYEd2EHceh9itDmEHFwmxaspWuTFquWc/xom15TQ==
-X-Received: by 2002:ac8:6f79:: with SMTP id u25mr4504317qtv.183.1591987005197;
-        Fri, 12 Jun 2020 11:36:45 -0700 (PDT)
+        bh=yMps1tjSsFNlt9t4rlKg3armr8tDMRCqkoxm9uLhH+Q=;
+        b=VVHI0dkyro2CaaN3pKlfkt1/gMy7KAXlyLduhV98S9Y2ndlHPmfa+FL1B8BkpHCLLY
+         01ek3UHoG1w7SMLx1V7NWX0rZW8zDdhNIajyGRIaZ7RJ0cItOY5/GKF9FhQ6qOnJytn3
+         778OiCFMftXzOEWliti/peCp9G9BdTMYJc3FksubZJrbNK8r1mv5UWov5MmjtF7Q9JBt
+         Vi6RM8iCzNhA33kTfGZwlwEfYC+/wsgMhV3UtJGJH6nbQs5w/R/2apBMidJf5Se5B/ZR
+         XuEh+HWe8Yc0TTbbLwMAP+1d3EHkZ7gcwFc9mu1vfiRIjwnj9ByOR1T+Ftv+zrqFAua1
+         kduQ==
+X-Gm-Message-State: AOAM533Jlm5JAQtS5ssQlvEWLOm+vzHFDZgvWaRdEzBU4GUlDPyfAdUB
+	RJDKLS5rEv8YiMJ1bQKDror51WWaceE=
+X-Google-Smtp-Source: ABdhPJztmDOESDuC7CMHm0G6ru2Lo3lsg0Sl4gnm4WfXWqkyLcoZ2B+J6JlDdZOP6IIHvtYm69dauA==
+X-Received: by 2002:ad4:54cd:: with SMTP id j13mr13036927qvx.151.1591987008428;
+        Fri, 12 Jun 2020 11:36:48 -0700 (PDT)
 Return-Path: <otavio.salvador@gmail.com>
 Received: from localhost ([181.220.84.90])
-        by smtp.gmail.com with ESMTPSA id v14sm5561764qtj.31.2020.06.12.11.36.44
+        by smtp.gmail.com with ESMTPSA id 124sm4518980qkn.45.2020.06.12.11.36.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Jun 2020 11:36:44 -0700 (PDT)
+        Fri, 12 Jun 2020 11:36:47 -0700 (PDT)
 From: "Otavio Salvador" <otavio.salvador@gmail.com>
 To: Meta-OpenEmbedded Mailing listing <openembedded-devel@lists.openembedded.org>
 Cc: Domarys Correa <domarys.correa@ossystems.com.br>,
 	Khem Raj <raj.khem@gmail.com>,
 	Otavio Salvador <otavio@ossystems.com.br>
-Subject: [dunfell-backport meta-python PATCH 08/22] python3-u-msgpack-python: Add recipe version 2.6.0
-Date: Fri, 12 Jun 2020 15:35:53 -0300
-Message-Id: <20200612183607.108989-8-otavio@ossystems.com.br>
+Subject: [dunfell-backport meta-python PATCH 09/22] python3-xmodem: Add recipe version 0.4.6
+Date: Fri, 12 Jun 2020 15:35:54 -0300
+Message-Id: <20200612183607.108989-9-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20200612183607.108989-1-otavio@ossystems.com.br>
 References: <20200612183607.108989-1-otavio@ossystems.com.br>
@@ -46,31 +46,31 @@ From: Domarys Correa <domarys.correa@ossystems.com.br>
 
 Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 9f16073b4b1db5dbcff15344a9021bdf731561ae)
+(cherry picked from commit 0dccb1e5a698aec92506196fc1a9fcde601160ce)
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
 
- .../python/python3-u-msgpack-python_2.6.0.bb       | 14 ++++++++++++++
+ .../python/python3-xmodem_0.4.6.bb                 | 14 ++++++++++++++
  1 file changed, 14 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-u-msgpack-python_2.6.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-u-msgpack-python_2.6.0.bb b/meta-python/recipes-devtools/python/python3-u-msgpack-python_2.6.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb b/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb
 new file mode 100644
-index 000000000..6d2e0e0c3
+index 000000000..3fdd3e58c
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-u-msgpack-python_2.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb
 @@ -0,0 +1,14 @@
-+DESCRIPTION = "A portable, lightweight MessagePack serializer and deserializer written in pure Python."
++DESCRIPTION = "XMODEM protocol implementation"
 +
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=9eb4691bcb66360acee473a8cf75f594"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 +
-+SRC_URI[sha256sum] = "754edb07eaee39a9686a99823892e3a1be4e0948d9cc5c717946750c27643c9c"
++SRC_URI[sha256sum] = "089737298f5738eabc43f2519efdc80b402693768f16383f7013b9e6f8f279d7"
 +
 +inherit pypi setuptools3
 +
 +RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-logging \
 +"
 +
 +BBCLASSEXTEND = "native nativesdk"
