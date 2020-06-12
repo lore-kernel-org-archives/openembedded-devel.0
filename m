@@ -1,40 +1,40 @@
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com [209.85.222.193])
- by mx.groups.io with SMTP id smtpd.web10.1264.1591987019358121705
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com [209.85.160.196])
+ by mx.groups.io with SMTP id smtpd.web10.1269.1591987022516307422
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Jun 2020 11:36:59 -0700
+ Fri, 12 Jun 2020 11:37:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.222.193, mailfrom: otavio.salvador@gmail.com)
-Received: by mail-qk1-f193.google.com with SMTP id c12so9895876qkk.13
-        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 11:36:59 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.160.196, mailfrom: otavio.salvador@gmail.com)
+Received: by mail-qt1-f196.google.com with SMTP id u17so7917884qtq.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 11:37:02 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:organization:content-transfer-encoding;
-        bh=eNvvsWG+1loqPGtV5qccGIc4ovbjPi4aoQbvM2Ak4wU=;
-        b=RwwtotP6bRlFDUQfVQVtSKWb3QrZ/a4FcPJWegvPeMZfYH7apoUJSzIP5ySS+S2Hdr
-         r4LLIcxrGgmqYlUmjMdCh+IdPRNjTeDcHt+tF6psIxdpysbWIlwnBTdxufMWbl8dc5g+
-         lWYdZB7U8s2/bSvYiMt5xywuVae2Gs7Kw/JdZpl5dlHZNbZoZ8Qsk3HQ9JlJrkGhsyGL
-         0allrVVTCkDCdH3CvcDnKhlQbIPIR8Wuz+dEv/e8rRIaWNvLww66N525YTT83AlLESLt
-         YRh4s24UZF0qtOfzgZHIL6n4iscy6DictVCRXkcCqtGm58d8kTj4be7tYJuxjguHMYTt
-         hbAw==
-X-Gm-Message-State: AOAM5321ftHjx5DFLDjYVMzUY4OoOUY8LzCvtip8w+kPEyHpLLNylhT+
-	QRpK1qJKvB/mU4fLTtjOpvD2ZceoGas=
-X-Google-Smtp-Source: ABdhPJwG7GquPtnj3BMwdbCWMGtcLkcHcjhjgXdAXJgxCTpXDIPrj/jSxiL177qSb9J2nDjYWzI7cg==
-X-Received: by 2002:a37:850:: with SMTP id 77mr4393606qki.498.1591987018275;
-        Fri, 12 Jun 2020 11:36:58 -0700 (PDT)
+        bh=jfV7FJcn6Or6ZK5Q45UxyuirL2q8b2kPOevb9fRh0BY=;
+        b=hF8EQRc9nLsfX35yR6qoWkhMeUt8zYiEMDFNfqP4VEnZcFK3MbGdSCy/ILt5qmf7YW
+         YrsxJQVRaDYRdD+hlRi8ZJ+j+6tVsmLqAAdN8kQW4eHkGyazOxHqAcPorXLPGyrkHOYy
+         Ps2DSudWZsUiAokAkf/rwNFOOl0tP5GAWHX8djIv+TC+MIFSUs1aBUB8MF9XT4oBL4Cd
+         eximpJMx6jOFpAUj0Wc0nb1scfskTiprKW1c18nvs0r9Lm5qjK7JQ14wAKxzMlXGcw07
+         +b23CUXxTBtoI+gT2U4RSBWiduM5EH0KCDDjACS6JGuDSOtZgSv5bVMeX+HTf0yTSuBP
+         U/bQ==
+X-Gm-Message-State: AOAM532luqwSgeswP/uJUTZ/UtaS9hQJ1tdceQK83H4kVNWKAIkMpw21
+	xMUWMsdJXrznr8bgYsqzdCowwDPUaaU=
+X-Google-Smtp-Source: ABdhPJx4gzjAAubsasm2mNLTdg7720cuwdw/+uxIBCFj4nYV2KtXpipJrnRdNu57wmpFO08MRR6Zig==
+X-Received: by 2002:ac8:538b:: with SMTP id x11mr4341823qtp.84.1591987021467;
+        Fri, 12 Jun 2020 11:37:01 -0700 (PDT)
 Return-Path: <otavio.salvador@gmail.com>
 Received: from localhost ([181.220.84.90])
-        by smtp.gmail.com with ESMTPSA id s45sm5596929qte.26.2020.06.12.11.36.57
+        by smtp.gmail.com with ESMTPSA id x43sm5434241qtk.70.2020.06.12.11.37.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Jun 2020 11:36:57 -0700 (PDT)
+        Fri, 12 Jun 2020 11:37:00 -0700 (PDT)
 From: "Otavio Salvador" <otavio.salvador@gmail.com>
 To: Meta-OpenEmbedded Mailing listing <openembedded-devel@lists.openembedded.org>
 Cc: Domarys Correa <domarys.correa@ossystems.com.br>,
 	Khem Raj <raj.khem@gmail.com>,
 	Otavio Salvador <otavio@ossystems.com.br>
-Subject: [dunfell-backport meta-python PATCH 12/22] python3-autobahn: Add recipe version 20.4.3
-Date: Fri, 12 Jun 2020 15:35:57 -0300
-Message-Id: <20200612183607.108989-12-otavio@ossystems.com.br>
+Subject: [dunfell-backport meta-python PATCH 13/22] python3-snappy: Add recipe version 0.5.4
+Date: Fri, 12 Jun 2020 15:35:58 -0300
+Message-Id: <20200612183607.108989-13-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20200612183607.108989-1-otavio@ossystems.com.br>
 References: <20200612183607.108989-1-otavio@ossystems.com.br>
@@ -46,41 +46,33 @@ From: Domarys Correa <domarys.correa@ossystems.com.br>
 
 Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 6cf47ddf3e5ed023548217b034f6367251e32860)
+(cherry picked from commit a6fa788675ac7f5921b8fdf1ddf29dc7a3f78c93)
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
 
- .../python/python3-autobahn_20.4.3.bb         | 23 +++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-autobahn_20.4.3.bb
+ .../python/python3-snappy_0.5.4.bb                | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-snappy_0.5.4.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-autobahn_20.4.3.bb b/meta-python/recipes-devtools/python/python3-autobahn_20.4.3.bb
+diff --git a/meta-python/recipes-devtools/python/python3-snappy_0.5.4.bb b/meta-python/recipes-devtools/python/python3-snappy_0.5.4.bb
 new file mode 100644
-index 000000000..60ef57d04
+index 000000000..1836473b8
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-autobahn_20.4.3.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "WebSocket client & server library, WAMP real-time framework"
++++ b/meta-python/recipes-devtools/python/python3-snappy_0.5.4.bb
+@@ -0,0 +1,15 @@
++DESCRIPTION = "Python library for the snappy compression library from Google"
++DEPENDS += "snappy"
 +
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b3090152f53ee19f6a7b64b1a36384fb"
 +
-+SRC_URI[sha256sum] = "c6fe745d52ba9f9eecf791cd31f558df42aebfc4f9ee558a8f1d18c707e1ae1f"
++SRC_URI[sha256sum] = "d9c26532cfa510f45e8d135cde140e8a5603d3fb254cfec273ebc0ecf9f668e2"
 +
 +inherit pypi setuptools3
 +
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-twisted \
-+    ${PYTHON_PN}-zopeinterface \
-+    ${PYTHON_PN}-py-ubjson \
-+    ${PYTHON_PN}-cbor2 \
-+    ${PYTHON_PN}-u-msgpack-python \
-+    ${PYTHON_PN}-lz4 \
-+    ${PYTHON_PN}-snappy \
-+    ${PYTHON_PN}-pyopenssl \
-+    ${PYTHON_PN}-txaio \
-+    ${PYTHON_PN}-six \
-+"
++PYPI_PACKAGE = "python-snappy"
++
++RDEPENDS_${PN} += "snappy"
 +
 +BBCLASSEXTEND = "native nativesdk"
 -- 
