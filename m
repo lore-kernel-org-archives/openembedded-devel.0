@@ -1,72 +1,171 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web12.22137.1591974296729817895
+Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com [209.85.160.176])
+ by mx.groups.io with SMTP id smtpd.web10.22289.1591975305799531830
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Jun 2020 08:05:01 -0700
+ Fri, 12 Jun 2020 08:21:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: tgamblin@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 05CF4YhS010377
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 08:04:45 -0700
-Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Fri, 12 Jun 2020
- 08:04:23 -0700
-Received: by ala-lpggp3.wrs.com (Postfix, from userid 20958)	id E4FEF9009BA;
- Fri, 12 Jun 2020 08:04:23 -0700 (PDT)
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH] python3-django: upgrade 2.2.7 -> 2.2.13
-Date: Fri, 12 Jun 2020 08:04:23 -0700
-Message-ID: <20200612150423.94579-1-trevor.gamblin@windriver.com>
-X-Mailer: git-send-email 2.24.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=GP+cm4G/;
+ spf=pass (domain: gmail.com, ip: 209.85.160.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f176.google.com with SMTP id w9so7399135qtv.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 08:21:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=tGjrU8WzKJ2hhXRCcQ2AoLpecvMG1DAVeyOWYps/0Vw=;
+        b=GP+cm4G/WlHZjYIdeWbWX4T3SQV1EYFkOsg+aV7zTexGjFo7rmCjJkLrhGNfXSsgZV
+         4UPZq0WxacWoHJuwRnFx4ZOtQyN7kt8potxjlcz5ImWh72KjlCEGK+XlsGwTMoV8BzVe
+         VhM6FKLu/XbR9c+xQcIfNGxP9LIS/RaDXi/rNz7pHFizgdUvLrdnreVpz2d7E3gNHIbh
+         l0iH6tGhGBgT1gnLP54JliPcF4nA1tuCnIOL30QjXhh8I9hpCNWYYqqL+Iab9gYXpqMj
+         oEGOeNCKe00geW/2WcYT3FNr7Gibtb82c3fnMHS+byC727iKJrQ1ZmxNYSt89o5MIP9K
+         EcGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=tGjrU8WzKJ2hhXRCcQ2AoLpecvMG1DAVeyOWYps/0Vw=;
+        b=hv3wFLtWP47ESukxTnAde8p4Q6XWfQdFfckKvwBAtmxuJAJcapCx4eE/U5cer7YUqL
+         55a9yfSQhuwo0B2c9yfdce036SiMVoMfsFJwuFcsvA8tsdSR/J0n1Bf6gQ4PV+EzsJ6g
+         GeltrVbgy5CF2h1U7dhO2/AvZHtzYvS5O9IwAl0IK+cOHdOtAiL45hN2rY+6y1kx1jEm
+         LQFr6dy+CvmUl0yXgzUaVAGu9B+BGpSE5Mb/pZlSmP2VWU+giy6MTVmrjQ9zQKn+cGFf
+         rEN4q1TKNb1uqdcJClxgW/43U5PwQvETS/p6c//kTfcAVvlih1tbScrfL+JAd0CRIl0G
+         pt2Q==
+X-Gm-Message-State: AOAM533iul1d8OZmgaEuLjaT5UF/3X87ABVUFJmNfsc+ZpzooZbNeix1
+	dgCNzQPX9vxOzCeMHV6Ba8yoWm73M+lNS5ranpE=
+X-Google-Smtp-Source: ABdhPJwSXQ46/pSvnz2PtBAkkdPHwk+ZuzKB16FptlaKRhNNiNuTGi0thyg71zolnk6kX/nBOAbvvJr3Pu0fNu0uxgM=
+X-Received: by 2002:ac8:44b3:: with SMTP id a19mr3579296qto.285.1591975304786;
+ Fri, 12 Jun 2020 08:21:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+References: <20200612054313.4166368-1-anuj.mittal@intel.com> <20200612054313.4166368-2-anuj.mittal@intel.com>
+In-Reply-To: <20200612054313.4166368-2-anuj.mittal@intel.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 12 Jun 2020 08:21:33 -0700
+Message-ID: <CAMKF1soEA5dfNkWET3RbaRR=W=fTGcfMsd1=bZfX+_i54_baDA@mail.gmail.com>
+Subject: Re: [oe] [PATCH 2/2] opencl-clhpp: add recipe
+To: Anuj Mittal <anuj.mittal@intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000088793905a7e4a225"
 
-Upgrade from 2.2.7 for:
+--00000000000088793905a7e4a225
+Content-Type: text/plain; charset="UTF-8"
 
-- Bugfixes, including CVE-2020-13254, CVE-2020-13596, many
-others;
-- Official support for Python 3.8 (as of Django 2.2.8)
+On Thu, Jun 11, 2020 at 10:43 PM Anuj Mittal <anuj.mittal@intel.com> wrote:
 
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
----
- .../recipes-devtools/python/python3-django_2.2.13.bb     | 9 +++++++++
- .../recipes-devtools/python/python3-django_2.2.7.bb      | 9 ---------
- 2 files changed, 9 insertions(+), 9 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-django_2.2.13.bb
- delete mode 100644 meta-python/recipes-devtools/python/python3-django_2.2.7.bb
+> Recipe to provide OpenCL API C++ bindings.
+>
+> Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+> ---
+>  .../recipes-core/opencl/opencl-clhpp_git.bb   | 22 +++++++++++++++++++
+>  1 file changed, 22 insertions(+)
+>  create mode 100644 meta-oe/recipes-core/opencl/opencl-clhpp_git.bb
+>
+> diff --git a/meta-oe/recipes-core/opencl/opencl-clhpp_git.bb
+> b/meta-oe/recipes-core/opencl/opencl-clhpp_git.bb
+> new file mode 100644
+> index 000000000..540c5d346
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/opencl/opencl-clhpp_git.bb
+> @@ -0,0 +1,22 @@
+> +SUMMARY  = "OpenCL API C++ bindings"
+> +DESCRIPTION = "OpenCL API C++ bindings from Khronos"
+> +
+> +SRC_URI = "git://github.com/KhronosGroup/OpenCL-CLHPP.git;protocol=https"
+> +
+> +LICENSE  = "Apache-2.0"
+> +LIC_FILES_CHKSUM =
+> "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+> +
+> +PV = "2.0.11+git${SRCPV}"
+> +SRCREV = "432b551429b362a877ed9b647b7114022b332be0"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +inherit cmake
+> +
+> +EXTRA_OECMAKE = " \
+> +                  -DBUILD_DOCS=OFF \
+> +                  -DBUILD_EXAMPLES=OFF \
+> +                  -DBUILD_TESTS=OFF \
+> +                  "
+> +
+> +ALLOW_EMPTY_${PN} = "1"
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.13.bb b/meta-python/recipes-devtools/python/python3-django_2.2.13.bb
-new file mode 100644
-index 000000000..55eacdff2
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django_2.2.13.bb
-@@ -0,0 +1,9 @@
-+require python-django.inc
-+inherit setuptools3
-+
-+SRC_URI[md5sum] = "30c688af9b63c4800ef9b044e0dd4145"
-+SRC_URI[sha256sum] = "84f370f6acedbe1f3c41e1a02de44ac206efda3355e427139ecb785b5f596d80"
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-sqlparse \
-+"
-diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.7.bb b/meta-python/recipes-devtools/python/python3-django_2.2.7.bb
-deleted file mode 100644
-index e56453abc..000000000
---- a/meta-python/recipes-devtools/python/python3-django_2.2.7.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--require python-django.inc
--inherit setuptools3
--
--SRC_URI[md5sum] = "b0833024aac4c8240467e4dc91a12e9b"
--SRC_URI[sha256sum] = "16040e1288c6c9f68c6da2fe75ebde83c0a158f6f5d54f4c5177b0c1478c5b86"
--
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-sqlparse \
--"
--- 
-2.24.1
 
+Why is this needed ?
+
+
+> --
+> 2.25.4
+>
+> 
+>
+
+--00000000000088793905a7e4a225
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Thu, Jun 11, 2020 at 10:43 PM Anuj Mittal &lt;<a href=
+=3D"mailto:anuj.mittal@intel.com">anuj.mittal@intel.com</a>&gt; wrote:<br>=
+</div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-l=
+eft:1px #ccc solid;padding-left:1ex">Recipe to provide OpenCL API C++ bindi=
+ngs.<br>
+<br>
+Signed-off-by: Anuj Mittal &lt;<a href=3D"mailto:anuj.mittal@intel.com" ta=
+rget=3D"_blank">anuj.mittal@intel.com</a>&gt;<br>
+---<br>
+=C2=A0.../recipes-core/opencl/<a href=3D"http://opencl-clhpp_git.bb" rel=
+=3D"noreferrer" target=3D"_blank">opencl-clhpp_git.bb</a>=C2=A0 =C2=A0| 22=
+ +++++++++++++++++++<br>
+=C2=A01 file changed, 22 insertions(+)<br>
+=C2=A0create mode 100644 meta-oe/recipes-core/opencl/<a href=3D"http://ope=
+ncl-clhpp_git.bb" rel=3D"noreferrer" target=3D"_blank">opencl-clhpp_git.bb<=
+/a><br>
+<br>
+diff --git a/meta-oe/recipes-core/opencl/<a href=3D"http://opencl-clhpp_gi=
+t.bb" rel=3D"noreferrer" target=3D"_blank">opencl-clhpp_git.bb</a> b/meta-o=
+e/recipes-core/opencl/<a href=3D"http://opencl-clhpp_git.bb" rel=3D"norefer=
+rer" target=3D"_blank">opencl-clhpp_git.bb</a><br>
+new file mode 100644<br>
+index 000000000..540c5d346<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-core/opencl/<a href=3D"http://opencl-clhpp_git.bb" r=
+el=3D"noreferrer" target=3D"_blank">opencl-clhpp_git.bb</a><br>
+@@ -0,0 +1,22 @@<br>
++SUMMARY=C2=A0 =3D &quot;OpenCL API C++ bindings&quot;<br>
++DESCRIPTION =3D &quot;OpenCL API C++ bindings from Khronos&quot;<br>
++<br>
++SRC_URI =3D &quot;git://<a href=3D"http://github.com/KhronosGroup/OpenCL-=
+CLHPP.git;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">github.com=
+/KhronosGroup/OpenCL-CLHPP.git;protocol=3Dhttps</a>&quot;<br>
++<br>
++LICENSE=C2=A0 =3D &quot;Apache-2.0&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE.txt;md5=3D3b83ef96387f14655fc85=
+4ddc3c6bd57&quot;<br>
++<br>
++PV =3D &quot;2.0.11+git${SRCPV}&quot;<br>
++SRCREV =3D &quot;432b551429b362a877ed9b647b7114022b332be0&quot;<br>
++<br>
++S =3D &quot;${WORKDIR}/git&quot;<br>
++<br>
++inherit cmake<br>
++<br>
++EXTRA_OECMAKE =3D &quot; \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 -DBUILD_DO=
+CS=3DOFF \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 -DBUILD_EX=
+AMPLES=3DOFF \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 -DBUILD_TE=
+STS=3DOFF \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
++<br>
++ALLOW_EMPTY_${PN} =3D &quot;1&quot;</blockquote><div dir=3D"auto"><br></d=
+iv><div dir=3D"auto">Why is this needed ?</div><div dir=3D"auto"><br></div>=
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex"><br>
+-- <br>
+2.25.4<br>
+<br>
+<br>
+</blockquote></div></div>
+
+--00000000000088793905a7e4a225--
