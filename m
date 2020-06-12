@@ -1,117 +1,76 @@
-Received: from mail-io1-f43.google.com (mail-io1-f43.google.com [209.85.166.43])
- by mx.groups.io with SMTP id smtpd.web11.1568.1591998377261068555
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com [209.85.215.195])
+ by mx.groups.io with SMTP id smtpd.web10.381.1592007985514263274
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Jun 2020 14:46:17 -0700
+ Fri, 12 Jun 2020 17:26:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=RNzxh5GX;
- spf=pass (domain: gmail.com, ip: 209.85.166.43, mailfrom: ticotimo@gmail.com)
-Received: by mail-io1-f43.google.com with SMTP id m81so11840499ioa.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 14:46:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=b2xXTAsM;
+ spf=pass (domain: gmail.com, ip: 209.85.215.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f195.google.com with SMTP id p21so4873768pgm.13
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 17:26:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=4ve964iMTehfb7HdaB2fkNs1q2J64ue0VDfxbK/8AZE=;
-        b=RNzxh5GXx+cwW6C7yfqPSrgFZKut7/tUF2NM6UoCf1yzMjlIzRmK8OzOGyUOpKFtf5
-         o/xuIXqqs+QqNGCHk6ZFAvwCe5thnt1gPUQZZWW0hPq28nJpCrAzlVnw88Hnkvhh0gna
-         TryY7CPaU0mDsRlRl+jNgRGQbbFyw/5KQ8o5p321MkUDnu774oVizOxN1HB7Ndt8ywU2
-         y3q87VMmDrUYQR1zPZ88kF8eJFRtZncgDeXhoJVtNruJMDVTIh2CyZS+gq6jDuOxQqhh
-         ck2TKFiYeo1Er4rl1gLUUb7g9l8+XW0SuItLDDQtI1HXiOmYke+SzQYfx9cdnX73LnJA
-         Ajeg==
+        h=from:to:cc:subject:date:message-id:organization:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=0ipb0a+yopji2TbKuzkQSsKik4vH5H6TwshL2NuvD7o=;
+        b=b2xXTAsMBeTGZJWGjZJSqtPZHNhuaigh8+zaalscK6BNsWHUy/fA7GiG4IxU961gVh
+         AsFwgbhjUVvaMvNPd7DxVXAtEDT2Y0QfO3ypmW29UT1k1TdMEr3QOtcoYzhlDG2is9+8
+         VB2TyAvzQBXIgK8RgOkNH2z2eZ6HDqvQU6A9EJY+8wmQsTlkhDRJK1vrEYFl2ickEt1w
+         fqJr5uQqbbsbJ3UEetvMHYsjJfmhlxxNt93lqz4l5FYhSYr/BoeF2wBXtUTfW5Hwt45c
+         q0p446zuOIJwHXFmDtABsaYj/UjrMLim/AMVP+G41YdXBcU9qPcjWYU2GJLZPo3NXDnR
+         s6Qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=4ve964iMTehfb7HdaB2fkNs1q2J64ue0VDfxbK/8AZE=;
-        b=ig2YvLbqdDbiYJJnVZNlSRs+n8dNPc500PTMA/OvPQcjJjTvoW4HNCWSJrm98njS+t
-         kTRb2ep9rDDZMP0E4EuV6qRUxR97nvuSgMuHxrzve+pObqP9ReLSIksofAk1ugw0GaDh
-         bD3f79sr/weHWccuSiRsn2IqyvVkuGJ20dWnvNdZObDjbAh9cCfry3f11ZiaGfprZSo8
-         l61MTNRCOU+rcGurR1IXpVaCoADn/uU+o6qloNAyzGqbiJQ0c3kinjQlz2glry+w0rRV
-         85xkM7oZ6FXOfevHS37A3SSHeU7aTbcOsscHQ/bT1VtHWallVAcoQMxMjcS/Ck4MVWUm
-         bnhg==
-X-Gm-Message-State: AOAM530zf0vpNSIwZEfy65d/3mz/xrcxMOBkS0FyuVJCglzlso4nBcfK
-	IsWS/8gc2J4ckuV2DBZy3Dqx117/5wYa7FrLevE=
-X-Google-Smtp-Source: ABdhPJyAaSyy4+25N6ycMpVWiCUlYCJyKdRUjahmquA8MD8p1GaUL+0JS6TU+FJSbUQMXymzZizJkjyN+Xjx8azrTF8=
-X-Received: by 2002:a6b:249:: with SMTP id 70mr15608219ioc.146.1591998376621;
- Fri, 12 Jun 2020 14:46:16 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:organization
+         :in-reply-to:references:mime-version:content-transfer-encoding;
+        bh=0ipb0a+yopji2TbKuzkQSsKik4vH5H6TwshL2NuvD7o=;
+        b=WZbNyND9ArYnR5AdkVudiTwi3pkBANYPGsCf4g/sLV+YVCx7nCi81CW5dUJG+NXDIb
+         m5lxxbjOEHQAADmv2z+Wjae/9/1eYhr+Adxbaq+N7lNIEZbn/LAX5w1hOu9LVwGoS233
+         ZoJpyoyeAx5Oe0pS02JDxTfOoK2KjgpqMB/Ct6kxmLwpR1qUmzHCUVO4ci6OBY+gPAWN
+         VSfL9k3KpHI4fpKTmhmWzAElIsCjj0OInh8vsmc7D1W0VoA1vryvo0CoYSBGVhgDD0Ye
+         PoBe+c8WnWZ0PDKLEZr9jbw64cFTtUrD8roKgsuWvC4WPuUEHYDw5PrQ9krA4ACwZdQk
+         vzCg==
+X-Gm-Message-State: AOAM533sgunvk/R2PXNRxgD4Rk2HmnGuO2JoUmpV4ZhtZAzzkLZz8ebn
+	vD49thpNLMNzgagyD5jVT90=
+X-Google-Smtp-Source: ABdhPJzvSnLyyl2OAFDZnIvH02015tndnNzgUzMoRsSIMQZQ9E5pkACgzuv8mED80YYXN9/tXj2h6w==
+X-Received: by 2002:a63:3756:: with SMTP id g22mr12798599pgn.304.1592007984914;
+        Fri, 12 Jun 2020 17:26:24 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from tyche.localnet ([2601:646:9200:4e0::96b0])
+        by smtp.gmail.com with ESMTPSA id mu17sm6752752pjb.53.2020.06.12.17.26.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 12 Jun 2020 17:26:24 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: Christian Eggers <ceggers@arri.de>, openembedded-devel@lists.openembedded.org
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, Andreas =?ISO-8859-1?Q?M=FCller?= <schnitzeltony@gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 2/4] ttf-dejavu: Extend for native and nativesdk
+Date: Fri, 12 Jun 2020 16:38:44 -0700
+Message-ID: <6059723.tB9ojmTFGE@tyche>
+Organization: HIMVIS
+In-Reply-To: <CALbNGRSJb8fUA23=C+ecLN5-VpXb=sh2=cBCy8nR1_2shuBS4Q@mail.gmail.com>
+References: <20200609063212.3788-1-ceggers@arri.de> <20200609063212.3788-3-ceggers@arri.de> <CALbNGRSJb8fUA23=C+ecLN5-VpXb=sh2=cBCy8nR1_2shuBS4Q@mail.gmail.com>
 MIME-Version: 1.0
-References: <20200612195425.36226-1-paulohefagundes@gmail.com> <7695.1591992084920889109@lists.openembedded.org>
-In-Reply-To: <7695.1591992084920889109@lists.openembedded.org>
-From: "Tim Orling" <ticotimo@gmail.com>
-Date: Fri, 12 Jun 2020 14:46:05 -0700
-Message-ID: <CANx9H-AZVEXNaWuW=XAAY0kh7tiFda7SFg6SwuK9aMPjHVj_-Q@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-fastapi and python3-uvicorn: add packages and dependencies
-To: "Fagundes, Paulo" <paulohefagundes@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000b9a35605a7ea0194"
-
---000000000000b9a35605a7ea0194
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
-On Fri, Jun 12, 2020 at 1:01 PM Fagundes, Paulo <paulohefagundes@gmail.com>
-wrote:
-
-> this is only my second upstream patch to this project, so I'm still
-> learning about email patches and about the standards. I'm not sure if it=
-'s
-> ok to add multiple recipes to a single commit, but I added these because=
- I
-> added fastapi and uvicorn to our project and all of these dependencies w=
-ere
-> needed.
->
-
-It=E2=80=99s very hard to review multiple additions in one email. Instead,=
- stage
-the dependencies first (each as a separate commit) and then add the
-depending recipe.
-
-This also makes handling patch review changes much easier, as each new
-recipe becomes atomic.
-
-
-> another thing to note is that some of my peers were having trouble
-> building uvloop.
-> I was able to build uvloop just fine on my Arch Linux system, but my pee=
-rs
-> on Ubuntu 18.04 LTS got errors in the compile stage when uvloop tried to
-> call ./configure
->
-> So if anyone can check that it works for them that would be great
->
-> Let me know if this patch is ok and if we need to separate it into
-> different patches for each recipe let me know. Thanks
+On Tuesday, June 9, 2020 6:21:50 AM PDT Andreas M=FCller wrote:
+> On Tue, Jun 9, 2020 at 3:06 PM Christian Eggers <ceggers@arri.de> wrote:
+> > When using doxygen together with the "dot" tool (graphviz package), a
+> > ttf font package is additionally required.
+> >=20
+> > Probably this change could also be moved to ttf.inc.
 >=20
->
+> Extend an allarch recipe to native - sounds odd to me...
+>=20
 
---000000000000b9a35605a7ea0194
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+bbclassextend will convert the dependencies to be PN-<bbclassextend> and th=
+ats=20
+where this will help. But ideally I think I agree, it would be better to so=
+rt=20
+out dependencies such that native/nativesdk can depend on PN for allarch on=
+es.
 
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Fri, Jun 12, 2020 at 1:01 PM Fagundes, Paulo &lt;<a hre=
-f=3D"mailto:paulohefagundes@gmail.com">paulohefagundes@gmail.com</a>&gt; wr=
-ote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;=
-border-left:1px #ccc solid;padding-left:1ex">this is only my second upstrea=
-m patch to this project, so I&#39;m still learning about email patches and =
-about the standards. I&#39;m not sure if it&#39;s ok to add multiple recipe=
-s to a single commit, but I added these because I added fastapi and uvicorn=
- to our project and all of these dependencies were needed.<br></blockquote>=
-<div dir=3D"auto"><br></div><div dir=3D"auto">It=E2=80=99s very hard to rev=
-iew multiple additions in one email. Instead, stage the dependencies first =
-(each as a separate commit) and then add the depending recipe.</div><div di=
-r=3D"auto"><br></div><div dir=3D"auto">This also makes handling patch revie=
-w changes much easier, as each new recipe becomes atomic.</div><div dir=3D"=
-auto"><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8e=
-x;border-left:1px #ccc solid;padding-left:1ex"><br>another thing to note is=
- that some of my peers were having trouble building uvloop.<br>I was able t=
-o build uvloop just fine on my Arch Linux system, but my peers on Ubuntu 18=
-.04 LTS got errors in the compile stage when uvloop tried to call ./configu=
-re<br><br>So if anyone can check that it works for them that would be great=
-<br><br>Let me know if this patch is ok and if we need to separate it into =
-different patches for each recipe let me know. Thanks
-<br>
-</blockquote></div></div>
+> Andreas
 
---000000000000b9a35605a7ea0194--
+
+
+
