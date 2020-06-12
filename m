@@ -1,17 +1,17 @@
-Received: from NAM04-CO1-obe.outbound.protection.outlook.com (NAM04-CO1-obe.outbound.protection.outlook.com [40.107.69.50])
- by mx.groups.io with SMTP id smtpd.web11.21769.1591972796652715038
+Received: from NAM04-SN1-obe.outbound.protection.outlook.com (NAM04-SN1-obe.outbound.protection.outlook.com [40.107.70.49])
+ by mx.groups.io with SMTP id smtpd.web10.21357.1591972820697277231
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Jun 2020 07:39:57 -0700
+ Fri, 12 Jun 2020 07:40:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=PGZeusFI;
- spf=pass (domain: windriver.com, ip: 40.107.69.50, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=ZszcXYQ6;
+ spf=pass (domain: windriver.com, ip: 40.107.70.49, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YRQcfqjy9JnZ78/vpXZchxPYbRRwOd3JE2auNbrStZHVvsp4GrC+1jXkUY25CPdTaVt0Cjsp6Y2za+Y1HjalQn4aQOcQdj0yL1uDv/+d0g0hElRJrDxE8ucChWGIgqpbtbtfMrO64p02ye37fgeM60AWJhpPWV5Wdp3xytoqX8M26gnuD3WQ0kyqaRNl2Dmxdp1x5dHRq7dO1f4nTPs7oRhPI3bA4h+0EQxANZTPXdAS7Lt5jPrrycKxM66YH6obIOboQSgT7lDmJWiNScybkFgw3kgUvobX32/NJ7stsshDYIJ9a4BE6mcZyjN1W2vRd487s2iDG8jWXib67CyFBQ==
+ b=kGhZU0+s+yPnJ76ubftNL691X0SMW6bAdW2/8rPeVer33e4jPGpajRbgmCjaDjuyVa+YH2P/4Aa7317S8CrTQbjYyYKkh3l/5XBraOP8QtnPH54mfxKaGXBMuqvby7n3UDqSazhV6WcUOybzBQLMdMdscA0NelT5wQzPUfcjLrfr5Im7T7+ocAsvKZaF+L/HEWNudTkvoU/JAJ/IZerc3ndxJ6vUhoAOvYIV4DqOfHXZ54u5zCaUB0tkLO/ua+7aJOo4Zg6tJBvReSMQfMyEPQ/bSxsLtTePljNpdF5eacwjMmgLtI7L6r5FhuxYMooibTSAxIZEWC2XtZpBio+blw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pqycduEn0vKFTUEFcxRvYPK0iIRkC7vHP60BP9WjM9E=;
- b=T79dV2Tg0bSKTgxGNeOb0CxNV/HtpN5EywGq+4VWerWBDFjr44xXxZtEpu2zpyvmXQxCM6xGbVpTbCoXX/kO15zka2WSovPOTY6p+4DS/sR0AA/vJxbGQ7vFz+sAvBo+eg6sJ9CVf2M/XBqyK1C3AswuyysfY3OsMJsdUyGA2FmsI8KGegCe5hhw9yyR2YXt8N9VAVl8kSs39E3TM3jpoFkMTu+20n0GaT10/8trR4s3qhPL4OmrSMFljd/ntUcac4pvumbFh1UMgQFZR0++/V1BRGYuNXZ8+7KlcdA+N37ATWsOApAyS8TIlAWebkn28AohTl0ETPDXsCsAp0dE9A==
+ bh=HvB0ckXJR9JQUowWntPn6buw8owmaEGfQesTRsgS88w=;
+ b=MJ4QbKBGPbGjJAs52qvflzs50/2jPoKde3wLs3IzhPl5FUELEk7RAKNcctPG6St8mBCYJHaflwCgUDlWNTW/+JfqEx2cB+jdgTwQNlPi31f6oHrHp7G/Ku3xOzJAdWJNhrEKWt+AIefAxiqBvWlqn/JDl/OctcQ2zRkBEkQIG2uADRzRW18YV10/bPGsXE+mlOhcA1UVulqnl6CfIf7h3aZLPrNdexQLDv0BqxVzET4SpAblN4zTc2rrtezAvxokE/2cacrmA46s3i27EUAFesGah9sniVDCgzUJFBU06z/jAwvBvZDpLm9C2d0VZ8cVYyF2ytTrmrfXg2aSef4I3g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,120 +19,116 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pqycduEn0vKFTUEFcxRvYPK0iIRkC7vHP60BP9WjM9E=;
- b=PGZeusFIYhoTsKKDFVbET02JFPXfntaoduhWKDu8SUAd6cYbNipYlJQDeE3wxDR98I9eOBKVUJzWQ9reDsV7iNNRkTJPusZeSnuyE5bwECxyk1ZLVOdZQZKAvZAacSNK9XG3nY9HAYXfKJjauA0z5iAv7DZzZReesK8AjTcYl8I=
+ bh=HvB0ckXJR9JQUowWntPn6buw8owmaEGfQesTRsgS88w=;
+ b=ZszcXYQ6Bd+C+JlN8BNa+kdAXO4VcL/Jxzc4as5hKF1DALU3ufhlb/Al28n3aUjAb4Ct4JgJWrroYiiQ4q2yWNACOwuy+Me2ZE7abWdYjedA5gHyXjNddzOcJPRiBlgZj9fPhSfgBkzNEoe4vPtLK2fNCZVkk5yHUFoB6br7WDc=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB3956.namprd11.prod.outlook.com (2603:10b6:405:77::10) with
+ by BN6PR11MB1233.namprd11.prod.outlook.com (2603:10b6:404:44::23) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.21; Fri, 12 Jun
- 2020 14:39:55 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.18; Fri, 12 Jun
+ 2020 14:40:19 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3088.021; Fri, 12 Jun 2020
- 14:39:55 +0000
-Subject: Re: [oe] [meta-python][PATCH 3/7] python3-pint: Upgrade 0.11 -> 0.12
-To: Leon Anavi <leon.anavi@konsulko.com>,
+ 14:40:18 +0000
+Subject: Re: [oe] [meta-python][PATCH] python3-m2crypto: add the missing rdepends
+To: "Yu, Mingli" <mingli.yu@windriver.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200611090904.29772-1-leon.anavi@konsulko.com>
- <20200611090904.29772-3-leon.anavi@konsulko.com>
+References: <20200612034646.3659830-1-mingli.yu@windriver.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <355592c3-af2f-f218-c3a4-891ea003a3f3@windriver.com>
-Date: Fri, 12 Jun 2020 10:39:53 -0400
+Message-ID: <cbabbacc-4eca-8ed0-4bc0-4fdf70bde200@windriver.com>
+Date: Fri, 12 Jun 2020 10:40:15 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200611090904.29772-3-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0105.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2c::14) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200612034646.3659830-1-mingli.yu@windriver.com>
+X-ClientProxiedBy: YT1PR01CA0109.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2c::18) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0105.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2c::14) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.18 via Frontend Transport; Fri, 12 Jun 2020 14:39:55 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0109.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2c::18) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.18 via Frontend Transport; Fri, 12 Jun 2020 14:40:18 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 0159a800-e622-42ed-bad8-08d80ede7936
-X-MS-TrafficTypeDiagnostic: BN6PR11MB3956:
+X-MS-Office365-Filtering-Correlation-Id: 352ffd78-df23-443d-14ac-08d80ede8732
+X-MS-TrafficTypeDiagnostic: BN6PR11MB1233:
+X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB3956B32DC280B08F72B53CF19F810@BN6PR11MB3956.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:4303;
+	<BN6PR11MB1233B4E7B8F483EC0629E03E9F810@BN6PR11MB1233.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:3383;
 X-Forefront-PRVS: 0432A04947
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	Lu4BTuljHHC0NGrB/oNE8DFJV2bsr3OJZpkZKnhErKyeRCQG7UMv67anOJAvjGWzgAH8WSheIfaUGfxQCGomYEbVHHTuPAs8ASAy93PPv7pFHxkt2nBb9uz8XcQYgIiKVbiA76hlx5+JNxXkKJ2oiDwIygjIZVnBAwf/kfNySfxzVToCEhtKrR39+awTvZNIghYEhrYEVcPJHRRkro5fjmRPBc6OSKBlRTKfWOYghO24KKSIQDMrkJiJe6p8Z41t1nQiL4URuz8GDv68gZTEXjCf5GedJqLUHOut6SwvNNrM5xXO9t9EEwd4clqSMI1hVpNykCiOREicPGDbV0y7XfoUmyXtcRT6b/fZKMV15Q3yEXx6mhg5/+cCmUx4e+ErXAd9dw8cFgguj8l+V1c0b8uvCK+PUp+q+3DhhcKGhOGFgqryW+xagcww5MYxN2YzbAES6TFsltb7clcirol1Ww==
+	NFjrTLDrxZOEvDGTZX4VduZuk33SvPGDCTOy4jKeZmvhYsX8RGFwvMuj0fw7un08a0jtu1oBNPRptfAdSRRM4iR2p1NHWpD3zbsSo0brck+HpbuTMAOQ39i3/LIaCokQ1JbH+3cs67a4WJF5AT0GLXcZ+JLqhXzcVBHnc3NW83h/tpf8pjj0Ofpo0/YAC71AMI7JXZentVSrLRKkjB/15OYlWxVNijcVLexDbgkXZzxY9M27dXEM9V+tKjf/gIi1iQ/GqYfH5w1V5Ja4NpYA5jcEOTEtS5AtiU79/AK65ObspUmq8sCwWjH3WpUhW8E2yjb/x3t+sJwkrGOOPXps0Lcjq0Wl1Td3fhkG3+YiptSge9//hXE776DQ1hsElLIluMraakfBABAVjVipxh4v5DX7PjrLpIkDHdydus9vheKl5OctQoJ/olu7PlOjz+gU8VmBwjhnf6sckBooVqijrA==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(376002)(396003)(366004)(136003)(39850400004)(966005)(478600001)(66476007)(36756003)(26005)(66946007)(2616005)(66556008)(31686004)(5660300002)(53546011)(2906002)(8676002)(956004)(186003)(44832011)(86362001)(16576012)(166002)(8936002)(52116002)(6486002)(316002)(16526019)(31696002)(33964004)(83380400001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(39850400004)(346002)(396003)(376002)(366004)(6486002)(66946007)(31686004)(66476007)(66556008)(478600001)(16576012)(2906002)(6666004)(966005)(316002)(36756003)(16526019)(5660300002)(83380400001)(53546011)(33964004)(26005)(186003)(31696002)(86362001)(8936002)(8676002)(2616005)(166002)(52116002)(44832011)(956004)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	dtG/4TBgOKoQKxbZN48PDzat/p/HkOSqd1+fmPitp3LlP/4A+lO37eM6OGpXfrNwMF7ND2VX6865Af8pIKCNrxHK7gJZaf1xOMaqeWa3+1au1Yr1DiTutQiWiIKilz7hULEkcn4e6gOHvC2C1jp6ZL9/oRn7pPrU6fIGurGfXLDsf4ErmbZ4acrc+1e/oGfa6hbBUq6JQ6h+pJfvRlJK7gmNNHIvaG1enSKCmZRcvnQ79rhT08KIzlfjZfdHl1l9xTBVnvGw25tyoiV41DT6yGw7d9Jq+ZmPOz+ZMaZWwgGI7sMv49vvHnVZLCVFfOiQAJGRix7HPi2irNv9mrF6ksFCegXPnWniTJrkn/tStzjPWcKoBHUNXF4T/wWJVHa6ATU0RujfXzLLuFA45TN+yiQ1PDnp6bh2+ggJtJbKmm/535OorUFnH1xdveze5Vbuy75+PZAn+vdEqcY7KeFfjtLkBJPG3QypfLnrV7fAXK8QXPghjUkTQEyDt8GR+QYr
+	OKOF6OUdzcrjv5IlzXUD+Did5OlYVMGh7aDKjDkY7nmPxO6FYWZE1xZT99p/qN8+ZUCZSpW3K/EF4zwT/vgtz5SohuJHz7r+N7/BkqTvUAgMIRi3CS4wHB6osL81puQb0qNPCbAd5nFXDOvi2LriPcvni2Zcljz0FXAiwqEYzTLtF20CNiI9rHhc8FF5Ieyi2qKM56ydI3tgZsVgVRzfk7C11zAoRHk/Xr0gYEs5xNkqcdqpOkCIW83YyB78ojp3/k9kVyix0kaLfDLTyHdj6VbCQmTASSpj62Q1C93SdXQ2esx9eTivrv9CREI05/HUcxn3ho5TubJNNLedCJc529MpEd2cbZjyAILtsge3Wog/Wg3Hp5j8dKfGeEgzFe8FNSXIzuCTfX+X7p4gGKaHsqUXdIzab7aAoGxRKGh+3FEspeR4KfzaiMD22ya2UE5r4bl4cAt0znUx9cMnRS7ziYeyRY37wvYFxVqrN1ZXEOYUWTbKTcut2ET299foNrhh
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0159a800-e622-42ed-bad8-08d80ede7936
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jun 2020 14:39:55.3442
+X-MS-Exchange-CrossTenant-Network-Message-Id: 352ffd78-df23-443d-14ac-08d80ede8732
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jun 2020 14:40:18.8748
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: rVssQLzwzvXYHHa/aJvRbsru293wTItB2N7s5BbFhT55lHYEuZXswor3WU+C15Z6+cULrobU6V5lk8ru9aGArXcYfUtRWbgmXdy/NF7kHfI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB3956
+X-MS-Exchange-CrossTenant-UserPrincipalName: BtXmxqfqvUO/80kGDAyR0wipXyLOw3ZVbwCJk0HEjlITAYe0TspUrrdbFLOTMhxRwdXDdhtdN4puQSwZV7bpv79ytJyS6jm3hTjPq1C0c3E=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1233
 Content-Type: multipart/alternative;
- boundary="------------BF13F8C9F33B3E2B9AAF0E18"
+ boundary="------------16A8E03BEF03E3D771F5698E"
 Content-Language: en-US
 
---------------BF13F8C9F33B3E2B9AAF0E18
+--------------16A8E03BEF03E3D771F5698E
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 6/11/20 5:09 AM, Leon Anavi wrote:
-> Upgrade to release 0.12. Fix link to the homepage, add a summary.
-> The new release brings:
+On 6/11/20 11:46 PM, Yu, Mingli wrote:
+> From: Mingli Yu <mingli.yu@windriver.com>
 >
-> - Add full support for Decimal and Fraction at the registry level.
-> - NaN is now treated the same as zero in addition, subtraction,
->    equality, and disequality
-> - New implementation of 'Lx' String Format Type Option
-> - Bug fixes
+> Add the missing rdepends to fix the error such as below:
+>   # python3
+>   [snip]
+>   >>> import M2Crypto
+>   ModuleNotFoundError: No module named 'decimal'
 >
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../{python3-pint_0.11.bb => python3-pint_0.12.bb}       | 9 +++++----
->   1 file changed, 5 insertions(+), 4 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-pint_0.11.bb => python3-pint_0.12.bb} (63%)
+>   .../recipes-devtools/python/python-m2crypto.inc    | 14 ++++++++++----
+>   1 file changed, 10 insertions(+), 4 deletions(-)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pint_0.11.bb b/meta-python/recipes-devtools/python/python3-pint_0.12.bb
-> similarity index 63%
-> rename from meta-python/recipes-devtools/python/python3-pint_0.11.bb
-> rename to meta-python/recipes-devtools/python/python3-pint_0.12.bb
-> index d37da7c6a..626af0554 100644
-> --- a/meta-python/recipes-devtools/python/python3-pint_0.11.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pint_0.12.bb
-> @@ -1,5 +1,6 @@
-> -DESCRIPTION = "Interval arithmetic for Python"
-> -HOMEPAGE = "https://github.com/AlexandreDecan/python-intervals"
-> +SUMMARY = "Physical quantities module"
-> +DESCRIPTION = "Physical quantities Python module"
-> +HOMEPAGE = "https://github.com/hgrecco/pint"
->   SECTION = "devel/python"
+> diff --git a/meta-python/recipes-devtools/python/python-m2crypto.inc b/meta-python/recipes-devtools/python/python-m2crypto.inc
+> index 881fdf1cc..81c81645a 100644
+> --- a/meta-python/recipes-devtools/python/python-m2crypto.inc
+> +++ b/meta-python/recipes-devtools/python/python-m2crypto.inc
+> @@ -17,10 +17,16 @@ PYPI_PACKAGE = "M2Crypto"
+>   inherit pypi siteinfo
 >   
->   LICENSE = "BSD-3-Clause"
-> @@ -9,8 +10,8 @@ PYPI_PACKAGE := "Pint"
+>   DEPENDS += "openssl swig-native"
+> -RDEPENDS_${PN} += "${PYTHON_PN}-typing \
+> -                   ${PYTHON_PN}-distutils \
+> -                   ${PYTHON_PN}-smtpd \
+> -                   ${PYTHON_PN}-xmlrpc \
+> +RDEPENDS_${PN} += "\
+> +  ${PYTHON_PN}-datetime \
+> +  ${PYTHON_PN}-distutils \
+> +  ${PYTHON_PN}-logging \
+> +  ${PYTHON_PN}-netclient \
+> +  ${PYTHON_PN}-netserver \
+> +  ${PYTHON_PN}-numbers \
+> +  ${PYTHON_PN}-smtpd \
+> +  ${PYTHON_PN}-typing \
+> +  ${PYTHON_PN}-xmlrpc \
+>   "
 >   
->   inherit pypi ptest setuptools3
->   
-> -SRC_URI[md5sum] = "3a8f29c2a30efd35af4b5c5a224ef965"
-> -SRC_URI[sha256sum] = "308f1070500e102f83b6adfca6db53debfce2ffc5d3cbe3f6c367da359b5cf4d"
-> +SRC_URI[md5sum] = "0af699bc0ccdff56228b4a81216b4f7d"
-> +SRC_URI[sha256sum] = "dc899061f9dc478e0aac3b0d872ca33d120efd32c382984818adab3522b6c793"
->   
->   DEPENDS += "python3-setuptools-scm-native"
->   
+>   DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR} -I${STAGING_INCDIR}"
 >
 > 
 
---------------BF13F8C9F33B3E2B9AAF0E18
+--------------16A8E03BEF03E3D771F5698E
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -142,55 +138,51 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 6/11/20 5:09 AM, Leon Anavi wrote:<br>
+    <div class="moz-cite-prefix">On 6/11/20 11:46 PM, Yu, Mingli wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200611090904.29772-3-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 0.12. Fix link to the homepage, add a summary.
-The new release brings:
+    <blockquote type="cite" cite="mid:20200612034646.3659830-1-mingli.yu@windriver.com">
+      <pre class="moz-quote-pre" wrap="">From: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a>
 
-- Add full support for Decimal and Fraction at the registry level.
-- NaN is now treated the same as zero in addition, subtraction,
-  equality, and disequality
-- New implementation of 'Lx' String Format Type Option
-- Bug fixes
+Add the missing rdepends to fix the error such as below:
+ # python3
+ [snip]
+ &gt;&gt;&gt; import M2Crypto
+ ModuleNotFoundError: No module named 'decimal'
 
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+Signed-off-by: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200611090904.29772-3-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200612034646.3659830-1-mingli.yu@windriver.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../{python3-pint_0.11.bb =&gt; python3-pint_0.12.bb}       | 9 &#43;&#43;&#43;&#43;&#43;----
- 1 file changed, 5 insertions(&#43;), 4 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pint_0.11.bb =&gt; python3-pint_0.12.bb} (63%)
+ .../recipes-devtools/python/python-m2crypto.inc    | 14 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;----
+ 1 file changed, 10 insertions(&#43;), 4 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pint_0.11.bb b/meta-python/recipes-devtools/python/python3-pint_0.12.bb
-similarity index 63%
-rename from meta-python/recipes-devtools/python/python3-pint_0.11.bb
-rename to meta-python/recipes-devtools/python/python3-pint_0.12.bb
-index d37da7c6a..626af0554 100644
---- a/meta-python/recipes-devtools/python/python3-pint_0.11.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-pint_0.12.bb
-@@ -1,5 &#43;1,6 @@
--DESCRIPTION = &quot;Interval arithmetic for Python&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/AlexandreDecan/python-intervals">&quot;https://github.com/AlexandreDecan/python-intervals&quot;</a>
-&#43;SUMMARY = &quot;Physical quantities module&quot;
-&#43;DESCRIPTION = &quot;Physical quantities Python module&quot;
-&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/hgrecco/pint">&quot;https://github.com/hgrecco/pint&quot;</a>
- SECTION = &quot;devel/python&quot;
+diff --git a/meta-python/recipes-devtools/python/python-m2crypto.inc b/meta-python/recipes-devtools/python/python-m2crypto.inc
+index 881fdf1cc..81c81645a 100644
+--- a/meta-python/recipes-devtools/python/python-m2crypto.inc
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python-m2crypto.inc
+@@ -17,10 &#43;17,16 @@ PYPI_PACKAGE = &quot;M2Crypto&quot;
+ inherit pypi siteinfo
  
- LICENSE = &quot;BSD-3-Clause&quot;
-@@ -9,8 &#43;10,8 @@ PYPI_PACKAGE := &quot;Pint&quot;
+ DEPENDS &#43;= &quot;openssl swig-native&quot;
+-RDEPENDS_${PN} &#43;= &quot;${PYTHON_PN}-typing \
+-                   ${PYTHON_PN}-distutils \
+-                   ${PYTHON_PN}-smtpd \
+-                   ${PYTHON_PN}-xmlrpc \
+&#43;RDEPENDS_${PN} &#43;= &quot;\
+&#43;  ${PYTHON_PN}-datetime \
+&#43;  ${PYTHON_PN}-distutils \
+&#43;  ${PYTHON_PN}-logging \
+&#43;  ${PYTHON_PN}-netclient \
+&#43;  ${PYTHON_PN}-netserver \
+&#43;  ${PYTHON_PN}-numbers \
+&#43;  ${PYTHON_PN}-smtpd \
+&#43;  ${PYTHON_PN}-typing \
+&#43;  ${PYTHON_PN}-xmlrpc \
+ &quot;
  
- inherit pypi ptest setuptools3
- 
--SRC_URI[md5sum] = &quot;3a8f29c2a30efd35af4b5c5a224ef965&quot;
--SRC_URI[sha256sum] = &quot;308f1070500e102f83b6adfca6db53debfce2ffc5d3cbe3f6c367da359b5cf4d&quot;
-&#43;SRC_URI[md5sum] = &quot;0af699bc0ccdff56228b4a81216b4f7d&quot;
-&#43;SRC_URI[sha256sum] = &quot;dc899061f9dc478e0aac3b0d872ca33d120efd32c382984818adab3522b6c793&quot;
- 
- DEPENDS &#43;= &quot;python3-setuptools-scm-native&quot;
- 
+ DISTUTILS_BUILD_ARGS &#43;= &quot;build_ext --openssl=${STAGING_EXECPREFIXDIR} -I${STAGING_INCDIR}&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -200,4 +192,4 @@ index d37da7c6a..626af0554 100644
   </body>
 </html>
 
---------------BF13F8C9F33B3E2B9AAF0E18--
+--------------16A8E03BEF03E3D771F5698E--
