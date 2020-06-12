@@ -1,54 +1,59 @@
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web10.15426.1591949898242733485
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+ by mx.groups.io with SMTP id smtpd.web12.16296.1591953616634943733
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Jun 2020 01:18:18 -0700
+ Fri, 12 Jun 2020 02:20:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: kai.kang@windriver.com)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 05C8IGGh002885
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 01:18:17 -0700 (PDT)
-Received: from pek-kkang-d1.wrs.com (128.224.162.131) by
- ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
- 14.3.487.0; Fri, 12 Jun 2020 01:18:09 -0700
-From: "kai" <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python2][PATCH] python: update RRECOMMENDS for multilib
-Date: Fri, 12 Jun 2020 16:16:38 +0800
-Message-ID: <20200612081638.2467372-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=missing; spf=pass (domain: intel.com, ip: 134.134.136.31, mailfrom: anuj.mittal@intel.com)
+IronPort-SDR: N4aeFcXJ2CyiVnfsCI279FyWOnWyaWML/+Sr/stVain5FDHbUBmQE4JY2NEknbV2JLimcr4rTG
+ 7pTsMqomS3Sw==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Jun 2020 02:20:15 -0700
+IronPort-SDR: fJV5N70wNFMyjkK5d5LAprGTMGS6cUsvl6wvDyqc/v3sdH9CIjcYL5KJwMIcsz6JWT+Zr5ff/4
+ GAZXW2AqdA9A==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.73,502,1583222400"; 
+   d="scan'208";a="315086063"
+Received: from kmsmsx156.gar.corp.intel.com ([172.21.138.133])
+  by FMSMGA003.fm.intel.com with ESMTP; 12 Jun 2020 02:20:14 -0700
+Received: from pgsmsx101.gar.corp.intel.com ([169.254.1.74]) by
+ KMSMSX156.gar.corp.intel.com ([169.254.1.204]) with mapi id 14.03.0439.000;
+ Fri, 12 Jun 2020 17:20:13 +0800
+From: "Anuj Mittal" <anuj.mittal@intel.com>
+To: "ross@burtonini.com" <ross@burtonini.com>, "arthur.she@linaro.org"
+	<arthur.she@linaro.org>
+CC: "denis@denix.org" <denis@denix.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-oe][PATCH] igt-gpu-tools: add new package
+Thread-Topic: [oe] [meta-oe][PATCH] igt-gpu-tools: add new package
+Thread-Index: AQHWPmp6KO+sRIz9OUiN4HpAQOIHOKjP382AgABuqACAAOvagIACtzEAgABA5oA=
+Date: Fri, 12 Jun 2020 09:20:12 +0000
+Message-ID: <b27b1907c0cbc522137a2f9f5fd8794cd8459d8d.camel@intel.com>
+References: <20200609142957.187352-1-arthur.she@linaro.org>
+	 <CAAnfSTsaMMCGGnGGYHf6dQ3Kdjtzf-NnPy7VoXDjffC-BFPHGw@mail.gmail.com>
+	 <20200609215534.GW17660@denix.org>
+	 <CAAnfSTupFtc44EX0O6f=1xGX8TLeNhTk9w5J-y0WGPhdA3ZgAw@mail.gmail.com>
+	 <CAJ8hLzHt24_OpYUf92=qHpypsb3UpXuOhUm4MAoGoi23h1zh+g@mail.gmail.com>
+In-Reply-To: <CAJ8hLzHt24_OpYUf92=qHpypsb3UpXuOhUm4MAoGoi23h1zh+g@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.255.145.38]
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <47E9F37CDD707F4CA326B622CB0A5755@intel.com>
+Content-Transfer-Encoding: base64
 
-From: Kai Kang <kai.kang@windriver.com>
-
-There is a qa issue because of oe-core commit b3fda05 which updates
-multilib mechanism:
-
-| ERROR: lib32-python-2.7.18-r0 do_package: QA Issue: lib32-python package
-    lib32-python-crypt - suspicious values 'openssl' in RRECOMMENDS [multilib]
-
-Prepend ${MLPREFIX} to RRECOMMENDS to fix the issue.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- recipes-devtools/python/python_2.7.18.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/recipes-devtools/python/python_2.7.18.bb b/recipes-devtools/python/python_2.7.18.bb
-index be7c6d2..0945cb3 100644
---- a/recipes-devtools/python/python_2.7.18.bb
-+++ b/recipes-devtools/python/python_2.7.18.bb
-@@ -153,7 +153,7 @@ PACKAGES_remove = "${PN}"
- # manual dependency additions
- RPROVIDES_${PN}-modules = "${PN}"
- RRECOMMENDS_${PN}-core_append_class-nativesdk = " nativesdk-python-modules"
--RRECOMMENDS_${PN}-crypt = "openssl"
-+RRECOMMENDS_${PN}-crypt = "${MLPREFIX}openssl"
- 
- # package libpython2
- PACKAGES =+ "lib${BPN}2"
--- 
-2.25.1
-
+T24gVGh1LCAyMDIwLTA2LTExIGF0IDIyOjI3IC0wNzAwLCBBcnRodXIgU2hlIHdyb3RlOg0KPiBI
+aSBSb3NzLCBEZW55cywNCj4gVGhhbmtzIGZvciB5b3VyIGNvbW1lbnRzLg0KPiBJJ3ZlIHRhbGtl
+ZCB0byB0aGUgbWV0YS1pbnRlbCBtYWludGFpbmVyLg0KPiBIZSBhZ3JlZXMgdG8gcmVtb3ZlIGl0
+IGZyb20gbWV0YS1pbnRlbCBhbmQgdXNlIHRoaXMgb25lIGluc3RlYWQsIG9uY2UNCj4gaXQgZ2V0
+cyBtZXJnZWQuDQoNCkFjdHVhbGx5IEkgaGFkIHJlcXVlc3RlZCB0aGF0IGl0IGJlIHNlbnQgdG8g
+b2UtY29yZSBsaXN0IHRvIHNlZWsNCm90aGVycycgb3BpbmlvbiBvbiB3aGV0aGVyIGl0IGNhbiBi
+ZSBpbmNsdWRlZCB0aGVyZSBzaW5jZSB0aGlzIHByb3ZpZGVzDQphIGNvcmUgdmFsaWRhdGlvbiBm
+dW5jdGlvbmFsaXR5IHRoYXQgaXMgYXBwbGljYWJsZSBub3QganVzdCB0byBhIHNpbmdsZQ0KYXJj
+aCBhbmQgaXMgdXNlZCBieSBhbGwuIEkgd291bGQgaGF2ZSBiZWVuIGFibGUgdG8gcmVtb3ZlIGl0
+IGZyb20gbWV0YS0NCmludGVsIGluIHRoYXQgY2FzZS4NCg0KVGhhbmtzLA0KDQpBbnVqDQo=
