@@ -1,40 +1,40 @@
-Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com [209.85.219.45])
- by mx.groups.io with SMTP id smtpd.web11.1357.1591987009465864838
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
+ by mx.groups.io with SMTP id smtpd.web12.1228.1591987012741466354
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Jun 2020 11:36:49 -0700
+ Fri, 12 Jun 2020 11:36:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.219.45, mailfrom: otavio.salvador@gmail.com)
-Received: by mail-qv1-f45.google.com with SMTP id d12so2001419qvn.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 11:36:49 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: otavio.salvador@gmail.com)
+Received: by mail-qk1-f195.google.com with SMTP id c185so9946870qke.7
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 11:36:52 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:organization:content-transfer-encoding;
-        bh=yMps1tjSsFNlt9t4rlKg3armr8tDMRCqkoxm9uLhH+Q=;
-        b=VVHI0dkyro2CaaN3pKlfkt1/gMy7KAXlyLduhV98S9Y2ndlHPmfa+FL1B8BkpHCLLY
-         01ek3UHoG1w7SMLx1V7NWX0rZW8zDdhNIajyGRIaZ7RJ0cItOY5/GKF9FhQ6qOnJytn3
-         778OiCFMftXzOEWliti/peCp9G9BdTMYJc3FksubZJrbNK8r1mv5UWov5MmjtF7Q9JBt
-         Vi6RM8iCzNhA33kTfGZwlwEfYC+/wsgMhV3UtJGJH6nbQs5w/R/2apBMidJf5Se5B/ZR
-         XuEh+HWe8Yc0TTbbLwMAP+1d3EHkZ7gcwFc9mu1vfiRIjwnj9ByOR1T+Ftv+zrqFAua1
-         kduQ==
-X-Gm-Message-State: AOAM533Jlm5JAQtS5ssQlvEWLOm+vzHFDZgvWaRdEzBU4GUlDPyfAdUB
-	RJDKLS5rEv8YiMJ1bQKDror51WWaceE=
-X-Google-Smtp-Source: ABdhPJztmDOESDuC7CMHm0G6ru2Lo3lsg0Sl4gnm4WfXWqkyLcoZ2B+J6JlDdZOP6IIHvtYm69dauA==
-X-Received: by 2002:ad4:54cd:: with SMTP id j13mr13036927qvx.151.1591987008428;
-        Fri, 12 Jun 2020 11:36:48 -0700 (PDT)
+        bh=N9JKDNtYB9YRf4Hpn3cDC4W22K8DBd76p5eCqS3jArU=;
+        b=GHZozgNGGVh2DN6dO2oM3GFCUwBWJ/8StCKXjVUO4Z2cbuF0JBHjGybv9JWgO2ZJXj
+         VD5b09BpuoEfpqQPzilKNOxo6PhLe0v84IiyfAOgYwLTvz+tNoG/PTE1jw37chkfQjUs
+         S9GZ1pMQ8Y5ycsQd2IRzQTkEERjtm8clWevStOwfemaHUR6pNw2koEpnVbD2OsxDpuR0
+         6KF8SBh/gJko2BjZ+Qt8C62zJUTzVZEi8c7za2byGez8hWwNZ4FJb7HAno9hd7Mqq74E
+         1vd9xn9yyzE4jd6rOy5fqN/N6H7/iwYFVm+B3PasXhIGzYCDb9rQGX8CRCLsx6I7CT8v
+         hUGg==
+X-Gm-Message-State: AOAM530of3gcgxhlhM9Cj2wE7e4eteJGQeTb/5BXetQAPApt2HtCzqSY
+	3/l3fEXTWYuObNDunprWmbaTjrugAw4=
+X-Google-Smtp-Source: ABdhPJzYYxSlnUCxiS6IsO080iZIIS9I6rUj4RUpLgvb37TLD+Jdzwwmc+lKWDsHD6IuyAhWMVYIOQ==
+X-Received: by 2002:a37:a194:: with SMTP id k142mr4414021qke.14.1591987011704;
+        Fri, 12 Jun 2020 11:36:51 -0700 (PDT)
 Return-Path: <otavio.salvador@gmail.com>
 Received: from localhost ([181.220.84.90])
-        by smtp.gmail.com with ESMTPSA id 124sm4518980qkn.45.2020.06.12.11.36.47
+        by smtp.gmail.com with ESMTPSA id m26sm3185723qtm.73.2020.06.12.11.36.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Jun 2020 11:36:47 -0700 (PDT)
+        Fri, 12 Jun 2020 11:36:51 -0700 (PDT)
 From: "Otavio Salvador" <otavio.salvador@gmail.com>
 To: Meta-OpenEmbedded Mailing listing <openembedded-devel@lists.openembedded.org>
 Cc: Domarys Correa <domarys.correa@ossystems.com.br>,
 	Khem Raj <raj.khem@gmail.com>,
 	Otavio Salvador <otavio@ossystems.com.br>
-Subject: [dunfell-backport meta-python PATCH 09/22] python3-xmodem: Add recipe version 0.4.6
-Date: Fri, 12 Jun 2020 15:35:54 -0300
-Message-Id: <20200612183607.108989-9-otavio@ossystems.com.br>
+Subject: [dunfell-backport meta-python PATCH 10/22] python3-multidict: Update 4.7.4 -> 4.7.5
+Date: Fri, 12 Jun 2020 15:35:55 -0300
+Message-Id: <20200612183607.108989-10-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20200612183607.108989-1-otavio@ossystems.com.br>
 References: <20200612183607.108989-1-otavio@ossystems.com.br>
@@ -46,32 +46,41 @@ From: Domarys Correa <domarys.correa@ossystems.com.br>
 
 Signed-off-by: Domarys Correa <domarys.correa@ossystems.com.br>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 0dccb1e5a698aec92506196fc1a9fcde601160ce)
+(cherry picked from commit 3491b0dee95898c7c6895a86e97e8c1d02362206)
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
 
- .../python/python3-xmodem_0.4.6.bb                 | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb
+ ...hon3-multidict_4.7.4.bb => python3-multidict_4.7.5.bb} | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-multidict_4.7.4.bb => python3-multidict_4.7.5.bb} (76%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb b/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb
-new file mode 100644
-index 000000000..3fdd3e58c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "XMODEM protocol implementation"
+diff --git a/meta-python/recipes-devtools/python/python3-multidict_4.7.4.bb b/meta-python/recipes-devtools/python/python3-multidict_4.7.5.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-multidict_4.7.4.bb
+rename to meta-python/recipes-devtools/python/python3-multidict_4.7.5.bb
+index 0636972ec..30e10c251 100644
+--- a/meta-python/recipes-devtools/python/python3-multidict_4.7.4.bb
++++ b/meta-python/recipes-devtools/python/python3-multidict_4.7.5.bb
+@@ -1,12 +1,12 @@
+ SUMMARY = "Multidicts are useful for working with HTTP headers, URL query args etc."
+ HOMEPAGE = "https://github.com/aio-libs/multidict/"
 +
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
-+
-+SRC_URI[sha256sum] = "089737298f5738eabc43f2519efdc80b402693768f16383f7013b9e6f8f279d7"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-logging \
-+"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a"
+ 
+-inherit pypi setuptools3 ptest
++SRC_URI[sha256sum] = "aee283c49601fa4c13adc64c09c978838a7e812f85377ae130a24d7198c0331e"
+ 
+-SRC_URI[md5sum] = "22b46f759cf2cc3ca1d2c9f82cc9bb79"
+-SRC_URI[sha256sum] = "d7d428488c67b09b26928950a395e41cc72bb9c3d5abfe9f0521940ee4f796d4"
++inherit pypi setuptools3 ptest
+ 
+ SRC_URI += " \
+ 	file://run-ptest \
+@@ -20,3 +20,5 @@ do_install_ptest() {
+ 	install -d ${D}${PTEST_PATH}/tests
+ 	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+ }
 +
 +BBCLASSEXTEND = "native nativesdk"
 -- 
