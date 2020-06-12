@@ -1,68 +1,54 @@
-Received: from mga11.intel.com (mga11.intel.com [])
- by mx.groups.io with SMTP id smtpd.web11.14185.1591940602049791376
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web10.15426.1591949898242733485
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Jun 2020 22:43:22 -0700
+ Fri, 12 Jun 2020 01:18:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=fail (domain: intel.com, ip: <nil>, mailfrom: anuj.mittal@intel.com)
-IronPort-SDR: sf11bHCkIgW8NTH/bBsDmaXaUepmd0W4RFsPu7qNVFNUjGkLOg7qy60wwEXdE1Wv/TXNcuCado
- AMsdc4aP9QjA==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga007.fm.intel.com ([10.253.24.52])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jun 2020 22:43:22 -0700
-IronPort-SDR: w8MpH9cNqzK/WMwDEA7Qyg0eI9RSjX8Ol28v7WraQdELTIZ9ZBpCcMDU2kWW361bdLYHnDcoo9
- Z6g+TKkGMc4Q==
-X-IronPort-AV: E=Sophos;i="5.73,502,1583222400"; 
-   d="scan'208";a="259802373"
-Received: from anmitta2-mobl1.gar.corp.intel.com ([10.255.145.38])
-  by fmsmga007-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jun 2020 22:43:21 -0700
-From: "Anuj Mittal" <anuj.mittal@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 2/2] opencl-clhpp: add recipe
-Date: Fri, 12 Jun 2020 13:43:13 +0800
-Message-Id: <20200612054313.4166368-2-anuj.mittal@intel.com>
-X-Mailer: git-send-email 2.25.4
-In-Reply-To: <20200612054313.4166368-1-anuj.mittal@intel.com>
-References: <20200612054313.4166368-1-anuj.mittal@intel.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: kai.kang@windriver.com)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 05C8IGGh002885
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jun 2020 01:18:17 -0700 (PDT)
+Received: from pek-kkang-d1.wrs.com (128.224.162.131) by
+ ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+ 14.3.487.0; Fri, 12 Jun 2020 01:18:09 -0700
+From: "kai" <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python2][PATCH] python: update RRECOMMENDS for multilib
+Date: Fri, 12 Jun 2020 16:16:38 +0800
+Message-ID: <20200612081638.2467372-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Recipe to provide OpenCL API C++ bindings.
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+There is a qa issue because of oe-core commit b3fda05 which updates
+multilib mechanism:
+
+| ERROR: lib32-python-2.7.18-r0 do_package: QA Issue: lib32-python package
+    lib32-python-crypt - suspicious values 'openssl' in RRECOMMENDS [multilib]
+
+Prepend ${MLPREFIX} to RRECOMMENDS to fix the issue.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../recipes-core/opencl/opencl-clhpp_git.bb   | 22 +++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 meta-oe/recipes-core/opencl/opencl-clhpp_git.bb
+ recipes-devtools/python/python_2.7.18.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/opencl/opencl-clhpp_git.bb b/meta-oe/recipes-core/opencl/opencl-clhpp_git.bb
-new file mode 100644
-index 000000000..540c5d346
---- /dev/null
-+++ b/meta-oe/recipes-core/opencl/opencl-clhpp_git.bb
-@@ -0,0 +1,22 @@
-+SUMMARY  = "OpenCL API C++ bindings"
-+DESCRIPTION = "OpenCL API C++ bindings from Khronos"
-+
-+SRC_URI = "git://github.com/KhronosGroup/OpenCL-CLHPP.git;protocol=https"
-+
-+LICENSE  = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
-+
-+PV = "2.0.11+git${SRCPV}"
-+SRCREV = "432b551429b362a877ed9b647b7114022b332be0"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+EXTRA_OECMAKE = " \
-+                  -DBUILD_DOCS=OFF \
-+                  -DBUILD_EXAMPLES=OFF \
-+                  -DBUILD_TESTS=OFF \
-+                  "
-+
-+ALLOW_EMPTY_${PN} = "1"
+diff --git a/recipes-devtools/python/python_2.7.18.bb b/recipes-devtools/python/python_2.7.18.bb
+index be7c6d2..0945cb3 100644
+--- a/recipes-devtools/python/python_2.7.18.bb
++++ b/recipes-devtools/python/python_2.7.18.bb
+@@ -153,7 +153,7 @@ PACKAGES_remove = "${PN}"
+ # manual dependency additions
+ RPROVIDES_${PN}-modules = "${PN}"
+ RRECOMMENDS_${PN}-core_append_class-nativesdk = " nativesdk-python-modules"
+-RRECOMMENDS_${PN}-crypt = "openssl"
++RRECOMMENDS_${PN}-crypt = "${MLPREFIX}openssl"
+ 
+ # package libpython2
+ PACKAGES =+ "lib${BPN}2"
 -- 
-2.25.4
+2.25.1
 
