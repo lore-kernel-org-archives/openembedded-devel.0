@@ -1,52 +1,57 @@
-Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web10.14971.1592075046854272244
+Received: from mail-il1-f194.google.com (mail-il1-f194.google.com [209.85.166.194])
+ by mx.groups.io with SMTP id smtpd.web11.17233.1592082718459092762
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Jun 2020 12:04:07 -0700
+ Sat, 13 Jun 2020 14:11:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=tWGxD3NR;
- spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 3CF4560250;
-	Sat, 13 Jun 2020 21:04:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1592075045;
-	bh=K16LkoJRBetseZaUGDrwBJ4mKhgB28fDBN8E7Ak8vLU=;
-	h=From:To:Cc:Subject:Date:From;
-	b=tWGxD3NRW9r9ZAyQADuF5bVXoFt9HTLmfTBvddYjC9kE/6REWKSFFmeOXF1QE8iDC
-	 bHEE6ys05Ud6pNUPQKBZimN7VCOSYwnzIZ4+8CYXkJ6dWNeVtw7jB1AfA/WKK3GgGY
-	 IfsAc40kV1J2kE5WvnwB/HOBlLHJsDYtKzilPyyWl5Kf2JP+XVBz53izbvVTKal8Vc
-	 kzD2LA/9QubH7ai2vziUh5ldf6kGRnsmj27JGkN6VijkLPUt2+5dr0CQx9Rknj1WxX
-	 3UQMT9T4+3PXpD/ItQxYvztzuqoh9DMFVsVxR6hjQWKN5zHo7dRRPHdeLI4XFtb6cE
-	 0KNflRtNTh5ag==
-From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH] libzip: upgrade 1.7.0 -> 1.7.1
-Date: Sat, 13 Jun 2020 21:04:01 +0200
-Message-Id: <1592075041-18741-1-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=oxAGnhIx;
+ spf=pass (domain: gmail.com, ip: 209.85.166.194, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-il1-f194.google.com with SMTP id 9so11927176ilg.12
+        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2020 14:11:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=0h8OTsbqtvfpFxJJmyM9akkTbZzawH4/PcD7OFxDZpg=;
+        b=oxAGnhIxxIB7NcqVah7fEH01p2CwaaH1S7hFTtWR2nVgyrhmR8TPWhAS8ZxjAIpfh2
+         BpiFumSZwzJjyg4n1w9j0rYVubhlpTTDwjlwKjQsJS1vmGr17x8qvqOVUCa+CA/b3+WK
+         hbDohgLPF67i3TB/7p0W0tm8Tr2qbYC9mTiPQ73eao62IXAthTYit3LfXFvixZAhCdyP
+         mxmC4f739oWeLsOsesJaRWqVuGUCT/jp+nOEDCYi5i42Xxa7R4x40uankStiN62wCKkV
+         YHIvO80tB0bSFBLg8X4FiL2jyHOjMXN2pH3jvG7vryeRlmJkj8fGqrjqKXa/JHTSAEEk
+         4UXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=0h8OTsbqtvfpFxJJmyM9akkTbZzawH4/PcD7OFxDZpg=;
+        b=kVl02nFrQ1a78XR68GN3WI6AMVIa8opgdw8PYewPlGTB1jaKgwsgX9foER19J9kKTC
+         1j8vh7crA1THKtubDulfWOrUeN0bCyoa0QdvHOuoOceSL+7fDyOopyhFS1fFTywT0SVn
+         RRUc0pYmY1QzfzoB/gWqp0ugmnV/WXlA7nDkmOyI+v9jd5OwKHf0kjUiomxM8w3dCrde
+         Mvsn5f7Z2z2MmzVmTmP/N39AsYO/rdD67x8ENedbWzNsYyjesDsZxesQ7cc03RQTr1Mj
+         ioJuZtlU3t7R35MBzxfl4L42wvqb5+h69zMq7KlZm5irlVCKE2thNz2MVVIP2Y/mnsaJ
+         MNMg==
+X-Gm-Message-State: AOAM530AtHcnscr4lkIu+eB+IbdB2gQF+qOJnd8Tt8w/m6kl+llRMcfc
+	5GxxIRn8t3Etl8ahKkt+cH/8fG379Hc/A0aX78Q=
+X-Google-Smtp-Source: ABdhPJwD0RkA7AkLmfzWxwOXgAw3+nZRhdlbxqOq6vknwEag1C7dMv+IQcdo1cHH9KQ/1EDuiHudHtyv9HO8HKEiYL4=
+X-Received: by 2002:a92:d691:: with SMTP id p17mr19835320iln.299.1592082717720;
+ Sat, 13 Jun 2020 14:11:57 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200613183645.22689-1-liu.ming50@gmail.com>
+In-Reply-To: <20200613183645.22689-1-liu.ming50@gmail.com>
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Date: Sat, 13 Jun 2020 23:11:44 +0200
+Message-ID: <CALbNGRRd26tfWNK5wcifdoisN8Fid0j0kwRh0WZFU=6ijg3yag@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] packagegroup-boot: drop recipe
+To: Ming Liu <liu.ming50@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Max Krummenacher <max.krummenacher@toradex.com>, Ming Liu <ming.liu@toradex.com>
+Content-Type: text/plain; charset="UTF-8"
 
-See full changelog https://github.com/nih-at/libzip/releases/tag/v1.7.1
+On Sat, Jun 13, 2020 at 8:34 PM Ming Liu <liu.ming50@gmail.com> wrote:
+>
+> From: Ming Liu <ming.liu@toradex.com>
+>
+> It's duplicated to packagegroup-core-boot in OE, let's drop it.
+NAK - it is not a duplicate - packagegroup-core-boot completely
+different recipe. And by the way this recipe does not hurt anybody.
 
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
----
- meta-oe/recipes-extended/libzip/{libzip_1.7.0.bb => libzip_1.7.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/libzip/{libzip_1.7.0.bb => libzip_1.7.1.bb} (84%)
-
-diff --git a/meta-oe/recipes-extended/libzip/libzip_1.7.0.bb b/meta-oe/recipes-extended/libzip/libzip_1.7.1.bb
-similarity index 84%
-rename from meta-oe/recipes-extended/libzip/libzip_1.7.0.bb
-rename to meta-oe/recipes-extended/libzip/libzip_1.7.1.bb
-index e7cb6a0..1a9cd8f 100644
---- a/meta-oe/recipes-extended/libzip/libzip_1.7.0.bb
-+++ b/meta-oe/recipes-extended/libzip/libzip_1.7.1.bb
-@@ -15,4 +15,4 @@ inherit cmake
- 
- SRC_URI = "https://libzip.org/download/libzip-${PV}.tar.xz"
- 
--SRC_URI[sha256sum] = "d26b2952426d2518f3db5cdeda4fe3cd668fc5bb38a598781e4d1d3f7f8ca7be"
-+SRC_URI[sha256sum] = "a020dc1b17a79faa748e43a05f8605d65e403813e8e97ad3a300a90ddba097ac"
--- 
-2.7.4
-
+Andreas
