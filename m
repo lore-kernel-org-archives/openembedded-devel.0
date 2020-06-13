@@ -1,57 +1,57 @@
-Received: from mail-il1-f194.google.com (mail-il1-f194.google.com [209.85.166.194])
- by mx.groups.io with SMTP id smtpd.web11.17233.1592082718459092762
+Received: from mail-io1-f68.google.com (mail-io1-f68.google.com [209.85.166.68])
+ by mx.groups.io with SMTP id smtpd.web12.16984.1592083044018639316
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Jun 2020 14:11:58 -0700
+ Sat, 13 Jun 2020 14:17:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=oxAGnhIx;
- spf=pass (domain: gmail.com, ip: 209.85.166.194, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-il1-f194.google.com with SMTP id 9so11927176ilg.12
-        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2020 14:11:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=sykPTN4o;
+ spf=pass (domain: gmail.com, ip: 209.85.166.68, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-io1-f68.google.com with SMTP id x189so4843307iof.9
+        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2020 14:17:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=0h8OTsbqtvfpFxJJmyM9akkTbZzawH4/PcD7OFxDZpg=;
-        b=oxAGnhIxxIB7NcqVah7fEH01p2CwaaH1S7hFTtWR2nVgyrhmR8TPWhAS8ZxjAIpfh2
-         BpiFumSZwzJjyg4n1w9j0rYVubhlpTTDwjlwKjQsJS1vmGr17x8qvqOVUCa+CA/b3+WK
-         hbDohgLPF67i3TB/7p0W0tm8Tr2qbYC9mTiPQ73eao62IXAthTYit3LfXFvixZAhCdyP
-         mxmC4f739oWeLsOsesJaRWqVuGUCT/jp+nOEDCYi5i42Xxa7R4x40uankStiN62wCKkV
-         YHIvO80tB0bSFBLg8X4FiL2jyHOjMXN2pH3jvG7vryeRlmJkj8fGqrjqKXa/JHTSAEEk
-         4UXQ==
+        bh=LAz/hs5JtmDdszRcECWiOtZxd8NRMVnxheumynQ5cTo=;
+        b=sykPTN4oyjX8kzkYQi3KcWsMvxg+4rRJYA2lU3MQJU5G2SmCVJ9g9hzlTo5sKh+xEG
+         v3yA5XZAB//nzGWBj2/5qvRM71QM0Db0TjD8cKtF0BAQtPfGW/lWaJIJ2O9dXvjL2LVy
+         q1pHzdo8uZJXmxhBZd/pkEFd2vec6kYVqHO/x+UVcFDKYtLMjX3aoxNrkosHU57Nd0yP
+         4A9dNbKkJ8EojG6BhN4fOaJef5yreWt+4MLMSY3kaFVMbdH6RxR1y8nzxCxkTp5sjZfV
+         hVy8CCWKfMwxtUgEAb5qNP1V+p7MsnnY+UQV5oiYmFS3J/LEZGSIAb7uWx/xUkX6IkkS
+         En0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=0h8OTsbqtvfpFxJJmyM9akkTbZzawH4/PcD7OFxDZpg=;
-        b=kVl02nFrQ1a78XR68GN3WI6AMVIa8opgdw8PYewPlGTB1jaKgwsgX9foER19J9kKTC
-         1j8vh7crA1THKtubDulfWOrUeN0bCyoa0QdvHOuoOceSL+7fDyOopyhFS1fFTywT0SVn
-         RRUc0pYmY1QzfzoB/gWqp0ugmnV/WXlA7nDkmOyI+v9jd5OwKHf0kjUiomxM8w3dCrde
-         Mvsn5f7Z2z2MmzVmTmP/N39AsYO/rdD67x8ENedbWzNsYyjesDsZxesQ7cc03RQTr1Mj
-         ioJuZtlU3t7R35MBzxfl4L42wvqb5+h69zMq7KlZm5irlVCKE2thNz2MVVIP2Y/mnsaJ
-         MNMg==
-X-Gm-Message-State: AOAM530AtHcnscr4lkIu+eB+IbdB2gQF+qOJnd8Tt8w/m6kl+llRMcfc
-	5GxxIRn8t3Etl8ahKkt+cH/8fG379Hc/A0aX78Q=
-X-Google-Smtp-Source: ABdhPJwD0RkA7AkLmfzWxwOXgAw3+nZRhdlbxqOq6vknwEag1C7dMv+IQcdo1cHH9KQ/1EDuiHudHtyv9HO8HKEiYL4=
-X-Received: by 2002:a92:d691:: with SMTP id p17mr19835320iln.299.1592082717720;
- Sat, 13 Jun 2020 14:11:57 -0700 (PDT)
+        bh=LAz/hs5JtmDdszRcECWiOtZxd8NRMVnxheumynQ5cTo=;
+        b=Lvpu0tMupHD8Vo8iOqXONEx9nueOFpeCrI82qzHGHZtT5KHPJLOMLL85R2VI5hQu/2
+         S2m6ExzvfC4A0dTXbJ9au4stbQpmjXtuczb5OHsFPI/QhU4vV3x4O7nmTG2XGJGKuGKP
+         2oi79mSWCzdnx/UgYTFLaSLocgCmu2FLQKx6Jsdc0PO96L+HMHUGc4+ER5uqdue7c2os
+         adnpNaahXiLYMMr6oRpTwwE28+PKk9AsTfNIOJunRdM1znPEOwsB8I2kY7BXMCon1QYy
+         S2I5YEgxTh4/Ne7dVB7RxFkiGpw+UqqODCKldbmaE8QhP9+zBkY7YuJtRzn8kJeVUMZ+
+         9w1A==
+X-Gm-Message-State: AOAM5319S1vRqaHnOhXavO7BjODHDOPW/9mMsTeM2nOo//6sE6LYHkdM
+	u84t6W87LI0H/iwcwcJJa9XiKSoyI/rQDmjY0ag=
+X-Google-Smtp-Source: ABdhPJzNJoBquCs+Uvq799j7xKnDY8Ea6cxzN9WQ3/UkI7fIsDRSkjyQxR8ghqrlFMW5W4yhUNzUjGXjAfd9qdLg2GE=
+X-Received: by 2002:a05:6602:2c8f:: with SMTP id i15mr20394592iow.45.1592083043516;
+ Sat, 13 Jun 2020 14:17:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200613183645.22689-1-liu.ming50@gmail.com>
-In-Reply-To: <20200613183645.22689-1-liu.ming50@gmail.com>
+References: <20200613183729.22777-1-liu.ming50@gmail.com>
+In-Reply-To: <20200613183729.22777-1-liu.ming50@gmail.com>
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-Date: Sat, 13 Jun 2020 23:11:44 +0200
-Message-ID: <CALbNGRRd26tfWNK5wcifdoisN8Fid0j0kwRh0WZFU=6ijg3yag@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH] packagegroup-boot: drop recipe
+Date: Sat, 13 Jun 2020 23:17:11 +0200
+Message-ID: <CALbNGRSQfyu15mNfv54QWWyBZ6Qih3MzbBq1-GKUfJmKR0dnNg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] packagegroup-basic: drop recipe
 To: Ming Liu <liu.ming50@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
 	Max Krummenacher <max.krummenacher@toradex.com>, Ming Liu <ming.liu@toradex.com>
 Content-Type: text/plain; charset="UTF-8"
 
-On Sat, Jun 13, 2020 at 8:34 PM Ming Liu <liu.ming50@gmail.com> wrote:
+On Sat, Jun 13, 2020 at 8:35 PM Ming Liu <liu.ming50@gmail.com> wrote:
 >
 > From: Ming Liu <ming.liu@toradex.com>
 >
-> It's duplicated to packagegroup-core-boot in OE, let's drop it.
-NAK - it is not a duplicate - packagegroup-core-boot completely
-different recipe. And by the way this recipe does not hurt anybody.
+> It's duplicated to packagegroup-base in OE, let's drop it.
+Same packagegroup-base us a huge molloch and far from just the same as
+packagegroup-basic. Please keep it.
 
 Andreas
