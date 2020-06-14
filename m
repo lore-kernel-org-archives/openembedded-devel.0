@@ -1,56 +1,66 @@
-Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web12.17845.1592086330464127278
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com [209.85.222.193])
+ by mx.groups.io with SMTP id smtpd.web10.23018.1592110774237807125
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Jun 2020 15:12:11 -0700
+ Sat, 13 Jun 2020 21:59:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=kr21cT6h;
- spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 0BF906020E;
-	Sun, 14 Jun 2020 00:12:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1592086327;
-	bh=/6hi5yynL5AGTqVT5Pk8xzDAAgR+zkB1ZwPPsUvvIIY=;
-	h=From:To:Cc:Subject:Date:From;
-	b=kr21cT6hPRy9SxPsMflBiK1mlJDvcJcZn5EaUUh2YqhhZLxMVc8bWDnOuO8A3l5QP
-	 AZFffDG3jJIMlwoZxEz1qUgXe7QWSlBdFDj5w6qj+Fs0neYPrHjCsIotmdzKOEln6p
-	 eTFUeGmJqlW+lO3IpVNnlD3WZdEltN05lyxujuV6QBUFEvT0YB1edvUHIzdCXHIJHN
-	 YRgDEUKCFjsFdIDWTd6V8wUv8I6GxWDsWXdqHvTrD+7VeXGVTOB6bhwMhZ3O9QIhqJ
-	 L6aqw9vh1FSFvCsxzQBPdWmJmhM0jy6YKMOxCRKa83H7xB3OtH/Xca9ob5yW0qoJ0Z
-	 R0EH9VUZZh3Vw==
-From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-filesystems][PATCH] fuse3: upgrade 3.9.1 -> 3.9.2
-Date: Sun, 14 Jun 2020 00:12:04 +0200
-Message-Id: <1592086324-25888-1-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=GDJjnW9k;
+ spf=pass (domain: gmail.com, ip: 209.85.222.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f193.google.com with SMTP id 205so12819475qkg.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Jun 2020 21:59:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=aJsQQL74uXu8gI0+xpil4OcaPdikS9+dcW4kkvvOehs=;
+        b=GDJjnW9kAVN7zZ1xipvbiDeup2UYhwC3gtYUbjwFiEkfjThFr5YLLQA4XNaUfTRm4O
+         Fd3XyjErpTVZ5aMz3wsTowxOFnIyAzC7L87KvcCLPiJT0j3Qe7N3CmVA98YLcJiF0fwH
+         xxx/v4N/+sx9SjlHX+LkcL+n8crM2BIMq9+vC4BwaRTIBZkg8Uzfy+QVmOMd4YUk2D1B
+         Lsk6cVHifHabqP0wxpC3YxnrlNP1XEvAjN0Is8txEHE3l0fpBUHnoeMkazem7/5WqJiu
+         su38vOowP4pNmJOVKlZ4mYi1uuZz0sGdgy196a9YeeTyR77P3ZeycM9O/D0UrVjg/gsv
+         bCpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=aJsQQL74uXu8gI0+xpil4OcaPdikS9+dcW4kkvvOehs=;
+        b=at5Var4y+X/79N+3QMOWyaNXK8AVoD8USSK6rtQfb/cmzy0FchvCztyEckPOAEzk2r
+         keopSpQkNoxGajfQfXtf5fOl7tQPwRPyYq34kYRn7hTRHMvC9rbtvnlXi4iKoBFICnIn
+         5Sz3SC0Y4AaVY76VirYP3o8M44DpUckDDAMAtcDe7c7J0iLqwivq7GmIZP8DeTPOujFH
+         93OwFwygWtNj72Zj0Uoa0hMalfN3QDxlxXacbCc0zdqAm7y86RCnmUys1iSYt97ZqnND
+         yYa3pE+741I6NLvV4URO6sNTeJ/JHmIQj3Ka0/upvF6L6EnCll57sKGzOoZwr2S01AVc
+         RDqQ==
+X-Gm-Message-State: AOAM531jAIfzYm/PZL0wWzLA+gRXm6hQa1wqgr92fxn7dYo9jMImLW3R
+	EZifFv6lU0zpGiHtLaU+TQ/g4AjKx3lG3nNqtwA=
+X-Google-Smtp-Source: ABdhPJx+K3/xSK7PNOCG0YUR8GLQw+X3cjcUFeL4gRlH5NK2Q77k2kdJzVye1UGujkRQL7VQcPihkoFetg2bGo3OBaw=
+X-Received: by 2002:a05:620a:2050:: with SMTP id d16mr10317322qka.215.1592110773261;
+ Sat, 13 Jun 2020 21:59:33 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200613183645.22689-1-liu.ming50@gmail.com> <CALbNGRRd26tfWNK5wcifdoisN8Fid0j0kwRh0WZFU=6ijg3yag@mail.gmail.com>
+In-Reply-To: <CALbNGRRd26tfWNK5wcifdoisN8Fid0j0kwRh0WZFU=6ijg3yag@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Sat, 13 Jun 2020 21:59:06 -0700
+Message-ID: <CAMKF1sr-UVwujYmKYmDamm9pWqorQB9uD6WBwxc8dqV=nT8h0g@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] packagegroup-boot: drop recipe
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: Ming Liu <liu.ming50@gmail.com>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Max Krummenacher <max.krummenacher@toradex.com>, Ming Liu <ming.liu@toradex.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-See changelog https://github.com/libfuse/libfuse/releases/tag/fuse-3.9.2
+On Sat, Jun 13, 2020 at 2:12 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
+>
+> On Sat, Jun 13, 2020 at 8:34 PM Ming Liu <liu.ming50@gmail.com> wrote:
+> >
+> > From: Ming Liu <ming.liu@toradex.com>
+> >
+> > It's duplicated to packagegroup-core-boot in OE, let's drop it.
+> NAK - it is not a duplicate - packagegroup-core-boot completely
+> different recipe. And by the way this recipe does not hurt anybody.
+>
 
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
----
- .../recipes-support/fuse/{fuse3_3.9.1.bb => fuse3_3.9.2.bb}            | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-filesystems/recipes-support/fuse/{fuse3_3.9.1.bb => fuse3_3.9.2.bb} (91%)
+agreed
 
-diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.9.1.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
-similarity index 91%
-rename from meta-filesystems/recipes-support/fuse/fuse3_3.9.1.bb
-rename to meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
-index 1830fa1..24b17fc 100644
---- a/meta-filesystems/recipes-support/fuse/fuse3_3.9.1.bb
-+++ b/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
-@@ -13,8 +13,7 @@ LIC_FILES_CHKSUM = "file://GPL2.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
- 
- SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.xz \
- "
--SRC_URI[md5sum] = "26d6b450276fb04e20bf91d83b9423f0"
--SRC_URI[sha256sum] = "1bafcfd6c66ba35b7b0beb822532a9106eb8409ad6cde988888fde85f89be645"
-+SRC_URI[sha256sum] = "6999b6d48e7c0a79628fa901f6e66def3513cab4ffdd8097821e7dc3cdeae08a"
- 
- S = "${WORKDIR}/fuse-${PV}"
- 
--- 
-2.7.4
-
+> Andreas
+>=20
