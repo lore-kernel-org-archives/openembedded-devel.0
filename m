@@ -1,60 +1,78 @@
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by mx.groups.io with SMTP id smtpd.web11.10769.1592195331918092033
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web12.12927.1592209450097591496
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Jun 2020 21:28:52 -0700
+ Mon, 15 Jun 2020 01:24:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linux.microsoft.com header.s=default header.b=ScvaqsUJ;
- spf=pass (domain: linux.microsoft.com, ip: 13.77.154.182, mailfrom: pauleg@linux.microsoft.com)
-Received: by linux.microsoft.com (Postfix, from userid 1054)
-	id 2B60420B4780; Sun, 14 Jun 2020 21:28:51 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 2B60420B4780
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1592195331;
-	bh=EBwhpbuQP1EUqfRQXnN1WrZlH8SFA2AH2Zxo/Lj/zTA=;
-	h=From:To:Subject:Date:From;
-	b=ScvaqsUJn0eovQ8w0bt4+rBt02h1JGFuunDnabQlxgKOfmbZ3lnZCdGYUzTal7e8e
-	 Oe6nKS5+9RZmN+wTxdx81XbtKLyx7hTNKFN58kXlt+V5bA+CBRYyMFjYYtbf4P/L89
-	 mWKAhMi4Iycaz9ZkpEPg1UM5kwuEWGDd8/v035qY=
-From: paul.eggleton@linux.microsoft.com
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] protobuf-c: disable parallelism to avoid race condition
-Date: Sun, 14 Jun 2020 21:28:45 -0700
-Message-Id: <1592195325-52107-1-git-send-email-paul.eggleton@linux.microsoft.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.73,514,1583164800"; 
+   d="scan'208";a="94501901"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 15 Jun 2020 16:24:02 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 1DDD94CE2E80
+	for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jun 2020 16:24:02 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Mon, 15 Jun 2020 16:23:31 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-python] [PATCH] python3-gunicorn: Enable ptest
+Date: Mon, 15 Jun 2020 22:46:12 +0800
+Message-ID: <1592232372-4547-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: 1DDD94CE2E80.A3590
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-Unfortunately 489d3b4b932ee8016d792341f8ea5836a9522cd4 did not completely
-fix the problem - if you try cleaning and rebuilding protobuf-c-native it
-doesn't take long to reproduce the issue on a 32-core machine. I spent
-some time trying to debug this but failed, there is still a race between
-generating t.test-full.pb.h and compiling cxx_generate_packed_data.c
-despite BUILT_SOURCES and explicit dependencies. I even tried converting
-the multiple target rules to use grouped targets (&:), that didn't fix it
-either. Disabling parallelism as a workaround only costs ~20s and it
-turns out that upstream is switching to Meson soon anyway:
-
-  https://github.com/protobuf-c/protobuf-c/pull/340
-
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.microsoft.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ .../python/python3-gunicorn/run-ptest             |  3 +++
+ .../python/python3-gunicorn_20.0.4.bb             | 15 ++++++++++++++-
+ 2 files changed, 17 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-gunicorn/run-ptest
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb
-index bb8aecd..6fef0be 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb
-@@ -22,6 +22,11 @@ S = "${WORKDIR}/git"
- 
- inherit autotools pkgconfig
- 
-+# After several fix attempts there is still a race between generating
-+# t.test-full.pb.h and compiling cxx_generate_packed_data.c despite
-+# BUILT_SOURCES and explicit dependencies.
-+PARALLEL_MAKE = ""
+diff --git a/meta-python/recipes-devtools/python/python3-gunicorn/run-ptest b/meta-python/recipes-devtools/python/python3-gunicorn/run-ptest
+new file mode 100644
+index 000000000..b63c4de0d
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-gunicorn/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
 +
- PACKAGE_BEFORE_PN = "${PN}-compiler"
++pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
+diff --git a/meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb b/meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb
+index 5bd8d51c0..23aafd67d 100644
+--- a/meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb
++++ b/meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb
+@@ -6,6 +6,19 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f75f3fb94cdeab1d607e2adaa6077752"
+ SRC_URI[md5sum] = "543669fcbb5739ee2af77184c5e571a1"
+ SRC_URI[sha256sum] = "1904bb2b8a43658807108d59c3f3d56c2b6121a701161de0ddf9ad140073c626"
  
- FILES_${PN}-compiler = "${bindir}"
+-inherit pypi setuptools3
++inherit pypi setuptools3 ptest
++
++SRC_URI += " \
++	file://run-ptest \
++"
++
++RDEPENDS_${PN}-ptest += " \
++	${PYTHON_PN}-pytest \
++"
++
++do_install_ptest() {
++	install -d ${D}${PTEST_PATH}/tests
++	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
++}
+ 
+ RDEPENDS_${PN} += "${PYTHON_PN}-setuptools ${PYTHON_PN}-fcntl"
 -- 
-1.8.3.1
+2.17.1
+
+
 
