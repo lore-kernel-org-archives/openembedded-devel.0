@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.16911.1592224738801522247
+ by mx.groups.io with SMTP id smtpd.web10.16912.1592224740879791341
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Jun 2020 05:38:59 -0700
+ Mon, 15 Jun 2020 05:39:01 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=48850 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jkoO7-0003qE-Nw; Mon, 15 Jun 2020 15:38:56 +0300
+	id 1jkoOA-0003qE-9o; Mon, 15 Jun 2020 15:39:00 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/2] python3-psutil: Consolidate in a single file
-Date: Mon, 15 Jun 2020 15:38:47 +0300
-Message-Id: <20200615123848.31016-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-protobuf: Consolidate in a single file
+Date: Mon, 15 Jun 2020 15:38:48 +0300
+Message-Id: <20200615123848.31016-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200615123848.31016-1-leon.anavi@konsulko.com>
+References: <20200615123848.31016-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.7
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -32,71 +34,93 @@ Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python-psutil.inc | 22 ----------------
- .../python/python3-psutil_5.7.0.bb            | 25 +++++++++++++++++--
- 2 files changed, 23 insertions(+), 24 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-psutil.inc
+ .../python/python-protobuf.inc                | 32 -----------------
+ .../python/python3-protobuf_3.11.3.bb         | 34 +++++++++++++++++--
+ 2 files changed, 32 insertions(+), 34 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-protobuf.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-psutil.inc b/meta-python/recipes-devtools/python/python-psutil.inc
+diff --git a/meta-python/recipes-devtools/python/python-protobuf.inc b/meta-python/recipes-devtools/python/python-protobuf.inc
 deleted file mode 100644
-index dfb33e8dc..000000000
---- a/meta-python/recipes-devtools/python/python-psutil.inc
+index 5716894f3..000000000
+--- a/meta-python/recipes-devtools/python/python-protobuf.inc
 +++ /dev/null
-@@ -1,22 +0,0 @@
--SUMMARY = "A cross-platform process and system utilities module for Python"
+@@ -1,32 +0,0 @@
+-DESCRIPTION = "Protocol Buffers"
+-HOMEPAGE = "https://developers.google.com/protocol-buffers/"
+-SECTION = "devel/python"
+-
 -LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=e35fd9f271d19d5f742f20a9d1f8bb8b"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=19e8f490f9526b1de84f8d949cfcfd4e"
 -
--SRC_URI[md5sum] = "ed7b0f11ed214bcabbe76b7cf52f3ae3"
--SRC_URI[sha256sum] = "685ec16ca14d079455892f25bd124df26ff9137664af445563c1bd36629b5e0e"
+-inherit pypi
 -
--PACKAGES =+ "${PN}-tests"
+-SRC_URI[md5sum] = "eeda7dea65fc94e560fc9a8180eb1872"
+-SRC_URI[sha256sum] = "c77c974d1dadf246d789f6dad1c24426137c9091e930dbf50e0a29c1fcf00b1f"
 -
--FILES_${PN}-tests += " \
--    ${PYTHON_SITEPACKAGES_DIR}/psutil/test* \
--    ${PYTHON_SITEPACKAGES_DIR}/psutil/__pycache__/test* \
--"
+-# http://errors.yoctoproject.org/Errors/Details/184715/
+-# Can't find required file: ../src/google/protobuf/descriptor.proto
+-CLEANBROKEN = "1"
 -
+-UPSTREAM_CHECK_REGEX = "protobuf/(?P<pver>\d+(\.\d+)+)/"
 -
 -RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-shell \
--    ${PYTHON_PN}-threading \
--    ${PYTHON_PN}-xml \
+-    ${PYTHON_PN}-datetime \
+-    ${PYTHON_PN}-json \
+-    ${PYTHON_PN}-logging \
+-    ${PYTHON_PN}-netclient \
+-    ${PYTHON_PN}-numbers \
+-    ${PYTHON_PN}-pkgutil \
+-    ${PYTHON_PN}-six \
+-    ${PYTHON_PN}-unittest \
 -"
 -
+-# For usage in other recipies when compiling protobuf files (e.g. by grpcio-tools)
 -BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-psutil_5.7.0.bb b/meta-python/recipes-devtools/python/python3-psutil_5.7.0.bb
-index c1969ea65..170819d59 100644
---- a/meta-python/recipes-devtools/python/python3-psutil_5.7.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-psutil_5.7.0.bb
-@@ -1,4 +1,25 @@
-+SUMMARY = "A cross-platform process and system utilities module for Python"
+-
+diff --git a/meta-python/recipes-devtools/python/python3-protobuf_3.11.3.bb b/meta-python/recipes-devtools/python/python3-protobuf_3.11.3.bb
+index 30ea34e90..a4c9d6699 100644
+--- a/meta-python/recipes-devtools/python/python3-protobuf_3.11.3.bb
++++ b/meta-python/recipes-devtools/python/python3-protobuf_3.11.3.bb
+@@ -1,7 +1,37 @@
+-inherit setuptools3
+-require python-protobuf.inc
++DESCRIPTION = "Protocol Buffers"
++HOMEPAGE = "https://developers.google.com/protocol-buffers/"
++SECTION = "devel/python"
++
 +LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=e35fd9f271d19d5f742f20a9d1f8bb8b"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=19e8f490f9526b1de84f8d949cfcfd4e"
 +
-+SRC_URI[md5sum] = "ed7b0f11ed214bcabbe76b7cf52f3ae3"
-+SRC_URI[sha256sum] = "685ec16ca14d079455892f25bd124df26ff9137664af445563c1bd36629b5e0e"
++inherit pypi setuptools3
 +
- inherit pypi setuptools3
--require python-psutil.inc
++SRC_URI[md5sum] = "eeda7dea65fc94e560fc9a8180eb1872"
++SRC_URI[sha256sum] = "c77c974d1dadf246d789f6dad1c24426137c9091e930dbf50e0a29c1fcf00b1f"
++
++# http://errors.yoctoproject.org/Errors/Details/184715/
++# Can't find required file: ../src/google/protobuf/descriptor.proto
++CLEANBROKEN = "1"
++
++UPSTREAM_CHECK_REGEX = "protobuf/(?P<pver>\d+(\.\d+)+)/"
  
--RDEPENDS_${PN} += "${PYTHON_PN}-netclient"
-+PACKAGES =+ "${PN}-tests"
-+
-+FILES_${PN}-tests += " \
-+    ${PYTHON_SITEPACKAGES_DIR}/psutil/test* \
-+    ${PYTHON_SITEPACKAGES_DIR}/psutil/__pycache__/test* \
-+"
-+
+ DEPENDS += "protobuf"
 +
 +RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-shell \
-+    ${PYTHON_PN}-threading \
-+    ${PYTHON_PN}-xml \
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-json \
++    ${PYTHON_PN}-logging \
 +    ${PYTHON_PN}-netclient \
++    ${PYTHON_PN}-numbers \
++    ${PYTHON_PN}-pkgutil \
++    ${PYTHON_PN}-six \
++    ${PYTHON_PN}-unittest \
 +"
 +
++# For usage in other recipies when compiling protobuf files (e.g. by grpcio-tools)
 +BBCLASSEXTEND = "native nativesdk"
++
+ DISTUTILS_BUILD_ARGS += "--cpp_implementation"
+ DISTUTILS_INSTALL_ARGS += "--cpp_implementation"
+ 
 -- 
 2.17.1
 
