@@ -1,78 +1,69 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web11.9523.1592188875123679764
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+ by mx.groups.io with SMTP id smtpd.web11.10504.1592193843860539678
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Jun 2020 19:41:15 -0700
+ Sun, 14 Jun 2020 21:04:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.73,513,1583164800"; 
-   d="scan'208";a="94484243"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 15 Jun 2020 10:41:14 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id D3F684CE26DE
-	for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jun 2020 10:41:13 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Mon, 15 Jun 2020 10:41:16 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python-html2text: Enable ptest
-Date: Mon, 15 Jun 2020 22:40:03 +0800
-Message-ID: <1592232003-4200-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=missing; spf=pass (domain: intel.com, ip: 134.134.136.126, mailfrom: anuj.mittal@intel.com)
+IronPort-SDR: RNXQU5xTYbpy44WMV5oMsyiJEc9e0atrwOx/EGjF6xB3yDOQEz7L9is/REJxIr0JVRPLi6Mrpg
+ lqzH6YHpe9LQ==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jun 2020 21:04:02 -0700
+IronPort-SDR: XqH2dL5jhPw0cKG+dRZGHLvlzLqI02hEmpMImsxbhwQYkVnKptj8AOjoXg9r6m2CLgvsWThptf
+ imwha7H3Qzjg==
+X-IronPort-AV: E=Sophos;i="5.73,513,1583222400"; 
+   d="scan'208";a="276425380"
+Received: from anmitta2-mobl1.gar.corp.intel.com ([10.249.77.167])
+  by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jun 2020 21:04:01 -0700
+From: "Anuj Mittal" <anuj.mittal@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH v2] opencl-clhpp: add recipe
+Date: Mon, 15 Jun 2020 12:03:57 +0800
+Message-Id: <20200615040357.220684-1-anuj.mittal@intel.com>
+X-Mailer: git-send-email 2.25.4
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: D3F684CE26DE.A86A6
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Recipe to provide OpenCL API C++ bindings.
+
+Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
 ---
- .../python/python3-html2text/run-ptest            |  3 +++
- .../python/python3-html2text_2020.1.16.bb         | 15 ++++++++++++++-
- 2 files changed, 17 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-html2text/run-ptest
+v2: Remove ALLOW_EMPTY and change it to RDEPENDS_$PN-dev = ""
 
-diff --git a/meta-python/recipes-devtools/python/python3-html2text/run-ptest b/meta-python/recipes-devtools/python/python3-html2text/run-ptest
+ .../recipes-core/opencl/opencl-clhpp_git.bb   | 23 +++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-oe/recipes-core/opencl/opencl-clhpp_git.bb
+
+diff --git a/meta-oe/recipes-core/opencl/opencl-clhpp_git.bb b/meta-oe/recipes-core/opencl/opencl-clhpp_git.bb
 new file mode 100644
-index 000000000..b63c4de0d
+index 000000000..a4f292475
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-html2text/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
++++ b/meta-oe/recipes-core/opencl/opencl-clhpp_git.bb
+@@ -0,0 +1,23 @@
++SUMMARY  = "OpenCL API C++ bindings"
++DESCRIPTION = "OpenCL API C++ bindings from Khronos"
 +
-+pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-diff --git a/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb b/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb
-index 565b31d97..ea17190d5 100644
---- a/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb
-+++ b/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb
-@@ -7,6 +7,19 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- SRC_URI[md5sum] = "c77b580c94d1a9e0145f23cc4472993d"
- SRC_URI[sha256sum] = "e296318e16b059ddb97f7a8a1d6a5c1d7af4544049a01e261731d2d5cc277bbb"
- 
--inherit pypi setuptools3
-+inherit pypi setuptools3 ptest
++SRC_URI = "git://github.com/KhronosGroup/OpenCL-CLHPP.git;protocol=https"
 +
-+SRC_URI += " \
-+	file://run-ptest \
-+"
++LICENSE  = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 +
-+RDEPENDS_${PN}-ptest += " \
-+	${PYTHON_PN}-pytest \
-+"
++PV = "2.0.11+git${SRCPV}"
++SRCREV = "432b551429b362a877ed9b647b7114022b332be0"
 +
-+do_install_ptest() {
-+	install -d ${D}${PTEST_PATH}/test
-+	cp -rf ${S}/test/* ${D}${PTEST_PATH}/test/
-+}
- 
- BBCLASSEXTEND = "native nativesdk"
++S = "${WORKDIR}/git"
++
++inherit cmake
++
++EXTRA_OECMAKE = " \
++                  -DBUILD_DOCS=OFF \
++                  -DBUILD_EXAMPLES=OFF \
++                  -DBUILD_TESTS=OFF \
++                  "
++
++# Headers only so PN is empty
++RDEPENDS_${PN}-dev = ""
 -- 
-2.17.1
-
-
+2.25.4
 
