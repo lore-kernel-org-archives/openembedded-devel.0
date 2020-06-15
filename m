@@ -1,24 +1,22 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.14561.1592217040290986330
+ by mx.groups.io with SMTP id smtpd.web10.16911.1592224738801522247
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Jun 2020 03:30:40 -0700
+ Mon, 15 Jun 2020 05:38:59 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=45690 helo=localhost.localdomain)
+Received: from [78.130.197.211] (port=48850 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jkmNy-0002ty-B7; Mon, 15 Jun 2020 13:30:39 +0300
+	id 1jkoO7-0003qE-Nw; Mon, 15 Jun 2020 15:38:56 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 7/7] python3-can: Upgrade 3.3.2 -> 3.3.3
-Date: Mon, 15 Jun 2020 13:30:17 +0300
-Message-Id: <20200615103017.2714-7-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-psutil: Consolidate in a single file
+Date: Mon, 15 Jun 2020 15:38:47 +0300
+Message-Id: <20200615123848.31016-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200615103017.2714-1-leon.anavi@konsulko.com>
-References: <20200615103017.2714-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-0.7
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,48 +28,75 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.3.3. It contains backported fixes from 4.x
-development branch which targets Python 3:
-
-- Backport caching msg.data value in neovi interface.
-- Fix Vector CANlib treatment of empty app name.
-- Handle empty CSV file.
-- ASCII reader can now handle FD frames.
-- Exclude test packages from distribution.
-- RTR crash fix in canutils log reader parsing RTR frames.
-- Skip J1939 messages in ASC Reader.
-- Exposes a configuration option to allow the CAN message player
-  to send error frames (and sets the default to not send
-  error frames).
-- Fixes the semantics provided by periodic tasks in SocketCAN interface.
-- Avoid padding CAN_FD_MESSAGE_64 objects to 4 bytes.
-- Fixes the broken CANalyst-II interface.
-- Socketcan BCM status fix.
+Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-can_3.3.2.bb => python3-can_3.3.3.bb}     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-can_3.3.2.bb => python3-can_3.3.3.bb} (80%)
+ .../recipes-devtools/python/python-psutil.inc | 22 ----------------
+ .../python/python3-psutil_5.7.0.bb            | 25 +++++++++++++++++--
+ 2 files changed, 23 insertions(+), 24 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-psutil.inc
 
-diff --git a/meta-python/recipes-devtools/python/python3-can_3.3.2.bb b/meta-python/recipes-devtools/python/python3-can_3.3.3.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-can_3.3.2.bb
-rename to meta-python/recipes-devtools/python/python3-can_3.3.3.bb
-index 698eaf5b3..4da233959 100644
---- a/meta-python/recipes-devtools/python/python3-can_3.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-can_3.3.3.bb
-@@ -3,8 +3,8 @@ SECTION = "devel/python"
- LICENSE = "LGPLv3"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e6a600fd5e1d9cbde2d983680233ad02"
+diff --git a/meta-python/recipes-devtools/python/python-psutil.inc b/meta-python/recipes-devtools/python/python-psutil.inc
+deleted file mode 100644
+index dfb33e8dc..000000000
+--- a/meta-python/recipes-devtools/python/python-psutil.inc
++++ /dev/null
+@@ -1,22 +0,0 @@
+-SUMMARY = "A cross-platform process and system utilities module for Python"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=e35fd9f271d19d5f742f20a9d1f8bb8b"
+-
+-SRC_URI[md5sum] = "ed7b0f11ed214bcabbe76b7cf52f3ae3"
+-SRC_URI[sha256sum] = "685ec16ca14d079455892f25bd124df26ff9137664af445563c1bd36629b5e0e"
+-
+-PACKAGES =+ "${PN}-tests"
+-
+-FILES_${PN}-tests += " \
+-    ${PYTHON_SITEPACKAGES_DIR}/psutil/test* \
+-    ${PYTHON_SITEPACKAGES_DIR}/psutil/__pycache__/test* \
+-"
+-
+-
+-RDEPENDS_${PN} += " \
+-    ${PYTHON_PN}-shell \
+-    ${PYTHON_PN}-threading \
+-    ${PYTHON_PN}-xml \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-psutil_5.7.0.bb b/meta-python/recipes-devtools/python/python3-psutil_5.7.0.bb
+index c1969ea65..170819d59 100644
+--- a/meta-python/recipes-devtools/python/python3-psutil_5.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-psutil_5.7.0.bb
+@@ -1,4 +1,25 @@
++SUMMARY = "A cross-platform process and system utilities module for Python"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=e35fd9f271d19d5f742f20a9d1f8bb8b"
++
++SRC_URI[md5sum] = "ed7b0f11ed214bcabbe76b7cf52f3ae3"
++SRC_URI[sha256sum] = "685ec16ca14d079455892f25bd124df26ff9137664af445563c1bd36629b5e0e"
++
+ inherit pypi setuptools3
+-require python-psutil.inc
  
--SRC_URI[md5sum] = "b724553a330478270267380b4888a18e"
--SRC_URI[sha256sum] = "5fefb5c1e7e7f07faefc02c6eac79f9b58376f007048a04d8e7f325d48ec6b2e"
-+SRC_URI[md5sum] = "1310da316799e4b12944a6c1dcb017a9"
-+SRC_URI[sha256sum] = "ecd69cf6b2f0235345ebe607a15325cf1384c85b24ffbe1d68c3754357f87488"
- 
- PYPI_PACKAGE="python-can"
- 
+-RDEPENDS_${PN} += "${PYTHON_PN}-netclient"
++PACKAGES =+ "${PN}-tests"
++
++FILES_${PN}-tests += " \
++    ${PYTHON_SITEPACKAGES_DIR}/psutil/test* \
++    ${PYTHON_SITEPACKAGES_DIR}/psutil/__pycache__/test* \
++"
++
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-shell \
++    ${PYTHON_PN}-threading \
++    ${PYTHON_PN}-xml \
++    ${PYTHON_PN}-netclient \
++"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
