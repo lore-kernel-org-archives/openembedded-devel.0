@@ -1,116 +1,132 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.45])
- by mx.groups.io with SMTP id smtpd.web11.2277.1592354833215397380
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.48])
+ by mx.groups.io with SMTP id smtpd.web10.2427.1592355259063997845
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Jun 2020 17:47:13 -0700
+ Tue, 16 Jun 2020 17:54:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@uievolution.onmicrosoft.com header.s=selector2-uievolution-onmicrosoft-com header.b=S76n5BAr;
- spf=pass (domain: xevo.com, ip: 40.107.237.45, mailfrom: rrowe@xevo.com)
+ dkim=pass header.i=@uievolution.onmicrosoft.com header.s=selector2-uievolution-onmicrosoft-com header.b=VFhE72Dm;
+ spf=pass (domain: xevo.com, ip: 40.107.93.48, mailfrom: rrowe@xevo.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SIOush0WBQF/oe9mxoekg6gM3ih7KbZyy+Y4voLcoOLyK9/s17GLMFjZu0EAbIYJh2GF9l2a4m7pWunlgEDT22tsc7X/utYhMgu/t1QAasp6P6oyvg/vRKDdBj0qzCJMTe1xge0lpclnBaXtVZXNkWI/GYce/s4YqbGKn5igIMvFLT2WIYT0Z3tRkrknxt6gaAprqOB79HAb2Qj7S6V0EH8ZjKo1zx2xvjxBEkDz946IZhmj7nqzsH+AN93wkB/PNLOfp91eb5wCysH/5IY2iKUmzM7pCdOIFv02I1JSm7k4t2FQqqf1kwZ5+Iiv5vaCeQP44r8Lodaco/ynos2pLA==
+ b=C8WhF7Lk7r+P2Af7XnzyOjWxdWyUrWuzej8751OVq6EUPKZIvmHG+S24W7QYYL4IlNkaetnUDiBgNs/JbqL7S6FklT23u1Qo+gGAg9CZ0CztTNclkg4BGRBz/YI0xS1ota62AKmJMguM4tNaq0liUf3yH7m0QJ1r1kaG0fFYcS/XBc7yVV00Qd0NX0pDIBp2G4CXL/svx8euMIYUOsbLuDytv/1fdFNjyh/HaIXcnMud9bar+TOifsWUrOO4TRIRKsJHMpyov/GXWUxQrAwG1JlR01Eru0450k100neR7RPHOs+brksTYn1y9ovF3EbodTtAXIIt05+ua4ITtvkJHA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tSp6XFNMGkWyFqQcVANJvnr2Hq8Fl6ibBla++T8+r9w=;
- b=hLVtindLJFGUSJt6BMDj0nqjMzm8CE3ka4sm2RAx6QljjwAsAHrtDjLbXfBCHuyR2EifHcJPhkCcD62G6ochitinzvoyw1oYHVnV4Z2dmVjJfBNoTybGqm3TNFki2lJrQrXsw/CbCnmgtSMRsamf0Vlp+oiZuHDFX30+R+Cmz3JX3jxEi6pEtDqsdZgbH+27tgUW70oPN2xmqqJAgK4M+CyN1rE6LH8DrEqnCP1bwB0DWvqPGO8ggEGikxmp7+dlvXU2mLjMypLT/wSe15NOVv+nfaxar0507Z/tzkQEde4VBeWbsAHxc5UHz5P2d1UNGmMtp5H/4EyAvW43Egc4sQ==
+ bh=XCVJ2dAtV4OeKu9uZDL13q5YeoYAx7DANbiB5HmSfkA=;
+ b=j7HMdoceK/sV11VOGo2FJQQ4H/mPM9Ac0DW6JRx+w/UmBhGHEZHeMKzuxXhTmz1HoFE4t5516R8A3g16j0oaZVYdi55V6wn/732EIVBdWwm7AniDAdmIs9308aclRCJ+1kGGI50MJEZ9teeL7LGtuEQxtz2cyrpE/BuhskltyrrhqMlcX8XLh27mviQHlkGNEGW9BYFZ1tCE9vrbZ4XDTCFBkccfzAPst7+M0uevNO7cboUUNfSxnIYuLhiCOOGUv2MIehafNmnk/jcvkOg7ZtD+rCZ/RDGqqKpXbe8RE4shbPKBKyOcdmsm1/KFPv868kX/czqkdQbWSJCfkGL+Iw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=xevo.com; dmarc=pass action=none header.from=xevo.com;
  dkim=pass header.d=xevo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=uievolution.onmicrosoft.com; s=selector2-uievolution-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tSp6XFNMGkWyFqQcVANJvnr2Hq8Fl6ibBla++T8+r9w=;
- b=S76n5BAryZU1n1NgAOKHWjE0FZ1CojtlwPY4soBXpiKInvhycsYSIsyLr+tYFyh94kEsqmi8U5YpIzwTLHHpfzqXLWAXKZQB/GP73ZWIAv2fnkwYj0KMbR69Nc+tNgYDTBd0zHU6b1nbDXFnlcExXW54pA0hfFvrW8jMGFvCLCk=
+ bh=XCVJ2dAtV4OeKu9uZDL13q5YeoYAx7DANbiB5HmSfkA=;
+ b=VFhE72DmzIr+5cBNaHyGZLWlxpEU7N4CEfxMAng9oNb8aDm2TMj86jWzHbR+AiRqEcPgjODiUb0D4wa8GOsnY69bPMlv3VQU1sWKPNkR2Yfu/iPVAhuwDvWr3zT4kL6Rn2o2/oElQFVPdrwtbhfaLvJUlNkwNDSl7NPWtOnyDL8=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=xevo.com;
 Received: from MW3PR18MB3659.namprd18.prod.outlook.com (2603:10b6:303:53::19)
- by MWHPR18MB0992.namprd18.prod.outlook.com (2603:10b6:300:a1::7) with
+ by MWHPR1801MB1984.namprd18.prod.outlook.com (2603:10b6:301:6c::32) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.24; Wed, 17 Jun
- 2020 00:47:11 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22; Wed, 17 Jun
+ 2020 00:54:15 +0000
 Received: from MW3PR18MB3659.namprd18.prod.outlook.com
  ([fe80::3d7f:edb8:f540:5050]) by MW3PR18MB3659.namprd18.prod.outlook.com
  ([fe80::3d7f:edb8:f540:5050%5]) with mapi id 15.20.3109.021; Wed, 17 Jun 2020
- 00:47:11 +0000
+ 00:54:15 +0000
 From: "Ryan Rowe" <rrowe@xevo.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: jbroadus@xevo.com,
 	mkelly@xevo.com,
 	Ryan Rowe <rrowe@xevo.com>
-Subject: [meta-python][PATCH 2/2] add python3-argexec
-Date: Tue, 16 Jun 2020 17:46:48 -0700
-Message-Id: <20200617004648.43633-2-rrowe@xevo.com>
+Subject: [meta-python][PATCH] python3-typeguard: Upgrade 2.7.1 -> 2.9.1
+Date: Tue, 16 Jun 2020 17:54:09 -0700
+Message-Id: <20200617005409.44365-1-rrowe@xevo.com>
 X-Mailer: git-send-email 2.17.2 (Apple Git-113)
-In-Reply-To: <20200617004648.43633-1-rrowe@xevo.com>
-References: <20200617004648.43633-1-rrowe@xevo.com>
-X-ClientProxiedBy: MWHPR08CA0046.namprd08.prod.outlook.com
- (2603:10b6:300:c0::20) To MW3PR18MB3659.namprd18.prod.outlook.com
+X-ClientProxiedBy: MWHPR17CA0072.namprd17.prod.outlook.com
+ (2603:10b6:300:93::34) To MW3PR18MB3659.namprd18.prod.outlook.com
  (2603:10b6:303:53::19)
 Return-Path: rrowe@xevo.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from CASE.local.rynet.xyz (73.83.210.194) by MWHPR08CA0046.namprd08.prod.outlook.com (2603:10b6:300:c0::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.20.3109.21 via Frontend Transport; Wed, 17 Jun 2020 00:47:10 +0000
+Received: from CASE.local.rynet.xyz (73.83.210.194) by MWHPR17CA0072.namprd17.prod.outlook.com (2603:10b6:300:93::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.20.3109.22 via Frontend Transport; Wed, 17 Jun 2020 00:54:15 +0000
 X-Mailer: git-send-email 2.17.2 (Apple Git-113)
 X-Originating-IP: [73.83.210.194]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: fc374c63-a133-48a9-c175-08d81257f850
-X-MS-TrafficTypeDiagnostic: MWHPR18MB0992:
+X-MS-Office365-Filtering-Correlation-Id: a495d06f-4f98-442a-722f-08d81258f524
+X-MS-TrafficTypeDiagnostic: MWHPR1801MB1984:
 X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<MWHPR18MB099282974837F41B3492929ACC9A0@MWHPR18MB0992.namprd18.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:586;
+	<MWHPR1801MB198415F04554EEEFFBE20FD2CC9A0@MWHPR1801MB1984.namprd18.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:5236;
 X-Forefront-PRVS: 04371797A5
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	+reu7WjtxJVQiioVMG/oyT7xjca+ZkJYb0KvEQMPgAGvMv4Hmdi4X8+gCwqFdS8Iv1sotTLfrf3BtDddC0mvgHziI3rF7pGUF4OX2W2VvphK6tiH96URq/yV/MWOqPIktdLPZg8Pr3p3+/dN/6wK6/2e+FM2Vmg+FuUxEVqnUIuHRTP+nMZJFFkem4GigEMOZfCr4LHwrRWZFGgLwS+NX3LBbvrTYjwx1KhD9/43/PAlRLAOS58F8sctpgbEKfgzZf9Ctora4LDlhsyVZwfP38XbaUKv2kHCBIIUkpPhGD2+ULrtJzqx4EPSeXpODC4jw5AtMh6AAHTtQC9wk+6qLkc4ZaC0hYGIBKJSX64acBUgEzA40KZKYt1yM9gax1jSUPrjIOAAT83EbMxExMedCT0ygx+sI3ZUBTItQ7YfkUPgFNeDn94i7ysHCkEMZUKeWtHQ8WAaX8aE0YYGUxi6lA==
+	iVzSsNL0oAgsDOmbRIJrVYTRm+3eLU0GAaIhbzn12L6TiUFpwsf7PNDmm7sQKfG80DTHuUH4Gp1gfc2eHG5E+O05PL6BZ0F1XFSd+Y4ujhnvAJyXqtoiHy6KqcI9F2soAHu6/AzlytwEbrRXtXSTVgDxmqIOUFocK9D9CyKsdj5OV8qI8SzdLvmnb+R6S7sGsrxtuJFRSmm5qBmOQqOxf7o9zu8rzun+Xfp7Ie8+rALHXCqMID/Jd1dpku0+G3qUEaayOGyUp1HJQWsjAtM5FN6vYsk5iXtADoJXxSofaa7ZBzr+EY5mIhl9Sc3bgJTvHKuthTQPqUvmJZ2JJwWXF0Ao0oK9eFM1hYJnDk6Xal3lDxqeGZsoFOnxkn7zlSAKWqGaTYJpkL0RpkE9/t3AU1cuBI+IYguyD7y/Fv0Kt3cpeO3f7Xerf6nHg3Ji/F07ELLINmIum18g65xv9AO1Fg==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW3PR18MB3659.namprd18.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(376002)(136003)(366004)(396003)(39840400004)(52116002)(6512007)(26005)(36756003)(478600001)(1076003)(8936002)(66946007)(6666004)(86362001)(66476007)(2906002)(66556008)(6486002)(316002)(8676002)(186003)(16526019)(5660300002)(2616005)(107886003)(6506007)(6916009)(4326008)(956004)(4730100016);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW3PR18MB3659.namprd18.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(366004)(376002)(39840400004)(396003)(136003)(346002)(2906002)(26005)(16526019)(6666004)(186003)(66946007)(66476007)(66556008)(52116002)(6512007)(316002)(4326008)(5660300002)(107886003)(36756003)(6506007)(1076003)(478600001)(6486002)(956004)(2616005)(8936002)(86362001)(83380400001)(6916009)(8676002)(4730100016);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	P5BOPPWfusOLKZhDWUdQIag6ZvY5rs9z4sXQc1QiZUTM/O4jnyeE6AGX8CXJzdE9mwGJfcIPG7O6zO82hWFGxy8z77t1pZ6E/4z1xJ11uG7RYAxO6338ehm5VaWizL6hgsK1NqCmZE9pAmFQGGe6+LSKetJAGNxU5ki86wrSRj1xlXz+axLTVfvzgeg1k+kXke+LQaNnzBSjWQmH/aSlylTTCI3Tz75nff8pjWAI8tI1DrVOcIm17iyNv/l5F6Le/PNSBBCZhyfOy/Pcum+ucHHx3ltEYJzGVYMe08UGGowT1WKHmoLoLK/BbF7sbQj+8Azvau9YvQIyjuYo5CclkKD2mf0zeCCB9Qo2LdXUwsEky9DiuSwYIM/005UD+Bud5Q/4TXCFzzjMkHyDjA7eixlnCoYKV5c3VYkuPVTgvn0C+7cHZxWTbEP38z1qrDMctIVQmumYGhyzeRrOYOz+5REAuCwLqZAuiIQoefVp5VU=
+	Bq6G5jTEeFoaIY4R1O4V0wspAvCjJ1Dab1RLa30XBbt8zwtIBSAO7XUMWdiIfy5jYgGhenEDiKSjJR9cF2HWLivWIdcUI8AxlV98tLKilIdz3DhyfwSMoPO0qCD35DGmS4ff15gkl1lJGnvg+ufqzc+yGP2nK0Xpfbi1Mhwekx1ijdVH00m2Ng+btK003cskB5pZPSnCfGd2xScUptHVjbMTrQoZ2H02JtDUhXp4ywQxxAGhoVGR+uENH6gik4X7qv6XH1FqcdGM4J+WQp9g7M0mu4Js+97iHj5wBIe27lfYp+7CFehZAc0BeeYg8azHudZwWnBh/1lwkTmt4h06JLkwi6b0lgX0k4vbeDp1E7D8G9/r73Jho1iplzV7I/zNx2RYqbgJEfzI6ndRkiParXRZQ1LrCt6iwVhON1UbzHnbm0q/PzZf/BNtBFKcyFQZirvRvqa0HiaEj2JCHIRoHhEHNxdxry/d+U+Cfj2tUMp0zbGVyYz+nvjl89kzlrA6
 X-OriginatorOrg: xevo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fc374c63-a133-48a9-c175-08d81257f850
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2020 00:47:11.5519
+X-MS-Exchange-CrossTenant-Network-Message-Id: a495d06f-4f98-442a-722f-08d81258f524
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2020 00:54:15.4274
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e0a7ca1f-2458-4cd6-a7c7-d733c07495ab
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: QQeEqk61HoH3yz1TXennW19xxL1O2SyrG7SEyTrPEZ5oY5hU244sp4wvH3ueTj8l
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR18MB0992
+X-MS-Exchange-CrossTenant-UserPrincipalName: NaE8ji1ULx9bQYMuw8DGGAPc6AMQGYu6Uh6ulzvc6fHvEo4Pk+M7r9BVyrwYLdsq
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR1801MB1984
 Content-Type: text/plain
+
+2.9.1 (2020-06-07)
+- Fixed ImportError on Python < 3.8 when typing_extensions was not
+  installed
+
+2.9.0 (2020-06-06)
+- Upped the minimum Python version from 3.5.2 to 3.5.3
+- Added support for typing.NoReturn
+- Added full support for typing_extensions (now equivalent to support
+  of the typing module)
+- Added the option of supplying check_type() with globals/locals for
+  correct resolution of forward references
+- Fixed erroneous TypeError when trying to check against non-runtime
+  typing.Protocol (skips the check for now until a proper compatibility
+  check has been implemented)
+- Fixed forward references in TypedDict not being resolved
+- Fixed checking against recursive types
+
+2.8.0 (2020-06-02)
+- Added support for the Mock and MagicMock types (PR by prescod)
+- Added support for typing_extensions.Literal (PR by Ryan Rowe)
+- Fixed unintended wrapping of untyped generators (PR by prescod)
+- Fixed checking against bound type variables with check_type() without
+  a call memo
+- Fixed error message when checking against a Union containing a
+  Literal
 
 Signed-off-by: Ryan Rowe <rrowe@xevo.com>
 ---
- .../python/python3-argexec_1.0.2.bb           | 20 +++++++++++++++++++
- 1 file changed, 20 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-argexec_1.0.2.bb
+ ...{python3-typeguard_2.7.1.bb => python3-typeguard_2.9.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-typeguard_2.7.1.bb => python3-typeguard_2.9.1.bb} (72%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-argexec_1.0.2.bb b/meta-python/recipes-devtools/python/python3-argexec_1.0.2.bb
-new file mode 100644
-index 000000000..64fbf58c4
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-argexec_1.0.2.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "Expose your Python functions to the command line with one easy step!"
-+HOMEPAGE = "https://github.com/XevoInc/argexec"
-+SECTION = "devel/python"
-+
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=ea70b07c354e36056bd35e17c9c3face"
-+
-+inherit pypi setuptools3
-+
-+SRC_URI[md5sum] = "9fac09884c54db79e57ab80f0c423794"
-+SRC_URI[sha256sum] = "e271286b280f930aeaae7496454573f8029c3f48ef1dc47c780155dd4a7b9e7f"
-+
-+DEPENDS += "python3-setuptools-scm-native"
-+RDEPENDS_${PN} += "\
-+  python3-typing
-+  python3-dynamic-dispatch
-+  python3-typeguard
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-typeguard_2.7.1.bb b/meta-python/recipes-devtools/python/python3-typeguard_2.9.1.bb
+similarity index 72%
+rename from meta-python/recipes-devtools/python/python3-typeguard_2.7.1.bb
+rename to meta-python/recipes-devtools/python/python3-typeguard_2.9.1.bb
+index b62b60564..a0167cf03 100644
+--- a/meta-python/recipes-devtools/python/python3-typeguard_2.7.1.bb
++++ b/meta-python/recipes-devtools/python/python3-typeguard_2.9.1.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://pypi.org/project/typeguard/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f0e423eea5c91e7aa21bdb70184b3e53"
+ 
+-SRC_URI[md5sum] = "ef743359de59f8fe17e7c5e3af70e2c5"
+-SRC_URI[sha256sum] = "2d545c71e9439c21bcd7c28f5f55b3606e6106f7031ab58375656a1aed483ef2"
++SRC_URI[md5sum] = "411df8eefd76ffa014328a46342bdf38"
++SRC_URI[sha256sum] = "529ef3d88189cc457f4340388028412f71be8091c2c943465146d4170fb67288"
+ 
+ inherit pypi setuptools3
+ 
 -- 
 2.17.2 (Apple Git-113)
 
