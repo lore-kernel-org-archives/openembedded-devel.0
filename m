@@ -1,147 +1,217 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.7878.1592401143192149014
+Received: from NAM04-SN1-obe.outbound.protection.outlook.com (NAM04-SN1-obe.outbound.protection.outlook.com [40.107.70.83])
+ by mx.groups.io with SMTP id smtpd.web11.9283.1592405049709454870
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Jun 2020 06:39:04 -0700
+ Wed, 17 Jun 2020 07:44:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.73,522,1583164800"; 
-   d="scan'208,217";a="94744017"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 17 Jun 2020 21:39:00 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id C0F5C4CE30EB
-	for <openembedded-devel@lists.openembedded.org>; Wed, 17 Jun 2020 21:38:55 +0800 (CST)
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Wed, 17 Jun 2020 21:38:55 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local ([::1]) by
- G08CNEXMBPEKD05.g08.fujitsu.local ([fe80::4086:9520:5ef9:407d%14]) with mapi
- id 15.00.1497.006; Wed, 17 Jun 2020 21:38:55 +0800
-From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-wtforms: upgrade 2.2.1 -> 2.3.1
-Thread-Topic: [oe] [meta-python] [PATCH] python3-wtforms: upgrade 2.2.1 ->
-  2.3.1
-Thread-Index: AQHWRKrLHqjwaJQdw02FW9pX63E6lg==
-Date: Wed, 17 Jun 2020 13:38:55 +0000
-Message-ID: <1592401134880.81332@cn.fujitsu.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.167.33.78]
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=ABpa6ttH;
+ spf=pass (domain: windriver.com, ip: 40.107.70.83, mailfrom: trevor.gamblin@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=MOCRPADG1D3VrHzi1aMq9GOqbROmMfE7AKWhz9ftr/axSNZ2R+Enh5f1BIeNxYSGuZiPKjcwBZZg0aQfcZpOVIgKKBk4E7eUk9Eo1w0iL9THP7myCtZEN3E/xlY1VKdcCqOJXqLX59StCxe0zNRit7O27BBvUBAJphn183cAnhZg7SvBi0KQePDh1TmrVP9TjOxHswWbgfP6TzwEUNJm7EgBLRhO4UnT47fehR5QqKaafS9NLdxkzpGKf6ewOpIBSlYKkyWGyXPbKoMXZ7E3BjRiJZcmfLckmQg/94drIX1ETmahOMPOMBhaF08bmHsMWD11Eb/ZiVkOXUZP1odFUg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CdbB3Db3gWkNfJQENy61zCcLezZQL8clF9C0EhKWDmc=;
+ b=mgj5QJmULkfMjX33oqRLzj03LqlQf6/eUGNHE5ruCCi+xkjsqQRuPj38XALyguTU84tdKr22bKU7Bs7bqcN/nkCTz+WENYSNXlgHh0dJs/FdSiBcVhbsrteW4qkZJr81h35c9RIfBJDA/IjkhIowk89qIhI3CRu6LP9llbtupgn71/qX4eeVGfq9T+EbCz844DtxJ6fJM3m5TycOl+lMjHVjxoSErW4vzNDSFZubJI1FSW4TCAbJ1NqhWH7/qb49wUQCo/BHYpCkKQi+P1FU7oHbwnG98iTnP4vLPMts3rZtE/2JXAAzmrOs0oa+lQy9hzoWePTLnclhB0ryaGcUMQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CdbB3Db3gWkNfJQENy61zCcLezZQL8clF9C0EhKWDmc=;
+ b=ABpa6ttHBkryCkYVwZZE0oV6/VfjBuWLuMmScFQraU92Sb9il4N6eHC0ep2/UAm1cTUCqP2HL4JMiC1aiVXcPbe57IEWa7uR4HHc4Z/bHsDP9/Xqarp0crquPSDm8WOSAIml6bsBNrJEtqaY2V9WWVCK4oA7a1KCPy5zp0M3jVY=
+Authentication-Results: xevo.com; dkim=none (message not signed)
+ header.d=none;xevo.com; dmarc=none action=none header.from=windriver.com;
+Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
+ by BN6PR11MB1233.namprd11.prod.outlook.com (2603:10b6:404:44::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.21; Wed, 17 Jun
+ 2020 14:44:08 +0000
+Received: from BN6PR11MB0003.namprd11.prod.outlook.com
+ ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
+ ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3109.021; Wed, 17 Jun 2020
+ 14:44:08 +0000
+Subject: Re: [oe] [meta-python][PATCH] python3-typeguard: Upgrade 2.7.1 -> 2.9.1
+To: Ryan Rowe <rrowe@xevo.com>, openembedded-devel@lists.openembedded.org
+Cc: jbroadus@xevo.com, mkelly@xevo.com
+References: <20200617005409.44365-1-rrowe@xevo.com>
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+Message-ID: <3a3bfd2c-9d94-b522-152e-9f27cc6a8453@windriver.com>
+Date: Wed, 17 Jun 2020 10:44:04 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
+In-Reply-To: <20200617005409.44365-1-rrowe@xevo.com>
+X-ClientProxiedBy: YTBPR01CA0036.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:14::49) To BN6PR11MB0003.namprd11.prod.outlook.com
+ (2603:10b6:405:61::26)
+Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: C0F5C4CE30EB.A37E5
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Content-Language: zh-CN
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.0.16] (174.115.236.231) by YTBPR01CA0036.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:14::49) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22 via Frontend Transport; Wed, 17 Jun 2020 14:44:07 +0000
+X-Originating-IP: [174.115.236.231]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 8781d952-4772-4128-024c-08d812cce3e1
+X-MS-TrafficTypeDiagnostic: BN6PR11MB1233:
+X-Microsoft-Antispam-PRVS: 
+	<BN6PR11MB1233B4531A5DE4EE05BAF44B9F9A0@BN6PR11MB1233.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:5236;
+X-Forefront-PRVS: 04371797A5
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	EpxlNXy8aW9gcxmxdizqq4xY5YTXHkOn0R1wYOkAaEb957Gh0IvXZacr3scoDObLwGgV4u6e/0Cybf/Z8wA/ZVzmexEFqzM3d23XUCCuSrHozT0Aco60eVfO9W9cel+2F/RBQIqjZq+BKWt99bq7dXqY6RrCuESK8JLzUppRosgGMrj8L5QQRgl4JXPd0wJD58frtaO1SW5jCQv2PZaiz2LHIsOCHL8vdAtSqfQQtWRj6H3JUvB1dsXH9F7v7g/iYTVlQK8PWIVJ2bR181fqCdpC7AaH47Wc98aLEpkm5ra/KJMsDkmcSXWeqLCDbh+/Xlbj1yf1Fz4EbNCU0kf7CB3OZp/d5a+hZc6BPw2jtCgbViln6I4+w9kQUWAGgKENfEvb7l54gZI+HuxII2dzKPfSGlRNYXULSgfV8DLPpHzOAVXmEBC7jbGBkWARwPtKgSUITBJ6phjejbalKaiZeA==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(39850400004)(366004)(136003)(376002)(346002)(66476007)(33964004)(44832011)(66946007)(6666004)(5660300002)(31696002)(31686004)(66556008)(16526019)(86362001)(956004)(52116002)(36756003)(2906002)(2616005)(8676002)(186003)(6486002)(4326008)(478600001)(26005)(83380400001)(966005)(166002)(8936002)(16576012)(53546011)(316002)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	KDCm0Nf7fmtTzpsLtb0e8isq03YQb/D99qrrJTR5MjIuFX0tSSV8Qx4DZ0hqY+XL5+7OLrJgv1KnWl08mgzaz3YBVVwEwBw96Lfb6Y79OTuG/FR+W6AnyPG31ng6dZZ3Zd6C1Admm8xqSXkDq8VAllBGoRQItNfaqVwL0mgRCfaymBLmcot9Hfm1IBNSVUSD3Zsk0r7ZsffTy7LG2Pfatz+SXN51kamAD5bJR0C7t2COeiGqDnECI6ls0bvlxKT1E1KU/cRga8+rdikY2LBfcf8T+YjmUdnr13Nf3oF8QKDD90STfuKoXT14XJtqM7HkvDDmnoExZwP+fkjvqJVxSaAwuZh/zScMsGzHAt7iRpohR0QPkEpljlSzYvxkuzGSrObEiXn+LSND0ZeZEHL05M2myPlWCmXIib7f92+FOarVvBMCB7nnVMlV5GXt+xtuBeCBH0PX6yKUvA6Kunp+mDbMlV18cshRb5pS/vLwS03rRTQ2wHAplbpCUVmvTdcm
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8781d952-4772-4128-024c-08d812cce3e1
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2020 14:44:08.1173
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: +YGHz9qAQ9WDbuzYys1o69GPWat5P0HIqpqd7loFQPo1E7vFPwSNzvRqtfVNOHMwjEy1lAv3Oy6iW152dfhFjdXbPljm8y76i12tocUXKgs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1233
 Content-Type: multipart/alternative;
-	boundary="_000_159240113488081332cnfujitsucom_"
+ boundary="------------76990DFD263A06BEB5424A15"
+Content-Language: en-US
 
---_000_159240113488081332cnfujitsucom_
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+--------------76990DFD263A06BEB5424A15
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Pz9TaWduZWQtb2ZmLWJ5OiBXYW5nIE1pbmd5dSA8d2FuZ215QGNuLmZ1aml0
-c3UuY29tPg0KLS0tDQogLi4uL3tweXRob24zLXd0Zm9ybXNfMi4yLjEuYmIg
-PT4gcHl0aG9uMy13dGZvcm1zXzIuMy4xLmJifSAgfCA2ICsrKy0tLQ0KIDEg
-ZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0p
-DQogcmVuYW1lIG1ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9u
-L3tweXRob24zLXd0Zm9ybXNfMi4yLjEuYmIgPT4gcHl0aG9uMy13dGZvcm1z
-XzIuMy4xLmJifSAoNjAlKQ0KDQpkaWZmIC0tZ2l0IGEvbWV0YS1weXRob24v
-cmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy13dGZvcm1zXzIuMi4x
-LmJiIGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0
-aG9uMy13dGZvcm1zXzIuMy4xLmJiDQpzaW1pbGFyaXR5IGluZGV4IDYwJQ0K
-cmVuYW1lIGZyb20gbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRo
-b24vcHl0aG9uMy13dGZvcm1zXzIuMi4xLmJiDQpyZW5hbWUgdG8gbWV0YS1w
-eXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy13dGZvcm1z
-XzIuMy4xLmJiDQppbmRleCAyYjdhZjYyNjcuLjlmMDgxYjY4YyAxMDA2NDQN
-Ci0tLSBhL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5
-dGhvbjMtd3Rmb3Jtc18yLjIuMS5iYg0KKysrIGIvbWV0YS1weXRob24vcmVj
-aXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy13dGZvcm1zXzIuMy4xLmJi
-DQpAQCAtMiwxMCArMiwxMCBAQCBERVNDUklQVElPTiA9ICJBIGZsZXhpYmxl
-IGZvcm1zIHZhbGlkYXRpb24gYW5kIHJlbmRlcmluZyBsaWJyYXJ5IGZvciBw
-eXRob24gd2ViDQogSE9NRVBBR0UgPSAiaHR0cHM6Ly9weXBpLnB5dGhvbi5v
-cmcvcHlwaS9XVEZvcm1zIg0KIFNFQ1RJT04gPSAiZGV2ZWwvcHl0aG9uIg0K
-IExJQ0VOU0UgPSAiQlNELTMtQ2xhdXNlIg0KLUxJQ19GSUxFU19DSEtTVU0g
-PSAiZmlsZTovL1BLRy1JTkZPO21kNT1jNDY2MGMxMzI3NzBkNWQwYTU3NTc1
-NDFmNmI3OTQ5MyINCitMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9QS0ct
-SU5GTzttZDU9MjA4Y2UxYzE1OWY5MTFlY2YzODk4MDY2NTA1ODIwMjEiDQoN
-Ci1TUkNfVVJJW21kNXN1bV0gPSAiNDFjMDAwOGRiZTdiZDk4ODkyYzU4Zjc0
-NTdhNDZhNGEiDQotU1JDX1VSSVtzaGEyNTZzdW1dID0gIjBjZGJhYzNlN2Y2
-ODc4MDg2YzMzNGFhMjVkYzVhMzM4NjlhMzk1NGU5ZDFlMDE1MTMwZDY1YTY5
-MzA5YjNiNjEiDQorU1JDX1VSSVttZDVzdW1dID0gImJmZjA2OTQzZTU5Njcx
-NTgxYWYwN2Y4MGQxNGJkYTVmIg0KK1NSQ19VUklbc2hhMjU2c3VtXSA9ICI4
-NjFhMTNiM2FlNTIxZDY3MDBkYWMzYjI3NzE5NzBiZDM1NGE2M2JhNzA0M2Vj
-YzNhODJiNTI4ODU5NmExOTcyIg0KDQogUFlQSV9QQUNLQUdFID0gIldURm9y
-bXMiDQoNCi0tDQoyLjE3LjE/DQoNCgoK
 
---_000_159240113488081332cnfujitsucom_
-Content-Type: text/html; charset="gb2312"
-Content-Transfer-Encoding: quoted-printable
+On 6/16/20 8:54 PM, Ryan Rowe wrote:
+> 2.9.1 (2020-06-07)
+> - Fixed ImportError on Python < 3.8 when typing_extensions was not
+>    installed
+>
+> 2.9.0 (2020-06-06)
+> - Upped the minimum Python version from 3.5.2 to 3.5.3
+> - Added support for typing.NoReturn
+> - Added full support for typing_extensions (now equivalent to support
+>    of the typing module)
+> - Added the option of supplying check_type() with globals/locals for
+>    correct resolution of forward references
+> - Fixed erroneous TypeError when trying to check against non-runtime
+>    typing.Protocol (skips the check for now until a proper compatibility
+>    check has been implemented)
+> - Fixed forward references in TypedDict not being resolved
+> - Fixed checking against recursive types
+>
+> 2.8.0 (2020-06-02)
+> - Added support for the Mock and MagicMock types (PR by prescod)
+> - Added support for typing_extensions.Literal (PR by Ryan Rowe)
+> - Fixed unintended wrapping of untyped generators (PR by prescod)
+> - Fixed checking against bound type variables with check_type() without
+>    a call memo
+> - Fixed error message when checking against a Union containing a
+>    Literal
+>
+> Signed-off-by: Ryan Rowe <rrowe@xevo.com>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>   ...{python3-typeguard_2.7.1.bb => python3-typeguard_2.9.1.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-typeguard_2.7.1.bb => python3-typeguard_2.9.1.bb} (72%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-typeguard_2.7.1.bb b/meta-python/recipes-devtools/python/python3-typeguard_2.9.1.bb
+> similarity index 72%
+> rename from meta-python/recipes-devtools/python/python3-typeguard_2.7.1.bb
+> rename to meta-python/recipes-devtools/python/python3-typeguard_2.9.1.bb
+> index b62b60564..a0167cf03 100644
+> --- a/meta-python/recipes-devtools/python/python3-typeguard_2.7.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-typeguard_2.9.1.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "https://pypi.org/project/typeguard/"
+>   LICENSE = "MIT"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=f0e423eea5c91e7aa21bdb70184b3e53"
+>   
+> -SRC_URI[md5sum] = "ef743359de59f8fe17e7c5e3af70e2c5"
+> -SRC_URI[sha256sum] = "2d545c71e9439c21bcd7c28f5f55b3606e6106f7031ab58375656a1aed483ef2"
+> +SRC_URI[md5sum] = "411df8eefd76ffa014328a46342bdf38"
+> +SRC_URI[sha256sum] = "529ef3d88189cc457f4340388028412f71be8091c2c943465146d4170fb67288"
+>   
+>   inherit pypi setuptools3
+>   
+>
+> 
 
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dgb2312">
-<style type=3D"text/css" style=3D"display:none"><!-- p { margin-top: 0px; m=
-argin-bottom: 0px; }--></style>
-</head>
-<body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
-FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
-<div>&#8203;&#8203;Signed-off-by: Wang Mingyu &lt;wangmy@cn.fujitsu.com&gt;=
-</div>
-<div>---</div>
-<div>&nbsp;.../{python3-wtforms_2.2.1.bb =3D&gt; python3-wtforms_2.3.1.bb}&=
-nbsp; | 6 &#43;&#43;&#43;---</div>
-<div>&nbsp;1 file changed, 3 insertions(&#43;), 3 deletions(-)</div>
-<div>&nbsp;rename meta-python/recipes-devtools/python/{python3-wtforms_2.2.=
-1.bb =3D&gt; python3-wtforms_2.3.1.bb} (60%)</div>
-<div><br>
-</div>
-<div>diff --git a/meta-python/recipes-devtools/python/python3-wtforms_2.2.1=
-.bb b/meta-python/recipes-devtools/python/python3-wtforms_2.3.1.bb</div>
-<div>similarity index 60%</div>
-<div>rename from meta-python/recipes-devtools/python/python3-wtforms_2.2.1.=
-bb</div>
-<div>rename to meta-python/recipes-devtools/python/python3-wtforms_2.3.1.bb=
-</div>
-<div>index 2b7af6267..9f081b68c 100644</div>
-<div>--- a/meta-python/recipes-devtools/python/python3-wtforms_2.2.1.bb</di=
-v>
-<div>&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-wtforms_=
-2.3.1.bb</div>
-<div>@@ -2,10 &#43;2,10 @@ DESCRIPTION =3D &quot;A flexible forms validatio=
-n and rendering library for python web</div>
-<div>&nbsp;HOMEPAGE =3D &quot;https://pypi.python.org/pypi/WTForms&quot;</d=
-iv>
-<div>&nbsp;SECTION =3D &quot;devel/python&quot;</div>
-<div>&nbsp;LICENSE =3D &quot;BSD-3-Clause&quot;</div>
-<div>-LIC_FILES_CHKSUM =3D &quot;file://PKG-INFO;md5=3Dc4660c132770d5d0a575=
-7541f6b79493&quot;</div>
-<div>&#43;LIC_FILES_CHKSUM =3D &quot;file://PKG-INFO;md5=3D208ce1c159f911ec=
-f389806650582021&quot;</div>
-<div><br>
-</div>
-<div>-SRC_URI[md5sum] =3D &quot;41c0008dbe7bd98892c58f7457a46a4a&quot;</div>
-<div>-SRC_URI[sha256sum] =3D &quot;0cdbac3e7f6878086c334aa25dc5a33869a3954e=
-9d1e015130d65a69309b3b61&quot;</div>
-<div>&#43;SRC_URI[md5sum] =3D &quot;bff06943e59671581af07f80d14bda5f&quot;<=
-/div>
-<div>&#43;SRC_URI[sha256sum] =3D &quot;861a13b3ae521d6700dac3b2771970bd354a=
-63ba7043ecc3a82b5288596a1972&quot;</div>
-<div><br>
-</div>
-<div>&nbsp;PYPI_PACKAGE =3D &quot;WTForms&quot;</div>
-<div><br>
-</div>
-<div>--</div>
-<div>2.17.1&#8203;<br>
-</div>
-<p><br>
-</p>
-</body>
+--------------76990DFD263A06BEB5424A15
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 6/16/20 8:54 PM, Ryan Rowe wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:20200617005409.44365-1-rrowe@xevo.com">
+      <pre class="moz-quote-pre" wrap="">2.9.1 (2020-06-07)
+- Fixed ImportError on Python &lt; 3.8 when typing_extensions was not
+  installed
+
+2.9.0 (2020-06-06)
+- Upped the minimum Python version from 3.5.2 to 3.5.3
+- Added support for typing.NoReturn
+- Added full support for typing_extensions (now equivalent to support
+  of the typing module)
+- Added the option of supplying check_type() with globals/locals for
+  correct resolution of forward references
+- Fixed erroneous TypeError when trying to check against non-runtime
+  typing.Protocol (skips the check for now until a proper compatibility
+  check has been implemented)
+- Fixed forward references in TypedDict not being resolved
+- Fixed checking against recursive types
+
+2.8.0 (2020-06-02)
+- Added support for the Mock and MagicMock types (PR by prescod)
+- Added support for typing_extensions.Literal (PR by Ryan Rowe)
+- Fixed unintended wrapping of untyped generators (PR by prescod)
+- Fixed checking against bound type variables with check_type() without
+  a call memo
+- Fixed error message when checking against a Union containing a
+  Literal
+
+Signed-off-by: Ryan Rowe <a class="moz-txt-link-rfc2396E" href="mailto:rrowe@xevo.com">&lt;rrowe@xevo.com&gt;</a></pre>
+    </blockquote>
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
+    <blockquote type="cite" cite="mid:20200617005409.44365-1-rrowe@xevo.com">
+      <pre class="moz-quote-pre" wrap="">
+---
+ ...{python3-typeguard_2.7.1.bb =&gt; python3-typeguard_2.9.1.bb} | 4 &#43;&#43;--
+ 1 file changed, 2 insertions(&#43;), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-typeguard_2.7.1.bb =&gt; python3-typeguard_2.9.1.bb} (72%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-typeguard_2.7.1.bb b/meta-python/recipes-devtools/python/python3-typeguard_2.9.1.bb
+similarity index 72%
+rename from meta-python/recipes-devtools/python/python3-typeguard_2.7.1.bb
+rename to meta-python/recipes-devtools/python/python3-typeguard_2.9.1.bb
+index b62b60564..a0167cf03 100644
+--- a/meta-python/recipes-devtools/python/python3-typeguard_2.7.1.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-typeguard_2.9.1.bb
+@@ -3,8 &#43;3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pypi.org/project/typeguard/">&quot;https://pypi.org/project/typeguard/&quot;</a>
+ LICENSE = &quot;MIT&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=f0e423eea5c91e7aa21bdb70184b3e53">&quot;file://LICENSE;md5=f0e423eea5c91e7aa21bdb70184b3e53&quot;</a>
+ 
+-SRC_URI[md5sum] = &quot;ef743359de59f8fe17e7c5e3af70e2c5&quot;
+-SRC_URI[sha256sum] = &quot;2d545c71e9439c21bcd7c28f5f55b3606e6106f7031ab58375656a1aed483ef2&quot;
+&#43;SRC_URI[md5sum] = &quot;411df8eefd76ffa014328a46342bdf38&quot;
+&#43;SRC_URI[sha256sum] = &quot;529ef3d88189cc457f4340388028412f71be8091c2c943465146d4170fb67288&quot;
+ 
+ inherit pypi setuptools3
+ 
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+    </blockquote>
+  </body>
 </html>
 
---_000_159240113488081332cnfujitsucom_--
+--------------76990DFD263A06BEB5424A15--
