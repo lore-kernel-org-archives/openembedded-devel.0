@@ -1,17 +1,17 @@
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com (NAM02-SN1-obe.outbound.protection.outlook.com [40.107.77.81])
- by mx.groups.io with SMTP id smtpd.web10.7108.1592399253390107686
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com (NAM02-SN1-obe.outbound.protection.outlook.com [40.107.77.52])
+ by mx.groups.io with SMTP id smtpd.web10.7118.1592399265249658380
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Jun 2020 06:07:33 -0700
+ Wed, 17 Jun 2020 06:07:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=V7Yu4uwH;
- spf=pass (domain: windriver.com, ip: 40.107.77.81, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=IiUr1tbi;
+ spf=pass (domain: windriver.com, ip: 40.107.77.52, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=boIZc0o24lq005OjVKVf9w/y96xHogAuSeX+VgWsm1fUPgyHUovMUkVWx1xn+3uFYkbw3y7pxr0w9Z+1PslP801EdBf4w6uFC1SEYRrrtEedeizQMWaR5iPIfmK9iMoiHPjv4HQpmeU1Hwsp0yMkTgF2JlrjzN8CPX1u9HIQVSOASs78aHX9+HQgUziuqFz1F7Ia4J9cNMY5XvxMZxwawldKuD5ih9wWIo9kyVXd0m9XurgQZRVr3Sh7oWnKlumewHWCG2YgIbrPnUGmz0VFHs8KPK4J+zjQXqdPflWlVI5tiT9qcMSPt7EaksUMT2NagiKwtyiqU68M+Fq4en9kAA==
+ b=jj7YbEqYq7RwJ0iCdwLNnXgC5vXEHXt3QTl5sd6j28TDsFsWVnUaLp5+IqRksYmci7Zr4MuLGp5tQrN7CApJCZqzWmRRARouQf5S0A4xj2UVQv4qolah1U/R8xUsg2le0CY4vpfN2TAwQMR3OTorrBnlsp7ucByTPqNvloQkPISaYcSL7hEQ6Wdmv7x6js2JsMACEAcqtOC+MzGmYxHUGIepgPys/hgcNbbpBXxaKVgWDBYVcNPGC/Gb4rh9INb6v9bruLEys0qGm0q/D8euAOQaopkVRfuty0nlzJUqfT64co3CQoDbCHOuT5NYPPgG8HKPXWo4urVWteQLAZ9/Pg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zhJNRG4kGLN0rvh27cwqwJWiKmM4MwzlgOFDNuAoKQY=;
- b=cryLDE7OObQmXJ1NwxmsuOlM5vrGLxpdx+HyPtKjgb8jrWFz4DeW0A4BlNbLRjpJuMYdjL/qDlW3cR6G/RK5aftPJfuCW+Oia2OjZZw8HLaY/LzvzwLNdDtaLvwjgM1/D4CeSRz0UvpNHr2nPO4g879eV1U1SL9yXdHKGfneDOdR3NB6HSpw75bzLxbjw0jLFDPSqabQYylXyQJCFzDQxCaAPeiG3Rz/Yjt0ae56BS+gFgMCNqnD89I8H5HzuO+tXplvd0wBJtnQ/xLz/MHjleXDN22e5rydli5DAzKGL+wt/Ew6RkTxCVO+cspKtI/WF7l45Josiu6JxaqHs10lNQ==
+ bh=eTm5U9JUJ/cReiPoPpYoU4zqjPkvz+ZXX20kbu1tgYQ=;
+ b=UWkpVltd4FGmugrLUvSHvRH5tpNoZo0IQUlvXtxbU6FKwTLUTwfD1IaZHPCEse9nIpPxfvQccqCdlpMhu4cPEJeOowUixa8Y9CVw3bjm76KogyBnL8JlMI+QPbtvWOyp/+L3QOYXW2Mg8dUkB2sluZ7Xwl/Z3EcKG+U27tmvIbp6/OOJ2n2UI70RizzBEz989JVyNBNZaJRgZZRHDFUIhZuJpKs4YZd+o7O/hoB9/lKAv7I8BW/+jmGcU9bP5UfXRGyQ3B69YLxm7BAdeqOMajxhouuBxqCySk8ovwihNbZjiaGgP43PUo1Ox0AXq572HCPoHIYq6VMrmBio5UHOtw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,67 +19,68 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zhJNRG4kGLN0rvh27cwqwJWiKmM4MwzlgOFDNuAoKQY=;
- b=V7Yu4uwHt2aB8TGtF6iqHHv7FTDq5xLM/4hALaOm5EHaAO8RahPjUIJYaN3dgNB9YI3DlVAY2TrcJ0PkSbHSATMhP34ItixINAURzBEaT2zUFR7Kkrw1m++hAIjf9OtfcTvXhklqaaTo85kzz54c/OtEUxKjyu6Q51yrHLuzaHo=
+ bh=eTm5U9JUJ/cReiPoPpYoU4zqjPkvz+ZXX20kbu1tgYQ=;
+ b=IiUr1tbi8h12G/XqZ5VJINUTNAkST5ljRhOn2zOWRZZzdTR4+rrXUnWsDBdKU/MV9fmXNHyDtab1OSwK9oFCirn8oFrmB1SAScEkBvKRocdcJedePZmem43/YJCi8YUaIvL5CJ4Z7QSie3sfbQ8IvEYYlPbdAvoQqm64SKOyka8=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN8PR11MB3588.namprd11.prod.outlook.com (2603:10b6:408:83::30) with
+ by BN6PR11MB3875.namprd11.prod.outlook.com (2603:10b6:405:80::37) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.26; Wed, 17 Jun
- 2020 13:07:31 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.21; Wed, 17 Jun
+ 2020 13:07:43 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3109.021; Wed, 17 Jun 2020
- 13:07:31 +0000
-Subject: Re: [oe] [meta-python][PATCH 1/7] python3-iso8601: Consolidate in a single file
+ 13:07:43 +0000
+Subject: Re: [oe] [meta-python][PATCH 2/7] python3-isodate: Consolidate in a single file
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200615103017.2714-1-leon.anavi@konsulko.com>
+ <20200615103017.2714-2-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <c20a5e97-91a6-3216-ab8a-a69ef51f9d77@windriver.com>
-Date: Wed, 17 Jun 2020 09:07:28 -0400
+Message-ID: <29fd21a4-f4a7-b425-6e3c-b4b7b49f9024@windriver.com>
+Date: Wed, 17 Jun 2020 09:07:41 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200615103017.2714-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTOPR0101CA0030.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:15::43) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200615103017.2714-2-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTOPR0101CA0009.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:15::22) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YTOPR0101CA0030.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::43) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22 via Frontend Transport; Wed, 17 Jun 2020 13:07:30 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YTOPR0101CA0009.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.21 via Frontend Transport; Wed, 17 Jun 2020 13:07:43 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: ce179157-030b-4ed9-eab1-08d812bf6473
-X-MS-TrafficTypeDiagnostic: BN8PR11MB3588:
+X-MS-Office365-Filtering-Correlation-Id: 09525339-b51e-44d7-b819-08d812bf6c0a
+X-MS-TrafficTypeDiagnostic: BN6PR11MB3875:
 X-Microsoft-Antispam-PRVS: 
-	<BN8PR11MB358842E891FB3C60269130DF9F9A0@BN8PR11MB3588.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:159;
+	<BN6PR11MB3875DB950546CFAB757A65F49F9A0@BN6PR11MB3875.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:341;
 X-Forefront-PRVS: 04371797A5
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	taTufd8gRQdIsBlWXUxgU2PVTyPSQQH/w0C8zJAdc2SsUYdOzckc8uFb70cggWuzqghgmowMOV55VS27p6uSwimnnYwCZrXFfq7oYyKKR2h/U6gzK3nbhDkciz0qI+N6XoQ4TBQ6NmnuIJYiQXrvm+pSGIOfVd94ta5rGMQp7UDlh+Yvh9uGkKe3VDJkmMGGneVKp8K5F/LLcvkoWvcOOZxMy2RATGFBOssr3J/m50gf9hGwnAWw65Ikw0xQk90dhhjbpj3nwQfeECBUORpRoGAhZ9ltuAe2JYUP+95sI9U3Tmt7aW5IDE5dQg1M8KfTBNW2oGxZJccvHdgEyFaXDkuDGph/SZ3AveJ+3FgUbJJI6IiVX3Udbt2JGnxmSx3Zov8bN1XciNnFfao++q6SpdTybn0hC5z8AoBU2lqB22hHQQ2+9avVbiT1F7ssYHbDfaDuLSKIQj3qmD58KUrOcw==
+	VUu+xeZadpzSRyS7e19Q0KYieyNrmUITObg3l6y9hBIYlH5mioohyHXbEz4lyQrEWKJHadvOdLwSHyXOYOnWUdNo1ZdJjxFcdo9H17AUILnPlBI50iCPwvB1PlUosmAfWtv82mununxo+7hjUCEd7y6Vqek3pfrAD0EHsQDSHka8M7vHB54PxqeM1ivVG9de5AIid+41xWYi9dKMcggfbPMieP5vllJod/r6MAPFWyK7tRDosZwcTnM5xCykf4ciRaim0VNmlXaVec4ZgHnAKmRD7rysZCRck1RvBLyd21qrakcUQH1BzWE41LaLvLHcVmNuLotYTKj7v2Zz0hjq6jsMhT+0/PyVVS/z3gRQ7+43+n/lC0IGZDiuA9DADoXJZ3wxZRkYAzbyOUvmzRXLEPiX45ZY3tIKN2IigVgWgS8rX4kzXt+mQFLKLX6Gy6YXKe48Vp75Ogx4P3v0gfO/sQ==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(376002)(366004)(346002)(39850400004)(136003)(66556008)(26005)(53546011)(6486002)(166002)(31686004)(8676002)(2906002)(966005)(66946007)(316002)(8936002)(16576012)(66476007)(44832011)(186003)(86362001)(33964004)(52116002)(478600001)(16526019)(36756003)(5660300002)(83380400001)(31696002)(2616005)(956004)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(39840400004)(136003)(396003)(366004)(376002)(346002)(83380400001)(2906002)(966005)(36756003)(44832011)(31686004)(2616005)(956004)(5660300002)(52116002)(66946007)(31696002)(16526019)(186003)(316002)(53546011)(66476007)(166002)(6486002)(478600001)(8676002)(16576012)(26005)(8936002)(66556008)(33964004)(86362001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	v3QuPIj1LFjhMU3qW3UGAySuSrYdrXBnho5coleE9ZiCu0gZB4GT602UL0Lk6WoESrWFZG81pX0brB7h2Acbo3FDZoZ0cwvSSxget5lHxr6i66/l9k9TOY+ywRLJoZ2GJGdVbilegEl5x4EN105/pedgr8/Bs/X2EugTV9KNK+eOFnQUI8RVI96vY14s4f+BwCX2N1if7fO3AUl1ge7aeiXHci56kqJz7Xusud4zLkli8db/Yu8sb3yjcZiulJ+Zi3giDvDgHIQEXJNXUl2geUvx7XU7lBgyI42xOpP90IRlHm0HuKsUYiOKhLMjs8QRIhTMZY61lHdqmUUm6EXJkfAYLsCApkjqWoEWYbQ3QOHwwP6ebDmUywv9iiSZqByzAi3DVksZ62/lFkmXaXr4qw8T63MryYHd4bAqOx1oUMv3iaCey3DvE5OzxG/vJ+AJd/DMujqulbqezU0JqmPqx3p73PsosGcX3dSyn12J2ms=
+	q2LBQxVRae0ika7Pst8b81ZC/wLtkqsvsTJTQMZ9Y1cWc0O7Wm4uYrTUUMN1CcSJF6nMgTvvMElZHQ4VOPbieu1DnL2k1ftGwzZLv9IwUznByVPT6fGrysjFzGy2h64Sbhl3ifJ5y7/JjhePLHtiRiqMwmyPSHhP2tRS2svgBBO10L0dssJPkzAqjcYudNpRLGe5gsElyUJanTkhqkiQQR+pN3sXhxyrfjBU0c7o9pfEFxQ8/l57/glgZLKNSipXl4KmkGg8jzvbX7nbkQVvxne0cZwdOlmKnJEeNShzK8MhY21Vxi6nY7jCLZiHM5LCBSxE0S9VOnDAWJMNj0rquioF5M4Zleo5QA7zXuZEBI9HfqLtTzxasNYEFV2wPd+OPR02qi3YWiD629hrOkEoGtiNb2LdaT/91w5PmE7Zv4u7wG8Sl2/8DqAywzH1PtFQr9uOCQrsw1XqUDCV/vG4suZX6Weyb/kEnpb0zqBul9M=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ce179157-030b-4ed9-eab1-08d812bf6473
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2020 13:07:30.8378
+X-MS-Exchange-CrossTenant-Network-Message-Id: 09525339-b51e-44d7-b819-08d812bf6c0a
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2020 13:07:43.6060
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: XifWkznMBVTpUiwdzlqcM5bmfNPn7Un1pfWj3riXeI/x0hB6odSgCA9I+KT4gp+u8axlM+z829e/fMgOAGBehArYAdKfnLbIY40Yj0HpqPo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR11MB3588
+X-MS-Exchange-CrossTenant-UserPrincipalName: tEfMx+/02hDm1LtXEskaVbg3tNuXpenUUN8QOwaVQttsTLQa3Uvbz5xL2qWRzvlbdUXXIUpPJ26rHNtcdGoldiV6DM8ub8/OTMlV5fl3ekg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB3875
 Content-Type: multipart/alternative;
- boundary="------------506D63F37EB3649544992C30"
+ boundary="------------481D1CAB5902306180DA4388"
 Content-Language: en-US
 
---------------506D63F37EB3649544992C30
+--------------481D1CAB5902306180DA4388
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -90,57 +91,56 @@ On 6/15/20 6:30 AM, Leon Anavi wrote:
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-devtools/python/python-iso8601.inc   | 14 --------------
->   .../python/python3-iso8601_0.1.12.bb             | 16 +++++++++++++++-
->   2 files changed, 15 insertions(+), 15 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python-iso8601.inc
+>   .../recipes-devtools/python/python-isodate.inc   | 14 --------------
+>   .../python/python3-isodate_0.6.0.bb              | 16 ++++++++++++++--
+>   2 files changed, 14 insertions(+), 16 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python-isodate.inc
 >
-> diff --git a/meta-python/recipes-devtools/python/python-iso8601.inc b/meta-python/recipes-devtools/python/python-iso8601.inc
+> diff --git a/meta-python/recipes-devtools/python/python-isodate.inc b/meta-python/recipes-devtools/python/python-isodate.inc
 > deleted file mode 100644
-> index a70843ead..000000000
-> --- a/meta-python/recipes-devtools/python/python-iso8601.inc
+> index 8c128919e..000000000
+> --- a/meta-python/recipes-devtools/python/python-isodate.inc
 > +++ /dev/null
 > @@ -1,14 +0,0 @@
-> -SUMMARY = "Simple module to parse ISO 8601 dates"
-> -HOMEPAGE = "http://pyiso8601.readthedocs.org/"
-> -LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=b05625f2336fa024e8d57e65c6595844"
+> -SUMMARY = "ISO 8601 date/time parser"
+> -LICENSE = "BSD-3-Clause"
+> -LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e910b35b0ef4e1f665b9a75d6afb7709"
 > -
-> -SRC_URI[md5sum] = "4de940f691c5ea759fb254384c8ddcf6"
-> -SRC_URI[sha256sum] = "49c4b20e1f38aa5cf109ddcd39647ac419f928512c869dc01d5c7098eddede82"
+> -SRC_URI[md5sum] = "0e1203fce27ce65e2d01c5f21c4d428f"
+> -SRC_URI[sha256sum] = "2e364a3d5759479cdb2d37cce6b9376ea504db2ff90252a2e5b7cc89cc9ff2d8"
 > -
-> -RDEPENDS_${PN} += "\
-> -    ${PYTHON_PN}-datetime \
-> -    ${PYTHON_PN}-numbers \
+> -inherit pypi
+> -
+> -RDEPENDS_${PN} += " \
+> -    ${PYTHON_PN}-six \
 > -"
 > -
 > -BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-iso8601_0.1.12.bb b/meta-python/recipes-devtools/python/python3-iso8601_0.1.12.bb
-> index 4a332b53b..74b5bdcb8 100644
-> --- a/meta-python/recipes-devtools/python/python3-iso8601_0.1.12.bb
-> +++ b/meta-python/recipes-devtools/python/python3-iso8601_0.1.12.bb
-> @@ -1,2 +1,16 @@
-> +SUMMARY = "Simple module to parse ISO 8601 dates"
-> +HOMEPAGE = "http://pyiso8601.readthedocs.org/"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b05625f2336fa024e8d57e65c6595844"
+> diff --git a/meta-python/recipes-devtools/python/python3-isodate_0.6.0.bb b/meta-python/recipes-devtools/python/python3-isodate_0.6.0.bb
+> index 0e79ae995..2aa64d08d 100644
+> --- a/meta-python/recipes-devtools/python/python3-isodate_0.6.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-isodate_0.6.0.bb
+> @@ -1,2 +1,14 @@
+> -inherit setuptools3
+> -require python-isodate.inc
+> +SUMMARY = "ISO 8601 date/time parser"
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e910b35b0ef4e1f665b9a75d6afb7709"
 > +
-> +SRC_URI[md5sum] = "4de940f691c5ea759fb254384c8ddcf6"
-> +SRC_URI[sha256sum] = "49c4b20e1f38aa5cf109ddcd39647ac419f928512c869dc01d5c7098eddede82"
+> +SRC_URI[md5sum] = "0e1203fce27ce65e2d01c5f21c4d428f"
+> +SRC_URI[sha256sum] = "2e364a3d5759479cdb2d37cce6b9376ea504db2ff90252a2e5b7cc89cc9ff2d8"
 > +
->   inherit pypi setuptools3
-> -require python-iso8601.inc
+> +inherit pypi setuptools3
 > +
-> +RDEPENDS_${PN} += "\
-> +    ${PYTHON_PN}-datetime \
-> +    ${PYTHON_PN}-numbers \
+> +RDEPENDS_${PN} += " \
+> +    ${PYTHON_PN}-six \
 > +"
 > +
 > +BBCLASSEXTEND = "native nativesdk"
 >
 > 
 
---------------506D63F37EB3649544992C30
+--------------481D1CAB5902306180DA4388
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -152,59 +152,58 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/15/20 6:30 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200615103017.2714-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200615103017.2714-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
-    <blockquote type="cite" cite="mid:20200615103017.2714-1-leon.anavi@konsulko.com">
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
+    <blockquote type="cite" cite="mid:20200615103017.2714-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python-iso8601.inc   | 14 --------------
- .../python/python3-iso8601_0.1.12.bb             | 16 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
- 2 files changed, 15 insertions(&#43;), 15 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-iso8601.inc
+ .../recipes-devtools/python/python-isodate.inc   | 14 --------------
+ .../python/python3-isodate_0.6.0.bb              | 16 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;--
+ 2 files changed, 14 insertions(&#43;), 16 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-isodate.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-iso8601.inc b/meta-python/recipes-devtools/python/python-iso8601.inc
+diff --git a/meta-python/recipes-devtools/python/python-isodate.inc b/meta-python/recipes-devtools/python/python-isodate.inc
 deleted file mode 100644
-index a70843ead..000000000
---- a/meta-python/recipes-devtools/python/python-iso8601.inc
+index 8c128919e..000000000
+--- a/meta-python/recipes-devtools/python/python-isodate.inc
 &#43;&#43;&#43; /dev/null
 @@ -1,14 &#43;0,0 @@
--SUMMARY = &quot;Simple module to parse ISO 8601 dates&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://pyiso8601.readthedocs.org/">&quot;http://pyiso8601.readthedocs.org/&quot;</a>
--LICENSE = &quot;MIT&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=b05625f2336fa024e8d57e65c6595844">&quot;file://LICENSE;md5=b05625f2336fa024e8d57e65c6595844&quot;</a>
+-SUMMARY = &quot;ISO 8601 date/time parser&quot;
+-LICENSE = &quot;BSD-3-Clause&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=e910b35b0ef4e1f665b9a75d6afb7709">&quot;file://PKG-INFO;beginline=8;endline=8;md5=e910b35b0ef4e1f665b9a75d6afb7709&quot;</a>
 -
--SRC_URI[md5sum] = &quot;4de940f691c5ea759fb254384c8ddcf6&quot;
--SRC_URI[sha256sum] = &quot;49c4b20e1f38aa5cf109ddcd39647ac419f928512c869dc01d5c7098eddede82&quot;
+-SRC_URI[md5sum] = &quot;0e1203fce27ce65e2d01c5f21c4d428f&quot;
+-SRC_URI[sha256sum] = &quot;2e364a3d5759479cdb2d37cce6b9376ea504db2ff90252a2e5b7cc89cc9ff2d8&quot;
 -
--RDEPENDS_${PN} &#43;= &quot;\
--    ${PYTHON_PN}-datetime \
--    ${PYTHON_PN}-numbers \
+-inherit pypi
+-
+-RDEPENDS_${PN} &#43;= &quot; \
+-    ${PYTHON_PN}-six \
 -&quot;
 -
--BBCLASSEXTEND = &quot;native nativesdk&quot;
-diff --git a/meta-python/recipes-devtools/python/python3-iso8601_0.1.12.bb b/meta-python/recipes-devtools/python/python3-iso8601_0.1.12.bb
-index 4a332b53b..74b5bdcb8 100644
---- a/meta-python/recipes-devtools/python/python3-iso8601_0.1.12.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-iso8601_0.1.12.bb
-@@ -1,2 &#43;1,16 @@
-&#43;SUMMARY = &quot;Simple module to parse ISO 8601 dates&quot;
-&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://pyiso8601.readthedocs.org/">&quot;http://pyiso8601.readthedocs.org/&quot;</a>
-&#43;LICENSE = &quot;MIT&quot;
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=b05625f2336fa024e8d57e65c6595844">&quot;file://LICENSE;md5=b05625f2336fa024e8d57e65c6595844&quot;</a>
+-BBCLASSEXTEND = &quot;native nativesdk<a class="moz-txt-link-rfc2396E" href="mailto:diff--gita/meta-python/recipes-devtools/python/python3-isodate_0.6.0.bbb/meta-python/recipes-devtools/python/python3-isodate_0.6.0.bbindex0e79ae995..2aa64d08d100644---a/meta-python/recipes-devtools/python/python3-isodate_0.6.0.bb&#43;&#43;&#43;b/meta-python/recipes-devtools/python/python3-isodate_0.6.0.bb@@-1,2&#43;1,14@@-inheritsetuptools3-requirepython-isodate.inc&#43;SUMMARY=">&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-isodate_0.6.0.bb b/meta-python/recipes-devtools/python/python3-isodate_0.6.0.bb
+index 0e79ae995..2aa64d08d 100644
+--- a/meta-python/recipes-devtools/python/python3-isodate_0.6.0.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-isodate_0.6.0.bb
+@@ -1,2 &#43;1,14 @@
+-inherit setuptools3
+-require python-isodate.inc
+&#43;SUMMARY = &quot;</a>ISO 8601 date/time parser&quot;
+&#43;LICENSE = &quot;BSD-3-Clause&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=e910b35b0ef4e1f665b9a75d6afb7709">&quot;file://PKG-INFO;beginline=8;endline=8;md5=e910b35b0ef4e1f665b9a75d6afb7709&quot;</a>
 &#43;
-&#43;SRC_URI[md5sum] = &quot;4de940f691c5ea759fb254384c8ddcf6&quot;
-&#43;SRC_URI[sha256sum] = &quot;49c4b20e1f38aa5cf109ddcd39647ac419f928512c869dc01d5c7098eddede82&quot;
+&#43;SRC_URI[md5sum] = &quot;0e1203fce27ce65e2d01c5f21c4d428f&quot;
+&#43;SRC_URI[sha256sum] = &quot;2e364a3d5759479cdb2d37cce6b9376ea504db2ff90252a2e5b7cc89cc9ff2d8&quot;
 &#43;
- inherit pypi setuptools3
--require python-iso8601.inc
+&#43;inherit pypi setuptools3
 &#43;
-&#43;RDEPENDS_${PN} &#43;= &quot;\
-&#43;    ${PYTHON_PN}-datetime \
-&#43;    ${PYTHON_PN}-numbers \
+&#43;RDEPENDS_${PN} &#43;= &quot; \
+&#43;    ${PYTHON_PN}-six \
 &#43;&quot;
 &#43;
 &#43;BBCLASSEXTEND = &quot;native nativesdk&quot;
@@ -217,4 +216,4 @@ index 4a332b53b..74b5bdcb8 100644
   </body>
 </html>
 
---------------506D63F37EB3649544992C30--
+--------------481D1CAB5902306180DA4388--
