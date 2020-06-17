@@ -1,80 +1,79 @@
 Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.7802.1592400955725211615
+ by mx.groups.io with SMTP id smtpd.web11.7854.1592401137831466111
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Jun 2020 06:35:59 -0700
+ Wed, 17 Jun 2020 06:38:58 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.73,522,1583164800"; 
-   d="scan'208,217";a="94743901"
+   d="scan'208,217";a="94744011"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 17 Jun 2020 21:35:47 +0800
+  by heian.cn.fujitsu.com with ESMTP; 17 Jun 2020 21:38:54 +0800
 Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id B66E149B1103
-	for <openembedded-devel@lists.openembedded.org>; Wed, 17 Jun 2020 21:35:44 +0800 (CST)
+	by cn.fujitsu.com (Postfix) with ESMTP id E1D2D4CE30E4
+	for <openembedded-devel@lists.openembedded.org>; Wed, 17 Jun 2020 21:38:50 +0800 (CST)
 Received: from G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) by
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Wed, 17 Jun 2020 21:35:44 +0800
+ (TLS) id 15.0.1497.2; Wed, 17 Jun 2020 21:38:51 +0800
 Received: from G08CNEXMBPEKD05.g08.fujitsu.local ([::1]) by
  G08CNEXMBPEKD05.g08.fujitsu.local ([fe80::4086:9520:5ef9:407d%14]) with mapi
- id 15.00.1497.006; Wed, 17 Jun 2020 21:35:43 +0800
+ id 15.00.1497.006; Wed, 17 Jun 2020 21:38:50 +0800
 From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-networking][PATCH] openipmi: upgrade 2.0.28 -> 2.0.29
-Thread-Topic: [oe] [meta-networking][PATCH] openipmi: upgrade 2.0.28 ->
-  2.0.29
-Thread-Index: AQHWRKqGSpi12xBbcUqTG/EOcxxcIg==
-Date: Wed, 17 Jun 2020 13:35:43 +0000
-Message-ID: <1592400942777.98825@cn.fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] twm: upgrade 1.0.10 -> 1.0.11
+Thread-Topic: [oe] [meta-oe] [PATCH] twm: upgrade 1.0.10 -> 1.0.11
+Thread-Index: AQHWRKrFvI7NtYiTW0+dhq9pJ3pKHA==
+Date: Wed, 17 Jun 2020 13:38:50 +0000
+Message-ID: <1592401130021.4922@cn.fujitsu.com>
 Accept-Language: zh-CN, en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.167.33.78]
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: B66E149B1103.A077E
+X-yoursite-MailScanner-ID: E1D2D4CE30E4.A28BC
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
 X-Spam-Status: No
 Content-Language: zh-CN
 Content-Type: multipart/alternative;
-	boundary="_000_159240094277798825cnfujitsucom_"
+	boundary="_000_15924011300214922cnfujitsucom_"
 
---_000_159240094277798825cnfujitsucom_
+--_000_15924011300214922cnfujitsucom_
 Content-Type: text/plain; charset="gb2312"
 Content-Transfer-Encoding: base64
 
-Pz8/U2lnbmVkLW9mZi1ieTogV2FuZyBNaW5neXUgPHdhbmdteUBjbi5mdWpp
-dHN1LmNvbT4NCi0tLQ0KIC4uLi9vcGVuaXBtaS97b3BlbmlwbWlfMi4wLjI4
-LmJiID0+IG9wZW5pcG1pXzIuMC4yOS5iYn0gICAgICAgfCA0ICsrLS0NCiAx
-IGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygt
-KQ0KIHJlbmFtZSBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L29w
-ZW5pcG1pL3tvcGVuaXBtaV8yLjAuMjguYmIgPT4gb3BlbmlwbWlfMi4wLjI5
-LmJifSAoOTYlKQ0KDQpkaWZmIC0tZ2l0IGEvbWV0YS1uZXR3b3JraW5nL3Jl
-Y2lwZXMtc3VwcG9ydC9vcGVuaXBtaS9vcGVuaXBtaV8yLjAuMjguYmIgYi9t
-ZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L29wZW5pcG1pL29wZW5p
-cG1pXzIuMC4yOS5iYg0Kc2ltaWxhcml0eSBpbmRleCA5NiUNCnJlbmFtZSBm
-cm9tIG1ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvb3BlbmlwbWkv
-b3BlbmlwbWlfMi4wLjI4LmJiDQpyZW5hbWUgdG8gbWV0YS1uZXR3b3JraW5n
-L3JlY2lwZXMtc3VwcG9ydC9vcGVuaXBtaS9vcGVuaXBtaV8yLjAuMjkuYmIN
-CmluZGV4IGYxOTZlYjk5Mi4uODU2MzRhNzBlIDEwMDY0NA0KLS0tIGEvbWV0
-YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9vcGVuaXBtaS9vcGVuaXBt
-aV8yLjAuMjguYmINCisrKyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1
-cHBvcnQvb3BlbmlwbWkvb3BlbmlwbWlfMi4wLjI5LmJiDQpAQCAtMzUsOCAr
-MzUsOCBAQCBTUkNfVVJJID0gIiR7U09VUkNFRk9SR0VfTUlSUk9SfS9vcGVu
-aXBtaS9PcGVuSVBNSS0ke1BWfS50YXIuZ3ogXA0KDQogUyA9ICIke1dPUktE
-SVJ9L09wZW5JUE1JLSR7UFZ9Ig0KDQotU1JDX1VSSVttZDVzdW1dID0gImJh
-MzdmMDhlMzA2MDYyZWM3M2M3ZWQyYTJiZDRkNWY0Ig0KLVNSQ19VUklbc2hh
-MjU2c3VtXSA9ICI4ZThiMWRlMmE5YTA0MWI0MTkxMzNlY2IyMWY5NTZlOTk5
-ODQxY2YyZTc1OWU5NzNlZWJhOWEzNmY4YjQwOTk2Ig0KK1NSQ19VUklbbWQ1
-c3VtXSA9ICI0NmI0NTJlOTVkNjljOTJlNDE3MmIzNjczZWQ4OGQ1MiINCitT
-UkNfVVJJW3NoYTI1NnN1bV0gPSAiMjI0NDEyNDU3OWFmYjE0ZTU2OWYzNDM5
-M2U5YWM2MWU2NThhMjhiNmZmYThlNWMwZDJjMWMxMmE4Y2U2OTVjZCINCg0K
-IGluaGVyaXQgYXV0b3Rvb2xzLWJyb2tlbnNlcCBwa2djb25maWcgcHl0aG9u
-M25hdGl2ZSBwZXJsbmF0aXZlIHVwZGF0ZS1yYy5kIHN5c3RlbWQgY3Bhbi1i
-YXNlDQoNCi0tDQoyLjE3LjE/DQoNCgoK
+Pz9TaWduZWQtb2ZmLWJ5OiBXYW5nIE1pbmd5dSA8d2FuZ215QGNuLmZ1aml0
+c3UuY29tPg0KLS0tDQogLi4uL3hvcmctYXBwL3t0d21fMS4wLjEwLmJiID0+
+IHR3bV8xLjAuMTEuYmJ9ICAgICAgICAgICAgICAgIHwgNSArKystLQ0KIDEg
+ZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0p
+DQogcmVuYW1lIG1ldGEtb2UvcmVjaXBlcy1ncmFwaGljcy94b3JnLWFwcC97
+dHdtXzEuMC4xMC5iYiA9PiB0d21fMS4wLjExLmJifSAoNjclKQ0KDQpkaWZm
+IC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWdyYXBoaWNzL3hvcmctYXBwL3R3
+bV8xLjAuMTAuYmIgYi9tZXRhLW9lL3JlY2lwZXMtZ3JhcGhpY3MveG9yZy1h
+cHAvdHdtXzEuMC4xMS5iYg0Kc2ltaWxhcml0eSBpbmRleCA2NyUNCnJlbmFt
+ZSBmcm9tIG1ldGEtb2UvcmVjaXBlcy1ncmFwaGljcy94b3JnLWFwcC90d21f
+MS4wLjEwLmJiDQpyZW5hbWUgdG8gbWV0YS1vZS9yZWNpcGVzLWdyYXBoaWNz
+L3hvcmctYXBwL3R3bV8xLjAuMTEuYmINCmluZGV4IDNhMjI2N2FlOS4uNDVj
+YWFhY2YyIDEwMDY0NA0KLS0tIGEvbWV0YS1vZS9yZWNpcGVzLWdyYXBoaWNz
+L3hvcmctYXBwL3R3bV8xLjAuMTAuYmINCisrKyBiL21ldGEtb2UvcmVjaXBl
+cy1ncmFwaGljcy94b3JnLWFwcC90d21fMS4wLjExLmJiDQpAQCAtNSw4ICs1
+LDkgQEAgREVQRU5EUyArPSAiIGxpYnhleHQgbGlieHQgbGlieG11IGJpc29u
+LW5hdGl2ZSINCiBMSUNFTlNFID0gIk1JVCINCiBMSUNfRklMRVNfQ0hLU1VN
+ID0gImZpbGU6Ly9DT1BZSU5HO21kNT00YzZkNDJlZjYwZTgxNjZhYTI2NjA2
+NTI0YzBiOTU4NiINCg0KLVNSQ19VUklbbWQ1c3VtXSA9ICJlMzIyYzA4ZWVi
+NjM1ZjkyNGVkZTViOGViYTNkYjU0ZSINCi1TUkNfVVJJW3NoYTI1NnN1bV0g
+PSAiNjQ0OWVhZGNhMTZjZTBmMGQ5MDA2MDViMGNjMDIwYjk1ZjQwNjE5MjYx
+YjdiZWNjZmI0NmJjYzE4MzY0NDVkNyINCitTUkNfVVJJID0gIiR7WE9SR19N
+SVJST1J9L2luZGl2aWR1YWwvYXBwLyR7QlBOfS0ke1BWfS50YXIuZ3oiDQor
+U1JDX1VSSVttZDVzdW1dID0gIjQ4ZTgzMjEwYjM5YTdiZmI0OTI2MDRiYTBi
+Y2ZiMTllIg0KK1NSQ19VUklbc2hhMjU2c3VtXSA9ICI0MTBlY2FiYWM1NGU2
+ZGI3YWZkNWMyMGE3OGQ4OWMwMTM0ZjNjNzRiMTQ5YmVlNzFiMWZlYzc3NWU2
+ZTA2MGNjIg0KDQogRklMRVNfJHtQTn0gKz0gIiR7ZGF0YWRpcn0vWDExL3R3
+bS9zeXN0ZW0udHdtcmMiDQogQUxURVJOQVRJVkVfTkFNRSA9ICJ4LXdpbmRv
+dy1tYW5hZ2VyIg0KLS0NCjIuMTcuMT8NCg0KCgo=
 
---_000_159240094277798825cnfujitsucom_
+--_000_15924011300214922cnfujitsucom_
 Content-Type: text/html; charset="gb2312"
 Content-Transfer-Encoding: quoted-printable
 
@@ -86,47 +85,45 @@ argin-bottom: 0px; }--></style>
 </head>
 <body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
 FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
-<div>&#8203;&#8203;&#8203;Signed-off-by: Wang Mingyu &lt;wangmy@cn.fujitsu.=
-com&gt;</div>
+<div>&#8203;&#8203;Signed-off-by: Wang Mingyu &lt;wangmy@cn.fujitsu.com&gt;=
+</div>
 <div>---</div>
-<div>&nbsp;.../openipmi/{openipmi_2.0.28.bb =3D&gt; openipmi_2.0.29.bb}&nbs=
-p; &nbsp; &nbsp; &nbsp;| 4 &#43;&#43;--</div>
-<div>&nbsp;1 file changed, 2 insertions(&#43;), 2 deletions(-)</div>
-<div>&nbsp;rename meta-networking/recipes-support/openipmi/{openipmi_2.0.28=
-.bb =3D&gt; openipmi_2.0.29.bb} (96%)</div>
+<div>&nbsp;.../xorg-app/{twm_1.0.10.bb =3D&gt; twm_1.0.11.bb}&nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | 5 &#43;&#43;&#43;--</div>
+<div>&nbsp;1 file changed, 3 insertions(&#43;), 2 deletions(-)</div>
+<div>&nbsp;rename meta-oe/recipes-graphics/xorg-app/{twm_1.0.10.bb =3D&gt; =
+twm_1.0.11.bb} (67%)</div>
 <div><br>
 </div>
-<div>diff --git a/meta-networking/recipes-support/openipmi/openipmi_2.0.28.=
-bb b/meta-networking/recipes-support/openipmi/openipmi_2.0.29.bb</div>
-<div>similarity index 96%</div>
-<div>rename from meta-networking/recipes-support/openipmi/openipmi_2.0.28.b=
-b</div>
-<div>rename to meta-networking/recipes-support/openipmi/openipmi_2.0.29.bb<=
+<div>diff --git a/meta-oe/recipes-graphics/xorg-app/twm_1.0.10.bb b/meta-oe=
+/recipes-graphics/xorg-app/twm_1.0.11.bb</div>
+<div>similarity index 67%</div>
+<div>rename from meta-oe/recipes-graphics/xorg-app/twm_1.0.10.bb</div>
+<div>rename to meta-oe/recipes-graphics/xorg-app/twm_1.0.11.bb</div>
+<div>index 3a2267ae9..45caaacf2 100644</div>
+<div>--- a/meta-oe/recipes-graphics/xorg-app/twm_1.0.10.bb</div>
+<div>&#43;&#43;&#43; b/meta-oe/recipes-graphics/xorg-app/twm_1.0.11.bb</div>
+<div>@@ -5,8 &#43;5,9 @@ DEPENDS &#43;=3D &quot; libxext libxt libxmu bison=
+-native&quot;</div>
+<div>&nbsp;LICENSE =3D &quot;MIT&quot;</div>
+<div>&nbsp;LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3D4c6d42ef60e8166a=
+a26606524c0b9586&quot;</div>
+<div><br>
+</div>
+<div>-SRC_URI[md5sum] =3D &quot;e322c08eeb635f924ede5b8eba3db54e&quot;</div>
+<div>-SRC_URI[sha256sum] =3D &quot;6449eadca16ce0f0d900605b0cc020b95f406192=
+61b7beccfb46bcc1836445d7&quot;</div>
+<div>&#43;SRC_URI =3D &quot;${XORG_MIRROR}/individual/app/${BPN}-${PV}.tar.=
+gz&quot;</div>
+<div>&#43;SRC_URI[md5sum] =3D &quot;48e83210b39a7bfb492604ba0bcfb19e&quot;<=
 /div>
-<div>index f196eb992..85634a70e 100644</div>
-<div>--- a/meta-networking/recipes-support/openipmi/openipmi_2.0.28.bb</div>
-<div>&#43;&#43;&#43; b/meta-networking/recipes-support/openipmi/openipmi_2.=
-0.29.bb</div>
-<div>@@ -35,8 &#43;35,8 @@ SRC_URI =3D &quot;${SOURCEFORGE_MIRROR}/openipmi=
-/OpenIPMI-${PV}.tar.gz \</div>
+<div>&#43;SRC_URI[sha256sum] =3D &quot;410ecabac54e6db7afd5c20a78d89c0134f3=
+c74b149bee71b1fec775e6e060cc&quot;</div>
 <div><br>
 </div>
-<div>&nbsp;S =3D &quot;${WORKDIR}/OpenIPMI-${PV}&quot;</div>
-<div><br>
+<div>&nbsp;FILES_${PN} &#43;=3D &quot;${datadir}/X11/twm/system.twmrc&quot;=
 </div>
-<div>-SRC_URI[md5sum] =3D &quot;ba37f08e306062ec73c7ed2a2bd4d5f4&quot;</div>
-<div>-SRC_URI[sha256sum] =3D &quot;8e8b1de2a9a041b419133ecb21f956e999841cf2=
-e759e973eeba9a36f8b40996&quot;</div>
-<div>&#43;SRC_URI[md5sum] =3D &quot;46b452e95d69c92e4172b3673ed88d52&quot;<=
-/div>
-<div>&#43;SRC_URI[sha256sum] =3D &quot;2244124579afb14e569f34393e9ac61e658a=
-28b6ffa8e5c0d2c1c12a8ce695cd&quot;</div>
-<div><br>
-</div>
-<div>&nbsp;inherit autotools-brokensep pkgconfig python3native perlnative u=
-pdate-rc.d systemd cpan-base</div>
-<div><br>
-</div>
+<div>&nbsp;ALTERNATIVE_NAME =3D &quot;x-window-manager&quot;</div>
 <div>--</div>
 <div>2.17.1&#8203;<br>
 </div>
@@ -135,4 +132,4 @@ pdate-rc.d systemd cpan-base</div>
 </body>
 </html>
 
---_000_159240094277798825cnfujitsucom_--
+--_000_15924011300214922cnfujitsucom_--
