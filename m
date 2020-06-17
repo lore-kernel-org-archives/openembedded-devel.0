@@ -1,17 +1,17 @@
-Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.84])
- by mx.groups.io with SMTP id smtpd.web12.9263.1592405076700139952
+Received: from NAM02-CY1-obe.outbound.protection.outlook.com (NAM02-CY1-obe.outbound.protection.outlook.com [40.107.76.74])
+ by mx.groups.io with SMTP id smtpd.web11.9308.1592405087254868180
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Jun 2020 07:44:37 -0700
+ Wed, 17 Jun 2020 07:44:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=H2fgoCWr;
- spf=pass (domain: windriver.com, ip: 40.107.75.84, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=a5T0xANP;
+ spf=pass (domain: windriver.com, ip: 40.107.76.74, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LFoblI8c1n3hp2XjBCFXgUNf+bf6YCKwHW4b7c5pu+8ejBVS2jSdHUeKxY1kIwPU01HRWdFbCKm5rjGzonatY6wlFHhAPKtD2e9SeQCUEHt7AYYGKCaiBCiy4OcWwUSi+yP+nydhqWlStVNO4QjFHBcjQYIYuB+zhCJxYuc36MSdYFeqHlqKZat/45EX/O2hTJ6de8jKe3lFZnVwTog10hYlCX5XJOxfBbyjHFHsTocSUV3zQOuU8k+QNeiuhVIUYqeDj5lsRRvmFH3I/vdRwJ2z6X0MPuaP/KBetv7RjGIWJ5EoBILLECw77AA8p+hzI0ZKUm2oUlnML4DSD2/oHA==
+ b=Gz8DmddlXI9jL9zAm+eqslUvwTWDsum7Skt7GYazleJekfES2ZIZBzIKdwvG8dFq1n3jiSv8o46zLS8US6Wbqjg9vMfX0E3A8U5D/LWYR1e4P1eH2NRfHnfGtMjo8p0ftMjiiv4Cu+m9gOeoZ9uV04rNzGCDgTKW+Ilc2BThF0jo42qus5OFVoXYwjimjqq9R5AOPie51AhrgVVHxw4Ktvy8hUj1NjGKYvuD4hexBuXnwlqa+6zeDNRX21TxlKMeb152xY2cWP1CeLwY4Rp4MBFMC2/lsmGEtkqCo4dKQyjS93TQ5OeqGs+55j+W2ONyWOovo8RF0m1NdHkKI4oI4Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2k2rJdE8DabqtgLnjZgHbl9FDQMun8eytp7e3moxeKY=;
- b=Upx6Uu2KkzC0C7ZLnBSIKPurQ+B/mcDjNcb1e2RteTNE6Q1W4hd0JPa1k53pE7nGfansc7lWAeZluclA199CaDyLn19zgipTbKE2jg6GcJLHQ3EmF1EiJpmvAWdriB7EbPUb4H0WYAPgL/1oyCeYdzVlPRcGlevg8+MrjdKT7lNDAYSONavZYa+nQlno1Xn4IxtHoXFNBmvQloGHbfbjLr4WoEZChvukz5NHuf0HfFCMIjAIyEL7av+q2gN7tZumqVvAlFWm4N234OzrpFQGZTpQwqpC16oKV2IiuMRr52uhMvoW2qdVL4rlPlaFaRRi9j5pALFSEo/4/y9FePyk0Q==
+ bh=kUx9XmhWQMdlsdTh0q8Kxgrf4J40LDe/zhhFBnRMF0E=;
+ b=IIY750LXKnzP3SiDtBJfL0OVcgmHOLSZkq2xWxN2pxN7Jvb3x7COhWhYX3yNU4nC8xtX3lqGw6ou0mSEGqFu9AfzdDbMZwlQ8QajzjxoB6TJYN8kC/JF0eCYxXwSa80qlKleH1d3pJZNDrvXmjxz6/WHHG8eJugE7TMGd0rzTHgSlJilMKSc4i9y/paVjjh3ou6DEcq6W2MImkz8rRY/mKi1utnPlLplazCX+xD8XUtSt7L877NOPQlkltU02AYMZW9l/B0oTK016QlQzMk7d464hAZ70CxXvZUkcpfUGX9Wxd803OT/54OnQwG5XogKafdMfzIikAUD3TZd5rs92g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2k2rJdE8DabqtgLnjZgHbl9FDQMun8eytp7e3moxeKY=;
- b=H2fgoCWr+J7sLURKx8NiZ0ErXhbzQ/GZ2PmC9useVoEuSnGDe2CdSs71tpcnq7C4PZFzQoQBTxgm0o8MBKGXyKPOFRxhHOmn7vPvSKxJLDhnXK9g3qI9U69I85dU27P5Iy0kDFg9CgacSIb/i8mXaT0o41C5sMG68GE0b2gPbvc=
+ bh=kUx9XmhWQMdlsdTh0q8Kxgrf4J40LDe/zhhFBnRMF0E=;
+ b=a5T0xANP9lXxWKU/pZkRPWFQnPt9MthgPHpt/NXXSqDrOv1G5hApNMeXCzPYYZZgLq6/AsT0SRHDDMcfX4mvOGI/ppcz4E/KDPBK/s25rm0LUQAuwoFqlZ7KwRaZA82x6t9n1IPTYAGvBxLr2akUzRIoMcLIYFxI9jbMi7dnRyc=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,144 +28,152 @@ Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
  by BN6PR11MB1875.namprd11.prod.outlook.com (2603:10b6:404:104::11) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22; Wed, 17 Jun
- 2020 14:44:34 +0000
+ 2020 14:44:46 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3109.021; Wed, 17 Jun 2020
- 14:44:34 +0000
-Subject: Re: [oe] [meta-python] [PATCH] python3-intervals: Enable ptest
+ 14:44:46 +0000
+Subject: Re: [oe] [meta-python] [PATCH] python3-ipy: Enable ptest
 To: zangrc <zangrc.fnst@cn.fujitsu.com>,
  openembedded-devel@lists.openembedded.org
-References: <1592231844-3955-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+References: <1592231885-4040-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <2a1aa3c9-6166-41fa-80cf-5f8e7a3bad8f@windriver.com>
-Date: Wed, 17 Jun 2020 10:44:32 -0400
+Message-ID: <37d43bf5-2d44-b9b6-cd64-968116f1f438@windriver.com>
+Date: Wed, 17 Jun 2020 10:44:43 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <1592231844-3955-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-ClientProxiedBy: YTBPR01CA0020.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:14::33) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <1592231885-4040-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-ClientProxiedBy: YTBPR01CA0031.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:14::44) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YTBPR01CA0020.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:14::33) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22 via Frontend Transport; Wed, 17 Jun 2020 14:44:34 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YTBPR01CA0031.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:14::44) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22 via Frontend Transport; Wed, 17 Jun 2020 14:44:45 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: e7dc9bcc-1938-45c7-84a8-08d812ccf3b6
+X-MS-Office365-Filtering-Correlation-Id: a30b0249-b641-4c2b-e911-08d812ccfa72
 X-MS-TrafficTypeDiagnostic: BN6PR11MB1875:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB187553A156F2A1DF4336E49E9F9A0@BN6PR11MB1875.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:127;
+	<BN6PR11MB1875E5AFA192F534111B8F189F9A0@BN6PR11MB1875.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:37;
 X-Forefront-PRVS: 04371797A5
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	781huXvR4i7iDsicLq7tdIkJacYpXI+gBZQqjSzbkNv/wk5Ty6nw0bZyfgGxMgof8pPgI1k6nWplnnfJk1DEc7/EAOfpFIHbOslPgs6zl6t6HwvJlmW+QlOzVUfl5SAHh3GlcLOw9bbMVS+DtuAob0aWIyQlO58kPSE1RYr+DeLkTR5KRYvbQW0f/XELxRbMKZVmTbPxqx6FsvuGNItrphShBhME1O9E3nugQMuQfqYSCrq8Elf7ERgMfDkCioMRgN/yz98kk8tUvP+veA8PZdEBEOpBNdIsocotKlZrMQ0SJeJOAlVU9PzGrnWOVVGpCkYbiwB+g97YmcA7caPelRDlhlDiL7bmYqVNsbQ3DT2NFMcZIaMdq5/cZZ5Lhq6M7/GnfXhyyxsjGDNTK0/Ir8dXXhpxOiUs7WtDs+9X0ae7mmin5TkYdT3GlWaBriPn/dP+dHTKPLx4FvlhjCsvmw==
+	8/17dEL4QoJaluPbLCCTNdU3pnIMPz/F+iVnwnuKgAfDOYl3cnNniQA+tofY9q2MZJb0+YhulDQpVblNW5QkuhL4LHV9ttOUh5sjFEYjW9S4aGlTRNqse3cK44mvx7eUBOHANqxWCFi2tnXivSnlMBjR1vC4qktgpw0QUOzkUuRmhdh+IQT3ceiaE3A9IHb3wA4Rfh3crljeaq/e7u0SguLHuXgxIBhSRfKBxs73LaYU2K+JcgUlnu9MBAP9mw3x4GjbWVQE8kQsiNZnZhLQGBk5gNuesO2k5sXBldSl/Z5zn11EdF224gecv2dijyfTgYtAA1wCwaAWckxw0O09KjwCuZZw+DmZ5o7u7ANmwXOJtU7dtu+bmePpYq8ttxXO3wQlNgTUR5akpFoTXVbUbd/vO5ZpBtOKUZ77Sf/kpal0qz0MODSVCKbWsnkghgHS2nUtUVPozsi6fTESEJU+xw==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(366004)(376002)(396003)(136003)(346002)(39850400004)(2906002)(26005)(966005)(16526019)(66476007)(66556008)(186003)(52116002)(66946007)(5660300002)(316002)(16576012)(53546011)(478600001)(44832011)(6486002)(33964004)(956004)(2616005)(166002)(8936002)(31686004)(86362001)(31696002)(8676002)(83380400001)(36756003)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	SgZ/1hlXgqELE3dXP452qeG8hvTI7RkXKTGeQMpWms+zO0vEOIbQPfuLB9c8+1/75ihEdJRKITPl4EHHmEUdxFE4amdKrVf/VriE4HLWK5xMNQtlgFZ4v51pxVLwqB7geeQzlOxA33fqixYxkKqgnU9SQMvt3YR6GT0GDuwVFD4Fb+paG+VAxrVrcf/RhfFp9KhAhIOYSq/SYtP1DISU7V73pQstq+m1Xl38nQeYRFDnRGiKMLMfVG0aJK3ZbAgaJo2UuG8D6n1+HceGsSaKneg+prfktZzra6SrhlA00hXo63kAanCwSR601BtmqYYLFCwnRq9ii3jUbqNQkhXefUMQgn+fMHVLPNFmRQfIo9LRqMhbOW1qH/EmEgud5Hso5p3hQyaIjZ0sX8cbpy3pQbV2/HHMRXYi5pbLs2ybtK4XlyN5smvamEa1f9G9v3ca6L747/0A3GekO5jlUKwyKaELrofuAYxQHb5gc+i34PE+42CWAKXpHzMb/WvIKFcE
+	oMcd0IN6d3zxhIuFJ03FZOqYZ3uXU1g/25Vk0AJCgQx6/TwCoZdv3AhIKW54KlQV+1k4WBAkMOCdXZB96qeHQrPIrcpnQnrPwrirGtDNdhqpt0gqrdQoILuUmxbNSWgHcBEZufAx+D0LKCUuxLWBhe8J5k9tmE8hqz40xmhfd3TElfIVVmITyN5iDEWZA2XCZh1DZcyS9soT55RJoji9ymr3FgbOjP2XCeevGyME7gG6Le2EuyK+dRp2ll3PqCKU6hEISfp0Qpn6gAlyTu9n8K8clf40dP+XmG8mQSaw8YfMKqkuFtP62O7abGgQfxY3YZQDyuhVa2IS+pesAWnAyiP/ytpcLli6/FlfO/Bz0n5ncip0h3utOX0fuwVKExwQQiUEcPqySxxNDr8fzXGmJ1ym3FRfXKJ86Pnv1rtRqFby+ot9QE/D658HuoojP0l13KLOLky3dKIQpRzkrmfCslpeLxt6tzY7jOeK9Fv8vEYyK/BPNmnkejsiS/ZBICSP
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e7dc9bcc-1938-45c7-84a8-08d812ccf3b6
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2020 14:44:34.5706
+X-MS-Exchange-CrossTenant-Network-Message-Id: a30b0249-b641-4c2b-e911-08d812ccfa72
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2020 14:44:45.8855
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WlEN1KasuW8rbd3k+s8nD3ihq5l1lSeNO/nvIIC8WK4EYElALCdkhSiMSPYjSrvAOlEQYVe0yHZcoonNXZVeCw4psXF1whAYsXYVddwsKpk=
+X-MS-Exchange-CrossTenant-UserPrincipalName: PQqc86LJP4r/77Ery95OcMpktDyyZCndhvx94vhMzNlVFCWSSlE0Vc3uOdHqZXvm/1fGVqvTcmXITZvLE32U5DFPlKYTKNJOTSbeHsxCeuc=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1875
 Content-Type: multipart/alternative;
- boundary="------------09015CE5A7FF0E9FB0E18FA2"
+ boundary="------------BFCC3DD98AF2F08F013792F9"
 Content-Language: en-US
 
---------------09015CE5A7FF0E9FB0E18FA2
+--------------BFCC3DD98AF2F08F013792F9
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 6/15/20 10:37 AM, zangrc wrote:
+On 6/15/20 10:38 AM, zangrc wrote:
 > -Consolidate into a single file.
 >
 > Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python-intervals.inc               | 15 ----------
->   .../python/python3-intervals/run-ptest        |  3 ++
->   .../python/python3-intervals_1.10.0.bb        | 30 +++++++++++++++++--
->   3 files changed, 31 insertions(+), 17 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python-intervals.inc
->   create mode 100644 meta-python/recipes-devtools/python/python3-intervals/run-ptest
+>   .../recipes-devtools/python/python-ipy.inc    | 19 -----------
+>   .../python/python3-ipy/run-ptest              |  3 ++
+>   .../python/python3-ipy_1.00.bb                | 34 +++++++++++++++++--
+>   3 files changed, 35 insertions(+), 21 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python-ipy.inc
+>   create mode 100644 meta-python/recipes-devtools/python/python3-ipy/run-ptest
 >
-> diff --git a/meta-python/recipes-devtools/python/python-intervals.inc b/meta-python/recipes-devtools/python/python-intervals.inc
+> diff --git a/meta-python/recipes-devtools/python/python-ipy.inc b/meta-python/recipes-devtools/python/python-ipy.inc
 > deleted file mode 100644
-> index 4489aa59d..000000000
-> --- a/meta-python/recipes-devtools/python/python-intervals.inc
+> index 46b2fad03..000000000
+> --- a/meta-python/recipes-devtools/python/python-ipy.inc
 > +++ /dev/null
-> @@ -1,15 +0,0 @@
-> -DESCRIPTION = "Interval arithmetic for Python"
-> -HOMEPAGE = "https://github.com/AlexandreDecan/python-intervals"
+> @@ -1,19 +0,0 @@
+> -SUMMARY = "IPy - class and tools for handling of IPv4 and IPv6 addresses and networks"
+> -DESCRIPTION = "IPy is a Python module for handling IPv4 and IPv6 Addresses and Networks \
+> -in a fashion similar to perl's Net::IP and friends. The IP class allows \
+> -a comfortable parsing and handling for most notations in use for IPv4 \
+> -and IPv6 Addresses and Networks."
 > -SECTION = "devel/python"
+> -HOMEPAGE = "https://github.com/autocracy/python-ipy"
 > -
-> -LICENSE = "LGPLv3"
-> -LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab"
+> -LICENSE = "BSD-3-Clause"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=848d24919845901b4f48bae5f13252e6"
 > -
-> -PYPI_PACKAGE := "python-intervals"
+> -SRC_URI[md5sum] = "1a90c68174234672241a7e60c7ea0fb9"
+> -SRC_URI[sha256sum] = "2f2bf658a858d43868d8a4352b3889cf78c66e2ce678b300dcf518c9149ba621"
 > -
 > -inherit pypi
 > -
-> -SRC_URI[md5sum] = "8955317ff4e42590c90ba6247b1caaed"
-> -SRC_URI[sha256sum] = "0d26746eaed0be78a61dd289bb7a10721b08770bb3e807614835f490d514f2a5"
+> -PYPI_PACKAGE = "IPy"
 > -
 > -BBCLASSEXTEND = "native"
-> diff --git a/meta-python/recipes-devtools/python/python3-intervals/run-ptest b/meta-python/recipes-devtools/python/python3-intervals/run-ptest
+> diff --git a/meta-python/recipes-devtools/python/python3-ipy/run-ptest b/meta-python/recipes-devtools/python/python3-ipy/run-ptest
 > new file mode 100644
-> index 000000000..357d8cb98
+> index 000000000..b63c4de0d
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-intervals/run-ptest
+> +++ b/meta-python/recipes-devtools/python/python3-ipy/run-ptest
 > @@ -0,0 +1,3 @@
 > +#!/bin/sh
 > +
-> +pytest -o log_cli=true -o log_cli_level=INFO test_intervals.py| sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-> diff --git a/meta-python/recipes-devtools/python/python3-intervals_1.10.0.bb b/meta-python/recipes-devtools/python/python3-intervals_1.10.0.bb
-> index 8cbe1090f..2e8276ec7 100644
-> --- a/meta-python/recipes-devtools/python/python3-intervals_1.10.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-intervals_1.10.0.bb
-> @@ -1,2 +1,28 @@
+> +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
+> diff --git a/meta-python/recipes-devtools/python/python3-ipy_1.00.bb b/meta-python/recipes-devtools/python/python3-ipy_1.00.bb
+> index ea6a1055a..14931546e 100644
+> --- a/meta-python/recipes-devtools/python/python3-ipy_1.00.bb
+> +++ b/meta-python/recipes-devtools/python/python3-ipy_1.00.bb
+> @@ -1,2 +1,32 @@
 > -inherit setuptools3
-> -require python-intervals.inc
-> +DESCRIPTION = "Interval arithmetic for Python"
-> +HOMEPAGE = "https://github.com/AlexandreDecan/python-intervals"
+> -require python-ipy.inc
+> +SUMMARY = "IPy - class and tools for handling of IPv4 and IPv6 addresses and networks"
+> +DESCRIPTION = "IPy is a Python module for handling IPv4 and IPv6 Addresses and Networks \
+> +in a fashion similar to perl's Net::IP and friends. The IP class allows \
+> +a comfortable parsing and handling for most notations in use for IPv4 \
+> +and IPv6 Addresses and Networks."
 > +SECTION = "devel/python"
+> +HOMEPAGE = "https://github.com/autocracy/python-ipy"
 > +
-> +LICENSE = "LGPLv3"
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab"
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=848d24919845901b4f48bae5f13252e6"
 > +
-> +PYPI_PACKAGE := "python-intervals"
+> +SRC_URI[md5sum] = "1a90c68174234672241a7e60c7ea0fb9"
+> +SRC_URI[sha256sum] = "2f2bf658a858d43868d8a4352b3889cf78c66e2ce678b300dcf518c9149ba621"
+> +
+> +inherit pypi setuptools3 ptest
 > +
 > +SRC_URI += " \
 > +	file://run-ptest \
 > +"
-> +
-> +inherit pypi setuptools3 ptest
 > +
 > +RDEPENDS_${PN}-ptest += " \
 > +	${PYTHON_PN}-pytest \
 > +"
 > +
 > +do_install_ptest() {
-> +	cp -f ${S}/test_intervals.py ${D}${PTEST_PATH}
-> +	cp -f ${S}/README.md ${D}${PTEST_PATH}
+> +	install -d ${D}${PTEST_PATH}/test/
+> +	cp -rf ${S}/test/* ${D}${PTEST_PATH}/test
 > +}
 > +
-> +SRC_URI[md5sum] = "8955317ff4e42590c90ba6247b1caaed"
-> +SRC_URI[sha256sum] = "0d26746eaed0be78a61dd289bb7a10721b08770bb3e807614835f490d514f2a5"
+> +PYPI_PACKAGE = "IPy"
 > +
 > +BBCLASSEXTEND = "native"
 >
 > 
 
---------------09015CE5A7FF0E9FB0E18FA2
+--------------BFCC3DD98AF2F08F013792F9
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -175,87 +183,95 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 6/15/20 10:37 AM, zangrc wrote:<br>
+    <div class="moz-cite-prefix">On 6/15/20 10:38 AM, zangrc wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:1592231844-3955-1-git-send-email-zangrc.fnst@cn.fujitsu.com">
+    <blockquote type="cite" cite="mid:1592231885-4040-1-git-send-email-zangrc.fnst@cn.fujitsu.com">
       <pre class="moz-quote-pre" wrap="">-Consolidate into a single file.
 
 Signed-off-by: Zang Ruochen <a class="moz-txt-link-rfc2396E" href="mailto:zangrc.fnst@cn.fujitsu.com">&lt;zangrc.fnst@cn.fujitsu.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:1592231844-3955-1-git-send-email-zangrc.fnst@cn.fujitsu.com">
+    <blockquote type="cite" cite="mid:1592231885-4040-1-git-send-email-zangrc.fnst@cn.fujitsu.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python-intervals.inc               | 15 ----------
- .../python/python3-intervals/run-ptest        |  3 &#43;&#43;
- .../python/python3-intervals_1.10.0.bb        | 30 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;--
- 3 files changed, 31 insertions(&#43;), 17 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-intervals.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-intervals/run-ptest
+ .../recipes-devtools/python/python-ipy.inc    | 19 -----------
+ .../python/python3-ipy/run-ptest              |  3 &#43;&#43;
+ .../python/python3-ipy_1.00.bb                | 34 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;--
+ 3 files changed, 35 insertions(&#43;), 21 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-ipy.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-ipy/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python-intervals.inc b/meta-python/recipes-devtools/python/python-intervals.inc
+diff --git a/meta-python/recipes-devtools/python/python-ipy.inc b/meta-python/recipes-devtools/python/python-ipy.inc
 deleted file mode 100644
-index 4489aa59d..000000000
---- a/meta-python/recipes-devtools/python/python-intervals.inc
+index 46b2fad03..000000000
+--- a/meta-python/recipes-devtools/python/python-ipy.inc
 &#43;&#43;&#43; /dev/null
-@@ -1,15 &#43;0,0 @@
--DESCRIPTION = &quot;Interval arithmetic for Python&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/AlexandreDecan/python-intervals">&quot;https://github.com/AlexandreDecan/python-intervals&quot;</a>
+@@ -1,19 &#43;0,0 @@
+-SUMMARY = &quot;IPy - class and tools for handling of IPv4 and IPv6 addresses and networks&quot;
+-DESCRIPTION = &quot;IPy is a Python module for handling IPv4 and IPv6 Addresses and Networks \
+-in a fashion similar to perl's Net::IP and friends. The IP class allows \
+-a comfortable parsing and handling for most notations in use for IPv4 \
+-and IPv6 Addresses and Networks.&quot;
 -SECTION = &quot;devel/python&quot;
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/autocracy/python-ipy">&quot;https://github.com/autocracy/python-ipy&quot;</a>
 -
--LICENSE = &quot;LGPLv3&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab">&quot;file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab&quot;</a>
+-LICENSE = &quot;BSD-3-Clause&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=848d24919845901b4f48bae5f13252e6">&quot;file://COPYING;md5=848d24919845901b4f48bae5f13252e6&quot;</a>
 -
--PYPI_PACKAGE := &quot;python-intervals&quot;
+-SRC_URI[md5sum] = &quot;1a90c68174234672241a7e60c7ea0fb9&quot;
+-SRC_URI[sha256sum] = &quot;2f2bf658a858d43868d8a4352b3889cf78c66e2ce678b300dcf518c9149ba621&quot;
 -
 -inherit pypi
 -
--SRC_URI[md5sum] = &quot;8955317ff4e42590c90ba6247b1caaed&quot;
--SRC_URI[sha256sum] = &quot;0d26746eaed0be78a61dd289bb7a10721b08770bb3e807614835f490d514f2a5&quot;
+-PYPI_PACKAGE = &quot;IPy&quot;
 -
 -BBCLASSEXTEND = &quot;native&quot;
-diff --git a/meta-python/recipes-devtools/python/python3-intervals/run-ptest b/meta-python/recipes-devtools/python/python3-intervals/run-ptest
+diff --git a/meta-python/recipes-devtools/python/python3-ipy/run-ptest b/meta-python/recipes-devtools/python/python3-ipy/run-ptest
 new file mode 100644
-index 000000000..357d8cb98
+index 000000000..b63c4de0d
 --- /dev/null
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-intervals/run-ptest
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-ipy/run-ptest
 @@ -0,0 &#43;1,3 @@
 &#43;#!/bin/sh
 &#43;
-&#43;pytest -o log_cli=true -o log_cli_level=INFO test_intervals.py| sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;){printf &quot;%s: %s\n&quot;, $NF, $0}else{print}}'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;) {$NF=&quot;&quot;;print $0}else{print}}'
-diff --git a/meta-python/recipes-devtools/python/python3-intervals_1.10.0.bb b/meta-python/recipes-devtools/python/python3-intervals_1.10.0.bb
-index 8cbe1090f..2e8276ec7 100644
---- a/meta-python/recipes-devtools/python/python3-intervals_1.10.0.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-intervals_1.10.0.bb
-@@ -1,2 &#43;1,28 @@
+&#43;pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;){printf &quot;%s: %s\n&quot;, $NF, $0}else{print}}'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;) {$NF=&quot;&quot;;print $0}else{print}}'
+diff --git a/meta-python/recipes-devtools/python/python3-ipy_1.00.bb b/meta-python/recipes-devtools/python/python3-ipy_1.00.bb
+index ea6a1055a..14931546e 100644
+--- a/meta-python/recipes-devtools/python/python3-ipy_1.00.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-ipy_1.00.bb
+@@ -1,2 &#43;1,32 @@
 -inherit setuptools3
--require python-intervals.inc
-&#43;DESCRIPTION = &quot;Interval arithmetic for Python&quot;
-&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/AlexandreDecan/python-intervals">&quot;https://github.com/AlexandreDecan/python-intervals&quot;</a>
+-require python-ipy.inc
+&#43;SUMMARY = &quot;IPy - class and tools for handling of IPv4 and IPv6 addresses and networks&quot;
+&#43;DESCRIPTION = &quot;IPy is a Python module for handling IPv4 and IPv6 Addresses and Networks \
+&#43;in a fashion similar to perl's Net::IP and friends. The IP class allows \
+&#43;a comfortable parsing and handling for most notations in use for IPv4 \
+&#43;and IPv6 Addresses and Networks.&quot;
 &#43;SECTION = &quot;devel/python&quot;
+&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/autocracy/python-ipy">&quot;https://github.com/autocracy/python-ipy&quot;</a>
 &#43;
-&#43;LICENSE = &quot;LGPLv3&quot;
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab">&quot;file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab&quot;</a>
+&#43;LICENSE = &quot;BSD-3-Clause&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=848d24919845901b4f48bae5f13252e6">&quot;file://COPYING;md5=848d24919845901b4f48bae5f13252e6&quot;</a>
 &#43;
-&#43;PYPI_PACKAGE := &quot;python-intervals&quot;
+&#43;SRC_URI[md5sum] = &quot;1a90c68174234672241a7e60c7ea0fb9&quot;
+&#43;SRC_URI[sha256sum] = &quot;2f2bf658a858d43868d8a4352b3889cf78c66e2ce678b300dcf518c9149ba621&quot;
+&#43;
+&#43;inherit pypi setuptools3 ptest
 &#43;
 &#43;SRC_URI &#43;= &quot; \
 &#43;	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
 &#43;&quot;
-&#43;
-&#43;inherit pypi setuptools3 ptest
 &#43;
 &#43;RDEPENDS_${PN}-ptest &#43;= &quot; \
 &#43;	${PYTHON_PN}-pytest \
 &#43;&quot;
 &#43;
 &#43;do_install_ptest() {
-&#43;	cp -f ${S}/test_intervals.py ${D}${PTEST_PATH}
-&#43;	cp -f ${S}/README.md ${D}${PTEST_PATH}
+&#43;	install -d ${D}${PTEST_PATH}/test/
+&#43;	cp -rf ${S}/test/* ${D}${PTEST_PATH}/test
 &#43;}
 &#43;
-&#43;SRC_URI[md5sum] = &quot;8955317ff4e42590c90ba6247b1caaed&quot;
-&#43;SRC_URI[sha256sum] = &quot;0d26746eaed0be78a61dd289bb7a10721b08770bb3e807614835f490d514f2a5&quot;
+&#43;PYPI_PACKAGE = &quot;IPy&quot;
 &#43;
 &#43;BBCLASSEXTEND = &quot;native&quot;
 </pre>
@@ -267,4 +283,4 @@ index 8cbe1090f..2e8276ec7 100644
   </body>
 </html>
 
---------------09015CE5A7FF0E9FB0E18FA2--
+--------------BFCC3DD98AF2F08F013792F9--
