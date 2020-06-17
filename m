@@ -1,17 +1,17 @@
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com (NAM02-SN1-obe.outbound.protection.outlook.com [40.107.77.89])
- by mx.groups.io with SMTP id smtpd.web10.7180.1592399412969006353
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.86])
+ by mx.groups.io with SMTP id smtpd.web12.7181.1592399568046968083
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Jun 2020 06:10:13 -0700
+ Wed, 17 Jun 2020 06:12:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=L94MCUEZ;
- spf=pass (domain: windriver.com, ip: 40.107.77.89, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=OExA/4qT;
+ spf=pass (domain: windriver.com, ip: 40.107.92.86, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nXbVx6yYug1raCenFKp70THSaW4PKWl/qPJdm5jTB17GhmADCiDKjTfFgnJERCmWK/oboIuP06k4SRNTJElAxUh8rgt4pPYLOrDuDD+ygod9nqEqn/kv4WVfJI5f9C7U+1CqMGg42lzaw9vaa/KvGVMQcl4KCfG9k3ZZPkQSbdFj1EMBNAbchgeSOMnB+arfMGT/dNoNbAWZOq1FPEBZvkccqfDyIDfbcDz6xs8mfbHkQioaKadlFc9VG99OiA4yIPkL4dgu69WChNkVgcqjaEyxtnZQy79yT7Tg6t0PnGpKUDcoXPjV8FbUBM7Ba220e4u1xV+fcAmiclpCNxuexw==
+ b=BpbODgWy0kmgN6OcxFcra3r3yWcOlL+6AD3APhPlfPI0D+JXo4XGqISlvk5DRdjaZxkhBAWnY4gBAiC200pEwhKFedjma4RVQppx8VB7baKuzB7Tc4upuHOgP8NRh/6Zc7/Vuvle9uMU3xMlOXQT5CWAEr0t4nBFIy4he6rYHcGg+8Z2aWXRJmRqK7Ej8JjNUEumY2FSWVQaaelGtrEqusAdTVL6zFx6zIWpMWcUwlLykTOgkM4J2d+NJhSOK0fW2yCFEON2dEsqVPou8D+mnms18anJMDdHQhuKzeqZA9eNoAnk/QvqzwDQzPv9t9uDUCu80KwTHo5fpkH/I90JRA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/a4W/HBXFTQhsfsSOhbeHcKwcbhBsk+t3nIdvVJvWqY=;
- b=LxoyvlfAR2ud3RRAQwxnVHWz+/joaVfmkM0jaEsvVPhIJ8UKxB15xGztnhE+1oPsDrYuWY9/3ckMx26Z4hSvr6gdzRSLiQSEa6YY6M8+aBWzXK0ggx/EV9NuJzHc856Fjjs/p3YkYdlKk1AcjPPE0T+lBNAg/PL1w/dip3qkjpcRY5GETc4qK5+lSYNAe/L6ruajS1z4gy/xuJzN51imFuVInMKtoLZ7wrug5zFWwVhbd7vfZPX/oaLuITbPB6+RvpcNtAL+2LnUrkBmiBg8lZZnQibh4ZYhHZ8NY1QoQpqdsVvm9LL05X62sqs9nW6yVYQwkcSSOBy+SZY3UJ6PHw==
+ bh=5jc/fLB4mrLto7W5xIwE80GJfDY2uy8yeAEjUJXITVg=;
+ b=g8lmfpvuh+BK6nUDFpJm78aj752g120wQ2ofDxlfjV9GPuCco9ZSTxzru0Egrh8uMy27t1cAhiLeEAEKUUsNAK/U2LEz+poQdVS1SReLwE3KNbNRSoE4oE+vghqc8+p2fDlx9U7rsqIDGIcwu6/IsQCEsIZmAJ1HjeSXNsXaLMKutIOjqh/O+GMNqxvCz4OLaMs1H/nPYzBzzvL8NFlARZcVlrkgx5ZfFahqT/cYKA2+UAp3oTlgv5me9YJMObmYzgkUN+BN4K98QnrmrJVjswBj/u5wVq2KF/P7z3BqdNAyRccbsKiMrYWlk3K1HaVVjL/vIMFwyb4fXkijKc9m+Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,118 +19,162 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/a4W/HBXFTQhsfsSOhbeHcKwcbhBsk+t3nIdvVJvWqY=;
- b=L94MCUEZ3Lkk94fdJm4XEYaG//mfX/oXolkj7/McNHYIYPyWrU+1UgaDgbCWmrAqKPc6LBAMmSD0YC338biExEY8Iys/g2esS/gBPaOh87IjsXZM+u3v45D7VOdm98TNPDDiD94Q3OLx5ZOKsybq8xju6zqnNzcD7+Nrf3wAWUk=
+ bh=5jc/fLB4mrLto7W5xIwE80GJfDY2uy8yeAEjUJXITVg=;
+ b=OExA/4qTr/paJqvXfKnJQrE3Duiajn7c6BDFTRlMnmIeKfNkQCmdG7teYV24/u9EWOSqPGBFHayI/cKfZaxSgREbr1rW4GO3EcTeMVFEwwTztssQ26ZBdVjqB7a8fdtRdw8bwl1z5mK0SH6a/uTjt/ERYS025ZZENQqvfk027BI=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN8PR11MB3588.namprd11.prod.outlook.com (2603:10b6:408:83::30) with
+ by BN6PR11MB1873.namprd11.prod.outlook.com (2603:10b6:404:106::19) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.26; Wed, 17 Jun
- 2020 13:10:11 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.21; Wed, 17 Jun
+ 2020 13:12:46 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3109.021; Wed, 17 Jun 2020
- 13:10:11 +0000
-Subject: Re: [oe] [meta-python] [PATCH] python3-geojson: Enable ptest
-To: zangrc <zangrc.fnst@cn.fujitsu.com>,
+ 13:12:46 +0000
+Subject: Re: [oe] [meta-oe][PATCH] protobuf: Upgrade 3.11.4 -> 3.12.3
+To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
-References: <1592231816-3893-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+References: <20200615124132.5262-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <523ace8b-3f0d-ad9d-7f24-7e415c22928b@windriver.com>
-Date: Wed, 17 Jun 2020 09:10:09 -0400
+Message-ID: <b197aba7-c2aa-1d6e-35d6-be2b41b2c698@windriver.com>
+Date: Wed, 17 Jun 2020 09:12:44 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <1592231816-3893-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-ClientProxiedBy: YT1PR01CA0025.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::38)
- To BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
+In-Reply-To: <20200615124132.5262-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTOPR0101CA0008.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:15::21) To BN6PR11MB0003.namprd11.prod.outlook.com
+ (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0025.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::38) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22 via Frontend Transport; Wed, 17 Jun 2020 13:10:11 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YTOPR0101CA0008.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.21 via Frontend Transport; Wed, 17 Jun 2020 13:12:45 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 991123e8-c026-4cc5-89e9-08d812bfc446
-X-MS-TrafficTypeDiagnostic: BN8PR11MB3588:
+X-MS-Office365-Filtering-Correlation-Id: a43c2fc8-ef0e-4297-2c38-08d812c02047
+X-MS-TrafficTypeDiagnostic: BN6PR11MB1873:
 X-Microsoft-Antispam-PRVS: 
-	<BN8PR11MB3588C53F90BAA7BC168C55049F9A0@BN8PR11MB3588.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:88;
+	<BN6PR11MB1873C052C09E540FD705EB959F9A0@BN6PR11MB1873.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4502;
 X-Forefront-PRVS: 04371797A5
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	u1GOajo2h1O5A632x3AbCEOC+WjXID6Y8vz/7MSApO7nSa0DBZwOKpvRPUA1Sejzq/IWKs7fHG//H/0b3yC84INy/Ds2XA8kb2htajLz/y55prvF6E/D2n41SoyKuSozFTgPN4Eu4H9aaXZMM23P3Xa1JWCVNWwxrqUl9xNxTXZlP/ieDQnTA8jVCJgZS72aug4ThRWXnyONpWmNHeOXOaWY9hekcsboRdGxOuGZCW2nKzDEAYibFc7FR3VGEd3Ux+UY9TCniJcOkSEZoBpjpa1U+EkgjCb+Er9UCaD7hoXfGorOt+/KRLc11SYwFEdKTrlywxugscgr/F8HW4cR7GX2Tn8JYWnpefy7bmv5S3PEPmdnv61/lti6AYKy4dPXRmpBPEe8x9GeQ9EojiJuwqY5pGHAc1Xwnm2NYdj9z+0u8f2l/ijChwnVwBDgcxFF1tGHK6ErkbT9Fg2ROyCGmQ==
+	V2caMccsYC4I3hCMY+x2PXEdF9F4atvzY0KjYdkifddaJq8BMiI0XlOtU90hGxZj64fAFGr8m460Zf70BpYKVCM67Bfn8gwGkkqNjgxrbPMA36vBDozMUcfYlkMn9+/traqC3kklClhuFSRYNqgMX/YcG4IJdJVntuDvVHNjxrTqUZXjX+lcjFDMTdJ8FTbiUdBj2i5csfcJAjWR2JKYf422QjXzh5AsqJGMXWgeFD2QAX6VcTwy/ud+99GonwGsLS8xCE5bZ1CjmW8MBZKPJV7ii9M8GNLuNRp7wJr4vGbfDwIhAtUSnIsrB//6LpehDt8SZfpq9+7gVRYEtCTaeRnVA+yu3veOW3mLqw0iM/ZhupwjBKhYjLVM0O6SslGNnP1Z0MNUa9HAzenDUouciHhUvHS3bPhGIKzguaR37kdn2hJppIiC4y33ItlHJq2gzKeZScuAJdYj/fQVi86amg==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(376002)(366004)(346002)(39840400004)(136003)(66556008)(26005)(53546011)(6486002)(166002)(31686004)(8676002)(2906002)(966005)(66946007)(316002)(8936002)(16576012)(66476007)(44832011)(186003)(86362001)(33964004)(52116002)(478600001)(16526019)(36756003)(5660300002)(83380400001)(31696002)(2616005)(956004)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(376002)(39850400004)(346002)(366004)(136003)(396003)(66946007)(31696002)(66476007)(186003)(478600001)(86362001)(6486002)(16526019)(26005)(5660300002)(66556008)(8676002)(83380400001)(8936002)(966005)(16576012)(52116002)(2906002)(2616005)(44832011)(956004)(316002)(33964004)(53546011)(36756003)(166002)(31686004)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	/sZOCFx7UOS2re7dB5V6aDF5kpBzA60sxSc4q6z7hpmW04NJ4zqIZowcQAEyxTWoCBaO74rb/qwpfiQBLO6rtZeorvHyzptGEbY3gud4cGp7Z5/BlVaI4rXlQDGqY62/Vu5GI7n2Ac2UtufiJOkdazuUPbb+BqX76w+v3OONY9CGXBCvB0XVarRi/JykKIKFCnOqU8DOSNAu3RC/wj8WlmYYv3es237t8Jw7Q0tCfWgX7Qoq/5dn9ShnMrJx5mzGI6kcVV+9g2fNj6hFp9w5s3AkjKu9uVe+8YOaYcoQM6EHer9d2VjapBnYV16EEiWxLo+I2K2z7tIfYwBafLrZecI8fsJYVvvIagQsCALuV7qTQkr5/SUw44S1/8r9DyG/5P6SBQnwLlzt8kxQdH6HyNwmcVnxePl5gw3upxQ0rtza7N8WZdr3llJjVgNtq2fTlRic99e3JiERuzVM1tqTbAC24rkOtsThFDh8O5tH0go=
+	jNcbkarb0fxF2+KYZjWfOXarHD6QDvyNpoy/OmYX2KQVX6lDsjERcaJYG1DDbsygh27b9xoXJcqjAQ2+61eiMLN0gK293MXIeqUDsjLlkRJz8y7o/6tP++1HLfSvqOqvwiiP7ePrX98Zjd32Q6yUrz51xX6SziDnmnsDyS9+eKMIOrDklCUOo9MD/jO/cDhMiutdUlHX804woMHsyCEpZMQp2rBmxMpFIOe9+SHGp2xhu14eBk5memQOl7ak1ZIxk+NSSnFFmLHUZYOIz9ugDzSK9zwqjbKhjsmQsWXu89kr0dwdyc5pMjM2stzzqaz69t7Uxq/hHNSIk5/KlmyMagNzObUqGfXN40IWjt7aAjCXwJUiPAQ2oR2kKtAO4SNkY8L7/tHCEHpVry/lNhZGZwq0w5lDC9vkpbhNwY6pELxJxK/28wxszRpSVK8q+LdFYLl+l9f4at/0hYT7FnwpW9tdcyuqqoNAikRjcA9tfLarmPFypbiPcTmQubIJZc8v
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 991123e8-c026-4cc5-89e9-08d812bfc446
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2020 13:10:11.6386
+X-MS-Exchange-CrossTenant-Network-Message-Id: a43c2fc8-ef0e-4297-2c38-08d812c02047
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2020 13:12:45.9966
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bA4fyybF8DjlNfaY6MrKBepsuWTfk3gYOVdvG9UMvM6l/lOJR2P+iIzIzVaSe19LPfMOp5gI23+IcG0bh94Gd8CIFaX1q50iufojEY+AjVw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR11MB3588
+X-MS-Exchange-CrossTenant-UserPrincipalName: wLwlYpDjuZr7EwjrD0sHBCukxpIQsS1uoGajisT3SDr3+T5oVXdyn1nDtxsGlt+Yj2ENmRxcaJskD1JNLoZ2+ZIGSLPYdHsJTGcNh8u9ARk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1873
 Content-Type: multipart/alternative;
- boundary="------------71E098EDCD9CAFDC7BC282CE"
+ boundary="------------857C463BC88884D460A7D4D1"
 Content-Language: en-US
 
---------------71E098EDCD9CAFDC7BC282CE
+--------------857C463BC88884D460A7D4D1
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 6/15/20 10:36 AM, zangrc wrote:
-> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+On 6/15/20 8:41 AM, Leon Anavi wrote:
+> Upgrade to release 3.12.3. Update the path to the git repository
+> in GitHub. Update the patch for examples/Makefile.
+>
+> The new release brings:
+>
+> - [experimental] Singular, non-message typed fields in proto3 now
+>    support presence tracking. This is enabled by adding the
+>    "optional" field label and passing the
+>    --experimental_allow_proto3_optional flag to protoc.
+> - Allow duplicate symbol names when multiple descriptor sets are
+>    passed on the command-line, to match the behavior when multiple
+>    .proto files are passed.
+> - Deterministic protoc --descriptor_set_out
+> - Bug fixes for the supported programming languages
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python3-geojson/run-ptest              |  3 +++
->   .../python/python3-geojson_2.5.0.bb               | 15 ++++++++++++++-
->   2 files changed, 17 insertions(+), 1 deletion(-)
->   create mode 100644 meta-python/recipes-devtools/python/python3-geojson/run-ptest
+>   ...Makefile-respect-CXX-LDFLAGS-variables-fix-.patch | 12 ++++++++----
+>   .../{protobuf_3.11.4.bb => protobuf_3.12.3.bb}       |  4 ++--
+>   2 files changed, 10 insertions(+), 6 deletions(-)
+>   rename meta-oe/recipes-devtools/protobuf/{protobuf_3.11.4.bb => protobuf_3.12.3.bb} (96%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-geojson/run-ptest b/meta-python/recipes-devtools/python/python3-geojson/run-ptest
-> new file mode 100644
-> index 000000000..b63c4de0d
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-geojson/run-ptest
-> @@ -0,0 +1,3 @@
-> +#!/bin/sh
-> +
-> +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-> diff --git a/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb b/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
-> index 7c3c23b22..c3fd37c8b 100644
-> --- a/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
-> @@ -6,7 +6,20 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=f48972abe5cddee79e301574742ed745"
->   SRC_URI[md5sum] = "14753ed28678828b1de73f68b04e2324"
->   SRC_URI[sha256sum] = "6e4bb7ace4226a45d9c8c8b1348b3fc43540658359f93c3f7e03efa9f15f658a"
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+> index 0a2e5e2df..934c98193 100644
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+> @@ -1,4 +1,4 @@
+> -From a28e15092a298e0c73c6fc1ded0913275cf27cb0 Mon Sep 17 00:00:00 2001
+> +From e5340f816aa273cfda36998466739ca0748caafb Mon Sep 17 00:00:00 2001
+>   From: Martin Jansa <Martin.Jansa@gmail.com>
+>   Date: Fri, 28 Jun 2019 13:50:52 +0000
+>   Subject: [PATCH] examples/Makefile: respect CXX,LDFLAGS variables, fix build
+> @@ -23,12 +23,13 @@ Subject: [PATCH] examples/Makefile: respect CXX,LDFLAGS variables, fix build
 >   
-> -inherit pypi setuptools3
-> +inherit pypi setuptools3 ptest
-> +
-> +SRC_URI += " \
-> +	file://run-ptest \
-> +"
-> +
-> +RDEPENDS_${PN}-ptest += " \
-> +	${PYTHON_PN}-pytest \
-> +"
-> +
-> +do_install_ptest() {
-> +	install -d ${D}${PTEST_PATH}/tests
-> +	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> +}
+>   Upstream-Status: Pending
+>   Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> +Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+>   ---
+>    examples/Makefile | 6 ++++--
+>    1 file changed, 4 insertions(+), 2 deletions(-)
 >   
->   RDEPENDS_${PN} += "python3-simplejson python3-math"
+>   diff --git a/examples/Makefile b/examples/Makefile
+> -index 4ad605641..31d887639 100644
+> +index e9f9635ae..b2fbe2de1 100644
+>   --- a/examples/Makefile
+>   +++ b/examples/Makefile
+>   @@ -2,6 +2,8 @@
+> @@ -44,13 +45,16 @@ index 4ad605641..31d887639 100644
+>    
+>    add_person_cpp: add_person.cc protoc_middleman
+>    	pkg-config --cflags protobuf  # fails if protobuf is not installed
+> --	c++ add_person.cc addressbook.pb.cc -o add_person_cpp `pkg-config --cflags --libs protobuf`
+> +-	c++ -std=c++11 add_person.cc addressbook.pb.cc -o add_person_cpp `pkg-config --cflags --libs protobuf`
+>   +	$(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) add_person.cc addressbook.pb.cc -o add_person_cpp
+>    
+>    list_people_cpp: list_people.cc protoc_middleman
+>    	pkg-config --cflags protobuf  # fails if protobuf is not installed
+> --	c++ list_people.cc addressbook.pb.cc -o list_people_cpp `pkg-config --cflags --libs protobuf`
+> +-	c++ -std=c++11 list_people.cc addressbook.pb.cc -o list_people_cpp `pkg-config --cflags --libs protobuf`
+>   +	$(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) list_people.cc addressbook.pb.cc -o list_people_cpp
+>    
+>    add_person_dart: add_person.dart protoc_middleman_dart
+>    
+> +--
+> +2.17.1
+> +
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.12.3.bb
+> similarity index 96%
+> rename from meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
+> rename to meta-oe/recipes-devtools/protobuf/protobuf_3.12.3.bb
+> index 4d6c5b255..21ad7a460 100644
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.12.3.bb
+> @@ -10,9 +10,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
+>   DEPENDS = "zlib"
+>   DEPENDS_append_class-target = " protobuf-native"
 >   
+> -SRCREV = "d0bfd5221182da1a7cc280f3337b5e41a89539cf"
+> +SRCREV = "31ebe2ac71400344a5db91ffc13c4ddfb7589f92"
+>   
+> -SRC_URI = "git://github.com/google/protobuf.git;branch=3.11.x \
+> +SRC_URI = "git://github.com/protocolbuffers/protobuf.git \
+>              file://run-ptest \
+>              file://0001-protobuf-fix-configure-error.patch \
+>              file://0001-Makefile.am-include-descriptor.cc-when-building-libp.patch \
 >
 > 
 
---------------71E098EDCD9CAFDC7BC282CE
+--------------857C463BC88884D460A7D4D1
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -140,55 +184,98 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 6/15/20 10:36 AM, zangrc wrote:<br>
+    <div class="moz-cite-prefix">On 6/15/20 8:41 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:1592231816-3893-1-git-send-email-zangrc.fnst@cn.fujitsu.com">
-      <pre class="moz-quote-pre" wrap="">Signed-off-by: Zang Ruochen <a class="moz-txt-link-rfc2396E" href="mailto:zangrc.fnst@cn.fujitsu.com">&lt;zangrc.fnst@cn.fujitsu.com&gt;</a></pre>
+    <blockquote type="cite" cite="mid:20200615124132.5262-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 3.12.3. Update the path to the git repository
+in GitHub. Update the patch for examples/Makefile.
+
+The new release brings:
+
+- [experimental] Singular, non-message typed fields in proto3 now
+  support presence tracking. This is enabled by adding the
+  &quot;optional&quot; field label and passing the
+  --experimental_allow_proto3_optional flag to protoc.
+- Allow duplicate symbol names when multiple descriptor sets are
+  passed on the command-line, to match the behavior when multiple
+  .proto files are passed.
+- Deterministic protoc --descriptor_set_out
+- Bug fixes for the supported programming languages
+
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:1592231816-3893-1-git-send-email-zangrc.fnst@cn.fujitsu.com">
+    <blockquote type="cite" cite="mid:20200615124132.5262-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python3-geojson/run-ptest              |  3 &#43;&#43;&#43;
- .../python/python3-geojson_2.5.0.bb               | 15 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
- 2 files changed, 17 insertions(&#43;), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-geojson/run-ptest
+ ...Makefile-respect-CXX-LDFLAGS-variables-fix-.patch | 12 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;----
+ .../{protobuf_3.11.4.bb =&gt; protobuf_3.12.3.bb}       |  4 &#43;&#43;--
+ 2 files changed, 10 insertions(&#43;), 6 deletions(-)
+ rename meta-oe/recipes-devtools/protobuf/{protobuf_3.11.4.bb =&gt; protobuf_3.12.3.bb} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-geojson/run-ptest b/meta-python/recipes-devtools/python/python3-geojson/run-ptest
-new file mode 100644
-index 000000000..b63c4de0d
---- /dev/null
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-geojson/run-ptest
-@@ -0,0 &#43;1,3 @@
-&#43;#!/bin/sh
-&#43;
-&#43;pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;){printf &quot;%s: %s\n&quot;, $NF, $0}else{print}}'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;) {$NF=&quot;&quot;;print $0}else{print}}'
-diff --git a/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb b/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
-index 7c3c23b22..c3fd37c8b 100644
---- a/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
-@@ -6,7 &#43;6,20 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.rst;md5=f48972abe5cddee79e301574742ed745">&quot;file://LICENSE.rst;md5=f48972abe5cddee79e301574742ed745&quot;</a>
- SRC_URI[md5sum] = &quot;14753ed28678828b1de73f68b04e2324&quot;
- SRC_URI[sha256sum] = &quot;6e4bb7ace4226a45d9c8c8b1348b3fc43540658359f93c3f7e03efa9f15f658a&quot;
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+index 0a2e5e2df..934c98193 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+&#43;&#43;&#43; b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+@@ -1,4 &#43;1,4 @@
+-From a28e15092a298e0c73c6fc1ded0913275cf27cb0 Mon Sep 17 00:00:00 2001
+&#43;From e5340f816aa273cfda36998466739ca0748caafb Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <a class="moz-txt-link-rfc2396E" href="mailto:Martin.Jansa@gmail.com">&lt;Martin.Jansa@gmail.com&gt;</a>
+ Date: Fri, 28 Jun 2019 13:50:52 &#43;0000
+ Subject: [PATCH] examples/Makefile: respect CXX,LDFLAGS variables, fix build
+@@ -23,12 &#43;23,13 @@ Subject: [PATCH] examples/Makefile: respect CXX,LDFLAGS variables, fix build
  
--inherit pypi setuptools3
-&#43;inherit pypi setuptools3 ptest
-&#43;
-&#43;SRC_URI &#43;= &quot; \
-&#43;	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
-&#43;&quot;
-&#43;
-&#43;RDEPENDS_${PN}-ptest &#43;= &quot; \
-&#43;	${PYTHON_PN}-pytest \
-&#43;&quot;
-&#43;
-&#43;do_install_ptest() {
-&#43;	install -d ${D}${PTEST_PATH}/tests
-&#43;	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-&#43;}
+ Upstream-Status: Pending
+ Signed-off-by: Martin Jansa <a class="moz-txt-link-rfc2396E" href="mailto:Martin.Jansa@gmail.com">&lt;Martin.Jansa@gmail.com&gt;</a>
+&#43;Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a>
+ ---
+  examples/Makefile | 6 &#43;&#43;&#43;&#43;--
+  1 file changed, 4 insertions(&#43;), 2 deletions(-)
  
- RDEPENDS_${PN} &#43;= &quot;python3-simplejson python3-math&quot;
+ diff --git a/examples/Makefile b/examples/Makefile
+-index 4ad605641..31d887639 100644
+&#43;index e9f9635ae..b2fbe2de1 100644
+ --- a/examples/Makefile
+ &#43;&#43;&#43; b/examples/Makefile
+ @@ -2,6 &#43;2,8 @@
+@@ -44,13 &#43;45,16 @@ index 4ad605641..31d887639 100644
+  
+  add_person_cpp: add_person.cc protoc_middleman
+  	pkg-config --cflags protobuf  # fails if protobuf is not installed
+--	c&#43;&#43; add_person.cc addressbook.pb.cc -o add_person_cpp `pkg-config --cflags --libs protobuf`
+&#43;-	c&#43;&#43; -std=c&#43;&#43;11 add_person.cc addressbook.pb.cc -o add_person_cpp `pkg-config --cflags --libs protobuf`
+ &#43;	$(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) add_person.cc addressbook.pb.cc -o add_person_cpp
+  
+  list_people_cpp: list_people.cc protoc_middleman
+  	pkg-config --cflags protobuf  # fails if protobuf is not installed
+--	c&#43;&#43; list_people.cc addressbook.pb.cc -o list_people_cpp `pkg-config --cflags --libs protobuf`
+&#43;-	c&#43;&#43; -std=c&#43;&#43;11 list_people.cc addressbook.pb.cc -o list_people_cpp `pkg-config --cflags --libs protobuf`
+ &#43;	$(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) list_people.cc addressbook.pb.cc -o list_people_cpp
+  
+  add_person_dart: add_person.dart protoc_middleman_dart
+  
+&#43;-- 
+&#43;2.17.1
+&#43;
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.12.3.bb
+similarity index 96%
+rename from meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
+rename to meta-oe/recipes-devtools/protobuf/protobuf_3.12.3.bb
+index 4d6c5b255..21ad7a460 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
+&#43;&#43;&#43; b/meta-oe/recipes-devtools/protobuf/protobuf_3.12.3.bb
+@@ -10,9 &#43;10,9 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b">&quot;file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b&quot;</a>
+ DEPENDS = &quot;zlib&quot;
+ DEPENDS_append_class-target = &quot; protobuf-native&quot;
  
+-SRCREV = &quot;d0bfd5221182da1a7cc280f3337b5e41a89539cf&quot;
+&#43;SRCREV = &quot;31ebe2ac71400344a5db91ffc13c4ddfb7589f92&quot;
+ 
+-SRC_URI = &quot;git://github.com/google/protobuf.git;branch=3.11.x \
+&#43;SRC_URI = &quot;git://github.com/protocolbuffers/protobuf.git \
+            <a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
+            <a class="moz-txt-link-freetext" href="file://0001-protobuf-fix-configure-error.patch">file://0001-protobuf-fix-configure-error.patch</a> \
+            <a class="moz-txt-link-freetext" href="file://0001-Makefile.am-include-descriptor.cc-when-building-libp.patch">file://0001-Makefile.am-include-descriptor.cc-when-building-libp.patch</a> \
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -198,4 +285,4 @@ index 7c3c23b22..c3fd37c8b 100644
   </body>
 </html>
 
---------------71E098EDCD9CAFDC7BC282CE--
+--------------857C463BC88884D460A7D4D1--
