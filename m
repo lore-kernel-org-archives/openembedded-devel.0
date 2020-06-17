@@ -1,17 +1,17 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.71])
- by mx.groups.io with SMTP id smtpd.web10.9268.1592405180493767992
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.82])
+ by mx.groups.io with SMTP id smtpd.web11.9367.1592405192995483078
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Jun 2020 07:46:20 -0700
+ Wed, 17 Jun 2020 07:46:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=ezexH/uu;
- spf=pass (domain: windriver.com, ip: 40.107.237.71, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=XPatKuDY;
+ spf=pass (domain: windriver.com, ip: 40.107.94.82, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gHzZgT+eELyjNF2m4xI9k3KbC87UiS/IlHfW9R+30YBa4m2z/N6vQeUdJ3paXHV4WbWhiY+SXIJsfkVXLldP3WseerJty13Vv3j4Yn/ql+XzuRPA9Y6U+9DQ+2yWnMHZ89OLZgqdEBVEo/bqboQi2K++VwWffa2RUEsd/Ew4W2Gwc0MeanUuRT7FTgmJjIugPavymRs675tFk9qTuJlcpm8qmg09Nl09FMz02AD7GVpwGIoxOvaKi/+U3L16TbBHds8ZQ3yuSU+9uoto8aw/1oJkeWFWhrRWXrnuXwewVEslOlFFdEMmCFdaoUvyl/q678J09upff1F+iZqA4tym+A==
+ b=jnAYRoUj8+DYGMf4VBa+YwbuWmAPdx9C1jDSn6OE6i9MCvEQ8XApNTJfgZPsPA77uAfl3cInwzbjULG+sAeX+DYSlgwtA3ZukNjlXkmc2JgH7eZnTTDhfYdsT+J4gNzcKAoQrIhM2UC/WWW7cMxn+38CdDOhiFNl4/7tvgdB0QxiuWkr582UoGPCTwjoHDfj5l54BljllVKvkNoendXynnK2vMawRM9qEmerGnlNIoaHhV2jKO+b0KIpsUvL/a4xaD59Dn/AJsYVOuiaC2rT//VLhCotYYRwHjDoKPYqFd287/Sr302rycqeer4Xc33nbjO0ZrKX+Aca0s4z7SnDlQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=giY1cCMMQHH2uWMNvEciR5U3kX+ICuPL2l+KdNNSiCg=;
- b=AZrJpskooDhyrWcfMHTxOTvSmVivY2JN3Rzd09w/ZMDHBXk4x3OG+Rrc8+XhqQ+/WY80l16kCKljAOaX4zdntFpyrmm3YT6unhJXF0C8bXk5jA1AdUrI6c7ZNzf/Vg2wLc5jHvHVCEbMVY76u99Ptg5dnQISrrUmBrxPzufpYsylXLrDV8Rv7Gdlwj30cfYRZq3wb8jXLvE8wKQBo3HtE/rwiUV77Y90FCMS2ilMDuVNvNbTnC/5iUokip08udu78jrsMn+kbFDYy3B/k6dcVz+3H8J2eoE8YBPMwhJEmbp1EsxW5v7Cf+OmsLj71Lx66YiUEPBZ3W0tvC80KMUpWw==
+ bh=28okenUm2f58IMtnk4r5W1qYz6VTqolzLNfXyqVwA0U=;
+ b=cK1DnZUmWaaojdfUpZZmDIkPMqIqCsLY6PIWt1isfCn4VR2u6VLjD0HHnmCkjPGXTZfRLBtUCx4NKdIg6kb1xhpbhpLOjb0GweVnnp2ryi5fsfjEWD3dcnsywq4Rly479U2/i58p7VJF1XaoTtCu3XQeyeJFTcupEITFdQ9oh+v4ZrTAFZAE3zplhXzRXqDsGikrh8s0g7tt+Gs9aBUZY5x/m+T8zClhL5TNffQ6WuM0pwrQgDEU35DomOaA4oxB9vRCkehDZqijbbsv5XAGf9rl4tC0svdJDfVY5ntpa/8RJReb6KlolabjpOYIRomokDqunjzarr9NGHWGsK1Gjw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,96 +19,96 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=giY1cCMMQHH2uWMNvEciR5U3kX+ICuPL2l+KdNNSiCg=;
- b=ezexH/uuDtZehBytzXKam4aiBSHk+x7Y2T9DEIfn0ZtJKNCDZQPBln5bXjAoD4Oth1GJnEdffMAHhk8Zq2Odjkirs6ljubdn22q3mBE6Av3ioCsCV7DCVQu/zf5ke4vY9QgqCcqbaV7SfoTmEuVDG933mHwbLH5pooTJYqFm4bY=
+ bh=28okenUm2f58IMtnk4r5W1qYz6VTqolzLNfXyqVwA0U=;
+ b=XPatKuDY7qtsbAtoJwa2MvREQHAdicyTtMHIbZ07Q2m4izu9C2B1i8us/6eX/E+vAfNBo29SicFZWvHgX3pqCQ9+c+P9R1kq0SicRzL3xWuBWJB1PnbchS8VVHh9CfCAJHLhHJZDJtAEkf/ukzaX/sEtOPJmw/fPii+CWe+CE5s=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB4162.namprd11.prod.outlook.com (2603:10b6:405:84::12) with
+ by BN6PR11MB1233.namprd11.prod.outlook.com (2603:10b6:404:44::23) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.24; Wed, 17 Jun
- 2020 14:46:19 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.21; Wed, 17 Jun
+ 2020 14:46:31 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3109.021; Wed, 17 Jun 2020
- 14:46:19 +0000
-Subject: Re: [oe] [meta-python] [PATCH] python3-dnspython: Enable ptest
+ 14:46:31 +0000
+Subject: Re: [oe] [meta-python] [PATCH] python3-dominate: Enable ptest
 To: zhengruoqin <zhengrq.fnst@cn.fujitsu.com>,
  openembedded-devel@lists.openembedded.org
-References: <1592242301-113731-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+References: <1592242746-113844-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <b857fdc2-c890-56a0-918f-64c7eddcaa01@windriver.com>
-Date: Wed, 17 Jun 2020 10:46:16 -0400
+Message-ID: <590b7f05-d6af-cd0c-b2d5-45629cd1b465@windriver.com>
+Date: Wed, 17 Jun 2020 10:46:30 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <1592242301-113731-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-ClientProxiedBy: YT1PR01CA0156.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::35) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <1592242746-113844-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-ClientProxiedBy: YT1PR01CA0130.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2f::9) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0156.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::35) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22 via Frontend Transport; Wed, 17 Jun 2020 14:46:18 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0130.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::9) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.21 via Frontend Transport; Wed, 17 Jun 2020 14:46:31 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 4d24dc34-8dda-4698-dba5-08d812cd3203
-X-MS-TrafficTypeDiagnostic: BN6PR11MB4162:
+X-MS-Office365-Filtering-Correlation-Id: 3ebaf2e6-0433-4a86-8319-08d812cd398a
+X-MS-TrafficTypeDiagnostic: BN6PR11MB1233:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB4162702044E79D0AC912B6909F9A0@BN6PR11MB4162.namprd11.prod.outlook.com>
+	<BN6PR11MB1233F581F666EBA469F0CF109F9A0@BN6PR11MB1233.namprd11.prod.outlook.com>
 X-MS-Oob-TLC-OOBClassifiers: OLM:168;
 X-Forefront-PRVS: 04371797A5
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	8HyaBCoSbh55aj2QxoGt6o1rxXVjolCJMASENlx4k3nyGbmj/3Z5G0nYLLNwrLUgdqGj3dGkQQSFv18li5A4AYHKK5P58PGTc1GfejImrIUWwGUOQfpUpUhYnE6alZUlYfOo073XBDGXBcCaAagQ9CsqZqSRQ2K1H4kTPE4tZnzgCMRFHQtYcqbccDYG68PyGT0vOPwr+NiD4jtcX8fRxMMJe9PP/lMt/EJjNN8O1SqVIDRnYAFyBm8RoM7AtTZU7CDsKaxBup1O5T1xKZ3IYgHs8Dw6pVPBUKtADztuFQ/GjzBJZEYECFDHnxYCrVjGPHCWVOMxcQzZvILEA8s3yGrbgxo69BvYjYNWj3n1ZivFvqMVTGXEW96Nb8gb6yAZKY39YPEkZDVqZZryAVmh+w5XJoq8qDFLcs3qUwKuG/2oU7+vivcgl+6h0vQGnkS+NVKofYZZj2Mj1RfRKPRVXw==
+	MCjefHLqclFsY17ii/0JwPkBAqZIFiT4zgIT926/f33djdSziTXrPeRWqH/vYetCB3B9aaUhYBquxPsHZ7+ugWQI5H56KgjYX7zzATCIJyhQChTSshBSxQdMoXirjeOgSdISoVJJP8wX3PgnfV7/rT7M0XjLnisPnnvN8yR+RxT7xV/d8Ay2yEArQN0kmLG+wDONzdS4XVh1YzPa5QAvXPufYS/6YfmivkDc4gcKmpxIPgfnbWO27/4oJAocuZFiLa/K409vC+Tl4hsgREg/nOgBT+TPXhy42JbQA1C8tdFNEV5WzsQ48ogDyDVuR6wEkYfkU8Sp7d/Y57qIZlWeWJ3USMlQKN12uEu84aTxPddI8xGt+nUP/yCyQqJ6zM73LX1i6FFuGCYMqSdz43MfOY+wppVFsHmL0hcBaQmxowo+TSCnhan0ljCpYNAdCtEouQ2tsIj0ja280Jf97A0cPQ==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(366004)(39850400004)(396003)(346002)(376002)(53546011)(52116002)(31686004)(6486002)(33964004)(83380400001)(44832011)(66476007)(66946007)(966005)(26005)(16526019)(66556008)(186003)(5660300002)(16576012)(86362001)(166002)(8676002)(31696002)(36756003)(316002)(478600001)(2616005)(8936002)(2906002)(956004)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(39850400004)(366004)(136003)(376002)(346002)(66476007)(33964004)(44832011)(66946007)(5660300002)(31696002)(31686004)(66556008)(16526019)(86362001)(956004)(52116002)(36756003)(2906002)(2616005)(8676002)(186003)(6486002)(478600001)(26005)(83380400001)(966005)(166002)(8936002)(16576012)(53546011)(316002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	Av9xJnaQoGLTIoyr2WzllLH1e9MRnmakjFyrxdIeurZf0Fc/itAUQ1jRCj3NkTHphj+GFfRO8ow6jksX+4X3j9jT9Cnj9B0XwVzcVZjZ8IJ91yhwwp/h/NQj3bWv4MJ2DLhBwdX1vl7OU7xhp7KXfqqORmTifaja7JR5ZaSoEOyyAHovKcQGTBIaZx3IvGq0+Tvo9fohenFGnfMGq6gpbcNlgndSZYkTWGGwZzyXKsLtkQBGzfhFatXn+5jXhwNpPHWYwE1xo01dDua9pLektXA0E+ODKagdUm1xkD2h2bcfJA08q1GeSj6VSQJud5ZqtjDpi5xXIqtquqzi0PSGUKwBm5nkJ8nMMuiVdqxNr5rMJ14Lc+WksKVRqv89WhbipWaBBe6N5HD4iKvd8owUb8hvzdES09FQWKdzTB03HFh6sISMhVpueYEkY8D2Jn/rTUnnf5yLe9DeGEs/BOSc96PLZoLVQ8hfH0cG8YrTVuhbmu5KlwzdNdw5Fi7sbg3K
+	YkBfHXwVwC4Zvyq97Q4gxTZ9tNdWbNF01XZG0NxTNrpZrWuNNiM6XdFdPjQdOJvSp19GglJULcXqb7+hwxL+/+jZXRNwVT/13P63IQiH7scHWvkdssMp+eTddAO9MK9c8pg/zMVqbCNZz9cBH6NB3EFid2Awj7HZoULnAuJbMU2Hi5J7Y4lPeqEKiCnr5bJWjqcThmjhtdeBTh934M0Ver1uHq9aPG+YdmmwFwq1TDmABsWLLaTk1tqNUbfS0UOYm2w5HEg/fqhVwAiirSgG0zv+5kWy69vi9sFw61GBA6tK03Lliy3Ri+E3CIWNF/300tQhY1LsMXo36CpZTXKS7QHTr6Ucba9s9SErLIObo3YkJpqceeWrnK+R+0znHhitDnongPHFjq7zj+i0XEx9KBG2wIj4GXkGTNhSfLUMORKgavgi/Y2mxkQKBPAdr0aDAIIyFBqf0d03no6olmSWWhvczAwEg2Q0C6b1kzgpBCuAjACBSGZ75xVe49pUUB8O
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4d24dc34-8dda-4698-dba5-08d812cd3203
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2020 14:46:19.0966
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3ebaf2e6-0433-4a86-8319-08d812cd398a
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2020 14:46:31.7267
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: BV48B/NDEhEgO1ZkiLp3xiRJ+oPLgDE5Bh39LLncURxAyOltK92Lf58XcTV7T5IkPgoGtLncZ4CcOzVVt69a5kI4B0TKKdBGio06KCkoxqQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB4162
+X-MS-Exchange-CrossTenant-UserPrincipalName: PrFINcEvB7fWTjaTzocYyyjqv3wSbk7qRdqv662I9Y130riFK+dutG5bKhq32SMmq8ZSSDvkMk+fzeYYuzyoBNxvQ8Fn1siOIFur3pDpyb0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1233
 Content-Type: multipart/alternative;
- boundary="------------41D505C4912E9AF91CC98FB2"
+ boundary="------------59C41AA00B5FC3E9E66377F9"
 Content-Language: en-US
 
---------------41D505C4912E9AF91CC98FB2
+--------------59C41AA00B5FC3E9E66377F9
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 6/15/20 1:31 PM, zhengruoqin wrote:
+On 6/15/20 1:39 PM, zhengruoqin wrote:
 > Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python3-dnspython/run-ptest            |  3 +++
->   .../python/python3-dnspython_1.16.0.bb            | 15 ++++++++++++++-
+>   .../python/python3-dominate/run-ptest             |  3 +++
+>   .../python/python3-dominate_2.5.1.bb              | 15 ++++++++++++++-
 >   2 files changed, 17 insertions(+), 1 deletion(-)
->   create mode 100644 meta-python/recipes-devtools/python/python3-dnspython/run-ptest
+>   create mode 100644 meta-python/recipes-devtools/python/python3-dominate/run-ptest
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-dnspython/run-ptest b/meta-python/recipes-devtools/python/python3-dnspython/run-ptest
+> diff --git a/meta-python/recipes-devtools/python/python3-dominate/run-ptest b/meta-python/recipes-devtools/python/python3-dominate/run-ptest
 > new file mode 100644
 > index 000000000..b63c4de0d
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-dnspython/run-ptest
+> +++ b/meta-python/recipes-devtools/python/python3-dominate/run-ptest
 > @@ -0,0 +1,3 @@
 > +#!/bin/sh
 > +
 > +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-> diff --git a/meta-python/recipes-devtools/python/python3-dnspython_1.16.0.bb b/meta-python/recipes-devtools/python/python3-dnspython_1.16.0.bb
-> index cb255442f..66cd88363 100644
-> --- a/meta-python/recipes-devtools/python/python3-dnspython_1.16.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-dnspython_1.16.0.bb
-> @@ -8,7 +8,20 @@ SRC_URI[sha256sum] = "36c5e8e38d4369a08b6780b7f27d790a292b2b08eea01607865bf0936c
->   
->   PYPI_PACKAGE_EXT = "zip"
+> diff --git a/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb b/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb
+> index dd8c59603..75dd4ef9f 100644
+> --- a/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb
+> @@ -5,7 +5,20 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
+>   SRC_URI[md5sum] = "35eeb6b5587c8c9a51cd22c83e07ac49"
+>   SRC_URI[sha256sum] = "9b05481605ea8c0afd0a98c0156a9fb78d9c406368d66b3e6fedf36920fb9d78"
 >   
 > -inherit pypi setuptools3
 > +inherit pypi setuptools3 ptest
@@ -126,12 +126,12 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > +	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 > +}
 >   
->   RDEPENDS_${PN} += " \
->       ${PYTHON_PN}-crypt \
+>   RDEPENDS_${PN} += "\
+>       ${PYTHON_PN}-numbers \
 >
 > 
 
---------------41D505C4912E9AF91CC98FB2
+--------------59C41AA00B5FC3E9E66377F9
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -141,36 +141,36 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 6/15/20 1:31 PM, zhengruoqin wrote:<br>
+    <div class="moz-cite-prefix">On 6/15/20 1:39 PM, zhengruoqin wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:1592242301-113731-1-git-send-email-zhengrq.fnst@cn.fujitsu.com">
+    <blockquote type="cite" cite="mid:1592242746-113844-1-git-send-email-zhengrq.fnst@cn.fujitsu.com">
       <pre class="moz-quote-pre" wrap="">Signed-off-by: Zheng Ruoqin <a class="moz-txt-link-rfc2396E" href="mailto:zhengrq.fnst@cn.fujitsu.com">&lt;zhengrq.fnst@cn.fujitsu.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:1592242301-113731-1-git-send-email-zhengrq.fnst@cn.fujitsu.com">
+    <blockquote type="cite" cite="mid:1592242746-113844-1-git-send-email-zhengrq.fnst@cn.fujitsu.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python3-dnspython/run-ptest            |  3 &#43;&#43;&#43;
- .../python/python3-dnspython_1.16.0.bb            | 15 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
+ .../python/python3-dominate/run-ptest             |  3 &#43;&#43;&#43;
+ .../python/python3-dominate_2.5.1.bb              | 15 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
  2 files changed, 17 insertions(&#43;), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-dnspython/run-ptest
+ create mode 100644 meta-python/recipes-devtools/python/python3-dominate/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python3-dnspython/run-ptest b/meta-python/recipes-devtools/python/python3-dnspython/run-ptest
+diff --git a/meta-python/recipes-devtools/python/python3-dominate/run-ptest b/meta-python/recipes-devtools/python/python3-dominate/run-ptest
 new file mode 100644
 index 000000000..b63c4de0d
 --- /dev/null
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-dnspython/run-ptest
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-dominate/run-ptest
 @@ -0,0 &#43;1,3 @@
 &#43;#!/bin/sh
 &#43;
 &#43;pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;){printf &quot;%s: %s\n&quot;, $NF, $0}else{print}}'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;) {$NF=&quot;&quot;;print $0}else{print}}'
-diff --git a/meta-python/recipes-devtools/python/python3-dnspython_1.16.0.bb b/meta-python/recipes-devtools/python/python3-dnspython_1.16.0.bb
-index cb255442f..66cd88363 100644
---- a/meta-python/recipes-devtools/python/python3-dnspython_1.16.0.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-dnspython_1.16.0.bb
-@@ -8,7 &#43;8,20 @@ SRC_URI[sha256sum] = &quot;36c5e8e38d4369a08b6780b7f27d790a292b2b08eea01607865bf0936c
- 
- PYPI_PACKAGE_EXT = &quot;zip&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb b/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb
+index dd8c59603..75dd4ef9f 100644
+--- a/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb
+@@ -5,7 &#43;5,20 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=b52f2d57d10c4f7ee67a7eb9615d5d24">&quot;file://LICENSE.txt;md5=b52f2d57d10c4f7ee67a7eb9615d5d24&quot;</a>
+ SRC_URI[md5sum] = &quot;35eeb6b5587c8c9a51cd22c83e07ac49&quot;
+ SRC_URI[sha256sum] = &quot;9b05481605ea8c0afd0a98c0156a9fb78d9c406368d66b3e6fedf36920fb9d78&quot;
  
 -inherit pypi setuptools3
 &#43;inherit pypi setuptools3 ptest
@@ -188,8 +188,8 @@ index cb255442f..66cd88363 100644
 &#43;	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 &#43;}
  
- RDEPENDS_${PN} &#43;= &quot; \
-     ${PYTHON_PN}-crypt \
+ RDEPENDS_${PN} &#43;= &quot;\
+     ${PYTHON_PN}-numbers \
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -199,4 +199,4 @@ index cb255442f..66cd88363 100644
   </body>
 </html>
 
---------------41D505C4912E9AF91CC98FB2--
+--------------59C41AA00B5FC3E9E66377F9--
