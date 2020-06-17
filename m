@@ -1,75 +1,85 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.1719.1592424781617032965
+Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com [209.85.219.52])
+ by mx.groups.io with SMTP id smtpd.web12.4138.1592431881678349434
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Jun 2020 13:13:02 -0700
+ Wed, 17 Jun 2020 15:11:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=34286 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jleQc-0003o3-3j; Wed, 17 Jun 2020 23:12:59 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCH 2/2] sip3: Upgrade 4.19.19 -> 4.19.23
-Date: Wed, 17 Jun 2020 23:12:47 +0300
-Message-Id: <20200617201247.14206-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200617201247.14206-1-leon.anavi@konsulko.com>
-References: <20200617201247.14206-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=uxoa0pFO;
+ spf=pass (domain: gmail.com, ip: 209.85.219.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f52.google.com with SMTP id d12so1858054qvn.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Jun 2020 15:11:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=5wg1bODb0hauc/fJOVwwj+y6aOwaBU0LITcu9CbZFJ0=;
+        b=uxoa0pFO3iRqLIa/5lVCJoQ2uWi9VsoWy17jXv9O/KdrsdmSCzQv220Y7MTunayOBR
+         WBxYIgjNhhb0+hNJDuijgCY8RBWB7o79PiKrzQF1LkNXqX/0m4IDtZM2o1mWv5v5/RXe
+         UdZiP+l8Rj9aEQpHq2AMy2LF0GAK53eFFkHxsfYKbPcA9vZzNPpTIeSL8F/DMfI1D3ox
+         sANIrS7KVTrXCa+vNlIECzIncd9HHONNtqrBSV7C8gDcdkpIuWFV7N2yGiFPHnFmTvsX
+         n1peS5olww2gV3Dt3+HC897mvcxMqIVKK1I0syBXhXttMWc8TFMY9BoTnQAk7U1rDpN1
+         75JA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=5wg1bODb0hauc/fJOVwwj+y6aOwaBU0LITcu9CbZFJ0=;
+        b=XRXyGyeD9Vlmo7aApM1oKB4YRgJ7DOeP2RX/879io+Jz5nddVsbqB1996tLqUBgK8D
+         zpWJ6U4L18SnidXco8is2y4NN/C0N5pXCLhm2UJZMqkmx4jcDNzhJ8lktKAJbiXF2W61
+         e65k4MKKNPonMbW3CcMmZ2WB+J4jiBAw53g8Kpb7wRnL934u1r9Ocj26gVea7a0iFGXJ
+         VrrQtLHWyAzVJwfFuVH3+xEieT4yw1vu/2oCntd+L+QG2Jiws2pSPoGSp5clNg9OTB7V
+         NonDbv7JMxw/OnBRjTkWq0OJCBv5D5ZPAw1wFGiqN3ndWowImVMPX6/9AjJfOV9Fv7Bq
+         msjQ==
+X-Gm-Message-State: AOAM53245zaAAYNQBN347xWqQN398864IXqzk/77tJHBBvVNaWGHj50O
+	PC7bSgwRA5FeW34haoSJ8Lu+vDIDhcxUfmpgoKM=
+X-Google-Smtp-Source: ABdhPJwNA8HBLmBtvICuaLaabJ7+0hi/kY4rqWeVp+Cak+LQL09db0nY+9eVPTVyqN6g8DSMybyBpZTyYjedNMh90JA=
+X-Received: by 2002:ad4:5511:: with SMTP id az17mr829254qvb.146.1592431880724;
+ Wed, 17 Jun 2020 15:11:20 -0700 (PDT)
+MIME-Version: 1.0
+References: <1592401134880.81332@cn.fujitsu.com>
+In-Reply-To: <1592401134880.81332@cn.fujitsu.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Wed, 17 Jun 2020 15:10:54 -0700
+Message-ID: <CAMKF1sobCp-j1kraYU7kNHa4AAmE_AB3taQPB+Z+j3SazRUkHQ@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH] python3-wtforms: upgrade 2.2.1 -> 2.3.1
+To: Wang Mingyu <wangmy@cn.fujitsu.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Upgrade to release 4.19.23:
+On Wed, Jun 17, 2020 at 6:39 AM Wang Mingyu <wangmy@cn.fujitsu.com> wrote:
+>
+> Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+> ---
+>  .../{python3-wtforms_2.2.1.bb => python3-wtforms_2.3.1.bb}  | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python3-wtforms_2.2.1.bb => python3-wtforms_2.3.1.bb} (60%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-wtforms_2.2.1.bb b/meta-python/recipes-devtools/python/python3-wtforms_2.3.1.bb
+> similarity index 60%
+> rename from meta-python/recipes-devtools/python/python3-wtforms_2.2.1.bb
+> rename to meta-python/recipes-devtools/python/python3-wtforms_2.3.1.bb
+> index 2b7af6267..9f081b68c 100644
+> --- a/meta-python/recipes-devtools/python/python3-wtforms_2.2.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-wtforms_2.3.1.bb
+> @@ -2,10 +2,10 @@ DESCRIPTION = "A flexible forms validation and rendering library for python web
+>  HOMEPAGE = "https://pypi.python.org/pypi/WTForms"
+>  SECTION = "devel/python"
+>  LICENSE = "BSD-3-Clause"
+> -LIC_FILES_CHKSUM = "file://PKG-INFO;md5=c4660c132770d5d0a5757541f6b79493"
+> +LIC_FILES_CHKSUM = "file://PKG-INFO;md5=208ce1c159f911ecf389806650582021"
+>
+what changed here ? please document it in commit msg. Additionally
+this patch is not applicable to master branch
+please rebase and resend.
 
-- Added some missing quotes to configure.py
-- Fixed a race condition when calling the PyQt5-specific meta-call
-  helper.
-- Fixed the wrapping of methods that return a Py_Ssize_t.
-- The code generator now distinguishes between the copy/assignment
-  helper and the array helper when determining which helpers can
-  be generated.
-- Fixed the code generation when making a copy of C++ object on
-  the stack to the heap when the class has no suitable ctor.
-- Check there is a public copy ctor when we can't using an
-  assigment operator as a workaround.
-- Preserve any current exception in the implementation of the
-  wrapper dealloc functions.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../recipes-devtools/sip/{sip3_4.19.19.bb => sip3_4.19.23.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/sip/{sip3_4.19.19.bb => sip3_4.19.23.bb} (92%)
-
-diff --git a/meta-oe/recipes-devtools/sip/sip3_4.19.19.bb b/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
-similarity index 92%
-rename from meta-oe/recipes-devtools/sip/sip3_4.19.19.bb
-rename to meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
-index e6a4653b5..320755b84 100644
---- a/meta-oe/recipes-devtools/sip/sip3_4.19.19.bb
-+++ b/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
- 
- SRC_URI = "https://www.riverbankcomputing.com/static/Downloads/sip/${PV}/sip-${PV}.tar.gz \
- "
--SRC_URI[md5sum] = "98111479309dc472410f26080d6d4a88"
--SRC_URI[sha256sum] = "5436b61a78f48c7e8078e93a6b59453ad33780f80c644e5f3af39f94be1ede44"
-+SRC_URI[md5sum] = "70adc0c9734e2d9dcd241d3f931dfc74"
-+SRC_URI[sha256sum] = "22ca9bcec5388114e40d4aafd7ccd0c4fe072297b628d0c5cdfa2f010c0bc7e7"
- 
- inherit python3-dir python3native
- 
--- 
-2.17.1
-
+> -SRC_URI[md5sum] = "41c0008dbe7bd98892c58f7457a46a4a"
+> -SRC_URI[sha256sum] = "0cdbac3e7f6878086c334aa25dc5a33869a3954e9d1e015130d65a69309b3b61"
+> +SRC_URI[md5sum] = "bff06943e59671581af07f80d14bda5f"
+> +SRC_URI[sha256sum] = "861a13b3ae521d6700dac3b2771970bd354a63ba7043ecc3a82b5288596a1972"
+>
+>  PYPI_PACKAGE = "WTForms"
+>
+> --
+> 2.17.1
+>
+>
+> 
