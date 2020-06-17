@@ -1,202 +1,281 @@
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.82])
- by mx.groups.io with SMTP id smtpd.web11.9367.1592405192995483078
+Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com [209.85.219.54])
+ by mx.groups.io with SMTP id smtpd.web12.201.1592410186679084333
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Jun 2020 07:46:33 -0700
+ Wed, 17 Jun 2020 09:09:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=XPatKuDY;
- spf=pass (domain: windriver.com, ip: 40.107.94.82, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jnAYRoUj8+DYGMf4VBa+YwbuWmAPdx9C1jDSn6OE6i9MCvEQ8XApNTJfgZPsPA77uAfl3cInwzbjULG+sAeX+DYSlgwtA3ZukNjlXkmc2JgH7eZnTTDhfYdsT+J4gNzcKAoQrIhM2UC/WWW7cMxn+38CdDOhiFNl4/7tvgdB0QxiuWkr582UoGPCTwjoHDfj5l54BljllVKvkNoendXynnK2vMawRM9qEmerGnlNIoaHhV2jKO+b0KIpsUvL/a4xaD59Dn/AJsYVOuiaC2rT//VLhCotYYRwHjDoKPYqFd287/Sr302rycqeer4Xc33nbjO0ZrKX+Aca0s4z7SnDlQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=28okenUm2f58IMtnk4r5W1qYz6VTqolzLNfXyqVwA0U=;
- b=cK1DnZUmWaaojdfUpZZmDIkPMqIqCsLY6PIWt1isfCn4VR2u6VLjD0HHnmCkjPGXTZfRLBtUCx4NKdIg6kb1xhpbhpLOjb0GweVnnp2ryi5fsfjEWD3dcnsywq4Rly479U2/i58p7VJF1XaoTtCu3XQeyeJFTcupEITFdQ9oh+v4ZrTAFZAE3zplhXzRXqDsGikrh8s0g7tt+Gs9aBUZY5x/m+T8zClhL5TNffQ6WuM0pwrQgDEU35DomOaA4oxB9vRCkehDZqijbbsv5XAGf9rl4tC0svdJDfVY5ntpa/8RJReb6KlolabjpOYIRomokDqunjzarr9NGHWGsK1Gjw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=TSIiZL1e;
+ spf=pass (domain: gmail.com, ip: 209.85.219.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f54.google.com with SMTP id g7so1263862qvx.11
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Jun 2020 09:09:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=28okenUm2f58IMtnk4r5W1qYz6VTqolzLNfXyqVwA0U=;
- b=XPatKuDY7qtsbAtoJwa2MvREQHAdicyTtMHIbZ07Q2m4izu9C2B1i8us/6eX/E+vAfNBo29SicFZWvHgX3pqCQ9+c+P9R1kq0SicRzL3xWuBWJB1PnbchS8VVHh9CfCAJHLhHJZDJtAEkf/ukzaX/sEtOPJmw/fPii+CWe+CE5s=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB1233.namprd11.prod.outlook.com (2603:10b6:404:44::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.21; Wed, 17 Jun
- 2020 14:46:31 +0000
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3109.021; Wed, 17 Jun 2020
- 14:46:31 +0000
-Subject: Re: [oe] [meta-python] [PATCH] python3-dominate: Enable ptest
-To: zhengruoqin <zhengrq.fnst@cn.fujitsu.com>,
- openembedded-devel@lists.openembedded.org
-References: <1592242746-113844-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <590b7f05-d6af-cd0c-b2d5-45629cd1b465@windriver.com>
-Date: Wed, 17 Jun 2020 10:46:30 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
-In-Reply-To: <1592242746-113844-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-ClientProxiedBy: YT1PR01CA0130.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::9) To BN6PR11MB0003.namprd11.prod.outlook.com
- (2603:10b6:405:61::26)
-Return-Path: trevor.gamblin@windriver.com
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=sxonER0j0GVeUUhDZeSN2PJPciBydbvHQxMsyjBmLWc=;
+        b=TSIiZL1e/fQtP3Fl2IuQYvC+ZgqGFVQZkTX5AE0LfKE0MowMkhlxEV8e5FP1nqAsMn
+         SA7fHR+5A2d8f2gE1ON4/hheGsU59873pT+mS9GuFzO+1kRXTmz7/J64Yrx9eFHMANE+
+         0DlPRpHXpYPxHheWQydxZ7JAVhBggZdHA1r14d5I1J+rb5iAnJflDILp3SfHGE+eBP72
+         bKvZaqWGOM2I+D88dLThRPavhHB2ivk7zhJmstbGLjE95nKCAkxqesHm7sM/Ilz3zudr
+         WwzR5U4nlJMsoGnczIq4loV5v37QfZY8LDGhhvVSXfG1SkVNzxYWsfFWP7Q7icHXuepa
+         lMnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=sxonER0j0GVeUUhDZeSN2PJPciBydbvHQxMsyjBmLWc=;
+        b=eCq1kT3ZBL4ynFGAEbxXAFcXYMLO4ykiETDNZIxwcl2jkix/FT2YCnRmsRo1e79giC
+         HIhLUznzyyMcNPdTyUYuE50yzUi8F9AZO5bIk/VwWumYlp9TXLslVotvyY1GNruiT8UQ
+         UbeTdgWsFYRbk4X0GQH70yV7twfXCr4vXcsEgDP5Ty0nAQ6pTd+WlU/r7+oFSMESoiw6
+         avV9kXKt9V6Yy1r+lRIbkRLw3Mcf8q9wtsLeaWungds2ORNxmR4GJrtgBBltMYC4mmxw
+         ASDs45zCFghwMUoPl3BDvE0EsLT9DBtReZbtNXv7rH1m5tnkTWW3vJ3YDoqkiwkvjQd8
+         W6Aw==
+X-Gm-Message-State: AOAM531AQJO4fCQsjstcKsEsLTX0IHhd+Z6TzrrPhb9NHspPb+gfClpd
+	c2w9+GA9QzrWC2Jhjl09pKYugW51EBV2pD/kgf8=
+X-Google-Smtp-Source: ABdhPJxrbFFdc7yRTnsIpRAFbwaARTn2sYKUS45I1VgWkYMkCe5jrA1X/yKC1DT3hj4oQ2CRfd7tzpKo36M9bd1KVys=
+X-Received: by 2002:a0c:ba0c:: with SMTP id w12mr8527271qvf.4.1592410185611;
+ Wed, 17 Jun 2020 09:09:45 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0130.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::9) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.21 via Frontend Transport; Wed, 17 Jun 2020 14:46:31 +0000
-X-Originating-IP: [174.115.236.231]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3ebaf2e6-0433-4a86-8319-08d812cd398a
-X-MS-TrafficTypeDiagnostic: BN6PR11MB1233:
-X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB1233F581F666EBA469F0CF109F9A0@BN6PR11MB1233.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:168;
-X-Forefront-PRVS: 04371797A5
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	MCjefHLqclFsY17ii/0JwPkBAqZIFiT4zgIT926/f33djdSziTXrPeRWqH/vYetCB3B9aaUhYBquxPsHZ7+ugWQI5H56KgjYX7zzATCIJyhQChTSshBSxQdMoXirjeOgSdISoVJJP8wX3PgnfV7/rT7M0XjLnisPnnvN8yR+RxT7xV/d8Ay2yEArQN0kmLG+wDONzdS4XVh1YzPa5QAvXPufYS/6YfmivkDc4gcKmpxIPgfnbWO27/4oJAocuZFiLa/K409vC+Tl4hsgREg/nOgBT+TPXhy42JbQA1C8tdFNEV5WzsQ48ogDyDVuR6wEkYfkU8Sp7d/Y57qIZlWeWJ3USMlQKN12uEu84aTxPddI8xGt+nUP/yCyQqJ6zM73LX1i6FFuGCYMqSdz43MfOY+wppVFsHmL0hcBaQmxowo+TSCnhan0ljCpYNAdCtEouQ2tsIj0ja280Jf97A0cPQ==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(39850400004)(366004)(136003)(376002)(346002)(66476007)(33964004)(44832011)(66946007)(5660300002)(31696002)(31686004)(66556008)(16526019)(86362001)(956004)(52116002)(36756003)(2906002)(2616005)(8676002)(186003)(6486002)(478600001)(26005)(83380400001)(966005)(166002)(8936002)(16576012)(53546011)(316002)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	YkBfHXwVwC4Zvyq97Q4gxTZ9tNdWbNF01XZG0NxTNrpZrWuNNiM6XdFdPjQdOJvSp19GglJULcXqb7+hwxL+/+jZXRNwVT/13P63IQiH7scHWvkdssMp+eTddAO9MK9c8pg/zMVqbCNZz9cBH6NB3EFid2Awj7HZoULnAuJbMU2Hi5J7Y4lPeqEKiCnr5bJWjqcThmjhtdeBTh934M0Ver1uHq9aPG+YdmmwFwq1TDmABsWLLaTk1tqNUbfS0UOYm2w5HEg/fqhVwAiirSgG0zv+5kWy69vi9sFw61GBA6tK03Lliy3Ri+E3CIWNF/300tQhY1LsMXo36CpZTXKS7QHTr6Ucba9s9SErLIObo3YkJpqceeWrnK+R+0znHhitDnongPHFjq7zj+i0XEx9KBG2wIj4GXkGTNhSfLUMORKgavgi/Y2mxkQKBPAdr0aDAIIyFBqf0d03no6olmSWWhvczAwEg2Q0C6b1kzgpBCuAjACBSGZ75xVe49pUUB8O
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3ebaf2e6-0433-4a86-8319-08d812cd398a
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2020 14:46:31.7267
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PrFINcEvB7fWTjaTzocYyyjqv3wSbk7qRdqv662I9Y130riFK+dutG5bKhq32SMmq8ZSSDvkMk+fzeYYuzyoBNxvQ8Fn1siOIFur3pDpyb0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1233
-Content-Type: multipart/alternative;
- boundary="------------59C41AA00B5FC3E9E66377F9"
-Content-Language: en-US
+References: <1592401132897.40897@cn.fujitsu.com>
+In-Reply-To: <1592401132897.40897@cn.fujitsu.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Wed, 17 Jun 2020 09:09:19 -0700
+Message-ID: <CAMKF1spG=tNZKckmH-ZvxKvXsPGorcuTgu5NzPN79RqSM9o_dQ@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH] rp-pppoe: upgrade 3.13 -> 3.14
+To: Wang Mingyu <wangmy@cn.fujitsu.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
---------------59C41AA00B5FC3E9E66377F9
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Please rebase it on latest master and resend
 
-
-On 6/15/20 1:39 PM, zhengruoqin wrote:
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   .../python/python3-dominate/run-ptest             |  3 +++
->   .../python/python3-dominate_2.5.1.bb              | 15 ++++++++++++++-
->   2 files changed, 17 insertions(+), 1 deletion(-)
->   create mode 100644 meta-python/recipes-devtools/python/python3-dominate/run-ptest
+On Wed, Jun 17, 2020 at 6:39 AM Wang Mingyu <wangmy@cn.fujitsu.com> wrote:
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-dominate/run-ptest b/meta-python/recipes-devtools/python/python3-dominate/run-ptest
-> new file mode 100644
-> index 000000000..b63c4de0d
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-dominate/run-ptest
-> @@ -0,0 +1,3 @@
-> +#!/bin/sh
+> configure.in-Error-fix.patch
+> dont-swallow-errors.patch
+> removed since they are not available in 3.14
+>
+> refresh configure_in_cross.patch
+>
+> Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+> ---
+>  .../rp-pppoe/configure.in-Error-fix.patch     | 57 -------------------
+>  .../rp-pppoe/configure_in_cross.patch         | 41 +++++--------
+>  .../rp-pppoe/dont-swallow-errors.patch        | 26 ---------
+>  .../{rp-pppoe_3.13.bb => rp-pppoe_3.14.bb}    |  6 +-
+>  4 files changed, 15 insertions(+), 115 deletions(-)
+>  delete mode 100644 meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure.in-Error-fix.patch
+>  delete mode 100644 meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/dont-swallow-errors.patch
+>  rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe_3.13.bb => rp-pppoe_3.14.bb} (92%)
+>
+> diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure.in-Error-fix.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure.in-Error-fix.patch
+> deleted file mode 100644
+> index bbd516fde..000000000
+> --- a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure.in-Error-fix.patch
+> +++ /dev/null
+> @@ -1,57 +0,0 @@
+> -From bdd20b7a584a20504dfabb409a41ee2b9ae41657 Mon Sep 17 00:00:00 2001
+> -From: Lei Maohui <leimaohui@cn.fujitsu.com>
+> -Date: Wed, 19 Aug 2015 13:52:57 +0900
+> -Subject: [PATCH] configure.in: Error fix.
+> -
+> -the error is: conftest.c:9:28: fatal error: ac_nonexistent.h:
+> -No such file or directory #include <ac_nonexistent.h>
+> -
+> -Upstream-Status: pending
+> -
+> -Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> -
+> ----
+> - src/configure.in | 30 ------------------------------
+> - 1 file changed, 30 deletions(-)
+> -
+> -diff --git a/src/configure.in b/src/configure.in
+> -index 1714e69..cae0976 100644
+> ---- a/src/configure.in
+> -+++ b/src/configure.in
+> -@@ -195,36 +195,6 @@ if test "$GCC" = yes; then
+> -       CFLAGS="$CFLAGS -fno-strict-aliasing -Wall -Wstrict-prototypes"
+> - fi
+> -
+> --dnl Figure out packing order of structures
+> --AC_CACHE_CHECK([packing order of bit fields],rpppoe_cv_pack_bitfields,[
+> --if test "${rpppoe_cv_pack_bitfields+set}" != set ; then
+> --AC_TRY_RUN([
+> --union foo {
+> --    struct bar {
+> --      unsigned int ver:4;
+> --      unsigned int type:4;
+> --    } bb;
+> --    unsigned char baz;
+> --};
+> --
+> --int
+> --main(void)
+> --{
+> --    union foo x;
+> --    x.bb.ver = 1;
+> --    x.bb.type = 2;
+> --    if (x.baz == 0x21) {
+> --      return 1;
+> --    } else if (x.baz == 0x12) {
+> --      return 0;
+> --    } else {
+> --      return 2;
+> --    }
+> --}], rpppoe_cv_pack_bitfields=normal, rpppoe_cv_pack_bitfields=rev,
+> --$ECHO "no defaults for cross-compiling"; exit 1)
+> --fi
+> --])
+> --
+> - if test "$rpppoe_cv_pack_bitfields" = "rev" ; then
+> -       AC_MSG_RESULT(reversed)
+> -       AC_DEFINE([PACK_BITFIELDS_REVERSED], [], [Reversed bitfields])
+> diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure_in_cross.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure_in_cross.patch
+> index 3b945934f..0c2d74832 100644
+> --- a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure_in_cross.patch
+> +++ b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure_in_cross.patch
+> @@ -8,13 +8,12 @@ a few target paths, reworks a few tests to be more friendly for cross
+>  and drops other tests.
+>
+>  Upstream-Status: Inappropriate [build system specific changes]
+> -
+>  ---
+> - src/configure.in | 66 ++++++++++++++------------------------------------------
+> - 1 file changed, 16 insertions(+), 50 deletions(-)
+> + src/configure.in | 60 +++++++++++-------------------------------------
+> + 1 file changed, 13 insertions(+), 47 deletions(-)
+>
+>  diff --git a/src/configure.in b/src/configure.in
+> -index 90a07df..1d30243 100644
+> +index 54b924e..8beb62c 100644
+>  --- a/src/configure.in
+>  +++ b/src/configure.in
+>  @@ -5,6 +5,13 @@ AC_INIT(pppoe.c)
+> @@ -67,13 +66,12 @@ index 90a07df..1d30243 100644
+>   fi
+>
+>   AC_SUBST(LINUX_KERNELMODE_PLUGIN)
+> -@@ -142,15 +149,8 @@ AC_CHECK_SIZEOF(unsigned short)
+> +@@ -142,14 +149,8 @@ AC_CHECK_SIZEOF(unsigned short)
+>   AC_CHECK_SIZEOF(unsigned int)
+>   AC_CHECK_SIZEOF(unsigned long)
+>
+>  -dnl Check for location of pppd
+>  -AC_PATH_PROG(PPPD, pppd, NOTFOUND, $PATH:/sbin:/usr/sbin:/usr/local/sbin)
+> --AC_PATH_PROG(ECHO, echo, echo)
+>  -
+>  -dnl Check for setsid (probably Linux-specific)
+>  -AC_PATH_PROG(SETSID, setsid, "", $PATH:/sbin:/usr/sbin:/usr/local/sbin)
+> @@ -84,7 +82,7 @@ index 90a07df..1d30243 100644
+>
+>   dnl Check for Linux-specific kernel support for PPPoE
+>   AC_MSG_CHECKING(for Linux 2.4.X kernel-mode PPPoE support)
+> -@@ -195,44 +195,8 @@ if test "$GCC" = yes; then
+> +@@ -192,42 +193,6 @@ if test "$GCC" = yes; then
+>         CFLAGS="$CFLAGS -fno-strict-aliasing -Wall -Wstrict-prototypes"
+>   fi
+>
+> @@ -124,30 +122,17 @@ index 90a07df..1d30243 100644
+>  -      ;;
+>  -esac
+>  -
+> - dnl Figure out packing order of structures
+> --AC_MSG_CHECKING([packing order of bit fields])
+> -+AC_CACHE_CHECK([packing order of bit fields],rpppoe_cv_pack_bitfields,[
+> - if test "${rpppoe_cv_pack_bitfields+set}" != set ; then
+> - AC_TRY_RUN([
+> - union foo {
+> -@@ -259,10 +223,11 @@ main(void)
+> - }], rpppoe_cv_pack_bitfields=normal, rpppoe_cv_pack_bitfields=rev,
+> - $ECHO "no defaults for cross-compiling"; exit 0)
+> - fi
+> -+])
+> -
+> - if test "$rpppoe_cv_pack_bitfields" = "rev" ; then
+> -       AC_MSG_RESULT(reversed)
+> --      AC_DEFINE(PACK_BITFIELDS_REVERSED)
+> -+      AC_DEFINE([PACK_BITFIELDS_REVERSED], [], [Reversed bitfields])
+> - else
+> -       AC_MSG_RESULT(normal)
+> - fi
+> -@@ -326,6 +291,7 @@ AC_SUBST(PPPOE_SERVER_DEPS)
+> + # Sigh... got to fix this up for tcl
+> + test "x$prefix" = xNONE && prefix=$ac_default_prefix
+> + # Let make expand exec_prefix.
+> +@@ -286,6 +251,7 @@ AC_SUBST(LIC_DEFINE)
+> + AC_SUBST(PPPOE_SERVER_DEPS)
+>   AC_SUBST(RDYNAMIC)
+>   AC_SUBST(LIBEVENT)
+> - AC_SUBST(ECHO)
+>  +AC_SUBST(HAVE_STRUCT_SOCKADDR_LL)
+>   AC_SUBST(LDFLAGS)
+>
+>   datadir_evaluated=`eval echo $datadir`
+> +--
+> +2.17.1
 > +
-> +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-> diff --git a/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb b/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb
-> index dd8c59603..75dd4ef9f 100644
-> --- a/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb
-> @@ -5,7 +5,20 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
->   SRC_URI[md5sum] = "35eeb6b5587c8c9a51cd22c83e07ac49"
->   SRC_URI[sha256sum] = "9b05481605ea8c0afd0a98c0156a9fb78d9c406368d66b3e6fedf36920fb9d78"
->   
-> -inherit pypi setuptools3
-> +inherit pypi setuptools3 ptest
-> +
-> +SRC_URI += " \
-> +	file://run-ptest \
-> +"
-> +
-> +RDEPENDS_${PN}-ptest += " \
-> +	${PYTHON_PN}-pytest \
-> +"
-> +
-> +do_install_ptest() {
-> +	install -d ${D}${PTEST_PATH}/tests
-> +	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> +}
->   
->   RDEPENDS_${PN} += "\
->       ${PYTHON_PN}-numbers \
+> diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/dont-swallow-errors.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/dont-swallow-errors.patch
+> deleted file mode 100644
+> index 8a857888b..000000000
+> --- a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/dont-swallow-errors.patch
+> +++ /dev/null
+> @@ -1,26 +0,0 @@
+> -From a9a7322273c51882af58c35ba288a0fae00ba841 Mon Sep 17 00:00:00 2001
+> -From: Lei Maohui <leimaohui@cn.fujitsu.com>
+> -Date: Wed, 19 Aug 2015 12:33:41 +0900
+> -Subject: [PATCH] don't swallow errors
+> -
+> -Further fixup to the configure scripts to not swallow errors
+> -
+> -Upstream-Status: Pending
+> -
+> ----
+> - src/configure.in | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+> -
+> -diff --git a/src/configure.in b/src/configure.in
+> -index 1d30243..1714e69 100644
+> ---- a/src/configure.in
+> -+++ b/src/configure.in
+> -@@ -221,7 +221,7 @@ main(void)
+> -       return 2;
+> -     }
+> - }], rpppoe_cv_pack_bitfields=normal, rpppoe_cv_pack_bitfields=rev,
+> --$ECHO "no defaults for cross-compiling"; exit 0)
+> -+$ECHO "no defaults for cross-compiling"; exit 1)
+> - fi
+> - ])
+> -
+> diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.13.bb b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.14.bb
+> similarity index 92%
+> rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.13.bb
+> rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.14.bb
+> index 492ade5ae..95c613e49 100644
+> --- a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.13.bb
+> +++ b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.14.bb
+> @@ -10,19 +10,17 @@ SRC_URI = "https://dianne.skoll.ca/projects/rp-pppoe/download/rp-pppoe-${PV}.tar
+>             file://top-autoconf.patch \
+>             file://configure_in_cross.patch \
+>             file://update-config.patch \
+> -           file://dont-swallow-errors.patch \
+>             file://discard-use-of-dnl-in-Makefile.am.patch \
+>             file://configure.patch \
+>             file://pppoe-server.default \
+>             file://pppoe-server.init \
+> -           file://configure.in-Error-fix.patch \
+>             file://pppoe-server.service \
+>             file://0001-ppoe-Dont-include-linux-if_ether.h.patch \
+>             file://0002-Enable-support-for-the-kernel-module.patch \
+>             "
+>
+> -SRC_URI[md5sum] = "ec9dccd9a367a1f71f2dc81069796dd8"
+> -SRC_URI[sha256sum] = "8cd6bc71ba46bd5f6eb4daf60220ccdcd991a8525111dee466501b1b9717e676"
+> +SRC_URI[md5sum] = "399ec9f69149f4a42edf0b4f5ac2173c"
+> +SRC_URI[sha256sum] = "7825232f64ab4d618ef074d62d145ae43d6edc91b9a718c6130a4742bac40e2a"
+>
+>  inherit autotools-brokensep update-rc.d systemd
+>
+> --
+> 2.17.1
+>
 >
 > 
-
---------------59C41AA00B5FC3E9E66377F9
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 6/15/20 1:39 PM, zhengruoqin wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:1592242746-113844-1-git-send-email-zhengrq.fnst@cn.fujitsu.com">
-      <pre class="moz-quote-pre" wrap="">Signed-off-by: Zheng Ruoqin <a class="moz-txt-link-rfc2396E" href="mailto:zhengrq.fnst@cn.fujitsu.com">&lt;zhengrq.fnst@cn.fujitsu.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:1592242746-113844-1-git-send-email-zhengrq.fnst@cn.fujitsu.com">
-      <pre class="moz-quote-pre" wrap="">
----
- .../python/python3-dominate/run-ptest             |  3 &#43;&#43;&#43;
- .../python/python3-dominate_2.5.1.bb              | 15 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
- 2 files changed, 17 insertions(&#43;), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-dominate/run-ptest
-
-diff --git a/meta-python/recipes-devtools/python/python3-dominate/run-ptest b/meta-python/recipes-devtools/python/python3-dominate/run-ptest
-new file mode 100644
-index 000000000..b63c4de0d
---- /dev/null
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-dominate/run-ptest
-@@ -0,0 &#43;1,3 @@
-&#43;#!/bin/sh
-&#43;
-&#43;pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;){printf &quot;%s: %s\n&quot;, $NF, $0}else{print}}'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;) {$NF=&quot;&quot;;print $0}else{print}}'
-diff --git a/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb b/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb
-index dd8c59603..75dd4ef9f 100644
---- a/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-dominate_2.5.1.bb
-@@ -5,7 &#43;5,20 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=b52f2d57d10c4f7ee67a7eb9615d5d24">&quot;file://LICENSE.txt;md5=b52f2d57d10c4f7ee67a7eb9615d5d24&quot;</a>
- SRC_URI[md5sum] = &quot;35eeb6b5587c8c9a51cd22c83e07ac49&quot;
- SRC_URI[sha256sum] = &quot;9b05481605ea8c0afd0a98c0156a9fb78d9c406368d66b3e6fedf36920fb9d78&quot;
- 
--inherit pypi setuptools3
-&#43;inherit pypi setuptools3 ptest
-&#43;
-&#43;SRC_URI &#43;= &quot; \
-&#43;	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
-&#43;&quot;
-&#43;
-&#43;RDEPENDS_${PN}-ptest &#43;= &quot; \
-&#43;	${PYTHON_PN}-pytest \
-&#43;&quot;
-&#43;
-&#43;do_install_ptest() {
-&#43;	install -d ${D}${PTEST_PATH}/tests
-&#43;	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-&#43;}
- 
- RDEPENDS_${PN} &#43;= &quot;\
-     ${PYTHON_PN}-numbers \
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------59C41AA00B5FC3E9E66377F9--
