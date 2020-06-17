@@ -1,17 +1,17 @@
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.56])
- by mx.groups.io with SMTP id smtpd.web11.9330.1592405128243909587
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (NAM11-CO1-obe.outbound.protection.outlook.com [40.107.220.60])
+ by mx.groups.io with SMTP id smtpd.web12.9289.1592405150154809929
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Jun 2020 07:45:28 -0700
+ Wed, 17 Jun 2020 07:45:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=MYTPXeg2;
- spf=pass (domain: windriver.com, ip: 40.107.94.56, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=pifJFD5J;
+ spf=pass (domain: windriver.com, ip: 40.107.220.60, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UGMk+/4UDi/U7Ru1dwyIWk8o1y5udKoWwmk4/LvX81M1yJMExJguGhBarn7tCUlG8HGROqp8oVIkoRlU8lXvcVBY+di56dQGaJVfysDzU3SsFnjG4eKx9Q7BS0xVMnVcyNn7Z6iK5GBn3Zm0b//NFdTrYxO8r9f0r6T6l4ML2Co3GFzXgTWpy9QGbKvFAhL6AnCsIvNr9ES8Fnv5PQ8defBDAvp9CtFTjQsYr1jeDqfiIepBorruopvWgQx33tYvjXD4Ian9X9ti79Q2aQt7SthDPdH/AnxEcziS25tbZQ4zaij3+8JwaubN2B96EkKLjciEdS7dBMP2DM1+VnN+3Q==
+ b=MaIqKTE3sS5s6ReJZ9291P27NonKlYyOPDJ4bnyTFuMs9CAsFNLQxoIW72vQSGGu1uKEqrnxlT2+VwuuyxOUkWPaTfUeoUCTf4gmHzWdLSRXVH5SI4p5gjIJ8ZNzTJ4i8LEluFry80IlcxGx1H5PpH613I2voz3ztZaWhxkHVUch8fc5NK9oFP0Nh6JVShp2X3zldNyt7aQwSbMouAVbBCnedaiSFYZTyz0Z0WpU82V58+HZk1vMvTQHOfHiZaJQhItVdd570wha4aAbX34qka4b1hSu0DUwZWwI1Zp3Kone9pkAt4rVpu3UYPt+NX3u6uCoyEHCyX3k8Boo2KXCMw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9ZjMhHeVmBim7A0jZY1aGst+3L//NhJg58NUr+EhVak=;
- b=HaHaUF/DqxJW9I/iqY5gDq5Xx5GQqH9/7suhWMxDnUqbZJvwCs9GGMggdLKNnpWL+2VkfEbDsTNyz8B/pjY2fiUFPfEVyvS7mfpHF5y6DCYgpdHev1eJHaFxz99RbwizQU8j/UiVTZl7TbEW3nbumrrjt2boO/WnUwW505BmgQLhwpXcidd5UoOWyxV0wui7FWZIk66AM8FGmU17fRqzTb6ZxaEuRZjUMKV4IqzJCfQ9BQTuBVha1+8ZFJC3OKbs2Z/xnsYg5+eSGiGVX1LuUzQwSndOBtH2Fk0D5MEbhC03W3I+m5ePQ0itpuqJs0yB6NR6gi6MRR2CcowosEo6EQ==
+ bh=y8GPZbsOIMZbiHO5F4cm1Q5zSDT3RTweoMqgvQ/xGAo=;
+ b=R6G+NsLfxq4PUBJAh6boSHwe2dpRURPfXqydGtGrFO9rlAIy6+hU3CT5myJgYUn3rcZ+KWZplEvjV+l/+VIe7tcGFgdbmVkoWB66hKDyC6ATh6m/oA9Pqlj2hFJ11CvT4uz004M+oV8TPHLm8iPjEvlxGovBiSZWftXiW3KFY9NXMRRgUu8MW6yCVuh5drmAPS0dMAMdnLvPa3QZKZDMr6NxhnPYWtJJJY735DS/SzvvjVlMxWes4vdJ10HMV/cL0qzuFu+s+tXndun9YuHGNMmNtDzyTbkYHk88ejhaCtsx568KI1SHZ+slNLjJml4F00KeQyxslYssNzFmvbx5Fg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,118 +19,101 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9ZjMhHeVmBim7A0jZY1aGst+3L//NhJg58NUr+EhVak=;
- b=MYTPXeg2C7p8NHAb9ikfYQMIUGwdPyYGPtqTWYAITh7aj//nLzfI1l6jP2IuetEDNnUXiyuraSh6XkcPhNbHfh2A9c4z8bQJDUB/B1vlqyIgYDgvYYlA8/dEOABuby9pTTwGWx/vPaeSaqk1ipfjnBVINGwQVvE+MRIyHtea0pA=
+ bh=y8GPZbsOIMZbiHO5F4cm1Q5zSDT3RTweoMqgvQ/xGAo=;
+ b=pifJFD5JlsxJB3wW/Yh143m9AAHlyT79ml1S5f4w/JZpzLUrowIv8+P6VGvQybkP6snOg8YyT9u+XOLQMj6LOYRYDVtGU1/Dgd4jXbZUdbdo8KLtcL6Ebx9wFJSucp7GU4C8eCQ8faPTL93grdO7WINLojRyxyD4rg1BJBzX78E=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB1233.namprd11.prod.outlook.com (2603:10b6:404:44::23) with
+ by BN6PR11MB4162.namprd11.prod.outlook.com (2603:10b6:405:84::12) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.21; Wed, 17 Jun
- 2020 14:45:27 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.24; Wed, 17 Jun
+ 2020 14:45:49 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3109.021; Wed, 17 Jun 2020
- 14:45:26 +0000
-Subject: Re: [oe] [meta-python] [PATCH] python3-gunicorn: Enable ptest
-To: zangrc <zangrc.fnst@cn.fujitsu.com>,
+ 14:45:49 +0000
+Subject: Re: [oe] [meta-python][PATCH] python-kconfiglib.inc: Remove
+To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
-References: <1592232372-4547-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+References: <20200615164918.822-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <5ad499a7-a236-e0a7-71cc-facff27fdf7e@windriver.com>
-Date: Wed, 17 Jun 2020 10:45:23 -0400
+Message-ID: <ebad0852-02f3-41ae-4974-d4d6d0c23339@windriver.com>
+Date: Wed, 17 Jun 2020 10:45:45 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <1592232372-4547-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-ClientProxiedBy: YT1PR01CA0136.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::15) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200615164918.822-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0140.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2f::19) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0136.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::15) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22 via Frontend Transport; Wed, 17 Jun 2020 14:45:26 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0140.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::19) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.21 via Frontend Transport; Wed, 17 Jun 2020 14:45:48 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: da892d3c-4538-441d-2d31-08d812cd12de
-X-MS-TrafficTypeDiagnostic: BN6PR11MB1233:
+X-MS-Office365-Filtering-Correlation-Id: e19d4fca-30cc-4f72-8e48-08d812cd2005
+X-MS-TrafficTypeDiagnostic: BN6PR11MB4162:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB12332BA0C7E3D5BA4D9C53689F9A0@BN6PR11MB1233.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:88;
+	<BN6PR11MB4162A537835B52346DABA7C59F9A0@BN6PR11MB4162.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:353;
 X-Forefront-PRVS: 04371797A5
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	3FuitFZvKb9eb9HAcV97/R5/hli2EXBPH5h7gzehMN2xORpWXoMfwX0lu07uVzNW+Nnm5oiIWOhwkdpa7iZlokVfI0D9kOnVDEATH+hgXFxay2aHW6QyTW+FaGFe67uOTQ5w5KZdIU7kgV46VBrcyZHBaKWuoGnKwv/7wFaL3xaCzJAAecProdvwfvcG3iHulFDiinegXgkaJGcrM/nlfnPPEOc7qvUyyiymLk33lq0YX+LaItMr6UsbD/t185ZKiVzzWzJI8jEDwA6F3kgmyd4gQvzqPQkokLbfSg5Lave6iBILcrUXzMnrRpMAGoUOLxWp6Lc8N/2Y2Rl78K0H9AxU4yhFKUQztxH0jIC2hTr5IscN8sgpzKRD5V1y2q4uVeDjJhywEPuK8yCmo2vz3Xuu2Klho7bJKFnYx0yQ1/YJGVBx0Z/Pa23ldypoVjvAbZJ2dfpX+0WPjhwrmHtnvg==
+	r361icJboI2+6UqorkWJmLh79ziw+cUWA3zFDTGIHnXpE9wUKHo0P8+Vu2BQungb7l71DCYKYGHtG9mN4I6Pqa879yDLmUhDr3Dn8txAW3PNA2/fBbgmLuv1tA8FTMC0He4meZDEBrFPh3q0h+nWYBJCVVRpy3MwJR1erclYPE9Ix9m92D6Svc+pYDmmisFSAOf4giV982JBSAV3Zs2HHXBuDI4T+pOXDpfI1ElDF1ZK6/PVsWeQo/9xrF/iOcSrFJAGRZu1fnGapwSBSxyqYBfw1JH35Fzq5kcJgLBNvRVhqWuNBEMX+S8DOYcDBEgF0WkFxe6YdpZBaFLxNNTv44u65PFxZYE+5zuJoQDWp41x23AeqbI//9StrL4tY7XnqU/pRt5wb903gMNpg4e57F/XVTvN6/EirlcozcQwUnF+eg9CuHDFKVGoLUrx2BpsthKuoAPG9ysqvFuj8VYp+Q==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(39850400004)(366004)(136003)(376002)(346002)(66476007)(33964004)(44832011)(66946007)(6666004)(5660300002)(31696002)(31686004)(66556008)(16526019)(86362001)(956004)(52116002)(36756003)(2906002)(2616005)(8676002)(186003)(6486002)(478600001)(26005)(83380400001)(966005)(166002)(8936002)(16576012)(53546011)(316002)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(366004)(39850400004)(396003)(346002)(376002)(53546011)(52116002)(31686004)(6486002)(33964004)(83380400001)(44832011)(66476007)(66946007)(966005)(26005)(16526019)(66556008)(186003)(5660300002)(6666004)(16576012)(86362001)(166002)(8676002)(31696002)(36756003)(316002)(478600001)(2616005)(8936002)(2906002)(956004)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	Bxs/sJL9OyCaNdpKpnVhdTUJxpJwu7WrA0DmW0e40v0Zxxuqz2Oc4EyBjsiPhPXt/VUIMvRddVTjmHGjydmay3Rlkf+czIvF07TwKvP9YLbKLQAhiwuGvQhqfoZoxK0+XeoJnAQdIWNpx+tcZ36aXCuth8tsoZfLYN4EQardDtaeIIPpZzH+S0yUf/VvMsAnwFnlUlN9+GlmVJ+ha9X6Vb8XOSaqA53ZrNtBkfNPlCpo9Kv44FkYi00t6I0+QX0fjzO46r5YU5ULpHfTHq+ZIA33nx+NOpQ9uZsXY309zjnGs9l6ay9jgZ/eLdl1TRZYNN3oL5t8oS7Kh2gABlxeVyAzlIHSxEtynHerZZWtjD4YFBbO4FYQrbWSXaB1cEtpSme9ZZpr45O5e4uGAx84K3wvvImXkNzUo/6LLXDWzFW7mUugMzp1h0GIix3z8MFdSGaqPR35CR/XS3o5QYumV/T4biM4tYrRCj7VG8C03qj0UIzvgpFHStGpZ0dQCJOf
+	NuFns75ET3q3EZK3SpT9vEDfMwRfRDXICl6cMIXxJ09pOjfrrJuH41tBZSL5HfPfUOmuN5bdzU/TVpP5UnbERZv87JBzndInZhqJMUT3Cs7X9lHrSBmuZETj0X/UQ/32J9SeLOKesooKzj4BzDHmoM08IdXIswrPqNaPqhb8Nppk1GqkarceIxi5wMUGsN7kCLLjdbtPj2JQF/3lrX9gXqKYnc7xrYlSSoEaPHL3HXw0R3+AqhlhswalGLuTa3ca7WzJP17oQrXzouJDgpA4g6NHcmwdV9Po4O6Oj0GaF9wzoXpnph5mUyJmupF9nGLUbSJ+MUhebCGju78mhm/XhzlRHY+Mzhlpm/Wwl0/Xeluqq6KJ0a+7y50z5gKiNHdFk2d+6gmaCRCCV7naCN6sKnM7k06wNxrIWc1tilNJcw22V+zbHJwKL+N1K8qMf+7CKeKPLKhtKkMZl9xRIA62krh0rFBnwI9+Bq4yMsNG1ydHyVcN5F6dlHHm+/oHSoqO
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: da892d3c-4538-441d-2d31-08d812cd12de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2020 14:45:26.8852
+X-MS-Exchange-CrossTenant-Network-Message-Id: e19d4fca-30cc-4f72-8e48-08d812cd2005
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2020 14:45:48.9183
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: AeO8GMdlINSe9Eq4wo02KksVy/etbUTgrqkIsPMeupX7XP39gsjIf/Mb2OexMzA0MThgtRK/NdOwFlce/zm/w5RqCj8KzpPx2QhpKvmV0nU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1233
+X-MS-Exchange-CrossTenant-UserPrincipalName: U29CpN4yOkJYr8zOpltM3MsnrO6izsWkqturJqd99DTxyW45YGFkCYgPfSY+bAKLvXxIdoZwTibKm31TWXBtZvRw8c7vzj0HPLqjg73HsMc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB4162
 Content-Type: multipart/alternative;
- boundary="------------12C9695EB33E81E0FA003AFF"
+ boundary="------------9CCD48E79666A48E7774924F"
 Content-Language: en-US
 
---------------12C9695EB33E81E0FA003AFF
+--------------9CCD48E79666A48E7774924F
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 6/15/20 10:46 AM, zangrc wrote:
-> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+On 6/15/20 12:49 PM, Leon Anavi wrote:
+> Remove inc file because the recipe python3-kconfiglib has been
+> alredy consolidated in a single file. I forgot to delete the
+> inc file in the previous commit.
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python3-gunicorn/run-ptest             |  3 +++
->   .../python/python3-gunicorn_20.0.4.bb             | 15 ++++++++++++++-
->   2 files changed, 17 insertions(+), 1 deletion(-)
->   create mode 100644 meta-python/recipes-devtools/python/python3-gunicorn/run-ptest
+>   meta-python/recipes-devtools/python/python-kconfiglib.inc | 8 --------
+>   1 file changed, 8 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python-kconfiglib.inc
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-gunicorn/run-ptest b/meta-python/recipes-devtools/python/python3-gunicorn/run-ptest
-> new file mode 100644
-> index 000000000..b63c4de0d
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-gunicorn/run-ptest
-> @@ -0,0 +1,3 @@
-> +#!/bin/sh
-> +
-> +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-> diff --git a/meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb b/meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb
-> index 5bd8d51c0..23aafd67d 100644
-> --- a/meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb
-> +++ b/meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb
-> @@ -6,6 +6,19 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f75f3fb94cdeab1d607e2adaa6077752"
->   SRC_URI[md5sum] = "543669fcbb5739ee2af77184c5e571a1"
->   SRC_URI[sha256sum] = "1904bb2b8a43658807108d59c3f3d56c2b6121a701161de0ddf9ad140073c626"
->   
-> -inherit pypi setuptools3
-> +inherit pypi setuptools3 ptest
-> +
-> +SRC_URI += " \
-> +	file://run-ptest \
-> +"
-> +
-> +RDEPENDS_${PN}-ptest += " \
-> +	${PYTHON_PN}-pytest \
-> +"
-> +
-> +do_install_ptest() {
-> +	install -d ${D}${PTEST_PATH}/tests
-> +	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> +}
->   
->   RDEPENDS_${PN} += "${PYTHON_PN}-setuptools ${PYTHON_PN}-fcntl"
+> diff --git a/meta-python/recipes-devtools/python/python-kconfiglib.inc b/meta-python/recipes-devtools/python/python-kconfiglib.inc
+> deleted file mode 100644
+> index 3dc4961c8..000000000
+> --- a/meta-python/recipes-devtools/python/python-kconfiglib.inc
+> +++ /dev/null
+> @@ -1,8 +0,0 @@
+> -DESCRIPTION = "Kconfiglib is a Kconfig implementation in Python"
+> -LICENSE = "ISC"
+> -LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=712177a72a3937909543eda3ad1bfb7c"
+> -
+> -SRC_URI[md5sum] = "4ad68618824d4bad1d1de1d7eb838bba"
+> -SRC_URI[sha256sum] = "bed2cc2216f538eca4255a83a4588d8823563cdd50114f86cf1a2674e602c93c"
+> -
+> -BBCLASSEXTEND = "native nativesdk"
 >
 > 
 
---------------12C9695EB33E81E0FA003AFF
+--------------9CCD48E79666A48E7774924F
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -140,54 +123,37 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 6/15/20 10:46 AM, zangrc wrote:<br>
+    <div class="moz-cite-prefix">On 6/15/20 12:49 PM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:1592232372-4547-1-git-send-email-zangrc.fnst@cn.fujitsu.com">
-      <pre class="moz-quote-pre" wrap="">Signed-off-by: Zang Ruochen <a class="moz-txt-link-rfc2396E" href="mailto:zangrc.fnst@cn.fujitsu.com">&lt;zangrc.fnst@cn.fujitsu.com&gt;</a></pre>
+    <blockquote type="cite" cite="mid:20200615164918.822-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Remove inc file because the recipe python3-kconfiglib has been
+alredy consolidated in a single file. I forgot to delete the
+inc file in the previous commit.
+
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:1592232372-4547-1-git-send-email-zangrc.fnst@cn.fujitsu.com">
+    <blockquote type="cite" cite="mid:20200615164918.822-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python3-gunicorn/run-ptest             |  3 &#43;&#43;&#43;
- .../python/python3-gunicorn_20.0.4.bb             | 15 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
- 2 files changed, 17 insertions(&#43;), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-gunicorn/run-ptest
+ meta-python/recipes-devtools/python/python-kconfiglib.inc | 8 --------
+ 1 file changed, 8 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-kconfiglib.inc
 
-diff --git a/meta-python/recipes-devtools/python/python3-gunicorn/run-ptest b/meta-python/recipes-devtools/python/python3-gunicorn/run-ptest
-new file mode 100644
-index 000000000..b63c4de0d
---- /dev/null
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-gunicorn/run-ptest
-@@ -0,0 &#43;1,3 @@
-&#43;#!/bin/sh
-&#43;
-&#43;pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;){printf &quot;%s: %s\n&quot;, $NF, $0}else{print}}'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;) {$NF=&quot;&quot;;print $0}else{print}}'
-diff --git a/meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb b/meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb
-index 5bd8d51c0..23aafd67d 100644
---- a/meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-gunicorn_20.0.4.bb
-@@ -6,6 &#43;6,19 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=f75f3fb94cdeab1d607e2adaa6077752">&quot;file://LICENSE;md5=f75f3fb94cdeab1d607e2adaa6077752&quot;</a>
- SRC_URI[md5sum] = &quot;543669fcbb5739ee2af77184c5e571a1&quot;
- SRC_URI[sha256sum] = &quot;1904bb2b8a43658807108d59c3f3d56c2b6121a701161de0ddf9ad140073c626&quot;
- 
--inherit pypi setuptools3
-&#43;inherit pypi setuptools3 ptest
-&#43;
-&#43;SRC_URI &#43;= &quot; \
-&#43;	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
-&#43;&quot;
-&#43;
-&#43;RDEPENDS_${PN}-ptest &#43;= &quot; \
-&#43;	${PYTHON_PN}-pytest \
-&#43;&quot;
-&#43;
-&#43;do_install_ptest() {
-&#43;	install -d ${D}${PTEST_PATH}/tests
-&#43;	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-&#43;}
- 
- RDEPENDS_${PN} &#43;= &quot;${PYTHON_PN}-setuptools ${PYTHON_PN}-fcntl&quot;
+diff --git a/meta-python/recipes-devtools/python/python-kconfiglib.inc b/meta-python/recipes-devtools/python/python-kconfiglib.inc
+deleted file mode 100644
+index 3dc4961c8..000000000
+--- a/meta-python/recipes-devtools/python/python-kconfiglib.inc
+&#43;&#43;&#43; /dev/null
+@@ -1,8 &#43;0,0 @@
+-DESCRIPTION = &quot;Kconfiglib is a Kconfig implementation in Python&quot;
+-LICENSE = &quot;ISC&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=712177a72a3937909543eda3ad1bfb7c">&quot;file://LICENSE.txt;md5=712177a72a3937909543eda3ad1bfb7c&quot;</a>
+-
+-SRC_URI[md5sum] = &quot;4ad68618824d4bad1d1de1d7eb838bba&quot;
+-SRC_URI[sha256sum] = &quot;bed2cc2216f538eca4255a83a4588d8823563cdd50114f86cf1a2674e602c93c&quot;
+-
+-BBCLASSEXTEND = &quot;native nativesdk&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -197,4 +163,4 @@ index 5bd8d51c0..23aafd67d 100644
   </body>
 </html>
 
---------------12C9695EB33E81E0FA003AFF--
+--------------9CCD48E79666A48E7774924F--
