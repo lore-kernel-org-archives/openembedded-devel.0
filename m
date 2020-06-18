@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.3437.1592471049803321000
+ by mx.groups.io with SMTP id smtpd.web10.3434.1592471055756850419
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Jun 2020 02:04:10 -0700
+ Thu, 18 Jun 2020 02:04:16 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=59970 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jlqSt-0004oK-ID; Thu, 18 Jun 2020 12:04:08 +0300
+	id 1jlqSw-0004oK-4P; Thu, 18 Jun 2020 12:04:14 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-periphery: Consolidate in a single file
-Date: Thu, 18 Jun 2020 12:03:57 +0300
-Message-Id: <20200618090358.31927-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-periphery: Upgrade 2.0.1 -> 2.1.0
+Date: Thu, 18 Jun 2020 12:03:58 +0300
+Message-Id: <20200618090358.31927-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200618090358.31927-1-leon.anavi@konsulko.com>
 References: <20200618090358.31927-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-1.0
+X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,51 +30,55 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Consolidate inc and bb files into a single bb file.
+Upgrade to release 2.1.0. Use LICENSE instead of PKG-INFO in
+LIC_FILES_CHKSUM. The new release brings the following changes:
+
+GPIO:
+- Add poll_multiple() static method.
+- Add line consumer label property.
+- Add line bias, line drive, and inverted properties.
+- Add additional properties as keyword arguments to constructor
+  for character device GPIOs.
+- Only unexport GPIO in close() if exported in open for sysfs
+  GPIOs.
+- Improve wording and fix typos in docstrings.
+
+Serial:
+- Fix performance of blocking read in read().
+- Raise exception on unexpected empty read in read(), which may
+  be caused by a serial port disconnect.
+- Add vmin and vtime properties for the corresponding termios
+  settings.
+- Add support for termios timeout with read().
+- Improve wording in docstrings.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python-periphery.inc    |  9 ---------
- .../python/python3-periphery_2.0.1.bb               | 13 +++++++++++--
- 2 files changed, 11 insertions(+), 11 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-periphery.inc
+ ...ython3-periphery_2.0.1.bb => python3-periphery_2.1.0.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-periphery_2.0.1.bb => python3-periphery_2.1.0.bb} (57%)
 
-diff --git a/meta-python/recipes-devtools/python/python-periphery.inc b/meta-python/recipes-devtools/python/python-periphery.inc
-deleted file mode 100644
-index 0171f63f8..000000000
---- a/meta-python/recipes-devtools/python/python-periphery.inc
-+++ /dev/null
-@@ -1,9 +0,0 @@
--DESCRIPTION = "A pure Python 2/3 library for peripheral I/O (GPIO, LED, PWM, SPI, I2C, MMIO, Serial) in Linux."
--HOMEPAGE = "http://pythonhosted.org/python-periphery/"
--LICENSE = "MIT"
--
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1ecf5c2354c22fb5bfd53eefb8f9e65b"
--
--PYPI_PACKAGE = "python-periphery"
--
--RDEPENDS_${PN} += "${PYTHON_PN}-mmap"
-diff --git a/meta-python/recipes-devtools/python/python3-periphery_2.0.1.bb b/meta-python/recipes-devtools/python/python3-periphery_2.0.1.bb
-index e9944274b..1aa48625f 100644
+diff --git a/meta-python/recipes-devtools/python/python3-periphery_2.0.1.bb b/meta-python/recipes-devtools/python/python3-periphery_2.1.0.bb
+similarity index 57%
+rename from meta-python/recipes-devtools/python/python3-periphery_2.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-periphery_2.1.0.bb
+index 1aa48625f..3cd9004df 100644
 --- a/meta-python/recipes-devtools/python/python3-periphery_2.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-periphery_2.0.1.bb
-@@ -1,5 +1,14 @@
--inherit pypi setuptools3
--require python-periphery.inc
-+DESCRIPTION = "A pure Python 2/3 library for peripheral I/O (GPIO, LED, PWM, SPI, I2C, MMIO, Serial) in Linux."
-+HOMEPAGE = "http://pythonhosted.org/python-periphery/"
-+LICENSE = "MIT"
-+
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1ecf5c2354c22fb5bfd53eefb8f9e65b"
++++ b/meta-python/recipes-devtools/python/python3-periphery_2.1.0.bb
+@@ -2,10 +2,10 @@ DESCRIPTION = "A pure Python 2/3 library for peripheral I/O (GPIO, LED, PWM, SPI
+ HOMEPAGE = "http://pythonhosted.org/python-periphery/"
+ LICENSE = "MIT"
  
- SRC_URI[md5sum] = "1d958f02575d4a19734ee2dd92336157"
- SRC_URI[sha256sum] = "5da4d5f40ff8974cf6c724587baa674d7e0593f07b6f6ee896104f11c1be18ec"
-+
-+inherit pypi setuptools3
-+
-+PYPI_PACKAGE = "python-periphery"
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-mmap"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1ecf5c2354c22fb5bfd53eefb8f9e65b"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=fea92e2e010ccb151792c29fadc2db7b"
+ 
+-SRC_URI[md5sum] = "1d958f02575d4a19734ee2dd92336157"
+-SRC_URI[sha256sum] = "5da4d5f40ff8974cf6c724587baa674d7e0593f07b6f6ee896104f11c1be18ec"
++SRC_URI[md5sum] = "27cdd7e026438067a238fb04ed5766a3"
++SRC_URI[sha256sum] = "57baa82e6bc59b67747317d16ad0cf9626826e8d43233af13bce924660500bd6"
+ 
+ inherit pypi setuptools3
+ 
 -- 
 2.17.1
 
