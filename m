@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.3432.1592471049630467564
+ by mx.groups.io with SMTP id smtpd.web11.3437.1592471049803321000
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 18 Jun 2020 02:04:10 -0700
 Authentication-Results: mx.groups.io;
@@ -8,15 +8,17 @@ Received: from [78.130.197.211] (port=59970 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jlqSq-0004oK-VG; Thu, 18 Jun 2020 12:04:06 +0300
+	id 1jlqSt-0004oK-ID; Thu, 18 Jun 2020 12:04:08 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/3] python3-pexpect: Consolidate in a single file
-Date: Thu, 18 Jun 2020 12:03:56 +0300
-Message-Id: <20200618090358.31927-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/3] python3-periphery: Consolidate in a single file
+Date: Thu, 18 Jun 2020 12:03:57 +0300
+Message-Id: <20200618090358.31927-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.7
+In-Reply-To: <20200618090358.31927-1-leon.anavi@konsulko.com>
+References: <20200618090358.31927-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-1.0
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -32,71 +34,47 @@ Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python-pexpect.inc                 | 23 -----------------
- .../python/python3-pexpect_4.8.0.bb           | 25 ++++++++++++++++++-
- 2 files changed, 24 insertions(+), 24 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pexpect.inc
+ .../recipes-devtools/python/python-periphery.inc    |  9 ---------
+ .../python/python3-periphery_2.0.1.bb               | 13 +++++++++++--
+ 2 files changed, 11 insertions(+), 11 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-periphery.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-pexpect.inc b/meta-python/recipes-devtools/python/python-pexpect.inc
+diff --git a/meta-python/recipes-devtools/python/python-periphery.inc b/meta-python/recipes-devtools/python/python-periphery.inc
 deleted file mode 100644
-index c6230b2b5..000000000
---- a/meta-python/recipes-devtools/python/python-pexpect.inc
+index 0171f63f8..000000000
+--- a/meta-python/recipes-devtools/python/python-periphery.inc
 +++ /dev/null
-@@ -1,23 +0,0 @@
--SUMMARY = "A Pure Python Expect like Module for Python"
--HOMEPAGE = "http://pexpect.readthedocs.org/"
--SECTION = "devel/python"
--LICENSE = "ISC"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=1c7a725251880af8c6a148181665385b"
+@@ -1,9 +0,0 @@
+-DESCRIPTION = "A pure Python 2/3 library for peripheral I/O (GPIO, LED, PWM, SPI, I2C, MMIO, Serial) in Linux."
+-HOMEPAGE = "http://pythonhosted.org/python-periphery/"
+-LICENSE = "MIT"
 -
--SRC_URI += "file://0001-FSM.py-change-shebang-from-python-to-python3.patch"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1ecf5c2354c22fb5bfd53eefb8f9e65b"
 -
--SRC_URI[md5sum] = "153eb25184249d6a85fde9acf4804085"
--SRC_URI[sha256sum] = "fc65a43959d153d0114afe13997d439c22823a27cefceb5ff35c2178c6784c0c"
+-PYPI_PACKAGE = "python-periphery"
 -
--UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/pexpect"
--
--RDEPENDS_${PN} = "\
--    ${PYTHON_PN}-core \
--    ${PYTHON_PN}-io \
--    ${PYTHON_PN}-terminal \
--    ${PYTHON_PN}-resource \
--    ${PYTHON_PN}-fcntl \
--    ${PYTHON_PN}-ptyprocess \
--"
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-pexpect_4.8.0.bb b/meta-python/recipes-devtools/python/python3-pexpect_4.8.0.bb
-index cf39233a3..99e1f199f 100644
---- a/meta-python/recipes-devtools/python/python3-pexpect_4.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pexpect_4.8.0.bb
-@@ -1,2 +1,25 @@
--require python-pexpect.inc
-+SUMMARY = "A Pure Python Expect like Module for Python"
-+HOMEPAGE = "http://pexpect.readthedocs.org/"
-+SECTION = "devel/python"
-+LICENSE = "ISC"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1c7a725251880af8c6a148181665385b"
+-RDEPENDS_${PN} += "${PYTHON_PN}-mmap"
+diff --git a/meta-python/recipes-devtools/python/python3-periphery_2.0.1.bb b/meta-python/recipes-devtools/python/python3-periphery_2.0.1.bb
+index e9944274b..1aa48625f 100644
+--- a/meta-python/recipes-devtools/python/python3-periphery_2.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-periphery_2.0.1.bb
+@@ -1,5 +1,14 @@
+-inherit pypi setuptools3
+-require python-periphery.inc
++DESCRIPTION = "A pure Python 2/3 library for peripheral I/O (GPIO, LED, PWM, SPI, I2C, MMIO, Serial) in Linux."
++HOMEPAGE = "http://pythonhosted.org/python-periphery/"
++LICENSE = "MIT"
 +
-+SRC_URI += "file://0001-FSM.py-change-shebang-from-python-to-python3.patch"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1ecf5c2354c22fb5bfd53eefb8f9e65b"
+ 
+ SRC_URI[md5sum] = "1d958f02575d4a19734ee2dd92336157"
+ SRC_URI[sha256sum] = "5da4d5f40ff8974cf6c724587baa674d7e0593f07b6f6ee896104f11c1be18ec"
 +
-+SRC_URI[md5sum] = "153eb25184249d6a85fde9acf4804085"
-+SRC_URI[sha256sum] = "fc65a43959d153d0114afe13997d439c22823a27cefceb5ff35c2178c6784c0c"
++inherit pypi setuptools3
 +
- inherit pypi setuptools3
++PYPI_PACKAGE = "python-periphery"
 +
-+UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/pexpect"
-+
-+RDEPENDS_${PN} = "\
-+    ${PYTHON_PN}-core \
-+    ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-terminal \
-+    ${PYTHON_PN}-resource \
-+    ${PYTHON_PN}-fcntl \
-+    ${PYTHON_PN}-ptyprocess \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
++RDEPENDS_${PN} += "${PYTHON_PN}-mmap"
 -- 
 2.17.1
 
