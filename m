@@ -1,74 +1,62 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.3196.1592560034445466088
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com [209.85.166.67])
+ by mx.groups.io with SMTP id smtpd.web10.4398.1592565424876068154
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Jun 2020 02:47:14 -0700
+ Fri, 19 Jun 2020 04:17:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=53780 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jmDqg-0001eB-96; Fri, 19 Jun 2020 13:02:23 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-msgpack: Upgrade 0.6.2 -> 1.0.0
-Date: Fri, 19 Jun 2020 12:46:38 +0300
-Message-Id: <20200619094638.7116-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200619094638.7116-1-leon.anavi@konsulko.com>
-References: <20200619094638.7116-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=LYs5y+pb;
+ spf=pass (domain: gmail.com, ip: 209.85.166.67, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-io1-f67.google.com with SMTP id o5so10737837iow.8
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2020 04:17:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=bpIeUaoGD170jrv6NPKrmnbXygDuykYGGWr3U+rZwoQ=;
+        b=LYs5y+pboi3dT+NQa6R3A5CFkBsnn5VU0S5O1ShexYE1ifyRRW/nWcNAr91ZbAj5n2
+         ZOt46rlKCR9LbzeBaOpBoqLGxE7QxwsYivGuXzp7154uCRY8B+G5WC9fmM2lqXRgEYdK
+         MwnYA5pnX4kvkZsZF+9IS9lBlLkfRp4/W6x5o/LlpAD6S1l3GgT3Zb+BzO+YapL4dgtt
+         t0b2/EyQ0nq6GBotXbBJHWdEyWNtiNyHtizOzOJgRF17u1oboJ7yMxlQ7Zvy4tv23Bni
+         sBZnUSlaYDHhmO6aTH0jpILamrlNmDRcq95DCYitQnrNvDwB+/Vj+lQ2goouTmrpJs99
+         DhnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=bpIeUaoGD170jrv6NPKrmnbXygDuykYGGWr3U+rZwoQ=;
+        b=rFO7C0b22aeAv3dFVMcfHRkWfZh2znomeF2eUiwjRgcV6vGNMq8q2xC8/mXfaWyeZH
+         s2vQx81hr/nFT3Dh0Txxu87BfhZe/cN2FwdjYGDsTLfzYk66X248Zn1GFYD1pblMoV8n
+         4WCVFE1CzSCwt7Eb+lY/ItoTJIpH/MPmHvye3PYnqe2fxxbkkBY2rFgJRjgZVV9zesO8
+         uTC5glMywwXugNmeu3mmAIoP/dBTe7SOD78poIo6JFoQy2mTaecnW/0gTVNG3nbq+PNU
+         SgwYklU+VkvRqdjfU6yuCu8WEFJtr8Z3m2aYotTg00THqVIXusUh9cFH50qxLS8QCy1P
+         6Pcg==
+X-Gm-Message-State: AOAM532y7eHkdEXbE46kxlRvZotGFcn0QLU5/S4gWOoYR9xSQNnQ1Urw
+	RkGKBqigK6OiPYVPAfWpNQbFKsAh4UcRGUMvCeE=
+X-Google-Smtp-Source: ABdhPJw3XoSx3M9YaRl2edwS9T2gqfX4LynZ0bPaBRXGP6PQTEA+46hWyhO+qMiawIr0pulka/jZLtZMfCP5pbRT/lI=
+X-Received: by 2002:a05:6638:d52:: with SMTP id d18mr3388572jak.21.1592565424202;
+ Fri, 19 Jun 2020 04:17:04 -0700 (PDT)
+MIME-Version: 1.0
+References: <1591295308-26420-1-git-send-email-rahulk@mvista.com>
+In-Reply-To: <1591295308-26420-1-git-send-email-rahulk@mvista.com>
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Date: Fri, 19 Jun 2020 13:16:52 +0200
+Message-ID: <CALbNGRRKvq7rd0PSPGvuAaVqg0W1nMO-_9LNQ4M8kXR+Cq3OTQ@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][zeus][PATCH] tremor: update SRC_URI as project moved to gitlab
+To: Rahul Kumar <rahulk@mvista.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Armin Kuster <akuster808@gmail.com>, Khem Raj <raj.khem@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 
-Upgrade to release 1.0.0:
+On Thu, Jun 4, 2020 at 8:28 PM Rahul Kumar <rahulk@mvista.com> wrote:
+>
+> From: Armin Kuster <akuster808@gmail.com>
+>
+> It appears Xiph.Org is now on gitlab
+> https://gitlab.xiph.org/xiph
+>
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> (cherry picked from commit cc6e59fdff71e47ef5b9b40aab3bcd9438960ea4)
+> Signed-off-by: Rahul Kumar <rahulk@mvista.com>
+Ping - we have the first 'victims' [1]
 
-- Remove Python 2 support from the msgpack/_cmsgpack.
-  msgpack/fallback still supports Python 2.
-- Remove encoding option from the Packer and Unpacker.
-- Unpacker: The default value of max_buffer_type is changed to
-  100MiB.
-- Unpacker: strict_map_key is True by default now.
-- Unpacker: String map keys are interned.
-- Drop old buffer protocol support.
-- Support Timestamp type.
-- Support serializing and decerializing datetime object with
-  tzinfo.
-- Unpacker: Fix Unpacker.read_bytes() in fallback implementation.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../{python3-msgpack_0.6.2.bb => python3-msgpack_1.0.0.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-msgpack_0.6.2.bb => python3-msgpack_1.0.0.bb} (77%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-msgpack_0.6.2.bb b/meta-python/recipes-devtools/python/python3-msgpack_1.0.0.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-msgpack_0.6.2.bb
-rename to meta-python/recipes-devtools/python/python3-msgpack_1.0.0.bb
-index 6d7e7a0dc..d744738a2 100644
---- a/meta-python/recipes-devtools/python/python3-msgpack_0.6.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-msgpack_1.0.0.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
- PYPI_PACKAGE = "msgpack"
- inherit pypi setuptools3 ptest
- 
--SRC_URI[md5sum] = "ba46fdee995565f40e332bd7eea882f1"
--SRC_URI[sha256sum] = "ea3c2f859346fcd55fc46e96885301d9c2f7a36d453f5d8f2967840efa1e1830"
-+SRC_URI[md5sum] = "c35ee8f991dad3969884e9585e56ebba"
-+SRC_URI[sha256sum] = "9534d5cc480d4aff720233411a1f765be90885750b07df772380b34c10ecb5c0"
- 
- RDEPENDS_${PN}_class-target += "\
-     ${PYTHON_PN}-io \
--- 
-2.17.1
-
+[1] https://github.com/openembedded/meta-openembedded/issues/247
