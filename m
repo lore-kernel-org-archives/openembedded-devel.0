@@ -1,140 +1,107 @@
-Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com [209.85.222.175])
- by mx.groups.io with SMTP id smtpd.web12.201.1592525146347709986
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.2110.1592554232622550776
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Jun 2020 17:05:46 -0700
+ Fri, 19 Jun 2020 01:10:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ih/MFTt7;
- spf=pass (domain: gmail.com, ip: 209.85.222.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f175.google.com with SMTP id 205so7447631qkg.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Jun 2020 17:05:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=QodMs5LO9JK9/XVlNlqSyY8GmpzpX/met+qnf92awTM=;
-        b=Ih/MFTt7F5zO4QkXH8a9t0Dl5kzFMkUqC1SxDXpixUxp1fCrz5Dn6ozSjPk4ZEIhfr
-         GjaECivM4TlLv/OaOcsGBDnqSd4yHnLjy95XFRi5cZjTz6PYdvdwyG7oKz+w001M6wmc
-         XBkBKoL7TePXVXHwwNCtkMsMod3c3MTEQFAGoQjfs4DyeLmtn+N9PnlJqNwQHi74Yyj6
-         bvypQsjqXX+BJ2onU0txpgSl5ZiEqvG7YV5PdGcgMpx5Wzn8xkbpQhjnIqu/VKSkRrvs
-         1Ur85TUKi9LPJ2W7jJ6eOHzuj7+ilZIDeMGji6cvl7oMpihXMjndIYXDexPbwGbXcJ49
-         vvTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=QodMs5LO9JK9/XVlNlqSyY8GmpzpX/met+qnf92awTM=;
-        b=UEmvqCV7ab8fsBcAfAlRdA2tu/XqXLnAFZbT5fr/yCGT/D3Chr/7O5pZZ8BIPfSZzo
-         1xb6Ew48+EMHUushrqik6tpx29tqu6PilIk7iKvAXZVUjLCLPhLxomADFpovuTJthibU
-         /a7cLu8DUH4dQtZTgRUVQUEFwjarUCVkpcNEzcuD84IC2dU2OccKzrqP0CIHnXqvcJZ5
-         awMeexjdpHOfI3d/PEvB1yuskIun7LFF2ota9tKE6uFaBcGB4A8Xef5LwvlcoiE+Snez
-         saqoXobIkIdZfe8lXYt42N6Dfjmsh57ZoXJQJzCCEBKNb2bAwT4a0V+sScxE4qEY1wDM
-         IjaA==
-X-Gm-Message-State: AOAM53230wzeNhPSOZdWIxPryquL1JzSo2er+qqmI/EGYZLpiBo4vYv9
-	wyzIwA377KKZJXerqDueP+AC8iKwgeVDapnb6hYrCF6f
-X-Google-Smtp-Source: ABdhPJyLeyq+pHNiE0Ilh73rdSGna7L2aImtCC1CruWB/uo9UOwDbGS2edTUbRjQ2VgIfEGDzdCdo/scu57gWmrXSck=
-X-Received: by 2002:a05:620a:2050:: with SMTP id d16mr1092275qka.215.1592525145271;
- Thu, 18 Jun 2020 17:05:45 -0700 (PDT)
-MIME-Version: 1.0
-References: <alpine.LFD.2.21.2006160631480.7747@localhost.localdomain>
-In-Reply-To: <alpine.LFD.2.21.2006160631480.7747@localhost.localdomain>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 18 Jun 2020 17:05:34 -0700
-Message-ID: <CAMKF1srjpN2W-63H-rZY-kGZ3po6m0YYbv+75QaUCEfWwjgCtw@mail.gmail.com>
-Subject: Re: [oe] standardizing HOMEPAGE values in python3 recipes
-To: "Robert P. J. Day" <rpjday@crashcourse.ca>
-Cc: OpenEmbedded Development mailing list <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="00000000000094724605a864a70a"
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=51466 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jmCL4-0007GG-57; Fri, 19 Jun 2020 11:25:39 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/7] python3-parse: Consolidate in a single file
+Date: Fri, 19 Jun 2020 11:10:05 +0300
+Message-Id: <20200619081011.25051-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.7
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
---00000000000094724605a864a70a
-Content-Type: text/plain; charset="UTF-8"
+Consolidate inc and bb files into a single bb file.
 
-On Tue, Jun 16, 2020 at 3:36 AM Robert P. J. Day <rpjday@crashcourse.ca>
-wrote:
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../recipes-devtools/python/python-parse.inc  | 26 -----------------
+ .../python/python3-parse_1.15.0.bb            | 28 +++++++++++++++++--
+ 2 files changed, 26 insertions(+), 28 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-parse.inc
 
->
->   given the current flurry of python recipe cleanup, just want to
-> verify a couple things that could/should be standardized.
->
->   first, HOMEPAGE values of the form:
->
->   https://pypi.python.org/pypi/astroid
->
-> can be adjusted to reflect the result of the redirection, as in:
->
->   https://pypi.org/project/astroid
+diff --git a/meta-python/recipes-devtools/python/python-parse.inc b/meta-python/recipes-devtools/python/python-parse.inc
+deleted file mode 100644
+index ecfd67172..000000000
+--- a/meta-python/recipes-devtools/python/python-parse.inc
++++ /dev/null
+@@ -1,26 +0,0 @@
+-SUMMARY = "Parse strings using a specification based on the Python format() syntax"
+-HOMEPAGE = "https://github.com/r1chardj0n3s/parse"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://parse.py;beginline=1325;endline=1345;md5=3d987b2e73881bbce768a80f9cdd23d9"
+-
+-SRC_URI[md5sum] = "a5aa82b2b8b4d733d227e3c99d7d01b4"
+-SRC_URI[sha256sum] = "a6d4e2c2f1fbde6717d28084a191a052950f758c0cbd83805357e6575c2b95c0"
+-
+-inherit pypi ptest
+-
+-RDEPENDS_${PN} += "\
+-    ${PYTHON_PN}-datetime \
+-    ${PYTHON_PN}-logging \
+-    "
+-
+-SRC_URI += " \
+-	file://run-ptest \
+-"
+-
+-RDEPENDS_${PN}-ptest += " \
+-	${PYTHON_PN}-pytest \
+-"
+-
+-do_install_ptest() {
+-	cp -f ${S}/test_parse.py ${D}${PTEST_PATH}/
+-}
+diff --git a/meta-python/recipes-devtools/python/python3-parse_1.15.0.bb b/meta-python/recipes-devtools/python/python3-parse_1.15.0.bb
+index b1242545c..bff41449c 100644
+--- a/meta-python/recipes-devtools/python/python3-parse_1.15.0.bb
++++ b/meta-python/recipes-devtools/python/python3-parse_1.15.0.bb
+@@ -1,2 +1,26 @@
+-inherit setuptools3
+-require python-parse.inc
++SUMMARY = "Parse strings using a specification based on the Python format() syntax"
++HOMEPAGE = "https://github.com/r1chardj0n3s/parse"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://parse.py;beginline=1325;endline=1345;md5=3d987b2e73881bbce768a80f9cdd23d9"
++
++SRC_URI[md5sum] = "a5aa82b2b8b4d733d227e3c99d7d01b4"
++SRC_URI[sha256sum] = "a6d4e2c2f1fbde6717d28084a191a052950f758c0cbd83805357e6575c2b95c0"
++
++inherit pypi setuptools3 ptest
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-logging \
++    "
++
++SRC_URI += " \
++	file://run-ptest \
++"
++
++RDEPENDS_${PN}-ptest += " \
++	${PYTHON_PN}-pytest \
++"
++
++do_install_ptest() {
++	cp -f ${S}/test_parse.py ${D}${PTEST_PATH}/
++}
+-- 
+2.17.1
 
-
-Both Links above point to pypi.org while not
-Ideal using pypi.python.org is still functional
-
-<https://pypi.org/project/astroid>
->
-> also, as i read it, recipe HOMEPAGE values should *not* refer to the
-> pypi page, as that is already set automatically by pypi.bbclass.
-> rather, the HOMEPAGE should refer to the actual source home page,
-> which in the case of the astroid package would be:
->
->   https://github.com/PyCQA/astroid
->
-> does this make sense?
-
-
-Yeah if there is anything beyond pypi link to be used
-Then it should be set but I think pypi is commonly used for majority of
-recipes
-
-
->
-> rday
-> 
->
-
---00000000000094724605a864a70a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Tue, Jun 16, 2020 at 3:36 AM Robert P. J. Day &lt;<a hr=
-ef=3D"mailto:rpjday@crashcourse.ca">rpjday@crashcourse.ca</a>&gt; wrote:<br=
-></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-=
-left:1px #ccc solid;padding-left:1ex"><br>
-=C2=A0 given the current flurry of python recipe cleanup, just want to<br>
-verify a couple things that could/should be standardized.<br>
-<br>
-=C2=A0 first, HOMEPAGE values of the form:<br>
-<br>
-=C2=A0 <a href=3D"https://pypi.python.org/pypi/astroid" rel=3D"noreferrer"=
- target=3D"_blank">https://pypi.python.org/pypi/astroid</a><br>
-<br>
-can be adjusted to reflect the result of the redirection, as in:<br>
-<br>
-=C2=A0 <a href=3D"https://pypi.org/project/astroid" rel=3D"noreferrer" tar=
-get=3D"_blank">https://pypi.org/project/astroid</a></blockquote><div dir=3D=
-"auto"><br></div><div dir=3D"auto">Both Links above point to <a href=3D"htt=
-p://pypi.org">pypi.org</a> while not</div><div dir=3D"auto">Ideal using <a =
-href=3D"http://pypi.python.org">pypi.python.org</a> is still functional=C2=
-=A0</div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" sty=
-le=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><a hre=
-f=3D"https://pypi.org/project/astroid" rel=3D"noreferrer" target=3D"_blank"=
-></a><br>
-<br>
-also, as i read it, recipe HOMEPAGE values should *not* refer to the<br>
-pypi page, as that is already set automatically by pypi.bbclass.<br>
-rather, the HOMEPAGE should refer to the actual source home page,<br>
-which in the case of the astroid package would be:<br>
-<br>
-=C2=A0 <a href=3D"https://github.com/PyCQA/astroid" rel=3D"noreferrer" tar=
-get=3D"_blank">https://github.com/PyCQA/astroid</a><br>
-<br>
-does this make sense?</blockquote><div dir=3D"auto"><br></div><div dir=3D"=
-auto">Yeah if there is anything beyond pypi link to be used</div><div dir=
-=3D"auto">Then it should be set but I think pypi is commonly used for majo=
-rity of recipes=C2=A0</div><div dir=3D"auto"><br></div><blockquote class=3D=
-"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding=
--left:1ex"><br>
-<br>
-rday<br>
-<br>
-</blockquote></div></div>
-
---00000000000094724605a864a70a--
