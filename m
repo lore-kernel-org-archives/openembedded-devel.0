@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.2100.1592554304191179379
+ by mx.groups.io with SMTP id smtpd.web12.2148.1592554318426090950
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Jun 2020 01:11:44 -0700
+ Fri, 19 Jun 2020 01:11:58 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=51466 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jmCMG-0007GG-Ai; Fri, 19 Jun 2020 11:26:53 +0300
+	id 1jmCMU-0007GG-J6; Fri, 19 Jun 2020 11:27:07 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 6/7] python3-prompt-toolkit: Upgrade 2.0.10 -> 3.0.5
-Date: Fri, 19 Jun 2020 11:10:10 +0300
-Message-Id: <20200619081011.25051-6-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 7/7] python3-ptyprocess: Consolidate in a single file
+Date: Fri, 19 Jun 2020 11:10:11 +0300
+Message-Id: <20200619081011.25051-7-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200619081011.25051-1-leon.anavi@konsulko.com>
 References: <20200619081011.25051-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-0.7
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,70 +30,111 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.0.5 and add HOMEPAGE. The new release brings:
-
-New features:
-- (almost) 100% type annotated.
-- Native asyncio instead of custom event loops.
-- Added shift-based text selection.
-- Added many more vt100 ANSI sequences and keys.
-- Improved control/shift key support in Windows.
-- No Mypy errors in prompt_toolkit anymore.
-- Added `set_exception_handler` optional argument to
-  `PromptSession.prompt()`.
-
-Breaking changes:
-- Python 2 support has been dropped. Minimal Python version is now
-  3.6, although 3.7 is preferred (because of ContextVars).
-- Native asyncio, so some async code becomes slightly different.
-- The active `Application` became a contextvar. Which means that
-  it should be propagated correctly to the code that requires it.
-  However, random other threads or coroutines won't be able to know
-  what the current application is.
-- The dialog shortcuts API changed. All dialog functions now return
-  an `Application`. You still have to call either `run()` or
-  `run_async` on the `Application` object.
-- The way inputhooks work is changed.
-- `patch_stdout` now requires an `Application` as input.
-- `ShiftControl` has been replaced with `ControlShift` and `s-c`
-  with `c-s` in key bindings. Aliases for backwards-compatibility
-  have been added.
-
-Fixes:
-- Bugfix in invalidate code. `PromptSession` was invalidating the
-  UI continuously.
-- Add uvloop support.
-- Forwarded `set_exception_handler` in `Application.run` to the
-  `run_async` call.
-- Bugfix in `NestedCompleter` when there is a leading space.
-- Bugfix in mouse handling on Windows.
+Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...mpt-toolkit_2.0.10.bb => python3-prompt-toolkit_3.0.5.bb} | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_2.0.10.bb => python3-prompt-toolkit_3.0.5.bb} (70%)
+ .../python/python-ptyprocess.inc              | 41 ------------------
+ .../python/python3-ptyprocess_0.6.0.bb        | 43 ++++++++++++++++++-
+ 2 files changed, 42 insertions(+), 42 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-ptyprocess.inc
 
-diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_2.0.10.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.5.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_2.0.10.bb
-rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.5.bb
-index d9ece8dab..b4d20c2cd 100644
---- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_2.0.10.bb
-+++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.5.bb
-@@ -1,9 +1,10 @@
- SUMMARY = "Library for building powerful interactive command lines in Python"
-+HOMEPAGE = "https://python-prompt-toolkit.readthedocs.io/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
- 
--SRC_URI[md5sum] = "5016c523e603cd7119644fbc0f00ce53"
--SRC_URI[sha256sum] = "f15af68f66e664eaa559d4ac8a928111eebd5feda0c11738b5998045224829db"
-+SRC_URI[md5sum] = "96ba0be8d3145eb70e3da25654987670"
-+SRC_URI[sha256sum] = "563d1a4140b63ff9dd587bda9557cffb2fe73650205ab6f4383092fb882e7dc8"
- 
+diff --git a/meta-python/recipes-devtools/python/python-ptyprocess.inc b/meta-python/recipes-devtools/python/python-ptyprocess.inc
+deleted file mode 100644
+index a6dc21cf1..000000000
+--- a/meta-python/recipes-devtools/python/python-ptyprocess.inc
++++ /dev/null
+@@ -1,41 +0,0 @@
+-SUMMARY = "Run a subprocess in a pseudo terminal"
+-HOMEPAGE = "http://ptyprocess.readthedocs.io/en/latest/"
+-SECTION = "devel/python"
+-LICENSE = "ISC"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=cfdcd51fa7d5808da4e74346ee394490"
+-
+-SRCNAME = "ptyprocess"
+-
+-SRC_URI[md5sum] = "37402d69f3b50913d4d483587bffad8f"
+-SRC_URI[sha256sum] = "923f299cc5ad920c68f2bc0bc98b75b9f838b93b599941a6b63ddbc2476394c0"
+-
+-UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/ptyprocess"
+-
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
+-
+-RDEPENDS_${PN} = "\
+-    ${PYTHON_PN}-core \
+-    ${PYTHON_PN}-fcntl \
+-    ${PYTHON_PN}-terminal \
+-    ${PYTHON_PN}-resource \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+-
+-inherit ptest
+-
+-SRC_URI += " \
+-	file://run-ptest \
+-"
+-
+-RDEPENDS_${PN}-ptest += " \
+-	${PYTHON_PN}-pytest \
+-	${PYTHON_PN}-fcntl \
+-	${PYTHON_PN}-terminal \
+-	${PYTHON_PN}-resource \
+-"
+-
+-do_install_ptest() {
+-	install -d ${D}${PTEST_PATH}/tests
+-	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-}
+diff --git a/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb b/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb
+index bdcd0e253..87911e02e 100644
+--- a/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb
+@@ -1,2 +1,43 @@
+-require python-ptyprocess.inc
++SUMMARY = "Run a subprocess in a pseudo terminal"
++HOMEPAGE = "http://ptyprocess.readthedocs.io/en/latest/"
++SECTION = "devel/python"
++LICENSE = "ISC"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=cfdcd51fa7d5808da4e74346ee394490"
++
++SRCNAME = "ptyprocess"
++
++SRC_URI[md5sum] = "37402d69f3b50913d4d483587bffad8f"
++SRC_URI[sha256sum] = "923f299cc5ad920c68f2bc0bc98b75b9f838b93b599941a6b63ddbc2476394c0"
++
  inherit pypi setuptools3
- 
++
++UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/ptyprocess"
++
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
++RDEPENDS_${PN} = "\
++    ${PYTHON_PN}-core \
++    ${PYTHON_PN}-fcntl \
++    ${PYTHON_PN}-terminal \
++    ${PYTHON_PN}-resource \
++"
++
++BBCLASSEXTEND = "native nativesdk"
++
++inherit ptest
++
++SRC_URI += " \
++	file://run-ptest \
++"
++
++RDEPENDS_${PN}-ptest += " \
++	${PYTHON_PN}-pytest \
++	${PYTHON_PN}-fcntl \
++	${PYTHON_PN}-terminal \
++	${PYTHON_PN}-resource \
++"
++
++do_install_ptest() {
++	install -d ${D}${PTEST_PATH}/tests
++	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
++}
 -- 
 2.17.1
 
