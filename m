@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.3187.1592560014082158489
+ by mx.groups.io with SMTP id smtpd.web10.3190.1592560024118796381
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Jun 2020 02:46:54 -0700
+ Fri, 19 Jun 2020 02:47:04 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=53780 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jmDqK-0001eB-WB; Fri, 19 Jun 2020 13:02:02 +0300
+	id 1jmDqV-0001eB-Uj; Fri, 19 Jun 2020 13:02:13 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/3] python3-booleanpy: Upgrade 3.7 to 3.8
-Date: Fri, 19 Jun 2020 12:46:36 +0300
-Message-Id: <20200619094638.7116-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/3] python3-toml: Upgrade 0.10.0 -> 0.10.1
+Date: Fri, 19 Jun 2020 12:46:37 +0300
+Message-Id: <20200619094638.7116-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200619094638.7116-1-leon.anavi@konsulko.com>
+References: <20200619094638.7116-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,41 +30,50 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.8:
+Upgrade to release 0.10.1:
 
-- Add support for evaluation of boolean expression.
-- Fix parsing of tokens that have a number as the first character.
-- Restore proper Python 2 compatibility.
-- Add pointers to Linux distro packages.
+- Removed test for unexpected EOF while parsing string
+- Raise an exception if EOF is reached and a string is
+  unterminated
+- Allow loading from bytes paths.
+- Fix the issue where the parser fails on time attr with no space
+  after =
+- Fix trailing whitespace in break
+- Handle arrays of multiline strings
+- Fix bad syntax handling
+- Improve professionalism of error message.
+- Extend TomlNumpyEncoder to numpy integer types.
+- Fix loading values when a line has " }" after a boolean.
 
-Change LICENSE.txt md5 checksum because the year has been updated.
+The copyright notices were updated and the md5 checksum has
+changed. The license remains MIT.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-booleanpy_3.7.bb => python3-booleanpy_3.8.bb}  | 6 +++---
+ .../{python3-toml_0.10.0.bb => python3-toml_0.10.1.bb}      | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-booleanpy_3.7.bb => python3-booleanpy_3.8.bb} (55%)
+ rename meta-python/recipes-devtools/python/{python3-toml_0.10.0.bb => python3-toml_0.10.1.bb} (54%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb b/meta-python/recipes-devtools/python/python3-booleanpy_3.8.bb
-similarity index 55%
-rename from meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb
-rename to meta-python/recipes-devtools/python/python3-booleanpy_3.8.bb
-index ebf7ba4e7..a1ce7eafc 100644
---- a/meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-booleanpy_3.8.bb
-@@ -2,10 +2,10 @@ SUMMARY = "Define boolean algebras, create and parse boolean expressions and cre
- HOMEPAGE = "https://github.com/bastikr/boolean.py"
+diff --git a/meta-python/recipes-devtools/python/python3-toml_0.10.0.bb b/meta-python/recipes-devtools/python/python3-toml_0.10.1.bb
+similarity index 54%
+rename from meta-python/recipes-devtools/python/python3-toml_0.10.0.bb
+rename to meta-python/recipes-devtools/python/python3-toml_0.10.1.bb
+index b72753b80..00f38c6c3 100644
+--- a/meta-python/recipes-devtools/python/python3-toml_0.10.0.bb
++++ b/meta-python/recipes-devtools/python/python3-toml_0.10.1.bb
+@@ -2,10 +2,10 @@ SUMMARY = "Python Library for Tom's Obvious, Minimal Language"
+ HOMEPAGE = "https://github.com/uiri/toml"
+ LICENSE = "MIT"
+ SECTION = "devel/python"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=6d6012eea477117abf51c31262a152f8"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=16c77b2b1050d2f03cb9c2ed0edaf4f0"
  
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e319747a5eb94cddf646037c01ddba47"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9b58494d4f385978ca5a7ef4f6abca53"
+-SRC_URI[md5sum] = "63fffbe2d632865ec29cd69bfdf36682"
+-SRC_URI[sha256sum] = "229f81c57791a41d65e399fc06bf0848bab550a9dfd5ed66df18ce5f05e73d5c"
++SRC_URI[md5sum] = "743131c431419fe42f854cff02ad3abe"
++SRC_URI[sha256sum] = "926b612be1e5ce0634a2ca03470f95169cf16f939018233a670519cb4ac58b0f"
  
--SRC_URI[md5sum] = "1189d115a38f84f5df743014926a9159"
--SRC_URI[sha256sum] = "bd19b412435611ecc712603d0fd7d0e280e24698e7a6e3d5f610473870c5dd1e"
-+SRC_URI[md5sum] = "83ccc145ba74a585637124c8bc648333"
-+SRC_URI[sha256sum] = "cc24e20f985d60cd4a3a5a1c0956dd12611159d32a75081dabd0c9ab981acaa4"
- 
- PYPI_PACKAGE = "boolean.py"
+ inherit pypi setuptools3
  
 -- 
 2.17.1
