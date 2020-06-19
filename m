@@ -1,17 +1,17 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.65])
- by mx.groups.io with SMTP id smtpd.web10.10685.1592583586379355881
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.76])
+ by mx.groups.io with SMTP id smtpd.web10.10690.1592583596431857035
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Jun 2020 09:19:46 -0700
+ Fri, 19 Jun 2020 09:19:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Lwyx6NOv;
- spf=pass (domain: windriver.com, ip: 40.107.237.65, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=lDmJJHW3;
+ spf=pass (domain: windriver.com, ip: 40.107.94.76, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=K0IY9dUbx4YVFe1P3TV6lJSayVsX7azQAVt8a1+jRth9OZ12be0y0hQgTijTKbHau4aNtyVpL/u3L49pL9bNMDGIid4bhZBkeRKnZ6c1jAFFi+newj52pNQ1j0Zj6cSjEPDUM1ZqtZSHMh+mArEANdYgEwnBQRJHV4bFSSYHOc2lJ8g2nYlSxaa+bX6w+YVskSESdrEK/kv26PanD3MCIjl2Rq5flqkkWLTdVsOg8yWlvgMUefki0g+v3dA8W4Yxwvzkx+dhnEB6lI3NurGy8FY+gzw4J831m/VB/5hPTdvhCO5YHH8+QOu2GmuUZ7m4dT6Nw1vcCsSCL1BzHG6X0A==
+ b=cClVKSbTIMdSbOO4vBAS/NhmciTDerVwrs/JABRr8D++qn1iCqnRJURaq/5xSL6cwEeaU8YzTDGOP1n5Z/5WZiTO++pWGz+ba4mRckg6jYSzetm/AenAV61CE2WEfkBnZlx5Um/EoeOQ97m+dEghRzH5gt1xyorIbRuI2ZrumzOjzAatAWhRt/wbJs6ZU3v5NsTU4AbrpL3XDUuppVkaz8B7/F2qMDMYGAG/dfuAhz/QqhfIkODan45t1MULhChjsxhWaUAlkvSo5vnGnvdgK3GmT2bbq8NnwmOFzewc2jTZ/g+R47orSIP7ZYY9SBtdZ+Wnh5IMMhHc6H6RrRpPKA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=r/R7GOYh8tKQyHdUogf41eu8w7n5HAeBhQTSVKg9OrU=;
- b=Ite5QVeIlwHzyK0DCalYj3hRK6U3ZQoV8Y2ktILN8WBUYQezSezhSC4M0fPEwq2F1bSUiJwujstzy9NKH0hgoO2beXHGi2baheAvwoF4pZe4OPk0UnxgUP7D0BDeZYrDoDVNoZ45/UVqmbI4JHTuiHB5O561nORJw13hH5n167IlqEfDV47q157FwyluxoBOaAVESKfqghN0c1GTitT/sHNp0s5KfKhcwH2CM35fXmBxck0XuVNYKL2+6DfAdFZL0JsawhGTmpeW2WTqR3QUHAsigDI/TnsxHfR768CD4hB81kvPKI614hu2YwlMpTfDFHlf3S5zZA8cTG+EYZZwzA==
+ bh=5OTogTatYRcueetEWenZPk6dxkVPU+4wiZpJPOv0DUQ=;
+ b=VpiBgo2RZpNjCGcLp4ZusA2tIJLL/wKf+5VIZX6r7h2j/xCHVd557IM6WotWOZKdoPI4lZZDicvpkOnsf2zLQG9TTlOzZMcbX637JuXG1CeWP5/XDtsWtYr+1JJI6+IR4Ug85ccQmipGPFjdj7dm7mhn7uai1JUx2i8o7o4X4HGgAj6dsiFSGXRRsieJ3kuJ59V6lNmu5DAhFEB4pp97/AW+afkOvdv0lzU0k1uvekkajK1LvelX2hSkap3mY4LqN2q9jAMpFJXNbF7eTXjOtJSMDe6K0XV3JOfaGy12gJLb4RQhdtzZNRYUJNMbOyymMBOqCMzqB02KvHsHclKxPw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,67 +19,67 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=r/R7GOYh8tKQyHdUogf41eu8w7n5HAeBhQTSVKg9OrU=;
- b=Lwyx6NOvsSbjWqYW4DEvA46roenL17oYEskq2cd7YMkzqSFAsuqXrEFrv8LCByi8pxqcrB2CbKEdZt8nJloQDhMBjqKL7oOaukA3dgeDP3wLGFHFJE0G9X9i3G61iGi97USxefhSCoXAB9gbPwGtLyrxpCzEUjZjz/lyou7k9yk=
+ bh=5OTogTatYRcueetEWenZPk6dxkVPU+4wiZpJPOv0DUQ=;
+ b=lDmJJHW3idz+AYUMcX37kf811kpGYUQseh0wU0XcURh6aZWSRhQzv3ntbk9BXUmZfOd+6Uu+KfwDf8Z/FwAfFj4doL2h43Wmk7SQt9hdKFeeTnWVXIFjlQVk03+5g6tiDU+TXkfPwdGc/Cr2Dby3du+9ceUxiogsBDPNoJb4rnk=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB0001.namprd11.prod.outlook.com (2603:10b6:405:69::23) with
+ by BN6PR11MB3954.namprd11.prod.outlook.com (2603:10b6:405:79::35) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22; Fri, 19 Jun
- 2020 16:19:45 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.21; Fri, 19 Jun
+ 2020 16:19:55 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3109.021; Fri, 19 Jun 2020
- 16:19:45 +0000
-Subject: Re: [oe] [meta-python][PATCH 4/7] python3-huey: Add package
+ 16:19:55 +0000
+Subject: Re: [oe] [meta-python][PATCH 5/7] python3-sqlsoup: add package
 To: akuster <akuster808@gmail.com>, openembedded-devel@lists.openembedded.org
 References: <20200618152805.13075-1-akuster808@gmail.com>
- <20200618152805.13075-5-akuster808@gmail.com>
+ <20200618152805.13075-6-akuster808@gmail.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <aca2e46c-fdd8-f1d3-278a-dadd562d3ce4@windriver.com>
-Date: Fri, 19 Jun 2020 12:19:43 -0400
+Message-ID: <7b0306f3-11ac-9f8e-b022-6335bc803ed5@windriver.com>
+Date: Fri, 19 Jun 2020 12:19:53 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200618152805.13075-5-akuster808@gmail.com>
-X-ClientProxiedBy: YT1PR01CA0142.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::21) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200618152805.13075-6-akuster808@gmail.com>
+X-ClientProxiedBy: YT1PR01CA0132.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2f::11) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0142.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22 via Frontend Transport; Fri, 19 Jun 2020 16:19:44 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0132.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::11) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22 via Frontend Transport; Fri, 19 Jun 2020 16:19:54 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: daa0815d-d15b-44a2-62ef-08d8146c941a
-X-MS-TrafficTypeDiagnostic: BN6PR11MB0001:
+X-MS-Office365-Filtering-Correlation-Id: 2526c0a6-ff03-4de0-2869-08d8146c9a47
+X-MS-TrafficTypeDiagnostic: BN6PR11MB3954:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB00019E2EFCFCD7EB45A9F0589F980@BN6PR11MB0001.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:207;
+	<BN6PR11MB39542FE53A7506C670A2E2109F980@BN6PR11MB3954.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:411;
 X-Forefront-PRVS: 0439571D1D
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	OODayVk0XVxECiiwL5+wQA3BieGq9oXEfzlyYfRskO6dEwinfF5lYrblKVZHkWpVWolryXwADlrw11RVxwxIRSMrU0uYe/1mFwfsIfE2DfJP2X1foFadQcAc8oMQoPR4+PpCWIvt24vOzpixJio02TG9PXVwBw5QdOrquqT+6cy/RQaflF9M2KieZPkG7XnNZV5YdZpaIYumTFaZ3TncGFNC2Jfk+uVHUksnGkzD3MIquU2CevL5cdwfdX+KgltsOzYf8JODH1p5vI/Ca5nd02dfaNiSphezRI8m9b28lL9jlv7UJZKEceCZqfdHS78BSQ7ZRk0HNdrriM1VypLc/WJoOXXkhTgxqBojbpni5YmRz9Mek02VOonb7K0LligTl44fe6PZKflVDTYjCVDbuvhLLaZBu+a7S3THGaFJHxFaNUIwjl4cUy2+m2z+WtOiasXk5E+U8JJnYTp0uwV+mQ==
+	bQLVxWtOLnShpeYSK48vWlZrdlswRjyhMyo7MLduVTuFIgTWxh42Z+XFH0MoWCU8886pSoMkn0GJebP4yWnxoDq6GO96qTYy00Q5ZPRXdJt78i0T4pZRexNcUxX0ru2gKvv7aiJdUpp+tpYSxLaDA/5Cjof/ZdPLSJNiJoSxDBCyNM5qdBmWaF76ORwiuQOjM6dvKzfLkAXkzYH+QZJipIRPy/OwOJKPKaOHi60+c5QwcRdsDk/2eCjlTcmBnYr2APlAnj7+QjWhi5FuauPK+UqhGoWDdme+JJDaeE9sqQbGULAgFi46NQEs08oM5f+YnPW2/CpJJjGSeUPVCH+IIbU8Snu26g2ORn1iYHJWS+CtY6yl9MLAr+HHOmuiy5rb5t9a3LbIfoCZAIai/w0VQQ4WqWxTIw4+4Z+F1QMiepbtLK8N/8HQPsr+ZrfQjNN0e++2wbaBNxskK3943pazBQ==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(39850400004)(366004)(396003)(376002)(346002)(5660300002)(31696002)(16576012)(316002)(478600001)(8676002)(8936002)(83380400001)(966005)(6486002)(16526019)(2906002)(166002)(36756003)(66946007)(66476007)(66556008)(31686004)(86362001)(2616005)(52116002)(53546011)(956004)(33964004)(186003)(44832011)(26005)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(376002)(136003)(366004)(39850400004)(396003)(5660300002)(53546011)(6486002)(478600001)(86362001)(83380400001)(8936002)(26005)(956004)(166002)(16526019)(44832011)(52116002)(33964004)(31696002)(31686004)(2616005)(186003)(316002)(2906002)(966005)(36756003)(66476007)(66556008)(66946007)(16576012)(8676002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	bijlcukPLaGW7IvYUoa5+FNRx+y4zdr0WiUVsUr7Y4j5BC7vk2eRENWRTbKjOgjSvgEn3aMybPyUsKFG07k6MTyk3MSr7C/Vz8uxFP3RooIgs0eRlL/HLcLEvzlKvneExhs0Iu1zW/Nwrqk+Eqnhr8oB7iE9bwgrgAd2tSdWBSLEPdBEgrTMvpNXarFkLbBdbISx9wgd7AfZdFmJXO7OXiEkz1K+aQUIRqBsjzCRlhTHAbD/U287JHNDntaUlAJGL8gfEFY132dkKsK/HB5l/PsHqdLbeGhoeWQeC846sZPG0yc6sI0Zb2j+M9lDCKvF/GKCJtrPV/0H7PoX1cDOEX4JjmGqYkqPscmyXMyqB0TsXtp+eYYYxJFeISUb1uj70w99ANXIWaeCRre4a4jNtwG0hGpYF/2rSrrhuVlA1x/75HiK1JEDaGqqAKBVn4SkUA/CULHFBxmjuG2xQxGkstUvIsLJHpqu2NhQjF+sFX9do9+w/bsRkKgo37sISVM+
+	fkbncVyfSHdkTQlJMXN3SQYvJmiI0eQH3chFtomxkk4E26E9dpFh9AcbnYEELaQpvWEn0WwNiORPXvhzuXvUq1nOyhQM+HMEegB0k4KVSmM7kBJc4hW4cerIovFM7AcxTnfB/BMheKMEVUfX/PlO3B9uurz8z+washJwuPQIF1XvBGEcmv2bw//Elmndr4zjibh7OYQP5KTLr124T8gJDiUCta06h3NLpYwJ1e0QKGymguIK/dS/DYEAkoXAvVpZfP8PIbYHt75JesEQiLilqGShaJF8IQ/IsEVtv33qxt+rbRVy9DR+pQD/Pl4ZGUkq32lotVvhEOg1zHzZWWvxuKLxkGkN6HzXilmtiwwLdkIdHdSyIxbq/vZTcpA9ij+t6weDHkwcs2AQ/Rtx3wTY8rbZjnJsrOqLMBIKiMRsu6tcz28Fpa8QmCslBsH2vXrPJoQOEM6nacVh5Sg1JBX9Olc7C5V5Z9daHQZ6UTzt5KXS2wc7zNSjqzOM0+3EFORG
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: daa0815d-d15b-44a2-62ef-08d8146c941a
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2020 16:19:44.9176
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2526c0a6-ff03-4de0-2869-08d8146c9a47
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2020 16:19:55.2743
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: wgsV6tn9VxMQs4cBqeOE8kKdusBmyjveq/ytaPle9sjeE4fqx3EcJJgEykUX9FRNlPOWaONk7Ix7HCoD08SH5i/XaSpNHBJn2M4nUCZS0F4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB0001
+X-MS-Exchange-CrossTenant-UserPrincipalName: FAogTMPs9dhQuHlhvyXrG45DD1C3tE1bDHE/QOi2XPN+pOubG7RFYVM77AkxEtCpIxngBXgD8e7WtzcFFxXunfWvAO04cRb0mi+2QdVUxho=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB3954
 Content-Type: multipart/alternative;
- boundary="------------E133C8406ECECA50AACEB189"
+ boundary="------------303208B5152CF29688F66D23"
 Content-Language: en-US
 
---------------E133C8406ECECA50AACEB189
+--------------303208B5152CF29688F66D23
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -88,30 +88,29 @@ On 6/18/20 11:28 AM, akuster wrote:
 > Signed-off-by: Armin Kuster <akuster808@gmail.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-devtools/python/python3-huey_2.2.0.bb      | 10 ++++++++++
->   1 file changed, 10 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-huey_2.2.0.bb
+>   .../recipes-devtools/python/python3-sqlsoup_0.9.1.bb     | 9 +++++++++
+>   1 file changed, 9 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-sqlsoup_0.9.1.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-huey_2.2.0.bb b/meta-python/recipes-devtools/python/python3-huey_2.2.0.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-sqlsoup_0.9.1.bb b/meta-python/recipes-devtools/python/python3-sqlsoup_0.9.1.bb
 > new file mode 100644
-> index 0000000000..cac6be9547
+> index 0000000000..592ba72043
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-huey_2.2.0.bb
-> @@ -0,0 +1,10 @@
-> +SUMMARY = "a little task queue for python"
+> +++ b/meta-python/recipes-devtools/python/python3-sqlsoup_0.9.1.bb
+> @@ -0,0 +1,9 @@
+> +SUMMARY = "A one step database access tool, built on the SQLAlchemy ORM."
 > +SECTION = "devel/python"
 > +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=5cac039fcc82f01141cc170b48f315d4"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=4382f3a1adb96f258dbd80f5b400f0d5"
 > +
-> +PYPI_PACKAGE = "huey"
-> +SRC_URI[sha256sum] = "15cef4225f7ae200fbecf89a0fed13e389fd751d6c8e1d3b26562b7df953de0e"
+> +PYPI_PACKAGE = "sqlsoup"
+> +SRC_URI[sha256sum] = "2fafb7732a663dcd59b37e64d1c94d5fb20d4fad32cd8ee260aa1cd9a10340d6"
 > +
 > +inherit pypi setuptools3
-> +
 >
 > 
 
---------------E133C8406ECECA50AACEB189
+--------------303208B5152CF29688F66D23
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -123,33 +122,32 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/18/20 11:28 AM, akuster wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200618152805.13075-5-akuster808@gmail.com">
+    <blockquote type="cite" cite="mid:20200618152805.13075-6-akuster808@gmail.com">
       <pre class="moz-quote-pre" wrap="">Signed-off-by: Armin Kuster <a class="moz-txt-link-rfc2396E" href="mailto:akuster808@gmail.com">&lt;akuster808@gmail.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200618152805.13075-5-akuster808@gmail.com">
+    <blockquote type="cite" cite="mid:20200618152805.13075-6-akuster808@gmail.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python3-huey_2.2.0.bb      | 10 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
- 1 file changed, 10 insertions(&#43;)
- create mode 100644 meta-python/recipes-devtools/python/python3-huey_2.2.0.bb
+ .../recipes-devtools/python/python3-sqlsoup_0.9.1.bb     | 9 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
+ 1 file changed, 9 insertions(&#43;)
+ create mode 100644 meta-python/recipes-devtools/python/python3-sqlsoup_0.9.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-huey_2.2.0.bb b/meta-python/recipes-devtools/python/python3-huey_2.2.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-sqlsoup_0.9.1.bb b/meta-python/recipes-devtools/python/python3-sqlsoup_0.9.1.bb
 new file mode 100644
-index 0000000000..cac6be9547
+index 0000000000..592ba72043
 --- /dev/null
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-huey_2.2.0.bb
-@@ -0,0 &#43;1,10 @@
-&#43;SUMMARY = &quot;a little task queue for python&quot;
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-sqlsoup_0.9.1.bb
+@@ -0,0 &#43;1,9 @@
+&#43;SUMMARY = &quot;A one step database access tool, built on the SQLAlchemy ORM.&quot;
 &#43;SECTION = &quot;devel/python&quot;
 &#43;LICENSE = &quot;MIT&quot;
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=5cac039fcc82f01141cc170b48f315d4">&quot;file://LICENSE;md5=5cac039fcc82f01141cc170b48f315d4&quot;</a>
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=4382f3a1adb96f258dbd80f5b400f0d5">&quot;file://LICENSE;md5=4382f3a1adb96f258dbd80f5b400f0d5&quot;</a>
 &#43;
-&#43;PYPI_PACKAGE = &quot;huey&quot;
-&#43;SRC_URI[sha256sum] = &quot;15cef4225f7ae200fbecf89a0fed13e389fd751d6c8e1d3b26562b7df953de0e&quot;
+&#43;PYPI_PACKAGE = &quot;sqlsoup&quot;
+&#43;SRC_URI[sha256sum] = &quot;2fafb7732a663dcd59b37e64d1c94d5fb20d4fad32cd8ee260aa1cd9a10340d6&quot;
 &#43;
 &#43;inherit pypi setuptools3
-&#43;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -159,4 +157,4 @@ index 0000000000..cac6be9547
   </body>
 </html>
 
---------------E133C8406ECECA50AACEB189--
+--------------303208B5152CF29688F66D23--
