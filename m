@@ -1,50 +1,50 @@
-Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com [209.85.208.67])
- by mx.groups.io with SMTP id smtpd.web12.4677.1592566332558672388
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+ by mx.groups.io with SMTP id smtpd.web11.4587.1592566333373478704
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Jun 2020 04:32:12 -0700
+ Fri, 19 Jun 2020 04:32:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=IMbqMI2P;
- spf=pass (domain: gmail.com, ip: 209.85.208.67, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f67.google.com with SMTP id w7so7362116edt.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2020 04:32:12 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=j68I8NQ7;
+ spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f44.google.com with SMTP id cy7so806399edb.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2020 04:32:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=FRkuKLQdYvZpkWAEnZFBguwM7Kn/IY1RzBzSYviehrk=;
-        b=IMbqMI2PncvBVcOG4wFwumLJQ/NsEg2cmVZgjVcM45tWDIa5IUkHY/JcKWHTpM8orL
-         k+pH2uNkgPSmNS9l3y6eJ+JpTvSOYkVKCyK8vMqH7lvLDSAQHIruPt3P/g91SK0417EV
-         IGpUlKdWLFUnjDFildSszQdQ0hHEgNSeLngxV58NJPHlmssjIMDjVHEqKs0vX/FnD+kM
-         Y3fLhx76FnJt6C5RSN1+PDjUc8qQxf9evMXfxUhxCMplzaR5YW6sfU4FXdunb8FFLl1R
-         3rGSfgi58KXr8hvD2tWQQQ+PJfVlkFc/WOWOxtU2y6scb82i2xPbvs6A1mumLLMMRJrS
-         c8XQ==
+        bh=B76dvreHkxkNPnOQyh/+Fww4vTu26YQyPXpRkNOf7ig=;
+        b=j68I8NQ7+MCSqkxW0wDjMa2j6MYlZWIPDQe8/nGjivbiJou8zjeUztdEbgvzFD0LLq
+         qQ1mQL+DQ9QNIQJFibhnP1YsgXi7N8mkeF1tbpKUPst6t7EYTPNvOlYVn+LjDLl5VhK0
+         b3AaHmZKcQqEpkdThZsubbe2baS+WrGLllQ3vS72TDOxOi66g0cwfMMC+6OgF7d+tB/z
+         s/IneysEZRF7KDcGUXA2KM/CdPptb6AUyZzChkBDOJoZW1mHW8kRRi5679d5CpOYaetq
+         YhmHrbYqnawbKma/bgOp6lekKt+ihUgXSz6lAer+OCVr6IBkZBXwqBOzYlP0rIBEBluV
+         KhAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=FRkuKLQdYvZpkWAEnZFBguwM7Kn/IY1RzBzSYviehrk=;
-        b=QEMJDpcqVgHbqKvceOSlSpLlM8pS+Z77S3fyG3/YB4M/Pzcf5KrbvqLjmzPKWllUUF
-         4PK8tTrh2GDa+ryCTtccgRo5IZ2pcRkFKRAwa/uTtJSasMQM1sRNQVsbXoBE873OzRHQ
-         jm7gHbqRnrouDmg+q1lfnKT0u8P+rJdHxYQJphLhM38t2jV6E2rDRZ0Y3ERNqfuHlM05
-         0grqGXeJcY+Smjlw+D7ngXDNBAordOfiMXuvzjTQsa7RBH+r2mWGMx9+6CaF1Z1zaA1e
-         4et3wDGaD6TbLUmRu6VyJwRcJA4vqBFPxSz/fOC+YweBLmHmk2e402xuQoWRyYuDbCWs
-         UKpg==
-X-Gm-Message-State: AOAM533KFMagmrYoUIKApY2jzcWt/6PFH+xF1PJ2tTtYYm7guX429jXR
-	6B/CalFQMkPHEcSsiw1ogOdNriWjHnk=
-X-Google-Smtp-Source: ABdhPJx9IhRkf9CA7Es6StshH7Z0Rlp47RxMJU43A0diF5dybU1OM6VdmXLhfiOEzR6QjfF+tzxKIw==
-X-Received: by 2002:a05:6402:1b01:: with SMTP id by1mr2808494edb.20.1592566330795;
-        Fri, 19 Jun 2020 04:32:10 -0700 (PDT)
+        bh=B76dvreHkxkNPnOQyh/+Fww4vTu26YQyPXpRkNOf7ig=;
+        b=I0pxUaJuAxlJCBCaQpI8jVqcp60kHvkqHKeKMuXSrHwf5inxN8TZMYkceFWUv8O6gf
+         aTPmUtrlYUMkj9qbEuPWbI58GNv+SoioTH6ZjgSlK03ZARcaMBdte3jFkkebgdFTsfav
+         VHxCUrDUIsU3Q0W/l9OGhbtJAQKrC+S8X05R+Nj9MjUxT/DklqFSFuY436QKnPLUHns/
+         oFlYXpQKHcm1FIzHgmJs+W3v2AJVenjfs4DjpH269v8gXlSmY6DQVzs/+tICWCOTTDvp
+         8PfdRWHJQ/8jZybbgl0z0YcQK6FHSAlePw+xYdlgzkWT7rlRt1FjzO6iEIe3CI6tFPe5
+         PAYg==
+X-Gm-Message-State: AOAM531Xu3DklcAYLkt7kA1fUMvjp/jWS6zJreijKkXRBzEtRSTrjO6L
+	Vg9wqgYt9pX5kaR9AWI/2AdSL4G/qzc=
+X-Google-Smtp-Source: ABdhPJwiyx7iahEsgFcO1yY46lUgJEaPMnSbf7uB4193pqEVFa6CJ0GnCHPAxUxiwOg05xEs5elz4A==
+X-Received: by 2002:aa7:db51:: with SMTP id n17mr2692236edt.241.1592566331718;
+        Fri, 19 Jun 2020 04:32:11 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f07a002d299e9f71202562c.dip0.t-ipconnect.de. [2003:f0:7f07:a002:d299:e9f7:1202:562c])
         by smtp.gmail.com with ESMTPSA id o12sm4472346edq.7.2020.06.19.04.32.10
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Jun 2020 04:32:10 -0700 (PDT)
+        Fri, 19 Jun 2020 04:32:11 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 02/10] libdvdcss: upgrade 1.3.0 -> 1.4.2
-Date: Fri, 19 Jun 2020 13:31:53 +0200
-Message-Id: <20200619113201.2811033-2-schnitzeltony@gmail.com>
+Subject: [PATCH 03/10] vlc: upgrade 3.0.10 -> 3.0.11
+Date: Fri, 19 Jun 2020 13:31:54 +0200
+Message-Id: <20200619113201.2811033-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200619113201.2811033-1-schnitzeltony@gmail.com>
 References: <20200619113201.2811033-1-schnitzeltony@gmail.com>
@@ -52,38 +52,28 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-License checksum was changed by FSF address change
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../vlc/{libdvdcss_1.3.0.bb => libdvdcss_1.4.2.bb}         | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
- rename meta-multimedia/recipes-multimedia/vlc/{libdvdcss_1.3.0.bb => libdvdcss_1.4.2.bb} (50%)
+ .../recipes-multimedia/vlc/{vlc_3.0.10.bb => vlc_3.0.11.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-multimedia/recipes-multimedia/vlc/{vlc_3.0.10.bb => vlc_3.0.11.bb} (98%)
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.3.0.bb b/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.4.2.bb
-similarity index 50%
-rename from meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.3.0.bb
-rename to meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.4.2.bb
-index 79e64aebd..fe06699ab 100644
---- a/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.3.0.bb
-+++ b/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.4.2.bb
-@@ -1,6 +1,7 @@
-+SUMMARY = "libdvdcss is a simple library for accessing DVDs like block devices"
- DESCRIPTION = "libdvdcss is a simple library designed for accessing DVDs like a block device without having to bother about the decryption."
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.10.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.11.bb
+similarity index 98%
+rename from meta-multimedia/recipes-multimedia/vlc/vlc_3.0.10.bb
+rename to meta-multimedia/recipes-multimedia/vlc/vlc_3.0.11.bb
+index 6020c2035..dd9486e8a 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.10.bb
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.11.bb
+@@ -25,7 +25,7 @@ SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
+            file://0004-Use-packageconfig-to-detect-mmal-support.patch \
+            file://0005-Fix-build-with-Qt-5.15.patch \
+ "
+-SRC_URI[sha256sum] = "a966abfc7f3b2ff3adaa130306ecaf5d6ad3b6dc73385fc9ab0c1204029d4c31"
++SRC_URI[sha256sum] = "3e94a1acf33445e9da15d528aa48657aa26b912eaa2656b403d43860a8834919"
  
- SRC_URI = "http://download.videolan.org/pub/libdvdcss/${PV}/libdvdcss-${PV}.tar.bz2"
+ inherit autotools features_check gettext pkgconfig mime-xdg
  
-@@ -8,5 +9,5 @@ inherit autotools
- 
- EXTRA_OECONF = " --disable-doc "
- 
--SRC_URI[md5sum] = "7f0fdb3ff91d638f5e45ed7536f7eb67"
--SRC_URI[sha256sum] = "7c414acd520c4e4dd7267952f72d738ff50321a7869af4d75c65aefad44f1395"
-+SRC_URI[md5sum] = "7b74f2e142b13c9de6dc8d807ab912d4"
-+SRC_URI[sha256sum] = "78c2ed77ec9c0d8fbed7bf7d3abc82068b8864be494cfad165821377ff3f2575"
 -- 
 2.26.2
 
