@@ -1,228 +1,82 @@
-Received: from mailout08.rmx.de (mailout08.rmx.de [94.199.90.85])
- by mx.groups.io with SMTP id smtpd.web10.6565.1592572938832804078
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web10.9965.1592581650113821802
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Jun 2020 06:22:20 -0700
+ Fri, 19 Jun 2020 08:47:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: arri.de, ip: 94.199.90.85, mailfrom: ceggers@arri.de)
-Received: from kdin01.retarus.com (kdin01.dmz1.retloc [172.19.17.48])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout08.rmx.de (Postfix) with ESMTPS id 49pKGZ1yWtzMqv4
-	for <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2020 15:22:14 +0200 (CEST)
-Received: from ppmail.arri.de (unknown [217.111.95.7])
-	(using TLSv1 with cipher AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by kdin01.retarus.com (Postfix) with ESMTPS id 49pKGY3T0Tz2xFW
-	for <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2020 15:22:13 +0200 (CEST)
-Received: from mta.arri.de ([192.168.100.141]) by ppmail.arri.de over TLS secured channel with Microsoft SMTPSVC(7.0.6002.18264);
-	 Fri, 19 Jun 2020 15:22:12 +0200
-Received: from N95HX1G2.wgnetz.xx (192.168.54.65) by mta.arri.de
- (192.168.100.104) with Microsoft SMTP Server (TLS) id 14.3.408.0; Fri, 19 Jun
- 2020 15:22:12 +0200
-From: "Christian Eggers" <ceggers@arri.de>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Christian Eggers <ceggers@arri.de>
-Subject: [meta-oe][PATCH] linuxptp: Fix segmentation fault on 32 bit platforms with 64 bit time_t
-Date: Fri, 19 Jun 2020 15:20:57 +0200
-Message-ID: <20200619132057.4354-1-ceggers@arri.de>
-X-Mailer: git-send-email 2.26.2
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=aSom/wA/;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: adrian.freihofer@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id e12so8000310eds.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2020 08:47:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=kFCtPZeSgBx5mT3ipPz+KOGs13SPrbbJUHT1hJJu0RU=;
+        b=aSom/wA/IE4QMfx2GEiZORomfdTNYWzRHLvVXlY1Nvbx4RHROWlPbCutpDq5UWGJ08
+         6I5qOYNITEYzpiVPj8NUEIP2hr85Y1NbMtN5btWF6UfF4qc0atA+KTFpeyAcVA/vRiTN
+         QoIEijnTeS5XmsHI5Mkn72OYJgmurVgZduGPSq5IGjtyORQxszItVFIR20UzSuoCQl+N
+         nCcnifRd2zjcvP2GeIppx3KWwOzoyuXQhmIR/RCvbeUQ3shiQNsr8Er8q9B/JTZYnwoM
+         EkxxjMATwTRoCdG/5Ti6bBAQaxc0vzZRzW2L97hKXvq2TCNCcKqgMchzHqayFsGTjm5n
+         NBrw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=kFCtPZeSgBx5mT3ipPz+KOGs13SPrbbJUHT1hJJu0RU=;
+        b=sKiI13z+q5VYRQoDKxDpJ+SAO/8YE2NxXSQWwF2RK6mOrZ2fW2vT++6qbx2irrhHtF
+         sWOdnOBJY2myeUlDyRp9zwpzahFmIdUukoB8TXFNMztBdTSZl69Y3VbbMg+1KWrbWv9K
+         tpABRA5L4LMbNFdiMeSfhByPiBWxB1LdCL5EuJup52pjNdPsq7Vb6PlvcNCdWnNKPgWD
+         iC81mCp4eOKJ3L/1UrJ60KmIt3qXQHX8+xoKpf/bme3CwaQMM8zeDGckIrDJiC2Uujbc
+         9ccdUE2I7vLwR6NGVe3E4e/81l7kj+t9FViwM5voF++TVAPzt07F5wgJ/lHaL1hYF7bY
+         XiHg==
+X-Gm-Message-State: AOAM5331TgGfSYKH0PdiKoe0j8gdIL9YfJtCT0W+CZwkHoTJ6YpOC0TW
+	JDo8XDbf0kKLeKK4SfK482WHM5Af
+X-Google-Smtp-Source: ABdhPJz+Y58ejBDbsywHRC5Z0Ll/dkkvqOXb+qrpp07i0cMqNkBYGzVtpICPqucBcBmdr7mJbpIpEg==
+X-Received: by 2002:aa7:c607:: with SMTP id h7mr4042777edq.214.1592581648390;
+        Fri, 19 Jun 2020 08:47:28 -0700 (PDT)
+Return-Path: <adrian.freihofer@gmail.com>
+Received: from md2pfrec.ad001.siemens.net (c-82-192-240-69.customer.ggaweb.ch. [82.192.240.69])
+        by smtp.gmail.com with ESMTPSA id dn15sm5365283ejc.26.2020.06.19.08.47.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 19 Jun 2020 08:47:27 -0700 (PDT)
+From: "Adrian Freihofer" <adrian.freihofer@gmail.com>
+X-Google-Original-From: Adrian Freihofer <adrian.freihofer@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Adrian Freihofer <adrian.freihofer@siemens.com>
+Subject: [meta-network][PATCH] squid: upgrade 4.9 -> 4.12
+Date: Fri, 19 Jun 2020 17:45:06 +0200
+Message-Id: <20200619154506.43803-1-adrian.freihofer@siemens.com>
+X-Mailer: git-send-email 2.25.4
 MIME-Version: 1.0
-X-Originating-IP: [192.168.54.65]
-X-OriginalArrivalTime: 19 Jun 2020 13:22:12.0806 (UTC) FILETIME=[A4A1D660:01D6463C]
-X-RMX-ID: 20200619-152213-49pKGY3T0Tz2xFW-0@kdin01
-X-RMX-SOURCE: 217.111.95.7
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Back ported upstream patch:
-https://github.com/richardcochran/linuxptp/commit/7de73fefc378cc42b9ed111=
-5b3afa409d0250a48
-
-Signed-off-by: Christian Eggers <ceggers@arri.de>
 ---
- .../linuxptp/time_t_maybe_long_long.patch     | 135 ++++++++++++++++++
- .../linuxptp/linuxptp_2.0.bb                  |   1 +
- 2 files changed, 136 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/time_t=
-_maybe_long_long.patch
+ .../recipes-daemons/squid/{squid_4.9.bb => squid_4.12.bb}   | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-daemons/squid/{squid_4.9.bb => squid_4.12.bb} (95%)
 
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/time_t_maybe_=
-long_long.patch b/meta-oe/recipes-connectivity/linuxptp/linuxptp/time_t_m=
-aybe_long_long.patch
-new file mode 100644
-index 000000000..af99d2b7f
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp/time_t_maybe_long_lo=
-ng.patch
-@@ -0,0 +1,135 @@
-+Fix printf if time_t is long long
-+
-+On some platforms, time_t has recently switched from "long" to "long
-+long" [1]. For these platforms it is necessary to use "%lld" as printf
-+format specifier because the ABI differs between "long" and "long long".
-+
-+I found no way for creating something similar to PRId64 for time_t. No
-+idea how to determine whether it's "long" or "long long". So I cast
-+everything to "long long" instead.
-+
-+[1] https://git.musl-libc.org/cgit/musl/commit/?id=3D38143339646a4ccce8a=
-fe298c34467767c899f51
-+
-+Upstream-Status: Accepted [next version is after 2.0]
-+Upstream-Patch: https://github.com/richardcochran/linuxptp/commit/7de73f=
-efc378cc42b9ed1115b3afa409d0250a48
-+
-+Signed-off-by: Christian Eggers <ceggers@arri.de>
-+---
-+diff -Naur linuxptp-2.0.org/phc_ctl.c linuxptp-2.0/phc_ctl.c
-+--- linuxptp-2.0.org/phc_ctl.c	2018-08-12 23:08:43.000000000 +0200
-++++ linuxptp-2.0/phc_ctl.c	2020-05-29 21:34:26.166519963 +0200
-+@@ -230,8 +230,8 @@
-+ 			strerror(errno));
-+ 		return -1;
-+ 	} else {
-+-		pr_notice("set clock time to %ld.%09ld or %s",
-+-			ts.tv_sec, ts.tv_nsec, ctime(&ts.tv_sec));
-++		pr_notice("set clock time to %lld.%09ld or %s",
-++			(long long)ts.tv_sec, ts.tv_nsec, ctime(&ts.tv_sec));
-+ 	}
-+=20
-+ 	return args_to_eat;
-+@@ -248,8 +248,8 @@
-+=20
-+ 		return -1;
-+ 	} else {
-+-		pr_notice("clock time is %ld.%09lu or %s",
-+-			ts.tv_sec, ts.tv_nsec, ctime(&ts.tv_sec));
-++		pr_notice("clock time is %lld.%09lu or %s",
-++			(long long)ts.tv_sec, ts.tv_nsec, ctime(&ts.tv_sec));
-+ 	}
-+=20
-+ 	/* get operation does not require any arguments */
-+diff -Naur linuxptp-2.0.org/print.c linuxptp-2.0/print.c
-+--- linuxptp-2.0.org/print.c	2018-08-12 23:08:43.000000000 +0200
-++++ linuxptp-2.0/print.c	2020-05-29 21:34:26.166519963 +0200
-+@@ -73,16 +73,16 @@
-+=20
-+ 	if (verbose) {
-+ 		f =3D level >=3D LOG_NOTICE ? stdout : stderr;
-+-		fprintf(f, "%s[%ld.%03ld]: %s%s%s\n",
-++		fprintf(f, "%s[%lld.%03ld]: %s%s%s\n",
-+ 			progname ? progname : "",
-+-			ts.tv_sec, ts.tv_nsec / 1000000,
-++			(long long)ts.tv_sec, ts.tv_nsec / 1000000,
-+ 			message_tag ? message_tag : "", message_tag ? " " : "",
-+ 			buf);
-+ 		fflush(f);
-+ 	}
-+ 	if (use_syslog) {
-+-		syslog(level, "[%ld.%03ld] %s%s%s",
-+-		       ts.tv_sec, ts.tv_nsec / 1000000,
-++		syslog(level, "[%lld.%03ld] %s%s%s",
-++		       (long long)ts.tv_sec, ts.tv_nsec / 1000000,
-+ 		       message_tag ? message_tag : "", message_tag ? " " : "",
-+ 		       buf);
-+ 	}
-+diff -Naur linuxptp-2.0.org/unicast_service.c linuxptp-2.0/unicast_servi=
-ce.c
-+--- linuxptp-2.0.org/unicast_service.c	2018-08-12 23:08:43.000000000 +02=
-00
-++++ linuxptp-2.0/unicast_service.c	2020-05-29 21:36:23.170497415 +0200
-+@@ -209,9 +209,9 @@
-+ 	tmo =3D now.tv_sec + req->durationField;
-+ 	if (tmo > client->grant_tmo) {
-+ 		client->grant_tmo =3D tmo;
-+-		pr_debug("%s grant of 0x%x extended to %ld",
-++		pr_debug("%s grant of 0x%x extended to %lld",
-+ 			 pid2str(&client->portIdentity),
-+-			 client->message_types, tmo);
-++			 client->message_types, (long long)tmo);
-+ 	}
-+ }
-+=20
-+@@ -226,8 +226,8 @@
-+ 	interval =3D pqueue_peek(p->unicast_service->queue);
-+ 	if (interval) {
-+ 		tmo.it_value =3D interval->tmo;
-+-		pr_debug("arming timer tmo=3D{%ld,%ld}",
-+-			 interval->tmo.tv_sec, interval->tmo.tv_nsec);
-++		pr_debug("arming timer tmo=3D{%lld,%ld}",
-++			 (long long)interval->tmo.tv_sec, interval->tmo.tv_nsec);
-+ 	} else {
-+ 		pr_debug("stopping unicast service timer");
-+ 	}
-+@@ -499,8 +499,8 @@
-+=20
-+ 	while ((interval =3D pqueue_peek(p->unicast_service->queue)) !=3D NULL=
-) {
-+=20
-+-		pr_debug("peek i=3D{2^%d} tmo=3D{%ld,%ld}", interval->log_period,
-+-			 interval->tmo.tv_sec, interval->tmo.tv_nsec);
-++		pr_debug("peek i=3D{2^%d} tmo=3D{%lld,%ld}", interval->log_period,
-++			 (long long)interval->tmo.tv_sec, interval->tmo.tv_nsec);
-+=20
-+ 		if (timespec_compare(&now, &interval->tmo) >=3D 0) {
-+ 			break;
-+@@ -519,8 +519,8 @@
-+ 		}
-+=20
-+ 		interval_increment(interval);
-+-		pr_debug("next i=3D{2^%d} tmo=3D{%ld,%ld}", interval->log_period,
-+-			 interval->tmo.tv_sec, interval->tmo.tv_nsec);
-++		pr_debug("next i=3D{2^%d} tmo=3D{%lld,%ld}", interval->log_period,
-++			 (long long)interval->tmo.tv_sec, interval->tmo.tv_nsec);
-+ 		pqueue_insert(p->unicast_service->queue, interval);
-+ 	}
-+=20
-+diff -Naur linuxptp-2.0.org/unicast_client.c linuxptp-2.0/unicast_client=
-.c
-+--- linuxptp-2.0.org/unicast_client.c	2018-08-12 23:08:43.000000000 +020=
-0
-++++ linuxptp-2.0/unicast_client.c	2020-06-02 11:13:06.922997844 +0200
-+@@ -216,7 +216,7 @@
-+ 				       long duration)
-+ {
-+ 	struct timespec now;
-+-	long tmo;
-++	time_t tmo;
-+=20
-+ 	if (clock_gettime(CLOCK_MONOTONIC, &now)) {
-+ 		pr_err("clock_gettime failed: %m");
-+@@ -226,7 +226,7 @@
-+ 	tmo =3D now.tv_sec + duration;
-+ 	if (!master->renewal_tmo || tmo < master->renewal_tmo) {
-+ 		master->renewal_tmo =3D tmo;
-+-		pr_debug("port %d: renewal timeout at %ld", portnum(p), tmo);
-++		pr_debug("port %d: renewal timeout at %lld", portnum(p), (long long)t=
-mo);
-+ 	}
-+ }
-+=20
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb b/meta=
--oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
-index eb262d36b..930c6673d 100644
---- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
-+++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
-@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fc=
-e4486a80fdaf4a4263"
- SRC_URI =3D "http://sourceforge.net/projects/linuxptp/files/v${PV}/linux=
-ptp-${PV}.tgz \
-            file://build-Allow-CC-and-prefix-to-be-overriden.patch \
-            file://no-incdefs-using-host-headers.patch \
-+           file://time_t_maybe_long_long.patch \
-            "
-=20
- SRC_URI[md5sum] =3D "d8bb7374943bb747db7786ac26f17f11"
---=20
-Christian Eggers
-Embedded software developer
-
-Arnold & Richter Cine Technik GmbH & Co. Betriebs KG
-Sitz: Muenchen - Registergericht: Amtsgericht Muenchen - Handelsregistern=
-ummer: HRA 57918
-Persoenlich haftender Gesellschafter: Arnold & Richter Cine Technik GmbH
-Sitz: Muenchen - Registergericht: Amtsgericht Muenchen - Handelsregistern=
-ummer: HRB 54477
-Geschaeftsfuehrer: Dr. Michael Neuhaeuser; Stephan Schenk; Walter Traunin=
-ger; Markus Zeiler
+diff --git a/meta-networking/recipes-daemons/squid/squid_4.9.bb b/meta-networking/recipes-daemons/squid/squid_4.12.bb
+similarity index 95%
+rename from meta-networking/recipes-daemons/squid/squid_4.9.bb
+rename to meta-networking/recipes-daemons/squid/squid_4.12.bb
+index 19949acd8..6e49790fe 100644
+--- a/meta-networking/recipes-daemons/squid/squid_4.9.bb
++++ b/meta-networking/recipes-daemons/squid/squid_4.12.bb
+@@ -28,11 +28,11 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2
+ 
+ SRC_URI_remove_toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
+ 
+-SRC_URI[md5sum] = "b315d0dce37627dfe61eec7f5304baaf"
+-SRC_URI[sha256sum] = "0f5829d878002147e7c4d9b8901c2c3c051693465e82e45cef9ab0e226e3e729"
++SRC_URI[md5sum] = "5d058f7f8f1db9fa4ce3db910a008b0e"
++SRC_URI[sha256sum] = "eae0ad993921e472ce36cce34674c47a224fc2868b65ef0c4b41b2f5f18378a0"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+-                    file://errors/COPYRIGHT;md5=19cc4dd146f397e72f3ff6f9f58fbfbe \
++                    file://errors/COPYRIGHT;md5=4c3268f394af77fbbf541875cef96a6c \
+                     "
+ DEPENDS = "libtool krb5 openldap db cyrus-sasl"
+ 
+-- 
+2.25.4
 
