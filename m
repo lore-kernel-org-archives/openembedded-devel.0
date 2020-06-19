@@ -1,17 +1,17 @@
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.73])
- by mx.groups.io with SMTP id smtpd.web10.10696.1592583607992476250
+Received: from NAM04-CO1-obe.outbound.protection.outlook.com (NAM04-CO1-obe.outbound.protection.outlook.com [40.107.69.74])
+ by mx.groups.io with SMTP id smtpd.web10.10701.1592583619403802370
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Jun 2020 09:20:08 -0700
+ Fri, 19 Jun 2020 09:20:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=NnswqPK9;
- spf=pass (domain: windriver.com, ip: 40.107.94.73, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=GZWcANgf;
+ spf=pass (domain: windriver.com, ip: 40.107.69.74, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=L6WulV+habiBBdbRU80v+N6GAEUK1nryeIfOLsazmfBH1brMJpdB4qoiQ8mc4QZxL0s9Vtw6kHwPmmdBxVsE03VyL1apncR8MLhu6c4nCGAb5GZ1BJQeDwFwXBeN13xzTeZh1e0vTFZfCdo8eLPYoRocMjzzxt2vF3M7QSrVCoxhmFAdMP/dKuYMgDNPSCrUykJ4jYOYPgYMRtXnKYd8C0UpP1Cddgn2DZGvbmj/JQchUQ9K2nhG5XupNbsWu+j95rrPTxwFSv1m0p+MJTLLkYMErxJvLEVt/M3VMzmdtHzNKtTBFhIeb42L3QQXixogkn4TjZX9XZrRL760M8BRTw==
+ b=dL5ZK31CBBKIWxt8JH6/l8hLdlyGlEvUtie1/8FMVcoHgRZu8qdka+K9ZLRlpq4LpQnIcryrSmS3gIlI44ZBkufUwEz4eDURs0XLfutEePwjUTYFKyi3az9fiVXXt93SEbFCN/5AXArgnrqSz6pHDUr/IIBbqsbJoLRFcUVK6JqHs2IIIir+6LONoeto9gwDP7pKRTk+l9lY4K1RQTmMDDrFdmOSiRO981eQYFepclTxpdrOHX1TvM08RwzadWxI/tT3Mvuib+VTdyxnyP6wdYC8vIQzb3iET3+/zSn7DYblnLlORA2fAiR2ajyuhH1JYf2X6oZtK5LYY2FRs/8g9w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9JEt2b6ycRFJhjYiImXcArL1H7b9I9Pxwxrleb7MlFE=;
- b=NWXcJHgJQl/QmQnfLY2X8X1y/WbYebItBWg5WjfnOLz3i383DIgspYqkn54nV/7ntvp6Ex2mm6nY8rXV/pduSs/gjeDzwjx3u4v7WGsbxT0sS49fluPfHaHXLsCpZI2d3T3NsSELeSvJMAt/nzeTXpbrmIpGAa7R/hZRgzmVSQTB3gXyqzhwX874x8WXkQZT+I7YQ54Mppi5dIsx2fy/+KH3salI4yV1COSq2JlHj0pH260wfYPm8vHbmIEgLoQWNUtDnQk5D6fAmP8b4PsYsgYlLaeiTf3wvgFwlakBOy5cYp9TdII2HwU30l+h07CtLQo5cYaQMwcz1nekH8Vdhg==
+ bh=/TddRrhTYkQuHuLx0XD3AJ5F1fwNJRmzGi8yFaRK5yI=;
+ b=JlvoG2zFb7OZRYDH3REKvdIUQhf/yekwoT6M8h9Bsn0gnr4+Af/eKFcHiXdhCX2XA/hYiWgQ+Zm0XLZ81WXe6uC9uBT2G10KrYUxAiqu5Ohz56XAN6DHbTgaum94wWIxX29cNJ/kV85e3rRpuIU8rjif//x8iPbmVUM+n+0+sk8hYagdpdxsRWVN2LKQrSAauUbpLYPEmHZvL+Wzz+YqtNk7CKVNKwjwsxyZ/NZ/4RczIu+4Lma5SnNKL4HYlE5nlzN0TVc0R84vYj3EjnnrOOgKoYZxtDxt9s12mhhAdHmaoigP7OMHUsaylAUroF4gytKKmUvs08i5TEch9iZ8kw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,67 +19,67 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9JEt2b6ycRFJhjYiImXcArL1H7b9I9Pxwxrleb7MlFE=;
- b=NnswqPK9SDKcgI1BCx7HmxDFIRIojwFNPGWp7JkQpSp2MOLb8qgq6isdQ8BZj4hpNdXC/Zwsofxzmy6rUIdJ5+29EWperhbs4MZk8XFrFzIIWkOHUsWgXGzIFvtrTztaCcfrcdJTIIamvkgzgzlq/OhL0cZfg7YR6WjWN0six/0=
+ bh=/TddRrhTYkQuHuLx0XD3AJ5F1fwNJRmzGi8yFaRK5yI=;
+ b=GZWcANgf8lGsIp6Lv8iEMij3EAz7HGQECnM9bcstMHeWrd8k2VexDMtwyxCBQYE4jtZ/rI+vppfHbgmP77mJGGlbsYzvtzJnAVbrxiysS7mTakj5GPzOPaP3MM/hIyK7+k6eBTgAiTczcxNT/MXhxt+s8vol0oGDBOFvmsLmKoI=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB3954.namprd11.prod.outlook.com (2603:10b6:405:79::35) with
+ by BN6PR11MB0001.namprd11.prod.outlook.com (2603:10b6:405:69::23) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.21; Fri, 19 Jun
- 2020 16:20:07 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22; Fri, 19 Jun
+ 2020 16:20:18 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3109.021; Fri, 19 Jun 2020
- 16:20:07 +0000
-Subject: Re: [oe] [meta-python][PATCH 6/7] python3-smpplib: add package
+ 16:20:18 +0000
+Subject: Re: [oe] [meta-python][PATCH 7/7] python3-pyrad: add package
 To: akuster <akuster808@gmail.com>, openembedded-devel@lists.openembedded.org
 References: <20200618152805.13075-1-akuster808@gmail.com>
- <20200618152805.13075-7-akuster808@gmail.com>
+ <20200618152805.13075-8-akuster808@gmail.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <a88bbe2f-704d-8ae0-09c7-0d5fef9e5aba@windriver.com>
-Date: Fri, 19 Jun 2020 12:20:05 -0400
+Message-ID: <279a3789-c03a-b210-4ab5-066cedd9cfcc@windriver.com>
+Date: Fri, 19 Jun 2020 12:20:15 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200618152805.13075-7-akuster808@gmail.com>
-X-ClientProxiedBy: YT1PR01CA0146.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::25) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200618152805.13075-8-akuster808@gmail.com>
+X-ClientProxiedBy: YT1PR01CA0147.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2f::26) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0146.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::25) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.21 via Frontend Transport; Fri, 19 Jun 2020 16:20:06 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0147.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::26) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22 via Frontend Transport; Fri, 19 Jun 2020 16:20:16 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2cf613dc-553b-4138-e328-08d8146ca126
-X-MS-TrafficTypeDiagnostic: BN6PR11MB3954:
+X-MS-Office365-Filtering-Correlation-Id: 96f96bd8-8a10-47dc-832d-08d8146ca7f2
+X-MS-TrafficTypeDiagnostic: BN6PR11MB0001:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB3954D2503203BB635FDAB5459F980@BN6PR11MB3954.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:207;
+	<BN6PR11MB000121E190F205C8AB4393539F980@BN6PR11MB0001.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:138;
 X-Forefront-PRVS: 0439571D1D
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	6n1oXkpFmKvOhqekL7kfmXHCMwnU2qdFxc2hADixcBRtn0wY027B87vXagvz2ozvs9ey9VRCy3I0odptMAWD/5yGNbUEs0UrIkcSjwSS2ptslFDa2rbGSZCUFBsOgZC4Uh1k/04i5bI7Ay3CN3uzKv+8IEoykE36EslKVnAV14JB/M4yGtsbxmYsDrGpGqqVSDTYyqB1XhpG+7Zb0zAtW5mn2Eam4odVbeyspZ3eFwP/KLDs/wPVrJZyri+nVGc/Q0UMNMsZeq7Y1aghGMIAPePXMRFtZyO8Y4KZ6gnX8hiaaf6GFLd721CfSb7i7Uc5t+7U6y2q8F1qHRnX3HUeeDnE2xoR0nXY98xcdsqdKF7E6eK25NOWUuMOIEaS/NuncS/T129uA8YnDYh4xQvhFZVKF7X0nP2nAAR7Ja12YRthphHfbWGq+Q/4szX4yl33/zUxLuxARuYPjVh550+Rtg==
+	SS5+H2le/u3NI+mz3nd3rwjrRUJ7uGExaXupk3ToezfqQQFX34dzxLg8zIPlgrKc9ThkvOQ4ABDQyQkKNVof4I8W/mpzzTxizwjwqM/xI4ATcIRxKxhKXhL1h6ik9CYqCUkqiSZV9QEIG007zUysUcZTHD+VrMM4l0xCkDqSru2wmAfSt4k+UwgXXQLHr7cpdrfhgmho8es3mPO5tAlHcsFYekJbUdYFlDmXl9rJXXhJykQuVt9WB/4h3G1ohm06xeC1x2C2Vc5QWKFKHwvE0q+CPwore4cLOVHDgR7PAlU/mkq1Vhd5g6O3OVfhEZRMNww89QSMdKB2/khcKbOl3nGDsGFUXMoeqKHfq2yVFPVgbsI0XcAwaEsWoCNoUNTSLMl7mn/jVPbr9BiNZjc5NAeuGz5U/BytRIGASVuPcybUfxrFL+4iMHWGQzTWrpFAv58jUHFgiVSDPcFUnSgqJw==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(376002)(136003)(366004)(39850400004)(396003)(5660300002)(53546011)(6486002)(478600001)(86362001)(83380400001)(8936002)(26005)(956004)(166002)(16526019)(44832011)(52116002)(33964004)(31696002)(31686004)(2616005)(186003)(316002)(2906002)(966005)(36756003)(66476007)(66556008)(66946007)(16576012)(8676002)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(39850400004)(366004)(396003)(376002)(346002)(5660300002)(31696002)(16576012)(316002)(478600001)(8676002)(8936002)(83380400001)(966005)(6486002)(16526019)(2906002)(166002)(36756003)(66946007)(66476007)(66556008)(31686004)(86362001)(2616005)(52116002)(53546011)(956004)(33964004)(186003)(44832011)(26005)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	x/3i0SZu3kALfY9IWvX58E89ZytVhoKVd4BMR1ptRV0sr4DcUk990jpYOYYUupOh3V3+H4CJhaJjy4KjRBI3nzo9EBwMLulJbTgjpq+pA2xfpj+tzhG7BRUuBG5Nab5LoXYilNVNRY3Wp2rwp00gT1MdqeJp6iOsJr2Kc0GwKJYOamvcRTv2uIEt4nJPxWhvEbWLhQgIGYWP5vQMYPYaDRSzIKK98D+Yhkk64AsC+SkXuO2EyMPzkhWko1ZGDQmZjUHz9uOL3lxMSG3pQ3Wms3oZgQwO0si8RzbK2QmWi67lthfMw5DfGHDu9ya+wAbOE5c1UT+5Zx057LLc5VmDCMWGk3NvmV0MsaSAYbfrQ24z1rQcOwf12O3VeuOpG5H7D5eXeGo7UVMPtMXj/fud2KHgZPtFDOG6pS6d9PCWbULxctNs6kUFTpRk96P1xNamu2r3naYyEV/V5joiAnw/zakzyMB2p5r4mJ9E7u1fJL+CvU/tc1FI/qQlvQNCZyHq
+	Ots1dt96bvqo14caySnXPuTCJpbflz2ftS3GrLR1BhpnToOk3FRBo6Jm+LV+7tDvpDLOSmX+UgVaFHNRZ4ZWKLslAf9T/0EntcvqB7lkhPO5St85wXgumvvbJUq7GAEyZ29xit1cKFiqd8nfDmc9afHkdNLh/2RnOKmCklutyOSrO+zh1M4NoI8I1M8gP01RpXIAcEKC89tZ5ta0alIHmzNk4HlvKVT6JJ0PdcWaT194tslTLCdX16Jgc5BRy/rl/zLdUFTosKyC9T3Xjpv0hcKtXkoTnho2o0cGASWia4bYjcRYdLf+S3HVdvzSnsgVn7FKIk3nsbYEhDVb9fnNvAqJp1JVb0ArenIYiD6Z9TK0H6xgeyN3gNgugUY8XGFaPq3x7rBKZfjK8Bmx+k6ntSizbmFPEfSvWGeXvGH2BvDWYqhl25iagiJ751w++L8s8yD9h0ODAVP2JZ340HZH3PvpZP2d8azZvZ9R2RpK4JZQWSK8ifNDLJHDva4YWEag
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2cf613dc-553b-4138-e328-08d8146ca126
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2020 16:20:06.8403
+X-MS-Exchange-CrossTenant-Network-Message-Id: 96f96bd8-8a10-47dc-832d-08d8146ca7f2
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2020 16:20:18.2247
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: w6CgHiAliLsB61RKtI8L+QjWnBVYmkuHfLHnNpkMCO4lsrlFFdfvcvcO2xZfUh4WxFvD3YzllbLeKs8KANLCCb0Q5rJJj3i1BJNSUWLOUk0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB3954
+X-MS-Exchange-CrossTenant-UserPrincipalName: caFLcWDNwoN/y4sZ2RNqZFDFLZWUXwOjnFS5loONWaWimwtFTXGXcxV2FU1ER/Q+gJfOA5DdHXXwDB4mVcEDBDyEnP5m4yCp9Daw6fUMby4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB0001
 Content-Type: multipart/alternative;
- boundary="------------A3E158BCB3D920BF6F9152AD"
+ boundary="------------7FBFB0B1F4EC7BC5A1577E7A"
 Content-Language: en-US
 
---------------A3E158BCB3D920BF6F9152AD
+--------------7FBFB0B1F4EC7BC5A1577E7A
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -88,29 +88,29 @@ On 6/18/20 11:28 AM, akuster wrote:
 > Signed-off-by: Armin Kuster <akuster808@gmail.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-devtools/python/python3-smpplib_2.1.0.bb     | 9 +++++++++
+>   meta-python/recipes-devtools/python/python3-pyrad_2.3.bb | 9 +++++++++
 >   1 file changed, 9 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-smpplib_2.1.0.bb
+>   create mode 100644 meta-python/recipes-devtools/python/python3-pyrad_2.3.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-smpplib_2.1.0.bb b/meta-python/recipes-devtools/python/python3-smpplib_2.1.0.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-pyrad_2.3.bb b/meta-python/recipes-devtools/python/python3-pyrad_2.3.bb
 > new file mode 100644
-> index 0000000000..948af58aab
+> index 0000000000..3b38fb3a4b
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-smpplib_2.1.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pyrad_2.3.bb
 > @@ -0,0 +1,9 @@
-> +SUMMARY = "SMPP library for python"
+> +SUMMARY = "RADIUS tools"
 > +SECTION = "devel/python"
-> +LICENSE = "GPLv3.0"
-> +LIC_FILES_CHKSUM = "file://README.md;md5=56a03d0ce7e492d4b9487b8aae957efe"
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=debd8dc49cd9a7d58c7fffc771efed4f"
 > +
-> +PYPI_PACKAGE = "smpplib"
-> +SRC_URI[sha256sum] = "df4139a279b35fbb42a58f2a254a9c6daf362b04a7f94e208dc120e0b8a3fd4b"
+> +PYPI_PACKAGE = "pyrad"
+> +SRC_URI[sha256sum] = "89c4d9b2cab1746c48dc0d93898d278e34a40acedf6f511aeaa748bcd4490295"
 > +
 > +inherit pypi setuptools3
 >
 > 
 
---------------A3E158BCB3D920BF6F9152AD
+--------------7FBFB0B1F4EC7BC5A1577E7A
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -122,30 +122,30 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/18/20 11:28 AM, akuster wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200618152805.13075-7-akuster808@gmail.com">
+    <blockquote type="cite" cite="mid:20200618152805.13075-8-akuster808@gmail.com">
       <pre class="moz-quote-pre" wrap="">Signed-off-by: Armin Kuster <a class="moz-txt-link-rfc2396E" href="mailto:akuster808@gmail.com">&lt;akuster808@gmail.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200618152805.13075-7-akuster808@gmail.com">
+    <blockquote type="cite" cite="mid:20200618152805.13075-8-akuster808@gmail.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python3-smpplib_2.1.0.bb     | 9 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
+ meta-python/recipes-devtools/python/python3-pyrad_2.3.bb | 9 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
  1 file changed, 9 insertions(&#43;)
- create mode 100644 meta-python/recipes-devtools/python/python3-smpplib_2.1.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyrad_2.3.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-smpplib_2.1.0.bb b/meta-python/recipes-devtools/python/python3-smpplib_2.1.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyrad_2.3.bb b/meta-python/recipes-devtools/python/python3-pyrad_2.3.bb
 new file mode 100644
-index 0000000000..948af58aab
+index 0000000000..3b38fb3a4b
 --- /dev/null
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-smpplib_2.1.0.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-pyrad_2.3.bb
 @@ -0,0 &#43;1,9 @@
-&#43;SUMMARY = &quot;SMPP library for python&quot;
+&#43;SUMMARY = &quot;RADIUS tools&quot;
 &#43;SECTION = &quot;devel/python&quot;
-&#43;LICENSE = &quot;GPLv3.0&quot;
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://README.md;md5=56a03d0ce7e492d4b9487b8aae957efe">&quot;file://README.md;md5=56a03d0ce7e492d4b9487b8aae957efe&quot;</a>
+&#43;LICENSE = &quot;BSD-3-Clause&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=debd8dc49cd9a7d58c7fffc771efed4f">&quot;file://LICENSE.txt;md5=debd8dc49cd9a7d58c7fffc771efed4f&quot;</a>
 &#43;
-&#43;PYPI_PACKAGE = &quot;smpplib&quot;
-&#43;SRC_URI[sha256sum] = &quot;df4139a279b35fbb42a58f2a254a9c6daf362b04a7f94e208dc120e0b8a3fd4b&quot;
+&#43;PYPI_PACKAGE = &quot;pyrad&quot;
+&#43;SRC_URI[sha256sum] = &quot;89c4d9b2cab1746c48dc0d93898d278e34a40acedf6f511aeaa748bcd4490295&quot;
 &#43;
 &#43;inherit pypi setuptools3
 </pre>
@@ -157,4 +157,4 @@ index 0000000000..948af58aab
   </body>
 </html>
 
---------------A3E158BCB3D920BF6F9152AD--
+--------------7FBFB0B1F4EC7BC5A1577E7A--
