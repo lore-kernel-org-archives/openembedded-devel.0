@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.2115.1592554253177323792
+ by mx.groups.io with SMTP id smtpd.web11.2121.1592554264130246331
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Jun 2020 01:10:53 -0700
+ Fri, 19 Jun 2020 01:11:04 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=51466 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jmCLQ-0007GG-SV; Fri, 19 Jun 2020 11:26:02 +0300
+	id 1jmCLb-0007GG-9v; Fri, 19 Jun 2020 11:26:12 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/7] python3-pathlib2: Consolidate in a single file
-Date: Fri, 19 Jun 2020 11:10:07 +0300
-Message-Id: <20200619081011.25051-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/7] python3-pretend: Consolidate in a single file
+Date: Fri, 19 Jun 2020 11:10:08 +0300
+Message-Id: <20200619081011.25051-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200619081011.25051-1-leon.anavi@konsulko.com>
 References: <20200619081011.25051-1-leon.anavi@konsulko.com>
@@ -34,45 +34,41 @@ Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python-pathlib2.inc     | 11 -----------
- .../python/python3-pathlib2_2.3.5.bb                | 13 ++++++++++++-
- 2 files changed, 12 insertions(+), 12 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pathlib2.inc
+ .../recipes-devtools/python/python-pretend.inc        |  9 ---------
+ .../recipes-devtools/python/python3-pretend_1.0.9.bb  | 11 ++++++++++-
+ 2 files changed, 10 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pretend.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-pathlib2.inc b/meta-python/recipes-devtools/python/python-pathlib2.inc
+diff --git a/meta-python/recipes-devtools/python/python-pretend.inc b/meta-python/recipes-devtools/python/python-pretend.inc
 deleted file mode 100644
-index d69d5273a..000000000
---- a/meta-python/recipes-devtools/python/python-pathlib2.inc
+index 58f196199..000000000
+--- a/meta-python/recipes-devtools/python/python-pretend.inc
 +++ /dev/null
-@@ -1,11 +0,0 @@
--DESCRIPTION = "Object-oriented filesystem paths"
--HOMEPAGE = "https://github.com/mcmtroffaes/pathlib2"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=042856c23a3e903b33bf361ea1cbe29a"
+@@ -1,9 +0,0 @@
+-SUMMARY = "A library for stubbing in Python"
+-HOMEPAGE = "https://github.com/alex/pretend"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=411780c0b7fa756753e94affeee5bc99"
 -
--SRC_URI[md5sum] = "f2bd0a363eb0f8fa0556f35c1d9e66fb"
--SRC_URI[sha256sum] = "6cd9a47b597b37cc57de1c05e56fb1a1c9cc9fab04fe78c29acd090418529868"
--
--RDEPENDS_${PN} += "${PYTHON_PN}-six ${PYTHON_PN}-ctypes"
+-SRC_URI[md5sum] = "ad53883ede48aeac7ae584f0de0240e8"
+-SRC_URI[sha256sum] = "c90eb810cde8ebb06dafcb8796f9a95228ce796531bc806e794c2f4649aa1b10"
 -
 -BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-pathlib2_2.3.5.bb b/meta-python/recipes-devtools/python/python3-pathlib2_2.3.5.bb
-index 66f71e57a..a022701ad 100644
---- a/meta-python/recipes-devtools/python/python3-pathlib2_2.3.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-pathlib2_2.3.5.bb
-@@ -1,2 +1,13 @@
-+DESCRIPTION = "Object-oriented filesystem paths"
-+HOMEPAGE = "https://github.com/mcmtroffaes/pathlib2"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=042856c23a3e903b33bf361ea1cbe29a"
+diff --git a/meta-python/recipes-devtools/python/python3-pretend_1.0.9.bb b/meta-python/recipes-devtools/python/python3-pretend_1.0.9.bb
+index 9c5d8a843..21d14a03b 100644
+--- a/meta-python/recipes-devtools/python/python3-pretend_1.0.9.bb
++++ b/meta-python/recipes-devtools/python/python3-pretend_1.0.9.bb
+@@ -1,2 +1,11 @@
++SUMMARY = "A library for stubbing in Python"
++HOMEPAGE = "https://github.com/alex/pretend"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=411780c0b7fa756753e94affeee5bc99"
 +
-+SRC_URI[md5sum] = "f2bd0a363eb0f8fa0556f35c1d9e66fb"
-+SRC_URI[sha256sum] = "6cd9a47b597b37cc57de1c05e56fb1a1c9cc9fab04fe78c29acd090418529868"
++SRC_URI[md5sum] = "ad53883ede48aeac7ae584f0de0240e8"
++SRC_URI[sha256sum] = "c90eb810cde8ebb06dafcb8796f9a95228ce796531bc806e794c2f4649aa1b10"
 +
  inherit pypi setuptools3
--require python-pathlib2.inc
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-six ${PYTHON_PN}-ctypes"
+-require python-pretend.inc
 +
 +BBCLASSEXTEND = "native nativesdk"
 -- 
