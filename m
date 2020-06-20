@@ -1,77 +1,83 @@
-Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com [209.85.216.66])
- by mx.groups.io with SMTP id smtpd.web12.1451.1592608564641990918
+Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
+ by mx.groups.io with SMTP id smtpd.web11.8835.1592651303005355374
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Jun 2020 16:16:04 -0700
+ Sat, 20 Jun 2020 04:08:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Q7HzdiVe;
- spf=pass (domain: gmail.com, ip: 209.85.216.66, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f66.google.com with SMTP id u8so4718122pje.4
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Jun 2020 16:16:04 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@axis.com header.s=axis-central1 header.b=n2ngQffl;
+ spf=pass (domain: axis.com, ip: 195.60.68.17, mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=vlEAG6owc5CCxfwVkS9q/f+vQdnfteRgV1fm/0Ulxf4=;
-        b=Q7HzdiVesrpto1pNObX5bO2ZthtKWi2DoqxvR8BaOOsFjxpnGU2WgFHvNQnf2p4JQe
-         KAfRJsiPCLSB0oBTY/7NxvJiOuOnXivkZZ4sxQCv3gGebphqxTm8JpZp+FK/TMOJtlCZ
-         qA8E8VN5ycW3941U4sYSzSi4DBFqmLKYtX20v9ocR6O5OOR1btwCJTTdekEL/VxN7OBM
-         RwXtQbmtJAqdKgm9NSWTEMNgejLZIVFmQpBndOzdw6zVVZztZaGmTFVovKzv7RRKGFoA
-         UNrAweUXNlv4E01+//8tEnSc9PMc6Xf2AkYymPPRMjCKfmVEnNE0wMMJNTX/Nw56WSZj
-         m9Pg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=vlEAG6owc5CCxfwVkS9q/f+vQdnfteRgV1fm/0Ulxf4=;
-        b=PXyHgsTmtv8ff6o9cvkd74b8KqSM6KWB5HCyGypKJXgIN0XmssA0aRj0BAzS3CBYxO
-         9oVHVEoktVKWC/C4+7CzZumdtwSXmCf6jv7QEJwrPyye7i7ihasM+MgpXZIvuCGJbsrM
-         aOxb4pjrU+gVM+9/Ul9IJqEY4Spy/117IYWW2acCBEEyd0TLpRWVHIy6IpCniY8T3z4D
-         ilg0ZrDGZ6tVeAtW/GuV9kMKM2iLFmTZSZuGajzrrdHZtXp/XIEDcEYcSs3HTqdGZmR2
-         PzsOekfX7xWRjn095OC8u3+eFC7jnDO2HqRRaNtB+JWt5YXcKO2RjMoZk1d5W3roTa+K
-         iY8w==
-X-Gm-Message-State: AOAM532OpHfuyvEDUWRyUxEyABACl4Ehz6Kvs5bHmIsoYYAzpcTQMyXm
-	SwEsO//7PO10/yqNvHXYlseN1nF14XQ=
-X-Google-Smtp-Source: ABdhPJyd+kVn9lXEXFLP/kVYTM2V6j6Mm6aweXbkj7GdlfHI9z3MMm9oXdbBl9XvcXDMw3U3ei24rQ==
-X-Received: by 2002:a17:90b:1b06:: with SMTP id nu6mr5746481pjb.106.1592608563632;
-        Fri, 19 Jun 2020 16:16:03 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::dedc])
-        by smtp.gmail.com with ESMTPSA id k7sm6746258pfp.84.2020.06.19.16.16.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Jun 2020 16:16:03 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [dunfell][meta-oe][PATCH] nss: Remove mcpu to avoid march conflicts
-Date: Fri, 19 Jun 2020 16:16:01 -0700
-Message-Id: <20200619231601.2777510-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.27.0
+  d=axis.com; l=2308; q=dns/txt; s=axis-central1;
+  t=1592651303; x=1624187303;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=pRnuXD6XCVAn0Q1cwqxN7CGmxxOKqAsNWcOIboLL4RQ=;
+  b=n2ngQffliUzxz3rdSuMj0SolA3EJ6INDOriT6tWXYRRMApxC6v0Td3X+
+   p/0aYuzdRg97wZGIu5F4X/gS/2nwxjM9UUV8oYHnd5WLtP1qmYBVdMzcg
+   6JcMtMDqPyojNiX4kO5yY9oAQ6Dg6nPqpUxkx3f2aSZP9NQcqATbvYtAB
+   z4MXONw16E6umhxzV0nOM2l5J8Fjenl/qrkWy5Xcb1SgohSlXp8SN6CMf
+   lNfQs/s/EIfNn1OBGhmWLbpe4yINeK/3gI9iWunZmhr1RhhkYH83w39bZ
+   ARdjIevA2425IMWh9Uls7KneFipNgSbZI3+gCkQze/2zUsnrMO4tnb5tX
+   w==;
+IronPort-SDR: 98tkrjVcDm/0BVePh7tmaxnx4muUnmE+jDQ4VFPUiFppKivbhSAAukTZlnDSlBsWVIlekShj24
+ IWDwD57bFfrqigs4a5b6KtF/2su303Ewx7d5UanwMiMpDKdzYrCYQEELc0crGwYBG01zV9Y7HF
+ TWac0LUnrYKPbYfuS5QJdCxJodWoDZn4eLkzBiatzJ2wvOmvrsMYrK5pSim9JP5Jn0AHfzgd25
+ cQg3PGj84rJutnOj4NnavHJ5gZ9SRE3UCED6xtXmojiDjaKGxVQyQjv4GCWS3zvqCovEKlc9JG
+ P1A=
+X-IronPort-AV: E=Sophos;i="5.75,258,1589234400"; 
+   d="scan'208";a="10018335"
+From: "Peter Kjellerstedt" <peter.kjellerstedt@axis.com>
+To: Khem Raj <raj.khem@gmail.com>, =?utf-8?B?QW5kcmVhcyBNw7xsbGVy?=
+	<schnitzeltony@gmail.com>
+CC: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [PATCH 10/10] libgit2: upgrade 1.0.0 -> 1.0.1 / rename recipe
+Thread-Topic: [oe] [PATCH 10/10] libgit2: upgrade 1.0.0 -> 1.0.1 / rename
+ recipe
+Thread-Index: AQHWRi1kBOGRhlaHc0+RgHssJEqIMKjf9F4AgAABuQCAAALggIABX+MA
+Date: Sat, 20 Jun 2020 11:08:19 +0000
+Message-ID: <2162972d9efc41a3bfb7a0ca4a6b964e@XBOX03.axis.com>
+References: <20200619113201.2811033-1-schnitzeltony@gmail.com>
+ <20200619113201.2811033-10-schnitzeltony@gmail.com>
+ <e7646f40-9032-0b77-5969-9afa9a883704@gmail.com>
+ <CALbNGRR3bTe4ATHS-2505iGUOsQq+H3YPqRoLc-+cHCYvNmNLg@mail.gmail.com>
+ <079febc3-4665-d650-22af-03f6fac48454@gmail.com>
+In-Reply-To: <079febc3-4665-d650-22af-03f6fac48454@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Some files are compiled with armv8-a+crypto and when using cortex-a55
-the deduced march is armv8.2-a which then conflicts
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-support/nss/nss_3.51.1.bb | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-index fba80ce2a..36e6cd8fc 100644
---- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-@@ -47,6 +47,10 @@ inherit siteinfo
- TD = "${S}/tentative-dist"
- TDS = "${S}/tentative-dist-staging"
- 
-+# cortex-a55 is ARMv8.2-a based but libatomic explicitly asks for -march=armv8.1-a
-+# which caused -march conflicts in gcc
-+TUNE_CCARGS_remove = "-mcpu=cortex-a55+crc -mcpu=cortex-a55 -mcpu=cortex-a55+crc+crypto"
-+
- TARGET_CC_ARCH += "${LDFLAGS}"
- 
- do_configure_prepend_libc-musl () {
--- 
-2.27.0
-
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWxA
+bGlzdHMub3BlbmVtYmVkZGVkLm9yZyA8b3BlbmVtYmVkZGVkLQ0KPiBkZXZlbEBsaXN0cy5vcGVu
+ZW1iZWRkZWQub3JnPiBPbiBCZWhhbGYgT2YgS2hlbSBSYWoNCj4gU2VudDogZGVuIDE5IGp1bmkg
+MjAyMCAxODowNQ0KPiBUbzogQW5kcmVhcyBNw7xsbGVyIDxzY2huaXR6ZWx0b255QGdtYWlsLmNv
+bT4NCj4gQ2M6IG9wZW5lbWJlZGVkLWRldmVsIDxvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3Bl
+bmVtYmVkZGVkLm9yZz4NCj4gU3ViamVjdDogUmU6IFtvZV0gW1BBVENIIDEwLzEwXSBsaWJnaXQy
+OiB1cGdyYWRlIDEuMC4wIC0+IDEuMC4xIC8gcmVuYW1lDQo+IHJlY2lwZQ0KPiANCj4gT24gNi8x
+OS8yMCA4OjU1IEFNLCBBbmRyZWFzIE3DvGxsZXIgd3JvdGU6DQo+ID4gT24gRnJpLCBKdW4gMTks
+IDIwMjAgYXQgNTo0OCBQTSBLaGVtIFJhaiA8cmFqLmtoZW1AZ21haWwuY29tPiB3cm90ZToNCj4g
+Pj4NCj4gPj4NCj4gPj4NCj4gPj4gT24gNi8xOS8yMCA0OjMyIEFNLCBBbmRyZWFzIE3DvGxsZXIg
+d3JvdGU6DQo+ID4+PiBTaWduZWQtb2ZmLWJ5OiBBbmRyZWFzIE3DvGxsZXIgPHNjaG5pdHplbHRv
+bnlAZ21haWwuY29tPg0KPiA+Pj4gLS0tDQo+ID4+PiAgLi4uL2xpYmdpdDIve2xpYmdpdDJfMS4w
+LjAuYmIgPT4gbGliZ2l0Ml9naXQuYmJ9ICAgICAgICAgICAgICAgfCAzDQo+ICsrLQ0KPiA+Pg0K
+PiA+PiBJIHRoaW5rIHdlIGhhdmUgYmVlbiBwcmVmZXJyaW5nIHRvIHVzZSBQViB2aWEgcmVjaXBl
+IG5hbWVzIGlmDQo+IHBvc3NpYmxlLg0KPiA+PiB3aGljaCB0aGlzIHJlY2lwZSBpcyBhbHJlYWR5
+IGRvaW5nLCBpcyB0aGVyZSBhbnkgYmVuZWZpdCBvZiByZW5hbWluZw0KPiBpdA0KPiA+PiB0byBf
+Z2l0ID8NCj4gPiBSZW5hbWluZzoNCj4gPiAqIG5lZWRzIGV4dHJhIGVmZm9ydHMgdG8gY3JlYXRl
+IGRpZmYgd2hpbGUgd29ya2luZyBvbiBhIHJlY2lwZQ0KPiA+ICogbWlnaHQgY2F1c2UgaXNzdWVz
+IG9uIGh1Z2UgZGlmZnMNCj4gPg0KPiA+IFNoYWxsIEkgc3dpdGNoIGJhY2sgdG8gb2xkIHNjaGVt
+ZSBhbmQgc2VuZCBWMj8NCj4gPg0KPiANCj4gU28gb25lIGVhc3kgcHJvYmxlbSB5b3UgcnVuIGlu
+dG8gd2l0aCBfZ2l0IHJlY2lwZXMgaXMgdGhhdCBTUkNSRVYgZ2V0cw0KPiB1cGRhdGVkIGJ1dCBQ
+ViBkb2VzIG5vdCwgdGhlIGlzc3VlcyB3aXRoIHJlbmFtaW5nIHJlY2lwZXMgaXMgYXMgeW91DQo+
+IGRlc2NyaWJlZCBhbmQgYWxzbyBnaXQgaGlzdG9yeSB0cmFja2luZyBpcyBhIGJpdCBwYWluZnVs
+IHRvbywgSSBhbSBub3QNCj4gaGFyZCBvcGluZWQgZWl0aGVyIHdheS4NCj4gDQo+IExldHMga2Vl
+cCB0aGUgX1BWIHZlcnNpb24gaWYgaXRzIGEgcHJvcGVyIHJlbGVhc2UgU1JDUkVWIHRoYXQgd2Ug
+YXJlDQo+IGp1bXBpbmcgdG8uDQo+IA0KPiA+IEFuZHJlYXMNCg0KT25lIHJlYXNvbiB0byBrZWVw
+IHRoZSB2ZXJzaW9uIGluIHRoZSBmaWxlbmFtZSBpcyBiZWNhdXNlIHlvdSBjYW5ub3QgZG8gDQp2
+ZXJzaW9uZWQgYmJhcHBlbmRzIG90aGVyd2lzZS4gSS5lLiwgaXQgaXMgbm90IHBvc3NpYmxlIHRv
+IGRvIGEgDQoibGliZ2l0Ml8xLjAuJS5iYmFwcGVuZCIgaWYgdGhlIHJlY2lwZSBpcyBjYWxsZWQg
+ImxpYmdpdDJfZ2l0LmJiIi4NCg0KLy9QZXRlcg0KDQo=
