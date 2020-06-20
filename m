@@ -1,107 +1,77 @@
-Received: from mail-il1-f195.google.com (mail-il1-f195.google.com [209.85.166.195])
- by mx.groups.io with SMTP id smtpd.web10.10947.1592660338246008163
+Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com [209.85.208.68])
+ by mx.groups.io with SMTP id smtpd.web11.4834.1592688032834848379
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Jun 2020 06:38:58 -0700
+ Sat, 20 Jun 2020 14:20:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=J+iP30n5;
- spf=pass (domain: gmail.com, ip: 209.85.166.195, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-il1-f195.google.com with SMTP id e11so11877223ilr.4
-        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Jun 2020 06:38:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=O5ZF48OF;
+ spf=pass (domain: gmail.com, ip: 209.85.208.68, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f68.google.com with SMTP id k8so10593132edq.4
+        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Jun 2020 14:20:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=xKsugPRyX44Li3zOIGPVmeo7FzCVDbC6hVuhl37sX08=;
-        b=J+iP30n54RfRgxntAsKJ+ZHOxGHcj+xtxa7uKWLb2ZsxR4U0/r/HFzQcqmxDh/SEpO
-         1O9K3fqkx4Kfpvf2OS9NmAwGQzCa6xNRCKYxjnSM6osrJ/X871yzMcb5So9wiwwhtpnx
-         8XCpSj2i+D1PsMJBTRPEvnBYrZhqkbg4DUtEmF+TfIvRhQgnk9WCBwkW3ZzNv7rqTKpX
-         CsIOa747aC+GrfM3NCejHoQ/X9Tq9DS3hIlmruTaieMUc33Df54X3LYov0LvXjzA6qa3
-         dda+lEBs5jhDr0u8YJDn0IcySC/x+RLz6Tpu/Bi+nyU3Wcz98qKRHhl3mNzK1iIhHAUo
-         ns+w==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=u4msXOAqJsZKZSGWXeFk6Qm/PqNd6ODLMSCknlaDxzw=;
+        b=O5ZF48OFUqxA/O6Fx0sjAU7k6GQbxnswO9x+1YiP96+BN6Ip1M9J+fQhd+bppSatKS
+         4ITex/YjDNvm1iYwb+TheTmtuZ1ZD/a424OlXDUOVIbHp+fo0Zs0yJqY8bRxvy5D8V2E
+         4a3QCqH1lrMVMBkVNJn7mqjohmD9bVDzamlktl3SPnfoGdnkZR2BDD87nw7iUOYivVQm
+         Qtp+TogDtymg5uA4rZJvmpj/g8WUq18K5W9r2lm6IOkjOgXOJl3qV1hso9OQsGzLvenW
+         1gWS/HT1R/YEAvFidkdsdfH4otV+bOWOMw/6uXO5/VEuSsAK3kTr4hl79JlPxL+cOqZA
+         eNjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=xKsugPRyX44Li3zOIGPVmeo7FzCVDbC6hVuhl37sX08=;
-        b=b4YD1dBPQ/qEvj6jOD1bTQAGI23tZ/voLE3JYzdND8oIBX1mSuhmOOP2lUGSqZuAaQ
-         vKVoNmsGcS9D2DIzZEbpiStcxxjlWyfVqg4E+JGX57W2fg8qH7HA60vj2A3AY9UMLUuT
-         /jA4v0RVJlqfc2P7KFmonYiMp7/SJ0wHzOjJ0nJBfZsSwYyoe/p5sa8prvx+zSJCxxu5
-         vXAJ09D8siVzUP7Qqvu5YCuGXg8ovWiBpDUseve9ke0ef/Fa3VafDCVy21F2to511sJH
-         lpj/X88N6FIj9nBs5Djg1gkYEqUoGZ1xTICxuX8vedrdqLNYu4eDOfOuf+TBzrzBPEjK
-         yJPA==
-X-Gm-Message-State: AOAM533v8f9OpHTjObeUERK/dV/Jue4ySSeuFANI/GrkRHIpOoh4GXAI
-	OvHXfAfplfHLn6UQU+pUrLMWP/EsC7dflwMALBM=
-X-Google-Smtp-Source: ABdhPJw5GFguLUPfx4Ba4f2+EYhHQWlpWVnXHzcf0tfRvt48Lq6t3nAtlZUf1n0xskGTSE8MRwqsKKapyfozuOZ/Jbo=
-X-Received: by 2002:a92:c852:: with SMTP id b18mr8450613ilq.224.1592660337627;
- Sat, 20 Jun 2020 06:38:57 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200619113201.2811033-1-schnitzeltony@gmail.com>
- <20200619113201.2811033-10-schnitzeltony@gmail.com> <e7646f40-9032-0b77-5969-9afa9a883704@gmail.com>
- <CALbNGRR3bTe4ATHS-2505iGUOsQq+H3YPqRoLc-+cHCYvNmNLg@mail.gmail.com>
- <079febc3-4665-d650-22af-03f6fac48454@gmail.com> <2162972d9efc41a3bfb7a0ca4a6b964e@XBOX03.axis.com>
-In-Reply-To: <2162972d9efc41a3bfb7a0ca4a6b964e@XBOX03.axis.com>
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=u4msXOAqJsZKZSGWXeFk6Qm/PqNd6ODLMSCknlaDxzw=;
+        b=EB5fUMnMA7fdICjD3NfFd2F6HHkLxm4MvcK0gaxKchHZgE69Uaslrn9l000CdFVsN0
+         BRoPVLKFRQ4Hvn1+KQQJgdH+xnXmDP9+cZeg1txSqcGj5WFBK/wnNayoTnEQUYFpeDE+
+         gcGbhZ7pRm/Mn+fDVFzsuTjtyg5PTjR/MhGs6QQq10pVGnIqR1t36MjzM1vLUhF8fwjN
+         nuuJOY4sivPtm9IUg1LkB+qvEsYbkexnExqWZpg8ZpvHfqvbGhJ8C7nI5+hg4K39Zhxj
+         qs2GQfo18SwazXHecib11CDfSe/TGaHQvDojp67+n3GgyyW91CRAXAjKFyXWcXw+wH7s
+         Pbew==
+X-Gm-Message-State: AOAM531cgh7z9wSAy5INRO1GnNF+ePVrBIqeeLosg/H0hez22/nX8o8i
+	leMPbT1o0Osis56+mJ6UOWx5nxiPn0PDQw==
+X-Google-Smtp-Source: ABdhPJxreuFk8tVERegSk7ShdOD7k66201kvJ/lmOZ3GS7CFl+e7MLP41umAasVedjOsqHYpfbvDLA==
+X-Received: by 2002:a50:8b44:: with SMTP id l62mr9920116edl.72.1592688030823;
+        Sat, 20 Jun 2020 14:20:30 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from superandy.speedport.ip (p200300f07f07a073c7ed84e0f8e2ef6e.dip0.t-ipconnect.de. [2003:f0:7f07:a073:c7ed:84e0:f8e2:ef6e])
+        by smtp.gmail.com with ESMTPSA id f10sm2928010edx.5.2020.06.20.14.20.30
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 20 Jun 2020 14:20:30 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-Date: Sat, 20 Jun 2020 15:38:46 +0200
-Message-ID: <CALbNGRTEyj7hz7difs-_SfyFDcd3VRtjnGm=UCsF108Q4J1AyA@mail.gmail.com>
-Subject: Re: [oe] [PATCH 10/10] libgit2: upgrade 1.0.0 -> 1.0.1 / rename recipe
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Cc: Khem Raj <raj.khem@gmail.com>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 1/4 v2] libgit2: upgrade 1.0.0 -> 1.0.1
+Date: Sat, 20 Jun 2020 23:20:19 +0200
+Message-Id: <20200620212022.82066-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.26.2
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sat, Jun 20, 2020 at 1:08 PM Peter Kjellerstedt
-<peter.kjellerstedt@axis.com> wrote:
->
-> > -----Original Message-----
-> > From: openembedded-devel@lists.openembedded.org <openembedded-
-> > devel@lists.openembedded.org> On Behalf Of Khem Raj
-> > Sent: den 19 juni 2020 18:05
-> > To: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> > Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-> > Subject: Re: [oe] [PATCH 10/10] libgit2: upgrade 1.0.0 -> 1.0.1 / renam=
-e
-> > recipe
-> >
-> > On 6/19/20 8:55 AM, Andreas M=C3=BCller wrote:
-> > > On Fri, Jun 19, 2020 at 5:48 PM Khem Raj <raj.khem@gmail.com> wrote:
-> > >>
-> > >>
-> > >>
-> > >> On 6/19/20 4:32 AM, Andreas M=C3=BCller wrote:
-> > >>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> > >>> ---
-> > >>>  .../libgit2/{libgit2_1.0.0.bb =3D> libgit2_git.bb}               |=
- 3
-> > ++-
-> > >>
-> > >> I think we have been preferring to use PV via recipe names if
-> > possible.
-> > >> which this recipe is already doing, is there any benefit of renaming
-> > it
-> > >> to _git ?
-> > > Renaming:
-> > > * needs extra efforts to create diff while working on a recipe
-> > > * might cause issues on huge diffs
-> > >
-> > > Shall I switch back to old scheme and send V2?
-> > >
-> >
-> > So one easy problem you run into with _git recipes is that SRCREV gets
-> > updated but PV does not, the issues with renaming recipes is as you
-> > described and also git history tracking is a bit painful too, I am not
-> > hard opined either way.
-> >
-> > Lets keep the _PV version if its a proper release SRCREV that we are
-> > jumping to.
-> >
-> > > Andreas
->
-> One reason to keep the version in the filename is because you cannot do
-> versioned bbappends otherwise. I.e., it is not possible to do a
-> "libgit2_1.0.%.bbappend" if the recipe is called "libgit2_git.bb".
->
-> //Peter
-OK - will send V2 for the two recipe-rename recipes tonight
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ .../libgit2/{libgit2_1.0.0.bb => libgit2_1.0.1.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libgit2/{libgit2_1.0.0.bb => libgit2_1.0.1.bb} (91%)
 
-Andreas
+diff --git a/meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb b/meta-oe/recipes-support/libgit2/libgit2_1.0.1.bb
+similarity index 91%
+rename from meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
+rename to meta-oe/recipes-support/libgit2/libgit2_1.0.1.bb
+index 74343683f..363ed4d65 100644
+--- a/meta-oe/recipes-support/libgit2/libgit2_1.0.0.bb
++++ b/meta-oe/recipes-support/libgit2/libgit2_1.0.1.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5b002a195fb7ea2d8d583f07eaff3a8e"
+ DEPENDS = "curl openssl zlib libssh2 libgcrypt libpcre2"
+ 
+ SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v1.0"
+-SRCREV = "7d3c7057f0e774aecd6fc4ef8333e69e5c4873e0"
++SRCREV = "0ced29612dacb67eefe0c562a5c1d3aab21cce96"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.26.2
+
