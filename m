@@ -1,182 +1,94 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.7190.1592867901882638181
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com [209.85.216.68])
+ by mx.groups.io with SMTP id smtpd.web11.7861.1592870107738359126
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Jun 2020 16:18:22 -0700
+ Mon, 22 Jun 2020 16:55:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 47F0A40BA1;
-	Mon, 22 Jun 2020 23:18:21 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 20BIvPl2Opwv; Mon, 22 Jun 2020 23:18:21 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id BC158407DA;
-	Mon, 22 Jun 2020 23:18:17 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 7CB16173217; Mon, 22 Jun 2020 19:18:17 -0400 (EDT)
-Date: Mon, 22 Jun 2020 19:18:17 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: Chandana kalluri <ckalluri@xilinx.com>
-Cc: Alejandro Hernandez Samaniego <alhe@linux.microsoft.com>,
-	Alexander Kanavin <alex.kanavin@gmail.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-browser][PATCH] chromium.inc: Use python3native.bbclass instead of pythonnative.bbclass
-Message-ID: <20200622231817.GK17660@denix.org>
-References: <1592863740-4473-1-git-send-email-chandana.kalluri@xilinx.com>
- <CANNYZj-irMbwZptvXfiT047fNwzzgK98z04kLoDRAO=aPM1xKA@mail.gmail.com>
- <20200622223220.GJ17660@denix.org>
- <b0a58e1f-04e4-44f5-62ff-a4810826e578@linux.microsoft.com>
- <BYAPR02MB5926B4D4B776B27284BD4C3AB0970@BYAPR02MB5926.namprd02.prod.outlook.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=R45hR8/r;
+ spf=pass (domain: gmail.com, ip: 209.85.216.68, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f68.google.com with SMTP id h95so707319pje.4
+        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Jun 2020 16:55:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=8Wk+fslfXmodsmFrNjcBTDRh8IY5TL4WZV9zhqs8yfw=;
+        b=R45hR8/rU7ZSKXlf3lb8+4wVB08TRX4cridTChbPTay7XvPmzP8cSkAmmAQNDVwx4u
+         t/uVuaveTz3I9GtEjJuhYer6Sd1ngfyEs8p6Uxr3REHd2+cdQV/4jyhbpMdGWDWfVH8l
+         A5kum+N/iBw/fjaAyB58NfO1hBdDmHvWhc5DOrBpS+vq49lgpUIsKuovzRWso5ZM9e46
+         lrH3Dob+x6GL92vk8z1Smnfwi8vRvrmpI+kD6R7LGGYluhM5AdN1jLvL9NAKylNMSZMz
+         ZaSeszZQBuleIaR/AbGX1uztYYdzGwnWSXgq5SjMZj98P7nHuk2xzemU9yTqnX6HRp8K
+         d6bQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=8Wk+fslfXmodsmFrNjcBTDRh8IY5TL4WZV9zhqs8yfw=;
+        b=s6PrhBN7ghDcfnAf9oX12h/1siMVfTJbvGH9CzVHfiBDX8ERKNkMww8fjCkkKwQSnn
+         frv1EYqq6qcCyrNiQWO5sqGTX0IEbyMgL10dbYCRLLAJvevZZVV5pJZBHiL9ipE7wB9n
+         8tCBcKMkBf6MBX3Ed4PJ6ofizCuLxJXs4Yn8QMYyTdCZ2xU+vBTYN1hn0C5E3YOl3/LB
+         H6KRSi+ryHuFaXsv2a1uvG3WPp6Tj5cMZjpIhf0YzAVi/Y5TOberxuq4NxKn5GxjISvq
+         W7gY/pH9rKW74IDkrKezcN5/wTYjQDKhAAeo72b8vpuxRIw6Xkzy0pZghJe1OWH/SQZG
+         GouQ==
+X-Gm-Message-State: AOAM532HizNMGvmpSK82CMz5cjXJHQ5chMpifP0+T6Gt12bDSl7h4K5q
+	RfDXHWuYvVVnSz1XtK/nvLM=
+X-Google-Smtp-Source: ABdhPJyWNRJzPYKB0lZE+gjc6p6OK5kD/cmikw/dQJnbqtSEGh9Vmu3F3oWcqoNIXFCGdwWFXcd+9A==
+X-Received: by 2002:a17:90a:a58b:: with SMTP id b11mr21413468pjq.107.1592870107112;
+        Mon, 22 Jun 2020 16:55:07 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:4e0:3ce8:8e51:3e8d:ab7a? ([2601:646:9200:4e0:3ce8:8e51:3e8d:ab7a])
+        by smtp.gmail.com with ESMTPSA id w124sm14572094pfc.213.2020.06.22.16.55.06
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 22 Jun 2020 16:55:06 -0700 (PDT)
+Subject: Re: [oe] [meta-browser][PATCH] chromium.inc: Use setuptools3 instead of setuptools bbclass
+To: Chandana kalluri <ckalluri@xilinx.com>,
+ openembedded-devel@lists.openembedded.org
+Cc: Sai Hari Chandana Kalluri <chandana.kalluri@xilinx.com>
+References: <1592863905-5241-1-git-send-email-chandana.kalluri@xilinx.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Message-ID: <9c218a48-a624-0e3f-fad8-88d994efd0ed@gmail.com>
+Date: Mon, 22 Jun 2020 16:55:05 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.9.0
 MIME-Version: 1.0
-In-Reply-To: <BYAPR02MB5926B4D4B776B27284BD4C3AB0970@BYAPR02MB5926.namprd02.prod.outlook.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Jun 22, 2020 at 10:53:09PM +0000, Chandana kalluri wrote:
-> I am building the meta-browser layer against poky/master and currently I=
- am=20
-> seeing parse errors as pythonnative and setuptools classes are no longer=
-=
-=20
-> supported. Hence the patch.
-
-So, have you had any successful builds of chromium after your patches?
+In-Reply-To: <1592863905-5241-1-git-send-email-chandana.kalluri@xilinx.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
 
-> How are everyone else building python2 chromium against poky/master whic=
-h=20
-> doesn=E2=80=99t have support for python2 recipes/classes anymore?
 
-You need meta-python2 layer to enable Python2 support.
-
-
-> Thanks,
-> Chandana
->=20
->=20
-> From: Alejandro Hernandez Samaniego <alhe@linux.microsoft.com>
-> Sent: Monday, June 22, 2020 3:42 PM
-> To: Denys Dmytriyenko <denis@denix.org>; Alexander Kanavin <alex.kanavin=
-@gmail.com>
-> Cc: Chandana Kalluri <ckalluri@xilinx.com>; OpenEmbedded Devel List <ope=
-nembedded-devel@lists.openembedded.org>; Chandana Kalluri <ckalluri@xilinx.=
-com>
-> Subject: Re: [oe] [meta-browser][PATCH] chromium.inc: Use python3native.=
-bbclass instead of pythonnative.bbclass
->=20
->=20
-> Some of it is already ported, but it doesn't look like it will be fixed =
-soon, its easier to depend on python-native but that creates a dependency o=
-n meta-python as well as it uses EOL code.
->=20
-> If you do that you have to manually patch lots of stuff on the v8 engine=
- (and other components) which try calling /usr/bin/python specifically, but=
- it will work.
->=20
-> Alejandro
-> On 6/22/20 3:32 PM, Denys Dmytriyenko wrote:
->=20
-> Yeah, not gonna work - many people are waiting for this to happen, but a=
-las:
->=20
->=20
->=20
-> https://bugs.chromium.org/p/chromium/issues/detail?id=3D942720
->=20
->=20
->=20
->=20
->=20
-> On Tue, Jun 23, 2020 at 12:16:51AM +0200, Alexander Kanavin wrote:
->=20
-> Wait, did you actually test this? Chromium is not yet ready for python3,
->=20
-> and builds will fail.
->=20
->=20
->=20
-> Alex
->=20
->=20
->=20
-> On Tue, 23 Jun 2020 at 00:09, Chandana kalluri <ckalluri@xilinx.com><mai=
-lto:ckalluri@xilinx.com> wrote:
->=20
->=20
->=20
-> From dunfell onwards, python2 recipes and classes are not supported.
->=20
-> Inherit
->=20
-> python3native.bbclass for chromium instead of pythonnative.bbclass
->=20
->=20
->=20
-> Signed-off-by: Sai Hari Chandana Kalluri <chandana.kalluri@xilinx.com><m=
-ailto:chandana.kalluri@xilinx.com>
->=20
+On 6/22/20 3:11 PM, Chandana kalluri wrote:
+>  From dunfell onwards, python2 recipes and classes are not supported. Inherit
+> setuptools3.bbclass for chromium instead of setuptools.bbclass
+> 
+> Signed-off-by: Sai Hari Chandana Kalluri <chandana.kalluri@xilinx.com>
 > ---
->=20
->  recipes-browser/chromium/chromium.inc | 2 +-
->=20
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
->=20
->=20
-> diff --git a/recipes-browser/chromium/chromium.inc
->=20
-> b/recipes-browser/chromium/chromium.inc
->=20
-> index 14d762f..a483ec4 100644
->=20
+>   recipes-browser/chromium/chromium.inc | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
+> index a483ec4..49947be 100644
 > --- a/recipes-browser/chromium/chromium.inc
->=20
 > +++ b/recipes-browser/chromium/chromium.inc
->=20
-> @@ -18,7 +18,7 @@ TOOLCHAIN =3D "clang"
->=20
->  # to build the native recipes (e.g. GN) with clang too.
->=20
->  TOOLCHAIN_class-native =3D "clang"
->=20
->=20
->=20
-> -inherit pythonnative setuptools
->=20
-> +inherit python3native setuptools
->=20
->=20
->=20
->  # Chromium itself is licensed under the 3-clause BSD license. However, =
-it
->=20
->  # depends upon several other projects whose copyright files are listed =
-in
->=20
-> --
->=20
-> 2.7.4
->=20
->=20
->=20
->=20
->=20
->=20
->=20
->=20
->=20
->=20
->=20
->=20
->=20
->=20
->=20
->=20
+> @@ -18,7 +18,7 @@ TOOLCHAIN = "clang"
+>   # to build the native recipes (e.g. GN) with clang too.
+>   TOOLCHAIN_class-native = "clang"
+>   
+> -inherit python3native setuptools
+> +inherit python3native setuptools3
 
->=20
+it still needs python2, better patch is to add meta-python2 to 
+meta-browser layer dependencies
 
+e.g in conf/layer.conf
+LAYERDEPENDS_browser-layer = "clang-layer core openembedded-layer"
+
+
+>   
+>   # Chromium itself is licensed under the 3-clause BSD license. However, it
+>   # depends upon several other projects whose copyright files are listed in
+> 
+> 
+> 
+> 
