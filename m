@@ -1,271 +1,182 @@
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.40])
- by mx.groups.io with SMTP id smtpd.web11.6830.1592866390576323352
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web12.7190.1592867901882638181
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Jun 2020 15:53:10 -0700
+ Mon, 22 Jun 2020 16:18:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@xilinx.onmicrosoft.com header.s=selector2-xilinx-onmicrosoft-com header.b=VzNfiY2x;
- spf=pass (domain: xilinx.com, ip: 40.107.94.40, mailfrom: ckalluri@xilinx.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=QSmrXUwN2gAcJkRkjv0pTDgYfGZIzdbQWvKyNLpdSPUwpf182nKgBNwhTe8hNhdmcgEkGW850khINRT5MjXnD3sfjbe1oCaLsFruUyhyXPxpeyJMVSMZxbfRcjBO2fiZptI4PlrIRXOgpFMLjoKwTJCsrFwd4R7i1fZ78vAQN7uZoUMjoe/C6qqks/9J4Pl6vLqZMPKTZnTzl+crw4yF9XZYbdD5twgTkPzLO/7G3nLMvwiIJ45O8X9IxdCvu7eHwzzjAgbCzn1so8o5esTO+6PKG3Fe5cFmj7608wVffh0wCYeC+EPlA7rn8/SpYrXCBx1pqFLT9q8m9J7kERs0MQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nPKYNjpmSl217/u3w1aEk2FbTIFxhMAtY1gh9rkBSuY=;
- b=jqdGGsC9rJA3Gg/y+aRsK0L9sMpr6GU70EIC7VJ0fUyvQj20DuNYx63dZRz43BM4x5EuonEAv6kSpz9IwlWlxzH3NH37vbgExKxGxRm28vHbQB6fPpKWBMcihIUVJIhsTb0IXR7sqpTJJeyMiFsPkBVXij0wjEUDg5MkFYkhteKWNRKGiHdsgH7VtG50GdndB7SvpIPvo481asDGpr07AX5hrx2W4j6G2QPH/F+kRNjTfG338GKBgCixg4yoAI51M2l/PJgrv2g0mlNKKgZaAkMV1XDbMeLtF+JzMYFz2+Wlg2knmJOLkRmEyaFfguxZJXbys6m7bOtNuncVOTN8rw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=xilinx.com; dmarc=pass action=none header.from=xilinx.com;
- dkim=pass header.d=xilinx.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nPKYNjpmSl217/u3w1aEk2FbTIFxhMAtY1gh9rkBSuY=;
- b=VzNfiY2xfmt43yaqUS+nI82Q6Y2c6DsGHz7nC7Wi+uStp4rcoDqemWai5n/rZ+kXpOL9fnfnsZamrK4JD7iQBy+kdLG5fRRqKZFT+nPovb0qv+4D+ebKtEcVg55jYgsiUBJIpY9ilmBJD2s03A6Ex2zdmxEGOyGGLYSzNNva/Qw=
-Received: from BYAPR02MB5926.namprd02.prod.outlook.com (2603:10b6:a03:11e::19)
- by BY5PR02MB6627.namprd02.prod.outlook.com (2603:10b6:a03:203::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22; Mon, 22 Jun
- 2020 22:53:09 +0000
-Received: from BYAPR02MB5926.namprd02.prod.outlook.com
- ([fe80::747a:5ccd:410a:4175]) by BYAPR02MB5926.namprd02.prod.outlook.com
- ([fe80::747a:5ccd:410a:4175%6]) with mapi id 15.20.3109.027; Mon, 22 Jun 2020
- 22:53:09 +0000
-From: "Chandana kalluri" <ckalluri@xilinx.com>
-To: Alejandro Hernandez Samaniego <alhe@linux.microsoft.com>, Denys
- Dmytriyenko <denis@denix.org>, Alexander Kanavin <alex.kanavin@gmail.com>
-CC: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 47F0A40BA1;
+	Mon, 22 Jun 2020 23:18:21 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 20BIvPl2Opwv; Mon, 22 Jun 2020 23:18:21 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id BC158407DA;
+	Mon, 22 Jun 2020 23:18:17 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 7CB16173217; Mon, 22 Jun 2020 19:18:17 -0400 (EDT)
+Date: Mon, 22 Jun 2020 19:18:17 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: Chandana kalluri <ckalluri@xilinx.com>
+Cc: Alejandro Hernandez Samaniego <alhe@linux.microsoft.com>,
+	Alexander Kanavin <alex.kanavin@gmail.com>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: [oe] [meta-browser][PATCH] chromium.inc: Use python3native.bbclass instead of pythonnative.bbclass
-Thread-Topic: [oe] [meta-browser][PATCH] chromium.inc: Use
- python3native.bbclass instead of pythonnative.bbclass
-Thread-Index: AQHWSOHBdXVun0hWN0yNjYpRKkfY1qjlM+SAgAAEUwCAAAKkgIAAAxPg
-Date: Mon, 22 Jun 2020 22:53:09 +0000
-Message-ID: 
- <BYAPR02MB5926B4D4B776B27284BD4C3AB0970@BYAPR02MB5926.namprd02.prod.outlook.com>
+Message-ID: <20200622231817.GK17660@denix.org>
 References: <1592863740-4473-1-git-send-email-chandana.kalluri@xilinx.com>
  <CANNYZj-irMbwZptvXfiT047fNwzzgK98z04kLoDRAO=aPM1xKA@mail.gmail.com>
  <20200622223220.GJ17660@denix.org>
  <b0a58e1f-04e4-44f5-62ff-a4810826e578@linux.microsoft.com>
-In-Reply-To: <b0a58e1f-04e4-44f5-62ff-a4810826e578@linux.microsoft.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-MS-TNEF-Correlator: 
-authentication-results: linux.microsoft.com; dkim=none (message not signed)
- header.d=none;linux.microsoft.com; dmarc=none action=none
- header.from=xilinx.com;
-x-originating-ip: [149.199.62.133]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 79c2720f-b7d3-4d4d-63ef-08d816ff08c3
-x-ms-traffictypediagnostic: BY5PR02MB6627:
-x-microsoft-antispam-prvs: 
- <BY5PR02MB6627405C5A884E3FBB451B3EB0970@BY5PR02MB6627.namprd02.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:5797;
-x-forefront-prvs: 0442E569BC
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- yEpI9W5mEizFWXWIKWGRqsXipOpx1BERTUA3uUCSKtBiugL3lMzXYRIpbOfdyyDSb17/+GdhMPTKrfirJZqNupvALm3unEeCsKL12euV/xhc2dqlWhN690QuoPxxgtRU1OwZwt4zFcEgIv5UAxsjQ64FQBi9UH3ThWCPGJRC59af11IOQpp2htIuTkQSJ8TLdiZ4Hp5x5QXLWA7KKyXwPMLm+Nuf7ugE6k+8vArjImdXlFlZLh6fVouNS5D+vYpt3JKlGxvvRfQk2zgYBUhbFWRy1x5dHfORVKEpB5kXW6xSapnJWm3WPTxYf5NrmwOwbfJyrerXJbgehbj3BwOnKVrF6UUbvtc2E7Am3sYp5+UR6D5agWcX8hEjML6pd0igBHzDzMAB7kVyTLe4Wzus+bH7GoL8L8tSIFfEBJg6CwojMV+9Roo1GwK9g4ppEVDUwY8MlGuiVN3W5LEJimY+eQ==
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR02MB5926.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(39860400002)(366004)(346002)(136003)(396003)(376002)(52536014)(33656002)(7696005)(478600001)(55016002)(6506007)(64756008)(53546011)(2906002)(66476007)(66946007)(66556008)(76116006)(66446008)(5660300002)(9686003)(4326008)(186003)(166002)(86362001)(110136005)(26005)(66574015)(8936002)(8676002)(83380400001)(71200400001)(316002)(966005)(32563001);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata: 
- 32oG+idL96K4+X7rBb4njf+Eyqj4qRs3cnchRMbyX7oFk0HGfRHuH+rhkK2E+AxMpVr+IJrnPBlOtEDlO2GnZvbrnGjWsWLtAsyqA5pTWjRONNjOL5xELIDOwSPSoHJCywDpCe3wlc1viwgQ+0zGQLTrAr2cF32RIrUYpchcRX5fWScYOlDEcpcl6GeFc8DGh6XSOylKMTPrzk9ePgyHzT1ukuBhZKEJR63sNJu548nDdgHB17ZJV6e1zUZzYJAkbD8FfhhOs4G2Ra5QH/y+33Fe9bX4JB4hMuPIBC8Kn4B7yBcco2SnZywjE86K/57MLOYhCat7+/lLRzIeAlrmF+3PLnMW6txIKVUSX2HwI134RmEvcRKBxDst3FExjGCP93LC7Ev9iZpChTHz2wM1cAijLfjSdWJ0PZKaKz9yK0koNFjRqRO11VnSN4eYIbsM7H/d2+MCzAs2/2M+2lTPPqxVPg65+lBWb0GhYtBVdriE20S9PqokmBPVsQUgfEtr
-x-ms-exchange-transport-forked: True
+ <BYAPR02MB5926B4D4B776B27284BD4C3AB0970@BYAPR02MB5926.namprd02.prod.outlook.com>
 MIME-Version: 1.0
-X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 79c2720f-b7d3-4d4d-63ef-08d816ff08c3
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Jun 2020 22:53:09.0750
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: LNH14V2YnZK0OB/iRReGYgNqegGNm9GxHzR3BBtlWYdTMMWbkB3hbwGVajLihYBF85EcnF0KeQjb6ipmJiKsag==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR02MB6627
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_BYAPR02MB5926B4D4B776B27284BD4C3AB0970BYAPR02MB5926namp_"
+In-Reply-To: <BYAPR02MB5926B4D4B776B27284BD4C3AB0970@BYAPR02MB5926.namprd02.prod.outlook.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
---_000_BYAPR02MB5926B4D4B776B27284BD4C3AB0970BYAPR02MB5926namp_
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+On Mon, Jun 22, 2020 at 10:53:09PM +0000, Chandana kalluri wrote:
+> I am building the meta-browser layer against poky/master and currently I=
+ am=20
+> seeing parse errors as pythonnative and setuptools classes are no longer=
+=
+=20
+> supported. Hence the patch.
 
-SSBhbSBidWlsZGluZyB0aGUgbWV0YS1icm93c2VyIGxheWVyIGFnYWluc3QgcG9reS9tYXN0ZXIg
-YW5kIGN1cnJlbnRseSBJIGFtIHNlZWluZyBwYXJzZSBlcnJvcnMgYXMgcHl0aG9ubmF0aXZlIGFu
-ZCBzZXR1cHRvb2xzIGNsYXNzZXMgYXJlIG5vIGxvbmdlciBzdXBwb3J0ZWQuIEhlbmNlIHRoZSBw
-YXRjaC4NCkhvdyBhcmUgZXZlcnlvbmUgZWxzZSBidWlsZGluZyBweXRob24yIGNocm9taXVtIGFn
-YWluc3QgcG9reS9tYXN0ZXIgd2hpY2ggZG9lc27igJl0IGhhdmUgc3VwcG9ydCBmb3IgcHl0aG9u
-MiByZWNpcGVzL2NsYXNzZXMgYW55bW9yZT8NCg0KVGhhbmtzLA0KQ2hhbmRhbmENCg0KDQpGcm9t
-OiBBbGVqYW5kcm8gSGVybmFuZGV6IFNhbWFuaWVnbyA8YWxoZUBsaW51eC5taWNyb3NvZnQuY29t
-Pg0KU2VudDogTW9uZGF5LCBKdW5lIDIyLCAyMDIwIDM6NDIgUE0NClRvOiBEZW55cyBEbXl0cml5
-ZW5rbyA8ZGVuaXNAZGVuaXgub3JnPjsgQWxleGFuZGVyIEthbmF2aW4gPGFsZXgua2FuYXZpbkBn
-bWFpbC5jb20+DQpDYzogQ2hhbmRhbmEgS2FsbHVyaSA8Y2thbGx1cmlAeGlsaW54LmNvbT47IE9w
-ZW5FbWJlZGRlZCBEZXZlbCBMaXN0IDxvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVk
-ZGVkLm9yZz47IENoYW5kYW5hIEthbGx1cmkgPGNrYWxsdXJpQHhpbGlueC5jb20+DQpTdWJqZWN0
-OiBSZTogW29lXSBbbWV0YS1icm93c2VyXVtQQVRDSF0gY2hyb21pdW0uaW5jOiBVc2UgcHl0aG9u
-M25hdGl2ZS5iYmNsYXNzIGluc3RlYWQgb2YgcHl0aG9ubmF0aXZlLmJiY2xhc3MNCg0KDQpTb21l
-IG9mIGl0IGlzIGFscmVhZHkgcG9ydGVkLCBidXQgaXQgZG9lc24ndCBsb29rIGxpa2UgaXQgd2ls
-bCBiZSBmaXhlZCBzb29uLCBpdHMgZWFzaWVyIHRvIGRlcGVuZCBvbiBweXRob24tbmF0aXZlIGJ1
-dCB0aGF0IGNyZWF0ZXMgYSBkZXBlbmRlbmN5IG9uIG1ldGEtcHl0aG9uIGFzIHdlbGwgYXMgaXQg
-dXNlcyBFT0wgY29kZS4NCg0KSWYgeW91IGRvIHRoYXQgeW91IGhhdmUgdG8gbWFudWFsbHkgcGF0
-Y2ggbG90cyBvZiBzdHVmZiBvbiB0aGUgdjggZW5naW5lIChhbmQgb3RoZXIgY29tcG9uZW50cykg
-d2hpY2ggdHJ5IGNhbGxpbmcgL3Vzci9iaW4vcHl0aG9uIHNwZWNpZmljYWxseSwgYnV0IGl0IHdp
-bGwgd29yay4NCg0KQWxlamFuZHJvDQpPbiA2LzIyLzIwIDM6MzIgUE0sIERlbnlzIERteXRyaXll
-bmtvIHdyb3RlOg0KDQpZZWFoLCBub3QgZ29ubmEgd29yayAtIG1hbnkgcGVvcGxlIGFyZSB3YWl0
-aW5nIGZvciB0aGlzIHRvIGhhcHBlbiwgYnV0IGFsYXM6DQoNCg0KDQpodHRwczovL2J1Z3MuY2hy
-b21pdW0ub3JnL3AvY2hyb21pdW0vaXNzdWVzL2RldGFpbD9pZD05NDI3MjANCg0KDQoNCg0KDQpP
-biBUdWUsIEp1biAyMywgMjAyMCBhdCAxMjoxNjo1MUFNICswMjAwLCBBbGV4YW5kZXIgS2FuYXZp
-biB3cm90ZToNCg0KV2FpdCwgZGlkIHlvdSBhY3R1YWxseSB0ZXN0IHRoaXM/IENocm9taXVtIGlz
-IG5vdCB5ZXQgcmVhZHkgZm9yIHB5dGhvbjMsDQoNCmFuZCBidWlsZHMgd2lsbCBmYWlsLg0KDQoN
-Cg0KQWxleA0KDQoNCg0KT24gVHVlLCAyMyBKdW4gMjAyMCBhdCAwMDowOSwgQ2hhbmRhbmEga2Fs
-bHVyaSA8Y2thbGx1cmlAeGlsaW54LmNvbT48bWFpbHRvOmNrYWxsdXJpQHhpbGlueC5jb20+IHdy
-b3RlOg0KDQoNCg0KRnJvbSBkdW5mZWxsIG9ud2FyZHMsIHB5dGhvbjIgcmVjaXBlcyBhbmQgY2xh
-c3NlcyBhcmUgbm90IHN1cHBvcnRlZC4NCg0KSW5oZXJpdA0KDQpweXRob24zbmF0aXZlLmJiY2xh
-c3MgZm9yIGNocm9taXVtIGluc3RlYWQgb2YgcHl0aG9ubmF0aXZlLmJiY2xhc3MNCg0KDQoNClNp
-Z25lZC1vZmYtYnk6IFNhaSBIYXJpIENoYW5kYW5hIEthbGx1cmkgPGNoYW5kYW5hLmthbGx1cmlA
-eGlsaW54LmNvbT48bWFpbHRvOmNoYW5kYW5hLmthbGx1cmlAeGlsaW54LmNvbT4NCg0KLS0tDQoN
-CiByZWNpcGVzLWJyb3dzZXIvY2hyb21pdW0vY2hyb21pdW0uaW5jIHwgMiArLQ0KDQogMSBmaWxl
-IGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pDQoNCg0KDQpkaWZmIC0tZ2l0
-IGEvcmVjaXBlcy1icm93c2VyL2Nocm9taXVtL2Nocm9taXVtLmluYw0KDQpiL3JlY2lwZXMtYnJv
-d3Nlci9jaHJvbWl1bS9jaHJvbWl1bS5pbmMNCg0KaW5kZXggMTRkNzYyZi4uYTQ4M2VjNCAxMDA2
-NDQNCg0KLS0tIGEvcmVjaXBlcy1icm93c2VyL2Nocm9taXVtL2Nocm9taXVtLmluYw0KDQorKysg
-Yi9yZWNpcGVzLWJyb3dzZXIvY2hyb21pdW0vY2hyb21pdW0uaW5jDQoNCkBAIC0xOCw3ICsxOCw3
-IEBAIFRPT0xDSEFJTiA9ICJjbGFuZyINCg0KICMgdG8gYnVpbGQgdGhlIG5hdGl2ZSByZWNpcGVz
-IChlLmcuIEdOKSB3aXRoIGNsYW5nIHRvby4NCg0KIFRPT0xDSEFJTl9jbGFzcy1uYXRpdmUgPSAi
-Y2xhbmciDQoNCg0KDQotaW5oZXJpdCBweXRob25uYXRpdmUgc2V0dXB0b29scw0KDQoraW5oZXJp
-dCBweXRob24zbmF0aXZlIHNldHVwdG9vbHMNCg0KDQoNCiAjIENocm9taXVtIGl0c2VsZiBpcyBs
-aWNlbnNlZCB1bmRlciB0aGUgMy1jbGF1c2UgQlNEIGxpY2Vuc2UuIEhvd2V2ZXIsIGl0DQoNCiAj
-IGRlcGVuZHMgdXBvbiBzZXZlcmFsIG90aGVyIHByb2plY3RzIHdob3NlIGNvcHlyaWdodCBmaWxl
-cyBhcmUgbGlzdGVkIGluDQoNCi0tDQoNCjIuNy40DQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoN
-Cg0KDQoNCg==
+So, have you had any successful builds of chromium after your patches?
 
---_000_BYAPR02MB5926B4D4B776B27284BD4C3AB0970BYAPR02MB5926namp_
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: base64
 
-PGh0bWwgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOm89InVy
-bjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6dz0idXJuOnNjaGVt
-YXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6d29yZCIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMubWlj
-cm9zb2Z0LmNvbS9vZmZpY2UvMjAwNC8xMi9vbW1sIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
-VFIvUkVDLWh0bWw0MCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIg
-Y29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRv
-ciIgY29udGVudD0iTWljcm9zb2Z0IFdvcmQgMTUgKGZpbHRlcmVkIG1lZGl1bSkiPg0KPHN0eWxl
-PjwhLS0NCi8qIEZvbnQgRGVmaW5pdGlvbnMgKi8NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6
-IkNhbWJyaWEgTWF0aCI7DQoJcGFub3NlLTE6MiA0IDUgMyA1IDQgNiAzIDIgNDt9DQpAZm9udC1m
-YWNlDQoJe2ZvbnQtZmFtaWx5OkNhbGlicmk7DQoJcGFub3NlLTE6MiAxNSA1IDIgMiAyIDQgMyAy
-IDQ7fQ0KQGZvbnQtZmFjZQ0KCXtmb250LWZhbWlseTpDb25zb2xhczsNCglwYW5vc2UtMToyIDEx
-IDYgOSAyIDIgNCAzIDIgNDt9DQovKiBTdHlsZSBEZWZpbml0aW9ucyAqLw0KcC5Nc29Ob3JtYWws
-IGxpLk1zb05vcm1hbCwgZGl2Lk1zb05vcm1hbA0KCXttYXJnaW46MGluOw0KCW1hcmdpbi1ib3R0
-b206LjAwMDFwdDsNCglmb250LXNpemU6MTEuMHB0Ow0KCWZvbnQtZmFtaWx5OiJDYWxpYnJpIixz
-YW5zLXNlcmlmO30NCmE6bGluaywgc3Bhbi5Nc29IeXBlcmxpbmsNCgl7bXNvLXN0eWxlLXByaW9y
-aXR5Ojk5Ow0KCWNvbG9yOmJsdWU7DQoJdGV4dC1kZWNvcmF0aW9uOnVuZGVybGluZTt9DQphOnZp
-c2l0ZWQsIHNwYW4uTXNvSHlwZXJsaW5rRm9sbG93ZWQNCgl7bXNvLXN0eWxlLXByaW9yaXR5Ojk5
-Ow0KCWNvbG9yOnB1cnBsZTsNCgl0ZXh0LWRlY29yYXRpb246dW5kZXJsaW5lO30NCnByZQ0KCXtt
-c28tc3R5bGUtcHJpb3JpdHk6OTk7DQoJbXNvLXN0eWxlLWxpbms6IkhUTUwgUHJlZm9ybWF0dGVk
-IENoYXIiOw0KCW1hcmdpbjowaW47DQoJbWFyZ2luLWJvdHRvbTouMDAwMXB0Ow0KCWZvbnQtc2l6
-ZToxMC4wcHQ7DQoJZm9udC1mYW1pbHk6IkNvdXJpZXIgTmV3Ijt9DQpwLm1zb25vcm1hbDAsIGxp
-Lm1zb25vcm1hbDAsIGRpdi5tc29ub3JtYWwwDQoJe21zby1zdHlsZS1uYW1lOm1zb25vcm1hbDsN
-Cgltc28tbWFyZ2luLXRvcC1hbHQ6YXV0bzsNCgltYXJnaW4tcmlnaHQ6MGluOw0KCW1zby1tYXJn
-aW4tYm90dG9tLWFsdDphdXRvOw0KCW1hcmdpbi1sZWZ0OjBpbjsNCglmb250LXNpemU6MTEuMHB0
-Ow0KCWZvbnQtZmFtaWx5OiJDYWxpYnJpIixzYW5zLXNlcmlmO30NCnNwYW4uSFRNTFByZWZvcm1h
-dHRlZENoYXINCgl7bXNvLXN0eWxlLW5hbWU6IkhUTUwgUHJlZm9ybWF0dGVkIENoYXIiOw0KCW1z
-by1zdHlsZS1wcmlvcml0eTo5OTsNCgltc28tc3R5bGUtbGluazoiSFRNTCBQcmVmb3JtYXR0ZWQi
-Ow0KCWZvbnQtZmFtaWx5OkNvbnNvbGFzO30NCnNwYW4uRW1haWxTdHlsZTIxDQoJe21zby1zdHls
-ZS10eXBlOnBlcnNvbmFsLXJlcGx5Ow0KCWZvbnQtZmFtaWx5OiJDYWxpYnJpIixzYW5zLXNlcmlm
-Ow0KCWNvbG9yOndpbmRvd3RleHQ7fQ0KLk1zb0NocERlZmF1bHQNCgl7bXNvLXN0eWxlLXR5cGU6
-ZXhwb3J0LW9ubHk7DQoJZm9udC1zaXplOjEwLjBwdDt9DQpAcGFnZSBXb3JkU2VjdGlvbjENCgl7
-c2l6ZTo4LjVpbiAxMS4waW47DQoJbWFyZ2luOjEuMGluIDEuMGluIDEuMGluIDEuMGluO30NCmRp
-di5Xb3JkU2VjdGlvbjENCgl7cGFnZTpXb3JkU2VjdGlvbjE7fQ0KLS0+PC9zdHlsZT48IS0tW2lm
-IGd0ZSBtc28gOV0+PHhtbD4NCjxvOnNoYXBlZGVmYXVsdHMgdjpleHQ9ImVkaXQiIHNwaWRtYXg9
-IjEwMjYiIC8+DQo8L3htbD48IVtlbmRpZl0tLT48IS0tW2lmIGd0ZSBtc28gOV0+PHhtbD4NCjxv
-OnNoYXBlbGF5b3V0IHY6ZXh0PSJlZGl0Ij4NCjxvOmlkbWFwIHY6ZXh0PSJlZGl0IiBkYXRhPSIx
-IiAvPg0KPC9vOnNoYXBlbGF5b3V0PjwveG1sPjwhW2VuZGlmXS0tPg0KPC9oZWFkPg0KPGJvZHkg
-bGFuZz0iRU4tVVMiIGxpbms9ImJsdWUiIHZsaW5rPSJwdXJwbGUiPg0KPGRpdiBjbGFzcz0iV29y
-ZFNlY3Rpb24xIj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPkkgYW0gYnVpbGRpbmcgdGhlIG1ldGEt
-YnJvd3NlciBsYXllciBhZ2FpbnN0IHBva3kvbWFzdGVyIGFuZCBjdXJyZW50bHkgSSBhbSBzZWVp
-bmcgcGFyc2UgZXJyb3JzIGFzIHB5dGhvbm5hdGl2ZSBhbmQgc2V0dXB0b29scyBjbGFzc2VzIGFy
-ZSBubyBsb25nZXIgc3VwcG9ydGVkLiBIZW5jZSB0aGUgcGF0Y2guDQo8bzpwPjwvbzpwPjwvcD4N
-CjxwIGNsYXNzPSJNc29Ob3JtYWwiPkhvdyBhcmUgZXZlcnlvbmUgZWxzZSBidWlsZGluZyBweXRo
-b24yIGNocm9taXVtIGFnYWluc3QgcG9reS9tYXN0ZXIgd2hpY2ggZG9lc27igJl0IGhhdmUgc3Vw
-cG9ydCBmb3IgcHl0aG9uMiByZWNpcGVzL2NsYXNzZXMgYW55bW9yZT8gJm5ic3A7PG86cD48L286
-cD48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjxwIGNs
-YXNzPSJNc29Ob3JtYWwiPlRoYW5rcyw8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3Jt
-YWwiPkNoYW5kYW5hPG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48bzpwPiZu
-YnNwOzwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9w
-Pg0KPGRpdiBzdHlsZT0iYm9yZGVyOm5vbmU7Ym9yZGVyLWxlZnQ6c29saWQgYmx1ZSAxLjVwdDtw
-YWRkaW5nOjBpbiAwaW4gMGluIDQuMHB0Ij4NCjxkaXY+DQo8ZGl2IHN0eWxlPSJib3JkZXI6bm9u
-ZTtib3JkZXItdG9wOnNvbGlkICNFMUUxRTEgMS4wcHQ7cGFkZGluZzozLjBwdCAwaW4gMGluIDBp
-biI+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48Yj5Gcm9tOjwvYj4gQWxlamFuZHJvIEhlcm5hbmRl
-eiBTYW1hbmllZ28gJmx0O2FsaGVAbGludXgubWljcm9zb2Z0LmNvbSZndDsNCjxicj4NCjxiPlNl
-bnQ6PC9iPiBNb25kYXksIEp1bmUgMjIsIDIwMjAgMzo0MiBQTTxicj4NCjxiPlRvOjwvYj4gRGVu
-eXMgRG15dHJpeWVua28gJmx0O2RlbmlzQGRlbml4Lm9yZyZndDs7IEFsZXhhbmRlciBLYW5hdmlu
-ICZsdDthbGV4LmthbmF2aW5AZ21haWwuY29tJmd0Ozxicj4NCjxiPkNjOjwvYj4gQ2hhbmRhbmEg
-S2FsbHVyaSAmbHQ7Y2thbGx1cmlAeGlsaW54LmNvbSZndDs7IE9wZW5FbWJlZGRlZCBEZXZlbCBM
-aXN0ICZsdDtvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyZndDs7IENo
-YW5kYW5hIEthbGx1cmkgJmx0O2NrYWxsdXJpQHhpbGlueC5jb20mZ3Q7PGJyPg0KPGI+U3ViamVj
-dDo8L2I+IFJlOiBbb2VdIFttZXRhLWJyb3dzZXJdW1BBVENIXSBjaHJvbWl1bS5pbmM6IFVzZSBw
-eXRob24zbmF0aXZlLmJiY2xhc3MgaW5zdGVhZCBvZiBweXRob25uYXRpdmUuYmJjbGFzczxvOnA+
-PC9vOnA+PC9wPg0KPC9kaXY+DQo8L2Rpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxvOnA+Jm5i
-c3A7PC9vOnA+PC9wPg0KPHA+U29tZSBvZiBpdCBpcyBhbHJlYWR5IHBvcnRlZCwgYnV0IGl0IGRv
-ZXNuJ3QgbG9vayBsaWtlIGl0IHdpbGwgYmUgZml4ZWQgc29vbiwgaXRzIGVhc2llciB0byBkZXBl
-bmQgb24gcHl0aG9uLW5hdGl2ZSBidXQgdGhhdCBjcmVhdGVzIGEgZGVwZW5kZW5jeSBvbiBtZXRh
-LXB5dGhvbiBhcyB3ZWxsIGFzIGl0IHVzZXMgRU9MIGNvZGUuPG86cD48L286cD48L3A+DQo8cD5J
-ZiB5b3UgZG8gdGhhdCB5b3UgaGF2ZSB0byBtYW51YWxseSBwYXRjaCBsb3RzIG9mIHN0dWZmIG9u
-IHRoZSB2OCBlbmdpbmUgKGFuZCBvdGhlciBjb21wb25lbnRzKSB3aGljaCB0cnkgY2FsbGluZyAv
-dXNyL2Jpbi9weXRob24gc3BlY2lmaWNhbGx5LCBidXQgaXQgd2lsbCB3b3JrLjxvOnA+PC9vOnA+
-PC9wPg0KPHA+QWxlamFuZHJvPG86cD48L286cD48L3A+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05v
-cm1hbCI+T24gNi8yMi8yMCAzOjMyIFBNLCBEZW55cyBEbXl0cml5ZW5rbyB3cm90ZTo8bzpwPjwv
-bzpwPjwvcD4NCjwvZGl2Pg0KPGJsb2NrcXVvdGUgc3R5bGU9Im1hcmdpbi10b3A6NS4wcHQ7bWFy
-Z2luLWJvdHRvbTo1LjBwdCI+DQo8cHJlPlllYWgsIG5vdCBnb25uYSB3b3JrIC0gbWFueSBwZW9w
-bGUgYXJlIHdhaXRpbmcgZm9yIHRoaXMgdG8gaGFwcGVuLCBidXQgYWxhczo8bzpwPjwvbzpwPjwv
-cHJlPg0KPHByZT48bzpwPiZuYnNwOzwvbzpwPjwvcHJlPg0KPHByZT48YSBocmVmPSJodHRwczov
-L2J1Z3MuY2hyb21pdW0ub3JnL3AvY2hyb21pdW0vaXNzdWVzL2RldGFpbD9pZD05NDI3MjAiPmh0
-dHBzOi8vYnVncy5jaHJvbWl1bS5vcmcvcC9jaHJvbWl1bS9pc3N1ZXMvZGV0YWlsP2lkPTk0Mjcy
-MDwvYT48bzpwPjwvbzpwPjwvcHJlPg0KPHByZT48bzpwPiZuYnNwOzwvbzpwPjwvcHJlPg0KPHBy
-ZT48bzpwPiZuYnNwOzwvbzpwPjwvcHJlPg0KPHByZT5PbiBUdWUsIEp1biAyMywgMjAyMCBhdCAx
-MjoxNjo1MUFNICYjNDM7MDIwMCwgQWxleGFuZGVyIEthbmF2aW4gd3JvdGU6PG86cD48L286cD48
-L3ByZT4NCjxibG9ja3F1b3RlIHN0eWxlPSJtYXJnaW4tdG9wOjUuMHB0O21hcmdpbi1ib3R0b206
-NS4wcHQiPg0KPHByZT5XYWl0LCBkaWQgeW91IGFjdHVhbGx5IHRlc3QgdGhpcz8gQ2hyb21pdW0g
-aXMgbm90IHlldCByZWFkeSBmb3IgcHl0aG9uMyw8bzpwPjwvbzpwPjwvcHJlPg0KPHByZT5hbmQg
-YnVpbGRzIHdpbGwgZmFpbC48bzpwPjwvbzpwPjwvcHJlPg0KPHByZT48bzpwPiZuYnNwOzwvbzpw
-PjwvcHJlPg0KPHByZT5BbGV4PG86cD48L286cD48L3ByZT4NCjxwcmU+PG86cD4mbmJzcDs8L286
-cD48L3ByZT4NCjxwcmU+T24gVHVlLCAyMyBKdW4gMjAyMCBhdCAwMDowOSwgQ2hhbmRhbmEga2Fs
-bHVyaSA8YSBocmVmPSJtYWlsdG86Y2thbGx1cmlAeGlsaW54LmNvbSI+Jmx0O2NrYWxsdXJpQHhp
-bGlueC5jb20mZ3Q7PC9hPiB3cm90ZTo8bzpwPjwvbzpwPjwvcHJlPg0KPHByZT48bzpwPiZuYnNw
-OzwvbzpwPjwvcHJlPg0KPGJsb2NrcXVvdGUgc3R5bGU9Im1hcmdpbi10b3A6NS4wcHQ7bWFyZ2lu
-LWJvdHRvbTo1LjBwdCI+DQo8cHJlPkZyb20gZHVuZmVsbCBvbndhcmRzLCBweXRob24yIHJlY2lw
-ZXMgYW5kIGNsYXNzZXMgYXJlIG5vdCBzdXBwb3J0ZWQuPG86cD48L286cD48L3ByZT4NCjxwcmU+
-SW5oZXJpdDxvOnA+PC9vOnA+PC9wcmU+DQo8cHJlPnB5dGhvbjNuYXRpdmUuYmJjbGFzcyBmb3Ig
-Y2hyb21pdW0gaW5zdGVhZCBvZiBweXRob25uYXRpdmUuYmJjbGFzczxvOnA+PC9vOnA+PC9wcmU+
-DQo8cHJlPjxvOnA+Jm5ic3A7PC9vOnA+PC9wcmU+DQo8cHJlPlNpZ25lZC1vZmYtYnk6IFNhaSBI
-YXJpIENoYW5kYW5hIEthbGx1cmkgPGEgaHJlZj0ibWFpbHRvOmNoYW5kYW5hLmthbGx1cmlAeGls
-aW54LmNvbSI+Jmx0O2NoYW5kYW5hLmthbGx1cmlAeGlsaW54LmNvbSZndDs8L2E+PG86cD48L286
-cD48L3ByZT4NCjxwcmU+LS0tPG86cD48L286cD48L3ByZT4NCjxwcmU+IHJlY2lwZXMtYnJvd3Nl
-ci9jaHJvbWl1bS9jaHJvbWl1bS5pbmMgfCAyICYjNDM7LTxvOnA+PC9vOnA+PC9wcmU+DQo8cHJl
-PiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oJiM0MzspLCAxIGRlbGV0aW9uKC0pPG86cD48
-L286cD48L3ByZT4NCjxwcmU+PG86cD4mbmJzcDs8L286cD48L3ByZT4NCjxwcmU+ZGlmZiAtLWdp
-dCBhL3JlY2lwZXMtYnJvd3Nlci9jaHJvbWl1bS9jaHJvbWl1bS5pbmM8bzpwPjwvbzpwPjwvcHJl
-Pg0KPHByZT5iL3JlY2lwZXMtYnJvd3Nlci9jaHJvbWl1bS9jaHJvbWl1bS5pbmM8bzpwPjwvbzpw
-PjwvcHJlPg0KPHByZT5pbmRleCAxNGQ3NjJmLi5hNDgzZWM0IDEwMDY0NDxvOnA+PC9vOnA+PC9w
-cmU+DQo8cHJlPi0tLSBhL3JlY2lwZXMtYnJvd3Nlci9jaHJvbWl1bS9jaHJvbWl1bS5pbmM8bzpw
-PjwvbzpwPjwvcHJlPg0KPHByZT4mIzQzOyYjNDM7JiM0MzsgYi9yZWNpcGVzLWJyb3dzZXIvY2hy
-b21pdW0vY2hyb21pdW0uaW5jPG86cD48L286cD48L3ByZT4NCjxwcmU+QEAgLTE4LDcgJiM0Mzsx
-OCw3IEBAIFRPT0xDSEFJTiA9ICZxdW90O2NsYW5nJnF1b3Q7PG86cD48L286cD48L3ByZT4NCjxw
-cmU+ICMgdG8gYnVpbGQgdGhlIG5hdGl2ZSByZWNpcGVzIChlLmcuIEdOKSB3aXRoIGNsYW5nIHRv
-by48bzpwPjwvbzpwPjwvcHJlPg0KPHByZT4gVE9PTENIQUlOX2NsYXNzLW5hdGl2ZSA9ICZxdW90
-O2NsYW5nJnF1b3Q7PG86cD48L286cD48L3ByZT4NCjxwcmU+PG86cD4mbmJzcDs8L286cD48L3By
-ZT4NCjxwcmU+LWluaGVyaXQgcHl0aG9ubmF0aXZlIHNldHVwdG9vbHM8bzpwPjwvbzpwPjwvcHJl
-Pg0KPHByZT4mIzQzO2luaGVyaXQgcHl0aG9uM25hdGl2ZSBzZXR1cHRvb2xzPG86cD48L286cD48
-L3ByZT4NCjxwcmU+PG86cD4mbmJzcDs8L286cD48L3ByZT4NCjxwcmU+ICMgQ2hyb21pdW0gaXRz
-ZWxmIGlzIGxpY2Vuc2VkIHVuZGVyIHRoZSAzLWNsYXVzZSBCU0QgbGljZW5zZS4gSG93ZXZlciwg
-aXQ8bzpwPjwvbzpwPjwvcHJlPg0KPHByZT4gIyBkZXBlbmRzIHVwb24gc2V2ZXJhbCBvdGhlciBw
-cm9qZWN0cyB3aG9zZSBjb3B5cmlnaHQgZmlsZXMgYXJlIGxpc3RlZCBpbjxvOnA+PC9vOnA+PC9w
-cmU+DQo8cHJlPi0tPG86cD48L286cD48L3ByZT4NCjxwcmU+Mi43LjQ8bzpwPjwvbzpwPjwvcHJl
-Pg0KPHByZT48bzpwPiZuYnNwOzwvbzpwPjwvcHJlPg0KPHByZT48bzpwPiZuYnNwOzwvbzpwPjwv
-cHJlPg0KPHByZT48bzpwPiZuYnNwOzwvbzpwPjwvcHJlPg0KPC9ibG9ja3F1b3RlPg0KPC9ibG9j
-a3F1b3RlPg0KPHByZT48bzpwPiZuYnNwOzwvbzpwPjwvcHJlPg0KPGJsb2NrcXVvdGUgc3R5bGU9
-Im1hcmdpbi10b3A6NS4wcHQ7bWFyZ2luLWJvdHRvbTo1LjBwdCI+DQo8cHJlPjxvOnA+Jm5ic3A7
-PC9vOnA+PC9wcmU+DQo8L2Jsb2NrcXVvdGU+DQo8cHJlPjxvOnA+Jm5ic3A7PC9vOnA+PC9wcmU+
-DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48YnI+DQo8YnI+DQo8bzpwPjwvbzpwPjwvcD4NCjxwcmU+
-PG86cD48L286cD48L3ByZT4NCjwvYmxvY2txdW90ZT4NCjwvZGl2Pg0KPC9kaXY+DQo8L2JvZHk+
-DQo8L2h0bWw+DQo=
+> How are everyone else building python2 chromium against poky/master whic=
+h=20
+> doesn=E2=80=99t have support for python2 recipes/classes anymore?
 
---_000_BYAPR02MB5926B4D4B776B27284BD4C3AB0970BYAPR02MB5926namp_--
+You need meta-python2 layer to enable Python2 support.
+
+
+> Thanks,
+> Chandana
+>=20
+>=20
+> From: Alejandro Hernandez Samaniego <alhe@linux.microsoft.com>
+> Sent: Monday, June 22, 2020 3:42 PM
+> To: Denys Dmytriyenko <denis@denix.org>; Alexander Kanavin <alex.kanavin=
+@gmail.com>
+> Cc: Chandana Kalluri <ckalluri@xilinx.com>; OpenEmbedded Devel List <ope=
+nembedded-devel@lists.openembedded.org>; Chandana Kalluri <ckalluri@xilinx.=
+com>
+> Subject: Re: [oe] [meta-browser][PATCH] chromium.inc: Use python3native.=
+bbclass instead of pythonnative.bbclass
+>=20
+>=20
+> Some of it is already ported, but it doesn't look like it will be fixed =
+soon, its easier to depend on python-native but that creates a dependency o=
+n meta-python as well as it uses EOL code.
+>=20
+> If you do that you have to manually patch lots of stuff on the v8 engine=
+ (and other components) which try calling /usr/bin/python specifically, but=
+ it will work.
+>=20
+> Alejandro
+> On 6/22/20 3:32 PM, Denys Dmytriyenko wrote:
+>=20
+> Yeah, not gonna work - many people are waiting for this to happen, but a=
+las:
+>=20
+>=20
+>=20
+> https://bugs.chromium.org/p/chromium/issues/detail?id=3D942720
+>=20
+>=20
+>=20
+>=20
+>=20
+> On Tue, Jun 23, 2020 at 12:16:51AM +0200, Alexander Kanavin wrote:
+>=20
+> Wait, did you actually test this? Chromium is not yet ready for python3,
+>=20
+> and builds will fail.
+>=20
+>=20
+>=20
+> Alex
+>=20
+>=20
+>=20
+> On Tue, 23 Jun 2020 at 00:09, Chandana kalluri <ckalluri@xilinx.com><mai=
+lto:ckalluri@xilinx.com> wrote:
+>=20
+>=20
+>=20
+> From dunfell onwards, python2 recipes and classes are not supported.
+>=20
+> Inherit
+>=20
+> python3native.bbclass for chromium instead of pythonnative.bbclass
+>=20
+>=20
+>=20
+> Signed-off-by: Sai Hari Chandana Kalluri <chandana.kalluri@xilinx.com><m=
+ailto:chandana.kalluri@xilinx.com>
+>=20
+> ---
+>=20
+>  recipes-browser/chromium/chromium.inc | 2 +-
+>=20
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+>=20
+>=20
+> diff --git a/recipes-browser/chromium/chromium.inc
+>=20
+> b/recipes-browser/chromium/chromium.inc
+>=20
+> index 14d762f..a483ec4 100644
+>=20
+> --- a/recipes-browser/chromium/chromium.inc
+>=20
+> +++ b/recipes-browser/chromium/chromium.inc
+>=20
+> @@ -18,7 +18,7 @@ TOOLCHAIN =3D "clang"
+>=20
+>  # to build the native recipes (e.g. GN) with clang too.
+>=20
+>  TOOLCHAIN_class-native =3D "clang"
+>=20
+>=20
+>=20
+> -inherit pythonnative setuptools
+>=20
+> +inherit python3native setuptools
+>=20
+>=20
+>=20
+>  # Chromium itself is licensed under the 3-clause BSD license. However, =
+it
+>=20
+>  # depends upon several other projects whose copyright files are listed =
+in
+>=20
+> --
+>=20
+> 2.7.4
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+
+>=20
+
