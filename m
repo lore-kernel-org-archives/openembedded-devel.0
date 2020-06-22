@@ -1,76 +1,66 @@
-Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com [209.85.208.172])
- by mx.groups.io with SMTP id smtpd.web10.13087.1592815990596083450
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.14340.1592822154834262497
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Jun 2020 01:53:10 -0700
+ Mon, 22 Jun 2020 03:35:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=OV7AWVp5;
- spf=pass (domain: gmail.com, ip: 209.85.208.172, mailfrom: dbaryshkov@gmail.com)
-Received: by mail-lj1-f172.google.com with SMTP id y11so18358760ljm.9
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Jun 2020 01:53:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=EMW375rJ97lMP2KTuiRwtxLyak7GuXq2wY5HfzyB4BA=;
-        b=OV7AWVp5CXO+iwbluiNVhLewsdVEjJNdiPy1nJu/d6mhOpN9B9THQ85FqAtop22ZDk
-         dWKVzSi8XFP572J1842iW0fp3AuRnPCHq049TyUDy8/FiwTCbihA0lQXXIzWRKrhqhT/
-         YVRkWv7H9CODz1krV0GtwUhYR5ud6keJk9wEKxWVS2aejvmk5lX0eJ9tG+o54BQ8w7OV
-         sE/iAF5AGqqTtWDo0ax6YELIxHNjGkL2zLlxt9NT6ygoIxrgleN6BOXpzqT+W7JqwuN+
-         wv3dF74KUjx3qf5oFwO1V4dNW5uziDdoooHcViXq+whe2BZd0M8D34jvvUCUOYtPFUhP
-         noVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=EMW375rJ97lMP2KTuiRwtxLyak7GuXq2wY5HfzyB4BA=;
-        b=YeFvxaFbI5L/lul7v3ScYCNpXFECtvKQt/MroezMFjTsFbnWiU+/+31DzWZ0ZvVm3w
-         6sY4LVwr6NnoPPkcfnvFqgAbzCOabcI0oEYiIL26sVKl+xJAsOuUqfgkvv5otwS6yABc
-         TOMCEArDar6PgY+n65Og7H7OhvUS/SxzYL1dvvbNBkpm7YJjmPedLRj7KJhtZVFAl3ST
-         /M81LjDEgI2frPv5AlZU+bb04zQnfx7ScDEiDrko+Lv9mqFK+9x82akDQEWoFAugXc6w
-         VRJd5qN3JfjiM7Gw//2uQUJ74I6ZSrIzdiVYvmkhzwsLPQtlFQ5nrS4iFCSZEKWYK+VC
-         /vXQ==
-X-Gm-Message-State: AOAM531FuQQ0nys5vWNSujbaHPdPViWRELTPQPubvudpiFv5vD6j5bvp
-	exyARBNETkPEKp3yBf9flCP3QKqTABA=
-X-Google-Smtp-Source: ABdhPJxGqFCofiX9+JM5/ik+W2kzLcKSMWSQwqdTEb8wqKDpd3RvqQIViX92FZETQjc5Q2Y0k4mmDQ==
-X-Received: by 2002:a2e:4b12:: with SMTP id y18mr7253038lja.117.1592815987364;
-        Mon, 22 Jun 2020 01:53:07 -0700 (PDT)
-Return-Path: <dbaryshkov@gmail.com>
-Received: from eriador.lan ([94.25.228.18])
-        by smtp.gmail.com with ESMTPSA id w6sm2616453ljw.11.2020.06.22.01.53.05
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 Jun 2020 01:53:06 -0700 (PDT)
-From: "Dmitry Eremin-Solenikov" <dbaryshkov@gmail.com>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=43452 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jnJnp-0005ty-Bg; Mon, 22 Jun 2020 13:35:51 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] lmsensors: do not depend on lmsensors-isatools on non-x86
-Date: Mon, 22 Jun 2020 11:53:05 +0300
-Message-Id: <20200622085305.2374048-1-dbaryshkov@gmail.com>
-X-Mailer: git-send-email 2.27.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 01/10] python3-ordered-set: Upgrade 3.1.1 -> 4.0.2
+Date: Mon, 22 Jun 2020 13:35:33 +0300
+Message-Id: <20200622103542.27830-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-lmsensors will build isadump and isaset only on x86 architecture.
-Depending on this package breaks lmsensors on all non-x86 machines. Fix
-this by enabling ${PN}-isatools dependency only on x86.
+Upgrade to release 4.0.2:
 
-Signed-off-by: Dmitry Baryshkov <dbaryshkov@gmail.com>
+- Fix packaging, remove vestiges of type stubs
+- Code formatting (isort and black)
+- Directly distribute type stub file via PEP 561
+- Include pytest.ini in sdist
+- Add a Jenkinsfile
+- Handle another indexing case from NumPy
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...hon3-ordered-set_3.1.1.bb => python3-ordered-set_4.0.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-ordered-set_3.1.1.bb => python3-ordered-set_4.0.2.bb} (76%)
 
-diff --git a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
-index 890db55bccfd..9c561e9f477a 100644
---- a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
-+++ b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
-@@ -95,7 +95,7 @@ RDEPENDS_${PN} += " \
-     ${PN}-sensorsdetect \
-     ${PN}-sensorsconfconvert \
-     ${PN}-pwmconfig \
--    ${PN}-isatools \
-+    ${@bb.utils.contains('MACHINE_FEATURES', 'x86', '${PN}-isatools', '', d)} \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-ordered-set_3.1.1.bb b/meta-python/recipes-devtools/python/python3-ordered-set_4.0.2.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-ordered-set_3.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-ordered-set_4.0.2.bb
+index bf362daa7..0e678b54d 100644
+--- a/meta-python/recipes-devtools/python/python3-ordered-set_3.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-ordered-set_4.0.2.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://github.com/LuminosoInsight/ordered-set"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://MIT-LICENSE;md5=2b36be0d99854aa2ae292a800a7c1d4e"
  
- # libsensors packages
+-SRC_URI[md5sum] = "6e12312c8dc4c90fe840e86e8a352644"
+-SRC_URI[sha256sum] = "a7bfa858748c73b096e43db14eb23e2bc714a503f990c89fac8fab9b0ee79724"
++SRC_URI[md5sum] = "5d88f3870c32d4868b28c8fe833f7e74"
++SRC_URI[sha256sum] = "ba93b2df055bca202116ec44b9bead3df33ea63a7d5827ff8e16738b97f33a95"
+ 
+ inherit pypi setuptools3 ptest
+ 
 -- 
-2.27.0
+2.17.1
 
