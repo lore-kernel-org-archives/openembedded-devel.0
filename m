@@ -1,17 +1,17 @@
-Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.55])
- by mx.groups.io with SMTP id smtpd.web10.17545.1592833586592839650
+Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.78])
+ by mx.groups.io with SMTP id smtpd.web12.17819.1592833599559413546
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Jun 2020 06:46:26 -0700
+ Mon, 22 Jun 2020 06:46:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=FfvCGKQF;
- spf=pass (domain: windriver.com, ip: 40.107.75.55, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=UMWXvoSy;
+ spf=pass (domain: windriver.com, ip: 40.107.75.78, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UdnyyyMHHHSJFrPoUDkX/KeunSdLN7eRCXk79taGUK01DXfB/QwYOGgy7P5cHKGEAQJDQQrkUhy6PoZrBI0FbYT7C9EjMFHmtihlepJOROTK8kvtgmhrBgoZFTKVTHUDjg/6vHeq/5L5A2lBUpox0Qmd9FubXeq1ikYHa4LB9+yiO7BicuJUL6QYy+2jxnueleT2dg/2qgQZ0sF+ciSFaBA6/cuIffHh0QyLID9LSs5MC43t+4mAwWz2fLRui8rjUITv/EFCAqh003CR+q9VFDQVZ8jGC8/Ibe1ryhoqSlOW3fSBYsDrDyBJiirKPyIQslftenzy7Gx4YWFz0qgl+Q==
+ b=TZHNRK9vjo/hc5jSQcW0/lrQQgAkouLXLIjhEHEKT37Wt+P6mITTsuZ7w4fkxmNdubnwy0vf+4d3URxfZjLapfRt+lqVxLwusWa7vpsbR096mg/cQRinQnzT0L+BkPo6Rwjhjc4SZWUW55UnFfaKG81MRSQiMl95p54EUsOqCT+hNlfqSy7D9mrw4kJIL6Uj7vNy272ISExlAh+MI7Bmrz/38AMwpJ5iWB7qJsTo672tnp0eOXXz+wIp8EBaOs2KKuHMDFPaJxI12teGaJPJVgOeRrC15/RhuY9SZwLt+FanrHrWtjIivRBUXA1lhmm/d43EQM6jX+agh7zPIzlQzw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BPnJS2xXZ+4yH9O8qGQ/Bpwa6KPuOZ3gWCoOjkSmYfw=;
- b=bxAt+e5Atnan6po0RJAvhyMI6fBhzjaBhafU2erqSgO0z0FMTiyFuhk2O1aywOcLulQh2EneBZ5l76iyPORoZtFfK8YyzLwk4ZfLVr+jjIISVcNceqZXSqcO5f1YxS0GR7+O7ecC+WSZ+gaEapkbqBRRB/y2yhLcIs6EC6fKGKzmcEGv2F4fe09+7CcnUmxIUH75r+8U5euuNALOnPOz5hqsNErcTCjjFJbTH/EYUDAcrIkA1fYCUo2P0xUn+8+lnY9/XPpwwOO51xkJcmIYjF4yR5T1fP8jB5G2HTVjtzcJd+HLiwvxBYpVRN9VD+kRx+ydR7V7hluJcnrhWPJ1RA==
+ bh=RN6ssEmKupZwVB7DuCJlQ0SA3Hgx1U2FFg1koC6UkjQ=;
+ b=dlCY/Fwp/21rauV3hkOhXu2kw5vwHQYgPVyGMUEwgBZ61tChXoJxRIIpsii/CiwfQRJDGnbse/WvokvYZtqbKE31inGak7VrwDOoU4dO13rANGuxxMEcOaO+i5CnEpsA8SmCpm+4jLIfgqXWvyZrFsj2siTzshuafnI0Dbzqi3rnboqDCfUj3ZycpH7hiwcHSwarMRW1DML+LWP1U5FS0/xTvNIq+eRwaDDwrhtfMH0Fx1NiSJB9e7BUfxD5ImQ+LAuGMNBveOTwdmw2i9Xh+hYRiDa8K2wMZc0iLH2qNbKxzEX2pgKanynVItsLBDOLB+wgWoWo5I09X1jCsxwlOw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,142 +19,183 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BPnJS2xXZ+4yH9O8qGQ/Bpwa6KPuOZ3gWCoOjkSmYfw=;
- b=FfvCGKQFQY1UW2F2hfExkf2GKg/J3VUkHHVttpMWW/m7MCD0h5aqgwxSk34uMkeHv7I5mRnrRGuQFVG09wyNLOMSm/+Gzyr1kVW4H+42j59o+X89TRuF4ECC5okvA1XHwTSMlKnUYfbTmTvqSxccUJ9f65N2PH0jlHHw4+7bTxY=
+ bh=RN6ssEmKupZwVB7DuCJlQ0SA3Hgx1U2FFg1koC6UkjQ=;
+ b=UMWXvoSyNWuI9O6l2d+JWNgOI3xzkTkjnthDXRokFi4AXiqWy1iWlHpsZo6V/dfYTtPiJ8SAk6J5nmDY1oYNLI997UiBwCqCuDUYUL1KAoTu00pMcrzyHmUxeNybZSY/tJH1SrtA0JyYyLn1gJX8AnPx5e0E5o4w/RdLj47krmQ=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB1779.namprd11.prod.outlook.com (2603:10b6:404:100::8) with
+ by BN7PR11MB2546.namprd11.prod.outlook.com (2603:10b6:406:ad::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.23; Mon, 22 Jun
- 2020 13:46:25 +0000
+ 2020 13:46:38 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3109.027; Mon, 22 Jun 2020
- 13:46:25 +0000
-Subject: Re: [oe] [meta-python][PATCH 6/7] python3-prompt-toolkit: Upgrade 2.0.10 -> 3.0.5
+ 13:46:38 +0000
+Subject: Re: [oe] [meta-python][PATCH 7/7] python3-ptyprocess: Consolidate in a single file
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200619081011.25051-1-leon.anavi@konsulko.com>
- <20200619081011.25051-6-leon.anavi@konsulko.com>
+ <20200619081011.25051-7-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <e0cc2a2e-8c2b-a316-fd51-d1a87506aa0f@windriver.com>
-Date: Mon, 22 Jun 2020 09:46:23 -0400
+Message-ID: <a8316458-fc30-3f72-e8c9-77f9bb6d865b@windriver.com>
+Date: Mon, 22 Jun 2020 09:46:36 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200619081011.25051-6-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTBPR01CA0036.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:14::49) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200619081011.25051-7-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0062.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2e::31) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YTBPR01CA0036.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:14::49) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22 via Frontend Transport; Mon, 22 Jun 2020 13:46:24 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0062.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22 via Frontend Transport; Mon, 22 Jun 2020 13:46:37 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 7d4768c0-4b39-4939-70ec-08d816b2a7d4
-X-MS-TrafficTypeDiagnostic: BN6PR11MB1779:
+X-MS-Office365-Filtering-Correlation-Id: d136cf20-7cde-43af-f58d-08d816b2af96
+X-MS-TrafficTypeDiagnostic: BN7PR11MB2546:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB1779EB63958B7FA31B935E6F9F970@BN6PR11MB1779.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:3826;
+	<BN7PR11MB2546F6205FA2EE30A2C646019F970@BN7PR11MB2546.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:159;
 X-Forefront-PRVS: 0442E569BC
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	rQmsz1fthnZ4XtJ856m07LBItjiUFjmFojjBm5h29w7eAm2H2jy8+rjzvip0NfwyOOwSFwHipDAcUC0rM2kz018lqIKgb2smKnAfdrJIgazKhkGsAn+ulDQUd0BZUCWSriIKrvILXOCPlabljmU4AcD/AHMoVNWfzTV8lmR3gUYjKMn8byXLon6V47cdjharaglgUeBtHhlTlFpmiRFXV388ISvjI5Ii74kt08TiPsBjNiSmX5gJgLrs8YhdpLVpxdl21hKzN1bSWeF0f/lJh0HJFOpjX1BEtq7kmuclL5V/LEz++0zXka2s9Etd/+oW9kIXjF7D9CYvF99FmV1uUWKJY9VYf76/P7hTVlfvccNt3FxEYjaghK4GJQlgpc5j3TpOjDyVIJq4eszBzzLENegTE4IQBFuqFaylo0qvBfMqMKJROaxRuanDHsAWRl90Nu/az2cuOBz6VzqT2T8XtQ==
+	VJSETH8JemKt5atNE5Zn9WrMZNoXqZsPvDQ6X2m53P0fiZh4qHTnMMYrMJa1Cd687s1sl9CB6DV/72vgl8oifzYRtnlNHD6ctrv+OZ0C13wE06fw9qCseX3sRhLqvfeWA8IsP6VZtdplKKXrwdC8O+FlghC87hGNKV30mYywVDSR7VnVJGyfUpYRtO/T5jmabCAFOPiJDBj4wGKflkyPeIq1n3r/XwWU5jv4LDMtUpaseV0yMIUYmjtOeQXph8X2tMwoPRsLeQUdOPYxyppPRWKzSlGXXzcXBAx0rtt+Kixzpu7k89V/Tgb8FcIb8pqr4LEgQIAL6Naysf07yGHduiJdc9FJojiNOyfmfqwRM9Y/8nIOMTiTA+JEb55mF5hxsOODNzkdHXA+VuZda/if0Zi8NQ/Gw8/x2yt+m27ro/ItrICj9M8B1uXKmnfLtSn4wIFpO8mhAmiPheSrImhN+Q==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(366004)(376002)(39850400004)(136003)(396003)(53546011)(44832011)(66476007)(66556008)(2906002)(83380400001)(26005)(86362001)(166002)(33964004)(8676002)(36756003)(8936002)(31696002)(6486002)(16576012)(5660300002)(966005)(478600001)(31686004)(66946007)(2616005)(186003)(16526019)(52116002)(316002)(956004)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(346002)(366004)(39850400004)(396003)(376002)(66556008)(36756003)(2906002)(53546011)(186003)(6486002)(166002)(16526019)(52116002)(31686004)(26005)(83380400001)(31696002)(5660300002)(86362001)(33964004)(16576012)(44832011)(316002)(66946007)(66476007)(8936002)(2616005)(956004)(478600001)(966005)(8676002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	/rDWjhN37JW67lfjwnb5Ht/NsoOYqol4kYjIJartImCrsWfOsu6aE20vHwoqSHCMBMdIGGVOYkPiAuy53TtVaS5Z6/74I79LgRb41jUSt8Tsn7kDcNINrutvZvrCuaDukqB6FNRoKgoWisy+vZpUfYiaFfobQtGRtugMtGnGo7P5pQbQiulX2bRLN9oL3hJvlRuatm+CUcE8lczcLnKKL4HEm0hgNSMBoo1l6O1oBGSpxRDk4VodE59rGPs8v03f/iw3p9zcWJqbRtt8TWrhxD9RW4ThJN9rg2aWpmjm01Do9GysH7wK9iLLNUz/Z0dJcI/XFbILl+3VBpH6KdceJoj47Dx8NlT+GJtHtScsHyQrFCAZjigxsnYPtqS/nwKBGYKtB4OHdGBcH/05M9TH/XDyGHcRJgquUZBgb5gy/itfu7KLqJ8Lv/1Y3wqmGOn1ao2oNp1MbwxG2tCy1LaQ/OZPx1RgD1iK1hk0uAf/hcs=
+	iXaGv3m9CDXLI1Qrg800GXUk8R4CdhVW/nB9ps+LBFGf+NsHeDTWbm4GXVuW+ILceyO0Bv1rITOQVoNDwZRW2cW3+YyGtPgp6NqO7rslBE/aGg8JnWZP4/ev/9B664drAigSuxOrN8UcIeHbO5GZQmZtaIezYcD3u96xO/+6n5vPXWOlCNFFOQIaZwkyyjA/0/6ykZi+VROA5vhdPSaPjgq78eaaaUMgk73RBaSpaNJZNMwffxDpB34es4evUCMrw/bAP6nHAavjROOp7JHj+7kpcM6bhvdGhl15rFypYhD2nEEu/icdZTpRUPK2nJHQB/IW9ugXrtsn+jqFfWbT7mVUpZMT+DH2L8t/x85DNEyF3m/RfKC9ClGhHqoz0nORGhwJjm03A77NoQHfLAp2wCX5geudluGciLE3Mo5qgzIw6N4E+eYjFfQJIqvGPTEQwJMZ9FsQxQQxujs2B0O+uiC88s+auS0Gb5r7fYqhc3k=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7d4768c0-4b39-4939-70ec-08d816b2a7d4
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jun 2020 13:46:25.1956
+X-MS-Exchange-CrossTenant-Network-Message-Id: d136cf20-7cde-43af-f58d-08d816b2af96
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jun 2020 13:46:38.2179
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DEwfM84eEGvJ7Whrt+ucrDV3UMypkDwntayP6QieapDSq1tM4M1Iydd+cXcH1Au1VfbOAUq64SJ3gN9oNmEbABACIlspIzBbRCKRNkGvgy8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1779
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7OgtlnAew+UnuQoyzneC5mmO2lCOIoJfK89uE+0LvmXi6sbdjTEPs+CZnS2S5NSECVCvtv79zE/qkDaT4YPhIatCf93fkXHd3nV9OMQ4GhM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PR11MB2546
 Content-Type: multipart/alternative;
- boundary="------------882B95E51F84515191A88473"
+ boundary="------------98D813A990522DDBE3DC55F9"
 Content-Language: en-US
 
---------------882B95E51F84515191A88473
+--------------98D813A990522DDBE3DC55F9
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 6/19/20 4:10 AM, Leon Anavi wrote:
-> Upgrade to release 3.0.5 and add HOMEPAGE. The new release brings:
->
-> New features:
-> - (almost) 100% type annotated.
-> - Native asyncio instead of custom event loops.
-> - Added shift-based text selection.
-> - Added many more vt100 ANSI sequences and keys.
-> - Improved control/shift key support in Windows.
-> - No Mypy errors in prompt_toolkit anymore.
-> - Added `set_exception_handler` optional argument to
->    `PromptSession.prompt()`.
->
-> Breaking changes:
-> - Python 2 support has been dropped. Minimal Python version is now
->    3.6, although 3.7 is preferred (because of ContextVars).
-> - Native asyncio, so some async code becomes slightly different.
-> - The active `Application` became a contextvar. Which means that
->    it should be propagated correctly to the code that requires it.
->    However, random other threads or coroutines won't be able to know
->    what the current application is.
-> - The dialog shortcuts API changed. All dialog functions now return
->    an `Application`. You still have to call either `run()` or
->    `run_async` on the `Application` object.
-> - The way inputhooks work is changed.
-> - `patch_stdout` now requires an `Application` as input.
-> - `ShiftControl` has been replaced with `ControlShift` and `s-c`
->    with `c-s` in key bindings. Aliases for backwards-compatibility
->    have been added.
->
-> Fixes:
-> - Bugfix in invalidate code. `PromptSession` was invalidating the
->    UI continuously.
-> - Add uvloop support.
-> - Forwarded `set_exception_handler` in `Application.run` to the
->    `run_async` call.
-> - Bugfix in `NestedCompleter` when there is a leading space.
-> - Bugfix in mouse handling on Windows.
+> Consolidate inc and bb files into a single bb file.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...mpt-toolkit_2.0.10.bb => python3-prompt-toolkit_3.0.5.bb} | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_2.0.10.bb => python3-prompt-toolkit_3.0.5.bb} (70%)
+>   .../python/python-ptyprocess.inc              | 41 ------------------
+>   .../python/python3-ptyprocess_0.6.0.bb        | 43 ++++++++++++++++++-
+>   2 files changed, 42 insertions(+), 42 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python-ptyprocess.inc
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_2.0.10.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.5.bb
-> similarity index 70%
-> rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_2.0.10.bb
-> rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.5.bb
-> index d9ece8dab..b4d20c2cd 100644
-> --- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_2.0.10.bb
-> +++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.5.bb
-> @@ -1,9 +1,10 @@
->   SUMMARY = "Library for building powerful interactive command lines in Python"
-> +HOMEPAGE = "https://python-prompt-toolkit.readthedocs.io/"
->   LICENSE = "BSD-3-Clause"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
->   
-> -SRC_URI[md5sum] = "5016c523e603cd7119644fbc0f00ce53"
-> -SRC_URI[sha256sum] = "f15af68f66e664eaa559d4ac8a928111eebd5feda0c11738b5998045224829db"
-> +SRC_URI[md5sum] = "96ba0be8d3145eb70e3da25654987670"
-> +SRC_URI[sha256sum] = "563d1a4140b63ff9dd587bda9557cffb2fe73650205ab6f4383092fb882e7dc8"
->   
+> diff --git a/meta-python/recipes-devtools/python/python-ptyprocess.inc b/meta-python/recipes-devtools/python/python-ptyprocess.inc
+> deleted file mode 100644
+> index a6dc21cf1..000000000
+> --- a/meta-python/recipes-devtools/python/python-ptyprocess.inc
+> +++ /dev/null
+> @@ -1,41 +0,0 @@
+> -SUMMARY = "Run a subprocess in a pseudo terminal"
+> -HOMEPAGE = "http://ptyprocess.readthedocs.io/en/latest/"
+> -SECTION = "devel/python"
+> -LICENSE = "ISC"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=cfdcd51fa7d5808da4e74346ee394490"
+> -
+> -SRCNAME = "ptyprocess"
+> -
+> -SRC_URI[md5sum] = "37402d69f3b50913d4d483587bffad8f"
+> -SRC_URI[sha256sum] = "923f299cc5ad920c68f2bc0bc98b75b9f838b93b599941a6b63ddbc2476394c0"
+> -
+> -UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/ptyprocess"
+> -
+> -S = "${WORKDIR}/${SRCNAME}-${PV}"
+> -
+> -RDEPENDS_${PN} = "\
+> -    ${PYTHON_PN}-core \
+> -    ${PYTHON_PN}-fcntl \
+> -    ${PYTHON_PN}-terminal \
+> -    ${PYTHON_PN}-resource \
+> -"
+> -
+> -BBCLASSEXTEND = "native nativesdk"
+> -
+> -inherit ptest
+> -
+> -SRC_URI += " \
+> -	file://run-ptest \
+> -"
+> -
+> -RDEPENDS_${PN}-ptest += " \
+> -	${PYTHON_PN}-pytest \
+> -	${PYTHON_PN}-fcntl \
+> -	${PYTHON_PN}-terminal \
+> -	${PYTHON_PN}-resource \
+> -"
+> -
+> -do_install_ptest() {
+> -	install -d ${D}${PTEST_PATH}/tests
+> -	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+> -}
+> diff --git a/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb b/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb
+> index bdcd0e253..87911e02e 100644
+> --- a/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb
+> @@ -1,2 +1,43 @@
+> -require python-ptyprocess.inc
+> +SUMMARY = "Run a subprocess in a pseudo terminal"
+> +HOMEPAGE = "http://ptyprocess.readthedocs.io/en/latest/"
+> +SECTION = "devel/python"
+> +LICENSE = "ISC"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=cfdcd51fa7d5808da4e74346ee394490"
+> +
+> +SRCNAME = "ptyprocess"
+> +
+> +SRC_URI[md5sum] = "37402d69f3b50913d4d483587bffad8f"
+> +SRC_URI[sha256sum] = "923f299cc5ad920c68f2bc0bc98b75b9f838b93b599941a6b63ddbc2476394c0"
+> +
 >   inherit pypi setuptools3
->   
+> +
+> +UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/ptyprocess"
+> +
+> +S = "${WORKDIR}/${SRCNAME}-${PV}"
+> +
+> +RDEPENDS_${PN} = "\
+> +    ${PYTHON_PN}-core \
+> +    ${PYTHON_PN}-fcntl \
+> +    ${PYTHON_PN}-terminal \
+> +    ${PYTHON_PN}-resource \
+> +"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> +
+> +inherit ptest
+> +
+> +SRC_URI += " \
+> +	file://run-ptest \
+> +"
+> +
+> +RDEPENDS_${PN}-ptest += " \
+> +	${PYTHON_PN}-pytest \
+> +	${PYTHON_PN}-fcntl \
+> +	${PYTHON_PN}-terminal \
+> +	${PYTHON_PN}-resource \
+> +"
+> +
+> +do_install_ptest() {
+> +	install -d ${D}${PTEST_PATH}/tests
+> +	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+> +}
 >
 > 
 
---------------882B95E51F84515191A88473
+--------------98D813A990522DDBE3DC55F9
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -166,75 +207,116 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/19/20 4:10 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200619081011.25051-6-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 3.0.5 and add HOMEPAGE. The new release brings:
-
-New features:
-- (almost) 100% type annotated.
-- Native asyncio instead of custom event loops.
-- Added shift-based text selection.
-- Added many more vt100 ANSI sequences and keys.
-- Improved control/shift key support in Windows.
-- No Mypy errors in prompt_toolkit anymore.
-- Added `set_exception_handler` optional argument to
-  `PromptSession.prompt()`.
-
-Breaking changes:
-- Python 2 support has been dropped. Minimal Python version is now
-  3.6, although 3.7 is preferred (because of ContextVars).
-- Native asyncio, so some async code becomes slightly different.
-- The active `Application` became a contextvar. Which means that
-  it should be propagated correctly to the code that requires it.
-  However, random other threads or coroutines won't be able to know
-  what the current application is.
-- The dialog shortcuts API changed. All dialog functions now return
-  an `Application`. You still have to call either `run()` or
-  `run_async` on the `Application` object.
-- The way inputhooks work is changed.
-- `patch_stdout` now requires an `Application` as input.
-- `ShiftControl` has been replaced with `ControlShift` and `s-c`
-  with `c-s` in key bindings. Aliases for backwards-compatibility
-  have been added.
-
-Fixes:
-- Bugfix in invalidate code. `PromptSession` was invalidating the
-  UI continuously.
-- Add uvloop support.
-- Forwarded `set_exception_handler` in `Application.run` to the
-  `run_async` call.
-- Bugfix in `NestedCompleter` when there is a leading space.
-- Bugfix in mouse handling on Windows.
+    <blockquote type="cite" cite="mid:20200619081011.25051-7-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200619081011.25051-6-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200619081011.25051-7-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...mpt-toolkit_2.0.10.bb =&gt; python3-prompt-toolkit_3.0.5.bb} | 5 &#43;&#43;&#43;--
- 1 file changed, 3 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_2.0.10.bb =&gt; python3-prompt-toolkit_3.0.5.bb} (70%)
+ .../python/python-ptyprocess.inc              | 41 ------------------
+ .../python/python3-ptyprocess_0.6.0.bb        | 43 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
+ 2 files changed, 42 insertions(&#43;), 42 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-ptyprocess.inc
 
-diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_2.0.10.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.5.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_2.0.10.bb
-rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.5.bb
-index d9ece8dab..b4d20c2cd 100644
---- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_2.0.10.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.5.bb
-@@ -1,9 &#43;1,10 @@
- SUMMARY = &quot;Library for building powerful interactive command lines in Python&quot;
-&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://python-prompt-toolkit.readthedocs.io/">&quot;https://python-prompt-toolkit.readthedocs.io/&quot;</a>
- LICENSE = &quot;BSD-3-Clause&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f">&quot;file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f&quot;</a>
- 
--SRC_URI[md5sum] = &quot;5016c523e603cd7119644fbc0f00ce53&quot;
--SRC_URI[sha256sum] = &quot;f15af68f66e664eaa559d4ac8a928111eebd5feda0c11738b5998045224829db&quot;
-&#43;SRC_URI[md5sum] = &quot;96ba0be8d3145eb70e3da25654987670&quot;
-&#43;SRC_URI[sha256sum] = &quot;563d1a4140b63ff9dd587bda9557cffb2fe73650205ab6f4383092fb882e7dc8&quot;
- 
+diff --git a/meta-python/recipes-devtools/python/python-ptyprocess.inc b/meta-python/recipes-devtools/python/python-ptyprocess.inc
+deleted file mode 100644
+index a6dc21cf1..000000000
+--- a/meta-python/recipes-devtools/python/python-ptyprocess.inc
+&#43;&#43;&#43; /dev/null
+@@ -1,41 &#43;0,0 @@
+-SUMMARY = &quot;Run a subprocess in a pseudo terminal&quot;
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://ptyprocess.readthedocs.io/en/latest/">&quot;http://ptyprocess.readthedocs.io/en/latest/&quot;</a>
+-SECTION = &quot;devel/python&quot;
+-LICENSE = &quot;ISC&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=cfdcd51fa7d5808da4e74346ee394490">&quot;file://LICENSE;md5=cfdcd51fa7d5808da4e74346ee394490&quot;</a>
+-
+-SRCNAME = &quot;ptyprocess&quot;
+-
+-SRC_URI[md5sum] = &quot;37402d69f3b50913d4d483587bffad8f&quot;
+-SRC_URI[sha256sum] = &quot;923f299cc5ad920c68f2bc0bc98b75b9f838b93b599941a6b63ddbc2476394c0&quot;
+-
+-UPSTREAM_CHECK_URI = <a class="moz-txt-link-rfc2396E" href="https://pypi.python.org/pypi/ptyprocess">&quot;https://pypi.python.org/pypi/ptyprocess&quot;</a>
+-
+-S = &quot;${WORKDIR}/${SRCNAME}-${PV}&quot;
+-
+-RDEPENDS_${PN} = &quot;\
+-    ${PYTHON_PN}-core \
+-    ${PYTHON_PN}-fcntl \
+-    ${PYTHON_PN}-terminal \
+-    ${PYTHON_PN}-resource \
+-&quot;
+-
+-BBCLASSEXTEND = &quot;native nativesdk&quot;
+-
+-inherit ptest
+-
+-SRC_URI &#43;= &quot; \
+-	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
+-&quot;
+-
+-RDEPENDS_${PN}-ptest &#43;= &quot; \
+-	${PYTHON_PN}-pytest \
+-	${PYTHON_PN}-fcntl \
+-	${PYTHON_PN}-terminal \
+-	${PYTHON_PN}-resource \
+-&quot;
+-
+-do_install_ptest() {
+-	install -d ${D}${PTEST_PATH}/tests
+-	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-}
+diff --git a/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb b/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb
+index bdcd0e253..87911e02e 100644
+--- a/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb
+@@ -1,2 &#43;1,43 @@
+-require python-ptyprocess.inc
+&#43;SUMMARY = &quot;Run a subprocess in a pseudo terminal&quot;
+&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://ptyprocess.readthedocs.io/en/latest/">&quot;http://ptyprocess.readthedocs.io/en/latest/&quot;</a>
+&#43;SECTION = &quot;devel/python&quot;
+&#43;LICENSE = &quot;ISC&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=cfdcd51fa7d5808da4e74346ee394490">&quot;file://LICENSE;md5=cfdcd51fa7d5808da4e74346ee394490&quot;</a>
+&#43;
+&#43;SRCNAME = &quot;ptyprocess&quot;
+&#43;
+&#43;SRC_URI[md5sum] = &quot;37402d69f3b50913d4d483587bffad8f&quot;
+&#43;SRC_URI[sha256sum] = &quot;923f299cc5ad920c68f2bc0bc98b75b9f838b93b599941a6b63ddbc2476394c0&quot;
+&#43;
  inherit pypi setuptools3
- 
+&#43;
+&#43;UPSTREAM_CHECK_URI = <a class="moz-txt-link-rfc2396E" href="https://pypi.python.org/pypi/ptyprocess">&quot;https://pypi.python.org/pypi/ptyprocess&quot;</a>
+&#43;
+&#43;S = &quot;${WORKDIR}/${SRCNAME}-${PV}&quot;
+&#43;
+&#43;RDEPENDS_${PN} = &quot;\
+&#43;    ${PYTHON_PN}-core \
+&#43;    ${PYTHON_PN}-fcntl \
+&#43;    ${PYTHON_PN}-terminal \
+&#43;    ${PYTHON_PN}-resource \
+&#43;&quot;
+&#43;
+&#43;BBCLASSEXTEND = &quot;native nativesdk&quot;
+&#43;
+&#43;inherit ptest
+&#43;
+&#43;SRC_URI &#43;= &quot; \
+&#43;	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
+&#43;&quot;
+&#43;
+&#43;RDEPENDS_${PN}-ptest &#43;= &quot; \
+&#43;	${PYTHON_PN}-pytest \
+&#43;	${PYTHON_PN}-fcntl \
+&#43;	${PYTHON_PN}-terminal \
+&#43;	${PYTHON_PN}-resource \
+&#43;&quot;
+&#43;
+&#43;do_install_ptest() {
+&#43;	install -d ${D}${PTEST_PATH}/tests
+&#43;	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+&#43;}
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -244,4 +326,4 @@ index d9ece8dab..b4d20c2cd 100644
   </body>
 </html>
 
---------------882B95E51F84515191A88473--
+--------------98D813A990522DDBE3DC55F9--
