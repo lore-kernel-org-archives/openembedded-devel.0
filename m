@@ -1,91 +1,137 @@
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.web12.4885.1592688035011403261
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web12.11528.1592805607051459523
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Jun 2020 14:20:35 -0700
+ Sun, 21 Jun 2020 23:00:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=FJzq4S4d;
- spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f43.google.com with SMTP id dr13so14076796ejc.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Jun 2020 14:20:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=x23kHkn7+xp0/ekjKUgfbNrg+o9PyKoCPD2hblaECjQ=;
-        b=FJzq4S4dwenDzyltorGCvaOA5vkW7yDU4ATEed51K5scZ/otuos1FTWTxVH7pjsRWw
-         QobCK9RLi+mAqCgZJTEup2CxoHqwM3k3i9/Uzi5K3dotJ1v1RYeajhrl3njqnxWmbsjq
-         CxYwFxkc0yvPG0B5y8tMykMi6NXH+VAH4vF2axwX8kbKSiXN92xfADqq5TL+MSNY7OZ0
-         M6OUg5vvaWlClbS8/Q5nBYfIw1g6bVtyXtCGDJGzek/E8zhIhEbJVzNPVIXeLvb3KM+i
-         htNoLu/Lt8mFq14FZfTyzd+Ane+PBoIj+rt0hOGvKmdOCtnx/WIOesOnwsUs16EKFWOS
-         phog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=x23kHkn7+xp0/ekjKUgfbNrg+o9PyKoCPD2hblaECjQ=;
-        b=lanDOxJ3lsPue4NTCExnESSeZOmGwMV2wkp08hK6JpY/rAiC4MfPoa7Bf9SPHtOFHw
-         ANCcAW2EPBu6navl857jKDqXoIRWYzgr0EyBXL2irtjUOpITzNbMQIgVthMDKNOhk1rR
-         zKB6FyKdayduQvjwV1hV0r/AG9LPuLShMEdtm4JFilClEg6dqTl2eWdLZ7OQsDYoZwMU
-         3quBbB+Uwlf5dIJ8vdLwNPQ/UhN6pmXhFbPWN6Q0Mjl0GondRCdnU0Y6IsHWI975WIla
-         vAU9E13i6D0H7voAiy7U2q+q8d6ArMqJ7W/S89IuBEtvQYHkGi93xVbAxTNX2wqFI93e
-         O/Bg==
-X-Gm-Message-State: AOAM5328UTkipUi3csgoE2swzWY0L4p8VEtMZutuwnUkCgHTaYLK57fJ
-	yDz0b6ZVNZld6Wb9T2dsKilCYdDNj0teFA==
-X-Google-Smtp-Source: ABdhPJxKQgLjHvoUu/SAS5h41kdvKUdiM/0VzlEOLsc8tYGKpvCGmEIHW6ZWmRLmlQnC/bpx8QE6CA==
-X-Received: by 2002:a17:906:4716:: with SMTP id y22mr9608504ejq.125.1592688033376;
-        Sat, 20 Jun 2020 14:20:33 -0700 (PDT)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300f07f07a073c7ed84e0f8e2ef6e.dip0.t-ipconnect.de. [2003:f0:7f07:a073:c7ed:84e0:f8e2:ef6e])
-        by smtp.gmail.com with ESMTPSA id f10sm2928010edx.5.2020.06.20.14.20.32
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 20 Jun 2020 14:20:32 -0700 (PDT)
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 4/4] asio: upgrade 1.12.2 -> 1.16.1
-Date: Sat, 20 Jun 2020 23:20:22 +0200
-Message-Id: <20200620212022.82066-4-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200620212022.82066-1-schnitzeltony@gmail.com>
-References: <20200620212022.82066-1-schnitzeltony@gmail.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: kai.kang@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 05M5xIc2013253
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
+	Sun, 21 Jun 2020 22:59:39 -0700
+Received: from [128.224.162.131] (128.224.162.131) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Sun, 21 Jun 2020
+ 22:59:07 -0700
+Subject: Re: [oe] [meta-python2][PATCH] python: update RRECOMMENDS for multilib
+To: <openembedded-devel@lists.openembedded.org>
+References: <1617BDFF89AD69A8.6417@lists.openembedded.org>
+CC: <ticotimo@gmail.com>
+From: "kai" <kai.kang@windriver.com>
+Message-ID: <c50790d4-a665-678a-06a2-865d71852f32@windriver.com>
+Date: Mon, 22 Jun 2020 13:57:05 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <1617BDFF89AD69A8.6417@lists.openembedded.org>
+Content-Type: multipart/alternative;
+	boundary="------------65F6CF88A4CB5401A9B0BF2F"
+Content-Language: en-US
 
-License checksum was changed by change of copyright year
+--------------65F6CF88A4CB5401A9B0BF2F
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../asio/{asio_1.12.2.bb => asio_1.16.1.bb}                | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/asio/{asio_1.12.2.bb => asio_1.16.1.bb} (67%)
+On 6/12/20 4:16 PM, kai wrote:
+> From: Kai Kang <kai.kang@windriver.com>
+>
+> There is a qa issue because of oe-core commit b3fda05 which updates
+> multilib mechanism:
+>
+> | ERROR: lib32-python-2.7.18-r0 do_package: QA Issue: lib32-python package
+>      lib32-python-crypt - suspicious values 'openssl' in RRECOMMENDS [multilib]
+>
+> Prepend ${MLPREFIX} to RRECOMMENDS to fix the issue.
 
-diff --git a/meta-oe/recipes-support/asio/asio_1.12.2.bb b/meta-oe/recipes-support/asio/asio_1.16.1.bb
-similarity index 67%
-rename from meta-oe/recipes-support/asio/asio_1.12.2.bb
-rename to meta-oe/recipes-support/asio/asio_1.16.1.bb
-index 35f875fdc..f381d12fb 100644
---- a/meta-oe/recipes-support/asio/asio_1.12.2.bb
-+++ b/meta-oe/recipes-support/asio/asio_1.16.1.bb
-@@ -1,3 +1,4 @@
-+SUMMARY = "Asio is C++ library for network and low-level I/O programming"
- DESCRIPTION = "Asio is a cross-platform C++ library for network and low-level \
-         I/O programming that provides developers with a consistent asynchronous \
-         model using a modern C++ approach."
-@@ -14,10 +15,10 @@ inherit autotools
- 
- ALLOW_EMPTY_${PN} = "1"
- 
--LIC_FILES_CHKSUM = "file://COPYING;md5=3e73f311a3af69e6df275e8c3b1c09b5"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=de86c8210a433f72bd3cc98e797a6084"
- 
--SRC_URI[md5sum] = "312e53385e2daad10f08d57f91ad3431"
--SRC_URI[sha256sum] = "4e27dcb37456ba707570334b91f4798721111ed67b69915685eac141895779aa"
-+SRC_URI[md5sum] = "569f4b082c652ae8a8ad94fb470016f9"
-+SRC_URI[sha256sum] = "e271db76dbbcda9835ed1c9c94deb2ba3f4589c3ebcaa71d99ac694b8d62638c"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/asio/${BP}.tar.bz2"
- 
+Ping.
+
+
+>
+> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> ---
+>   recipes-devtools/python/python_2.7.18.bb | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/recipes-devtools/python/python_2.7.18.bb b/recipes-devtools/python/python_2.7.18.bb
+> index be7c6d2..0945cb3 100644
+> --- a/recipes-devtools/python/python_2.7.18.bb
+> +++ b/recipes-devtools/python/python_2.7.18.bb
+> @@ -153,7 +153,7 @@ PACKAGES_remove = "${PN}"
+>   # manual dependency additions
+>   RPROVIDES_${PN}-modules = "${PN}"
+>   RRECOMMENDS_${PN}-core_append_class-nativesdk = " nativesdk-python-modules"
+> -RRECOMMENDS_${PN}-crypt = "openssl"
+> +RRECOMMENDS_${PN}-crypt = "${MLPREFIX}openssl"
+>   
+>   # package libpython2
+>   PACKAGES =+ "lib${BPN}2"
+>
+> 
+
+
 -- 
-2.26.2
+Kai Kang
+Wind River Linux
 
+
+--------------65F6CF88A4CB5401A9B0BF2F
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <div class="moz-cite-prefix">On 6/12/20 4:16 PM, kai wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:1617BDFF89AD69A8.6417@lists.openembedded.org">
+      <pre class="moz-quote-pre" wrap="">From: Kai Kang <a class="moz-txt-link-rfc2396E" href="mailto:kai.kang@windriver.com">&lt;kai.kang@windriver.com&gt;</a>
+
+There is a qa issue because of oe-core commit b3fda05 which updates
+multilib mechanism:
+
+| ERROR: lib32-python-2.7.18-r0 do_package: QA Issue: lib32-python package
+    lib32-python-crypt - suspicious values 'openssl' in RRECOMMENDS [multilib]
+
+Prepend ${MLPREFIX} to RRECOMMENDS to fix the issue.</pre>
+    </blockquote>
+    <p>Ping.</p>
+    <p><br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:1617BDFF89AD69A8.6417@lists.openembedded.org">
+      <pre class="moz-quote-pre" wrap="">
+
+Signed-off-by: Kai Kang <a class="moz-txt-link-rfc2396E" href="mailto:kai.kang@windriver.com">&lt;kai.kang@windriver.com&gt;</a>
+---
+ recipes-devtools/python/python_2.7.18.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/recipes-devtools/python/python_2.7.18.bb b/recipes-devtools/python/python_2.7.18.bb
+index be7c6d2..0945cb3 100644
+--- a/recipes-devtools/python/python_2.7.18.bb
++++ b/recipes-devtools/python/python_2.7.18.bb
+@@ -153,7 +153,7 @@ PACKAGES_remove = "${PN}"
+ # manual dependency additions
+ RPROVIDES_${PN}-modules = "${PN}"
+ RRECOMMENDS_${PN}-core_append_class-nativesdk = " nativesdk-python-modules"
+-RRECOMMENDS_${PN}-crypt = "openssl"
++RRECOMMENDS_${PN}-crypt = "${MLPREFIX}openssl"
+ 
+ # package libpython2
+ PACKAGES =+ "lib${BPN}2"
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+    </blockquote>
+    <p><br>
+    </p>
+    <pre class="moz-signature" cols="72">-- 
+Kai Kang
+Wind River Linux</pre>
+  </body>
+</html>
+
+--------------65F6CF88A4CB5401A9B0BF2F--
