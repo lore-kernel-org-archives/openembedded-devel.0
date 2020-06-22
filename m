@@ -1,17 +1,17 @@
 Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.78])
- by mx.groups.io with SMTP id smtpd.web12.17819.1592833599559413546
+ by mx.groups.io with SMTP id smtpd.web11.17877.1592833621834192536
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Jun 2020 06:46:39 -0700
+ Mon, 22 Jun 2020 06:47:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=UMWXvoSy;
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=nN+8Njzt;
  spf=pass (domain: windriver.com, ip: 40.107.75.78, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TZHNRK9vjo/hc5jSQcW0/lrQQgAkouLXLIjhEHEKT37Wt+P6mITTsuZ7w4fkxmNdubnwy0vf+4d3URxfZjLapfRt+lqVxLwusWa7vpsbR096mg/cQRinQnzT0L+BkPo6Rwjhjc4SZWUW55UnFfaKG81MRSQiMl95p54EUsOqCT+hNlfqSy7D9mrw4kJIL6Uj7vNy272ISExlAh+MI7Bmrz/38AMwpJ5iWB7qJsTo672tnp0eOXXz+wIp8EBaOs2KKuHMDFPaJxI12teGaJPJVgOeRrC15/RhuY9SZwLt+FanrHrWtjIivRBUXA1lhmm/d43EQM6jX+agh7zPIzlQzw==
+ b=fOdMSHEdzBiciYk30QRxnFCRlu+pOCsB9vDyw5npiHV1fjCocVcIPDhfzIVgpkn1FufCNyEz0rR0U2tvjQiy48b8M6gOH+MD7kasF3PCCiLRG32EMdvTR0NK138bQfH3cqP/39/c0efNj4UaIgNywoXmsbyy+VgovNBB+EjLWIPiI9jP6wlQEVnZJPqfL6G4tEGMiEugSgsATbZABiE/vYQx642hsxC6ls0YKIfv9FRRzamAaW/fUX/mia5DWLYtt03Zr8ucHxeUfI4chzPPxaC/X974vyYPGagJSoHf5qTYvF0Lu5/s6YD6ocEK24DkoNv2VJsuk/24q9eYZR50Nw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RN6ssEmKupZwVB7DuCJlQ0SA3Hgx1U2FFg1koC6UkjQ=;
- b=dlCY/Fwp/21rauV3hkOhXu2kw5vwHQYgPVyGMUEwgBZ61tChXoJxRIIpsii/CiwfQRJDGnbse/WvokvYZtqbKE31inGak7VrwDOoU4dO13rANGuxxMEcOaO+i5CnEpsA8SmCpm+4jLIfgqXWvyZrFsj2siTzshuafnI0Dbzqi3rnboqDCfUj3ZycpH7hiwcHSwarMRW1DML+LWP1U5FS0/xTvNIq+eRwaDDwrhtfMH0Fx1NiSJB9e7BUfxD5ImQ+LAuGMNBveOTwdmw2i9Xh+hYRiDa8K2wMZc0iLH2qNbKxzEX2pgKanynVItsLBDOLB+wgWoWo5I09X1jCsxwlOw==
+ bh=tksF9pH4EownAaw9xm8eYv4qJE3kqyXdoBji1SpkIik=;
+ b=dpsCVf0Bo2l9nEJU/zt9qAKX+YTKTJvbSXakeVNltzBGDReuuu5Ux73yLt27yvtL5JAQBRLDXdKMMFuh5hWY2MjmhpFmOIkFzA+a41xu41D1j0ts8WenUM1Y3zKjI/wOUD1wT1y8H3/suKBH4VKmsxmJptyx9m6bUzC47PUJAyLX0ZXwWhC5NRz7suEqwRRRqvCSno5zfv9TEoZBwOZJA5G9l5nX8Kcgqs/6Acy7QhMNvG+4/LnhA7X28mN53hRLIua69Ntz9AeF8hPo+BOVRxDPkX4s9tau7MBZzE/Ila+qq2Nrfi7ctAcrBIaDTFRb892uqqdt/rvq5tH8JtrPLQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,183 +19,113 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RN6ssEmKupZwVB7DuCJlQ0SA3Hgx1U2FFg1koC6UkjQ=;
- b=UMWXvoSyNWuI9O6l2d+JWNgOI3xzkTkjnthDXRokFi4AXiqWy1iWlHpsZo6V/dfYTtPiJ8SAk6J5nmDY1oYNLI997UiBwCqCuDUYUL1KAoTu00pMcrzyHmUxeNybZSY/tJH1SrtA0JyYyLn1gJX8AnPx5e0E5o4w/RdLj47krmQ=
+ bh=tksF9pH4EownAaw9xm8eYv4qJE3kqyXdoBji1SpkIik=;
+ b=nN+8NjztzjrrFuKQ6cbNnQHIM2RzLO2U8H6gDltyGfH2NhNIv5AORPO4zx25P8VZ0qAuBEFwCem7ZRyaOFB+gk9vrf5iyehwy4rcnmmrR7KoIOv30Tb/UFPOCKQyInzwANN8Jh0/JRTVPMU5ZMXtJurCalO3BYreLRxNxfJe+K8=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN7PR11MB2546.namprd11.prod.outlook.com (2603:10b6:406:ad::13) with
+ by BN6PR11MB1779.namprd11.prod.outlook.com (2603:10b6:404:100::8) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.23; Mon, 22 Jun
- 2020 13:46:38 +0000
+ 2020 13:47:00 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3109.027; Mon, 22 Jun 2020
- 13:46:38 +0000
-Subject: Re: [oe] [meta-python][PATCH 7/7] python3-ptyprocess: Consolidate in a single file
+ 13:47:00 +0000
+Subject: Re: [oe] [meta-python][PATCH 1/3] python3-booleanpy: Upgrade 3.7 to 3.8
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200619081011.25051-1-leon.anavi@konsulko.com>
- <20200619081011.25051-7-leon.anavi@konsulko.com>
+References: <20200619094638.7116-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <a8316458-fc30-3f72-e8c9-77f9bb6d865b@windriver.com>
-Date: Mon, 22 Jun 2020 09:46:36 -0400
+Message-ID: <72852c35-acb4-0c3c-5f97-8a56087ef4de@windriver.com>
+Date: Mon, 22 Jun 2020 09:46:58 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
-In-Reply-To: <20200619081011.25051-7-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0062.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2e::31) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200619094638.7116-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0058.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2e::27) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0062.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22 via Frontend Transport; Mon, 22 Jun 2020 13:46:37 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0058.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::27) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.22 via Frontend Transport; Mon, 22 Jun 2020 13:46:59 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: d136cf20-7cde-43af-f58d-08d816b2af96
-X-MS-TrafficTypeDiagnostic: BN7PR11MB2546:
+X-MS-Office365-Filtering-Correlation-Id: d5d760a1-6080-4272-1faf-08d816b2bce4
+X-MS-TrafficTypeDiagnostic: BN6PR11MB1779:
 X-Microsoft-Antispam-PRVS: 
-	<BN7PR11MB2546F6205FA2EE30A2C646019F970@BN7PR11MB2546.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:159;
+	<BN6PR11MB177959281EB1E96EC4371D669F970@BN6PR11MB1779.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:3044;
 X-Forefront-PRVS: 0442E569BC
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	VJSETH8JemKt5atNE5Zn9WrMZNoXqZsPvDQ6X2m53P0fiZh4qHTnMMYrMJa1Cd687s1sl9CB6DV/72vgl8oifzYRtnlNHD6ctrv+OZ0C13wE06fw9qCseX3sRhLqvfeWA8IsP6VZtdplKKXrwdC8O+FlghC87hGNKV30mYywVDSR7VnVJGyfUpYRtO/T5jmabCAFOPiJDBj4wGKflkyPeIq1n3r/XwWU5jv4LDMtUpaseV0yMIUYmjtOeQXph8X2tMwoPRsLeQUdOPYxyppPRWKzSlGXXzcXBAx0rtt+Kixzpu7k89V/Tgb8FcIb8pqr4LEgQIAL6Naysf07yGHduiJdc9FJojiNOyfmfqwRM9Y/8nIOMTiTA+JEb55mF5hxsOODNzkdHXA+VuZda/if0Zi8NQ/Gw8/x2yt+m27ro/ItrICj9M8B1uXKmnfLtSn4wIFpO8mhAmiPheSrImhN+Q==
+	ubKJdDdtSZ9rxr1cApe6B2Wt5/3BclKJIwHGmsPLMyHqynhGsDCh80QPtDipncJ/z4tiXAOm+usH0YnFreMWl8T8pS1NWkV/b1i0eMCY6PHHCm7ZTTAARnh5yx2HyTQbWabSUiAsRpy807ujzGEY+N1NLPSqWpZgKjA0gvCTW5f/L1O6+usxUcspLQphaot0Y09bUnnsXPL8TLoMY4FIsjmfjfJTF0J+PytrGd8XCvffO6ayOAVKogFAKL1l8AHBsXoEl0AagbBMW23h+HnffFpAHa39k6BCIwex+9XC0VlnK8NvGAdLTObRsJexBri0a2S80XBcPyA0Am1JEixMq5WIw/5MRgK0JOo0lHRd0wSCpGxj5FfU7wtGFiNq7o3YgugSUH8bs8snr14P6lLV3o+r8x5x6VWXaE9RHKcpHt2F9OpXBhdniBvmvBsET4n5BQsUwo3Ds18YUij1TRpj1g==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(346002)(366004)(39850400004)(396003)(376002)(66556008)(36756003)(2906002)(53546011)(186003)(6486002)(166002)(16526019)(52116002)(31686004)(26005)(83380400001)(31696002)(5660300002)(86362001)(33964004)(16576012)(44832011)(316002)(66946007)(66476007)(8936002)(2616005)(956004)(478600001)(966005)(8676002)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(366004)(376002)(39850400004)(136003)(396003)(53546011)(44832011)(66476007)(66556008)(2906002)(83380400001)(26005)(86362001)(166002)(33964004)(8676002)(36756003)(8936002)(31696002)(6486002)(16576012)(5660300002)(966005)(478600001)(31686004)(66946007)(2616005)(186003)(16526019)(52116002)(316002)(956004)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	iXaGv3m9CDXLI1Qrg800GXUk8R4CdhVW/nB9ps+LBFGf+NsHeDTWbm4GXVuW+ILceyO0Bv1rITOQVoNDwZRW2cW3+YyGtPgp6NqO7rslBE/aGg8JnWZP4/ev/9B664drAigSuxOrN8UcIeHbO5GZQmZtaIezYcD3u96xO/+6n5vPXWOlCNFFOQIaZwkyyjA/0/6ykZi+VROA5vhdPSaPjgq78eaaaUMgk73RBaSpaNJZNMwffxDpB34es4evUCMrw/bAP6nHAavjROOp7JHj+7kpcM6bhvdGhl15rFypYhD2nEEu/icdZTpRUPK2nJHQB/IW9ugXrtsn+jqFfWbT7mVUpZMT+DH2L8t/x85DNEyF3m/RfKC9ClGhHqoz0nORGhwJjm03A77NoQHfLAp2wCX5geudluGciLE3Mo5qgzIw6N4E+eYjFfQJIqvGPTEQwJMZ9FsQxQQxujs2B0O+uiC88s+auS0Gb5r7fYqhc3k=
+	TeYZwuQ4DsRp3acqQwH9V3vWkNKLsnbJrNT5ePQM2xi9U+2wFXkAF0IrCXYbT2eTzvSXT1IYYd3zNBSEmOYIxZoPtprsinHF/rQ0YVarDjV5CCrZTyz2UKCqyNPGkD1XDonKMKh/LCz8fscXxcX9hhRKvwcpSwGJc9Saj/niix72Lf45CZjSyxOTP6jd4pplfjc4PdoRogmySV9ZLUkYT3Q3wO+9V5h+Hwf3JTpHX98ptfZIpHikitmRbOzOTYRUMnkyroVFgieXd80HuqrYp1IknHoS84Z1OcIARE/yy3SDOr81yMR5Xx0PTZvddDTSnsfRw9mYj/CzPO7DtNpFgf6adMRYWUPPpJzcSOLwGkzYZgmfCN7clC0N85yg0r30xnrbaxzfqd542Uw6dbziXyA4hBtuvf6vWZ8PSzzjIscN70M242Pwsp6b5+XighH4qiwEmAxO0z68sS7ts2TIODoBoGrlv6DF4apkVtz7Su8=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d136cf20-7cde-43af-f58d-08d816b2af96
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jun 2020 13:46:38.2179
+X-MS-Exchange-CrossTenant-Network-Message-Id: d5d760a1-6080-4272-1faf-08d816b2bce4
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jun 2020 13:47:00.4796
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7OgtlnAew+UnuQoyzneC5mmO2lCOIoJfK89uE+0LvmXi6sbdjTEPs+CZnS2S5NSECVCvtv79zE/qkDaT4YPhIatCf93fkXHd3nV9OMQ4GhM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PR11MB2546
+X-MS-Exchange-CrossTenant-UserPrincipalName: UQ/QOiPiV+gI5ZyAiATV4jm8q36smYM+SsMyZ1wWyz2wZ8PD4a/NPDMoXHiANm/iAq8/1mcVCKVaUArqQAxindjaZiOGyJqL334D0QmeKLo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1779
 Content-Type: multipart/alternative;
- boundary="------------98D813A990522DDBE3DC55F9"
+ boundary="------------71FFBCC5E0718196ED987AAD"
 Content-Language: en-US
 
---------------98D813A990522DDBE3DC55F9
+--------------71FFBCC5E0718196ED987AAD
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 6/19/20 4:10 AM, Leon Anavi wrote:
-> Consolidate inc and bb files into a single bb file.
+On 6/19/20 5:46 AM, Leon Anavi wrote:
+> Upgrade to release 3.8:
+>
+> - Add support for evaluation of boolean expression.
+> - Fix parsing of tokens that have a number as the first character.
+> - Restore proper Python 2 compatibility.
+> - Add pointers to Linux distro packages.
+>
+> Change LICENSE.txt md5 checksum because the year has been updated.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python-ptyprocess.inc              | 41 ------------------
->   .../python/python3-ptyprocess_0.6.0.bb        | 43 ++++++++++++++++++-
->   2 files changed, 42 insertions(+), 42 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python-ptyprocess.inc
+>   .../{python3-booleanpy_3.7.bb => python3-booleanpy_3.8.bb}  | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-booleanpy_3.7.bb => python3-booleanpy_3.8.bb} (55%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python-ptyprocess.inc b/meta-python/recipes-devtools/python/python-ptyprocess.inc
-> deleted file mode 100644
-> index a6dc21cf1..000000000
-> --- a/meta-python/recipes-devtools/python/python-ptyprocess.inc
-> +++ /dev/null
-> @@ -1,41 +0,0 @@
-> -SUMMARY = "Run a subprocess in a pseudo terminal"
-> -HOMEPAGE = "http://ptyprocess.readthedocs.io/en/latest/"
-> -SECTION = "devel/python"
-> -LICENSE = "ISC"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=cfdcd51fa7d5808da4e74346ee394490"
-> -
-> -SRCNAME = "ptyprocess"
-> -
-> -SRC_URI[md5sum] = "37402d69f3b50913d4d483587bffad8f"
-> -SRC_URI[sha256sum] = "923f299cc5ad920c68f2bc0bc98b75b9f838b93b599941a6b63ddbc2476394c0"
-> -
-> -UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/ptyprocess"
-> -
-> -S = "${WORKDIR}/${SRCNAME}-${PV}"
-> -
-> -RDEPENDS_${PN} = "\
-> -    ${PYTHON_PN}-core \
-> -    ${PYTHON_PN}-fcntl \
-> -    ${PYTHON_PN}-terminal \
-> -    ${PYTHON_PN}-resource \
-> -"
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> -
-> -inherit ptest
-> -
-> -SRC_URI += " \
-> -	file://run-ptest \
-> -"
-> -
-> -RDEPENDS_${PN}-ptest += " \
-> -	${PYTHON_PN}-pytest \
-> -	${PYTHON_PN}-fcntl \
-> -	${PYTHON_PN}-terminal \
-> -	${PYTHON_PN}-resource \
-> -"
-> -
-> -do_install_ptest() {
-> -	install -d ${D}${PTEST_PATH}/tests
-> -	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> -}
-> diff --git a/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb b/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb
-> index bdcd0e253..87911e02e 100644
-> --- a/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb
-> @@ -1,2 +1,43 @@
-> -require python-ptyprocess.inc
-> +SUMMARY = "Run a subprocess in a pseudo terminal"
-> +HOMEPAGE = "http://ptyprocess.readthedocs.io/en/latest/"
-> +SECTION = "devel/python"
-> +LICENSE = "ISC"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=cfdcd51fa7d5808da4e74346ee394490"
-> +
-> +SRCNAME = "ptyprocess"
-> +
-> +SRC_URI[md5sum] = "37402d69f3b50913d4d483587bffad8f"
-> +SRC_URI[sha256sum] = "923f299cc5ad920c68f2bc0bc98b75b9f838b93b599941a6b63ddbc2476394c0"
-> +
->   inherit pypi setuptools3
-> +
-> +UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/ptyprocess"
-> +
-> +S = "${WORKDIR}/${SRCNAME}-${PV}"
-> +
-> +RDEPENDS_${PN} = "\
-> +    ${PYTHON_PN}-core \
-> +    ${PYTHON_PN}-fcntl \
-> +    ${PYTHON_PN}-terminal \
-> +    ${PYTHON_PN}-resource \
-> +"
-> +
-> +BBCLASSEXTEND = "native nativesdk"
-> +
-> +inherit ptest
-> +
-> +SRC_URI += " \
-> +	file://run-ptest \
-> +"
-> +
-> +RDEPENDS_${PN}-ptest += " \
-> +	${PYTHON_PN}-pytest \
-> +	${PYTHON_PN}-fcntl \
-> +	${PYTHON_PN}-terminal \
-> +	${PYTHON_PN}-resource \
-> +"
-> +
-> +do_install_ptest() {
-> +	install -d ${D}${PTEST_PATH}/tests
-> +	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> +}
+> diff --git a/meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb b/meta-python/recipes-devtools/python/python3-booleanpy_3.8.bb
+> similarity index 55%
+> rename from meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb
+> rename to meta-python/recipes-devtools/python/python3-booleanpy_3.8.bb
+> index ebf7ba4e7..a1ce7eafc 100644
+> --- a/meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb
+> +++ b/meta-python/recipes-devtools/python/python3-booleanpy_3.8.bb
+> @@ -2,10 +2,10 @@ SUMMARY = "Define boolean algebras, create and parse boolean expressions and cre
+>   HOMEPAGE = "https://github.com/bastikr/boolean.py"
+>   
+>   LICENSE = "BSD-2-Clause"
+> -LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e319747a5eb94cddf646037c01ddba47"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9b58494d4f385978ca5a7ef4f6abca53"
+>   
+> -SRC_URI[md5sum] = "1189d115a38f84f5df743014926a9159"
+> -SRC_URI[sha256sum] = "bd19b412435611ecc712603d0fd7d0e280e24698e7a6e3d5f610473870c5dd1e"
+> +SRC_URI[md5sum] = "83ccc145ba74a585637124c8bc648333"
+> +SRC_URI[sha256sum] = "cc24e20f985d60cd4a3a5a1c0956dd12611159d32a75081dabd0c9ab981acaa4"
+>   
+>   PYPI_PACKAGE = "boolean.py"
+>   
 >
 > 
 
---------------98D813A990522DDBE3DC55F9
+--------------71FFBCC5E0718196ED987AAD
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -205,118 +135,49 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 6/19/20 4:10 AM, Leon Anavi wrote:<br>
+    <div class="moz-cite-prefix">On 6/19/20 5:46 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200619081011.25051-7-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Consolidate inc and bb files into a single bb file.
+    <blockquote type="cite" cite="mid:20200619094638.7116-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 3.8:
+
+- Add support for evaluation of boolean expression.
+- Fix parsing of tokens that have a number as the first character.
+- Restore proper Python 2 compatibility.
+- Add pointers to Linux distro packages.
+
+Change LICENSE.txt md5 checksum because the year has been updated.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200619081011.25051-7-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200619094638.7116-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python-ptyprocess.inc              | 41 ------------------
- .../python/python3-ptyprocess_0.6.0.bb        | 43 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
- 2 files changed, 42 insertions(&#43;), 42 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-ptyprocess.inc
+ .../{python3-booleanpy_3.7.bb =&gt; python3-booleanpy_3.8.bb}  | 6 &#43;&#43;&#43;---
+ 1 file changed, 3 insertions(&#43;), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-booleanpy_3.7.bb =&gt; python3-booleanpy_3.8.bb} (55%)
 
-diff --git a/meta-python/recipes-devtools/python/python-ptyprocess.inc b/meta-python/recipes-devtools/python/python-ptyprocess.inc
-deleted file mode 100644
-index a6dc21cf1..000000000
---- a/meta-python/recipes-devtools/python/python-ptyprocess.inc
-&#43;&#43;&#43; /dev/null
-@@ -1,41 &#43;0,0 @@
--SUMMARY = &quot;Run a subprocess in a pseudo terminal&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://ptyprocess.readthedocs.io/en/latest/">&quot;http://ptyprocess.readthedocs.io/en/latest/&quot;</a>
--SECTION = &quot;devel/python&quot;
--LICENSE = &quot;ISC&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=cfdcd51fa7d5808da4e74346ee394490">&quot;file://LICENSE;md5=cfdcd51fa7d5808da4e74346ee394490&quot;</a>
--
--SRCNAME = &quot;ptyprocess&quot;
--
--SRC_URI[md5sum] = &quot;37402d69f3b50913d4d483587bffad8f&quot;
--SRC_URI[sha256sum] = &quot;923f299cc5ad920c68f2bc0bc98b75b9f838b93b599941a6b63ddbc2476394c0&quot;
--
--UPSTREAM_CHECK_URI = <a class="moz-txt-link-rfc2396E" href="https://pypi.python.org/pypi/ptyprocess">&quot;https://pypi.python.org/pypi/ptyprocess&quot;</a>
--
--S = &quot;${WORKDIR}/${SRCNAME}-${PV}&quot;
--
--RDEPENDS_${PN} = &quot;\
--    ${PYTHON_PN}-core \
--    ${PYTHON_PN}-fcntl \
--    ${PYTHON_PN}-terminal \
--    ${PYTHON_PN}-resource \
--&quot;
--
--BBCLASSEXTEND = &quot;native nativesdk&quot;
--
--inherit ptest
--
--SRC_URI &#43;= &quot; \
--	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
--&quot;
--
--RDEPENDS_${PN}-ptest &#43;= &quot; \
--	${PYTHON_PN}-pytest \
--	${PYTHON_PN}-fcntl \
--	${PYTHON_PN}-terminal \
--	${PYTHON_PN}-resource \
--&quot;
--
--do_install_ptest() {
--	install -d ${D}${PTEST_PATH}/tests
--	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--}
-diff --git a/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb b/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb
-index bdcd0e253..87911e02e 100644
---- a/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-ptyprocess_0.6.0.bb
-@@ -1,2 &#43;1,43 @@
--require python-ptyprocess.inc
-&#43;SUMMARY = &quot;Run a subprocess in a pseudo terminal&quot;
-&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://ptyprocess.readthedocs.io/en/latest/">&quot;http://ptyprocess.readthedocs.io/en/latest/&quot;</a>
-&#43;SECTION = &quot;devel/python&quot;
-&#43;LICENSE = &quot;ISC&quot;
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=cfdcd51fa7d5808da4e74346ee394490">&quot;file://LICENSE;md5=cfdcd51fa7d5808da4e74346ee394490&quot;</a>
-&#43;
-&#43;SRCNAME = &quot;ptyprocess&quot;
-&#43;
-&#43;SRC_URI[md5sum] = &quot;37402d69f3b50913d4d483587bffad8f&quot;
-&#43;SRC_URI[sha256sum] = &quot;923f299cc5ad920c68f2bc0bc98b75b9f838b93b599941a6b63ddbc2476394c0&quot;
-&#43;
- inherit pypi setuptools3
-&#43;
-&#43;UPSTREAM_CHECK_URI = <a class="moz-txt-link-rfc2396E" href="https://pypi.python.org/pypi/ptyprocess">&quot;https://pypi.python.org/pypi/ptyprocess&quot;</a>
-&#43;
-&#43;S = &quot;${WORKDIR}/${SRCNAME}-${PV}&quot;
-&#43;
-&#43;RDEPENDS_${PN} = &quot;\
-&#43;    ${PYTHON_PN}-core \
-&#43;    ${PYTHON_PN}-fcntl \
-&#43;    ${PYTHON_PN}-terminal \
-&#43;    ${PYTHON_PN}-resource \
-&#43;&quot;
-&#43;
-&#43;BBCLASSEXTEND = &quot;native nativesdk&quot;
-&#43;
-&#43;inherit ptest
-&#43;
-&#43;SRC_URI &#43;= &quot; \
-&#43;	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
-&#43;&quot;
-&#43;
-&#43;RDEPENDS_${PN}-ptest &#43;= &quot; \
-&#43;	${PYTHON_PN}-pytest \
-&#43;	${PYTHON_PN}-fcntl \
-&#43;	${PYTHON_PN}-terminal \
-&#43;	${PYTHON_PN}-resource \
-&#43;&quot;
-&#43;
-&#43;do_install_ptest() {
-&#43;	install -d ${D}${PTEST_PATH}/tests
-&#43;	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-&#43;}
+diff --git a/meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb b/meta-python/recipes-devtools/python/python3-booleanpy_3.8.bb
+similarity index 55%
+rename from meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb
+rename to meta-python/recipes-devtools/python/python3-booleanpy_3.8.bb
+index ebf7ba4e7..a1ce7eafc 100644
+--- a/meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-booleanpy_3.8.bb
+@@ -2,10 &#43;2,10 @@ SUMMARY = &quot;Define boolean algebras, create and parse boolean expressions and cre
+ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/bastikr/boolean.py">&quot;https://github.com/bastikr/boolean.py&quot;</a>
+ 
+ LICENSE = &quot;BSD-2-Clause&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=e319747a5eb94cddf646037c01ddba47">&quot;file://LICENSE.txt;md5=e319747a5eb94cddf646037c01ddba47&quot;</a>
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=9b58494d4f385978ca5a7ef4f6abca53">&quot;file://LICENSE.txt;md5=9b58494d4f385978ca5a7ef4f6abca53&quot;</a>
+ 
+-SRC_URI[md5sum] = &quot;1189d115a38f84f5df743014926a9159&quot;
+-SRC_URI[sha256sum] = &quot;bd19b412435611ecc712603d0fd7d0e280e24698e7a6e3d5f610473870c5dd1e&quot;
+&#43;SRC_URI[md5sum] = &quot;83ccc145ba74a585637124c8bc648333&quot;
+&#43;SRC_URI[sha256sum] = &quot;cc24e20f985d60cd4a3a5a1c0956dd12611159d32a75081dabd0c9ab981acaa4&quot;
+ 
+ PYPI_PACKAGE = &quot;boolean.py&quot;
+ 
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -326,4 +187,4 @@ index bdcd0e253..87911e02e 100644
   </body>
 </html>
 
---------------98D813A990522DDBE3DC55F9--
+--------------71FFBCC5E0718196ED987AAD--
