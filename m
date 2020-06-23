@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.3650.1592905911342155086
+ by mx.groups.io with SMTP id smtpd.web10.3657.1592905912582322331
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Jun 2020 02:51:51 -0700
+ Tue, 23 Jun 2020 02:51:52 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=35806 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jnfan-0006Iq-Gp; Tue, 23 Jun 2020 12:51:50 +0300
+	id 1jnfap-0006Iq-2O; Tue, 23 Jun 2020 12:51:51 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 05/11] python3-more-itertools: Upgrade 8.3.0 -> 8.4.0
-Date: Tue, 23 Jun 2020 12:51:30 +0300
-Message-Id: <20200623095136.24854-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 06/11] python3-configparser: Upgrade 4.0.2 -> 5.0.0
+Date: Tue, 23 Jun 2020 12:51:31 +0300
+Message-Id: <20200623095136.24854-6-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200623095136.24854-1-leon.anavi@konsulko.com>
 References: <20200623095136.24854-1-leon.anavi@konsulko.com>
@@ -30,45 +30,40 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 8.4.0:
+Add toml-native as dependency. Upgrade to release 5.0.0:
 
-- New itertools:
-  :func:`mark_ends`
-  :func:`is_sorted`
-- Changes to existing itertools:
-  :func:`islice_extended` can now be used with real slices
-  The implementations for :func:`filter_except` and
-  :func:`map_except` were improved
-- Other changes:
-  Automated tests now enforce code style (using black)
-  The various signatures of :func:`islice_extended` and
-  :func:`numeric_range` now appear in the docs
-  The test configuration for mypy was updated
+- Require Python 3.6 or later. For Python 2.6-3.5, use
+  configparser < 5 (selection should be automatic when installed
+  using pip 9 from PyPI). The 4.x line remains supported for bug
+  fixes but will no longer be updated for future releases.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ore-itertools_8.3.0.bb => python3-more-itertools_8.4.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-more-itertools_8.3.0.bb => python3-more-itertools_8.4.0.bb} (77%)
+ ...-configparser_4.0.2.bb => python3-configparser_5.0.0.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-configparser_4.0.2.bb => python3-configparser_5.0.0.bb} (68%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-more-itertools_8.3.0.bb b/meta-python/recipes-devtools/python/python3-more-itertools_8.4.0.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-more-itertools_8.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-more-itertools_8.4.0.bb
-index 97393d050..f040b1a97 100644
---- a/meta-python/recipes-devtools/python/python3-more-itertools_8.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-more-itertools_8.4.0.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/erikrose/more-itertools"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3396ea30f9d21389d7857719816f83b5"
+diff --git a/meta-python/recipes-devtools/python/python3-configparser_4.0.2.bb b/meta-python/recipes-devtools/python/python3-configparser_5.0.0.bb
+similarity index 68%
+rename from meta-python/recipes-devtools/python/python3-configparser_4.0.2.bb
+rename to meta-python/recipes-devtools/python/python3-configparser_5.0.0.bb
+index 196660925..6b2af125f 100644
+--- a/meta-python/recipes-devtools/python/python3-configparser_4.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-configparser_5.0.0.bb
+@@ -5,10 +5,10 @@ LICENSE = "MIT"
  
--SRC_URI[md5sum] = "03dbc82ec1c4e814733d84abf79f43f0"
--SRC_URI[sha256sum] = "558bb897a2232f5e4f8e2399089e35aecb746e1f9191b6584a151647e89267be"
-+SRC_URI[md5sum] = "0912041c05148ed079984cff69af2e99"
-+SRC_URI[sha256sum] = "68c70cc7167bdf5c7c9d8f6954a7837089c6a36bf565383919bb595efb8a17e5"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=10;endline=10;md5=23f9ad5cad3d8cc0336e2a5d8a87e1fa"
  
- inherit pypi setuptools3 ptest
+-SRC_URI[md5sum] = "35926cc4b9133f1f9ca70a1fd2fdf237"
+-SRC_URI[sha256sum] = "c7d282687a5308319bf3d2e7706e575c635b0a470342641c93bea0ea3b5331df"
++SRC_URI[md5sum] = "558114054aa5610365df1b34d3fea349"
++SRC_URI[sha256sum] = "2ca44140ee259b5e3d8aaf47c79c36a7ab0d5e94d70bd4105c03ede7a20ea5a1"
  
+-DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
++DEPENDS += "${PYTHON_PN}-setuptools-scm-native ${PYTHON_PN}-toml-native"
+ inherit pypi setuptools3
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
