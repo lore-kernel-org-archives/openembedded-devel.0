@@ -1,97 +1,93 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web12.1595.1592893314439465001
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com [209.85.221.65])
+ by mx.groups.io with SMTP id smtpd.web10.3619.1592905718208276987
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Jun 2020 23:21:54 -0700
+ Tue, 23 Jun 2020 02:48:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: liwei.song@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 05N6L1HD028382
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 22 Jun 2020 23:21:43 -0700
-Received: from pek-lpggp3.wrs.com (128.224.153.76) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.40) with Microsoft SMTP Server id 14.3.487.0; Mon, 22 Jun 2020
- 23:21:30 -0700
-From: "LiweiSong" <liwei.song@windriver.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-CC: <liwei.song@windriver.com>
-Subject: [oe][meta-oe][PATCH] pm-graph: add flags support for RT kernel
-Date: Tue, 23 Jun 2020 14:21:27 +0800
-Message-ID: <20200623062127.37418-1-liwei.song@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=EcYRmvQ/;
+ spf=pass (domain: gmail.com, ip: 209.85.221.65, mailfrom: uvv.mail@gmail.com)
+Received: by mail-wr1-f65.google.com with SMTP id z13so8053143wrw.5
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Jun 2020 02:48:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=HJBqBIJ530EprYKlBpjCwdcbXZhs1kI04WJs/0kMhT4=;
+        b=EcYRmvQ//d6XJrRn2tgxuwIR457qF4/VoCnBd2Z1BgEif47PYxvXxBrwhpZ1+D6CSw
+         eRevl+BPVj4ulvmp2L2JuCe4/nhzecy7HewKrtP5pahkHXfDAHDV30FTjTxW4HF1qF71
+         KWjQCROg+Veiyj1TRwIJCamHn1exr5g5nmg6cycp1lfMysgiRsPqN6OWJ/ERe/pF8uJA
+         0G9zpc7298Hn0Uejkb0bAKTi3yUW8Nt6qe3joPsFXJRZW289wsFFeGWhwgMin5JZ4y15
+         w6MY2XGih7OduUXOgY34fHThKgcuEYJIvCEu3208OZ9OS3CLJLGgEE6Dn3Jcrf6kH0mI
+         A6hw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=HJBqBIJ530EprYKlBpjCwdcbXZhs1kI04WJs/0kMhT4=;
+        b=PFr0iho4a+h4ZPVTsVCvOzWgeGYalxB7HO/IQ2sfUwww7MZSKhUD7IexmByk8S80Ok
+         X57HN6r7I/NQm9At3cywKcQJJSS0HGSaFGVnGqdgvD/jAMFvi1+xL6jBelnQXFNzn8JP
+         vrEpvn6c9l1sC5m3B4eSLYN8D+q1y9bAqeSecHphL0mDCcUBhJlmH6ztOhipAQUUhve7
+         9PuzvFoYhL++Gtw89Q61y/iFK+An9X0RFW6KiBku0wx4hH/Ejw/J5ZOxNx+N5X7Akt9Q
+         H9v7VhZT9o81ftN1BdxAFxeCGb1bYx+j3OGl3olSHh/Ol6DOERM0+jqC5qXiQWL9JujD
+         QOkA==
+X-Gm-Message-State: AOAM531lljSp7FW/EbsUOb13Ehta7bDKc4NoDNffGNQfutbJiLhKcJSC
+	Xmep2z3tfJxB3r40+6kR+U2hcygeOhc=
+X-Google-Smtp-Source: ABdhPJw9hssji56DkOae2ZvTooA24ZBBJQqY1LSBfL8+1lBmDIhBvgSKt9itxlVMjBHorl+fx+l59w==
+X-Received: by 2002:a5d:4bc8:: with SMTP id l8mr8623974wrt.159.1592905716412;
+        Tue, 23 Jun 2020 02:48:36 -0700 (PDT)
+Return-Path: <uvv.mail@gmail.com>
+Received: from localhost.localdomain (dslb-002-205-007-033.002.205.pools.vodafone-ip.de. [2.205.7.33])
+        by smtp.gmail.com with ESMTPSA id 1sm2876222wmf.21.2020.06.23.02.48.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 23 Jun 2020 02:48:35 -0700 (PDT)
+From: "Vyacheslav Yurkov" <uvv.mail@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+Subject: [meta-java][PATCH] jlex: set unique file name for download
+Date: Tue, 23 Jun 2020 11:48:25 +0200
+Message-Id: <20200623094825.33289-1-uvv.mail@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-with PREEMPT_RT enabled in kernel, ftrace have a different
-falgs compare with standard kernel. Add supported for
-RT kernel ftrace flags format.
+From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
 
-Signed-off-by: Liwei Song <liwei.song@windriver.com>
+Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
 ---
- ...d-support-for-RT-kernel-ftrace-flags.patch | 42 +++++++++++++++++++
- .../recipes-kernel/pm-graph/pm-graph_5.5.bb   |  1 +
- 2 files changed, 43 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/pm-graph/pm-graph/0001-sleepgraph-add-support-for-RT-kernel-ftrace-flags.patch
+ recipes-core/jlex/jlex_1.2.6.bb | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-sleepgraph-add-support-for-RT-kernel-ftrace-flags.patch b/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-sleepgraph-add-support-for-RT-kernel-ftrace-flags.patch
-new file mode 100644
-index 000000000000..f7f8bc06871d
---- /dev/null
-+++ b/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-sleepgraph-add-support-for-RT-kernel-ftrace-flags.patch
-@@ -0,0 +1,42 @@
-+From 47a1db21f6c5d17c94c58c3fe0dcce35c623dbf4 Mon Sep 17 00:00:00 2001
-+From: Liwei Song <liwei.song@windriver.com>
-+Date: Tue, 23 Jun 2020 04:47:20 +0000
-+Subject: [PATCH] sleepgraph: add support for RT kernel ftrace flags
+diff --git a/recipes-core/jlex/jlex_1.2.6.bb b/recipes-core/jlex/jlex_1.2.6.bb
+index b8f9ffb..3c14e4c 100644
+--- a/recipes-core/jlex/jlex_1.2.6.bb
++++ b/recipes-core/jlex/jlex_1.2.6.bb
+@@ -1,7 +1,9 @@
+ SUMMARY = "Lexical analyzer generator for Java"
+ AUTHOR = "Elliot Berk, A. Appel, C. Scott Ananian"
 +
-+with PREEMPT_RT enabled in kernel, ftrace have a different
-+flags format:
-+
-+                   _-----=> irqs-off
-+                  / _----=> need-resched
-+                 | / _----=> need-resched
-+                 || / _---=> hardirq/softirq
-+                 ||| / _--=> preempt-depth
-+                 ||||/     delay
-+TASK-PID   CPU#  |||||   TIMESTAMP  FUNCTION
-+   | |       |   |||||      |         |
-+
-+add support for this.
-+
-+Upstream-Status: Submitted [https://github.com/intel/pm-graph/pull/18]
-+
-+Signed-off-by: Liwei Song <liwei.song@windriver.com>
-+---
-+ sleepgraph.py | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/sleepgraph.py b/sleepgraph.py
-+index cfed8e09e0e6..561f165cf9be 100755
-+--- a/sleepgraph.py
-++++ b/sleepgraph.py
-+@@ -2689,7 +2689,7 @@ class TestProps:
-+ 		'[ +!#\*@$]*(?P<dur>[0-9\.]*) .*\|  (?P<msg>.*)'
-+ 	ftrace_line_fmt_nop = \
-+ 		' *(?P<proc>.*)-(?P<pid>[0-9]*) *\[(?P<cpu>[0-9]*)\] *'+\
-+-		'(?P<flags>.{4}) *(?P<time>[0-9\.]*): *'+\
-++		'(?P<flags>.{4,7}) *(?P<time>[0-9\.]*): *'+\
-+ 		'(?P<msg>.*)'
-+ 	def __init__(self):
-+ 		self.stamp = ''
-+-- 
-+2.24.1
-+
-diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.5.bb b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.5.bb
-index a1378866ad47..4526eeed3fe6 100644
---- a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.5.bb
-+++ b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.5.bb
-@@ -9,6 +9,7 @@ SRCREV = "cf59527dc24fdd2f314ae4dcaeb3d68a117988f6"
- SRC_URI = "git://github.com/intel/pm-graph.git \
-            file://0001-Makefile-fix-multilib-build-failure.patch \
-            file://0001-sleepgraph.py-use-python3.patch \
-+           file://0001-sleepgraph-add-support-for-RT-kernel-ftrace-flags.patch \
- "
- S = "${WORKDIR}/git"
++JLEX_MAIN_FILENAME = "jlex-${PV}-Main.java"
+ LICENSE = "JLEX"
+-LIC_FILES_CHKSUM = "file://Main.java;beginline=148;endline=166;md5=9bf4a6a951053991db64f9d7330d648a"
++LIC_FILES_CHKSUM = "file://${JLEX_MAIN_FILENAME};beginline=148;endline=166;md5=9bf4a6a951053991db64f9d7330d648a"
+ 
+ PACKAGE_ARCH = "${TUNE_PKGARCH}"
+ 
+@@ -10,7 +12,7 @@ RDEPENDS_${PN}_class-native = ""
+ 
+ inherit java-library
+ 
+-SRC_URI = "http://www.cs.princeton.edu/~appel/modern/java/JLex/Archive/${PV}/Main.java \
++SRC_URI = "http://www.cs.princeton.edu/~appel/modern/java/JLex/Archive/${PV}/Main.java;downloadfilename=${JLEX_MAIN_FILENAME} \
+            file://jlex \
+           "
+ 
+@@ -26,6 +28,7 @@ do_configure() {
+ 
+ do_compile() {
+ 	mkdir -p build
++	cp ${JLEX_MAIN_FILENAME} Main.java
+ 
+ 	javac -d build Main.java
  
 -- 
-2.17.1
+2.25.1
 
