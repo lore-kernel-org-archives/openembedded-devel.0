@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.3657.1592905912582322331
+ by mx.groups.io with SMTP id smtpd.web12.3723.1592905913695306558
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Jun 2020 02:51:52 -0700
+ Tue, 23 Jun 2020 02:51:54 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=35806 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jnfap-0006Iq-2O; Tue, 23 Jun 2020 12:51:51 +0300
+	id 1jnfaq-0006Iq-6c; Tue, 23 Jun 2020 12:51:52 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 06/11] python3-configparser: Upgrade 4.0.2 -> 5.0.0
-Date: Tue, 23 Jun 2020 12:51:31 +0300
-Message-Id: <20200623095136.24854-6-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 07/11] python3-pytest-timeout: Upgrade 1.3.4 -> 1.4.1
+Date: Tue, 23 Jun 2020 12:51:32 +0300
+Message-Id: <20200623095136.24854-7-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200623095136.24854-1-leon.anavi@konsulko.com>
 References: <20200623095136.24854-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=0.0
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,40 +30,35 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Add toml-native as dependency. Upgrade to release 5.0.0:
+Upgrade to release 1.4.1:
 
-- Require Python 3.6 or later. For Python 2.6-3.5, use
-  configparser < 5 (selection should be automatic when installed
-  using pip 9 from PyPI). The 4.x line remains supported for bug
-  fixes but will no longer be updated for future releases.
+- Fix coverage compatibility which was broken by 1.4.0.
+- Better detection of when we are debugging.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...-configparser_4.0.2.bb => python3-configparser_5.0.0.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-configparser_4.0.2.bb => python3-configparser_5.0.0.bb} (68%)
+ ...ytest-timeout_1.3.4.bb => python3-pytest-timeout_1.4.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pytest-timeout_1.3.4.bb => python3-pytest-timeout_1.4.1.bb} (67%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-configparser_4.0.2.bb b/meta-python/recipes-devtools/python/python3-configparser_5.0.0.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-configparser_4.0.2.bb
-rename to meta-python/recipes-devtools/python/python3-configparser_5.0.0.bb
-index 196660925..6b2af125f 100644
---- a/meta-python/recipes-devtools/python/python3-configparser_4.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-configparser_5.0.0.bb
-@@ -5,10 +5,10 @@ LICENSE = "MIT"
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-timeout_1.3.4.bb b/meta-python/recipes-devtools/python/python3-pytest-timeout_1.4.1.bb
+similarity index 67%
+rename from meta-python/recipes-devtools/python/python3-pytest-timeout_1.3.4.bb
+rename to meta-python/recipes-devtools/python/python3-pytest-timeout_1.4.1.bb
+index a359969ed..506f4c065 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest-timeout_1.3.4.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest-timeout_1.4.1.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d8048cd156eda3df2e7f111b0ae9ceff"
  
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=10;endline=10;md5=23f9ad5cad3d8cc0336e2a5d8a87e1fa"
+ PYPI_PACKAGE = "pytest-timeout"
  
--SRC_URI[md5sum] = "35926cc4b9133f1f9ca70a1fd2fdf237"
--SRC_URI[sha256sum] = "c7d282687a5308319bf3d2e7706e575c635b0a470342641c93bea0ea3b5331df"
-+SRC_URI[md5sum] = "558114054aa5610365df1b34d3fea349"
-+SRC_URI[sha256sum] = "2ca44140ee259b5e3d8aaf47c79c36a7ab0d5e94d70bd4105c03ede7a20ea5a1"
+-SRC_URI[md5sum] = "1594762ae77ed7c6c2727aa8b4aa8bfb"
+-SRC_URI[sha256sum] = "80faa19cd245a42b87a51699d640c00d937c02b749052bfca6bae8bdbe12c48e"
++SRC_URI[md5sum] = "c458dd7d417a5f2dbae0f1f6073845f7"
++SRC_URI[sha256sum] = "6d0fb4ce74cebb81be252e4e0d9c2a91f30270b33208cfa0f1da6eed9abf18ac"
  
--DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
-+DEPENDS += "${PYTHON_PN}-setuptools-scm-native ${PYTHON_PN}-toml-native"
  inherit pypi setuptools3
  
- BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
