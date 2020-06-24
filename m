@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.15906.1593011822760545300
+ by mx.groups.io with SMTP id smtpd.web12.16001.1593011824309056139
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Jun 2020 08:17:03 -0700
+ Wed, 24 Jun 2020 08:17:04 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=53538 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jo795-00035d-1x; Wed, 24 Jun 2020 18:17:03 +0300
+	id 1jo796-00035d-O8; Wed, 24 Jun 2020 18:17:05 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 08/10] python3-license-expression: Consolidate in a single file
-Date: Wed, 24 Jun 2020 18:16:26 +0300
-Message-Id: <20200624151628.547-8-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 09/10] python3-license-expression: Upgrade 1.0 -> 1.2
+Date: Wed, 24 Jun 2020 18:16:27 +0300
+Message-Id: <20200624151628.547-9-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200624151628.547-1-leon.anavi@konsulko.com>
 References: <20200624151628.547-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.7
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,86 +30,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Consolidate inc and bb files into a single bb file.
+Upgrade to release 1.2:
+
+- Add ability to render WITH expression wrapped in parenthesis
+- Fix anomalous backslashes in strings
+- Update the thirdparty directory structure
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python-license-expression.inc      | 29 -----------------
- .../python/python3-license-expression_1.0.bb  | 31 +++++++++++++++++--
- 2 files changed, 29 insertions(+), 31 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-license-expression.inc
+ ...se-expression_1.0.bb => python3-license-expression_1.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-license-expression_1.0.bb => python3-license-expression_1.2.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python-license-expression.inc b/meta-python/recipes-devtools/python/python-license-expression.inc
-deleted file mode 100644
-index add25810d..000000000
---- a/meta-python/recipes-devtools/python/python-license-expression.inc
-+++ /dev/null
-@@ -1,29 +0,0 @@
--SUMMARY = "Utility library to parse, compare, simplify and normalize license expressions"
--HOMEPAGE = "https://github.com/nexB/license-expression"
--
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://apache-2.0.LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
--
+diff --git a/meta-python/recipes-devtools/python/python3-license-expression_1.0.bb b/meta-python/recipes-devtools/python/python3-license-expression_1.2.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-license-expression_1.0.bb
+rename to meta-python/recipes-devtools/python/python3-license-expression_1.2.bb
+index b1c38e95d..c033bd352 100644
+--- a/meta-python/recipes-devtools/python/python3-license-expression_1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-license-expression_1.2.bb
+@@ -4,8 +4,8 @@ HOMEPAGE = "https://github.com/nexB/license-expression"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://apache-2.0.LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
+ 
 -SRC_URI[md5sum] = "81477f779099f55071c6a7b88a29bb01"
 -SRC_URI[sha256sum] = "8aaa455c5b97c4f2174090178b19792b2a1c620e80591aafd4e0a99b713f9e8d"
--
--inherit pypi ptest
--
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-booleanpy \
--    "
--
--BBCLASSEXTEND = "native nativesdk"
--
--SRC_URI += " \
--	file://run-ptest \
--"
--
--RDEPENDS_${PN}-ptest += " \
--	${PYTHON_PN}-pytest \
--"
--
--do_install_ptest() {
--	install -d ${D}${PTEST_PATH}/tests
--	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--}
-diff --git a/meta-python/recipes-devtools/python/python3-license-expression_1.0.bb b/meta-python/recipes-devtools/python/python3-license-expression_1.0.bb
-index 10a702ca4..b1c38e95d 100644
---- a/meta-python/recipes-devtools/python/python3-license-expression_1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-license-expression_1.0.bb
-@@ -1,2 +1,29 @@
--inherit setuptools3
--require python-license-expression.inc
-+SUMMARY = "Utility library to parse, compare, simplify and normalize license expressions"
-+HOMEPAGE = "https://github.com/nexB/license-expression"
-+
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://apache-2.0.LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
-+
-+SRC_URI[md5sum] = "81477f779099f55071c6a7b88a29bb01"
-+SRC_URI[sha256sum] = "8aaa455c5b97c4f2174090178b19792b2a1c620e80591aafd4e0a99b713f9e8d"
-+
-+inherit pypi ptest setuptools3
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-booleanpy \
-+    "
-+
-+BBCLASSEXTEND = "native nativesdk"
-+
-+SRC_URI += " \
-+	file://run-ptest \
-+"
-+
-+RDEPENDS_${PN}-ptest += " \
-+	${PYTHON_PN}-pytest \
-+"
-+
-+do_install_ptest() {
-+	install -d ${D}${PTEST_PATH}/tests
-+	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
++SRC_URI[md5sum] = "fd4cb295cc345be1071274cdbd81c969"
++SRC_URI[sha256sum] = "7960e1dfdf20d127e75ead931476f2b5c7556df05b117a73880b22ade17d1abc"
+ 
+ inherit pypi ptest setuptools3
+ 
 -- 
 2.17.1
 
