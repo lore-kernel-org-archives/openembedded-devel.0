@@ -1,22 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.15981.1593011802878911806
+ by mx.groups.io with SMTP id smtpd.web10.15899.1593011804027218288
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Jun 2020 08:16:43 -0700
+ Wed, 24 Jun 2020 08:16:44 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=53538 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jo78g-00035d-Tt; Wed, 24 Jun 2020 18:16:41 +0300
+	id 1jo78m-00035d-OO; Wed, 24 Jun 2020 18:16:45 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 01/10] python3-networkx: Consolidate in a single file
-Date: Wed, 24 Jun 2020 18:16:19 +0300
-Message-Id: <20200624151628.547-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 02/10] python3-netifaces: Consolidate in a single file
+Date: Wed, 24 Jun 2020 18:16:20 +0300
+Message-Id: <20200624151628.547-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-1.0
+In-Reply-To: <20200624151628.547-1-leon.anavi@konsulko.com>
+References: <20200624151628.547-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.7
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -28,51 +30,48 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Consolidate inc and bb files into a single bb file. Add
-a HOMEPAGE.
+Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python-networkx.inc       |  8 --------
- .../recipes-devtools/python/python3-networkx_2.4.bb   | 11 ++++++++---
- 2 files changed, 8 insertions(+), 11 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-networkx.inc
+ .../recipes-devtools/python/python-netifaces.inc     | 10 ----------
+ .../python/python3-netifaces_0.10.9.bb               | 12 ++++++++++--
+ 2 files changed, 10 insertions(+), 12 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-netifaces.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-networkx.inc b/meta-python/recipes-devtools/python/python-networkx.inc
+diff --git a/meta-python/recipes-devtools/python/python-netifaces.inc b/meta-python/recipes-devtools/python/python-netifaces.inc
 deleted file mode 100644
-index 4bca636dc..000000000
---- a/meta-python/recipes-devtools/python/python-networkx.inc
+index daccc4fba..000000000
+--- a/meta-python/recipes-devtools/python/python-netifaces.inc
 +++ /dev/null
-@@ -1,8 +0,0 @@
--DESCRIPTION = "Python package for creating and manipulating graphs and networks"
--LICENSE = "BSD-3-Clause"
+@@ -1,10 +0,0 @@
+-DESCRIPTION = "Portable network interface information for Python"
+-SECTION = "devel/python"
+-
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=a53cbc7cb75660694e138ba973c148df"
+-
+-SRC_URI[md5sum] = "de92cc322b4f56047c073f802ad77860"
+-SRC_URI[sha256sum] = "2dee9ffdd16292878336a58d04a20f0ffe95555465fee7c9bd23b3490ef2abf3"
 -
 -inherit pypi
--
--RDEPENDS_${PN} += "\
--                   ${PYTHON_PN}-decorator \
--                   "
-diff --git a/meta-python/recipes-devtools/python/python3-networkx_2.4.bb b/meta-python/recipes-devtools/python/python3-networkx_2.4.bb
-index efa82e21c..5708e35b5 100644
---- a/meta-python/recipes-devtools/python/python3-networkx_2.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-networkx_2.4.bb
-@@ -1,8 +1,13 @@
--require python-networkx.inc
--
-+DESCRIPTION = "Python package for creating and manipulating graphs and networks"
-+HOMEPAGE = "http://networkx.github.io/"
-+LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b68290ee1026b204170a23bbdb27a4fd"
- 
- SRC_URI[md5sum] = "63e3fdc9d3a46bcabc776acc5ea5fe48"
- SRC_URI[sha256sum] = "f8f4ff0b6f96e4f9b16af6b84622597b5334bf9cae8cf9b2e42e7985d5c95c64"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-netifaces_0.10.9.bb b/meta-python/recipes-devtools/python/python3-netifaces_0.10.9.bb
+index 69d5c674c..7edb7e7fb 100644
+--- a/meta-python/recipes-devtools/python/python3-netifaces_0.10.9.bb
++++ b/meta-python/recipes-devtools/python/python3-netifaces_0.10.9.bb
+@@ -1,2 +1,10 @@
+-require python-netifaces.inc
 -inherit setuptools3
-+inherit pypi setuptools3
++DESCRIPTION = "Portable network interface information for Python"
++SECTION = "devel/python"
 +
-+RDEPENDS_${PN} += "\
-+                   ${PYTHON_PN}-decorator \
-+                   "
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=a53cbc7cb75660694e138ba973c148df"
++
++SRC_URI[md5sum] = "de92cc322b4f56047c073f802ad77860"
++SRC_URI[sha256sum] = "2dee9ffdd16292878336a58d04a20f0ffe95555465fee7c9bd23b3490ef2abf3"
++
++inherit pypi setuptools3
 -- 
 2.17.1
 
