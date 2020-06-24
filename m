@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.15873.1593011817142975991
+ by mx.groups.io with SMTP id smtpd.web12.15995.1593011819031136579
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Jun 2020 08:16:57 -0700
+ Wed, 24 Jun 2020 08:16:59 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=53538 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jo78w-00035d-Hc; Wed, 24 Jun 2020 18:16:58 +0300
+	id 1jo791-00035d-Cj; Wed, 24 Jun 2020 18:17:00 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 05/10] python3-ndg-httpsclient: Consolidate in a single file
-Date: Wed, 24 Jun 2020 18:16:23 +0300
-Message-Id: <20200624151628.547-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 06/10] python3-lazy-object-proxy: Consolidate in a single file
+Date: Wed, 24 Jun 2020 18:16:24 +0300
+Message-Id: <20200624151628.547-6-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200624151628.547-1-leon.anavi@konsulko.com>
 References: <20200624151628.547-1-leon.anavi@konsulko.com>
@@ -31,82 +31,51 @@ X-Source-Args:
 X-Source-Dir: 
 
 Consolidate inc and bb files into a single bb file.
-Fix the HOMEPAGE to point to the GitHub repository.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python-ndg-httpsclient.inc         | 25 -----------------
- .../python/python3-ndg-httpsclient_0.5.1.bb   | 27 ++++++++++++++++++-
- 2 files changed, 26 insertions(+), 26 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-ndg-httpsclient.inc
+ .../python/python-lazy-object-proxy.inc            | 12 ------------
+ .../python/python3-lazy-object-proxy_1.4.3.bb      | 14 ++++++++++++--
+ 2 files changed, 12 insertions(+), 14 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-lazy-object-proxy.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-ndg-httpsclient.inc b/meta-python/recipes-devtools/python/python-ndg-httpsclient.inc
+diff --git a/meta-python/recipes-devtools/python/python-lazy-object-proxy.inc b/meta-python/recipes-devtools/python/python-lazy-object-proxy.inc
 deleted file mode 100644
-index bca58f764..000000000
---- a/meta-python/recipes-devtools/python/python-ndg-httpsclient.inc
+index bbbd66ce6..000000000
+--- a/meta-python/recipes-devtools/python/python-lazy-object-proxy.inc
 +++ /dev/null
-@@ -1,25 +0,0 @@
--DESCRIPTION = "Provides enhanced HTTPS support for httplib and urllib2 using PyOpenSSL"
--HOMEPAGE = "http://python-requests.org"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://MANIFEST.in;md5=ce22c0cd986d2de3f7073cd6b5523ae0"
+@@ -1,12 +0,0 @@
+-SUMMARY = "A fast and thorough lazy object proxy"
+-HOMEPAGE = "https://python-lazy-object-proxy.readthedocs.io/"
+-LICENSE = "BSD-2-Clause"
+-SECTION = "devel/python"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=9c5c2c74370826468065c5702b8a1fcf"
 -
--SRC_URI[md5sum] = "b0fc8ea38f87d2c1ab1ed79a95c078f9"
--SRC_URI[sha256sum] = "d72faed0376ab039736c2ba12e30695e2788c4aa569c9c3e3d72131de2592210"
+-DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
 -
--PYPI_PACKAGE = "ndg_httpsclient"
+-SRC_URI[md5sum] = "5c64c06affcd2a7c6ddc848af4280cca"
+-SRC_URI[sha256sum] = "f3900e8a5de27447acbf900b4750b0ddfd7ec1ea7fbaf11dfa911141bc522af0"
 -
--DEPENDS += " \
--    ${PYTHON_PN}-pyopenssl \
--    ${PYTHON_PN}-pyasn1 \
--"
--
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-datetime \
--    ${PYTHON_PN}-logging \
--    ${PYTHON_PN}-pyopenssl \
--    ${PYTHON_PN}-pyasn1 \
--"
--
--BBCLASSEXTEND = "native nativesdk"
--
--UPSTREAM_CHECK_REGEX = ""
-diff --git a/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.5.1.bb b/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.5.1.bb
-index 65a8c816f..23e1868c2 100644
---- a/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.5.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.5.1.bb
-@@ -1,5 +1,30 @@
-+DESCRIPTION = "Provides enhanced HTTPS support for httplib and urllib2 using PyOpenSSL"
-+HOMEPAGE = "https://github.com/cedadev/ndg_httpsclient/"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://MANIFEST.in;md5=ce22c0cd986d2de3f7073cd6b5523ae0"
+-inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.4.3.bb b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.4.3.bb
+index 150e12fd4..bd197adcb 100644
+--- a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.4.3.bb
++++ b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.4.3.bb
+@@ -1,2 +1,12 @@
+-inherit setuptools3
+-require python-lazy-object-proxy.inc
++SUMMARY = "A fast and thorough lazy object proxy"
++HOMEPAGE = "https://python-lazy-object-proxy.readthedocs.io/"
++LICENSE = "BSD-2-Clause"
++SECTION = "devel/python"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=9c5c2c74370826468065c5702b8a1fcf"
 +
-+SRC_URI[md5sum] = "b0fc8ea38f87d2c1ab1ed79a95c078f9"
-+SRC_URI[sha256sum] = "d72faed0376ab039736c2ba12e30695e2788c4aa569c9c3e3d72131de2592210"
++DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
 +
- inherit pypi setuptools3 update-alternatives
--require python-ndg-httpsclient.inc
++SRC_URI[md5sum] = "5c64c06affcd2a7c6ddc848af4280cca"
++SRC_URI[sha256sum] = "f3900e8a5de27447acbf900b4750b0ddfd7ec1ea7fbaf11dfa911141bc522af0"
 +
-+PYPI_PACKAGE = "ndg_httpsclient"
-+
-+DEPENDS += " \
-+    ${PYTHON_PN}-pyopenssl \
-+    ${PYTHON_PN}-pyasn1 \
-+"
-+
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-datetime \
-+    ${PYTHON_PN}-logging \
-+    ${PYTHON_PN}-pyopenssl \
-+    ${PYTHON_PN}-pyasn1 \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
-+
-+UPSTREAM_CHECK_REGEX = ""
- 
- ALTERNATIVE_${PN} = "ndg_httpclient"
- ALTERNATIVE_LINK_NAME[ndg_httpclient] = "${bindir}/ndg_httpclient"
++inherit pypi setuptools3
 -- 
 2.17.1
 
