@@ -1,59 +1,109 @@
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
- by mx.groups.io with SMTP id smtpd.web12.4458.1592962829218290112
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
+ by mx.groups.io with SMTP id smtpd.web12.7412.1592976217956437156
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Jun 2020 18:40:29 -0700
+ Tue, 23 Jun 2020 22:23:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: balister.org, ip: 216.168.135.166, mailfrom: philip@balister.org)
-Received: (qmail 12226 invoked by uid 1003); 24 Jun 2020 01:36:58 -0000
-Received: from unknown (HELO ?192.168.11.139?) (philip@opensdr.com@73.152.143.112)
-  by mail.geekisp.com with (ECDHE-RSA-AES128-GCM-SHA256 encrypted) SMTP; 24 Jun 2020 01:36:58 -0000
-To: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>,
- openembedded-core <openembedded-core@lists.openembedded.org>,
- openembedded-architecture
- <openembedded-architecture@lists.openembedded.org>,
- Yocto Project <yocto@yoctoproject.org>
-From: "Philip Balister" <philip@balister.org>
-Subject: OpenEmbedded Happy hour June 24 Noon EDT
-Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
- mQENBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
- HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
- rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
- 2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
- fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
- AAG0JVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz6JAT4EEwECACgCGyMG
- CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
- nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
- 3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
- YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
- 3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
- yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4Yxi5AQ0ETo83gQEIAPs+ZC0R
- gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
- GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
- uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
- LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
- gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAYkBJQQYAQIADwIbDAUC
- WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
- 1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
- ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
- icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
- ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
- 6eUfr0u7CwnEyqiQ
-Message-ID: <0b85c686-771f-2ba7-4713-7ae0b4ab2201@balister.org>
-Date: Tue, 23 Jun 2020 21:40:25 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=QI4Chlow;
+ spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: uvv.mail@gmail.com)
+Received: by mail-qk1-f195.google.com with SMTP id l188so786675qkf.10
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Jun 2020 22:23:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=a5SmkYO+J196LfU5WvoHMvM3F1/Bil+m5FW7cmvOoCw=;
+        b=QI4ChlowfIeGwTL/5pnYr6c2AkRIj/Nbka+Zi1Kg6wGXI5a/GedFVBI5pyYuxVDjeg
+         eUxWpbhFuntLfsT6ZrD34k3n/UIz2UuFpQzT/o25EwPEQPPHpAfo+nViXrR2LFJGTnDE
+         FLvhKbcI5u/2IGqqmsY2MQKbLyz2hHWLPnq8rxBLKnYUcKRddD9c7cB/qy1cE7oXz3Cp
+         KxRNiC3QH+UNge67DSFKUmCiQ3eg60WK0Q5AjaCmMv6JajdZgy1m3VWo/EiXzoEKi3pY
+         dPTZyV6u4RQfnu7Ov2ww12+/hbcSe0agWu+ea/PLFO6tGBnYkTjoWRbpSXwzwDU+ufqE
+         TZUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=a5SmkYO+J196LfU5WvoHMvM3F1/Bil+m5FW7cmvOoCw=;
+        b=X0lTfV310WHznRYPo5Lao2PaBZMeQFwK5sElBEsvqDEl9liymqa7D2zvDIzvOiAKww
+         sxTnrHofbqBgm6U3uvsdIYHbIyT/Q3VNiO6CjylAPgKOsooPDbhO4OCq6aJ4qY7ynrpB
+         NRCFHgAdjDvyS8b7gP/mzLeK2ygh9wBdmySdiXyV8zhqzsK391DIRkTTfZFgCEvkALcH
+         TSmoj4snmpYEIAo64HolTHncV9VSFwn/+Tx9P0jU364hLOfMLZ918fyPD/FNswqpuw2t
+         hT7jtgFYQI2m+aBaauA7uhXyVnVmdqB0ThVJCC2vVSLCZ1RA3LSv05VWwgkyZl69e4ha
+         HZWA==
+X-Gm-Message-State: AOAM532yjmdv4j1K+ntP1cLNpjtTRXFwKh6BEISiLLwQ6U0tSmDe/ufk
+	Kq1UvbD04cv66FAh3M35UV4=
+X-Google-Smtp-Source: ABdhPJyBXhC1nC8f90vY5nQMZG1KEllEitgQYmCUxkC21SDcCfCWnsVuP31sUxtBCrUmbqCRezZoyw==
+X-Received: by 2002:a37:90c3:: with SMTP id s186mr8833837qkd.354.1592976217106;
+        Tue, 23 Jun 2020 22:23:37 -0700 (PDT)
+Return-Path: <uvv.mail@gmail.com>
+Received: from Vyacheslavs-MacBook-Pro.local ([37.120.205.162])
+        by smtp.gmail.com with ESMTPSA id c21sm707626qtb.49.2020.06.23.22.23.35
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 23 Jun 2020 22:23:36 -0700 (PDT)
+Subject: Re: [oe] [meta-java][PATCH] icedtea7-native: set unique download file names
+To: Richard Leitner <richard.leitner@skidata.com>
+Cc: openembedded-devel@lists.openembedded.org,
+ Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+References: <20200623122341.34613-1-uvv.mail@gmail.com>
+ <20200623180806.GA52708@pcleri>
+From: "Vyacheslav Yurkov" <uvv.mail@gmail.com>
+Message-ID: <79a74ea2-dda2-bf50-c3c4-8a8f34151037@gmail.com>
+Date: Wed, 24 Jun 2020 07:23:33 +0200
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.9.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <20200623180806.GA52708@pcleri>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Sorry for the late notice. I figured out the calendar and added the item
-there and never announced anything. Moving forward, I' send dhort
-reminders and use the calendar to track scheduling.
+Hi Richards,
+Thanks for the quick review.
 
-See:
+The problem is that the whole file in general has tabs/spaces mixed, 
+even just withing EXTRA_OECONF declaration. It's also not clear to me 
+why two empty lines needed in it. In my patch I simply left indentation 
+as it was in original file. Do you think it would be better just to 
+change the whole EXTRA_OECONF to spaces?
 
-https://www.openembedded.org/wiki/Calendar
+Thanks,
+Vyacheslav
 
-Philip
+On 23.06.2020 20:08, Richard Leitner wrote:
+> Hi Vyacheslav,
+> thanks for your patch. Please find my comments inline.
+>
+> On Tue, Jun 23, 2020 at 02:23:41PM +0200, Vyacheslav Yurkov wrote:
+>> From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+> It would be great if you could describe the change in a few more words
+> here. Thanks!
+>
+>> Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+>> ---
+>>   recipes-core/icedtea/icedtea7-native.inc      | 14 +++----
+>>   .../icedtea/openjdk-7-release-03b147.inc      | 40 +++++++++++--------
+>>   2 files changed, 31 insertions(+), 23 deletions(-)
+>>
+>> diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
+>> index b0b9419..70738e7 100644
+>> --- a/recipes-core/icedtea/icedtea7-native.inc
+>> +++ b/recipes-core/icedtea/icedtea7-native.inc
+>> @@ -83,13 +83,13 @@ EXTRA_OECONF = "\
+>>   	--with-javac=${STAGING_BINDIR_NATIVE}/javac \
+>>   	--with-rhino=${STAGING_DATADIR_NATIVE}/java/rhino.jar \
+>>   	\
+>> -	--with-openjdk-src-zip=${DL_DIR}/${OPENJDK_FILE} \
+>> -        --with-hotspot-src-zip=${DL_DIR}/${HOTSPOT_FILE} \
+>> -        --with-corba-src-zip=${DL_DIR}/${CORBA_FILE} \
+>> -        --with-jaxp-src-zip=${DL_DIR}/${JAXP_FILE} \
+>> -        --with-jaxws-src-zip=${DL_DIR}/${JAXWS_FILE} \
+>> -        --with-jdk-src-zip=${DL_DIR}/${JDK_FILE} \
+>> -        --with-langtools-src-zip=${DL_DIR}/${LANGTOOLS_FILE} \
+>> +	--with-openjdk-src-zip=${DL_DIR}/${OPENJDK_FILE_DOWNLOAD} \
+> Looks like you have some whitespace issues here.
+>
+> Apart from that the patch looks good, therefore I'm looking forward to a
+> v2. Thanks!
+>
+> regards;rl
+>
