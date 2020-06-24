@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.15899.1593011804027218288
+ by mx.groups.io with SMTP id smtpd.web10.15900.1593011807511202308
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Jun 2020 08:16:44 -0700
+ Wed, 24 Jun 2020 08:16:47 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=53538 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jo78m-00035d-OO; Wed, 24 Jun 2020 18:16:45 +0300
+	id 1jo78q-00035d-8g; Wed, 24 Jun 2020 18:16:48 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 02/10] python3-netifaces: Consolidate in a single file
-Date: Wed, 24 Jun 2020 18:16:20 +0300
-Message-Id: <20200624151628.547-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 03/10] python3-netaddr: Consolidate in a single file
+Date: Wed, 24 Jun 2020 18:16:21 +0300
+Message-Id: <20200624151628.547-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200624151628.547-1-leon.anavi@konsulko.com>
 References: <20200624151628.547-1-leon.anavi@konsulko.com>
@@ -34,44 +34,50 @@ Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python-netifaces.inc     | 10 ----------
- .../python/python3-netifaces_0.10.9.bb               | 12 ++++++++++--
- 2 files changed, 10 insertions(+), 12 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-netifaces.inc
+ .../recipes-devtools/python/python-netaddr.inc    | 13 -------------
+ .../python/python3-netaddr_0.7.19.bb              | 15 +++++++++++++--
+ 2 files changed, 13 insertions(+), 15 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-netaddr.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-netifaces.inc b/meta-python/recipes-devtools/python/python-netifaces.inc
+diff --git a/meta-python/recipes-devtools/python/python-netaddr.inc b/meta-python/recipes-devtools/python/python-netaddr.inc
 deleted file mode 100644
-index daccc4fba..000000000
---- a/meta-python/recipes-devtools/python/python-netifaces.inc
+index bea9be674..000000000
+--- a/meta-python/recipes-devtools/python/python-netaddr.inc
 +++ /dev/null
-@@ -1,10 +0,0 @@
--DESCRIPTION = "Portable network interface information for Python"
--SECTION = "devel/python"
+@@ -1,13 +0,0 @@
+-SUMMARY = "A network address manipulation library for Python."
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=e6345d695ffe3776f68a56fe7962db44"
 -
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=a53cbc7cb75660694e138ba973c148df"
--
--SRC_URI[md5sum] = "de92cc322b4f56047c073f802ad77860"
--SRC_URI[sha256sum] = "2dee9ffdd16292878336a58d04a20f0ffe95555465fee7c9bd23b3490ef2abf3"
+-SRC_URI[md5sum] = "51019ef59c93f3979bcb37d3b8527e07"
+-SRC_URI[sha256sum] = "38aeec7cdd035081d3a4c306394b19d677623bf76fa0913f6695127c7753aefd"
 -
 -inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python3-netifaces_0.10.9.bb b/meta-python/recipes-devtools/python/python3-netifaces_0.10.9.bb
-index 69d5c674c..7edb7e7fb 100644
---- a/meta-python/recipes-devtools/python/python3-netifaces_0.10.9.bb
-+++ b/meta-python/recipes-devtools/python/python3-netifaces_0.10.9.bb
-@@ -1,2 +1,10 @@
--require python-netifaces.inc
+-
+-RDEPENDS_${PN} += " \
+-    ${PYTHON_PN}-pprint \
+-    ${PYTHON_PN}-xml \
+-"
+diff --git a/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb b/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb
+index 30416a4ff..75460caa7 100644
+--- a/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb
++++ b/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb
+@@ -1,2 +1,13 @@
+-require python-netaddr.inc
 -inherit setuptools3
-+DESCRIPTION = "Portable network interface information for Python"
-+SECTION = "devel/python"
++SUMMARY = "A network address manipulation library for Python."
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=e6345d695ffe3776f68a56fe7962db44"
 +
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=a53cbc7cb75660694e138ba973c148df"
-+
-+SRC_URI[md5sum] = "de92cc322b4f56047c073f802ad77860"
-+SRC_URI[sha256sum] = "2dee9ffdd16292878336a58d04a20f0ffe95555465fee7c9bd23b3490ef2abf3"
++SRC_URI[md5sum] = "51019ef59c93f3979bcb37d3b8527e07"
++SRC_URI[sha256sum] = "38aeec7cdd035081d3a4c306394b19d677623bf76fa0913f6695127c7753aefd"
 +
 +inherit pypi setuptools3
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-pprint \
++    ${PYTHON_PN}-xml \
++"
 -- 
 2.17.1
 
