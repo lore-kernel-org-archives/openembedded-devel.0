@@ -1,182 +1,147 @@
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.78])
- by mx.groups.io with SMTP id smtpd.web11.10331.1593091132916252963
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.web10.116.1593100904656646524
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Jun 2020 06:18:53 -0700
+ Thu, 25 Jun 2020 09:01:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Q6vcps5H;
- spf=pass (domain: windriver.com, ip: 40.107.94.78, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SOivXOjsLFVxpNLSdhHr72RJXs+0QMNRGGTasY9/BzkXDZl/7NNts+66Cqwc9Cby4f6BBc4s6B5yTtF3zMfN2MhO03YnHNvt8GD02/cYPRHCNV+nqu3ZL4NP6xZkDzlcDYUIDgX9C+PkjLASUdq4nPZM19ai9qtmvYR/nyxJNYzaalfsZQb25TMt6zrMSpF1gkI9/OrtV8yKVl8mvwj3ejZLmVObjHsLTc35RHs7DldYDoRa2oENcdcLFEKNnFn9AcnpmekFXKPkE5Z3RzTY0yO7DxTdZKYnZraMxSPyVU7g1hsELuD30L16SmYk/xUsOo+0t+QR35+LuU++Qgti2w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sDjvbe4DtLMWQFd1wpyVUa/k4AH4WsGvoClGaVU1Rlw=;
- b=C7v6bAsackLZu7uO6TySvGP9xTU2c6ngRYlFkLqQG1j4kbJBROWdmxFNtdUWUh2T272ceyT/nbz6I/NpYtliuNiCB7u0MCY/9HVHcEijyb+FQgxEZpojBKDMy71WOE5GpY09pqMFZ0DR2HJWhsiv9myZ0Ojr9bkufFdhBNJ/2G6nXsHFbZTF8IXWJajNnq78WSsQabie6pF4Eq2wR44+DgToKY5taEgOZS3z20zOAiPvizPA8IksFXQ8bJfIJkH3Svig92ERKfjKN+T6Nav/FNsFpq5bG9HoMCqsqKjNYYnMqy1B6NrxWHRbUrWTfU+5Yj95MNpBayrA0eI8dSM+OQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=SutmfUmI;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id x8so2079811plm.10
+        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2020 09:01:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sDjvbe4DtLMWQFd1wpyVUa/k4AH4WsGvoClGaVU1Rlw=;
- b=Q6vcps5HSnX2Kzw1iV7FBKN+nXWyc+WXfMEkYwwCF6yHuUVIqDqpJenrh7rw6KFgF/qzIeSrCL32W/RZcbfZ+5Ki+nqwj9KwzItzijjGz9hKkpfbvbfeSppLl/5p0DZ0kdbAQpN5+lsX7zGAKFxPUDNWfq3MOrny6X4Tfy2fbpE=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB1713.namprd11.prod.outlook.com (2603:10b6:404:3c::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.20; Thu, 25 Jun
- 2020 13:18:51 +0000
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3109.027; Thu, 25 Jun 2020
- 13:18:50 +0000
-Subject: Re: [oe] [meta-python][PATCH 11/11] python3-xxhash: Upgrade 1.4.3 -> 1.4.4
-To: Leon Anavi <leon.anavi@konsulko.com>,
+        d=gmail.com; s=20161025;
+        h=subject:to:references:from:autocrypt:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=c5bKA6t56B3aNZpmiQEhJTtnF3uEMuz4TjlcH9Guimc=;
+        b=SutmfUmIh833/lBv2dkQYArOBbHj41BDLb2fHHZNGi/qpXNC4/q6mtckq8H3Rqrzl4
+         PNjx5KSxtiAI2ivhk6KGiHcLbnl8pp8vEj8MCypVDFOdVdL4iX3DTdK+znpmKd6efdvQ
+         fAnwMiRnH3/MlHK2b0E3f4gUqTEcLAeGv/Qh9rY9HzZuofFYj2+eRd/mMUpmkDqZyusR
+         0PU9c4yaY3CjUDJQeKy0kRLSBf+8Ne7BUuXzLeSSpBoSzvs6fT7MsACAJdH7ivIlTe/u
+         bABwoAC6giFZxkApCbSRP7M7qh0w0Q52Iu37vItN1gJbfLZ8jWIsCAQ+nU3yB6ekBWO7
+         emOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
+         :date:user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=c5bKA6t56B3aNZpmiQEhJTtnF3uEMuz4TjlcH9Guimc=;
+        b=OlxC9Bh4jPxD9U5DFMBYTrYhrhrMNm746Sjm/bgvFqheUni9hUyw+P6KH7topoACaz
+         Zhqikp031aJhQnGZUJ9ituRZbBVrp+5785NAolWtguPOQJ6QgeCyFqHXgf2ienA24f8M
+         2+NybvNmrY8t1nTlg/JIvRevKS6A109N+WZ8WwbF99747G3/YlC1uOLv/2EkkLD/762p
+         TbiT2xrVao6C9v+gth0bbrqR+gko7g62T4WDK4JlDP3IwJ5h2+UMSpZXCugxXR4sqEtF
+         ednZ+MMcNdvRcdVtCLB33C4v8k+kKqikTENqno3qchq+LBefVj4zsOq5+Qkbyrw4ZdjG
+         5w1A==
+X-Gm-Message-State: AOAM530kYytvbxvUnsnaguTBSkVHLbWRx14KxA872lo6weQy5pMaNRsO
+	IdzqlB3BTwXgyN/GNqP11aiA2dg5D04=
+X-Google-Smtp-Source: ABdhPJy0kRuK7MTex4mVOq9+XMXZC9uKp/cks/zPG1msRhb8CNUlUj8Ie/Dc3SH+fSyn2B3pkFQkdg==
+X-Received: by 2002:a17:902:8c89:: with SMTP id t9mr23009351plo.306.1593100903419;
+        Thu, 25 Jun 2020 09:01:43 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:4e0::dedc? ([2601:646:9200:4e0::dedc])
+        by smtp.gmail.com with ESMTPSA id z24sm24134065pfk.29.2020.06.25.09.01.42
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 25 Jun 2020 09:01:42 -0700 (PDT)
+Subject: Re: [oe] [PATCH v2] Revert "packagegroup-xfce-base: add RDEPEND packagegroup-core-x11"
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200623095136.24854-1-leon.anavi@konsulko.com>
- <20200623095136.24854-11-leon.anavi@konsulko.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <1c1fe2fa-5775-15b1-dc31-ab43afff435d@windriver.com>
-Date: Thu, 25 Jun 2020 09:18:48 -0400
+References: <20200625064921.4060827-1-schnitzeltony@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Autocrypt: addr=raj.khem@gmail.com; keydata=
+ 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
+Message-ID: <2d898deb-9e9f-3c13-2775-1b5f663140ff@gmail.com>
+Date: Thu, 25 Jun 2020 09:01:42 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200623095136.24854-11-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0015.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::28)
- To BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
-Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0015.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.21 via Frontend Transport; Thu, 25 Jun 2020 13:18:50 +0000
-X-Originating-IP: [174.115.236.231]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 44bb2033-d0e0-42fe-6a8f-08d8190a4ce7
-X-MS-TrafficTypeDiagnostic: BN6PR11MB1713:
-X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB17131CE9AE681E922730F41D9F920@BN6PR11MB1713.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:88;
-X-Forefront-PRVS: 0445A82F82
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	XZXzMwvLbwGjgXHc70W2YPBzOhkhypKqdHBpKLCgbvSEN7yc800IWjSRJNOKTukpQYwah5oAEl0kSthEhkV85bQzyv/lJ9RRWroDGVRefbZl++t7q1mEKhH3kiDppEdZgCCPeabhlbdY+yWg1DgkvLL/rb1cSMkf7pclaCyMiDjOy6xhVe9+XVd6aKpxrnAEIBYPhxQDW/J7kqb89PdvHKwloaA7h6svkshgXlnpjJt812krWNhLcHsKuNVxevSSsUkw93unGQoliNnPxVHxglm9b5u52GgwtpvD1iXkn4UwrHrjeoZdVc8FzcKCqfm2ieNupXAOrQh5loj6W0GvKZL/YrREf7IghIPmVtttFmNsswJjQulh7J7U6RgZVbRjxxJiZxbj2VehSYYIqNyJ7Yc6v8WihjU5WK/wAIHtqrd3YpBUjWVVCmJnN9bLC0eIF4BiJg4ZWOuAGZZoTJu3JQ==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(366004)(376002)(396003)(136003)(39850400004)(478600001)(316002)(16576012)(966005)(86362001)(31696002)(36756003)(33964004)(956004)(44832011)(52116002)(2906002)(31686004)(2616005)(53546011)(186003)(16526019)(26005)(166002)(66946007)(66476007)(8676002)(83380400001)(5660300002)(66556008)(6486002)(8936002)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	1ZSRorKgh8RwsPL5/lqbRYSHSYLS/8p1fDGcZDepsrycxGeD7PvsgiHINX0k3I7CP7i6oWnnFPEceMCOklrcQlxy5HFsa0LJfO2XoWe80vF0OhgdTjrn0HfvbZUq/KIMfxj2s1J7LdH9g0vkB5Y/Y/vobG6eYPN8L1Ee9fZAQrvyMOnRPuYEy3iZ+OgudBvj7x0x3tZHbXJTe/cGVk6Fr4xBLuSUXkm5QQUPbVkwQP7hpoQKrFk7q8+CdkmfVzLjnqmpZleWW6mICLhH+iLcpyPG9Ty0afZvdSwhPU5oW0MjuH7w79+WAPzc8tOgtOUZvj4G8IzsfwkWU53CTVvp4HiqzKVItenVxsjGZV0sMQkJInCTRxWRQHN8yrW6HPbFZjgEFCTAOaiBieH7Igd/xVzL6Q60ow9o1maKaZ51h2cJR9OBvmaRVPMadiASyvZpqYwJHJMfGt/fjZ0KHr0J4A50HOe7LsSR24oDB/b7GkW68UcRJTBM6qY26IzOjyKM
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 44bb2033-d0e0-42fe-6a8f-08d8190a4ce7
-X-MS-Exchange-CrossTenant-AuthSource: BN6PR11MB0003.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2020 13:18:50.6436
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1PVbM/2ltR6fOFTyoujPFVEV+10t8TRJqTnTvNEbRCh6PIyqRT+5fSs4TnT77EHUxDtysTcjkMmDjbnDKScxE8x9/dbv0uiGebBb260OPzA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1713
-Content-Type: multipart/alternative;
- boundary="------------E6EE47A44DB4587D09E4FE7A"
+In-Reply-To: <20200625064921.4060827-1-schnitzeltony@gmail.com>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-
---------------E6EE47A44DB4587D09E4FE7A
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 
-On 6/23/20 5:51 AM, Leon Anavi wrote:
-> Upgrade to release 1.4.4:
->
-> - Upgrade xxHash to v0.7.3
-> - Stop using PEP393 deprecated APIs
-> - Use XXH(32|64)_canonicalFromHash to replace u2bytes and
->    ull2bytes
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   .../{python3-xxhash_1.4.3.bb => python3-xxhash_1.4.4.bb}      | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-xxhash_1.4.3.bb => python3-xxhash_1.4.4.bb} (75%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-xxhash_1.4.3.bb b/meta-python/recipes-devtools/python/python3-xxhash_1.4.4.bb
-> similarity index 75%
-> rename from meta-python/recipes-devtools/python/python3-xxhash_1.4.3.bb
-> rename to meta-python/recipes-devtools/python/python3-xxhash_1.4.4.bb
-> index c114a6c8b..97f4e358b 100644
-> --- a/meta-python/recipes-devtools/python/python3-xxhash_1.4.3.bb
-> +++ b/meta-python/recipes-devtools/python/python3-xxhash_1.4.4.bb
-> @@ -3,8 +3,8 @@ SECTION = "devel/python"
->   LICENSE = "BSD-2-Clause"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=5a8d76283514a1b7e6a414aba38629b5"
->   
-> -SRC_URI[md5sum] = "ce9cbbcc89620fd47a2468badd08dcf0"
-> -SRC_URI[sha256sum] = "8b6b1afe7731d7d9cbb0398b4a811ebb5e6be5c174f72c68abf81f919a435de9"
-> +SRC_URI[md5sum] = "0194cc926dd7676d27aba0f89da9798b"
-> +SRC_URI[sha256sum] = "7d6df9d217977d085b8abd74b61efa40405ac416f2d8bdacc40826bd5cb1b746"
->   
->   SRC_URI += " \
->       file://run-ptest \
->
+
+On 6/24/20 11:49 PM, Andreas Müller wrote:
+> packagegroup-core-x11 drags stuff not everybody needs e.g xserver-nodm-init and
+> that's not what everybody wants. packagegroup-core-x11 is something to add into
+> images.
 > 
+> This reverts commit 394567c0078c627642e7b80b722f147da5a6f376:
+> 
+>     packagegroup-xfce-base: add RDEPEND packagegroup-core-x11
+> 
+>     without packagegroup-core-x11, after boot target, and run
+>     startx, it will report error like:
+> 
+>     /usr/bin/startx: line 203: xauth: command not found
+> 
+>     xinit: unable to run server "/usr/bin/X": No such file or directory
+>     Use the -- option, or make sure that /usr/bin is in your path and
+>     that "/usr/bin/X" is a program or a link to the right type of server
+>     for your display.  Possible server names include:
 
---------------E6EE47A44DB4587D09E4FE7A
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
 
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 6/23/20 5:51 AM, Leon Anavi wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20200623095136.24854-11-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.4.4:
+will these issues resurface if we revert it ?
 
-- Upgrade xxHash to v0.7.3
-- Stop using PEP393 deprecated APIs
-- Use XXH(32|64)_canonicalFromHash to replace u2bytes and
-  ull2bytes
-
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200623095136.24854-11-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">
----
- .../{python3-xxhash_1.4.3.bb =&gt; python3-xxhash_1.4.4.bb}      | 4 &#43;&#43;--
- 1 file changed, 2 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-xxhash_1.4.3.bb =&gt; python3-xxhash_1.4.4.bb} (75%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-xxhash_1.4.3.bb b/meta-python/recipes-devtools/python/python3-xxhash_1.4.4.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-xxhash_1.4.3.bb
-rename to meta-python/recipes-devtools/python/python3-xxhash_1.4.4.bb
-index c114a6c8b..97f4e358b 100644
---- a/meta-python/recipes-devtools/python/python3-xxhash_1.4.3.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-xxhash_1.4.4.bb
-@@ -3,8 &#43;3,8 @@ SECTION = &quot;devel/python&quot;
- LICENSE = &quot;BSD-2-Clause&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=5a8d76283514a1b7e6a414aba38629b5">&quot;file://LICENSE;md5=5a8d76283514a1b7e6a414aba38629b5&quot;</a>
- 
--SRC_URI[md5sum] = &quot;ce9cbbcc89620fd47a2468badd08dcf0&quot;
--SRC_URI[sha256sum] = &quot;8b6b1afe7731d7d9cbb0398b4a811ebb5e6be5c174f72c68abf81f919a435de9&quot;
-&#43;SRC_URI[md5sum] = &quot;0194cc926dd7676d27aba0f89da9798b&quot;
-&#43;SRC_URI[sha256sum] = &quot;7d6df9d217977d085b8abd74b61efa40405ac416f2d8bdacc40826bd5cb1b746&quot;
- 
- SRC_URI &#43;= &quot; \
-     <a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------E6EE47A44DB4587D09E4FE7A--
+> 
+>         Xorg        Common X server for most displays
+>         Xvfb        Virtual frame buffer
+>         Xfake       kdrive-based virtual frame buffer
+>         Xnest       X server nested in a window on anot
+> 
+>     Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>     Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> 
+> Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+> ---
+> V1 -> V2:
+> * Add commit message of patch reverted
+> * Add Signed-off-by
+> 
+>  meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb | 1 -
+>  1 file changed, 1 deletion(-)
+> 
+> diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
+> index 6ddf8ee91..70ef909ef 100644
+> --- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
+> +++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
+> @@ -7,7 +7,6 @@ inherit packagegroup features_check
+>  REQUIRED_DISTRO_FEATURES = "x11"
+>  
+>  RDEPENDS_${PN} = " \
+> -    packagegroup-core-x11 \
+>      xfwm4 \
+>      xfce4-session \
+>      xfconf \
+> 
+> 
+> 
+> 
