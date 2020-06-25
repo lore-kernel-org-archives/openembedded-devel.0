@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.6714.1593076109991619621
+ by mx.groups.io with SMTP id smtpd.web10.6716.1593076111840340683
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Jun 2020 02:08:30 -0700
+ Thu, 25 Jun 2020 02:08:32 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=47184 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1joNrw-0005y7-GM; Thu, 25 Jun 2020 12:08:29 +0300
+	id 1joNry-0005y7-4P; Thu, 25 Jun 2020 12:08:30 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 07/12] python3-ruamel-yaml: Upgrade 0.16.5 0> 0.16.10
-Date: Thu, 25 Jun 2020 12:07:14 +0300
-Message-Id: <20200625090719.16068-7-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 08/12] python3-pandas: Upgrade 1.0.3 -> 1.0.5
+Date: Thu, 25 Jun 2020 12:07:15 +0300
+Message-Id: <20200625090719.16068-8-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200625090719.16068-1-leon.anavi@konsulko.com>
 References: <20200625090719.16068-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,53 +30,39 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.16.10:
+Upgrade to release 1.0.5:
 
-- updated image references in README to sourceforge
-- update requirements so that ruamel.yaml.clib is installed for
-  3.8, as it has become available
-- fix typchecking issue on TaggedScalar
-- fix error in dumping literal scalar in sequence with comments
-  before element
-- fix empty string mapping key roundtripping with preservation
-  of quotes as `? ''`
-- fix incorrect state setting in class constructor
-- adjust deprecation warning test for Hashable, as that no
-  longer warns
-
-The year in LICENSE has been updated and LIC_FILES_CHKSUM changed.
+- Fix regression in read_parquet() when reading from file-like
+  objects.
+- Fix regression in reading from public S3 buckets.
+- Fixed regression in replace() raising an AssertionError when
+  replacing values in an extension dtype with values of a
+  different dtype
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ruamel-yaml_0.16.5.bb => python3-ruamel-yaml_0.16.10.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-ruamel-yaml_0.16.5.bb => python3-ruamel-yaml_0.16.10.bb} (57%)
+ .../{python3-pandas_1.0.3.bb => python3-pandas_1.0.5.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pandas_1.0.3.bb => python3-pandas_1.0.5.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.5.bb b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.10.bb
-similarity index 57%
-rename from meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.5.bb
-rename to meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.10.bb
-index ba095648f..076721a09 100644
---- a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.10.bb
-@@ -2,14 +2,14 @@ SUMMARY = "YAML parser/emitter that supports roundtrip preservation of comments,
- AUTHOR = "Anthon van der Neut"
+diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.0.3.bb b/meta-python/recipes-devtools/python/python3-pandas_1.0.5.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-pandas_1.0.3.bb
+rename to meta-python/recipes-devtools/python/python3-pandas_1.0.5.bb
+index 099e035e1..d8db4cef3 100644
+--- a/meta-python/recipes-devtools/python/python3-pandas_1.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pandas_1.0.5.bb
+@@ -6,8 +6,8 @@ HOMEPAGE = "http://pandas.pydata.org/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ee0470f2de336c370a71c2f8d5e81c11"
  
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=caf8bd842440b537c044e131785a4666"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=60afc0a1bb0501c0c555cabe78bba022"
- 
- PYPI_PACKAGE = "ruamel.yaml"
+-SRC_URI[md5sum] = "a3ea90326c5b55944d369bef87740a72"
+-SRC_URI[sha256sum] = "32f42e322fb903d0e189a4c10b75ba70d90958cc4f66a1781ed027f1a1d14586"
++SRC_URI[md5sum] = "5183db713194e6fbc96c45f30a0d1311"
++SRC_URI[sha256sum] = "69c5d920a0b2a9838e677f78f4dde506b95ea8e4d30da25859db6469ded84fa8"
  
  inherit pypi setuptools3
  
--SRC_URI[md5sum] = "7d5a5b0a7621a1247b081cc8e4978354"
--SRC_URI[sha256sum] = "412a6f5cfdc0525dee6a27c08f5415c7fd832a7afcb7a0ed7319628aed23d408"
-+SRC_URI[md5sum] = "02774e7ed3273b3d8eee6c08326b91c4"
-+SRC_URI[sha256sum] = "099c644a778bf72ffa00524f78dd0b6476bca94a1da344130f4bf3381ce5b954"
- 
- do_install_prepend() {
-     export RUAMEL_NO_PIP_INSTALL_CHECK=1
 -- 
 2.17.1
 
