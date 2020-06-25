@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.6575.1593076104165489558
+ by mx.groups.io with SMTP id smtpd.web12.6528.1593076109351395635
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Jun 2020 02:08:24 -0700
+ Thu, 25 Jun 2020 02:08:29 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=47184 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1joNro-0005y7-P9; Thu, 25 Jun 2020 12:08:23 +0300
+	id 1joNrs-0005y7-2x; Thu, 25 Jun 2020 12:08:28 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 05/12] python3-pyexpect: Upgrade 1.0.19 -> 1.0.20
-Date: Thu, 25 Jun 2020 12:07:12 +0300
-Message-Id: <20200625090719.16068-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 06/12] python3-pyjks: Upgrade 19.0.0 -> 20.0.0
+Date: Thu, 25 Jun 2020 12:07:13 +0300
+Message-Id: <20200625090719.16068-6-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200625090719.16068-1-leon.anavi@konsulko.com>
 References: <20200625090719.16068-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
+X-OutGoing-Spam-Status: No, score=0.0
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,43 +30,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.0.20:
+Upgrade to release 20.0.0:
 
-- Support expectations on types that return different types than
-  bool on comparison.
-- Better documentation intro using the feedback I got for my talk
-  at berlin.python.pizza
-- Fix upload command and add some todos
-
-LIC_FILES_CHKSUM changed due to the recent modifications of
-README.md. The license remains the same.
+- Mirrors keytool support for keystores with empty passphrases
+- Add Python 3.7 and 3.8 to support matrix
+- Docs and examples fixes
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ython3-pyexpect_1.0.19.bb => python3-pyexpect_1.0.20.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pyexpect_1.0.19.bb => python3-pyexpect_1.0.20.bb} (52%)
+ .../{python3-pyjks_19.0.0.bb => python3-pyjks_20.0.0.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pyjks_19.0.0.bb => python3-pyjks_20.0.0.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb b/meta-python/recipes-devtools/python/python3-pyexpect_1.0.20.bb
-similarity index 52%
-rename from meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb
-rename to meta-python/recipes-devtools/python/python3-pyexpect_1.0.20.bb
-index ea3c018af..e09fec01d 100644
---- a/meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyexpect_1.0.20.bb
-@@ -3,9 +3,9 @@ DESCRIPTION = "Minimal but very flexible implementation of the expect pattern"
- SECTION = "devel/python"
- HOMEPAGE = " https://bitbucket.org/dwt/pyexpect"
- LICENSE = "ISC"
--LIC_FILES_CHKSUM = "file://README.md;md5=500b884e9dcd5f677a53cbbee8ace939"
-+LIC_FILES_CHKSUM = "file://README.md;md5=a6aa1e7097aca5955f9a2e1c8b0ce158"
+diff --git a/meta-python/recipes-devtools/python/python3-pyjks_19.0.0.bb b/meta-python/recipes-devtools/python/python3-pyjks_20.0.0.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-pyjks_19.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-pyjks_20.0.0.bb
+index ee2f3075c..520899b8e 100644
+--- a/meta-python/recipes-devtools/python/python3-pyjks_19.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyjks_20.0.0.bb
+@@ -6,8 +6,8 @@ HOMEPAGE = "http://github.com/kurtbrose/pyjks"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=9694d6cc724caf7f7386be88a4a81958"
+ 
+-SRC_URI[md5sum] = "b6e8f3b91be355d15e3ba99de2cccf9b"
+-SRC_URI[sha256sum] = "9ce5b40289bcdffcd6a8e7118b333ba8ba2ec4c9ebc5e324885cc8a69767011a"
++SRC_URI[md5sum] = "1a6bce95484f1f62f8ff59755972c632"
++SRC_URI[sha256sum] = "0378cec15fb11b2ed27ba54dad9fd987d48e6f62f49fcff138f5f7a8b312b044"
  
  inherit pypi setuptools3
  
--SRC_URI[md5sum] = "dc744289858001925c75d21e26f1260f"
--SRC_URI[sha256sum] = "bff4654b113dac6c2231e486e11dcb23281ddc0742a5404467303fe7638829ef"
-+SRC_URI[md5sum] = "7ebc843f015b54d849ac7632eda74e9b"
-+SRC_URI[sha256sum] = "acaaa6f96de315dc99cac3da810156bf3829d1eb5c49180f00a4fdde82eabc76"
 -- 
 2.17.1
 
