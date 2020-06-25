@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.6528.1593076109351395635
+ by mx.groups.io with SMTP id smtpd.web10.6714.1593076109991619621
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Jun 2020 02:08:29 -0700
+ Thu, 25 Jun 2020 02:08:30 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=47184 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1joNrs-0005y7-2x; Thu, 25 Jun 2020 12:08:28 +0300
+	id 1joNrw-0005y7-GM; Thu, 25 Jun 2020 12:08:29 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 06/12] python3-pyjks: Upgrade 19.0.0 -> 20.0.0
-Date: Thu, 25 Jun 2020 12:07:13 +0300
-Message-Id: <20200625090719.16068-6-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 07/12] python3-ruamel-yaml: Upgrade 0.16.5 0> 0.16.10
+Date: Thu, 25 Jun 2020 12:07:14 +0300
+Message-Id: <20200625090719.16068-7-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200625090719.16068-1-leon.anavi@konsulko.com>
 References: <20200625090719.16068-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=0.0
+X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,36 +30,53 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 20.0.0:
+Upgrade to release 0.16.10:
 
-- Mirrors keytool support for keystores with empty passphrases
-- Add Python 3.7 and 3.8 to support matrix
-- Docs and examples fixes
+- updated image references in README to sourceforge
+- update requirements so that ruamel.yaml.clib is installed for
+  3.8, as it has become available
+- fix typchecking issue on TaggedScalar
+- fix error in dumping literal scalar in sequence with comments
+  before element
+- fix empty string mapping key roundtripping with preservation
+  of quotes as `? ''`
+- fix incorrect state setting in class constructor
+- adjust deprecation warning test for Hashable, as that no
+  longer warns
+
+The year in LICENSE has been updated and LIC_FILES_CHKSUM changed.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pyjks_19.0.0.bb => python3-pyjks_20.0.0.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pyjks_19.0.0.bb => python3-pyjks_20.0.0.bb} (81%)
+ ...ruamel-yaml_0.16.5.bb => python3-ruamel-yaml_0.16.10.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-ruamel-yaml_0.16.5.bb => python3-ruamel-yaml_0.16.10.bb} (57%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyjks_19.0.0.bb b/meta-python/recipes-devtools/python/python3-pyjks_20.0.0.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-pyjks_19.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-pyjks_20.0.0.bb
-index ee2f3075c..520899b8e 100644
---- a/meta-python/recipes-devtools/python/python3-pyjks_19.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyjks_20.0.0.bb
-@@ -6,8 +6,8 @@ HOMEPAGE = "http://github.com/kurtbrose/pyjks"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=9694d6cc724caf7f7386be88a4a81958"
+diff --git a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.5.bb b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.10.bb
+similarity index 57%
+rename from meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.5.bb
+rename to meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.10.bb
+index ba095648f..076721a09 100644
+--- a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.5.bb
++++ b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.10.bb
+@@ -2,14 +2,14 @@ SUMMARY = "YAML parser/emitter that supports roundtrip preservation of comments,
+ AUTHOR = "Anthon van der Neut"
  
--SRC_URI[md5sum] = "b6e8f3b91be355d15e3ba99de2cccf9b"
--SRC_URI[sha256sum] = "9ce5b40289bcdffcd6a8e7118b333ba8ba2ec4c9ebc5e324885cc8a69767011a"
-+SRC_URI[md5sum] = "1a6bce95484f1f62f8ff59755972c632"
-+SRC_URI[sha256sum] = "0378cec15fb11b2ed27ba54dad9fd987d48e6f62f49fcff138f5f7a8b312b044"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=caf8bd842440b537c044e131785a4666"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=60afc0a1bb0501c0c555cabe78bba022"
+ 
+ PYPI_PACKAGE = "ruamel.yaml"
  
  inherit pypi setuptools3
  
+-SRC_URI[md5sum] = "7d5a5b0a7621a1247b081cc8e4978354"
+-SRC_URI[sha256sum] = "412a6f5cfdc0525dee6a27c08f5415c7fd832a7afcb7a0ed7319628aed23d408"
++SRC_URI[md5sum] = "02774e7ed3273b3d8eee6c08326b91c4"
++SRC_URI[sha256sum] = "099c644a778bf72ffa00524f78dd0b6476bca94a1da344130f4bf3381ce5b954"
+ 
+ do_install_prepend() {
+     export RUAMEL_NO_PIP_INSTALL_CHECK=1
 -- 
 2.17.1
 
