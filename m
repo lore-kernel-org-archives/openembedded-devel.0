@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.6520.1593076098641803632
+ by mx.groups.io with SMTP id smtpd.web11.6575.1593076104165489558
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Jun 2020 02:08:19 -0700
+ Thu, 25 Jun 2020 02:08:24 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=47184 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1joNrk-0005y7-RQ; Thu, 25 Jun 2020 12:08:17 +0300
+	id 1joNro-0005y7-P9; Thu, 25 Jun 2020 12:08:23 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 04/12] python3-twine: Upgrade 3.1.1 -> 3.2.0
-Date: Thu, 25 Jun 2020 12:07:11 +0300
-Message-Id: <20200625090719.16068-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 05/12] python3-pyexpect: Upgrade 1.0.19 -> 1.0.20
+Date: Thu, 25 Jun 2020 12:07:12 +0300
+Message-Id: <20200625090719.16068-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200625090719.16068-1-leon.anavi@konsulko.com>
 References: <20200625090719.16068-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,45 +30,43 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.2.0:
+Upgrade to release 1.0.20:
 
-- Improve display of HTTP errors during upload
-- Use red text when printing errors on the command line
-- Print packages and signatures to be uploaded when using
-  --verbose option
-- Update URL to .pypirc specification
-- Require repository URL scheme to be http or https
-- Don't raise an exception when Python version can't be parsed
-  from filename
-- Fix inaccurate retry message during upload
-- Clarify error messages for archive format
-- Add type annotations, checked with mypy, with PEP 561 support
-  for users of Twine's API
+- Support expectations on types that return different types than
+  bool on comparison.
+- Better documentation intro using the feedback I got for my talk
+  at berlin.python.pizza
+- Fix upload command and add some todos
+
+LIC_FILES_CHKSUM changed due to the recent modifications of
+README.md. The license remains the same.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-twine_3.1.1.bb => python3-twine_3.2.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-twine_3.1.1.bb => python3-twine_3.2.0.bb} (68%)
+ ...ython3-pyexpect_1.0.19.bb => python3-pyexpect_1.0.20.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pyexpect_1.0.19.bb => python3-pyexpect_1.0.20.bb} (52%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-twine_3.1.1.bb b/meta-python/recipes-devtools/python/python3-twine_3.2.0.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-twine_3.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-twine_3.2.0.bb
-index 31b55302a..34309585f 100644
---- a/meta-python/recipes-devtools/python/python3-twine_3.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-twine_3.2.0.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://twine.readthedocs.io/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a3d1106b253a8d50dd82a4202a045b4c"
- 
--SRC_URI[md5sum] = "faf033a3458de37df6cdecceb6da2c2b"
--SRC_URI[sha256sum] = "d561a5e511f70275e5a485a6275ff61851c16ffcb3a95a602189161112d9f160"
-+SRC_URI[md5sum] = "41ce5c8aad253ef4b43b19c76997e2f2"
-+SRC_URI[sha256sum] = "34352fd52ec3b9d29837e6072d5a2a7c6fe4290e97bba46bb8d478b5c598f7ab"
+diff --git a/meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb b/meta-python/recipes-devtools/python/python3-pyexpect_1.0.20.bb
+similarity index 52%
+rename from meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb
+rename to meta-python/recipes-devtools/python/python3-pyexpect_1.0.20.bb
+index ea3c018af..e09fec01d 100644
+--- a/meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb
++++ b/meta-python/recipes-devtools/python/python3-pyexpect_1.0.20.bb
+@@ -3,9 +3,9 @@ DESCRIPTION = "Minimal but very flexible implementation of the expect pattern"
+ SECTION = "devel/python"
+ HOMEPAGE = " https://bitbucket.org/dwt/pyexpect"
+ LICENSE = "ISC"
+-LIC_FILES_CHKSUM = "file://README.md;md5=500b884e9dcd5f677a53cbbee8ace939"
++LIC_FILES_CHKSUM = "file://README.md;md5=a6aa1e7097aca5955f9a2e1c8b0ce158"
  
  inherit pypi setuptools3
  
+-SRC_URI[md5sum] = "dc744289858001925c75d21e26f1260f"
+-SRC_URI[sha256sum] = "bff4654b113dac6c2231e486e11dcb23281ddc0742a5404467303fe7638829ef"
++SRC_URI[md5sum] = "7ebc843f015b54d849ac7632eda74e9b"
++SRC_URI[sha256sum] = "acaaa6f96de315dc99cac3da810156bf3829d1eb5c49180f00a4fdde82eabc76"
 -- 
 2.17.1
 
