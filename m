@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.6706.1593076087641985404
+ by mx.groups.io with SMTP id smtpd.web10.6709.1593076095239724432
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Jun 2020 02:08:08 -0700
+ Thu, 25 Jun 2020 02:08:15 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=47184 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1joNrZ-0005y7-1v; Thu, 25 Jun 2020 12:08:05 +0300
+	id 1joNrh-0005y7-Ot; Thu, 25 Jun 2020 12:08:14 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 02/12] python3-jsonpatch: Upgrade 1.25 -> 1.26
-Date: Thu, 25 Jun 2020 12:07:09 +0300
-Message-Id: <20200625090719.16068-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 03/12] python3-socketio: Upgrade 4.5.1 -> 4.6.0
+Date: Thu, 25 Jun 2020 12:07:10 +0300
+Message-Id: <20200625090719.16068-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200625090719.16068-1-leon.anavi@konsulko.com>
 References: <20200625090719.16068-1-leon.anavi@konsulko.com>
@@ -30,35 +30,41 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.26:
+Upgrade to release 4.6.0:
 
-- Optimize exception message
-- Optimize error handling
-- Fixed some typos and wording
+- Improved handling of rejected connections
+- Fix multi-namespace disconnect logic
+- AsyncPubSubManager does not await for can_disconnect()
+- Require a recipient in call() function in the server
+- ASGI startup and shutdown lifespan handlers
+- Remove references to Python 2.7 in the documentation
+- Fix server example in docstring
+- Fix documentation typo
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-jsonpatch_1.25.bb => python3-jsonpatch_1.26.bb}  | 4 ++--
+ .../{python3-socketio_4.5.1.bb => python3-socketio_4.6.0.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-jsonpatch_1.25.bb => python3-jsonpatch_1.26.bb} (71%)
+ rename meta-python/recipes-devtools/python/{python3-socketio_4.5.1.bb => python3-socketio_4.6.0.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-jsonpatch_1.25.bb b/meta-python/recipes-devtools/python/python3-jsonpatch_1.26.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python3-jsonpatch_1.25.bb
-rename to meta-python/recipes-devtools/python/python3-jsonpatch_1.26.bb
-index 8ec21ff11..b1217cfac 100644
---- a/meta-python/recipes-devtools/python/python3-jsonpatch_1.25.bb
-+++ b/meta-python/recipes-devtools/python/python3-jsonpatch_1.26.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
+diff --git a/meta-python/recipes-devtools/python/python3-socketio_4.5.1.bb b/meta-python/recipes-devtools/python/python3-socketio_4.6.0.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-socketio_4.5.1.bb
+rename to meta-python/recipes-devtools/python/python3-socketio_4.6.0.bb
+index 54ecbbaa0..7d96398e9 100644
+--- a/meta-python/recipes-devtools/python/python3-socketio_4.5.1.bb
++++ b/meta-python/recipes-devtools/python/python3-socketio_4.6.0.bb
+@@ -9,8 +9,8 @@ inherit pypi setuptools3
  
- inherit pypi setuptools3
+ PYPI_PACKAGE = "python-socketio"
  
--SRC_URI[md5sum] = "fcc546892414bef2f7f89f0e2a618a9e"
--SRC_URI[sha256sum] = "ddc0f7628b8bfdd62e3cbfbc24ca6671b0b6265b50d186c2cf3659dc0f78fd6a"
-+SRC_URI[md5sum] = "3aa7e75ad472c51a6de0123137dbfdf2"
-+SRC_URI[sha256sum] = "e45df18b0ab7df1925f20671bbc3f6bd0b4b556fb4b9c5d97684b0a7eac01744"
+-SRC_URI[md5sum] = "3dbd0a2ebcf34632f67327b665cbb951"
+-SRC_URI[sha256sum] = "149b98c33f8c3d09273fb4ebeb83781e4dc9411b56b27d9f058bec1bd1ed74b7"
++SRC_URI[md5sum] = "44bb7854234e144655ef9c34b0165704"
++SRC_URI[sha256sum] = "358d8fbbc029c4538ea25bcaa283e47f375be0017fcba829de8a3a731c9df25a"
  
- RDEPENDS_${PN} += "${PYTHON_PN}-json ${PYTHON_PN}-jsonpointer ${PYTHON_PN}-netclient ${PYTHON_PN}-stringold"
+ PACKAGECONFIG ?= "asyncio_client client"
+ PACKAGECONFIG[asyncio_client] = ",,,${PYTHON_PN}-aiohttp ${PYTHON_PN}-websockets"
 -- 
 2.17.1
 
