@@ -1,108 +1,119 @@
-Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com [209.85.216.66])
- by mx.groups.io with SMTP id smtpd.web11.159.1593141282409379188
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+ by mx.groups.io with SMTP id smtpd.web10.167.1593141283159859389
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Jun 2020 20:14:42 -0700
+ Thu, 25 Jun 2020 20:14:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=SE324YBA;
- spf=pass (domain: gmail.com, ip: 209.85.216.66, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f66.google.com with SMTP id u8so4104089pje.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2020 20:14:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=NE8sceD5;
+ spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f181.google.com with SMTP id x8so2845710plm.10
+        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2020 20:14:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id;
-        bh=y/sbNfY4WuuHrNClkYmus2Y0jtAnC5Q6ED7TSL4EqH0=;
-        b=SE324YBA6HvlBPZpljkpxKKuTiniC0kg+76hCDE4WHe1gMegS8fc8TcfLahdZiVxrJ
-         51IlAtk2k2TCpHYyOLcZJBe/oNiH39o5BQYE9hKUaR3ChJB1hyZD+6SWQYoSZk2lkEvi
-         XjAdwQ2l5QIhZFmpqnDaXRsoj8laapFNgZMx1h8HRAL+mv3+dmT2FPv3RYWlPyunoU37
-         Zy8745+Q8NEDo86RxEaV2JBsrZLO0yRW569c7FNgwJ/Qh7mTLR3e5JExb8qRC0UsRIu7
-         KOoZxT83RoeaL8Z9TBwNv9x92qZwi589b5z39te1X79FxumQ8Q/ZYtdoH0c9iD3X5SQ7
-         FK8g==
+        h=from:to:subject:date:message-id:in-reply-to:references;
+        bh=rFTS6bBWVGmIslvzE7IXw4IK4VNnPjBzdos+6G/kLpY=;
+        b=NE8sceD5/hNKFGaBSW95mqQsLTpA5gxqQWC9cVrss1GbZE/UEZA/HNX02MJnr41Q7q
+         pjO4fMDFTWPm9wh0RINP1njM2El0S9KWhaMnlHnRYqBcwDueJK9iH3FUkU62WXx/aiAe
+         +jbloqv2JRHvMpn/BUAvo0KK7TCUkymJ2zIa3owsGFz3wVDCZbssyYZh0b3BYqcSwmgk
+         QK/AXARK5nqkxJ6FpXEgy/npP7EK68c56rJDIFVTb2uekJZ7Vmls6InDVWLwRvQ8aOM4
+         bGU2/8Qn5M1kibzE2+AjEoDGaURNes5P6ryDTuMm6TS0stCQix6WE7rwx38ZR4KZq0Pv
+         Gfyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id;
-        bh=y/sbNfY4WuuHrNClkYmus2Y0jtAnC5Q6ED7TSL4EqH0=;
-        b=Ywtr7fTTDW7yUKIY/pWs8WOBvWb5KAV1/7FHvrPU0Ju7R492aeB7twFqnPRuVAOqrV
-         EZpARG22a1aHERq2o2TmG1GNu44SkTdxd4TEoS1iAdj5tocQHNo7Zu+78TeHNPEP0GvE
-         66eUGPk3IOx45NHkhodyEdHBvjPm9FguNZw93EQ5fnkMnGP2v3eLuSN98yYbmi3WrZ/1
-         gDMskMftV/f3mqJ0+2Hyr8ra9a6scch5bX7Xu+l90c4W7tb4o7bW1bkUQyumnL16soGp
-         hOmnlEFk9nAup4HDm0Zpqu26IqULkSLca5Tz1Z+6OUkDuut3kdESsS1aAVLBGZ4QnYpA
-         2rHg==
-X-Gm-Message-State: AOAM530FYLiUvydjLARceO5s2+48nB1+whAOpoP8yXKInTsjlK7Lo3wY
-	HZOkNfJ9ihMmcx5rNnk2tJnwlobz
-X-Google-Smtp-Source: ABdhPJzyPCJLqb6DcBPKIntFc4V14IeycJGuQ7cN+PdM4xXXX0cBmEqibglJiUCFVI2IhkjpRhviYg==
-X-Received: by 2002:a17:902:aa42:: with SMTP id c2mr871346plr.216.1593141281463;
-        Thu, 25 Jun 2020 20:14:41 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references;
+        bh=rFTS6bBWVGmIslvzE7IXw4IK4VNnPjBzdos+6G/kLpY=;
+        b=J4WBTlcPcuLRWnP8JZbrYb+AGQSDffTD3lgcYgO4/2NdSOe1SyD4410bcM0RqZ+Odx
+         NLT3mxb+lQ4qQZNXhqtDlRIjwYF2oXwEDL78dQidL6DDH/KS2cnwTnJsvH5BBunoewze
+         GSvLeUi9NftVpPwPezLlf9oHfa3enYqh4ccy+vU+ld6GD9qeCz4mZeW+1sWbaRtLyEST
+         OdKjyRWgDWtx7015vurl4pX84S4fJcE09w+IpgOXVLRazHy8zROSW8r5wzdlf5QdD8ZN
+         P5rhv7odH4nRi9/dOhlEpEp9Du/9mHpj3LSOBoE63xGL5n8DwVWU1cEpJUPZy/P2VaQ+
+         2Hnw==
+X-Gm-Message-State: AOAM532u8U6b232mo0PLQhbeey2NZsowakJ4KjXWOSwk98iy4EMVaCqa
+	srXzNw0nfaCsk0qHmE8MkB3HcVQB
+X-Google-Smtp-Source: ABdhPJyT4ApMT8PoscsPaDAgBzECMxXq9sVoEIA9viFWmYcud+A/DZyF0kUfJQw5ObwEdNg2jPixkQ==
+X-Received: by 2002:a17:902:8204:: with SMTP id x4mr798365pln.153.1593141282516;
+        Thu, 25 Jun 2020 20:14:42 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:acbe:8216:8a55:1b44])
-        by smtp.gmail.com with ESMTPSA id z1sm24506070pfr.88.2020.06.25.20.14.40
+        by smtp.gmail.com with ESMTPSA id z1sm24506070pfr.88.2020.06.25.20.14.41
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Jun 2020 20:14:40 -0700 (PDT)
+        Thu, 25 Jun 2020 20:14:41 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [zeus 0/6] Patch review
-Date: Thu, 25 Jun 2020 20:14:32 -0700
-Message-Id: <cover.1593141198.git.akuster808@gmail.com>
+Subject: [zeus 1/6] gd: fix CVE-2017-6363
+Date: Thu, 25 Jun 2020 20:14:33 -0700
+Message-Id: <9aea795890af4de0b8e6587f1f2778109446736d.1593141198.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1593141198.git.akuster808@gmail.com>
+References: <cover.1593141198.git.akuster808@gmail.com>
 
-Please have reviews back by Saturday
+From: Haiqing Bai <Haiqing.Bai@windriver.com>
 
-The following changes since commit 9e60d30669a2ad0598e9abf0cd15ee06b523986b:
+Backport the CVE patch from the upstream to fix the heap-based buffer
+over-read in tiffWriter.
 
-  sanlock: Replace cp -a with cp -R --no-dereference (2020-03-15 13:30:34 -0700)
-
-are available in the Git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib stable/zeus-nut
-  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/zeus-nut
-
-Armin Kuster (1):
-  tremor: update SRC_URI as project moved to gitlab
-
-Haiqing Bai (2):
-  gd: fix CVE-2017-6363
-  python-urllib3/python3-urllib3: fix CVE-2020-7212
-
-Wang Mingyu (2):
-  libssh2: CVE-2019-17498.patch
-  opensc: CVE-2019-19479 CVE-2019-19480
-
-Wenlin Kang (1):
-  ipmitool: fix CVE-2020-5208
-
- .../tremor/tremor_20180319.bb                 |   2 +-
- ...-Fix-buffer-overflow-vulnerabilities.patch | 133 ++++++++++++++++
- ...uffer-overflow-in-ipmi_spd_print_fru.patch |  53 +++++++
- ...er-overflow-in-ipmi_get_session_info.patch |  53 +++++++
- .../0004-channel-Fix-buffer-overflow.patch    |  69 +++++++++
- ...er-overflows-in-get_lan_param_select.patch |  94 ++++++++++++
- ...u-sdr-Fix-id_string-buffer-overflows.patch | 142 ++++++++++++++++++
- .../ipmitool/ipmitool_1.8.18.bb               |   6 +
- .../recipes-support/gd/gd/CVE-2017-6363.patch |  35 +++++
- meta-oe/recipes-support/gd/gd_2.2.5.bb        |   1 +
- .../libssh2/libssh2/CVE-2019-17498.patch      | 131 ++++++++++++++++
- .../recipes-support/libssh2/libssh2_1.8.2.bb  |   1 +
- .../opensc/opensc/CVE-2019-19479.patch        |  30 ++++
- .../opensc/opensc/CVE-2019-19480.patch        |  34 +++++
- .../recipes-support/opensc/opensc_0.19.0.bb   |   2 +
- .../python/python-urllib3/CVE-2020-7212.patch |  54 +++++++
- .../python/python-urllib3_1.25.6.bb           |   2 +
- .../python3-urllib3/CVE-2020-7212.patch       |  54 +++++++
- .../python/python3-urllib3_1.25.6.bb          |   2 +
- 19 files changed, 897 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0001-fru-Fix-buffer-overflow-vulnerabilities.patch
- create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0002-fru-Fix-buffer-overflow-in-ipmi_spd_print_fru.patch
- create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0003-session-Fix-buffer-overflow-in-ipmi_get_session_info.patch
- create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0004-channel-Fix-buffer-overflow.patch
- create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0005-lanp-Fix-buffer-overflows-in-get_lan_param_select.patch
- create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0006-fru-sdr-Fix-id_string-buffer-overflows.patch
+Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../recipes-support/gd/gd/CVE-2017-6363.patch | 35 +++++++++++++++++++
+ meta-oe/recipes-support/gd/gd_2.2.5.bb        |  1 +
+ 2 files changed, 36 insertions(+)
  create mode 100644 meta-oe/recipes-support/gd/gd/CVE-2017-6363.patch
- create mode 100644 meta-oe/recipes-support/libssh2/libssh2/CVE-2019-17498.patch
- create mode 100644 meta-oe/recipes-support/opensc/opensc/CVE-2019-19479.patch
- create mode 100644 meta-oe/recipes-support/opensc/opensc/CVE-2019-19480.patch
- create mode 100644 meta-python/recipes-devtools/python/python-urllib3/CVE-2020-7212.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch
 
+diff --git a/meta-oe/recipes-support/gd/gd/CVE-2017-6363.patch b/meta-oe/recipes-support/gd/gd/CVE-2017-6363.patch
+new file mode 100644
+index 0000000000..25b5880ff9
+--- /dev/null
++++ b/meta-oe/recipes-support/gd/gd/CVE-2017-6363.patch
+@@ -0,0 +1,35 @@
++From 8f7b60ea7db87de5df76169e3f3918e401ef8bf7 Mon Sep 17 00:00:00 2001
++From: Mike Frysinger <vapier@gentoo.org>
++Date: Wed, 31 Jan 2018 14:50:16 -0500
++Subject: [PATCH] gd/gd2: make sure transparent palette index is within bounds
++ #383
++
++The gd image formats allow for a palette of 256 colors,
++so if the transparent index is out of range, disable it.
++
++Upstream-Status: Backport
++[https://github.com/libgd/libgd.git commit:0be86e1926939a98afbd2f3a23c673dfc4df2a7c]
++CVE-2017-6363
++
++Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
++---
++ src/gd_gd.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/src/gd_gd.c b/src/gd_gd.c
++index f8d39cb..5a86fc3 100644
++--- a/src/gd_gd.c
+++++ b/src/gd_gd.c
++@@ -54,7 +54,8 @@ _gdGetColors (gdIOCtx * in, gdImagePtr im, int gd2xFlag)
++ 		if (!gdGetWord (&im->transparent, in)) {
++ 			goto fail1;
++ 		}
++-		if (im->transparent == 257) {
+++		/* Make sure transparent index is within bounds of the palette. */
+++		if (im->transparent >= 256 || im->transparent < 0) {
++ 			im->transparent = (-1);
++ 		}
++ 	}
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-support/gd/gd_2.2.5.bb b/meta-oe/recipes-support/gd/gd_2.2.5.bb
+index 35f9bb2516..dda2e67d6d 100644
+--- a/meta-oe/recipes-support/gd/gd_2.2.5.bb
++++ b/meta-oe/recipes-support/gd/gd_2.2.5.bb
+@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/libgd/libgd.git;branch=GD-2.2 \
+            file://0001-annotate.c-gdft.c-Replace-strncpy-with-memccpy-to-fi.patch \
+            file://CVE-2018-1000222.patch \
+            file://CVE-2019-6978.patch \
++           file://CVE-2017-6363.patch \
+           "
+ 
+ SRCREV = "8255231b68889597d04d451a72438ab92a405aba"
 -- 
 2.17.1
 
