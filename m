@@ -1,17 +1,17 @@
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.80])
- by mx.groups.io with SMTP id smtpd.web11.9545.1593183667649917514
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.43])
+ by mx.groups.io with SMTP id smtpd.web12.9815.1593183677268788611
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Jun 2020 08:01:07 -0700
+ Fri, 26 Jun 2020 08:01:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=DD7hRpQO;
- spf=pass (domain: windriver.com, ip: 40.107.93.80, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=NI4agj0j;
+ spf=pass (domain: windriver.com, ip: 40.107.93.43, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OIkpzhqcCCCipPse6Aj+xj0cN3N0CJWfLdB4xb051Vwdd7D8Xw1PGisgAk3z3yXRnMHUDtF4SfhlqeGIGU9VtuRchHi6LhuAdollc/9OeByEkdiaPjtppT8N5f5s/yeKl0peXYqbLluLvPWmxxszucUHIsx7hXBddyJR2s6WQDwFq9GnXZ/70VzBUq0WpQySL2+1PUyzZm4crTx0ZwpbJ6lWh9d6ZZk6hotT6r9HpIOeUMP2oGs9ph2cNlHylhQ+OPQqGQnLuQLLdc9cuCIDsixehxXtOgvURk/5DkSrKU1FHnuNahpng9pbYxn0pjMXl2yfuokYubOywBcx2Qp+JA==
+ b=S4xXMHR4ptO1+79ZX+42V1U6501y8e/rytMjltx6TqClwDLivum/4DJUpuI9uTdBnEknHLqV6D8ePaem8osrUlk1W/eiirXacOEr9X2eku+1232f5SpqaOZ5rmnoljs6x3ZadLE4gboAh9iRfGI/G0HJHFFEgBcbT6pZBsxrMbNU6NBv6qdSsMTLr6wOWIUjM5fxfezAyjBBIYq4UWavfFkWvxxrhCl1Zv22HENQH3HkC/4ASxh29ia2ZKRN4W5vUFsPmSeCiEl1CDOg3I0w8QQUz5ona8/AWKV2T5mIqf78KVp/tZjqlasx1J9kwYBir2QL4XwQc1MR/d3di4BXOQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MIuFa1Y4Q70TvJHAp9B2Q3CbiMa1Q1qu65gUH/hn6kc=;
- b=O++FwTcWCOXcxFXe72UGGMKNLPSIDcwtQXlxFaaoFbg/q3o0os+NxZnq39W1fyTFkshvI8yiwbwrhvxXzgDBrhc/xWJyMjvFLWtGgSywaBHfW6yKuFaf3wP6UxdWQVxMIPb28QQxApyUf4hH63HMIIMD8nEMbYhNyfMlbaZDyPB2wLJ5nwi8v/RlHyMlToSuIHgMzxcAA17wSRhIIhR8B4d+3PXjt1U1lSOLiCKkNx3ZV2s/IWwQbj2PWhkWxqrpVrKi4t76mMORMPaLMtZkx0ewBC8kjRx+w7cL3mMEKQF8CYifzhhQSFiI7HDm8ryjxHS87Ah6oWOqImKphtyfSg==
+ bh=sNWFCb4VA2wGN4z5ASrapTRaN44WwhJkGislKiQSvKI=;
+ b=NypwXySjUcWB4XGCUKkVajqN03XQLKNyZqEWHWSGBWvv747GX6Ivo0ygiVxAeGkt+vJKij8tkjzOHcJp0KxNV66xSXgfp5janvjsfiQDT3fbIUW5mvBsB0rcE3ua+M2wU5OZLGxw1a9nJ1tVw23LPCVeT6VaHAxi+RURsJe0SrnvhZIVBJboiySInhdCDYbbEbYKkeAKpa8jAm94EuK2Ofb+bBCPJA/4jdFTiNewi+8uC6iHWzNqnrDPXUmoMYO0OQ+Yd2zbenQgVWhV1jquOdEgEERggf0fBWKJLcGzKpWv7smUA3Sr70czaaa+R803l4LdQBuJ1PqSEa/XF/T7UQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MIuFa1Y4Q70TvJHAp9B2Q3CbiMa1Q1qu65gUH/hn6kc=;
- b=DD7hRpQOGuk8xRw/oZPDn3xVGjk+Cwm5zUaKSAqiBAapayZd0HhRnFGts3YP0tsjmJstduClq7zdHPSw+zz1dtTo0aI6dZcXgztwfO5M16d4b8mSgpkgv9aIb9KSz5S5+FSOTdYOK4ROW0EYWluUU9rVTJp9pG7jH8LdNAnfrw0=
+ bh=sNWFCb4VA2wGN4z5ASrapTRaN44WwhJkGislKiQSvKI=;
+ b=NI4agj0joKX+uA6JkfkHRO0Q7TXwsJRszu9HEyMwEJFSVmWYRIIUV7nccOT+DDrKvEcGGfmYFy1GFz2L/abfrBIWw0gUCyHRhjels4BnJxWV5u7jexlh78YVaBDbKvCP8O31mLfAHozYbLRmWB6+DCDQzEExeNdvc9zyszEOHmg=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,110 +28,108 @@ Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
  by BN6PR11MB1604.namprd11.prod.outlook.com (2603:10b6:405:e::17) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.20; Fri, 26 Jun
- 2020 15:01:06 +0000
+ 2020 15:01:16 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3131.025; Fri, 26 Jun 2020
- 15:01:06 +0000
-Subject: Re: [oe] [meta-python][PATCH 04/12] python3-twine: Upgrade 3.1.1 -> 3.2.0
+ 15:01:16 +0000
+Subject: Re: [oe] [meta-python][PATCH 05/12] python3-pyexpect: Upgrade 1.0.19 -> 1.0.20
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200625090719.16068-1-leon.anavi@konsulko.com>
- <20200625090719.16068-4-leon.anavi@konsulko.com>
+ <20200625090719.16068-5-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <00ec657b-3a40-f514-9b50-8d55bf0f40fd@windriver.com>
-Date: Fri, 26 Jun 2020 11:01:04 -0400
+Message-ID: <6957f92b-d27b-776f-c370-f25b1701fc66@windriver.com>
+Date: Fri, 26 Jun 2020 11:01:14 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200625090719.16068-4-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTXPR0101CA0019.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00::32) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200625090719.16068-5-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTXPR0101CA0007.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00::20) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YTXPR0101CA0019.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::32) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.20 via Frontend Transport; Fri, 26 Jun 2020 15:01:05 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YTXPR0101CA0007.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.20 via Frontend Transport; Fri, 26 Jun 2020 15:01:15 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b566b800-8cb0-4906-41a3-08d819e1c08b
+X-MS-Office365-Filtering-Correlation-Id: 63ac21cc-1eb2-4485-414e-08d819e1c655
 X-MS-TrafficTypeDiagnostic: BN6PR11MB1604:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB160414A4FD3F60938A3EFCA69F930@BN6PR11MB1604.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1443;
+	<BN6PR11MB160456B44118C57A7F6192AB9F930@BN6PR11MB1604.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:5236;
 X-Forefront-PRVS: 0446F0FCE1
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	EgGNn8L5PAbgA0fnI5zEfSixhdtOcpIAczSSjGThPoRT9fKJZu3KOOmZjxaLDGvFvqAXtRhrGZD+iN3icmsmmk6smIgDG81HX8uugGMkPxGPRsjAVJNw95BJQfOv4c2bvLyIu3ALSeN+bsztqKh5p/p1v2V0WfGHHV2TM9GpJ0uzBogvun9uhvg9QNDKjW2NN2rmpqurtpKH669Gfl9OeL5dB8WK4Gw82RxLYAInL+Sfc9mI9+TNnInrcKLWEj8lgv5AXEWDA9/cxk/GzVkxE8Fjyqb+ZFAjOMNBnP1QfOVlXcKo2jlZLAT+Ct6aNP1fRCVBq41uumKtop8H+mpcxqoFvlq2ERgc+4uUaPRTAzddZ6wBxQ7TrNxnltpXG8ZaR/WPWe2GCOb/NIbdj/FnVbsa39JMe5kiPL8bGjKC9Z/PtgW8vnLeDN36LupF5h6wGKVlsVltVGjOGLpq1N7z/A==
+	sus7ljvPAfPiPrR20kk7ql0KdPsQOyaIaBMesgh9rSNo5d/cFQ9dI9qY2AiMWAosQIGM4kA2zPNvfa/vnb0qJ3ZwfMVF0ycStXIwNDHqoFhd5/dVlg8H3OnA6AS/DiW3xS1AQGdZ6U/BELT+3EuP6Jsli/W5zcMJZJG2LO1V07Roxe+Ag+GWWtHBZwCGtia8zWSCGuKyIjyyu6gtQmhDWzvfVhQN9R2Uuh4DAPmK6BKl9gTeDkAnWXUrQD/paJ5AbsxovgCndeRldeDo8Y9ILvTVFbhso3kaib+SZ/LQkv8nm4v0U55mPCvVzZV+HemqLzlleyoaUNrKxRTR8Ib4CHjPqrQqiZQfRcBAw9RaLpxdoCJ93wrIYk/1T2Tq4J4dp+HiVRUsP8ZLbX97fmuqe6f2T4yJaP69oGA25mPoyzB1A85ChcUNw/I0+f6PEiCawRb7TaYzyXAAnCMj95h2fg==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(366004)(346002)(136003)(396003)(376002)(39850400004)(2616005)(956004)(31686004)(66556008)(66946007)(44832011)(83380400001)(6486002)(86362001)(16576012)(31696002)(166002)(316002)(966005)(66476007)(53546011)(8936002)(8676002)(36756003)(2906002)(186003)(478600001)(5660300002)(33964004)(16526019)(26005)(52116002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	sseTGqLZilX+ygs00G0CE+HYwS/pTn6uprQ+79JqLWww70YSP+0l8xUxzRf1w+aeM7cASL3wcS9eT1k7EopMOFNXULCFxK/9kVC8CJ+7IdU933b4B60AxFJq8o8uBzXm7x3qq/TSivRn2CPafQz5dL2z+JwdX2KaoCMbLZ8GeyrJwlqHWr2FnvrHPKVWkz1mPBLJTZaPccC8dzDYnXP0vC67wl/z7ktVxwww3Q7+zMs3n/OpxW6MnIIYDs1aUX292kkGWQRkRMrZdFi1Et5hiJRwfdV6nBz57OtmYpYfxGUz+wvMFQw/KT9fRSQXxnAhsTtHSTlzfdLnwWp9VzhWDTBwvD14ZHET2sFd217Di+1PTbv9OP1lyAt7lCmYgSSS3Okt/Jui3Dwr2F1ia5BkJi3ozmBU254iZ9lZA0Xs7e12HQYPqptiumVdkcHoWYe02jJuwc5ITTrW1l0HghoYwoTEibQra+e4LenrlJW5q3g=
+	ATIMJSqom5tRUzEsgVtcbXRuJKYphor2DEs/oj5hoqpfM2aCe+dodOI8dR4n4Z2bXGXs+D4129jSfdtgnnDh9xXfuc75YvFDyICApWgp4Xi56wjvf1KH+3SyWXhtcBE44cCSJQke5tDiBr4X8k4X56e9QSS8MW7VRvfpGIVMU7bgXYa7Coka4i4NGE4TB9q7Bw5BZJ1kFzwlJw7iiiDq+lmMMoZyPisFhbnKRAXD6lvv54OXxpdMCu/xDhupNMEHVrzHbEMWpb63e0cpF+Hp01XZa9aaueu1UXM1yEIhl3CPngA5oA4OAROwyThCxgPnL2BfBfFWzO4JRWBQtlT5J7RCGs1XW54rPykK/BIJx1OpRr3bq3TlgDjWaLE391mOflA9AdfF8azY9xvZSvjRYDXusBB1kuggzbxC2U3YEZI2RXtviOcWNlvgjdJri/eYbI6rcgW9YjGEDFwW9BRVYt8VfCSZuQ65+6ZMn9a6M80=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b566b800-8cb0-4906-41a3-08d819e1c08b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 63ac21cc-1eb2-4485-414e-08d819e1c655
 X-MS-Exchange-CrossTenant-AuthSource: BN6PR11MB0003.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2020 15:01:06.3971
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2020 15:01:16.1255
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Q9POLC7jYO9TTTyBoNF5xXhi9I0NnvokYsPDsiIjRM3Zp/g6aJViaQqo5ohr0LDFzPgZ3xGyKtubV5TXvyt57ZWXiNj7W7HtxUISDCrWlaA=
+X-MS-Exchange-CrossTenant-UserPrincipalName: WW8kEWT//vscNv1aeFj/1PkZPf2SubbGizRD+ovYa6H1tRAPuCW9wM0TyX8C3u1A+TAj0I4pFPTTUks2jit/mWWONuZHIeo5HFZbXv+9frQ=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1604
 Content-Type: multipart/alternative;
- boundary="------------F5DC606E9EF342273548AFAC"
+ boundary="------------FF9371E565CD7754A68C244D"
 Content-Language: en-US
 
---------------F5DC606E9EF342273548AFAC
+--------------FF9371E565CD7754A68C244D
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 6/25/20 5:07 AM, Leon Anavi wrote:
-> Upgrade to release 3.2.0:
+> Upgrade to release 1.0.20:
 >
-> - Improve display of HTTP errors during upload
-> - Use red text when printing errors on the command line
-> - Print packages and signatures to be uploaded when using
->    --verbose option
-> - Update URL to .pypirc specification
-> - Require repository URL scheme to be http or https
-> - Don't raise an exception when Python version can't be parsed
->    from filename
-> - Fix inaccurate retry message during upload
-> - Clarify error messages for archive format
-> - Add type annotations, checked with mypy, with PEP 561 support
->    for users of Twine's API
+> - Support expectations on types that return different types than
+>    bool on comparison.
+> - Better documentation intro using the feedback I got for my talk
+>    at berlin.python.pizza
+> - Fix upload command and add some todos
+>
+> LIC_FILES_CHKSUM changed due to the recent modifications of
+> README.md. The license remains the same.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-twine_3.1.1.bb => python3-twine_3.2.0.bb} | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-twine_3.1.1.bb => python3-twine_3.2.0.bb} (68%)
+>   ...ython3-pyexpect_1.0.19.bb => python3-pyexpect_1.0.20.bb} | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-pyexpect_1.0.19.bb => python3-pyexpect_1.0.20.bb} (52%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-twine_3.1.1.bb b/meta-python/recipes-devtools/python/python3-twine_3.2.0.bb
-> similarity index 68%
-> rename from meta-python/recipes-devtools/python/python3-twine_3.1.1.bb
-> rename to meta-python/recipes-devtools/python/python3-twine_3.2.0.bb
-> index 31b55302a..34309585f 100644
-> --- a/meta-python/recipes-devtools/python/python3-twine_3.1.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-twine_3.2.0.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE = "https://twine.readthedocs.io/"
->   LICENSE = "Apache-2.0"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=a3d1106b253a8d50dd82a4202a045b4c"
->   
-> -SRC_URI[md5sum] = "faf033a3458de37df6cdecceb6da2c2b"
-> -SRC_URI[sha256sum] = "d561a5e511f70275e5a485a6275ff61851c16ffcb3a95a602189161112d9f160"
-> +SRC_URI[md5sum] = "41ce5c8aad253ef4b43b19c76997e2f2"
-> +SRC_URI[sha256sum] = "34352fd52ec3b9d29837e6072d5a2a7c6fe4290e97bba46bb8d478b5c598f7ab"
+> diff --git a/meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb b/meta-python/recipes-devtools/python/python3-pyexpect_1.0.20.bb
+> similarity index 52%
+> rename from meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb
+> rename to meta-python/recipes-devtools/python/python3-pyexpect_1.0.20.bb
+> index ea3c018af..e09fec01d 100644
+> --- a/meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pyexpect_1.0.20.bb
+> @@ -3,9 +3,9 @@ DESCRIPTION = "Minimal but very flexible implementation of the expect pattern"
+>   SECTION = "devel/python"
+>   HOMEPAGE = " https://bitbucket.org/dwt/pyexpect"
+>   LICENSE = "ISC"
+> -LIC_FILES_CHKSUM = "file://README.md;md5=500b884e9dcd5f677a53cbbee8ace939"
+> +LIC_FILES_CHKSUM = "file://README.md;md5=a6aa1e7097aca5955f9a2e1c8b0ce158"
 >   
 >   inherit pypi setuptools3
 >   
+> -SRC_URI[md5sum] = "dc744289858001925c75d21e26f1260f"
+> -SRC_URI[sha256sum] = "bff4654b113dac6c2231e486e11dcb23281ddc0742a5404467303fe7638829ef"
+> +SRC_URI[md5sum] = "7ebc843f015b54d849ac7632eda74e9b"
+> +SRC_URI[sha256sum] = "acaaa6f96de315dc99cac3da810156bf3829d1eb5c49180f00a4fdde82eabc76"
 >
 > 
 
---------------F5DC606E9EF342273548AFAC
+--------------FF9371E565CD7754A68C244D
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -143,50 +141,48 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/25/20 5:07 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200625090719.16068-4-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 3.2.0:
+    <blockquote type="cite" cite="mid:20200625090719.16068-5-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.0.20:
 
-- Improve display of HTTP errors during upload
-- Use red text when printing errors on the command line
-- Print packages and signatures to be uploaded when using
-  --verbose option
-- Update URL to .pypirc specification
-- Require repository URL scheme to be http or https
-- Don't raise an exception when Python version can't be parsed
-  from filename
-- Fix inaccurate retry message during upload
-- Clarify error messages for archive format
-- Add type annotations, checked with mypy, with PEP 561 support
-  for users of Twine's API
+- Support expectations on types that return different types than
+  bool on comparison.
+- Better documentation intro using the feedback I got for my talk
+  at berlin.python.pizza
+- Fix upload command and add some todos
+
+LIC_FILES_CHKSUM changed due to the recent modifications of
+README.md. The license remains the same.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200625090719.16068-4-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200625090719.16068-5-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-twine_3.1.1.bb =&gt; python3-twine_3.2.0.bb} | 4 &#43;&#43;--
- 1 file changed, 2 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-twine_3.1.1.bb =&gt; python3-twine_3.2.0.bb} (68%)
+ ...ython3-pyexpect_1.0.19.bb =&gt; python3-pyexpect_1.0.20.bb} | 6 &#43;&#43;&#43;---
+ 1 file changed, 3 insertions(&#43;), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pyexpect_1.0.19.bb =&gt; python3-pyexpect_1.0.20.bb} (52%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-twine_3.1.1.bb b/meta-python/recipes-devtools/python/python3-twine_3.2.0.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-twine_3.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-twine_3.2.0.bb
-index 31b55302a..34309585f 100644
---- a/meta-python/recipes-devtools/python/python3-twine_3.1.1.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-twine_3.2.0.bb
-@@ -3,8 &#43;3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://twine.readthedocs.io/">&quot;https://twine.readthedocs.io/&quot;</a>
- LICENSE = &quot;Apache-2.0&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=a3d1106b253a8d50dd82a4202a045b4c">&quot;file://LICENSE;md5=a3d1106b253a8d50dd82a4202a045b4c&quot;</a>
- 
--SRC_URI[md5sum] = &quot;faf033a3458de37df6cdecceb6da2c2b&quot;
--SRC_URI[sha256sum] = &quot;d561a5e511f70275e5a485a6275ff61851c16ffcb3a95a602189161112d9f160&quot;
-&#43;SRC_URI[md5sum] = &quot;41ce5c8aad253ef4b43b19c76997e2f2&quot;
-&#43;SRC_URI[sha256sum] = &quot;34352fd52ec3b9d29837e6072d5a2a7c6fe4290e97bba46bb8d478b5c598f7ab&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb b/meta-python/recipes-devtools/python/python3-pyexpect_1.0.20.bb
+similarity index 52%
+rename from meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb
+rename to meta-python/recipes-devtools/python/python3-pyexpect_1.0.20.bb
+index ea3c018af..e09fec01d 100644
+--- a/meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-pyexpect_1.0.20.bb
+@@ -3,9 &#43;3,9 @@ DESCRIPTION = &quot;Minimal but very flexible implementation of the expect pattern&quot;
+ SECTION = &quot;devel/python&quot;
+ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://bitbucket.org/dwt/pyexpect">&quot; https://bitbucket.org/dwt/pyexpect&quot;</a>
+ LICENSE = &quot;ISC&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://README.md;md5=500b884e9dcd5f677a53cbbee8ace939">&quot;file://README.md;md5=500b884e9dcd5f677a53cbbee8ace939&quot;</a>
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://README.md;md5=a6aa1e7097aca5955f9a2e1c8b0ce158">&quot;file://README.md;md5=a6aa1e7097aca5955f9a2e1c8b0ce158&quot;</a>
  
  inherit pypi setuptools3
  
+-SRC_URI[md5sum] = &quot;dc744289858001925c75d21e26f1260f&quot;
+-SRC_URI[sha256sum] = &quot;bff4654b113dac6c2231e486e11dcb23281ddc0742a5404467303fe7638829ef&quot;
+&#43;SRC_URI[md5sum] = &quot;7ebc843f015b54d849ac7632eda74e9b&quot;
+&#43;SRC_URI[sha256sum] = &quot;acaaa6f96de315dc99cac3da810156bf3829d1eb5c49180f00a4fdde82eabc76&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -196,4 +192,4 @@ index 31b55302a..34309585f 100644
   </body>
 </html>
 
---------------F5DC606E9EF342273548AFAC--
+--------------FF9371E565CD7754A68C244D--
