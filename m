@@ -1,17 +1,17 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.46])
- by mx.groups.io with SMTP id smtpd.web11.10013.1593184923357335096
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.84])
+ by mx.groups.io with SMTP id smtpd.web10.10048.1593184933075468300
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Jun 2020 08:22:03 -0700
+ Fri, 26 Jun 2020 08:22:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=O5sPKlza;
- spf=pass (domain: windriver.com, ip: 40.107.237.46, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=nOqNYJO0;
+ spf=pass (domain: windriver.com, ip: 40.107.93.84, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Kx7OTaFGIWv/u0BosD9AcBH2nv3871JZ2CW9KZ0FRHOTIR6UVrmAcPBb0HSfKlMCw46DT6LNuk2hMIK47m/A9KzZ1d9TFkKKU759xlO+NKr6bxhOIH0hzlJSqF8aamaLkq9jg+2wltK4fWzd13U95+Ks0QA86358Lzvsl5HeFbwRNud86Gp4lzmzREb5XFCKaaLysysEaYWLookuWGYJmr5BHEEQ3nHtwBCyPdK6e8tU7DStdhqHE+kPmEA4cFOntHZYNBGeLAbQXGyuQeXUjM43PFwWfFSrqlQBh0TIzN9Mi+1igmRxm470gVsbRmkDbGEvF8s770JmvpXVCpzmjA==
+ b=WNNiGJzvi3vPTvslw4lFx9OyDrygsUXV4B0NZLtUSkyIPa7whNKR/dnxpr3Yb+jEG5N9FY8YFF7AP3RJpA9ML6Y3Kv+KLhJbnu4J/l3+Hh/dT560DowIDQRO+vwjN/4O7pK+sXPEjKC0mB4uXaDgYBlzf3jao6XfQulfh9OFfKI5wj0kYT9/QlMX+2wYQAW6wYLoTq+p+JQJcBLmSiLCFNJKaapuoVPR1ePtJ3IxVAzzy0B0+UjR488v1LC3tE7bQEBpPgBpWdkDxYE7xou+zV6Fp/5gmhnYGxA2/PlmLVK3EXfLsVN0PiFZRjDgA5xgV/if240+Kygki52caKX7hA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qQIHDvTfeFA7aDBHFRw/QdutZFmkyT5VTwb1kC8G4b0=;
- b=oHtMucXsUBqbQhzHPdv1ngzpECfUQ6YNad5NB2Su6ltzYiTTgirEP48ECIPq/wJBhrPwdJqITWTZlkZWL+iRX+RoPtYNfOyqRdseuzMUslbtauY7nFFDqBW/Ozmew35ywfEgtwQ36FQJoFOdacg7Nxgq8OKkYUGFENgI/LrnZaa/E2YCxtYes7WDoyTUsZWv+pJ4XV2ubcl7TtC/kkSHXSLE0t0v38BqLC3NV3ehohSM/N0tMKjiWJjrF9L2co2IVNQ8fb9EBz6T1Da7hxrnuFSxD0lUqIUTKjRfXJ9xAJaL6MEv+YUq8+Dq5xuH/80UERVKw5AtX46h63OTjKH3hA==
+ bh=XxEg9ZXo/Fz6vw55d2Iv2UtyzXRITHJa85VJWCFt3xg=;
+ b=R6tTlXYx7FD/6N2hJHtgRcVxPGjerJo1cWYpITxRZaPm4OnjjmMhtG0fMnHcO6uN/SkOZW1jDnGzHg7EOUCsR8pgUsj0eu8WCmXO91x3HANtKGi4nliNbJARTOdT1J9mLwybV0GbKt8NsHJT4yQNjhPYv27wDA0pU21KKdgs8RCJOLKEADdwK6ighRnSiZZQMxRrFPX6pZA+MGN0zUzIvuLH7GkAeGp8bPxIOP+g2ET2IMpmKktym+BHiJzGQO9qh1P25dNT7m2CA6xWccq9S8zP0N+uErmDAvpKE0+di3BbE7iLZI8JHyg2R98v0IhlkaXhONzqveAhPtsjyuVBnw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qQIHDvTfeFA7aDBHFRw/QdutZFmkyT5VTwb1kC8G4b0=;
- b=O5sPKlza1hfg+cWI9nf5cBeEhd69b8i0h5/wBeWQLEWM5u47+nXFjUGpdreOmgSP05orz4PGBCDBpY7kiG3hZ8bUY6/5lK57fJ/oh8du/g4VVQOe111xS5WUFg+QX0GchB8dQyYNQlu+8pdf+1nnQO81fqqUdqVfdwsg7JdO678=
+ bh=XxEg9ZXo/Fz6vw55d2Iv2UtyzXRITHJa85VJWCFt3xg=;
+ b=nOqNYJO0EBH/5Lej5nmVs35Wsbm5hvza1Gv8vHhU+u2GtSq8/3ET/FKFbKGnZpAnL/YyuPDcDOF/u0qxxTvUX2qWzWw4qapYPslU/d5StJi1V6Y9kZllof2eYOQcEjRU7CuTSEPbMQP6dH4KxKwuUrHyz2GDbWnIOD1QQO2ZV1w=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,103 +28,100 @@ Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
  by BN8PR11MB3682.namprd11.prod.outlook.com (2603:10b6:408:88::33) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.25; Fri, 26 Jun
- 2020 15:22:00 +0000
+ 2020 15:22:12 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3131.025; Fri, 26 Jun 2020
- 15:22:00 +0000
-Subject: Re: [oe] [meta-python][PATCH 06/10] python3-msk: Upgrade 0.3.13 -> 0.3.15
+ 15:22:11 +0000
+Subject: Re: [oe] [meta-python][PATCH 07/10] python3-pyperf: Upgrade 1.7.1 -> 2.0.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200622103542.27830-1-leon.anavi@konsulko.com>
- <20200622103542.27830-6-leon.anavi@konsulko.com>
+ <20200622103542.27830-7-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <2537be18-fd90-dbb5-422a-d20ab1d4b0ea@windriver.com>
-Date: Fri, 26 Jun 2020 11:21:58 -0400
+Message-ID: <ca6fcab6-afd8-fcd6-5830-bffe99bb0eed@windriver.com>
+Date: Fri, 26 Jun 2020 11:22:10 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200622103542.27830-6-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTXPR0101CA0009.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00::22) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200622103542.27830-7-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTXPR0101CA0003.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00::16) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YTXPR0101CA0009.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.20 via Frontend Transport; Fri, 26 Jun 2020 15:21:59 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YTXPR0101CA0003.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::16) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.20 via Frontend Transport; Fri, 26 Jun 2020 15:22:11 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: cfd26dee-14bc-4843-0d03-08d819e4abd0
+X-MS-Office365-Filtering-Correlation-Id: 0a2612d6-1ee4-42bb-9193-08d819e4b2b3
 X-MS-TrafficTypeDiagnostic: BN8PR11MB3682:
 X-Microsoft-Antispam-PRVS: 
-	<BN8PR11MB36823D1A3162B818416CA2939F930@BN8PR11MB3682.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1775;
+	<BN8PR11MB368224E313995468543239E09F930@BN8PR11MB3682.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:187;
 X-Forefront-PRVS: 0446F0FCE1
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	Zz1EBMwQOnQ2J30tyk7g9QkYqTz/+dzDaeEJNE56B2nqGOUeV2ZMvtpjPyP9RQcesrcHybeHWq9kQjs+OS0g/UDnT+MA1thp37o7IF6mj1R+l9pXQ3DFDkQhzS81+CqN9WNgph/O2iWBSeQp8qoQjinyFJU6LMIXRO3Cnkr3YJoLyIoP7hMpiTcTa07bkPJjdVaTeFQSx2NhglB0IhhGZsVxorw8xeq6kbpTPsUVAd33gYXeiCqTMR5qrJqme+CxsUndicZP4wDX0NSRapbcmpiLCf3xMnFi8mumckbl+d+/8+m8ifGboraywT2BUHnGpyufSjxoWJKdAD81bme1lOuqHmLbjTVNJOdZlQSgRGu7lP3PTmyJhWKMYB42Kc3236DUfvutLv1JbsVBbGpP8ixlZWkeKli+wldW1DmLbMcnEqSzGUdt9owGhaxQhq6W+w2sgdbLscvsF6VpUWLHKg==
+	jg2Hi4zOnHE4TPabeSADHiVzGp/6cmt+dRhdZ/OYRkT5OwTDSb51naI+PNnqeMfQ1pNAcvkfji3UutGX4C3doC/mO52NLQQ03AqQdetCcpBgZT5bg7fcmhScl0pCQZg3tsTQylMKzxR5QO2gtpd+F/ocSPZ2U/NRaMDkR9/cV06A13qE2otmzL58nbdFfNUrGaWiIYfLqvtKjVQoM+cGnZ+sPx5KBSZ6E8NQp1KbhZzUZzXzE8DGAMUWnA0w5J9vxXE0kvmW3/eUYMYgOgSfyho7D7so97Lz4EqzCnQqi82/0pkLte/+e2PTKxvz5N5Hl8ioU+aOZyU8oQmPLvEexyEu7Wu1YFmeAiFLoY3zw+0VXuFTd9VDuGg0N3dIzctEf7PRY+58XVPyuOfYpLlditvmhwcE08WtjQJvm3Jdp9Iwe/ew1ci1S9iUDw7RNvIAjmZvb5wU1edE03TPsiZ+ZQ==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(136003)(366004)(39850400004)(376002)(346002)(956004)(16576012)(2616005)(166002)(316002)(36756003)(31686004)(86362001)(5660300002)(66946007)(966005)(8676002)(66476007)(66556008)(44832011)(31696002)(53546011)(33964004)(2906002)(478600001)(16526019)(186003)(6486002)(52116002)(26005)(83380400001)(8936002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	XBObznOfrLoxt/h1a1J/n5SobvvAH61w/DNIc9e/JTzsPlbIF69peglUNPzeq3Zmuow3CrAqhqbunUeWgzx1jlhohZv+grDCaJ/p1VGs/dqdz7StelIrzn0TD1Xgx1fOin7IJ7Z+JhVphdNKOZDSkUeTf+nIneCAYW4yVQ3pmwxb0bGb4fKoSY+0rljXbYUm2ABYXoxeLD7sYtAXXQszCRzN2Tzfx9oIwZgvP7ZBj+2EuUbNtR+LAfqZK2EhfgLYLVGqz0TtoWB2wVANolbdy9+WnR/wrm1KnlIJLZhTL1nOSwty/3ZqJ+WIAfW1MQl6v0kL66XaXZWyb0hlG+fWKC2d/jmqU0EKeb6BapHjoCiHT5a1gzucxslNi0wTCjaGMDneEwAy83tQ8ORZCC3Od/CbolDq7/vzo+mO8pcctUUAPTMlx3juzT47OS0yCfe8patXB92AYnogZI6EKC2duanmfqCAh/cqe2tqyoHaeRevXbObg3zCpkrxdJxP05je
+	qI+inj6eOmMOg365ONpa7Xt4ef0k1p/iakUZnGtcVw919biHJitJ/mhiLvRT+al43ue3CPGaXuv+JfO0t1bzD++mWXuHSq6dPo10vHkXarOULxucC3CvIHh8uIiSST348n7/Q/jm0vGTSVSN9lXSgFi1xG9nRsRAg3Mq+cOIPFzE7Tp2pbaTFAZnydVJBr6t9BKU8hq92sRY6zjggYAAATHzl3xpGUHbKgf6+EW7JG58fFAv9y9tzv/0aBq6/WqXob0ZhCf/378f47xxvpYsjgRioApcB4vCUeZ78iyC1yr2GYo8TMELtPKB2y4pLSIKHK0nITSoWPiO8v5r44Yhl91eOK8iqZ5shqHBQNdhZIrPcVsDvSH+bo1x7EEYX9g1pi2m0yErh5+EW1ycJm8M/52cDTG14kjo5lsB10j0l4IhECUCmGHkmSXE6ml7tpOBOm7tGa5pGu57hN1UFgH3bwRiKVvdUR+2yCjYXHi3SvD6WLHsqQE0cbphO1ZKc7U9
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cfd26dee-14bc-4843-0d03-08d819e4abd0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0a2612d6-1ee4-42bb-9193-08d819e4b2b3
 X-MS-Exchange-CrossTenant-AuthSource: BN6PR11MB0003.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2020 15:22:00.1000
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2020 15:22:11.6464
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: b6VW3gzSlK5b0A67tgz/C/qBOYLpTXRyt1cvm6waMP2K+BLIWnxMmPD+NRGbUBnzMRM54aUglfOn2psVl9zkU1d/e/ToCAibORMeovGkwUk=
+X-MS-Exchange-CrossTenant-UserPrincipalName: jNm4G9F4gOrcGgWhShDcaqZ6sRFLgm9fiJLFgFMvuluWvgmbjNySlC7Bsj0TRq9zbJjFBdjvvvEvVYuy/PdLhwE0Az0/oxIoEYXnLu7PC6o=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR11MB3682
 Content-Type: multipart/alternative;
- boundary="------------FC2770B6D634E8F6E0615FBE"
+ boundary="------------9D4B8C4137364CAF3D9EBE02"
 Content-Language: en-US
 
---------------FC2770B6D634E8F6E0615FBE
+--------------9D4B8C4137364CAF3D9EBE02
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 6/22/20 6:35 AM, Leon Anavi wrote:
-> Upgrade to release 0.3.15:
+> Upgrade to release 2.0.0:
 >
-> - Switch Github authentication to utilize Personal Access Tokens
->    as the existing username and password method is being
->    deprecated.
-> - Fix handling of --repo-cache argument.
-> - Query for name and e-mail if missing.
+> - Drop Python 2 support
+> - Fix test_runner on PyPy3
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-msk_0.3.13.bb => python3-msk_0.3.15.bb}   | 4 ++--
+>   .../{python3-pyperf_1.7.1.bb => python3-pyperf_2.0.0.bb}      | 4 ++--
 >   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-msk_0.3.13.bb => python3-msk_0.3.15.bb} (69%)
+>   rename meta-python/recipes-devtools/python/{python3-pyperf_1.7.1.bb => python3-pyperf_2.0.0.bb} (84%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-msk_0.3.13.bb b/meta-python/recipes-devtools/python/python3-msk_0.3.15.bb
-> similarity index 69%
-> rename from meta-python/recipes-devtools/python/python3-msk_0.3.13.bb
-> rename to meta-python/recipes-devtools/python/python3-msk_0.3.15.bb
-> index 3f2aaf48d..af011ccf8 100644
-> --- a/meta-python/recipes-devtools/python/python3-msk_0.3.13.bb
-> +++ b/meta-python/recipes-devtools/python/python3-msk_0.3.15.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/MycroftAI/mycroft-skills-kit"
->   LICENSE = "Apache-2.0"
->   LIC_FILES_CHKSUM = "file://README.md;md5=2f90e43663eddf1c33087419fbb35e28"
+> diff --git a/meta-python/recipes-devtools/python/python3-pyperf_1.7.1.bb b/meta-python/recipes-devtools/python/python3-pyperf_2.0.0.bb
+> similarity index 84%
+> rename from meta-python/recipes-devtools/python/python3-pyperf_1.7.1.bb
+> rename to meta-python/recipes-devtools/python/python3-pyperf_2.0.0.bb
+> index 081e904e1..7ced7d017 100644
+> --- a/meta-python/recipes-devtools/python/python3-pyperf_1.7.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pyperf_2.0.0.bb
+> @@ -13,8 +13,8 @@ Features: \
+>   LICENSE = "MIT"
+>   LIC_FILES_CHKSUM = "file://COPYING;md5=78bc2e6e87c8c61272937b879e6dc2f8"
 >   
-> -SRC_URI[md5sum] = "11d9fc865ef627efe68f25fc113974e8"
-> -SRC_URI[sha256sum] = "55be86ff2cd0087016759f2b15b40861cda2a8d8a8d0c669fdacdf32a77a10da"
-> +SRC_URI[md5sum] = "dcb286c489d24d8b0fb8413835f7478a"
-> +SRC_URI[sha256sum] = "56d3557889ee2ceebc72284f979aa6ddd4c7fbe2af31142eb6f51404f14516d5"
+> -SRC_URI[md5sum] = "d9e894dc843bb7f0abff109931a29895"
+> -SRC_URI[sha256sum] = "c37690e810116a83a244dfeec47885e2f0475b4c450313904be3bc2cdaf6d50a"
+> +SRC_URI[md5sum] = "7f62d3f6fc5475138791d3d883fdf4cd"
+> +SRC_URI[sha256sum] = "2189fbc4af08d519f85468e70e32c902eab0f1341b2c41028b94b2832d3169a7"
 >   
->   inherit pypi setuptools3
+>   DEPENDS += "${PYTHON_PN}-six-native"
 >   
 >
 > 
 
---------------FC2770B6D634E8F6E0615FBE
+--------------9D4B8C4137364CAF3D9EBE02
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -136,42 +133,39 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/22/20 6:35 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200622103542.27830-6-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 0.3.15:
+    <blockquote type="cite" cite="mid:20200622103542.27830-7-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 2.0.0:
 
-- Switch Github authentication to utilize Personal Access Tokens
-  as the existing username and password method is being
-  deprecated.
-- Fix handling of --repo-cache argument.
-- Query for name and e-mail if missing.
+- Drop Python 2 support
+- Fix test_runner on PyPy3
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200622103542.27830-6-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200622103542.27830-7-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-msk_0.3.13.bb =&gt; python3-msk_0.3.15.bb}   | 4 &#43;&#43;--
+ .../{python3-pyperf_1.7.1.bb =&gt; python3-pyperf_2.0.0.bb}      | 4 &#43;&#43;--
  1 file changed, 2 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-msk_0.3.13.bb =&gt; python3-msk_0.3.15.bb} (69%)
+ rename meta-python/recipes-devtools/python/{python3-pyperf_1.7.1.bb =&gt; python3-pyperf_2.0.0.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-msk_0.3.13.bb b/meta-python/recipes-devtools/python/python3-msk_0.3.15.bb
-similarity index 69%
-rename from meta-python/recipes-devtools/python/python3-msk_0.3.13.bb
-rename to meta-python/recipes-devtools/python/python3-msk_0.3.15.bb
-index 3f2aaf48d..af011ccf8 100644
---- a/meta-python/recipes-devtools/python/python3-msk_0.3.13.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-msk_0.3.15.bb
-@@ -3,8 &#43;3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/MycroftAI/mycroft-skills-kit">&quot;https://github.com/MycroftAI/mycroft-skills-kit&quot;</a>
- LICENSE = &quot;Apache-2.0&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://README.md;md5=2f90e43663eddf1c33087419fbb35e28">&quot;file://README.md;md5=2f90e43663eddf1c33087419fbb35e28&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-pyperf_1.7.1.bb b/meta-python/recipes-devtools/python/python3-pyperf_2.0.0.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-pyperf_1.7.1.bb
+rename to meta-python/recipes-devtools/python/python3-pyperf_2.0.0.bb
+index 081e904e1..7ced7d017 100644
+--- a/meta-python/recipes-devtools/python/python3-pyperf_1.7.1.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-pyperf_2.0.0.bb
+@@ -13,8 &#43;13,8 @@ Features: \
+ LICENSE = &quot;MIT&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=78bc2e6e87c8c61272937b879e6dc2f8">&quot;file://COPYING;md5=78bc2e6e87c8c61272937b879e6dc2f8&quot;</a>
  
--SRC_URI[md5sum] = &quot;11d9fc865ef627efe68f25fc113974e8&quot;
--SRC_URI[sha256sum] = &quot;55be86ff2cd0087016759f2b15b40861cda2a8d8a8d0c669fdacdf32a77a10da&quot;
-&#43;SRC_URI[md5sum] = &quot;dcb286c489d24d8b0fb8413835f7478a&quot;
-&#43;SRC_URI[sha256sum] = &quot;56d3557889ee2ceebc72284f979aa6ddd4c7fbe2af31142eb6f51404f14516d5&quot;
+-SRC_URI[md5sum] = &quot;d9e894dc843bb7f0abff109931a29895&quot;
+-SRC_URI[sha256sum] = &quot;c37690e810116a83a244dfeec47885e2f0475b4c450313904be3bc2cdaf6d50a&quot;
+&#43;SRC_URI[md5sum] = &quot;7f62d3f6fc5475138791d3d883fdf4cd&quot;
+&#43;SRC_URI[sha256sum] = &quot;2189fbc4af08d519f85468e70e32c902eab0f1341b2c41028b94b2832d3169a7&quot;
  
- inherit pypi setuptools3
+ DEPENDS &#43;= &quot;${PYTHON_PN}-six-native&quot;
  
 </pre>
       <br>
@@ -182,4 +176,4 @@ index 3f2aaf48d..af011ccf8 100644
   </body>
 </html>
 
---------------FC2770B6D634E8F6E0615FBE--
+--------------9D4B8C4137364CAF3D9EBE02--
