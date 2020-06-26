@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.5614.1593170995769819480
+ by mx.groups.io with SMTP id smtpd.web11.5615.1593170995911921577
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 26 Jun 2020 04:29:56 -0700
 Authentication-Results: mx.groups.io;
@@ -8,17 +8,17 @@ Received: from [78.130.197.211] (port=48362 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jomYL-000568-KT; Fri, 26 Jun 2020 14:29:54 +0300
+	id 1jomYM-000568-5Z; Fri, 26 Jun 2020 14:29:55 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 02/12] python3-rdflib: Upgrade 4.2.2 -> 5.0.0
-Date: Fri, 26 Jun 2020 14:29:34 +0300
-Message-Id: <20200626112944.25569-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 03/12] python3-httplib2: Upgrade 0.17.3 -> 0.18.1
+Date: Fri, 26 Jun 2020 14:29:35 +0300
+Message-Id: <20200626112944.25569-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200626112944.25569-1-leon.anavi@konsulko.com>
 References: <20200626112944.25569-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,39 +30,44 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 5.0.0:
+Upgrade to release 0.18.1:
 
-- Fix n3 parser exponent syntax of floats with leading dot.
-- FIX: Change is comparison to == for tuple
-- Added _parseBoolean function to enforce correct Lexical-to-value
-  mapping
-- SPARQL fix CONSTRUCT resolve with initBindings fixes
-- Documentation fixes
+- explicit build-backend workaround for pip build isolation bug
+  "AttributeError: 'module' object has no attribute '__legacy__'"
+  on pip install
+  https://github.com/httplib2/httplib2/issues/169
+- IMPORTANT security vulnerability CWE-93 CRLF injection
+  Force %xx quote of space, CR, LF characters in uri.
+  https://cwe.mitre.org/data/definitions/93.html
+
+PKG-INFO md5 checksum changed, the license remains the same.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-rdflib_4.2.2.bb => python3-rdflib_5.0.0.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-rdflib_4.2.2.bb => python3-rdflib_5.0.0.bb} (68%)
+ ...ython3-httplib2_0.17.3.bb => python3-httplib2_0.18.1.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-httplib2_0.17.3.bb => python3-httplib2_0.18.1.bb} (52%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-rdflib_4.2.2.bb b/meta-python/recipes-devtools/python/python3-rdflib_5.0.0.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-rdflib_4.2.2.bb
-rename to meta-python/recipes-devtools/python/python3-rdflib_5.0.0.bb
-index f7e7f6310..d037a74bf 100644
---- a/meta-python/recipes-devtools/python/python3-rdflib_4.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-rdflib_5.0.0.bb
-@@ -2,8 +2,8 @@ SUMMARY = "RDFLib is a pure Python package for working with RDF"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=68c1a3bb687bd63b8e5552f3ea249840"
+diff --git a/meta-python/recipes-devtools/python/python3-httplib2_0.17.3.bb b/meta-python/recipes-devtools/python/python3-httplib2_0.18.1.bb
+similarity index 52%
+rename from meta-python/recipes-devtools/python/python3-httplib2_0.17.3.bb
+rename to meta-python/recipes-devtools/python/python3-httplib2_0.18.1.bb
+index 57047c9ac..9c9b6c5b0 100644
+--- a/meta-python/recipes-devtools/python/python3-httplib2_0.17.3.bb
++++ b/meta-python/recipes-devtools/python/python3-httplib2_0.18.1.bb
+@@ -2,9 +2,9 @@ SUMMARY = "A comprehensive HTTP client library, httplib2 supports many features
+ HOMEPAGE = "https://github.com/httplib2/httplib2"
+ SECTION = "devel/python"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=4edb3f072a9d815734530f608039a167"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=7e04d1303d64a7b62421751ecb490dc2"
  
--SRC_URI[md5sum] = "534fe35b13c5857d53fa1ac5a41eca67"
--SRC_URI[sha256sum] = "da1df14552555c5c7715d8ce71c08f404c988c58a1ecd38552d0da4fc261280d"
-+SRC_URI[md5sum] = "80d7c6adc2e4040cdd8dade2e0e61403"
-+SRC_URI[sha256sum] = "78149dd49d385efec3b3adfbd61c87afaf1281c30d3fcaf1b323b34f603fb155"
+-SRC_URI[md5sum] = "5730490cfe83350477b54b0a8a190c8a"
+-SRC_URI[sha256sum] = "39dd15a333f67bfb70798faa9de8a6e99c819da6ad82b77f9a259a5c7b1225a2"
++SRC_URI[md5sum] = "0b331f96cdb2ae0e0342d4ea0f5f0502"
++SRC_URI[sha256sum] = "8af66c1c52c7ffe1aa5dc4bcd7c769885254b0756e6e69f953c7f0ab49a70ba3"
  
  inherit pypi setuptools3
- 
 -- 
 2.17.1
 
