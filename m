@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.5827.1593170999707772413
+ by mx.groups.io with SMTP id smtpd.web10.5654.1593171000607599938
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 26 Jun 2020 04:30:00 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=48362 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jomYQ-000568-Cn; Fri, 26 Jun 2020 14:29:58 +0300
+	id 1jomYQ-000568-UV; Fri, 26 Jun 2020 14:29:59 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 08/12] python3-pkgconfig: Upgrade 1.4.0 -> 1.5.1
-Date: Fri, 26 Jun 2020 14:29:40 +0300
-Message-Id: <20200626112944.25569-8-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 09/12] python3-msm: Upgrade 0.8.3 -> 0.8.7
+Date: Fri, 26 Jun 2020 14:29:41 +0300
+Message-Id: <20200626112944.25569-9-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200626112944.25569-1-leon.anavi@konsulko.com>
 References: <20200626112944.25569-1-leon.anavi@konsulko.com>
@@ -30,47 +30,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Inherit class pypi and upgrade to release 1.5.1:
+Upgrade to release 0.8.7:
 
-- Use poetry instead of setuptools directly
-- Fix: raise exception if package is missing
-- Fix version parsing for openssl-like version numbers
-- Fix: expose --modversion
-- Fix: strip whitespace from variable names
-- Fix: do not specify pytest Python version
+- Handle git:// urls more gracefully
+- Add final rstrip
+- Add another rstrip for checking if it is Github url
+- Convert Paths to str for python 3.5 compatibility
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...hon3-pkgconfig_1.4.0.bb => python3-pkgconfig_1.5.1.bb} | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pkgconfig_1.4.0.bb => python3-pkgconfig_1.5.1.bb} (68%)
+ .../python/{python3-msm_0.8.3.bb => python3-msm_0.8.7.bb}     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-msm_0.8.3.bb => python3-msm_0.8.7.bb} (74%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pkgconfig_1.4.0.bb b/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.1.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-pkgconfig_1.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-pkgconfig_1.5.1.bb
-index fc7a47a43..05ca3beec 100644
---- a/meta-python/recipes-devtools/python/python3-pkgconfig_1.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.1.bb
-@@ -4,16 +4,14 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=faa7f82be8f220bff6156be4790344fc"
+diff --git a/meta-python/recipes-devtools/python/python3-msm_0.8.3.bb b/meta-python/recipes-devtools/python/python3-msm_0.8.7.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python3-msm_0.8.3.bb
+rename to meta-python/recipes-devtools/python/python3-msm_0.8.7.bb
+index 24e1ccb3b..de930f934 100644
+--- a/meta-python/recipes-devtools/python/python3-msm_0.8.3.bb
++++ b/meta-python/recipes-devtools/python/python3-msm_0.8.7.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/MycroftAI/mycroft-skills-manager"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
  
--SRC_URI = "git://github.com/matze/pkgconfig.git"
--SRCREV ?= "8af0102346847e8873af8e76ab3f34ba9da806e2"
-+SRC_URI[md5sum] = "9f9cdb224ec0a1e59efcc7cac4b91972"
-+SRC_URI[sha256sum] = "97bfe3d981bab675d5ea3ef259045d7919c93897db7d3b59d4e8593cba8d354f"
+-SRC_URI[md5sum] = "d5f580c58389b337f5577cb92f36e788"
+-SRC_URI[sha256sum] = "c201785997f3b766ec376a89bbb3367889ac542183ca26733ffe002bb94917b4"
++SRC_URI[md5sum] = "16f755ea554c332cdb666dfc1109f7f2"
++SRC_URI[sha256sum] = "9878eecbf7255d4907637700ecfeeacb9fe586409ee3ae05d406683ad18d7e5e"
  
- RDEPENDS_${PN} = "pkgconfig \
-                  ${PYTHON_PN}-shell \
-                  "
- 
--inherit setuptools3
--
--S = "${WORKDIR}/git"
-+inherit pypi setuptools3
- 
- BBCLASSEXTEND = "native"
+ inherit pypi setuptools3
  
 -- 
 2.17.1
