@@ -1,86 +1,135 @@
-Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com [209.85.208.196])
- by mx.groups.io with SMTP id smtpd.web11.3845.1593162264791681855
+Received: from esa7.bmw.c3s2.iphmx.com (esa7.bmw.c3s2.iphmx.com [68.232.133.109])
+ by mx.groups.io with SMTP id smtpd.web12.5692.1593170384482453603
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Jun 2020 02:04:26 -0700
+ Fri, 26 Jun 2020 04:19:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qtec.com header.s=google header.b=JpCjd9rl;
- spf=neutral (domain: qtec.com, ip: 209.85.208.196, mailfrom: daniel@qtec.com)
-Received: by mail-lj1-f196.google.com with SMTP id 9so9534432ljv.5
-        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Jun 2020 02:04:24 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@bmw.de header.s=mailing1 header.b=NipwFOE0;
+ spf=pass (domain: bmw.de, ip: 68.232.133.109, mailfrom: prvs=439b82d5b=mikko.rapeli@bmw.de)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=qtec.com; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=1Y72kfAuZlDqRVfc6wnZ4eUYqcXsVJ52/a0JxdY2jz0=;
-        b=JpCjd9rlbJXyQT7gzcqKAJhAQmIiVXWtSOwjnESTM7lsOMnWLkBGCwD5HYnra7+Q74
-         LOGCR6WNuuarzmOWFuQ2iPgGlSrTT/C6CRRwDnnFTMzYGiTYHnXd6KQOkiEPMr3Sp4Y2
-         JFvbuWsFuWtAUgQaSFpJeFZvO1+Swe3BQ+Ghw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=1Y72kfAuZlDqRVfc6wnZ4eUYqcXsVJ52/a0JxdY2jz0=;
-        b=QeNtx0NWkYsdbEOByWgZfS9HykYKriq/2+qX1mTb8Qkr+Mce2gpDk7EloDOA+2dewU
-         QdGX5htDvKTnAT0njQAmSJKiZrVenqnG728uYhG5RduxQXuDe9xUufKVN+xPjEcZPN2G
-         c48/SaobbgnoqWmpdsiQJB6RovqHRcRPwuE9yJ6oFpdzfrtzJKiSXOTpeeof8ebY9Vcx
-         dPshUjvR8AkKxiqPp+mo7uVRflgk5DyLWJpKdMubgzPil30c7RdnIS61wn1PfBTLQiJ/
-         ptmEg/RDPH0q2HbmU7npZ3SMffIwHmr/qBgFus9XelZTM1S5i6RcMrPQ47oG2+n8DERi
-         oMCw==
-X-Gm-Message-State: AOAM530O0imZAldVNHjMhFEknzMRso7j++TbvzTwJ1nfKHb3xhDsu1tf
-	OIpzFqxtsUEaZv6Buj41UVWT21pyZlFX1T+QPCE6MofeP2tFtRFwQBnfaz5cFnf4rZvhgDVF70N
-	y88DrAcvd4EQQ/5WtvhnG8dwgXNw9nVxfBi80OILrA9Xk7Rq52m/5yuKzxirHVAfqLcDHsTxMC3
-	rm+k2fnNbSu+A=
-X-Google-Smtp-Source: ABdhPJyS+GWaDDC5OeR0ODaI+ipLVcPL92Vi+EtipMZT81vaxRVBDQ7MnLA9fEj24gSmw3RKyzNfBg==
-X-Received: by 2002:a2e:9dd8:: with SMTP id x24mr1012606ljj.304.1593162258279;
-        Fri, 26 Jun 2020 02:04:18 -0700 (PDT)
-Return-Path: <daniel@qtec.com>
-Received: from turia.fritz.box (cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-        by smtp.gmail.com with ESMTPSA id 5sm5371385ljr.64.2020.06.26.02.04.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 26 Jun 2020 02:04:17 -0700 (PDT)
-From: "Daniel Gomez" <daniel@qtec.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Daniel Gomez <daniel@qtec.com>
-Subject: [OE-core][PATCH] ttf-fonts: Update ttf-ubuntu-font-family recipe
-Date: Fri, 26 Jun 2020 11:04:01 +0200
-Message-Id: <20200626090401.83942-1-daniel@qtec.com>
-X-Mailer: git-send-email 2.27.0
+  d=bmw.de; i=@bmw.de; q=dns/txt; s=mailing1;
+  t=1593170384; x=1624706384;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-id:content-transfer-encoding:
+   mime-version;
+  bh=IbV+r7S5wPNdSbgHNXXbAVpKwe0RUfocTtsqBsCPNog=;
+  b=NipwFOE0bCCAimsRO7o+8eZumRWnLIcTgRerg/Am77KHWhd8hb9+WpOc
+   OmgGcftB+f0G5cjyd/IG566is0O0dxRSr/LXRGzxbk/owrUCHLbz3oUwE
+   42EcKdElzvc97N62Q9Zc4Pn73NE0GGKV8I/jFarKm9cYGWKKZOPV1dub2
+   o=;
+Received: from esagw2.bmwgroup.com (HELO esagw2.muc) ([160.46.252.38]) by
+ esa7.bmw.c3s2.iphmx.com with ESMTP/TLS; 26 Jun 2020 13:19:39 +0200
+Received: from esabb6.muc ([160.50.100.50])  by esagw2.muc with ESMTP/TLS;
+ 26 Jun 2020 13:19:38 +0200
+Received: from smucm10m.bmwgroup.net (HELO smucm10m.europe.bmw.corp) ([160.48.96.49])
+ by esabb6.muc with ESMTP/TLS; 26 Jun 2020 13:19:37 +0200
+Received: from smucm10k.europe.bmw.corp (160.48.96.47) by smucm10m.europe.bmw.corp
+ (160.48.96.49) with Microsoft SMTP Server (TLS;
+ Fri, 26 Jun 2020 13:19:36 +0200
+Received: from smucm10k.europe.bmw.corp ([160.48.96.47]) by
+ smucm10k.europe.bmw.corp ([160.48.96.47]) with mapi id 15.00.1497.006; Fri,
+ 26 Jun 2020 13:19:36 +0200
+From: "Mikko Rapeli" <mikko.rapeli@bmw.de>
+To: <msisov@igalia.com>
+CC: <openembedded-devel@lists.openembedded.org>,
+	<fabio.berton@ossystems.com.br>, <raphael.kubo.da.costa@intel.com>,
+	<raj.khem@gmail.com>, <otavio@ossystems.com.br>, <ashie@clear-code.com>
+Subject: Re: [meta-browser][PATCH] chromium-ozone-wayland: add build dependency to at-spi2-atk
+Thread-Topic: [meta-browser][PATCH] chromium-ozone-wayland: add build
+ dependency to at-spi2-atk
+Thread-Index: AQHWS4pNf9iSRspmcEmu39MclEleJqjqYE6AgAA+a4A=
+Date: Fri, 26 Jun 2020 11:19:36 +0000
+Message-ID: <20200626111933.GN108868@korppu>
+References: <20200626071951.35887-1-mikko.rapeli@bmw.de>
+ <b1af5b16e18f92152f2ab0e1083a0089@igalia.com>
+In-Reply-To: <b1af5b16e18f92152f2ab0e1083a0089@igalia.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-messagesentrepresentingtype: 1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <82E8368CBAAEEB49B3CF9850B1F8672C@bmwmail.corp>
+Content-Transfer-Encoding: quoted-printable
 
-Current version 0.80 is no longer available with the link in the recipe.
-Update it to use 0.83 version.
+Hi,
 
-Signed-off-by: Daniel Gomez <daniel@qtec.com>
----
- ...ont-family_0.80.bb => ttf-ubuntu-font-family_0.83.bb} | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-graphics/ttf-fonts/{ttf-ubuntu-font-family_0.80.bb => ttf-ubuntu-font-family_0.83.bb} (65%)
+On Fri, Jun 26, 2020 at 10:36:09AM +0300, Maksim Sisov wrote:
+> Hi!
+>=20
+> Thank you for your contribution! But would you please make a pull
+> request to the meta-browser github repo that is the source of the
+> meta-browser recipe? Thanks!
+>=20
+> https://github.com/OSSystems/meta-browser
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.80.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.83.bb
-similarity index 65%
-rename from meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.80.bb
-rename to meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.83.bb
-index d5d1b9a17..b8aa4c01c 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.80.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.83.bb
-@@ -6,10 +6,13 @@ LICENSE = "UFL"
- LIC_FILES_CHKSUM = "file://LICENCE.txt;md5=325a1a9029112a2405e743c7f816427b"
- PR = "r1"
+Ok, I can do this too. README in meta-browser says that contributions
+through mailing list also work. Maybe you want to update that.
 
--SRC_URI = "http://font.ubuntu.com/download/ubuntu-font-family-${PV}.zip"
-+SHA1SUM = "0cef8205"
+Cheers,
 
--SRC_URI[md5sum] = "a1fc70f5a5b1d096ab8310886cddaa1c"
--SRC_URI[sha256sum] = "107170099bbc3beae8602b97a5c423525d363106c3c24f787d43e09811298e4c"
-+SRC_URI = "https://assets.ubuntu.com/v1/${SHA1SUM}-ubuntu-font-family-${PV}.zip"
-+
-+
-+SRC_URI[md5sum] = "c5a5059d6856b4ddf79d824dcaf5ad32"
-+SRC_URI[sha256sum] = "61a2b342526fd552f19fef438bb9211a8212de19ad96e32a1209c039f1d68ecf"
+-Mikko
 
- S = "${WORKDIR}/ubuntu-font-family-${PV}"
-
---
-2.27.0
-
+> On 26.06.2020 10:19, Mikko Rapeli wrote:
+> > Fixes configure error with poky master branch:
+> >=20
+> > ERROR at //build/config/linux/pkg_config.gni:103:17: Script returned
+> > non-zero exit code.
+> >     pkgresult =3D exec_script(pkg_config_script, args, "value")
+> >                 ^----------
+> > Current dir:
+> > /home/builder/src/yocto/poky/build/tmp/work/cortexa57-poky-linux/chromi=
+um-ozone-wayland/83.0.4103.116-r0/chromium-83.0.4103.116/out/Release/
+> > Command: python
+> > /home/builder/src/yocto/poky/build/tmp/work/cortexa57-poky-linux/chromi=
+um-ozone-wayland/83.0.4103.116-r0/chromium-83.0.4103.116/build/config/linux=
+/pkg-config.py
+> > atk atk-bridge-2.0
+> > Returned 1.
+> > stderr:
+> >=20
+> > Package atk-bridge-2.0 was not found in the pkg-config search path.
+> > Perhaps you should add the directory containing `atk-bridge-2.0.pc'
+> > to the PKG_CONFIG_PATH environment variable
+> > No package 'atk-bridge-2.0' found
+> > Could not run pkg-config.
+> >=20
+> > See //build/config/linux/atk/BUILD.gn:19:1: whence it was called.
+> > pkg_config("atk_base") {
+> > ^-----------------------
+> > See //ui/views/BUILD.gn:821:22: which caused the file to be included.
+> >         configs +=3D [ "//build/config/linux/atk" ]
+> >                      ^-------------------------
+> > WARNING: exit code 1 from a shell command.
+> > ERROR: Execution of
+> > '/home/builder/src/yocto/poky/build/tmp/work/cortexa57-poky-linux/chrom=
+ium-ozone-wayland/83.0.4103.116-r0/temp/run.do_configure.35368'
+> > failed with exit code 1:
+> > ERROR at //build/config/linux/pkg_config.gni:103:17: Script returned
+> > non-zero exit code.
+> >     pkgresult =3D exec_script(pkg_config_script, args, "value")
+> >                 ^----------
+> >=20
+> > Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
+> > ---
+> >  recipes-browser/chromium/chromium-ozone-wayland_83.0.4103.116.bb | 1 +
+> >  1 file changed, 1 insertion(+)
+> >=20
+> > diff --git
+> > a/recipes-browser/chromium/chromium-ozone-wayland_83.0.4103.116.bb
+> > b/recipes-browser/chromium/chromium-ozone-wayland_83.0.4103.116.bb
+> > index de9274d..58fa0fb 100644
+> > --- a/recipes-browser/chromium/chromium-ozone-wayland_83.0.4103.116.bb
+> > +++ b/recipes-browser/chromium/chromium-ozone-wayland_83.0.4103.116.bb
+> > @@ -3,6 +3,7 @@ require chromium-gn.inc
+> >  REQUIRED_DISTRO_FEATURES =3D "wayland"
+> > =20
+> >  DEPENDS +=3D "\
+> > +        at-spi2-atk \
+> >          libxkbcommon \
+> >          virtual/egl \
+> >          wayland \
+>=20
+> --=20
+> Best Regards,
+> Maksim Sisov=
