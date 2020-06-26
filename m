@@ -1,109 +1,86 @@
-Received: from mail.kapsi.fi (mail.kapsi.fi [91.232.154.25])
- by mx.groups.io with SMTP id smtpd.web10.2846.1593156025733349241
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com [209.85.208.196])
+ by mx.groups.io with SMTP id smtpd.web11.3845.1593162264791681855
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Jun 2020 00:20:26 -0700
+ Fri, 26 Jun 2020 02:04:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: lakka.kapsi.fi, ip: 91.232.154.25, mailfrom: mcfrisk@lakka.kapsi.fi)
-Received: from kapsi.fi ([2001:67c:1be8::11] helo=lakka.kapsi.fi)
-	by mail.kapsi.fi with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.89)
-	(envelope-from <mcfrisk@lakka.kapsi.fi>)
-	id 1joiel-0007HB-Ss; Fri, 26 Jun 2020 10:20:17 +0300
-Received: from mcfrisk by lakka.kapsi.fi with local (Exim 4.92)
-	(envelope-from <mcfrisk@lakka.kapsi.fi>)
-	id 1joiel-000AHf-O8; Fri, 26 Jun 2020 10:20:15 +0300
-From: "Mikko Rapeli" <mikko.rapeli@bmw.de>
+ dkim=pass header.i=@qtec.com header.s=google header.b=JpCjd9rl;
+ spf=neutral (domain: qtec.com, ip: 209.85.208.196, mailfrom: daniel@qtec.com)
+Received: by mail-lj1-f196.google.com with SMTP id 9so9534432ljv.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Jun 2020 02:04:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=qtec.com; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=1Y72kfAuZlDqRVfc6wnZ4eUYqcXsVJ52/a0JxdY2jz0=;
+        b=JpCjd9rlbJXyQT7gzcqKAJhAQmIiVXWtSOwjnESTM7lsOMnWLkBGCwD5HYnra7+Q74
+         LOGCR6WNuuarzmOWFuQ2iPgGlSrTT/C6CRRwDnnFTMzYGiTYHnXd6KQOkiEPMr3Sp4Y2
+         JFvbuWsFuWtAUgQaSFpJeFZvO1+Swe3BQ+Ghw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=1Y72kfAuZlDqRVfc6wnZ4eUYqcXsVJ52/a0JxdY2jz0=;
+        b=QeNtx0NWkYsdbEOByWgZfS9HykYKriq/2+qX1mTb8Qkr+Mce2gpDk7EloDOA+2dewU
+         QdGX5htDvKTnAT0njQAmSJKiZrVenqnG728uYhG5RduxQXuDe9xUufKVN+xPjEcZPN2G
+         c48/SaobbgnoqWmpdsiQJB6RovqHRcRPwuE9yJ6oFpdzfrtzJKiSXOTpeeof8ebY9Vcx
+         dPshUjvR8AkKxiqPp+mo7uVRflgk5DyLWJpKdMubgzPil30c7RdnIS61wn1PfBTLQiJ/
+         ptmEg/RDPH0q2HbmU7npZ3SMffIwHmr/qBgFus9XelZTM1S5i6RcMrPQ47oG2+n8DERi
+         oMCw==
+X-Gm-Message-State: AOAM530O0imZAldVNHjMhFEknzMRso7j++TbvzTwJ1nfKHb3xhDsu1tf
+	OIpzFqxtsUEaZv6Buj41UVWT21pyZlFX1T+QPCE6MofeP2tFtRFwQBnfaz5cFnf4rZvhgDVF70N
+	y88DrAcvd4EQQ/5WtvhnG8dwgXNw9nVxfBi80OILrA9Xk7Rq52m/5yuKzxirHVAfqLcDHsTxMC3
+	rm+k2fnNbSu+A=
+X-Google-Smtp-Source: ABdhPJyS+GWaDDC5OeR0ODaI+ipLVcPL92Vi+EtipMZT81vaxRVBDQ7MnLA9fEj24gSmw3RKyzNfBg==
+X-Received: by 2002:a2e:9dd8:: with SMTP id x24mr1012606ljj.304.1593162258279;
+        Fri, 26 Jun 2020 02:04:18 -0700 (PDT)
+Return-Path: <daniel@qtec.com>
+Received: from turia.fritz.box (cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
+        by smtp.gmail.com with ESMTPSA id 5sm5371385ljr.64.2020.06.26.02.04.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 26 Jun 2020 02:04:17 -0700 (PDT)
+From: "Daniel Gomez" <daniel@qtec.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Fabio Berton <fabio.berton@ossystems.com.br>,
-	Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Otavio Salvador <otavio@ossystems.com.br>,
-	Maksim Sisov <msisov@igalia.com>,
-	Takuro Ashie <ashie@clear-code.com>,
-	Mikko Rapeli <mikko.rapeli@bmw.de>
-Subject: [meta-browser][PATCH] chromium-ozone-wayland: add build dependency to at-spi2-atk
-Date: Fri, 26 Jun 2020 10:19:51 +0300
-Message-Id: <20200626071951.35887-1-mikko.rapeli@bmw.de>
-X-Mailer: git-send-email 2.26.1
+Cc: Daniel Gomez <daniel@qtec.com>
+Subject: [OE-core][PATCH] ttf-fonts: Update ttf-ubuntu-font-family recipe
+Date: Fri, 26 Jun 2020 11:04:01 +0200
+Message-Id: <20200626090401.83942-1-daniel@qtec.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-X-Rspam-Score: 3.8 (+++)
-X-Rspam-Report: Action: no action
- Symbol: RCVD_TLS_LAST(0.00)
- Symbol: ARC_NA(0.00)
- Symbol: RCVD_COUNT_TWO(0.00)
- Symbol: BAYES_HAM(-3.00)
- Symbol: FROM_HAS_DN(0.00)
- Symbol: TO_DN_SOME(0.00)
- Symbol: R_MISSING_CHARSET(2.50)
- Symbol: FREEMAIL_ENVRCPT(0.00)
- Symbol: TAGGED_RCPT(0.00)
- Symbol: MIME_GOOD(-0.10)
- Symbol: BROKEN_CONTENT_TYPE(1.50)
- Symbol: TO_MATCH_ENVRCPT_ALL(0.00)
- Symbol: DMARC_POLICY_SOFTFAIL(0.10)
- Symbol: RCPT_COUNT_SEVEN(0.00)
- Symbol: MID_CONTAINS_FROM(1.00)
- Symbol: NEURAL_HAM(-0.00)
- Symbol: R_SPF_NA(0.00)
- Symbol: FORGED_SENDER(0.30)
- Symbol: R_DKIM_NA(0.00)
- Symbol: MIME_TRACE(0.00)
- Symbol: ASN(0.00)
- Symbol: FROM_NEQ_ENVFROM(0.00)
- Symbol: SUSPICIOUS_RECIPS(1.50)
- Symbol: FREEMAIL_CC(0.00)
- Message-ID: 20200626071951.35887-1-mikko.rapeli@bmw.de
-X-Rspam-Bar: +++
-X-SA-Exim-Connect-IP: 2001:67c:1be8::11
-X-SA-Exim-Mail-From: mcfrisk@lakka.kapsi.fi
-X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
 Content-Transfer-Encoding: 8bit
 
-Fixes configure error with poky master branch:
+Current version 0.80 is no longer available with the link in the recipe.
+Update it to use 0.83 version.
 
-ERROR at //build/config/linux/pkg_config.gni:103:17: Script returned non-zero exit code.
-    pkgresult = exec_script(pkg_config_script, args, "value")
-                ^----------
-Current dir: /home/builder/src/yocto/poky/build/tmp/work/cortexa57-poky-linux/chromium-ozone-wayland/83.0.4103.116-r0/chromium-83.0.4103.116/out/Release/
-Command: python /home/builder/src/yocto/poky/build/tmp/work/cortexa57-poky-linux/chromium-ozone-wayland/83.0.4103.116-r0/chromium-83.0.4103.116/build/config/linux/pkg-config.py atk atk-bridge-2.0
-Returned 1.
-stderr:
-
-Package atk-bridge-2.0 was not found in the pkg-config search path.
-Perhaps you should add the directory containing `atk-bridge-2.0.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'atk-bridge-2.0' found
-Could not run pkg-config.
-
-See //build/config/linux/atk/BUILD.gn:19:1: whence it was called.
-pkg_config("atk_base") {
-^-----------------------
-See //ui/views/BUILD.gn:821:22: which caused the file to be included.
-        configs += [ "//build/config/linux/atk" ]
-                     ^-------------------------
-WARNING: exit code 1 from a shell command.
-ERROR: Execution of '/home/builder/src/yocto/poky/build/tmp/work/cortexa57-poky-linux/chromium-ozone-wayland/83.0.4103.116-r0/temp/run.do_configure.35368' failed with exit code 1:
-ERROR at //build/config/linux/pkg_config.gni:103:17: Script returned non-zero exit code.
-    pkgresult = exec_script(pkg_config_script, args, "value")
-                ^----------
-
-Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
+Signed-off-by: Daniel Gomez <daniel@qtec.com>
 ---
- recipes-browser/chromium/chromium-ozone-wayland_83.0.4103.116.bb | 1 +
- 1 file changed, 1 insertion(+)
+ ...ont-family_0.80.bb => ttf-ubuntu-font-family_0.83.bb} | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-graphics/ttf-fonts/{ttf-ubuntu-font-family_0.80.bb => ttf-ubuntu-font-family_0.83.bb} (65%)
 
-diff --git a/recipes-browser/chromium/chromium-ozone-wayland_83.0.4103.116.bb b/recipes-browser/chromium/chromium-ozone-wayland_83.0.4103.116.bb
-index de9274d..58fa0fb 100644
---- a/recipes-browser/chromium/chromium-ozone-wayland_83.0.4103.116.bb
-+++ b/recipes-browser/chromium/chromium-ozone-wayland_83.0.4103.116.bb
-@@ -3,6 +3,7 @@ require chromium-gn.inc
- REQUIRED_DISTRO_FEATURES = "wayland"
- 
- DEPENDS += "\
-+        at-spi2-atk \
-         libxkbcommon \
-         virtual/egl \
-         wayland \
--- 
-2.20.1
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.80.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.83.bb
+similarity index 65%
+rename from meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.80.bb
+rename to meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.83.bb
+index d5d1b9a17..b8aa4c01c 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.80.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.83.bb
+@@ -6,10 +6,13 @@ LICENSE = "UFL"
+ LIC_FILES_CHKSUM = "file://LICENCE.txt;md5=325a1a9029112a2405e743c7f816427b"
+ PR = "r1"
+
+-SRC_URI = "http://font.ubuntu.com/download/ubuntu-font-family-${PV}.zip"
++SHA1SUM = "0cef8205"
+
+-SRC_URI[md5sum] = "a1fc70f5a5b1d096ab8310886cddaa1c"
+-SRC_URI[sha256sum] = "107170099bbc3beae8602b97a5c423525d363106c3c24f787d43e09811298e4c"
++SRC_URI = "https://assets.ubuntu.com/v1/${SHA1SUM}-ubuntu-font-family-${PV}.zip"
++
++
++SRC_URI[md5sum] = "c5a5059d6856b4ddf79d824dcaf5ad32"
++SRC_URI[sha256sum] = "61a2b342526fd552f19fef438bb9211a8212de19ad96e32a1209c039f1d68ecf"
+
+ S = "${WORKDIR}/ubuntu-font-family-${PV}"
+
+--
+2.27.0
 
