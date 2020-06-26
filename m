@@ -1,86 +1,256 @@
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web10.423.1593142521355759081
+Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com [209.85.222.180])
+ by mx.groups.io with SMTP id smtpd.web11.803.1593144802430411629
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Jun 2020 20:35:21 -0700
+ Thu, 25 Jun 2020 21:13:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=MlvVuJJN;
- spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id f9so4075323pfn.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2020 20:35:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=lrn440y+;
+ spf=pass (domain: gmail.com, ip: 209.85.222.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f180.google.com with SMTP id z63so7673770qkb.8
+        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jun 2020 21:13:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=mfkQi3N3UxvYHsQGk7xMmqT+xgE5vhmqaxWIwdZ9Njc=;
-        b=MlvVuJJNbHET75kbWFg3wgGssulX4gzRMDny73dwbX9eQAYiGHNsUniWs69A0m0DXK
-         HdFVTZjtqEaRqVzbP4vXqbR7Reou7j9T4Cn2Vi90uMSBSKCEFmXPRrjZAtJYOkNCrFK6
-         vRJJ8nbNvXDlLa/4c6KShZVciteco+OFdL1FZqZ0YjRlsOw1SBf0LxNtWZfRttB9BLRp
-         lIW54EsKxd4svwDZnf378gkZxeUAEMlzYikNDYJ9efctQsoZpPykAMsvw0bk0gewKwGT
-         4CoEPajmknmUYtAh6I3Bl6uboW6KRCA3aeel25wnJ1ohIhIZMVP+qLgiBuPQhpxB3iY3
-         qb5w==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=pbwLNWP6AkPiqYhfqMjnCDpqO0VBG7ogXRJjB3czauo=;
+        b=lrn440y+e2W/YVKUXjS/ETIezOT581rseIDiozT8fAxd8m0j3rLNOCMBAhCqNlABQz
+         vb9ACzqqyUYcmmG7YVY10Qx69iXxB35/xjU2qBBpjMO6F4+p91FDy36X2docMCpHyKxh
+         TEm5yXTNVS493jY6UALweN/Ks5PsUxqhBim2BFvFwjv3fMTfF3fnQVXYL3fyDlELmFh0
+         zhQzz1fq5PLVCH4ZBq2PkHzDz+95FSKjJP1dEWGskUD4Yf7K+YOY9VfoDCnEvQc+yIJP
+         zB/TOQwSWbol97JWtWCZJxvtsnqZStP3wq5c9bK2bVxD8eIMf21UxepmBoFsXqHAVMq8
+         TPeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=mfkQi3N3UxvYHsQGk7xMmqT+xgE5vhmqaxWIwdZ9Njc=;
-        b=OP6fOWSh2E5ERASVLGCK5i6KPghns+czh/JeYm/Z3w/WwkCj2fWA26jmxupjfmIl4a
-         pV02MD9vxXR4LfBVAl8ABxkaG8Sf+6PQ5fihBpPOOf8/PvoAfZPeZv/YsH9bFOsMcsSe
-         /VzKQOEVM+1kfGCdxdMXREzBMpOcohqZZgo3gwCUcUJ5+PAFrRM70C7zusJI59VF7Mo6
-         WOegXHRLed0zpCuuKPA8wpoXAnKa96TBq9OYTZk0YMRyEDPTooTw0XvLh/FmY6vVbwsc
-         +r4CE4Ggroae324cQOzkI/zQO5pOZmEcD4SxlEte/YTySsHMkSbChbKI+0sK0yODoRIJ
-         SPYQ==
-X-Gm-Message-State: AOAM530viyhRgBP0AJ1dSPkb/5P5MUFQljEsLoBrKHzqtvbmR70aMHsX
-	Ap+o1Fe8hX/Lfying1sTuhWuxh6q
-X-Google-Smtp-Source: ABdhPJxB2xGqPxFMw4+FWr/ZEZJUImJu0bOe5rtrWp/neLIbxpGBazb9rHKVAqwRbB4hXf+npdegDg==
-X-Received: by 2002:a62:1407:: with SMTP id 7mr813598pfu.88.1593142520066;
-        Thu, 25 Jun 2020 20:35:20 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:acbe:8216:8a55:1b44])
-        by smtp.gmail.com with ESMTPSA id h30sm6759260pfr.89.2020.06.25.20.35.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Jun 2020 20:35:19 -0700 (PDT)
-From: "akuster" <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Armin Kuster <akuster@mvista.com>
-Subject: [meta-networking][PATCH] ntp: update 4.2.8p15
-Date: Thu, 25 Jun 2020 20:35:17 -0700
-Message-Id: <20200626033517.28970-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=pbwLNWP6AkPiqYhfqMjnCDpqO0VBG7ogXRJjB3czauo=;
+        b=brs5NAHkxnSXDLzrWv+kMnr1Bcyv1t6lYRN1ovZMNbRKYBP65RWTq5T5CRCSE/TQ12
+         TY1MedOnAC8v13pnwk+zL9oJkA1TLMfZcVwrh2A2IzTcxuo4x3bd/r8YYJlauNQ3ky1T
+         NlX2mXi4q17dgDi8jGC5ovqHhgXh0U5EkDmLaY6VcukcYa31PB66HIm8sUUNs9ts92uo
+         yezIR4N+ojV/bAQhq62KIa/VvNOjvxtUd/Acoa9DbWw9WvXWjECkOpIKRzT0c+Y7okeY
+         tpSw4Xlf5jUb8ATy1T3PxI4y+dsNws3lecJNRq5ChzG9hJxoEk9Zb8A2a6xeGz12KSxA
+         mjcQ==
+X-Gm-Message-State: AOAM533QhC3bSzdFMXxCCWXLXtQclvuOJup9ttVZoB8dnfjK8AFrw5Hz
+	armxD5J/Id0ufAzJi1evONz2stcQVOD99NRL1lw=
+X-Google-Smtp-Source: ABdhPJwiA+036RnK1KOkQw/LU29t70y9VKYtFYyNDXH3sSzr68HMbS64P8qwFPD8nyW2M/u3MJ9r6Khk7lDU8l0XA6I=
+X-Received: by 2002:a05:620a:2050:: with SMTP id d16mr992825qka.215.1593144801402;
+ Thu, 25 Jun 2020 21:13:21 -0700 (PDT)
+MIME-Version: 1.0
+References: <cover.1593141198.git.akuster808@gmail.com>
+In-Reply-To: <cover.1593141198.git.akuster808@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 25 Jun 2020 21:13:10 -0700
+Message-ID: <CAMKF1so4o6vsd3zyPKOu-w9CC=48ubfPSz9HYEEg6GWpFa3v=A@mail.gmail.com>
+Subject: Re: [oe] [zeus 0/6] Patch review
+To: akuster <akuster808@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000f6a35205a8f4ed06"
 
-From: Armin Kuster <akuster@mvista.com>
+--000000000000f6a35205a8f4ed06
+Content-Type: text/plain; charset="UTF-8"
 
-Source: ntp.org
-MR: 104487
-Type: Security Fix
-Disposition: Backport from http://archive.ntp.org/ntp4/ntp-4.2/
-ChangeID: 65b220646dc29168c45b051a6ea2a651b9e669d1
-Description:
+On Thu, Jun 25, 2020 at 8:14 PM akuster <akuster808@gmail.com> wrote:
 
-Bugfix only update including a security fix: CVE-2020-15025
+> Please have reviews back by Saturday
+>
+> The following changes since commit
+> 9e60d30669a2ad0598e9abf0cd15ee06b523986b:
+>
+>   sanlock: Replace cp -a with cp -R --no-dereference (2020-03-15 13:30:34
+> -0700)
+>
+> are available in the Git repository at:
+>
+>   git://git.openembedded.org/meta-openembedded-contrib stable/zeus-nut
+>
+> http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/zeus-nut
+>
+> Armin Kuster (1):
+>   tremor: update SRC_URI as project moved to gitlab
+>
+> Haiqing Bai (2):
+>   gd: fix CVE-2017-6363
+>   python-urllib3/python3-urllib3: fix CVE-2020-7212
+>
+> Wang Mingyu (2):
+>   libssh2: CVE-2019-17498.patch
+>   opensc: CVE-2019-19479 CVE-2019-19480
+>
+> Wenlin Kang (1):
+>   ipmitool: fix CVE-2020-5208
 
-changelog: https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ChangeLog-stable
 
-Signed-off-by: Armin Kuster <akuster@mvista.com>
----
- .../recipes-support/ntp/{ntp_4.2.8p14.bb => ntp_4.2.8p15.bb}   | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-networking/recipes-support/ntp/{ntp_4.2.8p14.bb => ntp_4.2.8p15.bb} (98%)
+Lgtm
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p14.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb
-similarity index 98%
-rename from meta-networking/recipes-support/ntp/ntp_4.2.8p14.bb
-rename to meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb
-index cdf66082f2..7e168825e0 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p14.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb
-@@ -24,8 +24,7 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-            file://ntpd.list \
- "
- 
--SRC_URI[md5sum] = "783edaf1d68ddf651bde64eda54a579d"
--SRC_URI[sha256sum] = "1960e4f081f6aafd108d721bc3ab15f9e8dfd08dc08339aa95bca9d2545e4eb7"
-+SRC_URI[sha256sum] = "f65840deab68614d5d7ceb2d0bb9304ff70dcdedd09abb79754a87536b849c19"
- 
- inherit autotools update-rc.d useradd systemd pkgconfig
- 
--- 
-2.17.1
 
+
+>
+>  .../tremor/tremor_20180319.bb                 |   2 +-
+>  ...-Fix-buffer-overflow-vulnerabilities.patch | 133 ++++++++++++++++
+>  ...uffer-overflow-in-ipmi_spd_print_fru.patch |  53 +++++++
+>  ...er-overflow-in-ipmi_get_session_info.patch |  53 +++++++
+>  .../0004-channel-Fix-buffer-overflow.patch    |  69 +++++++++
+>  ...er-overflows-in-get_lan_param_select.patch |  94 ++++++++++++
+>  ...u-sdr-Fix-id_string-buffer-overflows.patch | 142 ++++++++++++++++++
+>  .../ipmitool/ipmitool_1.8.18.bb               |   6 +
+>  .../recipes-support/gd/gd/CVE-2017-6363.patch |  35 +++++
+>  meta-oe/recipes-support/gd/gd_2.2.5.bb        |   1 +
+>  .../libssh2/libssh2/CVE-2019-17498.patch      | 131 ++++++++++++++++
+>  .../recipes-support/libssh2/libssh2_1.8.2.bb  |   1 +
+>  .../opensc/opensc/CVE-2019-19479.patch        |  30 ++++
+>  .../opensc/opensc/CVE-2019-19480.patch        |  34 +++++
+>  .../recipes-support/opensc/opensc_0.19.0.bb   |   2 +
+>  .../python/python-urllib3/CVE-2020-7212.patch |  54 +++++++
+>  .../python/python-urllib3_1.25.6.bb           |   2 +
+>  .../python3-urllib3/CVE-2020-7212.patch       |  54 +++++++
+>  .../python/python3-urllib3_1.25.6.bb          |   2 +
+>  19 files changed, 897 insertions(+), 1 deletion(-)
+>  create mode 100644
+> meta-oe/recipes-kernel/ipmitool/ipmitool/0001-fru-Fix-buffer-overflow-vulnerabilities.patch
+>  create mode 100644
+> meta-oe/recipes-kernel/ipmitool/ipmitool/0002-fru-Fix-buffer-overflow-in-ipmi_spd_print_fru.patch
+>  create mode 100644
+> meta-oe/recipes-kernel/ipmitool/ipmitool/0003-session-Fix-buffer-overflow-in-ipmi_get_session_info.patch
+>  create mode 100644
+> meta-oe/recipes-kernel/ipmitool/ipmitool/0004-channel-Fix-buffer-overflow.patch
+>  create mode 100644
+> meta-oe/recipes-kernel/ipmitool/ipmitool/0005-lanp-Fix-buffer-overflows-in-get_lan_param_select.patch
+>  create mode 100644
+> meta-oe/recipes-kernel/ipmitool/ipmitool/0006-fru-sdr-Fix-id_string-buffer-overflows.patch
+>  create mode 100644 meta-oe/recipes-support/gd/gd/CVE-2017-6363.patch
+>  create mode 100644
+> meta-oe/recipes-support/libssh2/libssh2/CVE-2019-17498.patch
+>  create mode 100644
+> meta-oe/recipes-support/opensc/opensc/CVE-2019-19479.patch
+>  create mode 100644
+> meta-oe/recipes-support/opensc/opensc/CVE-2019-19480.patch
+>  create mode 100644
+> meta-python/recipes-devtools/python/python-urllib3/CVE-2020-7212.patch
+>  create mode 100644
+> meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch
+>
+> --
+> 2.17.1
+>
+> 
+>
+
+--000000000000f6a35205a8f4ed06
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Thu, Jun 25, 2020 at 8:14 PM akuster &lt;<a href=3D"mai=
+lto:akuster808@gmail.com">akuster808@gmail.com</a>&gt; wrote:<br></div><blo=
+ckquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left=
+-width:1px;border-left-style:solid;padding-left:1ex;border-left-color:rgb(2=
+04,204,204)">Please have reviews back by Saturday<br>
+<br>
+The following changes since commit 9e60d30669a2ad0598e9abf0cd15ee06b523986=
+b:<br>
+<br>
+=C2=A0 sanlock: Replace cp -a with cp -R --no-dereference (2020-03-15 13:3=
+0:34 -0700)<br>
+<br>
+are available in the Git repository at:<br>
+<br>
+=C2=A0 git://<a href=3D"http://git.openembedded.org/meta-openembedded-cont=
+rib" rel=3D"noreferrer" target=3D"_blank">git.openembedded.org/meta-openemb=
+edded-contrib</a> stable/zeus-nut<br>
+=C2=A0 <a href=3D"http://cgit.openembedded.org/meta-openembedded-contrib/l=
+og/?h=3Dstable/zeus-nut" rel=3D"noreferrer" target=3D"_blank">http://cgit.o=
+penembedded.org/meta-openembedded-contrib/log/?h=3Dstable/zeus-nut</a><br>
+<br>
+Armin Kuster (1):<br>
+=C2=A0 tremor: update SRC_URI as project moved to gitlab<br>
+<br>
+Haiqing Bai (2):<br>
+=C2=A0 gd: fix CVE-2017-6363<br>
+=C2=A0 python-urllib3/python3-urllib3: fix CVE-2020-7212<br>
+<br>
+Wang Mingyu (2):<br>
+=C2=A0 libssh2: CVE-2019-17498.patch<br>
+=C2=A0 opensc: CVE-2019-19479 CVE-2019-19480<br>
+<br>
+Wenlin Kang (1):<br>
+=C2=A0 ipmitool: fix CVE-2020-5208</blockquote><div dir=3D"auto"><br></div=
+><div dir=3D"auto">Lgtm</div><div dir=3D"auto"><br></div><div dir=3D"auto">=
+<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
+ex;border-left-width:1px;border-left-style:solid;padding-left:1ex;border-le=
+ft-color:rgb(204,204,204)"><br>
+<br>
+=C2=A0.../tremor/<a href=3D"http://tremor_20180319.bb" rel=3D"noreferrer" =
+target=3D"_blank">tremor_20180319.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
+=C2=A0...-Fix-buffer-overflow-vulnerabilities.patch | 133 ++++++++++++++++=
+<br>
+=C2=A0...uffer-overflow-in-ipmi_spd_print_fru.patch |=C2=A0 53 +++++++<br>
+=C2=A0...er-overflow-in-ipmi_get_session_info.patch |=C2=A0 53 +++++++<br>
+=C2=A0.../0004-channel-Fix-buffer-overflow.patch=C2=A0 =C2=A0 |=C2=A0 69 +=
+++++++++<br>
+=C2=A0...er-overflows-in-get_lan_param_select.patch |=C2=A0 94 +++++++++++=
++<br>
+=C2=A0...u-sdr-Fix-id_string-buffer-overflows.patch | 142 ++++++++++++++++=
+++<br>
+=C2=A0.../ipmitool/<a href=3D"http://ipmitool_1.8.18.bb" rel=3D"noreferrer=
+" target=3D"_blank">ipmitool_1.8.18.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A06 +<br>
+=C2=A0.../recipes-support/gd/gd/CVE-2017-6363.patch |=C2=A0 35 +++++<br>
+=C2=A0meta-oe/recipes-support/gd/<a href=3D"http://gd_2.2.5.bb" rel=3D"nor=
+eferrer" target=3D"_blank">gd_2.2.5.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=
+=A0 =C2=A01 +<br>
+=C2=A0.../libssh2/libssh2/CVE-2019-17498.patch=C2=A0 =C2=A0 =C2=A0 | 131 +=
++++++++++++++++<br>
+=C2=A0.../recipes-support/libssh2/<a href=3D"http://libssh2_1.8.2.bb" rel=
+=3D"noreferrer" target=3D"_blank">libssh2_1.8.2.bb</a>=C2=A0 |=C2=A0 =C2=
+=A01 +<br>
+=C2=A0.../opensc/opensc/CVE-2019-19479.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
+=C2=A0 30 ++++<br>
+=C2=A0.../opensc/opensc/CVE-2019-19480.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
+=C2=A0 34 +++++<br>
+=C2=A0.../recipes-support/opensc/<a href=3D"http://opensc_0.19.0.bb" rel=
+=3D"noreferrer" target=3D"_blank">opensc_0.19.0.bb</a>=C2=A0 =C2=A0|=C2=A0=
+ =C2=A02 +<br>
+=C2=A0.../python/python-urllib3/CVE-2020-7212.patch |=C2=A0 54 +++++++<br>
+=C2=A0.../python/<a href=3D"http://python-urllib3_1.25.6.bb" rel=3D"norefe=
+rrer" target=3D"_blank">python-urllib3_1.25.6.bb</a>=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +<br>
+=C2=A0.../python3-urllib3/CVE-2020-7212.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
+=C2=A0 54 +++++++<br>
+=C2=A0.../python/<a href=3D"http://python3-urllib3_1.25.6.bb" rel=3D"noref=
+errer" target=3D"_blank">python3-urllib3_1.25.6.bb</a>=C2=A0 =C2=A0 =C2=A0 =
+=
+=C2=A0 =C2=A0 |=C2=A0 =C2=A02 +<br>
+=C2=A019 files changed, 897 insertions(+), 1 deletion(-)<br>
+=C2=A0create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0001-fru=
+-Fix-buffer-overflow-vulnerabilities.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0002-fru=
+-Fix-buffer-overflow-in-ipmi_spd_print_fru.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0003-ses=
+sion-Fix-buffer-overflow-in-ipmi_get_session_info.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0004-cha=
+nnel-Fix-buffer-overflow.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0005-lan=
+p-Fix-buffer-overflows-in-get_lan_param_select.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0006-fru=
+-sdr-Fix-id_string-buffer-overflows.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-support/gd/gd/CVE-2017-6363.patch=
+<br>
+=C2=A0create mode 100644 meta-oe/recipes-support/libssh2/libssh2/CVE-2019-=
+17498.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-support/opensc/opensc/CVE-2019-19=
+479.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-support/opensc/opensc/CVE-2019-19=
+480.patch<br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/python-urllib=
+3/CVE-2020-7212.patch<br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-urlli=
+b3/CVE-2020-7212.patch<br>
+<br>
+-- <br>
+2.17.1<br>
+<br>
+<br>
+</blockquote></div></div>
+
+--000000000000f6a35205a8f4ed06--
