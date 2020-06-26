@@ -1,17 +1,17 @@
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.89])
- by mx.groups.io with SMTP id smtpd.web11.9590.1593183758600964519
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com (NAM02-SN1-obe.outbound.protection.outlook.com [40.107.77.71])
+ by mx.groups.io with SMTP id smtpd.web11.9986.1593184867022731013
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Jun 2020 08:02:38 -0700
+ Fri, 26 Jun 2020 08:21:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=lZfTaVXt;
- spf=pass (domain: windriver.com, ip: 40.107.93.89, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=SxUCyLrX;
+ spf=pass (domain: windriver.com, ip: 40.107.77.71, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=b5u5p4ZS/jAZMuicaYcXAnXycvrpANOeYxsBtvM6hpDrlrCIC59CPr1bL4nkKTGiIYssr2lh0QPhe09kREWTDEk49ku+AlsqcKnpAX6d5XspPmW0x6S5VmmaOar6Gjj+nZ+25VYFSAmy9L2fnKyFsU0R0QonlHWjk92CD955s0KczbQ4ud15ys4dCKKZtqOvfs/ZKf4WhxSKQLFQSRrcA5Ag8JU28l66qIwPaKefgE2E3dySD1ZXTKZ0ts+bJDDnjCjKnV6XvkrBp6po1ACbxCyDMfJNvDT339ccRggujz2rhZyIZm+FKWavIJRVT/olFZO55kwRrn4IfKQO83Yr6A==
+ b=dwjYEnQlW8Re035uplscJS7kGbBWpsW9QgveaQ4K+mg2+mfK9U6w9CTZudLKK17Iyphc0HFr1pPG50A2eHbIaoDSCH9Jl7rtgCYGpYQ0yXHlEFXvH4nRf3H7llPkH6YMZ9gQ6jxTc2OxqeQXGvO0noNPtksp5BG+XuPEMNP078NZ2EXm9OkwR7WZ24WQUh504ulQXmII8/NCFlk3bUDmYdux8qFjrGre4bcm79jiTcu/+yJPGVjyuMgWgsmg/hGlkaeqopGNSVIzEarbAXP7iyjfJ0mPJltE36seT9HhPzvvIMpCT0Mgq3atGTc463cUi0cpB6aAJybnLFqWQs1V7w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gv1Wj4IWQD794IdDrbSX8l0eMCo/4SecPwIF/B/Hc+k=;
- b=HPxNDtIFsLeq7p5TTACltxeL2jHtnaxrcruJJ+E9vvbWzdwZLKlOGYocPczYjPKFLmoB7unL7zvUkE5oz/GI9fgHppc9MC6fiKxnheDBDstAw3xaHknUQkFjNtw6Fdvoqyn+izsT7Sk0gFSHxcXvm4piVROsdmYQL4qdveSNRvoW1KaKrOsa3kor1j6IOLtWCN3mi70OX6Esdjg+YYk/r/Cbn3XpFnQxYil3Iov2UDwXkEFfHGnFz00SN2i0cQ+bTACp2JkKDA8jiO7pwYF2w27Nmfv2EuN3HzazKKSVMdjCcNlvhySzpBs827+wsHlVAmasQYsO4e0NBqbgrbd1Og==
+ bh=NxJfUw4O8VNpIz09naLZoXNPhUDZU3LQX1DXruNzJ6E=;
+ b=RTAmYw3w0/KrMgPxuLzYy2fM2DKTu0KB6+BYorSmIPCH9/+c5ea6BeroEuBDiDOdRhaHpLM1bIiQ5XCbVPt2ca+0M089Kg1iyAvFWWD7gMvZyz7vzMIF1xoUortL0MTriLxiGIrOXI0EyvYhS/lB1gLArYwXX6RdSOgyxGBPh765hP5nQWGO7v6BWzrkxT7Bt89iILOGjpT1KqZ1Yqhj31iXfb2+gj5MuuxFV3ia2e+d/G0IDhdyVCMh4b+cM6fd0g/ntSaGPfy1CnAfp4G0qd5m4rUcO4pNJQk3oajgJtOsgUhsXCZB7tr9VawxkFtUHCkQVsptwnODSlgvsmvZyQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,121 +19,112 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gv1Wj4IWQD794IdDrbSX8l0eMCo/4SecPwIF/B/Hc+k=;
- b=lZfTaVXtChL/EJ5Zruj1jym450GBIt2rm6VYjCYKjRGNiLEjRU7vpuYK1Lwe3KxBuCtSTvMyOuobHX5hstky0rtlkQ//QGG6n36ooM4z2EsUdIqPguRDpHr7t+wYd9WD8jxMTdQoCTdVi+qy/PTNSSAn8YQvzNUg3ktdyOw1U2k=
+ bh=NxJfUw4O8VNpIz09naLZoXNPhUDZU3LQX1DXruNzJ6E=;
+ b=SxUCyLrXMXnDhl4s9GORraP6N9CTb4vekRGEviHl3hgm/08KuY0kN/HsakfMbVsjqrXhAHa+0/Ckd0brHSClb7K5PED2/n4YIoNJMYdHNAhCNjIRM2HlZQBsljpsCZz8aXZAzQgmD4gyy3/X9ra1xCoYQ+yba//mlXFkZ1Cnank=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB1604.namprd11.prod.outlook.com (2603:10b6:405:e::17) with
+ by BN6PR11MB3953.namprd11.prod.outlook.com (2603:10b6:405:7f::24) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.20; Fri, 26 Jun
- 2020 15:02:37 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.24; Fri, 26 Jun
+ 2020 15:21:05 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3131.025; Fri, 26 Jun 2020
- 15:02:37 +0000
-Subject: Re: [oe] [meta-python][PATCH 12/12] python3-astroid: Upgrade 2.3.3 -> 2.4.2
+ 15:21:05 +0000
+Subject: Re: [oe] [meta-python][PATCH 01/10] python3-ordered-set: Upgrade 3.1.1 -> 4.0.2
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200625090719.16068-1-leon.anavi@konsulko.com>
- <20200625090719.16068-12-leon.anavi@konsulko.com>
+References: <20200622103542.27830-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <48c05234-18b2-77bb-0545-570a4201cc0f@windriver.com>
-Date: Fri, 26 Jun 2020 11:02:35 -0400
+Message-ID: <b6b30222-515f-8f18-66ca-e1fc07ff2ebf@windriver.com>
+Date: Fri, 26 Jun 2020 11:21:03 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200625090719.16068-12-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0068.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2d::7) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200622103542.27830-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTXPR0101CA0004.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00::17) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0068.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::7) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.20 via Frontend Transport; Fri, 26 Jun 2020 15:02:36 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YTXPR0101CA0004.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::17) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.20 via Frontend Transport; Fri, 26 Jun 2020 15:21:04 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b42fde8d-8c3c-4549-ac51-08d819e1f6ce
-X-MS-TrafficTypeDiagnostic: BN6PR11MB1604:
+X-MS-Office365-Filtering-Correlation-Id: c2c31726-0d49-4f3b-18d0-08d819e48af6
+X-MS-TrafficTypeDiagnostic: BN6PR11MB3953:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB1604D30F644CF2C308877CFE9F930@BN6PR11MB1604.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2150;
+	<BN6PR11MB3953F3239C783BF88FCD35C39F930@BN6PR11MB3953.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:184;
 X-Forefront-PRVS: 0446F0FCE1
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	1ER7w90n7obiHllG7+cf+3oad7uyTRZaRC6YcL/oMytU7he7PhTpCWLPfvKnOscF+6+SpNKuVPdpV3g2xjofvBLjHg0TGZEkK4JhFh81k0ljSms9jseenaX92Wjgf4H/44niqXCSzXlR7g7Xx48z6Ism3nvE4+6Fzdq4qznbwd0NJJTs3+qXQnbxKiYogPZOihV3DHOlQaf15w+pHJ7Wfse1ohDnUu0voerjPMy7VkMzgVREHR/z+UopM9r5HaI9PfHSh2h/OIGVHejKAhtNdKirbEgzFFOBgTIdUyHNUfto3ukMNR6Gy2wZrLdTSfnlZoFVM4f6JqYrnSM7hi9pjVyQ+vNt4fuuVnUZErnWRmScVK38e2rmh6vv/rrSpHpKHGNdl+qs3E6gww+4VrTBBs9mnnjRv4/y4XTGHrVX3K+1zKzWVvjRHOBT0l1bor96mZFCSEBzzNQon69H68a65w==
+	hKxU1w3neIMYJL9hnkS7NkmqpP7M//1tX001uVDR12tSLfTLGgpkjlimWZTK1Qra+Bt8Cgwf0ULMyDiKGoN3ENpaaXP0ZVZGo1uFPgAHdmy9oLGJ32SIP2ZVTMQ1yuTrUbh1lTPTNDDMxA6eGWDjbR4D1iuBofCcLMinD/lJhT2o/42bQiccMbP7XIJJJJ7MSMrP0EbHruUmFHZW6fXx3BSrE9gZqclfND6e9c3XuRXPv5rXn0h2iEJ6f7G59rIh4S365aXvdVKttd2gfo2684qFtsHTTYwdSMHKT15+gX1GicGVqIYiV8B4bN6zDUKr6bIInePTS1lJD9nWfHD+ylEUIAyGzGfGPrvlPyOqsXkrtPyrN8ZSFG+fiLgIl/qc3zKiQ0xsq83ziTrKhpqd/DKCuImEhDU7bnyQKedowzFhuE2gvtjY2rJc2CMsBXRXwcZGM9rhqADS2ICSsdfW7A==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(366004)(346002)(136003)(396003)(376002)(39850400004)(2616005)(956004)(31686004)(66556008)(66946007)(44832011)(83380400001)(6486002)(86362001)(16576012)(31696002)(166002)(316002)(966005)(66476007)(53546011)(8936002)(8676002)(36756003)(2906002)(186003)(478600001)(5660300002)(33964004)(16526019)(26005)(52116002)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(39850400004)(396003)(136003)(346002)(376002)(366004)(316002)(166002)(16576012)(2906002)(956004)(83380400001)(31686004)(8676002)(31696002)(8936002)(478600001)(966005)(36756003)(52116002)(53546011)(26005)(44832011)(2616005)(186003)(6486002)(16526019)(33964004)(66556008)(66476007)(5660300002)(86362001)(66946007)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	QWFmMANCCrFvrjkuew/TZFc7GCdSKgdqZanP/R50r8Q4ZqvImBb2b/BzRuKH+1dOJNjAUDls7CjRoh/vAU0AEDB+c5H1j/IaOmCRhjUZM+mEoaFzEsMZ7wn3zaJL+RYurpPucYNCEpJgcO+H5eYOT3ZFdrgZt9bj+rD5nIn9soDFJnsVCrpmiOVm7l7tcIozg+OODxmthj0JrTPFRU+z43cI16YdA9hKp+l/2GITlJC+m4mIVU96F5YiIc/ODPEZT0PSRldJhFKAEfy6MM6SqCIvMHF8O9QfD6L2/sPLnfMAA5qtVudVkSKoh2Bf/4jPNPM6Qlfl1Imzl4OCLVJVhVxXL2dmFwxHbKdLEV5+ohy7PgaRv4emmcI2vXb4XqhGmvLyDf/u9nftGWkNvNIq3sOSANBaF2LY0/J4ZQ8rm9uDzessxtbm4AQNvki9Dx3FSYCzAVgpv5oCjKIrmoBB4IGz7pXKtJ7bskGklOLcIj2GxHECPDflxre3gnqD53YY
+	gQa8v8/ZX83Q00AeOXmkly97/5RsvBfLYWq7XzXeGm7zFbcqPWIWgc0iglh6MUsikPNanm9Euf1nS0mqm+8yr6PKAYqqHNPXd/zMXsdpiVM+6jypRq1WK/OcVfwS1QVmzMoFEia03F4UVxm59vN5CRfyjhEq3lyJvD3LsZvHLvd3pRsQlgMFcZeHTBZcVh4Qmdecj00Fe/KRc5J3CHYUqp/kBkQWTYKcYWl+eqdFz+GfZ5tGziq8cH9ecaW5FVT4RoC58GYS2I8fox1i9js2errG/CRjRsZiXotTQuiGpft8shtQuICsmX26NH2ka/7W1cpPhtLtdYZGjmdI0vFDzkKDBYgTL7G5npfsb7sgwqDrx86CTWX93Wgt89ZQ22A0V4GPTB1JPzPJs7q3pbH2J5U4NhcYJkqUUh3Ss+VThS0Lr1vHMXtQrNofapva/+vkJSi/gZtTJflFCiCbM187gxb28IVH8DFxXoF3a23vwbIjSlcNJ62ra7gNdIqt/fSN
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b42fde8d-8c3c-4549-ac51-08d819e1f6ce
+X-MS-Exchange-CrossTenant-Network-Message-Id: c2c31726-0d49-4f3b-18d0-08d819e48af6
 X-MS-Exchange-CrossTenant-AuthSource: BN6PR11MB0003.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2020 15:02:37.4449
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2020 15:21:04.9935
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fgQLdUxXhbTXRthC7vOjGnDFMix4ThX0DWgVlw0gBHafxlafjKlt/FML5BPFPARsvcYFRUXekEkl91dx0wCk+Fl6K8PMvSxvPmDZxCNGlLc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1604
+X-MS-Exchange-CrossTenant-UserPrincipalName: SJ+6FTSbBSFnCjCYZHOQjsHxiDDTF8p2kBlpAtIfYfcFmT0JHmf+tIPEO8oTcNaqsDSFO6Ssvn3Ymrx28r2RWX2x1jZPRvDOUEh3BI9lnT4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB3953
 Content-Type: multipart/alternative;
- boundary="------------53A61F08C3193D31875ED39B"
+ boundary="------------86FB07B281A6DB2A10797230"
 Content-Language: en-US
 
---------------53A61F08C3193D31875ED39B
+--------------86FB07B281A6DB2A10797230
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 6/25/20 5:07 AM, Leon Anavi wrote:
-> Upgrade to release 2.4.2:
+On 6/22/20 6:35 AM, Leon Anavi wrote:
+> Upgrade to release 4.0.2:
 >
-> - `FunctionDef.is_generator` properly handles `yield` nodes in
->    `While` tests
-> - Properly construct the arguments of infered property descriptors
-> - Handle the case where the raw builder fails to retrieve the
->    ``__all__`` attribute
-> - Restructure the AST parsing heuristic to always pick the same
->    module
-> - Do not crash with SyntaxError when parsing namedtuples with
->    invalid label
-> - Expose a ast_from_string method in AstroidManager, which will
->    accept source code as a string and return the corresponding
->    astroid object
-> - Prevent a recursion error to happen when inferring the declared
->    metaclass of a class
+> - Fix packaging, remove vestiges of type stubs
+> - Code formatting (isort and black)
+> - Directly distribute type stub file via PEP 561
+> - Include pytest.ini in sdist
+> - Add a Jenkinsfile
+> - Handle another indexing case from NumPy
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../{python3-astroid_2.3.3.bb => python3-astroid_2.4.2.bb}    | 4 ++--
+>   ...hon3-ordered-set_3.1.1.bb => python3-ordered-set_4.0.2.bb} | 4 ++--
 >   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-astroid_2.3.3.bb => python3-astroid_2.4.2.bb} (84%)
+>   rename meta-python/recipes-devtools/python/{python3-ordered-set_3.1.1.bb => python3-ordered-set_4.0.2.bb} (76%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.3.3.bb b/meta-python/recipes-devtools/python/python3-astroid_2.4.2.bb
-> similarity index 84%
-> rename from meta-python/recipes-devtools/python/python3-astroid_2.3.3.bb
-> rename to meta-python/recipes-devtools/python/python3-astroid_2.4.2.bb
-> index dc1ce0eb4..677cec7ac 100644
-> --- a/meta-python/recipes-devtools/python/python3-astroid_2.3.3.bb
-> +++ b/meta-python/recipes-devtools/python/python3-astroid_2.4.2.bb
-> @@ -4,8 +4,8 @@ SECTION = "devel/python"
->   LICENSE = "LGPL-2.1"
->   LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+> diff --git a/meta-python/recipes-devtools/python/python3-ordered-set_3.1.1.bb b/meta-python/recipes-devtools/python/python3-ordered-set_4.0.2.bb
+> similarity index 76%
+> rename from meta-python/recipes-devtools/python/python3-ordered-set_3.1.1.bb
+> rename to meta-python/recipes-devtools/python/python3-ordered-set_4.0.2.bb
+> index bf362daa7..0e678b54d 100644
+> --- a/meta-python/recipes-devtools/python/python3-ordered-set_3.1.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-ordered-set_4.0.2.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "http://github.com/LuminosoInsight/ordered-set"
+>   LICENSE = "MIT"
+>   LIC_FILES_CHKSUM = "file://MIT-LICENSE;md5=2b36be0d99854aa2ae292a800a7c1d4e"
 >   
-> -SRC_URI[md5sum] = "5f3d73d82d1753b59bb49a6bc6046dee"
-> -SRC_URI[sha256sum] = "71ea07f44df9568a75d0f354c49143a4575d90645e9fead6dfb52c26a85ed13a"
-> +SRC_URI[md5sum] = "b54e1325995d3a9abd84bac91d4d5867"
-> +SRC_URI[sha256sum] = "2f4078c2a41bf377eea06d71c9d2ba4eb8f6b1af2135bec27bbbb7d8f12bb703"
+> -SRC_URI[md5sum] = "6e12312c8dc4c90fe840e86e8a352644"
+> -SRC_URI[sha256sum] = "a7bfa858748c73b096e43db14eb23e2bc714a503f990c89fac8fab9b0ee79724"
+> +SRC_URI[md5sum] = "5d88f3870c32d4868b28c8fe833f7e74"
+> +SRC_URI[sha256sum] = "ba93b2df055bca202116ec44b9bead3df33ea63a7d5827ff8e16738b97f33a95"
 >   
->   inherit pypi setuptools3
+>   inherit pypi setuptools3 ptest
 >   
 >
 > 
 
---------------53A61F08C3193D31875ED39B
+--------------86FB07B281A6DB2A10797230
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -143,53 +134,45 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 6/25/20 5:07 AM, Leon Anavi wrote:<br>
+    <div class="moz-cite-prefix">On 6/22/20 6:35 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200625090719.16068-12-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 2.4.2:
+    <blockquote type="cite" cite="mid:20200622103542.27830-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 4.0.2:
 
-- `FunctionDef.is_generator` properly handles `yield` nodes in
-  `While` tests
-- Properly construct the arguments of infered property descriptors
-- Handle the case where the raw builder fails to retrieve the
-  ``__all__`` attribute
-- Restructure the AST parsing heuristic to always pick the same
-  module
-- Do not crash with SyntaxError when parsing namedtuples with
-  invalid label
-- Expose a ast_from_string method in AstroidManager, which will
-  accept source code as a string and return the corresponding
-  astroid object
-- Prevent a recursion error to happen when inferring the declared
-  metaclass of a class
+- Fix packaging, remove vestiges of type stubs
+- Code formatting (isort and black)
+- Directly distribute type stub file via PEP 561
+- Include pytest.ini in sdist
+- Add a Jenkinsfile
+- Handle another indexing case from NumPy
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200625090719.16068-12-leon.anavi@konsulko.com">
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
+    <blockquote type="cite" cite="mid:20200622103542.27830-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../{python3-astroid_2.3.3.bb =&gt; python3-astroid_2.4.2.bb}    | 4 &#43;&#43;--
+ ...hon3-ordered-set_3.1.1.bb =&gt; python3-ordered-set_4.0.2.bb} | 4 &#43;&#43;--
  1 file changed, 2 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-astroid_2.3.3.bb =&gt; python3-astroid_2.4.2.bb} (84%)
+ rename meta-python/recipes-devtools/python/{python3-ordered-set_3.1.1.bb =&gt; python3-ordered-set_4.0.2.bb} (76%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.3.3.bb b/meta-python/recipes-devtools/python/python3-astroid_2.4.2.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-astroid_2.3.3.bb
-rename to meta-python/recipes-devtools/python/python3-astroid_2.4.2.bb
-index dc1ce0eb4..677cec7ac 100644
---- a/meta-python/recipes-devtools/python/python3-astroid_2.3.3.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-astroid_2.4.2.bb
-@@ -4,8 &#43;4,8 @@ SECTION = &quot;devel/python&quot;
- LICENSE = &quot;LGPL-2.1&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=751419260aa954499f7abaabaa882bbe">&quot;file://COPYING;md5=751419260aa954499f7abaabaa882bbe&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-ordered-set_3.1.1.bb b/meta-python/recipes-devtools/python/python3-ordered-set_4.0.2.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-ordered-set_3.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-ordered-set_4.0.2.bb
+index bf362daa7..0e678b54d 100644
+--- a/meta-python/recipes-devtools/python/python3-ordered-set_3.1.1.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-ordered-set_4.0.2.bb
+@@ -3,8 &#43;3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://github.com/LuminosoInsight/ordered-set">&quot;http://github.com/LuminosoInsight/ordered-set&quot;</a>
+ LICENSE = &quot;MIT&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://MIT-LICENSE;md5=2b36be0d99854aa2ae292a800a7c1d4e">&quot;file://MIT-LICENSE;md5=2b36be0d99854aa2ae292a800a7c1d4e&quot;</a>
  
--SRC_URI[md5sum] = &quot;5f3d73d82d1753b59bb49a6bc6046dee&quot;
--SRC_URI[sha256sum] = &quot;71ea07f44df9568a75d0f354c49143a4575d90645e9fead6dfb52c26a85ed13a&quot;
-&#43;SRC_URI[md5sum] = &quot;b54e1325995d3a9abd84bac91d4d5867&quot;
-&#43;SRC_URI[sha256sum] = &quot;2f4078c2a41bf377eea06d71c9d2ba4eb8f6b1af2135bec27bbbb7d8f12bb703&quot;
+-SRC_URI[md5sum] = &quot;6e12312c8dc4c90fe840e86e8a352644&quot;
+-SRC_URI[sha256sum] = &quot;a7bfa858748c73b096e43db14eb23e2bc714a503f990c89fac8fab9b0ee79724&quot;
+&#43;SRC_URI[md5sum] = &quot;5d88f3870c32d4868b28c8fe833f7e74&quot;
+&#43;SRC_URI[sha256sum] = &quot;ba93b2df055bca202116ec44b9bead3df33ea63a7d5827ff8e16738b97f33a95&quot;
  
- inherit pypi setuptools3
+ inherit pypi setuptools3 ptest
  
 </pre>
       <br>
@@ -200,4 +183,4 @@ index dc1ce0eb4..677cec7ac 100644
   </body>
 </html>
 
---------------53A61F08C3193D31875ED39B--
+--------------86FB07B281A6DB2A10797230--
