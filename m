@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.5826.1593170999192476106
+ by mx.groups.io with SMTP id smtpd.web12.5827.1593170999707772413
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Jun 2020 04:29:59 -0700
+ Fri, 26 Jun 2020 04:30:00 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=48362 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jomYP-000568-SC; Fri, 26 Jun 2020 14:29:58 +0300
+	id 1jomYQ-000568-Cn; Fri, 26 Jun 2020 14:29:58 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 07/12] python3-greenlet: Upgrade 0.4.15 -> 0.4.16
-Date: Fri, 26 Jun 2020 14:29:39 +0300
-Message-Id: <20200626112944.25569-7-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 08/12] python3-pkgconfig: Upgrade 1.4.0 -> 1.5.1
+Date: Fri, 26 Jun 2020 14:29:40 +0300
+Message-Id: <20200626112944.25569-8-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200626112944.25569-1-leon.anavi@konsulko.com>
 References: <20200626112944.25569-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,35 +30,48 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.4.16:
+Inherit class pypi and upgrade to release 1.5.1:
 
-- Support for DEC Alpha architecture
-- Support for Python 3.9
-- Support for Python 3.10a0
+- Use poetry instead of setuptools directly
+- Fix: raise exception if package is missing
+- Fix version parsing for openssl-like version numbers
+- Fix: expose --modversion
+- Fix: strip whitespace from variable names
+- Fix: do not specify pytest Python version
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-greenlet_0.4.15.bb => python3-greenlet_0.4.16.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-greenlet_0.4.15.bb => python3-greenlet_0.4.16.bb} (65%)
+ ...hon3-pkgconfig_1.4.0.bb => python3-pkgconfig_1.5.1.bb} | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pkgconfig_1.4.0.bb => python3-pkgconfig_1.5.1.bb} (68%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-greenlet_0.4.15.bb b/meta-python/recipes-devtools/python/python3-greenlet_0.4.16.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-greenlet_0.4.15.bb
-rename to meta-python/recipes-devtools/python/python3-greenlet_0.4.16.bb
-index f9c862118..4556d499f 100644
---- a/meta-python/recipes-devtools/python/python3-greenlet_0.4.15.bb
-+++ b/meta-python/recipes-devtools/python/python3-greenlet_0.4.16.bb
-@@ -3,7 +3,7 @@ LICENSE = "MIT & PSF"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
-                     file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
+diff --git a/meta-python/recipes-devtools/python/python3-pkgconfig_1.4.0.bb b/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.1.bb
+similarity index 68%
+rename from meta-python/recipes-devtools/python/python3-pkgconfig_1.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-pkgconfig_1.5.1.bb
+index fc7a47a43..05ca3beec 100644
+--- a/meta-python/recipes-devtools/python/python3-pkgconfig_1.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.1.bb
+@@ -4,16 +4,14 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=faa7f82be8f220bff6156be4790344fc"
  
--SRC_URI[md5sum] = "10fa304f673fc18b28fa6d8c6658cb80"
--SRC_URI[sha256sum] = "9416443e219356e3c31f1f918a91badf2e37acf297e2fa13d24d1cc2380f8fbc"
-+SRC_URI[md5sum] = "9aebea08f7beb6b87143d0588578c984"
-+SRC_URI[sha256sum] = "6e06eac722676797e8fce4adb8ad3dc57a1bb3adfb0dd3fdf8306c055a38456c"
+-SRC_URI = "git://github.com/matze/pkgconfig.git"
+-SRCREV ?= "8af0102346847e8873af8e76ab3f34ba9da806e2"
++SRC_URI[md5sum] = "9f9cdb224ec0a1e59efcc7cac4b91972"
++SRC_URI[sha256sum] = "97bfe3d981bab675d5ea3ef259045d7919c93897db7d3b59d4e8593cba8d354f"
  
- inherit pypi distutils3
+ RDEPENDS_${PN} = "pkgconfig \
+                  ${PYTHON_PN}-shell \
+                  "
+ 
+-inherit setuptools3
+-
+-S = "${WORKDIR}/git"
++inherit pypi setuptools3
+ 
+ BBCLASSEXTEND = "native"
+ 
 -- 
 2.17.1
 
