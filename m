@@ -1,24 +1,25 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.5825.1593170997714960684
+ by mx.groups.io with SMTP id smtpd.web11.5618.1593170998703216837
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Jun 2020 04:29:58 -0700
+ Fri, 26 Jun 2020 04:29:59 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=48362 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jomYN-000568-VJ; Fri, 26 Jun 2020 14:29:56 +0300
+	id 1jomYO-000568-TN; Fri, 26 Jun 2020 14:29:57 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 05/12] python3-kiwisolver: Upgrade 1.1.0 -> 1.2.0
-Date: Fri, 26 Jun 2020 14:29:37 +0300
-Message-Id: <20200626112944.25569-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 06/12] python3-sqlalchemy: Upgrade 1.3.17 -> 1.3.18
+Date: Fri, 26 Jun 2020 14:29:38 +0300
+Message-Id: <20200626112944.25569-6-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200626112944.25569-1-leon.anavi@konsulko.com>
 References: <20200626112944.25569-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
+MIME-Version: 1.0
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -29,68 +30,55 @@ X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 1.2.0:
+Upgrade to release 1.3.18:
 
-- make the the c++ part of the code c++11 compliant
-- use cppy for Python/C bindings
+- orm: Improve error message when using Query.filter_by() in a
+  query where the first entity is not a mapped class.
+- orm: Added a new parameter query_expression.default_expr to the
+  query_expression() construct, which will be appled to queries
+  automatically if the with_expression() option is not used.
+- engine: Further refinements to the fixes to the "reset" agent
+  fixed in #5326, which now emits a warning when it is not being
+  correctly invoked and corrects for the behavior. Additional
+  scenarios have been identified and fixed where this warning was
+  being emitted.
+- engine: Fixed issue in URL object where stringifying the object
+  would not URL encode special characters, preventing the URL from
+  being re-consumable as a real URL.
+- sql: Added a “.schema” parameter to the table() construct,
+  allowing ad-hoc table expressions to also include a schema name.
+- sql: Introduce IdentityOptions to store common parameters for
+  sequences and identity columns.
+- schema: Fixed issue where dialect_options were omitted when a
+  database object (e.g., Table) was copied using tometadata().
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python3-kiwisolver_1.1.0.bb        | 16 ---------------
- .../python/python3-kiwisolver_1.2.0.bb        | 20 +++++++++++++++++++
- 2 files changed, 20 insertions(+), 16 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-kiwisolver_1.2.0.bb
+ ...hon3-sqlalchemy_1.3.17.bb => python3-sqlalchemy_1.3.18.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.3.17.bb => python3-sqlalchemy_1.3.18.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb b/meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb
-deleted file mode 100644
-index a10830257..000000000
---- a/meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--SUMMARY = "A fast implementation of the Cassowary constraint solver"
--HOMEPAGE = "https://github.com/nucleic/kiwi"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://setup.py;endline=7;md5=1c177d169db050341d3b890c69fb80e3"
--
--SRC_URI[md5sum] = "fc8a614367f7ba0d34a02fd08c535afc"
--SRC_URI[sha256sum] = "53eaed412477c836e1b9522c19858a8557d6e595077830146182225613b11a75"
--
--inherit pypi setuptools3
--
--RDEPENDS_${PN} += "\
--    python3-core \
--    python3-setuptools \
--"
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-kiwisolver_1.2.0.bb b/meta-python/recipes-devtools/python/python3-kiwisolver_1.2.0.bb
-new file mode 100644
-index 000000000..94db61142
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-kiwisolver_1.2.0.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "A fast implementation of the Cassowary constraint solver"
-+HOMEPAGE = "https://github.com/nucleic/kiwi"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://setup.py;endline=7;md5=e54bd74bd9d0a84ae3f8f6d21ada0ab4"
-+
-+SRC_URI[md5sum] = "9f53fabb361c04d76c5afc688652c814"
-+SRC_URI[sha256sum] = "247800260cd38160c362d211dcaf4ed0f7816afb5efe56544748b21d6ad6d17f"
-+
-+inherit pypi setuptools3
-+
-+DEPENDS += "\
-+    python3-cppy-native \
-+"
-+
-+RDEPENDS_${PN} += "\
-+    python3-core \
-+    python3-setuptools \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.17.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.18.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.17.bb
+rename to meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.18.bb
+index b9c58e5b6..a5e1737b0 100644
+--- a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.17.bb
++++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.18.bb
+@@ -4,8 +4,8 @@ HOMEPAGE = "http://www.sqlalchemy.org/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c19467890539ff718c00a019c9c7a7b2"
+ 
+-SRC_URI[md5sum] = "478214152b9293bf5652815d7312c890"
+-SRC_URI[sha256sum] = "156a27548ba4e1fed944ff9fcdc150633e61d350d673ae7baaf6c25c04ac1f71"
++SRC_URI[md5sum] = "96e085d318297b1ad36ef2685f54287a"
++SRC_URI[sha256sum] = "da2fb75f64792c1fc64c82313a00c728a7c301efe6a60b7a9fe35b16b4368ce7"
+ 
+ PYPI_PACKAGE = "SQLAlchemy"
+ inherit pypi setuptools3
 -- 
 2.17.1
 
