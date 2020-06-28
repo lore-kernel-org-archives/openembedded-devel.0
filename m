@@ -1,50 +1,50 @@
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web10.7014.1593383759481320963
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web10.7016.1593383760416720499
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Jun 2020 15:35:59 -0700
+ Sun, 28 Jun 2020 15:36:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Q8Pku1Ik;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id dp18so14716306ejc.8
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2020 15:35:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=agO1lusR;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id ga4so14676345ejb.11
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2020 15:36:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=/3vajvdjOtsSc4m5+/IAAV9XwVMHQ6jj1Nnjooa6avs=;
-        b=Q8Pku1IkCxbNTgtubOGUfdl8lztJ4ba6HgNumSuVjV6V+9f4Ndt+J76C9+W5GHTyWP
-         EHLijMciT5LEO4CBUxCdkI7z8E0fiQHYl3cyLBIwjnxNOk1sw1Ej1lQUckRCUFwb/B2G
-         aBW7tw8MGcXFQ6hijOLTPpbCk9daF+oIApofUUT9qoqlB1IeJY6FG/D4nfBLFDrzfeKh
-         qWBoRe5rpuHpq4pphe3cq8aOQ4QsiwSPpafDrJBJK6dKqdFpSyZQ2a5bnNaIeTElMwoY
-         pghkcqgPZDa0W5637Mzxz9WVN2gHZ4G/M2QEfuvuEdL7lWZ0EB9ymBO2GOu5XscrkjdB
-         ngaA==
+        bh=xZA0Z8tc39nKRysXxrB4Xh18xwjtfGnw8lo/Mc4J8/0=;
+        b=agO1lusRAgMBgry5aO12zkhyNO26hngMQzZgO9JcxIlvHBv3KDaTrz4J+Vgp/2XrhH
+         b+66zEldqSkyazHwtp8Vzwj+05cHl+so5c1JPWfZN7FSccg5ypiUNRb17Kcjegl2AbSa
+         EvZ/yOz32lasIkEtQ+DPF0VaUwKh4CbMiEOsEUdmN0f+obk3v9WKCvDpYPmM5d46x14Y
+         SY+lUDlS7ofwPId8cec0iLqYgL5jSYaN7rHIGSgVaqiUVUgzzgVD2deEy8ihp65p7Pf2
+         s9CPwjSeswG6rEbylHL6NxIprVeoBY989wRhkUrISDJxpR8nWkK8r5L8H/KtUgBHPw++
+         EatQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=/3vajvdjOtsSc4m5+/IAAV9XwVMHQ6jj1Nnjooa6avs=;
-        b=hBa/UW2d2hTdgz7lMtKx0/pirT2LK511asV4treNhg2dZ7HAWZBP3eggfInf89REai
-         P0CCDT4lv7VRAGqjqeFzjv6tW9bKvO3hV5VE7gG2jdUG2BAlT7z4Kk5CdUmZkihPfdbt
-         0oJMdVoOHDn2lNNvUOElpBqA7SJ34ykgVF7PAW7NERC8TLQaKu1J+fWcrWmDYllFGMUq
-         0HJCRpz3Z+Z0Bgah6lOsdACKY9O5sWErMNgRdKwpKt7NeBcLLrCc6pOY8fv8rZo/9FMO
-         WGvYY1p5ZfEeulYcRFFsj4Sb7EaO81G7OUVy4FN/ZJYZ6SR4ddIXRqunvq3E71nSc3ky
-         8VYg==
-X-Gm-Message-State: AOAM532/K+a1gX2+LzsIKt0a9oBqp87MV2bdRw6xSWflxcbP80Ilh8C4
-	K2nR5Q9GdKEFOKqmz7eNyymOo+2T
-X-Google-Smtp-Source: ABdhPJx7I/htRM+yN0DI02HCk2lYyN6FaYIIP3qX0sE9xUiwApQjwxGRnyMfznQwgDV8cyPX86kRHw==
-X-Received: by 2002:a17:907:1002:: with SMTP id ox2mr11383709ejb.358.1593383757821;
-        Sun, 28 Jun 2020 15:35:57 -0700 (PDT)
+        bh=xZA0Z8tc39nKRysXxrB4Xh18xwjtfGnw8lo/Mc4J8/0=;
+        b=CpIJ3GI4m+AiVCF/+0b96ywX6I3sJZ86GhSgdadTkZq8cTJ89m0VnNcLW+5kmF7Vy3
+         IMjSsSdZ6SWAyt0Zr3ExJ3hebPHrdmEWWvqi5JN3tcqTasi4Xt2EYbsgmxeWuomuxZ9s
+         C1ryOu+dFGbPmYbz4RH6WHUokKFWIfJdnB+QYgf1vStmXskNagjPzuh68+43dcplET9x
+         1dODwE00zs4CeAAhQekv2aGSSp3XAct5pmP+88vK7whNqS9k66iqh88KeV1+xobIucyj
+         onyvO1Ks8ZBpexj8Rl5UyPMqlAUNsxrSTyuQuvYDmjaRMMg+lakse65MYguFLY8/3lIm
+         ZGPA==
+X-Gm-Message-State: AOAM533538ZY+n+MYj9Fg2zS5K7i2klRB8Lc7ZYYs2gD7LccJ7sap0jX
+	X/BsKnUvW+IKt4Db+p/dEqyzKAnC
+X-Google-Smtp-Source: ABdhPJyDdtxSbOKE4Lk6Svt3fGCjaaETy+8F1PagsjUxf65EPYTgIE8RvkXlK8e8lwy7s9A5HyNyLA==
+X-Received: by 2002:a17:906:694d:: with SMTP id c13mr11173670ejs.337.1593383758636;
+        Sun, 28 Jun 2020 15:35:58 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f4b8e33cbb401a015e6742d.dip0.t-ipconnect.de. [2003:f0:7f4b:8e33:cbb4:1a0:15e6:742d])
-        by smtp.gmail.com with ESMTPSA id q25sm7602169ejz.97.2020.06.28.15.35.56
+        by smtp.gmail.com with ESMTPSA id q25sm7602169ejz.97.2020.06.28.15.35.57
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Jun 2020 15:35:57 -0700 (PDT)
+        Sun, 28 Jun 2020 15:35:58 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 4/5] ibus: upgrade 1.5.21 -> 1.5.22
-Date: Mon, 29 Jun 2020 00:35:44 +0200
-Message-Id: <20200628223545.3853840-4-schnitzeltony@gmail.com>
+Subject: [PATCH 5/5] network-manager-applet: upgrade 1.16.0 -> 1.18.0
+Date: Mon, 29 Jun 2020 00:35:45 +0200
+Message-Id: <20200628223545.3853840-5-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200628223545.3853840-1-schnitzeltony@gmail.com>
 References: <20200628223545.3853840-1-schnitzeltony@gmail.com>
@@ -52,41 +52,42 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-1.5.22
+=======================================================
+network-manager-applet-1.18.0
+Overview of changes since network-manager-applet-1.16.0
+=======================================================
 
-* GDBusAuthObserver security fix 3d442db
-* Use XDG_CACHE_HOME for Unix socket directory a141a14 982c40f 5742e1b d53401e a1705ad
-* Hangul button press handling 25d11f5 c662a02 ecc3465
-* Fix deprecated APIs 48a8d7e 35863d8
-* Bug fixes 773420f 745ffb8 26a8105 bccf94d d50627f 7486385 cd4fef5
+* Enable build with appindicator by default.
+* Add WireGuard support to the editor.
+* Support OWE (Opportunistic Wireless Encryption) in the editor.
+* Fix crash when disposing VPN secret dialog.
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-gnome/recipes-support/ibus/ibus.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ ...er-applet_1.16.0.bb => network-manager-applet_1.18.0.bb} | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-gnome/recipes-connectivity/network-manager-applet/{network-manager-applet_1.16.0.bb => network-manager-applet_1.18.0.bb} (78%)
 
-diff --git a/meta-gnome/recipes-support/ibus/ibus.inc b/meta-gnome/recipes-support/ibus/ibus.inc
-index 0f4ae7d04..1bbeb2c48 100644
---- a/meta-gnome/recipes-support/ibus/ibus.inc
-+++ b/meta-gnome/recipes-support/ibus/ibus.inc
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.16.0.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.18.0.bb
+similarity index 78%
+rename from meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.16.0.bb
+rename to meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.18.0.bb
+index 0cac52c05..c5e95b388 100644
+--- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.16.0.bb
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.18.0.bb
+@@ -9,8 +9,10 @@ inherit features_check gnomebase gsettings gtk-icon-cache gettext
  
- inherit autotools-brokensep pkgconfig gobject-introspection gettext gtk-doc vala
+ REQUIRED_DISTRO_FEATURES = "x11"
  
--PV = "1.5.21"
-+PV = "1.5.22"
+-SRC_URI[archive.md5sum] = "9652c2757e85d6caba657405cf794fbd"
+-SRC_URI[archive.sha256sum] = "d6f98a455a271e7e169b5d35d290f4880f503cdf7593251572c9330941b5c3e5"
++SRC_URI[archive.sha256sum] = "ddbb400ace804b59cc513611ce9701f7ef3f00de151dbbfb96284c8c1ef2b18b"
++
++# We don't not have ubuntu's appindicator (yet?)
++EXTRA_OEMESON = "-Dappindicator=no"
  
- DEPENDS = "unicode-ucd"
- 
-@@ -13,7 +13,7 @@ SRC_URI = " \
-     git://github.com/ibus/ibus.git \
-     file://0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch \
- "
--SRCREV = "ae0040c73466bb6e78fce5e669a55fcce6ffd16d"
-+SRCREV = "e3262f08b9e3efc57808700823b0622ec03a1b5f"
- S = "${WORKDIR}/git"
- 
- PACKAGECONFIG[appindicator] = "--enable-appindicator,--disable-appindicator,qtbase"
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[modemmanager] = "-Dwwan=true, -Dwwan=false, modemmanager"
 -- 
 2.26.2
 
