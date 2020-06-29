@@ -1,93 +1,65 @@
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web10.7016.1593383760416720499
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web12.9531.1593393090937417847
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Jun 2020 15:36:00 -0700
+ Sun, 28 Jun 2020 18:11:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=agO1lusR;
- spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id ga4so14676345ejb.11
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jun 2020 15:36:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=xZA0Z8tc39nKRysXxrB4Xh18xwjtfGnw8lo/Mc4J8/0=;
-        b=agO1lusRAgMBgry5aO12zkhyNO26hngMQzZgO9JcxIlvHBv3KDaTrz4J+Vgp/2XrhH
-         b+66zEldqSkyazHwtp8Vzwj+05cHl+so5c1JPWfZN7FSccg5ypiUNRb17Kcjegl2AbSa
-         EvZ/yOz32lasIkEtQ+DPF0VaUwKh4CbMiEOsEUdmN0f+obk3v9WKCvDpYPmM5d46x14Y
-         SY+lUDlS7ofwPId8cec0iLqYgL5jSYaN7rHIGSgVaqiUVUgzzgVD2deEy8ihp65p7Pf2
-         s9CPwjSeswG6rEbylHL6NxIprVeoBY989wRhkUrISDJxpR8nWkK8r5L8H/KtUgBHPw++
-         EatQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=xZA0Z8tc39nKRysXxrB4Xh18xwjtfGnw8lo/Mc4J8/0=;
-        b=CpIJ3GI4m+AiVCF/+0b96ywX6I3sJZ86GhSgdadTkZq8cTJ89m0VnNcLW+5kmF7Vy3
-         IMjSsSdZ6SWAyt0Zr3ExJ3hebPHrdmEWWvqi5JN3tcqTasi4Xt2EYbsgmxeWuomuxZ9s
-         C1ryOu+dFGbPmYbz4RH6WHUokKFWIfJdnB+QYgf1vStmXskNagjPzuh68+43dcplET9x
-         1dODwE00zs4CeAAhQekv2aGSSp3XAct5pmP+88vK7whNqS9k66iqh88KeV1+xobIucyj
-         onyvO1Ks8ZBpexj8Rl5UyPMqlAUNsxrSTyuQuvYDmjaRMMg+lakse65MYguFLY8/3lIm
-         ZGPA==
-X-Gm-Message-State: AOAM533538ZY+n+MYj9Fg2zS5K7i2klRB8Lc7ZYYs2gD7LccJ7sap0jX
-	X/BsKnUvW+IKt4Db+p/dEqyzKAnC
-X-Google-Smtp-Source: ABdhPJyDdtxSbOKE4Lk6Svt3fGCjaaETy+8F1PagsjUxf65EPYTgIE8RvkXlK8e8lwy7s9A5HyNyLA==
-X-Received: by 2002:a17:906:694d:: with SMTP id c13mr11173670ejs.337.1593383758636;
-        Sun, 28 Jun 2020 15:35:58 -0700 (PDT)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300f07f4b8e33cbb401a015e6742d.dip0.t-ipconnect.de. [2003:f0:7f4b:8e33:cbb4:1a0:15e6:742d])
-        by smtp.gmail.com with ESMTPSA id q25sm7602169ejz.97.2020.06.28.15.35.57
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Jun 2020 15:35:58 -0700 (PDT)
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 5/5] network-manager-applet: upgrade 1.16.0 -> 1.18.0
-Date: Mon, 29 Jun 2020 00:35:45 +0200
-Message-Id: <20200628223545.3853840-5-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200628223545.3853840-1-schnitzeltony@gmail.com>
-References: <20200628223545.3853840-1-schnitzeltony@gmail.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.75,293,1589212800"; 
+   d="scan'208";a="95451757"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 29 Jun 2020 09:11:24 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id BFBC24CE34D8
+	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Jun 2020 09:00:53 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Mon, 29 Jun 2020 09:11:21 +0800
+From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-gnome][PATCH 1/2] Fix build error when enable multilib.
+Date: Mon, 29 Jun 2020 09:11:16 +0800
+Message-ID: <1593393076-49791-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
+X-yoursite-MailScanner-ID: BFBC24CE34D8.A9C43
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-=======================================================
-network-manager-applet-1.18.0
-Overview of changes since network-manager-applet-1.16.0
-=======================================================
+ERROR: tracker-miners-2.3.3-r0 do_package: QA Issue: tracker-miners:
+Files/directories were installed but not shipped in any package:
+  /usr/lib64/systemd
+  /usr/lib64/systemd/user
+  /usr/lib64/systemd/user/tracker-extract.service
+  /usr/lib64/systemd/user/tracker-writeback.service
+  /usr/lib64/systemd/user/tracker-miner-fs.service
 
-* Enable build with appindicator by default.
-* Add WireGuard support to the editor.
-* Support OWE (Opportunistic Wireless Encryption) in the editor.
-* Fix crash when disposing VPN secret dialog.
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- ...er-applet_1.16.0.bb => network-manager-applet_1.18.0.bb} | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-connectivity/network-manager-applet/{network-manager-applet_1.16.0.bb => network-manager-applet_1.18.0.bb} (78%)
+ meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.16.0.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.18.0.bb
-similarity index 78%
-rename from meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.16.0.bb
-rename to meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.18.0.bb
-index 0cac52c05..c5e95b388 100644
---- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.16.0.bb
-+++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.18.0.bb
-@@ -9,8 +9,10 @@ inherit features_check gnomebase gsettings gtk-icon-cache gettext
+diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb b/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb
+index b40787f..e2ced39 100644
+--- a/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb
++++ b/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb
+@@ -60,6 +60,10 @@ PACKAGECONFIG[libseccomp] = ",,libseccomp"
+ # not yet in meta-gnome
+ PACKAGECONFIG[rss]        = "-Dminer_rss=true,-Dminer_rss=false,libgrss"
  
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI[archive.md5sum] = "9652c2757e85d6caba657405cf794fbd"
--SRC_URI[archive.sha256sum] = "d6f98a455a271e7e169b5d35d290f4880f503cdf7593251572c9330941b5c3e5"
-+SRC_URI[archive.sha256sum] = "ddbb400ace804b59cc513611ce9701f7ef3f00de151dbbfb96284c8c1ef2b18b"
++EXTRA_OEMESON += " \
++    -Dsystemd_user_services=${systemd_user_unitdir} \
++"
 +
-+# We don't not have ubuntu's appindicator (yet?)
-+EXTRA_OEMESON = "-Dappindicator=no"
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[modemmanager] = "-Dwwan=true, -Dwwan=false, modemmanager"
+ FILES_${PN} += " \
+     ${datadir}/dbus-1 \
+     ${datadir}/tracker \
 -- 
-2.26.2
+1.8.3.1
+
+
 
