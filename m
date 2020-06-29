@@ -1,289 +1,203 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.85])
- by mx.groups.io with SMTP id smtpd.web12.13369.1593414125258096656
+Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com [209.85.218.68])
+ by mx.groups.io with SMTP id smtpd.web10.13660.1593414855431486223
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Jun 2020 00:02:05 -0700
+ Mon, 29 Jun 2020 00:14:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=mPQVceCR;
- spf=pass (domain: windriver.com, ip: 40.107.243.85, mailfrom: qi.chen@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=h25eqAVT5pBVJRsPGC42V7FYgQ6pZOiTOre/ofHOX1xwu5f8UMK7hatlVRo6UdYJuNz0zVOX5vUM4O8ud8ncbg4hJlMVc7DrBtR7OlOxTOhyB4vhIMtI92D1P0MRt5gn3OBfREc7Om6KRQ7h5DP2q5A4OsZcdvJ3pmCJg2S5T3O9WbwGMFSectIpK/Wj1MnQ4vGWGbHm1de+z13Bb2VMJ06s/aOB4vOGPPSksTBom72uGAhzoGIcYSgPgQLEJF3m4kO4Cp9z3HIKASsjHO97msN3c+ELRd9CyUBfaPpoQYIC+iZ9MHtHcVEVSv8QyU3BuEUgF1Rq94jGPh3xH6DkCg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=T9Tn+D33hgpk8fB2uWzQ0eufalPH+d0k97GqbAgTnaI=;
- b=NVsn5YJhLTwmaJTBYmVyl9Z5zRSucNjdCKBwluXOuKazas/FKsKgVK5GZ8oKI8+GES2Um904W89zXnr235yt+xiqR60PF5Eiivhy/BMpzoPu5RaX3UifBMArFVG/Ak8tj3HUOOL+6ksYVUuQPEEbrCbHHL0KA1enB1uCef6+/6YNYdwKPFVqa4EOm7WH+FxFpiAdHGFKQ5APciUZOUGyzRJvsLygDUG4V2MEBOwwBJD/v9rMSCy/DNxEG75FVbKqpyr7FRcdCBvfBQgjEfKK7h5jIIn6iWLEeLBwE6rIdCRmjGOrJIz6eyIbtFLqX79IQ45569QrFPb8AvpLVLdrIg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=U1SdO0xK;
+ spf=pass (domain: gmail.com, ip: 209.85.218.68, mailfrom: uvv.mail@gmail.com)
+Received: by mail-ej1-f68.google.com with SMTP id a1so15447254ejg.12
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Jun 2020 00:14:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=T9Tn+D33hgpk8fB2uWzQ0eufalPH+d0k97GqbAgTnaI=;
- b=mPQVceCRR2huuBJEcyUNF5B7IRyvk92CBDg8jzQJIqYnSpMZlnc3Z2ZDC5vU17iKebDVtvrJk9MA5CcS+/G+i+1VVPR6xZstNZnw/ZDT3KI/yVM+cWY6QV9QAf5D5xmd1J89pSBj16RE1iMjuC0LwONsPOH6L1qeeyd+DAaE2b8=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BYAPR11MB3480.namprd11.prod.outlook.com (2603:10b6:a03:79::27)
- by BY5PR11MB4388.namprd11.prod.outlook.com (2603:10b6:a03:1c9::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.20; Mon, 29 Jun
- 2020 07:02:03 +0000
-Received: from BYAPR11MB3480.namprd11.prod.outlook.com
- ([fe80::e91c:b2c9:b293:dab2]) by BYAPR11MB3480.namprd11.prod.outlook.com
- ([fe80::e91c:b2c9:b293:dab2%7]) with mapi id 15.20.3131.026; Mon, 29 Jun 2020
- 07:02:03 +0000
-Subject: Re: [oe] [meta-oe][PATCH] multipath-tools: fix compiling parallel issue
-To: Scott Murray <scott.murray@konsulko.com>,
- hongxu <hongxu.jia@windriver.com>
-References: <20200526062714.4000-1-hongxu.jia@windriver.com>
- <alpine.LFD.2.22.394.2006231320130.2920@godzilla.spiteful.org>
-Cc: raj.khem@gmail.com, openembedded-devel@lists.openembedded.org
-From: "Chen Qi" <Qi.Chen@windriver.com>
-Message-ID: <5a7869aa-be14-52e9-65b3-b1706685128e@windriver.com>
-Date: Mon, 29 Jun 2020 15:05:30 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
- Thunderbird/45.4.0
-In-Reply-To: <alpine.LFD.2.22.394.2006231320130.2920@godzilla.spiteful.org>
-X-ClientProxiedBy: HK2PR04CA0070.apcprd04.prod.outlook.com
- (2603:1096:202:15::14) To BYAPR11MB3480.namprd11.prod.outlook.com
- (2603:10b6:a03:79::27)
-Return-Path: Qi.Chen@windriver.com
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=dRYImXlX0NJ67ZnZaWiDCEBhkGQ86eZR1wjQBhJaWRg=;
+        b=U1SdO0xKOgL3ZBwVFWHh+VCYYcRUmC6PhO/BirCt5EecUUsUMj1/vyqqXPOnhmIGyg
+         eIKY1Dq6/6k0dQtiMe27SybQYUkBBg29FWw4UV6EMvO3PchYY7PDbjKdsGs1+SguW0jY
+         9wEw6rigKRpWWd0hDeLRvLFloB3c9Ydq8WPk7PuSf/fID40lnpruCpTn7tlqnFLkCN7G
+         50YeMtPhLC38aqXlxGRlp+sRKWPMYnF2By5msm1SsUEISAPbPAudbKrn3y0NsjGGF3dA
+         dtoPADc3EK/bG8J4x0X9pcNlRXFV7NL/FHAJW1MYrj1mpZsIg0bOwger1dm3cQelGMnl
+         pWeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=dRYImXlX0NJ67ZnZaWiDCEBhkGQ86eZR1wjQBhJaWRg=;
+        b=YZOcBlHZjdHoDjx5VMi9kI2HOCnANRJ/jeFErE+P5q47ES3bS8zw2ns8HTOfu5lFu0
+         zuCqS8Np2OrHG94i41xbsXiwuOWbIEwXwqgSpi2Fnt7E6zxqII+etyZcjR2Fha91/3RL
+         lWta2OhSK5GyyJTXsC1Hq3Es5ReY/fcYCWNEUmZ3mNzclUP8IpngqymSLvY/+mQH8Vuv
+         RCXKHmQD+aIgjENXtazdQ01VXFmQt3YVrkwHVFpHC9LFKQW2Y+IkNTcDPycP0cxJwOVD
+         GjSGvU4GVFbzuhH2fHFmNSVnfhLraf5vzUM/rq4LUq02zIeX1SgUHFL+aPPVnH3lk6TO
+         CHpw==
+X-Gm-Message-State: AOAM531i1q09phYn3TPkKgWSgX0nT8+86SKP//7CpNObtFqXMMjQQhXD
+	koA9JWQfJc+ScwNhm7TN78FjoUUloQxdfA==
+X-Google-Smtp-Source: ABdhPJx8r7HWGpZr6v0Sn/frJFhAky/6KVFjiMd1fZsT0/8cJ6RyV8IQemOKZYTs6x9Rr091mpwWoQ==
+X-Received: by 2002:a17:906:2cd5:: with SMTP id r21mr12405338ejr.20.1593414853487;
+        Mon, 29 Jun 2020 00:14:13 -0700 (PDT)
+Return-Path: <uvv.mail@gmail.com>
+Received: from localhost.localdomain (dslb-002-205-007-033.002.205.pools.vodafone-ip.de. [2.205.7.33])
+        by smtp.gmail.com with ESMTPSA id e3sm6506188edm.14.2020.06.29.00.14.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 29 Jun 2020 00:14:12 -0700 (PDT)
+From: "Vyacheslav Yurkov" <uvv.mail@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+Subject: [meta-java][PATCH v2] icedtea7-native: set unique download file names
+Date: Mon, 29 Jun 2020 09:14:00 +0200
+Message-Id: <20200629071400.200683-1-uvv.mail@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [128.224.162.161] (60.247.85.82) by HK2PR04CA0070.apcprd04.prod.outlook.com (2603:1096:202:15::14) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.20.3131.21 via Frontend Transport; Mon, 29 Jun 2020 07:02:01 +0000
-X-Originating-IP: [60.247.85.82]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b21ede23-7f7c-4614-a94a-08d81bfa5363
-X-MS-TrafficTypeDiagnostic: BY5PR11MB4388:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB4388CFE1339AEB620CB00A7DED6E0@BY5PR11MB4388.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:4941;
-X-Forefront-PRVS: 044968D9E1
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	Rm+rulBYts3tCYElP6WO9/emrz+MpTXipkqblglpxGvreXKkJZgDv3P95sZuVsmnR8ZRym2Tr7YvutcH7Mjj9UXpkY7skQfOxT2SPVt5YMw2+1RAL9alvj4fzlDfDHHpMq1qx96flOWk7/p1x1NSjVi3anM9feiS8zCLgAGyaFaqFElkXHlTsELLjHtaaI4kTTF9MvZTp6iQScKxyEih4ou/WiE2mT86mQ5O2V9jUtI/F3DSFZzWj9EVdzZinmxaLte+UEde7PQi6PGvjpQiQF1Xi/eViTuxkBAEYTAwA4cFeM0AIwcMelhGzgfJCHhe+/7ka4BeXm6dpTIA8yeq/6dJyL4v4goNRBiIJ26YN+xxqkgGJsS9NYwnkGNPiTEvJbW9C7O3DJaxXoFJDhdYa0fc+sTqWmv7D/VnTssdLNQx87tYGv43tjye+H8wzLP2wfKbv49ZMEqC1+kDpv5yYYTAhjTQkFGxXYY5TgTTgdRKdFOxEiTEYwBxzbCJFyAx5Lhkt058ck4AOtw59B8yMA==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR11MB3480.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(376002)(39840400004)(396003)(136003)(366004)(66556008)(66946007)(66476007)(956004)(316002)(6706004)(6486002)(31696002)(16526019)(186003)(6636002)(5660300002)(86362001)(2906002)(110136005)(83380400001)(8676002)(16576012)(8936002)(6666004)(36756003)(31686004)(4326008)(966005)(33964004)(166002)(53546011)(478600001)(2616005)(52116002)(26005)(78286006)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	5O/6jQES3h+f3uZP0Q+ojBSiqZlYQh0yTkDUJd8icjP7oh4WhjCrxuj09+sKT9Wa1Jnz8Q3Kicoq2EdLI69ziQWUdmFJHkhMqT0nBv2GPnxtQSTNppg8hb6ByMk5eQUca54W+tG4Zt6dsuh2rWs8Sg6xFSPcxqW25ikXQnb9IOH1/pkb6FM/MiyYPtC260a5TCKdYn/tiWTdZ7Na5koqEn1wFUXQ6yY+BQfkV4f4TFGQ9byVUh+SNVvYtCeRcXC+ck4wlSF0/Rb+pKJA2w3kUCppTUy4jVg/y0O0ExgBDQqj2B8jPt32Ke8oFJLXWqnMb/Q5hYA/NmGrU8CAzatQ50TASFaMyZtPMDMn2oDfkePG/tZMF4zomR9Z5II7+EiVdhpNR7flLLZw4ophiXqTyBq+pv4nEZoVkAyl4tSFT6aAiV5RYf+JBCgVYnICAQp6Qom8MJ+Pl7sxpbfHkrTi09qShXE28UaHULIHh1ef9EM=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b21ede23-7f7c-4614-a94a-08d81bfa5363
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR11MB3480.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2020 07:02:02.9888
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: a+GAed0JQeaA7ZCxOT6395T2gd78Gl5to4d7GpkDWtjmXr1KtPQuJN8iLGARQeI3zSAxbjTLAYDGOfAEiEXZKg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4388
-Content-Type: multipart/alternative;
- boundary="------------F5DC23AEF5CAF757780D86B8"
-
---------------F5DC23AEF5CAF757780D86B8
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-On 06/24/2020 01:24 AM, Scott Murray wrote:
-> On Mon, 25 May 2020, hongxu wrote:
->
->> Add explicit dependency on libraries
->> [snip]
->> gcc/i686-overc-linux/10.1.0/ld: cannot find -lmpathpersist
->> collect2: error: ld returned 1 exit status
->> Makefile:36: recipe for target 'multipathd' failed
->> make[1]: *** [multipathd] Error 1
->> make[1]: Leaving directory 'git/multipathd'
->> Makefile:29: recipe for target 'multipathd' failed
->> make: *** [multipathd] Error 2
->> ln -sf libmpathpersist.so.0 libmpathpersist.so
->> [snip]
->>
->> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> [Snip]
->
-> Just a heads up, this change seems perhaps insufficient, in one of my
-> first test builds of AGL with latest dunfell meta-oe, I hit this failure:
->
-> /ws/scottm/dev/agl/agl-repo/build-qemux86-64/tmp/work/corei7-64-agl-linux/multipath-tools/0.8.4-r0/recipe-sysroot-native/usr/bin/x86_64-agl-linux/../../libexec/x86_64-agl-linux/gcc/x86_64-agl-linux/9.3.0/ld:
-> err
-> or in libsg.o(.eh_frame); no .eh_frame_hdr table will be created
-> /ws/scottm/dev/agl/agl-repo/build-qemux86-64/tmp/work/corei7-64-agl-linux/multipath-tools/0.8.4-r0/recipe-sysroot-native/usr/bin/x86_64-agl-linux/../../libexec/x86_64-agl-linux/gcc/x86_64-agl-linux/9.3.0/ld:
-> BFD
->   (GNU Binutils) 2.34.0.20200220 internal error, aborting at
-> ../../bfd/merge.c:933 in _bfd_merged_section_offset
->
-> /ws/scottm/dev/agl/agl-repo/build-qemux86-64/tmp/work/corei7-64-agl-linux/multipath-tools/0.8.4-r0/recipe-sysroot-native/usr/bin/x86_64-agl-linux/../../libexec/x86_64-agl-linux/gcc/x86_64-agl-linux/9.3.0/ld:
-> Ple
-> ase report this bug.
->
-> collect2: error: ld returned 1 exit status
-> make[1]: *** [Makefile:24: libcheckreadsector0.so] Error 1
-> make[1]: *** Waiting for unfinished jobs....
->
-> It built fine on a retry.  My guess is there's still a race between ld and
-> one of the inputs being generated.
->
-> Scott
->
->
-
-I also got a similar error.
-ld: error in libsg.o(.eh_frame); no .eh_frame_hdr table will be created
-....
-ld: BFD (GNU Binutils) 2.34.0.20200220 internal error, aborting at 
-../../bfd/merge.c:933 in _bfd_merged_section_offset
-....
-| make[1]: *** [Makefile:24: libcheckcciss_tur.so] Error 1
-| make[1]: *** Waiting for unfinished jobs....
-
-Looking at the Makefile, it has:
-*LIBS= \**
-**        libcheckcciss_tur.so \**
-**        libcheckreadsector0.so \**
-**        libchecktur.so \**
-**        libcheckdirectio.so \**
-**        libcheckemc_clariion.so \**
-**        libcheckhp_sw.so \**
-**        libcheckrdac.so**
-**
-**all: $(LIBS)*
-
-and
-
-*libcheck%.so: libsg.o %.o**
-**        $(CC) $(LDFLAGS) $(SHARED_FLAGS) -o $@ $^*
-and
-
-*%.o:    %.c**
-**        @echo building $@ because of $?**
-**        $(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<*
-
- From the Makefile, there seems no race condition.
-
-Khem, do you have some idea what's going on?
-
-Best Regards,
-Chen Qi
-
->
->
-> 
-
-
-
---------------F5DC23AEF5CAF757780D86B8
-Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 8bit
 
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body bgcolor="#FFFFFF" text="#000000">
-    <div class="moz-cite-prefix">On 06/24/2020 01:24 AM, Scott Murray
-      wrote:<br>
-    </div>
-    <blockquote cite="mid:alpine.LFD.2.22.394.2006231320130.2920@godzilla.spiteful.org" type="cite">
-      <pre wrap="">On Mon, 25 May 2020, hongxu wrote:
+From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
 
-</pre>
-      <blockquote type="cite">
-        <pre wrap="">Add explicit dependency on libraries
-[snip]
-gcc/i686-overc-linux/10.1.0/ld: cannot find -lmpathpersist
-collect2: error: ld returned 1 exit status
-Makefile:36: recipe for target 'multipathd' failed
-make[1]: *** [multipathd] Error 1
-make[1]: Leaving directory 'git/multipathd'
-Makefile:29: recipe for target 'multipathd' failed
-make: *** [multipathd] Error 2
-ln -sf libmpathpersist.so.0 libmpathpersist.so
-[snip]
+Add package names to download file names. This allows to avoid name
+collisions in case PREMIRRORS are used and all source archives reside in
+the same directory. Fixed mixed indentation.
 
-Signed-off-by: Hongxu Jia <a class="moz-txt-link-rfc2396E" href="mailto:hongxu.jia@windriver.com">&lt;hongxu.jia@windriver.com&gt;</a>
-</pre>
-      </blockquote>
-      <pre wrap="">[Snip]
+Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+---
+ recipes-core/icedtea/icedtea7-native.inc      | 47 +++++++++----------
+ .../icedtea/openjdk-7-release-03b147.inc      | 40 +++++++++-------
+ 2 files changed, 46 insertions(+), 41 deletions(-)
 
-Just a heads up, this change seems perhaps insufficient, in one of my
-first test builds of AGL with latest dunfell meta-oe, I hit this failure:
+diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
+index b0b9419..f117f4a 100644
+--- a/recipes-core/icedtea/icedtea7-native.inc
++++ b/recipes-core/icedtea/icedtea7-native.inc
+@@ -67,31 +67,28 @@ export ALT_FREETYPE_LIB_PATH = "${STAGING_LIBDIR}"
+ INSANE_SKIP_${PN} = "already-stripped"
+ 
+ EXTRA_OECONF = "\
+-	--with-parallel-jobs=${@openjdk_build_helper_get_parallel_make(d)} \
+-	\
+-        --disable-tests \
+-        --disable-hotspot-tests \
+-        --disable-langtools-tests \
+-        --disable-jdk-tests \
+-        --disable-pulse-java \
+-        --disable-docs \
+-        --disable-nss \
+-        --disable-system-lcms \
+-	--disable-system-gtk \
+-	\
+-	--with-jdk-home=${WORKDIR}/fake-jdk \
+-	--with-javac=${STAGING_BINDIR_NATIVE}/javac \
+-	--with-rhino=${STAGING_DATADIR_NATIVE}/java/rhino.jar \
+-	\
+-	--with-openjdk-src-zip=${DL_DIR}/${OPENJDK_FILE} \
+-        --with-hotspot-src-zip=${DL_DIR}/${HOTSPOT_FILE} \
+-        --with-corba-src-zip=${DL_DIR}/${CORBA_FILE} \
+-        --with-jaxp-src-zip=${DL_DIR}/${JAXP_FILE} \
+-        --with-jaxws-src-zip=${DL_DIR}/${JAXWS_FILE} \
+-        --with-jdk-src-zip=${DL_DIR}/${JDK_FILE} \
+-        --with-langtools-src-zip=${DL_DIR}/${LANGTOOLS_FILE} \
+-        ac_cv_path_UNZIP_BIN="${STAGING_BINDIR_NATIVE}/unzip" \
+-  "
++    --with-parallel-jobs=${@openjdk_build_helper_get_parallel_make(d)} \
++    --disable-tests \
++    --disable-hotspot-tests \
++    --disable-langtools-tests \
++    --disable-jdk-tests \
++    --disable-pulse-java \
++    --disable-docs \
++    --disable-nss \
++    --disable-system-lcms \
++    --disable-system-gtk \
++    --with-jdk-home=${WORKDIR}/fake-jdk \
++    --with-javac=${STAGING_BINDIR_NATIVE}/javac \
++    --with-rhino=${STAGING_DATADIR_NATIVE}/java/rhino.jar \
++    --with-openjdk-src-zip=${DL_DIR}/${OPENJDK_FILE_DOWNLOAD} \
++    --with-hotspot-src-zip=${DL_DIR}/${HOTSPOT_FILE_DOWNLOAD} \
++    --with-corba-src-zip=${DL_DIR}/${CORBA_FILE_DOWNLOAD} \
++    --with-jaxp-src-zip=${DL_DIR}/${JAXP_FILE_DOWNLOAD} \
++    --with-jaxws-src-zip=${DL_DIR}/${JAXWS_FILE_DOWNLOAD} \
++    --with-jdk-src-zip=${DL_DIR}/${JDK_FILE_DOWNLOAD} \
++    --with-langtools-src-zip=${DL_DIR}/${LANGTOOLS_FILE_DOWNLOAD} \
++    ac_cv_path_UNZIP_BIN="${STAGING_BINDIR_NATIVE}/unzip" \
++"
+ 
+ JDK_DIR = "icedtea7-native"
+ 
+diff --git a/recipes-core/icedtea/openjdk-7-release-03b147.inc b/recipes-core/icedtea/openjdk-7-release-03b147.inc
+index 9816c0c..b504667 100644
+--- a/recipes-core/icedtea/openjdk-7-release-03b147.inc
++++ b/recipes-core/icedtea/openjdk-7-release-03b147.inc
+@@ -13,50 +13,58 @@ ICEDTEA_PREFIX = "icedtea7-forest-2.1"
+ ICEDTEA_HG_URL = "http://icedtea.classpath.org/hg/release/${ICEDTEA_PREFIX}"
+ 
+ OPENJDK_CHANGESET = "22cc03983e20"
+-OPENJDK_FILE = "${OPENJDK_CHANGESET}.tar.bz2"
+-OPENJDK_URI = "${ICEDTEA_HG_URL}/archive/${OPENJDK_FILE};name=openjdk;unpack=false"
++OPENJDK_FILE_UPSTREAM = "${OPENJDK_CHANGESET}.tar.bz2"
++OPENJDK_FILE_DOWNLOAD = "openjdk-${OPENJDK_CHANGESET}.tar.bz2"
++OPENJDK_URI = "${ICEDTEA_HG_URL}/archive/${OPENJDK_FILE_UPSTREAM};name=openjdk;unpack=false;downloadfilename=${OPENJDK_FILE_DOWNLOAD}"
+ SRC_URI[openjdk.md5sum] = "f98b0f7a69f9427a5b3775dddddc89cb"
+ SRC_URI[openjdk.sha256sum] = "758227833982371e3a94def84226a947f8dbbd176517f313b8cb96840bdea41e"
+ 
+ HOTSPOT_CHANGESET = "8b7c4c5f6ba9"
+-HOTSPOT_FILE = "${HOTSPOT_CHANGESET}.tar.gz"
+-HOTSPOT_URI = "${ICEDTEA_HG_URL}/hotspot/archive/${HOTSPOT_FILE};name=hotspot;unpack=false"
++HOTSPOT_FILE_UPSTREAM = "${HOTSPOT_CHANGESET}.tar.gz"
++HOTSPOT_FILE_DOWNLOAD = "hotspot-${HOTSPOT_CHANGESET}.tar.gz"
++HOTSPOT_URI = "${ICEDTEA_HG_URL}/hotspot/archive/${HOTSPOT_FILE_UPSTREAM};name=hotspot;unpack=false;downloadfilename=${HOTSPOT_FILE_DOWNLOAD}"
+ SRC_URI[hotspot.md5sum] = "cb45a8f19d77acc1f4f48e75e36a27fe"
+ SRC_URI[hotspot.sha256sum] = "22866990d143e76ced94b76defa3051e5e5d9a51fd272d63daa0df272d6406a2"
+ 
+ CORBA_CHANGESET = "5617f6c5cc94"
+-CORBA_FILE = "${CORBA_CHANGESET}.tar.gz"
+-CORBA_URI = "${ICEDTEA_HG_URL}/corba/archive/${CORBA_FILE};name=corba;unpack=false"
++CORBA_FILE_UPSTREAM = "${CORBA_CHANGESET}.tar.gz"
++CORBA_FILE_DOWNLOAD = "corba-${CORBA_CHANGESET}.tar.gz"
++CORBA_URI = "${ICEDTEA_HG_URL}/corba/archive/${CORBA_FILE_UPSTREAM};name=corba;unpack=false;downloadfilename=${CORBA_FILE_DOWNLOAD}"
+ SRC_URI[corba.md5sum] = "920f1a788a7fdef29a5cd70892331251"
+ SRC_URI[corba.sha256sum] = "963915483530f311ff313635f79ed11ea7ce5a1c0dbee5d1acb1994132857fa3"
+ 
+ JAXP_CHANGESET = "7a8825b15df6"
+-JAXP_FILE = "${JAXP_CHANGESET}.tar.gz"
+-JAXP_URI = "${ICEDTEA_HG_URL}/jaxp/archive/${JAXP_FILE};name=jaxp;unpack=false"
++JAXP_FILE_UPSTREAM = "${JAXP_CHANGESET}.tar.gz"
++JAXP_FILE_DOWNLOAD = "jaxp-${JAXP_CHANGESET}.tar.gz"
++JAXP_URI = "${ICEDTEA_HG_URL}/jaxp/archive/${JAXP_FILE_UPSTREAM};name=jaxp;unpack=false;downloadfilename=${JAXP_FILE_DOWNLOAD}"
+ SRC_URI[jaxp.md5sum] = "a0982b6df79739127871e355a40ca5a6"
+ SRC_URI[jaxp.sha256sum] = "297c8dbeed5afa5395b6be06b17282d53f8a888c2909074dfc1605afc0daf1c2"
+ 
+ JAXWS_CHANGESET = "7edfbfe974f2"
+-JAXWS_FILE = "${JAXWS_CHANGESET}.tar.gz"
+-JAXWS_URI = "${ICEDTEA_HG_URL}/jaxws/archive/${JAXWS_FILE};name=jaxws;unpack=false"
++JAXWS_FILE_UPSTREAM = "${JAXWS_CHANGESET}.tar.gz"
++JAXWS_FILE_DOWNLOAD = "jaxws-${JAXWS_CHANGESET}.tar.gz"
++JAXWS_URI = "${ICEDTEA_HG_URL}/jaxws/archive/${JAXWS_FILE_UPSTREAM};name=jaxws;unpack=false;downloadfilename=${JAXWS_FILE_DOWNLOAD}"
+ SRC_URI[jaxws.md5sum] = "2deecec809ea8e38835678889c2bc3ac"
+ SRC_URI[jaxws.sha256sum] = "823ca6b8fd780bf1b1565a90cfc8ec6f0ee422a5d25ffb20b1ce0272dc4955aa"
+ 
+ JDK_CHANGESET = "d5ddeffc4651"
+-JDK_FILE = "${JDK_CHANGESET}.tar.gz"
+-JDK_URI = "${ICEDTEA_HG_URL}/jdk/archive/${JDK_FILE};name=jdk;unpack=false"
++JDK_FILE_UPSTREAM = "${JDK_CHANGESET}.tar.gz"
++JDK_FILE_DOWNLOAD = "jdk-${JDK_CHANGESET}.tar.gz"
++JDK_URI = "${ICEDTEA_HG_URL}/jdk/archive/${JDK_FILE_UPSTREAM};name=jdk;unpack=false;downloadfilename=${JDK_FILE_DOWNLOAD}"
+ SRC_URI[jdk.md5sum] = "27c28d6be213df818490e69f12efe475"
+ SRC_URI[jdk.sha256sum] = "e83e6234842376147a4c32451f23d629ba107e908ebdb0f367657f9cc6c1be98"
+ 
+ LANGTOOLS_CHANGESET = "b534c4c6cd9b"
+-LANGTOOLS_FILE = "${LANGTOOLS_CHANGESET}.tar.gz"
+-LANGTOOLS_URI = "${ICEDTEA_HG_URL}/langtools/archive/${LANGTOOLS_FILE};name=langtools;unpack=false"
++LANGTOOLS_FILE_UPSTREAM = "${LANGTOOLS_CHANGESET}.tar.gz"
++LANGTOOLS_FILE_DOWNLOAD = "langtools-${LANGTOOLS_CHANGESET}.tar.gz"
++LANGTOOLS_URI = "${ICEDTEA_HG_URL}/langtools/archive/${LANGTOOLS_FILE_UPSTREAM};name=langtools;unpack=false;downloadfilename=${LANGTOOLS_FILE_DOWNLOAD}"
+ SRC_URI[langtools.md5sum] = "16b72f3fea8ac4e5b50de693e87f9c53"
+ SRC_URI[langtools.sha256sum] = "c77dd42d83f06d18fa8aa65c93d137608a2e02cf24b68fc10d7b1c0bcc12a93c"
+ 
+ CACAO_VERSION = "a567bcb7f589"
+-CACAO_FILE = "${CACAO_VERSION}.tar.gz"
+-CACAO_URI = "http://icedtea.wildebeest.org/download/drops/cacao/${CACAO_FILE};name=cacao;unpack=false"
++CACAO_FILE_UPSTREAM = "${CACAO_VERSION}.tar.gz"
++CACAO_FILE_DOWNLOAD = "cacao-${CACAO_VERSION}.tar.gz"
++CACAO_URI = "http://icedtea.wildebeest.org/download/drops/cacao/${CACAO_FILE_UPSTREAM};name=cacao;unpack=false;downloadfilename=${CACAO_FILE_DOWNLOAD}"
+ SRC_URI[cacao.md5sum] = "ec1def7f0d3d25e9e7da47c480f26a73"
+ SRC_URI[cacao.sha256sum] = "d49f79debc131a5694cae6ab3ba2864e7f3249ee8d9dc09aae8afdd4dc6b09f9"
+ 
+-- 
+2.25.1
 
-/ws/scottm/dev/agl/agl-repo/build-qemux86-64/tmp/work/corei7-64-agl-linux/multipath-tools/0.8.4-r0/recipe-sysroot-native/usr/bin/x86_64-agl-linux/../../libexec/x86_64-agl-linux/gcc/x86_64-agl-linux/9.3.0/ld:
-err
-or in libsg.o(.eh_frame); no .eh_frame_hdr table will be created
-/ws/scottm/dev/agl/agl-repo/build-qemux86-64/tmp/work/corei7-64-agl-linux/multipath-tools/0.8.4-r0/recipe-sysroot-native/usr/bin/x86_64-agl-linux/../../libexec/x86_64-agl-linux/gcc/x86_64-agl-linux/9.3.0/ld:
-BFD
- (GNU Binutils) 2.34.0.20200220 internal error, aborting at
-../../bfd/merge.c:933 in _bfd_merged_section_offset
-
-/ws/scottm/dev/agl/agl-repo/build-qemux86-64/tmp/work/corei7-64-agl-linux/multipath-tools/0.8.4-r0/recipe-sysroot-native/usr/bin/x86_64-agl-linux/../../libexec/x86_64-agl-linux/gcc/x86_64-agl-linux/9.3.0/ld:
-Ple
-ase report this bug.
-
-collect2: error: ld returned 1 exit status
-make[1]: *** [Makefile:24: libcheckreadsector0.so] Error 1
-make[1]: *** Waiting for unfinished jobs....
-
-It built fine on a retry.  My guess is there's still a race between ld and
-one of the inputs being generated.
-
-Scott
-
-
-</pre>
-    </blockquote>
-    <br>
-    I also got a similar error.<br>
-    ld: error in libsg.o(.eh_frame); no .eh_frame_hdr table will be
-    created<br>
-    ....<br>
-    ld: BFD (GNU Binutils) 2.34.0.20200220 internal error, aborting at
-    ../../bfd/merge.c:933 in _bfd_merged_section_offset<br>
-    ....<br>
-    | make[1]: *** [Makefile:24: libcheckcciss_tur.so] Error 1<br>
-    | make[1]: *** Waiting for unfinished jobs....<br>
-    <br>
-    Looking at the Makefile, it has:<br>
-    <b>LIBS= \</b><b><br>
-    </b><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; libcheckcciss_tur.so \</b><b><br>
-    </b><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; libcheckreadsector0.so \</b><b><br>
-    </b><b>&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; libchecktur.so \</b><b><br>
-    </b><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; libcheckdirectio.so \</b><b><br>
-    </b><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; libcheckemc_clariion.so \</b><b><br>
-    </b><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; libcheckhp_sw.so \</b><b><br>
-    </b><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; libcheckrdac.so</b><b><br>
-    </b><b><br>
-    </b><b>all: $(LIBS)</b><br>
-    <br>
-    and<br>
-    <br>
-    <b>libcheck%.so: libsg.o %.o</b><b><br>
-    </b><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $(CC) $(LDFLAGS) $(SHARED_FLAGS) -o $@ $^</b><br>
-    and <br>
-    <br>
-    <b>%.o:&nbsp;&nbsp;&nbsp; %.c</b><b><br>
-    </b><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @echo building $@ because of $?</b><b><br>
-    </b><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $&lt;</b><br>
-    <br>
-    From the Makefile, there seems no race condition.<br>
-    <br>
-    Khem, do you have some idea what's going on?<br>
-    <br>
-    Best Regards,<br>
-    Chen Qi<br>
-    <br>
-    <blockquote cite="mid:alpine.LFD.2.22.394.2006231320130.2920@godzilla.spiteful.org" type="cite"><br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <br>
-      <pre wrap="">
-</pre>
-    </blockquote>
-    <p><br>
-    </p>
-  </body>
-</html>
-
---------------F5DC23AEF5CAF757780D86B8--
