@@ -1,17 +1,17 @@
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.76])
- by mx.groups.io with SMTP id smtpd.web10.20544.1593442337080812433
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.60])
+ by mx.groups.io with SMTP id smtpd.web10.20557.1593442355004735843
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Jun 2020 07:52:17 -0700
+ Mon, 29 Jun 2020 07:52:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=qSMZLbKB;
- spf=pass (domain: windriver.com, ip: 40.107.92.76, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Fywyx/wA;
+ spf=pass (domain: windriver.com, ip: 40.107.92.60, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=i1gSyLbKIW9j47eZs83ivhp98sLvLE/IoVLMRf5RQXhYnsvR52M3BzFBWen6ey86r2OdcMQpm+8L4EOnIBcWtNHkDGNpXs6ra51MeHOKm5E+FoLXHveq9fWPGaH6EARZbxsssDhanTU85JeQUnXpQi+QWaXPhedGf0TSfOk6eP1n6zzw9OMeeYxlNS9CzuImwbX0LYMXB1GqQeCKGTFQgWwTBGUy4FF8113WO9gHkC8gsAM1dHZBrkTETjeXZNo3zKEicK6YQd+tXkY5jdeCUZSL4FFcay3+s0k/sWvUBud19VLWAIJ6sqLvynrmY+t6bBQGodbJnE+GQRTNFSoWyQ==
+ b=euzpaPp07BdHhIP16/XVyrbKWufOMAsH5bWIsOEzuXdphbqdDy3A/bQ7tKskMGsu+SJ4ZS5tF1oJYBTrmnTsERrnRFlb5BwdyemeXpYGkj/K/LRR53gbE8cvHwdaqnrsfqlehMsKAv4ZA7IDfmluxKf5Ts4rBNaZPzdsqgracG1WVobblKl5e/6C+1EyYoqH9RsJCggzi9Zeo8XzPNaAqfXpFuCj0eoTtzZW4o8OIpl8SawCvlvXUbIQe5wAYXWhJzlLynzQ7uQi7MjrtRMgGRYhzjwzU2wLNLEPzJ3KAwKpdPbtJ6samHd1MmwtQJGp8orchj/KKU2MKqlrJLQ6Vg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Aol650fA+XH78b9pqY9ERZg6mb239zyd1woT27fM7gs=;
- b=IRii7vTEqOsCjRtNpjcjc9IWdbnSfnQWW8l9VKvJM8Gl0f5tMIWPg0s7w4EXT0LREFHaoPue+XNluszqa6DHTjaWlXzcBbs7fQR08g6QcsAq6T4uxthIOtNKnB1sEfyg532/NAbmDgDbcOPJgOJcGu/M43EQjDLapElGZBtC5EevKCC+9pER/0MNnYhIYlavXv5B2KP45VgkZLesuhjL0/+mfhtsX9BN/3ZCgB4e7krfAbTv8HalIJLlRoqPeF8CRyO9LP6ayiN0QCB2MzkfHp0044fhHMZVABSrgChAu73JARf+aObaAyLtMFxXg1lxZ/S18EE3+ZlVVu2pAL6O6g==
+ bh=GgEyk1U7Bj6e/AmrgMJlqJY6tRTDMUGTxNPuHgLqd3k=;
+ b=O3mZ6kYdM9LlwjIT6MNp1fW213gXKQfEXtsDX5jxUTZyB75Cn/vEO9Co91OHS68IYeIdHvez/Xs8LyCeu65NRs/cGQxoXuCdAAjJ1Fhp0blnRUf80per1T6WBcLcSzNIf+3c0nny2taaMcmiDYR4lolZg6WCchqjciyy5z2Mog0n3cj5YUGLQpw+6Tmc75C/iXPDEQoGBoMiGeN9pTFy9uKoIZ5vDfJs81XvJf901YxD4xfbvRwSgRb7XmlaOXRj+w0mnH2tH53UzOkZN6qg4aiA0i4tB3Dsxbls+Ln8ZW3sXUP4ngqYw6+U2nA4hMN4iMqZ1FEYgxFOEBrhHw7USA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Aol650fA+XH78b9pqY9ERZg6mb239zyd1woT27fM7gs=;
- b=qSMZLbKBLuaNRn0ScnAYOPvPZ/wt0hR4ywESVXEcEuRJpsVR5vY/FJkVexCKn0wP224cXDmz0kLj07RnU1bOuyp6jEDJWN3+k6M+OCCrOOvzw9ANa7aDs3sEanA5wWKxP06lYpIWk9gVMPWlgVaR58WIPgkBDn9Y4GJjeNdxplo=
+ bh=GgEyk1U7Bj6e/AmrgMJlqJY6tRTDMUGTxNPuHgLqd3k=;
+ b=Fywyx/wAHu2eD9vXszFNYI6MqunzSfQFcP31UFIalE7P/0r0crwEhLeqeVleuFcFKindGGsEeKLmlftfncW9mU1eUzOjM4fKEGxzJBK56+hd6tTxjzQf76LOx4edj6mi8Aq2fvnKtEAfLpbHiFaR2Uj2K+qLoKV97yYD9CsF2rU=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,102 +28,132 @@ Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
  by BN6PR11MB1988.namprd11.prod.outlook.com (2603:10b6:404:48::23) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.25; Mon, 29 Jun
- 2020 14:52:16 +0000
+ 2020 14:52:33 +0000
 Received: from BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
  ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3131.026; Mon, 29 Jun 2020
- 14:52:16 +0000
-Subject: Re: [oe] [meta-python][PATCH 09/12] python3-msm: Upgrade 0.8.3 -> 0.8.7
+ 14:52:33 +0000
+Subject: Re: [oe] [meta-python][PATCH 05/12] python3-kiwisolver: Upgrade 1.1.0 -> 1.2.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200626112944.25569-1-leon.anavi@konsulko.com>
- <20200626112944.25569-9-leon.anavi@konsulko.com>
+ <20200626112944.25569-5-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <09ea388b-7bbe-db19-cde8-bf129b7b7ff9@windriver.com>
-Date: Mon, 29 Jun 2020 10:52:14 -0400
+Message-ID: <fe849a59-d3fa-8207-e13b-4de35a54e544@windriver.com>
+Date: Mon, 29 Jun 2020 10:52:31 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200626112944.25569-9-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0121.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2c::30) To BN6PR11MB0003.namprd11.prod.outlook.com
+In-Reply-To: <20200626112944.25569-5-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0101.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2c::10) To BN6PR11MB0003.namprd11.prod.outlook.com
  (2603:10b6:405:61::26)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0121.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2c::30) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.21 via Frontend Transport; Mon, 29 Jun 2020 14:52:15 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0101.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2c::10) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.21 via Frontend Transport; Mon, 29 Jun 2020 14:52:33 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: abde9e0d-933e-4034-2a67-08d81c3c0397
+X-MS-Office365-Filtering-Correlation-Id: 1b7f5eda-649c-4acb-5876-08d81c3c0e33
 X-MS-TrafficTypeDiagnostic: BN6PR11MB1988:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB1988685E93C4DDCA127F6DD69F6E0@BN6PR11MB1988.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:469;
+	<BN6PR11MB1988677344F744B979CDBACC9F6E0@BN6PR11MB1988.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2000;
 X-Forefront-PRVS: 044968D9E1
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	mcYFpfoFHOgBopz3PQqy0xYvfwJbxTUWUq5fx3LnmE0UMhWlaH4hEVho0KkrdJUz9Uod5p9etSaGhzeKSm5FPQPxEgr87mj4gTA8/Qhf8ICdO1VYZ1Iudh9Q8/d7H7SfMGBQkCiWSQkw6YaXNvo0rm846EjIFolJOdsh/sQ5nbCefNUtaRyLqkiGw41gshimGn85h+kx/9Mm/1AEwEeyONr3bClAGIwlV/BK/3IjupDFnBCb2G6/f78yTEVmp4IyCWcJQmZNrmTYsSOPietJ1AQleAPSkE6pgkyKg3O+OZg1QgZEy2v9pKHldPxibmmcZ7tyRAdHF4DmJiiRJtt2hMT+an+E44n1kVUa6D8MkDNIj9A7b9pT1qD0u3eW+u6u5CoTFxbz7zoQwXya4omcXm64DKCYDHo7fvMAYuSH22AY3aCTgNaTeTtO/2+fGuGSSU0Ty4XDH+drJg3AmEvX0g==
+	FvjroiZwCbS7nOoI33f8OAv+7QrYjqx5W11L7fsjtwXK6wahodeSvLlv35iQ2TjpE9yzjtVRCp+sd6aumL9K534hvCtm/A/JJ69h/Jua7Iu/1EHsTTx7sK/oe4cBmtWz9ec7ECF1Ft3kKEoTvFochZIxMJ5D9rDFiLg3OHRwQDt3eNHa8rJ/AZoDcvQiIWZLAgD6N5SJ0XAT+J/wtKgJ3e/GXZUfHa5YbIiFUrK6juaAbSrM/yVNIOJfQ70gZQFUhQO7+GWFUqJrHvUrRMSOSHhI2AZquYiN9Lqu4CTg72FpxygU/quHpuRQWA14nZoT8OUZT6tRnmito9QtU7fv/goGnvHhVzH9UH6wh6EqY3SbrSsW3b0lumMldTXAz8pxXrzCoAbm1VF8tgOTMIaUY5jFDvptseTWZViNOkIN/M2bVikdTrk7XIGm1z6e/jIwhUQZeDU9spxowV9UGzboGQ==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(39850400004)(396003)(366004)(136003)(346002)(376002)(36756003)(16526019)(966005)(5660300002)(478600001)(2906002)(83380400001)(8936002)(8676002)(86362001)(31686004)(316002)(16576012)(166002)(6486002)(26005)(52116002)(186003)(33964004)(53546011)(66556008)(66946007)(66476007)(956004)(31696002)(2616005)(44832011)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	NGvoWr9Iwp7S03QulMtw+v4/SHnc0G3HPy87PdVmhmeiYNM36Yj9kw9RnOt7ecvDn3R0kZww5o5sl3x97CH2b7pstdf5BJodren248tum3R1qDXUBp0xPz9n/i7CQX6C4MUEVBnogCkQdqLLVyS1pd0QyPqmnqgLMmcOdOAX2bEdrXQ1ZOL15yK2xhdLRgEjtpjbJGPLIQ3Sec2Wl3cO9E6ToTlBhnSLc6221+pNlLFacQXjYXk4Xvipp/Gz+6PT3HqYY2NysT4lnhdOfpRV3ArkVFMlHZGOyfiDcLTDIuWh2DruFEUzH+mSpXZI+jRJg7ZJOtmf2ro6CT/Dg3jC8VBDd8o0JEVDLmrEFZ9Ld5iMcFkICpfWoNDWwcER3DAoFA0lbcOOxEOfBHlXC+75Q/u6MzUZu1LBCaLbbBpAWcETqjDrGMQfaMRIUxuYpp2bEHmNR8q4qfZkz8RtOqoV/rxNolcQ1QvKFk6azpnBrAw=
+	cZXN4u24OM1O/1cFI+ERnrCDCGGyN3/KqGFpARQulE5q88CjvsgR5rI/0FfxmDTEG/NioEdmrACoJ9CswjmuPo4/bbBWcuu4aFGuHFHid5HXuf3DveBZvRcLmCN2gPATB4LrkNoJvHGNijreU7L05AKQgtqICyc0FRRCemyTGVOe9rf557ZnoAH0xA+Mzg+mAjluYXNGRLIXCQWNbYT1ltqIXt6G2A/7xCRqaMsuLVwk4vplSBrSW9PMuuFl54xfKM8ff8qghad7gqVD/o2xjMhNMRSFS2Ed/yXvmdK226Q/RSSmSbO33IRLrMtYPfkDW6aSNP6AH1Daot67YLagf1YOqAXgo4b14tNxF5BeCVZlcanM6OJk7HWU9OKkKwZpsPz3vUrf8KkZGD9RpeTsLQyppaUIXnmUhqcNCRArNTolFjZN6Fd10D3TqBaEQukOiUTNgRE2MUhVsHEWF7wOd2YDmxM7Pb82FKJLEblNF30=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: abde9e0d-933e-4034-2a67-08d81c3c0397
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1b7f5eda-649c-4acb-5876-08d81c3c0e33
 X-MS-Exchange-CrossTenant-AuthSource: BN6PR11MB0003.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2020 14:52:15.9287
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2020 14:52:33.7734
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: CS5IqhYlHn9GMJHQWxSc5bjOkcegAdkJlxy+VI+fkKaPiTrILCdIkyk9sfjhUoSVCn4RWFBw5RDxLNhILY/5layrXzc6Nduw6mb1wcC7Wn8=
+X-MS-Exchange-CrossTenant-UserPrincipalName: LeJpx3kv7IhPSWZ3LaBSdHBWRzFODKlkKW71B9SAVB3tn3LJts9RY6PYGE4sk+m6QN9bpPZS7qnQeVZByK3ehPZ0ZK12RQhkQeVIKAWn2Os=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1988
 Content-Type: multipart/alternative;
- boundary="------------044584BA6665FCCD9E93073E"
+ boundary="------------EE2C4B4B6C2796BBDC8761FC"
 Content-Language: en-US
 
---------------044584BA6665FCCD9E93073E
+--------------EE2C4B4B6C2796BBDC8761FC
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 6/26/20 7:29 AM, Leon Anavi wrote:
-> Upgrade to release 0.8.7:
+> Upgrade to release 1.2.0:
 >
-> - Handle git:// urls more gracefully
-> - Add final rstrip
-> - Add another rstrip for checking if it is Github url
-> - Convert Paths to str for python 3.5 compatibility
+> - make the the c++ part of the code c++11 compliant
+> - use cppy for Python/C bindings
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-msm_0.8.3.bb => python3-msm_0.8.7.bb}     | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-msm_0.8.3.bb => python3-msm_0.8.7.bb} (74%)
+>   .../python/python3-kiwisolver_1.1.0.bb        | 16 ---------------
+>   .../python/python3-kiwisolver_1.2.0.bb        | 20 +++++++++++++++++++
+>   2 files changed, 20 insertions(+), 16 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb
+>   create mode 100644 meta-python/recipes-devtools/python/python3-kiwisolver_1.2.0.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-msm_0.8.3.bb b/meta-python/recipes-devtools/python/python3-msm_0.8.7.bb
-> similarity index 74%
-> rename from meta-python/recipes-devtools/python/python3-msm_0.8.3.bb
-> rename to meta-python/recipes-devtools/python/python3-msm_0.8.7.bb
-> index 24e1ccb3b..de930f934 100644
-> --- a/meta-python/recipes-devtools/python/python3-msm_0.8.3.bb
-> +++ b/meta-python/recipes-devtools/python/python3-msm_0.8.7.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/MycroftAI/mycroft-skills-manager"
->   LICENSE = "Apache-2.0"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
->   
-> -SRC_URI[md5sum] = "d5f580c58389b337f5577cb92f36e788"
-> -SRC_URI[sha256sum] = "c201785997f3b766ec376a89bbb3367889ac542183ca26733ffe002bb94917b4"
-> +SRC_URI[md5sum] = "16f755ea554c332cdb666dfc1109f7f2"
-> +SRC_URI[sha256sum] = "9878eecbf7255d4907637700ecfeeacb9fe586409ee3ae05d406683ad18d7e5e"
->   
->   inherit pypi setuptools3
->   
+> diff --git a/meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb b/meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb
+> deleted file mode 100644
+> index a10830257..000000000
+> --- a/meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb
+> +++ /dev/null
+> @@ -1,16 +0,0 @@
+> -SUMMARY = "A fast implementation of the Cassowary constraint solver"
+> -HOMEPAGE = "https://github.com/nucleic/kiwi"
+> -LICENSE = "BSD"
+> -LIC_FILES_CHKSUM = "file://setup.py;endline=7;md5=1c177d169db050341d3b890c69fb80e3"
+> -
+> -SRC_URI[md5sum] = "fc8a614367f7ba0d34a02fd08c535afc"
+> -SRC_URI[sha256sum] = "53eaed412477c836e1b9522c19858a8557d6e595077830146182225613b11a75"
+> -
+> -inherit pypi setuptools3
+> -
+> -RDEPENDS_${PN} += "\
+> -    python3-core \
+> -    python3-setuptools \
+> -"
+> -
+> -BBCLASSEXTEND = "native nativesdk"
+> diff --git a/meta-python/recipes-devtools/python/python3-kiwisolver_1.2.0.bb b/meta-python/recipes-devtools/python/python3-kiwisolver_1.2.0.bb
+> new file mode 100644
+> index 000000000..94db61142
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-kiwisolver_1.2.0.bb
+> @@ -0,0 +1,20 @@
+> +SUMMARY = "A fast implementation of the Cassowary constraint solver"
+> +HOMEPAGE = "https://github.com/nucleic/kiwi"
+> +LICENSE = "BSD"
+> +LIC_FILES_CHKSUM = "file://setup.py;endline=7;md5=e54bd74bd9d0a84ae3f8f6d21ada0ab4"
+> +
+> +SRC_URI[md5sum] = "9f53fabb361c04d76c5afc688652c814"
+> +SRC_URI[sha256sum] = "247800260cd38160c362d211dcaf4ed0f7816afb5efe56544748b21d6ad6d17f"
+> +
+> +inherit pypi setuptools3
+> +
+> +DEPENDS += "\
+> +    python3-cppy-native \
+> +"
+> +
+> +RDEPENDS_${PN} += "\
+> +    python3-core \
+> +    python3-setuptools \
+> +"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
 >
 > 
 
---------------044584BA6665FCCD9E93073E
+--------------EE2C4B4B6C2796BBDC8761FC
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -135,42 +165,72 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/26/20 7:29 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200626112944.25569-9-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 0.8.7:
+    <blockquote type="cite" cite="mid:20200626112944.25569-5-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.2.0:
 
-- Handle git:// urls more gracefully
-- Add final rstrip
-- Add another rstrip for checking if it is Github url
-- Convert Paths to str for python 3.5 compatibility
+- make the the c&#43;&#43; part of the code c&#43;&#43;11 compliant
+- use cppy for Python/C bindings
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200626112944.25569-9-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200626112944.25569-5-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-msm_0.8.3.bb =&gt; python3-msm_0.8.7.bb}     | 4 &#43;&#43;--
- 1 file changed, 2 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-msm_0.8.3.bb =&gt; python3-msm_0.8.7.bb} (74%)
+ .../python/python3-kiwisolver_1.1.0.bb        | 16 ---------------
+ .../python/python3-kiwisolver_1.2.0.bb        | 20 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
+ 2 files changed, 20 insertions(&#43;), 16 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-kiwisolver_1.2.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-msm_0.8.3.bb b/meta-python/recipes-devtools/python/python3-msm_0.8.7.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-msm_0.8.3.bb
-rename to meta-python/recipes-devtools/python/python3-msm_0.8.7.bb
-index 24e1ccb3b..de930f934 100644
---- a/meta-python/recipes-devtools/python/python3-msm_0.8.3.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-msm_0.8.7.bb
-@@ -3,8 &#43;3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/MycroftAI/mycroft-skills-manager">&quot;https://github.com/MycroftAI/mycroft-skills-manager&quot;</a>
- LICENSE = &quot;Apache-2.0&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa">&quot;file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa&quot;</a>
- 
--SRC_URI[md5sum] = &quot;d5f580c58389b337f5577cb92f36e788&quot;
--SRC_URI[sha256sum] = &quot;c201785997f3b766ec376a89bbb3367889ac542183ca26733ffe002bb94917b4&quot;
-&#43;SRC_URI[md5sum] = &quot;16f755ea554c332cdb666dfc1109f7f2&quot;
-&#43;SRC_URI[sha256sum] = &quot;9878eecbf7255d4907637700ecfeeacb9fe586409ee3ae05d406683ad18d7e5e&quot;
- 
- inherit pypi setuptools3
- 
+diff --git a/meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb b/meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb
+deleted file mode 100644
+index a10830257..000000000
+--- a/meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb
+&#43;&#43;&#43; /dev/null
+@@ -1,16 &#43;0,0 @@
+-SUMMARY = &quot;A fast implementation of the Cassowary constraint solver&quot;
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/nucleic/kiwi">&quot;https://github.com/nucleic/kiwi&quot;</a>
+-LICENSE = &quot;BSD&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://setup.py;endline=7;md5=1c177d169db050341d3b890c69fb80e3">&quot;file://setup.py;endline=7;md5=1c177d169db050341d3b890c69fb80e3&quot;</a>
+-
+-SRC_URI[md5sum] = &quot;fc8a614367f7ba0d34a02fd08c535afc&quot;
+-SRC_URI[sha256sum] = &quot;53eaed412477c836e1b9522c19858a8557d6e595077830146182225613b11a75&quot;
+-
+-inherit pypi setuptools3
+-
+-RDEPENDS_${PN} &#43;= &quot;\
+-    python3-core \
+-    python3-setuptools \
+-&quot;
+-
+-BBCLASSEXTEND = &quot;native nativesdk&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-kiwisolver_1.2.0.bb b/meta-python/recipes-devtools/python/python3-kiwisolver_1.2.0.bb
+new file mode 100644
+index 000000000..94db61142
+--- /dev/null
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-kiwisolver_1.2.0.bb
+@@ -0,0 &#43;1,20 @@
+&#43;SUMMARY = &quot;A fast implementation of the Cassowary constraint solver&quot;
+&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/nucleic/kiwi">&quot;https://github.com/nucleic/kiwi&quot;</a>
+&#43;LICENSE = &quot;BSD&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://setup.py;endline=7;md5=e54bd74bd9d0a84ae3f8f6d21ada0ab4">&quot;file://setup.py;endline=7;md5=e54bd74bd9d0a84ae3f8f6d21ada0ab4&quot;</a>
+&#43;
+&#43;SRC_URI[md5sum] = &quot;9f53fabb361c04d76c5afc688652c814&quot;
+&#43;SRC_URI[sha256sum] = &quot;247800260cd38160c362d211dcaf4ed0f7816afb5efe56544748b21d6ad6d17f&quot;
+&#43;
+&#43;inherit pypi setuptools3
+&#43;
+&#43;DEPENDS &#43;= &quot;\
+&#43;    python3-cppy-native \
+&#43;&quot;
+&#43;
+&#43;RDEPENDS_${PN} &#43;= &quot;\
+&#43;    python3-core \
+&#43;    python3-setuptools \
+&#43;&quot;
+&#43;
+&#43;BBCLASSEXTEND = &quot;native nativesdk&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -180,4 +240,4 @@ index 24e1ccb3b..de930f934 100644
   </body>
 </html>
 
---------------044584BA6665FCCD9E93073E--
+--------------EE2C4B4B6C2796BBDC8761FC--
