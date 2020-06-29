@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.461.1593451158324407444
+ by mx.groups.io with SMTP id smtpd.web11.494.1593451161243954812
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Jun 2020 10:19:18 -0700
+ Mon, 29 Jun 2020 10:19:21 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=39772 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jpxR6-0000w7-1C; Mon, 29 Jun 2020 20:19:17 +0300
+	id 1jpxR9-0000w7-FT; Mon, 29 Jun 2020 20:19:20 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/7] python3-pymisp: Upgrade 2.4.122 -> 2.4.128
-Date: Mon, 29 Jun 2020 20:18:49 +0300
-Message-Id: <20200629171853.18608-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/7] python3-pychromecast: Upgrade 4.2.3 -> 7.0.1
+Date: Mon, 29 Jun 2020 20:18:50 +0300
+Message-Id: <20200629171853.18608-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200629171853.18608-1-leon.anavi@konsulko.com>
 References: <20200629171853.18608-1-leon.anavi@konsulko.com>
@@ -30,35 +30,35 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.4.128:
+Upgrade to release 7.0.1:
 
-- Bump version.
-- Add a few test cases.
-- Bump objects.
+- BREAKING CHANGE Track services based on UUID instead of mDNS
+  service name
+- Correct version
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pymisp_2.4.122.bb => python3-pymisp_2.4.128.bb}  | 4 ++--
+ ...n3-pychromecast_4.2.3.bb => python3-pychromecast_7.0.1.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.122.bb => python3-pymisp_2.4.128.bb} (77%)
+ rename meta-python/recipes-devtools/python/{python3-pychromecast_4.2.3.bb => python3-pychromecast_7.0.1.bb} (66%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.122.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.128.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.122.bb
-rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.128.bb
-index bf2da0066..e27bf9900 100644
---- a/meta-python/recipes-devtools/python/python3-pymisp_2.4.122.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymisp_2.4.128.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/MISP/PyMISP"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
+diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_4.2.3.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.0.1.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python3-pychromecast_4.2.3.bb
+rename to meta-python/recipes-devtools/python/python3-pychromecast_7.0.1.bb
+index f561753a1..d21bb5f3a 100644
+--- a/meta-python/recipes-devtools/python/python3-pychromecast_4.2.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pychromecast_7.0.1.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
  
--SRC_URI[md5sum] = "ef41185d4c2753dc2c1a9ab937e3614a"
--SRC_URI[sha256sum] = "ecdc362b4bb5dd500a5f0b9e795b35ed75037de64f8dcf39c24d029e7657ad7f"
-+SRC_URI[md5sum] = "a90a25def591c6a265bc904f801646f1"
-+SRC_URI[sha256sum] = "714b8b5c8debb4b5e0e602a5fe8a599206e89c1313244ed0e69d9e0bc816f1f7"
+-SRC_URI[md5sum] = "56632e0d94f2648a29d89affddddaaec"
+-SRC_URI[sha256sum] = "d7b7b35254203ab4617389061bee25b0fa67c6628c48bd6a75ccfefef74f1edb"
++SRC_URI[md5sum] = "519d928bf3bdc8adb4dff1ad0e9de6ff"
++SRC_URI[sha256sum] = "85112a0f39727636e35a0e1b633cc55a90a17bfc06be0a9a9bea5e46ac603cf1"
  
- inherit pypi setuptools3
+ PYPI_PACKAGE = "PyChromecast"
  
 -- 
 2.17.1
