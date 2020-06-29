@@ -1,203 +1,104 @@
-Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com [209.85.218.68])
- by mx.groups.io with SMTP id smtpd.web10.13660.1593414855431486223
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.17241.1593432765420110463
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Jun 2020 00:14:15 -0700
+ Mon, 29 Jun 2020 05:12:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=U1SdO0xK;
- spf=pass (domain: gmail.com, ip: 209.85.218.68, mailfrom: uvv.mail@gmail.com)
-Received: by mail-ej1-f68.google.com with SMTP id a1so15447254ejg.12
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Jun 2020 00:14:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=dRYImXlX0NJ67ZnZaWiDCEBhkGQ86eZR1wjQBhJaWRg=;
-        b=U1SdO0xKOgL3ZBwVFWHh+VCYYcRUmC6PhO/BirCt5EecUUsUMj1/vyqqXPOnhmIGyg
-         eIKY1Dq6/6k0dQtiMe27SybQYUkBBg29FWw4UV6EMvO3PchYY7PDbjKdsGs1+SguW0jY
-         9wEw6rigKRpWWd0hDeLRvLFloB3c9Ydq8WPk7PuSf/fID40lnpruCpTn7tlqnFLkCN7G
-         50YeMtPhLC38aqXlxGRlp+sRKWPMYnF2By5msm1SsUEISAPbPAudbKrn3y0NsjGGF3dA
-         dtoPADc3EK/bG8J4x0X9pcNlRXFV7NL/FHAJW1MYrj1mpZsIg0bOwger1dm3cQelGMnl
-         pWeQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=dRYImXlX0NJ67ZnZaWiDCEBhkGQ86eZR1wjQBhJaWRg=;
-        b=YZOcBlHZjdHoDjx5VMi9kI2HOCnANRJ/jeFErE+P5q47ES3bS8zw2ns8HTOfu5lFu0
-         zuCqS8Np2OrHG94i41xbsXiwuOWbIEwXwqgSpi2Fnt7E6zxqII+etyZcjR2Fha91/3RL
-         lWta2OhSK5GyyJTXsC1Hq3Es5ReY/fcYCWNEUmZ3mNzclUP8IpngqymSLvY/+mQH8Vuv
-         RCXKHmQD+aIgjENXtazdQ01VXFmQt3YVrkwHVFpHC9LFKQW2Y+IkNTcDPycP0cxJwOVD
-         GjSGvU4GVFbzuhH2fHFmNSVnfhLraf5vzUM/rq4LUq02zIeX1SgUHFL+aPPVnH3lk6TO
-         CHpw==
-X-Gm-Message-State: AOAM531i1q09phYn3TPkKgWSgX0nT8+86SKP//7CpNObtFqXMMjQQhXD
-	koA9JWQfJc+ScwNhm7TN78FjoUUloQxdfA==
-X-Google-Smtp-Source: ABdhPJx8r7HWGpZr6v0Sn/frJFhAky/6KVFjiMd1fZsT0/8cJ6RyV8IQemOKZYTs6x9Rr091mpwWoQ==
-X-Received: by 2002:a17:906:2cd5:: with SMTP id r21mr12405338ejr.20.1593414853487;
-        Mon, 29 Jun 2020 00:14:13 -0700 (PDT)
-Return-Path: <uvv.mail@gmail.com>
-Received: from localhost.localdomain (dslb-002-205-007-033.002.205.pools.vodafone-ip.de. [2.205.7.33])
-        by smtp.gmail.com with ESMTPSA id e3sm6506188edm.14.2020.06.29.00.14.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Jun 2020 00:14:12 -0700 (PDT)
-From: "Vyacheslav Yurkov" <uvv.mail@gmail.com>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=33196 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jpseP-0001kP-4v; Mon, 29 Jun 2020 15:12:42 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
-Subject: [meta-java][PATCH v2] icedtea7-native: set unique download file names
-Date: Mon, 29 Jun 2020 09:14:00 +0200
-Message-Id: <20200629071400.200683-1-uvv.mail@gmail.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 01/10] python3-pyparted: Consolidate in a single file
+Date: Mon, 29 Jun 2020 15:12:24 +0300
+Message-Id: <20200629121233.27026-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-1.0
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+Consolidate inc and bb files into a single bb file.
 
-Add package names to download file names. This allows to avoid name
-collisions in case PREMIRRORS are used and all source archives reside in
-the same directory. Fixed mixed indentation.
-
-Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- recipes-core/icedtea/icedtea7-native.inc      | 47 +++++++++----------
- .../icedtea/openjdk-7-release-03b147.inc      | 40 +++++++++-------
- 2 files changed, 46 insertions(+), 41 deletions(-)
+ .../python-pyparted/python-pyparted.inc       | 22 ------------------
+ .../python3-pyparted_3.11.3.bb                | 23 +++++++++++++++++--
+ 2 files changed, 21 insertions(+), 24 deletions(-)
+ delete mode 100644 meta-python/recipes-extended/python-pyparted/python-pyparted.inc
 
-diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
-index b0b9419..f117f4a 100644
---- a/recipes-core/icedtea/icedtea7-native.inc
-+++ b/recipes-core/icedtea/icedtea7-native.inc
-@@ -67,31 +67,28 @@ export ALT_FREETYPE_LIB_PATH = "${STAGING_LIBDIR}"
- INSANE_SKIP_${PN} = "already-stripped"
- 
- EXTRA_OECONF = "\
--	--with-parallel-jobs=${@openjdk_build_helper_get_parallel_make(d)} \
--	\
--        --disable-tests \
--        --disable-hotspot-tests \
--        --disable-langtools-tests \
--        --disable-jdk-tests \
--        --disable-pulse-java \
--        --disable-docs \
--        --disable-nss \
--        --disable-system-lcms \
--	--disable-system-gtk \
--	\
--	--with-jdk-home=${WORKDIR}/fake-jdk \
--	--with-javac=${STAGING_BINDIR_NATIVE}/javac \
--	--with-rhino=${STAGING_DATADIR_NATIVE}/java/rhino.jar \
--	\
--	--with-openjdk-src-zip=${DL_DIR}/${OPENJDK_FILE} \
--        --with-hotspot-src-zip=${DL_DIR}/${HOTSPOT_FILE} \
--        --with-corba-src-zip=${DL_DIR}/${CORBA_FILE} \
--        --with-jaxp-src-zip=${DL_DIR}/${JAXP_FILE} \
--        --with-jaxws-src-zip=${DL_DIR}/${JAXWS_FILE} \
--        --with-jdk-src-zip=${DL_DIR}/${JDK_FILE} \
--        --with-langtools-src-zip=${DL_DIR}/${LANGTOOLS_FILE} \
--        ac_cv_path_UNZIP_BIN="${STAGING_BINDIR_NATIVE}/unzip" \
--  "
-+    --with-parallel-jobs=${@openjdk_build_helper_get_parallel_make(d)} \
-+    --disable-tests \
-+    --disable-hotspot-tests \
-+    --disable-langtools-tests \
-+    --disable-jdk-tests \
-+    --disable-pulse-java \
-+    --disable-docs \
-+    --disable-nss \
-+    --disable-system-lcms \
-+    --disable-system-gtk \
-+    --with-jdk-home=${WORKDIR}/fake-jdk \
-+    --with-javac=${STAGING_BINDIR_NATIVE}/javac \
-+    --with-rhino=${STAGING_DATADIR_NATIVE}/java/rhino.jar \
-+    --with-openjdk-src-zip=${DL_DIR}/${OPENJDK_FILE_DOWNLOAD} \
-+    --with-hotspot-src-zip=${DL_DIR}/${HOTSPOT_FILE_DOWNLOAD} \
-+    --with-corba-src-zip=${DL_DIR}/${CORBA_FILE_DOWNLOAD} \
-+    --with-jaxp-src-zip=${DL_DIR}/${JAXP_FILE_DOWNLOAD} \
-+    --with-jaxws-src-zip=${DL_DIR}/${JAXWS_FILE_DOWNLOAD} \
-+    --with-jdk-src-zip=${DL_DIR}/${JDK_FILE_DOWNLOAD} \
-+    --with-langtools-src-zip=${DL_DIR}/${LANGTOOLS_FILE_DOWNLOAD} \
-+    ac_cv_path_UNZIP_BIN="${STAGING_BINDIR_NATIVE}/unzip" \
+diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted.inc b/meta-python/recipes-extended/python-pyparted/python-pyparted.inc
+deleted file mode 100644
+index 97054487f..000000000
+--- a/meta-python/recipes-extended/python-pyparted/python-pyparted.inc
++++ /dev/null
+@@ -1,22 +0,0 @@
+-DESCRIPTION = "pyparted is a set of Python modules that provide Python programmers \
+-an interface to libparted, the GNU parted library for disk partitioning and \
+-filesystem manipulation."
+-SUMMARY = "Python bindings for libparted"
+-HOMEPAGE = "https://github.com/rhinstaller/pyparted"
+-LICENSE = "GPL-2.0+"
+-LIC_FILES_CHKSUM = "\
+-    file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
+-    file://src/_pedmodule.c;beginline=10;endline=22;md5=9e53304db812b80d0939e11bb69dcab2 \
+-"
+-DEPENDS += "parted"
+-
+-# upstream only publishes releases in github archives which are discouraged
+-SRCREV = "481510c10866851844b19f3d2ffcdaa37efc0cf8"
+-SRC_URI = "git://github.com/rhinstaller/pyparted.git;protocol=https"
+-
+-S = "${WORKDIR}/git"
+-
+-RDEPENDS_${PN}_class-target += " \
+-    parted (>= 2.3) \
+-"
+-RDEPENDS_${PN}_class-native = ""
+diff --git a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.3.bb b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.3.bb
+index d83901ff3..a801920c0 100644
+--- a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.3.bb
++++ b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.3.bb
+@@ -1,8 +1,27 @@
+-require python-pyparted.inc
++DESCRIPTION = "pyparted is a set of Python modules that provide Python programmers \
++an interface to libparted, the GNU parted library for disk partitioning and \
++filesystem manipulation."
++SUMMARY = "Python bindings for libparted"
++HOMEPAGE = "https://github.com/rhinstaller/pyparted"
++LICENSE = "GPL-2.0+"
++LIC_FILES_CHKSUM = "\
++    file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
++    file://src/_pedmodule.c;beginline=10;endline=22;md5=9e53304db812b80d0939e11bb69dcab2 \
 +"
++DEPENDS += "parted"
++
++# upstream only publishes releases in github archives which are discouraged
++SRCREV = "481510c10866851844b19f3d2ffcdaa37efc0cf8"
++SRC_URI = "git://github.com/rhinstaller/pyparted.git;protocol=https"
  
- JDK_DIR = "icedtea7-native"
+ inherit distutils3
  
-diff --git a/recipes-core/icedtea/openjdk-7-release-03b147.inc b/recipes-core/icedtea/openjdk-7-release-03b147.inc
-index 9816c0c..b504667 100644
---- a/recipes-core/icedtea/openjdk-7-release-03b147.inc
-+++ b/recipes-core/icedtea/openjdk-7-release-03b147.inc
-@@ -13,50 +13,58 @@ ICEDTEA_PREFIX = "icedtea7-forest-2.1"
- ICEDTEA_HG_URL = "http://icedtea.classpath.org/hg/release/${ICEDTEA_PREFIX}"
+-RDEPENDS_${PN} += "python3-stringold python3-codecs python3-math"
++S = "${WORKDIR}/git"
++
++RDEPENDS_${PN}_class-target += " \
++    parted (>= 2.3) \
++    python3-stringold python3-codecs python3-math \
++"
+ RDEPENDS_${PN}_class-native = ""
  
- OPENJDK_CHANGESET = "22cc03983e20"
--OPENJDK_FILE = "${OPENJDK_CHANGESET}.tar.bz2"
--OPENJDK_URI = "${ICEDTEA_HG_URL}/archive/${OPENJDK_FILE};name=openjdk;unpack=false"
-+OPENJDK_FILE_UPSTREAM = "${OPENJDK_CHANGESET}.tar.bz2"
-+OPENJDK_FILE_DOWNLOAD = "openjdk-${OPENJDK_CHANGESET}.tar.bz2"
-+OPENJDK_URI = "${ICEDTEA_HG_URL}/archive/${OPENJDK_FILE_UPSTREAM};name=openjdk;unpack=false;downloadfilename=${OPENJDK_FILE_DOWNLOAD}"
- SRC_URI[openjdk.md5sum] = "f98b0f7a69f9427a5b3775dddddc89cb"
- SRC_URI[openjdk.sha256sum] = "758227833982371e3a94def84226a947f8dbbd176517f313b8cb96840bdea41e"
- 
- HOTSPOT_CHANGESET = "8b7c4c5f6ba9"
--HOTSPOT_FILE = "${HOTSPOT_CHANGESET}.tar.gz"
--HOTSPOT_URI = "${ICEDTEA_HG_URL}/hotspot/archive/${HOTSPOT_FILE};name=hotspot;unpack=false"
-+HOTSPOT_FILE_UPSTREAM = "${HOTSPOT_CHANGESET}.tar.gz"
-+HOTSPOT_FILE_DOWNLOAD = "hotspot-${HOTSPOT_CHANGESET}.tar.gz"
-+HOTSPOT_URI = "${ICEDTEA_HG_URL}/hotspot/archive/${HOTSPOT_FILE_UPSTREAM};name=hotspot;unpack=false;downloadfilename=${HOTSPOT_FILE_DOWNLOAD}"
- SRC_URI[hotspot.md5sum] = "cb45a8f19d77acc1f4f48e75e36a27fe"
- SRC_URI[hotspot.sha256sum] = "22866990d143e76ced94b76defa3051e5e5d9a51fd272d63daa0df272d6406a2"
- 
- CORBA_CHANGESET = "5617f6c5cc94"
--CORBA_FILE = "${CORBA_CHANGESET}.tar.gz"
--CORBA_URI = "${ICEDTEA_HG_URL}/corba/archive/${CORBA_FILE};name=corba;unpack=false"
-+CORBA_FILE_UPSTREAM = "${CORBA_CHANGESET}.tar.gz"
-+CORBA_FILE_DOWNLOAD = "corba-${CORBA_CHANGESET}.tar.gz"
-+CORBA_URI = "${ICEDTEA_HG_URL}/corba/archive/${CORBA_FILE_UPSTREAM};name=corba;unpack=false;downloadfilename=${CORBA_FILE_DOWNLOAD}"
- SRC_URI[corba.md5sum] = "920f1a788a7fdef29a5cd70892331251"
- SRC_URI[corba.sha256sum] = "963915483530f311ff313635f79ed11ea7ce5a1c0dbee5d1acb1994132857fa3"
- 
- JAXP_CHANGESET = "7a8825b15df6"
--JAXP_FILE = "${JAXP_CHANGESET}.tar.gz"
--JAXP_URI = "${ICEDTEA_HG_URL}/jaxp/archive/${JAXP_FILE};name=jaxp;unpack=false"
-+JAXP_FILE_UPSTREAM = "${JAXP_CHANGESET}.tar.gz"
-+JAXP_FILE_DOWNLOAD = "jaxp-${JAXP_CHANGESET}.tar.gz"
-+JAXP_URI = "${ICEDTEA_HG_URL}/jaxp/archive/${JAXP_FILE_UPSTREAM};name=jaxp;unpack=false;downloadfilename=${JAXP_FILE_DOWNLOAD}"
- SRC_URI[jaxp.md5sum] = "a0982b6df79739127871e355a40ca5a6"
- SRC_URI[jaxp.sha256sum] = "297c8dbeed5afa5395b6be06b17282d53f8a888c2909074dfc1605afc0daf1c2"
- 
- JAXWS_CHANGESET = "7edfbfe974f2"
--JAXWS_FILE = "${JAXWS_CHANGESET}.tar.gz"
--JAXWS_URI = "${ICEDTEA_HG_URL}/jaxws/archive/${JAXWS_FILE};name=jaxws;unpack=false"
-+JAXWS_FILE_UPSTREAM = "${JAXWS_CHANGESET}.tar.gz"
-+JAXWS_FILE_DOWNLOAD = "jaxws-${JAXWS_CHANGESET}.tar.gz"
-+JAXWS_URI = "${ICEDTEA_HG_URL}/jaxws/archive/${JAXWS_FILE_UPSTREAM};name=jaxws;unpack=false;downloadfilename=${JAXWS_FILE_DOWNLOAD}"
- SRC_URI[jaxws.md5sum] = "2deecec809ea8e38835678889c2bc3ac"
- SRC_URI[jaxws.sha256sum] = "823ca6b8fd780bf1b1565a90cfc8ec6f0ee422a5d25ffb20b1ce0272dc4955aa"
- 
- JDK_CHANGESET = "d5ddeffc4651"
--JDK_FILE = "${JDK_CHANGESET}.tar.gz"
--JDK_URI = "${ICEDTEA_HG_URL}/jdk/archive/${JDK_FILE};name=jdk;unpack=false"
-+JDK_FILE_UPSTREAM = "${JDK_CHANGESET}.tar.gz"
-+JDK_FILE_DOWNLOAD = "jdk-${JDK_CHANGESET}.tar.gz"
-+JDK_URI = "${ICEDTEA_HG_URL}/jdk/archive/${JDK_FILE_UPSTREAM};name=jdk;unpack=false;downloadfilename=${JDK_FILE_DOWNLOAD}"
- SRC_URI[jdk.md5sum] = "27c28d6be213df818490e69f12efe475"
- SRC_URI[jdk.sha256sum] = "e83e6234842376147a4c32451f23d629ba107e908ebdb0f367657f9cc6c1be98"
- 
- LANGTOOLS_CHANGESET = "b534c4c6cd9b"
--LANGTOOLS_FILE = "${LANGTOOLS_CHANGESET}.tar.gz"
--LANGTOOLS_URI = "${ICEDTEA_HG_URL}/langtools/archive/${LANGTOOLS_FILE};name=langtools;unpack=false"
-+LANGTOOLS_FILE_UPSTREAM = "${LANGTOOLS_CHANGESET}.tar.gz"
-+LANGTOOLS_FILE_DOWNLOAD = "langtools-${LANGTOOLS_CHANGESET}.tar.gz"
-+LANGTOOLS_URI = "${ICEDTEA_HG_URL}/langtools/archive/${LANGTOOLS_FILE_UPSTREAM};name=langtools;unpack=false;downloadfilename=${LANGTOOLS_FILE_DOWNLOAD}"
- SRC_URI[langtools.md5sum] = "16b72f3fea8ac4e5b50de693e87f9c53"
- SRC_URI[langtools.sha256sum] = "c77dd42d83f06d18fa8aa65c93d137608a2e02cf24b68fc10d7b1c0bcc12a93c"
- 
- CACAO_VERSION = "a567bcb7f589"
--CACAO_FILE = "${CACAO_VERSION}.tar.gz"
--CACAO_URI = "http://icedtea.wildebeest.org/download/drops/cacao/${CACAO_FILE};name=cacao;unpack=false"
-+CACAO_FILE_UPSTREAM = "${CACAO_VERSION}.tar.gz"
-+CACAO_FILE_DOWNLOAD = "cacao-${CACAO_VERSION}.tar.gz"
-+CACAO_URI = "http://icedtea.wildebeest.org/download/drops/cacao/${CACAO_FILE_UPSTREAM};name=cacao;unpack=false;downloadfilename=${CACAO_FILE_DOWNLOAD}"
- SRC_URI[cacao.md5sum] = "ec1def7f0d3d25e9e7da47c480f26a73"
- SRC_URI[cacao.sha256sum] = "d49f79debc131a5694cae6ab3ba2864e7f3249ee8d9dc09aae8afdd4dc6b09f9"
- 
+ BBCLASSEXTEND = "native"
 -- 
-2.25.1
+2.17.1
 
