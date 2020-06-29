@@ -1,205 +1,109 @@
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.81])
- by mx.groups.io with SMTP id smtpd.web11.20706.1593442571145983674
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web11.20789.1593442755182685531
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Jun 2020 07:56:11 -0700
+ Mon, 29 Jun 2020 07:59:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=OtOZyJjg;
- spf=pass (domain: windriver.com, ip: 40.107.92.81, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JUxuxLN0ecMO5Ubt18KCExirPX1xY9CIQhxXIzleUmjaxKRpJZsp4aCbIbzlh9PX4t33VQuHTqM14Vbz0fWtFdkjnaf+MITiCMEde6lSGh43j+BvQTwUeb6nAJ0P4U9OInQANSa7qIbfB0xOb0OnVxGDj5AnQJu7BVfxJkj8m8FYurhSLrqs9BM3yYhQ7KTjPY39HFZzH29SvNlOdceZi6vUk64ZTRk4bfQsjYCSsZNdKF3BjbVzIw74J2T8aFsq7OhOppPV6C9XxsC4N8jiM80VV6se5jSMY466YttRgAGB9qeZ1QnodebGsjlQr279y/lbLB4OixTylCCUcAfSRg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+mq+NOwzPvyrc2nHwFzd7SeFbLEK9g78u8hBtmjJq/U=;
- b=FOWOPJ+8WXxJH/20VIjyG9USXO0/XKMoiuPwXNzspIux4zvY3o0d8evMca9OcNt0DZDlvAIRWQf8OHKPcc0BloehNFqa0VeHi8LdN4+EteZnNwksN2zzoSVV8rnD0YR1583II6Khf59XM/7g65+nDGyLXEkG14I+z3eFmb4vrtpdivmus5pcwDZS7sIG3zUz7pOUQ2nPRmbXPPDBs668lsJG8KPygMoOQI68DXnmTZrtOqjeZrNoTxYRaf15MmSGcO+bYWiaJvzGh08folyTYdrdFJ4E40t7FuoTm8lqJlMCX6c2KPXX3m7VT5y7a1Y1ArmACb0SHQBIDOTyQeaMpA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Hehfr3CK;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id g17so7188875plq.12
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Jun 2020 07:59:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+mq+NOwzPvyrc2nHwFzd7SeFbLEK9g78u8hBtmjJq/U=;
- b=OtOZyJjg3AI6PLZOXdTemiUzI+lI4pPi/ZUxOyp420f0lE/lOgcvxSeYtrLki4vOUtsyRUMW3E0Yc5N1O1QF8CjxKM0vaqJw3qZZiieVC/DFNuwabCk5Yq7ISnZCLpuZcg8wEEsujS4tSN67bicqowj/b/nSJjgSRw6gJ06oQmE=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com (2603:10b6:405:61::26)
- by BN6PR11MB1988.namprd11.prod.outlook.com (2603:10b6:404:48::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.25; Mon, 29 Jun
- 2020 14:56:10 +0000
-Received: from BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7]) by BN6PR11MB0003.namprd11.prod.outlook.com
- ([fe80::518f:1382:bbeb:91e7%4]) with mapi id 15.20.3131.026; Mon, 29 Jun 2020
- 14:56:10 +0000
-Subject: Re: [oe] [meta-python] [PATCH] python3-bcrypt: Enable ptest
-To: zangrc <zangrc.fnst@cn.fujitsu.com>,
- openembedded-devel@lists.openembedded.org
-References: <1593333924-4040-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
- <1593333924-4040-5-git-send-email-zangrc.fnst@cn.fujitsu.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <eb4d0d2a-da1d-6383-a052-eaa624be14af@windriver.com>
-Date: Mon, 29 Jun 2020 10:56:08 -0400
+        d=gmail.com; s=20161025;
+        h=to:from:subject:autocrypt:message-id:date:user-agent:mime-version
+         :content-transfer-encoding:content-language;
+        bh=qXVLFCS6zLSIw328bu4T7sfDZIyq7Bl6/zrmR3MhPQE=;
+        b=Hehfr3CKj1A8fRfex66QvqcpAuOR8810T/oRpU5WReHb8I/xxiQ/pdHyyKmyIFT9vF
+         PvRpp5hhUuCKHe/kkfjIizMzdcg9IwooqpBS5jVbnp/9eA0UvXnRmEE+udPzZXAN0t51
+         V3v940vJgLVNaOjUlUyShOGaahSSuJAcGssvREaKf3I/XkkvPQmnlQCWYBJIswhPdcYb
+         /2tbWSloGM32V+Unrin5Czd0enWD14/HLcv00hxYOTM7GtirQx9L61RcemXrLzCi/YJ3
+         K/JKYAuXooToZBn3zyMWA1ZmKCD2VGJeQDEJZeY1yQd7HgXRI6SRUgHtzaHZvwORAADh
+         2pAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:to:from:subject:autocrypt:message-id:date
+         :user-agent:mime-version:content-transfer-encoding:content-language;
+        bh=qXVLFCS6zLSIw328bu4T7sfDZIyq7Bl6/zrmR3MhPQE=;
+        b=Zhzs9x6hX+9a4CQagVSaeDQu4SNHCnH6xworzRt6pAbYA9p/K3/a53qMZkXDARCKCQ
+         NFZpP943FM2vBPkKbZBZt7Joq8urQPtv2bjlR+E2R3dW/4ioNe1BdYWEGq8O9zxo+zrb
+         1ESwwqJoVPTvfIhCqQWaOqjKkiB/kRf22S3tYH1Gkx7+dxNMNZ4qHYJIPkIh+twkWb1i
+         qbEAgFTujMUwNp54B211UwS9gET1sIK+bJ50KfhdpvORPL+Z7zTqvOGJqUcaUiQE7pFm
+         hWhkq041qaW1goj7aobepWXz5Dhy9ZP8wa4nqkW/nZkhsJfkg3/w3EXDkOEc/RwnYSqE
+         7hxw==
+X-Gm-Message-State: AOAM531yg0kYMY3Ci9921snshyfY82mC88o+oDz2/gx0UJlyAoad0gzs
+	Hn/1MXFctlrVQt+e9suQ5x/XVjse
+X-Google-Smtp-Source: ABdhPJwIjwQC6tuzhAkAuuT8BWPI3BAeGZbvTAVO2A/MaTvGAtASb0s2xOr+mLKRMgHrPY5NjxSIGg==
+X-Received: by 2002:a17:902:968b:: with SMTP id n11mr13488644plp.331.1593442754193;
+        Mon, 29 Jun 2020 07:59:14 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:c4f0:9f8d:a81:ca7e? ([2601:202:4180:a5c0:c4f0:9f8d:a81:ca7e])
+        by smtp.gmail.com with ESMTPSA id u26sm78659pfn.54.2020.06.29.07.59.13
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 29 Jun 2020 07:59:13 -0700 (PDT)
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: "akuster" <akuster808@gmail.com>
+Subject: meta-python Dunfell branch maintenance
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+ 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
+ 8CS2NxU=
+Message-ID: <c1502c01-c4c8-b05c-5db1-979b0d335b38@gmail.com>
+Date: Mon, 29 Jun 2020 07:59:13 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
-In-Reply-To: <1593333924-4040-5-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-ClientProxiedBy: YT1PR01CA0092.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2d::31) To BN6PR11MB0003.namprd11.prod.outlook.com
- (2603:10b6:405:61::26)
-Return-Path: trevor.gamblin@windriver.com
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0092.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.20 via Frontend Transport; Mon, 29 Jun 2020 14:56:09 +0000
-X-Originating-IP: [174.115.236.231]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 254121b8-cebc-4783-ecca-08d81c3c8ef0
-X-MS-TrafficTypeDiagnostic: BN6PR11MB1988:
-X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB1988008D679EDBF264FA69479F6E0@BN6PR11MB1988.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:88;
-X-Forefront-PRVS: 044968D9E1
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	tf9iDGaknPoLUaN2fj37NHVacHlWr6ujizyRqiXtYCQj29QE5fs8GKH0Nugz9vN1ptSqp+zAjZIctyRv3xcryVzwqpVlZN5JopTJqFXCXz8NK7nBy4yry88jdCpTNG/XmM0tx+Rrzu/58yNPAUhiFIVp8EyMsvGeklYfEQDsmlHa4WXRMySgt5Y/HzWGht6PeQR5iBFJeFhbKxX7PM6JCFgzTHldQYLuJSEt4WkHC4CKphHDMgP9N66AgVnZzf4CAOrox+Oer/T6mRHkQpBl5AZo/cqeVN8lkbxrEa6fs54Sbycfwbph44IQrI4tjRj34Ej2U3DgVgiAyrsf5Jm76G/PVeP6B+LLMq34ebE3lUEN+0WQXnFbGUXnzdExIrcRmpy+CEKbcmMQXySeIFBq966TD/zDrruR6YuaeoOI6g//lZTSpRPhjnQ/xEfysd09XYAN/lRliujn+goXyuxnMA==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB0003.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(376002)(346002)(136003)(366004)(396003)(39850400004)(186003)(33964004)(53546011)(26005)(52116002)(6486002)(31696002)(2616005)(44832011)(66946007)(66476007)(66556008)(956004)(5660300002)(2906002)(478600001)(966005)(36756003)(16526019)(166002)(83380400001)(8936002)(31686004)(316002)(16576012)(8676002)(86362001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	OPeVJ6SIzqXpdd+DOlLZ0eojVFvO/O+PBV7TcUYYW1PYNp0n/tIC3pRVIBirknCjXOGG2leqivcaQxviy6tWwaxHjuE9PYaA+f4LzG62K0Xw190QlVUk6PESMlTFqL1EW1xhKDjIC3VCDABuO/pP079IwrmhpRET87Q4LcuYcTZSsKQ9leOLle7/Vysrn3iGBbS45KEidHVjOGstoLU+6psUhxFa+SUpRETAoO3qGuwddZRiNCE0ydioHI+PeDHf8ke9GkwrevMzbm2KiJeAg5dJzhkpc7zL42HhHqeKtNCi81o/dYrjzHpk7rEPvH5dff3qL1t0xMHfJYUq9Lr0egQQCvPfVO1IxwVMzbtoo7baN0cb8iPO12DKJhfQFymAr+swSID2Q2VbmmdNLVO7bpuFyn1Syy6daDB0Ma+9GH4uJ49XuUsDGXixr1LiX8WVTMDieRDaRRlITlmLlnRUS5RAKTqvCrS09otKKhTEwR4oxrjpYNOUrbIeiYBodqJX
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 254121b8-cebc-4783-ecca-08d81c3c8ef0
-X-MS-Exchange-CrossTenant-AuthSource: BN6PR11MB0003.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2020 14:56:09.9601
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1PFQZrC9De72KubeQ1JENwizZlQFNIsInwVqO2krVuR7N/7kg1Jf+o3Bh/dA6EPQfcpw8NLsAvY9grJwNSCk6tbkR8OPNPsioF/6JMvcApE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB1988
-Content-Type: multipart/alternative;
- boundary="------------1C6CA7641E071830CED48256"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 Content-Language: en-US
 
---------------1C6CA7641E071830CED48256
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Hello all,
 
+I have notice many meta-python3 recipes are having their .inc files
+being consolidated. I am considering backporting those consolidations
+that are bug fix only so that maintenance moving forward is easier.
 
-On 6/28/20 4:45 AM, zangrc wrote:
-> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   .../python/python3-bcrypt/run-ptest               |  3 +++
->   .../python/python3-bcrypt_3.1.7.bb                | 15 ++++++++++++++-
->   2 files changed, 17 insertions(+), 1 deletion(-)
->   create mode 100644 meta-python/recipes-devtools/python/python3-bcrypt/run-ptest
->
-> diff --git a/meta-python/recipes-devtools/python/python3-bcrypt/run-ptest b/meta-python/recipes-devtools/python/python3-bcrypt/run-ptest
-> new file mode 100644
-> index 000000000..b63c4de0d
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-bcrypt/run-ptest
-> @@ -0,0 +1,3 @@
-> +#!/bin/sh
-> +
-> +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-> diff --git a/meta-python/recipes-devtools/python/python3-bcrypt_3.1.7.bb b/meta-python/recipes-devtools/python/python3-bcrypt_3.1.7.bb
-> index 0f2d31f53..3b9cd52f2 100644
-> --- a/meta-python/recipes-devtools/python/python3-bcrypt_3.1.7.bb
-> +++ b/meta-python/recipes-devtools/python/python3-bcrypt_3.1.7.bb
-> @@ -7,7 +7,20 @@ DEPENDS += "${PYTHON_PN}-cffi-native"
->   SRC_URI[md5sum] = "5d6f93b575ce52470af37a8e7dce76fe"
->   SRC_URI[sha256sum] = "0b0069c752ec14172c5f78208f1863d7ad6755a6fae6fe76ec2c80d13be41e42"
->   
-> -inherit pypi setuptools3
-> +inherit pypi setuptools3 ptest
-> +
-> +SRC_URI += " \
-> +	file://run-ptest \
-> +"
-> +
-> +RDEPENDS_${PN}-ptest += " \
-> +	${PYTHON_PN}-pytest \
-> +"
-> +
-> +do_install_ptest() {
-> +	install -d ${D}${PTEST_PATH}/tests
-> +	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> +}
->   
->   RDEPENDS_${PN}_class-target += "\
->       ${PYTHON_PN}-cffi \
->
-> 
+Any concerns from the community on taking that route where=C2=A0 appropri=
+ate?
 
---------------1C6CA7641E071830CED48256
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
+regards,
+Armin
 
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 6/28/20 4:45 AM, zangrc wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:1593333924-4040-5-git-send-email-zangrc.fnst@cn.fujitsu.com">
-      <pre class="moz-quote-pre" wrap="">Signed-off-by: Zang Ruochen <a class="moz-txt-link-rfc2396E" href="mailto:zangrc.fnst@cn.fujitsu.com">&lt;zangrc.fnst@cn.fujitsu.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:1593333924-4040-5-git-send-email-zangrc.fnst@cn.fujitsu.com">
-      <pre class="moz-quote-pre" wrap="">
----
- .../python/python3-bcrypt/run-ptest               |  3 &#43;&#43;&#43;
- .../python/python3-bcrypt_3.1.7.bb                | 15 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
- 2 files changed, 17 insertions(&#43;), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-bcrypt/run-ptest
-
-diff --git a/meta-python/recipes-devtools/python/python3-bcrypt/run-ptest b/meta-python/recipes-devtools/python/python3-bcrypt/run-ptest
-new file mode 100644
-index 000000000..b63c4de0d
---- /dev/null
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-bcrypt/run-ptest
-@@ -0,0 &#43;1,3 @@
-&#43;#!/bin/sh
-&#43;
-&#43;pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;){printf &quot;%s: %s\n&quot;, $NF, $0}else{print}}'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;) {$NF=&quot;&quot;;print $0}else{print}}'
-diff --git a/meta-python/recipes-devtools/python/python3-bcrypt_3.1.7.bb b/meta-python/recipes-devtools/python/python3-bcrypt_3.1.7.bb
-index 0f2d31f53..3b9cd52f2 100644
---- a/meta-python/recipes-devtools/python/python3-bcrypt_3.1.7.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-bcrypt_3.1.7.bb
-@@ -7,7 &#43;7,20 @@ DEPENDS &#43;= &quot;${PYTHON_PN}-cffi-native&quot;
- SRC_URI[md5sum] = &quot;5d6f93b575ce52470af37a8e7dce76fe&quot;
- SRC_URI[sha256sum] = &quot;0b0069c752ec14172c5f78208f1863d7ad6755a6fae6fe76ec2c80d13be41e42&quot;
- 
--inherit pypi setuptools3
-&#43;inherit pypi setuptools3 ptest
-&#43;
-&#43;SRC_URI &#43;= &quot; \
-&#43;	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
-&#43;&quot;
-&#43;
-&#43;RDEPENDS_${PN}-ptest &#43;= &quot; \
-&#43;	${PYTHON_PN}-pytest \
-&#43;&quot;
-&#43;
-&#43;do_install_ptest() {
-&#43;	install -d ${D}${PTEST_PATH}/tests
-&#43;	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-&#43;}
- 
- RDEPENDS_${PN}_class-target &#43;= &quot;\
-     ${PYTHON_PN}-cffi \
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------1C6CA7641E071830CED48256--
