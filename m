@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.17242.1593432767448996244
+ by mx.groups.io with SMTP id smtpd.web10.17260.1593432768563910548
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Jun 2020 05:12:47 -0700
+ Mon, 29 Jun 2020 05:12:48 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=33196 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jpseT-0001kP-KG; Mon, 29 Jun 2020 15:12:46 +0300
+	id 1jpseU-0001kP-7O; Mon, 29 Jun 2020 15:12:47 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 02/10] python3-pyparted: Upgrade 3.11.3 -> 3.11.6
-Date: Mon, 29 Jun 2020 15:12:25 +0300
-Message-Id: <20200629121233.27026-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 03/10] python3-pywbem: Consolidate in a single file
+Date: Mon, 29 Jun 2020 15:12:26 +0300
+Message-Id: <20200629121233.27026-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200629121233.27026-1-leon.anavi@konsulko.com>
 References: <20200629121233.27026-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-1.0
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,47 +30,137 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Inherit pypi. Upgrade to release 3.11.6:
-
-- Use preprocessor for the _ped module and what constants to
-  include
-- Reduce libparted requirement to 3.2
-- Update the pypi target in the Makefile
-- Reduce minimum Python required to 3.5
+Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...3-pyparted_3.11.3.bb => python3-pyparted_3.11.6.bb} | 10 ++++------
- 1 file changed, 4 insertions(+), 6 deletions(-)
- rename meta-python/recipes-extended/python-pyparted/{python3-pyparted_3.11.3.bb => python3-pyparted_3.11.6.bb} (73%)
+ .../recipes-extended/pywbem/python-pywbem.inc | 51 ------------------
+ .../pywbem/python3-pywbem_0.15.0.bb           | 53 ++++++++++++++++++-
+ 2 files changed, 51 insertions(+), 53 deletions(-)
+ delete mode 100644 meta-python/recipes-extended/pywbem/python-pywbem.inc
 
-diff --git a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.3.bb b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.6.bb
-similarity index 73%
-rename from meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.3.bb
-rename to meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.6.bb
-index a801920c0..63f493366 100644
---- a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.3.bb
-+++ b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.6.bb
-@@ -8,15 +8,13 @@ LIC_FILES_CHKSUM = "\
-     file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
-     file://src/_pedmodule.c;beginline=10;endline=22;md5=9e53304db812b80d0939e11bb69dcab2 \
- "
--DEPENDS += "parted"
- 
--# upstream only publishes releases in github archives which are discouraged
--SRCREV = "481510c10866851844b19f3d2ffcdaa37efc0cf8"
--SRC_URI = "git://github.com/rhinstaller/pyparted.git;protocol=https"
-+SRC_URI[md5sum] = "b85dcaecc3106eb6e9a117270b09615e"
-+SRC_URI[sha256sum] = "727ccdf308c194069aa9797f7a6a973bc95b2e407cdf5d58d6c8bc4c9dec92dc"
- 
--inherit distutils3
-+inherit pypi distutils3
- 
+diff --git a/meta-python/recipes-extended/pywbem/python-pywbem.inc b/meta-python/recipes-extended/pywbem/python-pywbem.inc
+deleted file mode 100644
+index 98508b0c3..000000000
+--- a/meta-python/recipes-extended/pywbem/python-pywbem.inc
++++ /dev/null
+@@ -1,51 +0,0 @@
+-SUMMARY = "Python WBEM Client and Provider Interface"
+-DESCRIPTION = "\
+-A Python library for making CIM (Common Information Model) operations over \
+-HTTP using the WBEM CIM-XML protocol. It is based on the idea that a good \
+-WBEM client should be easy to use and not necessarily require a large amount \
+-of programming knowledge. It is suitable for a large range of tasks from \
+-simply poking around to writing web and GUI applications. \
+-\
+-WBEM, or Web Based Enterprise Management is a manageability protocol, like \
+-SNMP, standardised by the Distributed Management Task Force (DMTF) available \
+-at http://www.dmtf.org/standards/wbem. \
+-\
+-It also provides a Python provider interface, and is the fastest and easiest \
+-way to write providers on the planet."
+-HOMEPAGE = "http://pywbem.github.io"
+-LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
+-
+-inherit pypi 
+-
+-SRCREV = "b3386b3bee8876d15f0745147c0b08937d8ab18e"
+-PYPI_SRC_URI = "git://github.com/pywbem/pywbem;protocol=https;branch=stable_0.15"
+-
 -S = "${WORKDIR}/git"
-+DEPENDS += "parted"
+-
+-DEPENDS += " \
+-    ${PYTHON_PN}-ply-native \
+-    ${PYTHON_PN}-pyyaml-native \
+-    ${PYTHON_PN}-six-native \
+-"
+-
+-do_install_append() {
+-    mv ${D}${bindir}/wbemcli.py ${D}${bindir}/pywbemcli
+-
+-    rm -f ${D}${bindir}/*.bat
+-}
+-
+-RDEPENDS_${PN}_class-target += "\
+-    ${PYTHON_PN}-datetime \
+-    ${PYTHON_PN}-io \
+-    ${PYTHON_PN}-netclient \
+-    ${PYTHON_PN}-ply \
+-    ${PYTHON_PN}-pyyaml \
+-    ${PYTHON_PN}-six \
+-    ${PYTHON_PN}-stringold \
+-    ${PYTHON_PN}-threading \
+-    ${PYTHON_PN}-unixadmin \
+-    ${PYTHON_PN}-xml \
+-"
+-
+-BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-extended/pywbem/python3-pywbem_0.15.0.bb b/meta-python/recipes-extended/pywbem/python3-pywbem_0.15.0.bb
+index abfb8d920..cbb55b8f7 100644
+--- a/meta-python/recipes-extended/pywbem/python3-pywbem_0.15.0.bb
++++ b/meta-python/recipes-extended/pywbem/python3-pywbem_0.15.0.bb
+@@ -1,5 +1,52 @@
+-require python-pywbem.inc
+-inherit setuptools3 update-alternatives
++SUMMARY = "Python WBEM Client and Provider Interface"
++DESCRIPTION = "\
++A Python library for making CIM (Common Information Model) operations over \
++HTTP using the WBEM CIM-XML protocol. It is based on the idea that a good \
++WBEM client should be easy to use and not necessarily require a large amount \
++of programming knowledge. It is suitable for a large range of tasks from \
++simply poking around to writing web and GUI applications. \
++\
++WBEM, or Web Based Enterprise Management is a manageability protocol, like \
++SNMP, standardised by the Distributed Management Task Force (DMTF) available \
++at http://www.dmtf.org/standards/wbem. \
++\
++It also provides a Python provider interface, and is the fastest and easiest \
++way to write providers on the planet."
++HOMEPAGE = "http://pywbem.github.io"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
++
++inherit pypi setuptools3 update-alternatives
++
++SRCREV = "b3386b3bee8876d15f0745147c0b08937d8ab18e"
++PYPI_SRC_URI = "git://github.com/pywbem/pywbem;protocol=https;branch=stable_0.15"
++
++S = "${WORKDIR}/git"
++
++DEPENDS += " \
++    ${PYTHON_PN}-ply-native \
++    ${PYTHON_PN}-pyyaml-native \
++    ${PYTHON_PN}-six-native \
++"
++
++do_install_append() {
++    mv ${D}${bindir}/wbemcli.py ${D}${bindir}/pywbemcli
++
++    rm -f ${D}${bindir}/*.bat
++}
++
++RDEPENDS_${PN}_class-target += "\
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-io \
++    ${PYTHON_PN}-netclient \
++    ${PYTHON_PN}-ply \
++    ${PYTHON_PN}-pyyaml \
++    ${PYTHON_PN}-six \
++    ${PYTHON_PN}-stringold \
++    ${PYTHON_PN}-threading \
++    ${PYTHON_PN}-unixadmin \
++    ${PYTHON_PN}-xml \
++"
  
- RDEPENDS_${PN}_class-target += " \
-     parted (>= 2.3) \
+ ALTERNATIVE_${PN} = "mof_compiler pywbemcli wbemcli"
+ ALTERNATIVE_TARGET[mof_compiler] = "${bindir}/mof_compiler"
+@@ -7,3 +54,5 @@ ALTERNATIVE_TARGET[pywbemcli] = "${bindir}/pywbemcli"
+ ALTERNATIVE_TARGET[wbemcli] = "${bindir}/wbemcli"
+ 
+ ALTERNATIVE_PRIORITY = "60"
++
++BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
