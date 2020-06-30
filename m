@@ -1,59 +1,76 @@
 Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.6168.1593480539989844452
+ by mx.groups.io with SMTP id smtpd.web11.9919.1593499153797087467
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Jun 2020 18:29:00 -0700
+ Mon, 29 Jun 2020 23:39:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.75,296,1589212800"; 
-   d="scan'208";a="95532720"
+   d="scan'208";a="95550783"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 30 Jun 2020 09:28:54 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id AA3464CE4B14
-	for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 09:18:22 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Tue, 30 Jun 2020 09:28:49 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+  by heian.cn.fujitsu.com with ESMTP; 30 Jun 2020 14:39:12 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id B4A454CE4B19
+	for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 14:28:39 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Tue, 30 Jun 2020 14:39:08 +0800
+From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-perl] [PATCH] libnet-dns-perl: upgrade 1.24 -> 1.25
-Date: Tue, 30 Jun 2020 09:28:47 +0800
-Message-ID: <1593480527-5252-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-uritemplate: Enable ptest
+Date: Tue, 30 Jun 2020 14:39:05 +0800
+Message-ID: <1593499145-72426-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
+X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: AA3464CE4B14.A4167
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
+X-yoursite-MailScanner-ID: B4A454CE4B19.A94CB
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- .../{libnet-dns-perl_1.24.bb => libnet-dns-perl_1.25.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libnet/{libnet-dns-perl_1.24.bb => libnet-dns-perl_1.25.bb} (92%)
+ .../python/python3-uritemplate/run-ptest          |  3 +++
+ .../python/python3-uritemplate_3.0.1.bb           | 15 ++++++++++++++-
+ 2 files changed, 17 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-uritemplate/run-ptest
 
-diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.24.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.25.bb
-similarity index 92%
-rename from meta-perl/recipes-perl/libnet/libnet-dns-perl_1.24.bb
-rename to meta-perl/recipes-perl/libnet/libnet-dns-perl_1.25.bb
-index 8994f692b..bda6ec1eb 100644
---- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.24.bb
-+++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.25.bb
-@@ -9,8 +9,8 @@ DEPENDS += "perl"
+diff --git a/meta-python/recipes-devtools/python/python3-uritemplate/run-ptest b/meta-python/recipes-devtools/python/python3-uritemplate/run-ptest
+new file mode 100644
+index 000000000..b63c4de0d
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-uritemplate/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
++
++pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
+diff --git a/meta-python/recipes-devtools/python/python3-uritemplate_3.0.1.bb b/meta-python/recipes-devtools/python/python3-uritemplate_3.0.1.bb
+index 952e954c5..2a83219a9 100644
+--- a/meta-python/recipes-devtools/python/python3-uritemplate_3.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-uritemplate_3.0.1.bb
+@@ -9,6 +9,19 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0f6d769bdcfacac3c1a1ffa568937fe0"
+ SRC_URI[md5sum] = "869fb44fbd56713490db7272eb36c8ae"
+ SRC_URI[sha256sum] = "5af8ad10cec94f215e3f48112de2022e1d5a37ed427fbd88652fa908f2ab7cae"
  
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
+-inherit pypi setuptools3
++inherit pypi setuptools3 ptest
++
++SRC_URI += " \
++        file://run-ptest \
++"
++
++RDEPENDS_${PN}-ptest += " \
++       ${PYTHON_PN}-pytest \
++"
++
++do_install_ptest() {
++      install -d ${D}${PTEST_PATH}/tests
++        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
++}
  
--SRC_URI[md5sum] = "1bf07817bb272d412a737ecc2347d70b"
--SRC_URI[sha256sum] = "11a6c2ba6cb1c6640f01c9bbf2036bcbe3974232e9b939ab94985230c92cde63"
-+SRC_URI[md5sum] = "5c0d1a6de317993e146ce6d37c897be5"
-+SRC_URI[sha256sum] = "10931927d32d771817f9cd7d5502794f245a86cb403310db33656e493f67ff25"
- 
- UPSTREAM_CHECK_REGEX = "Net\-DNS\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
- 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
