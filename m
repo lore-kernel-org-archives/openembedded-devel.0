@@ -1,109 +1,88 @@
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
- by mx.groups.io with SMTP id smtpd.web10.17323.1593529266081784736
+Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com [209.85.219.54])
+ by mx.groups.io with SMTP id smtpd.web10.17461.1593529665474738920
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2020 08:01:06 -0700
+ Tue, 30 Jun 2020 08:07:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nLQE9CUu;
- spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f195.google.com with SMTP id e13so18858881qkg.5
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 08:01:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=d1NJeiC8;
+ spf=pass (domain: gmail.com, ip: 209.85.219.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f54.google.com with SMTP id h18so9407752qvl.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 08:07:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=P3LuRauZNS1XhjZbI06wravgGi81tnwVFa5FOsp7uYU=;
-        b=nLQE9CUupl/ofRh7Vw3WVo7IohDuTR9200ooQOmm5Kt67YHBCT1r3EK1N6QoMAMRhp
-         8JH/Q7NqNnP+9CZbkmkhTKm97x6B3xed0AvMGt3b8uGAgFlr71fjjcvUjUH2fkdbF8Xc
-         7OpYDVh3CU1xSlw7Ezmj152x7D/opgoroDBOfd7tQTntpxG1O7RvUhg7PUh2Ec/ctp63
-         f2+v90tvRsBt6wxAmkJUUGxzkcifm7aVPi9AdO2mbrHNmnP4FmCawfKos26IeYowJS5+
-         WWbofPd6tavaYQXYlmRNclB8tixe0lcDqn5DogEPBpbaVR+Pnknfvcl6uhCTZ2wYEkkU
-         5GOw==
+         :cc;
+        bh=rZ+gyaFhr8FTrjts2gvkGMlzHByMcuNpXpe4CZTWWms=;
+        b=d1NJeiC8a6GJSEtvVcxpem5nddy+B09JW6CL15Wq+99oiGrg/VteYYZ0Pz6jmi8Gc/
+         oC7+BzdY7w1wRJThMxLqFFcbMHdlwXmGIT4i/pfC0iF8IWbE3CNuDix268+h7JX9WCPO
+         /eC/wiDldTRBS+sL+8BEtuwp9texaP54EaU1adzpK8gFGjdSr33Sezx1ZpIzok+oCdJh
+         qDJeOxA/9IlCSxqDeAedOGS66oaS9a6GFxr7toS0e9VKA/pHkh48xxAD9KJnoTiuLz5X
+         t49JeYoceSiro45XGm39fmVHytDbH1bGMRvjpiCAqkuDINfcGfmkcOiI5W2j31Tz1E70
+         AY6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=P3LuRauZNS1XhjZbI06wravgGi81tnwVFa5FOsp7uYU=;
-        b=dgoYqtoy9Lbbc4kMe7W6HU2Cd+qRK4ByUvcZYBtgzEgeQif3YbV1vezo94bn4oEwiV
-         8biyd2o80EWDaWHSkP05fmspvwFYxIfI8sNyE9IwskQ9f4Hb52e96k6z1lBhMhrS2b0+
-         akvzxbmppoHHq2GvH5lQRlSUy/phns3+UcCgzF3aCJpe7mU85o8Vv8/XXNKy4/sUKvVF
-         ySfHJpKElMYBp2w39Bn7GvCk++twG0dI0K8ECGsn5w4YZfmOOE2AHQbVYwy8x2/F63cA
-         5DGRxj7iiABjoOXz+8MgSH3JlmyfVfZkzBo7cm3c9c87bCHM9Y2m6CWeWf1LOWHFVLki
-         /zRw==
-X-Gm-Message-State: AOAM531PVj4+9MtIhVv+9Bv3pBOqw9Nt2z8RcpXC/jqxj65V1qRl8WOS
-	knT/d4MFjdmvCA5OiLmjjlxaNDz4mRcq6lknB/c=
-X-Google-Smtp-Source: ABdhPJwiGua6K1m2on+Z0EnjB3rhB4N5YaDYXLN+QN5PsPKEbvs4JvD/f4+ntAMhtc9W66TzMZ4PU/yk+KNmQ9dw/L8=
-X-Received: by 2002:a05:620a:148d:: with SMTP id w13mr9636950qkj.215.1593529263835;
- Tue, 30 Jun 2020 08:01:03 -0700 (PDT)
+         :message-id:subject:to:cc;
+        bh=rZ+gyaFhr8FTrjts2gvkGMlzHByMcuNpXpe4CZTWWms=;
+        b=mDc5CbyEj3LIzf4OIjQD1UOVfdgnIOe/xOK820s+7L0eAQDmvAE2Gzv21n0sJaoX3y
+         b6YBZLTxbX+imePpWfU/RU4SMp5/NEsitb87/LFjGfbwG/kqexwo5K5qyczbLIfuYyAX
+         VyOLupr6Un70liZcAdYMkSvpibyroT4+O2zn7GAj/FWjsLvcsegykDqfMqTWYit20u3n
+         71K/dwnHonDkygU32kvSwsCLcupqByboRHT6wKJztJ7s44xmKBy1rwuXVEMELLhic0ux
+         TfhYIGqNZ+gWn2/5JPDx4wmTjyghARnCMo2qVZYDCCMTmOcBtwehH5QbTg652CtmenYX
+         w/+Q==
+X-Gm-Message-State: AOAM531rZr6tQjyScVDNQTJ+DMBTBR1ogms+6TpMObU3eE6etRM2RAWm
+	oKl2WujafGmYXc7rCttZ+USl3JqyrkcqAIm63ZjeDIXg
+X-Google-Smtp-Source: ABdhPJyrMNv6ghocQHcWH/nvIx5S3rggkiclwTlpozhqWkmcvWjMyIxiOHWbN3UY4PTU7jLAPlKMZ89WrBCz/uztx3M=
+X-Received: by 2002:a0c:fd2a:: with SMTP id i10mr20931572qvs.23.1593529664425;
+ Tue, 30 Jun 2020 08:07:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <1593479853-4475-1-git-send-email-zangrc.fnst@cn.fujitsu.com> <1593479853-4475-5-git-send-email-zangrc.fnst@cn.fujitsu.com>
-In-Reply-To: <1593479853-4475-5-git-send-email-zangrc.fnst@cn.fujitsu.com>
+References: <c1502c01-c4c8-b05c-5db1-979b0d335b38@gmail.com> <20200629151951.GA7038@localhost>
+In-Reply-To: <20200629151951.GA7038@localhost>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Tue, 30 Jun 2020 08:00:37 -0700
-Message-ID: <CAMKF1sr++fJpuMxPLWaBdgvvvhQoSGJtVSs-0q9yv4cXZGdOGw@mail.gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH] python3-wcwidth: Enable ptest
-To: zangrc <zangrc.fnst@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Date: Tue, 30 Jun 2020 08:07:18 -0700
+Message-ID: <CAMKF1spiRhob53ZdB2c9OTboFUyBJJ6aWkmE8dC6aFTaAT6pEQ@mail.gmail.com>
+Subject: Re: [oe] meta-python Dunfell branch maintenance
+To: Adrian Bunk <bunk@stusta.de>
+Cc: akuster <akuster808@gmail.com>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Please rebase it on top of the master and resend.
+On Mon, Jun 29, 2020 at 8:20 AM Adrian Bunk <bunk@stusta.de> wrote:
+>
+> On Mon, Jun 29, 2020 at 07:59:13AM -0700, akuster wrote:
+> > Hello all,
+> >
+> > I have notice many meta-python3 recipes are having their .inc files
+> > being consolidated. I am considering backporting those consolidations
+> > that are bug fix only
+>
+> Those consolidations can never be "bug fix only" - part of a recipe in
+> an .inc file is not a bug.
+>
+> > so that maintenance moving forward is easier.
+> >
+> > Any concerns from the community on taking that route where  appropriate?
+>
+> I wouldn't see it appropriate for a stable branch in most cases.
+>
+> If you are backporting other changes for a recipe that were done in
+> master on top of such a change this approach sounds like an option, but
+> in the normal case that the recipe is never touched for other reasons in
+> a stable branch I do not see the benefits of making such unnecessary changes.
+>
 
-On Mon, Jun 29, 2020 at 6:18 PM zangrc <zangrc.fnst@cn.fujitsu.com> wrote:
+I reckon that this would make it easy to maintain then in the future,
+so the question is do
+we do this now or do we wait until a bug fix is required on dunfell,
+at that time the
+the effort would be to do both. If its moving code around without
+other changes then it's a trivial fix
+I would leave it up to maintainer's discretion if it makes their work
+easier, it's perhaps fine to
+cherry-pick the easy ones.
+
+> > regards,
+> > Armin
 >
-> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-> ---
->  .../python/python3-wcwidth/run-ptest              |  3 +++
->  .../python/python3-wcwidth_0.2.4.bb               | 15 ++++++++++++++-
->  2 files changed, 17 insertions(+), 1 deletion(-)
->  create mode 100644 meta-python/recipes-devtools/python/python3-wcwidth/=
-run-ptest
->
-> diff --git a/meta-python/recipes-devtools/python/python3-wcwidth/run-pte=
-st b/meta-python/recipes-devtools/python/python3-wcwidth/run-ptest
-> new file mode 100644
-> index 000000000..b63c4de0d
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-wcwidth/run-ptest
-> @@ -0,0 +1,3 @@
-> +#!/bin/sh
-> +
-> +pytest -o log_cli=3Dtrue -o log_cli_level=3DINFO | sed -e 's/\[...%\]//=
-g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SK=
-IP/g'| awk '{if ($NF=3D=3D"PASS" || $NF=3D=3D"FAIL" || $NF=3D=3D"SKIP" || $=
-NF=3D=3D"XFAIL" || $NF=3D=3D"XPASS"){printf "%s: %s\n", $NF, $0}else{print}=
-}'| awk '{if ($NF=3D=3D"PASS" || $NF=3D=3D"FAIL" || $NF=3D=3D"SKIP" || $NF=
-=3D=3D"XFAIL" || $NF=3D=3D"XPASS") {$NF=3D"";print $0}else{print}}'
-> diff --git a/meta-python/recipes-devtools/python/python3-wcwidth_0.2.4.b=
-b b/meta-python/recipes-devtools/python/python3-wcwidth_0.2.4.bb
-> index 48ff37654..d10f5e69c 100644
-> --- a/meta-python/recipes-devtools/python/python3-wcwidth_0.2.4.bb
-> +++ b/meta-python/recipes-devtools/python/python3-wcwidth_0.2.4.bb
-> @@ -7,6 +7,19 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db15979c39a25=
-43892fca8cd86b4b52cb"
->  SRC_URI[md5sum] =3D "5e6cd8cd008a7ad2c2578ac49a9d87a1"
->  SRC_URI[sha256sum] =3D "8c6b5b6ee1360b842645f336d9e5d68c55817c26d3050f4=
-6b235ef2bc650e48f"
->
-> -inherit pypi setuptools3
-> +inherit pypi setuptools3 ptest
-> +
-> +SRC_URI +=3D " \
-> +        file://run-ptest \
-> +"
-> +
-> +RDEPENDS_${PN}-ptest +=3D " \
-> +       ${PYTHON_PN}-pytest \
-> +"
-> +
-> +do_install_ptest() {
-> +      install -d ${D}${PTEST_PATH}/tests
-> +        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> +}
->
->  BBCLASSEXTEND =3D "native nativesdk"
-> --
-> 2.17.1
->
->
->
->=20
+> cu
+> Adrian
+> 
