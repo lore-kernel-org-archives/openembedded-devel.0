@@ -1,77 +1,94 @@
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.web10.2243.1593537811380796366
+Received: from mail-ot1-f65.google.com (mail-ot1-f65.google.com [209.85.210.65])
+ by mx.groups.io with SMTP id smtpd.web12.4645.1593543942249984668
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2020 10:23:31 -0700
+ Tue, 30 Jun 2020 12:05:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=QjQ7FNK9;
- spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id d194so6880580pga.13
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 10:23:31 -0700 (PDT)
+ dkim=pass header.i=@mvista-com.20150623.gappssmtp.com header.s=20150623 header.b=Y/GASr9W;
+ spf=permerror, err=parse error for token &{10 18 websitewelcome.com}: parse error for token &{10 18 _spf.google.com}: limit exceeded (domain: mvista.com, ip: 209.85.210.65, mailfrom: jpuhlman@mvista.com)
+Received: by mail-ot1-f65.google.com with SMTP id m2so19296626otr.12
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 12:05:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
+        d=mvista-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=lvNcH1My/m4Z6czHDfkcIKzkkoUxiHQC69se3Ck1Cro=;
-        b=QjQ7FNK9cV7y4kV5bRuz4MG6+HctwQP8zUQy0qjrwXAh4ziyZBTbUHtJa41OEtJOkv
-         1bWVjmQNXlqU3lT+4NGeYTjqTYSXGbg0I/Vsrk4GdS/5r+O6txfZRZh0xOH8N7yyjNq/
-         EojN4gBb4kYL1dQ0QE6kgFHHfEI0sRwNud53w0RUKADSu2m5sW/1ohCeYOihQrFDkka8
-         yXdXoAWCNyV7jAaEN/hk3R1bDRStC3nJWFwuIAsxOKLsb0c0HAS9aY5lIUgSQ5Z4aYpJ
-         ZCsKN7k7R/RIZKcRXlAopAxykuoH6NQcQqNeWVSgDdJ5QQWcE3sUQgCiRDmfhg77lHj6
-         l01A==
+        bh=vvek09ORefYsshmDonnRDpPwKHrbP2PXI7LNQy5YVFk=;
+        b=Y/GASr9W07VxL3DPlIFc6fyQIWZ7ilerY9eTCF6iVBSFdPB/bJwt6b0lmMUv8qjXwT
+         tTin8qjfnxPBPaj3x5+hr7lBpWZ0fXsb2+Vjmkj58LHv2rLrD8Jueeg4nJOp4ttMp7he
+         6iMHXNnCzXBzTxqE/TYZzVPAFGeCmBi0GmQbxSiBuAyZ7mKWx6sNe34EDoEZw24o67ue
+         1n2AVliJ/Cvf64AdhwqJCYbA2ZRyxZY2QByxEyImbNhBOlzokbCu14/+avE6H0eLrZng
+         f3aG2X/dzKy4ouetBl216nIn1AMBGhaWvQpG9iebcnnlU15WPe8PBQEZpTop8lbLLJfV
+         lXsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=lvNcH1My/m4Z6czHDfkcIKzkkoUxiHQC69se3Ck1Cro=;
-        b=QU37UUuBR+WR5IInGdCcPFFjeWbUTPjoIlaHLVOtr30ZOWoCtfFVpNdpJGTBJaHCJ8
-         L5ayCbDXQ8LU0Y3jCw6QdEmU2/X5MtjaumDcOvyL4nXCFTzHszDC4fuKI33wHyCErToT
-         Uol2a6POZauC9gGY9wLpvIfKz2XY6pipkCHSQ1t+6xFIXpJf6x4hQXQHUG+LJjrF99Qf
-         9l/tmlkDQQpDi9I/+LKwgaegPOkqwHFIdDZj/RGBVPAgTesWj5K9WQ7rdfBnDh1hmJ5q
-         cgHRGhISNDytvCXLTPVhBIOOM7ekcfvmsbMJM54ShAZvICsY4YtbdFSpD0YK85jsCuL7
-         gscw==
-X-Gm-Message-State: AOAM533UfDmuQ40is74Q9ni+518KTyQ40JdgT4Uvdzbe1EyFFiTwj18Y
-	Pjg8V15ninsImE3vIlaCQYKq3QA3nAs=
-X-Google-Smtp-Source: ABdhPJyvudzwjf1A6JY2/xI7P8n4+wdprLFtHp7i0ul31VpEHXUxv3nURQj1Mb3X7baIV+1Anmj1iA==
-X-Received: by 2002:a65:64d8:: with SMTP id t24mr16395416pgv.286.1593537810459;
-        Tue, 30 Jun 2020 10:23:30 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net (c-73-63-224-124.hsd1.ca.comcast.net. [73.63.224.124])
-        by smtp.gmail.com with ESMTPSA id n11sm3157132pgm.1.2020.06.30.10.23.29
+        bh=vvek09ORefYsshmDonnRDpPwKHrbP2PXI7LNQy5YVFk=;
+        b=uGFPckk76FvdAxVBuj5UhIl51yF8k96X73lA/cUzjuDd+BztpNjB8aXmUEkCofkVOy
+         EKkb+42Riu/wrnpkz5H71KUOJkz4+T0ImS7oAOVyGUbQHZmJjhfqO6mBS2sWdzQbxGnO
+         7/LehCMfFwctvX4Cr4Gd9jpZ3kp3qjKrCd+d53kvh8sorn2JONT6SBA/NyjMTfiKVQyk
+         /7qnzh5XbCbCu6UIAjYasiJUcgPE20cXy3u0e2a981K5nuNPoLOacdNufQzxXTOG7ImX
+         YEiZEuktKJrUr2c26RrntpYFQgDGie+WZ6Y0u1GE+eYasoXbvOmNHmXwpa1KoV6xcc4O
+         Ni9Q==
+X-Gm-Message-State: AOAM531c0YN68DlMDzWtqymYY77dns8tiyj6Rd4vYl0Bh4yWiyRwRkWY
+	Jp45x/pwHaNZPzbsU2P4EutJMimVHzQ=
+X-Google-Smtp-Source: ABdhPJxp03dFz/tScQjJM7aaSva8SvN5POhcW4WSkB44LgR6On3oL1eHNG0SIqmYXUZAff/YWD5XPg==
+X-Received: by 2002:a9d:3436:: with SMTP id v51mr4067040otb.171.1593543927028;
+        Tue, 30 Jun 2020 12:05:27 -0700 (PDT)
+Return-Path: <jpuhlman@mvista.com>
+Received: from workhorse.localdomain (99-14-97-149.lightspeed.frokca.sbcglobal.net. [99.14.97.149])
+        by smtp.gmail.com with ESMTPSA id l23sm909171oot.41.2020.06.30.12.05.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Jun 2020 10:23:29 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Tue, 30 Jun 2020 12:05:26 -0700 (PDT)
+Received: by workhorse.localdomain (Postfix, from userid 1000)
+	id D766B2A099A; Tue, 30 Jun 2020 12:05:24 -0700 (PDT)
+From: "Jeremy Puhlman" <jpuhlman@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] lirc: Inherit distutils-common-base
-Date: Tue, 30 Jun 2020 10:23:27 -0700
-Message-Id: <20200630172327.283522-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.27.0
+Cc: Jeremy Puhlman <jpuhlman@mvista.com>
+Subject: [meta-java][master|dunfell][PATCH] icedtea7-native: set ALT_CUPS_HEADERS_PATH to staging
+Date: Tue, 30 Jun 2020 12:05:23 -0700
+Message-Id: <20200630190523.9795-1-jpuhlman@mvista.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This helps in compiling the python pieces in this package, which uses
-setup.py to build but does not have ldshared set correctly, inheriting
-distutils-common-base provides the minimum needed environment for the
-python module build
+From: Jeremy Puhlman <jpuhlman@mvista.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ALT_CUPS_HEADERS_PATH eventually gets added to some links as
+-I/usr/include
+
+If you are using the buildtools-extended-tarball, the limits.h
+from the system gets included first then later the limits.h
+from the buildtools tarball gets added again, but is missing
+glibc definitions, if the system glibc is much older(centos7).
+
+This leads to:
+In file included from /usr/include/limits.h:124,
+                 from /usr/include/sys/param.h:26,
+                 from ../../../src/solaris/javavm/export/jvm_md.h:35,
+                 from ../../../src/share/javavm/export/jvm.h:32,
+                 from ../../../src/solaris/native/sun/awt/awt.h:33,
+                 from ../../../src/solaris/native/sun/awt/awt_p.h:75,
+                 from ../../../src/solaris/native/sun/awt/awt_MToolkit.c:26:
+/build/buildtools/sysroots/x86_64-montavistasdk-linux/usr/include/limits.h:145:17: error: missing binary operator before token "("
+  145 | #if __GLIBC_USE (IEC_60559_BFP_EXT_C2X)
+
+Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
 ---
- .../meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-core/icedtea/icedtea7-native.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb
-index 2843cdf95c..b68303241e 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb
-@@ -29,7 +29,7 @@ SYSTEMD_SERVICE_${PN}-exec = "irexec.service"
- SYSTEMD_AUTO_ENABLE_lirc = "enable"
- SYSTEMD_AUTO_ENABLE_lirc-exec = "enable"
+diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
+index b0b9419..ba94927 100644
+--- a/recipes-core/icedtea/icedtea7-native.inc
++++ b/recipes-core/icedtea/icedtea7-native.inc
+@@ -61,6 +61,7 @@ B = "${S}/build"
+ # openjdk looks in /usr/include and /usr/lib for freetype by default.
+ export ALT_FREETYPE_HEADERS_PATH = "${STAGING_INCDIR}/freetype2"
+ export ALT_FREETYPE_LIB_PATH = "${STAGING_LIBDIR}"
++export ALT_CUPS_HEADERS_PATH = "${STAGING_INCDIR}"
  
--inherit autotools pkgconfig systemd python3native
-+inherit autotools pkgconfig systemd python3native distutils-common-base
- 
- PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir,systemd"
- PACKAGECONFIG[x11] = "--with-x,--with-x=no,libx11,"
+ # libfreetype.so.6 is copied from STAGING_LIBDIR
+ # which is already stripped.
 -- 
-2.27.0
+2.20.1
 
