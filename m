@@ -1,88 +1,80 @@
-Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com [209.85.219.54])
- by mx.groups.io with SMTP id smtpd.web10.17461.1593529665474738920
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.1947.1593537088825509720
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2020 08:07:45 -0700
+ Tue, 30 Jun 2020 10:11:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=d1NJeiC8;
- spf=pass (domain: gmail.com, ip: 209.85.219.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f54.google.com with SMTP id h18so9407752qvl.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 08:07:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=rZ+gyaFhr8FTrjts2gvkGMlzHByMcuNpXpe4CZTWWms=;
-        b=d1NJeiC8a6GJSEtvVcxpem5nddy+B09JW6CL15Wq+99oiGrg/VteYYZ0Pz6jmi8Gc/
-         oC7+BzdY7w1wRJThMxLqFFcbMHdlwXmGIT4i/pfC0iF8IWbE3CNuDix268+h7JX9WCPO
-         /eC/wiDldTRBS+sL+8BEtuwp9texaP54EaU1adzpK8gFGjdSr33Sezx1ZpIzok+oCdJh
-         qDJeOxA/9IlCSxqDeAedOGS66oaS9a6GFxr7toS0e9VKA/pHkh48xxAD9KJnoTiuLz5X
-         t49JeYoceSiro45XGm39fmVHytDbH1bGMRvjpiCAqkuDINfcGfmkcOiI5W2j31Tz1E70
-         AY6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=rZ+gyaFhr8FTrjts2gvkGMlzHByMcuNpXpe4CZTWWms=;
-        b=mDc5CbyEj3LIzf4OIjQD1UOVfdgnIOe/xOK820s+7L0eAQDmvAE2Gzv21n0sJaoX3y
-         b6YBZLTxbX+imePpWfU/RU4SMp5/NEsitb87/LFjGfbwG/kqexwo5K5qyczbLIfuYyAX
-         VyOLupr6Un70liZcAdYMkSvpibyroT4+O2zn7GAj/FWjsLvcsegykDqfMqTWYit20u3n
-         71K/dwnHonDkygU32kvSwsCLcupqByboRHT6wKJztJ7s44xmKBy1rwuXVEMELLhic0ux
-         TfhYIGqNZ+gWn2/5JPDx4wmTjyghARnCMo2qVZYDCCMTmOcBtwehH5QbTg652CtmenYX
-         w/+Q==
-X-Gm-Message-State: AOAM531rZr6tQjyScVDNQTJ+DMBTBR1ogms+6TpMObU3eE6etRM2RAWm
-	oKl2WujafGmYXc7rCttZ+USl3JqyrkcqAIm63ZjeDIXg
-X-Google-Smtp-Source: ABdhPJyrMNv6ghocQHcWH/nvIx5S3rggkiclwTlpozhqWkmcvWjMyIxiOHWbN3UY4PTU7jLAPlKMZ89WrBCz/uztx3M=
-X-Received: by 2002:a0c:fd2a:: with SMTP id i10mr20931572qvs.23.1593529664425;
- Tue, 30 Jun 2020 08:07:44 -0700 (PDT)
-MIME-Version: 1.0
-References: <c1502c01-c4c8-b05c-5db1-979b0d335b38@gmail.com> <20200629151951.GA7038@localhost>
-In-Reply-To: <20200629151951.GA7038@localhost>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Tue, 30 Jun 2020 08:07:18 -0700
-Message-ID: <CAMKF1spiRhob53ZdB2c9OTboFUyBJJ6aWkmE8dC6aFTaAT6pEQ@mail.gmail.com>
-Subject: Re: [oe] meta-python Dunfell branch maintenance
-To: Adrian Bunk <bunk@stusta.de>
-Cc: akuster <akuster808@gmail.com>, 
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=46852 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jqJn4-0004sv-Iy; Tue, 30 Jun 2020 20:11:27 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/7] python3-cassandra-driver: Upgrade 3.14.0 -> 3.24.0
+Date: Tue, 30 Jun 2020 20:11:13 +0300
+Message-Id: <20200630171119.25540-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-On Mon, Jun 29, 2020 at 8:20 AM Adrian Bunk <bunk@stusta.de> wrote:
->
-> On Mon, Jun 29, 2020 at 07:59:13AM -0700, akuster wrote:
-> > Hello all,
-> >
-> > I have notice many meta-python3 recipes are having their .inc files
-> > being consolidated. I am considering backporting those consolidations
-> > that are bug fix only
->
-> Those consolidations can never be "bug fix only" - part of a recipe in
-> an .inc file is not a bug.
->
-> > so that maintenance moving forward is easier.
-> >
-> > Any concerns from the community on taking that route where  appropriate?
->
-> I wouldn't see it appropriate for a stable branch in most cases.
->
-> If you are backporting other changes for a recipe that were done in
-> master on top of such a change this approach sounds like an option, but
-> in the normal case that the recipe is never touched for other reasons in
-> a stable branch I do not see the benefits of making such unnecessary changes.
->
+Upgrade to release 3.24.0:
 
-I reckon that this would make it easy to maintain then in the future,
-so the question is do
-we do this now or do we wait until a bug fix is required on dunfell,
-at that time the
-the effort would be to do both. If its moving code around without
-other changes then it's a trivial fix
-I would leave it up to maintainer's discretion if it makes their work
-easier, it's perhaps fine to
-cherry-pick the easy ones.
+Features
+- Make geomet an optional dependency at runtime (PYTHON-1237)
+- Add use_default_tempdir cloud config options (PYTHON-1245)
+- Tcp flow control for libevreactor (PYTHON-1248)
 
-> > regards,
-> > Armin
->
-> cu
-> Adrian
-> 
+Bug Fixes
+- Unable to connect to a cloud cluster using Ubuntu 20.04
+  (PYTHON-1238)
+- PlainTextAuthProvider fails with unicode chars and Python3
+  (PYTHON-1241)
+- [GRAPH] Graph execution profiles consistency level are not set
+  to LOCAL_QUORUM with a cloud cluster (PYTHON-1240)
+- [GRAPH] Can't write data in a Boolean field using the Fluent API
+  (PYTHON-1239)
+- [GRAPH] Fix elementMap() result deserialization (PYTHON-1233)
+
+Others
+- Bump geomet dependency version to 0.2 (PYTHON-1243)
+- Bump gremlinpython dependency version to 3.4.6 (PYTHON-1212)
+- Improve fluent graph documentation for core graphs (PYTHON-1244)
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ ...ra-driver_3.14.0.bb => python3-cassandra-driver_3.24.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cassandra-driver_3.14.0.bb => python3-cassandra-driver_3.24.0.bb} (85%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.14.0.bb b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.24.0.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-cassandra-driver_3.14.0.bb
+rename to meta-python/recipes-devtools/python/python3-cassandra-driver_3.24.0.bb
+index 768e557b9..562829028 100644
+--- a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.14.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.24.0.bb
+@@ -8,8 +8,8 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
+ SRCNAME = "cassandra-driver"
+ 
+-SRC_URI[md5sum] = "c5bed026bf48c821424c1f6296193908"
+-SRC_URI[sha256sum] = "b65218e2582277f5b77d1436e420db8616f63e3437a9e839cdcd7172d760e861"
++SRC_URI[md5sum] = "c31bc29989d8b0c7524a38b0e38c8bfb"
++SRC_URI[sha256sum] = "83ec8d9a5827ee44bb1c0601a63696a8a9086beaf0151c8255556299246081bd"
+ 
+ DISTUTILS_BUILD_ARGS += " \
+     --no-libev \
+-- 
+2.17.1
+
