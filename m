@@ -1,30 +1,30 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [])
- by mx.groups.io with SMTP id smtpd.web12.5975.1593480471667516957
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web10.6168.1593480539989844452
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Jun 2020 18:28:14 -0700
+ Mon, 29 Jun 2020 18:29:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: <nil>, mailfrom: zangrc.fnst@cn.fujitsu.com)
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.75,296,1589212800"; 
-   d="scan'208";a="95532670"
+   d="scan'208";a="95532720"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 30 Jun 2020 09:28:05 +0800
+  by heian.cn.fujitsu.com with ESMTP; 30 Jun 2020 09:28:54 +0800
 Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id C159D4CE4B14
-	for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 09:17:33 +0800 (CST)
+	by cn.fujitsu.com (Postfix) with ESMTP id AA3464CE4B14
+	for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 09:18:22 +0800 (CST)
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Tue, 30 Jun 2020 09:28:00 +0800
+ (TLS) id 15.0.1497.2; Tue, 30 Jun 2020 09:28:49 +0800
 From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] rsyslog: upgrade 0.2004.0 -> 0.2006.0
-Date: Tue, 30 Jun 2020 09:27:59 +0800
-Message-ID: <1593480479-5155-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+Subject: [oe] [meta-perl] [PATCH] libnet-dns-perl: upgrade 1.24 -> 1.25
+Date: Tue, 30 Jun 2020 09:28:47 +0800
+Message-ID: <1593480527-5252-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
 X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: C159D4CE4B14.A55A7
+X-yoursite-MailScanner-ID: AA3464CE4B14.A4167
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
@@ -32,28 +32,28 @@ Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../rsyslog/{rsyslog_8.2004.0.bb => rsyslog_8.2006.0.bb}      | 4 ++--
+ .../{libnet-dns-perl_1.24.bb => libnet-dns-perl_1.25.bb}      | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.2004.0.bb => rsyslog_8.2006.0.bb} (98%)
+ rename meta-perl/recipes-perl/libnet/{libnet-dns-perl_1.24.bb => libnet-dns-perl_1.25.bb} (92%)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2004.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2006.0.bb
-similarity index 98%
-rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.2004.0.bb
-rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.2006.0.bb
-index 68e96ef7a..ff6699509 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2004.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2006.0.bb
-@@ -29,8 +29,8 @@ SRC_URI_append_libc-musl = " \
-     file://0001-Include-sys-time-h.patch \
- "
+diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.24.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.25.bb
+similarity index 92%
+rename from meta-perl/recipes-perl/libnet/libnet-dns-perl_1.24.bb
+rename to meta-perl/recipes-perl/libnet/libnet-dns-perl_1.25.bb
+index 8994f692b..bda6ec1eb 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.24.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.25.bb
+@@ -9,8 +9,8 @@ DEPENDS += "perl"
  
--SRC_URI[md5sum] = "375a60ab0f461367f84f07a5dbda6de2"
--SRC_URI[sha256sum] = "5fc3d7b775f0879a40606d960491812a602e22f62e006ce027ed7bcf4c9f27d9"
-+SRC_URI[md5sum] = "33de768941953ceeca9d1a437b47891b"
-+SRC_URI[sha256sum] = "d9589e64866f2fdc5636af4cae9d60ebf1e3257bb84b81ee953ede6a05878e97"
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
  
- UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
- UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+-SRC_URI[md5sum] = "1bf07817bb272d412a737ecc2347d70b"
+-SRC_URI[sha256sum] = "11a6c2ba6cb1c6640f01c9bbf2036bcbe3974232e9b939ab94985230c92cde63"
++SRC_URI[md5sum] = "5c0d1a6de317993e146ce6d37c897be5"
++SRC_URI[sha256sum] = "10931927d32d771817f9cd7d5502794f245a86cb403310db33656e493f67ff25"
+ 
+ UPSTREAM_CHECK_REGEX = "Net\-DNS\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
+ 
 -- 
 2.17.1
 
