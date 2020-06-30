@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.1969.1593537126670344521
+ by mx.groups.io with SMTP id smtpd.web12.1974.1593537129688072729
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2020 10:12:07 -0700
+ Tue, 30 Jun 2020 10:12:10 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=46852 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jqJnh-0004sv-Mn; Tue, 30 Jun 2020 20:12:06 +0300
+	id 1jqJnk-0004sv-PG; Tue, 30 Jun 2020 20:12:09 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/7] python3-pywbem: Upgrade 0.17.2 -> 0.17.3
-Date: Tue, 30 Jun 2020 20:11:17 +0300
-Message-Id: <20200630171119.25540-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 6/7] python3-h2: Consolidate in a single file
+Date: Tue, 30 Jun 2020 20:11:18 +0300
+Message-Id: <20200630171119.25540-6-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200630171119.25540-1-leon.anavi@konsulko.com>
 References: <20200630171119.25540-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-0.7
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,38 +30,52 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.17.3:
-
-- Improved support for array-typed elements in ValueMapping
-- Accomodated the newly released flake8 version 3.8.1 by removing
-  the pinning of pyflakes to <2.2.0, and adjusting the source
-  code of pywbem to get around the new flake8 messages E123, E124,
-  E402.
+Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pywbem_0.17.2.bb => python3-pywbem_0.17.3.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-extended/pywbem/{python3-pywbem_0.17.2.bb => python3-pywbem_0.17.3.bb} (92%)
+ .../recipes-connectivity/python-h2/python-h2.inc    | 12 ------------
+ .../python-h2/python3-h2_3.1.1.bb                   | 13 +++++++++++--
+ 2 files changed, 11 insertions(+), 14 deletions(-)
+ delete mode 100644 meta-python/recipes-connectivity/python-h2/python-h2.inc
 
-diff --git a/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.2.bb b/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.3.bb
-similarity index 92%
-rename from meta-python/recipes-extended/pywbem/python3-pywbem_0.17.2.bb
-rename to meta-python/recipes-extended/pywbem/python3-pywbem_0.17.3.bb
-index ce63822b4..930f04896 100644
---- a/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.2.bb
-+++ b/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.3.bb
-@@ -16,8 +16,8 @@ HOMEPAGE = "http://pywbem.github.io"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
+diff --git a/meta-python/recipes-connectivity/python-h2/python-h2.inc b/meta-python/recipes-connectivity/python-h2/python-h2.inc
+deleted file mode 100644
+index c457836b7..000000000
+--- a/meta-python/recipes-connectivity/python-h2/python-h2.inc
++++ /dev/null
+@@ -1,12 +0,0 @@
+-DESCRIPTION = "HTTP/2 State-Machine based protocol implementation"
+-HOMEPAGE = "https://github.com/python-hyper/hyper-h2"
+-LICENSE = "MIT"
+-
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=b6b2f6bbe76528af543242d606c14851"
+-
+-SRC_URI[md5sum] = "950b5a62a2a608dc4547a01edf99aa8f"
+-SRC_URI[sha256sum] = "b8a32bd282594424c0ac55845377eea13fa54fe4a8db012f3a198ed923dc3ab4"
+-
+-inherit pypi
+-
+-RDEPENDS_${PN} += "${PYTHON_PN}-hpack ${PYTHON_PN}-hyperframe"
+diff --git a/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb b/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
+index 7230a27e8..5d9a65530 100644
+--- a/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
++++ b/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
+@@ -1,3 +1,12 @@
+-require python-h2.inc
++DESCRIPTION = "HTTP/2 State-Machine based protocol implementation"
++HOMEPAGE = "https://github.com/python-hyper/hyper-h2"
++LICENSE = "MIT"
  
--SRC_URI[md5sum] = "6100157c720ba272895b3f79a05c8dc3"
--SRC_URI[sha256sum] = "84dac33f77d5ff2c3d8eb42fc7de2ffb6d33f5e4954ef89db0dbf3fe646a2809"
-+SRC_URI[md5sum] = "9fbee6b4327f035eb212017b6cd84309"
-+SRC_URI[sha256sum] = "1de9963adda97d89d191d027ddc64167699a11ac42ecc3ea35dddf7679ac2441"
- 
- inherit pypi setuptools3 update-alternatives
- 
+-inherit setuptools3
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b6b2f6bbe76528af543242d606c14851"
++
++SRC_URI[md5sum] = "950b5a62a2a608dc4547a01edf99aa8f"
++SRC_URI[sha256sum] = "b8a32bd282594424c0ac55845377eea13fa54fe4a8db012f3a198ed923dc3ab4"
++
++inherit pypi setuptools3
++
++RDEPENDS_${PN} += "${PYTHON_PN}-hpack ${PYTHON_PN}-hyperframe"
 -- 
 2.17.1
 
