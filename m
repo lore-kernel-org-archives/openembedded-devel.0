@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.1974.1593537129688072729
+ by mx.groups.io with SMTP id smtpd.web10.1973.1593537131245353739
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2020 10:12:10 -0700
+ Tue, 30 Jun 2020 10:12:11 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=46852 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jqJnk-0004sv-PG; Tue, 30 Jun 2020 20:12:09 +0300
+	id 1jqJnm-0004sv-LO; Tue, 30 Jun 2020 20:12:11 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 6/7] python3-h2: Consolidate in a single file
-Date: Tue, 30 Jun 2020 20:11:18 +0300
-Message-Id: <20200630171119.25540-6-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 7/7] python3-h2: Upgrade 3.1.1 -> 3.2.0
+Date: Tue, 30 Jun 2020 20:11:19 +0300
+Message-Id: <20200630171119.25540-7-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200630171119.25540-1-leon.anavi@konsulko.com>
 References: <20200630171119.25540-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.7
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,52 +30,39 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Consolidate inc and bb files into a single bb file.
+Upgrade to release 3.2.0:
+
+- Receiving DATA frames on closed (or reset) streams now
+  properly emit a WINDOW_UPDATE to keep the connection flow window
+  topped up.
+- h2.config.logger now uses a trace(...) function, in addition to
+  debug(...). If you defined a custom logger object, you need to
+  handle these new function calls.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-connectivity/python-h2/python-h2.inc    | 12 ------------
- .../python-h2/python3-h2_3.1.1.bb                   | 13 +++++++++++--
- 2 files changed, 11 insertions(+), 14 deletions(-)
- delete mode 100644 meta-python/recipes-connectivity/python-h2/python-h2.inc
+ .../python-h2/{python3-h2_3.1.1.bb => python3-h2_3.2.0.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-connectivity/python-h2/{python3-h2_3.1.1.bb => python3-h2_3.2.0.bb} (68%)
 
-diff --git a/meta-python/recipes-connectivity/python-h2/python-h2.inc b/meta-python/recipes-connectivity/python-h2/python-h2.inc
-deleted file mode 100644
-index c457836b7..000000000
---- a/meta-python/recipes-connectivity/python-h2/python-h2.inc
-+++ /dev/null
-@@ -1,12 +0,0 @@
--DESCRIPTION = "HTTP/2 State-Machine based protocol implementation"
--HOMEPAGE = "https://github.com/python-hyper/hyper-h2"
--LICENSE = "MIT"
--
--LIC_FILES_CHKSUM = "file://LICENSE;md5=b6b2f6bbe76528af543242d606c14851"
--
+diff --git a/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb b/meta-python/recipes-connectivity/python-h2/python3-h2_3.2.0.bb
+similarity index 68%
+rename from meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
+rename to meta-python/recipes-connectivity/python-h2/python3-h2_3.2.0.bb
+index 5d9a65530..bdc110fb6 100644
+--- a/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
++++ b/meta-python/recipes-connectivity/python-h2/python3-h2_3.2.0.bb
+@@ -4,8 +4,8 @@ LICENSE = "MIT"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b6b2f6bbe76528af543242d606c14851"
+ 
 -SRC_URI[md5sum] = "950b5a62a2a608dc4547a01edf99aa8f"
 -SRC_URI[sha256sum] = "b8a32bd282594424c0ac55845377eea13fa54fe4a8db012f3a198ed923dc3ab4"
--
--inherit pypi
--
--RDEPENDS_${PN} += "${PYTHON_PN}-hpack ${PYTHON_PN}-hyperframe"
-diff --git a/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb b/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
-index 7230a27e8..5d9a65530 100644
---- a/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
-+++ b/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
-@@ -1,3 +1,12 @@
--require python-h2.inc
-+DESCRIPTION = "HTTP/2 State-Machine based protocol implementation"
-+HOMEPAGE = "https://github.com/python-hyper/hyper-h2"
-+LICENSE = "MIT"
++SRC_URI[md5sum] = "197a99c09f344a0dd987fab9801dc8d0"
++SRC_URI[sha256sum] = "875f41ebd6f2c44781259005b157faed1a5031df3ae5aa7bcb4628a6c0782f14"
  
--inherit setuptools3
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b6b2f6bbe76528af543242d606c14851"
-+
-+SRC_URI[md5sum] = "950b5a62a2a608dc4547a01edf99aa8f"
-+SRC_URI[sha256sum] = "b8a32bd282594424c0ac55845377eea13fa54fe4a8db012f3a198ed923dc3ab4"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-hpack ${PYTHON_PN}-hyperframe"
+ inherit pypi setuptools3
+ 
 -- 
 2.17.1
 
