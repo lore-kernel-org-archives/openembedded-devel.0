@@ -1,17 +1,17 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.84])
- by mx.groups.io with SMTP id smtpd.web11.15243.1593523481383392451
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.66])
+ by mx.groups.io with SMTP id smtpd.web11.15246.1593523493069382672
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2020 06:24:41 -0700
+ Tue, 30 Jun 2020 06:24:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Migt7h9p;
- spf=pass (domain: windriver.com, ip: 40.107.237.84, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=nGc19L16;
+ spf=pass (domain: windriver.com, ip: 40.107.237.66, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SrLMa4TyymWaoIDSdBN2O5u+J368Smtx2wUu2a/OYGZ9r65YV9F2FmY1tVFl8h9kgXVc3Uiy6iqz91svhflDyZi0Ud28aD+03TI0UrNGjzCtD9KWSOp6r/WYvMAPht5PmodjWX1Otpp8Y0YoWOSTbshhGDiD9Yj2cACw9ERqUvBIIaD5bG4ksxmxPBarR3TTDUo2PSEQgrG1ki3rdzjLt2sorZsYELWMAzgZ5fjqQcALATsIjVwVYwJETBKQEqofXeA/5/v9WIOyXbH3sjvDRqR65727bRpA1RcciTpa+PmsShv0hMgwzpaQ5udzecyHXRTDDkJEBxHJa8vFkRukhA==
+ b=EOVVCl0hFivOwdDnCs6ta12wO1RuAan/luu2YrMvJImfTYYibvqUINwYjVl5lOJ7mWIFYF+LUcpgBpBqf/K6E3LG5mio0MPnC+g+hHw1CSIVQ2KyRUUQT+SmUtAn1h2LJ15/LOLhfr5mu5Y/CH1nwgV5Qv8ii/4QQQqnrOiHfScbp1omoquDhqvDCZSJFdtgeSOUzsCF6tAAryviS60MU50h59bjjIsVsWLoaRaHsp2Zvc1tw660njvY1aeqN6Haoynh9ftRpz2IFNRXtcWgXY+MhrndVtJdzsTAqAnIJl7I7Ix2SSKtdDnwamsuQFQ+ej2Y/2K/Jr0QlUbGuPPISA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cv+stqjo/VzxKoiLyomnREiZNnfQ4aV72me604wOmrM=;
- b=meN2jssbiiGLR0zYMPuWrs6BdnS4VetV77NiXOsAQoRWtl7yleMEzQzKLrNTiEIsPhos+qAESkUll5por2BAtu74s25CYya99gpxBGR6MAQFF7tsPCDjmJ83ZkgkhM77GW5VQpJ4EgTE2+TKNFsrcGiWfP84N2N81EZvESi9z5/uw6FZRuQ2zXK3TKVne6g3Nd42bJLmCpLtBekAGcHMBWN71igTFuBNvT1T5b2p2iiVl4jNgS5I+JQhZRW5gRFJUKnX4lsW+Pa98U5vDUY+7zqubMaSAtShFFN9/4GTTpGAlLhuvnnR80Wucco75+m0nfyIWDT9zJySAAyVn84sjg==
+ bh=i61VAfUrcUcjUGgfxskZzV1YQztDr8jJ3WvglKQ4m/I=;
+ b=WPB/7T4azPYliDoG/pBUvnqZBGOFlCZ54VEaaIs2porz6uQJTmwpqqWbGmm3Rzvo7wxXUNpQ7R3LsTRZHHsGVoiKir04QUIXKGwX6+GXY158OQ6MmM3rfK/Fwe7WfQMvU3iG9dpE+FBELeLqAToC9V8HHcuNxphoLDRoOL4pmReNtECciM0rbcpvgQoIlWBgjbkyE3a1mFL1Y2XgT0BjRGdxSyEFAzJOHo8zPZOZSoXiK/Lk8DesnHQwirD53S1oZpw/zdsS/0odKEX9+qlYSnf5WQXoGRe4bKiUR01qGe8RopQHrI2AT3h65W8X1Sr4vmK7i2wPptYIrM6ooDSTIw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cv+stqjo/VzxKoiLyomnREiZNnfQ4aV72me604wOmrM=;
- b=Migt7h9pVrYwO1u5xMx4uDGinlNEHPPc8In90hxJzAH0YXr4AyXhlbvQs/IRXz8MjDqfoD36HMm6Waj9w9PfTLtg608WMLhxTHnApymAYWDEeCqPlGfQ+QQyYo6CNT/2SM1hamVn81X4hVzUCSeTuKBn3xE82iDgFJmaOqbTji0=
+ bh=i61VAfUrcUcjUGgfxskZzV1YQztDr8jJ3WvglKQ4m/I=;
+ b=nGc19L16zytOkSt/bLqCL31YOIyrN3iP3YwVGKMXrdX7v6UOvrwAUvhqD3QIOEC7hOfjZ+TWfB50DwqcemKU6Jil7uIrriwvG+M6wsg0o5GfkQaAFLZHnY5bHe1ypDwY+02cRlw5MtSqsMPptNq5q9IE1zHopGoYpW8twnKDqww=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,101 +28,101 @@ Received: from CY4PR11MB0006.namprd11.prod.outlook.com (2603:10b6:910:7b::18)
  by CY4PR11MB1686.namprd11.prod.outlook.com (2603:10b6:903:30::19) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.21; Tue, 30 Jun
- 2020 13:24:40 +0000
+ 2020 13:24:51 +0000
 Received: from CY4PR11MB0006.namprd11.prod.outlook.com
  ([fe80::f422:a1ed:36f3:82d4]) by CY4PR11MB0006.namprd11.prod.outlook.com
  ([fe80::f422:a1ed:36f3:82d4%7]) with mapi id 15.20.3131.027; Tue, 30 Jun 2020
- 13:24:40 +0000
-Subject: Re: [oe] [meta-python][PATCH 06/10] python3-humanize: Upgrade 2.4.0 -> 2.4.1
+ 13:24:51 +0000
+Subject: Re: [oe] [meta-python][PATCH 07/10] python3-autobahn: Upgrade 20.4.3 -> 20.6.2
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200629121233.27026-1-leon.anavi@konsulko.com>
- <20200629121233.27026-6-leon.anavi@konsulko.com>
+ <20200629121233.27026-7-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <d540646a-302e-5532-1894-531cf7cde576@windriver.com>
-Date: Tue, 30 Jun 2020 09:24:38 -0400
+Message-ID: <e49bcf41-7edf-edfa-f9b0-119fd624b99f@windriver.com>
+Date: Tue, 30 Jun 2020 09:24:49 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200629121233.27026-6-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTXPR0101CA0015.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00::28) To CY4PR11MB0006.namprd11.prod.outlook.com
- (2603:10b6:910:7b::18)
+In-Reply-To: <20200629121233.27026-7-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0018.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::31)
+ To CY4PR11MB0006.namprd11.prod.outlook.com (2603:10b6:910:7b::18)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YTXPR0101CA0015.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.21 via Frontend Transport; Tue, 30 Jun 2020 13:24:39 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0018.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.20 via Frontend Transport; Tue, 30 Jun 2020 13:24:50 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 5bcd7930-32bf-4e18-8376-08d81cf8f137
+X-MS-Office365-Filtering-Correlation-Id: f5b02ce6-bc89-4d86-23e5-08d81cf8f83f
 X-MS-TrafficTypeDiagnostic: CY4PR11MB1686:
 X-Microsoft-Antispam-PRVS: 
-	<CY4PR11MB1686405889E7201922505E2C9F6F0@CY4PR11MB1686.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:199;
+	<CY4PR11MB1686CD3E778D17B3E05CF3269F6F0@CY4PR11MB1686.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:262;
 X-Forefront-PRVS: 0450A714CB
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	gyzlUdVSoulzAzCvSlPGkmWOoZVUWSwgo2vCe7MNOx5K0B1FLTDY0bxdNhjsDmNOTf0ePS8llQGYkGRl+CfKivJD3ch8LpgLtfpY5ORUW1xwCHtxaDtrT3vMhTH0rOTHDVnzB9CsDQvt34idDyPFpSqGJf8xmiEAfW4SN+v/zoRLRw6DUF8vtyMQTanrerjkuY4Z3Fk1Qok8uqhXUB68b/KLK3xzQ9noTVRzOgn8pJD/np72gvQxW7Xzf0UnCbOfIh0p7Iyiia7NHWgGTEOPo/D2MqVNO2hFcxZkQA7LsaLTcs0MR7UYxevJb2TBVnAM56XGI7J0W8vtAX6Gw3Shs6QjG0WUXjdmbru5BCn023cBDnqljDDxgWxaJfsMGF4vQMB4GnYwC2H+aje2I9a5v9lPnTHqO1xM9a6g6JZnlNFRHxxwpI64DCSbRKRzXS+odiykwjXm3pVFXXlCAo8KQ1Es2orQlL9ciHkZjN4d+Gg=
+	ngl6WvQ7PnTnZpp8XDGpV7ctFr6kdD9UjXIFCqcJeQCnlG8Q0U7GBLrHZbeGJyq9ai72nAIh0si0Ps/H7X7HnlX2t9nrQYlNXDZAG1X+3d49tckhhxq5j8UDRR5kfOBIJQMW0chwf/pfCzE2+R6kn2+YrmgUa9g+pgyG0O4bGmsGNBeTVHvHyc3l2bFs0nkRugSyCclCsEK86yGioCKYmGcavwSw5uQ8odpLadXsptfO/UJZrb1zeQuSKAihXYKKqqUyd4LyTct/cAdaaPkvtNpWTMd99XxsSQugkmgrJMDLh73Z6doMuxNMoUiSdVWDS8ax1p4iP8ZLMgLjgJwbYJ4oyp3H+bAk0BQJb819jSw14q4SDqMLbqOsYjz4z9TK6rTTji8ctfmrxZPOw/cq1xa5vkbS3raH+E5OKonUXgSGd0V87SdiahXjtzWS+iv7UWTKaZ9hhdUeUN1oKlilyg==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CY4PR11MB0006.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(366004)(39850400004)(346002)(136003)(376002)(53546011)(31686004)(8936002)(2906002)(8676002)(966005)(44832011)(16526019)(36756003)(83380400001)(2616005)(956004)(86362001)(26005)(31696002)(33964004)(186003)(478600001)(316002)(5660300002)(52116002)(6486002)(66946007)(16576012)(66556008)(19273905006)(66476007)(166002)(43740500002)(563064011);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CY4PR11MB0006.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(366004)(39850400004)(346002)(136003)(376002)(53546011)(31686004)(8936002)(2906002)(8676002)(966005)(44832011)(66574015)(16526019)(36756003)(83380400001)(2616005)(956004)(86362001)(26005)(31696002)(33964004)(186003)(478600001)(316002)(5660300002)(52116002)(6486002)(66946007)(16576012)(66556008)(66476007)(166002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	y/FofVCV6n2BlatgUJO4xbA+FSTu91nzfdSq2DCstCxscQ3zUgbyMgd5oqw+an1Itl5sMHvWbX6DhLZj3HZoskjcYjkaOjfzVzLhStcD1BY93WuYfDUOCIP+teZtcF8nVQUIpoYqB7jQ566g18dTD4/N6w/NdjgJS6zNO9bWNvQnbCktHhjER/Pwx7ObvMWR3xOR3btQJlPZiH8pbkUpXs7KjuFwfN4Rnz287j53gsAxy130A4PahTduHpnLaT0UM++3IsLRDbkEAbOs3E4Kxc1ec49zInHJildQw4b2QHLH6wJ1xdBIO8nH4zW0RzqjsjdXJ5kwIvIUTEBPXbKRvGbGylF00Q3ZfKzZRv/s5WI+NsRjq74c67/guQLKcFpxNF6KyvbKYtdX14fpCpGjc0T1I82bdK+ygdwxjjznbIiKwadWZlIiKuL+3jbJlRHp7OfpIgd6HT4xqJcDXaMYxKeS9nPYIcYK556VdgDwwjk4PLd0+jejjhhMudrv1RS2
+	hpLpdxMaxaFcJ/AN7puPHe8aV94MV++P6DF/eM718UbeVnMAAUSmCEKsPXqym30t3wD2c8LMYbGGq7R9ujFugYjur4FrxmNq+pun4sfKBvkqzMsz7T/+ctl+kqZQEw9dnCpJEP9iliHxgEo7OaOVx2nRqT22uSdesV/Mk5dqQaG/NBDotrDWvM3C1bneA2cQKmsb7N635Jw/YFx5S2y3Ut7TPlTFlYxhO/Yk04Kmt3AQ3A7sK8BF1knIU376LU2Fa91YNO78e9Q3xDvNF9N2r/v89Hs5jw756D3oT/bsXAGinpB7uPaTW5mWCTe99YFheFWSlvkotI4SAFWvoA5lMy8eoOvZXJsXzq2JKz0UO1TshfX2x6+eVV//M/wx62lORVw8IMwu5xeW9GuvyB3xlAMvL/gB0+kJfsuB36VyZaZGFhmrU/O+3ocBfJaFiSbxtsm0E3Y6lPppx01BbVyZmOfYs2+jnd0ZeH4pzMiE1ChKXrBFbyPILGQk1kTR3KmA
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5bcd7930-32bf-4e18-8376-08d81cf8f137
+X-MS-Exchange-CrossTenant-Network-Message-Id: f5b02ce6-bc89-4d86-23e5-08d81cf8f83f
 X-MS-Exchange-CrossTenant-AuthSource: CY4PR11MB0006.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2020 13:24:39.8678
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2020 13:24:51.6579
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 6OW6fMD4BB5/OOqZmNrEHkz66yKLR2nFgEsdiKPBRz3N/CbeO3JSNPPpNO8CvgL9Rp82ppCZXm5sL2IvLpYxPlePLwHjhAQHqPnfcNBISlQ=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9G4WLhnQ4Dirm97S9paTwjTKKOaNTY0AtqD2WgbXzm9aCbhLnEBlXIlYZgzvz3hoMxXN9ZCc1LYVzAULeeEyXSdYqxMjX2Tb56jtMJkuJe8=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR11MB1686
 Content-Type: multipart/alternative;
- boundary="------------2552A9A929998F9EC831F7F5"
+ boundary="------------9A2441665DF490FB128E0F01"
 Content-Language: en-US
 
---------------2552A9A929998F9EC831F7F5
+--------------9A2441665DF490FB128E0F01
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 6/29/20 8:12 AM, Leon Anavi wrote:
-> Upgrade to release 2.4.1:
+> Upgrade to release 20.6.2:
 >
-> - Explicit error if _DEFAULT_LOCALE_PATH is None
-> - Fix incorrect Portuguese spelling
-> - Fix fractional(0.333) output in README
+> - fix: xbr fixes
+> - fix: use cpy 3.8 for running flake in CI
+> - new: Ticket1392 internal attrs
+> - new: internal-only router attributes and hook for router to add
+>    custom information
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../{python3-humanize_2.4.0.bb => python3-humanize_2.4.1.bb}  | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-humanize_2.4.0.bb => python3-humanize_2.4.1.bb} (71%)
+>   .../{python3-autobahn_20.4.3.bb => python3-autobahn_20.6.2.bb} | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+>   rename meta-python/recipes-devtools/python/{python3-autobahn_20.4.3.bb => python3-autobahn_20.6.2.bb} (78%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb b/meta-python/recipes-devtools/python/python3-humanize_2.4.1.bb
-> similarity index 71%
-> rename from meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
-> rename to meta-python/recipes-devtools/python/python3-humanize_2.4.1.bb
-> index 6bb6946ff..3a06a48b1 100644
-> --- a/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-humanize_2.4.1.bb
-> @@ -4,8 +4,8 @@ HOMEPAGE = "http://github.com/jmoiron/humanize"
+> diff --git a/meta-python/recipes-devtools/python/python3-autobahn_20.4.3.bb b/meta-python/recipes-devtools/python/python3-autobahn_20.6.2.bb
+> similarity index 78%
+> rename from meta-python/recipes-devtools/python/python3-autobahn_20.4.3.bb
+> rename to meta-python/recipes-devtools/python/python3-autobahn_20.6.2.bb
+> index 60ef57d04..171a6dce4 100644
+> --- a/meta-python/recipes-devtools/python/python3-autobahn_20.4.3.bb
+> +++ b/meta-python/recipes-devtools/python/python3-autobahn_20.6.2.bb
+> @@ -3,7 +3,8 @@ DESCRIPTION = "WebSocket client & server library, WAMP real-time framework"
 >   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98"
 >   
-> -SRC_URI[md5sum] = "010e86a4196ed6030112e7bc681e7353"
-> -SRC_URI[sha256sum] = "42ae7d54b398c01bd100847f6cb0fc9e381c21be8ad3f8e2929135e48dbff026"
-> +SRC_URI[md5sum] = "3d4d25cf84181c55bf7d219dd175dbff"
-> +SRC_URI[sha256sum] = "4b4ce2fc1c9d79c63f68009ddf5a12ad238aa78e2fceb256b5aa921763551422"
+> -SRC_URI[sha256sum] = "c6fe745d52ba9f9eecf791cd31f558df42aebfc4f9ee558a8f1d18c707e1ae1f"
+> +SRC_URI[md5sum] = "bcafb42ea58232308777a265d41c1c98"
+> +SRC_URI[sha256sum] = "6ac6b6653b8d20d632b034adccf6a566154d4efbeaa23abf7c3995fd601e9a01"
 >   
 >   inherit pypi setuptools3
 >   
 >
 > 
 
---------------2552A9A929998F9EC831F7F5
+--------------9A2441665DF490FB128E0F01
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -134,38 +134,39 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/29/20 8:12 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200629121233.27026-6-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 2.4.1:
+    <blockquote type="cite" cite="mid:20200629121233.27026-7-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 20.6.2:
 
-- Explicit error if _DEFAULT_LOCALE_PATH is None
-- Fix incorrect Portuguese spelling
-- Fix fractional(0.333) output in README
+- fix: xbr fixes
+- fix: use cpy 3.8 for running flake in CI
+- new: Ticket1392 internal attrs
+- new: internal-only router attributes and hook for router to add
+  custom information
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200629121233.27026-6-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200629121233.27026-7-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../{python3-humanize_2.4.0.bb =&gt; python3-humanize_2.4.1.bb}  | 4 &#43;&#43;--
- 1 file changed, 2 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-humanize_2.4.0.bb =&gt; python3-humanize_2.4.1.bb} (71%)
+ .../{python3-autobahn_20.4.3.bb =&gt; python3-autobahn_20.6.2.bb} | 3 &#43;&#43;-
+ 1 file changed, 2 insertions(&#43;), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-autobahn_20.4.3.bb =&gt; python3-autobahn_20.6.2.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb b/meta-python/recipes-devtools/python/python3-humanize_2.4.1.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-humanize_2.4.1.bb
-index 6bb6946ff..3a06a48b1 100644
---- a/meta-python/recipes-devtools/python/python3-humanize_2.4.0.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-humanize_2.4.1.bb
-@@ -4,8 &#43;4,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://github.com/jmoiron/humanize">&quot;http://github.com/jmoiron/humanize&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-autobahn_20.4.3.bb b/meta-python/recipes-devtools/python/python3-autobahn_20.6.2.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-autobahn_20.4.3.bb
+rename to meta-python/recipes-devtools/python/python3-autobahn_20.6.2.bb
+index 60ef57d04..171a6dce4 100644
+--- a/meta-python/recipes-devtools/python/python3-autobahn_20.4.3.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-autobahn_20.6.2.bb
+@@ -3,7 &#43;3,8 @@ DESCRIPTION = &quot;WebSocket client &amp; server library, WAMP real-time framework&quot;
  LICENSE = &quot;MIT&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d">&quot;file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d&quot;</a>
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98">&quot;file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98&quot;</a>
  
--SRC_URI[md5sum] = &quot;010e86a4196ed6030112e7bc681e7353&quot;
--SRC_URI[sha256sum] = &quot;42ae7d54b398c01bd100847f6cb0fc9e381c21be8ad3f8e2929135e48dbff026&quot;
-&#43;SRC_URI[md5sum] = &quot;3d4d25cf84181c55bf7d219dd175dbff&quot;
-&#43;SRC_URI[sha256sum] = &quot;4b4ce2fc1c9d79c63f68009ddf5a12ad238aa78e2fceb256b5aa921763551422&quot;
+-SRC_URI[sha256sum] = &quot;c6fe745d52ba9f9eecf791cd31f558df42aebfc4f9ee558a8f1d18c707e1ae1f&quot;
+&#43;SRC_URI[md5sum] = &quot;bcafb42ea58232308777a265d41c1c98&quot;
+&#43;SRC_URI[sha256sum] = &quot;6ac6b6653b8d20d632b034adccf6a566154d4efbeaa23abf7c3995fd601e9a01&quot;
  
  inherit pypi setuptools3
  
@@ -178,4 +179,4 @@ index 6bb6946ff..3a06a48b1 100644
   </body>
 </html>
 
---------------2552A9A929998F9EC831F7F5--
+--------------9A2441665DF490FB128E0F01--
