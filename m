@@ -1,82 +1,81 @@
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web10.10723.1593562057148640451
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web10.10726.1593562058711678927
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2020 17:07:37 -0700
+ Tue, 30 Jun 2020 17:07:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=UQgwlX5m;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id g67so9860526pgc.8
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 17:07:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=KMBVbt33;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id q17so10146931pfu.8
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 17:07:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=aEizeECvJs10zhIWGhsLoDS0fPhyD9kXqoUcXL8I1yA=;
-        b=UQgwlX5mNTWM487VKxHhqETC6HLlxOfojA5/fQmpZPI6sgoBD+dXQcB5PC+hUxLa3R
-         WmdjvPVrWuJCfzOqHEfU4AqAzWgrhhSTLEolEIsTsM7xvp3RbUYDgfjyFRm/XgoUXCvq
-         fw4uHvjqjg7Cov5pLhXorFbIe2/VhH3DJ0b3l6G/FnDgEMrY0ZBB19A+51aapIezYMrx
-         uDY5tRJToSoTrRfy0KHaAdYvIrfnWyiY9/VqCRApIVwqKegFyXp7hoPtuHug098gkwLO
-         g0fyROHGdzhfhSRfLOTWS3yN1KhXsLwpDoNz6azq9glsRm7eCHErzCX60+hxRC1M85Kp
-         XonQ==
+        bh=38fM3U5fZKHw7mBrleQ/+qL6zhqsTIbkAsrWCAk7k/E=;
+        b=KMBVbt335VV0YY6NEeJLXqcde/b1RfV7ARuDoferzhLM1WLzGrB/rjHR/1doK/sL/i
+         lBzDUbMp+T9qGzP/wlasxHjHpgr+XbF3L/MIqlInP0Ngcx5GNShB5PtFN1SP3UBoiGMz
+         pDGuUjHXGSBgtoCQluAqgDTwgGAP0nv8i+DJdLbt0JDW9WzfIJiawLSt2KKvMNDgxSfm
+         RTrIDlluOn00HOBsB7orsPA0sAfyuCQQzDptDF6vpjrE3O+XJTfkxvzEgqdtiKzfzdAB
+         UTaw+LjgadMY/t8FKX7X8goyUrrkj+ztEZC2EsbAqccr5+4gK5Y0jpsIW/rK1x+yxwnT
+         Orug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=aEizeECvJs10zhIWGhsLoDS0fPhyD9kXqoUcXL8I1yA=;
-        b=tcm1ix8DiwKvCe5dBhBHjsFOIjOQZq/4ikAaEFZyLz/xUb6rZ3Gi7Zvt29x4F70ZIu
-         SbUqDQW7V3SiomKSKbcWsSBcKCriqlywTPzwXX3i5UXNg27CMjLka8cX/II5W4uqLAjG
-         WoCET81IQWSNc5WS8czBAUCQ8Wz880nhtIcCcsF+zAmVCFM1Wm7MjwGzbqRVRvgFYyRS
-         nEUPttKKuOyXYFhk8RLt9yB51OXnsLnM+HlEqwwCAHdzIagXto1foiNtB+JlXBUq7OiV
-         tBEKRII4Qo22ksvP7T+UZQjUVrUA+CthMQnw8MYNyLsJp9kFiztYYwkLwpRl5v/cJy9j
-         8fVg==
-X-Gm-Message-State: AOAM530Zyshh/UHBIoF+Ca98ctbKvP+anx5+GmL/H4wSFhwZ8dLlyvNU
-	6fh3ceiysrtacPYjsgLdYjZqUgVpUk8=
-X-Google-Smtp-Source: ABdhPJyo9v5g1X8UHjlwDlDuY2pHxMJdmPcSRtPsfI2t6fnuq7CbW8cvb8iBP3xAfSRvq3gupTp7+A==
-X-Received: by 2002:a63:5b55:: with SMTP id l21mr9799201pgm.348.1593562056361;
-        Tue, 30 Jun 2020 17:07:36 -0700 (PDT)
+        bh=38fM3U5fZKHw7mBrleQ/+qL6zhqsTIbkAsrWCAk7k/E=;
+        b=jRW94C6CcmJgMxHtoQkw1O85ZH/blxpZpZNS0DDptAOl9j8mXBMAqeckbIR6g+7/pl
+         UgBi1l3Jhpg16RG2Ld++2bOu6O67QRzdWUJVIJmfdaoTlbHcNXYEA/ZxKwiz7of4+PN0
+         Z/opCkQ+pvY14/DD8Zue0mX2Xqt+QWw+BoJejXdxLTlpSp/X8fDZdHsqU6DYEtUeKL8e
+         FXOCAWfYSEptNDHj2oOdvGZTWFOWObDe/QrAnHKsf0INnU1YG7A+miqbRtoNUu5mdSs1
+         VTtCu0s0NZ7XNYiz9xFAk5q0lQ6iQVfXUmyHBdBR/5kumTv5TiqapOgX+I5QrLOytxSl
+         rRGQ==
+X-Gm-Message-State: AOAM532wxjTOe2HBYDeZm5MBq7HT/qaMI76fYonm+QsonE1HaG2vlAM3
+	7SncK6Z4cNPObhZjvlG4v/xFTULuN3w=
+X-Google-Smtp-Source: ABdhPJwc3L6nU27UpwkHlt+TaevbpHhpDgr/RAeBfWfMzaqWve5gpbC7F19MomXjGwM6VaYIHuJ2yg==
+X-Received: by 2002:a63:8b4c:: with SMTP id j73mr17001199pge.209.1593562057690;
+        Tue, 30 Jun 2020 17:07:37 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:c85d:3ce:5443:9164])
-        by smtp.gmail.com with ESMTPSA id z2sm3940544pff.36.2020.06.30.17.07.35
+        by smtp.gmail.com with ESMTPSA id z2sm3940544pff.36.2020.06.30.17.07.36
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Jun 2020 17:07:35 -0700 (PDT)
+        Tue, 30 Jun 2020 17:07:36 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfel 13/32] libnftnl: upgrade 1.1.6 -> 1.1.7
-Date: Tue, 30 Jun 2020 17:06:58 -0700
-Message-Id: <cbf4d9a0875e8c1e504d6bc779b68f6a89ffef77.1593561840.git.akuster808@gmail.com>
+Subject: [dunfel 14/32] nftables: upgrade 0.9.4 -> 0.9.5
+Date: Tue, 30 Jun 2020 17:06:59 -0700
+Message-Id: <96a085c081f7c2e6115d83cc6510d12610b0afd1.1593561840.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1593561840.git.akuster808@gmail.com>
 References: <cover.1593561840.git.akuster808@gmail.com>
 
 From: Pierre-Jean Texier <pjtexier@koncepto.io>
 
-See https://lwn.net/Articles/822353/
-
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 9e7912b8fd841001a2ffb78dc32edc86fd70b8cd)
+(cherry picked from commit bf1ac503e8a54387a6b46623235dadff0d14596e)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../libnftnl/{libnftnl_1.1.6.bb => libnftnl_1.1.7.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-filter/libnftnl/{libnftnl_1.1.6.bb => libnftnl_1.1.7.bb} (88%)
+ .../nftables/{nftables_0.9.4.bb => nftables_0.9.5.bb}          | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-networking/recipes-filter/nftables/{nftables_0.9.4.bb => nftables_0.9.5.bb} (90%)
 
-diff --git a/meta-networking/recipes-filter/libnftnl/libnftnl_1.1.6.bb b/meta-networking/recipes-filter/libnftnl/libnftnl_1.1.7.bb
-similarity index 88%
-rename from meta-networking/recipes-filter/libnftnl/libnftnl_1.1.6.bb
-rename to meta-networking/recipes-filter/libnftnl/libnftnl_1.1.7.bb
-index db42954542..4ff00bf873 100644
---- a/meta-networking/recipes-filter/libnftnl/libnftnl_1.1.6.bb
-+++ b/meta-networking/recipes-filter/libnftnl/libnftnl_1.1.7.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=79808397c3355f163c012616125c9e26"
- SECTION = "libs"
- DEPENDS = "libmnl"
+diff --git a/meta-networking/recipes-filter/nftables/nftables_0.9.4.bb b/meta-networking/recipes-filter/nftables/nftables_0.9.5.bb
+similarity index 90%
+rename from meta-networking/recipes-filter/nftables/nftables_0.9.4.bb
+rename to meta-networking/recipes-filter/nftables/nftables_0.9.5.bb
+index 5b57abb87a..0fd187f1b8 100644
+--- a/meta-networking/recipes-filter/nftables/nftables_0.9.4.bb
++++ b/meta-networking/recipes-filter/nftables/nftables_0.9.5.bb
+@@ -10,8 +10,7 @@ DEPENDS = "libmnl libnftnl bison-native \
+ UPSTREAM_CHECK_REGEX = "nftables-(?P<pver>\d+(\.\d+){2,}).tar.bz2"
  
--SRCREV = "ac0778e403eb51986ce19bcf1a6e8ae3cd83dcfa"
-+SRCREV = "eedafeb6db330b8adff1b7cdd3dac325f9144195"
- SRC_URI = "git://git.netfilter.org/libnftnl \
-            file://0001-avoid-naming-local-function-as-one-of-printf-family.patch \
-            "
+ SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "fdfd51a1083fb054a487b5159b1ed5cd"
+-SRC_URI[sha256sum] = "08b8683a9db5fba980bc092b75288af98d218bbe8ab446daf2338570d0730f9a"
++SRC_URI[sha256sum] = "f2c1957eabc370057c4576b8f33a71d91a6ad019b8b335abafe61c9c42cc7e16"
+ 
+ inherit autotools manpages pkgconfig
+ 
 -- 
 2.17.1
 
