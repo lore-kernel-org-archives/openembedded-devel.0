@@ -1,82 +1,77 @@
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.web11.10738.1593562060394816331
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web12.10577.1593562061385673231
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2020 17:07:40 -0700
+ Tue, 30 Jun 2020 17:07:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=s7Wd2huD;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id m22so381939pgv.9
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 17:07:40 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=jbQlTWoV;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id x72so719870pfc.6
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 17:07:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=E3S5GIGFJw7kxVNgnNjQhsPTFHft5mZCH8Iedf1aD0A=;
-        b=s7Wd2huD7EFdp/UK0NRS0uVGbtaZ5qd7aKSj0RWqNmhc929YjjwQOWaU+IcDWBE3wJ
-         +b8n4mDUMtQDmkGloUNAiUkTlbpWjq3NNFPd8PTEE+dRf6F5F2oZUGCi4cyEGhTE95i9
-         pldq2CwezJz2J6kw4EbaIsftiHZ4NfzmZOghE44xF00urCWSw80O1FqwX43Oi9K1TxSs
-         4o+w2TpAHnJSdgPdiwdvWYS3p1h72A0vVtLUTkPiX095ZSnpw5189PANOCRJU4IejLL9
-         7sDAFNL25a0l1AL1QkPgzm1fILKuwJ0G84+U0ubfT7Ze5zZDEfLC6duUrdz5lXz4gvGy
-         JH/A==
+        bh=gwo7QUO/wr6hNiRiGM6ny1pEDLzPEDRnTFXW+dbFvlY=;
+        b=jbQlTWoVJ/oKWlfYzLyYMiP0eYsxTcm57czro4oOEIVcQAX4WnS9dm5tdZ6/ehjwNv
+         klBVIfqnJ/l1ZMoPO6Xj8/LqnL5yrP1kLoNLltUx5GI8LTvPZUybGU0Q3MFUSoftZUiN
+         QFb/aTUIUWLOS1yFddRl6gg3rWMYmD1iRCySoLRxEaIhzKHkDPUmZCmKtocM6UQaQsJP
+         DqdntXtA+xHTqp4BL2VScIpaxsQqaKPGwN6G+hcnkJvqa4H49WE0VXrrBEWrUcccO0xa
+         loTalH9VJiALaSft7jiFp/8kD3Bub1JkADptOasRhvqJUIa5dATXpLB0W6BtLi3K6Lii
+         5tdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=E3S5GIGFJw7kxVNgnNjQhsPTFHft5mZCH8Iedf1aD0A=;
-        b=SKcm/QYGjPlHkPeKi+SjgywDNcmGSsDRbRTUDjgI6BdF4UYuMteIGkLIWvShJ+11Ku
-         TG7PBgcz63KZ6CJIonLd4Rh+vdGiTpyU/KWdMIUgOL8h2+UoBzkPfprkRCn1iTKxmNa5
-         g4oK3V3y2/+vg2dNqoRaEF5xgn0l/nbV+Nyp6VkJ9xOy4eQ/eSBAfMdeJJAuo2qJ0ymY
-         RVtlyp00bDyj0w2dJNEAPEkilvoKyZRpBQLJBmwyCQ1dZtM+Z2z1CEC77W0HUiZO8g9L
-         /rs2pRNb86wB7sG8EilHbi3pR9/KGJSYIAjDGxwE4e3EMPA7sKJxRVPJNH+RxltcI9XY
-         oQ/g==
-X-Gm-Message-State: AOAM533DYb3AHwkDC29N/4a8Wqnaz6SOuLEDQrXk5qKseuPSBf0srSSO
-	BrtuPFSox7vlGLJG0s8zTwPtKQpLlq0=
-X-Google-Smtp-Source: ABdhPJzqI6gh04CadeeS+x54v+sQC384qqZdr1SeOnSGms18PkDSyxx/jjMNQBpvMI7DjYUocz9grw==
-X-Received: by 2002:a63:8c5c:: with SMTP id q28mr17037212pgn.111.1593562059782;
-        Tue, 30 Jun 2020 17:07:39 -0700 (PDT)
+        bh=gwo7QUO/wr6hNiRiGM6ny1pEDLzPEDRnTFXW+dbFvlY=;
+        b=rCjAEvonKERNTsXh3N/mmtyjwXoo3C9oqSzFOgW5vof330uZqk5DuVFaPkja3NUr5e
+         cNT57Jzko6bFq9KtyVLMrnv77l3iSbejwEzsc4j/oZmCZt9mqQmOr7NBWGZT6+6yVeV/
+         eoPxrNdgDbJDDwjZ0j/6TMOuv1HdbY/+VVgTm4nJ+4X+zRJL1NwyquzrkZ38AF3vgpbI
+         KSa23FBI94w4PmczvT8zzu3X9zvQIsLERjRx5uclLo9yAhil/stEuN1Vkg2QgMqguzW0
+         eaF4VNkVyjR7wZNUXZy/SAdlXEP/N99IsGBiqyKCyvgBNKH1vPU8dsaiueKdCcmRb8je
+         YnJA==
+X-Gm-Message-State: AOAM530EPu1zv1BioPQO4spWgw2kTZi0uzpdc75QgSuDJMHLflQTrdKr
+	foirMQJzNS1qrAzBF5hTByVqPPWiV4w=
+X-Google-Smtp-Source: ABdhPJxRXsyAOe4dsup1k3xC6PKnaS0sFAuHch+fCvUQoE1bgElNONZCivyIr+1vpjAtJj7AUMNPnw==
+X-Received: by 2002:a63:541c:: with SMTP id i28mr18120919pgb.344.1593562060715;
+        Tue, 30 Jun 2020 17:07:40 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:c85d:3ce:5443:9164])
         by smtp.gmail.com with ESMTPSA id z2sm3940544pff.36.2020.06.30.17.07.39
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Jun 2020 17:07:39 -0700 (PDT)
+        Tue, 30 Jun 2020 17:07:40 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfel 16/32] mm-common: upgrade 1.0..0 -> 1.0.1
-Date: Tue, 30 Jun 2020 17:07:01 -0700
-Message-Id: <51da6c28118282bc2195d70b82cdf2d64bf5a8ed.1593561840.git.akuster808@gmail.com>
+Subject: [dunfel 17/32] python-django: add RDEPENDS
+Date: Tue, 30 Jun 2020 17:07:02 -0700
+Message-Id: <d9f169fbba19a89e8ad705eae9bf7ada29b48a80.1593561840.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1593561840.git.akuster808@gmail.com>
 References: <cover.1593561840.git.akuster808@gmail.com>
 
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+fix error:
+ModuleNotFoundError: No module named 'distutils'
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 15e57216d05e31935855b38fb41b5732aee257ef)
+(cherry picked from commit 1407d43bc4b2b8b7c2de35a4173556c08dca36a9)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../mm-common/{mm-common_1.0.0.bb => mm-common_1.0.1.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-core/mm-common/{mm-common_1.0.0.bb => mm-common_1.0.1.bb} (66%)
+ meta-python/recipes-devtools/python/python-django.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb b/meta-oe/recipes-core/mm-common/mm-common_1.0.1.bb
-similarity index 66%
-rename from meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb
-rename to meta-oe/recipes-core/mm-common/mm-common_1.0.1.bb
-index c7d1f2b73c..64b58db548 100644
---- a/meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb
-+++ b/meta-oe/recipes-core/mm-common/mm-common_1.0.1.bb
-@@ -6,8 +6,8 @@ GNOMEBASEBUILDCLASS = "meson"
- 
- inherit gnomebase
- 
--SRC_URI[archive.md5sum] = "9087b8612d75cbc1fad0c99e15c2a718"
--SRC_URI[archive.sha256sum] = "b97d9b041e5952486cab620b44ab09f6013a478f43b6699ae899b8a4da189cd4"
-+SRC_URI[archive.md5sum] = "5b5a589f648bd83bfa6291081ebf5864"
-+SRC_URI[archive.sha256sum] = "28a2d775afbf05c5c957b24b220ed6e9b2023179b98ecde471d89e9754ea5ac9"
- SRC_URI += "file://0001-meson.build-do-not-ask-for-python-installation-versi.patch"
- 
- BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python-django.inc b/meta-python/recipes-devtools/python/python-django.inc
+index 54c77c8276..73b7ac99f9 100644
+--- a/meta-python/recipes-devtools/python/python-django.inc
++++ b/meta-python/recipes-devtools/python/python-django.inc
+@@ -28,4 +28,5 @@ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-threading \
+     ${PYTHON_PN}-unixadmin \
+     ${PYTHON_PN}-xml \
++    ${PYTHON_PN}-distutils \
+ "
 -- 
 2.17.1
 
