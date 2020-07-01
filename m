@@ -1,89 +1,83 @@
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web10.10735.1593562067525175902
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.web11.10744.1593562068783552419
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2020 17:07:47 -0700
+ Tue, 30 Jun 2020 17:07:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dFXjAzHD;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id f2so9158135plr.8
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 17:07:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=EoeySlYb;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id l6so7106410pjq.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 17:07:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=Opagv9Ci44IKLaKvlA42tnefRhcqg62N3zReWymceh4=;
-        b=dFXjAzHDUN4y64c7+KPjxW2+aM44dcgYbeFl7BpOVzIpQPnnkWpaWkzH1eNjel0SHG
-         8O917rxoDl70dcycW1tNqq/O7Cbfzoir08ApcAoA/uU+hfpq5z40ighmbqFrhVmOm7K4
-         bb8Pwsr0rOte7EURKhGfwVlAZkItRdc+ASzJcr9c6wvbrvBTAu9ITLhO1aYfbkreTsth
-         5xjoKZVMCh8Fx98jdcmuFRbdi8wZEgvr06mpxTimOFBYklNn7i2LSDRti5MybOmQEanQ
-         Rmvg2BY2111uYWTJMjNLb3U67f7vbir8AWOOgsAPRv4FgA3eivHi2H/h7GIaH6fCkryw
-         122w==
+        bh=/GSk+7x5KPhduYaHbL8WZTFV/e6S93fDYVwVhnDXgaQ=;
+        b=EoeySlYbQPHYc2sJG4cGDBEUPvcRrtT4qJiDRnQcZgYjv92t6CGSMHv6PEzA3ovfwY
+         v9q7wIcDCegxmWRJOmvVaurjvZup25ffplxSEoHEjwQ+sSIU5hphb+P12K0JkJoEYe11
+         Bj29kPz01r6B6zZjFDQnqwpuObJZyS+hFk1iKnZ6FdVLxLoi5xrfmJILMXQPqKYDe7jy
+         XE/jLOChJDTQ2NwbFL6UNlPIGizEAAgqV7kivHDgiJmjanOqRNQGKmyu0xrXxslJnUTK
+         G1TfrAtHCMn99muM+4q8vbDhfJnzntr8sLEU1nA0OiQP7DMqMYJ1l6D50mXHLcF/02yq
+         rcNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=Opagv9Ci44IKLaKvlA42tnefRhcqg62N3zReWymceh4=;
-        b=VkeOvihlcMTvXE+GyMTwxwqErcFLgDJD5ofwoKpJJHjnZ1428cVVBuHfReAtDjgIpu
-         tgL3HrFVLByJh7L8GhGGGkGVyPg0g7AT3ebHELt1rQ+iYI0ZKOXJmUbnF1zUlGEysOwx
-         JSxlbCHc7smnQMHZoNLAnqT8AqGXGy12Q1KzwQXW1vJgTVSDNxRcJNtgufs6CxyOzV2p
-         q3yedMJDrp1ZhNuV3G0J39XcyZXddmMjv+01+kST6dUV36W0uNLT8MrfrWwkYPt6wq+O
-         yImOSJTPrzl2ZiY9obYkF2pd4qq+9l3y1CMuPh7AI6OsmDM90JHa3HLpXAjH87iUX2sz
-         kGtw==
-X-Gm-Message-State: AOAM532cAIUwW/mQ0rsYYNagcP0XZMI2kKUG+bqPUajvUslTM9rwOi0k
-	Ey6uC0do77VtNWXmNuSy89NElaNCrAQ=
-X-Google-Smtp-Source: ABdhPJxdzlnB5Ege/bLCN977RDx+y0Pqe5q/l6Gn+yLh9/ayTHfU36ZbJzduci3Rwdj/xTeGM8p6ww==
-X-Received: by 2002:a17:902:7e04:: with SMTP id b4mr11337189plm.295.1593562066865;
-        Tue, 30 Jun 2020 17:07:46 -0700 (PDT)
+        bh=/GSk+7x5KPhduYaHbL8WZTFV/e6S93fDYVwVhnDXgaQ=;
+        b=rM/BTuoT9h9N7PUu/HcdKYxdh07wDgfRjte1mv3+n1Wj/E2IgzQzibPylEwSrAGmrz
+         1RAbbDpzTOFz6Y6y3HnMnZMK4Nce+tWoT3SlLCFANxrQWjYtK5IS8KLGke+THsVBUit/
+         yD17o5nRPYsh79/uLhcipuI1ZlHUAeZmvFP+tMCd5HEVw90DpbXWUurdhIfkG3SC2K4a
+         sunOePbp0tdK0IizZy5GNCVePjMUbS3tuOn2J88ROsOOSZscxeBJ2W1ss9WR4jBynyG2
+         t4uuY9v0ZwhcHTRZQ2ALke000p0wCxWgfL9f2LxiUdWGTgar5yHk7NRcOdmw33AMFgAi
+         es4A==
+X-Gm-Message-State: AOAM530SuF33V/4UVH11cRpySzOO9JHm/By2/LhO7gOOahlffERZPqQ2
+	froT2yULlNuYfY2+YAbQsbPJunP7Tdk=
+X-Google-Smtp-Source: ABdhPJygUphmVjCNiekrXyp/48JZ1KdYUFQDIxk9QchOp+sOARoqxG1MvZnX6I+QS93UWJ7WzR8Rog==
+X-Received: by 2002:a17:902:8649:: with SMTP id y9mr20443516plt.60.1593562068168;
+        Tue, 30 Jun 2020 17:07:48 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:c85d:3ce:5443:9164])
-        by smtp.gmail.com with ESMTPSA id z2sm3940544pff.36.2020.06.30.17.07.45
+        by smtp.gmail.com with ESMTPSA id z2sm3940544pff.36.2020.06.30.17.07.46
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Jun 2020 17:07:46 -0700 (PDT)
+        Tue, 30 Jun 2020 17:07:47 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfel 22/32] rsnapshot: upgrade 1.4.2 -> 1.4.3
-Date: Tue, 30 Jun 2020 17:07:07 -0700
-Message-Id: <fe32b2cf7aea2f6fac18e068c70901d8404b8c2c.1593561840.git.akuster808@gmail.com>
+Subject: [dunfel 23/32] fuse3: upgrade 3.9.1 -> 3.9.2
+Date: Tue, 30 Jun 2020 17:07:08 -0700
+Message-Id: <6cef858e02476c819460a19373e399dc35c5ad8d.1593561840.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1593561840.git.akuster808@gmail.com>
 References: <cover.1593561840.git.akuster808@gmail.com>
 
 From: Pierre-Jean Texier <pjtexier@koncepto.io>
 
-VERSION 1.4.3
-------------------------------------------------------------------------------
-- Fixes and minor updates to Pod / man page.
-- Adds more tests.
-- Restore rsync error code 23 as an important warning.
-- Fixes shortargs appending.
-- Non-LVM backup source breaks after LVM backup source.
-- Update rsnapreport.pl utility script to work with rsync >= 3.1.0 stats and bytes changes.
+See changelog https://github.com/libfuse/libfuse/releases/tag/fuse-3.9.2
 
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-
-(cherry picked from commit 4ea3135e945aadba7d1cb6424a861378c484b570)
-
+(cherry picked from commit b6979461fdf6709d196efc7485c1e6e0ceace0e0)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../recipes-support/fuse/{fuse3_3.9.1.bb => fuse3_3.9.2.bb}    | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-filesystems/recipes-support/fuse/{fuse3_3.9.1.bb => fuse3_3.9.2.bb} (91%)
 
-diff --git a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-index efe95b1019..dcadede0ed 100644
---- a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-+++ b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-@@ -20,8 +20,8 @@ RDEPENDS_${PN} = "rsync \
-                   perl-module-overloading \
-                  "
+diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.9.1.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
+similarity index 91%
+rename from meta-filesystems/recipes-support/fuse/fuse3_3.9.1.bb
+rename to meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
+index 1830fa1668..24b17fc93b 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse3_3.9.1.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
+@@ -13,8 +13,7 @@ LIC_FILES_CHKSUM = "file://GPL2.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
  
--SRCREV = "27209563f924a22f510698ea225f53ea52f07cb4"
--PV = "1.4.2+git${SRCPV}"
-+SRCREV = "a9e29850fc33c503c289e245c7bad350eed746d9"
-+PV = "1.4.3+git${SRCPV}"
+ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.xz \
+ "
+-SRC_URI[md5sum] = "26d6b450276fb04e20bf91d83b9423f0"
+-SRC_URI[sha256sum] = "1bafcfd6c66ba35b7b0beb822532a9106eb8409ad6cde988888fde85f89be645"
++SRC_URI[sha256sum] = "6999b6d48e7c0a79628fa901f6e66def3513cab4ffdd8097821e7dc3cdeae08a"
  
- SRC_URI = "git://github.com/DrHyde/${BPN};branch=master;protocol=git \
-            file://configure-fix-cmd_rsync.patch \
+ S = "${WORKDIR}/fuse-${PV}"
+ 
 -- 
 2.17.1
 
