@@ -1,22 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.22813.1593613372071727497
+ by mx.groups.io with SMTP id smtpd.web12.22656.1593613383803971432
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Jul 2020 07:22:52 -0700
+ Wed, 01 Jul 2020 07:23:04 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=60354 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jqddR-0002cZ-Jo; Wed, 01 Jul 2020 17:22:50 +0300
+	id 1jqddd-0002cZ-Ss; Wed, 01 Jul 2020 17:23:03 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-requests: Upgrade 2.23.0 -> 2.24.0
-Date: Wed,  1 Jul 2020 17:22:39 +0300
-Message-Id: <20200701142243.1686-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-cryptography-vectors: Upgrade 2.8 -> 2.9.2
+Date: Wed,  1 Jul 2020 17:22:40 +0300
+Message-Id: <20200701142243.1686-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
+In-Reply-To: <20200701142243.1686-1-leon.anavi@konsulko.com>
+References: <20200701142243.1686-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,43 +29,46 @@ X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-Upgrade to release 2.24.0:
+Upgrade to release 2.9.2:
 
-- pyOpenSSL TLS implementation is now only used if Python either
-  doesn't have an ssl module or doesn't support SNI. Previously
-  pyOpenSSL was unconditionally used if available. This applies
-  even if pyOpenSSL is installed via the requests[security] extra.
-- Redirect resolution should now only occur when allow_redirects
-  is True.
-- No longer perform unnecessary Content-Length calculation for
-  requests that won’t use it.
+- Updated the macOS wheel to fix an issue where it would not run
+  on macOS versions older than 10.15.
+- Updated Windows, macOS, and manylinux wheels to be compiled with
+  OpenSSL 1.1.1g.
+- Support for Python 3.4 has been removed due to low usage and
+  maintenance burden.
+- Support for OpenSSL 1.0.1 has been removed. Users on older
+  version of OpenSSL will need to upgrade.
+- Support for LibreSSL 2.6.x has been removed.
+- Removed support for calling
+  :meth:`~cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey.public_bytes`
+  with no arguments, as per our deprecation policy. You must now
+  pass encoding and format.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-requests_2.23.0.bb => python3-requests_2.24.0.bb} | 4 ++--
+ ...y-vectors_2.8.bb => python3-cryptography-vectors_2.9.2.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-requests_2.23.0.bb => python3-requests_2.24.0.bb} (81%)
+ rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_2.8.bb => python3-cryptography-vectors_2.9.2.bb} (73%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-requests_2.23.0.bb b/meta-python/recipes-devtools/python/python3-requests_2.24.0.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-requests_2.23.0.bb
-rename to meta-python/recipes-devtools/python/python3-requests_2.24.0.bb
-index 9f3fb7d2e..de9a53584 100644
---- a/meta-python/recipes-devtools/python/python3-requests_2.23.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-requests_2.24.0.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=19b6be66ed463d93fa88c29f7860bcd7"
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.9.2.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb
+rename to meta-python/recipes-devtools/python/python3-cryptography-vectors_2.9.2.bb
+index 948aab9e0..60316fc74 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.9.2.bb
+@@ -4,8 +4,8 @@ SECTION = "devel/python"
+ LICENSE = "Apache-2.0 | BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
  
- FILESEXTRAPATHS_prepend := "${THISDIR}/python-requests:"
+-SRC_URI[md5sum] = "a744ed29bb9ef56b3a50317fea3b218e"
+-SRC_URI[sha256sum] = "6cd32174c56a3eca72f64af43c1daacaae758cfa5ff9d280dfcf818fa11ef116"
++SRC_URI[md5sum] = "657349b8de73959fc49ba15fd7346b58"
++SRC_URI[sha256sum] = "99ac91c4d89572399b097240809af1b8f67f4bedf43398d290c9b2b3d9f491b4"
  
--SRC_URI[md5sum] = "abfdc28db1065bbd0bc32592ac9d27a6"
--SRC_URI[sha256sum] = "b3f43d496c6daba4493e7c431722aeb7dbc6288f52a6e04e7b6023b0247817e6"
-+SRC_URI[md5sum] = "b54bff26a389e5932e8b1c4983a99ce7"
-+SRC_URI[sha256sum] = "b3559a131db72c33ee969480840fff4bb6dd111de7dd27c8ee1f820f4f00231b"
- 
- inherit pypi setuptools3
+ PYPI_PACKAGE = "cryptography_vectors"
  
 -- 
 2.17.1
