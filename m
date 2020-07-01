@@ -1,80 +1,176 @@
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web11.10733.1593562053223287923
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com [209.85.210.195])
+ by mx.groups.io with SMTP id smtpd.web10.10721.1593562054741458149
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2020 17:07:33 -0700
+ Tue, 30 Jun 2020 17:07:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZicryD34;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id b92so10230366pjc.4
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 17:07:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=bn9q1v4S;
+ spf=pass (domain: gmail.com, ip: 209.85.210.195, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f195.google.com with SMTP id t11so5291757pfq.11
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 17:07:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=NwLH7hcTvJER+4VdCYBKLnwoqvge/uAknI88M9bCm3E=;
-        b=ZicryD34g1U3sbOsdP9Sciatxy3hlhPEPQD6PeM5CJ4WeG6hD5h0XqAYWFyWhJthLr
-         842nmgoW3Tc2g4gUIgqdMP1C27I0FtEPVd/GOEL/v+Tk162y1BGpfUXfpAXh/hejNIvA
-         k2ryp6OGiSKl/KMmHYuFd0GON8858Mwi2TfvmHGEPvovWRK0/VtXmInbZe5lRa7fYsCw
-         XqzmGrdMwz1gxesfnXS1UHnftdTqPKzzlT1gKi0w+wWTWoZTp9G+3nowkDclOObw8T0+
-         1+n/uAMixKI/W9ZX3j3y6il5ih6gjrwnHkU0AbQsFG/YKjoGQSrIywJYmtNKsTmAA6xd
-         YmCw==
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+         :content-transfer-encoding;
+        bh=YXrFX+e2OXVNvfO0PEF5ZRlp6RFuzLgQl+eL9PF5y2w=;
+        b=bn9q1v4SvAFw4qCFUFW9cn0rwSyAcIABvdXntrVD+5O6y1EpCMuPUD1eNJkBiF1Wxt
+         0FiMhrsUS7X0Jmzss/Z9TcyqrYlG2s5q9ct2+wlIxXo/VyQ45qzVUFBlmhDxG8aYjUKI
+         hy3s+7UC6bjsA20/6DDI+rUEIsnF/c2j+GwU9ysqeWDnSdIB94tTaEZ9kZ0aDPWAtiLV
+         qaizP2qvHEi1LHZS1ULG8qr9mTUTyiRADlYt9NN343NKdfDs5xaKgMmIjXDD4pgCUTs3
+         Mue8wY9NxA47tP8Rp41mE2SeOmMLCMpiJ8D11Vvp4B+ieR08UPKJkxwG+ueVkqodyTQz
+         Fzcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=NwLH7hcTvJER+4VdCYBKLnwoqvge/uAknI88M9bCm3E=;
-        b=HW2IAQQhQbXVjdN+M4jIp2S0V811XFfvnTgup1M5KlniMVWdDNyYUCfgPGM19EZcNW
-         pPvFOmAftnj5oQmiGLNqYtJr923osTtY/RMh+cReNT8f3tDbKIIKDuzn/uiQWi8nR0/E
-         KokvgQE1KtRvbT7MagVpF/Mri0kS0l518vrP4WPcqpsPITY1N7SHM0pFg/2AYfQ4oCYi
-         KeoaPiewaqX/ZXio+0JT08K9Kw0IRsysoKKa8cn5J4fQBQd4VXHd+XsVrjD/rdtVlO2F
-         YC45nuARNfvQLoPdhayC5KJz7za5dENM38y8GdbJ/IuHAcuo+tsTep6slW1Q38k0bl2B
-         qboA==
-X-Gm-Message-State: AOAM532k9k++pWo6fa3isWfvolLSibGTxOly/36dFiJR3LNVB2sHVhR5
-	OABeGNCbyRFCHPeIfFY/ybmyQ89V/+s=
-X-Google-Smtp-Source: ABdhPJwA52W9zEVWpEAVBfI0+ISTJCb1RX5pa5tmgyjo4sfLVVd4ZTKvzzilgnO1R9tSHN/d/bgodw==
-X-Received: by 2002:a17:902:9f93:: with SMTP id g19mr19047974plq.314.1593562052504;
-        Tue, 30 Jun 2020 17:07:32 -0700 (PDT)
+         :references:mime-version:content-transfer-encoding;
+        bh=YXrFX+e2OXVNvfO0PEF5ZRlp6RFuzLgQl+eL9PF5y2w=;
+        b=SPHBWQpwlkgqbxEutFeJJB337zefNi2TgZ1kkPJcf0zO0y9ZNKxk+xR87tZGIURuFZ
+         l3xmNvPNqB5p4GneCtNy237aStZkn1Q+8CZCTCfoZ1FXgnQibWiaFceM5pK/ZjrjfHY4
+         xR1fBvA6ofbYEMpZaV/TGhqCRr8TYT3IYn316vtUsWU+E87/dv4gZP9wiZ8NNMzPDu0A
+         C2cDA/BfSJMh+glXpcGdGZ17vzaJwzORScGwxJqvimH7w3K0m+8tZ6KZK5mJuFbiGhJ/
+         OYhQXyOUb9CvLgRkOL/oMYJSsuyDz4tAjpSpALZsttZ4WVeG97O5/rM+xYBAO/qCvFuF
+         wEyA==
+X-Gm-Message-State: AOAM531OqqdNwZPd/xT4192FnZh5fZ46zG7ZSTVInsP8nyxP9TkeacbT
+	DmOGzAeIdTnO9AFi38OaXLkjpJAt4uU=
+X-Google-Smtp-Source: ABdhPJwO8PAX5axNneqIr3jw2PY3DPTQlk+mddGANK3tIVn0bebCrm8NChqSkIcd6Stwn/cpPxaqfg==
+X-Received: by 2002:a63:c152:: with SMTP id p18mr17804041pgi.64.1593562053980;
+        Tue, 30 Jun 2020 17:07:33 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:c85d:3ce:5443:9164])
-        by smtp.gmail.com with ESMTPSA id z2sm3940544pff.36.2020.06.30.17.07.31
+        by smtp.gmail.com with ESMTPSA id z2sm3940544pff.36.2020.06.30.17.07.32
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Jun 2020 17:07:31 -0700 (PDT)
+        Tue, 30 Jun 2020 17:07:33 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfel 10/32] libvpx: upgrade 1.8.1 -> 1.8.2
-Date: Tue, 30 Jun 2020 17:06:55 -0700
-Message-Id: <706019dc1fdc25626150ca825410d2740de83c3a.1593561840.git.akuster808@gmail.com>
+Subject: [dunfel 11/32] vlc: Fix build with qt5 in PACKAGECONFIG and Qt >= 5.15 / renumber patches
+Date: Tue, 30 Jun 2020 17:06:56 -0700
+Message-Id: <24303fe200ad0d7f273bb36d93fa1756c6d665cd.1593561840.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1593561840.git.akuster808@gmail.com>
 References: <cover.1593561840.git.akuster808@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+From: Andreas Müller <schnitzeltony@gmail.com>
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 91b30560e4a4e5a40744d01dfa1339ad8ba96a7e)
+(cherry picked from commit aadbc77f8e132301403c1187e8d0488d526f8817)
+[AK: meta-QT5 dufell has 5.15 so this is seems reasonable.]
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../webm/{libvpx_1.8.1.bb => libvpx_1.8.2.bb}                   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-multimedia/webm/{libvpx_1.8.1.bb => libvpx_1.8.2.bb} (96%)
+ ...ch => 0001-make-opencv-configurable.patch} |  0
+ ...isidec.patch => 0002-use-vorbisidec.patch} |  0
+ ...int.patch => 0003-fix-luaL-checkint.patch} |  0
+ ...ackageconfig-to-detect-mmal-support.patch} |  0
+ .../vlc/vlc/0005-Fix-build-with-Qt-5.15.patch | 56 +++++++++++++++++++
+ .../recipes-multimedia/vlc/vlc_3.0.9.2.bb     |  9 +--
+ 6 files changed, 61 insertions(+), 4 deletions(-)
+ rename meta-multimedia/recipes-multimedia/vlc/vlc/{0006-make-opencv-configurable.patch => 0001-make-opencv-configurable.patch} (100%)
+ rename meta-multimedia/recipes-multimedia/vlc/vlc/{0007-use-vorbisidec.patch => 0002-use-vorbisidec.patch} (100%)
+ rename meta-multimedia/recipes-multimedia/vlc/vlc/{0008-fix-luaL-checkint.patch => 0003-fix-luaL-checkint.patch} (100%)
+ rename meta-multimedia/recipes-multimedia/vlc/vlc/{0001-Use-packageconfig-to-detect-mmal-support.patch => 0004-Use-packageconfig-to-detect-mmal-support.patch} (100%)
+ create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0005-Fix-build-with-Qt-5.15.patch
 
-diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.8.1.bb b/meta-oe/recipes-multimedia/webm/libvpx_1.8.2.bb
-similarity index 96%
-rename from meta-oe/recipes-multimedia/webm/libvpx_1.8.1.bb
-rename to meta-oe/recipes-multimedia/webm/libvpx_1.8.2.bb
-index 006e73af46..4a98ec17dd 100644
---- a/meta-oe/recipes-multimedia/webm/libvpx_1.8.1.bb
-+++ b/meta-oe/recipes-multimedia/webm/libvpx_1.8.2.bb
-@@ -7,7 +7,7 @@ LICENSE = "BSD-3-Clause"
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0006-make-opencv-configurable.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0001-make-opencv-configurable.patch
+similarity index 100%
+rename from meta-multimedia/recipes-multimedia/vlc/vlc/0006-make-opencv-configurable.patch
+rename to meta-multimedia/recipes-multimedia/vlc/vlc/0001-make-opencv-configurable.patch
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0007-use-vorbisidec.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0002-use-vorbisidec.patch
+similarity index 100%
+rename from meta-multimedia/recipes-multimedia/vlc/vlc/0007-use-vorbisidec.patch
+rename to meta-multimedia/recipes-multimedia/vlc/vlc/0002-use-vorbisidec.patch
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0008-fix-luaL-checkint.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0003-fix-luaL-checkint.patch
+similarity index 100%
+rename from meta-multimedia/recipes-multimedia/vlc/vlc/0008-fix-luaL-checkint.patch
+rename to meta-multimedia/recipes-multimedia/vlc/vlc/0003-fix-luaL-checkint.patch
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0001-Use-packageconfig-to-detect-mmal-support.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0004-Use-packageconfig-to-detect-mmal-support.patch
+similarity index 100%
+rename from meta-multimedia/recipes-multimedia/vlc/vlc/0001-Use-packageconfig-to-detect-mmal-support.patch
+rename to meta-multimedia/recipes-multimedia/vlc/vlc/0004-Use-packageconfig-to-detect-mmal-support.patch
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0005-Fix-build-with-Qt-5.15.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0005-Fix-build-with-Qt-5.15.patch
+new file mode 100644
+index 0000000000..c4465b6af3
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc/0005-Fix-build-with-Qt-5.15.patch
+@@ -0,0 +1,56 @@
++From c805c6f64da6d8b03355b4796865b75e2f3b500d Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
++Date: Mon, 8 Jun 2020 00:50:08 +0200
++Subject: [PATCH] Fix build with Qt >= 5.15
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Upstream-Status: Pending
++
++Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
++---
++ modules/gui/qt/components/playlist/views.cpp | 1 +
++ modules/gui/qt/dialogs/plugins.cpp           | 1 +
++ modules/gui/qt/util/timetooltip.hpp          | 1 +
++ 3 files changed, 3 insertion(+)
++
++diff --git a/modules/gui/qt/components/playlist/views.cpp b/modules/gui/qt/components/playlist/views.cpp
++index 24db9d9..71d8514 100644
++--- a/modules/gui/qt/components/playlist/views.cpp
+++++ b/modules/gui/qt/components/playlist/views.cpp
++@@ -35,6 +35,7 @@
++ #include <QMetaType>
++ #include <QHeaderView>
++ #include <QSvgRenderer>
+++#include <QPainterPath>
++ 
++ #include <assert.h>
++ 
++diff --git a/modules/gui/qt/dialogs/plugins.cpp b/modules/gui/qt/dialogs/plugins.cpp
++index d233382..9ae9a63 100644
++--- a/modules/gui/qt/dialogs/plugins.cpp
+++++ b/modules/gui/qt/dialogs/plugins.cpp
++@@ -66,6 +66,7 @@
++ #include <QSplitter>
++ #include <QToolButton>
++ #include <QStackedWidget>
+++#include <QPainterPath>
++ 
++ //match the image source (width/height)
++ #define SCORE_ICON_WIDTH_SCALE 4
++diff --git a/modules/gui/qt/util/timetooltip.hpp b/modules/gui/qt/util/timetooltip.hpp
++index 6a1329e..9f50b18 100644
++--- a/modules/gui/qt/util/timetooltip.hpp
+++++ b/modules/gui/qt/util/timetooltip.hpp
++@@ -25,6 +25,7 @@
++ #include "qt.hpp"
++ 
++ #include <QWidget>
+++#include <QPainterPath>
++ 
++ class TimeTooltip : public QWidget
++ {
++-- 
++2.26.2
++
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb
+index f6c7a606d5..24898a5a7f 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.9.2.bb
+@@ -19,10 +19,11 @@ LDFLAGS_append_riscv64 = " -latomic"
+ LICENSE_FLAGS = "commercial"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d5b04755015be901744a78cc30d390d4"
+ SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
+-           file://0006-make-opencv-configurable.patch \
+-           file://0007-use-vorbisidec.patch \
+-           file://0008-fix-luaL-checkint.patch \
+-           file://0001-Use-packageconfig-to-detect-mmal-support.patch \
++           file://0001-make-opencv-configurable.patch \
++           file://0002-use-vorbisidec.patch \
++           file://0003-fix-luaL-checkint.patch \
++           file://0004-Use-packageconfig-to-detect-mmal-support.patch \
++           file://0005-Fix-build-with-Qt-5.15.patch \
+ "
+ SRC_URI[sha256sum] = "a9bdad293d81cd48516abad8d490d8ab4012964ae541ff19e00021e071e47601"
  
--SRCREV = "8ae686757b708cd8df1d10c71586aff5355cfe1e"
-+SRCREV = "7ec7a33a081aeeb53fed1a8d87e4cbd189152527"
- SRC_URI += "git://chromium.googlesource.com/webm/libvpx;protocol=https \
-             file://libvpx-configure-support-blank-prefix.patch \
-            "
 -- 
 2.17.1
 
