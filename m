@@ -1,92 +1,80 @@
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web11.10730.1593562052208742070
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web11.10733.1593562053223287923
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2020 17:07:32 -0700
+ Tue, 30 Jun 2020 17:07:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=tLWINIDe;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id j4so9164804plk.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 17:07:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZicryD34;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id b92so10230366pjc.4
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 17:07:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=368DkLsr9C0hvTEfohFiVqOOV5o7ZnFbqRPsKxbhlRc=;
-        b=tLWINIDeyXb9xQRnMNUrjv4wVj+h367LOvd+5fgNcqF3l6q3CsxLyb9vWwG56B9M8Y
-         V8rfL/HEYCwvWf1c3o78ULXopnfRJ45j63ikxTtFs7I6158SLjCR7kybb7LLWCjfRv4b
-         aHEiVeYEWX1ktTys8+iAFu7pIrJ6kW0e20szG8AMieX+8HjktDIFSUN5jNqbfaDzU41U
-         mxuVN+BGli2ZoaxcNZW77HMeH5cSnxTUMZOZ5l4fKUp64LpMEeX8NPFdaC/u9cuFL2He
-         YfCNiR9wNYoHOHhYEn2CI/r79OV2wMguOR3Tok9y6bhXbdNLDOTVwR5NppMkEct2Hm0j
-         PrrQ==
+        h=from:to:subject:date:message-id:in-reply-to:references;
+        bh=NwLH7hcTvJER+4VdCYBKLnwoqvge/uAknI88M9bCm3E=;
+        b=ZicryD34g1U3sbOsdP9Sciatxy3hlhPEPQD6PeM5CJ4WeG6hD5h0XqAYWFyWhJthLr
+         842nmgoW3Tc2g4gUIgqdMP1C27I0FtEPVd/GOEL/v+Tk162y1BGpfUXfpAXh/hejNIvA
+         k2ryp6OGiSKl/KMmHYuFd0GON8858Mwi2TfvmHGEPvovWRK0/VtXmInbZe5lRa7fYsCw
+         XqzmGrdMwz1gxesfnXS1UHnftdTqPKzzlT1gKi0w+wWTWoZTp9G+3nowkDclOObw8T0+
+         1+n/uAMixKI/W9ZX3j3y6il5ih6gjrwnHkU0AbQsFG/YKjoGQSrIywJYmtNKsTmAA6xd
+         YmCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=368DkLsr9C0hvTEfohFiVqOOV5o7ZnFbqRPsKxbhlRc=;
-        b=DtTw9V8x8T7uRAW/Uh0xz0aYvraHLMyITqd4lVyFvoowN4HARk1YM/PsMgppYz+EO4
-         dHxkEfVPEw8KNpgd68O9uefIwpu19ftLRECT5RVfJmnGxq70VQeN7jiAhafe8b1/ZB+R
-         lYLui7y9rgJ5UmIVqGrcQhwr1ivDCTQArLeE71kKtI0poJXhg3+Kr10FfJEN3wtfmSFI
-         6MDO9xcv7On81KTtSwqdnxqTa9f9HOYSTYZ78/GAC4db2NCgCzN4dl+esGdkSVK4/363
-         1A4vrvrgG46gmn5zFmlpBTftcvMWAotfkrkCYwYiftbskJQgDSgwhURPB2hwojFBFcn2
-         L+wQ==
-X-Gm-Message-State: AOAM530fKey8vZlH1znxlXv1q6YAeZqtPknrjVz5dnBK34SrMMxBfJgv
-	Lo4bEKW7UF91L5zdLRjkHejTmQE0UbE=
-X-Google-Smtp-Source: ABdhPJxQZ+wBqjSxlo9ckH9fKRbmfvZFEfi1pyrkhiiaeTFzsim3WmmMobphrIJdVSAn4sKcicUi3w==
-X-Received: by 2002:a17:90b:4c0f:: with SMTP id na15mr24795462pjb.112.1593562051503;
-        Tue, 30 Jun 2020 17:07:31 -0700 (PDT)
+         :references;
+        bh=NwLH7hcTvJER+4VdCYBKLnwoqvge/uAknI88M9bCm3E=;
+        b=HW2IAQQhQbXVjdN+M4jIp2S0V811XFfvnTgup1M5KlniMVWdDNyYUCfgPGM19EZcNW
+         pPvFOmAftnj5oQmiGLNqYtJr923osTtY/RMh+cReNT8f3tDbKIIKDuzn/uiQWi8nR0/E
+         KokvgQE1KtRvbT7MagVpF/Mri0kS0l518vrP4WPcqpsPITY1N7SHM0pFg/2AYfQ4oCYi
+         KeoaPiewaqX/ZXio+0JT08K9Kw0IRsysoKKa8cn5J4fQBQd4VXHd+XsVrjD/rdtVlO2F
+         YC45nuARNfvQLoPdhayC5KJz7za5dENM38y8GdbJ/IuHAcuo+tsTep6slW1Q38k0bl2B
+         qboA==
+X-Gm-Message-State: AOAM532k9k++pWo6fa3isWfvolLSibGTxOly/36dFiJR3LNVB2sHVhR5
+	OABeGNCbyRFCHPeIfFY/ybmyQ89V/+s=
+X-Google-Smtp-Source: ABdhPJwA52W9zEVWpEAVBfI0+ISTJCb1RX5pa5tmgyjo4sfLVVd4ZTKvzzilgnO1R9tSHN/d/bgodw==
+X-Received: by 2002:a17:902:9f93:: with SMTP id g19mr19047974plq.314.1593562052504;
+        Tue, 30 Jun 2020 17:07:32 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:c85d:3ce:5443:9164])
-        by smtp.gmail.com with ESMTPSA id z2sm3940544pff.36.2020.06.30.17.07.30
+        by smtp.gmail.com with ESMTPSA id z2sm3940544pff.36.2020.06.30.17.07.31
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Tue, 30 Jun 2020 17:07:31 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfel 09/32] libblockdev: upgrade 2.23 -> 2.24
-Date: Tue, 30 Jun 2020 17:06:54 -0700
-Message-Id: <860610065ec2ffae9b4aa95c3ae6c2a3cb78eb70.1593561840.git.akuster808@gmail.com>
+Subject: [dunfel 10/32] libvpx: upgrade 1.8.1 -> 1.8.2
+Date: Tue, 30 Jun 2020 17:06:55 -0700
+Message-Id: <706019dc1fdc25626150ca825410d2740de83c3a.1593561840.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1593561840.git.akuster808@gmail.com>
 References: <cover.1593561840.git.akuster808@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-From: Andreas Müller <schnitzeltony@gmail.com>
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 
-Change SRC_URI: all udisks related sources moved to
-https://github.com/storaged-project
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit dc25abfed8ce775ceb23dd483fe85924dc550bfe)
+(cherry picked from commit 91b30560e4a4e5a40744d01dfa1339ad8ba96a7e)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{libblockdev_2.23.bb => libblockdev_2.24.bb}           | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-extended/libblockdev/{libblockdev_2.23.bb => libblockdev_2.24.bb} (94%)
+ .../webm/{libvpx_1.8.1.bb => libvpx_1.8.2.bb}                   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-multimedia/webm/{libvpx_1.8.1.bb => libvpx_1.8.2.bb} (96%)
 
-diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_2.23.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_2.24.bb
-similarity index 94%
-rename from meta-oe/recipes-extended/libblockdev/libblockdev_2.23.bb
-rename to meta-oe/recipes-extended/libblockdev/libblockdev_2.24.bb
-index 3f4eec274f..99cdee5bba 100644
---- a/meta-oe/recipes-extended/libblockdev/libblockdev_2.23.bb
-+++ b/meta-oe/recipes-extended/libblockdev/libblockdev_2.24.bb
-@@ -10,11 +10,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
+diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.8.1.bb b/meta-oe/recipes-multimedia/webm/libvpx_1.8.2.bb
+similarity index 96%
+rename from meta-oe/recipes-multimedia/webm/libvpx_1.8.1.bb
+rename to meta-oe/recipes-multimedia/webm/libvpx_1.8.2.bb
+index 006e73af46..4a98ec17dd 100644
+--- a/meta-oe/recipes-multimedia/webm/libvpx_1.8.1.bb
++++ b/meta-oe/recipes-multimedia/webm/libvpx_1.8.2.bb
+@@ -7,7 +7,7 @@ LICENSE = "BSD-3-Clause"
  
- inherit autotools gobject-introspection
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d5b04755015be901744a78cc30d390d4"
  
--SRCREV = "f5d2458e9e52d8c55b609ae8cf46ef0673b4a02a"
--SRC_URI = " \
--    git://github.com/rhinstaller/libblockdev;branch=master \
--"
--
-+SRC_URI = "git://github.com/storaged-project/libblockdev;branch=2.x-branch"
-+SRCREV = "f5a4ba8bb298f8cbc435707d0b19b4b2ff836a8e"
- S = "${WORKDIR}/git"
- 
- FILES_${PN} += "${libdir}/python2.7/dist-packages ${libdir}/python3.*/site-packages"
+-SRCREV = "8ae686757b708cd8df1d10c71586aff5355cfe1e"
++SRCREV = "7ec7a33a081aeeb53fed1a8d87e4cbd189152527"
+ SRC_URI += "git://chromium.googlesource.com/webm/libvpx;protocol=https \
+             file://libvpx-configure-support-blank-prefix.patch \
+            "
 -- 
 2.17.1
 
