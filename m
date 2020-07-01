@@ -1,62 +1,43 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.16186.1593586923921754378
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+ by mx.groups.io with SMTP id smtpd.web10.17282.1593593325463523935
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Jul 2020 00:02:06 -0700
+ Wed, 01 Jul 2020 01:48:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.75,299,1589212800"; 
-   d="scan'208";a="95616740"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 01 Jul 2020 15:01:36 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id 329B34CE5474
-	for <openembedded-devel@lists.openembedded.org>; Wed,  1 Jul 2020 14:51:06 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Wed, 1 Jul 2020 15:01:35 +0800
-From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@cn.fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-pytest: upgrade 5.4.2 -> 5.4.3
-Date: Wed, 1 Jul 2020 15:01:28 +0800
-Message-ID: <1593586888-23124-4-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1593586888-23124-1-git-send-email-wangmy@cn.fujitsu.com>
-References: <1593586888-23124-1-git-send-email-wangmy@cn.fujitsu.com>
+ dkim=pass header.i=@stusta.de header.s=default header.b=NQRwFjjh;
+ spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=znrm=am=stusta.de=bunk@stusta.mhn.de)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 49xZdP11xKz5t;
+	Wed,  1 Jul 2020 10:48:40 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1593593322;
+	bh=UfWFF7uC7eQ/YYImJwjip4rZF9S3hWl/n9abijcqikc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=NQRwFjjheD9KLQ8gHN36/ZDiY9Q1aN8WHPgD0oBFIjVP8rMr/HW25VW9ZoqVOWQZu
+	 wuNe5C95yczEJqJ2zz+n9bCEC7PLyoJVLQyUE0nH5CwvImb+ViSyTPAQYnvFmemRBi
+	 cqA7SD1LoUOPWfmfSR0QmsoUyy36b5IEM09S148h7BKHVRBkhjbeWd8XG87yTJ4OZh
+	 wJw52aTNjiVqnvtTP7E3xEwY1welaAvpKeOhXvfjesfLfwh4Q9i6SKe42vclzInB0E
+	 40TL5ZfncbfbW+MhtLshNBumhr3JQtv3raQA953a/ylXYcmOLZYYEfmPcRy5AJLIYs
+	 tsM7BysEi+4tFZKEP02O6oO4Y71IYhVBV9PkiKghdYDqf1b8+WvaGDvSf9QFMs9IzV
+	 T2698eh0UQaSOEubqsx7P9IomyanrEayT3z//1ZIgpwL73Wx6wKsVCYenlGK9Syx2W
+	 jtBEb1BJHfMd/zbpccO+dM9wASy+dcdi2SqIT3He8m2TFMiR1CKFNZoTJtSESp3rvF
+	 TP3RbQFugNxTrPsy4t5DujpV8SWC8rBfNhRzcQAwLpzZ4cHJcVbx13P4mR6BEoPIB0
+	 Vy5jg8LTWfxlwkZphcpaVuNKGUZMshxwRsrd/b8IdvOMlJiN/0vEgAka0Y2dCaodhT
+	 GSLDjFM9n++9+MfzA6uEbkxo=
+Date: Wed, 1 Jul 2020 11:48:39 +0300
+From: "Adrian Bunk" <bunk@stusta.de>
+To: akuster <akuster808@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [dunfel 08/32] multipath-tools: Fix build with json-c 0.14 and newer
+Message-ID: <20200701084839.GC10930@localhost>
+References: <cover.1593561840.git.akuster808@gmail.com>
+ <d345970f40c6f9caae869f048c358f598d37e109.1593561840.git.akuster808@gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
-X-yoursite-MailScanner-ID: 329B34CE5474.A1B3E
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+In-Reply-To: <d345970f40c6f9caae869f048c358f598d37e109.1593561840.git.akuster808@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
----
- .../python/{python3-pytest_5.4.2.bb => python3-pytest_5.4.3.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pytest_5.4.2.bb => python3-pytest_5.4.3.bb} (91%)
+dunfell has json-c 0.13.1
 
-diff --git a/meta-python/recipes-devtools/python/python3-pytest_5.4.2.bb b/meta-python/recipes-devtools/python/python3-pytest_5.4.3.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-pytest_5.4.2.bb
-rename to meta-python/recipes-devtools/python/python3-pytest_5.4.3.bb
-index 9258c21ca..ca67223db 100644
---- a/meta-python/recipes-devtools/python/python3-pytest_5.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pytest_5.4.3.bb
-@@ -3,7 +3,7 @@ SUMMARY = "Simple powerful testing with python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=81eb9f71d006c6b268cf4388e3c98f7b"
- 
--SRC_URI[sha256sum] = "eb2b5e935f6a019317e455b6da83dd8650ac9ffd2ee73a7b657a30873d67a698"
-+SRC_URI[sha256sum] = "7979331bfcba207414f5e1263b5a0f8f521d0f457318836a7355531ed1a4c7d8"
- 
- SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch "
- 
--- 
-2.17.1
-
-
-
+cu
+Adrian
