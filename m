@@ -1,83 +1,84 @@
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web11.10748.1593562071201439725
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.web12.10582.1593562072142600205
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2020 17:07:51 -0700
+ Tue, 30 Jun 2020 17:07:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=eCVgfthy;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id gc15so2465639pjb.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 17:07:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=S5MoTWwd;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id x8so8265195plm.10
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 17:07:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=rHRBHdgblqoYom6bx9Odzxr0iaSeX7cu90s8eqIhHqE=;
-        b=eCVgfthyX4MmHHQu2jlMZnG47+y90Mttc5v4yZncm7gVzz+0C8fDfkPtVw/DQI3Vch
-         LeLg6Zmttw7k8iih1SvK4T0qJdBOw/l1Y4zYWzY63LQ59UkzOJQ6AgKKlOUWwR1yMnb0
-         HiA0flBYXCYweYIFfU179FaFhd/Qz+UKT6ED81+jpT5q7b+1F8EhhdQWRUSJPqyHToN9
-         /HlsgGrHcTvTcNAYv0ydGhzUiVc7eF5ECoDEzEMh60zEnFSIPRMRPWa9Q82Qc1g7RgEA
-         0J/vhnOS+L4Y96IqGL/EQLcAnh7SkA7Vmb1IabNdle+pQ/+59hAgz3RFzdjiJ6MT0JIb
-         YF1A==
+        bh=BT8YtZo1XU8/1GtRKJ1W46/azhOiEXZyokTKPtM3zcc=;
+        b=S5MoTWwd6aoOnBiQssF91NDP9iqelc5yqDc1YklEG5Yb+oN5C18ROiozGw9OruBOpb
+         bcwvMevTEEu5yc+j96SaLPVJHXsfTILTWvAY871BYTHKvY9/ijhr8++upyEdfgAHPr9N
+         Ma63i43gAw6ET0AF7sHPEg0DHAXSzDWMl1GMUWHe8jV2zAy2uBhdeXdJnWqRp31Z4nHN
+         lqMP9cNHu3KA7+5BQhN9XsdAqKRGGxwtg+Y5CRiiF1iL0hSVVjFM+2xE/gsFEBsFuO0M
+         M4N2P9VzyKIQXwr3QUSRTyOocciz5N6qkxVIu5n2BXSEr69DI5lq+S3hO552+yh67iFn
+         5nww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=rHRBHdgblqoYom6bx9Odzxr0iaSeX7cu90s8eqIhHqE=;
-        b=r2x2jgK8gzNSB7aJnyh28jJm2IPiS8+Hyx60fHp4o/JWzJ87zgIKq8rCXpDm+4GYCF
-         AVafMv1uY73tL9tX1htxSzSr3Yuq9/KO966z0HpXAuVSARKNFUvva6QTI6+k7sc/HTT1
-         vCecQiCyNe7xKiT/9kB3uubV5185Lv1DqboQJI6z7i0JLVoTUOcqgOPKf8rvyvbvrONV
-         T0roQ/YDVa8pLfN6hXrmNUo8jnVFGXh9V6eUp+oEPZyPvbtiZI0R5e1tNXp9LHg9J5ay
-         xyQph7XEepCw8DDh5S5lQPX+bAWB6z5y54fL8uktrKSaT60sVmTzzSAL3eSnIG+fO+Hs
-         UcpQ==
-X-Gm-Message-State: AOAM533K9Nq36+Nnj9eTrNx4P3SdYmzMMOuFqTyeOGxrOyI5NlnXY2QX
-	uqr37ACYesCPSHh7CnzmniI9Nz+nnTI=
-X-Google-Smtp-Source: ABdhPJxkXptlmlvxYsa5liStws/4ANCGWPoPh8rLaHdEW7fdzzasKc72W76wta4BgrWVuX5PXu+6YQ==
-X-Received: by 2002:a17:902:9042:: with SMTP id w2mr20437645plz.9.1593562070565;
-        Tue, 30 Jun 2020 17:07:50 -0700 (PDT)
+        bh=BT8YtZo1XU8/1GtRKJ1W46/azhOiEXZyokTKPtM3zcc=;
+        b=SD/IwHvcayWvOCh7I+FrH4HqpzC0mkLdMRW2FWyCrACXot6SoMw8PGrAuefxPCcdxt
+         HzOWGCSJkQ54saJwd1coRNDX2DyHe+Kz98bFEalzcc5twfhoG80edRI8TePHtkAIx5YH
+         tl9B/9JG73FZP7w4MJEM1pugM12ZUA2Ac7Ig77ItVk9Mxk/fZn2JQBbingfq/EWuhnGt
+         a5GP9o1K/tcCyfn/SXFsGR8AKhtdxnsMl6BJJEtsfBh+iDBVNdgprsgn1Q+xnJrf1Z7x
+         pNLPFniKWsdecFB1hIb6nt9+cVCyONXxX+VTOEYMQbPD4ClfnYpvOP0ng05gx4GiMFp4
+         zC1w==
+X-Gm-Message-State: AOAM5332ZHgqn4yXG4UrIZdZUO0tvw2kk5BlbxBFA/Y9DbHb82Tzhjip
+	InSdINWWxfgjyDtzudxD6LBYLo1iKcM=
+X-Google-Smtp-Source: ABdhPJzuwBjjhJzb7gAOKBlirrWjOl9abnJx7HgzjXDfJfTB9zdgr4GIGGoJ2A/hOopXDB4KkCgGqw==
+X-Received: by 2002:a17:90b:1c12:: with SMTP id oc18mr23903895pjb.160.1593562071478;
+        Tue, 30 Jun 2020 17:07:51 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:c85d:3ce:5443:9164])
-        by smtp.gmail.com with ESMTPSA id z2sm3940544pff.36.2020.06.30.17.07.49
+        by smtp.gmail.com with ESMTPSA id z2sm3940544pff.36.2020.06.30.17.07.50
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Jun 2020 17:07:50 -0700 (PDT)
+        Tue, 30 Jun 2020 17:07:51 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfel 25/32] openipmi: upgrade 2.0.28 -> 2.0.29
-Date: Tue, 30 Jun 2020 17:07:10 -0700
-Message-Id: <f7023576ac8c18aebddee97c02c6f53006ca5652.1593561840.git.akuster808@gmail.com>
+Subject: [dunfel 26/32] twm: upgrade 1.0.10 -> 1.0.11
+Date: Tue, 30 Jun 2020 17:07:11 -0700
+Message-Id: <e415e0bebea7bf6084693e9b4c123319f634de85.1593561840.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1593561840.git.akuster808@gmail.com>
 References: <cover.1593561840.git.akuster808@gmail.com>
 
 From: Wang Mingyu <wangmy@cn.fujitsu.com>
 
-???Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+??Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 0b0c102d8c6daae12894f47f9523fe27fca5b15f)
+(cherry picked from commit 8f6facb77e13c9dc53056f30283d0dd33a9c8679)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../openipmi/{openipmi_2.0.28.bb => openipmi_2.0.29.bb}       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/openipmi/{openipmi_2.0.28.bb => openipmi_2.0.29.bb} (96%)
+ .../xorg-app/{twm_1.0.10.bb => twm_1.0.11.bb}                | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-app/{twm_1.0.10.bb => twm_1.0.11.bb} (67%)
 
-diff --git a/meta-networking/recipes-support/openipmi/openipmi_2.0.28.bb b/meta-networking/recipes-support/openipmi/openipmi_2.0.29.bb
-similarity index 96%
-rename from meta-networking/recipes-support/openipmi/openipmi_2.0.28.bb
-rename to meta-networking/recipes-support/openipmi/openipmi_2.0.29.bb
-index f196eb9927..85634a70eb 100644
---- a/meta-networking/recipes-support/openipmi/openipmi_2.0.28.bb
-+++ b/meta-networking/recipes-support/openipmi/openipmi_2.0.29.bb
-@@ -35,8 +35,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
+diff --git a/meta-oe/recipes-graphics/xorg-app/twm_1.0.10.bb b/meta-oe/recipes-graphics/xorg-app/twm_1.0.11.bb
+similarity index 67%
+rename from meta-oe/recipes-graphics/xorg-app/twm_1.0.10.bb
+rename to meta-oe/recipes-graphics/xorg-app/twm_1.0.11.bb
+index 3a2267ae92..45caaacf2f 100644
+--- a/meta-oe/recipes-graphics/xorg-app/twm_1.0.10.bb
++++ b/meta-oe/recipes-graphics/xorg-app/twm_1.0.11.bb
+@@ -5,8 +5,9 @@ DEPENDS += " libxext libxt libxmu bison-native"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4c6d42ef60e8166aa26606524c0b9586"
  
- S = "${WORKDIR}/OpenIPMI-${PV}"
+-SRC_URI[md5sum] = "e322c08eeb635f924ede5b8eba3db54e"
+-SRC_URI[sha256sum] = "6449eadca16ce0f0d900605b0cc020b95f40619261b7beccfb46bcc1836445d7"
++SRC_URI = "${XORG_MIRROR}/individual/app/${BPN}-${PV}.tar.gz"
++SRC_URI[md5sum] = "48e83210b39a7bfb492604ba0bcfb19e"
++SRC_URI[sha256sum] = "410ecabac54e6db7afd5c20a78d89c0134f3c74b149bee71b1fec775e6e060cc"
  
--SRC_URI[md5sum] = "ba37f08e306062ec73c7ed2a2bd4d5f4"
--SRC_URI[sha256sum] = "8e8b1de2a9a041b419133ecb21f956e999841cf2e759e973eeba9a36f8b40996"
-+SRC_URI[md5sum] = "46b452e95d69c92e4172b3673ed88d52"
-+SRC_URI[sha256sum] = "2244124579afb14e569f34393e9ac61e658a28b6ffa8e5c0d2c1c12a8ce695cd"
- 
- inherit autotools-brokensep pkgconfig python3native perlnative update-rc.d systemd cpan-base
- 
+ FILES_${PN} += "${datadir}/X11/twm/system.twmrc"
+ ALTERNATIVE_NAME = "x-window-manager"
 -- 
 2.17.1
 
