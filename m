@@ -1,120 +1,89 @@
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web10.10734.1593562066594729667
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web10.10735.1593562067525175902
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jun 2020 17:07:46 -0700
+ Tue, 30 Jun 2020 17:07:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=N9eUBCyr;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id c1so2968549pja.5
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 17:07:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=dFXjAzHD;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id f2so9158135plr.8
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jun 2020 17:07:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=OXJ3guRQUbsWA4I4EVqn7DDtYacYHLsTABmLa3AcPdc=;
-        b=N9eUBCyrg4V2O1Clv+deRDnztp/SEGZcaYIgKS+Ar01RAZ911JHhz1mbgKy08oviW8
-         sSky/mLTUpJyu6QiuIU5kT1XZqqzqswRqTMPIhIfxIsdXhN7caXARYG+UYSU5cCXT7lu
-         kXfn5fZMASJsZRbCY0EmpHtIXcLB36Fq6/XNWZU3Nng3Ui4bRNuOcdDPtbH9nO3Y7d80
-         WIGAc6oB4mn8uWuKLAosHuEn3Z/n++ZwpDEMFTRxM9tzzogr+FilF1adb83UjwyJHOPS
-         1KwYA3TtC2Dx+CPRLwtln+zwjmrkZRY6y6JO4zRBKRYm0xWfJJw6yELZgafH1wLDnfaq
-         MWtw==
+        bh=Opagv9Ci44IKLaKvlA42tnefRhcqg62N3zReWymceh4=;
+        b=dFXjAzHDUN4y64c7+KPjxW2+aM44dcgYbeFl7BpOVzIpQPnnkWpaWkzH1eNjel0SHG
+         8O917rxoDl70dcycW1tNqq/O7Cbfzoir08ApcAoA/uU+hfpq5z40ighmbqFrhVmOm7K4
+         bb8Pwsr0rOte7EURKhGfwVlAZkItRdc+ASzJcr9c6wvbrvBTAu9ITLhO1aYfbkreTsth
+         5xjoKZVMCh8Fx98jdcmuFRbdi8wZEgvr06mpxTimOFBYklNn7i2LSDRti5MybOmQEanQ
+         Rmvg2BY2111uYWTJMjNLb3U67f7vbir8AWOOgsAPRv4FgA3eivHi2H/h7GIaH6fCkryw
+         122w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=OXJ3guRQUbsWA4I4EVqn7DDtYacYHLsTABmLa3AcPdc=;
-        b=GxmFtVxztoMHQEKxqh9kEePRwvTr2vkgHcg4pSg+F8rV/UMkyOZiMcm77nfKqJ40R0
-         G0x7erAFb2nQ+nUI0m459qncGKMoqhZ6oNvl385hqgiIwQEfdsuIkugGh4Ak0AKH1xR7
-         RlSeTtoAd5vcBGWuGex/invXucl5tIEIYsZwXIKDUaS2BX7Kme2xEbCWmSYSOGsDeraH
-         mGanE1i98BSclosEuLbk/OMX+DAJdMOIIgxOjaToKWmLbaAi6yyGY3RdTvplZVu89Mrt
-         8QbHjYduFzbPQ6YH+7woQTOaazfMxsYpZB0JSdZSmg/DZMtnx8sOBTJkigRp1SQ1G/gZ
-         TEog==
-X-Gm-Message-State: AOAM5311pCmjRPRMn5pv1kPf5ElU8QArAYaiomlfLQmxgBLNPhb4gIYZ
-	wvyeZOoJgY1LpANcnIcb34RCzr7+zTQ=
-X-Google-Smtp-Source: ABdhPJwjQtnVOTWBGaqpHHgtpoCbjs5kIALL7UljZsO1om2bCKSg3mZxLoc2E2Gq4MAkUISaOEuPNg==
-X-Received: by 2002:a17:902:8c84:: with SMTP id t4mr19506859plo.315.1593562065777;
-        Tue, 30 Jun 2020 17:07:45 -0700 (PDT)
+        bh=Opagv9Ci44IKLaKvlA42tnefRhcqg62N3zReWymceh4=;
+        b=VkeOvihlcMTvXE+GyMTwxwqErcFLgDJD5ofwoKpJJHjnZ1428cVVBuHfReAtDjgIpu
+         tgL3HrFVLByJh7L8GhGGGkGVyPg0g7AT3ebHELt1rQ+iYI0ZKOXJmUbnF1zUlGEysOwx
+         JSxlbCHc7smnQMHZoNLAnqT8AqGXGy12Q1KzwQXW1vJgTVSDNxRcJNtgufs6CxyOzV2p
+         q3yedMJDrp1ZhNuV3G0J39XcyZXddmMjv+01+kST6dUV36W0uNLT8MrfrWwkYPt6wq+O
+         yImOSJTPrzl2ZiY9obYkF2pd4qq+9l3y1CMuPh7AI6OsmDM90JHa3HLpXAjH87iUX2sz
+         kGtw==
+X-Gm-Message-State: AOAM532cAIUwW/mQ0rsYYNagcP0XZMI2kKUG+bqPUajvUslTM9rwOi0k
+	Ey6uC0do77VtNWXmNuSy89NElaNCrAQ=
+X-Google-Smtp-Source: ABdhPJxdzlnB5Ege/bLCN977RDx+y0Pqe5q/l6Gn+yLh9/ayTHfU36ZbJzduci3Rwdj/xTeGM8p6ww==
+X-Received: by 2002:a17:902:7e04:: with SMTP id b4mr11337189plm.295.1593562066865;
+        Tue, 30 Jun 2020 17:07:46 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:c85d:3ce:5443:9164])
-        by smtp.gmail.com with ESMTPSA id z2sm3940544pff.36.2020.06.30.17.07.44
+        by smtp.gmail.com with ESMTPSA id z2sm3940544pff.36.2020.06.30.17.07.45
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Jun 2020 17:07:45 -0700 (PDT)
+        Tue, 30 Jun 2020 17:07:46 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfel 21/32] zstd: Upgrade 1.4.4 -> 1.4.5
-Date: Tue, 30 Jun 2020 17:07:06 -0700
-Message-Id: <d35b46dbe10bf47f1fffa456c41d42a9cdb1a9a1.1593561840.git.akuster808@gmail.com>
+Subject: [dunfel 22/32] rsnapshot: upgrade 1.4.2 -> 1.4.3
+Date: Tue, 30 Jun 2020 17:07:07 -0700
+Message-Id: <fe32b2cf7aea2f6fac18e068c70901d8404b8c2c.1593561840.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1593561840.git.akuster808@gmail.com>
 References: <cover.1593561840.git.akuster808@gmail.com>
 
-From: Alex Kiernan <alex.kiernan@gmail.com>
+From: Pierre-Jean Texier <pjtexier@koncepto.io>
 
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+VERSION 1.4.3
+------------------------------------------------------------------------------
+- Fixes and minor updates to Pod / man page.
+- Adds more tests.
+- Restore rsync error code 23 as an important warning.
+- Fixes shortargs appending.
+- Non-LVM backup source breaks after LVM backup source.
+- Update rsnapreport.pl utility script to work with rsync >= 3.1.0 stats and bytes changes.
+
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit f6aa84fcf197bb74ed2a4dc1e3bb898fc884e27b)
+
+(cherry picked from commit 4ea3135e945aadba7d1cb6424a861378c484b570)
+
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../0001-Fix-legacy-build-after-2103.patch    | 27 +++++++++++++++++++
- .../zstd/{zstd_1.4.4.bb => zstd_1.4.5.bb}     |  6 +++--
- 2 files changed, 31 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-extended/zstd/zstd/0001-Fix-legacy-build-after-2103.patch
- rename meta-oe/recipes-extended/zstd/{zstd_1.4.4.bb => zstd_1.4.5.bb} (85%)
+ meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/zstd/zstd/0001-Fix-legacy-build-after-2103.patch b/meta-oe/recipes-extended/zstd/zstd/0001-Fix-legacy-build-after-2103.patch
-new file mode 100644
-index 0000000000..c701554b8b
---- /dev/null
-+++ b/meta-oe/recipes-extended/zstd/zstd/0001-Fix-legacy-build-after-2103.patch
-@@ -0,0 +1,27 @@
-+From 93cec0c1d6d0be8dd3a9d01d3e7f2099f1728df7 Mon Sep 17 00:00:00 2001
-+From: Orivej Desh <orivej@gmx.fr>
-+Date: Fri, 22 May 2020 12:48:02 +0000
-+Subject: [PATCH] Fix legacy build after #2103
-+
-+Upstream-Status: Backport
-+Signed-of-by: Alex Kiernan <alex.kiernan@gmail.com>
-+---
-+ lib/legacy/zstd_v04.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/lib/legacy/zstd_v04.c b/lib/legacy/zstd_v04.c
-+index 56bf45222498..19fda8980abf 100644
-+--- a/lib/legacy/zstd_v04.c
-++++ b/lib/legacy/zstd_v04.c
-+@@ -74,7 +74,7 @@ extern "C" {
-+ /*-*************************************
-+ *  Debug
-+ ***************************************/
-+-#include "debug.h"
-++#include "../common/debug.h"
-+ #ifndef assert
-+ #  define assert(condition) ((void)0)
-+ #endif
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb b/meta-oe/recipes-extended/zstd/zstd_1.4.5.bb
-similarity index 85%
-rename from meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
-rename to meta-oe/recipes-extended/zstd/zstd_1.4.5.bb
-index eb201f4139..cd0b471e17 100644
---- a/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
-+++ b/meta-oe/recipes-extended/zstd/zstd_1.4.5.bb
-@@ -9,9 +9,11 @@ LICENSE = "BSD-3-Clause & GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c7f0b161edbe52f5f345a3d1311d0b32 \
-                     file://COPYING;md5=39bba7d2cf0ba1036f2a6e2be52fe3f0"
+diff --git a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
+index efe95b1019..dcadede0ed 100644
+--- a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
++++ b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
+@@ -20,8 +20,8 @@ RDEPENDS_${PN} = "rsync \
+                   perl-module-overloading \
+                  "
  
--SRC_URI = "git://github.com/facebook/zstd.git;nobranch=1"
-+SRC_URI = "git://github.com/facebook/zstd.git;nobranch=1 \
-+           file://0001-Fix-legacy-build-after-2103.patch \
-+           "
+-SRCREV = "27209563f924a22f510698ea225f53ea52f07cb4"
+-PV = "1.4.2+git${SRCPV}"
++SRCREV = "a9e29850fc33c503c289e245c7bad350eed746d9"
++PV = "1.4.3+git${SRCPV}"
  
--SRCREV = "10f0e6993f9d2f682da6d04aa2385b7d53cbb4ee"
-+SRCREV = "b706286adbba780006a47ef92df0ad7a785666b6"
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
- 
- S = "${WORKDIR}/git"
+ SRC_URI = "git://github.com/DrHyde/${BPN};branch=master;protocol=git \
+            file://configure-fix-cmd_rsync.patch \
 -- 
 2.17.1
 
