@@ -1,101 +1,60 @@
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
- by mx.groups.io with SMTP id smtpd.web12.1290.1593672958336909306
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web11.2379.1593679485400763362
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Jul 2020 23:55:58 -0700
+ Thu, 02 Jul 2020 01:44:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@skidata.com header.s=selector1 header.b=g15p5AiT;
- spf=pass (domain: skidata.com, ip: 91.230.2.91, mailfrom: prvs=445b5c427=richard.leitner@skidata.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-  t=1593672958; x=1625208958;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=rU0Y2yGgL8oDcI71++JIfNpwvhLHbMCbQN98jrOpEPA=;
-  b=g15p5AiTdNNVorKyuDR54y5NMlxfvSbYfnzLLwt4Xewjip1XyFt9AY+y
-   QQHD6r6oaUk3wfIpiiB2YxgzGqgptMxTRiaPgRAYqBn+wciWRnMDC/+hY
-   OgQvFrPF7RpWpMah7h4qSAG7IxKL1YD+4lDa0BTsfi20u4qjLN/kmyyIA
-   o2r76I7CnfOp4uLK70Wu5tPM7vMeFK4F1yf+XHIoqVpDp6iylzSfJP4ux
-   jyveEO++LDZnhw7KKnin7CuWCWYZbnRIPi9Zdf0rq+cGEYHCUi7Q15ifq
-   GdvoTXMDxGcPDamawWuLVqURnTs2rMQ6Z4T7JK7mGduSOGxUTgGw9cxxb
-   w==;
-IronPort-SDR: 6OUeN63gb4VNRpDwClldxqwnfyBtneZN0e+L3M2yvQ46XyknmUYsxan6UGnwvFvGqjFGczSV8s
- nJg5JTLF3qY7tLBlgaR0JRhq4Lj1eziP9GLiDhld9Wvp+/YVYRCElZavJE6SGfMlbddvWEU1mB
- m6mbfYxqHRHxiHJXRKOMikvkHf9hmLQf35ylV+R68yPTM72XGcSo3DktHIAPGI7IRTi2KFD/cF
- wCpJeGVhGfX4nxTqgXK1ST0Hc+HUMOzZ+/c/krRgWYtpjatLmsp0ROxbYY96JuhqXF6i6kUBAp
- 0u4=
-X-IronPort-AV: E=Sophos;i="5.75,303,1589234400"; 
-   d="scan'208";a="2608500"
-Date: Thu, 2 Jul 2020 08:55:55 +0200
-From: "Richard Leitner" <richard.leitner@skidata.com>
-To: Vyacheslav Yurkov <uvv.mail@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>, Vyacheslav Yurkov
-	<Vyacheslav.Yurkov@bruker.com>
-Subject: Re: [oe] [meta-java][PATCH] jlex: set unique file name for download
-Message-ID: <20200702065555.GC308462@pcleri>
-References: <20200623094825.33289-1-uvv.mail@gmail.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.75,303,1589212800"; 
+   d="scan'208";a="95694234"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 02 Jul 2020 16:44:39 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id BB6864CE4BD0
+	for <openembedded-devel@lists.openembedded.org>; Thu,  2 Jul 2020 16:44:34 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Thu, 2 Jul 2020 16:44:35 +0800
+From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][PATCH] mraa: Disable python2,otherwise, there is a build error when enable multilib.
+Date: Thu, 2 Jul 2020 16:44:22 +0800
+Message-ID: <1593679462-110536-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-In-Reply-To: <20200623094825.33289-1-uvv.mail@gmail.com>
-Return-Path: richard.leitner@skidata.com
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
- sdex5srv.skidata.net (192.168.111.83)
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
+X-yoursite-MailScanner-ID: BB6864CE4BD0.AB73A
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-Hi,
-thank you for your patch!
+ERROR: mraa-2.1.0+gitAUTOINC+e15ce6fbc7-r0 do_package: QA Issue: mraa:
+Files/directories were installed but not shipped in any package:
+  /usr/lib/python3.8/site-packages/_mraa.so
+  /usr/lib/python3.8/site-packages/mraa.py
 
-This is a note to let you know that I've just added this patch to the
-master-next branch of the meta-java repository at
-	git://git.yoctoproject.org/meta-java
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ meta-oe/recipes-extended/mraa/mraa_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-As soon as it has gone through some more testing it will likely be
-merged to the master branch.
+diff --git a/meta-oe/recipes-extended/mraa/mraa_git.bb b/meta-oe/recipes-extended/mraa/mraa_git.bb
+index 7c2441632..8bd8e9006 100644
+--- a/meta-oe/recipes-extended/mraa/mraa_git.bb
++++ b/meta-oe/recipes-extended/mraa/mraa_git.bb
+@@ -22,7 +22,7 @@ inherit cmake distutils3-base
+ 
+ DEPENDS += "json-c"
+ 
+-EXTRA_OECMAKE_append = " -DINSTALLTOOLS:BOOL=ON -DFIRMATA=ON -DCMAKE_SKIP_RPATH=ON \
++EXTRA_OECMAKE_append = " -DINSTALLTOOLS:BOOL=ON -DFIRMATA=ON -DCMAKE_SKIP_RPATH=ON -DPYTHON2_LIBRARY=OFF \
+                          -DPYTHON3_PACKAGES_PATH:PATH=${baselib}/python${PYTHON_BASEVERSION}/site-packages \
+                          -DPYTHON_LIBRARY=${STAGING_LIBDIR}/lib${PYTHON_DIR}${PYTHON_ABI}.so \
+                          -DPYTHON_INCLUDE_DIR=${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI} \
+-- 
+2.17.1
 
-If you have any questions, please let me know.
 
-regards;rl
 
-On Tue, Jun 23, 2020 at 11:48:25AM +0200, Vyacheslav Yurkov wrote:
-> From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
-> 
-> Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
-> ---
->  recipes-core/jlex/jlex_1.2.6.bb | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes-core/jlex/jlex_1.2.6.bb b/recipes-core/jlex/jlex_1.2.6.bb
-> index b8f9ffb..3c14e4c 100644
-> --- a/recipes-core/jlex/jlex_1.2.6.bb
-> +++ b/recipes-core/jlex/jlex_1.2.6.bb
-> @@ -1,7 +1,9 @@
->  SUMMARY = "Lexical analyzer generator for Java"
->  AUTHOR = "Elliot Berk, A. Appel, C. Scott Ananian"
-> +
-> +JLEX_MAIN_FILENAME = "jlex-${PV}-Main.java"
->  LICENSE = "JLEX"
-> -LIC_FILES_CHKSUM = "file://Main.java;beginline=148;endline=166;md5=9bf4a6a951053991db64f9d7330d648a"
-> +LIC_FILES_CHKSUM = "file://${JLEX_MAIN_FILENAME};beginline=148;endline=166;md5=9bf4a6a951053991db64f9d7330d648a"
->  
->  PACKAGE_ARCH = "${TUNE_PKGARCH}"
->  
-> @@ -10,7 +12,7 @@ RDEPENDS_${PN}_class-native = ""
->  
->  inherit java-library
->  
-> -SRC_URI = "http://www.cs.princeton.edu/~appel/modern/java/JLex/Archive/${PV}/Main.java \
-> +SRC_URI = "http://www.cs.princeton.edu/~appel/modern/java/JLex/Archive/${PV}/Main.java;downloadfilename=${JLEX_MAIN_FILENAME} \
->             file://jlex \
->            "
->  
-> @@ -26,6 +28,7 @@ do_configure() {
->  
->  do_compile() {
->  	mkdir -p build
-> +	cp ${JLEX_MAIN_FILENAME} Main.java
->  
->  	javac -d build Main.java
->  
-> -- 
-> 2.25.1
-> 
