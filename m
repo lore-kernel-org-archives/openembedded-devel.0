@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.3838.1593686911192336881
+ by mx.groups.io with SMTP id smtpd.web12.3840.1593686913011101287
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Jul 2020 03:48:31 -0700
+ Thu, 02 Jul 2020 03:48:33 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=35470 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jqwlZ-0002lw-Iu; Thu, 02 Jul 2020 13:48:30 +0300
+	id 1jqwlb-0002lw-Aj; Thu, 02 Jul 2020 13:48:32 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-dbus-next: Upgrade 0.1.2 -> 0.1.3
-Date: Thu,  2 Jul 2020 13:48:16 +0300
-Message-Id: <20200702104819.14256-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-pybluez: Upgrade 0.22 -> 0.23
+Date: Thu,  2 Jul 2020 13:48:17 +0300
+Message-Id: <20200702104819.14256-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200702104819.14256-1-leon.anavi@konsulko.com>
 References: <20200702104819.14256-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,41 +30,47 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.1.3:
+Upgrade to release 0.23:
 
-- Add the object manager interface to the service.
-- Allow coroutines in service methods.
-- Client: don't send method replies with NO_REPLY_EXPECTED
-  message flag.
-- Fix duplicate nodes in introspection.
+- Dropped support for Python 2.7. The minimum Python version
+  is now 3.5.
+
+Use tar.gz instead of zip. Fix the URL of the HOMEPAGE.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ython3-dbus-next_0.1.2.bb => python3-dbus-next_0.1.3.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-dbus-next_0.1.2.bb => python3-dbus-next_0.1.3.bb} (52%)
+ .../{python3-pybluez_0.22.bb => python3-pybluez_0.23.bb}   | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pybluez_0.22.bb => python3-pybluez_0.23.bb} (58%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-dbus-next_0.1.2.bb b/meta-python/recipes-devtools/python/python3-dbus-next_0.1.3.bb
-similarity index 52%
-rename from meta-python/recipes-devtools/python/python3-dbus-next_0.1.2.bb
-rename to meta-python/recipes-devtools/python/python3-dbus-next_0.1.3.bb
-index 2784013a1..4da4be81b 100644
---- a/meta-python/recipes-devtools/python/python3-dbus-next_0.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-dbus-next_0.1.3.bb
-@@ -1,10 +1,10 @@
- SUMMARY = "A zero-dependency DBus library for Python with asyncio support"
- HOMEPAGE = "https://github.com/acrisci/python-dbus-next"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=b32e18a71bcdd072bce21f204629a104"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=94e750c96e56788499b56c81de91431c"
+diff --git a/meta-python/recipes-devtools/python/python3-pybluez_0.22.bb b/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
+similarity index 58%
+rename from meta-python/recipes-devtools/python/python3-pybluez_0.22.bb
+rename to meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
+index 26902e18d..5242059bc 100644
+--- a/meta-python/recipes-devtools/python/python3-pybluez_0.22.bb
++++ b/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Bluetooth Python extension module"
+-HOMEPAGE = "http://karulis.github.io/pybluez/"
++HOMEPAGE = "https://pybluez.github.io/"
+ SECTION = "devel/python"
  
--SRC_URI[md5sum] = "df838d695284dd1775860f9691a8663f"
--SRC_URI[sha256sum] = "a567d845ceed5feac48dda7faeb9ff2571f9a434a3c32b9b363f763e82368762"
-+SRC_URI[md5sum] = "a823270b11c8dd7932c12adc6b2fadbb"
-+SRC_URI[sha256sum] = "4dd9097778224c69228f7f2a0f52e9b13ec2c75e87974ad312525c927835e8fb"
+ DEPENDS = "bluez5"
+@@ -7,11 +7,10 @@ DEPENDS = "bluez5"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8a71d0475d08eee76d8b6d0c6dbec543"
  
- PYPI_PACKAGE = "dbus_next"
+-SRC_URI[md5sum] = "49dab9d5a8f0b798c8125c7f649be3cd"
+-SRC_URI[sha256sum] = "4ce006716a54d9d18e8186a3f1c8b12a8e6befecffe8fd5828a291fb694ce49d"
++SRC_URI[md5sum] = "afbe8429bb82d2c46a3d0f5f4f898f9d"
++SRC_URI[sha256sum] = "c8f04d2e78951eaa9de486b4d49381704e8943d0a6e6e58f55fcd7b8582e90de"
  
+ PYPI_PACKAGE = "PyBluez"
+-PYPI_PACKAGE_EXT = "zip"
+ inherit pypi setuptools3
+ 
+ RDEPENDS_${PN} += "\
 -- 
 2.17.1
 
