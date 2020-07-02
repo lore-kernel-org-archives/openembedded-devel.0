@@ -1,79 +1,61 @@
-Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com [209.85.218.68])
- by mx.groups.io with SMTP id smtpd.web11.3476.1593684923035085919
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.3878.1593686910770441212
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Jul 2020 03:15:23 -0700
+ Thu, 02 Jul 2020 03:48:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kynetics-com.20150623.gappssmtp.com header.s=20150623 header.b=SVGpSwAP;
- spf=neutral (domain: kynetics.com, ip: 209.85.218.68, mailfrom: jacopo.dallaglio@kynetics.com)
-Received: by mail-ej1-f68.google.com with SMTP id f12so2429778eja.9
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Jul 2020 03:15:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kynetics-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=KdmivNlsBbzd5OVj9eapEm8jaY6EYeRnjoteXNVB6BI=;
-        b=SVGpSwAPOzYdavvgDllsJa8tnlB3ohxu41K+LuBVpEl9qTd7oJMGhz80z7a5jo6thJ
-         YdqkYzrxau0J1rGLaZHu2TcZY3Xo8eZ2h8yVnN3VCXrSccYogWkDm3f6ZZarJholyqft
-         T/sbz6HYqNoxK4Qwb6xLth859I871fMBrnID5Y69GTRD3iVuYm0xu90ZPZLhLHc+3Fc2
-         LfRDoZziJ6sQCeHl7wwAHIu23otc3Wl82u2nftjr8YUQQqzPtiRsvGc5HR9zgw+LNs49
-         Ja/xzLM4Pbz4Y1j1mS6D5K7TeaBhVS0it0JakLIiJIhePRR2829siCaXtiZQri9XTEqN
-         Ckgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=KdmivNlsBbzd5OVj9eapEm8jaY6EYeRnjoteXNVB6BI=;
-        b=Zfnio93E5s071MnhBuf246ir6Lvykq6K/rHM5w4so4xEswUVvLvI5bb2f8biYd06Wu
-         vMduHYZfgNtxij41LxnOwZHIbD6uTpJt6k3OfuJNGh3V53SRJmcGwtHhE1I8+h3vU51w
-         4bry3VB0GaBEiClaDBYDGj+RP6vn1eu5LBTaps7SYEOubOp2ATYyfY3RHOfIpOTey446
-         bCe70OcMSKcvK7piEHBpqOVK9fBn1XHhB+CKLTcwOSkLfqq8NBQf4In8b3dkeO+/i3of
-         MTGU8xLq7VeXco2sKMGm3jVCl7GEO0PRLzYrNLHly/Ho1WQ22VQ/0UGB4AxMtvPFRGKR
-         eWbQ==
-X-Gm-Message-State: AOAM5313dNj/QdOe+xXgLWxN5OciFPltQBE73HIj4t3vcB9Vj58DXMfO
-	jxMmdQScI/g1pM54pVH/pa6UOnVKEQ==
-X-Google-Smtp-Source: ABdhPJxzyq9Q37iksunSYt9Pr4UPLlH/K7qPQdfz7RBsCEesNp2r//Q/OzdTZrFzo8AYNai04Kf50g==
-X-Received: by 2002:a17:906:6a4f:: with SMTP id n15mr26265672ejs.378.1593684921216;
-        Thu, 02 Jul 2020 03:15:21 -0700 (PDT)
-Return-Path: <jacopo.dallaglio@kynetics.com>
-Received: from localhost.localdomain.home-life.hub ([176.206.86.212])
-        by smtp.gmail.com with ESMTPSA id h8sm8543773edq.15.2020.07.02.03.15.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Jul 2020 03:15:20 -0700 (PDT)
-From: "Jacopo Dall'Aglio" <jacopo.dallaglio@kynetics.com>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=35470 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jqwlX-0002lw-38; Thu, 02 Jul 2020 13:48:28 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jacopo Dall'Aglio <jacopo.dallaglio@kynetics.com>
-Subject: [meta-python][PATCH] python3-libconf: add recipe version 2.0.1
-Date: Thu,  2 Jul 2020 12:15:15 +0200
-Message-Id: <20200702101515.465529-1-jacopo.dallaglio@kynetics.com>
-X-Mailer: git-send-email 2.25.4
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-pint: Upgrade 0.13 -> 0.14
+Date: Thu,  2 Jul 2020 13:48:15 +0300
+Message-Id: <20200702104819.14256-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Signed-off-by: Jacopo Dall'Aglio <jacopo.dallaglio@kynetics.com>
+Upgrade to release 0.14:
+
+- Changes required to support Pint-Pandas 0.1
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python3-libconf_2.0.1.bb                 | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-libconf_2.0.1.bb
+ .../python/{python3-pint_0.13.bb => python3-pint_0.14.bb}     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pint_0.13.bb => python3-pint_0.14.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-libconf_2.0.1.bb b/meta-python/recipes-devtools/python/python3-libconf_2.0.1.bb
-new file mode 100644
-index 000000000..80bc59d97
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-libconf_2.0.1.bb
-@@ -0,0 +1,13 @@
-+SUMMARY = "A pure-Python libconfig reader/writer with permissive license"
-+SECTION = "devel/python"
-+HOMEPAGE = "https://github.com/Grk0/python-libconf"
-+LICENSE = "MIT"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=05f696c084eaaf5d75bc150f70975758"
-+
-+SRC_URI[md5sum] = "e212611cbf6a696e05742a983b3a0c57"
-+SRC_URI[sha256sum] = "2f907258953ba60a95a82d5633726b47c81f2d5cf8d8801b092579016d757f4a"
-+
-+inherit pypi setuptools3
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pint_0.13.bb b/meta-python/recipes-devtools/python/python3-pint_0.14.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-pint_0.13.bb
+rename to meta-python/recipes-devtools/python/python3-pint_0.14.bb
+index 9a081baba..8e1630476 100644
+--- a/meta-python/recipes-devtools/python/python3-pint_0.13.bb
++++ b/meta-python/recipes-devtools/python/python3-pint_0.14.bb
+@@ -10,8 +10,8 @@ PYPI_PACKAGE := "Pint"
+ 
+ inherit pypi ptest setuptools3
+ 
+-SRC_URI[md5sum] = "6e60d42736f8175a57119aecc383fe4b"
+-SRC_URI[sha256sum] = "13fa35ffa3ddf53161b4304917085687950e0de461bcdd4d65cdee11a43d7fb2"
++SRC_URI[md5sum] = "e5e409806bc82f518230117b30ae23ed"
++SRC_URI[sha256sum] = "9aa450ebb9d722ed03fa9a450104cfd16c479b49f862d547c6f77320de597f72"
+ 
+ DEPENDS += "python3-setuptools-scm-native"
+ 
 -- 
-2.25.4
+2.17.1
 
