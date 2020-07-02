@@ -1,81 +1,90 @@
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com [209.85.222.196])
- by mx.groups.io with SMTP id smtpd.web10.9589.1593704711461564103
+Received: from mx0a-00082601.pphosted.com (mx0a-00082601.pphosted.com [67.231.145.42])
+ by mx.groups.io with SMTP id smtpd.web10.402.1593707775661457564
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Jul 2020 08:45:11 -0700
+ Thu, 02 Jul 2020 09:36:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nDr2p8zf;
- spf=pass (domain: gmail.com, ip: 209.85.222.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f196.google.com with SMTP id r22so26007290qke.13
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Jul 2020 08:45:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=ihPhNbXcJI1jGgP9vU8wC1fuiUaJEPmPLJAdmIjv+c0=;
-        b=nDr2p8zfY92g5fU0VPEFEWADZHNgkpHcQI+cYr1qZX8LNWcC5tZrQE9HjMq9H8xJDD
-         kZJynx3zSsW4ghsmTo2ExyAGM7Rqp1NW89qoD7fOwmJBOzLWvlI5i9//dApCzASDRY4P
-         iVKQ0TQ7A5zAipuoOj4wwyn1+aPBfs2GvSQ0wQk08ePVczcB0HOxCmcUZRYmI0LK8Mxz
-         mHKhgFub3tEKrnFKC1j2vIou/XJ1494URfZGmMCkqK5kvEZ/gyNTFCqkRG/NYgRqbVx9
-         eAuaUCNGQeQ/pbROzCfyk/jIpbS6s0qRWCKQAgdwu9GX01cm9RLKTHbAJI7N3YbNI5pU
-         YBYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=ihPhNbXcJI1jGgP9vU8wC1fuiUaJEPmPLJAdmIjv+c0=;
-        b=lChoiOpGXhrNlAcBOt3bB+LNg+pDZ5qUi4dIsuoxI18h9td6Nd2GJRt+TqctAhehNM
-         lp6etbIqPhXdobAnvfA7s9mP1Z6D0oMrrsdYsFRgEaU764uCMdC7yaeuBGdqyXAlHBv+
-         FjSaK6xx7lmZBaY1nwxWaXnY46lhrQCjwnbspzWaC+nH4HxMHnaWU+jP7LznzfnLOHt+
-         zfDXAq8QuTYoiP/TVscNImnoKvI9igkK14Miak1oYg7IVfTMOsXY5R/WUu0DTz7HqoQ7
-         KxYKZLs5eMGxu2Jx4fAhDXsqGyDbrOQDkeGTroLXK3vuhPDMXiz1uATgSVYxnsH4hFj+
-         fJ5A==
-X-Gm-Message-State: AOAM530lcir97O2cPJKsG0OOWy6Q/FE8lfhCXJt8nyqffLywsMDuDRSL
-	hOe5oVBLU/aM8XIygxt470c7yvOypo51dap/piomfgtT
-X-Google-Smtp-Source: ABdhPJzWwNOb/UqY3r9to9+qTFBdObNvF3TCt1RpHYpqVtlt/JKZIPN1GYOZftNPMrKCtip/AFsDimsQ1GB9Pk5QvWY=
-X-Received: by 2002:a37:46d1:: with SMTP id t200mr10208324qka.17.1593704710506;
- Thu, 02 Jul 2020 08:45:10 -0700 (PDT)
+ dkim=pass header.i=@fb.com header.s=facebook header.b=onGSEI/G;
+ spf=pass (domain: fb.com, ip: 67.231.145.42, mailfrom: prvs=44520df2fc=andrestc@fb.com)
+Received: from pps.filterd (m0044010.ppops.net [127.0.0.1])
+	by mx0a-00082601.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 062GQuZf017626
+	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Jul 2020 09:36:15 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fb.com; h=from : to : cc : subject
+ : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=facebook; bh=PfSOd2pSNNdTBxIqtLLB5LwwVrGkh1emA2zgEEw2cUE=;
+ b=onGSEI/GLLsOv9g5ZgCL4lNmv4ZzH7j9DpMoSSJXIp2ti4Gy4l5RY/EFYfxaH7MCVQLF
+ ZEjdDdSanlfFjazP6fazjrb7/EckstCwNjKhN4DbMyMb+30GeVRLopyIdQFfxy8Jy8oh
+ CwnLXOxwElmASgqs+lEWkEhndh2YJ6AnnVU= 
+Received: from mail.thefacebook.com ([163.114.132.120])
+	by mx0a-00082601.pphosted.com with ESMTP id 321k40g1n8-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 02 Jul 2020 09:36:14 -0700
+Received: from intmgw003.03.ash8.facebook.com (2620:10d:c085:208::f) by
+ mail.thefacebook.com (2620:10d:c085:11d::4) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.1979.3; Thu, 2 Jul 2020 09:36:13 -0700
+Received: by devbig014.lla2.facebook.com (Postfix, from userid 185260)
+	id 7E1935A005D8; Thu,  2 Jul 2020 09:36:09 -0700 (PDT)
+Smtp-Origin-Hostprefix: devbig
+From: andrestc@fb.com
+Smtp-Origin-Hostname: devbig014.lla2.facebook.com
+To: <openembedded-devel@lists.openembedded.org>
+CC: Andre Carvalho <andrestc@fb.com>
+Smtp-Origin-Cluster: lla2c09
+Subject: [meta-networking][PATCH] netcat: Set CPE_PRODUCT
+Date: Thu, 2 Jul 2020 09:36:02 -0700
+Message-ID: <20200702163602.1768259-1-andrestc@fb.com>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-References: <1593586888-23124-1-git-send-email-wangmy@cn.fujitsu.com> <1593586888-23124-3-git-send-email-wangmy@cn.fujitsu.com>
-In-Reply-To: <1593586888-23124-3-git-send-email-wangmy@cn.fujitsu.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 2 Jul 2020 08:44:44 -0700
-Message-ID: <CAMKF1sr6PUVc=zOLe=Sw8em7rNe3BujFQyc4NUbenO5Y3Hy7BQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-cryptography-vectors: upgrade 2.8 -> 2.9.2
-To: Wang Mingyu <wangmy@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+X-FB-Internal: Safe
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235,18.0.687
+ definitions=2020-07-02_09:2020-07-02,2020-07-02 signatures=0
+X-Proofpoint-Spam-Details: rule=fb_default_notspam policy=fb_default score=0 spamscore=0
+ suspectscore=0 impostorscore=0 bulkscore=0 priorityscore=1501
+ malwarescore=0 mlxlogscore=977 phishscore=0 mlxscore=0 adultscore=0
+ clxscore=1011 cotscore=-2147483648 lowpriorityscore=0 classifier=spam
+ adjust=0 reason=mlx scancount=1 engine=8.12.0-2004280000
+ definitions=main-2007020113
+X-FB-Internal: deliver
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-I took the one from Leon, since it had a better commit msg.
+This way yocto cve-check can find open CVE's. See also:
 
-On Wed, Jul 1, 2020 at 12:02 AM Wang Mingyu <wangmy@cn.fujitsu.com> wrote:
->
-> Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
-> ---
->  ...y-vectors_2.8.bb => python3-cryptography-vectors_2.9.2.bb} | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_2.8.bb => python3-cryptography-vectors_2.9.2.bb} (73%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.9.2.bb
-> similarity index 73%
-> rename from meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb
-> rename to meta-python/recipes-devtools/python/python3-cryptography-vectors_2.9.2.bb
-> index 948aab9e0..60316fc74 100644
-> --- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.8.bb
-> +++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.9.2.bb
-> @@ -4,8 +4,8 @@ SECTION = "devel/python"
->  LICENSE = "Apache-2.0 | BSD"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
->
-> -SRC_URI[md5sum] = "a744ed29bb9ef56b3a50317fea3b218e"
-> -SRC_URI[sha256sum] = "6cd32174c56a3eca72f64af43c1daacaae758cfa5ff9d280dfcf818fa11ef116"
-> +SRC_URI[md5sum] = "657349b8de73959fc49ba15fd7346b58"
-> +SRC_URI[sha256sum] = "99ac91c4d89572399b097240809af1b8f67f4bedf43398d290c9b2b3d9f491b4"
->
->  PYPI_PACKAGE = "cryptography_vectors"
->
-> --
-> 2.17.1
->
->
->
-> 
+http://lists.openembedded.org/pipermail/openembedded-core/2017-July/13989=
+7.html
+
+"Results from cve-check are not very good at the moment.
+One of the reasons for this is that component names used in CVE
+database differ from yocto recipe names. This series fixes several
+of those name mapping problems by setting the CVE_PRODUCT correctly
+in the recipes. To check this mapping with after a build, I'm exporting
+LICENSE and CVE_PRODUCT variables to buildhistory for recipes and
+packages."
+
+Value added is based on:
+https://nvd.nist.gov/products/cpe/search/results?keyword=3Dnetcat&status=3D=
+FINAL&orderBy=3DCPEURI&namingFormat=3D2.3
+
+Signed-off-by: Andre Carvalho <andrestc@fb.com>
+---
+ meta-networking/recipes-support/netcat/netcat_0.7.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/meta-networking/recipes-support/netcat/netcat_0.7.1.bb b/met=
+a-networking/recipes-support/netcat/netcat_0.7.1.bb
+index 14d743f82..1e113de51 100644
+--- a/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
++++ b/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
+@@ -16,6 +16,8 @@ SRC_URI[sha256sum] =3D "b55af0bbdf5acc02d1eb6ab18da2acd=
+77a400bafd074489003f3df0967
+=20
+ inherit autotools
+=20
++CVE_PRODUCT =3D "netcat_project:netcat"
++
+ do_install_append() {
+     install -d ${D}${bindir}
+     mv ${D}${bindir}/nc ${D}${bindir}/nc.${BPN}
+--=20
+2.24.1
+
