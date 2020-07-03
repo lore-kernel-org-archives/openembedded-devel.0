@@ -1,24 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.6910.1593768642163165070
+ by mx.groups.io with SMTP id smtpd.web12.6901.1593768643114965793
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Jul 2020 02:30:42 -0700
+ Fri, 03 Jul 2020 02:30:43 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=56428 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jrI1o-0007av-Db; Fri, 03 Jul 2020 12:30:40 +0300
+	id 1jrI1o-0007av-VN; Fri, 03 Jul 2020 12:30:41 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 05/10] python3-python-vlc: Upgrade 3.0.9113 -> 3.0.10114
-Date: Fri,  3 Jul 2020 12:30:15 +0300
-Message-Id: <20200703093020.3514-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 06/10] python3-robotframework: Upgrade 3.0.4 -> 3.2.1
+Date: Fri,  3 Jul 2020 12:30:16 +0300
+Message-Id: <20200703093020.3514-6-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200703093020.3514-1-leon.anavi@konsulko.com>
 References: <20200703093020.3514-1-leon.anavi@konsulko.com>
-MIME-Version: 1.0
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -30,38 +29,37 @@ X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-Upgrade to release 3.0.10114:
+Suppy zip as the correct extention for download in variable
+PYPI_PACKAGE_EXT. Upgrade to release 3.2.1, for details have a
+look at the release notes:
+https://github.com/robotframework/robotframework/blob/master/doc/releasenotes/rf-3.2.1.rst
 
-- Generate bindings against 3.0.10
-- Fix return types for callbacks
-- Example usage of media callbacks
-￼
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...python-vlc_3.0.9113.bb => python3-python-vlc_3.0.10114.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-python-vlc_3.0.9113.bb => python3-python-vlc_3.0.10114.bb} (65%)
+ ...botframework_3.0.4.bb => python3-robotframework_3.2.1.bb} | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-robotframework_3.0.4.bb => python3-robotframework_3.2.1.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.9113.bb b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-python-vlc_3.0.9113.bb
-rename to meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb
-index 6d53e33812..7f8affb4f3 100644
---- a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.9113.bb
-+++ b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "wiki.videolan.org/PythonBinding"
- LICENSE = "LGPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- 
--SRC_URI[md5sum] = "a3a7d64bb4c6c1cd5569173ceef9cb67"
--SRC_URI[sha256sum] = "5422b79d347b6419008ee91cfd9663edc37eaf2a0bd8fb9017d4cc2e5f249dda"
-+SRC_URI[md5sum] = "17dba9a55903cdcae10814080fcadb8f"
-+SRC_URI[sha256sum] = "c1a8a295bea8277fa3d9a07dcdf873fe18c5f11a0e4d1f618df47c316fe0003b"
+diff --git a/meta-python/recipes-devtools/python/python3-robotframework_3.0.4.bb b/meta-python/recipes-devtools/python/python3-robotframework_3.2.1.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-robotframework_3.0.4.bb
+rename to meta-python/recipes-devtools/python/python3-robotframework_3.2.1.bb
+index 0628f92d98..a5e3a2a4f2 100644
+--- a/meta-python/recipes-devtools/python/python3-robotframework_3.0.4.bb
++++ b/meta-python/recipes-devtools/python/python3-robotframework_3.2.1.bb
+@@ -11,8 +11,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
  inherit pypi setuptools3
+ 
+-SRC_URI[md5sum] = "ee753415645ff4831ff0d366a0467fe7"
+-SRC_URI[sha256sum] = "ab94257cbd848dfca7148e092d233a12853cc7e840ce8231af9cbb5e7f51aa47"
++PYPI_PACKAGE_EXT = "zip"
++SRC_URI[md5sum] = "ac8aaad885e48c6b6cd5461be5b8149f"
++SRC_URI[sha256sum] = "d693e6d06b17f48669e2a8c4cb6c1f0d56e5f1a74835d18b8ea2118da7bf2d79"
+ 
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-shell \
 -- 
 2.17.1
 
