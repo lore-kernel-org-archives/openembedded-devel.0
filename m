@@ -1,17 +1,17 @@
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.73])
- by mx.groups.io with SMTP id smtpd.web10.10842.1593784980647072378
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.63])
+ by mx.groups.io with SMTP id smtpd.web10.10846.1593785000131531920
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Jul 2020 07:03:00 -0700
+ Fri, 03 Jul 2020 07:03:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=YhvSvN98;
- spf=pass (domain: windriver.com, ip: 40.107.223.73, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=TOyFQnNL;
+ spf=pass (domain: windriver.com, ip: 40.107.94.63, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nP5U2Jr64aY+4CROnJRfrjFp+fICNRckdBU/OoCFX7ZaCi1iGrzIqbTm+gcQOAHGbR6DovQPxk+aTgo+CXC9w0/HM+cK0nNT0YdNf4d+EtohO5DMiWLReOXrHSeU5Nh1x7ihbLdJWDhIqOGVmLj3+l1+LExIVy16RAYQJn3fZKyDwW7X5inliCKIq92i91aL9XtVJnrT60RdiJIh3IEs2ZuMdfLSNx0JxR7GS3mgsnssfNKiIDNyetdh7U7D0X1p2yzmhze7DJhZNuCNY/cTK+qP6G8hbGalR2h5C9cPKxbPXBxrIcztkHeC6Z2xc2WOHF4ljt83AhGo3YUkP2f6Vw==
+ b=gvMbrzkrH4t/8/L8Z1z6LtMqBihquvvagR1ylHdTulJ4nfrIXhAqCkPEiLGdoUk//3oOwANb+eUO7Jz6zhe6vBqA6C1n2Oh0VgYYeOH43RipW19RoULeAaYJTlBc/XvilBhaTggGrF6HGXE8c7d1QaKNtQ8NahnUAV5VkzeqHTBmJhZ+p+P+5dBKNso5F4SVB16sqQIedrq5NMpyjdIGwzJsGfIY5NkVdb8tQRebV7DIIYb7t5w4Fx+b4D8GhJcHdCD3gyQptderiEmCN1GBurUXmgKzJicuaaUslvMku9boHl66Wxn95rtlwxOZl/j7bqqriN8zVdAkplJJxg19mw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uBcUkltjq3+haOlJ0cn5e0AYVwkjDOqhVIykeAkBKBw=;
- b=PsHQD1CjuHZGAuoxrY+9mqY5XpEBTICvgmExm1ACV3R4Tt8/6GoUbJnSqHKJGaKZ96upnS/0uCVRbtjmGTK8ggBSonlMNf6rPJ7fhC/3y3eI9fpG2vXUss7QOt4tRK+w6PqiQj1pLrQxYD6OJPd4PXRk+xsGz+Vqhm5AFbatu/1VaxJsY/y8sor7R5btNUX8JRRC1bBgWeryIrf09Ur+SzOYEVG31AhfwptNQmSKgEG+aolBWw45jlAeXVY2kPG6/9bcHZvyfo4QdeCjOEN9lqlkQMubDyz/svDkknLDlef2YR+ZYlCGyhcKuE0frICI2sq0ShakCkwVo6lYyFsuAA==
+ bh=w7xZZU1ZfSCsEHTY7H0MjwApdmP3Z2k9Z1T0TOZjO0U=;
+ b=V4Ne9yS8dryhGaUG4d8QdSAAsvCzRaLIcFR3t64YKrM20BYNWabKK6/vDihX6qgzd2ksBkyPqREGG3uKFq9BxQQtdvaAmkAfedMPQE7hqENSKihXvcP9JnSoXr8q1RBfwC0kEibBPs+Fe/XvBbIZV9NCdppK38vj84uQ87QX2Z3SMkHoqUIoxBfbqLMbNEddoDKUchWWE+tyh8azrpy5tmcxCTUB5ToJF02mJifo4wDRU05+1X221pmoEZVHmX2xUADiZFs4wFPvbbb/PksD+CDonGijDgCVkc5DaJBE92t05KYR7tQQsTDM8eMUV1eroXAlk4qRPOnHGvn4506Xrg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,112 +19,114 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uBcUkltjq3+haOlJ0cn5e0AYVwkjDOqhVIykeAkBKBw=;
- b=YhvSvN98Pur5bl9NaUvNsXxZxN6wBRDk4KBkYWxdJHdjQB3S+DxWX1i5zKH/rLJ16LQ+fS8v486XRA0u8OTZ4DpTlDQefLatkdOQvLixi2OLk0kE8OiBTl3XHljDqUQmWJKpyK1UWJmNsuu+5EK8YLY/8bou75myTrQCi/jargA=
+ bh=w7xZZU1ZfSCsEHTY7H0MjwApdmP3Z2k9Z1T0TOZjO0U=;
+ b=TOyFQnNLv0t3BvO3OE3T4GyWHzOYowIHIPlrpSw2H22dXbLXcUmQr/+8B1lijaRGSg6n79SNRs2n02I5tbKna2+WUQfOGDKpC7NqI+r7a93kFPKho3Wt12DamwSJzSa25eu2hsg7m9wTF98MiIk0IJVRERSQgwiBDnX2w4krJxQ=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29) by
  DM6PR11MB3628.namprd11.prod.outlook.com (2603:10b6:5:144::25) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3153.28; Fri, 3 Jul 2020 14:02:58 +0000
+ 15.20.3153.28; Fri, 3 Jul 2020 14:03:19 +0000
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2]) by DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2%5]) with mapi id 15.20.3131.036; Fri, 3 Jul 2020
- 14:02:58 +0000
-Subject: Re: [oe] [meta-python][PATCH 5/7] python3-py: Upgrade 1.8.2 -> 1.9.0
+ 14:03:19 +0000
+Subject: Re: [oe] [meta-python][PATCH 6/7] python3-html5lib: Upgrade 1.0.1 -> 1.1
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200629171853.18608-1-leon.anavi@konsulko.com>
- <20200629171853.18608-5-leon.anavi@konsulko.com>
+ <20200629171853.18608-6-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <91777526-7c51-d34b-5c06-a7fccdf3df60@windriver.com>
-Date: Fri, 3 Jul 2020 10:02:56 -0400
+Message-ID: <7cbc0b5e-deca-f959-8ece-f27987a4113a@windriver.com>
+Date: Fri, 3 Jul 2020 10:03:15 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200629171853.18608-5-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0128.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::7) To DM5PR11MB0011.namprd11.prod.outlook.com
+In-Reply-To: <20200629171853.18608-6-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0152.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2f::31) To DM5PR11MB0011.namprd11.prod.outlook.com
  (2603:10b6:4:6b::29)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0128.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::7) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.23 via Frontend Transport; Fri, 3 Jul 2020 14:02:58 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0152.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.21 via Frontend Transport; Fri, 3 Jul 2020 14:03:18 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: ac2f4e6d-7453-4a2c-1da9-08d81f59ca7e
+X-MS-Office365-Filtering-Correlation-Id: 0738a715-7e8d-464f-d17c-08d81f59d6b1
 X-MS-TrafficTypeDiagnostic: DM6PR11MB3628:
 X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB3628A89B5DB2C6F16785862C9F6A0@DM6PR11MB3628.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:3383;
+	<DM6PR11MB3628C1B111B4731908B449CF9F6A0@DM6PR11MB3628.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:5516;
 X-Forefront-PRVS: 045315E1EE
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	7IyDWRPIkZNjBVgYDkDIQieaEGBXsqaR3WgKekzQqdC35l3FLrQBVV3Hq8AmFBE2C0qGf63QBaSJfmwoD5EMSVIAmOa70wVUtHu4NTBF/aH+Kxnmr5qhuXeb+tgiFJHa3dCggLkaccKGDukdWpq4Q9STE8jgvMnJaNaTPJ/Oidfhbd3EEAdeZMgCgL/Tt1rouYro5iHh07t7+AUvHOULd7aL6DxCKrpPGLscHvcLK7A5d5iRjTPxgAdut4thi2OuCIxb5f1Hw4Hi66EPPrHkijFnjMvEyviShsdGtYBvIljzX34Ty+KuzqWg8BlM1jEJsZhYWBtWSf7iyMo69CgI6s2/ykzdPFCdocx/M5f6r7BaaFEpS5QB1M0Oz7beFPPndJMYL4UGvJWjFOClBuaK3GAO/O4WxN+7vAuh6UiqgZBDZwdv3o+5IcuMES//5vC6Dt5cKvxV+3Ud0PSpqripPA==
+	LDL6juTVEI7ESQVY7YcoXCGk55IAis4bxKgXIKM06ryEshT2TqoGzflPOUt1M4ymE60Hv5Vyw7b4HKCskRY8/zmgni7LKKTRKIj+n8+2QiEB0gu1H9Fkx8QvHTNKpY96o7UsI/k5VMAt1BHzDREMNM//jq8gOoJTKBxSt0j363cVHHRJQV7D9C8JV7mnstLi8pYpaH4lWbrJsshQQJhqx1tH8oW7uXs71EnTP4xnTP760TWk9mX5GUEJ/ShVTCuLzzzX5fIN83uU2t4FQ6FwYUJ+k5g3NS+BpHf9+PQS/mojpbLWwfsq8fYtvO8YsbinknfvHjPbHXCBv6LnLyKFnOFsP/FocfkVqqeY6ExjF6f6ktoV+Yup5kVFVKtRcer1M/hNOcninj+uL0QRjKqMlkJV9Ehwl+C5vl8FYpI1S6UsVPCKsnUXWx+kVfpCuieAoxZljWMw6sKWeXsJklGiYA==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(39850400004)(396003)(136003)(366004)(376002)(346002)(186003)(2906002)(966005)(52116002)(86362001)(16526019)(5660300002)(31686004)(316002)(66946007)(2616005)(66556008)(956004)(478600001)(66476007)(36756003)(26005)(8676002)(44832011)(53546011)(6486002)(16576012)(8936002)(31696002)(83380400001)(33964004)(166002)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(39850400004)(396003)(136003)(366004)(376002)(346002)(186003)(2906002)(966005)(52116002)(86362001)(16526019)(5660300002)(31686004)(316002)(66946007)(2616005)(66556008)(956004)(478600001)(66476007)(36756003)(26005)(8676002)(44832011)(53546011)(6486002)(16576012)(8936002)(31696002)(83380400001)(33964004)(166002)(6666004)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	Wq9pDnQ4cSeIrZJWjqZZSqUuKPli+JsL4AbRpDJwfiDmewt/cE7CHwppoIRywL0fdpjHCpIaD+Tu3IYU/FSOjzOdrr1kXtQd3a9dBbabnvT/HWWsvKakiB7WnYQZfKHIDUxG9+wr9/jOlogiQt3vqrGT4Sao204EsMAHwuiz1+EFS93rfMVLenD/qog/Sq1u/wO/S4Y/l5ACSKDBM6Hcvkzw1Ip3AtB6zJM06NyR73JaPlp4rsK7JlZAdQk+rG5GrazsqV9+qeEfpWtaa+He3tQuC/lleqtFyNHxMA6Tlu7Hsd+8IFEbqUfP/7E5ActJ0DL0v2ekMccWVtyX1heCNjF3WLdEOKHtzrzivpw1wy7aZFuhxxXyu/7pgpdrDDVVmzenjNG1ci1GkyJO0zilU6BUtEADzIMZMzmoDp41wIBXZlAyQSUQ01ENvRlfKV6ys7gqo9c2pKYurSn+6km370lwiXk3JfOVubOEHYnMRg0=
+	YPJJv9+H/4aRJdvMlBvE5WQueN7lnj9oo1NvECykaALTSN/nTj2V8c5zwdD+fuHVtz5b+Lci5eYs0LHtix2cGgmxzmelLjNIXKIoDtQIEB3EiaIVL0YRZ6pvp6IcaYza1CS1lRa/Q12QtwkPE0rik58OV5vg15XQjm+doy9Rtood/HQo+bJWi/c5pQn9WdA5i8LnvJkh3GkK3IUEsAkfyq2lv3U4SSsnL1HgAOA5ey81JJAVAZ3h5hlq+TQ7uyAHAB1X5S3MiUMsIcGXfbNtiR1TyJHcK+j2G2Z0kVFGx7QOZmkxXQCFp3DD2mZxxsU5SbJOe3w/RPsef2HxGclalyEpTCSjdoiaBveW2I3FewsNJMIg7HXy8++0cVPFDhfqcINeB3tZFmkUbBl3AjdX2jcuisWo5OAACi2jnPEYgj5mZLuCpm1Enh2RHeBKzY4uWGTnWBJOjSJF/38MXua5pP1bFrgAJPduRI8nkHGu7Xo=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ac2f4e6d-7453-4a2c-1da9-08d81f59ca7e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0738a715-7e8d-464f-d17c-08d81f59d6b1
 X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB0011.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2020 14:02:58.5087
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2020 14:03:18.9981
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7U/Tq7VNWtQZ7SCpRPrOPEZTNUnTq99Dsp8Unlj7ICmInYYmOXpoy2IxebsrvUE5/kGkcedyT51RfWOVJmL7kM8oDG6yz66fEFKumjpPXNI=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7J4okLpd0dW7xcV07DSOEVAkhSnvLLuIC/Y8PHiWsHJ3onX4/gQQg7cJOFdh3IAbW5XgQK2JF0BwpF9JVrK4i+gHYOX+/sJKeESi0VgJpw8=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB3628
 Content-Type: multipart/alternative;
- boundary="------------A4A916FD255A3B27FC9DA717"
+ boundary="------------2B95AEF782DE5B5ACD4FDBD8"
 Content-Language: en-US
 
---------------A4A916FD255A3B27FC9DA717
+--------------2B95AEF782DE5B5ACD4FDBD8
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 6/29/20 1:18 PM, Leon Anavi wrote:
-> Upgrade to release 1.9.0:
+> Upgrade to release 1.1:
 >
-> - Add type annotation stubs for the following modules:
->    py.error
->    py.iniconfig
->    py.path (not including SVN paths)
->    py.io
->    py.xml
+> - Drop support for Python 3.3.
+> - Drop support for Python 3.4.
+> - Deprecate the html5lib sanitizer (html5lib.serialize(sanitize=True)
+>    and html5lib.filters.sanitizer). We recommend users migrate to
+>    Bleach <https://github.com/mozilla/bleach>.
+> - Try to import from collections.abc to remove DeprecationWarning
+>    and ensure html5lib keeps working in future Python versions.
+> - Drop optional datrie dependency.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-py_1.8.2.bb => python3-py_1.9.0.bb}       | 4 ++--
+>   .../{python3-html5lib_1.0.1.bb => python3-html5lib_1.1.bb}    | 4 ++--
 >   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-py_1.8.2.bb => python3-py_1.9.0.bb} (72%)
+>   rename meta-python/recipes-devtools/python/{python3-html5lib_1.0.1.bb => python3-html5lib_1.1.bb} (70%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-py_1.8.2.bb b/meta-python/recipes-devtools/python/python3-py_1.9.0.bb
-> similarity index 72%
-> rename from meta-python/recipes-devtools/python/python3-py_1.8.2.bb
-> rename to meta-python/recipes-devtools/python/python3-py_1.9.0.bb
-> index aea737853..794ec2a87 100644
-> --- a/meta-python/recipes-devtools/python/python3-py_1.8.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-py_1.9.0.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE = "http://py.readthedocs.io/"
+> diff --git a/meta-python/recipes-devtools/python/python3-html5lib_1.0.1.bb b/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb
+> similarity index 70%
+> rename from meta-python/recipes-devtools/python/python3-html5lib_1.0.1.bb
+> rename to meta-python/recipes-devtools/python/python3-html5lib_1.1.bb
+> index 98ee56b2e..59f3cc945 100644
+> --- a/meta-python/recipes-devtools/python/python3-html5lib_1.0.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb
+> @@ -2,8 +2,8 @@ SUMMARY = "HTML parser based on the WHATWG HTML specifcation"
 >   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=a6bb0320b04a0a503f12f69fea479de9"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=1ba5ada9e6fead1fdc32f43c9f10ba7c"
 >   
-> -SRC_URI[md5sum] = "baa54e458875d68031c422abb2e47a5c"
-> -SRC_URI[sha256sum] = "f3b3a4c36512a4c4f024041ab51866f11761cc169670204b235f6b20523d4e6b"
-> +SRC_URI[md5sum] = "b80db4e61eef724f49feb4d20b649e62"
-> +SRC_URI[sha256sum] = "9ca6883ce56b4e8da7e79ac18787889fa5206c79dcc67fb065376cd2fe03f342"
+> -SRC_URI[md5sum] = "942a0688d6bdf20d087c9805c40182ad"
+> -SRC_URI[sha256sum] = "66cb0dcfdbbc4f9c3ba1a63fdb511ffdbd4f513b2b6d81b80cd26ce6b3fb3736"
+> +SRC_URI[md5sum] = "6748742e2ec4cb99287a6bc82bcfe2b0"
+> +SRC_URI[sha256sum] = "b2e5b40261e20f354d198eae92afc10d750afb487ed5e50f9c4eaf07c184146f"
 >   
->   DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+>   inherit pypi setuptools3
 >   
 >
 > 
 
---------------A4A916FD255A3B27FC9DA717
+--------------2B95AEF782DE5B5ACD4FDBD8
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -136,43 +138,45 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/29/20 1:18 PM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200629171853.18608-5-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.9.0:
+    <blockquote type="cite" cite="mid:20200629171853.18608-6-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.1:
 
-- Add type annotation stubs for the following modules:
-  py.error
-  py.iniconfig
-  py.path (not including SVN paths)
-  py.io
-  py.xml
+- Drop support for Python 3.3.
+- Drop support for Python 3.4.
+- Deprecate the html5lib sanitizer (html5lib.serialize(sanitize=True)
+  and html5lib.filters.sanitizer). We recommend users migrate to
+  Bleach <a class="moz-txt-link-rfc2396E" href="https://github.com/mozilla/bleach">&lt;https://github.com/mozilla/bleach&gt;</a>.
+- Try to import from collections.abc to remove DeprecationWarning
+  and ensure html5lib keeps working in future Python versions.
+- Drop optional datrie dependency.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200629171853.18608-5-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200629171853.18608-6-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-py_1.8.2.bb =&gt; python3-py_1.9.0.bb}       | 4 &#43;&#43;--
+ .../{python3-html5lib_1.0.1.bb =&gt; python3-html5lib_1.1.bb}    | 4 &#43;&#43;--
  1 file changed, 2 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-py_1.8.2.bb =&gt; python3-py_1.9.0.bb} (72%)
+ rename meta-python/recipes-devtools/python/{python3-html5lib_1.0.1.bb =&gt; python3-html5lib_1.1.bb} (70%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-py_1.8.2.bb b/meta-python/recipes-devtools/python/python3-py_1.9.0.bb
-similarity index 72%
-rename from meta-python/recipes-devtools/python/python3-py_1.8.2.bb
-rename to meta-python/recipes-devtools/python/python3-py_1.9.0.bb
-index aea737853..794ec2a87 100644
---- a/meta-python/recipes-devtools/python/python3-py_1.8.2.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-py_1.9.0.bb
-@@ -3,8 &#43;3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://py.readthedocs.io/">&quot;http://py.readthedocs.io/&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-html5lib_1.0.1.bb b/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb
+similarity index 70%
+rename from meta-python/recipes-devtools/python/python3-html5lib_1.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-html5lib_1.1.bb
+index 98ee56b2e..59f3cc945 100644
+--- a/meta-python/recipes-devtools/python/python3-html5lib_1.0.1.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb
+@@ -2,8 &#43;2,8 @@ SUMMARY = &quot;HTML parser based on the WHATWG HTML specifcation&quot;
  LICENSE = &quot;MIT&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=a6bb0320b04a0a503f12f69fea479de9">&quot;file://LICENSE;md5=a6bb0320b04a0a503f12f69fea479de9&quot;</a>
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=1ba5ada9e6fead1fdc32f43c9f10ba7c">&quot;file://LICENSE;md5=1ba5ada9e6fead1fdc32f43c9f10ba7c&quot;</a>
  
--SRC_URI[md5sum] = &quot;baa54e458875d68031c422abb2e47a5c&quot;
--SRC_URI[sha256sum] = &quot;f3b3a4c36512a4c4f024041ab51866f11761cc169670204b235f6b20523d4e6b&quot;
-&#43;SRC_URI[md5sum] = &quot;b80db4e61eef724f49feb4d20b649e62&quot;
-&#43;SRC_URI[sha256sum] = &quot;9ca6883ce56b4e8da7e79ac18787889fa5206c79dcc67fb065376cd2fe03f342&quot;
+-SRC_URI[md5sum] = &quot;942a0688d6bdf20d087c9805c40182ad&quot;
+-SRC_URI[sha256sum] = &quot;66cb0dcfdbbc4f9c3ba1a63fdb511ffdbd4f513b2b6d81b80cd26ce6b3fb3736&quot;
+&#43;SRC_URI[md5sum] = &quot;6748742e2ec4cb99287a6bc82bcfe2b0&quot;
+&#43;SRC_URI[sha256sum] = &quot;b2e5b40261e20f354d198eae92afc10d750afb487ed5e50f9c4eaf07c184146f&quot;
  
- DEPENDS &#43;= &quot;${PYTHON_PN}-setuptools-scm-native&quot;
+ inherit pypi setuptools3
  
 </pre>
       <br>
@@ -183,4 +187,4 @@ index aea737853..794ec2a87 100644
   </body>
 </html>
 
---------------A4A916FD255A3B27FC9DA717--
+--------------2B95AEF782DE5B5ACD4FDBD8--
