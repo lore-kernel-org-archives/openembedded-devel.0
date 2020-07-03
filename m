@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.6840.1593768641653350387
+ by mx.groups.io with SMTP id smtpd.web10.6910.1593768642163165070
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Jul 2020 02:30:42 -0700
 Authentication-Results: mx.groups.io;
@@ -8,17 +8,18 @@ Received: from [78.130.197.211] (port=56428 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jrI1n-0007av-FK; Fri, 03 Jul 2020 12:30:40 +0300
+	id 1jrI1o-0007av-Db; Fri, 03 Jul 2020 12:30:40 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 04/10] python3-regex: Upgrade 2020.1.8 -> 2020.6.8
-Date: Fri,  3 Jul 2020 12:30:14 +0300
-Message-Id: <20200703093020.3514-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 05/10] python3-python-vlc: Upgrade 3.0.9113 -> 3.0.10114
+Date: Fri,  3 Jul 2020 12:30:15 +0300
+Message-Id: <20200703093020.3514-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200703093020.3514-1-leon.anavi@konsulko.com>
 References: <20200703093020.3514-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
+MIME-Version: 1.0
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -29,59 +30,38 @@ X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 2020.6.8:
+Upgrade to release 3.0.10114:
 
-- Updated to Unicode 13.0.0.
-- Improved performance of string sets.
-
-Fix SUMMARY and HOMEPAGE. Use exact line from PKG-INFO to
-determine the license and LIC_FILES_CHKSUM. The license remain
-the same.
-
+- Generate bindings against 3.0.10
+- Fix return types for callbacks
+- Example usage of media callbacks
+￼
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python3-regex_2020.1.8.bb                 | 12 ------------
- .../python/python3-regex_2020.6.8.bb                 | 11 +++++++++++
- 2 files changed, 11 insertions(+), 12 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-regex_2020.1.8.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-regex_2020.6.8.bb
+ ...python-vlc_3.0.9113.bb => python3-python-vlc_3.0.10114.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-python-vlc_3.0.9113.bb => python3-python-vlc_3.0.10114.bb} (65%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-regex_2020.1.8.bb b/meta-python/recipes-devtools/python/python3-regex_2020.1.8.bb
-deleted file mode 100644
-index 6bdc03995a..0000000000
---- a/meta-python/recipes-devtools/python/python3-regex_2020.1.8.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--SUMMARY = ""
--HOMEPAGE = "http://pythonhosted.org/regex"
--LICENSE = "PSF"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=3d9edb84b293ab5a9ed5bcaf1b769ab6"
--
--inherit pypi setuptools3
--
--SRC_URI[md5sum] = "73abc3d7e902e94b4281fd2652f5a94f"
--SRC_URI[sha256sum] = "d0f424328f9822b0323b3b6f2e4b9c90960b24743d220763c7f07071e0778351"
--
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-regex_2020.6.8.bb b/meta-python/recipes-devtools/python/python3-regex_2020.6.8.bb
-new file mode 100644
-index 0000000000..d09f638400
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-regex_2020.6.8.bb
-@@ -0,0 +1,11 @@
-+SUMMARY = "Alternative regular expression module, to replace re."
-+HOMEPAGE = "https://bitbucket.org/mrabarnett/mrab-regex/src"
-+LICENSE = "PSF"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=ee7987010dadc17745d623f406b500ec"
-+
-+inherit pypi setuptools3
-+
-+SRC_URI[md5sum] = "a991f73b0ccfe8f6e9a99bd1bc9071b1"
-+SRC_URI[sha256sum] = "e9b64e609d37438f7d6e68c2546d2cb8062f3adb27e6336bc129b51be20773ac"
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.9113.bb b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb
+similarity index 65%
+rename from meta-python/recipes-devtools/python/python3-python-vlc_3.0.9113.bb
+rename to meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb
+index 6d53e33812..7f8affb4f3 100644
+--- a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.9113.bb
++++ b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "wiki.videolan.org/PythonBinding"
+ LICENSE = "LGPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ 
+-SRC_URI[md5sum] = "a3a7d64bb4c6c1cd5569173ceef9cb67"
+-SRC_URI[sha256sum] = "5422b79d347b6419008ee91cfd9663edc37eaf2a0bd8fb9017d4cc2e5f249dda"
++SRC_URI[md5sum] = "17dba9a55903cdcae10814080fcadb8f"
++SRC_URI[sha256sum] = "c1a8a295bea8277fa3d9a07dcdf873fe18c5f11a0e4d1f618df47c316fe0003b"
+ 
+ inherit pypi setuptools3
 -- 
 2.17.1
 
