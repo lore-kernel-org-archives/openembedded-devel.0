@@ -1,17 +1,17 @@
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.71])
- by mx.groups.io with SMTP id smtpd.web10.10889.1593785100745740789
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.88])
+ by mx.groups.io with SMTP id smtpd.web11.10804.1593785146202865241
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Jul 2020 07:05:01 -0700
+ Fri, 03 Jul 2020 07:05:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Qwm4GHJs;
- spf=pass (domain: windriver.com, ip: 40.107.92.71, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=b0Lr3j49;
+ spf=pass (domain: windriver.com, ip: 40.107.92.88, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SflyKzvz2aUmTOVDMkb6Mc/doo+7Pezw93Z0bg/zxcXn6ly0EFktmjvJ4CwazGgiJdYnYv4MFcLnE9XOgmpTCFIVsiq2vSV8u7iDqNu2uRu8JIgh/xDIA0hjWrc+vxJN51NsGsiK1jU4wLnGN/3Id4oyiQM/HceE4/is4hknrgoV7fRZz6e+6ZZ338qZqt2nC09f2ebwC2KQp0Yz+qtizNtN4rpBljjPNA8mxaE6wjIjOqHtgSdSC2y2myXSNUSXcyV4MoWodeCh0Zh44diEB9wIXKDg7Gnn10D0n6YhGzGmaEu8poX/SMVkXnsESBkb9fMGEqVbCi2HO7xYzw3uaQ==
+ b=GpJrI5tYR5bnEDByQsZX4iZ6vrxxQHsFae28NJIDy7xpzBJe8TXxcgBQ1C4BFmKjTCSTkTEtLAiPoRlkHfAKcE73nAjx1jNIWJEmPkswOLxhXwE4GzQgijVczQ0NPrrHXjb1setEfQuef23Y3zQ/FME8AGK3qtxzyzj+9ytoc9JPcM9ZvkZSKuvCm0qIe32Q41EOJsEhJ0bMA1TPBY909bVePeF35chT4OnFnT0taDgT8egkl9LDRBfXp1sBJffN50DWy55UMtqp5EkuX1FGg+vYyGZwNHmP9e2HxkJuaZa+y5ztBYnLmsYuqYVSu1FNiewl3/2PQEy3s0SmL8zttg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Dsu2mAPa4XP0o8finHg2wHAc0LlLVDHyfnOqGqGJKqM=;
- b=ICOkWogqhr1c8iBgLyALxHBWuSTgBrcJ2JFJuIFaTGBBxvwJsDzPGt6vc0UDrPLK2f4V1cwsDXF/gX16tVAHstryuibpT/sTkD+5hvgUCvRoH6K+JVLWpH+gp1Z3dhS2dOtZUNpeGstqjdKRFQisEIFlIDvjYzLKTPnltweK+XhyNzYJUBBFAJQGOsTRfasjmxmU5vyvKgQeaIX7Sga8HAHlpf6R2wuN4LZW2y2c2uwZFapGs5fqUtBTE+p/EDwBtxSzqToODuh/7xBJNHxUpneSnK/cAHWFdnGF0SejD8eJAg2NzQa/+iInNdfHxBjUWpWu4bYWPEpcHennQaxbCw==
+ bh=/kXRCHTJMc1EdP0whqjbEEDVBAcZovEXB+8+M4nW8zE=;
+ b=m7I+qALNr7R1iNc9P4zHJbQy8QkTNXf+c9RkLP4DUFYgN85HS+n4xhJYpbgz0es3iXSmkRvXBTU3SL5bEm73FhYEb35tW1OKQUGvjfGYEveJuhTcCVvuOWpRkfrx0/O2J5eoAIxQHoJtFV0iFNCA7AILP6ZtpPe1rssx6Ls9DZNVACvH/vp23Bazj+/bu4dJtOdAUqlg0/Gnmqim21WO+GM+fmggtJPCw1WjO9kh7AguGiCQP20JNDOImPlZVQMtNxQai33YD5Pq6NfCkF8NGMdZF0AymbW7PuRTjnFfLgUPCfa3sBTp1o/Y0RIDUTtQwRUUxLNvMkDJYJztkfpyRQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,125 +19,109 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Dsu2mAPa4XP0o8finHg2wHAc0LlLVDHyfnOqGqGJKqM=;
- b=Qwm4GHJsMt2coMNOBbJEFLuUD5hg2H8WfNU5lN/1HYen2PkwcQoHWEhmod+rujDq9MbwnfDT7ctu2tOf6/TAjG2NGoTnpNI2/VUQb64dZwt0llF7lQVVcO+zQWi2Txi4oTdWnMKBbm4W/++lf5e8th+swyej7sn+0U2d8B8Xjvc=
+ bh=/kXRCHTJMc1EdP0whqjbEEDVBAcZovEXB+8+M4nW8zE=;
+ b=b0Lr3j49hHaxzHrpyXTYZNjlX6Qk4YiMM2rj/5Fhv3WuPquUBwFzxFRDJxn3ZHeEA0MTx73ElLNo30S0h8uMrRqQTkGwTdXanNo48Nl8yVuslLWeQpYXD5LKOflNIhj/PGAD7OjosyDTGOB2SXxfSY0QkBIEfmwN4OEmcF+cdVw=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29) by
  DM6PR11MB3628.namprd11.prod.outlook.com (2603:10b6:5:144::25) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3153.28; Fri, 3 Jul 2020 14:04:59 +0000
+ 15.20.3153.28; Fri, 3 Jul 2020 14:05:45 +0000
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2]) by DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2%5]) with mapi id 15.20.3131.036; Fri, 3 Jul 2020
- 14:04:59 +0000
-Subject: Re: [oe] [meta-python][PATCH 1/7] python3-cassandra-driver: Upgrade 3.14.0 -> 3.24.0
+ 14:05:45 +0000
+Subject: Re: [oe] [meta-python][PATCH 2/7] python3-configargparse: Upgrade 0.15.1 -> 1.2.3
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200630171119.25540-1-leon.anavi@konsulko.com>
+ <20200630171119.25540-2-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <30b0b0df-b460-de4f-3a69-a339a46a2944@windriver.com>
-Date: Fri, 3 Jul 2020 10:04:57 -0400
+Message-ID: <81a2cc95-8d0d-ab12-6d0f-6934528a6333@windriver.com>
+Date: Fri, 3 Jul 2020 10:05:43 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200630171119.25540-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTOPR0101CA0032.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:15::45) To DM5PR11MB0011.namprd11.prod.outlook.com
+In-Reply-To: <20200630171119.25540-2-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTOPR0101CA0007.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:15::20) To DM5PR11MB0011.namprd11.prod.outlook.com
  (2603:10b6:4:6b::29)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YTOPR0101CA0032.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::45) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.21 via Frontend Transport; Fri, 3 Jul 2020 14:04:58 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YTOPR0101CA0007.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.23 via Frontend Transport; Fri, 3 Jul 2020 14:05:44 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: e06f23ce-4bab-432d-f179-08d81f5a1249
+X-MS-Office365-Filtering-Correlation-Id: f356ffc9-d9da-4f49-24bd-08d81f5a2daa
 X-MS-TrafficTypeDiagnostic: DM6PR11MB3628:
 X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB3628F0486E19D4E6A54E07B59F6A0@DM6PR11MB3628.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:3968;
+	<DM6PR11MB36282A2E5F7E562C7E1FC70C9F6A0@DM6PR11MB3628.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:741;
 X-Forefront-PRVS: 045315E1EE
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	Gz+l98zDmLl4XqE7uxgb1AObKRq3KNk0XPj6r6SOYjrm/8ixw7zmHV7GKqK+5j11dilsLBtSuq/uLKwTm/3vQNHGqwLakCtNRC3pVo/xuXvovuLttrNs+GJeHcusSsCaDNvxp7n27G1eD55mU5lEJWqPNdyhRumA8J+380t0n7Ef/SLo0NrA1lfvW8tULPfRKrEkXh0JzCvtAOyN6rtu6vsIpC2PkVtvmGhYCftpMmL0bMyw7XZJ76i6XGhlgwXK76YDo6pYhYRwMcap5ShHmyBks3i9Mwb/9OYlfbGimM6qDQc6LiccOUZmEoNDLB8ERDtTadE5VuttTYb818vmLueMs+sa+vNYvwI8noZA4unFOa44DK3m2nkgYMgy2VbzH2oY0m0cvdMKp1Xasfv56dDzm4q/rRrCn3lvgg2yoC18yR6XHaUNadXJKIiQd4ZpIzUJXmJ7LWLZDL6zL3U7xQ==
+	UUxEqQbY1joz98oVmXVRUTBobFkR8TeSipWy13UVX9E/HFiPM8vXqHATF5uisATndt/VcM5HsqZFDpjRZetnU3vtGT3nNJ/rgZnTuCCDYgzpcyfJ6Zk0OA6RaZdgVK0Q3QVHUKeHJGN+7UK/ziKTaGOcTiSVxNz+lHk7La6/0BlSFEd9TjbgKwJocAi9ofYZrYTBJ5eC8ECSv9WxZQPF19SnJlL9PPSL/xcfXYEB3/L+Vosb2VZSWx9T6Vv4OXanQBxWMyX7QOcu4Cu/Q6JV2q1zIQjzGFXqIp/Jk8ELRAgTg3KT/Pvbde9uWyVli1owVLn+bzBRqdGjKPxiiR+pgeezZa0km+BAY0JKC6Bl2Ui5nKNOrlZB8wEtFfxJyQBry/endHF2lSet9EsnO9WjmNsQVNbukBIJ3qy7n1QBNnP3MOycQszTilFBe9OxYqTfGjVowPD8AbzwHl51jdlGUA==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(39850400004)(396003)(136003)(366004)(376002)(346002)(186003)(2906002)(966005)(52116002)(86362001)(16526019)(5660300002)(31686004)(316002)(66946007)(2616005)(66556008)(956004)(478600001)(66476007)(36756003)(26005)(8676002)(44832011)(53546011)(6486002)(16576012)(8936002)(31696002)(83380400001)(33964004)(166002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	Bw1kygyqLCEzGSS9luG9x8shZh39J5lQQw88zkd60tBnML/jStGQiAN7nK8SBpkQMX0CWvxmTnMDUGuZCEoyjjLk+JSJ5Pli5GVq7vh0BaZ3qazocvjMUEXvaqZAT8w2tKhCM26wulmG/dhRfr9xqLl1lj9hihc4cWiEdfki5K426nzkE0uTRyuAKvlSyigoYGU4gB/MtbdjJZ3R8KgChT6t9BPas12+pTXNPVtiZSbGozwickt2iHsC/bluEeFVLWvvYkAtRawIPsgWmSnFJCMNomP4EQzSs3G5n7nhw9GbefgsgloW+HT0jsgCB4y+vQykEv6zKHOiBdCEOtIqhKhqSubNSJ+FCCc4XFc4OrfOGgw90zQPZPYboVLj5xY8QVirXPYfupGuvKZT5VChXnlbt9BO0ghaalW9jgeFxbOVVi0To9Hx6pwcS3GArizomlD5qvsqdGTibvroHjZU/5DFNsn1V13iP7AY91aOJLzToxMP1EB113NUTku/iGFY
+	BewsSZ39s3CE7LIBG58jxioXDwVBGdCRd+7UJbVxDhY1ji06v8uLAhRm+ooNwV/Y9dxFLzDphEkePJnDFYB+pDWH/C+jqEsp4FSXzbSM0ZxL2Q0fNAp7sr0fUpHjMPymcm/usoHHvX81HWiJ/MNrkQZkwAYNiat6sfngAUpA6OScBk8zjw+GHKMTKsvnWR5hwhnHrcAcCW9S7gu3Q692lCotxi28/tEAmsO9HZijK/IUJNwgjXn7GJXctC0KZfNP1zZHKzsT2DAkYsGf1wAEGLy9AdnuOGzfnnNg37aTN8f3oR+WjS6liq7RN/8apz04S7eeeD+MnvU8JT+1MS+u3yHNhrKFDMiJVCU55jvOC+3Y7BVeto2gn35VA7MK6vN4cyP69pFHAj4xm1EE/+eymu6E0Iw0uhHu3FdiOzEk984A0a74I0LQ3rKOmNANEpoht+/CZ5PSpbwv3rGzPW2W0c7zYgBa1mr62LdV0E6ugb92vr5YP93rGXXmv+q9yl2U
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e06f23ce-4bab-432d-f179-08d81f5a1249
+X-MS-Exchange-CrossTenant-Network-Message-Id: f356ffc9-d9da-4f49-24bd-08d81f5a2daa
 X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB0011.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2020 14:04:58.9597
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2020 14:05:44.9026
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cIyfnJJH7jMbFKE1/5y5PCKP2oWSTbSF6S4derz/85ExSa2FlwmFd9aXxTYuXgtLwhM21uA0fLmOafwRl4x+xD9U9r8hhzDfQ6nzCegqNMk=
+X-MS-Exchange-CrossTenant-UserPrincipalName: xLe0VyQEu/ozOS6IsryvP+56RzJjyLS7d5vCNu4sQ6aQip2K+eW1EMySYmeTnm9H//MOO4tSu4vqcLY5rPXfapaDVZ3XU3PuPUll2K0B0+Y=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB3628
 Content-Type: multipart/alternative;
- boundary="------------F6F7AE8AB4725EFA6E59C9CF"
+ boundary="------------1B70E9946B785D07A226F05F"
 Content-Language: en-US
 
---------------F6F7AE8AB4725EFA6E59C9CF
+--------------1B70E9946B785D07A226F05F
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 6/30/20 1:11 PM, Leon Anavi wrote:
-> Upgrade to release 3.24.0:
+> Upgrade to release 1.2.3:
 >
-> Features
-> - Make geomet an optional dependency at runtime (PYTHON-1237)
-> - Add use_default_tempdir cloud config options (PYTHON-1245)
-> - Tcp flow control for libevreactor (PYTHON-1248)
->
-> Bug Fixes
-> - Unable to connect to a cloud cluster using Ubuntu 20.04
->    (PYTHON-1238)
-> - PlainTextAuthProvider fails with unicode chars and Python3
->    (PYTHON-1241)
-> - [GRAPH] Graph execution profiles consistency level are not set
->    to LOCAL_QUORUM with a cloud cluster (PYTHON-1240)
-> - [GRAPH] Can't write data in a Boolean field using the Fluent API
->    (PYTHON-1239)
-> - [GRAPH] Fix elementMap() result deserialization (PYTHON-1233)
->
-> Others
-> - Bump geomet dependency version to 0.2 (PYTHON-1243)
-> - Bump gremlinpython dependency version to 3.4.6 (PYTHON-1212)
-> - Improve fluent graph documentation for core graphs (PYTHON-1244)
+> - Fix bug in accepts_list_and_has_nargs section.
+> - Allow use of nargs with action=append
+> - Add support for python's Configparser config file format
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...ra-driver_3.14.0.bb => python3-cassandra-driver_3.24.0.bb} | 4 ++--
+>   ...nfigargparse_0.15.1.bb => python3-configargparse_1.2.3.bb} | 4 ++--
 >   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-cassandra-driver_3.14.0.bb => python3-cassandra-driver_3.24.0.bb} (85%)
+>   rename meta-python/recipes-devtools/python/{python3-configargparse_0.15.1.bb => python3-configargparse_1.2.3.bb} (78%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.14.0.bb b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.24.0.bb
-> similarity index 85%
-> rename from meta-python/recipes-devtools/python/python3-cassandra-driver_3.14.0.bb
-> rename to meta-python/recipes-devtools/python/python3-cassandra-driver_3.24.0.bb
-> index 768e557b9..562829028 100644
-> --- a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.14.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.24.0.bb
-> @@ -8,8 +8,8 @@ LICENSE = "Apache-2.0"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
->   SRCNAME = "cassandra-driver"
+> diff --git a/meta-python/recipes-devtools/python/python3-configargparse_0.15.1.bb b/meta-python/recipes-devtools/python/python3-configargparse_1.2.3.bb
+> similarity index 78%
+> rename from meta-python/recipes-devtools/python/python3-configargparse_0.15.1.bb
+> rename to meta-python/recipes-devtools/python/python3-configargparse_1.2.3.bb
+> index 0797898a9..54841c243 100644
+> --- a/meta-python/recipes-devtools/python/python3-configargparse_0.15.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-configargparse_1.2.3.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/bw2/ConfigArgParse"
+>   LICENSE = "MIT"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=da746463714cc35999ed9a42339f2943"
 >   
-> -SRC_URI[md5sum] = "c5bed026bf48c821424c1f6296193908"
-> -SRC_URI[sha256sum] = "b65218e2582277f5b77d1436e420db8616f63e3437a9e839cdcd7172d760e861"
-> +SRC_URI[md5sum] = "c31bc29989d8b0c7524a38b0e38c8bfb"
-> +SRC_URI[sha256sum] = "83ec8d9a5827ee44bb1c0601a63696a8a9086beaf0151c8255556299246081bd"
+> -SRC_URI[md5sum] = "aba15b7973b7a70bea86fd69289f8fe3"
+> -SRC_URI[sha256sum] = "baaf0fd2c1c108d007f402dab5481ac5f12d77d034825bf5a27f8224757bd0ac"
+> +SRC_URI[md5sum] = "8978866babc7ff0994f691ebe48b5aba"
+> +SRC_URI[sha256sum] = "edd17be986d5c1ba2e307150b8e5f5107aba125f3574dddd02c85d5cdcfd37dc"
 >   
->   DISTUTILS_BUILD_ARGS += " \
->       --no-libev \
+>   PYPI_PACKAGE = "ConfigArgParse"
+>   
 >
 > 
 
---------------F6F7AE8AB4725EFA6E59C9CF
+--------------1B70E9946B785D07A226F05F
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -149,58 +133,41 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/30/20 1:11 PM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200630171119.25540-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 3.24.0:
+    <blockquote type="cite" cite="mid:20200630171119.25540-2-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.2.3:
 
-Features
-- Make geomet an optional dependency at runtime (PYTHON-1237)
-- Add use_default_tempdir cloud config options (PYTHON-1245)
-- Tcp flow control for libevreactor (PYTHON-1248)
-
-Bug Fixes
-- Unable to connect to a cloud cluster using Ubuntu 20.04
-  (PYTHON-1238)
-- PlainTextAuthProvider fails with unicode chars and Python3
-  (PYTHON-1241)
-- [GRAPH] Graph execution profiles consistency level are not set
-  to LOCAL_QUORUM with a cloud cluster (PYTHON-1240)
-- [GRAPH] Can't write data in a Boolean field using the Fluent API
-  (PYTHON-1239)
-- [GRAPH] Fix elementMap() result deserialization (PYTHON-1233)
-
-Others
-- Bump geomet dependency version to 0.2 (PYTHON-1243)
-- Bump gremlinpython dependency version to 3.4.6 (PYTHON-1212)
-- Improve fluent graph documentation for core graphs (PYTHON-1244)
+- Fix bug in accepts_list_and_has_nargs section.
+- Allow use of nargs with action=append
+- Add support for python's Configparser config file format
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200630171119.25540-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200630171119.25540-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...ra-driver_3.14.0.bb =&gt; python3-cassandra-driver_3.24.0.bb} | 4 &#43;&#43;--
+ ...nfigargparse_0.15.1.bb =&gt; python3-configargparse_1.2.3.bb} | 4 &#43;&#43;--
  1 file changed, 2 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cassandra-driver_3.14.0.bb =&gt; python3-cassandra-driver_3.24.0.bb} (85%)
+ rename meta-python/recipes-devtools/python/{python3-configargparse_0.15.1.bb =&gt; python3-configargparse_1.2.3.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.14.0.bb b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.24.0.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-cassandra-driver_3.14.0.bb
-rename to meta-python/recipes-devtools/python/python3-cassandra-driver_3.24.0.bb
-index 768e557b9..562829028 100644
---- a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.14.0.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.24.0.bb
-@@ -8,8 &#43;8,8 @@ LICENSE = &quot;Apache-2.0&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93">&quot;file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93&quot;</a>
- SRCNAME = &quot;cassandra-driver&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-configargparse_0.15.1.bb b/meta-python/recipes-devtools/python/python3-configargparse_1.2.3.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-configargparse_0.15.1.bb
+rename to meta-python/recipes-devtools/python/python3-configargparse_1.2.3.bb
+index 0797898a9..54841c243 100644
+--- a/meta-python/recipes-devtools/python/python3-configargparse_0.15.1.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-configargparse_1.2.3.bb
+@@ -3,8 &#43;3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/bw2/ConfigArgParse">&quot;https://github.com/bw2/ConfigArgParse&quot;</a>
+ LICENSE = &quot;MIT&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=da746463714cc35999ed9a42339f2943">&quot;file://LICENSE;md5=da746463714cc35999ed9a42339f2943&quot;</a>
  
--SRC_URI[md5sum] = &quot;c5bed026bf48c821424c1f6296193908&quot;
--SRC_URI[sha256sum] = &quot;b65218e2582277f5b77d1436e420db8616f63e3437a9e839cdcd7172d760e861&quot;
-&#43;SRC_URI[md5sum] = &quot;c31bc29989d8b0c7524a38b0e38c8bfb&quot;
-&#43;SRC_URI[sha256sum] = &quot;83ec8d9a5827ee44bb1c0601a63696a8a9086beaf0151c8255556299246081bd&quot;
+-SRC_URI[md5sum] = &quot;aba15b7973b7a70bea86fd69289f8fe3&quot;
+-SRC_URI[sha256sum] = &quot;baaf0fd2c1c108d007f402dab5481ac5f12d77d034825bf5a27f8224757bd0ac&quot;
+&#43;SRC_URI[md5sum] = &quot;8978866babc7ff0994f691ebe48b5aba&quot;
+&#43;SRC_URI[sha256sum] = &quot;edd17be986d5c1ba2e307150b8e5f5107aba125f3574dddd02c85d5cdcfd37dc&quot;
  
- DISTUTILS_BUILD_ARGS &#43;= &quot; \
-     --no-libev \
+ PYPI_PACKAGE = &quot;ConfigArgParse&quot;
+ 
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -210,4 +177,4 @@ index 768e557b9..562829028 100644
   </body>
 </html>
 
---------------F6F7AE8AB4725EFA6E59C9CF--
+--------------1B70E9946B785D07A226F05F--
