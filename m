@@ -1,68 +1,66 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.3219.1593746373949549502
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.6838.1593768639441517989
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Jul 2020 20:19:35 -0700
+ Fri, 03 Jul 2020 02:30:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.75,306,1589212800"; 
-   d="scan'208";a="95745894"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 03 Jul 2020 11:19:28 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 85D174CE4BD0
-	for <openembedded-devel@lists.openembedded.org>; Fri,  3 Jul 2020 11:19:24 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 3 Jul 2020 11:19:25 +0800
-From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][PATCH] upm:Fix build error when enable multilib.
-Date: Fri, 3 Jul 2020 11:19:18 +0800
-Message-ID: <1593746358-124780-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
-X-yoursite-MailScanner-ID: 85D174CE4BD0.A8DEB
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=56428 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jrI1j-0007av-BA; Fri, 03 Jul 2020 12:30:36 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 01/10] python3-importlib-metadata: Upgrade 1.6.1 -> 1.7.0
+Date: Fri,  3 Jul 2020 12:30:11 +0300
+Message-Id: <20200703093020.3514-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.2
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-ERROR: upm-2.0.0+gitAUTOINC+5cf20df96c-r0 do_package: QA Issue: upm:
-Files/directories were installed but not shipped in any package:
-  /usr/lib/python3.8/site-packages/upm/pyupm_adc121c021.py
-  /usr/lib/python3.8/site-packages/upm/pyupm_hmc5883l.py
-  /usr/lib/python3.8/site-packages/upm/_pyupm_mma8x5x.so
-  /usr/lib/python3.8/site-packages/upm/_pyupm_m24lr64e.so
-  /usr/lib/python3.8/site-packages/upm/pyupm_tca9548a.py
-  /usr/lib/python3.8/site-packages/upm/pyupm_mb704x.py
-  /usr/lib/python3.8/site-packages/upm/_pyupm_ehr.so
-  ......
+Upgrade to release 1.7.0:
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+- PathNotFoundError now has a custom __str__ mentioning
+  "package metadata" being missing to help guide users to the cause
+   when the package is installed but no metadata is present.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-extended/upm/upm_git.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ ...etadata_1.6.1.bb => python3-importlib-metadata_1.7.0.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-importlib-metadata_1.6.1.bb => python3-importlib-metadata_1.7.0.bb} (64%)
 
-diff --git a/meta-oe/recipes-extended/upm/upm_git.bb b/meta-oe/recipes-extended/upm/upm_git.bb
-index 5b3585c14..6a7611f38 100644
---- a/meta-oe/recipes-extended/upm/upm_git.bb
-+++ b/meta-oe/recipes-extended/upm/upm_git.bb
-@@ -46,6 +46,10 @@ PACKAGECONFIG ??= "${@bb.utils.contains('PACKAGES', 'node-${PN}', 'nodejs', '',
- PACKAGECONFIG[python] = "-DBUILDSWIGPYTHON=ON -DPYTHON_LIBRARY=${STAGING_LIBDIR}/lib${PYTHON_DIR}${PYTHON_ABI}.so -DPYTHON_INCLUDE_DIR=${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI}, -DBUILDSWIGPYTHON=OFF, swig-native ${PYTHON_PN},"
- PACKAGECONFIG[nodejs] = "-DBUILDSWIGNODE=ON, -DBUILDSWIGNODE=OFF, swig-native nodejs-native,"
+diff --git a/meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb b/meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
+similarity index 64%
+rename from meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb
+rename to meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
+index c46df8fcdc..de0fc78368 100644
+--- a/meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb
++++ b/meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
+@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e88ae122f3925d8bde8319060f2ddb8e"
  
-+do_configure_prepend() {
-+    sed -i s:\"lib/${_packages_path}:\"${baselib}/${_packages_path}:g ${S}/cmake/modules/OpenCVDetectPython.cmake
-+}
-+
- FILES_${PYTHON_PN}-${PN} = "${PYTHON_SITEPACKAGES_DIR}"
- RDEPENDS_${PYTHON_PN}-${PN} += "${PYTHON_PN}"
+ inherit pypi setuptools3
  
+-SRC_URI = "https://files.pythonhosted.org/packages/aa/9a/8483b77e2decd95963d7e34bc9bc91a26e71fd89b57d8cf978ca24747c7f/importlib_metadata-1.6.1.tar.gz"
++SRC_URI = "https://files.pythonhosted.org/packages/e2/ae/0b037584024c1557e537d25482c306cf6327b5a09b6c4b893579292c1c38/importlib_metadata-1.7.0.tar.gz"
+ S = "${WORKDIR}/importlib_metadata-${PV}"
+-SRC_URI[md5sum] = "38f795ac13abc923acfd3da06263eb8f"
+-SRC_URI[sha256sum] = "0505dd08068cfec00f53a74a0ad927676d7757da81b7436a6eefe4c7cf75c545"
++SRC_URI[md5sum] = "4505ea85600cca1e693a4f8f5dd27ba8"
++SRC_URI[sha256sum] = "90bb658cdbbf6d1735b6341ce708fc7024a3e14e99ffdc5783edea9f9b077f83"
+ 
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+ RDEPENDS_${PN} += "${PYTHON_PN}-zipp ${PYTHON_PN}-pathlib2"
 -- 
 2.17.1
-
-
 
