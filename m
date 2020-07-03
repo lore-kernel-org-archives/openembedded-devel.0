@@ -1,17 +1,17 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.58])
- by mx.groups.io with SMTP id smtpd.web11.10723.1593784927841200393
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.83])
+ by mx.groups.io with SMTP id smtpd.web11.10729.1593784948858681632
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Jul 2020 07:02:08 -0700
+ Fri, 03 Jul 2020 07:02:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=bFPpDrqC;
- spf=pass (domain: windriver.com, ip: 40.107.237.58, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=IahVG9jP;
+ spf=pass (domain: windriver.com, ip: 40.107.237.83, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=iZ1IVnGIKM4dUerlt2Y+zPaG3ycHojZG7WOR5Otj4FrfcGGjJLL6s1nG1jkRy+pdnzvfky/vPGSIpIJfNLGxKl2Su2OmwdwL+BKxB1Wmjcq9V7aflQmCb2FxA5u5bPse3x9srQFVe3azeN3dtamb3iWSnJcQAaDOhD6EobQO591+c9C1usUDc26Rl1BmH/aQ15ydT+eW+3sykyzbQMMrQUgHoAkv3I0nvTnjvf3kQSy4vCHLrtE1xRHSmpSo0UF0EKPzDZu1m5CLjtRCecSffy20YBNVFf1jCQWCUA6FQQKWFOlJApF8yVRjr21c0nJwuxydo+VqG3aeQDpYcvSLUg==
+ b=nbYdS197Pmg925Jj8x7NbOKgZ/1tlA/PtTIzoRJ+ij/AIGSIWAlJ/szsqKP2w1VG11MgyAiuXbW0kxJe4OuiPmuighNmLUxI8zPr/RXD7P42Rgd0GTiVZEkaCKaG8B3tfj4aofDsJ7zZ/yNkIBjC3VnQPecMrZX219bbAdMtpLTIYBwngfmMymgfx41uhwzHL89zAi2lqqv4LltBuzjshTmSBB4aaXVIPD51JiGuXgsVWhek1t3Z24XVqACAcmNpAt0mwHgACZ2ozLyfJl7PgGzJLkRy6xFwmtm8CdzIS6D+kLanE1L+/ET9j1FNzrcZDprD9qyL1MP9ifEbS5Ei2g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YyiWdXY9IU428PRwEzvda93p3wiMxmvQgaCDzGDNLJY=;
- b=f93mxJ7gXJpdtY/B1oXLPj45mn9Jiyw0NMs13xsFvcEZhBrRdO3rNmZaTvP0M2UayEzGTHyFh/q9EOKhz8CrHTPQz2DAlc92pU06Cxlp75hOOG/umB5Z0sVOUmggDi2HuDjdjjFWxfHeAI+SZQCjFlFblfRViyQH2b2H/+bXeqjTsKhevAvjm6qa6EXqfk4/nYIen0m16NY5QI2eO2uFzF1bkUILgl6wYKRKsxrbo4ZjnaydCvETPACQEVeB1DITc9FKVAxQRHcdpvE/sEl8jJUacdbfsgoC7o9UvHNGqA5pkMkq7xPDHXr2rrHAZJngAuMsBnP2GBmLb7CDhVmxkQ==
+ bh=PZ4UPD0omAvn1YkAAEipcLnokCJXRGdn+Pq7xXfTCkI=;
+ b=mEmY4Mx1A9d8c4d5fyFBb3KA3ixdoF27k/++3rArKwJqDQjWJXRfcqN2Qqt75n3xTqeruRH/Pj9iabZ3jdtvCmsdNjwfltqAtgda0KiiErWZrwZvJnDPB9DqIc48dxozXyyRFzxZ2oUFeE89BD5ZAUFwQ6/5UBhocxzzC0aM6ZO/Kvq/Zdb8BAcQMsHXFLGqxHcP+jFTTOmvjtKSaNFIjDU1v3KxQSivAu5d0ztyC6v3bvG23QfmA08E19nFJMTzwxOVXllqxgYlk40abe28HKOwSBcrc1ElsGi0X4V52kQA6CCepWl5k/E13onhWDOQ5scfAvVZ9Uxow9Lsjg3+0A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,112 +19,138 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YyiWdXY9IU428PRwEzvda93p3wiMxmvQgaCDzGDNLJY=;
- b=bFPpDrqCBuBX9D2fgMBP3VYPE/8nVlp/bFYEvYTdWcmZA8bf3pG/QwxZOfWnljlaThq5qgGD0STgYdIs/WvMFKY4GcE4mJE11oiojPL1b0LZbM8pA5UgqrpjzlEABC3OunG7b3me1yfy87uoqvaNOfy/ZUnxdqFsJzPbyVuf4aA=
+ bh=PZ4UPD0omAvn1YkAAEipcLnokCJXRGdn+Pq7xXfTCkI=;
+ b=IahVG9jPgmMM7JLxL/xDsoCcZDioo7Wu37yKDqGhT9H2CeJ43AHbv8eBhWhBDHcu+fygT5aiIxTnJrS5ZJkLfOpibD3A5I5g2PaZUdWq9Uv3qlSgZiobJV2gH8L73Scbtq+AUISSCufoLw4mcJIav/NgppiHRe/2qBTOfiufFAI=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29) by
  DM6PR11MB3627.namprd11.prod.outlook.com (2603:10b6:5:13b::11) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3131.23; Fri, 3 Jul 2020 14:02:05 +0000
+ 15.20.3131.23; Fri, 3 Jul 2020 14:02:27 +0000
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2]) by DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2%5]) with mapi id 15.20.3131.036; Fri, 3 Jul 2020
- 14:02:05 +0000
-Subject: Re: [oe] [meta-python][PATCH 1/7] python3-tqdm: Upgrade 4.43.0 -> 4.47.0
+ 14:02:27 +0000
+Subject: Re: [oe] [meta-python][PATCH 2/7] python3-pyflakes: Upgrade 2.1.1 -> 2.2.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200629171853.18608-1-leon.anavi@konsulko.com>
+ <20200629171853.18608-2-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <210f3543-80cd-d0bb-204e-9636ed29e8f9@windriver.com>
-Date: Fri, 3 Jul 2020 10:02:02 -0400
+Message-ID: <6a046d8f-b073-afa6-ec04-f9aab89344e4@windriver.com>
+Date: Fri, 3 Jul 2020 10:02:25 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200629171853.18608-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0134.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::13) To DM5PR11MB0011.namprd11.prod.outlook.com
+In-Reply-To: <20200629171853.18608-2-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0152.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2f::31) To DM5PR11MB0011.namprd11.prod.outlook.com
  (2603:10b6:4:6b::29)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0134.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::13) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.21 via Frontend Transport; Fri, 3 Jul 2020 14:02:04 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0152.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.21 via Frontend Transport; Fri, 3 Jul 2020 14:02:27 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 07aadd8a-5d5c-450f-3af1-08d81f59aa62
+X-MS-Office365-Filtering-Correlation-Id: ab83ebd3-8c93-44e7-19e5-08d81f59b804
 X-MS-TrafficTypeDiagnostic: DM6PR11MB3627:
 X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB362711941A6A116ECCB0EE799F6A0@DM6PR11MB3627.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:800;
+	<DM6PR11MB3627E6CF4EBD5EF29DE247469F6A0@DM6PR11MB3627.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1107;
 X-Forefront-PRVS: 045315E1EE
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	jz4Qfvw8Fqb/vmkDxItZBZkzANqs2Og6JfApGzz5It9c+0AGOM+Hf4Sydbmd0FWpKMjBhqMV51AlaADcoe16blftVOx8QzFPOYj0q7cTsMGMMLTIL5PtINJNfooaeGLjDG0h0RYoUc3GLTId6Nxr9WCVCF1T0pfm0oyHEEGVDHv8E3g+zaF8W9CgDfbdACPvmMwXRmoCMUyTCakD34i0nwvYVT8R5CO6sSbgNz8k5lN+DUdmoQnbdPtk2xRWrb2+PCKXoIplC/3WmSBTvwlI805dSUzB9wogzFx/D43SUgJWimu1thcWCoc2ZtdSc9VoxKYjSojRMG7RGjOriG+lbSkyCWZs3td9NgDTEeNxEv+WufNywWl5XzX2VqOU8k8G7yb8ON32jOtvsyh7hA7VNwV1oOkIApioAT1M46dD1khjIQqSYVJwJSiV1+Hylt1bDQjHA1z20AGYC/u7A1Vnqg==
+	TuoMq42Q3ZRgtQwhr9moeqcWRbf2Qmb48EH+qJieAPow/XVbZVtaVimFEQInNWlMW8Z6Mv0eL4GadP1olLhp1+jukSVGwmCqdqfLko03S2MSwpjcLX0tIiouY9G16k8Vkj9lIZeFiN01kB/OHfpKhP8SL6erE8j+lumLErr3wARozdwo3IiP79fcTvC9bnF1hNtOomY22IXWuPA1m1cjBG+9KbyqGrMt3swPGg8ocvBCzPBnN+nW2/GOAgNMXUenudtvA0o98eHS74vmbDhAcsrtsmeoK11pTKMh+QK65BMbXXraVmOVuZA9wLxoCR66+T+5HftrGLAvcUZeNtnR2cOI7vh95O1nVb1mi81n+sezxggEgrdqcI3+WYIbubUhXI7YXgRKT6DbJ+nO1XVWF7/gX5FZBgBiMWj/2fp/q4fWmqZsR9qnKRQIa3EUhVDgLIxamMXKTFkFb0ri2x710g==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(366004)(39850400004)(376002)(346002)(136003)(33964004)(66556008)(478600001)(966005)(16576012)(316002)(36756003)(8676002)(66476007)(8936002)(53546011)(2906002)(86362001)(52116002)(31686004)(31696002)(166002)(66946007)(83380400001)(16526019)(5660300002)(26005)(186003)(44832011)(6486002)(2616005)(956004)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	RiVK3kRUsChVLMWYyv929PmaX/yfKcTdsdTYDmU3Y6ZL/lI1glZ4nr5kAX43LiX2o8Fa3y5s1r2Lsu+xXB4h20Vpu8w6guakICYZqISJCVw2s921OsvURnL0ciXK6jUIC53L5OXLGlY63PnIcHwZY8PP0QRemtH2z887vWOfJGhq8u3CAKgfkalKDqrk2cNyruAc3umMEYrwS1xHUrdNUeot8jY7qkNI3KvO9CQDr/Qiu7YH9r0ewB9VPfumW5uUab/Ntj/ZBx0ajNmTrQICBAxn5KMkR/nIQm1Ki0iR+5ElOyjso8vn4X+bF6xR7NEpO8es7KPQlRzcUC+btc5K3XmOAjOgupUohEcP1B7gRda0yy8HIHuzqStFdSHRRCcbPoZbO9KNfCqLaiYyRK4O5YShI4Oobgtcq6W0YUqIosf0J4REjmGpZnF5vgtrAYOEwq6Dgv4JEX8J/eBO8wcD10qpYVtCCCcCaq84jh6ssSE=
+	Kq6svmnNi1LbhWljrzCybJw/o8wJSw9j3RO7FPt+72jQBCy5pDFv6Lnd4oDIqVNCR/0CmvjQNcQ6x/Q9U9yxMjzYU+Y5ICL/IYqUaKw3+Xr3DevGQLD/Y+epIivJWaOrmFR+OMrTUJncG7WN6n0QVmPngEpOkrK1o6oX3Ny6n53gFhP644U4ay8CwiiZLuV+1j0Qbqvp+FWI9PqPdF73zbq5Uvh+1XlN3iQEiK+Zg2PNe1tC4GCZHMdMfkDFpWn02zSuEDS6/9utGkHVmzFr8eAKHtzC4c7lx7T7w9ixM6vFvaxJbaTodtvfQkmmjXNGevWKkh8+2m5lzOdytBFvG1jZyxCgset+YqSWd2oCjNQ/RjtBSdAOU87wK+BwgGwLZQaafwYZZ+1XIh3avUX2dZDNfUSkS3ADpzdUhssspDw96k5azZegAF7cInXa+E2Kuiv/ecvAGQLJjSWNtewgPsogOTvn1bYRWTtO/FDyH7o=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 07aadd8a-5d5c-450f-3af1-08d81f59aa62
+X-MS-Exchange-CrossTenant-Network-Message-Id: ab83ebd3-8c93-44e7-19e5-08d81f59b804
 X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB0011.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2020 14:02:05.2405
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jul 2020 14:02:27.5390
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YT+MlfvAWO9zN6bOslbZd3lHva8aNNxhFUnjjO0fnL5ha2ldbGMip3/HueQXxmAODdXBKiXPmh+NqxFAiCfpsuFewBqTBFRfcRRixIAGqLI=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 327vysi28y8qKVSlu2iHJRRWgjUo+ivdr6X83yxaVnMv/LqBo5/xMjR3/1RsMv9BnUAXnLsXMzVzhP0nFH0V/MFFNNgPFdHyHdIsTq/f5VM=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB3627
 Content-Type: multipart/alternative;
- boundary="------------4BBCBD5DEDCD7F8D18C9273C"
+ boundary="------------256E95F64BC3EA99217AADD9"
 Content-Language: en-US
 
---------------4BBCBD5DEDCD7F8D18C9273C
+--------------256E95F64BC3EA99217AADD9
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 6/29/20 1:18 PM, Leon Anavi wrote:
-> Upgrade to release 4.47.0:
+> Use LICENSE instead of README.rst for LIC_FILES_CHKSUM. Upgrade to
+> release 2.2.0:
 >
-> - add contrib.discord (similar to contrib.telegram)
-> - add contrib.bells to auto-enable all extras
-> - add contrib.utils_worker for common slow tasks (e.g. web I/O)
-> - fix slow notebook imports
-> - fix gui TypeError on unknown len()
-> - misc documentation/error message updates
-> - misc framework updates
+> - Include column information in error messages
+> - Fix @overload detection with other decorators and in non-global
+>    scopes
+> - Fix return-type annotation being a class member
+> - Fix assignment to _ in doctests with existing _ name
+> - Namespace attributes which are attached to ast nodes with
+>    _pyflakes_ to avoid conflicts with other libraries (notably
+>    bandit)
+> - Add check for f-strings without placeholders
+> - Add check for unused/extra/invalid 'string literal'.format(...)
+> - Add check for unused/extra/invalid 'string literal % ...
+> - Improve python shebang detection
+> - Allow type ignore to be followed by a code # type:
+>    ignore[attr-defined]
+> - Add support for assignment expressions (PEP 572)
+> - Support @overload detection from typing_extensions as well
+> - Fix @overload detection for async functions
+> - Allow continue inside finally in python 3.8+
+> - Fix handling of annotations in positional-only arguments
+> - Make pyflakes more resistant to future syntax additions
+> - Fix false positives in partially quoted type annotations
+> - Warn about is comparison to tuples
+> - Fix Checker usage with async function subtrees
+> - Add check for if of non-empty tuple
+> - Switch from optparse to argparse
+> - Fix false positives in partially quoted type annotations in
+>    unusual contexts
+> - Be more cautious when identifying Literal type expressions
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-tqdm_4.43.0.bb => python3-tqdm_4.47.0.bb} | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-tqdm_4.43.0.bb => python3-tqdm_4.47.0.bb} (65%)
+>   ...{python3-pyflakes_2.1.1.bb => python3-pyflakes_2.2.0.bb} | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-pyflakes_2.1.1.bb => python3-pyflakes_2.2.0.bb} (56%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.43.0.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.47.0.bb
-> similarity index 65%
-> rename from meta-python/recipes-devtools/python/python3-tqdm_4.43.0.bb
-> rename to meta-python/recipes-devtools/python/python3-tqdm_4.47.0.bb
-> index 642246c00..fad758e3f 100644
-> --- a/meta-python/recipes-devtools/python/python3-tqdm_4.43.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-tqdm_4.47.0.bb
-> @@ -5,8 +5,8 @@ SECTION = "devel/python"
->   LICENSE = "MIT & MPL-2.0"
->   LIC_FILES_CHKSUM = "file://LICENCE;md5=7ea57584e3f8bbde2ae3e1537551de25"
+> diff --git a/meta-python/recipes-devtools/python/python3-pyflakes_2.1.1.bb b/meta-python/recipes-devtools/python/python3-pyflakes_2.2.0.bb
+> similarity index 56%
+> rename from meta-python/recipes-devtools/python/python3-pyflakes_2.1.1.bb
+> rename to meta-python/recipes-devtools/python/python3-pyflakes_2.2.0.bb
+> index c13882240..911cf4ec3 100644
+> --- a/meta-python/recipes-devtools/python/python3-pyflakes_2.1.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pyflakes_2.2.0.bb
+> @@ -1,10 +1,10 @@
+>   SUMMARY = "passive checker of Python programs"
+>   HOMEPAGE = "https://github.com/dreamhost/cliff"
+>   LICENSE = "Apache-2.0"
+> -LIC_FILES_CHKSUM = "file://README.rst;md5=5127315117a8561a1504343d59620647"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=690c2d09203dc9e07c4083fc45ea981f"
 >   
-> -SRC_URI[md5sum] = "81454c26572e4e47911596ea065eb1b7"
-> -SRC_URI[sha256sum] = "f35fb121bafa030bd94e74fcfd44f3c2830039a2ddef7fc87ef1c2d205237b24"
-> +SRC_URI[md5sum] = "1594eab5b5aef37ef1fd6d36ce4f8f4c"
-> +SRC_URI[sha256sum] = "63ef7a6d3eb39f80d6b36e4867566b3d8e5f1fe3d6cb50c5e9ede2b3198ba7b7"
+> -SRC_URI[md5sum] = "a0f71a15724e553c46e03ba5ed56703c"
+> -SRC_URI[sha256sum] = "d976835886f8c5b31d47970ed689944a0262b5f3afa00a5a7b4dc81e5449f8a2"
+> +SRC_URI[md5sum] = "48b1c29732ca810a70cba0e6d0531169"
+> +SRC_URI[sha256sum] = "35b2d75ee967ea93b55750aa9edbbf72813e06a66ba54438df2cfac9e3c27fc8"
 >   
 >   inherit pypi setuptools3
 >   
 >
 > 
 
---------------4BBCBD5DEDCD7F8D18C9273C
+--------------256E95F64BC3EA99217AADD9
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -136,42 +162,67 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/29/20 1:18 PM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200629171853.18608-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 4.47.0:
+    <blockquote type="cite" cite="mid:20200629171853.18608-2-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Use LICENSE instead of README.rst for LIC_FILES_CHKSUM. Upgrade to
+release 2.2.0:
 
-- add contrib.discord (similar to contrib.telegram)
-- add contrib.bells to auto-enable all extras
-- add contrib.utils_worker for common slow tasks (e.g. web I/O)
-- fix slow notebook imports
-- fix gui TypeError on unknown len()
-- misc documentation/error message updates
-- misc framework updates
+- Include column information in error messages
+- Fix @overload detection with other decorators and in non-global
+  scopes
+- Fix return-type annotation being a class member
+- Fix assignment to _ in doctests with existing _ name
+- Namespace attributes which are attached to ast nodes with
+  _pyflakes_ to avoid conflicts with other libraries (notably
+  bandit)
+- Add check for f-strings without placeholders
+- Add check for unused/extra/invalid 'string literal'.format(...)
+- Add check for unused/extra/invalid 'string literal % ...
+- Improve python shebang detection
+- Allow type ignore to be followed by a code # type:
+  ignore[attr-defined]
+- Add support for assignment expressions (PEP 572)
+- Support @overload detection from typing_extensions as well
+- Fix @overload detection for async functions
+- Allow continue inside finally in python 3.8&#43;
+- Fix handling of annotations in positional-only arguments
+- Make pyflakes more resistant to future syntax additions
+- Fix false positives in partially quoted type annotations
+- Warn about is comparison to tuples
+- Fix Checker usage with async function subtrees
+- Add check for if of non-empty tuple
+- Switch from optparse to argparse
+- Fix false positives in partially quoted type annotations in
+  unusual contexts
+- Be more cautious when identifying Literal type expressions
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
-    <blockquote type="cite" cite="mid:20200629171853.18608-1-leon.anavi@konsulko.com">
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
+    <blockquote type="cite" cite="mid:20200629171853.18608-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-tqdm_4.43.0.bb =&gt; python3-tqdm_4.47.0.bb} | 4 &#43;&#43;--
- 1 file changed, 2 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-tqdm_4.43.0.bb =&gt; python3-tqdm_4.47.0.bb} (65%)
+ ...{python3-pyflakes_2.1.1.bb =&gt; python3-pyflakes_2.2.0.bb} | 6 &#43;&#43;&#43;---
+ 1 file changed, 3 insertions(&#43;), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pyflakes_2.1.1.bb =&gt; python3-pyflakes_2.2.0.bb} (56%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.43.0.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.47.0.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-tqdm_4.43.0.bb
-rename to meta-python/recipes-devtools/python/python3-tqdm_4.47.0.bb
-index 642246c00..fad758e3f 100644
---- a/meta-python/recipes-devtools/python/python3-tqdm_4.43.0.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-tqdm_4.47.0.bb
-@@ -5,8 &#43;5,8 @@ SECTION = &quot;devel/python&quot;
- LICENSE = &quot;MIT &amp; MPL-2.0&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENCE;md5=7ea57584e3f8bbde2ae3e1537551de25">&quot;file://LICENCE;md5=7ea57584e3f8bbde2ae3e1537551de25&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-pyflakes_2.1.1.bb b/meta-python/recipes-devtools/python/python3-pyflakes_2.2.0.bb
+similarity index 56%
+rename from meta-python/recipes-devtools/python/python3-pyflakes_2.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-pyflakes_2.2.0.bb
+index c13882240..911cf4ec3 100644
+--- a/meta-python/recipes-devtools/python/python3-pyflakes_2.1.1.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-pyflakes_2.2.0.bb
+@@ -1,10 &#43;1,10 @@
+ SUMMARY = &quot;passive checker of Python programs&quot;
+ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/dreamhost/cliff">&quot;https://github.com/dreamhost/cliff&quot;</a>
+ LICENSE = &quot;Apache-2.0&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://README.rst;md5=5127315117a8561a1504343d59620647">&quot;file://README.rst;md5=5127315117a8561a1504343d59620647&quot;</a>
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=690c2d09203dc9e07c4083fc45ea981f">&quot;file://LICENSE;md5=690c2d09203dc9e07c4083fc45ea981f&quot;</a>
  
--SRC_URI[md5sum] = &quot;81454c26572e4e47911596ea065eb1b7&quot;
--SRC_URI[sha256sum] = &quot;f35fb121bafa030bd94e74fcfd44f3c2830039a2ddef7fc87ef1c2d205237b24&quot;
-&#43;SRC_URI[md5sum] = &quot;1594eab5b5aef37ef1fd6d36ce4f8f4c&quot;
-&#43;SRC_URI[sha256sum] = &quot;63ef7a6d3eb39f80d6b36e4867566b3d8e5f1fe3d6cb50c5e9ede2b3198ba7b7&quot;
+-SRC_URI[md5sum] = &quot;a0f71a15724e553c46e03ba5ed56703c&quot;
+-SRC_URI[sha256sum] = &quot;d976835886f8c5b31d47970ed689944a0262b5f3afa00a5a7b4dc81e5449f8a2&quot;
+&#43;SRC_URI[md5sum] = &quot;48b1c29732ca810a70cba0e6d0531169&quot;
+&#43;SRC_URI[sha256sum] = &quot;35b2d75ee967ea93b55750aa9edbbf72813e06a66ba54438df2cfac9e3c27fc8&quot;
  
  inherit pypi setuptools3
  
@@ -184,4 +235,4 @@ index 642246c00..fad758e3f 100644
   </body>
 </html>
 
---------------4BBCBD5DEDCD7F8D18C9273C--
+--------------256E95F64BC3EA99217AADD9--
