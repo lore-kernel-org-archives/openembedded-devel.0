@@ -1,230 +1,184 @@
-Received: from mail-io1-f49.google.com (mail-io1-f49.google.com [209.85.166.49])
- by mx.groups.io with SMTP id smtpd.web11.1993.1593792273941769166
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com [209.85.214.193])
+ by mx.groups.io with SMTP id smtpd.web10.4322.1593799171338360043
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Jul 2020 09:04:34 -0700
+ Fri, 03 Jul 2020 10:59:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=PQCk+Svl;
- spf=pass (domain: gmail.com, ip: 209.85.166.49, mailfrom: ticotimo@gmail.com)
-Received: by mail-io1-f49.google.com with SMTP id f23so32953111iof.6
-        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Jul 2020 09:04:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=DJGHx5e4;
+ spf=pass (domain: gmail.com, ip: 209.85.214.193, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f193.google.com with SMTP id u9so9280407pls.13
+        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Jul 2020 10:59:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=gTJwoJxOwimjTaWd8hrwMJccycLRYSSf7lDi5Dtcncc=;
-        b=PQCk+SvlllIzm14DwdtBkt6KNC30mkr0tmo2SDmI9x3NLwjosgP3IP5Alj3bVeiSOe
-         lB9oQ5Wsv2SFl4nkFQzTnHJpxrbm5A5dLOnuS2y/dvwi92Yt0pfddBDQ6gLaabSWOwgw
-         c2g7F/0TF5RlQSln1Ht9T9NxQI7IwF9kZxqaUZe4tb64xNZqQnGEZbBBX6yGp/ITgnhg
-         a1Ge+GGEGbS1bZfS4dB2tZL4FrtH+PezaJ5FqML830eZPRfbOd/f8JBMWpbthbQNYUl+
-         0s1EmW6cqfFjDbiJotLOhP2nyFXRqKN2XlYpknmEXlEF21d2JD2UjNjKgxTNuwb4rr83
-         ++Kg==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=rhbvtFiBhtjRbaPPeLDU75wWV8VNgBJTxiBI0aXyfTQ=;
+        b=DJGHx5e4U9E3OqEHNPolzFIG6LIv0xLHXg9PiCJk4UhUNHSz5DAuQL0H/Gq2avu0kw
+         LyAuYc2EqoL+sYUmgetHmloWYD9EXPIf9+d4Dzkwy5FxiojrLRzktDDdObcZnA4Qz4zf
+         OEGwoeLvSNAL5lKEgnuHCReWG9E0CBz3j1YnM0mNIZRkqjsgfFM0zv1bJ+qS+WcdmEFp
+         fv5q8wZ1cJydtrGWV9yD+oIbVtau6CnGeKnRx1JixmSDmRITl0GZYQ2QK0/Lo8oIpzIF
+         owzhhJmEzmdJ8kbX7kcy+a8hpeZazLzCEs/M9OUU4wA6JMl4lRdv/j0CDSH9OMiz+dAG
+         eBUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=gTJwoJxOwimjTaWd8hrwMJccycLRYSSf7lDi5Dtcncc=;
-        b=i3/vK4mktQG3bbGxVc1YYoZb2EPwFefUSnKAkuaNmYW3qlyTKmDE5FSdOamiDvTv1c
-         65pdA0pokFDx/1juXf5V3+gAkNNwT9X9PRNfetOKmCLr/2bqzMCtSgkV5v/oRy4gZDBx
-         EKIo5Bplzr2kPg3H+xGbDACRUA0QjfXMyVij4UFbQVJ+j388zwMjiIyiwlfyGZQaiwJ2
-         ZhtqJyTTsVGZqE6nJ2G9tZ92wD2qZuA52VSSBRi9Rwml+e1q7bIpmGHLCn53ME0Z+I6u
-         avG5Ap1vtQAy0dP7f7gx34Udq+213Qk8r51UAqnzbSSoCoDDNCRtYz3vCNC1GAHa2ik+
-         2gNg==
-X-Gm-Message-State: AOAM5308+dliyXF088VvR0FTFuhd3qpa+Vpkp0etXomZCyNWuisWSQQ7
-	oeLXp9lLhpxHkzqf4gONe8RsXEHNsdPhpW1kXoA=
-X-Google-Smtp-Source: ABdhPJz8/WelSTAa1QkQ4DPhvlO4oIvmidp2hiIEdCznRCyYuWPOEABKOu52+yUfvRtKR8N4sEg7CDDVayjwff8iXv0=
-X-Received: by 2002:a02:aa1b:: with SMTP id r27mr38584026jam.89.1593792273211;
- Fri, 03 Jul 2020 09:04:33 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=rhbvtFiBhtjRbaPPeLDU75wWV8VNgBJTxiBI0aXyfTQ=;
+        b=KDO/bc9salZKYSEecpSz7MHkehsC/ny2K3K5upyspOgQnZb51CrQWqYaQbrBQnpKJ/
+         rQiNBZZukT6TQREKfQLxrBkJ7wyBhX1bH+pCwqmWNNiR5DEqDoYEdFm+uuIjTAm4bsZE
+         1An12VyhYsF3W1EctfrL+e5nXi3Ylo/mp75yTgn92JaCYht/JoTM4hQ/mxJtlUERajEP
+         l/LLDcGgu1JYmPBQEVMBbJxwHAECP5Bvgj8qBhju70foV8SDZ2u0qSmgGV8oE3+peUfZ
+         9j+w4/37vvoBSmw+Lab3kmnzf0lVQyYT5QO8aNQnXo1keCgIoMKLoARM0BzW/IbcZMYX
+         plXw==
+X-Gm-Message-State: AOAM532FBnabNeyBC8j3NPgJRgGrdj9umzz8DdkpauqcNSdFFpuNs2h+
+	ZAZn2M3ZEhq/42JufKDRu4FSgbhP0UY=
+X-Google-Smtp-Source: ABdhPJzRQ6SYnsFOwK773PJFsazqhWIGCdYUgyU9YS7RTtBIKjWrBUiisuucroc59d4G1oRMRHhwUA==
+X-Received: by 2002:a17:902:8b8a:: with SMTP id ay10mr31779357plb.235.1593799170472;
+        Fri, 03 Jul 2020 10:59:30 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0::afc])
+        by smtp.gmail.com with ESMTPSA id n15sm12152674pgs.25.2020.07.03.10.59.29
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 03 Jul 2020 10:59:29 -0700 (PDT)
+From: "akuster" <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 00/30] Merge request July 3
+Date: Fri,  3 Jul 2020 10:58:55 -0700
+Message-Id: <cover.1593799085.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20200703155514.39291-1-sakib.sajal@windriver.com>
-In-Reply-To: <20200703155514.39291-1-sakib.sajal@windriver.com>
-From: "Tim Orling" <ticotimo@gmail.com>
-Date: Fri, 3 Jul 2020 09:04:22 -0700
-Message-ID: <CANx9H-CZW7OChSwGRi42JgVF4N-DG4AWCYzA0VtcWmzAwhpiEA@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-requests-toolbelt: add ptest
-To: Sakib Sajal <sakib.sajal@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000004a67bc05a98bae1c"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---0000000000004a67bc05a98bae1c
-Content-Type: text/plain; charset="UTF-8"
+Please merge to dunfell.
+Cover letter only
 
-On Fri, Jul 3, 2020 at 8:55 AM Sakib Sajal <sakib.sajal@windriver.com>
-wrote:
+The following changes since commit 8a72d29e0876830ffd96b85d7d0308302eb07a5d:
 
-> Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
-> ---
->  .../python/python3-requests-toolbelt/run-ptest  |  3 +++
->  .../python/python3-requests-toolbelt_0.9.1.bb   | 17 +++++++++++++++--
->  2 files changed, 18 insertions(+), 2 deletions(-)
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
->
-> diff --git
-> a/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
-> b/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
-> new file mode 100644
-> index 000000000..b63c4de0d
-> --- /dev/null
-> +++
-> b/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
-> @@ -0,0 +1,3 @@
-> +#!/bin/sh
-> +
-> +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'|
-> sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e
-> 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" ||
-> $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk
-> '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" ||
-> $NF=="XPASS") {$NF="";print $0}else{print}}'
+  python3-docutils: Remove, moved to OE-core (2020-06-12 09:32:24 -0700)
 
+are available in the Git repository at:
 
-Seems like these two run-ptest files are very similar...please consider an
-extensible way to reduce duplication. For instance, the ptest-perl.bbclass
-provides a run-ptest script that is nearly universal. For python, we
-probably need some templating. Food for thought and improving our code base.
+  git://git.openembedded.org/meta-openembedded dunfell-next
+  http://cgit.openembedded.org/meta-openembedded/log/?h=dunfell-next
 
->
-> diff --git a/meta-python/recipes-devtools/python/
-> python3-requests-toolbelt_0.9.1.bb b/meta-python/recipes-devtools/python/
-> python3-requests-toolbelt_0.9.1.bb
-> index 3beb39718..e075c019d 100644
-> --- a/meta-python/recipes-devtools/python/
-> python3-requests-toolbelt_0.9.1.bb
-> +++ b/meta-python/recipes-devtools/python/
-> python3-requests-toolbelt_0.9.1.bb
-> @@ -5,12 +5,25 @@ AUTHOR = "Ian Cordasco, Cory Benfield"
->  LICENSE = "Apache-2.0"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=71760e0f1dda8cff91b0bc9246caf571"
->
-> +SRC_URI = "file://run-ptest \
-> +          "
-> +
->  SRC_URI[md5sum] = "b1509735c4b4cf95df2619facbc3672e"
->  SRC_URI[sha256sum] =
-> "968089d4584ad4ad7c171454f0a5c6dac23971e9472521ea3b6d49d610aa6fc0"
->
-> -inherit setuptools3
-> -inherit pypi
-> +inherit pypi setuptools3 ptest
->
->  RDEPENDS_${PN} += " \
->      ${PYTHON_PN}-requests (>=2.0.1) \
->  "
-> +
-> +RDEPENDS_${PN}-ptest += " \
-> +       ${PYTHON_PN}-pytest \
-> +       ${PYTHON_PN}-betamax \
-> +       ${PYTHON_PN}-mock \
-> +"
-> +
-> +do_install_ptest() {
-> +       install -d ${D}${PTEST_PATH}/tests
-> +       cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> +}
-> --
-> 2.27.0
->
-> 
->
+Alex Kiernan (1):
+  zstd: Upgrade 1.4.4 -> 1.4.5
 
---0000000000004a67bc05a98bae1c
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Andreas Müller (3):
+  libblockdev: upgrade 2.23 -> 2.24
+  openh264: upgrade 2.1.0 -> 2.1.1
+  tcpreplay: upgrade 4.3.2 -> 4.3.3
 
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Fri, Jul 3, 2020 at 8:55 AM Sakib Sajal &lt;<a href=3D"=
-mailto:sakib.sajal@windriver.com">sakib.sajal@windriver.com</a>&gt; wrote:<=
-br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
-x;border-left-width:1px;border-left-style:solid;padding-left:1ex;border-lef=
-t-color:rgb(204,204,204)">Signed-off-by: Sakib Sajal &lt;<a href=3D"mailto:=
-sakib.sajal@windriver.com" target=3D"_blank">sakib.sajal@windriver.com</a>&=
-gt;<br>
----<br>
-=C2=A0.../python/python3-requests-toolbelt/run-ptest=C2=A0 |=C2=A0 3 +++<b=
-r>
-=C2=A0.../python/<a href=3D"http://python3-requests-toolbelt_0.9.1.bb" rel=
-=
-=3D"noreferrer" target=3D"_blank">python3-requests-toolbelt_0.9.1.bb</a>=
-=C2=A0 =C2=A0| 17 +++++++++++++++--<br>
-=C2=A02 files changed, 18 insertions(+), 2 deletions(-)<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-reque=
-sts-toolbelt/run-ptest<br>
-<br>
-diff --git a/meta-python/recipes-devtools/python/python3-requests-toolbelt=
-/run-ptest b/meta-python/recipes-devtools/python/python3-requests-toolbelt/=
-run-ptest<br>
-new file mode 100644<br>
-index 000000000..b63c4de0d<br>
---- /dev/null<br>
-+++ b/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-pt=
-est<br>
-@@ -0,0 +1,3 @@<br>
-+#!/bin/sh<br>
-+<br>
-+pytest -o log_cli=3Dtrue -o log_cli_level=3DINFO | sed -e &#39;s/\[...%\]=
-//g&#39;| sed -e &#39;s/PASSED/PASS/g&#39;| sed -e &#39;s/FAILED/FAIL/g&#39=
-;|sed -e &#39;s/SKIPPED/SKIP/g&#39;| awk &#39;{if ($NF=3D=3D&quot;PASS&quot=
-; || $NF=3D=3D&quot;FAIL&quot; || $NF=3D=3D&quot;SKIP&quot; || $NF=3D=3D&qu=
-ot;XFAIL&quot; || $NF=3D=3D&quot;XPASS&quot;){printf &quot;%s: %s\n&quot;, =
-$NF, $0}else{print}}&#39;| awk &#39;{if ($NF=3D=3D&quot;PASS&quot; || $NF=
-=3D=3D&quot;FAIL&quot; || $NF=3D=3D&quot;SKIP&quot; || $NF=3D=3D&quot;XFAI=
-L&quot; || $NF=3D=3D&quot;XPASS&quot;) {$NF=3D&quot;&quot;;print $0}else{pr=
-int}}&#39;</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Seems =
-like these two run-ptest files are very similar...please consider an extens=
-ible way to reduce duplication. For instance, the ptest-perl.bbclass provid=
-es a run-ptest script that is nearly universal. For python, we probably nee=
-d some templating. Food for thought and improving our code base.</div><bloc=
-kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-=
-width:1px;border-left-style:solid;padding-left:1ex;border-left-color:rgb(20=
-4,204,204)"><br>
-diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3=
--requests-toolbelt_0.9.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-r=
-equests-toolbelt_0.9.1.bb</a> b/meta-python/recipes-devtools/python/<a href=
-=
-=3D"http://python3-requests-toolbelt_0.9.1.bb" rel=3D"noreferrer" target=
-=3D"_blank">python3-requests-toolbelt_0.9.1.bb</a><br>
-index 3beb39718..e075c019d 100644<br>
---- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-reques=
-ts-toolbelt_0.9.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-requests=
--toolbelt_0.9.1.bb</a><br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-reques=
-ts-toolbelt_0.9.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-requests=
--toolbelt_0.9.1.bb</a><br>
-@@ -5,12 +5,25 @@ AUTHOR =3D &quot;Ian Cordasco, Cory Benfield&quot;<br>
-=C2=A0LICENSE =3D &quot;Apache-2.0&quot;<br>
-=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D71760e0f1dda8cff91b0=
-bc9246caf571&quot;<br>
-<br>
-+SRC_URI =3D &quot;file://run-ptest \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
-+<br>
-=C2=A0SRC_URI[md5sum] =3D &quot;b1509735c4b4cf95df2619facbc3672e&quot;<br>
-=C2=A0SRC_URI[sha256sum] =3D &quot;968089d4584ad4ad7c171454f0a5c6dac23971e=
-9472521ea3b6d49d610aa6fc0&quot;<br>
-<br>
--inherit setuptools3<br>
--inherit pypi<br>
-+inherit pypi setuptools3 ptest<br>
-<br>
-=C2=A0RDEPENDS_${PN} +=3D &quot; \<br>
-=C2=A0 =C2=A0 =C2=A0${PYTHON_PN}-requests (&gt;=3D2.0.1) \<br>
-=C2=A0&quot;<br>
-+<br>
-+RDEPENDS_${PN}-ptest +=3D &quot; \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0${PYTHON_PN}-pytest \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0${PYTHON_PN}-betamax \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0${PYTHON_PN}-mock \<br>
-+&quot;<br>
-+<br>
-+do_install_ptest() {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0install -d ${D}${PTEST_PATH}/tests<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/<b=
-r>
-+}<br>
--- <br>
-2.27.0<br>
-<br>
-<br>
-</blockquote></div></div>
+Armin Kuster (1):
+  ntp: update 4.2.8p15
 
---0000000000004a67bc05a98bae1c--
+Changqing Li (2):
+  python-django: add RDEPENDS
+  python-m2crypto: Add RDEPENDS
+
+Christian Eggers (1):
+  linuxptp: Fix segmentation fault on 32 bit platforms with 64 bit
+    time_t
+
+Konrad Weihmann (3):
+  netkit-rsh: properly append PACKAGECONFIG
+  zile: properly append PACKAGECONFIG
+  libtalloc: fix upstream url
+
+Leon Anavi (1):
+  python3-sqlalchemy: Upgrade 1.3.12 -> 1.3.17
+
+Mingli Yu (1):
+  python3-m2crypto: add the missing rdepends
+
+Paul Eggleton (1):
+  protobuf-c: disable parallelism to avoid race condition
+
+Pierre-Jean Texier (9):
+  zchunk: upgrade 1.1.5 -> 1.1.6
+  uriparser: upgrade 0.9.3 -> 0.9.4
+  jsoncpp: upgrade 1.9.2 -> 1.9.3
+  jpnevulator: upgrade 2.3.4 -> 2.3.5
+  libnftnl: upgrade 1.1.6 -> 1.1.7
+  nftables: upgrade 0.9.4 -> 0.9.5
+  haveged: upgrade 1.9.8 -> 1.9.9
+  rsnapshot: upgrade 1.4.2 -> 1.4.3
+  fuse3: upgrade 3.9.1 -> 3.9.2
+
+Qi.Chen@windriver.com (1):
+  python-django: set CVE_PRODUCT to be django
+
+Wang Mingyu (3):
+  postgresql: 12.2 -> 12.3
+  openipmi: upgrade 2.0.28 -> 2.0.29
+  twm: upgrade 1.0.10 -> 1.0.11
+
+Zang Ruochen (3):
+  proj: upgrade 7.0.0 -> 7.0.1
+  libvpx: upgrade 1.8.1 -> 1.8.2
+  mm-common: upgrade 1.0..0 -> 1.0.1
+
+ .../fuse/{fuse3_3.9.1.bb => fuse3_3.9.2.bb}   |   3 +-
+ .../{openh264_2.1.0.bb => openh264_2.1.1.bb}  |   4 +-
+ .../{libnftnl_1.1.6.bb => libnftnl_1.1.7.bb}  |   2 +-
+ .../{nftables_0.9.4.bb => nftables_0.9.5.bb}  |   3 +-
+ .../netkit-rsh/netkit-rsh_0.17.bb             |   2 +-
+ .../libtalloc/libtalloc_2.3.0.bb              |   2 +-
+ .../ntp/{ntp_4.2.8p14.bb => ntp_4.2.8p15.bb}  |   3 +-
+ ...{openipmi_2.0.28.bb => openipmi_2.0.29.bb} |   4 +-
+ ...{tcpreplay_4.3.2.bb => tcpreplay_4.3.3.bb} |   4 +-
+ .../linuxptp/time_t_maybe_long_long.patch     | 135 ++++++++++++++++++
+ .../linuxptp/linuxptp_2.0.bb                  |   1 +
+ ...{mm-common_1.0.0.bb => mm-common_1.0.1.bb} |   4 +-
+ ...Use-pkg-config-for-libxml2-detection.patch |  50 -------
+ meta-oe/recipes-dbs/postgresql/postgresql.inc |   1 -
+ ...{postgresql_12.2.bb => postgresql_12.3.bb} |   4 +-
+ .../{jsoncpp_1.9.2.bb => jsoncpp_1.9.3.bb}    |   2 +-
+ .../protobuf/protobuf-c_1.3.3.bb              |   5 +
+ .../{haveged_1.9.8.bb => haveged_1.9.9.bb}    |   4 +-
+ .../jpnevulator/jpnevulator_git.bb            |   4 +-
+ ...ibblockdev_2.23.bb => libblockdev_2.24.bb} |   7 +-
+ .../0001-Fix-legacy-build-after-2103.patch    |  27 ++++
+ .../zstd/{zstd_1.4.4.bb => zstd_1.4.5.bb}     |   6 +-
+ .../xorg-app/{twm_1.0.10.bb => twm_1.0.11.bb} |   5 +-
+ .../webm/{libvpx_1.8.1.bb => libvpx_1.8.2.bb} |   2 +-
+ .../proj/{proj_7.0.0.bb => proj_7.0.1.bb}     |   4 +-
+ .../rsnapshot/rsnapshot_git.bb                |   4 +-
+ ...{uriparser_0.9.3.bb => uriparser_0.9.4.bb} |   5 +-
+ .../zchunk/0001-zck.h-fix-build-on-musl.patch |  39 -----
+ .../0002-unzck-fix-build-with-musl-libc.patch |  61 --------
+ .../{zchunk_1.1.5.bb => zchunk_1.1.6.bb}      |   8 +-
+ meta-oe/recipes-support/zile/zile_2.4.14.bb   |   2 +-
+ .../recipes-devtools/python/python-django.inc |   3 +
+ .../python/python-m2crypto.inc                |  12 +-
+ ...1.3.12.bb => python3-sqlalchemy_1.3.17.bb} |   6 +-
+ 34 files changed, 226 insertions(+), 202 deletions(-)
+ rename meta-filesystems/recipes-support/fuse/{fuse3_3.9.1.bb => fuse3_3.9.2.bb} (91%)
+ rename meta-multimedia/recipes-multimedia/openh264/{openh264_2.1.0.bb => openh264_2.1.1.bb} (94%)
+ rename meta-networking/recipes-filter/libnftnl/{libnftnl_1.1.6.bb => libnftnl_1.1.7.bb} (88%)
+ rename meta-networking/recipes-filter/nftables/{nftables_0.9.4.bb => nftables_0.9.5.bb} (90%)
+ rename meta-networking/recipes-support/ntp/{ntp_4.2.8p14.bb => ntp_4.2.8p15.bb} (98%)
+ rename meta-networking/recipes-support/openipmi/{openipmi_2.0.28.bb => openipmi_2.0.29.bb} (96%)
+ rename meta-networking/recipes-support/tcpreplay/{tcpreplay_4.3.2.bb => tcpreplay_4.3.3.bb} (75%)
+ create mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/time_t_maybe_long_long.patch
+ rename meta-oe/recipes-core/mm-common/{mm-common_1.0.0.bb => mm-common_1.0.1.bb} (66%)
+ delete mode 100644 meta-oe/recipes-dbs/postgresql/files/0001-Use-pkg-config-for-libxml2-detection.patch
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_12.2.bb => postgresql_12.3.bb} (63%)
+ rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.9.2.bb => jsoncpp_1.9.3.bb} (93%)
+ rename meta-oe/recipes-extended/haveged/{haveged_1.9.8.bb => haveged_1.9.9.bb} (96%)
+ rename meta-oe/recipes-extended/libblockdev/{libblockdev_2.23.bb => libblockdev_2.24.bb} (94%)
+ create mode 100644 meta-oe/recipes-extended/zstd/zstd/0001-Fix-legacy-build-after-2103.patch
+ rename meta-oe/recipes-extended/zstd/{zstd_1.4.4.bb => zstd_1.4.5.bb} (85%)
+ rename meta-oe/recipes-graphics/xorg-app/{twm_1.0.10.bb => twm_1.0.11.bb} (67%)
+ rename meta-oe/recipes-multimedia/webm/{libvpx_1.8.1.bb => libvpx_1.8.2.bb} (96%)
+ rename meta-oe/recipes-navigation/proj/{proj_7.0.0.bb => proj_7.0.1.bb} (75%)
+ rename meta-oe/recipes-support/uriparser/{uriparser_0.9.3.bb => uriparser_0.9.4.bb} (64%)
+ delete mode 100644 meta-oe/recipes-support/zchunk/zchunk/0001-zck.h-fix-build-on-musl.patch
+ delete mode 100644 meta-oe/recipes-support/zchunk/zchunk/0002-unzck-fix-build-with-musl-libc.patch
+ rename meta-oe/recipes-support/zchunk/{zchunk_1.1.5.bb => zchunk_1.1.6.bb} (66%)
+ rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.3.12.bb => python3-sqlalchemy_1.3.17.bb} (67%)
+
+-- 
+2.17.1
+
