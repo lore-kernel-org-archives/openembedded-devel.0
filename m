@@ -1,22 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.6838.1593768639441517989
+ by mx.groups.io with SMTP id smtpd.web11.6839.1593768639709748936
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Jul 2020 02:30:39 -0700
+ Fri, 03 Jul 2020 02:30:40 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=56428 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jrI1j-0007av-BA; Fri, 03 Jul 2020 12:30:36 +0300
+	id 1jrI1l-0007av-H5; Fri, 03 Jul 2020 12:30:38 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 01/10] python3-importlib-metadata: Upgrade 1.6.1 -> 1.7.0
-Date: Fri,  3 Jul 2020 12:30:11 +0300
-Message-Id: <20200703093020.3514-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 02/10] python3-websocket-client: Upgrade 0.56.0 -> 0.57.0
+Date: Fri,  3 Jul 2020 12:30:12 +0300
+Message-Id: <20200703093020.3514-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.2
+In-Reply-To: <20200703093020.3514-1-leon.anavi@konsulko.com>
+References: <20200703093020.3514-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -28,39 +30,48 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.7.0:
+Upgrade to release 0.57.0:
 
-- PathNotFoundError now has a custom __str__ mentioning
-  "package metadata" being missing to help guide users to the cause
-   when the package is installed but no metadata is present.
+- wsdump: Fix --headers option
+- Fix getting 400 bad request with long proxy authorization string
+- Fix for errors that occur when closing websocket from another
+  thread
+- avoid calling repr(data) if tracing is not enabled
+- Fixed typo
+- Create dummy `ssl` object
+- Show compressed text messages in wsdump.py
+- Resolve issue opening socket to intranet on Windows 10 with no
+  proxy settings but behind proxy
+- Expose http connection header to user
+- Improve the readability of HTTP status codes.
+- fix the compatible issue with gevent+dnspython
+- v should be checked for emptry string before splitting it
+- _handshake: hasattr checks on six before accessing the values
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...etadata_1.6.1.bb => python3-importlib-metadata_1.7.0.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-importlib-metadata_1.6.1.bb => python3-importlib-metadata_1.7.0.bb} (64%)
+ ...et-client_0.56.0.bb => python3-websocket-client_0.57.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-websocket-client_0.56.0.bb => python3-websocket-client_0.57.0.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb b/meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
-similarity index 64%
-rename from meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb
-rename to meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
-index c46df8fcdc..de0fc78368 100644
---- a/meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
-@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e88ae122f3925d8bde8319060f2ddb8e"
+diff --git a/meta-python/recipes-devtools/python/python3-websocket-client_0.56.0.bb b/meta-python/recipes-devtools/python/python3-websocket-client_0.57.0.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-websocket-client_0.56.0.bb
+rename to meta-python/recipes-devtools/python/python3-websocket-client_0.57.0.bb
+index a3e1bcf393..aaa92f3ccb 100644
+--- a/meta-python/recipes-devtools/python/python3-websocket-client_0.56.0.bb
++++ b/meta-python/recipes-devtools/python/python3-websocket-client_0.57.0.bb
+@@ -7,8 +7,8 @@ HOMEPAGE = "https://github.com/websocket-client/websocket-client"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c4c4a98fbc4836b81c8c64d6ecb01fc1"
  
+-SRC_URI[md5sum] = "89484bd5dac71123ae6a09b2f90fe62c"
+-SRC_URI[sha256sum] = "1fd5520878b68b84b5748bb30e592b10d0a91529d5383f74f4964e72b297fd3a"
++SRC_URI[md5sum] = "8061820da5e1de26a6a1a6996d4eebd5"
++SRC_URI[sha256sum] = "d735b91d6d1692a6a181f2a8c9e0238e5f6373356f561bb9dc4c7af36f452010"
+ 
+ PYPI_PACKAGE = "websocket_client"
  inherit pypi setuptools3
- 
--SRC_URI = "https://files.pythonhosted.org/packages/aa/9a/8483b77e2decd95963d7e34bc9bc91a26e71fd89b57d8cf978ca24747c7f/importlib_metadata-1.6.1.tar.gz"
-+SRC_URI = "https://files.pythonhosted.org/packages/e2/ae/0b037584024c1557e537d25482c306cf6327b5a09b6c4b893579292c1c38/importlib_metadata-1.7.0.tar.gz"
- S = "${WORKDIR}/importlib_metadata-${PV}"
--SRC_URI[md5sum] = "38f795ac13abc923acfd3da06263eb8f"
--SRC_URI[sha256sum] = "0505dd08068cfec00f53a74a0ad927676d7757da81b7436a6eefe4c7cf75c545"
-+SRC_URI[md5sum] = "4505ea85600cca1e693a4f8f5dd27ba8"
-+SRC_URI[sha256sum] = "90bb658cdbbf6d1735b6341ce708fc7024a3e14e99ffdc5783edea9f9b077f83"
- 
- DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
- RDEPENDS_${PN} += "${PYTHON_PN}-zipp ${PYTHON_PN}-pathlib2"
 -- 
 2.17.1
 
