@@ -1,68 +1,68 @@
 Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web12.19247.1593870674345134762
+ by mx.groups.io with SMTP id smtpd.web10.19031.1593870674344991595
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 04 Jul 2020 06:51:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=UXTFfTxM;
+ dkim=pass header.i=@koncepto.io header.s=default header.b=BdDcdudN;
  spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
 Received: from menoah.home (lfbn-bor-1-1339-171.w193-250.abo.wanadoo.fr [193.250.150.171])
-	by koncepto.io (Postfix) with ESMTPSA id E897860301;
-	Sat,  4 Jul 2020 15:51:09 +0200 (CEST)
+	by koncepto.io (Postfix) with ESMTPSA id 2458360362;
+	Sat,  4 Jul 2020 15:51:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1593870670;
-	bh=WuvE3qEYEeWXCWqXrhqqo7h19XP+KCH7enxE8p8E0F4=;
-	h=From:To:Cc:Subject:Date:From;
-	b=UXTFfTxMt3N4XdaT9xSaScUk22MCB/xZdrJhcfVyLxlX5XFawe+aloadoeCRWGfVo
-	 dmeujXmDmAFIIkKooRXekyIfmFEmdtxBfBMAAm8dFATNtvnHcmUKRK9B5hzoCgLeM6
-	 y/ThnA4gGLo3Zo1htTzChXifVHF8K5GcRvMqBaaufFue4t88gadweYpfk3eOGxwmSK
-	 qN4jb0ug6OzKL5XmQ6i8e/9rM6JifYrA8vRjx7AOIPpyMheo6jyAgKiSAGQ8LmKeoa
-	 dwzhqI2xaxsM3x94Bq3ZYn2FDQqSb3Pfcu+g6QnH83+UrnOkVMrtGnGBnER+6hEoSJ
-	 RNbEBQkzXmrJg==
+	s=default; t=1593870671;
+	bh=UpHb5S8cH2qE43aUmCkAAgjHLUX6mKB1PfPSW3pQ+C8=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=BdDcdudNUF7xZarsmZMQqBqHn5QAnOnSh43tn9IXuTANHZjHmeECjR8b5LPgeLrkI
+	 kCv1Ugp+mlPt3YiQLs2XTajH/caz9rgKUjYpbvWb1y3flZFGcwhnPLioTqtXrx6RQe
+	 ML+dyFrWiqEssgeB7ieg+i9k0v9/edARjMm3xGkhupUeTu/J++9MZXkPuxERViX/T8
+	 nyf4oocs+GG5FCp9VaaJ7xjZMUjRpV438eJFFXrVFXj/IEUjRy+R9HKV92mEaubBRP
+	 vVMVkpeO3i8myK8/zQHw/bwK11up2XnatcOraThE3tlCh+IxpumZEjVbPl0B2cVNfw
+	 A6BXrFDwINtfw==
 From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH 1/2] haveged: upgrade 1.9.9 -> 1.9.13
-Date: Sat,  4 Jul 2020 15:51:06 +0200
-Message-Id: <1593870667-26940-1-git-send-email-pjtexier@koncepto.io>
+Subject: [meta-oe][PATCH 2/2] xxhash: upgrade 0.7.3 -> 0.7.4
+Date: Sat,  4 Jul 2020 15:51:07 +0200
+Message-Id: <1593870667-26940-2-git-send-email-pjtexier@koncepto.io>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1593870667-26940-1-git-send-email-pjtexier@koncepto.io>
+References: <1593870667-26940-1-git-send-email-pjtexier@koncepto.io>
 
-This includes the following changes:
+License-Update: copyright years updated
 
-1.9.10:
- - fix ordering cycle with private tmp
+-Copyright (c) 2012-present, Yann Collet
++Copyright (c) 2012-2020 Yann Collet
 
-1.9.11:
- - Fixed wrong version string in v1.9.10
-
-1.9.12:
- - Fix a memory leak in havege_destroy
-
-1.9.13:
- - Added support for --version
- - Updated systemd SystemCallFilter settings
+See full changelog https://github.com/Cyan4973/xxHash/releases/tag/v0.7.4
 
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- .../haveged/{haveged_1.9.9.bb => haveged_1.9.13.bb}             | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/haveged/{haveged_1.9.9.bb => haveged_1.9.13.bb} (97%)
+ .../xxhash/{xxhash_0.7.3.bb => xxhash_0.7.4.bb}               | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/xxhash/{xxhash_0.7.3.bb => xxhash_0.7.4.bb} (78%)
 
-diff --git a/meta-oe/recipes-extended/haveged/haveged_1.9.9.bb b/meta-oe/recipes-extended/haveged/haveged_1.9.13.bb
-similarity index 97%
-rename from meta-oe/recipes-extended/haveged/haveged_1.9.9.bb
-rename to meta-oe/recipes-extended/haveged/haveged_1.9.13.bb
-index c1839b37a..50326ea2f 100644
---- a/meta-oe/recipes-extended/haveged/haveged_1.9.9.bb
-+++ b/meta-oe/recipes-extended/haveged/haveged_1.9.13.bb
-@@ -6,7 +6,7 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM="file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-oe/recipes-support/xxhash/xxhash_0.7.3.bb b/meta-oe/recipes-support/xxhash/xxhash_0.7.4.bb
+similarity index 78%
+rename from meta-oe/recipes-support/xxhash/xxhash_0.7.3.bb
+rename to meta-oe/recipes-support/xxhash/xxhash_0.7.4.bb
+index 865adc5a1..6e74e49bf 100644
+--- a/meta-oe/recipes-support/xxhash/xxhash_0.7.3.bb
++++ b/meta-oe/recipes-support/xxhash/xxhash_0.7.4.bb
+@@ -3,12 +3,12 @@ DESCRIPTION = "xxHash is an extremely fast non-cryptographic hash algorithm, \
+ working at speeds close to RAM limits."
+ HOMEPAGE = "http://www.xxhash.com/"
+ LICENSE = "BSD-2-Clause & GPL-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=01a7eba4212ef1e882777a38585e7a9b"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b335320506abb0505437e39295e799cb"
  
- # v1.9.9
--SRCREV = "6da706c8026b629d9bb7ebebc32239305a03da8e"
-+SRCREV = "1283a65c541c4a83e152024a63faf7b267b9b1cd"
- SRC_URI = "git://github.com/jirka-h/haveged.git \
- "
+ SRC_URI = "git://github.com/Cyan4973/xxHash.git"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ 
+-SRCREV = "d408e9b0606d07b1ddc5452ffc0ec8512211b174"
++SRCREV = "173e50be0509c6fb6c1bb74d95049ef61d7fdced"
+ 
  S = "${WORKDIR}/git"
+ 
 -- 
 2.27.0
 
