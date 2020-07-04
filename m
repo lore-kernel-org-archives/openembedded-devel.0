@@ -1,68 +1,94 @@
-Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web10.19031.1593870674344991595
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
+ by mx.groups.io with SMTP id smtpd.web12.20512.1593875052471763855
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Jul 2020 06:51:15 -0700
+ Sat, 04 Jul 2020 08:04:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=BdDcdudN;
- spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
-Received: from menoah.home (lfbn-bor-1-1339-171.w193-250.abo.wanadoo.fr [193.250.150.171])
-	by koncepto.io (Postfix) with ESMTPSA id 2458360362;
-	Sat,  4 Jul 2020 15:51:11 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1593870671;
-	bh=UpHb5S8cH2qE43aUmCkAAgjHLUX6mKB1PfPSW3pQ+C8=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=BdDcdudNUF7xZarsmZMQqBqHn5QAnOnSh43tn9IXuTANHZjHmeECjR8b5LPgeLrkI
-	 kCv1Ugp+mlPt3YiQLs2XTajH/caz9rgKUjYpbvWb1y3flZFGcwhnPLioTqtXrx6RQe
-	 ML+dyFrWiqEssgeB7ieg+i9k0v9/edARjMm3xGkhupUeTu/J++9MZXkPuxERViX/T8
-	 nyf4oocs+GG5FCp9VaaJ7xjZMUjRpV438eJFFXrVFXj/IEUjRy+R9HKV92mEaubBRP
-	 vVMVkpeO3i8myK8/zQHw/bwK11up2XnatcOraThE3tlCh+IxpumZEjVbPl0B2cVNfw
-	 A6BXrFDwINtfw==
-From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH 2/2] xxhash: upgrade 0.7.3 -> 0.7.4
-Date: Sat,  4 Jul 2020 15:51:07 +0200
-Message-Id: <1593870667-26940-2-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1593870667-26940-1-git-send-email-pjtexier@koncepto.io>
-References: <1593870667-26940-1-git-send-email-pjtexier@koncepto.io>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Gt/o/Ohc;
+ spf=pass (domain: gmail.com, ip: 209.85.160.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f195.google.com with SMTP id w27so2849026qtb.7
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Jul 2020 08:04:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=a9BmjZEAm3DYhfXgbzuzA57oA+n7H8cJd15kfC2878Q=;
+        b=Gt/o/Ohc/yRQNpCVoqBuYyHqoHadS6RHie1tgEz/1lvmVObpA88uN4aVYXiojdahoE
+         9ILt339gLeo3Np3/ZxLoiLOFDgpPxo088f7y/l8G7O2vxNTmpFymee7IQKhxyT7hvQ8V
+         0SOtZvdOprBNX61rh8DfpZwHr7XK/47i8YYQiF+ZXZ6czDuoMVEyvXPVIfYs2A4MqMGc
+         Hlmm9HQp2PpN3XdFeU7KvnT9hSFO40ic4GtQFLd7aSU/DosTONTMdX4u8K+gjn7mfHj8
+         J9+WsPwsxOJeQ+LknvlQcKBILYvJK/8mPFdFvysGwM0e0LXWq/5gIZFHhhJmnPVjrWXZ
+         qhAg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=a9BmjZEAm3DYhfXgbzuzA57oA+n7H8cJd15kfC2878Q=;
+        b=kNE+qIBL4hz+9XDq/Q08crbzNE6oM7IDmlX7kgPqvPfjWDXB6vhm/N2PhoZuahUnSN
+         YwtbXHv1cebE1fjwaKpP971wlepRfVl6s2bshF6wht+Ut8OHDMQWsTSpF3hMdbo78UZK
+         i4TQuf+lFumcIyAPrR6otB6UkH9wk01E4wpY2Q24NJrN+PJ1Peg8ttjL3bV5JZ6KQhlc
+         7HzQ5xRHi5CNm6xapkNIxftopTbMpxlEvawpMLWj5+HokfsstqQFpNvofcOVGeDi/I9k
+         W/VJxjOB2vUo43KitjmkeIVPrv6RAxhRuyPHoSP8FBqN4CN4aHVoCKWqMBFsNrHL9hqR
+         MeQA==
+X-Gm-Message-State: AOAM5327IvRys9r+xIMEus05Tnq6vr8ba/6erHXSHa55qv8S31d7QXBi
+	/DkSYuc33iweGh7Xktij9NUOqlfmlvsLqeNeZy0=
+X-Google-Smtp-Source: ABdhPJydx1sdBtF4MdCXUGdoTCh6x9rmy4JPT0yigo/UhZ+4/0xsmMhH1m+I1pSj6Cws1FJWRMDGhpgOKHXHx/llNRM=
+X-Received: by 2002:aed:3621:: with SMTP id e30mr41696944qtb.190.1593875051445;
+ Sat, 04 Jul 2020 08:04:11 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200703183115.45146-1-paulohefagundes@gmail.com>
+In-Reply-To: <20200703183115.45146-1-paulohefagundes@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Sat, 4 Jul 2020 08:03:45 -0700
+Message-ID: <CAMKF1sqRhZ=hpQHYB6bbkny=p9w5JFzUkX3az7RR6SM2BRmDSg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] redis-plus-plus: add recipe
+To: "Fagundes, Paulo" <paulohefagundes@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-License-Update: copyright years updated
+Hi Paulo
 
--Copyright (c) 2012-present, Yann Collet
-+Copyright (c) 2012-2020 Yann Collet
+On Fri, Jul 3, 2020 at 11:31 AM Fagundes, Paulo
+<paulohefagundes@gmail.com> wrote:
+>
+> redis-plus-plus is a redis client written in C++ and based on hiredis
+>
+> Signed-off-by: Paulo Fagundes <paulohefagundes@gmail.com>
+> ---
+>  .../redis-plus-plus/redis-plus-plus_1.1.2.bb       | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.1.2.bb
+>
+> diff --git a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.1.2.bb b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.1.2.bb
+> new file mode 100644
+> index 0000000000..c6b64af432
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.1.2.bb
+> @@ -0,0 +1,14 @@
+> +DESCRIPTION = "C++ client for Redis based on hiredis"
+> +LICENSE = "Apache-2.0"
 
-See full changelog https://github.com/Cyan4973/xxHash/releases/tag/v0.7.4
+this recipe needs to define LIC_FILES_CHKSUM as well. Please fix it
+and resend it.
 
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
----
- .../xxhash/{xxhash_0.7.3.bb => xxhash_0.7.4.bb}               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/xxhash/{xxhash_0.7.3.bb => xxhash_0.7.4.bb} (78%)
+> +HOMEPAGE = "https://github.com/sewenew/redis-plus-plus"
+> +
+> +SRC_URI = "https://github.com/sewenew/redis-plus-plus/archive/1.1.2.tar.gz"
 
-diff --git a/meta-oe/recipes-support/xxhash/xxhash_0.7.3.bb b/meta-oe/recipes-support/xxhash/xxhash_0.7.4.bb
-similarity index 78%
-rename from meta-oe/recipes-support/xxhash/xxhash_0.7.3.bb
-rename to meta-oe/recipes-support/xxhash/xxhash_0.7.4.bb
-index 865adc5a1..6e74e49bf 100644
---- a/meta-oe/recipes-support/xxhash/xxhash_0.7.3.bb
-+++ b/meta-oe/recipes-support/xxhash/xxhash_0.7.4.bb
-@@ -3,12 +3,12 @@ DESCRIPTION = "xxHash is an extremely fast non-cryptographic hash algorithm, \
- working at speeds close to RAM limits."
- HOMEPAGE = "http://www.xxhash.com/"
- LICENSE = "BSD-2-Clause & GPL-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=01a7eba4212ef1e882777a38585e7a9b"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b335320506abb0505437e39295e799cb"
- 
- SRC_URI = "git://github.com/Cyan4973/xxHash.git"
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
- 
--SRCREV = "d408e9b0606d07b1ddc5452ffc0ec8512211b174"
-+SRCREV = "173e50be0509c6fb6c1bb74d95049ef61d7fdced"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.27.0
+see if you can use a release artifact instead of the archive since
+they might change checksums randomly. If there is no release artifact
+then
+use SRCREV to pin to the release tag with git fetcher instead.
 
+> +SRC_URI[sha256sum] = "9ff6050a948907ed7a7670296e6926f2bcc413555fc514adfb3b78ea11faa332"
+> +
+> +DEPENDS += "hiredis"
+> +RDEPENDS_${PN} += "hiredis"
+> +
+> +FILES_SOLIBSDEV = ""
+> +FILES_${PN} += " ${libdir}/libredis++.so"
+> +
+> +inherit cmake
+> --
+> 2.27.0
+>
+> 
