@@ -1,17 +1,17 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.40])
- by mx.groups.io with SMTP id smtpd.web10.60594.1594050268041310356
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.59])
+ by mx.groups.io with SMTP id smtpd.web11.60874.1594050490414686839
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Jul 2020 08:44:28 -0700
+ Mon, 06 Jul 2020 08:48:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Wm/cLyTB;
- spf=pass (domain: windriver.com, ip: 40.107.243.40, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=J5rL4DAU;
+ spf=pass (domain: windriver.com, ip: 40.107.243.59, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nc5CVBcO5SxM8aCLbf38aTeJgM+W5wnFK5R7c7RMqEqeXpnZCiIceUawfkcFGuJv/z/fnPMdpylXSLkVhQcmmAfR3jNNDTBGQrJHJutQVYBWilv4FVv1KNU+ttlxeSelhRhYfnWmCREUOAUHgD3vegwmSf8tQIihg6rUNwx4cRlYwzM0b3DxmSLsi3FuyDPc7uRWuJZgYqHeYpxDHFxSh+KSbE26pzx0lKW/btjx4EeXMp7RxMUTM2mekqvdjBGCQdYJ9EGb+taxjWxQtF3tV7p4HHgRlaH8iRAt+3GDdAxJXqUJxC21h5CUEkjyR62yeQ/3LSP/9r2WNzOB3pA1Sg==
+ b=RLi0UVeRdvagRWOHBSCO4h+V2W8mpfTDR1sEdOvt7nZeB26dohtKsXG+Z7NWE/6owS98vvnS1ZoFlyUg5o74dJfzl0R+oLq2mei5vX7NgYYWxDrhkvpse2hJKQHCGTLaePP+VMNXF3S8d/DEuURH5TCzi6nIe4CPUsYWCE+5TotJzcs9npPJREZxcSes1PePi6uEMK+K+TVTHQfLF6xPMprHN2BPfJ6rCWSXmSLSvMZmRowi3iHViNn9OaDFWmKf5zxxNA4Z5l1IUeUWPu3vQbjNkyd/xhf5c0OcXjrvuzJPI3LwXIPJLHZ4CPNj3cALE08mYLhmInZAtY818GwfxQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vsxbZc1J+TQgSbxhNyQUMyD+5jETAQwdxw83n2ICRlA=;
- b=D1pJ64DyATCkCH1J2lfJBGxhM5PNNLLhSo+mZv7oWX/d1xRVH/PBStQPljA4Kb/qSuJCRl5Cu6IB8ciygvUsOQ6gw1XD28cYyJgSdI6hjyZJaBqnC837s09JRWi0vtaBuSKCHKddsKd2EShE/YwLdZdtm6vd5QkVQc1a1SKpA13CpdDWliL37n2B3GwUYmS2VfrrzTlSZ1II0mtpXef9p/fmabyaE9dBvGkkTvJ+RrsqFJyBvQESlCv7pDAHhNNjNBQ0KlOo+coeTGhVcSZLHCpNA8OrOCem+gZ+8LbhP0jUz3R5l221uFuONc6A19JtmLRELwM86F/AmJdrsvyXBg==
+ bh=gsNflc84tZzlJKx2XfRk5kJiQ+z+OeVtONNSFYRrYos=;
+ b=ENL3RpREpzekMGtiY0+COQ8Mux2MgP2NG681rXKEg5JvOn7QELFXxlPDOg4CAf+nohSIWjlATQ+LkBfNO/iGXKmwKkFGgy8qvWocvWZkNm2STLw3Ca9yCKH3MIdQvtWnLQQT/TTXn/taupCbA8fE+Zlw0pdDvm3mh9FrsasPUNW9Q4GrgqxxD6aclQ52Bc3QmWtTpTHfDrpalhg3X/KKapfutd5zKdBsCDC7Kt0D5cQ3sRUZlxiqY9Cl0/reNn4scWkT4023EaeSlJhaahFv36LPllgfwNeaFjtHTPkVXuQ0dnGdc+0XNRbfCBLrLJt2nc91s2gBOW07lfbPmL/Y8Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,111 +19,120 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vsxbZc1J+TQgSbxhNyQUMyD+5jETAQwdxw83n2ICRlA=;
- b=Wm/cLyTBksJFpnsX/AjtMtW3/54D30FtunryXSuSHarbZOf1+Jy6NMVDrwnjLLo2v/IBqPd+L9FXiP2RThVQeLnc3tvC2iP90AvCyDM6AzCkI5f+RGsxqBi7Sg90+UUenVxeFFi5gvmZdJ1M0w4D9LUUQmPRNTqb2RIKy9Oovzo=
+ bh=gsNflc84tZzlJKx2XfRk5kJiQ+z+OeVtONNSFYRrYos=;
+ b=J5rL4DAUMwlAjReiyIDxcsdRofofY/n9ugagHC2Xypj8bOiljecJZjF1fqTY+0C+/0Dl+K52byRO+Wsa2CElpXlMMXjkTejiySAUKg081pBzY/dQSUhpfJV+6HYIBt4X1GWo1MANRj+vytFoGK8Zsm3edZ2VcDvZGgpIPkdxld0=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29) by
  DM6PR11MB3275.namprd11.prod.outlook.com (2603:10b6:5:5e::16) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3153.23; Mon, 6 Jul 2020 15:44:27 +0000
+ 15.20.3153.23; Mon, 6 Jul 2020 15:48:09 +0000
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2]) by DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2%5]) with mapi id 15.20.3153.029; Mon, 6 Jul 2020
- 15:44:27 +0000
-Subject: Re: [oe] [meta-python][PATCH 01/10] python3-importlib-metadata: Upgrade 1.6.1 -> 1.7.0
+ 15:48:09 +0000
+Subject: Re: [oe] [meta-python][PATCH 02/10] python3-websocket-client: Upgrade 0.56.0 -> 0.57.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200703093020.3514-1-leon.anavi@konsulko.com>
+ <20200703093020.3514-2-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <795b1df7-ebdb-e109-3e8e-cbd6368b29d9@windriver.com>
-Date: Mon, 6 Jul 2020 11:44:25 -0400
+Message-ID: <db35f5ec-7d46-e938-aa13-373738d6560f@windriver.com>
+Date: Mon, 6 Jul 2020 11:48:07 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200703093020.3514-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0152.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::31) To DM5PR11MB0011.namprd11.prod.outlook.com
- (2603:10b6:4:6b::29)
+In-Reply-To: <20200703093020.3514-2-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0006.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::19)
+ To DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0152.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.21 via Frontend Transport; Mon, 6 Jul 2020 15:44:26 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0006.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::19) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.20 via Frontend Transport; Mon, 6 Jul 2020 15:48:09 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: ee9ed102-f382-4f3a-b460-08d821c376bc
+X-MS-Office365-Filtering-Correlation-Id: c9b3a025-5837-4f21-efa7-08d821c3fb53
 X-MS-TrafficTypeDiagnostic: DM6PR11MB3275:
 X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB3275A7271E96469ABF81B05C9F690@DM6PR11MB3275.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1850;
+	<DM6PR11MB3275A72BBC7D97BCB87A21BB9F690@DM6PR11MB3275.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6108;
 X-Forefront-PRVS: 04569283F9
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	PI9nNiTQES8/JM6DnLg0bccobYQS7a3P82v3DfkDq+0JcG/UaDzJJQI2jJ9ZALibpkx1RUPuTDv9v7vLG1E2eCCYSt/vw18xEobnlZmkfkuGG0T628s0cg2Qdx+4weQ/+7VNIrXgW297/+nRamvgo5taUz8bdiOCVU0pheZCOYjhWEE0NlQ97nmVOjUYf8ryiGtjnpZetAYeIksfQ4AWnYp7wANToqJ3Dc4THQxWVephAX3H5jn9jq5gtYiIF/DcdgB4mteYL8xgOXm7fGbItblERzMCGmr7cnAbdcgXHZJI3W7MDduT/fyV0vv+WN1FhFo4cROf8okplHoeRDCiZ+7hIR9sl3oeIbLC2lAPBFvP15QQ1wG5zmwmFfOucVFFNIa0dmVXvODzrFY246eg5zPr1k8P+6zyYDF09dDQy12CFt6A01zTix8TBCzNMzFbUTfnNyFfrNUHT5WvF5AIBA==
+	ul4LjrJOQUggBas96ibe08Sblw7K21SeyR4NjinqnFHnOZhg5HWX5y35IQm+cOc8nrkOk91Mhsup4mBN3pSuukHh0Vmb/SCZ9AzcYrXcSi2KOPM+VRfHnjlm0NReUM2NFMWeGRqT9kQ0M8Z1B+X1k0A7kjkSo0G/9eQ1DFFa0dE4LMrTp/SSnZFoblYBusW8CspSXYVRe622aJQpp6MZsnQTLvJVeTZYmG9QFl8eQ7OEHzpkLnEmuZ8UaVhImo8zMs7KHkbsocVTFC//5vC7zaGOkKTIVhjcBkyBP7syMwSa2EHm6pxa2xcYn7u9IyCSYl3wAmn2En7U2t5aXNNOZHNzTUQsWVV1jEGY3fsCJINDYrREeUZKxV0sAD8Vg52qoFNA23udiF1MCGUFZuYSqP/AxZCj+dMpYH4Gff680aUd9k0pHCTIsmxeJWs351/8GPJYYJEAWCF3Wa3j1E7Saw==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(346002)(376002)(366004)(39850400004)(396003)(33964004)(16576012)(36756003)(26005)(8936002)(8676002)(316002)(31696002)(6486002)(16526019)(86362001)(2616005)(83380400001)(44832011)(186003)(956004)(2906002)(166002)(66946007)(52116002)(31686004)(66556008)(66476007)(5660300002)(53546011)(478600001)(966005)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	9aLVcl+qfcruJ3DYRAhtKOB/bWqtjyhrnRlo8EbJPCeoaiajF7VJGqryATDUHnouEWsz23z1eT0UJ6msaqe6MmPFZpuyrqg3ways9FvBwAFDH0AzPH9odzsu+T8G136sMMtdE95psorMt342MRb4VYuEd/g8ES4krrGHtakolJ4gxzQQa9mSbQxFQPqZHWN61192fx9yJegzjC5KBYyiD69yZmVa4UE8j4LURCMyUi4+gn6ixiDsRZ54y15mCGIn2Hr4y8QeiUqgWtPu6lEQ8aARBuNYBUt6iR38Dj9UoApdAJ57qAoW/vXkRcn2WorN0NyWWx6RtGUIi5xPwm0KbItCwRG9qLXgOJPGgKB8lgSjwpypYqYktwxCjdOLhtBM3Ul/g7YfddJK3zIPAdd4D4XGo/AS14QSqhi2lEQsNnTDIDnpcAjJJZ+308fG62A7vdUgvL5tbXfwy/bxhG/EGnnsnIUx4ydytvzh2Zo5eLzNVZYGstaqUfowCPASRoXG
+	0ERORDixzZc1DvEA3B+O3IQw0BUe+LZIDnC42tn8VEOl6toVdPM2R/RzK5oX6KIx+LW8JcAb+MrII60vfJpXnX+Kk7BMutuFNdXUEGB0isGqGjL4Th1kLADMYFGExVLVcduAx3eTiw+uZIVwpxyCmDbuhJl4GZj9qluXr9pTNyRI+csL3SGCeysGeXli7LS4KIvHRW7FJ3ULfaJ9nJ6ebz5NrDyuC8j84IxJN/WkarfHq9yhmtjbyGYJvwMwONiCBk9cEgtjXg4WP1scf9vISbnwwZBIieuL4yBLJ8I7Q8fMJMi+BUKXPT3d+ByUpzm57UXgB5mS5G0Z3KgKgLQ1MYbedNxAaED6UZKk22vXIEVdTUXylhPbcJLfrn54uFODK7jVZ8MODoqTLXzCCX+mhhQLdYmuB+zgxTP270DOlSdtKZOjJds2lpFHxr57it26740KBgWcdFehBABDXdosGzSZstL8U76nsm0RovummKcjk9iIW1z6WGBrBh7tT2/1
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ee9ed102-f382-4f3a-b460-08d821c376bc
+X-MS-Exchange-CrossTenant-Network-Message-Id: c9b3a025-5837-4f21-efa7-08d821c3fb53
 X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB0011.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2020 15:44:27.1660
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2020 15:48:09.3295
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lrw52zWuPYel+gSVNJXrZlITF7xGkYyZnV55qGNNgUYuNnM3L39sXXZf894asGetZ0unE6efkFUnRSPVbZX2WjZfRDaQaZvF6jWO2w53lhk=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 25AA2IfV9nPJbLQp141VUCjN9dEkQq/LUDSOmu8sCummtHSKXMliPe3OtQFzOjT7JOii/cPnQhJNPDnTlWKrluNsWcmKJMGr0ZpQ0cbqZS8=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB3275
 Content-Type: multipart/alternative;
- boundary="------------61C2B4B700978657E9D2A262"
+ boundary="------------4EB042D65918BA22E67E3EAD"
 Content-Language: en-US
 
---------------61C2B4B700978657E9D2A262
+--------------4EB042D65918BA22E67E3EAD
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 7/3/20 5:30 AM, Leon Anavi wrote:
-> Upgrade to release 1.7.0:
+> Upgrade to release 0.57.0:
 >
-> - PathNotFoundError now has a custom __str__ mentioning
->    "package metadata" being missing to help guide users to the cause
->     when the package is installed but no metadata is present.
+> - wsdump: Fix --headers option
+> - Fix getting 400 bad request with long proxy authorization string
+> - Fix for errors that occur when closing websocket from another
+>    thread
+> - avoid calling repr(data) if tracing is not enabled
+> - Fixed typo
+> - Create dummy `ssl` object
+> - Show compressed text messages in wsdump.py
+> - Resolve issue opening socket to intranet on Windows 10 with no
+>    proxy settings but behind proxy
+> - Expose http connection header to user
+> - Improve the readability of HTTP status codes.
+> - fix the compatible issue with gevent+dnspython
+> - v should be checked for emptry string before splitting it
+> - _handshake: hasattr checks on six before accessing the values
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...etadata_1.6.1.bb => python3-importlib-metadata_1.7.0.bb} | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-importlib-metadata_1.6.1.bb => python3-importlib-metadata_1.7.0.bb} (64%)
+>   ...et-client_0.56.0.bb => python3-websocket-client_0.57.0.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-websocket-client_0.56.0.bb => python3-websocket-client_0.57.0.bb} (77%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb b/meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
-> similarity index 64%
-> rename from meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb
-> rename to meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
-> index c46df8fcdc..de0fc78368 100644
-> --- a/meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
-> @@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e88ae122f3925d8bde8319060f2ddb8e"
+> diff --git a/meta-python/recipes-devtools/python/python3-websocket-client_0.56.0.bb b/meta-python/recipes-devtools/python/python3-websocket-client_0.57.0.bb
+> similarity index 77%
+> rename from meta-python/recipes-devtools/python/python3-websocket-client_0.56.0.bb
+> rename to meta-python/recipes-devtools/python/python3-websocket-client_0.57.0.bb
+> index a3e1bcf393..aaa92f3ccb 100644
+> --- a/meta-python/recipes-devtools/python/python3-websocket-client_0.56.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-websocket-client_0.57.0.bb
+> @@ -7,8 +7,8 @@ HOMEPAGE = "https://github.com/websocket-client/websocket-client"
+>   LICENSE = "BSD-3-Clause"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=c4c4a98fbc4836b81c8c64d6ecb01fc1"
 >   
+> -SRC_URI[md5sum] = "89484bd5dac71123ae6a09b2f90fe62c"
+> -SRC_URI[sha256sum] = "1fd5520878b68b84b5748bb30e592b10d0a91529d5383f74f4964e72b297fd3a"
+> +SRC_URI[md5sum] = "8061820da5e1de26a6a1a6996d4eebd5"
+> +SRC_URI[sha256sum] = "d735b91d6d1692a6a181f2a8c9e0238e5f6373356f561bb9dc4c7af36f452010"
+>   
+>   PYPI_PACKAGE = "websocket_client"
 >   inherit pypi setuptools3
->   
-> -SRC_URI = "https://files.pythonhosted.org/packages/aa/9a/8483b77e2decd95963d7e34bc9bc91a26e71fd89b57d8cf978ca24747c7f/importlib_metadata-1.6.1.tar.gz"
-> +SRC_URI = "https://files.pythonhosted.org/packages/e2/ae/0b037584024c1557e537d25482c306cf6327b5a09b6c4b893579292c1c38/importlib_metadata-1.7.0.tar.gz"
->   S = "${WORKDIR}/importlib_metadata-${PV}"
-> -SRC_URI[md5sum] = "38f795ac13abc923acfd3da06263eb8f"
-> -SRC_URI[sha256sum] = "0505dd08068cfec00f53a74a0ad927676d7757da81b7436a6eefe4c7cf75c545"
-> +SRC_URI[md5sum] = "4505ea85600cca1e693a4f8f5dd27ba8"
-> +SRC_URI[sha256sum] = "90bb658cdbbf6d1735b6341ce708fc7024a3e14e99ffdc5783edea9f9b077f83"
->   
->   DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
->   RDEPENDS_${PN} += "${PYTHON_PN}-zipp ${PYTHON_PN}-pathlib2"
 >
 > 
 
---------------61C2B4B700978657E9D2A262
+--------------4EB042D65918BA22E67E3EAD
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -135,44 +144,53 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 7/3/20 5:30 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200703093020.3514-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.7.0:
+    <blockquote type="cite" cite="mid:20200703093020.3514-2-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 0.57.0:
 
-- PathNotFoundError now has a custom __str__ mentioning
-  &quot;package metadata&quot; being missing to help guide users to the cause
-   when the package is installed but no metadata is present.
+- wsdump: Fix --headers option
+- Fix getting 400 bad request with long proxy authorization string
+- Fix for errors that occur when closing websocket from another
+  thread
+- avoid calling repr(data) if tracing is not enabled
+- Fixed typo
+- Create dummy `ssl` object
+- Show compressed text messages in wsdump.py
+- Resolve issue opening socket to intranet on Windows 10 with no
+  proxy settings but behind proxy
+- Expose http connection header to user
+- Improve the readability of HTTP status codes.
+- fix the compatible issue with gevent&#43;dnspython
+- v should be checked for emptry string before splitting it
+- _handshake: hasattr checks on six before accessing the values
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200703093020.3514-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200703093020.3514-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...etadata_1.6.1.bb =&gt; python3-importlib-metadata_1.7.0.bb} | 6 &#43;&#43;&#43;---
- 1 file changed, 3 insertions(&#43;), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-importlib-metadata_1.6.1.bb =&gt; python3-importlib-metadata_1.7.0.bb} (64%)
+ ...et-client_0.56.0.bb =&gt; python3-websocket-client_0.57.0.bb} | 4 &#43;&#43;--
+ 1 file changed, 2 insertions(&#43;), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-websocket-client_0.56.0.bb =&gt; python3-websocket-client_0.57.0.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb b/meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
-similarity index 64%
-rename from meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb
-rename to meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
-index c46df8fcdc..de0fc78368 100644
---- a/meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
-@@ -5,10 &#43;5,10 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=e88ae122f3925d8bde8319060f2ddb8e">&quot;file://LICENSE;md5=e88ae122f3925d8bde8319060f2ddb8e&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-websocket-client_0.56.0.bb b/meta-python/recipes-devtools/python/python3-websocket-client_0.57.0.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-websocket-client_0.56.0.bb
+rename to meta-python/recipes-devtools/python/python3-websocket-client_0.57.0.bb
+index a3e1bcf393..aaa92f3ccb 100644
+--- a/meta-python/recipes-devtools/python/python3-websocket-client_0.56.0.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-websocket-client_0.57.0.bb
+@@ -7,8 &#43;7,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/websocket-client/websocket-client">&quot;https://github.com/websocket-client/websocket-client&quot;</a>
+ LICENSE = &quot;BSD-3-Clause&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=c4c4a98fbc4836b81c8c64d6ecb01fc1">&quot;file://LICENSE;md5=c4c4a98fbc4836b81c8c64d6ecb01fc1&quot;</a>
  
+-SRC_URI[md5sum] = &quot;89484bd5dac71123ae6a09b2f90fe62c&quot;
+-SRC_URI[sha256sum] = &quot;1fd5520878b68b84b5748bb30e592b10d0a91529d5383f74f4964e72b297fd3a&quot;
+&#43;SRC_URI[md5sum] = &quot;8061820da5e1de26a6a1a6996d4eebd5&quot;
+&#43;SRC_URI[sha256sum] = &quot;d735b91d6d1692a6a181f2a8c9e0238e5f6373356f561bb9dc4c7af36f452010&quot;
+ 
+ PYPI_PACKAGE = &quot;websocket_client&quot;
  inherit pypi setuptools3
- 
--SRC_URI = <a class="moz-txt-link-rfc2396E" href="https://files.pythonhosted.org/packages/aa/9a/8483b77e2decd95963d7e34bc9bc91a26e71fd89b57d8cf978ca24747c7f/importlib_metadata-1.6.1.tar.gz">&quot;https://files.pythonhosted.org/packages/aa/9a/8483b77e2decd95963d7e34bc9bc91a26e71fd89b57d8cf978ca24747c7f/importlib_metadata-1.6.1.tar.gz&quot;</a>
-&#43;SRC_URI = <a class="moz-txt-link-rfc2396E" href="https://files.pythonhosted.org/packages/e2/ae/0b037584024c1557e537d25482c306cf6327b5a09b6c4b893579292c1c38/importlib_metadata-1.7.0.tar.gz">&quot;https://files.pythonhosted.org/packages/e2/ae/0b037584024c1557e537d25482c306cf6327b5a09b6c4b893579292c1c38/importlib_metadata-1.7.0.tar.gz&quot;</a>
- S = &quot;${WORKDIR}/importlib_metadata-${PV}&quot;
--SRC_URI[md5sum] = &quot;38f795ac13abc923acfd3da06263eb8f&quot;
--SRC_URI[sha256sum] = &quot;0505dd08068cfec00f53a74a0ad927676d7757da81b7436a6eefe4c7cf75c545&quot;
-&#43;SRC_URI[md5sum] = &quot;4505ea85600cca1e693a4f8f5dd27ba8&quot;
-&#43;SRC_URI[sha256sum] = &quot;90bb658cdbbf6d1735b6341ce708fc7024a3e14e99ffdc5783edea9f9b077f83&quot;
- 
- DEPENDS &#43;= &quot;${PYTHON_PN}-setuptools-scm-native&quot;
- RDEPENDS_${PN} &#43;= &quot;${PYTHON_PN}-zipp ${PYTHON_PN}-pathlib2&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -182,4 +200,4 @@ index c46df8fcdc..de0fc78368 100644
   </body>
 </html>
 
---------------61C2B4B700978657E9D2A262--
+--------------4EB042D65918BA22E67E3EAD--
