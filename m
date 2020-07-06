@@ -1,17 +1,17 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.44])
- by mx.groups.io with SMTP id smtpd.web10.60542.1594050169307058023
+Received: from NAM04-CO1-obe.outbound.protection.outlook.com (NAM04-CO1-obe.outbound.protection.outlook.com [40.107.69.69])
+ by mx.groups.io with SMTP id smtpd.web11.60759.1594050214912744291
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Jul 2020 08:42:49 -0700
+ Mon, 06 Jul 2020 08:43:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=ePGrcvkx;
- spf=pass (domain: windriver.com, ip: 40.107.243.44, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=F45hGb0y;
+ spf=pass (domain: windriver.com, ip: 40.107.69.69, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BY8TsmatZfE59Nk5kmnLJQ9qG6/Aw5FuinC/KXRuI+rOkRCi1ou3YT9LcxTPv6vruW91Ehvun4pieCxdA3JHTwU2Jm/WGOHH4lnTbo85M0FSm5m7lEs5gpUdQV3qU3nvS2wuOIlqj49hv3g3eA/8x82yCDndxzxTP1i3vW44BImckFlZdHheLlLCMvm0jTUo7DOLf4T8MHfkQ1ZKLc4bWFSaFQY282qL5mHXja8rcgdt48KI0RQUtf76nTIPOT+9E8Xv97wSblI+1ABN5lJ0Rfct0FajL1LbHUwMMGluefi1tHGAmb8xdQDaGC4iRuLYh9U704FOXgHlukGJ31nsGA==
+ b=WCh1Bt6bwG1IAkBh74ml8uG8DVCl5Ju8VDxI8u1EY5fTraLjLeummikbq4llZni1UcsIhZCZVtxhH+WgR1qmjNJ27AHtCMahLbi2Ua1KFnGAd0In3H88tylYnl2d3+3A0wlYlfJFt2p2favxRTlJ69wY1K5+V2M3H2k7fyXEy3hPZRdxIMPOGkSqy14ZLfLmWafBBrSNlWOLEB5khafb/+7bYdT75J2lrc43OOGukyGXQiZrFg+fa/6s6W86M0HX7pWnBja7BZC5V5dCLKpVJ1KoNVP3RNjEUizsKkyV1Xr8f91EJhh2847g4bVr4sC207a3ac3kRxyqgk57hfkBOw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=R1nprmALQ7QwyTdIa6jaecmyBWwcnBXe0+TGxMJFitU=;
- b=ceygrEqBksF4zz+ZGpdKVTdVVqT8ErLMYTN3XrWkwwLRsIBtdrNL2Wlq43AaW6kUsXeI4Mxk31YXsY1HlwLn1mLK43yNyfWpWqYoMHbscdCoGKVJR37nGy2KXNCxKZM+dFSewR1t1wm4yvMdw3hHWF6fxSRtfhrs5ft57Wk+hkvAvJsBP6J5mvyuYEWFAQCkrfVG1lV2FPa0fFoqUlpzI8dvOA3wcP3966eIsLxB/vOyWsDr8N+AnOKT0IqsZUJuaonXtCWwDGJ0SeJ8B1BbXcHTOxrprYRHBcLW6BcrGmm4dzOM0UuQeYaDuyAZk27ta81t8BY2qaXkCHAPDaGiHg==
+ bh=j8jyA4yrNPdwod6tLKdbBoSmWTtOcus9wHZwrfUiIG4=;
+ b=LA9xdzEGC9mdyRsSF6d20qMTlZnyWsSxGrsrYIZk2bmAQiVDT8tdb5jEvoseHUwIAffrdyANfKJloinSxf/NuR2b6GGGFxO7TXDTSWrFidepIHsw2k6VUgQkzddEuQJfFPWFu2MeAAknT1+QzxPysakAECFTPYvKfUlSdXlb6w76jahbbvzprM4DO+/rv5DaaiuCpBgMEsmIxfwVBcKpDHDXjbp3yTdtvG+necW7wbDK6Sgqe1Lnc2OIQBlEMJg3xPcNeRgRzsg5dfeQW3ulr+nTw8DRTb968Ha7FJGXuNvYMA2D4JAdzTw0g56Z43Kavj26mQO+ZFZgoGEmglp+Ug==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,119 +19,119 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=R1nprmALQ7QwyTdIa6jaecmyBWwcnBXe0+TGxMJFitU=;
- b=ePGrcvkxSOvT+Ebzch0E6OIzzR2gPLNjU4EApDOSvjFFPSjdLRulQWPU8PWVyVfhZNRFgnKWj1Y8h26XGXHyGjr1v/11msdAMtI4We60Ks2O8hGfX+AQxjTSqFlaWpsc+HQGdtp9bcmtz92aqBHql2sX8+vgn8/Zuja07mbrRvQ=
+ bh=j8jyA4yrNPdwod6tLKdbBoSmWTtOcus9wHZwrfUiIG4=;
+ b=F45hGb0yPy4hRpcI79UWdld88v3SQVoODURRJ/cUU1mi1RT2nZxiAqRqmiLOEtCBaEzYZ69HM0TL8aRORYO+yAjjL1zHokISPT2q8tEwApDwjeCw4puK/P7K5UA1UZ1qnz80P4mtoZ2sLlvFd5st45dmQREqmMXgnPVA3N59r4U=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29) by
- DM6PR11MB3275.namprd11.prod.outlook.com (2603:10b6:5:5e::16) with Microsoft
+ DM5PR11MB1899.namprd11.prod.outlook.com (2603:10b6:3:10b::14) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3153.23; Mon, 6 Jul 2020 15:42:48 +0000
+ 15.20.3153.27; Mon, 6 Jul 2020 15:43:33 +0000
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2]) by DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2%5]) with mapi id 15.20.3153.029; Mon, 6 Jul 2020
- 15:42:48 +0000
-Subject: Re: [oe] [meta-python][PATCH 3/5] python3-pybluez: Upgrade 0.22 -> 0.23
+ 15:43:33 +0000
+Subject: Re: [oe] [meta-python][PATCH 4/5] python3-stevedore: Upgrade 1.31.0 -> 2.0.1
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200702104819.14256-1-leon.anavi@konsulko.com>
- <20200702104819.14256-3-leon.anavi@konsulko.com>
+ <20200702104819.14256-4-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <4f1f4152-361f-309b-60da-15bedbdfa0b8@windriver.com>
-Date: Mon, 6 Jul 2020 11:42:46 -0400
+Message-ID: <fab227e3-72c4-40b1-71a5-166e58072342@windriver.com>
+Date: Mon, 6 Jul 2020 11:43:32 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200702104819.14256-3-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0015.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::28)
+In-Reply-To: <20200702104819.14256-4-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0031.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::44)
  To DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0015.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.23 via Frontend Transport; Mon, 6 Jul 2020 15:42:48 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0031.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::44) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.23 via Frontend Transport; Mon, 6 Jul 2020 15:43:33 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 065134b9-c337-4906-2d84-08d821c33c04
-X-MS-TrafficTypeDiagnostic: DM6PR11MB3275:
+X-MS-Office365-Filtering-Correlation-Id: e6710faf-f0ad-41fe-f7d4-08d821c35733
+X-MS-TrafficTypeDiagnostic: DM5PR11MB1899:
 X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB32758C8AE26210FAB7D9ABED9F690@DM6PR11MB3275.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2958;
+	<DM5PR11MB18994E7D4C879BF1EE32202E9F690@DM5PR11MB1899.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2399;
 X-Forefront-PRVS: 04569283F9
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	e0bjE/p2AXgpuNAnI8Fws2Rtw7egJnoiHyEz8NQavrB/RoQz80z9XP8JAhwvWzz2u4xyxLT0MiM+8Bg9sKUALZF92y3QD/kdyFsJyPimyeMUCwc9iwpETLhmK0ucAhvY7WKr059fS/9QoESKtdnemKcrMw95cobkQJL/Hw/OVe37uqHpjh3cxQzJsIpbqY5YXstZ71xd85cP/8irzvvyoMbTXaVvsJBDlC1imFPLoGtNZgKbzQWv+v21dGaH/IgaIdfBDDgoXJAObE8E93VzGSmNBYsb67tLr5ZGCRUGrmA5IV5fKOHXEK7tudEmT+Wd2Ia3l1SnhN/BeKvA7Uiy39V+8smfpi5w/lV5jYJFbZbu5xjacyoo5C0yuCT7rW2BX87Co3IhfTfryIpXs4+c9qFmmg4hAP5YIsMxEP9IvakklIr2QqIaiQ2k+paVfVBFxugJur//QkYhD5OdPcvqdw==
+	r5nYqguAFqkuRweWOMdZ43zF4uZX2RetRl3VCTPagN9ZCdC8ZXQqsGSmgOYvO5t48QSRAU6yObwYEWVfm7UuR73UlAy/RkB5Q80eGqW7I1Ecnq0Zz5JxLroq/trzenNmbj+nHgnbc1Iiuew8kMUONKnBJVY3kwwwTpqHZD209aEtTSOlvPAMUY+IL85Rc/d5b/l46BxuBMgrWPSTW0+XeIwih14t5+UZ0IBu3UOguJoxpCNhfmwCUkPPJ0o7QFuiVcNicnUqJ+2XlV6ET8YR02vBUEBYuLwsLWCOTm6bQkimlyrAMDX8hSxIW28hWOQBCCFa67wes9Jyizq/Pywl4XKq4KcdmDD9Moj8lFNYqS5ooaWUn8ryObp3dliCibCkA8hXa3ZOokBrabrh6O6y7dM9niF+qsiZ/jrF67rGjMx4lD09abO6ifCJg6dZPjUXFZHKLF4es6YL/UfHi5ZvnQ==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(346002)(376002)(366004)(39850400004)(396003)(33964004)(16576012)(36756003)(26005)(8936002)(8676002)(316002)(31696002)(6486002)(16526019)(86362001)(2616005)(83380400001)(44832011)(186003)(956004)(2906002)(166002)(66946007)(52116002)(31686004)(66556008)(66476007)(5660300002)(53546011)(478600001)(966005)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(346002)(376002)(366004)(39850400004)(136003)(16576012)(5660300002)(31686004)(478600001)(86362001)(83380400001)(31696002)(6486002)(966005)(36756003)(316002)(956004)(2616005)(186003)(16526019)(33964004)(44832011)(166002)(52116002)(8936002)(8676002)(66946007)(66476007)(66556008)(2906002)(53546011)(26005)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	LPDsgGVYuglgWCsKIEsHkO+RD0lOWI+N7O7IYLVE/mRmVq8zA753zj37e+jNn4IK1xxEFQytDe49SqCIFnkpIgdoIJhcq0eg8YkKjKeygUoo22uLf7j6GWrDk6HWyB6k3FeKK4x49ema5gxUUf303cJhU0Qm8+CJCG3HxQbu4Q0RT4TRWRf0E6g+CkBFFECdKBBszQajD71yB8ThZbBzEaMmNfB/gByHObh5yJBdlVvFjHMHFkUS8GmUfsJ7vOthn5k0i5EmRbPVV4mm+ru3YPdy1bAbYfDeNksBGJylEbv+Mq26+2s6BzYMH9wfagje4/QH//w874G/QLxsYHNMZ2o9MixRk3LwX16faC13WKvoJ43hmBqJielpRMokx8SSoMtyLQnveCzvy+XL69BPADq1wYuzeqRxll7HztjEQDB6ntdjq8JI0HvBtun/JWc2YftYxEtMMm06jsoaXb8UUkKT8TFbyBAPddZcA0OGPxG392eCbFAhU6oaQFlt7pDt
+	Ynhn39rYjuJCl1wSRIN+yWcJmlZjYMzbo8jYqSMh6VmzbfwklrRXy+svkR/MgK/9t31zd9cTJzWVAbOlLNBQ/b/P05tp12raFUdyxLCJa+/dw6TVmv3XPHrl3v9L64v6z85S7BPjYDUAGNAXZAbgOGX2RJlMEZlK7fVexJaM1QFlqu93rO29dRlsaiU3hb7aZ8u/8AzXPH8sCicxOoJ31HygurSZmZPi683MS4it/kRPKgf8Kfx/IGeZidY2AZFMm+fjDHvhs8Dlu2R9xJqdaK+M140jHXHl6Ygn07ebmIncf2YqJpqztgsuHWjAqlIZQ0p70lecveua1+uG+BvamRLG9AGGVYN153pgkU45A9Rv6jBXN96Uda040iezycot01TYCQBKj1sLE/kqUVed9pRseUA9+YzFj1D975KbKR89kGbbegLnp2VGxRDjEzzP609eUa07wHon0YWKt+bHXenbucrNmNCOD83ijf9UMKe6OEqrMI8c3mH5n77Ld7Hw
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 065134b9-c337-4906-2d84-08d821c33c04
+X-MS-Exchange-CrossTenant-Network-Message-Id: e6710faf-f0ad-41fe-f7d4-08d821c35733
 X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB0011.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2020 15:42:48.3390
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2020 15:43:33.9527
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: wfRIKC/2TwjyYDVhc8JPZXE1yy17/BWrmL12xOa78gWQKAEXjibtH3Jg0MkqAlzXIDdofgeB6FsD6d69VvkUFj6gJn3TyOqemejaZozHAPY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB3275
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6gzAqXYdGRg6TJmUmESTJtlDk0eSaTp8a78mcDwunG6qRUcMFhUTbWBeiF4lAqFzP18oDQhSnF461ftEPFG+ckm37/S7REg7thcCTDXddAM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1899
 Content-Type: multipart/alternative;
- boundary="------------49B0A258E8FBE530A9E97A9A"
+ boundary="------------D3B2568DDFB056E028E73CF8"
 Content-Language: en-US
 
---------------49B0A258E8FBE530A9E97A9A
+--------------D3B2568DDFB056E028E73CF8
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 7/2/20 6:48 AM, Leon Anavi wrote:
-> Upgrade to release 0.23:
+> Upgrade to release 2.0.1:
 >
-> - Dropped support for Python 2.7. The minimum Python version
->    is now 3.5.
+> - Stop to use the __future__ module
+> - Switch to newer openstackdocstheme and reno versions
+> - Add Python3 victoria unit tests
+> - Mark sphinx extensions thread safe
+> - Remove dead files
+> - Drop Python 2.7 support
+> - Update master for stable/ussuri
 >
-> Use tar.gz instead of zip. Fix the URL of the HOMEPAGE.
+> Update the HOMEPAGE because Stevedore is now part of the OpenStack
+> Oslo program and is managed through OpenStack's infrastructure
+> system.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../{python3-pybluez_0.22.bb => python3-pybluez_0.23.bb}   | 7 +++----
->   1 file changed, 3 insertions(+), 4 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-pybluez_0.22.bb => python3-pybluez_0.23.bb} (58%)
+>   ...thon3-stevedore_1.31.0.bb => python3-stevedore_2.0.1.bb} | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-stevedore_1.31.0.bb => python3-stevedore_2.0.1.bb} (60%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pybluez_0.22.bb b/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
-> similarity index 58%
-> rename from meta-python/recipes-devtools/python/python3-pybluez_0.22.bb
-> rename to meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
-> index 26902e18d..5242059bc 100644
-> --- a/meta-python/recipes-devtools/python/python3-pybluez_0.22.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
-> @@ -1,5 +1,5 @@
->   DESCRIPTION = "Bluetooth Python extension module"
-> -HOMEPAGE = "http://karulis.github.io/pybluez/"
-> +HOMEPAGE = "https://pybluez.github.io/"
->   SECTION = "devel/python"
+> diff --git a/meta-python/recipes-devtools/python/python3-stevedore_1.31.0.bb b/meta-python/recipes-devtools/python/python3-stevedore_2.0.1.bb
+> similarity index 60%
+> rename from meta-python/recipes-devtools/python/python3-stevedore_1.31.0.bb
+> rename to meta-python/recipes-devtools/python/python3-stevedore_2.0.1.bb
+> index b985ca5b1..cf388fa7c 100644
+> --- a/meta-python/recipes-devtools/python/python3-stevedore_1.31.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-stevedore_2.0.1.bb
+> @@ -1,10 +1,10 @@
+>   DESCRIPTION = "Manage dynamic plugins for Python applications"
+> -HOMEPAGE = "https://github.com/dreamhost/stevedore"
+> +HOMEPAGE = "https://docs.openstack.org/stevedore/latest/"
+>   LICENSE = "Apache-2.0"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 >   
->   DEPENDS = "bluez5"
-> @@ -7,11 +7,10 @@ DEPENDS = "bluez5"
->   LICENSE = "GPL-2.0"
->   LIC_FILES_CHKSUM = "file://COPYING;md5=8a71d0475d08eee76d8b6d0c6dbec543"
+> -SRC_URI[md5sum] = "42fa2bf0251c96b543765c5ce13f37c9"
+> -SRC_URI[sha256sum] = "e0739f9739a681c7a1fda76a102b65295e96a144ccdb552f2ae03c5f0abe8a14"
+> +SRC_URI[md5sum] = "d0f137ec4fe5d98978970671a860882d"
+> +SRC_URI[sha256sum] = "609912b87df5ad338ff8e44d13eaad4f4170a65b79ae9cb0aa5632598994a1b7"
 >   
-> -SRC_URI[md5sum] = "49dab9d5a8f0b798c8125c7f649be3cd"
-> -SRC_URI[sha256sum] = "4ce006716a54d9d18e8186a3f1c8b12a8e6befecffe8fd5828a291fb694ce49d"
-> +SRC_URI[md5sum] = "afbe8429bb82d2c46a3d0f5f4f898f9d"
-> +SRC_URI[sha256sum] = "c8f04d2e78951eaa9de486b4d49381704e8943d0a6e6e58f55fcd7b8582e90de"
+>   DEPENDS += "${PYTHON_PN}-pbr-native"
 >   
->   PYPI_PACKAGE = "PyBluez"
-> -PYPI_PACKAGE_EXT = "zip"
->   inherit pypi setuptools3
->   
->   RDEPENDS_${PN} += "\
 >
 > 
 
---------------49B0A258E8FBE530A9E97A9A
+--------------D3B2568DDFB056E028E73CF8
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -143,52 +143,52 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 7/2/20 6:48 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200702104819.14256-3-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 0.23:
+    <blockquote type="cite" cite="mid:20200702104819.14256-4-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 2.0.1:
 
-- Dropped support for Python 2.7. The minimum Python version
-  is now 3.5.
+- Stop to use the __future__ module
+- Switch to newer openstackdocstheme and reno versions
+- Add Python3 victoria unit tests
+- Mark sphinx extensions thread safe
+- Remove dead files
+- Drop Python 2.7 support
+- Update master for stable/ussuri
 
-Use tar.gz instead of zip. Fix the URL of the HOMEPAGE.
+Update the HOMEPAGE because Stevedore is now part of the OpenStack
+Oslo program and is managed through OpenStack's infrastructure
+system.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200702104819.14256-3-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200702104819.14256-4-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../{python3-pybluez_0.22.bb =&gt; python3-pybluez_0.23.bb}   | 7 &#43;&#43;&#43;----
- 1 file changed, 3 insertions(&#43;), 4 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pybluez_0.22.bb =&gt; python3-pybluez_0.23.bb} (58%)
+ ...thon3-stevedore_1.31.0.bb =&gt; python3-stevedore_2.0.1.bb} | 6 &#43;&#43;&#43;---
+ 1 file changed, 3 insertions(&#43;), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-stevedore_1.31.0.bb =&gt; python3-stevedore_2.0.1.bb} (60%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pybluez_0.22.bb b/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
-similarity index 58%
-rename from meta-python/recipes-devtools/python/python3-pybluez_0.22.bb
-rename to meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
-index 26902e18d..5242059bc 100644
---- a/meta-python/recipes-devtools/python/python3-pybluez_0.22.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
-@@ -1,5 &#43;1,5 @@
- DESCRIPTION = &quot;Bluetooth Python extension module&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://karulis.github.io/pybluez/">&quot;http://karulis.github.io/pybluez/&quot;</a>
-&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pybluez.github.io/">&quot;https://pybluez.github.io/&quot;</a>
- SECTION = &quot;devel/python&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-stevedore_1.31.0.bb b/meta-python/recipes-devtools/python/python3-stevedore_2.0.1.bb
+similarity index 60%
+rename from meta-python/recipes-devtools/python/python3-stevedore_1.31.0.bb
+rename to meta-python/recipes-devtools/python/python3-stevedore_2.0.1.bb
+index b985ca5b1..cf388fa7c 100644
+--- a/meta-python/recipes-devtools/python/python3-stevedore_1.31.0.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-stevedore_2.0.1.bb
+@@ -1,10 &#43;1,10 @@
+ DESCRIPTION = &quot;Manage dynamic plugins for Python applications&quot;
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/dreamhost/stevedore">&quot;https://github.com/dreamhost/stevedore&quot;</a>
+&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://docs.openstack.org/stevedore/latest/">&quot;https://docs.openstack.org/stevedore/latest/&quot;</a>
+ LICENSE = &quot;Apache-2.0&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57">&quot;file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57&quot;</a>
  
- DEPENDS = &quot;bluez5&quot;
-@@ -7,11 &#43;7,10 @@ DEPENDS = &quot;bluez5&quot;
- LICENSE = &quot;GPL-2.0&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=8a71d0475d08eee76d8b6d0c6dbec543">&quot;file://COPYING;md5=8a71d0475d08eee76d8b6d0c6dbec543&quot;</a>
+-SRC_URI[md5sum] = &quot;42fa2bf0251c96b543765c5ce13f37c9&quot;
+-SRC_URI[sha256sum] = &quot;e0739f9739a681c7a1fda76a102b65295e96a144ccdb552f2ae03c5f0abe8a14&quot;
+&#43;SRC_URI[md5sum] = &quot;d0f137ec4fe5d98978970671a860882d&quot;
+&#43;SRC_URI[sha256sum] = &quot;609912b87df5ad338ff8e44d13eaad4f4170a65b79ae9cb0aa5632598994a1b7&quot;
  
--SRC_URI[md5sum] = &quot;49dab9d5a8f0b798c8125c7f649be3cd&quot;
--SRC_URI[sha256sum] = &quot;4ce006716a54d9d18e8186a3f1c8b12a8e6befecffe8fd5828a291fb694ce49d&quot;
-&#43;SRC_URI[md5sum] = &quot;afbe8429bb82d2c46a3d0f5f4f898f9d&quot;
-&#43;SRC_URI[sha256sum] = &quot;c8f04d2e78951eaa9de486b4d49381704e8943d0a6e6e58f55fcd7b8582e90de&quot;
+ DEPENDS &#43;= &quot;${PYTHON_PN}-pbr-native&quot;
  
- PYPI_PACKAGE = &quot;PyBluez&quot;
--PYPI_PACKAGE_EXT = &quot;zip&quot;
- inherit pypi setuptools3
- 
- RDEPENDS_${PN} &#43;= &quot;\
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -198,4 +198,4 @@ index 26902e18d..5242059bc 100644
   </body>
 </html>
 
---------------49B0A258E8FBE530A9E97A9A--
+--------------D3B2568DDFB056E028E73CF8--
