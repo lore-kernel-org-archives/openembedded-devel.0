@@ -1,17 +1,17 @@
-Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.79])
- by mx.groups.io with SMTP id smtpd.web10.60352.1594049703542668200
+Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.88])
+ by mx.groups.io with SMTP id smtpd.web12.60455.1594049721701273743
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Jul 2020 08:35:04 -0700
+ Mon, 06 Jul 2020 08:35:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=j+aJR91/;
- spf=pass (domain: windriver.com, ip: 40.107.75.79, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=HY5CLOnN;
+ spf=pass (domain: windriver.com, ip: 40.107.75.88, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NpSYSteu+pyemO3B1O/a8e/zLRch59l+dzxMtD32b+ipTwFwXeVSA/J4J6zSngfkwWdqyz6x5thl88Nc40HP/9ftXoPE9DbCIJi3GXcRYJ8wmPF5lsh5S8CMiZuweJpLfRmkob1Z3HaiH5+XgQ4C52m37hvbua0GjUfI8wtll+Om1tY8rF/6RNpoLCkP3LBgVMEHrUmtQG1BMW1715+MiR8wUsnDlDac18FK6oqCVyUQ+wLcV5b95sUD6uCLJ4PK9gLZ9YKMpKp1KZDHPOxsgVUKdMMK6ZWKl3JsPUUjZykvnz4RTtGjNmeVBBjrwfsEtIGBafAy1EfrWk3ADzdL3Q==
+ b=Pzar4B5UcgkLIus4xraBAQscbYP3fA5ZSTnJKnE49l5+6WS0qKeLqA+sfQgwQfr4h/L9HxyeBcMAR+G/Xk03gYWg5qZCRgjAplbj0CImuRYCyvtycmeZMk+DF8ZQTc/d/6aGScap+Y2EbrcFYfKFPEmkHlIZJNdJ+rc7VfKujxdmSy9miO0GuKcBn/9HcCJ/+4/vtsKBi0zgTHZrHu3VpaqJmIqQVfZDUS8734K6yQFdr/aRi0b8qdgLDwNU1mRNHWhxG5380aNxQozkNqdXd+L2qaVUR7UEm5Hyugfz+gfzkszZZgf8XeRhloEgCmA++qV/nvBZMVfHEeXs8OZZXw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UK0J/9VTjykA51vOl6yCJ/YgcVoOH69r9BHLbRzePas=;
- b=EiA0PYwY+fQXq08jrHtGdZREmMdJpO9B//kR+8BzJ0InWc9yw/Um2XHOOhtV7CMwOMqI2ldOQavx4/J3gmO8WM8XX7Bn9JPV9UvTm3yngunz1OP9B4rQs0MnnkwxLOH1F59TPV+L36H9agEdOvqel94JqTeWgoH/9ddmD/pydFsdcBNFJMB2A/VDZ8qL+NSrTaKEofKzLyavFwPsbclYKBDS1CND502X1Bqu9395V05ZFUc0PzE4M4TfS1DYx2PfhNaia9weVlsCrJqu+prlQT87eX6b7Lcy0zANQUomMVdIebDuNViTucFqJLBQFgsDTCf34oqcegxq30V4vsGE7w==
+ bh=K/OYcdtU5L/Nk07eKy6K1+Lo5a/byDOSjRc0pitJtP8=;
+ b=T8UxwbYoqrnWqtUl2vHVPHKsiqVHq3oUTqCx2bboEBE2MuxuiiOIviJDFdsQtxDp+jR6bdjkWxHg/HxrkM5V0y1/jzG74x440QqSRVY6ZWCsY7RS4MBU8VFhYzkRI3sMc7Me/P16yNTaV3uj1MC5wYCKkjqDGAFbcY7jwt6c+Mu09r2E0bGlPU754D/adWvRhj5/yoawIz9/UKTQlh81DSde3DoNgNXeoQisl8YPGzLueasgEdh0fZp6lEKW54+mmG9Yf/a1GNA1qksQRkTRHLu+Vc6tu+P90/pOie8q4cOlCinOfDr/GWzPUG6R86iHkNmTGmxHrWDpy1Y13Z7VOA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,97 +19,97 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UK0J/9VTjykA51vOl6yCJ/YgcVoOH69r9BHLbRzePas=;
- b=j+aJR91/MLS66aUGGVwxbVua3/ynv43qONobk5OD+a2ogsqNSMxTL8wC7otMTTAejR24qPELFaQighlnjeIAFaEoBMPHpj487SUzc/Xs8udzUcIbPvpXkZp6IE/wwMNdQXgg8I9XO6KlnOK/GLR2v11OL8negLvo9iNaXG7X+Cg=
+ bh=K/OYcdtU5L/Nk07eKy6K1+Lo5a/byDOSjRc0pitJtP8=;
+ b=HY5CLOnNid0GSebSKtBCQ/uosAF2g8ymh9jm946iqQHC/mxlEGfhH54bb4PSnJ/bzQzRMOUp9PecT1zJNT8TlwvsdDsQJcCVcugPT0MVj3RdTk+a1rAu0oXiVu+UtOAPB2FweNfriunZJK+eiyqKidm5SRLPh9K6opvgIG688ic=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29) by
  DM6PR11MB2827.namprd11.prod.outlook.com (2603:10b6:5:c8::30) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3153.20; Mon, 6 Jul 2020 15:35:00 +0000
+ 15.20.3153.20; Mon, 6 Jul 2020 15:35:20 +0000
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2]) by DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2%5]) with mapi id 15.20.3153.029; Mon, 6 Jul 2020
- 15:35:00 +0000
-Subject: Re: [oe] [meta-python] [PATCH] python3-unidiff: Enable ptest
+ 15:35:20 +0000
+Subject: Re: [oe] [meta-python] [PATCH] python3-uritemplate: Enable ptest
 To: zhengruoqin <zhengrq.fnst@cn.fujitsu.com>,
  openembedded-devel@lists.openembedded.org
-References: <1593499134-72390-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+References: <1593499145-72426-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <d2ebd505-87d7-6f1e-a96c-bbd1d7fd97a3@windriver.com>
-Date: Mon, 6 Jul 2020 11:34:59 -0400
+Message-ID: <3639186f-4a33-8e6a-8eb8-5c0a42b09927@windriver.com>
+Date: Mon, 6 Jul 2020 11:35:18 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <1593499134-72390-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-ClientProxiedBy: YTOPR0101CA0069.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:14::46) To DM5PR11MB0011.namprd11.prod.outlook.com
+In-Reply-To: <1593499145-72426-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-ClientProxiedBy: YTOPR0101CA0047.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:14::24) To DM5PR11MB0011.namprd11.prod.outlook.com
  (2603:10b6:4:6b::29)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YTOPR0101CA0069.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:14::46) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.22 via Frontend Transport; Mon, 6 Jul 2020 15:35:00 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YTOPR0101CA0047.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:14::24) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.20 via Frontend Transport; Mon, 6 Jul 2020 15:35:19 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 0b329ea6-15e4-4c6d-33c9-08d821c22568
+X-MS-Office365-Filtering-Correlation-Id: d9edc5ee-82ba-4a1f-d5fd-08d821c230db
 X-MS-TrafficTypeDiagnostic: DM6PR11MB2827:
 X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB2827446E88C36248DA7AABA89F690@DM6PR11MB2827.namprd11.prod.outlook.com>
+	<DM6PR11MB2827F5DDD03397C9E4E610D09F690@DM6PR11MB2827.namprd11.prod.outlook.com>
 X-MS-Oob-TLC-OOBClassifiers: OLM:88;
 X-Forefront-PRVS: 04569283F9
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	nzysSOfSOTi6SMcQBRAm00jpqYtEU4Tj0MLB0jZxf55tKGarC7GaLVx0AxYB6sF3pFFevVyddWXOuZiNjZANLwTDlGKpwMcoX5R3tzyiHDI8pxFjcud/CzuEBpQt7tdnGzFU3KerFTRYFt8/mQZ6Tjcp99X27e0sZD9geM/mcYuHWcOuuqRYB7JOJLKaG8FRuqPT0fBRTasFgBXq7Pqak5Hd8hQ2zUKU9thgixExaZ8dMx2eboZULBXFv7t2i1ODnJ3mcoG1vCai03quPlakayxRaOafzdpXghw7wg43W/g9D1Y+LGkTrpQhwdHzMlZQH5tQJ6SgfKADr/Gi6O6By8fzVfGVDIUVSGr4DS3Q6oo66wxnoSKEwyRU8mUqIS9WowDZyyjIzmrDbunPD31IPENRVIfLWynSOYO2LfQfJ4FA/nH3k3zwKll4OcPFQoiZnar+pTQnNChWJiqBmV15kA==
+	/JbaSV0A9W7oBg8mn2tczOSVWvaxJnZJTTAyVkkQMXYiOOAAV2wRqf2MPLaGzLoZhb85bteT20cUNPLYsDr8/cheoZc35ZQUt18lpxDPeGOoYB5xaCnWrLxnWOfv2+rxkm7Q/fjyQLuR/j9e2sKMehLArkzWeSTNCu6ks3bFcc1PVqiQI1POmmLLuNIWWgxvx56CepHThuqZ61J4O+1CWbGulJdrLfWZ7s6ubeTFz7EsIZspmqUlbO6c0nUfDTTcWhf2GOFItrLoyWX5Rs3ytIB9p9x+4KWCoj91DHLzoVq//Vy6jeS8EuzCoC9BM/ruwYEBFkXxcJ21FMYzxBS6w+Q6Pu0/N37gLE3DPL5XIL+4NHoa9niy2OJmSdM8bslRHnrTgbcKVkGuoiNGcLdie/3MiuqeJY0ITb8HT3N5AinetnlJ91ykrXERryknUt8rL9MlgZhXmbFmyLYdUCqkOA==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(366004)(33964004)(8936002)(166002)(52116002)(6486002)(36756003)(86362001)(16576012)(83380400001)(31696002)(966005)(44832011)(66556008)(8676002)(66476007)(66946007)(26005)(186003)(5660300002)(2906002)(53546011)(31686004)(956004)(498600001)(2616005)(16526019)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(396003)(366004)(376002)(346002)(39850400004)(33964004)(8936002)(166002)(52116002)(316002)(6486002)(36756003)(86362001)(16576012)(83380400001)(31696002)(966005)(44832011)(66556008)(8676002)(66476007)(66946007)(26005)(186003)(5660300002)(2906002)(53546011)(31686004)(956004)(478600001)(2616005)(16526019)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	IJsUnO5Z6FyUTRHyHthb3o+b/hyLd0q0IAvBSgr1AmyMnPfbdxXtHfYkaf6bHd7LJvGBB/J0MbTaTrMhAE8MI2jZLUvVa4lGqn4HFjxllxf2+oV8zKjibFZc30pltx8r2CuxYyoMg7bl7xElmzjXNy1kh3mWWDwKZMrOvgH77NFf+l3N2EPhf/proTrfQq/qzZaMhjDZ49eqODJfdV2wE6afSlxmotBS3w3fN+eye0/wBu1O7mhLtvZvbb0ljzggfNZYejicpKZ6C5i73Cf/XhUgC5e2UTIsvNNMwrbDurZD9oCuHlfLB76KofLkm0JkadPFSOc0JJgEw7iZUNzjpZ/jBXNTuKr+9QkKkZeHVTWYpy9SwbiqKXYHqakpJRjQQwelLo5w3OyMKYO3s2GwXj/HHCkjTGF6f5801kLEn2r+efr/9W7iyn5RQB7wh06y5oBUpZKU3n8Ka1TsT4I2XRPQ7wadXsCXQ/z5+7GcCHw=
+	b0c/teX0MM4GlSLu6lVbIdAvlTESuZq3pNFgPRZhV3HvqlnEBzsRAAyfRbFQTbMXtdy7IpMpqR8hY72Q9Fl49sHIwf2eQZKn2w5CqQYrLP0J22iTNeznrBLLyhivgs1nDFs2R1Qrhbtw9RCvfxKdlyl4B4RUq8EzP+4hXrOMbrDmQjceU2IxONx7XmVmkG0ptvzx4pYICaZmyoQSBu5uK1WZqtBOwanJLkygne/tBaKy6mdRbwjfZXIndz8NBO+CDlUpODbwtRu7h8jKBYzhjmRyZKNTNPRhbqJCTOMKCddlJlvmT6/yUCZ5NMSbo9RQLRaLSeWW2nHYsxl3sXMGiMMlEcS71W1O07nHKIWspNRMnwNnBDepRAJwyytneS6jELoCLhRSWz+n8hLUpmH8I7PirHPM5NzQJBznVEeiWEWqasUEKkHCKuXBO7HHX7z8vJZOyZ2R58tPIIM3fiXr/uVL+eB2FsFRxlhHHJSEBc4=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0b329ea6-15e4-4c6d-33c9-08d821c22568
+X-MS-Exchange-CrossTenant-Network-Message-Id: d9edc5ee-82ba-4a1f-d5fd-08d821c230db
 X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB0011.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2020 15:35:00.9452
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2020 15:35:20.1170
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GBso1ttl8R2HLcJbvOdyAo4yVWvmzXynBYBuzmgTNNToAc19XC/UlfIbPEqxMp1oVDdnNWGR53JLqSJV9IpJHkS3WxEazsSYfZZYMOyur9w=
+X-MS-Exchange-CrossTenant-UserPrincipalName: z7bR53Nyi/9PyCPPhlraVwX9z5FsH7y+FkT2uHCgcbj+Gaj7WUo9tXT/qpI4hswXjXGpUUL1HxVK9GJlZX0kw6IU0eZo4BqrBJp/4S9ZZ6Y=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB2827
 Content-Type: multipart/alternative;
- boundary="------------4D28A0A9C081B27564B23E5F"
+ boundary="------------DD38D60BA5EEAA091B57E44B"
 Content-Language: en-US
 
---------------4D28A0A9C081B27564B23E5F
+--------------DD38D60BA5EEAA091B57E44B
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 6/30/20 2:38 AM, zhengruoqin wrote:
+On 6/30/20 2:39 AM, zhengruoqin wrote:
 > Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python3-unidiff/run-ptest              |  3 +++
->   .../python/python3-unidiff_0.6.0.bb               | 15 ++++++++++++++-
+>   .../python/python3-uritemplate/run-ptest          |  3 +++
+>   .../python/python3-uritemplate_3.0.1.bb           | 15 ++++++++++++++-
 >   2 files changed, 17 insertions(+), 1 deletion(-)
->   create mode 100644 meta-python/recipes-devtools/python/python3-unidiff/run-ptest
+>   create mode 100644 meta-python/recipes-devtools/python/python3-uritemplate/run-ptest
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-unidiff/run-ptest b/meta-python/recipes-devtools/python/python3-unidiff/run-ptest
+> diff --git a/meta-python/recipes-devtools/python/python3-uritemplate/run-ptest b/meta-python/recipes-devtools/python/python3-uritemplate/run-ptest
 > new file mode 100644
 > index 000000000..b63c4de0d
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-unidiff/run-ptest
+> +++ b/meta-python/recipes-devtools/python/python3-uritemplate/run-ptest
 > @@ -0,0 +1,3 @@
 > +#!/bin/sh
 > +
 > +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-> diff --git a/meta-python/recipes-devtools/python/python3-unidiff_0.6.0.bb b/meta-python/recipes-devtools/python/python3-unidiff_0.6.0.bb
-> index 75aa1bf79..c8e3d4c07 100644
-> --- a/meta-python/recipes-devtools/python/python3-unidiff_0.6.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-unidiff_0.6.0.bb
-> @@ -6,7 +6,20 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4c434b08ef42fea235bb019b5e5a97b3"
->   SRC_URI[md5sum] = "ae9524079753df7b1239f0378ed326b7"
->   SRC_URI[sha256sum] = "90c5214e9a357ff4b2fee19d91e77706638e3e00592a732d9405ea4e93da981f"
+> diff --git a/meta-python/recipes-devtools/python/python3-uritemplate_3.0.1.bb b/meta-python/recipes-devtools/python/python3-uritemplate_3.0.1.bb
+> index 952e954c5..2a83219a9 100644
+> --- a/meta-python/recipes-devtools/python/python3-uritemplate_3.0.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-uritemplate_3.0.1.bb
+> @@ -9,6 +9,19 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0f6d769bdcfacac3c1a1ffa568937fe0"
+>   SRC_URI[md5sum] = "869fb44fbd56713490db7272eb36c8ae"
+>   SRC_URI[sha256sum] = "5af8ad10cec94f215e3f48112de2022e1d5a37ed427fbd88652fa908f2ab7cae"
 >   
 > -inherit pypi setuptools3
 > +inherit pypi setuptools3 ptest
@@ -127,12 +127,11 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > +        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 > +}
 >   
->   RDEPENDS_${PN} += " \
->       ${PYTHON_PN}-codecs \
+>   BBCLASSEXTEND = "native nativesdk"
 >
 > 
 
---------------4D28A0A9C081B27564B23E5F
+--------------DD38D60BA5EEAA091B57E44B
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -142,36 +141,36 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 6/30/20 2:38 AM, zhengruoqin wrote:<br>
+    <div class="moz-cite-prefix">On 6/30/20 2:39 AM, zhengruoqin wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:1593499134-72390-1-git-send-email-zhengrq.fnst@cn.fujitsu.com">
+    <blockquote type="cite" cite="mid:1593499145-72426-1-git-send-email-zhengrq.fnst@cn.fujitsu.com">
       <pre class="moz-quote-pre" wrap="">Signed-off-by: Zheng Ruoqin <a class="moz-txt-link-rfc2396E" href="mailto:zhengrq.fnst@cn.fujitsu.com">&lt;zhengrq.fnst@cn.fujitsu.com&gt;</a></pre>
     </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
-    <blockquote type="cite" cite="mid:1593499134-72390-1-git-send-email-zhengrq.fnst@cn.fujitsu.com">
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
+    <blockquote type="cite" cite="mid:1593499145-72426-1-git-send-email-zhengrq.fnst@cn.fujitsu.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python3-unidiff/run-ptest              |  3 &#43;&#43;&#43;
- .../python/python3-unidiff_0.6.0.bb               | 15 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
+ .../python/python3-uritemplate/run-ptest          |  3 &#43;&#43;&#43;
+ .../python/python3-uritemplate_3.0.1.bb           | 15 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
  2 files changed, 17 insertions(&#43;), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-unidiff/run-ptest
+ create mode 100644 meta-python/recipes-devtools/python/python3-uritemplate/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python3-unidiff/run-ptest b/meta-python/recipes-devtools/python/python3-unidiff/run-ptest
+diff --git a/meta-python/recipes-devtools/python/python3-uritemplate/run-ptest b/meta-python/recipes-devtools/python/python3-uritemplate/run-ptest
 new file mode 100644
 index 000000000..b63c4de0d
 --- /dev/null
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-unidiff/run-ptest
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-uritemplate/run-ptest
 @@ -0,0 &#43;1,3 @@
 &#43;#!/bin/sh
 &#43;
 &#43;pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;){printf &quot;%s: %s\n&quot;, $NF, $0}else{print}}'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;) {$NF=&quot;&quot;;print $0}else{print}}'
-diff --git a/meta-python/recipes-devtools/python/python3-unidiff_0.6.0.bb b/meta-python/recipes-devtools/python/python3-unidiff_0.6.0.bb
-index 75aa1bf79..c8e3d4c07 100644
---- a/meta-python/recipes-devtools/python/python3-unidiff_0.6.0.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-unidiff_0.6.0.bb
-@@ -6,7 &#43;6,20 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=4c434b08ef42fea235bb019b5e5a97b3">&quot;file://LICENSE;md5=4c434b08ef42fea235bb019b5e5a97b3&quot;</a>
- SRC_URI[md5sum] = &quot;ae9524079753df7b1239f0378ed326b7&quot;
- SRC_URI[sha256sum] = &quot;90c5214e9a357ff4b2fee19d91e77706638e3e00592a732d9405ea4e93da981f&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-uritemplate_3.0.1.bb b/meta-python/recipes-devtools/python/python3-uritemplate_3.0.1.bb
+index 952e954c5..2a83219a9 100644
+--- a/meta-python/recipes-devtools/python/python3-uritemplate_3.0.1.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-uritemplate_3.0.1.bb
+@@ -9,6 &#43;9,19 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=0f6d769bdcfacac3c1a1ffa568937fe0">&quot;file://LICENSE;md5=0f6d769bdcfacac3c1a1ffa568937fe0&quot;</a>
+ SRC_URI[md5sum] = &quot;869fb44fbd56713490db7272eb36c8ae&quot;
+ SRC_URI[sha256sum] = &quot;5af8ad10cec94f215e3f48112de2022e1d5a37ed427fbd88652fa908f2ab7cae&quot;
  
 -inherit pypi setuptools3
 &#43;inherit pypi setuptools3 ptest
@@ -189,8 +188,7 @@ index 75aa1bf79..c8e3d4c07 100644
 &#43;        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 &#43;}
  
- RDEPENDS_${PN} &#43;= &quot; \
-     ${PYTHON_PN}-codecs \
+ BBCLASSEXTEND = &quot;native nativesdk&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -200,4 +198,4 @@ index 75aa1bf79..c8e3d4c07 100644
   </body>
 </html>
 
---------------4D28A0A9C081B27564B23E5F--
+--------------DD38D60BA5EEAA091B57E44B--
