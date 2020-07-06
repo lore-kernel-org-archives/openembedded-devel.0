@@ -1,17 +1,17 @@
-Received: from NAM04-CO1-obe.outbound.protection.outlook.com (NAM04-CO1-obe.outbound.protection.outlook.com [40.107.69.69])
- by mx.groups.io with SMTP id smtpd.web10.60708.1594050572613194156
+Received: from NAM04-CO1-obe.outbound.protection.outlook.com (NAM04-CO1-obe.outbound.protection.outlook.com [40.107.69.53])
+ by mx.groups.io with SMTP id smtpd.web11.60920.1594050584614986204
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Jul 2020 08:49:32 -0700
+ Mon, 06 Jul 2020 08:49:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=f5FqDcYK;
- spf=pass (domain: windriver.com, ip: 40.107.69.69, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=dA2HNrFK;
+ spf=pass (domain: windriver.com, ip: 40.107.69.53, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WIa0zShWtnxcIvvjeYaluGyzSUekBoe1wMNDd7Hul7/ZFivWdHcz5nsRqtaUEV2SlXH6TR3S+JnyvO2lsiUY56ycDbvf4VNMLQCO5aU0CYngCZ+PSAtbCvB7Tkp4o2ImaS6DKW/oIjY4Sqv/6Sv5lxE+NY94jF5l610BxQ3g59H6vYMP4pAdrCLef+WCYXLt8RmU3QpZqkrOzClSq2IHB8DJg2HaJFHuAogPFBcVF8G/Kxj0ifQiwr+ar159YLkgQB07E2NJqS0EcEZPd5hJqSvYZPWd1TZVcz+7lg5Z+/OXad5qz9qN9BpNeCfswKdYF/QLKPK4dyCd9lvlq18M4A==
+ b=TcB9AUOjqo0SwSqkfjn16Uust+xqSFisckAAnxQJsGwlURXeicbEvMlQJpLDKcqrwZ2p+tpQFPGL0P/UyQDrFjv6s0mD6MP6/atMwF7HmuQ5AQcqe8e/sMkXM+tlCb6vWOZswv4p2Tmre6CrUZ/5bG14p31d498TqbaV+s0bZHHpqz4Mr0CR3uB5SERLnxq+ksNSjkymqh88ton61YMvFYD+WjuqvLYro2BLx3LUjTajFSzA2gWCHKhqdC74LUGgsn+ks55xD3FfgdWKI3leD8OB2EFhDJVmFNxkFbVX+Xk4zhUT2QvKUQTgTtVp9LsfLwa6hZpG9Afcz20/h4AstA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AMqLj9Blv/8fcxB67mDiTxa4n9QsiB9X1/ErA4ZedCE=;
- b=V+dvF9Axy7g2ZAcIp3K4S9Y6rI6ambl5F3plN7Asw1j3uMgaSKGL1l/nSyl9ENa/Z3S6Hn5oZxZe+f0l5oM7BFLy/D+T0Ec5wjkZPXdB0yxStmT+p4Que5ppJ5kSZVV30Eo9TP+H2fM3hz76W/VYwj2EMAKcQmz1cvrDiNNn8ICQbRnXTts5NcyHBqD7YCdfFq9fvgj5NPS1tnF+/rnvJr99j8ovk3xtVaOenR6JCLTYPmRMQ/fGHqBV4GpNRGnbVEMe9f0dPwoFl/4w6OWF13ahc2ZeRvKjV7bHtGlcM/mV3a31f5wsnTnQ2DWRm+BceDolME7FN+/j+QrUZEJKuQ==
+ bh=pX9FBbIi9qRUcVme/yNghYHvtjO+zVHpqiXZ0e8xZuQ=;
+ b=Tj94Ohsi1bi1BfrQS1QJwn6+qMeauux3jDam7hph8cslZOBPBuOpgZWjeQCOVMA04v+6fYavCLC68jzBrtuiFhnk1O9aWeqNhTvFojOz39iPlGhDf8y3q0DseGlMujbAPcmJHoeihdk1JibHIDDo5kSB0i6sEHdDp/5DhclWS8jTCTc0OHqmbmglRnkUNRQkUjmLF4gzgduIZTYSPX+L2B89pqRuvAF7ZRjeVCu8VY/G91CneYQVkLkFstqc6nmbCoWYLWrn6kLop8s4LxgWkjqYoltLX0WePLm1eQIJxC4KRwmIhaxiJ/o5DpXY10I4Yk0LcY3ePDX8l9vVA8m2pg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,109 +19,159 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AMqLj9Blv/8fcxB67mDiTxa4n9QsiB9X1/ErA4ZedCE=;
- b=f5FqDcYKTVlRe5LEz8fpvygzWnxm0o5nrm8gUHd9X/BsNkchJU6ySzBLaer9DV1eIO9GQ5kA3sQVbDbnGmscLNoya1aXXH+W0lYvccPdd02AKo5JxRBJXSdWZ9oiC7z25gSyLDnzL17MLerCsWKOlzyc/Y61ZI4vhqpGapXn5aQ=
+ bh=pX9FBbIi9qRUcVme/yNghYHvtjO+zVHpqiXZ0e8xZuQ=;
+ b=dA2HNrFKA4Ry64DetHyXbWHHajZlGDsFBij2LcEwxvDK39rOJlFAdmok9uxMMi1h3JBqoqwoQQxg8PApXb9BnQEuXllfDBvUAOj2iyU6cjGEW01x1DB4yPemitjjHI4pJsks2o1OCbXYDTptyUYVgbmGPOH70MevV5q1fEYAxwY=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29) by
  DM5PR11MB1899.namprd11.prod.outlook.com (2603:10b6:3:10b::14) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3153.27; Mon, 6 Jul 2020 15:49:31 +0000
+ 15.20.3153.27; Mon, 6 Jul 2020 15:49:43 +0000
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2]) by DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2%5]) with mapi id 15.20.3153.029; Mon, 6 Jul 2020
- 15:49:31 +0000
-Subject: Re: [oe] [meta-python][PATCH 07/10] python3-pychromecast: Upgrade 7.0.1 -> 7.1.0
+ 15:49:43 +0000
+Subject: Re: [oe] [meta-python][PATCH 08/10] python3-pyasn1-modules: Consolidate in a single file
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200703093020.3514-1-leon.anavi@konsulko.com>
- <20200703093020.3514-7-leon.anavi@konsulko.com>
+ <20200703093020.3514-8-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <704c510f-cdc6-766b-bb52-c8b993f986af@windriver.com>
-Date: Mon, 6 Jul 2020 11:49:28 -0400
+Message-ID: <442b3a62-1f7b-45df-a1d0-147d224dbcbb@windriver.com>
+Date: Mon, 6 Jul 2020 11:49:42 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200703093020.3514-7-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTXPR0101CA0036.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00::49) To DM5PR11MB0011.namprd11.prod.outlook.com
+In-Reply-To: <20200703093020.3514-8-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTXPR0101CA0009.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00::22) To DM5PR11MB0011.namprd11.prod.outlook.com
  (2603:10b6:4:6b::29)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YTXPR0101CA0036.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::49) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.21 via Frontend Transport; Mon, 6 Jul 2020 15:49:31 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YTXPR0101CA0009.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.20 via Frontend Transport; Mon, 6 Jul 2020 15:49:43 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 4175619e-1fe1-4e91-9270-08d821c42c6e
+X-MS-Office365-Filtering-Correlation-Id: b5642bed-d089-4471-8679-08d821c43396
 X-MS-TrafficTypeDiagnostic: DM5PR11MB1899:
 X-Microsoft-Antispam-PRVS: 
-	<DM5PR11MB1899661667EA4205887275CC9F690@DM5PR11MB1899.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:262;
+	<DM5PR11MB1899CE1D15EE853479C520189F690@DM5PR11MB1899.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:153;
 X-Forefront-PRVS: 04569283F9
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	7C6xIVFupuJ7YoKiEvcoCtdw7Al3hWV6fmWZJPBHW4Q8drl3fAWLzx3xpiGIDfHZjMeMuxzFxLuzTxinHkDujUxtnv375D0p7X7jNXOWGmH6joqCKiHbv6Zo68P4q9jtQgROQOjdST/J0LTkN//VEUD2CsyQK0OGDFly7lC6gM0MsMfENvS3Sn6mnJ+blxTqTvwcbEnEiwXVROvgHBFzwnc/VQeiKxwhbgKcXqL7NVRGNfCe94Lz86tRFvE+mWXxLvGvIhTMVZxcsYU55z2p3G/JSdmP6TuFMvH2i4LkRY7Z0Ac1DUWwT/ft16J3ynQ4SuVB2wJ72Kywu/VdKgxJLHItFUdg4YoFf6i04MSqJDOHROQ1wjpxaj2t6RWAftUGngVXXx9I22BfkXkGQLVPxOJBcj71Kv9bOYBV7E7voS3YZD89MsXzuEO8mUvmLd9TivhFXvJi0DSpmeATC0ZzpQ==
+	NDW2O1pJK0PB2pbrvKoTUmBkY973p6AO9O9w/zThqvD95qiYW6WswOsNLPgg935BNU94ijEcn4AlP+ioKZe/80RILsH7xZyBe0TZsDmeb0JQaNzmbO2YB+9EJicRGv7ZHhBTdaXxMFL1DIsW05gz6Ipse0qNWTGNzaWn+Kw/5h+OZarCxlA+o+7yK4LXQuAnii3yxs9h5oyJ01k3MEKL91LN6n/U7XqfKtNQhRH/7pQGh+1ZWqPN4vgADdM/UDt4FTog8FTPrg2U1eWOylfETs0m61/hmzdp6FtPTrIF2cPyOUX+4EoqCFnRO4y0C43vnIc5h1pTE/GyKbiuHUk92iIFR6lGLaVH4alH4LlEM3x+g6yqPZK2vfWzSz1YfQjb1ry/9oRbR13gzk2xSS6K2JNg5Nx0iVKH35g3nSV1Jk4/1arE7g4+eo8tY2aAo2eObruuyRXaxYgeXm3gtFy6ng==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(346002)(376002)(366004)(39850400004)(136003)(16576012)(5660300002)(31686004)(478600001)(86362001)(83380400001)(31696002)(6486002)(6666004)(966005)(36756003)(316002)(956004)(2616005)(186003)(16526019)(33964004)(44832011)(166002)(52116002)(8936002)(8676002)(66946007)(66476007)(66556008)(2906002)(53546011)(26005)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(366004)(16576012)(5660300002)(31686004)(86362001)(83380400001)(498600001)(31696002)(6486002)(966005)(36756003)(956004)(2616005)(186003)(16526019)(33964004)(44832011)(166002)(52116002)(8936002)(8676002)(66946007)(66476007)(66556008)(2906002)(53546011)(26005)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	PJt5xyZjBozqcdYAiwNn27qbGil8jv1EUXuj9/FGAPbB9YN1vADKZawa9bpKlj0zPpDsWnXSHR8QvOt4D4FWtlX7uxo34AKXue2phTDDAL+2ypWuxaafzQewuCfdc0iv2NkWiznukj5+6LoXw0C/Wtab1ZvjIlV+Q1JHiKwgdYclCxbHz6iiO89dgOTmrjKstxJ7WwSnMC46Qw3uSUZzq3GKcRNSJnDf5Rq8cp05FzpfQOLsYfO3V9w8sr/Y3o70tkppCELiZZUo6Db9QajXcu7ZC6kDZco7N5+ErFdjJvqtbEvmS0VzQVGdBo65D6K69VMYc0Khq+EXh5xhboCnYFT8b304as5xcaJvLAqdRkv+Bq7fSAQiSsY6uquzKiEPb8GTpgjhBOXznsAxAnwO/JPkqc0sSW9B8Vf2rBzFwMcpOC29NOfuhOcXFm3PbkpdbcNGuO5cnqMULRjCt8tXCJsp52ImUenRwRm3weuYHGV332tOIxEDGh7+QaFmdDEV
+	1yYaiPCE00orQgcWFcI5IEYEFFduUGA2lPXHkm+g1Hq3cBVGRkdQAYYyM6dZ/NsTG+WfvBj2TzXwq9YuatpVYUV22wZO/TeZxvEA5JPuE1YHTNzkHRPtxjF8RshNtXS6nvn1k7cT7SpAYGMkHSTLhQBBWurkQ4K4/Sk51aUAQraRAgwMf8ouY7XmrDGQnFqyhFByvI+zQqPU1IAzVTLjYjPat1MJipJ1S+WZN1hsgFZBbXoWQ49h4nwmVOFhH+hiT2S1MWlwe1/CfxX9WeigZ9Qdux+KnkCZNFfIXZV+/+EHuirZm2zJMRKYXZO9UptfbSP9UBK54MVy0RfXJ+zN3fKSxjGBqVsKlN6X+1PJHXUlgewlYD4ZRmo/0ua3mlSemDRjAlFBl0yjbVH6oA2BIkF3ijB94rYnzvMlZX6mhmru+MT9LnbXFYtqm7c48Lcy1ffv0MlK5HHotOx+dI4jtT7wgaDetKbNBt7Y6vuTn0BTYP2j/uC8sR24hF+OrrL8
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4175619e-1fe1-4e91-9270-08d821c42c6e
+X-MS-Exchange-CrossTenant-Network-Message-Id: b5642bed-d089-4471-8679-08d821c43396
 X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB0011.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2020 15:49:31.6675
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2020 15:49:43.6714
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: T0gt3hwqnGy1RBG/YPO8mBNYh9U2jf3ISFYrLbDB5yh6FgMH686F297PBRXQRzp71TgDO/Pl1k1P1d9AO0tBYUxnaQHdlykvah2zEGOB3hI=
+X-MS-Exchange-CrossTenant-UserPrincipalName: eZDrxsf6sSf9bqsNQmV5lgCIEbGyJuPIv5NfUpMbl72zoiQ1IAZMA7X5gShnVOFSnmwKTXzbUKhKPWb6ttab0G5t+HP6BQI9qnCE/9A6RfM=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1899
 Content-Type: multipart/alternative;
- boundary="------------ED56E5B5DE1115E60CB28D6E"
+ boundary="------------268D8354FF76951251B6AAF0"
 Content-Language: en-US
 
---------------ED56E5B5DE1115E60CB28D6E
+--------------268D8354FF76951251B6AAF0
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 7/3/20 5:30 AM, Leon Anavi wrote:
-> Upgrade to release 7.1.0:
->
-> - Report host+port for discovered casts
-> - Fix plex controller
-> - Update list_chromecasts example
+> Consolidate inc and bb files into a single bb file.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...n3-pychromecast_7.0.1.bb => python3-pychromecast_7.1.0.bb} | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-pychromecast_7.0.1.bb => python3-pychromecast_7.1.0.bb} (66%)
+>   .../python/python-pyasn1-modules.inc          | 29 -----------------
+>   .../python/python3-pyasn1-modules_0.2.7.bb    | 31 +++++++++++++++++--
+>   2 files changed, 29 insertions(+), 31 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python-pyasn1-modules.inc
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.0.1.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb
-> similarity index 66%
-> rename from meta-python/recipes-devtools/python/python3-pychromecast_7.0.1.bb
-> rename to meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb
-> index d21bb5f3ac..12076adcd4 100644
-> --- a/meta-python/recipes-devtools/python/python3-pychromecast_7.0.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
->   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
->   
-> -SRC_URI[md5sum] = "519d928bf3bdc8adb4dff1ad0e9de6ff"
-> -SRC_URI[sha256sum] = "85112a0f39727636e35a0e1b633cc55a90a17bfc06be0a9a9bea5e46ac603cf1"
-> +SRC_URI[md5sum] = "10483fca4ffa0381c0c49f3647827179"
-> +SRC_URI[sha256sum] = "30e18e7d79b6ce2097e630d3cab6e6503f759808ae1ae592bec0a8a7591534f3"
->   
->   PYPI_PACKAGE = "PyChromecast"
->   
+> diff --git a/meta-python/recipes-devtools/python/python-pyasn1-modules.inc b/meta-python/recipes-devtools/python/python-pyasn1-modules.inc
+> deleted file mode 100644
+> index ce9791993c..0000000000
+> --- a/meta-python/recipes-devtools/python/python-pyasn1-modules.inc
+> +++ /dev/null
+> @@ -1,29 +0,0 @@
+> -SUMMARY = "A collection of ASN.1-based protocols modules."
+> -DESCRIPTION = "A collection of ASN.1 modules expressed in form of pyasn1\
+> - classes. Includes protocols PDUs definition (SNMP, LDAP etc.) and various\
+> - data structures (X.509, PKCS etc.)."
+> -HOMEPAGE = "https://github.com/etingof/pyasn1-modules"
+> -LICENSE = "BSD-2-Clause"
+> -LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a14482d15c2249de3b6f0e8a47e021fd"
+> -
+> -SRC_URI[md5sum] = "18c77d56abeef631d94f95ff2d652859"
+> -SRC_URI[sha256sum] = "0c35a52e00b672f832e5846826f1fb7507907f7d52fba6faa9e3c4cbe874fe4b"
+> -
+> -inherit pypi ptest
+> -
+> -RDEPENDS_${PN} = "${PYTHON_PN}-pyasn1"
+> -
+> -BBCLASSEXTEND = "native nativesdk"
+> -
+> -SRC_URI += " \
+> -	file://run-ptest \
+> -"
+> -
+> -RDEPENDS_${PN}-ptest += " \
+> -	${PYTHON_PN}-pytest \
+> -"
+> -
+> -do_install_ptest() {
+> -	install -d ${D}${PTEST_PATH}/tests
+> -	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+> -}
+> diff --git a/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.2.7.bb b/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.2.7.bb
+> index 3b1186f06c..f2a836b04a 100644
+> --- a/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.2.7.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.2.7.bb
+> @@ -1,2 +1,29 @@
+> -require python-pyasn1-modules.inc
+> -inherit setuptools3
+> +SUMMARY = "A collection of ASN.1-based protocols modules."
+> +DESCRIPTION = "A collection of ASN.1 modules expressed in form of pyasn1\
+> + classes. Includes protocols PDUs definition (SNMP, LDAP etc.) and various\
+> + data structures (X.509, PKCS etc.)."
+> +HOMEPAGE = "https://github.com/etingof/pyasn1-modules"
+> +LICENSE = "BSD-2-Clause"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a14482d15c2249de3b6f0e8a47e021fd"
+> +
+> +SRC_URI[md5sum] = "18c77d56abeef631d94f95ff2d652859"
+> +SRC_URI[sha256sum] = "0c35a52e00b672f832e5846826f1fb7507907f7d52fba6faa9e3c4cbe874fe4b"
+> +
+> +inherit pypi ptest setuptools3
+> +
+> +RDEPENDS_${PN} = "${PYTHON_PN}-pyasn1"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> +
+> +SRC_URI += " \
+> +	file://run-ptest \
+> +"
+> +
+> +RDEPENDS_${PN}-ptest += " \
+> +	${PYTHON_PN}-pytest \
+> +"
+> +
+> +do_install_ptest() {
+> +	install -d ${D}${PTEST_PATH}/tests
+> +	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+> +}
 >
 > 
 
---------------ED56E5B5DE1115E60CB28D6E
+--------------268D8354FF76951251B6AAF0
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -133,41 +183,91 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 7/3/20 5:30 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200703093020.3514-7-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 7.1.0:
-
-- Report host&#43;port for discovered casts
-- Fix plex controller
-- Update list_chromecasts example
+    <blockquote type="cite" cite="mid:20200703093020.3514-8-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200703093020.3514-7-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200703093020.3514-8-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...n3-pychromecast_7.0.1.bb =&gt; python3-pychromecast_7.1.0.bb} | 4 &#43;&#43;--
- 1 file changed, 2 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pychromecast_7.0.1.bb =&gt; python3-pychromecast_7.1.0.bb} (66%)
+ .../python/python-pyasn1-modules.inc          | 29 -----------------
+ .../python/python3-pyasn1-modules_0.2.7.bb    | 31 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;--
+ 2 files changed, 29 insertions(&#43;), 31 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pyasn1-modules.inc
 
-diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.0.1.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb
-similarity index 66%
-rename from meta-python/recipes-devtools/python/python3-pychromecast_7.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb
-index d21bb5f3ac..12076adcd4 100644
---- a/meta-python/recipes-devtools/python/python3-pychromecast_7.0.1.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb
-@@ -3,8 &#43;3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/balloob/pychromecast">&quot;https://github.com/balloob/pychromecast&quot;</a>
- LICENSE = &quot;MIT&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5">&quot;file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5&quot;</a>
- 
--SRC_URI[md5sum] = &quot;519d928bf3bdc8adb4dff1ad0e9de6ff&quot;
--SRC_URI[sha256sum] = &quot;85112a0f39727636e35a0e1b633cc55a90a17bfc06be0a9a9bea5e46ac603cf1&quot;
-&#43;SRC_URI[md5sum] = &quot;10483fca4ffa0381c0c49f3647827179&quot;
-&#43;SRC_URI[sha256sum] = &quot;30e18e7d79b6ce2097e630d3cab6e6503f759808ae1ae592bec0a8a7591534f3&quot;
- 
- PYPI_PACKAGE = &quot;PyChromecast&quot;
- 
+diff --git a/meta-python/recipes-devtools/python/python-pyasn1-modules.inc b/meta-python/recipes-devtools/python/python-pyasn1-modules.inc
+deleted file mode 100644
+index ce9791993c..0000000000
+--- a/meta-python/recipes-devtools/python/python-pyasn1-modules.inc
+&#43;&#43;&#43; /dev/null
+@@ -1,29 &#43;0,0 @@
+-SUMMARY = &quot;A collection of ASN.1-based protocols modules.&quot;
+-DESCRIPTION = &quot;A collection of ASN.1 modules expressed in form of pyasn1\
+- classes. Includes protocols PDUs definition (SNMP, LDAP etc.) and various\
+- data structures (X.509, PKCS etc.).&quot;
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/etingof/pyasn1-modules">&quot;https://github.com/etingof/pyasn1-modules&quot;</a>
+-LICENSE = &quot;BSD-2-Clause&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=a14482d15c2249de3b6f0e8a47e021fd">&quot;file://LICENSE.txt;md5=a14482d15c2249de3b6f0e8a47e021fd&quot;</a>
+-
+-SRC_URI[md5sum] = &quot;18c77d56abeef631d94f95ff2d652859&quot;
+-SRC_URI[sha256sum] = &quot;0c35a52e00b672f832e5846826f1fb7507907f7d52fba6faa9e3c4cbe874fe4b&quot;
+-
+-inherit pypi ptest
+-
+-RDEPENDS_${PN} = &quot;${PYTHON_PN}-pyasn1&quot;
+-
+-BBCLASSEXTEND = &quot;native nativesdk&quot;
+-
+-SRC_URI &#43;= &quot; \
+-	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
+-&quot;
+-
+-RDEPENDS_${PN}-ptest &#43;= &quot; \
+-	${PYTHON_PN}-pytest \
+-&quot;
+-
+-do_install_ptest() {
+-	install -d ${D}${PTEST_PATH}/tests
+-	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-}
+diff --git a/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.2.7.bb b/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.2.7.bb
+index 3b1186f06c..f2a836b04a 100644
+--- a/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.2.7.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.2.7.bb
+@@ -1,2 &#43;1,29 @@
+-require python-pyasn1-modules.inc
+-inherit setuptools3
+&#43;SUMMARY = &quot;A collection of ASN.1-based protocols modules.&quot;
+&#43;DESCRIPTION = &quot;A collection of ASN.1 modules expressed in form of pyasn1\
+&#43; classes. Includes protocols PDUs definition (SNMP, LDAP etc.) and various\
+&#43; data structures (X.509, PKCS etc.).&quot;
+&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/etingof/pyasn1-modules">&quot;https://github.com/etingof/pyasn1-modules&quot;</a>
+&#43;LICENSE = &quot;BSD-2-Clause&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=a14482d15c2249de3b6f0e8a47e021fd">&quot;file://LICENSE.txt;md5=a14482d15c2249de3b6f0e8a47e021fd&quot;</a>
+&#43;
+&#43;SRC_URI[md5sum] = &quot;18c77d56abeef631d94f95ff2d652859&quot;
+&#43;SRC_URI[sha256sum] = &quot;0c35a52e00b672f832e5846826f1fb7507907f7d52fba6faa9e3c4cbe874fe4b&quot;
+&#43;
+&#43;inherit pypi ptest setuptools3
+&#43;
+&#43;RDEPENDS_${PN} = &quot;${PYTHON_PN}-pyasn1&quot;
+&#43;
+&#43;BBCLASSEXTEND = &quot;native nativesdk&quot;
+&#43;
+&#43;SRC_URI &#43;= &quot; \
+&#43;	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
+&#43;&quot;
+&#43;
+&#43;RDEPENDS_${PN}-ptest &#43;= &quot; \
+&#43;	${PYTHON_PN}-pytest \
+&#43;&quot;
+&#43;
+&#43;do_install_ptest() {
+&#43;	install -d ${D}${PTEST_PATH}/tests
+&#43;	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+&#43;}
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -177,4 +277,4 @@ index d21bb5f3ac..12076adcd4 100644
   </body>
 </html>
 
---------------ED56E5B5DE1115E60CB28D6E--
+--------------268D8354FF76951251B6AAF0--
