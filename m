@@ -1,17 +1,17 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.64])
- by mx.groups.io with SMTP id smtpd.web11.60769.1594050232989693041
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.40])
+ by mx.groups.io with SMTP id smtpd.web10.60594.1594050268041310356
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Jul 2020 08:43:53 -0700
+ Mon, 06 Jul 2020 08:44:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Agbu6ZfY;
- spf=pass (domain: windriver.com, ip: 40.107.243.64, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Wm/cLyTB;
+ spf=pass (domain: windriver.com, ip: 40.107.243.40, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=juWMLBUKGUIZ+4VowR3qigFbjYZqWp2gD4zeGg+g/SZVhEMVqcHnoZmQhlX5CE23VMlcJXAdpb8wbho3oelwZjwADoafW1zAEw8KEoHrAD7juv7Y/01ODVml/7YwXAR9rArnijO04CY3ql+T4VsGcBzTYTt2oO+2mJRLcL53Z2KXmXliD6kNgsjFbIVvfIGOWZjBI0DzEBquseEWeQZ0sdvTB94fc50TDLtu1ddzmqfuaU6S7O7D4xtGy+9nIIueMt/UNKZ4oyrY6KLEdyeulaE6X3bKbXERYJGuwu47JhcfCPRW4HSJ3h0nGTEpnRWw2m0huwHtGmat0uw101HdeQ==
+ b=nc5CVBcO5SxM8aCLbf38aTeJgM+W5wnFK5R7c7RMqEqeXpnZCiIceUawfkcFGuJv/z/fnPMdpylXSLkVhQcmmAfR3jNNDTBGQrJHJutQVYBWilv4FVv1KNU+ttlxeSelhRhYfnWmCREUOAUHgD3vegwmSf8tQIihg6rUNwx4cRlYwzM0b3DxmSLsi3FuyDPc7uRWuJZgYqHeYpxDHFxSh+KSbE26pzx0lKW/btjx4EeXMp7RxMUTM2mekqvdjBGCQdYJ9EGb+taxjWxQtF3tV7p4HHgRlaH8iRAt+3GDdAxJXqUJxC21h5CUEkjyR62yeQ/3LSP/9r2WNzOB3pA1Sg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=n/6y139Z4tc3MV/D/i/mqlnoVsPjcNdLLwaGZDaT4FE=;
- b=hlURQS1z9YY99z9eC6xmwdqCnefYbanoAJxEkEDJsZgM9+xeVKJmxNs+W+SfiqjKM+OcnHGkc/OIIQv5HfdHyJeeTe5nXmceZRnJOE383IwRyiZRbO3EFpoV/PdRK7kckqZAkMmrU9qnQI3sAi+x/CbT4Ax/F0F4cfLYT6tolRFBh2NSiW6ORW2cHa3f7KyDZaRQWPCklbU99Z3tYWHA0Rg1ef8ipaoNgXmcOmU9YqDZghf5soAc5tA98FLF1SlfKFCzMZCeslxN2jZzsDNTfSP4588YG+kEQ/MeMrjpBTTIiGYEGucfrguEIfyckkCXyUZYxFFGZXGoiKPKpqrGbg==
+ bh=vsxbZc1J+TQgSbxhNyQUMyD+5jETAQwdxw83n2ICRlA=;
+ b=D1pJ64DyATCkCH1J2lfJBGxhM5PNNLLhSo+mZv7oWX/d1xRVH/PBStQPljA4Kb/qSuJCRl5Cu6IB8ciygvUsOQ6gw1XD28cYyJgSdI6hjyZJaBqnC837s09JRWi0vtaBuSKCHKddsKd2EShE/YwLdZdtm6vd5QkVQc1a1SKpA13CpdDWliL37n2B3GwUYmS2VfrrzTlSZ1II0mtpXef9p/fmabyaE9dBvGkkTvJ+RrsqFJyBvQESlCv7pDAHhNNjNBQ0KlOo+coeTGhVcSZLHCpNA8OrOCem+gZ+8LbhP0jUz3R5l221uFuONc6A19JtmLRELwM86F/AmJdrsvyXBg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,180 +19,111 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=n/6y139Z4tc3MV/D/i/mqlnoVsPjcNdLLwaGZDaT4FE=;
- b=Agbu6ZfYOuw2d6Xos5JDF6IUlbZWKYuJraNdOsUMPAzwhwLk3uMsirBydkI4tbGuC4HkPWX5w5pmglLdt0YQMPRN8taIagW9L57kq8JDFCGFVY4fUw1/Q2vKYfczMfFxT4jzreJF57CpXcOW5tGBMU3aQAa/ws8bk52iTqo4XDM=
+ bh=vsxbZc1J+TQgSbxhNyQUMyD+5jETAQwdxw83n2ICRlA=;
+ b=Wm/cLyTBksJFpnsX/AjtMtW3/54D30FtunryXSuSHarbZOf1+Jy6NMVDrwnjLLo2v/IBqPd+L9FXiP2RThVQeLnc3tvC2iP90AvCyDM6AzCkI5f+RGsxqBi7Sg90+UUenVxeFFi5gvmZdJ1M0w4D9LUUQmPRNTqb2RIKy9Oovzo=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29) by
  DM6PR11MB3275.namprd11.prod.outlook.com (2603:10b6:5:5e::16) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3153.23; Mon, 6 Jul 2020 15:43:51 +0000
+ 15.20.3153.23; Mon, 6 Jul 2020 15:44:27 +0000
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2]) by DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2%5]) with mapi id 15.20.3153.029; Mon, 6 Jul 2020
- 15:43:51 +0000
-Subject: Re: [oe] [meta-python][PATCH 5/5] python3-h5py: Upgrade 2.9.0 -> 2.10.0
+ 15:44:27 +0000
+Subject: Re: [oe] [meta-python][PATCH 01/10] python3-importlib-metadata: Upgrade 1.6.1 -> 1.7.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200702104819.14256-1-leon.anavi@konsulko.com>
- <20200702104819.14256-5-leon.anavi@konsulko.com>
+References: <20200703093020.3514-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <aa928fef-da5b-646a-60d7-d6dfed1895ff@windriver.com>
-Date: Mon, 6 Jul 2020 11:43:49 -0400
+Message-ID: <795b1df7-ebdb-e109-3e8e-cbd6368b29d9@windriver.com>
+Date: Mon, 6 Jul 2020 11:44:25 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200702104819.14256-5-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0020.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::33)
- To DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29)
+In-Reply-To: <20200703093020.3514-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0152.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2f::31) To DM5PR11MB0011.namprd11.prod.outlook.com
+ (2603:10b6:4:6b::29)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0020.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::33) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.23 via Frontend Transport; Mon, 6 Jul 2020 15:43:51 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0152.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.21 via Frontend Transport; Mon, 6 Jul 2020 15:44:26 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: eb1827d0-52e2-4e32-a2fe-08d821c361cc
+X-MS-Office365-Filtering-Correlation-Id: ee9ed102-f382-4f3a-b460-08d821c376bc
 X-MS-TrafficTypeDiagnostic: DM6PR11MB3275:
 X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB32754CD2ACA60ADEF364351F9F690@DM6PR11MB3275.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:404;
+	<DM6PR11MB3275A7271E96469ABF81B05C9F690@DM6PR11MB3275.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1850;
 X-Forefront-PRVS: 04569283F9
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	7TjAI8j0NwQyzY35oIheazFkLbVk+F3OO3tinksDOifPW23X9OWBWQiGtbt3CHAy0C+rkXNdmtCkMOvvo6AdUGxR+3piKBAp7r+0+v2zucuvQD7fceaeSYsn0PJz1XUufQ59ROYBGRTWsiras+ecfg5NkcwhZYjgte4ogV/XHQHvZA41yk4+rlv7ny0GRAzhRz3AuOvF94lfLxp/iypdbtwNTOFxQuVtO+sYTgBH0B22m4pX9dHfRQa3kBRau14Zxfr8eseGPo9Plm59NJHEENEUBf6X5JgV1DZegxqunEefrjaid8anPb+ImaGllge7eIsxNJTUp8/ce08/6hOcztme7ZL+PbPxrVJrsFdSH8yHxLKJNtg+ZjHBB2Z9CPln7c3fP5q1PGUeRMuKWef6U6ouCze4Qi1Qvq9MYzcjJAhNwbvHA7e5HHthSBHvBN1R3854Ws/nK8DhBCIyHCkUKRHncYdvwFaXFMKwX7ow2a/zB6qdMoHqlqe3MiZt0LjG
+	PI9nNiTQES8/JM6DnLg0bccobYQS7a3P82v3DfkDq+0JcG/UaDzJJQI2jJ9ZALibpkx1RUPuTDv9v7vLG1E2eCCYSt/vw18xEobnlZmkfkuGG0T628s0cg2Qdx+4weQ/+7VNIrXgW297/+nRamvgo5taUz8bdiOCVU0pheZCOYjhWEE0NlQ97nmVOjUYf8ryiGtjnpZetAYeIksfQ4AWnYp7wANToqJ3Dc4THQxWVephAX3H5jn9jq5gtYiIF/DcdgB4mteYL8xgOXm7fGbItblERzMCGmr7cnAbdcgXHZJI3W7MDduT/fyV0vv+WN1FhFo4cROf8okplHoeRDCiZ+7hIR9sl3oeIbLC2lAPBFvP15QQ1wG5zmwmFfOucVFFNIa0dmVXvODzrFY246eg5zPr1k8P+6zyYDF09dDQy12CFt6A01zTix8TBCzNMzFbUTfnNyFfrNUHT5WvF5AIBA==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(346002)(376002)(366004)(39850400004)(396003)(33964004)(16576012)(36756003)(26005)(8936002)(8676002)(316002)(31696002)(19273905006)(6486002)(16526019)(86362001)(2616005)(83380400001)(44832011)(186003)(956004)(2906002)(166002)(66946007)(52116002)(31686004)(66556008)(66476007)(5660300002)(21615005)(53546011)(478600001)(966005)(43740500002)(562404015)(563064011);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(346002)(376002)(366004)(39850400004)(396003)(33964004)(16576012)(36756003)(26005)(8936002)(8676002)(316002)(31696002)(6486002)(16526019)(86362001)(2616005)(83380400001)(44832011)(186003)(956004)(2906002)(166002)(66946007)(52116002)(31686004)(66556008)(66476007)(5660300002)(53546011)(478600001)(966005)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	R4C3HLM23PX1uE+FEUzyIjOm5+EPZMfbWymk4Q+38EEwCazRfWUU/SaWnLu9I+p5HsFpPgldEIlVNuttrsCrpTpoiKqWMDGUNn5yaZWnJ94dFaf7rFrf8HhPP9XRwi+m0lmfeo7qFzLWq/X7ZBHDgFlHjaEdzbXfhB2Eljk0fJaOvmiB9diFKkVH3mtbLbgV1bFrrpsXx592xB/Lc8saePMe9NGQ2WXe/BQBZUmq/X90eRi8IM4bkCIoRamd63QwLFhQDf/LClFN3qzCYOLks51ftCZH2BGMh03/5z9imewHEUoZvCVaHLxVcnVBj8sevKbEvuG4a3ZvgC2c5xjqOlPqbHby1ts3pTjbTxAmtIgLikUH7oHOnzd8oPnfUioboGD66YgZMG4NrK3SFWszh9K+S8esIo3QWuUsrFQlOzvrdzvQlxRn5nceLx2wnq1I83pidBumOZV2+TRmod3qZVnE1ptnUGu3GIY1cW8An+0wao5UAmPMFQcsgU3p3Qis
+	9aLVcl+qfcruJ3DYRAhtKOB/bWqtjyhrnRlo8EbJPCeoaiajF7VJGqryATDUHnouEWsz23z1eT0UJ6msaqe6MmPFZpuyrqg3ways9FvBwAFDH0AzPH9odzsu+T8G136sMMtdE95psorMt342MRb4VYuEd/g8ES4krrGHtakolJ4gxzQQa9mSbQxFQPqZHWN61192fx9yJegzjC5KBYyiD69yZmVa4UE8j4LURCMyUi4+gn6ixiDsRZ54y15mCGIn2Hr4y8QeiUqgWtPu6lEQ8aARBuNYBUt6iR38Dj9UoApdAJ57qAoW/vXkRcn2WorN0NyWWx6RtGUIi5xPwm0KbItCwRG9qLXgOJPGgKB8lgSjwpypYqYktwxCjdOLhtBM3Ul/g7YfddJK3zIPAdd4D4XGo/AS14QSqhi2lEQsNnTDIDnpcAjJJZ+308fG62A7vdUgvL5tbXfwy/bxhG/EGnnsnIUx4ydytvzh2Zo5eLzNVZYGstaqUfowCPASRoXG
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: eb1827d0-52e2-4e32-a2fe-08d821c361cc
+X-MS-Exchange-CrossTenant-Network-Message-Id: ee9ed102-f382-4f3a-b460-08d821c376bc
 X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB0011.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2020 15:43:51.7744
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jul 2020 15:44:27.1660
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gou3tFIbCyg6bGucVxqEKRpp+HmbFVhQeMpRb0iPgmE6orkqV4h+NVfzY+77N9kf9VG9dGyEHo8uUlgzRYrxsxziRGm9tyx8lkZmoL/MSjs=
+X-MS-Exchange-CrossTenant-UserPrincipalName: lrw52zWuPYel+gSVNJXrZlITF7xGkYyZnV55qGNNgUYuNnM3L39sXXZf894asGetZ0unE6efkFUnRSPVbZX2WjZfRDaQaZvF6jWO2w53lhk=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB3275
 Content-Type: multipart/alternative;
- boundary="------------E86C6F33F8287524B1CD1A88"
+ boundary="------------61C2B4B700978657E9D2A262"
 Content-Language: en-US
 
---------------E86C6F33F8287524B1CD1A88
+--------------61C2B4B700978657E9D2A262
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 7/2/20 6:48 AM, Leon Anavi wrote:
-> Inherit pypi. Use LICENSE for LIC_FILES_CHKSUM.
+On 7/3/20 5:30 AM, Leon Anavi wrote:
+> Upgrade to release 1.7.0:
 >
-> Upgrade to release 2.10.0, for details:
-> http://docs.h5py.org/en/stable/whatsnew/index.html
+> - PathNotFoundError now has a custom __str__ mentioning
+>    "package metadata" being missing to help guide users to the cause
+>     when the package is installed but no metadata is present.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../0001-cross-compiling-support.patch           | 15 ++++++++-------
->   ...hon3-h5py_2.9.0.bb => python3-h5py_2.10.0.bb} | 16 ++++++++--------
->   2 files changed, 16 insertions(+), 15 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-h5py_2.9.0.bb => python3-h5py_2.10.0.bb} (62%)
+>   ...etadata_1.6.1.bb => python3-importlib-metadata_1.7.0.bb} | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-importlib-metadata_1.6.1.bb => python3-importlib-metadata_1.7.0.bb} (64%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-h5py/0001-cross-compiling-support.patch b/meta-python/recipes-devtools/python/python3-h5py/0001-cross-compiling-support.patch
-> index ff50c85a0..8c0b91432 100644
-> --- a/meta-python/recipes-devtools/python/python3-h5py/0001-cross-compiling-support.patch
-> +++ b/meta-python/recipes-devtools/python/python3-h5py/0001-cross-compiling-support.patch
-> @@ -1,4 +1,4 @@
-> -From 7e3b1745c1fef34683a0610381dd3308ad4d1ba9 Mon Sep 17 00:00:00 2001
-> +From 364fd0906efa349ea44a761820408dcf6b2b8726 Mon Sep 17 00:00:00 2001
->   From: Hongxu Jia <hongxu.jia@windriver.com>
->   Date: Tue, 29 Jan 2019 17:08:32 +0800
->   Subject: [PATCH] cross compiling support
-> @@ -8,16 +8,17 @@ Remove useless dirs
->   Upstream-Status: Inappropriate [oe specific]
+> diff --git a/meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb b/meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
+> similarity index 64%
+> rename from meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb
+> rename to meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
+> index c46df8fcdc..de0fc78368 100644
+> --- a/meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
+> @@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e88ae122f3925d8bde8319060f2ddb8e"
 >   
->   Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
->   ---
->    setup_build.py     | 4 ----
->    setup_configure.py | 2 +-
->    2 files changed, 1 insertion(+), 5 deletions(-)
+>   inherit pypi setuptools3
 >   
->   diff --git a/setup_build.py b/setup_build.py
-> -index 85b321a..2c78e92 100644
-> +index c0e9a28c..ffd3bef7 100644
->   --- a/setup_build.py
->   +++ b/setup_build.py
-> -@@ -53,10 +53,6 @@ if sys.platform.startswith('win'):
-> +@@ -55,10 +55,6 @@ if sys.platform.startswith('win'):
->            ('_HDF5USEDLL_', None),
->            ('H5_BUILT_AS_DYNAMIC_LIB', None)
->        ])
-> @@ -29,11 +30,11 @@ index 85b321a..2c78e92 100644
->    class h5py_build_ext(build_ext):
->    
->   diff --git a/setup_configure.py b/setup_configure.py
-> -index a2de76a..197f2da 100644
-> +index 5576775e..75f4141e 100644
->   --- a/setup_configure.py
->   +++ b/setup_configure.py
-> -@@ -208,7 +208,7 @@ def autodetect_version(hdf5_dir=None):
-> -     else:
-> +@@ -206,7 +206,7 @@ def autodetect_version(hdf5_dir=None):
-> +         default_path = 'libhdf5.so'
->            regexp = re.compile(r'^libhdf5.so')
->    
->   -    libdirs = ['/usr/local/lib', '/opt/local/lib']
-> @@ -42,5 +43,5 @@ index a2de76a..197f2da 100644
->            if pkgconfig.exists("hdf5"):
->                libdirs.extend(pkgconfig.parse("hdf5")['library_dirs'])
->   --
-> -2.7.4
-> +2.17.1
+> -SRC_URI = "https://files.pythonhosted.org/packages/aa/9a/8483b77e2decd95963d7e34bc9bc91a26e71fd89b57d8cf978ca24747c7f/importlib_metadata-1.6.1.tar.gz"
+> +SRC_URI = "https://files.pythonhosted.org/packages/e2/ae/0b037584024c1557e537d25482c306cf6327b5a09b6c4b893579292c1c38/importlib_metadata-1.7.0.tar.gz"
+>   S = "${WORKDIR}/importlib_metadata-${PV}"
+> -SRC_URI[md5sum] = "38f795ac13abc923acfd3da06263eb8f"
+> -SRC_URI[sha256sum] = "0505dd08068cfec00f53a74a0ad927676d7757da81b7436a6eefe4c7cf75c545"
+> +SRC_URI[md5sum] = "4505ea85600cca1e693a4f8f5dd27ba8"
+> +SRC_URI[sha256sum] = "90bb658cdbbf6d1735b6341ce708fc7024a3e14e99ffdc5783edea9f9b077f83"
 >   
-> diff --git a/meta-python/recipes-devtools/python/python3-h5py_2.9.0.bb b/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
-> similarity index 62%
-> rename from meta-python/recipes-devtools/python/python3-h5py_2.9.0.bb
-> rename to meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
-> index 7822e463e..3904abbb4 100644
-> --- a/meta-python/recipes-devtools/python/python3-h5py_2.9.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
-> @@ -1,17 +1,17 @@
-> -SUMMARY = "Provides both a high- and low-level interface to the HDF5 library from Python. "
-> +SUMMARY = "Provides both a high- and low-level interface to the HDF5 library from Python."
->   HOMEPAGE = "https://www.h5py.org/"
->   SECTION = "devel/python"
->   LICENSE = "BSD-3-Clause"
-> -LIC_FILES_CHKSUM = "file://setup.py;beginline=107;endline=107;md5=795ecad0d261c998cc526c84a822dff6"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=113251d71fb0384712c719b567261c5c"
->   
-> -SRC_URI = "git://github.com/h5py/h5py.git \
-> +SRC_URI[md5sum] = "504b595237409ab766fbbe568e60a080"
-> +SRC_URI[sha256sum] = "84412798925dc870ffd7107f045d7659e60f5d46d1c70c700375248bf6bf512d"
-> +
-> +SRC_URI_append = " \
->              file://0001-cross-compiling-support.patch \
->             "
-> -SRCREV ?= "8d96a14c3508de1bde77aec5db302e478dc5dbc4"
-> -
-> -inherit setuptools3
->   
-> -S = "${WORKDIR}/git"
-> +inherit pypi setuptools3
->   
->   BBCLASSEXTEND = "native"
->   
-> @@ -27,4 +27,4 @@ RDEPENDS_${PN} = "python3-numpy \
->                     python3-six \
->                    "
->   
-> -export HDF5_VERSION="1.8.19"
-> +export HDF5_VERSION="1.8.21"
+>   DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+>   RDEPENDS_${PN} += "${PYTHON_PN}-zipp ${PYTHON_PN}-pathlib2"
 >
 > 
 
---------------E86C6F33F8287524B1CD1A88
+--------------61C2B4B700978657E9D2A262
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -202,115 +133,46 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 7/2/20 6:48 AM, Leon Anavi wrote:<br>
+    <div class="moz-cite-prefix">On 7/3/20 5:30 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200702104819.14256-5-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Inherit pypi. Use LICENSE for LIC_FILES_CHKSUM.
+    <blockquote type="cite" cite="mid:20200703093020.3514-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.7.0:
 
-Upgrade to release 2.10.0, for details:
-<a class="moz-txt-link-freetext" href="http://docs.h5py.org/en/stable/whatsnew/index.html">http://docs.h5py.org/en/stable/whatsnew/index.html</a>
+- PathNotFoundError now has a custom __str__ mentioning
+  &quot;package metadata&quot; being missing to help guide users to the cause
+   when the package is installed but no metadata is present.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200702104819.14256-5-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200703093020.3514-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../0001-cross-compiling-support.patch           | 15 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-------
- ...hon3-h5py_2.9.0.bb =&gt; python3-h5py_2.10.0.bb} | 16 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;--------
- 2 files changed, 16 insertions(&#43;), 15 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-h5py_2.9.0.bb =&gt; python3-h5py_2.10.0.bb} (62%)
+ ...etadata_1.6.1.bb =&gt; python3-importlib-metadata_1.7.0.bb} | 6 &#43;&#43;&#43;---
+ 1 file changed, 3 insertions(&#43;), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-importlib-metadata_1.6.1.bb =&gt; python3-importlib-metadata_1.7.0.bb} (64%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-h5py/0001-cross-compiling-support.patch b/meta-python/recipes-devtools/python/python3-h5py/0001-cross-compiling-support.patch
-index ff50c85a0..8c0b91432 100644
---- a/meta-python/recipes-devtools/python/python3-h5py/0001-cross-compiling-support.patch
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-h5py/0001-cross-compiling-support.patch
-@@ -1,4 &#43;1,4 @@
--From 7e3b1745c1fef34683a0610381dd3308ad4d1ba9 Mon Sep 17 00:00:00 2001
-&#43;From 364fd0906efa349ea44a761820408dcf6b2b8726 Mon Sep 17 00:00:00 2001
- From: Hongxu Jia <a class="moz-txt-link-rfc2396E" href="mailto:hongxu.jia@windriver.com">&lt;hongxu.jia@windriver.com&gt;</a>
- Date: Tue, 29 Jan 2019 17:08:32 &#43;0800
- Subject: [PATCH] cross compiling support
-@@ -8,16 &#43;8,17 @@ Remove useless dirs
- Upstream-Status: Inappropriate [oe specific]
+diff --git a/meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb b/meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
+similarity index 64%
+rename from meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb
+rename to meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
+index c46df8fcdc..de0fc78368 100644
+--- a/meta-python/recipes-devtools/python/python3-importlib-metadata_1.6.1.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-importlib-metadata_1.7.0.bb
+@@ -5,10 &#43;5,10 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=e88ae122f3925d8bde8319060f2ddb8e">&quot;file://LICENSE;md5=e88ae122f3925d8bde8319060f2ddb8e&quot;</a>
  
- Signed-off-by: Hongxu Jia <a class="moz-txt-link-rfc2396E" href="mailto:hongxu.jia@windriver.com">&lt;hongxu.jia@windriver.com&gt;</a>
-&#43;Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a>
- ---
-  setup_build.py     | 4 ----
-  setup_configure.py | 2 &#43;-
-  2 files changed, 1 insertion(&#43;), 5 deletions(-)
+ inherit pypi setuptools3
  
- diff --git a/setup_build.py b/setup_build.py
--index 85b321a..2c78e92 100644
-&#43;index c0e9a28c..ffd3bef7 100644
- --- a/setup_build.py
- &#43;&#43;&#43; b/setup_build.py
--@@ -53,10 &#43;53,6 @@ if sys.platform.startswith('win'):
-&#43;@@ -55,10 &#43;55,6 @@ if sys.platform.startswith('win'):
-          ('_HDF5USEDLL_', None),
-          ('H5_BUILT_AS_DYNAMIC_LIB', None)
-      ])
-@@ -29,11 &#43;30,11 @@ index 85b321a..2c78e92 100644
-  class h5py_build_ext(build_ext):
-  
- diff --git a/setup_configure.py b/setup_configure.py
--index a2de76a..197f2da 100644
-&#43;index 5576775e..75f4141e 100644
- --- a/setup_configure.py
- &#43;&#43;&#43; b/setup_configure.py
--@@ -208,7 &#43;208,7 @@ def autodetect_version(hdf5_dir=None):
--     else:
-&#43;@@ -206,7 &#43;206,7 @@ def autodetect_version(hdf5_dir=None):
-&#43;         default_path = 'libhdf5.so'
-          regexp = re.compile(r'^libhdf5.so')
-  
- -    libdirs = ['/usr/local/lib', '/opt/local/lib']
-@@ -42,5 &#43;43,5 @@ index a2de76a..197f2da 100644
-          if pkgconfig.exists(&quot;hdf5&quot;):
-              libdirs.extend(pkgconfig.parse(&quot;hdf5&quot;)['library_dirs'])
- -- 
--2.7.4
-&#43;2.17.1
+-SRC_URI = <a class="moz-txt-link-rfc2396E" href="https://files.pythonhosted.org/packages/aa/9a/8483b77e2decd95963d7e34bc9bc91a26e71fd89b57d8cf978ca24747c7f/importlib_metadata-1.6.1.tar.gz">&quot;https://files.pythonhosted.org/packages/aa/9a/8483b77e2decd95963d7e34bc9bc91a26e71fd89b57d8cf978ca24747c7f/importlib_metadata-1.6.1.tar.gz&quot;</a>
+&#43;SRC_URI = <a class="moz-txt-link-rfc2396E" href="https://files.pythonhosted.org/packages/e2/ae/0b037584024c1557e537d25482c306cf6327b5a09b6c4b893579292c1c38/importlib_metadata-1.7.0.tar.gz">&quot;https://files.pythonhosted.org/packages/e2/ae/0b037584024c1557e537d25482c306cf6327b5a09b6c4b893579292c1c38/importlib_metadata-1.7.0.tar.gz&quot;</a>
+ S = &quot;${WORKDIR}/importlib_metadata-${PV}&quot;
+-SRC_URI[md5sum] = &quot;38f795ac13abc923acfd3da06263eb8f&quot;
+-SRC_URI[sha256sum] = &quot;0505dd08068cfec00f53a74a0ad927676d7757da81b7436a6eefe4c7cf75c545&quot;
+&#43;SRC_URI[md5sum] = &quot;4505ea85600cca1e693a4f8f5dd27ba8&quot;
+&#43;SRC_URI[sha256sum] = &quot;90bb658cdbbf6d1735b6341ce708fc7024a3e14e99ffdc5783edea9f9b077f83&quot;
  
-diff --git a/meta-python/recipes-devtools/python/python3-h5py_2.9.0.bb b/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
-similarity index 62%
-rename from meta-python/recipes-devtools/python/python3-h5py_2.9.0.bb
-rename to meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
-index 7822e463e..3904abbb4 100644
---- a/meta-python/recipes-devtools/python/python3-h5py_2.9.0.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
-@@ -1,17 &#43;1,17 @@
--SUMMARY = &quot;Provides both a high- and low-level interface to the HDF5 library from Python. &quot;
-&#43;SUMMARY = &quot;Provides both a high- and low-level interface to the HDF5 library from Python.&quot;
- HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://www.h5py.org/">&quot;https://www.h5py.org/&quot;</a>
- SECTION = &quot;devel/python&quot;
- LICENSE = &quot;BSD-3-Clause&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://setup.py;beginline=107;endline=107;md5=795ecad0d261c998cc526c84a822dff6">&quot;file://setup.py;beginline=107;endline=107;md5=795ecad0d261c998cc526c84a822dff6&quot;</a>
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=113251d71fb0384712c719b567261c5c">&quot;file://LICENSE;md5=113251d71fb0384712c719b567261c5c&quot;</a>
- 
--SRC_URI = &quot;git://github.com/h5py/h5py.git \
-&#43;SRC_URI[md5sum] = &quot;504b595237409ab766fbbe568e60a080&quot;
-&#43;SRC_URI[sha256sum] = &quot;84412798925dc870ffd7107f045d7659e60f5d46d1c70c700375248bf6bf512d&quot;
-&#43;
-&#43;SRC_URI_append = &quot; \
-            <a class="moz-txt-link-freetext" href="file://0001-cross-compiling-support.patch">file://0001-cross-compiling-support.patch</a> \
-           &quot;
--SRCREV ?= &quot;8d96a14c3508de1bde77aec5db302e478dc5dbc4&quot;
--
--inherit setuptools3
- 
--S = &quot;${WORKDIR}/git&quot;
-&#43;inherit pypi setuptools3
- 
- BBCLASSEXTEND = &quot;native&quot;
- 
-@@ -27,4 &#43;27,4 @@ RDEPENDS_${PN} = &quot;python3-numpy \
-                   python3-six \
-                  &quot;
- 
--export HDF5_VERSION=&quot;1.8.19&quot;
-&#43;export HDF5_VERSION=&quot;1.8.21&quot;
+ DEPENDS &#43;= &quot;${PYTHON_PN}-setuptools-scm-native&quot;
+ RDEPENDS_${PN} &#43;= &quot;${PYTHON_PN}-zipp ${PYTHON_PN}-pathlib2&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -320,4 +182,4 @@ index 7822e463e..3904abbb4 100644
   </body>
 </html>
 
---------------E86C6F33F8287524B1CD1A88--
+--------------61C2B4B700978657E9D2A262--
