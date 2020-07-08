@@ -1,89 +1,133 @@
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web12.3947.1594240269246828273
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com [209.85.160.194])
+ by mx.groups.io with SMTP id smtpd.web10.4628.1594242058017106646
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Jul 2020 13:31:09 -0700
+ Wed, 08 Jul 2020 14:00:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nUVc8oXB;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id 72so8084059ple.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Jul 2020 13:31:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=FI1XSdHR;
+ spf=pass (domain: gmail.com, ip: 209.85.160.194, mailfrom: philip.balister@gmail.com)
+Received: by mail-qt1-f194.google.com with SMTP id e12so28165qtr.9
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Jul 2020 14:00:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=R1z6A3M9TFr/4eWBjg8CdO8QD4sYf/uXZE4hhHvxGwE=;
-        b=nUVc8oXBMHnzZJMcLcJei2rPXxZ1cH/b0jL+CQw+YQmv9m8FcxAmfGxmsujSsu9anq
-         x3cw4fP4ugLVcsznb7wfful65sNsSm+EMXLv/Mu8CEUYohmVHkhlbbgWUNwMjoRUXlxS
-         157pPiBA/IyZ2RXQu5mrhUg/phUedlqbaoRiiOCHdKZDSGiEaYyIW/q0X+sP1oYs52/L
-         MLR6h4PrUXiWFYeZg1R0+oFYro5I+kLzQEnhdwD4U/fOkQkc3A0l6kHa+r0WJCsrcRRx
-         ub3LT6lWdhxkcZYMCGDDsGDkxD5SHCKiJxRf/+gQ8CVxKimK9o1csYbvFLiBHXg2y+jA
-         XpKQ==
+        h=sender:from:to:cc:subject:date:message-id;
+        bh=9VgIKLrWvkO9wWkdgjPOSJXd6TEkZyJYGk1mSx7R7Bg=;
+        b=FI1XSdHRLdf8yYcSHcYy5N4+FkMOkL8gIdEFn+ZOFwh1DWrCu0bIJ6bNQrsjFXrEbS
+         3J9lefZxqyxh49Mq6wjvQwhS/O5YecqFAaBoSIPK5OBvUFIly1T3VcUmgpHRNZiWMY9y
+         JQFx/QTbs8ab5Hc05KQgzfGukBVd4L0EREl9Q8OHRwUfeLUvaXHRk6A5CE84eRbahdR7
+         ijAkU10Q4sYge85cHTvfp+/h/ACFr8qq6FtWNaA1g56UxSmI4iikL/aTh79oIro/WB2u
+         1WzlvqPAXqOg+I5Mwdcyg6JmQSH0KMB1p5Sxz+BesYCyHvoKdR+24eL7lVCtknrI1mnm
+         JTAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=R1z6A3M9TFr/4eWBjg8CdO8QD4sYf/uXZE4hhHvxGwE=;
-        b=AsuWFxaauaMhbC+mtny/+fqr5M/y1NwTb4rEPbIl8uKKFv4qdXDoxJuUAgXvnmFxvi
-         bR9GxlQudAtCvHoZM16jKr4Tip7o0jZTjC73yN3z+rbJ/7KB2TIeSRT0faYHqMhN+KCv
-         l19A4akzL5OB4yNhKD0Pcmh+3pWWHh5yUudLNtOaqfsXe5gJ24HzcU4HjhTyO6yLV4HN
-         wGbPudDMQ7oYttog0I9fDr/sk6K43lh6RsuNO1bKcS+llL5M20fm6zLgIxpjJpamEadT
-         AeLmyc5cGwDaV2ms6djzahzE1LjdZ9SNMaYtkQ35f8wYjyglb83uidTGSivtf15MUFcB
-         vi8A==
-X-Gm-Message-State: AOAM532cmd/ygnxs735NnZShwDZKglACo+/0bd5ro1K+waFgr9hdoJM/
-	mfpJ4AC/IAFsDeNDaQhAP06MF+n2Txk=
-X-Google-Smtp-Source: ABdhPJz0EllEOL/k2TNQ8YDIAroQVNZM2JaPtoqDH9s/bXqdeJoV4QFczf/j+UiVMshRi7KJGuPkww==
-X-Received: by 2002:a17:902:ed02:: with SMTP id b2mr40793457pld.121.1594240268401;
-        Wed, 08 Jul 2020 13:31:08 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e0fc:4d03:5c6c:3dcd])
-        by smtp.gmail.com with ESMTPSA id 2sm596372pfa.110.2020.07.08.13.31.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Jul 2020 13:31:07 -0700 (PDT)
-From: "akuster" <akuster808@gmail.com>
+        h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+        bh=9VgIKLrWvkO9wWkdgjPOSJXd6TEkZyJYGk1mSx7R7Bg=;
+        b=HSWgeiLP1xb5xbEbeNuDoxsAqLiry6O/2IG45NP7d9jxQcKyQB80i/PpvzJHGzzFa8
+         mZ3LywPj4N/+j5VJRgwWfrKdDtVZU7nH1ssjcu+UM1QQFpuJUbr5dUqzgA645PLGmtT2
+         ElGFvDvk431AKtjLcWyczbAAjxjfC1UlExdLrr6mjYGm1853/Hg6uEbb1Eft6wNgE1i5
+         udXmG00K017vQHIRKRzvSefKscS0t3OVITVA6lQczbGgtnGHD9EuTjRw7VXWB8TP5Nfw
+         kFSP3bGtYqvw3n6YIqvS8ip72AyfQ7ma0nlSaqK/2AblTiLRXKIQlOLv9g01bwFvjVuZ
+         y0Eg==
+X-Gm-Message-State: AOAM531WaDhd2p9ARtM6vXNbPj98rC9C+lBuE1eMl5mMPeVuKQP5+mYt
+	BgNgbmQF31scPSM8/51k5vY+o+8yhX4=
+X-Google-Smtp-Source: ABdhPJxDfq3hXX2XmnnRn5zXwOdsR8LDxPNFlL+GaIxVaZ/60xwGgiK4tkuGO/9gYhAxCOlSH6nUjA==
+X-Received: by 2002:ac8:518b:: with SMTP id c11mr60547904qtn.195.1594242056651;
+        Wed, 08 Jul 2020 14:00:56 -0700 (PDT)
+Return-Path: <philip.balister@gmail.com>
+Received: from prague.hsd1.va.comcast.net ([2601:5c0:c100:b84:c110:9e9e:8241:dfa])
+        by smtp.gmail.com with ESMTPSA id 2sm1147673qka.42.2020.07.08.14.00.54
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Wed, 08 Jul 2020 14:00:55 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: "Philip Balister" <philip@balister.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Armin Kuster <akuster@mvista.com>
-Subject: [meta-networking][master][dunfell][PATCH] wireshark: Update to 3.2.5
-Date: Wed,  8 Jul 2020 13:31:06 -0700
-Message-Id: <20200708203106.14506-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
+Cc: Philip Balister <philip@balister.org>
+Subject: [meta-python][PATCH] python3-pybind11: Use cmake to build and add -native version
+Date: Wed,  8 Jul 2020 17:00:48 -0400
+Message-Id: <20200708210048.7409-1-philip@balister.org>
+X-Mailer: git-send-email 2.13.6
 
-From: Armin Kuster <akuster@mvista.com>
+ * Switch to git repo to pick up cmake files for recipes to use
+ * Use cmake to build innstead of pypi so cmake files are included in sysroot
+ * Disable tests to prevent configure failure (I tried adding pytest asa DEPEND)
+ * Patch out cmake that strips output to prevent QA failures
+ * With this I can build gnuradio using pybind11.
 
-Source: wireshark.org
-MR: 104620
-Type: Security Fix
-Disposition: Backport from wireshark.org
-ChangeID: 64e3701e4d6bd53972c22c49d655556e6f37e461
-Description:
-
-Affects: 3.2.0 to 3.2.4
-
-Includes:
-CVE-2020-15466
-
-For more info see: https://www.wireshark.org/docs/relnotes/wireshark-3.2.5.html
-
-Signed-off-by: Armin Kuster <akuster@mvista.com>
+Signed-off-by: Philip Balister <philip@balister.org>
 ---
- .../wireshark/{wireshark_3.2.4.bb => wireshark_3.2.5.bb}       | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_3.2.4.bb => wireshark_3.2.5.bb} (95%)
+ .../0001-Do-not-strip-binaries.patch               | 39 ++++++++++++++++++++++
+ .../python/python3-pybind11_2.5.0.bb               | 15 +++++++--
+ 2 files changed, 51 insertions(+), 3 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.2.4.bb b/meta-networking/recipes-support/wireshark/wireshark_3.2.5.bb
-similarity index 95%
-rename from meta-networking/recipes-support/wireshark/wireshark_3.2.4.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_3.2.5.bb
-index c3caaefde9..a6c09d47ba 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.2.4.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.2.5.bb
-@@ -12,8 +12,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch b/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch
+new file mode 100644
+index 000000000..07ab9a03b
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch
+@@ -0,0 +1,39 @@
++From 918f3ef01c7a67f3beb67307966698474f144581 Mon Sep 17 00:00:00 2001
++From: Philip Balister <philip@balister.org>
++Date: Wed, 8 Jul 2020 09:41:43 -0400
++Subject: [PATCH] Do not strip binaries.
++
++ * OpenEmbedded strips them after creating debug packages.
++
++Signed-off-by: Philip Balister <philip@balister.org>
++---
++ tools/pybind11Tools.cmake | 13 -------------
++ 1 file changed, 13 deletions(-)
++
++diff --git a/tools/pybind11Tools.cmake b/tools/pybind11Tools.cmake
++index a3603ab..b4c8f63 100644
++--- a/tools/pybind11Tools.cmake
+++++ b/tools/pybind11Tools.cmake
++@@ -230,19 +230,6 @@ function(pybind11_add_module target_name)
++ 
++   _pybind11_add_lto_flags(${target_name} ${ARG_THIN_LTO})
++ 
++-  if (NOT MSVC AND NOT ${CMAKE_BUILD_TYPE} MATCHES Debug|RelWithDebInfo)
++-    # Strip unnecessary sections of the binary on Linux/Mac OS
++-    if(CMAKE_STRIP)
++-      if(APPLE)
++-        add_custom_command(TARGET ${target_name} POST_BUILD
++-                           COMMAND ${CMAKE_STRIP} -x $<TARGET_FILE:${target_name}>)
++-      else()
++-        add_custom_command(TARGET ${target_name} POST_BUILD
++-                           COMMAND ${CMAKE_STRIP} $<TARGET_FILE:${target_name}>)
++-      endif()
++-    endif()
++-  endif()
++-
++   if(MSVC)
++     # /MP enables multithreaded builds (relevant when there are many files), /bigobj is
++     # needed for bigger binding projects due to the limit to 64k addressable sections
++-- 
++2.25.4
++
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb b/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb
+index dc3b8f6ad..7dcf71e13 100644
+--- a/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb
+@@ -3,7 +3,16 @@ HOMEPAGE = "https://github.com/wjakob/pybind11"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=beb87117af69fd10fbf9fb14c22a2e62"
  
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+-SRC_URI[md5sum] = "5355e1fd05c8eedef19cc9bfd3d82a77"
+-SRC_URI[sha256sum] = "ea5a4e7a880112915463826f1acbec5892df36dfe102ecb249229ac514fb54ad"
++DEPENDS = "boost"
  
--SRC_URI[md5sum] = "4bbee1bdd5b88343733590fabfffddf3"
--SRC_URI[sha256sum] = "d17d461e849e2d0b033431c45f71d8ee8ec3c8faa232a6ad63069a47927db8aa"
-+SRC_URI[sha256sum] = "bd89052a5766cce08b1090df49628567e48cdd24bbaa47667c851bac6aaac940"
- 
- PE = "1"
- 
+-inherit pypi setuptools3
++SRC_URI = "git://github.com/pybind/pybind11.git \
++           file://0001-Do-not-strip-binaries.patch"
++SRCREV = "3b1dbebabc801c9cf6f0953a4c20b904d444f879"
++
++S = "${WORKDIR}/git"
++
++BBCLASSEXTEND = "native"
++
++EXTRA_OECMAKE =  "-DPYBIND11_TEST=OFF"
++
++inherit cmake python3native
 -- 
-2.17.1
+2.13.6
 
