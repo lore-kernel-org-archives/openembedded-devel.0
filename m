@@ -1,89 +1,96 @@
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.web12.4325.1594267661563884467
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web12.4333.1594267692374641801
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Jul 2020 21:07:41 -0700
+ Wed, 08 Jul 2020 21:08:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=phUG6kZ7;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id w2so379502pgg.10
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Jul 2020 21:07:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=JlXQqQfG;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id i14so422789pfu.13
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Jul 2020 21:08:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=R1z6A3M9TFr/4eWBjg8CdO8QD4sYf/uXZE4hhHvxGwE=;
-        b=phUG6kZ7KAbSeX4SVG/fk4mpfe6Wb6QbtnHHEA4Vync78hKxcIckCRS+Qjt4M7sM23
-         or59PPo88rXwnPEk1mbyt1ElPgx70yaRH/rnEMueBGD2qe2YwsqBk2A7yOHDLGCEM8w0
-         Yqy0S0XVQqy3+VhlFX/iE87Avg8qJS2GKf9nhwHAteRdNu1mPAc/szHrwmVksEbqOMhw
-         UTP8VWMLYUbjlpky+WMW+T8sb2vNaOxWhNsc5mzB4nebiPffwRAAn8iZqynEH3zfdFcH
-         4PO9A1tuVZrPyYIekPJk+O2WMSNz03O/6Xaq4qJXuO6Q0L/Iv/jz+ubgMLqszPKHNVUW
-         MZcA==
+        h=from:to:subject:date:message-id;
+        bh=Fbh+krsxJjWzrQ82jruMHHpfN4cZBJw3SmSjW/b/zrg=;
+        b=JlXQqQfGKYJVT3ZTxG3wFf18hT2zYk4taJV03+DkvIx4yzuNXr2nUm76rUs89j8W7l
+         tQ3ThcDQ29jRGUNaBRqYjNFucnQrwLfAb884K+Ath23udd4gCL6RMX11znP7TFpwGt8T
+         b9ARu+Eoif0VxMushT7Yh9voZFna2PoPPFHrUBBo5+16QhJ2sOU3F2rVRxQlmD5xkEBk
+         hgBhRB0wKoHRiEkIWRKju/BiCvTjZqXSpc7p6t5zW5StZHXQtdztldnv39Tj5uMO80It
+         eyA62mHk3bEPOplk1d8ifZ3e1ZfXfXQtkTR08cVmQnSfbBzBq1YHG+nI/gqQW6rB20U2
+         Xcgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=R1z6A3M9TFr/4eWBjg8CdO8QD4sYf/uXZE4hhHvxGwE=;
-        b=dRf3qqEmjV7iblPQnWCX5ax2tpaQh+BFrtOXOQQh+BPofnWPxkd0uM9lir3ItjqdoV
-         NCMSCzTpkilySAFi9zKFE7YlT2D0LdsfKV6VRp+vZ0PGwXd9QUf1HWbyw2R952wMXvpz
-         GRKSB/VbM1x6F/0/Qy+BY66eaTcQNXAmk1+jHvBZ1uSTOZ/8CrmexJWEaBl0xq72r4Eg
-         F3ekW+/H5gx5rQBM7SNqZ50fRBNtxfamSzIkh+E5AXETGjG/2txDu+3Ik2bHfRo29BzE
-         1I/HYZs3bdnZFftRBENp6IK+LQ1GPEewIMEd6JF+zA3w0EUppL2jhiq/iwTmPxtjoUcl
-         0edg==
-X-Gm-Message-State: AOAM531MXpHXIP0iCqOC6Ixxmbzimsf0e3gOaQky4J/YIcPIu4PJYxR1
-	6xiEePauiN79tZ5GlRJOl7cKcVKNl2w=
-X-Google-Smtp-Source: ABdhPJwNHM1lRhmB2klFhcat2qnM0BPVC6AIjYwlWuvfkWA0UcTe89LaHVfZf9+JnmXWwVwACc5M2w==
-X-Received: by 2002:a62:dd91:: with SMTP id w139mr34334631pff.40.1594267660793;
-        Wed, 08 Jul 2020 21:07:40 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id;
+        bh=Fbh+krsxJjWzrQ82jruMHHpfN4cZBJw3SmSjW/b/zrg=;
+        b=GYxtMmqIv2XSFUiMw1DftmvKSSqOTU+UNrW+ePkY2Fy3kreBKREbsAhgwCA8GJ9Hvg
+         JHQ5OrtALVw54+DiWnF/ydqNNolXDi1BlFzGdW+4nqLTXRRqqqB7GE+K5Q9nHxk+QHxv
+         KUaeY4+w/kjp4qFEgSPqbkV/K6F9Qls992YoYO1ducd5lrhNZNc/HXusbYpy2TZFQ62j
+         fMz6wr3+3pZgm+xkPTiG9onGDkC+icQZnCJPpwKy+6zL2PVDkKtTh1jUR4/3/D6jCMfW
+         +pMV0KSNNFu2YC2ii/jSmRaBe6n5lbac3wskJ5TQlhOKeO9+CRW6F12HjN4AmeT+eYIq
+         +KlQ==
+X-Gm-Message-State: AOAM531GpU+/n6uueJ5aVkRZAZ87k4BGi3/GF0l8t9Qu8qTN7p8QwKoN
+	veoxjf39Jg1vVe79gvkyAHGxK1XE8sU=
+X-Google-Smtp-Source: ABdhPJwhkjGr4tUzqkRIRVngtVbgwVoZOrB+T+6rMg1TWbcb39aWAyoVo+xjYuN7vaOEKouYtv+McA==
+X-Received: by 2002:a63:6cd:: with SMTP id 196mr52225576pgg.169.1594267691623;
+        Wed, 08 Jul 2020 21:08:11 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e0fc:4d03:5c6c:3dcd])
-        by smtp.gmail.com with ESMTPSA id c188sm1120924pfc.143.2020.07.08.21.07.39
+        by smtp.gmail.com with ESMTPSA id b22sm835694pju.26.2020.07.08.21.08.10
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Jul 2020 21:07:40 -0700 (PDT)
+        Wed, 08 Jul 2020 21:08:11 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Armin Kuster <akuster@mvista.com>
-Subject: [meta-python][PATCH] wireshark: Update to 3.2.5
-Date: Wed,  8 Jul 2020 21:07:38 -0700
-Message-Id: <20200709040738.9690-1-akuster808@gmail.com>
+Subject: [meta-python][PATCH] python3-flask-babel: update to 1.0.0 and consolidate
+Date: Wed,  8 Jul 2020 21:08:10 -0700
+Message-Id: <20200709040810.9754-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 
-From: Armin Kuster <akuster@mvista.com>
+The python3-werkzeug 1.0.0 requires this package to be updated.
+Fixes:
+File "/usr/lib/python3.8/site-packages/flask_babel/__init__.py", line 19, in <module>
+    from werkzeug import ImmutableDict
+ImportError: cannot import name 'ImmutableDict' from 'werkzeug' (/usr/lib/python3.8/site-packages/werkzeug/__init__.py)
 
-Source: wireshark.org
-MR: 104620
-Type: Security Fix
-Disposition: Backport from wireshark.org
-ChangeID: 64e3701e4d6bd53972c22c49d655556e6f37e461
-Description:
+https://github.com/python-babel/flask-babel/issues/162
 
-Affects: 3.2.0 to 3.2.4
-
-Includes:
-CVE-2020-15466
-
-For more info see: https://www.wireshark.org/docs/relnotes/wireshark-3.2.5.html
-
-Signed-off-by: Armin Kuster <akuster@mvista.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../wireshark/{wireshark_3.2.4.bb => wireshark_3.2.5.bb}       | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_3.2.4.bb => wireshark_3.2.5.bb} (95%)
+ .../recipes-devtools/python/python3-flask-babel_0.12.2.bb    | 2 --
+ .../{python-flask-babel.inc => python3-flask-babel_1.0.0.bb} | 5 ++---
+ 2 files changed, 2 insertions(+), 5 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-flask-babel_0.12.2.bb
+ rename meta-python/recipes-devtools/python/{python-flask-babel.inc => python3-flask-babel_1.0.0.bb} (66%)
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.2.4.bb b/meta-networking/recipes-support/wireshark/wireshark_3.2.5.bb
-similarity index 95%
-rename from meta-networking/recipes-support/wireshark/wireshark_3.2.4.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_3.2.5.bb
-index c3caaefde9..a6c09d47ba 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.2.4.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.2.5.bb
-@@ -12,8 +12,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
+diff --git a/meta-python/recipes-devtools/python/python3-flask-babel_0.12.2.bb b/meta-python/recipes-devtools/python/python3-flask-babel_0.12.2.bb
+deleted file mode 100644
+index 104e7c28f1..0000000000
+--- a/meta-python/recipes-devtools/python/python3-flask-babel_0.12.2.bb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-inherit pypi setuptools3
+-require python-flask-babel.inc
+diff --git a/meta-python/recipes-devtools/python/python-flask-babel.inc b/meta-python/recipes-devtools/python/python3-flask-babel_1.0.0.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python-flask-babel.inc
+rename to meta-python/recipes-devtools/python/python3-flask-babel_1.0.0.bb
+index 0e507f3372..d968be3ee2 100644
+--- a/meta-python/recipes-devtools/python/python-flask-babel.inc
++++ b/meta-python/recipes-devtools/python/python3-flask-babel_1.0.0.bb
+@@ -2,12 +2,11 @@ DESCRIPTION = "i18n and l10n support for Flask based on babel and pytz"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=51917f3e8e858f5ae295a7d0e2eb3cc9"
  
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+-SRC_URI[md5sum] = "fcf2f360ff279d3133e40974804efd72"
+-SRC_URI[sha256sum] = "316ad183e42003f3922957fa643d0a1e8e34a0f0301a88c3a8f605bc37ba5c86"
++SRC_URI[sha256sum] = "d6a70468f9a8919d59fba2a291a003da3a05ff884275dddbd965f3b98b09ab3e"
  
--SRC_URI[md5sum] = "4bbee1bdd5b88343733590fabfffddf3"
--SRC_URI[sha256sum] = "d17d461e849e2d0b033431c45f71d8ee8ec3c8faa232a6ad63069a47927db8aa"
-+SRC_URI[sha256sum] = "bd89052a5766cce08b1090df49628567e48cdd24bbaa47667c851bac6aaac940"
+ PYPI_PACKAGE = "Flask-Babel"
  
- PE = "1"
+-inherit pypi
++inherit pypi setuptools3
  
+ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-speaklater \
 -- 
 2.17.1
 
