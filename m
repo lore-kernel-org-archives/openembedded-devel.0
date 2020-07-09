@@ -1,71 +1,164 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [])
- by mx.groups.io with SMTP id smtpd.web11.8501.1594306856983201430
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
+ by mx.groups.io with SMTP id smtpd.web11.9045.1594308109901379959
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Jul 2020 08:01:08 -0700
+ Thu, 09 Jul 2020 08:21:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: <nil>, mailfrom: wangmy@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.75,331,1589212800"; 
-   d="scan'208";a="95993667"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 09 Jul 2020 23:00:49 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id F2D3D49B1116
-	for <openembedded-devel@lists.openembedded.org>; Thu,  9 Jul 2020 23:00:42 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 9 Jul 2020 23:00:44 +0800
-From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@cn.fujitsu.com>
-Subject: [oe] [meta-python][PATCH] python3-idna: upgrade 2.9 -> 2.10
-Date: Thu, 9 Jul 2020 23:00:36 +0800
-Message-ID: <1594306837-45766-1-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=HTcuMCLl;
+ spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f46.google.com with SMTP id rk21so2709919ejb.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Jul 2020 08:21:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=R7RZ7gIwIYo15EiUoOsDA5KnwKCfW0JtHdti3bAcU/g=;
+        b=HTcuMCLlq9qeiYF4emJEBrpu4XJOVkL/Vx686mZjdSxOwrpbs71+3oD7fyZwETz2yD
+         +Yu+FYC41v0WFg5TG+X1EkyPIVcdP8/ykNjgUYjExrsPBRzKc08YkcpChIhiK/RWpdV8
+         NeWU/gnSiotUHMwM4u7sbfhXLCq5I9HUPKMLWCsq4WffboUKhCB0glSI/HvkELBtAa7E
+         6htr2pQV8ADqr49ifO27DslG+WQKCtCIepe4LVEZcWfOaWkZi6Q7c3WzYBerVzhpW2DO
+         iW1LgFnNYpje8hezoNuXSCWpj1dybxOj5qcTBTC7v46ICovyr237fPjpB1qZC5Qof85A
+         6yFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=R7RZ7gIwIYo15EiUoOsDA5KnwKCfW0JtHdti3bAcU/g=;
+        b=hm8eTqkB5K0seTXwd+ljYIhVBfGciqU0HOKVtv1U4EUSp0AVAg8CQLiT9vwQqJSco9
+         F6LQD0sbkvjZMPkCGVqF/Bjp6uLib2gNrGgthCIVGlBlt+shnqPml+hN9LlqTzEpf4hd
+         /dpPfDGK9nAK6F6EapSgz3h6CYGrWBPaCYbh2ySmdJooWwlpLtsl1WYWIUkXVrdTqknd
+         IvxF/YV//UXrZPbBTwOBrO7kEz6aj4epWWQuK8aCVeXcqulSufrWzZYiHfn+9T0Z1eIB
+         prgrxUz1OlNkEWwe4SrP8WI+NsmApzArILUrS9mOH7ruyqWaLEIf35RrfS2OxBVIdzCA
+         XJGQ==
+X-Gm-Message-State: AOAM531YxSDLi1oJlYuGs+LJSgLo/sU4JGpWPAYLsfHI9gEodm7Ny2hK
+	0p5GMEJa32JkRGf5tHGufpnMmEZd3vCPqStUKzo=
+X-Google-Smtp-Source: ABdhPJxWHcLBaC7Cf9eXlhyAylOJqsuIIEIdcX7c+p0dQ6N34P7dGDguqIJaZmZP4YYeuB/BbC5OhVIvkfX+J7o6RKk=
+X-Received: by 2002:a17:906:5fc4:: with SMTP id k4mr56695215ejv.94.1594308108420;
+ Thu, 09 Jul 2020 08:21:48 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
-X-yoursite-MailScanner-ID: F2D3D49B1116.A3110
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+References: <cover.1593561840.git.akuster808@gmail.com> <fc1b28e574a01410f082034c1f8212139b6107e1.1593561840.git.akuster808@gmail.com>
+In-Reply-To: <fc1b28e574a01410f082034c1f8212139b6107e1.1593561840.git.akuster808@gmail.com>
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+Date: Thu, 9 Jul 2020 17:21:37 +0200
+Message-ID: <CA+chaQc92KeJnoG+NPi6EvKMHNnLCbN8AFPS9Usdc1S1WNHu9A@mail.gmail.com>
+Subject: Re: [oe] [dunfel 03/32] jsoncpp: upgrade 1.9.2 -> 1.9.3
+To: akuster <akuster808@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000770aac05aa03c8cd"
 
-Main new features of idna release 2.10:
-- Update to Unicode 13.0.0.
-- Throws a more specific exception if "xn--" is provided as a label.
-- This is expected to be the last version that supports Python 2.
-See here for a full comparison:
-https://github.com/kjd/idna/commit/e5c11dbcd8dd32bb048b4dbdd344b49d18ecdf45
+--000000000000770aac05aa03c8cd
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
----
- meta-python/recipes-devtools/python/python-idna.inc           | 4 ++--
- .../python/{python3-idna_2.9.bb => python3-idna_2.10.bb}      | 0
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-idna_2.9.bb => python3-idna_2.10.bb} (100%)
+FYI this "small" upgrade changes ABI version from libjsoncpp22
+to libjsoncpp24 which might cause some issues to people who expect
+relatively stable ABIs in LTS dunfell.
 
-diff --git a/meta-python/recipes-devtools/python/python-idna.inc b/meta-python/recipes-devtools/python/python-idna.inc
-index adf26e0279..4968f10726 100644
---- a/meta-python/recipes-devtools/python/python-idna.inc
-+++ b/meta-python/recipes-devtools/python/python-idna.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/kjd/idna"
- LICENSE = "BSD-3-Clause & Python-2.0 & Unicode"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=cf36c8682cc154d2d4aa57bd6246b9a1"
- 
--SRC_URI[md5sum] = "870b8b80267f00f0faf1b7ba4bdbf14e"
--SRC_URI[sha256sum] = "7588d1c14ae4c77d74036e8c22ff447b26d0fde8f007354fd48a7814db15b7cb"
-+SRC_URI[md5sum] = "7a910c706db30d758f377db2762c0f9a"
-+SRC_URI[sha256sum] = "b307872f855b18632ce0c21c5e45be78c0ea7ae4c15c828c20788b26921eb3f6"
- 
- RDEPENDS_${PN}_class-target = "\
-     ${PYTHON_PN}-codecs \
-diff --git a/meta-python/recipes-devtools/python/python3-idna_2.9.bb b/meta-python/recipes-devtools/python/python3-idna_2.10.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-idna_2.9.bb
-rename to meta-python/recipes-devtools/python/python3-idna_2.10.bb
--- 
-2.17.1
+On Wed, Jul 1, 2020 at 2:07 AM akuster <akuster808@gmail.com> wrote:
 
+> From: Pierre-Jean Texier <pjtexier@koncepto.io>
+>
+> See full changelog
+> https://github.com/open-source-parsers/jsoncpp/releases/tag/1.9.3
+>
+> Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> (cherry picked from commit 65e124eef373680726ac045677cbec7d9080a289)
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>  .../jsoncpp/{jsoncpp_1.9.2.bb => jsoncpp_1.9.3.bb}              | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.9.2.bb =>
+> jsoncpp_1.9.3.bb} (93%)
+>
+> diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
+> b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb
+> similarity index 93%
+> rename from meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
+> rename to meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb
+> index a88410f2ff..97c6361ad8 100644
+> --- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
+> +++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb
+> @@ -11,7 +11,7 @@ SECTION = "libs"
+>  LICENSE = "MIT"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=fa2a23dd1dc6c139f35105379d76df2b"
+>
+> -SRCREV = "d2e6a971f4544c55b8e3b25cf96db266971b778f"
+> +SRCREV = "6aba23f4a8628d599a9ef7fa4811c4ff6e4070e2"
+>  SRC_URI = "git://github.com/open-source-parsers/jsoncpp"
+>
+>  S = "${WORKDIR}/git"
+> --
+> 2.17.1
+>
+> 
+>
 
+--000000000000770aac05aa03c8cd
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr">FYI this &quot;small&quot; upgrade changes ABI version fro=
+m=C2=A0libjsoncpp22 to=C2=A0libjsoncpp24 which might cause some issues to p=
+eople who expect relatively stable ABIs in LTS dunfell.</div><br><div class=
+=
+=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Jul 1, 2020=
+ at 2:07 AM akuster &lt;<a href=3D"mailto:akuster808@gmail.com">akuster808@=
+gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
+g-left:1ex">From: Pierre-Jean Texier &lt;<a href=3D"mailto:pjtexier@koncept=
+o.io" target=3D"_blank">pjtexier@koncepto.io</a>&gt;<br>
+<br>
+See full changelog <a href=3D"https://github.com/open-source-parsers/jsonc=
+pp/releases/tag/1.9.3" rel=3D"noreferrer" target=3D"_blank">https://github.=
+com/open-source-parsers/jsoncpp/releases/tag/1.9.3</a><br>
+<br>
+Signed-off-by: Pierre-Jean Texier &lt;<a href=3D"mailto:pjtexier@koncepto.=
+io" target=3D"_blank">pjtexier@koncepto.io</a>&gt;<br>
+Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=
+=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
+(cherry picked from commit 65e124eef373680726ac045677cbec7d9080a289)<br>
+Signed-off-by: Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail.com" ta=
+rget=3D"_blank">akuster808@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0.../jsoncpp/{<a href=3D"http://jsoncpp_1.9.2.bb" rel=3D"noreferrer" =
+target=3D"_blank">jsoncpp_1.9.2.bb</a> =3D&gt; <a href=3D"http://jsoncpp_1.=
+9.3.bb" rel=3D"noreferrer" target=3D"_blank">jsoncpp_1.9.3.bb</a>}=C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+=C2=A0rename meta-oe/recipes-devtools/jsoncpp/{<a href=3D"http://jsoncpp_1=
+.9.2.bb" rel=3D"noreferrer" target=3D"_blank">jsoncpp_1.9.2.bb</a> =3D&gt; =
+<a href=3D"http://jsoncpp_1.9.3.bb" rel=3D"noreferrer" target=3D"_blank">js=
+oncpp_1.9.3.bb</a>} (93%)<br>
+<br>
+diff --git a/meta-oe/recipes-devtools/jsoncpp/<a href=3D"http://jsoncpp_1.=
+9.2.bb" rel=3D"noreferrer" target=3D"_blank">jsoncpp_1.9.2.bb</a> b/meta-oe=
+/recipes-devtools/jsoncpp/<a href=3D"http://jsoncpp_1.9.3.bb" rel=3D"norefe=
+rrer" target=3D"_blank">jsoncpp_1.9.3.bb</a><br>
+similarity index 93%<br>
+rename from meta-oe/recipes-devtools/jsoncpp/<a href=3D"http://jsoncpp_1.9=
+.2.bb" rel=3D"noreferrer" target=3D"_blank">jsoncpp_1.9.2.bb</a><br>
+rename to meta-oe/recipes-devtools/jsoncpp/<a href=3D"http://jsoncpp_1.9.3=
+.bb" rel=3D"noreferrer" target=3D"_blank">jsoncpp_1.9.3.bb</a><br>
+index a88410f2ff..97c6361ad8 100644<br>
+--- a/meta-oe/recipes-devtools/jsoncpp/<a href=3D"http://jsoncpp_1.9.2.bb"=
+ rel=3D"noreferrer" target=3D"_blank">jsoncpp_1.9.2.bb</a><br>
++++ b/meta-oe/recipes-devtools/jsoncpp/<a href=3D"http://jsoncpp_1.9.3.bb"=
+ rel=3D"noreferrer" target=3D"_blank">jsoncpp_1.9.3.bb</a><br>
+@@ -11,7 +11,7 @@ SECTION =3D &quot;libs&quot;<br>
+=C2=A0LICENSE =3D &quot;MIT&quot;<br>
+=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Dfa2a23dd1dc6c139f351=
+05379d76df2b&quot;<br>
+<br>
+-SRCREV =3D &quot;d2e6a971f4544c55b8e3b25cf96db266971b778f&quot;<br>
++SRCREV =3D &quot;6aba23f4a8628d599a9ef7fa4811c4ff6e4070e2&quot;<br>
+=C2=A0SRC_URI =3D &quot;git://<a href=3D"http://github.com/open-source-par=
+sers/jsoncpp" rel=3D"noreferrer" target=3D"_blank">github.com/open-source-p=
+arsers/jsoncpp</a>&quot;<br>
+<br>
+=C2=A0S =3D &quot;${WORKDIR}/git&quot;<br>
+-- <br>
+2.17.1<br>
+<br>
+<br>
+</blockquote></div>
+
+--000000000000770aac05aa03c8cd--
