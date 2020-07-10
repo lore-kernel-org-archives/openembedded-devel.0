@@ -1,174 +1,83 @@
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
- by mx.groups.io with SMTP id smtpd.web12.14658.1594397953150481798
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.2040.1594404997212468126
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Jul 2020 09:19:13 -0700
+ Fri, 10 Jul 2020 11:16:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=RH6Wpoas;
- spf=pass (domain: gmail.com, ip: 209.85.160.195, mailfrom: philip.balister@gmail.com)
-Received: by mail-qt1-f195.google.com with SMTP id o38so4856849qtf.6
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Jul 2020 09:19:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=sender:from:to:cc:subject:date:message-id;
-        bh=SmV8BopIicHtPykBPbHnxLFZ5n/nu2NfZpedZF05yLQ=;
-        b=RH6WpoasUUONHWkChjTBQ2CwGCoqHppjSLyc1wUb67aSUcQKV99ZRdB5DD4SxyFef5
-         qDGKgIDAFr5HjWxfijLTy4O+yloFEXkfVDFpNX6at+dTQOv++yMOBWxl0UJyad9MBniF
-         bcK7AOw+rDhhBzNOaSmcxE6E8lLzi2NlFzFRvPIWyyPSSVw5j0knprLCPtb4FsNJEwa5
-         ksj+ULD8QhGS0O0NATtl1AIFp3JcwHLO7e0ftBpdCJ7DDFMWRyB44+N32Eq5+raZ7ckp
-         LWX+IvTPo376X8EnDIv5yVJANkLWOIUzUO9K81MfnuFw3/qml1/UPC/cV2GyEwzu6fjR
-         3iSw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-        bh=SmV8BopIicHtPykBPbHnxLFZ5n/nu2NfZpedZF05yLQ=;
-        b=Qajipxjl/LJVoL88sHaebQ1juAIP20m6b8tAtwV8FU0TImW1CDlwFASaAJdyQ6oa5v
-         Iw9yASJBZhyih1DaIXBnALZV3ftMZnqV8Ahysvbo75S5h7KlxuB/gh2YtuVFT3tIbFmd
-         7ZlT+qLY2RGBNN4PgyPYkpJ0rEZacg2lK5yxSyiMB1FAhH6OKlErn4NSaLw3apoBRP9v
-         +SczR08rE2k9NEh8EXTUCK+NwvrSllzZD4Zeh3EtHShVzqPedg7+5uzIDe6ijIJbs6R5
-         u/f/whuCkYRzjaq+Whre5Mid9U2CmaIYf6N2WF8tNmdNaNBZh0oCuUDxCt0mu3STSYcE
-         Qm9Q==
-X-Gm-Message-State: AOAM533cKiHZtCaesZe95ueIZGgutVs838n9hLorD3LmSb7h58Vx7hOq
-	3DY/NEWItydnavgfekijkV7ZV32pTaM=
-X-Google-Smtp-Source: ABdhPJxAb8xgwoRBsz4rb3hCfdCUU2tlxQHQXtUOX0NTXX+cqqC0/aGRx8ixIR0qo7n/lbwMTebn5Q==
-X-Received: by 2002:ac8:4251:: with SMTP id r17mr69062206qtm.372.1594397951818;
-        Fri, 10 Jul 2020 09:19:11 -0700 (PDT)
-Return-Path: <philip.balister@gmail.com>
-Received: from prague.hsd1.va.comcast.net ([2601:5c0:c100:b84:c110:9e9e:8241:dfa])
-        by smtp.gmail.com with ESMTPSA id t35sm8528866qth.79.2020.07.10.09.19.10
-        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
-        Fri, 10 Jul 2020 09:19:10 -0700 (PDT)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: "Philip Balister" <philip@balister.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: Philip Balister <philip@balister.org>
-Subject: [meta-python][PATCHv2] python3-pybind11: Use cmake to build and add -native version
-Date: Fri, 10 Jul 2020 12:19:06 -0400
-Message-Id: <20200710161906.7297-1-philip@balister.org>
-X-Mailer: git-send-email 2.13.6
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: ssajal@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 06AIGFM5014812
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Jul 2020 11:16:26 -0700
+Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Fri, 10 Jul 2020
+ 11:16:09 -0700
+Received: by yow-lpggp3.wrs.com (Postfix, from userid 20885)	id 3F51B20208;
+ Fri, 10 Jul 2020 14:16:09 -0400 (EDT)
+From: "Sakib Sajal" <sakib.sajal@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python][PATCH 4/4] python3-requests-toolbelt: add ptest
+Date: Fri, 10 Jul 2020 14:15:55 -0400
+Message-ID: <20200710181555.29809-5-sakib.sajal@windriver.com>
+X-Mailer: git-send-email 2.27.0
+In-Reply-To: <20200710181555.29809-1-sakib.sajal@windriver.com>
+References: <20200710181555.29809-1-sakib.sajal@windriver.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
- * Switch to git repo to pick up cmake files for recipes to use
- * Use cmake to build innstead of pypi so cmake files are included in sysroot
- * Disable tests to prevent configure failure (I tried adding pytest asa DEPEND)
- * Patch out cmake that strips output to prevent QA failures
- * Do not check pointer length for installed python when cross compiling.
- * With this I can build gnuradio using pybind11.
-
-Signed-off-by: Philip Balister <philip@balister.org>
+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
 ---
- ...t-check-pointer-size-when-cross-compiling.patch | 30 +++++++++++++++++
- .../0001-Do-not-strip-binaries.patch               | 39 ++++++++++++++++++++++
- .../python/python3-pybind11_2.5.0.bb               | 17 ++++++++--
- 3 files changed, 83 insertions(+), 3 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-check-pointer-size-when-cross-compiling.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch
+ .../python3-requests-toolbelt/run-ptest       |  3 +++
+ .../python/python3-requests-toolbelt_0.9.1.bb | 22 +++++++++++++++++--
+ 2 files changed, 23 insertions(+), 2 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-check-pointer-size-when-cross-compiling.patch b/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-check-pointer-size-when-cross-compiling.patch
+diff --git a/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest b/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
 new file mode 100644
-index 000000000..6455c95e7
+index 000000000..b63c4de0d
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-check-pointer-size-when-cross-compiling.patch
-@@ -0,0 +1,30 @@
-+From 3abfa65517959ad279481021fafefba28f955e76 Mon Sep 17 00:00:00 2001
-+From: Philip Balister <philip@balister.org>
-+Date: Fri, 10 Jul 2020 10:14:59 -0400
-+Subject: [PATCH] Do not check pointer size when cross compiling.
++++ b/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
 +
-+It is reasonable to build for 32 machine on a 64 bit build machine. Prevents:
-+| CMake Error at tools/FindPythonLibsNew.cmake:127 (message):
-+|   Python config failure: Python is 64-bit, chosen compiler is 32-bit
-+
-+Signed-off-by: Philip Balister <philip@balister.org>
-+---
-+ tools/FindPythonLibsNew.cmake | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/tools/FindPythonLibsNew.cmake b/tools/FindPythonLibsNew.cmake
-+index d0c8fa2..8479e70 100644
-+--- a/tools/FindPythonLibsNew.cmake
-++++ b/tools/FindPythonLibsNew.cmake
-+@@ -123,7 +123,7 @@ list(GET _PYTHON_VALUES 9 PYTHON_MULTIARCH)
-+ 
-+ # Make sure the Python has the same pointer-size as the chosen compiler
-+ # Skip if CMAKE_SIZEOF_VOID_P is not defined
-+-if(CMAKE_SIZEOF_VOID_P AND (NOT "${PYTHON_SIZEOF_VOID_P}" STREQUAL "${CMAKE_SIZEOF_VOID_P}"))
-++if((NOT CMAKE_CROSSCOMPILING) AND CMAKE_SIZEOF_VOID_P AND (NOT "${PYTHON_SIZEOF_VOID_P}" STREQUAL "${CMAKE_SIZEOF_VOID_P}"))
-+     if(PythonLibsNew_FIND_REQUIRED)
-+         math(EXPR _PYTHON_BITS "${PYTHON_SIZEOF_VOID_P} * 8")
-+         math(EXPR _CMAKE_BITS "${CMAKE_SIZEOF_VOID_P} * 8")
-+-- 
-+2.25.4
-+
-diff --git a/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch b/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch
-new file mode 100644
-index 000000000..07ab9a03b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch
-@@ -0,0 +1,39 @@
-+From 918f3ef01c7a67f3beb67307966698474f144581 Mon Sep 17 00:00:00 2001
-+From: Philip Balister <philip@balister.org>
-+Date: Wed, 8 Jul 2020 09:41:43 -0400
-+Subject: [PATCH] Do not strip binaries.
-+
-+ * OpenEmbedded strips them after creating debug packages.
-+
-+Signed-off-by: Philip Balister <philip@balister.org>
-+---
-+ tools/pybind11Tools.cmake | 13 -------------
-+ 1 file changed, 13 deletions(-)
-+
-+diff --git a/tools/pybind11Tools.cmake b/tools/pybind11Tools.cmake
-+index a3603ab..b4c8f63 100644
-+--- a/tools/pybind11Tools.cmake
-++++ b/tools/pybind11Tools.cmake
-+@@ -230,19 +230,6 @@ function(pybind11_add_module target_name)
-+ 
-+   _pybind11_add_lto_flags(${target_name} ${ARG_THIN_LTO})
-+ 
-+-  if (NOT MSVC AND NOT ${CMAKE_BUILD_TYPE} MATCHES Debug|RelWithDebInfo)
-+-    # Strip unnecessary sections of the binary on Linux/Mac OS
-+-    if(CMAKE_STRIP)
-+-      if(APPLE)
-+-        add_custom_command(TARGET ${target_name} POST_BUILD
-+-                           COMMAND ${CMAKE_STRIP} -x $<TARGET_FILE:${target_name}>)
-+-      else()
-+-        add_custom_command(TARGET ${target_name} POST_BUILD
-+-                           COMMAND ${CMAKE_STRIP} $<TARGET_FILE:${target_name}>)
-+-      endif()
-+-    endif()
-+-  endif()
-+-
-+   if(MSVC)
-+     # /MP enables multithreaded builds (relevant when there are many files), /bigobj is
-+     # needed for bigger binding projects due to the limit to 64k addressable sections
-+-- 
-+2.25.4
-+
-diff --git a/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb b/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb
-index dc3b8f6ad..46bba8d8d 100644
---- a/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb
-@@ -3,7 +3,18 @@ HOMEPAGE = "https://github.com/wjakob/pybind11"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=beb87117af69fd10fbf9fb14c22a2e62"
++pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
+diff --git a/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb b/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb
+index 3beb39718..cb1bc607b 100644
+--- a/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb
++++ b/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb
+@@ -5,12 +5,30 @@ AUTHOR = "Ian Cordasco, Cory Benfield"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=71760e0f1dda8cff91b0bc9246caf571"
  
--SRC_URI[md5sum] = "5355e1fd05c8eedef19cc9bfd3d82a77"
--SRC_URI[sha256sum] = "ea5a4e7a880112915463826f1acbec5892df36dfe102ecb249229ac514fb54ad"
-+DEPENDS = "boost"
- 
--inherit pypi setuptools3
-+SRC_URI = "git://github.com/pybind/pybind11.git \
-+           file://0001-Do-not-strip-binaries.patch \
-+           file://0001-Do-not-check-pointer-size-when-cross-compiling.patch \
++SRC_URI = "file://run-ptest \
 +          "
-+SRCREV = "3b1dbebabc801c9cf6f0953a4c20b904d444f879"
 +
-+S = "${WORKDIR}/git"
+ SRC_URI[md5sum] = "b1509735c4b4cf95df2619facbc3672e"
+ SRC_URI[sha256sum] = "968089d4584ad4ad7c171454f0a5c6dac23971e9472521ea3b6d49d610aa6fc0"
+ 
+-inherit setuptools3
+-inherit pypi
++inherit pypi setuptools3 ptest
+ 
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-requests (>=2.0.1) \
+ "
 +
-+BBCLASSEXTEND = "native"
++RDEPENDS_${PN}-ptest += " \
++	${PYTHON_PN}-pytest \
++	${PYTHON_PN}-betamax \
++	${PYTHON_PN}-mock \
++	${PYTHON_PN}-multiprocessing \
++"
 +
-+EXTRA_OECMAKE =  "-DPYBIND11_TEST=OFF"
-+
-+inherit cmake python3native
++do_install_ptest() {
++	install -d ${D}${PTEST_PATH}/tests
++	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
++	cp -rf ${S}/setup.py ${D}${PTEST_PATH}
++	# remove test test_multipart_encoder.py as it fails,
++	# downloaded file is not supported
++	rm -f ${D}${PTEST_PATH}/tests/test_multipart_encoder.py
++}
 -- 
-2.13.6
+2.27.0
 
