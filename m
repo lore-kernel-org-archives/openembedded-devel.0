@@ -1,83 +1,176 @@
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com [209.85.160.196])
- by mx.groups.io with SMTP id smtpd.web10.2331.1594346331035752612
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.80])
+ by mx.groups.io with SMTP id smtpd.web12.9796.1594384615652655755
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Jul 2020 18:58:51 -0700
+ Fri, 10 Jul 2020 05:36:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=n5kqiYeF;
- spf=pass (domain: gmail.com, ip: 209.85.160.196, mailfrom: rgowda.praveen@gmail.com)
-Received: by mail-qt1-f196.google.com with SMTP id d27so3304552qtg.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Jul 2020 18:58:50 -0700 (PDT)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=W1sHePtr;
+ spf=pass (domain: windriver.com, ip: 40.107.243.80, mailfrom: trevor.gamblin@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=XiMtSR0Qm6rRAAVzVEFjZgDezimvDheKiAXI6fvqSFMPKYLvhG9ncfE2HwZCQ9B/TsKEPjg0MYbJIxZRfc0G3CRxtFDNnkJqiPd6S9lFuDgo/1IDdM24M+WNxtuIZQyuegTggYu1+IBVWYVAN6JiCiPwzVf3tn2RNL102YVzRjqvuElMQNgqHXF38eVgsHqOfT5gb1v9jnR4USeE3UurFKdzQVy3vxF2wTdXAsSk1i+9tclTDZBHYGV8BzBStheogvG7nHMD6m1L24G0vgAphL/zzCizkMayEFwXHdm63gLjZtNn++r6JhTCPuBjc6Nq9z/8VqzF7ld6a63kNf6nGA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QxEgicAzfua0iPvOW6LWwK7tyIWxKpg2Qmh2Z1BapPA=;
+ b=je+7VC5CbwvhEppPKfAtGCtI3k7OmL3V0aG2HXS8DPnZDuUGQGw1Ui7YJDQ1Pmb9fpUbjk849s33/UIORr+adNjS5mAHbpRVJt3ZEijhcxE4vOcv16f5QBUoRvz8AgTwh19lrIUSlCDj6OiCYIwJ1pC2Mw0zoT4D+CxMDFqXWX8nLfnX9WSU90WaADRd7quNIHKK7TnIpwUIg9QaeYY1y4xoRWW1Mzx67V86S9zlCDf12qhRjZWSeikF4miWdbE7wNMiujV72Obp77/4RCGzo8zeUy/trffWlQ8gOaU99IMARnpiav69oKGe1o0S2jySMDKdXKRTLzu8y6u1VernTQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=DgfcWhu64rMhvlhrIenf/iQRqrp1oqCeTpIVq+6R1dU=;
-        b=n5kqiYeFMrapXvSTDNuuodB0XZIbGBcApafLNpXAJJSw5AQYWKCaoHyDL4h8+fn5am
-         989n6KSoI+udU5t398a+qaVX/SeT/A7xwnSQa3kJWQlM+s8q3nxc8NmOlYQZi8gxI568
-         PGeRsikjJLzZoGkDLoy35r7/R+XLVirVAb8J8RN0fbNAov2ssdwB7v1w3+p5uYAAQvUQ
-         WhF6+7ck0UiwP/YFCVfYgcluhIpKkFPP2gXiJPBf/wOzTCaMCrMI1dP1NzJ7gVMtdFRx
-         1L/958DTYHieswtWfq4ihxR3kkuc4BXP7hE5I38lc7hAcJleVUTVruu5HOcyYtymUzsR
-         kDTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=DgfcWhu64rMhvlhrIenf/iQRqrp1oqCeTpIVq+6R1dU=;
-        b=tzmLue6+PW+i8+1lQjjhXR00vCwqK6mTDH6kZhgJvLD8njgfn5gtbOVO+b2x1XOYnN
-         dHETryUQx6DxSFzEY22AJl0nRbEl9M7x/nLlfP8l9uZ6czB6kiQ7njuHdXK3csJo8qtT
-         iNjjQ35MTFOCaKoX/IgRv2QJLok8SKxF6CoEUhxdHspMWajE/UVzVdKz9sTIDwHDyBq/
-         BxawayLHxcm8qQNsW43TDb6MB4WPnrq+R5B5NkoJiDbWvp8xXf9RGqRmqZz2oIqHVBoc
-         ClofmJ12Q4P7SQJ8Foa+IenLAoUKh4sx5lnu5aVxjCUY0M9QFzemZIEgBkV5Bj5BqwZ+
-         W4zw==
-X-Gm-Message-State: AOAM533MUHiiPK5FfpTODaeFbyVV+91WU32r5J9xpc0+0qQ5DVSa7wBa
-	rEUTHlk/uU0w/wz0XABoYIkbnpOyAwg=
-X-Google-Smtp-Source: ABdhPJyw06z/4WDAxXwQZYA52RUi0rByh3Dwgaz0VC7IeASfb70ssy+PBxDpHgxsVac2gxrgzxE7Zg==
-X-Received: by 2002:ac8:2bba:: with SMTP id m55mr38204230qtm.214.1594346329956;
-        Thu, 09 Jul 2020 18:58:49 -0700 (PDT)
-Return-Path: <rgowda.praveen@gmail.com>
-Received: from CACSVML-19150.cable.comcast.com (fw800-d-hillsboro-or-corp.comcast.net. [198.178.9.164])
-        by smtp.googlemail.com with ESMTPSA id a28sm5516238qko.45.2020.07.09.18.58.48
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 09 Jul 2020 18:58:49 -0700 (PDT)
-From: "Praveen Gowda" <rgowda.praveen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Praveen Gowda <praveenrgowda@gmail.com>,
-	Praveen Gowda <rgowda.praveen@gmail.com>
-Subject: [PATCH] Update fstools SRC to latest
-Date: Thu,  9 Jul 2020 18:58:26 -0700
-Message-Id: <20200710015825.64379-1-rgowda.praveen@gmail.com>
-X-Mailer: git-send-email 2.24.3 (Apple Git-128)
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QxEgicAzfua0iPvOW6LWwK7tyIWxKpg2Qmh2Z1BapPA=;
+ b=W1sHePtrGRRGU09BiKPtSYb6x0OFRB+ehv3Hfrs2TzuFrDTNfmGkIEC0+eSrpI2MgpGqEjJ9xg8RERuujQkDT5kvpsVAFl9HJynyOoFuQ+Gcn07Gjwey1C0TDcR5OhAGqZMZt2xQjLppwb+9GmbnVbh2ogFFp2vgl5UkaZcZST4=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29) by
+ DM6PR11MB4516.namprd11.prod.outlook.com (2603:10b6:5:2a5::22) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3174.20; Fri, 10 Jul 2020 12:36:54 +0000
+Received: from DM5PR11MB0011.namprd11.prod.outlook.com
+ ([fe80::c970:4bd8:f35c:d6d2]) by DM5PR11MB0011.namprd11.prod.outlook.com
+ ([fe80::c970:4bd8:f35c:d6d2%5]) with mapi id 15.20.3153.031; Fri, 10 Jul 2020
+ 12:36:54 +0000
+Subject: Re: [oe] [meta-python][PATCH 1/7] python3-pychromecast: Upgrade 7.1.0 -> 7.1.1
+To: Leon Anavi <leon.anavi@konsulko.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20200708094659.27331-1-leon.anavi@konsulko.com>
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+Message-ID: <a6c4718e-3a73-7ffe-2de3-1d1c14659104@windriver.com>
+Date: Fri, 10 Jul 2020 08:36:52 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.9.0
+In-Reply-To: <20200708094659.27331-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0071.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2d::10) To DM5PR11MB0011.namprd11.prod.outlook.com
+ (2603:10b6:4:6b::29)
+Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0071.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::10) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.20 via Frontend Transport; Fri, 10 Jul 2020 12:36:53 +0000
+X-Originating-IP: [174.115.236.231]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 6a54bd35-4d59-4f80-9f61-08d824cded1b
+X-MS-TrafficTypeDiagnostic: DM6PR11MB4516:
+X-Microsoft-Antispam-PRVS: 
+	<DM6PR11MB45167F78C2275FB4BDD3F8159F650@DM6PR11MB4516.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:173;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	Fgb8cr66opU1rbZqpSD3osXXokcfJKRzKmApBHwibEeduFJlspuXt8kqGjcbOiApj5hCuqsq4X0K7QIfNntZHDGVL5kZYriP57wjxbV+/yewwWTjrBJaE0RAYEo8Mn+4s55aW7smfJ11qB4sGrfeI+xihkzvzfkfbG6tT6ocvrnhDS7pbt/XvnKpm1Frowu0JJFo3ARGtscxmXJxqBuBm1RbXUgaZFGK3tPfeQWzUVoInEhpGwZFPHGmQmjC16yEBBM39yzO2AuCnSJaiU6zpJw4w+ZfyftmHhHHXZCz5QxyQchqdU/JFAINm6PNMHDkwAsyIdUFoyH4bdwo87pz1aeUiCNJ+hk1IqvTSAe833uJGwh49wwkhPkQ4dANIPeOzzbm1lyq8aM7Qf8yDSC8AOahxVSQ9q1TIl541gVPmqylHb8vPoxRFgFzpZ91T6keZ0oYRIFoa/ykjrLXdHmWAA==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(39850400004)(366004)(376002)(346002)(136003)(16526019)(16576012)(44832011)(166002)(53546011)(66556008)(66946007)(26005)(66476007)(2906002)(966005)(316002)(478600001)(8676002)(31686004)(31696002)(8936002)(6486002)(86362001)(2616005)(956004)(36756003)(186003)(52116002)(5660300002)(83380400001)(33964004)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	TR2LpVa1wtduj3RcQarI8YyCnRn5061nUNTHdNQqmuAkXxf3OaXxfp3IsjrufaekL0GPWPvrSJutf8BMC+Te/3/z2gEG1WRmAwHEWkPmKE7EeSu2g+tK7RKxVdOWV34wUYxRiLIsiPlqcCtNw3h/HqMHnAtH0i80Sb8YPtDtgiCGW1aAyzNlz4jAh5Im7VhKzqkdyYifZvq34FMIgTCTswwtHCSCApMyUWmL12gH19HKBJdpGCTEhVLoEsu+60Lvji/hHcnAep3e9Vry5+bPH4AlHdyJnyuCzyDbzJ7En0dxS8aZ/HSDkYvD+RlvYWz3wDFmixph8GVJ4ZA+TYav45EghkdvOmyCByO68bNP8PcvUftoI18tYQ6jdGEs2NBIefngsMAE/bFwipxUaPZ9xs6D5X2Y/ESu/v7Owb9AIVgmO8rtu2ZgRyeOFRWn/MmENR9LD0vGoA3fIPuQHO1OOr843u67wifgoe5D/HRYIRE=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6a54bd35-4d59-4f80-9f61-08d824cded1b
+X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB0011.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2020 12:36:53.9710
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: XqMw18KWDy14vJ50WJfPr9d/0CaXY4ODUVSpJpEpVTL1AwmRktBbiA2sqHMTn+G51EUF+FzYy1Ag3O0UQX3R+jhaujYy/ye9uOsmzmdGy5I=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB4516
+Content-Type: multipart/alternative;
+ boundary="------------159B8FB0696BD9F19DA9A371"
+Content-Language: en-US
 
-From: Praveen Gowda <praveenrgowda@gmail.com>
+--------------159B8FB0696BD9F19DA9A371
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Praveen Gowda <rgowda.praveen@gmail.com>
+
+On 7/8/20 5:46 AM, Leon Anavi wrote:
+> Upgrade to release 7.1.1:
+>
+> - Add debug prints
+> - Bump flake8 from 3.7.9 to 3.8.3
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>   ...n3-pychromecast_7.1.0.bb => python3-pychromecast_7.1.1.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-pychromecast_7.1.0.bb => python3-pychromecast_7.1.1.bb} (66%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.1.1.bb
+> similarity index 66%
+> rename from meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb
+> rename to meta-python/recipes-devtools/python/python3-pychromecast_7.1.1.bb
+> index 12076adcd..3da979c0f 100644
+> --- a/meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pychromecast_7.1.1.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
+>   LICENSE = "MIT"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
+>   
+> -SRC_URI[md5sum] = "10483fca4ffa0381c0c49f3647827179"
+> -SRC_URI[sha256sum] = "30e18e7d79b6ce2097e630d3cab6e6503f759808ae1ae592bec0a8a7591534f3"
+> +SRC_URI[md5sum] = "897e7acd6ac2c01f3df2e2d6b2e13c11"
+> +SRC_URI[sha256sum] = "87fa9ad42425edd21e02a9240669e5763e52d975ee259a948a6fe07e6ab977b9"
+>   
+>   PYPI_PACKAGE = "PyChromecast"
+>   
+>
+> 
+
+--------------159B8FB0696BD9F19DA9A371
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 7/8/20 5:46 AM, Leon Anavi wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:20200708094659.27331-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 7.1.1:
+
+- Add debug prints
+- Bump flake8 from 3.7.9 to 3.8.3
+
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+    </blockquote>
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
+    <blockquote type="cite" cite="mid:20200708094659.27331-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">
 ---
- recipes-core/fstools/fstools_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ ...n3-pychromecast_7.1.0.bb =&gt; python3-pychromecast_7.1.1.bb} | 4 &#43;&#43;--
+ 1 file changed, 2 insertions(&#43;), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pychromecast_7.1.0.bb =&gt; python3-pychromecast_7.1.1.bb} (66%)
 
-diff --git a/recipes-core/fstools/fstools_git.bb b/recipes-core/fstools/fstools_git.bb
-index 3bd56f7..8541a62 100644
---- a/recipes-core/fstools/fstools_git.bb
-+++ b/recipes-core/fstools/fstools_git.bb
-@@ -9,13 +9,13 @@ HOMEPAGE = "https://git.openwrt.org/?p=project/fstools.git;a=summary"
- LICENSE = "LGPL-2.1 & GPL-2.0 & PD"
- LIC_FILES_CHKSUM = "file://ubi.c;beginline=1;endline=17;md5=8ccc371d64f0b3a8d91065b678dc7095"
- SECTION = "base"
--DEPENDS += "util-linux"
-+DEPENDS += "util-linux ubus"
+diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.1.1.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-pychromecast_7.1.1.bb
+index 12076adcd..3da979c0f 100644
+--- a/meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-pychromecast_7.1.1.bb
+@@ -3,8 &#43;3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/balloob/pychromecast">&quot;https://github.com/balloob/pychromecast&quot;</a>
+ LICENSE = &quot;MIT&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5">&quot;file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5&quot;</a>
  
--SRC_URI = "git://git.openwrt.org/project/fstools.git;branch=lede-17.01 \
-+SRC_URI = "git://git.openwrt.org/project/fstools.git \
- 	   file://0001-Define-GLOB_ONLYDIR-if-not-available.patch \
-           "
+-SRC_URI[md5sum] = &quot;10483fca4ffa0381c0c49f3647827179&quot;
+-SRC_URI[sha256sum] = &quot;30e18e7d79b6ce2097e630d3cab6e6503f759808ae1ae592bec0a8a7591534f3&quot;
+&#43;SRC_URI[md5sum] = &quot;897e7acd6ac2c01f3df2e2d6b2e13c11&quot;
+&#43;SRC_URI[sha256sum] = &quot;87fa9ad42425edd21e02a9240669e5763e52d975ee259a948a6fe07e6ab977b9&quot;
  
--SRCREV = "37762ff488752c1686b359816aec75831b49c55f"
-+SRCREV = "d34ea8eb1e12259a315cdef7aa0cd3ceaea68e00"
+ PYPI_PACKAGE = &quot;PyChromecast&quot;
  
- S = "${WORKDIR}/git"
- 
--- 
-2.24.3 (Apple Git-128)
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+    </blockquote>
+  </body>
+</html>
 
+--------------159B8FB0696BD9F19DA9A371--
