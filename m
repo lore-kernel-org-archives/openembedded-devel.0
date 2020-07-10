@@ -1,17 +1,17 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.80])
- by mx.groups.io with SMTP id smtpd.web12.9796.1594384615652655755
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.85])
+ by mx.groups.io with SMTP id smtpd.web11.9753.1594384628070369304
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Jul 2020 05:36:55 -0700
+ Fri, 10 Jul 2020 05:37:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=W1sHePtr;
- spf=pass (domain: windriver.com, ip: 40.107.243.80, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=cAUTUY8G;
+ spf=pass (domain: windriver.com, ip: 40.107.244.85, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XiMtSR0Qm6rRAAVzVEFjZgDezimvDheKiAXI6fvqSFMPKYLvhG9ncfE2HwZCQ9B/TsKEPjg0MYbJIxZRfc0G3CRxtFDNnkJqiPd6S9lFuDgo/1IDdM24M+WNxtuIZQyuegTggYu1+IBVWYVAN6JiCiPwzVf3tn2RNL102YVzRjqvuElMQNgqHXF38eVgsHqOfT5gb1v9jnR4USeE3UurFKdzQVy3vxF2wTdXAsSk1i+9tclTDZBHYGV8BzBStheogvG7nHMD6m1L24G0vgAphL/zzCizkMayEFwXHdm63gLjZtNn++r6JhTCPuBjc6Nq9z/8VqzF7ld6a63kNf6nGA==
+ b=obFKK5+xd5HDdp08cy+FByee9K5kS24q7UH47cgKlNVZbhO9uAq7BSJ9GuDJpFWjoLtaLmIh6iMm0e2y3y24GveX37CFFobg3esgKqseFeDT9mThaw3hS8SvHbcOd6jxA/Zu5pM/jBpU1lTJVszyPB3WF3PbQA2RQqCI/impfpvFYLxiX2OoEmWi8B0tnQ9vfdYEwJQMguQnuyyEWphraxWwrmspZfwif5IE6SvwBKkKNszgsWEC0NX99NE2ylUCBm0bpxpbuZjI4rj/0gKYdX0dtz4bUsCf3xDiA6CyOViFcLmfTRznvGncx298J6cQKzKTyDAX1H2lfYFl4fVo2g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QxEgicAzfua0iPvOW6LWwK7tyIWxKpg2Qmh2Z1BapPA=;
- b=je+7VC5CbwvhEppPKfAtGCtI3k7OmL3V0aG2HXS8DPnZDuUGQGw1Ui7YJDQ1Pmb9fpUbjk849s33/UIORr+adNjS5mAHbpRVJt3ZEijhcxE4vOcv16f5QBUoRvz8AgTwh19lrIUSlCDj6OiCYIwJ1pC2Mw0zoT4D+CxMDFqXWX8nLfnX9WSU90WaADRd7quNIHKK7TnIpwUIg9QaeYY1y4xoRWW1Mzx67V86S9zlCDf12qhRjZWSeikF4miWdbE7wNMiujV72Obp77/4RCGzo8zeUy/trffWlQ8gOaU99IMARnpiav69oKGe1o0S2jySMDKdXKRTLzu8y6u1VernTQ==
+ bh=GhMj+NRFAzdpx8d+tB+SqqtvGrrmL8SGk2jgAPnq9Gs=;
+ b=U1S7rfmMIgDh3xdWOsuzfS3suapaV/uhJXOzSxzT1wxORInm10SwSQ7olz11KvtKqkkOHQiIzJbNl8nczHwY4TjaWyyb36XpwtnqtHluL4kocuKY0/F5gyX5QLpIAATO+TQLHFLGPUPLJxxmllEQOQd8WatYqpd4+Vf1+CjVV23N4ymBNAKtVGUj9fdvK2QSJ+8VCsNBJelUTtMiwcFpzDMGVL6vF6ArgxpzOuO/jf4RUVvrg9eps7CSjilXoIy4UbBdTkPM5FX/BSAf+va22tvLJCIJkca1QrksweenTSbBfD90N3/ORMvbkTy1nbLXy3YZTFYGSPF0myQBYjBOlQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,106 +19,114 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QxEgicAzfua0iPvOW6LWwK7tyIWxKpg2Qmh2Z1BapPA=;
- b=W1sHePtrGRRGU09BiKPtSYb6x0OFRB+ehv3Hfrs2TzuFrDTNfmGkIEC0+eSrpI2MgpGqEjJ9xg8RERuujQkDT5kvpsVAFl9HJynyOoFuQ+Gcn07Gjwey1C0TDcR5OhAGqZMZt2xQjLppwb+9GmbnVbh2ogFFp2vgl5UkaZcZST4=
+ bh=GhMj+NRFAzdpx8d+tB+SqqtvGrrmL8SGk2jgAPnq9Gs=;
+ b=cAUTUY8GKa+Yx5JLIGu/Jp+HK8GjDGMauXR36MS/D+osLDBWoWHbMiOJEm5XdIywxC50yvinUy6ywwwFvEaZ3eaE2WRY9AkcJRwaT8cVFgqwe15g4ia5MuQNxCfXPJLMdY39avJnkn7Jp4UQHW4n/tIJpnDwkQQEKncvWrcC/oc=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29) by
- DM6PR11MB4516.namprd11.prod.outlook.com (2603:10b6:5:2a5::22) with Microsoft
+ DM5PR11MB1449.namprd11.prod.outlook.com (2603:10b6:4:8::20) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3174.20; Fri, 10 Jul 2020 12:36:54 +0000
+ 15.20.3174.23; Fri, 10 Jul 2020 12:37:07 +0000
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2]) by DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2%5]) with mapi id 15.20.3153.031; Fri, 10 Jul 2020
- 12:36:54 +0000
-Subject: Re: [oe] [meta-python][PATCH 1/7] python3-pychromecast: Upgrade 7.1.0 -> 7.1.1
+ 12:37:06 +0000
+Subject: Re: [oe] [meta-python][PATCH 2/7] python3-imageio: Upgrade 2.8.0 -> 2.9.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200708094659.27331-1-leon.anavi@konsulko.com>
+ <20200708094659.27331-2-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <a6c4718e-3a73-7ffe-2de3-1d1c14659104@windriver.com>
-Date: Fri, 10 Jul 2020 08:36:52 -0400
+Message-ID: <e1a8b5f7-938a-3a6f-8aed-4f0adfc0dddf@windriver.com>
+Date: Fri, 10 Jul 2020 08:37:05 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200708094659.27331-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0071.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2d::10) To DM5PR11MB0011.namprd11.prod.outlook.com
+In-Reply-To: <20200708094659.27331-2-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0085.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2d::24) To DM5PR11MB0011.namprd11.prod.outlook.com
  (2603:10b6:4:6b::29)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0071.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::10) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.20 via Frontend Transport; Fri, 10 Jul 2020 12:36:53 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0085.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::24) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.21 via Frontend Transport; Fri, 10 Jul 2020 12:37:06 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 6a54bd35-4d59-4f80-9f61-08d824cded1b
-X-MS-TrafficTypeDiagnostic: DM6PR11MB4516:
+X-MS-Office365-Filtering-Correlation-Id: 3ee7be03-3143-4155-7a89-08d824cdf4cd
+X-MS-TrafficTypeDiagnostic: DM5PR11MB1449:
 X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB45167F78C2275FB4BDD3F8159F650@DM6PR11MB4516.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:173;
+	<DM5PR11MB14492288B2F748FA6A61E7069F650@DM5PR11MB1449.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1201;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	Fgb8cr66opU1rbZqpSD3osXXokcfJKRzKmApBHwibEeduFJlspuXt8kqGjcbOiApj5hCuqsq4X0K7QIfNntZHDGVL5kZYriP57wjxbV+/yewwWTjrBJaE0RAYEo8Mn+4s55aW7smfJ11qB4sGrfeI+xihkzvzfkfbG6tT6ocvrnhDS7pbt/XvnKpm1Frowu0JJFo3ARGtscxmXJxqBuBm1RbXUgaZFGK3tPfeQWzUVoInEhpGwZFPHGmQmjC16yEBBM39yzO2AuCnSJaiU6zpJw4w+ZfyftmHhHHXZCz5QxyQchqdU/JFAINm6PNMHDkwAsyIdUFoyH4bdwo87pz1aeUiCNJ+hk1IqvTSAe833uJGwh49wwkhPkQ4dANIPeOzzbm1lyq8aM7Qf8yDSC8AOahxVSQ9q1TIl541gVPmqylHb8vPoxRFgFzpZ91T6keZ0oYRIFoa/ykjrLXdHmWAA==
+	pLpRipnZ0Yj9U+Sm1B2xblmMfQrpOVXFjft/djiK3uUaYln/wLrfcOCIp0vOQvQcsNCh8L91lX4sQkviL9VWq8sE3JoQ13EHdREpWINBTwQlxtjWXAhwdGI1e0T6R0hJGIkNU9DZcqWLOHR+5al9gUoTRhSoZ06rscAYzu6qTnqKgmknuprmeAwCpkohcsWv6KiMrJUb2p+8k1qMqXVVl1fyNAdB1CVsC+10kbU1CwG1+N2/aNvg6xCCYD6CZcFx1T9W1dqv+/ahb1LAfMjoianL+WmpgqaDvxn4G/HI9qWiH7A/eFoA50Sl/IZzY75/1YyjG7QnZv9gapwZ1PeD1W4VcKY4UAoY6Avp34Dyu3/EHYh4Wv/8xLoLclb+GT+6t2ArSPCUbdnN+pNvjmQVc4fTmU1f2KlmQDN8U0VoIophbP0vr2s5ABL7kLOvvek4HZY5IcF5wlRxewjbUHX4DQ==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(39850400004)(366004)(376002)(346002)(136003)(16526019)(16576012)(44832011)(166002)(53546011)(66556008)(66946007)(26005)(66476007)(2906002)(966005)(316002)(478600001)(8676002)(31686004)(31696002)(8936002)(6486002)(86362001)(2616005)(956004)(36756003)(186003)(52116002)(5660300002)(83380400001)(33964004)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(346002)(366004)(136003)(376002)(39850400004)(396003)(186003)(8676002)(16526019)(26005)(316002)(6486002)(966005)(478600001)(2906002)(33964004)(66946007)(16576012)(52116002)(53546011)(66574015)(8936002)(83380400001)(44832011)(36756003)(86362001)(31696002)(66556008)(66476007)(31686004)(5660300002)(166002)(956004)(2616005)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	TR2LpVa1wtduj3RcQarI8YyCnRn5061nUNTHdNQqmuAkXxf3OaXxfp3IsjrufaekL0GPWPvrSJutf8BMC+Te/3/z2gEG1WRmAwHEWkPmKE7EeSu2g+tK7RKxVdOWV34wUYxRiLIsiPlqcCtNw3h/HqMHnAtH0i80Sb8YPtDtgiCGW1aAyzNlz4jAh5Im7VhKzqkdyYifZvq34FMIgTCTswwtHCSCApMyUWmL12gH19HKBJdpGCTEhVLoEsu+60Lvji/hHcnAep3e9Vry5+bPH4AlHdyJnyuCzyDbzJ7En0dxS8aZ/HSDkYvD+RlvYWz3wDFmixph8GVJ4ZA+TYav45EghkdvOmyCByO68bNP8PcvUftoI18tYQ6jdGEs2NBIefngsMAE/bFwipxUaPZ9xs6D5X2Y/ESu/v7Owb9AIVgmO8rtu2ZgRyeOFRWn/MmENR9LD0vGoA3fIPuQHO1OOr843u67wifgoe5D/HRYIRE=
+	W+ss9oTWjLzXdLbA+AxHkbRixkCO74OP/4Bvd4ukL9Vvr9uICj6LonKH5BunyNgk5fpziCv/6yfGbihRz0V2yVoO+c4abAK5KXa2ZVS3Iqrp3UIRRizgBbTSa3DWNOOeX0bQlB5cMI+1q7x6B26Jy1UdcEhoWMvihwLFHAXP5d7GQfP1D/1qrCjWVqGCGv3za8hq+Fy4Cd5Xc/EZ0/KRaVmjxq9YSwIq5kTjxnCI7cOkVR901nFNMOtFkERPQFfwQANgueSPeNtG02ian8r4SepyBKc5GEEqnwBJO0shP6TFTqFeir8QYAmp3/dw5wNJq/mnhwyZY3jwXdBS2snAu3+iv+g9t4nmsv1OyrONhrOq5Ab8IX1JqielfzHaFivUeAePhEzuNVwEr13aBp6CcfGESRfpnWIuGWFC+RxKJY9cZRU63KL1YC9+z9kuCPkaRVSVJf7LS+P+K8NDi5eRDlF0BXvndaAp460IXqYwVn0=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6a54bd35-4d59-4f80-9f61-08d824cded1b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3ee7be03-3143-4155-7a89-08d824cdf4cd
 X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB0011.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2020 12:36:53.9710
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2020 12:37:06.8616
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: XqMw18KWDy14vJ50WJfPr9d/0CaXY4ODUVSpJpEpVTL1AwmRktBbiA2sqHMTn+G51EUF+FzYy1Ag3O0UQX3R+jhaujYy/ye9uOsmzmdGy5I=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB4516
+X-MS-Exchange-CrossTenant-UserPrincipalName: TZdQB7lKZygkef8Dlo1MOgCjNY8Z0ir/xXxJu/SVkYjPKKrMAs3kHYju8fOGZ3fvofIhisHKWFdbhVGfPa9yjjH+EHOUBmIMz9XoOxID6QQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1449
 Content-Type: multipart/alternative;
- boundary="------------159B8FB0696BD9F19DA9A371"
+ boundary="------------27728FB8C6B8DD52D82B8992"
 Content-Language: en-US
 
---------------159B8FB0696BD9F19DA9A371
+--------------27728FB8C6B8DD52D82B8992
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 7/8/20 5:46 AM, Leon Anavi wrote:
-> Upgrade to release 7.1.1:
+> Upgrade to release 2.9.0:
 >
-> - Add debug prints
-> - Bump flake8 from 3.7.9 to 3.8.3
+> - More robust loading of FEI SEM data.
+> - Fix webcam not working on Win10.
+> - Add a few standard images useful to 3D visualization.
+> - The timeout used in HTTP requests can now be set with an
+>    environment variable.
+> - The DICOM plugin can now used gdcm for compressed transfer
+>    formats.
+> - Better support for itk/sitk plugins.
+> - Test coverage and CI for ARM.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...n3-pychromecast_7.1.0.bb => python3-pychromecast_7.1.1.bb} | 4 ++--
+>   .../{python3-imageio_2.8.0.bb => python3-imageio_2.9.0.bb}    | 4 ++--
 >   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-pychromecast_7.1.0.bb => python3-pychromecast_7.1.1.bb} (66%)
+>   rename meta-python/recipes-devtools/python/{python3-imageio_2.8.0.bb => python3-imageio_2.9.0.bb} (73%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.1.1.bb
-> similarity index 66%
-> rename from meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb
-> rename to meta-python/recipes-devtools/python/python3-pychromecast_7.1.1.bb
-> index 12076adcd..3da979c0f 100644
-> --- a/meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pychromecast_7.1.1.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
->   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
+> diff --git a/meta-python/recipes-devtools/python/python3-imageio_2.8.0.bb b/meta-python/recipes-devtools/python/python3-imageio_2.9.0.bb
+> similarity index 73%
+> rename from meta-python/recipes-devtools/python/python3-imageio_2.8.0.bb
+> rename to meta-python/recipes-devtools/python/python3-imageio_2.9.0.bb
+> index 9ca30f424..fbe5e2c97 100644
+> --- a/meta-python/recipes-devtools/python/python3-imageio_2.8.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-imageio_2.9.0.bb
+> @@ -6,8 +6,8 @@ LICENSE = "BSD-2-Clause"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=7b9bbbb543b6af3e6b53f9b7fb68f71d"
 >   
-> -SRC_URI[md5sum] = "10483fca4ffa0381c0c49f3647827179"
-> -SRC_URI[sha256sum] = "30e18e7d79b6ce2097e630d3cab6e6503f759808ae1ae592bec0a8a7591534f3"
-> +SRC_URI[md5sum] = "897e7acd6ac2c01f3df2e2d6b2e13c11"
-> +SRC_URI[sha256sum] = "87fa9ad42425edd21e02a9240669e5763e52d975ee259a948a6fe07e6ab977b9"
 >   
->   PYPI_PACKAGE = "PyChromecast"
+> -SRC_URI[md5sum] = "1e270dbf24c0390c2f4e3e4120904ac0"
+> -SRC_URI[sha256sum] = "fb5fd6d3d17126bbaac9af29fe340e2c97a196eb9416d4f28c0e543744a152cf"
+> +SRC_URI[md5sum] = "d22757338542e3742a335cea6210e419"
+> +SRC_URI[sha256sum] = "52ddbaeca2dccf53ba2d6dec5676ca7bc3b2403ef8b37f7da78b7654bb3e10f0"
+>   
+>   inherit pypi setuptools3
 >   
 >
 > 
 
---------------159B8FB0696BD9F19DA9A371
+--------------27728FB8C6B8DD52D82B8992
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -130,39 +138,46 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 7/8/20 5:46 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200708094659.27331-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 7.1.1:
+    <blockquote type="cite" cite="mid:20200708094659.27331-2-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 2.9.0:
 
-- Add debug prints
-- Bump flake8 from 3.7.9 to 3.8.3
+- More robust loading of FEI SEM data.
+- Fix webcam not working on Win10.
+- Add a few standard images useful to 3D visualization.
+- The timeout used in HTTP requests can now be set with an
+  environment variable.
+- The DICOM plugin can now used gdcm for compressed transfer
+  formats.
+- Better support for itk/sitk plugins.
+- Test coverage and CI for ARM.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
-    <blockquote type="cite" cite="mid:20200708094659.27331-1-leon.anavi@konsulko.com">
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
+    <blockquote type="cite" cite="mid:20200708094659.27331-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...n3-pychromecast_7.1.0.bb =&gt; python3-pychromecast_7.1.1.bb} | 4 &#43;&#43;--
+ .../{python3-imageio_2.8.0.bb =&gt; python3-imageio_2.9.0.bb}    | 4 &#43;&#43;--
  1 file changed, 2 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pychromecast_7.1.0.bb =&gt; python3-pychromecast_7.1.1.bb} (66%)
+ rename meta-python/recipes-devtools/python/{python3-imageio_2.8.0.bb =&gt; python3-imageio_2.9.0.bb} (73%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.1.1.bb
-similarity index 66%
-rename from meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-pychromecast_7.1.1.bb
-index 12076adcd..3da979c0f 100644
---- a/meta-python/recipes-devtools/python/python3-pychromecast_7.1.0.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-pychromecast_7.1.1.bb
-@@ -3,8 &#43;3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/balloob/pychromecast">&quot;https://github.com/balloob/pychromecast&quot;</a>
- LICENSE = &quot;MIT&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5">&quot;file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-imageio_2.8.0.bb b/meta-python/recipes-devtools/python/python3-imageio_2.9.0.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-imageio_2.8.0.bb
+rename to meta-python/recipes-devtools/python/python3-imageio_2.9.0.bb
+index 9ca30f424..fbe5e2c97 100644
+--- a/meta-python/recipes-devtools/python/python3-imageio_2.8.0.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-imageio_2.9.0.bb
+@@ -6,8 &#43;6,8 @@ LICENSE = &quot;BSD-2-Clause&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=7b9bbbb543b6af3e6b53f9b7fb68f71d">&quot;file://LICENSE;md5=7b9bbbb543b6af3e6b53f9b7fb68f71d&quot;</a>
  
--SRC_URI[md5sum] = &quot;10483fca4ffa0381c0c49f3647827179&quot;
--SRC_URI[sha256sum] = &quot;30e18e7d79b6ce2097e630d3cab6e6503f759808ae1ae592bec0a8a7591534f3&quot;
-&#43;SRC_URI[md5sum] = &quot;897e7acd6ac2c01f3df2e2d6b2e13c11&quot;
-&#43;SRC_URI[sha256sum] = &quot;87fa9ad42425edd21e02a9240669e5763e52d975ee259a948a6fe07e6ab977b9&quot;
  
- PYPI_PACKAGE = &quot;PyChromecast&quot;
+-SRC_URI[md5sum] = &quot;1e270dbf24c0390c2f4e3e4120904ac0&quot;
+-SRC_URI[sha256sum] = &quot;fb5fd6d3d17126bbaac9af29fe340e2c97a196eb9416d4f28c0e543744a152cf&quot;
+&#43;SRC_URI[md5sum] = &quot;d22757338542e3742a335cea6210e419&quot;
+&#43;SRC_URI[sha256sum] = &quot;52ddbaeca2dccf53ba2d6dec5676ca7bc3b2403ef8b37f7da78b7654bb3e10f0&quot;
+ 
+ inherit pypi setuptools3
  
 </pre>
       <br>
@@ -173,4 +188,4 @@ index 12076adcd..3da979c0f 100644
   </body>
 </html>
 
---------------159B8FB0696BD9F19DA9A371--
+--------------27728FB8C6B8DD52D82B8992--
