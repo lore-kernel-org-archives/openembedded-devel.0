@@ -1,120 +1,134 @@
 Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com [209.85.167.194])
- by mx.groups.io with SMTP id smtpd.web10.11718.1594390882366774360
+ by mx.groups.io with SMTP id smtpd.web10.11720.1594390884290297106
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Jul 2020 07:21:22 -0700
+ Fri, 10 Jul 2020 07:21:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=jmIL7HXv;
+ dkim=pass header.i=@linaro.org header.s=google header.b=mNd7Pzh/;
  spf=pass (domain: linaro.org, ip: 209.85.167.194, mailfrom: anibal.limon@linaro.org)
-Received: by mail-oi1-f194.google.com with SMTP id k6so4873955oij.11
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Jul 2020 07:21:22 -0700 (PDT)
+Received: by mail-oi1-f194.google.com with SMTP id e4so4934226oib.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Jul 2020 07:21:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=4XTCOurLGAbBtP4Tt1pz7zsGbeyloSXABQmfKYLSxNQ=;
-        b=jmIL7HXvJEaI3rp3H47olgRgOpgh3QkZ2YZUO6rS85GE7Y/Y+qLOTflMxuTeHBzHtF
-         xCczldZTQkeSwT4aeAkUFL3Ey+98V7Yfi61g13Ga1AMlOty+t6zvf61U1JK3JK6AGoWH
-         ykmZQOmuN6Az8Py60ZWR7/H+JJYmW66C1oLtKeis2RqSsEfHVK6nrY2flJECXILiCitm
-         5v2fevkSROjI1wAfT6qeFsBBAG1XCsS2Dbq1t/vNkz04ksHkE+D2Wy2sNk5gziEqNwhk
-         +kumlXPymTvHVvuxdV7MAre2ieS3HMnQ1eFMWCZKbh5KhDO6TI0oDdaGFPyydHJIcLl2
-         oxwA==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=Dwao7pmBaFz0KrdEDk2A/wIeCdL6wjAQU3EE65BV2z0=;
+        b=mNd7Pzh/OeRwUiMUxun7l7WXnliy/HVmq26PcfCDYogCca/QevNdbJLX4EEGkcSXx9
+         coY1vzHS8T8E3M/en7lA0lBCNcbrrzWrd7goqS1l620VzWA24+ozmHc/NOOVR8lk/gyW
+         73RDsnfMvHWS+nNlRhRgzJ3DPEGqY3n0ELXl4ZiSspAnVbLTcxBZ8JzVcCnS12UXjmme
+         pmMnWgcNsXGsTJL8NZVis4rnycUqlmbcwhw5GbFEan+gkGp+RY5bYttBKy75AXfx+z8E
+         C96Hu/1aeXrItzkPO8nCTu1NftCRWpmF7pq1w4/YfW6mpILiLcJak68bV/NVoFKDXgEL
+         cHyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=4XTCOurLGAbBtP4Tt1pz7zsGbeyloSXABQmfKYLSxNQ=;
-        b=faNuzgRR7Rv5tb4NrXF1IPmtDlU+bL09gtQEBz9+lmVAEyDjFisKPI361rBlKSusXU
-         6gcuaJRFl/ss2MMKUeQoldiZYxK5P0EykqL8Ur6yvzd6/4AMCIMFOpii0iXRIv6NqcVq
-         fcmCEZqIScJUEkBAl6zCgXitpAM5OKlrl3HO0fXoWiJiE0uPXQkwtpVkXT1n+EoRAM05
-         yOrNELFjaXNMHPNpVmYvt4uVm8vud1B+iCCsehsJwuWunbeL96uvcYtZ/rE4Zx03a9Yw
-         kXo2y2jyPAx9FmyuThUGLZXcm+mAADmWx1DMIgSBC9UELFYpptKezWh4AGC1p+PLCzKM
-         TsUQ==
-X-Gm-Message-State: AOAM533liNPkOUeWdf95jxkH5XtoyGha/BwCO8oEUZgUbhhp95ZU3zCT
-	ME8GDeVvgwGR0ai0ZZ1cW2s8NRLfssw=
-X-Google-Smtp-Source: ABdhPJy4ALzO/YMKKmNmJQml79tu2xsWia2sJNgj+tq4WXK3ZxM7aBV7aTm6gqaa2ZMriJrF/cxnVg==
-X-Received: by 2002:aca:50d5:: with SMTP id e204mr2392509oib.60.1594390881062;
-        Fri, 10 Jul 2020 07:21:21 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=Dwao7pmBaFz0KrdEDk2A/wIeCdL6wjAQU3EE65BV2z0=;
+        b=tdA+JXRshNnZnkl/OdK6kxBXQR77jm63bFdfR4nMqsMs6cAfskuuHOt6IcpHI2uBGH
+         T8s0uBVOU72izJjphTHzucGZdfmQH+eUz+YeQ1UYFraFn/DOtHWzgVzpMBmvm6Wy/KRb
+         1dH1qV18jwjsVgmK/NXbl6qHmwkX0V1SaM9SkWTY9g75xeKmt4Geu2vSbHOiY1daQvVJ
+         2A6g1ZD/XsWMP9chQRzwefuDGGBePbwuF21KXKxLagrA4jSySYkxqMdop1lTpLjRyfd4
+         J01gctuo1JvENgV5c970kXch8Z1fgJVDQOR6zlbhgpmyZSaFiwuXuuufzge5E/mNJYCR
+         /iCg==
+X-Gm-Message-State: AOAM533CWjubeGxY21+N/m1qSlALHF/Q4+yDJxP/os/hgjrboBy+uZ7S
+	Czm+Boyz2OcJiHa250qHDH24xAEsp7A=
+X-Google-Smtp-Source: ABdhPJyk+CFXY8k3E6ISln9tYma5FBJAHy+Mm+oW938vXZdOqfbTivT25ROpd0+yhGeIAI30WUsI7w==
+X-Received: by 2002:aca:1e04:: with SMTP id m4mr4186534oic.76.1594390882989;
+        Fri, 10 Jul 2020 07:21:22 -0700 (PDT)
 Return-Path: <anibal.limon@linaro.org>
 Received: from blackbox.rga.ip ([2806:109f:4:f5a5:908a:c7ff:fe6a:e9f5])
-        by smtp.gmail.com with ESMTPSA id s8sm1111416otk.36.2020.07.10.07.21.19
+        by smtp.gmail.com with ESMTPSA id s8sm1111416otk.36.2020.07.10.07.21.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 10 Jul 2020 07:21:19 -0700 (PDT)
+        Fri, 10 Jul 2020 07:21:22 -0700 (PDT)
 From: "Anibal Limon" <anibal.limon@linaro.org>
 To: openembedded-devel@lists.openembedded.org
 Cc: nicolas.dechesne@linaro.org,
-	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
 	=?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <anibal.limon@linaro.org>
-Subject: [PATCH 1/2] recipes-graphics: Add opengl-es-cts install in /usr/lib
-Date: Fri, 10 Jul 2020 09:21:13 -0500
-Message-Id: <20200710142114.10612-1-anibal.limon@linaro.org>
+Subject: [PATCH 2/2] recipes-graphics: Add parallel-deqp-runner recipe
+Date: Fri, 10 Jul 2020 09:21:14 -0500
+Message-Id: <20200710142114.10612-2-anibal.limon@linaro.org>
 X-Mailer: git-send-email 2.27.0
+In-Reply-To: <20200710142114.10612-1-anibal.limon@linaro.org>
+References: <20200710142114.10612-1-anibal.limon@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-
-Commonly this kind of testing tools are installed in /usr/lib
-like piglit, remove version.
-
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 Signed-off-by: Aníbal Limón <anibal.limon@linaro.org>
 ---
- .../vk-gl-cts/opengl-es-cts_3.2.6.1.bb        | 45 +++++++++++++++++++
- 1 file changed, 45 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb
+ ...-WORKAROUND-Remove-vulkan-dependency.patch | 42 +++++++++++++++++++
+ .../parallel-deqp-runner_git.bb               | 14 +++++++
+ 2 files changed, 56 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner/0001-meson.build-WORKAROUND-Remove-vulkan-dependency.patch
+ create mode 100644 meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner_git.bb
 
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb
+diff --git a/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner/0001-meson.build-WORKAROUND-Remove-vulkan-dependency.patch b/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner/0001-meson.build-WORKAROUND-Remove-vulkan-dependency.patch
 new file mode 100644
-index 000000000..226f70027
+index 000000000..0fedfad13
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb
-@@ -0,0 +1,45 @@
-+DESCRIPTION = "OpenGL CTS"
-+LICENSE = "Apache-2.0"
-+PR = "r0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
++++ b/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner/0001-meson.build-WORKAROUND-Remove-vulkan-dependency.patch
+@@ -0,0 +1,42 @@
++From 2b74a5b160c0500291c554ab5c0944f502e72a42 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <anibal.limon@linaro.org>
++Date: Thu, 9 Jul 2020 20:00:53 +0200
++Subject: [PATCH] meson.build: WORKAROUND Remove vulkan dependency
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-+SRC_URI = "\
-+	git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https;tag=${BPN}-${PV};name=vk-gl-cts \
-+	git://github.com/google/amber;protocol=https;destsuffix=git/external/amber/src;name=amber;branch=main \
-+	git://github.com/KhronosGroup/glslang.git;protocol=https;destsuffix=git/external/glslang/src;name=glslang \
-+	git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;destsuffix=git/external/spirv-headers/src;name=spirv-headers \
-+	git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;destsuffix=git/external/spirv-tools/src;name=spirv-tools \
-+"
++We need a patch in the source code to allow enable when DISTRO_FEATURES
++contains vulkan.
++
++Signed-off-by: Aníbal Limón <anibal.limon@linaro.org>
++---
++ meson.build | 6 ------
++ 1 file changed, 6 deletions(-)
++
++diff --git a/meson.build b/meson.build
++index db97c26..4c1b865 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -3,21 +3,15 @@ project('parallel-deqp-runner', ['c', 'cpp'],
++ cpp = meson.get_compiler('cpp')
++ 
++ thread_dep = dependency('threads')
++-vulkan_dep = dependency('vulkan')
++ 
++ fs_dep = cpp.find_library('stdc++fs', required : false)
++ if not fs_dep.found()
++     fs_dep = cpp.find_library('c++fs')
++ endif
++ 
++-
++ deqp_runner = executable('deqp-runner',
++            'src/deqp-runner.cc',
++            dependencies : [thread_dep, fs_dep],
++            install : true)
++ 
++-executable('hang-detection',
++-           'src/hang_detection.c',
++-           dependencies: [vulkan_dep])
++-
++ subdir('test')
+diff --git a/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner_git.bb b/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner_git.bb
+new file mode 100644
+index 000000000..4c02cc55a
+--- /dev/null
++++ b/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner_git.bb
+@@ -0,0 +1,14 @@
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=4f59d6446bf2e004e80df1a0937129fa"
++
++SRC_URI = "git://gitlab.freedesktop.org/mesa/parallel-deqp-runner.git;protocol=https \
++           file://0001-meson.build-WORKAROUND-Remove-vulkan-dependency.patch \
++           "
++
++# Modify these as desired
++PV = "2020.06.15+git${SRCPV}"
++SRCREV = "e1642fb691d29b1462504b58916f7f514a963e80"
 +
 +S = "${WORKDIR}/git"
 +
-+SRCREV_FORMAT = "vk-gl-cts"
-+SRCREV_amber = "d26ee22dd7faab1845a531d410f7ec1db407402a"
-+SRCREV_glslang = "c538b5d796fb24dd418fdd650c7f76e56bcc3dd8"
-+SRCREV_spirv-headers = "e4322e3be589e1ddd44afb20ea842a977c1319b8"
-+SRCREV_spirv-tools = "1eb89172a82b436d8037e8a8c29c80f7e1f7df74"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit pkgconfig cmake
-+
-+DEPENDS += "libpng zlib virtual/libgles2 virtual/egl"
-+
-+EXTRA_OECMAKE_append = "-DDEQP_TARGET=surfaceless"
-+
-+CTSDIR = "${libdir}/${BPN}"
-+
-+do_install() {
-+	install -d ${D}/${CTSDIR}
-+
-+	install -m 0755 ${B}/external/openglcts/modules/cts-runner ${D}/${CTSDIR}
-+	install -m 0755 ${B}/external/openglcts/modules/glcts ${D}/${CTSDIR}
-+	for dir in gl_cts gles2 gles3 gles31 gles32 ; do
-+		cp -r ${B}/external/openglcts/modules/$dir ${D}/${CTSDIR}/
-+	done
-+	install -m 0755 ${B}/modules/gles3/deqp-gles3 ${D}/${CTSDIR}
-+
-+	rm -r ${D}/${CTSDIR}/*/*.a ${D}/${CTSDIR}/*/cmake_install.cmake ${D}/${CTSDIR}/*/CMakeFiles
-+}
-+
-+FILES_${PN} += "${CTSDIR}"
++inherit pkgconfig meson
 -- 
 2.27.0
 
