@@ -1,17 +1,17 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.80])
- by mx.groups.io with SMTP id smtpd.web10.9591.1594384637248255656
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.49])
+ by mx.groups.io with SMTP id smtpd.web11.9759.1594384651996676482
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Jul 2020 05:37:17 -0700
+ Fri, 10 Jul 2020 05:37:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=a1x6BHdK;
- spf=pass (domain: windriver.com, ip: 40.107.243.80, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Rst4SV+I;
+ spf=pass (domain: windriver.com, ip: 40.107.243.49, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YIH05EXeCT9qNsJLW/UvR24Jt196FRtuPVZwyjtW+XOZWIKpwNutO850M1KsVozRJObqzlUB3EHALVjxptbvIhKJPe7vDZyAJaVeDEh6JF6d6gmlwTyfQq5OSyMulqbFBeNWhlduKS6qvt/uD8Tv/2jde4qE7UXzOO7CSCgBCTx+eIIYz8bzT8LQPhMT1lnsEHyp5xCw4+0oN6eUh+G5Iv7NrOLfGa09JTV6lNu17Ty0bCmGR315Dy1qlTvbRndrXOCVbckeBXWvjHpP/g4QrdCr2a8Ppw+2erbl8NNZJvjPwIY+IKdII4mVz1z0eXgBUNTx4bl1OzaihSv5zyvgGA==
+ b=On20YMgLP4MC3SywdOvIWE1IaMycRpr6/kTMmAFHgh66k4SG4Hpr8XtHqPj874TaVCzND7+R1+9pId7qSMOSKaa9AAS2B9rrh31G74dF8Q8uBg4cQYMZasFhrhi92VJZNyBG5ERkEyYuYoOwtflHjCeCMWr6YQOQLGujgTuE59kOiflWUXgkyEmXhCgtta35yk24Ko7V1UEAVV3UrWO3koKUYBUJCvmsDO4waIUIlAo+pQJNBeKYugGNwOI6sK79kDyU3sNhc9SMgBbFXHM8v76CPGfqAp1JDWCYtwSwc2kUSQvRZjcc8JaamXtKA2/n45g2Ced6uOVE54hKj3/qvQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0jW1/j3aTz8iihFZ+19m5rwzTVU5uCWlDzc8VZ9AYdo=;
- b=TLzY/+nrVbd82E01u4omEURtWZXFYO1sgQrslbCz26l3kBVcZm+qAdGE/5sCDJExo9UyE7lUlRr8/+AmXWP96BrMU1eOPr9Q+1fvtGtoh4mtHU/kP8iSt3pG5el16kf6lQugGuS2ddDZ0Za+y++BG2WCZbkE3yVPtp1x6MECc878tOr2LM7L0UwBsXc5MkAXsu6uODZqRx8Mh6KRvgc54oGYLSbgw2nrzidmbtFrR8C4vxuYyz2VxEPAjqCfE6rEvrigVyOV5FqcEtPrrntVPmTT76hzf7tM0Nb25E4oyP0kPz8KPzbK8ZJHmGhuWltm8IP24BDqe2xnsZFadAwY4g==
+ bh=nsPhpl0BZYPyhjpD4ou2PWadvQPhTUqULO7IMDndtQg=;
+ b=UE6vLf2XuqMauBG7/uin3AFHsh59pbxEkFOxvxcau7rjmu3T4PdB614WB3Kxw2ai9bchRt0jkNheKMXgcStOEdSdsSx1i/IV3SJZIlcBTMnmUY4TEreg5ScIEfMdTvLP+mwp/XHHLGWsKPYyVzdvSMhIx6S2qcfUocMHdchI227ZomyGtZ+9sAsCli3vm1RnWz3JymPsO2GDxMX/jhabFXdaiNR5p5jazGRVlov07VWoGKdCQfGwMi3/ITknP+96e9kTJsV9XpCaz+W4ZHzrfp2G0DSt/sQOvU5x9NOOLSLJmxPD0CwTWkQ33Sjan5DtzUmbvqQb9D3adOz6jWGEYg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,106 +19,113 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0jW1/j3aTz8iihFZ+19m5rwzTVU5uCWlDzc8VZ9AYdo=;
- b=a1x6BHdKF3GQ0dVRgbJtHNV0TJQVxnnUYGVMElgyBXcxV3vhiIXMNVVJJs/a2nKyK9ihdw4iuK3CFqXE5O3APIkcFdBBGweEr65LR7wehLnlcC8JdzyVSN3O53GFAD9yjJjcqHrGrDWhDl8v9aIMbrds5wunGDJLnix/dqao+1Y=
+ bh=nsPhpl0BZYPyhjpD4ou2PWadvQPhTUqULO7IMDndtQg=;
+ b=Rst4SV+I3tn+K9RtZvSwftum93mei0o1skVerCeDgdzFYIjd+GhUNllk3eHJPx+BIYOxdEIsmBHk8AnYRj5H4bm0R+4Vl88laf18+iu2GkMoNPmQPATGrEkXgYaB0OyYbaxeRBS/OpB/luxKlx6edpXauuHNHDLEo87jrQoXYn8=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29) by
  DM6PR11MB4516.namprd11.prod.outlook.com (2603:10b6:5:2a5::22) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3174.20; Fri, 10 Jul 2020 12:37:16 +0000
+ 15.20.3174.20; Fri, 10 Jul 2020 12:37:31 +0000
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2]) by DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2%5]) with mapi id 15.20.3153.031; Fri, 10 Jul 2020
- 12:37:16 +0000
-Subject: Re: [oe] [meta-python][PATCH 3/7] python3-humanize: Upgrade 2.4.1 -> 2.5.0
+ 12:37:31 +0000
+Subject: Re: [oe] [meta-python][PATCH 4/7] python3-tinyrecord: Upgrade 0.1.5 -> 0.2.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200708094659.27331-1-leon.anavi@konsulko.com>
- <20200708094659.27331-3-leon.anavi@konsulko.com>
+ <20200708094659.27331-4-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <2a174cb7-3ac2-8147-d77a-aa221e423c07@windriver.com>
-Date: Fri, 10 Jul 2020 08:37:14 -0400
+Message-ID: <85efddab-f541-9590-67b4-0566878bc535@windriver.com>
+Date: Fri, 10 Jul 2020 08:37:29 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200708094659.27331-3-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0067.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2d::6) To DM5PR11MB0011.namprd11.prod.outlook.com
+In-Reply-To: <20200708094659.27331-4-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0073.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2d::12) To DM5PR11MB0011.namprd11.prod.outlook.com
  (2603:10b6:4:6b::29)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0067.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::6) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.22 via Frontend Transport; Fri, 10 Jul 2020 12:37:15 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0073.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::12) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.21 via Frontend Transport; Fri, 10 Jul 2020 12:37:30 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 690102f0-4c3c-4f26-cb0f-08d824cdfa85
+X-MS-Office365-Filtering-Correlation-Id: 27d54863-d150-4798-feb7-08d824ce0352
 X-MS-TrafficTypeDiagnostic: DM6PR11MB4516:
 X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB45166D9C18B58FDD6E6DA2C09F650@DM6PR11MB4516.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:173;
+	<DM6PR11MB45167E5D8A2BDF8439C500E19F650@DM6PR11MB4516.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:962;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	AkAXnWNxZIu5ETe3gzy7LpOprk0sNjy3XXEg1MlyYl/GToyzVX6sr0c/Mz0VoB1w5CgcOWlheD4uA0Y7q3dOhVjofEGhInt8AJL0ppTzIZUO/SZpbmECZSnGUHVyIpFNZEMtZme9CNGTfq1QsZKXMG6+jvt/aaOp8jvgp1Nii22hwFg91p78RKFcxp1Uf5U+pivmrORx3c1jD3mSYxKxJ+1hJcFp1WpD8cua9HHhBqeKUnp0PkjaF3UAd7Pczxc84Nr++9R7rXO++3bznB4b+mFw1uYmjL82lm1hSAJwnP9LjwMcBU5pWsreo5n6aJ3B/qM+BnrWFaMNMXzjbNXNWS779lFE5P9aj+Z79f9dvebaDier0UozSI88ikLs7zJPXBebbmbAKe1DTeMlnEqxSxY8e9l/XBjF94HT2qB1WUbYjtJAnOkb/gfrbrQ33Sd34tjFiZ6GN0530dEufaqjT+2tlwmZChuxjXgyNRzmGxc=
+	ra2Jy0CFPXqCtYciiBigV612W6mAHX3IfxwD43WRyPmov28THMhcHJjdSXDAa3X5eSJ1yW1m7jrkxkutKDFHUvwgv0KB/lNCUGj2H7j34U1TQuUZZeR3yzVWq2SxxV7NXJk2/SSVjvjVTEvCS0GKM5Cd07YWbjhLRqr5it5iUbA76TLma/TfUSAp6tXOSXM7KuPyKJWfm2kOTbX6ganYi+si04GP32TtVVECU/vZB0Pv3MhSP6jhqgnnXjM6Muc0zAhhuDEEDe8ViupXU0R3E06CllQo9mtmUG6qNEcYjkWWgE92TSBq4xUcy9Wz7Md4ydsjaCilfuiDWDyQYHzpQKiLkIFhTao0t/1Lyi0xX0tFmhI58DCqgQgFgePCNvV7JHmJbsHIjDmASIQZsAxEYAuJ7sw1VQIIJBImvgVArWvQ78xdwfuN11c2NkmR7GJytZXYyD6ehpIhODzBOQnLQg==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(39850400004)(366004)(376002)(346002)(136003)(16526019)(16576012)(44832011)(166002)(53546011)(66556008)(66946007)(26005)(66476007)(2906002)(966005)(316002)(478600001)(8676002)(31686004)(31696002)(8936002)(6486002)(86362001)(2616005)(956004)(36756003)(186003)(52116002)(5660300002)(19273905006)(83380400001)(33964004)(43740500002)(563064011);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(39850400004)(366004)(376002)(346002)(136003)(16526019)(16576012)(44832011)(166002)(53546011)(66556008)(66946007)(26005)(66476007)(2906002)(966005)(316002)(478600001)(8676002)(31686004)(31696002)(8936002)(6486002)(86362001)(2616005)(956004)(36756003)(186003)(52116002)(5660300002)(83380400001)(33964004)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	wU8NoOEWmOtVMK4r4Stgt0QD5OfcngS2LUDe0MjKPvH/4dnERl4gH5bLxcU0A/JPX7bd5uiZ85Av2jU1u614Vq1qCACUH/kR6mN1Zyo8NEHO0AYLy2DaxySqlPhyc4VvV6GeenfuG1EurMfmfMIBq7Z+Hjm6l01RfHUY0lC4zROkrTPxqqJBc8KrWOjVml5SRrPjGAmBnrBFS2z/k+6147i4c+d40f07dAPN9KdIH3rowCpnV9bgAw0cITRqQ1FojR+CCTuTyPC/0xFI7/Zhx5iO9GBlTyHDYAR4gj8hLqzSLmjC3x3fEAm8s9+Z5kwVPc1VxLrPNtY3xGI4oNEK6aTl6MNurNtkd6FuKDOliiJ9Zdo6DSFtYGBm9HbEbNMy/+SSbBoHt635K+1N5mINpVeMsWCKXw2C5TsUQe17HCSX0E8jlvUlYNtkCucBj91dXYwQfqRBeBCOKyb6UglMgPujG9PeRtOvBNnV52G7j1Y=
+	o1JDu/qLwb+tevV3h0EK4V2CuybPGuOObJefmrXnRJTbkLpvepCW5EJ6mSiPlkrnxWOzS/R1vFscsaIeuLb7ozlGnZ2F7jQCu0BSYprWWHtmMxDiORWkkIaHb/OGL9v0Ruv5u2AlcIYCYF5XgR3bc3lL6y3k0mbvmosGwnQk20t4BX9CzAaYuqahbsfN2AGZiz0KNYirmROPi9cZyBE1PTIR5gSTplaDI1WpDDrBSbGwaRJYsdjYhJhRQSKRcnAWeNAjE7Hw3lly2pEOCsWU4hxjWPLfkoqPnOtYIuIWVPTAwMqwkayvPMX5+8U/UBONhrQ18qvgBnaigSthb/ZGOHoloP5hs3pKPwlj4W4/6DfFpWmkpBRUHXLW9LN4I/Ay44uKbVn5SBmwyVxnMDM44NASR+oNP65QgyzkRmRES4PYr0nrYPtMrOmgiV5ijLMgPgdFThgc7hgP4XFjeGUAPjZPsI1JI0R2e79IN6XeAgQ=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 690102f0-4c3c-4f26-cb0f-08d824cdfa85
+X-MS-Exchange-CrossTenant-Network-Message-Id: 27d54863-d150-4798-feb7-08d824ce0352
 X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB0011.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2020 12:37:16.4212
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2020 12:37:31.2018
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: SKsJJxeucb6KHVW8yuJ38q3teZWDDaCpt0ef/4FirfhfyTEBlMQ8dU6rXQe4QPWtf6oIWmnwuHDr7huv9q1seR231O9R2OUcqXFiUPXkHeQ=
+X-MS-Exchange-CrossTenant-UserPrincipalName: vgBGDuOFcNG3SXpXAUlgGYQ6JjVryBMGcaK8o6YKfKjfAfwFQaTzU7OAnHwM4blWVD5MRVY99Vpm8Zaks788qfgQPpcHvQQLUyiMLI+F3EE=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB4516
 Content-Type: multipart/alternative;
- boundary="------------5DE514130F800D4BE205E9FB"
+ boundary="------------E23CA8D9604E1EE7AEFCF6D2"
 Content-Language: en-US
 
---------------5DE514130F800D4BE205E9FB
+--------------E23CA8D9604E1EE7AEFCF6D2
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 7/8/20 5:46 AM, Leon Anavi wrote:
-> Upgrade to release 2.5.0:
+> Upgrade 0.2.0:
 >
-> - Add pt_PT locale
+> - Add LICENSE and MANIFEST.in
+> - Pin tinydb<4
+> - Drop support for EOL Python 2.7, 3.3 and 3.4
+>
+> Use LICENSE for LIC_FILES_CHKSUM.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../{python3-humanize_2.4.1.bb => python3-humanize_2.5.0.bb}  | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-humanize_2.4.1.bb => python3-humanize_2.5.0.bb} (71%)
+>   ...hon3-tinyrecord_0.1.5.bb => python3-tinyrecord_0.2.0.bb} | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-tinyrecord_0.1.5.bb => python3-tinyrecord_0.2.0.bb} (65%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-humanize_2.4.1.bb b/meta-python/recipes-devtools/python/python3-humanize_2.5.0.bb
-> similarity index 71%
-> rename from meta-python/recipes-devtools/python/python3-humanize_2.4.1.bb
-> rename to meta-python/recipes-devtools/python/python3-humanize_2.5.0.bb
-> index 3a06a48b1..255933a5c 100644
-> --- a/meta-python/recipes-devtools/python/python3-humanize_2.4.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-humanize_2.5.0.bb
-> @@ -4,8 +4,8 @@ HOMEPAGE = "http://github.com/jmoiron/humanize"
+> diff --git a/meta-python/recipes-devtools/python/python3-tinyrecord_0.1.5.bb b/meta-python/recipes-devtools/python/python3-tinyrecord_0.2.0.bb
+> similarity index 65%
+> rename from meta-python/recipes-devtools/python/python3-tinyrecord_0.1.5.bb
+> rename to meta-python/recipes-devtools/python/python3-tinyrecord_0.2.0.bb
+> index 65df2e1c3..1d99ae2f3 100644
+> --- a/meta-python/recipes-devtools/python/python3-tinyrecord_0.1.5.bb
+> +++ b/meta-python/recipes-devtools/python/python3-tinyrecord_0.2.0.bb
+> @@ -6,10 +6,10 @@ then execute architecture which allows us to minimize the time \
+>   that we are within a thread lock."
+>   HOMEPAGE = "https://github.com/eugene-eeo/tinyrecord"
 >   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
+> -LIC_FILES_CHKSUM = "file://README;md5=31c1dc11b4ae83546538de4c16bceabc"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=ee157eec4b228c8d5b7a6e0feab2864a"
 >   
-> -SRC_URI[md5sum] = "3d4d25cf84181c55bf7d219dd175dbff"
-> -SRC_URI[sha256sum] = "4b4ce2fc1c9d79c63f68009ddf5a12ad238aa78e2fceb256b5aa921763551422"
-> +SRC_URI[md5sum] = "636e2c0fa1465abf8f1ff677d00e11c4"
-> +SRC_URI[sha256sum] = "8a68bd9bccb899fd9bfb1e6d96c1e84e4475551cc9a5b5bdbd69b9b1cfd19c80"
+> -SRC_URI[md5sum] = "e47dcfe299686cd3fa7ffaa7cb2ee8b1"
+> -SRC_URI[sha256sum] = "bc7e6a8e78600df234d7a85c2f5d584130f2c6ffd7cd310f9d3a1d976d3373c8"
+> +SRC_URI[md5sum] = "cbaae3f4599b12e3bea67ca4a75eca99"
+> +SRC_URI[sha256sum] = "eb6dc23601be359ee00f5a3d31a46adf3bad0a16f8d60af216cd67982ca75cf4"
 >   
+>   PYPI_PACKAGE = "tinyrecord"
 >   inherit pypi setuptools3
->   
 >
 > 
 
---------------5DE514130F800D4BE205E9FB
+--------------E23CA8D9604E1EE7AEFCF6D2
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -130,39 +137,46 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 7/8/20 5:46 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200708094659.27331-3-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 2.5.0:
+    <blockquote type="cite" cite="mid:20200708094659.27331-4-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade 0.2.0:
 
-- Add pt_PT locale
+- Add LICENSE and MANIFEST.in
+- Pin tinydb&lt;4
+- Drop support for EOL Python 2.7, 3.3 and 3.4
+
+Use LICENSE for LIC_FILES_CHKSUM.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200708094659.27331-3-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200708094659.27331-4-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../{python3-humanize_2.4.1.bb =&gt; python3-humanize_2.5.0.bb}  | 4 &#43;&#43;--
- 1 file changed, 2 insertions(&#43;), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-humanize_2.4.1.bb =&gt; python3-humanize_2.5.0.bb} (71%)
+ ...hon3-tinyrecord_0.1.5.bb =&gt; python3-tinyrecord_0.2.0.bb} | 6 &#43;&#43;&#43;---
+ 1 file changed, 3 insertions(&#43;), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-tinyrecord_0.1.5.bb =&gt; python3-tinyrecord_0.2.0.bb} (65%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-humanize_2.4.1.bb b/meta-python/recipes-devtools/python/python3-humanize_2.5.0.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python3-humanize_2.4.1.bb
-rename to meta-python/recipes-devtools/python/python3-humanize_2.5.0.bb
-index 3a06a48b1..255933a5c 100644
---- a/meta-python/recipes-devtools/python/python3-humanize_2.4.1.bb
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-humanize_2.5.0.bb
-@@ -4,8 &#43;4,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://github.com/jmoiron/humanize">&quot;http://github.com/jmoiron/humanize&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-tinyrecord_0.1.5.bb b/meta-python/recipes-devtools/python/python3-tinyrecord_0.2.0.bb
+similarity index 65%
+rename from meta-python/recipes-devtools/python/python3-tinyrecord_0.1.5.bb
+rename to meta-python/recipes-devtools/python/python3-tinyrecord_0.2.0.bb
+index 65df2e1c3..1d99ae2f3 100644
+--- a/meta-python/recipes-devtools/python/python3-tinyrecord_0.1.5.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-tinyrecord_0.2.0.bb
+@@ -6,10 &#43;6,10 @@ then execute architecture which allows us to minimize the time \
+ that we are within a thread lock.&quot;
+ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/eugene-eeo/tinyrecord">&quot;https://github.com/eugene-eeo/tinyrecord&quot;</a>
  LICENSE = &quot;MIT&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d">&quot;file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d&quot;</a>
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://README;md5=31c1dc11b4ae83546538de4c16bceabc">&quot;file://README;md5=31c1dc11b4ae83546538de4c16bceabc&quot;</a>
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=ee157eec4b228c8d5b7a6e0feab2864a">&quot;file://LICENSE;md5=ee157eec4b228c8d5b7a6e0feab2864a&quot;</a>
  
--SRC_URI[md5sum] = &quot;3d4d25cf84181c55bf7d219dd175dbff&quot;
--SRC_URI[sha256sum] = &quot;4b4ce2fc1c9d79c63f68009ddf5a12ad238aa78e2fceb256b5aa921763551422&quot;
-&#43;SRC_URI[md5sum] = &quot;636e2c0fa1465abf8f1ff677d00e11c4&quot;
-&#43;SRC_URI[sha256sum] = &quot;8a68bd9bccb899fd9bfb1e6d96c1e84e4475551cc9a5b5bdbd69b9b1cfd19c80&quot;
+-SRC_URI[md5sum] = &quot;e47dcfe299686cd3fa7ffaa7cb2ee8b1&quot;
+-SRC_URI[sha256sum] = &quot;bc7e6a8e78600df234d7a85c2f5d584130f2c6ffd7cd310f9d3a1d976d3373c8&quot;
+&#43;SRC_URI[md5sum] = &quot;cbaae3f4599b12e3bea67ca4a75eca99&quot;
+&#43;SRC_URI[sha256sum] = &quot;eb6dc23601be359ee00f5a3d31a46adf3bad0a16f8d60af216cd67982ca75cf4&quot;
  
+ PYPI_PACKAGE = &quot;tinyrecord&quot;
  inherit pypi setuptools3
- 
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -172,4 +186,4 @@ index 3a06a48b1..255933a5c 100644
   </body>
 </html>
 
---------------5DE514130F800D4BE205E9FB--
+--------------E23CA8D9604E1EE7AEFCF6D2--
