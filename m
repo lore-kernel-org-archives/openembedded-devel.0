@@ -1,169 +1,67 @@
-Received: from mga03.intel.com (mga03.intel.com [])
- by mx.groups.io with SMTP id smtpd.web11.4583.1594357719904155029
+Received: from esa6.hc324-48.eu.iphmx.com (esa6.hc324-48.eu.iphmx.com [207.54.71.69])
+ by mx.groups.io with SMTP id smtpd.web11.5927.1594366662682100741
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Jul 2020 22:08:40 -0700
+ Fri, 10 Jul 2020 00:37:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=fail (domain: intel.com, ip: <nil>, mailfrom: naveen.kumar.saini@intel.com)
-IronPort-SDR: OKmpn4BzeFQPIpM28kJZm5wJg6Dc3qHR89BbQGt8oeZ8vIfJtJvpBsyxhKO1wB0EkfRZ1wxzDq
- oLk2uB26VY+w==
-X-IronPort-AV: E=McAfee;i="6000,8403,9677"; a="148141374"
-X-IronPort-AV: E=Sophos;i="5.75,334,1589266800"; 
-   d="scan'208";a="148141374"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Jul 2020 22:08:39 -0700
-IronPort-SDR: 4x+nKxgfpjh6k72HQQmatUNU+7u76aXodjeuAHW5qUFHX+nYuoLTyBilH9NqWSfH4r9EnmT2cA
- LtsY6yckZtLg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.75,334,1589266800"; 
-   d="scan'208";a="484528040"
-Received: from saininav-desk1.png.intel.com ([172.30.199.23])
-  by fmsmga005.fm.intel.com with ESMTP; 09 Jul 2020 22:08:38 -0700
-From: "Naveen Saini" <naveen.kumar.saini@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] safestringlib: add ptest
-Date: Fri, 10 Jul 2020 13:16:01 +0800
-Message-Id: <20200710051601.11962-2-naveen.kumar.saini@intel.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200710051601.11962-1-naveen.kumar.saini@intel.com>
-References: <20200710051601.11962-1-naveen.kumar.saini@intel.com>
+ dkim=fail reason="signature has expired" header.i=@bmw.de header.s=mailing1 header.b=CIwx2PZF;
+ spf=pass (domain: bmw.de, ip: 207.54.71.69, mailfrom: prvs=45341c8fb=mikko.rapeli@bmw.de)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=bmw.de; i=@bmw.de; q=dns/txt; s=mailing1;
+  t=1594366662; x=1625902662;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-id:content-transfer-encoding:
+   mime-version;
+  bh=Z2g9B8pi81MqseFBc1IjaUzbi4DDJke4kYvCY4loMl4=;
+  b=CIwx2PZFx1k16/RKDGl5ysjPzCAz3QoJY0WV9R/3QDtX7HcLMqnZpNGN
+   eGZfPrFPJd1d9ZiWRLjOhq/E0YAs5GmP8IiSUwBA9hak0i3TIhDRL9SAP
+   gCnAL2censlqrbfbQB6bYxzDoB1znSrtQinVJLkep/lQspja71E73yY2D
+   Q=;
+Received: from esagw2.bmwgroup.com (HELO esagw2.muc) ([160.46.252.38]) by
+ esa6.hc324-48.eu.iphmx.com with ESMTP/TLS; 10 Jul 2020 09:37:39 +0200
+Received: from esabb3.muc ([160.50.100.30])  by esagw2.muc with ESMTP/TLS;
+ 10 Jul 2020 09:37:40 +0200
+Received: from smucm10l.bmwgroup.net (HELO smucm10l.europe.bmw.corp) ([160.48.96.48])
+ by esabb3.muc with ESMTP/TLS; 10 Jul 2020 09:37:39 +0200
+Received: from smucm10k.europe.bmw.corp (160.48.96.47) by smucm10l.europe.bmw.corp
+ (160.48.96.48) with Microsoft SMTP Server (TLS;
+ Fri, 10 Jul 2020 09:37:39 +0200
+Received: from smucm10k.europe.bmw.corp ([160.48.96.47]) by
+ smucm10k.europe.bmw.corp ([160.48.96.47]) with mapi id 15.00.1497.006; Fri,
+ 10 Jul 2020 09:37:39 +0200
+From: "Mikko Rapeli" <mikko.rapeli@bmw.de>
+To: <raj.khem@gmail.com>
+CC: <Martin.Jansa@gmail.com>, <akuster808@gmail.com>,
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [dunfel 03/32] jsoncpp: upgrade 1.9.2 -> 1.9.3
+Thread-Topic: [oe] [dunfel 03/32] jsoncpp: upgrade 1.9.2 -> 1.9.3
+Thread-Index: AQHWTzuheh3t6q+gcEKvV7kMPYyzp6j/SUeAgAAMgICAAAurgIAAi9KAgABstQA=
+Date: Fri, 10 Jul 2020 07:37:39 +0000
+Message-ID: <20200710073738.GQ108868@korppu>
+References: <cover.1593561840.git.akuster808@gmail.com>
+ <fc1b28e574a01410f082034c1f8212139b6107e1.1593561840.git.akuster808@gmail.com>
+ <CA+chaQc92KeJnoG+NPi6EvKMHNnLCbN8AFPS9Usdc1S1WNHu9A@mail.gmail.com>
+ <24a9b660-a636-a614-4e5c-62bc9782ade3@gmail.com>
+ <CA+chaQen7fpxTQ2eT933-5pZjsSpT0pJhciP2UY8V5rwe-6X1w@mail.gmail.com>
+ <afc84fcc-e8bb-c8d2-52a4-372b72840857@gmail.com>
+In-Reply-To: <afc84fcc-e8bb-c8d2-52a4-372b72840857@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-messagesentrepresentingtype: 1
+MIME-Version: 1.0
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <13C5AFF3AECFFA4488437F4F5FE7CC65@bmwmail.corp>
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
----
- .../safestringlib/enable-logs-for-ptest.patch | 28 +++++++++++++++++
- .../exclude-test-wmemmove-s-ptest.patch       | 30 +++++++++++++++++++
- .../safestringlib/safestringlib/run-ptest     | 10 +++++++
- .../safestringlib/safestringlib_git.bb        | 13 +++++++-
- 4 files changed, 80 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/safestringlib/safestringlib/enable-logs-for-ptest.patch
- create mode 100644 meta-oe/recipes-support/safestringlib/safestringlib/exclude-test-wmemmove-s-ptest.patch
- create mode 100755 meta-oe/recipes-support/safestringlib/safestringlib/run-ptest
+Hi,
 
-diff --git a/meta-oe/recipes-support/safestringlib/safestringlib/enable-logs-for-ptest.patch b/meta-oe/recipes-support/safestringlib/safestringlib/enable-logs-for-ptest.patch
-new file mode 100644
-index 000000000..4707b9e01
---- /dev/null
-+++ b/meta-oe/recipes-support/safestringlib/safestringlib/enable-logs-for-ptest.patch
-@@ -0,0 +1,28 @@
-+From 0375758a2225394bcf766e3d5c3611c44ea967f7 Mon Sep 17 00:00:00 2001
-+From: Naveen Saini <naveen.kumar.saini@intel.com>
-+Date: Thu, 9 Jul 2020 13:12:05 +0800
-+Subject: [PATCH] unittests/CMakeLists.txt: define DEBUG for logs
-+
-+Required for ptest testcase.
-+
-+Upstream-Status: Inappropriate
-+
-+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
-+---
-+ unittests/CMakeLists.txt | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/unittests/CMakeLists.txt b/unittests/CMakeLists.txt
-+index 88cd835..9b285b2 100644
-+--- a/unittests/CMakeLists.txt
-++++ b/unittests/CMakeLists.txt
-+@@ -1,5 +1,6 @@
-+ cmake_minimum_required(VERSION 3.1)
-+ project(safestring_test)
-++add_compile_definitions(DEBUG)
-+ 
-+ set(SOURCES
-+   Safe_String_UnitTestMain.c
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-support/safestringlib/safestringlib/exclude-test-wmemmove-s-ptest.patch b/meta-oe/recipes-support/safestringlib/safestringlib/exclude-test-wmemmove-s-ptest.patch
-new file mode 100644
-index 000000000..85ce97060
---- /dev/null
-+++ b/meta-oe/recipes-support/safestringlib/safestringlib/exclude-test-wmemmove-s-ptest.patch
-@@ -0,0 +1,30 @@
-+From 669ac8ccbf7259239ccfd3f2a4a6e53a3c69ad09 Mon Sep 17 00:00:00 2001
-+From: Naveen Saini <naveen.kumar.saini@intel.com>
-+Date: Wed, 8 Jul 2020 17:47:20 +0800
-+Subject: [PATCH] unittests/Safe_String_UnitTestMain.c: exclude test_wmemmove_s
-+
-+test_wmemmove_s cause segmentation fault, exclude it for now
-+
-+Upstream-Status: Inappropriate
-+
-+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
-+---
-+ unittests/Safe_String_UnitTestMain.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/unittests/Safe_String_UnitTestMain.c b/unittests/Safe_String_UnitTestMain.c
-+index fa40511..e4b7e31 100644
-+--- a/unittests/Safe_String_UnitTestMain.c
-++++ b/unittests/Safe_String_UnitTestMain.c
-+@@ -159,7 +159,7 @@ int main(void) {
-+ 	test_wcsncpy_s(); /* New - Done */
-+ 	test_wcsnlen_s(); /* New - Done */
-+ 	test_wmemcpy_s(); /* New - Done */
-+-	test_wmemmove_s(); /* New - Done */
-++//	test_wmemmove_s(); /* New - Done */
-+ 	test_wmemset_s(); /* New - Done */
-+ 	test_wmemcmp_s(); /* New - Done */
-+ 
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-support/safestringlib/safestringlib/run-ptest b/meta-oe/recipes-support/safestringlib/safestringlib/run-ptest
-new file mode 100755
-index 000000000..e426929e8
---- /dev/null
-+++ b/meta-oe/recipes-support/safestringlib/safestringlib/run-ptest
-@@ -0,0 +1,10 @@
-+#!/bin/sh
-+
-+cd unittests
-+TOTALFAILS=$(./safestring_test  | grep Error | wc -l)
-+if [ $TOTALFAILS -eq 0 ]; then
-+  echo "PASS: safestring test"
-+else
-+  echo "FAIL: safestring  test"
-+  echo "Total Saftstring tests failed: $TOTALFAILS"
-+fi
-diff --git a/meta-oe/recipes-support/safestringlib/safestringlib_git.bb b/meta-oe/recipes-support/safestringlib/safestringlib_git.bb
-index 3d54fc8d6..1bcb21439 100644
---- a/meta-oe/recipes-support/safestringlib/safestringlib_git.bb
-+++ b/meta-oe/recipes-support/safestringlib/safestringlib_git.bb
-@@ -5,6 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE&COPYING.txt;md5=edd6f8c4c1072d72645ae28cb04bd
-                     file://LICENSE;md5=54f68ba2c33474320fcc46b1f2d01249"
- 
- SRC_URI = "git://github.com/intel/safestringlib.git;protocol=https \
-+           file://exclude-test-wmemmove-s-ptest.patch \
-+           file://enable-logs-for-ptest.patch \
-+           file://run-ptest \
-         "
- 
- PV = "1.0.0+git${SRCPV}"
-@@ -12,8 +15,11 @@ SRCREV = "245c4b8cff1d2e7338b7f3a82828fc8e72b29549"
- 
- S = "${WORKDIR}/git"
- 
--inherit pkgconfig cmake
-+inherit pkgconfig cmake ptest
- 
-+EXTRA_OECMAKE += " \
-+                   ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', '-DBUILD_UNITTESTS=ON', '', d)} \
-+                   "
- do_install() {
-     install -d ${D}${libdir}
-     install -d ${D}${includedir}
-@@ -22,5 +28,10 @@ do_install() {
-     install -m 0644 ${S}/include/*.h ${D}${includedir}
- }
- 
-+do_install_ptest () {
-+    install -d ${D}${PTEST_PATH}/unittests
-+    install -m 0755 ${B}/unittests/safestring_test ${D}${PTEST_PATH}/unittests
-+}
-+
- SOLIBS = ".so"
- FILES_SOLIBSDEV = ""
--- 
-2.17.1
+jsoncpp seems to have messy ABI history so I would not update even minor ve=
+rsions
+in stable branch:
 
+https://abi-laboratory.pro/index.php?view=3Dtimeline&l=3Djsoncpp
+
+Cheers,
+
+-Mikko=
