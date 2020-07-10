@@ -1,176 +1,174 @@
-Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com [209.85.210.196])
- by mx.groups.io with SMTP id smtpd.web10.14462.1594397906570898418
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
+ by mx.groups.io with SMTP id smtpd.web12.14658.1594397953150481798
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Jul 2020 09:18:26 -0700
+ Fri, 10 Jul 2020 09:19:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZY19jmc+;
- spf=pass (domain: gmail.com, ip: 209.85.210.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f196.google.com with SMTP id m9so2756471pfh.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Jul 2020 09:18:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=RH6Wpoas;
+ spf=pass (domain: gmail.com, ip: 209.85.160.195, mailfrom: philip.balister@gmail.com)
+Received: by mail-qt1-f195.google.com with SMTP id o38so4856849qtf.6
+        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Jul 2020 09:19:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=OifQ/toEvFcP7K85XwXz1po/B5hoYQPKX76mfrnbghw=;
-        b=ZY19jmc+lCPz4BCSjf3chxZ6Gp82r4n5hRZmp8UguQDduKJC1S+7uadVw92ip16iAG
-         ++toAMiXeS6fJXviamiPu76sk7nSv84aIBgq4KfnvZSS7BIdS7c3EEBdNzml7aOfhIhM
-         nb98RhLDncViq8PwWVt4EEbwfsPd8e2N4DNzmq8RIxKxArwQMVelCaMcDVS/ND5cM82H
-         LAaWkfJyI7UCxFNHVOORbwR/TQks2KIvI7MOe/52AKT0xcRddkcxzNM4SaowNCze0+PA
-         /gvPIdc32WhMbqEfsq5DU7z7eZRJsqik6JP4UkjIQ6Ua9BuEp0I0NtLFzUtQu2CQAfO+
-         K9YQ==
+        h=sender:from:to:cc:subject:date:message-id;
+        bh=SmV8BopIicHtPykBPbHnxLFZ5n/nu2NfZpedZF05yLQ=;
+        b=RH6WpoasUUONHWkChjTBQ2CwGCoqHppjSLyc1wUb67aSUcQKV99ZRdB5DD4SxyFef5
+         qDGKgIDAFr5HjWxfijLTy4O+yloFEXkfVDFpNX6at+dTQOv++yMOBWxl0UJyad9MBniF
+         bcK7AOw+rDhhBzNOaSmcxE6E8lLzi2NlFzFRvPIWyyPSSVw5j0knprLCPtb4FsNJEwa5
+         ksj+ULD8QhGS0O0NATtl1AIFp3JcwHLO7e0ftBpdCJ7DDFMWRyB44+N32Eq5+raZ7ckp
+         LWX+IvTPo376X8EnDIv5yVJANkLWOIUzUO9K81MfnuFw3/qml1/UPC/cV2GyEwzu6fjR
+         3iSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=OifQ/toEvFcP7K85XwXz1po/B5hoYQPKX76mfrnbghw=;
-        b=es3enYemtyfzuh+nDCNBMtDdav2IXnN9vR23rnmygQVjtjDAC2JQLT8N5tAFHLWmLK
-         bDci9lKc4ScDHAivTf/f4ygB/slG4gh3NP6MC68Rkea0EYPL1vh3DcSqz/e2eTdXhUmL
-         XqqNTqhTDUCtwSenoSJDWJ3Rb9ryiBUeocJ2yA+0ikM6Tr+2BS56gSZHu/TSEa+W0Gv/
-         zUJwsa72eOHrKZFbnfDKgTqOdT0VOBN1U3phjvLQ58hVNsrfwrqK+XNPiRV5auZEbmxe
-         9UuveJllqUa9A784z2v6KWBnZG/nblLYnlr2jDmkbg8bhnW7nj79jUEKRumMPVuvI96x
-         AsHw==
-X-Gm-Message-State: AOAM532mFsWwnTCnpP46BLgLfLgK36Y8R8ZXb+TMtsop+jxxevtG/wc6
-	GP7MBiH5MJHS+NKZUT68AK0cBcDgyt0=
-X-Google-Smtp-Source: ABdhPJyO31C4L9IT4L/yZHgSi6aRT45jUsmu8OIB7moVEQn7pKoSUi8TaNbRUddGiEPTQlGAYmzIrw==
-X-Received: by 2002:a63:d806:: with SMTP id b6mr29409252pgh.403.1594397905587;
-        Fri, 10 Jul 2020 09:18:25 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:4e0:2036:8379:4d57:501b? ([2601:646:9200:4e0:2036:8379:4d57:501b])
-        by smtp.gmail.com with ESMTPSA id bg6sm6003135pjb.51.2020.07.10.09.18.24
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 10 Jul 2020 09:18:25 -0700 (PDT)
-Subject: Re: [oe] [dunfel 03/32] jsoncpp: upgrade 1.9.2 -> 1.9.3
-To: akuster808 <akuster808@gmail.com>, Martin Jansa <Martin.Jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <cover.1593561840.git.akuster808@gmail.com>
- <fc1b28e574a01410f082034c1f8212139b6107e1.1593561840.git.akuster808@gmail.com>
- <CA+chaQc92KeJnoG+NPi6EvKMHNnLCbN8AFPS9Usdc1S1WNHu9A@mail.gmail.com>
- <24a9b660-a636-a614-4e5c-62bc9782ade3@gmail.com>
- <CA+chaQen7fpxTQ2eT933-5pZjsSpT0pJhciP2UY8V5rwe-6X1w@mail.gmail.com>
- <afc84fcc-e8bb-c8d2-52a4-372b72840857@gmail.com>
- <1110a82f-3ba0-66e7-ac39-276b7b5ee6d5@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Message-ID: <ab6083eb-e8b3-d427-ecd1-146cdd960f52@gmail.com>
-Date: Fri, 10 Jul 2020 09:18:24 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <1110a82f-3ba0-66e7-ac39-276b7b5ee6d5@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+        h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+        bh=SmV8BopIicHtPykBPbHnxLFZ5n/nu2NfZpedZF05yLQ=;
+        b=Qajipxjl/LJVoL88sHaebQ1juAIP20m6b8tAtwV8FU0TImW1CDlwFASaAJdyQ6oa5v
+         Iw9yASJBZhyih1DaIXBnALZV3ftMZnqV8Ahysvbo75S5h7KlxuB/gh2YtuVFT3tIbFmd
+         7ZlT+qLY2RGBNN4PgyPYkpJ0rEZacg2lK5yxSyiMB1FAhH6OKlErn4NSaLw3apoBRP9v
+         +SczR08rE2k9NEh8EXTUCK+NwvrSllzZD4Zeh3EtHShVzqPedg7+5uzIDe6ijIJbs6R5
+         u/f/whuCkYRzjaq+Whre5Mid9U2CmaIYf6N2WF8tNmdNaNBZh0oCuUDxCt0mu3STSYcE
+         Qm9Q==
+X-Gm-Message-State: AOAM533cKiHZtCaesZe95ueIZGgutVs838n9hLorD3LmSb7h58Vx7hOq
+	3DY/NEWItydnavgfekijkV7ZV32pTaM=
+X-Google-Smtp-Source: ABdhPJxAb8xgwoRBsz4rb3hCfdCUU2tlxQHQXtUOX0NTXX+cqqC0/aGRx8ixIR0qo7n/lbwMTebn5Q==
+X-Received: by 2002:ac8:4251:: with SMTP id r17mr69062206qtm.372.1594397951818;
+        Fri, 10 Jul 2020 09:19:11 -0700 (PDT)
+Return-Path: <philip.balister@gmail.com>
+Received: from prague.hsd1.va.comcast.net ([2601:5c0:c100:b84:c110:9e9e:8241:dfa])
+        by smtp.gmail.com with ESMTPSA id t35sm8528866qth.79.2020.07.10.09.19.10
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Fri, 10 Jul 2020 09:19:10 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: "Philip Balister" <philip@balister.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: Philip Balister <philip@balister.org>
+Subject: [meta-python][PATCHv2] python3-pybind11: Use cmake to build and add -native version
+Date: Fri, 10 Jul 2020 12:19:06 -0400
+Message-Id: <20200710161906.7297-1-philip@balister.org>
+X-Mailer: git-send-email 2.13.6
 
+ * Switch to git repo to pick up cmake files for recipes to use
+ * Use cmake to build innstead of pypi so cmake files are included in sysroot
+ * Disable tests to prevent configure failure (I tried adding pytest asa DEPEND)
+ * Patch out cmake that strips output to prevent QA failures
+ * Do not check pointer length for installed python when cross compiling.
+ * With this I can build gnuradio using pybind11.
 
+Signed-off-by: Philip Balister <philip@balister.org>
+---
+ ...t-check-pointer-size-when-cross-compiling.patch | 30 +++++++++++++++++
+ .../0001-Do-not-strip-binaries.patch               | 39 ++++++++++++++++++++++
+ .../python/python3-pybind11_2.5.0.bb               | 17 ++++++++--
+ 3 files changed, 83 insertions(+), 3 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-check-pointer-size-when-cross-compiling.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch
 
-On 7/10/20 8:55 AM, akuster808 wrote:
-> 
-> 
-> On 7/9/20 6:08 PM, Khem Raj wrote:
->>
->> On 7/9/20 9:48 AM, Martin Jansa wrote:
->>> I don't have a strong opinion about this one.
->>>
->>> It's easy enough to undo by downstream layers if they care about ABI.
->>>
->>> At LGE we do have some prebuilt binaries which use jsoncpp, so we do
->>> care, but haven't updated to dunfell yet and when we do get those
->>> prebuilt binaries to be rebuilt, we might as well use newer jsoncpp (and
->>> in that case might backport this upgrade anyway even if it gets reverted
->>> in dunfell).
->>>
->>> Maybe someone else will share an opinion on this as well.
->> I checked https://github.com/open-source-parsers/jsoncpp/releases/tag/1.9.3
->>
->> and it does not mention ABI change there from 1.9.2 to 1.9.3
-> that what lead me to believe it was worthy of backport.
->>
->> but then I see
->>
->> https://github.com/open-source-parsers/jsoncpp/commit/8b7ea09b8055df01866a5ce4142b12ed8f9f13eb
->>
->> I dont know if there are API changes which means it will need porting
->> effors for users or is it just a relinking that is needed.
-> 
-> Same conclusion I came to.  Still the question is open. Should this be
-> reverted?
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-check-pointer-size-when-cross-compiling.patch b/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-check-pointer-size-when-cross-compiling.patch
+new file mode 100644
+index 000000000..6455c95e7
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-check-pointer-size-when-cross-compiling.patch
+@@ -0,0 +1,30 @@
++From 3abfa65517959ad279481021fafefba28f955e76 Mon Sep 17 00:00:00 2001
++From: Philip Balister <philip@balister.org>
++Date: Fri, 10 Jul 2020 10:14:59 -0400
++Subject: [PATCH] Do not check pointer size when cross compiling.
++
++It is reasonable to build for 32 machine on a 64 bit build machine. Prevents:
++| CMake Error at tools/FindPythonLibsNew.cmake:127 (message):
++|   Python config failure: Python is 64-bit, chosen compiler is 32-bit
++
++Signed-off-by: Philip Balister <philip@balister.org>
++---
++ tools/FindPythonLibsNew.cmake | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/tools/FindPythonLibsNew.cmake b/tools/FindPythonLibsNew.cmake
++index d0c8fa2..8479e70 100644
++--- a/tools/FindPythonLibsNew.cmake
+++++ b/tools/FindPythonLibsNew.cmake
++@@ -123,7 +123,7 @@ list(GET _PYTHON_VALUES 9 PYTHON_MULTIARCH)
++ 
++ # Make sure the Python has the same pointer-size as the chosen compiler
++ # Skip if CMAKE_SIZEOF_VOID_P is not defined
++-if(CMAKE_SIZEOF_VOID_P AND (NOT "${PYTHON_SIZEOF_VOID_P}" STREQUAL "${CMAKE_SIZEOF_VOID_P}"))
+++if((NOT CMAKE_CROSSCOMPILING) AND CMAKE_SIZEOF_VOID_P AND (NOT "${PYTHON_SIZEOF_VOID_P}" STREQUAL "${CMAKE_SIZEOF_VOID_P}"))
++     if(PythonLibsNew_FIND_REQUIRED)
++         math(EXPR _PYTHON_BITS "${PYTHON_SIZEOF_VOID_P} * 8")
++         math(EXPR _CMAKE_BITS "${CMAKE_SIZEOF_VOID_P} * 8")
++-- 
++2.25.4
++
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch b/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch
+new file mode 100644
+index 000000000..07ab9a03b
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch
+@@ -0,0 +1,39 @@
++From 918f3ef01c7a67f3beb67307966698474f144581 Mon Sep 17 00:00:00 2001
++From: Philip Balister <philip@balister.org>
++Date: Wed, 8 Jul 2020 09:41:43 -0400
++Subject: [PATCH] Do not strip binaries.
++
++ * OpenEmbedded strips them after creating debug packages.
++
++Signed-off-by: Philip Balister <philip@balister.org>
++---
++ tools/pybind11Tools.cmake | 13 -------------
++ 1 file changed, 13 deletions(-)
++
++diff --git a/tools/pybind11Tools.cmake b/tools/pybind11Tools.cmake
++index a3603ab..b4c8f63 100644
++--- a/tools/pybind11Tools.cmake
+++++ b/tools/pybind11Tools.cmake
++@@ -230,19 +230,6 @@ function(pybind11_add_module target_name)
++ 
++   _pybind11_add_lto_flags(${target_name} ${ARG_THIN_LTO})
++ 
++-  if (NOT MSVC AND NOT ${CMAKE_BUILD_TYPE} MATCHES Debug|RelWithDebInfo)
++-    # Strip unnecessary sections of the binary on Linux/Mac OS
++-    if(CMAKE_STRIP)
++-      if(APPLE)
++-        add_custom_command(TARGET ${target_name} POST_BUILD
++-                           COMMAND ${CMAKE_STRIP} -x $<TARGET_FILE:${target_name}>)
++-      else()
++-        add_custom_command(TARGET ${target_name} POST_BUILD
++-                           COMMAND ${CMAKE_STRIP} $<TARGET_FILE:${target_name}>)
++-      endif()
++-    endif()
++-  endif()
++-
++   if(MSVC)
++     # /MP enables multithreaded builds (relevant when there are many files), /bigobj is
++     # needed for bigger binding projects due to the limit to 64k addressable sections
++-- 
++2.25.4
++
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb b/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb
+index dc3b8f6ad..46bba8d8d 100644
+--- a/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb
+@@ -3,7 +3,18 @@ HOMEPAGE = "https://github.com/wjakob/pybind11"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=beb87117af69fd10fbf9fb14c22a2e62"
+ 
+-SRC_URI[md5sum] = "5355e1fd05c8eedef19cc9bfd3d82a77"
+-SRC_URI[sha256sum] = "ea5a4e7a880112915463826f1acbec5892df36dfe102ecb249229ac514fb54ad"
++DEPENDS = "boost"
+ 
+-inherit pypi setuptools3
++SRC_URI = "git://github.com/pybind/pybind11.git \
++           file://0001-Do-not-strip-binaries.patch \
++           file://0001-Do-not-check-pointer-size-when-cross-compiling.patch \
++          "
++SRCREV = "3b1dbebabc801c9cf6f0953a4c20b904d444f879"
++
++S = "${WORKDIR}/git"
++
++BBCLASSEXTEND = "native"
++
++EXTRA_OECMAKE =  "-DPYBIND11_TEST=OFF"
++
++inherit cmake python3native
+-- 
+2.13.6
 
-from my own usecase it does not matter since dunfell is still under 
-porting effort and any version can be used, but others might have 
-different view.
-
-> 
-> -armin
->>> On Thu, Jul 9, 2020 at 6:06 PM akuster808 <akuster808@gmail.com
->>> <mailto:akuster808@gmail.com>> wrote:
->>>
->>>
->>>
->>>      On 7/9/20 8:21 AM, Martin Jansa wrote:
->>>>      FYI this "small" upgrade changes ABI version from libjsoncpp22
->>>>      to libjsoncpp24 which might cause some issues to people who expect
->>>>      relatively stable ABIs in LTS dunfell.
->>>      Well that is not good. I did look at the details but apparently I
->>>      failed to catch the "soversion" change.
->>>
->>>      Would you recommend reverting this?
->>>
->>>      -armin
->>>>      On Wed, Jul 1, 2020 at 2:07 AM akuster <akuster808@gmail.com
->>>>      <mailto:akuster808@gmail.com>> wrote:
->>>>
->>>>          From: Pierre-Jean Texier <pjtexier@koncepto.io
->>>>          <mailto:pjtexier@koncepto.io>>
->>>>
->>>>          See full changelog
->>>>          https://github.com/open-source-parsers/jsoncpp/releases/tag/1.9.3
->>>>
->>>>          Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io
->>>>          <mailto:pjtexier@koncepto.io>>
->>>>          Signed-off-by: Khem Raj <raj.khem@gmail.com
->>>>          <mailto:raj.khem@gmail.com>>
->>>>          (cherry picked from commit
->>>>          65e124eef373680726ac045677cbec7d9080a289)
->>>>          Signed-off-by: Armin Kuster <akuster808@gmail.com
->>>>          <mailto:akuster808@gmail.com>>
->>>>          ---
->>>>           .../jsoncpp/{jsoncpp_1.9.2.bb <http://jsoncpp_1.9.2.bb> =>
->>>>          jsoncpp_1.9.3.bb <http://jsoncpp_1.9.3.bb>}              | 2 +-
->>>>           1 file changed, 1 insertion(+), 1 deletion(-)
->>>>           rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.9.2.bb
->>>>          <http://jsoncpp_1.9.2.bb> => jsoncpp_1.9.3.bb
->>>>          <http://jsoncpp_1.9.3.bb>} (93%)
->>>>
->>>>          diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
->>>>          <http://jsoncpp_1.9.2.bb>
->>>>          b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb
->>>>          <http://jsoncpp_1.9.3.bb>
->>>>          similarity index 93%
->>>>          rename from meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
->>>>          <http://jsoncpp_1.9.2.bb>
->>>>          rename to meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb
->>>>          <http://jsoncpp_1.9.3.bb>
->>>>          index a88410f2ff..97c6361ad8 100644
->>>>          --- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
->>>>          <http://jsoncpp_1.9.2.bb>
->>>>          +++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb
->>>>          <http://jsoncpp_1.9.3.bb>
->>>>          @@ -11,7 +11,7 @@ SECTION = "libs"
->>>>           LICENSE = "MIT"
->>>>           LIC_FILES_CHKSUM =
->>>>          "file://LICENSE;md5=fa2a23dd1dc6c139f35105379d76df2b"
->>>>
->>>>          -SRCREV = "d2e6a971f4544c55b8e3b25cf96db266971b778f"
->>>>          +SRCREV = "6aba23f4a8628d599a9ef7fa4811c4ff6e4070e2"
->>>>           SRC_URI = "git://github.com/open-source-parsers/jsoncpp
->>>>          <http://github.com/open-source-parsers/jsoncpp>"
->>>>
->>>>           S = "${WORKDIR}/git"
->>>>          --
->>>>          2.17.1
->>>>
->>>>
->>>
->>> 
->>>
-> 
