@@ -1,134 +1,84 @@
-Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com [209.85.167.194])
- by mx.groups.io with SMTP id smtpd.web10.11720.1594390884290297106
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
+ by mx.groups.io with SMTP id smtpd.web11.12966.1594393843290263071
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Jul 2020 07:21:24 -0700
+ Fri, 10 Jul 2020 08:10:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=mNd7Pzh/;
- spf=pass (domain: linaro.org, ip: 209.85.167.194, mailfrom: anibal.limon@linaro.org)
-Received: by mail-oi1-f194.google.com with SMTP id e4so4934226oib.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Jul 2020 07:21:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=mhnxiqM2;
+ spf=pass (domain: gmail.com, ip: 209.85.160.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f195.google.com with SMTP id w34so4678700qte.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Jul 2020 08:10:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=Dwao7pmBaFz0KrdEDk2A/wIeCdL6wjAQU3EE65BV2z0=;
-        b=mNd7Pzh/OeRwUiMUxun7l7WXnliy/HVmq26PcfCDYogCca/QevNdbJLX4EEGkcSXx9
-         coY1vzHS8T8E3M/en7lA0lBCNcbrrzWrd7goqS1l620VzWA24+ozmHc/NOOVR8lk/gyW
-         73RDsnfMvHWS+nNlRhRgzJ3DPEGqY3n0ELXl4ZiSspAnVbLTcxBZ8JzVcCnS12UXjmme
-         pmMnWgcNsXGsTJL8NZVis4rnycUqlmbcwhw5GbFEan+gkGp+RY5bYttBKy75AXfx+z8E
-         C96Hu/1aeXrItzkPO8nCTu1NftCRWpmF7pq1w4/YfW6mpILiLcJak68bV/NVoFKDXgEL
-         cHyQ==
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Ug3spjyDC5XMfIEvalhUnxfI50y5/7bzZ0G8o/ppV5g=;
+        b=mhnxiqM2PXyU0xEfmPTYpvP88WJkWtfTQDUWnwYBDR5UuzXEpvmNjrHNoLM/k6LhaX
+         la+nOYSz/K7rRhlDmwtCc+1ZDHzVm4s5Hl/Qvr5v9AU4mepFj/ZxRzuuEpaDIUD+C4TH
+         5K12lqPBI1p0FEwpBJAQMcRCdOS2hoq3/4eZxi4NbW0cjgPNfhYuYdbk2vAbnbQEG//3
+         VwcZwFiPpGYhOsxPt5JKNOaqEgFVUq6hUKN9v6FYGMQLbVaQIjg5bvP1pujWyZwJWPGp
+         xQ5BtPdWnSuTGqGnvMG6HreIKPYKnZrbTbyE7CON6AaiiXoWVCAT+ZgGg5oy1q1B6WMF
+         jbsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=Dwao7pmBaFz0KrdEDk2A/wIeCdL6wjAQU3EE65BV2z0=;
-        b=tdA+JXRshNnZnkl/OdK6kxBXQR77jm63bFdfR4nMqsMs6cAfskuuHOt6IcpHI2uBGH
-         T8s0uBVOU72izJjphTHzucGZdfmQH+eUz+YeQ1UYFraFn/DOtHWzgVzpMBmvm6Wy/KRb
-         1dH1qV18jwjsVgmK/NXbl6qHmwkX0V1SaM9SkWTY9g75xeKmt4Geu2vSbHOiY1daQvVJ
-         2A6g1ZD/XsWMP9chQRzwefuDGGBePbwuF21KXKxLagrA4jSySYkxqMdop1lTpLjRyfd4
-         J01gctuo1JvENgV5c970kXch8Z1fgJVDQOR6zlbhgpmyZSaFiwuXuuufzge5E/mNJYCR
-         /iCg==
-X-Gm-Message-State: AOAM533CWjubeGxY21+N/m1qSlALHF/Q4+yDJxP/os/hgjrboBy+uZ7S
-	Czm+Boyz2OcJiHa250qHDH24xAEsp7A=
-X-Google-Smtp-Source: ABdhPJyk+CFXY8k3E6ISln9tYma5FBJAHy+Mm+oW938vXZdOqfbTivT25ROpd0+yhGeIAI30WUsI7w==
-X-Received: by 2002:aca:1e04:: with SMTP id m4mr4186534oic.76.1594390882989;
-        Fri, 10 Jul 2020 07:21:22 -0700 (PDT)
-Return-Path: <anibal.limon@linaro.org>
-Received: from blackbox.rga.ip ([2806:109f:4:f5a5:908a:c7ff:fe6a:e9f5])
-        by smtp.gmail.com with ESMTPSA id s8sm1111416otk.36.2020.07.10.07.21.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 10 Jul 2020 07:21:22 -0700 (PDT)
-From: "Anibal Limon" <anibal.limon@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: nicolas.dechesne@linaro.org,
-	=?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <anibal.limon@linaro.org>
-Subject: [PATCH 2/2] recipes-graphics: Add parallel-deqp-runner recipe
-Date: Fri, 10 Jul 2020 09:21:14 -0500
-Message-Id: <20200710142114.10612-2-anibal.limon@linaro.org>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20200710142114.10612-1-anibal.limon@linaro.org>
-References: <20200710142114.10612-1-anibal.limon@linaro.org>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Ug3spjyDC5XMfIEvalhUnxfI50y5/7bzZ0G8o/ppV5g=;
+        b=AE5vlPwOO1fJj8TnP50pWLyVmNXNL+DU+N43Da9xPp8zPLmD7ERAkdm6TI9wO8r47A
+         /qKkbn+1p20x7NmsTGhr6Yj41RnsfnRe3H0HWnDzGebKVuJesuCE15Fr5UMfKI3vnoUz
+         1Yzc+B8OIULdLmnEe3d0IyLestDENS3XB1Bx7bE+Qn/PdA/z1gsQXYNi6DLkiS1Zrb9J
+         yPXN4/3vw2pYJlxSowGtXI9wJgmHy+NHy0yUxJmbTt8Qm+Gv99W9DjHaMFOjBhzxMwWw
+         h8MKFYv1iobeV9P1VEOZawM3Ldh70d4SYRaBsZ2zMcg918mGBIH4lHoHN1vc+QKi9S28
+         DEKw==
+X-Gm-Message-State: AOAM531ialMj/NIwPX9DgY6rriwgksfnYcy6zOFRm3QOgSdymNj7astn
+	1m+Aize0EqYGOZBDg8tu47G9EaJV/CL2IJZr8zM=
+X-Google-Smtp-Source: ABdhPJw7a1Y88Qe99vLu1RLja9MlliCDASp3nVJyIpCfwTg77wiLCAmUmpHMglemNV3+lyKcm2/d+zGdvOWhOJKCVDs=
+X-Received: by 2002:ac8:4f13:: with SMTP id b19mr61757476qte.146.1594393842081;
+ Fri, 10 Jul 2020 08:10:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20200710015825.64379-1-rgowda.praveen@gmail.com>
+In-Reply-To: <20200710015825.64379-1-rgowda.praveen@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 10 Jul 2020 08:10:16 -0700
+Message-ID: <CAMKF1sq2RP7aun_N1x+q4XD_3xnV_OU7wPjopRWy2keJXG-ngQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH] Update fstools SRC to latest
+To: Praveen Gowda <rgowda.praveen@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Praveen Gowda <praveenrgowda@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Aníbal Limón <anibal.limon@linaro.org>
----
- ...-WORKAROUND-Remove-vulkan-dependency.patch | 42 +++++++++++++++++++
- .../parallel-deqp-runner_git.bb               | 14 +++++++
- 2 files changed, 56 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner/0001-meson.build-WORKAROUND-Remove-vulkan-dependency.patch
- create mode 100644 meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner_git.bb
+Can you send it as. pull request against meta-openwrt on github.
 
-diff --git a/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner/0001-meson.build-WORKAROUND-Remove-vulkan-dependency.patch b/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner/0001-meson.build-WORKAROUND-Remove-vulkan-dependency.patch
-new file mode 100644
-index 000000000..0fedfad13
---- /dev/null
-+++ b/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner/0001-meson.build-WORKAROUND-Remove-vulkan-dependency.patch
-@@ -0,0 +1,42 @@
-+From 2b74a5b160c0500291c554ab5c0944f502e72a42 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <anibal.limon@linaro.org>
-+Date: Thu, 9 Jul 2020 20:00:53 +0200
-+Subject: [PATCH] meson.build: WORKAROUND Remove vulkan dependency
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+We need a patch in the source code to allow enable when DISTRO_FEATURES
-+contains vulkan.
-+
-+Signed-off-by: Aníbal Limón <anibal.limon@linaro.org>
-+---
-+ meson.build | 6 ------
-+ 1 file changed, 6 deletions(-)
-+
-+diff --git a/meson.build b/meson.build
-+index db97c26..4c1b865 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -3,21 +3,15 @@ project('parallel-deqp-runner', ['c', 'cpp'],
-+ cpp = meson.get_compiler('cpp')
-+ 
-+ thread_dep = dependency('threads')
-+-vulkan_dep = dependency('vulkan')
-+ 
-+ fs_dep = cpp.find_library('stdc++fs', required : false)
-+ if not fs_dep.found()
-+     fs_dep = cpp.find_library('c++fs')
-+ endif
-+ 
-+-
-+ deqp_runner = executable('deqp-runner',
-+            'src/deqp-runner.cc',
-+            dependencies : [thread_dep, fs_dep],
-+            install : true)
-+ 
-+-executable('hang-detection',
-+-           'src/hang_detection.c',
-+-           dependencies: [vulkan_dep])
-+-
-+ subdir('test')
-diff --git a/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner_git.bb b/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner_git.bb
-new file mode 100644
-index 000000000..4c02cc55a
---- /dev/null
-+++ b/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner_git.bb
-@@ -0,0 +1,14 @@
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4f59d6446bf2e004e80df1a0937129fa"
-+
-+SRC_URI = "git://gitlab.freedesktop.org/mesa/parallel-deqp-runner.git;protocol=https \
-+           file://0001-meson.build-WORKAROUND-Remove-vulkan-dependency.patch \
-+           "
-+
-+# Modify these as desired
-+PV = "2020.06.15+git${SRCPV}"
-+SRCREV = "e1642fb691d29b1462504b58916f7f514a963e80"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit pkgconfig meson
--- 
-2.27.0
-
+On Fri, Jul 10, 2020 at 5:14 AM Praveen Gowda <rgowda.praveen@gmail.com> wrote:
+>
+> From: Praveen Gowda <praveenrgowda@gmail.com>
+>
+> Signed-off-by: Praveen Gowda <rgowda.praveen@gmail.com>
+> ---
+>  recipes-core/fstools/fstools_git.bb | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/recipes-core/fstools/fstools_git.bb b/recipes-core/fstools/fstools_git.bb
+> index 3bd56f7..8541a62 100644
+> --- a/recipes-core/fstools/fstools_git.bb
+> +++ b/recipes-core/fstools/fstools_git.bb
+> @@ -9,13 +9,13 @@ HOMEPAGE = "https://git.openwrt.org/?p=project/fstools.git;a=summary"
+>  LICENSE = "LGPL-2.1 & GPL-2.0 & PD"
+>  LIC_FILES_CHKSUM = "file://ubi.c;beginline=1;endline=17;md5=8ccc371d64f0b3a8d91065b678dc7095"
+>  SECTION = "base"
+> -DEPENDS += "util-linux"
+> +DEPENDS += "util-linux ubus"
+>
+> -SRC_URI = "git://git.openwrt.org/project/fstools.git;branch=lede-17.01 \
+> +SRC_URI = "git://git.openwrt.org/project/fstools.git \
+>            file://0001-Define-GLOB_ONLYDIR-if-not-available.patch \
+>            "
+>
+> -SRCREV = "37762ff488752c1686b359816aec75831b49c55f"
+> +SRCREV = "d34ea8eb1e12259a315cdef7aa0cd3ceaea68e00"
+>
+>  S = "${WORKDIR}/git"
+>
+> --
+> 2.24.3 (Apple Git-128)
+>
+> 
