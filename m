@@ -1,47 +1,47 @@
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com [209.85.210.194])
- by mx.groups.io with SMTP id smtpd.web12.14129.1594396509284936220
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com [209.85.210.196])
+ by mx.groups.io with SMTP id smtpd.web10.14462.1594397906570898418
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Jul 2020 08:55:09 -0700
+ Fri, 10 Jul 2020 09:18:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=StH9oAE6;
- spf=pass (domain: gmail.com, ip: 209.85.210.194, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f194.google.com with SMTP id 1so2708241pfn.9
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Jul 2020 08:55:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZY19jmc+;
+ spf=pass (domain: gmail.com, ip: 209.85.210.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f196.google.com with SMTP id m9so2756471pfh.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Jul 2020 09:18:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=MzsypbbLwxFRHtEAA1/QBQBrO28Ylh6RZiPtRi2p9n0=;
-        b=StH9oAE6JZHnBh1/+oc8ujseEN2MJcdmIKx9FeBFqFA7uj7lSgfzqCN9h69kmg7qQM
-         tMMWcAvv8f4w5ThlJbnFT7vf3NIkhBqe0NKhPgs4VmKqqjeLFm9ix2ZfJhFkU9vAV6iC
-         U6txos/yReUa7KP9YGJJlAQT9N9nKBIijPhikQHtNf9bFN9duKUQJNm2ZiYxKwRBv4V0
-         ol29SwVZFwn22LuIEOqY2YrGC+KP5MoDhz7EPTzStlaTkcLiprkozg4PdewZ9IJsiE7n
-         QzEZsO8UUg4eOe3H8vNnWhA65rHjbjVacbyJrZ19MqyGojeZoQNvR2nUxa6+DAGUbMlx
-         Rzpg==
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=OifQ/toEvFcP7K85XwXz1po/B5hoYQPKX76mfrnbghw=;
+        b=ZY19jmc+lCPz4BCSjf3chxZ6Gp82r4n5hRZmp8UguQDduKJC1S+7uadVw92ip16iAG
+         ++toAMiXeS6fJXviamiPu76sk7nSv84aIBgq4KfnvZSS7BIdS7c3EEBdNzml7aOfhIhM
+         nb98RhLDncViq8PwWVt4EEbwfsPd8e2N4DNzmq8RIxKxArwQMVelCaMcDVS/ND5cM82H
+         LAaWkfJyI7UCxFNHVOORbwR/TQks2KIvI7MOe/52AKT0xcRddkcxzNM4SaowNCze0+PA
+         /gvPIdc32WhMbqEfsq5DU7z7eZRJsqik6JP4UkjIQ6Ua9BuEp0I0NtLFzUtQu2CQAfO+
+         K9YQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:autocrypt
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-transfer-encoding:content-language;
-        bh=MzsypbbLwxFRHtEAA1/QBQBrO28Ylh6RZiPtRi2p9n0=;
-        b=amZj6UGFupWyvzpffj3PR4oXm3JWYwrrnYqJVK/yEOxYnhG+YKVW1zKVcHX6C4l8Vg
-         9/2lL/yXsgKCOc32FBgGaEdqQKXyHAhQo5tl6J56bVWHMQeRlempOB5Cnu3tZibxKwT5
-         2Iaa0DfkvM3NNnztJOBdgBer8yKly/Lcx4Rrs9cSjhhvHyhDWWeWfiTn0WyG40FmFSah
-         JI6EvmZPtoZW1VDFIjMSAe8HzDtQ5W26GFtj6p6vcyxYDVR+qw01wrlN+iPhorfOqFN7
-         zFpZOPhlyTVHUQ0gwNhvNUT2G4JJ+utJs9S8jBLZYcBPI34zKQG1KGsI9jsOcStJmkwd
-         zdiQ==
-X-Gm-Message-State: AOAM532IISoM8cklp8q+bB4u32e/rqqJ+e73xZ4NHZ/SbrbV8EPsnmit
-	zmzHEsMylag0zipUZ4OGshiZ7K1qir0=
-X-Google-Smtp-Source: ABdhPJyPJNwGgVbVwklREo2yvU9la4v8GRzYCqw3Bq+MhRbm+ZbS4wkZIbhee8gScVVui1YMyCwQDA==
-X-Received: by 2002:a63:8f17:: with SMTP id n23mr60869693pgd.40.1594396508351;
-        Fri, 10 Jul 2020 08:55:08 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:396f:c9d9:1d67:d8dc? ([2601:202:4180:a5c0:396f:c9d9:1d67:d8dc])
-        by smtp.gmail.com with ESMTPSA id z9sm6083451pgh.94.2020.07.10.08.55.07
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=OifQ/toEvFcP7K85XwXz1po/B5hoYQPKX76mfrnbghw=;
+        b=es3enYemtyfzuh+nDCNBMtDdav2IXnN9vR23rnmygQVjtjDAC2JQLT8N5tAFHLWmLK
+         bDci9lKc4ScDHAivTf/f4ygB/slG4gh3NP6MC68Rkea0EYPL1vh3DcSqz/e2eTdXhUmL
+         XqqNTqhTDUCtwSenoSJDWJ3Rb9ryiBUeocJ2yA+0ikM6Tr+2BS56gSZHu/TSEa+W0Gv/
+         zUJwsa72eOHrKZFbnfDKgTqOdT0VOBN1U3phjvLQ58hVNsrfwrqK+XNPiRV5auZEbmxe
+         9UuveJllqUa9A784z2v6KWBnZG/nblLYnlr2jDmkbg8bhnW7nj79jUEKRumMPVuvI96x
+         AsHw==
+X-Gm-Message-State: AOAM532mFsWwnTCnpP46BLgLfLgK36Y8R8ZXb+TMtsop+jxxevtG/wc6
+	GP7MBiH5MJHS+NKZUT68AK0cBcDgyt0=
+X-Google-Smtp-Source: ABdhPJyO31C4L9IT4L/yZHgSi6aRT45jUsmu8OIB7moVEQn7pKoSUi8TaNbRUddGiEPTQlGAYmzIrw==
+X-Received: by 2002:a63:d806:: with SMTP id b6mr29409252pgh.403.1594397905587;
+        Fri, 10 Jul 2020 09:18:25 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:4e0:2036:8379:4d57:501b? ([2601:646:9200:4e0:2036:8379:4d57:501b])
+        by smtp.gmail.com with ESMTPSA id bg6sm6003135pjb.51.2020.07.10.09.18.24
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 10 Jul 2020 08:55:07 -0700 (PDT)
+        Fri, 10 Jul 2020 09:18:25 -0700 (PDT)
 Subject: Re: [oe] [dunfel 03/32] jsoncpp: upgrade 1.9.2 -> 1.9.3
-To: Khem Raj <raj.khem@gmail.com>, Martin Jansa <Martin.Jansa@gmail.com>
+To: akuster808 <akuster808@gmail.com>, Martin Jansa <Martin.Jansa@gmail.com>
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 References: <cover.1593561840.git.akuster808@gmail.com>
  <fc1b28e574a01410f082034c1f8212139b6107e1.1593561840.git.akuster808@gmail.com>
@@ -49,162 +49,128 @@ References: <cover.1593561840.git.akuster808@gmail.com>
  <24a9b660-a636-a614-4e5c-62bc9782ade3@gmail.com>
  <CA+chaQen7fpxTQ2eT933-5pZjsSpT0pJhciP2UY8V5rwe-6X1w@mail.gmail.com>
  <afc84fcc-e8bb-c8d2-52a4-372b72840857@gmail.com>
-From: "akuster" <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
- 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
- 8CS2NxU=
-Message-ID: <1110a82f-3ba0-66e7-ac39-276b7b5ee6d5@gmail.com>
-Date: Fri, 10 Jul 2020 08:55:06 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ <1110a82f-3ba0-66e7-ac39-276b7b5ee6d5@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Message-ID: <ab6083eb-e8b3-d427-ecd1-146cdd960f52@gmail.com>
+Date: Fri, 10 Jul 2020 09:18:24 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <afc84fcc-e8bb-c8d2-52a4-372b72840857@gmail.com>
-Content-Type: text/plain; charset=utf-8
+In-Reply-To: <1110a82f-3ba0-66e7-ac39-276b7b5ee6d5@gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
 
 
 
-On 7/9/20 6:08 PM, Khem Raj wrote:
->
-> On 7/9/20 9:48 AM, Martin Jansa wrote:
->> I don't have a strong opinion about this one.
+On 7/10/20 8:55 AM, akuster808 wrote:
+> 
+> 
+> On 7/9/20 6:08 PM, Khem Raj wrote:
 >>
->> It's easy enough to undo by downstream layers if they care about ABI.
+>> On 7/9/20 9:48 AM, Martin Jansa wrote:
+>>> I don't have a strong opinion about this one.
+>>>
+>>> It's easy enough to undo by downstream layers if they care about ABI.
+>>>
+>>> At LGE we do have some prebuilt binaries which use jsoncpp, so we do
+>>> care, but haven't updated to dunfell yet and when we do get those
+>>> prebuilt binaries to be rebuilt, we might as well use newer jsoncpp (and
+>>> in that case might backport this upgrade anyway even if it gets reverted
+>>> in dunfell).
+>>>
+>>> Maybe someone else will share an opinion on this as well.
+>> I checked https://github.com/open-source-parsers/jsoncpp/releases/tag/1.9.3
 >>
->> At LGE we do have some prebuilt binaries which use jsoncpp, so we do
->> care, but haven't updated to dunfell yet and when we do get those
->> prebuilt binaries to be rebuilt, we might as well use newer jsoncpp (and
->> in that case might backport this upgrade anyway even if it gets reverted
->> in dunfell).
+>> and it does not mention ABI change there from 1.9.2 to 1.9.3
+> that what lead me to believe it was worthy of backport.
 >>
->> Maybe someone else will share an opinion on this as well.
-> I checked https://github.com/open-source-parsers/jsoncpp/releases/tag/1.9.3
->
-> and it does not mention ABI change there from 1.9.2 to 1.9.3
-that what lead me to believe it was worthy of backport.
->
-> but then I see
->
-> https://github.com/open-source-parsers/jsoncpp/commit/8b7ea09b8055df01866a5ce4142b12ed8f9f13eb
->
-> I dont know if there are API changes which means it will need porting
-> effors for users or is it just a relinking that is needed.
+>> but then I see
+>>
+>> https://github.com/open-source-parsers/jsoncpp/commit/8b7ea09b8055df01866a5ce4142b12ed8f9f13eb
+>>
+>> I dont know if there are API changes which means it will need porting
+>> effors for users or is it just a relinking that is needed.
+> 
+> Same conclusion I came to.  Still the question is open. Should this be
+> reverted?
 
-Same conclusion I came to.  Still the question is open. Should this be
-reverted?
+from my own usecase it does not matter since dunfell is still under 
+porting effort and any version can be used, but others might have 
+different view.
 
--armin
->> On Thu, Jul 9, 2020 at 6:06 PM akuster808 <akuster808@gmail.com
->> <mailto:akuster808@gmail.com>> wrote:
->>
->>
->>
->>     On 7/9/20 8:21 AM, Martin Jansa wrote:
->>>     FYI this "small" upgrade changes ABI version from libjsoncpp22
->>>     to libjsoncpp24 which might cause some issues to people who expect
->>>     relatively stable ABIs in LTS dunfell.
->>     Well that is not good. I did look at the details but apparently I
->>     failed to catch the "soversion" change.
->>
->>     Would you recommend reverting this?
->>
->>     -armin
->>>     On Wed, Jul 1, 2020 at 2:07 AM akuster <akuster808@gmail.com
->>>     <mailto:akuster808@gmail.com>> wrote:
->>>
->>>         From: Pierre-Jean Texier <pjtexier@koncepto.io
->>>         <mailto:pjtexier@koncepto.io>>
->>>
->>>         See full changelog
->>>         https://github.com/open-source-parsers/jsoncpp/releases/tag/1.9.3
->>>
->>>         Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io
->>>         <mailto:pjtexier@koncepto.io>>
->>>         Signed-off-by: Khem Raj <raj.khem@gmail.com
->>>         <mailto:raj.khem@gmail.com>>
->>>         (cherry picked from commit
->>>         65e124eef373680726ac045677cbec7d9080a289)
->>>         Signed-off-by: Armin Kuster <akuster808@gmail.com
->>>         <mailto:akuster808@gmail.com>>
->>>         ---
->>>          .../jsoncpp/{jsoncpp_1.9.2.bb <http://jsoncpp_1.9.2.bb> =>
->>>         jsoncpp_1.9.3.bb <http://jsoncpp_1.9.3.bb>}              | 2 +-
->>>          1 file changed, 1 insertion(+), 1 deletion(-)
->>>          rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.9.2.bb
->>>         <http://jsoncpp_1.9.2.bb> => jsoncpp_1.9.3.bb
->>>         <http://jsoncpp_1.9.3.bb>} (93%)
->>>
->>>         diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
->>>         <http://jsoncpp_1.9.2.bb>
->>>         b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb
->>>         <http://jsoncpp_1.9.3.bb>
->>>         similarity index 93%
->>>         rename from meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
->>>         <http://jsoncpp_1.9.2.bb>
->>>         rename to meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb
->>>         <http://jsoncpp_1.9.3.bb>
->>>         index a88410f2ff..97c6361ad8 100644
->>>         --- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
->>>         <http://jsoncpp_1.9.2.bb>
->>>         +++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb
->>>         <http://jsoncpp_1.9.3.bb>
->>>         @@ -11,7 +11,7 @@ SECTION = "libs"
->>>          LICENSE = "MIT"
->>>          LIC_FILES_CHKSUM =
->>>         "file://LICENSE;md5=fa2a23dd1dc6c139f35105379d76df2b"
->>>
->>>         -SRCREV = "d2e6a971f4544c55b8e3b25cf96db266971b778f"
->>>         +SRCREV = "6aba23f4a8628d599a9ef7fa4811c4ff6e4070e2"
->>>          SRC_URI = "git://github.com/open-source-parsers/jsoncpp
->>>         <http://github.com/open-source-parsers/jsoncpp>"
->>>
->>>          S = "${WORKDIR}/git"
->>>         -- 
->>>         2.17.1
+> 
+> -armin
+>>> On Thu, Jul 9, 2020 at 6:06 PM akuster808 <akuster808@gmail.com
+>>> <mailto:akuster808@gmail.com>> wrote:
 >>>
 >>>
->>
->> 
->>
-
+>>>
+>>>      On 7/9/20 8:21 AM, Martin Jansa wrote:
+>>>>      FYI this "small" upgrade changes ABI version from libjsoncpp22
+>>>>      to libjsoncpp24 which might cause some issues to people who expect
+>>>>      relatively stable ABIs in LTS dunfell.
+>>>      Well that is not good. I did look at the details but apparently I
+>>>      failed to catch the "soversion" change.
+>>>
+>>>      Would you recommend reverting this?
+>>>
+>>>      -armin
+>>>>      On Wed, Jul 1, 2020 at 2:07 AM akuster <akuster808@gmail.com
+>>>>      <mailto:akuster808@gmail.com>> wrote:
+>>>>
+>>>>          From: Pierre-Jean Texier <pjtexier@koncepto.io
+>>>>          <mailto:pjtexier@koncepto.io>>
+>>>>
+>>>>          See full changelog
+>>>>          https://github.com/open-source-parsers/jsoncpp/releases/tag/1.9.3
+>>>>
+>>>>          Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io
+>>>>          <mailto:pjtexier@koncepto.io>>
+>>>>          Signed-off-by: Khem Raj <raj.khem@gmail.com
+>>>>          <mailto:raj.khem@gmail.com>>
+>>>>          (cherry picked from commit
+>>>>          65e124eef373680726ac045677cbec7d9080a289)
+>>>>          Signed-off-by: Armin Kuster <akuster808@gmail.com
+>>>>          <mailto:akuster808@gmail.com>>
+>>>>          ---
+>>>>           .../jsoncpp/{jsoncpp_1.9.2.bb <http://jsoncpp_1.9.2.bb> =>
+>>>>          jsoncpp_1.9.3.bb <http://jsoncpp_1.9.3.bb>}              | 2 +-
+>>>>           1 file changed, 1 insertion(+), 1 deletion(-)
+>>>>           rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.9.2.bb
+>>>>          <http://jsoncpp_1.9.2.bb> => jsoncpp_1.9.3.bb
+>>>>          <http://jsoncpp_1.9.3.bb>} (93%)
+>>>>
+>>>>          diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
+>>>>          <http://jsoncpp_1.9.2.bb>
+>>>>          b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb
+>>>>          <http://jsoncpp_1.9.3.bb>
+>>>>          similarity index 93%
+>>>>          rename from meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
+>>>>          <http://jsoncpp_1.9.2.bb>
+>>>>          rename to meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb
+>>>>          <http://jsoncpp_1.9.3.bb>
+>>>>          index a88410f2ff..97c6361ad8 100644
+>>>>          --- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
+>>>>          <http://jsoncpp_1.9.2.bb>
+>>>>          +++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb
+>>>>          <http://jsoncpp_1.9.3.bb>
+>>>>          @@ -11,7 +11,7 @@ SECTION = "libs"
+>>>>           LICENSE = "MIT"
+>>>>           LIC_FILES_CHKSUM =
+>>>>          "file://LICENSE;md5=fa2a23dd1dc6c139f35105379d76df2b"
+>>>>
+>>>>          -SRCREV = "d2e6a971f4544c55b8e3b25cf96db266971b778f"
+>>>>          +SRCREV = "6aba23f4a8628d599a9ef7fa4811c4ff6e4070e2"
+>>>>           SRC_URI = "git://github.com/open-source-parsers/jsoncpp
+>>>>          <http://github.com/open-source-parsers/jsoncpp>"
+>>>>
+>>>>           S = "${WORKDIR}/git"
+>>>>          --
+>>>>          2.17.1
+>>>>
+>>>>
+>>>
+>>> 
+>>>
+> 
