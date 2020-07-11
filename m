@@ -1,17 +1,17 @@
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com (NAM02-SN1-obe.outbound.protection.outlook.com [40.107.77.49])
- by mx.groups.io with SMTP id smtpd.web10.1609.1594487937844896332
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com (NAM02-SN1-obe.outbound.protection.outlook.com [40.107.77.50])
+ by mx.groups.io with SMTP id smtpd.web11.1619.1594487971223402799
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Jul 2020 10:18:58 -0700
+ Sat, 11 Jul 2020 10:19:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=NF6Pl7FR;
- spf=pass (domain: windriver.com, ip: 40.107.77.49, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=hb/aAG0i;
+ spf=pass (domain: windriver.com, ip: 40.107.77.50, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VeTiqT89Dy9+ppN6LTR/HzmSQfw90dv+QQlMyzGeOloHXN18c9KJ/0i4PMT+fRXFKmvvrPQRRjd2krnqz3tiqPZ3nAMu03p0aXd/N2qEHL8FpT1nO/mmNRWzhRBDeG2FBJ6lYkdPVIdrqKLemgFP45JFvggZLOEvx14fRkS39qudVMeav59H8N5Op/2vwfqMhy9K/6IwwJNNc78q0ktqmfA+zTSWorLZfNruRfZq+4tFVdDziy6yos7CxJ2kzQZba/Jf5yrvSEtxQar8p6alA0rXLOGL01l1iNHKAdby+XcV0sVh0Qsm6XbYd+cvdaTkn5KnfpXrdolBYX2rc1qjFw==
+ b=BOWNwSS0dDaScmdKmS2r8SX7I8+Rje27gszWe0bYmg75ZxAoRPYrOqyIUaexqXPIlGAyeZt6lNOlgpVU+zvg81//ZlM1r0t5jXX3xaGX39BF449Y/X6Lw1ZLUchEMasW4d6nzkZ8d1sJLJVIkMYAfPtF+Vht6QRRgiLrsSL1v1lgKLBlAcLKoc2TRHmPcxNm/HDjQwd1p7gkYoqgp1YZuu8speAINAIGmDxUcwgzNGRN/mJ5NR9Ij7R44WbqWUfUpqiyfLO3kvQnv71EYrQbvQGF+kuvmbPSjexCGJWXMH51ulBzLy1S18OB1MAJZ4l98K7Q3a+cYPkdci+tUWunfw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FgqcA28XZ/C6WxuNNLv5tKSyWSq0aqMr7awkLXDlNuY=;
- b=a1UutSmwJBc9g+PlE/E9IC86B1XfchJxx67oGPU1T41B/YAHq74HVuXxdVMivhvh3SvDfvR77pENNkFCV/2TPIU0feQkEA5Tl9O2lEZq4U8q36jeTuqfDdhh0PRDTPV0lILdN+J4LN4t8hOzirT9xwhwC04rbxYnGQa44JnN751TGzkL1waWeIkbXo04MYZNJmHRg2l9ZHbMSjkZQeCEr44H18YYWfBAyKzu9ADn/eKt5ZNOeB49S4ahZNz/9r8NnB3d8Ab2VltjLW82WTWyngI9PYOTIpXezrDJUcvA94KBZgMGjGORSJhxETwIpHoOj8WUvtWyPgA3wILYRg2n9Q==
+ bh=txcN+wRzEb1dZ+HngjJpJWWglIP38gxr7yihKMO2iGs=;
+ b=b8oqR1vsflZZrkUSdsvWqyOinzD2hxZ1+UqT/rqYvfyHrctwxssu/jT54RaXi3BLVMWpyZN47EI5pUhKbxK3y87TS+hYSJTr2J4eU2168aKb2mME9fUoVmZmeGsjdtOiUTBWtimHKNm1n6qlPnN/ALqxHK5IxJJK3mLsuhMnJHHEO5uRWAR4pKzHkLT84YY83TegU31muCZHjPnhDKAisHrOIWAZohWTzZIety6mPEaNyKAIkXqeDugWqL6fgogaBO2Ci7GQ9tedexMHtTxvu51ppaKwh/fYlAFLZkWdoHejAbGVIyNP6tz3Z6lBUpqlm0LWVe82X+cKt1niEuHcCw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,100 +19,97 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FgqcA28XZ/C6WxuNNLv5tKSyWSq0aqMr7awkLXDlNuY=;
- b=NF6Pl7FRIsXHRqgca9njXxIw3lTryBef6farQBqFXyBo5xW5HGUwr9jw/T5SKhIEsj09ij4jr9SxaqUKn0cxdajH9QyRykygkKKlz9pD8fCPP0ET/FPNX7lZnE43uC/ILG5f8AeMB2g+2+44OJ795VRC747RO+6uC/nu0akz9s8=
+ bh=txcN+wRzEb1dZ+HngjJpJWWglIP38gxr7yihKMO2iGs=;
+ b=hb/aAG0iRCLBYoOsbwBmef7/YqPdGu0iDNKgA+DdVZUrwrOqn5cLQzaf3qkvQ1Bxw887PDl5tS6qj8g9pwmfULEuoo6ngWfv5EzSoGgSXCzBpTIJGItVFRssedUzH7w8fKSIi7d/Jmqx9rGH6Qb2hR7IbWBCqu+uQ6FmyG27fHo=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29) by
  DM6PR11MB2843.namprd11.prod.outlook.com (2603:10b6:5:c7::33) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3174.21; Sat, 11 Jul 2020 17:18:56 +0000
+ 15.20.3174.21; Sat, 11 Jul 2020 17:19:29 +0000
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2]) by DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2%5]) with mapi id 15.20.3153.031; Sat, 11 Jul 2020
- 17:18:56 +0000
-Subject: Re: [oe] [meta-python][PATCH 3/4] python3-natsort: add new package
+ 17:19:29 +0000
+Subject: Re: [oe] [meta-python][PATCH 4/4] python3-croniter: Fix missing rdep
 To: akuster <akuster808@gmail.com>, openembedded-devel@lists.openembedded.org
 References: <20200710040109.22600-1-akuster808@gmail.com>
- <20200710040109.22600-4-akuster808@gmail.com>
+ <20200710040109.22600-5-akuster808@gmail.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <f22daf2e-c1d6-5921-3e16-5ffaa73b05a9@windriver.com>
-Date: Sat, 11 Jul 2020 13:18:54 -0400
+Message-ID: <ff715213-0255-4e9d-fd51-e68ef64f01db@windriver.com>
+Date: Sat, 11 Jul 2020 13:19:28 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200710040109.22600-4-akuster808@gmail.com>
-X-ClientProxiedBy: YTBPR01CA0030.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:14::43) To DM5PR11MB0011.namprd11.prod.outlook.com
+In-Reply-To: <20200710040109.22600-5-akuster808@gmail.com>
+X-ClientProxiedBy: YTBPR01CA0004.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:14::17) To DM5PR11MB0011.namprd11.prod.outlook.com
  (2603:10b6:4:6b::29)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YTBPR01CA0030.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:14::43) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.22 via Frontend Transport; Sat, 11 Jul 2020 17:18:56 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YTBPR01CA0004.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:14::17) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.20 via Frontend Transport; Sat, 11 Jul 2020 17:19:29 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 462c4350-618a-418a-228c-08d825be7e39
+X-MS-Office365-Filtering-Correlation-Id: 1135683e-a32d-4920-2ce7-08d825be91fd
 X-MS-TrafficTypeDiagnostic: DM6PR11MB2843:
 X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB2843483C5771AC30B566C4AF9F620@DM6PR11MB2843.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:138;
+	<DM6PR11MB2843264B9F9296BFFD8339479F620@DM6PR11MB2843.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:854;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	a7saJgcfxynLTR3VsfUCP8P1LEud759MKxGnY2Q7VCEVFwV4T0moLE5ANtHK8N3elC2s+mLUCXhgh06Sr+6GgZ1H9FT5LfHH06tlhGnvK5km+dPg4xhH1PCSB+MUlPVxpVPvaqhrsWnXzLDxe1uy+9sph7f4wlJvSKEACfevhxl5guaT5bjIIGw+YQ5w+7fCo4IB0rA4noOAi18V2dt4gU+ZHY5XFjH5Ggmlem2TjH4M2dgzIAieMXuygLhn6TxjNlT96Hny0CgJ6AudpTZYgCJVtNTshE2mgp0gS1gaql8O4GyireMBQnZsBUpGNm2Bs7adF+pACvvY+PYy7FeSZkB9SNjlcWhp0O5yz9C7JmWPmf0L33UtVxlL+6vCmbJbohuk5CRd9t8u+d2+fjXSAp4yjeClutv1VvWLQEveWa3xN6moFH4SGR5zzsqb8bc0RJp30rbihOMm0Y3i4bZb/Q==
+	SzNtcxk1z8iGVPZvIYeP3/N1f4F6DG4Xc/z5CzlgobPQlzHSNaHki+eAA8+WYhW83KOnA/iYCX/o/bseiqW8l25ObYrko0u9TBL+fymx8s90MJNTHKv55uwdwFixlEJeMge5sEFXEB0HnkviA4seoMuchaicIu7VREsJl1UhgPVYvqiG0Pib5tE7X1d8X/GmbCYy9qGPzuRGAwXdlH3NnsKIe+JzvJzpIw409rmfaH/JEZ2GkNHjcmmh/gn4yjEOyYqBD6GZpIcKtdtF3wpON+w92OgP9fsqt1Q2oeCs+9DpqHYAP4EWieMFqUrXcbl3/xzjnnXZqqgE58jtNPIvxfZOz3Kj5uIgMZYMMbafNfvHG3IvQSmx/O86qYRLwsrMiXKRBCJxgHRb9s5E5tFBvXG74mF8Ev7n/V0xj5UYwYUgmXtQmPqHRok9BoHyslBsZVJw5DXB/x8Xaxifj96TNg==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(366004)(39840400004)(346002)(376002)(136003)(396003)(26005)(66946007)(36756003)(31696002)(478600001)(86362001)(966005)(186003)(2906002)(53546011)(66476007)(66556008)(6486002)(31686004)(16526019)(5660300002)(33964004)(16576012)(52116002)(2616005)(8936002)(956004)(316002)(44832011)(166002)(8676002)(83380400001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	zhnZy7LXSp7SsCgJ4GgBun0wxpGOSIzX+OrZjEx3Po6r5jpmmz8HiCpZPM8e2kGXkH03UjeMzaCCWm8RJtZYnKrmtNOy3sCHiqFov5ZHc0gYKYWw7O3myuSImikxRRP4i+C6AEVr6iF9zHE4ogWwsOWuLaFybggEg14aKxRjnlKnGSufsrr9tiyBiSGpnw1+s0AGb6cS7JA3phjapnP1L+z74BXR7rizd4f8F1tDv2p3WQil5iVrNQBBNENCPgX1dF+FEnPuVB1khEzSOE3/JYxfm4yWOVzijwBc4y/zjlVjLQvCgjVzMrOsAp/vOoF7srF1PlDDlp/7yvxGOZpTDPvRFQoHqFHzM1F64578r+emH0OPLSgTL9Q7MRaPY0IaLKfYb33GPt50tChFinvd1uWlI1m9rPRp3RZ7VI5ZOUtmNV++uU58BB/qocv2sceATTGHj8nQ3FTHdovJ8L1QplJHxODBMUco3cH0Kr75Bf0=
+	wDcw4PHmM7Rj9AHekzvhc2MRTKAdEhf15tp4+gMiGpQIRrV4hNjpQOx4JtedO3rm4Zcsm3fX6CfdzpOPcjbAY4K76pI4yXO+KgAkunzX74Q6w0VyHlcd9X98XcsJt1rwzz+cxHUhGFxDnjG2dYQYhDCA9ExcM6Saa2h1XP1UHn3mlPlUX2B0vrqnCmINcMbyO0xCWfoN7J6TdC++GBzVFmbEjATI5Nzwr7ezBHrAFmDTn9LhcRyjip3WLmoO+DzswcsYXg9oA+KSf9AXb6fZ6s/8KzEb4OWHrDBIbWkIWwTOErnM3mbP0Q1Enh8cO02fjZ2i7ePN3sguVdXxXVhlE2sHJ6z33MqlUHOu8B4WWp7om0lzoa5/eQ3kQNDE3ER5x16idZCJrNXR+CWy2RqgWPJfjWpdAnElOwkK3Z9IJH55ozxWUCpfQ7r7XSu6hcA/ZOV+IxcKGO7bV4kUoLDKUGdbNQbkxzUZfQhhsFv3CI0=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 462c4350-618a-418a-228c-08d825be7e39
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1135683e-a32d-4920-2ce7-08d825be91fd
 X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB0011.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jul 2020 17:18:56.6301
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jul 2020 17:19:29.7866
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xI5pEsjGo5zvowJSXAEjqzr3z+CaLU7nLekRmqMLEAFUCtN8iU7wlvxc61QMXHj1gN/BzBXmcGcA8vChacxD0mcnIzKQ5VHwXu2kIcICJ4Y=
+X-MS-Exchange-CrossTenant-UserPrincipalName: iCSrOUJVka8Li8Li3QGQ/Am5wJtuYegjAgfpgwIHctSKOJ3kUma2tdB1Nv3pzUd8Tbav5NKa0mZyXVE4w5IsWNv9hIqrGU0d2HCVG6cQiUA=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB2843
 Content-Type: multipart/alternative;
- boundary="------------EDE4EE3977445F5A17D617A5"
+ boundary="------------0D4D942089C375D058EDE88D"
 Content-Language: en-US
 
---------------EDE4EE3977445F5A17D617A5
+--------------0D4D942089C375D058EDE88D
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 7/10/20 12:01 AM, akuster wrote:
+> The last update introduced the need for natsort. Fixes this error:
+>    File "/usr/lib/python3.8/site-packages/croniter/croniter.py", line 13, in <module>
+>      import natsort
+> ModuleNotFoundError: No module named 'natsort'
+>
 > Signed-off-by: Armin Kuster <akuster808@gmail.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-devtools/python/python3-natsort_7.0.1.bb  | 11 +++++++++++
->   1 file changed, 11 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-natsort_7.0.1.bb
+>   meta-python/recipes-devtools/python/python3-croniter_0.3.34.bb | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-natsort_7.0.1.bb b/meta-python/recipes-devtools/python/python3-natsort_7.0.1.bb
-> new file mode 100644
-> index 0000000000..e20cdf0fa3
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-natsort_7.0.1.bb
-> @@ -0,0 +1,11 @@
-> +SUMMARY = "Simple yet flexible natural sorting in Python."
-> +SECTION = "devel/python"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=6a96e5ad780a0eea866ecccec4463517"
-> +
-> +PYPI_PACKAGE = "natsort"
-> +SRC_URI[sha256sum] = "a633464dc3a22b305df0f27abcb3e83515898aa1fd0ed2f9726c3571a27258cf"
-> +
-> +inherit pypi setuptools3
-> +
-> +RDEPENDS_${PN} = "python3-fastnumbers python3-icu"
+> diff --git a/meta-python/recipes-devtools/python/python3-croniter_0.3.34.bb b/meta-python/recipes-devtools/python/python3-croniter_0.3.34.bb
+> index 0c28948f63..123d176137 100644
+> --- a/meta-python/recipes-devtools/python/python3-croniter_0.3.34.bb
+> +++ b/meta-python/recipes-devtools/python/python3-croniter_0.3.34.bb
+> @@ -9,4 +9,4 @@ SRC_URI[sha256sum] = "7186b9b464f45cf3d3c83a18bc2344cc101d7b9fd35a05f2878437b149
+>   
+>   inherit pypi setuptools3
+>   
+> -RDEPENDS_${PN} += " python3-dateutil"
+> +RDEPENDS_${PN} += " python3-dateutil python3-natsort"
 >
 > 
 
---------------EDE4EE3977445F5A17D617A5
+--------------0D4D942089C375D058EDE88D
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -124,34 +121,31 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 7/10/20 12:01 AM, akuster wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200710040109.22600-4-akuster808@gmail.com">
-      <pre class="moz-quote-pre" wrap="">Signed-off-by: Armin Kuster <a class="moz-txt-link-rfc2396E" href="mailto:akuster808@gmail.com">&lt;akuster808@gmail.com&gt;</a></pre>
+    <blockquote type="cite" cite="mid:20200710040109.22600-5-akuster808@gmail.com">
+      <pre class="moz-quote-pre" wrap="">The last update introduced the need for natsort. Fixes this error:
+  File &quot;/usr/lib/python3.8/site-packages/croniter/croniter.py&quot;, line 13, in &lt;module&gt;
+    import natsort
+ModuleNotFoundError: No module named 'natsort'
+
+Signed-off-by: Armin Kuster <a class="moz-txt-link-rfc2396E" href="mailto:akuster808@gmail.com">&lt;akuster808@gmail.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200710040109.22600-4-akuster808@gmail.com">
+    <blockquote type="cite" cite="mid:20200710040109.22600-5-akuster808@gmail.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python3-natsort_7.0.1.bb  | 11 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
- 1 file changed, 11 insertions(&#43;)
- create mode 100644 meta-python/recipes-devtools/python/python3-natsort_7.0.1.bb
+ meta-python/recipes-devtools/python/python3-croniter_0.3.34.bb | 2 &#43;-
+ 1 file changed, 1 insertion(&#43;), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-natsort_7.0.1.bb b/meta-python/recipes-devtools/python/python3-natsort_7.0.1.bb
-new file mode 100644
-index 0000000000..e20cdf0fa3
---- /dev/null
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-natsort_7.0.1.bb
-@@ -0,0 &#43;1,11 @@
-&#43;SUMMARY = &quot;Simple yet flexible natural sorting in Python.&quot;
-&#43;SECTION = &quot;devel/python&quot;
-&#43;LICENSE = &quot;MIT&quot;
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=6a96e5ad780a0eea866ecccec4463517">&quot;file://LICENSE;md5=6a96e5ad780a0eea866ecccec4463517&quot;</a>
-&#43;
-&#43;PYPI_PACKAGE = &quot;natsort&quot;
-&#43;SRC_URI[sha256sum] = &quot;a633464dc3a22b305df0f27abcb3e83515898aa1fd0ed2f9726c3571a27258cf&quot;
-&#43;
-&#43;inherit pypi setuptools3
-&#43;
-&#43;RDEPENDS_${PN} = &quot;python3-fastnumbers python3-icu&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-croniter_0.3.34.bb b/meta-python/recipes-devtools/python/python3-croniter_0.3.34.bb
+index 0c28948f63..123d176137 100644
+--- a/meta-python/recipes-devtools/python/python3-croniter_0.3.34.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-croniter_0.3.34.bb
+@@ -9,4 &#43;9,4 @@ SRC_URI[sha256sum] = &quot;7186b9b464f45cf3d3c83a18bc2344cc101d7b9fd35a05f2878437b149
+ 
+ inherit pypi setuptools3
+ 
+-RDEPENDS_${PN} &#43;= &quot; python3-dateutil&quot;
+&#43;RDEPENDS_${PN} &#43;= &quot; python3-dateutil python3-natsort&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -161,4 +155,4 @@ index 0000000000..e20cdf0fa3
   </body>
 </html>
 
---------------EDE4EE3977445F5A17D617A5--
+--------------0D4D942089C375D058EDE88D--
