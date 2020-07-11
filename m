@@ -1,121 +1,75 @@
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com [209.85.215.194])
- by mx.groups.io with SMTP id smtpd.web10.2393.1594406133481677861
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.web11.2894.1594437575953789580
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Jul 2020 11:35:33 -0700
+ Fri, 10 Jul 2020 20:19:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=MYnOJU6R;
- spf=pass (domain: gmail.com, ip: 209.85.215.194, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f194.google.com with SMTP id k27so2898443pgm.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Jul 2020 11:35:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Mkw3RTPL;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id o1so3029432plk.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Jul 2020 20:19:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:message-id:date:user-agent:mime-version
-         :in-reply-to:content-language:content-transfer-encoding;
-        bh=zUjGzAw/NG5TfnpsQF0UoRNAwcMaocNNS0HKOM+/+cI=;
-        b=MYnOJU6R2JL/Y2Y4Y41247Cwbt92Kb8Rwhmm+kHynixB7h18gyBt7riraLj8nysYqM
-         j2UiSU+MiBgzAUAuYr78DPVq1sCRSZKZsich3uK+xY0mnfXwTHERgnGwMuJ+pTloD+fZ
-         wXzAEtoT/+nOEvkqA2Nar0MKtdBigl1q/sRwT9d/Npn3sEGxVQrBzJ2LOkwSL+akLSa8
-         7l0eQLkdl7NHQSk8yH/fxFOJ7S+r5u0JifGM1eABLlBLi5VNOgzznNKFSkO399uj3KTJ
-         NDxAQCcRLyBHDrdKg1ATSJjSoCvyUMp8sgDNLm0e/bYu+6uZfkHi+d+QFYafEWVoue1R
-         KzXg==
+        h=from:to:subject:date:message-id;
+        bh=Frs5SSWcTNSv35iiJ2H5fEOZel7okWNV2ZFS00BK9FQ=;
+        b=Mkw3RTPLqwM1O9vrUM5EnYRvneevY20+ipkiMyNCmPavyqqGJSdPKnduWBSdWNr6gt
+         4HsrPifmph9lOtXGQ2XNKl1PIZPg15XRJ1rAMdtNxE/8hl/NoUPPjV8dFZ7AJOUn62/o
+         Jok/F436VAe2nZ2zEiFC3gii1EzVJ4Vt3Euhb+wLaXXnaZoUEdEo7z+JCGgfkYkEiHhJ
+         xehofdSOkwPVFaa9fFCKbsXd9BEjWoIjqZeQxsQrBGEXdM8rCzjvaKDBM04DXnVchkGU
+         JEy6VeEO/n/0bkL6Lx4nahAuDH4ZRwKsp7hRlsxYfOI6YIxgyLEsQEi2m4nhFzJH9R18
+         +U+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=zUjGzAw/NG5TfnpsQF0UoRNAwcMaocNNS0HKOM+/+cI=;
-        b=e7zDl8ceabZIQkovtDbBru6sPUDsZ/RbsejmP9Cd4sPB9FC4P+Ea5Fk+FID2Us8t71
-         YijyUuUIh3fAf/ECmTIdU7Yzu42hJ/5xQN1jiKcyBgMT5LA3vza8f2TS0T6+lEkhy7ZY
-         YM464EeNQ+9Z0P5I2PGVfavOrdKL2WLX9y25gcHc0Pf7TJ6VxbNq0BQ3yHI/tW3sozw5
-         Dous4psQfdds9B9hIXkBQNJURg9BXranH4WYei8mVjqrhj02M/6QLDoVRh6ryhFyDmdn
-         bbK5E4IrWAoGMNBj/FRWG7qmQQhMRJF2XE4irS9hdzFxClzLd1MntNe8xZbP3UEIAbNp
-         AdhQ==
-X-Gm-Message-State: AOAM5316ggdC7Sh8efNdcltFonk8Kqnd6MzjyaGzwwhUzJXJHIbcGvTA
-	PES/JuYKF6ll+2yUjwAnXwD6PU7ul4U=
-X-Google-Smtp-Source: ABdhPJxCu0ILt9fZvOMExRN6UpVWUu+7GyNuoosa+A58iZ23jCqbBsIH4xP1RK30dosRDXInzbPjOA==
-X-Received: by 2002:a63:29c8:: with SMTP id p191mr61755357pgp.333.1594406132566;
-        Fri, 10 Jul 2020 11:35:32 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:4e0:2036:8379:4d57:501b? ([2601:646:9200:4e0:2036:8379:4d57:501b])
-        by smtp.gmail.com with ESMTPSA id f6sm7305932pfe.174.2020.07.10.11.35.31
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 10 Jul 2020 11:35:32 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][PATCH 1/2] safestringlib: add recipe
-To: Naveen Saini <naveen.kumar.saini@intel.com>,
- openembedded-devel@lists.openembedded.org
-References: <20200710051601.11962-1-naveen.kumar.saini@intel.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Message-ID: <c3dd7c20-08f3-a1b8-d0c2-3b2cf1a8da68@gmail.com>
-Date: Fri, 10 Jul 2020 11:35:31 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <20200710051601.11962-1-naveen.kumar.saini@intel.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+        h=x-gm-message-state:from:to:subject:date:message-id;
+        bh=Frs5SSWcTNSv35iiJ2H5fEOZel7okWNV2ZFS00BK9FQ=;
+        b=EDrk2/UUrqOSMakjT+eornYwv07/q0j6G9iO9RKTUksaF5WtHgeZZQcpdGrS2tCeAc
+         V66V7/GIHY7u1x9M8jNyyn4WzjtOt2LYRcyzp7e5QoDq9pa/BlFjhIJLGQQOY+/lr/IP
+         AEMbNeZbpKM/9T07a/YIp3GvvLM2gu8M8gc0ephq6X5K0WuGacsHn+tXCWRQ7mHxQFNF
+         Pxl/mQHSXExNAy8ZuxvOPpj4AFAK7Hg67gTH3L756TTA1fhZhkdOC09hqCFBHWtj6zyh
+         TeNpr2Lm+H0UwR4O5ixM6uhqD5oGZQUnozNljBskXjed66z8ICDQKFl0KZVzBOTOfPg2
+         UWSA==
+X-Gm-Message-State: AOAM5331nzHFhKdCjTq9WGYyWN0O8CqJC2aTo2DCbrg5n/7lekCzmZkK
+	6/I58Tp6/iPqU6U7CT1Y0cd+Xr9wYSc=
+X-Google-Smtp-Source: ABdhPJxC5HcfTxYn0Gf/pPRczC3SzUwqgWLXdlRJnMOpsoS79/+qPbPiyqNR3kxzQa4NqqHeRorrWw==
+X-Received: by 2002:a17:90a:2562:: with SMTP id j89mr8451262pje.218.1594437575009;
+        Fri, 10 Jul 2020 20:19:35 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:94e8:27ac:fdd9:c160])
+        by smtp.gmail.com with ESMTPSA id f3sm6925461pju.54.2020.07.10.20.19.33
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 10 Jul 2020 20:19:34 -0700 (PDT)
+From: "akuster" <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH 1/5] python3-gmpy2: add new package
+Date: Fri, 10 Jul 2020 20:19:28 -0700
+Message-Id: <20200711031932.5883-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../recipes-devtools/python/python3-gmpy2_2.0.8.bb  | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-gmpy2_2.0.8.bb
 
+diff --git a/meta-python/recipes-devtools/python/python3-gmpy2_2.0.8.bb b/meta-python/recipes-devtools/python/python3-gmpy2_2.0.8.bb
+new file mode 100644
+index 0000000000..c6edcbb320
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-gmpy2_2.0.8.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "GMP/MPIR, MPFR, and MPC interface to Python 2.6+ and 3.x"
++SECTION = "devel/python"
++LICENSE = "GPL-3.0 | LGPL-3.0+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
++                    file://COPYING.LESSER;md5=e6a600fd5e1d9cbde2d983680233ad02"
++
++DEPENDS += "gmp mpfr libmpc"
++
++PYPI_PACKAGE = "gmpy2"
++PYPI_PACKAGE_EXT = "zip"
++SRC_URI[sha256sum] = "dd233e3288b90f21b0bb384bcc7a7e73557bb112ccf0032ad52aa614eb373d3f"
++
++inherit pypi setuptools3
+-- 
+2.17.1
 
-On 7/9/20 10:16 PM, Naveen Saini wrote:
-> The Secure Development Lifecycle (SDL) recommends banning certain
-> C Library functions because they directly contribute to security
-> vulnerabilities such as buffer overflows.
-> 
-> However routines for the manipulation of strings and memory buffers
-> are common in software and firmware, and are essential to accomplish
-> certain programming tasks.
-> 
-> Safer replacements for these functions that avoid or prevent serious
-> security vulnerabilities (e.g. buffer overflows, string format attacks,
-> conversion overflows/underflows, etc.) are available in the SafeString Library.
-> 
-> Ref:
-> https://github.com/intel/safestringlib
-
-We also carry recipe for safec https://github.com/rurban/safeclib
-is this a replacement in some sense ?
-
-> 
-> Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
-> ---
->   .../safestringlib/safestringlib_git.bb        | 26 +++++++++++++++++++
->   1 file changed, 26 insertions(+)
->   create mode 100644 meta-oe/recipes-support/safestringlib/safestringlib_git.bb
-> 
-> diff --git a/meta-oe/recipes-support/safestringlib/safestringlib_git.bb b/meta-oe/recipes-support/safestringlib/safestringlib_git.bb
-> new file mode 100644
-> index 000000000..3d54fc8d6
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/safestringlib/safestringlib_git.bb
-> @@ -0,0 +1,26 @@
-> +SUMMARY = "Safe string operations and memory routines"
-> +SECTION = "libs"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE&COPYING.txt;md5=edd6f8c4c1072d72645ae28cb04bdbce \
-> +                    file://LICENSE;md5=54f68ba2c33474320fcc46b1f2d01249"
-> +
-> +SRC_URI = "git://github.com/intel/safestringlib.git;protocol=https \
-> +        "
-> +
-> +PV = "1.0.0+git${SRCPV}"
-> +SRCREV = "245c4b8cff1d2e7338b7f3a82828fc8e72b29549"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit pkgconfig cmake
-> +
-> +do_install() {
-> +    install -d ${D}${libdir}
-> +    install -d ${D}${includedir}
-> +    install -m 0644 ${B}/libsafestring_shared.so ${D}${libdir}
-> +    install -m 0644 ${B}/libsafestring_static.a ${D}${libdir}
-> +    install -m 0644 ${S}/include/*.h ${D}${includedir}
-> +}
-> +
-> +SOLIBS = ".so"
-> +FILES_SOLIBSDEV = ""
-> 
-> 
-> 
-> 
