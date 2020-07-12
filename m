@@ -1,17 +1,17 @@
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.84])
- by mx.groups.io with SMTP id smtpd.web12.2150.1594578202809750954
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.88])
+ by mx.groups.io with SMTP id smtpd.web11.2225.1594578216854732023
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Jul 2020 11:23:23 -0700
+ Sun, 12 Jul 2020 11:23:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=UOlXBDWM;
- spf=pass (domain: windriver.com, ip: 40.107.94.84, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Fkd9EBNh;
+ spf=pass (domain: windriver.com, ip: 40.107.94.88, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hbGjpD3aITHxyTfu/++GEUNiDvk1gKLnPjiFpEYFIQBWoq9w9sSmpXTH3/zwqSxiliEOkOchdYEgEMKtufsOC6LWHy1XVEfdB7KkiamXUCHv7uC5HtGSW4ziphNRvXjYr8yN2JPRLBUxhT/DCpMctBMU50PIpbFLUUhhDDmDKMZ3yiKOoFHx/bsQbYOhIxCzoHQy2YaN6v6KVypcylq1NNdnHRTHjE5iuJ+OkafDL7qaMia4uFQJxmtDoHmwFKHVY6167hgJ3iv6e8LWhamBwt1+VjX1IkpxMIHZ3Djefzs/jYdetZvGdXM+UBg2tG09vGnUIVTHJqAed9bO//9/Dg==
+ b=NTBtZuSwn6C8u11FkUhaYMUQw1kFWnyyWaorC9lgG4NIYbdjCjxu61cdirZVVGB+L8oC5UF08BaZow8UKG9CyMTgmTB0eYYCDxIOOQ371gGD4cuF6gRr4QPb2n5Cs/FhkT2NZh9JF9+ERzKr0HiFGrawohYAj8QUg1DGGnlPtjayCZBKZ8pFimE4p1EWd6FPUi2Lx8GGVpYRjteKaWHCh+/DxLgC0qVwsELTuQhck2gM6MpEmNc3vVqilyfGDt7gnUc8+hPByeFyK+Atj4wqHc5ku5H5/aYeKfkFaynmHPD+JxvjflOpjNFLi0vpj2Dv9v1J9BCt2PuTZ30t6mpGgA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zYG5OFcpxRMRxPvSU6MUg83GglMQI9uQQzAPzc4L9ZE=;
- b=WuWZOkQg2VrfKURIdjb0xeeO6RQDe3YkumewzJHguj0IJ6nOxeM7K5Ef5nmp/hu12qDHIKOTxrJ0lJgs0k7s74UNbfxckwyesz8sfrDhtFiMvBkxGQgEyGiYqXf8VZTG2adu45btIVCWsxWT+TdIJkV8okZb113sykOjvFgHw/rDmwe3X2Ns3QGYAVGFCCP4UAbrrdFzUl+1egl4MR1fS8UDDfJi/zvmSbugcGeqfs8qJDRxPQ57i7ap2rtKBiJgSykOVp35FFSwkCc/1ejEdaiQgGn68nHfeZPm2TFYTAM6l03TqvQATTiy2P/JOhsKoaDHJbV+d2ecmofqn3UPMw==
+ bh=GUt5KkEqgpRWSfAVk83HMKlksPrw5UNfyXZOyEsiny0=;
+ b=fdT2byPd93V55gfYuA2seHoTyeSuQX//xsKN76l6wLh7MzTbYNFBjnWyfNrlMVSIeXEjvyZOX5sD+idYVCtE0vMyoULMtDbXOUKiqC1fe9SrShcwKe3sSn83bs8fAdwdIigiR5JK+WCQzbp43eT3jWowKX/X1yQy2D27gvWMqoR755ujepvgosW8KPS2wygZ9onpm1fX+VqrwY02CocbL80spFnKsfiRAcn6IcVcBqyAhqevjavhHaioxZLt0zGbH3sZxYG4eMKMi52iagm3jwuxW2Op5wRVDnjNfunOSzOyL14XXjRnia1QS8TxPXZ0FIKmzMOTgiJboYVMy6InBw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,107 +19,131 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zYG5OFcpxRMRxPvSU6MUg83GglMQI9uQQzAPzc4L9ZE=;
- b=UOlXBDWMrkzLYq7m/caFST48pn3gRt+Tn0yfah94t3EeTVTa2Ith/istIj/oKHpYSp1948baGdqJ+mjjbcMYO72TzKQ18LHWWE8awg8TbNxWHaDZymfq8GS3JWHRcsbi4ooXVuLmpcsnDVGLJFxeHU1CQDATg1mO14he+JQV91g=
+ bh=GUt5KkEqgpRWSfAVk83HMKlksPrw5UNfyXZOyEsiny0=;
+ b=Fkd9EBNhKJrq2ru4X/4Qo3Lthx96CnAhey2qEumETCzrNquSq/Ai67fmsJonCOUbbIbVURrkMrnPxgrN2e0WnZ1uOvCIEUzs7ZsUZ1I+2k8oR7ZtjhGL9+yySGZl2TemmE9bHWZrRzQ2489wqSU3yEo4BJPWcEr1OhT3R987oA4=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29) by
  DM6PR11MB2844.namprd11.prod.outlook.com (2603:10b6:5:c0::20) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3174.23; Sun, 12 Jul 2020 18:23:22 +0000
+ 15.20.3174.23; Sun, 12 Jul 2020 18:23:35 +0000
 Received: from DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2]) by DM5PR11MB0011.namprd11.prod.outlook.com
  ([fe80::c970:4bd8:f35c:d6d2%5]) with mapi id 15.20.3174.025; Sun, 12 Jul 2020
- 18:23:22 +0000
-Subject: Re: [oe] [meta-python][PATCH 3/4] python3-mccabe: add recipe for v0.2.1
+ 18:23:35 +0000
+Subject: Re: [oe] [meta-python][PATCH 4/4] python3-requests-toolbelt: add ptest
 To: Sakib Sajal <sakib.sajal@windriver.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200710181555.29809-1-sakib.sajal@windriver.com>
- <20200710181555.29809-4-sakib.sajal@windriver.com>
+ <20200710181555.29809-5-sakib.sajal@windriver.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <12808ba6-be96-6839-0511-498726514392@windriver.com>
-Date: Sun, 12 Jul 2020 14:23:20 -0400
+Message-ID: <ca597a2b-f483-e423-9513-fb102ad891e0@windriver.com>
+Date: Sun, 12 Jul 2020 14:23:33 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200710181555.29809-4-sakib.sajal@windriver.com>
-X-ClientProxiedBy: YT1PR01CA0029.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::42)
+In-Reply-To: <20200710181555.29809-5-sakib.sajal@windriver.com>
+X-ClientProxiedBy: YT1PR01CA0003.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::16)
  To DM5PR11MB0011.namprd11.prod.outlook.com (2603:10b6:4:6b::29)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0029.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::42) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.22 via Frontend Transport; Sun, 12 Jul 2020 18:23:21 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0003.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::16) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.21 via Frontend Transport; Sun, 12 Jul 2020 18:23:34 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 61aa9923-0095-4102-bbc5-08d82690a87c
+X-MS-Office365-Filtering-Correlation-Id: 276cc737-adef-4c24-0979-08d82690b06a
 X-MS-TrafficTypeDiagnostic: DM6PR11MB2844:
 X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB284453DF8F94DA8EE5BB55AF9F630@DM6PR11MB2844.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:549;
+	<DM6PR11MB2844146E27AA486666B4238D9F630@DM6PR11MB2844.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:298;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	6VgqePwkQaEGaweSMDMl1NLhi8u5EOxRfJJ24U5Xc2eJckvmp5k2aU5FNOKs2IsOZKxXkcK4iwri1WZCrJN6B6BMZ8p7nQtyHhJlvSp/2OcuWOlviYp8RM1+b14b4hYZldoGWpqVDSQqZhkB9QtFFo2p3M44D3/oJ1PwHIAJ6mojgjX5JqMO6nDpYGmbUQChsBA6GaPuMMTAOfUZcUSRP2PtBGAikdlLUnIqAZYPBZRO1S5ICLrQ/JdBHGNg42hHvY/A9yrjN4469iKEl9WIRGyQi381CGghdZJIWhqMN0OjwsLNy1CbQ0DsWObfWnDX6DxYiUQN8GohAqi7cOPmkM6RmfzWsje8lOsbZdxO5cp4p3x1PS76TRaSOMyxppFpGfVvl4/K5svuONZyXDImOzwCak0+DHXlmARJNIUpnF21uHOkd83VgntO7tudllZnOZdOWeSUXbo4t+EK23Sahg==
+	i3CmTa134YoJ0hs9vm+cLO1RRHaeYFHcT2rSD/eIXZA52YU0t3v/V/UUR1qA0qCBsqf4T2TH0VPyfSwl+b8xblnel7HtGnk6KkTAE64FATC/FYWnVp35SUjlIaLrZQ2npTabWDIIDQHsAnb6/kigrNQNDs5yIWgKxuzaT/8ymWmh3vBQQFlR3uAZbNUvw8q9yXt1JD+IXyTj9Cw5cd2+iCo7Ja6IrzDPPHp3mlaNjHRGQrsuxlFF9JRMIJaU22K5IRnW1q6uoWxA+eveafouwbudwMgPbBkUlp1C9iU8CnE2j+efGo7xL2xHqAUub0EikrDKSNIOoNl5vE558rnmPlqZlL/SRa2Oj3hA/wgQf1LdrNiYdaZX3Tm1fojooFTKFD5S4ZYBH09e1WR2OuzUvgZ7+gSdJnzELWDucHz3yBXW2bRbmL7c+17vhWaEppGlxPxS9ekmVztr7Viq4mZjCA==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB0011.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(366004)(136003)(39830400003)(376002)(346002)(396003)(86362001)(31696002)(31686004)(66946007)(52116002)(66476007)(5660300002)(16576012)(316002)(66556008)(26005)(966005)(478600001)(33964004)(53546011)(8676002)(8936002)(6486002)(36756003)(2616005)(44832011)(956004)(83380400001)(16526019)(186003)(2906002)(166002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	/S6tlqyU2VX1I5hDxFnYtzIaSTN3roVSuMf69vQAFviQS5tdFQD5Y2y23Ulm12CMYUYrBaJViCplb71sQ8HSX+iey7fvCJtCbyTkV6ZDrKkAO116GJ2bbS5lE11cg3B62S6yiKWfSA/r+7IZx4328HnsPNHIpvrsjP/w9+Yekw2xQtcE2w6uFt5339cD2SuD/p6P9CyESdKm2LbeAR2Oh7dUbPmrVan8xP0eil9nuXeS92cqF89YqP6Le6eQ6KrPJHnmcqbKjt2bdQ6gamcBi7YVWDJYxXVXKrTzJT8QgbL6qarLbwerRkGi2CkMXHeeZL88RfGDsJqll9H+3HO7zcJtJMrNKhmSGpJGQIVAzuveJAso87IN0cLmP+ZeFrzrXsCF9GWTfQzTVgVduNBaq2JEb7mh7FGA7RhQ7CJOl8HH3RzPXnZ1kidSKNbgvmIr9uYGuJKwsET/UwYFj6xS5vTuYlDS8+Ilmbr/yeEc+GQ=
+	QZ4lSHY1T/e43oQTCatOI+k+w0FZs26lMTBPRzUSD3EOxLw2w9nJ7s0LIfwezOK6C960+3m7tqRwPs8g4GPe+CEQCMSve+kcE8eF7vCcFf+8NExbOZ94qocyYDPQlV+PRrYwazl72Mm+u0Gz1gIU9axBu5CFcsQjBSqtUHAoYuLULkDh3VtK8EKUf3Qa3vQb38By2y/M9gc7us0F0Y8AnB+yCV/dAE7IEQyZLEOc3Z2LWDG8ZvTFi1aU0lEfMdJ6/pK5lOED2f2mpNbws79DbDwXrDPAO8dpVQVULYZSSubqSBnSzdah42cTRyPtf0Jg8cX5uqX0x0/3lJNHF7dFm8XWj2bLacMpD/iHq6NfJSXHwqjqwt+yZTelMiGXGXg7H35qFPgRX8lewapavKVTHYCRraDIK+IMdtNiV8oVx2Cc6JqjpYmIwAoh5VB90ptkUyCzT4f/KjmvKZw4ZFtQ+q/T927QR+TWmw08XtHAosw=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 61aa9923-0095-4102-bbc5-08d82690a87c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 276cc737-adef-4c24-0979-08d82690b06a
 X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB0011.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jul 2020 18:23:21.9053
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jul 2020 18:23:35.3568
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DhHxe3r0Bg9joC6pkaQgiOlWcUg0J4vnCyWF4DK0dBUbj7oyM/8P1m9V7/wbVwH7bUURT0Rh2k0/kvUzrZj93mhZqJ4r7hS7ggiuhgm559I=
+X-MS-Exchange-CrossTenant-UserPrincipalName: lXItDaWtDntB5GTcQeXndqSot445Zs4ewC6AfWOfV4hjLOSo0ZWwn0G2A9yoVA38tCxJVEZ7WAGWuDjLVgkcg/tuqtAdgmf6/dxbj2/8tus=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB2844
 Content-Type: multipart/alternative;
- boundary="------------BCB8B0FB877E1BBE8A7932E7"
+ boundary="------------AF289207A42009FFDCCD2DC1"
 Content-Language: en-US
 
---------------BCB8B0FB877E1BBE8A7932E7
+--------------AF289207A42009FFDCCD2DC1
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 7/10/20 2:15 PM, Sakib Sajal wrote:
-> Recipe is brought in from meta-cloud-services
->
 > Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python3-mccabe_0.2.1.bb                | 15 +++++++++++++++
->   1 file changed, 15 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-mccabe_0.2.1.bb
+>   .../python3-requests-toolbelt/run-ptest       |  3 +++
+>   .../python/python3-requests-toolbelt_0.9.1.bb | 22 +++++++++++++++++--
+>   2 files changed, 23 insertions(+), 2 deletions(-)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-mccabe_0.2.1.bb b/meta-python/recipes-devtools/python/python3-mccabe_0.2.1.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest b/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
 > new file mode 100644
-> index 000000000..d3a9971e4
+> index 000000000..b63c4de0d
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-mccabe_0.2.1.bb
-> @@ -0,0 +1,15 @@
-> +DESCRIPTION = "McCabe checker, plugin for flake8"
-> +HOMEPAGE = "https://github.com/dreamhost/cliff"
-> +SECTION = "devel/python"
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://README.rst;md5=aa0383f6aee4f5c20084a97cd13164c4"
+> +++ b/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
+> @@ -0,0 +1,3 @@
+> +#!/bin/sh
 > +
-> +SRC_URI[md5sum] = "5a3f3fa6a4bad126c88aaaa7dab682f5"
-> +SRC_URI[sha256sum] = "5a2a170e47de5593a6abfae1e9542bd2c3924ac62bbe4e6ed96c953c0352243a"
+> +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
+> diff --git a/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb b/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb
+> index 3beb39718..cb1bc607b 100644
+> --- a/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb
+> @@ -5,12 +5,30 @@ AUTHOR = "Ian Cordasco, Cory Benfield"
+>   LICENSE = "Apache-2.0"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=71760e0f1dda8cff91b0bc9246caf571"
+>   
+> +SRC_URI = "file://run-ptest \
+> +          "
 > +
-> +inherit pypi setuptools3
+>   SRC_URI[md5sum] = "b1509735c4b4cf95df2619facbc3672e"
+>   SRC_URI[sha256sum] = "968089d4584ad4ad7c171454f0a5c6dac23971e9472521ea3b6d49d610aa6fc0"
+>   
+> -inherit setuptools3
+> -inherit pypi
+> +inherit pypi setuptools3 ptest
+>   
+>   RDEPENDS_${PN} += " \
+>       ${PYTHON_PN}-requests (>=2.0.1) \
+>   "
 > +
-> +RDEPENDS_${PN} += "${PYTHON_PN}-prettytable \
-> +            ${PYTHON_PN}-cmd2 \
-> +            ${PYTHON_PN}-pyparsing \
-> +           "
+> +RDEPENDS_${PN}-ptest += " \
+> +	${PYTHON_PN}-pytest \
+> +	${PYTHON_PN}-betamax \
+> +	${PYTHON_PN}-mock \
+> +	${PYTHON_PN}-multiprocessing \
+> +"
+> +
+> +do_install_ptest() {
+> +	install -d ${D}${PTEST_PATH}/tests
+> +	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+> +	cp -rf ${S}/setup.py ${D}${PTEST_PATH}
+> +	# remove test test_multipart_encoder.py as it fails,
+> +	# downloaded file is not supported
+> +	rm -f ${D}${PTEST_PATH}/tests/test_multipart_encoder.py
+> +}
 >
 > 
 
---------------BCB8B0FB877E1BBE8A7932E7
+--------------AF289207A42009FFDCCD2DC1
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -131,40 +155,64 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 7/10/20 2:15 PM, Sakib Sajal wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200710181555.29809-4-sakib.sajal@windriver.com">
-      <pre class="moz-quote-pre" wrap="">Recipe is brought in from meta-cloud-services
-
-Signed-off-by: Sakib Sajal <a class="moz-txt-link-rfc2396E" href="mailto:sakib.sajal@windriver.com">&lt;sakib.sajal@windriver.com&gt;</a></pre>
+    <blockquote type="cite" cite="mid:20200710181555.29809-5-sakib.sajal@windriver.com">
+      <pre class="moz-quote-pre" wrap="">Signed-off-by: Sakib Sajal <a class="moz-txt-link-rfc2396E" href="mailto:sakib.sajal@windriver.com">&lt;sakib.sajal@windriver.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200710181555.29809-4-sakib.sajal@windriver.com">
+    <blockquote type="cite" cite="mid:20200710181555.29809-5-sakib.sajal@windriver.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python3-mccabe_0.2.1.bb                | 15 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
- 1 file changed, 15 insertions(&#43;)
- create mode 100644 meta-python/recipes-devtools/python/python3-mccabe_0.2.1.bb
+ .../python3-requests-toolbelt/run-ptest       |  3 &#43;&#43;&#43;
+ .../python/python3-requests-toolbelt_0.9.1.bb | 22 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;--
+ 2 files changed, 23 insertions(&#43;), 2 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python3-mccabe_0.2.1.bb b/meta-python/recipes-devtools/python/python3-mccabe_0.2.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest b/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
 new file mode 100644
-index 000000000..d3a9971e4
+index 000000000..b63c4de0d
 --- /dev/null
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-mccabe_0.2.1.bb
-@@ -0,0 &#43;1,15 @@
-&#43;DESCRIPTION = &quot;McCabe checker, plugin for flake8&quot;
-&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/dreamhost/cliff">&quot;https://github.com/dreamhost/cliff&quot;</a>
-&#43;SECTION = &quot;devel/python&quot;
-&#43;LICENSE = &quot;Apache-2.0&quot;
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://README.rst;md5=aa0383f6aee4f5c20084a97cd13164c4">&quot;file://README.rst;md5=aa0383f6aee4f5c20084a97cd13164c4&quot;</a>
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
+@@ -0,0 &#43;1,3 @@
+&#43;#!/bin/sh
 &#43;
-&#43;SRC_URI[md5sum] = &quot;5a3f3fa6a4bad126c88aaaa7dab682f5&quot;
-&#43;SRC_URI[sha256sum] = &quot;5a2a170e47de5593a6abfae1e9542bd2c3924ac62bbe4e6ed96c953c0352243a&quot;
+&#43;pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;){printf &quot;%s: %s\n&quot;, $NF, $0}else{print}}'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;) {$NF=&quot;&quot;;print $0}else{print}}'
+diff --git a/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb b/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb
+index 3beb39718..cb1bc607b 100644
+--- a/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb
+@@ -5,12 &#43;5,30 @@ AUTHOR = &quot;Ian Cordasco, Cory Benfield&quot;
+ LICENSE = &quot;Apache-2.0&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=71760e0f1dda8cff91b0bc9246caf571">&quot;file://LICENSE;md5=71760e0f1dda8cff91b0bc9246caf571&quot;</a>
+ 
+&#43;SRC_URI = <a class="moz-txt-link-rfc2396E" href="file://run-ptest\&#43;">&quot;file://run-ptest \
+&#43;          &quot;</a>
 &#43;
-&#43;inherit pypi setuptools3
+ SRC_URI[md5sum] = &quot;b1509735c4b4cf95df2619facbc3672e&quot;
+ SRC_URI[sha256sum] = &quot;968089d4584ad4ad7c171454f0a5c6dac23971e9472521ea3b6d49d610aa6fc0&quot;
+ 
+-inherit setuptools3
+-inherit pypi
+&#43;inherit pypi setuptools3 ptest
+ 
+ RDEPENDS_${PN} &#43;= &quot; \
+     ${PYTHON_PN}-requests (&gt;=2.0.1) \
+ &quot;
 &#43;
-&#43;RDEPENDS_${PN} &#43;= &quot;${PYTHON_PN}-prettytable \
-&#43;            ${PYTHON_PN}-cmd2 \
-&#43;            ${PYTHON_PN}-pyparsing \
-&#43;           &quot;
+&#43;RDEPENDS_${PN}-ptest &#43;= &quot; \
+&#43;	${PYTHON_PN}-pytest \
+&#43;	${PYTHON_PN}-betamax \
+&#43;	${PYTHON_PN}-mock \
+&#43;	${PYTHON_PN}-multiprocessing \
+&#43;&quot;
+&#43;
+&#43;do_install_ptest() {
+&#43;	install -d ${D}${PTEST_PATH}/tests
+&#43;	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+&#43;	cp -rf ${S}/setup.py ${D}${PTEST_PATH}
+&#43;	# remove test test_multipart_encoder.py as it fails,
+&#43;	# downloaded file is not supported
+&#43;	rm -f ${D}${PTEST_PATH}/tests/test_multipart_encoder.py
+&#43;}
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -174,4 +222,4 @@ index 000000000..d3a9971e4
   </body>
 </html>
 
---------------BCB8B0FB877E1BBE8A7932E7--
+--------------AF289207A42009FFDCCD2DC1--
