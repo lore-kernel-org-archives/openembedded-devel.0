@@ -1,92 +1,100 @@
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
- by mx.groups.io with SMTP id smtpd.web10.11829.1594608983612352269
+Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
+ by mx.groups.io with SMTP id smtpd.web11.11749.1594608984507952591
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Jul 2020 19:56:23 -0700
+ Sun, 12 Jul 2020 19:56:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=O13Rc3mL;
- spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f177.google.com with SMTP id j20so5384090pfe.5
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2020 19:56:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Byrr+fLl;
+ spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f174.google.com with SMTP id j19so5394037pgm.11
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2020 19:56:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=s3aLqezacXDp82DOsHTEIARI/bmvL2cvg0FppqlYCuA=;
-        b=O13Rc3mLJb//ffNiIrfbn6RlIUeUBVjwjqzfY9N3xE+YK8iUPz2qXbDaGjG2iBdGc4
-         Um5AwC5WNP6XgJg692WKmDshAH4iA2QKiSmLNt6jO4Tn4v7vOGITxQOS9PgSDFwqXsj4
-         zzQ3ZuI6gteDo09qPzpxyAAuQ4pVvcoeIZlfUm1QDBrb+2Y8FFAGmVAIyyEwURjy8OFy
-         nYrTsAwz68StzwhX5j/WVh765bmkt5vd2QdmB7PIEAznRYq4J1+nN1tPovIuRkOyBXRQ
-         0ByvOwH3j7B4/VwhH79LzaU3DG/TFRGUS0UvncLpHMoelgxADiGDyiRwgowgvLBmFzKd
-         vJnA==
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+         :content-transfer-encoding;
+        bh=N5dt3sFbG8akgeByCd0/NUf0GmNmO7INZH9hZx65tCw=;
+        b=Byrr+fLlA4kViaq8CBW3IOs+Uz+/LHhy+WgMgMZaWZiomq9frmXGM6syaiN6cGUGgo
+         GzYUWYrS+a2V8MLhfQSiw5vxj2gKHIT5Z7s5CowD93mTZVozcutn4CaOtuf/0NOPPYyd
+         L4pVrsp30ikzwPYF4b5PSXAFTM9gNcwt+Y2kLpdlHw2Og8hircffrcd5rdmV1r6ctmWu
+         HNLSPOpDiNN8WDU4VW1oi4Ws+vpYI+FPAQ1LKUV0w1fQkKDsNezMAFyPMUIW7HxBT5R4
+         z4J1f9I0oQMaex5sSBKNBtTOKg+clbLlW+xuwasgJIEVY71q+eiStW2wNgPPlTA8HwqU
+         iNEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=s3aLqezacXDp82DOsHTEIARI/bmvL2cvg0FppqlYCuA=;
-        b=T5wELZX3wIc51KjnhgMNxnlE/AY5Dxlx2zdIdF11NoZW3EBSdfM7NkT59LzugHDSol
-         jjPoUnnK+qAC1XiTq2LjYWveIY5yr47KIxtUSSAGbRx3U7BvCZa7lZ3G48HVrD9Hr8Ro
-         BTMbZShiJku3DvOovVTHw9kL7Ofb3c7o3sPhU0MIEDx/vyptTQ3I+QlVlx0oPBuYskbc
-         nSehwY/6BjkyMDui/xPaKcsDwJgPk18876IJKA4l2ebFTzN2TXQhfzKlN3jtUqnr3Nbs
-         lV3+xRgc5AeSUcaton0Ff9on2Hf0LOfIkDJbNSNkLTPTZdK96rvnDUj3aWt7hdKFQvba
-         eHbw==
-X-Gm-Message-State: AOAM532cBUxJ+3Mytl926O9Z97InFa4MFRJRAn5ARKblIkLfFyj2hl9F
-	CKJiKbejKdOMCS1hvnZDcRAZwMPwUn0=
-X-Google-Smtp-Source: ABdhPJy2vcIql4oSuHGtLzsipIrGjDGpMY0bxXahbIC8DAWWLqNU6xGMWzZEFW3QcENwd5mGUmXQ5Q==
-X-Received: by 2002:aa7:9292:: with SMTP id j18mr29787462pfa.128.1594608982952;
-        Sun, 12 Jul 2020 19:56:22 -0700 (PDT)
+         :references:mime-version:content-transfer-encoding;
+        bh=N5dt3sFbG8akgeByCd0/NUf0GmNmO7INZH9hZx65tCw=;
+        b=IrpmGk3hOp1FkEHyQ/U7T8PF9HvmS+HvPbLa0ngs8T7N6Sl6SiPeQcItfRQwjusvuX
+         0RFcti4K63Faze644KIgnR7L3dDy9OVNQFOp+Ihfw9/A/7ZFBMKmMHrVimvVvWCFK7do
+         dfrMl50/l8/zfqxp7/viZZN/pr9oFwOkajIbyt+ZrsitPQolIrFOt1XkFUQRnTAhqpCI
+         EuZQ6vCHzS2rGEEoL1clwaqDXqi/WEApBmq5JOD6+5Nf3YR6egwI+9jJCs9b9gK8NhWV
+         wY3vxHzhl9Ryk7E3sEcoKwNtK2YYootNs0sL66nrCJlRdi73qtihWSOlRqLaxj3/LW2A
+         W+vw==
+X-Gm-Message-State: AOAM530/K6mVssH5ueaCRP4EDr2RvP+kIsIYnR+ckT+ca92BpeHXWqgu
+	RotsPCqLgB8GZ4NbBMbP/rIdJa4N3Fc=
+X-Google-Smtp-Source: ABdhPJzS5A4mN1kqfWAdBCit5ebJJj/vCnLMLFDjXsZxmj0egx5J9TWOH1F/+sOMHTcVq4sX9Rw5UA==
+X-Received: by 2002:a05:6a00:224c:: with SMTP id i12mr20203621pfu.18.1594608983751;
+        Sun, 12 Jul 2020 19:56:23 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e013:ddd8:d9b9:dad6])
-        by smtp.gmail.com with ESMTPSA id u19sm13687976pfk.98.2020.07.12.19.56.21
+        by smtp.gmail.com with ESMTPSA id u19sm13687976pfk.98.2020.07.12.19.56.23
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Jul 2020 19:56:22 -0700 (PDT)
+        Sun, 12 Jul 2020 19:56:23 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 05/18] libmcrypt: set CLEANBROKEN
-Date: Sun, 12 Jul 2020 19:56:01 -0700
-Message-Id: <4deb89233f0c6fc907edc69d232e6e9ece454280.1594608813.git.akuster808@gmail.com>
+Subject: [dunfell 06/18] blueman: upgrade 2.1.1 -> 2.1.3
+Date: Sun, 12 Jul 2020 19:56:02 -0700
+Message-Id: <c94e7930edc25fe5fe10022482915895abb12b23.1594608813.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1594608813.git.akuster808@gmail.com>
 References: <cover.1594608813.git.akuster808@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Changqing Li <changqing.li@windriver.com>
+From: Andreas Müller <schnitzeltony@gmail.com>
 
-reproduce steps:
-1. bitbake libmcrypt
-2. add bb.note('hello') in do_fetch of base.bbclass
-3. bitbake libmcrypt
+2.1.3
+Changes
+  * Force cython to use python language version 3
+Bugs fixed
+  * Fix tooltip not updating when bluetooth is disabled
+  * Fix dbus timeout in DhcClient
+  * Call the right method when pulseaudio crashes
+  * Handle os.remove failing
 
-do_configure failed:
-Making clean in doc
-make[1]: Entering directory 'build/tmp-glibc/work/cortexa72-wrs-linux/libmcrypt/2.5.8-r0/libmcrypt-2.5.8/doc'
-make[1]: *** No rule to make target 'clean'.  Stop.
-make[1]: Leaving directory 'build/tmp-glibc/work/cortexa72-wrs-linux/libmcrypt/2.5.8-r0/libmcrypt-2.5.8/doc'
-Makefile:316: recipe for target 'clean-recursive' failed
+2.1.2
+Bugs fixed
+  * Signal bar updates with multiple adapters
+  * Pairing with pincode
 
-error occurred in autotools_preconfigure, since we have build one time
-in step1, we have CONFIGURESTAMPFILE, and also BB_TASKHASH changed after
-step2, in step3, after do_fetch, ${S} is renewed, but with main Makefile
-exist but no Makefile exist under sub folder, so above error occurred.
-
-set CLEANBROKEN to fix this error
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e2d3ecaeb03027dd34875486ad00c58f921a5595)
+(cherry picked from commit d05070c7d8d1f384914b1243298b4759fd9accae)
+[AK: Dunfell does not support py2 so upgrade seems resonable]
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-crypto/libmcrypt/libmcrypt_2.5.8.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../blueman/{blueman_2.1.1.bb => blueman_2.1.3.bb}             | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/blueman/{blueman_2.1.1.bb => blueman_2.1.3.bb} (94%)
 
-diff --git a/meta-oe/recipes-crypto/libmcrypt/libmcrypt_2.5.8.bb b/meta-oe/recipes-crypto/libmcrypt/libmcrypt_2.5.8.bb
-index be413a1c71..46e694be4a 100644
---- a/meta-oe/recipes-crypto/libmcrypt/libmcrypt_2.5.8.bb
-+++ b/meta-oe/recipes-crypto/libmcrypt/libmcrypt_2.5.8.bb
-@@ -13,3 +13,5 @@ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/mcrypt/files/Libmcrypt/"
- UPSTREAM_CHECK_REGEX = "Libmcrypt/(?P<pver>\d+(\.\d+)+)/"
+diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.1.1.bb b/meta-networking/recipes-connectivity/blueman/blueman_2.1.3.bb
+similarity index 94%
+rename from meta-networking/recipes-connectivity/blueman/blueman_2.1.1.bb
+rename to meta-networking/recipes-connectivity/blueman/blueman_2.1.3.bb
+index 0ea7f6de97..9143a67ae8 100644
+--- a/meta-networking/recipes-connectivity/blueman/blueman_2.1.1.bb
++++ b/meta-networking/recipes-connectivity/blueman/blueman_2.1.3.bb
+@@ -11,8 +11,7 @@ SRC_URI = " \
+     file://0001-Search-for-cython3.patch \
+     file://0002-fix-fail-to-enable-bluetooth.patch \
+ "
+-SRC_URI[md5sum] = "9de89abb31be45bdbf11f7884764a2dc"
+-SRC_URI[sha256sum] = "f1eab2334e5a1587defa80900901048d14c2e8ffa8c0cff7240bc9937a61dbc3"
++SRC_URI[sha256sum] = "3bd02e0cc9e2c1424df1fc2015da710a280ef4c657515727e47eafabf8c2cfde"
  
- inherit autotools-brokensep gettext binconfig
-+
-+CLEANBROKEN = "1"
+ EXTRA_OECONF = " \
+     --disable-appindicator \
 -- 
 2.17.1
 
