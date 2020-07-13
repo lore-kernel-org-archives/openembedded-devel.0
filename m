@@ -1,85 +1,84 @@
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.web10.11842.1594608993907352567
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web10.11844.1594608994680792666
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 12 Jul 2020 19:56:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=RhLSnRap;
- spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id k5so4863363plk.13
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2020 19:56:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=piSNFSKG;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id x9so4886280plr.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2020 19:56:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=daCaLId2yCXqdqF/EYTDpNI/4gXawi3HChCeOjtwUas=;
-        b=RhLSnRapQ6buLAGEj5fYgjfEl2PzGs0MwyjlV55U6kfnkVVQrPdayt9/0GO5eXdrwy
-         3jTbUH5TDI9DQ2kjWwz+BKDLOAOt1Snd//WwECNQLPb3FKRZjvvC3dUURm6fY4nzN6EO
-         7owbqTO9z9wXMgfQHCHs87XbR87U+YrnJWYCPgSloLVz3LuF6EIYLv2DY6+gnBEo8O6C
-         o7t4nPS1rs+TWkhswYQVTquLUWlwk4ZihzT3E85ux42ubiNCnO58IdiUK0eiyiPNXhay
-         Qt3v+ayuO7TjyzjU14XQC1HMlJ5xdo43bIOJxJ5Du4EyvlA7BLk2B3Gh1h+DIpEQpBJR
-         3UIA==
+        bh=EBAOZLkXK0xzM2mZgAxSTDm9MZUUGbr1BeAIC2UZ2tU=;
+        b=piSNFSKG3j6E8L1vmzuX3pX5dlBV2MvOxBT8KJl7ZI2CWCGx6o9nII+iG6kegf5F0Z
+         PJrKTLz2SsXhAQmCt9Q3NkxAmRj6nGQLpZzk/8wH89VkOA8AahClXy0oRff37l2oN1iA
+         Fd6hQLNCe4vtSiZ2HHUDgawwO3hfEqLwNwU10AB8oYH8C6A9/xVOgYnc8gj4ObQ/TRWW
+         i+KppxMtwkmpCOdjS1uULZ3OdqdpWJBzU1EXOQLHnaKG56gkbIJQ7VrOWukY2YXviy0B
+         lCy3PGLZ+WHh0Cx3zSOTOxddxX8LDXIgag8cusZwx7Lz6mLTghMk2au7G6G5zrXZRrbL
+         o/MA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=daCaLId2yCXqdqF/EYTDpNI/4gXawi3HChCeOjtwUas=;
-        b=R56EYVALIR93QwvYgNVotOyGa8ckaOgVLiMicsWgeiI+eRqmsj6pG6ezBDMg5Ckvvv
-         0248T0dLLGCx3ZRhsalpWr+R+H/scbfpzxKUuhchXGD5Xz+7BnvOuc3BzyzyUZHCB79m
-         NxWe8Y3KIDOlL4qDg+ZDV2x4Gr1Qg0T2Bx1cvYWX+9rPlanVaWLovZxuCWpZ78dvMkJY
-         R/LjMPd1NRo7xbd0Hq17DBQCpSmTSOSOBjF9hSTKQGGImr3AyBhQRnwyt0Yg/58RadPE
-         sy+MJxs3yGVN31ylDM5VDOjrUo1jloRjC674x4zmCu5knFeYKhF0w3pvriEjDsip/fHl
-         lxFg==
-X-Gm-Message-State: AOAM532Ps3wfrnNCXWL8JyIVknbROS4GLZWJeYIxtS+RKvhO8W2rvsBT
-	v3Z4PS1M5n4Pfrd+xeVuGaAgktipSGU=
-X-Google-Smtp-Source: ABdhPJxAM+wWoF0MvGBKcOyJYbiCrl11L7tbnucfZhBXE1zl0SZwOG/eWyhEG7vRVfY4qDs9GN2ScA==
-X-Received: by 2002:a17:90a:30ea:: with SMTP id h97mr17909337pjb.32.1594608993336;
-        Sun, 12 Jul 2020 19:56:33 -0700 (PDT)
+        bh=EBAOZLkXK0xzM2mZgAxSTDm9MZUUGbr1BeAIC2UZ2tU=;
+        b=OCi2W8WfsBNoqB8rOfiPSlk816niWw4bEr+Zi1SjgvTPje75LBIc2S/mt1l2mviKYH
+         TOKpFf9owf8xz1Cxt5l+UYx7typYRVNMopie4nLYLxU2JlMQQIbhiDIaAYqa21N362dT
+         hHRydPXPNUJW0UXJmjT93TQ9bh5PFSeuyHIi/mPyVlvwMYifGbbrxys97ctfKTWurrS0
+         9+rbYGOkfDtHdmdmuRi5qMntRh9WnnTIJyHswaGPN0+52vYI5r6se6+Zbk3kkTpjfcaG
+         VTDOktsExHSEJbxwNpFgF3uUn6pYa/Mt9sPn3S9yqHYV0biy7k7LlyVAb8Ib57jRi5Rs
+         h6zQ==
+X-Gm-Message-State: AOAM533hIh98ulZj8ydejrybwQTAe+sX28tzbsufcMvmtTKlQezHFmLj
+	78E+jynNaW8IJZuUeF/50Y7BMjngbvo=
+X-Google-Smtp-Source: ABdhPJzLaz2dp+KUb6x4sZkutdU2orxN15exk/oIUktzwf1b8a3jojZ29ztqTqTEaeLMqa/pF6z4Fg==
+X-Received: by 2002:a17:90a:bf02:: with SMTP id c2mr17114345pjs.114.1594608994096;
+        Sun, 12 Jul 2020 19:56:34 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e013:ddd8:d9b9:dad6])
-        by smtp.gmail.com with ESMTPSA id u19sm13687976pfk.98.2020.07.12.19.56.32
+        by smtp.gmail.com with ESMTPSA id u19sm13687976pfk.98.2020.07.12.19.56.33
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sun, 12 Jul 2020 19:56:33 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 16/18] multipath-tools: disable parallel build as a workaround
-Date: Sun, 12 Jul 2020 19:56:12 -0700
-Message-Id: <2103ef7d6425ead1b802f1185fbd84f75c61f9c3.1594608813.git.akuster808@gmail.com>
+Subject: [dunfell 17/18] drbd-utils: Add CLEANBROKEN to fix rebuild errors
+Date: Sun, 12 Jul 2020 19:56:13 -0700
+Message-Id: <c0d869c0958c28d2e8361961568fc0d20bd1912d.1594608813.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1594608813.git.akuster808@gmail.com>
 References: <cover.1594608813.git.akuster808@gmail.com>
 
-From: "Qi.Chen@windriver.com" <Qi.Chen@windriver.com>
+From: Robert Yang <liezhi.yang@windriver.com>
 
-With parallel build enabled, we got the following error:
+Fixed when rebuild:
+DEBUG: Executing shell function autotools_preconfigure
+NOTE: make clean
+aclocal
+autoheader
+autoconf
 
-  ld: error in libsg.o(.eh_frame); no .eh_frame_hdr table will be created
-  ....
-  ld: BFD (GNU Binutils) 2.34.0.20200220 internal error, aborting at ../../bfd/merge.c:933 in _bfd_merged_section_offset
-  ....
-  | make[1]: *** [Makefile:24: libcheckcciss_tur.so] Error 1
-  | make[1]: *** Waiting for unfinished jobs....
+You need to call ./configure with appropriate arguments (again).
 
-However, looking at the Makefile, it does not seem to have problem.
+make: *** [Makefile:287: config.status] Error 1
 
-So disable the parallel build as a workaround.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 45d6317353ea7431e2ffbe0419ba7e07a911265b)
+(cherry picked from commit 922e061fdbbc80c44f49866c7b08b2e09e4a3d0a)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-networking/recipes-support/drbd/drbd-utils_9.12.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-index af34a4b392..8b0c89338f 100644
---- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-+++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-@@ -116,3 +116,4 @@ FILES_kpartx = "${base_sbindir}/kpartx \
-                "
- 
- RDEPENDS_${PN} += "kpartx"
-+PARALLEL_MAKE = ""
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.12.0.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.12.0.bb
+index b83f68f8c1..5dabdd51d0 100644
+--- a/meta-networking/recipes-support/drbd/drbd-utils_9.12.0.bb
++++ b/meta-networking/recipes-support/drbd/drbd-utils_9.12.0.bb
+@@ -56,3 +56,5 @@ FILES_${PN} += "${nonarch_base_libdir}/drbd \
+                 ${nonarch_libdir}/drbd \
+                 ${nonarch_libdir}/tmpfiles.d"
+ FILES_${PN}-dbg += "${nonarch_base_libdir}/drbd/.debug"
++
++CLEANBROKEN = "1"
 -- 
 2.17.1
 
