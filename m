@@ -1,97 +1,86 @@
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com [209.85.214.194])
- by mx.groups.io with SMTP id smtpd.web10.11834.1594608986383136867
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web11.11750.1594608987151850912
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Jul 2020 19:56:26 -0700
+ Sun, 12 Jul 2020 19:56:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=GU8dXRH4;
- spf=pass (domain: gmail.com, ip: 209.85.214.194, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f194.google.com with SMTP id w17so4869193ply.11
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2020 19:56:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Lr1eiX84;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id t15so5509997pjq.5
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2020 19:56:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=5p6CnYvoi8ggw/k1b4kWwC47U/h0RP9ZkxQM5gVdQuc=;
-        b=GU8dXRH4vSs73xPe3RuI/F0RcA+13jV2VZHcfP9SrEdTG6qC7FrGkcr5LmXjwvRynH
-         3nZMCY//DFbeM6rTZu2K4h0uVe0kzE9pc8Xn2x7ha8tPQ/zhsYMsKXb4mFMgzBjf8y8D
-         wh+w3s8+hZ+gRS/GVi+VoOxVZCju1ArVu+5zQdJJybmkVIpQTBQn+OgyYN49ssNU6fRX
-         7y9KPmgBXTvBw6p4uy1D1D7H0XARqZCR8xtsFVqLQzDR+JR7hVJLF+RryXSBzkpoMzjT
-         B8pAzzyJRnfwdrt0gccI+U0XTKWDsYkUMPrk4d9Xs2jB6wn2yF5STizBg+hg6Pms0Qj2
-         l2hg==
+        h=from:to:subject:date:message-id:in-reply-to:references;
+        bh=DLT9WHU4BNxPh5T5dginVxWogcyKlrGfBqf/RtN0TUc=;
+        b=Lr1eiX84gBS0eEprq0sCZIz3E4Lw7dZ2j3uPpWiwlB83gNYyHa+TiV+nlHoxcgrQyk
+         Qztf18QrydjFseqcO94uIYtHQk8Z2hMAiVSTfGZxWLHHjfTW9yNFlwuPdZphvgvBz2Ta
+         IlBUefkkHVhr6YAZSxw55rVtABCda5rbRyen7HONjQXmU14ebBt3Kxs46HJlaZUOvgX0
+         wPbstKlTwF52hMKJQRkGWL2t3BHRotKb5s/8ROozxqeo/36nkWlK4XpP5AXtFgCz76LZ
+         EgXoX59JDS+LxJTnM0mTtHiK9ORlnzdV5TZFpwD8lvSenbSDNciCj83Y961IH9Q3waSm
+         mLwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=5p6CnYvoi8ggw/k1b4kWwC47U/h0RP9ZkxQM5gVdQuc=;
-        b=nC97XqfYLNmHUruvZZ5HAaaYEqXHHtLyxeDYcB06y8DibmLvRkBtys0wUSC9J7py0B
-         J4DXz+kSLUPAxDtWJ/Fi6biCoNJQ+9jZrKZtkHr6glHMkGBBrH4VwUJ/ptQRqcB7pBVb
-         TJs2TegAWjHVeE5theuN4RXM5F2B3GrIbHoZV5iyMfgy2GSF1tqAMzcCxMJEr3ZM6iji
-         trqrlfT7WMpqRlry9WISxLmVdPBFGx6QVTxR9ACoadCcpOBbnFPBaP1xgegy1LrJyPvw
-         zf7sdnTSO7wzjvnMu6anFm0M5nBiOh7QGPbTUD0KNAdr9QCT3hRR2DCL8MN0DvqZkFB/
-         aoQg==
-X-Gm-Message-State: AOAM532fPx1rocyEUvh+mj9GtPbLm5EPxM9prjIV0BOXLZDb3iO+Qyf1
-	gHXH6KjQ6gSmYc5JlrxQRJVCvueiH6w=
-X-Google-Smtp-Source: ABdhPJym6WSStqKLpHoh0SZtuP9qihNrT0Z98uhtAv3LfLU/xg1ksSlzkw5cnMu90M94qdSqkHEhow==
-X-Received: by 2002:a17:90a:290e:: with SMTP id g14mr18402202pjd.85.1594608985765;
-        Sun, 12 Jul 2020 19:56:25 -0700 (PDT)
+         :references;
+        bh=DLT9WHU4BNxPh5T5dginVxWogcyKlrGfBqf/RtN0TUc=;
+        b=ZQhcEzeEXEwNtVfpqEUNiiIyeVJsklSCxHSddhkxQc9mjwAAo/WAzo0PPVXHWVZ6d8
+         Gqm/YlmOXjBwWnegAJCvNKcjJBm+ZQnRtE7KY/vvKukXnSV6KUUnhOKyONPGtZrij73g
+         E6EU1ekub9bMT/UX8snH1QNk3lWCfZhxyeswK0O4dxLGxLlLmhhi0LRbwQLlhnYOqQhM
+         JQ7/QPUE2TtzxNONzPZcHAGFRakigTKuwJBVsHYiTOKwZ2NJy38y2YFQ/zHTqL0PRYhM
+         LE2fmQX/OjHUaLh0WvNq0SVRU+CFEIrQzdMMbdZO60ChNYz0KSeKLUW5gF+9/+MIw1mM
+         FbvQ==
+X-Gm-Message-State: AOAM530o9sCMc+jEfoQSKhIkFnCLJr+1ab39pHM6gxRb9iVD7EgxKg3M
+	rGGIbC7eUmaphpkHdu1z3IVbaK0u82c=
+X-Google-Smtp-Source: ABdhPJwXQFev+8YJDn0nXBGR/gmJD8Ayd7l8v/TyDAcfOXf4Jz3/+NSCjMJ7+HDppg6Mv4bklcA5Xg==
+X-Received: by 2002:a17:902:d710:: with SMTP id w16mr3556786ply.295.1594608986547;
+        Sun, 12 Jul 2020 19:56:26 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e013:ddd8:d9b9:dad6])
-        by smtp.gmail.com with ESMTPSA id u19sm13687976pfk.98.2020.07.12.19.56.24
+        by smtp.gmail.com with ESMTPSA id u19sm13687976pfk.98.2020.07.12.19.56.25
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Jul 2020 19:56:25 -0700 (PDT)
+        Sun, 12 Jul 2020 19:56:26 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 08/18] ibus: upgrade 1.5.21 -> 1.5.22
-Date: Sun, 12 Jul 2020 19:56:04 -0700
-Message-Id: <66a457908d72cd75edf687b10b409882c0fa9bc3.1594608813.git.akuster808@gmail.com>
+Subject: [dunfell 09/18] Fix build error when enable multilib.
+Date: Sun, 12 Jul 2020 19:56:05 -0700
+Message-Id: <b1b6f976aae12df18fb3aa5432b405e2c4431103.1594608813.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1594608813.git.akuster808@gmail.com>
 References: <cover.1594608813.git.akuster808@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-From: Andreas Müller <schnitzeltony@gmail.com>
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 
-1.5.22
+ERROR: tracker-miners-2.3.3-r0 do_package: QA Issue: tracker-miners:
+Files/directories were installed but not shipped in any package:
+  /usr/lib64/systemd
+  /usr/lib64/systemd/user
+  /usr/lib64/systemd/user/tracker-extract.service
+  /usr/lib64/systemd/user/tracker-writeback.service
+  /usr/lib64/systemd/user/tracker-miner-fs.service
 
-* GDBusAuthObserver security fix 3d442db
-* Use XDG_CACHE_HOME for Unix socket directory a141a14 982c40f 5742e1b d53401e a1705ad
-* Hangul button press handling 25d11f5 c662a02 ecc3465
-* Fix deprecated APIs 48a8d7e 35863d8
-* Bug fixes 773420f 745ffb8 26a8105 bccf94d d50627f 7486385 cd4fef5
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 43e3c0da024f49e428aff6eef94feef8a17bf941)
+(cherry picked from commit 02afb13f5dde533e97617635fdc1464fcade038c)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-gnome/recipes-support/ibus/ibus.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-gnome/recipes-support/ibus/ibus.inc b/meta-gnome/recipes-support/ibus/ibus.inc
-index 0f4ae7d04b..1bbeb2c481 100644
---- a/meta-gnome/recipes-support/ibus/ibus.inc
-+++ b/meta-gnome/recipes-support/ibus/ibus.inc
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb b/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb
+index b40787f3c9..e2ced395c1 100644
+--- a/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb
++++ b/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb
+@@ -60,6 +60,10 @@ PACKAGECONFIG[libseccomp] = ",,libseccomp"
+ # not yet in meta-gnome
+ PACKAGECONFIG[rss]        = "-Dminer_rss=true,-Dminer_rss=false,libgrss"
  
- inherit autotools-brokensep pkgconfig gobject-introspection gettext gtk-doc vala
- 
--PV = "1.5.21"
-+PV = "1.5.22"
- 
- DEPENDS = "unicode-ucd"
- 
-@@ -13,7 +13,7 @@ SRC_URI = " \
-     git://github.com/ibus/ibus.git \
-     file://0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch \
- "
--SRCREV = "ae0040c73466bb6e78fce5e669a55fcce6ffd16d"
-+SRCREV = "e3262f08b9e3efc57808700823b0622ec03a1b5f"
- S = "${WORKDIR}/git"
- 
- PACKAGECONFIG[appindicator] = "--enable-appindicator,--disable-appindicator,qtbase"
++EXTRA_OEMESON += " \
++    -Dsystemd_user_services=${systemd_user_unitdir} \
++"
++
+ FILES_${PN} += " \
+     ${datadir}/dbus-1 \
+     ${datadir}/tracker \
 -- 
 2.17.1
 
