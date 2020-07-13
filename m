@@ -1,50 +1,50 @@
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.web10.11831.1594608985399052374
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com [209.85.214.194])
+ by mx.groups.io with SMTP id smtpd.web10.11834.1594608986383136867
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Jul 2020 19:56:25 -0700
+ Sun, 12 Jul 2020 19:56:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=j4V/agBe;
- spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id l63so5394359pge.12
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2020 19:56:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=GU8dXRH4;
+ spf=pass (domain: gmail.com, ip: 209.85.214.194, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f194.google.com with SMTP id w17so4869193ply.11
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2020 19:56:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=U+CN3sKdbheip9Nqwpr6MJOBkQk0wAml85UmVleNBSM=;
-        b=j4V/agBedfZFHYX4IbUzmcF35rbbq0BcnR8uuVB73huMNZtR0PztyuJErB9Uwn/Hd7
-         YtevzCopoGAS9M+B6shkBDyfAct31cw+E/Ihu+SCrhOx99W5iJWb1r33OYaQ5JyrEFLc
-         L5KmZi8o8enfLdR34b4p7CQOcOfvpS/y3CzigQz43RVRdzF7kikJCAAZlpTZgVBDRfsE
-         5wqJdbuewNAF2IDwGuiWsWmWp8J7UYyKOKPIB0bNWRHaIBHjRP1DBfuh2NY14rj1kCZM
-         C2dQryT/GLvYTu2UmMCAE5QTeFGxMONLguY9wkNgYvrfP356kOBKLQg4G1mBiKbidIvI
-         HyyQ==
+        bh=5p6CnYvoi8ggw/k1b4kWwC47U/h0RP9ZkxQM5gVdQuc=;
+        b=GU8dXRH4vSs73xPe3RuI/F0RcA+13jV2VZHcfP9SrEdTG6qC7FrGkcr5LmXjwvRynH
+         3nZMCY//DFbeM6rTZu2K4h0uVe0kzE9pc8Xn2x7ha8tPQ/zhsYMsKXb4mFMgzBjf8y8D
+         wh+w3s8+hZ+gRS/GVi+VoOxVZCju1ArVu+5zQdJJybmkVIpQTBQn+OgyYN49ssNU6fRX
+         7y9KPmgBXTvBw6p4uy1D1D7H0XARqZCR8xtsFVqLQzDR+JR7hVJLF+RryXSBzkpoMzjT
+         B8pAzzyJRnfwdrt0gccI+U0XTKWDsYkUMPrk4d9Xs2jB6wn2yF5STizBg+hg6Pms0Qj2
+         l2hg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=U+CN3sKdbheip9Nqwpr6MJOBkQk0wAml85UmVleNBSM=;
-        b=PmchiMsNf0DR0SCRDlNevurx5TT08lyW7WUCSCyM71gIoTbJimGar+vsJpczoaIwz2
-         zZKhyvyn4+QM0g/v7cxqWMdPJj/lDqb/RIypYGLkNUxL9T0Kqjk5vaLQieu2+oE1bwif
-         8uOzGTNS6AKNOL9XwQlENovCy/lv3eoPw4h/BDyyyJbvJQC9F1vyOxg/6mqOX2ACUZMw
-         5sYLmO7SVxxnc9LBh/L1n6l95gQVYK2rzN7deqlR9Ox04iYfSxKugkkOG0meUHGPKmsA
-         FWPRXhmT4vl0RHm3BV7ps/zdPxGz1uV8wua0MYfJctFQHtHyWenHpY+ZwaellzgKC4td
-         KhbQ==
-X-Gm-Message-State: AOAM53202TGOa3uqwVugWXgo9AX/gom5s8R/EHZ4RH1FmBZikQUZtFUt
-	qsCfepHIVJqEXJX252KLhGzzRJ2m6W8=
-X-Google-Smtp-Source: ABdhPJwiCae9xmlNF1hd1ZL1c++/mKBgI2wT/X74q7DGWvzYRaZ3gKaoFrHBHAcjs2OprgZeoCgT3Q==
-X-Received: by 2002:a62:794e:: with SMTP id u75mr59504534pfc.298.1594608984775;
-        Sun, 12 Jul 2020 19:56:24 -0700 (PDT)
+        bh=5p6CnYvoi8ggw/k1b4kWwC47U/h0RP9ZkxQM5gVdQuc=;
+        b=nC97XqfYLNmHUruvZZ5HAaaYEqXHHtLyxeDYcB06y8DibmLvRkBtys0wUSC9J7py0B
+         J4DXz+kSLUPAxDtWJ/Fi6biCoNJQ+9jZrKZtkHr6glHMkGBBrH4VwUJ/ptQRqcB7pBVb
+         TJs2TegAWjHVeE5theuN4RXM5F2B3GrIbHoZV5iyMfgy2GSF1tqAMzcCxMJEr3ZM6iji
+         trqrlfT7WMpqRlry9WISxLmVdPBFGx6QVTxR9ACoadCcpOBbnFPBaP1xgegy1LrJyPvw
+         zf7sdnTSO7wzjvnMu6anFm0M5nBiOh7QGPbTUD0KNAdr9QCT3hRR2DCL8MN0DvqZkFB/
+         aoQg==
+X-Gm-Message-State: AOAM532fPx1rocyEUvh+mj9GtPbLm5EPxM9prjIV0BOXLZDb3iO+Qyf1
+	gHXH6KjQ6gSmYc5JlrxQRJVCvueiH6w=
+X-Google-Smtp-Source: ABdhPJym6WSStqKLpHoh0SZtuP9qihNrT0Z98uhtAv3LfLU/xg1ksSlzkw5cnMu90M94qdSqkHEhow==
+X-Received: by 2002:a17:90a:290e:: with SMTP id g14mr18402202pjd.85.1594608985765;
+        Sun, 12 Jul 2020 19:56:25 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e013:ddd8:d9b9:dad6])
-        by smtp.gmail.com with ESMTPSA id u19sm13687976pfk.98.2020.07.12.19.56.23
+        by smtp.gmail.com with ESMTPSA id u19sm13687976pfk.98.2020.07.12.19.56.24
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Jul 2020 19:56:24 -0700 (PDT)
+        Sun, 12 Jul 2020 19:56:25 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 07/18] modemmanager: upgrade 1.12.10 -> 1.12.12
-Date: Sun, 12 Jul 2020 19:56:03 -0700
-Message-Id: <f032374e55cf2560424c428356bc6230b601cdb7.1594608813.git.akuster808@gmail.com>
+Subject: [dunfell 08/18] ibus: upgrade 1.5.21 -> 1.5.22
+Date: Sun, 12 Jul 2020 19:56:04 -0700
+Message-Id: <66a457908d72cd75edf687b10b409882c0fa9bc3.1594608813.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1594608813.git.akuster808@gmail.com>
 References: <cover.1594608813.git.akuster808@gmail.com>
@@ -54,37 +54,44 @@ Content-Transfer-Encoding: 8bit
 
 From: Andreas Müller <schnitzeltony@gmail.com>
 
+1.5.22
+
+* GDBusAuthObserver security fix 3d442db
+* Use XDG_CACHE_HOME for Unix socket directory a141a14 982c40f 5742e1b d53401e a1705ad
+* Hangul button press handling 25d11f5 c662a02 ecc3465
+* Fix deprecated APIs 48a8d7e 35863d8
+* Bug fixes 773420f 745ffb8 26a8105 bccf94d d50627f 7486385 cd4fef5
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit f0a9b8bfab39e6b140bcb63f55cdadb692e7e91a)
-[ak: 1.12.x is a stable release]
+(cherry picked from commit 43e3c0da024f49e428aff6eef94feef8a17bf941)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{modemmanager_1.12.10.bb => modemmanager_1.12.12.bb}   | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.12.10.bb => modemmanager_1.12.12.bb} (93%)
+ meta-gnome/recipes-support/ibus/ibus.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.10.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.12.bb
-similarity index 93%
-rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.10.bb
-rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.12.bb
-index deab6f0466..b0ab46f3f2 100644
---- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.10.bb
-+++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.12.bb
-@@ -11,11 +11,8 @@ inherit gnomebase gettext systemd vala gobject-introspection bash-completion
+diff --git a/meta-gnome/recipes-support/ibus/ibus.inc b/meta-gnome/recipes-support/ibus/ibus.inc
+index 0f4ae7d04b..1bbeb2c481 100644
+--- a/meta-gnome/recipes-support/ibus/ibus.inc
++++ b/meta-gnome/recipes-support/ibus/ibus.inc
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
  
- DEPENDS = "glib-2.0 libgudev intltool-native libxslt-native"
+ inherit autotools-brokensep pkgconfig gobject-introspection gettext gtk-doc vala
  
--SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz \
--           "
--
--SRC_URI[sha256sum] = "b2b3058bbb72adf98b24707fdbebe58e590644a38145e30d574f685f154bf8aa"
--
-+SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz"
-+SRC_URI[sha256sum] = "a4fc4b33c0e8ae9372885f86fa033f3c1a89a76cd59a3458670eff1824222a3d"
- S = "${WORKDIR}/ModemManager-${PV}"
+-PV = "1.5.21"
++PV = "1.5.22"
  
- PACKAGECONFIG ??= "mbim qmi \
+ DEPENDS = "unicode-ucd"
+ 
+@@ -13,7 +13,7 @@ SRC_URI = " \
+     git://github.com/ibus/ibus.git \
+     file://0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch \
+ "
+-SRCREV = "ae0040c73466bb6e78fce5e669a55fcce6ffd16d"
++SRCREV = "e3262f08b9e3efc57808700823b0622ec03a1b5f"
+ S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG[appindicator] = "--enable-appindicator,--disable-appindicator,qtbase"
 -- 
 2.17.1
 
