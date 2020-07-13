@@ -1,87 +1,81 @@
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com [209.85.214.193])
- by mx.groups.io with SMTP id smtpd.web12.11821.1594608989034563602
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web10.11838.1594608990237499285
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Jul 2020 19:56:29 -0700
+ Sun, 12 Jul 2020 19:56:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=H4NKmUtL;
- spf=pass (domain: gmail.com, ip: 209.85.214.193, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f193.google.com with SMTP id f2so4874100plr.8
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2020 19:56:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=NqxE6bIw;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id f16so5515629pjt.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2020 19:56:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=6bowGLc+9kNPmkUCl9G8Qtjo6EfLx8G6v/tXNpqCAjk=;
-        b=H4NKmUtL47UwJFn49Ejsp5Weu6MeSksa1naw292dhoAtyhwuWZ8MeJBqKbrO4yZc+m
-         AXiUOErw0RQT8Bo3KmNJcq+ZViNcZQ5QaI8p/I7coswms1u9JE2xRKf8qdIR1e3SCDVn
-         atM1hg8AIrrgcAV4tcjGEUXaC+7w7Ta90iqGHa4fATBXpYJQSz939nIeQ94+4JFhtjwn
-         4+vNbpCoYjgthKc7ekQeIXLSGA2EQ+zkF3iC4WSWOB6pOaHWPFu6zokhC6e2nPTW0sHv
-         6E1GwtBJVjG4DqE3B6TEs8rON5kBO+2Azj+RP2O3fwCKCTypvQ5wghm8nn6shkDS4Uac
-         bDog==
+        bh=EP4hxRe2CJXKZ4sqaOUQtK793kq7uPBvTLfocfWlk90=;
+        b=NqxE6bIw+05jsDMQiurSFahWdmzFPsVJ6q+GAIDnmCM8IbjGoRvRtMA+Zia/U0rdAq
+         7nKi4xXNK4GEv3vcFeQOhclLrF/Ns+/XwEGv6QvAdmyqOXwcSeWYudZNVUETw/a8XMW9
+         zbgWsAzgBCciw2BOq61wmrnUyWjMtbmEqDTnKQxneZm+w1rANcLVx72JN+HEZBls5Oxu
+         WmUduaC7lMvBX6vYqLN/bCKh6R7o57nNOFsNx/v1VWlZ4WAhpBKL8hAQTz5ht5GInf2o
+         v7m6PVjOPZ+uIMFzbzqTz9Q/GUNeaWlhM+aGwx5Nk5o92cili3CKR3bm0Z0AeGIWiskW
+         nDzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=6bowGLc+9kNPmkUCl9G8Qtjo6EfLx8G6v/tXNpqCAjk=;
-        b=FVLnW72vmZknsj4RjiNpBf5QLoxw+xkEWKTwzAny6XQR01cJLmb6p6ue3s83a/0zqE
-         ZkoLNu7qRJVHbQHWwCEEsa9A9tgffA0TG15m7sZSMYnkQ34GZJGZwib5Lf397wovbIVG
-         pF0OgKwSCh/vV5aTrObQefml+qve4lRHVZfFX9Lsy07h2A7jBfXu2jd6vslV6QiFQbFZ
-         ghYCrTXkAlhGHiDeCuNWldDSpd0Qupk0OBXJg8ImTAbzpKLNY/Yrw8gor0Qs3zlNslnW
-         MUp0I0Glm2BQ1uEHS3hX7CVYshlEMJ8SYrsagolY2oUDb/xCdyPH9BKTQOwhrBLM8BDs
-         ZaVg==
-X-Gm-Message-State: AOAM5319rp50d2hTZVpC2/eVbu/3YrvrhkDJgjZHnYRZ98+29i/GixlR
-	spC/3jYIsbBQVQAxuDeLNzGVl5ELui8=
-X-Google-Smtp-Source: ABdhPJy5+ciqR78Y7Ku3QOH5R0U90J0rc4XBQ1rSXiTi0IE5cGdP/VmWkN2Lpmjnj1SRnLk9iOM/qQ==
-X-Received: by 2002:a17:902:fe85:: with SMTP id x5mr61399642plm.282.1594608988458;
-        Sun, 12 Jul 2020 19:56:28 -0700 (PDT)
+        bh=EP4hxRe2CJXKZ4sqaOUQtK793kq7uPBvTLfocfWlk90=;
+        b=U/lEprwLbKk/RYeqBT0BfrNoqOjzAsIAwcOI6uKGyz4OSpGpsNWVlzEHboBYAA/om6
+         GcWOtl64xhBuZ2lkAitKoYZIqQOzl3RaAr2XkvYZ1NEaEbxdTNZ86kAUco4IcRRreWM/
+         z0fbenZUsgsX4/2xRbABDSkdaDublxaRIcQUnwME/A96xrzYqWQN0tP4okhCBOEFWrqK
+         Iv+it626lYWSNWV7rPfQdgvV6ohbXvuVpk1zazQtySM9GDkaGu/qD1CwwGLQBId1c3Zj
+         amNll4bYaGnTQvlEyJFxhvWdGfi+G2S2oAmk4+B5kYhXDn/EfoUEmig6T/mq8n+jZDtM
+         OJrg==
+X-Gm-Message-State: AOAM5322wB9VFww7v8mpv1PHTFezVrgiMAhoftpoltlAbwqZyHPfUVJg
+	F5UOT3nImj4kZd/UlFYr8XgNqM+VDmo=
+X-Google-Smtp-Source: ABdhPJz2Gjcg0sK1XahgICAJQc9MvdAWUxN6q9qQNx8Gc2o6tAn1uJzqWKme1cBK5cjRniLkSrGkEw==
+X-Received: by 2002:a17:90a:a887:: with SMTP id h7mr18100317pjq.0.1594608989639;
+        Sun, 12 Jul 2020 19:56:29 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e013:ddd8:d9b9:dad6])
-        by smtp.gmail.com with ESMTPSA id u19sm13687976pfk.98.2020.07.12.19.56.27
+        by smtp.gmail.com with ESMTPSA id u19sm13687976pfk.98.2020.07.12.19.56.28
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Jul 2020 19:56:27 -0700 (PDT)
+        Sun, 12 Jul 2020 19:56:29 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 11/18] minicoredumper: update SRC_URI to use github instead
-Date: Sun, 12 Jul 2020 19:56:07 -0700
-Message-Id: <b86aae02b8a6feccaa38552dea2f608016aae675.1594608813.git.akuster808@gmail.com>
+Subject: [dunfell 12/18] mraa: Disable python2, otherwise, there is a build error when enable multilib.
+Date: Sun, 12 Jul 2020 19:56:08 -0700
+Message-Id: <aa6371f7bf24ae3fa3da7974f953502995b79c8f.1594608813.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1594608813.git.akuster808@gmail.com>
 References: <cover.1594608813.git.akuster808@gmail.com>
 
-From: Pierre-Jean Texier <pjtexier@koncepto.io>
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 
-Change SRC_URI:
+ERROR: mraa-2.1.0+gitAUTOINC+e15ce6fbc7-r0 do_package: QA Issue: mraa:
+Files/directories were installed but not shipped in any package:
+  /usr/lib/python3.8/site-packages/_mraa.so
+  /usr/lib/python3.8/site-packages/mraa.py
 
- - all minicoredumper related sources moved to https://github.com/diamon/minicoredumper
-
->>From the NEWS:
-
-The Linux Foundation will be shutting down their git service for workgroups.
-The minicoredumper repository and bug tracking has been moved to the DiaMon
-Workgroup account on github.com. We thank the Linux Foundation for providing
-us the git service over the last 5 years.
-
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 110fa8902db7e8568f92b314716effc7558980f4)
+(cherry picked from commit fadaf4867074d0140e769b954b7e8afb92c4dd1a)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb | 2 +-
+ meta-oe/recipes-extended/mraa/mraa_git.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-index 051656b5a0..d381c83ae8 100644
---- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-+++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-@@ -13,7 +13,7 @@ SRCREV = "16a0d44f1725eaa93096eaa0e086f42ef4c2712c"
+diff --git a/meta-oe/recipes-extended/mraa/mraa_git.bb b/meta-oe/recipes-extended/mraa/mraa_git.bb
+index 403d641ee9..0b40dcb71b 100644
+--- a/meta-oe/recipes-extended/mraa/mraa_git.bb
++++ b/meta-oe/recipes-extended/mraa/mraa_git.bb
+@@ -21,7 +21,7 @@ inherit cmake distutils3-base
  
- PR .= "+git${SRCPV}"
+ DEPENDS += "json-c"
  
--SRC_URI = "git://git.linuxfoundation.org/diamon/minicoredumper.git;protocol=http \
-+SRC_URI = "git://github.com/diamon/minicoredumper;protocol=https \
-            file://minicoredumper.service \
-            file://minicoredumper.init \
-            "
+-EXTRA_OECMAKE_append = " -DINSTALLTOOLS:BOOL=ON -DFIRMATA=ON -DCMAKE_SKIP_RPATH=ON \
++EXTRA_OECMAKE_append = " -DINSTALLTOOLS:BOOL=ON -DFIRMATA=ON -DCMAKE_SKIP_RPATH=ON -DPYTHON2_LIBRARY=OFF \
+                          -DPYTHON3_PACKAGES_PATH:PATH=${baselib}/python${PYTHON_BASEVERSION}/site-packages \
+                          -DPYTHON_LIBRARY=${STAGING_LIBDIR}/lib${PYTHON_DIR}${PYTHON_ABI}.so \
+                          -DPYTHON_INCLUDE_DIR=${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI} \
 -- 
 2.17.1
 
