@@ -1,50 +1,50 @@
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.web11.11749.1594608984507952591
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web10.11831.1594608985399052374
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Jul 2020 19:56:24 -0700
+ Sun, 12 Jul 2020 19:56:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Byrr+fLl;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id j19so5394037pgm.11
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2020 19:56:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=j4V/agBe;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id l63so5394359pge.12
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2020 19:56:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=N5dt3sFbG8akgeByCd0/NUf0GmNmO7INZH9hZx65tCw=;
-        b=Byrr+fLlA4kViaq8CBW3IOs+Uz+/LHhy+WgMgMZaWZiomq9frmXGM6syaiN6cGUGgo
-         GzYUWYrS+a2V8MLhfQSiw5vxj2gKHIT5Z7s5CowD93mTZVozcutn4CaOtuf/0NOPPYyd
-         L4pVrsp30ikzwPYF4b5PSXAFTM9gNcwt+Y2kLpdlHw2Og8hircffrcd5rdmV1r6ctmWu
-         HNLSPOpDiNN8WDU4VW1oi4Ws+vpYI+FPAQ1LKUV0w1fQkKDsNezMAFyPMUIW7HxBT5R4
-         z4J1f9I0oQMaex5sSBKNBtTOKg+clbLlW+xuwasgJIEVY71q+eiStW2wNgPPlTA8HwqU
-         iNEA==
+        bh=U+CN3sKdbheip9Nqwpr6MJOBkQk0wAml85UmVleNBSM=;
+        b=j4V/agBedfZFHYX4IbUzmcF35rbbq0BcnR8uuVB73huMNZtR0PztyuJErB9Uwn/Hd7
+         YtevzCopoGAS9M+B6shkBDyfAct31cw+E/Ihu+SCrhOx99W5iJWb1r33OYaQ5JyrEFLc
+         L5KmZi8o8enfLdR34b4p7CQOcOfvpS/y3CzigQz43RVRdzF7kikJCAAZlpTZgVBDRfsE
+         5wqJdbuewNAF2IDwGuiWsWmWp8J7UYyKOKPIB0bNWRHaIBHjRP1DBfuh2NY14rj1kCZM
+         C2dQryT/GLvYTu2UmMCAE5QTeFGxMONLguY9wkNgYvrfP356kOBKLQg4G1mBiKbidIvI
+         HyyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=N5dt3sFbG8akgeByCd0/NUf0GmNmO7INZH9hZx65tCw=;
-        b=IrpmGk3hOp1FkEHyQ/U7T8PF9HvmS+HvPbLa0ngs8T7N6Sl6SiPeQcItfRQwjusvuX
-         0RFcti4K63Faze644KIgnR7L3dDy9OVNQFOp+Ihfw9/A/7ZFBMKmMHrVimvVvWCFK7do
-         dfrMl50/l8/zfqxp7/viZZN/pr9oFwOkajIbyt+ZrsitPQolIrFOt1XkFUQRnTAhqpCI
-         EuZQ6vCHzS2rGEEoL1clwaqDXqi/WEApBmq5JOD6+5Nf3YR6egwI+9jJCs9b9gK8NhWV
-         wY3vxHzhl9Ryk7E3sEcoKwNtK2YYootNs0sL66nrCJlRdi73qtihWSOlRqLaxj3/LW2A
-         W+vw==
-X-Gm-Message-State: AOAM530/K6mVssH5ueaCRP4EDr2RvP+kIsIYnR+ckT+ca92BpeHXWqgu
-	RotsPCqLgB8GZ4NbBMbP/rIdJa4N3Fc=
-X-Google-Smtp-Source: ABdhPJzS5A4mN1kqfWAdBCit5ebJJj/vCnLMLFDjXsZxmj0egx5J9TWOH1F/+sOMHTcVq4sX9Rw5UA==
-X-Received: by 2002:a05:6a00:224c:: with SMTP id i12mr20203621pfu.18.1594608983751;
-        Sun, 12 Jul 2020 19:56:23 -0700 (PDT)
+        bh=U+CN3sKdbheip9Nqwpr6MJOBkQk0wAml85UmVleNBSM=;
+        b=PmchiMsNf0DR0SCRDlNevurx5TT08lyW7WUCSCyM71gIoTbJimGar+vsJpczoaIwz2
+         zZKhyvyn4+QM0g/v7cxqWMdPJj/lDqb/RIypYGLkNUxL9T0Kqjk5vaLQieu2+oE1bwif
+         8uOzGTNS6AKNOL9XwQlENovCy/lv3eoPw4h/BDyyyJbvJQC9F1vyOxg/6mqOX2ACUZMw
+         5sYLmO7SVxxnc9LBh/L1n6l95gQVYK2rzN7deqlR9Ox04iYfSxKugkkOG0meUHGPKmsA
+         FWPRXhmT4vl0RHm3BV7ps/zdPxGz1uV8wua0MYfJctFQHtHyWenHpY+ZwaellzgKC4td
+         KhbQ==
+X-Gm-Message-State: AOAM53202TGOa3uqwVugWXgo9AX/gom5s8R/EHZ4RH1FmBZikQUZtFUt
+	qsCfepHIVJqEXJX252KLhGzzRJ2m6W8=
+X-Google-Smtp-Source: ABdhPJwiCae9xmlNF1hd1ZL1c++/mKBgI2wT/X74q7DGWvzYRaZ3gKaoFrHBHAcjs2OprgZeoCgT3Q==
+X-Received: by 2002:a62:794e:: with SMTP id u75mr59504534pfc.298.1594608984775;
+        Sun, 12 Jul 2020 19:56:24 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e013:ddd8:d9b9:dad6])
         by smtp.gmail.com with ESMTPSA id u19sm13687976pfk.98.2020.07.12.19.56.23
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Jul 2020 19:56:23 -0700 (PDT)
+        Sun, 12 Jul 2020 19:56:24 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 06/18] blueman: upgrade 2.1.1 -> 2.1.3
-Date: Sun, 12 Jul 2020 19:56:02 -0700
-Message-Id: <c94e7930edc25fe5fe10022482915895abb12b23.1594608813.git.akuster808@gmail.com>
+Subject: [dunfell 07/18] modemmanager: upgrade 1.12.10 -> 1.12.12
+Date: Sun, 12 Jul 2020 19:56:03 -0700
+Message-Id: <f032374e55cf2560424c428356bc6230b601cdb7.1594608813.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1594608813.git.akuster808@gmail.com>
 References: <cover.1594608813.git.akuster808@gmail.com>
@@ -54,47 +54,37 @@ Content-Transfer-Encoding: 8bit
 
 From: Andreas Müller <schnitzeltony@gmail.com>
 
-2.1.3
-Changes
-  * Force cython to use python language version 3
-Bugs fixed
-  * Fix tooltip not updating when bluetooth is disabled
-  * Fix dbus timeout in DhcClient
-  * Call the right method when pulseaudio crashes
-  * Handle os.remove failing
-
-2.1.2
-Bugs fixed
-  * Signal bar updates with multiple adapters
-  * Pairing with pincode
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d05070c7d8d1f384914b1243298b4759fd9accae)
-[AK: Dunfell does not support py2 so upgrade seems resonable]
+(cherry picked from commit f0a9b8bfab39e6b140bcb63f55cdadb692e7e91a)
+[ak: 1.12.x is a stable release]
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../blueman/{blueman_2.1.1.bb => blueman_2.1.3.bb}             | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/blueman/{blueman_2.1.1.bb => blueman_2.1.3.bb} (94%)
+ .../{modemmanager_1.12.10.bb => modemmanager_1.12.12.bb}   | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.12.10.bb => modemmanager_1.12.12.bb} (93%)
 
-diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.1.1.bb b/meta-networking/recipes-connectivity/blueman/blueman_2.1.3.bb
-similarity index 94%
-rename from meta-networking/recipes-connectivity/blueman/blueman_2.1.1.bb
-rename to meta-networking/recipes-connectivity/blueman/blueman_2.1.3.bb
-index 0ea7f6de97..9143a67ae8 100644
---- a/meta-networking/recipes-connectivity/blueman/blueman_2.1.1.bb
-+++ b/meta-networking/recipes-connectivity/blueman/blueman_2.1.3.bb
-@@ -11,8 +11,7 @@ SRC_URI = " \
-     file://0001-Search-for-cython3.patch \
-     file://0002-fix-fail-to-enable-bluetooth.patch \
- "
--SRC_URI[md5sum] = "9de89abb31be45bdbf11f7884764a2dc"
--SRC_URI[sha256sum] = "f1eab2334e5a1587defa80900901048d14c2e8ffa8c0cff7240bc9937a61dbc3"
-+SRC_URI[sha256sum] = "3bd02e0cc9e2c1424df1fc2015da710a280ef4c657515727e47eafabf8c2cfde"
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.10.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.12.bb
+similarity index 93%
+rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.10.bb
+rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.12.bb
+index deab6f0466..b0ab46f3f2 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.10.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.12.bb
+@@ -11,11 +11,8 @@ inherit gnomebase gettext systemd vala gobject-introspection bash-completion
  
- EXTRA_OECONF = " \
-     --disable-appindicator \
+ DEPENDS = "glib-2.0 libgudev intltool-native libxslt-native"
+ 
+-SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz \
+-           "
+-
+-SRC_URI[sha256sum] = "b2b3058bbb72adf98b24707fdbebe58e590644a38145e30d574f685f154bf8aa"
+-
++SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz"
++SRC_URI[sha256sum] = "a4fc4b33c0e8ae9372885f86fa033f3c1a89a76cd59a3458670eff1824222a3d"
+ S = "${WORKDIR}/ModemManager-${PV}"
+ 
+ PACKAGECONFIG ??= "mbim qmi \
 -- 
 2.17.1
 
