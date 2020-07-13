@@ -1,81 +1,87 @@
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
- by mx.groups.io with SMTP id smtpd.web10.11836.1594608988050116598
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com [209.85.214.193])
+ by mx.groups.io with SMTP id smtpd.web12.11821.1594608989034563602
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Jul 2020 19:56:28 -0700
+ Sun, 12 Jul 2020 19:56:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=hfmwcVkD;
- spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f47.google.com with SMTP id gc9so5499079pjb.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2020 19:56:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=H4NKmUtL;
+ spf=pass (domain: gmail.com, ip: 209.85.214.193, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f193.google.com with SMTP id f2so4874100plr.8
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2020 19:56:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=zQxbgxykyKg0B22z/FIXC7mFeX01PrEJwD/vOw7DXwA=;
-        b=hfmwcVkD2hT5bYh6xyEMwE2AqrJKgfNvEi1E5LqGBkzp9XD6iPHyL79fshI2hYJA5K
-         nuuR6Al7chmgoScRLyUmjLE6jl1N61uXyN/gFG22Jetf8T3vDoKx1qmeG1w5knTPwIRr
-         xJIuegxxPjCZhuY46is58ORsPcOFAmYoITSDiKRGAthQT5yN76y3gl8FdbZFyErJQpA1
-         40+dOJMxySF5x8qEPLmJHXWMFxQ0VAn1wkNTEFbPV1+1khAOH6hSK5pxKokBSO/sScsy
-         XYR6luMmi7RJj9DeNiztkdno74bzBPSMqVSWwlMJnL9lQne9L/3c3OERh99re72PrtUr
-         wXIg==
+        bh=6bowGLc+9kNPmkUCl9G8Qtjo6EfLx8G6v/tXNpqCAjk=;
+        b=H4NKmUtL47UwJFn49Ejsp5Weu6MeSksa1naw292dhoAtyhwuWZ8MeJBqKbrO4yZc+m
+         AXiUOErw0RQT8Bo3KmNJcq+ZViNcZQ5QaI8p/I7coswms1u9JE2xRKf8qdIR1e3SCDVn
+         atM1hg8AIrrgcAV4tcjGEUXaC+7w7Ta90iqGHa4fATBXpYJQSz939nIeQ94+4JFhtjwn
+         4+vNbpCoYjgthKc7ekQeIXLSGA2EQ+zkF3iC4WSWOB6pOaHWPFu6zokhC6e2nPTW0sHv
+         6E1GwtBJVjG4DqE3B6TEs8rON5kBO+2Azj+RP2O3fwCKCTypvQ5wghm8nn6shkDS4Uac
+         bDog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=zQxbgxykyKg0B22z/FIXC7mFeX01PrEJwD/vOw7DXwA=;
-        b=Y806qQnHMb9wWUPtzzFCMDONZSjsaOxf5A2y2dYIYcZUPZvBofvQtnzHzgKm6wFDyF
-         FwsvMqeA4vHDccVqYdXrTzf7HqlVSirOBsC4odQRxZ8dsr0X7nv6iiYdyFSxWJ1v6Aqm
-         5V4QlYdAak0t2RGnLJFbH6Z0Kq/3frx4iGBRcUPLexMvmAM4sQuhcX3u+m3NASi8cDBu
-         N9LW1/lxU+ZQHlvbcWv1vGP9Pk0DbZNLY+del7uTIsL3OFbKzgTlFrI02b5Tzmaq8kVN
-         LqurF01o3xj+RR63rTQMYSDmL5ocOGpvowul0lQEaMPkjl9drRBz45upFBxC+nPvVL0Z
-         SOgg==
-X-Gm-Message-State: AOAM532277gbqREVufVIIyFxuQBTc5U4C/RS6F/8TcDkMFSj7nuUHwtD
-	+QzhEqoyEJsD8Fx+kflCF6lFte9K/c4=
-X-Google-Smtp-Source: ABdhPJxC8T1rJZadDYWHfr7qFr/c9goDCeqS2zg0phYb+6wwERvGGhQY7xljmvdFrv9DYQOr8Zbm1w==
-X-Received: by 2002:a17:902:7611:: with SMTP id k17mr68849136pll.255.1594608987424;
-        Sun, 12 Jul 2020 19:56:27 -0700 (PDT)
+        bh=6bowGLc+9kNPmkUCl9G8Qtjo6EfLx8G6v/tXNpqCAjk=;
+        b=FVLnW72vmZknsj4RjiNpBf5QLoxw+xkEWKTwzAny6XQR01cJLmb6p6ue3s83a/0zqE
+         ZkoLNu7qRJVHbQHWwCEEsa9A9tgffA0TG15m7sZSMYnkQ34GZJGZwib5Lf397wovbIVG
+         pF0OgKwSCh/vV5aTrObQefml+qve4lRHVZfFX9Lsy07h2A7jBfXu2jd6vslV6QiFQbFZ
+         ghYCrTXkAlhGHiDeCuNWldDSpd0Qupk0OBXJg8ImTAbzpKLNY/Yrw8gor0Qs3zlNslnW
+         MUp0I0Glm2BQ1uEHS3hX7CVYshlEMJ8SYrsagolY2oUDb/xCdyPH9BKTQOwhrBLM8BDs
+         ZaVg==
+X-Gm-Message-State: AOAM5319rp50d2hTZVpC2/eVbu/3YrvrhkDJgjZHnYRZ98+29i/GixlR
+	spC/3jYIsbBQVQAxuDeLNzGVl5ELui8=
+X-Google-Smtp-Source: ABdhPJy5+ciqR78Y7Ku3QOH5R0U90J0rc4XBQ1rSXiTi0IE5cGdP/VmWkN2Lpmjnj1SRnLk9iOM/qQ==
+X-Received: by 2002:a17:902:fe85:: with SMTP id x5mr61399642plm.282.1594608988458;
+        Sun, 12 Jul 2020 19:56:28 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e013:ddd8:d9b9:dad6])
-        by smtp.gmail.com with ESMTPSA id u19sm13687976pfk.98.2020.07.12.19.56.26
+        by smtp.gmail.com with ESMTPSA id u19sm13687976pfk.98.2020.07.12.19.56.27
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sun, 12 Jul 2020 19:56:27 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 10/18] nftables: upgrade 0.9.5 -> 0.9.6
-Date: Sun, 12 Jul 2020 19:56:06 -0700
-Message-Id: <7ed1adba7993bf3d619cb5bcb4f77ace9ea247ff.1594608813.git.akuster808@gmail.com>
+Subject: [dunfell 11/18] minicoredumper: update SRC_URI to use github instead
+Date: Sun, 12 Jul 2020 19:56:07 -0700
+Message-Id: <b86aae02b8a6feccaa38552dea2f608016aae675.1594608813.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1594608813.git.akuster808@gmail.com>
 References: <cover.1594608813.git.akuster808@gmail.com>
 
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+From: Pierre-Jean Texier <pjtexier@koncepto.io>
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Change SRC_URI:
+
+ - all minicoredumper related sources moved to https://github.com/diamon/minicoredumper
+
+>>From the NEWS:
+
+The Linux Foundation will be shutting down their git service for workgroups.
+The minicoredumper repository and bug tracking has been moved to the DiaMon
+Workgroup account on github.com. We thank the Linux Foundation for providing
+us the git service over the last 5 years.
+
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit b0d884a994197a9bc0b181545fe67f19a7630cd7)
-[AK: This release fixes vmap support which broke in the previous 0.9.5 release.]
+(cherry picked from commit 110fa8902db7e8568f92b314716effc7558980f4)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../nftables/{nftables_0.9.5.bb => nftables_0.9.6.bb}           | 2 +-
+ meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-filter/nftables/{nftables_0.9.5.bb => nftables_0.9.6.bb} (93%)
 
-diff --git a/meta-networking/recipes-filter/nftables/nftables_0.9.5.bb b/meta-networking/recipes-filter/nftables/nftables_0.9.6.bb
-similarity index 93%
-rename from meta-networking/recipes-filter/nftables/nftables_0.9.5.bb
-rename to meta-networking/recipes-filter/nftables/nftables_0.9.6.bb
-index 0fd187f1b8..41f7f4c91c 100644
---- a/meta-networking/recipes-filter/nftables/nftables_0.9.5.bb
-+++ b/meta-networking/recipes-filter/nftables/nftables_0.9.6.bb
-@@ -10,7 +10,7 @@ DEPENDS = "libmnl libnftnl bison-native \
- UPSTREAM_CHECK_REGEX = "nftables-(?P<pver>\d+(\.\d+){2,}).tar.bz2"
+diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
+index 051656b5a0..d381c83ae8 100644
+--- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
++++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
+@@ -13,7 +13,7 @@ SRCREV = "16a0d44f1725eaa93096eaa0e086f42ef4c2712c"
  
- SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2"
--SRC_URI[sha256sum] = "f2c1957eabc370057c4576b8f33a71d91a6ad019b8b335abafe61c9c42cc7e16"
-+SRC_URI[sha256sum] = "68d6fdfe8ab02303e6b1f13968a4022da5b0120110eaee3233d806857937b66e"
+ PR .= "+git${SRCPV}"
  
- inherit autotools manpages pkgconfig
- 
+-SRC_URI = "git://git.linuxfoundation.org/diamon/minicoredumper.git;protocol=http \
++SRC_URI = "git://github.com/diamon/minicoredumper;protocol=https \
+            file://minicoredumper.service \
+            file://minicoredumper.init \
+            "
 -- 
 2.17.1
 
