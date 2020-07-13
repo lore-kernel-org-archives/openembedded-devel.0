@@ -1,122 +1,185 @@
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
- by mx.groups.io with SMTP id smtpd.web12.2528.1594579320613362972
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.43])
+ by mx.groups.io with SMTP id smtpd.web12.10355.1594602706024571382
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Jul 2020 11:42:00 -0700
+ Sun, 12 Jul 2020 18:11:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=lG0yjSle;
- spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f177.google.com with SMTP id g67so5001121pgc.8
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jul 2020 11:42:00 -0700 (PDT)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Nlzv1lnH;
+ spf=pass (domain: windriver.com, ip: 40.107.93.43, mailfrom: changqing.li@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lLEqadm2+tPV8zQ00VCdhTEm5cAa0leDCD/2XUgEGtW+UABVQyXbMdV6nGajbmsg+Kj7tpyXUcCZNT+OyXbReY4hkdhnJj72k5KSWs31/gUUWniHAFjUv0I/Q5xl/ua9l44A2ZQfhcsOZ9w63jgR9sMGAGarGQl/3iqB4Hxu5KifQpreYDVbIfXUrl+KBDlESn3HAN+yZY37EN5EuzRk2BDuvDEH3PyDnlJfiHUyy/K7lBdajXnxM1Hz7nc4sb+dmAKPx+nd68UKsDLMVLiTbu5skqW5GCGo125JhCIDXIr8pM/9wg+/MbydzbO2YI7vuh1/d94z26AxulJSARZ7pg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7+6OTq/PSG6+DP3pBpIFPOdwrr3SuG0Ra/QLLaWu5YY=;
+ b=KLF7IlNPDN9fU8++JKVnSL9tq/LHmZPjR66M1UoYiH9KX0srD6A1IeJOJM/vDc0Jg2P9sxPG+ytS4fEuq0ximXtpXT00gJJzVJTOs+nI/4yaRs66Pqc9QHGcgP+k6qjmAfGF7YtA6oaJmxtBDl97xqaaTgaO9j7f1b7vKma6DGQnqGMk0uGnioQGVA0ZJ8IeC5b67zIKmzJ1sDH4Y1KiaJKeHO94gbRZoI5rchtcuM3Xiv/nX4E3WdDF7uq6brCzPB54tctaQf5Q85E+s9l5WMnDOzUFW7VQmQjP1ZeVjPZgR/SdJMwVAtJy0zclB3IbpKPkgljVVqBb24qLEZ3BYA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=VKmVVKjM3GmeUnSlrAouWfZEoZVjykYiSuurruD4/+8=;
-        b=lG0yjSleW/DuKpjv1uU5GB6/v2uVKermP/AJS7GAobXK/Sb5BP9JRr8a/vPF9Nz2jw
-         mmMXKD4ntzocw/f9f7rfoLczdzdVv8HHL9zd0NStuzhsvbxGO5mtWSKpMADWtbLpNOQE
-         3XCfm9NCbq+nxMi5TxAHJdGrgQLAsjFdTXHcPohHRyo4SxZudljQcVeADJM742hLGXYD
-         vGflQlpK+qeoNnD3mTcgRBgaAgRW3d39tfGYMehRdeyWbIgBmdNnkktk3ZZpVbsXBQn4
-         t1wkIKZd+lz86YSfElccl6oYzVZ/J3zINEVTorz5K8+aeFxXYdeseMLUyi3qw83son37
-         qgDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:autocrypt
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-transfer-encoding:content-language;
-        bh=VKmVVKjM3GmeUnSlrAouWfZEoZVjykYiSuurruD4/+8=;
-        b=G9uU+1AW0IPbG/xLzqDGCEuRLxMvrShbyW19c080J8AoMNlvJVN39azXg0OALGQcdw
-         uuXRZwE3jvOcs8DpIo6WwOqUPvsN/ptyMY4fHGyWsTmoVeBizxGyL/aMBp6b4WF03SxU
-         SQ21JqXWh0asF1oJc/PhSJx/rOCN3EBUhyixpedpG/mrwxR1iA1qGbJkNmCMG77cJey/
-         UqC0zsCVxJe+bV4s7lFG4gird3SsC3Rj1GpZ+zoweq0NYmQ1eECDks2ddXpKeJLs/m2h
-         zTssrMu3k4f9+vM/DL1ezPMeEufymD3RvgkxkU3tE0QibltTt+TlR4qgaaPZAIBtJabm
-         5URQ==
-X-Gm-Message-State: AOAM532crPUOhEqaR5NNCM25eMmiMs+MFZlXg3k070kjhbHuugcD2vP/
-	xDWLOgz4+wN9buw/vXwpgVGRKgWUW48=
-X-Google-Smtp-Source: ABdhPJyKU4XwlJ/vKVo3XE8mgrXB2rrRQlcIB9bxkJ08Gc4+Lfh9SWoDXWxIkTv7cKXsbT/Y8PHruw==
-X-Received: by 2002:aa7:8143:: with SMTP id d3mr26932201pfn.97.1594579319984;
-        Sun, 12 Jul 2020 11:41:59 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:94e8:27ac:fdd9:c160? ([2601:202:4180:a5c0:94e8:27ac:fdd9:c160])
-        by smtp.gmail.com with ESMTPSA id t13sm6265410pjs.17.2020.07.12.11.41.58
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 12 Jul 2020 11:41:59 -0700 (PDT)
-Subject: Re: [oe] [dunfel 03/32] jsoncpp: upgrade 1.9.2 -> 1.9.3
-To: Mikko.Rapeli@bmw.de, raj.khem@gmail.com
-Cc: Martin.Jansa@gmail.com, openembedded-devel@lists.openembedded.org
-References: <cover.1593561840.git.akuster808@gmail.com>
- <fc1b28e574a01410f082034c1f8212139b6107e1.1593561840.git.akuster808@gmail.com>
- <CA+chaQc92KeJnoG+NPi6EvKMHNnLCbN8AFPS9Usdc1S1WNHu9A@mail.gmail.com>
- <24a9b660-a636-a614-4e5c-62bc9782ade3@gmail.com>
- <CA+chaQen7fpxTQ2eT933-5pZjsSpT0pJhciP2UY8V5rwe-6X1w@mail.gmail.com>
- <afc84fcc-e8bb-c8d2-52a4-372b72840857@gmail.com>
- <20200710073738.GQ108868@korppu>
-From: "akuster" <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
- 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
- 8CS2NxU=
-Message-ID: <06e723c4-54f1-10f8-3d2a-f8be6cca1a06@gmail.com>
-Date: Sun, 12 Jul 2020 11:41:58 -0700
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7+6OTq/PSG6+DP3pBpIFPOdwrr3SuG0Ra/QLLaWu5YY=;
+ b=Nlzv1lnH32wZFFCI6eO0uBY+/EZBn3ibKk3j7vBfMC7lUbGHgrsk6YMAG7ExSl+k/6R+3t/1T9ZJh3C4xs03uohe/S+otUmhS8C/pZjw01jj8CtP7sw2tMJS8xyvxixJvE7bgdx8yqn8ao8jR2QAJlPaAOTytHp/6R9Hh/S6iP4=
+Authentication-Results: gmail.com; dkim=none (message not signed)
+ header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
+Received: from SN6PR11MB2557.namprd11.prod.outlook.com (2603:10b6:805:56::33)
+ by SN6PR11MB2912.namprd11.prod.outlook.com (2603:10b6:805:cb::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.23; Mon, 13 Jul
+ 2020 01:11:43 +0000
+Received: from SN6PR11MB2557.namprd11.prod.outlook.com
+ ([fe80::cdd9:281d:f264:70b4]) by SN6PR11MB2557.namprd11.prod.outlook.com
+ ([fe80::cdd9:281d:f264:70b4%7]) with mapi id 15.20.3174.025; Mon, 13 Jul 2020
+ 01:11:42 +0000
+Subject: Re: [oe] [meta-oe][PATCH] rsyslog: get alias of syslog back
+To: openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
+References: <16205920B40F3B3B.7755@lists.openembedded.org>
+From: "Changqing Li" <changqing.li@windriver.com>
+Message-ID: <0f9d5288-1d7f-547c-8641-c205ff45a203@windriver.com>
+Date: Mon, 13 Jul 2020 09:11:34 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Thunderbird/68.8.0
+In-Reply-To: <16205920B40F3B3B.7755@lists.openembedded.org>
+X-ClientProxiedBy: HKAPR03CA0003.apcprd03.prod.outlook.com
+ (2603:1096:203:c8::8) To SN6PR11MB2557.namprd11.prod.outlook.com
+ (2603:10b6:805:56::33)
+Return-Path: changqing.li@windriver.com
 MIME-Version: 1.0
-In-Reply-To: <20200710073738.GQ108868@korppu>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [128.224.162.189] (60.247.85.82) by HKAPR03CA0003.apcprd03.prod.outlook.com (2603:1096:203:c8::8) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3195.9 via Frontend Transport; Mon, 13 Jul 2020 01:11:41 +0000
+X-Originating-IP: [60.247.85.82]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 99a2bc12-406e-4778-6524-08d826c9b41a
+X-MS-TrafficTypeDiagnostic: SN6PR11MB2912:
+X-Microsoft-Antispam-PRVS: 
+	<SN6PR11MB29128BF932B42F84F3317F3F82600@SN6PR11MB2912.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:168;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	Ca9gkzQ/cZ0K+7KIQrTvTtCvrdRfk9CsuWIRAbKmA7NjTzuJQUG2IEaOH1EspCD61R9FJUK1o1v0GZEh2//PJe/uIM+oFx+ujILGW0QJn3bp05nZ5VEZLC0IS9IKnXAtFGx1NjhyU36OWi6kojousZJo05aVIsaEUc8vL9nRVukxVAV91weFEDqvAR3WYd5NUrT17FP657PYADOl8zaGLIq7dX3JIOUQLEhUSpoG9uvMHXcPMnMPKb50A5SS+ngUgIW0XV1djVjJ8bGQdzL1COdgWnI951h/SKwe+/pcbLPnWdjlL/V8TlZhSt2w5rHEpZHPMxJuHngy1ksI6FCT2PbjPwtHDcKT13YDhboeJDNnrLma9JVwCFzJmk0Qy9vGFKZKbKZzBjz30mhp9aLcSbQhGTfWt0VjcNeTvwbAfn57kcSMYBgsy/dXHcPhONAuDnA0pJwMRozW4O9dYvaL5iNRQbWlKI4vHJBJGoSgsPZbwIAaaiX2cX8hNJHHhf9j/jQLj7R0sbRAgJZa4NQkmQ==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN6PR11MB2557.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(366004)(136003)(346002)(39830400003)(376002)(8936002)(478600001)(53546011)(31686004)(8676002)(66556008)(33964004)(66476007)(6666004)(66946007)(36756003)(16576012)(966005)(316002)(16526019)(86362001)(52116002)(83380400001)(166002)(2616005)(6486002)(2906002)(6706004)(26005)(956004)(186003)(31696002)(44832011)(5660300002)(78286006)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	C8fdnLPqrSrUhCsrKDmCfIQusnXtINQ8U36ncoAReMYZKXGFL6AapawxDfOnj06tE7GmfPl1kPNA8p/gkfaOoCNbUWBOuKwcydL0nCEicde9Y0U9G21hrU75qRh8RrKp4TldYH7VQZTvXr9IfcqSZGfRyNvusi1408hIbV+cwpvbCGo9jJPnhTUBCd2I0R7Z+nkPdztT9NtArQN6bAFy6dxc9sht/ywNWf5Zr82W2Pa/1/NJDsI5TLlm0cFg7kLJPfIOAFuUPnjilqzf7eCdN01ckCHtFWJvqMAtHJwwe18Vcz4uIOEhCdJMxNRbu/7N6ItEISNOax8kAAfqE/8LKj/MLBLCzK5GWVvEEMJWfqr6Ifgdv6ChwTyV5I5K/eOdnF9RbtWt2DSVyoBwdKZE3PVZnMMfkaU8eufMVityEq4NAxSB7m0SMSzms2s9u/YL7ud/9uYLWUZmEe1BpxxANZwFvI4gbicBnEwKwNIFv8s=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 99a2bc12-406e-4778-6524-08d826c9b41a
+X-MS-Exchange-CrossTenant-AuthSource: SN6PR11MB2557.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jul 2020 01:11:42.7274
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: CHgahuJm3qugeJbQftE+kcRo/tvPg7ZRfKnqW4mB6r0R4IjYS0MKFFk6zCkOV89WGOhtQadtX3RUry/Xutc1hIdZLA3DeU0Jtd8AIr+Jyy4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR11MB2912
+Content-Type: multipart/alternative;
+ boundary="------------F391C8CC2A55753C9723FB61"
 Content-Language: en-US
 
+--------------F391C8CC2A55753C9723FB61
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
+Hi, Khem
 
-On 7/10/20 12:37 AM, Mikko.Rapeli@bmw.de wrote:
-> Hi,
+I noticed this patch is on next branch,  but this patch have problem 
+with sysV,
+
+I need to send a V2 later.  Please help to revert it.  Thanks and sorry 
+for troubling you.
+
+On 7/10/20 5:07 PM, Changqing Li wrote:
+> From: Changqing Li <changqing.li@windriver.com>
 >
-> jsoncpp seems to have messy ABI history so I would not update even minor versions
-> in stable branch:
-so are you for a revert?
-
--armin
-> https://abi-laboratory.pro/index.php?view=timeline&l=jsoncpp
+> since upstream rsyslog commit
+> https://github.com/rsyslog/rsyslog/pull/4317/commits/7a671da74f78047b3fd0eb65203f045de28cec0f
+> , Alias=syslog.service is removed from service file, which will make
+> systemctl restart syslog fail since Unit syslog.service not found when
+> we set rsyslog to default syslog.
 >
-> Cheers,
+> And upstream have change the solution about pull 4317, so during next
+> upgrade, we need to add our own rsyslog.service, refer
+> https://github.com/rgerhards/rsyslog/commit/83d5710f074b34263322cd53fa1112aafd25b985
 >
-> -Mikko
+> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> ---
+>   meta-oe/recipes-extended/rsyslog/rsyslog_8.2006.0.bb | 3 +++
+>   1 file changed, 3 insertions(+)
+>
+> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2006.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2006.0.bb
+> index ff6699509..263a86e5c 100644
+> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2006.0.bb
+> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2006.0.bb
+> @@ -152,6 +152,9 @@ do_install_append() {
+>           install -d 0755 ${D}${sysconfdir}/rsyslog.d
+>           echo '$ModLoad mmjsonparse' >> ${D}${sysconfdir}/rsyslog.d/mmjsonparse.conf
+>       fi
+> +
+> +    sed -i -e "s#;Requires=syslog.socket#Requires=syslog.socket#g" ${D}${systemd_system_unitdir}/rsyslog.service
+> +    sed -i -e "s#;Alias=syslog.service#Alias=syslog.service#g" ${D}${systemd_system_unitdir}/rsyslog.service
+>   }
+>   
+>   FILES_${PN} += "${bindir}"
+>
+> 
 
+--------------F391C8CC2A55753C9723FB61
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p>Hi, Khem</p>
+    <p>I noticed this patch is on next branch,&nbsp; but this patch have
+      problem with sysV, <br>
+    </p>
+    <p>I need to send a V2 later.&nbsp; Please help to revert it.&nbsp; Thanks and
+      sorry for troubling you.</p>
+    <div class="moz-cite-prefix">On 7/10/20 5:07 PM, Changqing Li wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:16205920B40F3B3B.7755@lists.openembedded.org">
+      <pre class="moz-quote-pre" wrap="">From: Changqing Li <a class="moz-txt-link-rfc2396E" href="mailto:changqing.li@windriver.com">&lt;changqing.li@windriver.com&gt;</a>
+
+since upstream rsyslog commit
+<a class="moz-txt-link-freetext" href="https://github.com/rsyslog/rsyslog/pull/4317/commits/7a671da74f78047b3fd0eb65203f045de28cec0f">https://github.com/rsyslog/rsyslog/pull/4317/commits/7a671da74f78047b3fd0eb65203f045de28cec0f</a>
+, Alias=syslog.service is removed from service file, which will make
+systemctl restart syslog fail since Unit syslog.service not found when
+we set rsyslog to default syslog.
+
+And upstream have change the solution about pull 4317, so during next
+upgrade, we need to add our own rsyslog.service, refer
+<a class="moz-txt-link-freetext" href="https://github.com/rgerhards/rsyslog/commit/83d5710f074b34263322cd53fa1112aafd25b985">https://github.com/rgerhards/rsyslog/commit/83d5710f074b34263322cd53fa1112aafd25b985</a>
+
+Signed-off-by: Changqing Li <a class="moz-txt-link-rfc2396E" href="mailto:changqing.li@windriver.com">&lt;changqing.li@windriver.com&gt;</a>
+---
+ meta-oe/recipes-extended/rsyslog/rsyslog_8.2006.0.bb | 3 &#43;&#43;&#43;
+ 1 file changed, 3 insertions(&#43;)
+
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2006.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2006.0.bb
+index ff6699509..263a86e5c 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2006.0.bb
+&#43;&#43;&#43; b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2006.0.bb
+@@ -152,6 &#43;152,9 @@ do_install_append() {
+         install -d 0755 ${D}${sysconfdir}/rsyslog.d
+         echo '$ModLoad mmjsonparse' &gt;&gt; ${D}${sysconfdir}/rsyslog.d/mmjsonparse.conf
+     fi
+&#43;
+&#43;    sed -i -e &quot;s#;Requires=syslog.socket#Requires=syslog.socket#g&quot; ${D}${systemd_system_unitdir}/rsyslog.service
+&#43;    sed -i -e &quot;s#;Alias=syslog.service#Alias=syslog.service#g&quot; ${D}${systemd_system_unitdir}/rsyslog.service
+ }
+ 
+ FILES_${PN} &#43;= &quot;${bindir}&quot;
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------F391C8CC2A55753C9723FB61--
