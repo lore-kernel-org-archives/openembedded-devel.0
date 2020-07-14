@@ -1,116 +1,170 @@
-Received: from mail-qv1-f66.google.com (mail-qv1-f66.google.com [209.85.219.66])
- by mx.groups.io with SMTP id smtpd.web11.13741.1594703098865749457
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.15627.1594714999494503848
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Jul 2020 22:04:59 -0700
+ Tue, 14 Jul 2020 01:23:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=OKzqVJs6;
- spf=pass (domain: gmail.com, ip: 209.85.219.66, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f66.google.com with SMTP id t11so6939570qvk.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Jul 2020 22:04:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=jkTxPfVK9MB8tHRl+p/J+vGqcrRPe04EOcQF9rPrVPA=;
-        b=OKzqVJs6yc+SZNjdC2K3SiT1TZbFV2YtgmpHS+UDvCHVpCfprY/LRW34pMg8PHSx70
-         p7iLV8d9q/s+IBV+GBbE3t2HKaW5ztJFNcnVPhTiBSNhObFTLIaFuSUsXcDOpKg2Kzlp
-         k0iWKC/HTNcgjqjHGczAEw2yCOSlM6DZ6My2nr67JSWmjSBH6XYD6YfdSV+dm96qcpHt
-         2JnOzY+p/Xs/4YWnbHJQB2CNVRi1i0U7/acKe6GJr/aGSaC99BVyqpWPaPoGM8xsZpwb
-         j6GBmzaCsmblTWLytAXpjUvCAJjkkw9YrOmYIFWGLMoUC7DNZmU5DFCYJ2mu1h5lL7S/
-         r2Cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=jkTxPfVK9MB8tHRl+p/J+vGqcrRPe04EOcQF9rPrVPA=;
-        b=TSFLcdtzsGoft8ABHjeuZmOq0KPG39OK0pk/diXPf1dBOCMN0BldC8MMDWLuOWfFEL
-         im3mECUOBTuK6saFR7tm4KxZNrYYHICt6pTrDqgXXxg3Kf16qyhlTqrOdCQTUpAoxJ85
-         Z+poYHBTf+aE1BTwPDWGr7uxpB1NpxiWCNif2z7ftWrKSueLbOkL8yxzQUuiMKRdVhx8
-         pEhQE/mPQlEKkRIaejvPkHhO1VtGO8BqKrMXoB+tDDo0R7STkkPcAc4rsD9R/B/EiVRl
-         ao0OsFagvyFsc0na8B+EinP82T3UZ9ESrX5H+rngS65kYA6STkm0V9kQBlis1+qBNsPV
-         o5dA==
-X-Gm-Message-State: AOAM533z4x9i+XsA/P/2RzWdzigx99Gmv7QA/vXc0VYxSHbXULpRm0vU
-	rKeUjhr73Q/WF3lPoNE6nGoidz3ERDYyi/InzZA=
-X-Google-Smtp-Source: ABdhPJzkkbuGg3Upj0IWAWY7sXJdNDfoHLjH9Q7VBghu8IcB6RFjIs67jxXLdham7lr9JxsHKT3ODMxWcJ1n7XEWae8=
-X-Received: by 2002:a05:6214:18f:: with SMTP id q15mr2880428qvr.23.1594703097882;
- Mon, 13 Jul 2020 22:04:57 -0700 (PDT)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: ovidiu.panait@windriver.com)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 06E8MvZU016918
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Jul 2020 01:23:08 -0700
+Received: from otp-linux01.wrs.com (128.224.126.17) by ALA-HCB.corp.ad.wrs.com
+ (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Tue, 14 Jul 2020
+ 01:22:46 -0700
+From: "Ovidiu Panait" <ovidiu.panait@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][dunfell][PATCH 1/1] nss: Fix CVE-2020-12399
+Date: Tue, 14 Jul 2020 11:20:35 +0300
+Message-ID: <20200714082035.28659-1-ovidiu.panait@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20200714050120.17802-1-naveen.kumar.saini@intel.com>
-In-Reply-To: <20200714050120.17802-1-naveen.kumar.saini@intel.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 13 Jul 2020 22:04:31 -0700
-Message-ID: <CAMKF1srC_87BtgiPMLCE7NUEE4ULGYrGPL3swdL_3EYneXSnFw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2 1/2] safestringlib: add recipe
-To: Naveen Saini <naveen.kumar.saini@intel.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 
-On Mon, Jul 13, 2020 at 9:53 PM Naveen Saini
-<naveen.kumar.saini@intel.com> wrote:
->
-> The Secure Development Lifecycle (SDL) recommends banning certain
-> C Library functions because they directly contribute to security
-> vulnerabilities such as buffer overflows.
->
-> However routines for the manipulation of strings and memory buffers
-> are common in software and firmware, and are essential to accomplish
-> certain programming tasks.
->
-> Safer replacements for these functions that avoid or prevent serious
-> security vulnerabilities (e.g. buffer overflows, string format attacks,
-> conversion overflows/underflows, etc.) are available in the SafeString Library.
->
-> Ref:
-> https://github.com/intel/safestringlib
->
-> Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
-> ---
->  .../safestringlib/safestringlib_git.bb        | 28 +++++++++++++++++++
->  1 file changed, 28 insertions(+)
->  create mode 100644 meta-oe/recipes-support/safestringlib/safestringlib_git.bb
->
-> diff --git a/meta-oe/recipes-support/safestringlib/safestringlib_git.bb b/meta-oe/recipes-support/safestringlib/safestringlib_git.bb
-> new file mode 100644
-> index 000000000..1ca594412
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/safestringlib/safestringlib_git.bb
-> @@ -0,0 +1,28 @@
-> +SUMMARY = "Safe string operations and memory routines"
-> +SECTION = "libs"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE&COPYING.txt;md5=edd6f8c4c1072d72645ae28cb04bdbce \
-> +                    file://LICENSE;md5=54f68ba2c33474320fcc46b1f2d01249"
-> +
-> +SRC_URI = "git://github.com/intel/safestringlib.git;protocol=https \
-> +        "
-> +
-> +PV = "1.0.0+git${SRCPV}"
-> +SRCREV = "245c4b8cff1d2e7338b7f3a82828fc8e72b29549"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit pkgconfig cmake
-> +
-> +COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
+Master (nss version 3.54) is not affected by this issue. This is a backport
+from nss version 3.54.
 
-Since we already have safec in meta-oe which works across more
-architectures and has more coverage too
-I see less of a point of including this package in meta-oe, perhaps
-meta-intel is a better location for this if it
-only helps x86
+NSS has shown timing differences when performing DSA signatures, which was
+exploitable and could eventually leak private keys. This vulnerability affects
+Thunderbird < 68.9.0, Firefox < 77, and Firefox ESR < 68.9.
 
-> +
-> +do_install() {
-> +    install -d ${D}${libdir}
-> +    install -d ${D}${includedir}
-> +    install -m 0644 ${B}/libsafestring_shared.so ${D}${libdir}
-> +    install -m 0644 ${B}/libsafestring_static.a ${D}${libdir}
-> +    install -m 0644 ${S}/include/*.h ${D}${includedir}
-> +}
-> +
-> +SOLIBS = ".so"
-> +FILES_SOLIBSDEV = ""
-> --
-> 2.17.1
->
-> 
+Upstream patch:
+https://hg.mozilla.org/projects/nss/rev/daa823a4a29bcef0fec33a379ec83857429aea2e
+
+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+---
+ ...e-a-fixed-length-for-DSA-exponentiat.patch | 110 ++++++++++++++++++
+ meta-oe/recipes-support/nss/nss_3.51.1.bb     |   1 +
+ 2 files changed, 111 insertions(+)
+ create mode 100644 meta-oe/recipes-support/nss/nss/0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch
+
+diff --git a/meta-oe/recipes-support/nss/nss/0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch b/meta-oe/recipes-support/nss/nss/0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch
+new file mode 100644
+index 000000000..517c277ae
+--- /dev/null
++++ b/meta-oe/recipes-support/nss/nss/0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch
+@@ -0,0 +1,110 @@
++From 5942c26888ba12ad5e0d92fb62f23d7cde6dc159 Mon Sep 17 00:00:00 2001
++From: Ovidiu Panait <ovidiu.panait@windriver.com>
++Date: Mon, 13 Jul 2020 06:25:56 +0000
++Subject: [PATCH] Bug 1631576 - Force a fixed length for DSA exponentiation
++ r=pereida,bbrumley
++
++Differential Revision: https://phabricator.services.mozilla.com/D72011
++
++Upstream-Status: Backport [https://hg.mozilla.org/projects/nss/rev/daa823a4a29bcef0fec33a379ec83857429aea2e]
++
++Authored-by: Robert Relyea <rrelyea@redhat.com>
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
++---
++ nss/lib/freebl/dsa.c | 45 ++++++++++++++++++++++++++++++++++----------
++ 1 file changed, 35 insertions(+), 10 deletions(-)
++
++diff --git a/nss/lib/freebl/dsa.c b/nss/lib/freebl/dsa.c
++index aef3539..389c9de 100644
++--- a/nss/lib/freebl/dsa.c
+++++ b/nss/lib/freebl/dsa.c
++@@ -313,13 +313,14 @@ DSA_NewKeyFromSeed(const PQGParams *params,
++ 
++ static SECStatus
++ dsa_SignDigest(DSAPrivateKey *key, SECItem *signature, const SECItem *digest,
++-               const unsigned char *kb)
+++               const unsigned char *kbytes)
++ {
++     mp_int p, q, g; /* PQG parameters */
++     mp_int x, k;    /* private key & pseudo-random integer */
++     mp_int r, s;    /* tuple (r, s) is signature) */
++     mp_int t;       /* holding tmp values */
++     mp_int ar;      /* holding blinding values */
+++    mp_digit fuzz;  /* blinding multiplier for q */
++     mp_err err = MP_OKAY;
++     SECStatus rv = SECSuccess;
++     unsigned int dsa_subprime_len, dsa_signature_len, offset;
++@@ -373,6 +374,7 @@ dsa_SignDigest(DSAPrivateKey *key, SECItem *signature, const SECItem *digest,
++     CHECK_MPI_OK(mp_init(&s));
++     CHECK_MPI_OK(mp_init(&t));
++     CHECK_MPI_OK(mp_init(&ar));
+++
++     /*
++     ** Convert stored PQG and private key into MPI integers.
++     */
++@@ -380,14 +382,28 @@ dsa_SignDigest(DSAPrivateKey *key, SECItem *signature, const SECItem *digest,
++     SECITEM_TO_MPINT(key->params.subPrime, &q);
++     SECITEM_TO_MPINT(key->params.base, &g);
++     SECITEM_TO_MPINT(key->privateValue, &x);
++-    OCTETS_TO_MPINT(kb, &k, dsa_subprime_len);
+++    OCTETS_TO_MPINT(kbytes, &k, dsa_subprime_len);
+++
+++    /* k blinding  create a single value that has the high bit set in
+++     * the mp_digit*/
+++    if (RNG_GenerateGlobalRandomBytes(&fuzz, sizeof(mp_digit)) != SECSuccess) {
+++        PORT_SetError(SEC_ERROR_NEED_RANDOM);
+++        rv = SECFailure;
+++        goto cleanup;
+++    }
+++    fuzz |= 1ULL << ((sizeof(mp_digit) * PR_BITS_PER_BYTE - 1));
++     /*
++     ** FIPS 186-1, Section 5, Step 1
++     **
++     ** r = (g**k mod p) mod q
++     */
++-    CHECK_MPI_OK(mp_exptmod(&g, &k, &p, &r)); /* r = g**k mod p */
++-    CHECK_MPI_OK(mp_mod(&r, &q, &r));         /* r = r mod q    */
+++    CHECK_MPI_OK(mp_mul_d(&q, fuzz, &t)); /* t = q*fuzz */
+++    CHECK_MPI_OK(mp_add(&k, &t, &t));     /* t = k+q*fuzz */
+++    /* length of t is now fixed, bits in k have been blinded */
+++    CHECK_MPI_OK(mp_exptmod(&g, &t, &p, &r)); /* r = g**t mod p */
+++    /* r is now g**(k+q*fuzz) == g**k mod p */
+++    CHECK_MPI_OK(mp_mod(&r, &q, &r)); /* r = r mod q    */
+++
++     /*
++     ** FIPS 186-1, Section 5, Step 2
++     **
++@@ -411,15 +427,24 @@ dsa_SignDigest(DSAPrivateKey *key, SECItem *signature, const SECItem *digest,
++     /* Using mp_invmod on k directly would leak bits from k. */
++     CHECK_MPI_OK(mp_mul(&k, &ar, &k));       /* k = k * ar */
++     CHECK_MPI_OK(mp_mulmod(&k, &t, &q, &k)); /* k = k * t mod q */
++-    CHECK_MPI_OK(mp_invmod(&k, &q, &k));     /* k = k**-1 mod q */
+++    /* k is now k*t*ar */
+++    CHECK_MPI_OK(mp_invmod(&k, &q, &k)); /* k = k**-1 mod q */
+++    /* k is now (k*t*ar)**-1 */
++     CHECK_MPI_OK(mp_mulmod(&k, &t, &q, &k)); /* k = k * t mod q */
++-    SECITEM_TO_MPINT(localDigest, &s);       /* s = HASH(M)     */
+++    /* k is now (k*ar)**-1 */
+++    SECITEM_TO_MPINT(localDigest, &s); /* s = HASH(M)     */
++     /* To avoid leaking secret bits here the addition is blinded. */
++-    CHECK_MPI_OK(mp_mul(&x, &ar, &x));        /* x = x * ar */
++-    CHECK_MPI_OK(mp_mulmod(&x, &r, &q, &x));  /* x = x * r mod q */
+++    CHECK_MPI_OK(mp_mul(&x, &ar, &x)); /* x = x * ar */
+++    /* x is now x*ar */
+++    CHECK_MPI_OK(mp_mulmod(&x, &r, &q, &x)); /* x = x * r mod q */
+++    /* x is now x*r*ar */
++     CHECK_MPI_OK(mp_mulmod(&s, &ar, &q, &t)); /* t = s * ar mod q */
++-    CHECK_MPI_OK(mp_add(&t, &x, &s));         /* s = t + x */
++-    CHECK_MPI_OK(mp_mulmod(&s, &k, &q, &s));  /* s = s * k mod q */
+++    /* t is now hash(M)*ar */
+++    CHECK_MPI_OK(mp_add(&t, &x, &s)); /* s = t + x */
+++    /* s is now (HASH(M)+x*r)*ar */
+++    CHECK_MPI_OK(mp_mulmod(&s, &k, &q, &s)); /* s = s * k mod q */
+++    /* s is now (HASH(M)+x*r)*ar*(k*ar)**-1 = (k**-1)*(HASH(M)+x*r) */
+++
++     /*
++     ** verify r != 0 and s != 0
++     ** mentioned as optional in FIPS 186-1.
++-- 
++2.18.1
++
+diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+index fba80ce2a..3d2c1340e 100644
+--- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
++++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+@@ -34,6 +34,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
+            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
+            file://riscv.patch \
+            file://0001-Enable-uint128-on-mips64.patch \
++           file://0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch \
+            "
+ 
+ SRC_URI[md5sum] = "6acaf1ddff69306ae30a908881c6f233"
+-- 
+2.17.1
+
