@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.9203.1594826706717423019
+ by mx.groups.io with SMTP id smtpd.web12.9065.1594826709510784039
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Jul 2020 08:25:07 -0700
+ Wed, 15 Jul 2020 08:25:09 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=33072 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jvjHM-0006eC-T7; Wed, 15 Jul 2020 18:25:05 +0300
+	id 1jvjHO-0006eC-L7; Wed, 15 Jul 2020 18:25:08 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-psutil: Upgrade 5.7.0 -> 5.7.2
-Date: Wed, 15 Jul 2020 18:24:47 +0300
-Message-Id: <20200715152450.29018-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-isort: Upgrade 4.3.21 -> 5.1.0
+Date: Wed, 15 Jul 2020 18:24:48 +0300
+Message-Id: <20200715152450.29018-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200715152450.29018-1-leon.anavi@konsulko.com>
 References: <20200715152450.29018-1-leon.anavi@konsulko.com>
@@ -30,45 +30,46 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 5.7.2:
+Upgrade to release 5.1.0:
 
-- wheels for 2.7 were inadvertently deleted.
-- parallel tests on UNIX (make test-parallel). They're twice as
-  fast!
-- "make build/install" is now run in parallel and it's about 15%
-  faster on UNIX.
-- Process.wait() on POSIX returns an enum, showing the negative
-  signal which was used to terminate the process.
-- Process.wait() return value is cached so that the exit code can
-  be retrieved on then next call.
-- memory leak tests are now stable.
-- Linux: cpu_freq() parsing should use spaces instead of tabs on
-  ia64.
-- Linux: Process.rlimit() does not handle long long type properly.
-- fix signature of callback function for getloadavg().
+- isort now throws an exception if an invalid settings path is
+  given (issue #1174).
+- Implemented support for automatic redundant alias removal
+  (issue #1281).
+- Implemented experimental support for floating all imports to
+  the top of a file (issue #1228)
+- Fixed #1178: support for semicolons in decorators.
+- Fixed #1315: Extra newline before comment with -n + --fss.
+- Fixed #1192: -k or --keep-direct-and-as-imports option has been
+  deprecated as it is now always on.
+
+For more details and breaking changes with release 5:
+https://github.com/timothycrosley/isort/blob/master/CHANGELOG.md
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-psutil_5.7.0.bb => python3-psutil_5.7.2.bb}     | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-psutil_5.7.0.bb => python3-psutil_5.7.2.bb} (64%)
+ .../{python3-isort_4.3.21.bb => python3-isort_5.1.0.bb}     | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-isort_4.3.21.bb => python3-isort_5.1.0.bb} (61%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-psutil_5.7.0.bb b/meta-python/recipes-devtools/python/python3-psutil_5.7.2.bb
-similarity index 64%
-rename from meta-python/recipes-devtools/python/python3-psutil_5.7.0.bb
-rename to meta-python/recipes-devtools/python/python3-psutil_5.7.2.bb
-index 170819d59..d61d501e9 100644
---- a/meta-python/recipes-devtools/python/python3-psutil_5.7.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-psutil_5.7.2.bb
-@@ -2,8 +2,9 @@ SUMMARY = "A cross-platform process and system utilities module for Python"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e35fd9f271d19d5f742f20a9d1f8bb8b"
+diff --git a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb b/meta-python/recipes-devtools/python/python3-isort_5.1.0.bb
+similarity index 61%
+rename from meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
+rename to meta-python/recipes-devtools/python/python3-isort_5.1.0.bb
+index e0b21ab55..a57b22361 100644
+--- a/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
++++ b/meta-python/recipes-devtools/python/python3-isort_5.1.0.bb
+@@ -2,10 +2,10 @@ SUMMARY = "A Python utility / library to sort Python imports."
+ HOMEPAGE = "https://pypi.python.org/pypi/isort"
+ LICENSE = "MIT"
+ SECTION = "devel/python"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=8227180126797a0148f94f483f3e1489"
  
--SRC_URI[md5sum] = "ed7b0f11ed214bcabbe76b7cf52f3ae3"
--SRC_URI[sha256sum] = "685ec16ca14d079455892f25bd124df26ff9137664af445563c1bd36629b5e0e"
-+PYPI_SRC_URI = "https://files.pythonhosted.org/packages/aa/3e/d18f2c04cf2b528e18515999b0c8e698c136db78f62df34eee89cee205f1/psutil-${PV}.tar.gz"
-+SRC_URI[md5sum] = "50bf39b4faa268ba1da8a9730bb38bb6"
-+SRC_URI[sha256sum] = "90990af1c3c67195c44c9a889184f84f5b2320dce3ee3acbd054e3ba0b4a7beb"
+-SRC_URI[md5sum] = "05d66f2eb7ce2c2d702e86bac24bf9e4"
+-SRC_URI[sha256sum] = "54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1"
++SRC_URI[md5sum] = "9e47f58de573c3fab674a70f0512e9f7"
++SRC_URI[sha256sum] = "b19b7ebce5e292507afa8fab30dd666011dd5ae8f4ef2a2d431751dc84c22140"
  
  inherit pypi setuptools3
  
