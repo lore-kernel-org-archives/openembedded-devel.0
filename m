@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.9070.1594826712838413588
+ by mx.groups.io with SMTP id smtpd.web12.9072.1594826714563016807
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Jul 2020 08:25:13 -0700
+ Wed, 15 Jul 2020 08:25:14 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=33072 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jvjHT-0006eC-CW; Wed, 15 Jul 2020 18:25:11 +0300
+	id 1jvjHU-0006eC-Nk; Wed, 15 Jul 2020 18:25:13 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-netaddr: Upgrade 0.7.20 -> 0.8.0
-Date: Wed, 15 Jul 2020 18:24:49 +0300
-Message-Id: <20200715152450.29018-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-bitarray: Upgrade 1.2.2 -> 1.4.1
+Date: Wed, 15 Jul 2020 18:24:50 +0300
+Message-Id: <20200715152450.29018-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200715152450.29018-1-leon.anavi@konsulko.com>
 References: <20200715152450.29018-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=0.0
+X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,46 +30,70 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.8.0:
+Upgrade to release 1.4.1:
 
-* Fixed weak reference support in classes with ``__slots__``
-* Added ``__bytes__`` to ``IPAddress`` for intuitive usage,
-  thanks to Michael Belousov.
-* Added ``format()`` function to EUI, thanks to Omer Anson.
-* Added ``IPNetwork.netmask`` property setter, thanks to
-  Naveen Nathan.
-* Added support for IABs in the ``40:D8:55`` OUI, thanks to
-  Brian Maissy.
-* Drastically optimized ``spanning_cidr()``, thanks to Brian
-  Maissy.
-* Fixed ``"x.x.x.x/x" in IPNetwork`` tests, thanks to xpac1985.
-* Added support for passing iterables of ``IPRange`` to ``IPSet``
-  and ``cidr_merge()``, based on a patch by Henry Stern.
+* add `.clear()` method (Python 3.3 added this method to lists)
+* avoid overallocation when bitarray objects are initially created
+* raise BufferError when resizing bitarrays which is exporting
+  buffers
+* add example to study the resize() function
+* improve some error messages
+* add more tests
+* raise `NotImplementedError` with (useful message) when trying to
+  call the `.fromstring()` or `.tostring()` methods, which have
+  been removed in the last release
+* add official Python 3.9 support
+* improve many docstrings
+* add DeprecationWarning for bitdiff()
+* add more tests
+* C-level:
+  - simplify pack/unpack code
+  - fix memory leak in '~' operation (bitarray_cpinvert)
+
+Use the exact line for the license in PKG-INFO.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-netaddr_0.7.20.bb => python3-netaddr_0.8.0.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-netaddr_0.7.20.bb => python3-netaddr_0.8.0.bb} (65%)
+ .../recipes-devtools/python/python3-bitarray_1.2.2.bb | 11 -----------
+ .../recipes-devtools/python/python3-bitarray_1.4.1.bb | 11 +++++++++++
+ 2 files changed, 11 insertions(+), 11 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-netaddr_0.7.20.bb b/meta-python/recipes-devtools/python/python3-netaddr_0.8.0.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-netaddr_0.7.20.bb
-rename to meta-python/recipes-devtools/python/python3-netaddr_0.8.0.bb
-index bc7598c46..a120b24f1 100644
---- a/meta-python/recipes-devtools/python/python3-netaddr_0.7.20.bb
-+++ b/meta-python/recipes-devtools/python/python3-netaddr_0.8.0.bb
-@@ -2,8 +2,8 @@ SUMMARY = "A network address manipulation library for Python."
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e6345d695ffe3776f68a56fe7962db44"
- 
--SRC_URI[md5sum] = "f254d6b61e07123f9e2643b1dcbd03df"
--SRC_URI[sha256sum] = "d09252e5aec3913815d77eb8e8ea8fa6eb33521253e52f977f6abaa964776f3e"
-+SRC_URI[md5sum] = "34cad578473b66ad77bc3b2a7613ed4a"
-+SRC_URI[sha256sum] = "d6cc57c7a07b1d9d2e917aa8b36ae8ce61c35ba3fcd1b83ca31c5a0ee2b5a243"
- 
- inherit pypi setuptools3
- 
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
+deleted file mode 100644
+index c495738c4..000000000
+--- a/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
+-HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+-LICENSE = "PSF"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=d331e1d54f5e78247388f5416c2ab928"
+-
+-SRC_URI[md5sum] = "81c48852b0bc538ac3ed25fae020360c"
+-SRC_URI[sha256sum] = "27a69ffcee3b868abab3ce8b17c69e02b63e722d4d64ffd91d659f81e9984954"
+-
+-inherit setuptools3 pypi
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb
+new file mode 100644
+index 000000000..4866e8464
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
++HOMEPAGE = "https://github.com/ilanschnell/bitarray"
++LICENSE = "PSF"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
++
++SRC_URI[md5sum] = "dfb3fe66ae989e4724747fcb0f704f56"
++SRC_URI[sha256sum] = "9e26d3dc7fad932fed66e08da3fcf93dd15e8402aa84e764e1e2a9e1b6ae2b7f"
++
++inherit setuptools3 pypi
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
