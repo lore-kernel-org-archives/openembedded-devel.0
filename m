@@ -1,170 +1,142 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web11.15627.1594714999494503848
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
+ by mx.groups.io with SMTP id smtpd.web12.61.1594785156618436651
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Jul 2020 01:23:19 -0700
+ Tue, 14 Jul 2020 20:52:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: ovidiu.panait@windriver.com)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 06E8MvZU016918
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Jul 2020 01:23:08 -0700
-Received: from otp-linux01.wrs.com (128.224.126.17) by ALA-HCB.corp.ad.wrs.com
- (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Tue, 14 Jul 2020
- 01:22:46 -0700
-From: "Ovidiu Panait" <ovidiu.panait@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][dunfell][PATCH 1/1] nss: Fix CVE-2020-12399
-Date: Tue, 14 Jul 2020 11:20:35 +0300
-Message-ID: <20200714082035.28659-1-ovidiu.panait@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=OiPlGKKt;
+ spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f46.google.com with SMTP id o22so1958614pjw.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Jul 2020 20:52:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=sCAJd6div5qY9UKgz0zK7o5c2NroERT9lfbnT9o2pdM=;
+        b=OiPlGKKtGit815+OiKQo2VfbDVU+PBTaFlIryE77ukku5lWUPXHxMtQzeM50ljJvhN
+         aiQrYmpPBSKf40G7jeCfUNJTk34A6qz3oPzl91YVzVYK4erSL64U4V6wDff3w6BSaH63
+         pNBlofxt1UMqPa9LI5q2Ko+eFwCA2iltyNsjH4drO0U4zkPDY+8HQPgr8IgbmXkV/kQK
+         2KKb47n3YnGMQ0goKNUGiTYFqek778UzO48N3VclhvJCt7w7JjI4Or8Bsvy64ZlNk1et
+         X3aAAy8hx8wS0/MsQwIamQ7FV8E/VKnIbos55MWhtaP7hgppIui7OpIKUGyTR9xJOjPj
+         UOLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:autocrypt
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-transfer-encoding:content-language;
+        bh=sCAJd6div5qY9UKgz0zK7o5c2NroERT9lfbnT9o2pdM=;
+        b=L9aiEtWE1eIxocvX/YTnBCgM2Se2Daui2ODmUyUQKJVaCUIxi1lDtMdA7Nyfxj2zvB
+         nunH6BkS1kXbRSYMRduuHF+h+Ej1zZlwycy8tiL9LZDzJx1wuKoIotB7qGd0yBp6+lSE
+         TKf5grR8OSTiGXtOWMaJz8F+dqRzyBXel6xy5ylHZQO8ZV0a4VTYyB9yJUng3f533uoB
+         qnn6p3t6OynC6xlFMKOHkpISJCTrTUAbKugFOP6Ryg//2DSv8Y/t9ReHN9il9EJx0gzI
+         gTdaggFhmnz9SxiA09obcm2EUBd1F2OHWAaAm8MZYtHg4T0aWrM49z2P5JeObqxMhUdJ
+         Jxnw==
+X-Gm-Message-State: AOAM533UMYCO6WeO/8a8j4UHQ3JHdoSjFzP7/29UOQAdgag1+wYYkRzf
+	z9DdarIeU/Ktwt2OAYOs2Wp3hJh5Nkw=
+X-Google-Smtp-Source: ABdhPJwRoD3NAYqh/hSopmoKeXfg7WPRrx8h5xazH53XBEwskABEy3xFHQP6RhFmMDEA01MnCJOYbw==
+X-Received: by 2002:a17:90b:1b44:: with SMTP id nv4mr8037405pjb.84.1594785155920;
+        Tue, 14 Jul 2020 20:52:35 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:7df4:7f73:717d:af68? ([2601:202:4180:a5c0:7df4:7f73:717d:af68])
+        by smtp.gmail.com with ESMTPSA id r2sm526677pfh.106.2020.07.14.20.52.34
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 14 Jul 2020 20:52:35 -0700 (PDT)
+Subject: Re: [oe] [dunfel 03/32] jsoncpp: upgrade 1.9.2 -> 1.9.3
+To: Khem Raj <raj.khem@gmail.com>, Mikko Rapeli <Mikko.Rapeli@bmw.de>
+Cc: Martin Jansa <Martin.Jansa@gmail.com>,
+ openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <cover.1593561840.git.akuster808@gmail.com>
+ <fc1b28e574a01410f082034c1f8212139b6107e1.1593561840.git.akuster808@gmail.com>
+ <CA+chaQc92KeJnoG+NPi6EvKMHNnLCbN8AFPS9Usdc1S1WNHu9A@mail.gmail.com>
+ <24a9b660-a636-a614-4e5c-62bc9782ade3@gmail.com>
+ <CA+chaQen7fpxTQ2eT933-5pZjsSpT0pJhciP2UY8V5rwe-6X1w@mail.gmail.com>
+ <afc84fcc-e8bb-c8d2-52a4-372b72840857@gmail.com>
+ <20200710073738.GQ108868@korppu>
+ <06e723c4-54f1-10f8-3d2a-f8be6cca1a06@gmail.com>
+ <20200713082540.GX108868@korppu>
+ <CAMKF1soout4WD0nWYa5Nmx9+GiW69UfLTpP6x+iFPtWF0mny1A@mail.gmail.com>
+From: "akuster" <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+ 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
+ 8CS2NxU=
+Message-ID: <3dad38ce-0b75-2a75-6488-189753b36ac4@gmail.com>
+Date: Tue, 14 Jul 2020 20:52:34 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain
+In-Reply-To: <CAMKF1soout4WD0nWYa5Nmx9+GiW69UfLTpP6x+iFPtWF0mny1A@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Master (nss version 3.54) is not affected by this issue. This is a backport
-from nss version 3.54.
 
-NSS has shown timing differences when performing DSA signatures, which was
-exploitable and could eventually leak private keys. This vulnerability affects
-Thunderbird < 68.9.0, Firefox < 77, and Firefox ESR < 68.9.
 
-Upstream patch:
-https://hg.mozilla.org/projects/nss/rev/daa823a4a29bcef0fec33a379ec83857429aea2e
+On 7/13/20 8:46 AM, Khem Raj wrote:
+> On Mon, Jul 13, 2020 at 1:25 AM <Mikko.Rapeli@bmw.de> wrote:
+>> Hi,
+>>
+>> On Sun, Jul 12, 2020 at 11:41:58AM -0700, akuster wrote:
+>>>
+>>> On 7/10/20 12:37 AM, Mikko.Rapeli@bmw.de wrote:
+>>>> Hi,
+>>>>
+>>>> jsoncpp seems to have messy ABI history so I would not update even minor versions
+>>>> in stable branch:
+>>> so are you for a revert?
+>> Yes, I would prefer a revert.
+> I think that's fine. Armin can you include this in your latest pull
+> review bundle, please?
 
-Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
----
- ...e-a-fixed-length-for-DSA-exponentiat.patch | 110 ++++++++++++++++++
- meta-oe/recipes-support/nss/nss_3.51.1.bb     |   1 +
- 2 files changed, 111 insertions(+)
- create mode 100644 meta-oe/recipes-support/nss/nss/0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch
+Sure.  I have a few more things to capture too.
 
-diff --git a/meta-oe/recipes-support/nss/nss/0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch b/meta-oe/recipes-support/nss/nss/0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch
-new file mode 100644
-index 000000000..517c277ae
---- /dev/null
-+++ b/meta-oe/recipes-support/nss/nss/0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch
-@@ -0,0 +1,110 @@
-+From 5942c26888ba12ad5e0d92fb62f23d7cde6dc159 Mon Sep 17 00:00:00 2001
-+From: Ovidiu Panait <ovidiu.panait@windriver.com>
-+Date: Mon, 13 Jul 2020 06:25:56 +0000
-+Subject: [PATCH] Bug 1631576 - Force a fixed length for DSA exponentiation
-+ r=pereida,bbrumley
-+
-+Differential Revision: https://phabricator.services.mozilla.com/D72011
-+
-+Upstream-Status: Backport [https://hg.mozilla.org/projects/nss/rev/daa823a4a29bcef0fec33a379ec83857429aea2e]
-+
-+Authored-by: Robert Relyea <rrelyea@redhat.com>
-+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
-+---
-+ nss/lib/freebl/dsa.c | 45 ++++++++++++++++++++++++++++++++++----------
-+ 1 file changed, 35 insertions(+), 10 deletions(-)
-+
-+diff --git a/nss/lib/freebl/dsa.c b/nss/lib/freebl/dsa.c
-+index aef3539..389c9de 100644
-+--- a/nss/lib/freebl/dsa.c
-++++ b/nss/lib/freebl/dsa.c
-+@@ -313,13 +313,14 @@ DSA_NewKeyFromSeed(const PQGParams *params,
-+ 
-+ static SECStatus
-+ dsa_SignDigest(DSAPrivateKey *key, SECItem *signature, const SECItem *digest,
-+-               const unsigned char *kb)
-++               const unsigned char *kbytes)
-+ {
-+     mp_int p, q, g; /* PQG parameters */
-+     mp_int x, k;    /* private key & pseudo-random integer */
-+     mp_int r, s;    /* tuple (r, s) is signature) */
-+     mp_int t;       /* holding tmp values */
-+     mp_int ar;      /* holding blinding values */
-++    mp_digit fuzz;  /* blinding multiplier for q */
-+     mp_err err = MP_OKAY;
-+     SECStatus rv = SECSuccess;
-+     unsigned int dsa_subprime_len, dsa_signature_len, offset;
-+@@ -373,6 +374,7 @@ dsa_SignDigest(DSAPrivateKey *key, SECItem *signature, const SECItem *digest,
-+     CHECK_MPI_OK(mp_init(&s));
-+     CHECK_MPI_OK(mp_init(&t));
-+     CHECK_MPI_OK(mp_init(&ar));
-++
-+     /*
-+     ** Convert stored PQG and private key into MPI integers.
-+     */
-+@@ -380,14 +382,28 @@ dsa_SignDigest(DSAPrivateKey *key, SECItem *signature, const SECItem *digest,
-+     SECITEM_TO_MPINT(key->params.subPrime, &q);
-+     SECITEM_TO_MPINT(key->params.base, &g);
-+     SECITEM_TO_MPINT(key->privateValue, &x);
-+-    OCTETS_TO_MPINT(kb, &k, dsa_subprime_len);
-++    OCTETS_TO_MPINT(kbytes, &k, dsa_subprime_len);
-++
-++    /* k blinding  create a single value that has the high bit set in
-++     * the mp_digit*/
-++    if (RNG_GenerateGlobalRandomBytes(&fuzz, sizeof(mp_digit)) != SECSuccess) {
-++        PORT_SetError(SEC_ERROR_NEED_RANDOM);
-++        rv = SECFailure;
-++        goto cleanup;
-++    }
-++    fuzz |= 1ULL << ((sizeof(mp_digit) * PR_BITS_PER_BYTE - 1));
-+     /*
-+     ** FIPS 186-1, Section 5, Step 1
-+     **
-+     ** r = (g**k mod p) mod q
-+     */
-+-    CHECK_MPI_OK(mp_exptmod(&g, &k, &p, &r)); /* r = g**k mod p */
-+-    CHECK_MPI_OK(mp_mod(&r, &q, &r));         /* r = r mod q    */
-++    CHECK_MPI_OK(mp_mul_d(&q, fuzz, &t)); /* t = q*fuzz */
-++    CHECK_MPI_OK(mp_add(&k, &t, &t));     /* t = k+q*fuzz */
-++    /* length of t is now fixed, bits in k have been blinded */
-++    CHECK_MPI_OK(mp_exptmod(&g, &t, &p, &r)); /* r = g**t mod p */
-++    /* r is now g**(k+q*fuzz) == g**k mod p */
-++    CHECK_MPI_OK(mp_mod(&r, &q, &r)); /* r = r mod q    */
-++
-+     /*
-+     ** FIPS 186-1, Section 5, Step 2
-+     **
-+@@ -411,15 +427,24 @@ dsa_SignDigest(DSAPrivateKey *key, SECItem *signature, const SECItem *digest,
-+     /* Using mp_invmod on k directly would leak bits from k. */
-+     CHECK_MPI_OK(mp_mul(&k, &ar, &k));       /* k = k * ar */
-+     CHECK_MPI_OK(mp_mulmod(&k, &t, &q, &k)); /* k = k * t mod q */
-+-    CHECK_MPI_OK(mp_invmod(&k, &q, &k));     /* k = k**-1 mod q */
-++    /* k is now k*t*ar */
-++    CHECK_MPI_OK(mp_invmod(&k, &q, &k)); /* k = k**-1 mod q */
-++    /* k is now (k*t*ar)**-1 */
-+     CHECK_MPI_OK(mp_mulmod(&k, &t, &q, &k)); /* k = k * t mod q */
-+-    SECITEM_TO_MPINT(localDigest, &s);       /* s = HASH(M)     */
-++    /* k is now (k*ar)**-1 */
-++    SECITEM_TO_MPINT(localDigest, &s); /* s = HASH(M)     */
-+     /* To avoid leaking secret bits here the addition is blinded. */
-+-    CHECK_MPI_OK(mp_mul(&x, &ar, &x));        /* x = x * ar */
-+-    CHECK_MPI_OK(mp_mulmod(&x, &r, &q, &x));  /* x = x * r mod q */
-++    CHECK_MPI_OK(mp_mul(&x, &ar, &x)); /* x = x * ar */
-++    /* x is now x*ar */
-++    CHECK_MPI_OK(mp_mulmod(&x, &r, &q, &x)); /* x = x * r mod q */
-++    /* x is now x*r*ar */
-+     CHECK_MPI_OK(mp_mulmod(&s, &ar, &q, &t)); /* t = s * ar mod q */
-+-    CHECK_MPI_OK(mp_add(&t, &x, &s));         /* s = t + x */
-+-    CHECK_MPI_OK(mp_mulmod(&s, &k, &q, &s));  /* s = s * k mod q */
-++    /* t is now hash(M)*ar */
-++    CHECK_MPI_OK(mp_add(&t, &x, &s)); /* s = t + x */
-++    /* s is now (HASH(M)+x*r)*ar */
-++    CHECK_MPI_OK(mp_mulmod(&s, &k, &q, &s)); /* s = s * k mod q */
-++    /* s is now (HASH(M)+x*r)*ar*(k*ar)**-1 = (k**-1)*(HASH(M)+x*r) */
-++
-+     /*
-+     ** verify r != 0 and s != 0
-+     ** mentioned as optional in FIPS 186-1.
-+-- 
-+2.18.1
-+
-diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-index fba80ce2a..3d2c1340e 100644
---- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-@@ -34,6 +34,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
-            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
-            file://riscv.patch \
-            file://0001-Enable-uint128-on-mips64.patch \
-+           file://0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch \
-            "
- 
- SRC_URI[md5sum] = "6acaf1ddff69306ae30a908881c6f233"
--- 
-2.17.1
+-armin
+>
+>> -Mikko
+>>
+>>> -armin
+>>>> https://abi-laboratory.pro/index.php?view=timeline&l=jsoncpp
+>>>>
+>>>> Cheers,
+>>>>
+>>>> -Mikko
+>>> 
 
