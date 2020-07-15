@@ -1,17 +1,17 @@
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.73])
- by mx.groups.io with SMTP id smtpd.web11.4999.1594857165819697638
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.49])
+ by mx.groups.io with SMTP id smtpd.web12.4852.1594857176658605200
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Jul 2020 16:52:46 -0700
+ Wed, 15 Jul 2020 16:52:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=XaaC2dSt;
- spf=pass (domain: windriver.com, ip: 40.107.244.73, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=l/GcYvBx;
+ spf=pass (domain: windriver.com, ip: 40.107.244.49, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=T1r20lUqTj04/pBJPCeb1w6Dg+Vv/zacrz8j8Sd4PrW6BtLU8iKDJbzSvfzBI4wRhNQvPyjyGplEm4tDe6xeIIEUewKjbaPCquGXEyg4L6dZq2BySwEOfJ+qeU108LwBkBa7KhCUohc8FblvPhLJ5xByfV2r7nIGCgzAJsWGGj4Ox9JfEKpeIt8+Uvo5b2tRXc00WJg5ONZFJ8jkBBHMDGZ9a4y5RfThoqVrx7vEGH0lUAh/9D+lDqGOM7wp184avL16gKd2ymS4KfKzzqn2n0uy/cUpw3+ozobcMldBpR6Qv77rofbazjkcQcQcdlc/i8xoTXslNn8iptZCsMS2Qg==
+ b=gExo1vMgZ0JAdPDYhyLVWzmatxPCJeTqgrMFFHT7Lrjs4YQe4mm6v88emQVwAV+uy9yea8C9LgLX8TslV/jhJtKnOzbJaTf6JhWpJP67Iave+TpfNye8sjweeFXkmpTu0DuQkBtolCg6qp4KExBDhCMh3gyyTffTRH94OTNdO5U6GAMf/0n8ECyEzfnrK1KPx8weZvh8arLkcx+T+6wWKrZX14pWb+7eNIY4KWQa91oOdf/vB7w7yk5apDUm6heHeHqc2mTGlklAHrNuENmQhrZn/8SvqKtVAsq7XCUN/lbEhBhqzZ7Axi4Gd1EM9X/RC+d/BQddvwuUKx0MoO0Mug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YzayMSgpav+zOs+8/V2sNHobocv7ChCZpCLfNzmQMnU=;
- b=BZF0oXjKfzn54AsrUPXV0oiAl0+dx8i56O8yLcqwFYp3C9TymmcabvuwYX7DiZA7NozRpIfY34zIEWM3pezZgZOCpHM2IsIECJY8OLp8ypJsy03xCqGgD+kKPTbMfckgpiizAKIYlb/Hk2/TNBYjupd3Tj5kp6ZgrpCHCiDc6oKmdzEP6fpDrhIhr8cuYX9SO60qVchXT3rOTbhQXbZOUDzeWLnmMcoR+N+uG+wzwHZkWmt5ZlaA6UdrTqPLHk82OMmOc/yRx06MZjKSHwivMuaox0D3ZUprridWykrwMZtscs2wUfDv4ZbDFUYEQX4GgAvWccULjamkPfMJom/83Q==
+ bh=NIjWi6ZUh1bvtQXC1M6IXw1BsdnnOwbw7GUtbd5MVrQ=;
+ b=MxW9W9SkgwHt3zFprJkZoxp/8s8XAk0X2GmstSWeMPIxc1qhn0s8qZwh1Q3yTF554OeBIZs2baV3yMYxMpTw1eHDHaCQj69RQBx+MybrJ7pTi9p+kT2VikxmvIRYguEDv1CcSXl6Mpv+h+y+zJp+QM69e+Dc7bZmr6xG6i/WVHQM2/qaJwTtCw+DIYrr1OlAxJEyq9PpqE906MoRJIQD6HD9vnXUdgGGnUm1rYIFnSYLPlJRnwlJcP4oD6iRAOFxaKC4+FQiimF7WdXJC6FkkZbr3bHzFGTOWU2JnNP4nrHore/xUohhBeqjRsTSJz2wYHpEQkd8giZFdd19UZyj3A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YzayMSgpav+zOs+8/V2sNHobocv7ChCZpCLfNzmQMnU=;
- b=XaaC2dStMmo7QfljHoIm+6jFprdbScHrdPv6cwSA5o9CKstdkb7BlsbEhOFaqDnMYA1+zR4ZjyhFFnrqv0bJLCKb6Sr5XpS3W1Qbn2a/t/lCiBBcH6hzWbfb5QIJLLLjwCUmNnSsM1V79rxCb+NROGKnRJpaT5YgOZlm+PRMcDs=
+ bh=NIjWi6ZUh1bvtQXC1M6IXw1BsdnnOwbw7GUtbd5MVrQ=;
+ b=l/GcYvBxNfadC0Y5/sjJ5BPj80ldJu1XuGhBX5EDUpPr0gWeHaOlFOqJ/jx6Jhg4Jz9+9ZoRMcprkUp4ky97rIQqJWLt1Okxg5tMj4STg5CVM3KLBV4biygchA3hvR8auUA26cQVwhkcDEDrwWYMPceonoPoAu0xt7HUiuf5OS0=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,59 +28,59 @@ Received: from CY4PR11MB0006.namprd11.prod.outlook.com (2603:10b6:910:7b::18)
  by CY4PR11MB0055.namprd11.prod.outlook.com (2603:10b6:910:76::12) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.24; Wed, 15 Jul
- 2020 23:52:45 +0000
+ 2020 23:52:55 +0000
 Received: from CY4PR11MB0006.namprd11.prod.outlook.com
  ([fe80::f422:a1ed:36f3:82d4]) by CY4PR11MB0006.namprd11.prod.outlook.com
  ([fe80::f422:a1ed:36f3:82d4%7]) with mapi id 15.20.3195.018; Wed, 15 Jul 2020
- 23:52:44 +0000
-Subject: Re: [oe] [meta-python][PATCH 2/5] python3-ecdsa: add package
+ 23:52:55 +0000
+Subject: Re: [oe] [meta-python][PATCH 3/5] python3-rsa: add new package
 To: akuster <akuster808@gmail.com>, openembedded-devel@lists.openembedded.org
 References: <20200711031932.5883-1-akuster808@gmail.com>
- <20200711031932.5883-2-akuster808@gmail.com>
+ <20200711031932.5883-3-akuster808@gmail.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <898d4c4b-c846-bc0c-eaa9-bac86192add9@windriver.com>
-Date: Wed, 15 Jul 2020 19:52:42 -0400
+Message-ID: <42b338ee-a648-58f4-91ac-14f2b6912993@windriver.com>
+Date: Wed, 15 Jul 2020 19:52:52 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200711031932.5883-2-akuster808@gmail.com>
-X-ClientProxiedBy: YT1PR01CA0094.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2d::33) To CY4PR11MB0006.namprd11.prod.outlook.com
+In-Reply-To: <20200711031932.5883-3-akuster808@gmail.com>
+X-ClientProxiedBy: YT1PR01CA0088.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2d::27) To CY4PR11MB0006.namprd11.prod.outlook.com
  (2603:10b6:910:7b::18)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0094.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::33) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3195.18 via Frontend Transport; Wed, 15 Jul 2020 23:52:44 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0088.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::27) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3195.18 via Frontend Transport; Wed, 15 Jul 2020 23:52:54 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 27ff3044-8000-4ffc-dab5-08d8291a2b31
+X-MS-Office365-Filtering-Correlation-Id: b406b319-b803-4398-fc51-08d8291a3189
 X-MS-TrafficTypeDiagnostic: CY4PR11MB0055:
 X-Microsoft-Antispam-PRVS: 
-	<CY4PR11MB0055C6FF7CEEFC72AA44AB049F7E0@CY4PR11MB0055.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:281;
+	<CY4PR11MB0055ED8463F11FBDD19858FB9F7E0@CY4PR11MB0055.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:247;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	dmg9x8R7QPWleQZ+v8VHz8PLrB9B275/XVKipz5NL4XjP8+b4vribse2uKlsATtTAFxwlwhXGh/MuBBo6TPfK6t4verPyFxs9lt8omktv++FfgKIvqbQmCNhwZMXwc5q3uX8XBL1pX8kP32bkwXf6bQEYjyn039cMq1Gtvp8TAnEUgx1qBPevfjeZbBt62B9DbZfJFTy0JIpSPhV5t14DmIuwh45cHwX8PgEihvoOuHkguFIaPdt53IEQGCAGITYU0HcpPM58/sfOcyk2V92iwutQ9DvKiI/rgcBxfyI9dFwjIyWuTgMeWeOO6Y+G8AmU4jUwf+5JNMXYiBOlkJ+aWpx5sPELoizfQtt4arhVaMEUkZVsM6u7YfpaCOmXDV2QPUOw+R2uTh1LFwdL0a1WQeTWXCVRhOM4582bVrONV1SnE9jIg02ABuaHv96F2wH5J7XrZbXWZJhzBXJq8wf2g==
+	EADqiOt0Eey6JNoNfXLUbTu4NX2TvsB8iNPiJTLpft44wYkfYQQoZYmW1/Gs5Iyy4T4uiK3h9iWf/ip2LMNYE8NxUQoRoixoJ8nXW1HX7vOJfD5cwxyfLyS0IQiJtaQgOe+n3uSBi5qPQgtNIjDvodfHBRzeepiovp+CcIl3JIIMRNUkZhwEpH4DgA0elMItRSWXXYS6PMr/xZIya30gpe92ffYapvQ0He18b+/ABTIDRhwK72TTFtEqB0Xbm0UIMIriF9BlyxKmLLD04Jay9MColmkgnEszWGhydRSD7VWlUtlGRYHgzasrnSdKpv5+mU3GWBKAtdJDtLzP/oVY69atn9oTv91qOBE7cyezStgBVC5Ojzmv2dNhP7mOxJ6tlagunXIU8Q7yfEl5oAgoM8kiYghFCjNG9B8t4OawuB798dDdbTJkHn/rjyMxjgs6bifhmOmXvl45kxIyWjdmYA==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CY4PR11MB0006.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(376002)(346002)(366004)(39850400004)(396003)(136003)(86362001)(316002)(8936002)(31696002)(2906002)(5660300002)(478600001)(16576012)(166002)(966005)(36756003)(31686004)(8676002)(186003)(956004)(16526019)(52116002)(44832011)(66946007)(83380400001)(6486002)(66476007)(26005)(2616005)(33964004)(53546011)(66556008)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	vYFaQQP08MKcY3JspxTZj/FWTTR7/tCCEOGbYoORMdu36n5gx71PUZhFKzL7FCdWHVbwLlgT6L9MdAsA+PP74ProWAEjmsjIo6JralaSoOiiIiNuDumv4zN2pbqZKOBTAAh3bZHKnuLy6YjEK262NqxmsU4E/bl0WEXUrMqKWr9ydtp7kv2/DqBSArhLQqlLCH3jubYFR3ZHRSN1o6VWC6QX8ZgEtlxmnZrJwmBQiHc95jZNA53w4DBBoIRVJrxGwtxtLxsZZBaPO/V2r4AFB5ApUr6m+dYp4Mfo9SwhXYahsIbwbNPX230neO6j8MlhmjbIHKWUb+nTC6hTUms8Sh73fueVjryTafNXKfwuVbWNfQl6BuJPsch39wOTQyzwl0UnSWbeX2+COB5lrOJm77fN/dleIZXxnj+tyVNh+du1aels8hTseO7/jstAgZrcast0tsnZO1r0RqsLMhuD1BDwn2uDw+X888Ht5Vn+Ip8=
+	zRmaqH739xFgfkZA/Womfq/8MLMEWxYFCcBrGiPffpg5AFBPcsx5ztqUPQAlUkO9U77y9NxHsGpfXRHC09+3a1dLxoJSELJ68QNF1sb8cdZI8fHyNFIF5UuVwqcLmHJgAUa0qLc0b1+tGbW8UBKmmCQE0SjQULZsadcVq+/v90XtNr5WwQWOVZzo1F2VAI20FpNpAjbqMDoWPyGTyflysNmqQ2Ph5lW+9ye/IFy1G31lXTaJkzkXXow5nL3iXqGrGmX8RdTOR4V+2iDhL27TjjrHMBjodR8ipac/YXJ3sTCN7djUOF46GDD8Ma3xXg4t0qxI7O94BD56jvAlPj/Ax37ndzuz0ljlXy9/GYCxByWrXX2hUY4Rn8ZyuVWlymQOYDm6ERChw666QhWPprmz9tNS83DGGrKNImCkt5S9OASREah11Bphy68eJhERMp8NnuBy3dpQi4qGFnQ1pqdFgIOfRHuZIAQyRlsPnDfN1hg=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 27ff3044-8000-4ffc-dab5-08d8291a2b31
+X-MS-Exchange-CrossTenant-Network-Message-Id: b406b319-b803-4398-fc51-08d8291a3189
 X-MS-Exchange-CrossTenant-AuthSource: CY4PR11MB0006.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2020 23:52:44.7718
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2020 23:52:55.3678
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: XO6rWyo2/ivMbdljRJi3k7HhOLFMhGmxAEb2OVUFmLAicYmlR8b1HZdScrkufTr3HAhrWvFStjlerlCZCovcJ2GzhNg8iguuaHaqA1zCapA=
+X-MS-Exchange-CrossTenant-UserPrincipalName: WCRXmnFLgWtfc6cDPdPP47o+qiw40TEwIH/RSe/DFMf+KrvbESszucqnx0XeDgOF3e3Sy4Mubox5P4Snq5opaAhrhnFKia4f+GL/jPmdFFw=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR11MB0055
 Content-Type: multipart/alternative;
- boundary="------------A1F3B083E1821FDF12620154"
+ boundary="------------D928B9FA2D432F60674EBD0D"
 Content-Language: en-US
 
---------------A1F3B083E1821FDF12620154
+--------------D928B9FA2D432F60674EBD0D
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -89,33 +89,64 @@ On 7/10/20 11:19 PM, akuster wrote:
 > Signed-off-by: Armin Kuster <akuster808@gmail.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-devtools/python/python3-ecdsa_0.15.bb   | 13 +++++++++++++
->   1 file changed, 13 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb
+>   .../python/python3-rsa_3.4.2.bb               | 44 +++++++++++++++++++
+>   1 file changed, 44 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb b/meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb b/meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb
 > new file mode 100644
-> index 0000000000..aba62f3ef9
+> index 0000000000..759214fa38
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb
-> @@ -0,0 +1,13 @@
-> +SUMMARY = "ECDSA cryptographic signature library (pure python)"
+> +++ b/meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb
+> @@ -0,0 +1,44 @@
+> +SUMMARY = "Pure-Python RSA implementation"
 > +SECTION = "devel/python"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=66ffc5e30f76cbb5358fe54b645e5a1d"
+> +AUTHOR = "Sybren A. Stuvel"
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=c403f6882d4f97a9cd927df987d55634"
 > +
-> +DEPENDS += "python3-pip python3-pbr"
+> +SRC_URI[sha256sum] = "25df4e10c263fb88b5ace923dd84bf9aa7f5019687b5e55382ffcdb8bede9db5"
 > +
-> +PYPI_PACKAGE = "ecdsa"
-> +SRC_URI[sha256sum] = "8f12ac317f8a1318efa75757ef0a651abe12e51fc1af8838fb91079445227277"
+> +inherit pypi setuptools3 update-alternatives
 > +
-> +inherit pypi setuptools3
+> +ALTERNATIVE_${PN} = "\
+> +    pyrsa-decrypt \
+> +    pyrsa-decrypt-bigfile \
+> +    pyrsa-encrypt \
+> +    pyrsa-encrypt-bigfile \
+> +    pyrsa-keygen \
+> +    pyrsa-priv2pub \
+> +    pyrsa-sign \
+> +    pyrsa-verify \
+> +"
 > +
-> +RDEPENDS_${PN} += "python3-six python3-gmpy2 python3-pbr"
+> +ALTERNATIVE_LINK_NAME[pyrsa-decrypt] = "${bindir}/pyrsa-decrypt"
+> +ALTERNATIVE_LINK_NAME[pyrsa-decrypt-bigfile] = "${bindir}/pyrsa-decrypt-bigfile"
+> +ALTERNATIVE_LINK_NAME[pyrsa-encrypt] = "${bindir}/pyrsa-encrypt"
+> +ALTERNATIVE_LINK_NAME[pyrsa-encrypt-bigfile] = "${bindir}/pyrsa-encrypt-bigfile"
+> +ALTERNATIVE_LINK_NAME[pyrsa-keygen] = "${bindir}/pyrsa-keygen"
+> +ALTERNATIVE_LINK_NAME[pyrsa-priv2pub] = "${bindir}/pyrsa-priv2pub"
+> +ALTERNATIVE_LINK_NAME[pyrsa-sign] = "${bindir}/pyrsa-sign"
+> +ALTERNATIVE_LINK_NAME[pyrsa-verify] = "${bindir}/pyrsa-verify"
+> +ALTERNATIVE_PRIORITY = "30"
+> +
+> +
+> +RDEPENDS_${PN} += "\
+> +    ${PYTHON_PN}-compression \
+> +    ${PYTHON_PN}-crypt \
+> +    ${PYTHON_PN}-doctest \
+> +    ${PYTHON_PN}-logging \
+> +    ${PYTHON_PN}-math \
+> +    ${PYTHON_PN}-multiprocessing \
+> +    ${PYTHON_PN}-netclient \
+> +    ${PYTHON_PN}-pickle \
+> +"
+> +
+> +RDEPENDS_${PN} += "${PYTHON_PN}-pyasn1"
 >
 > 
 
---------------A1F3B083E1821FDF12620154
+--------------D928B9FA2D432F60674EBD0D
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -127,36 +158,67 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 7/10/20 11:19 PM, akuster wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200711031932.5883-2-akuster808@gmail.com">
+    <blockquote type="cite" cite="mid:20200711031932.5883-3-akuster808@gmail.com">
       <pre class="moz-quote-pre" wrap="">Signed-off-by: Armin Kuster <a class="moz-txt-link-rfc2396E" href="mailto:akuster808@gmail.com">&lt;akuster808@gmail.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200711031932.5883-2-akuster808@gmail.com">
+    <blockquote type="cite" cite="mid:20200711031932.5883-3-akuster808@gmail.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python3-ecdsa_0.15.bb   | 13 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
- 1 file changed, 13 insertions(&#43;)
- create mode 100644 meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb
+ .../python/python3-rsa_3.4.2.bb               | 44 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
+ 1 file changed, 44 insertions(&#43;)
+ create mode 100644 meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb b/meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb
+diff --git a/meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb b/meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb
 new file mode 100644
-index 0000000000..aba62f3ef9
+index 0000000000..759214fa38
 --- /dev/null
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb
-@@ -0,0 &#43;1,13 @@
-&#43;SUMMARY = &quot;ECDSA cryptographic signature library (pure python)&quot;
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb
+@@ -0,0 &#43;1,44 @@
+&#43;SUMMARY = &quot;Pure-Python RSA implementation&quot;
 &#43;SECTION = &quot;devel/python&quot;
-&#43;LICENSE = &quot;MIT&quot;
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=66ffc5e30f76cbb5358fe54b645e5a1d">&quot;file://LICENSE;md5=66ffc5e30f76cbb5358fe54b645e5a1d&quot;</a>
+&#43;AUTHOR = &quot;Sybren A. Stuvel&quot;
+&#43;LICENSE = &quot;Apache-2.0&quot;
+&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=c403f6882d4f97a9cd927df987d55634">&quot;file://LICENSE;md5=c403f6882d4f97a9cd927df987d55634&quot;</a>
 &#43;
-&#43;DEPENDS &#43;= &quot;python3-pip python3-pbr&quot;
+&#43;SRC_URI[sha256sum] = &quot;25df4e10c263fb88b5ace923dd84bf9aa7f5019687b5e55382ffcdb8bede9db5&quot;
 &#43;
-&#43;PYPI_PACKAGE = &quot;ecdsa&quot;
-&#43;SRC_URI[sha256sum] = &quot;8f12ac317f8a1318efa75757ef0a651abe12e51fc1af8838fb91079445227277&quot;
+&#43;inherit pypi setuptools3 update-alternatives
 &#43;
-&#43;inherit pypi setuptools3
+&#43;ALTERNATIVE_${PN} = &quot;\
+&#43;    pyrsa-decrypt \
+&#43;    pyrsa-decrypt-bigfile \
+&#43;    pyrsa-encrypt \
+&#43;    pyrsa-encrypt-bigfile \
+&#43;    pyrsa-keygen \
+&#43;    pyrsa-priv2pub \
+&#43;    pyrsa-sign \
+&#43;    pyrsa-verify \
+&#43;&quot;
 &#43;
-&#43;RDEPENDS_${PN} &#43;= &quot;python3-six python3-gmpy2 python3-pbr&quot;
+&#43;ALTERNATIVE_LINK_NAME[pyrsa-decrypt] = &quot;${bindir}/pyrsa-decrypt&quot;
+&#43;ALTERNATIVE_LINK_NAME[pyrsa-decrypt-bigfile] = &quot;${bindir}/pyrsa-decrypt-bigfile&quot;
+&#43;ALTERNATIVE_LINK_NAME[pyrsa-encrypt] = &quot;${bindir}/pyrsa-encrypt&quot;
+&#43;ALTERNATIVE_LINK_NAME[pyrsa-encrypt-bigfile] = &quot;${bindir}/pyrsa-encrypt-bigfile&quot;
+&#43;ALTERNATIVE_LINK_NAME[pyrsa-keygen] = &quot;${bindir}/pyrsa-keygen&quot;
+&#43;ALTERNATIVE_LINK_NAME[pyrsa-priv2pub] = &quot;${bindir}/pyrsa-priv2pub&quot;
+&#43;ALTERNATIVE_LINK_NAME[pyrsa-sign] = &quot;${bindir}/pyrsa-sign&quot;
+&#43;ALTERNATIVE_LINK_NAME[pyrsa-verify] = &quot;${bindir}/pyrsa-verify&quot;
+&#43;ALTERNATIVE_PRIORITY = &quot;30&quot;
+&#43;
+&#43;
+&#43;RDEPENDS_${PN} &#43;= &quot;\
+&#43;    ${PYTHON_PN}-compression \
+&#43;    ${PYTHON_PN}-crypt \
+&#43;    ${PYTHON_PN}-doctest \
+&#43;    ${PYTHON_PN}-logging \
+&#43;    ${PYTHON_PN}-math \
+&#43;    ${PYTHON_PN}-multiprocessing \
+&#43;    ${PYTHON_PN}-netclient \
+&#43;    ${PYTHON_PN}-pickle \
+&#43;&quot;
+&#43;
+&#43;RDEPENDS_${PN} &#43;= &quot;${PYTHON_PN}-pyasn1&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -166,4 +228,4 @@ index 0000000000..aba62f3ef9
   </body>
 </html>
 
---------------A1F3B083E1821FDF12620154--
+--------------D928B9FA2D432F60674EBD0D--
