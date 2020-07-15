@@ -1,99 +1,81 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.9072.1594826714563016807
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web12.614.1594835021585741181
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Jul 2020 08:25:14 -0700
+ Wed, 15 Jul 2020 10:43:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=33072 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jvjHU-0006eC-Nk; Wed, 15 Jul 2020 18:25:13 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-bitarray: Upgrade 1.2.2 -> 1.4.1
-Date: Wed, 15 Jul 2020 18:24:50 +0300
-Message-Id: <20200715152450.29018-5-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200715152450.29018-1-leon.anavi@konsulko.com>
-References: <20200715152450.29018-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: mzeng@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 06FHheXU029944
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2020 10:43:40 -0700 (PDT)
+Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Wed, 15 Jul 2020
+ 10:43:39 -0700
+Received: by yow-lpggp3.wrs.com (Postfix, from userid 21151)	id 6D89420468;
+ Wed, 15 Jul 2020 13:43:39 -0400 (EDT)
+From: "Matthew" <matthew.zeng@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] net-snmp, openjpeg: add proper CVE tags to patches
+Date: Wed, 15 Jul 2020 13:43:39 -0400
+Message-ID: <20200715174339.20901-1-matthew.zeng@windriver.com>
+X-Mailer: git-send-email 2.27.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Upgrade to release 1.4.1:
-
-* add `.clear()` method (Python 3.3 added this method to lists)
-* avoid overallocation when bitarray objects are initially created
-* raise BufferError when resizing bitarrays which is exporting
-  buffers
-* add example to study the resize() function
-* improve some error messages
-* add more tests
-* raise `NotImplementedError` with (useful message) when trying to
-  call the `.fromstring()` or `.tostring()` methods, which have
-  been removed in the last release
-* add official Python 3.9 support
-* improve many docstrings
-* add DeprecationWarning for bitdiff()
-* add more tests
-* C-level:
-  - simplify pack/unpack code
-  - fix memory leak in '~' operation (bitarray_cpinvert)
-
-Use the exact line for the license in PKG-INFO.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Mingde (Matthew) Zeng <matthew.zeng@windriver.com>
 ---
- .../recipes-devtools/python/python3-bitarray_1.2.2.bb | 11 -----------
- .../recipes-devtools/python/python3-bitarray_1.4.1.bb | 11 +++++++++++
- 2 files changed, 11 insertions(+), 11 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb
+ .../recipes-protocols/net-snmp/net-snmp/CVE-2019-20892.patch  | 4 +++-
+ .../recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch    | 4 ++++
+ .../recipes-graphics/openjpeg/openjpeg/CVE-2020-8112.patch    | 4 ++++
+ 3 files changed, 11 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
-deleted file mode 100644
-index c495738c4..000000000
---- a/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
--HOMEPAGE = "https://github.com/ilanschnell/bitarray"
--LICENSE = "PSF"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=d331e1d54f5e78247388f5416c2ab928"
--
--SRC_URI[md5sum] = "81c48852b0bc538ac3ed25fae020360c"
--SRC_URI[sha256sum] = "27a69ffcee3b868abab3ce8b17c69e02b63e722d4d64ffd91d659f81e9984954"
--
--inherit setuptools3 pypi
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb
-new file mode 100644
-index 000000000..4866e8464
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb
-@@ -0,0 +1,11 @@
-+SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
-+HOMEPAGE = "https://github.com/ilanschnell/bitarray"
-+LICENSE = "PSF"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
-+
-+SRC_URI[md5sum] = "dfb3fe66ae989e4724747fcb0f704f56"
-+SRC_URI[sha256sum] = "9e26d3dc7fad932fed66e08da3fcf93dd15e8402aa84e764e1e2a9e1b6ae2b7f"
-+
-+inherit setuptools3 pypi
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.17.1
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2019-20892.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2019-20892.patch
+index 3e2637eaa..ec1b6de8f 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2019-20892.patch
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2019-20892.patch
+@@ -8,9 +8,11 @@ This patch fixes https://sourceforge.net/p/net-snmp/bugs/2956/.
 
+ Upstream-Status: Backport
+ [ak: fixup for 5.8 context, changes to library/snmpusm.h]
+-CVE:CVE-2019-20892
++
++CVE: CVE-2019-20892
+
+ Signed-off-by: Armin Kuster <akuster@mvista.com>
++Signed-off-by: Mingde (Matthew) Zeng <matthew.zeng@windriver.com>
+
+ ---
+  snmplib/snmp_client.c | 22 +++----------
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch
+index 9f2fc901f..1e14149c8 100644
+--- a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch
+@@ -4,6 +4,10 @@ Date: Sat, 11 Jan 2020 01:51:19 +0100
+ Subject: [PATCH] opj_j2k_update_image_dimensions(): reject images whose
+  coordinates are beyond INT_MAX (fixes #1228)
+
++CVE: CVE-2020-6851
++
++Signed-off-by: Mingde (Matthew) Zeng <matthew.zeng@windriver.com>
++
+ ---
+  src/lib/openjp2/j2k.c | 8 ++++++++
+  1 file changed, 8 insertions(+)
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-8112.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-8112.patch
+index cb250530e..6158601af 100644
+--- a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-8112.patch
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-8112.patch
+@@ -6,6 +6,10 @@ Subject: [PATCH] opj_tcd_init_tile(): avoid integer overflow
+ That could lead to later assertion failures.
+
+ Fixes #1231 / CVE-2020-8112
++
++CVE: CVE-2020-8112
++
++Signed-off-by: Mingde (Matthew) Zeng <matthew.zeng@windriver.com>
+ ---
+  src/lib/openjp2/tcd.c | 20 ++++++++++++++++++--
+  1 file changed, 18 insertions(+), 2 deletions(-)
+--
+2.27.0
