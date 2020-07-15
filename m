@@ -1,50 +1,50 @@
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
- by mx.groups.io with SMTP id smtpd.web10.3083.1594850757083938236
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com [209.85.167.47])
+ by mx.groups.io with SMTP id smtpd.web10.3084.1594850761139954536
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Jul 2020 15:05:57 -0700
+ Wed, 15 Jul 2020 15:06:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=WrikPHNG;
- spf=pass (domain: gmail.com, ip: 209.85.167.43, mailfrom: dbaryshkov@gmail.com)
-Received: by mail-lf1-f43.google.com with SMTP id k15so1991207lfc.4
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2020 15:05:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pn42afzQ;
+ spf=pass (domain: gmail.com, ip: 209.85.167.47, mailfrom: dbaryshkov@gmail.com)
+Received: by mail-lf1-f47.google.com with SMTP id k17so1991627lfg.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Jul 2020 15:06:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
         bh=bK+wUasaLSC/Te9KACdPp33tntB6jzfYe/bJaAHu/tI=;
-        b=WrikPHNGh6DQBuYmfexISGqhZso47HnT3f4riBWUc9Gr3FDt+qMTsR7ZYMMyK0L3Jr
-         rXPR3lX6qJ8wkpgRjWDVldr0kAv9UMJ8lUzwDBqtZw+SN+7L/evnHKnCVMGSvbVa6Hab
-         r0yDRLnIelYatxbKCBFmlbiDDDhNVrCGXWOCNDf57Q2+d7pgEIAm84q3jMOM1uJGxL4Q
-         3Jqrrp2tacIdA9Aoou+81l6yrqEhoDDOiXyLTIaJLKXMAidnuFE4CtiSh/j7S+qHqxNb
-         Y7g6XWTDyWqKGVzKUEKlvy8wj8rGZzUzZGMY8u45FmsmhYt736kbF8v/RfaVjfTohdDs
-         UX6Q==
+        b=pn42afzQwGmlAu9/8+CN9/z560mfgBN8iBPdkGgtOjkffZDhfGLcdAvVfSaJiBOB1U
+         x9gtnusem1h0d78CeO5LJY27xaYTsGIno6o2haGH2ij3xquP8IfK+Idtw6dkMyZ8xa4H
+         wUpvGNpQh4RhnmZwXpmmRf1++FKG7sUcSx3RD1BTGsPbQCuJbOmdQN5ncAPn036J2vZ9
+         6eprx6qI1FSBfTR5CgQ9Q9xoViAumgfx8xQINe8x/tkhlbQ/DR8yyCheAtvpj7+f6lNK
+         z1tAAMA+8RzCKHS7fuWBztNJyrZBF9lXEUCfdggwejKo9X1B5GykiEzf4v212TPaql0w
+         VZog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
         bh=bK+wUasaLSC/Te9KACdPp33tntB6jzfYe/bJaAHu/tI=;
-        b=D16jbgP9otQTG0cQmzkCwv6myaEr76kTEawL1v4mt5Flyt+nFKu4xz4P+D9Oh5tjEI
-         lE6iwWTV5CHeqv0/uD3YFQ55CqPSBOtf+t+S6AQc5S7a38Y6VWRQ1kMZxCTJi27JC8Jk
-         wengyj0FvNGiZKi7FLzYPSw52nasX1+OshTKqBlcHUHoFs2DRCU6lZirm3Z5Juokgjl9
-         mctwC2YpGJvoJzaat2WEp/iaQlBfR16DFWB8Tk6bRBzbCqNs/HGWp5bGiD/OFlp/hg17
-         BBHmw97u4GR8EEjYkbaGObxqBy2PJsxqUKdtsB16uWhdpL/7AuUdxgQTQmfNOZf765V1
-         prLg==
-X-Gm-Message-State: AOAM5316ygg7jXKeAno1K6f457zD+dYpAkYHwXqU87TxxObOkDE6LA/p
-	bCaV7/8sFYQWFrM9iC4PxFibkpCgCrk=
-X-Google-Smtp-Source: ABdhPJzv32BEzS7+oCvhjOch7lqg1y59dkk0qNyHKhG20g+PUT6T9RPjmgMdQHtqftHEFzi8DTA7fw==
-X-Received: by 2002:a19:c64e:: with SMTP id w75mr549193lff.64.1594850754598;
-        Wed, 15 Jul 2020 15:05:54 -0700 (PDT)
+        b=oZEiskXzChjGFYZZkMDoRmeJormVLRvFvIJ0lLdpNNteqrZTATXlXtbXiB0zDSqv5y
+         Dd3PLeMdqNqwUtoFw30E27MQ8JAcR2juFXCqnFabSXuF65p493Zx59qhb+1iilNthKNu
+         dnXF83NpYnczxQGKj69DtLHdmxQMmnqJ2Ehe+TFAN/X2m4Isz/BfDwLVmRsPCOMys6ni
+         tgnqpQ/imcv16Jz8OedIqLQfSjNFqqWuZMf1wHsuJLptOtJdon+1Cd80lN/W9M/P7Ce0
+         J+pQ3pSst6WDDQHaJDRJMOzTFtai6jGxUgCURv6uWpr03Xl8brrZgriWJSb+phJiPK5V
+         mgng==
+X-Gm-Message-State: AOAM533S0cruxCnGEin8UohWtFP98pTH3UTrSDLgMwEPIWjK7cfh4KxZ
+	zY7aOXrH1YSVnGrIIxYOo/j4kABk4/U=
+X-Google-Smtp-Source: ABdhPJwxCkRbyCAreELDjAkpVPEhVxnDR2PUrvQXt2qFtwQtGrKKERXySn+PWhbvcvSy0RwRlOv9dw==
+X-Received: by 2002:a19:2209:: with SMTP id i9mr546244lfi.46.1594850758820;
+        Wed, 15 Jul 2020 15:05:58 -0700 (PDT)
 Return-Path: <dbaryshkov@gmail.com>
 Received: from localhost.localdomain ([188.162.64.34])
-        by smtp.gmail.com with ESMTPSA id h23sm633604lfk.37.2020.07.15.15.05.53
+        by smtp.gmail.com with ESMTPSA id a5sm745231lfh.15.2020.07.15.15.05.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 15 Jul 2020 15:05:53 -0700 (PDT)
+        Wed, 15 Jul 2020 15:05:58 -0700 (PDT)
 From: "Dmitry Baryshkov" <dbaryshkov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 Subject: [meta-oe][PATCH v2] recipes-graphics: add Khronos OpenGL ES and Vulkan CTS recipes
-Date: Thu, 16 Jul 2020 01:05:52 +0300
-Message-Id: <20200715220552.1664338-1-dbaryshkov@gmail.com>
+Date: Thu, 16 Jul 2020 01:05:56 +0300
+Message-Id: <20200715220556.1671129-1-dbaryshkov@gmail.com>
 X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
