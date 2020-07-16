@@ -1,17 +1,17 @@
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.89])
- by mx.groups.io with SMTP id smtpd.web12.21427.1594922657711584197
+Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.89])
+ by mx.groups.io with SMTP id smtpd.web11.21573.1594922702761157650
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Jul 2020 11:04:17 -0700
+ Thu, 16 Jul 2020 11:05:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=fqrsVaG0;
- spf=pass (domain: windriver.com, ip: 40.107.223.89, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=WBPs4qO3;
+ spf=pass (domain: windriver.com, ip: 40.107.75.89, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=L8IeY5/z+xHkur8cmCc7c+e1FMQmHTXbAbvgFXZXk5gRtxOb+xBrYpTuZ2nqjH985m8IW/Qo3zS2W0gOLYO8u7fQgUGlNowv9A+PHv+F6EDJR8kIwDf2Hn2E8kractYgTB9vtuQIz8QXi1/q7BWqI1t+zxoYL9RSIYbJvS9llKOsbS/JCpi451zRR4Wc4eMkIZhPQeCxhwd+U/NXEnWS7sc0ukftGcD1Fz3QWwTH7WGRyjB8InS/qq1vmoKbjD6nnRzB1iZo273ItwtmHr9EqQtzdLQ84orG78thXP8g32FAztsIG++Npz7BqhlmnIYWTSdseCqj55iC1ehHVX1bKg==
+ b=gdiHgXHr3AlHHWDOyt3JF/LGgtlHbtbUSJ+OjU9rqku9sGBHE7et0ZBl9tagbk2kNLxsZ3qNU9IXM7CV8lW5vMc7Kcp2VVn+owuwPGVd/0btDcyh8ttwvn1cRxKSHMAEmMxAsYb7dMjREeESgdMDy4u8c0BJUDVmX1TB9DhoRCWf3XqKmHVwpB0pllMcAlmbQiDXjB4sR2EPMq6zPI6ItE8p3DVsFISMixGsmlUyAZ15ybzxK2ReygugKYeKP9SIkA6e79Lmmc8E9Pp2QhB7nmtaW9E8QWv5lsYRhPhW0/ddlVtOF2e30jddVWJhvDigFtkB12NLoc+lfgs4MbloMQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Si2KXTIydr7mN9VQ7UkU8n+303UON1oXs9oP+pOn3Zc=;
- b=drQmP7EANvFA8c2DF8vX12PNPkK+gVGkktFvJEcbK90Ec5At/+ta9Jnmo42FeQcFJKX45cAPQgV5rOL1DLhaMi6lPkzQWjuQrdWz08Nz64T88HT63aH+Y8SPA29o69k08QABELNalnvBC/Q5SH+TjEOLp0bACkhMndQvv68RPDNn9M7L8XUUbPoCmlfHq3WYAmH/EEwVFpa3cHLVfe9tYMk9yRFgOryftgrHC3rRfJR6RvEgxHsiRYUyhKBlDKTig4KVzvyhLeRIR8Czw3jSeYoHlJyK9Gsc7v5fiH8sVobv8rHVv7OIzNlsZW1p690vMTxQC52rVNSAI1gNbnGnxg==
+ bh=poFblaTpe16MwFmh6DFakT3i6qlwjDDagQRWMl7hnMk=;
+ b=WAB94HAB2t/Mvu4+i64XqeoybWEMiVW7B90RPiRmqZ0q63m3NkOV5Dqu/0vLpyJU/lpfBqsdI7eM8bdzfkLCz/GxwM3/5TaTwPZb9VL1KvYMcJP6d4oNDI37PP1bofpwOpV9+6AK7P47VBTa9xvp7Z7zIw39jasYzlABtu/K4eB7jDteSHCTHrkfyRwYO1Bzuex444ZROx/ON5S2dX4Mr1amIMGtDiEoRs0lujsCg2K6zzhnpNAdm9d+Y64WLOSe8dWSFAjC4C2TfNp5BmEMdMonaEEZajsGNkWCVifblmqu6y9WlxRhxeB49xXsm/68WlUg49n/JFcar5lExvL7sQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Si2KXTIydr7mN9VQ7UkU8n+303UON1oXs9oP+pOn3Zc=;
- b=fqrsVaG0JNxGbsIIZVwZv/mdGtZ7g6U+0ifBZfkpYABSKh3P9fpfIuFgyT9/7beO/QaS7soMbDWoJlymO32ltUbn46xGotxhQug+aPjW8mRBwDNFyG0dbd6CKXzKjQql3YEm+HmqD6B5Y9wXi+HX6d1BQdg2HcF2cB6l8ZVkFrY=
+ bh=poFblaTpe16MwFmh6DFakT3i6qlwjDDagQRWMl7hnMk=;
+ b=WBPs4qO3BCRNO7uabh8ujJxnhppdUA4WOVvhuRjYOIhMWJbIV78Ck8fxIe3xbUn8ReKmbm0dZGLqUgRsq+HbRZe/WXZuB0Whr1LhYNjFfHeRrxWRm62bYj5Hd7T/5jfIQSoliuEz7Kgf0f7sA+vO/Mbz15bCWDh9yI65UYnIAC8=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,134 +28,111 @@ Received: from CY4PR11MB0006.namprd11.prod.outlook.com (2603:10b6:910:7b::18)
  by CY4PR11MB0008.namprd11.prod.outlook.com (2603:10b6:910:76::16) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3195.17; Thu, 16 Jul
- 2020 18:04:16 +0000
+ 2020 18:05:01 +0000
 Received: from CY4PR11MB0006.namprd11.prod.outlook.com
  ([fe80::f422:a1ed:36f3:82d4]) by CY4PR11MB0006.namprd11.prod.outlook.com
  ([fe80::f422:a1ed:36f3:82d4%7]) with mapi id 15.20.3195.018; Thu, 16 Jul 2020
- 18:04:16 +0000
-Subject: Re: [oe] [meta-python][PATCH 5/5] python3-bitarray: Upgrade 1.2.2 -> 1.4.1
-To: Leon Anavi <leon.anavi@konsulko.com>,
+ 18:05:01 +0000
+Subject: Re: [oe] [meta-python] [PATCH] python3-requests-file: Enable ptest
+To: zangrc <zangrc.fnst@cn.fujitsu.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200715152450.29018-1-leon.anavi@konsulko.com>
- <20200715152450.29018-5-leon.anavi@konsulko.com>
+References: <1594928600-4618-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <213ce8e6-975b-84ac-99a7-bd12e801eab2@windriver.com>
-Date: Thu, 16 Jul 2020 14:04:14 -0400
+Message-ID: <a6b832c1-4e11-516d-cb17-ebe6f467ea16@windriver.com>
+Date: Thu, 16 Jul 2020 14:04:59 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200715152450.29018-5-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0058.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2e::27) To CY4PR11MB0006.namprd11.prod.outlook.com
+In-Reply-To: <1594928600-4618-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-ClientProxiedBy: YT1PR01CA0066.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2e::35) To CY4PR11MB0006.namprd11.prod.outlook.com
  (2603:10b6:910:7b::18)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0058.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::27) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3195.18 via Frontend Transport; Thu, 16 Jul 2020 18:04:16 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0066.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::35) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3195.17 via Frontend Transport; Thu, 16 Jul 2020 18:05:01 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 82988a7c-352f-4011-0250-08d829b2a782
+X-MS-Office365-Filtering-Correlation-Id: 816c1684-0800-494c-ff04-08d829b2c24b
 X-MS-TrafficTypeDiagnostic: CY4PR11MB0008:
 X-Microsoft-Antispam-PRVS: 
-	<CY4PR11MB00080FA62DA8DC53DFC2F1989F7F0@CY4PR11MB0008.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:6790;
+	<CY4PR11MB0008D04DCC37F54F46F19B5C9F7F0@CY4PR11MB0008.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:168;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	x0c+Fsf3dcj0KdpDeGIHEEOEdgj1vnLWAEuVkC3ZKolkkfzMriDUtVqEAq5c4YPXYKFi8N6ZP7vKPczMbvha9tW0HJqb/lCaGe4twodTETsDwlnTp4uTGeMveVQSLqoP+NI8jHTqxgpyaqmCESu7BwpbOlkri1c0542RIrX4oQfS73mBH7OcP8QUgEg5gK4WwYs9KgjKdBXWsR+TE3HrzAFn/ki0if2uudq3oMWreDVoA8+k03S/MUQ1C5tvqeImx+SJovxkBQceuL91cHxkxJsHjX/hTRBdWSw6CKitn/vzqKQ1Fp5EmHQEnFN7qSzeDCgD2LmGFfYnMQRzbnOrNifXU57hMEtrU1Tp/diWiEvwRzvJuWikSRwl2Luqo3jXf1+U24FrX69ANK0XxdFTmGSUAiv/FWuc5CdvUfvd6x52xh6kij4PP0shtgvozcy/wDZOYDm3TWyw3osRs7QLrQ==
+	Hi9RYoUIWPTV7Oqu1DJai+ydbPIFx7WUcMhTwrNegxgPqA5Eqxs3/u5PP7U3GxJ5jgcHDTCBJNUidS7WEcEYhcMjWcggn4xT1/gd2MlY4spy0zXhwmfFpypWAOh552ioGaz3x7QabAxhSRhfgZEYPzc26v6ATi7k2IKFhminBcQ0BEIIFqKtjzO1+KTWTcHH0oY0tIqxqYj2pqI8wN7ixmJojTvaXOjkqRs0/IN+zhhb3GVGxGuVMh/C27gjbHex7CtOuF9W2Dn7uZEMuj9fNg9GgJ3Vmuvyta5B8xc6MGKacfClpf/OOJwzZGCBs/qyxnj4wXsu9T78wgzrukiLs/WpKI6ThI0QsTugKW/lgKR0KGtm537d+P91K1wVk/FQOjJ6CuU56DRneulWvw3LE/8VRwX84D1xJpTY/cp0iOPVuC/GZJbsCN+4ZUDAx0d3IKR79GuLVlRG/FfwMXF8OQ==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CY4PR11MB0006.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(366004)(39850400004)(136003)(396003)(346002)(376002)(26005)(966005)(44832011)(186003)(16526019)(8936002)(86362001)(31696002)(33964004)(5660300002)(2906002)(53546011)(52116002)(316002)(66946007)(478600001)(83380400001)(166002)(8676002)(31686004)(6486002)(956004)(66556008)(16576012)(36756003)(2616005)(66476007)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	UInmHpdtwqvDxMaJ0SvAGDvuMp0k0RnJMc0oPa6s06Qps3JYSyViCByP4v9U61Hu2pcmLFwm599tCmZ8/eWpqhdx5mv9PNJD3AGq/CqP5jB+zbKr0HjnLuThBu5zYK1szfr8+R0oAXBLe6bAKp86Kc5N1LRHs7MrWil/Q2w5DO4AJYdU5Rccnnr2vFeZGUBz5HyO+l7ZJHcg87oyR1TGVo8dK+tykMxxjq2galvjlW0q8mDJB2NnpuOdeEnt7J6nwDpv0P8OUsZi2QXITHkF5u9jIwiTORoCtbHR+R1/MYGOrJTr0p5Xp4CGDzZj5PLezh8hqRudXM/mGc/BlLimZ0fAXTOP2Iz1OoxPKQIQ4jX+9WhpzaGS4TEwtcOWt2QZZENAT7KzBUCZOGRqTOxnbcIJyz3UApPpFPigOy5VulNHBTrJvyfSk4trrxN6zdVDx+BzEKfKB03l0lDT573b2gJ5VqueEHq0TnZHYpeDHt25Ufp3v6M1fYapH5S/fkAH
+	aDXbdkU/kZ/swffW6MBuQoL9izne3dJMI1u6wem18AsQxqOR56wIU4WX9z05szoToAf2WaMd7g1Yf+e22njykWegk6gutnvqEvOPi9nLu64mf7KXgYFwb0u44/2nBKV89okU78hgieUhp3zPOXenWhV0lWBTalV6ABv+GFbARJDK/EB7eREI81c7QMcXxtQC6SXrj048Kh/HYg7aNCsMgZvdceTQVp3DtUIRetDYu1G/UlIc2/fRl2x2DLVDMMVx6nGUyN+a/ehG8yyTSR39GRiKfTtGInTPJfNe7emhBViW2p1drK4ZKfJ3U/unMucbjYrMcsJfgYy0zNhSFGgrdrwDeK+wvu2jxcg/8RRoYrPuiGJyNl+O2XPYBpLyLnPU2B1ioDFdGAgSZB+v91SfR11uVnbc+p4qdULTQonRMHt3eptoAxOlD83Z66oAVrNQlnu12Rcq7vN/U1ZWBT7WRj2DnLYI9YxoBxsMRJ3kGdOp4upLRxuylydJ5vs58h3H
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 82988a7c-352f-4011-0250-08d829b2a782
+X-MS-Exchange-CrossTenant-Network-Message-Id: 816c1684-0800-494c-ff04-08d829b2c24b
 X-MS-Exchange-CrossTenant-AuthSource: CY4PR11MB0006.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jul 2020 18:04:16.5507
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jul 2020 18:05:01.4422
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: RcDCR90yeSCvbCJ5R1EPqEBV9dcrhO8VJQA94bLWAzMYzsPbfDrPwtFfEfEBq6Asuq9NtEH2rga8me6JRW8oOepLCnSHYcTudyENdWnX3CA=
+X-MS-Exchange-CrossTenant-UserPrincipalName: NvHnZrOx0l/f4cbSXRDCdzOZnHek7fWlQIaCnYMEfuVpTbI7ae3WYsZx3OaI19One+QRfPZtdD6XFtNqJt+ZDgo6u1ZgqHzIyFBYFbKwfGc=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR11MB0008
 Content-Type: multipart/alternative;
- boundary="------------69E53DBAEB39E2862E550AA4"
+ boundary="------------C7DF0C50FE580856FC153260"
 Content-Language: en-US
 
---------------69E53DBAEB39E2862E550AA4
+--------------C7DF0C50FE580856FC153260
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 7/15/20 11:24 AM, Leon Anavi wrote:
-> Upgrade to release 1.4.1:
->
-> * add `.clear()` method (Python 3.3 added this method to lists)
-> * avoid overallocation when bitarray objects are initially created
-> * raise BufferError when resizing bitarrays which is exporting
->    buffers
-> * add example to study the resize() function
-> * improve some error messages
-> * add more tests
-> * raise `NotImplementedError` with (useful message) when trying to
->    call the `.fromstring()` or `.tostring()` methods, which have
->    been removed in the last release
-> * add official Python 3.9 support
-> * improve many docstrings
-> * add DeprecationWarning for bitdiff()
-> * add more tests
-> * C-level:
->    - simplify pack/unpack code
->    - fix memory leak in '~' operation (bitarray_cpinvert)
->
-> Use the exact line for the license in PKG-INFO.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+On 7/16/20 3:43 PM, zangrc wrote:
+> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-devtools/python/python3-bitarray_1.2.2.bb | 11 -----------
->   .../recipes-devtools/python/python3-bitarray_1.4.1.bb | 11 +++++++++++
->   2 files changed, 11 insertions(+), 11 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
->   create mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb
+>   .../python/python3-requests-file/run-ptest        |  3 +++
+>   .../python/python3-requests-file_1.5.1.bb         | 15 ++++++++++++++-
+>   2 files changed, 17 insertions(+), 1 deletion(-)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-requests-file/run-ptest
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
-> deleted file mode 100644
-> index c495738c4..000000000
-> --- a/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
-> +++ /dev/null
-> @@ -1,11 +0,0 @@
-> -SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
-> -HOMEPAGE = "https://github.com/ilanschnell/bitarray"
-> -LICENSE = "PSF"
-> -LIC_FILES_CHKSUM = "file://PKG-INFO;md5=d331e1d54f5e78247388f5416c2ab928"
-> -
-> -SRC_URI[md5sum] = "81c48852b0bc538ac3ed25fae020360c"
-> -SRC_URI[sha256sum] = "27a69ffcee3b868abab3ce8b17c69e02b63e722d4d64ffd91d659f81e9984954"
-> -
-> -inherit setuptools3 pypi
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-requests-file/run-ptest b/meta-python/recipes-devtools/python/python3-requests-file/run-ptest
 > new file mode 100644
-> index 000000000..4866e8464
+> index 0000000000..b63c4de0d9
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb
-> @@ -0,0 +1,11 @@
-> +SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
-> +HOMEPAGE = "https://github.com/ilanschnell/bitarray"
-> +LICENSE = "PSF"
-> +LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
+> +++ b/meta-python/recipes-devtools/python/python3-requests-file/run-ptest
+> @@ -0,0 +1,3 @@
+> +#!/bin/sh
 > +
-> +SRC_URI[md5sum] = "dfb3fe66ae989e4724747fcb0f704f56"
-> +SRC_URI[sha256sum] = "9e26d3dc7fad932fed66e08da3fcf93dd15e8402aa84e764e1e2a9e1b6ae2b7f"
+> +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
+> diff --git a/meta-python/recipes-devtools/python/python3-requests-file_1.5.1.bb b/meta-python/recipes-devtools/python/python3-requests-file_1.5.1.bb
+> index 1c8bba40dd..88915b8fb4 100644
+> --- a/meta-python/recipes-devtools/python/python3-requests-file_1.5.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-requests-file_1.5.1.bb
+> @@ -6,7 +6,20 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9cc728d6087e43796227b0a31422de6b"
+>   SRC_URI[md5sum] = "c96daf6b0c56687556e8a52748fd896c"
+>   SRC_URI[sha256sum] = "07d74208d3389d01c38ab89ef403af0cfec63957d53a0081d8eca738d0247d8e"
+>   
+> -inherit pypi setuptools3
+> +inherit pypi setuptools3 ptest
 > +
-> +inherit setuptools3 pypi
+> +SRC_URI += " \
+> +        file://run-ptest \
+> +"
 > +
-> +BBCLASSEXTEND = "native nativesdk"
+> +RDEPENDS_${PN}-ptest += " \
+> +        ${PYTHON_PN}-pytest \
+> +"
+> +
+> +do_install_ptest() {
+> +        install -d ${D}${PTEST_PATH}/tests
+> +        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+> +}
+>   
+>   RDEPENDS_${PN} += " \
+>       python3-requests \
 >
 > 
 
---------------69E53DBAEB39E2862E550AA4
+--------------C7DF0C50FE580856FC153260
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -165,77 +142,55 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 7/15/20 11:24 AM, Leon Anavi wrote:<br>
+    <div class="moz-cite-prefix">On 7/16/20 3:43 PM, zangrc wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200715152450.29018-5-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.4.1:
-
-* add `.clear()` method (Python 3.3 added this method to lists)
-* avoid overallocation when bitarray objects are initially created
-* raise BufferError when resizing bitarrays which is exporting
-  buffers
-* add example to study the resize() function
-* improve some error messages
-* add more tests
-* raise `NotImplementedError` with (useful message) when trying to
-  call the `.fromstring()` or `.tostring()` methods, which have
-  been removed in the last release
-* add official Python 3.9 support
-* improve many docstrings
-* add DeprecationWarning for bitdiff()
-* add more tests
-* C-level:
-  - simplify pack/unpack code
-  - fix memory leak in '~' operation (bitarray_cpinvert)
-
-Use the exact line for the license in PKG-INFO.
-
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+    <blockquote type="cite" cite="mid:1594928600-4618-1-git-send-email-zangrc.fnst@cn.fujitsu.com">
+      <pre class="moz-quote-pre" wrap="">Signed-off-by: Zang Ruochen <a class="moz-txt-link-rfc2396E" href="mailto:zangrc.fnst@cn.fujitsu.com">&lt;zangrc.fnst@cn.fujitsu.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200715152450.29018-5-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:1594928600-4618-1-git-send-email-zangrc.fnst@cn.fujitsu.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python3-bitarray_1.2.2.bb | 11 -----------
- .../recipes-devtools/python/python3-bitarray_1.4.1.bb | 11 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;
- 2 files changed, 11 insertions(&#43;), 11 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb
+ .../python/python3-requests-file/run-ptest        |  3 &#43;&#43;&#43;
+ .../python/python3-requests-file_1.5.1.bb         | 15 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-
+ 2 files changed, 17 insertions(&#43;), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-requests-file/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
-deleted file mode 100644
-index c495738c4..000000000
---- a/meta-python/recipes-devtools/python/python3-bitarray_1.2.2.bb
-&#43;&#43;&#43; /dev/null
-@@ -1,11 &#43;0,0 @@
--SUMMARY = &quot;A high-level Python efficient arrays of booleans -- C extension&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/ilanschnell/bitarray">&quot;https://github.com/ilanschnell/bitarray&quot;</a>
--LICENSE = &quot;PSF&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;md5=d331e1d54f5e78247388f5416c2ab928">&quot;file://PKG-INFO;md5=d331e1d54f5e78247388f5416c2ab928&quot;</a>
--
--SRC_URI[md5sum] = &quot;81c48852b0bc538ac3ed25fae020360c&quot;
--SRC_URI[sha256sum] = &quot;27a69ffcee3b868abab3ce8b17c69e02b63e722d4d64ffd91d659f81e9984954&quot;
--
--inherit setuptools3 pypi
--
--BBCLASSEXTEND = &quot;native nativesdk&quot;
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-requests-file/run-ptest b/meta-python/recipes-devtools/python/python3-requests-file/run-ptest
 new file mode 100644
-index 000000000..4866e8464
+index 0000000000..b63c4de0d9
 --- /dev/null
-&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb
-@@ -0,0 &#43;1,11 @@
-&#43;SUMMARY = &quot;A high-level Python efficient arrays of booleans -- C extension&quot;
-&#43;HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/ilanschnell/bitarray">&quot;https://github.com/ilanschnell/bitarray&quot;</a>
-&#43;LICENSE = &quot;PSF&quot;
-&#43;LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d">&quot;file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d&quot;</a>
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-requests-file/run-ptest
+@@ -0,0 &#43;1,3 @@
+&#43;#!/bin/sh
 &#43;
-&#43;SRC_URI[md5sum] = &quot;dfb3fe66ae989e4724747fcb0f704f56&quot;
-&#43;SRC_URI[sha256sum] = &quot;9e26d3dc7fad932fed66e08da3fcf93dd15e8402aa84e764e1e2a9e1b6ae2b7f&quot;
+&#43;pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;){printf &quot;%s: %s\n&quot;, $NF, $0}else{print}}'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;) {$NF=&quot;&quot;;print $0}else{print}}'
+diff --git a/meta-python/recipes-devtools/python/python3-requests-file_1.5.1.bb b/meta-python/recipes-devtools/python/python3-requests-file_1.5.1.bb
+index 1c8bba40dd..88915b8fb4 100644
+--- a/meta-python/recipes-devtools/python/python3-requests-file_1.5.1.bb
+&#43;&#43;&#43; b/meta-python/recipes-devtools/python/python3-requests-file_1.5.1.bb
+@@ -6,7 &#43;6,20 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=9cc728d6087e43796227b0a31422de6b">&quot;file://LICENSE;md5=9cc728d6087e43796227b0a31422de6b&quot;</a>
+ SRC_URI[md5sum] = &quot;c96daf6b0c56687556e8a52748fd896c&quot;
+ SRC_URI[sha256sum] = &quot;07d74208d3389d01c38ab89ef403af0cfec63957d53a0081d8eca738d0247d8e&quot;
+ 
+-inherit pypi setuptools3
+&#43;inherit pypi setuptools3 ptest
 &#43;
-&#43;inherit setuptools3 pypi
+&#43;SRC_URI &#43;= &quot; \
+&#43;        <a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
+&#43;&quot;
 &#43;
-&#43;BBCLASSEXTEND = &quot;native nativesdk&quot;
+&#43;RDEPENDS_${PN}-ptest &#43;= &quot; \
+&#43;        ${PYTHON_PN}-pytest \
+&#43;&quot;
+&#43;
+&#43;do_install_ptest() {
+&#43;        install -d ${D}${PTEST_PATH}/tests
+&#43;        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+&#43;}
+ 
+ RDEPENDS_${PN} &#43;= &quot; \
+     python3-requests \
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -245,4 +200,4 @@ index 000000000..4866e8464
   </body>
 </html>
 
---------------69E53DBAEB39E2862E550AA4--
+--------------C7DF0C50FE580856FC153260--
