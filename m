@@ -1,74 +1,84 @@
-Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com [209.85.210.68])
- by mx.groups.io with SMTP id smtpd.web10.13874.1594999262166203098
+Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
+ by mx.groups.io with SMTP id smtpd.web11.13581.1594999263211704326
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Jul 2020 08:21:02 -0700
+ Fri, 17 Jul 2020 08:21:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=P+NgaNBb;
- spf=pass (domain: gmail.com, ip: 209.85.210.68, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f68.google.com with SMTP id 72so7130872otc.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2020 08:21:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ovBYsq/z;
+ spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f48.google.com with SMTP id 95so7120364otw.10
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2020 08:21:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id;
-        bh=1EGTSKzI3fYFof+NB/KXcY8ul+InvShsHaeiBVdsGxs=;
-        b=P+NgaNBbSnNJ16FzWp29IAScDq2vMiVBgOVPhWXERnQcpd0fU9wHyYZkkYPKPMQE9n
-         4yzTB2CFCSRFIv1/VJOAwdgOycfttc4fDDkFWnYBH1uBft/PZD3T4JSE8mJ1IynmSUGQ
-         ALh9o1l1WoTN7BX8HBe0iMNAIn2c6uRzYi0VzB9mSr9qe1mttaaix7fjXGUBlZey05AZ
-         UbwjZaEX6Ytov5RFBUy5NaRfGdJaUrj74UdGIp0kjLhlokoelSIp1eD2uIQOyAuzFV0m
-         4tVNH+Icq/y3jcHLhxmhLh58EtjVDhEm38yIVR0b0LVP+pEUmYFClreVeW1M16XS4Eot
-         QiSA==
+        h=from:to:subject:date:message-id:in-reply-to:references;
+        bh=7IrCQxY2vMEaTgpzGajW4yP3/huY2UknVXTf+wQ476U=;
+        b=ovBYsq/zXtw7mGj3PRWROtAdPHJHsghXGHB+hpx4udB2nOsexSF9lUDmeiS5jylWpz
+         WfDv90oUeBV1vg/AkYXYuVQMTIP6Lyhl1ysLXBuLU745wjwYkiUdsQeokNw9S5aU7eKQ
+         MDg9Q9I/863fIlOCyZOdaDMYF/2vfEStVaawGmzTwJirBjentaoW9I4j+djgF8AH1eZJ
+         aLkCH5kK5jKjoW5IWINqPvhRzwGTVVDMcSEBgtYY4EP3iO6VPAMXXE9vsehxqyEuZoiE
+         13+SxDrPQkT5gvPI/i6JP59vdfhoaWMAvTVDQ1gHmuN3CMQxKihFFG32uvoID7AfHrcs
+         xPsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id;
-        bh=1EGTSKzI3fYFof+NB/KXcY8ul+InvShsHaeiBVdsGxs=;
-        b=AyjOHRtAzApTYAkWDdHGHvbtvFyrzHBJgHXsvOcNu2cegFgDi7XWIa94jLIjClk+/D
-         RcepT3MXWsPb3IJAX2ot6+Sw7g1mp43wMG+xzCpF5cqgE/ibcy+ORtmYz29DyoH2yYMu
-         SEuXrbt+p75cA/AXrQ4dkTijboTN+jHKNhGf5Xz9liCjIdTYlK5m1b3TV20YFfrtMdDD
-         xBjbCwz2UuH/yysrT55Q/XDdT8j6W/NlloCUOL3RIa/wSytJrEPfw/Cy0DnuBGAUBn8g
-         gil/JIlkN9You52xamw2jChX9JHOmP3ugO1yfhxf+/Ajr+qsqwl2mwzc91UhP6+JsaSm
-         Cj5g==
-X-Gm-Message-State: AOAM533TTfLnRApTcwtH2my+2urjc5jYAOaH/8cEmV8ylgvS7EoFiN3s
-	qKammktwUmZLDU/bWiSgDHS9Eq7q+9Q=
-X-Google-Smtp-Source: ABdhPJyOPTCSQB0lTYgdV1l3SS0TzLWtAX+xBZNLD2Z1S/lhbq+T3Zz80AWpzZLb+XQkzXyF5J64pg==
-X-Received: by 2002:a9d:1928:: with SMTP id j40mr9007022ota.242.1594999261273;
-        Fri, 17 Jul 2020 08:21:01 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references;
+        bh=7IrCQxY2vMEaTgpzGajW4yP3/huY2UknVXTf+wQ476U=;
+        b=N9ewjhWbmDfRz5DyKzPavP8B9nGnV0PJaVHma8NNJKtRaEcW4J/91lc1+3nrTxTKKR
+         vrSqVhu6c9M5b9O8oj2EhlAuBNJqE9E/G8aazPZHcyrAEOdhNbJcAMK+BlpJY28oOPLG
+         YDU5PUbS9wApcoDKIzHWEQcj8uIfxlWpcLgyOcswATqVmqPitjZ2RSE7Ilgy2K79rK3h
+         X9/AqR0eoEz/rub5vGcSrLuDUD7lZCo6b6uTWQc9K+NhDBReoi0hUVsnXfCoY0uoeUlt
+         nIousrNpkziKCURMJLkgKASfBniFJm//dZa51EI2KOpYsO0F7ADmOlr5diBOJ+qp80d+
+         Rb+A==
+X-Gm-Message-State: AOAM533vhbXbXYVmSzoYtPJCQvXeIJivsFLWnucSUauqn3YZdf+mvmco
+	irNvda9P46j/jO+ueziuxYm2PTVvq+U=
+X-Google-Smtp-Source: ABdhPJyXZVMPoyYNZXKRuY+XymNIzOZ6jlDOOM9+kiDNlk3TxJ06rKDqb5lBXAiZZC1zlsmNxUFmPA==
+X-Received: by 2002:a05:6830:4008:: with SMTP id h8mr9470273ots.158.1594999262403;
+        Fri, 17 Jul 2020 08:21:02 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:b082:650f:a46e:c68d])
-        by smtp.gmail.com with ESMTPSA id k126sm1868439oib.52.2020.07.17.08.20.59
+        by smtp.gmail.com with ESMTPSA id k126sm1868439oib.52.2020.07.17.08.21.01
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Jul 2020 08:21:00 -0700 (PDT)
+        Fri, 17 Jul 2020 08:21:02 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 0/2] dunfell patch review
-Date: Fri, 17 Jul 2020 08:20:53 -0700
-Message-Id: <cover.1594999160.git.akuster808@gmail.com>
+Subject: [dunfell 1/2] Revert "jsoncpp: upgrade 1.9.2 -> 1.9.3"
+Date: Fri, 17 Jul 2020 08:20:54 -0700
+Message-Id: <0e0b4892f50808b87223a1e8dbcd13d4e16368cf.1594999160.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1594999160.git.akuster808@gmail.com>
+References: <cover.1594999160.git.akuster808@gmail.com>
 
-Two additional for reveiw. This include reverting the jsoncpp update that may have introduced an abi change.
+This reverts commit 2b384c59733c437027f9b14cc32da19251efd97b.
 
-The following changes since commit 3add820b373564478591e244226704371c1d34d1:
+It appears that there was a change in soname not noted in the changelog.
 
-  wireshark: Update to 3.2.5 (2020-07-12 19:20:59 -0700)
+https://github.com/open-source-parsers/jsoncpp/commit/8b7ea09b8055df01866a5ce4142b12ed8f9f13eb
 
-are available in the Git repository at:
+ABI change appears to have occured.
+https://abi-laboratory.pro/index.php?view=timeline&l=jsoncpp
 
-  git://git.openembedded.org/meta-openembedded-contrib stable/dunfell-nut
-  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/dunfell-nut
-
-Armin Kuster (1):
-  Revert "jsoncpp: upgrade 1.9.2 -> 1.9.3"
-
-Ovidiu Panait (1):
-  nss: Fix CVE-2020-12399
-
- .../{jsoncpp_1.9.3.bb => jsoncpp_1.9.2.bb}    |   2 +-
- ...e-a-fixed-length-for-DSA-exponentiat.patch | 110 ++++++++++++++++++
- meta-oe/recipes-support/nss/nss_3.51.1.bb     |   1 +
- 3 files changed, 112 insertions(+), 1 deletion(-)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../jsoncpp/{jsoncpp_1.9.3.bb => jsoncpp_1.9.2.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
  rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.9.3.bb => jsoncpp_1.9.2.bb} (93%)
- create mode 100644 meta-oe/recipes-support/nss/nss/0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch
 
+diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
+similarity index 93%
+rename from meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb
+rename to meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
+index 97c6361ad8..a88410f2ff 100644
+--- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb
++++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
+@@ -11,7 +11,7 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fa2a23dd1dc6c139f35105379d76df2b"
+ 
+-SRCREV = "6aba23f4a8628d599a9ef7fa4811c4ff6e4070e2"
++SRCREV = "d2e6a971f4544c55b8e3b25cf96db266971b778f"
+ SRC_URI = "git://github.com/open-source-parsers/jsoncpp"
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.17.1
 
