@@ -1,201 +1,143 @@
-Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com [209.85.210.52])
- by mx.groups.io with SMTP id smtpd.web11.13583.1594999264502553729
+Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com [209.85.167.173])
+ by mx.groups.io with SMTP id smtpd.web10.561.1595003003553342119
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Jul 2020 08:21:04 -0700
+ Fri, 17 Jul 2020 09:23:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=o0i309Pa;
- spf=pass (domain: gmail.com, ip: 209.85.210.52, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f52.google.com with SMTP id e90so7144390ote.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2020 08:21:04 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=HynSoShT;
+ spf=pass (domain: gmail.com, ip: 209.85.167.173, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f173.google.com with SMTP id y22so8431097oie.8
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Jul 2020 09:23:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=sC4v/WGjx4MjayZoa0K4ZTVjvDKYAvsZbl0csfA0+ng=;
-        b=o0i309Pa0P4ew5+8WDJbhh9JjehSHCScAJrtqGz3T1a1zwE+l+g+9o7wVHfkUz0k7l
-         aVnYjvTtdZvngpAoDWhyo8vyMmoxLWaWKY/IIsqmtrvm1mmLFbpUiYAqKcIGkaIaThWG
-         /naydrO4BUmJQ580QxhSBzDHWyEazwpTmQ3aO8OXmbO/KU0zjjGHjfbo2Wx+W3/60xTn
-         tS1DiM/+cvaOFrJ073Qilb8LII+X+UdfmBhBQGaS2sqhhcU/0MOWsbGi/cMGIXqb6DiN
-         7Ne1nbF/A4A48kmgwjk9EMuHylhxDaXRsgVckXTPlt4pTplAni2AyYEvjZbj3KeQD9gu
-         wgcw==
+        h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=Krp+rb/BKG4wfJIdZYd7WYtE8imyi2iyzJRnGIdxtYw=;
+        b=HynSoShTAUoCqB7SnZjXUlbuEbGwB7cuvqpWq/IwY7Fb1auiMgBXzbxgQL5YmuB9em
+         D01tKZzy6bGNND5bbBVEYD+bRmdVy7hfYGibLUGGh+NUFY0QxAV2QtoWzNIWQiyoPo+J
+         IMRGBKOqGIIurbCcKRah+Y+Dg9difi9JzUVE/lf9L2vvIZ6oh8ryoqPFi7W1ZJzw/pvV
+         U0Z0PX9GPwXJquDDnE/ue2UQ9CrX7mrmcJCRq8FCK17POHxEqh/QgrypKwURYSY2mtqP
+         sKXzPFnmoOwzh24Tzi4q50ntxoNF0/LclcWxSAuLcjSX7e+pSZWp5k+a9Fvs9/vtPZlL
+         XWtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=sC4v/WGjx4MjayZoa0K4ZTVjvDKYAvsZbl0csfA0+ng=;
-        b=Gh6Mh9wHHY5ae/DI0reM6IzfmTCvKYF/93phJc8j5vkOFZwE0fz6rRdtueWK6qVU7k
-         yk1CS4ubhvKJEAFRVP999MIjQR0lzmBwyBJW+Tv6hPOPIMF5ns6quk/tqqNhFt+fXyIZ
-         rTzqIi/q12i+TOkMd7oS5p1uqD8QY3YyOazQieeGm2jA4ky8gIGxLPIVvblAi1UVzt2t
-         Gf1tUklWmms2UayvGvbVpDiIbwOBVBiT6ZW5Wvku4WY33W7YdiuT7jdNn1lv6KCoaN8O
-         432RGUWakHLtCDmBVMeUKvHT1/XL7oEkmqHbLuUU0Awd5ZhrxAnT2EWkU8OQf7hl6xRE
-         EFJQ==
-X-Gm-Message-State: AOAM533Uz9b8aNsf2CayP07HXXBOBvILgdisX9O87rkZjeYmu7isGmMg
-	vI8bw1D1IX+EOsP+Xosgh7c4/1eEMvQ=
-X-Google-Smtp-Source: ABdhPJw/ti+ZWRGjKlh7lV8+8jg3SBoBtEhX6X5/nAp33jNkKXYlwHjBelr5yO0EgKMc+RsAutbv5A==
-X-Received: by 2002:a05:6830:1f22:: with SMTP id e2mr8913676oth.62.1594999263523;
-        Fri, 17 Jul 2020 08:21:03 -0700 (PDT)
+        h=x-gm-message-state:subject:to:cc:references:from:autocrypt
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-transfer-encoding:content-language;
+        bh=Krp+rb/BKG4wfJIdZYd7WYtE8imyi2iyzJRnGIdxtYw=;
+        b=Q1lVfCYvff8c0EPioumJqhdtfpnjKy4xF6dPmaiTKfbOKQA2wsIaJy0oPDFHhEEUhQ
+         n4cChelsXnAJuZlTqc46d7stqWAVXZ8ZR5MxahF94y8kZUhL7ur+qNiLlEhBHaPBATps
+         OkzYLUDGnbA//Wcpd/N30mOsY2ygvR+Px3fBsjg5k4AR5t33UXeqDXcdHR74TEVpiexB
+         hqU3KnzR9Z/+tzCZjJuTJTG18nB7ie18b/OiR76/G0WnF8tVJ5Lrq5hAznmLP07ZpDiU
+         qU3XofRqE6bXmfOvv2np84sIZc+m8VohxoAJ/oYlEgpt89r8RliYdurNZgHsd9pt6OOA
+         icUg==
+X-Gm-Message-State: AOAM530REL7Or8k94yAIewlPizaPh2HtpwLghLcXwx/Q8utXKzjBwIIT
+	Ex087ab+d9qafJBG8Sxh/aU=
+X-Google-Smtp-Source: ABdhPJw9vQ9X5PWYEDNtZBj24hMoTYp8MBAAkdr5lvwbaRLo1ibx7VaQKw8aJ+OBPCn9XmGxBdLBNQ==
+X-Received: by 2002:aca:2312:: with SMTP id e18mr7789904oie.135.1595003002881;
+        Fri, 17 Jul 2020 09:23:22 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:b082:650f:a46e:c68d])
-        by smtp.gmail.com with ESMTPSA id k126sm1868439oib.52.2020.07.17.08.21.02
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Jul 2020 08:21:03 -0700 (PDT)
+Received: from ?IPv6:2601:202:4180:a5c0:b082:650f:a46e:c68d? ([2601:202:4180:a5c0:b082:650f:a46e:c68d])
+        by smtp.gmail.com with ESMTPSA id x5sm1871064oic.21.2020.07.17.09.23.21
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 17 Jul 2020 09:23:22 -0700 (PDT)
+Subject: Re: [meta-python][RFC] Organizing meta-python recipes into logical/functional groups
+To: Trevor Gamblin <trevor.gamblin@windriver.com>,
+ openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: "timothy.t.orling@intel.com" <timothy.t.orling@intel.com>,
+ Khem Raj <raj.khem@gmail.com>
+References: <b1d1487b-0691-3429-48dc-a3fc3345c25f@windriver.com>
 From: "akuster" <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 2/2] nss: Fix CVE-2020-12399
-Date: Fri, 17 Jul 2020 08:20:55 -0700
-Message-Id: <5d4023848fabc2e0bf924b2f8def06f450d15ec0.1594999160.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1594999160.git.akuster808@gmail.com>
-References: <cover.1594999160.git.akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+ 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
+ 8CS2NxU=
+Message-ID: <89d4c21c-5ce0-3c68-3252-48c916beb140@gmail.com>
+Date: Fri, 17 Jul 2020 09:23:20 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <b1d1487b-0691-3429-48dc-a3fc3345c25f@windriver.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-From: Ovidiu Panait <ovidiu.panait@windriver.com>
 
-Master (nss version 3.54) is not affected by this issue. This is a backport
-from nss version 3.54.
 
-NSS has shown timing differences when performing DSA signatures, which was
-exploitable and could eventually leak private keys. This vulnerability affects
-Thunderbird < 68.9.0, Firefox < 77, and Firefox ESR < 68.9.
+On 7/16/20 1:39 PM, Trevor Gamblin wrote:
+> From #oe on IRC:
+>
+> <armpit> tgamblin, regarding meta-python... any thoughts of organizing
+> some  recipes into functional buckets? ie recipe-crypto
+> <armpit> rather then all under -devtools
+> <tgamblin> armpit: I think that makes sense. What do you think
+> moto-timo? What would our categories be?
+> <armpit> the last set of py packages made me think they could have
+> been categorized  into their own bucket.
+>
+> I think this is a good idea. While it isn't hard to find where a
+> particular recipe lives, it could be much better organized. We already
+> have the following in the layer:
+>
+> recipes-core
+> recipes-connectivity
+> recipes-extended
+> recipes-devtools (where most of the recipes actually are)
+>
+> Some ideas for bucket names (other suggestions are welcome):
+>
+> recipes-automation
+> recipes-crypto
+> recipes-frameworks
+> recipes-graphics
+> recipes-multimedia
+> recipes-support
+> recipes-testing
+> recipes-webdev
+>
+> Any additional thoughts on making this change?
 
-Upstream patch:
-https://hg.mozilla.org/projects/nss/rev/daa823a4a29bcef0fec33a379ec83857429aea2e
-
-Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- ...e-a-fixed-length-for-DSA-exponentiat.patch | 110 ++++++++++++++++++
- meta-oe/recipes-support/nss/nss_3.51.1.bb     |   1 +
- 2 files changed, 111 insertions(+)
- create mode 100644 meta-oe/recipes-support/nss/nss/0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch
-
-diff --git a/meta-oe/recipes-support/nss/nss/0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch b/meta-oe/recipes-support/nss/nss/0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch
-new file mode 100644
-index 0000000000..517c277ae0
---- /dev/null
-+++ b/meta-oe/recipes-support/nss/nss/0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch
-@@ -0,0 +1,110 @@
-+From 5942c26888ba12ad5e0d92fb62f23d7cde6dc159 Mon Sep 17 00:00:00 2001
-+From: Ovidiu Panait <ovidiu.panait@windriver.com>
-+Date: Mon, 13 Jul 2020 06:25:56 +0000
-+Subject: [PATCH] Bug 1631576 - Force a fixed length for DSA exponentiation
-+ r=pereida,bbrumley
-+
-+Differential Revision: https://phabricator.services.mozilla.com/D72011
-+
-+Upstream-Status: Backport [https://hg.mozilla.org/projects/nss/rev/daa823a4a29bcef0fec33a379ec83857429aea2e]
-+
-+Authored-by: Robert Relyea <rrelyea@redhat.com>
-+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
-+---
-+ nss/lib/freebl/dsa.c | 45 ++++++++++++++++++++++++++++++++++----------
-+ 1 file changed, 35 insertions(+), 10 deletions(-)
-+
-+diff --git a/nss/lib/freebl/dsa.c b/nss/lib/freebl/dsa.c
-+index aef3539..389c9de 100644
-+--- a/nss/lib/freebl/dsa.c
-++++ b/nss/lib/freebl/dsa.c
-+@@ -313,13 +313,14 @@ DSA_NewKeyFromSeed(const PQGParams *params,
-+ 
-+ static SECStatus
-+ dsa_SignDigest(DSAPrivateKey *key, SECItem *signature, const SECItem *digest,
-+-               const unsigned char *kb)
-++               const unsigned char *kbytes)
-+ {
-+     mp_int p, q, g; /* PQG parameters */
-+     mp_int x, k;    /* private key & pseudo-random integer */
-+     mp_int r, s;    /* tuple (r, s) is signature) */
-+     mp_int t;       /* holding tmp values */
-+     mp_int ar;      /* holding blinding values */
-++    mp_digit fuzz;  /* blinding multiplier for q */
-+     mp_err err = MP_OKAY;
-+     SECStatus rv = SECSuccess;
-+     unsigned int dsa_subprime_len, dsa_signature_len, offset;
-+@@ -373,6 +374,7 @@ dsa_SignDigest(DSAPrivateKey *key, SECItem *signature, const SECItem *digest,
-+     CHECK_MPI_OK(mp_init(&s));
-+     CHECK_MPI_OK(mp_init(&t));
-+     CHECK_MPI_OK(mp_init(&ar));
-++
-+     /*
-+     ** Convert stored PQG and private key into MPI integers.
-+     */
-+@@ -380,14 +382,28 @@ dsa_SignDigest(DSAPrivateKey *key, SECItem *signature, const SECItem *digest,
-+     SECITEM_TO_MPINT(key->params.subPrime, &q);
-+     SECITEM_TO_MPINT(key->params.base, &g);
-+     SECITEM_TO_MPINT(key->privateValue, &x);
-+-    OCTETS_TO_MPINT(kb, &k, dsa_subprime_len);
-++    OCTETS_TO_MPINT(kbytes, &k, dsa_subprime_len);
-++
-++    /* k blinding  create a single value that has the high bit set in
-++     * the mp_digit*/
-++    if (RNG_GenerateGlobalRandomBytes(&fuzz, sizeof(mp_digit)) != SECSuccess) {
-++        PORT_SetError(SEC_ERROR_NEED_RANDOM);
-++        rv = SECFailure;
-++        goto cleanup;
-++    }
-++    fuzz |= 1ULL << ((sizeof(mp_digit) * PR_BITS_PER_BYTE - 1));
-+     /*
-+     ** FIPS 186-1, Section 5, Step 1
-+     **
-+     ** r = (g**k mod p) mod q
-+     */
-+-    CHECK_MPI_OK(mp_exptmod(&g, &k, &p, &r)); /* r = g**k mod p */
-+-    CHECK_MPI_OK(mp_mod(&r, &q, &r));         /* r = r mod q    */
-++    CHECK_MPI_OK(mp_mul_d(&q, fuzz, &t)); /* t = q*fuzz */
-++    CHECK_MPI_OK(mp_add(&k, &t, &t));     /* t = k+q*fuzz */
-++    /* length of t is now fixed, bits in k have been blinded */
-++    CHECK_MPI_OK(mp_exptmod(&g, &t, &p, &r)); /* r = g**t mod p */
-++    /* r is now g**(k+q*fuzz) == g**k mod p */
-++    CHECK_MPI_OK(mp_mod(&r, &q, &r)); /* r = r mod q    */
-++
-+     /*
-+     ** FIPS 186-1, Section 5, Step 2
-+     **
-+@@ -411,15 +427,24 @@ dsa_SignDigest(DSAPrivateKey *key, SECItem *signature, const SECItem *digest,
-+     /* Using mp_invmod on k directly would leak bits from k. */
-+     CHECK_MPI_OK(mp_mul(&k, &ar, &k));       /* k = k * ar */
-+     CHECK_MPI_OK(mp_mulmod(&k, &t, &q, &k)); /* k = k * t mod q */
-+-    CHECK_MPI_OK(mp_invmod(&k, &q, &k));     /* k = k**-1 mod q */
-++    /* k is now k*t*ar */
-++    CHECK_MPI_OK(mp_invmod(&k, &q, &k)); /* k = k**-1 mod q */
-++    /* k is now (k*t*ar)**-1 */
-+     CHECK_MPI_OK(mp_mulmod(&k, &t, &q, &k)); /* k = k * t mod q */
-+-    SECITEM_TO_MPINT(localDigest, &s);       /* s = HASH(M)     */
-++    /* k is now (k*ar)**-1 */
-++    SECITEM_TO_MPINT(localDigest, &s); /* s = HASH(M)     */
-+     /* To avoid leaking secret bits here the addition is blinded. */
-+-    CHECK_MPI_OK(mp_mul(&x, &ar, &x));        /* x = x * ar */
-+-    CHECK_MPI_OK(mp_mulmod(&x, &r, &q, &x));  /* x = x * r mod q */
-++    CHECK_MPI_OK(mp_mul(&x, &ar, &x)); /* x = x * ar */
-++    /* x is now x*ar */
-++    CHECK_MPI_OK(mp_mulmod(&x, &r, &q, &x)); /* x = x * r mod q */
-++    /* x is now x*r*ar */
-+     CHECK_MPI_OK(mp_mulmod(&s, &ar, &q, &t)); /* t = s * ar mod q */
-+-    CHECK_MPI_OK(mp_add(&t, &x, &s));         /* s = t + x */
-+-    CHECK_MPI_OK(mp_mulmod(&s, &k, &q, &s));  /* s = s * k mod q */
-++    /* t is now hash(M)*ar */
-++    CHECK_MPI_OK(mp_add(&t, &x, &s)); /* s = t + x */
-++    /* s is now (HASH(M)+x*r)*ar */
-++    CHECK_MPI_OK(mp_mulmod(&s, &k, &q, &s)); /* s = s * k mod q */
-++    /* s is now (HASH(M)+x*r)*ar*(k*ar)**-1 = (k**-1)*(HASH(M)+x*r) */
-++
-+     /*
-+     ** verify r != 0 and s != 0
-+     ** mentioned as optional in FIPS 186-1.
-+-- 
-+2.18.1
-+
-diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-index 36e6cd8fc5..c00bd34cb2 100644
---- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-@@ -34,6 +34,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
-            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
-            file://riscv.patch \
-            file://0001-Enable-uint128-on-mips64.patch \
-+           file://0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch \
-            "
- 
- SRC_URI[md5sum] = "6acaf1ddff69306ae30a908881c6f233"
--- 
-2.17.1
+not from me :) 
+-armin
+>
+> Trevor
+>
 
