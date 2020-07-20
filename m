@@ -1,279 +1,75 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web12.32141.1595225355947063117
+Received: from esa14.hc324-48.eu.iphmx.com (esa14.hc324-48.eu.iphmx.com [207.54.69.24])
+ by mx.groups.io with SMTP id smtpd.web10.33492.1595230404996908472
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 19 Jul 2020 23:09:16 -0700
+ Mon, 20 Jul 2020 00:33:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: wonjong.lee@windriver.com)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 06K69D98027705
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
-	Sun, 19 Jul 2020 23:09:13 -0700 (PDT)
-Received: from SEL-WLEE-D1.wrs.com (128.224.239.83) by ALA-HCB.corp.ad.wrs.com
- (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Sun, 19 Jul 2020
- 23:08:56 -0700
-From: wonjong.lee@windriver.com
-To: <openembedded-devel@lists.openembedded.org>
-CC: <junhwa.rhee@gmail.com>, <jeff.kim@windriver.com>,
-        <andy.kang@windriver.com>
-Subject: [meta-oe][PATCH] minifi: Add recipe for c++ version
-Date: Mon, 20 Jul 2020 15:07:24 +0900
-Message-ID: <20200720060724.20579-1-wonjong.lee@windriver.com>
-X-Mailer: git-send-email 2.27.0
+ dkim=fail reason="signature has expired" header.i=@bmw.de header.s=mailing1 header.b=Yhy5vd44;
+ spf=pass (domain: bmw.de, ip: 207.54.69.24, mailfrom: prvs=46313fddc=mikko.rapeli@bmw.de)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=bmw.de; i=@bmw.de; q=dns/txt; s=mailing1;
+  t=1595230404; x=1626766404;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-id:content-transfer-encoding:
+   mime-version;
+  bh=Ytv2E7EpkJtdM2iyJZJ2ggaDL/f+FHi0lNM7bvUDBwM=;
+  b=Yhy5vd44LFfEb+A8grDVN9lrwQEWBqRuDf/wHDZ6EcGbdqiy7hB9XMOB
+   0k33m/sexI4vSFRrDzUlRayj4D57PGnmCc29uNpb9RCkzpvpyXkvyaszy
+   grlqbLx2LZEkdcZccoMrhgRZeWXx5b7A0NuBnsj0i7HuKCuF65hlN8ErY
+   w=;
+Received: from esagw3.bmwgroup.com (HELO esagw3.muc) ([160.46.252.35]) by
+ esa14.hc324-48.eu.iphmx.com with ESMTP/TLS; 20 Jul 2020 09:33:12 +0200
+Received: from esabb2.muc ([160.50.100.34])  by esagw3.muc with ESMTP/TLS;
+ 20 Jul 2020 09:33:12 +0200
+Received: from smucm10k.bmwgroup.net (HELO smucm10k.europe.bmw.corp) ([160.48.96.47])
+ by esabb2.muc with ESMTP/TLS; 20 Jul 2020 09:33:12 +0200
+Received: from smucm10k.europe.bmw.corp (160.48.96.47) by smucm10k.europe.bmw.corp
+ (160.48.96.47) with Microsoft SMTP Server (TLS;
+ Mon, 20 Jul 2020 09:33:12 +0200
+Received: from smucm10k.europe.bmw.corp ([160.48.96.47]) by
+ smucm10k.europe.bmw.corp ([160.48.96.47]) with mapi id 15.00.1497.006; Mon,
+ 20 Jul 2020 09:33:12 +0200
+From: "Mikko Rapeli" <mikko.rapeli@bmw.de>
+To: <bunk@stusta.de>
+CC: <akuster808@gmail.com>, <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [dunfell 1/2] Revert "jsoncpp: upgrade 1.9.2 -> 1.9.3"
+Thread-Topic: [oe] [dunfell 1/2] Revert "jsoncpp: upgrade 1.9.2 -> 1.9.3"
+Thread-Index: AQHWXE3ppA55RQE+OUio4wyCVbkf1akL5EAAgAQRp4A=
+Date: Mon, 20 Jul 2020 07:33:11 +0000
+Message-ID: <20200720073311.GQ108868@korppu>
+References: <cover.1594999160.git.akuster808@gmail.com>
+ <0e0b4892f50808b87223a1e8dbcd13d4e16368cf.1594999160.git.akuster808@gmail.com>
+ <20200717172458.GF1229@localhost>
+In-Reply-To: <20200717172458.GF1229@localhost>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-messagesentrepresentingtype: 1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <4C357FCF9B55944A963DD48F9653640E@bmwmail.corp>
+Content-Transfer-Encoding: quoted-printable
 
-MiNiFi--a subproject of Apache NiFi--is a complementary data
-collection approach that supplements the core tenets of NiFi
-in dataflow management, focusing on the collection of data at
-the source of its creation. The C++ implementation is an
-additional implementation to the one in Java with the aim of
-an even smaller resource footprint.
+Hi,
 
-Signed-off-by: wonjong.lee <wonjong.lee@windriver.com>
----
- .../files/fix-OSSPUUID-cross-compile.patch    | 70 +++++++++++++++++++
- .../files/fix-build-issue-in-yocto.patch      | 62 ++++++++++++++++
- .../minifi-cpp/files/minifi.service           | 13 ++++
- .../minifi-cpp/minifi-cpp_0.7.0.bb            | 63 +++++++++++++++++
- 4 files changed, 208 insertions(+)
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/minifi.service
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
+On Fri, Jul 17, 2020 at 08:24:58PM +0300, Adrian Bunk wrote:
+> On Fri, Jul 17, 2020 at 08:20:54AM -0700, akuster wrote:
+> >...
+> > --- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.3.bb
+> > +++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb
+> >...
+>=20
+> This would make the version going backwards, please add
+>   PV =3D "1.9.3+really1.9.2"
 
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch b/meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch
-new file mode 100644
-index 000000000..6af47cafb
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch
-@@ -0,0 +1,70 @@
-+diff -urN orig/cmake/BundledOSSPUUID.cmake patched/cmake/BundledOSSPUUID.cmake
-+--- orig/cmake/BundledOSSPUUID.cmake	2020-01-07 22:55:55.000000000 +0900
-++++ patched/cmake/BundledOSSPUUID.cmake	2020-07-14 11:32:28.221092406 +0900
-+@@ -22,7 +22,8 @@
-+ 
-+     # Define patch step
-+     find_package(Patch REQUIRED)
-+-    set(PC "${Patch_EXECUTABLE}" -p1 -i "${SOURCE_DIR}/thirdparty/ossp-uuid/ossp-uuid-mac-fix.patch")
-++    set(PATCH1 "${Patch_EXECUTABLE}" -p1 -i "${SOURCE_DIR}/thirdparty/ossp-uuid/ossp-uuid-mac-fix.patch")
-++    set(PATCH2 "${Patch_EXECUTABLE}" -p1 -i "${SOURCE_DIR}/thirdparty/ossp-uuid/cross-compile-fix.patch")
-+ 
-+     # Define byproducts
-+     set(BYPRODUCTS "lib/libuuid.a"
-+@@ -35,7 +36,9 @@
-+     ENDFOREACH(BYPRODUCT)
-+ 
-+     # Build project
-+-    set(CONFIGURE_COMMAND ./configure "CFLAGS=-fPIC" "CXXFLAGS=-fPIC" --with-cxx --without-perl --without-php --without-pgsql "--prefix=${BINARY_DIR}/thirdparty/ossp-uuid-install")
-++    set(CONFIGURE_COMMAND ac_cv_va_copy=C99 ./configure CFLAGS=-fPIC CXXFLAGS=-fPIC --host=${HOST_SYS}
-++        --with-cxx --without-perl --without-php --without-pgsql
-++        --prefix=${BINARY_DIR}/thirdparty/ossp-uuid-install)
-+     string(TOLOWER "${CMAKE_BUILD_TYPE}" build_type)
-+     if(NOT build_type MATCHES debug)
-+         list(APPEND CONFIGURE_COMMAND --enable-debug=yes)
-+@@ -52,8 +55,8 @@
-+             UPDATE_COMMAND ""
-+             INSTALL_COMMAND make install
-+             BUILD_BYPRODUCTS ${OSSPUUID_LIBRARIES_LIST}
-+-            CONFIGURE_COMMAND ""
-+-            PATCH_COMMAND ${PC} && ${CONFIGURE_COMMAND}
-++            CONFIGURE_COMMAND ${CONFIGURE_COMMAND}
-++            PATCH_COMMAND ${PATCH1} && ${PATCH2}
-+             STEP_TARGETS build
-+             EXCLUDE_FROM_ALL TRUE
-+     )
-+diff -urN orig/thirdparty/ossp-uuid/cross-compile-fix.patch patched/thirdparty/ossp-uuid/cross-compile-fix.patch
-+--- orig/thirdparty/ossp-uuid/cross-compile-fix.patch	1970-01-01 09:00:00.000000000 +0900
-++++ patched/thirdparty/ossp-uuid/cross-compile-fix.patch	2020-07-14 11:48:13.781090409 +0900
-+@@ -0,0 +1,31 @@
-++diff -urN orig/config.sub patched/config.sub
-++--- orig/config.sub	2008-07-05 06:43:08.000000000 +0900
-+++++ patched/config.sub	2020-07-14 11:46:47.249090591 +0900
-++@@ -238,6 +238,7 @@
-++ 	# Some are omitted here because they have special meanings below.
-++ 	1750a | 580 \
-++ 	| a29k \
-+++	| aarch64 | aarch64_be \
-++ 	| alpha | alphaev[4-8] | alphaev56 | alphaev6[78] | alphapca5[67] \
-++ 	| alpha64 | alpha64ev[4-8] | alpha64ev56 | alpha64ev6[78] | alpha64pca5[67] \
-++ 	| am33_2.0 \
-++@@ -314,6 +315,7 @@
-++ 	# Recognize the basic CPU types with company name.
-++ 	580-* \
-++ 	| a29k-* \
-+++	| aarch64-* | aarch64_be-* \
-++ 	| alpha-* | alphaev[4-8]-* | alphaev56-* | alphaev6[78]-* \
-++ 	| alpha64-* | alpha64ev[4-8]-* | alpha64ev56-* | alpha64ev6[78]-* \
-++ 	| alphapca5[67]-* | alpha64pca5[67]-* | arc-* \
-++diff -urN orig/shtool patched/shtool
-++--- orig/shtool	2008-07-05 06:43:08.000000000 +0900
-+++++ patched/shtool	2020-07-13 19:35:49.557213657 +0900
-++@@ -1400,7 +1400,7 @@
-++             if [ ".$opt_t" = .yes ]; then
-++                 echo "strip $dsttmp" 1>&2
-++             fi
-++-            strip $dsttmp || shtool_exit $?
-+++            $STRIP $dsttmp || shtool_exit $?
-++         fi
-++         if [ ".$opt_o" != . ]; then
-++             if [ ".$opt_t" = .yes ]; then
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch b/meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch
-new file mode 100644
-index 000000000..a7232c025
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch
-@@ -0,0 +1,62 @@
-+diff -urN orig/cmake/LibreSSL.cmake patched/cmake/LibreSSL.cmake
-+--- orig/cmake/LibreSSL.cmake	2020-01-07 22:55:55.000000000 +0900
-++++ patched/cmake/LibreSSL.cmake	2020-07-14 12:01:28.321088730 +0900
-+@@ -27,6 +27,17 @@
-+ 		set(BYPRODUCT_PREFIX "" CACHE STRING "" FORCE)
-+ 	set(BUILD_ARGS " -GVisual Studio 15 2017")
-+ 	endif(WIN32)
-++
-++	set(BYPRODUCTS
-++		"lib/${BYPRODUCT_PREFIX}crypto${BYPRODUCT_SUFFIX}"
-++		"lib/${BYPRODUCT_PREFIX}ssl${BYPRODUCT_SUFFIX}"
-++		"lib/${BYPRODUCT_PREFIX}tls${BYPRODUCT_SUFFIX}"
-++	)
-++	set(LIBRESSL_INSTALL_DIR "${BINARY_DIR}/thirdparty/libressl-install" CACHE STRING "" FORCE)
-++	FOREACH(BYPRODUCT ${BYPRODUCTS})
-++		LIST(APPEND LIBRESSL_LIBRARIES_LIST "${LIBRESSL_INSTALL_DIR}/${BYPRODUCT}")
-++	ENDFOREACH(BYPRODUCT)
-++
-+ 	ExternalProject_Add(
-+ 	libressl-portable
-+ 	URL https://cdn.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.8.3.tar.gz https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.8.3.tar.gz https://gentoo.osuosl.org/distfiles/libressl-2.8.3.tar.gz
-+@@ -37,6 +48,7 @@
-+ 				"-DLIBRESSL_APPS=OFF"
-+ 				"-DLIBRESSL_TESTS=OFF"
-+ 				"${BUILD_ARGS}"
-++	BUILD_BYPRODUCTS ${LIBRESSL_LIBRARIES_LIST}
-+ 	)
-+ 
-+ 	add_library(crypto STATIC IMPORTED)
-+diff -urN orig/CMakeLists.txt patched/CMakeLists.txt
-+--- orig/CMakeLists.txt	2020-01-07 22:55:55.000000000 +0900
-++++ patched/CMakeLists.txt	2020-07-14 16:25:51.581055220 +0900
-+@@ -120,12 +120,12 @@
-+ endif()
-+ 
-+ # Use ccache if present
-+-find_program(CCACHE_FOUND ccache)
-+-if(CCACHE_FOUND)
-+-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
-+-    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
-+-    message("-- Found ccache: ${CCACHE_FOUND}")
-+-endif(CCACHE_FOUND)
-++#find_program(CCACHE_FOUND ccache)
-++#if(CCACHE_FOUND)
-++#    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
-++#    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
-++#    message("-- Found ccache: ${CCACHE_FOUND}")
-++#endif(CCACHE_FOUND)
-+ 
-+ if (UNIX AND USE_GOLD_LINKER AND NOT APPLE )
-+   execute_process(COMMAND ${CMAKE_C_COMPILER} -fuse-ld=gold -Wl,--version ERROR_QUIET OUTPUT_VARIABLE ld_version)
-+@@ -303,8 +303,10 @@
-+     GIT_TAG "f3294d9d86e6a7915a967efff2842089b8b0d071"  # Version 7.64.0
-+     SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/curl-src"
-+     LIST_SEPARATOR % # This is needed for passing semicolon-separated lists
-++    TLS_VERIFY OFF
-+     CMAKE_ARGS ${PASSTHROUGH_CMAKE_ARGS}
-+                "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/thirdparty/curl-install"
-++               "-DCMAKE_INSTALL_LIBDIR=lib${LIBSUFFIX}"
-+                 -DCMAKE_POSITION_INDEPENDENT_CODE=ON
-+                 -DBUILD_CURL_EXE=OFF
-+                 -DBUILD_TESTING=OFF
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/minifi.service b/meta-oe/recipes-extended/minifi-cpp/files/minifi.service
-new file mode 100644
-index 000000000..c0e419c67
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/minifi.service
-@@ -0,0 +1,13 @@
-+[Unit]
-+Description=MiNiFi Service
-+After=network.target
-+RequiresMountsFor=/var
-+
-+[Service]
-+Type=simple
-+Environment=MINIFI_HOME=/etc/minifi
-+ExecStartPre=@BASE_BINDIR@/mkdir -p /var/lib/minifi /var/log/minifi
-+ExecStart=@BINDIR@/minifi
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-new file mode 100644
-index 000000000..b74f28db1
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-@@ -0,0 +1,63 @@
-+SUMMARY = "A subproject of Apache NiFi to collect data where it originates."
-+DESCRIPTION = "MiNiFi--a subproject of Apache NiFi--is a complementary \
-+data collection approach that supplements the core tenets of NiFi in dataflow \
-+management, focusing on the collection of data at the source of its creation."
-+HOMEPAGE = "https://nifi.apache.org/minifi/index.html"
-+SECTION = "console/network"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=f9534eb5f4ab800b573a37bffc62f3a7"
-+
-+DEPENDS = "libxcrypt bzip2 expat flex zlib python3"
-+
-+SRCREV = "aa42957a2e227df41510047cece3cd606dc1cb6a"
-+SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git \
-+           file://fix-build-issue-in-yocto.patch \
-+           file://fix-OSSPUUID-cross-compile.patch \
-+           file://minifi.service \
-+           "
-+
-+S = "${WORKDIR}/git"
-+
-+inherit pkgconfig cmake systemd
-+
-+SYSTEMD_PACKAGES = "minifi-cpp"
-+SYSTEMD_SERVICE_${PN} = "minifi.service"
-+
-+EXTRA_OECMAKE += " \
-+    -DHOST_SYS=${HOST_SYS} -DBUILD_SYS=${BUILD_SYS} \
-+    -DSKIP_TESTS=ON \
-+    "
-+
-+OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
-+
-+
-+do_install() {
-+    DESTDIR='${B}/minifi-install' cmake_runcmake_build --target ${OECMAKE_TARGET_INSTALL}
-+
-+    CONF_DIR=${D}${base_prefix}/etc/minifi/conf
-+    install -d ${D}${base_prefix}/usr/bin
-+    install -d ${CONF_DIR}
-+    cp -a ${B}/minifi-install/usr/bin/*   ${D}${base_prefix}/usr/bin/
-+    cp -a ${B}/minifi-install/usr/conf/*  ${CONF_DIR}/
-+    sed -i 's|#appender.rolling.directory=.*|appender.rolling.directory=/var/log/minifi|g' \
-+        ${CONF_DIR}/minifi-log.properties
-+    sed -i 's|nifi.provenance.repository.directory.default=.*|nifi.provenance.repository.directory.default=/var/lib/minifi/provenance_repository|g' \
-+        ${CONF_DIR}/minifi.properties
-+    sed -i 's|nifi.flowfile.repository.directory.default=.*|nifi.flowfile.repository.directory.default=/var/lib/minifi/flowfile_repository|g' \
-+        ${CONF_DIR}/minifi.properties
-+    sed -i 's|nifi.database.content.repository.directory.default=.*|nifi.database.content.repository.directory.default=/var/lib/minifi/content_repository|g' \
-+        ${CONF_DIR}/minifi.properties
-+    sed -i 's|nifi.flow.configuration.file=.*|nifi.flow.configuration.file=/etc/minifi/conf/config.yml|g' \
-+        ${CONF_DIR}/minifi.properties
-+
-+    install -m 0755 -d ${D}${systemd_unitdir}/system
-+    install -m 0644 ${WORKDIR}/minifi.service ${D}${systemd_unitdir}/system/
-+    sed -i -e 's|@BASE_BINDIR@|${base_bindir}|g' ${D}${systemd_unitdir}/system/minifi.service
-+    sed -i -e 's|@BINDIR@|${bindir}|g' ${D}${systemd_unitdir}/system/minifi.service
-+}
-+
-+FILES_${PN} = " \
-+        /usr/bin/* \
-+        /etc/minifi/* \
-+        ${systemd_unitdir}/system/minifi.service \
-+        "
--- 
-2.27.0
+This will break CVE version checks unless CVE_VERSION is set to 1.9.2.
+Please increment PE instead.
 
+Cheers,
+
+-Mikko
+
+> cu
+> Adrian
+
+>=20
