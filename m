@@ -1,144 +1,158 @@
-Received: from rcdn-iport-9.cisco.com (rcdn-iport-9.cisco.com [173.37.86.80])
- by mx.groups.io with SMTP id smtpd.web12.7077.1595284051341806477
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com [209.85.160.196])
+ by mx.groups.io with SMTP id smtpd.web10.7134.1595284181193932408
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Jul 2020 15:27:31 -0700
+ Mon, 20 Jul 2020 15:29:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cisco.com header.s=iport header.b=lDkvWP/D;
- spf=pass (domain: cisco.com, ip: 173.37.86.80, mailfrom: jpitti@cisco.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=cisco.com; i=@cisco.com; l=3898; q=dns/txt; s=iport;
-  t=1595284051; x=1596493651;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=nRvSJ5RsefpKwNCDDexGu0Un1hze0KgqeFYfkUKB9wU=;
-  b=lDkvWP/DHnfss90T50pE1ljqcka9jXCqOSTyM9rT27izxalNScFNqBSU
-   lZtkW85b5HXX0MRgQ4tLcxQhVV1tuD9a6zvguk2i8sbMBw6ouRnZt9CPh
-   1+yAfFbxzSQVqkivMDueE1UbuW9eDghhN8Czs+XaE44ECkszWo9RvF7Z4
-   Q=;
-X-IronPort-AV: E=Sophos;i="5.75,375,1589241600"; 
-   d="scan'208";a="709946266"
-Received: from rcdn-core-8.cisco.com ([173.37.93.144])
-  by rcdn-iport-9.cisco.com with ESMTP/TLS/DHE-RSA-SEED-SHA; 20 Jul 2020 22:27:30 +0000
-Received: from sjc-ads-2033.cisco.com (sjc-ads-2033.cisco.com [171.70.61.221])
-	by rcdn-core-8.cisco.com (8.15.2/8.15.2) with ESMTP id 06KMRUGS015939;
-	Mon, 20 Jul 2020 22:27:30 GMT
-Received: by sjc-ads-2033.cisco.com (Postfix, from userid 396877)
-	id 038DDD03; Mon, 20 Jul 2020 15:27:29 -0700 (PDT)
-From: "Julius Hemanth Pitti" <jpitti@cisco.com>
-To: openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
-Cc: xe-linux-external@cisco.com, Julius Hemanth Pitti <jpitti@cisco.com>
-Subject: [meta-oe][PATCH] netkit-telnetd: Fix buffer overflow in netoprintf
-Date: Mon, 20 Jul 2020 15:19:46 -0700
-Message-Id: <20200720221946.33011-1-jpitti@cisco.com>
-X-Mailer: git-send-email 2.19.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZMuzAN30;
+ spf=pass (domain: gmail.com, ip: 209.85.160.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f196.google.com with SMTP id e12so14681889qtr.9
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jul 2020 15:29:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=/wsmtAQf8vIMMljfJEieriZdaQTN9Q74CCyeEFRsek4=;
+        b=ZMuzAN30vMsflWePhNxgWMEXyvWdpKhDuJ9nKmLbZb92DkbEaQ5H1UBP3KfJctnA2l
+         QUxf9+ypB6jZYeL5UGgTASPX5pKSp5hvrb+IvLAE2tOIVcanPchMbsYuqBOVVaZRvMhc
+         tBUW3RGtcCC4DE0ll24UXQ2EqONN+8h5RkvGQ1bcBdXl8IjBSQnPxplnKCq/R+cV7KKA
+         teMTrzwV30MqVnVN+sN53D0Xv6SXQHTQOcRpCJsm7QjJy9wJVY4C2TCLI48k5ueAE6r0
+         5kRSSpPrTuE4XH8FSvJOrMNGVGqj59269rajjEbxXVIoBlUMvUQJ3t0ki+3mTGvGyUqE
+         bbhw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=/wsmtAQf8vIMMljfJEieriZdaQTN9Q74CCyeEFRsek4=;
+        b=lDBPS4sRjDCW0HzEYh5Fhi5F6vbSsnrtAjhGNmUMggMeYSBm/ZLLIEWFwSQZCxKWah
+         a6mIg8aQK3xZZOfY2KdLgbnoyHyzdP85X7iUTJHn+taLOulgjR4egq0PeequRsOW1QHV
+         YqLCbFbLsjoUPINXBWo2C0BnSiCtX+ZrHxNLlZga6Ris1/32p4HhGdosL9gq7RTplIDY
+         jrLX24ALJSl2NVu/LO5nPJx1xlWlKLMONayso/P53LSo8vpXmsuaFQi6If6MGHXXhYxw
+         zBQU6lq46YuQf67dfVQ8mLuxY63HqJNL9fqYiVQe3x3Cl+o7oXlujQJltAJXGSXjja/B
+         tLlg==
+X-Gm-Message-State: AOAM530/nKK4YsvH3gYZSFIZFWzoWlUq2dwIQLORmziZz2lVbkEj3yYJ
+	GEoda4VViWifrCakjtoEu7nqb7AelGEil/b5zTw=
+X-Google-Smtp-Source: ABdhPJzBzlrEgeIRhyl5jwEKrLxM9lgbwnsNBjDvMH1J/1gKKif2cUMy3D0mC2ZlX8jHI1IRGJHx1oXdPPBxF136xtg=
+X-Received: by 2002:ac8:4f13:: with SMTP id b19mr26578938qte.146.1595284180167;
+ Mon, 20 Jul 2020 15:29:40 -0700 (PDT)
 MIME-Version: 1.0
-X-Auto-Response-Suppress: DR, OOF, AutoReply
-X-Outbound-SMTP-Client: 171.70.61.221, sjc-ads-2033.cisco.com
-X-Outbound-Node: rcdn-core-8.cisco.com
-Content-Transfer-Encoding: 8bit
+References: <20200717205956.131825-1-joe.slater@windriver.com>
+ <CAMKF1so2eu6NJA3nfX6=96dF5NX7orT-wmdHEn5HJCGoMtwPrg@mail.gmail.com> <BY5PR11MB39925BE679AF15A585088706887B0@BY5PR11MB3992.namprd11.prod.outlook.com>
+In-Reply-To: <BY5PR11MB39925BE679AF15A585088706887B0@BY5PR11MB3992.namprd11.prod.outlook.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Mon, 20 Jul 2020 15:29:14 -0700
+Message-ID: <CAMKF1sryOnQzRot81G+OuysFR2=g47G6OPL1MjN01e_dEQn+CA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/1] lvm2: reproducible binaries
+To: "Slater, Joseph" <joe.slater@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	"MacLeod, Randy" <Randy.MacLeod@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-netoprintf() was not handling a case where
-return value of vsnprintf is greater than
-"size"(2nd argument), results in buffer overflow
-while adjusting "nfrontp" pointer to point
-beyond "netobuf" buffer.
+On Mon, Jul 20, 2020 at 3:16 PM Slater, Joseph <joe.slater@windriver.com> w=
+rote:
+>
+> I have not looked at when it is printed, probably for --help or --versio=
+n, but we would not be able to see the command line that invoked configure.=
+  To me, that's not much of a loss.
+>
+> I originally had a patch that would allow the definition of CONFIGURE_LI=
+NE in configure.ac to be overridden by setting it in the environment.  We c=
+ould then do that, or not, in the recipe.  Maybe even make it a packageconf=
+ option.  I can't remember why I switched to conditional patching, but I co=
+uld always switch back.
 
-Here is one such case where "nfrontp"
-crossed boundaries of "netobuf", and
-pointing to another global variable.
+options you suggest are definitely preferred over conditional patching
+since these patches will cause extra work
+and perhaps will become stale if someone is not testing reproducible build=
+s.
 
-(gdb) p &netobuf[8255]
-$5 = 0x55c93afe8b1f <netobuf+8255> ""
-(gdb) p nfrontp
-$6 = 0x55c93afe8c20 <terminaltype> "\377"
-(gdb) p &terminaltype
-$7 = (char **) 0x55c93afe8c20 <terminaltype>
-(gdb)
-
-This resulted in crash of telnetd service
-with segmentation fault.
-
-Signed-off-by: Julius Hemanth Pitti <jpitti@cisco.com>
----
- ....c-Fix-buffer-overflow-in-netoprintf.patch | 56 +++++++++++++++++++
- .../netkit-telnet/netkit-telnet_0.17.bb       |  1 +
- 2 files changed, 57 insertions(+)
- create mode 100644 meta-networking/recipes-netkit/netkit-telnet/files/0001-telnetd-utility.c-Fix-buffer-overflow-in-netoprintf.patch
-
-diff --git a/meta-networking/recipes-netkit/netkit-telnet/files/0001-telnetd-utility.c-Fix-buffer-overflow-in-netoprintf.patch b/meta-networking/recipes-netkit/netkit-telnet/files/0001-telnetd-utility.c-Fix-buffer-overflow-in-netoprintf.patch
-new file mode 100644
-index 000000000..8f983e40a
---- /dev/null
-+++ b/meta-networking/recipes-netkit/netkit-telnet/files/0001-telnetd-utility.c-Fix-buffer-overflow-in-netoprintf.patch
-@@ -0,0 +1,56 @@
-+From 9c81c8e5bc7782e8ae12c078615abc3c896059f2 Mon Sep 17 00:00:00 2001
-+From: Julius Hemanth Pitti <jpitti@cisco.com>
-+Date: Tue, 14 Jul 2020 22:34:19 -0700
-+Subject: [PATCH] telnetd/utility.c: Fix buffer overflow in netoprintf
-+
-+As per man page of vsnprintf, when formated
-+string size is greater than "size"(2nd argument),
-+then vsnprintf returns size of formated string,
-+not "size"(2nd argument).
-+
-+netoprintf() was not handling a case where
-+return value of vsnprintf is greater than
-+"size"(2nd argument), results in buffer overflow
-+while adjusting "nfrontp" pointer to point
-+beyond "netobuf" buffer.
-+
-+Here is one such case where "nfrontp"
-+crossed boundaries of "netobuf", and
-+pointing to another global variable.
-+
-+(gdb) p &netobuf[8255]
-+$5 = 0x55c93afe8b1f <netobuf+8255> ""
-+(gdb) p nfrontp
-+$6 = 0x55c93afe8c20 <terminaltype> "\377"
-+(gdb) p &terminaltype
-+$7 = (char **) 0x55c93afe8c20 <terminaltype>
-+(gdb)
-+
-+This resulted in crash of telnetd service
-+with segmentation fault.
-+
-+Though this is DoS security bug, I couldn't
-+find any CVE ID for this.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Julius Hemanth Pitti <jpitti@cisco.com>
-+---
-+ telnetd/utility.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/telnetd/utility.c b/telnetd/utility.c
-+index b9a46a6..4811f14 100644
-+--- a/telnetd/utility.c
-++++ b/telnetd/utility.c
-+@@ -66,7 +66,7 @@ netoprintf(const char *fmt, ...)
-+       len = vsnprintf(nfrontp, maxsize, fmt, ap);
-+       va_end(ap);
-+ 
-+-      if (len<0 || len==maxsize) {
-++      if (len<0 || len>=maxsize) {
-+ 	 /* didn't fit */
-+ 	 netflush();
-+       }
-+--
-+2.19.1
-diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-index 0e92add63..08dd532b6 100644
---- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-@@ -13,6 +13,7 @@ SRC_URI = "http://ftp.linux.org.uk/pub/linux/Networking/netkit/${BP}.tar.gz \
-            file://0001-telnet-telnetd-Fix-print-format-strings.patch \
-            file://0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch \
-            file://CVE-2020-10188.patch \
-+           file://0001-telnetd-utility.c-Fix-buffer-overflow-in-netoprintf.patch \
-            "
- 
- UPSTREAM_CHECK_URI = "${DEBIAN_MIRROR}/main/n/netkit-telnet/"
--- 
-2.19.1
-
+>
+> Joe
+>
+> -----Original Message-----
+> From: Khem Raj <raj.khem@gmail.com>
+> Sent: Monday, July 20, 2020 2:40 PM
+> To: Slater, Joseph <joe.slater@windriver.com>
+> Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>; MacLe=
+od, Randy <Randy.MacLeod@windriver.com>
+> Subject: Re: [oe] [meta-oe][PATCH 1/1] lvm2: reproducible binaries
+>
+> On Fri, Jul 17, 2020 at 2:00 PM Joe Slater <joe.slater@windriver.com> wr=
+ote:
+> >
+> > For reproducible binaries, create a static CONFIGURE_LINE during
+> > configuration rather than reporting the command line invoking
+> > configure.
+> >
+>
+> is there any downside of applying this patch without conditional depende=
+ncy on reproducible builds ?
+> what do we lose ?
+>
+> > Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> > ---
+> >  .../lvm2/files/reproducible-build.patch            | 24 +++++++++++++=
++++++++++
+> >  meta-oe/recipes-support/lvm2/lvm2.inc              |  2 ++
+> >  2 files changed, 26 insertions(+)
+> >  create mode 100644
+> > meta-oe/recipes-support/lvm2/files/reproducible-build.patch
+> >
+> > diff --git
+> > a/meta-oe/recipes-support/lvm2/files/reproducible-build.patch
+> > b/meta-oe/recipes-support/lvm2/files/reproducible-build.patch
+> > new file mode 100644
+> > index 0000000..db598a8
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-support/lvm2/files/reproducible-build.patch
+> > @@ -0,0 +1,24 @@
+> > +configure.ac:  override CONFIGURE_LINE
+> > +
+> > +For reproducible binaries, we need to report a constant CONFIGURE_LIN=
+E.
+> > +This patched is only applied for such builds.
+> > +
+> > +Upstream-Status: Inappropriate [oe specific]
+> > +
+> > +Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> > +
+> > +
+> > +--- git.orig/configure.ac
+> > ++++ git/configure.ac
+> > +@@ -15,7 +15,10 @@ AC_PREREQ(2.69)
+> > +
+> > +#####################################################################
+> > +###########  dnl -- Process this file with autoconf to produce a
+> > +configure script.
+> > + AC_INIT
+> > +-CONFIGURE_LINE=3D"$0 $@"
+> > ++dnl The default CONFIGURE_LINE has been overridden for reproducible
+> > ++binaries dnl CONFIGURE_LINE=3D"$0 $@"
+> > ++CONFIGURE_LINE=3D"configure parameters are not available for reprodu=
+cible builds"
+> > ++
+> > + AC_CONFIG_SRCDIR([lib/device/dev-cache.h])
+> > + AC_CONFIG_HEADERS([include/configure.h])
+> > +
+> > diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc
+> > b/meta-oe/recipes-support/lvm2/lvm2.inc
+> > index 01c9df4..ab618b4 100644
+> > --- a/meta-oe/recipes-support/lvm2/lvm2.inc
+> > +++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+> > @@ -15,7 +15,9 @@ SRC_URI =3D "git://sourceware.org/git/lvm2.git \
+> >             file://0001-Avoid-bashisms-in-init-scripts.patch \
+> >             file://0005-do-not-build-manual.patch \
+> >
+> > file://0006-start-lvm2-monitor.service-after-tmp.mount.patch \
+> > +
+> > + ${@bb.utils.contains('BUILD_REPRODUCIBLE_BINARIES','1','file://repro
+> > + ducible-build.patch','', d)} \
+> >             "
+> > +
+> >  SRCREV =3D "b9391b1b9f0b73303fa21f8f92574d17ce4c2b02"
+> >  S =3D "${WORKDIR}/git"
+> >
+> > --
+> > 2.7.4
+> >
+> >=20
