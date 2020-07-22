@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.15990.1595414957819166233
+ by mx.groups.io with SMTP id smtpd.web10.16235.1595414958616269870
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Jul 2020 03:49:18 -0700
+ Wed, 22 Jul 2020 03:49:19 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=55352 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jyCJF-0001ZT-JZ; Wed, 22 Jul 2020 13:49:14 +0300
+	id 1jyCJI-0001ZT-QJ; Wed, 22 Jul 2020 13:49:17 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/7] python3-pymysql: Upgrade 0.9.3 -> 0.10.0
-Date: Wed, 22 Jul 2020 13:48:59 +0300
-Message-Id: <20200722104905.15499-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/7] python3-simplejson: Upgrade 3.17.0 -> 3.17.2
+Date: Wed, 22 Jul 2020 13:49:00 +0300
+Message-Id: <20200722104905.15499-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200722104905.15499-1-leon.anavi@konsulko.com>
+References: <20200722104905.15499-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,45 +30,37 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.10.0:
+Upgrade to release 3.17.2:
 
-- MariaDB ed25519 auth is supported.
-- Python 3.4 support is dropped.
-- Context manager interface is removed from Connection. It will
-  be added with different meaning.
-- MySQL warnings are not shown by default because many user report
-  issue to PyMySQL issue tracker when they see warning. You need
-  to call "SHOW WARNINGS" explicitly when you want to see warnings.
-- Formatting of float object is changed from "3.14" to "3.14e0".
-- Use cp1252 codec for latin1 charset.
-- Fix decimal literal.
-- TRUNCATED_WRONG_VALUE_FOR_FIELD, and ILLEGAL_VALUE_FOR_TYPE are
-  now DataError instead of InternalError.
+* Added arm64 to build matrix and reintroduced
+  manylinux wheels
+* No more bdist_wininst builds per PEP 527
+* Minor grammatical issue fixed in README
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pymysql_0.9.3.bb => python3-pymysql_0.10.0.bb}   | 4 ++--
+ ...hon3-simplejson_3.17.0.bb => python3-simplejson_3.17.2.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pymysql_0.9.3.bb => python3-pymysql_0.10.0.bb} (76%)
+ rename meta-python/recipes-devtools/python/{python3-simplejson_3.17.0.bb => python3-simplejson_3.17.2.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymysql_0.9.3.bb b/meta-python/recipes-devtools/python/python3-pymysql_0.10.0.bb
-similarity index 76%
-rename from meta-python/recipes-devtools/python/python3-pymysql_0.9.3.bb
-rename to meta-python/recipes-devtools/python/python3-pymysql_0.10.0.bb
-index 6a64ccb16..895c47b03 100644
---- a/meta-python/recipes-devtools/python/python3-pymysql_0.9.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymysql_0.10.0.bb
-@@ -8,8 +8,8 @@ HOMEPAGE = "https://pymysql.readthedocs.io"
+diff --git a/meta-python/recipes-devtools/python/python3-simplejson_3.17.0.bb b/meta-python/recipes-devtools/python/python3-simplejson_3.17.2.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-simplejson_3.17.0.bb
+rename to meta-python/recipes-devtools/python/python3-simplejson_3.17.2.bb
+index b76ae5299..cab0da6a1 100644
+--- a/meta-python/recipes-devtools/python/python3-simplejson_3.17.0.bb
++++ b/meta-python/recipes-devtools/python/python3-simplejson_3.17.2.bb
+@@ -4,8 +4,8 @@ HOMEPAGE = "http://cheeseshop.python.org/pypi/simplejson"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=528175c84163bb800d23ad835c7fa0fc"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c6338d7abd321c0b50a2a547e441c52e"
  
--SRC_URI[md5sum] = "e5d9183cc0a775ac29f9e0365cca6556"
--SRC_URI[sha256sum] = "d8c059dcd81dedb85a9f034d5e22dcb4442c0b201908bede99e306d65ea7c8e7"
-+SRC_URI[md5sum] = "d08058b1592724d5808c43f56050f245"
-+SRC_URI[sha256sum] = "e14070bc84e050e0f80bf6063e31d276f03a0bb4d46b9eca2854566c4ae19837"
+-SRC_URI[md5sum] = "8a5ed75c367b90fedc3d685742e2a1c7"
+-SRC_URI[sha256sum] = "2b4b2b738b3b99819a17feaf118265d0753d5536049ea570b3c43b51c4701e81"
++SRC_URI[md5sum] = "27fba3bc75a32318bd3b163b8a31aa7e"
++SRC_URI[sha256sum] = "75ecc79f26d99222a084fbdd1ce5aad3ac3a8bd535cd9059528452da38b68841"
  
- PYPI_PACKAGE = "PyMySQL"
  inherit pypi setuptools3
+ 
 -- 
 2.17.1
 
