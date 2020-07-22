@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.16202.1595414960115780414
+ by mx.groups.io with SMTP id smtpd.web12.16203.1595414960652310057
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Jul 2020 03:49:20 -0700
+ Wed, 22 Jul 2020 03:49:21 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=55352 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jyCJK-0001ZT-6q; Wed, 22 Jul 2020 13:49:19 +0300
+	id 1jyCJL-0001ZT-4a; Wed, 22 Jul 2020 13:49:19 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/7] python3-stevedore: Upgrade 2.0.1 -> 3.2.0
-Date: Wed, 22 Jul 2020 13:49:02 +0300
-Message-Id: <20200722104905.15499-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/7] python3-mock: Upgrade 4.0.1 -> 4.0.2
+Date: Wed, 22 Jul 2020 13:49:03 +0300
+Message-Id: <20200722104905.15499-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200722104905.15499-1-leon.anavi@konsulko.com>
 References: <20200722104905.15499-1-leon.anavi@konsulko.com>
@@ -30,36 +30,34 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.2.0:
+Upgrade 4.0.2:
 
-- sphinxext: fix warning message for detailed list
-- add release note before major version update
-- switch to importlib.metadata package
+- Issue #39915: Ensure unittest.mock.AsyncMock.await_args_list has
+  call objects in the order of awaited arguments instead of using
+  unittest.mock.Mock.call_args which has the last value of the
+  call. Patch by Karthikeyan Singaravelan.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-stevedore_2.0.1.bb => python3-stevedore_3.2.0.bb} | 4 ++--
+ .../python/{python3-mock_4.0.1.bb => python3-mock_4.0.2.bb}   | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-stevedore_2.0.1.bb => python3-stevedore_3.2.0.bb} (72%)
+ rename meta-python/recipes-devtools/python/{python3-mock_4.0.1.bb => python3-mock_4.0.2.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-stevedore_2.0.1.bb b/meta-python/recipes-devtools/python/python3-stevedore_3.2.0.bb
-similarity index 72%
-rename from meta-python/recipes-devtools/python/python3-stevedore_2.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-stevedore_3.2.0.bb
-index cf388fa7c..0a2bffdcc 100644
---- a/meta-python/recipes-devtools/python/python3-stevedore_2.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-stevedore_3.2.0.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://docs.openstack.org/stevedore/latest/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python3-mock_4.0.1.bb b/meta-python/recipes-devtools/python/python3-mock_4.0.2.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-mock_4.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-mock_4.0.2.bb
+index eebfcdade..39ab6d01f 100644
+--- a/meta-python/recipes-devtools/python/python3-mock_4.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-mock_4.0.2.bb
+@@ -13,5 +13,5 @@ RDEPENDS_${PN} += "${PYTHON_PN}-prettytable \
+             ${PYTHON_PN}-pep8 \
+             ${PYTHON_PN}-pyflakes"
  
--SRC_URI[md5sum] = "d0f137ec4fe5d98978970671a860882d"
--SRC_URI[sha256sum] = "609912b87df5ad338ff8e44d13eaad4f4170a65b79ae9cb0aa5632598994a1b7"
-+SRC_URI[md5sum] = "6a39764d7aecc63a0990cf4635cb430d"
-+SRC_URI[sha256sum] = "38791aa5bed922b0a844513c5f9ed37774b68edc609e5ab8ab8d8fe0ce4315e5"
- 
- DEPENDS += "${PYTHON_PN}-pbr-native"
- 
+-SRC_URI[md5sum] = "8f48ba3fd059e7cfad92f8354064adfd"
+-SRC_URI[sha256sum] = "2a572b715f09dd2f0a583d8aeb5bb67d7ed7a8fd31d193cf1227a99c16a67bc3"
++SRC_URI[md5sum] = "6466619b89c2969dc57722ad73f85676"
++SRC_URI[sha256sum] = "dd33eb70232b6118298d516bbcecd26704689c386594f0f3c4f13867b2c56f72"
 -- 
 2.17.1
 
