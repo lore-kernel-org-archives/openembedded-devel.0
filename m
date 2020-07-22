@@ -1,85 +1,86 @@
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web12.489.1595457267641164048
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web11.856.1595458578281541164
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Jul 2020 15:34:27 -0700
+ Wed, 22 Jul 2020 15:56:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=E/GCIr10;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id br7so4175527ejb.5
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Jul 2020 15:34:27 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=D7+/UQP1;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id p1so1697227pls.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Jul 2020 15:56:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=YRrlcKy/y4wSmgO35qZ1KuWpyIGcGrmdKdKpTU9+za8=;
-        b=E/GCIr10iBQGc1Hv16xH0TWlQGwhyQJ6A9xJCuneAjCMhrY8sCgDu8XiL8hjxmqzIm
-         HV5Cy6eHRgypNtK9C413ykEnIvm7MasOWw9l7j/jw8LPjrAmAeRoFgCDMHmzx9jb9gth
-         nwsjGMFgM2/GlyjmTVRMZg7tjqt7xFOxjkkaMWPXWrewVB6rI8HPqCS6WexJ77an4c7B
-         a56Acrkz/26qywetCqDqePnvnnE0VReSTbdb4aYSVgAMD233YQ03jb5ISYRmtpndqgqf
-         yCSo5oZ8p17NejqK74zzAuXygGpwe4sGuJD10mH7ub3/ZFhbJ0ZDfzeVqvpd3QH0/7ZA
-         DEzA==
+        bh=UssJ2WTKDlfqi350w9QO+2t6+umAwmCzYgGwu+uTuV4=;
+        b=D7+/UQP1rphjK7HZx00Rq9cJ9Yj0dDlGOREB6xUN+TVpTVt1vYpn/UJwh2m0dcG/9Z
+         Y96IutWl+MCkqBeVkpJBidFsWxsXHMABUy2/vuCVtLYfRI6RWwhv5A6g+dzJkZO6sxgh
+         Go5/BEoqCk1kMzn1EHTaYj4km4g4LZdIFp1rLrixDDTeKSFqenoN8KTSo0XF+tOxWxFA
+         63AeaDcDfrZMm8tIPBRO3ipYo7SgkEtueyEcD0P0swijvElw73fPYampPHYOFcjLk2/0
+         /C62UwGKEiytqlAF3L9f8n0kM/Hx9HgtNFaOPPiEq3q32b76OtHO70vykFIrSKPogCRj
+         4qlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=YRrlcKy/y4wSmgO35qZ1KuWpyIGcGrmdKdKpTU9+za8=;
-        b=gWeO/TvAH0AOxHXjs9UXWLxr/vKEPAnQyMGnKKyIfxubEHzxmBCuZzF8llklBW5YVn
-         uc+MBIpPCG7zFLaB6Xzi9z4akAL//eIe11Vd6IOvUoiz6pT/21ZmeIb/7nJZ/yec1nIq
-         p+UzR8w8eipBsyTY7YYa5Zduy1Uf8ckU61hRK7PP1C1s758ojjF4/Jv9DH65bn3M/CAx
-         s5wtM7fGpvA5C5ctgEu5IOhr8wYp+puqzciiMj2LgPIVom796DxLaWjugHd9RdXB6JXf
-         HecXnAE99pu1fKoWIxfttXfIgGL4KONDR7WG/nelfCmH8qgH6Uxie/0UecTVTWfNjqwX
-         CCaQ==
-X-Gm-Message-State: AOAM5321GUC9BK22OaNjTf6ygRaacKYwOVOwihcXzNjPCjBbs8SRFRMH
-	fhLv5ew55WseXb8YBzYz1Yb0qenh
-X-Google-Smtp-Source: ABdhPJx8gGE/kS16MHLW4Q6ZVourhO+AtIE810lIECT09uGxYM7XzT/4WNm0N0a14cFk0pwzHLdA4w==
-X-Received: by 2002:a17:906:c452:: with SMTP id ck18mr1706546ejb.415.1595457265959;
-        Wed, 22 Jul 2020 15:34:25 -0700 (PDT)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300f07f0b6195abb66966ead5e06a.dip0.t-ipconnect.de. [2003:f0:7f0b:6195:abb6:6966:ead5:e06a])
-        by smtp.gmail.com with ESMTPSA id t20sm643527ejd.124.2020.07.22.15.34.25
-        for <openembedded-devel@lists.openembedded.org>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=UssJ2WTKDlfqi350w9QO+2t6+umAwmCzYgGwu+uTuV4=;
+        b=j/HPmDAI76X5UkZNWJElsUBZ2a5emwljmHLvbpBQNJo56F1k0o4jynDQxEbSdgaaRA
+         yzt0DQODReqgZD0QrfR/v3jMF481FB3lHgAQbZ1n3bF6cN7vviMRjvboMtjrPqXBw2f0
+         YWi6knlJUugUKqOm/nc2rcCXl2ci8zyZdGfUOI5rwaLWNiszhdrpexGVaBFFapqoreq/
+         bbQh0dzGRJgAe41rEOWJY5rnPoZHUaJ5pL/dMJGKmlCkLwbUE60cu9fkztzWEV2Oxllt
+         12LHeIr6RDoxBwbbRGk/k2XEp+2ItEGTD0eITEFJaoPWHOCHMSXKbDX34OTGa4hGKHGG
+         VSCA==
+X-Gm-Message-State: AOAM531xIA8xfGwBIgKAC210DTdAtwLMoJ6/qNW6CnLZt81EkPI31h/v
+	6Kdn33wEF/lHy410p8mLaoPRvMKzAdc=
+X-Google-Smtp-Source: ABdhPJzTwp6GxLYLhC9/qWUK4y4YscAsgLFgJaBl1kw6CGbHB74s8DvyyJ8XMg7jLxduEJDv3B6ZPw==
+X-Received: by 2002:a17:90a:20ad:: with SMTP id f42mr1462279pjg.96.1595458577149;
+        Wed, 22 Jul 2020 15:56:17 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::6651])
+        by smtp.gmail.com with ESMTPSA id k64sm637357pfd.132.2020.07.22.15.56.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Jul 2020 15:34:25 -0700 (PDT)
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+        Wed, 22 Jul 2020 15:56:16 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 3/3] graphene: upgrade 1.10.0 -> 1.10.2
-Date: Thu, 23 Jul 2020 00:34:15 +0200
-Message-Id: <20200722223415.8963-3-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.3
-In-Reply-To: <20200722223415.8963-1-schnitzeltony@gmail.com>
-References: <20200722223415.8963-1-schnitzeltony@gmail.com>
+Cc: Colin McAllister <colinmca242@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH 1/4] python3-cantools: Added recipe
+Date: Wed, 22 Jul 2020 15:56:05 -0700
+Message-Id: <20200722225608.3968953-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-see bugs fixed at [1]
+From: Colin McAllister <colinmca242@gmail.com>
 
-[1] https://github.com/ebassi/graphene/releases/tag/1.10.2
+Created python3 recipe for cantools.
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Colin McAllister <colinmca242@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../graphene/{graphene_1.10.0.bb => graphene_1.10.2.bb}       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/graphene/{graphene_1.10.0.bb => graphene_1.10.2.bb} (72%)
+ .../python/python3-cantools_35.1.0.bb              | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-cantools_35.1.0.bb
 
-diff --git a/meta-gnome/recipes-gnome/graphene/graphene_1.10.0.bb b/meta-gnome/recipes-gnome/graphene/graphene_1.10.2.bb
-similarity index 72%
-rename from meta-gnome/recipes-gnome/graphene/graphene_1.10.0.bb
-rename to meta-gnome/recipes-gnome/graphene/graphene_1.10.2.bb
-index f715dd23d..ef1898610 100644
---- a/meta-gnome/recipes-gnome/graphene/graphene_1.10.0.bb
-+++ b/meta-gnome/recipes-gnome/graphene/graphene_1.10.2.bb
-@@ -9,8 +9,8 @@ GNOMEBASEBUILDCLASS = "meson"
- 
- inherit gnomebase gobject-introspection gtk-doc
- 
--SRC_URI[archive.md5sum] = "07f72436bc7a85d12f5edd9fcedd0184"
--SRC_URI[archive.sha256sum] = "406d97f51dd4ca61e91f84666a00c3e976d3e667cd248b76d92fdb35ce876499"
-+SRC_URI[archive.md5sum] = "a2c26c4f44a02ca053e0e9afb63cc94c"
-+SRC_URI[archive.sha256sum] = "e97de8208f1aac4f913d4fa71ab73a7034e807186feb2abe55876e51c425a7f6"
- 
- GTKDOC_MESON_OPTION = "gtk_doc"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-cantools_35.1.0.bb b/meta-python/recipes-devtools/python/python3-cantools_35.1.0.bb
+new file mode 100644
+index 0000000000..a9638fbd2b
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-cantools_35.1.0.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "CAN BUS tools in Python 3."
++HOMEPAGE = "https://github.com/eerimoq/cantools"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
++
++SRC_URI[md5sum] = "46b71bbfec33146d9dbba708489a8ae2"
++SRC_URI[sha256sum] = "bd0ac5b16bb7fe2ada0c9436c91a0b3795217bed7126296dde1565919a3f44f1"
++
++PYPI_PACKAGE = "cantools"
++
++inherit pypi setuptools3
++
++CLEANBROKEN = "1"
++
 -- 
-2.21.3
+2.27.0
 
