@@ -1,280 +1,177 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web10.6133.1595481771944431460
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com [209.85.214.196])
+ by mx.groups.io with SMTP id smtpd.web11.6617.1595485003388340625
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Jul 2020 22:22:52 -0700
+ Wed, 22 Jul 2020 23:16:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: wonjong.lee@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 06N5MkgW027487
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Jul 2020 22:22:47 -0700 (PDT)
-Received: from SEL-WLEE-D1.wrs.com (128.224.239.83) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.40) with Microsoft SMTP Server id 14.3.487.0; Wed, 22 Jul 2020
- 22:22:45 -0700
-From: "wonjong.lee" <wonjong.lee@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <Junhwa.Rhee@windriver.com>, <jeff.kim@windriver.com>,
-        <andy.kang@windriver.com>, <wonjong.lee@windriver.com>
-Subject: [meta-oe][PATCH v2] minifi: Add recipe for c++ version
-Date: Thu, 23 Jul 2020 14:21:22 +0900
-Message-ID: <20200723052122.22468-1-wonjong.lee@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=PFUOMF56;
+ spf=pass (domain: gmail.com, ip: 209.85.214.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f196.google.com with SMTP id x8so2078342plm.10
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Jul 2020 23:16:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=OgwykLfHbvv+WFwrDPKwaYKxnYtyo9jVVQ36H60V6eU=;
+        b=PFUOMF561LBc3jNkLcZOWu0tVXDxpfb9dYC69NJtCeaGwzl4d3v+MietTIVT7HoLEY
+         qKO56thVuQGlRerAZ/Oi//ylR6g7Lj/9z++zbFu9Q0EHNE5VqOySQLuIfytOiujpxer9
+         zlU1oB0jhZ2Cibh8mr1aX9W+yTGh8LM0pcnnaJTKYpzNhYNlLtwe5BYaUR3U5WMFUOIl
+         xBFdiQLktfc+55kib7/Tr2T+7OYTYMQwiYp+/ctlYQiOZAz3YsuoG5V4YJ+JKJGhJZpG
+         5e0eH4xcbXk6G7oCVz2hv4HRZEnsftSQc6WpOi5XuzE88G+ezV0TdG2QUPXg4sIJ69tg
+         /KxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=OgwykLfHbvv+WFwrDPKwaYKxnYtyo9jVVQ36H60V6eU=;
+        b=dlrpvSrJNMC1VOH4yppFyaRv5wcvJZzR8goap0dmGSSUTD9aPdTtde8xYx2g83Ydjb
+         YSTdUu9HvO7gBPFUNBbqR6eyDZ30cfdL05v8IoMCnbBzylQFZd0wN7kmXUQJbWRKLgS4
+         sgWuH0bJPLJXohg9faxgL71jWytpcVOzLRp5vuGfPEBINGB97uerXb1WPXj1mqw1/y4l
+         66AnevDXyiJqKH4ovpgjyDgQUy8g/k1G8VldjNE7O01JYb7fA8dwJYx4hHv/qy4FJV9w
+         OOClYMgvJv94Cx87s4nxLe1uKyBuA4S/LMvAf+Z3L8h2Ved1JBjRl+BHSVNXuR/UuIij
+         hI0w==
+X-Gm-Message-State: AOAM531S0p0ZYJEDMWsSeT2ibflgsjWgRqzDQNGgNckg24uGxRYflXzw
+	czIBHuloS/JvjBt3+/nbR8xLOLkYAj4=
+X-Google-Smtp-Source: ABdhPJwAjRWxDGmW4gKDhcB04CXomWEut5pFWDhc76E/60hTE01JN+fXce0H/g3IX6HH4tNqB8dRhQ==
+X-Received: by 2002:a17:902:8206:: with SMTP id x6mr2646612pln.328.1595485002397;
+        Wed, 22 Jul 2020 23:16:42 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::6651])
+        by smtp.gmail.com with ESMTPSA id x13sm1496582pfj.122.2020.07.22.23.16.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 22 Jul 2020 23:16:41 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] samba: Fix conflicts with nss.h from glibc
+Date: Wed, 22 Jul 2020 23:16:40 -0700
+Message-Id: <20200723061640.1823528-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-MiNiFi--a subproject of Apache NiFi--is a complementary data
-collection approach that supplements the core tenets of NiFi
-in dataflow management, focusing on the collection of data at
-the source of its creation. The C++ implementation is an
-additional implementation to the one in Java with the aim of
-an even smaller resource footprint.
+This is seen with glibc 2.32 where these names are also defined
 
-Signed-off-by: wonjong.lee <wonjong.lee@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../files/fix-OSSPUUID-cross-compile.patch    | 70 +++++++++++++++++++
- .../files/fix-build-issue-in-yocto.patch      | 62 ++++++++++++++++
- .../minifi-cpp/files/minifi.service           | 13 ++++
- .../minifi-cpp/minifi-cpp_0.7.0.bb            | 64 +++++++++++++++++
- 4 files changed, 209 insertions(+)
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/minifi.service
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
+ ....c-Avoid-nss-function-conflicts-with.patch | 96 +++++++++++++++++++
+ .../samba/samba_4.10.15.bb                    |  1 +
+ 2 files changed, 97 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba/0001-nsswitch-nsstest.c-Avoid-nss-function-conflicts-with.patch
 
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch b/meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch
+diff --git a/meta-networking/recipes-connectivity/samba/samba/0001-nsswitch-nsstest.c-Avoid-nss-function-conflicts-with.patch b/meta-networking/recipes-connectivity/samba/samba/0001-nsswitch-nsstest.c-Avoid-nss-function-conflicts-with.patch
 new file mode 100644
-index 000000000..6af47cafb
+index 0000000000..2dbabdaa47
 --- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch
-@@ -0,0 +1,70 @@
-+diff -urN orig/cmake/BundledOSSPUUID.cmake patched/cmake/BundledOSSPUUID.cmake
-+--- orig/cmake/BundledOSSPUUID.cmake	2020-01-07 22:55:55.000000000 +0900
-++++ patched/cmake/BundledOSSPUUID.cmake	2020-07-14 11:32:28.221092406 +0900
-+@@ -22,7 +22,8 @@
++++ b/meta-networking/recipes-connectivity/samba/samba/0001-nsswitch-nsstest.c-Avoid-nss-function-conflicts-with.patch
+@@ -0,0 +1,96 @@
++From 9aba5ac17bb822f91f6b214f5b82dd1eb8c47616 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 22 Jul 2020 22:42:09 -0700
++Subject: [PATCH] nsswitch/nsstest.c: Avoid nss function conflicts with glibc nss.h
++
++glibc 2.32 will define these varibles [1] which results in conflicts
++with these static function names, therefore prefix these function names
++with samba_ to avoid it
++
++[1] https://sourceware.org/git/?p=glibc.git;a=commit;h=499a92df8b9fc64a054cf3b7f728f8967fc1da7d
++
++Upstream-Status: Submitted [https://gitlab.com/samba-team/samba/-/merge_requests/1477]
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ nsswitch/nsstest.c | 16 ++++++++--------
++ 1 file changed, 8 insertions(+), 8 deletions(-)
++
++diff --git a/nsswitch/nsstest.c b/nsswitch/nsstest.c
++index 6d92806..46f9679 100644
++--- a/nsswitch/nsstest.c
+++++ b/nsswitch/nsstest.c
++@@ -137,7 +137,7 @@ static struct passwd *nss_getpwuid(uid_t uid)
++ 	return &pwd;
++ }
 + 
-+     # Define patch step
-+     find_package(Patch REQUIRED)
-+-    set(PC "${Patch_EXECUTABLE}" -p1 -i "${SOURCE_DIR}/thirdparty/ossp-uuid/ossp-uuid-mac-fix.patch")
-++    set(PATCH1 "${Patch_EXECUTABLE}" -p1 -i "${SOURCE_DIR}/thirdparty/ossp-uuid/ossp-uuid-mac-fix.patch")
-++    set(PATCH2 "${Patch_EXECUTABLE}" -p1 -i "${SOURCE_DIR}/thirdparty/ossp-uuid/cross-compile-fix.patch")
++-static void nss_setpwent(void)
+++static void samba_nss_setpwent(void)
++ {
++ 	NSS_STATUS (*_nss_setpwent)(void) =
++ 		(NSS_STATUS(*)(void))find_fn("setpwent");
++@@ -152,7 +152,7 @@ static void nss_setpwent(void)
++ 	}
++ }
 + 
-+     # Define byproducts
-+     set(BYPRODUCTS "lib/libuuid.a"
-+@@ -35,7 +36,9 @@
-+     ENDFOREACH(BYPRODUCT)
++-static void nss_endpwent(void)
+++static void samba_nss_endpwent(void)
++ {
++ 	NSS_STATUS (*_nss_endpwent)(void) =
++ 		(NSS_STATUS (*)(void))find_fn("endpwent");
++@@ -284,7 +284,7 @@ again:
++ 	return &grp;
++ }
 + 
-+     # Build project
-+-    set(CONFIGURE_COMMAND ./configure "CFLAGS=-fPIC" "CXXFLAGS=-fPIC" --with-cxx --without-perl --without-php --without-pgsql "--prefix=${BINARY_DIR}/thirdparty/ossp-uuid-install")
-++    set(CONFIGURE_COMMAND ac_cv_va_copy=C99 ./configure CFLAGS=-fPIC CXXFLAGS=-fPIC --host=${HOST_SYS}
-++        --with-cxx --without-perl --without-php --without-pgsql
-++        --prefix=${BINARY_DIR}/thirdparty/ossp-uuid-install)
-+     string(TOLOWER "${CMAKE_BUILD_TYPE}" build_type)
-+     if(NOT build_type MATCHES debug)
-+         list(APPEND CONFIGURE_COMMAND --enable-debug=yes)
-+@@ -52,8 +55,8 @@
-+             UPDATE_COMMAND ""
-+             INSTALL_COMMAND make install
-+             BUILD_BYPRODUCTS ${OSSPUUID_LIBRARIES_LIST}
-+-            CONFIGURE_COMMAND ""
-+-            PATCH_COMMAND ${PC} && ${CONFIGURE_COMMAND}
-++            CONFIGURE_COMMAND ${CONFIGURE_COMMAND}
-++            PATCH_COMMAND ${PATCH1} && ${PATCH2}
-+             STEP_TARGETS build
-+             EXCLUDE_FROM_ALL TRUE
-+     )
-+diff -urN orig/thirdparty/ossp-uuid/cross-compile-fix.patch patched/thirdparty/ossp-uuid/cross-compile-fix.patch
-+--- orig/thirdparty/ossp-uuid/cross-compile-fix.patch	1970-01-01 09:00:00.000000000 +0900
-++++ patched/thirdparty/ossp-uuid/cross-compile-fix.patch	2020-07-14 11:48:13.781090409 +0900
-+@@ -0,0 +1,31 @@
-++diff -urN orig/config.sub patched/config.sub
-++--- orig/config.sub	2008-07-05 06:43:08.000000000 +0900
-+++++ patched/config.sub	2020-07-14 11:46:47.249090591 +0900
-++@@ -238,6 +238,7 @@
-++ 	# Some are omitted here because they have special meanings below.
-++ 	1750a | 580 \
-++ 	| a29k \
-+++	| aarch64 | aarch64_be \
-++ 	| alpha | alphaev[4-8] | alphaev56 | alphaev6[78] | alphapca5[67] \
-++ 	| alpha64 | alpha64ev[4-8] | alpha64ev56 | alpha64ev6[78] | alpha64pca5[67] \
-++ 	| am33_2.0 \
-++@@ -314,6 +315,7 @@
-++ 	# Recognize the basic CPU types with company name.
-++ 	580-* \
-++ 	| a29k-* \
-+++	| aarch64-* | aarch64_be-* \
-++ 	| alpha-* | alphaev[4-8]-* | alphaev56-* | alphaev6[78]-* \
-++ 	| alpha64-* | alpha64ev[4-8]-* | alpha64ev56-* | alpha64ev6[78]-* \
-++ 	| alphapca5[67]-* | alpha64pca5[67]-* | arc-* \
-++diff -urN orig/shtool patched/shtool
-++--- orig/shtool	2008-07-05 06:43:08.000000000 +0900
-+++++ patched/shtool	2020-07-13 19:35:49.557213657 +0900
-++@@ -1400,7 +1400,7 @@
-++             if [ ".$opt_t" = .yes ]; then
-++                 echo "strip $dsttmp" 1>&2
-++             fi
-++-            strip $dsttmp || shtool_exit $?
-+++            $STRIP $dsttmp || shtool_exit $?
-++         fi
-++         if [ ".$opt_o" != . ]; then
-++             if [ ".$opt_t" = .yes ]; then
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch b/meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch
-new file mode 100644
-index 000000000..a7232c025
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch
-@@ -0,0 +1,62 @@
-+diff -urN orig/cmake/LibreSSL.cmake patched/cmake/LibreSSL.cmake
-+--- orig/cmake/LibreSSL.cmake	2020-01-07 22:55:55.000000000 +0900
-++++ patched/cmake/LibreSSL.cmake	2020-07-14 12:01:28.321088730 +0900
-+@@ -27,6 +27,17 @@
-+ 		set(BYPRODUCT_PREFIX "" CACHE STRING "" FORCE)
-+ 	set(BUILD_ARGS " -GVisual Studio 15 2017")
-+ 	endif(WIN32)
-++
-++	set(BYPRODUCTS
-++		"lib/${BYPRODUCT_PREFIX}crypto${BYPRODUCT_SUFFIX}"
-++		"lib/${BYPRODUCT_PREFIX}ssl${BYPRODUCT_SUFFIX}"
-++		"lib/${BYPRODUCT_PREFIX}tls${BYPRODUCT_SUFFIX}"
-++	)
-++	set(LIBRESSL_INSTALL_DIR "${BINARY_DIR}/thirdparty/libressl-install" CACHE STRING "" FORCE)
-++	FOREACH(BYPRODUCT ${BYPRODUCTS})
-++		LIST(APPEND LIBRESSL_LIBRARIES_LIST "${LIBRESSL_INSTALL_DIR}/${BYPRODUCT}")
-++	ENDFOREACH(BYPRODUCT)
-++
-+ 	ExternalProject_Add(
-+ 	libressl-portable
-+ 	URL https://cdn.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.8.3.tar.gz https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.8.3.tar.gz https://gentoo.osuosl.org/distfiles/libressl-2.8.3.tar.gz
-+@@ -37,6 +48,7 @@
-+ 				"-DLIBRESSL_APPS=OFF"
-+ 				"-DLIBRESSL_TESTS=OFF"
-+ 				"${BUILD_ARGS}"
-++	BUILD_BYPRODUCTS ${LIBRESSL_LIBRARIES_LIST}
-+ 	)
++-static void nss_setgrent(void)
+++static void samba_nss_setgrent(void)
++ {
++ 	NSS_STATUS (*_nss_setgrent)(void) =
++ 		(NSS_STATUS (*)(void))find_fn("setgrent");
++@@ -299,7 +299,7 @@ static void nss_setgrent(void)
++ 	}
++ }
 + 
-+ 	add_library(crypto STATIC IMPORTED)
-+diff -urN orig/CMakeLists.txt patched/CMakeLists.txt
-+--- orig/CMakeLists.txt	2020-01-07 22:55:55.000000000 +0900
-++++ patched/CMakeLists.txt	2020-07-14 16:25:51.581055220 +0900
-+@@ -120,12 +120,12 @@
-+ endif()
++-static void nss_endgrent(void)
+++static void samba_nss_endgrent(void)
++ {
++ 	NSS_STATUS (*_nss_endgrent)(void) =
++ 		(NSS_STATUS (*)(void))find_fn("endgrent");
++@@ -396,7 +396,7 @@ static void nss_test_users(void)
++ {
++ 	struct passwd *pwd;
 + 
-+ # Use ccache if present
-+-find_program(CCACHE_FOUND ccache)
-+-if(CCACHE_FOUND)
-+-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
-+-    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
-+-    message("-- Found ccache: ${CCACHE_FOUND}")
-+-endif(CCACHE_FOUND)
-++#find_program(CCACHE_FOUND ccache)
-++#if(CCACHE_FOUND)
-++#    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
-++#    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
-++#    message("-- Found ccache: ${CCACHE_FOUND}")
-++#endif(CCACHE_FOUND)
++-	nss_setpwent();
+++	samba_nss_setpwent();
++ 	/* loop over all users */
++ 	while ((pwd = nss_getpwent())) {
++ 		printf("Testing user %s\n", pwd->pw_name);
++@@ -418,14 +418,14 @@ static void nss_test_users(void)
++ 		printf("initgroups: "); nss_test_initgroups(pwd->pw_name, pwd->pw_gid);
++ 		printf("\n");
++ 	}
++-	nss_endpwent();
+++	samba_nss_endpwent();
++ }
 + 
-+ if (UNIX AND USE_GOLD_LINKER AND NOT APPLE )
-+   execute_process(COMMAND ${CMAKE_C_COMPILER} -fuse-ld=gold -Wl,--version ERROR_QUIET OUTPUT_VARIABLE ld_version)
-+@@ -303,8 +303,10 @@
-+     GIT_TAG "f3294d9d86e6a7915a967efff2842089b8b0d071"  # Version 7.64.0
-+     SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/curl-src"
-+     LIST_SEPARATOR % # This is needed for passing semicolon-separated lists
-++    TLS_VERIFY OFF
-+     CMAKE_ARGS ${PASSTHROUGH_CMAKE_ARGS}
-+                "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/thirdparty/curl-install"
-++               "-DCMAKE_INSTALL_LIBDIR=lib${LIBSUFFIX}"
-+                 -DCMAKE_POSITION_INDEPENDENT_CODE=ON
-+                 -DBUILD_CURL_EXE=OFF
-+                 -DBUILD_TESTING=OFF
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/minifi.service b/meta-oe/recipes-extended/minifi-cpp/files/minifi.service
-new file mode 100644
-index 000000000..c0e419c67
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/minifi.service
-@@ -0,0 +1,13 @@
-+[Unit]
-+Description=MiNiFi Service
-+After=network.target
-+RequiresMountsFor=/var
++ static void nss_test_groups(void)
++ {
++ 	struct group *grp;
++ 
++-	nss_setgrent();
+++	samba_nss_setgrent();
++ 	/* loop over all groups */
++ 	while ((grp = nss_getgrent())) {
++ 		printf("Testing group %s\n", grp->gr_name);
++@@ -446,7 +446,7 @@ static void nss_test_groups(void)
++ 		printf("getgrgid: "); print_group(grp);
++ 		printf("\n");
++ 	}
++-	nss_endgrent();
+++	samba_nss_endgrent();
++ }
++ 
++ static void nss_test_errors(void)
++-- 
++2.27.0
 +
-+[Service]
-+Type=simple
-+Environment=MINIFI_HOME=/etc/minifi
-+ExecStartPre=@BASE_BINDIR@/mkdir -p /var/lib/minifi /var/log/minifi
-+ExecStart=@BINDIR@/minifi
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-new file mode 100644
-index 000000000..b7e6c26fd
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-@@ -0,0 +1,64 @@
-+SUMMARY = "A subproject of Apache NiFi to collect data where it originates."
-+DESCRIPTION = "MiNiFi--a subproject of Apache NiFi--is a complementary \
-+data collection approach that supplements the core tenets of NiFi in dataflow \
-+management, focusing on the collection of data at the source of its creation."
-+HOMEPAGE = "https://nifi.apache.org/minifi/index.html"
-+SECTION = "console/network"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=f9534eb5f4ab800b573a37bffc62f3a7"
-+
-+DEPENDS = "libxcrypt bzip2 expat flex zlib python3 bison-native"
-+RDEPENDS_${PN} = "python3-core"
-+
-+SRCREV = "aa42957a2e227df41510047cece3cd606dc1cb6a"
-+SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git \
-+           file://fix-build-issue-in-yocto.patch \
-+           file://fix-OSSPUUID-cross-compile.patch \
-+           file://minifi.service \
-+           "
-+
-+S = "${WORKDIR}/git"
-+
-+inherit pkgconfig cmake systemd
-+
-+SYSTEMD_PACKAGES = "minifi-cpp"
-+SYSTEMD_SERVICE_${PN} = "minifi.service"
-+
-+EXTRA_OECMAKE += " \
-+    -DHOST_SYS=${HOST_SYS} -DBUILD_SYS=${BUILD_SYS} \
-+    -DSKIP_TESTS=ON \
-+    "
-+
-+OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
-+
-+
-+do_install() {
-+    DESTDIR='${B}/minifi-install' cmake_runcmake_build --target ${OECMAKE_TARGET_INSTALL}
-+
-+    CONF_DIR=${D}${base_prefix}/etc/minifi/conf
-+    install -d ${D}${base_prefix}/usr/bin
-+    install -d ${CONF_DIR}
-+    cp -a ${B}/minifi-install/usr/bin/*   ${D}${base_prefix}/usr/bin/
-+    cp -a ${B}/minifi-install/usr/conf/*  ${CONF_DIR}/
-+    sed -i 's|#appender.rolling.directory=.*|appender.rolling.directory=/var/log/minifi|g' \
-+        ${CONF_DIR}/minifi-log.properties
-+    sed -i 's|nifi.provenance.repository.directory.default=.*|nifi.provenance.repository.directory.default=/var/lib/minifi/provenance_repository|g' \
-+        ${CONF_DIR}/minifi.properties
-+    sed -i 's|nifi.flowfile.repository.directory.default=.*|nifi.flowfile.repository.directory.default=/var/lib/minifi/flowfile_repository|g' \
-+        ${CONF_DIR}/minifi.properties
-+    sed -i 's|nifi.database.content.repository.directory.default=.*|nifi.database.content.repository.directory.default=/var/lib/minifi/content_repository|g' \
-+        ${CONF_DIR}/minifi.properties
-+    sed -i 's|nifi.flow.configuration.file=.*|nifi.flow.configuration.file=/etc/minifi/conf/config.yml|g' \
-+        ${CONF_DIR}/minifi.properties
-+
-+    install -m 0755 -d ${D}${systemd_unitdir}/system
-+    install -m 0644 ${WORKDIR}/minifi.service ${D}${systemd_unitdir}/system/
-+    sed -i -e 's|@BASE_BINDIR@|${base_bindir}|g' ${D}${systemd_unitdir}/system/minifi.service
-+    sed -i -e 's|@BINDIR@|${bindir}|g' ${D}${systemd_unitdir}/system/minifi.service
-+}
-+
-+FILES_${PN} = " \
-+        /usr/bin/* \
-+        /etc/minifi/* \
-+        ${systemd_unitdir}/system/minifi.service \
-+        "
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.15.bb b/meta-networking/recipes-connectivity/samba/samba_4.10.15.bb
+index 2c74c27fb8..01250cb43f 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.10.15.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.10.15.bb
+@@ -27,6 +27,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
+            file://0001-lib-replace-wscript-Avoid-generating-nested-main-fun.patch \
+            file://0002-util_sec.c-Move-__thread-variable-to-global-scope.patch \
+            file://0001-Add-options-to-configure-the-use-of-libbsd.patch \
++           file://0001-nsswitch-nsstest.c-Avoid-nss-function-conflicts-with.patch \
+            "
+ SRC_URI_append_libc-musl = " \
+            file://samba-pam.patch \
 -- 
 2.27.0
 
