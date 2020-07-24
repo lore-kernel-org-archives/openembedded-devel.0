@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.3438.1595586929364653367
+ by mx.groups.io with SMTP id smtpd.web11.3439.1595586930205381609
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Jul 2020 03:35:29 -0700
+ Fri, 24 Jul 2020 03:35:30 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=34792 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jyv32-0006km-1p; Fri, 24 Jul 2020 13:35:28 +0300
+	id 1jyv32-0006km-Uw; Fri, 24 Jul 2020 13:35:29 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/7] python3-aenum: Upgrade 2.2.3 -> 2.2.4
-Date: Fri, 24 Jul 2020 13:35:11 +0300
-Message-Id: <20200724103515.21420-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/7] python3-bitarray: Upgrade 1.4.1 -> 1.4.2
+Date: Fri, 24 Jul 2020 13:35:12 +0300
+Message-Id: <20200724103515.21420-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200724103515.21420-1-leon.anavi@konsulko.com>
 References: <20200724103515.21420-1-leon.anavi@konsulko.com>
@@ -30,39 +30,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.2.4:
+Upgrade to 1.4.2:
 
-- add support to Constant to retrieve members by value
-- add pickle/deepcopy support to Constant
-- add support for Constant to use other Constant values
-- AutoNumber and auto() now work together
-- Enum members are now added to the class as enum_property, which
-  supports unshadowing of parent class attributes when called on
-  an Enum member
+* add more tests
+* C-level:
+    - simplify pack/unpack code
+    - fix memory leak in `~` operation (bitarray_cpinvert)
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-aenum_2.2.3.bb => python3-aenum_2.2.4.bb} | 4 ++--
+ .../{python3-bitarray_1.4.1.bb => python3-bitarray_1.4.2.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-aenum_2.2.3.bb => python3-aenum_2.2.4.bb} (63%)
+ rename meta-python/recipes-devtools/python/{python3-bitarray_1.4.1.bb => python3-bitarray_1.4.2.bb} (68%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aenum_2.2.3.bb b/meta-python/recipes-devtools/python/python3-aenum_2.2.4.bb
-similarity index 63%
-rename from meta-python/recipes-devtools/python/python3-aenum_2.2.3.bb
-rename to meta-python/recipes-devtools/python/python3-aenum_2.2.4.bb
-index 16d2a881f..da77a5c75 100644
---- a/meta-python/recipes-devtools/python/python3-aenum_2.2.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-aenum_2.2.4.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://pypi.org/project/aenum/"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://aenum/LICENSE;md5=c6a85477543f8b8591b9c1f82abebbe9"
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.4.2.bb
+similarity index 68%
+rename from meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb
+rename to meta-python/recipes-devtools/python/python3-bitarray_1.4.2.bb
+index 4866e8464..925bdc8d9 100644
+--- a/meta-python/recipes-devtools/python/python3-bitarray_1.4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-bitarray_1.4.2.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
  
--SRC_URI[md5sum] = "026786dbb37c15c2c8dc91fbf5828e97"
--SRC_URI[sha256sum] = "a4334cabf47c167d44ab5a6198837b80deec5d5bad1b5cf70c966c3a330260e8"
-+SRC_URI[md5sum] = "8983562361efe5be865617341dadbb9b"
-+SRC_URI[sha256sum] = "81828d1fbe20b6b188d75b21a0fa936d7d929d839ef843ef385d9c2a97082864"
+-SRC_URI[md5sum] = "dfb3fe66ae989e4724747fcb0f704f56"
+-SRC_URI[sha256sum] = "9e26d3dc7fad932fed66e08da3fcf93dd15e8402aa84e764e1e2a9e1b6ae2b7f"
++SRC_URI[md5sum] = "2bc9489e9048db6a8705a7b9493e3015"
++SRC_URI[sha256sum] = "16f9908c9388af616f2b298febbefa8315d648f522d195a7706d8ba1895c5680"
  
- inherit pypi setuptools3
+ inherit setuptools3 pypi
  
 -- 
 2.17.1
