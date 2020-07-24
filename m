@@ -1,73 +1,60 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web11.2962.1595584451056562809
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.3466.1595586928904914845
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Jul 2020 02:54:11 -0700
+ Fri, 24 Jul 2020 03:35:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.75,390,1589212800"; 
-   d="scan'208";a="96851531"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 24 Jul 2020 17:54:10 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id D510F4CE4BDF
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jul 2020 17:54:08 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 24 Jul 2020 17:54:10 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-networking] [PATCH] dnsmasq: upgrade 2.81 -> 2.82
-Date: Fri, 24 Jul 2020 17:54:08 +0800
-Message-ID: <1595584448-85828-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: D510F4CE4BDF.A59D4
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=34792 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jyv2x-0006km-Rm; Fri, 24 Jul 2020 13:35:26 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/7] python3-pytest-metadata: Upgrade 1.9.0 -> 1.10.0
+Date: Fri, 24 Jul 2020 13:35:09 +0300
+Message-Id: <20200724103515.21420-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Upgrade to release 1.10.0:
+
+- Compatible with pytest-xdist 1.22.3+, now including 2.0+
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb | 8 --------
- meta-networking/recipes-support/dnsmasq/dnsmasq_2.82.bb | 8 ++++++++
- 2 files changed, 8 insertions(+), 8 deletions(-)
- delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb
- create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.82.bb
+ ...est-metadata_1.9.0.bb => python3-pytest-metadata_1.10.0.bb} | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pytest-metadata_1.9.0.bb => python3-pytest-metadata_1.10.0.bb} (72%)
 
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb
-deleted file mode 100644
-index 92415386c2..0000000000
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb
-+++ /dev/null
-@@ -1,8 +0,0 @@
--require dnsmasq.inc
--
--SRC_URI[dnsmasq-2.81.md5sum] = "e43808177a773014b5892ccba238f7a8"
--SRC_URI[dnsmasq-2.81.sha256sum] = "3c28c68c6c2967c3a96e9b432c0c046a5df17a426d3a43cffe9e693cf05804d0"
--SRC_URI += "\
--    file://lua.patch \
--"
--
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.82.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.82.bb
-new file mode 100644
-index 0000000000..4ca1f3cc91
---- /dev/null
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.82.bb
-@@ -0,0 +1,8 @@
-+require dnsmasq.inc
-+
-+SRC_URI[dnsmasq-2.82.md5sum] = "3c710dee3edba510ed11a6e3d9e0d9cb"
-+SRC_URI[dnsmasq-2.82.sha256sum] = "62f33bfac1a1b4a5dab8461b4664e414f7d6ced1d2cf141e9cdf9c3c2a424f65"
-+SRC_URI += "\
-+    file://lua.patch \
-+"
-+
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-metadata_1.9.0.bb b/meta-python/recipes-devtools/python/python3-pytest-metadata_1.10.0.bb
+similarity index 72%
+rename from meta-python/recipes-devtools/python/python3-pytest-metadata_1.9.0.bb
+rename to meta-python/recipes-devtools/python/python3-pytest-metadata_1.10.0.bb
+index 4a77af3cf..70cc98f29 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest-metadata_1.9.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest-metadata_1.10.0.bb
+@@ -4,7 +4,8 @@ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d425c8f3157dbf212db2ec53d9e5132"
+ 
+-SRC_URI[sha256sum] = "168d203abba8cabb65cf1b5fa675b0ba60dccbf1825d147960876a7e6f7c219c"
++SRC_URI[sha256sum] = "b7e6e0a45adacb17a03a97bf7a2ef60cc1f4e172bcce9732ce5e814191932315"
++SRC_URI[md5sum] = "4fcf9764e6210c4555411fce8109e7cd"
+ 
+ PYPI_PACKAGE = "pytest-metadata"
+ 
 -- 
-2.25.1
-
-
+2.17.1
 
