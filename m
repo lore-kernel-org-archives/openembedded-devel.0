@@ -1,327 +1,183 @@
-Received: from mail-ej1-f66.google.com (mail-ej1-f66.google.com [209.85.218.66])
- by mx.groups.io with SMTP id smtpd.web12.6060.1595596925154602323
+Received: from mail-il1-f195.google.com (mail-il1-f195.google.com [209.85.166.195])
+ by mx.groups.io with SMTP id smtpd.web10.6194.1595597240600348667
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Jul 2020 06:22:05 -0700
+ Fri, 24 Jul 2020 06:27:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=eSbpGbl+;
- spf=pass (domain: gmail.com, ip: 209.85.218.66, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f66.google.com with SMTP id lx13so9965414ejb.4
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jul 2020 06:22:04 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=FqK3Dd+T;
+ spf=pass (domain: gmail.com, ip: 209.85.166.195, mailfrom: ticotimo@gmail.com)
+Received: by mail-il1-f195.google.com with SMTP id r13so119792ilt.6
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jul 2020 06:27:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=5cp3Z2henUlFHJMf9IDbA2HpYEaamZCk2rTIIii+/Sk=;
-        b=eSbpGbl+AaCe1UEq64+o+fgm3XWtFiqF//8B97wFR0//00/YfZrkygioUs15HF7o8J
-         PLckYthqsBH7Nb0gfQV1+yWpZSM2IItwe0zfAUCOray5bXDSz+nTMG9U+P3kjTGctEUH
-         TYVWQR9GqRGmcPIgOQ/racZqZYYgD78mTIoTVyuPDOFDYvPalbxJ2owCmjNLh9w0YrjZ
-         /iMYDePv2bjvJTQm+DFWzKHkFpbZCJxIcHcVfcnKONUBErpKwfx06vS1X4+wDFQa9Msd
-         7yg5mbLb0K9z+8NhBpoNza2rsN+KIFCyfkbtHRcN8tYZmLMSCOEnPlXLllYw6K9ZnZLX
-         p6PQ==
+        bh=ftUimovvknHZjDxceHxLriKERQVmHGlozIqdo0uNC3o=;
+        b=FqK3Dd+TC9xPJL4YYAU0n5c3O1qzwayOHpkma1YhFWTJlC0Sv/hPepfkfZA2M5rLtc
+         Ziuso0R9B0m++JsTDzeHXbNoPZFPNMoNMeSboVBw2sphL4kDeBSw+H9l7x4/5Z4zqbjz
+         NLV4hPHJ6vQJ6TD6ozWp0u49pknOqPLm1rHJPSP557SE2MhVH5dw8rfAGRGYEW3g3mBV
+         gYR93nr9Cqu4PccUNN1+P6QQeiLVnlKgWKGrl71RNyufZYRgF0NodNU/RAyrENSs3k21
+         Nv49JsvL5noZAQS+xJm0JXDchkRXHWJNAhPpwkOnPAM1a+ixQMdppLA1cxLobM/ppIN0
+         qL7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=5cp3Z2henUlFHJMf9IDbA2HpYEaamZCk2rTIIii+/Sk=;
-        b=L3YWRyYYYUzdDGWu5LRrqDPYnWobXD7nAoKUnfy948y+qD5eNgEa3Vvep5S8aUkR+E
-         ixnqeeXiryErme+7p1TT7AuotrjPxMckV438odVY8zZEIZwa0oDo3Vm3XPjfhdr/jNcB
-         4hEecCUsaSEiSE7l4hSschwdvLQdrgi9B1hepJW5pBoHAccmd6zWqNa2I1ktCftqlSoR
-         bey325ifPIyJTrjay2q7zkr1bC3TWbMsrESPy/Qk0SZ+RGcQ1o1jbHCKW7JuAiYSCFBZ
-         HwgCHQ6N057r8uyI/wudrs414F2R5JWwChG1LIl4TjErISXacm6iqNWfiWXarpqBbwnf
-         IzrQ==
-X-Gm-Message-State: AOAM530WBWiP6nRCCEB9TwiAUKXIJQIfq+IkCooShDPkYIrMkdnKAPsJ
-	8EsUYDdx9wpFSiho3lLbdljyAQ3LRmVQiAh7g+o=
-X-Google-Smtp-Source: ABdhPJwGxCOcKGTStDylZ9FaAer+3TZWmHWwcaadv8+kTgTMTasNfL5amQx+GgydgSYMrhsOVhw30SE0eDsXv4WfqzM=
-X-Received: by 2002:a17:906:3152:: with SMTP id e18mr9424159eje.137.1595596923526;
- Fri, 24 Jul 2020 06:22:03 -0700 (PDT)
+        bh=ftUimovvknHZjDxceHxLriKERQVmHGlozIqdo0uNC3o=;
+        b=lVrVwu9Br0CQxnj/6xa0KyCpomnq0iaqiRPdAe2wvT4Ikg81dKAHJJI+ax+GvC8hwD
+         8Vs34bi5nVdWSsGYW644iKaPJLuqVYpQ0py4iv5jg178QMEkvETTcyviOftTnY6V6jFH
+         cyuuEuYtMWDGDANWVWDW/SXxi4pnKcTbQShv7omWCR++u/U4B+HAj/ZatXLTBf3S1VCR
+         3yyjFJw78YSveTxT/BfyxtkMNIqi40GTcRVNhwDQ+HFyNg2svkQD5Sjs4NwVUZE3ojuv
+         E1r4C5hEihF1EgRDdvHlDqRvE772bYYx3KV48sMSP8potko/wQs5RtMIPZfLM0TzDgUV
+         q0xw==
+X-Gm-Message-State: AOAM5307AZXxttvU05f4YD1muZA71ORn0q4h8dgfQQN3cCsymDIEDcuj
+	wS+1UXUNuaerttEdVip5ZXUwLVSuyEFMizu7O0c=
+X-Google-Smtp-Source: ABdhPJwP0B/Gsr3T7X4ku7YVFZ+BRYFovequqzLncBuHNTEOGhiiTSQdU0SXDQ3gOPtECy4XSmN97EmLB6OAS7BB3rw=
+X-Received: by 2002:a92:bf0c:: with SMTP id z12mr9832754ilh.151.1595597239824;
+ Fri, 24 Jul 2020 06:27:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200710142114.10612-1-anibal.limon@linaro.org>
- <CAMKF1sq-+=LrQu+=3CENSU2MS1ynFzUsujfdKJKAbjf5F9Pkrg@mail.gmail.com> <CA+_AqitDWTe7Gt5Rwevj-dYK9Y25gts08B_=+cn=7g6aY8+5bw@mail.gmail.com>
-In-Reply-To: <CA+_AqitDWTe7Gt5Rwevj-dYK9Y25gts08B_=+cn=7g6aY8+5bw@mail.gmail.com>
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-Date: Fri, 24 Jul 2020 15:21:52 +0200
-Message-ID: <CA+chaQfgEmEovqQsT7bwTe_veR+6=c0Sh7tN0Ye0EawGHPn-fg@mail.gmail.com>
-Subject: Re: [oe] [PATCH 1/2] recipes-graphics: Add opengl-es-cts install in /usr/lib
-To: Anibal Limon <anibal.limon@linaro.org>
-Cc: Khem Raj <raj.khem@gmail.com>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Nicolas Dechesne <nicolas.dechesne@linaro.org>, 
-	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Content-Type: multipart/alternative; boundary="000000000000d4e58605ab2fdb6f"
+References: <20200724103515.21420-1-leon.anavi@konsulko.com> <20200724103515.21420-5-leon.anavi@konsulko.com>
+In-Reply-To: <20200724103515.21420-5-leon.anavi@konsulko.com>
+From: "Tim Orling" <ticotimo@gmail.com>
+Date: Fri, 24 Jul 2020 06:27:09 -0700
+Message-ID: <CANx9H-AKh=EEyr6JniUvH9FLysN6rC-ftenFSnxYN9fdeQdWSw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 5/7] python3-urllib3: Upgrade 1.25.9 -> 1.25.10
+To: Leon Anavi <leon.anavi@konsulko.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000af37c505ab2fee03"
 
---000000000000d4e58605ab2fdb6f
+--000000000000af37c505ab2fee03
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-It should also probably list opengl in REQUIRED_DISTRO_FEATURES as it
-depends on virtual/libgles2 and virtual/egl.
+On Fri, Jul 24, 2020 at 3:35 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
 
-I'll send a patch shortly.
+> Upgarde to release 1.25.10:
 
-On Mon, Jul 13, 2020 at 4:50 PM Anibal Limon <anibal.limon@linaro.org>
-wrote:
+Typo: Upgarde -> Upgrade
 
-> Thanks for noticing, I need to add musl to my tests  :).
+
 >
-> Anibal
+> * Added support for ``SSLKEYLOGFILE`` environment variable for
+>   logging TLS session keys with use with programs like
+>   Wireshark for decrypting captured web traffic
+> * Fixed loading of SecureTransport libraries on macOS Big Sur
+>   due to the new dynamic linker cache
+> * Collapse chunked request bodies data and framing into one
+>   call to ``send()`` to reduce the number of TCP packets by 2-4x
+> * Don't insert ``None`` into ``ConnectionPool`` if the pool
+>   was empty when requesting a connection
+> * Avoid ``hasattr`` call in ``BrotliDecoder.decompress()``
 >
-> El dom., 12 de jul. de 2020 21:07, Khem Raj <raj.khem@gmail.com> escribi=
-=
-=C3=B3:
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> ---
+>  .../{python3-urllib3_1.25.9.bb => python3-urllib3_1.25.10.bb} | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python3-urllib3_1.25.9.bb =>
+> python3-urllib3_1.25.10.bb} (79%)
 >
->> fails to compile
->> musl - https://errors.yoctoproject.org/Errors/Details/420539/
->> clang - https://errors.yoctoproject.org/Errors/Details/420544/
->>
->> On Fri, Jul 10, 2020 at 7:21 AM Anibal Limon <anibal.limon@linaro.org>
->> wrote:
->> >
->> > From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
->> >
->> > Commonly this kind of testing tools are installed in /usr/lib
->> > like piglit, remove version.
->> >
->> > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
->> > Signed-off-by: An=C3=ADbal Lim=C3=B3n <anibal.limon@linaro.org>
->> > ---
->> >  .../vk-gl-cts/opengl-es-cts_3.2.6.1.bb        | 45 +++++++++++++++++=
-++
->> >  1 file changed, 45 insertions(+)
->> >  create mode 100644 meta-oe/recipes-graphics/vk-gl-cts/
->> opengl-es-cts_3.2.6.1.bb
->> >
->> > diff --git a/meta-oe/recipes-graphics/vk-gl-cts/
->> opengl-es-cts_3.2.6.1.bb b/meta-oe/recipes-graphics/vk-gl-cts/
->> opengl-es-cts_3.2.6.1.bb
->> > new file mode 100644
->> > index 000000000..226f70027
->> > --- /dev/null
->> > +++ b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb
->> > @@ -0,0 +1,45 @@
->> > +DESCRIPTION =3D "OpenGL CTS"
->> > +LICENSE =3D "Apache-2.0"
->> > +PR =3D "r0"
->> > +LIC_FILES_CHKSUM =3D
->> "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd57"
->> > +
->> > +SRC_URI =3D "\
->> > +       git://
->> github.com/KhronosGroup/VK-GL-CTS.git;protocol=3Dhttps;tag=3D${BPN}-${P=
-V};name=3Dvk-gl-cts
->> <http://github.com/KhronosGroup/VK-GL-CTS.git;protocol=3Dhttps;tag=3D$%=
-7BBPN%7D-$%7BPV%7D;name=3Dvk-gl-cts>
->> \
->> > +       git://
->> github.com/google/amber;protocol=3Dhttps;destsuffix=3Dgit/external/ambe=
-r/src;name=3Damber;branch=3Dmain
->> \
->> > +       git://
->> github.com/KhronosGroup/glslang.git;protocol=3Dhttps;destsuffix=3Dgit/e=
-xternal/glslang/src;name=3Dglslang
->> \
->> > +       git://
->> github.com/KhronosGroup/SPIRV-Headers.git;protocol=3Dhttps;destsuffix=
-=3Dgit/external/spirv-headers/src;name=3Dspirv-headers
->> \
->> > +       git://
->> github.com/KhronosGroup/SPIRV-Tools.git;protocol=3Dhttps;destsuffix=3Dg=
-it/external/spirv-tools/src;name=3Dspirv-tools
->> \
->> > +"
->> > +
->> > +S =3D "${WORKDIR}/git"
->> > +
->> > +SRCREV_FORMAT =3D "vk-gl-cts"
->> > +SRCREV_amber =3D "d26ee22dd7faab1845a531d410f7ec1db407402a"
->> > +SRCREV_glslang =3D "c538b5d796fb24dd418fdd650c7f76e56bcc3dd8"
->> > +SRCREV_spirv-headers =3D "e4322e3be589e1ddd44afb20ea842a977c1319b8"
->> > +SRCREV_spirv-tools =3D "1eb89172a82b436d8037e8a8c29c80f7e1f7df74"
->> > +
->> > +S =3D "${WORKDIR}/git"
->> > +
->> > +inherit pkgconfig cmake
->> > +
->> > +DEPENDS +=3D "libpng zlib virtual/libgles2 virtual/egl"
->> > +
->> > +EXTRA_OECMAKE_append =3D "-DDEQP_TARGET=3Dsurfaceless"
->> > +
->> > +CTSDIR =3D "${libdir}/${BPN}"
->> > +
->> > +do_install() {
->> > +       install -d ${D}/${CTSDIR}
->> > +
->> > +       install -m 0755 ${B}/external/openglcts/modules/cts-runner
->> ${D}/${CTSDIR}
->> > +       install -m 0755 ${B}/external/openglcts/modules/glcts
->> ${D}/${CTSDIR}
->> > +       for dir in gl_cts gles2 gles3 gles31 gles32 ; do
->> > +               cp -r ${B}/external/openglcts/modules/$dir
->> ${D}/${CTSDIR}/
->> > +       done
->> > +       install -m 0755 ${B}/modules/gles3/deqp-gles3 ${D}/${CTSDIR}
->> > +
->> > +       rm -r ${D}/${CTSDIR}/*/*.a ${D}/${CTSDIR}/*/cmake_install.cma=
-ke
->> ${D}/${CTSDIR}/*/CMakeFiles
->> > +}
->> > +
->> > +FILES_${PN} +=3D "${CTSDIR}"
->> > --
->> > 2.27.0
->> >
->> >
->>
->=20
+> diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
+> b/meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
+> similarity index 79%
+> rename from meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
+> rename to meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
+> index 8cbc1f9f9..db985a2ff 100644
+> --- a/meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
+> +++ b/meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
+>  LICENSE = "MIT"
+>  LIC_FILES_CHKSUM =
+> "file://LICENSE.txt;md5=65715c2eb961313d71b297dd5a04f85e"
+>
+> -SRC_URI[md5sum] = "dbf9b868b90880b24b1ac278094e912e"
+> -SRC_URI[sha256sum] =
+> "3018294ebefce6572a474f0604c2021e33b3fd8006ecd11d62107a5d2a963527"
+> +SRC_URI[md5sum] = "94e3d4d472a14e788d4bd1a903fd102b"
+> +SRC_URI[sha256sum] =
+> "91056c15fa70756691db97756772bb1eb9678fa585d9184f24534b100dc60f4a"
+>
+>  inherit pypi setuptools3
+>
+> --
+> 2.17.1
+>
+> 
 >
 
---000000000000d4e58605ab2fdb6f
+--000000000000af37c505ab2fee03
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">It should also probably list opengl in REQUIRED_DISTRO_FEA=
-TURES as it depends on virtual/libgles2 and virtual/egl.<div><br></div><div=
->I&#39;ll send a patch shortly.</div></div><br><div class=3D"gmail_quote"><=
-div dir=3D"ltr" class=3D"gmail_attr">On Mon, Jul 13, 2020 at 4:50 PM Anibal=
- Limon &lt;<a href=3D"mailto:anibal.limon@linaro.org">anibal.limon@linaro.o=
-rg</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
-n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
-"><div dir=3D"auto"><div>Thanks for noticing, I need to add musl to my test=
-s=C2=A0 :).</div><div dir=3D"auto"><br></div><div dir=3D"auto">Anibal</div>=
-<div dir=3D"auto"><br><div class=3D"gmail_quote" dir=3D"auto"><div dir=3D"l=
-tr" class=3D"gmail_attr">El dom., 12 de jul. de 2020 21:07, Khem Raj &lt;<a=
- href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a=
->&gt; escribi=C3=B3:<br></div><blockquote class=3D"gmail_quote" style=3D"ma=
-rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
-1ex">fails to compile<br>
-musl - <a href=3D"https://errors.yoctoproject.org/Errors/Details/420539/" =
-rel=3D"noreferrer noreferrer" target=3D"_blank">https://errors.yoctoproject=
-.org/Errors/Details/420539/</a><br>
-clang - <a href=3D"https://errors.yoctoproject.org/Errors/Details/420544/"=
- rel=3D"noreferrer noreferrer" target=3D"_blank">https://errors.yoctoprojec=
-t.org/Errors/Details/420544/</a><br>
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Fri, Jul 24, 2020 at 3:35 AM Leon Anavi &lt;<a href=3D"=
+mailto:leon.anavi@konsulko.com">leon.anavi@konsulko.com</a>&gt; wrote:<br><=
+/div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-le=
+ft:1px #ccc solid;padding-left:1ex">Upgarde to release 1.25.10:</blockquote=
+><div dir=3D"auto">Typo: Upgarde -&gt; Upgrade</div><div dir=3D"auto"><br><=
+/div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-le=
+ft:1px #ccc solid;padding-left:1ex"><br>
 <br>
-On Fri, Jul 10, 2020 at 7:21 AM Anibal Limon &lt;<a href=3D"mailto:anibal.=
-limon@linaro.org" rel=3D"noreferrer" target=3D"_blank">anibal.limon@linaro.=
-org</a>&gt; wrote:<br>
-&gt;<br>
-&gt; From: Dmitry Baryshkov &lt;<a href=3D"mailto:dmitry.baryshkov@linaro.=
-org" rel=3D"noreferrer" target=3D"_blank">dmitry.baryshkov@linaro.org</a>&g=
-t;<br>
-&gt;<br>
-&gt; Commonly this kind of testing tools are installed in /usr/lib<br>
-&gt; like piglit, remove version.<br>
-&gt;<br>
-&gt; Signed-off-by: Dmitry Baryshkov &lt;<a href=3D"mailto:dmitry.baryshko=
-v@linaro.org" rel=3D"noreferrer" target=3D"_blank">dmitry.baryshkov@linaro.=
-org</a>&gt;<br>
-&gt; Signed-off-by: An=C3=ADbal Lim=C3=B3n &lt;<a href=3D"mailto:anibal.li=
-mon@linaro.org" rel=3D"noreferrer" target=3D"_blank">anibal.limon@linaro.or=
-g</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 .../vk-gl-cts/<a href=3D"http://opengl-es-cts_3.2.6.1.bb" rel=
-=3D"noreferrer noreferrer" target=3D"_blank">opengl-es-cts_3.2.6.1.bb</a>=
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 45 +++++++++++++++++++<br>
-&gt;=C2=A0 1 file changed, 45 insertions(+)<br>
-&gt;=C2=A0 create mode 100644 meta-oe/recipes-graphics/vk-gl-cts/<a href=
-=3D"http://opengl-es-cts_3.2.6.1.bb" rel=3D"noreferrer noreferrer" target=
-=3D"_blank">opengl-es-cts_3.2.6.1.bb</a><br>
-&gt;<br>
-&gt; diff --git a/meta-oe/recipes-graphics/vk-gl-cts/<a href=3D"http://ope=
-ngl-es-cts_3.2.6.1.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">open=
-gl-es-cts_3.2.6.1.bb</a> b/meta-oe/recipes-graphics/vk-gl-cts/<a href=3D"ht=
-tp://opengl-es-cts_3.2.6.1.bb" rel=3D"noreferrer noreferrer" target=3D"_bla=
-nk">opengl-es-cts_3.2.6.1.bb</a><br>
-&gt; new file mode 100644<br>
-&gt; index 000000000..226f70027<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-oe/recipes-graphics/vk-gl-cts/<a href=3D"http://opengl-es-=
-cts_3.2.6.1.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">opengl-es-c=
-ts_3.2.6.1.bb</a><br>
-&gt; @@ -0,0 +1,45 @@<br>
-&gt; +DESCRIPTION =3D &quot;OpenGL CTS&quot;<br>
-&gt; +LICENSE =3D &quot;Apache-2.0&quot;<br>
-&gt; +PR =3D &quot;r0&quot;<br>
-&gt; +LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D3b83ef96387f14655fc8=
-54ddc3c6bd57&quot;<br>
-&gt; +<br>
-&gt; +SRC_URI =3D &quot;\<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/Khrono=
-sGroup/VK-GL-CTS.git;protocol=3Dhttps;tag=3D$%7BBPN%7D-$%7BPV%7D;name=3Dvk-=
-gl-cts" rel=3D"noreferrer noreferrer" target=3D"_blank">github.com/KhronosG=
-roup/VK-GL-CTS.git;protocol=3Dhttps;tag=3D${BPN}-${PV};name=3Dvk-gl-cts</a>=
- \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/google=
-/amber;protocol=3Dhttps;destsuffix=3Dgit/external/amber/src;name=3Damber;br=
-anch=3Dmain" rel=3D"noreferrer noreferrer" target=3D"_blank">github.com/goo=
-gle/amber;protocol=3Dhttps;destsuffix=3Dgit/external/amber/src;name=3Damber=
-;branch=3Dmain</a> \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/Khrono=
-sGroup/glslang.git;protocol=3Dhttps;destsuffix=3Dgit/external/glslang/src;n=
-ame=3Dglslang" rel=3D"noreferrer noreferrer" target=3D"_blank">github.com/K=
-hronosGroup/glslang.git;protocol=3Dhttps;destsuffix=3Dgit/external/glslang/=
-src;name=3Dglslang</a> \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/Khrono=
-sGroup/SPIRV-Headers.git;protocol=3Dhttps;destsuffix=3Dgit/external/spirv-h=
-eaders/src;name=3Dspirv-headers" rel=3D"noreferrer noreferrer" target=3D"_b=
-lank">github.com/KhronosGroup/SPIRV-Headers.git;protocol=3Dhttps;destsuffix=
-=
-=3Dgit/external/spirv-headers/src;name=3Dspirv-headers</a> \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/Khrono=
-sGroup/SPIRV-Tools.git;protocol=3Dhttps;destsuffix=3Dgit/external/spirv-too=
-ls/src;name=3Dspirv-tools" rel=3D"noreferrer noreferrer" target=3D"_blank">=
-github.com/KhronosGroup/SPIRV-Tools.git;protocol=3Dhttps;destsuffix=3Dgit/e=
-xternal/spirv-tools/src;name=3Dspirv-tools</a> \<br>
-&gt; +&quot;<br>
-&gt; +<br>
-&gt; +S =3D &quot;${WORKDIR}/git&quot;<br>
-&gt; +<br>
-&gt; +SRCREV_FORMAT =3D &quot;vk-gl-cts&quot;<br>
-&gt; +SRCREV_amber =3D &quot;d26ee22dd7faab1845a531d410f7ec1db407402a&quot=
-;<br>
-&gt; +SRCREV_glslang =3D &quot;c538b5d796fb24dd418fdd650c7f76e56bcc3dd8&qu=
-ot;<br>
-&gt; +SRCREV_spirv-headers =3D &quot;e4322e3be589e1ddd44afb20ea842a977c131=
-9b8&quot;<br>
-&gt; +SRCREV_spirv-tools =3D &quot;1eb89172a82b436d8037e8a8c29c80f7e1f7df7=
-4&quot;<br>
-&gt; +<br>
-&gt; +S =3D &quot;${WORKDIR}/git&quot;<br>
-&gt; +<br>
-&gt; +inherit pkgconfig cmake<br>
-&gt; +<br>
-&gt; +DEPENDS +=3D &quot;libpng zlib virtual/libgles2 virtual/egl&quot;<br=
->
-&gt; +<br>
-&gt; +EXTRA_OECMAKE_append =3D &quot;-DDEQP_TARGET=3Dsurfaceless&quot;<br>
-&gt; +<br>
-&gt; +CTSDIR =3D &quot;${libdir}/${BPN}&quot;<br>
-&gt; +<br>
-&gt; +do_install() {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0install -d ${D}/${CTSDIR}<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0install -m 0755 ${B}/external/openglcts/m=
-odules/cts-runner ${D}/${CTSDIR}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0install -m 0755 ${B}/external/openglcts/m=
-odules/glcts ${D}/${CTSDIR}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0for dir in gl_cts gles2 gles3 gles31 gles=
-32 ; do<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cp -r ${B}/ex=
-ternal/openglcts/modules/$dir ${D}/${CTSDIR}/<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0done<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0install -m 0755 ${B}/modules/gles3/deqp-g=
-les3 ${D}/${CTSDIR}<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0rm -r ${D}/${CTSDIR}/*/*.a ${D}/${CTSDIR}=
-/*/cmake_install.cmake ${D}/${CTSDIR}/*/CMakeFiles<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +FILES_${PN} +=3D &quot;${CTSDIR}&quot;<br>
-&gt; --<br>
-&gt; 2.27.0<br>
-&gt;<br>
-&gt; <br>
-</blockquote></div></div></div>
+* Added support for ``SSLKEYLOGFILE`` environment variable for<br>
+=C2=A0 logging TLS session keys with use with programs like<br>
+=C2=A0 Wireshark for decrypting captured web traffic<br>
+* Fixed loading of SecureTransport libraries on macOS Big Sur<br>
+=C2=A0 due to the new dynamic linker cache<br>
+* Collapse chunked request bodies data and framing into one<br>
+=C2=A0 call to ``send()`` to reduce the number of TCP packets by 2-4x<br>
+* Don&#39;t insert ``None`` into ``ConnectionPool`` if the pool<br>
+=C2=A0 was empty when requesting a connection<br>
+* Avoid ``hasattr`` call in ``BrotliDecoder.decompress()``<br>
 <br>
-</blockquote></div>
+Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" t=
+arget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
+---<br>
+=C2=A0.../{<a href=3D"http://python3-urllib3_1.25.9.bb" rel=3D"noreferrer"=
+ target=3D"_blank">python3-urllib3_1.25.9.bb</a> =3D&gt; <a href=3D"http://=
+python3-urllib3_1.25.10.bb" rel=3D"noreferrer" target=3D"_blank">python3-ur=
+llib3_1.25.10.bb</a>} | 4 ++--<br>
+=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
+=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python=
+3-urllib3_1.25.9.bb" rel=3D"noreferrer" target=3D"_blank">python3-urllib3_1=
+.25.9.bb</a> =3D&gt; <a href=3D"http://python3-urllib3_1.25.10.bb" rel=3D"n=
+oreferrer" target=3D"_blank">python3-urllib3_1.25.10.bb</a>} (79%)<br>
+<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3=
+-urllib3_1.25.9.bb" rel=3D"noreferrer" target=3D"_blank">python3-urllib3_1.=
+25.9.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python3=
+-urllib3_1.25.10.bb" rel=3D"noreferrer" target=3D"_blank">python3-urllib3_1=
+.25.10.bb</a><br>
+similarity index 79%<br>
+rename from meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+urllib3_1.25.9.bb" rel=3D"noreferrer" target=3D"_blank">python3-urllib3_1.2=
+5.9.bb</a><br>
+rename to meta-python/recipes-devtools/python/<a href=3D"http://python3-ur=
+llib3_1.25.10.bb" rel=3D"noreferrer" target=3D"_blank">python3-urllib3_1.25=
+.10.bb</a><br>
+index 8cbc1f9f9..db985a2ff 100644<br>
+--- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-urllib=
+3_1.25.9.bb" rel=3D"noreferrer" target=3D"_blank">python3-urllib3_1.25.9.bb=
+</a><br>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-urllib=
+3_1.25.10.bb" rel=3D"noreferrer" target=3D"_blank">python3-urllib3_1.25.10.=
+bb</a><br>
+@@ -3,8 +3,8 @@ HOMEPAGE =3D &quot;<a href=3D"https://github.com/shazow/ur=
+llib3" rel=3D"noreferrer" target=3D"_blank">https://github.com/shazow/urlli=
+b3</a>&quot;<br>
+=C2=A0LICENSE =3D &quot;MIT&quot;<br>
+=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE.txt;md5=3D65715c2eb961313d=
+71b297dd5a04f85e&quot;<br>
+<br>
+-SRC_URI[md5sum] =3D &quot;dbf9b868b90880b24b1ac278094e912e&quot;<br>
+-SRC_URI[sha256sum] =3D &quot;3018294ebefce6572a474f0604c2021e33b3fd8006ec=
+d11d62107a5d2a963527&quot;<br>
++SRC_URI[md5sum] =3D &quot;94e3d4d472a14e788d4bd1a903fd102b&quot;<br>
++SRC_URI[sha256sum] =3D &quot;91056c15fa70756691db97756772bb1eb9678fa585d9=
+184f24534b100dc60f4a&quot;<br>
+<br>
+=C2=A0inherit pypi setuptools3<br>
+<br>
+-- <br>
+2.17.1<br>
+<br>
+<br>
+</blockquote></div></div>
 
---000000000000d4e58605ab2fdb6f--
+--000000000000af37c505ab2fee03--
