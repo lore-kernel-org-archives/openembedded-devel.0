@@ -1,22 +1,22 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.275.1595608309621710889
+ by mx.groups.io with SMTP id smtpd.web11.293.1595608399110933760
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Jul 2020 09:31:50 -0700
+ Fri, 24 Jul 2020 09:33:19 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=35018 helo=localhost.localdomain)
+Received: from [78.130.197.211] (port=35024 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jz0bp-0004RI-OX; Fri, 24 Jul 2020 19:31:47 +0300
+	id 1jz0dJ-0005G0-HY; Fri, 24 Jul 2020 19:33:18 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCHv2] python3-matplotlib: Upgrade 3.2.2 -> 3.3.0
-Date: Fri, 24 Jul 2020 19:31:37 +0300
-Message-Id: <20200724163137.1593-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2] python3-urllib3: Upgrade 1.25.9 -> 1.25.10
+Date: Fri, 24 Jul 2020 19:33:07 +0300
+Message-Id: <20200724163307.1818-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.2
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -28,80 +28,43 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.3.0:
+Upgrade to release 1.25.10:
 
-- Provisional API for composing semantic axes layouts from text
-  or nested lists
-- New Axes.sharex, Axes.sharey methods
-- Turbo colormap
-- colors.BoundaryNorm supports extend keyword argument
-- Text color for legend labels
-- Pcolor and Pcolormesh now accept shading='nearest' and 'auto'
-- Allow tick formatters to be set with str or function inputs
-- New Axes.axline method
-- Dates use a modern epoch
-- Improved font weight detection
-- Axes3D no longer distorts the 3D plot to match the 2D aspect
-  ratio
-- More consistent toolbar behavior across backends
-- Toolbar icons are now styled for dark themes
-- Cursor text now uses a number of significant digits matching
-  pointing precision
-- Functions to compute a Path's size
-- savefig() gained a backend keyword argument
-- Saving SVG now supports adding metadata
-- Saving PDF metadata via PGF now consistent with PDF backend
-- NbAgg and WebAgg no longer use jQuery & jQuery UI
-
-Create setup.cfg with configuration to use the copy of FreeType
-installed on the system.
-
-License-Update: The line and the checksum of the license in
-setup.py has changed but the license remains the same.
+* Added support for ``SSLKEYLOGFILE`` environment variable for
+  logging TLS session keys with use with programs like
+  Wireshark for decrypting captured web traffic
+* Fixed loading of SecureTransport libraries on macOS Big Sur
+  due to the new dynamic linker cache
+* Collapse chunked request bodies data and framing into one
+  call to ``send()`` to reduce the number of TCP packets by 2-4x
+* Don't insert ``None`` into ``ConnectionPool`` if the pool
+  was empty when requesting a connection
+* Avoid ``hasattr`` call in ``BrotliDecoder.decompress()``
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...atplotlib_3.2.2.bb => python3-matplotlib_3.3.0.bb} | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-matplotlib_3.2.2.bb => python3-matplotlib_3.3.0.bb} (70%)
+ .../{python3-urllib3_1.25.9.bb => python3-urllib3_1.25.10.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-urllib3_1.25.9.bb => python3-urllib3_1.25.10.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.2.2.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-matplotlib_3.2.2.bb
-rename to meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
-index b32177d9b..2e88efb56 100644
---- a/meta-python/recipes-devtools/python/python3-matplotlib_3.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
-@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/matplotlib/matplotlib"
- SECTION = "devel/python"
- LICENSE = "PSF"
- LIC_FILES_CHKSUM = "\
--    file://setup.py;beginline=253;endline=253;md5=2a114620e4e6843aa7568d5902501753 \
-+    file://setup.py;beginline=251;endline=251;md5=e0ef37de7122ce842bcd1fb54482b353 \
-     file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74 \
- "
- DEPENDS = "\
-@@ -18,8 +18,8 @@ DEPENDS = "\
-     python3-pytz-native \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
+rename to meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
+index 8cbc1f9f9..db985a2ff 100644
+--- a/meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
++++ b/meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=65715c2eb961313d71b297dd5a04f85e"
  
--SRC_URI[md5sum] = "b60cd68f792a30173d825e16482aedd8"
--SRC_URI[sha256sum] = "3d77a6630d093d74cbbfebaa0571d00790966be1ed204e4a8239f5cbd6835c5d"
-+SRC_URI[md5sum] = "b1de7185687c6f5c092689e3431a69b3"
-+SRC_URI[sha256sum] = "24e8db94948019d531ce0bcd637ac24b1c8f6744ac86d2aa0eb6dbaeb1386f82"
+-SRC_URI[md5sum] = "dbf9b868b90880b24b1ac278094e912e"
+-SRC_URI[sha256sum] = "3018294ebefce6572a474f0604c2021e33b3fd8006ecd11d62107a5d2a963527"
++SRC_URI[md5sum] = "94e3d4d472a14e788d4bd1a903fd102b"
++SRC_URI[sha256sum] = "91056c15fa70756691db97756772bb1eb9678fa585d9184f24534b100dc60f4a"
  
- inherit pypi setuptools3 pkgconfig
+ inherit pypi setuptools3
  
-@@ -34,4 +34,9 @@ RDEPENDS_${PN} = "\
-     python3-pytz \
- "
- 
-+do_compile_prepend() {
-+    echo [libs] > ${S}/setup.cfg
-+    echo system_freetype = true >> ${S}/setup.cfg
-+}
-+
- BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
