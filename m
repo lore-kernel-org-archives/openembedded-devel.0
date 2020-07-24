@@ -1,87 +1,107 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web11.8951.1595606029400909842
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.275.1595608309621710889
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Jul 2020 08:53:58 -0700
+ Fri, 24 Jul 2020 09:31:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: joe.slater@windriver.com)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 06OFrkcn027850
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jul 2020 08:53:46 -0700 (PDT)
-Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCB.corp.ad.wrs.com
- (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Fri, 24 Jul 2020
- 08:53:26 -0700
-From: "Joe Slater" <joe.slater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
-Subject: [v2 resend][meta-oe][PATCH 1/1] lvm2: allow for reproducible binary builds
-Date: Fri, 24 Jul 2020 08:53:26 -0700
-Message-ID: <20200724155326.102518-1-joe.slater@windriver.com>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=35018 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jz0bp-0004RI-OX; Fri, 24 Jul 2020 19:31:47 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2] python3-matplotlib: Upgrade 3.2.2 -> 3.3.0
+Date: Fri, 24 Jul 2020 19:31:37 +0300
+Message-Id: <20200724163137.1593-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain
+X-OutGoing-Spam-Status: No, score=-0.2
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Modify original method to eliminate conditional patching
-of configure.ac.  Use SOURCE_DATE_EPOCH which is
-required for reproducible binaries.
+Upgrade to release 3.3.0:
 
-Signed-off-by: Joe Slater <joe.slater@windriver.com>
+- Provisional API for composing semantic axes layouts from text
+  or nested lists
+- New Axes.sharex, Axes.sharey methods
+- Turbo colormap
+- colors.BoundaryNorm supports extend keyword argument
+- Text color for legend labels
+- Pcolor and Pcolormesh now accept shading='nearest' and 'auto'
+- Allow tick formatters to be set with str or function inputs
+- New Axes.axline method
+- Dates use a modern epoch
+- Improved font weight detection
+- Axes3D no longer distorts the 3D plot to match the 2D aspect
+  ratio
+- More consistent toolbar behavior across backends
+- Toolbar icons are now styled for dark themes
+- Cursor text now uses a number of significant digits matching
+  pointing precision
+- Functions to compute a Path's size
+- savefig() gained a backend keyword argument
+- Saving SVG now supports adding metadata
+- Saving PDF metadata via PGF now consistent with PDF backend
+- NbAgg and WebAgg no longer use jQuery & jQuery UI
+
+Create setup.cfg with configuration to use the copy of FreeType
+installed on the system.
+
+License-Update: The line and the checksum of the license in
+setup.py has changed but the license remains the same.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-support/lvm2/files/reproducible-build.patch  | 16 ++++++++++------
- meta-oe/recipes-support/lvm2/lvm2.inc                    |  2 +-
- 2 files changed, 11 insertions(+), 7 deletions(-)
+ ...atplotlib_3.2.2.bb => python3-matplotlib_3.3.0.bb} | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-matplotlib_3.2.2.bb => python3-matplotlib_3.3.0.bb} (70%)
 
-diff --git a/meta-oe/recipes-support/lvm2/files/reproducible-build.patch b/meta-oe/recipes-support/lvm2/files/reproducible-build.patch
-index db598a8..3f53db9 100644
---- a/meta-oe/recipes-support/lvm2/files/reproducible-build.patch
-+++ b/meta-oe/recipes-support/lvm2/files/reproducible-build.patch
-@@ -1,23 +1,27 @@
- configure.ac:  override CONFIGURE_LINE
+diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.2.2.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
+similarity index 70%
+rename from meta-python/recipes-devtools/python/python3-matplotlib_3.2.2.bb
+rename to meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
+index b32177d9b..2e88efb56 100644
+--- a/meta-python/recipes-devtools/python/python3-matplotlib_3.2.2.bb
++++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/matplotlib/matplotlib"
+ SECTION = "devel/python"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "\
+-    file://setup.py;beginline=253;endline=253;md5=2a114620e4e6843aa7568d5902501753 \
++    file://setup.py;beginline=251;endline=251;md5=e0ef37de7122ce842bcd1fb54482b353 \
+     file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74 \
+ "
+ DEPENDS = "\
+@@ -18,8 +18,8 @@ DEPENDS = "\
+     python3-pytz-native \
+ "
  
- For reproducible binaries, we need to report a constant CONFIGURE_LINE.
--This patched is only applied for such builds.
+-SRC_URI[md5sum] = "b60cd68f792a30173d825e16482aedd8"
+-SRC_URI[sha256sum] = "3d77a6630d093d74cbbfebaa0571d00790966be1ed204e4a8239f5cbd6835c5d"
++SRC_URI[md5sum] = "b1de7185687c6f5c092689e3431a69b3"
++SRC_URI[sha256sum] = "24e8db94948019d531ce0bcd637ac24b1c8f6744ac86d2aa0eb6dbaeb1386f82"
  
--Upstream-Status: Inappropriate [oe specific]
-+Upstream-Status: Pending
+ inherit pypi setuptools3 pkgconfig
  
- Signed-off-by: Joe Slater <joe.slater@windriver.com>
+@@ -34,4 +34,9 @@ RDEPENDS_${PN} = "\
+     python3-pytz \
+ "
  
- 
- --- git.orig/configure.ac
- +++ git/configure.ac
--@@ -15,7 +15,10 @@ AC_PREREQ(2.69)
-+@@ -15,7 +15,15 @@ AC_PREREQ(2.69)
-  ################################################################################
-  dnl -- Process this file with autoconf to produce a configure script.
-  AC_INIT
- -CONFIGURE_LINE="$0 $@"
--+dnl The default CONFIGURE_LINE has been overridden for reproducible binaries
--+dnl CONFIGURE_LINE="$0 $@"
--+CONFIGURE_LINE="configure parameters are not available for reproducible builds"
-++
-++dnl per reproducible-builds.org check SOURCE_DATE_EPOCH
-++dnl
-++if test -z "${SOURCE_DATE_EPOCH+set}" ; then
-++    CONFIGURE_LINE="$0 $@"
-++else
-++    CONFIGURE_LINE="configure options are not available for reproducible builds"
-++fi
- +
-  AC_CONFIG_SRCDIR([lib/device/dev-cache.h])
-  AC_CONFIG_HEADERS([include/configure.h])
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index ab618b4..3c6c7ed 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -15,7 +15,7 @@ SRC_URI = "git://sourceware.org/git/lvm2.git \
-            file://0001-Avoid-bashisms-in-init-scripts.patch \
-            file://0005-do-not-build-manual.patch \
-            file://0006-start-lvm2-monitor.service-after-tmp.mount.patch \
--           ${@bb.utils.contains('BUILD_REPRODUCIBLE_BINARIES','1','file://reproducible-build.patch','', d)} \
-+           file://reproducible-build.patch \
-            "
- 
- SRCREV = "b9391b1b9f0b73303fa21f8f92574d17ce4c2b02"
++do_compile_prepend() {
++    echo [libs] > ${S}/setup.cfg
++    echo system_freetype = true >> ${S}/setup.cfg
++}
++
+ BBCLASSEXTEND = "native"
 -- 
-2.7.4
+2.17.1
 
