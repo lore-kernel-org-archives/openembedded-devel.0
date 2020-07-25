@@ -1,80 +1,76 @@
-Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com [209.85.167.67])
- by mx.groups.io with SMTP id smtpd.web11.7718.1595674792658077523
+Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
+ by mx.groups.io with SMTP id smtpd.web11.7747.1595674926132875667
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Jul 2020 03:59:53 -0700
+ Sat, 25 Jul 2020 04:02:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=oQ1jjMnW;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.67, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f67.google.com with SMTP id b11so6524881lfe.10
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jul 2020 03:59:52 -0700 (PDT)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=geTzr/d0;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.52, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f52.google.com with SMTP id i80so6511621lfi.13
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jul 2020 04:02:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=RA9t9Nv6rRXjtnRbWzH9eNj9zLZiD4IBjHyQUDkUbbg=;
-        b=oQ1jjMnWEm7nL3n+P0gPUNH7SH6LAp7iSvupploDnB6Y+/n0Lp3IADovulAc2vKIlS
-         TqW2rjX4Hke3ThQRBXx7m821fHJ2OzY8r7llFThtorToeQVFORbvuTJmQMnmKO1fWKnF
-         uHVPGeTtyOw7E4XBvDGPxtKRe7v0GXpSFEU9Uqq1YYVMm1oW/ZXexf40aa8O69ZeGdKk
-         alun0Plv0ypP5MiTG5nJvuoPpmqEO6vzLpqs419yVAoSAiFSzqtf5Zh+ftvwY65y2lfx
-         7+zGN8Z0oPdK8atgwAt/b9E8BFn8Y0HNYYRg58DnUFHn6E+9eHuAuTqykKxNFNZd0Vfm
-         AyMQ==
+        bh=DRwxmhZ+/s6TSbsulwIglnipiq5hag/plItQRDTvaX8=;
+        b=geTzr/d03amOGIrznqHlossvoVNdrceTmZMGoDQ9FS1qT2M6lWT3L29sNIPbLRXfx6
+         k1f3tqUrlpOUzfxJyHQ4kwcthdxSmBISDN/1x9+Dl8Ad0HkpnVPj3Ot26jNMlQE6Lata
+         oftQ0UCM1TbOQnDlQR/ttdaehvPzxILz+saj2UJunF+JgJ7hxFewVQKZ5/IDAdy4d/8q
+         4J6+0/6cLwd5sicqLGmjh5Ue8I+B114Lv09oc2+/dkTs9j858O/YPBLlS85ReNabof8e
+         M1czvBB+pXdpQFi7ESiwO36o0H3rEST1h9Asjh8qKk7dCISrdgdGCEHbhJJ84fdzruYE
+         7M5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=RA9t9Nv6rRXjtnRbWzH9eNj9zLZiD4IBjHyQUDkUbbg=;
-        b=JgxB4x1kjWsy5sKvolfeRCYwn+HU5ATuaBBnE0RpNOGAgVq8EHwF3ehg6zZLBdS/TN
-         kDcqUFi7ZF2MPA9sy02kQFdRyaTdYIUt7H4Y40g+4Un3hwWf63kIxpm2vez4WOOfOg+8
-         4/qlQkmUjubMmKilDPSkZYdDYD4zatVEN7ZUUCoN6kvfxSgisMSacyfj6lBfE83QzCcI
-         FQ395I3ykHDk4bvFT8u+ft4HIrgqvhjBX3+nO4v1DNsopngmQ1ZOonLvMmZNhLybxIfz
-         jZmZ5sw1eGZFbGRdkzfuSHQXtHmcDr4oxB5gaWdJAQavs/TX7c9E8wpcPpVQnPURahZI
-         cGjA==
-X-Gm-Message-State: AOAM5335Vm2p2cwjpG90csS9Eu6RaV3WGxby/wwKPI90rWnUJmRfNgQj
-	fEketGGtSL55REJwe9X65b2DY2trSXg=
-X-Google-Smtp-Source: ABdhPJyyQ6c4YPaQGGFdRNroUop4INnbv33+uk9FIjU5VYoC3nUGGiQcSatD/lYddvffqojbsfQQRw==
-X-Received: by 2002:a19:2d41:: with SMTP id t1mr7176849lft.9.1595674790651;
-        Sat, 25 Jul 2020 03:59:50 -0700 (PDT)
+        bh=DRwxmhZ+/s6TSbsulwIglnipiq5hag/plItQRDTvaX8=;
+        b=BjITO/hocmwsxjTDK+VlM/fjNVbP7BmQgHpAjDwHJMo+7xUkWu5uBe566u9dlAvYup
+         sQ7p1Mln/Nc9NpvdjdcrdVmpdoHyMWFokzJfds/XjiC4hxjh8S8yLdWUmeM/IT+JRsof
+         AAQEGJJkPT46Onp4+lX8JhNGK79wlXpIAhLlakd48nfvYBXwDj4RKjPyswdt+ToNHeRZ
+         cQhJxMMqQGjH49xfg+eHmK2VkD6NMsnXmerbUCxJhlyNoQds0y8ljIeGbVJotf0ZgUjM
+         BmrMpkgxJyWV4+CYdy5097UtaMDw8swXEFQ5t9oJB0zYzwj4kZf7leZdDTGknonN0QNX
+         2Xbw==
+X-Gm-Message-State: AOAM531eGE+jwDnpOclQUsULBUzaBEtAriwiIQWDD/oFGAUAzcK/kvin
+	YfFCH1eKClRU7bwTsPFjFCxSLAPvyzA=
+X-Google-Smtp-Source: ABdhPJxXf7w5YokCNgjFsQiAdbinCSvJIwUXsqYWlqqAC4SaOBflJ2zZO+6h0Cjxh4tA2GqBP4elKw==
+X-Received: by 2002:a19:803:: with SMTP id 3mr7156094lfi.15.1595674923870;
+        Sat, 25 Jul 2020 04:02:03 -0700 (PDT)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id a1sm1203735lfb.10.2020.07.25.03.59.49
+        by smtp.gmail.com with ESMTPSA id l18sm1065477lje.45.2020.07.25.04.02.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 25 Jul 2020 03:59:50 -0700 (PDT)
+        Sat, 25 Jul 2020 04:02:03 -0700 (PDT)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] libmbim: update to 1.24.2
-Date: Sat, 25 Jul 2020 12:59:48 +0200
-Message-Id: <20200725105948.2149916-1-open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-oe] libwebsockets: update to 4.0.20
+Date: Sat, 25 Jul 2020 13:02:01 +0200
+Message-Id: <20200725110201.2157416-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../libmbim/{libmbim_1.22.0.bb => libmbim_1.24.2.bb}        | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-connectivity/libmbim/{libmbim_1.22.0.bb => libmbim_1.24.2.bb} (74%)
+ .../{libwebsockets_4.0.1.bb => libwebsockets_4.0.20.bb}         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/libwebsockets/{libwebsockets_4.0.1.bb => libwebsockets_4.0.20.bb} (96%)
 
-diff --git a/meta-oe/recipes-connectivity/libmbim/libmbim_1.22.0.bb b/meta-oe/recipes-connectivity/libmbim/libmbim_1.24.2.bb
-similarity index 74%
-rename from meta-oe/recipes-connectivity/libmbim/libmbim_1.22.0.bb
-rename to meta-oe/recipes-connectivity/libmbim/libmbim_1.24.2.bb
-index 61e314f1f1..c7a04b6642 100644
---- a/meta-oe/recipes-connectivity/libmbim/libmbim_1.22.0.bb
-+++ b/meta-oe/recipes-connectivity/libmbim/libmbim_1.24.2.bb
-@@ -9,9 +9,9 @@ LIC_FILES_CHKSUM = " \
+diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.1.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.20.bb
+similarity index 96%
+rename from meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.1.bb
+rename to meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.20.bb
+index 0d1f57ab86..5427daac47 100644
+--- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.1.bb
++++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.20.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8c47b078124308a4e1354e8d59f606b7"
+ DEPENDS = "zlib"
  
- DEPENDS = "glib-2.0 glib-2.0-native libgudev"
+ S = "${WORKDIR}/git"
+-SRCREV = "6eb39388f43f6e2a27f0efcbf8cb2391e38824e9"
++SRCREV = "ec9e8ab892f2dc569ae09336c80c2796fd14a6ff"
+ SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.0-stable"
  
--inherit autotools pkgconfig bash-completion
-+inherit autotools pkgconfig bash-completion gobject-introspection
- 
- SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
- 
--SRC_URI[md5sum] = "87060e8957013177e4140edc6f64f5bd"
--SRC_URI[sha256sum] = "5c0778eb1cd12c3604523134e55183f5147b0cae71150e875b583768f7aa1f38"
-+SRC_URI[md5sum] = "6c2b490af87773c8446f37536e7411ac"
-+SRC_URI[sha256sum] = "32198c099987849c5f442d1cbf4b6e43e645cbdbe9cfdc197b19ddd63c6981e4"
+ UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
 -- 
 2.25.1
 
