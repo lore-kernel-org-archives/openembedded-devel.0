@@ -1,76 +1,76 @@
-Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
- by mx.groups.io with SMTP id smtpd.web12.7940.1595675812827679157
+Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com [209.85.208.169])
+ by mx.groups.io with SMTP id smtpd.web12.8194.1595677217437168702
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Jul 2020 04:16:53 -0700
+ Sat, 25 Jul 2020 04:40:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=q+XLIBDH;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.177, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f177.google.com with SMTP id b25so12496484ljp.6
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jul 2020 04:16:52 -0700 (PDT)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=Yfh1l/31;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.169, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f169.google.com with SMTP id h22so12530138lji.9
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jul 2020 04:40:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=+hU57LiMfkIaeHmBmDM0cKedMOk9fhQVSUWpke5RYSU=;
-        b=q+XLIBDHutE/SxHERW+GXk+otq895KZ/b9sXM/zgTfv+FZ0ZPOa5EXP/W8FJmIQW2C
-         3+ejP55kwS/FrQsQ99oyq1Umqh9FgQ8hCkIBC892JAzCOKLFZ+EE0CFmPy7VXYeSGpxG
-         yZGS82DDHzKCSUeicjRhmLHJYgRFTlZglZlJ/ZnSWAqgbcmHjKbWj0CIEbag0mbD0dwo
-         AnpXCUaY68dX9XhIS88eZ+Mi5new8+b2tV2j7iDdtVX2u2VVSKdyyygY+6xWo3npPy1o
-         KQz8c0cI3axjOuEef8kJ0SC6pj6HAW6iaRIHGp1xw+uEht/JPwy+CAJi2+f9eARo/lof
-         xTAA==
+        bh=hnYBr6K6P/L96VFxdYuOMmXVCei0V/1q2w7ylt0BzWc=;
+        b=Yfh1l/31mN3xqf89ILNfjn7jSnh1xivTsMPPYkkMAQvHKRZ7ICCDSVCGB846tCPZiq
+         NJh85om0lT9Z8/SS1BzVyD5uWE7uxKtHuJmx+eGv3F4rQMJhYEup8bvX99FSedt7mYZ0
+         3CH9eieh+ToDEX7zmWkMw/gLtHt74BbHytFKQnKDvendZqOyirkV9dbj4Bwi6jn57n9B
+         FgnW8gCFShriMM01sgXWpa41yANvg2p4d+/UnA8v45H8oxsOqpU1ANSp2sKIB312YS2/
+         EJP3CTN33haT06QBJSKJF78NBWyAeFMnu0ErN3TUVrOK/YkWY2Xt8RrP8ztAQO/VBZDN
+         cJAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=+hU57LiMfkIaeHmBmDM0cKedMOk9fhQVSUWpke5RYSU=;
-        b=gHFYw6B5c3aMW85YV8aAqpGYuA8PdT3k15ziOmDjLaOqOi0y26kTI4KX8ArD6O4ASN
-         r4lCOIP3MJoX1IR4LZ/3q7MzrrAj4cw4wkwwilWmTreHcTznADlXJcvKs6R2IbgXDKmx
-         q25r/DGmYPDiWB/SIrslxp0tsqzZJwM7Kb4Iubr68k63UTKNzf5pvc/W8GDmlhGFqHQw
-         PGZhGNc1A02agOurwP5+hj78h2zHprnQGq6oQ2ZF0OFQPileT1wo4bABv7GhTVGmTjp8
-         Z7OgAxRZZzhe9oFai1bxWnCwVXdGaEnX2c0V01b2uWWwvobxvNLoButLqQNs+IqqRJpH
-         vcEw==
-X-Gm-Message-State: AOAM531kRPeuQU4E79525TrH5Cm8FLlysEPL8BMvrf5euj84+B43u0hV
-	gJV6Iim/Vu1rXp3QahLDvafnWmMeHVw=
-X-Google-Smtp-Source: ABdhPJxW/q+G32ueeAusrhZzX2gqlbFdVISwDyhCA0yPqSbU7IO0v1OBS15DG8BMYxKiJ0NOo/QIZg==
-X-Received: by 2002:a2e:9dcc:: with SMTP id x12mr6626442ljj.261.1595675810804;
-        Sat, 25 Jul 2020 04:16:50 -0700 (PDT)
+        bh=hnYBr6K6P/L96VFxdYuOMmXVCei0V/1q2w7ylt0BzWc=;
+        b=B7Gyz4PiNNKyar9aLpKV6wRGnqP78QeasH+7jeSB2gtsWA9S0rjEavWmeFOHt5R2Jt
+         qvZK9DNTxFf9IvJ8B0dL++jQ/BAx2rJwGBQ538XA/57tIjeFqK5fdQNcYjzHjabIO7V8
+         eivFAKEodn2wq9Q1EkI7uLYJLrRhfXM3Pvfubt6l93GhMvteqE/niKo6ofaAfC/LQGBe
+         j7hJoeQ4ViY2HjZxrzLSPzVM31FJFAMjO6VujlEyAZF09EWI9GGRdkYBaj9eEpjCzuzd
+         jAyXp28FCoIpphvNbskNE14v7GZcUAdU0HBBu5Yl7gKwThUNjhOLusU/Gu/OQQ+lWd9G
+         reTQ==
+X-Gm-Message-State: AOAM531zuAYPmsUfsNnft4cekbWh3qT9MlVJMwyyhELFzTLqPBfJVcl8
+	SY7Sg/xWQ12MjMllov7mr5WZPXir9Oo=
+X-Google-Smtp-Source: ABdhPJykYJYdEs+kzSeHY/nGVp/UCoVTxqEBOjF2M3tFiHo9JjL4312DSAupOkedXoWGZx5N37rfPw==
+X-Received: by 2002:a2e:850c:: with SMTP id j12mr34085lji.56.1595677215086;
+        Sat, 25 Jul 2020 04:40:15 -0700 (PDT)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id r13sm949935ljg.101.2020.07.25.04.16.50
+        by smtp.gmail.com with ESMTPSA id e12sm960119ljl.94.2020.07.25.04.40.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 25 Jul 2020 04:16:50 -0700 (PDT)
+        Sat, 25 Jul 2020 04:40:14 -0700 (PDT)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] libbytesize: update to 2.3
-Date: Sat, 25 Jul 2020 13:16:48 +0200
-Message-Id: <20200725111648.2179171-1-open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-oe] libvdpau: update to 1.4
+Date: Sat, 25 Jul 2020 13:40:12 +0200
+Message-Id: <20200725114012.2284879-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../libbytesize/{libbytesize_2.2.bb => libbytesize_2.3.bb}      | 2 +-
+ .../recipes-graphics/vdpau/{libvdpau_1.3.bb => libvdpau_1.4.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/libbytesize/{libbytesize_2.2.bb => libbytesize_2.3.bb} (93%)
+ rename meta-oe/recipes-graphics/vdpau/{libvdpau_1.3.bb => libvdpau_1.4.bb} (91%)
 
-diff --git a/meta-oe/recipes-support/libbytesize/libbytesize_2.2.bb b/meta-oe/recipes-support/libbytesize/libbytesize_2.3.bb
-similarity index 93%
-rename from meta-oe/recipes-support/libbytesize/libbytesize_2.2.bb
-rename to meta-oe/recipes-support/libbytesize/libbytesize_2.3.bb
-index a954499c69..db8270f49f 100644
---- a/meta-oe/recipes-support/libbytesize/libbytesize_2.2.bb
-+++ b/meta-oe/recipes-support/libbytesize/libbytesize_2.3.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
+diff --git a/meta-oe/recipes-graphics/vdpau/libvdpau_1.3.bb b/meta-oe/recipes-graphics/vdpau/libvdpau_1.4.bb
+similarity index 91%
+rename from meta-oe/recipes-graphics/vdpau/libvdpau_1.3.bb
+rename to meta-oe/recipes-graphics/vdpau/libvdpau_1.4.bb
+index 240949f55c..b6790a0855 100644
+--- a/meta-oe/recipes-graphics/vdpau/libvdpau_1.3.bb
++++ b/meta-oe/recipes-graphics/vdpau/libvdpau_1.4.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=83af8811a28727a13f04132cc33b7f58"
+ 
+ DEPENDS = "virtual/libx11 libxext xorgproto"
+ 
+-SRCREV = "f57a9904c43ef5d726320c77baa91d0c38361ed4"
++SRCREV = "c3d1a9dbafdfe6144ff474d0d523dc01b068750f"
+ SRC_URI = "git://anongit.freedesktop.org/vdpau/libvdpau"
+ 
  S = "${WORKDIR}/git"
- B = "${S}"
- 
--SRCREV = "e64e752a28a4a41b0a43cba3bedf9571c22af807"
-+SRCREV = "96aba1e99aa40a21df980bac4f2ed3bd1e25dbde"
- SRC_URI = "git://github.com/rhinstaller/libbytesize;branch=master"
- 
- inherit gettext autotools python3native
 -- 
 2.25.1
 
