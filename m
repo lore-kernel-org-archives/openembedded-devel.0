@@ -1,130 +1,83 @@
-Received: from mail-ej1-f65.google.com (mail-ej1-f65.google.com [209.85.218.65])
- by mx.groups.io with SMTP id smtpd.web12.37941.1595799733654372294
+Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com [209.85.208.67])
+ by mx.groups.io with SMTP id smtpd.web12.40005.1595802908042773815
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Jul 2020 14:42:14 -0700
+ Sun, 26 Jul 2020 15:35:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=f+YvhTqP;
- spf=pass (domain: gmail.com, ip: 209.85.218.65, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f65.google.com with SMTP id dk23so3219599ejb.11
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 14:42:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZW9o42eD;
+ spf=pass (domain: gmail.com, ip: 209.85.208.67, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f67.google.com with SMTP id z17so10736086edr.9
+        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 15:35:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=b5sg87L/4ZjhTaD5Cl4bNl6YbcmbYTrvnU/UvtJwvjU=;
-        b=f+YvhTqPtqhSVbiyw5mqx+CVl4iaRl5T0gIY2ytq9kqNcANten1NeY36+21699tkVn
-         hAZ3gdqErhNTaSqIpNk8tpEtFI3XY4O2BXnRERb+gWbTQbwOTtxiPgBpopxO8B+qbswQ
-         wFel31+AIFHObgzZClqyx/pRb2wLQHsYKXg7Jqs/cX29eTY0gpLSjnRc2yL/HoH5clF6
-         g1XQfc4DR7o0/oLJSC9xSoMPR777r8M4LSXUFG4WPBcTKxfSiJ+Qqewvl8Q8AXQzx4ul
-         /pjT331azVExMi7NO1yub4Vg2Z1DEaX1/cpKvNalg9bUatVCDZWzzYQZhmvGWDJtKUkw
-         q67A==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TUzqtlyGQdkDheOERgnY8gJ9IniDZTF6WVPsiqiV8Rs=;
+        b=ZW9o42eD1zIyfcewUeaGmN7eoCwJGz2pyS1Vucq8fopsSP0k5FP9IBR+3KZS0p2goG
+         RxXXMAc3c6fSnpKK/UttHNKmVcf09eUaCmd9Gk1Cs5PDF8dfFkKXt7Hspw85SlAZKmAF
+         x5leDG3ZnNeJZV93df0B1LG0GVf1AqaeGaQRkwAbky7fhHn9P21mRF/PUsC0oiuM5SQZ
+         U7fxBeNOtQXxgpoCyQFp5jsHvgcQVWl3qsv/yeiMl/1022ASb3EgUgZt8P255dOwkMM1
+         hC3fhfLUGWlZwt1XNPi0Gii8PQNd69EOi4ZrTySlKM+hyPHHrbh4syx++TEIpVzTewM4
+         VEqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=b5sg87L/4ZjhTaD5Cl4bNl6YbcmbYTrvnU/UvtJwvjU=;
-        b=RAjhEdM/iE6aDp9TNuiWZ1os4IQDoD8lx2GFAzWZKS9f74JIBLmgBN8ADwQOuZ0/cf
-         69nmHQWsS5dCGO04dWdgo3SBJVW/m0l64IKmEIYyihlZbiFiKE5A7s1Y56E5R2cfLV1/
-         4pszZCxcGahAWvyb1vhHf2GJgUgc9Wiq85SEeH2ITJTeKW0z1/SsG27fim/Jt0hHlww9
-         CvYISKV0jTpYeN9S5AmVxXRgFrPJoS159UjcTZ4ATo+QZAvd0NF+6eit6dCCL8bDG7K2
-         ts+j0HvfyOsAC6DdtnsXfxubrPVqEzsQk3U7yZ5jphy/uJ/pZ06EHx6bkWrs41uQQ6M+
-         qLVg==
-X-Gm-Message-State: AOAM530skPnKxI1ztxEJH7VcYOLE4xMclMpjYyzFNZ0azONtbATTJvwh
-	wzVtIavvDgYu8Qjo4Zj8HC7S7JZRzrZhFkDeDdw=
-X-Google-Smtp-Source: ABdhPJyB5NICiZXoSo63PNGQmOtfIDSRVvoCv2NHYyJeFT9TFDP008dHh38fP4oHNCd4A/XI21Od0/dRqgAo0PgIc9w=
-X-Received: by 2002:a17:906:3e54:: with SMTP id t20mr18110993eji.471.1595799732174;
- Sun, 26 Jul 2020 14:42:12 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TUzqtlyGQdkDheOERgnY8gJ9IniDZTF6WVPsiqiV8Rs=;
+        b=FBfFyV2XoLgsOCEKbuZFnCYDeZ1xXgLsyxJIQrePVgTFrz8rcJywOXAXHsIzeUNK6F
+         N+EDoOS5jx4OvXpNmZ/r1FIuoq2Z/CeIsmc7O6LheQ5uUGhYpEX1fg8JDvkQNy5qWfAu
+         /NzLDDWZzlimFhJECdbXRyZY7QXBzjDk5du0WC02eMfOlJ9S+ZRSbZyoP6wy8c078tcD
+         fo9IbqgkVQa6BpLEi8jVW3dPl1dJ/09Zc7BqiXSYFb1TcFJrX/swqwm0SrHgjPfNmiCM
+         6bTJ2mClrAc6kHPsUiX2yXcuekVuOOD0Rsk44bLChYYqe7LCTmpronzLwUOEe/Isktt1
+         Kikw==
+X-Gm-Message-State: AOAM532xDeQkpvOXuGqbbSOAY/Kpsqyf/mtDExEU1cn9OH9pGYvoP9jr
+	SVovXtBszBInZ+d+QFzSVNCMitNP
+X-Google-Smtp-Source: ABdhPJwv73aMqMsx0FLm8txmgeGjAQvEc+pRa6IMGLzKxoxk5P0fc8Hz50Lh+4dseMW9abNxCf0UJQ==
+X-Received: by 2002:aa7:c4d1:: with SMTP id p17mr18074143edr.268.1595802906054;
+        Sun, 26 Jul 2020 15:35:06 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from superandy.speedport.ip (p200300f07f46e203fabf36e58663abdc.dip0.t-ipconnect.de. [2003:f0:7f46:e203:fabf:36e5:8663:abdc])
+        by smtp.gmail.com with ESMTPSA id x64sm6404096edc.95.2020.07.26.15.35.05
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 26 Jul 2020 15:35:05 -0700 (PDT)
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 01/10] xfce4-whiskermenu-plugin: upgrade 2.4.5 -> 2.4.6
+Date: Mon, 27 Jul 2020 00:34:46 +0200
+Message-Id: <20200726223455.333001-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-References: <20200726182237.561-1-akuster808@gmail.com> <20200726182237.561-2-akuster808@gmail.com>
-In-Reply-To: <20200726182237.561-2-akuster808@gmail.com>
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-Date: Sun, 26 Jul 2020 21:42:00 -0700
-Message-ID: <CA+chaQchMFa1ASRYz=oFyz+fKLm4mbdhrPnShXZ81Hus6cK6NA@mail.gmail.com>
-Subject: Re: [oe] [PATCH 2/2] khronos: includes virtual/libgles2 , needs opengl
-To: akuster <akuster808@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000002b467705ab5f140c"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---0000000000002b467705ab5f140c
-Content-Type: text/plain; charset="UTF-8"
+Release notes for 2.4.6
+=======================
+- Fix crash during grab check. (Issue #19)
+- Fix background incorrect without compositing.
 
-Hi,
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ ...menu-plugin_2.4.5.bb => xfce4-whiskermenu-plugin_2.4.6.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_2.4.5.bb => xfce4-whiskermenu-plugin_2.4.6.bb} (66%)
 
-I've already sent this one:
-https://lists.openembedded.org/g/openembedded-devel/message/85932
+diff --git a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.4.5.bb b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.4.6.bb
+similarity index 66%
+rename from meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.4.5.bb
+rename to meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.4.6.bb
+index 65ceb8c54..bbb274ed9 100644
+--- a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.4.5.bb
++++ b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.4.6.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ inherit xfce-panel-plugin cmake
+ 
+-SRC_URI[md5sum] = "adb064538b2e2cbc7ddd1d8ac57cec36"
+-SRC_URI[sha256sum] = "f5241910ea6411840b8c9f9471f0d262ab0583150bb82f9b280eccbaadb0ebbe"
++SRC_URI[md5sum] = "81a4a4c7635273485fac5c2d98e48d02"
++SRC_URI[sha256sum] = "8974d38cc87df528693efe4b6e14bcd233cdb49d2018a23ddddf745110b25744"
+ 
+ RRECOMMENDS_${PN} += "menulibre"
+-- 
+2.26.2
 
-On Sun, Jul 26, 2020 at 11:22 AM akuster <akuster808@gmail.com> wrote:
-
-> add FEATURE_CHECK on opengl.
->
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-> b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-> index bd75cdb1f4..1cd0a476aa 100644
-> --- a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-> +++ b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-> @@ -16,7 +16,9 @@ SRCREV_FORMAT = "vk-gl-cts"
->
->  S = "${WORKDIR}/git"
->
-> -inherit pkgconfig cmake
-> +inherit pkgconfig cmake features_check
-> +
-> +REQUIRED_DISTRO_FEATURES = "opengl"
->
->  DEPENDS += "libpng zlib virtual/libgles2 virtual/egl"
->
-> --
-> 2.17.1
->
-> 
->
-
---0000000000002b467705ab5f140c
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi,<div><br></div><div>I&#39;ve already sent this one:</di=
-v><div><a href=3D"https://lists.openembedded.org/g/openembedded-devel/messa=
-ge/85932">https://lists.openembedded.org/g/openembedded-devel/message/85932=
-</a>=C2=A0=C2=A0<br></div></div><br><div class=3D"gmail_quote"><div dir=3D"=
-ltr" class=3D"gmail_attr">On Sun, Jul 26, 2020 at 11:22 AM akuster &lt;<a h=
-ref=3D"mailto:akuster808@gmail.com">akuster808@gmail.com</a>&gt; wrote:<br>=
-</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;b=
-order-left:1px solid rgb(204,204,204);padding-left:1ex">add FEATURE_CHECK o=
-n opengl.<br>
-<br>
-Signed-off-by: Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail.com" ta=
-rget=3D"_blank">akuster808@gmail.com</a>&gt;<br>
----<br>
-=C2=A0meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc | 4 +++-<br>
-=C2=A01 file changed, 3 insertions(+), 1 deletion(-)<br>
-<br>
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc b/meta-oe/=
-recipes-graphics/vk-gl-cts/khronos-cts.inc<br>
-index bd75cdb1f4..1cd0a476aa 100644<br>
---- a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc<br>
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc<br>
-@@ -16,7 +16,9 @@ SRCREV_FORMAT =3D &quot;vk-gl-cts&quot;<br>
-<br>
-=C2=A0S =3D &quot;${WORKDIR}/git&quot;<br>
-<br>
--inherit pkgconfig cmake<br>
-+inherit pkgconfig cmake features_check<br>
-+<br>
-+REQUIRED_DISTRO_FEATURES =3D &quot;opengl&quot;<br>
-<br>
-=C2=A0DEPENDS +=3D &quot;libpng zlib virtual/libgles2 virtual/egl&quot;<br=
->
-<br>
--- <br>
-2.17.1<br>
-<br>
-<br>
-</blockquote></div>
-
---0000000000002b467705ab5f140c--
