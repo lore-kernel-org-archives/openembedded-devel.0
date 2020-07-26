@@ -1,78 +1,71 @@
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
- by mx.groups.io with SMTP id smtpd.web11.21209.1595724950118628435
+Received: from mail-yb1-f202.google.com (mail-yb1-f202.google.com [209.85.219.202])
+ by mx.groups.io with SMTP id smtpd.web11.24741.1595746731067857421
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Jul 2020 17:55:50 -0700
+ Sat, 25 Jul 2020 23:58:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=QrPdpyhf;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.54, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f54.google.com with SMTP id d2so1509995lfj.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jul 2020 17:55:49 -0700 (PDT)
+ dkim=pass header.i=@google.com header.s=20161025 header.b=C5yKwXoK;
+ spf=pass (domain: flex--wak.bounces.google.com, ip: 209.85.219.202, mailfrom: 3qskdxwmkahakoyuccuzs.qca@flex--wak.bounces.google.com)
+Received: by mail-yb1-f202.google.com with SMTP id k127so16413899ybk.11
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jul 2020 23:58:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Hqi0RPQ3t1v0ioqlf0BhPaet0pJHX+WPgkhWiHBSv04=;
-        b=QrPdpyhf9763doJiG0KeU0YXhn94cARpx/WC/NyiNG2JMXu3Og6eM5M3v78oy9rFON
-         3/t8zL2glZ6EoGlno1f+cNeurxBoL/0t30ISIi2fbzlnDZoIuF2ec7f9PSvPZJRVU/BF
-         84UGtvIuv7oQjSdY6YjZdF0ePlXEmdm7/ZS3GbFcxi7xmntGHyEEHWvbFV46/KvUB4ng
-         IvVIQ0aC310JKU3U/F2w4xvde3HjNtlT0ZMNrWKfOwWg2s9VXcNtx2d4ucEMeRLOSocj
-         69KaHu02LAZQoBDqDDuISyz5ywSX13dtwm9WimSEzczpk8NPSYBA+fuuF2dcT8WfS+2L
-         3DjA==
+        d=google.com; s=20161025;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=/a2IbJnR7XJ7EyQBVzFASeRtxMDawHUYETdo12n0AKg=;
+        b=C5yKwXoKwozszAwDkGb3WalYifq5yCpq0AHC/uLfsfzX3DVs5F5yPsK8WHH14MgBw7
+         xwTYpmi0NxlZKTPY4FcmE+prYOBg5LJ8xHcmCuoskX2PnAnvZOfipjjlAMc/VSUgcSl+
+         wLvjSmjesxUs/m+8kx/tMpwsrlSwwZ4bA1bw6lMvR6wAZL5k+gKizgr40yfDsgaZovf3
+         GXUEPXzHRQfL52d0I0+2T1gC910hk3MMudkwKDCYkAnNWjXht3qm0Jv8sCfScJavUKci
+         ES1kE98PAW98yn5r9IN/Sfo4kOwQ6PBpQ6UYpKy8isXkWt/IwHZdaXmBNkf+49qu1K28
+         QOhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Hqi0RPQ3t1v0ioqlf0BhPaet0pJHX+WPgkhWiHBSv04=;
-        b=pnnQomNZrFtuX+v62139cJAGmbFOtlE/kDAz3R2qaDZDWYsxmZ4horgtXPY7XTsBXH
-         zVLM86Resiim4B3FVXoHcphlX8H6WcWbrB9/sPdB/PP0G8UOWSEzVxThqoBJqICMW1Ha
-         j5QSt6YDY20Q/IeID2OlNGSMKCvtafmCT2/KAUziiLVCg57WB02E/KIT97PcwjIYoIwd
-         WI6KEH7oavig6H4NP9psKP+4TuyGdpi6+0ncFzKQm8x2mhzwW/yCAh63pTrrbRZDMfnN
-         Gi27VVBbNBVnbPR/HoOXKp91UA6yc+4wcWIae5qMtDPmoeqTeNdbCr9Qm1ZPS++jz9zc
-         sJ6Q==
-X-Gm-Message-State: AOAM531nCpFywaleo8Z9SFqvLEFnA+3htN83ZR1BH0TBGc5oaadWUlZZ
-	acLo2mn7wCD1DELKE1Fj0UtcJjTNgMc=
-X-Google-Smtp-Source: ABdhPJxnkCI6L6wcdHk1Rc05EiOdyiKKBYZJK84LYL+qGeqalheIlD+gBlUOLIR5TDVTXapjxYi3BQ==
-X-Received: by 2002:a19:be53:: with SMTP id o80mr8365857lff.33.1595724947557;
-        Sat, 25 Jul 2020 17:55:47 -0700 (PDT)
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id f9sm1852490lfc.43.2020.07.25.17.55.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 25 Jul 2020 17:55:47 -0700 (PDT)
-From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=/a2IbJnR7XJ7EyQBVzFASeRtxMDawHUYETdo12n0AKg=;
+        b=N32FGGXbXBA8BTTSi4Fzp0d5HiA2LQ4umAZZSO6RinvJKwoVDFObYLsdgw8hPBacHl
+         kmYYYi5I+f0K26DrJ484tvjybOV5iZWbrHp4V6OwqL2JeLpgUvfzPzp5LVVDifcaqaev
+         OA0oHdvCGy/4OGH+YWMJdxeqRs43Hk1Sl4F53b2VmvN+WM1zGlT277vBVuPrldGcLAnf
+         RwyC5Gip0/ZChe0YDTtMXhq8s9i5a+WhTDpEO23HyFaLr8Zz3Jhhu3JfVCBLhUnkVAET
+         o6Ho/n2uK5HlL2rUHMtnQgnsssW6ZfjSQ3wsKl1bGLyFLyodAiIJ0JJQlA7zB1VJexwB
+         OxPw==
+X-Gm-Message-State: AOAM531kvWVexUNNtlszcUCpBXVGwoxqzEcVamOyrPb0VfyNL2VfF9+m
+	/HVj+kfLMXOAid93Ipb/WgAoyI95p/IrsQsfJZUoCFMJQQvNBDg70WWCXZoAb7ClxOxCFDRjRs5
+	nQjJweydqTsE/pbo8q4LXdZLkXWiOJZSQpKi2FJesqROozUEP4dmC3AZyLkreHXBcVclHnfl828
+	opVgw=
+X-Google-Smtp-Source: ABdhPJwySvzmsEVN0EhSUgumeWeYwYsBN3qa3112teu4x0ZS9n5VfLOYPgnFWgg6+kYM7wZ4xvqBME4=
+X-Received: by 2002:a25:bb0d:: with SMTP id z13mr24369098ybg.488.1595746729953;
+ Sat, 25 Jul 2020 23:58:49 -0700 (PDT)
+Date: Sat, 25 Jul 2020 23:58:44 -0700
+Message-Id: <20200726065844.588792-1-wak@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.28.0.rc0.142.g3c755180ce-goog
+Subject: [meta-oe][PATCH] fmt: 6.2.0 -> 7.0.1
+From: "William A. Kennington III" <wak@google.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] libpeas: update to 1.26.0
-Date: Sun, 26 Jul 2020 02:55:44 +0200
-Message-Id: <20200726005544.3645042-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: "William A. Kennington III" <wak@google.com>
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Signed-off-by: William A. Kennington III <wak@google.com>
 ---
- .../libpeas/{libpeas_1.25.3.bb => libpeas_1.26.0.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-gnome/libpeas/{libpeas_1.25.3.bb => libpeas_1.26.0.bb} (80%)
+ meta-oe/recipes-support/fmt/{fmt_6.2.0.bb => fmt_7.0.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/fmt/{fmt_6.2.0.bb => fmt_7.0.1.bb} (89%)
 
-diff --git a/meta-oe/recipes-gnome/libpeas/libpeas_1.25.3.bb b/meta-oe/recipes-gnome/libpeas/libpeas_1.26.0.bb
-similarity index 80%
-rename from meta-oe/recipes-gnome/libpeas/libpeas_1.25.3.bb
-rename to meta-oe/recipes-gnome/libpeas/libpeas_1.26.0.bb
-index 57419a4275..888525e085 100644
---- a/meta-oe/recipes-gnome/libpeas/libpeas_1.25.3.bb
-+++ b/meta-oe/recipes-gnome/libpeas/libpeas_1.26.0.bb
-@@ -10,8 +10,8 @@ GTKDOC_MESON_OPTION = "gtk_doc"
+diff --git a/meta-oe/recipes-support/fmt/fmt_6.2.0.bb b/meta-oe/recipes-support/fmt/fmt_7.0.1.bb
+similarity index 89%
+rename from meta-oe/recipes-support/fmt/fmt_6.2.0.bb
+rename to meta-oe/recipes-support/fmt/fmt_7.0.1.bb
+index 05dc94a99..55db63286 100644
+--- a/meta-oe/recipes-support/fmt/fmt_6.2.0.bb
++++ b/meta-oe/recipes-support/fmt/fmt_7.0.1.bb
+@@ -5,7 +5,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b"
  
- inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache
+ SRC_URI += "git://github.com/fmtlib/fmt"
+-SRCREV = "9bdd1596cef1b57b9556f8bef32dc4a32322ef3e"
++SRCREV = "f19b1a521ee8b606dedcadfda69fd10ddf882753"
  
--SRC_URI[archive.md5sum] = "08bfff8f9688cf630dcb0f950617661f"
--SRC_URI[archive.sha256sum] = "1c9bbb29740c29cd6e1dd0c9964722ff08cd5e6f68f1b5c135bc391a6ce97639"
-+SRC_URI[archive.md5sum] = "f7723bf8433b7984121157e1e9a629b5"
-+SRC_URI[archive.sha256sum] = "a976d77e20496479a8e955e6a38fb0e5c5de89cf64d9f44e75c2213ee14f7376"
- 
- PACKAGECONFIG[python3] = "-Dpython3=true,-Dpython3=false,python3-pygobject"
+ S = "${WORKDIR}/git"
  
 -- 
-2.25.1
+2.28.0.rc0.142.g3c755180ce-goog
 
