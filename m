@@ -1,50 +1,50 @@
-Received: from mail-ej1-f65.google.com (mail-ej1-f65.google.com [209.85.218.65])
- by mx.groups.io with SMTP id smtpd.web10.40053.1595802908566073787
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web12.40007.1595802909564073641
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Jul 2020 15:35:08 -0700
+ Sun, 26 Jul 2020 15:35:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=XFnlHIJ4;
- spf=pass (domain: gmail.com, ip: 209.85.218.65, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f65.google.com with SMTP id o18so15132963eje.7
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 15:35:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=IkI70jse;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id g7so6888646ejw.12
+        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 15:35:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=iYsvxSbWztEnIw0WestP8DA5RjZ8guiQanfbzLpArLA=;
-        b=XFnlHIJ4ywjYqewc780lh2xOkRReqhP3zvj0AvcSMfwA+e+yRdiobsRXr4geQnMt3n
-         PX4mFxNgmQxUCCQxv+UdYL3ARfTKa5JE0id4SCrpzIC0bkvBBe1pSYnsvau/kyh6BjjV
-         q9TsN09RrxCCCmgTb2cf9ChrKl4o7xo82EiJKhYgwr5Xk8lZykOo0GOvjQ/y6A2hEnvM
-         iAbNXS2Sl/0/ufqGeY8N8dTdd8srUqLtUflC3tCPYTEpjiBCMzOiGtDM6hth0oUXacD0
-         BKReFJftdBUfo7PrQ0lQTohiikntomWUhAtdJzfHCps8zsdUJJAn76io1RJHQ9U50kKY
-         sj7w==
+        bh=6jsoshr0ZNqwUJN2wz4d1Yul0dL6U4Au7lyA4cgB3QA=;
+        b=IkI70jse0WPnz3Wwr7hcdBcQEwoG3Vx1ZDblgk0kUEg16XBywrUfWTtV1R5uaZAY3K
+         BBajd4VVOIt7Wf3c18XqMRLagy5dsLmBhZZmPHBbC7ZPhfRS5DJKEzLKj96jhpP7Ni05
+         6Gwquhe2MqvnzsNVj5HSPGYxYLL3tQLQXldQOX9pUoTY5ZcDpRrxuhfSkFQBvOMKtGQm
+         vBm4RKa/dVFex14IaxSqHDJdxNKKn31lrlWeIhAYNo15bfF7Xk303+h1zLymhFYUdad1
+         dmpOqNvZdNYv470Jp9WDj3boP+7n/S48ZRX/fzL0weuI9U0eACv4NmbjrnZ0wgAiTcH/
+         h4qA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=iYsvxSbWztEnIw0WestP8DA5RjZ8guiQanfbzLpArLA=;
-        b=kmS+smt+BeHupLJj4tJFO4OSUAN/OOc61EwOtSxG8tIUC1/JJC+ItRTOXA9REvwFD0
-         hXIgJGh3YYnUlxCoxYHYITFjd/3LZl2nYymnuDUFSzDANI2vkoKv/Q7QEEyqf0l5yE6r
-         3E9a0cJCJnteONQ/FD+d4x+822IaVhBzRe2J0V+YD62K4h7prBu6jlliBYN9+LLhnBij
-         ObMpm2czPfUJQQ1ou0CoHysA1JG/LjI1GC/bGDChp1FcW/rHAfU+NImf3FqhVek43WUP
-         e3vU2qtys6xNh6p3z+K/pb12DegTCCNVJnunOUfPMrCDWv1Au5cXCgdN7f9IRV1fBvqP
-         Bitg==
-X-Gm-Message-State: AOAM5329v3H/FnjUM9pq7+JfplCtZZiJFn97dEuK2QDhkGAxaShpys7n
-	tzjKGg+V7ObTzMHGapsCy0M4fOE/
-X-Google-Smtp-Source: ABdhPJyjiW+XU+3vCdwqpY8emIAjJeVjMXzDRWNV9Wzxe9w3v5+iDr4iiYahFW0vsh7O2iYCS2ia/w==
-X-Received: by 2002:a17:906:c1c3:: with SMTP id bw3mr10349496ejb.8.1595802906874;
-        Sun, 26 Jul 2020 15:35:06 -0700 (PDT)
+        bh=6jsoshr0ZNqwUJN2wz4d1Yul0dL6U4Au7lyA4cgB3QA=;
+        b=a4QMIGXJtD1eyYCcT8XUc+lbNP8nMqqKdJDGv6owFLs44QTae3+EECHYgRyULQ1i9g
+         KKpspdXUkUcwqwFQcrSkgrjwo5GZgp/92HSHZ4XIswDzOvq1aDB/D5QLoQLjL2HUfAfc
+         osCbAiPPrVJmNCF0z5QJvDhxfKCh6phKh/DjWKRbEIxwuqu1mDVufADwE7pAg32ViP4r
+         ntEvvai4jukyXDdgy5LWxzK0Ap6+epYnalZlV5iakETyAd7Y7FUiCDnWg4tP9SpZBWO0
+         WCWx8xRYScBBJsGYveUGAgxa4IqEnI0J4dL5aV5/GM+SR03Ji/Fi/G7GKuJIV/9RALUA
+         i7hQ==
+X-Gm-Message-State: AOAM533YFlzIIMrojHmVbFLfhCypOY9QbfEl09pZ80zdZXDIlN30/9X2
+	KdmrXwX9Gm8l0nBmAPK71+5kOPKC
+X-Google-Smtp-Source: ABdhPJy0XTJACWxkObgCaEZnkcuPx6tWxP4aIkoi2ZTPWrVUlkBAYriERlLejs6Aa3VV/wvVT9NdXA==
+X-Received: by 2002:a17:906:8608:: with SMTP id o8mr17279970ejx.156.1595802907859;
+        Sun, 26 Jul 2020 15:35:07 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f46e203fabf36e58663abdc.dip0.t-ipconnect.de. [2003:f0:7f46:e203:fabf:36e5:8663:abdc])
         by smtp.gmail.com with ESMTPSA id x64sm6404096edc.95.2020.07.26.15.35.06
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 26 Jul 2020 15:35:06 -0700 (PDT)
+        Sun, 26 Jul 2020 15:35:07 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 02/10] xfwm4: upgrade 4.14.2 -> 4.14.3
-Date: Mon, 27 Jul 2020 00:34:47 +0200
-Message-Id: <20200726223455.333001-2-schnitzeltony@gmail.com>
+Subject: [PATCH 03/10] xfce4-timer-plugin: upgrade 1.7.0 -> 1.7.1
+Date: Mon, 27 Jul 2020 00:34:48 +0200
+Message-Id: <20200726223455.333001-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200726223455.333001-1-schnitzeltony@gmail.com>
 References: <20200726223455.333001-1-schnitzeltony@gmail.com>
@@ -52,42 +52,49 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes for 4.14.3
-========================
-4.14.3
-======
-
-- Add support for XRes X11 extension to get the PID of sandboxed apps
-- Fix use-after-free of settings strings (xfce/xfwm4#406)
-- More XError traps (xfce/xfwm4#405)
-- I18n:
-  Update translations: en_CA, et, he, hy_AM, id, it, sq, zh_HK
-  New translations: hye
+Release notes for 1.7.1
+=======================
+- Update URLs from goodies.x.o to docs.x.o (Bug #16180)
+- Do not recreate box when orientation changes
+- Remove unused eventbox
+- Avoid square-sized plugin (Bug #16101)
+- Remove unused variables and function
+- Resolve GCC warning: ISO C90 forbids mixed declarations and code
+- Preferences: Improved spacing and layout in editor (Bug #14678)
+- Selecting a timer always starts it
+- Add Hossam Ayman's multiple timer code, some leak and g_free fixes in
+  update_function.
+- Translation Updates:
+  Albanian, Arabic, Asturian, Basque, Belarusian, Bulgarian,
+  Catalan, Chinese (China), Chinese (Taiwan), Croatian, Czech, Danish,
+  Dutch, Eastern Armenian, English (Australia), English (United Kingdom),
+  Finnish, French, Galician, German, Greek, Hebrew, Hungarian, Icelandic,
+  Indonesian, Italian, Japanese, Korean, Latvian, Lithuanian, Malay,
+  Norwegian Bokmål, Occitan (post 1500), Polish, Portuguese, Portuguese
+  (Brazil), Russian, Serbian, Slovak, Slovenian, Spanish, Swedish, Thai,
+  Turkish, Uighur, Ukrainian, Urdu, Urdu (Pakistan)
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-xfce/xfwm4/{xfwm4_4.14.2.bb => xfwm4_4.14.3.bb}   | 4 ++--
+ ...fce4-timer-plugin_1.7.0.bb => xfce4-timer-plugin_1.7.1.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.14.2.bb => xfwm4_4.14.3.bb} (90%)
+ rename meta-xfce/recipes-panel-plugins/timer/{xfce4-timer-plugin_1.7.0.bb => xfce4-timer-plugin_1.7.1.bb} (73%)
 
-diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.2.bb b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.3.bb
-similarity index 90%
-rename from meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.2.bb
-rename to meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.3.bb
-index b6066a526..ab8b34cfb 100644
---- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.2.bb
-+++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.3.bb
-@@ -9,8 +9,8 @@ inherit xfce update-alternatives features_check
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.0.bb b/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.1.bb
+similarity index 73%
+rename from meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.0.bb
+rename to meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.1.bb
+index 2ddc6f67c..f154023e2 100644
+--- a/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.0.bb
++++ b/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.1.bb
+@@ -6,5 +6,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ae39271267fd63eb7619432ff24e7ff1"
  
- SRC_URI += "file://0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch"
--SRC_URI[md5sum] = "6d61d07b6ea88a429c43e1b9c3293eb8"
--SRC_URI[sha256sum] = "b15b40342596a3b6ab5167a58371262adf5484e165cb25a31fef42f0aa8ffd92"
-+SRC_URI[md5sum] = "66b25adc9db8a3d829ba171bed478724"
-+SRC_URI[sha256sum] = "829bec5a9e35a9f11c54a546c0112f5ad36e0f747be1156856d4abcce37283bf"
+ inherit xfce-panel-plugin
  
- PACKAGECONFIG ?= " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'epoxy', '', d)} \
+-SRC_URI[md5sum] = "32e6a14e80bf9a93db2f2b3bfd7de920"
+-SRC_URI[sha256sum] = "2e4e5343e39926230cc981d5fe56cd58a2f3817d2e9b6089b5673a2e39bf7e9b"
++SRC_URI[md5sum] = "e0df5b6be30993719d084fc4f78a6218"
++SRC_URI[sha256sum] = "4b52d2911b1949e945971be6533155ee6ba99c77078eac7fd43b0f2aeca824e3"
 -- 
 2.26.2
 
