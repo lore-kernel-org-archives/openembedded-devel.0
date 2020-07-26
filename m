@@ -1,71 +1,80 @@
-Received: from mail-pj1-f74.google.com (mail-pj1-f74.google.com [209.85.216.74])
- by mx.groups.io with SMTP id smtpd.web10.26422.1595759233241111647
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com [209.85.167.47])
+ by mx.groups.io with SMTP id smtpd.web11.26624.1595759450212375489
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Jul 2020 03:27:13 -0700
+ Sun, 26 Jul 2020 03:30:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@google.com header.s=20161025 header.b=tRTlZCM/;
- spf=pass (domain: flex--wak.bounces.google.com, ip: 209.85.216.74, mailfrom: 3gfodxwmkakkfjtpxxpun.lxv@flex--wak.bounces.google.com)
-Received: by mail-pj1-f74.google.com with SMTP id jx16so9769307pjb.6
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 03:27:13 -0700 (PDT)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=NSLTCAbv;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.47, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f47.google.com with SMTP id i80so7422246lfi.13
+        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 03:30:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:message-id:mime-version:subject:from:to:cc;
-        bh=y2YLB/ZfR9lpCf7IcLaIZOOBflJp1gO22GLQx/rEy9U=;
-        b=tRTlZCM/XwG8/R/XXAJIE/tWiHDjXypuQhrGLXYB6EqCkmdPw2MJjXEGGnYvtaqA7s
-         igJk80e6jK5pbWuqPbRDoMf+hPceTjPXQ4MF4XN6LDdJoQTR9koODeEUleK7OHVGAWtq
-         cLi70OpmpEMaOO9rap2BFV06Cd+VKctMSsDFfleUt3sl4YyynSs4eQZ9DH1R5YIBDyAp
-         Mh20bLbeDDeY623v8WHGvzR6jvFZ/HUW2JmS//cxmaHEDD79KBx+75ZPiaQVT1NHVwMz
-         pCXu2o3//9e/H/yDxnRUZyiazE3KXZlqiGVbs6/ObXw0ubsizyepOt6DOr0TLxE3V5/m
-         bSsQ==
+        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=sJjXRHUsP2TyMko3LZj9eH9iLrnA42kZSXm2MJDV5fQ=;
+        b=NSLTCAbvq3zMmnX6wVyU0DGJW/DWHIBJL3mf6zZlp77Lux5MGPCQw4SOuE9Wam48ZG
+         v91fepxDSdsuzi7mxFlpWvkFj/E+EAeCanyL2wVBI4yLMNukjSD/pIRWybzqkBT1FJLX
+         Cyn47F3XDLh/bkU4nZ/9czkHuQRVrs6rHrPGKR1AH6rTvENm+0CIXtVNxukPkwANQe0v
+         Bfio4IQrN9hfST1tOzHCTgkY143qZtY24TBGV8tup+2GlHsJNRMxkFv/VUzQNapdeEif
+         0kdKE9m1rwC4mhkyjtNPpTZJt1Fwsr0AFPBvqeuZsnTmTMrZWC/7jN6/C+hMv9kypoi5
+         qlbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
-        bh=y2YLB/ZfR9lpCf7IcLaIZOOBflJp1gO22GLQx/rEy9U=;
-        b=iO5ss+Ps8vt85fmSm+SO6VCgayKt1ZzCLidn6TdweDVfQAzW/sbddEBS0ghYjU0YbO
-         ClUcnv+FFHEDSpfl0PAVKFw0f3NUo/LKAFFNVj7N9TBdCrpjPLUPOSC3v4OURCxWXPgQ
-         dVV4ZHL5KffTZkdN5DTjV5v1DlqRBVl+LyqUsREmRQ/Yi27WJmzs3/z8TH4zDOmNwz23
-         ockY3QGqQNu/CmKbou7eBJcD/59Hnfg/8u1fE5p+uolAFF9aIlAEUXrLq+ihCceEu6Hc
-         BEUmbj2j7sfdH9MMROIYbnFtrpSnS7q1M7tbwbCJMBIRmX5vfyZIWPvTQCl+Lf+hOHI8
-         V1Tw==
-X-Gm-Message-State: AOAM532m8hSsA8GOjgu+YQAtAllNSoylpzJQXPDe8Zk1He9vLnSBhR7P
-	0NqlEV27R+O1eS3Ae9uKkymGE5lZ+EhXk/MCyx7ttFYUZujueCjIMSPsZjKOQlPoq3pZFCxb8Gj
-	gZVfh8vyM3ytFKrcpA/bOsV77m7YpnD+4DeUUMlQhg1XfPGzdPJNUF2pgjx/h/It43llAsh1DEq
-	uY7UA=
-X-Google-Smtp-Source: ABdhPJzsa1J5xF6u1s2T7BRoDzJ5D0Y02dCcV7phIjOYArOfyBvR/XidX6klPZX5p84sHLUflJR0rps=
-X-Received: by 2002:a62:8407:: with SMTP id k7mr16145228pfd.258.1595759232228;
- Sun, 26 Jul 2020 03:27:12 -0700 (PDT)
-Date: Sun, 26 Jul 2020 03:27:09 -0700
-Message-Id: <20200726102709.648031-1-wak@google.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.28.0.rc0.142.g3c755180ce-goog
-Subject: [meta-oe][PATCH] function2: 4.0.0 -> 4.1.0
-From: "William A. Kennington III" <wak@google.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=sJjXRHUsP2TyMko3LZj9eH9iLrnA42kZSXm2MJDV5fQ=;
+        b=PszmUCnAfnvXKLxe4Y/ai5Zd1/+mJ9qGtii9ZWQLoHLbxa4PZ/bkTJsNsPcHrGqRl8
+         YYtfUgGFsJej8u4n4V38YpjDXLFnwMDdvDTVNvBLBSJpAGEYeON08liRpXIaY0vYW/Xs
+         W9DH185pDHyX1a+k23VK9cxhPi+si3ydQl8vTJhyhROmL90Jpaa4dJMuMIo6A0fdHNv8
+         IADQ57x5of/aqI1TI1XTVVe9VflFFTrvCh1V21n5LCvYPQj8qb/DPSldE13m97DnjdBK
+         c8KJqvIsz/cbO4ocSV719MD9GHuDKTlZHzW1pJSznrwIo+NWK8gPI+6iUAoFXLi9aPb5
+         PUTQ==
+X-Gm-Message-State: AOAM533ERmD55+ywCTk/FIDj+slGEGJffvrbOt2m/awPyV3x3WCZAZz6
+	WaCFsUOZEBPSOmuKMlUNkyA2EeypiTg=
+X-Google-Smtp-Source: ABdhPJwWaT+5P29U1rt6dBs4sw+cAGeQCX3qZjun0PPyQjIYze7tkxkbLyBhB+bAK+XruhSPm5Ek3g==
+X-Received: by 2002:a19:9c2:: with SMTP id 185mr9472432lfj.113.1595759447952;
+        Sun, 26 Jul 2020 03:30:47 -0700 (PDT)
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
+        by smtp.gmail.com with ESMTPSA id 29sm601356ljv.72.2020.07.26.03.30.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 26 Jul 2020 03:30:47 -0700 (PDT)
+From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: "William A. Kennington III" <wak@google.com>
-Content-Type: text/plain; charset="UTF-8"
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-oe] lsscsi: update to 0.31
+Date: Sun, 26 Jul 2020 12:30:45 +0200
+Message-Id: <20200726103045.3995966-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: William A. Kennington III <wak@google.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../function2/{function2_4.0.0.bb => function2_4.1.0.bb}        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/function2/{function2_4.0.0.bb => function2_4.1.0.bb} (92%)
+ .../recipes-bsp/lsscsi/{lsscsi_0.30.bb => lsscsi_0.31.bb}   | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-bsp/lsscsi/{lsscsi_0.30.bb => lsscsi_0.31.bb} (63%)
 
-diff --git a/meta-oe/recipes-support/function2/function2_4.0.0.bb b/meta-oe/recipes-support/function2/function2_4.1.0.bb
-similarity index 92%
-rename from meta-oe/recipes-support/function2/function2_4.0.0.bb
-rename to meta-oe/recipes-support/function2/function2_4.1.0.bb
-index 556a25aa1..56dc30acd 100644
---- a/meta-oe/recipes-support/function2/function2_4.0.0.bb
-+++ b/meta-oe/recipes-support/function2/function2_4.1.0.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "Provides improved implementations of std::function."
- HOMEPAGE = "https://naios.github.io/function2"
- LICENSE = "BSL-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
--SRCREV = "d2acdb6c3c7612a6133cd03464ef941161258f4e"
-+SRCREV = "3a0746bf5f601dfed05330aefcb6854354fce07d"
- PV .= "+git${SRCPV}"
+diff --git a/meta-oe/recipes-bsp/lsscsi/lsscsi_0.30.bb b/meta-oe/recipes-bsp/lsscsi/lsscsi_0.31.bb
+similarity index 63%
+rename from meta-oe/recipes-bsp/lsscsi/lsscsi_0.30.bb
+rename to meta-oe/recipes-bsp/lsscsi/lsscsi_0.31.bb
+index af34cdc483..2c96de163b 100644
+--- a/meta-oe/recipes-bsp/lsscsi/lsscsi_0.30.bb
++++ b/meta-oe/recipes-bsp/lsscsi/lsscsi_0.31.bb
+@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM="file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
- SRC_URI += "gitsm://github.com/Naios/function2"
+ SRC_URI = "http://sg.danny.cz/scsi/${BP}.tgz"
+ 
+-SRC_URI[md5sum] = "298a700cd50bb4be1382d618f7b038f4"
+-SRC_URI[sha256sum] = "619a2187405f02c5f57682f3478bffc75326803cd08839e39d434250c5518b15"
++SRC_URI[md5sum] = "efb68946f51860e8eedc18d6784afdae"
++SRC_URI[sha256sum] = "12bf1973014803c6fd6d547e7594a4c049f0eef3bf5d22190d4be29d7c09f3ca"
+ 
+ inherit autotools
+ 
+-S = "${WORKDIR}/lsscsi-030r154"
++S = "${WORKDIR}/lsscsi-${PV}"
 -- 
-2.28.0.rc0.142.g3c755180ce-goog
+2.25.1
 
