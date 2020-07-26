@@ -1,81 +1,77 @@
-Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com [209.85.208.194])
- by mx.groups.io with SMTP id smtpd.web11.25753.1595753495251804658
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com [209.85.167.47])
+ by mx.groups.io with SMTP id smtpd.web11.25858.1595754053807672529
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Jul 2020 01:51:35 -0700
+ Sun, 26 Jul 2020 02:00:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=njqRBw8+;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.194, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f194.google.com with SMTP id f5so14045910ljj.10
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 01:51:34 -0700 (PDT)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=sTUrSrrE;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.47, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f47.google.com with SMTP id i80so7369157lfi.13
+        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 02:00:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=dK/FR8dNaLY8PMas2P7imtOqsbVdCgnmdFNJQza0XLQ=;
-        b=njqRBw8+gEdr2M7kpKbT4wW+7TkicN/h+VihNzypsP/aKJQ/GcuoKKLsUugj8Qsm33
-         Jbd5NoADSnZP36TdnbylC4lz6JGWAQJWpT9og9CS8mbZtj8mX89zc0M2gmrFOREdGZls
-         SdLWNdC+21ZRWxo+kTHHBR84TGfKvOO53c5AB9Xdg4iNVmyFlkp/ZFd8y5USmMmTRWwQ
-         Qt8A5YCfc90et4X7X4EYbaIoIbV9jgJ/0L9WtQo+tVhMNeY4UtiUigZtArbDd5LV6pRO
-         GdhBn9Gy2EE08+GfJQp6qeMlgA2OOoI3lbF5PCapRT7s6x5U7Rf+QEzJD3WtXxdqrhn6
-         77Xg==
+        bh=ujGDFOaAdA6KkhQT9+W6MesXIDpAdZ6roIplvwfd7rw=;
+        b=sTUrSrrEJiPGFJ1jW5i5OityWDaZ8kyXLn7Nj4O3UnRwUXpi2iuMzkM6BTaYZM6QRZ
+         I8OdMJpWz2AzqmJzrPGiPG90Ol2o31sKSbuyBQnwngQkElGbZJyLdGTIhzG97fg5FEnd
+         nI+jCgfWOjE+UIcqo9Toc5ZnG1CRm1j63SCwZw3anGDYU6BL9GeAfGiOx2N22n3mnzDi
+         xJqzrBU/X/+rDBZGSiMt/mSE1+2EP0YcDVT8C4d9QUWVSIJZrKhDt8oVskgbRPtQAfhT
+         Vaowfz1y6riS13zWXXc5GfSmZAU+Tjd1A8oFiSvaOmWd6zZ8A+dKujA3i1ssj9w7OE1A
+         R9aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=dK/FR8dNaLY8PMas2P7imtOqsbVdCgnmdFNJQza0XLQ=;
-        b=jE7dt4uxSjZ01LqVH1kc2jsBs6vUug8x/gutfV1ET/VgML4km0lNT1/e7bZr3opkUE
-         U+iZvUTkYEPHpFRgHwgyoOSUgskEwp9xnzxz32wdFXF8hx0v+OJya3Dcsbxf8t5qBVdE
-         HB8vHoQmZP2Vz01k33TSD43GIwBDzN6uGfobtwgzeVgjLhuHP9B4hoOYExbGiHDlz5Tm
-         dJGYOZscHHMe7WpbeQcF83YugM3V7ueDMr8rq+j054DDbPOguF01946SKpOqj9vPRUCb
-         mZ+xcZEBm8W6FvXUJzg9GrkIQFxmUB4mxI5FSXTxxQbwrENFZsFdAx+/Hs8nhjJhgMQG
-         0Q6w==
-X-Gm-Message-State: AOAM530NPRq9PN2JkhkufaVs6YyWOw3rm/jVNgV0oYLfpHsl+xJLzEVD
-	rNe9p1GDTMaIzJMFHmA0ynDfWROP8I0=
-X-Google-Smtp-Source: ABdhPJyZt9WhU3pHitogQVP4Hyuq+n/3FjILI1VBxtEt02yN5Op0kNYEUyXMqRfJwbye+LmzjXC4AQ==
-X-Received: by 2002:a2e:999a:: with SMTP id w26mr2506950lji.242.1595753493140;
-        Sun, 26 Jul 2020 01:51:33 -0700 (PDT)
+        bh=ujGDFOaAdA6KkhQT9+W6MesXIDpAdZ6roIplvwfd7rw=;
+        b=ZhVX0XdJLzRcizHgWMTSEshQDseYoTcTEq9eAmmyckgINSvewjyDYHZqENDWsDwBgp
+         KHAtEuRCS14/FElXNNecERVSjKa7PUyTdOMGRJZlKzYsJV+roArh4KFW3C5NlwrTtTtT
+         QnTgOBVmraOxwOVAcuqjXg7C743BljsZI+QTkOr7WxQOGj/vIstULpAGYLV0keFDFh8P
+         g9AZKt9h+LZC3NbGq93WxRrF21dOwc4Qfyg7g4pJ1C0YN7mEaA1+hJ3Mx5e/m5MxFYrg
+         2nhNnbVUxxe7yswKwExTV26y4DMdG09ffDf8jOGOCfL/RlUaO1ocA0OpUi0DlktVD34o
+         1BTA==
+X-Gm-Message-State: AOAM5330Mmr41wAAv2kpczE9laA/ZWC892+OZg09t9f9AiX1F2GgdU5m
+	Dpx7N4lqxWl4yjzExAxIO25RsPRVQa0=
+X-Google-Smtp-Source: ABdhPJyvErkXfQyCuPYGGnw9vw5iQwceEl0d1Z0pNw3F+R6V534aHlC210+sRX5w3N9rNNQXUT/7ew==
+X-Received: by 2002:ac2:4adb:: with SMTP id m27mr9318463lfp.90.1595754051405;
+        Sun, 26 Jul 2020 02:00:51 -0700 (PDT)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id c17sm2201462lfr.23.2020.07.26.01.51.31
+        by smtp.gmail.com with ESMTPSA id k25sm1695136ljk.87.2020.07.26.02.00.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 26 Jul 2020 01:51:32 -0700 (PDT)
+        Sun, 26 Jul 2020 02:00:50 -0700 (PDT)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] leptonica: update to 1.79.0
-Date: Sun, 26 Jul 2020 10:51:30 +0200
-Message-Id: <20200726085130.3712200-1-open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-oe] libvncserver: update to 0.9.13
+Date: Sun, 26 Jul 2020 11:00:44 +0200
+Message-Id: <20200726090044.3879493-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../leptonica/{leptonica_1.74.4.bb => leptonica_1.79.0.bb}  | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/leptonica/{leptonica_1.74.4.bb => leptonica_1.79.0.bb} (73%)
+ .../{libvncserver_0.9.12.bb => libvncserver_0.9.13.bb}         | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/libvncserver/{libvncserver_0.9.12.bb => libvncserver_0.9.13.bb} (96%)
 
-diff --git a/meta-oe/recipes-graphics/leptonica/leptonica_1.74.4.bb b/meta-oe/recipes-graphics/leptonica/leptonica_1.79.0.bb
-similarity index 73%
-rename from meta-oe/recipes-graphics/leptonica/leptonica_1.74.4.bb
-rename to meta-oe/recipes-graphics/leptonica/leptonica_1.79.0.bb
-index 249e96f168..a6de1f7956 100644
---- a/meta-oe/recipes-graphics/leptonica/leptonica_1.74.4.bb
-+++ b/meta-oe/recipes-graphics/leptonica/leptonica_1.79.0.bb
-@@ -3,9 +3,11 @@ DEPENDS = "jpeg tiff libpng zlib"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://leptonica-license.txt;md5=34aa579294e8284b7b848c8d5d361e8f"
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.13.bb
+similarity index 96%
+rename from meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
+rename to meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.13.bb
+index dfdf82458c..11bba430e7 100644
+--- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.13.bb
+@@ -45,8 +45,7 @@ FILES_libvncclient = "${libdir}/libvncclient.*"
+ inherit cmake
  
-+UPSTREAM_CHECK_URI = "https://github.com/DanBloomberg/leptonica/releases"
-+
- SRC_URI = "http://www.leptonica.org/source/leptonica-${PV}.tar.gz"
--SRC_URI[md5sum] = "4f32be9bd2e2c142ba018037ab5d746f"
--SRC_URI[sha256sum] = "29c35426a416bf454413c6fec24c24a0b633e26144a17e98351b6dffaa4a833b"
-+SRC_URI[md5sum] = "a545654b1dae7d29e2ea346b29095f84"
-+SRC_URI[sha256sum] = "045966c9c5d60ebded314a9931007a56d9d2f7a6ac39cb5cc077c816f62300d8"
+ SRC_URI = "git://github.com/LibVNC/libvncserver"
+-SRCREV = "1354f7f1bb6962dab209eddb9d6aac1f03408110"
+-PV .= "+git${SRCPV}"
++SRCREV = "2aa20dad4c23c18948d3f63b33f9dfec1f837729"
  
- EXTRA_OECONF += " \
-     --without-libwebp \
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.25.1
 
