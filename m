@@ -1,91 +1,78 @@
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
- by mx.groups.io with SMTP id smtpd.web11.27918.1595766290584401533
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com [209.85.167.67])
+ by mx.groups.io with SMTP id smtpd.web12.28071.1595767011851825459
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Jul 2020 05:24:51 -0700
+ Sun, 26 Jul 2020 05:36:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=Y7plxZ6N;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.53, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f53.google.com with SMTP id d2so1884026lfj.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 05:24:50 -0700 (PDT)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=AjUwDuWJ;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.67, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f67.google.com with SMTP id s9so7534538lfs.4
+        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 05:36:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=82oTMHkx4KUkNpiMGHF+bQZ+tX2SsXtZ3l3KIbak0a8=;
-        b=Y7plxZ6N1pI7pvhHY9DepcfSI+zHJfq6MuPF8mP4co0HkQ+GgMnLBsJdfy/8e0I32P
-         JQ+HeUWrHLlKf5IIjXDbrlNWasiLG7HHE8SOULGPB5Co8s11eQzlEOamgKA2N+rvWA+D
-         KpkVpa5q16RzH7AG7HWjJ15v6PxPQXWF8OTWWbzlpkX1mvvIpSLQu12P/++t3kbHZtxs
-         II1bFICCstnjskJwTZwizu99wg5YbIb/OFSIImw0r2FuG1vUrjYcN6bOO2kAZ00YcdGu
-         Ug8ATGaVQpILZHsm6QNf1unfqpzFCUDDbpGjctHgF0n/KzPfEtKswL3xXmm6NSFpOEjp
-         p28w==
+        bh=e0/BV4xA4+f4KS6Nh5xNCKSzIFouumZfQQNQ0jo2uqY=;
+        b=AjUwDuWJREv9Fw1E8QSB6ciakelga7W3a0cJ0aJKQhzRATunGcBi4U9XlRFmdp1+hA
+         y6/+/vhbIDNabR5ft1T0VojevUMiHECSKO9TIUZMf/gyYGvxk4MhlQbm2ftTQFH5PBCY
+         uDbBuh8GX3mNBToO2BmgA0nsgKQIcBAyESS74HjG+hPOl6XAFmsGfN0JqJ6ZeFId+8Fs
+         YxKIHJTuTVMLpJHK8fFfx1E+hzYgQqmfjw9hZYu2elLnc0+K3KRuFueSkdyic3t4uL5P
+         JiZtUF88kGIwahD95gHwzfFoM0nC/hkWVlUWL0mqOxw4VasmqhHX//NP0X/9AZzUOMBP
+         sc+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=82oTMHkx4KUkNpiMGHF+bQZ+tX2SsXtZ3l3KIbak0a8=;
-        b=fEKqML4UpnhNWrb+sE+hc+6R1D/RzhJ/VRQoW8TzWGZ0LeBNICVfJ07+Iew3dcg0PB
-         d3h5cgWFp11oXC+/Og9wYWc0H7LocmLwcpgrlI+uAs5M6Rkt38aImCFRAU8yy8eXsbu9
-         6DrOlCDilLmPMEvq1yNBnMBxNb7xFHi3d2BxJJuYlVUn8/1ePfiS1A36/iCxi7XToSZO
-         3nWbZ6q4jftzPmZcFZxjB8MOgvnZErHm1P1lxiZIkjVelfll3sLrA4lgAmKgfLOQ9Hbl
-         PNe/rgLKHSUW1x3vvMwz2w4zN+2YsjmktNDtgoa7Mn7xzMZzSRRypRY4ilSZ0DDiGnFJ
-         9qFQ==
-X-Gm-Message-State: AOAM532T+Pmu4zVQ3xCWR50iJjbYXIfYSUV+qFu8RNAWN9C8serN0gJe
-	C+EZyEsHkBKIGbvTKWXMuuCax/Gu50I=
-X-Google-Smtp-Source: ABdhPJwA3It44UW7Ql8QIRuN1okUSW46mNWFBS5zkLbK9iHCH/YgmZbVD4bgwjTBPuJGxnX9Qx77Eg==
-X-Received: by 2002:a19:8295:: with SMTP id e143mr9207832lfd.95.1595766288346;
-        Sun, 26 Jul 2020 05:24:48 -0700 (PDT)
+        bh=e0/BV4xA4+f4KS6Nh5xNCKSzIFouumZfQQNQ0jo2uqY=;
+        b=cuZwXP8mftvK8aq/haFeRx4dw4UFQdXJ0bB9JYhMqe2JkqHdKrPuSRcn2grdpOtOTE
+         k/BvYyKWkNaZwxG8iFAH+1pB5YQ98MmR1jstsJOn1FWIP0vDrRR79gJz69WHYU7Bk6zl
+         PyFdq/h++MS4RG419XpRpPpVqoaEehYM8ua9uo/6puKZFoYMO3azzL69nPfoADgIJu5T
+         R56poy0LRQtokQdztaeDg2NRc+JNZu1OaS9okE9U4FLHQWkUaavM+c8LdLKloZBXNzoF
+         sgd0WffdEMmQwPTeQrXT0y3sahRXU+XZ7HxK6+6+8vBnBl+6dfxhTmP/8qCBbOE5jCi4
+         qm5Q==
+X-Gm-Message-State: AOAM5311v4wBpFnsYHCgBH+YHqpYPXT3VOHYCWaSdgfmVx135sC+CXV2
+	ivh2mnEQPb4P5RNnZw1p3EVh2ZTHYys=
+X-Google-Smtp-Source: ABdhPJzxTZ2aNNw9Uo3qRWNW7mRSdBspD7wYGEaAB81Se8NhLYtPl6RbMzns0jkhQ4uBm7d/eL0QsA==
+X-Received: by 2002:a19:834f:: with SMTP id f76mr8774594lfd.25.1595767009689;
+        Sun, 26 Jul 2020 05:36:49 -0700 (PDT)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id m26sm715584ljc.129.2020.07.26.05.24.47
+        by smtp.gmail.com with ESMTPSA id a19sm2321886lff.25.2020.07.26.05.36.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 26 Jul 2020 05:24:47 -0700 (PDT)
+        Sun, 26 Jul 2020 05:36:48 -0700 (PDT)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] keepalived: update to 2.1.5
-Date: Sun, 26 Jul 2020 14:24:46 +0200
-Message-Id: <20200726122446.31940-1-open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-oe] doxygen: update to 1.8.18
+Date: Sun, 26 Jul 2020 14:36:46 +0200
+Message-Id: <20200726123646.34005-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Removed config argument does not exist anymore (see
-@05443e1efa3569fcd39a).
-
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{keepalived_2.0.20.bb => keepalived_2.1.5.bb}          | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-daemons/keepalived/{keepalived_2.0.20.bb => keepalived_2.1.5.bb} (88%)
+ .../doxygen/{doxygen_1.8.17.bb => doxygen_1.8.18.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/doxygen/{doxygen_1.8.17.bb => doxygen_1.8.18.bb} (79%)
 
-diff --git a/meta-networking/recipes-daemons/keepalived/keepalived_2.0.20.bb b/meta-networking/recipes-daemons/keepalived/keepalived_2.1.5.bb
-similarity index 88%
-rename from meta-networking/recipes-daemons/keepalived/keepalived_2.0.20.bb
-rename to meta-networking/recipes-daemons/keepalived/keepalived_2.1.5.bb
-index f3c33dcb80..1230fcaee2 100644
---- a/meta-networking/recipes-daemons/keepalived/keepalived_2.0.20.bb
-+++ b/meta-networking/recipes-daemons/keepalived/keepalived_2.1.5.bb
-@@ -11,8 +11,10 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.18.bb
+similarity index 79%
+rename from meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb
+rename to meta-oe/recipes-devtools/doxygen/doxygen_1.8.18.bb
+index 45de718265..f3562b54fc 100644
+--- a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb
++++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.18.bb
+@@ -10,8 +10,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
+            file://0001-build-don-t-look-for-Iconv.patch \
+ "
+ SRC_URI_append_class-native = " file://doxygen-native-only-check-python3.patch"
+-SRC_URI[md5sum] = "7997a15c73a8bd6d003eaba5c2ee2b47"
+-SRC_URI[sha256sum] = "2cba988af2d495541cbbe5541b3bee0ee11144dcb23a81eada19f5501fd8b599"
++SRC_URI[md5sum] = "eda8e82fcc58970894029b0399776cb5"
++SRC_URI[sha256sum] = "18173d9edc46d2d116c1f92a95d683ec76b6b4b45b817ac4f245bb1073d00656"
  
- SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz"
--SRC_URI[md5sum] = "a5966e8433b60998709c4a922a407bac"
--SRC_URI[sha256sum] = "9670fbc5eb3dc113828be8b702549dc68ec9578cf83287520d935be76fc8f193"
-+SRC_URI[md5sum] = "27e1cfff5b8dd95062ad415957e663e5"
-+SRC_URI[sha256sum] = "d94d7ccbc5c95ab39c95a0e5ae89a25a224f39b6811f2930d3a1885a69732259"
-+
-+UPSTREAM_CHECK_URI = "https://github.com/acassen/keepalived/releases"
+ inherit cmake python3native
  
- DEPENDS = "libnfnetlink openssl"
- 
-@@ -25,7 +27,6 @@ PACKAGECONFIG[libnl] = "--enable-libnl,--disable-libnl,libnl"
- PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp"
- PACKAGECONFIG[systemd] = "--with-init=systemd --with-systemdsystemunitdir=${systemd_system_unitdir},--with-init=SYSV,systemd"
- 
--EXTRA_OECONF = "--disable-libiptc"
- EXTRA_OEMAKE = "initdir=${sysconfdir}/init.d"
- 
- do_install_append() {
 -- 
 2.25.1
 
