@@ -1,78 +1,71 @@
-Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com [209.85.208.170])
- by mx.groups.io with SMTP id smtpd.web12.26374.1595757836938154208
+Received: from mail-pj1-f74.google.com (mail-pj1-f74.google.com [209.85.216.74])
+ by mx.groups.io with SMTP id smtpd.web10.26422.1595759233241111647
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Jul 2020 03:03:57 -0700
+ Sun, 26 Jul 2020 03:27:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=sPkSlkPG;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.170, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f170.google.com with SMTP id d17so14148299ljl.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 03:03:56 -0700 (PDT)
+ dkim=pass header.i=@google.com header.s=20161025 header.b=tRTlZCM/;
+ spf=pass (domain: flex--wak.bounces.google.com, ip: 209.85.216.74, mailfrom: 3gfodxwmkakkfjtpxxpun.lxv@flex--wak.bounces.google.com)
+Received: by mail-pj1-f74.google.com with SMTP id jx16so9769307pjb.6
+        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 03:27:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3P43a8P6THn62eJsLx35iKxw55rqmaNHVw6F8Gaq4yU=;
-        b=sPkSlkPGwI8pmJARvIQY444FxEJP9UQKaBZuoRIRcQWdrToASWip1LuF/7z35oB17n
-         +4CsjfWFSSmb4Pabm7PcwPMJQqFYlkT3r8IqMQ5l0SUJVWeruFE2RpotkWvE0yD9ifz0
-         ympQFca7ZsVj6Dq7lJU2EZNznpfu8EaYNeuyJsp8SCzvGtSDlJmjx5pe5/vPaqICWIPR
-         dLdLclGhz5qKAF+Jo7HHab/fFnTccFUKmZXVQtEy3KR0ZkCks0It8zb7udlAVyqOCQ2p
-         +25nTxEhV02p+bx8JMGFvpriz1AO2PI+cSC9ipZ6TRHdeOUBdPZxQEWLiKWB9HkgOLZk
-         BIEQ==
+        d=google.com; s=20161025;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=y2YLB/ZfR9lpCf7IcLaIZOOBflJp1gO22GLQx/rEy9U=;
+        b=tRTlZCM/XwG8/R/XXAJIE/tWiHDjXypuQhrGLXYB6EqCkmdPw2MJjXEGGnYvtaqA7s
+         igJk80e6jK5pbWuqPbRDoMf+hPceTjPXQ4MF4XN6LDdJoQTR9koODeEUleK7OHVGAWtq
+         cLi70OpmpEMaOO9rap2BFV06Cd+VKctMSsDFfleUt3sl4YyynSs4eQZ9DH1R5YIBDyAp
+         Mh20bLbeDDeY623v8WHGvzR6jvFZ/HUW2JmS//cxmaHEDD79KBx+75ZPiaQVT1NHVwMz
+         pCXu2o3//9e/H/yDxnRUZyiazE3KXZlqiGVbs6/ObXw0ubsizyepOt6DOr0TLxE3V5/m
+         bSsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3P43a8P6THn62eJsLx35iKxw55rqmaNHVw6F8Gaq4yU=;
-        b=DmZi3DOx4/pZ7VzYxGD7e8jPrgVFJWSf2bsmZrcEpyAqHw9jlznAYDidRtFrC5NC76
-         rJQjz0es5M6EEbo+UzToisTxmtXqTljlp/MdYQKhKDksn1u30frxZeiisQ+Y44T/4gM6
-         nnvwzF/IOsUVQTSPOklESUlnWdwBL6UXL+v37+gnwY14Gm57SqRxVwUq6euayRnkjDWp
-         hh4ZYMIhxzXjssKrY+4ONclPuMV5kbx+enf3OalHJHGbuXtFhk8d5Ubw3URcZWuVoGPv
-         dtKSmWMP2nLTZw1LURQrxOSqWPlnXaLhVpSSbTJ2yzV3nlfWoE6ek4FbnHXsIPFVkAAH
-         gYSA==
-X-Gm-Message-State: AOAM530uZR1Oazfz4dxUZEHAZ0bCV43b+Y4ZZut23MnkpBxD9t1xepZd
-	Eqdecs3dQXEF8GnKI9g9shnMWKdXzlM=
-X-Google-Smtp-Source: ABdhPJydIQeSBm/jznowJ2Evs5I0rZ1X6kmw8rg450L7JzLa1EASNRtVNEx07YENohWlabrlcIkOWQ==
-X-Received: by 2002:a2e:9a82:: with SMTP id p2mr7862128lji.129.1595757834683;
-        Sun, 26 Jul 2020 03:03:54 -0700 (PDT)
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id e69sm2243995lfd.21.2020.07.26.03.03.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 26 Jul 2020 03:03:54 -0700 (PDT)
-From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=y2YLB/ZfR9lpCf7IcLaIZOOBflJp1gO22GLQx/rEy9U=;
+        b=iO5ss+Ps8vt85fmSm+SO6VCgayKt1ZzCLidn6TdweDVfQAzW/sbddEBS0ghYjU0YbO
+         ClUcnv+FFHEDSpfl0PAVKFw0f3NUo/LKAFFNVj7N9TBdCrpjPLUPOSC3v4OURCxWXPgQ
+         dVV4ZHL5KffTZkdN5DTjV5v1DlqRBVl+LyqUsREmRQ/Yi27WJmzs3/z8TH4zDOmNwz23
+         ockY3QGqQNu/CmKbou7eBJcD/59Hnfg/8u1fE5p+uolAFF9aIlAEUXrLq+ihCceEu6Hc
+         BEUmbj2j7sfdH9MMROIYbnFtrpSnS7q1M7tbwbCJMBIRmX5vfyZIWPvTQCl+Lf+hOHI8
+         V1Tw==
+X-Gm-Message-State: AOAM532m8hSsA8GOjgu+YQAtAllNSoylpzJQXPDe8Zk1He9vLnSBhR7P
+	0NqlEV27R+O1eS3Ae9uKkymGE5lZ+EhXk/MCyx7ttFYUZujueCjIMSPsZjKOQlPoq3pZFCxb8Gj
+	gZVfh8vyM3ytFKrcpA/bOsV77m7YpnD+4DeUUMlQhg1XfPGzdPJNUF2pgjx/h/It43llAsh1DEq
+	uY7UA=
+X-Google-Smtp-Source: ABdhPJzsa1J5xF6u1s2T7BRoDzJ5D0Y02dCcV7phIjOYArOfyBvR/XidX6klPZX5p84sHLUflJR0rps=
+X-Received: by 2002:a62:8407:: with SMTP id k7mr16145228pfd.258.1595759232228;
+ Sun, 26 Jul 2020 03:27:12 -0700 (PDT)
+Date: Sun, 26 Jul 2020 03:27:09 -0700
+Message-Id: <20200726102709.648031-1-wak@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.28.0.rc0.142.g3c755180ce-goog
+Subject: [meta-oe][PATCH] function2: 4.0.0 -> 4.1.0
+From: "William A. Kennington III" <wak@google.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] broadcom-bt-firmware: update to 12.0.1.1105_p2
-Date: Sun, 26 Jul 2020 12:03:52 +0200
-Message-Id: <20200726100352.3964129-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: "William A. Kennington III" <wak@google.com>
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Signed-off-by: William A. Kennington III <wak@google.com>
 ---
- ...firmware_git.bb => broadcom-bt-firmware_12.0.1.1105_p2.bb} | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
- rename meta-oe/recipes-kernel/broadcom-bt-firmware/{broadcom-bt-firmware_git.bb => broadcom-bt-firmware_12.0.1.1105_p2.bb} (96%)
+ .../function2/{function2_4.0.0.bb => function2_4.1.0.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/function2/{function2_4.0.0.bb => function2_4.1.0.bb} (92%)
 
-diff --git a/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_git.bb b/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p2.bb
-similarity index 96%
-rename from meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_git.bb
-rename to meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p2.bb
-index 8c474ecdc4..010bbcb4b4 100644
---- a/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_git.bb
-+++ b/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p2.bb
-@@ -10,9 +10,7 @@ NO_GENERIC_LICENSE[Firmware-Broadcom-WIDCOMM] = "LICENSE.broadcom_bcm20702"
+diff --git a/meta-oe/recipes-support/function2/function2_4.0.0.bb b/meta-oe/recipes-support/function2/function2_4.1.0.bb
+similarity index 92%
+rename from meta-oe/recipes-support/function2/function2_4.0.0.bb
+rename to meta-oe/recipes-support/function2/function2_4.1.0.bb
+index 556a25aa1..56dc30acd 100644
+--- a/meta-oe/recipes-support/function2/function2_4.0.0.bb
++++ b/meta-oe/recipes-support/function2/function2_4.1.0.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Provides improved implementations of std::function."
+ HOMEPAGE = "https://naios.github.io/function2"
+ LICENSE = "BSL-1.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
+-SRCREV = "d2acdb6c3c7612a6133cd03464ef941161258f4e"
++SRCREV = "3a0746bf5f601dfed05330aefcb6854354fce07d"
+ PV .= "+git${SRCPV}"
  
- LIC_FILES_CHKSUM = "file://LICENSE.broadcom_bcm20702;md5=c0d5ea0502b00df74173d0f8a48b619d"
- SRC_URI = "git://github.com/winterheart/broadcom-bt-firmware.git"
--SRCREV = "c0bd928b8ae5754b6077c99afe6ef5c949a58f32"
--PE = "1"
--PV = "0.0+git${SRCPV}"
-+SRCREV = "1af1116f73782951bd7bbe2139928e497c3a634b"
- 
- S = "${WORKDIR}/git"
- 
+ SRC_URI += "gitsm://github.com/Naios/function2"
 -- 
-2.25.1
+2.28.0.rc0.142.g3c755180ce-goog
 
