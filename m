@@ -1,50 +1,50 @@
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
- by mx.groups.io with SMTP id smtpd.web12.40009.1595802910465654920
+Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com [209.85.208.68])
+ by mx.groups.io with SMTP id smtpd.web10.40058.1595802911439342709
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Jul 2020 15:35:10 -0700
+ Sun, 26 Jul 2020 15:35:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=mtgD38FF;
- spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f53.google.com with SMTP id q4so7522213edv.13
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 15:35:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=bsu2ejqT;
+ spf=pass (domain: gmail.com, ip: 209.85.208.68, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f68.google.com with SMTP id m20so1264071eds.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 15:35:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=0P+eLBKOR6OjA1gHt7X70YOvNvCKfUH/IhsU+2HNNJk=;
-        b=mtgD38FFUNm801NF+J8n1WTVAiNTwo/X4sAPtRBETfOJEXvM3QBsPzf0CSZrWp6Bh4
-         VIOJIzlw4QWruMhnk8YasU9xw582LFXupeF6y6eLHV8unzpX2iKayGnVGS385tbukEWE
-         hAklGuc1feGrvXcFYRUetnxqvwrCVEN+lVL2pgi+u8OaNb/PrH4LXlXZemqM85Z/GEo5
-         kW7kmxqS7eRfWv2f9PKKo94Gijy8iZA8sMo5QnFin6M7S3CGLzHw/g4o///G7HrMn18u
-         14LrkRRfWjstqRbkHtmKwwOi40BRWuxnK+xqkU0NGy6ei8nC6hqMxRmMxC4KV8sIidFp
-         xuEQ==
+        bh=LyWh129Wm7bElDGLzQ7TqOUBjN97zH8QWaHCYK4aPWQ=;
+        b=bsu2ejqTsqEkx+/Yv6za/cDViT+hrmjw5KE1tdAY+0OXClDkXxWg4cBDPgfH6dkiPh
+         2qcbl7KfkSSAhAq+Af/AwpNDhF+mRTkKQqj0ESMOXfPAiresk104ZhlBuALSavGIySSk
+         LKDt97SEi7RUfVA0t+0VRdm8bfhDstylilVfbGapckfz3XfL6YU2cu3nF56KvNllFRqB
+         nEk9GUq5Mg1to/nkCq8ZKzBTIxeRBI/L6rFyzC3eZnJI5b5ahISjIYm73cCTvL1cmTLE
+         hFyWv2j/VlmlNwugGvwP+KXOGlDtt+vSwcRDJqk49IVUJvvdGvTso2SgdKzjDgs1uCQt
+         WXxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=0P+eLBKOR6OjA1gHt7X70YOvNvCKfUH/IhsU+2HNNJk=;
-        b=QGZmwewwMW9axo13ysuvuYkfOS3Ku3LvINSx1pHPpn6OF0RzqjIR7xbazWKlV9zve6
-         UhgvHAWoTVkFcf5Og686A5UNK9XHyABeYzlvIzxdgRe67jwBzmNx+RUD1OoFyBd9+iO9
-         0xD/wEgo6lcbf3IlE/aXeTUJ6liinh+ZYSOh4K73QdgmPacy2BIznlzOPOJY6mLCL3Mt
-         zej754pQe4SkN2WIP3SPoa364mliWSi7osX03qp0y/2h8u1sE/gT1a0a3oVCwZqF4l17
-         ZeemVcLyUiwPgSsT8nrfYKHnzihu42MuNMsPKsnluWzC68em0DA2Zu2nQIkeL9J+HA+x
-         4mGw==
-X-Gm-Message-State: AOAM531Hrhk/Bz0tRP0xM+ZE0Y+dm49qbndvbFfOHnl3gZu4LqpfWzab
-	2f9J0h3jAMINqvZBDcLDzKeUyFjU
-X-Google-Smtp-Source: ABdhPJyzaIeMpog0jy6kWJkUTFvJ/CI1T//TMhajFYrGDapCe3GbCwpvBnuzOBPHW85ggLMtpSCWoQ==
-X-Received: by 2002:a05:6402:1494:: with SMTP id e20mr18485336edv.2.1595802908783;
-        Sun, 26 Jul 2020 15:35:08 -0700 (PDT)
+        bh=LyWh129Wm7bElDGLzQ7TqOUBjN97zH8QWaHCYK4aPWQ=;
+        b=D9nRAR7baWcK+PYZDfnQp0SWpMas8JNGjK5LM1ouY+KM7OAka/zztsOLIUO6S6Zd/P
+         nQ7qJQnKZ6bwFos2FllAjvZVHr3MpTQwoXhBpaM4itA4HMTtAXYFumVbOHSpD7i/HQBP
+         XqEPzCNJnGe1ERyQ4wv3mbDMBYtnrCZW0bwcuDtHyNO1PqXiU3ghjYfmzPO2WQpCms9z
+         +j0LRHO02/o6z3i14hF57TS+QsQoaAC6l5NzJcR0gwnPR4rmeulM/WljjeQ8QC8JniDy
+         ufeQU3zAdtIdkPOyILG+624ItvRiVwAzJmoKdSJ5qeLW7gFMApda4w1Ygoy3cH2Kq9sh
+         ApBA==
+X-Gm-Message-State: AOAM5334K1Fa+ZXDI8FvAsUM8gDZU9sXem46TxkgBsxCP9mNze9cCt+S
+	Nlvxdfvklxnck2+o8FuSY2gtZ1JP
+X-Google-Smtp-Source: ABdhPJzusnKt86gvkRUJV49VG4vuMuE6jwv3sU5BbF5Awfz49abIOzhSCz8PHkO9UnCdbXpBoiQ8Eg==
+X-Received: by 2002:a50:d8c2:: with SMTP id y2mr18597155edj.114.1595802909806;
+        Sun, 26 Jul 2020 15:35:09 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f46e203fabf36e58663abdc.dip0.t-ipconnect.de. [2003:f0:7f46:e203:fabf:36e5:8663:abdc])
-        by smtp.gmail.com with ESMTPSA id x64sm6404096edc.95.2020.07.26.15.35.07
+        by smtp.gmail.com with ESMTPSA id x64sm6404096edc.95.2020.07.26.15.35.08
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 26 Jul 2020 15:35:08 -0700 (PDT)
+        Sun, 26 Jul 2020 15:35:09 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 04/10] gnome-desktop3: upgrade 3.36.3.1 -> 3.36.4
-Date: Mon, 27 Jul 2020 00:34:49 +0200
-Message-Id: <20200726223455.333001-4-schnitzeltony@gmail.com>
+Subject: [PATCH 05/10] evolution-data-server: upgrade 3.36.3 -> 3.36.4
+Date: Mon, 27 Jul 2020 00:34:50 +0200
+Message-Id: <20200726223455.333001-5-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200726223455.333001-1-schnitzeltony@gmail.com>
 References: <20200726223455.333001-1-schnitzeltony@gmail.com>
@@ -52,37 +52,43 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-===============
-Version 3.36.4
-===============
+Evolution-Data-Server 3.36.4 2020-07-03
+---------------------------------------
 
-- tests: Don't run at build-time
-- Translation updates
+Bug Fixes:
+	I#215 - Utilize If-None-Match header for WebCal refresh (Milan Crha)
+	I#222 - Camel: Match-All condition doesn't show any messages (Milan Crha)
+	I#226 - CVE-2020-14928: Response Injection via STARTTLS in SMTP and POP3 (Milan Crha)
+	I#228 - Restarting evolution-source-registry re-enables user-disabled CalDAV accounts (Milan Crha)
+	evo-I#982 - 'Message contains'-search broken in 3.36.3 (Milan Crha)
+
+Miscellaneous:
+	camel-folder-search: Fix a memory leak when searching message body (Milan Crha)
+	Rename camel_stream_buffer_truncate() to camel_stream_buffer_discard_cache() (Milan Crha)
+
+Translations:
+	Baurzhan Muftakhidinov (kk)
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{gnome-desktop3_3.36.3.1.bb => gnome-desktop3_3.36.4.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-desktop/{gnome-desktop3_3.36.3.1.bb => gnome-desktop3_3.36.4.bb} (88%)
+ .../evolution-data-server/evolution-data-server.inc         | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.3.1.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.4.bb
-similarity index 88%
-rename from meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.3.1.bb
-rename to meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.4.bb
-index b7ef7545a..6b0c53566 100644
---- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.3.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.4.bb
-@@ -16,8 +16,8 @@ inherit gnomebase itstool pkgconfig upstream-version-is-even gobject-introspecti
- REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
- UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
+diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
+index 6150df167..8276ce25a 100644
+--- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
++++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
  
--SRC_URI[archive.md5sum] = "75e828342e51c88c866dcdd46c021d26"
--SRC_URI[archive.sha256sum] = "4bed119fa25ea0ff7880928142365c3c8726585fc072bc147157e66b63e96b7e"
-+SRC_URI[archive.md5sum] = "285d5d8a97b7564809151d401199c239"
-+SRC_URI[archive.sha256sum] = "007bbd48c1ca2fcb184713c923174c1d4328c3e33a2271ca536bdd3b71229bc6"
+ inherit gnomebase upstream-version-is-even
  
- SRC_URI += " \
-     file://gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch \
+-SRC_URI[archive.md5sum] = "4990dbdbf5850cbbfc46727367776058"
+-SRC_URI[archive.sha256sum] = "1f5f48173d0f288219d73d4f193cb921ae631932ba84030f05751c42bb003db2"
+-PV = "3.36.3"
++SRC_URI[archive.md5sum] = "30282c322622a5a2d4b4a26eee661af4"
++SRC_URI[archive.sha256sum] = "39f83f1eee65c18785dfc2594720d5150e3fc37ea57e7b3b9bc2c40b4d3e4c0f"
++PV = "3.36.4"
+ 
 -- 
 2.26.2
 
