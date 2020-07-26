@@ -1,50 +1,50 @@
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
- by mx.groups.io with SMTP id smtpd.web12.40007.1595802909564073641
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
+ by mx.groups.io with SMTP id smtpd.web12.40009.1595802910465654920
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 26 Jul 2020 15:35:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=IkI70jse;
- spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f41.google.com with SMTP id g7so6888646ejw.12
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 15:35:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=mtgD38FF;
+ spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f53.google.com with SMTP id q4so7522213edv.13
+        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 15:35:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=6jsoshr0ZNqwUJN2wz4d1Yul0dL6U4Au7lyA4cgB3QA=;
-        b=IkI70jse0WPnz3Wwr7hcdBcQEwoG3Vx1ZDblgk0kUEg16XBywrUfWTtV1R5uaZAY3K
-         BBajd4VVOIt7Wf3c18XqMRLagy5dsLmBhZZmPHBbC7ZPhfRS5DJKEzLKj96jhpP7Ni05
-         6Gwquhe2MqvnzsNVj5HSPGYxYLL3tQLQXldQOX9pUoTY5ZcDpRrxuhfSkFQBvOMKtGQm
-         vBm4RKa/dVFex14IaxSqHDJdxNKKn31lrlWeIhAYNo15bfF7Xk303+h1zLymhFYUdad1
-         dmpOqNvZdNYv470Jp9WDj3boP+7n/S48ZRX/fzL0weuI9U0eACv4NmbjrnZ0wgAiTcH/
-         h4qA==
+        bh=0P+eLBKOR6OjA1gHt7X70YOvNvCKfUH/IhsU+2HNNJk=;
+        b=mtgD38FFUNm801NF+J8n1WTVAiNTwo/X4sAPtRBETfOJEXvM3QBsPzf0CSZrWp6Bh4
+         VIOJIzlw4QWruMhnk8YasU9xw582LFXupeF6y6eLHV8unzpX2iKayGnVGS385tbukEWE
+         hAklGuc1feGrvXcFYRUetnxqvwrCVEN+lVL2pgi+u8OaNb/PrH4LXlXZemqM85Z/GEo5
+         kW7kmxqS7eRfWv2f9PKKo94Gijy8iZA8sMo5QnFin6M7S3CGLzHw/g4o///G7HrMn18u
+         14LrkRRfWjstqRbkHtmKwwOi40BRWuxnK+xqkU0NGy6ei8nC6hqMxRmMxC4KV8sIidFp
+         xuEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=6jsoshr0ZNqwUJN2wz4d1Yul0dL6U4Au7lyA4cgB3QA=;
-        b=a4QMIGXJtD1eyYCcT8XUc+lbNP8nMqqKdJDGv6owFLs44QTae3+EECHYgRyULQ1i9g
-         KKpspdXUkUcwqwFQcrSkgrjwo5GZgp/92HSHZ4XIswDzOvq1aDB/D5QLoQLjL2HUfAfc
-         osCbAiPPrVJmNCF0z5QJvDhxfKCh6phKh/DjWKRbEIxwuqu1mDVufADwE7pAg32ViP4r
-         ntEvvai4jukyXDdgy5LWxzK0Ap6+epYnalZlV5iakETyAd7Y7FUiCDnWg4tP9SpZBWO0
-         WCWx8xRYScBBJsGYveUGAgxa4IqEnI0J4dL5aV5/GM+SR03Ji/Fi/G7GKuJIV/9RALUA
-         i7hQ==
-X-Gm-Message-State: AOAM533YFlzIIMrojHmVbFLfhCypOY9QbfEl09pZ80zdZXDIlN30/9X2
-	KdmrXwX9Gm8l0nBmAPK71+5kOPKC
-X-Google-Smtp-Source: ABdhPJy0XTJACWxkObgCaEZnkcuPx6tWxP4aIkoi2ZTPWrVUlkBAYriERlLejs6Aa3VV/wvVT9NdXA==
-X-Received: by 2002:a17:906:8608:: with SMTP id o8mr17279970ejx.156.1595802907859;
-        Sun, 26 Jul 2020 15:35:07 -0700 (PDT)
+        bh=0P+eLBKOR6OjA1gHt7X70YOvNvCKfUH/IhsU+2HNNJk=;
+        b=QGZmwewwMW9axo13ysuvuYkfOS3Ku3LvINSx1pHPpn6OF0RzqjIR7xbazWKlV9zve6
+         UhgvHAWoTVkFcf5Og686A5UNK9XHyABeYzlvIzxdgRe67jwBzmNx+RUD1OoFyBd9+iO9
+         0xD/wEgo6lcbf3IlE/aXeTUJ6liinh+ZYSOh4K73QdgmPacy2BIznlzOPOJY6mLCL3Mt
+         zej754pQe4SkN2WIP3SPoa364mliWSi7osX03qp0y/2h8u1sE/gT1a0a3oVCwZqF4l17
+         ZeemVcLyUiwPgSsT8nrfYKHnzihu42MuNMsPKsnluWzC68em0DA2Zu2nQIkeL9J+HA+x
+         4mGw==
+X-Gm-Message-State: AOAM531Hrhk/Bz0tRP0xM+ZE0Y+dm49qbndvbFfOHnl3gZu4LqpfWzab
+	2f9J0h3jAMINqvZBDcLDzKeUyFjU
+X-Google-Smtp-Source: ABdhPJyzaIeMpog0jy6kWJkUTFvJ/CI1T//TMhajFYrGDapCe3GbCwpvBnuzOBPHW85ggLMtpSCWoQ==
+X-Received: by 2002:a05:6402:1494:: with SMTP id e20mr18485336edv.2.1595802908783;
+        Sun, 26 Jul 2020 15:35:08 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f46e203fabf36e58663abdc.dip0.t-ipconnect.de. [2003:f0:7f46:e203:fabf:36e5:8663:abdc])
-        by smtp.gmail.com with ESMTPSA id x64sm6404096edc.95.2020.07.26.15.35.06
+        by smtp.gmail.com with ESMTPSA id x64sm6404096edc.95.2020.07.26.15.35.07
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 26 Jul 2020 15:35:07 -0700 (PDT)
+        Sun, 26 Jul 2020 15:35:08 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 03/10] xfce4-timer-plugin: upgrade 1.7.0 -> 1.7.1
-Date: Mon, 27 Jul 2020 00:34:48 +0200
-Message-Id: <20200726223455.333001-3-schnitzeltony@gmail.com>
+Subject: [PATCH 04/10] gnome-desktop3: upgrade 3.36.3.1 -> 3.36.4
+Date: Mon, 27 Jul 2020 00:34:49 +0200
+Message-Id: <20200726223455.333001-4-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200726223455.333001-1-schnitzeltony@gmail.com>
 References: <20200726223455.333001-1-schnitzeltony@gmail.com>
@@ -52,49 +52,37 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes for 1.7.1
-=======================
-- Update URLs from goodies.x.o to docs.x.o (Bug #16180)
-- Do not recreate box when orientation changes
-- Remove unused eventbox
-- Avoid square-sized plugin (Bug #16101)
-- Remove unused variables and function
-- Resolve GCC warning: ISO C90 forbids mixed declarations and code
-- Preferences: Improved spacing and layout in editor (Bug #14678)
-- Selecting a timer always starts it
-- Add Hossam Ayman's multiple timer code, some leak and g_free fixes in
-  update_function.
-- Translation Updates:
-  Albanian, Arabic, Asturian, Basque, Belarusian, Bulgarian,
-  Catalan, Chinese (China), Chinese (Taiwan), Croatian, Czech, Danish,
-  Dutch, Eastern Armenian, English (Australia), English (United Kingdom),
-  Finnish, French, Galician, German, Greek, Hebrew, Hungarian, Icelandic,
-  Indonesian, Italian, Japanese, Korean, Latvian, Lithuanian, Malay,
-  Norwegian Bokmål, Occitan (post 1500), Polish, Portuguese, Portuguese
-  (Brazil), Russian, Serbian, Slovak, Slovenian, Spanish, Swedish, Thai,
-  Turkish, Uighur, Ukrainian, Urdu, Urdu (Pakistan)
+===============
+Version 3.36.4
+===============
+
+- tests: Don't run at build-time
+- Translation updates
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...fce4-timer-plugin_1.7.0.bb => xfce4-timer-plugin_1.7.1.bb} | 4 ++--
+ .../{gnome-desktop3_3.36.3.1.bb => gnome-desktop3_3.36.4.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/timer/{xfce4-timer-plugin_1.7.0.bb => xfce4-timer-plugin_1.7.1.bb} (73%)
+ rename meta-gnome/recipes-gnome/gnome-desktop/{gnome-desktop3_3.36.3.1.bb => gnome-desktop3_3.36.4.bb} (88%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.0.bb b/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.1.bb
-similarity index 73%
-rename from meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.0.bb
-rename to meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.1.bb
-index 2ddc6f67c..f154023e2 100644
---- a/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.1.bb
-@@ -6,5 +6,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ae39271267fd63eb7619432ff24e7ff1"
+diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.3.1.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.4.bb
+similarity index 88%
+rename from meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.3.1.bb
+rename to meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.4.bb
+index b7ef7545a..6b0c53566 100644
+--- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.3.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.4.bb
+@@ -16,8 +16,8 @@ inherit gnomebase itstool pkgconfig upstream-version-is-even gobject-introspecti
+ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+ UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
  
- inherit xfce-panel-plugin
+-SRC_URI[archive.md5sum] = "75e828342e51c88c866dcdd46c021d26"
+-SRC_URI[archive.sha256sum] = "4bed119fa25ea0ff7880928142365c3c8726585fc072bc147157e66b63e96b7e"
++SRC_URI[archive.md5sum] = "285d5d8a97b7564809151d401199c239"
++SRC_URI[archive.sha256sum] = "007bbd48c1ca2fcb184713c923174c1d4328c3e33a2271ca536bdd3b71229bc6"
  
--SRC_URI[md5sum] = "32e6a14e80bf9a93db2f2b3bfd7de920"
--SRC_URI[sha256sum] = "2e4e5343e39926230cc981d5fe56cd58a2f3817d2e9b6089b5673a2e39bf7e9b"
-+SRC_URI[md5sum] = "e0df5b6be30993719d084fc4f78a6218"
-+SRC_URI[sha256sum] = "4b52d2911b1949e945971be6533155ee6ba99c77078eac7fd43b0f2aeca824e3"
+ SRC_URI += " \
+     file://gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch \
 -- 
 2.26.2
 
