@@ -1,102 +1,76 @@
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com [209.85.208.193])
- by mx.groups.io with SMTP id smtpd.web10.19457.1595718924590177642
+Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com [209.85.208.179])
+ by mx.groups.io with SMTP id smtpd.web11.20637.1595722191463777131
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Jul 2020 16:15:25 -0700
+ Sat, 25 Jul 2020 17:09:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=lyEsBzxy;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.193, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f193.google.com with SMTP id a27so4033058ljn.8
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jul 2020 16:15:24 -0700 (PDT)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=xmC/JEN2;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.179, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f179.google.com with SMTP id r19so13531618ljn.12
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jul 2020 17:09:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=iqNhEpDJ2wV/VcADHSt3jl+VyFXyN9IjNH9t1x+Jwn4=;
-        b=lyEsBzxyuaR70azDrVISrB7YV/DXiqkOzt6a+yGmdeigRfDNEiZhM++sIPyr/k2qEM
-         siogE3JqNWYRBERa/F5kR54252wLEFbu7ubuKOLgn4hC+B/eOIzfKVtUtq3L8+febIaR
-         kdzlM+9ywQSgFb2JqMEpFVamTvDj3f+kWU5hGWFOFpoH89Crb/n13Yf1ZWy2c5WOaL1X
-         eDwfPamAteyc3rj3xccu1NFr5EcVSORZ6/lbSjw437TBqPpOsw+7ZzfQD8dMva/gvNxa
-         wdsceNMgqB3E9L1JJUAGradI3GrRBgsrwWEBi8Oz+Q9ay8WvAD4nFQL3QA0jJIFLVPTy
-         +37w==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=2eEj339j/xI4vupvJgY0HPr88KexIWfzTKVMSx0G3Qg=;
+        b=xmC/JEN2z8hTXYGWLiwmkCIf4m7LScV60S4Le52U1VUkZ1vrvu4JA5+0CB21yN5g7G
+         cZ9e1IARJatfFipDUNKzi9XY6wk6/AC8zWe/GR69F4548aSZMf8rcIsUTTQcnhl/NZYz
+         mid+au5HD+i5CXdAHMAM0DbMsdavHiUr3bO1T5fF3mDVUHgTvz0CGv7XzHQZxtc2G/qs
+         oLmbhvPXKdSEJ0YGow8lcoVeFxj8rEZxun61TP+Zi3pZ3+KlQU5KIOoSM4KChGyWSNR7
+         QEcgPWvt6owugv8IFrU8nMP7YBZRloExVe17sVK7HtzHJ9zDEmYSMl1ACf6RfSOzcEJA
+         pXCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=iqNhEpDJ2wV/VcADHSt3jl+VyFXyN9IjNH9t1x+Jwn4=;
-        b=OqBZw/qc2stLWt2vSlLrrfodQHp7sm0c8IUbnyBvup4DSEZ2NsZeab3uosJOtMxc7w
-         +Cno+h2wcY2ZOnW5SVK8xk7wdDpIZDLJ1RR6OogQKHUGz+x80eKCCoQDaTrTPFqNk2HV
-         f3oxYaziJQQWtBpDcq7pF2+I59o5L/khlCZREJVHzOt/fcCetIQ3cw8ni6LWrm3LxGi+
-         DFmVk0XUFfWl0xC+9cW8LyEEySrhAt3/jj+C+1nhH36r1hQAVzJBDsbfdMtl8BX8NFGB
-         445fWriLrRCEhyfqUOMl0QLu7i2GhkHMf47bisB8FQ2EEI28KwSIBGC27zbc6ac9kHeR
-         +FkA==
-X-Gm-Message-State: AOAM533sZkY7OYtCDLy9voDPytC9owI7RQZdUe+0rKHoF5sN4HmsU90g
-	EJv2f0rAdH/U/iPVdy3Y3tVC3w==
-X-Google-Smtp-Source: ABdhPJxyiqDl76FTNk+jVDUPemiS2gtmr4h4BIUYuuR5jOjLI+voZJTGsghjvdtu0hEW6zt0kPsdRQ==
-X-Received: by 2002:a2e:8718:: with SMTP id m24mr7370943lji.253.1595718922501;
-        Sat, 25 Jul 2020 16:15:22 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=2eEj339j/xI4vupvJgY0HPr88KexIWfzTKVMSx0G3Qg=;
+        b=W+toDAXin1Xdv8UkuLhh8ec14KKLB934wC/ioHBYeRiHEmP3qINSLVZa8DJ+25xx41
+         cssiizBrZn2xT01HkUrAGXA6BQVSzbzI4EyjS9TLkI9346ixEi7b46kbwYrTL2ZwIm8d
+         Gt+LBUDJ9HwlXnnc9Tom+iZtb0dRB3KFdOBSVWHsTviTC4auYWnN1ulf3pymL8cMa/tO
+         dtFNImgBAAuBqJI/CAtsYbaBD2TXie7fW6Tj5reVy4Wum+YS8EVWW43zlQxmmMV5s+RO
+         0y49SyxuAH5B4LA6tTkCvK24w3D8qCrdkPL85hL8LxracLvUukdlQyhlriExe6sykXM1
+         /YIQ==
+X-Gm-Message-State: AOAM533WcyOh8ljd8rAJ5h1bEn+dnHjfCJ531YAM8jU/lZLwrFrUxHRN
+	IcAFl9nF6JcRq6tF+d1nxxnACyp2FdY=
+X-Google-Smtp-Source: ABdhPJxOkCOp4xYdikDcx8K0mKi4QFswmT4xHfmGDcrdMVgRaSZPZNl2UnAiwzmznsF/RyQRCzjFvg==
+X-Received: by 2002:a2e:8210:: with SMTP id w16mr7038946ljg.419.1595722189260;
+        Sat, 25 Jul 2020 17:09:49 -0700 (PDT)
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from [192.168.0.8] (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id f9sm1773948lfc.43.2020.07.25.16.15.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 25 Jul 2020 16:15:21 -0700 (PDT)
-Subject: Re: [PATCH][meta-oe 1/4] python3-mock: Upgrade 4.0.1 -> 4.0.2
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
- Leon Anavi <leon.anavi@konsulko.com>,
- Trevor Gamblin <trevor.gamblin@windriver.com>
-References: <20200725105726.2142880-1-open.source@oleksandr-kravchuk.com>
- <CAMKF1sp3GcJHH25LjnCp=qG3L84HLqXe_wmxGy9j2-GEEVS1uw@mail.gmail.com>
+Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
+        by smtp.gmail.com with ESMTPSA id j17sm1821680lfr.32.2020.07.25.17.09.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 25 Jul 2020 17:09:48 -0700 (PDT)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
-Message-ID: <3d3c2d41-f9cf-0198-981f-08a40e56c714@oleksandr-kravchuk.com>
-Date: Sun, 26 Jul 2020 01:15:20 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+To: openembedded-devel@lists.openembedded.org
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-oe] dctl: update v69
+Date: Sun, 26 Jul 2020 02:09:46 +0200
+Message-Id: <20200726000946.2892313-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sp3GcJHH25LjnCp=qG3L84HLqXe_wmxGy9j2-GEEVS1uw@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-Yes, it was sent by a mistake. Sorry.
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ meta-oe/recipes-core/ndctl/{ndctl_v67.bb => ndctl_v69.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-core/ndctl/{ndctl_v67.bb => ndctl_v69.bb} (95%)
 
-On 25/07/2020 17:42, Khem Raj wrote:
-> This is already on master
->
-> On Sat, Jul 25, 2020 at 3:57 AM Oleksandr Kravchuk
-> <open.source@oleksandr-kravchuk.com> wrote:
->> From: Leon Anavi <leon.anavi@konsulko.com>
->>
->> Upgrade 4.0.2:
->>
->> - Issue #39915: Ensure unittest.mock.AsyncMock.await_args_list has
->>    call objects in the order of awaited arguments instead of using
->>    unittest.mock.Mock.call_args which has the last value of the
->>    call. Patch by Karthikeyan Singaravelan.
->>
->> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
->> Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>   .../python/{python3-mock_4.0.1.bb => python3-mock_4.0.2.bb}   | 4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
->>   rename meta-python/recipes-devtools/python/{python3-mock_4.0.1.bb => python3-mock_4.0.2.bb} (77%)
->>
->> diff --git a/meta-python/recipes-devtools/python/python3-mock_4.0.1.bb b/meta-python/recipes-devtools/python/python3-mock_4.0.2.bb
->> similarity index 77%
->> rename from meta-python/recipes-devtools/python/python3-mock_4.0.1.bb
->> rename to meta-python/recipes-devtools/python/python3-mock_4.0.2.bb
->> index eebfcdade2..39ab6d01f5 100644
->> --- a/meta-python/recipes-devtools/python/python3-mock_4.0.1.bb
->> +++ b/meta-python/recipes-devtools/python/python3-mock_4.0.2.bb
->> @@ -13,5 +13,5 @@ RDEPENDS_${PN} += "${PYTHON_PN}-prettytable \
->>               ${PYTHON_PN}-pep8 \
->>               ${PYTHON_PN}-pyflakes"
->>
->> -SRC_URI[md5sum] = "8f48ba3fd059e7cfad92f8354064adfd"
->> -SRC_URI[sha256sum] = "2a572b715f09dd2f0a583d8aeb5bb67d7ed7a8fd31d193cf1227a99c16a67bc3"
->> +SRC_URI[md5sum] = "6466619b89c2969dc57722ad73f85676"
->> +SRC_URI[sha256sum] = "dd33eb70232b6118298d516bbcecd26704689c386594f0f3c4f13867b2c56f72"
->> --
->> 2.25.1
->>
+diff --git a/meta-oe/recipes-core/ndctl/ndctl_v67.bb b/meta-oe/recipes-core/ndctl/ndctl_v69.bb
+similarity index 95%
+rename from meta-oe/recipes-core/ndctl/ndctl_v67.bb
+rename to meta-oe/recipes-core/ndctl/ndctl_v69.bb
+index da0c6563a7..396da4bb32 100644
+--- a/meta-oe/recipes-core/ndctl/ndctl_v67.bb
++++ b/meta-oe/recipes-core/ndctl/ndctl_v69.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e66651809cac5da60c8b80e9e4e79e08"
+ 
+ inherit autotools-brokensep pkgconfig bash-completion systemd
+ 
+-SRCREV = "637bb424dc317a044c722a671355ef9df0e0d30f"
++SRCREV = "ea62d6d53bf6f806c4841e97a370201e18446860"
+ SRC_URI = "git://github.com/pmem/ndctl.git"
+ 
+ DEPENDS = "kmod udev json-c keyutils"
+-- 
+2.25.1
+
