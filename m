@@ -1,77 +1,76 @@
-Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
- by mx.groups.io with SMTP id smtpd.web12.27144.1595762510226045635
+Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com [209.85.208.175])
+ by mx.groups.io with SMTP id smtpd.web11.27141.1595762515929962852
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Jul 2020 04:21:50 -0700
+ Sun, 26 Jul 2020 04:21:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=agZODNtT;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.177, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f177.google.com with SMTP id t6so1297615ljk.9
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 04:21:49 -0700 (PDT)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=buJMp9x8;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.175, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f175.google.com with SMTP id d17so14243058ljl.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 04:21:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=xmzxJxs8io1QnrZfsUalv+hP4vWTa540q3is3oLe2s4=;
-        b=agZODNtTqbLxd+z8QUHsudiI51W2mkuX7oGZPQFRNlIGkzkPOrQ2QAErdxUK0T1hs9
-         VvfgxgoUkB8NvloqcvuuzrLb38Sfh/50UM+MKF8ORVdOOKaAMYCa+ga0zSIulullulXE
-         F8JhahjndOsGzrg73sfq1wqLY1wwK2jJzOvXUy6vE0xQl+265mCgO4FM58b5N/oFArhX
-         ZTPjF+b7xlz35Sg6yXqo2cB/XTs0GT32FXH8J2ximl/564gGpJOiSmmbckL1Ri7s572W
-         BVHBzwLdO27c4mnMDqqEZsNHMsPzumcTVTxu+rFeU94qPfHxAJSOr3bkss7Ee+xX/MAa
-         heag==
+        bh=dSladI1VM6rCV+kiEinJQ1E1QfDNHbkA8wxCPbaOwHA=;
+        b=buJMp9x8Y502F0h4b14lna/YGhAjRzIX5Dg5+bK+0XpWsXwfaUrd+LQzR/L7fOpf95
+         aG7FR3SRENN9Gw2cI+YbYqk/kriTsQlvrWrckviLTul65E+ZDgcUBIc4NHpNPuk/WFUN
+         Ks60xMLiE6YjoQqN+TeBldD11fIdLwYgh5GZHM01e4DrNrHZOybcy1oVPONFgkb4tYfc
+         Qs4GyREGUiRkQvx8S+Rn5qAkGv25beRcvLbJx+Uc9bd1nivKkl5mQniYvTxsBbNdGVEY
+         uUBJoVPLLChBp3xMHSvSG2AlmyKcPJsiTu7vdW8OJ7SZjCr0XGOYp3MMCr24zE2BmLug
+         iCWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=xmzxJxs8io1QnrZfsUalv+hP4vWTa540q3is3oLe2s4=;
-        b=nhUyo1HMjMh7KGp5KREpNYUhDRIFqg5hrCgXnJAPZQsvT4tm5qsEa4mKjSVwozpmrP
-         py/gxOtugJ/4Bv1WvggtdSh4xZ77B4NJWAp80RLRISNXoNTe1vVZEGPSajbuGV0gx3vT
-         cm2I3Sd4+QR5Co9zEk27hZt8gskKdVBE4muatelhiEndXDwuhZyC5TSzWkceAQdQSuaI
-         Tof7WuJ/MmUrK6zMjNfSCq3ILWHdEpkcq9BEAT2SUsxNfYv5fU7l5lb20mkUJAfZFnJE
-         HxDx1MbDSw9Sr9TCQ+yvFy9aXJms8cdB3mYIX1i3m1KMOmOTilNqyXbR8eHzfO2Q/sRQ
-         dQ2Q==
-X-Gm-Message-State: AOAM530PTsrIZWgwFwf43V/bWKjmWzlPSjejfLdTOYnebl8XU7m/kjfi
-	h2+5AdvCogqW2agBn9z1cb0ItbVIjqo=
-X-Google-Smtp-Source: ABdhPJzCAavfIK6kkBr2DVJMT9elveYgrEUkjK+BWYZuY92K2zKRmysvqKFgpPyu+WVGvUXCXeeKWA==
-X-Received: by 2002:a05:651c:50d:: with SMTP id o13mr3452827ljp.287.1595762507878;
-        Sun, 26 Jul 2020 04:21:47 -0700 (PDT)
+        bh=dSladI1VM6rCV+kiEinJQ1E1QfDNHbkA8wxCPbaOwHA=;
+        b=WMfBPyEBTcILpOU/5ZKfrG9mT1+ANjXwoggCfSZ8cbwCED2NyJwAwVv0pFbJiHqivH
+         fJSxTCXJsEu/u1qNDKolbahaYmeuHZin3AtG+atlZMcSyDxlwBTjxHz4vqMfO5W097IJ
+         GPtbJBhSrgDunVvh2s99P22EZS2cjxQXDqCha0MJzrhqy/TVveyvnE1FUd3zOmXpHv+f
+         AleTo4sQXh/4MfrolzjvYEEDUlXFRqodsNwoV9T8DDdse1H/g7bV2sH/cNeIHWNc9qp2
+         23hHxZzxWhz9hbSW7J5QTlsYgykfgdKas98CVUapNwfnOhb91zJZFIecrb9V3u5B96sv
+         ZgSw==
+X-Gm-Message-State: AOAM531r6etRCfiYpQTfGNcM1s3jj3bypIsvzNoyQSrDWc7OzJii+jQ5
+	K5I5KSYzAXRaxAe3gXZJ64AdMKZQVuo=
+X-Google-Smtp-Source: ABdhPJxes+g6ZwuvcBbxZY4hdi7gp7ojnQ6jBNd7VIjkbwlm/716FmH5By/pbxnk5zJVprD2DkXvoQ==
+X-Received: by 2002:a2e:964d:: with SMTP id z13mr7733142ljh.98.1595762513962;
+        Sun, 26 Jul 2020 04:21:53 -0700 (PDT)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id e24sm1981868ljg.18.2020.07.26.04.21.47
+        by smtp.gmail.com with ESMTPSA id s14sm1751584ljs.52.2020.07.26.04.21.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 26 Jul 2020 04:21:47 -0700 (PDT)
+        Sun, 26 Jul 2020 04:21:53 -0700 (PDT)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-multimedia] opusfile: update to 0.12
-Date: Sun, 26 Jul 2020 13:21:44 +0200
-Message-Id: <20200726112144.4020474-1-open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-multimedia] libmpdclient: update to 2.19
+Date: Sun, 26 Jul 2020 13:21:51 +0200
+Message-Id: <20200726112151.4020584-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../opusfile/{opusfile_0.10.bb => opusfile_0.12.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-multimedia/opusfile/{opusfile_0.10.bb => opusfile_0.12.bb} (72%)
+ .../musicpd/{libmpdclient_2.16.bb => libmpdclient_2.19.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-multimedia/recipes-multimedia/musicpd/{libmpdclient_2.16.bb => libmpdclient_2.19.bb} (91%)
 
-diff --git a/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.10.bb b/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.12.bb
-similarity index 72%
-rename from meta-multimedia/recipes-multimedia/opusfile/opusfile_0.10.bb
-rename to meta-multimedia/recipes-multimedia/opusfile/opusfile_0.12.bb
-index 3f6dbb8e92..c775cef5a1 100644
---- a/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.10.bb
-+++ b/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.12.bb
-@@ -8,7 +8,7 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6ac22b992dde6a891f8949c3e2da8576"
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.16.bb b/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.19.bb
+similarity index 91%
+rename from meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.16.bb
+rename to meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.19.bb
+index 235e63e481..32f9688eaa 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.16.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.19.bb
+@@ -8,7 +8,7 @@ inherit meson
+ SRC_URI = " \
+     git://github.com/MusicPlayerDaemon/libmpdclient \
+ "
+-SRCREV = "4e8d990eb5239566ee948f1cd79b7248e008620a"
++SRCREV = "27767959442ef390aabb16790494ba93fed962ef"
+ S = "${WORKDIR}/git"
  
- SRC_URI = "https://downloads.xiph.org/releases/opus/${BP}.tar.gz"
--SRC_URI[md5sum] = "ab3f7d15d766f5b36b0951ee435f9ebf"
--SRC_URI[sha256sum] = "48e03526ba87ef9cf5f1c47b5ebe3aa195bd89b912a57060c36184a6cd19412f"
-+SRC_URI[md5sum] = "45e8c62f6cd413395223c82f06bfa8ec"
-+SRC_URI[sha256sum] = "118d8601c12dd6a44f52423e68ca9083cc9f2bfe72da7a8c1acb22a80ae3550b"
- 
- inherit autotools pkgconfig
+ PACKAGECONFIG ??= "tcp"
 -- 
 2.25.1
 
