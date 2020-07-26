@@ -1,79 +1,81 @@
-Received: from mail-qv1-f74.google.com (mail-qv1-f74.google.com [209.85.219.74])
- by mx.groups.io with SMTP id smtpd.web10.24633.1595747632835626596
+Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com [209.85.208.194])
+ by mx.groups.io with SMTP id smtpd.web11.25753.1595753495251804658
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Jul 2020 00:13:53 -0700
+ Sun, 26 Jul 2020 01:51:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@google.com header.s=20161025 header.b=JxgRm+L6;
- spf=pass (domain: flex--wak.bounces.google.com, ip: 209.85.219.74, mailfrom: 3ly0dxwmkapw0eoksskpi.gsq@flex--wak.bounces.google.com)
-Received: by mail-qv1-f74.google.com with SMTP id v20so9002208qvt.15
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 00:13:52 -0700 (PDT)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=njqRBw8+;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.194, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f194.google.com with SMTP id f5so14045910ljj.10
+        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Jul 2020 01:51:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc;
-        bh=68dPgwJIWC3pXCKHoKJIQv77THd0WIInfHe65I4zGOE=;
-        b=JxgRm+L6M8piQG9S4seHrgHj1ONxcglABoy07itL4RMA456NImMUQEJW1/b78G6kZ2
-         vdc7Eh7xmd/87Ljsp0KN3m/WJwA+q+xQy3bqcrXZygD/UBzj/DA1WEadaIiYye/FHpWe
-         yJyov3bZ9gajpm36WbORMcJuLdn4RVGwiH5IJKGpkUQICsfAZUi9JkwKsesANeqlfeOB
-         I2BdRkpE71DAE4kyLgljnO2oDL4gYM3wOZFRzA8d1A4ovkTnrNAkPmt8ZxLCPvkTkPu4
-         w7k+ydwqHLUfWiNpkHpMmMcIgIyb4ks4w9joEdNurS0SdUZ3gLCMsi2s1yX9+dQID+Vt
-         TOcg==
+        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=dK/FR8dNaLY8PMas2P7imtOqsbVdCgnmdFNJQza0XLQ=;
+        b=njqRBw8+gEdr2M7kpKbT4wW+7TkicN/h+VihNzypsP/aKJQ/GcuoKKLsUugj8Qsm33
+         Jbd5NoADSnZP36TdnbylC4lz6JGWAQJWpT9og9CS8mbZtj8mX89zc0M2gmrFOREdGZls
+         SdLWNdC+21ZRWxo+kTHHBR84TGfKvOO53c5AB9Xdg4iNVmyFlkp/ZFd8y5USmMmTRWwQ
+         Qt8A5YCfc90et4X7X4EYbaIoIbV9jgJ/0L9WtQo+tVhMNeY4UtiUigZtArbDd5LV6pRO
+         GdhBn9Gy2EE08+GfJQp6qeMlgA2OOoI3lbF5PCapRT7s6x5U7Rf+QEzJD3WtXxdqrhn6
+         77Xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=68dPgwJIWC3pXCKHoKJIQv77THd0WIInfHe65I4zGOE=;
-        b=A+rkg+R2sHJtypw7Pfn01iBTTByRUVOIE42CXeThk9Rbpn9+iJZwRWclDNsGGNJ/5X
-         iwAD6edzkNtFPBKXuD9nP60R54my8ridATEF7j6Pk+6b6aBEYkK1RnKt711/+Pn4qDsD
-         ydSAvi+G3gnAFjHuBTag9OQwNdjIP6eqbvapx4HwXnzXydFaBol7eFYI5DhXKtB5zegn
-         rLF83gdQDbTKYppSc1VMzjCj05AOVLl50jm7YcFnOr3zr4ust9T2IGee51AjC1lLvz+n
-         Utsji3gr5Fr4j34AbyDjR2ocg+5Z7ftkhH+w/194jYTWJkY0imh7RxhUNut3XDNhs67U
-         iGXQ==
-X-Gm-Message-State: AOAM5318rJCQpae49OIWBiBncVX4fHH/ZwQEkA5fsEbeiAV0kRygQtYN
-	kFJLN1SB4/40Fzx/cUl0a3oKPd7e4HwZnzyj7gxn60xilk3Z7BQVd6gAxkQ2evfOp1qvZR4oxIN
-	fUpAXO2VwSHS+VSgoHBUUQEkHNsCB0iQqZTM2TZmKFHZfGU1hZxMijiaPTiuNVpU/HGcggmRUOM
-	oJuFI=
-X-Google-Smtp-Source: ABdhPJwMqzteljGf1rw7TZ7Fm5YxxdmycJ71qW7I36BNkFnsvcXZLUMxSB5SHlBIZQf/k5eMrN4bPt8=
-X-Received: by 2002:a0c:b520:: with SMTP id d32mr17244549qve.6.1595747631737;
- Sun, 26 Jul 2020 00:13:51 -0700 (PDT)
-Date: Sun, 26 Jul 2020 00:13:42 -0700
-In-Reply-To: <16253B4F2ECB6422.7401@lists.openembedded.org>
-Message-Id: <20200726071342.612126-1-wak@google.com>
-Mime-Version: 1.0
-References: <16253B4F2ECB6422.7401@lists.openembedded.org>
-X-Mailer: git-send-email 2.28.0.rc0.142.g3c755180ce-goog
-Subject: [meta-oe][PATCH v2] cli11: 1.9.0 -> 1.9.1
-From: "William A. Kennington III" <wak@google.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=dK/FR8dNaLY8PMas2P7imtOqsbVdCgnmdFNJQza0XLQ=;
+        b=jE7dt4uxSjZ01LqVH1kc2jsBs6vUug8x/gutfV1ET/VgML4km0lNT1/e7bZr3opkUE
+         U+iZvUTkYEPHpFRgHwgyoOSUgskEwp9xnzxz32wdFXF8hx0v+OJya3Dcsbxf8t5qBVdE
+         HB8vHoQmZP2Vz01k33TSD43GIwBDzN6uGfobtwgzeVgjLhuHP9B4hoOYExbGiHDlz5Tm
+         dJGYOZscHHMe7WpbeQcF83YugM3V7ueDMr8rq+j054DDbPOguF01946SKpOqj9vPRUCb
+         mZ+xcZEBm8W6FvXUJzg9GrkIQFxmUB4mxI5FSXTxxQbwrENFZsFdAx+/Hs8nhjJhgMQG
+         0Q6w==
+X-Gm-Message-State: AOAM530NPRq9PN2JkhkufaVs6YyWOw3rm/jVNgV0oYLfpHsl+xJLzEVD
+	rNe9p1GDTMaIzJMFHmA0ynDfWROP8I0=
+X-Google-Smtp-Source: ABdhPJyZt9WhU3pHitogQVP4Hyuq+n/3FjILI1VBxtEt02yN5Op0kNYEUyXMqRfJwbye+LmzjXC4AQ==
+X-Received: by 2002:a2e:999a:: with SMTP id w26mr2506950lji.242.1595753493140;
+        Sun, 26 Jul 2020 01:51:33 -0700 (PDT)
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
+        by smtp.gmail.com with ESMTPSA id c17sm2201462lfr.23.2020.07.26.01.51.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 26 Jul 2020 01:51:32 -0700 (PDT)
+From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: "William A. Kennington III" <wak@google.com>
-Content-Type: text/plain; charset="UTF-8"
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-oe] leptonica: update to 1.79.0
+Date: Sun, 26 Jul 2020 10:51:30 +0200
+Message-Id: <20200726085130.3712200-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: William A. Kennington III <wak@google.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../recipes-support/cli11/{cli11_1.9.0.bb => cli11_1.9.1.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/cli11/{cli11_1.9.0.bb => cli11_1.9.1.bb} (81%)
+ .../leptonica/{leptonica_1.74.4.bb => leptonica_1.79.0.bb}  | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/leptonica/{leptonica_1.74.4.bb => leptonica_1.79.0.bb} (73%)
 
-diff --git a/meta-oe/recipes-support/cli11/cli11_1.9.0.bb b/meta-oe/recipes-support/cli11/cli11_1.9.1.bb
-similarity index 81%
-rename from meta-oe/recipes-support/cli11/cli11_1.9.0.bb
-rename to meta-oe/recipes-support/cli11/cli11_1.9.1.bb
-index 151653b22..5f022d78a 100644
---- a/meta-oe/recipes-support/cli11/cli11_1.9.0.bb
-+++ b/meta-oe/recipes-support/cli11/cli11_1.9.1.bb
-@@ -3,10 +3,10 @@ DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich f
- HOMEPAGE = "https://github.com/CLIUtils/CLI11"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b73927b18d5c6cd8d2ed28a6ad539733"
--SRCREV = "13becaddb657eacd090537719a669d66d393b8b2"
-+SRCREV = "5cb3efabce007c3a0230e4cc2e27da491c646b6c"
- PV .= "+git${SRCPV}"
+diff --git a/meta-oe/recipes-graphics/leptonica/leptonica_1.74.4.bb b/meta-oe/recipes-graphics/leptonica/leptonica_1.79.0.bb
+similarity index 73%
+rename from meta-oe/recipes-graphics/leptonica/leptonica_1.74.4.bb
+rename to meta-oe/recipes-graphics/leptonica/leptonica_1.79.0.bb
+index 249e96f168..a6de1f7956 100644
+--- a/meta-oe/recipes-graphics/leptonica/leptonica_1.74.4.bb
++++ b/meta-oe/recipes-graphics/leptonica/leptonica_1.79.0.bb
+@@ -3,9 +3,11 @@ DEPENDS = "jpeg tiff libpng zlib"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://leptonica-license.txt;md5=34aa579294e8284b7b848c8d5d361e8f"
  
--SRC_URI += "gitsm://github.com/CLIUtils/CLI11"
-+SRC_URI += "gitsm://github.com/CLIUtils/CLI11;branch=v1"
++UPSTREAM_CHECK_URI = "https://github.com/DanBloomberg/leptonica/releases"
++
+ SRC_URI = "http://www.leptonica.org/source/leptonica-${PV}.tar.gz"
+-SRC_URI[md5sum] = "4f32be9bd2e2c142ba018037ab5d746f"
+-SRC_URI[sha256sum] = "29c35426a416bf454413c6fec24c24a0b633e26144a17e98351b6dffaa4a833b"
++SRC_URI[md5sum] = "a545654b1dae7d29e2ea346b29095f84"
++SRC_URI[sha256sum] = "045966c9c5d60ebded314a9931007a56d9d2f7a6ac39cb5cc077c816f62300d8"
  
- S = "${WORKDIR}/git"
- 
+ EXTRA_OECONF += " \
+     --without-libwebp \
 -- 
-2.28.0.rc0.142.g3c755180ce-goog
+2.25.1
 
