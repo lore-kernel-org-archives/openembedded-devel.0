@@ -1,73 +1,76 @@
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com [209.85.208.193])
- by mx.groups.io with SMTP id smtpd.web10.58824.1595865066253123509
+Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com [209.85.208.194])
+ by mx.groups.io with SMTP id smtpd.web12.58811.1595865365222454111
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Jul 2020 08:51:06 -0700
+ Mon, 27 Jul 2020 08:56:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=LgdRiT+f;
- spf=pass (domain: linaro.org, ip: 209.85.208.193, mailfrom: andrey.konovalov@linaro.org)
-Received: by mail-lj1-f193.google.com with SMTP id q4so17823268lji.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Jul 2020 08:51:05 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=zkaJJYvV;
+ spf=pass (domain: linaro.org, ip: 209.85.208.194, mailfrom: andrey.konovalov@linaro.org)
+Received: by mail-lj1-f194.google.com with SMTP id x9so17817369ljc.5
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Jul 2020 08:56:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=subject:to:cc:references:from:message-id:date:user-agent
          :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=BxnaWYpqH+TZSEPPchJigI0vXWd0qDsUviHuDeau2xE=;
-        b=LgdRiT+fWZXsqXNbaKQfIY0PZNXMoGPPgFftvDoUxnFx9gtpLSjY+cM+yGLb0iW+Jj
-         zSRW5TWnv9KZKe6zXhGR19kPl3jUBIfQB+GmPPQQRRAWbWOyzveY5HA4ioz8dz+YW0F+
-         hzjLfY53Ny/YWntmjgfpqclhMmONiM1y+aZcJQK7CuuRUltD5qIJx8RtqDVusS61DpGz
-         2haVGtGwylglqvvf8wcYqKTTnUHn6RxgNyQsjoNgIkzlmYo9FJ2RHAGM/x2ROUYf4kgI
-         FPUVqLxUDb8gaZpjMMvQgITeBuynGx7wb3UnXtJOUarXHBN5qTS1Au4UxZGWzc01KxgA
-         3FWQ==
+        bh=kkWxCQ9j53wQUvJl9/qJLUdu52u5aAE113JOx3lV9mU=;
+        b=zkaJJYvVJCqvCj+7XISwmJS1qvhH7HoywibgHVAxJSy2ZM6RKt8qNUB2VlnxKH0Vp1
+         BrMN1TaAH557JxUSpdThFB0jqYmtbBWv50bZRLfrzcL2DFCP496M2ykBbgTcyhrc891/
+         nHmDFImYo0ZMZLP6QeZTE7h8dHQxvXE/OKwA3aDO1WDVwvTi/nmuoLUodigYVfTsrtTo
+         cTyFwudLfXv0fca51yoV8uoIN1UyAdiRpnaXYI0tfXZ00RjGWPo95Z5FIZUZynzkJZmy
+         pfpAWOfyExc2ivRpITQ2OzTR9nGJh1WHyOH10XQ9JnoSoNoTCBIOt8mNB4LeTRm8IukU
+         zsoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:cc:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=BxnaWYpqH+TZSEPPchJigI0vXWd0qDsUviHuDeau2xE=;
-        b=ZGZxYOX1xGznfPzpyYkdQEd6qvC4j/Z64KS1TJBF+ufWUa6KlU9rgb6KrCJteS1/wa
-         7lxnkpuuvTW1FbHFG2PAlL/OkodHvivs86d5wkjTljpsVBwEtfFE7r6KmxpAhGRrwIhl
-         m+ycdej1xdxME28mrjFs04OoMSAQb3tHY6HxKplGapKfakf1WVygJ0DzDt7NK8ui1pru
-         b/nC03Pp5B+L9HJaYd9NsofHkDbEniYeK21EDttyTJxa5FMfvpK3mluGSEVFqo3EHqO7
-         3edtYSW0FE48hSGXxBDBHy/dDlgR925QDvtXqVtEgCrsKAs4bYK+Bpf8Ko3QTIXiKHPh
-         Fp4w==
-X-Gm-Message-State: AOAM530DPORd7K6sja6jZDT55ZZmDZrOHorCsA7DzIeoBM0PjbCPPp0u
-	IXNem8z/nHgS+ckas360CMQ4kw==
-X-Google-Smtp-Source: ABdhPJzF7R/Bg1yZa/Cr8UBiK/lhyaOVIeNTz955JsPdIM9tvYsdciMGdZ0wnJLlo2iLdmCqkq8b+w==
-X-Received: by 2002:a2e:8684:: with SMTP id l4mr10808346lji.75.1595865064543;
-        Mon, 27 Jul 2020 08:51:04 -0700 (PDT)
+        bh=kkWxCQ9j53wQUvJl9/qJLUdu52u5aAE113JOx3lV9mU=;
+        b=B9Bumf+fKSAXnVWUcovPdydL/gGyWTJgmDHjYCu6kXoofD7JfHlNvMlCxf15RPBqAE
+         wamL729uy88UbrBphesGODO8eIMACo75teZMYg5JR2QVDo0mBpyVlxs/r06bCBN44liO
+         9Txri+TT8ZX372fez3Zj/qk3eLGho2YwbDP87RG69tEbNfCWwWclQ7jPGiLOZqeGlu0u
+         jv+zJH9ZF4gXcyMi6RP78OFu1Kgsabbue40DWKAE3s8hEb9r3QiDfxyOFj9uhhmRWOAy
+         yMSPiZi0s/0ia3Zcn3QItKYrO0AIiiH8E+SLX+vWzcrHIqhheRb452QwhyOOLahW4g5z
+         NagQ==
+X-Gm-Message-State: AOAM532MWAbYkjOkR3uJ4RLggOg/8wuwtreJZZ8d/yMaF7X+aw+CugYI
+	pwLXq2ON+3PggX6cj2PilebmXA==
+X-Google-Smtp-Source: ABdhPJyYpn6zEM80idRnqTq/8a2pWsUb2IJr7WMAF3SXWMIYA7Rm/CiIFmy8eYeQ57GCIea+eHRMSA==
+X-Received: by 2002:a05:651c:1182:: with SMTP id w2mr4910848ljo.197.1595865363290;
+        Mon, 27 Jul 2020 08:56:03 -0700 (PDT)
 Return-Path: <andrey.konovalov@linaro.org>
 Received: from [192.168.118.216] (37-144-159-139.broadband.corbina.ru. [37.144.159.139])
-        by smtp.gmail.com with ESMTPSA id y21sm1955806ljg.111.2020.07.27.08.51.03
+        by smtp.gmail.com with ESMTPSA id l12sm2427326ljj.43.2020.07.27.08.56.01
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 27 Jul 2020 08:51:03 -0700 (PDT)
-Subject: Re: [libcamera-devel] [meta-multimedia][PATCH] libcamera: fix packaging and installation
-To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Cc: Khem Raj <raj.khem@gmail.com>, libcamera-devel@lists.libcamera.org,
- openembeded-devel <openembedded-devel@lists.openembedded.org>,
- madhavan.krishnan@linaro.org
+        Mon, 27 Jul 2020 08:56:02 -0700 (PDT)
+Subject: Re: [meta-multimedia][PATCH] libcamera: fix packaging and installation
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+ madhavan.krishnan@linaro.org, Peter Griffin <peter.griffin@linaro.org>,
+ libcamera-devel@lists.libcamera.org
 References: <20200727092108.6209-1-andrey.konovalov@linaro.org>
  <CAMKF1sqFr4Tkb_zumT8ida8aPPrcp-aS82xeO=xebeY=B7K=tQ@mail.gmail.com>
  <ad3cb56a-09ad-188c-760e-7365f297c5a9@linaro.org>
- <20200727154503.GB17521@pendragon.ideasonboard.com>
+ <CAMKF1socZsM2zmAdNjRLsN2Ny3SpRbB=3P2tXsBZciHOVsJ09A@mail.gmail.com>
 From: "Andrey Konovalov" <andrey.konovalov@linaro.org>
-Message-ID: <3831a2ac-eb6e-6b96-01b0-c6db1623f5b7@linaro.org>
-Date: Mon, 27 Jul 2020 18:51:02 +0300
+Message-ID: <b1894dad-7838-1c36-84d0-539138ad7590@linaro.org>
+Date: Mon, 27 Jul 2020 18:56:01 +0300
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200727154503.GB17521@pendragon.ideasonboard.com>
+In-Reply-To: <CAMKF1socZsM2zmAdNjRLsN2Ny3SpRbB=3P2tXsBZciHOVsJ09A@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-Hi Laurent,
+Hi Khem,
 
-On 27.07.2020 18:45, Laurent Pinchart wrote:
-> Hi Andrey,
-> 
-> On Mon, Jul 27, 2020 at 06:36:28PM +0300, Andrey Konovalov wrote:
+On 27.07.2020 18:38, Khem Raj wrote:
+> On Mon, Jul 27, 2020 at 8:36 AM Andrey Konovalov
+> <andrey.konovalov@linaro.org> wrote:
+>>
+>> Hi Khem,
+>>
 >> On 27.07.2020 18:28, Khem Raj wrote:
->>> On Mon, Jul 27, 2020 at 2:21 AM Andrey Konovalov wrote:
+>>> On Mon, Jul 27, 2020 at 2:21 AM Andrey Konovalov
+>>> <andrey.konovalov@linaro.org> wrote:
 >>>>
 >>>> libcamera checks if RPATH or RUNPATH dynamic tag is present in
 >>>> libcamera.so. If it does, it assumes that libcamera binaries are
@@ -129,20 +132,11 @@ On 27.07.2020 18:45, Laurent Pinchart wrote:
 >> and the drawback of this is moving part of the module signature implementation into the recipe.
 >>
 >> Or the libcamera implementation is to be changed to handle stripped binaries.
+>>
 > 
-> We could calculate the signature on selected sections only, but that
-> would make the implementation much more complex. Could the
-> src/ipa/ipa-sign-install.sh resign script could be used by the recipe ?
+> either of these solutions will be better perhaps.
 
-Yes, it could.
-I'll try this.
-
-> We can also improve the script to facilitate its usage.
-
-OK.
+Sound good. I'll try recalculating the signature and post v2 of the patch.
 
 Thanks,
 Andrey
-
->>>> +
-> 
