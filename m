@@ -1,50 +1,50 @@
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
- by mx.groups.io with SMTP id smtpd.web12.63715.1595878064017157309
+Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
+ by mx.groups.io with SMTP id smtpd.web12.63716.1595878065638362828
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Jul 2020 12:27:44 -0700
+ Mon, 27 Jul 2020 12:27:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=RyryBZOR;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.43, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f43.google.com with SMTP id k13so9666170lfo.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Jul 2020 12:27:43 -0700 (PDT)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=aOWLegcR;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.171, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f171.google.com with SMTP id h19so18504665ljg.13
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Jul 2020 12:27:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=I2u/HkPIv4kbQ8vZxT+XJHqzhY88JrzX3BevfYI0kNA=;
-        b=RyryBZORQHYKr+5md/x8XUzB9CGkQBkl6YxhSyumyvQ4AtaXzhSEtuH3PgyqZEdC8E
-         ILOtgIKuthq0CkTNXOiTGBC/n0UzggxQt2gKIiyv5+94/Q0FMVCZ3pimY9/tlvkfuK83
-         QFenvWmgZPiRz88lgK+CGq7U33utgkMko37KcLkkGHyZK/nKOtpWhl2S0TJooqK54GNf
-         Jv+InmCpEIAqr/QPjBz/kqMGN7F8uBNpL3sg5AGkAPtDbiXkiiuAobJVDdWsGXmuXDc1
-         L7+G0Jz7VU/67Z9u9sHD3kNN+bYyxWSmnWVnUW2k5gDQAtqgITmxdg6XuxKXt6bWt7HB
-         xYVA==
+        bh=tl4zMb1fEEIE26UdjQruQITTv6oPSgtk1fJIHrW0Bjg=;
+        b=aOWLegcRQ/Pc/GwFSN5AwZb82iOIfV4EQX5QOWtGHVUCDpH0lKYZ2CsgQstTyRxtxz
+         NbRUhRYUJS2CXQiAmeLb4mDRxOapcDO1lZV47Y2aG+4/fy72EA4qzUwoetj4UAGDhBTg
+         iO6PmpG0Ry82R3A91HGAlIte3SLvYhq3A687b/dGt4uZpmFhDScJrdO8PdxuPT++vjd5
+         PveRwwAdXf3PMX/+eXpCx8H3bFDlM1RCPZbUKbYOpBSVFJpQWrLunCUJzH3sVZaWMorG
+         YDrLyuKM0te0J6+AJUrwQWYtheblypCdw4OFMgzPC9fcLZ0INfRhQ/JQTDuwfDwsa8CU
+         9Cbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=I2u/HkPIv4kbQ8vZxT+XJHqzhY88JrzX3BevfYI0kNA=;
-        b=tds/KPlYK9c+fnHlUkgykfQiwIoLCMQaAzNrE0YA2M1E0BhCtxTlBnjV4Ed1ZRrN+X
-         vueyE0+GBAdirswCQr+8sWU/jkS19NFqD+26GCcwmBe/L+z4ozwWl4vTUrbNB1wvDOwr
-         v3Z6tbS1AiY64c+3N7hFl4oZf+VQR4mHf53aUwgAS0txVrh5NVy/PtcOXjQb58S9iQpA
-         Q1ERiUfNa80d2EfAvDtLVK2H5MNQTJ8rWNkCZXZA+kSN8FOXIhLNJpo54abbQpuCtKGs
-         AzAmbGGAeIrPUqqNukAxi8oDOoPsMJhMEisZnJGUbFXwFPCwJKv8cJEDiQa/IVIFc+G5
-         f8hg==
-X-Gm-Message-State: AOAM532eD+UYwdIDqhbFzn2ZXa5VNG5F5DKlv5oiBnU9dQo0ws3brnFX
-	+gKLbpKQm0203rt0HJ867tu9JoHS3zc=
-X-Google-Smtp-Source: ABdhPJzx5JI73ucSB/4jod+VSRDmZrJ2WikvD6RwPLvUgex3NeAWguTNutmyIVkw5zjwoDuhlT0HBA==
-X-Received: by 2002:a05:6512:34c8:: with SMTP id w8mr12419716lfr.12.1595878061573;
-        Mon, 27 Jul 2020 12:27:41 -0700 (PDT)
+        bh=tl4zMb1fEEIE26UdjQruQITTv6oPSgtk1fJIHrW0Bjg=;
+        b=M7KP1Mzx2KkPAAjiIgY7PozIcrtfYme2SCyuQqN6vPNuCMvaySCKKZbXj+7SfLKsur
+         QHUAqwakXcCTkgTbpslQtP0CdIGrM9AHqs3dmGN/c+1QkVKSVNlWLsDsPQvYajejhFhN
+         FGjUGE4vqXt9Cbj3NMDfxKvtMkh6waibc/LhlK+eeXHImgJZyLLPNVXKji5A7GC+hiep
+         /Gv2ETRhVTmoWd24pY8P/9TuyV8G+m+THUNg6tzx43nIRsMKoHAmycGQ7ZqTBS8TwJ0L
+         j7mbBg1RiCBYwYx5djhEfAE95kzeDQHMdPjUU8/uWB99ovCaYRUqolGNrusNKhoRi1+p
+         Cflw==
+X-Gm-Message-State: AOAM533yg1b5zKGnEVjV5XJ4liKX6P3zhIs3doyf3TZxeSrzrf1z39pY
+	ooqrnVSJQdV7AX2OmvMCPVrIo/DmLME=
+X-Google-Smtp-Source: ABdhPJxRUOK2u8JiESnW6DA7LoQGSZzKujAoowleG7asauD04f50sETQZ91X3Fhsdhnmo4wfwIqGzw==
+X-Received: by 2002:a2e:b4bb:: with SMTP id q27mr6535488ljm.277.1595878063469;
+        Mon, 27 Jul 2020 12:27:43 -0700 (PDT)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id u19sm2910311ljk.0.2020.07.27.12.27.40
+        by smtp.gmail.com with ESMTPSA id u19sm2910311ljk.0.2020.07.27.12.27.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Jul 2020 12:27:41 -0700 (PDT)
+        Mon, 27 Jul 2020 12:27:42 -0700 (PDT)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH v2][meta-oe 4/5] usbmuxd: update to 1.1.1
-Date: Mon, 27 Jul 2020 21:27:21 +0200
-Message-Id: <20200727192722.2488841-4-open.source@oleksandr-kravchuk.com>
+Subject: [PATCH v2][meta-oe 5/5] ifuse: update to 1.1.4
+Date: Mon, 27 Jul 2020 21:27:22 +0200
+Message-Id: <20200727192722.2488841-5-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200727192722.2488841-1-open.source@oleksandr-kravchuk.com>
 References: <20200727192722.2488841-1-open.source@oleksandr-kravchuk.com>
@@ -53,32 +53,32 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../usbmuxd/{usbmuxd_git.bb => usbmuxd_1.1.1.bb}               | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/usbmuxd/{usbmuxd_git.bb => usbmuxd_1.1.1.bb} (85%)
+ .../ifuse/{ifuse_1.1.2.bb => ifuse_1.1.4.bb}              | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+ rename meta-filesystems/recipes-filesystems/ifuse/{ifuse_1.1.2.bb => ifuse_1.1.4.bb} (54%)
 
-diff --git a/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb b/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_1.1.1.bb
-similarity index 85%
-rename from meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
-rename to meta-oe/recipes-connectivity/usbmuxd/usbmuxd_1.1.1.bb
-index 7284234326..3860fd8b99 100644
---- a/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
-+++ b/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_1.1.1.bb
-@@ -1,4 +1,5 @@
- DESCRIPTION = "This daemon is in charge of multiplexing connections over USB to an iPhone or iPod touch."
-+HOMEPAGE = "https://github.com/libimobiledevice/usbmuxd"
- LICENSE = "GPLv3 & GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=ebb5c50ab7cab4baeffba14977030c07 \
-                     file://COPYING.GPLv3;md5=d32239bcb673463ab874e80d47fae504"
-@@ -9,7 +10,7 @@ inherit autotools pkgconfig gitpkgv systemd
+diff --git a/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb b/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.4.bb
+similarity index 54%
+rename from meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb
+rename to meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.4.bb
+index f0b58b9673..8a317cddbe 100644
+--- a/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb
++++ b/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.4.bb
+@@ -5,11 +5,9 @@ HOMEPAGE ="http://www.libimobiledevice.org/"
  
- PKGV = "${GITPKGVTAG}"
+ DEPENDS = "fuse libimobiledevice"
  
--SRCREV = "ee85938c21043ef5f7cd4dfbc7677f385814d4d8"
-+SRCREV = "79c8b38d1488a6b07e1e68f39d8caec3f1a45622"
- SRC_URI = "git://github.com/libimobiledevice/usbmuxd;protocol=https"
+-SRC_URI = " \
+-    http://www.libimobiledevice.org/downloads/ifuse-${PV}.tar.bz2 \
+-"
++SRC_URI = "https://github.com/libimobiledevice/ifuse/releases/download/${PV}/ifuse-${PV}.tar.bz2"
  
- S = "${WORKDIR}/git"
+-SRC_URI[md5sum] = "4152526b2ac3c505cb41797d997be14d"
+-SRC_URI[sha256sum] = "47835c8afb72588b3202fe0b206d7ea37a68663d9aa4eaf73f0a4bcb6215fc05"
++SRC_URI[md5sum] = "cd31fbd0ea945b2ff1e39eac8d198fdd"
++SRC_URI[sha256sum] = "3550702ef94b2f5f16c7db91c6b3282b2aed1340665834a03e47458e09d98d87"
+ 
+ inherit autotools pkgconfig
 -- 
 2.25.1
 
