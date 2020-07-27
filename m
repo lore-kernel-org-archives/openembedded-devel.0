@@ -1,123 +1,105 @@
-Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com [209.85.218.68])
- by mx.groups.io with SMTP id smtpd.web11.50868.1595836880434724277
+Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com [209.85.208.194])
+ by mx.groups.io with SMTP id smtpd.web11.51732.1595841696652692853
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Jul 2020 01:01:20 -0700
+ Mon, 27 Jul 2020 02:21:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=VstHA0Zb;
- spf=pass (domain: gmail.com, ip: 209.85.218.68, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-ej1-f68.google.com with SMTP id w9so16064161ejc.8
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Jul 2020 01:01:20 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=JDL13Fw9;
+ spf=pass (domain: linaro.org, ip: 209.85.208.194, mailfrom: andrey.konovalov@linaro.org)
+Received: by mail-lj1-f194.google.com with SMTP id g6so3805852ljn.11
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Jul 2020 02:21:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
+        d=linaro.org; s=google;
         h=from:to:cc:subject:date:message-id;
-        bh=7J1ieZpEIxvm+G93taRa405KccispbvAlncPXTRLg/s=;
-        b=VstHA0ZbKEwJin1D5OdcuCDBwDxQzsia1WFq1gChVb+r3vp8gobCBu0SM8r0Qsq06o
-         tmSf0LJC4588/Y8cv1GuHK1R0KscZWxXIKqz25n9rlBIQ5l3nGS/TylMZD3eftYO8JDk
-         7FtE9GmX/BFjSsfHSCLGMm6My9yF4Ur7CH5Or3k5YkkOlj5XlKkgT20kfKeS/G7RQfGb
-         QxSw/I9x7WVWH8bSdfZpdYN15xJV1oQnQiotbBLWUcxjK2APEsmGpsAGfkwkTmgfvYds
-         pAokT24d8efIyKzXqH6UevsFKiL4zOxCyQzsqhT8laMviLmuFJgW19qoaDVVcPDG1HmJ
-         IuPg==
+        bh=TsLyHf9icimfTRdF3XNR95W1SsltnAf5GMBLlHhhh6E=;
+        b=JDL13Fw9v/WQ6uGRTA+IDmBNBN944L4CvSOEAo7yhKSgezk3Dgc4I56xBMJuyTlX6N
+         Vqyn3BUM4mpjC0/RHfXEwzs9gYBe5EQaU4yWLCkew2lujfspwgUu1tHuQIcwbl+bJfL7
+         w3CNavzw4deuCQFpkUyjJQbANHhVPkXgm5+qmzW+bZd3M5W4Vvp5DHF0IhNferkiEwD3
+         60Fm1XxzalELJwZdAxZI+cdBYNZbX15m0K3ulJJ9/ycHiVq6TVepKy9rn+EzOfWwS+vt
+         C9uvqxfPDQ0sv9q9g1t/agD78qZBvus0twI+f+d5hkfThFtE3LaQlTHmXcL39FEVFoY6
+         UZgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=7J1ieZpEIxvm+G93taRa405KccispbvAlncPXTRLg/s=;
-        b=oyC3vR4SbtBT2ryf0wYfzoEeQS5Mxy3x8ZZDxSddZcalgZSymAHoGt+BSu1Q6Gsp57
-         SuP38dR/yLA8xR/AXacoerILbGYkbCOiEElIaIiWFp26BNnw4A7o83EWdiXw2EEXQRlS
-         11wCQtYGUdVidvytBa3nryq9q9aHsbXpJzih4oRuDOwdvZRTK2PquZ1bznJUxjtEgqqC
-         vV72AGaVBwUbgBwkp6BSLwhfzqB1djtelWATKT0GKH2PGzvGbtF05krw6nIEwCISTAp3
-         qo/dGltxO5hXbfEQFJCZuDLdABgR6JX4fR8xDQAXlqfzoTnfptq+ieePcUwG6LXTlFRk
-         br7w==
-X-Gm-Message-State: AOAM5325ZO0zJEZ+1J1kKWjOVwmV3NKjSBTQPJtsaLPyo2DahfwxXoPS
-	bzrMf5Ah4FA41gThZhNU/rm29ZQC
-X-Google-Smtp-Source: ABdhPJy0by3n1o1PD7YvE3sk5lhiS6GzdGksQakLyAXK2NkY1l79Inv/fHmoM8nieJirQZKuR5Tnbg==
-X-Received: by 2002:a17:906:c0da:: with SMTP id bn26mr11696541ejb.359.1595836878611;
-        Mon, 27 Jul 2020 01:01:18 -0700 (PDT)
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from Unimatrix05-Bionic.lan ([2001:b07:5d32:c012:3f:a5ba:1524:a0bb])
-        by smtp.gmail.com with ESMTPSA id h24sm6535226ejk.117.2020.07.27.01.01.17
+        bh=TsLyHf9icimfTRdF3XNR95W1SsltnAf5GMBLlHhhh6E=;
+        b=PitZTHirTdewzKRCM2C53z0Z0hkkSkkbGLKtjx6ZbfOKMA8u0g1pcdR1l7wChvkULi
+         cw/lJdd3THwL7v1bEIdxvHwF9Rz6ODcYjHpXlmW2XfiMA1D4liAmeBFYi4h8ZLiM8nTh
+         0hEPgG7zyAnwKb6s4lYHkbUVa45JXjxnXYXMqPNay9VRirjYn8GvpsDIUVgP58mRRHqA
+         Mv99F1WvEOARw+BCqiERQQKARF5/CcQJ2Sq0PaYbHbjEiyroiIpS/mXgfcFuuRSY79O6
+         JN9BjEey/3Ob8drir8E3uZ/JYdSg2zAwn5Y054xYAuWpuO4Q+nKcSu03Y4AiXi/QNTtC
+         8Zrg==
+X-Gm-Message-State: AOAM5314zPb1Ej47AEedXjoRHxNg7IXcAgiN3ydNpuWtLk/erl4VSzgv
+	3oMSJnvmEnVQXoH9PGuAlO6V29joZhU=
+X-Google-Smtp-Source: ABdhPJzK4gttWwKg/EVsg0XP8nwdwrqoru3mzIKv8Ry6vLQMAVBynTodKhVVpokwV76aFLeqLr/nPw==
+X-Received: by 2002:a05:651c:106e:: with SMTP id y14mr8930700ljm.381.1595841694272;
+        Mon, 27 Jul 2020 02:21:34 -0700 (PDT)
+Return-Path: <andrey.konovalov@linaro.org>
+Received: from localhost.localdomain (37-144-159-139.broadband.corbina.ru. [37.144.159.139])
+        by smtp.googlemail.com with ESMTPSA id t10sm2231593ljg.60.2020.07.27.02.21.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Jul 2020 01:01:17 -0700 (PDT)
-From: "Gianfranco" <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+        Mon, 27 Jul 2020 02:21:33 -0700 (PDT)
+From: "Andrey Konovalov" <andrey.konovalov@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH] vboxguestdrivers: upgrade 6.1.6 -> 6.1.12
-Date: Mon, 27 Jul 2020 10:01:16 +0200
-Message-Id: <20200727080116.1984-1-costamagnagianfranco@yahoo.it>
+Cc: madhavan.krishnan@linaro.org,
+	raj.khem@gmail.com,
+	peter.griffin@linaro.org,
+	libcamera-devel@lists.libcamera.org,
+	Andrey Konovalov <andrey.konovalov@linaro.org>
+Subject: [meta-multimedia][PATCH] libcamera: fix packaging and installation
+Date: Mon, 27 Jul 2020 12:21:08 +0300
+Message-Id: <20200727092108.6209-1-andrey.konovalov@linaro.org>
 X-Mailer: git-send-email 2.17.1
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
----
- ...rs_6.1.6.bb => vboxguestdrivers_6.1.12.bb} |  4 +-
- .../websocketpp/websocketpp_0.8.3.bb          | 38 +++++++++++++++++++
- 2 files changed, 40 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_6.1.6.bb => vboxguestdrivers_6.1.12.bb} (95%)
- create mode 100644 meta-oe/recipes-support/websocketpp/websocketpp_0.8.3.bb
+libcamera checks if RPATH or RUNPATH dynamic tag is present in
+libcamera.so. If it does, it assumes that libcamera binaries are
+run directly from the build directory without installing them, and
+tries to use resorces like IPA modules from the build directory.
+Mainline meson strips RPATH/RUNPATH out at install time (for
+meson versions up to 0.54; the things are somewhat changed in 0.55).
+But openembedded-core patches meson to disable RPATH/RUNPATH removal.
+That's why we need to remove this tag manually in do_install_append().
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.6.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.12.bb
-similarity index 95%
-rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.6.bb
-rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.12.bb
-index 89b1ee11e..dfa15da2d 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.6.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.12.bb
-@@ -14,8 +14,8 @@ VBOX_NAME = "VirtualBox-${PV}"
- SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
-     file://Makefile.utils \
- "
--SRC_URI[md5sum] = "fe6328d22dfb20ea372daa4b58b12374"
--SRC_URI[sha256sum] = "b031c30d770f28c5f884071ad933e8c1f83e65b93aaba03a4012077c1d90a54f"
-+SRC_URI[md5sum] = "3c351f7fd6376e0bb3c8489505a9450c"
-+SRC_URI[sha256sum] = "05eff0321daa72f6d00fb121a6b4211f39964778823806fa0b7b751667dec362"
+IPA module is signed (with openssl dgst) after it is built. But
+during packaging the OE build system 1) splits out debugging info,
+and 2) strips the binaries. So the IPA module *.so file installed
+isn't the one which the signature was calculated against. Then
+the signature check fails, and libcamera tries to run the IPA
+module isolated (in a sandbox), which doesn't work if the IPA
+module wasn't designed to run isolated. The easiest way to fix that
+is to disable splitting out debug information and stripping the binaries
+during packaging with INHIBIT_PACKAGE_DEBUG_SPLIT and
+INHIBIT_PACKAGE_STRIP.
+
+Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
+---
+ .../recipes-multimedia/libcamera/libcamera.bb            | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+index 00a5c480d..573366f08 100644
+--- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
++++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+@@ -18,13 +18,20 @@ PV = "202006+git${SRCPV}"
  
- S = "${WORKDIR}/vbox_module"
+ S = "${WORKDIR}/git"
  
-diff --git a/meta-oe/recipes-support/websocketpp/websocketpp_0.8.3.bb b/meta-oe/recipes-support/websocketpp/websocketpp_0.8.3.bb
-new file mode 100644
-index 000000000..79a5ac5c4
---- /dev/null
-+++ b/meta-oe/recipes-support/websocketpp/websocketpp_0.8.3.bb
-@@ -0,0 +1,38 @@
-+SUMMARY = "C++/Boost Asio based websocket client/server library."
-+SECTION = "libs/network"
-+HOMEPAGE = "https://github.com/zaphoyd/websocketpp"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=4d168d763c111f4ffc62249870e4e0ea"
-+
-+DEPENDS = " ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'openssl boost zlib', '', d)} "
-+
-+SRC_URI = "git://github.com/zaphoyd/websocketpp.git;protocol=https \
-+           file://0001-cmake-Use-GNUInstallDirs.patch \
-+           file://855.patch \
-+           file://857.patch \
-+           file://0001-Correct-clang-compiler-flags.patch \
-+          "
-+
-+EXTRA_OECMAKE = "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', '-DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON', '', d)} "
-+
-+# this is an header only library, do not depend on the main package
-+RDEPENDS_${PN}-dev = ""
-+
-+# to add this package to an SDK, since it isn't a reverse-dependency of anything, just use something like this:
-+# TOOLCHAIN_TARGET_TASK_append = " websocketpp-dev"
-+
-+# tag 0.8.2
-+SRCREV= "56123c87598f8b1dd471be83ca841ceae07f95ba"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+PACKAGES =+ "${PN}-examples"
-+
-+FILES_${PN}-examples = "${docdir}"
-+
+-DEPENDS = "python3-pyyaml-native udev gnutls boost"
++DEPENDS = "python3-pyyaml-native udev gnutls boost chrpath-native"
+ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
+ 
+ RDEPENDS_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayland', '', d)}"
+ 
+ inherit meson pkgconfig python3native
+ 
 +do_install_append() {
-+	install -d ${D}${docdir}/${BPN}
-+	cp -R ${S}/examples ${D}${docdir}/${BPN}
++        chrpath -d ${D}${libdir}/libcamera.so
 +}
++
+ FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig"
+ FILES_${PN} += " ${libdir}/libcamera.so"
+ 
++INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
++INHIBIT_PACKAGE_STRIP = "1"
++
 -- 
 2.17.1
 
