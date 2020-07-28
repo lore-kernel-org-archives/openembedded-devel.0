@@ -1,17 +1,17 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.57])
- by mx.groups.io with SMTP id smtpd.web11.12105.1595943243184575756
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.54])
+ by mx.groups.io with SMTP id smtpd.web12.12453.1595943260550201033
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Jul 2020 06:34:03 -0700
+ Tue, 28 Jul 2020 06:34:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=qOjeAYnz;
- spf=pass (domain: windriver.com, ip: 40.107.243.57, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=RoUtmkCU;
+ spf=pass (domain: windriver.com, ip: 40.107.243.54, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CB9hk8zYFl5ugL4pz3Ve5TNzkS6osUE0x76bd/WlR2mUre7r4xbzXS8L6etrewANixylq+JOJkbg23oYOl0QgB9y855m1SvJ0wRfWFqXV8WB5YGJ04WUhh5fU8MyQmmZu4zmaNso78KL0NS2R2cJ8ZsTiB67CJbHSNJrYmBP5NTqAwai3wQ/qqr/A9Snmsbanx/C4/mLl3BbDBv2qARkb/Vnc6IhWxF0c0AaeUnOl/EJ+eLUhVv07jhWf2ZSk4rbeoExEMCC7MHnqdV0CP4RCBY8/IlVbf9GR74fYLwq70SqyFnPYrWuNt1KG4SkXj00w41NemJGe/JtIafYD0MD/g==
+ b=WcZJeuQci6GMbGTYBr1kb519NjV190Nw0SdNYY4h9RpQZGuxvMCFPUMo8RLKvEg+rJNVm5oprCzuN7TXNaQz8/ng+Vm/bQjAC17mStAVeXa6px3wFKp+TdJMgzNJLA8gdOXxwa/MKZrLNGUSefnXplizkit7pk2PkIRI5hYhkjAdL9UuJhaZRYLR5Y3cldlV+smLk6Yv8goCUO8imW8HezIFD9S995X2vgjF7xr+nn0njHVCoo1rftDyl/+o9cdtesymh+Os/fRD6qlHMx+ggZi9XxqTyxYKuHFe+yAzxdCU1h8OpKFSdV1UgDRfSzlmRbYTChsb0a7dqlQ+ubnvFw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SQe1jrageGSGh36MoGgDHQoAfq/uG+0VeJQA5+L5ZTM=;
- b=RiRJgQsdGG7fm+gwDxU2tYGwM+SQvpFDzXxzWEzjKBO4eIjDR4bAxGneyUYlg3452RlpO8RT2QQIKd6GIQOvYpGy3qikb/ef9xXxrDr42OfY7vdVIYnawXq32Tj/sjhTugMF4RE5Ci/m89P9WqVVyPPiaHoP+FYf1xYvRjqe1CVc7PZPjbDT3kPdU8oFEKQUalXqtUqYIaciJ/a39MRY0UxnUh9ToIJa84aazuZVp4yd74Vf0QmtmuaoCO126aq9qblqNVdm4FYaQEcSobdciIMx5I8WbsyzFKZ8Fomyxpr2QQDWYnOCzfN5NujzTMoFIAwAbia5sAfrFVIJQpvnAQ==
+ bh=jiM3ETFUE8MdO5Mewgmu+1PhOB8Whklg8g2pw5d1FVQ=;
+ b=nVleECBlElcfO7xQej4T8axBmIbeiYUzVV0Bp/p/BCcaz+7oI3oSauVVfd2sUdQDo3Hk1TNvQBYwgL5XzA+rCkFB8jo6DKGVVoeaVtHPI1ReA8JyfoTO9nxk+o2p4ivE1S/U0k+sklDaczJrpSFp/mH+OGplcmBCAejDXHIlOZP3ZSm84P9qUuESQRC3Ik0jt5xCEp4Rkvw5NH4Nh8Q1Gj6HtgI/IWW5RoWlmFoPNtLSR9bqX1KAqyeV2OhOt/YyTo6hxXGg4NSwJ17z6e+5A2UU9jl5rfA/vz+Zfef5N2yfGs/DCy6kBBRmdpiZmWICuCZY9oNgh7lbiFeffzvxWQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,152 +19,115 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SQe1jrageGSGh36MoGgDHQoAfq/uG+0VeJQA5+L5ZTM=;
- b=qOjeAYnziXZ4gPQvh3G+X9aw1+n4ACRU+j/YyaoCMughB+hjKK+g3XJKHwv8yhjODsOjGgw6t7S5Ed/9/vb3oYGKyavR6Gmbh7ejeuj/IKKJZfjaFMvz465w5+0nhtm8jiDmROy4LrHAU5Jg5t0uk+QbKsAP6LJLKx1/3kRPl88=
+ bh=jiM3ETFUE8MdO5Mewgmu+1PhOB8Whklg8g2pw5d1FVQ=;
+ b=RoUtmkCU7gCn6HDN/IXIkGgqVIuIfKCdZ/KasYp3qGpTHzLLSa2BlmR6/CXxnmCwdXBHlQczyXKN60cyvWxz8YWHSXsDwZ3c+SED7Ui7K9oG4jXfCtDyPqr230M30MWWc5EPbgpop0c8mm7d1W0TKQ2GJ8rgOYgg5qPIEfUdFcA=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB3816.namprd11.prod.outlook.com (2603:10b6:a03:f8::32) with
+ by BY5PR11MB4103.namprd11.prod.outlook.com (2603:10b6:a03:18c::29) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3216.24; Tue, 28 Jul
- 2020 13:34:02 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3216.28; Tue, 28 Jul
+ 2020 13:34:19 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::8d65:f6f9:ce31:8d47]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::8d65:f6f9:ce31:8d47%5]) with mapi id 15.20.3216.033; Tue, 28 Jul 2020
- 13:34:02 +0000
-Subject: Re: [oe] [meta-python][PATCHv2] python3-matplotlib: Upgrade 3.2.2 -> 3.3.0
+ 13:34:19 +0000
+Subject: Re: [oe] [meta-python][PATCHv2] python3-urllib3: Upgrade 1.25.9 -> 1.25.10
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200724163137.1593-1-leon.anavi@konsulko.com>
+References: <20200724163307.1818-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <3a868de4-b099-bc51-5ee6-2f85b59d7aba@windriver.com>
-Date: Tue, 28 Jul 2020 09:33:59 -0400
+Message-ID: <25369cb9-ecf9-5a48-5aec-a5aef511112d@windriver.com>
+Date: Tue, 28 Jul 2020 09:34:16 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200724163137.1593-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0089.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2d::28) To BY5PR11MB3909.namprd11.prod.outlook.com
+In-Reply-To: <20200724163307.1818-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0130.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2f::9) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0089.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3216.22 via Frontend Transport; Tue, 28 Jul 2020 13:34:01 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0130.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::9) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3239.16 via Frontend Transport; Tue, 28 Jul 2020 13:34:18 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: da8a6b2e-e93d-42d8-bbf0-08d832fae3c3
-X-MS-TrafficTypeDiagnostic: BYAPR11MB3816:
+X-MS-Office365-Filtering-Correlation-Id: c80cd08f-9da5-43d3-f7a4-08d832faee0a
+X-MS-TrafficTypeDiagnostic: BY5PR11MB4103:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB38163F3C396389A6096D4C9E9F730@BYAPR11MB3816.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
+	<BY5PR11MB4103F027C6933BFA480D58089F730@BY5PR11MB4103.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:5516;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	AIYfo3B7Dclwu1u/xUBKkzR7MY7r3berNl2LrJIl8xbfTj+0E5QJgSUd7YHlIm2bf6IWAL4In0Lv8nSo76Cg4qD1Drzb9/VmAHhUs6wIwtRFr7y9oeuO37PSERFeUfWorG3AAb0ZfUHHwhyaKt3AxIUrC39QsI9bu3kj1M0NYKNRcmanGhfkD4JU72udCc7umOTfR1D3TbSN0/oPet3fwQDDVc1BWU2hpRKY5CcR+hcOs1jNNQThm3yxnys3NAkh98Loj3ozYa7EiXwxA0rN+GBuIjX+M8yiQ3teVP8Eg+ZXjdpod0ADG0A8uMzmzjnYTGHMt3afD0dvvgpFmfqqnUuNNcR33nHbXpbz130jiFP6gqehlfG0Ettsv86zysZPrvoDzQ+pZzkFHrgLwX+5nDdNr7TkpHtd/R+ov82oQuFvMaKBmbf4nvyGGAAlf9eT4SDp0bz1iIhaZXkJgg9AAQ==
+	spGIGyB0xEvdykJYh2GzvDUG1bbe+NNPEdxlFqHj/5WpGk8sProVkjVfZz30eu7c5YI/i577jy0XqgHy/wiD6vPyKriFyOshR6oUP3qmeCJfFpcWmUb4Iz9Jsbo2gj8SD6zUOpOFhnBLMab8akmiAw/ppmnv24ULoPHXBkFtyMHu/yg40Ev0CenxN+XJI4/3SFouU13qV7RDfCkK6Bbsl1NtVL/HmOHNjlD5ahOUKOFqYKXzIcEgqQi0Gv08CLHc1yFxpN3mnMojZD2DdiyXz+WcM3haf35zGBLQ+REXg8HgurdQ123+hfMeQ1L5QV8tbnQjZhEX3uBeqTSK0K/xXIdWf1EMnPfFYMdj+iOM3i/PPqLkUfhtDoMTj41hCoURgU+GygfM08gGJRhMbZlGEIgTuJKIeZYbUWaCwyUjAOjZKYx+1wjapsZvsYLwoMK6AX+Wc5Vm1ksOE7aaAQRrNw==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(39850400004)(136003)(366004)(346002)(376002)(478600001)(316002)(83380400001)(33964004)(16576012)(53546011)(52116002)(8936002)(8676002)(31696002)(966005)(66476007)(66556008)(6486002)(66946007)(26005)(166002)(16526019)(2906002)(186003)(86362001)(36756003)(5660300002)(31686004)(44832011)(956004)(2616005)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(366004)(376002)(39850400004)(396003)(346002)(8936002)(478600001)(966005)(52116002)(36756003)(2906002)(33964004)(8676002)(2616005)(16576012)(44832011)(83380400001)(316002)(86362001)(31686004)(53546011)(166002)(6486002)(16526019)(186003)(66946007)(5660300002)(66476007)(66556008)(31696002)(956004)(26005)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	Duj2Mpt49XO3B0YUknXPrl6vJxiM3v7xHlK5hkZclNkDajTcnxbryb/NJrLRMRV3w9v7dpCOAtP9dQai6V9rpzteoaEQ0CdQZccAm9u7P0DZGdvAHTcNYV6d4QL9jI8//FA2vdDvbrvGAi4RjGDrbpnMO3o1N/nWrMW6MyEvvz3aM4DJKA1hPiYxey1baUhXbhLC9CuWQE/pykmrYmXR3JFP8LluJY0UhACHl2DsVqmrGoQlV3X5o+q6R3VD/uU2YMDfl4updw5h4eJ5i9VuqHkCzbIuoWkdSZ6nDsN5WlRMwtq/wCIq04TkkzhqJQ4X3NwTRBbnqvctkMiQHu9AuTIpX5Hy7+6gS/9VYw1IQNBIgvNCZ07DO42cjTQWgM+guTRfvjNkAF10PUQWzS8LUXvUL2ggkIjT2fkDURAhzYbwY+Ktru5KHxoemMS5oaUC6f8KOGA1I8gRoG/7ySUHz++ZZrJu+yGH5pYynwLg4Xk=
+	WYNRCw9RZ9caRNtUjvfrtmdAgsslTh8gsioF/HXF3X75e7t5fSHwoQnVwD02OpqpDWaGSu/qAAVuPyHUxnf4WhnG9DLp28/C3jUr5kPYotSB1uxJHz4ovAmLR2zX+wOykEXGJfy8Qssl4Hk+wef7DzI5Oirm4b2gYR/vcOWNeL6p6A04R2awhA4UW6hoaRYnuJeSx4oIEDB70C2XBhDbqeH2VqZTIVDqjwyf17bLyVw2PzFnuioVfu37NcvnOMobzBIFWTpquWy0QfNbUfo1RZHbRta1PUvhACZDCWJknPUPouOr33PKw1xhYzXNv/RzUfHnT881xmOYZUMqSiHuUckVj83DzVamTFbVm214VA/Q/7tmCstqLIPoMlTxZnzztl8Lz/5X0fTnxHohPt5o4Dw1fuvKybnd8AVmdxlg7gYrR7IWnokv8zPbfYRF4yWQGMeOm9dRcctP1CBDO9d9A79PsMhkfr3fQKs4VN7lF1A=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: da8a6b2e-e93d-42d8-bbf0-08d832fae3c3
+X-MS-Exchange-CrossTenant-Network-Message-Id: c80cd08f-9da5-43d3-f7a4-08d832faee0a
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2020 13:34:02.0162
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2020 13:34:19.4481
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qSDuuV6oU4sfhykTbg2XmeDOloHPL950K3ronyPXsbKL75XNa0E9AK6sIdW254kqpKC8F9WEabGbOMNTPTDIpvzUBlWju6nGVMqct5vqn14=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3816
+X-MS-Exchange-CrossTenant-UserPrincipalName: XteQUTS6hSK2v96L5nQzfiuy3xzIMAcoyR45CSc866Qk82ZHC7783gVTH6TAKqjMYmg/ZMnZ0EJJTGBFYn5pQnaLP63FsnFwAx5uOf2ROF8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4103
 Content-Type: multipart/alternative;
- boundary="------------00EB9A525A43C363AEEF8CCC"
+ boundary="------------FBC3CDFA70D34AFA4A3BD039"
 Content-Language: en-US
 
---------------00EB9A525A43C363AEEF8CCC
+--------------FBC3CDFA70D34AFA4A3BD039
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 7/24/20 12:31 PM, Leon Anavi wrote:
-> Upgrade to release 3.3.0:
+On 7/24/20 12:33 PM, Leon Anavi wrote:
+> Upgrade to release 1.25.10:
 >
-> - Provisional API for composing semantic axes layouts from text
->    or nested lists
-> - New Axes.sharex, Axes.sharey methods
-> - Turbo colormap
-> - colors.BoundaryNorm supports extend keyword argument
-> - Text color for legend labels
-> - Pcolor and Pcolormesh now accept shading='nearest' and 'auto'
-> - Allow tick formatters to be set with str or function inputs
-> - New Axes.axline method
-> - Dates use a modern epoch
-> - Improved font weight detection
-> - Axes3D no longer distorts the 3D plot to match the 2D aspect
->    ratio
-> - More consistent toolbar behavior across backends
-> - Toolbar icons are now styled for dark themes
-> - Cursor text now uses a number of significant digits matching
->    pointing precision
-> - Functions to compute a Path's size
-> - savefig() gained a backend keyword argument
-> - Saving SVG now supports adding metadata
-> - Saving PDF metadata via PGF now consistent with PDF backend
-> - NbAgg and WebAgg no longer use jQuery & jQuery UI
->
-> Create setup.cfg with configuration to use the copy of FreeType
-> installed on the system.
->
-> License-Update: The line and the checksum of the license in
-> setup.py has changed but the license remains the same.
+> * Added support for ``SSLKEYLOGFILE`` environment variable for
+>    logging TLS session keys with use with programs like
+>    Wireshark for decrypting captured web traffic
+> * Fixed loading of SecureTransport libraries on macOS Big Sur
+>    due to the new dynamic linker cache
+> * Collapse chunked request bodies data and framing into one
+>    call to ``send()`` to reduce the number of TCP packets by 2-4x
+> * Don't insert ``None`` into ``ConnectionPool`` if the pool
+>    was empty when requesting a connection
+> * Avoid ``hasattr`` call in ``BrotliDecoder.decompress()``
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...atplotlib_3.2.2.bb => python3-matplotlib_3.3.0.bb} | 11 ++++++++---
->   1 file changed, 8 insertions(+), 3 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-matplotlib_3.2.2.bb => python3-matplotlib_3.3.0.bb} (70%)
+>   .../{python3-urllib3_1.25.9.bb => python3-urllib3_1.25.10.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-urllib3_1.25.9.bb => python3-urllib3_1.25.10.bb} (79%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.2.2.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
-> similarity index 70%
-> rename from meta-python/recipes-devtools/python/python3-matplotlib_3.2.2.bb
-> rename to meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
-> index b32177d9b..2e88efb56 100644
-> --- a/meta-python/recipes-devtools/python/python3-matplotlib_3.2.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
-> @@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/matplotlib/matplotlib"
->   SECTION = "devel/python"
->   LICENSE = "PSF"
->   LIC_FILES_CHKSUM = "\
-> -    file://setup.py;beginline=253;endline=253;md5=2a114620e4e6843aa7568d5902501753 \
-> +    file://setup.py;beginline=251;endline=251;md5=e0ef37de7122ce842bcd1fb54482b353 \
->       file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74 \
->   "
->   DEPENDS = "\
-> @@ -18,8 +18,8 @@ DEPENDS = "\
->       python3-pytz-native \
->   "
+> diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
+> similarity index 79%
+> rename from meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
+> rename to meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
+> index 8cbc1f9f9..db985a2ff 100644
+> --- a/meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
+> +++ b/meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
+>   LICENSE = "MIT"
+>   LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=65715c2eb961313d71b297dd5a04f85e"
 >   
-> -SRC_URI[md5sum] = "b60cd68f792a30173d825e16482aedd8"
-> -SRC_URI[sha256sum] = "3d77a6630d093d74cbbfebaa0571d00790966be1ed204e4a8239f5cbd6835c5d"
-> +SRC_URI[md5sum] = "b1de7185687c6f5c092689e3431a69b3"
-> +SRC_URI[sha256sum] = "24e8db94948019d531ce0bcd637ac24b1c8f6744ac86d2aa0eb6dbaeb1386f82"
+> -SRC_URI[md5sum] = "dbf9b868b90880b24b1ac278094e912e"
+> -SRC_URI[sha256sum] = "3018294ebefce6572a474f0604c2021e33b3fd8006ecd11d62107a5d2a963527"
+> +SRC_URI[md5sum] = "94e3d4d472a14e788d4bd1a903fd102b"
+> +SRC_URI[sha256sum] = "91056c15fa70756691db97756772bb1eb9678fa585d9184f24534b100dc60f4a"
 >   
->   inherit pypi setuptools3 pkgconfig
+>   inherit pypi setuptools3
 >   
-> @@ -34,4 +34,9 @@ RDEPENDS_${PN} = "\
->       python3-pytz \
->   "
->   
-> +do_compile_prepend() {
-> +    echo [libs] > ${S}/setup.cfg
-> +    echo system_freetype = true >> ${S}/setup.cfg
-> +}
-> +
->   BBCLASSEXTEND = "native"
 >
 > 
 
---------------00EB9A525A43C363AEEF8CCC
+--------------FBC3CDFA70D34AFA4A3BD039
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -174,87 +137,50 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 7/24/20 12:31 PM, Leon Anavi wrote:<br>
+    <div class="moz-cite-prefix">On 7/24/20 12:33 PM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200724163137.1593-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 3.3.0:
+    <blockquote type="cite" cite="mid:20200724163307.1818-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.25.10:
 
-- Provisional API for composing semantic axes layouts from text
-  or nested lists
-- New Axes.sharex, Axes.sharey methods
-- Turbo colormap
-- colors.BoundaryNorm supports extend keyword argument
-- Text color for legend labels
-- Pcolor and Pcolormesh now accept shading='nearest' and 'auto'
-- Allow tick formatters to be set with str or function inputs
-- New Axes.axline method
-- Dates use a modern epoch
-- Improved font weight detection
-- Axes3D no longer distorts the 3D plot to match the 2D aspect
-  ratio
-- More consistent toolbar behavior across backends
-- Toolbar icons are now styled for dark themes
-- Cursor text now uses a number of significant digits matching
-  pointing precision
-- Functions to compute a Path's size
-- savefig() gained a backend keyword argument
-- Saving SVG now supports adding metadata
-- Saving PDF metadata via PGF now consistent with PDF backend
-- NbAgg and WebAgg no longer use jQuery &amp; jQuery UI
-
-Create setup.cfg with configuration to use the copy of FreeType
-installed on the system.
-
-License-Update: The line and the checksum of the license in
-setup.py has changed but the license remains the same.
+* Added support for ``SSLKEYLOGFILE`` environment variable for
+  logging TLS session keys with use with programs like
+  Wireshark for decrypting captured web traffic
+* Fixed loading of SecureTransport libraries on macOS Big Sur
+  due to the new dynamic linker cache
+* Collapse chunked request bodies data and framing into one
+  call to ``send()`` to reduce the number of TCP packets by 2-4x
+* Don't insert ``None`` into ``ConnectionPool`` if the pool
+  was empty when requesting a connection
+* Avoid ``hasattr`` call in ``BrotliDecoder.decompress()``
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200724163137.1593-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200724163307.1818-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...atplotlib_3.2.2.bb =&gt; python3-matplotlib_3.3.0.bb} | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-matplotlib_3.2.2.bb =&gt; python3-matplotlib_3.3.0.bb} (70%)
+ .../{python3-urllib3_1.25.9.bb =&gt; python3-urllib3_1.25.10.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-urllib3_1.25.9.bb =&gt; python3-urllib3_1.25.10.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.2.2.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-matplotlib_3.2.2.bb
-rename to meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
-index b32177d9b..2e88efb56 100644
---- a/meta-python/recipes-devtools/python/python3-matplotlib_3.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
-@@ -7,7 +7,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/matplotlib/matplotlib">&quot;https://github.com/matplotlib/matplotlib&quot;</a>
- SECTION = &quot;devel/python&quot;
- LICENSE = &quot;PSF&quot;
- LIC_FILES_CHKSUM = &quot;\
--    <a class="moz-txt-link-freetext" href="file://setup.py;beginline=253;endline=253;md5=2a114620e4e6843aa7568d5902501753">file://setup.py;beginline=253;endline=253;md5=2a114620e4e6843aa7568d5902501753</a> \
-+    <a class="moz-txt-link-freetext" href="file://setup.py;beginline=251;endline=251;md5=e0ef37de7122ce842bcd1fb54482b353">file://setup.py;beginline=251;endline=251;md5=e0ef37de7122ce842bcd1fb54482b353</a> \
-     <a class="moz-txt-link-freetext" href="file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74">file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74</a> \
- &quot;
- DEPENDS = &quot;\
-@@ -18,8 +18,8 @@ DEPENDS = &quot;\
-     python3-pytz-native \
- &quot;
+diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
+rename to meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
+index 8cbc1f9f9..db985a2ff 100644
+--- a/meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
++++ b/meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/shazow/urllib3">&quot;https://github.com/shazow/urllib3&quot;</a>
+ LICENSE = &quot;MIT&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=65715c2eb961313d71b297dd5a04f85e">&quot;file://LICENSE.txt;md5=65715c2eb961313d71b297dd5a04f85e&quot;</a>
  
--SRC_URI[md5sum] = &quot;b60cd68f792a30173d825e16482aedd8&quot;
--SRC_URI[sha256sum] = &quot;3d77a6630d093d74cbbfebaa0571d00790966be1ed204e4a8239f5cbd6835c5d&quot;
-+SRC_URI[md5sum] = &quot;b1de7185687c6f5c092689e3431a69b3&quot;
-+SRC_URI[sha256sum] = &quot;24e8db94948019d531ce0bcd637ac24b1c8f6744ac86d2aa0eb6dbaeb1386f82&quot;
+-SRC_URI[md5sum] = &quot;dbf9b868b90880b24b1ac278094e912e&quot;
+-SRC_URI[sha256sum] = &quot;3018294ebefce6572a474f0604c2021e33b3fd8006ecd11d62107a5d2a963527&quot;
++SRC_URI[md5sum] = &quot;94e3d4d472a14e788d4bd1a903fd102b&quot;
++SRC_URI[sha256sum] = &quot;91056c15fa70756691db97756772bb1eb9678fa585d9184f24534b100dc60f4a&quot;
  
- inherit pypi setuptools3 pkgconfig
+ inherit pypi setuptools3
  
-@@ -34,4 +34,9 @@ RDEPENDS_${PN} = &quot;\
-     python3-pytz \
- &quot;
- 
-+do_compile_prepend() {
-+    echo [libs] &gt; ${S}/setup.cfg
-+    echo system_freetype = true &gt;&gt; ${S}/setup.cfg
-+}
-+
- BBCLASSEXTEND = &quot;native&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -264,4 +190,4 @@ index b32177d9b..2e88efb56 100644
   </body>
 </html>
 
---------------00EB9A525A43C363AEEF8CCC--
+--------------FBC3CDFA70D34AFA4A3BD039--
