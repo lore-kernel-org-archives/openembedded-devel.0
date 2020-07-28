@@ -1,101 +1,116 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web12.17787.1595957488058030966
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com [209.85.160.174])
+ by mx.groups.io with SMTP id smtpd.web10.19389.1595961438562839037
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Jul 2020 10:31:28 -0700
+ Tue, 28 Jul 2020 11:37:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: joe.slater@windriver.com)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 06SHVQ0R016690
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2020 10:31:27 -0700 (PDT)
-Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCB.corp.ad.wrs.com
- (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Tue, 28 Jul 2020
- 10:31:07 -0700
-From: "Joe Slater" <joe.slater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
-Subject: [meta-oe][PATCH 1/1] lua: Security Advisory - lua - CVE-2020-15888
-Date: Tue, 28 Jul 2020 10:31:07 -0700
-Message-ID: <20200728173107.35777-1-joe.slater@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=DYGEYoZI;
+ spf=pass (domain: gmail.com, ip: 209.85.160.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f174.google.com with SMTP id b25so15636270qto.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2020 11:37:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Tr+GIqzTapKLzh9FSZkjV7DOnJChHgJ6MgrV6HzM4z4=;
+        b=DYGEYoZIS9EMuUWwVqWPL2VtLjEvxEa0vamfgZvltdKofTPB5P5qHcIBC6WJQ37ZhU
+         cvYxkvD/a0QgxYcJydN/2zZwFBnLJXyPCOkWDFqM4sNMWyWTPoCFIl3iVqR0FrkBRNuw
+         w7jIAKn74u8210VEAlrh9pwc7WuwvnCFRyDbYUOoWBg5gj0wnSSuxF14gVYfLHJ+Zm7A
+         KfAGpn+4fwi15QkZudsAesCfE6joKlACJjgDBvOzqP00HC7JZ+CAVhp3iQqyEce/ChpZ
+         rxpdCr3DCQRAu1I7qpNy2gidyIAqZMlCcC8551ss5XiUvlNBq4NMpeMP+vllTlDSwEuQ
+         GqIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Tr+GIqzTapKLzh9FSZkjV7DOnJChHgJ6MgrV6HzM4z4=;
+        b=EDZbjG+zXQXH4lES7HN1pBWcDWi8LA0gQztJq+ursZOWQgri7675K197t7RiMgbGBN
+         Pi113HkBw9tK74tGMOe7vVgEKeQAQi3w82ALc0w7XzqB0P13DOc0OCW6XoDugvHBG9CE
+         yrwQaxK8Hn0/boQce2MhgD4BTlona9hyOKY2jHWg3DOzkLMZAzKpFj/DUPWEbe4gWC2p
+         4aMgijx6u8AV5qiu73ZPr9GbtCAN7cDf5fQ8cIcyOVXkr5lUaf6msYW/8kJQNe1n7kWE
+         iT50Xi9AdDVkE2m8K1LUDoNAUGEYiOsCjYKL1Hj8CdFjytCaWqq0M3ZYVFAzitry9PCX
+         LWwQ==
+X-Gm-Message-State: AOAM5321tYgJzPHeBig0LoW91HO8AhD3hqTQ7EGKils9CRq89ZONR8xi
+	PyE3GnpwSVivCW7/C+iIiqJj9smAd9VpbskEkiUYszAyjSw=
+X-Google-Smtp-Source: ABdhPJyeL1AlfIB8nQqNoRaUx/Sulp8+46/IHcNqirjP6oNHp1xP5ubHS7znR/xQ5DpvUK/E/4ULmpwTrN812aDg+so=
+X-Received: by 2002:ac8:748b:: with SMTP id v11mr27989795qtq.293.1595961437616;
+ Tue, 28 Jul 2020 11:37:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20200726095913.3962157-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20200726095913.3962157-1-open.source@oleksandr-kravchuk.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Tue, 28 Jul 2020 11:36:50 -0700
+Message-ID: <CAMKF1srPjAdFQtJGJ2x6gbTN+zjjzTRhzwikQt+LCN2DmJb4Dw@mail.gmail.com>
+Subject: Re: [oe] [PATCH][meta-oe 1/2] opus-tools: update to 0.2
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-From: Yue Tao <Yue.Tao@windriver.com>
+On Sun, Jul 26, 2020 at 2:59 AM Oleksandr Kravchuk
+<open.source@oleksandr-kravchuk.com> wrote:
+>
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>  .../opus-tools/opus-tools_0.1.8.bb                | 15 ---------------
+>  .../opus-tools/opus-tools_0.2.bb                  | 15 +++++++++++++++
+>  2 files changed, 15 insertions(+), 15 deletions(-)
+>  delete mode 100644 meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb
+>  create mode 100644 meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb
+>
+> diff --git a/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb b/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb
+> deleted file mode 100644
+> index a84f2bf078..0000000000
+> --- a/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb
+> +++ /dev/null
+> @@ -1,15 +0,0 @@
+> -SUMMARY = "Opus Audio Tools"
+> -HOMEPAGE = "http://www.opus-codec.org/"
+> -
+> -LICENSE = "BSD-2-Clause"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=843a066da9f1facfcc6ea6f616ffecb1"
+> -
+> -SRC_URI = "http://downloads.xiph.org/releases/opus/opus-tools-${PV}.tar.gz"
+> -SRC_URI[md5sum] = "b424790eda9357a4df394e2d7ca19eac"
+> -SRC_URI[sha256sum] = "e4e188579ea1c4e4d5066460d4a7214a7eafe3539e9a4466fdc98af41ba4a2f6"
+> -
+> -S = "${WORKDIR}/opus-tools-${PV}"
+> -
+> -DEPENDS = "libopus flac"
+> -
+> -inherit autotools pkgconfig
+> diff --git a/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb b/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb
+> new file mode 100644
+> index 0000000000..766507de17
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb
+> @@ -0,0 +1,15 @@
+> +SUMMARY = "Opus Audio Tools"
+> +HOMEPAGE = "http://www.opus-codec.org/"
+> +
+> +LICENSE = "BSD-2-Clause"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=79f6fc2a6239fbe5f6e52f20ac76698c"
+> +
+> +SRC_URI = "https://archive.mozilla.org/pub/opus/opus-tools-${PV}.tar.gz"
+> +SRC_URI[md5sum] = "ff2d0536e960cabbfb8ca7c8c1759b6c"
+> +SRC_URI[sha256sum] = "b4e56cb00d3e509acfba9a9b627ffd8273b876b4e2408642259f6da28fa0ff86"
+> +
+> +S = "${WORKDIR}/opus-tools-${PV}"
+> +
+> +DEPENDS = "libopus flac libopusenc opusfile"
 
-Backport fix from https://github.com/lua/lua.git.
+this is causing
 
-Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
-Signed-off-by: Joe Slater <joe.slater@windriver.com>
----
- .../lua/lua/CVE-2020-15888.patch              | 45 +++++++++++++++++++
- meta-oe/recipes-devtools/lua/lua_5.3.5.bb     |  1 +
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/lua/lua/CVE-2020-15888.patch
+step1b: ERROR: Nothing PROVIDES 'opusfile' (but
+/home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb
+DEPENDS on or otherwise requires it). Close matches:
+step1b: ERROR: Nothing RPROVIDES 'opus-tools' (but
+/home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb,
+/home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb
+RDEPENDS on or otherwise requires it)
 
-diff --git a/meta-oe/recipes-devtools/lua/lua/CVE-2020-15888.patch b/meta-oe/recipes-devtools/lua/lua/CVE-2020-15888.patch
-new file mode 100644
-index 000000000..60a412597
---- /dev/null
-+++ b/meta-oe/recipes-devtools/lua/lua/CVE-2020-15888.patch
-@@ -0,0 +1,45 @@
-+From 6298903e35217ab69c279056f925fb72900ce0b7 Mon Sep 17 00:00:00 2001
-+From: Roberto Ierusalimschy <roberto@inf.puc-rio.br>
-+Date: Mon, 6 Jul 2020 12:11:54 -0300
-+Subject: [PATCH] Keep minimum size when shrinking a stack
-+
-+When shrinking a stack (during GC), do not make it smaller than the
-+initial stack size.
-+---
-+ ldo.c | 5 ++---
-+ 1 file changed, 2 insertions(+), 3 deletions(-)
-+==== end of original header ====
-+
-+CVE: CVE-2020-15888
-+
-+Upstream-Status: backport [https://github.com/lua/lua.git]
-+
-+Signed-off-by: Joe Slater <joe.slater@windriver.com>
-+
-+====
-+diff --git a/ldo.c b/ldo.c
-+index c563b1d9..a89ac010 100644
-+--- a/src/ldo.c
-++++ b/src/ldo.c
-+@@ -220,7 +220,7 @@ static int stackinuse (lua_State *L) {
-+ 
-+ void luaD_shrinkstack (lua_State *L) {
-+   int inuse = stackinuse(L);
-+-  int goodsize = inuse + (inuse / 8) + 2*EXTRA_STACK;
-++  int goodsize = inuse + BASIC_STACK_SIZE;
-+   if (goodsize > LUAI_MAXSTACK)
-+     goodsize = LUAI_MAXSTACK;  /* respect stack limit */
-+   if (L->stacksize > LUAI_MAXSTACK)  /* had been handling stack overflow? */
-+@@ -229,8 +229,7 @@ void luaD_shrinkstack (lua_State *L) {
-+     luaE_shrinkCI(L);  /* shrink list */
-+   /* if thread is currently not handling a stack overflow and its
-+      good size is smaller than current size, shrink its stack */
-+-  if (inuse <= (LUAI_MAXSTACK - EXTRA_STACK) &&
-+-      goodsize < L->stacksize)
-++  if (inuse <= (LUAI_MAXSTACK - EXTRA_STACK) && goodsize < L->stacksize)
-+     luaD_reallocstack(L, goodsize);
-+   else  /* don't change stack */
-+     condmovestack(L,{},{});  /* (change only for debugging) */
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-index a23a4a5da..d3461b06d 100644
---- a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-+++ b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-@@ -7,6 +7,7 @@ HOMEPAGE = "http://www.lua.org/"
- SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
-            file://lua.pc.in \
-            file://0001-Allow-building-lua-without-readline-on-Linux.patch \
-+           file://CVE-2020-15888.patch \
-            "
- 
- # if no test suite matches PV release of Lua exactly, download the suite for the closest Lua release.
--- 
-2.17.1
 
+> +
+> +inherit autotools pkgconfig
+> --
+> 2.25.1
+>
+> 
