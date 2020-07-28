@@ -1,17 +1,17 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.69])
- by mx.groups.io with SMTP id smtpd.web11.12062.1595943145871117772
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.45])
+ by mx.groups.io with SMTP id smtpd.web12.12411.1595943157997334641
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Jul 2020 06:32:26 -0700
+ Tue, 28 Jul 2020 06:32:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=C2gJ0uLr;
- spf=pass (domain: windriver.com, ip: 40.107.243.69, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=cNsrFj/k;
+ spf=pass (domain: windriver.com, ip: 40.107.244.45, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OpeDqhKEptlO9DCwfOmRBhE7+kWrMOn0PdYiAGv5qDbS8QUkjtZ2hRgtPzqT1nhYJiTy+aCLCJAiedJzOhi/nhvcSeSeS+k0ej55EdKTVJpWrEz839ZZpTGNyAPF77tVdf0K2lG0Rr9HNNkkCt8zVMGOfgYb7N3kJlrtaaq1BQ/ikHofedf6Sh29mtK97yrt+T3uGDtJ1rcXn0HLLf0c9sZd7cHjK6a5KWdzRoWlAsmhgQG6H6lUB7ADF2RKIAoHY0ddKBSNhXDmBsQHCpFAX50QFQlQSkr/qQ9occ6Ccz4Dz+TPRdolNUVEjWanXLszKlByIKw1zffAk1CsPjasiA==
+ b=HIFAPj6xPr7kuZTzsq/2qmUTvGmBtjw8tekdT17VY+X5sq/SJ3wfLPJoHx+8lvMwYG6ZwtKQgCFLQx0vZIEeSS754N/m0cxD24sDFEHKZ3CnfIInYle9oRxCFcgcneFsKVgzBoWKJi7kmNsPuQwZSVtyZcPnX6wPW0N11L5bdiye1OOSiz+40npgsK/JLGd0+1T65MuwSHcyrqYa24FM88U5U3DsKBrMWlK2bwFav2nMjdMtn3qxBchYrpCqfwlXxVPIYKtGLZyxiRQDojjggWTS4HVmEmYhr8tjPYnkurHrihCRZjbAODrL0C6Yegnh3wNELDZ6VX7H2oZIVEStEQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6eedERLO+RfZUPwlKXbuBhL/naB+wOh5kSMDgcPOudE=;
- b=Jt1N9tKYlpmIOYm6RrJRnSdYYOxKozlgsoaPkbyyemBQkkT06N1x4xBQeVkwucJ+br2w8AKmjm8AsvX7r4nD0lsQmZq7PuNrhX0kcGGcOI/ks5Ir2uEDIhqrVrl7Xi2pK48b5YGm3oc9L3QoQGd1cPc8J0cCLiYP0CnSuxje5Bull/EPyUEXTymfa2KeVJ6+llHhLs6HA/Ze1KOGj2/48Ryr+vxoGxI23mmwsOzl0Rs0J22YpdT2lbYu4GkVTUO7A23R3AW0SNdueWDJw3ki8UrqJgmm+Yqc9j9UhUm2cj3TCMAKA/jI4PrXlPe1FfHp4L373Mt6Tki2oak0UMgHNw==
+ bh=1fMTTDwnxjm91TQjRD/FnHX2ACI0Hc+3Ew8lwWROhlg=;
+ b=OxoL7JcDXmOyMRIliX2xVVesj2UAek/a+PJ91KEFpXlPLEvGN3E9Vd7zsOjB3NiSf6YHgkcO9zV25IBCC0SMZPcEXOzRLCG9FGzqupDJnrH8kyJZJQjkV61iWe1kc1yk1Mes+TQCnOGiQOFUlsgnO/VcdCLYXH7ApKoARod7s7fRU8OUetigN89VF8HlBCYesfFxn8yAl59q9RyJlJoewum7FpM2/534Lzd7k3N1bYmq0MZCICyD0WCcnfEMXBe8oqVB3u1wk44P9vLeJSYrFxFbPn8vn7quNloeq8wKCybDqPfuWf2w/gZko6UfS2XS+2axVjFkr02dMxYyONxuSQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,119 +19,113 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6eedERLO+RfZUPwlKXbuBhL/naB+wOh5kSMDgcPOudE=;
- b=C2gJ0uLre0IQsoMIBjbi1algzltORNeQmG+FX+TEX30f5JVCkofX4RhlORF2CYJREPOKHm5l/yaPc/d4T7a/c/55tbIQ765N2eo78RJgpx2iPPGrIYR702ile7UwHh54nSpZvLddOc86cRB562ZryUr3kGXjI5zSNVrNNmDN6t8=
+ bh=1fMTTDwnxjm91TQjRD/FnHX2ACI0Hc+3Ew8lwWROhlg=;
+ b=cNsrFj/kA5od8XfHFjsMZuwqOSiA0WKkCm02ZeVfiTDp0tu0QajlRYkGgMY5Z8gBa5qlFlufyVTih5/nwwikZrBxq0d3I1MwriI7QOSL/HxFf+zIlzxVMOUCozoGJxSvFzNnex6uiyhhm1QQr2i/4uULNwiWI/hg9EiFkDkvmjI=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB3816.namprd11.prod.outlook.com (2603:10b6:a03:f8::32) with
+ by BY5PR11MB4103.namprd11.prod.outlook.com (2603:10b6:a03:18c::29) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3216.24; Tue, 28 Jul
- 2020 13:32:23 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3216.28; Tue, 28 Jul
+ 2020 13:32:36 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::8d65:f6f9:ce31:8d47]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::8d65:f6f9:ce31:8d47%5]) with mapi id 15.20.3216.033; Tue, 28 Jul 2020
- 13:32:23 +0000
-Subject: Re: [oe] [meta-python][PATCH 2/7] python3-cmd2: Upgrade 1.1.0 -> 1.2.1
+ 13:32:36 +0000
+Subject: Re: [oe] [meta-python][PATCH 3/7] python3-aenum: Upgrade 2.2.3 -> 2.2.4
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200724103515.21420-1-leon.anavi@konsulko.com>
- <20200724103515.21420-2-leon.anavi@konsulko.com>
+ <20200724103515.21420-3-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <e927c9c6-d31e-62c7-e53f-ea4a2388afd1@windriver.com>
-Date: Tue, 28 Jul 2020 09:32:20 -0400
+Message-ID: <66ad5e20-8ea7-1c6e-bd96-89a90b4210ed@windriver.com>
+Date: Tue, 28 Jul 2020 09:32:34 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200724103515.21420-2-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0069.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2d::8) To BY5PR11MB3909.namprd11.prod.outlook.com
+In-Reply-To: <20200724103515.21420-3-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0090.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2d::29) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0069.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::8) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3239.16 via Frontend Transport; Tue, 28 Jul 2020 13:32:23 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0090.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3216.22 via Frontend Transport; Tue, 28 Jul 2020 13:32:35 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 698ea4a1-04d0-421a-a39c-08d832faa931
-X-MS-TrafficTypeDiagnostic: BYAPR11MB3816:
+X-MS-Office365-Filtering-Correlation-Id: 2ebbbd92-8502-451d-49b0-08d832fab0bc
+X-MS-TrafficTypeDiagnostic: BY5PR11MB4103:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB3816F512E13B23CAA8D9C9229F730@BYAPR11MB3816.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2399;
+	<BY5PR11MB4103050A6BE9EAD84F3BDCEA9F730@BY5PR11MB4103.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1002;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	Imf70ithjuOWxxsxzZ09rzPkRp9dQi/ZkYG6W9tEtGkQIfSLjyXjIwafFb8RrOosJaWxjLHxA1eRW1iRhSHzWX6MqM76IL7peqUOcMSH5SJcOWZCbzC6gCR3+HJg7/K0/wIfKuxKV0goXGygZiwK2heXHs/72OF7skrD2QLUMcXb4wEkcgac8b3h4bulZIviULRPh5Q3Z+hv37derb5pE0x+EvekL0G9Jg9Zy4cuq+K7+2FFVf4V3JMQ0uQvaZ2jsW89+8GSUOg/9qOTqdzWWsx3dR8olM14cPizwamX0l/h+SMVACOTzNkUhzXnkl8WWHluqhtIKhX7KGtTLHihpkoxqAFvZG8IS0/yCm0h732yNDDyP6lVob3C80xCQq6fUJaYnT2BjCIqPtLRyGV52K8FwFWg61GLIclFSJGqLjuXlFURXrzvNM+yMFLhgfcYhZDHkyh18sGVjID8+zPJ7w==
+	Syy1EJDvK/UczFM8EKUI7jAF4oDvyG5Pzs7laT9p0C8d9n9Qc/S+0+OE9GH09D86TnLGFT9s/F+T+xuw3AoAf7RYyetG957qFurEfe1p8HqtPTVW9nmc2hDJRu/BZKkykEqaTFnzbuHSnwpc6Ay2fCUEj3Rzw/k95wuGMQYQ+JuJLAQRoo6EzLdR2+pBHgD0G5K8gKz1xmQk9C+2piwkuZrP/k7OnfoBSXh1OK6fryphsGRfUwXBvY30H461FZryrKsgltfLwMCTMl8PzpiWqyazBfT7ik5KT1vad61IrETNi6OW4juIACk2WVn1iPzwelaIp/lM+nQYKnshhHPVdYUkoLVnM4pjIIuT6+AhZeu9py/0FH206SmVYQl1+jzf0dqPzDOPdt+GINlnZV6LLnGy+ktazsGLQKkkBlXtAbButopQhx9GRReV6YuGPfN2RJMi3JlPm6KFavuqTxGkag==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(376002)(346002)(366004)(136003)(39850400004)(396003)(86362001)(166002)(16526019)(2906002)(186003)(36756003)(5660300002)(26005)(2616005)(956004)(44832011)(31686004)(8936002)(53546011)(52116002)(8676002)(316002)(478600001)(33964004)(16576012)(83380400001)(6486002)(66946007)(66556008)(66476007)(966005)(31696002)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(366004)(376002)(39850400004)(396003)(346002)(8936002)(478600001)(966005)(52116002)(36756003)(2906002)(33964004)(8676002)(2616005)(16576012)(44832011)(83380400001)(316002)(86362001)(31686004)(53546011)(166002)(6486002)(16526019)(186003)(66946007)(5660300002)(66476007)(66556008)(31696002)(956004)(26005)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	eUIYj/IKRDaZppXh28SnYR6qAQs19QzzChuvM4s/MiguOlRe3sF3hKIoAzI0ub8Q29o+gxaaq8CqMM+pMcmwchBKTZTSD8EAAxqXNQhwZ/sEohCZgetbsQRd0+HjkiJOo8U1dPBKObGo/L395xc6bhHP+8iX8dMrJWJ3u4it0607p/QXwgeydl00q5WOxTNzzgb9PqDO5vs1V5VPGqUi5QHo9vClw3viNd8stl482rtALeMTQKBkBMut+8M1H4PSVMpe0b3EI5msNaPxx6ud7t+AyYG9Vjf2t1yzn+lUnhw6mPY7MZ+DKa5arBwiXwp0Ar3OPrtPMAg71AG0fXay+hJoCORQ2bPa4EUrd2QP159yObcxJUe9OGeRHjgWoPdJWLqPSRSFQZBhN1lF6n/yZ9eIJyNXEYImw3W4d0B2MaLj33YGsOykPQYizPwoiStmQe0NxwxVIrNeBjovwaLP/3DoeQImqpuos6B0Xs9riYQ=
+	EZrgCb802gxBATiTGDgEjXp/HNLPPRlsldCjYmwSl32oaTjEzNS9nFLVc6CUXP2wwZKzqW7G8z0rmah5rpQ2Jy+GfVOMnvCj1oAbYlrtCKDoJJkHGuC8lDS/T6NBrG7I9FrlkjmoWYgCYUJ6dZ9aLiiMs4yh+eQcM15e/C7LqVPkXMIlquEFI0/pvnwSQQTfWHhxAszGVOzOf3zaLebMssv7NT9vyFxqIZUkQRCsmvbijQ6aMfsT6k3Zg56xKAdbBva7kr9TPCh4NxlCRG6z/7fZc26j+tZIzUvbFODGvoWn4l1HEP2JmyFCJwVxg0hIyYjIXAvXOb2IQlkZhULNEIGEJ1eGXmRFnJJO6WDe+nm9Tp/F+LqoPc3AvE4BQBkSJZGQoaxQTE4aGSZ1lndZVX25PaTocROl+Pg5P1zgZWZPJJRaXPkhUg79mJAzH4nFhQi6FBdFBxxFHvwi1aQLhzAJ3SawRYbJQThiv6miYsU=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 698ea4a1-04d0-421a-a39c-08d832faa931
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2ebbbd92-8502-451d-49b0-08d832fab0bc
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2020 13:32:23.7678
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2020 13:32:36.4066
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: AxXUyd41ABZYCn8qhxWS6QzILTeNv9z7KfcASD44uws6azot0VuGzHK3oGgELC4+yejBO1Zn7eaFxtzm978vGH8aiRk3CY1T3XDfqHdpEgY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3816
+X-MS-Exchange-CrossTenant-UserPrincipalName: HIVUul4671gZflTFOpI0K0cS9HttEBB0BYZvJVjUwKX9Rld45KHU7/vqDqU8IgiQxYl22wp+i6wV6LFL0kiv5DcCmfhpcb9KEoHWepjyR1A=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4103
 Content-Type: multipart/alternative;
- boundary="------------0D1B4A3ADD1B39DF557DAD4C"
+ boundary="------------DE299AE63BDF053ECCD637F7"
 Content-Language: en-US
 
---------------0D1B4A3ADD1B39DF557DAD4C
+--------------DE299AE63BDF053ECCD637F7
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 7/24/20 6:35 AM, Leon Anavi wrote:
-> Upgrade to release 1.2.1:
+> Upgrade to release 2.2.4:
 >
-> - Switched to getting version using importlib.metadata instead
->    of using pkg_resources
-> - Fixed typing module compatibility issue with Python 3.5 prior
->    to 3.5.4
-> - Relax minimum version of importlib-metadata to >= 1.6.0 when
->    using Python < 3.8
->
-> Update the HOMEPAGE to match the home page link from pypi.org.
+> - add support to Constant to retrieve members by value
+> - add pickle/deepcopy support to Constant
+> - add support for Constant to use other Constant values
+> - AutoNumber and auto() now work together
+> - Enum members are now added to the class as enum_property, which
+>    supports unshadowing of parent class attributes when called on
+>    an Enum member
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-cmd2_1.1.0.bb => python3-cmd2_1.2.1.bb} | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-cmd2_1.1.0.bb => python3-cmd2_1.2.1.bb} (67%)
+>   .../python/{python3-aenum_2.2.3.bb => python3-aenum_2.2.4.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-aenum_2.2.3.bb => python3-aenum_2.2.4.bb} (63%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.1.0.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.2.1.bb
-> similarity index 67%
-> rename from meta-python/recipes-devtools/python/python3-cmd2_1.1.0.bb
-> rename to meta-python/recipes-devtools/python/python3-cmd2_1.2.1.bb
-> index bc74b5ab5..cb52ecfbb 100644
-> --- a/meta-python/recipes-devtools/python/python3-cmd2_1.1.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-cmd2_1.2.1.bb
-> @@ -1,12 +1,12 @@
->   SUMMARY = "Extra features for standard library's cmd module"
-> -HOMEPAGE = "http://packages.python.org/cmd2/"
-> +HOMEPAGE = "https://github.com/python-cmd2/cmd2"
->   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def"
+> diff --git a/meta-python/recipes-devtools/python/python3-aenum_2.2.3.bb b/meta-python/recipes-devtools/python/python3-aenum_2.2.4.bb
+> similarity index 63%
+> rename from meta-python/recipes-devtools/python/python3-aenum_2.2.3.bb
+> rename to meta-python/recipes-devtools/python/python3-aenum_2.2.4.bb
+> index 16d2a881f..da77a5c75 100644
+> --- a/meta-python/recipes-devtools/python/python3-aenum_2.2.3.bb
+> +++ b/meta-python/recipes-devtools/python/python3-aenum_2.2.4.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "https://pypi.org/project/aenum/"
+>   LICENSE = "BSD"
+>   LIC_FILES_CHKSUM = "file://aenum/LICENSE;md5=c6a85477543f8b8591b9c1f82abebbe9"
 >   
->   DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
->   
-> -SRC_URI[md5sum] = "2b4a3b15ac52d239664c40c2d661b0c7"
-> -SRC_URI[sha256sum] = "d233b5ad4b9ee264a43fb14668f287d25f998f4b443a81b4efdfd292f1a77108"
-> +SRC_URI[md5sum] = "0ab5f4d8ad6a9099202ed887358102f2"
-> +SRC_URI[sha256sum] = "5a5d3361fadada16cae0c99b65eba5d49d587fc2e02b3afb058da1872871e7a9"
+> -SRC_URI[md5sum] = "026786dbb37c15c2c8dc91fbf5828e97"
+> -SRC_URI[sha256sum] = "a4334cabf47c167d44ab5a6198837b80deec5d5bad1b5cf70c966c3a330260e8"
+> +SRC_URI[md5sum] = "8983562361efe5be865617341dadbb9b"
+> +SRC_URI[sha256sum] = "81828d1fbe20b6b188d75b21a0fa936d7d929d839ef843ef385d9c2a97082864"
 >   
 >   inherit pypi setuptools3
 >   
 >
 > 
 
---------------0D1B4A3ADD1B39DF557DAD4C
+--------------DE299AE63BDF053ECCD637F7
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -143,48 +137,42 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 7/24/20 6:35 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200724103515.21420-2-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.2.1:
+    <blockquote type="cite" cite="mid:20200724103515.21420-3-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 2.2.4:
 
-- Switched to getting version using importlib.metadata instead
-  of using pkg_resources
-- Fixed typing module compatibility issue with Python 3.5 prior
-  to 3.5.4
-- Relax minimum version of importlib-metadata to &gt;= 1.6.0 when
-  using Python &lt; 3.8
-
-Update the HOMEPAGE to match the home page link from pypi.org.
+- add support to Constant to retrieve members by value
+- add pickle/deepcopy support to Constant
+- add support for Constant to use other Constant values
+- AutoNumber and auto() now work together
+- Enum members are now added to the class as enum_property, which
+  supports unshadowing of parent class attributes when called on
+  an Enum member
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200724103515.21420-2-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200724103515.21420-3-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-cmd2_1.1.0.bb =&gt; python3-cmd2_1.2.1.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cmd2_1.1.0.bb =&gt; python3-cmd2_1.2.1.bb} (67%)
+ .../python/{python3-aenum_2.2.3.bb =&gt; python3-aenum_2.2.4.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-aenum_2.2.3.bb =&gt; python3-aenum_2.2.4.bb} (63%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.1.0.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.2.1.bb
-similarity index 67%
-rename from meta-python/recipes-devtools/python/python3-cmd2_1.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-cmd2_1.2.1.bb
-index bc74b5ab5..cb52ecfbb 100644
---- a/meta-python/recipes-devtools/python/python3-cmd2_1.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-cmd2_1.2.1.bb
-@@ -1,12 +1,12 @@
- SUMMARY = &quot;Extra features for standard library's cmd module&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://packages.python.org/cmd2/">&quot;http://packages.python.org/cmd2/&quot;</a>
-+HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/python-cmd2/cmd2">&quot;https://github.com/python-cmd2/cmd2&quot;</a>
- LICENSE = &quot;MIT&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def">&quot;file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-aenum_2.2.3.bb b/meta-python/recipes-devtools/python/python3-aenum_2.2.4.bb
+similarity index 63%
+rename from meta-python/recipes-devtools/python/python3-aenum_2.2.3.bb
+rename to meta-python/recipes-devtools/python/python3-aenum_2.2.4.bb
+index 16d2a881f..da77a5c75 100644
+--- a/meta-python/recipes-devtools/python/python3-aenum_2.2.3.bb
++++ b/meta-python/recipes-devtools/python/python3-aenum_2.2.4.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pypi.org/project/aenum/">&quot;https://pypi.org/project/aenum/&quot;</a>
+ LICENSE = &quot;BSD&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://aenum/LICENSE;md5=c6a85477543f8b8591b9c1f82abebbe9">&quot;file://aenum/LICENSE;md5=c6a85477543f8b8591b9c1f82abebbe9&quot;</a>
  
- DEPENDS += &quot;${PYTHON_PN}-setuptools-scm-native&quot;
- 
--SRC_URI[md5sum] = &quot;2b4a3b15ac52d239664c40c2d661b0c7&quot;
--SRC_URI[sha256sum] = &quot;d233b5ad4b9ee264a43fb14668f287d25f998f4b443a81b4efdfd292f1a77108&quot;
-+SRC_URI[md5sum] = &quot;0ab5f4d8ad6a9099202ed887358102f2&quot;
-+SRC_URI[sha256sum] = &quot;5a5d3361fadada16cae0c99b65eba5d49d587fc2e02b3afb058da1872871e7a9&quot;
+-SRC_URI[md5sum] = &quot;026786dbb37c15c2c8dc91fbf5828e97&quot;
+-SRC_URI[sha256sum] = &quot;a4334cabf47c167d44ab5a6198837b80deec5d5bad1b5cf70c966c3a330260e8&quot;
++SRC_URI[md5sum] = &quot;8983562361efe5be865617341dadbb9b&quot;
++SRC_URI[sha256sum] = &quot;81828d1fbe20b6b188d75b21a0fa936d7d929d839ef843ef385d9c2a97082864&quot;
  
  inherit pypi setuptools3
  
@@ -197,4 +185,4 @@ index bc74b5ab5..cb52ecfbb 100644
   </body>
 </html>
 
---------------0D1B4A3ADD1B39DF557DAD4C--
+--------------DE299AE63BDF053ECCD637F7--
