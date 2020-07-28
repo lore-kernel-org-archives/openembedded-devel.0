@@ -1,84 +1,258 @@
-Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
- by mx.groups.io with SMTP id smtpd.web12.63716.1595878065638362828
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
+ by mx.groups.io with SMTP id smtpd.web11.2268.1595896836016050353
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Jul 2020 12:27:46 -0700
+ Mon, 27 Jul 2020 17:40:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=aOWLegcR;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.171, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f171.google.com with SMTP id h19so18504665ljg.13
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Jul 2020 12:27:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=tl4zMb1fEEIE26UdjQruQITTv6oPSgtk1fJIHrW0Bjg=;
-        b=aOWLegcRQ/Pc/GwFSN5AwZb82iOIfV4EQX5QOWtGHVUCDpH0lKYZ2CsgQstTyRxtxz
-         NbRUhRYUJS2CXQiAmeLb4mDRxOapcDO1lZV47Y2aG+4/fy72EA4qzUwoetj4UAGDhBTg
-         iO6PmpG0Ry82R3A91HGAlIte3SLvYhq3A687b/dGt4uZpmFhDScJrdO8PdxuPT++vjd5
-         PveRwwAdXf3PMX/+eXpCx8H3bFDlM1RCPZbUKbYOpBSVFJpQWrLunCUJzH3sVZaWMorG
-         YDrLyuKM0te0J6+AJUrwQWYtheblypCdw4OFMgzPC9fcLZ0INfRhQ/JQTDuwfDwsa8CU
-         9Cbw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=tl4zMb1fEEIE26UdjQruQITTv6oPSgtk1fJIHrW0Bjg=;
-        b=M7KP1Mzx2KkPAAjiIgY7PozIcrtfYme2SCyuQqN6vPNuCMvaySCKKZbXj+7SfLKsur
-         QHUAqwakXcCTkgTbpslQtP0CdIGrM9AHqs3dmGN/c+1QkVKSVNlWLsDsPQvYajejhFhN
-         FGjUGE4vqXt9Cbj3NMDfxKvtMkh6waibc/LhlK+eeXHImgJZyLLPNVXKji5A7GC+hiep
-         /Gv2ETRhVTmoWd24pY8P/9TuyV8G+m+THUNg6tzx43nIRsMKoHAmycGQ7ZqTBS8TwJ0L
-         j7mbBg1RiCBYwYx5djhEfAE95kzeDQHMdPjUU8/uWB99ovCaYRUqolGNrusNKhoRi1+p
-         Cflw==
-X-Gm-Message-State: AOAM533yg1b5zKGnEVjV5XJ4liKX6P3zhIs3doyf3TZxeSrzrf1z39pY
-	ooqrnVSJQdV7AX2OmvMCPVrIo/DmLME=
-X-Google-Smtp-Source: ABdhPJxRUOK2u8JiESnW6DA7LoQGSZzKujAoowleG7asauD04f50sETQZ91X3Fhsdhnmo4wfwIqGzw==
-X-Received: by 2002:a2e:b4bb:: with SMTP id q27mr6535488ljm.277.1595878063469;
-        Mon, 27 Jul 2020 12:27:43 -0700 (PDT)
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id u19sm2910311ljk.0.2020.07.27.12.27.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Jul 2020 12:27:42 -0700 (PDT)
-From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH v2][meta-oe 5/5] ifuse: update to 1.1.4
-Date: Mon, 27 Jul 2020 21:27:22 +0200
-Message-Id: <20200727192722.2488841-5-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200727192722.2488841-1-open.source@oleksandr-kravchuk.com>
-References: <20200727192722.2488841-1-open.source@oleksandr-kravchuk.com>
+ dkim=pass header.i=@ideasonboard.com header.s=mail header.b=Y3yt6Tb+;
+ spf=pass (domain: ideasonboard.com, ip: 213.167.242.64, mailfrom: laurent.pinchart@ideasonboard.com)
+Received: from pendragon.ideasonboard.com (81-175-216-236.bb.dnainternet.fi [81.175.216.236])
+	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 6C6CC556;
+	Tue, 28 Jul 2020 02:40:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+	s=mail; t=1595896832;
+	bh=Hg6Zj+A4aQtYJO7gCJ3Bew5KDSG1Slvs/LxpNvCd+Ns=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Y3yt6Tb+UKCsfkYaeBngtbDomh6MqCk61TnHL3VxTolJLdgwFCeOFvxejt9vQIMu5
+	 u3V7dqrcWlfnd+uFEgsvSjsTV1ygz6OuhwZ6Jk4pPJbkhRf0OE8eJveI523lZp1MMT
+	 0m2rhwR2b7Xs0kzykb7pqEi/yEezbBj8ae421TtQ=
+Date: Tue, 28 Jul 2020 03:40:24 +0300
+From: "Laurent Pinchart" <laurent.pinchart@ideasonboard.com>
+To: Andrey Konovalov <andrey.konovalov@linaro.org>
+Cc: kieran.bingham@ideasonboard.com,
+	openembedded-devel@lists.openembedded.org,
+	libcamera-devel@lists.libcamera.org, raj.khem@gmail.com,
+	madhavan.krishnan@linaro.org
+Subject: Re: [oe] [libcamera-devel] [meta-multimedia][PATCH] libcamera: fix packaging and installation
+Message-ID: <20200728004024.GH15448@pendragon.ideasonboard.com>
+References: <20200727092108.6209-1-andrey.konovalov@linaro.org>
+ <a17180dc-a0ee-80b1-8c55-ee1c42d20e9e@ideasonboard.com>
+ <4ba4b745-06b5-c5a9-b046-0357aac9f9bd@linaro.org>
+ <20200727111107.GD5925@pendragon.ideasonboard.com>
+ <886753d5-5f11-c240-272f-5a25c096823b@linaro.org>
+ <20200727160310.GE17521@pendragon.ideasonboard.com>
+ <2a89b48b-b4f7-1bf7-1a32-27d22360ee2d@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <2a89b48b-b4f7-1bf7-1a32-27d22360ee2d@linaro.org>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- .../ifuse/{ifuse_1.1.2.bb => ifuse_1.1.4.bb}              | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
- rename meta-filesystems/recipes-filesystems/ifuse/{ifuse_1.1.2.bb => ifuse_1.1.4.bb} (54%)
+Hi Andrey,
 
-diff --git a/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb b/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.4.bb
-similarity index 54%
-rename from meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb
-rename to meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.4.bb
-index f0b58b9673..8a317cddbe 100644
---- a/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb
-+++ b/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.4.bb
-@@ -5,11 +5,9 @@ HOMEPAGE ="http://www.libimobiledevice.org/"
- 
- DEPENDS = "fuse libimobiledevice"
- 
--SRC_URI = " \
--    http://www.libimobiledevice.org/downloads/ifuse-${PV}.tar.bz2 \
--"
-+SRC_URI = "https://github.com/libimobiledevice/ifuse/releases/download/${PV}/ifuse-${PV}.tar.bz2"
- 
--SRC_URI[md5sum] = "4152526b2ac3c505cb41797d997be14d"
--SRC_URI[sha256sum] = "47835c8afb72588b3202fe0b206d7ea37a68663d9aa4eaf73f0a4bcb6215fc05"
-+SRC_URI[md5sum] = "cd31fbd0ea945b2ff1e39eac8d198fdd"
-+SRC_URI[sha256sum] = "3550702ef94b2f5f16c7db91c6b3282b2aed1340665834a03e47458e09d98d87"
- 
- inherit autotools pkgconfig
+On Mon, Jul 27, 2020 at 07:17:04PM +0300, Andrey Konovalov wrote:
+> On 27.07.2020 19:03, Laurent Pinchart wrote:
+> > On Mon, Jul 27, 2020 at 06:46:47PM +0300, Andrey Konovalov wrote:
+> >> On 27.07.2020 14:11, Laurent Pinchart wrote:
+> >>> On Mon, Jul 27, 2020 at 12:58:23PM +0300, Andrey Konovalov wrote:
+> >>>> On 27.07.2020 12:42, Kieran Bingham wrote:
+> >>>>> On 27/07/2020 10:21, Andrey Konovalov wrote:
+> >>>>>> libcamera checks if RPATH or RUNPATH dynamic tag is present in
+> >>>>>> libcamera.so. If it does, it assumes that libcamera binaries are
+> >>>>>> run directly from the build directory without installing them, and
+> >>>>>> tries to use resorces like IPA modules from the build directory.
+> >>>>>> Mainline meson strips RPATH/RUNPATH out at install time (for
+> >>>>>> meson versions up to 0.54; the things are somewhat changed in 0.55).
+> >>>>>> But openembedded-core patches meson to disable RPATH/RUNPATH removal.
+> >>>>>> That's why we need to remove this tag manually in do_install_append().
+> >>>>>
+> >>>>> Uh oh, what's changed... (I'll have to go take a look).
+> >>>>>
+> >>>>>     -
+> >>>>> https://mesonbuild.com/Release-notes-for-0-55-0.html#rpath-removal-now-more-careful
+> >>>>>
+> >>>>> If we're reliant upon meson behaviour which is no longer consistent,
+> >>>>> then we are going to have to do something else in libcamera.
+> >>>>
+> >>>> I haven't tried meson 0.55 yet, but my impression was that 0.55 should work
+> >>>> just as before for "usual" (as per libcamera's README) libcamera build. And
+> >>>> starting from 0.55 the patch in openembedded-core to disable RPATH/RUNPATH removal
+> >>>> *might* be dropped - if all the packages would be able to set RUNPATH to
+> >>>> what they need, and meson would detect that OK in all those cases.
+> >>>
+> >>> I think that if the problem is caused by a meson patch in openembedded,
+> >>> then it would make sense to fix it there. We can decide to address the
+> >>> issue in libcamera itself if it's found to affect other distributions
+> >>> too, or if meson's behaviour changes in an incompatible way.
+> >>
+> >> It looks like it is not openembedded only issue:
+> >>
+> >> -------- Forwarded Message --------
+> >> Subject: [libcamera-devel] [PATCH v4 0/2] package/libcamera: bump version to 96fab38
+> >> Date: Tue, 16 Jun 2020 20:59:49 +0200
+> >> From: Peter Seiderer <ps.report@gmx.net>
+> >> To: buildroot@busybox.net
+> >> CC: libcamera-devel@lists.libcamera.org, Yann E . MORIN <yann.morin.1998@free.fr>
+> >>
+> >> <snip>
+> >>
+> >> With the following patch libcamera is forced to believe it is running
+> >> in a installed environment:
+> >>
+> >> diff --git a/src/libcamera/utils.cpp b/src/libcamera/utils.cpp
+> >> index d55338f..4ff9dac 100644
+> >> --- a/src/libcamera/utils.cpp
+> >> +++ b/src/libcamera/utils.cpp
+> >> @@ -346,15 +346,18 @@ details::StringSplitter split(const std::string &str, const std::string &delim)
+> >>     */
+> >>    bool isLibcameraInstalled()
+> >>    {
+> >> +#if 0
+> >>    	/*
+> >>    	 * DT_RUNPATH (DT_RPATH when the linker uses old dtags) is removed on
+> >>    	 * install.
+> >>    	 */
+> >>    	for (const ElfW(Dyn) *dyn = _DYNAMIC; dyn->d_tag != DT_NULL; ++dyn) {
+> >> -		if (dyn->d_tag == DT_RUNPATH || dyn->d_tag == DT_RPATH)
+> >> +		if (dyn->d_tag == DT_RUNPATH || dyn->d_tag == DT_RPATH) {
+> >> +			printf("XXXXX - dyn->d_un.d_ptr: %s\n", (char*)dyn->d_un.d_ptr);
+> >>    			return false;
+> >> +		}
+> >>    	}
+> >> -
+> >> +#endif
+> >>    	return true;
+> >>    }
+> >>
+> >> Maybe this is because of the buildroot local meson patch ([1]), leading
+> >> to an empty (but not absent) RPATH?
+> > 
+> > buildroot preserves empty RPATH when installing. Maybe we could adapt
+> > isLibcameraInstalled() to return true only if RPATH is found *and* not
+> > empty ?
+> > 
+> > For openembedded, why is RPATH stripping skipped ?
+> 
+> Not sure if I can give a proper explanation, so I would better refer you to:
+> 
+> https://patches.openembedded.org/patch/156584/
+> https://github.com/mesonbuild/meson/issues/2567 (rpurdie's comments especially)
+
+Thank you for the pointers, it's pretty interesting.
+
+> Maybe the fix done in meson 0.55 would let distributions to re-enable RPATH stripping:
+>    https://mesonbuild.com/Release-notes-for-0-55-0.html#added-ability-to-specify-targets-in-meson-compile
+>    https://github.com/mesonbuild/meson/pull/7103
+>    https://github.com/mesonbuild/meson/pull/7472
+> - but I don't know if/when this could happen. For me it looks like a lot of re-testing
+> at least (distros have a whole lot of packages which could be affected).
+
+Yes, it will likely take time, even if I think it's the right solution.
+In the meantime, I think we'll have to handle this in the OE and
+buildroot recipes, I don't really see what else we could do. It may be
+possible to improve the implementation in libcamera by checking the
+R(UN)PATH value (it's tricky though, glibc and musl handle this quite
+differently, where glibc patches the _DYNAMIC entries with pointers to
+the string table in memory, while musl doesn't AFAIR), but it would only
+help if we can get the build system to strip the custom R(UN)PATH entry
+that we add. If nothing is stripped, I think we're stuck.
+
+> >> <snip>
+> >>
+> >> [0:02:18.125804232] [252] DEBUG IPAManager ipa_manager.cpp:316 IPA module /usr/lib/libcamera/ipa_rpi.so signature is not valid
+> >>
+> >> <snip>
+> >>
+> >> This can be avoided with the following patch/hack (disable signature check):
+> >>
+> >> diff --git a/src/libcamera/ipa_manager.cpp b/src/libcamera/ipa_manager.cpp
+> >> index 505cf61..3d64898 100644
+> >> --- a/src/libcamera/ipa_manager.cpp
+> >> +++ b/src/libcamera/ipa_manager.cpp
+> >> @@ -301,6 +301,9 @@ std::unique_ptr<IPAProxy> IPAManager::createIPA(PipelineHandler *pipe,
+> >>
+> >>    bool IPAManager::isSignatureValid(IPAModule *ipa) const
+> >>    {
+> >> +#if 1
+> >> +	return true;
+> >> +#else
+> >>    #if HAVE_IPA_PUBKEY
+> >>    	File file{ ipa->path() };
+> >>    	if (!file.open(File::ReadOnly))
+> >> @@ -320,6 +323,7 @@ bool IPAManager::isSignatureValid(IPAModule *ipa) const
+> >>    #else
+> >>    	return false;
+> >>    #endif
+> >> +#endif
+> >>    }
+> >>
+> >>    } /* namespace libcamera */
+> >>
+> >>
+> >> Maybe related to the buildroot finalize and/or sanitizing RPATH in target tree
+> >> step (and/or strip after install with BR2_ENABLE_DEBUG=y/BR2_STRIP_strip=y
+> >> enabled)?
+> > 
+> > For this, let's first see how module re-signing works with
+> > openemebedded, possibly improving the resigning script. If it's
+> > successful, I think we can then use the same methods for buildroot and
+> > other distributions. A packaging document to explain all this would be
+> > useful.
+> 
+> Sounds good.
+> 
+> >> -------- End of Forwarded Message --------
+> >>
+> >>>>> /me sighs ...
+> >>>>>
+> >>>>>> IPA module is signed (with openssl dgst) after it is built. But
+> >>>>>> during packaging the OE build system 1) splits out debugging info,
+> >>>>>> and 2) strips the binaries. So the IPA module *.so file installed
+> >>>>>> isn't the one which the signature was calculated against. Then
+> >>>>>> the signature check fails, and libcamera tries to run the IPA
+> >>>>>> module isolated (in a sandbox), which doesn't work if the IPA
+> >>>>>> module wasn't designed to run isolated. The easiest way to fix that
+> >>>>>> is to disable splitting out debug information and stripping the binaries
+> >>>>>> during packaging with INHIBIT_PACKAGE_DEBUG_SPLIT and
+> >>>>>> INHIBIT_PACKAGE_STRIP.
+> >>>>>
+> >>>>> This sounds like an effective solution for openembedded, but it needs to
+> >>>>> be fixed in libcamera all the same.
+> >>>>>
+> >>>>> I'll try to follow up with the meson guys to see what we can do,.
+> >>>
+> >>> We re-sign the IPA modules at install time for this very specific
+> >>> reason. If openembedded modifies the binaries after installing them,
+> >>> should it re-run the signing script ?
+> >>>
+> >>>>>> Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
+> >>>>>> ---
+> >>>>>>     .../recipes-multimedia/libcamera/libcamera.bb            | 9 ++++++++-
+> >>>>>>     1 file changed, 8 insertions(+), 1 deletion(-)
+> >>>>>>
+> >>>>>> diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+> >>>>>> index 00a5c480d..573366f08 100644
+> >>>>>> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+> >>>>>> +++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+> >>>>>> @@ -18,13 +18,20 @@ PV = "202006+git${SRCPV}"
+> >>>>>>     
+> >>>>>>     S = "${WORKDIR}/git"
+> >>>>>>     
+> >>>>>> -DEPENDS = "python3-pyyaml-native udev gnutls boost"
+> >>>>>> +DEPENDS = "python3-pyyaml-native udev gnutls boost chrpath-native"
+> >>>>>>     DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
+> >>>>>>     
+> >>>>>>     RDEPENDS_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayland', '', d)}"
+> >>>>>>     
+> >>>>>>     inherit meson pkgconfig python3native
+> >>>>>>     
+> >>>>>> +do_install_append() {
+> >>>>>> +        chrpath -d ${D}${libdir}/libcamera.so
+> >>>>>
+> >>>>> Aha, I didn't know about chrpath, that looks helpful. Perhaps part of
+> >>>>> the solution will be handling our own strip/install actions to do this
+> >>>>> explicitly in the build.
+> >>>>>
+> >>>>> It will be a pain to have to pull in another external dependency though...
+> >>>>>
+> >>>>>> +}
+> >>>>>> +
+> >>>>>>     FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig"
+> >>>>>>     FILES_${PN} += " ${libdir}/libcamera.so"
+> >>>>>>     
+> >>>>>> +INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+> >>>>>> +INHIBIT_PACKAGE_STRIP = "1"
+> >>>>>> +
+
 -- 
-2.25.1
+Regards,
 
+Laurent Pinchart
