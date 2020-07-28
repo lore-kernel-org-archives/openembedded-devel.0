@@ -1,258 +1,325 @@
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
- by mx.groups.io with SMTP id smtpd.web11.2268.1595896836016050353
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web10.5582.1595910870844325120
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Jul 2020 17:40:36 -0700
+ Mon, 27 Jul 2020 21:34:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ideasonboard.com header.s=mail header.b=Y3yt6Tb+;
- spf=pass (domain: ideasonboard.com, ip: 213.167.242.64, mailfrom: laurent.pinchart@ideasonboard.com)
-Received: from pendragon.ideasonboard.com (81-175-216-236.bb.dnainternet.fi [81.175.216.236])
-	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 6C6CC556;
-	Tue, 28 Jul 2020 02:40:32 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1595896832;
-	bh=Hg6Zj+A4aQtYJO7gCJ3Bew5KDSG1Slvs/LxpNvCd+Ns=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Y3yt6Tb+UKCsfkYaeBngtbDomh6MqCk61TnHL3VxTolJLdgwFCeOFvxejt9vQIMu5
-	 u3V7dqrcWlfnd+uFEgsvSjsTV1ygz6OuhwZ6Jk4pPJbkhRf0OE8eJveI523lZp1MMT
-	 0m2rhwR2b7Xs0kzykb7pqEi/yEezbBj8ae421TtQ=
-Date: Tue, 28 Jul 2020 03:40:24 +0300
-From: "Laurent Pinchart" <laurent.pinchart@ideasonboard.com>
-To: Andrey Konovalov <andrey.konovalov@linaro.org>
-Cc: kieran.bingham@ideasonboard.com,
-	openembedded-devel@lists.openembedded.org,
-	libcamera-devel@lists.libcamera.org, raj.khem@gmail.com,
-	madhavan.krishnan@linaro.org
-Subject: Re: [oe] [libcamera-devel] [meta-multimedia][PATCH] libcamera: fix packaging and installation
-Message-ID: <20200728004024.GH15448@pendragon.ideasonboard.com>
-References: <20200727092108.6209-1-andrey.konovalov@linaro.org>
- <a17180dc-a0ee-80b1-8c55-ee1c42d20e9e@ideasonboard.com>
- <4ba4b745-06b5-c5a9-b046-0357aac9f9bd@linaro.org>
- <20200727111107.GD5925@pendragon.ideasonboard.com>
- <886753d5-5f11-c240-272f-5a25c096823b@linaro.org>
- <20200727160310.GE17521@pendragon.ideasonboard.com>
- <2a89b48b-b4f7-1bf7-1a32-27d22360ee2d@linaro.org>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: mingli.yu@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 06S4YTwL004431
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Jul 2020 21:34:29 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.40) with Microsoft SMTP Server id 14.3.487.0; Mon, 27 Jul 2020
+ 21:34:28 -0700
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH v2] mariadb: upgrade to 10.5.4
+Date: Mon, 27 Jul 2020 21:34:28 -0700
+Message-ID: <20200728043428.6967-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <CAMKF1srMOdhSyWxhBxDKSkaUfTUzfeDA6m=2SB-LttecR6xs-A@mail.gmail.com>
+References: <CAMKF1srMOdhSyWxhBxDKSkaUfTUzfeDA6m=2SB-LttecR6xs-A@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <2a89b48b-b4f7-1bf7-1a32-27d22360ee2d@linaro.org>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-MIME-Autoconverted: from 8bit to quoted-printable by mail1.windriver.com id 06S4YTwL004431
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Andrey,
+From: Mingli Yu <mingli.yu@windriver.com>
 
-On Mon, Jul 27, 2020 at 07:17:04PM +0300, Andrey Konovalov wrote:
-> On 27.07.2020 19:03, Laurent Pinchart wrote:
-> > On Mon, Jul 27, 2020 at 06:46:47PM +0300, Andrey Konovalov wrote:
-> >> On 27.07.2020 14:11, Laurent Pinchart wrote:
-> >>> On Mon, Jul 27, 2020 at 12:58:23PM +0300, Andrey Konovalov wrote:
-> >>>> On 27.07.2020 12:42, Kieran Bingham wrote:
-> >>>>> On 27/07/2020 10:21, Andrey Konovalov wrote:
-> >>>>>> libcamera checks if RPATH or RUNPATH dynamic tag is present in
-> >>>>>> libcamera.so. If it does, it assumes that libcamera binaries are
-> >>>>>> run directly from the build directory without installing them, and
-> >>>>>> tries to use resorces like IPA modules from the build directory.
-> >>>>>> Mainline meson strips RPATH/RUNPATH out at install time (for
-> >>>>>> meson versions up to 0.54; the things are somewhat changed in 0.55).
-> >>>>>> But openembedded-core patches meson to disable RPATH/RUNPATH removal.
-> >>>>>> That's why we need to remove this tag manually in do_install_append().
-> >>>>>
-> >>>>> Uh oh, what's changed... (I'll have to go take a look).
-> >>>>>
-> >>>>>     -
-> >>>>> https://mesonbuild.com/Release-notes-for-0-55-0.html#rpath-removal-now-more-careful
-> >>>>>
-> >>>>> If we're reliant upon meson behaviour which is no longer consistent,
-> >>>>> then we are going to have to do something else in libcamera.
-> >>>>
-> >>>> I haven't tried meson 0.55 yet, but my impression was that 0.55 should work
-> >>>> just as before for "usual" (as per libcamera's README) libcamera build. And
-> >>>> starting from 0.55 the patch in openembedded-core to disable RPATH/RUNPATH removal
-> >>>> *might* be dropped - if all the packages would be able to set RUNPATH to
-> >>>> what they need, and meson would detect that OK in all those cases.
-> >>>
-> >>> I think that if the problem is caused by a meson patch in openembedded,
-> >>> then it would make sense to fix it there. We can decide to address the
-> >>> issue in libcamera itself if it's found to affect other distributions
-> >>> too, or if meson's behaviour changes in an incompatible way.
-> >>
-> >> It looks like it is not openembedded only issue:
-> >>
-> >> -------- Forwarded Message --------
-> >> Subject: [libcamera-devel] [PATCH v4 0/2] package/libcamera: bump version to 96fab38
-> >> Date: Tue, 16 Jun 2020 20:59:49 +0200
-> >> From: Peter Seiderer <ps.report@gmx.net>
-> >> To: buildroot@busybox.net
-> >> CC: libcamera-devel@lists.libcamera.org, Yann E . MORIN <yann.morin.1998@free.fr>
-> >>
-> >> <snip>
-> >>
-> >> With the following patch libcamera is forced to believe it is running
-> >> in a installed environment:
-> >>
-> >> diff --git a/src/libcamera/utils.cpp b/src/libcamera/utils.cpp
-> >> index d55338f..4ff9dac 100644
-> >> --- a/src/libcamera/utils.cpp
-> >> +++ b/src/libcamera/utils.cpp
-> >> @@ -346,15 +346,18 @@ details::StringSplitter split(const std::string &str, const std::string &delim)
-> >>     */
-> >>    bool isLibcameraInstalled()
-> >>    {
-> >> +#if 0
-> >>    	/*
-> >>    	 * DT_RUNPATH (DT_RPATH when the linker uses old dtags) is removed on
-> >>    	 * install.
-> >>    	 */
-> >>    	for (const ElfW(Dyn) *dyn = _DYNAMIC; dyn->d_tag != DT_NULL; ++dyn) {
-> >> -		if (dyn->d_tag == DT_RUNPATH || dyn->d_tag == DT_RPATH)
-> >> +		if (dyn->d_tag == DT_RUNPATH || dyn->d_tag == DT_RPATH) {
-> >> +			printf("XXXXX - dyn->d_un.d_ptr: %s\n", (char*)dyn->d_un.d_ptr);
-> >>    			return false;
-> >> +		}
-> >>    	}
-> >> -
-> >> +#endif
-> >>    	return true;
-> >>    }
-> >>
-> >> Maybe this is because of the buildroot local meson patch ([1]), leading
-> >> to an empty (but not absent) RPATH?
-> > 
-> > buildroot preserves empty RPATH when installing. Maybe we could adapt
-> > isLibcameraInstalled() to return true only if RPATH is found *and* not
-> > empty ?
-> > 
-> > For openembedded, why is RPATH stripping skipped ?
-> 
-> Not sure if I can give a proper explanation, so I would better refer you to:
-> 
-> https://patches.openembedded.org/patch/156584/
-> https://github.com/mesonbuild/meson/issues/2567 (rpurdie's comments especially)
+* Remove one backported patch
+* Remove SRC_URI[md5sum]
+* Rebase two patches to fix fuzz warnings
+* Add curl depends to fix below error:
+  | ./mariadb-10.5.4/storage/maria/libmarias3/libmarias3/marias3.h:26:10:=
+ fatal error: curl/curl.h: No such file or directory
 
-Thank you for the pointers, it's pretty interesting.
+* update the pam_user_map.so install logic as below commit introduced in =
+this new
+  mariadb version
+  236aed3f5f0 MDEV-21656: Wrong directory for pam_user_map.so JIRA:https:=
+//jira.mariadb.org/browse/MDEV-17292
 
-> Maybe the fix done in meson 0.55 would let distributions to re-enable RPATH stripping:
->    https://mesonbuild.com/Release-notes-for-0-55-0.html#added-ability-to-specify-targets-in-meson-compile
->    https://github.com/mesonbuild/meson/pull/7103
->    https://github.com/mesonbuild/meson/pull/7472
-> - but I don't know if/when this could happen. For me it looks like a lot of re-testing
-> at least (distros have a whole lot of packages which could be affected).
+* Disable rocksdb engine for arm64 to workaround undefined reference
+  to `crc32c_arm64' as https://jira.mariadb.org/browse/MDEV-23137
 
-Yes, it will likely take time, even if I think it's the right solution.
-In the meantime, I think we'll have to handle this in the OE and
-buildroot recipes, I don't really see what else we could do. It may be
-possible to improve the implementation in libcamera by checking the
-R(UN)PATH value (it's tricky though, glibc and musl handle this quite
-differently, where glibc patches the _DYNAMIC entries with pointers to
-the string table in memory, while musl doesn't AFAIR), but it would only
-help if we can get the build system to strip the custom R(UN)PATH entry
-that we add. If nothing is stripped, I think we're stuck.
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ ...ve_10.4.12.bb =3D> mariadb-native_10.5.4.bb} |  0
+ meta-oe/recipes-dbs/mysql/mariadb.inc         | 16 +++++---
+ ...-breakage-from-lock_guard-error-6161.patch | 32 ----------------
+ .../mysql/mariadb/c11_atomics.patch           | 37 +++++++++++++------
+ ...Lists.txt-fix-gen_lex_hash-not-found.patch | 26 +++++++------
+ .../{mariadb_10.4.12.bb =3D> mariadb_10.5.4.bb} |  2 +-
+ 6 files changed, 52 insertions(+), 61 deletions(-)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.4.12.bb =3D> mariadb=
+-native_10.5.4.bb} (100%)
+ delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-brea=
+kage-from-lock_guard-error-6161.patch
+ rename meta-oe/recipes-dbs/mysql/{mariadb_10.4.12.bb =3D> mariadb_10.5.4=
+.bb} (87%)
 
-> >> <snip>
-> >>
-> >> [0:02:18.125804232] [252] DEBUG IPAManager ipa_manager.cpp:316 IPA module /usr/lib/libcamera/ipa_rpi.so signature is not valid
-> >>
-> >> <snip>
-> >>
-> >> This can be avoided with the following patch/hack (disable signature check):
-> >>
-> >> diff --git a/src/libcamera/ipa_manager.cpp b/src/libcamera/ipa_manager.cpp
-> >> index 505cf61..3d64898 100644
-> >> --- a/src/libcamera/ipa_manager.cpp
-> >> +++ b/src/libcamera/ipa_manager.cpp
-> >> @@ -301,6 +301,9 @@ std::unique_ptr<IPAProxy> IPAManager::createIPA(PipelineHandler *pipe,
-> >>
-> >>    bool IPAManager::isSignatureValid(IPAModule *ipa) const
-> >>    {
-> >> +#if 1
-> >> +	return true;
-> >> +#else
-> >>    #if HAVE_IPA_PUBKEY
-> >>    	File file{ ipa->path() };
-> >>    	if (!file.open(File::ReadOnly))
-> >> @@ -320,6 +323,7 @@ bool IPAManager::isSignatureValid(IPAModule *ipa) const
-> >>    #else
-> >>    	return false;
-> >>    #endif
-> >> +#endif
-> >>    }
-> >>
-> >>    } /* namespace libcamera */
-> >>
-> >>
-> >> Maybe related to the buildroot finalize and/or sanitizing RPATH in target tree
-> >> step (and/or strip after install with BR2_ENABLE_DEBUG=y/BR2_STRIP_strip=y
-> >> enabled)?
-> > 
-> > For this, let's first see how module re-signing works with
-> > openemebedded, possibly improving the resigning script. If it's
-> > successful, I think we can then use the same methods for buildroot and
-> > other distributions. A packaging document to explain all this would be
-> > useful.
-> 
-> Sounds good.
-> 
-> >> -------- End of Forwarded Message --------
-> >>
-> >>>>> /me sighs ...
-> >>>>>
-> >>>>>> IPA module is signed (with openssl dgst) after it is built. But
-> >>>>>> during packaging the OE build system 1) splits out debugging info,
-> >>>>>> and 2) strips the binaries. So the IPA module *.so file installed
-> >>>>>> isn't the one which the signature was calculated against. Then
-> >>>>>> the signature check fails, and libcamera tries to run the IPA
-> >>>>>> module isolated (in a sandbox), which doesn't work if the IPA
-> >>>>>> module wasn't designed to run isolated. The easiest way to fix that
-> >>>>>> is to disable splitting out debug information and stripping the binaries
-> >>>>>> during packaging with INHIBIT_PACKAGE_DEBUG_SPLIT and
-> >>>>>> INHIBIT_PACKAGE_STRIP.
-> >>>>>
-> >>>>> This sounds like an effective solution for openembedded, but it needs to
-> >>>>> be fixed in libcamera all the same.
-> >>>>>
-> >>>>> I'll try to follow up with the meson guys to see what we can do,.
-> >>>
-> >>> We re-sign the IPA modules at install time for this very specific
-> >>> reason. If openembedded modifies the binaries after installing them,
-> >>> should it re-run the signing script ?
-> >>>
-> >>>>>> Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
-> >>>>>> ---
-> >>>>>>     .../recipes-multimedia/libcamera/libcamera.bb            | 9 ++++++++-
-> >>>>>>     1 file changed, 8 insertions(+), 1 deletion(-)
-> >>>>>>
-> >>>>>> diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-> >>>>>> index 00a5c480d..573366f08 100644
-> >>>>>> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-> >>>>>> +++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-> >>>>>> @@ -18,13 +18,20 @@ PV = "202006+git${SRCPV}"
-> >>>>>>     
-> >>>>>>     S = "${WORKDIR}/git"
-> >>>>>>     
-> >>>>>> -DEPENDS = "python3-pyyaml-native udev gnutls boost"
-> >>>>>> +DEPENDS = "python3-pyyaml-native udev gnutls boost chrpath-native"
-> >>>>>>     DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
-> >>>>>>     
-> >>>>>>     RDEPENDS_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayland', '', d)}"
-> >>>>>>     
-> >>>>>>     inherit meson pkgconfig python3native
-> >>>>>>     
-> >>>>>> +do_install_append() {
-> >>>>>> +        chrpath -d ${D}${libdir}/libcamera.so
-> >>>>>
-> >>>>> Aha, I didn't know about chrpath, that looks helpful. Perhaps part of
-> >>>>> the solution will be handling our own strip/install actions to do this
-> >>>>> explicitly in the build.
-> >>>>>
-> >>>>> It will be a pain to have to pull in another external dependency though...
-> >>>>>
-> >>>>>> +}
-> >>>>>> +
-> >>>>>>     FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig"
-> >>>>>>     FILES_${PN} += " ${libdir}/libcamera.so"
-> >>>>>>     
-> >>>>>> +INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-> >>>>>> +INHIBIT_PACKAGE_STRIP = "1"
-> >>>>>> +
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.4.12.bb b/meta-o=
+e/recipes-dbs/mysql/mariadb-native_10.5.4.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.4.12.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.5.4.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/=
+mysql/mariadb.inc
+index 95f5acba1..0aa44e29a 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -18,11 +18,9 @@ SRC_URI =3D "https://downloads.mariadb.org/interstitia=
+l/${BP}/source/${BP}.tar.gz
+            file://c11_atomics.patch \
+            file://clang_version_header_conflict.patch \
+            file://fix-arm-atomic.patch \
+-           file://0001-Fix-build-breakage-from-lock_guard-error-6161.pat=
+ch \
+            file://0001-Fix-library-LZ4-lookup.patch \
+           "
+-SRC_URI[md5sum] =3D "97d7c0f508c04a31c138fdb24e95dbc4"
+-SRC_URI[sha256sum] =3D "fef1e1d38aa253dd8a51006bd15aad184912fce31c446bb6=
+9434fcde735aa208"
++SRC_URI[sha256sum] =3D "26db2becc9cec37e99a4e73390bd2eaa74568e21f9cf1103=
+59f4f68b37154c72"
+=20
+ UPSTREAM_CHECK_URI =3D "https://github.com/MariaDB/server/releases"
+=20
+@@ -87,6 +85,10 @@ EXTRA_OECMAKE =3D "-DWITH_EMBEDDED_SERVER=3DON \
+                  -DCAT_EXECUTABLE=3D`which cat` \
+                  -DCMAKE_AR:FILEPATH=3D${AR}"
+=20
++# disable rocksdb engine for arm64 to workaround the undefined reference=
+ to `crc32c_arm64(unsigned int, unsigned char const*, unsigned int)'
++# check https://jira.mariadb.org/browse/MDEV-23137 for more details
++EXTRA_OECMAKE_append_aarch64 =3D " -DPLUGIN_ROCKSDB=3DNO"
++
+ # With Ninja it fails with:
+ # make: *** No rule to make target `install'.  Stop.
+ OECMAKE_GENERATOR =3D "Unix Makefiles"
+@@ -169,8 +171,12 @@ do_install() {
+         mv ${D}${datadir}/doc/README ${D}${datadir}/doc/${PN}/
+     fi
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d=
+)}; then
+-        mv ${D}/lib/security ${D}/${libdir}
+-        rmdir --ignore-fail-on-non-empty ${D}/lib
++        pam_so=3D$(find ${D} -name pam_user_map.so)
++        if [ x"${pam_so}" !=3D x ]; then
++            pam_dir=3D$(dirname ${pam_so})
++            mv ${pam_dir} ${D}/${libdir}
++            rmdir --ignore-fail-on-non-empty ${pam_dir%security}
++        fi
+     fi
+ }
+=20
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-breakage-fr=
+om-lock_guard-error-6161.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-F=
+ix-build-breakage-from-lock_guard-error-6161.patch
+deleted file mode 100644
+index 87c70617a..000000000
+--- a/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-breakage-from-lock=
+_guard-error-6161.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-Subject: [PATCH] Fix build breakage from lock_guard error (#6161)
+-
+-Summary:
+-This change fixes a source issue that caused compile time error which
+-breaks build for many fbcode services in that setup. The size() member
+-function of channel is a const member, so member variables accessed
+-within it are implicitly const as well. This caused error when clang
+-fails to resolve to a constructor that takes std::mutex because the
+-suitable constructor got rejected due to loss of constness for its
+-argument. The fix is to add mutable modifier to the lock_ member of
+-channel.
+-
+-Pull Request resolved: https://github.com/facebook/rocksdb/pull/6161
+-
+-Differential Revision: D18967685
+-
+-Pulled By: maysamyabandeh
+-
+-Upstream-Status: Backport
+-
+-fbshipit-source-id:698b6a5153c3c92eeacb842c467aa28cc350d432=20
+---- a/storage/rocksdb/rocksdb/util/channel.h
+-+++ b/storage/rocksdb/rocksdb/util/channel.h
+-@@ -60,7 +60,7 @@ class channel {
+-=20
+-  private:
+-   std::condition_variable cv_;
+--  std::mutex lock_;
+-+  mutable std::mutex lock_;
+-   std::queue<T> buffer_;
+-   bool eof_;
+- };
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch b/meta-o=
+e/recipes-dbs/mysql/mariadb/c11_atomics.patch
+index 169986130..36217f9aa 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
++++ b/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
+@@ -1,7 +1,7 @@
+-Author: Vicen=C8=9Biu Ciorbaru <vicentiu@mariadb.org>
+-Date:   Fri Dec 21 19:14:04 2018 +0200
+-
+-   Link with libatomic to enable C11 atomics support
++From 976468458d53d8bb71acf48ddfc852a60557acb9 Mon Sep 17 00:00:00 2001
++From: =3D?UTF-8?q?Vicen=3DC8=3D9Biu=3D20Ciorbaru?=3D <vicentiu@mariadb.o=
+rg>
++Date: Thu, 23 Jul 2020 00:02:21 -0700
++Subject: [PATCH] Link with libatomic to enable C11 atomics support
+=20
+    Some architectures (mips) require libatomic to support proper
+    atomic operations. Check first if support is available without
+@@ -9,10 +9,18 @@ Date:   Fri Dec 21 19:14:04 2018 +0200
+=20
+ Upstream-Status: Pending
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ configure.cmake      | 20 +++++++++++++++++++-
++ mysys/CMakeLists.txt |  4 ++++
++ sql/CMakeLists.txt   |  4 ++++
++ 3 files changed, 27 insertions(+), 1 deletion(-)
+=20
++diff --git a/configure.cmake b/configure.cmake
++index a355214..6ee595f 100644
+ --- a/configure.cmake
+ +++ b/configure.cmake
+-@@ -926,7 +926,25 @@ int main()
++@@ -865,7 +865,25 @@ int main()
+    long long int *ptr=3D &var;
+    return (int)__atomic_load_n(ptr, __ATOMIC_SEQ_CST);
+  }"
+@@ -39,10 +47,12 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ =20
+  IF(WITH_VALGRIND)
+    SET(HAVE_valgrind 1)
++diff --git a/mysys/CMakeLists.txt b/mysys/CMakeLists.txt
++index 3d8a20e..42f1441 100644
+ --- a/mysys/CMakeLists.txt
+ +++ b/mysys/CMakeLists.txt
+-@@ -78,6 +78,10 @@ TARGET_LINK_LIBRARIES(mysys dbug strings
+-  ${LIBNSL} ${LIBM} ${LIBRT} ${LIBDL} ${LIBSOCKET} ${LIBEXECINFO} ${CRC3=
+2_LIBRARY})
++@@ -129,6 +129,10 @@ TARGET_LINK_LIBRARIES(mysys dbug strings ${ZLIB_LIB=
+RARY}
++  ${LIBNSL} ${LIBM} ${LIBRT} ${LIBDL} ${LIBSOCKET} ${LIBEXECINFO})
+  DTRACE_INSTRUMENT(mysys)
+ =20
+ +IF (HAVE_GCC_C11_ATOMICS_WITH_LIBATOMIC)
+@@ -52,9 +62,11 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  IF(HAVE_BFD_H)
+    TARGET_LINK_LIBRARIES(mysys bfd) =20
+  ENDIF(HAVE_BFD_H)
++diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
++index 616017b..53575f6 100644
+ --- a/sql/CMakeLists.txt
+ +++ b/sql/CMakeLists.txt
+-@@ -178,6 +178,10 @@ ELSE()
++@@ -219,6 +219,10 @@ ELSE()
+    SET(MYSQLD_SOURCE main.cc ${DTRACE_PROBES_ALL})
+  ENDIF()
+ =20
+@@ -62,6 +74,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ +  TARGET_LINK_LIBRARIES(sql atomic)
+ +ENDIF()
+ +
+-=20
+- IF(MSVC AND NOT WITHOUT_DYNAMIC_PLUGINS)
+-=20
++ IF(MSVC)
++   SET(libs_to_export_symbols sql mysys dbug strings)
++   # Create shared library of already compiled object
++--=20
++2.17.1
++
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen=
+_lex_hash-not-found.patch b/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLi=
+sts.txt-fix-gen_lex_hash-not-found.patch
+index afc1be47b..4cb044339 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_ha=
+sh-not-found.patch
++++ b/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_ha=
+sh-not-found.patch
+@@ -1,6 +1,6 @@
+-From 796464015bffe6e0beca9e1c355b223512803c3e Mon Sep 17 00:00:00 2001
++From cfce1491827e5a581878b5e166bf4d30e6d90e07 Mon Sep 17 00:00:00 2001
+ From: Mingli Yu <mingli.yu@windriver.com>
+-Date: Wed, 27 Feb 2019 23:01:00 -0800
++Date: Thu, 23 Jul 2020 00:08:16 -0700
+ Subject: [PATCH] sql/CMakeLists.txt: fix gen_lex_hash not found
+=20
+ Fix the below do_compile issue in cross-compiling env.
+@@ -10,18 +10,17 @@ Fix the below do_compile issue in cross-compiling env.
+ Upstream-Status: Inappropriate [oe build specific]
+=20
+ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+-
+ ---
+  sql/CMakeLists.txt | 30 ++++++++++++++++++++----------
+  1 file changed, 20 insertions(+), 10 deletions(-)
+=20
+ diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
+-index c6910f46..bf51f4cb 100644
++index 0dc3caa..616017b 100644
+ --- a/sql/CMakeLists.txt
+ +++ b/sql/CMakeLists.txt
+-@@ -50,11 +50,16 @@ ${WSREP_INCLUDES}
+-=20
+-=20
++@@ -52,11 +52,16 @@ ${CMAKE_BINARY_DIR}/sql
++ ${CMAKE_SOURCE_DIR}/tpool
++ )
+ =20
+ -ADD_CUSTOM_COMMAND(
+ -  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex_token.h
+@@ -39,9 +38,9 @@ index c6910f46..bf51f4cb 100644
+ +   COMMAND gen_lex_token > lex_token.h)
+ +ENDIF()
+ =20
+- ADD_DEFINITIONS(-DMYSQL_SERVER -DHAVE_EVENT_SCHEDULER)
+-=20
+-@@ -370,11 +375,16 @@ IF(NOT CMAKE_CROSSCOMPILING)
++ ADD_CUSTOM_COMMAND(
++   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/sql_yacc_ora.yy
++@@ -345,11 +350,16 @@ IF(NOT CMAKE_CROSSCOMPILING)
+    ADD_EXECUTABLE(gen_lex_hash gen_lex_hash.cc)
+  ENDIF()
+ =20
+@@ -61,5 +60,8 @@ index c6910f46..bf51f4cb 100644
+ +   COMMAND gen_lex_hash > lex_hash.h)
+ +ENDIF()
+ =20
+- MYSQL_ADD_EXECUTABLE(mysql_tzinfo_to_sql tztime.cc COMPONENT Server)
+- SET_TARGET_PROPERTIES(mysql_tzinfo_to_sql PROPERTIES COMPILE_FLAGS "-DT=
+ZINFO2SQL")
++ MYSQL_ADD_EXECUTABLE(mariadb-tzinfo-to-sql tztime.cc COMPONENT Server)
++ SET_TARGET_PROPERTIES(mariadb-tzinfo-to-sql PROPERTIES COMPILE_FLAGS "-=
+DTZINFO2SQL")
++--=20
++2.17.1
++
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.4.12.bb b/meta-oe/recip=
+es-dbs/mysql/mariadb_10.5.4.bb
+similarity index 87%
+rename from meta-oe/recipes-dbs/mysql/mariadb_10.4.12.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_10.5.4.bb
+index c0b53379d..220b904b2 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb_10.4.12.bb
++++ b/meta-oe/recipes-dbs/mysql/mariadb_10.5.4.bb
+@@ -2,7 +2,7 @@ require mariadb.inc
+=20
+ EXTRA_OECMAKE +=3D "-DSTACK_DIRECTION=3D-1"
+=20
+-DEPENDS +=3D "mariadb-native bison-native openssl ncurses zlib libaio li=
+bedit libevent libxml2"
++DEPENDS +=3D "mariadb-native bison-native curl openssl ncurses zlib liba=
+io libedit libevent libxml2"
+=20
+ PROVIDES +=3D "mysql5 libmysqlclient"
+=20
+--=20
+2.17.1
 
--- 
-Regards,
-
-Laurent Pinchart
