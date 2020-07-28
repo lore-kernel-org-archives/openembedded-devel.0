@@ -1,185 +1,764 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.54])
- by mx.groups.io with SMTP id smtpd.web12.12453.1595943260550201033
+Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com [209.85.216.66])
+ by mx.groups.io with SMTP id smtpd.web10.13729.1595946697724458798
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Jul 2020 06:34:20 -0700
+ Tue, 28 Jul 2020 07:31:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=RoUtmkCU;
- spf=pass (domain: windriver.com, ip: 40.107.243.54, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WcZJeuQci6GMbGTYBr1kb519NjV190Nw0SdNYY4h9RpQZGuxvMCFPUMo8RLKvEg+rJNVm5oprCzuN7TXNaQz8/ng+Vm/bQjAC17mStAVeXa6px3wFKp+TdJMgzNJLA8gdOXxwa/MKZrLNGUSefnXplizkit7pk2PkIRI5hYhkjAdL9UuJhaZRYLR5Y3cldlV+smLk6Yv8goCUO8imW8HezIFD9S995X2vgjF7xr+nn0njHVCoo1rftDyl/+o9cdtesymh+Os/fRD6qlHMx+ggZi9XxqTyxYKuHFe+yAzxdCU1h8OpKFSdV1UgDRfSzlmRbYTChsb0a7dqlQ+ubnvFw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jiM3ETFUE8MdO5Mewgmu+1PhOB8Whklg8g2pw5d1FVQ=;
- b=nVleECBlElcfO7xQej4T8axBmIbeiYUzVV0Bp/p/BCcaz+7oI3oSauVVfd2sUdQDo3Hk1TNvQBYwgL5XzA+rCkFB8jo6DKGVVoeaVtHPI1ReA8JyfoTO9nxk+o2p4ivE1S/U0k+sklDaczJrpSFp/mH+OGplcmBCAejDXHIlOZP3ZSm84P9qUuESQRC3Ik0jt5xCEp4Rkvw5NH4Nh8Q1Gj6HtgI/IWW5RoWlmFoPNtLSR9bqX1KAqyeV2OhOt/YyTo6hxXGg4NSwJ17z6e+5A2UU9jl5rfA/vz+Zfef5N2yfGs/DCy6kBBRmdpiZmWICuCZY9oNgh7lbiFeffzvxWQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=iHBUQR+/;
+ spf=pass (domain: gmail.com, ip: 209.85.216.66, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f66.google.com with SMTP id mt12so4263075pjb.4
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2020 07:31:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jiM3ETFUE8MdO5Mewgmu+1PhOB8Whklg8g2pw5d1FVQ=;
- b=RoUtmkCU7gCn6HDN/IXIkGgqVIuIfKCdZ/KasYp3qGpTHzLLSa2BlmR6/CXxnmCwdXBHlQczyXKN60cyvWxz8YWHSXsDwZ3c+SED7Ui7K9oG4jXfCtDyPqr230M30MWWc5EPbgpop0c8mm7d1W0TKQ2GJ8rgOYgg5qPIEfUdFcA=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BY5PR11MB4103.namprd11.prod.outlook.com (2603:10b6:a03:18c::29) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3216.28; Tue, 28 Jul
- 2020 13:34:19 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::8d65:f6f9:ce31:8d47]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::8d65:f6f9:ce31:8d47%5]) with mapi id 15.20.3216.033; Tue, 28 Jul 2020
- 13:34:19 +0000
-Subject: Re: [oe] [meta-python][PATCHv2] python3-urllib3: Upgrade 1.25.9 -> 1.25.10
-To: Leon Anavi <leon.anavi@konsulko.com>,
+        d=gmail.com; s=20161025;
+        h=subject:to:references:from:autocrypt:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language;
+        bh=OvTfMwbTbmBxSbc1Zc/DcSANspvsIvaESrwy1Yhg+TA=;
+        b=iHBUQR+/L49tPjcf/SgsFupRrND8soMu6gm5rO6HVPlxRWvhd0fq+sg2aEDe1/WPLG
+         0nSAkXRFufahWkIeLnedcR2y+PqJt/YsKtywMcqnyhEIhN86CRW6zibYSzIxBNbdPfeE
+         6yjMncZ0V5+GIf0WRF92jkcSpmiLyxTqmtvPSYieS2fwkYRL4i8q/GfPnYE8IgbVRHNL
+         o9j5AUJ+wOm2cIKPxaR4R7Mkww90lNdi13Yxe4mKyzy2W4P+x0z5UI2eRvLCSbZnfGgL
+         RW74MLtcQP8l2tYnAMiN9W/pzK8apAzphtfYY2slUbAwIaiN31gXhSQUllBG17K2QHbr
+         shDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
+         :date:user-agent:mime-version:in-reply-to:content-language;
+        bh=OvTfMwbTbmBxSbc1Zc/DcSANspvsIvaESrwy1Yhg+TA=;
+        b=cw6LhxsdesBQBnbt0pFfg8ojoJ0A6FAH5iZa0htAsDYkCDJi4O4IAAVSbimTPCs6h4
+         PlY/VyyaCLccESQKhmDEqWHUGlCsqthz5JMtJrsORvSxrgTGT7aqlunHpK2abD2FGGBC
+         r3LVSykH5n5BXR4PHsCduYXyDSg0Gz3qZYyTUSRMrDa7j8qx4uWtUFrM2eXk7t0SqU9J
+         c9Zdr12KC001/uvIAWcQGbx72eSntmco4kY+BYnEhx83Z0ieqUTqRlzP7HzwoUJNP4K8
+         f+R498u6PWUyAT15HQW9YZEWy+yYqXWZwpTmbxIN3SqTMfNxU+irtQAx4ot2PIMuMe35
+         Ckyw==
+X-Gm-Message-State: AOAM530vOxzzyR7sSECxNB+9JcLbN+NC03XoIZUofD8npxOucL6cXOAZ
+	nzUnIqspwr9iM5p730ONSNjdqer1KGw=
+X-Google-Smtp-Source: ABdhPJxd75//q7ZFIvtv2HMq9s1/PMHAFiuIextxtGDTPJ56Pm4ByJIKkzJjIVggbGSS+LhEN0VDyA==
+X-Received: by 2002:a17:90a:3d49:: with SMTP id o9mr5181163pjf.156.1595946693742;
+        Tue, 28 Jul 2020 07:31:33 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:8df1:f28:d14a:8296? ([2601:202:4180:a5c0:8df1:f28:d14a:8296])
+        by smtp.gmail.com with ESMTPSA id z20sm3226506pjr.43.2020.07.28.07.31.32
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 28 Jul 2020 07:31:32 -0700 (PDT)
+Subject: Re: [oe] [meta-oe][PATCH v3] mariadb: upgrade to 10.5.4
+To: "Yu, Mingli" <mingli.yu@windriver.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200724163307.1818-1-leon.anavi@konsulko.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <25369cb9-ecf9-5a48-5aec-a5aef511112d@windriver.com>
-Date: Tue, 28 Jul 2020 09:34:16 -0400
+References: <CAMKF1srMOdhSyWxhBxDKSkaUfTUzfeDA6m=2SB-LttecR6xs-A@mail.gmail.com>
+ <20200728083603.75632-1-mingli.yu@windriver.com>
+From: "akuster" <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+ 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
+ 8CS2NxU=
+Message-ID: <a1f87e75-190a-f400-ccae-f9140cfd4172@gmail.com>
+Date: Tue, 28 Jul 2020 07:31:31 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
-In-Reply-To: <20200724163307.1818-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0130.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::9) To BY5PR11MB3909.namprd11.prod.outlook.com
- (2603:10b6:a03:191::13)
-Return-Path: trevor.gamblin@windriver.com
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0130.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::9) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3239.16 via Frontend Transport; Tue, 28 Jul 2020 13:34:18 +0000
-X-Originating-IP: [174.115.236.231]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: c80cd08f-9da5-43d3-f7a4-08d832faee0a
-X-MS-TrafficTypeDiagnostic: BY5PR11MB4103:
-X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB4103F027C6933BFA480D58089F730@BY5PR11MB4103.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5516;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	spGIGyB0xEvdykJYh2GzvDUG1bbe+NNPEdxlFqHj/5WpGk8sProVkjVfZz30eu7c5YI/i577jy0XqgHy/wiD6vPyKriFyOshR6oUP3qmeCJfFpcWmUb4Iz9Jsbo2gj8SD6zUOpOFhnBLMab8akmiAw/ppmnv24ULoPHXBkFtyMHu/yg40Ev0CenxN+XJI4/3SFouU13qV7RDfCkK6Bbsl1NtVL/HmOHNjlD5ahOUKOFqYKXzIcEgqQi0Gv08CLHc1yFxpN3mnMojZD2DdiyXz+WcM3haf35zGBLQ+REXg8HgurdQ123+hfMeQ1L5QV8tbnQjZhEX3uBeqTSK0K/xXIdWf1EMnPfFYMdj+iOM3i/PPqLkUfhtDoMTj41hCoURgU+GygfM08gGJRhMbZlGEIgTuJKIeZYbUWaCwyUjAOjZKYx+1wjapsZvsYLwoMK6AX+Wc5Vm1ksOE7aaAQRrNw==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(136003)(366004)(376002)(39850400004)(396003)(346002)(8936002)(478600001)(966005)(52116002)(36756003)(2906002)(33964004)(8676002)(2616005)(16576012)(44832011)(83380400001)(316002)(86362001)(31686004)(53546011)(166002)(6486002)(16526019)(186003)(66946007)(5660300002)(66476007)(66556008)(31696002)(956004)(26005)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	WYNRCw9RZ9caRNtUjvfrtmdAgsslTh8gsioF/HXF3X75e7t5fSHwoQnVwD02OpqpDWaGSu/qAAVuPyHUxnf4WhnG9DLp28/C3jUr5kPYotSB1uxJHz4ovAmLR2zX+wOykEXGJfy8Qssl4Hk+wef7DzI5Oirm4b2gYR/vcOWNeL6p6A04R2awhA4UW6hoaRYnuJeSx4oIEDB70C2XBhDbqeH2VqZTIVDqjwyf17bLyVw2PzFnuioVfu37NcvnOMobzBIFWTpquWy0QfNbUfo1RZHbRta1PUvhACZDCWJknPUPouOr33PKw1xhYzXNv/RzUfHnT881xmOYZUMqSiHuUckVj83DzVamTFbVm214VA/Q/7tmCstqLIPoMlTxZnzztl8Lz/5X0fTnxHohPt5o4Dw1fuvKybnd8AVmdxlg7gYrR7IWnokv8zPbfYRF4yWQGMeOm9dRcctP1CBDO9d9A79PsMhkfr3fQKs4VN7lF1A=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c80cd08f-9da5-43d3-f7a4-08d832faee0a
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2020 13:34:19.4481
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: XteQUTS6hSK2v96L5nQzfiuy3xzIMAcoyR45CSc866Qk82ZHC7783gVTH6TAKqjMYmg/ZMnZ0EJJTGBFYn5pQnaLP63FsnFwAx5uOf2ROF8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4103
+In-Reply-To: <20200728083603.75632-1-mingli.yu@windriver.com>
 Content-Type: multipart/alternative;
- boundary="------------FBC3CDFA70D34AFA4A3BD039"
+ boundary="------------CFDFB80DF50D295063CDDA18"
 Content-Language: en-US
 
---------------FBC3CDFA70D34AFA4A3BD039
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+--------------CFDFB80DF50D295063CDDA18
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+Mingli,
 
 
-On 7/24/20 12:33 PM, Leon Anavi wrote:
-> Upgrade to release 1.25.10:
+On 7/28/20 1:36 AM, Yu, Mingli wrote:
+> From: Mingli Yu <mingli.yu@windriver.com>
 >
-> * Added support for ``SSLKEYLOGFILE`` environment variable for
->    logging TLS session keys with use with programs like
->    Wireshark for decrypting captured web traffic
-> * Fixed loading of SecureTransport libraries on macOS Big Sur
->    due to the new dynamic linker cache
-> * Collapse chunked request bodies data and framing into one
->    call to ``send()`` to reduce the number of TCP packets by 2-4x
-> * Don't insert ``None`` into ``ConnectionPool`` if the pool
->    was empty when requesting a connection
-> * Avoid ``hasattr`` call in ``BrotliDecoder.decompress()``
+> * Remove one backported patch
+> * Remove SRC_URI[md5sum]
+> * Rebase two patches to fix fuzz warnings
+> * Add curl depends to fix below error:
+>   | ./mariadb-10.5.4/storage/maria/libmarias3/libmarias3/marias3.h:26:10: fatal error: curl/curl.h: No such file or directory
 >
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> * update the pam_user_map.so install logic as below commit introduced in this new
+>   mariadb version
+>   236aed3f5f0 MDEV-21656: Wrong directory for pam_user_map.so JIRA:https://jira.mariadb.org/browse/MDEV-17292
+>
+> * Backport a patch to fix the undefined reference to `crc32c_arm64' on arm64
+
+What are the difference between the patch versions?
+-armin
+
+>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 > ---
->   .../{python3-urllib3_1.25.9.bb => python3-urllib3_1.25.10.bb} | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-urllib3_1.25.9.bb => python3-urllib3_1.25.10.bb} (79%)
+>  ...ve_10.4.12.bb => mariadb-native_10.5.4.bb} |  0
+>  meta-oe/recipes-dbs/mysql/mariadb.inc         | 13 +++--
+>  ...-breakage-from-lock_guard-error-6161.patch | 32 -------------
+>  ...DB-undefined-reference-to-crc32c_arm.patch | 48 +++++++++++++++++++
+>  .../mysql/mariadb/c11_atomics.patch           | 37 +++++++++-----
+>  ...Lists.txt-fix-gen_lex_hash-not-found.patch | 26 +++++-----
+>  .../{mariadb_10.4.12.bb => mariadb_10.5.4.bb} |  2 +-
+>  7 files changed, 97 insertions(+), 61 deletions(-)
+>  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.4.12.bb => mariadb-native_10.5.4.bb} (100%)
+>  delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
+>  create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch
+>  rename meta-oe/recipes-dbs/mysql/{mariadb_10.4.12.bb => mariadb_10.5.4.bb} (87%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
-> similarity index 79%
-> rename from meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
-> rename to meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
-> index 8cbc1f9f9..db985a2ff 100644
-> --- a/meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
-> +++ b/meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
->   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=65715c2eb961313d71b297dd5a04f85e"
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.4.12.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.4.bb
+> similarity index 100%
+> rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.4.12.bb
+> rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.5.4.bb
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+> index 95f5acba1..58f573e5e 100644
+> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
+> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+> @@ -18,11 +18,10 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
+>             file://c11_atomics.patch \
+>             file://clang_version_header_conflict.patch \
+>             file://fix-arm-atomic.patch \
+> -           file://0001-Fix-build-breakage-from-lock_guard-error-6161.patch \
+>             file://0001-Fix-library-LZ4-lookup.patch \
+> +           file://0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch \
+>            "
+> -SRC_URI[md5sum] = "97d7c0f508c04a31c138fdb24e95dbc4"
+> -SRC_URI[sha256sum] = "fef1e1d38aa253dd8a51006bd15aad184912fce31c446bb69434fcde735aa208"
+> +SRC_URI[sha256sum] = "26db2becc9cec37e99a4e73390bd2eaa74568e21f9cf110359f4f68b37154c72"
+>  
+>  UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
+>  
+> @@ -169,8 +168,12 @@ do_install() {
+>          mv ${D}${datadir}/doc/README ${D}${datadir}/doc/${PN}/
+>      fi
+>      if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
+> -        mv ${D}/lib/security ${D}/${libdir}
+> -        rmdir --ignore-fail-on-non-empty ${D}/lib
+> +        pam_so=$(find ${D} -name pam_user_map.so)
+> +        if [ x"${pam_so}" != x ]; then
+> +            pam_dir=$(dirname ${pam_so})
+> +            mv ${pam_dir} ${D}/${libdir}
+> +            rmdir --ignore-fail-on-non-empty ${pam_dir%security}
+> +        fi
+>      fi
+>  }
+>  
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-breakage-from-lock_guard-error-6161.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
+> deleted file mode 100644
+> index 87c70617a..000000000
+> --- a/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
+> +++ /dev/null
+> @@ -1,32 +0,0 @@
+> -Subject: [PATCH] Fix build breakage from lock_guard error (#6161)
+> -
+> -Summary:
+> -This change fixes a source issue that caused compile time error which
+> -breaks build for many fbcode services in that setup. The size() member
+> -function of channel is a const member, so member variables accessed
+> -within it are implicitly const as well. This caused error when clang
+> -fails to resolve to a constructor that takes std::mutex because the
+> -suitable constructor got rejected due to loss of constness for its
+> -argument. The fix is to add mutable modifier to the lock_ member of
+> -channel.
+> -
+> -Pull Request resolved: https://github.com/facebook/rocksdb/pull/6161
+> -
+> -Differential Revision: D18967685
+> -
+> -Pulled By: maysamyabandeh
+> -
+> -Upstream-Status: Backport
+> -
+> -fbshipit-source-id:698b6a5153c3c92eeacb842c467aa28cc350d432 
+> ---- a/storage/rocksdb/rocksdb/util/channel.h
+> -+++ b/storage/rocksdb/rocksdb/util/channel.h
+> -@@ -60,7 +60,7 @@ class channel {
+> - 
+> -  private:
+> -   std::condition_variable cv_;
+> --  std::mutex lock_;
+> -+  mutable std::mutex lock_;
+> -   std::queue<T> buffer_;
+> -   bool eof_;
+> - };
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch
+> new file mode 100644
+> index 000000000..1856c1af7
+> --- /dev/null
+> +++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch
+> @@ -0,0 +1,48 @@
+> +From d88ea260882ca414e940cd6af225617f00503f71 Mon Sep 17 00:00:00 2001
+> +From: Krunal Bauskar <krunalbauskar@gmail.com>
+> +Date: Mon, 27 Jul 2020 18:38:10 +0800
+> +Subject: [PATCH] MDEV-23137: RocksDB: undefined reference to crc32c_arm64
+> +
+> +RocksDB fails to build on arm64: undefined reference to
+> +            `crc32c_arm64(unsigned int, unsigned char const*, unsigned int)'
+> +
+> +MariaDB uses storage/rocksdb/build_rocksdb.cmake to compile RocksDB.
+> +Said cmake missed adding crc32c_arm64 compilation target so if
+> +machine native architecture supported crc32 then complier would enable
+> +usage of function defined in crc32c_arm64 causing the listed error.
+> +
+> +Added crc32c_arm64 complition target.
+> +
+> +closes #1642
+> +
+> +Upstream-Status: Backport
+> +
+> +Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> +---
+> + storage/rocksdb/build_rocksdb.cmake | 10 ++++++++++
+> + 1 file changed, 10 insertions(+)
+> +
+> +diff --git a/storage/rocksdb/build_rocksdb.cmake b/storage/rocksdb/build_rocksdb.cmake
+> +index 3f3dca7e990..7d2252c5f77 100644
+> +--- a/storage/rocksdb/build_rocksdb.cmake
+> ++++ b/storage/rocksdb/build_rocksdb.cmake
+> +@@ -442,6 +442,16 @@ else()
+> +       util/crc32c_ppc.c
+> +       util/crc32c_ppc_asm.S)
+> +   endif(CMAKE_SYSTEM_PROCESSOR MATCHES "ppc64")
+> ++  # aarch
+> ++  if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|AARCH64")
+> ++    CHECK_CXX_COMPILER_FLAG("-march=armv8-a+crc+crypto" HAS_ARMV8_CRC)
+> ++    if(HAS_ARMV8_CRC)
+> ++      message(STATUS " HAS_ARMV8_CRC yes")
+> ++      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=armv8-a+crc+crypto -Wno-unused-function")
+> ++      list(APPEND ROCKSDB_SOURCES
+> ++        util/crc32c_arm64.cc)
+> ++    endif(HAS_ARMV8_CRC)
+> ++  endif(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|AARCH64")
+> + endif()
+> + SET(SOURCES)
+> + FOREACH(s ${ROCKSDB_SOURCES})
+> +-- 
+> +2.17.1
+> +
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch b/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
+> index 169986130..36217f9aa 100644
+> --- a/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
+> +++ b/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
+> @@ -1,7 +1,7 @@
+> -Author: Vicențiu Ciorbaru <vicentiu@mariadb.org>
+> -Date:   Fri Dec 21 19:14:04 2018 +0200
+> -
+> -   Link with libatomic to enable C11 atomics support
+> +From 976468458d53d8bb71acf48ddfc852a60557acb9 Mon Sep 17 00:00:00 2001
+> +From: =?UTF-8?q?Vicen=C8=9Biu=20Ciorbaru?= <vicentiu@mariadb.org>
+> +Date: Thu, 23 Jul 2020 00:02:21 -0700
+> +Subject: [PATCH] Link with libatomic to enable C11 atomics support
+>  
+>     Some architectures (mips) require libatomic to support proper
+>     atomic operations. Check first if support is available without
+> @@ -9,10 +9,18 @@ Date:   Fri Dec 21 19:14:04 2018 +0200
+>  
+>  Upstream-Status: Pending
+>  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> +---
+> + configure.cmake      | 20 +++++++++++++++++++-
+> + mysys/CMakeLists.txt |  4 ++++
+> + sql/CMakeLists.txt   |  4 ++++
+> + 3 files changed, 27 insertions(+), 1 deletion(-)
+>  
+> +diff --git a/configure.cmake b/configure.cmake
+> +index a355214..6ee595f 100644
+>  --- a/configure.cmake
+>  +++ b/configure.cmake
+> -@@ -926,7 +926,25 @@ int main()
+> +@@ -865,7 +865,25 @@ int main()
+>     long long int *ptr= &var;
+>     return (int)__atomic_load_n(ptr, __ATOMIC_SEQ_CST);
+>   }"
+> @@ -39,10 +47,12 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 >   
-> -SRC_URI[md5sum] = "dbf9b868b90880b24b1ac278094e912e"
-> -SRC_URI[sha256sum] = "3018294ebefce6572a474f0604c2021e33b3fd8006ecd11d62107a5d2a963527"
-> +SRC_URI[md5sum] = "94e3d4d472a14e788d4bd1a903fd102b"
-> +SRC_URI[sha256sum] = "91056c15fa70756691db97756772bb1eb9678fa585d9184f24534b100dc60f4a"
+>   IF(WITH_VALGRIND)
+>     SET(HAVE_valgrind 1)
+> +diff --git a/mysys/CMakeLists.txt b/mysys/CMakeLists.txt
+> +index 3d8a20e..42f1441 100644
+>  --- a/mysys/CMakeLists.txt
+>  +++ b/mysys/CMakeLists.txt
+> -@@ -78,6 +78,10 @@ TARGET_LINK_LIBRARIES(mysys dbug strings
+> -  ${LIBNSL} ${LIBM} ${LIBRT} ${LIBDL} ${LIBSOCKET} ${LIBEXECINFO} ${CRC32_LIBRARY})
+> +@@ -129,6 +129,10 @@ TARGET_LINK_LIBRARIES(mysys dbug strings ${ZLIB_LIBRARY}
+> +  ${LIBNSL} ${LIBM} ${LIBRT} ${LIBDL} ${LIBSOCKET} ${LIBEXECINFO})
+>   DTRACE_INSTRUMENT(mysys)
 >   
->   inherit pypi setuptools3
+>  +IF (HAVE_GCC_C11_ATOMICS_WITH_LIBATOMIC)
+> @@ -52,9 +62,11 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>   IF(HAVE_BFD_H)
+>     TARGET_LINK_LIBRARIES(mysys bfd)  
+>   ENDIF(HAVE_BFD_H)
+> +diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
+> +index 616017b..53575f6 100644
+>  --- a/sql/CMakeLists.txt
+>  +++ b/sql/CMakeLists.txt
+> -@@ -178,6 +178,10 @@ ELSE()
+> +@@ -219,6 +219,10 @@ ELSE()
+>     SET(MYSQLD_SOURCE main.cc ${DTRACE_PROBES_ALL})
+>   ENDIF()
 >   
+> @@ -62,6 +74,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>  +  TARGET_LINK_LIBRARIES(sql atomic)
+>  +ENDIF()
+>  +
+> - 
+> - IF(MSVC AND NOT WITHOUT_DYNAMIC_PLUGINS)
+> - 
+> + IF(MSVC)
+> +   SET(libs_to_export_symbols sql mysys dbug strings)
+> +   # Create shared library of already compiled object
+> +-- 
+> +2.17.1
+> +
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch b/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
+> index afc1be47b..4cb044339 100644
+> --- a/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
+> +++ b/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
+> @@ -1,6 +1,6 @@
+> -From 796464015bffe6e0beca9e1c355b223512803c3e Mon Sep 17 00:00:00 2001
+> +From cfce1491827e5a581878b5e166bf4d30e6d90e07 Mon Sep 17 00:00:00 2001
+>  From: Mingli Yu <mingli.yu@windriver.com>
+> -Date: Wed, 27 Feb 2019 23:01:00 -0800
+> +Date: Thu, 23 Jul 2020 00:08:16 -0700
+>  Subject: [PATCH] sql/CMakeLists.txt: fix gen_lex_hash not found
+>  
+>  Fix the below do_compile issue in cross-compiling env.
+> @@ -10,18 +10,17 @@ Fix the below do_compile issue in cross-compiling env.
+>  Upstream-Status: Inappropriate [oe build specific]
+>  
+>  Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> -
+>  ---
+>   sql/CMakeLists.txt | 30 ++++++++++++++++++++----------
+>   1 file changed, 20 insertions(+), 10 deletions(-)
+>  
+>  diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
+> -index c6910f46..bf51f4cb 100644
+> +index 0dc3caa..616017b 100644
+>  --- a/sql/CMakeLists.txt
+>  +++ b/sql/CMakeLists.txt
+> -@@ -50,11 +50,16 @@ ${WSREP_INCLUDES}
+> - 
+> - 
+> +@@ -52,11 +52,16 @@ ${CMAKE_BINARY_DIR}/sql
+> + ${CMAKE_SOURCE_DIR}/tpool
+> + )
+>   
+>  -ADD_CUSTOM_COMMAND(
+>  -  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex_token.h
+> @@ -39,9 +38,9 @@ index c6910f46..bf51f4cb 100644
+>  +   COMMAND gen_lex_token > lex_token.h)
+>  +ENDIF()
+>   
+> - ADD_DEFINITIONS(-DMYSQL_SERVER -DHAVE_EVENT_SCHEDULER)
+> - 
+> -@@ -370,11 +375,16 @@ IF(NOT CMAKE_CROSSCOMPILING)
+> + ADD_CUSTOM_COMMAND(
+> +   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/sql_yacc_ora.yy
+> +@@ -345,11 +350,16 @@ IF(NOT CMAKE_CROSSCOMPILING)
+>     ADD_EXECUTABLE(gen_lex_hash gen_lex_hash.cc)
+>   ENDIF()
+>   
+> @@ -61,5 +60,8 @@ index c6910f46..bf51f4cb 100644
+>  +   COMMAND gen_lex_hash > lex_hash.h)
+>  +ENDIF()
+>   
+> - MYSQL_ADD_EXECUTABLE(mysql_tzinfo_to_sql tztime.cc COMPONENT Server)
+> - SET_TARGET_PROPERTIES(mysql_tzinfo_to_sql PROPERTIES COMPILE_FLAGS "-DTZINFO2SQL")
+> + MYSQL_ADD_EXECUTABLE(mariadb-tzinfo-to-sql tztime.cc COMPONENT Server)
+> + SET_TARGET_PROPERTIES(mariadb-tzinfo-to-sql PROPERTIES COMPILE_FLAGS "-DTZINFO2SQL")
+> +-- 
+> +2.17.1
+> +
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.4.12.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.5.4.bb
+> similarity index 87%
+> rename from meta-oe/recipes-dbs/mysql/mariadb_10.4.12.bb
+> rename to meta-oe/recipes-dbs/mysql/mariadb_10.5.4.bb
+> index c0b53379d..220b904b2 100644
+> --- a/meta-oe/recipes-dbs/mysql/mariadb_10.4.12.bb
+> +++ b/meta-oe/recipes-dbs/mysql/mariadb_10.5.4.bb
+> @@ -2,7 +2,7 @@ require mariadb.inc
+>  
+>  EXTRA_OECMAKE += "-DSTACK_DIRECTION=-1"
+>  
+> -DEPENDS += "mariadb-native bison-native openssl ncurses zlib libaio libedit libevent libxml2"
+> +DEPENDS += "mariadb-native bison-native curl openssl ncurses zlib libaio libedit libevent libxml2"
+>  
+>  PROVIDES += "mysql5 libmysqlclient"
+>  
 >
 > 
 
---------------FBC3CDFA70D34AFA4A3BD039
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
 
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+--------------CFDFB80DF50D295063CDDA18
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
   <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 7/24/20 12:33 PM, Leon Anavi wrote:<br>
+    Mingli,<br>
+    <br>
+    <br>
+    <div class="moz-cite-prefix">On 7/28/20 1:36 AM, Yu, Mingli wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200724163307.1818-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.25.10:
+    <blockquote type="cite"
+      cite="mid:20200728083603.75632-1-mingli.yu@windriver.com">
+      <pre class="moz-quote-pre" wrap="">From: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a>
 
-* Added support for ``SSLKEYLOGFILE`` environment variable for
-  logging TLS session keys with use with programs like
-  Wireshark for decrypting captured web traffic
-* Fixed loading of SecureTransport libraries on macOS Big Sur
-  due to the new dynamic linker cache
-* Collapse chunked request bodies data and framing into one
-  call to ``send()`` to reduce the number of TCP packets by 2-4x
-* Don't insert ``None`` into ``ConnectionPool`` if the pool
-  was empty when requesting a connection
-* Avoid ``hasattr`` call in ``BrotliDecoder.decompress()``
+* Remove one backported patch
+* Remove SRC_URI[md5sum]
+* Rebase two patches to fix fuzz warnings
+* Add curl depends to fix below error:
+  | ./mariadb-10.5.4/storage/maria/libmarias3/libmarias3/marias3.h:26:10: fatal error: curl/curl.h: No such file or directory
 
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+* update the pam_user_map.so install logic as below commit introduced in this new
+  mariadb version
+  236aed3f5f0 MDEV-21656: Wrong directory for pam_user_map.so JIRA:<a class="moz-txt-link-freetext" href="https://jira.mariadb.org/browse/MDEV-17292">https://jira.mariadb.org/browse/MDEV-17292</a>
+
+* Backport a patch to fix the undefined reference to `crc32c_arm64' on arm64</pre>
     </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200724163307.1818-1-leon.anavi@konsulko.com">
+    <br>
+    What are the difference between the patch versions?<br>
+    -armin<br>
+    <br>
+    <blockquote type="cite"
+      cite="mid:20200728083603.75632-1-mingli.yu@windriver.com">
       <pre class="moz-quote-pre" wrap="">
----
- .../{python3-urllib3_1.25.9.bb =&gt; python3-urllib3_1.25.10.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-urllib3_1.25.9.bb =&gt; python3-urllib3_1.25.10.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
-rename to meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
-index 8cbc1f9f9..db985a2ff 100644
---- a/meta-python/recipes-devtools/python/python3-urllib3_1.25.9.bb
-+++ b/meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/shazow/urllib3">&quot;https://github.com/shazow/urllib3&quot;</a>
- LICENSE = &quot;MIT&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=65715c2eb961313d71b297dd5a04f85e">&quot;file://LICENSE.txt;md5=65715c2eb961313d71b297dd5a04f85e&quot;</a>
+Signed-off-by: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a>
+---
+ ...ve_10.4.12.bb =&gt; mariadb-native_10.5.4.bb} |  0
+ meta-oe/recipes-dbs/mysql/mariadb.inc         | 13 +++--
+ ...-breakage-from-lock_guard-error-6161.patch | 32 -------------
+ ...DB-undefined-reference-to-crc32c_arm.patch | 48 +++++++++++++++++++
+ .../mysql/mariadb/c11_atomics.patch           | 37 +++++++++-----
+ ...Lists.txt-fix-gen_lex_hash-not-found.patch | 26 +++++-----
+ .../{mariadb_10.4.12.bb =&gt; mariadb_10.5.4.bb} |  2 +-
+ 7 files changed, 97 insertions(+), 61 deletions(-)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.4.12.bb =&gt; mariadb-native_10.5.4.bb} (100%)
+ delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
+ create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch
+ rename meta-oe/recipes-dbs/mysql/{mariadb_10.4.12.bb =&gt; mariadb_10.5.4.bb} (87%)
+
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.4.12.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.4.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.4.12.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.5.4.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 95f5acba1..58f573e5e 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -18,11 +18,10 @@ SRC_URI = <a class="moz-txt-link-rfc2396E" href="https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gzfile://c11_atomics.patch\file://clang_version_header_conflict.patch\file://fix-arm-atomic.patch\-file://0001-Fix-build-breakage-from-lock_guard-error-6161.patch\file://0001-Fix-library-LZ4-lookup.patch\+file://0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch\">"https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
+            file://c11_atomics.patch \
+            file://clang_version_header_conflict.patch \
+            file://fix-arm-atomic.patch \
+-           file://0001-Fix-build-breakage-from-lock_guard-error-6161.patch \
+            file://0001-Fix-library-LZ4-lookup.patch \
++           file://0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch \
+           "</a>
+-SRC_URI[md5sum] = "97d7c0f508c04a31c138fdb24e95dbc4"
+-SRC_URI[sha256sum] = "fef1e1d38aa253dd8a51006bd15aad184912fce31c446bb69434fcde735aa208"
++SRC_URI[sha256sum] = "26db2becc9cec37e99a4e73390bd2eaa74568e21f9cf110359f4f68b37154c72"
  
--SRC_URI[md5sum] = &quot;dbf9b868b90880b24b1ac278094e912e&quot;
--SRC_URI[sha256sum] = &quot;3018294ebefce6572a474f0604c2021e33b3fd8006ecd11d62107a5d2a963527&quot;
-+SRC_URI[md5sum] = &quot;94e3d4d472a14e788d4bd1a903fd102b&quot;
-+SRC_URI[sha256sum] = &quot;91056c15fa70756691db97756772bb1eb9678fa585d9184f24534b100dc60f4a&quot;
+ UPSTREAM_CHECK_URI = <a class="moz-txt-link-rfc2396E" href="https://github.com/MariaDB/server/releases">"https://github.com/MariaDB/server/releases"</a>
  
- inherit pypi setuptools3
+@@ -169,8 +168,12 @@ do_install() {
+         mv ${D}${datadir}/doc/README ${D}${datadir}/doc/${PN}/
+     fi
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
+-        mv ${D}/lib/security ${D}/${libdir}
+-        rmdir --ignore-fail-on-non-empty ${D}/lib
++        pam_so=$(find ${D} -name pam_user_map.so)
++        if [ x"${pam_so}" != x ]; then
++            pam_dir=$(dirname ${pam_so})
++            mv ${pam_dir} ${D}/${libdir}
++            rmdir --ignore-fail-on-non-empty ${pam_dir%security}
++        fi
+     fi
+ }
+ 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-breakage-from-lock_guard-error-6161.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
+deleted file mode 100644
+index 87c70617a..000000000
+--- a/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-Subject: [PATCH] Fix build breakage from lock_guard error (#6161)
+-
+-Summary:
+-This change fixes a source issue that caused compile time error which
+-breaks build for many fbcode services in that setup. The size() member
+-function of channel is a const member, so member variables accessed
+-within it are implicitly const as well. This caused error when clang
+-fails to resolve to a constructor that takes std::mutex because the
+-suitable constructor got rejected due to loss of constness for its
+-argument. The fix is to add mutable modifier to the lock_ member of
+-channel.
+-
+-Pull Request resolved: <a class="moz-txt-link-freetext" href="https://github.com/facebook/rocksdb/pull/6161">https://github.com/facebook/rocksdb/pull/6161</a>
+-
+-Differential Revision: D18967685
+-
+-Pulled By: maysamyabandeh
+-
+-Upstream-Status: Backport
+-
+-fbshipit-source-id:698b6a5153c3c92eeacb842c467aa28cc350d432 
+---- a/storage/rocksdb/rocksdb/util/channel.h
+-+++ b/storage/rocksdb/rocksdb/util/channel.h
+-@@ -60,7 +60,7 @@ class channel {
+- 
+-  private:
+-   std::condition_variable cv_;
+--  std::mutex lock_;
+-+  mutable std::mutex lock_;
+-   std::queue&lt;T&gt; buffer_;
+-   bool eof_;
+- };
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch
+new file mode 100644
+index 000000000..1856c1af7
+--- /dev/null
++++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch
+@@ -0,0 +1,48 @@
++From d88ea260882ca414e940cd6af225617f00503f71 Mon Sep 17 00:00:00 2001
++From: Krunal Bauskar <a class="moz-txt-link-rfc2396E" href="mailto:krunalbauskar@gmail.com">&lt;krunalbauskar@gmail.com&gt;</a>
++Date: Mon, 27 Jul 2020 18:38:10 +0800
++Subject: [PATCH] MDEV-23137: RocksDB: undefined reference to crc32c_arm64
++
++RocksDB fails to build on arm64: undefined reference to
++            `crc32c_arm64(unsigned int, unsigned char const*, unsigned int)'
++
++MariaDB uses storage/rocksdb/build_rocksdb.cmake to compile RocksDB.
++Said cmake missed adding crc32c_arm64 compilation target so if
++machine native architecture supported crc32 then complier would enable
++usage of function defined in crc32c_arm64 causing the listed error.
++
++Added crc32c_arm64 complition target.
++
++closes #1642
++
++Upstream-Status: Backport
++
++Signed-off-by: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a>
++---
++ storage/rocksdb/build_rocksdb.cmake | 10 ++++++++++
++ 1 file changed, 10 insertions(+)
++
++diff --git a/storage/rocksdb/build_rocksdb.cmake b/storage/rocksdb/build_rocksdb.cmake
++index 3f3dca7e990..7d2252c5f77 100644
++--- a/storage/rocksdb/build_rocksdb.cmake
+++++ b/storage/rocksdb/build_rocksdb.cmake
++@@ -442,6 +442,16 @@ else()
++       util/crc32c_ppc.c
++       util/crc32c_ppc_asm.S)
++   endif(CMAKE_SYSTEM_PROCESSOR MATCHES "ppc64")
+++  # aarch
+++  if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|AARCH64")
+++    CHECK_CXX_COMPILER_FLAG("-march=armv8-a+crc+crypto" HAS_ARMV8_CRC)
+++    if(HAS_ARMV8_CRC)
+++      message(STATUS " HAS_ARMV8_CRC yes")
+++      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=armv8-a+crc+crypto -Wno-unused-function")
+++      list(APPEND ROCKSDB_SOURCES
+++        util/crc32c_arm64.cc)
+++    endif(HAS_ARMV8_CRC)
+++  endif(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|AARCH64")
++ endif()
++ SET(SOURCES)
++ FOREACH(s ${ROCKSDB_SOURCES})
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch b/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
+index 169986130..36217f9aa 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
++++ b/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
+@@ -1,7 +1,7 @@
+-Author: Vicențiu Ciorbaru <a class="moz-txt-link-rfc2396E" href="mailto:vicentiu@mariadb.org">&lt;vicentiu@mariadb.org&gt;</a>
+-Date:   Fri Dec 21 19:14:04 2018 +0200
+-
+-   Link with libatomic to enable C11 atomics support
++From 976468458d53d8bb71acf48ddfc852a60557acb9 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Vicen=C8=9Biu=20Ciorbaru?= <a class="moz-txt-link-rfc2396E" href="mailto:vicentiu@mariadb.org">&lt;vicentiu@mariadb.org&gt;</a>
++Date: Thu, 23 Jul 2020 00:02:21 -0700
++Subject: [PATCH] Link with libatomic to enable C11 atomics support
+ 
+    Some architectures (mips) require libatomic to support proper
+    atomic operations. Check first if support is available without
+@@ -9,10 +9,18 @@ Date:   Fri Dec 21 19:14:04 2018 +0200
+ 
+ Upstream-Status: Pending
+ Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a>
++Signed-off-by: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a>
++---
++ configure.cmake      | 20 +++++++++++++++++++-
++ mysys/CMakeLists.txt |  4 ++++
++ sql/CMakeLists.txt   |  4 ++++
++ 3 files changed, 27 insertions(+), 1 deletion(-)
+ 
++diff --git a/configure.cmake b/configure.cmake
++index a355214..6ee595f 100644
+ --- a/configure.cmake
+ +++ b/configure.cmake
+-@@ -926,7 +926,25 @@ int main()
++@@ -865,7 +865,25 @@ int main()
+    long long int *ptr= &amp;var;
+    return (int)__atomic_load_n(ptr, __ATOMIC_SEQ_CST);
+  }"
+@@ -39,10 +47,12 @@ Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a>
+  
+  IF(WITH_VALGRIND)
+    SET(HAVE_valgrind 1)
++diff --git a/mysys/CMakeLists.txt b/mysys/CMakeLists.txt
++index 3d8a20e..42f1441 100644
+ --- a/mysys/CMakeLists.txt
+ +++ b/mysys/CMakeLists.txt
+-@@ -78,6 +78,10 @@ TARGET_LINK_LIBRARIES(mysys dbug strings
+-  ${LIBNSL} ${LIBM} ${LIBRT} ${LIBDL} ${LIBSOCKET} ${LIBEXECINFO} ${CRC32_LIBRARY})
++@@ -129,6 +129,10 @@ TARGET_LINK_LIBRARIES(mysys dbug strings ${ZLIB_LIBRARY}
++  ${LIBNSL} ${LIBM} ${LIBRT} ${LIBDL} ${LIBSOCKET} ${LIBEXECINFO})
+  DTRACE_INSTRUMENT(mysys)
+  
+ +IF (HAVE_GCC_C11_ATOMICS_WITH_LIBATOMIC)
+@@ -52,9 +62,11 @@ Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a>
+  IF(HAVE_BFD_H)
+    TARGET_LINK_LIBRARIES(mysys bfd)  
+  ENDIF(HAVE_BFD_H)
++diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
++index 616017b..53575f6 100644
+ --- a/sql/CMakeLists.txt
+ +++ b/sql/CMakeLists.txt
+-@@ -178,6 +178,10 @@ ELSE()
++@@ -219,6 +219,10 @@ ELSE()
+    SET(MYSQLD_SOURCE main.cc ${DTRACE_PROBES_ALL})
+  ENDIF()
+  
+@@ -62,6 +74,9 @@ Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a>
+ +  TARGET_LINK_LIBRARIES(sql atomic)
+ +ENDIF()
+ +
+- 
+- IF(MSVC AND NOT WITHOUT_DYNAMIC_PLUGINS)
+- 
++ IF(MSVC)
++   SET(libs_to_export_symbols sql mysys dbug strings)
++   # Create shared library of already compiled object
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch b/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
+index afc1be47b..4cb044339 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
++++ b/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
+@@ -1,6 +1,6 @@
+-From 796464015bffe6e0beca9e1c355b223512803c3e Mon Sep 17 00:00:00 2001
++From cfce1491827e5a581878b5e166bf4d30e6d90e07 Mon Sep 17 00:00:00 2001
+ From: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a>
+-Date: Wed, 27 Feb 2019 23:01:00 -0800
++Date: Thu, 23 Jul 2020 00:08:16 -0700
+ Subject: [PATCH] sql/CMakeLists.txt: fix gen_lex_hash not found
+ 
+ Fix the below do_compile issue in cross-compiling env.
+@@ -10,18 +10,17 @@ Fix the below do_compile issue in cross-compiling env.
+ Upstream-Status: Inappropriate [oe build specific]
+ 
+ Signed-off-by: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a>
+-
+ ---
+  sql/CMakeLists.txt | 30 ++++++++++++++++++++----------
+  1 file changed, 20 insertions(+), 10 deletions(-)
+ 
+ diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
+-index c6910f46..bf51f4cb 100644
++index 0dc3caa..616017b 100644
+ --- a/sql/CMakeLists.txt
+ +++ b/sql/CMakeLists.txt
+-@@ -50,11 +50,16 @@ ${WSREP_INCLUDES}
+- 
+- 
++@@ -52,11 +52,16 @@ ${CMAKE_BINARY_DIR}/sql
++ ${CMAKE_SOURCE_DIR}/tpool
++ )
+  
+ -ADD_CUSTOM_COMMAND(
+ -  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex_token.h
+@@ -39,9 +38,9 @@ index c6910f46..bf51f4cb 100644
+ +   COMMAND gen_lex_token &gt; lex_token.h)
+ +ENDIF()
+  
+- ADD_DEFINITIONS(-DMYSQL_SERVER -DHAVE_EVENT_SCHEDULER)
+- 
+-@@ -370,11 +375,16 @@ IF(NOT CMAKE_CROSSCOMPILING)
++ ADD_CUSTOM_COMMAND(
++   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/sql_yacc_ora.yy
++@@ -345,11 +350,16 @@ IF(NOT CMAKE_CROSSCOMPILING)
+    ADD_EXECUTABLE(gen_lex_hash gen_lex_hash.cc)
+  ENDIF()
+  
+@@ -61,5 +60,8 @@ index c6910f46..bf51f4cb 100644
+ +   COMMAND gen_lex_hash &gt; lex_hash.h)
+ +ENDIF()
+  
+- MYSQL_ADD_EXECUTABLE(mysql_tzinfo_to_sql tztime.cc COMPONENT Server)
+- SET_TARGET_PROPERTIES(mysql_tzinfo_to_sql PROPERTIES COMPILE_FLAGS "-DTZINFO2SQL")
++ MYSQL_ADD_EXECUTABLE(mariadb-tzinfo-to-sql tztime.cc COMPONENT Server)
++ SET_TARGET_PROPERTIES(mariadb-tzinfo-to-sql PROPERTIES COMPILE_FLAGS "-DTZINFO2SQL")
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.4.12.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.5.4.bb
+similarity index 87%
+rename from meta-oe/recipes-dbs/mysql/mariadb_10.4.12.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_10.5.4.bb
+index c0b53379d..220b904b2 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb_10.4.12.bb
++++ b/meta-oe/recipes-dbs/mysql/mariadb_10.5.4.bb
+@@ -2,7 +2,7 @@ require mariadb.inc
+ 
+ EXTRA_OECMAKE += "-DSTACK_DIRECTION=-1"
+ 
+-DEPENDS += "mariadb-native bison-native openssl ncurses zlib libaio libedit libevent libxml2"
++DEPENDS += "mariadb-native bison-native curl openssl ncurses zlib libaio libedit libevent libxml2"
+ 
+ PROVIDES += "mysql5 libmysqlclient"
  
 </pre>
       <br>
@@ -187,7 +766,8 @@ index 8cbc1f9f9..db985a2ff 100644
       <pre class="moz-quote-pre" wrap="">
 </pre>
     </blockquote>
+    <br>
   </body>
 </html>
 
---------------FBC3CDFA70D34AFA4A3BD039--
+--------------CFDFB80DF50D295063CDDA18--
