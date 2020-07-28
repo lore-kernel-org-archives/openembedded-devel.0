@@ -1,115 +1,81 @@
-Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com [209.85.160.174])
- by mx.groups.io with SMTP id smtpd.web10.19389.1595961438562839037
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com [209.85.160.180])
+ by mx.groups.io with SMTP id smtpd.web12.987.1595965941002285348
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Jul 2020 11:37:18 -0700
+ Tue, 28 Jul 2020 12:52:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=DYGEYoZI;
- spf=pass (domain: gmail.com, ip: 209.85.160.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f174.google.com with SMTP id b25so15636270qto.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2020 11:37:18 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=PknOQP81;
+ spf=pass (domain: gmail.com, ip: 209.85.160.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f180.google.com with SMTP id w9so15816095qts.6
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jul 2020 12:52:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=Tr+GIqzTapKLzh9FSZkjV7DOnJChHgJ6MgrV6HzM4z4=;
-        b=DYGEYoZIS9EMuUWwVqWPL2VtLjEvxEa0vamfgZvltdKofTPB5P5qHcIBC6WJQ37ZhU
-         cvYxkvD/a0QgxYcJydN/2zZwFBnLJXyPCOkWDFqM4sNMWyWTPoCFIl3iVqR0FrkBRNuw
-         w7jIAKn74u8210VEAlrh9pwc7WuwvnCFRyDbYUOoWBg5gj0wnSSuxF14gVYfLHJ+Zm7A
-         KfAGpn+4fwi15QkZudsAesCfE6joKlACJjgDBvOzqP00HC7JZ+CAVhp3iQqyEce/ChpZ
-         rxpdCr3DCQRAu1I7qpNy2gidyIAqZMlCcC8551ss5XiUvlNBq4NMpeMP+vllTlDSwEuQ
-         GqIA==
+        bh=ROFUWpj5WOQZOqu5infhkv3cBKQ8HKrAgW/kvCP3Bvk=;
+        b=PknOQP81Yb6HORHzdqqSd9Hc1PA2JlquHnaUWSgMWPHi7vmV39tW+nvxIwJ44qtPq6
+         QbzfZR3bKf1uap64sxMQMqPvqvM9PuwkqD/M23SFVItbo00sC5SnETgUMVptL+sQrePW
+         DEiG3P0ozpVd2ReZY+peqcDPFxqwo4vSjmBi5dqyFG47I4HmrAnZnjs4dT8dx5rOPBjq
+         S6vcbAvDPnEebiN66s/Vj0QNcl0DLpxlNVccIDwwbwpK0TNfgXLRkBm55X33lEdlMaNJ
+         ad/PJ/swtlbdqY+v80JqmjSboo8Eha2nSA60Jb3iKUPf08qxrDffsJxKu620pubRfbrU
+         zVOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=Tr+GIqzTapKLzh9FSZkjV7DOnJChHgJ6MgrV6HzM4z4=;
-        b=EDZbjG+zXQXH4lES7HN1pBWcDWi8LA0gQztJq+ursZOWQgri7675K197t7RiMgbGBN
-         Pi113HkBw9tK74tGMOe7vVgEKeQAQi3w82ALc0w7XzqB0P13DOc0OCW6XoDugvHBG9CE
-         yrwQaxK8Hn0/boQce2MhgD4BTlona9hyOKY2jHWg3DOzkLMZAzKpFj/DUPWEbe4gWC2p
-         4aMgijx6u8AV5qiu73ZPr9GbtCAN7cDf5fQ8cIcyOVXkr5lUaf6msYW/8kJQNe1n7kWE
-         iT50Xi9AdDVkE2m8K1LUDoNAUGEYiOsCjYKL1Hj8CdFjytCaWqq0M3ZYVFAzitry9PCX
-         LWwQ==
-X-Gm-Message-State: AOAM5321tYgJzPHeBig0LoW91HO8AhD3hqTQ7EGKils9CRq89ZONR8xi
-	PyE3GnpwSVivCW7/C+iIiqJj9smAd9VpbskEkiUYszAyjSw=
-X-Google-Smtp-Source: ABdhPJyeL1AlfIB8nQqNoRaUx/Sulp8+46/IHcNqirjP6oNHp1xP5ubHS7znR/xQ5DpvUK/E/4ULmpwTrN812aDg+so=
-X-Received: by 2002:ac8:748b:: with SMTP id v11mr27989795qtq.293.1595961437616;
- Tue, 28 Jul 2020 11:37:17 -0700 (PDT)
+        bh=ROFUWpj5WOQZOqu5infhkv3cBKQ8HKrAgW/kvCP3Bvk=;
+        b=ixa/UG1QWt+dFmEhx2rHTJzoSFjT3hBeyh2rz30jf8v/ksYSAVaomJhASWGB7Ik1+i
+         590xgc9cBnpS8FQIKamXko2Clf0+a+AsiX3smVXSskpgWicN6Vc+8pdvBgwlFmtxamCb
+         /7++NudbEY01OzVzaBzGZdonqCFsM7uT0ySVL5rXF1hLGvUBYI5T2ryn/VdezGp7lDiw
+         DeexBm7LuQKQYl0w9GA2RtNLHsCLWSGhtPivEzMF0D59lzYshLxdQsXfDl5JJ7KM6a2l
+         GrWuPaMCaTbxm+L924bRWPcfHpOHSCoBoN5Nit5gPGYK/dpigcGWtuXXJRJAc63V+fXU
+         gr1w==
+X-Gm-Message-State: AOAM533viu/3WXcRqRIMyubRf2NDbgJm05GuhlmeJXCUM+7qqqXYIeMG
+	MIGNqbO/ylgMLexJPifG74uXfbWhkYUyAX80ZHE=
+X-Google-Smtp-Source: ABdhPJzdBxQ/T0p5Fqal/ZR485/nMLNrClJLMYUVQOUhGbbO2unRJTWZEUBPIlKgfvbhatFREXun0eaeGYjhgPRJXC0=
+X-Received: by 2002:ac8:1344:: with SMTP id f4mr7906958qtj.285.1595965939990;
+ Tue, 28 Jul 2020 12:52:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200726095913.3962157-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20200726095913.3962157-1-open.source@oleksandr-kravchuk.com>
+References: <20200726005544.3645042-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20200726005544.3645042-1-open.source@oleksandr-kravchuk.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Tue, 28 Jul 2020 11:36:50 -0700
-Message-ID: <CAMKF1srPjAdFQtJGJ2x6gbTN+zjjzTRhzwikQt+LCN2DmJb4Dw@mail.gmail.com>
-Subject: Re: [oe] [PATCH][meta-oe 1/2] opus-tools: update to 0.2
+Date: Tue, 28 Jul 2020 12:51:54 -0700
+Message-ID: <CAMKF1sr9c2WGQMyo-tnozq+c=wnPSmVmDfAgGTDbrN2EzB9w_Q@mail.gmail.com>
+Subject: Re: [oe] [PATCH][meta-oe] libpeas: update to 1.26.0
 To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Sun, Jul 26, 2020 at 2:59 AM Oleksandr Kravchuk
+this fails on musl
+
+http://errors.yoctoproject.org/Errors/Details/425660/
+
+On Sat, Jul 25, 2020 at 5:55 PM Oleksandr Kravchuk
 <open.source@oleksandr-kravchuk.com> wrote:
 >
 > Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 > ---
->  .../opus-tools/opus-tools_0.1.8.bb                | 15 ---------------
->  .../opus-tools/opus-tools_0.2.bb                  | 15 +++++++++++++++
->  2 files changed, 15 insertions(+), 15 deletions(-)
->  delete mode 100644 meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb
->  create mode 100644 meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb
+>  .../libpeas/{libpeas_1.25.3.bb => libpeas_1.26.0.bb}          | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-gnome/libpeas/{libpeas_1.25.3.bb => libpeas_1.26.0.bb} (80%)
 >
-> diff --git a/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb b/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb
-> deleted file mode 100644
-> index a84f2bf078..0000000000
-> --- a/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb
-> +++ /dev/null
-> @@ -1,15 +0,0 @@
-> -SUMMARY = "Opus Audio Tools"
-> -HOMEPAGE = "http://www.opus-codec.org/"
-> -
-> -LICENSE = "BSD-2-Clause"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=843a066da9f1facfcc6ea6f616ffecb1"
-> -
-> -SRC_URI = "http://downloads.xiph.org/releases/opus/opus-tools-${PV}.tar.gz"
-> -SRC_URI[md5sum] = "b424790eda9357a4df394e2d7ca19eac"
-> -SRC_URI[sha256sum] = "e4e188579ea1c4e4d5066460d4a7214a7eafe3539e9a4466fdc98af41ba4a2f6"
-> -
-> -S = "${WORKDIR}/opus-tools-${PV}"
-> -
-> -DEPENDS = "libopus flac"
-> -
-> -inherit autotools pkgconfig
-> diff --git a/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb b/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb
-> new file mode 100644
-> index 0000000000..766507de17
-> --- /dev/null
-> +++ b/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb
-> @@ -0,0 +1,15 @@
-> +SUMMARY = "Opus Audio Tools"
-> +HOMEPAGE = "http://www.opus-codec.org/"
-> +
-> +LICENSE = "BSD-2-Clause"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=79f6fc2a6239fbe5f6e52f20ac76698c"
-> +
-> +SRC_URI = "https://archive.mozilla.org/pub/opus/opus-tools-${PV}.tar.gz"
-> +SRC_URI[md5sum] = "ff2d0536e960cabbfb8ca7c8c1759b6c"
-> +SRC_URI[sha256sum] = "b4e56cb00d3e509acfba9a9b627ffd8273b876b4e2408642259f6da28fa0ff86"
-> +
-> +S = "${WORKDIR}/opus-tools-${PV}"
-> +
-> +DEPENDS = "libopus flac libopusenc opusfile"
-
-this is causing
-
-step1b: ERROR: Nothing PROVIDES 'opusfile' (but
-/home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb
-DEPENDS on or otherwise requires it). Close matches:
-step1b: ERROR: Nothing RPROVIDES 'opus-tools' (but
-/home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb,
-/home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb
-RDEPENDS on or otherwise requires it)
-
-
-> +
-> +inherit autotools pkgconfig
+> diff --git a/meta-oe/recipes-gnome/libpeas/libpeas_1.25.3.bb b/meta-oe/recipes-gnome/libpeas/libpeas_1.26.0.bb
+> similarity index 80%
+> rename from meta-oe/recipes-gnome/libpeas/libpeas_1.25.3.bb
+> rename to meta-oe/recipes-gnome/libpeas/libpeas_1.26.0.bb
+> index 57419a4275..888525e085 100644
+> --- a/meta-oe/recipes-gnome/libpeas/libpeas_1.25.3.bb
+> +++ b/meta-oe/recipes-gnome/libpeas/libpeas_1.26.0.bb
+> @@ -10,8 +10,8 @@ GTKDOC_MESON_OPTION = "gtk_doc"
+>
+>  inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache
+>
+> -SRC_URI[archive.md5sum] = "08bfff8f9688cf630dcb0f950617661f"
+> -SRC_URI[archive.sha256sum] = "1c9bbb29740c29cd6e1dd0c9964722ff08cd5e6f68f1b5c135bc391a6ce97639"
+> +SRC_URI[archive.md5sum] = "f7723bf8433b7984121157e1e9a629b5"
+> +SRC_URI[archive.sha256sum] = "a976d77e20496479a8e955e6a38fb0e5c5de89cf64d9f44e75c2213ee14f7376"
+>
+>  PACKAGECONFIG[python3] = "-Dpython3=true,-Dpython3=false,python3-pygobject"
+>
 > --
 > 2.25.1
 >
