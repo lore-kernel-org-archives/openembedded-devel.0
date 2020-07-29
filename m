@@ -1,77 +1,92 @@
-Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com [209.85.208.169])
- by mx.groups.io with SMTP id smtpd.web12.5473.1596028181950558268
+Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
+ by mx.groups.io with SMTP id smtpd.web10.5792.1596028638106420445
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Jul 2020 06:09:42 -0700
+ Wed, 29 Jul 2020 06:17:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=1ZMaFp/2;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.169, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f169.google.com with SMTP id t23so1442640ljc.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 06:09:41 -0700 (PDT)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=lY8dDdJ+;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.171, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f171.google.com with SMTP id s16so9768508ljc.8
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 06:17:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=OUTRuRLAaPK87bhfkCl4KpqT5731L01Sq4G8AZdxezM=;
-        b=1ZMaFp/2IPlLjlfreUsIncdL14ydg7I8tg+Vivfl2wN1jc/p28p6stJTFzYmIJjmwb
-         pJZeZcu94lSABAbZieLTFP1IenPgCVjl2whstOb8fS3+C20pUz0P/7XE24iWxPdZF25K
-         rt24Wa9C0Zv58XGZLWUX8Nb/PMWJjt/nzEsn4WULc6vBow8fUGIhlrxVWzOeUX64tiDp
-         qGKVWeeFYnY7olOJm+jlbaX33hWn37TqowH1nCsQhZBcwiv9FUTt3OdFunkNdWQQIamg
-         AAj4it1AJsHNRGuvsKpTJVPLrWiIV1kEQU4DuV4F9ccGEozuQgnVpXif4pSRSj07kS/b
-         K8eQ==
+        bh=e5ps1mXT7jNYZPoOkkQExaJnIhATYnbA5NYCllO/U+4=;
+        b=lY8dDdJ+Xr18oiz6CiOv1Dc+2rRNn2P7Sw1hAUQDuX7g1iVQnBtRNbFqfpJK/dYju7
+         5p9iM3U+mo+e+VAFcsUcLrvowoNPqDXZ6v+XcLblIFvDmajOTm3uyli2nVvQcYKwX9zi
+         5fgo+W5qu+vEeuZLZT1OHHQRLtOeTmaiOlC31ayEiKxjaMC0iyLj+pecRNARe+v7rEcB
+         t4RSZRBn0XmjKyqnYZpb35od6e8xJNkB3XI3NuMNmhnjV22i5/PT1AOo0kA1pBKi/Vgu
+         exT9t6ggRk+A16RBJADY2B7UJaQG9zkwAXqkZqtnBE2Y7lHV1+6AoOuAm6r00HEcRMEE
+         cEug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=OUTRuRLAaPK87bhfkCl4KpqT5731L01Sq4G8AZdxezM=;
-        b=dUIP9xetiKAIY1nJWe/TnEM+5XWkYD2Tf6XkJZGZxvMHTEGaGuBFzFyqjQSYNsfuFr
-         lkj0qXR2OEBzKzXMKuiL19k2bpAl0QlQiBcBveZ1kkcIDNLWPqPFcAuhHkoIS3+lvvRf
-         HKSikPX2kvA+Ug6U/ECERHJzhUTL68UgEZ60wHtuVFWi+GFS0da/wmcvI823gpWklRf3
-         uLwj4dFAUHSeGRc8tHjtlGzvGiaZ9m/qx0Jx63X6nh/MQRezrfLLzxK9iRe8a09RTo3d
-         dI/8RD1N++spSgA22xzwOt59FIAKpHwAh5Ky3w4ckpk+oq1im08Jb4b7wKIH7OhTnOtB
-         cHTQ==
-X-Gm-Message-State: AOAM530UWfn3tThfCJtzTM0Akm6Ka+YgTP1b+BLF7L+8+vGbzAX592ct
-	rGjX+YyaALVOcTaxz87Y2R9pZIO+2oo=
-X-Google-Smtp-Source: ABdhPJzY1AS2DPrJsnHox0ufm4olQdgfkvimyRitdwkj4/pB02WIFqPP6pQCvG/RoUa93x0bvhnRYw==
-X-Received: by 2002:a2e:2c0e:: with SMTP id s14mr2477172ljs.28.1596028179558;
-        Wed, 29 Jul 2020 06:09:39 -0700 (PDT)
+        bh=e5ps1mXT7jNYZPoOkkQExaJnIhATYnbA5NYCllO/U+4=;
+        b=SZx2sAvyOJcZJ8o6tBVdmxQoHQDsfXd4SXT4LHgpM0E6bLyNl90RhSeoyzaGxhdayl
+         jaTEy7tzcHgBwkwNw32BQf5OBwbaYh9r58K8MJEIjRTk1heMHYOc34HNzv12QXXehAe0
+         Syjh935z7xnxVZtxiI57q5f5mD/SC272hjoi0BzuFBV01jf98ij3rYL8DfNz1R5J11sR
+         VQt+9O3F7q0oJ3P3YBHOki0cQgAIs469IOP7A7+sQal2ClqZ0ZMb7AQqBdodvphFjiXx
+         u8N1ozERaI3Jq6iiaRMu/lB4eH/hAy9yo70oDvzBHgdGMT6lAknl0UAUTCbk1pxmcr/d
+         g+yA==
+X-Gm-Message-State: AOAM5338uK/3zLXTBsoDbzUqz0l/Z0bfP1EilQX+P1at5W/sLHo8dxCt
+	rmQn6HqL+5tMG7cr/pXIbcAEcLn/3sg=
+X-Google-Smtp-Source: ABdhPJwPmufZJUGJrmTS8pKup7l/pvGzPigDi4O5nV/fnsLQ1cD3ZIzn3aDWGoCmodonmpW4x3VMUA==
+X-Received: by 2002:a2e:8798:: with SMTP id n24mr13977581lji.372.1596028635593;
+        Wed, 29 Jul 2020 06:17:15 -0700 (PDT)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id d13sm447149lfl.89.2020.07.29.06.09.38
+        by smtp.gmail.com with ESMTPSA id t205sm456469lff.8.2020.07.29.06.17.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Jul 2020 06:09:39 -0700 (PDT)
+        Wed, 29 Jul 2020 06:17:14 -0700 (PDT)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] fping: update to 4.4
-Date: Wed, 29 Jul 2020 15:09:36 +0200
-Message-Id: <20200729130936.3446227-1-open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-networking] ifenslave: update to 2.11
+Date: Wed, 29 Jul 2020 15:17:12 +0200
+Message-Id: <20200729131712.3449121-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+ifenslave binary and its man page were removed (see @2b0da97853367e34).
+
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../recipes-support/fping/{fping_4.2.bb => fping_4.4.bb}       | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-networking/recipes-support/fping/{fping_4.2.bb => fping_4.4.bb} (86%)
+ .../ifenslave/{ifenslave_2.9.bb => ifenslave_2.11.bb}    | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
+ rename meta-networking/recipes-support/ifenslave/{ifenslave_2.9.bb => ifenslave_2.11.bb} (72%)
 
-diff --git a/meta-networking/recipes-support/fping/fping_4.2.bb b/meta-networking/recipes-support/fping/fping_4.4.bb
-similarity index 86%
-rename from meta-networking/recipes-support/fping/fping_4.2.bb
-rename to meta-networking/recipes-support/fping/fping_4.4.bb
-index 594f5b9cf..125fdfa70 100644
---- a/meta-networking/recipes-support/fping/fping_4.2.bb
-+++ b/meta-networking/recipes-support/fping/fping_4.4.bb
-@@ -12,8 +12,7 @@ LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c6170fbadddfcd74f011515291d96901"
+diff --git a/meta-networking/recipes-support/ifenslave/ifenslave_2.9.bb b/meta-networking/recipes-support/ifenslave/ifenslave_2.11.bb
+similarity index 72%
+rename from meta-networking/recipes-support/ifenslave/ifenslave_2.9.bb
+rename to meta-networking/recipes-support/ifenslave/ifenslave_2.11.bb
+index 125b59e76..72a7eeec5 100644
+--- a/meta-networking/recipes-support/ifenslave/ifenslave_2.9.bb
++++ b/meta-networking/recipes-support/ifenslave/ifenslave_2.11.bb
+@@ -8,20 +8,15 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=acc89812938cf9ad6b1debc37cea0253
+ inherit manpages
+ MAN_PKG = "${PN}"
  
- SRC_URI = "http://www.fping.org/dist/fping-${PV}.tar.gz"
--SRC_URI[md5sum] = "218e71764177a8ce25564a7810f8e729"
--SRC_URI[sha256sum] = "7d339674b6a95aae1d8ad487ff5056fd95b474c3650938268f6a905c3771b64a"
-+SRC_URI[sha256sum] = "9f854b65a52dc7b1749d6743e35d0a6268179d1a724267339fc9a066b2b72d11"
+-SRCREV = "42bfbb9beb924672ca86b86e9679ac3d6b87d992"
++SRCREV = "c26e9310f552e69d0d44eb48746e02c9ae4b4f6f"
+ SRC_URI = "git://salsa.debian.org/debian/ifenslave.git;protocol=https"
  
- S = "${WORKDIR}/fping-${PV}"
+-S = "${WORKDIR}/git"
++S = "${WORKDIR}/git/"
  
+ do_install() {
+-    install -d ${D}${sbindir}
+-    install -m 0755 ${S}/ifenslave ${D}${sbindir}/
+-
+     install -m 0755 -D ${S}/debian/ifenslave.if-pre-up ${D}${sysconfdir}/network/if-pre-up.d/ifenslave
+     install -m 0755 -D ${S}/debian/ifenslave.if-post-down ${D}${sysconfdir}/network/if-post-down.d/ifenslave
+     install -m 0755 -D ${S}/debian/ifenslave.if-up ${D}${sysconfdir}/network/if-up.d/ifenslave
+-    install -m 0644 -D ${S}/debian/ifenslave.8 ${D}${mandir}/man8/ifenslave.8
+ }
+ 
+ FILES_${PN}-doc_remove = "${mandir}"
+-FILES_${PN} += "${mandir}/man8/ifenslave.8"
 -- 
 2.25.1
 
