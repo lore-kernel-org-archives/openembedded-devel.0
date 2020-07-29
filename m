@@ -1,110 +1,75 @@
-Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
- by mx.groups.io with SMTP id smtpd.web12.1693.1596010251368426306
+Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com [209.85.208.178])
+ by mx.groups.io with SMTP id smtpd.web12.1815.1596011008801225090
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Jul 2020 01:10:51 -0700
+ Wed, 29 Jul 2020 01:23:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=YfVxAypt;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.171, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f171.google.com with SMTP id t6so11108815ljk.9
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 01:10:51 -0700 (PDT)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=RAvw1Fep;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.178, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f178.google.com with SMTP id g6so11462568ljn.11
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 01:23:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=UuBzcvLdr4ELoPH2G6MvXOmqPSBuiMm7BQeY06XNB74=;
-        b=YfVxAyptAHjhHITODNQ5GsosFU+gtPTYyhI/j/zT6roewV5upTxJC7Mt28zDDof7iC
-         NN9pnzKdnQKm9tKf4BZHl5PgUK6dRO/QBcFYcyHr7tBDbuZi5q0dqRnBkg1A+07ombgd
-         yIPYUskdewR14H1ozH1PmAt/dJCvAo1RezbpHqI1EloH3CZI7eYMC7wqfjHCSZrS4lfi
-         Ko3ANxZuL7uzll1MyK1QKkOC3YNN6eHlMgC53btF6w2xYa+olEzvENy0YAlYfgAfPxIA
-         O6hpGA4ZezxOHsz5r3hvbWPH1iz/rUjtfwdBk3mTsn7Trf2VmhYzMWGWgDyU9QlRzuEy
-         Y/Ig==
+        bh=Lpsd5N84fALiHbBCgPmOsJc8otT9XrW7FTtnAdcE+cU=;
+        b=RAvw1Feplchey3GVUeILTzsrtALAZpYgCHFPQCZgTH9plWnFUjebHbreDw9zjZzh4F
+         sZ3iNpAT/TB4s/t0BRi4Zk9iFN10y92jkj2DGkvXSOg8e+733iZNqg2hHa6XhlV4aMNb
+         qqyg8xvk0NAQzfIciYQNBMqzRys+eRfQkOboBUM7Im6eFL4uqogr0XQwsl7EBwWkXsrT
+         RxH6MJYxi/piAzwyyumWic8EP5FqjDhjnPkUi6ODIam/OYHuVTEbxE3e5lsIRK7DEqpt
+         hKunnpSUYVM4Dv0EcDEQT2Zp3+eLzdqMCU6r1n2311EpVRAv1R8PSw+BCir4wGRwKBR3
+         A7QQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=UuBzcvLdr4ELoPH2G6MvXOmqPSBuiMm7BQeY06XNB74=;
-        b=JVIPRwAMcYbcuWlehYkXEPG+H7sL5HhYIwAorGa12Oc3wt5tm/obY9DQYKJGEcolE2
-         b2e0prm5mEIdYmNvIn6qrCgU+gjcCwRvXUZUvXXVfYUmEIbqmzccGzmmk1QBepGBQzir
-         hn+GQ25WGOdC9uE8vWOBG0kl1N6XvyPLwVxxrl0r17Kncl/LuVt2bngykcp5/qzT2p3n
-         JQm5VpPXig0n/dBDLUK+neyNRiGeFSitWR+rvTPj41KkiGfmPGCUik/6SWrtCpFstpbK
-         ob3DHbhclnE1IuiWs7XZR5CR7JRHZJOD8fIhhAEb0yKN3KRwiXKG+rl5FHZ89PSJF3bT
-         5//A==
-X-Gm-Message-State: AOAM531YUtZSWwEwhe+FaxTsUwDT4A6mupMWmhcWd9PH5tHq6QkIyu0h
-	ntbtF+XUmqyeA0ZY0in2PNO/r1jCXag=
-X-Google-Smtp-Source: ABdhPJydWP2NL6lzTKwSfpXWmr28Z+t1AlcTiE+1x5vrFa+ps9GF7L7NVNHbzHaEvUEHuSe+GMIngg==
-X-Received: by 2002:a2e:8085:: with SMTP id i5mr14353838ljg.97.1596010249331;
-        Wed, 29 Jul 2020 01:10:49 -0700 (PDT)
+        bh=Lpsd5N84fALiHbBCgPmOsJc8otT9XrW7FTtnAdcE+cU=;
+        b=Pig6R1OmR6iN6x8X8TLQ43gFZ8QFvKEdL6tbAMtBlUd/mOsV6Vn4nogwi0ezQMBu20
+         YjFEC9154ZJ9TsbKr9e6VbbkJ3Fi/OOXmrfdG6WPwW+Y8rzuZstNJhRJOcOXl9ny/a+j
+         IO5mPcZ38wix8UdNlWhiXJ/o7jnzmV4PbL7gvvx6jPDsCT4SsB49AOMGWXfeUDfadw/Q
+         0kOiW84EJsrGYMjzCinH7G9EHBB8BELzloQA95QIe1mYRkfG/jwAtMm5ziPSCyHe3r35
+         wIdFsdQUkvqoeh8J8S+DTJ33DrneL1Qa6WC8lwHkNcrErj14tPia+c2pq2QBl0m18XaR
+         VAIQ==
+X-Gm-Message-State: AOAM531SvIpHVNTsLZZegizdZg3zr3yp1OzOk9Xai6xijH+oEUm4vh2G
+	p/HiP+ojJNQsBfDSkx5VZbeBXnJJepA=
+X-Google-Smtp-Source: ABdhPJziltRwoG1ipy+1Mllk5/UxMmWp++KDhaYLnRQErOehKMTH64+rpCK8DrWA2HWqjLa1cDQDCw==
+X-Received: by 2002:a2e:5852:: with SMTP id x18mr45165ljd.132.1596011006541;
+        Wed, 29 Jul 2020 01:23:26 -0700 (PDT)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id z15sm345837lfg.81.2020.07.29.01.10.48
+        by smtp.gmail.com with ESMTPSA id m20sm352419lfb.72.2020.07.29.01.23.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Jul 2020 01:10:48 -0700 (PDT)
+        Wed, 29 Jul 2020 01:23:25 -0700 (PDT)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH v2][meta-oe] libpeas: update to 1.26.0
-Date: Wed, 29 Jul 2020 10:10:46 +0200
-Message-Id: <20200729081046.2701969-1-open.source@oleksandr-kravchuk.com>
+Subject: [PATCH v2][meta-oe 1/2] libyui: update to 3.10.0
+Date: Wed, 29 Jul 2020 10:23:23 +0200
+Message-Id: <20200729082324.2710436-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../libpeas/add_missing_locale_include.patch  | 21 +++++++++++++++++++
- .../{libpeas_1.25.3.bb => libpeas_1.26.0.bb}  |  8 +++++--
- 2 files changed, 27 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-gnome/libpeas/libpeas/add_missing_locale_include.patch
- rename meta-oe/recipes-gnome/libpeas/{libpeas_1.25.3.bb => libpeas_1.26.0.bb} (75%)
+ .../libyui/{libyui_3.6.0.bb => libyui_3.10.0.bb}                | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-graphics/libyui/{libyui_3.6.0.bb => libyui_3.10.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-gnome/libpeas/libpeas/add_missing_locale_include.patch b/meta-oe/recipes-gnome/libpeas/libpeas/add_missing_locale_include.patch
-new file mode 100644
-index 000000000..664693128
---- /dev/null
-+++ b/meta-oe/recipes-gnome/libpeas/libpeas/add_missing_locale_include.patch
-@@ -0,0 +1,21 @@
-+From 3cc69f1eaa86163c3816265fa64cb660f4def364 Mon Sep 17 00:00:00 2001
-+From: Christian Hergert <chergert@redhat.com>
-+Date: Fri, 13 Mar 2020 10:32:21 -0700
-+Subject: [PATCH] demo: add missing locale.h include
-+
-+Fixes #39
-+
-+Upstream-Status: backport
-+
-+diff --git a/peas-demo/peas-demo.c b/peas-demo/peas-demo.c
-+index 47ac005..466a392 100644
-+--- a/peas-demo/peas-demo.c
-++++ b/peas-demo/peas-demo.c
-+@@ -26,6 +26,7 @@
-+ #include <girepository.h>
-+ #include <glib/gi18n.h>
-+ #include <gtk/gtk.h>
-++#include <locale.h>
-+ 
-+ #include <libpeas/peas.h>
-+ #include <libpeas-gtk/peas-gtk.h>
-diff --git a/meta-oe/recipes-gnome/libpeas/libpeas_1.25.3.bb b/meta-oe/recipes-gnome/libpeas/libpeas_1.26.0.bb
-similarity index 75%
-rename from meta-oe/recipes-gnome/libpeas/libpeas_1.25.3.bb
-rename to meta-oe/recipes-gnome/libpeas/libpeas_1.26.0.bb
-index 57419a427..0c600141f 100644
---- a/meta-oe/recipes-gnome/libpeas/libpeas_1.25.3.bb
-+++ b/meta-oe/recipes-gnome/libpeas/libpeas_1.26.0.bb
-@@ -10,8 +10,12 @@ GTKDOC_MESON_OPTION = "gtk_doc"
+diff --git a/meta-oe/recipes-graphics/libyui/libyui_3.6.0.bb b/meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb
+similarity index 95%
+rename from meta-oe/recipes-graphics/libyui/libyui_3.6.0.bb
+rename to meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb
+index 7c6f4c13d..d7f529e31 100644
+--- a/meta-oe/recipes-graphics/libyui/libyui_3.6.0.bb
++++ b/meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb
+@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/libyui/libyui.git \
+            file://0001-Use-relative-install-paths-for-CMake.patch \
+            "
  
- inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache
- 
--SRC_URI[archive.md5sum] = "08bfff8f9688cf630dcb0f950617661f"
--SRC_URI[archive.sha256sum] = "1c9bbb29740c29cd6e1dd0c9964722ff08cd5e6f68f1b5c135bc391a6ce97639"
-+SRC_URI += " \
-+    file://add_missing_locale_include.patch \
-+"
-+
-+SRC_URI[archive.md5sum] = "f7723bf8433b7984121157e1e9a629b5"
-+SRC_URI[archive.sha256sum] = "a976d77e20496479a8e955e6a38fb0e5c5de89cf64d9f44e75c2213ee14f7376"
- 
- PACKAGECONFIG[python3] = "-Dpython3=true,-Dpython3=false,python3-pygobject"
+-SRCREV = "8459235919f592b1bc099ecf9a947cb6344b6fa5"
++SRCREV = "de9134007d2d029fe5809ce48f57fe218e6ffe16"
+ SRCREV_FORMAT = "default"
+ S = "${WORKDIR}/git"
  
 -- 
 2.25.1
