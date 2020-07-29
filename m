@@ -1,83 +1,107 @@
-Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
- by mx.groups.io with SMTP id smtpd.web12.8573.1596037293499738061
+Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com [209.85.219.68])
+ by mx.groups.io with SMTP id smtpd.web12.1934.1596045596231297060
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Jul 2020 08:41:34 -0700
+ Wed, 29 Jul 2020 10:59:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=KK45V+BK;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.42, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f42.google.com with SMTP id s9so13300909lfs.4
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 08:41:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=nect6C6d;
+ spf=pass (domain: gmail.com, ip: 209.85.219.68, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f68.google.com with SMTP id o2so11254599qvk.6
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 10:59:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=kBm8FHIs4ajidNYfeXKKhcH3CSLWREPNcJxQEd4YWJY=;
-        b=KK45V+BKRmEYQeptLU5PAx0L7sorLVd/n9YHls22wk29r0Xk/lNxGnC8BO27fgi8rZ
-         1vhHSkWtQ6xX2iDwsocqldOgxRcvwa3CzRDcYBF7IGDNe+T19vibVTXKE/QETOY432ne
-         5ERwjlTSa8J3UgPztveNuTR1KNP3MGtGv+MfnJplN2GEpkDhFdHo7mZUWaq4O58kke/J
-         uAk0umQwWA4h7D5AG8DzKPy0zY9PvNIXEIoLMcaJ5efCyPyDMheS1CAjNyEZCNcB1esF
-         vek9Xi1x/0Yx8/tWYQHr+rDADw6w55dj1JeLeYfT9kaATpymvcnuacuawPgMiJLlxdhI
-         8v4A==
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=YM655Zwj6t8bt4ODqMWerCrgaktaA/noBCvjNRIR5BM=;
+        b=nect6C6deGZzAonFvPx3dVWmGgMILCdkQOcbIupUg7j1lWPfw5FAtOJMEyZ1IxmDYK
+         cC/8rKlrnqEwFmZunwKYoaKD8YnmYtbZU/CE0DEy/ZicGZmG3evkxVLbSyzBISjt8tOt
+         zEefYZsr8jA/+W39WGFC64ZL2xwm3VFbkWZX8uES6Oin8/3C7qbh8DXOfsCbPr5tTIXg
+         TtS3rifIjci+HL7VTSY7m/7bfx4O5CsLHjzHpsmcbXXuX/WGOQHcL103rSAlRRgb1Chp
+         YkvtKRjpSI1Vl1/H3MwYuOB0Fh5XsqaN5tBLj8EUWCAfiZY1NubBvXh0hL7EXR+t4biI
+         h+hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=kBm8FHIs4ajidNYfeXKKhcH3CSLWREPNcJxQEd4YWJY=;
-        b=qXvSaAxqKPpP3n+XwcXBzrOp7ztiumggwstxID3LlOuvCTbtRVAzJ11RnNx2MOJ/nm
-         yP4uyRfHRBd2/JJKtehFLzjPRNTrcxKWyoTQ1vNJmaWJh25c9vU4Uefx493HCEYSYA2a
-         TpDUUsqX0PxRsjCyAmX+fnA93HwECwc/VAd5hLC4jxqunwrwJ4TOVqizdDXK8DJjudkE
-         HhC5vYryw9So/v2ZseJ+67bGsH6pQl4V1kQimCPCPXtTNH07sibLMT3nF14oQdHmu6zP
-         KIFFmmgUUkJSYUwuZYIBn0BDi19sJqdjgSFl5yCh3HC3NiOjZqVDQSU3FWsWzLZyNmHg
-         ESwg==
-X-Gm-Message-State: AOAM533Gv6HLZ31DpqtPXX/551rsVY1QgwrOj2s8bsRbznprRrCWpZSU
-	WbNI58YoOpWDhyjqiRsxEvxjSPDqg48=
-X-Google-Smtp-Source: ABdhPJza4EPvdftmYZZH32yIe5zX3HvdgV3K+t5cu2bVRiSdFI0Qyjh0I7TDggsdVDPBU2GNwNhDuA==
-X-Received: by 2002:ac2:5f81:: with SMTP id r1mr17212948lfe.168.1596037291027;
-        Wed, 29 Jul 2020 08:41:31 -0700 (PDT)
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id i21sm529356lfe.50.2020.07.29.08.41.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Jul 2020 08:41:30 -0700 (PDT)
-From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] fmt: update to 7.0.1
-Date: Wed, 29 Jul 2020 17:41:26 +0200
-Message-Id: <20200729154126.21163-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=YM655Zwj6t8bt4ODqMWerCrgaktaA/noBCvjNRIR5BM=;
+        b=X0P1yw97i/nFJ8DK7i1DlkaQIjgMxa1nrxbYlRrM3ZAHHgItFuTXROX6yxYwVUl3Qr
+         gZnTzWMA1LD5sWx9YaVVne9Nf9+YWkMjbx8UHWUUNh4qgt4mIlU7T7vFS3qRAdbFLL4p
+         KsXTT5X2tyi3qplsS9KHkp+N2eTv3QLV87zCnRdWfT6Dfri3Ymsrk4S82/uxQLf+OyfB
+         KJnWAbZCtJRD2gt3BlwLI/y4+/gwyFfl1x0xtdaFt9XvE2f69XfMfsRsbR2O2O0OMUSV
+         e/FKbL/Jbn9/iIu4kJww9rVKg+iHvxxW61iIztx5apF6s10sQ6c3rl+FsrMKaBqxciuX
+         y8ow==
+X-Gm-Message-State: AOAM533CFYegJDrrlE+wSFZEOWpyj65QWR2yMWIElZFS+SHKZsuVi16N
+	fYTWW1HuRm7U9H6b2XCUZVEzl6rVd9lyENU+QUI=
+X-Google-Smtp-Source: ABdhPJwmNAFamsuxfoXZJNktIJSFIa6oLiG8TBnk3EZMFjgaiFSycVPY3hnlKNGN5TGseiUjwywvuGCjyuzr1btHZBo=
+X-Received: by 2002:a0c:b488:: with SMTP id c8mr5529466qve.130.1596045595260;
+ Wed, 29 Jul 2020 10:59:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20200729081024.2701842-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20200729081024.2701842-1-open.source@oleksandr-kravchuk.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Wed, 29 Jul 2020 10:59:29 -0700
+Message-ID: <CAMKF1spo2MghoP4CCx8P7dH_qz7sbQOP7bQzXtxfipc2-MWvXA@mail.gmail.com>
+Subject: Re: [PATCH v2][meta-oe 1/5] python3-coverage: Upgrade 5.1 -> 5.2
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Leon Anavi <leon.anavi@konsulko.com>, Trevor Gamblin <trevor.gamblin@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- meta-oe/recipes-support/fmt/{fmt_6.2.0.bb => fmt_7.0.1.bb} | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/fmt/{fmt_6.2.0.bb => fmt_7.0.1.bb} (69%)
+this is already in master,
 
-diff --git a/meta-oe/recipes-support/fmt/fmt_6.2.0.bb b/meta-oe/recipes-support/fmt/fmt_7.0.1.bb
-similarity index 69%
-rename from meta-oe/recipes-support/fmt/fmt_6.2.0.bb
-rename to meta-oe/recipes-support/fmt/fmt_7.0.1.bb
-index 05dc94a99..0467544b4 100644
---- a/meta-oe/recipes-support/fmt/fmt_6.2.0.bb
-+++ b/meta-oe/recipes-support/fmt/fmt_7.0.1.bb
-@@ -1,11 +1,13 @@
- SUMMARY = "open-source formatting library for C++"
--DESCRIPTION = "{fmt} is an open-source formatting library for C++. It can be used as a safe and fast alternative to (s)printf and iostreams."
-+DESCRIPTION = "{fmt} is an open-source formatting library for C++. \
-+               It can be used as a safe and fast alternative to \
-+               (s)printf and iostreams."
- HOMEPAGE = "https://fmt.dev"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b"
- 
- SRC_URI += "git://github.com/fmtlib/fmt"
--SRCREV = "9bdd1596cef1b57b9556f8bef32dc4a32322ef3e"
-+SRCREV = "f19b1a521ee8b606dedcadfda69fd10ddf882753"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.25.1
-
+On Wed, Jul 29, 2020 at 1:10 AM Oleksandr Kravchuk
+<open.source@oleksandr-kravchuk.com> wrote:
+>
+> From: Leon Anavi <leon.anavi@konsulko.com>
+>
+> Upgrade to release 5.2:
+>
+> - The HTML report has been redesigned by Vince Salvino. There is
+>   now a dark mode, the code text is larger, and system sans serif
+>   fonts are used, in addition to other small changes.
+> - The coverage report and coverage html commands now accept a
+>   --precision option to control the number of decimal points
+>   displayed. Thanks, Teake Nutma.
+> - The coverage report and coverage html commands now accept a
+>   --no-skip-covered option to negate --skip-covered.
+>   Thanks, Anthony Sottile.
+> - The --skip-empty option is now available for the XML report.
+> - The coverage report command now accepts a --sort option to
+>   specify how to sort the results. Thanks, Jerin Peter George.
+> - If coverage fails due to the coverage total not reaching the
+>   --fail-under value, it will now print a message making the
+>   condition clear. Thanks, Naveen Yadav.
+> - TOML configuration files with non-ASCII characters would cause
+>   errors on Windows. This is now fixed.
+> - The output of --debug=trace now includes information about how
+>   the --source option is being interpreted, and the module names
+>   being considered.
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  .../{python3-coverage_5.1.bb => python3-coverage_5.2.bb}      | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python3-coverage_5.1.bb => python3-coverage_5.2.bb} (61%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-coverage_5.1.bb b/meta-python/recipes-devtools/python/python3-coverage_5.2.bb
+> similarity index 61%
+> rename from meta-python/recipes-devtools/python/python3-coverage_5.1.bb
+> rename to meta-python/recipes-devtools/python/python3-coverage_5.2.bb
+> index 7265d2c97..72558e10c 100644
+> --- a/meta-python/recipes-devtools/python/python3-coverage_5.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-coverage_5.2.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "https://coverage.readthedocs.io"
+>  LICENSE = "Apache-2.0"
+>  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2ee41112a44fe7014dce33e26468ba93"
+>
+> -SRC_URI[md5sum] = "506e30fb011158abe5ce92f39866b271"
+> -SRC_URI[sha256sum] = "f90bfc4ad18450c80b024036eaf91e4a246ae287701aaa88eaebebf150868052"
+> +SRC_URI[md5sum] = "bfe80a336636160a3916467f55842bc5"
+> +SRC_URI[sha256sum] = "1874bdc943654ba46d28f179c1846f5710eda3aeb265ff029e0ac2b52daae404"
+>
+>  inherit pypi setuptools3
+>
+> --
+> 2.25.1
+>
