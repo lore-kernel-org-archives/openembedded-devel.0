@@ -1,84 +1,62 @@
-Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com [209.85.208.169])
- by mx.groups.io with SMTP id smtpd.web12.2228.1596013427269532723
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web11.2482.1596015338989630409
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Jul 2020 02:03:47 -0700
+ Wed, 29 Jul 2020 02:35:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=np7jVie5;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.169, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f169.google.com with SMTP id q7so24220261ljm.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 02:03:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=8jYUpRcBgw6bOxKedj+xl4zka/R3JWcrJKUNkHPWlrs=;
-        b=np7jVie5oT31URexCfdwlZf+qPOuvT/ggKOm04jHE/bgzOzgQCl9ZR1P9fKe5bDScW
-         T9aF1Whj1Aa2KUpKuFEYe5XF6KAyWgJEnVIbjl6PfPbuMm05unKRCPxK4KAy/gk0KMRb
-         HJvJDbD5HeoT5WU+rkoBr7fSE+Dw26XCyWZI/yXkXd/X2NqeVASInFz3QBw88GIBXxIx
-         2Cd7BBvAck6uHsq0z85UagEOAwyEBm7u4pnaAMKVA7OqYLDSQpo+djCMgMe4B56bbbpo
-         8sEfDYb64VYRnYKe4WK/+4Iz//jXCPXxmWXbP0PJk+dGSMMjT0VNW6K1rxmhwa/vXop7
-         PBnw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=8jYUpRcBgw6bOxKedj+xl4zka/R3JWcrJKUNkHPWlrs=;
-        b=U7f4n0ggqNxQymGei1gV9Jp3jiJMfJdd66SLibJBedvSayCbxB47gPXGMrQqcxOhUy
-         84BVqkV24aOglRFozj+mUHNW/vY810poirCuXE9u1K/c73BgzWPWUZqWujTAAlvZaHbw
-         cPav0kQ1aGQ/KjliCZg6H2NfB38/++vz0MZxK+J2cRVCbWXHj3zt6uJXSDsdyQ5z+jUT
-         0NDuonLcOFkAAD2pNBb7qU3sGMXmBKdeXmv8q+5gxTNDiktoNeau7Hb8FiCZUwt4Rl30
-         u3NScIkEYSoirENHp+BoYZwc5izCC5VDTiO8xYgkq9qLaVUknmpTLL6/qguLb0wGag8J
-         jAfQ==
-X-Gm-Message-State: AOAM530gtj4s1RVQiHg/XFCaEAGFIP0MNY1S5HHum0CEyAducgzE9sXc
-	P3yhSOsH/tkW3c8JSYt7QlLMYM0wBK0=
-X-Google-Smtp-Source: ABdhPJwmQ2HlOiSRK5qy0JVVAkHhZ0D1jfPG8AitihdrH3UQH7JMB3CgfcaiYPyXnX20WLFwS0T2tA==
-X-Received: by 2002:a2e:9ccb:: with SMTP id g11mr7057312ljj.421.1596013425187;
-        Wed, 29 Jul 2020 02:03:45 -0700 (PDT)
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id 72sm313015lfh.97.2020.07.29.02.03.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Jul 2020 02:03:44 -0700 (PDT)
-From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-multimedia] mpc: update to 0.33
-Date: Wed, 29 Jul 2020 11:03:40 +0200
-Message-Id: <20200729090340.2770442-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: yi.zhao@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 06T9Zbve023700
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 02:35:37 -0700 (PDT)
+Received: from localhost (128.224.162.174) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 29 Jul
+ 2020 02:35:37 -0700
+From: "Yi Zhao" <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-networking][PATCH 2/2] samba: upgrade 4.10.15 -> 4.10.17
+Date: Wed, 29 Jul 2020 17:35:13 +0800
+Message-ID: <20200729093513.6782-2-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200729093513.6782-1-yi.zhao@windriver.com>
+References: <20200729093513.6782-1-yi.zhao@windriver.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [128.224.162.174]
+Content-Type: text/plain
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+This is a security release in order to address the following defects:
+
+CVE-2020-10730: NULL pointer de-reference and use-after-free in Samba AD
+                DC LDAP Server with ASQ, VLV and paged_results.
+CVE-2020-10745: Parsing and packing of NBT and DNS packets can consume
+                excessive CPU
+CVE-2020-10760: LDAP Use-after-free in Samba AD DC Global Catalog with
+                paged_results and VLV.
+CVE-2020-14303: Empty UDP packet DoS in Samba AD DC nbtd.
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../musicpd/{mpc_0.31.bb => mpc_0.33.bb}              | 11 ++++-------
- 1 file changed, 4 insertions(+), 7 deletions(-)
- rename meta-multimedia/recipes-multimedia/musicpd/{mpc_0.31.bb => mpc_0.33.bb} (63%)
+ .../samba/{samba_4.10.15.bb => samba_4.10.17.bb}              | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/samba/{samba_4.10.15.bb => samba_4.10.17.bb} (99%)
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpc_0.31.bb b/meta-multimedia/recipes-multimedia/musicpd/mpc_0.33.bb
-similarity index 63%
-rename from meta-multimedia/recipes-multimedia/musicpd/mpc_0.31.bb
-rename to meta-multimedia/recipes-multimedia/musicpd/mpc_0.33.bb
-index 41abe7108..dcfc3df0b 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/mpc_0.31.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpc_0.33.bb
-@@ -5,12 +5,9 @@ HOMEPAGE = "https://www.musicpd.org/clients/mpc/"
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.15.bb b/meta-networking/recipes-connectivity/samba/samba_4.10.17.bb
+similarity index 99%
+rename from meta-networking/recipes-connectivity/samba/samba_4.10.15.bb
+rename to meta-networking/recipes-connectivity/samba/samba_4.10.17.bb
+index 01250cb43..6b1e5a042 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.10.15.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.10.17.bb
+@@ -36,8 +36,8 @@ SRC_URI_append_libc-musl = " \
+            file://0001-samba-fix-musl-lib-without-innetgr.patch \
+           "
  
- inherit meson
+-SRC_URI[md5sum] = "67e9f6b8c5140475641bf5121c93b3d4"
+-SRC_URI[sha256sum] = "0b8b62558b62fbb121015f28f40fae0f07522710b6bef77c508b51bb6914ced9"
++SRC_URI[md5sum] = "f69cac9ba5035ee60257520a209a0a83"
++SRC_URI[sha256sum] = "03dc9758e7bfa2faf7cdeb45b4d40997e2ee16a41e71996aa666bc069e70ba3e"
  
--DEPENDS += " \
--    libmpdclient \
--"
-+DEPENDS += "libmpdclient"
-+
-+SRC_URI = "git://github.com/MusicPlayerDaemon/mpc"
-+SRCREV = "ef16b280052ef0320cb80f79d74c8ce0324005ed"
+ UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.10(\.\d+)+).tar.gz"
  
--SRC_URI = " \
--    git://github.com/MusicPlayerDaemon/mpc \
--"
--SRCREV = "59875acdf34e5f0eac0c11453c49daef54f78413"
- S = "${WORKDIR}/git"
 -- 
-2.25.1
+2.17.1
 
