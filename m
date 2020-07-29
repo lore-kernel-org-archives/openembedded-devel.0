@@ -1,74 +1,94 @@
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
- by mx.groups.io with SMTP id smtpd.web12.2825.1596016859355531877
+Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com [209.85.167.65])
+ by mx.groups.io with SMTP id smtpd.web12.4667.1596025359297749126
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Jul 2020 03:00:59 -0700
+ Wed, 29 Jul 2020 05:22:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=jB5eQ31Q;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.51, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f51.google.com with SMTP id i80so12660540lfi.13
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 03:00:59 -0700 (PDT)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=T24Xla8R;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.65, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f65.google.com with SMTP id s9so12916198lfs.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 05:22:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=24bwsMJBXK3XXJ1haMsDbnrdCCkcJRBNbAatF9UKX3k=;
-        b=jB5eQ31Q1wLPn3L61GiobBJv+2GWHIlUkUKkNU2/HZRnHZNE0PVbgj4YhQ2tSdfgqp
-         36gIMPNcAMXPgV04ZE2g2WSds0rPdkdQUPBXFUurX8YGdYqCrLdps7iuca09GITIp5Me
-         tw4wk3Pdg6agW5Ft7PfMtT5g+ZW3n6BGuqPCY3CDu3jE6QGBi3yZ7XmfR5+I/V3wr1S5
-         l/3Akc+43EJij0rqyey4anDJo6JSLizfeQICr3SjaW5p6fmb+5quXCTAuFdZEcjeS/+c
-         xajx1B1OqZ41pxj02oqzPsvumRidfRpyakG06ymaMVnjHnlRJEF9+S9iZcnnfqpuOKi6
-         /SMQ==
+        bh=3lEEJVRuzrR9jA2ZmPFRwujoT5tNDN+U863siQs4SSs=;
+        b=T24Xla8R2+GsGhngwXjCgseKEuy0hHCb+5ZUQnxn/1knQlT/dOxz01NSl6H3D4CnBi
+         npdLTU8odLwn6HQ70pS/LF6Rg6a9WAijiSppAtOZJ5+VkTBYbyL/28wswonDUHypDVVQ
+         1+mhSLGhYAqL1S/RQ7qImw0IhhXtIpxNLE7iVt6xggwEfuTZhx2b8qQBOxJx947pj0xC
+         0Y+tBwhcK5OjrQwed1HhQIJQjIG8E0YFEUT2rhs3zJslgH6r4nSHMb11q0IqEhFwqQ38
+         qP/p8F+YbRTVYLcsIDmmc0sASxRjJV1phydfXBNP3AN1nNegxeedXDRlY0UnRHrIH2nw
+         U3Rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=24bwsMJBXK3XXJ1haMsDbnrdCCkcJRBNbAatF9UKX3k=;
-        b=FV4ZvTAIeL+unVA4GxBEs2rOnss6SFPUkog9ldlHzcXQ0tipAGKU0wWBDa+jL4Y9gA
-         eF4gKZqRm+3qcISL/+q4PHfGT0BUn0DKLMhEMMM+1YZxCfVvmV9pd3pzH9BQelOyOmK0
-         lOSvVi8ZzGibExcbtnQ/4o4G8VsPK87iQkuVgkAZ65PauwT8oFutfpsfYXuZy+z06kmo
-         2q+Vp4Tek/r/RAOBfATRXGCTVB2IJvXBKG3beE2ORq/ySd8/DX8wFljSoqK9qKKz3aqc
-         CdWtAqhGv9fM5h1fK2t4CUhqeiln2mDwK615KK3aA12UncBMEeQ6yccIrTrZByFHE+Cz
-         3e6g==
-X-Gm-Message-State: AOAM531KOON6vUscCBWPYtcgPcPVAtUospqbcwwyQ40IHT+RrppTN6xf
-	jWOk64g7ld9CAwq3pZ5E8/8IB0tNJ40=
-X-Google-Smtp-Source: ABdhPJwZveUcSdAJ3cktT1XQEAFCCgrisFs/Tiu2bIPs1Ba80zSjj/ZJq7BlqvpmNLeYhgkCRMONAw==
-X-Received: by 2002:a19:2256:: with SMTP id i83mr17291854lfi.165.1596016857184;
-        Wed, 29 Jul 2020 03:00:57 -0700 (PDT)
+        bh=3lEEJVRuzrR9jA2ZmPFRwujoT5tNDN+U863siQs4SSs=;
+        b=j88wsmQLDTFFNXli2vhFEeygJL0Qu1o91YsplQZXFeP8uDAx3Mju4KF0mmbpqblLte
+         4pp4oLXT8J7i35fgSAtQVTssUZfzm2FPt4YkqFOVtBuID1yNboLMRyxwL5Y11sr13FQ6
+         gpWRd0A0acpiSEX4RacxM+1UveTO7lkqEFgDMeVj+pamcOwlNAN2LCVPiwF7GpOV9zCp
+         7NUjtk9GkFwu1DHVqx4xtymXxjgpdQTFFr7U9Sej88nYv9ph/Z0A6maFjsjQXLcmgGXL
+         VLqAGGCL75rmSwJrZw0Y4/rASLQlMLG1MA7LUzxRiMzsQQNvUUWVw6+HjjVbGPTUud12
+         TdvA==
+X-Gm-Message-State: AOAM530D1ot4OHXRJ2L/VT5BJn/4MlyGyCL92GHhbCzKfQzQyhAGr95o
+	ZEoBw+Ro4xJg7oJy7ISaxpmhitQth2Q=
+X-Google-Smtp-Source: ABdhPJy67wEPfmJlfmsJ18NCUCpyMAlPQGXY18whL/wNifFi8gEgrqyG0TbZAgpIh3hcoMAvaQGO5A==
+X-Received: by 2002:a19:7111:: with SMTP id m17mr17484207lfc.156.1596025356738;
+        Wed, 29 Jul 2020 05:22:36 -0700 (PDT)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id 29sm363369ljv.72.2020.07.29.03.00.56
+        by smtp.gmail.com with ESMTPSA id r1sm423146lff.55.2020.07.29.05.22.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Jul 2020 03:00:56 -0700 (PDT)
+        Wed, 29 Jul 2020 05:22:35 -0700 (PDT)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-multimedia] ncmpc: update to 0.38
-Date: Wed, 29 Jul 2020 12:00:54 +0200
-Message-Id: <20200729100054.3313751-1-open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-networking] dhcpcd: update to 9.1.4
+Date: Wed, 29 Jul 2020 14:22:32 +0200
+Message-Id: <20200729122232.3342488-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+License checksum changed due to modified copyright years.
+
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../recipes-multimedia/musicpd/{ncmpc_0.34.bb => ncmpc_0.38.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/musicpd/{ncmpc_0.34.bb => ncmpc_0.38.bb} (96%)
+ .../dhcpcd/{dhcpcd_8.1.6.bb => dhcpcd_9.1.4.bb}          | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+ rename meta-networking/recipes-connectivity/dhcpcd/{dhcpcd_8.1.6.bb => dhcpcd_9.1.4.bb} (69%)
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.34.bb b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.38.bb
-similarity index 96%
-rename from meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.34.bb
-rename to meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.38.bb
-index 0c99c7c69..ebf5d290b 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.34.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.38.bb
-@@ -33,5 +33,5 @@ PACKAGECONFIG[chat_screen] = "-Dchat_screen=true,-Dchat_screen=false"
- SRC_URI = " \
-     git://github.com/MusicPlayerDaemon/ncmpc \
- "
--SRCREV = "79cf9905355f25bc5cc6d5a05d2846d75342f554"
-+SRCREV = "2c71add42152072c5e0490de2870315dfb3b71e1"
- S = "${WORKDIR}/git"
+diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_8.1.6.bb b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_9.1.4.bb
+similarity index 69%
+rename from meta-networking/recipes-connectivity/dhcpcd/dhcpcd_8.1.6.bb
+rename to meta-networking/recipes-connectivity/dhcpcd/dhcpcd_9.1.4.bb
+index 1cb2af500..defd3420f 100644
+--- a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_8.1.6.bb
++++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_9.1.4.bb
+@@ -1,19 +1,20 @@
+ SECTION = "console/network"
+ SUMMARY = "dhcpcd - a DHCP client"
+-DESCRIPTION = "dhcpcd runs on your machine and silently configures your computer to work on the attached networks without trouble and mostly without configuration."
++DESCRIPTION = "dhcpcd runs on your machine and silently configures your \
++               computer to work on the attached networks without trouble \
++               and mostly without configuration."
+ 
+ HOMEPAGE = "http://roy.marples.name/projects/dhcpcd/"
+ 
+ LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=0531457992a97ecebc6975914a874a9d"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=9674cc803c5d71306941e6e8b5c002f2"
+ 
+ UPSTREAM_CHECK_URI = "https://roy.marples.name/downloads/dhcpcd/"
+ 
+ SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz \
+            file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch"
+ 
+-SRC_URI[md5sum] = "e1eea03388d12c9ad21ecd7c135fdf8b"
+-SRC_URI[sha256sum] = "6c2934a3e1e67a5cfd5bb15b1efa71f65c00314ac1ccb5c50da8eae3a0b8147f"
++SRC_URI[sha256sum] = "5fe133e5497d8af6d26bd6e6b8dd48ab12d124d6cc4cefe6de6536ff97f76820"
+ 
+ inherit pkgconfig autotools-brokensep
+ 
 -- 
 2.25.1
 
