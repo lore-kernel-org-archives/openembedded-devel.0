@@ -1,50 +1,50 @@
-Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com [209.85.208.181])
- by mx.groups.io with SMTP id smtpd.web10.1919.1596011744008101202
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com [209.85.208.196])
+ by mx.groups.io with SMTP id smtpd.web12.1943.1596011745705808001
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Jul 2020 01:35:44 -0700
+ Wed, 29 Jul 2020 01:35:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=UZW44Wd/;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.181, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f181.google.com with SMTP id v4so14452731ljd.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 01:35:43 -0700 (PDT)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=ypWWewWL;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.196, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f196.google.com with SMTP id q6so24114966ljp.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 01:35:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=ZjpMhqQgaxNysNYu84CNpOf0kr+dB/WxbbnZs3+eMCg=;
-        b=UZW44Wd/L9BxPqV3YYFezC1tXvUSNDhCt/PHoh3/NICvkuae0MnHpCWqu5FE0Qj0xY
-         ahA2dehE5kL/f7D2XHT7td8tMvaR4eZzcr1HGXrdibNB5x4GKLWUZGv5dGV4bBwtB49F
-         t+gR+tI2lef/76TkEqqBzDHo4nfNGBwCIbtpYtIYz8yfvxGLzuyF2nTh5+TGqGPLQacY
-         UCN2bUKJjRnilVwE219YUli8wqagFHbThY9T09LQszLIoom3JGJWkAuYxiiha47f9WCr
-         GGrPVH4+HqSi69gh8UAENFsob89jpa/UOLaMjLJvT27wqBNgCi5y9uKLe1GA9MYikBTZ
-         YDWg==
+        bh=uMR9sIaUzbojF5ZnL3snOBknRpNBn1WOq0/JWONXuyc=;
+        b=ypWWewWL+qtOX57p30T12INcZosJ6LyGGfu3Aa4mDz85CemCChYgrKlhy+jR1nVkL7
+         OXcBcKHB0UCnSIRaaO9q/Slc6WiQEk0jXskAOFmZVdmcPHdJBIbIl9ayNtv8h+3UY4KS
+         vEzVyIm9pa/8OZE7QhccqDhfETtsYXrVgBl8YQSdS3hiabhjubdXkpD4XD24BFKzBl/A
+         7tcQoLhbfwgqSXZZjzgW/bwg2i7+cwaawWVxCFwNRl1VY2CyNNU4olkg7Vesrs0B6B2a
+         6KWjxG9xvqSc+m5RlIqxHvaV2+vUlm1ghVPQcQWmWLI2Cr72OgBrq1OeBtTZX02k6MNA
+         e50g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=ZjpMhqQgaxNysNYu84CNpOf0kr+dB/WxbbnZs3+eMCg=;
-        b=t/DFcefWd9HXJ744F3x3/DL8umGVddYytNgnRxPpJUi8W2LRuapisTxu4Ll+UrPTlw
-         eAneqv8DB0a7iIV7v5kaQvbbtXIguA9CPRu5uvB8Vo1ZkebRvHImsbHB0PvU6sAHA5TQ
-         gy423zdZuhTn2c9arIiEQxYpUNHIvTFZ/vriX6pTCCWHWCNFZD4/d3a+BtJTmqApHZQc
-         T+SR0spwhHAFJx0Jwt28PG/luRoPlnPW2oNWI8O91PonABPOao4kCNZCNC1sOQuXeCUw
-         zmkE+XMconzflsHTogqu/ceTnDH2ZAILOqi9DEjEBTsl+kLh+ZcLDGtomDVlbznF7aOg
-         EaEw==
-X-Gm-Message-State: AOAM530JLE2yu/Hs72r+93Oo30lz+PG+uMB8NU97sWZRBrHOkHUTrlsp
-	Lu/66pyrFRnhJtadLFL97KLDXIeVnSM=
-X-Google-Smtp-Source: ABdhPJwSHvKS1iYfGBukRFj43AAuezXpaRp0uJw0cvgtOAd2XwIBTanErqzvCGM2rJNaUun1L9666A==
-X-Received: by 2002:a2e:2e07:: with SMTP id u7mr13342179lju.195.1596011741767;
-        Wed, 29 Jul 2020 01:35:41 -0700 (PDT)
+        bh=uMR9sIaUzbojF5ZnL3snOBknRpNBn1WOq0/JWONXuyc=;
+        b=AdY73G3lW4eArRjjkf/1j43Pgr8UVCgNidz3xW4OBdAw1hyxCqdW1lVVcTUB7kQvz0
+         eFeIBpdh5hfASJJt6ec5vqnD05tH/VswkfqB+eJ7TGoXX6nJzC1P/2kt3uK6tfcZmhLx
+         etYUAB+EZWmRqKFuldFsdLEAu+sThzBZdMpDHiB1fnmLVqlsJ5Rm4ocKgnJvvjIqHoy9
+         ORv8q2MWfCdasSElzJF8cGN1ufqPIGcH08pfGzgosDU0oLXPUzlsM9p1aBQfz6J9RbJG
+         1KKWUqLXF4WESQPfcL4uTSKlTfc+iQtMRO9ZKEsEW6s490hsGY+3MyA4PHcqRhTOB8AT
+         e4rQ==
+X-Gm-Message-State: AOAM531fMuCBbQyOLsy812LNg0TfsvqFwEhD3eqHVDpSe1cJ7yUHMsCB
+	FwIxoctMRI8T+OSwrAwU9FO+HDcFWQE=
+X-Google-Smtp-Source: ABdhPJzPB/YIUn9OpqfUcdfnxcwCaxah9m45z2fAL6qdApqDrQ8AFO/K8CrMBepHQRqNX0gaBgHxNg==
+X-Received: by 2002:a2e:3015:: with SMTP id w21mr8762925ljw.30.1596011743584;
+        Wed, 29 Jul 2020 01:35:43 -0700 (PDT)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id s9sm258780ljh.46.2020.07.29.01.35.40
+        by smtp.gmail.com with ESMTPSA id s9sm258780ljh.46.2020.07.29.01.35.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Jul 2020 01:35:41 -0700 (PDT)
+        Wed, 29 Jul 2020 01:35:43 -0700 (PDT)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH v2][meta-oe 2/3] libopusenc: add recipe 0.2.1
-Date: Wed, 29 Jul 2020 10:35:36 +0200
-Message-Id: <20200729083537.2740433-2-open.source@oleksandr-kravchuk.com>
+Subject: [PATCH v2][meta-oe 3/3] opusfile: update to 0.12
+Date: Wed, 29 Jul 2020 10:35:37 +0200
+Message-Id: <20200729083537.2740433-3-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200729083537.2740433-1-open.source@oleksandr-kravchuk.com>
 References: <20200729083537.2740433-1-open.source@oleksandr-kravchuk.com>
@@ -53,35 +53,27 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../libopusenc/libopusenc_0.2.1.bb            | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/libopusenc/libopusenc_0.2.1.bb
+ .../opusfile/{opusfile_0.10.bb => opusfile_0.12.bb}           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-multimedia/recipes-multimedia/opusfile/{opusfile_0.10.bb => opusfile_0.12.bb} (72%)
 
-diff --git a/meta-oe/recipes-multimedia/libopusenc/libopusenc_0.2.1.bb b/meta-oe/recipes-multimedia/libopusenc/libopusenc_0.2.1.bb
-new file mode 100644
-index 000000000..596c5fe86
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/libopusenc/libopusenc_0.2.1.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "Opus Audio Codec"
-+DESCRIPTION = "The libopusenc libraries provide a high-level API for encoding \
-+               .opus files. libopusenc depends only on libopus."
-+HOMEPAGE = "http://www.opus-codec.org/"
-+SECTION = "libs/multimedia"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=174b92049c2c697eb73112801662a07c"
-+
-+DEPENDS = "libopus"
-+
-+UPSTREAM_CHECK_URI = "https://github.com/xiph/libopusenc/releases"
-+
-+SRC_URI = "https://ftp.osuosl.org/pub/xiph/releases/opus/libopusenc-${PV}.tar.gz"
-+SRC_URI[md5sum] = "f038ea0f4168d184c76b42d293697c57"
-+SRC_URI[sha256sum] = "8298db61a8d3d63e41c1a80705baa8ce9ff3f50452ea7ec1c19a564fe106cbb9"
-+
-+S = "${WORKDIR}/libopusenc-${PV}"
-+
-+inherit autotools pkgconfig
+diff --git a/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.10.bb b/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.12.bb
+similarity index 72%
+rename from meta-multimedia/recipes-multimedia/opusfile/opusfile_0.10.bb
+rename to meta-multimedia/recipes-multimedia/opusfile/opusfile_0.12.bb
+index 3f6dbb8e9..c775cef5a 100644
+--- a/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.10.bb
++++ b/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.12.bb
+@@ -8,7 +8,7 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6ac22b992dde6a891f8949c3e2da8576"
+ 
+ SRC_URI = "https://downloads.xiph.org/releases/opus/${BP}.tar.gz"
+-SRC_URI[md5sum] = "ab3f7d15d766f5b36b0951ee435f9ebf"
+-SRC_URI[sha256sum] = "48e03526ba87ef9cf5f1c47b5ebe3aa195bd89b912a57060c36184a6cd19412f"
++SRC_URI[md5sum] = "45e8c62f6cd413395223c82f06bfa8ec"
++SRC_URI[sha256sum] = "118d8601c12dd6a44f52423e68ca9083cc9f2bfe72da7a8c1acb22a80ae3550b"
+ 
+ inherit autotools pkgconfig
 -- 
 2.25.1
 
