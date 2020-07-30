@@ -1,146 +1,100 @@
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
- by mx.groups.io with SMTP id smtpd.web11.5802.1596074725890177548
+Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com [209.85.214.195])
+ by mx.groups.io with SMTP id smtpd.web11.2173.1596086206382411119
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Jul 2020 19:05:26 -0700
+ Wed, 29 Jul 2020 22:16:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=DBJOlaQz;
- spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f179.google.com with SMTP id s15so4092071pgc.8
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 19:05:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=lrxFOJJb;
+ spf=pass (domain: gmail.com, ip: 209.85.214.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f195.google.com with SMTP id d1so13143145plr.8
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 22:16:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Mqy5rGNiZHeDF/gJxd8mvrVrZ+pfXwmCN0f7c+uQIH4=;
-        b=DBJOlaQznDi9+Wx07MPZtodikv4jfY+7CobgGZK6R2j8U+QmcvOVA9qrm0PFS7f/yI
-         vwHNJ0VvpuJKOvKvzh3yrFFa2eGsQon6COSbKkG/BgVdL9xyS1TkeTGibIi+XncpL4xZ
-         9ceEBdJI+x9VUq7Yg4NV0p5qpAIdKHzyt1vaXOxp5JoHeHhJctRwD0RjXUJoZVFZSKDE
-         oC86r1jwXkOlx4nNN/c6pXdYABzcdZKSljcit7Qeb9b40JpfmiE409QZkVbETwgmqfMb
-         PQymnDTJueRZhCKHd6yi66yUAzAXHWBtSocQRy8xccyWPZKS2hvFyXaF970ESjd3Vd9F
-         CYUQ==
+        h=subject:to:references:from:message-id:date:user-agent:mime-version
+         :in-reply-to:content-language:content-transfer-encoding;
+        bh=qw+Mdl6rcqnFP+xzrVbdgVSX4mPaOrISAduCSjGSoJQ=;
+        b=lrxFOJJbQd+ALykZ3BvVmGO8fyGzyMwix4B5ivWDQi0EFshPZ9IqE/kgdQhm/chj5l
+         rzeuC8Qx8P9v7G1gPMDHYm0ITRGvPbZG8yiIwdylmXi2JTcPZuZVb41LG1vulnmPNxlJ
+         IGlo8pk/Y2GfGMcFBLkEdfztZAUZc3XuDEsa+Io0MgEaFIddZDS5qGXrzzz4yPmdAdfl
+         cwq76nGl05geTeLKei7zuijH0oX8YlHHt/GiOtabznxoNZIqTRf3Zoydo3B6dsurcD7b
+         zIFMFP1DfLrSPSF055XEs+YaFgkMWCy+G4EliqBHvON2k7MUiOss2IAVr5JbMX6nZvyZ
+         glPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+        h=x-gm-message-state:subject:to:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=Mqy5rGNiZHeDF/gJxd8mvrVrZ+pfXwmCN0f7c+uQIH4=;
-        b=Du2OEGWCsInNxx+pRraArZnvom/O6SfW3eBvfuyFkkVWOZRIeHXTziucQDmNEWCkVb
-         KbcMRt+vJa6zXsECM6MG5yqTHcz/FDtX9pxji4UDLQLdiny3rYoZbEgr6q3hH85j4LdM
-         /OTKb9Vn9LTa3CDsb5Ex7i4CMTpT55YV81V42YAgUD135pKVkU3A1OhHGEmbSgMZ+zp3
-         UTxODG8ZI2Ys04Yn8SsBF68b+BtjQXW3420Mkcq9ue9qLF+F8OYbQOt6DzBN3iBs2wE9
-         gxFPJAxa+s4mdKexV+LAAAavUKjou1M3pxsQiRH83wTOeZNRLWbEc+D9elVko3Z6IEYV
-         SC6g==
-X-Gm-Message-State: AOAM531kDIfEupPh9qs4mkXaBodQcNGUMPlqxy1+HMvlZhRUkWRRAi9l
-	iQUTtaTWR5EsEfv3f0CF3/oC3S+E
-X-Google-Smtp-Source: ABdhPJx15Ws1MUpa/9HXDPkBBOtYDnviC3BSNhZMR0KievWcbmvLubEKQMqyr+QMSHJ0zFQeRtWJ7g==
-X-Received: by 2002:a62:ac05:: with SMTP id v5mr982031pfe.8.1596074724984;
-        Wed, 29 Jul 2020 19:05:24 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:78ea:3c50:1a71:2bae])
-        by smtp.gmail.com with ESMTPSA id d29sm3807354pgb.54.2020.07.29.19.05.23
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Jul 2020 19:05:24 -0700 (PDT)
-From: "akuster" <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 00/21] Dunfell pull request 4/29
-Date: Wed, 29 Jul 2020 19:04:57 -0700
-Message-Id: <cover.1596074628.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
+        bh=qw+Mdl6rcqnFP+xzrVbdgVSX4mPaOrISAduCSjGSoJQ=;
+        b=pZh+Sj+mxV5csVw2klI+sUNxPv8dF5l8vQGqdR/yJqauwVNREhWUmG7GLYCQHxlCzl
+         u/lKfq195ILzdkt25Svhx7oAOkJVthQGe5AF/E87sGIXkK+DDd7MVGlduzCTp3DR2VW8
+         nGc369WIJp3RFhDk/PyBvGsa2IHMXSoG+GERHCPjOSYuLcmllZDH7XbK9sF9xERy8Fme
+         4wzcBCdefDkSSmxUObjvEuiSfh4HPltyDdvWXr0sQkRcJd7vl1A01bHdeHDEks80ZgsA
+         9vOMRXRhSmR833MBHyCCUOc++MkzaA00LCWTlqClC7qMMFfS1V9hgoG+UNKX2CBUyYvH
+         xeOw==
+X-Gm-Message-State: AOAM53169fr+BETQ9ujXEmMuo8q2dveI4ubMVCXCJChtqVRW3+ijiu+w
+	naCYizyDu+ajvnMGr1nOQX+mG1NPdbc=
+X-Google-Smtp-Source: ABdhPJxG9Yj5UhUVMmGe2iCEGs/PTsrIgzZdEfnr+TH6XSQFUzp8a/r/OP0Hqo1iG9Tsu9wtXl8a4g==
+X-Received: by 2002:a17:90b:3603:: with SMTP id ml3mr13303810pjb.207.1596086205589;
+        Wed, 29 Jul 2020 22:16:45 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:4e0:5ba:2655:68eb:112e? ([2601:646:9200:4e0:5ba:2655:68eb:112e])
+        by smtp.gmail.com with ESMTPSA id mj6sm4000963pjb.15.2020.07.29.22.16.44
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 29 Jul 2020 22:16:45 -0700 (PDT)
+Subject: Re: [oe] [PATCH][meta-networking] firewalld: update to 0.8.3
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20200729122637.3357934-1-open.source@oleksandr-kravchuk.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Message-ID: <bc292bf8-529b-f14d-37bc-c22939a8db2d@gmail.com>
+Date: Wed, 29 Jul 2020 22:16:44 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.11.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200729122637.3357934-1-open.source@oleksandr-kravchuk.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-Cover letter only.
 
-Please merge this into dunfell.
 
-The following changes since commit cc6fc6b1641ab23089c1e3bba11e0c6394f0867c:
+On 7/29/20 5:26 AM, Oleksandr Kravchuk wrote:
+> nft build dependency has been removed in @3f7419dcb50a5bdcf800512d2491.
+> 
 
-  ntp: update 4.2.8p15 (2020-07-01 08:01:41 -0700)
+does this also mean we do not need nftables in rdeps ?
 
-are available in the Git repository at:
-
-  git://git.openembedded.org/meta-openembedded dunfell-next
-  http://cgit.openembedded.org/meta-openembedded/log/?h=dunfell-next
-
-Andreas Müller (3):
-  blueman: upgrade 2.1.1 -> 2.1.3
-  modemmanager: upgrade 1.12.10 -> 1.12.12
-  ibus: upgrade 1.5.21 -> 1.5.22
-
-Armin Kuster (4):
-  net-snmp: Security fix CVE-2019-20892
-  wireshark: Update to 3.2.5
-  Revert "jsoncpp: upgrade 1.9.2 -> 1.9.3"
-  jsoncpp: add PE do to revert to older PV
-
-Bog999 (1):
-  python3: Add python3-cryptography to RDEPENDS for python3-redis
-
-Changqing Li (1):
-  libmcrypt: set CLEANBROKEN
-
-Khem Raj (1):
-  nss: Remove mcpu to avoid march conflicts
-
-Konrad Weihmann (1):
-  openldap: packaging fixes
-
-Ovidiu Panait (2):
-  freediameter: Fix testcnx ptest failure
-  nss: Fix CVE-2020-12399
-
-Pierre-Jean Texier (1):
-  minicoredumper: update SRC_URI to use github instead
-
-Qi.Chen@windriver.com (1):
-  multipath-tools: disable parallel build as a workaround
-
-Robert Yang (1):
-  drbd-utils: Add CLEANBROKEN to fix rebuild errors
-
-Zang Ruochen (1):
-  nftables: upgrade 0.9.5 -> 0.9.6
-
-Zheng Ruoqin (4):
-  Fix build error when enable multilib.
-  mraa: Disable python2, otherwise, there is a build error when enable
-    multilib.
-  paho-mqtt-c: Fix build error when enable multilib.
-  upm:Fix build error when enable multilib.
-
- .../tracker/tracker-miners_2.3.3.bb           |   4 +
- meta-gnome/recipes-support/ibus/ibus.inc      |   4 +-
- .../{blueman_2.1.1.bb => blueman_2.1.3.bb}    |   3 +-
- .../{nftables_0.9.5.bb => nftables_0.9.6.bb}  |   2 +-
- .../0001-Fix-testcnx-expired-CA-data.patch    | 746 ++++++++++++++++++
- .../freediameter/freediameter_1.3.2.bb        |   1 +
- .../net-snmp/net-snmp/CVE-2019-20892.patch    | 118 +++
- .../net-snmp/net-snmp_5.8.bb                  |   1 +
- .../recipes-support/drbd/drbd-utils_9.12.0.bb |   2 +
- ...{wireshark_3.2.4.bb => wireshark_3.2.5.bb} |   3 +-
- ...ger_1.12.10.bb => modemmanager_1.12.12.bb} |   7 +-
- .../paho-mqtt-c/paho-mqtt-c_1.3.2.bb          |   4 +
- .../libmcrypt/libmcrypt_2.5.8.bb              |   2 +
- .../{jsoncpp_1.9.3.bb => jsoncpp_1.9.2.bb}    |   4 +-
- meta-oe/recipes-extended/mraa/mraa_git.bb     |   2 +-
- meta-oe/recipes-extended/upm/upm_git.bb       |   4 +
- .../minicoredumper/minicoredumper_2.0.1.bb    |   2 +-
- .../multipath-tools/multipath-tools_0.8.4.bb  |   1 +
- ...e-a-fixed-length-for-DSA-exponentiat.patch | 110 +++
- meta-oe/recipes-support/nss/nss_3.51.1.bb     |   5 +
- .../openldap/openldap_2.4.50.bb               |   4 +-
- .../python/python3-redis_2.10.6.bb            |   1 +
- 22 files changed, 1013 insertions(+), 17 deletions(-)
- rename meta-networking/recipes-connectivity/blueman/{blueman_2.1.1.bb => blueman_2.1.3.bb} (94%)
- rename meta-networking/recipes-filter/nftables/{nftables_0.9.5.bb => nftables_0.9.6.bb} (93%)
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/0001-Fix-testcnx-expired-CA-data.patch
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2019-20892.patch
- rename meta-networking/recipes-support/wireshark/{wireshark_3.2.4.bb => wireshark_3.2.5.bb} (95%)
- rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.12.10.bb => modemmanager_1.12.12.bb} (93%)
- rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.9.3.bb => jsoncpp_1.9.2.bb} (92%)
- create mode 100644 meta-oe/recipes-support/nss/nss/0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch
-
--- 
-2.17.1
-
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>   .../firewalld/{firewalld_0.7.5.bb => firewalld_0.8.3.bb}      | 4 +---
+>   1 file changed, 1 insertion(+), 3 deletions(-)
+>   rename meta-networking/recipes-connectivity/firewalld/{firewalld_0.7.5.bb => firewalld_0.8.3.bb} (95%)
+> 
+> diff --git a/meta-networking/recipes-connectivity/firewalld/firewalld_0.7.5.bb b/meta-networking/recipes-connectivity/firewalld/firewalld_0.8.3.bb
+> similarity index 95%
+> rename from meta-networking/recipes-connectivity/firewalld/firewalld_0.7.5.bb
+> rename to meta-networking/recipes-connectivity/firewalld/firewalld_0.8.3.bb
+> index fbf586f76..ddf5ff88e 100644
+> --- a/meta-networking/recipes-connectivity/firewalld/firewalld_0.7.5.bb
+> +++ b/meta-networking/recipes-connectivity/firewalld/firewalld_0.8.3.bb
+> @@ -8,8 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>   SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz \
+>              file://firewalld.init \
+>   "
+> -SRC_URI[md5sum] = "b1aeede85a72adcf4f79d98019811244"
+> -SRC_URI[sha256sum] = "45a8a7dbc084ef56ce306154d3834922e7f1fc2bf11b6c821f579cad51313226"
+> +SRC_URI[sha256sum] = "4ecb16d82c2825ccfb8f109e543c0492cf6ea8c43e2d0f59901bddcead037dc6"
+>   
+>   # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from gsettings.m4
+>   DEPENDS = "intltool-native glib-2.0-native"
+> @@ -29,7 +28,6 @@ PACKAGES += "${PN}-zsh-completion"
+>   # /etc/sysconfig/firewalld is a Red Hat-ism, only referenced by
+>   # the Red Hat-specific init script which we aren't using, so we disable that.
+>   EXTRA_OECONF = "\
+> -    --with-nft=${sbindir}/nft \
+>       --without-ipset \
+>       --with-iptables=${sbindir}/iptables \
+>       --with-iptables-restore=${sbindir}/iptables-restore \
+> 
+> 
+> 
+> 
