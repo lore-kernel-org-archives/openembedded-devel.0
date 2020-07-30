@@ -1,114 +1,90 @@
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web10.2138.1596086376399405394
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.web12.2278.1596086511607761665
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Jul 2020 22:19:36 -0700
+ Wed, 29 Jul 2020 22:21:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=St/ZqMoc;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id kr4so1361971pjb.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 22:19:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Lrp8bgDF;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id u10so3657263plr.7
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 22:21:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:references:from:message-id:date:user-agent:mime-version
          :in-reply-to:content-language:content-transfer-encoding;
-        bh=AVLk3llBXdg4h/6KNGR/6dycW3AjSPbzykw1D0zjwY0=;
-        b=St/ZqMocL1OM7f4l2n769Lrt6CU8P7ir7cL8PRVPuX/cEwd8V9a0LyAh3so5LxBWpT
-         Mk307cg+LPtmikERZXCXoM3H+ELTm+KkbgC0XUdLmFbcn/olVObXkxQNoL2Jw6aPcmMY
-         McRpcimXEGIwqSTRSQKHnUjuqmUfZsLHRQT8UUN/KlFnQ1UqJe3EqpSoEaogql3pAJ96
-         hsoEEcQ3wGIZEmCJOt3VdIpyC4+wUII/AptJOwH4WXCcNyVkTiKndm8JsydildlNgRx/
-         OtxxUDSHFgvdtipsU5EYpAHEvqSNrIzA0d1xDI86xwpfhtJ6BDgTgtexoCEL6SB+y5uU
-         AlSA==
+        bh=dLVby2+rsRC9KENWg3Py+3RcAy8K9iYZXHQU7Xt9/ec=;
+        b=Lrp8bgDFj4TMg+TSsaMypedD1FHKmV098njqR51Oh8VFe1w0rG/kUPDvENB5mIh1n8
+         NcwR1ELrDw3tI5ZQHtMo6nkUvZLtGusaQQXB4WVuKGo/6QHA8f+yhkVJJHyo+YrRCPEm
+         JpgNj1wuys3cwPGEy5IeTus1OHpU/i7O7e/GuoeMIPfoNzGHn3il+WQTjWTRLeciy2yM
+         FPk1Y9Mo+qw8HLxHJYCCJAKE0YI+Q+7ImdF2HCF/9+A9bC2UYcyc+w/Lj0Rm1yL+7pWV
+         d44Xa/DeQ1iiwQSNh/1qUfND4QCyvndpTDye2MwsKf1Vx+VYCelot4AsR/5Oy3KFDp1b
+         7znQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=AVLk3llBXdg4h/6KNGR/6dycW3AjSPbzykw1D0zjwY0=;
-        b=RVFG0zxT2TjFoBBgR1IiHqUUXF8JcLpY8yIUzCO0/15jC+ELKHyvhoXie+fcJtXDqt
-         bBsHh3rXkfkvh0oO6a8iHGN6e3Q8mWNu52fp/racQsSuHINQZBNoBLOR4Su7PS0fchOf
-         aIX7xIBtns/dkiyRujABkqDF7bg77gB1uLh5pC58967F/RW+/2vyuR+g7WtW0EmvlDgk
-         ZWc1fWPpaZur+BSccmXJGnHp3MLO4KqoRCQAFvCpkxpLCDdl+DMWxmh5swlwnvKAok8B
-         Pp/dPaHkuHaCpgbmBrfGzFuTTJV+o8wcFijcyS6Vn/oR6iAiGocwxRdHkxniBVFJfezX
-         wDew==
-X-Gm-Message-State: AOAM532nNO2szfLu544a5nKOZGCoE8rcaRvTkkrRcd84x1RdiAevulWV
-	WAEBmZpVHAwmRdklV0ibrsj9i4q57EA=
-X-Google-Smtp-Source: ABdhPJwdQ1pl8paGA61JZASjukdUpqM5Heitcs5lYCTtowIAXo8GTUsnwwOnuVEW7E1TCFtHcuWt/w==
-X-Received: by 2002:a17:90a:be17:: with SMTP id a23mr10376318pjs.84.1596086375562;
-        Wed, 29 Jul 2020 22:19:35 -0700 (PDT)
+        bh=dLVby2+rsRC9KENWg3Py+3RcAy8K9iYZXHQU7Xt9/ec=;
+        b=iy/ACYj5hEle/hpuzU36fy7BixALQwPK1rSm37xs1sL4nKkjnW58xdAANeQo590h3Z
+         r6EYJ+Aul5rXZ5G/Hk0NWyx1XUdbaj1qZPkhbzrI95BT76/xsYtlWvrGgqPnDtikUwwu
+         1vmo497CweAcxBSFTqp+eHVvHH2zI1eBXRYu2TjO7fQr7258DtRD/I702+mNC8wECU9i
+         iC776eFMB4o8/FzBkt7M5VLCAOuGA00gju9/fvEhOYNfWCz+WbFqsN8vKT3ak/gEHlrK
+         ckLqPJx54um0x9oGdIFgVmw3IDsSINeoS9jfSaoAfseYXY5JN657p0dOTkkmJtuK25ry
+         +C+w==
+X-Gm-Message-State: AOAM5305unDYXa8x9KJevIRUPsy/g1qp6DhOOW53kkWq9CTyiqK6X+dp
+	dvs62l68RIUp/qgoNqcfE/WP5ig2ofQ=
+X-Google-Smtp-Source: ABdhPJyjR4yN5/3J10frzoY5lVoBwmeoYKCi6XxypqVYr7kt+9bd8b+EeB16SIMP5+ooHUbXxUEVQQ==
+X-Received: by 2002:a17:90a:b63:: with SMTP id 90mr13938744pjq.47.1596086510659;
+        Wed, 29 Jul 2020 22:21:50 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from ?IPv6:2601:646:9200:4e0:5ba:2655:68eb:112e? ([2601:646:9200:4e0:5ba:2655:68eb:112e])
-        by smtp.gmail.com with ESMTPSA id v2sm3873905pje.19.2020.07.29.22.19.34
+        by smtp.gmail.com with ESMTPSA id x128sm4173590pfb.120.2020.07.29.22.21.49
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 29 Jul 2020 22:19:34 -0700 (PDT)
-Subject: Re: [oe] [PATCH][meta-networking] kronosnet: update to 1.18
+        Wed, 29 Jul 2020 22:21:50 -0700 (PDT)
+Subject: Re: [oe] [PATCH][meta-oe] broadcom-bt-firmware: update to 12.0.1.1105_p2
 To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200726122050.18769-1-open.source@oleksandr-kravchuk.com>
+References: <20200726100352.3964129-1-open.source@oleksandr-kravchuk.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Message-ID: <21531571-e5c7-6bb5-1017-73356063eca8@gmail.com>
-Date: Wed, 29 Jul 2020 22:19:34 -0700
+Message-ID: <9e726b0e-ddd1-3a3f-8320-2acaf85e9b58@gmail.com>
+Date: Wed, 29 Jul 2020 22:21:49 -0700
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
  Gecko/20100101 Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <20200726122050.18769-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20200726100352.3964129-1-open.source@oleksandr-kravchuk.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 
 
 
-On 7/26/20 5:20 AM, Oleksandr Kravchuk wrote:
+On 7/26/20 3:03 AM, Oleksandr Kravchuk wrote:
 > Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 > ---
->   .../{kronosnet_1.15.bb => kronosnet_1.18.bb}          | 11 +++++++++--
->   1 file changed, 9 insertions(+), 2 deletions(-)
->   rename meta-networking/recipes-extended/kronosnet/{kronosnet_1.15.bb => kronosnet_1.18.bb} (67%)
+>   ...firmware_git.bb => broadcom-bt-firmware_12.0.1.1105_p2.bb} | 4 +---
+>   1 file changed, 1 insertion(+), 3 deletions(-)
+>   rename meta-oe/recipes-kernel/broadcom-bt-firmware/{broadcom-bt-firmware_git.bb => broadcom-bt-firmware_12.0.1.1105_p2.bb} (96%)
 > 
-> diff --git a/meta-networking/recipes-extended/kronosnet/kronosnet_1.15.bb b/meta-networking/recipes-extended/kronosnet/kronosnet_1.18.bb
-> similarity index 67%
-> rename from meta-networking/recipes-extended/kronosnet/kronosnet_1.15.bb
-> rename to meta-networking/recipes-extended/kronosnet/kronosnet_1.18.bb
-> index 6bf268da9d..7b1dfc2411 100644
-> --- a/meta-networking/recipes-extended/kronosnet/kronosnet_1.15.bb
-> +++ b/meta-networking/recipes-extended/kronosnet/kronosnet_1.18.bb
-> @@ -1,7 +1,9 @@
->   # Copyright (C) 2020 Khem Raj <raj.khem@gmail.com>
->   # Released under the MIT license (see COPYING.MIT for the terms)
+> diff --git a/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_git.bb b/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p2.bb
+> similarity index 96%
+> rename from meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_git.bb
+> rename to meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p2.bb
+> index 8c474ecdc4..010bbcb4b4 100644
+> --- a/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_git.bb
+> +++ b/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p2.bb
+> @@ -10,9 +10,7 @@ NO_GENERIC_LICENSE[Firmware-Broadcom-WIDCOMM] = "LICENSE.broadcom_bcm20702"
 >   
-> -SUMMARY = " Kronosnet, often referred to as knet, is a network abstraction layer designed for High Availability use cases, where redundancy, security, fault tolerance and fast fail-over are the core requirements of your application."
-> +SUMMARY = "Kronosnet, often referred to as knet, is a network abstraction layer \
-> +           designed for High Availability use cases, where redundancy, security, \
-> +           fault tolerance and fast fail-over are the core requirements of your application."
->   HOMEPAGE = "https://kronosnet.org/"
->   LICENSE = "GPL-2.0+ & LGPL-2.1"
->   LIC_FILES_CHKSUM = "file://COPYING.applications;md5=751419260aa954499f7abaabaa882bbe \
-> @@ -9,9 +11,11 @@ LIC_FILES_CHKSUM = "file://COPYING.applications;md5=751419260aa954499f7abaabaa88
->   SECTION = "libs"
->   DEPENDS = "doxygen-native libqb-native libxml2-native bzip2 libqb libxml2 libnl lksctp-tools lz4 lzo openssl nss xz zlib zstd"
->   
-> -SRCREV = "0ba5985c3ddec8429b989f0e7bd3324f53e0a9b0"
-> +SRCREV = "e1f3d4fb4906a26bf155a0e3fff2b6cb02be4dd2"
->   SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1"
->   
-> +UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
-> +
->   inherit autotools
+>   LIC_FILES_CHKSUM = "file://LICENSE.broadcom_bcm20702;md5=c0d5ea0502b00df74173d0f8a48b619d"
+>   SRC_URI = "git://github.com/winterheart/broadcom-bt-firmware.git"
+> -SRCREV = "c0bd928b8ae5754b6077c99afe6ef5c949a58f32"
+> -PE = "1"
+
+not sure if we can drop PE here
+
+> -PV = "0.0+git${SRCPV}"
+> +SRCREV = "1af1116f73782951bd7bbe2139928e497c3a634b"
 >   
 >   S = "${WORKDIR}/git"
-> @@ -21,3 +25,6 @@ S = "${WORKDIR}/git"
->   #                                                             ^~~~~~~~~~~~~~~~~~~~~~~
->   CFLAGS_append_toolchain-clang = " -Wno-sign-compare"
 >   
-> +PACKAGECONFIG[man] = "enable_man="yes", --disable-man, "
-> +
-
-Perhaps it can inherit manpage class ?
-
-> +PACKAGECONFIG_remove = "man"
-
-remove will override any other operation, which means there is no way to 
-enable the manpages via bappends or so,
-
 > 
 > 
 > 
