@@ -1,95 +1,92 @@
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web10.2181.1596086632115074374
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web11.2266.1596086763859661800
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Jul 2020 22:23:52 -0700
+ Wed, 29 Jul 2020 22:26:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=LpFo70mm;
- spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id j19so15875573pgm.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 22:23:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=jhY4keYY;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id f9so3561074pju.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jul 2020 22:26:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:references:from:message-id:date:user-agent:mime-version
          :in-reply-to:content-language:content-transfer-encoding;
-        bh=QuaHVg5II70TUizVr17FQOdnGbbk2CsFL1iSvktSGMw=;
-        b=LpFo70mmidO25YBWRMWWxjfQINO4YYtlV4y8yOtmLIUPaknFTj/bPVMuHa7+xhdKC6
-         c7RaCeB4/qP5/M8Us1AEkbd38NyO4dzVAOUkYD/b2juwFhnVw9RNJIWW2jIaoosJW1fT
-         uoyIQvr+NGr8LrT+xgD4jnV73dP7gsnbinPn4pPJG0/0Hgr/XQxIXr/Y1ZLgBJwUWC21
-         oKaAITwdNSY9nUghvF0XZ4YaB19tQpOxUzVyqhSpkiZRv9D4I27A+DUfn8OeGLHh9Nfk
-         sH20MUEjiBHJ1SphZM62LvmNa6vbROa9i6bxjsANYgqpzFEkrUq6vxHTrnzpeJrH41gb
-         /ORg==
+        bh=jtgXvFmwGYwIMC5f/RTWeRVvW321XIEy+HSzfUPMTSc=;
+        b=jhY4keYYfmj2pmLoR1yxmBjPdmRpvNtZNoftDr6pqeayEbqIa6t1HIQvyjLPKM/AGy
+         IokJICZoxxoOPLZhVd7QfBZK2mR/Y9bEnA0oTMZZUiWDTbZxjrCRaqtuA3DpFtmxkvGc
+         7n4putw4WbPFXYgYYaFz/bx9YzrYO/0EeyA1qi7L30wmpm6apoiiTvmHAoN4YehfmNHj
+         Z8gSNrDpEPMpxlUG4bVh0giL7PMZZ5VnGB4ifRLthRSpSfD/bruS0UPm2pLtD0NzNzo4
+         fBOefcCZtp6Lml5ijfLBvPLXOWBE3YIJbGj4eu9oGvuwX4Jw6Qq/dRMD3dt/VDbJLr90
+         rxlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=QuaHVg5II70TUizVr17FQOdnGbbk2CsFL1iSvktSGMw=;
-        b=S/QhrcZ21cNCUF3UK8EuMNMUKa152vl9egkVUk4fGtv4c4wb73FitGV8Slu9zuKCck
-         zTutkt72Fv7pgDV+hF+x9g/nb3MUhxlfXXr+m4Fs8LF/uMMCpFtx8LzbenmTK/nYkjZZ
-         VPjeG1PUfnK0K8ogIiY+8i2Xyzs68zX/LOG2pY2xJu+6ck7Wtlyy8Iw79ehQ243MKYfo
-         qQ6e0/E5JO5zTPWdhC5+JEGRIvgEbyDhf7tXJqjvbRKp9vSIkJyEZfrz/wBPQU2/oawd
-         ESb6mdXow3Q9GlKXR589OCckb5V8j4u6PFViFelud5gKQko+ek2Ky+h5TPqni8huwk/X
-         3MBg==
-X-Gm-Message-State: AOAM532vVkQgQ8x1KGHQgbCcoe4DIp0FEAGOUr/X4hkYPoW1wDRyFdzI
-	k++koSf7tZmyZV43CzsEbhe5WSKwtYI=
-X-Google-Smtp-Source: ABdhPJyH7p4mzXeAPeNXq4zELXu9yj7q3uI4EVBe/PJ9pjI/xry18bjJBDgDijJqnruowqh0i+vtiw==
-X-Received: by 2002:a63:2946:: with SMTP id p67mr32857778pgp.227.1596086631220;
-        Wed, 29 Jul 2020 22:23:51 -0700 (PDT)
+        bh=jtgXvFmwGYwIMC5f/RTWeRVvW321XIEy+HSzfUPMTSc=;
+        b=nzEqDdSapjzO0yDXhKoTNciw4hgqIeXjc/kTmVFtCNewV+PHzo/pmu95ro6QBEXWpG
+         sSILPdgiuH6xvGX3TYU0u0C5zhF3Czm+WuBWeqg4s34+gjD43ZlO9ndBT5/ivAJ198/w
+         hiM3/Pvp8XpjzDMtVueEeIGqQivsRFlEaIjRAxRgkFySfUkMd3AIW9ZNAQtNHdsur+K/
+         CFyvBtJ9JPbmJNMLIE5EeJLkcmNSMlPpCP6XOKSJ+3i4N4sxXBalYnxJZs3VfjeOwt8Q
+         qvzlcz3H7d/3ZzGaphyNmUPh8cD2O5g6yKb7XYqNGQrEcqD7/LkoT/EDy2FTJS1MKr8Y
+         N3Sg==
+X-Gm-Message-State: AOAM532Ar5NmYjWWIbhV/r88M1uOyU4WD+0FPcrUHxc4LiNE5XN4pdHW
+	F4Qxy2h9NT6x2opQqXEG/gDgoYZKy9I=
+X-Google-Smtp-Source: ABdhPJzXlsgfwVIOy8SG9/gpmAajxzKa3HnfOmGOMvfEQG7N/N8OBMuTd7tmzBNP6wCJw30Mx3GOrQ==
+X-Received: by 2002:a17:90b:4c49:: with SMTP id np9mr1364195pjb.42.1596086762916;
+        Wed, 29 Jul 2020 22:26:02 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from ?IPv6:2601:646:9200:4e0:5ba:2655:68eb:112e? ([2601:646:9200:4e0:5ba:2655:68eb:112e])
-        by smtp.gmail.com with ESMTPSA id 22sm4142009pfh.157.2020.07.29.22.23.50
+        by smtp.gmail.com with ESMTPSA id x128sm4189192pfb.120.2020.07.29.22.26.02
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 29 Jul 2020 22:23:50 -0700 (PDT)
-Subject: Re: [oe] [PATCH][meta-oe] fmt: update to 7.0.1
+        Wed, 29 Jul 2020 22:26:02 -0700 (PDT)
+Subject: Re: [oe] [PATCH][meta-oe] lsscsi: update to 0.31
 To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200729154126.21163-1-open.source@oleksandr-kravchuk.com>
+References: <20200726103045.3995966-1-open.source@oleksandr-kravchuk.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Message-ID: <1af0f1d4-5bb5-3914-8140-d7e8b2075ee0@gmail.com>
-Date: Wed, 29 Jul 2020 22:23:49 -0700
+Message-ID: <b14897e6-d31a-fb97-1210-3b57eb4f468a@gmail.com>
+Date: Wed, 29 Jul 2020 22:26:01 -0700
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
  Gecko/20100101 Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <20200729154126.21163-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20200726103045.3995966-1-open.source@oleksandr-kravchuk.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 
-its already proposed see
-https://git.openembedded.org/meta-openembedded/commit/?id=b7b0339c7873d7dd473a5b406ccb0888541fc010
 
-so please rebase it on top of master-next and resend the remaining delta
 
-On 7/29/20 8:41 AM, Oleksandr Kravchuk wrote:
+On 7/26/20 3:30 AM, Oleksandr Kravchuk wrote:
 > Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 > ---
->   meta-oe/recipes-support/fmt/{fmt_6.2.0.bb => fmt_7.0.1.bb} | 6 ++++--
->   1 file changed, 4 insertions(+), 2 deletions(-)
->   rename meta-oe/recipes-support/fmt/{fmt_6.2.0.bb => fmt_7.0.1.bb} (69%)
+>   .../recipes-bsp/lsscsi/{lsscsi_0.30.bb => lsscsi_0.31.bb}   | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-oe/recipes-bsp/lsscsi/{lsscsi_0.30.bb => lsscsi_0.31.bb} (63%)
 > 
-> diff --git a/meta-oe/recipes-support/fmt/fmt_6.2.0.bb b/meta-oe/recipes-support/fmt/fmt_7.0.1.bb
-> similarity index 69%
-> rename from meta-oe/recipes-support/fmt/fmt_6.2.0.bb
-> rename to meta-oe/recipes-support/fmt/fmt_7.0.1.bb
-> index 05dc94a99..0467544b4 100644
-> --- a/meta-oe/recipes-support/fmt/fmt_6.2.0.bb
-> +++ b/meta-oe/recipes-support/fmt/fmt_7.0.1.bb
-> @@ -1,11 +1,13 @@
->   SUMMARY = "open-source formatting library for C++"
-> -DESCRIPTION = "{fmt} is an open-source formatting library for C++. It can be used as a safe and fast alternative to (s)printf and iostreams."
-> +DESCRIPTION = "{fmt} is an open-source formatting library for C++. \
-> +               It can be used as a safe and fast alternative to \
-> +               (s)printf and iostreams."
->   HOMEPAGE = "https://fmt.dev"
->   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b"
+> diff --git a/meta-oe/recipes-bsp/lsscsi/lsscsi_0.30.bb b/meta-oe/recipes-bsp/lsscsi/lsscsi_0.31.bb
+> similarity index 63%
+> rename from meta-oe/recipes-bsp/lsscsi/lsscsi_0.30.bb
+> rename to meta-oe/recipes-bsp/lsscsi/lsscsi_0.31.bb
+> index af34cdc483..2c96de163b 100644
+> --- a/meta-oe/recipes-bsp/lsscsi/lsscsi_0.30.bb
+> +++ b/meta-oe/recipes-bsp/lsscsi/lsscsi_0.31.bb
+> @@ -6,9 +6,9 @@ LIC_FILES_CHKSUM="file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 >   
->   SRC_URI += "git://github.com/fmtlib/fmt"
-> -SRCREV = "9bdd1596cef1b57b9556f8bef32dc4a32322ef3e"
-> +SRCREV = "f19b1a521ee8b606dedcadfda69fd10ddf882753"
+>   SRC_URI = "http://sg.danny.cz/scsi/${BP}.tgz"
 >   
->   S = "${WORKDIR}/git"
+> -SRC_URI[md5sum] = "298a700cd50bb4be1382d618f7b038f4"
+> -SRC_URI[sha256sum] = "619a2187405f02c5f57682f3478bffc75326803cd08839e39d434250c5518b15"
+> +SRC_URI[md5sum] = "efb68946f51860e8eedc18d6784afdae"
+> +SRC_URI[sha256sum] = "12bf1973014803c6fd6d547e7594a4c049f0eef3bf5d22190d4be29d7c09f3ca"
 >   
+>   inherit autotools
+>   
+> -S = "${WORKDIR}/lsscsi-030r154"
+> +S = "${WORKDIR}/lsscsi-${PV}"
+
+this is the default value too, so perhaps it should be deleted here
+
 > 
 > 
 > 
