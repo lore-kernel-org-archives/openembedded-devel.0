@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.18230.1596201782812047581
+ by mx.groups.io with SMTP id smtpd.web11.18117.1596201783703119608
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 31 Jul 2020 06:23:03 -0700
+ Fri, 31 Jul 2020 06:23:04 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=47376 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k1V00-000741-Pc; Fri, 31 Jul 2020 16:23:01 +0300
+	id 1k1V01-000741-KK; Fri, 31 Jul 2020 16:23:02 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 06/15] python3-pid: Upgrade 3.0.3 -> 3.0.4
-Date: Fri, 31 Jul 2020 16:22:21 +0300
-Message-Id: <20200731132230.20031-6-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 07/15] python3-pychromecast: Upgrade 7.1.2 -> 7.2.0
+Date: Fri, 31 Jul 2020 16:22:22 +0300
+Message-Id: <20200731132230.20031-7-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200731132230.20031-1-leon.anavi@konsulko.com>
 References: <20200731132230.20031-1-leon.anavi@konsulko.com>
@@ -30,33 +30,37 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.0.4:
+Upgrade to release 7.2.0:
 
-- Use APPDATA and HOME locations on Windows
+- Allow passing an already existing zeroconf object to additional
+  functions
+- Ignore browser updates for *._sub._googlecast._tcp.local.
+- Fix return type of get_listed_chromecasts
+- Remove host and port from Chromecast object
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-pid_3.0.3.bb => python3-pid_3.0.4.bb}     | 4 ++--
+ ...n3-pychromecast_7.1.2.bb => python3-pychromecast_7.2.0.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pid_3.0.3.bb => python3-pid_3.0.4.bb} (71%)
+ rename meta-python/recipes-devtools/python/{python3-pychromecast_7.1.2.bb => python3-pychromecast_7.2.0.bb} (66%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pid_3.0.3.bb b/meta-python/recipes-devtools/python/python3-pid_3.0.4.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python3-pid_3.0.3.bb
-rename to meta-python/recipes-devtools/python/python3-pid_3.0.4.bb
-index 170c99b93..7a307a6dd 100644
---- a/meta-python/recipes-devtools/python/python3-pid_3.0.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pid_3.0.4.bb
-@@ -4,8 +4,8 @@ HOMEPAGE = "https://github.com/trbs/pid/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=83d53cbd3105063f20305bc313464e29"
+diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.1.2.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.2.0.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python3-pychromecast_7.1.2.bb
+rename to meta-python/recipes-devtools/python/python3-pychromecast_7.2.0.bb
+index 98dbf33b2..257778ba9 100644
+--- a/meta-python/recipes-devtools/python/python3-pychromecast_7.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pychromecast_7.2.0.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
  
--SRC_URI[md5sum] = "5c011ebebbdfd529f6e85d2e0396dae8"
--SRC_URI[sha256sum] = "925b61c35b6f2bc6b43075f493e99792f1473575a0beeb85bcf7de1d6a4a3c7d"
-+SRC_URI[md5sum] = "af607e6e2a51129e3fef516b7994c85b"
-+SRC_URI[sha256sum] = "0e33670e83f6a33ebb0822e43a609c3247178d4a375ff50a4689e266d853eb66"
+-SRC_URI[md5sum] = "6ca5102b09009c85424a9ab628005992"
+-SRC_URI[sha256sum] = "adcf478d7fc539e9decde59b2db7b6a4b1d679c4cf78d515d880adb1c4bc1c30"
++SRC_URI[md5sum] = "20ed7ec024fd4739446d42f8d19813b8"
++SRC_URI[sha256sum] = "c522c5ecb554471ca8e5690c05530b1c237c301349061d3839c506984f8d3c2d"
  
- inherit pypi setuptools3
+ PYPI_PACKAGE = "PyChromecast"
  
 -- 
 2.17.1
