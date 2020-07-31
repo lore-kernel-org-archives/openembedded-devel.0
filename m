@@ -1,84 +1,61 @@
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web11.14322.1596183524554475228
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web11.14546.1596184971389887728
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 31 Jul 2020 01:18:44 -0700
+ Fri, 31 Jul 2020 01:42:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: yi.zhao@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 06V8IgED020701
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
-	Fri, 31 Jul 2020 01:18:42 -0700 (PDT)
-Received: from [128.224.162.174] (128.224.162.174) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 31 Jul
- 2020 01:18:41 -0700
-Subject: Re: [oe] [meta-networking][PATCH 2/2] samba: upgrade 4.10.15 -> 4.10.17
-To: Khem Raj <raj.khem@gmail.com>
-CC: openembeded-devel <openembedded-devel@lists.openembedded.org>
-References: <20200729093513.6782-1-yi.zhao@windriver.com>
- <20200729093513.6782-2-yi.zhao@windriver.com>
- <CAMKF1sp3j++PvdP-3CnOkG7h7F3m3KSUQ-7ikeTqvP-JCkH1Kg@mail.gmail.com>
-From: "Yi Zhao" <yi.zhao@windriver.com>
-Message-ID: <a35393f6-5213-15e4-ebee-f1df51d56d7f@windriver.com>
-Date: Fri, 31 Jul 2020 16:18:33 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.75,417,1589212800"; 
+   d="scan'208";a="97210925"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 31 Jul 2020 16:42:47 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 52DC54CE4B09
+	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2020 16:42:41 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Fri, 31 Jul 2020 16:42:43 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-oe] [PATCH] libbytesize: upgrade 2.3 -> 2.4
+Date: Sat, 1 Aug 2020 04:42:39 +0800
+Message-ID: <1596228160-6530-2-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1596228160-6530-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+References: <1596228160-6530-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sp3j++PvdP-3CnOkG7h7F3m3KSUQ-7ikeTqvP-JCkH1Kg@mail.gmail.com>
-X-Originating-IP: [128.224.162.174]
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: 52DC54CE4B09.A4AC1
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
+
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ .../libbytesize/{libbytesize_2.3.bb => libbytesize_2.4.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libbytesize/{libbytesize_2.3.bb => libbytesize_2.4.bb} (93%)
+
+diff --git a/meta-oe/recipes-support/libbytesize/libbytesize_2.3.bb b/meta-oe/recipes-support/libbytesize/libbytesize_2.4.bb
+similarity index 93%
+rename from meta-oe/recipes-support/libbytesize/libbytesize_2.3.bb
+rename to meta-oe/recipes-support/libbytesize/libbytesize_2.4.bb
+index db8270f49f..0aaf188b61 100644
+--- a/meta-oe/recipes-support/libbytesize/libbytesize_2.3.bb
++++ b/meta-oe/recipes-support/libbytesize/libbytesize_2.4.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
+ S = "${WORKDIR}/git"
+ B = "${S}"
+ 
+-SRCREV = "96aba1e99aa40a21df980bac4f2ed3bd1e25dbde"
++SRCREV = "732ee8d28492e4bc9b52c29bcb81a5c19388d002"
+ SRC_URI = "git://github.com/rhinstaller/libbytesize;branch=master"
+ 
+ inherit gettext autotools python3native
+-- 
+2.25.1
 
 
-On 7/31/20 1:57 PM, Khem Raj wrote:
-> this fails to build on musl see
-> https://errors.yoctoproject.org/Errors/Details/426320/ perhaps we need
-> patches from https://bugzilla.samba.org/show_bug.cgi?id=14415
 
-
-Thanks. I will send V2.
-
-
-//Yi
-
-
->
-> On Wed, Jul 29, 2020 at 2:35 AM Yi Zhao <yi.zhao@windriver.com> wrote:
->> This is a security release in order to address the following defects:
->>
->> CVE-2020-10730: NULL pointer de-reference and use-after-free in Samba AD
->>                  DC LDAP Server with ASQ, VLV and paged_results.
->> CVE-2020-10745: Parsing and packing of NBT and DNS packets can consume
->>                  excessive CPU
->> CVE-2020-10760: LDAP Use-after-free in Samba AD DC Global Catalog with
->>                  paged_results and VLV.
->> CVE-2020-14303: Empty UDP packet DoS in Samba AD DC nbtd.
->>
->> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
->> ---
->>   .../samba/{samba_4.10.15.bb => samba_4.10.17.bb}              | 4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
->>   rename meta-networking/recipes-connectivity/samba/{samba_4.10.15.bb => samba_4.10.17.bb} (99%)
->>
->> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.15.bb b/meta-networking/recipes-connectivity/samba/samba_4.10.17.bb
->> similarity index 99%
->> rename from meta-networking/recipes-connectivity/samba/samba_4.10.15.bb
->> rename to meta-networking/recipes-connectivity/samba/samba_4.10.17.bb
->> index 01250cb43..6b1e5a042 100644
->> --- a/meta-networking/recipes-connectivity/samba/samba_4.10.15.bb
->> +++ b/meta-networking/recipes-connectivity/samba/samba_4.10.17.bb
->> @@ -36,8 +36,8 @@ SRC_URI_append_libc-musl = " \
->>              file://0001-samba-fix-musl-lib-without-innetgr.patch \
->>             "
->>
->> -SRC_URI[md5sum] = "67e9f6b8c5140475641bf5121c93b3d4"
->> -SRC_URI[sha256sum] = "0b8b62558b62fbb121015f28f40fae0f07522710b6bef77c508b51bb6914ced9"
->> +SRC_URI[md5sum] = "f69cac9ba5035ee60257520a209a0a83"
->> +SRC_URI[sha256sum] = "03dc9758e7bfa2faf7cdeb45b4d40997e2ee16a41e71996aa666bc069e70ba3e"
->>
->>   UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.10(\.\d+)+).tar.gz"
->>
->> --
->> 2.17.1
->>
->> 
