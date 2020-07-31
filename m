@@ -1,65 +1,65 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web11.20698.1596209170263787005
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web11.871.1596213603823659981
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 31 Jul 2020 08:26:10 -0700
+ Fri, 31 Jul 2020 09:40:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: daniel.dragomir@windriver.com)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 06VFPmQ1031187
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: joe.slater@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 06VGe2lV018411
 	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2020 08:25:58 -0700
-Received: from otp-ps-s1.wrs.com (128.224.124.60) by ALA-HCB.corp.ad.wrs.com
- (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Fri, 31 Jul 2020
- 08:25:25 -0700
-From: "Daniel Dragomir" <Daniel.Dragomir@windriver.com>
+	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2020 09:40:02 -0700 (PDT)
+Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.40) with Microsoft SMTP Server id 14.3.487.0; Fri, 31 Jul 2020
+ 09:40:01 -0700
+From: "Joe Slater" <joe.slater@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: <daniel.dragomir@windriver.com>
-Subject: [meta-oe][PATCH] rasdaemon: update to 0.6.6 and fix SRC_URI broken link
-Date: Fri, 31 Jul 2020 17:26:37 +0000
-Message-ID: <20200731172637.38212-1-Daniel.Dragomir@windriver.com>
-X-Mailer: git-send-email 2.17.1
+CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
+Subject: [meta-python][PATCH 1/1] python3-cryptography: fix two tests
+Date: Fri, 31 Jul 2020 09:40:01 -0700
+Message-ID: <20200731164001.16113-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Get sources from another repository since the one from infradead.org
-is broken:
+Tests depending on the hypothesis module should be skipped
+if the module is not available.
 
-fatal: remote error: access denied or repository not exported:
-       /users/mchehab/rasdaemon.git
-
-Also, fix indentation.
-
-Signed-off-by: Daniel Dragomir <Daniel.Dragomir@windriver.com>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- .../{rasdaemon_0.6.5.bb => rasdaemon_0.6.6.bb}         | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
- rename meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/{rasdaemon_0.6.5.bb => rasdaemon_0.6.6.bb} (89%)
+ .../recipes-devtools/python/python3-cryptography/h-test.patch  | 10 ++++++++++
+ .../recipes-devtools/python/python3-cryptography_2.8.bb        |  1 +
+ 2 files changed, 11 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-cryptography/h-test.patch
 
-diff --git a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.5.bb b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.6.bb
-similarity index 89%
-rename from meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.5.bb
-rename to meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.6.bb
-index 93f624882..93e00e6e0 100644
---- a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.5.bb
-+++ b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.6.bb
-@@ -3,12 +3,12 @@ HOMEPAGE = "http://git.infradead.org/users/mchehab/rasdaemon.git"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d3070efe0afa3dc41608bd82c00bb0dc"
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography/h-test.patch b/meta-python/recipes-devtools/python/python3-cryptography/h-test.patch
+new file mode 100644
+index 0000000..9f07c73
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-cryptography/h-test.patch
+@@ -0,0 +1,10 @@
++--- a/tests/hypothesis/__init__.py
+++++ b/tests/hypothesis/__init__.py
++@@ -3,3 +3,7 @@
++ # for complete details.
++ 
++ from __future__ import absolute_import, division, print_function
+++
+++import pytest
+++hypothesis = pytest.importorskip("hypothesis")
+++
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography_2.8.bb b/meta-python/recipes-devtools/python/python3-cryptography_2.8.bb
+index c75dabb..95e903b 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography_2.8.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography_2.8.bb
+@@ -11,6 +11,7 @@ SRC_URI[sha256sum] = "3cda1f0ed8747339bbdf71b9f38ca74c7b592f24f65cdb3ab3765e4b02
  
--SRC_URI = "git://git.infradead.org/users/mchehab/rasdaemon.git;branch=master \
--        file://0001-Fix-system-header-includes.patch \
--	file://rasdaemon.service \
--	file://init"
-+SRC_URI = "git://github.com/mchehab/rasdaemon.git;branch=master \
-+           file://0001-Fix-system-header-includes.patch \
-+           file://rasdaemon.service \
-+           file://init"
+ SRC_URI += " \
+     file://run-ptest \
++    file://h-test.patch \
+ "
  
--SRCREV = "25533c0c55426eeb2ad25dcbdb2b5e4ba4e83d80"
-+SRCREV = "32b978fcf73215c90ce7383580224e4295930ae7"
- 
- S = "${WORKDIR}/git"
- 
+ inherit pypi setuptools3
 -- 
-2.17.1
+2.7.4
 
