@@ -1,274 +1,112 @@
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
- by mx.groups.io with SMTP id smtpd.web12.18585.1596202763813238805
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.web12.19540.1596205439382887999
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 31 Jul 2020 06:39:24 -0700
+ Fri, 31 Jul 2020 07:23:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=T+D/7bCI;
- spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-ed1-f52.google.com with SMTP id n2so22383789edr.5
-        for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2020 06:39:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=gL7FkvjW;
+ spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: miroshko@gmail.com)
+Received: by mail-wm1-f43.google.com with SMTP id 184so9423425wmb.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2020 07:23:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=ryvredI+JyvkJm3rhofq2ISp1BjZJvvH8nt0lHFBUCo=;
-        b=T+D/7bCINe9e9mIpwh/a+Hd7v+JZ62K4PkkiqvJmt2HQsjHnHsAOy6sV5l70LOaERM
-         oG9QaerksIvh0YcYH7qNGWbbfeW8Hb7EWgffOILsliXUGNYnWKPWRa/3lBMqsfEmJmy5
-         Jd5pbMjQkZiJrp3fyVVk35vVjT+DnG9ghX8f9z0bcS12AxRfBcCpAwB1qxa5SnhBSBVU
-         6A9FM5yjNC6k6cbpqbxMTSKarn7SP4DpTai08g4LY2mDLXRRC+cl1OrnVqDiu0z26G9r
-         OebLb7nUnrG0UG+0XmhnoaK6OQMCDeqIpb+Mu2DBWkD1Px5OXKeYkbOlJ20y/ma45xZd
-         EoYA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=uLr8c9zkXcdgamtFgJgrGM+qVoLvj782nagA2wVTERw=;
+        b=gL7FkvjWT2v5Kxr76Vqu+Byk/wi9h27WNP6vS6mY4gd+KI5tlSXxqg6Qy+LTgqCRme
+         EQ5mzdwOd6hIKBrDUMJIR7wEgYWFGAnCC8nsjC65mt0QXUWeOwPxCQDyEod6QnbE4T0h
+         FQWf2zrOjYDw++m8rcmR0+j0qG75PolLFDz943vCyqM9Z08WzMDtOlfBPvxDtjgyxbfb
+         ccRLBidIJv62704HSVVDwBIBZHWSXXqqc454NKIRmnCuFCbJIzsh+JlXCknKexZanfK5
+         hNJLttlAyyaCuwZP9qWos1FBn/kcHGJVNjf9AsOHhgz346t9nNsFtlBedr9uKWasbuU6
+         /PUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=ryvredI+JyvkJm3rhofq2ISp1BjZJvvH8nt0lHFBUCo=;
-        b=uhLjWdRBZ5REiKE0EABT6FJN4HVbOQQJrIyIpptjqZMZCCqYLa5bUDuwMqsj6rJHof
-         22p8EoU9H/a4WnA70cbVtKhYkNoVuW2mwSrzt7hoH79C+XSR/7EIYk8ITXk6eVvquZ01
-         4PkZGgFaFrZUj/CxLStjZeCB13xenMqPNcTR3otrfjITSJFJAJzbGDv7YHgcI/quf+7x
-         RI+I4ykGHuwiBzq0R3bcp2mHwakW3m5f6onOk8ejJGlxApRdHI7sB7WcELWNivqrPpVH
-         8YqyYgLUjrEDlSQGzoxVZnXuH4Ynjrasrtfvl5fYaH8S1QHpAxGJVaM5rac3ivcXcYM1
-         V2vA==
-X-Gm-Message-State: AOAM532Sy3SGvZAG6TKiyTNMBd3RT9l3AJ2zw68kuQJjQ6vSbqbWXPYO
-	00vqZziFJvLlY3iE3ZUbRZaNubMy
-X-Google-Smtp-Source: ABdhPJx34ZoBtD5t/K+0X+oetP4GjzZTUHQ+6FsTdADjpO5U99QU4rD6vfqpNN6Hb8UMX2cECqrUPg==
-X-Received: by 2002:aa7:cb15:: with SMTP id s21mr4047353edt.175.1596202761688;
-        Fri, 31 Jul 2020 06:39:21 -0700 (PDT)
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from Unimatrix05-Bionic.lan ([2001:b07:5d32:c012:3f:a5ba:1524:a0bb])
-        by smtp.gmail.com with ESMTPSA id gh24sm8979424ejb.45.2020.07.31.06.39.20
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=uLr8c9zkXcdgamtFgJgrGM+qVoLvj782nagA2wVTERw=;
+        b=djGsHkbV5SK44QAVIHjUR4fKxxUUjkdYY8pwPvpR+hiK6m3BTv7KDQBCSspuB7nIXt
+         60zeS+WWhrAPCSwKexWbsAdLWgWFQ++HBgW59mfZmE3yUqaxFYpDIdSi52c3vIB7KYUm
+         7JRyelR9y49lHxKelpCFv2cbgpj8ug+xbbMZmOSkAkJeP4boQgc4bk2+IC9DuIL9N01p
+         IST3igGl/TidLooLHymdUXKJRQEYfZF0/Efsnf/MsDa6+UJ1IBSDqGHip+qk/V7klpoF
+         Av/cDldr5D5EMgn833pmbmNdMvoQsyzPpxekXKgFadGQReawJBqsEGKlMZTBanPYY1me
+         DRSQ==
+X-Gm-Message-State: AOAM532GTBt+CDXCmWCGKDiCKBoY0AD5D9x2soji4lRAi+h+Vua4ZKbw
+	TD+3V6sQ/uUrfzjuVOQJqXEB8Kv1bnQ=
+X-Google-Smtp-Source: ABdhPJw1PHpXo24cWvsrxB5l4hxnxQsRE3OnJfOjztjiY4Blj7Ur094fwQXkflIJzBlxauDzFjXkSg==
+X-Received: by 2002:a7b:ca57:: with SMTP id m23mr3992548wml.35.1596205437536;
+        Fri, 31 Jul 2020 07:23:57 -0700 (PDT)
+Return-Path: <miroshko@gmail.com>
+Received: from localhost.bmw-carit.intra ([2a02:8070:d1ac:b300::abe1])
+        by smtp.gmail.com with ESMTPSA id i9sm12776296wmb.11.2020.07.31.07.23.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 31 Jul 2020 06:39:20 -0700 (PDT)
-From: "Gianfranco" <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+        Fri, 31 Jul 2020 07:23:57 -0700 (PDT)
+From: miroshko@gmail.com
+X-Google-Original-From: Oleksii Miroshko <Oleksii.Miroshko@bmw.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Subject: [meta-oe][PATCH] dlt-daemon: update to 2.18.5 - drop patch 204: upstream - add gcc-10 build fix proposed upstream 238.patch
-Date: Fri, 31 Jul 2020 15:39:18 +0200
-Message-Id: <20200731133918.361-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.17.1
+Cc: Oleksii Miroshko <miroshko@gmail.com>
+Subject: [meta-selinux][PATCH] setools: Add native support
+Date: Fri, 31 Jul 2020 16:23:54 +0200
+Message-Id: <20200731142354.1428760-1-Oleksii.Miroshko@bmw.de>
+X-Mailer: git-send-email 2.25.4
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
+From: Oleksii Miroshko <miroshko@gmail.com>
+
+Enable using setools for analyzing the built SELinux policy
+during the build.
+
+Signed-off-by: Oleksii Miroshko <miroshko@gmail.com>
 ---
- .../dlt-daemon/dlt-daemon/204.patch           | 148 ------------------
- .../dlt-daemon/dlt-daemon/238.patch           |  35 +++++
- ...-daemon_2.18.4.bb => dlt-daemon_2.18.5.bb} |   4 +-
- 3 files changed, 37 insertions(+), 150 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/204.patch
- create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/238.patch
- rename meta-oe/recipes-extended/dlt-daemon/{dlt-daemon_2.18.4.bb => dlt-daemon_2.18.5.bb} (97%)
+ recipes-devtools/python/python3-decorator_%.bbappend | 2 ++
+ recipes-devtools/python/python3-networkx_%.bbappend  | 2 ++
+ recipes-security/setools/setools_4.3.0.bb            | 6 ++++++
+ 3 files changed, 10 insertions(+)
+ create mode 100644 recipes-devtools/python/python3-decorator_%.bbappend
+ create mode 100644 recipes-devtools/python/python3-networkx_%.bbappend
 
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/204.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/204.patch
-deleted file mode 100644
-index f0fc0bcb2..000000000
---- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/204.patch
-+++ /dev/null
-@@ -1,148 +0,0 @@
--Upstream-Status: Submitted [https://github.com/GENIVI/dlt-daemon/pull/204]
--From 92830aff6e91041f574753d78da758c62981d9a4 Mon Sep 17 00:00:00 2001
--From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
--Date: Sat, 25 Jan 2020 09:08:07 +0100
--Subject: [PATCH 1/3] dlt_user.h: fix build when musl is the libc
-- implementation, by adding a missing include for pthread_t reference:
--
--see https://errors.yoctoproject.org/Errors/Details/308000/ for details
--
--Thanks Khem Raj <raj.khem@gmail.com> for the report
--
--Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
--Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
-----
-- include/dlt/dlt_user.h | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/include/dlt/dlt_user.h b/include/dlt/dlt_user.h
--index 69cb854..766d349 100644
----- a/include/dlt/dlt_user.h
--+++ b/include/dlt/dlt_user.h
--@@ -74,6 +74,7 @@
--  \{
--  */
-- #   include <mqueue.h>
--+#   include <pthread.h>
-- 
-- #   if !defined (__WIN32__)
-- #      include <semaphore.h>
--
--From 5f67aba02c12b7446e63ccc86285c13bc5c7a432 Mon Sep 17 00:00:00 2001
--From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
--Date: Sat, 25 Jan 2020 09:16:14 +0100
--Subject: [PATCH 2/3] dlt-test-init-free: fix build failure with strict
-- compiler flags, due to uint being undefined. This is actually an "int" type,
-- looking at the test implementation
--
--Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
--Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
-----
-- src/tests/dlt-test-init-free.c | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/src/tests/dlt-test-init-free.c b/src/tests/dlt-test-init-free.c
--index 96b5245..35b8803 100644
----- a/src/tests/dlt-test-init-free.c
--+++ b/src/tests/dlt-test-init-free.c
--@@ -32,7 +32,7 @@
-- 
-- void exec(const char *cmd, char *buffer, size_t length);
-- void printMemoryUsage();
---char *occupyMemory(uint size);
--+char *occupyMemory(int size);
-- void do_example_test();
-- void do_dlt_test();
-- 
--@@ -131,7 +131,7 @@ void printMemoryUsage()
--     printf("%s", result);
-- }
-- 
---char *occupyMemory(uint size)
--+char *occupyMemory(int size)
-- {
--     char *buf = (char *)malloc(size * sizeof(char));
-- 
--
--From c790d61fad382e5d3e648ee99904087eb9bc4a77 Mon Sep 17 00:00:00 2001
--From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
--Date: Sat, 25 Jan 2020 09:20:48 +0100
--Subject: [PATCH 3/3] sys/poll.h: deprecate old sys/poll.h include header, now
-- glibc/musl wants poll.h being included directly. This fixes a build failure
-- on musl systems with strict c hardening flags
--
--Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
--Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
-----
-- src/console/logstorage/dlt-logstorage-ctrl.c | 2 +-
-- src/daemon/dlt_daemon_event_handler.c        | 2 +-
-- src/daemon/dlt_daemon_event_handler.h        | 2 +-
-- src/daemon/dlt_daemon_event_handler_types.h  | 2 +-
-- src/lib/dlt_user.c                           | 2 +-
-- 5 files changed, 5 insertions(+), 5 deletions(-)
--
--diff --git a/src/console/logstorage/dlt-logstorage-ctrl.c b/src/console/logstorage/dlt-logstorage-ctrl.c
--index 525c137..6614f44 100644
----- a/src/console/logstorage/dlt-logstorage-ctrl.c
--+++ b/src/console/logstorage/dlt-logstorage-ctrl.c
--@@ -61,7 +61,7 @@
-- #include <string.h>
-- #include <getopt.h>
-- 
---#include <sys/poll.h>
--+#include <poll.h>
-- 
-- #if defined(__linux__)
-- #   include "sd-daemon.h"
--diff --git a/src/daemon/dlt_daemon_event_handler.c b/src/daemon/dlt_daemon_event_handler.c
--index 1611f7b..0d463da 100644
----- a/src/daemon/dlt_daemon_event_handler.c
--+++ b/src/daemon/dlt_daemon_event_handler.c
--@@ -30,7 +30,7 @@
-- #include <string.h>
-- #include <errno.h>
-- 
---#include <sys/poll.h>
--+#include <poll.h>
-- #include <syslog.h>
-- 
-- #include "dlt_common.h"
--diff --git a/src/daemon/dlt_daemon_event_handler.h b/src/daemon/dlt_daemon_event_handler.h
--index eb96101..bd550d3 100644
----- a/src/daemon/dlt_daemon_event_handler.h
--+++ b/src/daemon/dlt_daemon_event_handler.h
--@@ -25,7 +25,7 @@
--  * \file dlt_daemon_event_handler.h
--  */
-- 
---#include <sys/poll.h>
--+#include <poll.h>
-- 
-- #include "dlt_daemon_connection_types.h"
-- #include "dlt_daemon_event_handler_types.h"
--diff --git a/src/daemon/dlt_daemon_event_handler_types.h b/src/daemon/dlt_daemon_event_handler_types.h
--index 370e503..0b16d08 100644
----- a/src/daemon/dlt_daemon_event_handler_types.h
--+++ b/src/daemon/dlt_daemon_event_handler_types.h
--@@ -25,7 +25,7 @@
--  * \file dlt_daemon_event_handler_types.h
--  */
-- 
---#include <sys/poll.h>
--+#include <poll.h>
-- 
-- #include "dlt_daemon_connection_types.h"
-- 
--#diff --git a/src/lib/dlt_user.c b/src/lib/dlt_user.c
--#index ffa9b09..511f991 100644
--#--- a/src/lib/dlt_user.c
--#+++ b/src/lib/dlt_user.c
--#@@ -43,7 +43,7 @@
--# #include <errno.h>
--# 
--# #include <sys/uio.h> /* writev() */
--#-#include <sys/poll.h>
--#+#include <poll.h>
--# 
--# #include <limits.h>
--# #ifdef linux
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/238.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/238.patch
+diff --git a/recipes-devtools/python/python3-decorator_%.bbappend b/recipes-devtools/python/python3-decorator_%.bbappend
 new file mode 100644
-index 000000000..14c44e6ed
+index 0000000..3bc71e0
 --- /dev/null
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/238.patch
-@@ -0,0 +1,35 @@
-+From 214f8c71552fc096077f0b916dad75b31eefea3d Mon Sep 17 00:00:00 2001
-+From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-+Date: Fri, 31 Jul 2020 15:26:35 +0200
-+Subject: [PATCH] dlt_offline: fix build failures with gcc-10
++++ b/recipes-devtools/python/python3-decorator_%.bbappend
+@@ -0,0 +1,2 @@
++BBCLASSEXTEND = "native nativesdk"
 +
-+see bug report: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=957140
+diff --git a/recipes-devtools/python/python3-networkx_%.bbappend b/recipes-devtools/python/python3-networkx_%.bbappend
+new file mode 100644
+index 0000000..3bc71e0
+--- /dev/null
++++ b/recipes-devtools/python/python3-networkx_%.bbappend
+@@ -0,0 +1,2 @@
++BBCLASSEXTEND = "native nativesdk"
 +
-+/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_client.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: multiple definition of `g_logstorage_cache_max'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: first defined here
-+/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_common.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:118: multiple definition of `g_logstorage_cache_size'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:118: first defined here
-+/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_common.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: multiple definition of `g_logstorage_cache_max'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: first defined here
-+/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_connection.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:118: multiple definition of `g_logstorage_cache_size'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:118: first defined here
-+/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_connection.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: multiple definition of `g_logstorage_cache_max'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: first defined here
-+/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_event_handler.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:118: multiple definition of `g_logstorage_cache_size'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:118: first defined here
-+/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_event_handler.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: multiple definition of `g_logstorage_cache_max'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: first defined here
-+/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_offline_logstorage.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: multiple definition of `g_logstorage_cache_max'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: first defined here
-+---
-+ src/offlinelogstorage/dlt_offline_logstorage.h | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/offlinelogstorage/dlt_offline_logstorage.h b/src/offlinelogstorage/dlt_offline_logstorage.h
-+index b58da70..8ad84b8 100644
-+--- a/src/offlinelogstorage/dlt_offline_logstorage.h
-++++ b/src/offlinelogstorage/dlt_offline_logstorage.h
-+@@ -114,9 +114,9 @@
-+ #define DLT_OFFLINE_LOGSTORAGE_IS_STRATEGY_SET(S, s) ((S)&(s))
-+ 
-+ /* logstorage max cache */
-+-unsigned int g_logstorage_cache_max;
-++static unsigned int g_logstorage_cache_max;
-+ /* current logstorage cache size */
-+-unsigned int g_logstorage_cache_size;
-++static unsigned int g_logstorage_cache_size;
-+ 
-+ typedef struct
-+ {
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
-similarity index 97%
-rename from meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb
-rename to meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
-index 35c638bc7..3f5089672 100644
---- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
-@@ -17,9 +17,9 @@ DEPENDS = "zlib gzip-native"
- SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=https \
-     file://0002-Don-t-execute-processes-as-a-specific-user.patch \
-     file://0004-Modify-systemd-config-directory.patch \
--    file://204.patch \
-+    file://238.patch \
- "
--SRCREV = "14ea971be7e808b9c5099c7f404ed3cf341873c4"
-+SRCREV = "f1ac087c766827b1d0ed9c3a814b3cc052e948f2"
+diff --git a/recipes-security/setools/setools_4.3.0.bb b/recipes-security/setools/setools_4.3.0.bb
+index ec73f7c..8fdeeb0 100644
+--- a/recipes-security/setools/setools_4.3.0.bb
++++ b/recipes-security/setools/setools_4.3.0.bb
+@@ -8,6 +8,8 @@ SETools."
+ SECTION = "base"
+ LICENSE = "GPLv2 & LGPLv2.1"
  
++BBCLASSEXTEND = "native nativesdk "
++
  S = "${WORKDIR}/git"
+ SRC_URI = "git://github.com/SELinuxProject/${BPN}.git;branch=4.3 \
+            file://setools4-fixes-for-cross-compiling.patch \
+@@ -21,9 +23,13 @@ LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=83a5eb6974c11f30785e90d0eeccf40c \
  
+ DEPENDS += "bison-native flex-native swig-native python3 python3-cython-native libsepol libselinux"
+ 
++DEPENDS_class-native += "libselinux python3-setuptools python3-cython python3-networkx"
++
+ RDEPENDS_${PN} += "python3-networkx python3-decorator python3-setuptools \
+                    python3-logging python3-json libselinux-python"
+ 
++RDEPENDS_${PN}_class-native = ""
++
+ RPROVIDES_${PN} += "${PN}-console"
+ 
+ inherit setuptools3
 -- 
-2.17.1
+2.25.4
 
