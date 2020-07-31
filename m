@@ -1,227 +1,231 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [])
- by mx.groups.io with SMTP id smtpd.web10.12218.1596172887901448762
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web11.12350.1596172889535841610
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Jul 2020 22:21:29 -0700
+ Thu, 30 Jul 2020 22:21:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: <nil>, mailfrom: zangrc.fnst@cn.fujitsu.com)
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.75,417,1589212800"; 
-   d="scan'208";a="97199290"
+   d="scan'208";a="97199293"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
   by heian.cn.fujitsu.com with ESMTP; 31 Jul 2020 13:21:20 +0800
 Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 7C44C4CE1505
-	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2020 13:21:16 +0800 (CST)
+	by cn.fujitsu.com (Postfix) with ESMTP id 261094CE5059
+	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jul 2020 13:21:17 +0800 (CST)
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 31 Jul 2020 13:21:17 +0800
+ (TLS) id 15.0.1497.2; Fri, 31 Jul 2020 13:21:18 +0800
 From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] linuxptp: upgrade 2.0 -> 3.0
-Date: Sat, 1 Aug 2020 01:21:13 +0800
-Message-ID: <1596216075-3418-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] nlohmann-json: upgrade 3.7.3 -> 3.9.0
+Date: Sat, 1 Aug 2020 01:21:14 +0800
+Message-ID: <1596216075-3418-2-git-send-email-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1596216075-3418-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+References: <1596216075-3418-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
 X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 7C44C4CE1505.A3C97
+X-yoursite-MailScanner-ID: 261094CE5059.A0F7D
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
 Content-Type: text/plain
 
-time_t_maybe_long_long.patch
-Removed since this is included in 3.0.
+-License-Update: Copyright year updated to 2020.
 
-Refresh the following patch:
-build-Allow-CC-and-prefix-to-be-overriden.patch
+-0001-Templatize-basic_json-ctor-from-json_ref.patch
+-0001-typo-fix.patch
+Removed since these are included in 3.9.0
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- ...-Allow-CC-and-prefix-to-be-overriden.patch |   4 +-
- .../linuxptp/time_t_maybe_long_long.patch     | 135 ------------------
- .../{linuxptp_2.0.bb => linuxptp_3.0.bb}      |   5 +-
- 3 files changed, 4 insertions(+), 140 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/time_t_maybe_long_long.patch
- rename meta-oe/recipes-connectivity/linuxptp/{linuxptp_2.0.bb => linuxptp_3.0.bb} (80%)
+ ...latize-basic_json-ctor-from-json_ref.patch | 99 -------------------
+ .../nlohmann-json/0001-typo-fix.patch         | 43 --------
+ ...n-json_3.7.3.bb => nlohmann-json_3.9.0.bb} |  6 +-
+ 3 files changed, 2 insertions(+), 146 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/nlohmann-json/nlohmann-json/0001-Templatize-basic_json-ctor-from-json_ref.patch
+ delete mode 100644 meta-oe/recipes-devtools/nlohmann-json/nlohmann-json/0001-typo-fix.patch
+ rename meta-oe/recipes-devtools/nlohmann-json/{nlohmann-json_3.7.3.bb => nlohmann-json_3.9.0.bb} (71%)
 
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/build-Allow-CC-and-prefix-to-be-overriden.patch b/meta-oe/recipes-connectivity/linuxptp/linuxptp/build-Allow-CC-and-prefix-to-be-overriden.patch
-index b1d96ae5a7..55ce4c9a90 100644
---- a/meta-oe/recipes-connectivity/linuxptp/linuxptp/build-Allow-CC-and-prefix-to-be-overriden.patch
-+++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp/build-Allow-CC-and-prefix-to-be-overriden.patch
-@@ -22,8 +22,8 @@ index 22e7d0d..809cc8f 100644
- +CC	?= $(CROSS_COMPILE)gcc
-  VER     = -DVER=$(version)
-  CFLAGS	= -Wall $(VER) $(incdefs) $(DEBUG) $(EXTRA_CFLAGS)
-- LDLIBS	= -lm -lrt $(EXTRA_LDFLAGS)
--@@ -35,7 +35,7 @@ incdefs := $(shell $(srcdir)/incdefs.sh)
-+ LDLIBS	= -lm -lrt -pthread $(EXTRA_LDFLAGS)
-+@@ -43,7 +43,7 @@ incdefs := $(shell $(srcdir)/incdefs.sh)
-  version := $(shell $(srcdir)/version.sh $(srcdir))
-  VPATH	= $(srcdir)
-  
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/time_t_maybe_long_long.patch b/meta-oe/recipes-connectivity/linuxptp/linuxptp/time_t_maybe_long_long.patch
+diff --git a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json/0001-Templatize-basic_json-ctor-from-json_ref.patch b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json/0001-Templatize-basic_json-ctor-from-json_ref.patch
 deleted file mode 100644
-index af99d2b7f9..0000000000
---- a/meta-oe/recipes-connectivity/linuxptp/linuxptp/time_t_maybe_long_long.patch
+index aea48b60a5..0000000000
+--- a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json/0001-Templatize-basic_json-ctor-from-json_ref.patch
 +++ /dev/null
-@@ -1,135 +0,0 @@
--Fix printf if time_t is long long
+@@ -1,99 +0,0 @@
+-From ec955f08b47ab7cb81f6e4a4c3e7b331ddf50f71 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Art=C3=B6m=20Bakri=20Al-Sarmini?= <3sz3tt+git@gmail.com>
+-Date: Sun, 12 Apr 2020 22:32:39 +0300
+-Subject: [PATCH] Templatize basic_json ctor from json_ref
 -
--On some platforms, time_t has recently switched from "long" to "long
--long" [1]. For these platforms it is necessary to use "%lld" as printf
--format specifier because the ABI differs between "long" and "long long".
+-Upstream-Status: Backport [https://github.com/nlohmann/json/commit/ec955f08b47ab7cb81f6e4a4c3e7b331ddf50f71]
+-Signed-off-by: Andrew Geissler <geissonator@gmail.com>
 -
--I found no way for creating something similar to PRId64 for time_t. No
--idea how to determine whether it's "long" or "long long". So I cast
--everything to "long long" instead.
--
--[1] https://git.musl-libc.org/cgit/musl/commit/?id=38143339646a4ccce8afe298c34467767c899f51
--
--Upstream-Status: Accepted [next version is after 2.0]
--Upstream-Patch: https://github.com/richardcochran/linuxptp/commit/7de73fefc378cc42b9ed1115b3afa409d0250a48
--
--Signed-off-by: Christian Eggers <ceggers@arri.de>
 ----
--diff -Naur linuxptp-2.0.org/phc_ctl.c linuxptp-2.0/phc_ctl.c
----- linuxptp-2.0.org/phc_ctl.c	2018-08-12 23:08:43.000000000 +0200
--+++ linuxptp-2.0/phc_ctl.c	2020-05-29 21:34:26.166519963 +0200
--@@ -230,8 +230,8 @@
-- 			strerror(errno));
-- 		return -1;
-- 	} else {
---		pr_notice("set clock time to %ld.%09ld or %s",
---			ts.tv_sec, ts.tv_nsec, ctime(&ts.tv_sec));
--+		pr_notice("set clock time to %lld.%09ld or %s",
--+			(long long)ts.tv_sec, ts.tv_nsec, ctime(&ts.tv_sec));
-- 	}
-- 
-- 	return args_to_eat;
--@@ -248,8 +248,8 @@
-- 
-- 		return -1;
-- 	} else {
---		pr_notice("clock time is %ld.%09lu or %s",
---			ts.tv_sec, ts.tv_nsec, ctime(&ts.tv_sec));
--+		pr_notice("clock time is %lld.%09lu or %s",
--+			(long long)ts.tv_sec, ts.tv_nsec, ctime(&ts.tv_sec));
-- 	}
-- 
-- 	/* get operation does not require any arguments */
--diff -Naur linuxptp-2.0.org/print.c linuxptp-2.0/print.c
----- linuxptp-2.0.org/print.c	2018-08-12 23:08:43.000000000 +0200
--+++ linuxptp-2.0/print.c	2020-05-29 21:34:26.166519963 +0200
--@@ -73,16 +73,16 @@
-- 
-- 	if (verbose) {
-- 		f = level >= LOG_NOTICE ? stdout : stderr;
---		fprintf(f, "%s[%ld.%03ld]: %s%s%s\n",
--+		fprintf(f, "%s[%lld.%03ld]: %s%s%s\n",
-- 			progname ? progname : "",
---			ts.tv_sec, ts.tv_nsec / 1000000,
--+			(long long)ts.tv_sec, ts.tv_nsec / 1000000,
-- 			message_tag ? message_tag : "", message_tag ? " " : "",
-- 			buf);
-- 		fflush(f);
-- 	}
-- 	if (use_syslog) {
---		syslog(level, "[%ld.%03ld] %s%s%s",
---		       ts.tv_sec, ts.tv_nsec / 1000000,
--+		syslog(level, "[%lld.%03ld] %s%s%s",
--+		       (long long)ts.tv_sec, ts.tv_nsec / 1000000,
-- 		       message_tag ? message_tag : "", message_tag ? " " : "",
-- 		       buf);
-- 	}
--diff -Naur linuxptp-2.0.org/unicast_service.c linuxptp-2.0/unicast_service.c
----- linuxptp-2.0.org/unicast_service.c	2018-08-12 23:08:43.000000000 +0200
--+++ linuxptp-2.0/unicast_service.c	2020-05-29 21:36:23.170497415 +0200
--@@ -209,9 +209,9 @@
-- 	tmo = now.tv_sec + req->durationField;
-- 	if (tmo > client->grant_tmo) {
-- 		client->grant_tmo = tmo;
---		pr_debug("%s grant of 0x%x extended to %ld",
--+		pr_debug("%s grant of 0x%x extended to %lld",
-- 			 pid2str(&client->portIdentity),
---			 client->message_types, tmo);
--+			 client->message_types, (long long)tmo);
-- 	}
-- }
-- 
--@@ -226,8 +226,8 @@
-- 	interval = pqueue_peek(p->unicast_service->queue);
-- 	if (interval) {
-- 		tmo.it_value = interval->tmo;
---		pr_debug("arming timer tmo={%ld,%ld}",
---			 interval->tmo.tv_sec, interval->tmo.tv_nsec);
--+		pr_debug("arming timer tmo={%lld,%ld}",
--+			 (long long)interval->tmo.tv_sec, interval->tmo.tv_nsec);
-- 	} else {
-- 		pr_debug("stopping unicast service timer");
-- 	}
--@@ -499,8 +499,8 @@
-- 
-- 	while ((interval = pqueue_peek(p->unicast_service->queue)) != NULL) {
-- 
---		pr_debug("peek i={2^%d} tmo={%ld,%ld}", interval->log_period,
---			 interval->tmo.tv_sec, interval->tmo.tv_nsec);
--+		pr_debug("peek i={2^%d} tmo={%lld,%ld}", interval->log_period,
--+			 (long long)interval->tmo.tv_sec, interval->tmo.tv_nsec);
-- 
-- 		if (timespec_compare(&now, &interval->tmo) >= 0) {
-- 			break;
--@@ -519,8 +519,8 @@
-- 		}
-- 
-- 		interval_increment(interval);
---		pr_debug("next i={2^%d} tmo={%ld,%ld}", interval->log_period,
---			 interval->tmo.tv_sec, interval->tmo.tv_nsec);
--+		pr_debug("next i={2^%d} tmo={%lld,%ld}", interval->log_period,
--+			 (long long)interval->tmo.tv_sec, interval->tmo.tv_nsec);
-- 		pqueue_insert(p->unicast_service->queue, interval);
-- 	}
-- 
--diff -Naur linuxptp-2.0.org/unicast_client.c linuxptp-2.0/unicast_client.c
----- linuxptp-2.0.org/unicast_client.c	2018-08-12 23:08:43.000000000 +0200
--+++ linuxptp-2.0/unicast_client.c	2020-06-02 11:13:06.922997844 +0200
--@@ -216,7 +216,7 @@
-- 				       long duration)
-- {
-- 	struct timespec now;
---	long tmo;
--+	time_t tmo;
-- 
-- 	if (clock_gettime(CLOCK_MONOTONIC, &now)) {
-- 		pr_err("clock_gettime failed: %m");
--@@ -226,7 +226,7 @@
-- 	tmo = now.tv_sec + duration;
-- 	if (!master->renewal_tmo || tmo < master->renewal_tmo) {
-- 		master->renewal_tmo = tmo;
---		pr_debug("port %d: renewal timeout at %ld", portnum(p), tmo);
--+		pr_debug("port %d: renewal timeout at %lld", portnum(p), (long long)tmo);
-- 	}
-- }
-- 
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_3.0.bb
-similarity index 80%
-rename from meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
-rename to meta-oe/recipes-connectivity/linuxptp/linuxptp_3.0.bb
-index 930c6673dc..69dee1a2f1 100644
---- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
-+++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_3.0.bb
-@@ -5,11 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz \
-            file://build-Allow-CC-and-prefix-to-be-overriden.patch \
-            file://no-incdefs-using-host-headers.patch \
--           file://time_t_maybe_long_long.patch \
+- include/nlohmann/detail/meta/type_traits.hpp | 13 ++++++++++++
+- include/nlohmann/json.hpp                    |  8 ++++----
+- single_include/nlohmann/json.hpp             | 21 ++++++++++++++++----
+- 3 files changed, 34 insertions(+), 8 deletions(-)
+-
+-diff --git a/include/nlohmann/detail/meta/type_traits.hpp b/include/nlohmann/detail/meta/type_traits.hpp
+-index 280f6953..dd0b3084 100644
+---- a/include/nlohmann/detail/meta/type_traits.hpp
+-+++ b/include/nlohmann/detail/meta/type_traits.hpp
+-@@ -41,6 +41,19 @@ template<typename> struct is_basic_json : std::false_type {};
+- NLOHMANN_BASIC_JSON_TPL_DECLARATION
+- struct is_basic_json<NLOHMANN_BASIC_JSON_TPL> : std::true_type {};
+-
+-+//////////////////////
+-+// jspn_ref helpers //
+-+//////////////////////
+-+
+-+template <typename>
+-+class json_ref;
+-+
+-+template<typename>
+-+struct is_json_ref : std::false_type {};
+-+
+-+template <typename T>
+-+struct is_json_ref<json_ref<T>> : std::true_type {};
+-+
+- //////////////////////////
+- // aliases for detected //
+- //////////////////////////
+-diff --git a/include/nlohmann/json.hpp b/include/nlohmann/json.hpp
+-index 336d69fe..0598efc8 100644
+---- a/include/nlohmann/json.hpp
+-+++ b/include/nlohmann/json.hpp
+-@@ -1773,10 +1773,10 @@ class basic_json
+-     // other constructors and destructor //
+-     ///////////////////////////////////////
+-
+--    /// @private
+--    basic_json(const detail::json_ref<basic_json>& ref)
+--        : basic_json(ref.moved_or_copied())
+--    {}
+-+    template <typename JsonRef,
+-+              detail::enable_if_t<detail::conjunction<detail::is_json_ref<JsonRef>,
+-+                                  std::is_same<typename JsonRef::value_type, basic_json>>::value, int> = 0 >
+-+    basic_json(const JsonRef& ref) : basic_json(ref.moved_or_copied()) {}
+-
+-     /*!
+-     @brief copy constructor
+-diff --git a/single_include/nlohmann/json.hpp b/single_include/nlohmann/json.hpp
+-index 09464f3b..8927180e 100644
+---- a/single_include/nlohmann/json.hpp
+-+++ b/single_include/nlohmann/json.hpp
+-@@ -2794,6 +2794,19 @@ template<typename> struct is_basic_json : std::false_type {};
+- NLOHMANN_BASIC_JSON_TPL_DECLARATION
+- struct is_basic_json<NLOHMANN_BASIC_JSON_TPL> : std::true_type {};
+-
+-+//////////////////////
+-+// jspn_ref helpers //
+-+//////////////////////
+-+
+-+template <typename>
+-+class json_ref;
+-+
+-+template<typename>
+-+struct is_json_ref : std::false_type {};
+-+
+-+template <typename T>
+-+struct is_json_ref<json_ref<T>> : std::true_type {};
+-+
+- //////////////////////////
+- // aliases for detected //
+- //////////////////////////
+-@@ -16632,10 +16645,10 @@ class basic_json
+-     // other constructors and destructor //
+-     ///////////////////////////////////////
+-
+--    /// @private
+--    basic_json(const detail::json_ref<basic_json>& ref)
+--        : basic_json(ref.moved_or_copied())
+--    {}
+-+    template <typename JsonRef,
+-+              detail::enable_if_t<detail::conjunction<detail::is_json_ref<JsonRef>,
+-+                                  std::is_same<typename JsonRef::value_type, basic_json>>::value, int> = 0 >
+-+    basic_json(const JsonRef& ref) : basic_json(ref.moved_or_copied()) {}
+-
+-     /*!
+-     @brief copy constructor
+---
+-2.21.0 (Apple Git-122)
+-
+diff --git a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json/0001-typo-fix.patch b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json/0001-typo-fix.patch
+deleted file mode 100644
+index 6af4e97403..0000000000
+--- a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json/0001-typo-fix.patch
++++ /dev/null
+@@ -1,43 +0,0 @@
+-From 70be9751cd60e622ce6463f41d47c02fc2d83cbc Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Art=C3=B6m=20Bakri=20Al-Sarmini?= <3sz3tt+git@gmail.com>
+-Date: Sun, 12 Apr 2020 23:42:26 +0300
+-Subject: [PATCH] typo fix
+-
+-Upstream-Status: Backport [https://github.com/nlohmann/json/commit/70be9751cd60e622ce6463f41d47c02fc2d83cbc]
+-
+-Signed-off-by: Andrew Geissler <geissonator@gmail.com>
+-
+----
+- include/nlohmann/detail/meta/type_traits.hpp | 2 +-
+- single_include/nlohmann/json.hpp             | 2 +-
+- 2 files changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/include/nlohmann/detail/meta/type_traits.hpp b/include/nlohmann/detail/meta/type_traits.hpp
+-index dd0b3084..13e92cb4 100644
+---- a/include/nlohmann/detail/meta/type_traits.hpp
+-+++ b/include/nlohmann/detail/meta/type_traits.hpp
+-@@ -42,7 +42,7 @@ NLOHMANN_BASIC_JSON_TPL_DECLARATION
+- struct is_basic_json<NLOHMANN_BASIC_JSON_TPL> : std::true_type {};
+-
+- //////////////////////
+--// jspn_ref helpers //
+-+// json_ref helpers //
+- //////////////////////
+-
+- template <typename>
+-diff --git a/single_include/nlohmann/json.hpp b/single_include/nlohmann/json.hpp
+-index 8927180e..294e7509 100644
+---- a/single_include/nlohmann/json.hpp
+-+++ b/single_include/nlohmann/json.hpp
+-@@ -2795,7 +2795,7 @@ NLOHMANN_BASIC_JSON_TPL_DECLARATION
+- struct is_basic_json<NLOHMANN_BASIC_JSON_TPL> : std::true_type {};
+-
+- //////////////////////
+--// jspn_ref helpers //
+-+// json_ref helpers //
+- //////////////////////
+-
+- template <typename>
+---
+-2.21.0 (Apple Git-122)
+-
+diff --git a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.7.3.bb b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.9.0.bb
+similarity index 71%
+rename from meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.7.3.bb
+rename to meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.9.0.bb
+index 5766194d26..0f5ef7052c 100644
+--- a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.7.3.bb
++++ b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.9.0.bb
+@@ -2,14 +2,12 @@ SUMMARY = "JSON for modern C++"
+ HOMEPAGE = "https://nlohmann.github.io/json/"
+ SECTION = "libs"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=f5f7c71504da070bcf4f090205ce1080"
++LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=dd0607f896f392c8b7d0290a676efc24"
+ 
+ SRC_URI = "git://github.com/nlohmann/json.git;nobranch=1 \
+-           file://0001-Templatize-basic_json-ctor-from-json_ref.patch \
+-           file://0001-typo-fix.patch \
             "
  
--SRC_URI[md5sum] = "d8bb7374943bb747db7786ac26f17f11"
--SRC_URI[sha256sum] = "0a24d9401e87d4af023d201e234d91127d82c350daad93432106284aa9459c7d"
-+SRC_URI[md5sum] = "1318805702eb6d59f9f247e1dd5ce12a"
-+SRC_URI[sha256sum] = "d74ceca722c75bfff53c633425f926dd48eb04f4a089451b855155c016d15785"
+-SRCREV = "e7b3b40b5a95bc74b9a7f662830a27c49ffc01b4"
++SRCREV = "d34771cafc87b358ba421faca28facc7f8080174"
  
- EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} \
-     EXTRA_CFLAGS='-D_GNU_SOURCE -DHAVE_CLOCK_ADJTIME -DHAVE_POSIX_SPAWN -DHAVE_ONESTEP_SYNC ${CFLAGS}'"
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.25.1
 
