@@ -1,91 +1,93 @@
-Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com [209.85.219.47])
- by mx.groups.io with SMTP id smtpd.web12.12668.1596175079521585298
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com [209.85.222.177])
+ by mx.groups.io with SMTP id smtpd.web12.12796.1596175779364454028
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Jul 2020 22:57:59 -0700
+ Thu, 30 Jul 2020 23:09:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=TCAC2ddg;
- spf=pass (domain: gmail.com, ip: 209.85.219.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f47.google.com with SMTP id x6so7824769qvr.8
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Jul 2020 22:57:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Gc02L9q8;
+ spf=pass (domain: gmail.com, ip: 209.85.222.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f177.google.com with SMTP id l64so21061530qkb.8
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Jul 2020 23:09:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=e6pJb1oKplscErxdntghZ5sJwJuOl2tBVMnyKA4OolU=;
-        b=TCAC2ddgn3nOG/2vLNo/xpaSIwJKTGt8sZm2C9N43kmlgCrw9MqyZGbNBfJ2iglUjK
-         iytO2hcD4XdZHLnNlPRfu60OBLpKQUU8WSgnD8ISIt4vEVSfU90QcYwTRAw8SwiLBSdi
-         867NbWMi5MhxCZR8d992mmMuh9ucQU9D6zEvC+3HYwUqqCIn6O+pyz1IIRFDWOoxTnb3
-         A9W1KHir0yjDT4pu9e3SIrSIkzV3vrNFOcnO+CIUB4Midh6qGCZ7kMqhzBwEzfyKMRvB
-         qy5ibYU3hRxunk+s6ddqYiZ4/nvtN9sVF9kmd0UbkH9NwEi9ueOthOIv9FYCY/27hnx8
-         egjw==
+        bh=MhMim0Jt7HnTtOY4yuz8I2oK16X+q47YHDLUVh3vebc=;
+        b=Gc02L9q8TogrTX/+RBBfzKdk8oX8YF4yhG2bAaR4UIKkQXbxL2LFP15NLY+q3ttmC1
+         P9SC9jNTyS3Pujt5dfUiHmv0GEMk3Vw1kVJj/uyZ7mi8U+EDaJN2zBBA2fGVp8/opuvZ
+         yOBfL7Va+PHteg0K9Z3NPNtiWzh7g0mmS3KtON9bL8vJ7Zv0CUilj94LvP4IPrcob2dM
+         QRUwvM7dmBMLjO1z2mh7hzGBELhHrJVWr0FcLknc0PsFgZg6wAfy/aoDpCseYoj2j+PE
+         idQ5O2g4TFoDnoObRvZQjSORDGzGi1pR/wJm8fr1t55CYxlM1KdcOoQe1pW6A0JxX/IZ
+         0gfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=e6pJb1oKplscErxdntghZ5sJwJuOl2tBVMnyKA4OolU=;
-        b=bebITYL9GomDgamz9LiBP/7wjHHJwEDKn7NUXqCaCLKGZe0w29EhA42O1O6X2djObl
-         S7OYzqQU1AAt3OUF0TJMPpDzDiWR749qeoGCIfnarCFmjG/kpzylWEszzbtoHfDP9Wxr
-         h8QorOcTjAc7Gk79EMoQZXrChicT5yEqxsjy4xsjgWpNGqE2jtngwMKuDDDyHTBPRhQs
-         5k9g/6npYaqkFUvouYjGM7f+dqPxzV6eIQMVf/TW9J09UTG7AIoaDy94K0OcnjcSPBsC
-         XEMNLBj4WYz/rxQWSmkIx1D7XF7kGcmDt75hrBFSfutUjwlPwS3QM/HWgrQ+D8adBqqv
-         Ej2g==
-X-Gm-Message-State: AOAM533wJxFTv9eCM+23NfrL7v/f0ErqzJRIAeN99Ecdyk5xfJeaNfSB
-	KWt2KkLRHGfgp9ooAb1UER0DCuY8TRUW5Nq2EJ0QLLq6pLQ=
-X-Google-Smtp-Source: ABdhPJzePpFcOllLKmQ7F9YL9pmXrE+f9JhS3A3LVUZB+j3WIKroAvmNXDaQcnTqLvfNUqkpAfFzJrLtapasbJ10gfU=
-X-Received: by 2002:a0c:b488:: with SMTP id c8mr2530300qve.130.1596175078469;
- Thu, 30 Jul 2020 22:57:58 -0700 (PDT)
+        bh=MhMim0Jt7HnTtOY4yuz8I2oK16X+q47YHDLUVh3vebc=;
+        b=ZUY1kGKqb90YIqcbAsbcsg/iAnJJH0TqXmiYQC04qqQ09QLmC4Z3szRPLrMdKhOA27
+         r+pqNl20U8Upyq7v6FXldiTRYd7yXmbQ18FKNa6By3kI+tlYFmEFFxOZ/1G+Oq2NB8b/
+         P/DfgVJxRxphix1+iw9vlCkDlLGsUtVF/7E1Guj9453ivmKefkaAfWHzS6tVGidH3Vra
+         bTeYXbykLFuaKNxNnhDd0ygW68o65q3T01WUbSdxg1XArgJ5yIb1b8Ziiqlr6asvjvUn
+         ww75gznwH9edmY46R1rgfgaZPMtEj/bx13boPnZkpaC2iYPBYOlg+lUFTJOcMJraFIKg
+         6urw==
+X-Gm-Message-State: AOAM532S1woL8rwodqCLkvnm6cdVeptbaMDbbRSXnTamU+na6yRD3S3q
+	F64HN2MwnXGTgusZ9+V9rnBWl/00n1+ZqI9Bcrg=
+X-Google-Smtp-Source: ABdhPJy75nxapExlpcK/UJTGzvaZdFWC4HLqGFpKjoH3zELfwD82/aYGbyIVwgovaiYNyFaTOd02h4zLtQsLrGbGbYM=
+X-Received: by 2002:a37:9d53:: with SMTP id g80mr2466568qke.17.1596175778434;
+ Thu, 30 Jul 2020 23:09:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200729093513.6782-1-yi.zhao@windriver.com> <20200729093513.6782-2-yi.zhao@windriver.com>
-In-Reply-To: <20200729093513.6782-2-yi.zhao@windriver.com>
+References: <20200729124155.3367618-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20200729124155.3367618-1-open.source@oleksandr-kravchuk.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 30 Jul 2020 22:57:32 -0700
-Message-ID: <CAMKF1sp3j++PvdP-3CnOkG7h7F3m3KSUQ-7ikeTqvP-JCkH1Kg@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH 2/2] samba: upgrade 4.10.15 -> 4.10.17
-To: Yi Zhao <yi.zhao@windriver.com>
+Date: Thu, 30 Jul 2020 23:09:12 -0700
+Message-ID: <CAMKF1so8iHhEByJJU0BK-oD7SFOuSPeh6tKqRFVjBUhpm3JoPw@mail.gmail.com>
+Subject: Re: [oe] [PATCH][meta-networking] mbedtls: update to 0.23.0
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-this fails to build on musl see
-https://errors.yoctoproject.org/Errors/Details/426320/ perhaps we need
-patches from https://bugzilla.samba.org/show_bug.cgi?id=14415
+Fails on musl
 
-On Wed, Jul 29, 2020 at 2:35 AM Yi Zhao <yi.zhao@windriver.com> wrote:
+https://errors.yoctoproject.org/Errors/Details/426318/
+
+On Wed, Jul 29, 2020 at 5:42 AM Oleksandr Kravchuk
+<open.source@oleksandr-kravchuk.com> wrote:
 >
-> This is a security release in order to address the following defects:
+> License checksum due to dropped due to CLA requirement being removed
+> from the license (see c76a54554ca8bffedf@).
 >
-> CVE-2020-10730: NULL pointer de-reference and use-after-free in Samba AD
->                 DC LDAP Server with ASQ, VLV and paged_results.
-> CVE-2020-10745: Parsing and packing of NBT and DNS packets can consume
->                 excessive CPU
-> CVE-2020-10760: LDAP Use-after-free in Samba AD DC Global Catalog with
->                 paged_results and VLV.
-> CVE-2020-14303: Empty UDP packet DoS in Samba AD DC nbtd.
->
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 > ---
->  .../samba/{samba_4.10.15.bb => samba_4.10.17.bb}              | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-networking/recipes-connectivity/samba/{samba_4.10.15.bb => samba_4.10.17.bb} (99%)
+>  .../mbedtls/{mbedtls_2.16.6.bb => mbedtls_2.23.0.bb}     | 9 +++++----
+>  1 file changed, 5 insertions(+), 4 deletions(-)
+>  rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.16.6.bb => mbedtls_2.23.0.bb} (84%)
 >
-> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.15.bb b/meta-networking/recipes-connectivity/samba/samba_4.10.17.bb
-> similarity index 99%
-> rename from meta-networking/recipes-connectivity/samba/samba_4.10.15.bb
-> rename to meta-networking/recipes-connectivity/samba/samba_4.10.17.bb
-> index 01250cb43..6b1e5a042 100644
-> --- a/meta-networking/recipes-connectivity/samba/samba_4.10.15.bb
-> +++ b/meta-networking/recipes-connectivity/samba/samba_4.10.17.bb
-> @@ -36,8 +36,8 @@ SRC_URI_append_libc-musl = " \
->             file://0001-samba-fix-musl-lib-without-innetgr.patch \
->            "
+> diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.6.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.23.0.bb
+> similarity index 84%
+> rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.6.bb
+> rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_2.23.0.bb
+> index 12ad39761..3e4553291 100644
+> --- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.6.bb
+> +++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.23.0.bb
+> @@ -18,13 +18,14 @@ understand what the code does. It features:                          \
+>  HOMEPAGE = "https://tls.mbed.org/"
 >
-> -SRC_URI[md5sum] = "67e9f6b8c5140475641bf5121c93b3d4"
-> -SRC_URI[sha256sum] = "0b8b62558b62fbb121015f28f40fae0f07522710b6bef77c508b51bb6914ced9"
-> +SRC_URI[md5sum] = "f69cac9ba5035ee60257520a209a0a83"
-> +SRC_URI[sha256sum] = "03dc9758e7bfa2faf7cdeb45b4d40997e2ee16a41e71996aa666bc069e70ba3e"
+>  LICENSE = "Apache-2.0"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=302d50a6369f5f22efdb674db908167a"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 >
->  UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.10(\.\d+)+).tar.gz"
+>  SECTION = "libs"
+>
+> -SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
+> -SRC_URI[md5sum] = "1f629a43c166de2eca808f3e30aa961d"
+> -SRC_URI[sha256sum] = "66455e23a6190a30142cdc1113f7418158839331a9d8e6b0778631d077281770"
+> +SRC_URI = "https://github.com/ARMmbed/mbedtls/archive/mbedtls-${PV}.tar.gz"
+> +SRC_URI[sha256sum] = "5c8998217402aa1fc734f4afaeac38fad2421470fac4b3abc112bd46391054fe"
+> +
+> +S = "${WORKDIR}/mbedtls-mbedtls-${PV}"
+>
+>  inherit cmake
 >
 > --
-> 2.17.1
+> 2.25.1
 >
 > 
