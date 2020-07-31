@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.18117.1596201783703119608
+ by mx.groups.io with SMTP id smtpd.web12.18233.1596201784530811104
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 31 Jul 2020 06:23:04 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=47376 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k1V01-000741-KK; Fri, 31 Jul 2020 16:23:02 +0300
+	id 1k1V02-000741-I5; Fri, 31 Jul 2020 16:23:03 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 07/15] python3-pychromecast: Upgrade 7.1.2 -> 7.2.0
-Date: Fri, 31 Jul 2020 16:22:22 +0300
-Message-Id: <20200731132230.20031-7-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 08/15] python3-dynamic-dispatch: Upgrade 1.0.2 -> 1.0.3
+Date: Fri, 31 Jul 2020 16:22:23 +0300
+Message-Id: <20200731132230.20031-8-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200731132230.20031-1-leon.anavi@konsulko.com>
 References: <20200731132230.20031-1-leon.anavi@konsulko.com>
@@ -30,37 +30,40 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 7.2.0:
+Upgrade to release 1.0.3:
 
-- Allow passing an already existing zeroconf object to additional
-  functions
-- Ignore browser updates for *._sub._googlecast._tcp.local.
-- Fix return type of get_listed_chromecasts
-- Remove host and port from Chromecast object
+- Fix bug when instantiating a thrice derived classes via dynamic
+  dispatch.
+
+Also a HOMEPAGE has been set.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...n3-pychromecast_7.1.2.bb => python3-pychromecast_7.2.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pychromecast_7.1.2.bb => python3-pychromecast_7.2.0.bb} (66%)
+ ...c-dispatch_1.0.2.bb => python3-dynamic-dispatch_1.0.3.bb} | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-dynamic-dispatch_1.0.2.bb => python3-dynamic-dispatch_1.0.3.bb} (64%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.1.2.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.2.0.bb
-similarity index 66%
-rename from meta-python/recipes-devtools/python/python3-pychromecast_7.1.2.bb
-rename to meta-python/recipes-devtools/python/python3-pychromecast_7.2.0.bb
-index 98dbf33b2..257778ba9 100644
---- a/meta-python/recipes-devtools/python/python3-pychromecast_7.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pychromecast_7.2.0.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
+diff --git a/meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.2.bb b/meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.3.bb
+similarity index 64%
+rename from meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.2.bb
+rename to meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.3.bb
+index 6485f9d57..2bf487584 100644
+--- a/meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.3.bb
+@@ -1,11 +1,12 @@
+ SUMMARY = "dynamic dispatch decorator for classes and functions"
++HOMEPAGE = "https://github.com/XevoInc/dynamic_dispatch"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ea70b07c354e36056bd35e17c9c3face"
  
--SRC_URI[md5sum] = "6ca5102b09009c85424a9ab628005992"
--SRC_URI[sha256sum] = "adcf478d7fc539e9decde59b2db7b6a4b1d679c4cf78d515d880adb1c4bc1c30"
-+SRC_URI[md5sum] = "20ed7ec024fd4739446d42f8d19813b8"
-+SRC_URI[sha256sum] = "c522c5ecb554471ca8e5690c05530b1c237c301349061d3839c506984f8d3c2d"
+ inherit pypi setuptools3
  
- PYPI_PACKAGE = "PyChromecast"
+-SRC_URI[md5sum] = "0e29d2afa806b9b87dadfbed6a0afd6d"
+-SRC_URI[sha256sum] = "ec7025b2890e7a882ceef95ff82fd154265136af930cab42533070b557d2a15d"
++SRC_URI[md5sum] = "6bd3cc24427de753eed0656e89d5302c"
++SRC_URI[sha256sum] = "fbc676aaedc8ec542056c21e5e206b8b62b8d11c3f3c5cfb32b273936da89604"
+ 
+ PYPI_PACKAGE = "dynamic_dispatch"
  
 -- 
 2.17.1
