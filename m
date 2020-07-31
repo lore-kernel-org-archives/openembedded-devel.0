@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.18223.1596201766084127044
+ by mx.groups.io with SMTP id smtpd.web11.18114.1596201779558409408
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 31 Jul 2020 06:22:46 -0700
+ Fri, 31 Jul 2020 06:22:59 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=47376 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k1Uzh-000741-Po; Fri, 31 Jul 2020 16:22:43 +0300
+	id 1k1Uzw-000741-KE; Fri, 31 Jul 2020 16:22:58 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 01/15] python3-pywbem: Upgrade 0.17.3 -> 0.17.4
-Date: Fri, 31 Jul 2020 16:22:16 +0300
-Message-Id: <20200731132230.20031-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 02/15] python3-lxml: Upgrade 4.5.1 -> 4.5.2
+Date: Fri, 31 Jul 2020 16:22:17 +0300
+Message-Id: <20200731132230.20031-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200731132230.20031-1-leon.anavi@konsulko.com>
+References: <20200731132230.20031-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,38 +30,44 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.17.4 with the following bug fixes:
+Upgrade to release 4.5.2:
 
-- Test: On Python 3.8, upgraded the minimum version of lxml from
-  4.4.1 to 4.4.3, in order to fix an XMLSyntaxError raised when
-  encountering UCS-4 characters.
-- Test: Fixed issue with Swig when installing M2Crypto on native
-  Windows in the Appveyor CI, reporting mssing files swig.swg and
-  python.swg. This was fixed by pinning the swig version to 4.0.1.
+- Cleaner() now validates that only known configuration options
+  can be set.
+- LP#1882606: Cleaner.clean_html() discarded comments and PIs
+  regardless of the corresponding configuration option, if
+  remove_unknown_tags was set.
+- LP#1880251: Instead of globally overwriting the document loader
+  in libxml2, lxml now sets it per parser run, which improves the
+  interoperability with other users of libxml2 such as libxmlsec.
+- LP#1881960: Fix build in CPython 3.10 by using Cython 0.29.21.
+- The setup options "--with-xml2-config" and "--with-xslt-config"
+  were accidentally renamed to "--xml2-config" and "--xslt-config"
+  in 4.5.1 and are now available again.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pywbem_0.17.3.bb => python3-pywbem_0.17.4.bb}    | 4 ++--
+ .../python/{python3-lxml_4.5.1.bb => python3-lxml_4.5.2.bb}   | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-extended/pywbem/{python3-pywbem_0.17.3.bb => python3-pywbem_0.17.4.bb} (92%)
+ rename meta-python/recipes-devtools/python/{python3-lxml_4.5.1.bb => python3-lxml_4.5.2.bb} (93%)
 
-diff --git a/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.3.bb b/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.4.bb
-similarity index 92%
-rename from meta-python/recipes-extended/pywbem/python3-pywbem_0.17.3.bb
-rename to meta-python/recipes-extended/pywbem/python3-pywbem_0.17.4.bb
-index 930f04896..a804b0cc0 100644
---- a/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.3.bb
-+++ b/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.4.bb
-@@ -16,8 +16,8 @@ HOMEPAGE = "http://pywbem.github.io"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
+diff --git a/meta-python/recipes-devtools/python/python3-lxml_4.5.1.bb b/meta-python/recipes-devtools/python/python3-lxml_4.5.2.bb
+similarity index 93%
+rename from meta-python/recipes-devtools/python/python3-lxml_4.5.1.bb
+rename to meta-python/recipes-devtools/python/python3-lxml_4.5.2.bb
+index a4198b029..7e11a67e7 100644
+--- a/meta-python/recipes-devtools/python/python3-lxml_4.5.1.bb
++++ b/meta-python/recipes-devtools/python/python3-lxml_4.5.2.bb
+@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
  
--SRC_URI[md5sum] = "9fbee6b4327f035eb212017b6cd84309"
--SRC_URI[sha256sum] = "1de9963adda97d89d191d027ddc64167699a11ac42ecc3ea35dddf7679ac2441"
-+SRC_URI[md5sum] = "b65c03026bf2174e58e3e47a5e7e4825"
-+SRC_URI[sha256sum] = "5b54b65a5434bb16432415743c0d154feee0c6d7a8a2fee208719c67d6d24c97"
+ DEPENDS += "libxml2 libxslt"
  
- inherit pypi setuptools3 update-alternatives
+-SRC_URI[md5sum] = "4d3cca9c0018dd98f39e0ac54fcc3d14"
+-SRC_URI[sha256sum] = "27ee0faf8077c7c1a589573b1450743011117f1aa1a91d5ae776bbc5ca6070f2"
++SRC_URI[md5sum] = "83ad758eab6c254b3565715967d553a6"
++SRC_URI[sha256sum] = "cdc13a1682b2a6241080745b1953719e7fe0850b40a5c71ca574f090a1391df6"
+ 
+ inherit pypi setuptools3
  
 -- 
 2.17.1
