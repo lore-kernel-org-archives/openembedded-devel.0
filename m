@@ -1,87 +1,120 @@
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
- by mx.groups.io with SMTP id smtpd.web11.9191.1596283455593463412
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
+ by mx.groups.io with SMTP id smtpd.web11.10026.1596286910477212385
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Aug 2020 05:04:16 -0700
+ Sat, 01 Aug 2020 06:01:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=iosM5mru;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.45, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f45.google.com with SMTP id 140so18173541lfi.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2020 05:04:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=xAQhPxLKrViGt/PS1gooIK+FUMQKWXkZ+jPB0XljkF8=;
-        b=iosM5mrujiT5BWY72OEMKzKoeSSc9vrxUrlJ79QG4pF6iJ+UYT82kcvqs2en6Y1aj2
-         Gs4zPf3N7ecadlccGPNXxP/cRFKF5VmDA24DR+lLgZwuaLjhlXQolR7brVpeyGcsE3wb
-         TwuNHQW0Sq6vCbBeTMFI3h1p8T/90e1Ip3+lryJq+4iw+hkCGYGud+YJqxyGtCBRCASo
-         hLCvZ98bPz4ttOR5EvPreQN+uEIy9q1jTXwhSVF/bznvybG55WCJofLILtqNKpUyYgNu
-         eTEOBI1HEBioUJJfsfG6d11fcx9g4c5NSoOZBykbG8wCqMIxxgNHiH6cjZ5zZmWJgr4E
-         6rLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=xAQhPxLKrViGt/PS1gooIK+FUMQKWXkZ+jPB0XljkF8=;
-        b=CB7wPmFF56nKl701viK6BwRVMNKp+Bfml34VzUM7fZxEfCNho/TsKLnE9OcPJ80J2A
-         3iETcUK6IShXJb7TkDfGILiynlM6YkLtZ5sMsvxKUYHRsGefvP/OCoV92auCUGZbo9Kb
-         OR/S6k2K1rC1QY3ju8wv/yY1DkBVV1QJD4UFHNsEpr1+PABEi/O0rgtk27uWZo0KBqfD
-         uYwhby4SVTJtc1Z5nUYIYeu8diMvmD224Z6PDKDFbzgCU+cEjtaJ4YLKpQASpQ87G6XF
-         iccpsUGsGKHYMO2GezwrM0hAQ1NZTryj1UUAwOry8/6vvx5g7+2+zCxHRTURoPoOWYL4
-         flVg==
-X-Gm-Message-State: AOAM531QPA3J1fkLudIEumShaAi6rRVKjkS9wSusLM4H/hJG0/vQboW6
-	wz2ixnPzR/XIDOlS4Ami7QO9rc28VFk=
-X-Google-Smtp-Source: ABdhPJwu9iCACpstcIh294AJRvTGq2mQzmOu2oWeMEm9/1rVLCuuqGsQgcwGbLYYfMflHNOtogUJRA==
-X-Received: by 2002:ac2:4c33:: with SMTP id u19mr4420317lfq.154.1596283453239;
-        Sat, 01 Aug 2020 05:04:13 -0700 (PDT)
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id m12sm2098172ljh.127.2020.08.01.05.04.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 01 Aug 2020 05:04:12 -0700 (PDT)
-From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH v2][meta-multimedia] libupnp: update to 1.14.0
-Date: Sat,  1 Aug 2020 14:04:09 +0200
-Message-Id: <20200801120409.295343-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@ideasonboard.com header.s=mail header.b=UB7S8Ekc;
+ spf=pass (domain: ideasonboard.com, ip: 213.167.242.64, mailfrom: laurent.pinchart@ideasonboard.com)
+Received: from pendragon.ideasonboard.com (81-175-216-236.bb.dnainternet.fi [81.175.216.236])
+	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 177A255E;
+	Sat,  1 Aug 2020 15:01:47 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+	s=mail; t=1596286907;
+	bh=O8hbxufj5tprlfrvasFVtKt/YXtGKFMBqKmI39zVK7g=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=UB7S8EkcqlLEoDunCNUAux4DyqtTZQpud+pBQZiMHf1ux3I+qZgQ2i00nR0r9UfAQ
+	 Lmfsh2YsSjw8Fgo9P/t321KICvLm4VTEmBhJdP/32WFjALNACReGgFbrQa1nCyXAUn
+	 i6TOA3fJ7ED3hqp1q5UUbWx0drkcrAuElHeL0Rs0=
+Date: Sat, 1 Aug 2020 16:01:37 +0300
+From: "Laurent Pinchart" <laurent.pinchart@ideasonboard.com>
+To: Andrey Konovalov <andrey.konovalov@linaro.org>
+Cc: openembedded-devel@lists.openembedded.org,
+	libcamera-devel@lists.libcamera.org, raj.khem@gmail.com,
+	madhavan.krishnan@linaro.org
+Subject: Re: [libcamera-devel] [meta-multimedia][PATCH v2] libcamera: fix packaging and installation
+Message-ID: <20200801130137.GE11820@pendragon.ideasonboard.com>
+References: <20200731143919.25825-1-andrey.konovalov@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200731143919.25825-1-andrey.konovalov@linaro.org>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- .../libupnp/{libupnp_git.bb => libupnp_1.14.0.bb}          | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
- rename meta-multimedia/recipes-connectivity/libupnp/{libupnp_git.bb => libupnp_1.14.0.bb} (88%)
+Hi Andrey,
 
-diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.0.bb
-similarity index 88%
-rename from meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb
-rename to meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.0.bb
-index 339c07cd9..88652a443 100644
---- a/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb
-+++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.0.bb
-@@ -6,17 +6,14 @@ supporting the Document Object Model (DOM) Level 2 API and an optional, \
- integrated mini web server for serving UPnP related documents."
- HOMEPAGE = "http://pupnp.sourceforge.net/"
- LICENSE = "BSD-3-Clause"
--
- LIC_FILES_CHKSUM = "file://COPYING;md5=394a0f17b97f33426275571e15920434"
- 
--PV = "1.8.4+git${SRCPV}"
--# release-1.8.4
--SRCREV = "d5a01fc9895daae98a0c5a8c7d3afce46add529d"
-+SRCREV = "a6c3616530490ca67db41131572ec18f00d95eb0"
- SRC_URI = "git://github.com/mrjimenez/pupnp.git;protocol=https"
- 
- S="${WORKDIR}/git"
- 
--inherit autotools
-+inherit autotools pkgconfig
- 
- EXTRA_OECONF += "--enable-reuseaddr"
- 
+Thank you for the patch.
+
+On Fri, Jul 31, 2020 at 05:39:19PM +0300, Andrey Konovalov wrote:
+> libcamera checks if RPATH or RUNPATH dynamic tag is present in
+> libcamera.so. If it does, it assumes that libcamera binaries are
+> run directly from the build directory without installing them, and
+> tries to use resorces like IPA modules from the build directory.
+> Mainline meson strips RPATH/RUNPATH out from libcamera.so file
+> at install time. But openembedded-core patches meson to disable
+> RPATH/RUNPATH removal. That's why  we need to remove this tag manually
+> in do_install_append().
+> 
+> IPA module is signed (with openssl dgst) after it is built. But
+> during packaging the OE build system 1) splits out debugging info,
+> and 2) strips the binaries. So the IPA module so file installed
+> isn't the one which the signature was calculated against. Then
+> the signature check fails, and libcamera tries to run the IPA
+> module isolated (in a sandbox), which doesn't work if the IPA
+> module wasn't designed to run isolated. The solution is to
+> recalculate the IPA modules signatures in ${PKGD} after do_package().
+> 
+> Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
+> ---
+>  Changes in v2:
+>   - Recalculate the IPA modules signatures after do_package()
+>     instead of disabling stripping and splitting libcamera package
+> 
+>  .../recipes-multimedia/libcamera/libcamera.bb     | 15 ++++++++++++++-
+>  1 file changed, 14 insertions(+), 1 deletion(-)
+> 
+> diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+> index 00a5c480d..30c6600e5 100644
+> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+> +++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+> @@ -18,13 +18,26 @@ PV = "202006+git${SRCPV}"
+>  
+>  S = "${WORKDIR}/git"
+>  
+> -DEPENDS = "python3-pyyaml-native udev gnutls boost"
+> +DEPENDS = "python3-pyyaml-native udev gnutls boost chrpath-native"
+>  DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
+>  
+>  RDEPENDS_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayland', '', d)}"
+>  
+>  inherit meson pkgconfig python3native
+>  
+> +do_install_append() {
+> +    chrpath -d ${D}${libdir}/libcamera.so
+> +}
+> +
+> +addtask do_recalculate_ipa_signatures_package after do_package before do_packagedata
+> +do_recalculate_ipa_signatures_package() {
+> +    for module in $(find "${PKGD}/usr/lib/libcamera" -name "*.so.sign"); do
+> +        if [ -f "${module%.sign}" ] ; then
+> +            "${S}/src/ipa/ipa-sign.sh" "${B}/src/ipa-priv-key.pem" "${module%.sign}" "${module}"
+> +        fi
+> +    done
+
+Note that you could also use the src/ipa/ipa-sign-install.sh script,
+which takes the key as the first argument followed by the list of .so
+files to sign. Something along the lines of (not tested)
+
+    local modules
+    for module in $(find "${PKGD}/usr/lib/libcamera" -name "*.so.sign"); do
+        module="${module%.sign}"
+        if [ -f "${module}" ] ; then
+	    modules="${modules} ${module}"
+        fi
+    done
+
+    "${S}/src/ipa/ipa-sign-install.sh" "${B}/src/ipa-priv-key.pem" ${modules}
+
+I think this will lower the risk of breakage in the future, as
+ipa-sign.sh will have a higher chance of being refactored than
+ipa-sign-install.sh
+
+Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+
+> +}
+> +
+>  FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig"
+>  FILES_${PN} += " ${libdir}/libcamera.so"
+
 -- 
-2.25.1
+Regards,
 
+Laurent Pinchart
