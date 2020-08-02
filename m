@@ -1,122 +1,298 @@
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com [209.85.208.193])
- by mx.groups.io with SMTP id smtpd.web11.15262.1596395261167731689
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
+ by mx.groups.io with SMTP id smtpd.web10.16405.1596398597631014602
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 02 Aug 2020 12:07:41 -0700
+ Sun, 02 Aug 2020 13:03:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=wVRMe7+Q;
- spf=pass (domain: linaro.org, ip: 209.85.208.193, mailfrom: andrey.konovalov@linaro.org)
-Received: by mail-lj1-f193.google.com with SMTP id 185so27174567ljj.7
-        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Aug 2020 12:07:40 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=RC6wRWqn;
+ spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f46.google.com with SMTP id a14so8814601edx.7
+        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Aug 2020 13:03:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id;
-        bh=gffvLB+WlAnYBdMss2eSA+WIA4DrPKNvIyVac0+f32Y=;
-        b=wVRMe7+QYyf+VYuYRbo5a7YRL633rfhrWcBkKbMh6HRq1mBZmQ8S48POOfXjB3y2dQ
-         WouYwYSAYuIOdZpLC2ZTqmn3q+rVRQ22apYzKhtf2CEiXqDWcUEiobqfsPVSNrgebHvJ
-         EAQjSiyGQZnYZM/yp2EnWashLJf7kjcauppBV7wY8eHy8Y+xQdPcsic5JdX9P+yVH/yt
-         HGpUxTe3MDuwYwAzO86wNfEAwjv0+IpCdOz0bX1Fhh7N9qhk/zbyRN02pWCizWSS4vGK
-         VoSZcTfrlCVp33WVxm6P6MNNHZJZOOtY4XK2ytSF4D8+PGpK3l9XMwMRi5TsfGV9aOQd
-         K+Mw==
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=bBk7hsIKxgFTzzrUfcCFzFjo1gIWmqgDyn9bg2hDCAA=;
+        b=RC6wRWqnNopaOsHPI1BBhkMiX+4iW65Upr8VtfEzLV9r/THcVAHqoeYrrTv/iSXYIa
+         uDRmHBLpYkKlBzuSmTdRYkyoDFPUAoB3Yt9/tghVI5Abjq6pzGdTPxJHHuWvpFgj65JS
+         F5Oo0QvR08oeW/T3WI28Dg0hcf/074wx5L13u7cTJe6VS/kd3jnXYM0BpkQwa+V1j3Yd
+         7ftIkNvadPuMX3eqyawJzwt6FGp9DX/54+NEDWTmQQ1f7EKh5qOIeU/15rE1Dua7qluj
+         gkbIFNcQUGaDjAAwGTOJXjjNTRmok1pJ6LLRjzSEQjZZzAUgFQueEP+pn1nKmu7X70zf
+         5K9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=gffvLB+WlAnYBdMss2eSA+WIA4DrPKNvIyVac0+f32Y=;
-        b=iadqhpf40UWvUN6zPS1eUn9dPD2w/tJAjy1O/PtrLNNGvuICAvsrjZ1E9PKVJbU4pC
-         iV4vjXFm/PaRhBHQaINcI0JcHGbsRdZ+EbphFGW2ZCM8kMk4G3Hq+ogWiAMkZcU1exao
-         8/HragIfTLuK3GD+2N1EJIbNRTRV6aDi34FeAvZvM5smE3nP/2z1hdkWif4AkFVtRwYm
-         GJMwFvHU8J47a2FyRXfp8nvmGsDVisI2q92/stpy/IuFjfpm8Jca5sso3YRDTg50wjVi
-         Cy8k2ZeV+b26JeQNaQkZBNZL+ZvL/un7SsgyX107MdSTQ/Bm+5psgOLtDJfkgaVwBPku
-         YaEA==
-X-Gm-Message-State: AOAM530c5EYHXU0ArhMZyUpPjmOFzowF4F6VnwQVBhG5MUTjBks2Y9OF
-	hNRo5BQ2SOWKfvMKjeWtq4QE5hVBZOo=
-X-Google-Smtp-Source: ABdhPJyk49ySFUfJeoNHN2+qiTSBMrVcej/XAoFNOlmQBp2+2SaxZO4ar8C0kDr4clQ1vErVkRQObA==
-X-Received: by 2002:a05:651c:1069:: with SMTP id y9mr6100342ljm.438.1596395259001;
-        Sun, 02 Aug 2020 12:07:39 -0700 (PDT)
-Return-Path: <andrey.konovalov@linaro.org>
-Received: from localhost.localdomain (37-144-159-139.broadband.corbina.ru. [37.144.159.139])
-        by smtp.googlemail.com with ESMTPSA id e29sm1289126ljp.136.2020.08.02.12.07.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 02 Aug 2020 12:07:38 -0700 (PDT)
-From: "Andrey Konovalov" <andrey.konovalov@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: madhavan.krishnan@linaro.org,
-	raj.khem@gmail.com,
-	peter.griffin@linaro.org,
-	libcamera-devel@lists.libcamera.org,
-	Andrey Konovalov <andrey.konovalov@linaro.org>
-Subject: [meta-multimedia][PATCH v3] libcamera: fix packaging and installation
-Date: Sun,  2 Aug 2020 22:07:19 +0300
-Message-Id: <20200802190719.9358-1-andrey.konovalov@linaro.org>
-X-Mailer: git-send-email 2.17.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=bBk7hsIKxgFTzzrUfcCFzFjo1gIWmqgDyn9bg2hDCAA=;
+        b=GYj3KM+NB+vG1kDGoSrctld+23s8VvkF4N45Kj++TnovA8byOUMeLBI9dJuhUcFBNI
+         q0ZeF9tuhdHEw69TFAsnM7aIiZIDOEkAniB8RYBgTwNmTkIrIrw1o9IgVSRK8pkjgsZ9
+         TRQW6DW8lTyyeQiOFoq0n+ALgVEoKLhBfMkqat4DlappNA7PLUwJ6QQP0nQSLY/kn6h2
+         6Iks82t85scxvB5CHjAod5FPCwmGQ8kajTeu8ji3/xB9X5hWvgLSz+TJhkvFF8tJ2n/R
+         4oy5G/BGLrJEc7IXl1EvPkTg2K23rBDh761Op/vPIKtdobVUXY9+SpfTJkUE8GzOvQ7D
+         1KRQ==
+X-Gm-Message-State: AOAM533ZR4mE7P51CClsiMGSiqMZK74Wa2QyZJJ6u5DP5kSQ/dK2D7o8
+	yI9Ulosu6nYnvrRiQ7ohHvjoLcVgVVdo2SJUNDw=
+X-Google-Smtp-Source: ABdhPJz/gIC6E8Umr/9iccyH5BqYUoqYl3TsczIlqRsQjYRut1jv9VNrCQfAR6cjfELwrRDC684gjrFAoRN/E0E4Kzg=
+X-Received: by 2002:aa7:ca54:: with SMTP id j20mr12856743edt.270.1596398596080;
+ Sun, 02 Aug 2020 13:03:16 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200726130737.57830-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20200726130737.57830-1-open.source@oleksandr-kravchuk.com>
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+Date: Sun, 2 Aug 2020 22:03:04 +0200
+Message-ID: <CA+chaQfFzhLFHYX0BY9-HwBhnk8kmmv2cRULaONWqXzTtwh=rw@mail.gmail.com>
+Subject: Re: [oe] [PATCH][meta-oe] valijson: update to 0.3
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="0000000000003d476e05abea8319"
 
-libcamera checks if RPATH or RUNPATH dynamic tag is present in
-libcamera.so. If it does, it assumes that libcamera binaries are
-run directly from the build directory without installing them, and
-tries to use resorces like IPA modules from the build directory.
-Mainline meson strips RPATH/RUNPATH out from libcamera.so file
-at install time. But openembedded-core patches meson to disable
-RPATH/RUNPATH removal. That's why  we need to remove this tag manually
-in do_install_append().
+--0000000000003d476e05abea8319
+Content-Type: text/plain; charset="UTF-8"
 
-IPA module is signed (with openssl dgst) after it is built. But
-during packaging the OE build system 1) splits out debugging info,
-and 2) strips the binaries. So the IPA module so file installed
-isn't the one which the signature was calculated against. Then
-the signature check fails, and libcamera tries to run the IPA
-module isolated (in a sandbox), which doesn't work if the IPA
-module wasn't designed to run isolated. The solution is to
-recalculate the IPA modules signatures in ${PKGD} after do_package().
+Hi,
 
-Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
-Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
----
- Changes in v3:
-  - As suggested by Laurent Pinchart, use ipa-sign-install.sh script
-    to recalculate the signatures instead of ipa-sign.sh.
+new dependency curlpp is only available in meta-networking, so this recipe
+in meta-oe cannot depend on it, either move it to meta-networking as well,
+or make it optional with PACKAGECONFIG if possible.
 
- Changes in v2:
-  - Recalculate the IPA modules signatures after do_package()
-    instead of disabling stripping and splitting libcamera package
+Now it causes:
+ERROR: Nothing PROVIDES 'curlpp' (but
+meta-openembedded/meta-oe/recipes-devtools/valijson/valijson_0.3.bb DEPENDS
+on or otherwise requires it). Close matches:
 
- .../recipes-multimedia/libcamera/libcamera.bb | 19 ++++++++++++++++++-
- 1 file changed, 18 insertions(+), 1 deletion(-)
+Regards,
 
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-index 00a5c480d..b34d673bd 100644
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-@@ -18,13 +18,30 @@ PV = "202006+git${SRCPV}"
- 
- S = "${WORKDIR}/git"
- 
--DEPENDS = "python3-pyyaml-native udev gnutls boost"
-+DEPENDS = "python3-pyyaml-native udev gnutls boost chrpath-native"
- DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
- 
- RDEPENDS_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayland', '', d)}"
- 
- inherit meson pkgconfig python3native
- 
-+do_install_append() {
-+    chrpath -d ${D}${libdir}/libcamera.so
-+}
-+
-+addtask do_recalculate_ipa_signatures_package after do_package before do_packagedata
-+do_recalculate_ipa_signatures_package() {
-+    local modules
-+    for module in $(find "${PKGD}/usr/lib/libcamera" -name "*.so.sign"); do
-+        module="${module%.sign}"
-+        if [ -f "${module}" ] ; then
-+            modules="${modules} ${module}"
-+        fi
-+    done
-+
-+    "${S}/src/ipa/ipa-sign-install.sh" "${B}/src/ipa-priv-key.pem" "${modules}"
-+}
-+
- FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig"
- FILES_${PN} += " ${libdir}/libcamera.so"
- 
--- 
-2.17.1
+On Sun, Jul 26, 2020 at 3:09 PM Oleksandr Kravchuk <
+open.source@oleksandr-kravchuk.com> wrote:
 
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>  .../recipes-devtools/valijson/valijson_0.3.bb | 36 +++++++++++++++++++
+>  .../recipes-devtools/valijson/valijson_git.bb | 21 -----------
+>  2 files changed, 36 insertions(+), 21 deletions(-)
+>  create mode 100644 meta-oe/recipes-devtools/valijson/valijson_0.3.bb
+>  delete mode 100644 meta-oe/recipes-devtools/valijson/valijson_git.bb
+>
+> diff --git a/meta-oe/recipes-devtools/valijson/valijson_0.3.bb
+> b/meta-oe/recipes-devtools/valijson/valijson_0.3.bb
+> new file mode 100644
+> index 0000000000..049cdeffc0
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/valijson/valijson_0.3.bb
+> @@ -0,0 +1,36 @@
+> +SUMMARY = "Header-only C++ library for JSON Schema validation"
+> +HOMEPAGE = "https://github.com/tristanpenman/valijson"
+> +LICENSE = "BSD-2-Clause"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=015106c62262b2383f6c72063f0998f2"
+> +
+> +SRC_URI = "git://github.com/tristanpenman/valijson.git"
+> +SRCREV = "7a52fc88cdffd6678c009ca2fad700151f7363c6"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +inherit cmake
+> +
+> +EXTRA_OECMAKE = "-DINSTALL_HEADERS=1 -DBUILD_TESTS=0"
+> +
+> +DEPENDS = "curlpp"
+> +
+> +# valijson is a header only C++ library, so the main package will be
+> empty.
+> +RDEPENDS_${PN}-dev = ""
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> +
+> +do_install() {
+> +    install -d ${D}${includedir}/compat
+> +    install -d ${D}${includedir}/valijson
+> +    install -d ${D}${includedir}/valijson/adapters
+> +    install -d ${D}${includedir}/valijson/constraints
+> +    install -d ${D}${includedir}/valijson/internal
+> +    install -d ${D}${includedir}/valijson/utils
+> +
+> +    install -m 0644 ${S}/include/compat/* ${D}${includedir}/compat
+> +    install -D -m 0644 ${S}/include/valijson/*.hpp -t
+> ${D}${includedir}/valijson
+> +    install -D -m 0644 ${S}/include/valijson/adapters/*.hpp -t
+> ${D}${includedir}/valijson/adapters
+> +    install -D -m 0644 ${S}/include/valijson/constraints/*.hpp -t
+> ${D}${includedir}/valijson/constraints
+> +    install -D -m 0644 ${S}/include/valijson/internal/*.hpp -t
+> ${D}${includedir}/valijson/internal
+> +    install -D -m 0644 ${S}/include/valijson/utils/*.hpp -t
+> ${D}${includedir}/valijson/utils
+> +}
+> diff --git a/meta-oe/recipes-devtools/valijson/valijson_git.bb
+> b/meta-oe/recipes-devtools/valijson/valijson_git.bb
+> deleted file mode 100644
+> index c3254d16e7..0000000000
+> --- a/meta-oe/recipes-devtools/valijson/valijson_git.bb
+> +++ /dev/null
+> @@ -1,21 +0,0 @@
+> -SUMMARY = "Header-only C++ library for JSON Schema validation"
+> -HOMEPAGE = "https://github.com/tristanpenman/valijson"
+> -LICENSE = "BSD-2-Clause"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=015106c62262b2383f6c72063f0998f2"
+> -
+> -SRC_URI = "git://github.com/tristanpenman/valijson.git"
+> -PV = "0.1+git${SRCPV}"
+> -
+> -SRCREV = "c2f22fddf599d04dc33fcd7ed257c698a05345d9"
+> -
+> -S = "${WORKDIR}/git"
+> -
+> -inherit cmake
+> -
+> -EXTRA_OECMAKE = "-DINSTALL_HEADERS=1 -DBUILD_TESTS=0"
+> -
+> -# valijson is a header only C++ library, so the main package will be
+> empty.
+> -RDEPENDS_${PN}-dev = ""
+> -
+> -BBCLASSEXTEND = "native nativesdk"
+> -
+> --
+> 2.25.1
+>
+> 
+>
+
+--0000000000003d476e05abea8319
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi,<div><br></div><div>new dependency curlpp is only avail=
+able in meta-networking, so this recipe in meta-oe cannot depend on it, eit=
+her move it to meta-networking as well, or make it optional with PACKAGECON=
+FIG if possible.</div><div><br></div><div>Now it causes:</div><div>ERROR: N=
+othing PROVIDES &#39;curlpp&#39; (but meta-openembedded/meta-oe/recipes-dev=
+tools/valijson/<a href=3D"http://valijson_0.3.bb">valijson_0.3.bb</a> DEPEN=
+DS on or otherwise requires it). Close matches:<br></div><div><br></div><di=
+v>Regards,</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=
+=3D"gmail_attr">On Sun, Jul 26, 2020 at 3:09 PM Oleksandr Kravchuk &lt;<a =
+href=3D"mailto:open.source@oleksandr-kravchuk.com" target=3D"_blank">open.s=
+ource@oleksandr-kravchuk.com</a>&gt; wrote:<br></div><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex">Signed-off-by: Oleksandr Kravchuk &lt;<a href=
+=3D"mailto:open.source@oleksandr-kravchuk.com" target=3D"_blank">open.sour=
+ce@oleksandr-kravchuk.com</a>&gt;<br>
+---<br>
+=C2=A0.../recipes-devtools/valijson/<a href=3D"http://valijson_0.3.bb" rel=
+=
+=3D"noreferrer" target=3D"_blank">valijson_0.3.bb</a> | 36 +++++++++++++++=
+++++<br>
+=C2=A0.../recipes-devtools/valijson/<a href=3D"http://valijson_git.bb" rel=
+=
+=3D"noreferrer" target=3D"_blank">valijson_git.bb</a> | 21 -----------<br>
+=C2=A02 files changed, 36 insertions(+), 21 deletions(-)<br>
+=C2=A0create mode 100644 meta-oe/recipes-devtools/valijson/<a href=3D"http=
+://valijson_0.3.bb" rel=3D"noreferrer" target=3D"_blank">valijson_0.3.bb</a=
+><br>
+=C2=A0delete mode 100644 meta-oe/recipes-devtools/valijson/<a href=3D"http=
+://valijson_git.bb" rel=3D"noreferrer" target=3D"_blank">valijson_git.bb</a=
+><br>
+<br>
+diff --git a/meta-oe/recipes-devtools/valijson/<a href=3D"http://valijson_=
+0.3.bb" rel=3D"noreferrer" target=3D"_blank">valijson_0.3.bb</a> b/meta-oe/=
+recipes-devtools/valijson/<a href=3D"http://valijson_0.3.bb" rel=3D"norefer=
+rer" target=3D"_blank">valijson_0.3.bb</a><br>
+new file mode 100644<br>
+index 0000000000..049cdeffc0<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-devtools/valijson/<a href=3D"http://valijson_0.3.bb"=
+ rel=3D"noreferrer" target=3D"_blank">valijson_0.3.bb</a><br>
+@@ -0,0 +1,36 @@<br>
++SUMMARY =3D &quot;Header-only C++ library for JSON Schema validation&quot=
+;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://github.com/tristanpenman/valijson" =
+rel=3D"noreferrer" target=3D"_blank">https://github.com/tristanpenman/valij=
+son</a>&quot;<br>
++LICENSE =3D &quot;BSD-2-Clause&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D015106c62262b2383f6c72063=
+f0998f2&quot;<br>
++<br>
++SRC_URI =3D &quot;git://<a href=3D"http://github.com/tristanpenman/valijs=
+on.git" rel=3D"noreferrer" target=3D"_blank">github.com/tristanpenman/valij=
+son.git</a>&quot;<br>
++SRCREV =3D &quot;7a52fc88cdffd6678c009ca2fad700151f7363c6&quot;<br>
++<br>
++S =3D &quot;${WORKDIR}/git&quot;<br>
++<br>
++inherit cmake<br>
++<br>
++EXTRA_OECMAKE =3D &quot;-DINSTALL_HEADERS=3D1 -DBUILD_TESTS=3D0&quot;<br>
++<br>
++DEPENDS =3D &quot;curlpp&quot;<br>
++<br>
++# valijson is a header only C++ library, so the main package will be empt=
+y.<br>
++RDEPENDS_${PN}-dev =3D &quot;&quot;<br>
++<br>
++BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
++<br>
++do_install() {<br>
++=C2=A0 =C2=A0 install -d ${D}${includedir}/compat<br>
++=C2=A0 =C2=A0 install -d ${D}${includedir}/valijson<br>
++=C2=A0 =C2=A0 install -d ${D}${includedir}/valijson/adapters<br>
++=C2=A0 =C2=A0 install -d ${D}${includedir}/valijson/constraints<br>
++=C2=A0 =C2=A0 install -d ${D}${includedir}/valijson/internal<br>
++=C2=A0 =C2=A0 install -d ${D}${includedir}/valijson/utils<br>
++<br>
++=C2=A0 =C2=A0 install -m 0644 ${S}/include/compat/* ${D}${includedir}/com=
+pat<br>
++=C2=A0 =C2=A0 install -D -m 0644 ${S}/include/valijson/*.hpp -t ${D}${inc=
+ludedir}/valijson<br>
++=C2=A0 =C2=A0 install -D -m 0644 ${S}/include/valijson/adapters/*.hpp -t =
+${D}${includedir}/valijson/adapters<br>
++=C2=A0 =C2=A0 install -D -m 0644 ${S}/include/valijson/constraints/*.hpp =
+-t ${D}${includedir}/valijson/constraints<br>
++=C2=A0 =C2=A0 install -D -m 0644 ${S}/include/valijson/internal/*.hpp -t =
+${D}${includedir}/valijson/internal<br>
++=C2=A0 =C2=A0 install -D -m 0644 ${S}/include/valijson/utils/*.hpp -t ${D=
+}${includedir}/valijson/utils<br>
++}<br>
+diff --git a/meta-oe/recipes-devtools/valijson/<a href=3D"http://valijson_=
+git.bb" rel=3D"noreferrer" target=3D"_blank">valijson_git.bb</a> b/meta-oe/=
+recipes-devtools/valijson/<a href=3D"http://valijson_git.bb" rel=3D"norefer=
+rer" target=3D"_blank">valijson_git.bb</a><br>
+deleted file mode 100644<br>
+index c3254d16e7..0000000000<br>
+--- a/meta-oe/recipes-devtools/valijson/<a href=3D"http://valijson_git.bb"=
+ rel=3D"noreferrer" target=3D"_blank">valijson_git.bb</a><br>
++++ /dev/null<br>
+@@ -1,21 +0,0 @@<br>
+-SUMMARY =3D &quot;Header-only C++ library for JSON Schema validation&quot=
+;<br>
+-HOMEPAGE =3D &quot;<a href=3D"https://github.com/tristanpenman/valijson" =
+rel=3D"noreferrer" target=3D"_blank">https://github.com/tristanpenman/valij=
+son</a>&quot;<br>
+-LICENSE =3D &quot;BSD-2-Clause&quot;<br>
+-LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D015106c62262b2383f6c72063=
+f0998f2&quot;<br>
+-<br>
+-SRC_URI =3D &quot;git://<a href=3D"http://github.com/tristanpenman/valijs=
+on.git" rel=3D"noreferrer" target=3D"_blank">github.com/tristanpenman/valij=
+son.git</a>&quot;<br>
+-PV =3D &quot;0.1+git${SRCPV}&quot;<br>
+-<br>
+-SRCREV =3D &quot;c2f22fddf599d04dc33fcd7ed257c698a05345d9&quot;<br>
+-<br>
+-S =3D &quot;${WORKDIR}/git&quot;<br>
+-<br>
+-inherit cmake<br>
+-<br>
+-EXTRA_OECMAKE =3D &quot;-DINSTALL_HEADERS=3D1 -DBUILD_TESTS=3D0&quot;<br>
+-<br>
+-# valijson is a header only C++ library, so the main package will be empt=
+y.<br>
+-RDEPENDS_${PN}-dev =3D &quot;&quot;<br>
+-<br>
+-BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
+-<br>
+-- <br>
+2.25.1<br>
+<br>
+<br>
+</blockquote></div>
+
+--0000000000003d476e05abea8319--
