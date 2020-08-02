@@ -1,120 +1,93 @@
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
- by mx.groups.io with SMTP id smtpd.web11.10026.1596286910477212385
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com [209.85.160.196])
+ by mx.groups.io with SMTP id smtpd.web11.4919.1596351410338057897
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Aug 2020 06:01:51 -0700
+ Sat, 01 Aug 2020 23:56:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ideasonboard.com header.s=mail header.b=UB7S8Ekc;
- spf=pass (domain: ideasonboard.com, ip: 213.167.242.64, mailfrom: laurent.pinchart@ideasonboard.com)
-Received: from pendragon.ideasonboard.com (81-175-216-236.bb.dnainternet.fi [81.175.216.236])
-	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 177A255E;
-	Sat,  1 Aug 2020 15:01:47 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1596286907;
-	bh=O8hbxufj5tprlfrvasFVtKt/YXtGKFMBqKmI39zVK7g=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=UB7S8EkcqlLEoDunCNUAux4DyqtTZQpud+pBQZiMHf1ux3I+qZgQ2i00nR0r9UfAQ
-	 Lmfsh2YsSjw8Fgo9P/t321KICvLm4VTEmBhJdP/32WFjALNACReGgFbrQa1nCyXAUn
-	 i6TOA3fJ7ED3hqp1q5UUbWx0drkcrAuElHeL0Rs0=
-Date: Sat, 1 Aug 2020 16:01:37 +0300
-From: "Laurent Pinchart" <laurent.pinchart@ideasonboard.com>
-To: Andrey Konovalov <andrey.konovalov@linaro.org>
-Cc: openembedded-devel@lists.openembedded.org,
-	libcamera-devel@lists.libcamera.org, raj.khem@gmail.com,
-	madhavan.krishnan@linaro.org
-Subject: Re: [libcamera-devel] [meta-multimedia][PATCH v2] libcamera: fix packaging and installation
-Message-ID: <20200801130137.GE11820@pendragon.ideasonboard.com>
-References: <20200731143919.25825-1-andrey.konovalov@linaro.org>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=TQyuQLci;
+ spf=pass (domain: gmail.com, ip: 209.85.160.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f196.google.com with SMTP id s23so26097860qtq.12
+        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Aug 2020 23:56:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=TWOfLlE2AtncW1MaW+6K5eTfXjpUSen3chvylEEs21U=;
+        b=TQyuQLciOO6rSSoqtCxM4XaQ5a8LsQ9e7+Je1E3K81BvpkyJGIbgHSipT1chMioXLS
+         Ua+kfNvGFbKXJ789WSjZH4mium3AwGYViLSv36w1c7mixnWb00sI6FNuoaIpBTtJ82td
+         ODfYpigQlkAsTf+3fyDk3T32A2A1rKi4LI4NT2POBm6XGX/IqZneEX46TFZB8yMWuxC+
+         DCWlLBVn3N0eVAKRgtRlXQna3uWD8ziJKhoh8AW+657Hk9dOFhlQVQFQUZpB0f5zG0ZB
+         4uMZpIMeznNMxltoCw8D4OIx0g7wgWICDzG7ZAoLdUad18RIpjyzfKtdzsbw9VvCwVJH
+         ZKig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=TWOfLlE2AtncW1MaW+6K5eTfXjpUSen3chvylEEs21U=;
+        b=Zt6DuOI5tr9WZigi5qMv9YYPc6oypcH9XltLqOMSslqFkyR6VtpQgwf7wRlmcJS16x
+         1k28sHTIZGfo2JastP+yk5fYEMCDCqcI70W0uxkn8OQWyGSLycy8aEMz8ZHk7cgQdm0O
+         9ClSZ1QDrDggPh6IQgZT25MOgeKvhnj6+3Ns/+EHQltk8YDc9ofj/6MocsZVg4H8VRg0
+         4LRFzmsUCHvjPI3PUkR5FvKkt9h1bAQQ15j4laPFXKEYHbuieWEP0efsTsKVADH7Cy2E
+         5SooQN5lmG0X8GYDUNAKjS1rCQ+AamO4lEijMOgTXDTDM6r11Yob3xBJXR8Bp+Ga6jGQ
+         1HCw==
+X-Gm-Message-State: AOAM533KlbnlUH+/LKezUpAMayFYojCg7kPA9d25Fe0YcZrzFxD0z1G5
+	0rzjDne2iwD09kluEpC4DBa4mI/0sS5FbpNGujA=
+X-Google-Smtp-Source: ABdhPJzHfZoRJgnBy+NK/isK6fDhlN+Qqbm5m3pjlbbKJABMYUAaqMSquuwymayKxnvoDWAMKZeaDsJW47zlP6rHhIg=
+X-Received: by 2002:ac8:4097:: with SMTP id p23mr10738389qtl.316.1596351409351;
+ Sat, 01 Aug 2020 23:56:49 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200731143919.25825-1-andrey.konovalov@linaro.org>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+References: <1596228160-6530-1-git-send-email-zangrc.fnst@cn.fujitsu.com> <1596228160-6530-3-git-send-email-zangrc.fnst@cn.fujitsu.com>
+In-Reply-To: <1596228160-6530-3-git-send-email-zangrc.fnst@cn.fujitsu.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Sat, 1 Aug 2020 23:56:23 -0700
+Message-ID: <CAMKF1srgVcmMF4UuYHf=arvD9M0nV9iftoQdBLi2GDqiO+yGxg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] libmicrohttpd: upgrade 0.9.70 -> 0.9.71
+To: zangrc <zangrc.fnst@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Andrey,
+This upgrade needs to rework depend packages since version 0.9.71,
+callbacks must return an enum instead of an int.
 
-Thank you for the patch.
+See systemd fix e.g.
+https://github.com/systemd/systemd/commit/d17eabb1052e7c8c432331a7a782845e36164f01
 
-On Fri, Jul 31, 2020 at 05:39:19PM +0300, Andrey Konovalov wrote:
-> libcamera checks if RPATH or RUNPATH dynamic tag is present in
-> libcamera.so. If it does, it assumes that libcamera binaries are
-> run directly from the build directory without installing them, and
-> tries to use resorces like IPA modules from the build directory.
-> Mainline meson strips RPATH/RUNPATH out from libcamera.so file
-> at install time. But openembedded-core patches meson to disable
-> RPATH/RUNPATH removal. That's why  we need to remove this tag manually
-> in do_install_append().
-> 
-> IPA module is signed (with openssl dgst) after it is built. But
-> during packaging the OE build system 1) splits out debugging info,
-> and 2) strips the binaries. So the IPA module so file installed
-> isn't the one which the signature was calculated against. Then
-> the signature check fails, and libcamera tries to run the IPA
-> module isolated (in a sandbox), which doesn't work if the IPA
-> module wasn't designed to run isolated. The solution is to
-> recalculate the IPA modules signatures in ${PKGD} after do_package().
-> 
-> Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
+also see https://lists.gnu.org/archive/html/libmicrohttpd/2020-06/msg00013.html
+where it says what the change is
+
+Currently we are failing in jsonrpc package see
+http://errors.yoctoproject.org/Errors/Details/427173/
+
+Please take a look and send a fix for jsonrpc I will hold this patch until then
+
+On Fri, Jul 31, 2020 at 1:42 AM zangrc <zangrc.fnst@cn.fujitsu.com> wrote:
+>
+> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 > ---
->  Changes in v2:
->   - Recalculate the IPA modules signatures after do_package()
->     instead of disabling stripping and splitting libcamera package
+>  .../{libmicrohttpd_0.9.70.bb => libmicrohttpd_0.9.71.bb}      | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-support/libmicrohttpd/{libmicrohttpd_0.9.70.bb => libmicrohttpd_0.9.71.bb} (86%)
+>
+> diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.70.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.71.bb
+> similarity index 86%
+> rename from meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.70.bb
+> rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.71.bb
+> index 94976d2e98..2bd8148e3f 100644
+> --- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.70.bb
+> +++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.71.bb
+> @@ -8,8 +8,8 @@ DEPENDS = "file"
+>
+>  SRC_URI = "${GNU_MIRROR}/libmicrohttpd/${BPN}-${PV}.tar.gz \
+>  "
+> -SRC_URI[md5sum] = "dcd6045ecb4ea18c120afedccbd1da74"
+> -SRC_URI[sha256sum] = "90d0a3d396f96f9bc41eb0f7e8187796049285fabef82604acd4879590977307"
+> +SRC_URI[md5sum] = "c7e230e9b899282b43d9a9faa41e893d"
+> +SRC_URI[sha256sum] = "e8f445e85faf727b89e9f9590daea4473ae00ead38b237cf1eda55172b89b182"
+>
+>  inherit autotools lib_package pkgconfig gettext
+>
+> --
+> 2.25.1
+>
+>
+>
 > 
->  .../recipes-multimedia/libcamera/libcamera.bb     | 15 ++++++++++++++-
->  1 file changed, 14 insertions(+), 1 deletion(-)
-> 
-> diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-> index 00a5c480d..30c6600e5 100644
-> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-> +++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-> @@ -18,13 +18,26 @@ PV = "202006+git${SRCPV}"
->  
->  S = "${WORKDIR}/git"
->  
-> -DEPENDS = "python3-pyyaml-native udev gnutls boost"
-> +DEPENDS = "python3-pyyaml-native udev gnutls boost chrpath-native"
->  DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
->  
->  RDEPENDS_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayland', '', d)}"
->  
->  inherit meson pkgconfig python3native
->  
-> +do_install_append() {
-> +    chrpath -d ${D}${libdir}/libcamera.so
-> +}
-> +
-> +addtask do_recalculate_ipa_signatures_package after do_package before do_packagedata
-> +do_recalculate_ipa_signatures_package() {
-> +    for module in $(find "${PKGD}/usr/lib/libcamera" -name "*.so.sign"); do
-> +        if [ -f "${module%.sign}" ] ; then
-> +            "${S}/src/ipa/ipa-sign.sh" "${B}/src/ipa-priv-key.pem" "${module%.sign}" "${module}"
-> +        fi
-> +    done
-
-Note that you could also use the src/ipa/ipa-sign-install.sh script,
-which takes the key as the first argument followed by the list of .so
-files to sign. Something along the lines of (not tested)
-
-    local modules
-    for module in $(find "${PKGD}/usr/lib/libcamera" -name "*.so.sign"); do
-        module="${module%.sign}"
-        if [ -f "${module}" ] ; then
-	    modules="${modules} ${module}"
-        fi
-    done
-
-    "${S}/src/ipa/ipa-sign-install.sh" "${B}/src/ipa-priv-key.pem" ${modules}
-
-I think this will lower the risk of breakage in the future, as
-ipa-sign.sh will have a higher chance of being refactored than
-ipa-sign-install.sh
-
-Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-
-> +}
-> +
->  FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig"
->  FILES_${PN} += " ${libdir}/libcamera.so"
-
--- 
-Regards,
-
-Laurent Pinchart
