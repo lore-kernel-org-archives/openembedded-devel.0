@@ -1,82 +1,124 @@
-Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com [209.85.208.170])
- by mx.groups.io with SMTP id smtpd.web11.1036.1596475501335619138
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
+ by mx.groups.io with SMTP id smtpd.web11.1629.1596476961142669511
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Aug 2020 10:25:02 -0700
+ Mon, 03 Aug 2020 10:49:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=veLn1fVb;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.170, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f170.google.com with SMTP id t6so27588763ljk.9
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Aug 2020 10:25:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=YlOSkzCl;
+ spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f195.google.com with SMTP id m7so3778474qki.12
+        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Aug 2020 10:49:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=1sifZnHRNkYKPjMWPfRd0+NKIJxo+BAdopCW+QegpAI=;
-        b=veLn1fVbIy6IdIfTit5UGLgui2kuIphuoP7fvQzOlU4tlpD9vBr56PHeeSxyPGXa6v
-         f0Ocy4rLl2wJLeD2MUFj8ttrbFwWdrOsN08uFHOPcM5/PPMZ7TUvk4zsNNUfal6QiNZA
-         yT8/gbPYKF7/wF7tk9C2SoYH08EMVwkpi9fllaHHJqrV0vPMBQDNTWzCROKC58IWX6a/
-         w4QRZvyf8aoCBe8jaN5VxWqufHzb9iTLwHAvzcchlFBR9eoBMrGa85VfpQYvjEyjQS0n
-         qacATUWL29YvvogRGIr7XQ2iuWm8ck8NdX/XcobgDGtbYXKsVmVDBj1Fl0Tkf4af5Cwt
-         Puyw==
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Y8Ja86GMir7ltL6W5gmY1BGylfkj7N+HuAhTwGfDQQQ=;
+        b=YlOSkzCliAT31GzHwKE+V4U60Krjz2zDhgmsE2qmao3PJi02KbyAbx4gh+EjF0gIp6
+         S/aLLXCX1gXtm7nDxUjqQ3/daV9GSBmc7ytUoc/n44v6jeGoBToZ2c0u0eaNL32SRf9I
+         nSIFLqqrJivsA4zV86DVHG5sxISu4ogR4PysjpE9Qlp5fpqtEG0njRUvLXFuDREH697n
+         LmGN2xIOEJlDCrSOiUPli2yZx+XUbpr5rX5jHNtmgGvI94ml9sDE7sZ1NzApXVjiC3a1
+         Haxsb0IgdQuEI27CI5SOfu89hLle3+ylIV0G1eH1+wsZCLNuhihgSGRXLOhFEDSPBccm
+         3EBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=1sifZnHRNkYKPjMWPfRd0+NKIJxo+BAdopCW+QegpAI=;
-        b=QeAARee5Td9cQTejX8PsScQn9JNu/YMwZnvQr6zpygzXLUwZ8gcZ5A9FdE8KlTaKgt
-         AMA6gryeWvW3pRxuNOor8WtM9n/wOo48rSMDuYPwhBYMoAFSpuvZFVbovDsgYK4MBhLD
-         9qMq0FLvceiHg0+BxK5OQFdFB3p/Q8ulVF4XyroVvpTPspBDU5PeToWy/NP5aIVP0ZeS
-         P+49q/K88/DmKMZ2JHSkZ0Vr5yUgRa/tmhg8qYxAHQkn5REm6416kxoyeDAyKpaTWJKn
-         ++GnQpeQlH5bh6Sf6Mk3/1JRypYI//SC6MzsiRcd5LISpYVfQFPBci7tZSatPyTvrw6d
-         l2nA==
-X-Gm-Message-State: AOAM531xD6cCu5ii891PfGKkvY3Y1zY/Q0gB714dYi/5T0yMQML1ks9h
-	SubTdRvZkeVfNcOa3ciI/mzDjuDpwxE=
-X-Google-Smtp-Source: ABdhPJwucu233hG63jA3zWIxSemZvdHPG75weSuYr2Zyi8baYsv6KgC8XYJSEJFa+6O7AlN9Ymwekw==
-X-Received: by 2002:a05:651c:2007:: with SMTP id s7mr4751601ljo.74.1596475498788;
-        Mon, 03 Aug 2020 10:24:58 -0700 (PDT)
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id c74sm3021142lfd.61.2020.08.03.10.24.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Aug 2020 10:24:58 -0700 (PDT)
-From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] kronosnet: inherit manpages
-Date: Mon,  3 Aug 2020 19:24:52 +0200
-Message-Id: <20200803172452.2360101-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Y8Ja86GMir7ltL6W5gmY1BGylfkj7N+HuAhTwGfDQQQ=;
+        b=KU6sk/ZcfNPDcIABFHLSoQ5lgGdHTdhoZ1kxPPzLOL5nM4hxpR9oH28XnxUPGM3cr2
+         jDoYDX8jc0djTqxxPS547WRalaD7WsGNgCL8xKDjm8AQ4wH3zu632DBOORpq6S2ntCOq
+         v+4J6Ojy/BtJ+2PIQaF+MYb6636guY+1oC8MIXkXutFOSqmDhANDOQJ6u00O9H+SVuCR
+         +SU9avec4SkZoevOaDwzlaP3xPMNMuhCHll1p1AZcntG1xa+/4f453VCmRpNUItI9cBp
+         45ydL82h5dMq+026cjvwvgPM7VRD0LOSQrhrEcn3XXLcRN3F+BXxNEWjVCfEWtR4KHdF
+         DaNg==
+X-Gm-Message-State: AOAM531WBXBRgQpQNoSBXinLQwMi4Em7uINgsGsqEKkpQJpaoRbhN1Yr
+	M4g4pIkjCWVa/mHZgHjOCiaPSWFdoABHCMq54/E=
+X-Google-Smtp-Source: ABdhPJww1n8KNVH2gBpNDR0e2Pa+k8bCtfXa3eK6gKBpqqVlR/S76cex3f4zNYogMM5ewlKUzhxfJm7iDhfzcQuNTqA=
+X-Received: by 2002:a05:620a:565:: with SMTP id p5mr18034450qkp.215.1596476960176;
+ Mon, 03 Aug 2020 10:49:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20200802190719.9358-1-andrey.konovalov@linaro.org>
+In-Reply-To: <20200802190719.9358-1-andrey.konovalov@linaro.org>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Mon, 3 Aug 2020 10:48:54 -0700
+Message-ID: <CAMKF1srLY6B6dtw3EhBJS30w=YNuigUqNUzJMSov+J0YxdW_eQ@mail.gmail.com>
+Subject: Re: [meta-multimedia][PATCH v3] libcamera: fix packaging and installation
+To: Andrey Konovalov <andrey.konovalov@linaro.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, madhavan.krishnan@linaro.org, 
+	Peter Griffin <peter.griffin@linaro.org>, libcamera-devel@lists.libcamera.org
+Content-Type: text/plain; charset="UTF-8"
 
-Let manpages bbclass handle man pages.
+fails with https://errors.yoctoproject.org/Errors/Details/427980/
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- .../recipes-extended/kronosnet/kronosnet_1.18.bb            | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/meta-networking/recipes-extended/kronosnet/kronosnet_1.18.bb b/meta-networking/recipes-extended/kronosnet/kronosnet_1.18.bb
-index 7b1dfc241..3fd6298b5 100644
---- a/meta-networking/recipes-extended/kronosnet/kronosnet_1.18.bb
-+++ b/meta-networking/recipes-extended/kronosnet/kronosnet_1.18.bb
-@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1"
- 
- UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
- 
--inherit autotools
-+inherit autotools manpages
- 
- S = "${WORKDIR}/git"
- 
-@@ -26,5 +26,5 @@ S = "${WORKDIR}/git"
- CFLAGS_append_toolchain-clang = " -Wno-sign-compare"
- 
- PACKAGECONFIG[man] = "enable_man="yes", --disable-man, "
--
--PACKAGECONFIG_remove = "man"
-+#
-+#PACKAGECONFIG_remove = "man"
--- 
-2.25.1
-
+On Sun, Aug 2, 2020 at 12:07 PM Andrey Konovalov
+<andrey.konovalov@linaro.org> wrote:
+>
+> libcamera checks if RPATH or RUNPATH dynamic tag is present in
+> libcamera.so. If it does, it assumes that libcamera binaries are
+> run directly from the build directory without installing them, and
+> tries to use resorces like IPA modules from the build directory.
+> Mainline meson strips RPATH/RUNPATH out from libcamera.so file
+> at install time. But openembedded-core patches meson to disable
+> RPATH/RUNPATH removal. That's why  we need to remove this tag manually
+> in do_install_append().
+>
+> IPA module is signed (with openssl dgst) after it is built. But
+> during packaging the OE build system 1) splits out debugging info,
+> and 2) strips the binaries. So the IPA module so file installed
+> isn't the one which the signature was calculated against. Then
+> the signature check fails, and libcamera tries to run the IPA
+> module isolated (in a sandbox), which doesn't work if the IPA
+> module wasn't designed to run isolated. The solution is to
+> recalculate the IPA modules signatures in ${PKGD} after do_package().
+>
+> Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
+> Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+> ---
+>  Changes in v3:
+>   - As suggested by Laurent Pinchart, use ipa-sign-install.sh script
+>     to recalculate the signatures instead of ipa-sign.sh.
+>
+>  Changes in v2:
+>   - Recalculate the IPA modules signatures after do_package()
+>     instead of disabling stripping and splitting libcamera package
+>
+>  .../recipes-multimedia/libcamera/libcamera.bb | 19 ++++++++++++++++++-
+>  1 file changed, 18 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+> index 00a5c480d..b34d673bd 100644
+> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+> +++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+> @@ -18,13 +18,30 @@ PV = "202006+git${SRCPV}"
+>
+>  S = "${WORKDIR}/git"
+>
+> -DEPENDS = "python3-pyyaml-native udev gnutls boost"
+> +DEPENDS = "python3-pyyaml-native udev gnutls boost chrpath-native"
+>  DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
+>
+>  RDEPENDS_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayland', '', d)}"
+>
+>  inherit meson pkgconfig python3native
+>
+> +do_install_append() {
+> +    chrpath -d ${D}${libdir}/libcamera.so
+> +}
+> +
+> +addtask do_recalculate_ipa_signatures_package after do_package before do_packagedata
+> +do_recalculate_ipa_signatures_package() {
+> +    local modules
+> +    for module in $(find "${PKGD}/usr/lib/libcamera" -name "*.so.sign"); do
+> +        module="${module%.sign}"
+> +        if [ -f "${module}" ] ; then
+> +            modules="${modules} ${module}"
+> +        fi
+> +    done
+> +
+> +    "${S}/src/ipa/ipa-sign-install.sh" "${B}/src/ipa-priv-key.pem" "${modules}"
+> +}
+> +
+>  FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig"
+>  FILES_${PN} += " ${libdir}/libcamera.so"
+>
+> --
+> 2.17.1
+>
