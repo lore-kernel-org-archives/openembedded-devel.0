@@ -1,17 +1,17 @@
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.67])
- by mx.groups.io with SMTP id smtpd.web11.6671.1596490917579028712
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.79])
+ by mx.groups.io with SMTP id smtpd.web11.6696.1596490982282297614
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Aug 2020 14:41:57 -0700
+ Mon, 03 Aug 2020 14:43:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=XhSWmGtU;
- spf=pass (domain: windriver.com, ip: 40.107.223.67, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=OTgKAcHs;
+ spf=pass (domain: windriver.com, ip: 40.107.236.79, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=M6ngUHuUNKxYEA2DCJd54KdsZ8FzCHsC+lCeEXEPTk2topDgpT4d2D4MEPzRH1NLSHUnde29HXLCgELN4awAjH/St1FKBHgJ725leraOoODk8Wu3rNPA7DU74/ot7I7/XUF3YSUoKv9ngL1cQsfylDHw3sRxuJ8SL6XnjniKdntXNFrergMt4rY0m+TtomwJZRTA5dO/lUmOjKRuK7F4VixjorVLfwx3hSoYXdgn3oX8VWuO+OYfVoj2fxYzH3tO1stx6cnU5MMFCb5jBS6UEr6CTYkyne6xr1jFhWv5SsOmXDjCgT4jPFW8WuuxQ9G/s0e7JwUQ9BmtfYt8oKIjlg==
+ b=lJFlEpcvVH/F7NomMhZreORbnsrbaw7HFaXyM5IZ1vfepR3QnQoRdCPZ7IPCiKZOtbevcQ+b50SAKk/2gcnTFCVY/zLD3bukiZQOa+QmbfDtK+3YBq/TpMfpNvrA4s0RZcDW3pI628rKU8OBsyZcgnv3PGfqNKxVqVQij/SQ08XaZXPrv96bSyZUcJKSZKbMHV0PcYqXGGT0nYh9BD+GosYUZZFFwwEWX5jr6+q8ieXvQ4nJHVb0q8zXElCkh9jS3DvrQHBzqPLIYGh0QBeyhxGO1fWnqoc/X5SSsY4gpN4pviclNlWgCm0zKMoqb8mN0IsBa6jMrB4TIs/0JMHCkA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZujaAR4uECLoUoU9uvzTRN6yeCqqeceFF8lXAbRZAgE=;
- b=GcN+/qM3nCTZvtc8AfR3lGPCLd3nMydMJO4n4M7YfUE2YBAfWJErgOy3yd3a9HT6+k4yJzsQ9MQAUkyHH9EVATpSVNwRy9d9HjAFKK0ovprvtprNsFsl1I0xmvezTBCEHo8OaF4imHcdOy65a0nnPLakfHEg4XzPMJ7Dmx8kOxwrf6m0FVLUFilbHI7ueVixUFxL+/i+KwdPRfrz2UIgR1V17wHUW5Wm7OpeQ1I0TqRP4KkH0dlK/o2rdt/8EbY9SqZ+7Bbh9rBtjMK1W0gXZ7Vv62CHE7dARO1ikeAmIj3Kt2/5V+uVpFAWiliPl0bzyG6PrFo1oNyT8t7vc0vCqQ==
+ bh=EQSNDJhLZ1PxwMcetg/qrVvr1GeDupTsU06g55qZ4Gs=;
+ b=oKbtURI6IyhJ7UIamfEcLBGSKV7XpRGB8+0+4BgzFp3CBV4ux/bI1jOnT5fg8gqUQWn1ObHzZJmXlpp3ajQzZzfqTZzhsaQ1uhrFdSTogSkUNyUvTxUhk9//Sqp/DXxfwPUzj9FHWMgIppirqLzxSCVOa4WO8HGMXyMxWVDyHGA34jJ4cvBGmwxXuBn0xvrPqDmQnTmjnSgb6UvWM/wiVKqSrEUTfLWmUZso/u9z/zZf2WTKOfI9qr9ajU0Kg1zD8PBGRi0UARYfgXHXPMbNGVac4Yd7Et7TuDg13MRYOWfv8OFM2rAfsr+Y3AervztfcHVISpo9S8LASaRvDQVBJA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,111 +19,111 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZujaAR4uECLoUoU9uvzTRN6yeCqqeceFF8lXAbRZAgE=;
- b=XhSWmGtUljkSdmPBtwvfbAc1tAHmui6dOuSGFOSIDCvKp9IP8uhbQQ50HdmJM/zKYs0MgX9RYtvAg6ER7KNQShradZu7bEath+KV54iuvqHKLrYdRz8tTWPXTjk7sy3Kn8t+rSHZb2DXRht0sELIFkncYrFmwy2Tjqstx5FMFdY=
-Authentication-Results: gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
+ bh=EQSNDJhLZ1PxwMcetg/qrVvr1GeDupTsU06g55qZ4Gs=;
+ b=OTgKAcHsPpaowFjDBwQrJB6aEBvqBN4ZnwxLJoBEUls6/BeY7/UFFy8rwSDhvB6Kwcr9wmLv0tG9cT7B5uCMRP4+xr8PnjRoM3gBs+6Nyaref7qAZu9SllGhsd0t8TcWCrPR/Lo0hjYmBmDM8pr4yVvAHq0t7v3c7MuAFK3orC8=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BY5PR11MB4101.namprd11.prod.outlook.com (2603:10b6:a03:18e::10) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3239.17; Mon, 3 Aug
- 2020 21:41:53 +0000
+ 2020 21:42:59 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::8d65:f6f9:ce31:8d47]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::8d65:f6f9:ce31:8d47%5]) with mapi id 15.20.3239.021; Mon, 3 Aug 2020
- 21:41:53 +0000
-Subject: Re: [oe] [meta-python][PATCH 4/4] python3-lorem: Added recipe
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-Cc: Colin McAllister <colinmca242@gmail.com>
-References: <20200731201848.484776-1-raj.khem@gmail.com>
- <20200731201848.484776-4-raj.khem@gmail.com>
+ 21:42:59 +0000
+Subject: Re: [oe] [meta-python][PATCH 01/15] python3-pywbem: Upgrade 0.17.3 -> 0.17.4
+To: Leon Anavi <leon.anavi@konsulko.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20200731132230.20031-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <569b2f9e-16cc-f51e-861d-fa6b2e3b6dc9@windriver.com>
-Date: Mon, 3 Aug 2020 17:41:50 -0400
+Message-ID: <72be8644-cd0b-959b-7b8b-07dcfa736030@windriver.com>
+Date: Mon, 3 Aug 2020 17:42:56 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200731201848.484776-4-raj.khem@gmail.com>
-X-ClientProxiedBy: YTXPR0101CA0026.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00::39) To BY5PR11MB3909.namprd11.prod.outlook.com
+In-Reply-To: <20200731132230.20031-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTXPR0101CA0005.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00::18) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YTXPR0101CA0026.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::39) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3239.17 via Frontend Transport; Mon, 3 Aug 2020 21:41:52 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YTXPR0101CA0005.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::18) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3239.16 via Frontend Transport; Mon, 3 Aug 2020 21:42:58 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 33e6ea84-1f48-4eda-7bb6-08d837f6098a
+X-MS-Office365-Filtering-Correlation-Id: 9fba3cce-01aa-4fd7-ee9c-08d837f63098
 X-MS-TrafficTypeDiagnostic: BY5PR11MB4101:
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB4101BB4DB581DF8997B50A4D9F4D0@BY5PR11MB4101.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:517;
+	<BY5PR11MB41016F8E9E3C1A5C328F82909F4D0@BY5PR11MB4101.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2000;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	MCuqFehU//9H+CgjTAZy4o25cD3Rl1ZXsNOHCNktNAxCEjY6cTei4/M78AZkP9jzDi4+tekOrtZn4BTT0lv85kxNYBQfHDKku+1J6rNshWisyEK77TOsgAHvqy+ZetbcxXxSIZxOc2X/a0CcRueKSfW0rMcZ95N1HSlz1uBZK092V2bM9cL+fEby9POn3g3Xp2Nle2Uaxy0SP7/07mHkNugwIxIk6+C3+Hj7yYQRoGyNH5wevebZi2UYt+cTL8gdajO6xqmDBEDlqTFY/4VK7oSMsD/Xqpblf/ve0dt01k/uCIMMhPRB32h+NnQs8xLwZZN+/q/BDRpccHjqMc3B9B2RGnOLpLCCsW2/hbEEcc1e+feOj0yzJ56cbAxO8vqu0aDN3tX5sR85mkS1BYT2kBI5Pipy+VH9SA0ROFj3X8svAHVXvHhvC0t8kA0XugsrPTgBs+xw9xcMtkP61WAQjA==
+	HJuRRxxjTSxyBXTS2aPm3ipNNBALn/C3ZrU2+GyJInn/U5HtqP58eJcClljU0ntJgPOKly8eZYNJoLbWBb5lZOsZ+kDuGTwed4CSTZJDDYCbdImIw9kH9hcgjrByuQwD/A/I4C1GbIV1NCndxZJBLCChH87r0942rGdPQFBiNfqgjM08mWrESTcUu7u2BKstj4L8iNe6rHMclBINFJ240YmCE21Fzajz2TZchO8HYWrCgfn86buq5eDiNrsqollMXQNOgA4lerl+WXZFUz6AwNLGH0etmBEzQe/FvXPeHPrBDKJH5stUZTXEGfOZegTGd4syO7ZoByMUAvKlI73c1SD0LLCY6RmLYWgHfMEN4eMzOhOMQVRTS22Eo4yH63imWm0b4EwkKfIlauxH4NDO97Oo92H9LOiv1SFUimvbTrUkr30y37ftXD4QGafDIsvEh+9KBRdEekKrengJzKNE7Q==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(39850400004)(376002)(136003)(396003)(346002)(366004)(4326008)(66556008)(166002)(8676002)(478600001)(6486002)(31696002)(44832011)(2906002)(66476007)(66946007)(52116002)(31686004)(16526019)(26005)(16576012)(956004)(86362001)(83380400001)(316002)(186003)(53546011)(966005)(33964004)(2616005)(36756003)(5660300002)(8936002)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(39850400004)(376002)(136003)(396003)(346002)(366004)(66556008)(166002)(8676002)(478600001)(6486002)(31696002)(44832011)(2906002)(66476007)(66946007)(52116002)(31686004)(16526019)(26005)(16576012)(956004)(86362001)(83380400001)(316002)(186003)(53546011)(966005)(33964004)(2616005)(83080400001)(36756003)(5660300002)(8936002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	4wSa0uf6NgSIhfiLPRZu/raiTfWtUFtY7GrF9I9ntLswPc5J6zJ7ujgXDXgj3JsrGxQmVYoNiT6Nc5vet+CMY4PgAlsQFIDLZg8ZmvBMTcTfecQIdXlO0C0piIhAY6/NzRJbVdAiCHzWWZmJx/Y/pHjXYsgtSirXMs4ZYvfwEWkLufzzxgjFC2pBuLb2Lp4DGZpXmq342AU8l9LKy+EhkVskby5+artGG/Kjufnu83+JwMk0c+TD7ir9u0t/p+66FYV02800VJGM5hNEIM16ZHJMjdJV2lvghqayutxh/xlD1n5psVy+YgfhcqcO+E0lGigDbUMthXykppSstHfRM2Vek3DTIP8CsrBMQ0G7mL1e9j27YDUUZN0SXWBR6bXrKS7QIhVgvC7G/fO6Zfdmtw6eF8vw9eHjOL+N1/s2dl50VUqm+uLLtEXHkOOjX6F27OEos5Q981Ci9gr+YjaM+9ITk7600sE3It/zNgcuDUV8PKC3+PynSQ2j0Bzu7LnYEWBle4w9aK4TIBH1MEve9z0DOsYEotRD19QuaOjVHGBlP3Otz41XNd2LMQfmrC9krrEKwiRHZNCs7a1Q7AapkvU1m9QBJKvXhgXSdn3/IohpIJZWzr45YFSnNu999AgFNSlBJJxb124QdT2Y4LmJ+A==
+	6In1CCEQxkawGakA3AvyalAND4DndIIQwYpuxifdy8C6SKAvgwzpGk0PEkAABDCxIPm3RiAfpyRizOfF3HjyfFWjllL2/pmfhIg1D4aUWpgtk6pJfgJgFN8xNJODbuSOQ02/3GJNBkNU9yNuRm9rm2fJokgMt9hxpOuS6FJezlud1tdR+mGEZ7Ed/l7Ns15f1aVEAyaJUzMCygb5gi6Plp2+F1CpyOWaequqU/K0GrHMn+im7OcTtitZObGke6RXxgIxxacNpcR0z8Kdipjw8+geuwdtJmaiKVKhlaf0axMLSFJq6v1fePaq4dtK5DQfDfemaLDuoaa1CMBPisMRDP2ADUi+dcPs4KOPZnlUQ/HHms1m6BG58w0M7nnU/MzjILmFOCnjw3b4TrZT1IU3C5Q1jJM/VuI4avZoDsUNDIkvU/jB5cIJ9ZA4zfIZLhUC6BCB38HOGJL6C2k+KPuQu1snhbZvXYqLuwUet1mJHraahpNgTM2z5Q3wLlqm74zFUkeBQBTadcd/bqK1lLbVZVkPMJShwHcaTJGxPS19cQDStKLrFDIDqjqKsv/dbuduf1Po7Pm6F/IN/izY/mUOYiYoWOfPtthAZapovklqi7NQy3+gpzeU2dnNt1YOwPy0idsmAa9/DeNPjmwhXRgSgQ==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 33e6ea84-1f48-4eda-7bb6-08d837f6098a
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9fba3cce-01aa-4fd7-ee9c-08d837f63098
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Aug 2020 21:41:53.6377
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Aug 2020 21:42:59.1525
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sYKlH0PYhPkMP9qQqUesHWzq4Qfr6lFfrC6MqF9GMj31inwDN7EAJfLflrh81uSDrMPw59ToswzdkOPHaF+yJp6NTQwxyT4b5JSEQDZsi+s=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2A6l8PVXxMqZWbKq+AdBLciky1LlAQc6yrkW0D2GJjuu90wicshF8BUhZN8gL1AwQHbOfh7RCJJZ3WtwmCIKQFRAfNrFYwfzuNHrPn92FWs=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4101
 Content-Type: multipart/alternative;
- boundary="------------7B23FD0870424AB09E20740C"
+ boundary="------------64BC0C6FB402EF4AD8D1BF19"
 Content-Language: en-US
 
---------------7B23FD0870424AB09E20740C
+--------------64BC0C6FB402EF4AD8D1BF19
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 7/31/20 4:18 PM, Khem Raj wrote:
-> From: Colin McAllister <colinmca242@gmail.com>
+On 7/31/20 9:22 AM, Leon Anavi wrote:
+> Upgrade to release 0.17.4 with the following bug fixes:
 >
-> Created Python3 recipe for python3-lorem.
+> - Test: On Python 3.8, upgraded the minimum version of lxml from
+>    4.4.1 to 4.4.3, in order to fix an XMLSyntaxError raised when
+>    encountering UCS-4 characters.
+> - Test: Fixed issue with Swig when installing M2Crypto on native
+>    Windows in the Appveyor CI, reporting mssing files swig.swg and
+>    python.swg. This was fixed by pinning the swig version to 4.0.1.
 >
-> Signed-off-by: Colin McAllister <colinmca242@gmail.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python3-lorem_0.1.1.bb                | 16 ++++++++++++++++
->   1 file changed, 16 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-lorem_0.1.1.bb
+>   .../{python3-pywbem_0.17.3.bb => python3-pywbem_0.17.4.bb}    | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-extended/pywbem/{python3-pywbem_0.17.3.bb => python3-pywbem_0.17.4.bb} (92%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-lorem_0.1.1.bb b/meta-python/recipes-devtools/python/python3-lorem_0.1.1.bb
-> new file mode 100644
-> index 0000000000..fc75e43485
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-lorem_0.1.1.bb
-> @@ -0,0 +1,16 @@
-> +DESCRIPTION = "Generator for random text that looks like Latin"
-> +HOMEPAGE = "https://github.com/sfischer13/python-lorem"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=5301c01b2bcdeedba23645f94db2f179"
-> +SRC_URI[md5sum] = "e3f0064a94c13e19780eb724affdb426"
-> +SRC_URI[sha256sum] = "785f4109a241fc2891e59705e85d065f6e6d3ed6ad91750a8cb54d4f3e59d934"
-> +
-> +PYPI_PACKAGE = "lorem"
-> +
-> +inherit pypi setuptools3
-> +
-> +CLEANBROKEN = "1"
-> +
-> +RDEPENDS_${PN} += " \
-> +        python3 \
-> +"
+> diff --git a/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.3.bb b/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.4.bb
+> similarity index 92%
+> rename from meta-python/recipes-extended/pywbem/python3-pywbem_0.17.3.bb
+> rename to meta-python/recipes-extended/pywbem/python3-pywbem_0.17.4.bb
+> index 930f04896..a804b0cc0 100644
+> --- a/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.3.bb
+> +++ b/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.4.bb
+> @@ -16,8 +16,8 @@ HOMEPAGE = "http://pywbem.github.io"
+>   LICENSE = "LGPLv2.1"
+>   LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
+>   
+> -SRC_URI[md5sum] = "9fbee6b4327f035eb212017b6cd84309"
+> -SRC_URI[sha256sum] = "1de9963adda97d89d191d027ddc64167699a11ac42ecc3ea35dddf7679ac2441"
+> +SRC_URI[md5sum] = "b65c03026bf2174e58e3e47a5e7e4825"
+> +SRC_URI[sha256sum] = "5b54b65a5434bb16432415743c0d154feee0c6d7a8a2fee208719c67d6d24c97"
+>   
+>   inherit pypi setuptools3 update-alternatives
+>   
 >
 > 
 
---------------7B23FD0870424AB09E20740C
+--------------64BC0C6FB402EF4AD8D1BF19
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -133,46 +133,46 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 7/31/20 4:18 PM, Khem Raj wrote:<br>
+    <div class="moz-cite-prefix">On 7/31/20 9:22 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200731201848.484776-4-raj.khem@gmail.com">
-      <pre class="moz-quote-pre" wrap="">From: Colin McAllister <a class="moz-txt-link-rfc2396E" href="mailto:colinmca242@gmail.com">&lt;colinmca242@gmail.com&gt;</a>
+    <blockquote type="cite" cite="mid:20200731132230.20031-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 0.17.4 with the following bug fixes:
 
-Created Python3 recipe for python3-lorem.
+- Test: On Python 3.8, upgraded the minimum version of lxml from
+  4.4.1 to 4.4.3, in order to fix an XMLSyntaxError raised when
+  encountering UCS-4 characters.
+- Test: Fixed issue with Swig when installing M2Crypto on native
+  Windows in the Appveyor CI, reporting mssing files swig.swg and
+  python.swg. This was fixed by pinning the swig version to 4.0.1.
 
-Signed-off-by: Colin McAllister <a class="moz-txt-link-rfc2396E" href="mailto:colinmca242@gmail.com">&lt;colinmca242@gmail.com&gt;</a>
-Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a></pre>
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200731201848.484776-4-raj.khem@gmail.com">
+    <blockquote type="cite" cite="mid:20200731132230.20031-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python3-lorem_0.1.1.bb                | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-lorem_0.1.1.bb
+ .../{python3-pywbem_0.17.3.bb =&gt; python3-pywbem_0.17.4.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-extended/pywbem/{python3-pywbem_0.17.3.bb =&gt; python3-pywbem_0.17.4.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-lorem_0.1.1.bb b/meta-python/recipes-devtools/python/python3-lorem_0.1.1.bb
-new file mode 100644
-index 0000000000..fc75e43485
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-lorem_0.1.1.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = &quot;Generator for random text that looks like Latin&quot;
-+HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/sfischer13/python-lorem">&quot;https://github.com/sfischer13/python-lorem&quot;</a>
-+LICENSE = &quot;MIT&quot;
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=5301c01b2bcdeedba23645f94db2f179">&quot;file://LICENSE;md5=5301c01b2bcdeedba23645f94db2f179&quot;</a>
-+SRC_URI[md5sum] = &quot;e3f0064a94c13e19780eb724affdb426&quot;
-+SRC_URI[sha256sum] = &quot;785f4109a241fc2891e59705e85d065f6e6d3ed6ad91750a8cb54d4f3e59d934&quot;
-+
-+PYPI_PACKAGE = &quot;lorem&quot;
-+
-+inherit pypi setuptools3
-+
-+CLEANBROKEN = &quot;1&quot;
-+
-+RDEPENDS_${PN} += &quot; \
-+        python3 \
-+&quot;
+diff --git a/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.3.bb b/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.4.bb
+similarity index 92%
+rename from meta-python/recipes-extended/pywbem/python3-pywbem_0.17.3.bb
+rename to meta-python/recipes-extended/pywbem/python3-pywbem_0.17.4.bb
+index 930f04896..a804b0cc0 100644
+--- a/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.3.bb
++++ b/meta-python/recipes-extended/pywbem/python3-pywbem_0.17.4.bb
+@@ -16,8 +16,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://pywbem.github.io">&quot;http://pywbem.github.io&quot;</a>
+ LICENSE = &quot;LGPLv2.1&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24">&quot;file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24&quot;</a>
+ 
+-SRC_URI[md5sum] = &quot;9fbee6b4327f035eb212017b6cd84309&quot;
+-SRC_URI[sha256sum] = &quot;1de9963adda97d89d191d027ddc64167699a11ac42ecc3ea35dddf7679ac2441&quot;
++SRC_URI[md5sum] = &quot;b65c03026bf2174e58e3e47a5e7e4825&quot;
++SRC_URI[sha256sum] = &quot;5b54b65a5434bb16432415743c0d154feee0c6d7a8a2fee208719c67d6d24c97&quot;
+ 
+ inherit pypi setuptools3 update-alternatives
+ 
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -182,4 +182,4 @@ index 0000000000..fc75e43485
   </body>
 </html>
 
---------------7B23FD0870424AB09E20740C--
+--------------64BC0C6FB402EF4AD8D1BF19--
