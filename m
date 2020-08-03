@@ -1,59 +1,97 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web11.5713.1596436627172405144
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web10.5866.1596436659356773644
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 02 Aug 2020 23:37:07 -0700
+ Sun, 02 Aug 2020 23:37:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: kai.kang@windriver.com)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: kai.kang@windriver.com)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 0736b5Ci005531
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0736bHCg024066
 	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Sun, 2 Aug 2020 23:37:05 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 2 Aug 2020 23:37:27 -0700
 Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
  ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
- 14.3.487.0; Sun, 2 Aug 2020 23:36:53 -0700
+ 14.3.487.0; Sun, 2 Aug 2020 23:37:06 -0700
 From: "kai" <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-xfce][PATCH 1/2] xfce4-eyes-plugin: 4.5.0 -> 4.5.1
-Date: Mon, 3 Aug 2020 14:36:49 +0800
-Message-ID: <20200803063650.24149-1-kai.kang@windriver.com>
+Subject: [meta-networking][PATCH 2/2] rdist: fix parallel build
+Date: Mon, 3 Aug 2020 14:36:50 +0800
+Message-ID: <20200803063650.24149-2-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200803063650.24149-1-kai.kang@windriver.com>
+References: <20200803063650.24149-1-kai.kang@windriver.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-4.5.1
+It fails to compile rdist occasionally when system load of build server
+is high:
 
-- Update URLs. Remove ref. to translations.x.o (Bug #16162)
-- Allow compilation with panel 4.15
-- Replace GtkStock buttons
-- Improve spacing (Bug #14664)
-- Make build less verbose
-- AC_CONFIG_MACRO_DIR -> AC_CONFIG_MACRO_DIRS
-- Translation Updates:
+| In file included from common.c:57:
+| ../include/defs.h:49:10: fatal error: y.tab.h: No such file or directory
+|    49 | #include "y.tab.h"
+|       |          ^~~~~~~~~
+| compilation terminated.
+
+Make $(COMMONOBJS) which include common.o to depends on related header files
+and y.tab.h to fix the parallel build failure.
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../{xfce4-eyes-plugin_4.5.0.bb => xfce4-eyes-plugin_4.5.1.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/eyes/{xfce4-eyes-plugin_4.5.0.bb => xfce4-eyes-plugin_4.5.1.bb} (68%)
+ .../rdist-6.1.5-fix-parallel-build.patch      | 31 +++++++++++++++++++
+ .../recipes-connectivity/rdist/rdist_6.1.5.bb |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/rdist/rdist-6.1.5/rdist-6.1.5-fix-parallel-build.patch
 
-diff --git a/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.5.0.bb b/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.5.1.bb
-similarity index 68%
-rename from meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.5.0.bb
-rename to meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.5.1.bb
-index e5c21a1ac..3d8bc854f 100644
---- a/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.5.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.5.1.bb
-@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-networking/recipes-connectivity/rdist/rdist-6.1.5/rdist-6.1.5-fix-parallel-build.patch b/meta-networking/recipes-connectivity/rdist/rdist-6.1.5/rdist-6.1.5-fix-parallel-build.patch
+new file mode 100644
+index 000000000..f35e96a34
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/rdist/rdist-6.1.5/rdist-6.1.5-fix-parallel-build.patch
+@@ -0,0 +1,31 @@
++It fails to produce common.o when system load is high:
++
++| In file included from common.c:57:
++| ../include/defs.h:49:10: fatal error: y.tab.h: No such file or directory
++|    49 | #include "y.tab.h"
++|       |          ^~~~~~~~~
++| compilation terminated.
++
++Make $(COMMONOBJS) which include common.o to depends on related header files
++and y.tab.h to fix the parallel build failure.
++
++Upstream-Status: Inappropriate [no upstream]
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++ src/Makefile.real | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/Makefile.real b/src/Makefile.real
++index e0f0dfc..53d4944 100644
++--- a/src/Makefile.real
+++++ b/src/Makefile.real
++@@ -41,7 +41,7 @@ $(SERVER_BIN): $(SERVEROBJS) $(COMMONOBJS) $(MISSINGOBJS)
++ $(CLIENT_BIN): $(CLIENTOBJS) $(COMMONOBJS) $(MISSINGOBJS)
++ 	$(CC) -o $@ $(CLIENTOBJS) $(COMMONOBJS) $(MISSINGOBJS) $(LIBS) $(LDFLAGS)
++ 
++-$(CLIENTOBJS) $(SERVEROBJS): $(HFILES) y.tab.h
+++$(COMMONOBJS) $(CLIENTOBJS) $(SERVEROBJS): $(HFILES) y.tab.h
++ 
++ y.tab.h: gram.c
++ 
+diff --git a/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb b/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
+index 3a27c2c5b..37b3eebe4 100644
+--- a/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
++++ b/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
+@@ -28,6 +28,7 @@ SRC_URI += "file://rdist-6.1.5-linux.patch \
+             file://rdist-6.1.5-fix-msgsndnotify-loop.patch \
+             file://rdist-6.1.5-bb-build.patch \
+             file://rdist-6.1.5-makefile-add-ldflags.patch \
++            file://rdist-6.1.5-fix-parallel-build.patch \
+ "
  
- inherit xfce-panel-plugin
- 
--SRC_URI[md5sum] = "6e274ceda37c7a8ae0821d9d49e965e9"
--SRC_URI[sha256sum] = "fdae00036383105a15d12e9809abd5945a8f2152b17e16ccdfbfe5bd9733f29d"
-+SRC_URI[sha256sum] = "4db780178e529391d53da180e49386904e69a5a33b3bd5185835d0a7e6ff5ac5"
- 
- FILES_${PN} += "${datadir}/xfce4/eyes"
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/rdist/files/rdist/"
 -- 
 2.17.1
 
