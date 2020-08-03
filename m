@@ -1,17 +1,17 @@
-Received: from NAM02-CY1-obe.outbound.protection.outlook.com (NAM02-CY1-obe.outbound.protection.outlook.com [40.107.76.40])
- by mx.groups.io with SMTP id smtpd.web10.6830.1596491698171901980
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.54])
+ by mx.groups.io with SMTP id smtpd.web10.6837.1596491706461909290
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Aug 2020 14:54:58 -0700
+ Mon, 03 Aug 2020 14:55:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=L0tjoC/M;
- spf=pass (domain: windriver.com, ip: 40.107.76.40, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=J03eJSU2;
+ spf=pass (domain: windriver.com, ip: 40.107.223.54, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Sumy3s7khhrGS+gSFoS1GdGSdfheT7XczzGHF4nfzJKXjSPpbyM5KhWExZIrzqZQtRRm8iwKYiK/DsOAs1Ut9E0m3IAe5tl5HaAGuu+XPZ+7vvru+4AoHiDfBC4NCepEWNucbBrzPQOCnh48Hq6GTduEJ/khNy31f4+PqGUPj/H0/sarN21KlOs8A3elNBwag/KkCrT2MotDJHV9tJIyu0WcseoMIUNAbsKaI1NxCYqM+Hz/aUsC3tgp45G6JgJGoaVouCOVumxNLXeOk3aQ4Y6BXe2Zdd24CXOjbqnBixzxMGuzbur5civBGWrDN4g6UY/45g4+IbRtJq4YrSZfZA==
+ b=eNI05Y+Xq4rTSaRPlGHNjIUcVUtSslctVgbyqnt4tZsI1BE7TM3YGNGiKhCC3PpHIt7OVbcoYVR+mZngs6BcHq3+A9HdtfvSQSyyMW+grV+JDhqwA4JYVdBGFGcO0MIWhLAjU2z+DDiVYMqlpQF+N3LQa0FtC669HK/NKY/yYvZsh3pgNGT9OnQx5X2rw1/yp2cYUdtCEt4b5mtrpo8DLpvHOsVPERzvM6Xuw5n2akHZypeVvdGfb7bCJI/klz4/Fa4+WxA4+TWiTEfG8o3uev4NgJYqWTlNpMr1xvx0/iQlgWhEXBzjCc8f51u/Oq4GwwWPRSaG2+jbxGZV7ym2XQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KtcCih/TjWx7XCG88m/LNNiC7OBjtFYz0Y5ZOqCqMVg=;
- b=QNHTbJMgyHC0peNnrXvVg0yGSOrXRjt/Gax0wDId2mQye/o5baDddJe4z9K1DT8imNll7wojoOiQwfOssXwCSL+etio1sI4BsjXPWaEY2t3is4XGSiGDdn+gg0ZRX3mqNC9LdNLFOkgrp2hOYJvcZ5dkKuJzx20jmU9ntidcoVOXVXwidT9i4qN1XosP/RNkMWoIA6AJ39WJ8xwRSGa6J531gw1gZeYjSo2Lx7Efq2KJMRPR+kvcJMVj6nrAylHyWoPkHYSqKulWwxZgXwBi3165pcVpDqtjOOoHnLnHwjXCsKP/ljT5TKWHigbjlgeDOl6pQfvIoH/HzPQXLk0eaQ==
+ bh=HXS8dfYENlZaFoMlrGI+YdG4XfH8Hly5PRLQ5KqmYVc=;
+ b=PZk0uGiP6AkCsTUZGVfwZAE+v+C+XQivTC59doX40+j/V3IubUCncvZVirT+mgdrdJMCmDS7YHcjGQvI4E241a/45Xjb9oRPdQ9xFk4LoMoeOdN7KO9zkb1ztIxDCSb4k+mT92pnpQ8MCCY8JvIOEdL2zXGUA/Qm/AVAFqxOqsKtac6RJpZBqvsa7P5/1M7TIlczz/Y5GcVg02o/1WKYGO6iWr0+u4eqn8aTRxXtYxw6NjQCx9ddoaKT1f1uW0oDGCJ9RaiDCQqwOIzAMka51NYbDQp9/M145FCt1NqKywpXKdZ1rpv5JbEwBwEajFrrGxfE5EjvzqEsKdadzkOi9g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,114 +19,108 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KtcCih/TjWx7XCG88m/LNNiC7OBjtFYz0Y5ZOqCqMVg=;
- b=L0tjoC/MA5BViPXk67XkanCzUvfnjiltJaA4yUD8AZJOnOlRvRao5xzQvgSpZDf6fLgRp4b+XN2UI7+xKRUBbOe5tRyzEN3NsUMNvL7/vMOMMoh31PMhgQBKcekbZgN0B4WhS01Xt1XNXq1P43THTY3Gu+TzTnxMFZEvYob0sFg=
+ bh=HXS8dfYENlZaFoMlrGI+YdG4XfH8Hly5PRLQ5KqmYVc=;
+ b=J03eJSU2bA2UJwBb+hzNVJyKdZ/uQs0iSbUzfR99v+72egQ8Z80YYKiSPE0HACyZdzbkhiW48Mk4rLYfJ+5JTBe7CSqPLK+d+Q3+i0+XDU5RRZF34RapCKQGkmXnQMRPyX01K3VMv9Th01/TBsfFqs6xb04OgkHgg4y5WNvqr/U=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB3352.namprd11.prod.outlook.com (2603:10b6:a03:1d::26) with
+ by BY5PR11MB4151.namprd11.prod.outlook.com (2603:10b6:a03:18f::22) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3239.21; Mon, 3 Aug
- 2020 21:54:55 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3239.17; Mon, 3 Aug
+ 2020 21:55:04 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::8d65:f6f9:ce31:8d47]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::8d65:f6f9:ce31:8d47%5]) with mapi id 15.20.3239.021; Mon, 3 Aug 2020
- 21:54:55 +0000
-Subject: Re: [oe] [meta-python][PATCH 08/15] python3-dynamic-dispatch: Upgrade 1.0.2 -> 1.0.3
+ 21:55:04 +0000
+Subject: Re: [oe] [meta-python][PATCH 09/15] python3-cbor2: Upgrade 5.1.1 -> 5.1.2
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200731132230.20031-1-leon.anavi@konsulko.com>
- <20200731132230.20031-8-leon.anavi@konsulko.com>
+ <20200731132230.20031-9-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <aebf4e4c-c154-fbea-efcb-e891afb31209@windriver.com>
-Date: Mon, 3 Aug 2020 17:54:52 -0400
+Message-ID: <b4561a84-ab30-30e3-20e9-8b26587f3e47@windriver.com>
+Date: Mon, 3 Aug 2020 17:55:02 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200731132230.20031-8-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0150.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::29) To BY5PR11MB3909.namprd11.prod.outlook.com
+In-Reply-To: <20200731132230.20031-9-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0142.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2f::21) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0150.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3239.16 via Frontend Transport; Mon, 3 Aug 2020 21:54:54 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YT1PR01CA0142.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3239.17 via Frontend Transport; Mon, 3 Aug 2020 21:55:03 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a7962139-d543-47df-56d5-08d837f7db5e
-X-MS-TrafficTypeDiagnostic: BYAPR11MB3352:
+X-MS-Office365-Filtering-Correlation-Id: f572293a-7786-4504-2ba1-08d837f7e0d0
+X-MS-TrafficTypeDiagnostic: BY5PR11MB4151:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB33520FE17651C7017061986A9F4D0@BYAPR11MB3352.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:262;
+	<BY5PR11MB4151C37F63045394C38A447C9F4D0@BY5PR11MB4151.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:187;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	oh49Oqa7daR+VdHTWTNICNb6i1GTmNOL/k0IKfSVue2f3O1prc3bM/ik1oEUGwfzj6G5xUrGBp3GWKotOPIMlP9g8uYZyAM5eDhNypt6hu6cc5nun5deCtPlpxy4Mf68jE7yNhC6z8SZKO3/SnswL3RFiuP+2m5oGBr42OhWkUuf2eAbUsueP/zuCkwRFxPCpGPHi9pesa8bZfJN5JdJKeVYCiGU8nskSwzMhLcwzYCo6NR8WbKW6jU3RXbjkCQJvW5S/x5f7X64TX8Yq9jWCnegvesSES16eeDZidT4K5P1h9cW+KlHtzJXqeEEcUQNhIqg5AQKlFziIo8DEW3jvZIZizKOM3uktqeeCTTSihlXQ5c6E4eRC7/TenpTu8+eXTPohl18HzsSnN9MK75DMXmklr8Agok49TRd7IbINfxIWweJkvqlGwdWkCA4nPFQJo6OfpFzM3XU7GfcKecvtA==
+	9XRrI9G64ygvHIxZFNjdcq/0/d1r2/PD0pKhZaGhnzsBQui45VEc1MiWb5WcKZNXplneSzYReSt0tzG82404Sy2zq9sqmwQ3OXynm5CLDj1IL8zc3Pjarh5T91SURF2RW84W95oXikjZ6KM/FicsthrAvXsdtMrvLRwxp0e8PS8u+iCvVh6XPB8GXZy4w+AojQXH1OqUJMuY5EYJlVYgNIAzD7o4i/fuzCu5RquKba3hDvyfMPamM/jUUn+2DN6GW+NfyRguXS6nLnpAbGzcLYxi0gWVhiHdA0Dsa/kDuGIjrUfGimpT8Y7L6i6hi0ekIKsgTMbZs84nebpL35SC52ii7GJSWqv95sg4gODQNa8129FHiX1HRaAPIIe1ApprSdEDzgkQCeHnUR9VWqkF/S44jwtUdyYbR6DXY3RLFfzyAC1KYUmOjpe/Fp8ZU5TQJMdJRBe24Nn5iBb/7cLukg==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(366004)(396003)(376002)(346002)(39850400004)(136003)(8676002)(31696002)(2616005)(83380400001)(44832011)(2906002)(53546011)(86362001)(5660300002)(36756003)(8936002)(6486002)(956004)(26005)(16526019)(186003)(66556008)(33964004)(66476007)(478600001)(166002)(16576012)(316002)(966005)(52116002)(31686004)(66946007)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(39850400004)(396003)(136003)(346002)(366004)(376002)(36756003)(16526019)(2906002)(26005)(966005)(478600001)(186003)(86362001)(31686004)(16576012)(83380400001)(5660300002)(53546011)(166002)(2616005)(66556008)(66476007)(956004)(44832011)(33964004)(31696002)(6486002)(8676002)(316002)(8936002)(66946007)(52116002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	r3nnVOdsSw6nSDkNEvj9oVfH1zgZD16yjwGXd9LlK8ylKdC9yYBldaRaeebtvLqUPUukKBlQmi68kSlDz8+z4/uSz75NfegAuHHLUlQ6vuOAkAlIYASgDJgzjG86NT75S67BKGZB9FsXEhHvix/ndMbkHwVvwYi4ARFcSGDvPXYnyO47uP2M7oFU2wrfy/i7xwhUm1xYzhbDctcU5OCsMNfmo1plPRogHi2+m7Uh9j+8RAANdhL/V6PwN9fl3j3LNTEtVAD6RFY8p+XogF74Ml0aoFfKK+ubFvcYJ0/Qw38ZnlSnFv4BroB5jkFEp/XolWIJdX7wKqHmamy7y7hrEqGQefVarrFEHeUrrc0MAp34QsxfeTr8Pa4ITJ6iBhpudDUZEqXOw8RVWmUTVnwrz46RGs3Sk6eL9FZXFataU4CBMzKvvtLDX6Tltk/p3i7vZAQyZD7BYxoPgIg/JOusdS8ty0HbPdPlmDD23cZDx2x58URz6Ooftcic0tPbFT7PpdKa96H5x9ytgj6bK4lpMuCelZMbyNlNlqfLQ/nlo/ZqePPbYODE7CpYI8njW/qASgzRAAs23/MAfF8WK6y6+S6cWpcPSHGMkzRQSxzcoLCh0aU3zxSm9Wl18hGawPKE8G6Jr0q+7vdIYE6vTyFDjg==
+	coXqwp96Y8ORhGf8qrsXwr/g0huVz81gWEltQzW7xCL52ybfHWtrcX0HvMJZpkXf8maBqVm06MwbH3yr/+jpxI9aV/ElyNv/UPQCGpSWw1eCnW/mIu5fRi8qn/J27UfAvi9DtvJJQRvH8iomk+gLDpnm71K5IXClUEHbF2hSLNO1fN6FjNeXilHrmZZSzqbyS67NPH1hW6hbkMb1QXkYdh4wpMJstDUd+joxizBhZzN/vDrVVZvIcrtBwu+ZTrCOgx0jMLfomTtGbWMfXvbI7mEhihypuZ5r62T7+Wf2UCtA5S90VG3CDoGQqaexkBzL6eRDQA5HTO2Tc5w/Krkytfk66KJz51U7vRLORPBB2TjRwYIKUi4DVh/wnX+ohZ9YFFg3ZHAy9mFHsvCvAFQ/9cbqb5019GdLVURRGNoTAbNdHfpq16WnF3IiMSEwpabfWzKuNyWLfCZlgJtsl0v11OZZ+2dR3x7zjiBV6NivgdcGpMNIHZOOiNJxZN6GioSdNPZCNi7bK5YELmf+0xBZL/DAvdzQmjqwTeqaTj+ryL+8s7qAdwt82KlGO3wdFUaNkja0MYBbjF57PlA5fQiI0gSc+lIkVCkoAGs6JXiG+a8K8R7Lvcn+8Wr8ljhXXvIsOYzU+cdC3kS6r1pAvVcbGA==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a7962139-d543-47df-56d5-08d837f7db5e
+X-MS-Exchange-CrossTenant-Network-Message-Id: f572293a-7786-4504-2ba1-08d837f7e0d0
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Aug 2020 21:54:55.3995
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Aug 2020 21:55:04.2773
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: t+vSsimY7RcVBviIrV/BISBktaXmw1a6dueAa3UBz9wqrbLu1ANyR/JIE3ZBUIcQMf6D9JAlAyAJSEHuDbGQMbrLemeALs/3dLoZX4qMh3c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3352
+X-MS-Exchange-CrossTenant-UserPrincipalName: 5C+uu38bYJHA0iyV4mB+cdpX3ZX1JRMVY7dljSVlsX7kn0I/iJqrmJcpRkAd0ABzhapCUTRWHD4WWHFEH+c3fgHxauAyNYGueUuU0I88RHg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4151
 Content-Type: multipart/alternative;
- boundary="------------F21BE3A198CC81732920CEC8"
+ boundary="------------FEF7C03FC270FDEEBC1F0266"
 Content-Language: en-US
 
---------------F21BE3A198CC81732920CEC8
+--------------FEF7C03FC270FDEEBC1F0266
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 7/31/20 9:22 AM, Leon Anavi wrote:
-> Upgrade to release 1.0.3:
+> Upgrade to release 5.1.2:
 >
-> - Fix bug when instantiating a thrice derived classes via dynamic
->    dispatch.
->
-> Also a HOMEPAGE has been set.
+> - Bugfix: Refcount bug in C lib causing intermittent segfaults
+>    on shutdown
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...c-dispatch_1.0.2.bb => python3-dynamic-dispatch_1.0.3.bb} | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-dynamic-dispatch_1.0.2.bb => python3-dynamic-dispatch_1.0.3.bb} (64%)
+>   .../python/{python3-cbor2_5.1.1.bb => python3-cbor2_5.1.2.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-cbor2_5.1.1.bb => python3-cbor2_5.1.2.bb} (81%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.2.bb b/meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.3.bb
-> similarity index 64%
-> rename from meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.2.bb
-> rename to meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.3.bb
-> index 6485f9d57..2bf487584 100644
-> --- a/meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.3.bb
-> @@ -1,11 +1,12 @@
->   SUMMARY = "dynamic dispatch decorator for classes and functions"
-> +HOMEPAGE = "https://github.com/XevoInc/dynamic_dispatch"
+> diff --git a/meta-python/recipes-devtools/python/python3-cbor2_5.1.1.bb b/meta-python/recipes-devtools/python/python3-cbor2_5.1.2.bb
+> similarity index 81%
+> rename from meta-python/recipes-devtools/python/python3-cbor2_5.1.1.bb
+> rename to meta-python/recipes-devtools/python/python3-cbor2_5.1.2.bb
+> index 6b26da2a6..c65be7226 100644
+> --- a/meta-python/recipes-devtools/python/python3-cbor2_5.1.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-cbor2_5.1.2.bb
+> @@ -4,8 +4,8 @@ DEPENDS +="${PYTHON_PN}-setuptools-scm-native"
 >   LICENSE = "Apache-2.0"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=ea70b07c354e36056bd35e17c9c3face"
+>   LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 >   
->   inherit pypi setuptools3
+> -SRC_URI[sha256sum] = "09e9607ea50e2ebb718791d475f11620cb244b0cc3758ce2e76cf36e8372ad64"
+> -SRC_URI[md5sum] = "b034d7edfd22c1f98e600aaedbd90f39"
+> +SRC_URI[sha256sum] = "91759bd0ee5ef0d4fa24144dfa551670730baeca8cf2fff1cc59f734ecd21de6"
+> +SRC_URI[md5sum] = "693c1bd6635bee8a591a70ea924ad676"
 >   
-> -SRC_URI[md5sum] = "0e29d2afa806b9b87dadfbed6a0afd6d"
-> -SRC_URI[sha256sum] = "ec7025b2890e7a882ceef95ff82fd154265136af930cab42533070b557d2a15d"
-> +SRC_URI[md5sum] = "6bd3cc24427de753eed0656e89d5302c"
-> +SRC_URI[sha256sum] = "fbc676aaedc8ec542056c21e5e206b8b62b8d11c3f3c5cfb32b273936da89604"
->   
->   PYPI_PACKAGE = "dynamic_dispatch"
+>   inherit pypi setuptools3 ptest
 >   
 >
 > 
 
---------------F21BE3A198CC81732920CEC8
+--------------FEF7C03FC270FDEEBC1F0266
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -138,45 +132,39 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 7/31/20 9:22 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200731132230.20031-8-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.0.3:
+    <blockquote type="cite" cite="mid:20200731132230.20031-9-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 5.1.2:
 
-- Fix bug when instantiating a thrice derived classes via dynamic
-  dispatch.
-
-Also a HOMEPAGE has been set.
+- Bugfix: Refcount bug in C lib causing intermittent segfaults
+  on shutdown
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200731132230.20031-8-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200731132230.20031-9-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...c-dispatch_1.0.2.bb =&gt; python3-dynamic-dispatch_1.0.3.bb} | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-dynamic-dispatch_1.0.2.bb =&gt; python3-dynamic-dispatch_1.0.3.bb} (64%)
+ .../python/{python3-cbor2_5.1.1.bb =&gt; python3-cbor2_5.1.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cbor2_5.1.1.bb =&gt; python3-cbor2_5.1.2.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.2.bb b/meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.3.bb
-similarity index 64%
-rename from meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.2.bb
-rename to meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.3.bb
-index 6485f9d57..2bf487584 100644
---- a/meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-dynamic-dispatch_1.0.3.bb
-@@ -1,11 +1,12 @@
- SUMMARY = &quot;dynamic dispatch decorator for classes and functions&quot;
-+HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/XevoInc/dynamic_dispatch">&quot;https://github.com/XevoInc/dynamic_dispatch&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-cbor2_5.1.1.bb b/meta-python/recipes-devtools/python/python3-cbor2_5.1.2.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-cbor2_5.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-cbor2_5.1.2.bb
+index 6b26da2a6..c65be7226 100644
+--- a/meta-python/recipes-devtools/python/python3-cbor2_5.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-cbor2_5.1.2.bb
+@@ -4,8 +4,8 @@ DEPENDS +=&quot;${PYTHON_PN}-setuptools-scm-native&quot;
  LICENSE = &quot;Apache-2.0&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=ea70b07c354e36056bd35e17c9c3face">&quot;file://LICENSE;md5=ea70b07c354e36056bd35e17c9c3face&quot;</a>
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10">&quot;file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10&quot;</a>
  
- inherit pypi setuptools3
+-SRC_URI[sha256sum] = &quot;09e9607ea50e2ebb718791d475f11620cb244b0cc3758ce2e76cf36e8372ad64&quot;
+-SRC_URI[md5sum] = &quot;b034d7edfd22c1f98e600aaedbd90f39&quot;
++SRC_URI[sha256sum] = &quot;91759bd0ee5ef0d4fa24144dfa551670730baeca8cf2fff1cc59f734ecd21de6&quot;
++SRC_URI[md5sum] = &quot;693c1bd6635bee8a591a70ea924ad676&quot;
  
--SRC_URI[md5sum] = &quot;0e29d2afa806b9b87dadfbed6a0afd6d&quot;
--SRC_URI[sha256sum] = &quot;ec7025b2890e7a882ceef95ff82fd154265136af930cab42533070b557d2a15d&quot;
-+SRC_URI[md5sum] = &quot;6bd3cc24427de753eed0656e89d5302c&quot;
-+SRC_URI[sha256sum] = &quot;fbc676aaedc8ec542056c21e5e206b8b62b8d11c3f3c5cfb32b273936da89604&quot;
- 
- PYPI_PACKAGE = &quot;dynamic_dispatch&quot;
+ inherit pypi setuptools3 ptest
  
 </pre>
       <br>
@@ -187,4 +175,4 @@ index 6485f9d57..2bf487584 100644
   </body>
 </html>
 
---------------F21BE3A198CC81732920CEC8--
+--------------FEF7C03FC270FDEEBC1F0266--
