@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.11825.1596463541914244416
+ by mx.groups.io with SMTP id smtpd.web12.12084.1596463542815818868
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Aug 2020 07:05:42 -0700
+ Mon, 03 Aug 2020 07:05:43 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=40282 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k2b5w-00024S-Rc; Mon, 03 Aug 2020 17:05:41 +0300
+	id 1k2b5x-00024S-N1; Mon, 03 Aug 2020 17:05:42 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/7] python3-openpyxl: Upgrade 3.0.3 -> 3.0.4
-Date: Mon,  3 Aug 2020 17:05:16 +0300
-Message-Id: <20200803140520.23250-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/7] python3-cryptography: Upgrade 2.8 -> 3.0
+Date: Mon,  3 Aug 2020 17:05:17 +0300
+Message-Id: <20200803140520.23250-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200803140520.23250-1-leon.anavi@konsulko.com>
 References: <20200803140520.23250-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,49 +30,69 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.0.4:
+Upgrade to release 3.0:
 
-- Find tables by name.
-- Worksheet protection missing in existing files.
-- Exception when reading files with external images.
-- Reading lots of merged cells is very slow.
-- Read support for Bubble Charts.
-- Preserve any indexed colours.
-- Reading many thousand of merged cells is really slow.
-- Adding tables in write-only mode raises an exception.
-- Add support for finding tables by name or range.
+- Deprecated support for Python 2. At the time there is no time
+  table for actually dropping support, however we strongly
+  encourage all users to upgrade their Python, as Python 2 no
+  longer receives support from the Python core team.
+- Added support for OpenSSH serialization format for ec, ed25519,
+  rsa and dsa private keys.
+- Added support for OpenSSH certificates.
+- Added :meth:`~cryptography.fernet.Fernet.encrypt_at_time` and
+  :meth:`~cryptography.fernet.Fernet.decrypt_at_time` to
+  :class:`~cryptography.fernet.Fernet`.
+- Added support for the :class:`~cryptography.x509.SubjectInformationAccess`
+  X.509 extension.
+- Added support for parsing :class:`~cryptography.x509.SignedCertificateTimestamps`
+  in OCSP responses.
+- Added support for parsing attributes in certificate signing
+  requests.
+- Added support for encoding attributes in certificate signing
+  requests.
+- On OpenSSL 1.1.1d and higher cryptography now uses OpenSSL's
+  built-in CSPRNG instead of its own OS random engine because
+  ithese versions of OpenSSL properly reseed on fork.
 
-License-Update: Use the exact line from PKG-INFO for the
-checksum of the license. The license remains the same.
+BACKWARDS INCOMPATIBLE:
+
+- Support for LibreSSL 2.7.x, 2.8.x, and 2.9.0 has been removed
+  (2.9.1+ is still supported).
+- Dropped support for macOS 10.9, macOS users must upgrade to
+  10.10 or newer.
+- RSA :meth:`~cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key`
+  no longer accepts public_exponent values except 65537 and 3
+  (the latter for legacy purposes).
+- X.509 certificate parsing now enforces that the version field
+  contains a valid value, rather than deferring this check until
+  :attr:`~cryptography.x509.Certificate.version` is accessed.
+- Added initial support for creating PKCS12 files with
+  :func:`~cryptography.hazmat.primitives.serialization.pkcs12.serialize_key_and_certificates`.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-openpyxl_3.0.3.bb => python3-openpyxl_3.0.4.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-openpyxl_3.0.3.bb => python3-openpyxl_3.0.4.bb} (68%)
+ ...ython3-cryptography_2.8.bb => python3-cryptography_3.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cryptography_2.8.bb => python3-cryptography_3.0.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-openpyxl_3.0.3.bb b/meta-python/recipes-devtools/python/python3-openpyxl_3.0.4.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-openpyxl_3.0.3.bb
-rename to meta-python/recipes-devtools/python/python3-openpyxl_3.0.4.bb
-index 018c4abe2..d0946e49a 100644
---- a/meta-python/recipes-devtools/python/python3-openpyxl_3.0.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-openpyxl_3.0.4.bb
-@@ -5,11 +5,11 @@ was initially based on PHPExcel."
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography_2.8.bb b/meta-python/recipes-devtools/python/python3-cryptography_3.0.bb
+similarity index 91%
+rename from meta-python/recipes-devtools/python/python3-cryptography_2.8.bb
+rename to meta-python/recipes-devtools/python/python3-cryptography_3.0.bb
+index 95e903b29..05a2350e3 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography_2.8.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography_3.0.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=097f805837700cfac572ac274cd38124"
  
- HOMEPAGE = "http://www.python-excel.org/"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=a6e506457afab4a25ecbaeb4bc3ed623"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
+ LDSHARED += "-pthread"
  
- inherit pypi setuptools3
+-SRC_URI[md5sum] = "77730058b556c6d9838679a94c6229ce"
+-SRC_URI[sha256sum] = "3cda1f0ed8747339bbdf71b9f38ca74c7b592f24f65cdb3ab3765e4b02871651"
++SRC_URI[md5sum] = "163608a7cb838c6b39360e1e64377d54"
++SRC_URI[sha256sum] = "8e924dbc025206e97756e8903039662aa58aa9ba357d8e1d8fc29e3092322053"
  
--SRC_URI[md5sum] = "9583cea56b9d4441d96eb63a8a5c92a4"
--SRC_URI[sha256sum] = "547a9fc6aafcf44abe358b89ed4438d077e9d92e4f182c87e2dc294186dc4b64"
-+SRC_URI[md5sum] = "8491219f6bd83ca6ad8334bf77435cf5"
-+SRC_URI[sha256sum] = "d88dd1480668019684c66cfff3e52a5de4ed41e9df5dd52e008cbf27af0dbf87"
- 
- RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-jdcal ${PYTHON_PN}-et-xmlfile"
+ SRC_URI += " \
+     file://run-ptest \
 -- 
 2.17.1
 
