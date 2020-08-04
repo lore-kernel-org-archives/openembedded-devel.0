@@ -1,88 +1,74 @@
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com [209.85.215.196])
- by mx.groups.io with SMTP id smtpd.web12.9943.1596502448116341547
+Received: from relay10.mail.gandi.net (relay10.mail.gandi.net [217.70.178.230])
+ by mx.groups.io with SMTP id smtpd.web11.12880.1596516767326190197
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Aug 2020 17:54:08 -0700
+ Mon, 03 Aug 2020 21:52:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=eTiaBG6d;
- spf=pass (domain: gmail.com, ip: 209.85.215.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f196.google.com with SMTP id x6so5977434pgx.12
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Aug 2020 17:54:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=oAzRDq6R4FuquOSc99rNg4HgT+3cWnWt+STWS1xC1J0=;
-        b=eTiaBG6dFU4xMDXJkFLypWgQBWu6oY/fPDRgWIxrJBVIYEYMt7wOYVAFHWdl8aNmaw
-         t0Hylqmn1OmnShvHY9oMI00sMSqpEIQXDOwy+yvbUNNFGXqxTJDU2wQIRVU2M/7msI+U
-         tja2ivkOGWztgQhRdfX3hg8yT6KXeAtXIA4kWE0bmTvTvD0qyVIkc6YPCo3t2LR523NU
-         /56uZ34YBi1fkQoPwHXQdiwuIeNYBY3HL/HERXyE87hh+iHCNOmJuT+goMMOynA9DvaJ
-         /7mA36u9qBjP1DcGnr78BS79p8MGgfoS6iVROqTvPlsgsGNeYS7tgcEtdKaUPQV1f1E7
-         5JNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=oAzRDq6R4FuquOSc99rNg4HgT+3cWnWt+STWS1xC1J0=;
-        b=h4AAsjkqXGkCZQOCfdTD0O63oTV3dAwCe3rrRByb71NVkTM0DpZ49lnavuIUynXFUp
-         aQIGCaMmE+wzRTGJc7wSLGnLxiE+XuDgI/pV8CYpm2IkblSEQ0ONwGUraYQKTuMfl3Oi
-         mOamPIVIRSUqpNFPnmSo4WFYFz5A5mGpemIoq23Sfo5P6WoUcLSiX/y4igjbvn5Z9GTh
-         EYU7uBkJMqnVwnTLAHUwIne06BRqKTvm9N49eryDtzfkMYo1IxY9C6/ULByTrGUJYhyS
-         gLlUNZwMFh+cEbQyrb0zZIMGP9n2asHXZCqzu14j0jq8Vf6wAivAhCLHU8uXs6VVSdR7
-         U/vA==
-X-Gm-Message-State: AOAM531GDYWyuCwJVE/lzY6gI5jB96nyO5gaI1JIp2+Wd/yUYbODnlXg
-	SrS4XLXzoMWKvr6qhE0xVnZl8rLWISw=
-X-Google-Smtp-Source: ABdhPJzqCP6A8/R7Cgcfc0986jVAGELsPuVFFJGOEDyZaoLOb9od1+IEMftsojYT7fgl/Yi1Evp8kQ==
-X-Received: by 2002:a63:5b55:: with SMTP id l21mr17697095pgm.348.1596502447311;
-        Mon, 03 Aug 2020 17:54:07 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e841])
-        by smtp.gmail.com with ESMTPSA id r134sm11835596pfc.1.2020.08.03.17.54.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Aug 2020 17:54:06 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Colin McAllister <colinmca242@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 3/3] python3-textparser: Added recipe
-Date: Mon,  3 Aug 2020 17:54:01 -0700
-Message-Id: <20200804005401.2416569-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200804005401.2416569-1-raj.khem@gmail.com>
-References: <20200804005401.2416569-1-raj.khem@gmail.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: redrectangle.org, ip: 217.70.178.230, mailfrom: robert.joslyn@redrectangle.org)
+Received: from bucephalus (rrcs-173-197-191-182.west.biz.rr.com [173.197.191.182])
+	(Authenticated sender: robert.joslyn@redrectangle.org)
+	by relay10.mail.gandi.net (Postfix) with ESMTPSA id 6FFC224000B;
+	Tue,  4 Aug 2020 04:52:43 +0000 (UTC)
+Message-ID: <4aa6319a96ccac1e54d0fd1ef8ec65751b7c449b.camel@redrectangle.org>
+Subject: Re: [oe] [PATCH][meta-networking] kronosnet: inherit manpages
+From: "Robert Joslyn" <robert.joslyn@redrectangle.org>
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>, 
+	openembedded-devel@lists.openembedded.org
+Date: Mon, 03 Aug 2020 21:52:40 -0700
+In-Reply-To: <20200803172452.2360101-1-open.source@oleksandr-kravchuk.com>
+References: <20200803172452.2360101-1-open.source@oleksandr-kravchuk.com>
+User-Agent: Evolution 3.36.4 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-From: Colin McAllister <colinmca242@gmail.com>
+On Mon, 2020-08-03 at 19:24 +0200, Oleksandr Kravchuk wrote:
+> Let manpages bbclass handle man pages.
+> 
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>  .../recipes-extended/kronosnet/kronosnet_1.18.bb            | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/meta-networking/recipes-
+> extended/kronosnet/kronosnet_1.18.bb b/meta-networking/recipes-
+> extended/kronosnet/kronosnet_1.18.bb
+> index 7b1dfc241..3fd6298b5 100644
+> --- a/meta-networking/recipes-extended/kronosnet/kronosnet_1.18.bb
+> +++ b/meta-networking/recipes-extended/kronosnet/kronosnet_1.18.bb
+> @@ -16,7 +16,7 @@ SRC_URI =
+> "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1"
+>  
+>  UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
+>  
+> -inherit autotools
+> +inherit autotools manpages
+>  
+>  S = "${WORKDIR}/git"
+>  
+> @@ -26,5 +26,5 @@ S = "${WORKDIR}/git"
+>  CFLAGS_append_toolchain-clang = " -Wno-sign-compare"
+>  
+>  PACKAGECONFIG[man] = "enable_man="yes", --disable-man, "
 
-Added python3 recipe for textparser.
+To use the manpages class, you'll want to change the PACKAGECONFIG option
+to "manpages". Unless there is some reason to do otherwise, I also suggest
+using --enable-man along with --disable-man to be consistent:
 
-Signed-off-by: Colin McAllister <colinmca242@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../python/python3-textparser_0.23.0.bb            | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-textparser_0.23.0.bb
+PACKAGECONFIG[manpages] = "--enable-man,--disable-man"
 
-diff --git a/meta-python/recipes-devtools/python/python3-textparser_0.23.0.bb b/meta-python/recipes-devtools/python/python3-textparser_0.23.0.bb
-new file mode 100644
-index 0000000000..0c626e7aa2
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-textparser_0.23.0.bb
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "A text parser written in the Python language."
-+HOMEPAGE = "https://github.com/eerimoq/textparser"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=fe9942a8bba5458a9dbd11277bc347ad"
-+
-+SRC_URI[md5sum] = "d5378eac93406156e9029114aaa1b515"
-+SRC_URI[sha256sum] = "f009d0f6f78aa7c1e648dca4e3961f6d67495f7f520f1a705245ffad33f4b470"
-+
-+PYPI_PACKAGE = "textparser"
-+
-+inherit pypi setuptools3
-+
-+CLEANBROKEN = "1"
-+
--- 
-2.28.0
+There are still some errors in do_install when enabling this that you'll
+need to look into as well if you want to enable man pages. For example:
+
+| /home/robert/yocto/poky/build/tmp/hosttools/install: cannot stat
+'../../git/man/knet_addrtostr.3': No such file or directory
+
+Thanks,
+Robert
+
+> -
+> -PACKAGECONFIG_remove = "man"
+> +#
+> +#PACKAGECONFIG_remove = "man"
+> 
+
 
