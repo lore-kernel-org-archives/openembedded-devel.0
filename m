@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.2338.1596535724991818329
+ by mx.groups.io with SMTP id smtpd.web12.2443.1596535815707055885
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Aug 2020 03:08:45 -0700
+ Tue, 04 Aug 2020 03:10:16 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=52496 helo=localhost.localdomain)
+Received: from [78.130.197.211] (port=52502 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k2ts7-0005rB-9N; Tue, 04 Aug 2020 13:08:41 +0300
+	id 1k2tta-0006Y3-01; Tue, 04 Aug 2020 13:10:14 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCH] python3-xxhash: Upgrade 1.4.4 -> 2.0.0
-Date: Tue,  4 Aug 2020 13:08:26 +0300
-Message-Id: <20200804100826.7059-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH] python3-xxhash: Upgrade 1.4.4 -> 2.0.0
+Date: Tue,  4 Aug 2020 13:10:05 +0300
+Message-Id: <20200804101005.7169-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
