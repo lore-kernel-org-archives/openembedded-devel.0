@@ -1,118 +1,389 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.991.1596603723739177597
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web12.1362.1596606302002396222
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Aug 2020 22:02:04 -0700
+ Tue, 04 Aug 2020 22:45:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.75,436,1589212800"; 
-   d="scan'208";a="97632373"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 05 Aug 2020 13:01:53 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 196684CE34DE
-	for <openembedded-devel@lists.openembedded.org>; Wed,  5 Aug 2020 13:01:51 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Wed, 5 Aug 2020 13:01:51 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: wonjong.lee@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0755iUD2021558
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 4 Aug 2020 22:44:50 -0700
+Received: from SEL-WLEE-D1.wrs.com (128.224.239.83) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.40) with Microsoft SMTP Server id 14.3.487.0; Tue, 4 Aug 2020
+ 22:44:32 -0700
+From: "wonjong.lee" <wonjong.lee@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] jsonrpc: Fix build with libmicrohttpd 0.9.71
-Date: Thu, 6 Aug 2020 01:01:51 +0800
-Message-ID: <1596646911-100255-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+CC: <Junhwa.Rhee@windriver.com>, <jeff.kim@windriver.com>,
+        <andy.kang@windriver.com>
+Subject: [meta-oe][PATCH v3] minifi: Add recipe for c++ version
+Date: Wed, 5 Aug 2020 14:43:03 +0900
+Message-ID: <20200805054303.25456-1-wonjong.lee@windriver.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 196684CE34DE.A1F36
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+MiNiFi--a subproject of Apache NiFi--is a complementary data
+collection approach that supplements the core tenets of NiFi
+in dataflow management, focusing on the collection of data at
+the source of its creation. The C++ implementation is an
+additional implementation to the one in Java with the aim of
+an even smaller resource footprint.
+
+Signed-off-by: wonjong.lee <wonjong.lee@windriver.com>
 ---
- .../0001-Fix-build-with-libmicrohttpd.patch   | 52 +++++++++++++++++++
- .../recipes-devtools/jsonrpc/jsonrpc_1.3.0.bb |  5 +-
- 2 files changed, 56 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-Fix-build-with-libmicrohttpd.patch
+ .../files/fix-OSSPUUID-cross-compile.patch    |  70 ++++++++++++
+ .../files/fix-build-issue-in-yocto.patch      |  88 ++++++++++++++
+ .../files/fix-rocksdb-cross-compile.patch     |  11 ++
+ .../minifi-cpp/files/minifi.service           |  13 +++
+ .../minifi-cpp/files/systemd-volatile.conf    |   2 +
+ .../minifi-cpp/files/sysvinit-volatile.conf   |   2 +
+ .../minifi-cpp/minifi-cpp_0.7.0.bb            | 108 ++++++++++++++++++
+ 7 files changed, 294 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch
+ create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch
+ create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/fix-rocksdb-cross-compile.patch
+ create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/minifi.service
+ create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/systemd-volatile.conf
+ create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/sysvinit-volatile.conf
+ create mode 100644 meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
 
-diff --git a/meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-Fix-build-with-libmicrohttpd.patch b/meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-Fix-build-with-libmicrohttpd.patch
+diff --git a/meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch b/meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch
 new file mode 100644
-index 0000000000..a4cacb3fc0
+index 000000000..6af47cafb
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-Fix-build-with-libmicrohttpd.patch
-@@ -0,0 +1,52 @@
-+From d983161415f5f5748fbdbaa5fbd168154ccf8867 Mon Sep 17 00:00:00 2001
-+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-+Date: Wed, 5 Aug 2020 12:31:24 +0900
-+Subject: [PATCH] Fix build with libmicrohttpd 0.9.71
-+
-+---
-+ src/jsonrpccpp/server/connectors/httpserver.cpp | 2 +-
-+ src/jsonrpccpp/server/connectors/httpserver.h   | 8 +++++++-
-+ 2 files changed, 8 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/jsonrpccpp/server/connectors/httpserver.cpp b/src/jsonrpccpp/server/connectors/httpserver.cpp
-+index a849615..dd3b841 100644
-+--- a/src/jsonrpccpp/server/connectors/httpserver.cpp
-++++ b/src/jsonrpccpp/server/connectors/httpserver.cpp
-+@@ -151,7 +151,7 @@ void HttpServer::SetUrlHandler(const string &url,
-+   this->SetHandler(NULL);
-+ }
++++ b/meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch
+@@ -0,0 +1,70 @@
++diff -urN orig/cmake/BundledOSSPUUID.cmake patched/cmake/BundledOSSPUUID.cmake
++--- orig/cmake/BundledOSSPUUID.cmake	2020-01-07 22:55:55.000000000 +0900
+++++ patched/cmake/BundledOSSPUUID.cmake	2020-07-14 11:32:28.221092406 +0900
++@@ -22,7 +22,8 @@
 + 
-+-int HttpServer::callback(void *cls, MHD_Connection *connection, const char *url,
-++mhd_result HttpServer::callback(void *cls, MHD_Connection *connection, const char *url,
-+                          const char *method, const char *version,
-+                          const char *upload_data, size_t *upload_data_size,
-+                          void **con_cls) {
-+diff --git a/src/jsonrpccpp/server/connectors/httpserver.h b/src/jsonrpccpp/server/connectors/httpserver.h
-+index 7785edb..0dcf032 100644
-+--- a/src/jsonrpccpp/server/connectors/httpserver.h
-++++ b/src/jsonrpccpp/server/connectors/httpserver.h
-+@@ -32,6 +32,12 @@ typedef intptr_t ssize_t;
-+ #include <map>
-+ #include <microhttpd.h>
++     # Define patch step
++     find_package(Patch REQUIRED)
++-    set(PC "${Patch_EXECUTABLE}" -p1 -i "${SOURCE_DIR}/thirdparty/ossp-uuid/ossp-uuid-mac-fix.patch")
+++    set(PATCH1 "${Patch_EXECUTABLE}" -p1 -i "${SOURCE_DIR}/thirdparty/ossp-uuid/ossp-uuid-mac-fix.patch")
+++    set(PATCH2 "${Patch_EXECUTABLE}" -p1 -i "${SOURCE_DIR}/thirdparty/ossp-uuid/cross-compile-fix.patch")
 + 
-++#if MHD_VERSION >= 0x00097002
-++#  define mhd_result enum MHD_Result
-++#else
-++#  define mhd_result int
-++#endif
++     # Define byproducts
++     set(BYPRODUCTS "lib/libuuid.a"
++@@ -35,7 +36,9 @@
++     ENDFOREACH(BYPRODUCT)
++ 
++     # Build project
++-    set(CONFIGURE_COMMAND ./configure "CFLAGS=-fPIC" "CXXFLAGS=-fPIC" --with-cxx --without-perl --without-php --without-pgsql "--prefix=${BINARY_DIR}/thirdparty/ossp-uuid-install")
+++    set(CONFIGURE_COMMAND ac_cv_va_copy=C99 ./configure CFLAGS=-fPIC CXXFLAGS=-fPIC --host=${HOST_SYS}
+++        --with-cxx --without-perl --without-php --without-pgsql
+++        --prefix=${BINARY_DIR}/thirdparty/ossp-uuid-install)
++     string(TOLOWER "${CMAKE_BUILD_TYPE}" build_type)
++     if(NOT build_type MATCHES debug)
++         list(APPEND CONFIGURE_COMMAND --enable-debug=yes)
++@@ -52,8 +55,8 @@
++             UPDATE_COMMAND ""
++             INSTALL_COMMAND make install
++             BUILD_BYPRODUCTS ${OSSPUUID_LIBRARIES_LIST}
++-            CONFIGURE_COMMAND ""
++-            PATCH_COMMAND ${PC} && ${CONFIGURE_COMMAND}
+++            CONFIGURE_COMMAND ${CONFIGURE_COMMAND}
+++            PATCH_COMMAND ${PATCH1} && ${PATCH2}
++             STEP_TARGETS build
++             EXCLUDE_FROM_ALL TRUE
++     )
++diff -urN orig/thirdparty/ossp-uuid/cross-compile-fix.patch patched/thirdparty/ossp-uuid/cross-compile-fix.patch
++--- orig/thirdparty/ossp-uuid/cross-compile-fix.patch	1970-01-01 09:00:00.000000000 +0900
+++++ patched/thirdparty/ossp-uuid/cross-compile-fix.patch	2020-07-14 11:48:13.781090409 +0900
++@@ -0,0 +1,31 @@
+++diff -urN orig/config.sub patched/config.sub
+++--- orig/config.sub	2008-07-05 06:43:08.000000000 +0900
++++++ patched/config.sub	2020-07-14 11:46:47.249090591 +0900
+++@@ -238,6 +238,7 @@
+++ 	# Some are omitted here because they have special meanings below.
+++ 	1750a | 580 \
+++ 	| a29k \
++++	| aarch64 | aarch64_be \
+++ 	| alpha | alphaev[4-8] | alphaev56 | alphaev6[78] | alphapca5[67] \
+++ 	| alpha64 | alpha64ev[4-8] | alpha64ev56 | alpha64ev6[78] | alpha64pca5[67] \
+++ 	| am33_2.0 \
+++@@ -314,6 +315,7 @@
+++ 	# Recognize the basic CPU types with company name.
+++ 	580-* \
+++ 	| a29k-* \
++++	| aarch64-* | aarch64_be-* \
+++ 	| alpha-* | alphaev[4-8]-* | alphaev56-* | alphaev6[78]-* \
+++ 	| alpha64-* | alpha64ev[4-8]-* | alpha64ev56-* | alpha64ev6[78]-* \
+++ 	| alphapca5[67]-* | alpha64pca5[67]-* | arc-* \
+++diff -urN orig/shtool patched/shtool
+++--- orig/shtool	2008-07-05 06:43:08.000000000 +0900
++++++ patched/shtool	2020-07-13 19:35:49.557213657 +0900
+++@@ -1400,7 +1400,7 @@
+++             if [ ".$opt_t" = .yes ]; then
+++                 echo "strip $dsttmp" 1>&2
+++             fi
+++-            strip $dsttmp || shtool_exit $?
++++            $STRIP $dsttmp || shtool_exit $?
+++         fi
+++         if [ ".$opt_o" != . ]; then
+++             if [ ".$opt_t" = .yes ]; then
+diff --git a/meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch b/meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch
+new file mode 100644
+index 000000000..2dc591c7a
+--- /dev/null
++++ b/meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch
+@@ -0,0 +1,88 @@
++diff -urN orig/cmake/LibreSSL.cmake patched/cmake/LibreSSL.cmake
++--- orig/cmake/LibreSSL.cmake	2020-07-28 11:39:40.046677515 +0900
+++++ patched/cmake/LibreSSL.cmake	2020-07-28 11:42:41.650677131 +0900
++@@ -27,6 +27,17 @@
++ 		set(BYPRODUCT_PREFIX "" CACHE STRING "" FORCE)
++ 	set(BUILD_ARGS " -GVisual Studio 15 2017")
++ 	endif(WIN32)
 ++
-+ namespace jsonrpc {
-+ /**
-+  * This class provides an embedded HTTP Server, based on libmicrohttpd, to
-+@@ -79,7 +85,7 @@ private:
-+   std::map<std::string, IClientConnectionHandler *> urlhandler;
-+   struct sockaddr_in loopback_addr;
+++	set(BYPRODUCTS
+++		"lib/${BYPRODUCT_PREFIX}crypto${BYPRODUCT_SUFFIX}"
+++		"lib/${BYPRODUCT_PREFIX}ssl${BYPRODUCT_SUFFIX}"
+++		"lib/${BYPRODUCT_PREFIX}tls${BYPRODUCT_SUFFIX}"
+++	)
+++	set(LIBRESSL_INSTALL_DIR "${BINARY_DIR}/thirdparty/libressl-install" CACHE STRING "" FORCE)
+++	FOREACH(BYPRODUCT ${BYPRODUCTS})
+++		LIST(APPEND LIBRESSL_LIBRARIES_LIST "${LIBRESSL_INSTALL_DIR}/${BYPRODUCT}")
+++	ENDFOREACH(BYPRODUCT)
+++
++ 	ExternalProject_Add(
++ 	libressl-portable
++ 	URL https://cdn.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.8.3.tar.gz https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.8.3.tar.gz https://gentoo.osuosl.org/distfiles/libressl-2.8.3.tar.gz
++@@ -37,6 +48,7 @@
++ 				"-DLIBRESSL_APPS=OFF"
++ 				"-DLIBRESSL_TESTS=OFF"
++ 				"${BUILD_ARGS}"
+++	BUILD_BYPRODUCTS ${LIBRESSL_LIBRARIES_LIST}
++ 	)
 + 
-+-  static int callback(void *cls, struct MHD_Connection *connection,
-++  static mhd_result callback(void *cls, struct MHD_Connection *connection,
-+                       const char *url, const char *method, const char *version,
-+                       const char *upload_data, size_t *upload_data_size,
-+                       void **con_cls);
-+-- 
-+2.25.1
++ 	add_library(crypto STATIC IMPORTED)
++diff -urN orig/CMakeLists.txt patched/CMakeLists.txt
++--- orig/CMakeLists.txt	2020-07-28 11:39:40.042677515 +0900
+++++ patched/CMakeLists.txt	2020-07-28 11:46:15.962676679 +0900
++@@ -119,13 +119,27 @@
++ 	endif()
++ endif()
++ 
+++include(CheckCXXSourceCompiles)
+++CHECK_CXX_SOURCE_COMPILES("
+++    #include <atomic>
+++    int main(int argc, char **argv) {
+++        uint8_t m;
+++        __atomic_load_8(&m, 0);
+++        return 0;
+++    }"
+++    HAVE_ATOMIC
+++)
+++if(NOT HAVE_ATOMIC)
+++    set(LIB_ATOMIC atomic)
+++endif()
+++
++ # Use ccache if present
++-find_program(CCACHE_FOUND ccache)
++-if(CCACHE_FOUND)
++-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
++-    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
++-    message("-- Found ccache: ${CCACHE_FOUND}")
++-endif(CCACHE_FOUND)
+++#find_program(CCACHE_FOUND ccache)
+++#if(CCACHE_FOUND)
+++#    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+++#    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
+++#    message("-- Found ccache: ${CCACHE_FOUND}")
+++#endif(CCACHE_FOUND)
++ 
++ if (UNIX AND USE_GOLD_LINKER AND NOT APPLE )
++   execute_process(COMMAND ${CMAKE_C_COMPILER} -fuse-ld=gold -Wl,--version ERROR_QUIET OUTPUT_VARIABLE ld_version)
++@@ -303,8 +317,10 @@
++     GIT_TAG "f3294d9d86e6a7915a967efff2842089b8b0d071"  # Version 7.64.0
++     SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/curl-src"
++     LIST_SEPARATOR % # This is needed for passing semicolon-separated lists
+++    TLS_VERIFY OFF
++     CMAKE_ARGS ${PASSTHROUGH_CMAKE_ARGS}
++                "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/thirdparty/curl-install"
+++               "-DCMAKE_INSTALL_LIBDIR=lib${LIBSUFFIX}"
++                 -DCMAKE_POSITION_INDEPENDENT_CODE=ON
++                 -DBUILD_CURL_EXE=OFF
++                 -DBUILD_TESTING=OFF
++diff -urN orig/libminifi/CMakeLists.txt patched/libminifi/CMakeLists.txt
++--- orig/libminifi/CMakeLists.txt	2020-07-28 11:39:40.074677515 +0900
+++++ patched/libminifi/CMakeLists.txt	2020-07-28 11:47:08.554676568 +0900
++@@ -108,6 +108,7 @@
++ add_library(spdlog STATIC ${SPD_SOURCES})
++ add_library(core-minifi STATIC ${SOURCES})
++ target_link_libraries(core-minifi ${CMAKE_DL_LIBS} yaml-cpp)
+++target_link_libraries(core-minifi ${LIB_ATOMIC})
++ 
++ #target_link_libraries(core-minifi  PRIVATE bsdiff )
++ 
+diff --git a/meta-oe/recipes-extended/minifi-cpp/files/fix-rocksdb-cross-compile.patch b/meta-oe/recipes-extended/minifi-cpp/files/fix-rocksdb-cross-compile.patch
+new file mode 100644
+index 000000000..848b97aed
+--- /dev/null
++++ b/meta-oe/recipes-extended/minifi-cpp/files/fix-rocksdb-cross-compile.patch
+@@ -0,0 +1,11 @@
++diff -urN orig/thirdparty/rocksdb/CMakeLists.txt patched/thirdparty/rocksdb/CMakeLists.txt
++--- orig/thirdparty/rocksdb/CMakeLists.txt	2020-07-28 11:39:40.254677515 +0900
+++++ patched/thirdparty/rocksdb/CMakeLists.txt	2020-07-28 11:51:11.898676054 +0900
++@@ -618,6 +618,7 @@
++ add_library(${ROCKSDB_STATIC_LIB} STATIC ${SOURCES})
++ target_link_libraries(${ROCKSDB_STATIC_LIB}
++   ${THIRDPARTY_LIBS} ${SYSTEM_LIBS})
+++target_link_libraries(${ROCKSDB_STATIC_LIB} ${LIB_ATOMIC})
++ 
++ if(WIN32)
++ #  add_library(${ROCKSDB_IMPORT_LIB} SHARED ${SOURCES})
+diff --git a/meta-oe/recipes-extended/minifi-cpp/files/minifi.service b/meta-oe/recipes-extended/minifi-cpp/files/minifi.service
+new file mode 100644
+index 000000000..5802a7b2f
+--- /dev/null
++++ b/meta-oe/recipes-extended/minifi-cpp/files/minifi.service
+@@ -0,0 +1,13 @@
++[Unit]
++Description=MiNiFi Service
++After=network.target
++RequiresMountsFor=/var
 +
-diff --git a/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.3.0.bb b/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.3.0.bb
-index ca9675ed64..0ae39765f2 100644
---- a/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.3.0.bb
-+++ b/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.3.0.bb
-@@ -9,7 +9,10 @@ SECTION = "libs"
- 
- DEPENDS = "curl jsoncpp libmicrohttpd hiredis"
- 
--SRC_URI = "git://github.com/cinemast/libjson-rpc-cpp"
-+SRC_URI = "git://github.com/cinemast/libjson-rpc-cpp \
-+	   file://0001-Fix-build-with-libmicrohttpd.patch \
-+"
++[Service]
++Type=simple
++WorkingDirectory=@LOCALSTATEDIR@/run/minifi
++Environment=MINIFI_HOME=@SYSCONFDIR@/minifi
++ExecStart=@BINDIR@/minifi
 +
- SRCREV = "c696f6932113b81cd20cd4a34fdb1808e773f23e"
- 
- S = "${WORKDIR}/git"
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-extended/minifi-cpp/files/systemd-volatile.conf b/meta-oe/recipes-extended/minifi-cpp/files/systemd-volatile.conf
+new file mode 100644
+index 000000000..c828b49fa
+--- /dev/null
++++ b/meta-oe/recipes-extended/minifi-cpp/files/systemd-volatile.conf
+@@ -0,0 +1,2 @@
++d @MINIFI_RUN@ 0755 root root -
++d @MINIFI_LOG@ 0755 root root -
+diff --git a/meta-oe/recipes-extended/minifi-cpp/files/sysvinit-volatile.conf b/meta-oe/recipes-extended/minifi-cpp/files/sysvinit-volatile.conf
+new file mode 100644
+index 000000000..2ad14e677
+--- /dev/null
++++ b/meta-oe/recipes-extended/minifi-cpp/files/sysvinit-volatile.conf
+@@ -0,0 +1,2 @@
++d root root 0755 @MINIFI_RUN@ none
++d root root 0755 @MINIFI_LOG@ none
+diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
+new file mode 100644
+index 000000000..eb9ede813
+--- /dev/null
++++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
+@@ -0,0 +1,108 @@
++SUMMARY = "A subproject of Apache NiFi to collect data where it originates."
++DESCRIPTION = "MiNiFi--a subproject of Apache NiFi--is a complementary \
++data collection approach that supplements the core tenets of NiFi in dataflow \
++management, focusing on the collection of data at the source of its creation."
++HOMEPAGE = "https://nifi.apache.org/minifi/index.html"
++SECTION = "console/network"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=f9534eb5f4ab800b573a37bffc62f3a7"
++
++DEPENDS = "libxcrypt expat flex python3 bison-native"
++RDEPENDS_${PN} = "python3-core"
++
++SRCREV = "aa42957a2e227df41510047cece3cd606dc1cb6a"
++SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git \
++           file://fix-build-issue-in-yocto.patch \
++           file://fix-rocksdb-cross-compile.patch \
++           file://fix-OSSPUUID-cross-compile.patch \
++           file://minifi.service \
++           file://systemd-volatile.conf \
++           file://sysvinit-volatile.conf \
++           "
++
++S = "${WORKDIR}/git"
++
++inherit pkgconfig cmake systemd
++
++# There are endian issues when communicating with the x86 nifi on the the mips and the ppc machines.
++COMPATIBLE_MACHINE_mips = "(!.*mips).*"
++COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
++COMPATIBLE_MACHINE_powerpc = "(!.*ppc).*"
++
++SYSTEMD_PACKAGES = "minifi-cpp"
++SYSTEMD_SERVICE_${PN} = "minifi.service"
++SYSTEMD_AUTO_ENABLE = "disable"
++
++EXTRA_OECMAKE += " \
++    -DHOST_SYS=${HOST_SYS} -DBUILD_SYS=${BUILD_SYS} \
++    -DSKIP_TESTS=ON \
++    "
++
++OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
++
++
++do_install() {
++    DESTDIR='${B}/minifi-install' cmake_runcmake_build --target ${OECMAKE_TARGET_INSTALL}
++
++    MINIFI_BIN=${base_prefix}${bindir}
++    MINIFI_HOME=${base_prefix}${sysconfdir}/minifi
++    MINIFI_RUN=${base_prefix}${localstatedir}/run/minifi
++    MINIFI_LOG=${base_prefix}${localstatedir}/log/minifi
++
++    install -d ${D}${MINIFI_BIN}
++    install -d ${D}${MINIFI_HOME}/conf
++    cp -a ${B}/minifi-install/usr/bin/*   ${D}${MINIFI_BIN}/
++    cp -a ${B}/minifi-install/usr/conf/*  ${D}${MINIFI_HOME}/conf/
++
++    sed -i 's|#appender.rolling.directory=.*|appender.rolling.directory='${MINIFI_LOG}'|g' \
++        ${D}${MINIFI_HOME}/conf/minifi-log.properties
++    sed -i 's|nifi.provenance.repository.directory.default=.*|nifi.provenance.repository.directory.default='${MINIFI_RUN}'/provenance_repository|g' \
++        ${D}${MINIFI_HOME}/conf/minifi.properties
++    sed -i 's|nifi.flowfile.repository.directory.default=.*|nifi.flowfile.repository.directory.default='${MINIFI_RUN}'/flowfile_repository|g' \
++        ${D}${MINIFI_HOME}/conf/minifi.properties
++    sed -i 's|nifi.database.content.repository.directory.default=.*|nifi.database.content.repository.directory.default='${MINIFI_RUN}'/content_repository|g' \
++        ${D}${MINIFI_HOME}/conf/minifi.properties
++    sed -i 's|nifi.flow.configuration.file=.*|nifi.flow.configuration.file='${MINIFI_HOME}'/conf/config.yml|g' \
++        ${D}${MINIFI_HOME}/conf/minifi.properties
++
++    sed -i 's|export MINIFI_HOME=.*|export MINIFI_HOME='${MINIFI_HOME}'|g' ${D}${MINIFI_BIN}/minifi.sh
++    sed -i 's|bin_dir=${MINIFI_HOME}/bin|bin_dir='${MINIFI_BIN}'|g' ${D}${MINIFI_BIN}/minifi.sh
++    sed -i 's|pid_file=${bin_dir}|pid_file='${MINIFI_RUN}'|g' ${D}${MINIFI_BIN}/minifi.sh
++
++    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++        install -d ${D}${sysconfdir}/tmpfiles.d/
++        install -m 0644 ${WORKDIR}/systemd-volatile.conf ${D}${sysconfdir}/tmpfiles.d/
++        install -m 0755 -d ${D}${systemd_unitdir}/system
++        install -m 0644 ${WORKDIR}/minifi.service ${D}${systemd_unitdir}/system/
++
++        sed -i 's|@LOCALSTATEDIR@|${localstatedir}|g' ${D}${systemd_unitdir}/system/minifi.service
++        sed -i 's|@SYSCONFDIR@|${sysconfdir}|g' ${D}${systemd_unitdir}/system/minifi.service
++        sed -i 's|@BINDIR@|${bindir}|g' ${D}${systemd_unitdir}/system/minifi.service
++
++        sed -i 's|@MINIFI_RUN@|'${MINIFI_RUN}'|g' ${D}${sysconfdir}/tmpfiles.d/systemd-volatile.conf
++        sed -i 's|@MINIFI_LOG@|'${MINIFI_LOG}'|g' ${D}${sysconfdir}/tmpfiles.d/systemd-volatile.conf
++
++    elif ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
++        install -d ${D}${sysconfdir}/default/volatiles
++        install -m 0644 ${WORKDIR}/sysvinit-volatile.conf ${D}${sysconfdir}/default/volatiles/99_minifi
++
++        sed -i 's|@MINIFI_RUN@|'${MINIFI_RUN}'|g' ${D}${sysconfdir}/default/volatiles/99_minifi
++        sed -i 's|@MINIFI_LOG@|'${MINIFI_LOG}'|g' ${D}${sysconfdir}/default/volatiles/99_minifi
++    fi
++}
++
++pkg_postinst_${PN}() {
++    if [ -z "$D" ]; then
++        if type systemd-tmpfiles >/dev/null; then
++            systemd-tmpfiles --create
++        elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
++            ${sysconfdir}/init.d/populate-volatile.sh update
++        fi
++    fi
++}
++
++FILES_${PN} = " \
++        ${bindir} \
++        ${sysconfdir} \
++        ${systemd_unitdir} \
++        "
 -- 
-2.25.1
-
-
+2.28.0
 
