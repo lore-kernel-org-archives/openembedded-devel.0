@@ -1,389 +1,206 @@
 Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web12.1362.1596606302002396222
+ by mx.groups.io with SMTP id smtpd.web11.2558.1596613843763509032
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Aug 2020 22:45:02 -0700
+ Wed, 05 Aug 2020 00:50:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: wonjong.lee@windriver.com)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: mingli.yu@windriver.com)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0755iUD2021558
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0757o5xk026203
 	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 4 Aug 2020 22:44:50 -0700
-Received: from SEL-WLEE-D1.wrs.com (128.224.239.83) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.40) with Microsoft SMTP Server id 14.3.487.0; Tue, 4 Aug 2020
- 22:44:32 -0700
-From: "wonjong.lee" <wonjong.lee@windriver.com>
+	for <openembedded-devel@lists.openembedded.org>; Wed, 5 Aug 2020 00:50:32 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+ 14.3.487.0; Wed, 5 Aug 2020 00:50:07 -0700
+From: "Yu, Mingli" <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: <Junhwa.Rhee@windriver.com>, <jeff.kim@windriver.com>,
-        <andy.kang@windriver.com>
-Subject: [meta-oe][PATCH v3] minifi: Add recipe for c++ version
-Date: Wed, 5 Aug 2020 14:43:03 +0900
-Message-ID: <20200805054303.25456-1-wonjong.lee@windriver.com>
-X-Mailer: git-send-email 2.28.0
+Subject: [meta-networking][PATCH] freeradius: fix the occasional verification failure
+Date: Wed, 5 Aug 2020 15:45:50 +0800
+Message-ID: <20200805074550.3849347-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-MiNiFi--a subproject of Apache NiFi--is a complementary data
-collection approach that supplements the core tenets of NiFi
-in dataflow management, focusing on the collection of data at
-the source of its creation. The C++ implementation is an
-additional implementation to the one in Java with the aim of
-an even smaller resource footprint.
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: wonjong.lee <wonjong.lee@windriver.com>
+Fixes:
+  # cd /etc/raddb/certs
+  # ./bootstrap
+[snip]
+chmod g+r ca.key
+openssl pkcs12 -in server.p12 -out server.pem -passin pass:'whatever' -passout pass:'whatever'
+chmod g+r server.pem
+C = FR, ST = Radius, O = Example Inc., CN = Example Server Certificate, emailAddress = admin@example.org
+error 7 at 0 depth lookup: certificate signature failure
+140066667427072:error:04067084:rsa routines:rsa_ossl_public_decrypt:data too large for modulus:../openssl-1.1.1g/crypto/rsa/rsa_ossl.c:553:
+140066667427072:error:0D0C5006:asn1 encoding routines:ASN1_item_verify:EVP lib:../openssl-1.1.1g/crypto/asn1/a_verify.c:170:
+error server.pem: verification failed
+make: *** [Makefile:107: server.vrfy] Error 2
+
+It seems the ca.pem mismatchs server.pem which results in failing to
+execute "openssl verify -CAfile ca.pem server.pem", so add the logic
+to check the file to avoid inconsistency.
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- .../files/fix-OSSPUUID-cross-compile.patch    |  70 ++++++++++++
- .../files/fix-build-issue-in-yocto.patch      |  88 ++++++++++++++
- .../files/fix-rocksdb-cross-compile.patch     |  11 ++
- .../minifi-cpp/files/minifi.service           |  13 +++
- .../minifi-cpp/files/systemd-volatile.conf    |   2 +
- .../minifi-cpp/files/sysvinit-volatile.conf   |   2 +
- .../minifi-cpp/minifi-cpp_0.7.0.bb            | 108 ++++++++++++++++++
- 7 files changed, 294 insertions(+)
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/fix-rocksdb-cross-compile.patch
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/minifi.service
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/systemd-volatile.conf
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/sysvinit-volatile.conf
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
+ ...file-fix-the-occasional-verification.patch | 135 ++++++++++++++++++
+ .../freeradius/freeradius_3.0.20.bb           |   1 +
+ 2 files changed, 136 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-raddb-certs-Makefile-fix-the-occasional-verification.patch
 
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch b/meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/0001-raddb-certs-Makefile-fix-the-occasional-verification.patch b/meta-networking/recipes-connectivity/freeradius/files/0001-raddb-certs-Makefile-fix-the-occasional-verification.patch
 new file mode 100644
-index 000000000..6af47cafb
+index 000000000..dce0427e1
 --- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/fix-OSSPUUID-cross-compile.patch
-@@ -0,0 +1,70 @@
-+diff -urN orig/cmake/BundledOSSPUUID.cmake patched/cmake/BundledOSSPUUID.cmake
-+--- orig/cmake/BundledOSSPUUID.cmake	2020-01-07 22:55:55.000000000 +0900
-++++ patched/cmake/BundledOSSPUUID.cmake	2020-07-14 11:32:28.221092406 +0900
-+@@ -22,7 +22,8 @@
++++ b/meta-networking/recipes-connectivity/freeradius/files/0001-raddb-certs-Makefile-fix-the-occasional-verification.patch
+@@ -0,0 +1,135 @@
++From 3eda5d35fbaf66ed6bdc86ada4320a0a18681b7e Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Wed, 5 Aug 2020 07:23:11 +0000
++Subject: [PATCH] raddb/certs/Makefile: fix the occasional verification failure
++
++Fixes:
++  # cd /etc/raddb/certs
++  # ./bootstrap
++[snip]
++chmod g+r ca.key
++openssl pkcs12 -in server.p12 -out server.pem -passin pass:'whatever' -passout pass:'whatever'
++chmod g+r server.pem
++C = FR, ST = Radius, O = Example Inc., CN = Example Server Certificate, emailAddress = admin@example.org
++error 7 at 0 depth lookup: certificate signature failure
++140066667427072:error:04067084:rsa routines:rsa_ossl_public_decrypt:data too large for modulus:../openssl-1.1.1g/crypto/rsa/rsa_ossl.c:553:
++140066667427072:error:0D0C5006:asn1 encoding routines:ASN1_item_verify:EVP lib:../openssl-1.1.1g/crypto/asn1/a_verify.c:170:
++error server.pem: verification failed
++make: *** [Makefile:107: server.vrfy] Error 2
++
++It seems the ca.pem mismatchs server.pem which results in failing to
++execute "openssl verify -CAfile ca.pem server.pem", so add to check
++the file to avoid inconsistency.
++
++Upstream-Status: Pending
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ raddb/certs/Makefile | 30 +++++++++++++++---------------
++ 1 file changed, 15 insertions(+), 15 deletions(-)
++
++diff --git a/raddb/certs/Makefile b/raddb/certs/Makefile
++index 77eec9baa1..3dcb63fe71 100644
++--- a/raddb/certs/Makefile
+++++ b/raddb/certs/Makefile
++@@ -59,7 +59,7 @@ passwords.mk: server.cnf ca.cnf client.cnf inner-server.cnf
++ #
++ ######################################################################
++ dh:
++-	$(OPENSSL) dhparam -out dh -2 $(DH_KEY_SIZE)
+++	@[ -f dh ] || $(OPENSSL) dhparam -out dh -2 $(DH_KEY_SIZE)
 + 
-+     # Define patch step
-+     find_package(Patch REQUIRED)
-+-    set(PC "${Patch_EXECUTABLE}" -p1 -i "${SOURCE_DIR}/thirdparty/ossp-uuid/ossp-uuid-mac-fix.patch")
-++    set(PATCH1 "${Patch_EXECUTABLE}" -p1 -i "${SOURCE_DIR}/thirdparty/ossp-uuid/ossp-uuid-mac-fix.patch")
-++    set(PATCH2 "${Patch_EXECUTABLE}" -p1 -i "${SOURCE_DIR}/thirdparty/ossp-uuid/cross-compile-fix.patch")
++ ######################################################################
++ #
++@@ -69,17 +69,17 @@ dh:
++ ca.key ca.pem: ca.cnf
++ 	@[ -f index.txt ] || $(MAKE) index.txt
++ 	@[ -f serial ] || $(MAKE) serial
++-	$(OPENSSL) req -new -x509 -keyout ca.key -out ca.pem \
+++	@[ -f ca.pem ] || $(OPENSSL) req -new -x509 -keyout ca.key -out ca.pem \
++ 		-days $(CA_DEFAULT_DAYS) -config ./ca.cnf \
++ 		-passin pass:$(PASSWORD_CA) -passout pass:$(PASSWORD_CA)
++ 	chmod g+r ca.key
 + 
-+     # Define byproducts
-+     set(BYPRODUCTS "lib/libuuid.a"
-+@@ -35,7 +36,9 @@
-+     ENDFOREACH(BYPRODUCT)
++ ca.der: ca.pem
++-	$(OPENSSL) x509 -inform PEM -outform DER -in ca.pem -out ca.der
+++	@[ -f ca.der ] || $(OPENSSL) x509 -inform PEM -outform DER -in ca.pem -out ca.der
 + 
-+     # Build project
-+-    set(CONFIGURE_COMMAND ./configure "CFLAGS=-fPIC" "CXXFLAGS=-fPIC" --with-cxx --without-perl --without-php --without-pgsql "--prefix=${BINARY_DIR}/thirdparty/ossp-uuid-install")
-++    set(CONFIGURE_COMMAND ac_cv_va_copy=C99 ./configure CFLAGS=-fPIC CXXFLAGS=-fPIC --host=${HOST_SYS}
-++        --with-cxx --without-perl --without-php --without-pgsql
-++        --prefix=${BINARY_DIR}/thirdparty/ossp-uuid-install)
-+     string(TOLOWER "${CMAKE_BUILD_TYPE}" build_type)
-+     if(NOT build_type MATCHES debug)
-+         list(APPEND CONFIGURE_COMMAND --enable-debug=yes)
-+@@ -52,8 +55,8 @@
-+             UPDATE_COMMAND ""
-+             INSTALL_COMMAND make install
-+             BUILD_BYPRODUCTS ${OSSPUUID_LIBRARIES_LIST}
-+-            CONFIGURE_COMMAND ""
-+-            PATCH_COMMAND ${PC} && ${CONFIGURE_COMMAND}
-++            CONFIGURE_COMMAND ${CONFIGURE_COMMAND}
-++            PATCH_COMMAND ${PATCH1} && ${PATCH2}
-+             STEP_TARGETS build
-+             EXCLUDE_FROM_ALL TRUE
-+     )
-+diff -urN orig/thirdparty/ossp-uuid/cross-compile-fix.patch patched/thirdparty/ossp-uuid/cross-compile-fix.patch
-+--- orig/thirdparty/ossp-uuid/cross-compile-fix.patch	1970-01-01 09:00:00.000000000 +0900
-++++ patched/thirdparty/ossp-uuid/cross-compile-fix.patch	2020-07-14 11:48:13.781090409 +0900
-+@@ -0,0 +1,31 @@
-++diff -urN orig/config.sub patched/config.sub
-++--- orig/config.sub	2008-07-05 06:43:08.000000000 +0900
-+++++ patched/config.sub	2020-07-14 11:46:47.249090591 +0900
-++@@ -238,6 +238,7 @@
-++ 	# Some are omitted here because they have special meanings below.
-++ 	1750a | 580 \
-++ 	| a29k \
-+++	| aarch64 | aarch64_be \
-++ 	| alpha | alphaev[4-8] | alphaev56 | alphaev6[78] | alphapca5[67] \
-++ 	| alpha64 | alpha64ev[4-8] | alpha64ev56 | alpha64ev6[78] | alpha64pca5[67] \
-++ 	| am33_2.0 \
-++@@ -314,6 +315,7 @@
-++ 	# Recognize the basic CPU types with company name.
-++ 	580-* \
-++ 	| a29k-* \
-+++	| aarch64-* | aarch64_be-* \
-++ 	| alpha-* | alphaev[4-8]-* | alphaev56-* | alphaev6[78]-* \
-++ 	| alpha64-* | alpha64ev[4-8]-* | alpha64ev56-* | alpha64ev6[78]-* \
-++ 	| alphapca5[67]-* | alpha64pca5[67]-* | arc-* \
-++diff -urN orig/shtool patched/shtool
-++--- orig/shtool	2008-07-05 06:43:08.000000000 +0900
-+++++ patched/shtool	2020-07-13 19:35:49.557213657 +0900
-++@@ -1400,7 +1400,7 @@
-++             if [ ".$opt_t" = .yes ]; then
-++                 echo "strip $dsttmp" 1>&2
-++             fi
-++-            strip $dsttmp || shtool_exit $?
-+++            $STRIP $dsttmp || shtool_exit $?
-++         fi
-++         if [ ".$opt_o" != . ]; then
-++             if [ ".$opt_t" = .yes ]; then
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch b/meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch
-new file mode 100644
-index 000000000..2dc591c7a
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/fix-build-issue-in-yocto.patch
-@@ -0,0 +1,88 @@
-+diff -urN orig/cmake/LibreSSL.cmake patched/cmake/LibreSSL.cmake
-+--- orig/cmake/LibreSSL.cmake	2020-07-28 11:39:40.046677515 +0900
-++++ patched/cmake/LibreSSL.cmake	2020-07-28 11:42:41.650677131 +0900
-+@@ -27,6 +27,17 @@
-+ 		set(BYPRODUCT_PREFIX "" CACHE STRING "" FORCE)
-+ 	set(BUILD_ARGS " -GVisual Studio 15 2017")
-+ 	endif(WIN32)
-++
-++	set(BYPRODUCTS
-++		"lib/${BYPRODUCT_PREFIX}crypto${BYPRODUCT_SUFFIX}"
-++		"lib/${BYPRODUCT_PREFIX}ssl${BYPRODUCT_SUFFIX}"
-++		"lib/${BYPRODUCT_PREFIX}tls${BYPRODUCT_SUFFIX}"
-++	)
-++	set(LIBRESSL_INSTALL_DIR "${BINARY_DIR}/thirdparty/libressl-install" CACHE STRING "" FORCE)
-++	FOREACH(BYPRODUCT ${BYPRODUCTS})
-++		LIST(APPEND LIBRESSL_LIBRARIES_LIST "${LIBRESSL_INSTALL_DIR}/${BYPRODUCT}")
-++	ENDFOREACH(BYPRODUCT)
-++
-+ 	ExternalProject_Add(
-+ 	libressl-portable
-+ 	URL https://cdn.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.8.3.tar.gz https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.8.3.tar.gz https://gentoo.osuosl.org/distfiles/libressl-2.8.3.tar.gz
-+@@ -37,6 +48,7 @@
-+ 				"-DLIBRESSL_APPS=OFF"
-+ 				"-DLIBRESSL_TESTS=OFF"
-+ 				"${BUILD_ARGS}"
-++	BUILD_BYPRODUCTS ${LIBRESSL_LIBRARIES_LIST}
-+ 	)
++ ca.crl: ca.pem
++-	$(OPENSSL) ca -gencrl -keyfile ca.key -cert ca.pem -config ./ca.cnf -out ca-crl.pem -key $(PASSWORD_CA)
++-	$(OPENSSL) crl -in ca-crl.pem -outform der -out ca.crl
+++	@[ -f ca-crl.pem ] || $(OPENSSL) ca -gencrl -keyfile ca.key -cert ca.pem -config ./ca.cnf -out ca-crl.pem -key $(PASSWORD_CA)
+++	@[ -f ca.crl ] || $(OPENSSL) crl -in ca-crl.pem -outform der -out ca.crl
++ 	rm ca-crl.pem
 + 
-+ 	add_library(crypto STATIC IMPORTED)
-+diff -urN orig/CMakeLists.txt patched/CMakeLists.txt
-+--- orig/CMakeLists.txt	2020-07-28 11:39:40.042677515 +0900
-++++ patched/CMakeLists.txt	2020-07-28 11:46:15.962676679 +0900
-+@@ -119,13 +119,27 @@
-+ 	endif()
-+ endif()
++ ######################################################################
++@@ -88,18 +88,18 @@ ca.crl: ca.pem
++ #
++ ######################################################################
++ server.csr server.key: server.cnf
++-	$(OPENSSL) req -new  -out server.csr -keyout server.key -config ./server.cnf
+++	@[ -f server.csr ] || $(OPENSSL) req -new  -out server.csr -keyout server.key -config ./server.cnf
++ 	chmod g+r server.key
 + 
-++include(CheckCXXSourceCompiles)
-++CHECK_CXX_SOURCE_COMPILES("
-++    #include <atomic>
-++    int main(int argc, char **argv) {
-++        uint8_t m;
-++        __atomic_load_8(&m, 0);
-++        return 0;
-++    }"
-++    HAVE_ATOMIC
-++)
-++if(NOT HAVE_ATOMIC)
-++    set(LIB_ATOMIC atomic)
-++endif()
-++
-+ # Use ccache if present
-+-find_program(CCACHE_FOUND ccache)
-+-if(CCACHE_FOUND)
-+-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
-+-    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
-+-    message("-- Found ccache: ${CCACHE_FOUND}")
-+-endif(CCACHE_FOUND)
-++#find_program(CCACHE_FOUND ccache)
-++#if(CCACHE_FOUND)
-++#    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
-++#    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
-++#    message("-- Found ccache: ${CCACHE_FOUND}")
-++#endif(CCACHE_FOUND)
++ server.crt: server.csr ca.key ca.pem
++ 	@[ -f server.crt ] || $(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in server.csr  -key $(PASSWORD_CA) -out server.crt -extensions xpserver_ext -extfile xpextensions -config ./server.cnf
 + 
-+ if (UNIX AND USE_GOLD_LINKER AND NOT APPLE )
-+   execute_process(COMMAND ${CMAKE_C_COMPILER} -fuse-ld=gold -Wl,--version ERROR_QUIET OUTPUT_VARIABLE ld_version)
-+@@ -303,8 +317,10 @@
-+     GIT_TAG "f3294d9d86e6a7915a967efff2842089b8b0d071"  # Version 7.64.0
-+     SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/curl-src"
-+     LIST_SEPARATOR % # This is needed for passing semicolon-separated lists
-++    TLS_VERIFY OFF
-+     CMAKE_ARGS ${PASSTHROUGH_CMAKE_ARGS}
-+                "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/thirdparty/curl-install"
-++               "-DCMAKE_INSTALL_LIBDIR=lib${LIBSUFFIX}"
-+                 -DCMAKE_POSITION_INDEPENDENT_CODE=ON
-+                 -DBUILD_CURL_EXE=OFF
-+                 -DBUILD_TESTING=OFF
-+diff -urN orig/libminifi/CMakeLists.txt patched/libminifi/CMakeLists.txt
-+--- orig/libminifi/CMakeLists.txt	2020-07-28 11:39:40.074677515 +0900
-++++ patched/libminifi/CMakeLists.txt	2020-07-28 11:47:08.554676568 +0900
-+@@ -108,6 +108,7 @@
-+ add_library(spdlog STATIC ${SPD_SOURCES})
-+ add_library(core-minifi STATIC ${SOURCES})
-+ target_link_libraries(core-minifi ${CMAKE_DL_LIBS} yaml-cpp)
-++target_link_libraries(core-minifi ${LIB_ATOMIC})
++ server.p12: server.crt
++-	$(OPENSSL) pkcs12 -export -in server.crt -inkey server.key -out server.p12  -passin pass:$(PASSWORD_SERVER) -passout pass:$(PASSWORD_SERVER)
+++	@[ -f server.p12 ] || $(OPENSSL) pkcs12 -export -in server.crt -inkey server.key -out server.p12  -passin pass:$(PASSWORD_SERVER) -passout pass:$(PASSWORD_SERVER)
++ 	chmod g+r server.p12
 + 
-+ #target_link_libraries(core-minifi  PRIVATE bsdiff )
++ server.pem: server.p12
++-	$(OPENSSL) pkcs12 -in server.p12 -out server.pem -passin pass:$(PASSWORD_SERVER) -passout pass:$(PASSWORD_SERVER)
+++	@[ -f server.pem ] || $(OPENSSL) pkcs12 -in server.p12 -out server.pem -passin pass:$(PASSWORD_SERVER) -passout pass:$(PASSWORD_SERVER)
++ 	chmod g+r server.pem
 + 
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/fix-rocksdb-cross-compile.patch b/meta-oe/recipes-extended/minifi-cpp/files/fix-rocksdb-cross-compile.patch
-new file mode 100644
-index 000000000..848b97aed
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/fix-rocksdb-cross-compile.patch
-@@ -0,0 +1,11 @@
-+diff -urN orig/thirdparty/rocksdb/CMakeLists.txt patched/thirdparty/rocksdb/CMakeLists.txt
-+--- orig/thirdparty/rocksdb/CMakeLists.txt	2020-07-28 11:39:40.254677515 +0900
-++++ patched/thirdparty/rocksdb/CMakeLists.txt	2020-07-28 11:51:11.898676054 +0900
-+@@ -618,6 +618,7 @@
-+ add_library(${ROCKSDB_STATIC_LIB} STATIC ${SOURCES})
-+ target_link_libraries(${ROCKSDB_STATIC_LIB}
-+   ${THIRDPARTY_LIBS} ${SYSTEM_LIBS})
-++target_link_libraries(${ROCKSDB_STATIC_LIB} ${LIB_ATOMIC})
++ .PHONY: server.vrfy
++@@ -113,18 +113,18 @@ server.vrfy: ca.pem
++ #
++ ######################################################################
++ client.csr client.key: client.cnf
++-	$(OPENSSL) req -new  -out client.csr -keyout client.key -config ./client.cnf
+++	@[ -f client.csr ] || $(OPENSSL) req -new  -out client.csr -keyout client.key -config ./client.cnf
++ 	chmod g+r client.key
 + 
-+ if(WIN32)
-+ #  add_library(${ROCKSDB_IMPORT_LIB} SHARED ${SOURCES})
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/minifi.service b/meta-oe/recipes-extended/minifi-cpp/files/minifi.service
-new file mode 100644
-index 000000000..5802a7b2f
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/minifi.service
-@@ -0,0 +1,13 @@
-+[Unit]
-+Description=MiNiFi Service
-+After=network.target
-+RequiresMountsFor=/var
++ client.crt: client.csr ca.pem ca.key
++ 	@[ -f client.crt ] || $(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in client.csr  -key $(PASSWORD_CA) -out client.crt -extensions xpclient_ext -extfile xpextensions -config ./client.cnf
++ 
++ client.p12: client.crt
++-	$(OPENSSL) pkcs12 -export -in client.crt -inkey client.key -out client.p12  -passin pass:$(PASSWORD_CLIENT) -passout pass:$(PASSWORD_CLIENT)
+++	@[ -f client.p12 ] || $(OPENSSL) pkcs12 -export -in client.crt -inkey client.key -out client.p12  -passin pass:$(PASSWORD_CLIENT) -passout pass:$(PASSWORD_CLIENT)
++ 	chmod g+r client.p12
++ 
++ client.pem: client.p12
++-	$(OPENSSL) pkcs12 -in client.p12 -out client.pem -passin pass:$(PASSWORD_CLIENT) -passout pass:$(PASSWORD_CLIENT)
+++	@[ -f client.pem ] || $(OPENSSL) pkcs12 -in client.p12 -out client.pem -passin pass:$(PASSWORD_CLIENT) -passout pass:$(PASSWORD_CLIENT)
++ 	chmod g+r client.pem
++ 	cp client.pem $(USER_NAME).pem
++ 
++@@ -139,18 +139,18 @@ client.vrfy: ca.pem client.pem
++ #
++ ######################################################################
++ inner-server.csr inner-server.key: inner-server.cnf
++-	$(OPENSSL) req -new  -out inner-server.csr -keyout inner-server.key -config ./inner-server.cnf
+++	@[ -f inner-server.csr] || $(OPENSSL) req -new  -out inner-server.csr -keyout inner-server.key -config ./inner-server.cnf
++ 	chmod g+r inner-server.key
++ 
++ inner-server.crt: inner-server.csr ca.key ca.pem
++-	$(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in inner-server.csr  -key $(PASSWORD_CA) -out inner-server.crt -extensions xpserver_ext -extfile xpextensions -config ./inner-server.cnf
+++	@[ -f inner-server.crt ] || $(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in inner-server.csr  -key $(PASSWORD_CA) -out inner-server.crt -extensions xpserver_ext -extfile xpextensions -config ./inner-server.cnf
++ 
++ inner-server.p12: inner-server.crt
++-	$(OPENSSL) pkcs12 -export -in inner-server.crt -inkey inner-server.key -out inner-server.p12  -passin pass:$(PASSWORD_INNER) -passout pass:$(PASSWORD_INNER)
+++	@[ -f inner-server.p12 ] || $(OPENSSL) pkcs12 -export -in inner-server.crt -inkey inner-server.key -out inner-server.p12  -passin pass:$(PASSWORD_INNER) -passout pass:$(PASSWORD_INNER)
++ 	chmod g+r inner-server.p12
++ 
++ inner-server.pem: inner-server.p12
++-	$(OPENSSL) pkcs12 -in inner-server.p12 -out inner-server.pem -passin pass:$(PASSWORD_INNER) -passout pass:$(PASSWORD_INNER)
+++	@[ -f inner-server.pem ] || $(OPENSSL) pkcs12 -in inner-server.p12 -out inner-server.pem -passin pass:$(PASSWORD_INNER) -passout pass:$(PASSWORD_INNER)
++ 	chmod g+r inner-server.pem
++ 
++ .PHONY: inner-server.vrfy
++-- 
++2.26.2
 +
-+[Service]
-+Type=simple
-+WorkingDirectory=@LOCALSTATEDIR@/run/minifi
-+Environment=MINIFI_HOME=@SYSCONFDIR@/minifi
-+ExecStart=@BINDIR@/minifi
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/systemd-volatile.conf b/meta-oe/recipes-extended/minifi-cpp/files/systemd-volatile.conf
-new file mode 100644
-index 000000000..c828b49fa
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/systemd-volatile.conf
-@@ -0,0 +1,2 @@
-+d @MINIFI_RUN@ 0755 root root -
-+d @MINIFI_LOG@ 0755 root root -
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/sysvinit-volatile.conf b/meta-oe/recipes-extended/minifi-cpp/files/sysvinit-volatile.conf
-new file mode 100644
-index 000000000..2ad14e677
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/sysvinit-volatile.conf
-@@ -0,0 +1,2 @@
-+d root root 0755 @MINIFI_RUN@ none
-+d root root 0755 @MINIFI_LOG@ none
-diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-new file mode 100644
-index 000000000..eb9ede813
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-@@ -0,0 +1,108 @@
-+SUMMARY = "A subproject of Apache NiFi to collect data where it originates."
-+DESCRIPTION = "MiNiFi--a subproject of Apache NiFi--is a complementary \
-+data collection approach that supplements the core tenets of NiFi in dataflow \
-+management, focusing on the collection of data at the source of its creation."
-+HOMEPAGE = "https://nifi.apache.org/minifi/index.html"
-+SECTION = "console/network"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=f9534eb5f4ab800b573a37bffc62f3a7"
-+
-+DEPENDS = "libxcrypt expat flex python3 bison-native"
-+RDEPENDS_${PN} = "python3-core"
-+
-+SRCREV = "aa42957a2e227df41510047cece3cd606dc1cb6a"
-+SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git \
-+           file://fix-build-issue-in-yocto.patch \
-+           file://fix-rocksdb-cross-compile.patch \
-+           file://fix-OSSPUUID-cross-compile.patch \
-+           file://minifi.service \
-+           file://systemd-volatile.conf \
-+           file://sysvinit-volatile.conf \
-+           "
-+
-+S = "${WORKDIR}/git"
-+
-+inherit pkgconfig cmake systemd
-+
-+# There are endian issues when communicating with the x86 nifi on the the mips and the ppc machines.
-+COMPATIBLE_MACHINE_mips = "(!.*mips).*"
-+COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
-+COMPATIBLE_MACHINE_powerpc = "(!.*ppc).*"
-+
-+SYSTEMD_PACKAGES = "minifi-cpp"
-+SYSTEMD_SERVICE_${PN} = "minifi.service"
-+SYSTEMD_AUTO_ENABLE = "disable"
-+
-+EXTRA_OECMAKE += " \
-+    -DHOST_SYS=${HOST_SYS} -DBUILD_SYS=${BUILD_SYS} \
-+    -DSKIP_TESTS=ON \
-+    "
-+
-+OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
-+
-+
-+do_install() {
-+    DESTDIR='${B}/minifi-install' cmake_runcmake_build --target ${OECMAKE_TARGET_INSTALL}
-+
-+    MINIFI_BIN=${base_prefix}${bindir}
-+    MINIFI_HOME=${base_prefix}${sysconfdir}/minifi
-+    MINIFI_RUN=${base_prefix}${localstatedir}/run/minifi
-+    MINIFI_LOG=${base_prefix}${localstatedir}/log/minifi
-+
-+    install -d ${D}${MINIFI_BIN}
-+    install -d ${D}${MINIFI_HOME}/conf
-+    cp -a ${B}/minifi-install/usr/bin/*   ${D}${MINIFI_BIN}/
-+    cp -a ${B}/minifi-install/usr/conf/*  ${D}${MINIFI_HOME}/conf/
-+
-+    sed -i 's|#appender.rolling.directory=.*|appender.rolling.directory='${MINIFI_LOG}'|g' \
-+        ${D}${MINIFI_HOME}/conf/minifi-log.properties
-+    sed -i 's|nifi.provenance.repository.directory.default=.*|nifi.provenance.repository.directory.default='${MINIFI_RUN}'/provenance_repository|g' \
-+        ${D}${MINIFI_HOME}/conf/minifi.properties
-+    sed -i 's|nifi.flowfile.repository.directory.default=.*|nifi.flowfile.repository.directory.default='${MINIFI_RUN}'/flowfile_repository|g' \
-+        ${D}${MINIFI_HOME}/conf/minifi.properties
-+    sed -i 's|nifi.database.content.repository.directory.default=.*|nifi.database.content.repository.directory.default='${MINIFI_RUN}'/content_repository|g' \
-+        ${D}${MINIFI_HOME}/conf/minifi.properties
-+    sed -i 's|nifi.flow.configuration.file=.*|nifi.flow.configuration.file='${MINIFI_HOME}'/conf/config.yml|g' \
-+        ${D}${MINIFI_HOME}/conf/minifi.properties
-+
-+    sed -i 's|export MINIFI_HOME=.*|export MINIFI_HOME='${MINIFI_HOME}'|g' ${D}${MINIFI_BIN}/minifi.sh
-+    sed -i 's|bin_dir=${MINIFI_HOME}/bin|bin_dir='${MINIFI_BIN}'|g' ${D}${MINIFI_BIN}/minifi.sh
-+    sed -i 's|pid_file=${bin_dir}|pid_file='${MINIFI_RUN}'|g' ${D}${MINIFI_BIN}/minifi.sh
-+
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+        install -d ${D}${sysconfdir}/tmpfiles.d/
-+        install -m 0644 ${WORKDIR}/systemd-volatile.conf ${D}${sysconfdir}/tmpfiles.d/
-+        install -m 0755 -d ${D}${systemd_unitdir}/system
-+        install -m 0644 ${WORKDIR}/minifi.service ${D}${systemd_unitdir}/system/
-+
-+        sed -i 's|@LOCALSTATEDIR@|${localstatedir}|g' ${D}${systemd_unitdir}/system/minifi.service
-+        sed -i 's|@SYSCONFDIR@|${sysconfdir}|g' ${D}${systemd_unitdir}/system/minifi.service
-+        sed -i 's|@BINDIR@|${bindir}|g' ${D}${systemd_unitdir}/system/minifi.service
-+
-+        sed -i 's|@MINIFI_RUN@|'${MINIFI_RUN}'|g' ${D}${sysconfdir}/tmpfiles.d/systemd-volatile.conf
-+        sed -i 's|@MINIFI_LOG@|'${MINIFI_LOG}'|g' ${D}${sysconfdir}/tmpfiles.d/systemd-volatile.conf
-+
-+    elif ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-+        install -d ${D}${sysconfdir}/default/volatiles
-+        install -m 0644 ${WORKDIR}/sysvinit-volatile.conf ${D}${sysconfdir}/default/volatiles/99_minifi
-+
-+        sed -i 's|@MINIFI_RUN@|'${MINIFI_RUN}'|g' ${D}${sysconfdir}/default/volatiles/99_minifi
-+        sed -i 's|@MINIFI_LOG@|'${MINIFI_LOG}'|g' ${D}${sysconfdir}/default/volatiles/99_minifi
-+    fi
-+}
-+
-+pkg_postinst_${PN}() {
-+    if [ -z "$D" ]; then
-+        if type systemd-tmpfiles >/dev/null; then
-+            systemd-tmpfiles --create
-+        elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
-+            ${sysconfdir}/init.d/populate-volatile.sh update
-+        fi
-+    fi
-+}
-+
-+FILES_${PN} = " \
-+        ${bindir} \
-+        ${sysconfdir} \
-+        ${systemd_unitdir} \
-+        "
+diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
+index d2046d72e..2c39c4c44 100644
+--- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
++++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
+@@ -28,6 +28,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
+     file://0001-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch \
+     file://0001-rlm_python3-add-PY_INC_DIR-in-search-dir.patch \
+     file://0001-raddb-certs-Makefile-fix-the-existed-certificate-err.patch \
++    file://0001-raddb-certs-Makefile-fix-the-occasional-verification.patch \
+     file://radiusd.service \
+     file://radiusd-volatiles.conf \
+ "
 -- 
-2.28.0
+2.26.2
 
