@@ -1,206 +1,100 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web11.2558.1596613843763509032
+Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com [209.85.208.194])
+ by mx.groups.io with SMTP id smtpd.web11.5663.1596629142593580058
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Aug 2020 00:50:43 -0700
+ Wed, 05 Aug 2020 05:05:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: mingli.yu@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0757o5xk026203
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 5 Aug 2020 00:50:32 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
- 14.3.487.0; Wed, 5 Aug 2020 00:50:07 -0700
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH] freeradius: fix the occasional verification failure
-Date: Wed, 5 Aug 2020 15:45:50 +0800
-Message-ID: <20200805074550.3849347-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.26.2
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=dcP4mTU6;
+ spf=pass (domain: gmail.com, ip: 209.85.208.194, mailfrom: jonatan.p@gmail.com)
+Received: by mail-lj1-f194.google.com with SMTP id i10so12602663ljn.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Aug 2020 05:05:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=NFUarfG+aRgvzZBgc/4bQGLUyRtwVpXYHQwT/ASEwz8=;
+        b=dcP4mTU6BNS1VfhVJ6BwmYNCAIKx4oxtkqK2qd2IGYVKkgXdnlpLk3qVFMgsFttKLm
+         UWP8D5kHeAzvc8cGqcsoOR7U11nvFeD+GxvA8Mt7EXn6dOC+V7u4jW/KkkKc0hsVxHzJ
+         Y11yeQ9RTEKhUrd+FXHU6a5Wo0bwZ7VPKcjmbAmTVDFnF6Z8xExkIwxwazEbVaYu7Q8G
+         wSb+ATLxO9hVrqJ16kSjQeAc6GLGGEnC8PKOac14FnxMaxHxx0WFz78NFuJ7630pP/Lv
+         wN2MW53/eHBn25sMJW/RFEibm2Sg3AojbdlGoHMsqotLbiKqrrP6v2JTU9w7NJpAGCyN
+         CSrQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=NFUarfG+aRgvzZBgc/4bQGLUyRtwVpXYHQwT/ASEwz8=;
+        b=ipBeuOQwlJJF4JMjWe/5bxRkSE6dwECPmKg9nZXxN9vazJE3CVDGr3x4/Z3hxHVtZE
+         UzqBC2WDNsG3pcsrq0aAgDoAwy/2l6CSHvZHD0aKCVPUJB6rE10lQdYASHYe7OvtZRhr
+         YB+GNo0kEWMTOBHaN1TYQGBmJa6CjDRKXhbAxu05/l+1ZvCPurw2S8YQv6YyXe2TTIzq
+         HV22B9nyhTLMWiRNPa1IdKq3zLAQpJ/ZJ/cLRAXFGyNq4D9QkVsEaEt74mF0/jooEWHI
+         HMl/E0UHYB0qgSOdghbLDFHYkayeRQfS6A8xAIbBoKItuSMGIYxdJz+ubpkNilGPUg6q
+         znig==
+X-Gm-Message-State: AOAM530TvSujKqC4JP5NNI1gLfQ8foltDxELzKzuT6iCgmyNP3eOjdYl
+	IelfRLLsg6lS2z+4tl47lo9pvhO6
+X-Google-Smtp-Source: ABdhPJzyUSXlFP69wi5OK4OOYzofoblIfLC9vFyk1OcWivIBs69D59hAwJ+kWUwfzD8jkOwVo21pDw==
+X-Received: by 2002:a05:651c:1344:: with SMTP id j4mr1389386ljb.164.1596629139899;
+        Wed, 05 Aug 2020 05:05:39 -0700 (PDT)
+Return-Path: <jonatan.p@gmail.com>
+Received: from X1.lan (h-170-217-237.A357.priv.bahnhof.se. [81.170.217.237])
+        by smtp.gmail.com with ESMTPSA id a19sm1038557lff.25.2020.08.05.05.05.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 05 Aug 2020 05:05:39 -0700 (PDT)
+From: =?UTF-8?B?Sm9uYXRhbiBQw6Vsc3Nvbg==?= <jonatan.p@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: =?UTF-8?q?Jonatan=20P=C3=A5lsson?= <jonatan.p@gmail.com>
+Subject: [PATCH] openjdk-8: Convert do_unpack postfunc to _append
+Date: Wed,  5 Aug 2020 14:05:26 +0200
+Message-Id: <20200805120526.2162683-1-jonatan.p@gmail.com>
+X-Mailer: git-send-email 2.26.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-From: Mingli Yu <mingli.yu@windriver.com>
+archiver.bbclass will invoke do_unpack as a function (rather than a
+task) during do_unpack_and_patch. When invoked as a function, the
+postfuncs of do_unpack are not executed.
+
+Convert the postfuncs into an _append fragment on do_unpack instead.
 
 Fixes:
-  # cd /etc/raddb/certs
-  # ./bootstrap
-[snip]
-chmod g+r ca.key
-openssl pkcs12 -in server.p12 -out server.pem -passin pass:'whatever' -passout pass:'whatever'
-chmod g+r server.pem
-C = FR, ST = Radius, O = Example Inc., CN = Example Server Certificate, emailAddress = admin@example.org
-error 7 at 0 depth lookup: certificate signature failure
-140066667427072:error:04067084:rsa routines:rsa_ossl_public_decrypt:data too large for modulus:../openssl-1.1.1g/crypto/rsa/rsa_ossl.c:553:
-140066667427072:error:0D0C5006:asn1 encoding routines:ASN1_item_verify:EVP lib:../openssl-1.1.1g/crypto/asn1/a_verify.c:170:
-error server.pem: verification failed
-make: *** [Makefile:107: server.vrfy] Error 2
 
-It seems the ca.pem mismatchs server.pem which results in failing to
-execute "openssl verify -CAfile ca.pem server.pem", so add the logic
-to check the file to avoid inconsistency.
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+    .. snip ..
+    No file to patch.  Skipping patch.
+    1 out of 1 hunk ignored
+    Patch 1001-hotspot-fix-crash-on-JNI_CreateJavaVM.patch does not apply (enforce with -f)
+    ERROR: Logfile of failure stored in: .. snip .. /build/tmp/work/x86_64-linux/openjdk-8-native/252-r0/temp/log.do_unpack_and_patch.220625
+    ERROR: Task (.. snip .. /sources/openembedded-core/meta-java/recipes-core/openjdk/openjdk-8-native_252.bb:do_unpack_and_patch) failed with exit code '1'
 ---
- ...file-fix-the-occasional-verification.patch | 135 ++++++++++++++++++
- .../freeradius/freeradius_3.0.20.bb           |   1 +
- 2 files changed, 136 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-raddb-certs-Makefile-fix-the-occasional-verification.patch
+ recipes-core/openjdk/openjdk-8-common.inc | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/freeradius/files/0001-raddb-certs-Makefile-fix-the-occasional-verification.patch b/meta-networking/recipes-connectivity/freeradius/files/0001-raddb-certs-Makefile-fix-the-occasional-verification.patch
-new file mode 100644
-index 000000000..dce0427e1
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/freeradius/files/0001-raddb-certs-Makefile-fix-the-occasional-verification.patch
-@@ -0,0 +1,135 @@
-+From 3eda5d35fbaf66ed6bdc86ada4320a0a18681b7e Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Wed, 5 Aug 2020 07:23:11 +0000
-+Subject: [PATCH] raddb/certs/Makefile: fix the occasional verification failure
+diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+index c78bb2a..123e896 100644
+--- a/recipes-core/openjdk/openjdk-8-common.inc
++++ b/recipes-core/openjdk/openjdk-8-common.inc
+@@ -46,6 +46,13 @@ do_unpack_delete_X11_wrappers() {
+     find ${S}/jdk/src/solaris/classes/sun/awt/X11 -maxdepth 1 -name '*.java' -delete
+ }
+ 
++do_unpack_append() {
++    bb.build.exec_func('do_unpack_extract_submodules', d)
 +
-+Fixes:
-+  # cd /etc/raddb/certs
-+  # ./bootstrap
-+[snip]
-+chmod g+r ca.key
-+openssl pkcs12 -in server.p12 -out server.pem -passin pass:'whatever' -passout pass:'whatever'
-+chmod g+r server.pem
-+C = FR, ST = Radius, O = Example Inc., CN = Example Server Certificate, emailAddress = admin@example.org
-+error 7 at 0 depth lookup: certificate signature failure
-+140066667427072:error:04067084:rsa routines:rsa_ossl_public_decrypt:data too large for modulus:../openssl-1.1.1g/crypto/rsa/rsa_ossl.c:553:
-+140066667427072:error:0D0C5006:asn1 encoding routines:ASN1_item_verify:EVP lib:../openssl-1.1.1g/crypto/asn1/a_verify.c:170:
-+error server.pem: verification failed
-+make: *** [Makefile:107: server.vrfy] Error 2
++    if not bb.utils.filter('PACKAGECONFIG', 'x11', d):
++        bb.build.exec_func('do_unpack_delete_X11_wrappers', d)
++}
 +
-+It seems the ca.pem mismatchs server.pem which results in failing to
-+execute "openssl verify -CAfile ca.pem server.pem", so add to check
-+the file to avoid inconsistency.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ raddb/certs/Makefile | 30 +++++++++++++++---------------
-+ 1 file changed, 15 insertions(+), 15 deletions(-)
-+
-+diff --git a/raddb/certs/Makefile b/raddb/certs/Makefile
-+index 77eec9baa1..3dcb63fe71 100644
-+--- a/raddb/certs/Makefile
-++++ b/raddb/certs/Makefile
-+@@ -59,7 +59,7 @@ passwords.mk: server.cnf ca.cnf client.cnf inner-server.cnf
-+ #
-+ ######################################################################
-+ dh:
-+-	$(OPENSSL) dhparam -out dh -2 $(DH_KEY_SIZE)
-++	@[ -f dh ] || $(OPENSSL) dhparam -out dh -2 $(DH_KEY_SIZE)
-+ 
-+ ######################################################################
-+ #
-+@@ -69,17 +69,17 @@ dh:
-+ ca.key ca.pem: ca.cnf
-+ 	@[ -f index.txt ] || $(MAKE) index.txt
-+ 	@[ -f serial ] || $(MAKE) serial
-+-	$(OPENSSL) req -new -x509 -keyout ca.key -out ca.pem \
-++	@[ -f ca.pem ] || $(OPENSSL) req -new -x509 -keyout ca.key -out ca.pem \
-+ 		-days $(CA_DEFAULT_DAYS) -config ./ca.cnf \
-+ 		-passin pass:$(PASSWORD_CA) -passout pass:$(PASSWORD_CA)
-+ 	chmod g+r ca.key
-+ 
-+ ca.der: ca.pem
-+-	$(OPENSSL) x509 -inform PEM -outform DER -in ca.pem -out ca.der
-++	@[ -f ca.der ] || $(OPENSSL) x509 -inform PEM -outform DER -in ca.pem -out ca.der
-+ 
-+ ca.crl: ca.pem
-+-	$(OPENSSL) ca -gencrl -keyfile ca.key -cert ca.pem -config ./ca.cnf -out ca-crl.pem -key $(PASSWORD_CA)
-+-	$(OPENSSL) crl -in ca-crl.pem -outform der -out ca.crl
-++	@[ -f ca-crl.pem ] || $(OPENSSL) ca -gencrl -keyfile ca.key -cert ca.pem -config ./ca.cnf -out ca-crl.pem -key $(PASSWORD_CA)
-++	@[ -f ca.crl ] || $(OPENSSL) crl -in ca-crl.pem -outform der -out ca.crl
-+ 	rm ca-crl.pem
-+ 
-+ ######################################################################
-+@@ -88,18 +88,18 @@ ca.crl: ca.pem
-+ #
-+ ######################################################################
-+ server.csr server.key: server.cnf
-+-	$(OPENSSL) req -new  -out server.csr -keyout server.key -config ./server.cnf
-++	@[ -f server.csr ] || $(OPENSSL) req -new  -out server.csr -keyout server.key -config ./server.cnf
-+ 	chmod g+r server.key
-+ 
-+ server.crt: server.csr ca.key ca.pem
-+ 	@[ -f server.crt ] || $(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in server.csr  -key $(PASSWORD_CA) -out server.crt -extensions xpserver_ext -extfile xpextensions -config ./server.cnf
-+ 
-+ server.p12: server.crt
-+-	$(OPENSSL) pkcs12 -export -in server.crt -inkey server.key -out server.p12  -passin pass:$(PASSWORD_SERVER) -passout pass:$(PASSWORD_SERVER)
-++	@[ -f server.p12 ] || $(OPENSSL) pkcs12 -export -in server.crt -inkey server.key -out server.p12  -passin pass:$(PASSWORD_SERVER) -passout pass:$(PASSWORD_SERVER)
-+ 	chmod g+r server.p12
-+ 
-+ server.pem: server.p12
-+-	$(OPENSSL) pkcs12 -in server.p12 -out server.pem -passin pass:$(PASSWORD_SERVER) -passout pass:$(PASSWORD_SERVER)
-++	@[ -f server.pem ] || $(OPENSSL) pkcs12 -in server.p12 -out server.pem -passin pass:$(PASSWORD_SERVER) -passout pass:$(PASSWORD_SERVER)
-+ 	chmod g+r server.pem
-+ 
-+ .PHONY: server.vrfy
-+@@ -113,18 +113,18 @@ server.vrfy: ca.pem
-+ #
-+ ######################################################################
-+ client.csr client.key: client.cnf
-+-	$(OPENSSL) req -new  -out client.csr -keyout client.key -config ./client.cnf
-++	@[ -f client.csr ] || $(OPENSSL) req -new  -out client.csr -keyout client.key -config ./client.cnf
-+ 	chmod g+r client.key
-+ 
-+ client.crt: client.csr ca.pem ca.key
-+ 	@[ -f client.crt ] || $(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in client.csr  -key $(PASSWORD_CA) -out client.crt -extensions xpclient_ext -extfile xpextensions -config ./client.cnf
-+ 
-+ client.p12: client.crt
-+-	$(OPENSSL) pkcs12 -export -in client.crt -inkey client.key -out client.p12  -passin pass:$(PASSWORD_CLIENT) -passout pass:$(PASSWORD_CLIENT)
-++	@[ -f client.p12 ] || $(OPENSSL) pkcs12 -export -in client.crt -inkey client.key -out client.p12  -passin pass:$(PASSWORD_CLIENT) -passout pass:$(PASSWORD_CLIENT)
-+ 	chmod g+r client.p12
-+ 
-+ client.pem: client.p12
-+-	$(OPENSSL) pkcs12 -in client.p12 -out client.pem -passin pass:$(PASSWORD_CLIENT) -passout pass:$(PASSWORD_CLIENT)
-++	@[ -f client.pem ] || $(OPENSSL) pkcs12 -in client.p12 -out client.pem -passin pass:$(PASSWORD_CLIENT) -passout pass:$(PASSWORD_CLIENT)
-+ 	chmod g+r client.pem
-+ 	cp client.pem $(USER_NAME).pem
-+ 
-+@@ -139,18 +139,18 @@ client.vrfy: ca.pem client.pem
-+ #
-+ ######################################################################
-+ inner-server.csr inner-server.key: inner-server.cnf
-+-	$(OPENSSL) req -new  -out inner-server.csr -keyout inner-server.key -config ./inner-server.cnf
-++	@[ -f inner-server.csr] || $(OPENSSL) req -new  -out inner-server.csr -keyout inner-server.key -config ./inner-server.cnf
-+ 	chmod g+r inner-server.key
-+ 
-+ inner-server.crt: inner-server.csr ca.key ca.pem
-+-	$(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in inner-server.csr  -key $(PASSWORD_CA) -out inner-server.crt -extensions xpserver_ext -extfile xpextensions -config ./inner-server.cnf
-++	@[ -f inner-server.crt ] || $(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in inner-server.csr  -key $(PASSWORD_CA) -out inner-server.crt -extensions xpserver_ext -extfile xpextensions -config ./inner-server.cnf
-+ 
-+ inner-server.p12: inner-server.crt
-+-	$(OPENSSL) pkcs12 -export -in inner-server.crt -inkey inner-server.key -out inner-server.p12  -passin pass:$(PASSWORD_INNER) -passout pass:$(PASSWORD_INNER)
-++	@[ -f inner-server.p12 ] || $(OPENSSL) pkcs12 -export -in inner-server.crt -inkey inner-server.key -out inner-server.p12  -passin pass:$(PASSWORD_INNER) -passout pass:$(PASSWORD_INNER)
-+ 	chmod g+r inner-server.p12
-+ 
-+ inner-server.pem: inner-server.p12
-+-	$(OPENSSL) pkcs12 -in inner-server.p12 -out inner-server.pem -passin pass:$(PASSWORD_INNER) -passout pass:$(PASSWORD_INNER)
-++	@[ -f inner-server.pem ] || $(OPENSSL) pkcs12 -in inner-server.p12 -out inner-server.pem -passin pass:$(PASSWORD_INNER) -passout pass:$(PASSWORD_INNER)
-+ 	chmod g+r inner-server.pem
-+ 
-+ .PHONY: inner-server.vrfy
-+-- 
-+2.26.2
-+
-diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
-index d2046d72e..2c39c4c44 100644
---- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
-+++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
-@@ -28,6 +28,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
-     file://0001-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch \
-     file://0001-rlm_python3-add-PY_INC_DIR-in-search-dir.patch \
-     file://0001-raddb-certs-Makefile-fix-the-existed-certificate-err.patch \
-+    file://0001-raddb-certs-Makefile-fix-the-occasional-verification.patch \
-     file://radiusd.service \
-     file://radiusd-volatiles.conf \
- "
+ def package_config_option_cleanup(d):
+     distro_x11 = bb.utils.contains('DISTRO_FEATURES', 'x11', True, False, d)
+     distro_alsa = bb.utils.contains('DISTRO_FEATURES', 'alsa', True, False, d)
+@@ -155,9 +162,6 @@ def jdk_configure_options(d):
+     options = package_config_option_cleanup(d)
+     return options[3]
+ 
+-do_unpack[postfuncs] += "do_unpack_extract_submodules"
+-do_unpack[postfuncs] += "${@bb.utils.contains('PACKAGECONFIG', 'x11', '', 'do_unpack_delete_X11_wrappers', d)}"
+-
+ export DEBUG_BINARIES = "true"
+ 
+ ALTERNATIVE_PRIORITY = "50"
 -- 
-2.26.2
+2.26.1
 
