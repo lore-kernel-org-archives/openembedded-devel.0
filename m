@@ -1,80 +1,83 @@
-Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
- by mx.groups.io with SMTP id smtpd.web11.134.1596583564034604780
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.781.1596602865207798302
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Aug 2020 16:26:04 -0700
+ Tue, 04 Aug 2020 21:47:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=xiX8h7GC;
- spf=pass (domain: linaro.org, ip: 209.85.210.51, mailfrom: anibal.limon@linaro.org)
-Received: by mail-ot1-f51.google.com with SMTP id h22so2688585otq.11
-        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Aug 2020 16:26:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=fadd18Wok1huH/S0IY6NQPRJTTcrXDCVrvwyplmb38k=;
-        b=xiX8h7GCgACco9f+1RU+reAKE/JZBNmueQe/XinoIhOK0/MdiNU64msuh4uGg+oGW5
-         /GILiyZ+TCLIAnZwKHAwJejwF+oyXxjsC6twKeUU/CTmuawpmTgKE5NKggAoCegT7lAW
-         cxHHk5u2HiqJ1XZJAKHknYjN3l7/BcLdRCXAId3YNqDU5CjUCQ8UNTUnz4MZ6trCDzKy
-         Pxuxub1fzU2rqe2nDMdlYwyIvirIT3IkG8MkLBXlgkwTXfrDxfZoOAL15gVJ1T20OSZQ
-         QgAEh6u7zuSMKf7gp9mRuuRy/4q/9mcXPYg7haWR7IRAgial8xWauVYtiSduJA3M8OVa
-         byeg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=fadd18Wok1huH/S0IY6NQPRJTTcrXDCVrvwyplmb38k=;
-        b=VPrW8M9mHJzk2bsyuTu20BWLNiBCUpIalj1JbsfzEE4NN51FBGYDN4BxlE5/wMt4NT
-         HiBefDXJ7ZysaUaQ6QCc7I1QDisOHE7qpCyclljOBIaO85sIHQob4ur/yIXwEic3W2vQ
-         T8yayteFgHwBb/vfjguJB55XTlS/Pp/er2IPJ0ES0+hbbgmwVVJS03yGwjMEVEhP7nQi
-         lqIKwbUAMsoIbWE+UownW270sYipSSkO5mBJ7IkEb6P7Hr4SmpEQMFsFTHmMR60nzMR0
-         cUj3YqnWLAU6KVI52dgeMm3XIPCh5J/jAtoOzjywtLQYoYFMJZ35dKS2sNoLAdxdNFKr
-         kw+A==
-X-Gm-Message-State: AOAM533qNwTD30QIqxeU0dVDYbFg/e+/v5r0UE6dAHElIdFaaoOQDnXB
-	IYTinhJ4oiAFAY49OQeSLSbfvNUUcFo=
-X-Google-Smtp-Source: ABdhPJz1Bk2HS4r49ZaGapw06bzsPDXpw/3qpuArBjjBfYFygp+HuloZtKBT/whWOhofRk/+u8UMHw==
-X-Received: by 2002:a9d:2787:: with SMTP id c7mr408204otb.29.1596583563063;
-        Tue, 04 Aug 2020 16:26:03 -0700 (PDT)
-Return-Path: <anibal.limon@linaro.org>
-Received: from blackbox.rga.ip ([2806:109f:4:de8:908a:c7ff:fe6a:e9f5])
-        by smtp.gmail.com with ESMTPSA id e7sm45313otj.28.2020.08.04.16.26.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 04 Aug 2020 16:26:02 -0700 (PDT)
-From: "Anibal Limon" <anibal.limon@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: dmitry.baryshkov@linaro.org,
-	nicolas.dechesne@linaro.org,
-	=?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <anibal.limon@linaro.org>
-Subject: [PATCH] meta-oe: opengl-es-cts install deqp test runners
-Date: Tue,  4 Aug 2020 18:25:59 -0500
-Message-Id: <20200804232559.39980-1-anibal.limon@linaro.org>
-X-Mailer: git-send-email 2.28.0
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: mingli.yu@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0754lCe3020193
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 4 Aug 2020 21:47:33 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+ 14.3.487.0; Tue, 4 Aug 2020 21:47:15 -0700
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] mariadb: not use the bundled libpcre2
+Date: Wed, 5 Aug 2020 12:42:58 +0800
+Message-ID: <20200805044258.1154486-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Signed-off-by: Aníbal Limón <anibal.limon@linaro.org>
+From: Mingli Yu <mingli.yu@windriver.com>
+
+From mariadb 10.5.1, it starts to use pcre2 [1] which is the bundled
+libpre2 by default. If using the bundled one, it will fetch, unpack
+and build the libpcre2 during mariadb do_compile phase as mariadb uses
+the bundled libpcre2 as an external project, more details in [2].
+
+To avoid downloading the libpcre2 source from website during mariadb
+do_compile phase, switch to use the system libpcre2.
+
+[1] https://mariadb.com/kb/en/pcre/
+[2] https://github.com/MariaDB/server/blob/10.5/cmake/pcre.cmake
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- .../recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb    | 7 +++++++
- 1 file changed, 7 insertions(+)
+ meta-oe/recipes-dbs/mysql/mariadb-native_10.5.4.bb | 2 +-
+ meta-oe/recipes-dbs/mysql/mariadb.inc              | 1 +
+ meta-oe/recipes-dbs/mysql/mariadb_10.5.4.bb        | 2 +-
+ 3 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb
-index 3e336e45c..a9ded3d78 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb
-@@ -13,6 +13,13 @@ S = "${WORKDIR}/git"
- do_install() {
- 	install -d ${D}/${CTSDIR}
- 	cp -r ${B}/external/openglcts/modules/* ${D}/${CTSDIR}
-+
-+	install -m 0755 ${B}/modules/egl/deqp-egl ${D}/${CTSDIR}
-+	install -m 0755 ${B}/modules/gles2/deqp-gles2 ${D}/${CTSDIR}
-+	install -m 0755 ${B}/modules/gles3/deqp-gles3 ${D}/${CTSDIR}
-+	install -m 0755 ${B}/modules/gles31/deqp-gles31 ${D}/${CTSDIR}
-+	install -m 0755 ${B}/modules/internal/de-internal-tests ${D}/${CTSDIR}
-+
- 	rm -r ${D}/${CTSDIR}/*.a ${D}/${CTSDIR}/cmake_install.cmake ${D}/${CTSDIR}/CMakeFiles
- 	rm -r ${D}/${CTSDIR}/*/*.a ${D}/${CTSDIR}/*/cmake_install.cmake ${D}/${CTSDIR}/*/CMakeFiles
- 	rm -r ${D}/${CTSDIR}/common/subgroups/*.a ${D}/${CTSDIR}/common/subgroups/cmake_install.cmake ${D}/${CTSDIR}/common/subgroups/CMakeFiles
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.4.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.4.bb
+index e1a038dfa..73b2a0980 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.4.bb
++++ b/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.4.bb
+@@ -2,7 +2,7 @@ require mariadb.inc
+ inherit native
+ 
+ PROVIDES += "mysql5-native"
+-DEPENDS = "ncurses-native zlib-native bison-native"
++DEPENDS = "ncurses-native zlib-native bison-native libpcre2-native"
+ 
+ RDEPENDS_${PN} = ""
+ PACKAGES = ""
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 58f573e5e..1aa1f68cd 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -77,6 +77,7 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
+                  -DNROFF=FALSE \
+                  -DENABLE_DTRACE=FALSE \
+                  -DWITH_PIC=ON \
++                 -DWITH_PCRE=system \
+                  -DINSTALL_LAYOUT=RPM \
+                  -DINSTALL_DOCDIR:PATH=${datadir}/doc/${BPN} \
+                  -DINSTALL_LIBDIR:PATH=${baselib} \
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.5.4.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.5.4.bb
+index 220b904b2..e6743fe97 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb_10.5.4.bb
++++ b/meta-oe/recipes-dbs/mysql/mariadb_10.5.4.bb
+@@ -2,7 +2,7 @@ require mariadb.inc
+ 
+ EXTRA_OECMAKE += "-DSTACK_DIRECTION=-1"
+ 
+-DEPENDS += "mariadb-native bison-native curl openssl ncurses zlib libaio libedit libevent libxml2"
++DEPENDS += "mariadb-native bison-native libpcre2 curl openssl ncurses zlib libaio libedit libevent libxml2"
+ 
+ PROVIDES += "mysql5 libmysqlclient"
+ 
 -- 
-2.28.0
+2.17.1
 
