@@ -1,17 +1,17 @@
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.43])
- by mx.groups.io with SMTP id smtpd.web11.5932.1596718893431655355
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.83])
+ by mx.groups.io with SMTP id smtpd.web10.5894.1596718912050511621
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Aug 2020 06:01:33 -0700
+ Thu, 06 Aug 2020 06:01:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=TsvdtTyK;
- spf=pass (domain: windriver.com, ip: 40.107.223.43, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=kzfRNitK;
+ spf=pass (domain: windriver.com, ip: 40.107.223.83, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=A5LhmJ+9+v1KGUyI05pb6OHZmWZdxqHp0UQMVR+C/hFeFDX2sV5WaXRupymTcwb07Z0FnFm6c45+qfDzKu0dlymF9Vu6mC+oWovUC/toQP2u7QeXFqABP3fu9Zf9U/GAEoMTUnUn8yeiuQAD01Y0CHd0SroEtxZ/WlCF8fQkTWl+aO9vZHfT4ib2GUs6zOH9Msr4yQgW0rE0heQPFm6A8VO/o3PSsQNm9gCreBfyWI7LZegIpIqjVaj2S7bHrVM60LzNyxezuovMvMYuot79Mnoa+Mu5zXCJPUT3p+9Yvm2bRHPf1p4GkXVtD0zh8FJV6AYbaphBb7deMYssUWRlMw==
+ b=fmVtt/36coYc0jUSzBWPz++N384ABqvxMYFU7ew9KK22OTA/xf8nh9FyvJ5Og+ICg8I3w5qCZhtlZkBOIrhtr5FbpvAdIIIE99Ge9Fh/7A9wICXQc5tDI00KNWdK9yIDjF6U14zR1gkwOVkrxo4CDW+gbVTDkvKbgmqt7J6/wIQIBsuWMqna/qpnfEgr4wMH46gedEukSCNkzp7MoUw1V6P3i7Ub8x/p1PPzsUr9vPhna5TDqB0UyGt2rBwjoEhDct9Lp93lTK2NREoEmjFeBx3WSJ81gCyf7b+o9++R84UMwp94QlIGanCNteOn/GPhfE+9FA6UYXchx1lQdM+UFQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=i9MEHwCZZnlJV+QabUUF9GgcY8mL846M5sA0pJoPs/M=;
- b=MIVL8l0xaYHndsoEMRnw+wN53AnjtRwsmFVTD5YgZUe8tNz/+uGLI7P1hqVMLX3zAbT/389M8LIUcMS14NXXtPYYk+yhBY2I62TIJbxswKvNvhqhO2zjnu2RKN/oT5Guup2pWJwBR/xSzo1c7GXafwztMnt3NEwVynAp6wfuGsgHhwMk7Iiu38Ph6uj0xoNClhG/ksITXtLx38UU9hH1QibBHuTp7c7Oi6PiNvYK/X9hHcYTQiHYhXP+t1fOc+dE9O2wSVYb/HiTRqkEWZpCGCId/itl63k61KjF70xXgwGfxsdGbDMcZTZk80grmz8HfIX+BBcQZfp2zg5anWsBSw==
+ bh=z8UwSaiLyaj8qp2cVf/wHGI9mj7UssmMUeZ4eQROGaw=;
+ b=jHWgSpAWd9BrWxGyQ7OXhBbK2/FrMnIe2wGpKw1KYuLurQlGV/qE0ODQ8CeLs4QrXw+3PVzRBwpViS6F+4DbVyeoUifb4Y4cJNFbUFzinBrLOdFJdK944xkIH0pfR10uKWKJKOcZvGwsY9UJNnmvpjE8Uo8xVgd3kjoa5u7J/n6HNreDPoYXdCXKQb3sbIupBW21hE/AzvsvbN8X0Ok11UOG5mYOZyS52Gxn8wmss07f6eqfP5Uj0Xz1fEguvyxj4fykhn3ey7fuIUiLjWdjBg+Cvk28gFOtl4Xiu6R73al8cLyagZSvLW0sYmrJBjOo4+j//pBe4rrY1pCkKASDfQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=i9MEHwCZZnlJV+QabUUF9GgcY8mL846M5sA0pJoPs/M=;
- b=TsvdtTyKITkKyFkdP0L2MqQIWYHvNEEFJDkXK+w1yE7i6D5pmbH5OteGS6h/wjW1V7SCw58lgwu8C+40Ychs9LHkJD4+OQRw+MYHbln5ttq1e/qo24IXT8MaClwZNOc9qCIKfNDthNow4na7bGLCBJ1gxueHuoR79HhXSHYX7DA=
+ bh=z8UwSaiLyaj8qp2cVf/wHGI9mj7UssmMUeZ4eQROGaw=;
+ b=kzfRNitKOf/H9Vhmv1DJpV0udL6w1PXXtW0oxFH7Tllhi6tcVUuLGQu+X2TtrbitLyLPJoTkZM510WjT7XgSev30MbqpyDRZUp51CCNZfSALcCda5gGMRRUBw4I+S9w2iPkazIMACMYnM6ZBthHJUBPN3u0Q8PDRTibO/rv+0Vk=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,122 +28,113 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BY5PR11MB4305.namprd11.prod.outlook.com (2603:10b6:a03:1bf::16) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.15; Thu, 6 Aug
- 2020 13:01:32 +0000
+ 2020 13:01:49 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::8d65:f6f9:ce31:8d47]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::8d65:f6f9:ce31:8d47%5]) with mapi id 15.20.3261.016; Thu, 6 Aug 2020
- 13:01:32 +0000
-Subject: Re: [oe] [meta-python][PATCH 2/7] python3-yarl: Upgrade 1.4.2 -> 1.5.1
+ 13:01:49 +0000
+Subject: Re: [oe] [meta-python][PATCH 3/7] python3-openpyxl: Upgrade 3.0.3 -> 3.0.4
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200803140520.23250-1-leon.anavi@konsulko.com>
- <20200803140520.23250-2-leon.anavi@konsulko.com>
+ <20200803140520.23250-3-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <021ebbe6-061a-3d89-8e93-9b0053d893d1@windriver.com>
-Date: Thu, 6 Aug 2020 09:01:29 -0400
+Message-ID: <8e1b11a3-c1ac-8574-74fd-7c9428a5d22f@windriver.com>
+Date: Thu, 6 Aug 2020 09:01:47 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200803140520.23250-2-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTXPR0101CA0055.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:1::32) To BY5PR11MB3909.namprd11.prod.outlook.com
+In-Reply-To: <20200803140520.23250-3-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTXPR0101CA0056.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:1::33) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.16] (174.115.236.231) by YTXPR0101CA0055.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:1::32) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.18 via Frontend Transport; Thu, 6 Aug 2020 13:01:31 +0000
+Received: from [192.168.0.16] (174.115.236.231) by YTXPR0101CA0056.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:1::33) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.19 via Frontend Transport; Thu, 6 Aug 2020 13:01:48 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 824b303a-0d71-483e-35ba-08d83a08d721
+X-MS-Office365-Filtering-Correlation-Id: 59e2a9d8-db90-44fa-c348-08d83a08e1ac
 X-MS-TrafficTypeDiagnostic: BY5PR11MB4305:
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB43057639C588E53D71251FA79F480@BY5PR11MB4305.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:3968;
+	<BY5PR11MB430510521DB019C4BFBA83489F480@BY5PR11MB4305.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	KAXrysS4gVQWFT/+WzfPpmc8NweR2Eyi+ezhgHfqfsjQS7I7bLsBJ7NSC1lLXFfujrYitCrSPJ69/sNU+Zo0eI1oZLQnLTZLIe1N9SbBPFf4ZgJu8hHSCS5fh2/bykBMMlZfD1RXPMg4K9jPpFh/jgmzZmT7i4FEEUWq6rl3ihInaHNUYyDHzNspcIU7S4QzYVuyf9t6f3Q8iSQJTyiP9bDeHP3RIS8yWFo7P1RdLUmqDwr+3EVPUOW3VUo4mOMeZ/S6rIAnQLLL74P/AXLQojiPtNWj1fun8AuhsgvslAYltdGK/N2TwtGY/yGabmLWc8LSHLuC+3TExhjO3O0kWCDtn1oQFP7bQYAhYFomqvoqW+Ft1GPCBPoz+qIR/Lpa2No8CnnvaFnS5i4yL8L2tuQqSbIk89eqWhryyOvMq0Eutb0PTALdzvk8rgtbA+/DOxD746kXle7E4rIEoCJKUA==
+	d1ulpbrX2elVdfYKXAlijq+TW9nU5+RCiSjlzhKy+NAou4oF9e7Cq1AOJvSIOSMaa2K/yxQggiswdYy2I1FdkAX/Pp+x5X1h60DeaW8n4z8j7rxFPtBDl19l6EI/XkYXxjuTVl7hkVjBcYQ4JQHSRrtIb3urBheCfH0kHzt6/F+q62NdoSnr0CyA1kG+a7YU5ieBdsSyjrvkXL4lEazNXkId7Eo8gnX5cTSDM8i/30P/rqRpXws6sUqmz89Rg+kUvVLxJkY9AIoOIfHIRhibo2yzHIM/gTghIKiWFGZCH8erR7cmikvGrUBo7XxhVj50KoNDO+trkyuDwm5HmqGk6JJsKQ4HNzzXfacx8mow5zHiIec1IrQgbaRVgYo9LILrONMC+Zl4Vhyr7SpHvhxoGJgmXn4+59NFRv9Pjp61JwVGJzQuRHpyh34akBTdvk0nom70eSuZc3oYp+w7JpVu0Q==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(39850400004)(376002)(346002)(366004)(396003)(136003)(2616005)(44832011)(26005)(86362001)(186003)(16526019)(31686004)(956004)(5660300002)(16576012)(316002)(478600001)(966005)(52116002)(2906002)(6486002)(166002)(8676002)(8936002)(36756003)(66556008)(66476007)(66946007)(31696002)(33964004)(53546011)(83380400001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	JZ2BaVHGClHJUlY53zNZPUwMoT1LK4LIO13wIgMs667wR/+31TDkVBKZGohXUiQLDb79w/BmmKH/JwpfQ+dAUDgEy75qoeCN8i2NguF9mjr5HkabgvpIUeDG991UmplBt0nUQB6yiNjJhX7o3YE70y8V0VU6+aNf4nloi9Gltqtu9XMvLeql5KYeCMRWJxfcq6LhuJKdRqUTLDeOzfuzQ0/4HQufjiELfCXAlKL02q8fWYXmS3ix+0mslWibG2RmUmH+wwG6OzMMhV5hQaSRWjfeS6X1OYRKFwaGDTCkGmi4HFceg94wjRegblZ8sqv2X++oTOPNFG/w/EWMWeulCGdyFtoGeR2L0i8MyBGGurgKQhCjpbEvqvFeGhwUub9UvbJS4nA0bsLCPQoUyz3IH4dylXSrJTPvu9UFNCmcYmPSJXem51cmcU5uNykWAgQT42ff0qG4/IXliFS3jNsU3LysdxIru3roJX3Zk47jd2j+c69jR880IyC/wXEeY4+Wq6l3famOAta04mLxFl1umFH/ciIOhjFu2Lg2FaGMnfadjw9Cq6ljTdaf3goAEPCSm2sscx5gN8qLcf9zLnUqCXZOhs1pCeGXKeLqmlJ410cx8SeZFrXsW5hOCh4gIDOWVAkCb1yHPQgqmaCkPBhgXQ==
+	QqgCeLEc36EtGTx50wjhQ3/VK7U3dvsPf8so7bZ8vDC3Qt7cvkFuGRRxM9S/DRJWKpbWSZZAenwlGu1n6oy2nUZkcCszAt47aQFexzcFiBRxCnjYmF+zuxp7QaDWEylwmHgP2BIVG0ddJKhM3hsH0AGi4YqqUs589w+uwRVlcXVu/Rdn74+IlSgB+z18YLfmWDKVS29AhY8whBuVWUhqFVmugVI1C4IAlNhybKte/UY9VAl+BC1fNZzyYjsejqD4rrVkZbjkHgwC6IOeV6R/uGQkExEe08JVXgh5KqnFCM0/B7+bQ0MZOZD9gThR/OrKSB+8rk0qsY7t47faS7ObLeY+i3g6bsB9X0G1eyxlhTPZ3dJd2gIPxep2fJ69QH3GqTWOnfv9sbvYnOohVma5r+bcU1aPYUYHF7G9JPRaQu++soX2HBldKjJ03rc398/f/lvL2+Cv6zNMkWoF+1oE3Hbg0OR5zmsqgBwSivmxak+ICCQbrvkcXtbX5gSiU5HV8S9PLZ3XR8gFg+QBWGoTCjAj5DwjBoZygDZfpGlAc2WlikJVomO2jeFAebKGE0YEmxyGIhK01rKn6tpJYA7TrZuRmXPB57RviWh6Exwg9/L4gUDHyp9o/RJWj4dgKfLdOL9x4pg2i+AK9wUhZVZscA==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 824b303a-0d71-483e-35ba-08d83a08d721
+X-MS-Exchange-CrossTenant-Network-Message-Id: 59e2a9d8-db90-44fa-c348-08d83a08e1ac
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Aug 2020 13:01:31.9080
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Aug 2020 13:01:49.4949
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KpFIgak0VF10mbTLczsgKguOKnr2nAgMiCGqaRexG7QYt+Q2/3f/ksF6dpFvmzWCi0sMoQzL6+pHn52zuJNQpUQ6yhAAHJu9u10QW9dNuO8=
+X-MS-Exchange-CrossTenant-UserPrincipalName: PRLMR3NdTFbVh7Ut4h5Lb/A5zYc8CU8vEUDcjDYXf4A3/fAckf5nbSBHNoUcUArA01OqcYgaHFq2XNVYnhPFAqM16FJ30bcXUm0qrNvduH4=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4305
 Content-Type: multipart/alternative;
- boundary="------------D6273526D7220E7627BDD800"
+ boundary="------------EF588941F8B6E24B7B8EB8EF"
 Content-Language: en-US
 
---------------D6273526D7220E7627BDD800
+--------------EF588941F8B6E24B7B8EB8EF
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 8/3/20 10:05 AM, Leon Anavi wrote:
-> Upgrade to release 1.5.1:
+> Upgrade to release 3.0.4:
 >
-> - Fix including relocated internal yarl._quoting_c C-extension
->    into published PyPI dists.
-> - Convert host to lowercase on URL building. #386
-> - Allow using mod operator (%) for updating query string (an alias
->    for update_query() method).
-> - Allow use of sequences such as list and tuple in the values of a
->    mapping such as dict to represent that a key has many values:
+> - Find tables by name.
+> - Worksheet protection missing in existing files.
+> - Exception when reading files with external images.
+> - Reading lots of merged cells is very slow.
+> - Read support for Bubble Charts.
+> - Preserve any indexed colours.
+> - Reading many thousand of merged cells is really slow.
+> - Adding tables in write-only mode raises an exception.
+> - Add support for finding tables by name or range.
 >
->    url = URL("http://example.com")
->    assert url.with_query({"a": [1, 2]}) == URL("http://example.com/?a=1&a=2")
->
-> - Support URL.build() with scheme and path (creates a relative
->    URL).
-> - Cache slow IDNA encode/decode calls.
-> - Add @final / Final type hints.
-> - Support URL authority/raw_authority properties and authority
->    argument of URL.build() method.
-> - Hide the library implementation details, make the exposed public
->    list very clean.
-> - Fix tests with newer Python (3.7.6, 3.8.1 and 3.9.0+).
-> - Fix a bug where query component, passed in a form of mapping or
->    sequence, is unquoted in unexpected way.
-> - Hide Query and QueryVariable type aliases in __init__.pyi, now
->    they are prefixed with underscore.
-> - Keep ipv6 brackets after updating port/user/password.
+> License-Update: Use the exact line from PKG-INFO for the
+> checksum of the license. The license remains the same.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-yarl_1.4.2.bb => python3-yarl_1.5.1.bb}   | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-yarl_1.4.2.bb => python3-yarl_1.5.1.bb} (79%)
+>   ...{python3-openpyxl_3.0.3.bb => python3-openpyxl_3.0.4.bb} | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-openpyxl_3.0.3.bb => python3-openpyxl_3.0.4.bb} (68%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.4.2.bb b/meta-python/recipes-devtools/python/python3-yarl_1.5.1.bb
-> similarity index 79%
-> rename from meta-python/recipes-devtools/python/python3-yarl_1.4.2.bb
-> rename to meta-python/recipes-devtools/python/python3-yarl_1.5.1.bb
-> index 15d92065d..40f0e4db0 100644
-> --- a/meta-python/recipes-devtools/python/python3-yarl_1.4.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-yarl_1.5.1.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/aio-libs/yarl/"
->   LICENSE = "Apache-2.0"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=b334fc90d45983db318f54fd5bf6c90b"
+> diff --git a/meta-python/recipes-devtools/python/python3-openpyxl_3.0.3.bb b/meta-python/recipes-devtools/python/python3-openpyxl_3.0.4.bb
+> similarity index 68%
+> rename from meta-python/recipes-devtools/python/python3-openpyxl_3.0.3.bb
+> rename to meta-python/recipes-devtools/python/python3-openpyxl_3.0.4.bb
+> index 018c4abe2..d0946e49a 100644
+> --- a/meta-python/recipes-devtools/python/python3-openpyxl_3.0.3.bb
+> +++ b/meta-python/recipes-devtools/python/python3-openpyxl_3.0.4.bb
+> @@ -5,11 +5,11 @@ was initially based on PHPExcel."
 >   
-> -SRC_URI[md5sum] = "08ba0d6e18f460b44d9e5459f3d217ba"
-> -SRC_URI[sha256sum] = "58cd9c469eced558cd81aa3f484b2924e8897049e06889e8ff2510435b7ef74b"
-> +SRC_URI[md5sum] = "a9b20bf0b8a6962e1101b28908a67bf8"
-> +SRC_URI[sha256sum] = "c22c75b5f394f3d47105045ea551e08a3e804dc7e01b37800ca35b58f856c3d6"
+>   HOMEPAGE = "http://www.python-excel.org/"
+>   LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://PKG-INFO;md5=a6e506457afab4a25ecbaeb4bc3ed623"
+> +LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
 >   
->   SRC_URI += " \
->       file://run-ptest \
+>   inherit pypi setuptools3
+>   
+> -SRC_URI[md5sum] = "9583cea56b9d4441d96eb63a8a5c92a4"
+> -SRC_URI[sha256sum] = "547a9fc6aafcf44abe358b89ed4438d077e9d92e4f182c87e2dc294186dc4b64"
+> +SRC_URI[md5sum] = "8491219f6bd83ca6ad8334bf77435cf5"
+> +SRC_URI[sha256sum] = "d88dd1480668019684c66cfff3e52a5de4ed41e9df5dd52e008cbf27af0dbf87"
+>   
+>   RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-jdcal ${PYTHON_PN}-et-xmlfile"
 >
 > 
 
---------------D6273526D7220E7627BDD800
+--------------EF588941F8B6E24B7B8EB8EF
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -155,63 +146,54 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 8/3/20 10:05 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200803140520.23250-2-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.5.1:
+    <blockquote type="cite" cite="mid:20200803140520.23250-3-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 3.0.4:
 
-- Fix including relocated internal yarl._quoting_c C-extension
-  into published PyPI dists.
-- Convert host to lowercase on URL building. #386
-- Allow using mod operator (%) for updating query string (an alias
-  for update_query() method).
-- Allow use of sequences such as list and tuple in the values of a
-  mapping such as dict to represent that a key has many values:
+- Find tables by name.
+- Worksheet protection missing in existing files.
+- Exception when reading files with external images.
+- Reading lots of merged cells is very slow.
+- Read support for Bubble Charts.
+- Preserve any indexed colours.
+- Reading many thousand of merged cells is really slow.
+- Adding tables in write-only mode raises an exception.
+- Add support for finding tables by name or range.
 
-  url = URL(<a class="moz-txt-link-rfc2396E" href="http://example.com">&quot;http://example.com&quot;</a>)
-  assert url.with_query({&quot;a&quot;: [1, 2]}) == URL(<a class="moz-txt-link-rfc2396E" href="http://example.com/?a=1&amp;a=2">&quot;http://example.com/?a=1&amp;a=2&quot;</a>)
-
-- Support URL.build() with scheme and path (creates a relative
-  URL).
-- Cache slow IDNA encode/decode calls.
-- Add @final / Final type hints.
-- Support URL authority/raw_authority properties and authority
-  argument of URL.build() method.
-- Hide the library implementation details, make the exposed public
-  list very clean.
-- Fix tests with newer Python (3.7.6, 3.8.1 and 3.9.0+).
-- Fix a bug where query component, passed in a form of mapping or
-  sequence, is unquoted in unexpected way.
-- Hide Query and QueryVariable type aliases in __init__.pyi, now
-  they are prefixed with underscore.
-- Keep ipv6 brackets after updating port/user/password.
+License-Update: Use the exact line from PKG-INFO for the
+checksum of the license. The license remains the same.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200803140520.23250-2-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200803140520.23250-3-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-yarl_1.4.2.bb =&gt; python3-yarl_1.5.1.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-yarl_1.4.2.bb =&gt; python3-yarl_1.5.1.bb} (79%)
+ ...{python3-openpyxl_3.0.3.bb =&gt; python3-openpyxl_3.0.4.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-openpyxl_3.0.3.bb =&gt; python3-openpyxl_3.0.4.bb} (68%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.4.2.bb b/meta-python/recipes-devtools/python/python3-yarl_1.5.1.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-yarl_1.4.2.bb
-rename to meta-python/recipes-devtools/python/python3-yarl_1.5.1.bb
-index 15d92065d..40f0e4db0 100644
---- a/meta-python/recipes-devtools/python/python3-yarl_1.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-yarl_1.5.1.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/aio-libs/yarl/">&quot;https://github.com/aio-libs/yarl/&quot;</a>
- LICENSE = &quot;Apache-2.0&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=b334fc90d45983db318f54fd5bf6c90b">&quot;file://LICENSE;md5=b334fc90d45983db318f54fd5bf6c90b&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-openpyxl_3.0.3.bb b/meta-python/recipes-devtools/python/python3-openpyxl_3.0.4.bb
+similarity index 68%
+rename from meta-python/recipes-devtools/python/python3-openpyxl_3.0.3.bb
+rename to meta-python/recipes-devtools/python/python3-openpyxl_3.0.4.bb
+index 018c4abe2..d0946e49a 100644
+--- a/meta-python/recipes-devtools/python/python3-openpyxl_3.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-openpyxl_3.0.4.bb
+@@ -5,11 +5,11 @@ was initially based on PHPExcel.&quot;
  
--SRC_URI[md5sum] = &quot;08ba0d6e18f460b44d9e5459f3d217ba&quot;
--SRC_URI[sha256sum] = &quot;58cd9c469eced558cd81aa3f484b2924e8897049e06889e8ff2510435b7ef74b&quot;
-+SRC_URI[md5sum] = &quot;a9b20bf0b8a6962e1101b28908a67bf8&quot;
-+SRC_URI[sha256sum] = &quot;c22c75b5f394f3d47105045ea551e08a3e804dc7e01b37800ca35b58f856c3d6&quot;
+ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://www.python-excel.org/">&quot;http://www.python-excel.org/&quot;</a>
+ LICENSE = &quot;MIT&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;md5=a6e506457afab4a25ecbaeb4bc3ed623">&quot;file://PKG-INFO;md5=a6e506457afab4a25ecbaeb4bc3ed623&quot;</a>
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489">&quot;file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489&quot;</a>
  
- SRC_URI += &quot; \
-     <a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
+ inherit pypi setuptools3
+ 
+-SRC_URI[md5sum] = &quot;9583cea56b9d4441d96eb63a8a5c92a4&quot;
+-SRC_URI[sha256sum] = &quot;547a9fc6aafcf44abe358b89ed4438d077e9d92e4f182c87e2dc294186dc4b64&quot;
++SRC_URI[md5sum] = &quot;8491219f6bd83ca6ad8334bf77435cf5&quot;
++SRC_URI[sha256sum] = &quot;d88dd1480668019684c66cfff3e52a5de4ed41e9df5dd52e008cbf27af0dbf87&quot;
+ 
+ RDEPENDS_${PN} += &quot;${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-jdcal ${PYTHON_PN}-et-xmlfile&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -221,4 +203,4 @@ index 15d92065d..40f0e4db0 100644
   </body>
 </html>
 
---------------D6273526D7220E7627BDD800--
+--------------EF588941F8B6E24B7B8EB8EF--
