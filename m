@@ -1,63 +1,99 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [])
- by mx.groups.io with SMTP id smtpd.web12.3045.1596768208107280924
+Received: from mail-pj1-f65.google.com (mail-pj1-f65.google.com [209.85.216.65])
+ by mx.groups.io with SMTP id smtpd.web10.1433.1596784002294279833
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Aug 2020 19:43:31 -0700
+ Fri, 07 Aug 2020 00:06:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: <nil>, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.75,443,1589212800"; 
-   d="scan'208";a="97744119"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 07 Aug 2020 10:43:22 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 034724CE34E8
-	for <openembedded-devel@lists.openembedded.org>; Fri,  7 Aug 2020 10:43:19 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 7 Aug 2020 10:43:20 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-perl] [PATCH] libcgi-perl: upgrade 4.48 -> 4.50
-Date: Fri, 7 Aug 2020 22:43:18 +0800
-Message-ID: <1596811399-7392-2-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1596811399-7392-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-References: <1596811399-7392-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=uhcl2I5Q;
+ spf=pass (domain: gmail.com, ip: 209.85.216.65, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f65.google.com with SMTP id t6so469464pjr.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 07 Aug 2020 00:06:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=DInSETXG+hHsoUbyYRo515ovTPTAD8SPC7PhxmfNYng=;
+        b=uhcl2I5QkTtq90+c2wAS5L1Yg4Dg+IYu7ueCSxUnmPyMHofp0qJiy9bdX5apUU5try
+         gJXOyP0VdMfxFCdY2YbNSzkGA7OFXyQiOI4bH2+EfYHSWJfmoUnivF8/p1qW4nanECnd
+         oyWKKfI8MAaQ6GqN6iOe7lZOB4HazjOG49jvPVhXIVyT2A5l6/oSX4FfYHAM932kGR8r
+         emHjvF0z22dMBG8SbVypLdN551JmwMIWNOZhPAttoEmo+w31g6LHdEbhjd3wxa2EObTF
+         iywhI643F/WJZlveYEZxdAG5gdHj2P6rsWqXGpRd4gyNyjdd2wT48LYUPU0rv8+fkkiM
+         FVOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=DInSETXG+hHsoUbyYRo515ovTPTAD8SPC7PhxmfNYng=;
+        b=dGdikQi4u8ajyzup8yaMv1/oBANQAkwzKb/bSJ8m8TYLFjJC18KGg/PrqTlNluxppb
+         4PWBjL4ls/KCQWszc353BAwkzi1DfEOWfWoMtOWNpGV96AlYvH9ty0/LL+LsOw8kWhgT
+         p56AAqncNLT/PxCfeivmU5hoGhh3VX/neN5B9GNPioCtBn43BOVWLSNxBEKnTOSG9tSy
+         DPADiZMLBS9gIPLIwR1NlX41ccWsQIQpQ6DwLtadBQW3fZMf4cSPx9OXdYlzliXz+q+j
+         aG10IpUmiGnc8ivaGvxFEPIxQ61JTrrRT5V64Tgfrjh7toITCi/xCFg+nXZilq5Ub4NV
+         V1UA==
+X-Gm-Message-State: AOAM531DxrW0XMXwcyzMycbjMlwCgpBjqgJ1DNdM6GCmOa6n/scP1KnR
+	HO1kr84VhwI3LCrEl1gJrxydlUWw28A=
+X-Google-Smtp-Source: ABdhPJzPg+MFzwEpd2zDAppYMZOCdspCLpRgvhu1vo82L2M939sCzEOHXjAdq+32vDf41LZykZXgNA==
+X-Received: by 2002:a17:902:6a8b:: with SMTP id n11mr11176919plk.264.1596784001449;
+        Fri, 07 Aug 2020 00:06:41 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
+        by smtp.gmail.com with ESMTPSA id e26sm10344715pgt.63.2020.08.07.00.06.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 07 Aug 2020 00:06:41 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Shlomi Vaknin <shlomi.39sd@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-ipython: add recipe
+Date: Fri,  7 Aug 2020 00:06:38 -0700
+Message-Id: <20200807070638.2335454-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 034724CE34E8.A2BC1
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+From: Shlomi Vaknin <shlomi.39sd@gmail.com>
+
+Signed-off-by: Shlomi Vaknin <shlomi.39sd@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libcgi/{libcgi-perl_4.48.bb => libcgi-perl_4.50.bb}       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libcgi/{libcgi-perl_4.48.bb => libcgi-perl_4.50.bb} (90%)
+ .../python/python3-ipython_7.17.0.bb          | 29 +++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-ipython_7.17.0.bb
 
-diff --git a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.48.bb b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.50.bb
-similarity index 90%
-rename from meta-perl/recipes-perl/libcgi/libcgi-perl_4.48.bb
-rename to meta-perl/recipes-perl/libcgi/libcgi-perl_4.50.bb
-index 1ae470ee6c..61ed78b6fe 100644
---- a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.48.bb
-+++ b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.50.bb
-@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=415fc49abed2728f9480cd32c8d67beb"
- 
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEEJO/CGI-${PV}.tar.gz"
- 
--SRC_URI[md5sum] = "0e81952bb42e00361abc4d33696b08f5"
--SRC_URI[sha256sum] = "102cd7562983b85e8354ebcbb3be94a35f7f6706b2b49fdb790135da4d1d55d2"
-+SRC_URI[md5sum] = "6c7c9d0c272849f3c3c1859cb78962fe"
-+SRC_URI[sha256sum] = "d8c7a2143352842a9b4962c314ee7e0385273c8b9d8314dcbd04a09c008eef46"
- 
- S = "${WORKDIR}/CGI-${PV}"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-ipython_7.17.0.bb b/meta-python/recipes-devtools/python/python3-ipython_7.17.0.bb
+new file mode 100644
+index 0000000000..ddcddd60b8
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-ipython_7.17.0.bb
+@@ -0,0 +1,29 @@
++SUMMARY = "IPython: Productive Interactive Computing"
++HOMEPAGE = "https://ipython.org"
++AUTHOR = "The IPython Development Team <ipython-dev@python.org>"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
++
++PYPI_PACKAGE = "ipython"
++
++SRC_URI[md5sum] = "1f2257d771de9d2fb40d9e3cfcea429d"
++SRC_URI[sha256sum] = "b70974aaa2674b05eb86a910c02ed09956a33f2dd6c71afc60f0b128a77e7f28"
++
++RDEPENDS_${PN} = "\
++    ${PYTHON_PN}-setuptools \
++    ${PYTHON_PN}-jedi \
++    ${PYTHON_PN}-decorator \
++    ${PYTHON_PN}-pickleshare \
++    ${PYTHON_PN}-traitlets \
++    ${PYTHON_PN}-prompt-toolkit \
++    ${PYTHON_PN}-pygments \
++    ${PYTHON_PN}-backcall \
++    ${PYTHON_PN}-pydoc \
++    ${PYTHON_PN}-debugger \
++    ${PYTHON_PN}-pexpect \
++    ${PYTHON_PN}-unixadmin \
++    ${PYTHON_PN}-misc \
++    ${PYTHON_PN}-sqlite3 \
++"
++
++inherit setuptools3 pypi
 -- 
-2.25.1
-
-
+2.28.0
 
