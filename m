@@ -1,21 +1,21 @@
 Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web11.2638.1596791745874179745
+ by mx.groups.io with SMTP id smtpd.web12.2688.1596791983266363177
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 07 Aug 2020 02:15:46 -0700
+ Fri, 07 Aug 2020 02:19:43 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: wenlin.kang@windriver.com)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0779FCRJ028785
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0779JM8i028887
 	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 7 Aug 2020 02:15:34 -0700
+	for <openembedded-devel@lists.openembedded.org>; Fri, 7 Aug 2020 02:19:32 -0700
 Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
  (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Fri, 7 Aug 2020
- 02:15:10 -0700
+ 02:19:11 -0700
 From: "wenlin.kang@windriver.com" <wenlin.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][PATCH] lua: fix CVE-2020-15945
-Date: Fri, 7 Aug 2020 02:15:10 -0700
-Message-ID: <20200807091510.73969-1-wenlin.kang@windriver.com>
+Subject: [oe][zeus][meta-oe][PATCH] lua: fix CVE-2020-15945
+Date: Fri, 7 Aug 2020 02:19:11 -0700
+Message-ID: <20200807091911.74967-1-wenlin.kang@windriver.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -199,13 +199,13 @@ index 000000000..1c3101201
 +2.13.3
 +
 diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-index d3461b06d..6b9cf4aa2 100644
+index ae41e627f..6a9422595 100644
 --- a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
 +++ b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-@@ -8,6 +8,7 @@ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
+@@ -7,6 +7,7 @@ HOMEPAGE = "http://www.lua.org/"
+ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
             file://lua.pc.in \
             file://0001-Allow-building-lua-without-readline-on-Linux.patch \
-            file://CVE-2020-15888.patch \
 +           file://0001-Fixed-bug-invalid-oldpc-when-returning-to-a-function.patch \
             "
  
