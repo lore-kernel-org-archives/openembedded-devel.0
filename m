@@ -1,78 +1,215 @@
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web12.2138.1596788814508355636
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.2638.1596791745874179745
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 07 Aug 2020 01:26:54 -0700
+ Fri, 07 Aug 2020 02:15:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Bk0LizsT;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id y6so728940plt.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 07 Aug 2020 01:26:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=krYIrkhHhg/4lHH1eKiHb8+0b5jwkaH36kr3c49a0Dc=;
-        b=Bk0LizsTiHToURF+1lkpVQJ0T6CdMqkBkT2lVMQoiM7huLad+58gNPkQRNQSvMvqp9
-         zVpj6lCuDD5ttvD7uQV525f5Y6/g1VfhFt0bu1to2HnkZ4lUXs4M9X/kNK5U4TCHFztd
-         5CvEvXqrFysLOzMY1+ufX2/1uwhnfMd6QGVmgHe6MYd/UTy0/ADpauCN7dBXLdjd8qXa
-         3COSkaVpRB8B9o3mxE5hX6Xlr9Fbh2ELW0AJzGmlE/daeOVtqhl6qOEz6zYe5FzxVoGU
-         mLrWbSA4TKHUCzBHwQEN3/RYXIOmdcyY3ohclcyqqb/4nqzcoAWoWI6jfCAlpo7n+3QK
-         xRWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=krYIrkhHhg/4lHH1eKiHb8+0b5jwkaH36kr3c49a0Dc=;
-        b=nw4JrgpUrBqvXHkZiw5yk5eWpQhj28eU0vuDDZg/FTd5tdDypEk547cFYnmr/Aeibi
-         GvOaqMaPM+76XCezLbhd1+26DvgeKQSBKAhDj2e1fqXGjjqcG6882yuYf03XJdq/qaQY
-         IbMFlpCmnjHagMWN0QefCHUCNo2tO7clhX2lRKnGafnIRghBru+tLb5Y0SjSxqxbPtSs
-         XDG6wYc93bohjY1w9kL5u/W9LtVqCX6s8fosggw2+Or4+AbV8sN6KujfH7eyDQzBo+px
-         krCYWeu8GD+D5htNllCVwNSBbFdgf5bbHd3U7xjB5XUZsFGMZjrjwHH4b8gM00uy6nmo
-         NdyQ==
-X-Gm-Message-State: AOAM5332tNqgRvlPd1BFT0VUAZU7ju8UhHAgIrn+AJ3h5/0bvehaEyEc
-	xhlr0u8fbpJEsg88W2mzPajlvVyv5Io=
-X-Google-Smtp-Source: ABdhPJyF9EG6ofu/PonxHIXPKxi+QvLC69qgZ6rlUCFkoGY1MD3NxGkjl8hs8rjTcFzc8qrSR3K0lg==
-X-Received: by 2002:a17:902:7612:: with SMTP id k18mr11024771pll.187.1596788813618;
-        Fri, 07 Aug 2020 01:26:53 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id h5sm11494569pfq.146.2020.08.07.01.26.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 07 Aug 2020 01:26:53 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH] gnome-settings-daemon: Add introspection to UNKNOWN_CONFIGURE_WHITELIST
-Date: Fri,  7 Aug 2020 01:26:51 -0700
-Message-Id: <20200807082651.3326045-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: wenlin.kang@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0779FCRJ028785
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 7 Aug 2020 02:15:34 -0700
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Fri, 7 Aug 2020
+ 02:15:10 -0700
+From: "wenlin.kang@windriver.com" <wenlin.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][PATCH] lua: fix CVE-2020-15945
+Date: Fri, 7 Aug 2020 02:15:10 -0700
+Message-ID: <20200807091510.73969-1-wenlin.kang@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-gobject-introspection is needed unconditionally therefore add "introspection"
-to unknown configure option whitelist
+Fix CVE-2020-15945
 
-Fixes
-ERROR: QA Issue: gnome-settings-daemon: configure was passed unrecognised options: introspection [unknown-configure-option]
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
 ---
- .../gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb       | 2 ++
- 1 file changed, 2 insertions(+)
+ ...d-oldpc-when-returning-to-a-function.patch | 163 ++++++++++++++++++
+ meta-oe/recipes-devtools/lua/lua_5.3.5.bb     |   1 +
+ 2 files changed, 164 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-invalid-oldpc-when-returning-to-a-function.patch
 
-diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb
-index 730ea9ed05..b38ba558c5 100644
---- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb
-@@ -30,6 +30,8 @@ REQUIRED_DISTRO_FEATURES = "x11 polkit pulseaudio systemd gobject-introspection-
- SRC_URI[archive.md5sum] = "102dc488a6a726e4050cf5ab7e967e8d"
- SRC_URI[archive.sha256sum] = "3e33dbd319b562a5ab602dcab6de3ca81b85f8346672e90ec632b36bbf15ee4b"
- 
-+UNKNOWN_CONFIGURE_WHITELIST = "introspection"
+diff --git a/meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-invalid-oldpc-when-returning-to-a-function.patch b/meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-invalid-oldpc-when-returning-to-a-function.patch
+new file mode 100644
+index 000000000..1c3101201
+--- /dev/null
++++ b/meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-invalid-oldpc-when-returning-to-a-function.patch
+@@ -0,0 +1,163 @@
++From d8d344365945a534f700c82c5dd26f704f89fef3 Mon Sep 17 00:00:00 2001
++From: Roberto Ierusalimschy <roberto@inf.puc-rio.br>
++Date: Wed, 5 Aug 2020 16:59:58 +0800
++Subject: [PATCH] Fixed bug: invalid 'oldpc' when returning to a function
 +
- # allow cross build mixed with build of native tools
- do_write_config_append() {
-     cat >${WORKDIR}/meson.native <<EOF
++The field 'L->oldpc' is not always updated when control returns to a
++function; an invalid value can seg. fault when computing 'changedline'.
++(One example is an error in a finalizer; control can return to
++'luaV_execute' without executing 'luaD_poscall'.) Instead of trying to
++fix all possible corner cases, it seems safer to be resilient to invalid
++values for 'oldpc'. Valid but wrong values at most cause an extra call
++to a line hook.
++
++Upstream-Status: Backport [https://github.com/lua/lua/commit/a2195644d89812e5b157ce7bac35543e06db05e3]
++CVE: CVE-2020-15945
++
++[Adjust the codes to be applicable to the tree]
++Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
++---
++ src/ldebug.c | 30 +++++++++++++++---------------
++ src/ldebug.h |  4 ++++
++ src/ldo.c    |  2 +-
++ src/lstate.c |  1 +
++ src/lstate.h |  2 +-
++ 5 files changed, 22 insertions(+), 17 deletions(-)
++
++diff --git a/src/ldebug.c b/src/ldebug.c
++index 239affb..832b16c 100644
++--- a/src/ldebug.c
+++++ b/src/ldebug.c
++@@ -34,9 +34,8 @@
++ #define noLuaClosure(f)		((f) == NULL || (f)->c.tt == LUA_TCCL)
++ 
++ 
++-/* Active Lua function (given call info) */
++-#define ci_func(ci)		(clLvalue((ci)->func))
++-
+++/* inverse of 'pcRel' */
+++#define invpcRel(pc, p)                ((p)->code + (pc) + 1)
++ 
++ static const char *funcnamefromcode (lua_State *L, CallInfo *ci,
++                                     const char **name);
++@@ -71,20 +70,18 @@ static void swapextra (lua_State *L) {
++ 
++ /*
++ ** This function can be called asynchronously (e.g. during a signal).
++-** Fields 'oldpc', 'basehookcount', and 'hookcount' (set by
++-** 'resethookcount') are for debug only, and it is no problem if they
++-** get arbitrary values (causes at most one wrong hook call). 'hookmask'
++-** is an atomic value. We assume that pointers are atomic too (e.g., gcc
++-** ensures that for all platforms where it runs). Moreover, 'hook' is
++-** always checked before being called (see 'luaD_hook').
+++** Fields 'basehookcount' and 'hookcount' (set by 'resethookcount')
+++** are for debug only, and it is no problem if they get arbitrary
+++** values (causes at most one wrong hook call). 'hookmask' is an atomic
+++** value. We assume that pointers are atomic too (e.g., gcc ensures that
+++** for all platforms where it runs). Moreover, 'hook' is always checked
+++** before being called (see 'luaD_hook').
++ */
++ LUA_API void lua_sethook (lua_State *L, lua_Hook func, int mask, int count) {
++   if (func == NULL || mask == 0) {  /* turn off hooks? */
++     mask = 0;
++     func = NULL;
++   }
++-  if (isLua(L->ci))
++-    L->oldpc = L->ci->u.l.savedpc;
++   L->hook = func;
++   L->basehookcount = count;
++   resethookcount(L);
++@@ -665,7 +662,10 @@ l_noret luaG_runerror (lua_State *L, const char *fmt, ...) {
++ void luaG_traceexec (lua_State *L) {
++   CallInfo *ci = L->ci;
++   lu_byte mask = L->hookmask;
+++  const Proto *p = ci_func(ci)->p;
++   int counthook = (--L->hookcount == 0 && (mask & LUA_MASKCOUNT));
+++  /* 'L->oldpc' may be invalid; reset it in this case */
+++  int oldpc = (L->oldpc < p->sizecode) ? L->oldpc : 0;
++   if (counthook)
++     resethookcount(L);  /* reset count */
++   else if (!(mask & LUA_MASKLINE))
++@@ -677,15 +677,15 @@ void luaG_traceexec (lua_State *L) {
++   if (counthook)
++     luaD_hook(L, LUA_HOOKCOUNT, -1);  /* call count hook */
++   if (mask & LUA_MASKLINE) {
++-    Proto *p = ci_func(ci)->p;
++     int npc = pcRel(ci->u.l.savedpc, p);
++     int newline = getfuncline(p, npc);
++     if (npc == 0 ||  /* call linehook when enter a new function, */
++-        ci->u.l.savedpc <= L->oldpc ||  /* when jump back (loop), or when */
++-        newline != getfuncline(p, pcRel(L->oldpc, p)))  /* enter a new line */
+++        ci->u.l.savedpc <= invpcRel(oldpc, p) ||  /* when jump back (loop), or when */
+++        newline != getfuncline(p, oldpc))  /* enter a new line */
++       luaD_hook(L, LUA_HOOKLINE, newline);  /* call line hook */
+++
+++    L->oldpc = npc;  /* 'pc' of last call to line hook */
++   }
++-  L->oldpc = ci->u.l.savedpc;
++   if (L->status == LUA_YIELD) {  /* did hook yield? */
++     if (counthook)
++       L->hookcount = 1;  /* undo decrement to zero */
++diff --git a/src/ldebug.h b/src/ldebug.h
++index 0e31546..c224cc4 100644
++--- a/src/ldebug.h
+++++ b/src/ldebug.h
++@@ -13,6 +13,10 @@
++ 
++ #define pcRel(pc, p)	(cast(int, (pc) - (p)->code) - 1)
++ 
+++/* Active Lua function (given call info) */
+++#define ci_func(ci)            (clLvalue((ci)->func))
+++
+++
++ #define getfuncline(f,pc)	(((f)->lineinfo) ? (f)->lineinfo[pc] : -1)
++ 
++ #define resethookcount(L)	(L->hookcount = L->basehookcount)
++diff --git a/src/ldo.c b/src/ldo.c
++index 90b695f..f66ac1a 100644
++--- a/src/ldo.c
+++++ b/src/ldo.c
++@@ -382,7 +382,7 @@ int luaD_poscall (lua_State *L, CallInfo *ci, StkId firstResult, int nres) {
++       luaD_hook(L, LUA_HOOKRET, -1);
++       firstResult = restorestack(L, fr);
++     }
++-    L->oldpc = ci->previous->u.l.savedpc;  /* 'oldpc' for caller function */
+++    L->oldpc = pcRel(ci->u.l.savedpc, ci_func(ci)->p);  /* 'oldpc' for caller function */
++   }
++   res = ci->func;  /* res == final position of 1st result */
++   L->ci = ci->previous;  /* back to caller */
++diff --git a/src/lstate.c b/src/lstate.c
++index 9194ac3..3573e36 100644
++--- a/src/lstate.c
+++++ b/src/lstate.c
++@@ -236,6 +236,7 @@ static void preinit_thread (lua_State *L, global_State *g) {
++   L->nny = 1;
++   L->status = LUA_OK;
++   L->errfunc = 0;
+++  L->oldpc = 0;
++ }
++ 
++ 
++diff --git a/src/lstate.h b/src/lstate.h
++index a469466..d75eadf 100644
++--- a/src/lstate.h
+++++ b/src/lstate.h
++@@ -164,7 +164,6 @@ struct lua_State {
++   StkId top;  /* first free slot in the stack */
++   global_State *l_G;
++   CallInfo *ci;  /* call info for current function */
++-  const Instruction *oldpc;  /* last pc traced */
++   StkId stack_last;  /* last free slot in the stack */
++   StkId stack;  /* stack base */
++   UpVal *openupval;  /* list of open upvalues in this stack */
++@@ -174,6 +173,7 @@ struct lua_State {
++   CallInfo base_ci;  /* CallInfo for first level (C calling Lua) */
++   volatile lua_Hook hook;
++   ptrdiff_t errfunc;  /* current error handling function (stack index) */
+++  int oldpc;  /* last pc traced */
++   int stacksize;
++   int basehookcount;
++   int hookcount;
++-- 
++2.13.3
++
+diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
+index d3461b06d..6b9cf4aa2 100644
+--- a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
++++ b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
+@@ -8,6 +8,7 @@ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
+            file://lua.pc.in \
+            file://0001-Allow-building-lua-without-readline-on-Linux.patch \
+            file://CVE-2020-15888.patch \
++           file://0001-Fixed-bug-invalid-oldpc-when-returning-to-a-function.patch \
+            "
+ 
+ # if no test suite matches PV release of Lua exactly, download the suite for the closest Lua release.
 -- 
-2.28.0
+2.17.1
 
