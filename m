@@ -1,112 +1,78 @@
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com [209.85.222.196])
- by mx.groups.io with SMTP id smtpd.web11.1465.1596784535292440976
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web12.2138.1596788814508355636
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 07 Aug 2020 00:15:35 -0700
+ Fri, 07 Aug 2020 01:26:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Y3o8Z2GQ;
- spf=pass (domain: gmail.com, ip: 209.85.222.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f196.google.com with SMTP id p25so919793qkp.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 07 Aug 2020 00:15:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Bk0LizsT;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id y6so728940plt.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 07 Aug 2020 01:26:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=lfP9de+cyw8UCnd7ufFdSdOaKEhklfAZhNq1AV+TyPA=;
-        b=Y3o8Z2GQEHoovL3QtFmr/KjRaEMRzJpFS1ESFufSdWc9Eq3hX42i4fan/9kx6M15MB
-         olGqp4kD+9whY3VHcq7CnK3CaTuaYgkvY0MDpj+qKo1I+Wd/lEDUQmKKnOgFPpzFsmYS
-         KdbVVbby2fILhTTBiXT2ZvC/uBrTXSNelOkrW4LMyBqHKX520aR0VOer/w7njkxC7pXp
-         ufN8F7GGBULnuAjXcmGpRchQT9oYS04J4DzIKv1VgLCge6yz1Dz/lS+Hx0Sk7nAP0rux
-         CljlXYJL56s41hTk20cacVgZaaAoeIc0Nwj+LeR6ieUKSRPhRNYjQ1SZwzw6Csanj++a
-         7rNw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=krYIrkhHhg/4lHH1eKiHb8+0b5jwkaH36kr3c49a0Dc=;
+        b=Bk0LizsTiHToURF+1lkpVQJ0T6CdMqkBkT2lVMQoiM7huLad+58gNPkQRNQSvMvqp9
+         zVpj6lCuDD5ttvD7uQV525f5Y6/g1VfhFt0bu1to2HnkZ4lUXs4M9X/kNK5U4TCHFztd
+         5CvEvXqrFysLOzMY1+ufX2/1uwhnfMd6QGVmgHe6MYd/UTy0/ADpauCN7dBXLdjd8qXa
+         3COSkaVpRB8B9o3mxE5hX6Xlr9Fbh2ELW0AJzGmlE/daeOVtqhl6qOEz6zYe5FzxVoGU
+         mLrWbSA4TKHUCzBHwQEN3/RYXIOmdcyY3ohclcyqqb/4nqzcoAWoWI6jfCAlpo7n+3QK
+         xRWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=lfP9de+cyw8UCnd7ufFdSdOaKEhklfAZhNq1AV+TyPA=;
-        b=RwHTHBO5R5S54tTO1ozT7bIvnfjlfN1MLXwCqmrCTbKLjhQQzrVTNe/PMREuFw2Ku3
-         cZnxPl7++U9LOmArbzH9GFJYAYa3V03J5GpeuNldd9fBQqndM/TybgpOFYjfe7ldxZ/i
-         0qWbHHAjVaw7QYAoGSgRCsNdG+7SPL5OYl9GIu17zQSoisj3X3x7GT7aOSG7Mk8PKn97
-         e0SKoGJFCkU8klCsYlNV+F0W2B42Kuj1dANnhQyY+ZrQvayOCMxVUcOWBk70+XPfakcm
-         qpymf/LqRz1Wa8rcufhmN7RQMfsJt/BdqI5ctszm9lBvR98TvaxAwz+M8BEqXR7SG7hq
-         Z6Eg==
-X-Gm-Message-State: AOAM5307qmQ129X8gGQuEySassICkOew5zONpVBq9+8cIspQqXKTWH0k
-	T87OjLxrOKTdP1tUqffVQpfNuVMdNsjTj7qjrak=
-X-Google-Smtp-Source: ABdhPJzUoyAE8BznmivrQiP0+sc8unpVmt5FP6AgIGQaZoeBsaOcDMMRYK2zuHG0bAYZIvosy6I+LxAR8ZOy2e0xkZ4=
-X-Received: by 2002:a37:7081:: with SMTP id l123mr11020200qkc.225.1596784534318;
- Fri, 07 Aug 2020 00:15:34 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200731142354.1428760-1-Oleksii.Miroshko@bmw.de>
-In-Reply-To: <20200731142354.1428760-1-Oleksii.Miroshko@bmw.de>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=krYIrkhHhg/4lHH1eKiHb8+0b5jwkaH36kr3c49a0Dc=;
+        b=nw4JrgpUrBqvXHkZiw5yk5eWpQhj28eU0vuDDZg/FTd5tdDypEk547cFYnmr/Aeibi
+         GvOaqMaPM+76XCezLbhd1+26DvgeKQSBKAhDj2e1fqXGjjqcG6882yuYf03XJdq/qaQY
+         IbMFlpCmnjHagMWN0QefCHUCNo2tO7clhX2lRKnGafnIRghBru+tLb5Y0SjSxqxbPtSs
+         XDG6wYc93bohjY1w9kL5u/W9LtVqCX6s8fosggw2+Or4+AbV8sN6KujfH7eyDQzBo+px
+         krCYWeu8GD+D5htNllCVwNSBbFdgf5bbHd3U7xjB5XUZsFGMZjrjwHH4b8gM00uy6nmo
+         NdyQ==
+X-Gm-Message-State: AOAM5332tNqgRvlPd1BFT0VUAZU7ju8UhHAgIrn+AJ3h5/0bvehaEyEc
+	xhlr0u8fbpJEsg88W2mzPajlvVyv5Io=
+X-Google-Smtp-Source: ABdhPJyF9EG6ofu/PonxHIXPKxi+QvLC69qgZ6rlUCFkoGY1MD3NxGkjl8hs8rjTcFzc8qrSR3K0lg==
+X-Received: by 2002:a17:902:7612:: with SMTP id k18mr11024771pll.187.1596788813618;
+        Fri, 07 Aug 2020 01:26:53 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
+        by smtp.gmail.com with ESMTPSA id h5sm11494569pfq.146.2020.08.07.01.26.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 07 Aug 2020 01:26:53 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Fri, 7 Aug 2020 00:15:08 -0700
-Message-ID: <CAMKF1soEYORUhc-mqKhoGSKR77Brcnu3cPXOdBBU1prL4Z+N8g@mail.gmail.com>
-Subject: Re: [oe] [meta-selinux][PATCH] setools: Add native support
-To: Oleksii Miroshko <miroshko@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH] gnome-settings-daemon: Add introspection to UNKNOWN_CONFIGURE_WHITELIST
+Date: Fri,  7 Aug 2020 01:26:51 -0700
+Message-Id: <20200807082651.3326045-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.28.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Please send it to yocto@lists.yoctoproject.org
+gobject-introspection is needed unconditionally therefore add "introspection"
+to unknown configure option whitelist
 
-On Fri, Jul 31, 2020 at 7:24 AM Oleksii Miroshko <miroshko@gmail.com> wrote:
->
-> From: Oleksii Miroshko <miroshko@gmail.com>
->
-> Enable using setools for analyzing the built SELinux policy
-> during the build.
->
-> Signed-off-by: Oleksii Miroshko <miroshko@gmail.com>
-> ---
->  recipes-devtools/python/python3-decorator_%.bbappend | 2 ++
->  recipes-devtools/python/python3-networkx_%.bbappend  | 2 ++
->  recipes-security/setools/setools_4.3.0.bb            | 6 ++++++
->  3 files changed, 10 insertions(+)
->  create mode 100644 recipes-devtools/python/python3-decorator_%.bbappend
->  create mode 100644 recipes-devtools/python/python3-networkx_%.bbappend
->
-> diff --git a/recipes-devtools/python/python3-decorator_%.bbappend b/recipes-devtools/python/python3-decorator_%.bbappend
-> new file mode 100644
-> index 0000000..3bc71e0
-> --- /dev/null
-> +++ b/recipes-devtools/python/python3-decorator_%.bbappend
-> @@ -0,0 +1,2 @@
-> +BBCLASSEXTEND = "native nativesdk"
-> +
-> diff --git a/recipes-devtools/python/python3-networkx_%.bbappend b/recipes-devtools/python/python3-networkx_%.bbappend
-> new file mode 100644
-> index 0000000..3bc71e0
-> --- /dev/null
-> +++ b/recipes-devtools/python/python3-networkx_%.bbappend
-> @@ -0,0 +1,2 @@
-> +BBCLASSEXTEND = "native nativesdk"
-> +
-> diff --git a/recipes-security/setools/setools_4.3.0.bb b/recipes-security/setools/setools_4.3.0.bb
-> index ec73f7c..8fdeeb0 100644
-> --- a/recipes-security/setools/setools_4.3.0.bb
-> +++ b/recipes-security/setools/setools_4.3.0.bb
-> @@ -8,6 +8,8 @@ SETools."
->  SECTION = "base"
->  LICENSE = "GPLv2 & LGPLv2.1"
->
-> +BBCLASSEXTEND = "native nativesdk "
-> +
->  S = "${WORKDIR}/git"
->  SRC_URI = "git://github.com/SELinuxProject/${BPN}.git;branch=4.3 \
->             file://setools4-fixes-for-cross-compiling.patch \
-> @@ -21,9 +23,13 @@ LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=83a5eb6974c11f30785e90d0eeccf40c \
->
->  DEPENDS += "bison-native flex-native swig-native python3 python3-cython-native libsepol libselinux"
->
-> +DEPENDS_class-native += "libselinux python3-setuptools python3-cython python3-networkx"
-> +
->  RDEPENDS_${PN} += "python3-networkx python3-decorator python3-setuptools \
->                     python3-logging python3-json libselinux-python"
->
-> +RDEPENDS_${PN}_class-native = ""
-> +
->  RPROVIDES_${PN} += "${PN}-console"
->
->  inherit setuptools3
-> --
-> 2.25.4
->
-> 
+Fixes
+ERROR: QA Issue: gnome-settings-daemon: configure was passed unrecognised options: introspection [unknown-configure-option]
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb       | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb
+index 730ea9ed05..b38ba558c5 100644
+--- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb
+@@ -30,6 +30,8 @@ REQUIRED_DISTRO_FEATURES = "x11 polkit pulseaudio systemd gobject-introspection-
+ SRC_URI[archive.md5sum] = "102dc488a6a726e4050cf5ab7e967e8d"
+ SRC_URI[archive.sha256sum] = "3e33dbd319b562a5ab602dcab6de3ca81b85f8346672e90ec632b36bbf15ee4b"
+ 
++UNKNOWN_CONFIGURE_WHITELIST = "introspection"
++
+ # allow cross build mixed with build of native tools
+ do_write_config_append() {
+     cat >${WORKDIR}/meson.native <<EOF
+-- 
+2.28.0
+
