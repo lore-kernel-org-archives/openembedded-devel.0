@@ -1,51 +1,51 @@
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web10.8974.1596906253725267333
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web11.9154.1596906254653844788
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Aug 2020 10:04:13 -0700
+ Sat, 08 Aug 2020 10:04:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=WohmunMr;
- spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id v15so2524708pgh.6
-        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Aug 2020 10:04:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=SP0mwGDJ;
+ spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f179.google.com with SMTP id u128so2817198pfb.6
+        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Aug 2020 10:04:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=69w8HTigqJUZCVcRylk1YppFFi5gjI1PG6K6Es4sUB0=;
-        b=WohmunMryfeAwXd/VryQesup1vuRl6jl6xECjRkFMR2AcI6GLquhC/0qSfQ2XWQRvg
-         xsg4bf9cLNHUx5/BQUyXBSGrbKAeQ0YX2ZT/YRizek9kByxf1ZjJNrZr9udvEqV1dvqR
-         ceIbxutvjh8keX18pEYZlGKwEiyXSX5RI66VrvxL4RvWTUti4uUkn69dZx6vB4asxDnN
-         fGkGr/ZpNex2CWWKESgXiKA0WDHl7eiEqX9G4yVrwWEvnLSdp51FK6wcjZuI3vYW1sML
-         SlZRRdWXM5yN2Iimk02kAxfT88uJB9oP7Re+PmQmdjgB8Qeuc9lOhw7dDqxsUBeKQPf/
-         AGAQ==
+        bh=Xr5ejcyLXhDab2j1WZRZaTjDFTW8/tWbzWRQuTW8xJA=;
+        b=SP0mwGDJOWrpBeKo1Yv8dG9uvYAVEG3u/QFwM3jhWi9pfFp6gZAd93NMWV7yJtAFg3
+         7Wmi91PlxuIznYSWXI8zy49zJdEcXIMT1gISyamDTwqe77vQpPq2Ttp1iIk5msFssi9b
+         bg/e7GHOL+bJPoKRFZXlTlg3ON5slk0+tlRg4a/f6jFI4GS5DrqnwenoUXLv4UCzaLdE
+         NbysmGvLFcYpUcVDCpA9U+0kPT+6CcD0wSraHiIReFtKKb0nsdpOnfWZVa6ZSJHrcPIw
+         JWpAHo6dURxJskjVjEMQO3nWFlP2S/6dHNhSEkg40mBelMDCveynNOUf0lxmFYJyR7rk
+         fIUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=69w8HTigqJUZCVcRylk1YppFFi5gjI1PG6K6Es4sUB0=;
-        b=YN/TKxrZ4eSxfKud7P1FV/Tbu3lpqsEosSK/vxsVVb05mv9O9pAMLdyUBTbD+TJBsy
-         bGW81B7GgeZBITtrHhYaI/xvJyAIAvXqmc9Un+YlbcEDzKmEwidD8V3+SVuCP/Wy0gbi
-         t+/gX38kvZbxL8Kjm2kk9GlwWujn6VAGZ8X0T6QYX2MgHbDgx/zMR/6CodRjvA1ozh6z
-         6bvf0nAGAmuITmNMc0p6bkq4E2llipWJYM04b3qIDtpQE1AghNqiVXLqYyJPPOCh7ZeC
-         sPhhuml6OSMk0sntbSPlW3kAvnpsGuno+NhG0BFFnA9VHJltlcNr7w+mC8PTRfsncewX
-         h3sQ==
-X-Gm-Message-State: AOAM533EJFyyAfEE9s1cJitnrxRsyFxQtFyj8cIjsaNnFXknf3K2b8F1
-	Obsf+X9osomQxE2VG9xcms4cYXHB76g=
-X-Google-Smtp-Source: ABdhPJwiUnG84kOrWpxdxMvBj8g1LMA4eDH/CKMtqCyJlf1F1wSKl+l4x/1cRvN93xZ9AZzLCykujA==
-X-Received: by 2002:a63:4c57:: with SMTP id m23mr15540312pgl.77.1596906252932;
-        Sat, 08 Aug 2020 10:04:12 -0700 (PDT)
+        bh=Xr5ejcyLXhDab2j1WZRZaTjDFTW8/tWbzWRQuTW8xJA=;
+        b=I9O8qcfBBVUDyf8XraP95H0gYbsRF8g78+nHAm2fRoNtgJR5soGma9m8U7u7mCFT9x
+         OqgSUDwWbYPKg5x+J4mVfHDkNRCRW6RVzVM6lYVnzZgAC0nqQvzAy4rBN+mbc8hIsAfn
+         B9Jx2rjuRJdAA9mMNbgaIsqJXzDAmYjt5hQQi7MfRMykzElYrtluxozpWsgu12VuwL+S
+         jb6+zGh9jiFwz6Yd7iCevARh9+GcnMmObQe5r2fknH3UVtPQ611IM9jsuGjDbinlgkRb
+         nUHdLp4LjAUCjd4mw+m5OSwJ9bsgmXvaW2Htfssaxx8LqccrOf3oSeHJqivkq7LRWPtM
+         BliA==
+X-Gm-Message-State: AOAM533Lj5DzXj+z9WHE4z8NVR6kg5kRmSL0c1ogNH+JsbujEQYhfs2H
+	Bx8t7MvjWFbJcCGtJGHjcopE2X3Esis=
+X-Google-Smtp-Source: ABdhPJxpHnoVvlaoc9GFzVQh4cdw+G8EbynPtfHY/q2vWjlBGp55cc4bsshGLz5JXPYbR0p5WTQM/g==
+X-Received: by 2002:a62:7b89:: with SMTP id w131mr17457976pfc.284.1596906253887;
+        Sat, 08 Aug 2020 10:04:13 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id j130sm14280225pgc.76.2020.08.08.10.04.12
+        by smtp.gmail.com with ESMTPSA id j130sm14280225pgc.76.2020.08.08.10.04.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 08 Aug 2020 10:04:12 -0700 (PDT)
+        Sat, 08 Aug 2020 10:04:13 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Shlomi Vaknin <shlomi.39sd@gmail.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][ 3/9] python3-traitlets: add recipe
-Date: Sat,  8 Aug 2020 10:04:01 -0700
-Message-Id: <20200808170407.2326879-3-raj.khem@gmail.com>
+Subject: [meta-python][ 4/9] python3-ipython-genutils: add recipe
+Date: Sat,  8 Aug 2020 10:04:02 -0700
+Message-Id: <20200808170407.2326879-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200808170407.2326879-1-raj.khem@gmail.com>
 References: <20200808170407.2326879-1-raj.khem@gmail.com>
@@ -57,32 +57,26 @@ From: Shlomi Vaknin <shlomi.39sd@gmail.com>
 Signed-off-by: Shlomi Vaknin <shlomi.39sd@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/python3-traitlets_4.3.3.bb          | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-traitlets_4.3.3.bb
+ .../python/python3-ipython-genutils_0.2.0.bb         | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-ipython-genutils_0.2.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-traitlets_4.3.3.bb b/meta-python/recipes-devtools/python/python3-traitlets_4.3.3.bb
+diff --git a/meta-python/recipes-devtools/python/python3-ipython-genutils_0.2.0.bb b/meta-python/recipes-devtools/python/python3-ipython-genutils_0.2.0.bb
 new file mode 100644
-index 0000000000..edfb3abfaf
+index 0000000000..587aea1f05
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-traitlets_4.3.3.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Traitlets Python config system"
++++ b/meta-python/recipes-devtools/python/python3-ipython-genutils_0.2.0.bb
+@@ -0,0 +1,12 @@
++SUMMARY = "Vestigial utilities from IPython"
 +HOMEPAGE = "http://ipython.org"
 +AUTHOR = "IPython Development Team <ipython-dev@scipy.org>"
 +LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING.md;md5=eec4de4d599518742e54e75954e33b46"
++LIC_FILES_CHKSUM = "file://COPYING.md;md5=f7c3032c3ac398265224533a0a333a35"
 +
-+PYPI_PACKAGE = "traitlets"
++PYPI_PACKAGE = "ipython_genutils"
 +
-+SRC_URI[md5sum] = "3a4f263af65d3d79f1c279f0247077ef"
-+SRC_URI[sha256sum] = "d023ee369ddd2763310e4c3eae1ff649689440d4ae59d7485eb4cfbbe3e359f7"
-+
-+RDEPENDS_${PN} = "\
-+    ${PYTHON_PN}-ipython-genutils \
-+    ${PYTHON_PN}-six \
-+    ${PYTHON_PN}-decorator \
-+"
++SRC_URI[md5sum] = "5a4f9781f78466da0ea1a648f3e1f79f"
++SRC_URI[sha256sum] = "eb2e116e75ecef9d4d228fdc66af54269afa26ab4463042e33785b887c628ba8"
 +
 +inherit setuptools3 pypi
 -- 
