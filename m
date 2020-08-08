@@ -1,51 +1,51 @@
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web12.9006.1596906256414903589
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.web11.9157.1596906257399757803
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Aug 2020 10:04:16 -0700
+ Sat, 08 Aug 2020 10:04:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gq9e459Q;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id 2so2496940pjx.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Aug 2020 10:04:16 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=p3G8qsY1;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id t10so2656401plz.10
+        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Aug 2020 10:04:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=iJt2nz1BwT0uJiyIsKmyUAPneWHIxXtT3lIdnvNePyw=;
-        b=gq9e459QG7e3cecsWkzIa5RHeSebf7pBfvRJuyaHz/mhvrlIAQP73GAlQAsmYFZ57e
-         +aZxr+XmWjlWRiMV8uRBXBCf6oRNv+CQg55uYcVRAq+C+ET8UQAiJZHvvHcbdTG94xjQ
-         baDYw7Z0KNGm3FtvaC/as3EaKpBse3Fjmp5LYld7muzQrb2piWVN/cOUV4Wdq1kSf5EM
-         kf5EOrA4N+/R2a7p8cXjWn+M2Z8mAd/FVX8C/2+3sNyIpmEHjAo1Cp/eVDwSf1V5oeaE
-         YXDPNYpYtg0Y47f/VB2z5bIfMJGZeciwcfndKtkm5dzUSNctNxY00PCNckaRsc8g2Yya
-         DqCA==
+        bh=VveTlptQPiMd4KS2YK1vgx4IOt0mMT9MhrwW0fdjH6Q=;
+        b=p3G8qsY1EkgL3TcXycVCMEHQyWdmPFN6N4jQqVORBppCXgmbt9NfWTUNJLhNau8I5e
+         25RBrRxF5JA0pX50RVNnRD9OAx2kndYLSIAYMracYB2u8H4R3F9EMxeKk7M64CLx7LrC
+         XwuWkrPAa6qCfI0gvWTejAtHxZ1PpFJaNBQVy1ZqcbSfF7L21dGRpGMHUHZsL5cRO+c1
+         XxKewwBmYhg5suk+WKmTRrxGyQ1hDPtxqaQuunVjv5aqMfwAJXLD0zymF6erri2jssIG
+         W4HhaxF2AM4f5TwOeJidBuzQWLOshG8TxsALsLd6Pj8dDsubL/mjOTqzB+xWQar3m1We
+         46oQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=iJt2nz1BwT0uJiyIsKmyUAPneWHIxXtT3lIdnvNePyw=;
-        b=cim0d6k33Iwk+LjKYwWtwHhXzFylkk/IQ3s1uORuvn8Gg86Gk8DO9wbk9CwEMg5ZQl
-         SwJ6m2gn9td6MHqGtq+D9Kc/3EXn9EKnWlvL5K5148tbHD2dUtBaGoqruOC+LFqTPh3m
-         dMJbJkrvi2Uso5vk910VpoOIX4vvAROEYs1bJMwgz79haUi/emWG7emviUeNcEGTvycR
-         HzXInLGw7byYurht6WFIpsFQIArTJCK2YgLDQTQQH9dlt+p64VxswUsAnCQQbnpFcmNA
-         sMCx8WDYBC6Zt9jSb3LPcH6yME7jf8El4FKRVFOoyGZDn+0PAX3hHL6zZYFXEh971r0b
-         b21A==
-X-Gm-Message-State: AOAM531AwSXvg1jdPZdAGQNw+OYcLUXQYU0ykJze7u7hAYtZAMac8yQF
-	Q1R4/4krEQWuwA3WHQjsm/GnTn0yUzw=
-X-Google-Smtp-Source: ABdhPJyKr3ahW/3Yi4HCNQ5npnrajg80UO4H4F1RIRYhM8OHcWJjSufeIanMKe8vf8uJkLcyDnc+Pg==
-X-Received: by 2002:a17:90a:9502:: with SMTP id t2mr17334474pjo.205.1596906255702;
-        Sat, 08 Aug 2020 10:04:15 -0700 (PDT)
+        bh=VveTlptQPiMd4KS2YK1vgx4IOt0mMT9MhrwW0fdjH6Q=;
+        b=dL80Vugz6PuRmHu20v6P476MiCgWkg5k9ccYAYyplbtr+teBY9rDi8AFd8qS387d1v
+         Dw5O3mN+LRwPDfDapFb35p9vmkhUOewjVo+Qog1BXsG9Cn9Gnadrx6D8C5gFFfOlnmEx
+         8ulGYmvueyD/cV4fyS5S2rbCxAvacLSnRLt7Rx0gRKRZrQezWgpVIZUsdKzXfJE598JB
+         Hc9UqYMvgT651aQErbGgNmlFaOxOOCpQZeziUaELKnoUkb2+8KOszBs0kWiZSHnWiV4L
+         GbOgej9z0Aagy5YssYVcXVV+Cbw7ih5W7vnDu9xMKrcAN8aaRFGAgRAsesycnLJbOdaS
+         dcsA==
+X-Gm-Message-State: AOAM533cYeTx9SVOZS5mZ/Pw7hQ3cqJYJkL2ZMhoKTeMrNoTuLK+uRQP
+	ToW1kzxs5RJWnMIXuilUYwVo8Q2mh2U=
+X-Google-Smtp-Source: ABdhPJzSjqUVFtl02Ioc5BJw0vTdp1nGM0Vc1wdUj7pmMHnKM9TZNRFaiObI5FoshLarmaRSY4LbWg==
+X-Received: by 2002:a17:90b:4b03:: with SMTP id lx3mr18507009pjb.143.1596906256716;
+        Sat, 08 Aug 2020 10:04:16 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id j130sm14280225pgc.76.2020.08.08.10.04.14
+        by smtp.gmail.com with ESMTPSA id j130sm14280225pgc.76.2020.08.08.10.04.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 08 Aug 2020 10:04:15 -0700 (PDT)
+        Sat, 08 Aug 2020 10:04:16 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Shlomi Vaknin <shlomi.39sd@gmail.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][ 6/9] python3-pickleshare: add recipe
-Date: Sat,  8 Aug 2020 10:04:04 -0700
-Message-Id: <20200808170407.2326879-6-raj.khem@gmail.com>
+Subject: [meta-python][ 7/9] python3-backcall: add recipe
+Date: Sat,  8 Aug 2020 10:04:05 -0700
+Message-Id: <20200808170407.2326879-7-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200808170407.2326879-1-raj.khem@gmail.com>
 References: <20200808170407.2326879-1-raj.khem@gmail.com>
@@ -57,26 +57,26 @@ From: Shlomi Vaknin <shlomi.39sd@gmail.com>
 Signed-off-by: Shlomi Vaknin <shlomi.39sd@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/python3-pickleshare_0.7.5.bb              | 12 ++++++++++++
+ .../python/python3-backcall_0.2.0.bb                 | 12 ++++++++++++
  1 file changed, 12 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pickleshare_0.7.5.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-backcall_0.2.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-pickleshare_0.7.5.bb b/meta-python/recipes-devtools/python/python3-pickleshare_0.7.5.bb
+diff --git a/meta-python/recipes-devtools/python/python3-backcall_0.2.0.bb b/meta-python/recipes-devtools/python/python3-backcall_0.2.0.bb
 new file mode 100644
-index 0000000000..9d67e4f338
+index 0000000000..56b1485342
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pickleshare_0.7.5.bb
++++ b/meta-python/recipes-devtools/python/python3-backcall_0.2.0.bb
 @@ -0,0 +1,12 @@
-+SUMMARY = "Tiny 'shelve'-like database with concurrency support"
-+HOMEPAGE = "https://github.com/pickleshare/pickleshare"
-+AUTHOR = "Ville Vainio <vivainio@gmail.com>"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=905c08218089ffebea3a64c82fc4d7d0"
++SUMMARY = "Specifications for callback functions passed in to an API"
++HOMEPAGE = "https://github.com/takluyver/backcall"
++AUTHOR = "Thomas Kluyver <thomas@kluyver.me.uk>"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=40e56b724d016484a7f790ec826d3ffc"
 +
-+PYPI_PACKAGE = "pickleshare"
++PYPI_PACKAGE = "backcall"
 +
-+SRC_URI[md5sum] = "44ab782615894a812ab96669a122a634"
-+SRC_URI[sha256sum] = "87683d47965c1da65cdacaf31c8441d12b8044cdec9aca500cd78fc2c683afca"
++SRC_URI[md5sum] = "1f4c9a370c78743406296f48e56e8821"
++SRC_URI[sha256sum] = "5cbdbf27be5e7cfadb448baf0aa95508f91f2bbc6c6437cd9cd06e2a4c215e1e"
 +
 +inherit setuptools3 pypi
 -- 
