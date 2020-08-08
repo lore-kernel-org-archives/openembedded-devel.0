@@ -1,99 +1,92 @@
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web12.9003.1596906251678942486
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.web12.9004.1596906252723982731
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Aug 2020 10:04:11 -0700
+ Sat, 08 Aug 2020 10:04:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=bc6SNBak;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id 74so2797476pfx.13
-        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Aug 2020 10:04:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=dFrjJd85;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id c6so2505463pje.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Aug 2020 10:04:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=DInSETXG+hHsoUbyYRo515ovTPTAD8SPC7PhxmfNYng=;
-        b=bc6SNBakI/5nH7Gp8+QEO+kowdUute/7plvr3J2m8mOnRcvdiWeHmNLmaMzSWl4WIj
-         5wl0oU/QxD6H7UVeYEqdNiSLYOuRdRUOoYm5cajOIUjArCXhOZyn1sySoMz40gcWKnv9
-         RH4G86g2OjwDvcAEp3rWi4LmCOw00+HHYg3ZtCrS6mKq71GKtwL9RduVZ8SUyQXghvdG
-         LcvzITrxiSGjNkpCxU/qWvI55p/jSfgS1w7q1On/EVTLuOkQ0pzSVJPA5JGNOEaaY2lH
-         2CcWH8Tsx8MY/3oYunddBSR2hYLyqybDwt+ddJns2nr/GMq6HCaekB6/F3Z3j77TRjhe
-         UyfA==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=Y49T2t/v9E/9HVzywlUX/L2LRvfcQT08508sK7UemTM=;
+        b=dFrjJd85lxkrS9fuHLeBXPnPFkNo/eSWH9imERpGKEXb8TSpdDq5PGVcX8/czKQhWY
+         vV2C+RG7ULIK5k3N2OW9t99tKOxfZRwl1EDTB7P9+pwv8/yapZbded9d7dJIZZhbXkBB
+         4pVWmLaze2IYZG5RdIg+tZiZa6yyaJCiprVDaO5QT7cFaP+4puFwGSIDah3PFfyTEVp1
+         2zFcr3TV1dgyM9YczU/6BY9kZDrjoP36ySnnhO+Bkh37Q3lhTDXc++DH0SrfsiX1i3UQ
+         4rK7wPIqYbMx67EYrD+oh7b0K1AMltOqrjJFkpjJZDR/Wy2gEyaIKhh2uNWW/Cy3fgtz
+         FwbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=DInSETXG+hHsoUbyYRo515ovTPTAD8SPC7PhxmfNYng=;
-        b=i13uUGrdWx3kIlJJWBG/p79xa0oGvqOz7M+12+3WmSsLFLk+caZPUuxE3/P4oPl98l
-         L4chUlevDrNJg/TaAZpkxBl3WIgaJ+mRIncOFfsXBzibJIei/a7TeCzCTWbXReRNT57F
-         2iExukccPvsuXeCp9pJ4lij+KTkeMY2LUtHSCNyLdkmHSCgpQqUPpzWI91NerVwQCoDa
-         rC9WTUOoRuJLG7N/0pFfbVwL7LckW1XlCJ+jYoibKXc8JNMn8pIuW+PnnHMSSJl/CUCN
-         bBdT8MaBfOX966fmW/kntfC4floJc1T6Ogk+RR8lPDlgyRh7WWbcwTRwpn0golHrFY38
-         nd0A==
-X-Gm-Message-State: AOAM530p49GYdMLXbLyuV2Bq8kEq4PPnSlCuK75COZ4C7ASyRFqIhpD5
-	YuMEmsBBC5Wx7RRaQxJgG/h9pYIoa3c=
-X-Google-Smtp-Source: ABdhPJxnWDLwQgWvDl2S7yLWTR8oSoYWr1FTKqZmsNoTiFmb5epfWn4XPwkGWyVVGUiK9JrMCEmKzw==
-X-Received: by 2002:a62:7ac2:: with SMTP id v185mr18661156pfc.277.1596906250816;
-        Sat, 08 Aug 2020 10:04:10 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=Y49T2t/v9E/9HVzywlUX/L2LRvfcQT08508sK7UemTM=;
+        b=KxSHGAU4sH8+qixmNfMLv1+FrpTJyy3zPWZGval4yu54Hha+dELbBultJDal9rd0jc
+         C9RtgYQ4mqfbHwJ94YaFt1D9xYzUW5vLkMu+vpLSyk5BWVlsJowSFyIszAa10aK5kKwz
+         X87CSbrZPzQOBoxls790CFiRdmc1XB+qbrp7Kcq7INX5noZSR8NydMF2jJ5lJcux67fw
+         SEMqJ8GXBrVet7YeqXg+3ec6ZjT9Xdp1YI7/BnmxFByWgbm+eM1r2G2MOP/hpMi5EagO
+         vFzKu/okesOKRMEER+7tht2IPaYC5Zko3Ruma8PNPePI6uryA6mapxvJWn7bIpDMYEH4
+         2UVA==
+X-Gm-Message-State: AOAM531oqB+36sZ4JJtz7anVF6pctiSaNqnhKE/ESAPXdKoMduRs7mjT
+	yiNzXtS09FgY8S4NnmnN0hqz3tBmy2g=
+X-Google-Smtp-Source: ABdhPJy4SV9nPDYUnkD7vaaMD0qIDck1ZrhbZOwA6oYpZbFdaklqy5hHm1e+skbZvmuYTXK4sRm/rg==
+X-Received: by 2002:a17:90a:d195:: with SMTP id fu21mr18834470pjb.100.1596906251983;
+        Sat, 08 Aug 2020 10:04:11 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id j130sm14280225pgc.76.2020.08.08.10.04.09
+        by smtp.gmail.com with ESMTPSA id j130sm14280225pgc.76.2020.08.08.10.04.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 08 Aug 2020 10:04:10 -0700 (PDT)
+        Sat, 08 Aug 2020 10:04:11 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Shlomi Vaknin <shlomi.39sd@gmail.com>,
+Cc: Colin McAllister <colinmca242@gmail.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][ 1/9] python3-ipython: add recipe
-Date: Sat,  8 Aug 2020 10:03:59 -0700
-Message-Id: <20200808170407.2326879-1-raj.khem@gmail.com>
+Subject: [meta-python][ 2/9] python3-jdatetime: Added recipe
+Date: Sat,  8 Aug 2020 10:04:00 -0700
+Message-Id: <20200808170407.2326879-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20200808170407.2326879-1-raj.khem@gmail.com>
+References: <20200808170407.2326879-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Shlomi Vaknin <shlomi.39sd@gmail.com>
+From: Colin McAllister <colinmca242@gmail.com>
 
-Signed-off-by: Shlomi Vaknin <shlomi.39sd@gmail.com>
+Created python3 recipe for jdatetime.
+
+Signed-off-by: Colin McAllister <colinmca242@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/python3-ipython_7.17.0.bb          | 29 +++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-ipython_7.17.0.bb
+ .../python/python3-jdatetime_3.6.2.bb          | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-jdatetime_3.6.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-ipython_7.17.0.bb b/meta-python/recipes-devtools/python/python3-ipython_7.17.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-jdatetime_3.6.2.bb b/meta-python/recipes-devtools/python/python3-jdatetime_3.6.2.bb
 new file mode 100644
-index 0000000000..ddcddd60b8
+index 0000000000..43f6e18493
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-ipython_7.17.0.bb
-@@ -0,0 +1,29 @@
-+SUMMARY = "IPython: Productive Interactive Computing"
-+HOMEPAGE = "https://ipython.org"
-+AUTHOR = "The IPython Development Team <ipython-dev@python.org>"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
++++ b/meta-python/recipes-devtools/python/python3-jdatetime_3.6.2.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION = "Jalali implementation of Python's datetime module"
++HOMEPAGE = "https://github.com/slashmili/python-jalali"
++LICENSE = "Python-2.0"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=fc0a323542d2fbe0ad822fa0b1a0a96f"
 +
-+PYPI_PACKAGE = "ipython"
++SRC_URI[md5sum] = "3c9ee1bc7de48ff4d9c773046b2eb081"
++SRC_URI[sha256sum] = "a589e35f0dab89283c1a3de9d70ed6cf657932aaed8e8ce1b0e5801aaab1da67"
 +
-+SRC_URI[md5sum] = "1f2257d771de9d2fb40d9e3cfcea429d"
-+SRC_URI[sha256sum] = "b70974aaa2674b05eb86a910c02ed09956a33f2dd6c71afc60f0b128a77e7f28"
++PYPI_PACKAGE = "jdatetime"
 +
-+RDEPENDS_${PN} = "\
-+    ${PYTHON_PN}-setuptools \
-+    ${PYTHON_PN}-jedi \
-+    ${PYTHON_PN}-decorator \
-+    ${PYTHON_PN}-pickleshare \
-+    ${PYTHON_PN}-traitlets \
-+    ${PYTHON_PN}-prompt-toolkit \
-+    ${PYTHON_PN}-pygments \
-+    ${PYTHON_PN}-backcall \
-+    ${PYTHON_PN}-pydoc \
-+    ${PYTHON_PN}-debugger \
-+    ${PYTHON_PN}-pexpect \
-+    ${PYTHON_PN}-unixadmin \
-+    ${PYTHON_PN}-misc \
-+    ${PYTHON_PN}-sqlite3 \
++inherit pypi setuptools3
++
++CLEANBROKEN = "1"
++
++RDEPENDS_${PN} += " \
++        ${PYTHON_PN}-modules \
 +"
 +
-+inherit setuptools3 pypi
 -- 
 2.28.0
 
