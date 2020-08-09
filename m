@@ -1,50 +1,50 @@
-Received: from mail-ej1-f67.google.com (mail-ej1-f67.google.com [209.85.218.67])
- by mx.groups.io with SMTP id smtpd.web12.22906.1596976521983122660
+Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com [209.85.218.68])
+ by mx.groups.io with SMTP id smtpd.web10.23041.1596976522794064493
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 09 Aug 2020 05:35:22 -0700
+ Sun, 09 Aug 2020 05:35:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=cx8BlCLZ;
- spf=pass (domain: gmail.com, ip: 209.85.218.67, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f67.google.com with SMTP id m22so6688942eje.10
-        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Aug 2020 05:35:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=tfLZXAwZ;
+ spf=pass (domain: gmail.com, ip: 209.85.218.68, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f68.google.com with SMTP id d6so6701028ejr.5
+        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Aug 2020 05:35:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=Vure1F+B3nSDXOvyTCNV5aDmxdk71iN9xfvuHb3HeJ8=;
-        b=cx8BlCLZD9E77/nefURWHPGmACPTPoU2/9NoTV7O2yKExtrVKDa0hjwdGOn3Kyb80V
-         DQ/tLiL1Ngs1p8SeiNa0EkB+jw2TwepzK9m9FAzgY1mCzhBHEDo6GMNNJRXK1CyXtaUN
-         LcYkUA/e3LHNT80aNKADH+hUF+BudMILwaIixG4Xr1ONFZtus/EIGBbdGn2lRVhUfONr
-         54cLx/K0nbTMKvjk//MZGRnQZx+G4lhapLhdwLYwZrb1QhQtZc7fyppbuQfSFFRySbeZ
-         V05rwSkb+hbgzVlZMEgW9+ahaL1DEfQ5osxet27Mix7U1/LJCzFRe7lEYwj9MTMf4LU+
-         m1oA==
+        bh=9L8ynwvg8l+NrzwiCKWvu+UBDWo53DIEWywrcl216hU=;
+        b=tfLZXAwZeZUvBjvNj07sfrcHdEUuEZHPpP80gCSpYmZtFNZn187TEg5IsPzMSte84L
+         ac5JLNNtNFGJZ846/qMIr6nI71cerUArwXBWxyUDgf9Omn1WLY4WgVwoAbI7I0GVTkZX
+         RkhNHgqTjME9QB6yKQebHKjyTtVET9JPoudxo5A1VRocGXDEyE1ECeJzIp9OJVp4S0G2
+         nga48Nq8Z5d50lbfnn7RqWFZy6RtUxBH61UprG4+v79zWqvwV9JBohwzRYKgHbt5Ebk1
+         rDbf7A6cxr8uN2V7B+Z9qmcF+UX7Sa9kHoprPCsyGjvcJDlbNFzcApZia5Oi4XXJjEK1
+         DLzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Vure1F+B3nSDXOvyTCNV5aDmxdk71iN9xfvuHb3HeJ8=;
-        b=GW2KdLsQY+zyRRKMdX4mAX8wMokiO9IPBdyrxVEC7HFLlw7RtDwozM19ItmwQOxg9g
-         fnKxYxOgywn17LhZwDxM6PbIQXhImxS4Zre9suXCURkZozZU7zwj1OVE8MPLWyziXCog
-         e34cGG146QC8SsVOSQfbkAtsM+agn80l+/AJ5kuBeCk7RMtM8h/mJNqfphvOFN5zKdK+
-         TvAUkwNLanqF3AYn1siVQCyq4aqoGAQGDKRoYONIy/XWr/WwR+39VAoipqT2OAvOCVlm
-         J+bKp1GZMsfc23hkIz5HYVNHWHFQPo3nAMIqrlNjzxS93qVdHvqz4cGJVfivTYYQYKaZ
-         9ZMA==
-X-Gm-Message-State: AOAM532AGmZY6+mkXRoJZDd+FCSnOBLw+iVzc/8qlTfY2Sppa7KQ28sW
-	IHcB4GWZ8aiefv8gTb6lW3preyuP
-X-Google-Smtp-Source: ABdhPJzCzp9hM0Hl3+bdUcjqdWQH11mcmk4R70lBiCeyD302L/RsMrHF4wzdPBshrWeqD4z5cdBIiQ==
-X-Received: by 2002:a17:906:289a:: with SMTP id o26mr17089642ejd.309.1596976520271;
-        Sun, 09 Aug 2020 05:35:20 -0700 (PDT)
+        bh=9L8ynwvg8l+NrzwiCKWvu+UBDWo53DIEWywrcl216hU=;
+        b=XOF+NLdbZdGWjhslXkCH+0APLN9RG/B0gKPE/tlDc+bLbnF8cPmkU+bBVm94hW2yNU
+         9qDD84GJwtmf23wTo+uHME0YhvhavDf0XtWXSgQRz/mniUfTy/BfEofW12GeqJCt6WVz
+         H5HLm9yn3k5282i8Lxau1oZ5fSNenG8xgn4haq1lu390p6N7EEWHxgMXYtUP3ooGhRdV
+         KA6ReUrNvZu/44dHo0ukRAQVQIEpD+4X7ehzhzH2r8GYwTvsDD83ib43jmHT0wVSBFHK
+         sI5MU1WhdLnQbez6p6LcvHimGqRwVzKAMcpDvwVpbZBebUGugNrWz3WHJhmFIQ75WKSv
+         rlZQ==
+X-Gm-Message-State: AOAM532nD4rsEdBk6tfb4vCla1ms476wnpWw0QR8udOZNHuKsM2lvWOl
+	eDaC0hbqKo9of59YGH9CyU9OpKXQ
+X-Google-Smtp-Source: ABdhPJxDexFmEmOFXEFck+qYokIbZZDBTKylmDCLqTVjIXaHEtSlIckXPFgmMxR6Gg/rVSRgUpkrBA==
+X-Received: by 2002:a17:906:36c2:: with SMTP id b2mr16730074ejc.238.1596976521158;
+        Sun, 09 Aug 2020 05:35:21 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f102180f54bc478636fc7f8.dip0.t-ipconnect.de. [2003:f0:7f10:2180:f54b:c478:636f:c7f8])
-        by smtp.gmail.com with ESMTPSA id b24sm10070260edn.33.2020.08.09.05.35.19
+        by smtp.gmail.com with ESMTPSA id b24sm10070260edn.33.2020.08.09.05.35.20
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 Aug 2020 05:35:19 -0700 (PDT)
+        Sun, 09 Aug 2020 05:35:20 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 3/6] geoclue: upgrade 2.5.3 -> 2.5.6
-Date: Sun,  9 Aug 2020 14:35:04 +0200
-Message-Id: <20200809123507.267616-3-schnitzeltony@gmail.com>
+Subject: [PATCH 4/6] gnome-help.bbclass: remove double FILES_${PN}-help entry
+Date: Sun,  9 Aug 2020 14:35:05 +0200
+Message-Id: <20200809123507.267616-4-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200809123507.267616-1-schnitzeltony@gmail.com>
 References: <20200809123507.267616-1-schnitzeltony@gmail.com>
@@ -52,61 +52,28 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-While at it:
-* remove unnecessary exports
-* minor recipe cleanup
-
-Release notes [1]
-
-2.5.6:
-* Fix crashes in WiFi handling code.
-* Plug a leak.
-
-2.5.5:
-* Plug another leak.
-* Fix another buffer overflow.
-* Fix WiFi-geolocation that got broken in 2.5.4.
-* Put freequently used small strings on the stack to avoid excessive memory usage.
-
-2.5.4:
-* Plug a leak that becomes pretty huge after a while of running Geoclue.
-* Fix a buffer-overflow.
-
-[1] https://gitlab.freedesktop.org/geoclue/geoclue/-/releases
+When I wrote this class meta-qt5-extra's qt5-translation.bbclass was taken
+as template. So this is a leftover which does not make sense: Variable is set
+differently few lines below.
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../geoclue/{geoclue_2.5.3.bb => geoclue_2.5.6.bb}   | 12 ++----------
- 1 file changed, 2 insertions(+), 10 deletions(-)
- rename meta-oe/recipes-navigation/geoclue/{geoclue_2.5.3.bb => geoclue_2.5.6.bb} (82%)
+ meta-gnome/classes/gnome-help.bbclass | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-oe/recipes-navigation/geoclue/geoclue_2.5.3.bb b/meta-oe/recipes-navigation/geoclue/geoclue_2.5.6.bb
-similarity index 82%
-rename from meta-oe/recipes-navigation/geoclue/geoclue_2.5.3.bb
-rename to meta-oe/recipes-navigation/geoclue/geoclue_2.5.6.bb
-index e57e7a720..03a10ce62 100644
---- a/meta-oe/recipes-navigation/geoclue/geoclue_2.5.3.bb
-+++ b/meta-oe/recipes-navigation/geoclue/geoclue_2.5.6.bb
-@@ -12,17 +12,9 @@ DEPENDS = "glib-2.0 dbus json-glib libsoup-2.4 intltool-native"
+diff --git a/meta-gnome/classes/gnome-help.bbclass b/meta-gnome/classes/gnome-help.bbclass
+index 967091ba4..9c4771ddc 100644
+--- a/meta-gnome/classes/gnome-help.bbclass
++++ b/meta-gnome/classes/gnome-help.bbclass
+@@ -9,8 +9,6 @@
+ #   else
+ #       pack all help files to ${PN}-help-<lingua>
  
- inherit meson pkgconfig gtk-doc gobject-introspection vala
- 
--SRC_URI = " \
--    https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/${PV}/geoclue-${PV}.tar \
--"
+-FILES_${PN}-help = "${datadir}/*/translations"
 -
--SRC_URI[md5sum] = "6228301ed62b587ebaa0438b97ce66e4"
--SRC_URI[sha256sum] = "3caa5e10190a34c17a9b3a9d1d8a19797ed197f07f36f6e35ce533a379efe155"
-+SRC_URI = "https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/${PV}/geoclue-${PV}.tar"
- 
--export BUILD_SYS
--export HOST_SYS
--export STAGING_INCDIR
--export STAGING_LIBDIR
-+SRC_URI[sha256sum] = "76494f1262fd90faea05116aface7f580b9b50f7c525bc86ccf33409cea95e8d"
- 
- # Without this line, package is declared a library and named libgeoclue*
- AUTO_LIBNAME_PKGS = ""
+ # Dummy to get yelp build & PACKAGE_NO_HELP_SPLIT set 1
+ PACKAGES_append = " ${PN}-help"
+ FILES_${PN}-help = "${datadir}/help"
 -- 
 2.26.2
 
