@@ -1,50 +1,50 @@
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
- by mx.groups.io with SMTP id smtpd.web12.22907.1596976523722768080
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
+ by mx.groups.io with SMTP id smtpd.web11.23154.1596976524626153742
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 09 Aug 2020 05:35:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=GfCgXySH;
- spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f52.google.com with SMTP id m22so6688998eje.10
-        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Aug 2020 05:35:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=EGinBIPy;
+ spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f54.google.com with SMTP id q4so4455199edv.13
+        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Aug 2020 05:35:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=MiFhIul7hvgaqoanhK5IzFjTeu2znjoqFeuH74KJXTU=;
-        b=GfCgXySH7D1aw9YQbEnTR85mKFpSSucHCyPXZ0zprLmjCU0gi411mUSSvaA1bdkSCn
-         cO19qK1w1hpFFoKJHs9PIwPjBPtRKEfbIZjMskGw0Iroo8WjaRYJlELpQzctBhfkAkLi
-         gQvAjvujrLGiEiFO+PHO47ciZl6MqisFKk/RTBHxVWxWD+hm6+Z8i9d/A7bSJU7vRLrV
-         pK8r1ghckIw53xN2Iixl++01JcipH5bybR3QfcYugFWNzyJBzAw5o0rnfpsqwxDtyzQa
-         UtzJlY6XfLkXR4DRXuIkZ5LguoNWpviEqECHnxxBFca1vGQukQAVBLMy2arQRQOuJLtV
-         RdIA==
+        bh=BJVgsP2pZT8n8o0VpSU/ChrFgJZatOZENdjKDNuSFZA=;
+        b=EGinBIPyzJXBz6zOhShOoSEd3hIab1T6VTXPGmF5N0kN6UWMzEXy4c3ukDJiWlX4Dw
+         w41sI7uC4vZLIdpYhgzf3W7ELEuQN6N3DcUU9CoW11Ouo0DVDmLHshCg9/MKm5CjnoFe
+         0jShKDjg0W78l9jBjWAoM3vqd3HBP4FJFaTqQ430KLQg2o0KK2HkNTQrPKP60n31KIl8
+         hoYuGKWi3yP40YfzxWg/5Eccl/UBiRpXFzcD8GWt/4+EdgL1sZRRsGVYuplnpuWt+ize
+         KYKn/gyXu0vue/HjnWawmr87IwoxxjqRyUh5LigrGzHVwDyUzkR4GYqKny3hYhfBCvc4
+         uUBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=MiFhIul7hvgaqoanhK5IzFjTeu2znjoqFeuH74KJXTU=;
-        b=VT9QjhcObaA5FygsQSCzv1BS99H1pARkpz9DTJG3+WcZNlcp7HpkPpiN/Sc9t1seu5
-         Kx9y9q+lLYOefY94v1v88AjO2hNgkYEUqZYMOGLnCbFbf+Z3Px0HPZHk/niUuwwAQ7JI
-         PBvCf/aQgTMbubqTjOYV/J5xBBVOGFdKE7Bp4U0HmSDAqxTewsiZ1GwEGWfflCsqIU5O
-         gILEFIhLeceQ1oNUIJV+P9K/Mk3txLH/8cRb0HMfGAR0G1jq87AJIrmtwR0AsdUYrnSJ
-         A0ZarXfw2rQ/xotLOGZT0WNM3lvkwKCFtpzT93c0iczY4TlJFG1xPOuyYXTCIvmCKLGb
-         VILA==
-X-Gm-Message-State: AOAM533DJUVpCLBAD0O61WsqS/janr0QfuImTaEXRcSYe3RT5edfijZT
-	1O33qRJuzgtQc5nydrJcqsXxzNxx
-X-Google-Smtp-Source: ABdhPJz5fXE0yQmO5YTEQPyROPVR4G2YGUkQca4GmhkD2Sdoy41ZI7jf+lUtTZXj3YSe+ptpN9AqBA==
-X-Received: by 2002:a17:906:2296:: with SMTP id p22mr17138591eja.510.1596976522052;
+        bh=BJVgsP2pZT8n8o0VpSU/ChrFgJZatOZENdjKDNuSFZA=;
+        b=foBX3tHZhaZviKX77qUXf1rmYLBkw/BbomjthKUms9A1/DJlq+D5yryyPSF+v+rctx
+         TmVQ7CylFHS9q9ebfq7bIr7gbpqLqsG+2G3X0PCiLhTOpMCUsTV9oynydmWatSGRCM0z
+         K4oNoa2ktzUiQTflivIv+1DJsIlWlDr5bXQ1o2+AlL+SmaR0XkWHxxfKSb+md6q0QJHs
+         JJcj2cNuufr8+8XE1o0gD1OUkzDtcWw4pKhM2dwirngPQdmmNUMZkJ71kJq/XqiosSCc
+         ZUkFjm+jqt+0nZe4jBVwKRaFisURTV9KdwdGRLRwC+s1Fn5FG1Xr2AGDv8mzq4IXpeWh
+         VzUw==
+X-Gm-Message-State: AOAM532Hhf/59u2fOxg/eMOHcvbbfXi53xFOhqv5jcE09VCzpbWBDqg/
+	49eNQ5Z58nLva1Ylq21HLvamvHUv
+X-Google-Smtp-Source: ABdhPJyzz32I7nQvUBl5jYxQkqZ4aEfF3Og/BljHcxu0jwSZUX5xZyNDC3vvbUp3qw7AbY05IAHl5A==
+X-Received: by 2002:a50:9fc9:: with SMTP id c67mr17148322edf.69.1596976522974;
         Sun, 09 Aug 2020 05:35:22 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f102180f54bc478636fc7f8.dip0.t-ipconnect.de. [2003:f0:7f10:2180:f54b:c478:636f:c7f8])
-        by smtp.gmail.com with ESMTPSA id b24sm10070260edn.33.2020.08.09.05.35.21
+        by smtp.gmail.com with ESMTPSA id b24sm10070260edn.33.2020.08.09.05.35.22
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 Aug 2020 05:35:21 -0700 (PDT)
+        Sun, 09 Aug 2020 05:35:22 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 5/6] gnome-calendar: initial add 3.36.2
-Date: Sun,  9 Aug 2020 14:35:06 +0200
-Message-Id: <20200809123507.267616-5-schnitzeltony@gmail.com>
+Subject: [PATCH 6/6] imagemagick: upgrade 7.0.9_13 -> 7.0.10_25
+Date: Sun,  9 Aug 2020 14:35:07 +0200
+Message-Id: <20200809123507.267616-6-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200809123507.267616-1-schnitzeltony@gmail.com>
 References: <20200809123507.267616-1-schnitzeltony@gmail.com>
@@ -52,63 +52,35 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Changelog would be > 300 lines so for those intersted see [1]
+
+[1] https://github.com/ImageMagick/ImageMagick/blob/master/ChangeLog
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../gnome-calendar/gnome-calendar_3.36.2.bb   | 32 +++++++++++++++++++
- .../packagegroups/packagegroup-gnome-apps.bb  |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.36.2.bb
+ .../{imagemagick_7.0.9.bb => imagemagick_7.0.10.bb}           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/imagemagick/{imagemagick_7.0.9.bb => imagemagick_7.0.10.bb} (98%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.36.2.bb b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.36.2.bb
-new file mode 100644
-index 000000000..4605857f5
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.36.2.bb
-@@ -0,0 +1,32 @@
-+SUMMARY = "GNOME calendar"
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=8f0e2cd40e05189ec81232da84bd6e1a"
-+
-+SECTION = "x11/gnome"
-+
-+DEPENDS = " \
-+    gtk+3 \
-+    libical \
-+    gsettings-desktop-schemas \
-+    evolution-data-server \
-+    libsoup-2.4 \
-+    libdazzle \
-+    libhandy \
-+    libgweather \
-+    geoclue \
-+"
-+
-+GNOMEBASEBUILDCLASS = "meson"
-+
-+inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-version-is-even
-+
-+REQUIRED_DISTRO_FEATURES = "x11"
-+
-+SRC_URI[archive.sha256sum] = "d0b05345c0555a085e6e5426eab49494aba2826c856eb06fd7fdb762ec0c4c1f"
-+
-+FILES_${PN} += " \
-+    ${datadir}/gnome-shell \
-+    ${datadir}/metainfo \
-+    ${datadir}/dbus-1 \
-+"
-+
-diff --git a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
-index 934101f9b..2d2d6b599 100644
---- a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
-+++ b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
-@@ -13,6 +13,7 @@ RDEPENDS_${PN} = " \
-     gedit \
-     ghex \
-     gnome-calculator \
-+    gnome-calendar \
-     gnome-font-viewer \
-     gnome-photos \
-     gnome-terminal \
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.9.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+similarity index 98%
+rename from meta-oe/recipes-support/imagemagick/imagemagick_7.0.9.bb
+rename to meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+index 3f7d06e26..804faf02e 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.9.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+@@ -9,9 +9,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=41b4fa9af60c88e61484b02c0561181a"
+ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
+ 
+ BASE_PV := "${PV}"
+-PV .= "_13"
++PV .= "_25"
+ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git "
+-SRCREV = "15b935d64f613b5a0fc9d3fead5c6ec1b0e3908f"
++SRCREV = "8b4e00829eb84d4e7b4da11acf1f98f1e8166e5b"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.26.2
 
