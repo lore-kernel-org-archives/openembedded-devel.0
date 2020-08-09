@@ -1,50 +1,50 @@
-Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com [209.85.218.68])
- by mx.groups.io with SMTP id smtpd.web10.23041.1596976522794064493
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.web12.22907.1596976523722768080
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 09 Aug 2020 05:35:23 -0700
+ Sun, 09 Aug 2020 05:35:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=tfLZXAwZ;
- spf=pass (domain: gmail.com, ip: 209.85.218.68, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f68.google.com with SMTP id d6so6701028ejr.5
-        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Aug 2020 05:35:22 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=GfCgXySH;
+ spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f52.google.com with SMTP id m22so6688998eje.10
+        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Aug 2020 05:35:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=9L8ynwvg8l+NrzwiCKWvu+UBDWo53DIEWywrcl216hU=;
-        b=tfLZXAwZeZUvBjvNj07sfrcHdEUuEZHPpP80gCSpYmZtFNZn187TEg5IsPzMSte84L
-         ac5JLNNtNFGJZ846/qMIr6nI71cerUArwXBWxyUDgf9Omn1WLY4WgVwoAbI7I0GVTkZX
-         RkhNHgqTjME9QB6yKQebHKjyTtVET9JPoudxo5A1VRocGXDEyE1ECeJzIp9OJVp4S0G2
-         nga48Nq8Z5d50lbfnn7RqWFZy6RtUxBH61UprG4+v79zWqvwV9JBohwzRYKgHbt5Ebk1
-         rDbf7A6cxr8uN2V7B+Z9qmcF+UX7Sa9kHoprPCsyGjvcJDlbNFzcApZia5Oi4XXJjEK1
-         DLzQ==
+        bh=MiFhIul7hvgaqoanhK5IzFjTeu2znjoqFeuH74KJXTU=;
+        b=GfCgXySH7D1aw9YQbEnTR85mKFpSSucHCyPXZ0zprLmjCU0gi411mUSSvaA1bdkSCn
+         cO19qK1w1hpFFoKJHs9PIwPjBPtRKEfbIZjMskGw0Iroo8WjaRYJlELpQzctBhfkAkLi
+         gQvAjvujrLGiEiFO+PHO47ciZl6MqisFKk/RTBHxVWxWD+hm6+Z8i9d/A7bSJU7vRLrV
+         pK8r1ghckIw53xN2Iixl++01JcipH5bybR3QfcYugFWNzyJBzAw5o0rnfpsqwxDtyzQa
+         UtzJlY6XfLkXR4DRXuIkZ5LguoNWpviEqECHnxxBFca1vGQukQAVBLMy2arQRQOuJLtV
+         RdIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=9L8ynwvg8l+NrzwiCKWvu+UBDWo53DIEWywrcl216hU=;
-        b=XOF+NLdbZdGWjhslXkCH+0APLN9RG/B0gKPE/tlDc+bLbnF8cPmkU+bBVm94hW2yNU
-         9qDD84GJwtmf23wTo+uHME0YhvhavDf0XtWXSgQRz/mniUfTy/BfEofW12GeqJCt6WVz
-         H5HLm9yn3k5282i8Lxau1oZ5fSNenG8xgn4haq1lu390p6N7EEWHxgMXYtUP3ooGhRdV
-         KA6ReUrNvZu/44dHo0ukRAQVQIEpD+4X7ehzhzH2r8GYwTvsDD83ib43jmHT0wVSBFHK
-         sI5MU1WhdLnQbez6p6LcvHimGqRwVzKAMcpDvwVpbZBebUGugNrWz3WHJhmFIQ75WKSv
-         rlZQ==
-X-Gm-Message-State: AOAM532nD4rsEdBk6tfb4vCla1ms476wnpWw0QR8udOZNHuKsM2lvWOl
-	eDaC0hbqKo9of59YGH9CyU9OpKXQ
-X-Google-Smtp-Source: ABdhPJxDexFmEmOFXEFck+qYokIbZZDBTKylmDCLqTVjIXaHEtSlIckXPFgmMxR6Gg/rVSRgUpkrBA==
-X-Received: by 2002:a17:906:36c2:: with SMTP id b2mr16730074ejc.238.1596976521158;
-        Sun, 09 Aug 2020 05:35:21 -0700 (PDT)
+        bh=MiFhIul7hvgaqoanhK5IzFjTeu2znjoqFeuH74KJXTU=;
+        b=VT9QjhcObaA5FygsQSCzv1BS99H1pARkpz9DTJG3+WcZNlcp7HpkPpiN/Sc9t1seu5
+         Kx9y9q+lLYOefY94v1v88AjO2hNgkYEUqZYMOGLnCbFbf+Z3Px0HPZHk/niUuwwAQ7JI
+         PBvCf/aQgTMbubqTjOYV/J5xBBVOGFdKE7Bp4U0HmSDAqxTewsiZ1GwEGWfflCsqIU5O
+         gILEFIhLeceQ1oNUIJV+P9K/Mk3txLH/8cRb0HMfGAR0G1jq87AJIrmtwR0AsdUYrnSJ
+         A0ZarXfw2rQ/xotLOGZT0WNM3lvkwKCFtpzT93c0iczY4TlJFG1xPOuyYXTCIvmCKLGb
+         VILA==
+X-Gm-Message-State: AOAM533DJUVpCLBAD0O61WsqS/janr0QfuImTaEXRcSYe3RT5edfijZT
+	1O33qRJuzgtQc5nydrJcqsXxzNxx
+X-Google-Smtp-Source: ABdhPJz5fXE0yQmO5YTEQPyROPVR4G2YGUkQca4GmhkD2Sdoy41ZI7jf+lUtTZXj3YSe+ptpN9AqBA==
+X-Received: by 2002:a17:906:2296:: with SMTP id p22mr17138591eja.510.1596976522052;
+        Sun, 09 Aug 2020 05:35:22 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f102180f54bc478636fc7f8.dip0.t-ipconnect.de. [2003:f0:7f10:2180:f54b:c478:636f:c7f8])
-        by smtp.gmail.com with ESMTPSA id b24sm10070260edn.33.2020.08.09.05.35.20
+        by smtp.gmail.com with ESMTPSA id b24sm10070260edn.33.2020.08.09.05.35.21
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 Aug 2020 05:35:20 -0700 (PDT)
+        Sun, 09 Aug 2020 05:35:21 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 4/6] gnome-help.bbclass: remove double FILES_${PN}-help entry
-Date: Sun,  9 Aug 2020 14:35:05 +0200
-Message-Id: <20200809123507.267616-4-schnitzeltony@gmail.com>
+Subject: [PATCH 5/6] gnome-calendar: initial add 3.36.2
+Date: Sun,  9 Aug 2020 14:35:06 +0200
+Message-Id: <20200809123507.267616-5-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200809123507.267616-1-schnitzeltony@gmail.com>
 References: <20200809123507.267616-1-schnitzeltony@gmail.com>
@@ -52,28 +52,63 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-When I wrote this class meta-qt5-extra's qt5-translation.bbclass was taken
-as template. So this is a leftover which does not make sense: Variable is set
-differently few lines below.
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-gnome/classes/gnome-help.bbclass | 2 --
- 1 file changed, 2 deletions(-)
+ .../gnome-calendar/gnome-calendar_3.36.2.bb   | 32 +++++++++++++++++++
+ .../packagegroups/packagegroup-gnome-apps.bb  |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.36.2.bb
 
-diff --git a/meta-gnome/classes/gnome-help.bbclass b/meta-gnome/classes/gnome-help.bbclass
-index 967091ba4..9c4771ddc 100644
---- a/meta-gnome/classes/gnome-help.bbclass
-+++ b/meta-gnome/classes/gnome-help.bbclass
-@@ -9,8 +9,6 @@
- #   else
- #       pack all help files to ${PN}-help-<lingua>
- 
--FILES_${PN}-help = "${datadir}/*/translations"
--
- # Dummy to get yelp build & PACKAGE_NO_HELP_SPLIT set 1
- PACKAGES_append = " ${PN}-help"
- FILES_${PN}-help = "${datadir}/help"
+diff --git a/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.36.2.bb b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.36.2.bb
+new file mode 100644
+index 000000000..4605857f5
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.36.2.bb
+@@ -0,0 +1,32 @@
++SUMMARY = "GNOME calendar"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=8f0e2cd40e05189ec81232da84bd6e1a"
++
++SECTION = "x11/gnome"
++
++DEPENDS = " \
++    gtk+3 \
++    libical \
++    gsettings-desktop-schemas \
++    evolution-data-server \
++    libsoup-2.4 \
++    libdazzle \
++    libhandy \
++    libgweather \
++    geoclue \
++"
++
++GNOMEBASEBUILDCLASS = "meson"
++
++inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-version-is-even
++
++REQUIRED_DISTRO_FEATURES = "x11"
++
++SRC_URI[archive.sha256sum] = "d0b05345c0555a085e6e5426eab49494aba2826c856eb06fd7fdb762ec0c4c1f"
++
++FILES_${PN} += " \
++    ${datadir}/gnome-shell \
++    ${datadir}/metainfo \
++    ${datadir}/dbus-1 \
++"
++
+diff --git a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
+index 934101f9b..2d2d6b599 100644
+--- a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
++++ b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
+@@ -13,6 +13,7 @@ RDEPENDS_${PN} = " \
+     gedit \
+     ghex \
+     gnome-calculator \
++    gnome-calendar \
+     gnome-font-viewer \
+     gnome-photos \
+     gnome-terminal \
 -- 
 2.26.2
 
