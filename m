@@ -1,86 +1,104 @@
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
- by mx.groups.io with SMTP id smtpd.web11.23154.1596976524626153742
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web11.31050.1597003330564389118
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 09 Aug 2020 05:35:24 -0700
+ Sun, 09 Aug 2020 13:02:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=EGinBIPy;
- spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f54.google.com with SMTP id q4so4455199edv.13
-        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Aug 2020 05:35:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=c/hce1oY;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id c6so3673721pje.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Aug 2020 13:02:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=BJVgsP2pZT8n8o0VpSU/ChrFgJZatOZENdjKDNuSFZA=;
-        b=EGinBIPyzJXBz6zOhShOoSEd3hIab1T6VTXPGmF5N0kN6UWMzEXy4c3ukDJiWlX4Dw
-         w41sI7uC4vZLIdpYhgzf3W7ELEuQN6N3DcUU9CoW11Ouo0DVDmLHshCg9/MKm5CjnoFe
-         0jShKDjg0W78l9jBjWAoM3vqd3HBP4FJFaTqQ430KLQg2o0KK2HkNTQrPKP60n31KIl8
-         hoYuGKWi3yP40YfzxWg/5Eccl/UBiRpXFzcD8GWt/4+EdgL1sZRRsGVYuplnpuWt+ize
-         KYKn/gyXu0vue/HjnWawmr87IwoxxjqRyUh5LigrGzHVwDyUzkR4GYqKny3hYhfBCvc4
-         uUBg==
+        bh=ueAw8W5mId2q2wVpB8TpWmnUzrLNESiOEzr5/GEq1uA=;
+        b=c/hce1oYT5idN5YUFPSinlphbO4236eBCCNCMrV9bZmPWWWEvyLOxBerBkGsumu498
+         L7u90He8CcFD67ZJpQYhgqXnjmVIlhda2W7TD2Ggwc1wlZuoWnhwBKEMy9wYgV9Wdykb
+         dogEv6E5bqbepYYN0meNUNdWcK+Rh2B6mhYJFoJLXQ11R87kTnpYSKxqBdCS0jK2Jq81
+         iNTELBDWzkDSRwfAUpWrhGFDMCB+SNNdSg6Fju/dZYkrzmV9G8XH41TaeUvK1VTwQJgb
+         ecPK73EkYJBgr5GiVD7C86OkADnsFzS4K3AhL3o8AAsIIH9JLSP/e9TiP7+n4gxuQjnn
+         JlEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=BJVgsP2pZT8n8o0VpSU/ChrFgJZatOZENdjKDNuSFZA=;
-        b=foBX3tHZhaZviKX77qUXf1rmYLBkw/BbomjthKUms9A1/DJlq+D5yryyPSF+v+rctx
-         TmVQ7CylFHS9q9ebfq7bIr7gbpqLqsG+2G3X0PCiLhTOpMCUsTV9oynydmWatSGRCM0z
-         K4oNoa2ktzUiQTflivIv+1DJsIlWlDr5bXQ1o2+AlL+SmaR0XkWHxxfKSb+md6q0QJHs
-         JJcj2cNuufr8+8XE1o0gD1OUkzDtcWw4pKhM2dwirngPQdmmNUMZkJ71kJq/XqiosSCc
-         ZUkFjm+jqt+0nZe4jBVwKRaFisURTV9KdwdGRLRwC+s1Fn5FG1Xr2AGDv8mzq4IXpeWh
-         VzUw==
-X-Gm-Message-State: AOAM532Hhf/59u2fOxg/eMOHcvbbfXi53xFOhqv5jcE09VCzpbWBDqg/
-	49eNQ5Z58nLva1Ylq21HLvamvHUv
-X-Google-Smtp-Source: ABdhPJyzz32I7nQvUBl5jYxQkqZ4aEfF3Og/BljHcxu0jwSZUX5xZyNDC3vvbUp3qw7AbY05IAHl5A==
-X-Received: by 2002:a50:9fc9:: with SMTP id c67mr17148322edf.69.1596976522974;
-        Sun, 09 Aug 2020 05:35:22 -0700 (PDT)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300f07f102180f54bc478636fc7f8.dip0.t-ipconnect.de. [2003:f0:7f10:2180:f54b:c478:636f:c7f8])
-        by smtp.gmail.com with ESMTPSA id b24sm10070260edn.33.2020.08.09.05.35.22
-        for <openembedded-devel@lists.openembedded.org>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ueAw8W5mId2q2wVpB8TpWmnUzrLNESiOEzr5/GEq1uA=;
+        b=J3//aKuOUxX8iPMskroQbYUmsVNzTS+wAh8C4j0cgqkyXXMI4/NuZZ3MaZf2LjBKxG
+         snguProRKJmseGbod8pb9wyRk/qXyuTaI7EIE+G5/rE3scuJ+0hwsYq45NhNRD2nz1z8
+         G+gvHyKoDZUaMEPPCZXnc+JtyPj1dU+qPlFHg5HpylJq96kyn7gFebzDCJ/ID3QO1hmW
+         FwgJleQ8HU2tLhpCX9K3kRRJsaqEU4R5/dIBeUlwwf1ncQVwnP6OewndXSeOU38onmOd
+         h50RkhBGgYurvmMULmloroTcdPbDxeSSDjBHA+FHnRnR9epHmlPsBsuc9gmQJ1cdTdVy
+         cUcw==
+X-Gm-Message-State: AOAM530213+etvZZifXCWBjvkrV/VywGNiwFTBCbriyPWwXy02cjdSUu
+	jMVx3QyhMe96ofwzU4A0bA1MRYu5inA=
+X-Google-Smtp-Source: ABdhPJw9xPxu8TYQPbrfXjvQiN5TJVKNCuUtahR0oxM64MGVV4l/ZcpqJUBwyEm+NlejHP09KATXIA==
+X-Received: by 2002:a17:90a:ea82:: with SMTP id h2mr23524858pjz.75.1597003329635;
+        Sun, 09 Aug 2020 13:02:09 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
+        by smtp.gmail.com with ESMTPSA id y4sm19560215pff.44.2020.08.09.13.02.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 Aug 2020 05:35:22 -0700 (PDT)
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+        Sun, 09 Aug 2020 13:02:09 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 6/6] imagemagick: upgrade 7.0.9_13 -> 7.0.10_25
-Date: Sun,  9 Aug 2020 14:35:07 +0200
-Message-Id: <20200809123507.267616-6-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200809123507.267616-1-schnitzeltony@gmail.com>
-References: <20200809123507.267616-1-schnitzeltony@gmail.com>
+Cc: Colin McAllister <colinmca242@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH v2] python3-pynacl: Added recipe
+Date: Sun,  9 Aug 2020 13:02:07 -0700
+Message-Id: <20200809200207.2328601-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Changelog would be > 300 lines so for those intersted see [1]
+From: Colin McAllister <colinmca242@gmail.com>
 
-[1] https://github.com/ImageMagick/ImageMagick/blob/master/ChangeLog
+Created Python3 recipe for PyNaCl.
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Colin McAllister <colinmca242@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{imagemagick_7.0.9.bb => imagemagick_7.0.10.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/imagemagick/{imagemagick_7.0.9.bb => imagemagick_7.0.10.bb} (98%)
+ .../python/python3-pynacl_1.4.0.bb            | 32 +++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pynacl_1.4.0.bb
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.9.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-similarity index 98%
-rename from meta-oe/recipes-support/imagemagick/imagemagick_7.0.9.bb
-rename to meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-index 3f7d06e26..804faf02e 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.9.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-@@ -9,9 +9,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=41b4fa9af60c88e61484b02c0561181a"
- DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
- 
- BASE_PV := "${PV}"
--PV .= "_13"
-+PV .= "_25"
- SRC_URI = "git://github.com/ImageMagick/ImageMagick.git "
--SRCREV = "15b935d64f613b5a0fc9d3fead5c6ec1b0e3908f"
-+SRCREV = "8b4e00829eb84d4e7b4da11acf1f98f1e8166e5b"
- 
- S = "${WORKDIR}/git"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-pynacl_1.4.0.bb b/meta-python/recipes-devtools/python/python3-pynacl_1.4.0.bb
+new file mode 100644
+index 0000000000..6fd42ebf81
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pynacl_1.4.0.bb
+@@ -0,0 +1,32 @@
++SUMMARY = "Python binding to the Networking and Cryptography (NaCl) library"
++DESCRIPTION = "Python binding to the Networking and Cryptography (NaCl) library"
++HOMEPAGE = "https://github.com/pyca/pynacl"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=8cc789b082b3d97e1ccc5261f8594d3f"
++
++SRC_URI[md5sum] = "8c6c57893327a694c72510fb620e4744"
++SRC_URI[sha256sum] = "54e9a2c849c742006516ad56a88f5c74bf2ce92c9f67435187c3c5953b346505"
++
++PYPI_PACKAGE = "PyNaCl"
++
++inherit pypi setuptools3
++
++DEPENDS += "\
++    ${PYTHON_PN}-wheel-native \
++    ${PYTHON_PN}-cffi-native \
++    libsodium \
++"
++
++RDEPENDS_${PN} = "\
++    ${PYTHON_PN}-six \
++    ${PYTHON_PN}-cffi \
++    libsodium \
++"
++
++do_compile_prepend() {
++    export SODIUM_INSTALL=system
++}
++
++do_install_prepend() {
++    export SODIUM_INSTALL=system
++}
 -- 
-2.26.2
+2.28.0
 
