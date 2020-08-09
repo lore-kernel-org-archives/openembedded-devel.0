@@ -1,83 +1,86 @@
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web12.19521.1596954895207431493
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web12.22905.1596976519718386806
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Aug 2020 23:34:55 -0700
+ Sun, 09 Aug 2020 05:35:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=JSgW9tMp;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id u10so3220618plr.7
-        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Aug 2020 23:34:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=rtTja+zU;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id f24so6700568ejx.6
+        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Aug 2020 05:35:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=V0ouYU4IyecRC5AjoCiPPiSGwm7VKaMjdDdlIqZ636E=;
-        b=JSgW9tMpwBRCzo9sqvLhdIhfu/vBwzW0GK7CVTn6wdC1HPdIlSbBUHgADHpnZWyHzo
-         D6tTTHjNRZDWtx6r+HQXdT6DfoDso7SKsSNTN9GaB8Fb4k+cAuyxas28QtWzPiH9dDFy
-         cw/b7rc+5H0n34c9hKbuRoR6W1wcade9gS7idUekbRmn4K8dr5xAq4ONHapgN5IWdljT
-         agqRhnUSYkVA1mSBnie4gtmSN0XTgNNb+2alrqRqFIc4l6HteT7OEzgVuj0JdZPS79ME
-         t93vofGc/0qxyVSzMR8SrrL4HE3OcJpU8f4yBZWe0/CdPnjPyu6actPcWcaoJ7MdDaWd
-         NMjg==
+        bh=T4shGMTtUYXjzp3MDUNXyogsJw+TieEEkZ2LDjUrR48=;
+        b=rtTja+zU6O+srns51mXFOOv+EkUdVnBOInq1iSbOh9ueQn6hMOn254reeo2F99XuTa
+         gkof+XwLqwSMyPaHjUXhm2LzLDzUrcHnYNN3+krrE1BIQuEWtgPC8Pu4c3TX/G7mXjbl
+         qbF1ZbQ69cCctSmpBOy1BwrmZoPILAKdJnNP843y2sowmeLxa9HBplTzaCNk1QatLtCl
+         bADY9Ozi46a/KPQzsZBqaqKpAzE8txVtmWy8c6JwMo3OuVsWcpnMkInlpAmjL8x4o0LR
+         7MmQ7MjcnNkkImqKLBnkugSuyDBUFKuyLG/1cLozqbw2s5SqYnSRnRLfwFmXeobJGl7t
+         dWqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=V0ouYU4IyecRC5AjoCiPPiSGwm7VKaMjdDdlIqZ636E=;
-        b=RWEbKgq414FpzJ+tr2+5eZKovGpYNFHNfyqqnaGA/lK1vcIXW1da0CEXHlglfHiI8b
-         dpo6l7/arMH9umKSCrxDA3CdTDfepeE/96mkj2Ekt6IrsoKnLUgeG7eOqgXV+PF4VvpD
-         ArusZyNYIUYmu2zAlBPVvlGAc4czeYXdcvQ9+9UB5cZuBUmyl8Dv30+/SyIyblc3HB57
-         EwoA4PHB1PLisfQ+D+xA9jbEW215GQ5qfFGpS0pfnjnJPbKezLnF7nntmQT5b9X9c7ou
-         dTkKKV29SJhY1bV/HFJQr8gZF2ySVEmhXrR7ojEJeaiiovyFJ8M9DzZHfH2ZX+PxcbkP
-         ktZw==
-X-Gm-Message-State: AOAM533QM29ljVt2BCgq+fvVvpd6CbuplXE/FSMjN0lHptk4iXP5Rzhz
-	BRc1abGdqWdEe7lQzbBFqOf4vPZKQqE=
-X-Google-Smtp-Source: ABdhPJzJua2hZ9dLCh/AwUoK1E24qVtdIaDGmkeL+jXeUEkI/NiA4JrJGu8uUmqZn8qBP2Jf8ReVwQ==
-X-Received: by 2002:a17:90a:e292:: with SMTP id d18mr21692363pjz.181.1596954894462;
-        Sat, 08 Aug 2020 23:34:54 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id c207sm17796017pfc.64.2020.08.08.23.34.53
+        bh=T4shGMTtUYXjzp3MDUNXyogsJw+TieEEkZ2LDjUrR48=;
+        b=uGpIhO9BXsIJyyD0hu4wZsnaDQp1rPmwxzIUmx3Dz/zTRTDiaeJL95aM2LwInrNZXx
+         +l47rdTOXaieX+CvAQIaK/WT0Ps7ccze/0NZeBtT8ZdS02SrFA38SgH8dhb9VCgIrJws
+         MRn74fs9AFlxWIPjf/5X/DgCZ0vlI21WnTU5cxB9k+NYFSWG4oPbOOfdhRMAVkWCkOdc
+         DaSYrKeX150SiaN/aZsx0J7vaY9kBomcFw2kgB3u6886KLpwfBjJStzK4wGQTRPHaK4/
+         0FZAirwjtdeZZx8iHe3zUMV7uvIDOqbrXt09UnX5eOaAhpHAlD1/w11Q/krO76DEJWwg
+         xkLA==
+X-Gm-Message-State: AOAM533zv343dmwGcABL+T3j4RlFp0qqcr9WCI7TGN7K7RDZgU/y/RPQ
+	7lt+bWHoi9D/8gYx6BeXvUZpsV9Q
+X-Google-Smtp-Source: ABdhPJy5gjqU6CpyP0hudJny6bAS9HvePfmKl7MYWnUKGkJAZn2LdlPUVMOHNHnJvu4GUklsdFhHpg==
+X-Received: by 2002:a17:906:924b:: with SMTP id c11mr18055174ejx.75.1596976517748;
+        Sun, 09 Aug 2020 05:35:17 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from superandy.speedport.ip (p200300f07f102180f54bc478636fc7f8.dip0.t-ipconnect.de. [2003:f0:7f10:2180:f54b:c478:636f:c7f8])
+        by smtp.gmail.com with ESMTPSA id b24sm10070260edn.33.2020.08.09.05.35.16
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 08 Aug 2020 23:34:53 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Sun, 09 Aug 2020 05:35:17 -0700 (PDT)
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] iwd: Module load dir should be relative to root_dir
-Date: Sat,  8 Aug 2020 23:34:51 -0700
-Message-Id: <20200809063451.3326500-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
+Subject: [PATCH 1/6] tumbler: upgrade 0.2.8 -> 0.2.9
+Date: Sun,  9 Aug 2020 14:35:02 +0200
+Message-Id: <20200809123507.267616-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This is autodetected by configure from systemd.pc and it depends on
-value of root_dir ( usrmerge ) and not /usr being hardcoded eg. in
-nonarch_libdir this has been fixed in systemd [1]
+Release notes for 0.2.9
+=======================
+This is a bugfix release from the stable xfce-4.14 branch. This release
+addresses the issue described in Bug #28 and partially solved by the
+previous release 0.2.8. The issue now is completely solved by adding
+the correct orientation handling when fallback code for generating jpeg
+thumbnail takes place.
 
-Fixes
-ERROR: iwd-1.8-r0 do_package: QA Issue: iwd: Files/directories were installed but not shipped in any package:
-/lib/modules-load.d
-/lib/modules-load.d/pkcs8.conf
-
-[1] https://github.com/systemd/systemd/commit/4a56315a990b802860170ecd1bbd3eb68e14a38b
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-oe/recipes-connectivity/iwd/iwd_1.8.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../tumbler/{tumbler_0.2.8.bb => tumbler_0.2.9.bb}             | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-xfce/recipes-xfce/tumbler/{tumbler_0.2.8.bb => tumbler_0.2.9.bb} (88%)
 
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.8.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.8.bb
-index bfbf3c7fa6..b1e6fea2ff 100644
---- a/meta-oe/recipes-connectivity/iwd/iwd_1.8.bb
-+++ b/meta-oe/recipes-connectivity/iwd/iwd_1.8.bb
-@@ -41,7 +41,7 @@ do_install_append() {
+diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.2.8.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_0.2.9.bb
+similarity index 88%
+rename from meta-xfce/recipes-xfce/tumbler/tumbler_0.2.8.bb
+rename to meta-xfce/recipes-xfce/tumbler/tumbler_0.2.9.bb
+index e0d4845a0..d364c8033 100644
+--- a/meta-xfce/recipes-xfce/tumbler/tumbler_0.2.8.bb
++++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.2.9.bb
+@@ -6,8 +6,7 @@ DEPENDS = "freetype gdk-pixbuf poppler curl xfce4-dev-tools-native libxml2 libgs
  
- FILES_${PN} += " \
-     ${datadir}/dbus-1 \
--    ${nonarch_libdir}/modules-load.d \
-+    ${nonarch_base_libdir}/modules-load.d \
-     ${systemd_unitdir}/network \
- "
+ inherit xfce gtk-doc
+ 
+-SRC_URI[md5sum] = "5d541608b3962fd2b16e23a266fd7a10"
+-SRC_URI[sha256sum] = "0999b9a3deb57010956db6630ae7205813999147043171049a7b6c333be93e96"
++SRC_URI[sha256sum] = "6508906f03e5a6ae3f6503b71b056df47d336d5504f39df6ce0bb9c5248007b6"
+ 
+ INSANE_SKIP_${PN} = "dev-so"
  
 -- 
-2.28.0
+2.26.2
 
