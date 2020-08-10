@@ -1,111 +1,195 @@
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.web10.39917.1597042012703492753
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.40861.1597048454835198445
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 09 Aug 2020 23:46:53 -0700
+ Mon, 10 Aug 2020 01:34:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=H9qTSOYr;
- spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-wr1-f53.google.com with SMTP id p20so7061974wrf.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Aug 2020 23:46:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=VAPdjjbVnRGa0qiwJGMEpKEj0C1A+2fSeVZFouLh7OQ=;
-        b=H9qTSOYrjHYgBPwawfuJvz/+zRBIRS28Bd4LZtVm/xDsu+4kZ3okpMZD3ISOsy2anx
-         FfhJ3R8U64lxAt3M/uxOntD0PalRC2lCrI4Qz+HHshch6Vya/hfN2ILLa1QMqvJJj948
-         keLF9ScM8Wtc4m/gHxPTDqc/jNaDQWhnme1OY/SwZ0/W9t0D42smXMmJM0+RvG+/GP3H
-         UCqshBEpAW5KDI61/2Q8HF5CCC59L5koDE5qkmmEo5grp6nY6ZuOhpANi178Xr1ufOd8
-         pQFs4l473L1lpXBKMAk8QtIw7/1i5Tc3w8YQdHKzzMoxHwC1hTk5QatO+05Xdy7Wf3lW
-         Dqkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=VAPdjjbVnRGa0qiwJGMEpKEj0C1A+2fSeVZFouLh7OQ=;
-        b=h71z5Y9Dr9bPBiCXgsetYM8+ubOplqQ1ADGnae/NLOZ20fuliFP1OrdpSaXBojKoL3
-         b2UGr3Fu3mf331ysOXsGyxRnGCTGUNF+jzZycRQQ3ujWtNdr8xbwRFhDpT8JfhaT6LXN
-         oZXZEwLLGGK0xiEDP+pZPhRbdw6xFVD5583S9iRV3Z1IrUb7hwTtlaxgNefWGN2nFD6t
-         dV94dD+0t/HervVnRtZPyxJlWoUtvg7KzyRw06EBefVd5Cbb0qgL+x0/OioUhMlXSi1j
-         bJ7yVh8vB7C9mA4IV45Lhqe8sxDGdmdst6r8YxNTFLUGHV2hCJAHjslZ5FNQbGm+/mbA
-         nPkA==
-X-Gm-Message-State: AOAM531o7SyIO5LnC7S5sCGMskOaZCVElH7emd2ssgDIcfjYgP7zuJwd
-	rkhL2ntEmhU2fPTnPYuMMuDPunvC
-X-Google-Smtp-Source: ABdhPJxrRzOKt8lFis4Rmzd0bSzuAwPQOCEbUnjShOS9maxVwxJgp/WQEKE2dAau357WtlordGiyTw==
-X-Received: by 2002:a5d:4dd0:: with SMTP id f16mr22804997wru.408.1597042010966;
-        Sun, 09 Aug 2020 23:46:50 -0700 (PDT)
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from localhost.localdomain ([5.170.82.145])
-        by smtp.gmail.com with ESMTPSA id e16sm19410479wrx.30.2020.08.09.23.46.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 Aug 2020 23:46:50 -0700 (PDT)
-From: "Gianfranco" <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH 5/5] dlt-daemon: fix build with upstream-proposed patch for MUSL libc
-Date: Mon, 10 Aug 2020 08:46:33 +0200
-Message-Id: <20200810064633.20079-5-costamagnagianfranco@yahoo.it>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: mingli.yu@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 07A8XfFc002875
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Aug 2020 01:34:02 -0700
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.40) with Microsoft SMTP Server id 14.3.487.0; Mon, 10 Aug 2020
+ 01:33:38 -0700
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] fio: upgrade to 3.21
+Date: Mon, 10 Aug 2020 01:33:37 -0700
+Message-ID: <20200810083337.126739-1-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200810064633.20079-1-costamagnagianfranco@yahoo.it>
-References: <20200810064633.20079-1-costamagnagianfranco@yahoo.it>
+MIME-Version: 1.0
+Content-Type: text/plain
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+From: Mingli Yu <mingli.yu@windriver.com>
+
+Remove 2 patches as these logics have been already included in the
+new version as [1] and [2].
+
+[1] https://git.kernel.dk/?p=fio.git;a=commit;h=8629f5f5c24e8a02c0a168cff22a40ec0788bb2d
+[2] https://git.kernel.dk/?p=fio.git;a=commit;h=10ee8843e79763e8b6ff967f8a2b5d5b92411f90
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- .../dlt-daemon/dlt-daemon/241.patch           | 30 +++++++++++++++++++
- .../dlt-daemon/dlt-daemon_2.18.5.bb           |  1 +
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/241.patch
+ .../0001-update-the-interpreter-paths.patch   | 83 -------------------
+ .../fio/files/python3_shebangs.patch          | 38 ---------
+ .../fio/{fio_3.17.bb => fio_3.21.bb}          |  4 +-
+ 3 files changed, 1 insertion(+), 124 deletions(-)
+ delete mode 100644 meta-oe/recipes-benchmark/fio/files/0001-update-the-interpreter-paths.patch
+ delete mode 100644 meta-oe/recipes-benchmark/fio/files/python3_shebangs.patch
+ rename meta-oe/recipes-benchmark/fio/{fio_3.17.bb => fio_3.21.bb} (91%)
 
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/241.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/241.patch
-new file mode 100644
-index 000000000..7d8f22ec7
---- /dev/null
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/241.patch
-@@ -0,0 +1,30 @@
-+From b8f9919f000e642fc8970d0a42c1bdadf5a9d720 Mon Sep 17 00:00:00 2001
-+From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-+Date: Mon, 10 Aug 2020 08:30:34 +0200
-+Subject: [PATCH] sd-daemon.c: Fix build with newer glibc and musl libc
-+
-+Reported by Khem Raj on meta-oe list
-+
-+TOPDIR/build/tmp/work/armv7vet2hf-neon-yoe-linux-musleabi/dlt-daemon/2.18.5-r0/recipe-sysroot/usr/include/sys/fcntl.h:1:2: error: redirecting incorrect #include <sys/fcntl.h> to <fcntl.h> [-Werror,-W#warnings]
-+ ^
-+1 error generated.
-+
-+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
-+---
-+ systemd/3rdparty/sd-daemon.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/systemd/3rdparty/sd-daemon.c b/systemd/3rdparty/sd-daemon.c
-+index 88936d2..de3f985 100644
-+--- a/systemd/3rdparty/sd-daemon.c
-++++ b/systemd/3rdparty/sd-daemon.c
-+@@ -35,7 +35,7 @@
-+ #ifdef __BIONIC__
-+ #include <linux/fcntl.h>
-+ #else
-+-#include <sys/fcntl.h>
-++#include <fcntl.h>
-+ #endif
-+ #include <netinet/in.h>
-+ #include <stdlib.h>
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
-index e7a194ac8..3a2b40515 100644
---- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
-@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=https \
-     file://0002-Don-t-execute-processes-as-a-specific-user.patch \
-     file://0004-Modify-systemd-config-directory.patch \
-     file://238.patch \
-+    file://241.patch \
- "
- SRCREV = "f1ac087c766827b1d0ed9c3a814b3cc052e948f2"
+diff --git a/meta-oe/recipes-benchmark/fio/files/0001-update-the-interpreter-paths.patch b/meta-oe/recipes-benchmark/fio/files/0001-update-the-interpreter-paths.patch
+deleted file mode 100644
+index c9c3a08df..000000000
+--- a/meta-oe/recipes-benchmark/fio/files/0001-update-the-interpreter-paths.patch
++++ /dev/null
+@@ -1,83 +0,0 @@
+-From 55078e494bdf7da7dd9cb76077fa7ac2a66b6dd6 Mon Sep 17 00:00:00 2001
+-From: Mingli Yu <mingli.yu@windriver.com>
+-Date: Fri, 20 Jul 2018 02:33:25 -0700
+-Subject: [PATCH] update the interpreter paths
+-
+-Update the interpreter path to make it more
+-compatible
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+----
+- tools/fio_jsonplus_clat2csv     | 2 +-
+- tools/fiologparser.py           | 2 +-
+- tools/genfio                    | 2 +-
+- tools/hist/fiologparser_hist.py | 2 +-
+- tools/hist/half-bins.py         | 2 +-
+- tools/plot/fio2gnuplot          | 2 +-
+- 6 files changed, 6 insertions(+), 6 deletions(-)
+-
+-diff --git a/tools/fio_jsonplus_clat2csv b/tools/fio_jsonplus_clat2csv
+-index 78a007e5..0524b6e6 100755
+---- a/tools/fio_jsonplus_clat2csv
+-+++ b/tools/fio_jsonplus_clat2csv
+-@@ -1,4 +1,4 @@
+--#!/usr/bin/python2.7
+-+#!/usr/bin/env python
+- # Note: this script is python2 and python3 compatible.
+- #
+- # fio_jsonplus_clat2csv
+-diff --git a/tools/fiologparser.py b/tools/fiologparser.py
+-index cc29f1c7..ea60e783 100755
+---- a/tools/fiologparser.py
+-+++ b/tools/fiologparser.py
+-@@ -1,4 +1,4 @@
+--#!/usr/bin/python2.7
+-+#!/usr/bin/env python
+- # Note: this script is python2 and python 3 compatible.
+- #
+- # fiologparser.py
+-diff --git a/tools/genfio b/tools/genfio
+-index 286d814d..8518bbcc 100755
+---- a/tools/genfio
+-+++ b/tools/genfio
+-@@ -1,4 +1,4 @@
+--#!/usr/bin/bash
+-+#!/bin/bash
+- #
+- #  Copyright (C) 2013 eNovance SAS <licensing@enovance.com>
+- #  Author: Erwan Velu  <erwan@enovance.com>
+-diff --git a/tools/hist/fiologparser_hist.py b/tools/hist/fiologparser_hist.py
+-index 8910d5fa..b77c2933 100755
+---- a/tools/hist/fiologparser_hist.py
+-+++ b/tools/hist/fiologparser_hist.py
+-@@ -1,4 +1,4 @@
+--#!/usr/bin/python2.7
+-+#!/usr/bin/env python
+- """ 
+-     Utility for converting *_clat_hist* files generated by fio into latency statistics.
+-     
+-diff --git a/tools/hist/half-bins.py b/tools/hist/half-bins.py
+-index 1bba8ff7..58d53e36 100755
+---- a/tools/hist/half-bins.py
+-+++ b/tools/hist/half-bins.py
+-@@ -1,4 +1,4 @@
+--#!/usr/bin/python2.7
+-+#!/usr/bin/env python
+- """ Cut the number bins in half in fio histogram output. Example usage:
+- 
+-         $ half-bins.py -c 2 output_clat_hist.1.log > smaller_clat_hist.1.log
+-diff --git a/tools/plot/fio2gnuplot b/tools/plot/fio2gnuplot
+-index 4d1815cf..509141af 100755
+---- a/tools/plot/fio2gnuplot
+-+++ b/tools/plot/fio2gnuplot
+-@@ -1,4 +1,4 @@
+--#!/usr/bin/python2.7
+-+#!/usr/bin/env python
+- # Note: this script is python2 and python3 compatible.
+- #
+- #  Copyright (C) 2013 eNovance SAS <licensing@enovance.com>
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-benchmark/fio/files/python3_shebangs.patch b/meta-oe/recipes-benchmark/fio/files/python3_shebangs.patch
+deleted file mode 100644
+index 068b02164..000000000
+--- a/meta-oe/recipes-benchmark/fio/files/python3_shebangs.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-python3: change four shebangs to python3
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Joe Slater <joe.slater@windriver.com>
+-
+---- a/tools/fio_jsonplus_clat2csv
+-+++ b/tools/fio_jsonplus_clat2csv
+-@@ -1,4 +1,4 @@
+--#!/usr/bin/env python
+-+#!/usr/bin/env python3
+- # Note: this script is python2 and python3 compatible.
+- #
+- # fio_jsonplus_clat2csv
+---- a/tools/fiologparser.py
+-+++ b/tools/fiologparser.py
+-@@ -1,4 +1,4 @@
+--#!/usr/bin/env python
+-+#!/usr/bin/env python3
+- # Note: this script is python2 and python 3 compatible.
+- #
+- # fiologparser.py
+---- a/tools/hist/fiologparser_hist.py
+-+++ b/tools/hist/fiologparser_hist.py
+-@@ -1,4 +1,4 @@
+--#!/usr/bin/env python
+-+#!/usr/bin/env python3
+- """ 
+-     Utility for converting *_clat_hist* files generated by fio into latency statistics.
+-     
+---- a/tools/plot/fio2gnuplot
+-+++ b/tools/plot/fio2gnuplot
+-@@ -1,4 +1,4 @@
+--#!/usr/bin/env python
+-+#!/usr/bin/env python3
+- # Note: this script is python2 and python3 compatible.
+- #
+- #  Copyright (C) 2013 eNovance SAS <licensing@enovance.com>
+diff --git a/meta-oe/recipes-benchmark/fio/fio_3.17.bb b/meta-oe/recipes-benchmark/fio/fio_3.21.bb
+similarity index 91%
+rename from meta-oe/recipes-benchmark/fio/fio_3.17.bb
+rename to meta-oe/recipes-benchmark/fio/fio_3.21.bb
+index 759d1087c..83f38fc7b 100644
+--- a/meta-oe/recipes-benchmark/fio/fio_3.17.bb
++++ b/meta-oe/recipes-benchmark/fio/fio_3.21.bb
+@@ -22,10 +22,8 @@ PACKAGECONFIG_NUMA_armeb = ""
+ PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
+ PACKAGECONFIG[numa] = ",--disable-numa,numactl"
  
+-SRCREV = "08ce9dc20b8a4e55db7af6d869ddfa49b4a02d03"
++SRCREV = "d13596b225baf61425a9ca92b0583fc3fa97765d"
+ SRC_URI = "git://git.kernel.dk/fio.git \
+-          file://0001-update-the-interpreter-paths.patch \
+-          file://python3_shebangs.patch \
+ "
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.17.1
 
