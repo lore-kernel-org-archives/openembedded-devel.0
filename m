@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.46326.1597070613100355071
+ by mx.groups.io with SMTP id smtpd.web11.46327.1597070613591664058
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 10 Aug 2020 07:43:33 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=59248 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k591Q-0008Tw-0V; Mon, 10 Aug 2020 17:43:32 +0300
+	id 1k591Q-0008Tw-Uj; Mon, 10 Aug 2020 17:43:33 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 6/7] python3-prompt-toolkit: Upgrade 3.0.5 -> 3.0.6
-Date: Mon, 10 Aug 2020 17:43:17 +0300
-Message-Id: <20200810144318.17106-6-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 7/7] python3-cmd2: Upgrade 1.2.1 -> 1.3.1
+Date: Mon, 10 Aug 2020 17:43:18 +0300
+Message-Id: <20200810144318.17106-7-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200810144318.17106-1-leon.anavi@konsulko.com>
 References: <20200810144318.17106-1-leon.anavi@konsulko.com>
@@ -30,59 +30,40 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.0.6:
+Upgrade to release 1.3.1:
 
-New features:
-- The SSH/Telnet adaptors have been refactored and improved in
-  several ways.
-  * Handle terminal types for both telnet and SSH sessions.
-  * Added pipe input abstraction. (base class for `PosixPipeInput`
-    and `Win32PipeInput`).
-  * The color depth logic has been refactored and moved to the
-    `Output` implementations. Added `get_default_color_depth`
-    method to `Output` objects.
-  * All line feets are now preceded by a carriage return in the
-    telnet connection stdout.
-- Introduce `REPLACE_SINGLE` input mode for Vi key bindings.
-- Improvements to the checkbox implementation:
-    * Hide the scrollbar for a single checkbox.
-    * Added a "checked" setter to the checkbox.
-- Expose `KeyPressEvent` in key_binding/__init__.py (often used in
-  type annotations).
-- The renderer has been optimized so that no trailing spaces are
-  generated (this improves copying in some terminals).
-
-Fixes:
-- Ignore F21..F24 key bindings by default.
-- Fix auto_suggest key bindings when suggestion text is empty.
-- Bugfix in SIGWINCH handling.
-- Handle bug in HSplit/VSplit when the number of children is zero.
-- Bugfix in CPR handling in renderer. Proper cancellation of
-  pending tasks.
-- Ensure rprompt aligns with input.
-- Use `sys.stdin.encoding` for decoding stdin stream.
+- Fixed issue determining whether an argparse completer function
+  required a reference to a containing CommandSet. Also resolves
+  issues determining the correct CommandSet instance when calling
+  the argparse argument completer function. Manifested as a
+  TypeError when using cmd2.Cmd.path_complete as a completer for
+  an argparse-based command defined in a CommandSet.
+- Added CommandSet - Enables defining a separate loadable module
+  of commands to register/unregister with your cmd2 application.
+- Marked with_argparser_and_unknown_args pending deprecation and
+  consolidated implementation into with_argparser
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...rompt-toolkit_3.0.5.bb => python3-prompt-toolkit_3.0.6.bb} | 4 ++--
+ .../python/{python3-cmd2_1.2.1.bb => python3-cmd2_1.3.1.bb}   | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_3.0.5.bb => python3-prompt-toolkit_3.0.6.bb} (80%)
+ rename meta-python/recipes-devtools/python/{python3-cmd2_1.2.1.bb => python3-cmd2_1.3.1.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.5.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.6.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.5.bb
-rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.6.bb
-index 78fdbca4f..806e67c09 100644
---- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.6.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://python-prompt-toolkit.readthedocs.io/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
+diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.2.1.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.3.1.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-cmd2_1.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-cmd2_1.3.1.bb
+index cb52ecfbb..15b10d0f5 100644
+--- a/meta-python/recipes-devtools/python/python3-cmd2_1.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-cmd2_1.3.1.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def"
  
--SRC_URI[md5sum] = "96ba0be8d3145eb70e3da25654987670"
--SRC_URI[sha256sum] = "563d1a4140b63ff9dd587bda9557cffb2fe73650205ab6f4383092fb882e7dc8"
-+SRC_URI[md5sum] = "e50cb328715b338480d8d29dda54ff5d"
-+SRC_URI[sha256sum] = "7630ab85a23302839a0f26b31cc24f518e6155dea1ed395ea61b42c45941b6a6"
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+ 
+-SRC_URI[md5sum] = "0ab5f4d8ad6a9099202ed887358102f2"
+-SRC_URI[sha256sum] = "5a5d3361fadada16cae0c99b65eba5d49d587fc2e02b3afb058da1872871e7a9"
++SRC_URI[md5sum] = "9f0af0810da98a30ac92f1e4e7a8c8ab"
++SRC_URI[sha256sum] = "c86f3b8348798732759c9d53cbcb6258a8f21f60c1a1268e942d24c9dc50b4c6"
  
  inherit pypi setuptools3
  
