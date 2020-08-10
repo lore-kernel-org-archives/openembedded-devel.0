@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.46460.1597070610888746541
+ by mx.groups.io with SMTP id smtpd.web12.46129.1597070611291427279
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 10 Aug 2020 07:43:31 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=59248 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k591N-0008Tw-93; Mon, 10 Aug 2020 17:43:29 +0300
+	id 1k591O-0008Tw-BA; Mon, 10 Aug 2020 17:43:31 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/7] python3-argexec: Upgrade 1.0.2 -> 1.0.3
-Date: Mon, 10 Aug 2020 17:43:13 +0300
-Message-Id: <20200810144318.17106-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/7] python3-cantools: Upgrade 35.1.0 -> 35.3.0
+Date: Mon, 10 Aug 2020 17:43:15 +0300
+Message-Id: <20200810144318.17106-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200810144318.17106-1-leon.anavi@konsulko.com>
 References: <20200810144318.17106-1-leon.anavi@konsulko.com>
@@ -30,34 +30,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.0.3:
+Upgrade to release 35.3.0:
 
-- Handle calls to decorated functions from non-__main__ modules
+- Fix dump of signal types in DBC files
+- Fix SIG_VALTYPE_ item on DBC dump for extended frame id messages
+- Fix compile error
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-argexec_1.0.2.bb => python3-argexec_1.0.3.bb}    | 4 ++--
+ ...{python3-cantools_35.1.0.bb => python3-cantools_35.3.0.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-argexec_1.0.2.bb => python3-argexec_1.0.3.bb} (72%)
+ rename meta-python/recipes-devtools/python/{python3-cantools_35.1.0.bb => python3-cantools_35.3.0.bb} (64%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-argexec_1.0.2.bb b/meta-python/recipes-devtools/python/python3-argexec_1.0.3.bb
-similarity index 72%
-rename from meta-python/recipes-devtools/python/python3-argexec_1.0.2.bb
-rename to meta-python/recipes-devtools/python/python3-argexec_1.0.3.bb
-index 179e07127..a26835b60 100644
---- a/meta-python/recipes-devtools/python/python3-argexec_1.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-argexec_1.0.3.bb
-@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ea70b07c354e36056bd35e17c9c3face"
+diff --git a/meta-python/recipes-devtools/python/python3-cantools_35.1.0.bb b/meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb
+similarity index 64%
+rename from meta-python/recipes-devtools/python/python3-cantools_35.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb
+index a9638fbd2..c79e51e33 100644
+--- a/meta-python/recipes-devtools/python/python3-cantools_35.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/eerimoq/cantools"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
  
- inherit pypi setuptools3
+-SRC_URI[md5sum] = "46b71bbfec33146d9dbba708489a8ae2"
+-SRC_URI[sha256sum] = "bd0ac5b16bb7fe2ada0c9436c91a0b3795217bed7126296dde1565919a3f44f1"
++SRC_URI[md5sum] = "068514ac776e03ebaa8b2d02dd16fc77"
++SRC_URI[sha256sum] = "5e3a6f679ad3dcb31142e388e052187d5fc5bd481c4fc3b2791eaa1e681cca98"
  
--SRC_URI[md5sum] = "9fac09884c54db79e57ab80f0c423794"
--SRC_URI[sha256sum] = "e271286b280f930aeaae7496454573f8029c3f48ef1dc47c780155dd4a7b9e7f"
-+SRC_URI[md5sum] = "448635948823309312ea9f70b30b6c2d"
-+SRC_URI[sha256sum] = "61f9ae9322e38ae64996848421afbdb018239a99c4e796fe064f172d6c98c3bf"
+ PYPI_PACKAGE = "cantools"
  
- DEPENDS += "python3-setuptools-scm-native"
- RDEPENDS_${PN} += "\
 -- 
 2.17.1
 
