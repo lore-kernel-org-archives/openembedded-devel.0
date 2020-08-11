@@ -1,17 +1,17 @@
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com (NAM02-BN1-obe.outbound.protection.outlook.com [40.107.212.59])
- by mx.groups.io with SMTP id smtpd.web10.15691.1597154686783909462
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com (NAM02-BN1-obe.outbound.protection.outlook.com [40.107.212.54])
+ by mx.groups.io with SMTP id smtpd.web10.15696.1597154697417941721
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Aug 2020 07:04:47 -0700
+ Tue, 11 Aug 2020 07:04:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=T2X1UEHW;
- spf=pass (domain: windriver.com, ip: 40.107.212.59, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=m4byoczp;
+ spf=pass (domain: windriver.com, ip: 40.107.212.54, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AYPrCHpeS1Mpr8KCP8do3R22LcJ2kVF6/3pPo6qZDtxhX6oeFYjKK57qzNjL5Jst3nuXRzOFamWVgswY720Ssy4TrqIGmc2wcV5iCxL+4QFVFurYqB33SPtM7C4IuEIwnbjMjdXIq7EHbRzCGGyV79cjQfZAXBBxMJGkIjPN10dKslK9e8qYuL5welPRI4p1zi7o7MYGgADz747sUGvjwrNUpKeUeUunzxoL7safPqn96WH9vDT3QvyMvEPXwkVgrqR2sYqNtWZEKPteQJC9b0uBp2G/7wuP6FwUnsAuDUfdcSxRPcvlbtQFh96oA49nXAWblts53dAaEJUlG0rfCg==
+ b=c+/u9Qu2YPJmNfYemJoDgMJRq+D0HILXp4X+oUcTkZZrsT+tL6EaePC+52ZTtl/n3wACTCPjizUOgzIK45Gc1L9rOCYPvKzPKtVrAP8/ze+5dxz31cXJaSlW83kEF4B6gMYXuDnGFWNDLyKylHhvUqKCffAIIjQG42lIjCl+6QIVXBxX2Tglm8GMKkyVOEU52yZIa2WdGoFQ7EdMbPBmjLITVOwEZJ9DkSWCFXm1vRNVwqeAEdHpVNU+auLTRysWzb4Me83b9fh7ibigyOheEn4aAawNOptHJxzeHTkhAwtt/pSieALGWBZLvdLHj8+vuVsZFjLzAnkQKm4TGTptIw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=td2QK/KkkbTfrctcMMM6gEsfYa6ojRK4iyCxPk7NfIY=;
- b=OD6NQXQ2o/HL9hdVB3bYkOCtmUzCOldc7CYX9hiGeklH1nordH9Xq5gHe0/TG20dNw/eD3v90t7Upmr95FeZT5dOT2Y4dWtRZtMRcHuayMnL6iYwclhbjjVmTGhJjSDml+mGVvuCINthDrpjNuDXKgvtx4XNXCAbMgQMXVPrR932uPuMoq39QSoMLdui4s9rPyXfyUAwTLYbA8b4R6ftXygWaBXys6jMJH25ffEg2l8/XFbL/L5pN6Mm9eWlt9U34SvALWBWnDfa4Ok+NlYhA+kzvnWcaLre0v0EE4YCagJb7FuCKX9GDik2hexVPwQQ2lI7cYCYC3JcvxGYz4k1rA==
+ bh=EpJPjzXFqJbMkmQLBGlcX52n/d5R7VolvrIeUetCISw=;
+ b=NQPbPXUPTJ07RRdP9+GuiNdgC+L7ztZuR+Irx8DK4zD0FeoZQ5KAr60FUaFAaJyf2RgeeNOmaz7gUFtGZphaAQjERmd6Vnn2208BBC3jGOLgUk1xQPVfYK4ODcRLUk6Q43Pv9eSNe9owBhQpYqmOFx6/aU0545ANdKLD82o3vGrZMSeQV14A0NRJ6WnV1B0m3WIOmfvX0XU/8VrZ/MZvzV6f6GBEDNNgxgqIqYygm9p7Kb1UnLyffA3mzA3H6iDNMqzPIW6VRdXlKrlrBtuaUkokU93QcqE9C8liEkOuPtMlzyZHcTGjkW6uNEjeJOz0vppZQx6IIk907Wvl7svwtA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=td2QK/KkkbTfrctcMMM6gEsfYa6ojRK4iyCxPk7NfIY=;
- b=T2X1UEHWH5XzXMlxIOyNif9wm7dafGHmIwEz+61WKh8DZubdv1V+aS7cY8Va3ZsDAwGsSne7qPD+vsh8wZ+XvbHz1+J9k1H6f96MKzL+NouulD4FkYmMewG6YyiWbR6srhjiibmQ1+/2aZxNbBw8725tLcXeCAjJFupD0MvRjVw=
+ bh=EpJPjzXFqJbMkmQLBGlcX52n/d5R7VolvrIeUetCISw=;
+ b=m4byoczpA+hHYCvARY0odNoHr9GaYcumGvu6ocMixQh2xV0zJXNKKAvUVLdGM7KkwxheKVhowg86XPSMPYMILrqxgg5IGCSckEgkXqU07vEP41I1Zn5Eolbs/jQ257m/xewgKHv/xS1+poI6Vlf3FyBQDoofAWqappLOfHLWolo=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,100 +28,105 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB2904.namprd11.prod.outlook.com (2603:10b6:a03:87::23) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.17; Tue, 11 Aug
- 2020 14:04:45 +0000
+ 2020 14:04:56 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::8d65:f6f9:ce31:8d47]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::8d65:f6f9:ce31:8d47%5]) with mapi id 15.20.3261.024; Tue, 11 Aug 2020
- 14:04:45 +0000
-Subject: Re: [oe] [meta-python][PATCH 4/7] python3-cantools: Upgrade 35.1.0 -> 35.3.0
+ 14:04:56 +0000
+Subject: Re: [oe] [meta-python][PATCH 5/7] python3-wtforms: Upgrade 2.3.1 -> 2.3.3
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200810144318.17106-1-leon.anavi@konsulko.com>
- <20200810144318.17106-4-leon.anavi@konsulko.com>
+ <20200810144318.17106-5-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <ae9f78c7-034c-1293-ccaa-5e41523f1149@windriver.com>
-Date: Tue, 11 Aug 2020 10:04:43 -0400
+Message-ID: <531aac59-9652-f56d-2dea-7ea090033f5b@windriver.com>
+Date: Tue, 11 Aug 2020 10:04:53 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200810144318.17106-4-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0037.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2e::6) To BY5PR11MB3909.namprd11.prod.outlook.com
+In-Reply-To: <20200810144318.17106-5-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0049.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2e::18) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0037.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::6) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.19 via Frontend Transport; Tue, 11 Aug 2020 14:04:44 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0049.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::18) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.19 via Frontend Transport; Tue, 11 Aug 2020 14:04:55 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b8d7512d-d45d-4162-d8c2-08d83dff8045
+X-MS-Office365-Filtering-Correlation-Id: bb9556ce-8ab9-44a6-9703-08d83dff869e
 X-MS-TrafficTypeDiagnostic: BYAPR11MB2904:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB29044AFB35AAD45F4CCF45189F450@BYAPR11MB2904.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:317;
+	<BYAPR11MB2904B7D75DB461FE00A0164B9F450@BYAPR11MB2904.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	4hvt13DOJ0RjeS2yhXY/Za5LPEifNP+Sls6z22y1W/D9anZi0a95Fk5aybH2uBiDAWel139q91CZKWhLbl5Pld8WR6oIwcWMIldf42YDiu7A5ySsMcHRU2Kd+DzY5m2z9CjKLB/3zn/XBU2QW8C1nERGNmrtI8zMrrle7AMRG4KlR0VHkOnpGqbO/FNXeE31yOKDPQGyLUbwLhfrDfdR7RTUi/3myflIiBOl/Y/MUqEwx65kZDdmhcIR/MpysaU+DDVzGmqEGN3poXe3fDg/4dpuaPlHkfWbPgZgHYvK0DkP9rf5KwU6DEUiMEsFSRi08rlxgjIdzCQJ1SSSb3JF92MVNscQliZbA6WuyfLBK4ABobTEeYfBawdoaEqQM2XzJMnmIFOAxkAN+KcA8GEPA4TSPxR5cOUSSGyYHxipwbkafFkJBhksB3CRY73qxhnvsDMZiU47F4cKd1SB2GUdbQ==
+	DbBjY0xJWu3IcCuVbFYVsWV3hlavF0DSaj1bBRjbtHWGxXzpu5zeRrdfv/4atcQXd+CdGDT07ii0ptVrJ3617930/idguqCIfgPWFnw/S2ERaUNMTc4dNsYUaiv0Bf8vZaUq3wjp3MpMy89QmGowWssZiHgm3EgFLZuxoIqPIR46plxFvKM46ZKaMHSahg8KaM2sC/sxV3bpT3xcQW6F3Cq6ZfTautRytTEC29mEI2uxJPWojjkVk390Wq4JppOaayfX7teUivIOaHH+YKzxb6u1i8mr5zWm0L7NRQsILnOQ1UXu2VWprzC1Z0R5xHcPC1iZ5+jzRdzWvBbLZe0Lg4f/HxJR1gTpNh0FmcNcD+CJfOBh1VVT5LpwPkmtg7Lh0skTKiQ43b6hKPbenT8EZiVKHBpCT7i4TIwcHxUXHslqgdPzGizCD4CnLUzcchp0HR4vsg1huYSCjEdGHMxH6g==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(376002)(396003)(39850400004)(366004)(136003)(346002)(966005)(86362001)(8936002)(166002)(8676002)(956004)(16576012)(83380400001)(186003)(66476007)(66946007)(2616005)(16526019)(478600001)(6486002)(31686004)(26005)(66556008)(5660300002)(2906002)(36756003)(31696002)(52116002)(44832011)(33964004)(316002)(53546011)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	CsFITK01cH+B+h5D8WetM77GhNX11A0sraC4tusb82whr9Nc14ZTAaDFWyFE9wiL0Epg1qXgMmQkKpXVMKQQ7sZnN2kFz3InQJcsqLNNNLLZrK3N0GK3fHiCdSkjfVj9E6SCyE5CsLJj0mqoWiL9mr8roX57FicXdQqctMgAEK3S396WMDxMVnLrDSp0U4roOizWst0+MweGi+BvCAmioYkHkSZFWqw2MSwkmPYyroFdfZD0olpkJqmnM/rHCK4c1TEeBOxE7mmeptn0Qhv9bfFYDLIfthdPg/+YtTnMkWwxMTmOnipUruoyNKMGEwtGPuXivslWix0T9psYR+VW4t+hjewr00cDetAihFvo61cpQzsoxJYVa0EMseue5uMpiJgodOkSoHvrpq3wbPwN3OPGC/aCT1pZZOP0I6BBevzktX4NvrIlmISI9ju1PpEoK7aV3d01baUAFEFN8qe+K8Fppb5z+X+b+9uCrezer/eb+2ZHLJVVig65HRhW/glTl8KQOetZq2ki9/sduH0UXwlwzzdkV976bQdMshC3bOJzl7oaX0PuTzzIQ7C4PF5nTkrLtQRTDgj2Tje7JJAJL5ht4ATRkqjDgrrsxXycsbncKDYjWu6/mHioX+NQ4rSV9ARxRCjDlK5nNIMVdZwYDQ==
+	W9+46R3vjAtXZ3RuqX32YrQcr6yuw0jWbjy+Xw3KQpNNfKmvuSYylnLaktN/hSyP2PJuhQZHwDlzjQYDxTezSbbnNtYcWK8QF1xgUJHHXf0mxgVb6abj8obtp/Yl2iuBk8LZqVxBPDLu2xQ7lsL9OKEqxo/xUl6cXCK7fq1NJkpDbAWpzTz0OGr8LfJNZay8e2W7d75qondEmLPFcXxhAPHXRCWDuVTt9Zo51nxd3VNVWS+jMJA9r8qo3CvbyiRSfzUf8sHKhoJly5YNX3sPkonHv6NGZCSuPka+kkGfW4CR8YHapWyGlWpi/KIrAdiCfkvS9QwwDkrTzRFqYwhIcmW7cJ91VzR4YJZ9e1Mn8rgOuaVZWgtYD09dATl2GbVaAIfxC2YEcoy+vKxb8c53mnFqYTkBw6eoYSw1hEuDp9oNf2krMwxUGqw5XHhKkMsXcU9T2kWiLkbGQjLBzomdmCLly3/CA2wSwyiuS279QXAmj/UbQkLIl6VPzA1oLa0Lqqdu/unWuJB9sXGXux8+CVlt/43smlUsQ2cOKf8W2CcMfwrYJTcYWnUs0ULoCJ4Moj7YfAIEU598U+ZpcpPs5W6jyW8D4QaVAdx8fNynH4yD2DI894YJNEz3R3ckHZysl2DnxcEVqp5DyvcrSVhF5A==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b8d7512d-d45d-4162-d8c2-08d83dff8045
+X-MS-Exchange-CrossTenant-Network-Message-Id: bb9556ce-8ab9-44a6-9703-08d83dff869e
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2020 14:04:45.3219
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2020 14:04:56.0048
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vV841nRjXU2cISrKCRGLWuS3oSO45BahB2BCddMLXehL6euvIylbIaJDTZ8d9rvD42wVI5AaeW7Rm8DwyHIxOj8UI+xI+8bxdMxoe0DyV28=
+X-MS-Exchange-CrossTenant-UserPrincipalName: jN+zi7hNSP9XKxngoJ436/Q3Wt2cXf23GnDiu1XntCCiKkIBy6khrEOXmf5jhdAuQ4FjTyf9br5zhdJjQPMyb5mBWrqghAE5J4p0F69LXvs=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2904
 Content-Type: multipart/alternative;
- boundary="------------AC52A60DCDCD2E1AFA47D068"
+ boundary="------------985842BABD76B0794D527FAD"
 Content-Language: en-US
 
---------------AC52A60DCDCD2E1AFA47D068
+--------------985842BABD76B0794D527FAD
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 8/10/20 10:43 AM, Leon Anavi wrote:
-> Upgrade to release 35.3.0:
+> Upgrade to release 2.3.3:
 >
-> - Fix dump of signal types in DBC files
-> - Fix SIG_VALTYPE_ item on DBC dump for extended frame id messages
-> - Fix compile error
+> - Includes the missing translation files
+> - Fixed a bug with SelectField choices shortcut at form submission
+>
+> License-Update: Use the exact line from PKG-INFO. The license
+> remains the same.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...{python3-cantools_35.1.0.bb => python3-cantools_35.3.0.bb} | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-cantools_35.1.0.bb => python3-cantools_35.3.0.bb} (64%)
+>   .../{python3-wtforms_2.3.1.bb => python3-wtforms_2.3.3.bb}  | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-wtforms_2.3.1.bb => python3-wtforms_2.3.3.bb} (58%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-cantools_35.1.0.bb b/meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb
-> similarity index 64%
-> rename from meta-python/recipes-devtools/python/python3-cantools_35.1.0.bb
-> rename to meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb
-> index a9638fbd2..c79e51e33 100644
-> --- a/meta-python/recipes-devtools/python/python3-cantools_35.1.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/eerimoq/cantools"
->   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
+> diff --git a/meta-python/recipes-devtools/python/python3-wtforms_2.3.1.bb b/meta-python/recipes-devtools/python/python3-wtforms_2.3.3.bb
+> similarity index 58%
+> rename from meta-python/recipes-devtools/python/python3-wtforms_2.3.1.bb
+> rename to meta-python/recipes-devtools/python/python3-wtforms_2.3.3.bb
+> index 9f081b68c..a6e7a5b2e 100644
+> --- a/meta-python/recipes-devtools/python/python3-wtforms_2.3.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-wtforms_2.3.3.bb
+> @@ -2,10 +2,10 @@ DESCRIPTION = "A flexible forms validation and rendering library for python web
+>   HOMEPAGE = "https://pypi.python.org/pypi/WTForms"
+>   SECTION = "devel/python"
+>   LICENSE = "BSD-3-Clause"
+> -LIC_FILES_CHKSUM = "file://PKG-INFO;md5=208ce1c159f911ecf389806650582021"
+> +LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=53dbfa56f61b90215a9f8f0d527c043d"
 >   
-> -SRC_URI[md5sum] = "46b71bbfec33146d9dbba708489a8ae2"
-> -SRC_URI[sha256sum] = "bd0ac5b16bb7fe2ada0c9436c91a0b3795217bed7126296dde1565919a3f44f1"
-> +SRC_URI[md5sum] = "068514ac776e03ebaa8b2d02dd16fc77"
-> +SRC_URI[sha256sum] = "5e3a6f679ad3dcb31142e388e052187d5fc5bd481c4fc3b2791eaa1e681cca98"
+> -SRC_URI[md5sum] = "bff06943e59671581af07f80d14bda5f"
+> -SRC_URI[sha256sum] = "861a13b3ae521d6700dac3b2771970bd354a63ba7043ecc3a82b5288596a1972"
+> +SRC_URI[md5sum] = "2b6ea167a71c6becf20f0934417fd06c"
+> +SRC_URI[sha256sum] = "81195de0ac94fbc8368abbaf9197b88c4f3ffd6c2719b5bf5fc9da744f3d829c"
 >   
->   PYPI_PACKAGE = "cantools"
+>   PYPI_PACKAGE = "WTForms"
 >   
 >
 > 
 
---------------AC52A60DCDCD2E1AFA47D068
+--------------985842BABD76B0794D527FAD
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -133,40 +138,45 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 8/10/20 10:43 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200810144318.17106-4-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 35.3.0:
+    <blockquote type="cite" cite="mid:20200810144318.17106-5-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 2.3.3:
 
-- Fix dump of signal types in DBC files
-- Fix SIG_VALTYPE_ item on DBC dump for extended frame id messages
-- Fix compile error
+- Includes the missing translation files
+- Fixed a bug with SelectField choices shortcut at form submission
+
+License-Update: Use the exact line from PKG-INFO. The license
+remains the same.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200810144318.17106-4-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200810144318.17106-5-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...{python3-cantools_35.1.0.bb =&gt; python3-cantools_35.3.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cantools_35.1.0.bb =&gt; python3-cantools_35.3.0.bb} (64%)
+ .../{python3-wtforms_2.3.1.bb =&gt; python3-wtforms_2.3.3.bb}  | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-wtforms_2.3.1.bb =&gt; python3-wtforms_2.3.3.bb} (58%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cantools_35.1.0.bb b/meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb
-similarity index 64%
-rename from meta-python/recipes-devtools/python/python3-cantools_35.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb
-index a9638fbd2..c79e51e33 100644
---- a/meta-python/recipes-devtools/python/python3-cantools_35.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/eerimoq/cantools">&quot;https://github.com/eerimoq/cantools&quot;</a>
- LICENSE = &quot;MIT&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd">&quot;file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-wtforms_2.3.1.bb b/meta-python/recipes-devtools/python/python3-wtforms_2.3.3.bb
+similarity index 58%
+rename from meta-python/recipes-devtools/python/python3-wtforms_2.3.1.bb
+rename to meta-python/recipes-devtools/python/python3-wtforms_2.3.3.bb
+index 9f081b68c..a6e7a5b2e 100644
+--- a/meta-python/recipes-devtools/python/python3-wtforms_2.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-wtforms_2.3.3.bb
+@@ -2,10 +2,10 @@ DESCRIPTION = &quot;A flexible forms validation and rendering library for python web
+ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pypi.python.org/pypi/WTForms">&quot;https://pypi.python.org/pypi/WTForms&quot;</a>
+ SECTION = &quot;devel/python&quot;
+ LICENSE = &quot;BSD-3-Clause&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;md5=208ce1c159f911ecf389806650582021">&quot;file://PKG-INFO;md5=208ce1c159f911ecf389806650582021&quot;</a>
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=53dbfa56f61b90215a9f8f0d527c043d">&quot;file://PKG-INFO;beginline=8;endline=8;md5=53dbfa56f61b90215a9f8f0d527c043d&quot;</a>
  
--SRC_URI[md5sum] = &quot;46b71bbfec33146d9dbba708489a8ae2&quot;
--SRC_URI[sha256sum] = &quot;bd0ac5b16bb7fe2ada0c9436c91a0b3795217bed7126296dde1565919a3f44f1&quot;
-+SRC_URI[md5sum] = &quot;068514ac776e03ebaa8b2d02dd16fc77&quot;
-+SRC_URI[sha256sum] = &quot;5e3a6f679ad3dcb31142e388e052187d5fc5bd481c4fc3b2791eaa1e681cca98&quot;
+-SRC_URI[md5sum] = &quot;bff06943e59671581af07f80d14bda5f&quot;
+-SRC_URI[sha256sum] = &quot;861a13b3ae521d6700dac3b2771970bd354a63ba7043ecc3a82b5288596a1972&quot;
++SRC_URI[md5sum] = &quot;2b6ea167a71c6becf20f0934417fd06c&quot;
++SRC_URI[sha256sum] = &quot;81195de0ac94fbc8368abbaf9197b88c4f3ffd6c2719b5bf5fc9da744f3d829c&quot;
  
- PYPI_PACKAGE = &quot;cantools&quot;
+ PYPI_PACKAGE = &quot;WTForms&quot;
  
 </pre>
       <br>
@@ -177,4 +187,4 @@ index a9638fbd2..c79e51e33 100644
   </body>
 </html>
 
---------------AC52A60DCDCD2E1AFA47D068--
+--------------985842BABD76B0794D527FAD--
