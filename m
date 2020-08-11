@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.13115.1597146303347967100
+ by mx.groups.io with SMTP id smtpd.web12.13116.1597146304209157866
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Aug 2020 04:45:03 -0700
+ Tue, 11 Aug 2020 04:45:04 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=37052 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k5SiD-0004It-Tj; Tue, 11 Aug 2020 14:45:02 +0300
+	id 1k5SiE-0004It-RG; Tue, 11 Aug 2020 14:45:03 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 07/10] python3-sympy: Upgrade 1.6.1 -> 1.6.2
-Date: Tue, 11 Aug 2020 14:44:27 +0300
-Message-Id: <20200811114430.27916-7-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 08/10] python3-parse: Upgrade 1.15.0 -> 1.16.0
+Date: Tue, 11 Aug 2020 14:44:28 +0300
+Message-Id: <20200811114430.27916-8-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200811114430.27916-1-leon.anavi@konsulko.com>
 References: <20200811114430.27916-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,42 +30,38 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.6.2:
+Upgrade to release 1.16.0:
 
-- Fixed a bug that made matrix operations fail in a multithreaded
-  application
-- Using factor with the extension argument no longer hangs in some
-  cases
-- Calling preview with viewer="file" no longer looks for a file
-  executable (a regression in 1.6.0)
-- The deprecation of calling preview with viewer="StringIO" is now
-  expired instead of forgotten (a regression in 1.6.0)
-- intersphinx links to :mod:`sympy` no longer point to the
-  documentation for Immutable Matrices
+Make compiled parse objects pickleable
+
+License-Update: Use file LICENSE.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-sympy_1.6.1.bb => python3-sympy_1.6.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-sympy_1.6.1.bb => python3-sympy_1.6.2.bb} (75%)
+ .../{python3-parse_1.15.0.bb => python3-parse_1.16.0.bb}    | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-parse_1.15.0.bb => python3-parse_1.16.0.bb} (63%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sympy_1.6.1.bb b/meta-python/recipes-devtools/python/python3-sympy_1.6.2.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-sympy_1.6.1.bb
-rename to meta-python/recipes-devtools/python/python3-sympy_1.6.2.bb
-index fafd591a8..428b40c3b 100644
---- a/meta-python/recipes-devtools/python/python3-sympy_1.6.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-sympy_1.6.2.bb
-@@ -6,8 +6,8 @@ HOMEPAGE = "https://pypi.org/project/sympy/"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=ebb06e9df8f57522b72d0edb0fcf83d4"
+diff --git a/meta-python/recipes-devtools/python/python3-parse_1.15.0.bb b/meta-python/recipes-devtools/python/python3-parse_1.16.0.bb
+similarity index 63%
+rename from meta-python/recipes-devtools/python/python3-parse_1.15.0.bb
+rename to meta-python/recipes-devtools/python/python3-parse_1.16.0.bb
+index bff41449c..a1e945276 100644
+--- a/meta-python/recipes-devtools/python/python3-parse_1.15.0.bb
++++ b/meta-python/recipes-devtools/python/python3-parse_1.16.0.bb
+@@ -1,10 +1,10 @@
+ SUMMARY = "Parse strings using a specification based on the Python format() syntax"
+ HOMEPAGE = "https://github.com/r1chardj0n3s/parse"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://parse.py;beginline=1325;endline=1345;md5=3d987b2e73881bbce768a80f9cdd23d9"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=8ab458ad281b60e6f1b39b3feafbfc05"
  
--SRC_URI[md5sum] = "8bdf8473751722fd1714aa7125b1478b"
--SRC_URI[sha256sum] = "7386dba4f7e162e90766b5ea7cab5938c2fe3c620b310518c8ff504b283cb15b"
-+SRC_URI[md5sum] = "50d6b69b1de36b757484b9ff833a9e0a"
-+SRC_URI[sha256sum] = "1cfadcc80506e4b793f5b088558ca1fcbeaec24cd6fc86f1fdccaa3ee1d48708"
+-SRC_URI[md5sum] = "a5aa82b2b8b4d733d227e3c99d7d01b4"
+-SRC_URI[sha256sum] = "a6d4e2c2f1fbde6717d28084a191a052950f758c0cbd83805357e6575c2b95c0"
++SRC_URI[md5sum] = "ba263b3143e9528ae960bbba4d56bf25"
++SRC_URI[sha256sum] = "cd89e57aed38dcf3e0ff8253f53121a3b23e6181758993323658bffc048a5c19"
  
- inherit pypi setuptools3
+ inherit pypi setuptools3 ptest
  
 -- 
 2.17.1
