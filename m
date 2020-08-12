@@ -1,190 +1,148 @@
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web12.293.1597264899157683012
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web12.294.1597264899736565593
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 12 Aug 2020 13:41:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=AaYYU0hL;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id e4so1713788pjd.0
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=p3AmnYeG;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id ep8so1706343pjb.3
         for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 13:41:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=3GytwY4f7Dus8/6QMwObJm10uv42dnWKDoTbOHspPJQ=;
-        b=AaYYU0hLwihipMTtWuvLTXS7a5uqYhGpLK4CC4DzS0Ro4bbfVJ2Ig4OuCAUl0qaHtW
-         Z/iqcbM2+PFK1/OlGPXFFOZV5/4cYk6mHi2zw8OHks48AN7ahWn77oA82ZplLKizclLI
-         /lc5l5/SIMw+rHP5XKTqIBC8gYm3EikYFkEmhNYZnY8jdPDf+71gVpTMYU0edfCuy3c9
-         Pb0JkcI/V22WDl6GVSgG7U+jobpwsRyCxmlBE790Qp6bTKWB7STtjA7nJwXhT/MaLhPJ
-         X/UptdwF2PU5PantO2bmRc1e4o0FBv7b2sNs249VirCQ1Hcwe5vVYWG9t/37hzsZFwFi
-         bNXg==
+        bh=Iwf0ejCqjjQNfwgDYpJdMI5kIclZR954ZAbb6hH6ujU=;
+        b=p3AmnYeGKHKdypotIPlm9TmXCybG4Rq1/RvaMzzqN5Qw3F+q0Wxt7+hb8/+fFKRTt6
+         /oAa9oElblncc76YrDKc5LVElD+99pMIeCDhGfQhknICWipND/5Ct3HuXNFNJnGZKdw1
+         QHJ2WxD9QX+g1nQzKP4Tsco2EwEXPO0M1bXVKr909d+KXdsJwJoQdAJ/4pd4Cao5ly4x
+         pqV5Zcq/C3m4HXJ/4sODTRXed9bINd9p06NLoPBVgfmqyK/NqwE74IZZQHRMiGwg0vUf
+         olaMlel4vwNn99RUoMfjrVZZcK+cf/XbD8KA4rB9qRYWFIqr+bT4YxzWtq9c2qe9/aly
+         h8/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=3GytwY4f7Dus8/6QMwObJm10uv42dnWKDoTbOHspPJQ=;
-        b=O9yXMdgEbj1CB5kV3vSeyOWJn6nyA+LV1np6flOfKSzrWywIYEmSxxevbuYNaWQWUg
-         D8XENFwWCiMjglJZ5qb3hOyWxZuHMzXH0Jiy4VKdyfAGGfiz9bbeKUUZwVHVa4MVrCIh
-         8u1JEep7TYwwccrV57Y/Uenu6PGyIT/0pEdR488q/NtVXU1n9mfg/Q+3Y8akJE3yhwbS
-         9ueNdYQunazR/wcCfnrKLsQ8+8YEwZKpNiGO3K3RYoRW6pcj9ba/Hs1oTQk28Pg2v5gT
-         lfUwHtHL4zfBhCDSW8/uZSUYlUSZjyd9S33U0aPpH3d5Jy6oKTywlrKuKpK6gjInRdBW
-         urow==
-X-Gm-Message-State: AOAM532Bh54Hsfq3hCFeHTvIl4hrPPUy4sfws9MjwsJAej8gboV2ktzi
-	e5zPAUNAA3D0f508N+epERLgzwgm9mM=
-X-Google-Smtp-Source: ABdhPJyoG46zps2X8EprPfcFvzVGNpq9RWpS/u/k7DARRoSlIV+gbUd+aIcxLiJTK/EfzfebxZJF2Q==
-X-Received: by 2002:a17:90a:4709:: with SMTP id h9mr1739904pjg.235.1597264895406;
-        Wed, 12 Aug 2020 13:41:35 -0700 (PDT)
+        bh=Iwf0ejCqjjQNfwgDYpJdMI5kIclZR954ZAbb6hH6ujU=;
+        b=CkMVDgxormVdW6Vw71AoF52p+ljMSqVfpwhyXvgz/tsVUscO5w4bMH+f7DUUNSQpE8
+         arboV9vB+VSBKNnC5Nj8Br22LfrFe7vic+7xJvEAmfgzeUQhFXK21mrpRiZRJyd/Q3Gi
+         hgUMRd9E1DsrtUXYlHHkUl9c14UIbI9H1XlfYB0dMRny5HEH7JieMQVAM7lBTIDy919F
+         swRu/9vhNkCNgPMxtQ+/2XHsi/OsMcF/hAuGWQGgEypU6dPwwo/HoG6e1D5PS4+tRtG+
+         0krg6dpwU4XJTYF232lr1c44mqFUWyJMXkP6QE7Fut0YFdiXLaNUiPoAuxvyxrFR0xP4
+         C/7Q==
+X-Gm-Message-State: AOAM533KUrUK4q4idcHkQmWGcVJHRvZZXZy4umG0NuAe5KosT2LhKtd5
+	FE3fvsQy9Ef7Q6O/bPYRP5aIo1PyTmM=
+X-Google-Smtp-Source: ABdhPJy0wE5/cq+fZDVouKwzWxm2ngVArhuYHFYkwNwQFlhPV5oSreP3ntWVuiOSMtHSjar9SNxemw==
+X-Received: by 2002:a17:90a:c7cb:: with SMTP id gf11mr1784871pjb.108.1597264898483;
+        Wed, 12 Aug 2020 13:41:38 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id l22sm2984287pjy.31.2020.08.12.13.41.34
+        by smtp.gmail.com with ESMTPSA id l22sm2984287pjy.31.2020.08.12.13.41.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2020 13:41:34 -0700 (PDT)
+        Wed, 12 Aug 2020 13:41:38 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][ 04/18] vblade: Upgrade to version 24
-Date: Wed, 12 Aug 2020 13:41:16 -0700
-Message-Id: <20200812204130.1012160-4-raj.khem@gmail.com>
+Subject: [meta-networking][ 08/18] iscsi-initiator-utils: Upgrade to _2.1.2
+Date: Wed, 12 Aug 2020 13:41:20 -0700
+Message-Id: <20200812204130.1012160-8-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200812204130.1012160-1-raj.khem@gmail.com>
 References: <20200812204130.1012160-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Switch to github for src_uri
-Add a patch to fix build with -fno-common
+Fix build with clang
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-daemons/vblade/files/gcc-10.patch | 85 +++++++++++++++++++
- .../vblade/{vblade_22.bb => vblade_24.bb}     |  9 +-
- 2 files changed, 90 insertions(+), 4 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/vblade/files/gcc-10.patch
- rename meta-networking/recipes-daemons/vblade/{vblade_22.bb => vblade_24.bb} (86%)
+ .../0001-Makefile-Do-not-set-Werror.patch     | 31 +++++++++++++++++++
+ ....1.0.bb => iscsi-initiator-utils_2.1.2.bb} |  9 ++----
+ 2 files changed, 34 insertions(+), 6 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-Makefile-Do-not-set-Werror.patch
+ rename meta-networking/recipes-daemons/iscsi-initiator-utils/{iscsi-initiator-utils_2.1.0.bb => iscsi-initiator-utils_2.1.2.bb} (96%)
 
-diff --git a/meta-networking/recipes-daemons/vblade/files/gcc-10.patch b/meta-networking/recipes-daemons/vblade/files/gcc-10.patch
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-Makefile-Do-not-set-Werror.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-Makefile-Do-not-set-Werror.patch
 new file mode 100644
-index 0000000000..9a42aa3699
+index 0000000000..d5e0deb899
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/vblade/files/gcc-10.patch
-@@ -0,0 +1,85 @@
-+From af17efc862b9acfd63ce2ecb21f75ed890a93a5d Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20K=C3=B6lbl?= <koelblandreas@freenet.de>
-+Date: Thu, 9 Jul 2020 14:29:18 +0200
-+Subject: [PATCH] Fix linkage of global identifiers
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-Makefile-Do-not-set-Werror.patch
+@@ -0,0 +1,31 @@
++From 31d88f46bfc67de2659991674253a5d5dfb92afc Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 12 Aug 2020 12:00:29 -0700
++Subject: [PATCH] Makefile: Do not set -Werror
 +
-+Align the code to the standard and modern compilers.
++clang finds more warnings which causes build to fail, disable treating
++warning as errors
 +
-+Upstream-Status: Submitted [https://github.com/OpenAoE/vblade/pull/15]
-+Signed-off-by: Andreas Kölbl <koelblandreas@freenet.de>
++Upstream-Status: Inappropriate [OE-Specific]
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ dat.c    | 12 ++++++++++++
-+ dat.h    | 19 ++++++++++---------
-+ makefile |  7 +++++--
-+ 3 files changed, 27 insertions(+), 11 deletions(-)
-+ create mode 100644 dat.c
++ usr/Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+--- /dev/null
-++++ b/dat.c
-+@@ -0,0 +1,12 @@
-++/* dat.c: Global memory for vblade AoE target */
-++#include "dat.h"
-++
-++int	shelf, slot;
-++ulong	aoetag;
-++uchar	mac[6];
-++int	bfd;		// block file descriptor
-++int	sfd;		// socket file descriptor
-++vlong	size;		// size of vblade
-++vlong	offset;
-++char	*progname;
-++char	serial[Nserial+1];
-+--- a/dat.h
-++++ b/dat.h
-+@@ -1,4 +1,5 @@
-+ /* dat.h: include file for vblade AoE target */
-++#include <sys/types.h>
++diff --git a/usr/Makefile b/usr/Makefile
++index 21bb154..0018605 100644
++--- a/usr/Makefile
+++++ b/usr/Makefile
++@@ -35,7 +35,7 @@ endif
++ PKG_CONFIG = /usr/bin/pkg-config
 + 
-+ #define	nil	((void *)0)
-+ /*
-+@@ -163,12 +164,12 @@ enum {
-+ 	Nserial= 20,
-+ };
-+ 
-+-int	shelf, slot;
-+-ulong	aoetag;
-+-uchar	mac[6];
-+-int	bfd;		// block file descriptor
-+-int	sfd;		// socket file descriptor
-+-vlong	size;		// size of vblade
-+-vlong	offset;
-+-char	*progname;
-+-char	serial[Nserial+1];
-++extern int	shelf, slot;
-++extern ulong	aoetag;
-++extern uchar	mac[6];
-++extern int	bfd;		// block file descriptor
-++extern int	sfd;		// socket file descriptor
-++extern vlong	size;		// size of vblade
-++extern vlong	offset;
-++extern char	*progname;
-++extern char	serial[Nserial+1];
-+--- a/makefile
-++++ b/makefile
-+@@ -8,7 +8,7 @@ sbindir = ${prefix}/sbin
-+ sharedir = ${prefix}/share
-+ mandir = ${sharedir}/man
-+ 
-+-O=aoe.o bpf.o ${PLATFORM}.o ata.o
-++O=aoe.o bpf.o ${PLATFORM}.o ata.o dat.o
-+ 
-+ vblade: $O
-+ 	${CC} ${LDFLAGS} -o vblade $O
-+@@ -25,6 +25,9 @@ ata.o : ata.c config.h dat.h fns.h makef
-+ bpf.o : bpf.c
-+ 	${CC} ${CFLAGS} -c $<
-+ 
-++dat.o : dat.c
-++	${CC} ${CFLAGS} -c $<
-++
-+ config.h : config/config.h.in makefile
-+ 	@if ${CC} ${CFLAGS} config/u64.c > /dev/null 2>&1; then \
-+ 	  sh -xc "cp config/config.h.in config.h"; \
-diff --git a/meta-networking/recipes-daemons/vblade/vblade_22.bb b/meta-networking/recipes-daemons/vblade/vblade_24.bb
-similarity index 86%
-rename from meta-networking/recipes-daemons/vblade/vblade_22.bb
-rename to meta-networking/recipes-daemons/vblade/vblade_24.bb
-index a52a1e92b4..09ba8cfd93 100644
---- a/meta-networking/recipes-daemons/vblade/vblade_22.bb
-+++ b/meta-networking/recipes-daemons/vblade/vblade_24.bb
-@@ -6,19 +6,20 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++ CFLAGS ?= -O2 -g
++-WARNFLAGS ?= -Wall -Wextra -Werror -Wstrict-prototypes -fno-common
+++WARNFLAGS ?= -Wall -Wextra -Wstrict-prototypes -fno-common
++ CFLAGS += $(WARNFLAGS) -I../include -I. -D_GNU_SOURCE \
++ 	  -I$(TOPDIR)/libopeniscsiusr
++ CFLAGS += $(shell $(PKG_CONFIG) --cflags libkmod)
++-- 
++2.28.0
++
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.0.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.2.bb
+similarity index 96%
+rename from meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.0.bb
+rename to meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.2.bb
+index 97b5563574..254362881b 100644
+--- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.0.bb
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.2.bb
+@@ -12,9 +12,10 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)
  
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/aoetools/files/vblade/"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/aoetools/${BP}.tar.gz \
-+SRCREV = "a7f48bda5bf1646f6450601049bf4b74053adbb3"
-+SRC_URI = "git://github.com/OpenAoE/vblade \
-            file://cross.patch \
-            file://makefile-add-ldflags.patch \
-+           file://gcc-10.patch \
-            file://${BPN}.conf \
-            file://${BPN}.init \
-            file://${BPN}.service \
-            file://volatiles.99_vblade \
-           "
+-SRCREV ?= "549f8987be49583bb06b117a364bea3a8fc5250c"
++SRCREV ?= "802688debcd88c48edabe86deb7e7ed47ebadc26"
  
--SRC_URI[md5sum] = "510d98ba0f231284a5fbe2da11cb2d6e"
--SRC_URI[sha256sum] = "a990378f273f10eb431e42954a871aed52714035bbab28c54cef600c458356bb"
-+S = "${WORKDIR}/git"
+ SRC_URI = "git://github.com/open-iscsi/open-iscsi \
++           file://0001-Makefile-Do-not-set-Werror.patch \
+            file://initd.debian \
+            file://99_iscsi-initiator-utils \
+            file://iscsi-initiator \
+@@ -23,9 +24,6 @@ SRC_URI = "git://github.com/open-iscsi/open-iscsi \
+            file://set_initiatorname \
+            "
+ S = "${WORKDIR}/git"
+-B = "${WORKDIR}/build"
+-
+-PV .= "+git${SRCPV}"
  
--UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/aoetools/files/vblade/"
-+UPSTREAM_CHECK_URI = "https://github.com/OpenAoE/vblade/archive/"
+ inherit update-rc.d systemd autotools pkgconfig
  
- inherit autotools-brokensep update-rc.d systemd
+@@ -34,7 +32,7 @@ EXTRA_OECONF = " \
+     --host=${BUILD_SYS} \
+ "
+ 
+-EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '', '--without-systemd',     d)}"
++EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '', '--without-systemd NO_SYSTEMD=1',     d)}"
+ 
+ EXTRA_OEMAKE = ' \
+     OS="${TARGET_SYS}" \
+@@ -43,7 +41,6 @@ EXTRA_OEMAKE = ' \
+     MANDIR="${mandir}" \
+     OPTFLAGS="-DNO_SYSTEMD ${CFLAGS}" \
+     PKG_CONFIG="${STAGING_BINDIR_NATIVE}/pkg-config" \
+-    NO_SYSTEMD=1 \
+ '
+ 
  
 -- 
 2.28.0
