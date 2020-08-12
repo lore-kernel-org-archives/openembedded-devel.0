@@ -1,166 +1,164 @@
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.web11.292.1597264897990401526
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+ by mx.groups.io with SMTP id smtpd.web11.293.1597264898713402394
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 12 Aug 2020 13:41:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=KGJRIi/+;
- spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f181.google.com with SMTP id v15so1634186pgh.6
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 13:41:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=SkZD4Qr+;
+ spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f175.google.com with SMTP id k18so1607784pfp.7
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 13:41:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=sumpd7AvAQfTgh0Nuoqixy2l53FVSs9EISmvST9aZWU=;
-        b=KGJRIi/+bfei4XvKELuc2YftdPsN5sJN0YLGKaLPZqk9taCOI60Sb31YDO8KnYjo75
-         RvNuxx4bcYlIzyG/+jG/e5pwkRF6f1Oh/5epo+jBsUab3ETak1NeQcdGSoQTSCnp3p+v
-         uGHUXAe+WtA4CcXAwub836W3i0Ze3Fbv66yHUfIe4V4l4nvdF6MCHhDL3Z5rcqQCE7yw
-         7aqCAT3OUmL7NoSb2jQRPi5Y4pPFhV2u/t1sdnvSih4a1Md5Dt0exNHihiYhviQid/mt
-         6+Sed/YTxxwTfjjqTw4Z8MhZ7JYXc6b1oUo6FWtvQz0cx8F9tJFzy0MeVpxW7PyKGsgF
-         Tjag==
+        bh=xIztNWjSceu0dRHeCGWtlVNIif93hgemqWFRuWBlC+Y=;
+        b=SkZD4Qr+T4uXlnJT9AEGZN4ae0bDKpTEU213R/dZOhCJNxjz0hP1cVDR/1VJjMYC2A
+         qLEUYrSEKb+zXSrovxB4YYXKZYmeb42URwx6s0D5+P6hyAaiGFW7jCtHi+1jOb5lLMWn
+         /Nqp3FJRLXtCZM9Fx6DVgXbvgk9lWe9FTtz99XlVSQjX9CorrEV7n1IPxFT6902XflFt
+         nMQdp0NjcYJfZ7iEDXJO67IFblnwcBvAYYn4+a4tgbX3qIvUil5UymKre+ZFHZtbtl63
+         nCHX/7425ECcggzHxKrAqTefRV/8S+8R5z5rHBRtPaxawpSo4iKrXU9M44RDkfILZKJE
+         DK6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=sumpd7AvAQfTgh0Nuoqixy2l53FVSs9EISmvST9aZWU=;
-        b=Bj+Hx42678r34tRdVgRb4V1Z6LRUYhZdXnyM+/KDrjNToCHGXH159y4AxMPljMONjo
-         flxHUdXYLSNo5ev4fUFb09lciOf1JxRr7bKCnuHDk4KnjFcvikW2OpeeXI+Dwfq274BH
-         +VngwAtxoQxn5Avz7Qu/Gh3UiTO5L9BzKKfwgV0WAqa5LsTquIyfOwjRixE6dB6wljj/
-         9dvRMX09Wb3lyrZNMeByk60y8a+FCBdhckIxQxRRd44foXKdRW1N55HlHqBpj9LvwZaY
-         Bn6LsRih8q61fvKdBnKR1ThRx71Q5ikdmlloB64Zt2WzQkpDDVIFYlEBc1ntVSCrU6+5
-         vL/A==
-X-Gm-Message-State: AOAM530HvQNNm0DjzuIBqGt4qFIGgJnnaNYtMg86bcwnsK1dtj+LN3m6
-	6YQ5sZYmSo1Xkg17AtVysaNRtm/JvEw=
-X-Google-Smtp-Source: ABdhPJwFpiz7axN+jcr8K3ljBEK9FxwvAQXPguozaQQ8PAJi2PPLRi6Hs9wCvRIUG5k1Sp2OUh5/mg==
-X-Received: by 2002:a63:6744:: with SMTP id b65mr890656pgc.42.1597264897005;
+        bh=xIztNWjSceu0dRHeCGWtlVNIif93hgemqWFRuWBlC+Y=;
+        b=b6c5Kg8IoIbaIrmGs42+Bykaja/IPw5pk/5anbog9ITITJpsILqJ2eT65uw95ir4bI
+         RTFY1V6aopx+ynd1LkfYCgUHPfftfoG7UWwO6U3V5dAmrsOG9e4rziReZO5W/uvz+nrZ
+         rhEvEG8hqjKnub1QdfZtSlu5d2dXiEzYBdSpupgSMU7Ai1tbGGr8idKr8yiqwSQqcMf7
+         M7OXTmMfl7+HWjrPI02gjd544+mXDPnXv7OiLD33r7jjys1KU8hq7RxhAhpKO+ru2T6R
+         +7jwCfwOga636VuVM1QsXc17X/kWCl8wjenClVim02Oazdzf1txtIxRDNwO/D3O1U2uh
+         Om+w==
+X-Gm-Message-State: AOAM532pVVZcGUETUObvkRdjxCrnvLwCyJYsaAZCEA9FbPSjVvtsKmnC
+	iqTP1WmDRP9R8C1EnJbKCZcGzgRTLjU=
+X-Google-Smtp-Source: ABdhPJyWEi5SGFfk/HnOSS1xnAybqstzexj+wOSJgOY8adXwNNW7u3s5mVL9O6ICxUYHCZGGomg7vw==
+X-Received: by 2002:a65:4bc7:: with SMTP id p7mr827039pgr.440.1597264897726;
         Wed, 12 Aug 2020 13:41:37 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id l22sm2984287pjy.31.2020.08.12.13.41.36
+        by smtp.gmail.com with ESMTPSA id l22sm2984287pjy.31.2020.08.12.13.41.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2020 13:41:36 -0700 (PDT)
+        Wed, 12 Aug 2020 13:41:37 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][ 06/18] netplan: Update to latest to fix build with -fno-common
-Date: Wed, 12 Aug 2020 13:41:18 -0700
-Message-Id: <20200812204130.1012160-6-raj.khem@gmail.com>
+Subject: [meta-networking][ 07/18] ncftp: Fix build with -fno-common
+Date: Wed, 12 Aug 2020 13:41:19 -0700
+Message-Id: <20200812204130.1012160-7-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200812204130.1012160-1-raj.khem@gmail.com>
 References: <20200812204130.1012160-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add patches to fix build with clang-11
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-dbus-Remove-unused-variabes.patch    | 33 +++++++++++++++++
- ...rst-prerquisite-only-for-target-rule.patch | 35 +++++++++++++++++++
- .../netplan/netplan_0.99.bb                   |  4 ++-
- 3 files changed, 71 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-connectivity/netplan/netplan/0001-dbus-Remove-unused-variabes.patch
- create mode 100644 meta-networking/recipes-connectivity/netplan/netplan/0002-Makefile-Use-first-prerquisite-only-for-target-rule.patch
+ .../ncftp/ncftp/ncftp-3.2.5-gcc10.patch       | 83 +++++++++++++++++++
+ .../recipes-daemons/ncftp/ncftp_3.2.6.bb      |  1 +
+ 2 files changed, 84 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/ncftp/ncftp/ncftp-3.2.5-gcc10.patch
 
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan/0001-dbus-Remove-unused-variabes.patch b/meta-networking/recipes-connectivity/netplan/netplan/0001-dbus-Remove-unused-variabes.patch
+diff --git a/meta-networking/recipes-daemons/ncftp/ncftp/ncftp-3.2.5-gcc10.patch b/meta-networking/recipes-daemons/ncftp/ncftp/ncftp-3.2.5-gcc10.patch
 new file mode 100644
-index 0000000000..22ecae3047
+index 0000000000..5dee824d7a
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/netplan/netplan/0001-dbus-Remove-unused-variabes.patch
-@@ -0,0 +1,33 @@
-+From 0edb96a5f79dcec4f4467193716c2bf015fe5132 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 12 Aug 2020 10:38:07 -0700
-+Subject: [PATCH 1/2] dbus: Remove unused variabes
++++ b/meta-networking/recipes-daemons/ncftp/ncftp/ncftp-3.2.5-gcc10.patch
+@@ -0,0 +1,83 @@
++Fix build with -fno-common
 +
-+Fixes
-+src/dbus.c:49:23: error: unused variable 'stdout' [-Werror,-Wunused-variable]
-+g_autofree gchar *stdout = NULL;
-+^
++Patch from https://src.fedoraproject.org/rpms/ncftp/raw/master/f/ncftp-3.2.5-gcc10.patch
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/dbus.c | 3 ---
-+ 1 file changed, 3 deletions(-)
 +
-+diff --git a/src/dbus.c b/src/dbus.c
-+index cb7ec38..a057236 100644
-+--- a/src/dbus.c
-++++ b/src/dbus.c
-+@@ -45,9 +45,6 @@ static int method_apply(sd_bus_message *m, void *userdata, sd_bus_error *ret_err
++--- a/ncftp/bookmark.h
+++++ b/ncftp/bookmark.h
++@@ -29,6 +29,8 @@ typedef struct Bookmark {
++     int             reserved;
++ } Bookmark;
 + 
-+ static int method_info(sd_bus_message *m, void *userdata, sd_bus_error *ret_error) {
-+     sd_bus_message *reply = NULL;
-+-    g_autoptr(GError) err = NULL;
-+-    g_autofree gchar *stdout = NULL;
-+-    g_autofree gchar *stderr = NULL;
-+     gint exit_status = 0;
+++extern Bookmark gBm;
+++
++ #define kBookmarkVersion		8
++ #define kBookmarkMinVersion		3
++ #if (defined(WIN32) || defined(_WINDOWS)) && !defined(__CYGWIN__)
++--- a/ncftp/cmds.c
+++++ b/ncftp/cmds.c
++@@ -98,7 +98,7 @@ extern char gPager[], gHome[], gShell[];
++ extern char gOS[];
++ extern int gAutoResume;
++ extern int gAutoSaveChangesToExistingBookmarks;
++-extern Bookmark gBm;
+++//extern Bookmark gBm;
++ extern int gLoadedBm, gConfirmClose, gSavePasswords, gScreenColumns;
++ extern char gLocalCWD[512], gPrevLocalCWD[512];
++ extern int gMayCancelJmp;
++--- a/ncftp/main.c
+++++ b/ncftp/main.c
++@@ -38,7 +38,7 @@ extern int gUnprocessedJobs;
++ char gLocalCWD[512], gPrevLocalCWD[512];
 + 
-+     exit_status = sd_bus_message_new_method_return(m, &reply);
-+-- 
-+2.28.0
-+
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan/0002-Makefile-Use-first-prerquisite-only-for-target-rule.patch b/meta-networking/recipes-connectivity/netplan/netplan/0002-Makefile-Use-first-prerquisite-only-for-target-rule.patch
-new file mode 100644
-index 0000000000..e736529a8a
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/netplan/netplan/0002-Makefile-Use-first-prerquisite-only-for-target-rule.patch
-@@ -0,0 +1,35 @@
-+From 1da4451fd3470e6600b027cb78526b440e296f8b Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 12 Aug 2020 10:47:08 -0700
-+Subject: [PATCH 2/2] Makefile: Use first prerquisite only for target rule
-+
-+This ensures that src/_features.h is not added to compiler cmdline which
-+can confuse the compiler as it may not understand .h as valid input and
-+complain
-+
-+| clang-11: error: cannot specify -o when generating multiple output files
-+| make: *** [Makefile:50: netplan-dbus] Error 1
-+| make: *** Waiting for unfinished jobs....
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 4495773..c05dea3 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -47,7 +47,7 @@ generate: libnetplan.so.$(NETPLAN_SOVER) nm.o networkd.o generate.o sriov.o
-+ 	$(CC) $(BUILDFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $^ -L. -lnetplan `pkg-config --cflags --libs glib-2.0 gio-2.0 yaml-0.1 uuid`
++ extern char gRemoteCWD[512], gPrevRemoteCWD[512];
++-extern Bookmark gBm;
+++//extern Bookmark gBm;
++ extern int gLoadedBm;
++ extern int gFirewallType;
++ extern char gAutoAscii[];
++--- a/sh_util/gpshare.c
+++++ b/sh_util/gpshare.c
++@@ -28,7 +28,7 @@
 + 
-+ netplan-dbus: src/dbus.c src/_features.h
-+-	$(CC) $(BUILDFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $^ `pkg-config --cflags --libs libsystemd glib-2.0`
-++	$(CC) $(BUILDFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $< `pkg-config --cflags --libs libsystemd glib-2.0`
++ static int gIsAtty1 = 1, gIsAtty2 = 1;
++ extern int gLoadedBm, gBookmarkMatchMode;
++-Bookmark gBm;
+++//Bookmark gBm;
 + 
-+ src/_features.h: src/[^_]*.[hc]
-+ 	printf "#include <stddef.h>\nstatic const char *feature_flags[] __attribute__((__unused__)) = {\n" > $@
-+-- 
-+2.28.0
-+
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan_0.99.bb b/meta-networking/recipes-connectivity/netplan/netplan_0.99.bb
-index 67ccddf6ab..702fcca75d 100644
---- a/meta-networking/recipes-connectivity/netplan/netplan_0.99.bb
-+++ b/meta-networking/recipes-connectivity/netplan/netplan_0.99.bb
-@@ -11,11 +11,13 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- S = "${WORKDIR}/git"
--SRCREV = "1ccf7e0e3a7a91edbbe3f9f0669c8bbab8248cd1"
-+SRCREV = "85134d13eb1ee5a1a7d139cd74ffa10933d73677"
- PV = "0.99+git${SRCPV}"
- 
- SRC_URI = " \
-         git://github.com/CanonicalLtd/netplan.git \
-+        file://0001-dbus-Remove-unused-variabes.patch \
-+        file://0002-Makefile-Use-first-prerquisite-only-for-target-rule.patch \
++ double
++ FileSize(double size, const char **uStr0, double *uMult0)
++--- a/sh_util/ncftpget.c
+++++ b/sh_util/ncftpget.c
++@@ -40,7 +40,7 @@ extern unsigned int gFirewallPort;
++ extern char gFirewallExceptionList[256];
++ extern int gFwDataPortMode;
++ extern const char gOS[], gVersion[];
++-extern Bookmark gBm;
+++//extern Bookmark gBm;
++ 
++ static void
++ #if (defined(__GNUC__)) && (__GNUC__ >= 2)
++--- a/sh_util/ncftpls.c
+++++ b/sh_util/ncftpls.c
++@@ -39,7 +39,7 @@ extern unsigned int gFirewallPort;
++ extern char gFirewallExceptionList[256];
++ extern int gFwDataPortMode;
++ extern const char gOS[], gVersion[];
++-extern Bookmark gBm;
+++//extern Bookmark gBm;
++ 
++ static int FTPRemoteRecursiveMList(FTPCIPtr cip, const char *const rdir, /* FTPFileInfoListPtr files, */ FTPLineListPtr lines);
++ 
++--- a/sh_util/ncftpput.c
+++++ b/sh_util/ncftpput.c
++@@ -41,7 +41,6 @@ extern unsigned int gFirewallPort;
++ extern char gFirewallExceptionList[256];
++ extern int gFwDataPortMode;
++ extern const char gOS[], gVersion[];
++-extern Bookmark gBm;
++ extern int gSendfileInProgress;
++ 
++ static void
+diff --git a/meta-networking/recipes-daemons/ncftp/ncftp_3.2.6.bb b/meta-networking/recipes-daemons/ncftp/ncftp_3.2.6.bb
+index 5f92f27fdf..ee6da5737f 100644
+--- a/meta-networking/recipes-daemons/ncftp/ncftp_3.2.6.bb
++++ b/meta-networking/recipes-daemons/ncftp/ncftp_3.2.6.bb
+@@ -8,6 +8,7 @@ DEPENDS = "ncurses"
+ SRC_URI = "ftp://ftp.ncftp.com/${BPN}/${BP}-src.tar.xz \
+            file://ncftp-configure-use-BUILD_CC-for-ccdv.patch \
+            file://unistd.patch \
++           file://ncftp-3.2.5-gcc10.patch \
  "
- 
- DEPENDS = "glib-2.0 libyaml ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+ SRC_URI[md5sum] = "42d0f896d69a4d603ec097546444245f"
+ SRC_URI[sha256sum] = "5f200687c05d0807690d9fb770327b226f02dd86155b49e750853fce4e31098d"
 -- 
 2.28.0
 
