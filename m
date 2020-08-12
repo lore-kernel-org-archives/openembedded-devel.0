@@ -1,108 +1,163 @@
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web11.295.1597264901257449089
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.web12.298.1597264902640188162
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Aug 2020 13:41:41 -0700
+ Wed, 12 Aug 2020 13:41:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=qocQXlwn;
- spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id s15so1632894pgc.8
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 13:41:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Fj4SEYF7;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id j21so1627832pgi.9
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 13:41:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=prtcrOEs8zqhAWwTviv7/38+s+CdvvouYjCbk/ZEDEE=;
-        b=qocQXlwnmBt6YCXSgDLaDMDdPZK5de8f2w8d1lPbI31TZMNRdq9Vic7MyLCjjidhWz
-         zAMqr0nbRfoQEobpEJGlxycGH+HBPu9Q7eDLzEkMetUosE+SGQIvIFX3FmHK/isQEjbj
-         f0Mgj2tb0rbLd00lRKhR0j5d+2noH11SJSxwqiIyj2EoFH10mkQ3VKrmrEju9XmC4SN3
-         lyXrGzc2GM97EGOoDZBK9H++hrHs+jo8TYm94A7IMVVcrbP5GIY30KPm74FzD9nPjbGX
-         o+OVhpbUq4R769fDPMHkq/I2XyY4a+voMiOEoAUuUpqUE9sopLfkDNW5gGqvOkHMz2il
-         2X/Q==
+        bh=UAxZs4QZpnENF2la/IpznttmkOPn5u1ffi7jXFEjChM=;
+        b=Fj4SEYF7ClU2oAqcrZlwEqt5OsLiIeGVGSxSvQrip0L/G36x5Ra6Lk4ty4f1e+76Qx
+         2lZ5zHLSTpHFDMCGF7WGyqfV9asoVWkPBaf/x4ORAP+5iB3jjClh6JGG5orISqWWIPwE
+         BjvPVFqgtWWBY02YArGRsx+SUlr4ThuneUPWvJMhwji9hl2nvDnkk5IBiTWi9O2wq2Gj
+         3Ongn/ffSTfKN2uHQhjO01HgAhFgarKi3nGsuprARww61FXfnF2y2ZoCqNwtNmx713K9
+         wifgc9qOQIRMsLMerrHIo7Vy9gkAh2JHIPN3oUHoua+9qtqbxytfHZvynwQSyXMVsSGr
+         55Dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=prtcrOEs8zqhAWwTviv7/38+s+CdvvouYjCbk/ZEDEE=;
-        b=QK0ORHT2LM7tDXjqRUJka4pUcHmHp4LHRonBmkvm+hapyegT/tM9D1iNANOPwXqg21
-         gE7QCWmwu4ADAa+TdqaibH8TKB4Srbh4lmKh2F5K7kpCyVsoC1elQy5hPbvxsRCB2RHw
-         e41pxXNRrRSdEFnU0CsTJ/VzVHF5/616CaJzQTem3QwRhcDW4W7pt9mQriEZtsSxxgu3
-         Gwnpfh8EzSS4To+pEgb2IeOrsKakYXgdQc3HcXyHDTK0/e5W/l7AVbMASjXExswSCGEs
-         NUG1VbtoCdmVth/vCUj549835MSrRCZjGKghQG0DyRxr3Wb9h/DlTVWAbPHCeA26teEF
-         9mbA==
-X-Gm-Message-State: AOAM530pOkEsO9IRK64xduxacnyZ1h2TyfE2Excmd0nNuH4sm53185Z6
-	xfBsStGHCPD7zY8ro16BFShYO6zmgEo=
-X-Google-Smtp-Source: ABdhPJwgFx7a8MbXbFekZ8I+uDYrq5PD7R218VlU6dO6Svv85Ubfmeb9tzKqjGybmbe91Bmzvg8nnA==
-X-Received: by 2002:a63:4f52:: with SMTP id p18mr819815pgl.408.1597264900208;
-        Wed, 12 Aug 2020 13:41:40 -0700 (PDT)
+        bh=UAxZs4QZpnENF2la/IpznttmkOPn5u1ffi7jXFEjChM=;
+        b=fV1GbFu+ZtPlS1bvMDOeTQJf2xueWo5XVU6ltsNgixj0lGKcmaIEtws8gGbt/2S/qL
+         KRfGJOxD+NjiNDMfE9hux8c1JKH/+qzPY6RtI4Lke56ggD1QHaSQs5T+N8dYywJW2BHl
+         m+PAbMC/MVnZ/RIIEeBwg4DslCD4hRsgv36qKkS37t/o01GN+E5kMfpt12RF1iieNe0X
+         ETiItQWedyPkunZUciZW5WZiKVBj4XJx7aooMqmNbG+r/FnRZoWOLSvLf7MEbTlNZ9PE
+         Yvfb6nUC481WLp1yLDzEO+wZW9OTbfzqUo1VJq2YjW72c9beUAa87N7m7BaEiPVpEUTN
+         lccQ==
+X-Gm-Message-State: AOAM531AhDfhcHnS0FmxuaRmG1fzTUKAea/ZoXKSgDbtoCN6Rnvb3314
+	/KkHlUfCfM31k1wNgZh846KVnryk/aM=
+X-Google-Smtp-Source: ABdhPJyUfOtPuEQgghG5OrXpLe4f9TYehbCEEbj9+YIz5ks5hR3Ccdv9tFE2HfDzys0RMy9b+t2u0Q==
+X-Received: by 2002:a63:b70c:: with SMTP id t12mr844238pgf.178.1597264901611;
+        Wed, 12 Aug 2020 13:41:41 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id l22sm2984287pjy.31.2020.08.12.13.41.39
+        by smtp.gmail.com with ESMTPSA id l22sm2984287pjy.31.2020.08.12.13.41.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2020 13:41:39 -0700 (PDT)
+        Wed, 12 Aug 2020 13:41:40 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][ 10/18] fwknop: Fix build with gcc10
-Date: Wed, 12 Aug 2020 13:41:22 -0700
-Message-Id: <20200812204130.1012160-10-raj.khem@gmail.com>
+Subject: [meta-networking][ 11/18] dibbler: Update to latest
+Date: Wed, 12 Aug 2020 13:41:23 -0700
+Message-Id: <20200812204130.1012160-11-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200812204130.1012160-1-raj.khem@gmail.com>
 References: <20200812204130.1012160-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+Drop upstreamed patch
+Fixed compatibility with g++-10
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...with-GCC-s-fno-common-flag-fixes-305.patch | 27 +++++++++++++++++++
- .../recipes-support/fwknop/fwknop_2.6.10.bb   |  1 +
- 2 files changed, 28 insertions(+)
- create mode 100644 meta-networking/recipes-support/fwknop/fwknop/0001-Fix-compilation-with-GCC-s-fno-common-flag-fixes-305.patch
+ ...Rename-pthread_mutex_t-variable-lock.patch | 74 -------------------
+ .../dibbler/dibbler_git.bb                    |  3 +-
+ 2 files changed, 1 insertion(+), 76 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/dibbler/dibbler/0001-linux-port-Rename-pthread_mutex_t-variable-lock.patch
 
-diff --git a/meta-networking/recipes-support/fwknop/fwknop/0001-Fix-compilation-with-GCC-s-fno-common-flag-fixes-305.patch b/meta-networking/recipes-support/fwknop/fwknop/0001-Fix-compilation-with-GCC-s-fno-common-flag-fixes-305.patch
-new file mode 100644
-index 0000000000..e696ac4ead
---- /dev/null
-+++ b/meta-networking/recipes-support/fwknop/fwknop/0001-Fix-compilation-with-GCC-s-fno-common-flag-fixes-305.patch
-@@ -0,0 +1,27 @@
-+From 5aea816f27a71e6c88ad50e7326fa6584eeb7ad9 Mon Sep 17 00:00:00 2001
-+From: Francois Marier <francois@debian.org>
-+Date: Fri, 24 Jul 2020 21:22:47 -0700
-+Subject: [PATCH] Fix compilation with GCC's -fno-common flag (fixes #305)
-+
-+Upstream-Status: Submitted [https://github.com/mrash/fwknop/pull/319]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ client/log_msg.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/client/log_msg.h b/client/log_msg.h
-+index cc17716..3dda161 100644
-+--- a/client/log_msg.h
-++++ b/client/log_msg.h
-+@@ -38,7 +38,7 @@ enum
-+     LOG_VERBOSITY_INFO,         /*!< Constant to define a INFO message */
-+     LOG_VERBOSITY_DEBUG,        /*!< Constant to define a DEBUG message */
-+     LOG_LAST_VERBOSITY
-+-} log_level_t;
-++};
-+ 
-+ #define LOG_DEFAULT_VERBOSITY   LOG_VERBOSITY_NORMAL    /*!< Default verbosity to use */
-+ 
-+-- 
-+2.28.0
-+
-diff --git a/meta-networking/recipes-support/fwknop/fwknop_2.6.10.bb b/meta-networking/recipes-support/fwknop/fwknop_2.6.10.bb
-index 3eca3ab627..c3681f9259 100644
---- a/meta-networking/recipes-support/fwknop/fwknop_2.6.10.bb
-+++ b/meta-networking/recipes-support/fwknop/fwknop_2.6.10.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
- inherit autotools-brokensep
+diff --git a/meta-networking/recipes-connectivity/dibbler/dibbler/0001-linux-port-Rename-pthread_mutex_t-variable-lock.patch b/meta-networking/recipes-connectivity/dibbler/dibbler/0001-linux-port-Rename-pthread_mutex_t-variable-lock.patch
+deleted file mode 100644
+index 346a56a9ad..0000000000
+--- a/meta-networking/recipes-connectivity/dibbler/dibbler/0001-linux-port-Rename-pthread_mutex_t-variable-lock.patch
++++ /dev/null
+@@ -1,74 +0,0 @@
+-From 630086cf1b3fba71822319a268d3711734cd6aa8 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 31 Jan 2019 12:56:13 -0800
+-Subject: [PATCH] linux-port: Rename pthread_mutex_t variable 'lock'
+-
+-lock is also used by libc++ in std namespace and using it here causes
+-clang to fail e.g.
+-
+-dibbler-client.cpp:47:25: error: reference to 'lock' is ambiguous
+-    pthread_mutex_lock(&lock);
+-                        ^
+-../../../../../../../workspace/sources/dibbler/Port-linux/dibbler-client.cpp:29:26: note: candidate found by name lookup is 'lock'
+-extern ::pthread_mutex_t lock;
+-                         ^
+-/mnt/a/yoe/build/tmp/work/aarch64-yoe-linux/dibbler/1.0.1+1.0.2RC1+gitc4b0ed52e751da7823dd9a36e91f93a6310e5525-r0/recipe-sysroot/usr/include/c++/v1/mutex:446:1: note: candidate found by name lookup is 'std::__1::lock'
+-lock(_L0& __l0, _L1& __l1, _L2& __l2, _L3& ...__l3)
+-
+-Upstream-Status: Submitted [https://github.com/tomaszmrugalski/dibbler/pull/37]
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- Port-linux/dibbler-client.cpp          | 6 +++---
+- Port-linux/lowlevel-linux-link-state.c | 6 +++---
+- 2 files changed, 6 insertions(+), 6 deletions(-)
+-
+-diff --git a/Port-linux/dibbler-client.cpp b/Port-linux/dibbler-client.cpp
+-index 78f34241..b5ebb9f0 100644
+---- a/Port-linux/dibbler-client.cpp
+-+++ b/Port-linux/dibbler-client.cpp
+-@@ -26,7 +26,7 @@ using namespace std;
+- 
+- #define IF_RECONNECTED_DETECTED -1
+- 
+--extern pthread_mutex_t lock;
+-+extern pthread_mutex_t dibbler_lock;
+- 
+- TDHCPClient* ptr = 0;
+- 
+-@@ -44,8 +44,8 @@ void signal_handler(int n) {
+- #ifdef MOD_CLNT_CONFIRM
+- void signal_handler_of_linkstate_change(int n) {
+-     Log(Notice) << "Network switch off event detected. initiating CONFIRM." << LogEnd;
+--    pthread_mutex_lock(&lock);
+--    pthread_mutex_unlock(&lock);
+-+    pthread_mutex_lock(&dibbler_lock);
+-+    pthread_mutex_unlock(&dibbler_lock);
+- }
+- #endif
+- 
+-diff --git a/Port-linux/lowlevel-linux-link-state.c b/Port-linux/lowlevel-linux-link-state.c
+-index 76293ea1..e6b94063 100644
+---- a/Port-linux/lowlevel-linux-link-state.c
+-+++ b/Port-linux/lowlevel-linux-link-state.c
+-@@ -34,7 +34,7 @@ volatile int * notifier = 0;
+- int isDone = 0;
+- pthread_t parent_id;
+- pthread_t ntid;
+--pthread_mutex_t lock;
+-+pthread_mutex_t dibbler_lock;
+- 
+- struct state {
+-     int id;
+-@@ -86,9 +86,9 @@ void link_state_changed(int ifindex)
+-     {
+- 	if (changed_links->cnt<16)
+- 	    changed_links->ifindex[changed_links->cnt++] = ifindex;
+--	pthread_mutex_lock(&lock);
+-+	pthread_mutex_lock(&dibbler_lock);
+- 	*notifier = 1; /* notify that change has occured */
+--	pthread_mutex_unlock(&lock);
+-+	pthread_mutex_unlock(&dibbler_lock);
+- 	pthread_kill(parent_id,SIGUSR1);
+-     } else
+-     {
+diff --git a/meta-networking/recipes-connectivity/dibbler/dibbler_git.bb b/meta-networking/recipes-connectivity/dibbler/dibbler_git.bb
+index 90051a319a..c2f4827161 100644
+--- a/meta-networking/recipes-connectivity/dibbler/dibbler_git.bb
++++ b/meta-networking/recipes-connectivity/dibbler/dibbler_git.bb
+@@ -5,11 +5,10 @@ HOMEPAGE = "http://klub.com.pl/dhcpv6"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=7236695bb6d4461c105d685a8b61c4e3"
  
- SRC_URI = "http://www.cipherdyne.org/${BPN}/download/${BPN}-${PV}.tar.bz2 \
-+           file://0001-Fix-compilation-with-GCC-s-fno-common-flag-fixes-305.patch \
-           "
- SRC_URI[md5sum] = "47a9c7c214c40dceb5dc2aa8832e4f32"
- SRC_URI[sha256sum] = "f6c09bec97ed8e474a98ae14f9f53e1bcdda33393f20667b6af3fb6bb894ca77"
+-SRCREV = "c4b0ed52e751da7823dd9a36e91f93a6310e5525"
++SRCREV = "a7c6cf58a88a510cb00841351e75030ce78d36bf"
+ 
+ SRC_URI = "git://github.com/tomaszmrugalski/dibbler \
+            file://dibbler_fix_getSize_crash.patch \
+-           file://0001-linux-port-Rename-pthread_mutex_t-variable-lock.patch \
+            "
+ PV = "1.0.1+1.0.2RC1+git${SRCREV}"
+ 
 -- 
 2.28.0
 
