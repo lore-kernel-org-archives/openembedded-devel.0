@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.11925.1597228058067199256
+ by mx.groups.io with SMTP id smtpd.web12.11840.1597228058571309302
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 12 Aug 2020 03:27:38 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=53212 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k5nyp-0001gR-0d; Wed, 12 Aug 2020 13:27:36 +0300
+	id 1k5nyq-0001gR-N3; Wed, 12 Aug 2020 13:27:37 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/5] python3-rsa: Upgrade 3.4.2 -> 4.6
-Date: Wed, 12 Aug 2020 13:27:24 +0300
-Message-Id: <20200812102726.4376-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-cmd2: Upgrade 1.3.1 -> 1.3.2
+Date: Wed, 12 Aug 2020 13:27:25 +0300
+Message-Id: <20200812102726.4376-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200812102726.4376-1-leon.anavi@konsulko.com>
 References: <20200812102726.4376-1-leon.anavi@konsulko.com>
@@ -30,63 +30,42 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 4.6:
+Upgrade to release 1.3.2:
 
-- Rolled back the switch to Poetry, and reverted back to using
-  Pipenv + setup.py for dependency management. There apparently
-  is an issue no-binary installs of packages build with Poetry.
-- Limited SHA3 support to those Python versions (3.6+) that
-  support it natively. The third-party library that adds support
-  for this to Python 3.5 is a binary package, and thus breaks the
-  pure-Python nature of Python-RSA.
-- To avoid older Python installations from trying to upgrade to
-  RSA 4.4, this is now made explicit in the python_requires
-  argument in setup.py
-
-The encrypt/decrypt-bigfile CLI commands have been removed in
-2016 therefore the recipe has been updated accordingly.
+- Added functions to fetch registered CommandSets by type and
+  command name.
+- Fixed prog value of subcommands added with as_subcommand_to()
+  decorator.
+- Fixed missing settings in subcommand parsers created with
+  as_subcommand_to() decorator. These settings include things
+  like description and epilog text.
+- Fixed issue with CommandSet auto-discovery only searching
+  direct sub-classes
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-rsa_3.4.2.bb => python3-rsa_4.6.bb}    | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-rsa_3.4.2.bb => python3-rsa_4.6.bb} (77%)
+ .../python/{python3-cmd2_1.3.1.bb => python3-cmd2_1.3.2.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.1.bb => python3-cmd2_1.3.2.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb b/meta-python/recipes-devtools/python/python3-rsa_4.6.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb
-rename to meta-python/recipes-devtools/python/python3-rsa_4.6.bb
-index 759214fa3..d2b108635 100644
---- a/meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-rsa_4.6.bb
-@@ -4,15 +4,14 @@ AUTHOR = "Sybren A. Stuvel"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c403f6882d4f97a9cd927df987d55634"
+diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.1.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.3.2.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.1.bb
+rename to meta-python/recipes-devtools/python/python3-cmd2_1.3.2.bb
+index 15b10d0f5..f5d6099dd 100644
+--- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-cmd2_1.3.2.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def"
  
--SRC_URI[sha256sum] = "25df4e10c263fb88b5ace923dd84bf9aa7f5019687b5e55382ffcdb8bede9db5"
-+SRC_URI[md5sum] = "bbf1c954865319bd542600ab07f92aca"
-+SRC_URI[sha256sum] = "109ea5a66744dd859bf16fe904b8d8b627adafb9408753161e766a92e7d681fa"
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
  
- inherit pypi setuptools3 update-alternatives
+-SRC_URI[md5sum] = "9f0af0810da98a30ac92f1e4e7a8c8ab"
+-SRC_URI[sha256sum] = "c86f3b8348798732759c9d53cbcb6258a8f21f60c1a1268e942d24c9dc50b4c6"
++SRC_URI[md5sum] = "ee7199d76f75bf01d8a162db6b696662"
++SRC_URI[sha256sum] = "645792972e1c0475b03fd575d8ca95c526db970d886669a399307eb52fddd7bd"
  
- ALTERNATIVE_${PN} = "\
-     pyrsa-decrypt \
--    pyrsa-decrypt-bigfile \
-     pyrsa-encrypt \
--    pyrsa-encrypt-bigfile \
-     pyrsa-keygen \
-     pyrsa-priv2pub \
-     pyrsa-sign \
-@@ -20,9 +19,7 @@ ALTERNATIVE_${PN} = "\
- "
+ inherit pypi setuptools3
  
- ALTERNATIVE_LINK_NAME[pyrsa-decrypt] = "${bindir}/pyrsa-decrypt"
--ALTERNATIVE_LINK_NAME[pyrsa-decrypt-bigfile] = "${bindir}/pyrsa-decrypt-bigfile"
- ALTERNATIVE_LINK_NAME[pyrsa-encrypt] = "${bindir}/pyrsa-encrypt"
--ALTERNATIVE_LINK_NAME[pyrsa-encrypt-bigfile] = "${bindir}/pyrsa-encrypt-bigfile"
- ALTERNATIVE_LINK_NAME[pyrsa-keygen] = "${bindir}/pyrsa-keygen"
- ALTERNATIVE_LINK_NAME[pyrsa-priv2pub] = "${bindir}/pyrsa-priv2pub"
- ALTERNATIVE_LINK_NAME[pyrsa-sign] = "${bindir}/pyrsa-sign"
 -- 
 2.17.1
 
