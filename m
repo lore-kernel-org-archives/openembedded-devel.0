@@ -1,99 +1,93 @@
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com [209.85.214.196])
- by mx.groups.io with SMTP id smtpd.web12.10111.1597218659211235983
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.11924.1597228056298887794
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Aug 2020 00:50:59 -0700
+ Wed, 12 Aug 2020 03:27:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=XVGjLQTt;
- spf=pass (domain: gmail.com, ip: 209.85.214.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f196.google.com with SMTP id o1so741746plk.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 00:50:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=KsQCwPst5lvFWaHALi+IUS4ygdnbiWCJqMOPbmuIXug=;
-        b=XVGjLQTtAKSK7oAI1t4WdlXJOAqgO81E34saDl5YJmVD/hHgnYUNgB6icMpyHpQwFe
-         HC/1QQOVqMY/7SR0lMHp8hXsQT2UTCzsomMKf1EPJim/fIG+8sJDkhHATrHoAlBivrS+
-         oSZwFnGwFaItGwGXOdGRlSa/iCX6jEfdA0htjyWF9ZIpHuIYteJbwjJBEB/YbBkrb2RS
-         TJThaF0ZjCfcp1UuBum4flxua1hM7/vrWlPzD1TELvb8qiQB2hEGY8kQj8TDrJMm5G2Z
-         ejwSCiYUR7WDjfM2qOXYntas++5+NXP9B6liqhuMLeadv8usjsypbhP5ew/uDAPify37
-         v52g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=KsQCwPst5lvFWaHALi+IUS4ygdnbiWCJqMOPbmuIXug=;
-        b=otIv8sm3IFJnJDauA9dICDDws/9eCDQ7GK/M98MyZMZjGHXRx5UK9I3KzVazXF5K5l
-         Dq+6F7REMfF9tbyKBFBYYoB7in42lcB0jwyVfGPKjaLI/oN1SH6xZNFPLS1HDpFwNUMr
-         GJl7uMANGDpFz8+MEQwhGXL5P5IuOqFXzNmjmRPVYe+PP+5HRnq6zCT9Hrcq4R6JbkFf
-         MWHdDm4hBJPHb5eH0sG9jWHraO4TK7lEiDgPV0ajGU35V+AWD8CC5QrbreKUGcDDj9lL
-         SvX/CIwXLx3mXB1VprfR5F3JgZllLAJKDxGZiFhHnhg5VLzeeslWt9qHfd/wFk45c4TO
-         qrGw==
-X-Gm-Message-State: AOAM5309VeQeOYKk6CkB0japlmdSLM4kWibAh5ncfvyjtMv16WI4dH2A
-	4IQBQUC3nh4JauyfG+dsGxgeVmrFyzA=
-X-Google-Smtp-Source: ABdhPJxoItopyaLQuULX4pMqxzDAHhyWaI9BqmiBw6fLQRSWaLZNsbNdlelEajeZK3z/Yby41jai8g==
-X-Received: by 2002:a17:90b:374c:: with SMTP id ne12mr5055895pjb.120.1597218658332;
-        Wed, 12 Aug 2020 00:50:58 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id l63sm1384257pgl.24.2020.08.12.00.50.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2020 00:50:57 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=53212 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1k5nyl-0001gR-Lh; Wed, 12 Aug 2020 13:27:32 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH v2] ocl-icd: Upgrade to latest
-Date: Wed, 12 Aug 2020 00:50:55 -0700
-Message-Id: <20200812075055.3512737-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-graphviz: Upgrade 0.14 -> 0.14.1
+Date: Wed, 12 Aug 2020 13:27:22 +0300
+Message-Id: <20200812102726.4376-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-License-Update: Update copyrights [1]
+Add homepage and upgrade to release 0.14.1:
 
-Install CL/cl_icd.h as its needed by opencl-icd-loader
+Document the colon-separated node[:port[:compass]] format used
+for tail and head points in the edge()- and edges()-methods
 
-Do not provide libOpenCL.so these are alrwady provided by OpenCL 1.2 Installable Client Driver
+License-Update: Use file LICENSE.txt to check the license.
 
-[1] https://github.com/OCL-dev/ocl-icd/commit/3920205736afbb67729e9c73c7b4c6fdb3fcb327#diff-7116ef0705885343c9e1b2171a06be0e
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
-v2: Fix library conflicts and license checksums
+ .../python/python3-graphviz_0.14.1.bb           | 17 +++++++++++++++++
+ .../python/python3-graphviz_0.14.bb             | 16 ----------------
+ 2 files changed, 17 insertions(+), 16 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-graphviz_0.14.1.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-graphviz_0.14.bb
 
- meta-oe/recipes-core/opencl/ocl-icd_git.bb | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-core/opencl/ocl-icd_git.bb b/meta-oe/recipes-core/opencl/ocl-icd_git.bb
-index d14ec53e3d..a65c7618b8 100644
---- a/meta-oe/recipes-core/opencl/ocl-icd_git.bb
-+++ b/meta-oe/recipes-core/opencl/ocl-icd_git.bb
-@@ -3,12 +3,12 @@ DESCRIPTION = "Open Source alternative to vendor specific OpenCL ICD loaders."
- 
- # The LICENSE is BSD 2-Clause "Simplified" License
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://COPYING;md5=232257bbf7320320725ca9529d3782ab"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=1238d5bccbb6bda30654e48dcc0a554b"
- 
- SRC_URI = "git://github.com/OCL-dev/ocl-icd.git;protocol=https"
- 
- PV = "2.2.12+git${SRCPV}"
--SRCREV = "af79aebe4649f30dbd711c1bf6fc661eac6e5f01"
-+SRCREV = "a9e57b199ff1e8d03fa3e5c53c5544de3dc72fe6"
- 
- S = "${WORKDIR}/git"
- 
-@@ -16,4 +16,10 @@ inherit autotools
- 
- DEPENDS = "ruby-native"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-graphviz_0.14.1.bb b/meta-python/recipes-devtools/python/python3-graphviz_0.14.1.bb
+new file mode 100644
+index 000000000..f26a1efce
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-graphviz_0.14.1.bb
+@@ -0,0 +1,17 @@
++DESCRIPTION = "Graphviz protocol implementation"
++HOMEPAGE = "https://graphviz.readthedocs.io/en/stable/"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f7831c564aeff14e68aa4ff7a93dc89f"
 +
-+do_install_append() {
-+    install -Dm 0644 ${S}/khronos-headers/CL/cl_icd.h ${D}${includedir}/CL/cl_icd.h
-+    rm -rf ${D}${libdir}/libOpenCL.so*
-+}
++SRC_URI[md5sum] = "436cb0f41f6a949f916357ca037e205a"
++SRC_URI[sha256sum] = "f5aad52a652c06825dcc5ee018d920fca26aef339386866094597fb3f2f222ce"
 +
- BBCLASSEXTEND = "native"
++inherit pypi setuptools3
++
++PYPI_PACKAGE_EXT = "zip"
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-logging \
++"
++
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-graphviz_0.14.bb b/meta-python/recipes-devtools/python/python3-graphviz_0.14.bb
+deleted file mode 100644
+index 98bbddd21..000000000
+--- a/meta-python/recipes-devtools/python/python3-graphviz_0.14.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-DESCRIPTION = "Graphviz protocol implementation"
+-
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+-
+-SRC_URI[sha256sum] = "e104ba036c8aef84320ec80560e544cd3cad68c9f90394b4e2b87bc44ab09791"
+-
+-inherit pypi setuptools3
+-
+-PYPI_PACKAGE_EXT = "zip"
+-
+-RDEPENDS_${PN} += " \
+-    ${PYTHON_PN}-logging \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
 -- 
-2.28.0
+2.17.1
 
