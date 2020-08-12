@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.18991.1597250634451834357
+ by mx.groups.io with SMTP id smtpd.web11.18990.1597250634451273156
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 12 Aug 2020 09:43:54 -0700
 Authentication-Results: mx.groups.io;
@@ -8,17 +8,15 @@ Received: from [78.130.197.211] (port=55224 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k5tqx-0000d2-OM; Wed, 12 Aug 2020 19:43:52 +0300
+	id 1k5tqw-0000d2-BP; Wed, 12 Aug 2020 19:43:51 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-javaobj-py3: Upgrade 0.4.0.1 -> 0.4.1
-Date: Wed, 12 Aug 2020 19:43:32 +0300
-Message-Id: <20200812164335.24599-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-pytest-timeout: Upgrade 1.4.1 -> 1.4.2
+Date: Wed, 12 Aug 2020 19:43:31 +0300
+Message-Id: <20200812164335.24599-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200812164335.24599-1-leon.anavi@konsulko.com>
-References: <20200812164335.24599-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,37 +28,32 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.4.1:
+Upgrade to release 1.4.2:
 
-- Added the custom transformer allowing a finer loading of custom
-  Java streams
-
-License-Update: Use file LICENSE to check the license.
+- Fix compatibility when run with pytest pre-releases
+- Fix detection of third-party debuggers
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...-javaobj-py3_0.4.0.1.bb => python3-javaobj-py3_0.4.1.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-javaobj-py3_0.4.0.1.bb => python3-javaobj-py3_0.4.1.bb} (67%)
+ ...ytest-timeout_1.4.1.bb => python3-pytest-timeout_1.4.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pytest-timeout_1.4.1.bb => python3-pytest-timeout_1.4.2.bb} (67%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.0.1.bb b/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-timeout_1.4.1.bb b/meta-python/recipes-devtools/python/python3-pytest-timeout_1.4.2.bb
 similarity index 67%
-rename from meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.1.bb
-index 49d258ca8..c83140a89 100644
---- a/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.1.bb
-@@ -5,10 +5,10 @@ DESCRIPTION = "python-javaobj is a python library that provides functions\
-  representation is a standard data interchange format in Java world."
- HOMEPAGE = "https://github.com/tcalmant/python-javaobj"
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://setup.py;beginline=15;endline=27;md5=af9ce26ac2de1b7436eb08c9308b4a1e"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d273d63619c9aeaf15cdaf76422c4f87"
+rename from meta-python/recipes-devtools/python/python3-pytest-timeout_1.4.1.bb
+rename to meta-python/recipes-devtools/python/python3-pytest-timeout_1.4.2.bb
+index 506f4c065..906d67064 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest-timeout_1.4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest-timeout_1.4.2.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d8048cd156eda3df2e7f111b0ae9ceff"
  
--SRC_URI[md5sum] = "352fe0df9336b8699ad0799ef152da6b"
--SRC_URI[sha256sum] = "18c44cfaa214813784a823432b4ab9829c9626b2b00072011627b4008b0067cd"
-+SRC_URI[md5sum] = "47632071c3c3ca14b6c42f2a4e2e1309"
-+SRC_URI[sha256sum] = "419ff99543469e68149f875abb0db5251cecd350c03d2bfb4c94a5796f1cbc14"
+ PYPI_PACKAGE = "pytest-timeout"
+ 
+-SRC_URI[md5sum] = "c458dd7d417a5f2dbae0f1f6073845f7"
+-SRC_URI[sha256sum] = "6d0fb4ce74cebb81be252e4e0d9c2a91f30270b33208cfa0f1da6eed9abf18ac"
++SRC_URI[md5sum] = "552cc293447b00f7a294ce7a1fb3839f"
++SRC_URI[sha256sum] = "20b3113cf6e4e80ce2d403b6fb56e9e1b871b510259206d40ff8d609f48bda76"
  
  inherit pypi setuptools3
  
