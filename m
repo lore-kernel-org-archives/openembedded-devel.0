@@ -1,50 +1,50 @@
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web11.1314.1597271988586652582
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web11.1317.1597271989634372145
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Aug 2020 15:39:48 -0700
+ Wed, 12 Aug 2020 15:39:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=RxqlDVmo;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id bo3so4009799ejb.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 15:39:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=rVgfoJ7W;
+ spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f50.google.com with SMTP id p24so4002553ejf.13
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 15:39:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=zTGDkA5DH4UKcBX3FAjGAg77g5AJHVXNnqK6oT3yKyE=;
-        b=RxqlDVmoS7W7Q39+MI839en1OFzPXk/67q5YzakylwQfBeSA4ujVW+O3a0PlPvoSBV
-         ly36pUHfe/22ims+1J1GmNUZe/EzwdjIsfZ4gbc1hcj3QhzZ/hUBOUgwFz87EHSPkTRY
-         7rCAQNBlvW4/5DH1iaqMoihdkzgY577HEXaDWhARAMig7aCA83TaH4DiOlXcMxooH5b3
-         BS4nsbeBrvWfDRUoZhqJkD7OVl2Af8sHOGDjJyUDg1mvCTFoHSXdywVf/YPigcF4IrTX
-         AWw1BTNQEpJwiIsfOx+IR/IYQm+u+2jRNLyMCGyMqR/5jkWpCzLnCB2ZT3peFV0KvYA6
-         GW4A==
+        bh=9ebNC/7Avr76cdYnsmJVKY4OfNAIZ5YyblSSPdxikTE=;
+        b=rVgfoJ7W+BCrxVzX6rGhxcCpnI4uxrcuMzSe/VJrUL8+nDWMTFGD8iqG4u4uPLgwu3
+         afijSYTe7jbghgu5WWdyzMK+oF7a6NfNdxakbQzvqkkb21hF+fCD7xJd8QxZQDaY4dG4
+         Y/gpCWPugbcFVwXSwl4j3c27Zs1aajDsfOVEF4wajILR6ik5nUFfYxrC8H6szUF4+JFw
+         2N2s6xfOWAszmZ84n50q0w2bV8xQCjrrBHJJngdJ5gmI9AY4WOvUOiD3GNrZlWkQ/ATQ
+         pU3onee091j9zLTLsPMhDaee8WPgi8KRXvbvUtLsroEJIKxeKJ3oW+KCeOLrN6mLjrJl
+         9/gA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=zTGDkA5DH4UKcBX3FAjGAg77g5AJHVXNnqK6oT3yKyE=;
-        b=tbD8xydSBLWAbZQ5T9DtddcN5F6Df3/V4JtfrRQjVOI2GQ9A0UplSmLKCmuWEcOxSk
-         e7vhLdbeAnQuwkH1NYchGGALFKF36SqXjj0jjd9b9uFe6mP61ZWww7rYDZjFMfL5Vg/i
-         3yzaE9tgi7GFYSZXBhOKhWj4J+Aa57e2eQWNcvaAMk32h1Aa+95ugL8lC6ey2Igtl/vR
-         rJVHjwmKFaHVFI+Y9S9PUG825SGtViowe9yxCYYK1o8zaNCKIVuGHZQQlbZlaEwMO8cx
-         mgIwnoSfSQ49uj3ug8MTZqTMuvn1UXYdYcgHZhpe++WMzcON+e+YhhG036mFl12TgO1O
-         U6Cg==
-X-Gm-Message-State: AOAM5308wGF7x/K72X0OcIyxfZwooWVPCGTQD4qlwmpm5h/ATrmgebY3
-	wrY7r0xrEgrd5qulH2qf+FgAz6Rh
-X-Google-Smtp-Source: ABdhPJw+IqHoWZrzk7YsPHajvIerlnZMeL2/WcTf/xiEnuBjDP8AKQezXHlMc0k8I317NoHRViVHtA==
-X-Received: by 2002:a17:906:7715:: with SMTP id q21mr2009783ejm.251.1597271986823;
-        Wed, 12 Aug 2020 15:39:46 -0700 (PDT)
+        bh=9ebNC/7Avr76cdYnsmJVKY4OfNAIZ5YyblSSPdxikTE=;
+        b=ai7bnX5KbkjHvLqJ+F5zRc8L+M5mH2sks6vJQbtYzPya7CdDDLY7frT7+FYAsvwTAZ
+         wf9IlIORroNHXisfof4yqww2RpXGBspSmsKZeTi+0GRIsPFVMEJOd8f8WM/lr4pKHwBd
+         8r6o17FObKZhy6T1BZNittzvvMvUxsJgjPJoXwrMIltf1sDX71IJ3tx5hBflJ9PdLLky
+         yc1eQW1stJjnrfvE1dtwm8XqsbeaA1z8U/9gYFp+ADKisKBzn+WrNX08aGWmTa8VlvgB
+         lroIFuGnXzueMgzF0cp90WAVkqYxWqQ4iDQUYtKMK7eBTDKqY51d7vPTrB7wiah3PTg4
+         llOA==
+X-Gm-Message-State: AOAM530/fK7MQeruDqmw1Sv38NsZxQamQNpd++0rnmI7e57HN2D+1642
+	fI0g7iFujMWQGtlk+M6jdoxAo5Ee
+X-Google-Smtp-Source: ABdhPJwNjeNrTv+vZWb0cqR/3nB2xj6Hropte0pJPw3AlOkZzSFPlTa8ZmgTFIC/mww+Gr1ol6Xqrg==
+X-Received: by 2002:a17:906:8608:: with SMTP id o8mr2171612ejx.156.1597271987827;
+        Wed, 12 Aug 2020 15:39:47 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f147e04a6500bbf92bdd781.dip0.t-ipconnect.de. [2003:f0:7f14:7e04:a650:bbf:92bd:d781])
-        by smtp.gmail.com with ESMTPSA id ci27sm2569208ejc.23.2020.08.12.15.39.45
+        by smtp.gmail.com with ESMTPSA id ci27sm2569208ejc.23.2020.08.12.15.39.46
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2020 15:39:46 -0700 (PDT)
+        Wed, 12 Aug 2020 15:39:47 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 6/8] gnome-disk-utility: re-add 3.36.3
-Date: Thu, 13 Aug 2020 00:39:31 +0200
-Message-Id: <20200812223933.1119785-6-schnitzeltony@gmail.com>
+Subject: [PATCH 7/8] gdm: upgrade 3.36.2 -> 3.36.3
+Date: Thu, 13 Aug 2020 00:39:32 +0200
+Message-Id: <20200812223933.1119785-7-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200812223933.1119785-1-schnitzeltony@gmail.com>
 References: <20200812223933.1119785-1-schnitzeltony@gmail.com>
@@ -52,65 +52,35 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+==============
+Version 3.36.3
+==============
+- User switching fix
+- Translation updates
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../gnome-disk-utility_3.36.3.bb              | 34 +++++++++++++++++++
- .../packagegroups/packagegroup-gnome-apps.bb  |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_3.36.3.bb
+ meta-gnome/recipes-gnome/gdm/{gdm_3.36.2.bb => gdm_3.36.3.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-gnome/recipes-gnome/gdm/{gdm_3.36.2.bb => gdm_3.36.3.bb} (89%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_3.36.3.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_3.36.3.bb
-new file mode 100644
-index 000000000..08fd96472
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_3.36.3.bb
-@@ -0,0 +1,34 @@
-+SUMMARY = "GNOME disk utility"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+SECTION = "x11/gnome"
-+
-+DEPENDS = " \
-+    gtk+3 \
-+    libdvdread \
-+    libcanberra \
-+    libnotify \
-+    libsecret \
-+    libpwquality \
-+    udisks2 \
-+"
-+
-+GNOMEBASEBUILDCLASS = "meson"
-+
-+inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-version-is-even mime-xdg
-+
-+REQUIRED_DISTRO_FEATURES = "x11"
-+
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-+
-+# As soon as elogind is of interest this needs rework: meson option is combo
-+PACKAGECONFIG[systemd] = "-Dlogind=libsystemd,-Dlogind=none,systemd"
-+
-+SRC_URI[archive.sha256sum] = "dd033d3f36ab070bc72317cf3045e5b4927765543f1bce7612b2c7f96595167a"
-+
-+FILES_${PN} += " \
-+    ${datadir}/metainfo \
-+    ${datadir}/dbus-1 \
-+"
-+
-diff --git a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
-index 2d2d6b599..1f450fd9d 100644
---- a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
-+++ b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
-@@ -14,6 +14,7 @@ RDEPENDS_${PN} = " \
-     ghex \
-     gnome-calculator \
-     gnome-calendar \
-+    gnome-disk-utility \
-     gnome-font-viewer \
-     gnome-photos \
-     gnome-terminal \
+diff --git a/meta-gnome/recipes-gnome/gdm/gdm_3.36.2.bb b/meta-gnome/recipes-gnome/gdm/gdm_3.36.3.bb
+similarity index 89%
+rename from meta-gnome/recipes-gnome/gdm/gdm_3.36.2.bb
+rename to meta-gnome/recipes-gnome/gdm/gdm_3.36.3.bb
+index fbf25a30c..fb0b77bf4 100644
+--- a/meta-gnome/recipes-gnome/gdm/gdm_3.36.2.bb
++++ b/meta-gnome/recipes-gnome/gdm/gdm_3.36.3.bb
+@@ -14,8 +14,7 @@ REQUIRED_DISTRO_FEATURES = "x11 systemd pam"
+ 
+ inherit gnomebase gsettings gobject-introspection gettext systemd useradd upstream-version-is-even features_check
+ 
+-SRC_URI[archive.md5sum] = "18384eb8345dbee5a8219916debf7e43"
+-SRC_URI[archive.sha256sum] = "3f561c10ae2e5942b03026f02c0aa7d8712e382708b17a0970874df8175b83a8"
++SRC_URI[archive.sha256sum] = "3bfbb620cbc0d1cbd70b4c4376cf4b705db4dc36a37124e5be386ccc25fa7e81"
+ SRC_URI += "file://0001-Ensure-pam-file-installation.patch"
+ 
+ EXTRA_OECONF = " \
 -- 
 2.26.2
 
