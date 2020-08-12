@@ -1,50 +1,50 @@
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
- by mx.groups.io with SMTP id smtpd.web12.1226.1597271984131243222
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web12.1227.1597271985061273246
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Aug 2020 15:39:44 -0700
+ Wed, 12 Aug 2020 15:39:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=EcQVOMdV;
- spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f46.google.com with SMTP id t10so4031515ejs.8
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 15:39:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=nIenFjCJ;
+ spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f44.google.com with SMTP id c16so4014910ejx.12
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 15:39:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=yd2ToUwswRAkEOojsXJTH/KqNm9pf60JZQrEZYQxxG4=;
-        b=EcQVOMdVsPD7NjuoZ4eS1Y+ERtQGLvwHnjkz60w/VH3xJngIfsV3fNdRyD9SPz7IWL
-         eqvNX5KE9mE3LKOMDpLQifKuVq11z/bI81PCXi0f1jVJvJ+bxKVkstvFR3dJ9hYpNA3H
-         as788JqereiBqYWrR8WXprZptFMhD3BwGxl53m8ncZa2pTIVfNANadHwHdyVlyEAZfpV
-         0sOlNdfMEv7KOHapLwywoWGkD1DVi1YaZjutNShLssZkc9smT5NKxmfg41yXpktTwRGy
-         5at2ei1bUqr3Mp5504UuCLdpYYdvka0JOlRBSwuai/DN8Cfll2ARU6+0LUcu6V7jKzG9
-         HX1g==
+        bh=3U4FeC2UguD0GTc4US4dvVn4rszmqEHFZOtb+BrqbNU=;
+        b=nIenFjCJwPmYw5rs9Zrf5TxklfrTloC//VhEWLuB5zmrDKRdMvzN9vff413usTo6Uz
+         v3X64gzOPWXaMYihuGtwgeL/pAl6IyQgEcgj52Vca/D5dhk0HuTELFiKsBRftXIkgjZA
+         qIVSX+w+CogDnNLnMCGGARyGfUZGZR/7OaGr8QMfVmIS628+YbepHDpisrcV9+imYnhL
+         5SAoxaZfbOiq31Nst2BrnWX88UsrrUYX2tKxPvntlFPVQbHcBxbMnGTw9WtZCpVyVTFo
+         86LUVtYV9lThyOYzN7bLL398msb0UXS7pC1xaPHoVa6ck5ZKloTgrDkfF0ptvVQQG7G+
+         /rHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=yd2ToUwswRAkEOojsXJTH/KqNm9pf60JZQrEZYQxxG4=;
-        b=BV2osLq9yMNwPF0EwS5t193AaH6I4tkNFoeJizbl2iMCtFdl5e2y8t1lWAdM1wUvLf
-         E2iVFpaWjhmRBfnbHRK6kRh+HAhJCWvJFwUlaWyZjisWFMeEKpNyiDxNVO6OJi3QIB9V
-         akemjIw+ClNxT0+cv+4mMbrnr3WnO3wnhLVxMKAUV9+FKKUo39dze6MSaDyXgIzwmcLL
-         Y3i0wlPEUDlTd/UUF+2CFW3D3bumOmZDbolAWMDbyR3cI9uAZGp+nSY1IgrD619AVK4Y
-         KxpgBqMfxXAhLJ9KN33Tk4TDLFvyaMGfc5K1gajvV2klf6doC/Y036pCf55Fj37RNuMX
-         5ZvA==
-X-Gm-Message-State: AOAM5333usU+s+oK5yLDGudRrGeeR5LyMRYMqVgf+L+FqWTD2SdDu9Mb
-	jTlQ82+wa6aNRCtD8lwJ4az7kUYv
-X-Google-Smtp-Source: ABdhPJwtOW0cePKjQOQPf+VAcVTBVJpg+3vRdmy4wXXKZgvMeS6Lkk49SO9V9BwOqGBtvixX+mrdDw==
-X-Received: by 2002:a17:906:d187:: with SMTP id c7mr2115245ejz.196.1597271982354;
-        Wed, 12 Aug 2020 15:39:42 -0700 (PDT)
+        bh=3U4FeC2UguD0GTc4US4dvVn4rszmqEHFZOtb+BrqbNU=;
+        b=dOwSYmNKZkaUuzDvPbIssjgipA+t/T2nh3LasFfIz+NTNnBbD5V6AswbWquBJNlT1z
+         qdNV60GQQVdkSSWUhEOIVFxv3CFEYPTrbHEuYO9HTNkF1ycFZxJNIcf2QWCZNvkT3KV+
+         upioGX5PboqeHwW5mQSRFBLi5+oakT27ZVXs3iKqTIXE1w33flkm7u2GW7RXtc+BX0m+
+         ceA5JFZOb3WaJo0R5q4nqY2LERzBsxxCLFKG8+a42ZZtJfMO+yB8up35gO+hLXjTUOI/
+         Z1XZn7RnCIr/f3Gbr+/NZ9RD1/z6SxOac79+97QYKehhV9lsAf8Q1UVPou9N4I6rb45C
+         LAdw==
+X-Gm-Message-State: AOAM532zPzGuUt8VYF2Lp5ejkgaTP0AR7x338VelRo2PF7q9OjbF0JH5
+	K+P32NvhWI5UlIx5NmCOZbjy7lDQ
+X-Google-Smtp-Source: ABdhPJxkFmpl9jdRyrxvmCOgTrHzx0xRlUWgaPxZ6tQgqvvbzWYFfNeaSKGy1A0nEXXJY9lERvox+g==
+X-Received: by 2002:a17:906:5f8f:: with SMTP id a15mr2125963eju.291.1597271983394;
+        Wed, 12 Aug 2020 15:39:43 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f147e04a6500bbf92bdd781.dip0.t-ipconnect.de. [2003:f0:7f14:7e04:a650:bbf:92bd:d781])
-        by smtp.gmail.com with ESMTPSA id ci27sm2569208ejc.23.2020.08.12.15.39.41
+        by smtp.gmail.com with ESMTPSA id ci27sm2569208ejc.23.2020.08.12.15.39.42
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2020 15:39:41 -0700 (PDT)
+        Wed, 12 Aug 2020 15:39:42 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 2/8] xfwm4: upgrade 4.14.4 -> 4.14.5
-Date: Thu, 13 Aug 2020 00:39:27 +0200
-Message-Id: <20200812223933.1119785-2-schnitzeltony@gmail.com>
+Subject: [PATCH 3/8] gnome-desktop3: upgrade 3.36.4 -> 3.36.5
+Date: Thu, 13 Aug 2020 00:39:28 +0200
+Message-Id: <20200812223933.1119785-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200812223933.1119785-1-schnitzeltony@gmail.com>
 References: <20200812223933.1119785-1-schnitzeltony@gmail.com>
@@ -52,33 +52,38 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes for 4.14.5
-========================
-- Fix an error leak in compositor (xfce/xfwm4#351)
-- Fix compositor selection atom misuse
+Major change is removal of md5 checksum because this is a very exciting
+upgrade:
+
+===============
+Version 3.36.5
+===============
+
+- No changes
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-xfce/xfwm4/{xfwm4_4.14.4.bb => xfwm4_4.14.5.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.14.4.bb => xfwm4_4.14.5.bb} (93%)
+ .../{gnome-desktop3_3.36.4.bb => gnome-desktop3_3.36.5.bb}     | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-desktop/{gnome-desktop3_3.36.4.bb => gnome-desktop3_3.36.5.bb} (88%)
 
-diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.4.bb b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.5.bb
-similarity index 93%
-rename from meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.4.bb
-rename to meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.5.bb
-index d68e00864..f8febe804 100644
---- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.4.bb
-+++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.5.bb
-@@ -9,7 +9,7 @@ inherit xfce update-alternatives features_check
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.4.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.5.bb
+similarity index 88%
+rename from meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.4.bb
+rename to meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.5.bb
+index 6b0c53566..fcdb2aee4 100644
+--- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.4.bb
++++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.5.bb
+@@ -16,8 +16,7 @@ inherit gnomebase itstool pkgconfig upstream-version-is-even gobject-introspecti
+ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+ UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
  
- SRC_URI += "file://0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch"
--SRC_URI[sha256sum] = "b2a4e6acc3e6eb5503f247f2664c2b1a25240050d75ca93299955aa6b5e62a7e"
-+SRC_URI[sha256sum] = "d7a7c63fa42ec6d7cb3caab130d6f496be5bd7689b775d20e8786b7f3e282930"
+-SRC_URI[archive.md5sum] = "285d5d8a97b7564809151d401199c239"
+-SRC_URI[archive.sha256sum] = "007bbd48c1ca2fcb184713c923174c1d4328c3e33a2271ca536bdd3b71229bc6"
++SRC_URI[archive.sha256sum] = "eea1242994109fa3f05793963ee25c3df23bc84b0f0b81f03ec3c294c27ab753"
  
- PACKAGECONFIG ?= " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'epoxy', '', d)} \
+ SRC_URI += " \
+     file://gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch \
 -- 
 2.26.2
 
