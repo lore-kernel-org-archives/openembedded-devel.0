@@ -1,68 +1,100 @@
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
- by mx.groups.io with SMTP id smtpd.web12.9309.1597213436711050257
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.web11.9669.1597214236588549192
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Aug 2020 23:23:57 -0700
+ Tue, 11 Aug 2020 23:37:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=W7AB03aD;
- spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: marek.belisko@gmail.com)
-Received: by mail-ej1-f50.google.com with SMTP id t10so982163ejs.8
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Aug 2020 23:23:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=dkUlH2MX;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id m71so524338pfd.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Aug 2020 23:37:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=Eddk8SJ/BR5gQ82UrHZ4oZcC8w6yY8NP1qbI9UuDrT0=;
-        b=W7AB03aDjA2FFeBTfbrIUa17HP/t5WWDEj30n+7NAqe669W03GdVH02dUElu/72sNx
-         slHo2wDi5FK5BSWzSQtnbjN7AHSgM5ZBqDpPMKWnIuCdDqO/wGFKFKYwYrWXAVhuFvU0
-         vAEJPEDShBRAybl6umZogn+02GGmKCQmZhTGz6kS8Arsw85O5DKodGrFQdl6DQuKufoI
-         LgwjzruoDcedPiKSrifVO/GaH885vBRcqYfYJcbKpHIHCocQVLdehzbQvK7cfNNZ3XQl
-         hDiBn69e6eUwAY9gXTMXMDJd+iVnRTwBwveeDFIrE3cHpnJBnUPJVhngtwvYWJtjmjOz
-         ds/Q==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=MzlB5pe445HStbReLuihS/IIdWHAJ7Zy8/S+ES7aZVQ=;
+        b=dkUlH2MXiUOy3MDshqQHH//maFEtrV32b9pue0mPkb5NzLLeWhNUUCpyHj3zxVBu9g
+         G3KQSAIAJ68wZWBu4cr7qTIXQIc3QFzt4w/aqi0G/8BU0upA+IBXmydbwBnkIV2ysEOa
+         W3jsqQnf45JnjyPxJJbXYsOhSVcS4TTcUnsqnORYs6oFuza3xMf8qm7ncaXSRZ8Klxqy
+         UJ/winV0K1uTNzxruVkQU/FCdAY2rZMSPIjX8sNzuzfZYv7HzOg5OELpi+oIglqcRNKe
+         3xeFrPGCxksMb4YuMoItWKgnu6haLQr1MOMkiPXVlzvFI4g07bsfGY42VFzh9Dp/uNxW
+         DFgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=Eddk8SJ/BR5gQ82UrHZ4oZcC8w6yY8NP1qbI9UuDrT0=;
-        b=F1g2jE+yDxVdAbr0EXN+zZY4SXdRcseGrXtH2GNDVr1CyS0K0S9bZ9ZnqD42FPdb5Q
-         Vq6QTV1rg/1GEW2IcWd5lXsZ7B1zijPkGn8IJsejDj5eDPeBO7IO3j17UPOiUNMx1unC
-         idwHdr/9Ym/6bqEqFDPFyVByPom/23mgcZpzC6gT0BJeFZOvq17IweHGTtXT/XJ3rh3w
-         Fm9yN14ynIii2KO7N/HwbJHmJpf3tWlKiSgpMtR5Fu8vuasgzMi3To4AgiZjDpdL9AdZ
-         52y+ZpiA/xGTSr9iYpO5Xikeb6D0t50YNK7I0B1FhHU1f5EMhqJXebe2qzXX4WmH5kdm
-         QOYQ==
-X-Gm-Message-State: AOAM532diPUV+8+mrLk8t1gV5KzSsSEKLPCmjwiq1GBWorlmEyr+VDS6
-	3o6yI6qAgiMlP+/M4IgXBJkPIHUFcng+d/NCWj5iA2O/
-X-Google-Smtp-Source: ABdhPJyfnVlmGGEuU3yZSM3r/ogRDGRB28NxAsET/+gqyQi8WOOn9UaR7viGc6tGdYpsYXB3lDYr1AHBYN+K6SrZhlQ=
-X-Received: by 2002:a17:906:c187:: with SMTP id g7mr30925270ejz.108.1597213434946;
- Tue, 11 Aug 2020 23:23:54 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=MzlB5pe445HStbReLuihS/IIdWHAJ7Zy8/S+ES7aZVQ=;
+        b=iZ6Ue5u/ZCY202CMMXl0VN4YUZlP5Tn7IvS3I0BEgCtSts3697Ux8DgdcUDlrKRUZt
+         blyLF+shza27LmhtRWmr3GDexZd1sEQMPnYkw1vNdztwNFWLtgTL4r+3XM5nm/6Hs3D3
+         0yuhg/aLmqvZhTgvNxpf0Z+UHMSwqg8h7Y/CAgu4g1ooHzCiyth+2wFfn2dY6s5y/9aw
+         /UE+A1sieG+ZwESiMv+vOXNp7wNJRm4cmHYYtS8CWXbryuoWDwIdHt7+KgVur8KIU3fs
+         OU5ujqCA3qxPCfE9L8K7uZZORQQ9hmMbTfh4zQ7+RVYYHSB9S93sJW1ooNLrFiwi8+eg
+         JNjA==
+X-Gm-Message-State: AOAM532PW78IQipE6tE48YaddkKyd0E7LCt1of6J9UXukN0ZJGqkptri
+	suYH5hKcRCv5CQbgKbDJ3Khl6ft6C5E=
+X-Google-Smtp-Source: ABdhPJwaAqtuUTM9IagNIgY/IL/YtJ0FFXIH/Ts6LYmR+69wd0OUrBlkaBKxr6cv1cyxsgLqzBcgQQ==
+X-Received: by 2002:a63:fa09:: with SMTP id y9mr3937547pgh.0.1597214235549;
+        Tue, 11 Aug 2020 23:37:15 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
+        by smtp.gmail.com with ESMTPSA id s67sm1187969pfs.117.2020.08.11.23.37.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 11 Aug 2020 23:37:15 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Vijay Khemka <vijaykhemka@fb.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][ 1/9] Adding recipe for exprtk
+Date: Tue, 11 Aug 2020 23:37:03 -0700
+Message-Id: <20200812063711.2758315-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-From: "Marek Belisko" <marek.belisko@gmail.com>
-Date: Wed, 12 Aug 2020 08:23:44 +0200
-Message-ID: <CAAfyv36hiQVK386UOAfxtWGM+stjYJEco5e1hT=eiPwfsxYJXw@mail.gmail.com>
-Subject: python3-pytz fails on dunfell
-To: OpenEmbedded Development mailing list <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-Hi,
+From: Vijay Khemka <vijaykhemka@fb.com>
 
-I'm using dunfell branch from poky + meta-openembedded and facing
-dependency issue like:
+The C++ Mathematical Expression  Toolkit Library (ExprTk) is  a simple
+to  use,   easy  to   integrate  and   extremely  efficient   run-time
+mathematical  expression parsing  and evaluation  engine. The  parsing
+engine  supports numerous  forms  of  functional and  logic processing
+semantics and is easily extensible.
 
-'python3-pytz', 'python3-pytest', 'python3-packaging', 'python3-pyparsing'
+It is a header only library.
 
-when including python3-pytz as dependency to one of my recipes. When
-disable ptest everything is fine. I search for python3-pyparsing but
-cannot find it anywhere.
+Signed-off-by: Vijay Khemka <vijaykhemka@fb.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-devtools/exprtk/exprtk_git.bb | 22 +++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/exprtk/exprtk_git.bb
 
-Thanks abd BR,
-
-marek
-
+diff --git a/meta-oe/recipes-devtools/exprtk/exprtk_git.bb b/meta-oe/recipes-devtools/exprtk/exprtk_git.bb
+new file mode 100644
+index 0000000000..6930f31e96
+--- /dev/null
++++ b/meta-oe/recipes-devtools/exprtk/exprtk_git.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "Expression parser"
++HOMEPAGE = "https://github.com/ArashPartow/exprtk"
++SECTION = "libs"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
++SRCREV = "281c2ccc65b8f91c012ea3725ebcef406378a225"
++
++SRC_URI = "git://github.com/ArashPartow/exprtk.git"
++
++S = "${WORKDIR}/git"
++
++# other packages commonly reference the file directly as "exprtk.hpp"
++# create symlink to allow this usage
++do_install() {
++    install -d ${D}/${includedir}
++    install -m 0644 ${S}/exprtk.hpp ${D}/${includedir}/exprtk.hpp
++}
++
++# exprtk is a header only C++ library, so the main package will be empty.
++RDEPENDS_${PN}-dev = ""
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
-as simple and primitive as possible
--------------------------------------------------
-Marek Belisko - OPEN-NANDRA
-Freelance Developer
+2.28.0
 
-Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
-Tel: +421 915 052 184
-skype: marekwhite
-twitter: #opennandra
-web: http://open-nandra.com
