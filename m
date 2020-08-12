@@ -1,164 +1,191 @@
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
- by mx.groups.io with SMTP id smtpd.web11.293.1597264898713402394
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web12.293.1597264899157683012
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Aug 2020 13:41:38 -0700
+ Wed, 12 Aug 2020 13:41:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=SkZD4Qr+;
- spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f175.google.com with SMTP id k18so1607784pfp.7
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 13:41:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=AaYYU0hL;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id e4so1713788pjd.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 13:41:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=xIztNWjSceu0dRHeCGWtlVNIif93hgemqWFRuWBlC+Y=;
-        b=SkZD4Qr+T4uXlnJT9AEGZN4ae0bDKpTEU213R/dZOhCJNxjz0hP1cVDR/1VJjMYC2A
-         qLEUYrSEKb+zXSrovxB4YYXKZYmeb42URwx6s0D5+P6hyAaiGFW7jCtHi+1jOb5lLMWn
-         /Nqp3FJRLXtCZM9Fx6DVgXbvgk9lWe9FTtz99XlVSQjX9CorrEV7n1IPxFT6902XflFt
-         nMQdp0NjcYJfZ7iEDXJO67IFblnwcBvAYYn4+a4tgbX3qIvUil5UymKre+ZFHZtbtl63
-         nCHX/7425ECcggzHxKrAqTefRV/8S+8R5z5rHBRtPaxawpSo4iKrXU9M44RDkfILZKJE
-         DK6Q==
+        bh=3GytwY4f7Dus8/6QMwObJm10uv42dnWKDoTbOHspPJQ=;
+        b=AaYYU0hLwihipMTtWuvLTXS7a5uqYhGpLK4CC4DzS0Ro4bbfVJ2Ig4OuCAUl0qaHtW
+         Z/iqcbM2+PFK1/OlGPXFFOZV5/4cYk6mHi2zw8OHks48AN7ahWn77oA82ZplLKizclLI
+         /lc5l5/SIMw+rHP5XKTqIBC8gYm3EikYFkEmhNYZnY8jdPDf+71gVpTMYU0edfCuy3c9
+         Pb0JkcI/V22WDl6GVSgG7U+jobpwsRyCxmlBE790Qp6bTKWB7STtjA7nJwXhT/MaLhPJ
+         X/UptdwF2PU5PantO2bmRc1e4o0FBv7b2sNs249VirCQ1Hcwe5vVYWG9t/37hzsZFwFi
+         bNXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=xIztNWjSceu0dRHeCGWtlVNIif93hgemqWFRuWBlC+Y=;
-        b=b6c5Kg8IoIbaIrmGs42+Bykaja/IPw5pk/5anbog9ITITJpsILqJ2eT65uw95ir4bI
-         RTFY1V6aopx+ynd1LkfYCgUHPfftfoG7UWwO6U3V5dAmrsOG9e4rziReZO5W/uvz+nrZ
-         rhEvEG8hqjKnub1QdfZtSlu5d2dXiEzYBdSpupgSMU7Ai1tbGGr8idKr8yiqwSQqcMf7
-         M7OXTmMfl7+HWjrPI02gjd544+mXDPnXv7OiLD33r7jjys1KU8hq7RxhAhpKO+ru2T6R
-         +7jwCfwOga636VuVM1QsXc17X/kWCl8wjenClVim02Oazdzf1txtIxRDNwO/D3O1U2uh
-         Om+w==
-X-Gm-Message-State: AOAM532pVVZcGUETUObvkRdjxCrnvLwCyJYsaAZCEA9FbPSjVvtsKmnC
-	iqTP1WmDRP9R8C1EnJbKCZcGzgRTLjU=
-X-Google-Smtp-Source: ABdhPJyWEi5SGFfk/HnOSS1xnAybqstzexj+wOSJgOY8adXwNNW7u3s5mVL9O6ICxUYHCZGGomg7vw==
-X-Received: by 2002:a65:4bc7:: with SMTP id p7mr827039pgr.440.1597264897726;
-        Wed, 12 Aug 2020 13:41:37 -0700 (PDT)
+        bh=3GytwY4f7Dus8/6QMwObJm10uv42dnWKDoTbOHspPJQ=;
+        b=O9yXMdgEbj1CB5kV3vSeyOWJn6nyA+LV1np6flOfKSzrWywIYEmSxxevbuYNaWQWUg
+         D8XENFwWCiMjglJZ5qb3hOyWxZuHMzXH0Jiy4VKdyfAGGfiz9bbeKUUZwVHVa4MVrCIh
+         8u1JEep7TYwwccrV57Y/Uenu6PGyIT/0pEdR488q/NtVXU1n9mfg/Q+3Y8akJE3yhwbS
+         9ueNdYQunazR/wcCfnrKLsQ8+8YEwZKpNiGO3K3RYoRW6pcj9ba/Hs1oTQk28Pg2v5gT
+         lfUwHtHL4zfBhCDSW8/uZSUYlUSZjyd9S33U0aPpH3d5Jy6oKTywlrKuKpK6gjInRdBW
+         urow==
+X-Gm-Message-State: AOAM532Bh54Hsfq3hCFeHTvIl4hrPPUy4sfws9MjwsJAej8gboV2ktzi
+	e5zPAUNAA3D0f508N+epERLgzwgm9mM=
+X-Google-Smtp-Source: ABdhPJyoG46zps2X8EprPfcFvzVGNpq9RWpS/u/k7DARRoSlIV+gbUd+aIcxLiJTK/EfzfebxZJF2Q==
+X-Received: by 2002:a17:90a:4709:: with SMTP id h9mr1739904pjg.235.1597264895406;
+        Wed, 12 Aug 2020 13:41:35 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id l22sm2984287pjy.31.2020.08.12.13.41.37
+        by smtp.gmail.com with ESMTPSA id l22sm2984287pjy.31.2020.08.12.13.41.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2020 13:41:37 -0700 (PDT)
+        Wed, 12 Aug 2020 13:41:34 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][ 07/18] ncftp: Fix build with -fno-common
-Date: Wed, 12 Aug 2020 13:41:19 -0700
-Message-Id: <20200812204130.1012160-7-raj.khem@gmail.com>
+Subject: [meta-networking][ 04/18] vblade: Upgrade to version 24
+Date: Wed, 12 Aug 2020 13:41:16 -0700
+Message-Id: <20200812204130.1012160-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200812204130.1012160-1-raj.khem@gmail.com>
 References: <20200812204130.1012160-1-raj.khem@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+
+Switch to github for src_uri
+Add a patch to fix build with -fno-common
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../ncftp/ncftp/ncftp-3.2.5-gcc10.patch       | 83 +++++++++++++++++++
- .../recipes-daemons/ncftp/ncftp_3.2.6.bb      |  1 +
- 2 files changed, 84 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/ncftp/ncftp/ncftp-3.2.5-gcc10.patch
+ .../recipes-daemons/vblade/files/gcc-10.patch | 85 +++++++++++++++++++
+ .../vblade/{vblade_22.bb => vblade_24.bb}     |  9 +-
+ 2 files changed, 90 insertions(+), 4 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/vblade/files/gcc-10.patch
+ rename meta-networking/recipes-daemons/vblade/{vblade_22.bb => vblade_24.bb} (86%)
 
-diff --git a/meta-networking/recipes-daemons/ncftp/ncftp/ncftp-3.2.5-gcc10.patch b/meta-networking/recipes-daemons/ncftp/ncftp/ncftp-3.2.5-gcc10.patch
+diff --git a/meta-networking/recipes-daemons/vblade/files/gcc-10.patch b/meta-networking/recipes-daemons/vblade/files/gcc-10.patch
 new file mode 100644
-index 0000000000..5dee824d7a
+index 0000000000..9a42aa3699
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/ncftp/ncftp/ncftp-3.2.5-gcc10.patch
-@@ -0,0 +1,83 @@
-+Fix build with -fno-common
++++ b/meta-networking/recipes-daemons/vblade/files/gcc-10.patch
+@@ -0,0 +1,85 @@
++From af17efc862b9acfd63ce2ecb21f75ed890a93a5d Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20K=C3=B6lbl?= <koelblandreas@freenet.de>
++Date: Thu, 9 Jul 2020 14:29:18 +0200
++Subject: [PATCH] Fix linkage of global identifiers
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-+Patch from https://src.fedoraproject.org/rpms/ncftp/raw/master/f/ncftp-3.2.5-gcc10.patch
++Align the code to the standard and modern compilers.
 +
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Upstream-Status: Submitted [https://github.com/OpenAoE/vblade/pull/15]
++Signed-off-by: Andreas Kölbl <koelblandreas@freenet.de>
++---
++ dat.c    | 12 ++++++++++++
++ dat.h    | 19 ++++++++++---------
++ makefile |  7 +++++--
++ 3 files changed, 27 insertions(+), 11 deletions(-)
++ create mode 100644 dat.c
 +
-+--- a/ncftp/bookmark.h
-++++ b/ncftp/bookmark.h
-+@@ -29,6 +29,8 @@ typedef struct Bookmark {
-+     int             reserved;
-+ } Bookmark;
-+ 
-++extern Bookmark gBm;
++--- /dev/null
+++++ b/dat.c
++@@ -0,0 +1,12 @@
+++/* dat.c: Global memory for vblade AoE target */
+++#include "dat.h"
 ++
-+ #define kBookmarkVersion		8
-+ #define kBookmarkMinVersion		3
-+ #if (defined(WIN32) || defined(_WINDOWS)) && !defined(__CYGWIN__)
-+--- a/ncftp/cmds.c
-++++ b/ncftp/cmds.c
-+@@ -98,7 +98,7 @@ extern char gPager[], gHome[], gShell[];
-+ extern char gOS[];
-+ extern int gAutoResume;
-+ extern int gAutoSaveChangesToExistingBookmarks;
-+-extern Bookmark gBm;
-++//extern Bookmark gBm;
-+ extern int gLoadedBm, gConfirmClose, gSavePasswords, gScreenColumns;
-+ extern char gLocalCWD[512], gPrevLocalCWD[512];
-+ extern int gMayCancelJmp;
-+--- a/ncftp/main.c
-++++ b/ncftp/main.c
-+@@ -38,7 +38,7 @@ extern int gUnprocessedJobs;
-+ char gLocalCWD[512], gPrevLocalCWD[512];
+++int	shelf, slot;
+++ulong	aoetag;
+++uchar	mac[6];
+++int	bfd;		// block file descriptor
+++int	sfd;		// socket file descriptor
+++vlong	size;		// size of vblade
+++vlong	offset;
+++char	*progname;
+++char	serial[Nserial+1];
++--- a/dat.h
+++++ b/dat.h
++@@ -1,4 +1,5 @@
++ /* dat.h: include file for vblade AoE target */
+++#include <sys/types.h>
 + 
-+ extern char gRemoteCWD[512], gPrevRemoteCWD[512];
-+-extern Bookmark gBm;
-++//extern Bookmark gBm;
-+ extern int gLoadedBm;
-+ extern int gFirewallType;
-+ extern char gAutoAscii[];
-+--- a/sh_util/gpshare.c
-++++ b/sh_util/gpshare.c
-+@@ -28,7 +28,7 @@
++ #define	nil	((void *)0)
++ /*
++@@ -163,12 +164,12 @@ enum {
++ 	Nserial= 20,
++ };
 + 
-+ static int gIsAtty1 = 1, gIsAtty2 = 1;
-+ extern int gLoadedBm, gBookmarkMatchMode;
-+-Bookmark gBm;
-++//Bookmark gBm;
++-int	shelf, slot;
++-ulong	aoetag;
++-uchar	mac[6];
++-int	bfd;		// block file descriptor
++-int	sfd;		// socket file descriptor
++-vlong	size;		// size of vblade
++-vlong	offset;
++-char	*progname;
++-char	serial[Nserial+1];
+++extern int	shelf, slot;
+++extern ulong	aoetag;
+++extern uchar	mac[6];
+++extern int	bfd;		// block file descriptor
+++extern int	sfd;		// socket file descriptor
+++extern vlong	size;		// size of vblade
+++extern vlong	offset;
+++extern char	*progname;
+++extern char	serial[Nserial+1];
++--- a/makefile
+++++ b/makefile
++@@ -8,7 +8,7 @@ sbindir = ${prefix}/sbin
++ sharedir = ${prefix}/share
++ mandir = ${sharedir}/man
 + 
-+ double
-+ FileSize(double size, const char **uStr0, double *uMult0)
-+--- a/sh_util/ncftpget.c
-++++ b/sh_util/ncftpget.c
-+@@ -40,7 +40,7 @@ extern unsigned int gFirewallPort;
-+ extern char gFirewallExceptionList[256];
-+ extern int gFwDataPortMode;
-+ extern const char gOS[], gVersion[];
-+-extern Bookmark gBm;
-++//extern Bookmark gBm;
++-O=aoe.o bpf.o ${PLATFORM}.o ata.o
+++O=aoe.o bpf.o ${PLATFORM}.o ata.o dat.o
 + 
-+ static void
-+ #if (defined(__GNUC__)) && (__GNUC__ >= 2)
-+--- a/sh_util/ncftpls.c
-++++ b/sh_util/ncftpls.c
-+@@ -39,7 +39,7 @@ extern unsigned int gFirewallPort;
-+ extern char gFirewallExceptionList[256];
-+ extern int gFwDataPortMode;
-+ extern const char gOS[], gVersion[];
-+-extern Bookmark gBm;
-++//extern Bookmark gBm;
++ vblade: $O
++ 	${CC} ${LDFLAGS} -o vblade $O
++@@ -25,6 +25,9 @@ ata.o : ata.c config.h dat.h fns.h makef
++ bpf.o : bpf.c
++ 	${CC} ${CFLAGS} -c $<
 + 
-+ static int FTPRemoteRecursiveMList(FTPCIPtr cip, const char *const rdir, /* FTPFileInfoListPtr files, */ FTPLineListPtr lines);
-+ 
-+--- a/sh_util/ncftpput.c
-++++ b/sh_util/ncftpput.c
-+@@ -41,7 +41,6 @@ extern unsigned int gFirewallPort;
-+ extern char gFirewallExceptionList[256];
-+ extern int gFwDataPortMode;
-+ extern const char gOS[], gVersion[];
-+-extern Bookmark gBm;
-+ extern int gSendfileInProgress;
-+ 
-+ static void
-diff --git a/meta-networking/recipes-daemons/ncftp/ncftp_3.2.6.bb b/meta-networking/recipes-daemons/ncftp/ncftp_3.2.6.bb
-index 5f92f27fdf..ee6da5737f 100644
---- a/meta-networking/recipes-daemons/ncftp/ncftp_3.2.6.bb
-+++ b/meta-networking/recipes-daemons/ncftp/ncftp_3.2.6.bb
-@@ -8,6 +8,7 @@ DEPENDS = "ncurses"
- SRC_URI = "ftp://ftp.ncftp.com/${BPN}/${BP}-src.tar.xz \
-            file://ncftp-configure-use-BUILD_CC-for-ccdv.patch \
-            file://unistd.patch \
-+           file://ncftp-3.2.5-gcc10.patch \
- "
- SRC_URI[md5sum] = "42d0f896d69a4d603ec097546444245f"
- SRC_URI[sha256sum] = "5f200687c05d0807690d9fb770327b226f02dd86155b49e750853fce4e31098d"
+++dat.o : dat.c
+++	${CC} ${CFLAGS} -c $<
+++
++ config.h : config/config.h.in makefile
++ 	@if ${CC} ${CFLAGS} config/u64.c > /dev/null 2>&1; then \
++ 	  sh -xc "cp config/config.h.in config.h"; \
+diff --git a/meta-networking/recipes-daemons/vblade/vblade_22.bb b/meta-networking/recipes-daemons/vblade/vblade_24.bb
+similarity index 86%
+rename from meta-networking/recipes-daemons/vblade/vblade_22.bb
+rename to meta-networking/recipes-daemons/vblade/vblade_24.bb
+index a52a1e92b4..09ba8cfd93 100644
+--- a/meta-networking/recipes-daemons/vblade/vblade_22.bb
++++ b/meta-networking/recipes-daemons/vblade/vblade_24.bb
+@@ -6,19 +6,20 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/aoetools/files/vblade/"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/aoetools/${BP}.tar.gz \
++SRCREV = "a7f48bda5bf1646f6450601049bf4b74053adbb3"
++SRC_URI = "git://github.com/OpenAoE/vblade \
+            file://cross.patch \
+            file://makefile-add-ldflags.patch \
++           file://gcc-10.patch \
+            file://${BPN}.conf \
+            file://${BPN}.init \
+            file://${BPN}.service \
+            file://volatiles.99_vblade \
+           "
+ 
+-SRC_URI[md5sum] = "510d98ba0f231284a5fbe2da11cb2d6e"
+-SRC_URI[sha256sum] = "a990378f273f10eb431e42954a871aed52714035bbab28c54cef600c458356bb"
++S = "${WORKDIR}/git"
+ 
+-UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/aoetools/files/vblade/"
++UPSTREAM_CHECK_URI = "https://github.com/OpenAoE/vblade/archive/"
+ 
+ inherit autotools-brokensep update-rc.d systemd
+ 
 -- 
 2.28.0
 
