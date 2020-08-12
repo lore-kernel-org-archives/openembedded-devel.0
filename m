@@ -1,163 +1,111 @@
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.web12.298.1597264902640188162
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web10.302.1597264903041559164
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Aug 2020 13:41:42 -0700
+ Wed, 12 Aug 2020 13:41:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Fj4SEYF7;
- spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id j21so1627832pgi.9
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 13:41:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=s58NJwzK;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id f193so1600513pfa.12
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 13:41:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=UAxZs4QZpnENF2la/IpznttmkOPn5u1ffi7jXFEjChM=;
-        b=Fj4SEYF7ClU2oAqcrZlwEqt5OsLiIeGVGSxSvQrip0L/G36x5Ra6Lk4ty4f1e+76Qx
-         2lZ5zHLSTpHFDMCGF7WGyqfV9asoVWkPBaf/x4ORAP+5iB3jjClh6JGG5orISqWWIPwE
-         BjvPVFqgtWWBY02YArGRsx+SUlr4ThuneUPWvJMhwji9hl2nvDnkk5IBiTWi9O2wq2Gj
-         3Ongn/ffSTfKN2uHQhjO01HgAhFgarKi3nGsuprARww61FXfnF2y2ZoCqNwtNmx713K9
-         wifgc9qOQIRMsLMerrHIo7Vy9gkAh2JHIPN3oUHoua+9qtqbxytfHZvynwQSyXMVsSGr
-         55Dw==
+        bh=UrVI+mbAaZzcGuRL9YXSxCLgRCZBnY5DmeSIAFD/ybg=;
+        b=s58NJwzKOz69Zc9KzLBcViwKkU1oCeZLP68jbNdg289tO83p7mfpuYmYz8hU8KJHAh
+         XdJqC9zqPsY1PWD6Uh/r6AYm6lzrPBzwmssR+ILcjfCisZHB48w3mdXNr7Gu/q+vxc+c
+         BnSvWWBOPYBvQ9BRa0IyWxZgWDibS8Si7IavcGi5WfYYyjE0hjLGwqFOkfuCawpZnqRl
+         Ng3ctviwHMIQOD7EPlCQQ/rXOzBzSkRWNdHZIohGD9UOgZ3OVLPFpFhkxH+VzmSbrKww
+         wRPNXr5biecC4m97azDnVJAL/HS6WStmTZceEfg9kxXm+xzfbHpZnANlpLBKsXYInpkh
+         2vCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=UAxZs4QZpnENF2la/IpznttmkOPn5u1ffi7jXFEjChM=;
-        b=fV1GbFu+ZtPlS1bvMDOeTQJf2xueWo5XVU6ltsNgixj0lGKcmaIEtws8gGbt/2S/qL
-         KRfGJOxD+NjiNDMfE9hux8c1JKH/+qzPY6RtI4Lke56ggD1QHaSQs5T+N8dYywJW2BHl
-         m+PAbMC/MVnZ/RIIEeBwg4DslCD4hRsgv36qKkS37t/o01GN+E5kMfpt12RF1iieNe0X
-         ETiItQWedyPkunZUciZW5WZiKVBj4XJx7aooMqmNbG+r/FnRZoWOLSvLf7MEbTlNZ9PE
-         Yvfb6nUC481WLp1yLDzEO+wZW9OTbfzqUo1VJq2YjW72c9beUAa87N7m7BaEiPVpEUTN
-         lccQ==
-X-Gm-Message-State: AOAM531AhDfhcHnS0FmxuaRmG1fzTUKAea/ZoXKSgDbtoCN6Rnvb3314
-	/KkHlUfCfM31k1wNgZh846KVnryk/aM=
-X-Google-Smtp-Source: ABdhPJyUfOtPuEQgghG5OrXpLe4f9TYehbCEEbj9+YIz5ks5hR3Ccdv9tFE2HfDzys0RMy9b+t2u0Q==
-X-Received: by 2002:a63:b70c:: with SMTP id t12mr844238pgf.178.1597264901611;
-        Wed, 12 Aug 2020 13:41:41 -0700 (PDT)
+        bh=UrVI+mbAaZzcGuRL9YXSxCLgRCZBnY5DmeSIAFD/ybg=;
+        b=UVkcpUoMGmfC0/RkmUMgnRG+w75fe6HOgp3sPXTp2B6Ny/0Yt8C7fGo5Q7/ncjPN0w
+         DMADPCW9ly0nz4rurbynElBdKHsZ9Bxo6+89nNhn5K0Ppnu36P+zg3TggN7BZJwR1Vc+
+         Eo/Jdw+5L521ykhKWVvOvHWlMEIH3Bvfj5zz1IPbyoQxrqSm6octBL3+pyoo2tY7bwfA
+         UEQ+LbJVN0bREGTQtaf6PorQAswc61aY9El2WeLJdIkTecbSvFhdW4ARmVgEPrlUb3OF
+         3t+b6EzANO1S0HJhh6Z9hHF3ntgjFVO3zeQBwu8IOABp8/hLxUNdiKu2Sg13x0DTK0gs
+         pk3w==
+X-Gm-Message-State: AOAM5308l4shlB99th1wf00dZxT5F3gUcjQa0IRAyblgcfE4xR3EWqXk
+	U9SbB68S2OybSwz+k0xmvo+c/cnVy8M=
+X-Google-Smtp-Source: ABdhPJytdzaVF2LtUMRw9wt3f9Wa0WfTvVaeTr64UA11a0D9K6d6BFLYsO4vPouJA7KA7zboABXZpg==
+X-Received: by 2002:a63:5c65:: with SMTP id n37mr842913pgm.294.1597264899301;
+        Wed, 12 Aug 2020 13:41:39 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id l22sm2984287pjy.31.2020.08.12.13.41.40
+        by smtp.gmail.com with ESMTPSA id l22sm2984287pjy.31.2020.08.12.13.41.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2020 13:41:40 -0700 (PDT)
+        Wed, 12 Aug 2020 13:41:38 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][ 11/18] dibbler: Update to latest
-Date: Wed, 12 Aug 2020 13:41:23 -0700
-Message-Id: <20200812204130.1012160-11-raj.khem@gmail.com>
+Subject: [meta-networking][ 09/18] tftp-hpa: Fix build with -fno-common
+Date: Wed, 12 Aug 2020 13:41:21 -0700
+Message-Id: <20200812204130.1012160-9-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200812204130.1012160-1-raj.khem@gmail.com>
 References: <20200812204130.1012160-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Drop upstreamed patch
-Fixed compatibility with g++-10
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...Rename-pthread_mutex_t-variable-lock.patch | 74 -------------------
- .../dibbler/dibbler_git.bb                    |  3 +-
- 2 files changed, 1 insertion(+), 76 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/dibbler/dibbler/0001-linux-port-Rename-pthread_mutex_t-variable-lock.patch
+ ...Mark-toplevel-definition-as-external.patch | 30 +++++++++++++++++++
+ .../recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb  |  1 +
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/0001-tftp-Mark-toplevel-definition-as-external.patch
 
-diff --git a/meta-networking/recipes-connectivity/dibbler/dibbler/0001-linux-port-Rename-pthread_mutex_t-variable-lock.patch b/meta-networking/recipes-connectivity/dibbler/dibbler/0001-linux-port-Rename-pthread_mutex_t-variable-lock.patch
-deleted file mode 100644
-index 346a56a9ad..0000000000
---- a/meta-networking/recipes-connectivity/dibbler/dibbler/0001-linux-port-Rename-pthread_mutex_t-variable-lock.patch
-+++ /dev/null
-@@ -1,74 +0,0 @@
--From 630086cf1b3fba71822319a268d3711734cd6aa8 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 31 Jan 2019 12:56:13 -0800
--Subject: [PATCH] linux-port: Rename pthread_mutex_t variable 'lock'
--
--lock is also used by libc++ in std namespace and using it here causes
--clang to fail e.g.
--
--dibbler-client.cpp:47:25: error: reference to 'lock' is ambiguous
--    pthread_mutex_lock(&lock);
--                        ^
--../../../../../../../workspace/sources/dibbler/Port-linux/dibbler-client.cpp:29:26: note: candidate found by name lookup is 'lock'
--extern ::pthread_mutex_t lock;
--                         ^
--/mnt/a/yoe/build/tmp/work/aarch64-yoe-linux/dibbler/1.0.1+1.0.2RC1+gitc4b0ed52e751da7823dd9a36e91f93a6310e5525-r0/recipe-sysroot/usr/include/c++/v1/mutex:446:1: note: candidate found by name lookup is 'std::__1::lock'
--lock(_L0& __l0, _L1& __l1, _L2& __l2, _L3& ...__l3)
--
--Upstream-Status: Submitted [https://github.com/tomaszmrugalski/dibbler/pull/37]
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- Port-linux/dibbler-client.cpp          | 6 +++---
-- Port-linux/lowlevel-linux-link-state.c | 6 +++---
-- 2 files changed, 6 insertions(+), 6 deletions(-)
--
--diff --git a/Port-linux/dibbler-client.cpp b/Port-linux/dibbler-client.cpp
--index 78f34241..b5ebb9f0 100644
----- a/Port-linux/dibbler-client.cpp
--+++ b/Port-linux/dibbler-client.cpp
--@@ -26,7 +26,7 @@ using namespace std;
-- 
-- #define IF_RECONNECTED_DETECTED -1
-- 
---extern pthread_mutex_t lock;
--+extern pthread_mutex_t dibbler_lock;
-- 
-- TDHCPClient* ptr = 0;
-- 
--@@ -44,8 +44,8 @@ void signal_handler(int n) {
-- #ifdef MOD_CLNT_CONFIRM
-- void signal_handler_of_linkstate_change(int n) {
--     Log(Notice) << "Network switch off event detected. initiating CONFIRM." << LogEnd;
---    pthread_mutex_lock(&lock);
---    pthread_mutex_unlock(&lock);
--+    pthread_mutex_lock(&dibbler_lock);
--+    pthread_mutex_unlock(&dibbler_lock);
-- }
-- #endif
-- 
--diff --git a/Port-linux/lowlevel-linux-link-state.c b/Port-linux/lowlevel-linux-link-state.c
--index 76293ea1..e6b94063 100644
----- a/Port-linux/lowlevel-linux-link-state.c
--+++ b/Port-linux/lowlevel-linux-link-state.c
--@@ -34,7 +34,7 @@ volatile int * notifier = 0;
-- int isDone = 0;
-- pthread_t parent_id;
-- pthread_t ntid;
---pthread_mutex_t lock;
--+pthread_mutex_t dibbler_lock;
-- 
-- struct state {
--     int id;
--@@ -86,9 +86,9 @@ void link_state_changed(int ifindex)
--     {
-- 	if (changed_links->cnt<16)
-- 	    changed_links->ifindex[changed_links->cnt++] = ifindex;
---	pthread_mutex_lock(&lock);
--+	pthread_mutex_lock(&dibbler_lock);
-- 	*notifier = 1; /* notify that change has occured */
---	pthread_mutex_unlock(&lock);
--+	pthread_mutex_unlock(&dibbler_lock);
-- 	pthread_kill(parent_id,SIGUSR1);
--     } else
--     {
-diff --git a/meta-networking/recipes-connectivity/dibbler/dibbler_git.bb b/meta-networking/recipes-connectivity/dibbler/dibbler_git.bb
-index 90051a319a..c2f4827161 100644
---- a/meta-networking/recipes-connectivity/dibbler/dibbler_git.bb
-+++ b/meta-networking/recipes-connectivity/dibbler/dibbler_git.bb
-@@ -5,11 +5,10 @@ HOMEPAGE = "http://klub.com.pl/dhcpv6"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=7236695bb6d4461c105d685a8b61c4e3"
- 
--SRCREV = "c4b0ed52e751da7823dd9a36e91f93a6310e5525"
-+SRCREV = "a7c6cf58a88a510cb00841351e75030ce78d36bf"
- 
- SRC_URI = "git://github.com/tomaszmrugalski/dibbler \
-            file://dibbler_fix_getSize_crash.patch \
--           file://0001-linux-port-Rename-pthread_mutex_t-variable-lock.patch \
-            "
- PV = "1.0.1+1.0.2RC1+git${SRCREV}"
- 
+diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/0001-tftp-Mark-toplevel-definition-as-external.patch b/meta-networking/recipes-daemons/tftp-hpa/files/0001-tftp-Mark-toplevel-definition-as-external.patch
+new file mode 100644
+index 0000000000..646757c783
+--- /dev/null
++++ b/meta-networking/recipes-daemons/tftp-hpa/files/0001-tftp-Mark-toplevel-definition-as-external.patch
+@@ -0,0 +1,30 @@
++From 2a12174a5059e84d4ff6fad8f983a4d0f2127e73 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 12 Aug 2020 12:17:31 -0700
++Subject: [PATCH] tftp: Mark toplevel definition as external
++
++Fixes
++multiple definition of `toplevel'; tftp.o:/usr/src/debug/tftp-hpa/5.2-r0/tftp-hpa-5.2/tftp/tftp.c:51: first defined here
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ tftp/tftp.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/tftp/tftp.c b/tftp/tftp.c
++index 9d15022..109848c 100644
++--- a/tftp/tftp.c
+++++ b/tftp/tftp.c
++@@ -48,7 +48,7 @@ extern int maxtimeout;
++ #define PKTSIZE    SEGSIZE+4
++ char ackbuf[PKTSIZE];
++ int timeout;
++-sigjmp_buf toplevel;
+++extern sigjmp_buf toplevel;
++ sigjmp_buf timeoutbuf;
++ 
++ static void nak(int, const char *);
++-- 
++2.28.0
++
+diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+index 413950be1b..4c62da8181 100644
+--- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
++++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+@@ -28,6 +28,7 @@ SRC_URI = "http://kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-${PV}.t
+            file://tftp-hpa-bug-fix-on-separated-CR-and-LF.patch \
+            file://fix-writing-emtpy-file.patch \
+            file://0001-__progname-is-provided-by-libc.patch \
++           file://0001-tftp-Mark-toplevel-definition-as-external.patch \
+            file://tftpd-hpa.socket \
+            file://tftpd-hpa.service \
+ "
 -- 
 2.28.0
 
