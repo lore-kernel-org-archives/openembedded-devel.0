@@ -1,139 +1,69 @@
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com [209.85.222.193])
- by mx.groups.io with SMTP id smtpd.web11.17862.1597247611253646937
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.18991.1597250634451834357
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Aug 2020 08:53:31 -0700
+ Wed, 12 Aug 2020 09:43:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=CCYEDWWh;
- spf=pass (domain: gmail.com, ip: 209.85.222.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f193.google.com with SMTP id x69so2509459qkb.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 08:53:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=NsHQd8S+FwOML+UWiC4fz+X8i/64apkekk59Hoj5SVA=;
-        b=CCYEDWWh996fRUt0YF/6/gL/7WYlA6dn34sCg7ZYsPH6EnU38ZME2E4SXitDLTWEBP
-         GYXht19aPbbgUsUDzcF2Ub7sSabVLsWAy2TiD8eLfCpC0wfljW7GLwidPrNZy14WJ/pN
-         28IoCZ/BJqaLp8uiqxVkHwvF6XYvXbHt4xcZbY4XEgpUve3yjNkjUOhSGZcR6/O12tBM
-         lAXBHr6Y6oNSnLqPbh0o8kh4l1c2Cr88PxWi1MohCHQwgwmzQic2ypDbN2pU9+nkzzoF
-         U/BQ+4oOnLlUEQMxW2PpnE+3kCawzR7z0H6IZrLMIYSc3Mz650lTiBJiVFPjyTjyaLyS
-         q5CA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=NsHQd8S+FwOML+UWiC4fz+X8i/64apkekk59Hoj5SVA=;
-        b=b3fUV6/OhCb6H1lTgxhgenj/llZckSTmUjrkiKG2xXZ5wF7lVrDooOkc7+uBUrskuB
-         eQg9jiJu2cyWyNHvicBLT7E843EiZngxX0EJlAQE/W/GWkzWF7Ku/JFmaZxB2u7nP3kq
-         bO+eCc2HOHgtct+2LF4taITnHqOrBq0Pgb9k5KyEZospf7x7pFQOLwmvX0NVhQ+05Tfd
-         UBARLWrLaTVTfoGRqbu4u+t0oFmrSPSsN/ddgqb/Kj8wybRbc4MmBRMHkjLopP8U6bSV
-         zQ4z+qSz+P8fgrfeNf78E4Kr38uxw/YmmK1rkLwq5Vszc4OujLdZVbaiynKBCokywmAI
-         EZ8A==
-X-Gm-Message-State: AOAM533Iso+2ut15xK2c47gQE2W3mzXLf6H/LgysDMqVkfwC6Yr0LmcJ
-	5pumURj2rI2ywYBS9kOg1rjGEI8QPvstNZmX4Dg=
-X-Google-Smtp-Source: ABdhPJyNVgWFtqoNG01VODGQ3OX2az7uAhNJW1nJOH55E15JyjhVToQxuaoglrRjpSj4V59SbZJVDXVpvZRu2osnLQo=
-X-Received: by 2002:a37:9d53:: with SMTP id g80mr548180qke.17.1597247610323;
- Wed, 12 Aug 2020 08:53:30 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200811210229.93989-1-joe.slater@windriver.com>
- <CAMKF1sqUt6+-5AhPB1j8LtQgY0=gjAm4jNoXEx5txCChr0xzMQ@mail.gmail.com> <BY5PR11MB399200D5752C7637C2CF603588420@BY5PR11MB3992.namprd11.prod.outlook.com>
-In-Reply-To: <BY5PR11MB399200D5752C7637C2CF603588420@BY5PR11MB3992.namprd11.prod.outlook.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 12 Aug 2020 08:53:04 -0700
-Message-ID: <CAMKF1soW3qb1VTUhDMUCKDP_Q08SHTtfrQRR=OoCNb=Q45o4Sw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/1] mozjs: specify TMPDIR
-To: "Slater, Joseph" <joe.slater@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	"MacLeod, Randy" <Randy.MacLeod@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=55224 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1k5tqx-0000d2-OM; Wed, 12 Aug 2020 19:43:52 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-javaobj-py3: Upgrade 0.4.0.1 -> 0.4.1
+Date: Wed, 12 Aug 2020 19:43:32 +0300
+Message-Id: <20200812164335.24599-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200812164335.24599-1-leon.anavi@konsulko.com>
+References: <20200812164335.24599-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.2
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-On Wed, Aug 12, 2020 at 8:41 AM Slater, Joseph <joe.slater@windriver.com> w=
-rote:
->
-> The symptom seems to be that sometimes, when a lot of similar tempfiles =
-are created under /tmp, a file will be created that cannot be read once the=
- original fd is closed.  Moving where these files are created might avoid s=
-ome underlying problem, but it also might just reduce the failure rate to s=
-omething so low that you never see it.
-> There should probably be more investigation into what is going on, but i=
-t is hard to put much effort into dealing with something that (usually) occ=
-urs very rarely and is easily avoided.
+Upgrade to release 0.4.1:
 
-this issue has never shown up on builders that I have access to, and I
-would be interested to know if there are more users seeing this issue
-as well.
-I think we need some more reports on these lines for this change since
-it will impact everyone
+- Added the custom transformer allowing a finer loading of custom
+  Java streams
 
->
-> Joe
->
-> -----Original Message-----
-> From: Khem Raj <raj.khem@gmail.com>
-> Sent: Tuesday, August 11, 2020 4:04 PM
-> To: Slater, Joseph <joe.slater@windriver.com>
-> Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>; MacLe=
-od, Randy <Randy.MacLeod@windriver.com>
-> Subject: Re: [oe] [meta-oe][PATCH 1/1] mozjs: specify TMPDIR
->
-> On Tue, Aug 11, 2020 at 2:02 PM Joe Slater <joe.slater@windriver.com> wr=
-ote:
-> >
-> > Although it is extremely rare the following type of error can occur
-> > during configuration:
-> >
-> > Creating `/tmp/conftest.i53clm4z.cpp` with content:
-> > ...
-> > x86_64-wrs-linux-g++: error: /tmp/conftest.i53clm4z.cpp: No such file
-> > or directory
-> > x86_64-wrs-linux-g++: error: /tmp/conftest.i53clm4z.cpp: No such file
-> > or directory
-> > x86_64-wrs-linux-g++: fatal error: no input files
-> >
-> > So, specify a local directory as TMPDIR during configuration.
->
-> Do we know the real underlying issue ? it's not clear to me from descrip=
-tion
->
-> /tmp is always mounted on linux build systems so I am assuming its hitti=
-ng some sort of race condition since /tmp is mounted using tmpfs it might b=
-e more evident since its faster whereas when its pointing to custom dir on =
-HDD its hiding the underlying issue.
->
-> IOW how is the problem manifested and how is this patch helping ?
->
-> >
-> > Signed-off-by: Joe Slater <joe.slater@windriver.com>
-> > ---
-> >  .../dynamic-layers/meta-python/recipes-extended/mozjs/mozjs_60.9.0.bb
-> > | 4 +++-
-> >  1 file changed, 3 insertions(+), 1 deletion(-)
-> >
-> > diff --git
-> > a/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs_60.9
-> > .0.bb
-> > b/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs_60.9
-> > .0.bb
-> > index f13a184..629c652 100644
-> > ---
-> > a/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs_60.9
-> > .0.bb
-> > +++ b/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs_
-> > +++ 60.9.0.bb
-> > @@ -100,7 +100,9 @@ do_configure() {
-> >      autoconf213 --macrodir=3D${STAGING_DATADIR_NATIVE}/autoconf213
-> > old-configure.in > old-configure
-> >
-> >      cd ${B}
-> > -    ${S}/js/src/configure ${EXTRA_OECONF}
-> > +    # use of /tmp can causes problems on heavily loaded hosts
-> > +    mkdir -p "${B}/lcl_tmp"
-> > +    TMPDIR=3D"${B}/lcl_tmp"  ${S}/js/src/configure ${EXTRA_OECONF}
-> >
-> >      # Make standard Makefile checks pass
-> >      touch ${S}/js/src/configure
-> > --
-> > 2.7.4
-> >
-> >=20
+License-Update: Use file LICENSE to check the license.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ ...-javaobj-py3_0.4.0.1.bb => python3-javaobj-py3_0.4.1.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-javaobj-py3_0.4.0.1.bb => python3-javaobj-py3_0.4.1.bb} (67%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.0.1.bb b/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.1.bb
+similarity index 67%
+rename from meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.1.bb
+index 49d258ca8..c83140a89 100644
+--- a/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.1.bb
+@@ -5,10 +5,10 @@ DESCRIPTION = "python-javaobj is a python library that provides functions\
+  representation is a standard data interchange format in Java world."
+ HOMEPAGE = "https://github.com/tcalmant/python-javaobj"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://setup.py;beginline=15;endline=27;md5=af9ce26ac2de1b7436eb08c9308b4a1e"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d273d63619c9aeaf15cdaf76422c4f87"
+ 
+-SRC_URI[md5sum] = "352fe0df9336b8699ad0799ef152da6b"
+-SRC_URI[sha256sum] = "18c44cfaa214813784a823432b4ab9829c9626b2b00072011627b4008b0067cd"
++SRC_URI[md5sum] = "47632071c3c3ca14b6c42f2a4e2e1309"
++SRC_URI[sha256sum] = "419ff99543469e68149f875abb0db5251cecd350c03d2bfb4c94a5796f1cbc14"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.17.1
+
