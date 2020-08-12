@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.11924.1597228056298887794
+ by mx.groups.io with SMTP id smtpd.web12.11839.1597228056367720344
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 12 Aug 2020 03:27:36 -0700
 Authentication-Results: mx.groups.io;
@@ -8,14 +8,16 @@ Received: from [78.130.197.211] (port=53212 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k5nyl-0001gR-Lh; Wed, 12 Aug 2020 13:27:32 +0300
+	id 1k5nyo-0001gR-7K; Wed, 12 Aug 2020 13:27:34 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-graphviz: Upgrade 0.14 -> 0.14.1
-Date: Wed, 12 Aug 2020 13:27:22 +0300
-Message-Id: <20200812102726.4376-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-huey: Upgrade 2.2.0 -> 2.3.0
+Date: Wed, 12 Aug 2020 13:27:23 +0300
+Message-Id: <20200812102726.4376-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200812102726.4376-1-leon.anavi@konsulko.com>
+References: <20200812102726.4376-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,66 +30,42 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Add homepage and upgrade to release 0.14.1:
+Upgrade to release 2.3.0:
 
-Document the colon-separated node[:port[:compass]] format used
-for tail and head points in the edge()- and edges()-methods
-
-License-Update: Use file LICENSE.txt to check the license.
+- Use monotonic clock for timing operations within the consumer.
+- Ensure internal state is cleaned up on file-lock when released.
+- Support passing around TaskException as a pickled value.
+- Set the multiprocessing mode to "fork" on MacOS and Python 3.8
+  or newer.
+- Added option to enforce FIFO behavior when using Sqlite as
+  storage.
+- Added the on_shutdown handler to djhuey namespace.
+- Ensure exception is set on AsyncResult in mini-huey.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python3-graphviz_0.14.1.bb           | 17 +++++++++++++++++
- .../python/python3-graphviz_0.14.bb             | 16 ----------------
- 2 files changed, 17 insertions(+), 16 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-graphviz_0.14.1.bb
- delete mode 100644 meta-python/recipes-devtools/python/python3-graphviz_0.14.bb
+ .../python/{python3-huey_2.2.0.bb => python3-huey_2.3.0.bb}   | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-huey_2.2.0.bb => python3-huey_2.3.0.bb} (59%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-graphviz_0.14.1.bb b/meta-python/recipes-devtools/python/python3-graphviz_0.14.1.bb
-new file mode 100644
-index 000000000..f26a1efce
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-graphviz_0.14.1.bb
-@@ -0,0 +1,17 @@
-+DESCRIPTION = "Graphviz protocol implementation"
-+HOMEPAGE = "https://graphviz.readthedocs.io/en/stable/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f7831c564aeff14e68aa4ff7a93dc89f"
+diff --git a/meta-python/recipes-devtools/python/python3-huey_2.2.0.bb b/meta-python/recipes-devtools/python/python3-huey_2.3.0.bb
+similarity index 59%
+rename from meta-python/recipes-devtools/python/python3-huey_2.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-huey_2.3.0.bb
+index cac6be954..f70a349fd 100644
+--- a/meta-python/recipes-devtools/python/python3-huey_2.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-huey_2.3.0.bb
+@@ -4,7 +4,9 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5cac039fcc82f01141cc170b48f315d4"
+ 
+ PYPI_PACKAGE = "huey"
+-SRC_URI[sha256sum] = "15cef4225f7ae200fbecf89a0fed13e389fd751d6c8e1d3b26562b7df953de0e"
 +
-+SRC_URI[md5sum] = "436cb0f41f6a949f916357ca037e205a"
-+SRC_URI[sha256sum] = "f5aad52a652c06825dcc5ee018d920fca26aef339386866094597fb3f2f222ce"
-+
-+inherit pypi setuptools3
-+
-+PYPI_PACKAGE_EXT = "zip"
-+
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-logging \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-graphviz_0.14.bb b/meta-python/recipes-devtools/python/python3-graphviz_0.14.bb
-deleted file mode 100644
-index 98bbddd21..000000000
---- a/meta-python/recipes-devtools/python/python3-graphviz_0.14.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--DESCRIPTION = "Graphviz protocol implementation"
--
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
--
--SRC_URI[sha256sum] = "e104ba036c8aef84320ec80560e544cd3cad68c9f90394b4e2b87bc44ab09791"
--
--inherit pypi setuptools3
--
--PYPI_PACKAGE_EXT = "zip"
--
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-logging \
--"
--
--BBCLASSEXTEND = "native nativesdk"
++SRC_URI[md5sum] = "aa9f2a8f54cb68c62690c5e28589f49c"
++SRC_URI[sha256sum] = "76978840a875607cd77c283c4ebf3ea5071b2ec06a1ac428d63be0d88f1e7070"
+ 
+ inherit pypi setuptools3
+ 
 -- 
 2.17.1
 
