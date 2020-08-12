@@ -1,94 +1,83 @@
-Received: from mail-ej1-f65.google.com (mail-ej1-f65.google.com [209.85.218.65])
- by mx.groups.io with SMTP id smtpd.web12.1233.1597271991068931806
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com [209.85.214.194])
+ by mx.groups.io with SMTP id smtpd.web10.155.1597273705031227152
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Aug 2020 15:39:51 -0700
+ Wed, 12 Aug 2020 16:08:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=q2hN7lyh;
- spf=pass (domain: gmail.com, ip: 209.85.218.65, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f65.google.com with SMTP id p24so4002599ejf.13
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 15:39:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=PgxZBRjV;
+ spf=pass (domain: gmail.com, ip: 209.85.214.194, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f194.google.com with SMTP id y6so1787226plt.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 16:08:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=U8T2Yphuz6LCZ8MOVIA5cy+R4K3kDWYu+Bzmp06hRMg=;
-        b=q2hN7lyhDZWK8dlwaEeMGDquj/oZdqMnrpvA+B1DJVOW3q+pRpjzm+v4jY59kt9x4z
-         Yj1lEdCfmyXwRvIxT9fd4tSkx/InxVyLG3s9nr4jNpm/0NYa6zTpBQmCmny3kHC8tkqp
-         qZmUc1oqTyNKaCMKbEq2lFI8Pa1tmUh0q71Z33mOlQ1lhwASGBkDSde6S7y6vd8N5YbD
-         Osyeg52x6jQC/Cto7IsFOL285Ab1jQ+9BbWiWh3XDBjxc5o/EScd2bBVNPaSIIftX4Y9
-         /pvTlEDjoS1NVPs6S+hwlgTOJbtahXnWBLi6MOk+VTqpGzMfHTeomxaV5VbgHErR2dgX
-         FfDw==
+        bh=Uwm2VyNFLLxqjkFJtAEEblq6m8G6j7jXxklmaJNxL9o=;
+        b=PgxZBRjVTGWXEA0F59ZV+PMgu3KVACsEP2KPrDSYZOPsquG0AGxRbIfk1B7oCq2zEo
+         xwOlErH3kjmVbgAuaexvJuDtynP4S2vMSErm9fSp+5/RuqMeWMDeru5xCeO/qLVCeev7
+         5s5ityQqnNHqHBsKQmFRW26FC+mMBkX79/jH8MdE7WILH5U4J8OqWcu0bIdnaHnzQueK
+         hMV5nGnzcI98sQW0HJrP9nLWrXw43HXHW3/nvbfL8zrkSCsXQrpat77RpcLv3E7gH+Jb
+         ks7F3Ezcx+Zyk+E+JF03IwZAWZIeHWAoN3AASw6FuhAmqcOEaLtty5skVuoMeq0l7AEB
+         u1JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=U8T2Yphuz6LCZ8MOVIA5cy+R4K3kDWYu+Bzmp06hRMg=;
-        b=k9rPg+WKo/4Ven3VmLE4DhyrZj/JmReI622EmCcGzgO/jt2k7Gs/L36NKLW34cEr1a
-         DWtmBslx6W3raFrfx/ymN8lJlk9fm+0fprgVJ+H/9184a1pB6zOUXQ581FwKoPM7H+lp
-         V+YXvyWCX3OCjPaNZZl/MWuany5dyuVdGwjIlxtNkeO3dvaThZrcep6ytc4Hw+vWcGBZ
-         m38kNv2tlCM4mWnxa7RjqlP7DwNwZO1TVUzIoqWz02DbPFYO+VGNpTfuFGAv/6JZ+82j
-         +YrD5ROvnguxhaxCUdXNGddJW9lGJcNZXhjPONja/A2HD42AZfhlyTvaiDeVd67PkfBI
-         ewpw==
-X-Gm-Message-State: AOAM531mArsXlFGLg6Cpcy4hncvbuJSUxWDk8vYitIbTOJX+KU5DdsJw
-	U8t3c0UCYeyHkzH7Wu3aDM3CPSj2
-X-Google-Smtp-Source: ABdhPJxqZ6YXlHHcWD6mcz/fI2sRE5pufDJNdvsUr7ACh0sy0yA9MwvRfjTzpmXeXpRB2USJkzwOBA==
-X-Received: by 2002:a17:906:228a:: with SMTP id p10mr1998625eja.23.1597271989279;
-        Wed, 12 Aug 2020 15:39:49 -0700 (PDT)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300f07f147e04a6500bbf92bdd781.dip0.t-ipconnect.de. [2003:f0:7f14:7e04:a650:bbf:92bd:d781])
-        by smtp.gmail.com with ESMTPSA id ci27sm2569208ejc.23.2020.08.12.15.39.47
-        for <openembedded-devel@lists.openembedded.org>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Uwm2VyNFLLxqjkFJtAEEblq6m8G6j7jXxklmaJNxL9o=;
+        b=t2xCkZmM9A6dGYdJvmgxMulu7O21aaTiBmV8lLcovZCMdKeNNRFij+P8ZuKvvsJc/0
+         Mgrydb3QH3bc69+YrcbjB9ckouQRcmOm5f6Xfy7eVOuicLc0KByOsKwFFW3oa5w99hvN
+         +MKkp/9v+qsUmnVxD4knUUrFPfXXm+shA0ob6K+8Xk3NAxjl97Z64bXDekidFF+arjTu
+         E1xio8ol8896eVdfytMFNApdUcdp2crq0AYCwZSrVZbRq5PhuPCO4QX1+DlOa49NDN0V
+         NpwFtpPtoE6gt3hggOZVXDzT2xBk8oxoi/jBzcDVRdkuZ3guOpc+vPmaZwPC481IG0QS
+         14Nw==
+X-Gm-Message-State: AOAM531cgNtvivWTcYlcJ7LbZYCymmFskl1opMY6oGw1VvTK03apcltT
+	p8bjB8HEDkxEbTRivBihEiTt8u2Zc6Y=
+X-Google-Smtp-Source: ABdhPJxIIQbOXZFaQmzHabwNGCxhlBB1itoQAbfL0X9Ru6N70+AoPLmgYRaScg7AFHFO0vo6M1XEiA==
+X-Received: by 2002:a17:902:7d81:: with SMTP id a1mr1467883plm.89.1597273703807;
+        Wed, 12 Aug 2020 16:08:23 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
+        by smtp.gmail.com with ESMTPSA id h19sm3112146pjv.41.2020.08.12.16.08.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2020 15:39:48 -0700 (PDT)
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+        Wed, 12 Aug 2020 16:08:23 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 8/8] poppler: upgrade 0.90.1 -> 20.08.0
-Date: Thu, 13 Aug 2020 00:39:33 +0200
-Message-Id: <20200812223933.1119785-8-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200812223933.1119785-1-schnitzeltony@gmail.com>
-References: <20200812223933.1119785-1-schnitzeltony@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH 1/3] python3-matplotlib: Use lld for linking when using clang
+Date: Wed, 12 Aug 2020 16:08:19 -0700
+Message-Id: <20200812230821.1802729-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Looks like they changed release schema.
+build uses LTO and for some reason it does not work well when using
+clang-11
 
-Release 20.08.0:
-core:
- * Sub-page objects: initialize clip max values considering the render resolution. Issue #937
- * Splash: Set initial line width to 1. Issue #674
- * Fix stack overflow with specially crafted files
- * GfxShading: Simplify holding the Function
- * Splash: Fix x86 + windows asm build
+Fixes
 
-qt5:
- * Deprecate Document::toc
- * Deprecate AnnotationUtils
+| /mnt/b/yoe/master/build/tmp/work/armv7vet2hf-neon-yoe-linux-musleabi/python3-matplotlib/3.3.0-r0/recipe-sysroot-nat
+ive/usr/bin/arm-yoe-linux-musleabi/arm-yoe-linux-musleabi-ld.gold: error: /mnt/b/yoe/master/build/tmp/work/armv7vet2h
+f-neon-yoe-linux-musleabi/python3-matplotlib/3.3.0-r0/build/temp.linux-x86_64-3.8/extern/agg24-svn/src/agg_bezier_arc
+.o: not an object or archive
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../poppler/{poppler_0.90.1.bb => poppler_20.08.0.bb}          | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-oe/recipes-support/poppler/{poppler_0.90.1.bb => poppler_20.08.0.bb} (93%)
+ .../recipes-devtools/python/python3-matplotlib_3.3.0.bb        | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_0.90.1.bb b/meta-oe/recipes-support/poppler/poppler_20.08.0.bb
-similarity index 93%
-rename from meta-oe/recipes-support/poppler/poppler_0.90.1.bb
-rename to meta-oe/recipes-support/poppler/poppler_20.08.0.bb
-index bb5a782ae..c3f9716ef 100644
---- a/meta-oe/recipes-support/poppler/poppler_0.90.1.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_20.08.0.bb
-@@ -7,8 +7,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://0001-Do-not-overwrite-all-our-build-flags.patch \
-            file://basename-include.patch \
-            "
--SRC_URI[md5sum] = "b80a82f14459d31d929db421b0e8cf05"
--SRC_URI[sha256sum] = "984d82e72e91418d280885298c8bdc855a2fd92665fd52a1345b27235e0c71c4"
-+SRC_URI[sha256sum] = "ae65fef04bbf63259a6352e7b620719115d4fb97f5079b0b8b00a8eb0c86eca5"
+diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
+index 2e88efb563..bc2054a4d7 100644
+--- a/meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
+@@ -23,6 +23,9 @@ SRC_URI[sha256sum] = "24e8db94948019d531ce0bcd637ac24b1c8f6744ac86d2aa0eb6dbaeb1
  
- DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
+ inherit pypi setuptools3 pkgconfig
  
++# LTO with clang needs lld
++LDFLAGS_append_toolchain-clang = " -fuse-ld=lld"
++
+ RDEPENDS_${PN} = "\
+     freetype \
+     libpng \
 -- 
-2.26.2
+2.28.0
 
