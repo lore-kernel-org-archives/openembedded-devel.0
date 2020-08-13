@@ -1,17 +1,17 @@
-Received: from NAM04-SN1-obe.outbound.protection.outlook.com (NAM04-SN1-obe.outbound.protection.outlook.com [40.107.70.66])
- by mx.groups.io with SMTP id smtpd.web11.13276.1597334177937830167
+Received: from NAM04-SN1-obe.outbound.protection.outlook.com (NAM04-SN1-obe.outbound.protection.outlook.com [40.107.70.77])
+ by mx.groups.io with SMTP id smtpd.web10.13219.1597334187966934127
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2020 08:56:18 -0700
+ Thu, 13 Aug 2020 08:56:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=AQrbWXgW;
- spf=pass (domain: windriver.com, ip: 40.107.70.66, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=RZqxOQ8q;
+ spf=pass (domain: windriver.com, ip: 40.107.70.77, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ABMXK5B/hBV328satqxoEe1Xa3rH+FAoJBh962ohxLut9XK1sBevwRmbg1D6YEZn9UG7xzbtO1jgxTJORa+4iLnrkz+zHEo06nICjgq5313ZxCYQZ/dEhjGIdXKL56vRQvA8yjU+JS/uNNWw9PHTKC2t3Yh+1pilnn0xUg8idXip+texScLM12iYUKhSV/Njkbcy9hpaqAFTOQ+IYNl8/V8/l2XZU/gtW4/msnnbYg8J+rs6X1nbVq53VBIFg9w4WVYsCZtodtFhL5F7y1OIEJOeU/EggDhkkvgc/ZhVaQcbEsW8IXvnh8TPyDAu/kFMa29qXCZknFULUYVT1Slc4Q==
+ b=cMQCACFQKl2+19uLFk7iPDEomo+pjWjfngtr/esk2U1rBuctF8NwfspNBdAhUMu2XiclfABBGFCZ4NBapDQDS/cWXjYt5ea7wAdVVe3znNok8tbSVHYrXf4vFcVf3jS266i1tq1GlFjg5fyEROgie1KdzSnxQGEGoip7DgxZZjKKC5z2W41hojL2cKxaHxH0GzcX0mtycqDkGrCCuqPm3fSn66/P6VeC8Im/DD6E4YGO2SIE4crpfEt+1XGK2mAW4byM6Gbws7M6k4YYhmdc4ztfTs2fEL88mwWQBqBluzdVtFeHYDhWv0h7tnaNcs0JQr8IndNNUCvzIH/dVBJJBw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CV2WAI1TbqxYkZweocepfQeS9t1+9u8ceFZIfbugtzA=;
- b=LmomrFY0ZHNZ+ZfsGQ+djTjXdTmimlIHogmZuTOVUlH06uzCyo1wW3z2CKTP1QBLObFjsMIJFfOsAmYkv6CJclEt2sHHIjL0B9JjFHcTTZNEHoktv2uppTMe+UYxcKYISbqjMZHaIFFhV8mgqx0DdpCbroJI7PQLc13yncy3e53k8zJLQSXEbv5cMh8Z1R3AyDrj50QJtpklMJLqfRssIQEToW4eI/hpWoSX5EaniITaF1FiIW8MB2rgDXqNwq3F4pK155+q8eNag53TsZMHeqPxMXwBXVf3OElaUoeCTaR5cMv0B6/yDFBWHKSNNI4vopyuwND5989H+jaeMnmfYg==
+ bh=VsjZrcHi6HkRFsXvXxo49swjnMz5FEsGEgT3S+B8E70=;
+ b=XpB6ujQ85yl7dHuqyjwhATFQjSxWYOGK/C1s+I0ibQDIfHu6IkaBYpHrjrKurx2NqafTyFku49KJoTrF7aaBYkWojKFyxINu9JrvvW9iOriEzqFzrzVMkFsO4nRC0QebBw8gD+BUbD5xB8rwW2f4FVWzGUU0N+ehSm45Jcb8pbm+OsIRMc8Uy96jgI9qTKnBVZkssQkuWgWgfk4lDGIKBXDbTwcm73l94gAIKid9MYjdo6kVBKLiuMddJl81PCWeApwEWLWB46cffhSXZQ/EuA7ur+FHJesLbUHDQ00r5hyRrUhyQvQ6RFNhVL0w1UeQ5qKmCperiwUUic/SFaS/Gw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CV2WAI1TbqxYkZweocepfQeS9t1+9u8ceFZIfbugtzA=;
- b=AQrbWXgW7uox9ezqz5XaZKop2BVn9TuQR29GHLYMUOvOrSN69nQBHOXJb8HDWHrzmqi+r6q1mpARl+GK9HFIHDI94jTJpai/iuQIQ8m0u/8q2/p0hsIGbk3muz9i/x9VGzr2JB/b42ErPKG79leMAzPLa++EAVimhZLhCxlgaVA=
+ bh=VsjZrcHi6HkRFsXvXxo49swjnMz5FEsGEgT3S+B8E70=;
+ b=RZqxOQ8qBx8NnIDnC4VY2I23PbJjcMigP5z4yuGvhn2nPTBc+ktqXGdZA2oJyECDwltKUm/g552Fcbov8SD1vdhAetgynwF78+ZZph7+DtWxLwVIoBt1QvVy7OPqWe6lj/SpBVpeRD4n6SW88+Xuw1PtlnhHIR/S/naOqmC3EeE=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,127 +28,106 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB3814.namprd11.prod.outlook.com (2603:10b6:a03:fb::11) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.15; Thu, 13 Aug
- 2020 15:56:16 +0000
+ 2020 15:56:26 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::8d65:f6f9:ce31:8d47]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::8d65:f6f9:ce31:8d47%5]) with mapi id 15.20.3261.024; Thu, 13 Aug 2020
- 15:56:16 +0000
-Subject: Re: [oe] [meta-python][PATCH 3/5] python3-rsa: Upgrade 3.4.2 -> 4.6
+ 15:56:26 +0000
+Subject: Re: [oe] [meta-python][PATCH 4/5] python3-cmd2: Upgrade 1.3.1 -> 1.3.2
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200812102726.4376-1-leon.anavi@konsulko.com>
- <20200812102726.4376-3-leon.anavi@konsulko.com>
+ <20200812102726.4376-4-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <fba4a81c-709e-3852-b0c0-767558fe233a@windriver.com>
-Date: Thu, 13 Aug 2020 11:56:13 -0400
+Message-ID: <cac9ab6a-e25a-1e91-38cc-8aa09eb6d76d@windriver.com>
+Date: Thu, 13 Aug 2020 11:56:24 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200812102726.4376-3-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTOPR0101CA0016.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:15::29) To BY5PR11MB3909.namprd11.prod.outlook.com
+In-Reply-To: <20200812102726.4376-4-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTOPR0101CA0011.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:15::24) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YTOPR0101CA0016.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.15 via Frontend Transport; Thu, 13 Aug 2020 15:56:15 +0000
+Received: from [192.168.0.30] (174.115.236.231) by YTOPR0101CA0011.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::24) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.15 via Frontend Transport; Thu, 13 Aug 2020 15:56:26 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: cad4a458-88d2-4d3f-3927-08d83fa16963
+X-MS-Office365-Filtering-Correlation-Id: d7f07bcd-b469-46a3-c17f-08d83fa16f8b
 X-MS-TrafficTypeDiagnostic: BYAPR11MB3814:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB3814387E6369AFCC8A9A5E239F430@BYAPR11MB3814.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2958;
+	<BYAPR11MB381469515F314125B3E263749F430@BYAPR11MB3814.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:212;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	znSgnH8wX9YI+2/KvMpWoE5/4svrwf9wIQ6+pVes7e5DS+zVp5FFPbDs9rXUona3M3aupF7atCY1LN3xcfeaLL9gCLd3dsb3Rhw9Y5/6htsbQWof0qMrE8ZfaqIA2K+z+IlKfdStU7DQ2TX/AniaGv4aybHtDlavEY4DPgXjo82MNIxYGk4jz8vfpO/w9WFu/rflT/hkYK9E17FpBxCyE5bkVhWpK1ozCANGC3g03TQZfZbCT/NA2UJ2B1WrhrdN8/Fy6iIdsnXdokmVPGZaBh9LjlSDQTr2uTWjkQKGH+6i7CSE5mwh/h+TdLdIZXhsdGrSsrI51QkpjxPUauPXRysOi6Aw/Xr0cn37d4CNoytI/SotjbOS2Zj+8t0PwKU4DMiJked5Q07Klh75EfmrrwrsCbWRUkvqJZyRZTpg8LBtmyC5/Q0+3QHfHjoLk3J1M+sFqCGsbiUBcws55WSjSQ==
+	O6Ddc2/v+l3AwYilsf71zMGkLRuJkDMPqOcMQGG+HA2NJTQKXefDPSh+wW3LZSk2Vtt41VKkz8vk8ySZGhc5RI/lPf7/hzxjZYaYKIgE4SvJNAc5+iC3P5la8CmvF7U+kogxneP63iG6peM9vcRsC8CMC0zM6coChU52r8RjkTkic1yrtXJCwVtbPEmu/P/MRBxaW6FOyoTjQ74nHeoPIhsEad5UdDsI6RiM3uzRZZ7qjSsk4niS5BtKRSosfivrF2HnaaRAQ2op/4mZTTEezlqjuwC0eHGOw7hWzotdJ7t7O58ixfbBBjoLnY4Qb4t4sNH82SJlD1ruSK0fOSZdiyHiDz3YqLdPY4/GnJXeIPNCXNA5aRYhQCqO4sF6+jdhvSpJMRgpwQ9JaPfLAZgECeRAAmx6tFXdTK4TWy0sybTj8i9hG9hSJQY06xxhSDx6Iw2ujaWu8l+OpGIbwfFMhQ==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(396003)(39850400004)(376002)(366004)(136003)(346002)(8936002)(16526019)(66946007)(66556008)(966005)(66476007)(2616005)(31686004)(31696002)(44832011)(186003)(956004)(36756003)(166002)(83380400001)(26005)(86362001)(5660300002)(16576012)(53546011)(33964004)(6486002)(52116002)(8676002)(316002)(2906002)(478600001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	dao2fSQKYu4NkjKgrsVQ4PLcncRHbEXJiExmLYdnoO44i+fMGCdEUGV6nAdxpuyRTKy5DD3cAYI5jVZjDYWszOsNCdz4FWBXh8nKKPcnYwDNHH+XCy//A5ZjxnzvUg+kdC6vTiFyCMwgXI4c+1xO+EXznNsS5pJKea62x36jUo83G5OBNYN19Rf8nYIIoKxcYWJ6SBdkA7cAmzzXLhxHyezKAa/sXXD1ptSK6YGwG6ggGtf7cn4FljrfDqXon/3CW7TSR0PAEU6KVu8ZdiiIJ1rdci5Xp7+RaRk/QY1QPlrbVTyRbK5pbPtD7bPhX663F5GaQASY5VOvN6kKlaw5VIc5AqJuERi3W1X4IFK7dxgWGuh8CmEQP5UBUcUSdc8IRvL01GnWQjD2nXelaB+ldgaxwPJ5stfpExnS3f/b1sdNGWU9LBkw9BIigDN+liIMbro2LMg+XU8aWrRePiy0Q1hNABFaInFaU1q0e/Edm8jiIjhv8z8U7jYKrKEYV88U3RowU0mAVVRfMWZyd4Z4Wxdel43oazOhjIklZoG12TPZ4azlq3eBjRQua0iyQkwmj3rWZ20fZUe03N/TjKGDPvyxosvrnoq0YJNqQkjTw0JLVAZpcrjnfGmWN8ToemWPNkVgEecIGGuMdYzsfyl9OA==
+	oOY53t+A5AjKcmiN1nZmrz1plD9mo9uuSYMKKIk7NGtQ6jGXkXzqD1xYK72G236ZjXzccKiqPiqNQEiLwZZOObcDETs2dLM7HbmsUki+byaC9ihVXWEjn9In080E+1tRWUy89d9E+KdPIqLfaElbEwFYvC/IMd3e9pioUbG4ObjMOIIu3CY1xNyRvI5G5NYuF7C6ZSLbWxzOTe5TvPIIz7e1hrGi93cOS2ggzv+6hSCVUC04cWkgACOPCA8ejcKKsCpTgkoGmCEgXLU7VmdUwsSSZhoBirGPnydQtB0f3hn5D82jcq5FAeBi+opNlTPKBPiCbzUfGZMWgOI8V6cWgl2djZWqBA0zkPQRYeOdxpe/7qgYGFXOS3KgDmngjHJoUPy1z8VGVSQSiS2KwUn9sgSB9BDa/Vb+21UdAi5J1fFpcKna7UO65AA7DnU7nLwqx/4pfIni7L7TGeS/+IV4/J+ebU/xQu53a7Qp5vD69t98uHCp9nNdQ8JR9nTuHTklP/M5MIsj9cvCB82YCeU4IrndSEnAS1T97EAcRduhVtTbdEOrMdArXXhyHmpG6WFP3ddyl9UT0COZkEqWzclBkFogrsPWUopWzlkQK2P16SiCkpd7SwF5ZO3mMDBIfoJPqoE9hygj6q3Nv2d2gyKa/g==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cad4a458-88d2-4d3f-3927-08d83fa16963
+X-MS-Exchange-CrossTenant-Network-Message-Id: d7f07bcd-b469-46a3-c17f-08d83fa16f8b
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Aug 2020 15:56:16.7407
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Aug 2020 15:56:26.8558
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +BF182dKvWeybzAcn5Wrj7bBL3Gw8wwHFbf9ttJlpimY1Z2ymeq3+c6u8FH9Cn+aGWKVdElhMVVA9vxGE6IDsKlQsacWXf03RQWZ7R7SFsQ=
+X-MS-Exchange-CrossTenant-UserPrincipalName: zAruUcSbnyYr1eXQy4KPvmEC1DqhzedbcSeCUEYh/WAzm0rXtLECDQqSFCBnfCEYIg7M+P5R/JS4sOBnZ6kkq55q4lWIn5Adx4BusR4GGZE=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3814
 Content-Type: multipart/alternative;
- boundary="------------5ED675CB453C3D398739B263"
+ boundary="------------C312A0557E9F0803A480E318"
 Content-Language: en-US
 
---------------5ED675CB453C3D398739B263
+--------------C312A0557E9F0803A480E318
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 8/12/20 6:27 AM, Leon Anavi wrote:
-> Upgrade to release 4.6:
+> Upgrade to release 1.3.2:
 >
-> - Rolled back the switch to Poetry, and reverted back to using
->    Pipenv + setup.py for dependency management. There apparently
->    is an issue no-binary installs of packages build with Poetry.
-> - Limited SHA3 support to those Python versions (3.6+) that
->    support it natively. The third-party library that adds support
->    for this to Python 3.5 is a binary package, and thus breaks the
->    pure-Python nature of Python-RSA.
-> - To avoid older Python installations from trying to upgrade to
->    RSA 4.4, this is now made explicit in the python_requires
->    argument in setup.py
->
-> The encrypt/decrypt-bigfile CLI commands have been removed in
-> 2016 therefore the recipe has been updated accordingly.
+> - Added functions to fetch registered CommandSets by type and
+>    command name.
+> - Fixed prog value of subcommands added with as_subcommand_to()
+>    decorator.
+> - Fixed missing settings in subcommand parsers created with
+>    as_subcommand_to() decorator. These settings include things
+>    like description and epilog text.
+> - Fixed issue with CommandSet auto-discovery only searching
+>    direct sub-classes
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-rsa_3.4.2.bb => python3-rsa_4.6.bb}    | 7 ++-----
->   1 file changed, 2 insertions(+), 5 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-rsa_3.4.2.bb => python3-rsa_4.6.bb} (77%)
+>   .../python/{python3-cmd2_1.3.1.bb => python3-cmd2_1.3.2.bb}   | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.1.bb => python3-cmd2_1.3.2.bb} (75%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb b/meta-python/recipes-devtools/python/python3-rsa_4.6.bb
-> similarity index 77%
-> rename from meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb
-> rename to meta-python/recipes-devtools/python/python3-rsa_4.6.bb
-> index 759214fa3..d2b108635 100644
-> --- a/meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-rsa_4.6.bb
-> @@ -4,15 +4,14 @@ AUTHOR = "Sybren A. Stuvel"
->   LICENSE = "Apache-2.0"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=c403f6882d4f97a9cd927df987d55634"
+> diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.1.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.3.2.bb
+> similarity index 75%
+> rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.1.bb
+> rename to meta-python/recipes-devtools/python/python3-cmd2_1.3.2.bb
+> index 15b10d0f5..f5d6099dd 100644
+> --- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-cmd2_1.3.2.bb
+> @@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def"
 >   
-> -SRC_URI[sha256sum] = "25df4e10c263fb88b5ace923dd84bf9aa7f5019687b5e55382ffcdb8bede9db5"
-> +SRC_URI[md5sum] = "bbf1c954865319bd542600ab07f92aca"
-> +SRC_URI[sha256sum] = "109ea5a66744dd859bf16fe904b8d8b627adafb9408753161e766a92e7d681fa"
+>   DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
 >   
->   inherit pypi setuptools3 update-alternatives
+> -SRC_URI[md5sum] = "9f0af0810da98a30ac92f1e4e7a8c8ab"
+> -SRC_URI[sha256sum] = "c86f3b8348798732759c9d53cbcb6258a8f21f60c1a1268e942d24c9dc50b4c6"
+> +SRC_URI[md5sum] = "ee7199d76f75bf01d8a162db6b696662"
+> +SRC_URI[sha256sum] = "645792972e1c0475b03fd575d8ca95c526db970d886669a399307eb52fddd7bd"
 >   
->   ALTERNATIVE_${PN} = "\
->       pyrsa-decrypt \
-> -    pyrsa-decrypt-bigfile \
->       pyrsa-encrypt \
-> -    pyrsa-encrypt-bigfile \
->       pyrsa-keygen \
->       pyrsa-priv2pub \
->       pyrsa-sign \
-> @@ -20,9 +19,7 @@ ALTERNATIVE_${PN} = "\
->   "
+>   inherit pypi setuptools3
 >   
->   ALTERNATIVE_LINK_NAME[pyrsa-decrypt] = "${bindir}/pyrsa-decrypt"
-> -ALTERNATIVE_LINK_NAME[pyrsa-decrypt-bigfile] = "${bindir}/pyrsa-decrypt-bigfile"
->   ALTERNATIVE_LINK_NAME[pyrsa-encrypt] = "${bindir}/pyrsa-encrypt"
-> -ALTERNATIVE_LINK_NAME[pyrsa-encrypt-bigfile] = "${bindir}/pyrsa-encrypt-bigfile"
->   ALTERNATIVE_LINK_NAME[pyrsa-keygen] = "${bindir}/pyrsa-keygen"
->   ALTERNATIVE_LINK_NAME[pyrsa-priv2pub] = "${bindir}/pyrsa-priv2pub"
->   ALTERNATIVE_LINK_NAME[pyrsa-sign] = "${bindir}/pyrsa-sign"
 >
 > 
 
---------------5ED675CB453C3D398739B263
+--------------C312A0557E9F0803A480E318
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -160,68 +139,47 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 8/12/20 6:27 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200812102726.4376-3-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 4.6:
+    <blockquote type="cite" cite="mid:20200812102726.4376-4-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.3.2:
 
-- Rolled back the switch to Poetry, and reverted back to using
-  Pipenv + setup.py for dependency management. There apparently
-  is an issue no-binary installs of packages build with Poetry.
-- Limited SHA3 support to those Python versions (3.6+) that
-  support it natively. The third-party library that adds support
-  for this to Python 3.5 is a binary package, and thus breaks the
-  pure-Python nature of Python-RSA.
-- To avoid older Python installations from trying to upgrade to
-  RSA 4.4, this is now made explicit in the python_requires
-  argument in setup.py
-
-The encrypt/decrypt-bigfile CLI commands have been removed in
-2016 therefore the recipe has been updated accordingly.
+- Added functions to fetch registered CommandSets by type and
+  command name.
+- Fixed prog value of subcommands added with as_subcommand_to()
+  decorator.
+- Fixed missing settings in subcommand parsers created with
+  as_subcommand_to() decorator. These settings include things
+  like description and epilog text.
+- Fixed issue with CommandSet auto-discovery only searching
+  direct sub-classes
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200812102726.4376-3-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200812102726.4376-4-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-rsa_3.4.2.bb =&gt; python3-rsa_4.6.bb}    | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-rsa_3.4.2.bb =&gt; python3-rsa_4.6.bb} (77%)
+ .../python/{python3-cmd2_1.3.1.bb =&gt; python3-cmd2_1.3.2.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.1.bb =&gt; python3-cmd2_1.3.2.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb b/meta-python/recipes-devtools/python/python3-rsa_4.6.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb
-rename to meta-python/recipes-devtools/python/python3-rsa_4.6.bb
-index 759214fa3..d2b108635 100644
---- a/meta-python/recipes-devtools/python/python3-rsa_3.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-rsa_4.6.bb
-@@ -4,15 +4,14 @@ AUTHOR = &quot;Sybren A. Stuvel&quot;
- LICENSE = &quot;Apache-2.0&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=c403f6882d4f97a9cd927df987d55634">&quot;file://LICENSE;md5=c403f6882d4f97a9cd927df987d55634&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.1.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.3.2.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.1.bb
+rename to meta-python/recipes-devtools/python/python3-cmd2_1.3.2.bb
+index 15b10d0f5..f5d6099dd 100644
+--- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-cmd2_1.3.2.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def">&quot;file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def&quot;</a>
  
--SRC_URI[sha256sum] = &quot;25df4e10c263fb88b5ace923dd84bf9aa7f5019687b5e55382ffcdb8bede9db5&quot;
-+SRC_URI[md5sum] = &quot;bbf1c954865319bd542600ab07f92aca&quot;
-+SRC_URI[sha256sum] = &quot;109ea5a66744dd859bf16fe904b8d8b627adafb9408753161e766a92e7d681fa&quot;
+ DEPENDS += &quot;${PYTHON_PN}-setuptools-scm-native&quot;
  
- inherit pypi setuptools3 update-alternatives
+-SRC_URI[md5sum] = &quot;9f0af0810da98a30ac92f1e4e7a8c8ab&quot;
+-SRC_URI[sha256sum] = &quot;c86f3b8348798732759c9d53cbcb6258a8f21f60c1a1268e942d24c9dc50b4c6&quot;
++SRC_URI[md5sum] = &quot;ee7199d76f75bf01d8a162db6b696662&quot;
++SRC_URI[sha256sum] = &quot;645792972e1c0475b03fd575d8ca95c526db970d886669a399307eb52fddd7bd&quot;
  
- ALTERNATIVE_${PN} = &quot;\
-     pyrsa-decrypt \
--    pyrsa-decrypt-bigfile \
-     pyrsa-encrypt \
--    pyrsa-encrypt-bigfile \
-     pyrsa-keygen \
-     pyrsa-priv2pub \
-     pyrsa-sign \
-@@ -20,9 +19,7 @@ ALTERNATIVE_${PN} = &quot;\
- &quot;
+ inherit pypi setuptools3
  
- ALTERNATIVE_LINK_NAME[pyrsa-decrypt] = &quot;${bindir}/pyrsa-decrypt&quot;
--ALTERNATIVE_LINK_NAME[pyrsa-decrypt-bigfile] = &quot;${bindir}/pyrsa-decrypt-bigfile&quot;
- ALTERNATIVE_LINK_NAME[pyrsa-encrypt] = &quot;${bindir}/pyrsa-encrypt&quot;
--ALTERNATIVE_LINK_NAME[pyrsa-encrypt-bigfile] = &quot;${bindir}/pyrsa-encrypt-bigfile&quot;
- ALTERNATIVE_LINK_NAME[pyrsa-keygen] = &quot;${bindir}/pyrsa-keygen&quot;
- ALTERNATIVE_LINK_NAME[pyrsa-priv2pub] = &quot;${bindir}/pyrsa-priv2pub&quot;
- ALTERNATIVE_LINK_NAME[pyrsa-sign] = &quot;${bindir}/pyrsa-sign&quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -231,4 +189,4 @@ index 759214fa3..d2b108635 100644
   </body>
 </html>
 
---------------5ED675CB453C3D398739B263--
+--------------C312A0557E9F0803A480E318--
