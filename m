@@ -1,57 +1,55 @@
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.web10.13655.1597335406863415893
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web11.13967.1597336090594339787
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2020 09:16:47 -0700
+ Thu, 13 Aug 2020 09:28:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=n5FO+Pk1;
- spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-ej1-f47.google.com with SMTP id m22so6771195eje.10
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 09:16:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ka3zZ/aB;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id kq25so6847687ejb.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 09:28:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=GZO6L/G+v3Ct4FT8yKOWgkt86Bu9GAT3byGl3KI1m7w=;
-        b=n5FO+Pk16NNF9+b5pCdmBu14vfodIY09MZuI8A3lNb/P0Di2apL7jHZlz1wWH7P7uF
-         +gP7ohievM/latnCovKYIqSpw/IST6QkLMTNK1YGgl97B2D88qMre9SIW5RcclKMXzmE
-         i9xADSbW8vVNEZL8yJA8syeL8LxSrC8gXXhPdgeguNRX3YNtvywWdymUVRoW2CBn4wiz
-         IooFJCtOGdKmVOAo33f0wlySlfE5IoXu2soNMjWUMaHAAPquSoIAP5s5UbvfSB4F0AT+
-         ILEVDW3TAjT5Oe5mHLT27fgEo5oa0lGko67S8p1RBmDnFRETVUkne8lOFFwprOWHIZYv
-         Nnkg==
+        bh=WUtDVfjoYR6P+khaoj6VdfXr6MVa+4GhAZLIOfSU1mY=;
+        b=ka3zZ/aBmzbreYtH5bkb4EEXnC8SX7w09GwRrg+0lXAAfhN/B6Aa1yuIAmaCdK8kWD
+         2PQynZaLkn3GvY7WfJDioduHs+GdlBp2QrOn93Km0NKf0zgoPA9fz+mLfqyuCJgPyMwJ
+         sBnsSPicwJP3Uh6nQdC3JRoKboQ7zAD+K0UlbWIgO4OxBHf0XxTGdvaJqbxv6kgSH7SF
+         qDV6CdQ6HGi4MvFX0y4V4ST1Ipnn20xMaFjqcScCWtfhN4+v+r1f1oRbJGRfqaxd09NE
+         YitehaLPp7BB7FPFeaDXB75Wo8Eiz+Wg/DMGXUDVbO1oBatBv5VgBsjwscj8woeEFLIN
+         C4eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=GZO6L/G+v3Ct4FT8yKOWgkt86Bu9GAT3byGl3KI1m7w=;
-        b=f/bZvxfyY5a0v7VKX4EMZ4Nc1e+0ymjfkW6g3O+E07quyEx5ecVo1uW8XKK0luUi2I
-         j3AKnLjvstctqjhrrwrxkJ6HzVCnNmN6cwrMmELHEdaULtMPGuSU3WJ162YsrOcvbaa/
-         rJ/bhplUnCWm/P24LERpSVsYW8TN3yXK5AhoS73hkQNejh4v6Zt0RA85x6/R1kC8VPFd
-         bVHTQI/lymSM5a/fZ7iUx27b6ugJ9/A3+xVp8gfdfMCzlDYU3I4AVE6mOU6SB/WZWUgg
-         gVw/Bbr54Xq+ECAB+x9mT1aH9LbDJ9T/cbbmiewTuZgJKsrsqw+7R3b7CF9LiSSvFocm
-         6Owg==
-X-Gm-Message-State: AOAM53236CbQgBwsQiz7WXrcLgkTq1epb9SDnHiLPpuwZj3qiURXbcD3
-	VQk4jmyVFuCalOtaJSSgqClC/rdL
-X-Google-Smtp-Source: ABdhPJzVO4Zk77qbmpf2XuK8ge7/cYkbphn7iuFcrL6FrCc15PX+36FW/p3y+01VVjh1h1hWdsd5iQ==
-X-Received: by 2002:a17:907:9483:: with SMTP id dm3mr5643098ejc.333.1597335405021;
-        Thu, 13 Aug 2020 09:16:45 -0700 (PDT)
+        bh=WUtDVfjoYR6P+khaoj6VdfXr6MVa+4GhAZLIOfSU1mY=;
+        b=U5DlhfpI08elrR/DwHX3z8mC+hWnpMBwW4JCf3Km6B/KtpsEqXFU2Z57lzo30QIRen
+         sE+iKmKgJ+iz4eQbISnCx6AjCUs0tZlSMabFXdhrN3s4tTWEwLevz8/Vq/QMZzs5VBiq
+         NIixjulnIfItDov/gXoh6mKgNh2hn+flHCb4+BC11+otbA1dn2m5H/xl9EAznXBGh8at
+         MmdyJxpnoMmttAAbCLS0I/NfDwbE31AxXnBK1ujMRTUaxD+yD6JjPe9KD0sVKBu6w4nG
+         xqq+aGoSOOYbktKbSyyQp0d/nDChsc/aH03t+QaoqGTetuff8W7cwwEzRZJg20SEYyeU
+         uZqg==
+X-Gm-Message-State: AOAM530aB3SZipDQiBaLTHUQ9LkS6dqYvmY+Nu+hEjPrFFS84Gt+fW4C
+	dWHfec0YBWApv4Ihlf/rVenrDice
+X-Google-Smtp-Source: ABdhPJzaLq3KPzFFMviYVsz7Ye3CNGx9qANlRXB1Xc8e8gkwbb6imlKUzDOKXzE+S7IPMtLNOVnhJw==
+X-Received: by 2002:a17:906:82d5:: with SMTP id a21mr5413947ejy.213.1597336088795;
+        Thu, 13 Aug 2020 09:28:08 -0700 (PDT)
 Return-Path: <alex.kanavin@gmail.com>
 Received: from linux-f9zs.box (cable-95-168-130-13.cust.telecolumbus.net. [95.168.130.13])
-        by smtp.gmail.com with ESMTPSA id b62sm4241411edf.61.2020.08.13.09.16.43
+        by smtp.gmail.com with ESMTPSA id n5sm4620328eja.105.2020.08.13.09.28.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2020 09:16:44 -0700 (PDT)
+        Thu, 13 Aug 2020 09:28:07 -0700 (PDT)
 From: "Alexander Kanavin" <alex.kanavin@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alexander Kanavin <alexander.kanavin@daimler.com>
-Subject: [meta-java][PATCH] openjdk-8: add a glibc 2.32 compatibility patch
-Date: Thu, 13 Aug 2020 18:16:14 +0200
-Message-Id: <20200813161614.22699-1-alex.kanavin@gmail.com>
+Cc: Alexander Kanavin <alex.kanavin@gmail.com>
+Subject: [meta-java][PATCHv2] openjdk-8: add a glibc 2.32 compatibility patch
+Date: Thu, 13 Aug 2020 18:27:56 +0200
+Message-Id: <20200813162756.24193-1-alex.kanavin@gmail.com>
 X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Alexander Kanavin <alexander.kanavin@daimler.com>
-
-Signed-off-by: Alexander Kanavin <alexander.kanavin@daimler.com>
+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
 ---
  .../openjdk/openjdk-8-release-common.inc      |  1 +
  .../2010-Remove-usage-of-sys-sysctl.h.patch   | 39 +++++++++++++++++++
