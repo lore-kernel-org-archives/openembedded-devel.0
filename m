@@ -1,125 +1,67 @@
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web10.1456.1597342377263427492
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web12.3183.1597347634727506626
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2020 11:12:57 -0700
+ Thu, 13 Aug 2020 12:40:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=KMibBKfW;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id f193so3204290pfa.12
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 11:12:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=wrFePGqwFahrjUquq3vAEQRFvoL92QkCVuN/EqfideQ=;
-        b=KMibBKfWyRujKJAhwCGoi37yN4Bc2dfY+HCKRofQXXQjZVPVhmYJivDWEy58YVtR1G
-         YF79ZzqbnH2uAZ1nrL/q7FKBGeWBJPWPEhngxzf62R8VBIsvWaoQ8Lk1n0lK1wD4oQSk
-         IsRweU9CtRO9UwSGBiRpVppVGXBftnjffUuGqzUNc56K58bvDqUBAgliwMYiU425DoEc
-         IAi59s+RNCT3WOqlNU9+oktsg1Rc2jYhMqZZgsNc3qVzz6Wr9EuwrAHIy6uHyHsj2J2u
-         urEw0Dvry4N0PXDWyoCZfQwnGDNi4Fhzi5l5akFETrRlJexSG2VUMB3ITbxuiH0uUSPH
-         G1IQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=wrFePGqwFahrjUquq3vAEQRFvoL92QkCVuN/EqfideQ=;
-        b=RnvcJIuUaUHnDbX7YJZlyZC9B2SWGThV6b02WAG+PB/3Hks0Cjw+VK0NYZp1O55bRR
-         OSe80zLZ9W0WYpUPUCVce/nEdUBXbieJpuD1mq5euXYJr3cx8zSZ6/YM02GzB/MUIvtf
-         nLWDlsBeIpvv+Lkh9E/r8u5hSd3OJEgn+vYwJlmZ7BEhYIkojroH2jtY/B+ewEdIUJmb
-         Xb8iKpoqtuPmHs8YgX4JOc2t7bmWWu6NbrMkc06bfMD/CB39gU0RoaF9/PBw1XTQ0KPt
-         jrWzixxsg0PwdWb/Gk0kw6uwa6bbdfIczDDgvHk9DHvPJK0Hvc2ROKEpZ47/eruwR6cd
-         tZ+g==
-X-Gm-Message-State: AOAM532+L505hIbjnW9CO7b2v0u15+925qilcIeIUqryjTKWcmZrIpzS
-	/KVnVUTrU02wMwTQip80L4Ql7V7Q3UU=
-X-Google-Smtp-Source: ABdhPJxOfGYtrMPlX/CYhmrPssIhL4NMvb0zkxl8EMQhAsXOD9zSnI2agpdHBXbF4vu6Lazc4+XfaA==
-X-Received: by 2002:a62:7ac2:: with SMTP id v185mr5560149pfc.277.1597342376431;
-        Thu, 13 Aug 2020 11:12:56 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id h12sm6719678pfr.143.2020.08.13.11.12.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2020 11:12:55 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-filesystems][PATCH 3/3] owfs: Fix build with -fno-common
-Date: Thu, 13 Aug 2020 11:12:52 -0700
-Message-Id: <20200813181252.805078-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200813181252.805078-1-raj.khem@gmail.com>
-References: <20200813181252.805078-1-raj.khem@gmail.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: joe.slater@windriver.com)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 07DJeXYP018560
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 12:40:33 -0700 (PDT)
+Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCB.corp.ad.wrs.com
+ (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Thu, 13 Aug 2020
+ 12:40:15 -0700
+From: "Joe Slater" <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
+Subject: [meta-networking][PATCH 1/1] aoetool: make builds reproducible
+Date: Thu, 13 Aug 2020 12:40:15 -0700
+Message-ID: <20200813194015.3412-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Strip host path infomation out of binaries by not suppressing
+default CFLAGS.
+
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- .../0001-Fix-compilation-with-GCC10.patch     | 44 +++++++++++++++++++
- .../recipes-filesystems/owfs/owfs_3.2p3.bb    |  1 +
- 2 files changed, 45 insertions(+)
- create mode 100644 meta-filesystems/recipes-filesystems/owfs/owfs/0001-Fix-compilation-with-GCC10.patch
+ .../aoetools/aoetools/reproducible-build.patch       | 12 ++++++++++++
+ .../recipes-support/aoetools/aoetools_36.bb          |  1 +
+ 2 files changed, 13 insertions(+)
+ create mode 100644 meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch
 
-diff --git a/meta-filesystems/recipes-filesystems/owfs/owfs/0001-Fix-compilation-with-GCC10.patch b/meta-filesystems/recipes-filesystems/owfs/owfs/0001-Fix-compilation-with-GCC10.patch
+diff --git a/meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch b/meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch
 new file mode 100644
-index 0000000000..6426ecb247
+index 000000000..4939ab25c
 --- /dev/null
-+++ b/meta-filesystems/recipes-filesystems/owfs/owfs/0001-Fix-compilation-with-GCC10.patch
-@@ -0,0 +1,44 @@
-+From a812202d22a2861318b8e39f1cd74cd222f8e76f Mon Sep 17 00:00:00 2001
-+From: "Azamat H. Hackimov" <azamat.hackimov@gmail.com>
-+Date: Tue, 9 Jun 2020 11:30:38 +0300
-+Subject: [PATCH] Fix compilation with GCC10
-+
-+Fixed compilation with -fno-common, which enabled in GCC 10 by default.
-+See https://bugs.gentoo.org/707438.
-+
-+Upstream-Status: Backport [https://github.com/owfs/owfs/pull/62]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ module/owserver/src/c/owserver.c       | 2 ++
-+ module/owserver/src/include/owserver.h | 2 +-
-+ 2 files changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/module/owserver/src/c/owserver.c b/module/owserver/src/c/owserver.c
-+index db29988e..2ed29161 100644
-+--- a/module/owserver/src/c/owserver.c
-++++ b/module/owserver/src/c/owserver.c
-+@@ -36,6 +36,8 @@
++++ b/meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch
+@@ -0,0 +1,12 @@
++--- a/Makefile
+++++ b/Makefile
++@@ -40,7 +40,8 @@ NPERSHELF=16
++ CONF_SCRIPTS = aoe-discover aoe-interfaces aoe-mkshelf aoe-revalidate aoe-flush aoe-stat
++ PROGS = aoeping aoecfg aoe-sancheck
++ COMMANDS := ${CONF_SCRIPTS} aoe-mkdevs aoe-version coraid-update ${PROGS}
++-CFLAGS = -Wall -O -g
+++# We could still override this on the command line.
+++CFLAGS += -Wall -O -g
++ SANCHECKLIBS = -lpthread
 + 
-+ #include "owserver.h"
-+ 
-++pthread_mutex_t persistence_mutex ;
-++
-+ /* --- Prototypes ------------ */
-+ static void SetupAntiloop(int argc, char **argv);
-+ 
-+diff --git a/module/owserver/src/include/owserver.h b/module/owserver/src/include/owserver.h
-+index 8be582f0..a257ed02 100644
-+--- a/module/owserver/src/include/owserver.h
-++++ b/module/owserver/src/include/owserver.h
-+@@ -18,7 +18,7 @@
-+ #include "ow.h"
-+ #include "ow_connection.h"
-+ 
-+-pthread_mutex_t persistence_mutex ;
-++extern pthread_mutex_t persistence_mutex ;
-+ #define PERSISTENCELOCK    _MUTEX_LOCK(   persistence_mutex ) ;
-+ #define PERSISTENCEUNLOCK  _MUTEX_UNLOCK( persistence_mutex ) ;
-+ 
-+-- 
-+2.28.0
-+
-diff --git a/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p3.bb b/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p3.bb
-index 414084449f..7f56c88fcc 100644
---- a/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p3.bb
-+++ b/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p3.bb
-@@ -12,6 +12,7 @@ DEPENDS = "fuse virtual/libusb0"
- SRCREV = "3744375dfaa350e31c9b360eb1e1a517bbeb5c47"
- SRC_URI = "git://github.com/owfs/owfs \
-            file://0001-Add-build-rule-for-README.patch \
-+           file://0001-Fix-compilation-with-GCC10.patch \
-            file://owhttpd \
-            file://owserver \
-            "
++ AOE_PING_OBJ = aoeping.o linux.o
+diff --git a/meta-networking/recipes-support/aoetools/aoetools_36.bb b/meta-networking/recipes-support/aoetools/aoetools_36.bb
+index 9b73b442a..60f3dc9b2 100644
+--- a/meta-networking/recipes-support/aoetools/aoetools_36.bb
++++ b/meta-networking/recipes-support/aoetools/aoetools_36.bb
+@@ -13,6 +13,7 @@ RRECOMMENDS_${PN} = "kernel-module-aoe"
+ SRC_URI = "http://sourceforge.net/projects/${BPN}/files/${BPN}/${BPN}-${PV}.tar.gz \
+            file://aoe-stat-no-bashism.patch \
+            file://makefile-add-ldflags.patch \
++           file://reproducible-build.patch \
+         "
+ SRC_URI[md5sum] = "bff30daa988a65f69d4448ce4726a6db"
+ SRC_URI[sha256sum] = "fb5e2cd0de7644cc1ec04ee3aeb43211cf7445a0c19e13d6b3ed5a8fbdf215ff"
 -- 
-2.28.0
+2.24.1
 
