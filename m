@@ -1,167 +1,120 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.73])
- by mx.groups.io with SMTP id smtpd.web10.13262.1597334306494668254
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.web10.13655.1597335406863415893
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2020 08:58:26 -0700
+ Thu, 13 Aug 2020 09:16:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=R8QJ/fx2;
- spf=pass (domain: windriver.com, ip: 40.107.237.73, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XtVMdbyiiEzPL81bfakMgnWPpjSSEhASsVqbdXsqvcbDzVx1uOmQ46PWsyqatxFFCexrpp59ve4NvZw/UDu2b2T4omiDp/u/vQoZ61soq94YH+zzhM2HKeO3/xYHliBaPXA8wS87gMZWEPBZjJQBIvSP1FU/784UjtfCzi51YFeOpzNpcTSRAZCik5kds+ksS/FozkML9+Sz/CnVWZ1GHWaDHsOKadhsK2PuA/x3RV0JupKherHU8pIYZLD/4S2Z2xqt/kRLfAtZxAwxemS+l1z8ZLzVryybspWLGVhaEPni3f6Nm7CufN6TVM69kNN9H5YfLNVCAw6r6s4gg21hLw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=I2YGlUOETzNpO/du4/Njqw4cWgWXdVZ/u+NQsO/6PJI=;
- b=DJFggkxnvlVniuvxnlQrjSHqlU8qIc2B5nWEifZUGqG7pPPmGntZglnQBI+3Pcg7cU/y5sNlWtYIAoeX+hnRFPLJEOT8q81zPACE3TRd9xdSH7YVSaAngils+1dYi+c5KU2TyHGsdLnVtjNsJD9HQWTGhAQo73h4+sRjKipHV7voWLMcIeSZl72Uj6aJ9p+A+SvHIjD1PtFwAYEfnR+C3wla6udqrY/MdT59I+e0yA3C8uPJPTa8mrXp9RJ5KY8iIxBV11kfU1E+BzDXI4g+SCsevFI5Iwae/lvyFQ5wp6XjzFfG0HoxuM4GeYKW1tJ6uTHD7Ft9CT9OWGhMz8Cojg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=n5FO+Pk1;
+ spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-ej1-f47.google.com with SMTP id m22so6771195eje.10
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 09:16:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=I2YGlUOETzNpO/du4/Njqw4cWgWXdVZ/u+NQsO/6PJI=;
- b=R8QJ/fx24X/Rwo2EsbptHetCb6QClsqavsRlKTXyD3kIiu0gMipf1nudUSQM0H/1LYRHS13j27/OUTK6SFnyDxID/eyIQVFwRRWlym1ExNuu6bbi4ZGVNcJrJC2EKIwmPgWsddafSTDPpFU9OXOKdjCqDmqsoqQQyyfeMsKiFjA=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB3606.namprd11.prod.outlook.com (2603:10b6:a03:b5::25) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.20; Thu, 13 Aug
- 2020 15:58:24 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::8d65:f6f9:ce31:8d47]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::8d65:f6f9:ce31:8d47%5]) with mapi id 15.20.3261.024; Thu, 13 Aug 2020
- 15:58:24 +0000
-Subject: Re: [oe] [meta-python][PATCH 3/3] python3-pandas: Add workaround to fix build with clang
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-References: <20200812230821.1802729-1-raj.khem@gmail.com>
- <20200812230821.1802729-3-raj.khem@gmail.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <4b35b1ca-a744-2ae4-6c6c-3dd12d5d227a@windriver.com>
-Date: Thu, 13 Aug 2020 11:58:22 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
-In-Reply-To: <20200812230821.1802729-3-raj.khem@gmail.com>
-X-ClientProxiedBy: YT1PR01CA0111.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2c::20) To BY5PR11MB3909.namprd11.prod.outlook.com
- (2603:10b6:a03:191::13)
-Return-Path: trevor.gamblin@windriver.com
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GZO6L/G+v3Ct4FT8yKOWgkt86Bu9GAT3byGl3KI1m7w=;
+        b=n5FO+Pk16NNF9+b5pCdmBu14vfodIY09MZuI8A3lNb/P0Di2apL7jHZlz1wWH7P7uF
+         +gP7ohievM/latnCovKYIqSpw/IST6QkLMTNK1YGgl97B2D88qMre9SIW5RcclKMXzmE
+         i9xADSbW8vVNEZL8yJA8syeL8LxSrC8gXXhPdgeguNRX3YNtvywWdymUVRoW2CBn4wiz
+         IooFJCtOGdKmVOAo33f0wlySlfE5IoXu2soNMjWUMaHAAPquSoIAP5s5UbvfSB4F0AT+
+         ILEVDW3TAjT5Oe5mHLT27fgEo5oa0lGko67S8p1RBmDnFRETVUkne8lOFFwprOWHIZYv
+         Nnkg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GZO6L/G+v3Ct4FT8yKOWgkt86Bu9GAT3byGl3KI1m7w=;
+        b=f/bZvxfyY5a0v7VKX4EMZ4Nc1e+0ymjfkW6g3O+E07quyEx5ecVo1uW8XKK0luUi2I
+         j3AKnLjvstctqjhrrwrxkJ6HzVCnNmN6cwrMmELHEdaULtMPGuSU3WJ162YsrOcvbaa/
+         rJ/bhplUnCWm/P24LERpSVsYW8TN3yXK5AhoS73hkQNejh4v6Zt0RA85x6/R1kC8VPFd
+         bVHTQI/lymSM5a/fZ7iUx27b6ugJ9/A3+xVp8gfdfMCzlDYU3I4AVE6mOU6SB/WZWUgg
+         gVw/Bbr54Xq+ECAB+x9mT1aH9LbDJ9T/cbbmiewTuZgJKsrsqw+7R3b7CF9LiSSvFocm
+         6Owg==
+X-Gm-Message-State: AOAM53236CbQgBwsQiz7WXrcLgkTq1epb9SDnHiLPpuwZj3qiURXbcD3
+	VQk4jmyVFuCalOtaJSSgqClC/rdL
+X-Google-Smtp-Source: ABdhPJzVO4Zk77qbmpf2XuK8ge7/cYkbphn7iuFcrL6FrCc15PX+36FW/p3y+01VVjh1h1hWdsd5iQ==
+X-Received: by 2002:a17:907:9483:: with SMTP id dm3mr5643098ejc.333.1597335405021;
+        Thu, 13 Aug 2020 09:16:45 -0700 (PDT)
+Return-Path: <alex.kanavin@gmail.com>
+Received: from linux-f9zs.box (cable-95-168-130-13.cust.telecolumbus.net. [95.168.130.13])
+        by smtp.gmail.com with ESMTPSA id b62sm4241411edf.61.2020.08.13.09.16.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Aug 2020 09:16:44 -0700 (PDT)
+From: "Alexander Kanavin" <alex.kanavin@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alexander Kanavin <alexander.kanavin@daimler.com>
+Subject: [meta-java][PATCH] openjdk-8: add a glibc 2.32 compatibility patch
+Date: Thu, 13 Aug 2020 18:16:14 +0200
+Message-Id: <20200813161614.22699-1-alex.kanavin@gmail.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.30] (174.115.236.231) by YT1PR01CA0111.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2c::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.15 via Frontend Transport; Thu, 13 Aug 2020 15:58:24 +0000
-X-Originating-IP: [174.115.236.231]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 6fa6886e-82b4-4a94-52f3-08d83fa1b5c6
-X-MS-TrafficTypeDiagnostic: BYAPR11MB3606:
-X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB3606D6B11BC642F935C9AE579F430@BYAPR11MB3606.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2331;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	Fm2ZvGs6PCSUUHOMRDBUiJ5VCdgn8T/rT4yNmf1ItE8ArBoVNuCmyI/L3lF4EtHqMr/gKioBfZgWHsiVTxrJcwFQkb0wS1wWCAgF+xrAowoRVykUOvUcaQy0lgMmb1q4vHkDXkPKJAM4ocTp9n3pY0AViE5NqZxrLG389FL/iq5znKgHOIEsjUa5t9WFew+GsEPfFv65yi+DYfPhKtGb/6LhpN5Az4108kJiAYYjg2jXPsiyL6AGoa/8RYqp0Mw3NftO9xiAhsB6FS+FHYj8yeRAcydtMpTQNEoBGqeglG9LxMKgqnEe1PSPJsDOwScmSVIOrs8syilKDMCnpt/q3m4mkqkn8Wa7Wtg3RVQre7OkUnzVkuCr01JkVfEmeRz03N2sfT0KzU725RKiky8yC2d9Z4VL0NArEMoiVzJ1Ja8TZas3BSvRhqY8QlcTuHpOiLfj41D8gKg3PpNds6kAzQ==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(136003)(366004)(346002)(376002)(39850400004)(396003)(8676002)(31686004)(186003)(8936002)(16526019)(5660300002)(36756003)(26005)(6486002)(478600001)(2906002)(31696002)(44832011)(66946007)(956004)(166002)(66476007)(966005)(83380400001)(86362001)(66556008)(52116002)(53546011)(316002)(33964004)(2616005)(16576012)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	RHOa1NbdQ6iNS664rB+LzrxE3Xx2s/D6qAnmU7r5M6CQk3tBWHCOEJfggUJdRzYVGX/CA8eBspMroJDm9KtEa+p87DvQuVPCyZUB3D7QWXt/SyASZzSb+BmuPjtK6TYmCJNliJOj945ukYMLrYcaI2TEDdDE4VcOoZQb3+Bx38/EYiLu4uDhipAqnWC8s0XJ7LJb00lMyJH3I8UyMSWaXzsqBrpuC0rLWI2Se2AG5rwjegACoXIodK1LjkgUhSDS4AZypuN0X2Wn9fjtV/wnyHql2TwlJD7Uh4t/VziAR/HoZ5rSQVdPNMwZguwBAqkeN387ry1oIEGDt07Vf75r3GhvT01gRCYWPnOmJDIDis/DKWbEkpMiFZ0VKqtlazE5pPv/fFxoLn7EbICY06MbuR0U26iqdF0scZHUdGy5qr+MaCkxXsGeVFK3oatw4Os5uxxTDA4pmrcUk6+3u1rQ8VUv6V5jzsT9Ci45RBOIKJN1PN07ddWK5uZAQaWND88JFhRhUZnNw0RmeIKJvOmxeouEUfOctjOvSRO8g7tGgfCppc0NHY3WAAvROS0ZG5ocILwfKazGu+5xVHY6LbJ8BqYkw6vbaxKNIAYLAqSFJw8ns1f3nvmHxCHn2ddAd9jnEiptkZJtYJbhojaNLBJI2g==
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6fa6886e-82b4-4a94-52f3-08d83fa1b5c6
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Aug 2020 15:58:24.6922
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: B+B6MMwJ0x2W7+edVa3dZLZ+nmIgg87AIV/vtIatlIou2MxjbGAdkZuF9VzJhiyXi4IvhNGGnafsG2UZU6p0BRDpNesbGmLWZ78H+p7vXJ4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3606
-Content-Type: multipart/alternative;
- boundary="------------7EE777F006CC106D71E35F1F"
-Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
---------------7EE777F006CC106D71E35F1F
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: Alexander Kanavin <alexander.kanavin@daimler.com>
 
-
-On 8/12/20 7:08 PM, Khem Raj wrote:
-> This is a bug introduced by cython [1]
-> the workaround suppressed the additional warnings seen with clang [2]
->
-> [1] https://github.com/cython/cython/issues/3474
-> [2] https://github.com/pandas-dev/pandas/issues/33239
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   meta-python/recipes-devtools/python/python3-pandas_1.1.0.bb | 2 ++
->   1 file changed, 2 insertions(+)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.1.0.bb b/meta-python/recipes-devtools/python/python3-pandas_1.1.0.bb
-> index f100677caa..7d65287cb0 100644
-> --- a/meta-python/recipes-devtools/python/python3-pandas_1.1.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pandas_1.1.0.bb
-> @@ -15,6 +15,8 @@ DEPENDS += " \
->       ${PYTHON_PN}-numpy-native ${PYTHON_PN}-cython-native \
->   "
->   
-> +CFLAGS_append_toolchain-clang = " -Wno-error=deprecated-declarations"
-> +
->   RDEPENDS_${PN} += " \
->       ${PYTHON_PN}-json \
->       ${PYTHON_PN}-numpy \
->
-> 
-
---------------7EE777F006CC106D71E35F1F
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 8/12/20 7:08 PM, Khem Raj wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20200812230821.1802729-3-raj.khem@gmail.com">
-      <pre class="moz-quote-pre" wrap="">This is a bug introduced by cython [1]
-the workaround suppressed the additional warnings seen with clang [2]
-
-[1] <a class="moz-txt-link-freetext" href="https://github.com/cython/cython/issues/3474">https://github.com/cython/cython/issues/3474</a>
-[2] <a class="moz-txt-link-freetext" href="https://github.com/pandas-dev/pandas/issues/33239">https://github.com/pandas-dev/pandas/issues/33239</a>
-
-Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200812230821.1802729-3-raj.khem@gmail.com">
-      <pre class="moz-quote-pre" wrap="">
+Signed-off-by: Alexander Kanavin <alexander.kanavin@daimler.com>
 ---
- meta-python/recipes-devtools/python/python3-pandas_1.1.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../openjdk/openjdk-8-release-common.inc      |  1 +
+ .../2010-Remove-usage-of-sys-sysctl.h.patch   | 39 +++++++++++++++++++
+ 2 files changed, 40 insertions(+)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.1.0.bb b/meta-python/recipes-devtools/python/python3-pandas_1.1.0.bb
-index f100677caa..7d65287cb0 100644
---- a/meta-python/recipes-devtools/python/python3-pandas_1.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pandas_1.1.0.bb
-@@ -15,6 +15,8 @@ DEPENDS += &quot; \
-     ${PYTHON_PN}-numpy-native ${PYTHON_PN}-cython-native \
- &quot;
- 
-+CFLAGS_append_toolchain-clang = &quot; -Wno-error=deprecated-declarations&quot;
+diff --git a/recipes-core/openjdk/openjdk-8-release-common.inc b/recipes-core/openjdk/openjdk-8-release-common.inc
+index 02210a1..c43fd22 100644
+--- a/recipes-core/openjdk/openjdk-8-release-common.inc
++++ b/recipes-core/openjdk/openjdk-8-release-common.inc
+@@ -20,6 +20,7 @@ PATCHES_URI = "\
+     file://2007-jdk-no-genx11-in-headless.patch \
+     file://2008-jdk-no-unused-deps.patch \
+     file://2009-jdk-use-gcc-instead-of-ld-to-link-genSocketOptionRegistry.patch \
++    file://2010-Remove-usage-of-sys-sysctl.h.patch \
+ "
+ HOTSPOT_UB_PATCH = "\
+     file://1001-hotspot-fix-crash-on-JNI_CreateJavaVM.patch \
+diff --git a/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch b/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
+new file mode 100644
+index 0000000..f6d7681
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
+@@ -0,0 +1,39 @@
++From 3ed9b4a109cf2f31b97ab8ba317d67886452523c Mon Sep 17 00:00:00 2001
++From: Alexander Kanavin <alex.kanavin@gmail.com>
++Date: Thu, 13 Aug 2020 17:59:42 +0200
++Subject: [PATCH] Remove usage of sys/sysctl.h
 +
- RDEPENDS_${PN} += &quot; \
-     ${PYTHON_PN}-json \
-     ${PYTHON_PN}-numpy \
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-  </body>
-</html>
++This header has been removed in glibc 2.32, and isn't used for
++anything.
++
++Upstream-Status: Pending
++Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
++---
++ jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c | 1 -
++ jdk/src/solaris/native/java/net/PlainSocketImpl.c         | 1 -
++ 2 files changed, 2 deletions(-)
++
++diff --git a/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c b/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
++index cd15654e..4d8abe03 100644
++--- a/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
+++++ b/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
++@@ -41,7 +41,6 @@
++ #endif
++ #ifdef __linux__
++ #include <unistd.h>
++-#include <sys/sysctl.h>
++ #include <sys/utsname.h>
++ #include <netinet/ip.h>
++ 
++diff --git a/jdk/src/solaris/native/java/net/PlainSocketImpl.c b/jdk/src/solaris/native/java/net/PlainSocketImpl.c
++index 170957e7..9aafbc09 100644
++--- a/jdk/src/solaris/native/java/net/PlainSocketImpl.c
+++++ b/jdk/src/solaris/native/java/net/PlainSocketImpl.c
++@@ -43,7 +43,6 @@
++ #endif
++ #ifdef __linux__
++ #include <unistd.h>
++-#include <sys/sysctl.h>
++ #endif
++ 
++ #include "jvm.h"
+-- 
+2.28.0
 
---------------7EE777F006CC106D71E35F1F--
