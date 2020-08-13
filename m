@@ -1,209 +1,175 @@
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com [209.85.214.195])
- by mx.groups.io with SMTP id smtpd.web10.13098.1597333907077396471
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (NAM11-CO1-obe.outbound.protection.outlook.com [40.107.220.62])
+ by mx.groups.io with SMTP id smtpd.web12.13033.1597334009300430687
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2020 08:51:47 -0700
+ Thu, 13 Aug 2020 08:53:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=sXUWdoOQ;
- spf=pass (domain: gmail.com, ip: 209.85.214.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f195.google.com with SMTP id y10so1237455plr.11
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 08:51:46 -0700 (PDT)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=TR0DjpgP;
+ spf=pass (domain: windriver.com, ip: 40.107.220.62, mailfrom: trevor.gamblin@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=JZ2tfPOtFpbICM6Bm+4GvCrSSgO9teoVbzQm/TLbb2lXxseKZJzqxaunZooMyrAvO9/9AzmupuJBv8i3NmHrc5eyeJP1hZRR+41FyUyqHKI+W4gE+IAM8nM5ZZMJy3ktjbBoYKS+imMq4jtm4nAZqToPGav+hl4oszKEympRpZIclM18Hr5mGW94VoalHSzqbfoAPgbJuZF05T0QdeA4YnnANvzIsBpgBO8QKYPFmeY8Sj6ld/rTckrDsiUx4PfjOco8kMJVQqtyyLygKTrVjfCSJtEVipEhLLjCcsUCAUvcQNiJ+IXSRG5yxoRqU1nHEgG1/72PHcCWrhxQzG5ZZg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=f7ER8yTGDo3g+zIYMO1CG8Yy9aD7ivQVDJ3u7cvye6g=;
+ b=G9xrD2lAzmaiSk7ld6g3UkZTpbesj7F4mSulnL0jICtDw5lyBGGE4u9+Tip5HPMQsbobNc/XMv727gnRCM5z4ORW0zPqgMYYv/dHhYRLKCLSYeYSOKscIo7vM3XfGkpnKgAcR8cAx9BbpM3sVkt0UM64QOz3Mj7d4uUY8c38JjchWamKr3S66Xn37WmytnsNtskSDyQJIvsFuQm6lB1RaaqMCQKg6vpRj2jXQMzMv1y/XcLJNhSDFr80bGxqv/oxWpmK/AHyG3LPboxxLGCLQZaHihHgm4CmLIY8FkmJpAkwnD9pwV5xwg0X1ZfFGYVUh1wn4ghdCMVPlvcm7/XAbA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=uiIjohc2MliW6JbjtRBrSj3GvSjp3BX2COje7qzFhrQ=;
-        b=sXUWdoOQ9JEn5g50IQYPefQyHfk5rb7ycBH3PLC0fEJpf0VLXC8eT+SMqSv/81wzgE
-         ZsTIK096Mh7dzBR80V+s+1MBIq1Zojhc9Lf4r+tgGtkIowsStnqg+KDffFtYUY+wc4v5
-         JViM0xkGT3fazL37TnsoD9xtCoNoRtQYRimZNRr5nwdgwbvuSEB0yutL2tSDKQNBcZda
-         KOEl65W1t9YTZvIoC1oToTeFfjAn/17p73OPNkmdZspPyrwe0O8rj00sCRgmk1xnbesd
-         bg9+dg2gcbIyWXAEPBsiX4Aq40nJGIrPSh0g7qtsHdsMPKh/XYZ7E34HJ5GJh8x+1JZs
-         HB5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=uiIjohc2MliW6JbjtRBrSj3GvSjp3BX2COje7qzFhrQ=;
-        b=OXrpzvriVJAu2vnEVyXr+hiQIQN1QXB+9Qg8YnmuEAPZLmcpzUV7n9/RfhYiXnUldH
-         SJlak3C3EuT1MqcWDrAoqaoe31ssgcDo3A4DfJkmYynF0rlKaah5Yrdabnyr1q+p4TH/
-         l8OotPyJmOQw5Ko/xaHXZZ7tY5Hpdea9AhQmUud5ACu66eQ7xudMi8+FNn5SDQUpfIdW
-         S5tjiKPN6uowKCqBZhwDkVNzmvbaNDJ+GOVRYiW6cLSxrdxIOASPjgTGV8Bsg8H7Q1Ea
-         6nIZmAo3UiLaAsmEhNnZ/uSC/eg7N/ehn3TL9ibjuQwH3bkSftTD+KLnbC2QVHoaOjSE
-         mP8w==
-X-Gm-Message-State: AOAM5333/ZR3k/JzARdJdQd9f508yQumvfaAMyKNXmVNPbYtPiK/rU9D
-	jhQ3gRhZ/a0p2WnbU7DfnqzKePpbeNs=
-X-Google-Smtp-Source: ABdhPJx/B3mjfG/vo5nJVJsMUysfU8CrYc/Ber15tdV4+zMU3qFi+oWtIVTQo8FGmo71zsebvIbd3w==
-X-Received: by 2002:a17:90a:e990:: with SMTP id v16mr5990718pjy.194.1597333905811;
-        Thu, 13 Aug 2020 08:51:45 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net (c-73-63-224-124.hsd1.ca.comcast.net. [73.63.224.124])
-        by smtp.gmail.com with ESMTPSA id a4sm5664407pju.49.2020.08.13.08.51.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2020 08:51:45 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH V2] netplan: Update to latest to fix build with -fno-common
-Date: Thu, 13 Aug 2020 08:51:41 -0700
-Message-Id: <20200813155141.774110-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200813155141.774110-1-raj.khem@gmail.com>
-References: <20200813155141.774110-1-raj.khem@gmail.com>
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=f7ER8yTGDo3g+zIYMO1CG8Yy9aD7ivQVDJ3u7cvye6g=;
+ b=TR0DjpgP/LASh3KEMARPNZ6veDguYvbQeQ8CwJdOL7Or9lzf1YLuPYGxtweINnLoVk+XIp2EraYAOGuyQUbCJKE6uPdNH25KL6i58sKmWMg5lgB6UNG3hK2tPF8jJE6q0syeV47+lsN3Xkbrh4xgLH+8dq51n9VA7m4mbRuoflo=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
+ by BY5PR11MB4183.namprd11.prod.outlook.com (2603:10b6:a03:18e::33) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.16; Thu, 13 Aug
+ 2020 15:53:26 +0000
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::8d65:f6f9:ce31:8d47]) by BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::8d65:f6f9:ce31:8d47%5]) with mapi id 15.20.3261.024; Thu, 13 Aug 2020
+ 15:53:26 +0000
+Subject: Re: [oe] [meta-python][PATCH 01/10] python3-luma-core: Upgrade 1.14.1 -> 1.15.0
+To: Leon Anavi <leon.anavi@konsulko.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20200811114430.27916-1-leon.anavi@konsulko.com>
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+Message-ID: <bc3e869b-2add-e87d-610a-37002aaf7ff5@windriver.com>
+Date: Thu, 13 Aug 2020 11:53:23 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.9.0
+In-Reply-To: <20200811114430.27916-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTXPR0101CA0064.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:1::41) To BY5PR11MB3909.namprd11.prod.outlook.com
+ (2603:10b6:a03:191::13)
+Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.0.30] (174.115.236.231) by YTXPR0101CA0064.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:1::41) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.16 via Frontend Transport; Thu, 13 Aug 2020 15:53:25 +0000
+X-Originating-IP: [174.115.236.231]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 8e3f886b-8cf3-4cfc-b9b0-08d83fa103c0
+X-MS-TrafficTypeDiagnostic: BY5PR11MB4183:
+X-Microsoft-Antispam-PRVS: 
+	<BY5PR11MB4183F8FA200559485D9987F69F430@BY5PR11MB4183.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:173;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	OQxDO5RnFTKchJp/cYctQApOtiNL6WZOjc0gFW2CU0nCzmO6teuRVe/Z5t7WZSjCzRU/A5XvzGjXDul3JDxU3Xt1HQljNzVUb9CKo4iUtC1PAchK0UCJnptkbZDWQblrsY5lUVzRv6IMZ8kh+wuMSm00L1dpR3HiJPpaHYb0oWIpgVGALYD97r1vxDFX7G2qlAkLcxsetvspF5ygNKxIoq58ajddSHtHx2ROGCWNh2O0pSBMhoumB1rd3ZuJ5vPJLnLv0KtlJtd+Y276STTV4kNeNMLQ35yDJeF/ePmsyo9weymDIAfqq4Bthb48ajCGvdXPy3L1cQ8UcZgooVh21Agopp3qSwDIDX7XUqERTFzMZ+LVfn9/xtmEZ3TITTAoqd3c7Lsto0GPLEp52KRcyXXHzHYdWvk5JfdREx8SRZdrzt9vys6wL0DSCAtXHH/ckSvTPDs/PfBkK5jf030Mpg==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(39850400004)(376002)(346002)(136003)(366004)(396003)(316002)(2616005)(16576012)(956004)(66476007)(478600001)(166002)(36756003)(83380400001)(66946007)(66556008)(6486002)(186003)(31696002)(8676002)(966005)(52116002)(5660300002)(86362001)(31686004)(33964004)(44832011)(8936002)(16526019)(2906002)(53546011)(26005)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	1ncyp2KWWYzyJqutExNUQGCczWb2HtuVTo+0D/dVdIzVFDf2LmrlGTXaGE6z/Te/TnRXI3UmJq/hSKJaHucx7VL0mZIlxuSjQ8ud4+SHSpx9RdFWkQ4Jw+A2muysWkE655L1MDfF4Tj7B1Q/yFHI/EOPV418L1zF8ufbze/xmNb8YbRCBLy1IlDWpteSG/B90pkgpc0FpQWPiMQENehZ+XGIY4HkETzulqYLk5qcj/4r0gHqxVsLngG+G8j0EBC+NIeYhCw7ibuDHQ9Ke36c3uG/S/nkPNjby4BgcqvcIEuwgr6CDIHfab0fhnfDsk6mMCpXYhBIoG4clIYfgZ/VJv6p8ogeoHgscngH0thnXkvNSfTnymDUuRUe51VHxN49h6h4tUBNIakis5uWhACY2Xv4dLtzkJ3hTr0Sv4RNgMmkVvlo39BXIwBjUrKxHOaQID/GcWjLUhPUUqKUWOxrO1sdgA5hnnuoONsROVTbd6wA63ZYnoZOCkBrPfjzXC2toZzYVUjbckhlfZqtglN2iXPO66pXUYLJh8g9Og8PzSIsnxAdy02qEs5gFYOiazwqWmnSpfAeLI5VikZ+b8HZ+P5lqWOC9AcklQiqT+Ds95Q5Hkx5tGtJDibW6cy4XYFKwFXezvXwqfTZFS0DfBRhpg==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8e3f886b-8cf3-4cfc-b9b0-08d83fa103c0
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Aug 2020 15:53:26.0590
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: CxlyQgEWjKxDTV5gQGFhsUPDkZVO/hYnluDN6Nv0sht3gzM3IK7Yn7hHRhLsHo4yxCuEKKyMvs6LAG3KyqNVsrn/dnOH3KrRERF50Oey1v4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4183
+Content-Type: multipart/alternative;
+ boundary="------------0113CFB8DA1FC8DE301B0B0F"
+Content-Language: en-US
 
-Add patches to fix build with clang-11
+--------------0113CFB8DA1FC8DE301B0B0F
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+On 8/11/20 7:44 AM, Leon Anavi wrote:
+> Upgrade to release 1.15.0:
+>
+> - Parallel bus and I2C backpack support
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>   ...ython3-luma-core_1.14.1.bb => python3-luma-core_1.15.0.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-luma-core_1.14.1.bb => python3-luma-core_1.15.0.bb} (75%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-luma-core_1.14.1.bb b/meta-python/recipes-devtools/python/python3-luma-core_1.15.0.bb
+> similarity index 75%
+> rename from meta-python/recipes-devtools/python/python3-luma-core_1.14.1.bb
+> rename to meta-python/recipes-devtools/python/python3-luma-core_1.15.0.bb
+> index d532405cc..17445e727 100644
+> --- a/meta-python/recipes-devtools/python/python3-luma-core_1.14.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-luma-core_1.15.0.bb
+> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7"
+>   
+>   inherit pypi setuptools3
+>   
+> -SRC_URI[md5sum] = "a738326f46c860acf6a4a9b2ec36ba73"
+> -SRC_URI[sha256sum] = "972dc312b2831fe4c6b51943cc36903a9508cab8d9f2631a7ee485695924d34b"
+> +SRC_URI[md5sum] = "9c890fa8e387a035ff0d1ae96a0715f1"
+> +SRC_URI[sha256sum] = "e0e14c762695fb8758e8b15cfd28cd4c1618bf2fd93157c8770a2e8e0e254ae5"
+>   
+>   CLEANBROKEN = "1"
+>   
+>
+> 
+
+--------------0113CFB8DA1FC8DE301B0B0F
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 8/11/20 7:44 AM, Leon Anavi wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:20200811114430.27916-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.15.0:
+
+- Parallel bus and I2C backpack support
+
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+    </blockquote>
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
+    <blockquote type="cite" cite="mid:20200811114430.27916-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">
 ---
-v2: Add a patch to fix gcc10 warnings
+ ...ython3-luma-core_1.14.1.bb =&gt; python3-luma-core_1.15.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-luma-core_1.14.1.bb =&gt; python3-luma-core_1.15.0.bb} (75%)
 
- .../0001-dbus-Remove-unused-variabes.patch    | 33 +++++++++++++++++
- ...1-src-parse.c-Initialize-key-to-NULL.patch | 32 +++++++++++++++++
- ...rst-prerquisite-only-for-target-rule.patch | 35 +++++++++++++++++++
- .../netplan/netplan_0.99.bb                   |  5 ++-
- 4 files changed, 104 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-connectivity/netplan/netplan/0001-dbus-Remove-unused-variabes.patch
- create mode 100644 meta-networking/recipes-connectivity/netplan/netplan/0001-src-parse.c-Initialize-key-to-NULL.patch
- create mode 100644 meta-networking/recipes-connectivity/netplan/netplan/0002-Makefile-Use-first-prerquisite-only-for-target-rule.patch
+diff --git a/meta-python/recipes-devtools/python/python3-luma-core_1.14.1.bb b/meta-python/recipes-devtools/python/python3-luma-core_1.15.0.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-luma-core_1.14.1.bb
+rename to meta-python/recipes-devtools/python/python3-luma-core_1.15.0.bb
+index d532405cc..17445e727 100644
+--- a/meta-python/recipes-devtools/python/python3-luma-core_1.14.1.bb
++++ b/meta-python/recipes-devtools/python/python3-luma-core_1.15.0.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7">&quot;file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7&quot;</a>
+ 
+ inherit pypi setuptools3
+ 
+-SRC_URI[md5sum] = &quot;a738326f46c860acf6a4a9b2ec36ba73&quot;
+-SRC_URI[sha256sum] = &quot;972dc312b2831fe4c6b51943cc36903a9508cab8d9f2631a7ee485695924d34b&quot;
++SRC_URI[md5sum] = &quot;9c890fa8e387a035ff0d1ae96a0715f1&quot;
++SRC_URI[sha256sum] = &quot;e0e14c762695fb8758e8b15cfd28cd4c1618bf2fd93157c8770a2e8e0e254ae5&quot;
+ 
+ CLEANBROKEN = &quot;1&quot;
+ 
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+    </blockquote>
+  </body>
+</html>
 
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan/0001-dbus-Remove-unused-variabes.patch b/meta-networking/recipes-connectivity/netplan/netplan/0001-dbus-Remove-unused-variabes.patch
-new file mode 100644
-index 0000000000..22ecae3047
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/netplan/netplan/0001-dbus-Remove-unused-variabes.patch
-@@ -0,0 +1,33 @@
-+From 0edb96a5f79dcec4f4467193716c2bf015fe5132 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 12 Aug 2020 10:38:07 -0700
-+Subject: [PATCH 1/2] dbus: Remove unused variabes
-+
-+Fixes
-+src/dbus.c:49:23: error: unused variable 'stdout' [-Werror,-Wunused-variable]
-+g_autofree gchar *stdout = NULL;
-+^
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/dbus.c | 3 ---
-+ 1 file changed, 3 deletions(-)
-+
-+diff --git a/src/dbus.c b/src/dbus.c
-+index cb7ec38..a057236 100644
-+--- a/src/dbus.c
-++++ b/src/dbus.c
-+@@ -45,9 +45,6 @@ static int method_apply(sd_bus_message *m, void *userdata, sd_bus_error *ret_err
-+ 
-+ static int method_info(sd_bus_message *m, void *userdata, sd_bus_error *ret_error) {
-+     sd_bus_message *reply = NULL;
-+-    g_autoptr(GError) err = NULL;
-+-    g_autofree gchar *stdout = NULL;
-+-    g_autofree gchar *stderr = NULL;
-+     gint exit_status = 0;
-+ 
-+     exit_status = sd_bus_message_new_method_return(m, &reply);
-+-- 
-+2.28.0
-+
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan/0001-src-parse.c-Initialize-key-to-NULL.patch b/meta-networking/recipes-connectivity/netplan/netplan/0001-src-parse.c-Initialize-key-to-NULL.patch
-new file mode 100644
-index 0000000000..a710b1e576
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/netplan/netplan/0001-src-parse.c-Initialize-key-to-NULL.patch
-@@ -0,0 +1,32 @@
-+From 63de116c617a35ff3d54c785b3dfb5378bb07f46 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 12 Aug 2020 22:39:17 -0700
-+Subject: [PATCH] src/parse.c: Initialize key to NULL
-+
-+Fixes
-+
-+src/parse.c:810:22: note: 'key' was declared here
-+cc1: all warnings being treated as errors
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/parse.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/parse.c b/src/parse.c
-+index 63a0863..c66277f 100644
-+--- a/src/parse.c
-++++ b/src/parse.c
-+@@ -807,7 +807,7 @@ handle_addresses(yaml_document_t* doc, yaml_node_t* node, const void* _, GError*
-+         char* prefix_len;
-+         guint64 prefix_len_num;
-+         yaml_node_t *entry = yaml_document_get_node(doc, *i);
-+-        yaml_node_t *key, *value = NULL;
-++        yaml_node_t *key = NULL, *value = NULL;
-+ 
-+         if (entry->type != YAML_SCALAR_NODE && entry->type != YAML_MAPPING_NODE) {
-+             return yaml_error(entry, error, "expected either scalar or mapping (check indentation)");
-+-- 
-+2.28.0
-+
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan/0002-Makefile-Use-first-prerquisite-only-for-target-rule.patch b/meta-networking/recipes-connectivity/netplan/netplan/0002-Makefile-Use-first-prerquisite-only-for-target-rule.patch
-new file mode 100644
-index 0000000000..e736529a8a
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/netplan/netplan/0002-Makefile-Use-first-prerquisite-only-for-target-rule.patch
-@@ -0,0 +1,35 @@
-+From 1da4451fd3470e6600b027cb78526b440e296f8b Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 12 Aug 2020 10:47:08 -0700
-+Subject: [PATCH 2/2] Makefile: Use first prerquisite only for target rule
-+
-+This ensures that src/_features.h is not added to compiler cmdline which
-+can confuse the compiler as it may not understand .h as valid input and
-+complain
-+
-+| clang-11: error: cannot specify -o when generating multiple output files
-+| make: *** [Makefile:50: netplan-dbus] Error 1
-+| make: *** Waiting for unfinished jobs....
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 4495773..c05dea3 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -47,7 +47,7 @@ generate: libnetplan.so.$(NETPLAN_SOVER) nm.o networkd.o generate.o sriov.o
-+ 	$(CC) $(BUILDFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $^ -L. -lnetplan `pkg-config --cflags --libs glib-2.0 gio-2.0 yaml-0.1 uuid`
-+ 
-+ netplan-dbus: src/dbus.c src/_features.h
-+-	$(CC) $(BUILDFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $^ `pkg-config --cflags --libs libsystemd glib-2.0`
-++	$(CC) $(BUILDFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $< `pkg-config --cflags --libs libsystemd glib-2.0`
-+ 
-+ src/_features.h: src/[^_]*.[hc]
-+ 	printf "#include <stddef.h>\nstatic const char *feature_flags[] __attribute__((__unused__)) = {\n" > $@
-+-- 
-+2.28.0
-+
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan_0.99.bb b/meta-networking/recipes-connectivity/netplan/netplan_0.99.bb
-index 67ccddf6ab..5546f300b3 100644
---- a/meta-networking/recipes-connectivity/netplan/netplan_0.99.bb
-+++ b/meta-networking/recipes-connectivity/netplan/netplan_0.99.bb
-@@ -11,11 +11,14 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- S = "${WORKDIR}/git"
--SRCREV = "1ccf7e0e3a7a91edbbe3f9f0669c8bbab8248cd1"
-+SRCREV = "85134d13eb1ee5a1a7d139cd74ffa10933d73677"
- PV = "0.99+git${SRCPV}"
- 
- SRC_URI = " \
-         git://github.com/CanonicalLtd/netplan.git \
-+        file://0001-dbus-Remove-unused-variabes.patch \
-+        file://0002-Makefile-Use-first-prerquisite-only-for-target-rule.patch \
-+        file://0001-src-parse.c-Initialize-key-to-NULL.patch \
- "
- 
- DEPENDS = "glib-2.0 libyaml ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
--- 
-2.28.0
-
+--------------0113CFB8DA1FC8DE301B0B0F--
