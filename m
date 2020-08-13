@@ -1,142 +1,125 @@
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
- by mx.groups.io with SMTP id smtpd.web12.1420.1597342375372890720
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web10.1455.1597342376289194834
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2020 11:12:55 -0700
+ Thu, 13 Aug 2020 11:12:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=KwQC3gwv;
- spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f177.google.com with SMTP id 128so3215235pgd.5
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 11:12:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=XOIYRWCr;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id h12so3210090pgm.7
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 11:12:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Vuv5+bJ840Gqc5oTAfX6NYz9ih8Qr+1+LuoAAqLq72Q=;
-        b=KwQC3gwv+W/Vsfsh6DUz38yqWeiuTJQ/jGxaWxSUpjMuszF7pvHGpJOOXqCrVCN4/0
-         B6tbUilgGJ0Y7xpvaTT0GKJmeAHlSnoh1n3HkqF5zxlye2ouAlLYGi3/StEhRA9d4goh
-         Np5MJaYo/Uf2Yw+OfGE21M+KxhwV1HWk3fB2vPplniz0f+8EAfT8SwZWM5fAF1vanMaE
-         TsanZuW1rluI+rJYOs7WmJzDUcYn+37qXkKiXn14GXpqnqO7612Dxlly4qcxeyricFi3
-         T2Ekz0phEHZpws0i/I/+FHOsEFq2IO1/1G8y1jJ9fs4WkQmGO7sIzQGgk5nnm/a3MFsl
-         jtUw==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=brgNO9uDZDr0Zhxbw7GWbEn4NwvWnN/4qDVXzi80Fr4=;
+        b=XOIYRWCr4taeU7g1+GzgU6sUGGSopnFDHp+Gel5RIs0EbIcgc5OsSDaZaR0TZFysKx
+         4RIbr4NlL9yG1pdX7Lw0iEjHPDy8GCHspzKTUkLmBjz4m0veHbfZj1Cdh5cSNwgEejUr
+         U/UtceyYOMbJ8j4tjPEfmQzZ4rO6rRhLuFx8/Df6CtPbHYmyieP2IuFVuo4tDVd2bqwb
+         VI9+ISTkgxchk9RvEWiAPfAVXDOdmNjBmHQkkj6JvMWTYnsWvlMW6czUQcMhyg6C6n+B
+         TZB2zqdjSZlZNyOZeu4BoMEBJyKnoHSGy0JRhh0uTW90kVYUD2PAjtgykBdpp6aoL300
+         y3NQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Vuv5+bJ840Gqc5oTAfX6NYz9ih8Qr+1+LuoAAqLq72Q=;
-        b=CrYIZzTzdoSJEhrKLslJndm8N1IY4vD73sZpJbSGT8dDSMtOAwuM95pv66X+nYbcUE
-         emgkpewNUKxjki/jmGtkkp6rJhG66V+kDrF6RkN91TTmIRQKsApOgY1BT3WAAn+sj0zH
-         e9cfRXsx2EdzYf1G9bAVe8/NPnU4tqx4rzCCPc5dCzLC495hSoWVFsIjk+fMwn9WXDYh
-         oIxq4qn8Cm7XyFWUyTrbwtYHUT/5H+vIyaLziHiR9p6ToECYKfUqDsX30jgGLqBNJ8xM
-         r6cv61w5UmkfZKeoseNoO8zQoKvXS++NH60DCJH/7iGbVz2ZYehCV3D7iVkT6mkUvmAj
-         D7EQ==
-X-Gm-Message-State: AOAM533VnQDAL2f6kqjC8ufDIY0OEjDuM8OTbHGwqogLRyFlKjPzq3nS
-	v58iwd7KHlotHnUGst4ee3W26s6jfyE=
-X-Google-Smtp-Source: ABdhPJzqwG+5WR0DEAXbiK8l9fHd8KTWv1mHOg4TQQkBDiOe9iZDRfXqYtNIzgpS+6QxaW2mUpza5g==
-X-Received: by 2002:a05:6a00:14c4:: with SMTP id w4mr5829957pfu.20.1597342374399;
-        Thu, 13 Aug 2020 11:12:54 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=brgNO9uDZDr0Zhxbw7GWbEn4NwvWnN/4qDVXzi80Fr4=;
+        b=t/x4PhFJTiqv2UxBibvxWqkcp51B2yiFkb8fxI4v6JL2zWp9VyrQktXG74YHyrebaQ
+         PQuWiINdzcx7Abkeh/A9tjjwRHKWPVnlDu974Ydfms0VotpjO6N0pRBxpaeZwoLkichw
+         ZJ0cJ4i3v/B+gnz6ZWb2OGLyE1rjzb5+8v82GpTJK2i1fozbzkk85ApmrQDLKNDNypUA
+         WCGFYykDYWC2eaydTaEWlgQ73MRV5Nsl34PrAtHbHfNGNLiIIMML6+OwClTUgu3A/ZQF
+         j7DtxD+rObhgnH+rrXQT8z4uHECKOwjafEZfwfoUh8bllrMygBVR6PDpQxPuLHEhP5bx
+         2xAg==
+X-Gm-Message-State: AOAM533TYCzboz5vxrw4NMvJSCuwIkuTHAsOqzb2iGPXR48LbTbR6Lup
+	mJRwgt9kL2i2BrsAw0gQazJo12gmK4E=
+X-Google-Smtp-Source: ABdhPJzFROW2HAnx5+/+99Kbziv8HWvV65VrKKsyK4S7xuGvHInTGxdeLNJem90JPqsrgrhvV+RYTg==
+X-Received: by 2002:aa7:9f10:: with SMTP id g16mr5427100pfr.148.1597342375453;
+        Thu, 13 Aug 2020 11:12:55 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id h12sm6719678pfr.143.2020.08.13.11.12.53
+        by smtp.gmail.com with ESMTPSA id h12sm6719678pfr.143.2020.08.13.11.12.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2020 11:12:53 -0700 (PDT)
+        Thu, 13 Aug 2020 11:12:54 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/3] memtester: Fix build with -fno-common
-Date: Thu, 13 Aug 2020 11:12:50 -0700
-Message-Id: <20200813181252.805078-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/3] read-edid: Fix build with gcc-10+
+Date: Thu, 13 Aug 2020 11:12:51 -0700
+Message-Id: <20200813181252.805078-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20200813181252.805078-1-raj.khem@gmail.com>
+References: <20200813181252.805078-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Define-mword16-and-mword8-once.patch | 57 +++++++++++++++++++
- .../memtester/memtester_4.3.0.bb              |  7 ++-
- 2 files changed, 61 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-benchmark/memtester/files/0001-Define-mword16-and-mword8-once.patch
+ .../0001-get-edid-define-quiet-once.patch     | 44 +++++++++++++++++++
+ .../read-edid/read-edid_3.0.2.bb              |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-oe/recipes-support/read-edid/read-edid/0001-get-edid-define-quiet-once.patch
 
-diff --git a/meta-oe/recipes-benchmark/memtester/files/0001-Define-mword16-and-mword8-once.patch b/meta-oe/recipes-benchmark/memtester/files/0001-Define-mword16-and-mword8-once.patch
+diff --git a/meta-oe/recipes-support/read-edid/read-edid/0001-get-edid-define-quiet-once.patch b/meta-oe/recipes-support/read-edid/read-edid/0001-get-edid-define-quiet-once.patch
 new file mode 100644
-index 0000000000..ffd9b9f266
+index 0000000000..5147f17c3a
 --- /dev/null
-+++ b/meta-oe/recipes-benchmark/memtester/files/0001-Define-mword16-and-mword8-once.patch
-@@ -0,0 +1,57 @@
-+From 01f1c05702eb534271777648c976ab6402a5145b Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/read-edid/read-edid/0001-get-edid-define-quiet-once.patch
+@@ -0,0 +1,44 @@
++From 9da8eb6663d0ba046bc0570172c549d421de043a Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 12 Aug 2020 23:18:30 -0700
-+Subject: [PATCH] Define mword16 and mword8 once
++Date: Wed, 12 Aug 2020 23:39:32 -0700
++Subject: [PATCH] get-edid: define quiet once
 +
-+Defining them in .h meant they are defined in all .c files including
-+this .h file
-+
-+Fixes build with gcc 10+
++Fixes build with gcc 10
 +
 +Upstream-Status: Pending
++
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ tests.c | 9 +++++++++
-+ types.h | 9 ---------
-+ 2 files changed, 9 insertions(+), 9 deletions(-)
++ get-edid/classic.c | 2 +-
++ get-edid/i2c.c     | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/tests.c b/tests.c
-+index be1b350..4305bed 100644
-+--- a/tests.c
-++++ b/tests.c
-+@@ -27,6 +27,15 @@ char progress[] = "-\\|/";
-+ #define PROGRESSOFTEN 2500
-+ #define ONE 0x00000001L
++diff --git a/get-edid/classic.c b/get-edid/classic.c
++index 9cc8ee3..b13f5f0 100644
++--- a/get-edid/classic.c
+++++ b/get-edid/classic.c
++@@ -26,7 +26,7 @@ typedef byte* real_ptr;
++ #define dosmemput(buffer,length,offset) memcpy(offset,buffer,length)
 + 
-++union {
-++    unsigned char bytes[UL_LEN/8];
-++    ul val;
-++} mword8;
-++
-++union {
-++    unsigned short u16s[UL_LEN/16];
-++    ul val;
-++} mword16;
-+ /* Function definitions. */
++ #define display(...) if (quiet == 0) { fprintf(stderr, __VA_ARGS__); }
++-int quiet;
+++extern int quiet;
 + 
-+ int compare_regions(ulv *bufa, ulv *bufb, size_t count) {
-+diff --git a/types.h b/types.h
-+index ad7ce73..e14ea32 100644
-+--- a/types.h
-++++ b/types.h
-+@@ -25,12 +25,3 @@ struct test {
-+     int (*fp)();
-+ };
++ real_ptr far_ptr_to_real_ptr( uint32 farptr )
++ {
++diff --git a/get-edid/i2c.c b/get-edid/i2c.c
++index 625d7cb..0929e98 100644
++--- a/get-edid/i2c.c
+++++ b/get-edid/i2c.c
++@@ -15,7 +15,7 @@
 + 
-+-union {
-+-    unsigned char bytes[UL_LEN/8];
-+-    ul val;
-+-} mword8;
-+-
-+-union {
-+-    unsigned short u16s[UL_LEN/16];
-+-    ul val;
-+-} mword16;
++ //Ideas (but not too much actual code) taken from i2c-tools. Thanks guys.
++ 
++-int quiet;
+++extern int quiet;
++ 
++ #define display(...) if (quiet == 0) { fprintf(stderr, __VA_ARGS__); }
++ 
 +-- 
 +2.28.0
 +
-diff --git a/meta-oe/recipes-benchmark/memtester/memtester_4.3.0.bb b/meta-oe/recipes-benchmark/memtester/memtester_4.3.0.bb
-index 0964c04874..3d29055781 100644
---- a/meta-oe/recipes-benchmark/memtester/memtester_4.3.0.bb
-+++ b/meta-oe/recipes-benchmark/memtester/memtester_4.3.0.bb
-@@ -5,9 +5,10 @@ LICENSE = "GPLv2"
+diff --git a/meta-oe/recipes-support/read-edid/read-edid_3.0.2.bb b/meta-oe/recipes-support/read-edid/read-edid_3.0.2.bb
+index e4c2cadc2d..1aa492c31b 100644
+--- a/meta-oe/recipes-support/read-edid/read-edid_3.0.2.bb
++++ b/meta-oe/recipes-support/read-edid/read-edid_3.0.2.bb
+@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=292c42e2aedc4af636636bf7af0e2b26"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- 
--SRC_URI = "http://pyropus.ca/software/memtester/old-versions/${BP}.tar.gz"
--SRC_URI += "file://Makefile.patch"
--
-+SRC_URI = "http://pyropus.ca/software/memtester/old-versions/${BP}.tar.gz \
-+           file://Makefile.patch \
-+           file://0001-Define-mword16-and-mword8-once.patch \
-+           "
- SRC_URI[md5sum] = "598f41b7308e1f736164bca3ab84ddbe"
- SRC_URI[sha256sum] = "f9dfe2fd737c38fad6535bbab327da9a21f7ce4ea6f18c7b3339adef6bf5fd88"
- 
+ SRC_URI = "http://polypux.org/projects/read-edid/read-edid-${PV}.tar.gz \
+            file://0001-Do-not-install-license-file.patch \
++           file://0001-get-edid-define-quiet-once.patch \
+ 	   "
+ SRC_URI[md5sum] = "016546e438bf6c98739ff74061df9854"
+ SRC_URI[sha256sum] = "c7c6d8440f5b90f98e276829271ccea5b2ff5a3413df8a0f87ec09f834af186f"
 -- 
 2.28.0
 
