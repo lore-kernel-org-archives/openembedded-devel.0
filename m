@@ -1,118 +1,142 @@
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web11.13967.1597336090594339787
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+ by mx.groups.io with SMTP id smtpd.web12.1420.1597342375372890720
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2020 09:28:10 -0700
+ Thu, 13 Aug 2020 11:12:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ka3zZ/aB;
- spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id kq25so6847687ejb.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 09:28:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=KwQC3gwv;
+ spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f177.google.com with SMTP id 128so3215235pgd.5
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 11:12:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=WUtDVfjoYR6P+khaoj6VdfXr6MVa+4GhAZLIOfSU1mY=;
-        b=ka3zZ/aBmzbreYtH5bkb4EEXnC8SX7w09GwRrg+0lXAAfhN/B6Aa1yuIAmaCdK8kWD
-         2PQynZaLkn3GvY7WfJDioduHs+GdlBp2QrOn93Km0NKf0zgoPA9fz+mLfqyuCJgPyMwJ
-         sBnsSPicwJP3Uh6nQdC3JRoKboQ7zAD+K0UlbWIgO4OxBHf0XxTGdvaJqbxv6kgSH7SF
-         qDV6CdQ6HGi4MvFX0y4V4ST1Ipnn20xMaFjqcScCWtfhN4+v+r1f1oRbJGRfqaxd09NE
-         YitehaLPp7BB7FPFeaDXB75Wo8Eiz+Wg/DMGXUDVbO1oBatBv5VgBsjwscj8woeEFLIN
-         C4eQ==
+        bh=Vuv5+bJ840Gqc5oTAfX6NYz9ih8Qr+1+LuoAAqLq72Q=;
+        b=KwQC3gwv+W/Vsfsh6DUz38yqWeiuTJQ/jGxaWxSUpjMuszF7pvHGpJOOXqCrVCN4/0
+         B6tbUilgGJ0Y7xpvaTT0GKJmeAHlSnoh1n3HkqF5zxlye2ouAlLYGi3/StEhRA9d4goh
+         Np5MJaYo/Uf2Yw+OfGE21M+KxhwV1HWk3fB2vPplniz0f+8EAfT8SwZWM5fAF1vanMaE
+         TsanZuW1rluI+rJYOs7WmJzDUcYn+37qXkKiXn14GXpqnqO7612Dxlly4qcxeyricFi3
+         T2Ekz0phEHZpws0i/I/+FHOsEFq2IO1/1G8y1jJ9fs4WkQmGO7sIzQGgk5nnm/a3MFsl
+         jtUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=WUtDVfjoYR6P+khaoj6VdfXr6MVa+4GhAZLIOfSU1mY=;
-        b=U5DlhfpI08elrR/DwHX3z8mC+hWnpMBwW4JCf3Km6B/KtpsEqXFU2Z57lzo30QIRen
-         sE+iKmKgJ+iz4eQbISnCx6AjCUs0tZlSMabFXdhrN3s4tTWEwLevz8/Vq/QMZzs5VBiq
-         NIixjulnIfItDov/gXoh6mKgNh2hn+flHCb4+BC11+otbA1dn2m5H/xl9EAznXBGh8at
-         MmdyJxpnoMmttAAbCLS0I/NfDwbE31AxXnBK1ujMRTUaxD+yD6JjPe9KD0sVKBu6w4nG
-         xqq+aGoSOOYbktKbSyyQp0d/nDChsc/aH03t+QaoqGTetuff8W7cwwEzRZJg20SEYyeU
-         uZqg==
-X-Gm-Message-State: AOAM530aB3SZipDQiBaLTHUQ9LkS6dqYvmY+Nu+hEjPrFFS84Gt+fW4C
-	dWHfec0YBWApv4Ihlf/rVenrDice
-X-Google-Smtp-Source: ABdhPJzaLq3KPzFFMviYVsz7Ye3CNGx9qANlRXB1Xc8e8gkwbb6imlKUzDOKXzE+S7IPMtLNOVnhJw==
-X-Received: by 2002:a17:906:82d5:: with SMTP id a21mr5413947ejy.213.1597336088795;
-        Thu, 13 Aug 2020 09:28:08 -0700 (PDT)
-Return-Path: <alex.kanavin@gmail.com>
-Received: from linux-f9zs.box (cable-95-168-130-13.cust.telecolumbus.net. [95.168.130.13])
-        by smtp.gmail.com with ESMTPSA id n5sm4620328eja.105.2020.08.13.09.28.07
+        bh=Vuv5+bJ840Gqc5oTAfX6NYz9ih8Qr+1+LuoAAqLq72Q=;
+        b=CrYIZzTzdoSJEhrKLslJndm8N1IY4vD73sZpJbSGT8dDSMtOAwuM95pv66X+nYbcUE
+         emgkpewNUKxjki/jmGtkkp6rJhG66V+kDrF6RkN91TTmIRQKsApOgY1BT3WAAn+sj0zH
+         e9cfRXsx2EdzYf1G9bAVe8/NPnU4tqx4rzCCPc5dCzLC495hSoWVFsIjk+fMwn9WXDYh
+         oIxq4qn8Cm7XyFWUyTrbwtYHUT/5H+vIyaLziHiR9p6ToECYKfUqDsX30jgGLqBNJ8xM
+         r6cv61w5UmkfZKeoseNoO8zQoKvXS++NH60DCJH/7iGbVz2ZYehCV3D7iVkT6mkUvmAj
+         D7EQ==
+X-Gm-Message-State: AOAM533VnQDAL2f6kqjC8ufDIY0OEjDuM8OTbHGwqogLRyFlKjPzq3nS
+	v58iwd7KHlotHnUGst4ee3W26s6jfyE=
+X-Google-Smtp-Source: ABdhPJzqwG+5WR0DEAXbiK8l9fHd8KTWv1mHOg4TQQkBDiOe9iZDRfXqYtNIzgpS+6QxaW2mUpza5g==
+X-Received: by 2002:a05:6a00:14c4:: with SMTP id w4mr5829957pfu.20.1597342374399;
+        Thu, 13 Aug 2020 11:12:54 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
+        by smtp.gmail.com with ESMTPSA id h12sm6719678pfr.143.2020.08.13.11.12.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2020 09:28:07 -0700 (PDT)
-From: "Alexander Kanavin" <alex.kanavin@gmail.com>
+        Thu, 13 Aug 2020 11:12:53 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alexander Kanavin <alex.kanavin@gmail.com>
-Subject: [meta-java][PATCHv2] openjdk-8: add a glibc 2.32 compatibility patch
-Date: Thu, 13 Aug 2020 18:27:56 +0200
-Message-Id: <20200813162756.24193-1-alex.kanavin@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/3] memtester: Fix build with -fno-common
+Date: Thu, 13 Aug 2020 11:12:50 -0700
+Message-Id: <20200813181252.805078-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../openjdk/openjdk-8-release-common.inc      |  1 +
- .../2010-Remove-usage-of-sys-sysctl.h.patch   | 39 +++++++++++++++++++
- 2 files changed, 40 insertions(+)
- create mode 100644 recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
+ .../0001-Define-mword16-and-mword8-once.patch | 57 +++++++++++++++++++
+ .../memtester/memtester_4.3.0.bb              |  7 ++-
+ 2 files changed, 61 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-benchmark/memtester/files/0001-Define-mword16-and-mword8-once.patch
 
-diff --git a/recipes-core/openjdk/openjdk-8-release-common.inc b/recipes-core/openjdk/openjdk-8-release-common.inc
-index 02210a1..c43fd22 100644
---- a/recipes-core/openjdk/openjdk-8-release-common.inc
-+++ b/recipes-core/openjdk/openjdk-8-release-common.inc
-@@ -20,6 +20,7 @@ PATCHES_URI = "\
-     file://2007-jdk-no-genx11-in-headless.patch \
-     file://2008-jdk-no-unused-deps.patch \
-     file://2009-jdk-use-gcc-instead-of-ld-to-link-genSocketOptionRegistry.patch \
-+    file://2010-Remove-usage-of-sys-sysctl.h.patch \
- "
- HOTSPOT_UB_PATCH = "\
-     file://1001-hotspot-fix-crash-on-JNI_CreateJavaVM.patch \
-diff --git a/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch b/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
+diff --git a/meta-oe/recipes-benchmark/memtester/files/0001-Define-mword16-and-mword8-once.patch b/meta-oe/recipes-benchmark/memtester/files/0001-Define-mword16-and-mword8-once.patch
 new file mode 100644
-index 0000000..f6d7681
+index 0000000000..ffd9b9f266
 --- /dev/null
-+++ b/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
-@@ -0,0 +1,39 @@
-+From 3ed9b4a109cf2f31b97ab8ba317d67886452523c Mon Sep 17 00:00:00 2001
-+From: Alexander Kanavin <alex.kanavin@gmail.com>
-+Date: Thu, 13 Aug 2020 17:59:42 +0200
-+Subject: [PATCH] Remove usage of sys/sysctl.h
++++ b/meta-oe/recipes-benchmark/memtester/files/0001-Define-mword16-and-mword8-once.patch
+@@ -0,0 +1,57 @@
++From 01f1c05702eb534271777648c976ab6402a5145b Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 12 Aug 2020 23:18:30 -0700
++Subject: [PATCH] Define mword16 and mword8 once
 +
-+This header has been removed in glibc 2.32, and isn't used for
-+anything.
++Defining them in .h meant they are defined in all .c files including
++this .h file
++
++Fixes build with gcc 10+
 +
 +Upstream-Status: Pending
-+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c | 1 -
-+ jdk/src/solaris/native/java/net/PlainSocketImpl.c         | 1 -
-+ 2 files changed, 2 deletions(-)
++ tests.c | 9 +++++++++
++ types.h | 9 ---------
++ 2 files changed, 9 insertions(+), 9 deletions(-)
 +
-+diff --git a/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c b/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
-+index cd15654e..4d8abe03 100644
-+--- a/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
-++++ b/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
-+@@ -41,7 +41,6 @@
-+ #endif
-+ #ifdef __linux__
-+ #include <unistd.h>
-+-#include <sys/sysctl.h>
-+ #include <sys/utsname.h>
-+ #include <netinet/ip.h>
++diff --git a/tests.c b/tests.c
++index be1b350..4305bed 100644
++--- a/tests.c
+++++ b/tests.c
++@@ -27,6 +27,15 @@ char progress[] = "-\\|/";
++ #define PROGRESSOFTEN 2500
++ #define ONE 0x00000001L
 + 
-+diff --git a/jdk/src/solaris/native/java/net/PlainSocketImpl.c b/jdk/src/solaris/native/java/net/PlainSocketImpl.c
-+index 170957e7..9aafbc09 100644
-+--- a/jdk/src/solaris/native/java/net/PlainSocketImpl.c
-++++ b/jdk/src/solaris/native/java/net/PlainSocketImpl.c
-+@@ -43,7 +43,6 @@
-+ #endif
-+ #ifdef __linux__
-+ #include <unistd.h>
-+-#include <sys/sysctl.h>
-+ #endif
+++union {
+++    unsigned char bytes[UL_LEN/8];
+++    ul val;
+++} mword8;
+++
+++union {
+++    unsigned short u16s[UL_LEN/16];
+++    ul val;
+++} mword16;
++ /* Function definitions. */
 + 
-+ #include "jvm.h"
++ int compare_regions(ulv *bufa, ulv *bufb, size_t count) {
++diff --git a/types.h b/types.h
++index ad7ce73..e14ea32 100644
++--- a/types.h
+++++ b/types.h
++@@ -25,12 +25,3 @@ struct test {
++     int (*fp)();
++ };
++ 
++-union {
++-    unsigned char bytes[UL_LEN/8];
++-    ul val;
++-} mword8;
++-
++-union {
++-    unsigned short u16s[UL_LEN/16];
++-    ul val;
++-} mword16;
++-- 
++2.28.0
++
+diff --git a/meta-oe/recipes-benchmark/memtester/memtester_4.3.0.bb b/meta-oe/recipes-benchmark/memtester/memtester_4.3.0.bb
+index 0964c04874..3d29055781 100644
+--- a/meta-oe/recipes-benchmark/memtester/memtester_4.3.0.bb
++++ b/meta-oe/recipes-benchmark/memtester/memtester_4.3.0.bb
+@@ -5,9 +5,10 @@ LICENSE = "GPLv2"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ 
+-SRC_URI = "http://pyropus.ca/software/memtester/old-versions/${BP}.tar.gz"
+-SRC_URI += "file://Makefile.patch"
+-
++SRC_URI = "http://pyropus.ca/software/memtester/old-versions/${BP}.tar.gz \
++           file://Makefile.patch \
++           file://0001-Define-mword16-and-mword8-once.patch \
++           "
+ SRC_URI[md5sum] = "598f41b7308e1f736164bca3ab84ddbe"
+ SRC_URI[sha256sum] = "f9dfe2fd737c38fad6535bbab327da9a21f7ce4ea6f18c7b3339adef6bf5fd88"
+ 
 -- 
 2.28.0
 
