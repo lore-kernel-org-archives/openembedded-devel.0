@@ -1,125 +1,98 @@
-Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com [209.85.208.196])
- by mx.groups.io with SMTP id smtpd.web10.4364.1597350992378911602
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com [209.85.160.179])
+ by mx.groups.io with SMTP id smtpd.web11.6478.1597357546971952054
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2020 13:36:32 -0700
+ Thu, 13 Aug 2020 15:25:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=vNgCbRdW;
- spf=pass (domain: linaro.org, ip: 209.85.208.196, mailfrom: andrey.konovalov@linaro.org)
-Received: by mail-lj1-f196.google.com with SMTP id g6so7611824ljn.11
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 13:36:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=BLwgBrj6;
+ spf=pass (domain: gmail.com, ip: 209.85.160.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f179.google.com with SMTP id v22so5644851qtq.8
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 15:25:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id;
-        bh=dvn/IwqLA+3PH4BKODk/zOnnDdgbBvpTRDgFYMP1JH8=;
-        b=vNgCbRdW484fNR3yZuknZHE44eln9gutzaHVYYaPdwM9cgGpSiy9/rIle3omvay/rp
-         v+Ky/h0x3V35kQSQcuwIa9XAiAANotxAYa1Z1dA8TOtta4HQpc9b02sERfiUDazFXAHm
-         suP+WnsYMI+lYeVqNKM63qqgsOjXRiMeRvuNAp3CkQy2cRcZQCyKjOQY5JyIorbxKRks
-         E0X0zDcf9nnHOLfZHZY0yL/N2KoUYc9p1rMwkFVqkrfxCFmPM5d/Dz5+SyE/4vpvsgO/
-         WedBHcBiFGFhXHcESX3vxkeZPg46dy0wX+CuLechrvyERWeHwQln+aP6k3mrRQRHGdNg
-         AW8Q==
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=6m23k3SCnQtCXPq1kzkNZ/xyIMQk8M2vlkf8MV9qBhY=;
+        b=BLwgBrj6dqCoPlsj2/DB0CLGY1DE+8k34TMhOe8iY3cPoAOnQW1UFWjHPIaJO2Su6W
+         whuOjMI4y0haEyPRBkyvSPjMb1a75wINFlPDXGm7aLUm0B2Ti65bh0RfYyeb6FB7Vve7
+         0F4uO4K6Qu3xS29Fsk9v44oHsznd1m0ZcWAXHHCbtxSfZJM/E+Iywr6nXVpE90nGPxMD
+         ObMg7jOSIjF3VN8Mv8b7Vhtexy4JIq7HX1hz9vOXMRM/4dPnBIUpluHY3pXLYQp0lLd4
+         /A3izG+Mbm8K/xFQ0pRBTyXpX7U0Slc/EiMf0F837QboTgZRxGem4+9QKlMCrnJkuzmh
+         Wfww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=dvn/IwqLA+3PH4BKODk/zOnnDdgbBvpTRDgFYMP1JH8=;
-        b=JQswVK4z5JaV8B/bYBH3au3gNZIlolJwnom77KzCfix0i/DiQJYS0sIJcj469seq9n
-         9pzvvLGTm1YHhkABsnX/oGv+a3dvIdm0k6CJ3TCFLKWbOCnUOjFQvzebaxkx/fk7gP+C
-         hf+doI/8qnM9HmYyrbn4tcLzKWTKZkaswlKZTyv7a3OOPExZDOsBULW6f0v5RSdoKmQ2
-         4E+QMnBfAHpIYeE1/9G8tgMdFVcCOIDfKF6xa8OBcx0HPleHA05xmhmXMPWLI1Zf/144
-         Ml2OmDyGlEx/yD7KalnToGu7if0TFlMqnhSVYpYm0bhJKoaFzIq3iICJFt3vXaVbrfHL
-         Wwlg==
-X-Gm-Message-State: AOAM533TJCgJRz1E87DdHGF/gym8b33s/dKdEuGnRpT6HFRhdcn/5q4z
-	q5B6tK5MdTlcnjWNq11LR+76p2Cn2BU=
-X-Google-Smtp-Source: ABdhPJzGxBA0PhthWUt1flPrVng4nIor1DREaCyLQQmfR8qCInIkzs4s2oKK7nq5KxlBblFVd3iWvg==
-X-Received: by 2002:a2e:81d9:: with SMTP id s25mr2768909ljg.104.1597350990286;
-        Thu, 13 Aug 2020 13:36:30 -0700 (PDT)
-Return-Path: <andrey.konovalov@linaro.org>
-Received: from localhost.localdomain (37-144-159-139.broadband.corbina.ru. [37.144.159.139])
-        by smtp.googlemail.com with ESMTPSA id n29sm1442090lfi.9.2020.08.13.13.36.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2020 13:36:29 -0700 (PDT)
-From: "Andrey Konovalov" <andrey.konovalov@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: madhavan.krishnan@linaro.org,
-	raj.khem@gmail.com,
-	peter.griffin@linaro.org,
-	libcamera-devel@lists.libcamera.org,
-	Andrey Konovalov <andrey.konovalov@linaro.org>
-Subject: [meta-multimedia][PATCH v4] libcamera: fix packaging and installation
-Date: Thu, 13 Aug 2020 23:36:08 +0300
-Message-Id: <20200813203608.26814-1-andrey.konovalov@linaro.org>
-X-Mailer: git-send-email 2.17.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=6m23k3SCnQtCXPq1kzkNZ/xyIMQk8M2vlkf8MV9qBhY=;
+        b=KNaLTmf8cxIP7WAQLa3Vd4Qy2BBCfZ7ekDXI3hRA6+gLwxToh2MtxP/U5y/7P3LytD
+         3esDokUb2gk7SLkVDgPGHvc4gz9nHubhABG0kSiokfaCIzITGBg/+ROxUr6E0xks5S1W
+         dwW5a0bBWl6OQOHB7uDbxIk6imAy9iySTviO9mZ148yAfImaYSS0Z3etVsHapLKbo4K5
+         6zQ/34uxCBTHK0VVRjSyOaySY1WgMRp8NvG3gmdBlc0wo56Pho/sPk1JBPl+RN6+z14h
+         YHHp8Mp2dIATUpdgoWz4nEav9J/44GflMAYJv5Wm3RN95MBV6XYx2J5yeBiABlLOrQqd
+         IwTg==
+X-Gm-Message-State: AOAM532T6Ay68jLLahJvbUm20cSGQNpWo05VymowPUyCUvVnImJU5QFg
+	BW3QW9UyRirIuEf5PJAaZu4CX1Z8rYLj2kIJ8HM=
+X-Google-Smtp-Source: ABdhPJykeZgs0fs1OcJvZJoVqRwKYcVA21ATi6xWWhdCsqToAIdvoafEjXsF/nT9UB1zveLJ87oMzHVPXnRSBJtq8/Y=
+X-Received: by 2002:ac8:4097:: with SMTP id p23mr7058615qtl.316.1597357545978;
+ Thu, 13 Aug 2020 15:25:45 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200813194015.3412-1-joe.slater@windriver.com>
+In-Reply-To: <20200813194015.3412-1-joe.slater@windriver.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 13 Aug 2020 15:25:19 -0700
+Message-ID: <CAMKF1sreu9ygY8TK0biqdsfHkYFGHL3m_E-y-g_+5F4DZ0xBpg@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH 1/1] aoetool: make builds reproducible
+To: Joe Slater <joe.slater@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Randy MacLeod <randy.macleod@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
 
-libcamera checks if RPATH or RUNPATH dynamic tag is present in
-libcamera.so. If it does, it assumes that libcamera binaries are
-run directly from the build directory without installing them, and
-tries to use resorces like IPA modules from the build directory.
-Mainline meson strips RPATH/RUNPATH out from libcamera.so file
-at install time. But openembedded-core patches meson to disable
-RPATH/RUNPATH removal. That's why  we need to remove this tag manually
-in do_install_append().
+On Thu, Aug 13, 2020 at 12:40 PM Joe Slater <joe.slater@windriver.com> wrote:
+>
+> Strip host path infomation out of binaries by not suppressing
+> default CFLAGS.
+>
+> Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> ---
+>  .../aoetools/aoetools/reproducible-build.patch       | 12 ++++++++++++
+>  .../recipes-support/aoetools/aoetools_36.bb          |  1 +
+>  2 files changed, 13 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch
+>
+> diff --git a/meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch b/meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch
+> new file mode 100644
+> index 000000000..4939ab25c
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch
+> @@ -0,0 +1,12 @@
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -40,7 +40,8 @@ NPERSHELF=16
+> + CONF_SCRIPTS = aoe-discover aoe-interfaces aoe-mkshelf aoe-revalidate aoe-flush aoe-stat
+> + PROGS = aoeping aoecfg aoe-sancheck
+> + COMMANDS := ${CONF_SCRIPTS} aoe-mkdevs aoe-version coraid-update ${PROGS}
+> +-CFLAGS = -Wall -O -g
+> ++# We could still override this on the command line.
+> ++CFLAGS += -Wall -O -g
 
-IPA module is signed (with openssl dgst) after it is built. But
-during packaging the OE build system 1) splits out debugging info,
-and 2) strips the binaries. So the IPA module so file installed
-isn't the one which the signature was calculated against. Then
-the signature check fails, and libcamera tries to run the IPA
-module isolated (in a sandbox), which doesn't work if the IPA
-module wasn't designed to run isolated. The solution is to
-recalculate the IPA modules signatures in ${PKGD} after do_package().
+Perhaps use ?= here, since -O will override the default optimization
+that bitbake will pass in env
 
-Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
----
- Changes in v4:
-  - Some of the quotation marks removed to let bitbake to expand
-    the variables properly.
-
- Changes in v3:
-  - As suggested by Laurent Pinchart, use ipa-sign-install.sh script
-    to recalculate the signatures instead of ipa-sign.sh.
-
- Changes in v2:
-  - Recalculate the IPA modules signatures after do_package()
-    instead of disabling stripping and splitting libcamera package
-
- .../recipes-multimedia/libcamera/libcamera.bb | 19 ++++++++++++++++++-
- 1 file changed, 18 insertions(+), 1 deletion(-)
-
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-index af2d3b4e1..c66c93ec5 100644
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-@@ -18,13 +18,30 @@ PV = "202006+git${SRCPV}"
- 
- S = "${WORKDIR}/git"
- 
--DEPENDS = "python3-pyyaml-native udev gnutls boost"
-+DEPENDS = "python3-pyyaml-native udev gnutls boost chrpath-native"
- DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
- 
- RDEPENDS_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayland', '', d)}"
- 
- inherit meson pkgconfig python3native
- 
-+do_install_append() {
-+    chrpath -d ${D}${libdir}/libcamera.so
-+}
-+
-+addtask do_recalculate_ipa_signatures_package after do_package before do_packagedata
-+do_recalculate_ipa_signatures_package() {
-+    local modules
-+    for module in $(find ${PKGD}/usr/lib/libcamera -name "*.so.sign"); do
-+        module="${module%.sign}"
-+        if [ -f "${module}" ] ; then
-+            modules="${modules} ${module}"
-+        fi
-+    done
-+
-+    ${S}/src/ipa/ipa-sign-install.sh ${B}/src/ipa-priv-key.pem "${modules}"
-+}
-+
- FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig"
- FILES_${PN} += " ${libdir}/libcamera.so"
- 
--- 
-2.17.1
-
+> + SANCHECKLIBS = -lpthread
+> +
+> + AOE_PING_OBJ = aoeping.o linux.o
+> diff --git a/meta-networking/recipes-support/aoetools/aoetools_36.bb b/meta-networking/recipes-support/aoetools/aoetools_36.bb
+> index 9b73b442a..60f3dc9b2 100644
+> --- a/meta-networking/recipes-support/aoetools/aoetools_36.bb
+> +++ b/meta-networking/recipes-support/aoetools/aoetools_36.bb
+> @@ -13,6 +13,7 @@ RRECOMMENDS_${PN} = "kernel-module-aoe"
+>  SRC_URI = "http://sourceforge.net/projects/${BPN}/files/${BPN}/${BPN}-${PV}.tar.gz \
+>             file://aoe-stat-no-bashism.patch \
+>             file://makefile-add-ldflags.patch \
+> +           file://reproducible-build.patch \
+>          "
+>  SRC_URI[md5sum] = "bff30daa988a65f69d4448ce4726a6db"
+>  SRC_URI[sha256sum] = "fb5e2cd0de7644cc1ec04ee3aeb43211cf7445a0c19e13d6b3ed5a8fbdf215ff"
+> --
+> 2.24.1
+>
+> 
