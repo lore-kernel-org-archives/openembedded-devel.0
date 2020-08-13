@@ -1,134 +1,164 @@
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web11.1670.1597283638922829986
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web11.3869.1597294716522313205
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Aug 2020 18:53:59 -0700
+ Wed, 12 Aug 2020 21:58:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=REjEDSI6;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id f5so1922956plr.9
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 18:53:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=qU0NLjJn;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id c6so2204584pje.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 21:58:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=U/kYGpVZDmTANm+/WQmlXr/qvrdSTpjtwT2QtsvPdus=;
-        b=REjEDSI6IiLBCa/yorxHuJsSoRlgh8kUl2IkHaq+7Dk3ewynKO71aHYDHXrs6MrpqB
-         GExkKuKG/hG0MneinDGEkMS4lPxh69uDowJvMG9WA0fEVQIGPQ5uTmmBZhTZFtpFHcqF
-         lk2I8nDBwc5o8IPQXmXh0OKjI1yHInOz3o2yvcMjeKyIijIG0oGfYvvkI3yG+TrLL7E5
-         i+SiadfEvSAXw06zzffvB6qXznvjl22cUab7IOr8ItKaxjFRUjKs4MXBc7VsCa3ODs1T
-         dCMPxzC67Pg1ns1X5O3cjS0ObRHPsYN5blqroL8i8i3T1y8zV6pLzLjK4dBjXa1m6Edq
-         eTeA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=nG8s+10XK4ZoFiE7j0dM2MwzG85cidUTwz6GNRgLOf0=;
+        b=qU0NLjJnOY1dM6Mvk9u3f5qhSzYq7TYe4lagciQplr+GYlS/17klY7+ifuzsu9Orv2
+         fG/Pg0BHnArlG9NFI3IKidp4kfHTSiRHFuigvxDrSs6XTG7+U+So6fzCrj1obGkjd0li
+         yirNNiszyu4wNGrd2PVL/FcgwcOZGMKGhXu43xaPfowTqNuTqZXkRfgIvKvoe43lvxOP
+         7p8PBwjUzBDuF5LbMrjV1K3rrF4mXcnxh/Kkjbp3Za0wF/X6fz5wHFcx+gBz6f/3U1Jg
+         KZyxqLjDsMMHTT3r6j3LRp6pGdXFxT5oSG6kqn5JBwbhB2k8hTI5gUTL6luYPuLTgl4n
+         bh/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=U/kYGpVZDmTANm+/WQmlXr/qvrdSTpjtwT2QtsvPdus=;
-        b=N6CJ1gEN6mGyuQqbFLDWG2N/PMe9Sxufe8PWFyA+g3+nuyNUAMPDx0ZszsJF5emC16
-         w34LwjOt5YuhnlRtjL2EU73gwf9qcfQ5UfQfKpPK2vfMGMkaCJlICK1ph+yvmxTOo7pW
-         Eq84R76P78Eej2e4WZVovQpx/Zu6mbvmh/UF2mBZDcr4UxzCI+vjoqRgXO0ZW8clp1ot
-         Q08ItlPVvhvJexDZF/bWMijMs4bwlLtb7/YSOKt+pRmWS1gJLGV9LsbJ376RErrvxJiD
-         h0HSm1dX0MYOQH/ARu0fxGgK3giFiH0JAv3kpgnDCy1+6lVLd9OcUMcPdHqI2FvH9Da4
-         iZvA==
-X-Gm-Message-State: AOAM530o60bMuY/KnJ6HJ/8RxhYuFzlayGT6dKYzlxKtUv46HrzJSODt
-	SaGoVGcXNCgt0ql36sAX7BpnF5evzLA=
-X-Google-Smtp-Source: ABdhPJz9lWBz9/b6zlvnY/yZv5Mfv6tbN8xfNpbRWTf11pNvLAGqdgBsgA/A7SJsCUAmdKfIVPeriQ==
-X-Received: by 2002:a17:902:b602:: with SMTP id b2mr1985474pls.280.1597283638132;
-        Wed, 12 Aug 2020 18:53:58 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=nG8s+10XK4ZoFiE7j0dM2MwzG85cidUTwz6GNRgLOf0=;
+        b=P73W8tNuiskI8iWbYLwovK23nloUcMroBrFgNuULcW0+1CUeqx/bAzbG6UpnpmGKDr
+         isesw1TwPjo7Y/GB5rm3ftAaYWhDmmRQ4X8ynpIDrDPp/8ow29Cn7q+4WuVXo96q8rnc
+         237CCggqclTii8ce07XaaziGF1IbrOfq8nLlcBFcW0IkSUPBCtIGzyojKBGmzYFBYBJE
+         unoey9J7sCyR20otMsCCTUCLOw9M3Qa0piRt5KmYMwrkfBPeHCPAVPMehM+/y8o8sY4Y
+         xkouoLzuvl7p/RP/IaORrbuYhdsmbd8uj5fgsJK3u6OMg0L0o3JBQFvaGyCxvIe8hb+9
+         KnEg==
+X-Gm-Message-State: AOAM532pRvY2zPtQeILSwrk/tJQQp/Rgv+Bt/z5XPrxQZfOPbUsBKd/Q
+	e1wGMXy+JW5MPI7EXRn+numTtiw3MYA=
+X-Google-Smtp-Source: ABdhPJzGToK4c6D5A0CDvDfZXSsff0IYMIW4W61+R5+9MjwWDyfp80lEo6AVfimwn/17pkw8tckzWg==
+X-Received: by 2002:a17:90b:4c0c:: with SMTP id na12mr3097783pjb.24.1597294715533;
+        Wed, 12 Aug 2020 21:58:35 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id o4sm3453578pjs.51.2020.08.12.18.53.57
+        by smtp.gmail.com with ESMTPSA id l21sm3767824pgb.35.2020.08.12.21.58.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2020 18:53:57 -0700 (PDT)
+        Wed, 12 Aug 2020 21:58:35 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: schnitzeltony@gmail.com,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 4/4] tvheadend: Update to latest tip
-Date: Wed, 12 Aug 2020 18:53:52 -0700
-Message-Id: <20200813015352.2318764-4-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-webserver][PATCH] monkey: Upgrade to 1.6.9
+Date: Wed, 12 Aug 2020 21:58:32 -0700
+Message-Id: <20200813045832.2368101-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200813015352.2318764-1-raj.khem@gmail.com>
-References: <20200813015352.2318764-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Drop 0001-allocate-space-for-buf-on-heap.patch this is already fixed upstream
+Switch to using cmake
+Use CMake option to select musl support
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-allocate-space-for-buf-on-heap.patch | 46 -------------------
- .../recipes-dvb/tvheadend/tvheadend_git.bb    |  3 +-
- 2 files changed, 1 insertion(+), 48 deletions(-)
- delete mode 100644 meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-allocate-space-for-buf-on-heap.patch
+ .../{monkey_1.5.6.bb => monkey_1.6.9.bb}      | 67 ++++++++++---------
+ 1 file changed, 34 insertions(+), 33 deletions(-)
+ rename meta-webserver/recipes-httpd/monkey/{monkey_1.5.6.bb => monkey_1.6.9.bb} (60%)
 
-diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-allocate-space-for-buf-on-heap.patch b/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-allocate-space-for-buf-on-heap.patch
-deleted file mode 100644
-index cbd76b6abf..0000000000
---- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-allocate-space-for-buf-on-heap.patch
-+++ /dev/null
-@@ -1,46 +0,0 @@
--From d4a405f87fc215c14e610a25b5a6b14060c1ef15 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 25 Dec 2019 13:53:52 -0800
--Subject: [PATCH] allocate space for buf on heap
--
--Avoids
--| src/epggrab/module/xmltv.c:204:47: error: '%s' directive output may be truncated writing between 2 and 2147483645 bytes into a region of size 115 [-Werror=format-truncation=]
--|   204 |   snprintf(buf, sizeof(buf)-1, "ddprogid://%s/%s", mod->id, s);
--|       |                                               ^~
--
--Upstream-Status: Submitted [https://github.com/tvheadend/tvheadend/pull/1324]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/epggrab/module/xmltv.c | 6 ++++--
-- 1 file changed, 4 insertions(+), 2 deletions(-)
--
--diff --git a/src/epggrab/module/xmltv.c b/src/epggrab/module/xmltv.c
--index 34ab05bdb..b1a956614 100644
----- a/src/epggrab/module/xmltv.c
--+++ b/src/epggrab/module/xmltv.c
--@@ -197,11 +197,12 @@ static void parse_xmltv_dd_progid
--   (epggrab_module_t *mod, const char *s, char **uri, char **suri,
--    epg_episode_num_t *epnum)
-- {
---  char buf[128];
--   if (strlen(s) < 2) return;
-- 
--+  char* buf = (char *)malloc(strlen(s) + strlen(mod->id) + 13);
--+  buf[strlen(s) + strlen(mod->id) + 12] = '\0';
--   /* Raw URI */
---  snprintf(buf, sizeof(buf)-1, "ddprogid://%s/%s", mod->id, s);
--+  snprintf(buf, strlen(s) + strlen(mod->id) + 12, "ddprogid://%s/%s", mod->id, s);
-- 
--   /* SH - series without episode id so ignore */
--   if (strncmp("SH", s, 2))
--@@ -219,6 +220,7 @@ static void parse_xmltv_dd_progid
--       if (buf[e+1]) sscanf(&buf[e+1], "%hu", &(epnum->e_num));
--     }
--   }
--+  free(buf);
-- }
-- 
-- /**
---- 
--2.24.1
--
-diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-index 20faef047e..82c2cbe086 100644
---- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-+++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-@@ -10,10 +10,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=9cae5acac2e9ee2fc3aec01ac88ce5db"
+diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb b/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb
+similarity index 60%
+rename from meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb
+rename to meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb
+index 559d251bdf..289f069b1e 100644
+--- a/meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb
++++ b/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb
+@@ -7,45 +7,56 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
  
- SRC_URI = "git://github.com/tvheadend/tvheadend.git \
-            file://0001-adjust-for-64bit-time_t.patch \
--           file://0001-allocate-space-for-buf-on-heap.patch \
-            "
+ SECTION = "net"
  
--SRCREV = "fda89e85e0b6ae796d8a09e178d3937aa7869270"
-+SRCREV = "ce09077056f9c6558c188d135cec3be85cc9c200"
- PV = "4.3+git${SRCPV}"
- PKGV = "4.3+git${GITPKGV}"
+-DEPENDS_append_libc-musl = " libexecinfo"
+-
+-SRC_URI = "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz \
+-           file://0001-configure-Respect-LIBS-variable-from-env.patch \
++SRC_URI = "http://monkey-project.com/releases/1.6/monkey-${PV}.tar.gz \
+            file://monkey.service \
+            file://monkey.init"
  
+-SRC_URI[md5sum] = "9699e4c9ea6ce6b989907c252ae80254"
+-SRC_URI[sha256sum] = "7c3d845306aa74ee6effd7ab6169d16ac4e6450e564954d0d0baa2d1e9be1a22"
++SRC_URI[sha256sum] = "f1122e89cda627123286542b0a18fcaa131cbe9d4f5dd897d9455157289148fb"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/monkey/monkey/releases"
+ UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+).tar.gz"
+ 
+-EXTRA_OECONF = "--plugdir=${libdir}/monkey/ \
+-                --logdir=${localstatedir}/log/monkey/ \
+-                --pidfile=${localstatedir}/run/monkey.pid \
+-                --default-user=www-data \
+-                --datadir=${localstatedir}/www/monkey/ \
+-                --sysconfdir=${sysconfdir}/monkey/ \
+-                --enable-plugins=* \
+-                --disable-plugins=mbedtls \
+-                --debug \
+-                --malloc-libc"
+-
+-do_configure_prepend_libc-musl() {
+-	export LIBS="-lexecinfo"
+-}
++EXTRA_OECMAKE = "-DINSTALL_LOGDIR=${localstatedir}/log/monkey/ \
++                 -DPID_FILE=${localstatedir}/run/monkey.pid \
++                 -DINSTALL_SYSCONFDIR=${sysconfdir}/monkey/ \
++                 -DWITH_PLUGINS=* \
++                 -DWITHOUT_PLUGINS=mbedtls \
++                 -DWITH_DEBUG=1 \
++                 -DDEFAULT_USER='www-data' \
++                 -DWITH_SYSTEM_MALLOC=1 \
++                "
++
++EXTRA_OECMAKE_append_libc-musl = " -DWITH_MUSL=1 "
++
++# GCC-10+ defaults to -fno-common
++CFLAGS += "-fcommon"
+ 
+ DISABLE_STATIC = ""
+-CLEANBROKEN = "1"
+ 
+-inherit autotools-brokensep pkgconfig update-rc.d systemd
++inherit cmake pkgconfig update-rc.d systemd
++
++OECMAKE_GENERATOR = "Unix Makefiles"
++
++do_install_append() {
++    rm -rf ${D}/run
++    install -Dm 0755 ${WORKDIR}/monkey.init ${D}${sysconfdir}/init.d/monkey
++
++    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++        install -Dm 644 ${WORKDIR}/monkey.service ${D}/${systemd_unitdir}/system/monkey.service
++    fi
++}
+ 
+ INITSCRIPT_NAME = "monkey"
+ INITSCRIPT_PARAMS = "defaults 70"
+ 
+ SYSTEMD_SERVICE_${PN} = "monkey.service"
+ 
+-FILES_${PN} += "${localstatedir}/www/monkey/"
++PACKAGES += "${PN}-plugins"
++
++FILES_${PN}-plugins = "${libdir}/monkey-*.so"
++
++FILES_${PN} += "${localstatedir}/www/monkey/ /run"
++
+ 
+ CONFFILES_${PN} = "${sysconfdir}/monkey/monkey.conf \
+                    ${sysconfdir}/monkey/sites/default \
+@@ -65,13 +76,3 @@ CONFFILES_${PN} = "${sysconfdir}/monkey/monkey.conf \
+                    ${sysconfdir}/monkey/plugins/auth/monkey.users \
+                    "
+ 
+-do_install_append() {
+-
+-    mkdir -p ${D}${sysconfdir}/init.d
+-    install -m 0755 ${WORKDIR}/monkey.init ${D}${sysconfdir}/init.d/monkey
+-
+-    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+-        install -d ${D}${systemd_unitdir}/system
+-        install -m 644 ${WORKDIR}/monkey.service ${D}/${systemd_unitdir}/system
+-    fi
+-}
 -- 
 2.28.0
 
