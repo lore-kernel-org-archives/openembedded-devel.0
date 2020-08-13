@@ -1,77 +1,64 @@
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com [209.85.214.193])
- by mx.groups.io with SMTP id smtpd.web12.4343.1597296782079605383
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+ by mx.groups.io with SMTP id smtpd.web10.4415.1597297433375245506
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Aug 2020 22:33:02 -0700
+ Wed, 12 Aug 2020 22:43:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gN0Nza4O;
- spf=pass (domain: gmail.com, ip: 209.85.214.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f193.google.com with SMTP id f10so2123857plj.8
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Aug 2020 22:33:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=TbvizERAEa4jdOewLaVfgdjlFFtRGQvnDMPzR3O5+KY=;
-        b=gN0Nza4O/otVY1gyqMNHFWyqFHZVeXNRiLhKpQjxzIMybpnu1T/pIPWgmZZ2DvY0lI
-         fV4Ae9klvpzNEE8k7y3mYiUVKmJonTiVQ8AIZrpCa5FaJ2HWitDJJGVjg3It8jOEQCIa
-         Dy3t6lyTVUUgQqM9Vv6VCNfJW50rwTMVPinrBLXsSXQl6h9Bci4pWlueWqKLodIuTLfz
-         mZ71Lj0W7rnGAZ3Y7GWSew7jerjOY/9mHcXXyUPtWQOBrI0V2VPv8jQ7BNcdrxs/j/QM
-         IDvSIoVmSUdHcu7PtDd9bb3sOUfYGswoLXlE5ObZ3K13kjX10pDM5KpWnsL7rxepp22t
-         zqQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=TbvizERAEa4jdOewLaVfgdjlFFtRGQvnDMPzR3O5+KY=;
-        b=K9Z24egt23zUk3Xm1T+wyl7qO8bgKTQjd3/N3/xp+MyAgZV4Ja/sedTEBfhJme/o0K
-         8wkjqKNjGC9yTZVvaHmA21NR+ZZnYsHxGbuUnSYu2MwVIbEl0l20scvWHyhnTcO5/aaU
-         LaJMtHk6bBBNdQoCBZlTjncmNg0dNJLYGbl6yMHJAwJC16lIT9OEHQ/SgUl7iluklLqw
-         Yh0XWUer1xpjxv0OB+DfCl1mRPeXAz3pxq5NgJS6NPtB2Gc1kg3PRN4JUTIKXkf+C7NE
-         0NvcaKtdr851z5uZHQC+5FmvxN6tPuhc29HhKxIOl4WQfqz0WRI83YWqT2MsJii8ez2t
-         +2KQ==
-X-Gm-Message-State: AOAM532MVeaau0I87dzPmaOe525a5TUz+wxuN+CmtoxTmofg7f3Ou7mv
-	08HPUQyhQJYjyYlxxE0aoFhlP90gRw8=
-X-Google-Smtp-Source: ABdhPJzU8MwYHjmZv2ItKgos1HmpW2ictXslaZDsvufEe/se87c8JV8o9NBxh8Js8dlFdPXLt9Ny5A==
-X-Received: by 2002:a17:90a:e511:: with SMTP id t17mr3371893pjy.189.1597296781399;
-        Wed, 12 Aug 2020 22:33:01 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id x28sm4336801pfj.73.2020.08.12.22.33.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2020 22:33:01 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=pass header.i=@stusta.de header.s=default header.b=VrPSdgT7;
+ spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=pkdr=bx=stusta.de=bunk@stusta.mhn.de)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 4BRwVG042gzP9
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 07:43:49 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1597297430;
+	bh=KOyDqOhDuUkPRkUQ4etfFdJ33tIWUxDFB8qrbSr5iEc=;
+	h=From:To:Subject:Date:From;
+	b=VrPSdgT7FzzpZhqYNRoJ5yE9LzCASMEz7A26SuLvWmB0zoqfPPrHoVrOJ+X04G5gz
+	 gaTu4/Gt6xKzOly3DvPjltBr/MwAmv0OaYAcUbZBfpl0Ye7ucLQ5nIDQPMVmpkvQYk
+	 xoMNBqN5N2ymQS+aCGCkgLpDEIEOMvS7rtFUELiwEUnNm4818R+82Dt7wMg4k5ZFKs
+	 HhlnMymU2rcXrTH/SZs7cNwWppuJ6aaL3f66syLPjdSgK2pm5lyfSKHxBdZ4hbympk
+	 JcY9VG16xXFMykzVMwbP4sGdHi9y2QyZ75IKmsIlrV6WLrZT7pDBq+Vzbyf7dWDIll
+	 fKYwzLs5DAmUTaScWtR1lYIAD22/vcD5vvobjg0QSUNa3996k3NdOnpyG42MTEcPuv
+	 g204xLPUCKFSOdBnHVN/Y/JY4tb7TTarZu7kvNJ84GDWQXIChgm8ndtko/fcyfbcxM
+	 tZk++/NCJH0SjJGxL/e50bO7xfloQFcS17EyvoPv39PnaIl4J9CDPYG1BVxP8tuk/l
+	 IN5RHJS5P7pV4avfX9xzr1QWygqLyk+pQW5Vgfq4p6Zf3Y0YZdjffFr/g5HGhVftBw
+	 /5QIf7QOw71vcvQuN1Lctgjctj9QKOd3ITrboz1kTd7aAWis6Gd41L1eJyoqM7qLpO
+	 gQkndeH4u/1ejGHgWqRGvLos=
+From: "Adrian Bunk" <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-initramfs][PATCH 2/2] kexecboot: Use -fcommon to compile
-Date: Wed, 12 Aug 2020 22:32:58 -0700
-Message-Id: <20200813053258.2386575-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200813053258.2386575-1-raj.khem@gmail.com>
-References: <20200813053258.2386575-1-raj.khem@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: [meta-gnome][PATCH] gnome-settings-daemon: smartcard support is optional, and needs nss
+Date: Thu, 13 Aug 2020 08:43:48 +0300
+Message-Id: <20200813054348.8194-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
 
-gcc10 defaults to -fno-common and kexecboot does not compile with
--fno-common, so use -fcommon explicitly
+../gnome-settings-daemon-3.36.1/meson.build:165:2: ERROR: Dependency "nss" not found, tried pkgconfig
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+This happened when networkmanager is configured without nss,
+or nm support disabled in gnome-settings-daemon.
+
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb | 2 ++
+ .../gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb       | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-index ed3dece3f6..2f46fa9523 100644
---- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-+++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-@@ -13,6 +13,8 @@ inherit autotools
+diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb
+index b38ba558c..8d90a7a40 100644
+--- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb
+@@ -44,12 +44,14 @@ EXTRA_OEMESON = "--native-file ${WORKDIR}/meson.native"
+ PACKAGECONFIG ??= " \
+     cups nm \
+     alsa gudev \
++    smartcard \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} \
+ "
+ PACKAGECONFIG[alsa] = "-Dalsa=true,-Dalsa=false,alsa-lib"
+ PACKAGECONFIG[cups] = "-Dcups=true,-Dcups=false,cups"
+ PACKAGECONFIG[gudev] = "-Dgudev=true,-Dgudev=false,libgudev"
+ PACKAGECONFIG[nm] = "-Dnetwork_manager=true,-Dnetwork_manager=false,networkmanager"
++PACKAGECONFIG[smartcard] = "-Dsmartcard=true,-Dsmartcard=false,nss"
+ PACKAGECONFIG[wayland] = "-Dwayland=true,-Dwayland=false,wayland"
  
- EXTRA_OECONF = "--enable-textui --enable-delay=2 --enable-evdev-rate=1000,250"
- 
-+CFLAGS += "-fcommon"
-+
- do_install () {
-     install -D -m 0755 ${B}/src/kexecboot ${D}${bindir}/kexecboot
-     install -d ${D}/proc
+ FILES_${PN} += " \
 -- 
-2.28.0
+2.17.1
 
