@@ -1,274 +1,103 @@
-Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com [209.85.219.65])
- by mx.groups.io with SMTP id smtpd.web11.10728.1597373913935757498
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+ by mx.groups.io with SMTP id smtpd.web12.11570.1597378227144537069
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2020 19:58:34 -0700
+ Thu, 13 Aug 2020 21:10:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=WTRGglvW;
- spf=pass (domain: gmail.com, ip: 209.85.219.65, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f65.google.com with SMTP id t6so3732375qvw.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 19:58:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=VsxBf7LhpRDxhJ29GSAp6N/ycha2/QxPwCedEqiXtQQ=;
-        b=WTRGglvW9i2w09kKm8y9u1Ch2uYmA2BRU+d/C7uW3wouSvDam2mkZ/xmyeLQIs6Hza
-         xvyIzUjZFfPPeYICKNT8lr9ZslXM8/CtsXNwbjCl4qvJlbA+NVwGOfqZHW8gRVz/zTXb
-         E+V0LFXjBN0egC6t5efF8tEOTD4H349PBdF2EOHJxcqvVcYcjOfH/2GBdQ1c5iATvYd6
-         KY27BuTWrA8Mb31oMFghpzomMSSPKp0xJvTwx3kvVlU6mk48kFhzlhNOb+KNo7evakhC
-         hZC3LFy6Rx1lNRY31Kg1ZJ3wYrADq/3kG24Pp9Wb1VCOGD9sQECwA16pCbboT81eWuDK
-         u2fg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=VsxBf7LhpRDxhJ29GSAp6N/ycha2/QxPwCedEqiXtQQ=;
-        b=kYm8jnU3eH9F1/Jvqx0CAsp5RJOtpf+GIs99JgOLPG2DHJMUX+4uF+U8BRIVKugTkq
-         XBXdIuomnpxmUaUMto1mru/AFSKO+Z90AruzkDLU7aemU5xNYyPPiWXrAeIVsD3ONT4d
-         w+fhqm347hmyKi59fbRQD8Z/v1OqFwXtwVc123WZq+Zl1xrWp476nJbALtl0giX760Kp
-         6mYcueDulkNilfeWz/3iow/djfn/g+Bq+HNvZmO9xId3EPaoY+ZND8AS3SJRwaxpPwkx
-         a4cSxprO5vcADr2R5kG4aGG49PcR8eOHsQLYiNFLKXXYO25z1TgUf9v1dbaVpc4rxxaQ
-         eHjw==
-X-Gm-Message-State: AOAM531fA0mbs6Nvwfz0DZMvi3ejbx5iOBIwP5VBErT8bcGBbb26gUZh
-	klnaZ7y4xXSaTYdOuR49ndC8Cd0hmoZ4T+xh4cQ=
-X-Google-Smtp-Source: ABdhPJyzaTpNFBzujsnISVKlZL3SDZKijJaOP2aRFQxGl08n7vpbNwdczpqHyajAw/UpDajRudhFkW3XYh6EQdYqkp4=
-X-Received: by 2002:a0c:fbd1:: with SMTP id n17mr919583qvp.4.1597373912910;
- Thu, 13 Aug 2020 19:58:32 -0700 (PDT)
+ dkim=missing; spf=pass (domain: intel.com, ip: 192.55.52.88, mailfrom: anuj.mittal@intel.com)
+IronPort-SDR: VJjPbOZwseFJH0E+pP4TpkFX9P5YnyMXFPpG7xf2iyXHAQWewqH+ZfRrAsEFHsVEccfLArOEh9
+ zRDc1eAnC0iA==
+X-IronPort-AV: E=McAfee;i="6000,8403,9712"; a="172402545"
+X-IronPort-AV: E=Sophos;i="5.76,310,1592895600"; 
+   d="scan'208";a="172402545"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Aug 2020 21:10:25 -0700
+IronPort-SDR: SMpF2vaQF3NHKQFP5bpxcSlNl0LV6yTd+xErnQ5LXeUx/beuBvJcWqwLG3V7MCNKlqOWU0aBX/
+ sPS4Rsbd/W2Q==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.76,310,1592895600"; 
+   d="scan'208";a="325611286"
+Received: from pgsmsx603.gar.corp.intel.com ([10.108.199.138])
+  by orsmga008.jf.intel.com with ESMTP; 13 Aug 2020 21:10:25 -0700
+Received: from pgsmsx603.gar.corp.intel.com (10.108.199.138) by
+ pgsmsx603.gar.corp.intel.com (10.108.199.138) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.1713.5; Fri, 14 Aug 2020 12:10:24 +0800
+Received: from kmsmsx151.gar.corp.intel.com (172.21.73.86) by
+ pgsmsx603.gar.corp.intel.com (10.108.199.138) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.1713.5
+ via Frontend Transport; Fri, 14 Aug 2020 12:10:24 +0800
+Received: from pgsmsx101.gar.corp.intel.com ([169.254.1.186]) by
+ KMSMSX151.gar.corp.intel.com ([169.254.10.121]) with mapi id 14.03.0439.000;
+ Fri, 14 Aug 2020 12:10:24 +0800
+From: "Anuj Mittal" <anuj.mittal@intel.com>
+To: "raj.khem@gmail.com" <raj.khem@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-oe][ 6/9] opencl-icd-loader: Update beyond 2020.06.16
+Thread-Topic: [oe] [meta-oe][ 6/9] opencl-icd-loader: Update beyond
+ 2020.06.16
+Thread-Index: AQHWcHMMjkZZY9B8VUq8t4nTO1Tx4ak2eqeA
+Date: Fri, 14 Aug 2020 04:10:23 +0000
+Message-ID: <788ba2642e9ffc12c44454664795d484395450b8.camel@intel.com>
+References: <20200812063711.2758315-1-raj.khem@gmail.com>
+	 <20200812063711.2758315-6-raj.khem@gmail.com>
+In-Reply-To: <20200812063711.2758315-6-raj.khem@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.249.70.141]
 MIME-Version: 1.0
-References: <20200813155006.13934-1-sno@netbsd.org>
-In-Reply-To: <20200813155006.13934-1-sno@netbsd.org>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 13 Aug 2020 19:58:07 -0700
-Message-ID: <CAMKF1srvHMBigd7UbCtjbF4QG+GhnPr_x0BWEwfaJZruunsO9A@mail.gmail.com>
-Subject: Re: [meta-networking][PATCH] bearssl: add new recipe
-To: Jens Rehsack <sno@netbsd.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Return-Path: anuj.mittal@intel.com
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <46E0BFD8CE1C0945A96A192A86CE76CE@intel.com>
+Content-Transfer-Encoding: base64
 
-Fails with
-
-| /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-l=
-inux/bearssl/0.6-r0/recipe-sysroot-native/usr/bin/x86_64-poky-linux/../../l=
-ibexec/x86_64-poky-linux/gcc/x86_64-poky-linux/10.1.0/ld:
-build/obj/rsa_i62_pub.o: warning: relocation against
-`br_rsa_i62_public' in read-only section `.text'
-| /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-l=
-inux/bearssl/0.6-r0/recipe-sysroot-native/usr/bin/x86_64-poky-linux/../../l=
-ibexec/x86_64-poky-linux/gcc/x86_64-poky-linux/10.1.0/ld:
-build/obj/ec_prime_i15.o: relocation R_X86_64_PC32 against symbol
-`br_secp521r1' can not be used when making a shared object; recompile
-with -fPIC
-| /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-l=
-inux/bearssl/0.6-r0/recipe-sysroot-native/usr/bin/x86_64-poky-linux/../../l=
-ibexec/x86_64-poky-linux/gcc/x86_64-poky-linux/10.1.0/ld:
-final link failed: bad value
-| collect2: error: ld returned 1 exit status
-| make: *** [mk/Rules.mk:347: build/libbearssl.so] Error 1
-
-
-see https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/507
-
-On Thu, Aug 13, 2020 at 8:50 AM Jens Rehsack <sno@netbsd.org> wrote:
->
-> Add recipe for BearSSL - an an implementation of the SSL/TLS protocol wit=
-h
-> the approach of:
-> * Be correct and secure.
-> * Be small
-> * Be highly portable
-> * Be feature-rich and extensible
->
-> See https://bearssl.org for more details.
->
-> Signed-off-by: Jens Rehsack <sno@netbsd.org>
-> ---
->  ....mk-remove-fixed-command-definitions.patch | 57 +++++++++++++++++++
->  ..._x509.c-fix-potential-overflow-issue.patch | 41 +++++++++++++
->  .../bearssl/bearssl_0.6.bb                    | 31 ++++++++++
->  3 files changed, 129 insertions(+)
->  create mode 100644 meta-networking/recipes-connectivity/bearssl/bearssl/=
-0001-conf-Unix.mk-remove-fixed-command-definitions.patch
->  create mode 100644 meta-networking/recipes-connectivity/bearssl/bearssl/=
-0002-test-test_x509.c-fix-potential-overflow-issue.patch
->  create mode 100644 meta-networking/recipes-connectivity/bearssl/bearssl_=
-0.6.bb
->
-> diff --git a/meta-networking/recipes-connectivity/bearssl/bearssl/0001-co=
-nf-Unix.mk-remove-fixed-command-definitions.patch b/meta-networking/recipes=
--connectivity/bearssl/bearssl/0001-conf-Unix.mk-remove-fixed-command-defini=
-tions.patch
-> new file mode 100644
-> index 000000000..00be22499
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/bearssl/bearssl/0001-conf-Unix=
-.mk-remove-fixed-command-definitions.patch
-> @@ -0,0 +1,57 @@
-> +From 4ba61c59d3488c263d106d486b656854a57ad79f Mon Sep 17 00:00:00 2001
-> +From: Jens Rehsack <sno@netbsd.org>
-> +Date: Thu, 13 Aug 2020 15:26:30 +0200
-> +Subject: [PATCH 1/2] conf/Unix.mk: remove fixed command definitions
-> +
-> +For cross compiling in Yocto or with appropriate SDKs, commands like
-> +`$CC` are reasonably predefined.
-> +
-> +Upstream-Status: Inappropriate
-> +
-> +Signed-off-by: Jens Rehsack <sno@netbsd.org>
-> +---
-> + conf/Unix.mk | 10 +++-------
-> + 1 file changed, 3 insertions(+), 7 deletions(-)
-> +
-> +diff --git a/conf/Unix.mk b/conf/Unix.mk
-> +index 02f2b2b..05979fc 100644
-> +--- a/conf/Unix.mk
-> ++++ b/conf/Unix.mk
-> +@@ -37,23 +37,19 @@ RM =3D rm -f
-> + MKDIR =3D mkdir -p
-> +
-> + # C compiler and flags.
-> +-CC =3D cc
-> +-CFLAGS =3D -W -Wall -Os -fPIC
-> + CCOUT =3D -c -o
-> +
-> + # Static library building tool.
-> +-AR =3D ar
-> + ARFLAGS =3D -rcs
-> + AROUT =3D
-> +
-> + # DLL building tool.
-> +-LDDLL =3D cc
-> ++LDDLL =3D $(CCLD)
-> + LDDLLFLAGS =3D -shared
-> + LDDLLOUT =3D -o
-> +
-> + # Static linker.
-> +-LD =3D cc
-> +-LDFLAGS =3D
-> ++LD =3D $(CCLD)
-> + LDOUT =3D -o
-> +
-> + # C# compiler; we assume usage of Mono.
-> +@@ -63,7 +59,7 @@ RUNT0COMP =3D mono T0Comp.exe
-> + # Set the values to 'no' to disable building of the corresponding eleme=
-nt
-> + # by default. Building can still be invoked with an explicit target cal=
-l
-> + # (e.g. 'make dll' to force build the DLL).
-> +-#STATICLIB =3D no
-> ++STATICLIB =3D no
-> + #DLL =3D no
-> + #TOOLS =3D no
-> + #TESTS =3D no
-> +--
-> +2.17.1
-> +
-> diff --git a/meta-networking/recipes-connectivity/bearssl/bearssl/0002-te=
-st-test_x509.c-fix-potential-overflow-issue.patch b/meta-networking/recipes=
--connectivity/bearssl/bearssl/0002-test-test_x509.c-fix-potential-overflow-=
-issue.patch
-> new file mode 100644
-> index 000000000..94abd27fa
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/bearssl/bearssl/0002-test-test=
-_x509.c-fix-potential-overflow-issue.patch
-> @@ -0,0 +1,41 @@
-> +From 542380a13f178d97851751b57054a6b5be555d1c Mon Sep 17 00:00:00 2001
-> +From: Jens Rehsack <sno@netbsd.org>
-> +Date: Thu, 13 Aug 2020 16:16:44 +0200
-> +Subject: [PATCH 2/2] test/test_x509.c: fix potential overflow issue
-> +
-> +Instead of doing a memcpy() which does static overflow checking, use
-> +snprintf() for string copying which does the check dynamically.
-> +
-> +Fixes:
-> +| In file included from .../recipe-sysroot/usr/include/string.h:519,
-> +|                  from test/test_x509.c:27:
-> +| In function 'memcpy',
-> +|     inlined from 'parse_keyvalue' at test/test_x509.c:845:2,
-> +|     inlined from 'process_conf_file' at test/test_x509.c:1360:7,
-> +|     inlined from 'main' at test/test_x509.c:2038:2:
-> +| .../recipe-sysroot/usr/include/bits/string_fortified.h:34:10: warning:=
- '__builtin_memcpy' specified bound 4294967295 exceeds maximum object size =
-2147483647 [-Wstringop-overflow=3D]
-> +|    34 |   return __builtin___memcpy_chk (__dest, __src, __len, __bos0 =
-(__dest));
-> +|       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
-~~~~~~~~~
-> +
-> +Signed-off-by: Jens Rehsack <sno@netbsd.org>
-> +---
-> + test/test_x509.c | 3 +--
-> + 1 file changed, 1 insertion(+), 2 deletions(-)
-> +
-> +diff --git a/test/test_x509.c b/test/test_x509.c
-> +index 2c61cf5..76f6ab9 100644
-> +--- a/test/test_x509.c
-> ++++ b/test/test_x509.c
-> +@@ -842,8 +842,7 @@ parse_keyvalue(HT *d)
-> +               return -1;
-> +       }
-> +       name =3D xmalloc(u + 1);
-> +-      memcpy(name, buf, u);
-> +-      name[u] =3D 0;
-> ++      snprintf(name, u, "%s", buf);
-> +       if (HT_get(d, name) !=3D NULL) {
-> +               xfree(name);
-> +               return -1;
-> +--
-> +2.17.1
-> +
-> diff --git a/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb =
-b/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb
-> new file mode 100644
-> index 000000000..7bd0e549d
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb
-> @@ -0,0 +1,31 @@
-> +SUMMARY =3D "BearSSL is an implementation of the SSL/TLS protocol (RFC 5=
-246) written in C"
-> +DESCRIPTION =3D "BearSSL is an implementation of the SSL/TLS protocol (R=
-FC \
-> +5246) written in C. It aims at offering the following features: \
-> +  * Be correct and secure. In particular, insecure protocol versions and=
- \
-> +    choices of algorithms are not supported, by design; cryptographic \
-> +    algorithm implementations are constant-time by default. \
-> +  * Be small, both in RAM and code footprint. For instance, a minimal \
-> +    server implementation may fit in about 20 kilobytes of compiled code=
- \
-> +    and 25 kilobytes of RAM. \
-> +  * Be highly portable. BearSSL targets not only =E2=80=9Cbig=E2=80=9D o=
-perating systems \
-> +    like Linux and Windows, but also small embedded systems and even spe=
-cial \
-> +    contexts like bootstrap code. \
-> +  * Be feature-rich and extensible. SSL/TLS has many defined cipher suit=
-es \
-> +    and extensions; BearSSL should implement most of them, and allow ext=
-ra \
-> +    algorithm implementations to be added afterwards, possibly from thir=
-d \
-> +    parties."
-> +HOMEPAGE =3D "https://bearssl.org"
-> +
-> +SECTION =3D "libs"
-> +
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D1fc37e1037ae673975fbcb96a=
-98f7191"
-> +
-> +SRCREV =3D "8ef7680081c61b486622f2d983c0d3d21e83caad"
-> +SRC_URI =3D "git://www.bearssl.org/git/BearSSL;protocol=3Dhttps;nobranch=
-=3D1 \
-> +          file://0001-conf-Unix.mk-remove-fixed-command-definitions.patc=
-h \
-> +          file://0002-test-test_x509.c-fix-potential-overflow-issue.patc=
-h \
-> +          "
-> +
-> +S =3D "${WORKDIR}/git"
-> +B =3D "${S}"
-> --
-> 2.17.1
->
+T24gVHVlLCAyMDIwLTA4LTExIGF0IDIzOjM3IC0wNzAwLCBLaGVtIFJhaiB3cm90ZToNCj4gTGlj
+ZW5zZS1VcGRhdGU6IExpY2Vuc2UgaXMgbm93IGFwYWNoZS0yLjAgYXMgcGVyIFsxXQ0KPiANCj4g
+Rml4ZXMgYnVpbGQgd2loIGdjYzEwDQo+IEFkZCBuZXcgZGVwZW5kZW5jeSBvbiBvY2wtaWNkDQoN
+CldoeSBkb2VzIGl0IG5lZWQgdG8gZGVwZW5kIG9uIG9jbC1pY2Q/DQoNClRoYW5rcywNCg0KQW51
+ag0KDQo+IEdhdGhlciBpbnN0YWxsIGFydGlmYWN0cyBmcm9tIG5ldyBsb2NhdGlvbnMNCj4gDQo+
+IFsxXSANCj4gaHR0cHM6Ly9naXRodWIuY29tL0tocm9ub3NHcm91cC9PcGVuQ0wtSUNELUxvYWRl
+ci9jb21taXQvNDRmMzg0YWU2MjQ2NzVkNmIwYjkyY2UzOWE5N2NiN2Y0ODk5ZDkyYQ0KPiANCj4g
+U2lnbmVkLW9mZi1ieTogS2hlbSBSYWogPHJhai5raGVtQGdtYWlsLmNvbT4NCj4gLS0tDQo+ICAu
+Li4vb3BlbmNsL29wZW5jbC1pY2QtbG9hZGVyX2dpdC5iYiAgICAgICAgICAgIHwgMTggKysrKysr
+KysrKy0tLS0NCj4gLS0tLQ0KPiAgMSBmaWxlIGNoYW5nZWQsIDEwIGluc2VydGlvbnMoKyksIDgg
+ZGVsZXRpb25zKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWNvcmUvb3Bl
+bmNsL29wZW5jbC1pY2QtbG9hZGVyX2dpdC5iYg0KPiBiL21ldGEtb2UvcmVjaXBlcy1jb3JlL29w
+ZW5jbC9vcGVuY2wtaWNkLWxvYWRlcl9naXQuYmINCj4gaW5kZXggN2M0OWM4ZDU1Mi4uM2I5ZDA1
+MDU2OSAxMDA2NDQNCj4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLWNvcmUvb3BlbmNsL29wZW5jbC1p
+Y2QtbG9hZGVyX2dpdC5iYg0KPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtY29yZS9vcGVuY2wvb3Bl
+bmNsLWljZC1sb2FkZXJfZ2l0LmJiDQo+IEBAIC0xLDI0ICsxLDI3IEBADQo+ICBTVU1NQVJZICA9
+ICJPcGVuQ0wgSUNEIExvYWRlciINCj4gIERFU0NSSVBUSU9OID0gIk9wZW5DTCBjb21wdXRlIElD
+RCBMb2FkZXIgZnJvbSBLaHJvbm9zIEdyb3VwIg0KPiAtTElDRU5TRSAgPSAiS2hyb25vcyINCj4g
+LUxJQ19GSUxFU19DSEtTVU0gPQ0KPiAiZmlsZTovL0xJQ0VOU0UudHh0O21kNT1lYzcyNDczMmNl
+NzMyNjk0ODY1NzRjNzE4ZWYwYzc5YiINCj4gK0xJQ0VOU0UgID0gIkFwYWNoZS0yLjAiDQo+ICtM
+SUNfRklMRVNfQ0hLU1VNID0NCj4gImZpbGU6Ly9MSUNFTlNFO21kNT04NmQzZjNhOTVjMzI0Yzk0
+NzliZDg5ODY5NjhmNDMyNyINCj4gIFNFQ1RJT04gPSAiYmFzZSINCj4gIA0KPiArREVQRU5EUyAr
+PSAib3BlbmNsLWhlYWRlcnMgb2NsLWljZCINCj4gKw0KPiAgaW5oZXJpdCBwa2djb25maWcgY21h
+a2UNCj4gIA0KPiAgUyA9ICIke1dPUktESVJ9L2dpdCINCj4gLVNSQ1JFViA9ICJiMzQyZmY3Yjdm
+NzBhNGIzZjJjZmM1MzIxNWFmOGZhMjBhZGMzZDg2Ig0KPiArUFYgPSAiMjAyMC4wNi4xNitnaXQk
+e1NSQ1BWfSINCj4gK1NSQ1JFViA9ICI4NjJlZWJlN2NhNzMzYzM5ODMzNGE4ZGI4NDgxMTcyYTdk
+M2EzYzQ3Ig0KPiAgU1JDX1VSSSA9ICJnaXQ6Ly9naXRodWIuY29tL0tocm9ub3NHcm91cC9PcGVu
+Q0wtSUNELUxvYWRlci5naXQiDQo+ICANCj4gIGRvX2luc3RhbGwgKCkgew0KPiAgCWluc3RhbGwg
+LWQgJHtEfSR7YmluZGlyfQ0KPiAtCWluc3RhbGwgLW0gMDc1NSAke0J9L2Jpbi9pY2RfbG9hZGVy
+X3Rlc3QgJHtEfSR7YmluZGlyfS8NCj4gKwlpbnN0YWxsIC1tIDA3NTUgJHtCfS90ZXN0L2xvYWRl
+cl90ZXN0L2ljZF9sb2FkZXJfdGVzdA0KPiAke0R9JHtiaW5kaXJ9Lw0KPiAgCWNocnBhdGggLWQg
+JHtEfSR7YmluZGlyfS9pY2RfbG9hZGVyX3Rlc3QNCj4gIAlpbnN0YWxsIC1kICR7RH0ke2xpYmRp
+cn0NCj4gLQlpbnN0YWxsIC1tIDA2NDQgJHtCfS9saWIvbGliSWNkTG9nLnNvICR7RH0ke2xpYmRp
+cn0vDQo+IC0JaW5zdGFsbCAtbSAwNjQ0ICR7Qn0vbGliL2xpYk9wZW5DTERyaXZlclN0dWIuc28g
+JHtEfSR7bGliZGlyfS8NCj4gKwlpbnN0YWxsIC1tIDA2NDQgJHtCfS90ZXN0L2xvZy9saWJJY2RM
+b2cuc28gJHtEfSR7bGliZGlyfS8NCj4gKwlpbnN0YWxsIC1tIDA2NDQgJHtCfS90ZXN0L2RyaXZl
+cl9zdHViL2xpYk9wZW5DTERyaXZlclN0dWIuc28NCj4gJHtEfSR7bGliZGlyfS8NCj4gIAljaHJw
+YXRoIC1kICR7RH0ke2xpYmRpcn0vbGliT3BlbkNMRHJpdmVyU3R1Yi5zbw0KPiAtCWluc3RhbGwg
+LW0gMDY0NCAke0J9L2xpYi9saWJPcGVuQ0wuc28uMS4yICR7RH0ke2xpYmRpcn0vDQo+ICsJaW5z
+dGFsbCAtbSAwNjQ0ICR7Qn0vbGliT3BlbkNMLnNvLjEuMiAke0R9JHtsaWJkaXJ9Lw0KPiAgCWNk
+ICR7RH0ke2xpYmRpcn0NCj4gIAlsbiAtcyBsaWJPcGVuQ0wuc28uMS4yIGxpYk9wZW5DTC5zby4x
+DQo+ICAJbG4gLXMgbGliT3BlbkNMLnNvLjEgbGliT3BlbkNMLnNvDQo+IEBAIC00MSw1ICs0NCw0
+IEBAIEZJTEVTXyR7UE59LWRldiA9ICIgXA0KPiAgRklMRVNfbGliaWNkbG9nID0gIiR7bGliZGly
+fS9saWJJY2RMb2cuc28iDQo+ICBGSUxFU19saWJpY2Rsb2ctZGJnID0gIiR7bGliZGlyfS8uZGVi
+dWcvbGliSWNkTG9nLnNvIg0KPiAgDQo+IC1ERVBFTkRTID0gIm9wZW5jbC1oZWFkZXJzIg0KPiAg
+UkRFUEVORFNfJHtQTn0gPSAibGliaWNkbG9nIg0KPiANCg==
