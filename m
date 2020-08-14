@@ -1,50 +1,50 @@
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
- by mx.groups.io with SMTP id smtpd.web11.12367.1597383426442498455
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com [209.85.210.194])
+ by mx.groups.io with SMTP id smtpd.web10.12564.1597383426515300822
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 13 Aug 2020 22:37:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=h29RBq1W;
- spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f170.google.com with SMTP id p37so4002198pgl.3
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pAlPCyei;
+ spf=pass (domain: gmail.com, ip: 209.85.210.194, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f194.google.com with SMTP id d188so4021252pfd.2
         for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 22:37:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=WglflyNOrfDvy5tfkR/8vqXsky/rJleq445rxAK87uw=;
-        b=h29RBq1WMIW75dtNXaITMpY7AVkqVYjvKVrLzYM7XtecArQwpjCkBfc4j3phUEpqDb
-         u8QEbMVljasJNBB94TCWIx0VCZYzkx+sfHhK9dg3K9D1/WbRWWhWBsAZkBIc3vkCdSvc
-         sifFj4GsifX57TozaJB0SQYfCRyyf8eJKT+j3als7oPnQdcuCkKlLUJqCx/JEomnxMw6
-         r9cHbEPfOw1UIHGoTZxMXCm1E9wfmoU752ETOyDNvRB5A9DNhHnkDWbEfHAu+WK3HUnX
-         bHyTHDiwSYH8vubUhFLY6ZHg+EXIoRu3nPNMQ/Tdle6vs7YRyEfO0QpGoWnBU4/K8AQF
-         CvMQ==
+        bh=OUhlWV1rfKI3ryaEBMXVAgkSNuixW1kUp45BKJ1U4Yc=;
+        b=pAlPCyeiCgC/gc7wJTnw7w9802BFAlvJVpBpQVWx4VHYWnzGHmtG9xIS75BFtVk6TJ
+         ECaKNzbteQIWkQnpu+uQCDXKUJStMwwz5x0NtdOLOPlwj3EYHh6qatWhVGjQY68ANgVV
+         PLtXB0gCDOlyZNzid4jASWdjUeUvY55pSUk0BzjTRK3wMvW2WJzM8vtOoaSM554FckS3
+         1u7avIi6OKfrm3z33LAqzU6cbzwZ2wIKhj8sJU4zwzrJyPprXgmCuppDptZat0Tyr/5F
+         weWjaVmxKYXndCHeVZR6zEGpPCo0MxaU7PFkZmsHy2bAOOowu+1WiogK7YwVVRMjtZQS
+         S9Eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=WglflyNOrfDvy5tfkR/8vqXsky/rJleq445rxAK87uw=;
-        b=t/YaOcpsbHl84F0G2Yx6CHfV7YyC72jOteghJQU+t39vKFNgfAFeEdMTTR43P/sF6P
-         oJ/sADiccorqmzqFWJLLSRxzakq8Yy3YqF8XoGjBl0BnvPCJTS+ate1kVTguLZzmQr0h
-         eMjKOnjy76mXtHBHRV87o9ZAxpRl+r3Sr95pjNv3AV9W8xZtfIQ2mmkeWT7YvwaoGpEi
-         YAQ3PUdseD5RTKJ5ECZ6HXjc7mKwIwLACkzCh3Z+3KsMmMxnj1ft0TuOUootOrklBpDM
-         WvLRIsWgnskBWrNRErvwoK65+v98WXnP7paKz5oRa2U2MhhJze0MvCwtrjfUqDEHAS2R
-         jnKg==
-X-Gm-Message-State: AOAM5319yOljdUiiJ3jqFiqO/9wq6h7VMo4QBVmjvlBSVTjD6lJxWkpL
-	76LjLsnAKpgeslkmE5zt5qJShxhnt4ntEA==
-X-Google-Smtp-Source: ABdhPJxwEO2Po2uzLjfA1rwbkTIh7JIjowG5nxyME/t24hL4WvAJyfGxy0D6CQ3vCPbjA6GjZ0Yw4Q==
-X-Received: by 2002:a05:6a00:44:: with SMTP id i4mr682671pfk.276.1597383424431;
-        Thu, 13 Aug 2020 22:37:04 -0700 (PDT)
+        bh=OUhlWV1rfKI3ryaEBMXVAgkSNuixW1kUp45BKJ1U4Yc=;
+        b=WFMqdu08Lpiqb3ivOu8Ot10Es8v8dW9YlVcgGSfhyMNHlOfMqkHADF67Dp9ygv+hlD
+         /bU1O3EzNBKTY4FNCI23gcw4NVq0i30gram/4//Bpxt4eCVd8GMY6HvD9VtNqeooIQpF
+         AziSyxCVi6DPUJ+0jQQeHr7t2WRD2yloGtKh/HEcgWUgN54LwcFID43c4PNuvpWqPamT
+         Zh3wtddrb/YbT0Oao/WAJFKTmMbB5bKd/UlovMULIQHaWlLPfPkER9kbeH5+S9stivO3
+         DG2jbEsVoW6bsNweK2XNGfcMcJAyUVRyyZFVvWNMI9HN2ixMJMVMOZDrLnMn5gPpBJM7
+         nS3Q==
+X-Gm-Message-State: AOAM532+iFR22MjJJZ1EqcsVDXaXIa9NjAY+ToGqyu7ryto8q89RZHSR
+	wzvj1GjCgwt+/VSTQg31Gp355teg9UB6oA==
+X-Google-Smtp-Source: ABdhPJwBbAkTmUhfk49eabrgp7TJWajVqogNoMBzRcZppa70m16s55UrQrMAjgE9Ex7ulU4NoSuGdw==
+X-Received: by 2002:a62:79d7:: with SMTP id u206mr649922pfc.97.1597383425254;
+        Thu, 13 Aug 2020 22:37:05 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id k21sm7013974pgl.0.2020.08.13.22.37.03
+        by smtp.gmail.com with ESMTPSA id k21sm7013974pgl.0.2020.08.13.22.37.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2020 22:37:03 -0700 (PDT)
+        Thu, 13 Aug 2020 22:37:04 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 06/21] smstools3: Fix build with -fno-common
-Date: Thu, 13 Aug 2020 22:36:42 -0700
-Message-Id: <20200814053657.1701247-6-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 07/21] sblim-sfcb: Fix build with -fno-common
+Date: Thu, 13 Aug 2020 22:36:43 -0700
+Message-Id: <20200814053657.1701247-7-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200814053657.1701247-1-raj.khem@gmail.com>
 References: <20200814053657.1701247-1-raj.khem@gmail.com>
@@ -53,638 +53,195 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...arations-to-avoid-duplicate-var-defi.patch | 606 ++++++++++++++++++
- .../smstools3/smstools3_3.1.21.bb             |   4 +-
- 2 files changed, 609 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-connectivity/smstools3/smstools3/0001-Make-extern-declarations-to-avoid-duplicate-var-defi.patch
+ ...-variable-definition-in-header-files.patch | 100 ++++++++++++++++++
+ ...d-for-error.h-when-it-does-not-exist.patch |   0
+ ...tdint.h-system-header-for-UINT16_MAX.patch |   0
+ ...m-sfcb-1.3.15-fix-provider-debugging.patch |   0
+ .../sblim-sfcb-1.3.16-maxMsgLen.patch         |   0
+ .../sblim-sfcb-1.3.16-multilib-man-cfg.patch  |   0
+ ...sfcb-1.3.9-sfcbrepos-schema-location.patch |   0
+ .../sblim-sfcb-1.4.5-service.patch            |   0
+ ...m-sfcb-1.4.8-default-ecdh-curve-name.patch |   0
+ .../sblim-sfcb-1.4.9-fix-ftbfs.patch          |   0
+ .../sblim-sfcb-1.4.9-fix-sfcbinst2mof.patch   |   0
+ .../{files => sblim-sfcb}/sfcb.service        |   0
+ .../sblim-sfcb/sblim-sfcb_1.4.9.bb            |   1 +
+ 13 files changed, 101 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-Avoid-variable-definition-in-header-files.patch
+ rename meta-oe/recipes-extended/sblim-sfcb/{sblim-sfcb-1.4.9 => sblim-sfcb}/0001-Replace-need-for-error.h-when-it-does-not-exist.patch (100%)
+ rename meta-oe/recipes-extended/sblim-sfcb/{sblim-sfcb-1.4.9 => sblim-sfcb}/0001-include-stdint.h-system-header-for-UINT16_MAX.patch (100%)
+ rename meta-oe/recipes-extended/sblim-sfcb/{sblim-sfcb-1.4.9 => sblim-sfcb}/sblim-sfcb-1.3.15-fix-provider-debugging.patch (100%)
+ rename meta-oe/recipes-extended/sblim-sfcb/{sblim-sfcb-1.4.9 => sblim-sfcb}/sblim-sfcb-1.3.16-maxMsgLen.patch (100%)
+ rename meta-oe/recipes-extended/sblim-sfcb/{sblim-sfcb-1.4.9 => sblim-sfcb}/sblim-sfcb-1.3.16-multilib-man-cfg.patch (100%)
+ rename meta-oe/recipes-extended/sblim-sfcb/{sblim-sfcb-1.4.9 => sblim-sfcb}/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch (100%)
+ rename meta-oe/recipes-extended/sblim-sfcb/{sblim-sfcb-1.4.9 => sblim-sfcb}/sblim-sfcb-1.4.5-service.patch (100%)
+ rename meta-oe/recipes-extended/sblim-sfcb/{sblim-sfcb-1.4.9 => sblim-sfcb}/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch (100%)
+ rename meta-oe/recipes-extended/sblim-sfcb/{sblim-sfcb-1.4.9 => sblim-sfcb}/sblim-sfcb-1.4.9-fix-ftbfs.patch (100%)
+ rename meta-oe/recipes-extended/sblim-sfcb/{sblim-sfcb-1.4.9 => sblim-sfcb}/sblim-sfcb-1.4.9-fix-sfcbinst2mof.patch (100%)
+ rename meta-oe/recipes-extended/sblim-sfcb/{files => sblim-sfcb}/sfcb.service (100%)
 
-diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3/0001-Make-extern-declarations-to-avoid-duplicate-var-defi.patch b/meta-oe/recipes-connectivity/smstools3/smstools3/0001-Make-extern-declarations-to-avoid-duplicate-var-defi.patch
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-Avoid-variable-definition-in-header-files.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-Avoid-variable-definition-in-header-files.patch
 new file mode 100644
-index 0000000000..c714f74916
+index 0000000000..b0b43f357c
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/smstools3/smstools3/0001-Make-extern-declarations-to-avoid-duplicate-var-defi.patch
-@@ -0,0 +1,606 @@
-+From 77532d2e99252e3e07afa0f918bb8c9d73798f39 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-Avoid-variable-definition-in-header-files.patch
+@@ -0,0 +1,100 @@
++From fccbb85beb89b9ca35cac87fb553ef124a6c516b Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 13 Aug 2020 16:56:22 -0700
-+Subject: [PATCH] Make extern declarations to avoid duplicate var definitions
++Date: Thu, 13 Aug 2020 17:26:14 -0700
++Subject: [PATCH] Avoid variable definition in header files
 +
-+gcc-10+ defaults to -fno-common which flags these errors about mulitple
-+definitions since the variables are defined in header files which are
-+included from multiple sources, this patch ensures that extern
-+declaration is added appropriately
++This can cause multiple definitions to be emitted into objects and link
++fail as a result with gcc-10+ since it defaults to -fno-common, patch
++moves the definitions to source files
 +
 +Upstream-Status: Pending
++
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/blacklist.c |   2 +-
-+ src/blacklist.h |   2 +-
-+ src/charset.c   |   2 +-
-+ src/charshift.c |   2 +-
-+ src/logging.c   |   2 +-
-+ src/logging.h   |   4 +-
-+ src/modeminit.c |   6 +-
-+ src/smsd_cfg.c  |   2 +
-+ src/smsd_cfg.h  | 274 ++++++++++++++++++++++++------------------------
-+ src/stats.h     |  22 ++--
-+ src/whitelist.c |   2 +-
-+ src/whitelist.h |   2 +-
-+ 12 files changed, 164 insertions(+), 158 deletions(-)
++ control.h     | 2 +-
++ providerMgr.c | 1 +
++ providerMgr.h | 2 +-
++ sfcBroker.c   | 2 +-
++ trace.c       | 1 +
++ trace.h       | 2 +-
++ 6 files changed, 6 insertions(+), 4 deletions(-)
 +
-+diff --git a/src/blacklist.c b/src/blacklist.c
-+index 7440cca..0c00dd9 100755
-+--- a/src/blacklist.c
-++++ b/src/blacklist.c
-+@@ -17,11 +17,11 @@ Either version 2 of the License, or (at your option) any later version.
-+ #include <stdlib.h>
-+ #include <string.h>
-+ #include <signal.h>
-++#include "smsd_cfg.h"
-+ #include "blacklist.h"
-+ #include "extras.h"
-+ #include "logging.h"
-+ #include "alarm.h"
-+-#include "smsd_cfg.h"
++diff --git a/control.h b/control.h
++index e41e4b9..5e15363 100644
++--- a/control.h
+++++ b/control.h
++@@ -28,7 +28,7 @@ int             getControlUNum(char *id, unsigned int *val);
++ int             getControlULong(char *id, unsigned long *val);
++ int             getControlNum(char *id, long *val);
++ int             getControlBool(char *id, int *val);
++-const char      * sfcBrokerStart;
+++extern const char * sfcBrokerStart;
 + 
-+ int inblacklist(char* msisdn)
-+ {
-+diff --git a/src/blacklist.h b/src/blacklist.h
-+index 4f99050..61fd294 100755
-+--- a/src/blacklist.h
-++++ b/src/blacklist.h
-+@@ -15,7 +15,7 @@ Either version 2 of the License, or (at your option) any later version.
-+ #ifndef BLACK_H
-+ #define BLACK_H
-+ 
-+-char blacklist[256];	// Filename of the black-list
-++EXTERN char blacklist[256];	// Filename of the black-list
-+ 
-+ int inblacklist(char* msisdn);
-+ 
-+diff --git a/src/charset.c b/src/charset.c
-+index cd7c997..1716d70 100755
-+--- a/src/charset.c
-++++ b/src/charset.c
-+@@ -19,9 +19,9 @@ Either version 2 of the License, or (at your option) any later version.
-+ #include <syslog.h>
-+ #include <ctype.h>
-+ 
-++#include "smsd_cfg.h"
-+ #include "charset.h"
-+ #include "logging.h"
-+-#include "smsd_cfg.h"
-+ #include "pdu.h"
-+ #include "extras.h"
-+ #include "charshift.h"
-+diff --git a/src/charshift.c b/src/charshift.c
-+index 48ba340..2d7b26c 100755
-+--- a/src/charshift.c
-++++ b/src/charshift.c
-+@@ -25,8 +25,8 @@ Either version 2 of the License, or (at your option) any later version.
-+ #include <stdio.h>
-+ #include <stdarg.h>
-+ 
-+-#include "logging.h"
-+ #include "smsd_cfg.h"
-++#include "logging.h"
-+ #include "pdu.h"
-+ #include "charset.h"
-+ #include "extras.h"
-+diff --git a/src/logging.c b/src/logging.c
-+index 6ee2c4e..4af341f 100755
-+--- a/src/logging.c
-++++ b/src/logging.c
-+@@ -12,6 +12,7 @@ the GNU General Public License as published by the Free Software Foundation.
-+ Either version 2 of the License, or (at your option) any later version.
-+ */
-+ 
-++#include "smsd_cfg.h"
-+ #include "logging.h"
-+ #include "extras.h"
-+ #include <stdio.h>
-+@@ -22,7 +23,6 @@ Either version 2 of the License, or (at your option) any later version.
-+ #include <time.h>
-+ #include <fcntl.h>
-+ #include <unistd.h>
-+-#include "smsd_cfg.h"
-+ #include "stats.h"
-+ 
-+ int Filehandle = -1;
-+diff --git a/src/logging.h b/src/logging.h
-+index 4f27906..4550234 100755
-+--- a/src/logging.h
-++++ b/src/logging.h
-+@@ -18,7 +18,7 @@ Either version 2 of the License, or (at your option) any later version.
-+ #include <time.h>
-+ 
-+ // 3.1.16beta2: Moved logch() and prch() from charset.c to logging.c:
-+-char logch_buffer[8192];
-++EXTERN char logch_buffer[8192];
-+ 
-+ #ifdef __GNUC__
-+ void logch(char* format, ...) __attribute__ ((format(printf, 1, 2)));
-+@@ -30,7 +30,7 @@ char prch(char ch);
-+ 
-+ // 3.1.16beta: changed type:
-+ //int trouble_logging_started;
-+-time_t trouble_logging_started;
-++EXTERN time_t trouble_logging_started;
-+ 
-+ int change_loglevel(int new_level);
-+ void restore_loglevel();
-+diff --git a/src/modeminit.c b/src/modeminit.c
-+index 42ff6b4..0d05fe9 100755
-+--- a/src/modeminit.c
-++++ b/src/modeminit.c
-+@@ -19,8 +19,6 @@ Either version 2 of the License, or (at your option) any later version.
-+ #include <regex.h>
-+ #include <ctype.h>
-+ #include <time.h>
-+-#include "logging.h"
-+-#include "alarm.h"
-+ 
-+ #ifdef SOLARIS
-+ #include <sys/filio.h>
-+@@ -42,9 +40,11 @@ Either version 2 of the License, or (at your option) any later version.
-+ #include <netdb.h>
++ #endif
++ /* MODELINES */
++diff --git a/providerMgr.c b/providerMgr.c
++index c38a7d3..ff6d38d 100644
++--- a/providerMgr.c
+++++ b/providerMgr.c
++@@ -53,6 +53,7 @@
++ #define SFCB_ASM(x)
 + #endif
 + 
-++#include "smsd_cfg.h"
-++#include "logging.h"
-++#include "alarm.h"
-+ #include "extras.h"
-+ #include "modeminit.h"
-+-#include "smsd_cfg.h"
-+ #include "version.h"
-+ #include "pdu.h"
-+ #include "stats.h"
-+diff --git a/src/smsd_cfg.c b/src/smsd_cfg.c
-+index 35c1198..32472b4 100755
-+--- a/src/smsd_cfg.c
-++++ b/src/smsd_cfg.c
-+@@ -26,6 +26,8 @@ Either version 2 of the License, or (at your option) any later version.
-+ #include <ctype.h>
-+ #include <grp.h>
+++sigset_t mask, old_mask;
++ static pthread_mutex_t resultsocketMutex = PTHREAD_MUTEX_INITIALIZER;
 + 
-++#define EXTERN
-++
-+ #include "extras.h"
-+ #include "cfgfile.h"
-+ #include "smsd_cfg.h"
-+diff --git a/src/smsd_cfg.h b/src/smsd_cfg.h
-+index 8ae208d..d6ece37 100755
-+--- a/src/smsd_cfg.h
-++++ b/src/smsd_cfg.h
-+@@ -15,6 +15,10 @@ Either version 2 of the License, or (at your option) any later version.
-+ #ifndef SMSD_CFG_H
-+ #define SMSD_CFG_H
++ extern CMPIBroker *Broker;
++diff --git a/providerMgr.h b/providerMgr.h
++index 3cc7745..fbbfecd 100644
++--- a/providerMgr.h
+++++ b/providerMgr.h
++@@ -398,7 +398,7 @@ BinResponseHdr **invokeProviders(BinRequestContext * binCtx, int *err,
++ BinResponseHdr *invokeProvider(BinRequestContext * ctx);
++ void            freeResponseHeaders(BinResponseHdr ** resp,
++                                     BinRequestContext * ctx);
++-sigset_t mask, old_mask;
+++extern sigset_t mask, old_mask;
 + 
-++#ifndef EXTERN
-++#define EXTERN extern
-++#endif
-++
-+ #include <limits.h>
-+ #include <sys/types.h>
-+ #include <time.h>
-+@@ -126,17 +130,17 @@ Either version 2 of the License, or (at your option) any later version.
-+ #define ALPHABET_UNKNOWN        4
-+ #define ALPHABET_DEFAULT        0
++ #endif
++ /* MODELINES */
++diff --git a/sfcBroker.c b/sfcBroker.c
++index ca043c9..85581f5 100644
++--- a/sfcBroker.c
+++++ b/sfcBroker.c
++@@ -53,7 +53,7 @@
++ #endif
 + 
-+-char process_title[32];         // smsd for main task, NOTIFIER or CHILD, name of a modem for other tasks.
-+-int process_id;                 // -1 for main task, all modems have numbers starting with 0.
-++EXTERN char process_title[32];         // smsd for main task, NOTIFIER or CHILD, name of a modem for other tasks.
-++EXTERN int process_id;                 // -1 for main task, all modems have numbers starting with 0.
-+                                 // This is the same as device, can be used like devices[process_id] if IS_MODEM_PROCESS.
-+ 
-+-time_t process_start_time;
-++EXTERN time_t process_start_time;
-+ 
-+-int modem_handle;               // Handle for modem.
-++EXTERN int modem_handle;               // Handle for modem.
-+ 
-+-int put_command_timeouts;
-+-unsigned long long put_command_sent; // 3.1.16beta.
-+-char tmpdir[PATH_MAX];          // 3.1.16beta.
-++EXTERN int put_command_timeouts;
-++EXTERN unsigned long long put_command_sent; // 3.1.16beta.
-++EXTERN char tmpdir[PATH_MAX];          // 3.1.16beta.
-+ 
-+ typedef struct
-+ {
-+@@ -284,204 +288,204 @@ typedef struct
-+ 
-+ // NOTE for regular run intervals: effective value is at least delaytime.
-+ 
-+-char configfile[PATH_MAX];	// Path to config file
-+-char d_spool[PATH_MAX];		// Spool directory
-+-char d_failed[PATH_MAX];	// Failed spool directory
-+-char d_failed_copy[PATH_MAX];	// 3.1.17.
-+-char d_incoming[PATH_MAX];	// Incoming spool directory
-+-char d_incoming_copy[PATH_MAX]; // 3.1.16beta2.
-+-char d_report[PATH_MAX];	// Incoming report spool directory
-+-char d_report_copy[PATH_MAX];	// 3.1.17.
-+-char d_phonecalls[PATH_MAX];    // Incoming phonecalls data directory
-+-char d_saved[PATH_MAX];         // Directory for smsd's internal use, concatenation storage files etc.
-+-char d_sent[PATH_MAX];		// Sent spool directory
-+-char d_sent_copy[PATH_MAX];	// 3.1.17.
-+-char d_checked[PATH_MAX];	// Spool directory for checked messages (only used when no provider queues used)
-+-char eventhandler[PATH_MAX];	// Global event handler program or script
-+-char alarmhandler[PATH_MAX];	// Global alarm handler program or script
-+-char checkhandler[PATH_MAX];    // Handler that checks if the sms file is valid.
-+-int alarmlevel;			// Alarm Level (9=highest). Verbosity of alarm handler.
-+-char logfile[PATH_MAX];		// Name or Handle of Log File
-+-int  loglevel;			// Log Level (9=highest). Verbosity of log file.
-+-_queue queues[NUMBER_OF_MODEMS]; // Queues
-+-_device devices[NUMBER_OF_MODEMS]; // Modem devices
-+-int delaytime;			// sleep-time after workless
-+-int delaytime_mainprocess;      // sleep-time after workless, main process. If -1, delaytime is used.
-+-int blocktime;			// sleep-time after multiple errors
-+-int blockafter;                 // Block modem after n errors
-+-int errorsleeptime;		// sleep-time after each error
-+-int autosplit;			// Splitting of large text messages 0=no, 1=yes 2=number with text, 3=number with UDH
-+-int receive_before_send;	// if 1 smsd tries to receive one message before sending
-+-int store_received_pdu;         // 0=no, 1=unsupported pdu's only, 2=unsupported and 8bit/unicode, 3=all
-+-int store_sent_pdu;             // 0=no, 1=failed pdu's only, 2=failed and 8bit/unicode, 3=all
-+-int validity_period;            // Validity period for messages.
-+-int decode_unicode_text;        // 1 if unicode text is decoded internally.
-+-int internal_combine;           // 1 if multipart message is combined internally.
-+-int internal_combine_binary;    // 1 if multipart binary message is combined internally. Defaults to internal_combine.
-+-int keep_filename;              // 0 if unique filename is created to each directory when a message file is moved.
-+-int store_original_filename;    // 1 if an original filename is saved to message file when it's moved from
-++EXTERN char configfile[PATH_MAX];	// Path to config file
-++EXTERN char d_spool[PATH_MAX];		// Spool directory
-++EXTERN char d_failed[PATH_MAX];	// Failed spool directory
-++EXTERN char d_failed_copy[PATH_MAX];	// 3.1.17.
-++EXTERN char d_incoming[PATH_MAX];	// Incoming spool directory
-++EXTERN char d_incoming_copy[PATH_MAX]; // 3.1.16beta2.
-++EXTERN char d_report[PATH_MAX];	// Incoming report spool directory
-++EXTERN char d_report_copy[PATH_MAX];	// 3.1.17.
-++EXTERN char d_phonecalls[PATH_MAX];    // Incoming phonecalls data directory
-++EXTERN char d_saved[PATH_MAX];         // Directory for smsd's internal use, concatenation storage files etc.
-++EXTERN char d_sent[PATH_MAX];		// Sent spool directory
-++EXTERN char d_sent_copy[PATH_MAX];	// 3.1.17.
-++EXTERN char d_checked[PATH_MAX];	// Spool directory for checked messages (only used when no provider queues used)
-++EXTERN char eventhandler[PATH_MAX];	// Global event handler program or script
-++EXTERN char alarmhandler[PATH_MAX];	// Global alarm handler program or script
-++EXTERN char checkhandler[PATH_MAX];    // Handler that checks if the sms file is valid.
-++EXTERN int alarmlevel;			// Alarm Level (9=highest). Verbosity of alarm handler.
-++EXTERN char logfile[PATH_MAX];		// Name or Handle of Log File
-++EXTERN int  loglevel;			// Log Level (9=highest). Verbosity of log file.
-++EXTERN _queue queues[NUMBER_OF_MODEMS]; // Queues
-++EXTERN _device devices[NUMBER_OF_MODEMS]; // Modem devices
-++EXTERN int delaytime;			// sleep-time after workless
-++EXTERN int delaytime_mainprocess;      // sleep-time after workless, main process. If -1, delaytime is used.
-++EXTERN int blocktime;			// sleep-time after multiple errors
-++EXTERN int blockafter;                 // Block modem after n errors
-++EXTERN int errorsleeptime;		// sleep-time after each error
-++EXTERN int autosplit;			// Splitting of large text messages 0=no, 1=yes 2=number with text, 3=number with UDH
-++EXTERN int receive_before_send;	// if 1 smsd tries to receive one message before sending
-++EXTERN int store_received_pdu;         // 0=no, 1=unsupported pdu's only, 2=unsupported and 8bit/unicode, 3=all
-++EXTERN int store_sent_pdu;             // 0=no, 1=failed pdu's only, 2=failed and 8bit/unicode, 3=all
-++EXTERN int validity_period;            // Validity period for messages.
-++EXTERN int decode_unicode_text;        // 1 if unicode text is decoded internally.
-++EXTERN int internal_combine;           // 1 if multipart message is combined internally.
-++EXTERN int internal_combine_binary;    // 1 if multipart binary message is combined internally. Defaults to internal_combine.
-++EXTERN int keep_filename;              // 0 if unique filename is created to each directory when a message file is moved.
-++EXTERN int store_original_filename;    // 1 if an original filename is saved to message file when it's moved from
-+                                 // outgoing directory to spooler. Works together with keep_filename.
-+-int date_filename;              // 1 or 2 if YYYYMMDD is included to the filename of incoming message.
-+-char regular_run[PATH_MAX];     // Script/program which is run regularly.
-+-int regular_run_interval;       // Number of seconds between running a regular_run script/progdam.
-+-char admin_to[SIZE_TO];         // Destination number for administrative messages.
-+-int filename_preview;           // Number of chars of message text to concatenate to filename.
-+-int incoming_utf8;              // 1 if incoming files are saved using UTF-8 character set.
-+-int outgoing_utf8;              // 1 if outgoing files are automatically converted from UTF-8 to ISO and GSM.
-+-int log_charconv;               // 1 if character set conversion is logged.
-+-int log_single_lines;           // 1 if linefeeds are removed from the modem response to be logged.
-+-int executable_check;           // 0 if eventhandler and other executables are NOT checked during the startup checking.
-+-int keep_messages;              // For testing purposes: messages are not deleted and smsd stops after first run.
-+-char priviledged_numbers[SIZE_PRIVILEDGED_NUMBERS]; // Priviledged numbers in incoming messages.
-+-int ic_purge_hours;             // If internal_combine is used, concatenation storage is checked every ic_purge_interval minutes
-+-int ic_purge_minutes;           // and if there is message parts older than defined, they are handled or deleted.
-+-int ic_purge_read;              // 1 = message parts are stored as single messages. 0 = parts are just deleted.
-+-int ic_purge_interval;          // 
-+-char shell[PATH_MAX];           // Shell used to run eventhandler, defaults to /bin/sh
-+-char adminmessage_device[32];   // Name of device used to send administrative messages of mainspooler.
-+-int smart_logging;              // 1 = if loglevel is less than 7, degug log is written is there has been any errors.
-+-int status_signal_quality;      // 1 = signal quality is written to status file.
-+-int status_include_counters;    // 1 = succeeded, failed and received counters are included in the status line.
-+-int status_include_uptime;      // 3.1.16beta: 1 = include started & uptime line in the status file.
-+-int hangup_incoming_call;       // 1 = if detected unexpected input contains RING and we want to end call.
-+-int max_continuous_sending;     // Defines when sending is breaked to do check/do other tasks. Time in minutes.
-+-int voicecall_hangup_ath;       // If ATH is used instead of AT+CHUP.
-++EXTERN int date_filename;              // 1 or 2 if YYYYMMDD is included to the filename of incoming message.
-++EXTERN char regular_run[PATH_MAX];     // Script/program which is run regularly.
-++EXTERN int regular_run_interval;       // Number of seconds between running a regular_run script/progdam.
-++EXTERN char admin_to[SIZE_TO];         // Destination number for administrative messages.
-++EXTERN int filename_preview;           // Number of chars of message text to concatenate to filename.
-++EXTERN int incoming_utf8;              // 1 if incoming files are saved using UTF-8 character set.
-++EXTERN int outgoing_utf8;              // 1 if outgoing files are automatically converted from UTF-8 to ISO and GSM.
-++EXTERN int log_charconv;               // 1 if character set conversion is logged.
-++EXTERN int log_single_lines;           // 1 if linefeeds are removed from the modem response to be logged.
-++EXTERN int executable_check;           // 0 if eventhandler and other executables are NOT checked during the startup checking.
-++EXTERN int keep_messages;              // For testing purposes: messages are not deleted and smsd stops after first run.
-++EXTERN char priviledged_numbers[SIZE_PRIVILEDGED_NUMBERS]; // Priviledged numbers in incoming messages.
-++EXTERN int ic_purge_hours;             // If internal_combine is used, concatenation storage is checked every ic_purge_interval minutes
-++EXTERN int ic_purge_minutes;           // and if there is message parts older than defined, they are handled or deleted.
-++EXTERN int ic_purge_read;              // 1 = message parts are stored as single messages. 0 = parts are just deleted.
-++EXTERN int ic_purge_interval;          // 
-++EXTERN char shell[PATH_MAX];           // Shell used to run eventhandler, defaults to /bin/sh
-++EXTERN char adminmessage_device[32];   // Name of device used to send administrative messages of mainspooler.
-++EXTERN int smart_logging;              // 1 = if loglevel is less than 7, degug log is written is there has been any errors.
-++EXTERN int status_signal_quality;      // 1 = signal quality is written to status file.
-++EXTERN int status_include_counters;    // 1 = succeeded, failed and received counters are included in the status line.
-++EXTERN int status_include_uptime;      // 3.1.16beta: 1 = include started & uptime line in the status file.
-++EXTERN int hangup_incoming_call;       // 1 = if detected unexpected input contains RING and we want to end call.
-++EXTERN int max_continuous_sending;     // Defines when sending is breaked to do check/do other tasks. Time in minutes.
-++EXTERN int voicecall_hangup_ath;       // If ATH is used instead of AT+CHUP.
-+ 
-+ // 3.1.5:
-+-int trust_outgoing;             // 1 = it's _sure_ that files are created by rename AND permissions are correct. Speeds up spooling.
-++EXTERN int trust_outgoing;             // 1 = it's _sure_ that files are created by rename AND permissions are correct. Speeds up spooling.
-+ 
-+ // 3.1.5:
-+-int ignore_outgoing_priority;   // 1 = Priority: high header is not checked. Speeds up spooling.
-++EXTERN int ignore_outgoing_priority;   // 1 = Priority: high header is not checked. Speeds up spooling.
-+ 
-+ // 3.1.7:
-+-int ignore_exec_output;         // 1 = stdout and stderr of eventhandlers is _not_ checked.
-++EXTERN int ignore_exec_output;         // 1 = stdout and stderr of eventhandlers is _not_ checked.
-+ 
-+ // 3.1.7:
-+-mode_t conf_umask;              // File mode creation mask for smsd and modem processes.
-++EXTERN mode_t conf_umask;              // File mode creation mask for smsd and modem processes.
-+ 
-+ // 3.1.7:
-+-int trim_text;                  // 1 = trailing whitespaces are removed from text:
-++EXTERN int trim_text;                  // 1 = trailing whitespaces are removed from text:
-+ 
-+ // 3.1.7:
-+-int use_linux_ps_trick;         // 1 = change argv[0] to "smsd: MAINPROCESS", "smsd: GSM1" etc.
-++EXTERN int use_linux_ps_trick;         // 1 = change argv[0] to "smsd: MAINPROCESS", "smsd: GSM1" etc.
-+ 
-+ // 3.1.7:
-+-int log_unmodified;
-++EXTERN int log_unmodified;
-+ 
-+ // 3.1.7:
-+-char suspend_filename[PATH_MAX];
-++EXTERN char suspend_filename[PATH_MAX];
-+ 
-+ // 3.1.9:
-+-int spool_directory_order;
-++EXTERN int spool_directory_order;
-+ 
-+ // 3.1.9: 1 if read_from_modem is logged.
-+-int log_read_from_modem;
-++EXTERN int log_read_from_modem;
-+ 
-+ // 3.1.16beta2: log_read_timing for performance tuning.
-+-int log_read_timing;
-++EXTERN int log_read_timing;
-+ 
-+ // 3.1.16beta:
-+-int log_response_time;
-++EXTERN int log_response_time;
-+ 
-+ // 3.1.16beta2:
-+-int default_alphabet;
-++EXTERN int default_alphabet;
-+ 
-+ // 3.1.17: Child process for the mainprocess:
-+-char mainprocess_child[PATH_MAX];
-+-char mainprocess_child_args[PATH_MAX];
-++EXTERN char mainprocess_child[PATH_MAX];
-++EXTERN char mainprocess_child_args[PATH_MAX];
-+ 
-+ // 3.1.17: Notifier for the mainprocess:
-+-int mainprocess_notifier;
-++EXTERN int mainprocess_notifier;
-+ 
-+ // 3.1.17: If *_copy was made, evenhandler can use it instead of original file:
-+-int eventhandler_use_copy;
-++EXTERN int eventhandler_use_copy;
-+ 
-+ // 3.1.17: This defines how long to sleep while looping:
-+-int sleeptime_mainprocess;
-++EXTERN int sleeptime_mainprocess;
-+ 
-+ // 3.1.17: Defines how often PID is checked to detect if another smsd is running:
-+-int check_pid_interval;
-++EXTERN int check_pid_interval;
-+ 
-+ // 3.1.18: start script/program for mainprocess:
-+-char mainprocess_start[PATH_MAX];
-+-char mainprocess_start_args[PATH_MAX];
-++EXTERN char mainprocess_start[PATH_MAX];
-++EXTERN char mainprocess_start_args[PATH_MAX];
-+ 
-+-int message_count;              // Counter for sent messages. Multipart message is one message.
-++EXTERN int message_count;              // Counter for sent messages. Multipart message is one message.
-+ 
-+-volatile sig_atomic_t break_workless_delay; // To break the delay when SIGCONT is received.
-+-volatile sig_atomic_t terminate; // To terminate when SIGTERM is received.
-++EXTERN volatile sig_atomic_t break_workless_delay; // To break the delay when SIGCONT is received.
-++EXTERN volatile sig_atomic_t terminate; // To terminate when SIGTERM is received.
-+ 
-+-char username[65];              // user and group name which are used to run.
-+-char groupname[65];             // (max length is just a guess)
-++EXTERN char username[65];              // user and group name which are used to run.
-++EXTERN char groupname[65];             // (max length is just a guess)
-+ 
-+-char infofile[PATH_MAX];        // Hepler file for stopping the smsd smoothly.
-+-char pidfile[PATH_MAX];         // File where a process id is stored.
-++EXTERN char infofile[PATH_MAX];        // Hepler file for stopping the smsd smoothly.
-++EXTERN char pidfile[PATH_MAX];         // File where a process id is stored.
-+ 
-+ // Command line arguments:
-+-char arg_username[65];
-+-char arg_groupname[65];
-+-char arg_infofile[PATH_MAX];
-+-char arg_pidfile[PATH_MAX];
-+-char arg_logfile[PATH_MAX];
-+-int arg_terminal;
-++EXTERN char arg_username[65];
-++EXTERN char arg_groupname[65];
-++EXTERN char arg_infofile[PATH_MAX];
-++EXTERN char arg_pidfile[PATH_MAX];
-++EXTERN char arg_logfile[PATH_MAX];
-++EXTERN int arg_terminal;
-+ // 3.1.7:
-+-char arg_7bit_packed[512];
-+-int do_encode_decode_arg_7bit_packed;
-++EXTERN char arg_7bit_packed[512];
-++EXTERN int do_encode_decode_arg_7bit_packed;
-+ 
-+-int terminal;                   // 1 if smsd is communicating with terminal.
-+-pid_t device_pids[NUMBER_OF_MODEMS]; // Pid's of modem processes.
-+-char run_info[PATH_MAX];        // Information about external script/program execution.
-++EXTERN int terminal;                   // 1 if smsd is communicating with terminal.
-++EXTERN pid_t device_pids[NUMBER_OF_MODEMS]; // Pid's of modem processes.
-++EXTERN char run_info[PATH_MAX];        // Information about external script/program execution.
-+ 
-+-char communicate[32];           // Device name for terminal communication mode.
-++EXTERN char communicate[32];           // Device name for terminal communication mode.
-+ 
-+-char international_prefixes[PATH_MAX +1];
-+-char national_prefixes[PATH_MAX +1];
-++EXTERN char international_prefixes[PATH_MAX +1];
-++EXTERN char national_prefixes[PATH_MAX +1];
-+ 
-+ // Storage for startup errors:
-+-char *startup_err_str;
-+-int startup_err_count;
-++EXTERN char *startup_err_str;
-++EXTERN int startup_err_count;
-+ 
-+ // Storage for PDU's:
-+-char *incoming_pdu_store;
-+-char *outgoing_pdu_store;
-+-char *routed_pdu_store;
-++EXTERN char *incoming_pdu_store;
-++EXTERN char *outgoing_pdu_store;
-++EXTERN char *routed_pdu_store;
-+ 
-+ // Storage for getfile errors:
-+-char *getfile_err_store;
-++EXTERN char *getfile_err_store;
-+ 
-+ // Text buffer for error messages:
-+-char tb[SIZE_TB];
-++EXTERN char tb[SIZE_TB];
-+ 
-+ // Buffer for SIM memory checking:
-+-char *check_memory_buffer;
-+-size_t check_memory_buffer_size;
-++EXTERN char *check_memory_buffer;
-++EXTERN size_t check_memory_buffer_size;
-+ 
-+-int os_cygwin;                  // 1 if we are on Cygwin.
-++EXTERN int os_cygwin;                  // 1 if we are on Cygwin.
-+ 
-+-char language_file[PATH_MAX];   // File name of translated headers.
-+-char yes_chars[SIZE_HEADER];    // Characters which mean "yes" in the yesno() question.
-+-char no_chars[SIZE_HEADER];     // See details inside read_translation() function.
-+-char yes_word[SIZE_HEADER];     // "yes" printed as an output.
-+-char no_word[SIZE_HEADER];      // "no"
-+-char datetime_format[SIZE_HEADER]; // strftime format string for time stamps (not inside status reports).
-+-char logtime_format[SIZE_HEADER]; // 3.1.7: strftime format string for logging time stamps
-+-char date_filename_format[SIZE_HEADER]; // 3.1.7: strftime format string for date_filename
-+-int translate_incoming;         // 0 if incoming message headers are NOT transtaled.
-++EXTERN char language_file[PATH_MAX];   // File name of translated headers.
-++EXTERN char yes_chars[SIZE_HEADER];    // Characters which mean "yes" in the yesno() question.
-++EXTERN char no_chars[SIZE_HEADER];     // See details inside read_translation() function.
-++EXTERN char yes_word[SIZE_HEADER];     // "yes" printed as an output.
-++EXTERN char no_word[SIZE_HEADER];      // "no"
-++EXTERN char datetime_format[SIZE_HEADER]; // strftime format string for time stamps (not inside status reports).
-++EXTERN char logtime_format[SIZE_HEADER]; // 3.1.7: strftime format string for logging time stamps
-++EXTERN char date_filename_format[SIZE_HEADER]; // 3.1.7: strftime format string for date_filename
-++EXTERN int translate_incoming;         // 0 if incoming message headers are NOT transtaled.
-+ 
-+ // 3.1.14:
-+-int logtime_us;
-+-int logtime_ms;
-++EXTERN int logtime_us;
-++EXTERN int logtime_ms;
-+ 
-+ // 3.1.14:
-+-int shell_test;
-++EXTERN int shell_test;
-+ 
-+ // Next two are for debugging purposes:
-+-int enable_smsd_debug;
-+-char smsd_debug[SIZE_SMSD_DEBUG]; // Header of an outgoing message file.
-++EXTERN int enable_smsd_debug;
-++EXTERN char smsd_debug[SIZE_SMSD_DEBUG]; // Header of an outgoing message file.
-+ 
-+ // 3.1.20: Alt keys in communication mode:
-+ #define COMMUNICATE_A_KEY_COUNT 10
-+-char communicate_a_keys[COMMUNICATE_A_KEY_COUNT][256];
-++EXTERN char communicate_a_keys[COMMUNICATE_A_KEY_COUNT][256];
-+ 
-+ /* initialize all variable with default values */
-+ 
-+diff --git a/src/stats.h b/src/stats.h
-+index bd5cdc9..a614af1 100755
-+--- a/src/stats.h
-++++ b/src/stats.h
-+@@ -33,17 +33,17 @@ typedef struct
-+   int ber;
-+ } _stats;
-+ 
-+-_stats* statistics[NUMBER_OF_MODEMS]; // Statistic data (shared memory!)
-+-int rejected_counter;		// Statistic counter, rejected SM, number does not fit into any queue
-+-time_t start_time;		// Start time of smsd, allows statistic functions
-+-int printstatus;		// if 1 smsd outputs status on stdout
-+-time_t last_stats;		// time when the last stats file was created
-+-char d_stats[PATH_MAX];		// path to statistic files
-+-int stats_interval;		// time between statistic files in seconds.
-+-int stats_no_zeroes;		// Suppress files that contain only zeroes
-+-int status_interval;            // time between updating status file in seconds
++ int             sfcBrokerPid = 0;
 +-
-+-char *shared_buffer;
-++EXTERN _stats* statistics[NUMBER_OF_MODEMS]; // Statistic data (shared memory!)
-++EXTERN int rejected_counter;		// Statistic counter, rejected SM, number does not fit into any queue
-++EXTERN time_t start_time;		// Start time of smsd, allows statistic functions
-++EXTERN int printstatus;		// if 1 smsd outputs status on stdout
-++EXTERN time_t last_stats;		// time when the last stats file was created
-++EXTERN char d_stats[PATH_MAX];		// path to statistic files
-++EXTERN int stats_interval;		// time between statistic files in seconds.
-++EXTERN int stats_no_zeroes;		// Suppress files that contain only zeroes
-++EXTERN int status_interval;            // time between updating status file in seconds
-++
-++EXTERN char *shared_buffer;
+++const char     *sfcBrokerStart;
++ extern int      sfcbUseSyslog;
 + 
-+ /* Creates shared memory variables for statistic data */
++ extern void     setExFlag(unsigned long f);
++diff --git a/trace.c b/trace.c
++index 438af46..23597e1 100644
++--- a/trace.c
+++++ b/trace.c
++@@ -52,6 +52,7 @@ char           *processName = NULL;
++ int             providerProcess = 0;
++ int             idleThreadId = 0;
++ int             terminating = 0;
+++int             colorTrace;
 + 
-+diff --git a/src/whitelist.c b/src/whitelist.c
-+index 4ee7a69..3d90bf4 100755
-+--- a/src/whitelist.c
-++++ b/src/whitelist.c
-+@@ -17,11 +17,11 @@ Either version 2 of the License, or (at your option) any later version.
-+ #include <stdlib.h>
-+ #include <string.h>
-+ #include <signal.h>
-++#include "smsd_cfg.h"
-+ #include "whitelist.h"
-+ #include "extras.h"
-+ #include "logging.h"
-+ #include "alarm.h"
-+-#include "smsd_cfg.h"
++ int             _sfcb_debug = 0;
++ unsigned long   _sfcb_trace_mask = 0;
++diff --git a/trace.h b/trace.h
++index 2c6d8be..ea39850 100644
++--- a/trace.h
+++++ b/trace.h
++@@ -130,7 +130,7 @@ typedef struct traceId {
++ #define CYAN            6
++ #define WHITE           7
++ void            changeTextColor(int reset);
++-int             colorTrace;
+++extern int      colorTrace;
 + 
-+ /* Used with >= 3.1x */
-+ int inwhitelist_q(char* msisdn, char *queuename)
-+diff --git a/src/whitelist.h b/src/whitelist.h
-+index 88aea86..3f904f4 100755
-+--- a/src/whitelist.h
-++++ b/src/whitelist.h
-+@@ -15,7 +15,7 @@ Either version 2 of the License, or (at your option) any later version.
-+ #ifndef WHITE_H
-+ #define WHITE_H
++ #define MAX_MSG_SIZE 1024       /* max length of trace message */
 + 
-+-char whitelist[256];	// Filename of the white-list
-++EXTERN char whitelist[256];	// Filename of the white-list
-+ 
-+ /* Used with >= 3.1x */
-+ int inwhitelist_q(char* msisdn, char *queuename);
 +-- 
 +2.28.0
 +
-diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.21.bb b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.21.bb
-index 6e6413b4bc..ca40957531 100644
---- a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.21.bb
-+++ b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.21.bb
-@@ -7,7 +7,9 @@ HOMEPAGE = "http://smstools3.kekekasvi.com"
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/0001-Replace-need-for-error.h-when-it-does-not-exist.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-Replace-need-for-error.h-when-it-does-not-exist.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/0001-Replace-need-for-error.h-when-it-does-not-exist.patch
+rename to meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-Replace-need-for-error.h-when-it-does-not-exist.patch
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/0001-include-stdint.h-system-header-for-UINT16_MAX.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-include-stdint.h-system-header-for-UINT16_MAX.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/0001-include-stdint.h-system-header-for-UINT16_MAX.patch
+rename to meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-include-stdint.h-system-header-for-UINT16_MAX.patch
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.3.15-fix-provider-debugging.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.3.15-fix-provider-debugging.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.3.15-fix-provider-debugging.patch
+rename to meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.3.15-fix-provider-debugging.patch
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.3.16-maxMsgLen.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.3.16-maxMsgLen.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.3.16-maxMsgLen.patch
+rename to meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.3.16-maxMsgLen.patch
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.3.16-multilib-man-cfg.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.3.16-multilib-man-cfg.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.3.16-multilib-man-cfg.patch
+rename to meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.3.16-multilib-man-cfg.patch
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch
+rename to meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.4.5-service.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.4.5-service.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.4.5-service.patch
+rename to meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.4.5-service.patch
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch
+rename to meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.4.9-fix-ftbfs.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.4.9-fix-ftbfs.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.4.9-fix-ftbfs.patch
+rename to meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.4.9-fix-ftbfs.patch
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.4.9-fix-sfcbinst2mof.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.4.9-fix-sfcbinst2mof.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.4.9-fix-sfcbinst2mof.patch
+rename to meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sblim-sfcb-1.4.9-fix-sfcbinst2mof.patch
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/files/sfcb.service b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sfcb.service
+similarity index 100%
+rename from meta-oe/recipes-extended/sblim-sfcb/files/sfcb.service
+rename to meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/sfcb.service
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
+index a527f773a6..3e4ed7c03c 100644
+--- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
++++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
+@@ -26,6 +26,7 @@ SRC_URI = "http://downloads.sourceforge.net/sblim/${BP}.tar.bz2 \
+            file://0001-include-stdint.h-system-header-for-UINT16_MAX.patch \
+            file://0001-Replace-need-for-error.h-when-it-does-not-exist.patch \
+            file://sblim-sfcb-1.4.9-fix-sfcbinst2mof.patch \
++           file://0001-Avoid-variable-definition-in-header-files.patch \
+ "
  
- SRC_URI = "http://smstools3.kekekasvi.com/packages/${BP}.tar.gz \
-            file://sms_binpath.patch \
--           file://scripts_no_bash.patch"
-+           file://scripts_no_bash.patch \
-+           file://0001-Make-extern-declarations-to-avoid-duplicate-var-defi.patch \
-+           "
- 
- SRC_URI[md5sum] = "6a9f038fb38a49cc3a4f8f14a88fb8af"
- SRC_URI[sha256sum] = "a26ba4c02b16f6cf13177bffca6c9230dc5fefaeba8e3030cd4e4905f6a92084"
+ SRC_URI[md5sum] = "28021cdabc73690a94f4f9d57254ce30"
 -- 
 2.28.0
 
