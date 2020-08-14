@@ -1,184 +1,127 @@
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com [209.85.215.195])
- by mx.groups.io with SMTP id smtpd.web10.12568.1597383430858078585
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.web11.12373.1597383432180987203
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2020 22:37:10 -0700
+ Thu, 13 Aug 2020 22:37:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=XDJJXO4W;
- spf=pass (domain: gmail.com, ip: 209.85.215.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f195.google.com with SMTP id p37so4002275pgl.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 22:37:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=AlYa5pwv;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f170.google.com with SMTP id f10so3672132plj.8
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 22:37:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=m0MB7UzNum5b01OZa+8c/EBt30kdKNXpS/MYEEfH2fM=;
-        b=XDJJXO4Wg04ByA/lmOvx2SZgKTvSeIupIrVFH+IU8/aJFN5CrgA+6br6W0gtB/IEPE
-         2kyhJ1PGv4ruS/uYGx08Te8OlNT3bnK3dprpTKDm8NyajjjbMYiGqwcMo3No9UiWNtMw
-         mgt4k9dBVffCgLWp01zQQ7TWnYbHVQ3pEJsX+solDhDXHWFRRZkiuzm2kNmXsrUhN8+R
-         spAfjoQc76y6I6TRRv/YG5slKjaRrHVP251rhYHAKHS+v8Ep0xZnqBBf2VBo1cG9f3m/
-         TrPZJuqcaFuUs2LPt/loZNHUz1pSqRyzyMYlFS404WM4wCy/LGR1oZxFkTrb3xgYTysK
-         3sTg==
+        bh=39CDMIrK/ELnnRR74cvKajtJsWOjQynbJyMf9tg9mjY=;
+        b=AlYa5pwvB3eWyXthSL6SOtHSRHJHRFyBRF2JGr345CStTxz2tB1/HkaEiF/jOMur3q
+         s7wCySjnZWwqk+T8EnYwjoniAwBSpUy2mSxOVYva47aM+3d2CJNy3wBqJWCac04jfcjI
+         rlJnlLbcbZEJW0Qty5XzqY7JL3ZZzYSYU074kozAjFo7pWgL0u74OxcClC6yIWP72hdB
+         b87lzA0cPH+ga8f6mTKGmvm7W3TDu3rb9/rbuyarhGyNu0HdsAnDxXLBWiVKzmXvhYZe
+         sXoLwTAwg9ioJfvIL//SmAwuwdNqne++hzZvHyd6pAbD0l525lKsOSKHdhkiBO4hWPW1
+         96+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=m0MB7UzNum5b01OZa+8c/EBt30kdKNXpS/MYEEfH2fM=;
-        b=qLO4mcAfltmnp0puDYotilD5MGKiTAbLtuScdcKbZZeMuDOYTX51IIWzvYbEfF8rKu
-         gKag+osecJGL/eS1RA0skauuC7zrsvIuikTo76rfBOQZVjQXqoylqOL80XhvvvKL8Tuq
-         vyjAqBYKgrcdrNoWSxUafBP3W7A6zMZYSxonqu2OObQ3DzqA/SLgv/wbYXJ2kQlfVNOd
-         gO34OYeRsaHYZ23X8QHma0wJ0X7zfCRX5YEsWhQXbDg+SYrE3uhe++Q/Pn8JMPz7v2FU
-         83bSykv/OZCW9PVzlXkqtQbXN8e5QyKNRBMW2FtLH56NegUhcxsBsf9DlhsZ1oR2B+tf
-         Jd3g==
-X-Gm-Message-State: AOAM531Fub95jI8Rt8eqNJCxTSnTWTfaSw8JPtUHxHET99PNGDEymuWd
-	pzTSAGm/bMVpQ0hx/e4/yLAGCM1/AdqpIw==
-X-Google-Smtp-Source: ABdhPJyxvcgIQ72hLbzMvx7qLED6aPERuj9JYdU3SVkj90XoGYn6Y0OQ3BvpkD0QMP4ChQLHY6fzSg==
-X-Received: by 2002:a63:ef46:: with SMTP id c6mr725948pgk.96.1597383429897;
-        Thu, 13 Aug 2020 22:37:09 -0700 (PDT)
+        bh=39CDMIrK/ELnnRR74cvKajtJsWOjQynbJyMf9tg9mjY=;
+        b=ReFM6iN1fhDkjEYzTbuWP9EZ/FH1iV8kcxtNQWho7kO2qA2IjOSAI/eKDvk9PbJuNL
+         23iwTJou9t6hd+XppWjYwQ/NbJJcGj3XQYlVY4q+5ceuOKB4AM+0iBcdl1hYH4dN7yRT
+         iI94eQYAA0ZTy1wHPWmJI7L1DJRP0grvDmN7kE9kTlIzOT23WfZmdgvskwlrdH7Tr4bW
+         yy9QpxJMhMktR1dUGZxDwyPXU0xq3jynFxacST5x9NXlwOhMwd9dPKBwIA77zjoiDBJe
+         pPvxF7u8fM84I8iNA+N+dgsTUL5Fd31Rp3Fgp+GAEMSRjiQMIiT5gSGbZXR9gCqzdL4f
+         JJcA==
+X-Gm-Message-State: AOAM530NjrTMD5PBe2OAYY77DwfqJRe/LnEKv3V8onhk9yJ308z5p0r0
+	cr5QrhpBK7WwWmXHB6GzRmeuqGisfmm5Lg==
+X-Google-Smtp-Source: ABdhPJzgXBU6cJ9Mj8VDYtepxVMpogVjrq7PAHI3LOCXHQBROwwOO7WbRW/8oO3Ofb3Btm76QEqFjw==
+X-Received: by 2002:a17:90b:470f:: with SMTP id jc15mr978139pjb.166.1597383431202;
+        Thu, 13 Aug 2020 22:37:11 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id k21sm7013974pgl.0.2020.08.13.22.37.08
+        by smtp.gmail.com with ESMTPSA id k21sm7013974pgl.0.2020.08.13.22.37.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2020 22:37:09 -0700 (PDT)
+        Thu, 13 Aug 2020 22:37:10 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 11/21] mg: Upgrade to 20200723 tag
-Date: Thu, 13 Aug 2020 22:36:47 -0700
-Message-Id: <20200814053657.1701247-11-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 12/21] libforms: Fix build with -fno-common
+Date: Thu, 13 Aug 2020 22:36:48 -0700
+Message-Id: <20200814053657.1701247-12-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200814053657.1701247-1-raj.khem@gmail.com>
 References: <20200814053657.1701247-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Fixes build with gcc10
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ndefine-REGEX-for-musl-based-systems.patch | 19 ++++++-------------
- ...io-Include-sys-param.h-for-MAXNAMLEN.patch |  5 -----
- ...e-DEFFILEMODE-if-platform-is-missing.patch | 11 +++--------
- .../mg/{mg_20170401.bb => mg_20200723.bb}     |  7 ++++---
- 4 files changed, 13 insertions(+), 29 deletions(-)
- rename meta-oe/recipes-support/mg/{mg_20170401.bb => mg_20200723.bb} (82%)
+ ...e-extern-declarations-in-header-file.patch | 46 +++++++++++++++++++
+ .../libforms/libforms_1.2.3.bb                |  1 +
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/libforms/files/0001-Make-extern-declarations-in-header-file.patch
 
-diff --git a/meta-oe/recipes-support/mg/mg/0001-Undefine-REGEX-for-musl-based-systems.patch b/meta-oe/recipes-support/mg/mg/0001-Undefine-REGEX-for-musl-based-systems.patch
-index 1302679315..9c154a1734 100644
---- a/meta-oe/recipes-support/mg/mg/0001-Undefine-REGEX-for-musl-based-systems.patch
-+++ b/meta-oe/recipes-support/mg/mg/0001-Undefine-REGEX-for-musl-based-systems.patch
-@@ -9,31 +9,24 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  Makefile    | 2 +-
-  2 files changed, 1 insertion(+), 2 deletions(-)
- 
--diff --git a/GNUmakefile b/GNUmakefile
--index 7bf7dca..0e10030 100644
- --- a/GNUmakefile
- +++ b/GNUmakefile
--@@ -41,7 +41,6 @@ endif
-+@@ -45,7 +45,6 @@ endif
-  CC?=		gcc
-  CFLAGS?=	-O2 -pipe
-  CFLAGS+=	-g -Wall
- -CPPFLAGS=	-DREGEX
-  CPPFLAGS+=	-D_GNU_SOURCE
-- CPPFLAGS+=	$(BSD_CPPFLAGS) -D__dead=__dead2
-+ CPPFLAGS+=	$(BSD_CPPFLAGS)
-  LIBS=		$(CURSES_LIBS) $(BSD_LIBS)
--diff --git a/Makefile b/Makefile
--index 94ce340..d516bbc 100644
- --- a/Makefile
- +++ b/Makefile
--@@ -10,7 +10,7 @@ DPADD+=	${LIBCURSES} ${LIBUTIL}
-- #	REGEX		-- create regular expression functions.
-+@@ -11,7 +11,7 @@ DPADD+=	${LIBUTIL}
-  #	STARTUPFILE	-- look for and handle initialization file.
-+ #	MGLOG		-- debug mg internals to a log file.
-  #
---CFLAGS+=-Wall -DREGEX
--+CFLAGS+=-Wall
-+-CFLAGS+=-Wall -DREGEX `pkg-config --cflags-only-I ncurses`
-++CFLAGS+=-Wall `pkg-config --cflags-only-I ncurses`
-  
-  SRCS=	autoexec.c basic.c bell.c buffer.c cinfo.c dir.c display.c \
-  	echo.c extend.c file.c fileio.c funmap.c help.c kbd.c keymap.c \
---- 
--2.12.2
--
-diff --git a/meta-oe/recipes-support/mg/mg/0001-fileio-Include-sys-param.h-for-MAXNAMLEN.patch b/meta-oe/recipes-support/mg/mg/0001-fileio-Include-sys-param.h-for-MAXNAMLEN.patch
-index 551f1df163..8e8c2b9025 100644
---- a/meta-oe/recipes-support/mg/mg/0001-fileio-Include-sys-param.h-for-MAXNAMLEN.patch
-+++ b/meta-oe/recipes-support/mg/mg/0001-fileio-Include-sys-param.h-for-MAXNAMLEN.patch
-@@ -8,8 +8,6 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  fileio.c | 1 +
-  1 file changed, 1 insertion(+)
- 
--diff --git a/fileio.c b/fileio.c
--index 48a67a2..9b69665 100644
- --- a/fileio.c
- +++ b/fileio.c
- @@ -12,6 +12,7 @@
-@@ -20,6 +18,3 @@ index 48a67a2..9b69665 100644
-  #include <dirent.h>
-  #include <errno.h>
-  #include <fcntl.h>
---- 
--2.12.2
--
-diff --git a/meta-oe/recipes-support/mg/mg/0002-fileio-Define-DEFFILEMODE-if-platform-is-missing.patch b/meta-oe/recipes-support/mg/mg/0002-fileio-Define-DEFFILEMODE-if-platform-is-missing.patch
-index 907d67064a..bdd7632be6 100644
---- a/meta-oe/recipes-support/mg/mg/0002-fileio-Define-DEFFILEMODE-if-platform-is-missing.patch
-+++ b/meta-oe/recipes-support/mg/mg/0002-fileio-Define-DEFFILEMODE-if-platform-is-missing.patch
-@@ -8,13 +8,11 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  fileio.c | 4 ++++
-  1 file changed, 4 insertions(+)
- 
--diff --git a/fileio.c b/fileio.c
--index 9b69665..a852fd2 100644
- --- a/fileio.c
- +++ b/fileio.c
--@@ -28,6 +28,10 @@
-- #include "kbd.h"
-- #include "pathnames.h"
-+@@ -36,6 +36,10 @@
-+ #define DEFFILEMODE 0666
-+ #endif
-  
- +#if !defined(DEFFILEMODE)
- +# define DEFFILEMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH)/* 0666*/
-@@ -23,6 +21,3 @@ index 9b69665..a852fd2 100644
-  static char *bkuplocation(const char *);
-  static int   bkupleavetmp(const char *);
-  
---- 
--2.12.2
--
-diff --git a/meta-oe/recipes-support/mg/mg_20170401.bb b/meta-oe/recipes-support/mg/mg_20200723.bb
-similarity index 82%
-rename from meta-oe/recipes-support/mg/mg_20170401.bb
-rename to meta-oe/recipes-support/mg/mg_20200723.bb
-index dad1d008bf..b73f937565 100644
---- a/meta-oe/recipes-support/mg/mg_20170401.bb
-+++ b/meta-oe/recipes-support/mg/mg_20200723.bb
-@@ -5,15 +5,16 @@ LIC_FILES_CHKSUM = "file://version.c;md5=1895eb37bf6bd79cdc5c89d8166fabfb"
- DEPENDS = "ncurses libbsd"
- SECTION = "console/editors"
- 
--SRC_URI = "http://homepage.boetes.org/software/mg/mg-${PV}.tar.gz \
-+SRCREV = "60fa3582f5f735b9d43825f5bdcc4ea5f0740f91"
-+SRC_URI = "git://github.com/hboetes/mg \
-            file://0001-fileio-Include-sys-param.h-for-MAXNAMLEN.patch \
-            file://0002-fileio-Define-DEFFILEMODE-if-platform-is-missing.patch \
-            "
- SRC_URI_append_libc-musl = "\
-            file://0001-Undefine-REGEX-for-musl-based-systems.patch \
-            "
--SRC_URI[md5sum] = "884388589fb38c2109ad9fed328be20a"
--SRC_URI[sha256sum] = "0a3608b17c153960cb1d954ca3b62445a77c0c1a18aa5c8c58aba9f6b8d62aab"
+diff --git a/meta-oe/recipes-graphics/libforms/files/0001-Make-extern-declarations-in-header-file.patch b/meta-oe/recipes-graphics/libforms/files/0001-Make-extern-declarations-in-header-file.patch
+new file mode 100644
+index 0000000000..619bad6d02
+--- /dev/null
++++ b/meta-oe/recipes-graphics/libforms/files/0001-Make-extern-declarations-in-header-file.patch
+@@ -0,0 +1,46 @@
++From a57c498f6c25aa297e49533c242525f2b9da7048 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 13 Aug 2020 18:20:42 -0700
++Subject: [PATCH] Make extern declarations in header file
 +
-+S = "${WORKDIR}/git"
++curobj is a static object in other places as well.
++Fixes build with gcc10/-fno-common
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ fdesign/sp_spinner.c | 2 +-
++ lib/flinternal.h     | 4 ++--
++ 2 files changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/fdesign/sp_spinner.c b/fdesign/sp_spinner.c
++index 04f2c19..6206daa 100644
++--- a/fdesign/sp_spinner.c
+++++ b/fdesign/sp_spinner.c
++@@ -29,7 +29,7 @@
++ #include "spec/spinner_spec.h"
++ 
++ static FD_spinnerattrib * spn_attrib;
++-FL_OBJECT *curobj;
+++static FL_OBJECT *curobj;
++ 
++ 
++ /***************************************
++diff --git a/lib/flinternal.h b/lib/flinternal.h
++index 06d847e..577bd10 100644
++--- a/lib/flinternal.h
+++++ b/lib/flinternal.h
++@@ -138,8 +138,8 @@ enum {
++ 
++ /* events.c or event related */
++ 
++-FL_OBJECT * fli_handled_obj;
++-FL_OBJECT * fli_handled_parent;
+++extern FL_OBJECT * fli_handled_obj;
+++extern FL_OBJECT * fli_handled_parent;
++ 
++ void fli_obj_queue_delete( void );
++ 
++-- 
++2.28.0
++
+diff --git a/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb b/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
+index 999d53d4a9..35029f5176 100644
+--- a/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
++++ b/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
+@@ -9,6 +9,7 @@ SRC_URI = "http://download.savannah.nongnu.org/releases/xforms/xforms-${PV}.tar.
+            file://fix-link-to-xforms-man.patch \
+            file://add-absolute-path-for-include-dir.patch \
+            file://fix-path-fdesign_LDADD.patch \
++           file://0001-Make-extern-declarations-in-header-file.patch \
+           "
  
- # CFLAGS isn't in EXTRA_OEMAKE, as the makefile picks it up via ?=
- EXTRA_OEMAKE = "\
+ SRC_URI[md5sum] = "235720a758a8b8d9e6e452dc67190e9b"
 -- 
 2.28.0
 
