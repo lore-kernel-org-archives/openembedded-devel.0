@@ -1,232 +1,122 @@
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com [209.85.210.194])
- by mx.groups.io with SMTP id smtpd.web12.12371.1597383423354195690
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web12.12372.1597383423910756467
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2020 22:37:03 -0700
+ Thu, 13 Aug 2020 22:37:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gcENv1Oa;
- spf=pass (domain: gmail.com, ip: 209.85.210.194, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f194.google.com with SMTP id f193so4005118pfa.12
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=QnSIt+za;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id y206so4000178pfb.10
         for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 22:37:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=aJCdLhW7XOAN/hXTbPnlVy8LiYQ/kBv50BF3b7CZ1rA=;
-        b=gcENv1Oa9NKl9SOauKfsezmzTbJIc9myCp6GBd7xVvvhNljesL7sC517MTIrTkAbph
-         amwvpJ7q62tok2BtDYvnauo3CvtyTuuUqVtES2s7jdVPUN2rq+4qMrtVxX461ew+uJfQ
-         xz+gYmV1M/HXe508m75cqYUntvwjFXB1qWekCQV689kIjoDXcxkaSHqOgEu9u63weBTb
-         QEoAF8Xl5EuUHHA7UYd6IG0Wm6eWkSwvYRVrdVzCOGkNXhGWtGqatbfN/ODHledPEKVJ
-         rdl1gkFQdLr9Z+YyUGRG/UgOpVL9npPrBMKs1rtfzvF1pnJz1/iK3t4blR8eR2Zql5rb
-         Pn3g==
+        bh=IksqAyTJTdhnwvhfN4ezWBs4+/b6yARk4lO7L+umfEw=;
+        b=QnSIt+zaQp52l4Qdp1Wz+YL6UM79nkJVGnluYuIADAmDzsod0cK9ulC35O0bSSpfzm
+         R5YXhHnKky2RvaDjAJsCWvR21lZHomn1dB0Zv2OG/fOVUWUpR6AyY1FZIrEo9kXX5Ary
+         eEy7nzrudr2Zq+HUW2AfK2kKgkXqCFNkjQNLjE6lIAkwSe2iFKhEMZ0FEsvgoIRZg59d
+         BMw6LtT/wEN+6PPE6UJ4fPTo6u8kH/GFkR2707bWss9P/YVgJCxWMdLOh60U4hcK5USa
+         rYiqKkxN8F4YA15JSRoz55mMnp7Iy+vwEgV3RuQh6W8g+6wgv8GY+iSBG2VQCx+pUFdd
+         ZBEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=aJCdLhW7XOAN/hXTbPnlVy8LiYQ/kBv50BF3b7CZ1rA=;
-        b=GJzl7RpIhvc3jFuW1GzUkJj5tGya3IzTgPIkyxgUuPVOyZo8nGQAPhrx86qGuAjD8p
-         ZUfx2Yk3LCXNJTZ3xWAPSY2UYkXOzY2YtbIbMbzIJkj/RUq5O2pBKfSD1QJwVr2vHWYj
-         GjzNJyu12gfYLK7SJuHTB+h0LON2zoLE46p/VfsPvsttcchnbgbNHZlJGSiNS/whqwbu
-         sNGB3tpJrG5VDEFrKMxLKF0KgjYdGsa1QWrEmOewbSpXFTA5yMAyR6Nlt/NWOQU2liBV
-         2lnlt4xpaTy3l72t4BKDYhELRi84ud4Ac9HhsT3tKjNgLTPKbcRlLqrhHiB5/ZiO0TPB
-         oJOA==
-X-Gm-Message-State: AOAM531KTZ8vDft0lXlfst79ZggpXyHq5Ic7Z42sIkJmntqQ42xetGwm
-	2v3FHMxlPZSJcNiMMsBZXKy6SStjHvVgRQ==
-X-Google-Smtp-Source: ABdhPJw2vITLDXWJEPkiIgxNtSNAFr+WvK+OOku/4LFDImenVdZB6x6xiUYslGkzH1kUXrFPKIrAgQ==
-X-Received: by 2002:a62:8001:: with SMTP id j1mr681346pfd.45.1597383422257;
-        Thu, 13 Aug 2020 22:37:02 -0700 (PDT)
+        bh=IksqAyTJTdhnwvhfN4ezWBs4+/b6yARk4lO7L+umfEw=;
+        b=nk1+EcN26NwWTqdPnhyuxzcucdnNXnH0qjTAXAKiuXylNCK7dtUCwDK9uxersOqnHw
+         6qIWlzIHge3uswiOQUsiQVwE8GYKaJvEZGpjysjutcyvFJZpNbKfVcVHo82K8wLetTfJ
+         avUp0Kq+f1nVEiVHCo5N1rvE/jgN8tbqMkcR65ln0GMghS6mkvBucEZmhN6Rs1I/V/HY
+         oPZ7B+VG6YI7vXaGIsufabsQJcUYvmCm+kcd7lW9QCsxtZ8ahE05uqHMqETxj0rpSNaB
+         zLdMveVPO9cpyeM1vH3BhqUoahVvQ0rWzVO9oPOWeHGXdaH9eRJ0k1buCTUg5pvTZ5US
+         lgFA==
+X-Gm-Message-State: AOAM532qScqENEHKoL3MRKqa2Z7WsyTTCjh7SqlKd3krHO1ony6e/TXI
+	RoOEuyVjGjeyrbS54NMOTyyv9LN3b29JOA==
+X-Google-Smtp-Source: ABdhPJy3FQzSskBKcaCEdvoTT6C35EF9lfkKTJvdJZwHtcpV0wblactRFyCu0brP1V48YJJ94MJTWg==
+X-Received: by 2002:a62:1614:: with SMTP id 20mr675074pfw.258.1597383423066;
+        Thu, 13 Aug 2020 22:37:03 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id k21sm7013974pgl.0.2020.08.13.22.37.01
+        by smtp.gmail.com with ESMTPSA id k21sm7013974pgl.0.2020.08.13.22.37.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2020 22:37:01 -0700 (PDT)
+        Thu, 13 Aug 2020 22:37:02 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 04/21] fbida: Upgrade to 2.14
-Date: Thu, 13 Aug 2020 22:36:40 -0700
-Message-Id: <20200814053657.1701247-4-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 05/21] ipmitool: Fix build with -fno-common
+Date: Thu, 13 Aug 2020 22:36:41 -0700
+Message-Id: <20200814053657.1701247-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200814053657.1701247-1-raj.khem@gmail.com>
 References: <20200814053657.1701247-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-* Redo libjpeg detection to use cross cpp
-* Add missing dependencies
-* Use cairo only when it is compiled with EGL support which is not defaul
-  in oe-core
-* Fix build  with gcc10
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../fbida/{fbida_2.10.bb => fbida_2.14.bb}    | 16 ++---
- .../fbida/files/cairo-weak-detect.patch       | 17 ++++++
- .../fbida/files/fbida-gcc10.patch             | 61 +++++++++++++++++++
- .../fbida/files/fix-preprocessor.patch        | 20 ++----
- 4 files changed, 93 insertions(+), 21 deletions(-)
- rename meta-oe/recipes-graphics/fbida/{fbida_2.10.bb => fbida_2.14.bb} (80%)
- create mode 100644 meta-oe/recipes-graphics/fbida/files/cairo-weak-detect.patch
- create mode 100644 meta-oe/recipes-graphics/fbida/files/fbida-gcc10.patch
+ ...-move-variable-definition-to-.c-file.patch | 41 +++++++++++++++++++
+ .../ipmitool/ipmitool_1.8.18.bb               |  1 +
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0001-hpmfwupg-move-variable-definition-to-.c-file.patch
 
-diff --git a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb b/meta-oe/recipes-graphics/fbida/fbida_2.14.bb
-similarity index 80%
-rename from meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-rename to meta-oe/recipes-graphics/fbida/fbida_2.14.bb
-index 0bf48ace6b..29d0f64ac2 100644
---- a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-+++ b/meta-oe/recipes-graphics/fbida/fbida_2.14.bb
-@@ -6,20 +6,18 @@ AUTHOR = "Gerd Hoffmann"
- SECTION = "utils"
- 
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=e8feb78a32950a909621bbb51f634b39"
- 
--DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif"
-+DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif libdrm pixman poppler libepoxy cairo"
- 
- SRC_URI = "https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz \
- 	   file://0001-Avoid-using-host-path.patch \
- 	   file://fix-preprocessor.patch \
-            file://support-jpeg-turbo.patch \
--           file://use-jpeg-turbo.patch \
-+           file://cairo-weak-detect.patch \
-+           file://fbida-gcc10.patch \
- 	   "
--SRC_URI[md5sum] = "09460b964b58c2e39b665498eca29018"
--SRC_URI[sha256sum] = "7a5a3aac61b40a6a2bbf716d270a46e2f8e8d5c97e314e927d41398a4d0b6cb6"
--
--B = "${WORKDIR}/build"
-+SRC_URI[sha256sum] = "95b7c01556cb6ef9819f358b314ddfeb8a4cbe862b521a3ed62f03d163154438"
- 
- inherit pkgconfig
- 
-@@ -33,6 +31,10 @@ PACKAGECONFIG[tiff] = ",,tiff"
- PACKAGECONFIG[motif] = ",,libx11 libxext libxpm libxt openmotif"
- PACKAGECONFIG[webp] = ",,libwebp"
- PACKAGECONFIG[lirc] = ",,lirc"
-+# This can only be enabled when cairo has egl enabled in its packageconfig support too
-+PACKAGECONFIG[egl] = ",,"
-+
-+EXTRA_OEMAKE += ""${@bb.utils.contains('PACKAGECONFIG', 'egl', 'HAVE_CAIRO_GL=yes', 'HAVE_CAIRO_GL=no', d)}""
- 
- do_compile() {
-     sed -i -e 's# fbgs# \$(srcdir)/fbgs#; s#-Ijpeg#-I\$(srcdir)/jpeg#; s# jpeg/# \$(srcdir)/jpeg/#' ${S}/GNUmakefile
-diff --git a/meta-oe/recipes-graphics/fbida/files/cairo-weak-detect.patch b/meta-oe/recipes-graphics/fbida/files/cairo-weak-detect.patch
+diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-hpmfwupg-move-variable-definition-to-.c-file.patch b/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-hpmfwupg-move-variable-definition-to-.c-file.patch
 new file mode 100644
-index 0000000000..c7c579cc41
+index 0000000000..a765c3ab2f
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/fbida/files/cairo-weak-detect.patch
-@@ -0,0 +1,17 @@
-+OE configures cairo to disable EGL support, however fbida expects cairo with egl support
-+this patch therefore makes it possible to set HAVE_CAIRO_GL via recipe
-+
-+Upstream-Status: Inappropriate [OE-Specific]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+--- a/GNUmakefile
-++++ b/GNUmakefile
-+@@ -67,7 +67,7 @@ define make-config
-+ LIB		:= $(LIB)
-+ RESDIR		:= $(call ac_resdir)
-+ HAVE_LINUX_FB_H	:= $(call ac_header,linux/fb.h)
-+-HAVE_CAIRO_GL	:= $(call ac_pkg_config,cairo-gl)
-++HAVE_CAIRO_GL	?= $(call ac_pkg_config,cairo-gl)
-+ HAVE_LIBPCD	:= $(call ac_lib,pcd_open,pcd)
-+ HAVE_LIBGIF	:= $(call ac_lib,DGifOpenFileName,gif)
-+ HAVE_LIBWEBP	:= $(call ac_pkg_config,libwebp)
-diff --git a/meta-oe/recipes-graphics/fbida/files/fbida-gcc10.patch b/meta-oe/recipes-graphics/fbida/files/fbida-gcc10.patch
-new file mode 100644
-index 0000000000..1104289f3c
---- /dev/null
-+++ b/meta-oe/recipes-graphics/fbida/files/fbida-gcc10.patch
-@@ -0,0 +1,61 @@
-+Fix build with gcc10
-+
-+Patch from https://src.fedoraproject.org/rpms/fbida/raw/master/f/fbida.gcc10.patch
++++ b/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-hpmfwupg-move-variable-definition-to-.c-file.patch
+@@ -0,0 +1,41 @@
++From 3f7bb7218181745ca7762c1b4832cbb1c9e692f5 Mon Sep 17 00:00:00 2001
++From: Vaclav Dolezal <vdolezal@redhat.com>
++Date: Thu, 23 Jan 2020 11:26:32 +0100
++Subject: [PATCH] hpmfwupg: move variable definition to .c file
 +
 +Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Vaclav Dolezal <vdolezal@redhat.com>
++---
++ include/ipmitool/ipmi_hpmfwupg.h | 2 +-
++ lib/ipmi_hpmfwupg.c              | 2 ++
++ 2 files changed, 3 insertions(+), 1 deletion(-)
 +
-+--- fbida-2.14/fbi.c.org	2020-03-15 17:02:17.944189632 +0100
-++++ fbida-2.14/fbi.c	2020-03-15 17:02:21.880223224 +0100
-+@@ -100,7 +100,6 @@
++diff --git a/include/ipmitool/ipmi_hpmfwupg.h b/include/ipmitool/ipmi_hpmfwupg.h
++index de65292..07f597b 100644
++--- a/include/ipmitool/ipmi_hpmfwupg.h
+++++ b/include/ipmitool/ipmi_hpmfwupg.h
++@@ -800,7 +800,7 @@ typedef struct _VERSIONINFO {
++ 	char descString[HPMFWUPG_DESC_STRING_LENGTH + 1];
++ }VERSIONINFO, *PVERSIONINFO;
 + 
-+ /* graphics interface */
-+ gfxstate                   *gfx;
-+-int                        debug;
++-VERSIONINFO gVersionInfo[HPMFWUPG_COMPONENT_ID_MAX];
+++extern VERSIONINFO gVersionInfo[HPMFWUPG_COMPONENT_ID_MAX];
 + 
-+ /* framebuffer */
-+ char                       *fbdev = NULL;
-+--- fbida-2.14/filter.c	2020-03-15 16:44:17.159855150 +0100
-++++ fbida-2.14/filter.c	2020-03-15 16:44:27.017941447 +0100
-+@@ -6,8 +6,6 @@
-+ #include "readers.h"
-+ #include "filter.h"
++ #define TARGET_VER (0x01)
++ #define ROLLBACK_VER (0x02)
++diff --git a/lib/ipmi_hpmfwupg.c b/lib/ipmi_hpmfwupg.c
++index bbcffc0..d7cdcd6 100644
++--- a/lib/ipmi_hpmfwupg.c
+++++ b/lib/ipmi_hpmfwupg.c
++@@ -58,6 +58,8 @@ ipmi_intf_get_max_request_data_size(struct ipmi_intf * intf);
 + 
-+-int debug = 0;
-+-
-+ /* ----------------------------------------------------------------------- */
++ extern int verbose;
 + 
-+ static void
-+--- fbida-2.14/readers.c.org	2020-03-15 17:01:18.692683597 +0100
-++++ fbida-2.14/readers.c	2020-03-15 16:57:19.141632384 +0100
-+@@ -6,6 +6,8 @@
-+ 
-+ #include "readers.h"
-+ 
-++int debug=0;
+++VERSIONINFO gVersionInfo[HPMFWUPG_COMPONENT_ID_MAX];
 ++
-+ /* ----------------------------------------------------------------------- */
-+ 
-+ void load_bits_lsb(unsigned char *dst, unsigned char *src, int width,
++ int HpmfwupgUpgrade(struct ipmi_intf *intf, char *imageFilename,
++ 		int activate, int, int);
++ int HpmfwupgValidateImageIntegrity(struct HpmfwupgUpgradeCtx *pFwupgCtx);
++-- 
++2.28.0
 +
-+--- fbida-2.14/viewer.c.org	2020-03-15 17:05:02.991595832 +0100
-++++ fbida-2.14/viewer.c	2020-03-15 17:04:55.424531467 +0100
-+@@ -40,7 +40,6 @@
-+ #define PROCESS_LINES    16
-+ 
-+-int debug;
-+ Cursor ptrs[POINTER_COUNT];
-+ 
-+ /* ----------------------------------------------------------------------- */
-+ 
-+--- fbida-2.14/idaconfig.h.org	2020-03-15 17:07:09.239668196 +0100
-++++ fbida-2.14/idaconfig.h	2020-03-15 17:07:21.248770061 +0100
-+@@ -17,7 +17,7 @@
-+ 
-+ /* -------------------------------------------------------------------------- */
-+ 
-+-char *ida_lists;
-++extern char *ida_lists;
-+ 
-+ void ida_init_config(void);
-+ void ida_read_config(void);
-diff --git a/meta-oe/recipes-graphics/fbida/files/fix-preprocessor.patch b/meta-oe/recipes-graphics/fbida/files/fix-preprocessor.patch
-index 909a0a6c0f..cdeac996a1 100644
---- a/meta-oe/recipes-graphics/fbida/files/fix-preprocessor.patch
-+++ b/meta-oe/recipes-graphics/fbida/files/fix-preprocessor.patch
-@@ -1,14 +1,6 @@
--Index: fbida-2.13/GNUmakefile
--===================================================================
----- fbida-2.13.orig/GNUmakefile
--+++ fbida-2.13/GNUmakefile
--@@ -53,8 +53,7 @@ include $(srcdir)/mk/Autoconf.mk
-- 
-- ac_jpeg_ver = $(shell \
-- 	$(call ac_init,for libjpeg version);\
---	$(call ac_s_cmd,echo JPEG_LIB_VERSION \
---		| cpp -include jpeglib.h | tail -n 1);\
--+	$(call ac_s_cmd,cpp -include jpeglib.h -dM -E -x c /dev/null  | grep 'define JPEG_LIB_VERSION' | cut -f 3 -d' ');\
-- 	$(call ac_fini))
-- 
-- define make-config
-+--- a/scripts/jpeg-version.sh
-++++ b/scripts/jpeg-version.sh
-+@@ -1,2 +1,2 @@
-+ #!/bin/sh
-+-echo JPEG_LIB_VERSION | cpp $CFLAGS -include jpeglib.h | tail -1
-++${CPP} -include jpeglib.h -dM -E -x c /dev/null | grep 'define JPEG_LIB_VERSION' | cut -f 3 -d' '
+diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
+index 3de9a92a71..e3c74a5162 100644
+--- a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
++++ b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
+@@ -30,6 +30,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/ipmitool/ipmitool-${PV}.tar.bz2 \
+            file://0003-channel-Fix-buffer-overflow.patch \
+            file://0004-lanp-Fix-buffer-overflows-in-get_lan_param_select.patch \
+            file://0005-fru-sdr-Fix-id_string-buffer-overflows.patch \
++           file://0001-hpmfwupg-move-variable-definition-to-.c-file.patch \
+            "
+ SRC_URI[md5sum] = "bab7ea104c7b85529c3ef65c54427aa3"
+ SRC_URI[sha256sum] = "0c1ba3b1555edefb7c32ae8cd6a3e04322056bc087918f07189eeedfc8b81e01"
 -- 
 2.28.0
 
