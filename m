@@ -1,90 +1,127 @@
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
- by mx.groups.io with SMTP id smtpd.web12.11587.1597378321048297691
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
+ by mx.groups.io with SMTP id smtpd.web11.11668.1597378909892834936
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2020 21:12:01 -0700
+ Thu, 13 Aug 2020 21:21:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: intel.com, ip: 134.134.136.24, mailfrom: anuj.mittal@intel.com)
-IronPort-SDR: Ji5Wjr09TPvq1qNmQCkxJrR/NFv2VHR98i4lZykpWPLbqNOLPKOhN/m027EnRTs2kSxTo9Ukso
- yZ8nx/jyFIvQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9712"; a="155467253"
-X-IronPort-AV: E=Sophos;i="5.76,310,1592895600"; 
-   d="scan'208";a="155467253"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Aug 2020 21:12:00 -0700
-IronPort-SDR: LBSq3XdgZyFV6wXlcRqcHYGoMDJDoPsUK30hjNofjRRUbkJlAtoFtAq11VBvTxnrWAKsXbeGij
- cJBa/ns7YJ8Q==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.76,310,1592895600"; 
-   d="scan'208";a="325611472"
-Received: from pgsmsx603.gar.corp.intel.com ([10.108.199.138])
-  by orsmga008.jf.intel.com with ESMTP; 13 Aug 2020 21:11:59 -0700
-Received: from pgsmsx603.gar.corp.intel.com (10.108.199.138) by
- pgsmsx603.gar.corp.intel.com (10.108.199.138) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.1713.5; Fri, 14 Aug 2020 12:11:58 +0800
-Received: from kmsmsx153.gar.corp.intel.com (172.21.73.88) by
- pgsmsx603.gar.corp.intel.com (10.108.199.138) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.1713.5
- via Frontend Transport; Fri, 14 Aug 2020 12:11:58 +0800
-Received: from pgsmsx101.gar.corp.intel.com ([169.254.1.186]) by
- KMSMSX153.gar.corp.intel.com ([169.254.5.77]) with mapi id 14.03.0439.000;
- Fri, 14 Aug 2020 12:11:58 +0800
-From: "Anuj Mittal" <anuj.mittal@intel.com>
-To: "raj.khem@gmail.com" <raj.khem@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][PATCH v2] ocl-icd: Upgrade to latest
-Thread-Topic: [oe] [meta-oe][PATCH v2] ocl-icd: Upgrade to latest
-Thread-Index: AQHWcH1Yk/VektO6qUysPxX/xjmza6k2ewKA
-Date: Fri, 14 Aug 2020 04:11:57 +0000
-Message-ID: <e2199f620db08e5bd16d79b01f3c3df805676313.camel@intel.com>
-References: <20200812075055.3512737-1-raj.khem@gmail.com>
-In-Reply-To: <20200812075055.3512737-1-raj.khem@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.249.70.141]
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pQEiNLfW;
+ spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f195.google.com with SMTP id b79so7312304qkg.9
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 21:21:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=I1+Z+RiWKFG7pFy+1P0ZXjf2Q9WndZQf0y5HR11k8TM=;
+        b=pQEiNLfWIqdrZ+YoEceozVKYeZ83qq5UfIIUDu902aRK07If+oqe28w0BEtsCK0AES
+         OMbiyh8xQ8Cmr8lolMvWC4LTMGSg0Q+YYqIOzslwJcgewYmg+TMBZE7GY3E4TSLaujTn
+         8R3zbvnfvWJkeJZiRmzFVDaPWVdUaox8RXeR8S/KWIpYvm5QIRCvCFMKPoFXYrof4P4U
+         Kmi9hFOD9ZaUQKcLfappUvCSRGyY9MWXtXnPXYnLWpBxD62NCa0VgpnNCwn2dXs7pMLq
+         qrPmZwqJivpeTW3qY5omieid5uVedEgLFDbyBxIqZM86drnlVcLJhI6vAnAPKx4aKows
+         PjDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=I1+Z+RiWKFG7pFy+1P0ZXjf2Q9WndZQf0y5HR11k8TM=;
+        b=oNbx18Rtjs5NfH+L5ocgrkAKoZd0h52Lfmfp8ZPZnATYzAlQmzvvzpo9vgCM75trrs
+         0Gz5XtY/M7zBEA8gcoeZ8BDMIPwc8UqFWbfjqMfV0fhtNSdU5gzzDalOPMGE40lPdn7g
+         hl1W90nZLSfH1Kn/lTDQROh7yQ5ZIxQl4pOTc1m2/GbEjspoin0oKSwCh0SBvwUk0WvH
+         BcZwt7Nn74MtUEvZemr/Nd1LsEx43OBa/Srp9ddUngGeyJ3Ze1DFvj+AbFeZUr/P8EaH
+         q/a8UwiqZ9obkiuqJOm6xQLXvhdcyIfW8/m342iahASng1OXjbee+CbCmK8W9eGQShCD
+         gXEg==
+X-Gm-Message-State: AOAM531oAeBoWtHwNySu8K/fuft66XoLHxaK+fg4ZKJ0Y6hGMPccWBvZ
+	7YvM561kdmsOVmqD8ZAnq4tjCCR15ThlRXBwmRdW1mnY
+X-Google-Smtp-Source: ABdhPJyTqnr5Z9IU2pQxuqu/bWFsl8FretjbMMDXiWhpFtlCp9KmTMsPJANv5RiOLks4gPHkC/bgY1gtZZ5+EXpPsoU=
+X-Received: by 2002:a37:7081:: with SMTP id l123mr427075qkc.225.1597378908760;
+ Thu, 13 Aug 2020 21:21:48 -0700 (PDT)
 MIME-Version: 1.0
-Return-Path: anuj.mittal@intel.com
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <1DE79D781916A74A8487CAB7A32B695A@intel.com>
-Content-Transfer-Encoding: base64
+References: <20200812063711.2758315-1-raj.khem@gmail.com> <20200812063711.2758315-6-raj.khem@gmail.com>
+ <788ba2642e9ffc12c44454664795d484395450b8.camel@intel.com>
+In-Reply-To: <788ba2642e9ffc12c44454664795d484395450b8.camel@intel.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 13 Aug 2020 21:21:22 -0700
+Message-ID: <CAMKF1sqhY1xG9YfBzOm72-RyEn2cmAnvtOig5gj_e0HaTz2fvQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][ 6/9] opencl-icd-loader: Update beyond 2020.06.16
+To: "Mittal, Anuj" <anuj.mittal@intel.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-T24gV2VkLCAyMDIwLTA4LTEyIGF0IDAwOjUwIC0wNzAwLCBLaGVtIFJhaiB3cm90ZToNCj4gTGlj
-ZW5zZS1VcGRhdGU6IFVwZGF0ZSBjb3B5cmlnaHRzIFsxXQ0KPiANCj4gSW5zdGFsbCBDTC9jbF9p
-Y2QuaCBhcyBpdHMgbmVlZGVkIGJ5IG9wZW5jbC1pY2QtbG9hZGVyDQo+IA0KPiBEbyBub3QgcHJv
-dmlkZSBsaWJPcGVuQ0wuc28gdGhlc2UgYXJlIGFscndhZHkgcHJvdmlkZWQgYnkgT3BlbkNMIDEu
-Mg0KPiBJbnN0YWxsYWJsZSBDbGllbnQgRHJpdmVyDQoNCkFyZW4ndCBib3RoIG9mIHRoZXNlIGRp
-ZmZlcmVudCBpbXBsZW1lbnRhdGlvbnMgb2YgbGliT3BlbkNMPyBQcm9qZWN0DQpkZXBlbmRpbmcg
-b24gb2NsLWljZCBzaG91bGRuJ3QgbmVlZCB0byBkZXBlbmQgb24gb3BlbmNsLWljZC1sb2FkZXIg
-SQ0KdGhpbmsuDQoNClRoYW5rcywNCg0KQW51ag0KDQo+IA0KPiBbMV0gDQo+IGh0dHBzOi8vZ2l0
-aHViLmNvbS9PQ0wtZGV2L29jbC1pY2QvY29tbWl0LzM5MjAyMDU3MzZhZmJiNjc3MjllOWM3M2M3
-YjRjNmZkYjNmY2IzMjcjZGlmZi03MTE2ZWYwNzA1ODg1MzQzYzllMWIyMTcxYTA2YmUwZQ0KPiAN
-Cj4gU2lnbmVkLW9mZi1ieTogS2hlbSBSYWogPHJhai5raGVtQGdtYWlsLmNvbT4NCj4gLS0tDQo+
-IHYyOiBGaXggbGlicmFyeSBjb25mbGljdHMgYW5kIGxpY2Vuc2UgY2hlY2tzdW1zDQo+IA0KPiAg
-bWV0YS1vZS9yZWNpcGVzLWNvcmUvb3BlbmNsL29jbC1pY2RfZ2l0LmJiIHwgMTAgKysrKysrKyst
-LQ0KPiAgMSBmaWxlIGNoYW5nZWQsIDggaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkNCj4g
-DQo+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtY29yZS9vcGVuY2wvb2NsLWljZF9naXQu
-YmIgYi9tZXRhLQ0KPiBvZS9yZWNpcGVzLWNvcmUvb3BlbmNsL29jbC1pY2RfZ2l0LmJiDQo+IGlu
-ZGV4IGQxNGVjNTNlM2QuLmE2NWM3NjE4YjggMTAwNjQ0DQo+IC0tLSBhL21ldGEtb2UvcmVjaXBl
-cy1jb3JlL29wZW5jbC9vY2wtaWNkX2dpdC5iYg0KPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtY29y
-ZS9vcGVuY2wvb2NsLWljZF9naXQuYmINCj4gQEAgLTMsMTIgKzMsMTIgQEAgREVTQ1JJUFRJT04g
-PSAiT3BlbiBTb3VyY2UgYWx0ZXJuYXRpdmUgdG8gdmVuZG9yDQo+IHNwZWNpZmljIE9wZW5DTCBJ
-Q0QgbG9hZGVycy4iDQo+ICANCj4gICMgVGhlIExJQ0VOU0UgaXMgQlNEIDItQ2xhdXNlICJTaW1w
-bGlmaWVkIiBMaWNlbnNlDQo+ICBMSUNFTlNFID0gIkJTRC0yLUNsYXVzZSINCj4gLUxJQ19GSUxF
-U19DSEtTVU0gPQ0KPiAiZmlsZTovL0NPUFlJTkc7bWQ1PTIzMjI1N2JiZjczMjAzMjA3MjVjYTk1
-MjlkMzc4MmFiIg0KPiArTElDX0ZJTEVTX0NIS1NVTSA9DQo+ICJmaWxlOi8vQ09QWUlORzttZDU9
-MTIzOGQ1YmNjYmI2YmRhMzA2NTRlNDhkY2MwYTU1NGIiDQo+ICANCj4gIFNSQ19VUkkgPSAiZ2l0
-Oi8vZ2l0aHViLmNvbS9PQ0wtZGV2L29jbC1pY2QuZ2l0O3Byb3RvY29sPWh0dHBzIg0KPiAgDQo+
-ICBQViA9ICIyLjIuMTIrZ2l0JHtTUkNQVn0iDQo+IC1TUkNSRVYgPSAiYWY3OWFlYmU0NjQ5ZjMw
-ZGJkNzExYzFiZjZmYzY2MWVhYzZlNWYwMSINCj4gK1NSQ1JFViA9ICJhOWU1N2IxOTlmZjFlOGQw
-M2ZhM2U1YzUzYzU1NDRkZTNkYzcyZmU2Ig0KPiAgDQo+ICBTID0gIiR7V09SS0RJUn0vZ2l0Ig0K
-PiAgDQo+IEBAIC0xNiw0ICsxNiwxMCBAQCBpbmhlcml0IGF1dG90b29scw0KPiAgDQo+ICBERVBF
-TkRTID0gInJ1YnktbmF0aXZlIg0KPiAgDQo+ICsNCj4gK2RvX2luc3RhbGxfYXBwZW5kKCkgew0K
-PiArICAgIGluc3RhbGwgLURtIDA2NDQgJHtTfS9raHJvbm9zLWhlYWRlcnMvQ0wvY2xfaWNkLmgN
-Cj4gJHtEfSR7aW5jbHVkZWRpcn0vQ0wvY2xfaWNkLmgNCj4gKyAgICBybSAtcmYgJHtEfSR7bGli
-ZGlyfS9saWJPcGVuQ0wuc28qDQo+ICt9DQo+ICsNCj4gIEJCQ0xBU1NFWFRFTkQgPSAibmF0aXZl
-Ig0KPiANCg==
+On Thu, Aug 13, 2020 at 9:10 PM Mittal, Anuj <anuj.mittal@intel.com> wrote:
+>
+> On Tue, 2020-08-11 at 23:37 -0700, Khem Raj wrote:
+> > License-Update: License is now apache-2.0 as per [1]
+> >
+> > Fixes build wih gcc10
+> > Add new dependency on ocl-icd
+>
+> Why does it need to depend on ocl-icd?
+
+It needs headers from it.
+
+>
+> Thanks,
+>
+> Anuj
+>
+> > Gather install artifacts from new locations
+> >
+> > [1]
+> > https://github.com/KhronosGroup/OpenCL-ICD-Loader/commit/44f384ae624675d6b0b92ce39a97cb7f4899d92a
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >  .../opencl/opencl-icd-loader_git.bb            | 18 ++++++++++----
+> > ----
+> >  1 file changed, 10 insertions(+), 8 deletions(-)
+> >
+> > diff --git a/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
+> > b/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
+> > index 7c49c8d552..3b9d050569 100644
+> > --- a/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
+> > +++ b/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
+> > @@ -1,24 +1,27 @@
+> >  SUMMARY  = "OpenCL ICD Loader"
+> >  DESCRIPTION = "OpenCL compute ICD Loader from Khronos Group"
+> > -LICENSE  = "Khronos"
+> > -LIC_FILES_CHKSUM =
+> > "file://LICENSE.txt;md5=ec724732ce73269486574c718ef0c79b"
+> > +LICENSE  = "Apache-2.0"
+> > +LIC_FILES_CHKSUM =
+> > "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+> >  SECTION = "base"
+> >
+> > +DEPENDS += "opencl-headers ocl-icd"
+> > +
+> >  inherit pkgconfig cmake
+> >
+> >  S = "${WORKDIR}/git"
+> > -SRCREV = "b342ff7b7f70a4b3f2cfc53215af8fa20adc3d86"
+> > +PV = "2020.06.16+git${SRCPV}"
+> > +SRCREV = "862eebe7ca733c398334a8db8481172a7d3a3c47"
+> >  SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git"
+> >
+> >  do_install () {
+> >       install -d ${D}${bindir}
+> > -     install -m 0755 ${B}/bin/icd_loader_test ${D}${bindir}/
+> > +     install -m 0755 ${B}/test/loader_test/icd_loader_test
+> > ${D}${bindir}/
+> >       chrpath -d ${D}${bindir}/icd_loader_test
+> >       install -d ${D}${libdir}
+> > -     install -m 0644 ${B}/lib/libIcdLog.so ${D}${libdir}/
+> > -     install -m 0644 ${B}/lib/libOpenCLDriverStub.so ${D}${libdir}/
+> > +     install -m 0644 ${B}/test/log/libIcdLog.so ${D}${libdir}/
+> > +     install -m 0644 ${B}/test/driver_stub/libOpenCLDriverStub.so
+> > ${D}${libdir}/
+> >       chrpath -d ${D}${libdir}/libOpenCLDriverStub.so
+> > -     install -m 0644 ${B}/lib/libOpenCL.so.1.2 ${D}${libdir}/
+> > +     install -m 0644 ${B}/libOpenCL.so.1.2 ${D}${libdir}/
+> >       cd ${D}${libdir}
+> >       ln -s libOpenCL.so.1.2 libOpenCL.so.1
+> >       ln -s libOpenCL.so.1 libOpenCL.so
+> > @@ -41,5 +44,4 @@ FILES_${PN}-dev = " \
+> >  FILES_libicdlog = "${libdir}/libIcdLog.so"
+> >  FILES_libicdlog-dbg = "${libdir}/.debug/libIcdLog.so"
+> >
+> > -DEPENDS = "opencl-headers"
+> >  RDEPENDS_${PN} = "libicdlog"
+> > 
