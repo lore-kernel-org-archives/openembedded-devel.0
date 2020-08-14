@@ -1,127 +1,115 @@
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
- by mx.groups.io with SMTP id smtpd.web11.11668.1597378909892834936
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com [209.85.160.194])
+ by mx.groups.io with SMTP id smtpd.web11.11685.1597378962506937212
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2020 21:21:50 -0700
+ Thu, 13 Aug 2020 21:22:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=pQEiNLfW;
- spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f195.google.com with SMTP id b79so7312304qkg.9
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 21:21:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ROyQ5B2k;
+ spf=pass (domain: gmail.com, ip: 209.85.160.194, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f194.google.com with SMTP id h21so6116277qtp.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 21:22:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=I1+Z+RiWKFG7pFy+1P0ZXjf2Q9WndZQf0y5HR11k8TM=;
-        b=pQEiNLfWIqdrZ+YoEceozVKYeZ83qq5UfIIUDu902aRK07If+oqe28w0BEtsCK0AES
-         OMbiyh8xQ8Cmr8lolMvWC4LTMGSg0Q+YYqIOzslwJcgewYmg+TMBZE7GY3E4TSLaujTn
-         8R3zbvnfvWJkeJZiRmzFVDaPWVdUaox8RXeR8S/KWIpYvm5QIRCvCFMKPoFXYrof4P4U
-         Kmi9hFOD9ZaUQKcLfappUvCSRGyY9MWXtXnPXYnLWpBxD62NCa0VgpnNCwn2dXs7pMLq
-         qrPmZwqJivpeTW3qY5omieid5uVedEgLFDbyBxIqZM86drnlVcLJhI6vAnAPKx4aKows
-         PjDw==
+        bh=TB6xu6XnOL6BDFkUzgyFwvZrNiT9V5CfdzvGCgmeZzQ=;
+        b=ROyQ5B2khwypdOj0PjNe3cy+ICcMayLuJ+F3d1aZJKdSMKX/erON59DR2CJwZqyywy
+         XYUFl19Y9B7XrW7A5zijEXk2Wz1EQ8uONG2oHT3JUqwEzO5UqxJ+H8MWtm5Jh3Z7PyVB
+         ChB3oRnoQKfLg+0pafEl3XKDl16j0/RVkjCvyQQHabbyrFMuxwKk35thlzkpQPjMyUWh
+         24ho1HdkZRqCldT9bEIsfz8ssaAxmoLkbJ3GjxSBkfR12llc4jPxbAO5qmwL0oEE2SA7
+         YgNuZAMx31t0FLSzhafrE5zNFmg8vprEmhRaco8EoEOWzHtiJrSlwtNtJ83yfxD/mkCA
+         qA1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=I1+Z+RiWKFG7pFy+1P0ZXjf2Q9WndZQf0y5HR11k8TM=;
-        b=oNbx18Rtjs5NfH+L5ocgrkAKoZd0h52Lfmfp8ZPZnATYzAlQmzvvzpo9vgCM75trrs
-         0Gz5XtY/M7zBEA8gcoeZ8BDMIPwc8UqFWbfjqMfV0fhtNSdU5gzzDalOPMGE40lPdn7g
-         hl1W90nZLSfH1Kn/lTDQROh7yQ5ZIxQl4pOTc1m2/GbEjspoin0oKSwCh0SBvwUk0WvH
-         BcZwt7Nn74MtUEvZemr/Nd1LsEx43OBa/Srp9ddUngGeyJ3Ze1DFvj+AbFeZUr/P8EaH
-         q/a8UwiqZ9obkiuqJOm6xQLXvhdcyIfW8/m342iahASng1OXjbee+CbCmK8W9eGQShCD
-         gXEg==
-X-Gm-Message-State: AOAM531oAeBoWtHwNySu8K/fuft66XoLHxaK+fg4ZKJ0Y6hGMPccWBvZ
-	7YvM561kdmsOVmqD8ZAnq4tjCCR15ThlRXBwmRdW1mnY
-X-Google-Smtp-Source: ABdhPJyTqnr5Z9IU2pQxuqu/bWFsl8FretjbMMDXiWhpFtlCp9KmTMsPJANv5RiOLks4gPHkC/bgY1gtZZ5+EXpPsoU=
-X-Received: by 2002:a37:7081:: with SMTP id l123mr427075qkc.225.1597378908760;
- Thu, 13 Aug 2020 21:21:48 -0700 (PDT)
+        bh=TB6xu6XnOL6BDFkUzgyFwvZrNiT9V5CfdzvGCgmeZzQ=;
+        b=cbJcReMNRqPZAIIN/xdNGxDINKbFVGNbBxC8QayqSKrVqtKnBLNpNvYFY46slks5ww
+         xO0EhR/WNG9LjPaIZZswfxxH6HtAnqOcLE5STdKl9yLTJqExRRgaeyNV2CEUO2FuAeSl
+         CoOnmuQt6AR8afsszA0NiPayrvxOwqIcglSyPbYQE+npR00rd2s81SzxTz6lHJPxxM+5
+         EXrMb/UkrzKlbHUnhOd1LyIDHpf7d9IUeBQliFCgjHhtPzw0FAGaGoWrYxuY54L7P8rS
+         Nxs+hmmDxeZqbfLswrFZ7jZpL00L2da2jD7AxC1sbuMwp6CRs5kHqDei0MdTpJ/G2DtP
+         jYfw==
+X-Gm-Message-State: AOAM530uAAbFFtMVfyFQAlfiS3AwT+bm8JwPxgTzVfh1iztRghBlBgWX
+	o5DVtVTeQDlzR6Z/avyHSS/fqrpWeOxnDA/ykVDfGtR3
+X-Google-Smtp-Source: ABdhPJzeHhT+B805/+fAYIvx01PDlRGFM8wV0iS2jV+E1XBd57E6fc3XrwfzJuHGDJ8n9/HtDgXHGVOG8ZlhFe58nak=
+X-Received: by 2002:ac8:22ea:: with SMTP id g39mr523717qta.146.1597378961550;
+ Thu, 13 Aug 2020 21:22:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200812063711.2758315-1-raj.khem@gmail.com> <20200812063711.2758315-6-raj.khem@gmail.com>
- <788ba2642e9ffc12c44454664795d484395450b8.camel@intel.com>
-In-Reply-To: <788ba2642e9ffc12c44454664795d484395450b8.camel@intel.com>
+References: <20200812075055.3512737-1-raj.khem@gmail.com> <e2199f620db08e5bd16d79b01f3c3df805676313.camel@intel.com>
+In-Reply-To: <e2199f620db08e5bd16d79b01f3c3df805676313.camel@intel.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 13 Aug 2020 21:21:22 -0700
-Message-ID: <CAMKF1sqhY1xG9YfBzOm72-RyEn2cmAnvtOig5gj_e0HaTz2fvQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][ 6/9] opencl-icd-loader: Update beyond 2020.06.16
-To: "Mittal, Anuj" <anuj.mittal@intel.com>
+Date: Thu, 13 Aug 2020 21:22:15 -0700
+Message-ID: <CAMKF1soNLXv0HEsAxonpJZzSSgMTCQu1h1_rP9BrQTgR0W76gg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v2] ocl-icd: Upgrade to latest
+To: Anuj Mittal <anuj.mittal@intel.com>
 Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Aug 13, 2020 at 9:10 PM Mittal, Anuj <anuj.mittal@intel.com> wrote:
+On Thu, Aug 13, 2020 at 9:12 PM Anuj Mittal <anuj.mittal@intel.com> wrote:
 >
-> On Tue, 2020-08-11 at 23:37 -0700, Khem Raj wrote:
-> > License-Update: License is now apache-2.0 as per [1]
+> On Wed, 2020-08-12 at 00:50 -0700, Khem Raj wrote:
+> > License-Update: Update copyrights [1]
 > >
-> > Fixes build wih gcc10
-> > Add new dependency on ocl-icd
+> > Install CL/cl_icd.h as its needed by opencl-icd-loader
+> >
+> > Do not provide libOpenCL.so these are alrwady provided by OpenCL 1.2
+> > Installable Client Driver
 >
-> Why does it need to depend on ocl-icd?
+> Aren't both of these different implementations of libOpenCL? Project
+> depending on ocl-icd shouldn't need to depend on opencl-icd-loader I
+> think.
 
-It needs headers from it.
-
+yes they are different, for meta-oe khronos implementation is default.
 >
 > Thanks,
 >
 > Anuj
 >
-> > Gather install artifacts from new locations
 > >
 > > [1]
-> > https://github.com/KhronosGroup/OpenCL-ICD-Loader/commit/44f384ae624675d6b0b92ce39a97cb7f4899d92a
+> > https://github.com/OCL-dev/ocl-icd/commit/3920205736afbb67729e9c73c7b4c6fdb3fcb327#diff-7116ef0705885343c9e1b2171a06be0e
 > >
 > > Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > > ---
-> >  .../opencl/opencl-icd-loader_git.bb            | 18 ++++++++++----
-> > ----
-> >  1 file changed, 10 insertions(+), 8 deletions(-)
+> > v2: Fix library conflicts and license checksums
 > >
-> > diff --git a/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
-> > b/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
-> > index 7c49c8d552..3b9d050569 100644
-> > --- a/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
-> > +++ b/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
-> > @@ -1,24 +1,27 @@
-> >  SUMMARY  = "OpenCL ICD Loader"
-> >  DESCRIPTION = "OpenCL compute ICD Loader from Khronos Group"
-> > -LICENSE  = "Khronos"
+> >  meta-oe/recipes-core/opencl/ocl-icd_git.bb | 10 ++++++++--
+> >  1 file changed, 8 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/meta-oe/recipes-core/opencl/ocl-icd_git.bb b/meta-
+> > oe/recipes-core/opencl/ocl-icd_git.bb
+> > index d14ec53e3d..a65c7618b8 100644
+> > --- a/meta-oe/recipes-core/opencl/ocl-icd_git.bb
+> > +++ b/meta-oe/recipes-core/opencl/ocl-icd_git.bb
+> > @@ -3,12 +3,12 @@ DESCRIPTION = "Open Source alternative to vendor
+> > specific OpenCL ICD loaders."
+> >
+> >  # The LICENSE is BSD 2-Clause "Simplified" License
+> >  LICENSE = "BSD-2-Clause"
 > > -LIC_FILES_CHKSUM =
-> > "file://LICENSE.txt;md5=ec724732ce73269486574c718ef0c79b"
-> > +LICENSE  = "Apache-2.0"
+> > "file://COPYING;md5=232257bbf7320320725ca9529d3782ab"
 > > +LIC_FILES_CHKSUM =
-> > "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
-> >  SECTION = "base"
+> > "file://COPYING;md5=1238d5bccbb6bda30654e48dcc0a554b"
 > >
-> > +DEPENDS += "opencl-headers ocl-icd"
-> > +
-> >  inherit pkgconfig cmake
+> >  SRC_URI = "git://github.com/OCL-dev/ocl-icd.git;protocol=https"
+> >
+> >  PV = "2.2.12+git${SRCPV}"
+> > -SRCREV = "af79aebe4649f30dbd711c1bf6fc661eac6e5f01"
+> > +SRCREV = "a9e57b199ff1e8d03fa3e5c53c5544de3dc72fe6"
 > >
 > >  S = "${WORKDIR}/git"
-> > -SRCREV = "b342ff7b7f70a4b3f2cfc53215af8fa20adc3d86"
-> > +PV = "2020.06.16+git${SRCPV}"
-> > +SRCREV = "862eebe7ca733c398334a8db8481172a7d3a3c47"
-> >  SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git"
 > >
-> >  do_install () {
-> >       install -d ${D}${bindir}
-> > -     install -m 0755 ${B}/bin/icd_loader_test ${D}${bindir}/
-> > +     install -m 0755 ${B}/test/loader_test/icd_loader_test
-> > ${D}${bindir}/
-> >       chrpath -d ${D}${bindir}/icd_loader_test
-> >       install -d ${D}${libdir}
-> > -     install -m 0644 ${B}/lib/libIcdLog.so ${D}${libdir}/
-> > -     install -m 0644 ${B}/lib/libOpenCLDriverStub.so ${D}${libdir}/
-> > +     install -m 0644 ${B}/test/log/libIcdLog.so ${D}${libdir}/
-> > +     install -m 0644 ${B}/test/driver_stub/libOpenCLDriverStub.so
-> > ${D}${libdir}/
-> >       chrpath -d ${D}${libdir}/libOpenCLDriverStub.so
-> > -     install -m 0644 ${B}/lib/libOpenCL.so.1.2 ${D}${libdir}/
-> > +     install -m 0644 ${B}/libOpenCL.so.1.2 ${D}${libdir}/
-> >       cd ${D}${libdir}
-> >       ln -s libOpenCL.so.1.2 libOpenCL.so.1
-> >       ln -s libOpenCL.so.1 libOpenCL.so
-> > @@ -41,5 +44,4 @@ FILES_${PN}-dev = " \
-> >  FILES_libicdlog = "${libdir}/libIcdLog.so"
-> >  FILES_libicdlog-dbg = "${libdir}/.debug/libIcdLog.so"
+> > @@ -16,4 +16,10 @@ inherit autotools
 > >
-> > -DEPENDS = "opencl-headers"
-> >  RDEPENDS_${PN} = "libicdlog"
-> > 
+> >  DEPENDS = "ruby-native"
+> >
+> > +
+> > +do_install_append() {
+> > +    install -Dm 0644 ${S}/khronos-headers/CL/cl_icd.h
+> > ${D}${includedir}/CL/cl_icd.h
+> > +    rm -rf ${D}${libdir}/libOpenCL.so*
+> > +}
+> > +
+> >  BBCLASSEXTEND = "native"
+> >
+> 
