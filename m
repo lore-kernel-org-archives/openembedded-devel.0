@@ -1,50 +1,50 @@
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.web11.12369.1597383428531259137
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
+ by mx.groups.io with SMTP id smtpd.web12.12374.1597383429488905112
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2020 22:37:08 -0700
+ Thu, 13 Aug 2020 22:37:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=OkKD7vq+;
- spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id s15so3991220pgc.8
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 22:37:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=iIHBThnQ;
+ spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f178.google.com with SMTP id m34so3985196pgl.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 22:37:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=fbGTA1wA/ok0pba6rjrUnTpOBcbgfkoMRkdcZ8PnGr8=;
-        b=OkKD7vq+cNV2muMJRCAbZH2P/xnld1OSsxiqarw0WtHNJIP5c4tRc5Y224OlH2fDt9
-         Kz0J1UF2jPpuM2s5Hl4y1yu3481Jt3zgqNSKyydtPdBPNGNDmBPvNk+oXWuwrNIfUpmp
-         gTQ/DZqXehJeb+1HyFGhhBpxyn9k8T22QlTqANhom/v/TAnkgwsFrcanyodyU3X9HumK
-         zwDiavyuPPDYdfotZfggDVlsokcUD0eU2ICBXXN+/btBV6Lb+0FuOMcMAzdcvNrwYAs4
-         EfsLB1oVH5CZHeig3OpzIyx2WNmFwBJ4rBlEz5Z4JSEkkhqWN6o9+Vdn+YggXOiyOx4L
-         mwTA==
+        bh=OHri67kRaZGtm+VeiqwovwboiFUDFCoCBM+xnnsMyr4=;
+        b=iIHBThnQKyTkiwL++xgoYKWEsC5fZmRWtYH7Vno4HgI138Tw9oC5GiwlNFCWEypluS
+         Mnf+xy5mrYjJpK9uXpr+yOoAxMOxoXXBOASQbll0/ej6KxLp5PGhVSyyyD0RtGT0Zb+q
+         BJoAHYjQOFNjgtUA6KDnaOUOXO6GwJr/EirJIBwIhFSNjJxtpLUlNDt7jeGNRqeFe7N1
+         Jc0KfKq3e1KZhfucjJRksIdiqPfrSUblPVYxgr/np8V1UBkI3yRFnhqcMRaFNxrirPit
+         Lo/7lMEXJg2OEVapb6ChmsICDwQPMfwqA34pOVLyyte5x3P3/ZTflqWXs2r7opfv3Too
+         bNbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=fbGTA1wA/ok0pba6rjrUnTpOBcbgfkoMRkdcZ8PnGr8=;
-        b=kxcc6wUnkQ55w4nTG7uoZidOkYKxMMnvgmVHRowIbnJJFOwaNwrwBq8tMVEQ7T9hb3
-         bmy7f5D0ntU8eTXR5x04c0DvMxypwAc/8igt5MoVECtBxSPsOEt9LCexGHfexUDgln2K
-         ywm1Gheh23NqM1yvTO6nRIQsemIy780KSr82em5SmfS/Ga9eeMdLfcYY2XqUn7I5tgUL
-         JkFjg+lJlGw/p6ElUwloDVXsbKqS7QKbK1dQl8h/fGdRcQSDan4ei/NgeB61A51oYzlL
-         v8kSSeJFZTGSQIXq5DSVfWyjCu1WNf2KmJHDQdR5LLDUNOT5eMdspnb30AurMt3hXjCa
-         0xkg==
-X-Gm-Message-State: AOAM532kVlWlnXiHcYhIC/GGuGpt4gQfhDKKwKb+wQMJSSUSULMyH0to
-	/sPYSubFc7rjHos8B00XEyBCsuEl1GUVaw==
-X-Google-Smtp-Source: ABdhPJyTNLaT5nwORPhYqlcpTdleRZrhUs35XgrQAsRplfPKE/tUD00WGVcg9DRqGfUbzcC2rsT6nw==
-X-Received: by 2002:a62:1b0e:: with SMTP id b14mr654445pfb.281.1597383427748;
-        Thu, 13 Aug 2020 22:37:07 -0700 (PDT)
+        bh=OHri67kRaZGtm+VeiqwovwboiFUDFCoCBM+xnnsMyr4=;
+        b=TIVqvemkOVBvK/pStalTK1NYDAyCR2z1VS+5S72xA4EDllpaoTyy7MY5/1+7m15HoP
+         aXEMCvMnSLozuC+7PyVqmo8JIPsYIFYwMFc2DVzSSakFmXeHFtooBY0Cfd+4qPLgun8Y
+         aeCwdKk2HwjlEBoPYK2On7sbdkRIrvg2YlqgqXD5SkrjrEsD3p/iXLSLzr6+f7W9B0O0
+         xEle/2wbpEkPyAuRISrTO5RhgRcYQ23Q4PY8KGjT/ccaH51WAeE2emwj+ka+qDm8Cvkc
+         FGyj053R3wKx4DQp2naTK4F4zBley/10a1Sq8TozaMkh0BCPsXzAqZbiB+c8p9gc1fJR
+         V2xQ==
+X-Gm-Message-State: AOAM531cGxgOF5Rlr8H1H99iIpTGxC16/x6PzQhMIrM0W+Sf3+nc3+nf
+	dkY2IZViafSGmqYW+dQ9k6h+61iS7xieGg==
+X-Google-Smtp-Source: ABdhPJwm35QPBO3dB0PyzU9NjerG/fri24+aq+qk3DtJE7IOpq2IWAH+7M9nJkNZ3dKM9TXNEKrAHA==
+X-Received: by 2002:aa7:8e8d:: with SMTP id a13mr678811pfr.250.1597383428698;
+        Thu, 13 Aug 2020 22:37:08 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id k21sm7013974pgl.0.2020.08.13.22.37.06
+        by smtp.gmail.com with ESMTPSA id k21sm7013974pgl.0.2020.08.13.22.37.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2020 22:37:07 -0700 (PDT)
+        Thu, 13 Aug 2020 22:37:08 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 09/21] openocd: Fix build with gcc10/-fno-common
-Date: Thu, 13 Aug 2020 22:36:45 -0700
-Message-Id: <20200814053657.1701247-9-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 10/21] liblbxutil: Fix build with gcc10/-fno-common
+Date: Thu, 13 Aug 2020 22:36:46 -0700
+Message-Id: <20200814053657.1701247-10-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200814053657.1701247-1-raj.khem@gmail.com>
 References: <20200814053657.1701247-1-raj.khem@gmail.com>
@@ -53,71 +53,68 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...g-Make-bitbang_swd-extern-definition.patch | 42 +++++++++++++++++++
- .../recipes-devtools/openocd/openocd_git.bb   |  1 +
- 2 files changed, 43 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0001-bitbang-Make-bitbang_swd-extern-definition.patch
+ ...lbx_zlib-Mark-declration-with-extern.patch | 36 +++++++++++++++++++
+ .../xorg-lib/liblbxutil_1.1.0.bb              |  4 ++-
+ 2 files changed, 39 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/xorg-lib/liblbxutil-1.1.0/0001-lbx_zlib-Mark-declration-with-extern.patch
 
-diff --git a/meta-oe/recipes-devtools/openocd/openocd/0001-bitbang-Make-bitbang_swd-extern-definition.patch b/meta-oe/recipes-devtools/openocd/openocd/0001-bitbang-Make-bitbang_swd-extern-definition.patch
+diff --git a/meta-oe/recipes-graphics/xorg-lib/liblbxutil-1.1.0/0001-lbx_zlib-Mark-declration-with-extern.patch b/meta-oe/recipes-graphics/xorg-lib/liblbxutil-1.1.0/0001-lbx_zlib-Mark-declration-with-extern.patch
 new file mode 100644
-index 0000000000..d42b628dae
+index 0000000000..32a24b4be1
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/openocd/openocd/0001-bitbang-Make-bitbang_swd-extern-definition.patch
-@@ -0,0 +1,42 @@
-+From 428f9f3c4a5be973e4c7fc1325ae9dbe41040df2 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-graphics/xorg-lib/liblbxutil-1.1.0/0001-lbx_zlib-Mark-declration-with-extern.patch
+@@ -0,0 +1,36 @@
++From 95ed4b743f197e20f1884a326d5a7128187a7ba6 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 13 Aug 2020 17:47:35 -0700
-+Subject: [PATCH] bitbang: Make bitbang_swd extern definition
++Date: Thu, 13 Aug 2020 17:56:30 -0700
++Subject: [PATCH] lbx_zlib: Mark declration with extern
 +
-+Fixes build with gcc10+
++Fixes build with gcc10/-fno-common
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/jtag/drivers/bitbang.c | 1 +
-+ src/jtag/drivers/bitbang.h | 2 +-
-+ 2 files changed, 2 insertions(+), 1 deletion(-)
++ src/lbx_zlib/lbx_zlib.h | 12 ++++++------
++ 1 file changed, 6 insertions(+), 6 deletions(-)
 +
-+diff --git a/src/jtag/drivers/bitbang.c b/src/jtag/drivers/bitbang.c
-+index b5078c080..f8612aade 100644
-+--- a/src/jtag/drivers/bitbang.c
-++++ b/src/jtag/drivers/bitbang.c
-+@@ -43,6 +43,7 @@ static int bitbang_stableclocks(int num_cycles);
-+ static void bitbang_swd_write_reg(uint8_t cmd, uint32_t value, uint32_t ap_delay_clk);
++diff --git a/src/lbx_zlib/lbx_zlib.h b/src/lbx_zlib/lbx_zlib.h
++index 8ae8956..bec3b96 100644
++--- a/src/lbx_zlib/lbx_zlib.h
+++++ b/src/lbx_zlib/lbx_zlib.h
++@@ -136,9 +136,9 @@ extern void Xfree(pointer /*ptr*/);
++ #endif
 + 
-+ struct bitbang_interface *bitbang_interface;
-++const struct swd_driver bitbang_swd;
-+ 
-+ /* DANGER!!!! clock absolutely *MUST* be 0 in idle or reset won't work!
-+  *
-+diff --git a/src/jtag/drivers/bitbang.h b/src/jtag/drivers/bitbang.h
-+index 577717ebd..0faf5d9ae 100644
-+--- a/src/jtag/drivers/bitbang.h
-++++ b/src/jtag/drivers/bitbang.h
-+@@ -57,7 +57,7 @@ struct bitbang_interface {
-+ 	void (*swdio_drive)(bool on);
-+ };
-+ 
-+-const struct swd_driver bitbang_swd;
-++extern const struct swd_driver bitbang_swd;
-+ 
-+ extern bool swd_mode;
-+ 
++ /* lbx_zlib.c */
++-unsigned long stream_out_compressed;
++-unsigned long stream_out_uncompressed;
++-unsigned long stream_out_plain;
++-unsigned long stream_in_compressed;
++-unsigned long stream_in_uncompressed;
++-unsigned long stream_in_plain;
+++extern unsigned long stream_out_compressed;
+++extern unsigned long stream_out_uncompressed;
+++extern unsigned long stream_out_plain;
+++extern unsigned long stream_in_compressed;
+++extern unsigned long stream_in_uncompressed;
+++extern unsigned long stream_in_plain;
 +-- 
 +2.28.0
 +
-diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-index f01b224fac..c7d754fdba 100644
---- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
-+++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-@@ -10,6 +10,7 @@ SRC_URI = " \
-     git://repo.or.cz/r/jimtcl.git;protocol=http;destsuffix=git/jimtcl;name=jimtcl \
-     git://repo.or.cz/r/libjaylink.git;protocol=http;destsuffix=git/src/jtag/drivers/libjaylink;name=libjaylink \
-     file://0001-Do-not-include-syscrtl.h-with-glibc.patch \
-+    file://0001-bitbang-Make-bitbang_swd-extern-definition.patch \
- "
+diff --git a/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb b/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb
+index 3e5c31a05d..58b4f31b17 100644
+--- a/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb
++++ b/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb
+@@ -7,7 +7,9 @@ DEPENDS += " xorgproto zlib"
+ PE = "1"
+ PR = "r11"
  
- SRCREV_FORMAT = "openocd"
+-SRC_URI += "file://mkg3states-1.1.patch"
++SRC_URI += "file://mkg3states-1.1.patch \
++            file://0001-lbx_zlib-Mark-declration-with-extern.patch \
++           "
+ SRC_URI[md5sum] = "273329a78c2e9ea189ac416c7fde94a1"
+ SRC_URI[sha256sum] = "c6b6ff7858ec619cafa8205debca6bf78c5610a2844a782ed643c7fd017cf8ae"
+ 
 -- 
 2.28.0
 
