@@ -1,127 +1,119 @@
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web11.12373.1597383432180987203
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web10.12569.1597383433325220691
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Aug 2020 22:37:12 -0700
+ Thu, 13 Aug 2020 22:37:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=AlYa5pwv;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id f10so3672132plj.8
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 22:37:12 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=n8Adynzu;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id x25so4021083pff.4
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Aug 2020 22:37:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=39CDMIrK/ELnnRR74cvKajtJsWOjQynbJyMf9tg9mjY=;
-        b=AlYa5pwvB3eWyXthSL6SOtHSRHJHRFyBRF2JGr345CStTxz2tB1/HkaEiF/jOMur3q
-         s7wCySjnZWwqk+T8EnYwjoniAwBSpUy2mSxOVYva47aM+3d2CJNy3wBqJWCac04jfcjI
-         rlJnlLbcbZEJW0Qty5XzqY7JL3ZZzYSYU074kozAjFo7pWgL0u74OxcClC6yIWP72hdB
-         b87lzA0cPH+ga8f6mTKGmvm7W3TDu3rb9/rbuyarhGyNu0HdsAnDxXLBWiVKzmXvhYZe
-         sXoLwTAwg9ioJfvIL//SmAwuwdNqne++hzZvHyd6pAbD0l525lKsOSKHdhkiBO4hWPW1
-         96+w==
+        bh=kpUkZ0usTTuWq4R+D7yCknDTYGyZr19ZbfESNiA20mc=;
+        b=n8AdynzuSdQIOZKuvvBspEYXuHhLQKZnh3p8kt62MIVX+zc6gA35rs5Nw8U+sHurFb
+         EkZbVwyzMYxKEGuNCj/oTczPWbBLuce+XtLz073jpCVcN4k8lccGTCGrUnPOocJbXW67
+         IlnyTHJ7Z2hhuB0eihGG+sIII81W2DPFFJWR9VGnsXuG7QDnjfJsbZN1LTzcucCnazIJ
+         5kuUIqFS8auUxbSHVghl9o7sv86KJHrbsNmOZwpEPyvh5Ks4n5GGj51aKr4cfLXHYQh6
+         69luoSjWY5yaeo+Om+V7P8szsURs0f/m8zSNZ7R4Oh1ihjc2n4uCqFrBqzyi6lEyBxYb
+         pNNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=39CDMIrK/ELnnRR74cvKajtJsWOjQynbJyMf9tg9mjY=;
-        b=ReFM6iN1fhDkjEYzTbuWP9EZ/FH1iV8kcxtNQWho7kO2qA2IjOSAI/eKDvk9PbJuNL
-         23iwTJou9t6hd+XppWjYwQ/NbJJcGj3XQYlVY4q+5ceuOKB4AM+0iBcdl1hYH4dN7yRT
-         iI94eQYAA0ZTy1wHPWmJI7L1DJRP0grvDmN7kE9kTlIzOT23WfZmdgvskwlrdH7Tr4bW
-         yy9QpxJMhMktR1dUGZxDwyPXU0xq3jynFxacST5x9NXlwOhMwd9dPKBwIA77zjoiDBJe
-         pPvxF7u8fM84I8iNA+N+dgsTUL5Fd31Rp3Fgp+GAEMSRjiQMIiT5gSGbZXR9gCqzdL4f
-         JJcA==
-X-Gm-Message-State: AOAM530NjrTMD5PBe2OAYY77DwfqJRe/LnEKv3V8onhk9yJ308z5p0r0
-	cr5QrhpBK7WwWmXHB6GzRmeuqGisfmm5Lg==
-X-Google-Smtp-Source: ABdhPJzgXBU6cJ9Mj8VDYtepxVMpogVjrq7PAHI3LOCXHQBROwwOO7WbRW/8oO3Ofb3Btm76QEqFjw==
-X-Received: by 2002:a17:90b:470f:: with SMTP id jc15mr978139pjb.166.1597383431202;
-        Thu, 13 Aug 2020 22:37:11 -0700 (PDT)
+        bh=kpUkZ0usTTuWq4R+D7yCknDTYGyZr19ZbfESNiA20mc=;
+        b=fT9ps/s3H2Recx41PrDMyo6eV0F8XknVo2HZol8lCirUJGwVB6gkszizyJUIIo8cJV
+         KuSEZauC5C5wSQvZSwadP78fuNHf1dBhYfY6bfCxs4IW+prWJxJJNH+qgBvgnR7NMgnE
+         8cedhKdl8F/bCqsb4mX8uqpRBp0fMatIDAIqJidDZcij93VImlbY8fSHQMPYchUjtTiX
+         9w1Yaq+TNl9jqgxYjFqOob5ETHXxSZV5h/cNBO97oHB1H7vmQ+ZpdvCTmt7tAAs3dytv
+         kI0PbcjJzsTiwfJylTv23QeFLKOu2hftCOiEoL1GNNSSU5Xo4a/iOyHtO6oJZ/4wlhhQ
+         +tPw==
+X-Gm-Message-State: AOAM5333wgXoBwP5YHtLvWRtxhT8U0kro/cFCs5d4gfuNWQfw2KiRi5P
+	WyrRBYJLkkud+EUHU385Z8R2YaCEELFc1w==
+X-Google-Smtp-Source: ABdhPJxRpJhW14I1h/cdbij23w+jITEmkZ//FFzqsSBMzRKb3gRYqydZL8M3Ehta8wCHBxBSVa9mpw==
+X-Received: by 2002:a65:6650:: with SMTP id z16mr762347pgv.161.1597383432432;
+        Thu, 13 Aug 2020 22:37:12 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e60c])
-        by smtp.gmail.com with ESMTPSA id k21sm7013974pgl.0.2020.08.13.22.37.10
+        by smtp.gmail.com with ESMTPSA id k21sm7013974pgl.0.2020.08.13.22.37.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2020 22:37:10 -0700 (PDT)
+        Thu, 13 Aug 2020 22:37:11 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 12/21] libforms: Fix build with -fno-common
-Date: Thu, 13 Aug 2020 22:36:48 -0700
-Message-Id: <20200814053657.1701247-12-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 13/21] wifi-test-suite: Update to latest tip
+Date: Thu, 13 Aug 2020 22:36:49 -0700
+Message-Id: <20200814053657.1701247-13-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200814053657.1701247-1-raj.khem@gmail.com>
 References: <20200814053657.1701247-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+Fix build with gcc10/-fno-common
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...e-extern-declarations-in-header-file.patch | 46 +++++++++++++++++++
- .../libforms/libforms_1.2.3.bb                |  1 +
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/libforms/files/0001-Make-extern-declarations-in-header-file.patch
+ .../wifi-test-suite/files/fno-common.patch    | 29 +++++++++++++++++++
+ .../wifi-test-suite/wifi-test-suite_git.bb    |  3 +-
+ 2 files changed, 31 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-connectivity/wifi-test-suite/files/fno-common.patch
 
-diff --git a/meta-oe/recipes-graphics/libforms/files/0001-Make-extern-declarations-in-header-file.patch b/meta-oe/recipes-graphics/libforms/files/0001-Make-extern-declarations-in-header-file.patch
+diff --git a/meta-oe/recipes-connectivity/wifi-test-suite/files/fno-common.patch b/meta-oe/recipes-connectivity/wifi-test-suite/files/fno-common.patch
 new file mode 100644
-index 0000000000..619bad6d02
+index 0000000000..fc5e2e99c5
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/libforms/files/0001-Make-extern-declarations-in-header-file.patch
-@@ -0,0 +1,46 @@
-+From a57c498f6c25aa297e49533c242525f2b9da7048 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 13 Aug 2020 18:20:42 -0700
-+Subject: [PATCH] Make extern declarations in header file
++++ b/meta-oe/recipes-connectivity/wifi-test-suite/files/fno-common.patch
+@@ -0,0 +1,29 @@
++Mark extern variables with 'extern' keyword
 +
-+curobj is a static object in other places as well.
-+Fixes build with gcc10/-fno-common
++This ensures that compilers with -fno-common does not generate multiple definitions
 +
 +Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ fdesign/sp_spinner.c | 2 +-
-+ lib/flinternal.h     | 4 ++--
-+ 2 files changed, 3 insertions(+), 3 deletions(-)
++Signedd-off-by: Khem Raj <raj.khem@gmail.com>
 +
-+diff --git a/fdesign/sp_spinner.c b/fdesign/sp_spinner.c
-+index 04f2c19..6206daa 100644
-+--- a/fdesign/sp_spinner.c
-++++ b/fdesign/sp_spinner.c
-+@@ -29,7 +29,7 @@
-+ #include "spec/spinner_spec.h"
++--- a/lib/wfa_cs.c
+++++ b/lib/wfa_cs.c
++@@ -71,7 +71,7 @@ int wfaExecuteCLI(char *CLI);
 + 
-+ static FD_spinnerattrib * spn_attrib;
-+-FL_OBJECT *curobj;
-++static FL_OBJECT *curobj;
++ /* Since the two definitions are used all over the CA function */
++ char gCmdStr[WFA_CMD_STR_SZ];
++-dutCmdResponse_t gGenericResp;
+++extern dutCmdResponse_t gGenericResp;
++ int wfaTGSetPrio(int sockfd, int tgClass);
++ void create_apts_msg(int msg, unsigned int txbuf[],int id);
 + 
-+ 
-+ /***************************************
-+diff --git a/lib/flinternal.h b/lib/flinternal.h
-+index 06d847e..577bd10 100644
-+--- a/lib/flinternal.h
-++++ b/lib/flinternal.h
-+@@ -138,8 +138,8 @@ enum {
-+ 
-+ /* events.c or event related */
-+ 
-+-FL_OBJECT * fli_handled_obj;
-+-FL_OBJECT * fli_handled_parent;
-++extern FL_OBJECT * fli_handled_obj;
-++extern FL_OBJECT * fli_handled_parent;
-+ 
-+ void fli_obj_queue_delete( void );
-+ 
-+-- 
-+2.28.0
-+
-diff --git a/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb b/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
-index 999d53d4a9..35029f5176 100644
---- a/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
-+++ b/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
-@@ -9,6 +9,7 @@ SRC_URI = "http://download.savannah.nongnu.org/releases/xforms/xforms-${PV}.tar.
-            file://fix-link-to-xforms-man.patch \
-            file://add-absolute-path-for-include-dir.patch \
-            file://fix-path-fdesign_LDADD.patch \
-+           file://0001-Make-extern-declarations-in-header-file.patch \
-           "
++--- a/lib/wfa_thr.c
+++++ b/lib/wfa_thr.c
++@@ -41,7 +41,7 @@
++ /*
++  * external global thread sync variables
++  */
++-tgWMM_t wmm_thr[WFA_THREADS_NUM];
+++extern tgWMM_t wmm_thr[WFA_THREADS_NUM];
++ extern int resetsnd;
++ extern int resetrcv;
++ extern int newCmdOn;
+diff --git a/meta-oe/recipes-connectivity/wifi-test-suite/wifi-test-suite_git.bb b/meta-oe/recipes-connectivity/wifi-test-suite/wifi-test-suite_git.bb
+index 99cfb32051..cb39f5a0e1 100644
+--- a/meta-oe/recipes-connectivity/wifi-test-suite/wifi-test-suite_git.bb
++++ b/meta-oe/recipes-connectivity/wifi-test-suite/wifi-test-suite_git.bb
+@@ -8,12 +8,13 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=0542427ed5c315ca34aa09ae7a85ed32"
+ SECTION = "test"
  
- SRC_URI[md5sum] = "235720a758a8b8d9e6e452dc67190e9b"
+ S = "${WORKDIR}/git"
+-SRCREV = "f7a8d7ef7d1a831c1bb47de21fa083536ea2f3a9"
++SRCREV = "2da947374c8324f88a0e2155aeba4cf75464b0d8"
+ SRC_URI = "git://github.com/Wi-FiTestSuite/Wi-FiTestSuite-Linux-DUT.git \
+ 	file://0001-Use-toolchain-from-environment-variables.patch \
+ 	file://0002-Add-missing-include-removes-unnedded-stuff-and-add-n.patch \
+ 	file://0003-fix-path-to-usr-sbin-for-script-and-make-script-for-.patch \
+ 	file://0004-run-ranlib-per-library-and-use-AR.patch \
++        file://fno-common.patch \
+ "
+ 
+ # to avoid host path QA error
 -- 
 2.28.0
 
