@@ -1,88 +1,84 @@
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com [209.85.222.194])
- by mx.groups.io with SMTP id smtpd.web11.1100.1597442013414696535
+Received: from mail-pj1-f67.google.com (mail-pj1-f67.google.com [209.85.216.67])
+ by mx.groups.io with SMTP id smtpd.web10.20215.1597561983974678861
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Aug 2020 14:53:33 -0700
+ Sun, 16 Aug 2020 00:13:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.222.194, mailfrom: otavio.salvador@gmail.com)
-Received: by mail-qk1-f194.google.com with SMTP id d14so9685276qke.13
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Aug 2020 14:53:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=O75Uyvz4;
+ spf=pass (domain: gmail.com, ip: 209.85.216.67, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f67.google.com with SMTP id e4so6262525pjd.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Aug 2020 00:13:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Dmj1LNjiTkNLN7/TLoheQepEqqztLhlfq71Y4LqqHQs=;
+        b=O75Uyvz4WIorevylTSigQCsYdSdEpaoD9ZCmNffKnUwrOSt7GUdmnPEJg7LE+Vypun
+         5IA7pAkkYTcNGrkKCe3bFaf8VWH14bswjaAugiYy/q/sX4XsO7Gnb+m2Ti0NlQ0BslVP
+         RAe9YUNBD85HUiP1nA7XAwaD6Yz35uVpE5VKszpeRZNAH1AK5FuXPBRsKXhjU7yXsbA4
+         wvT6oyP34v2rR0Pmcm0yROOqutW1r322O7bcyAT8pQInq/fPVs2PMy/JdwVXyKceOY5L
+         qpLNrOtSi7ljDWwTY1avzMrrx9HPwoFuf1Ylsm4MSHzNWzR2qSEa4MMGQlgbgVWL/Ifs
+         SOUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :organization:content-transfer-encoding;
-        bh=Zl+Do+EQCBK2qkJRj2eyXPpTJ3XnheAox06xrG1iZRA=;
-        b=JY6YJoOA4kxtVLO1JZ5bAVivD9QztEH8NWPww6/B5UpWSIEbVGFdYkBMg60ycrm+/r
-         0QrMK98lEZ3z1pOOF1+jzYV2wrANU4R8HzAk8DoGb/o3qStNzaVj474AGOMFCtdTd/i9
-         MyBpVQTRG4eM5nkjXnWbaiEa0hQmunYm+p4ivs08RR7mXv4HZg+bBSkJIw8q5j6PE6/a
-         VTYtbDEh1GPuIoIAt/A5PMSIAs8Iia5XpE+DH+QqcwqTgUjBOzgK8v5l/sZVbQSwWLUF
-         oBlVyAZ0p4ZZKFEt3v7aGSVjyYd4a773tPOPrUbQnXonbaf7pqQf8E0GRJOP5W7ofFqs
-         oZCw==
-X-Gm-Message-State: AOAM533F00DcKL6koXXzl3Mt9E0GE4+nv30gIe7am9asdfcWBkPpmNdI
-	wujBvUXVq1JILgGgOFxvL9Nwm8w49I9/Cg==
-X-Google-Smtp-Source: ABdhPJwEpK7xkvu0l9d01A2krByi71YDq4LXFez5I5031p404Yg4oy7slPOqRlPq5GZdBErRqJESkg==
-X-Received: by 2002:a37:9f97:: with SMTP id i145mr3657093qke.136.1597442012371;
-        Fri, 14 Aug 2020 14:53:32 -0700 (PDT)
-Return-Path: <otavio.salvador@gmail.com>
-Received: from localhost ([181.220.78.182])
-        by smtp.gmail.com with ESMTPSA id 139sm9863555qkl.13.2020.08.14.14.53.31
+         :content-transfer-encoding;
+        bh=Dmj1LNjiTkNLN7/TLoheQepEqqztLhlfq71Y4LqqHQs=;
+        b=UNmaEfLgOaOjKTCG8uxTF9Qpz9AvXZY3heXlJ1QQE7M2vxU65l8W25Jv0wmjczE1Gp
+         GhJ72jl5u17thWq1bwtDQJqmDYKnU87Hb0Y+iIPdcI2atU9s5cXNsIlBv3s5/+KMVgB0
+         p8t5UqBjtYqpPX6ILy2HYlsqy/5+pZ22UgyDBC94ciOInwje/27+WWkJk4/gokm5NZJU
+         v92xq9fKIi/IS6Cald3CwsMDQYji1aHeS/StX1Gr0PCiHhtznoZaKixekD/zPmr2/xVE
+         0haSdqV53GJ1zHTxi6Bxee3fZBvuEcVXv6cVyzX/gV58KUsexZDfO2+hF/okp1QX2sDk
+         4qRQ==
+X-Gm-Message-State: AOAM5314SzhpKsW3Kq09KB/AwG9iXys7b/xnFnCNB8OthPHBNEuLx1IK
+	bCo8hPqc8ZGn9zyTQmDAMBB03nkA7ZJ0tQ==
+X-Google-Smtp-Source: ABdhPJzgbjDPfinoefn4GnNyuL+Zt1Jb71EGOSP87UwXa2PRjo2Vx91IknDwxNmgbCrXV3yGUnV/Vg==
+X-Received: by 2002:a17:902:6ac9:: with SMTP id i9mr7451169plt.128.1597561983057;
+        Sun, 16 Aug 2020 00:13:03 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::37ae])
+        by smtp.gmail.com with ESMTPSA id q7sm12054386pfu.133.2020.08.16.00.13.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2020 14:53:31 -0700 (PDT)
-From: "Otavio Salvador" <otavio.salvador@gmail.com>
-To: Meta-OpenEmbedded Mailing listing <openembedded-devel@lists.openembedded.org>
-Cc: Pierre-Jean Texier <pjtexier@koncepto.io>,
-	Khem Raj <raj.khem@gmail.com>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: [dunfell meta-oe PATCH] haveged: upgrade 1.9.9 -> 1.9.13
-Date: Fri, 14 Aug 2020 18:53:28 -0300
-Message-Id: <20200814215328.200355-1-otavio@ossystems.com.br>
+        Sun, 16 Aug 2020 00:13:02 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Shlomi Vaknin <shlomi.39sd@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH 1/2] json-schema-validator: Add recipe
+Date: Sun, 16 Aug 2020 00:12:59 -0700
+Message-Id: <20200816071300.1407768-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-Organization: O.S. Systems Software LTDA.
 Content-Transfer-Encoding: 8bit
 
-From: Pierre-Jean Texier <pjtexier@koncepto.io>
+From: Shlomi Vaknin <shlomi.39sd@gmail.com>
 
-This includes the following changes:
-
-1.9.10:
- - fix ordering cycle with private tmp
-
-1.9.11:
- - Fixed wrong version string in v1.9.10
-
-1.9.12:
- - Fix a memory leak in havege_destroy
-
-1.9.13:
- - Added support for --version
- - Updated systemd SystemCallFilter settings
-
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Shlomi Vaknin <shlomi.39sd@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 7e82d252fa558ebb6fe0d07b50a4be6abe40a725)
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
+ .../json-schema-validator_2.1.0.bb                 | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.1.0.bb
 
- .../haveged/{haveged_1.9.9.bb => haveged_1.9.13.bb}             | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/haveged/{haveged_1.9.9.bb => haveged_1.9.13.bb} (97%)
-
-diff --git a/meta-oe/recipes-extended/haveged/haveged_1.9.9.bb b/meta-oe/recipes-extended/haveged/haveged_1.9.13.bb
-similarity index 97%
-rename from meta-oe/recipes-extended/haveged/haveged_1.9.9.bb
-rename to meta-oe/recipes-extended/haveged/haveged_1.9.13.bb
-index c1839b37a..50326ea2f 100644
---- a/meta-oe/recipes-extended/haveged/haveged_1.9.9.bb
-+++ b/meta-oe/recipes-extended/haveged/haveged_1.9.13.bb
-@@ -6,7 +6,7 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM="file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- # v1.9.9
--SRCREV = "6da706c8026b629d9bb7ebebc32239305a03da8e"
-+SRCREV = "1283a65c541c4a83e152024a63faf7b267b9b1cd"
- SRC_URI = "git://github.com/jirka-h/haveged.git \
- "
- S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.1.0.bb b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.1.0.bb
+new file mode 100644
+index 0000000000..7f6c34eb3d
+--- /dev/null
++++ b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.1.0.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "JSON schema validator for JSON for Modern C++"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c441d022da1b1663c70181a32225d006"
++
++SRC_URI = "git://github.com/pboettch/json-schema-validator"
++SRCREV = "27fc1d094503623dfe39365ba82581507524545c"
++
++S = "${WORKDIR}/git"
++
++DEPENDS += "nlohmann-json"
++
++inherit cmake
++EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF"
++
 -- 
 2.28.0
 
