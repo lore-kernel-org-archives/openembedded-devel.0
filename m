@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.41348.1597663766246337362
+ by mx.groups.io with SMTP id smtpd.web12.40990.1597663767736712147
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Aug 2020 04:29:26 -0700
+ Mon, 17 Aug 2020 04:29:28 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=34814 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k7dKO-000361-KS; Mon, 17 Aug 2020 14:29:25 +0300
+	id 1k7dKP-000361-5G; Mon, 17 Aug 2020 14:29:25 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 04/10] python3-isort: Upgrade 5.3.2 -> 5.4.2
-Date: Mon, 17 Aug 2020 14:28:55 +0300
-Message-Id: <20200817112901.28914-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 05/10] python3-cffi: Upgrade 1.14.1 -> 1.14.2
+Date: Mon, 17 Aug 2020 14:28:56 +0300
+Message-Id: <20200817112901.28914-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200817112901.28914-1-leon.anavi@konsulko.com>
 References: <20200817112901.28914-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=0.0
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,37 +30,37 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 5.4.2:
+Upgrade to release 1.14.2:
 
-- Fixed: Known other does not work anymore with .editorconfig.
-- Fixed: Regression in first known party path expansion.
-- Fixed: --combine-as loses # noqa in different circumstances.
-- Implemented: support for length sort only of direct (AKA
-  straight) imports.
-- Fixed: --combine-as loses # noqa.
-- Fixed: --dont-order-by-type CLI broken.
+- CPython 3 on Windows: we again try to compile with
+  Py_LIMITED_API by default. This flag is not added if you run the
+  compilation with CPython 3.4, as it only works with CPython >=
+  3.5, but by now this version of Python is quite old (and we no
+  longer distribute cffi wheels for it).
+- You can manually disable Py_LIMITED_API by calling
+  ffi.set_source(..., py_limited_api=False).
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-isort_5.3.2.bb => python3-isort_5.4.2.bb} | 4 ++--
+ .../python/{python3-cffi_1.14.1.bb => python3-cffi_1.14.2.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-isort_5.3.2.bb => python3-isort_5.4.2.bb} (73%)
+ rename meta-python/recipes-devtools/python/{python3-cffi_1.14.1.bb => python3-cffi_1.14.2.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-isort_5.3.2.bb b/meta-python/recipes-devtools/python/python3-isort_5.4.2.bb
-similarity index 73%
-rename from meta-python/recipes-devtools/python/python3-isort_5.3.2.bb
-rename to meta-python/recipes-devtools/python/python3-isort_5.4.2.bb
-index 2f1a9838e..6b1cee40d 100644
---- a/meta-python/recipes-devtools/python/python3-isort_5.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-isort_5.4.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.14.1.bb b/meta-python/recipes-devtools/python/python3-cffi_1.14.2.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-cffi_1.14.1.bb
+rename to meta-python/recipes-devtools/python/python3-cffi_1.14.2.bb
+index 59b99dd71..57c28954a 100644
+--- a/meta-python/recipes-devtools/python/python3-cffi_1.14.1.bb
++++ b/meta-python/recipes-devtools/python/python3-cffi_1.14.2.bb
 @@ -4,8 +4,8 @@ LICENSE = "MIT"
- SECTION = "devel/python"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=8227180126797a0148f94f483f3e1489"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
+ DEPENDS += "libffi ${PYTHON_PN}-pycparser"
  
--SRC_URI[md5sum] = "5ef33a4fe121b3f24493ad8ac450baac"
--SRC_URI[sha256sum] = "ba83762132a8661d3525f87a86549712fb7d8da79eeb452e01f327ada9e87920"
-+SRC_URI[md5sum] = "59592b6e14beba48149d651e900e3815"
-+SRC_URI[sha256sum] = "d488ba1c5a2db721669cc180180d5acf84ebdc5af7827f7aaeaa75f73cf0e2b8"
+-SRC_URI[md5sum] = "1dac3d20d5602829dfaa7026658b7795"
+-SRC_URI[sha256sum] = "b2a2b0d276a136146e012154baefaea2758ef1f56ae9f4e01c612b0831e0bd2f"
++SRC_URI[md5sum] = "3cc2f1daf62dd66eda79b4d6281cebfc"
++SRC_URI[sha256sum] = "ae8f34d50af2c2154035984b8b5fc5d9ed63f32fe615646ab435b05b132ca91b"
  
  inherit pypi setuptools3
  
