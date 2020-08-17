@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.40989.1597663765685794348
+ by mx.groups.io with SMTP id smtpd.web11.41348.1597663766246337362
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 17 Aug 2020 04:29:26 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=34814 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k7dKN-000361-AT; Mon, 17 Aug 2020 14:29:24 +0300
+	id 1k7dKO-000361-KS; Mon, 17 Aug 2020 14:29:25 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 03/10] python3-bcrypt: Upgrade 3.1.7 -> 3.2.0
-Date: Mon, 17 Aug 2020 14:28:54 +0300
-Message-Id: <20200817112901.28914-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 04/10] python3-isort: Upgrade 5.3.2 -> 5.4.2
+Date: Mon, 17 Aug 2020 14:28:55 +0300
+Message-Id: <20200817112901.28914-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200817112901.28914-1-leon.anavi@konsulko.com>
 References: <20200817112901.28914-1-leon.anavi@konsulko.com>
@@ -30,35 +30,39 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.2.0:
+Upgrade to release 5.4.2:
 
-- Added typehints for library functions
-- Dropped support for Python versions less than 3.6
-- Shipped abi3 Windows wheels (requires pip >= 20)
+- Fixed: Known other does not work anymore with .editorconfig.
+- Fixed: Regression in first known party path expansion.
+- Fixed: --combine-as loses # noqa in different circumstances.
+- Implemented: support for length sort only of direct (AKA
+  straight) imports.
+- Fixed: --combine-as loses # noqa.
+- Fixed: --dont-order-by-type CLI broken.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-bcrypt_3.1.7.bb => python3-bcrypt_3.2.0.bb}      | 4 ++--
+ .../python/{python3-isort_5.3.2.bb => python3-isort_5.4.2.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-bcrypt_3.1.7.bb => python3-bcrypt_3.2.0.bb} (80%)
+ rename meta-python/recipes-devtools/python/{python3-isort_5.3.2.bb => python3-isort_5.4.2.bb} (73%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bcrypt_3.1.7.bb b/meta-python/recipes-devtools/python/python3-bcrypt_3.2.0.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-bcrypt_3.1.7.bb
-rename to meta-python/recipes-devtools/python/python3-bcrypt_3.2.0.bb
-index 3b9cd52f2..360f14be1 100644
---- a/meta-python/recipes-devtools/python/python3-bcrypt_3.1.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-bcrypt_3.2.0.bb
-@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8f7bb094c7232b058c7e9f2e431f389c"
+diff --git a/meta-python/recipes-devtools/python/python3-isort_5.3.2.bb b/meta-python/recipes-devtools/python/python3-isort_5.4.2.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-isort_5.3.2.bb
+rename to meta-python/recipes-devtools/python/python3-isort_5.4.2.bb
+index 2f1a9838e..6b1cee40d 100644
+--- a/meta-python/recipes-devtools/python/python3-isort_5.3.2.bb
++++ b/meta-python/recipes-devtools/python/python3-isort_5.4.2.bb
+@@ -4,8 +4,8 @@ LICENSE = "MIT"
+ SECTION = "devel/python"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=8227180126797a0148f94f483f3e1489"
  
- DEPENDS += "${PYTHON_PN}-cffi-native"
+-SRC_URI[md5sum] = "5ef33a4fe121b3f24493ad8ac450baac"
+-SRC_URI[sha256sum] = "ba83762132a8661d3525f87a86549712fb7d8da79eeb452e01f327ada9e87920"
++SRC_URI[md5sum] = "59592b6e14beba48149d651e900e3815"
++SRC_URI[sha256sum] = "d488ba1c5a2db721669cc180180d5acf84ebdc5af7827f7aaeaa75f73cf0e2b8"
  
--SRC_URI[md5sum] = "5d6f93b575ce52470af37a8e7dce76fe"
--SRC_URI[sha256sum] = "0b0069c752ec14172c5f78208f1863d7ad6755a6fae6fe76ec2c80d13be41e42"
-+SRC_URI[md5sum] = "fe31390dab603728f756cd3d6830c80a"
-+SRC_URI[sha256sum] = "5b93c1726e50a93a033c36e5ca7fdcd29a5c7395af50a6892f5d9e7c6cfbfb29"
- 
- inherit pypi setuptools3 ptest
+ inherit pypi setuptools3
  
 -- 
 2.17.1
