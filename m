@@ -1,89 +1,77 @@
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web10.38157.1597644971996192515
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.41345.1597663752398489065
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 16 Aug 2020 23:16:12 -0700
+ Mon, 17 Aug 2020 04:29:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=XyqGYu2s;
- spf=pass (domain: linaro.org, ip: 209.85.214.177, mailfrom: arthur.she@linaro.org)
-Received: by mail-pl1-f177.google.com with SMTP id r4so6993895pls.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Aug 2020 23:16:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=4SQt2kbEX5sSJsyYUpiA29dq7Uxk4D+Iq5DqLTPkRvk=;
-        b=XyqGYu2sgZ5kcNJWcg+q0X2Sk6LmHStoYTtUXsjpcjvZz0pItdtyUyyCaplYejfjhC
-         5pjoF2md3QYTZMSWaAzRibvZhKUNyMr8nIKGWhxt4IydblyukfMnPk5rL8FfvmXvl2Iv
-         e86icDkbaEasehTB2KHzcsZKHnA2BWx45qv2cdOMciso3QRLuzAT4KT8Mu94nG+e/s6u
-         tBjT7opZ44R8g793gPkEufsfFMan0QrtrRH7M8qPG1TMKuhn38VCszm1wCz39XZ6f8ik
-         7QOens3GNiMoGb4wK/qLlBsWcEHBq9x3g8J9ZUd221E2Cm/zR6YpQkE6GPUGyKJNrRNi
-         S9gg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=4SQt2kbEX5sSJsyYUpiA29dq7Uxk4D+Iq5DqLTPkRvk=;
-        b=nKqYM47HseX0IhYmiehhCgh54JEbs7GQWpWRH263hLldVpQfIJqs0fnXuFrpJh0NYi
-         Ys+Zby+R79xV7L8N/EkcOkMSAkaQVqm4Hm++FXQ4sxs6GTdIXtmGPNARrrea09IW+KZn
-         EqDpHhrRdZxI+qEkA+gp7AfM+Izc6cqndNboB8e+UnRh1eUk9frVZwm8EjPTSV8dnVE3
-         oUDGxfbTiBs5gri2TYjo1ni3yrtEqQjNpl113SBjEW8A23fMsvlE9H5c8fxiXHEtOLfE
-         WXlrTVdsSMiCbPW9Y3QoLHUPOoJooTHH/InLVVrBHkrhvH+ZRp8dN4w13y8+51QuVKB7
-         PJuA==
-X-Gm-Message-State: AOAM5308PFiCz7DuliCv/Ug2ODftGi084gn3M2uIkC+k2oeybH/1wbt0
-	BGyw62ZNSP6thFpoaLgy540VcVHIW6Q1xQ==
-X-Google-Smtp-Source: ABdhPJyAeOfpwOOz/dTQn34DviK/i48eapPZ2NPMIpTCM6sd/hd86CyPR2ThtIbNWy6xLiidXqOwFg==
-X-Received: by 2002:a17:902:9a01:: with SMTP id v1mr9836363plp.15.1597644971253;
-        Sun, 16 Aug 2020 23:16:11 -0700 (PDT)
-Return-Path: <arthur.she@linaro.org>
-Received: from arthur-X1E.hitronhub.home (S0106a84e3f840fe3.vn.shawcable.net. [50.68.230.12])
-        by smtp.gmail.com with ESMTPSA id q11sm18082224pfn.170.2020.08.16.23.16.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 16 Aug 2020 23:16:10 -0700 (PDT)
-From: "Arthur She" <arthur.she@linaro.org>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=34814 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1k7dK7-000361-7B; Mon, 17 Aug 2020 14:29:08 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Arthur She <arthur.she@linaro.org>
-Subject: [meta-oe][PATCH v2] xmlrpc-c: Upgrade 1.51.03 -> 1.54.02
-Date: Sun, 16 Aug 2020 23:16:08 -0700
-Message-Id: <20200817061608.4131054-1-arthur.she@linaro.org>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 01/10] python3-matplotlib: Upgrade 3.3.0 -> 3.3.1
+Date: Mon, 17 Aug 2020 14:28:52 +0300
+Message-Id: <20200817112901.28914-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Upgrade to release 1.54.02:
+Upgrade to release 3.3.1 that contains several critical bug-fixes:
 
-- Build: Use 'curl-config' found at configure time, not at make time.
-- Fix bug: 'toValue' won't compile for vector of vectors or map of vectors. Thanks Yang Bo .
-- Fix tiny memory leak in virtually impossible low memory situation.
+- fix docstring import issues when running Python with
+  optimization
+- fix hist with categorical data, such as with Pandas
+- fix install on BSD systems
+- fix nbagg compatibility with Chrome 84+
+- fix ordering of scatter marker size in 3D plots
+- fix performance regression when plotting Paths
+- fix reading from URL in imread
+- fix several regressions with new date epoch handling
+- fix some bad constrained and tight layout interactions
+  with colorbars
+- fix use of customized toolbars in TkAgg and WXAgg backends
 
-It also solved one igt-gpu-tools test results misleading issue [1]
+Add the native recipe for python3-certifi to DEPENDS.
 
-[1] https://gitlab.freedesktop.org/drm/igt-gpu-tools/-/issues/92
-
-Signed-off-by: Arthur She <arthur.she@linaro.org>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../xmlrpc-c/{xmlrpc-c_1.51.03.bb => xmlrpc-c_1.54.02.bb}    | 5 +++--
+ ...thon3-matplotlib_3.3.0.bb => python3-matplotlib_3.3.1.bb} | 5 +++--
  1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/xmlrpc-c/{xmlrpc-c_1.51.03.bb => xmlrpc-c_1.54.02.bb} (95%)
+ rename meta-python/recipes-devtools/python/{python3-matplotlib_3.3.0.bb => python3-matplotlib_3.3.1.bb} (86%)
 
-diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb
-rename to meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb
-index 6c31b6981..c1f0b78ca 100644
---- a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb
-+++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb
-@@ -9,8 +9,9 @@ SRC_URI = "git://github.com/mirror/xmlrpc-c.git \
-            file://0001-test-cpp-server_abyss-Fix-build-with-clang-libc.patch \
-            file://0002-fix-formatting-issues.patch \
-            "
--#Release 1.51.03
--SRCREV = "343a3b98e54999d67edb644bcd395aa9784fb16e"
-+
-+#Release 1.54.02
-+SRCREV = "86405c7e1bd4f70287204a28d242a1054daab520"
+diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.3.1.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-matplotlib_3.3.1.bb
+index bc2054a4d..6273ee2f2 100644
+--- a/meta-python/recipes-devtools/python/python3-matplotlib_3.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.3.1.bb
+@@ -16,10 +16,11 @@ DEPENDS = "\
+     python3-numpy-native \
+     python3-dateutil-native \
+     python3-pytz-native \
++    python3-certifi-native \
+ "
  
- S = "${WORKDIR}/git/stable"
+-SRC_URI[md5sum] = "b1de7185687c6f5c092689e3431a69b3"
+-SRC_URI[sha256sum] = "24e8db94948019d531ce0bcd637ac24b1c8f6744ac86d2aa0eb6dbaeb1386f82"
++SRC_URI[md5sum] = "f3a405f340be5b151cb2042c4d8d16f7"
++SRC_URI[sha256sum] = "87f53bcce90772f942c2db56736788b39332d552461a5cb13f05ff45c1680f0e"
+ 
+ inherit pypi setuptools3 pkgconfig
  
 -- 
-2.25.1
+2.17.1
 
