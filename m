@@ -1,86 +1,68 @@
-Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com [209.85.219.68])
- by mx.groups.io with SMTP id smtpd.web11.70951.1597770707257102792
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
+ by mx.groups.io with SMTP id smtpd.web12.74034.1597781336258461234
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Aug 2020 10:11:47 -0700
+ Tue, 18 Aug 2020 13:08:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ikG9S1wC;
- spf=pass (domain: gmail.com, ip: 209.85.219.68, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f68.google.com with SMTP id j10so9871438qvo.13
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2020 10:11:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=GzOE7Hoo;
+ spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: marek.belisko@gmail.com)
+Received: by mail-ed1-f53.google.com with SMTP id a14so16270253edx.7
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2020 13:08:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=evHCgzaM3GjCU11y11FSqaCJL2l+1N8st0FntQOjINY=;
-        b=ikG9S1wCcUM8td2sjfZX5Sa7qlRHUf9gn96p3A9Lcl2vj9eczR8B4xIhX5QLQfcAw6
-         guEJwLky7Qk+2jenvmiqA6RLgYoFNgFtfW+T56iN24PWrG6odX//z/kJBNmfE98W1g+A
-         FOLuFVyd5rtKVRcg1Amf6ENCNH06Nhb8hvOQPPszlg940mbY4DVBn/JORlOmLq+vKVNh
-         3uAKL9HO8DusBQmoIwrFAfm9g/XHKTx4RuLiwWALnDGENuy6BHo+vhAsOhmIp3yKUmbq
-         2QbkgtXW2n8sYxZcS29l5BoWIMcSvD9zRBYYV4B3qwHUDxIdzqoOH9DFZNSkVmffOqSL
-         OjYA==
+        h=mime-version:from:date:message-id:subject:to;
+        bh=4yZuM5zW+g7grcZyUuKbzgotJT5CQo3hVs9qt8+KlqA=;
+        b=GzOE7HooG5qblFDa/xoF7klbfSUhgTQyiPzKUzor01YNweefSiwioJn8UA9yOcf3AP
+         Vxh7fVy87P2dhGpeYO5Z0Mm/kSOzhPKvE6xMtqOvKJ3dtpiNfM/fx+tYsULqCp6mzcjO
+         5aV5gc+q+kqt3M8cVHW67bAecmpj10wHbx9vPHC/4rSJImWyl2nhoILO8gUblCyDo0Qp
+         toc2M1krJ0nQ35Dsw2xYqNm0FZtZbzodseHEedmMj51CQujdfpkGfFL29NfcHHlxd+XI
+         D8L/SremaNVWdTGOUpNIQXmWTEddl0m4E6uPuKZZwFUNa8VfMmEUJObVPSFOOcQHj7Pq
+         9OHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=evHCgzaM3GjCU11y11FSqaCJL2l+1N8st0FntQOjINY=;
-        b=Mxsy6z8CUettS1Hvt+SpmcgCxOZsCXlZUXhIsGLbX2hQ3Y/Rk+ZyA2l6j3GdqAWogB
-         rSrWj/NJXs7RbSXxYHQpJkA79yldBtOUo/U+uMa31V+7Dju9FVcrpWNHS+tRO4Xz+tlv
-         CHuV8YHkL57JOJfjXbOrZNb1dUCbzSHAeudDtwS3v81OIjph7fUoWMeUtlYp8vOjWK5o
-         3WEGiLGL7UuZU/ZT1iS35FFXiupuCKYCNjeYWrP6vJcxkoOjYIDQrdqvq2iuIp1/Avxi
-         ToJmHON1gghM3LR17TKn8SUZTKr9SXLZSMuMGmsfoECMb3cTH+J2iMVQB+ZW/sd5D54M
-         /CNA==
-X-Gm-Message-State: AOAM532Inbn8ORhln7wUQbZd+sG4rlktgrHeApdpZpiNt1CWKNa9xJGS
-	yJhL7cX8NVyA76ScLZfRW0SsiAAZMnu9VufATVk=
-X-Google-Smtp-Source: ABdhPJzh2sNGK0KWAzc7XrJbfsa/qFpjjb4jve5UOEN/oi5PKlylg+/V5iDvIFyInTfkLZ3K5gVUJ9AQmevgPZdgSck=
-X-Received: by 2002:a0c:fbd1:: with SMTP id n17mr20273679qvp.4.1597770706273;
- Tue, 18 Aug 2020 10:11:46 -0700 (PDT)
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=4yZuM5zW+g7grcZyUuKbzgotJT5CQo3hVs9qt8+KlqA=;
+        b=gFDJDIyUVkzQiIB8F6nycHyu/H8hqXYyCqaXgDx/H3x7BhPj3RyqiURG9Mk1bifGmC
+         Tfy4hK4RezWRv/89mcFPdX9S05YqrKEF5fA3kYgCJUc+TKHdc4JTXoKvWD9DM19bvVC4
+         5Pq4LxlSsk+MWDAnfecJXSXojUOXYzHDwnkZmVbcw3+fWfYYXiP6+NIlzIDq54++Oprd
+         ObX/S0XkyeybIWm6NyKSNOdKWj570TT0p27Botzy5nFNW6L47l2vf57VkI5/2SrIDd7U
+         mE4Meh1sSP/zl5Y4hMnq66GQeY9LIaNTb6ncKiDqbX7nvRpE/DDtq9rIl4y3clBAkC9V
+         rJ7A==
+X-Gm-Message-State: AOAM533zlmrjR3XABX2wZ3ALqq5uJoX91lxmjZzrIFPhAbBZZn2jiPDd
+	XT0XMgMn3LVp1adV4nujkRtH5/wEbBG+CFg7iUi/zDJhytQ=
+X-Google-Smtp-Source: ABdhPJy6Eaf0T/jMFKNt1er/vmc1mdEk79klP/vkiuJ0SIxrv3lmoUiAwpHIC/b8FycfvuNMlboG9EtoYNv614OhmzI=
+X-Received: by 2002:aa7:d983:: with SMTP id u3mr22271324eds.366.1597781334333;
+ Tue, 18 Aug 2020 13:08:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200818153444.15728-1-leon.anavi@konsulko.com> <20200818153444.15728-3-leon.anavi@konsulko.com>
-In-Reply-To: <20200818153444.15728-3-leon.anavi@konsulko.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Tue, 18 Aug 2020 10:11:20 -0700
-Message-ID: <CAMKF1sra2kUHd7tOiBZUsJCE7iaX86YgG4or-3O8qVN4Qxaakg@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 3/6] python3-python-vlc: Upgrade 3.0.10114 -> 3.0.11115
-To: Leon Anavi <leon.anavi@konsulko.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+From: "Marek Belisko" <marek.belisko@gmail.com>
+Date: Tue, 18 Aug 2020 22:08:43 +0200
+Message-ID: <CAAfyv36viDXoJC6VQ2asswo=TaDU=0zJftXGSxbhkfDDk13KYg@mail.gmail.com>
+Subject: libgpiod using STAGING_KERNEL_DIR
+To: OpenEmbedded Development mailing list <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Aug 18, 2020 at 8:35 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
->
-> Upgrade to release 3.0.11115:
->
-> - Position is now an enum
-> - Add Media.get_meta tests
-> - Fix typo in play_buffer example
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> ---
->  ...ython-vlc_3.0.10114.bb => python3-python-vlc_3.0.11115.bb} | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-python/recipes-devtools/python/{python3-python-vlc_3.0.10114.bb => python3-python-vlc_3.0.11115.bb} (65%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.11115.bb
-> similarity index 65%
-> rename from meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb
-> rename to meta-python/recipes-devtools/python/python3-python-vlc_3.0.11115.bb
-> index 7f8affb4f..014509d55 100644
-> --- a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb
-> +++ b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.11115.bb
-> @@ -3,7 +3,7 @@ HOMEPAGE = "wiki.videolan.org/PythonBinding"
->  LICENSE = "LGPL-2.0"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
->
-> -SRC_URI[md5sum] = "17dba9a55903cdcae10814080fcadb8f"
-> -SRC_URI[sha256sum] = "c1a8a295bea8277fa3d9a07dcdf873fe18c5f11a0e4d1f618df47c316fe0003b"
-> +SRC_URI[md5sum] = "422fd025294af2e55dfdcf9bc7d7dbac"
+Hi,
 
-I think bitbake does not generate md5sums anymore, so perhaps its good
-to drop them
+I'm using poky warrion and added meta-openembedded to have libgpiod
+recipe. I'm using a custom 5.6 kernel and I would like to update
+libgpiod to version 1.5.1 but this version needs kernel headers >= 5.g
+(but kernel headers on warrior are 4.x). My idea was to somehow pass
+STAGING_KERNEL_DIR to CFLAGS but this seems it's not the way to go. As
+I understand from the kernel-header recipe I cannot simply bump
+kernel-headers because libc depends on it also. Any ideas how to
+achieve this? Thanks.
 
-> +SRC_URI[sha256sum] = "a4d3bdddfce84a8fb1b2d5447193a0239c55c16ca246e5194d48efd59c4e236b"
->
->  inherit pypi setuptools3
-> --
-> 2.17.1
->
-> 
+BR,
+
+marek
+
+-- 
+as simple and primitive as possible
+-------------------------------------------------
+Marek Belisko - OPEN-NANDRA
+Freelance Developer
+
+Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
+Tel: +421 915 052 184
+skype: marekwhite
+twitter: #opennandra
+web: http://open-nandra.com
