@@ -1,66 +1,76 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.68141.1597764901332997793
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web12.68495.1597765844411269994
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Aug 2020 08:35:01 -0700
+ Tue, 18 Aug 2020 08:50:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=45392 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k83db-0004rN-Qo; Tue, 18 Aug 2020 18:35:00 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 6/6] python3-djangorestframework: Upgrade 3.9.0 -> 3.11.1
-Date: Tue, 18 Aug 2020 18:34:44 +0300
-Message-Id: <20200818153444.15728-6-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200818153444.15728-1-leon.anavi@konsulko.com>
-References: <20200818153444.15728-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: joe.slater@windriver.com)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 07IFoLVV002013
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2020 08:50:32 -0700
+Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCB.corp.ad.wrs.com
+ (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Tue, 18 Aug 2020
+ 08:49:58 -0700
+From: "Joe Slater" <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
+Subject: [meta-networking][V2][PATCH 1/1] aoetool: make builds reproducible
+Date: Tue, 18 Aug 2020 08:49:58 -0700
+Message-ID: <20200818154958.333-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.24.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Upgrade to release 3.11.1:
+Strip host path infomation out of binaries by not suppressing
+default CFLAGS.
 
-- OpenAPI schema generation improvements
-- Validator / Default context improvements
-- Supported Python versions are now: 3.5, 3.6, 3.7, and 3.8
-- Supported Django versions are now: 1.11, 2.0, 2.1, 2.2, and 3.0
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- ...amework_3.9.0.bb => python3-djangorestframework_3.11.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-djangorestframework_3.9.0.bb => python3-djangorestframework_3.11.1.bb} (71%)
+ .../aoetools/reproducible-build.patch         | 21 +++++++++++++++++++
+ .../recipes-support/aoetools/aoetools_36.bb   |  1 +
+ 2 files changed, 22 insertions(+)
+ create mode 100644 meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-djangorestframework_3.9.0.bb b/meta-python/recipes-devtools/python/python3-djangorestframework_3.11.1.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python3-djangorestframework_3.9.0.bb
-rename to meta-python/recipes-devtools/python/python3-djangorestframework_3.11.1.bb
-index 438a5e19a..81f55ff9e 100644
---- a/meta-python/recipes-devtools/python/python3-djangorestframework_3.9.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-djangorestframework_3.11.1.bb
-@@ -5,8 +5,8 @@ HOMEPAGE = "https://pypi.python.org/pypi/djangorestframework"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=7879a5a716147a784f7e524c9cf103c1"
- 
--SRC_URI[md5sum] = "0d481bf8dbb87bb927b46798edc1a9bd"
--SRC_URI[sha256sum] = "607865b0bb1598b153793892101d881466bd5a991de12bd6229abb18b1c86136"
-+SRC_URI[md5sum] = "c8ea3e4c3c0d705acf70184faeb2b696"
-+SRC_URI[sha256sum] = "6dd02d5a4bd2516fb93f80360673bf540c3b6641fec8766b1da2870a5aa00b32"
- PYPI_PACKAGE = "djangorestframework"
- 
- inherit pypi setuptools3
+diff --git a/meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch b/meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch
+new file mode 100644
+index 000000000..2cbd5016d
+--- /dev/null
++++ b/meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch
+@@ -0,0 +1,21 @@
++aoetools: modify CFLAGS for reproducible build
++
++Use the build system CFLAGS, if provided.
++
++Upstream-Status:  Pending
++
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
++
++
++--- aoetools-36.orig/Makefile
+++++ aoetools-36/Makefile
++@@ -40,7 +40,8 @@ NPERSHELF=16
++ CONF_SCRIPTS = aoe-discover aoe-interfaces aoe-mkshelf aoe-revalidate aoe-flush aoe-stat
++ PROGS = aoeping aoecfg aoe-sancheck
++ COMMANDS := ${CONF_SCRIPTS} aoe-mkdevs aoe-version coraid-update ${PROGS}
++-CFLAGS = -Wall -O -g
+++# Provide a default.
+++CFLAGS ?= -Wall -O -g
++ SANCHECKLIBS = -lpthread
++ 
++ AOE_PING_OBJ = aoeping.o linux.o
+diff --git a/meta-networking/recipes-support/aoetools/aoetools_36.bb b/meta-networking/recipes-support/aoetools/aoetools_36.bb
+index 9b73b442a..60f3dc9b2 100644
+--- a/meta-networking/recipes-support/aoetools/aoetools_36.bb
++++ b/meta-networking/recipes-support/aoetools/aoetools_36.bb
+@@ -13,6 +13,7 @@ RRECOMMENDS_${PN} = "kernel-module-aoe"
+ SRC_URI = "http://sourceforge.net/projects/${BPN}/files/${BPN}/${BPN}-${PV}.tar.gz \
+            file://aoe-stat-no-bashism.patch \
+            file://makefile-add-ldflags.patch \
++           file://reproducible-build.patch \
+         "
+ SRC_URI[md5sum] = "bff30daa988a65f69d4448ce4726a6db"
+ SRC_URI[sha256sum] = "fb5e2cd0de7644cc1ec04ee3aeb43211cf7445a0c19e13d6b3ed5a8fbdf215ff"
 -- 
-2.17.1
+2.24.1
 
