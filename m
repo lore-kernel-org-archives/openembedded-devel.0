@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.68741.1597764899582520664
+ by mx.groups.io with SMTP id smtpd.web12.68140.1597764900478400272
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Aug 2020 08:34:59 -0700
+ Tue, 18 Aug 2020 08:35:00 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=45392 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k83da-0004rN-A3; Tue, 18 Aug 2020 18:34:58 +0300
+	id 1k83da-0004rN-U7; Tue, 18 Aug 2020 18:34:59 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/6] python3-pytest-asyncio: Upgrade 0.12.0 -> 0.14.0
-Date: Tue, 18 Aug 2020 18:34:42 +0300
-Message-Id: <20200818153444.15728-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/6] python3-djangorestframework: Consolidate in a single file
+Date: Tue, 18 Aug 2020 18:34:43 +0300
+Message-Id: <20200818153444.15728-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200818153444.15728-1-leon.anavi@konsulko.com>
 References: <20200818153444.15728-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-0.7
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,38 +30,62 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.14.0:
-
-- event_loop fixture behavior now is coherent on all scopes.
-
-License-Update: Use file LICENSE to check the license.
+Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...st-asyncio_0.12.0.bb => python3-pytest-asyncio_0.14.0.bb} | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pytest-asyncio_0.12.0.bb => python3-pytest-asyncio_0.14.0.bb} (54%)
+ .../python/python-djangorestframework.inc      | 16 ----------------
+ .../python3-djangorestframework_3.9.0.bb       | 18 ++++++++++++++++--
+ 2 files changed, 16 insertions(+), 18 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-djangorestframework.inc
 
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.12.0.bb b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.14.0.bb
-similarity index 54%
-rename from meta-python/recipes-devtools/python/python3-pytest-asyncio_0.12.0.bb
-rename to meta-python/recipes-devtools/python/python3-pytest-asyncio_0.14.0.bb
-index d83c42de3..1e94c25f7 100644
---- a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.12.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.14.0.bb
-@@ -1,9 +1,10 @@
- DESCRIPTION = "pytest-asyncio is an Apache2 licensed library, written in Python, for testing asyncio code with pytest"
- 
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://README.rst;md5=3faed73a08162b5b5367cdcaee996f75"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
- 
--SRC_URI[sha256sum] = "475bd2f3dc0bc11d2463656b3cbaafdbec5a47b47508ea0b329ee693040eebd2"
-+SRC_URI[md5sum] = "b63593bc08f445f6e3f14c34128a68ed"
-+SRC_URI[sha256sum] = "9882c0c6b24429449f5f969a5158b528f39bde47dc32e85b9f0403965017e700"
- 
- inherit pypi setuptools3
- 
+diff --git a/meta-python/recipes-devtools/python/python-djangorestframework.inc b/meta-python/recipes-devtools/python/python-djangorestframework.inc
+deleted file mode 100644
+index 8551a8341..000000000
+--- a/meta-python/recipes-devtools/python/python-djangorestframework.inc
++++ /dev/null
+@@ -1,16 +0,0 @@
+-SUMMARY =  "djangorestframework"
+-DESCRIPTION = "pip3 install djangorestframework"
+-HOMEPAGE = "https://pypi.python.org/pypi/djangorestframework"
+-
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=7879a5a716147a784f7e524c9cf103c1"
+-
+-SRC_URI[md5sum] = "0d481bf8dbb87bb927b46798edc1a9bd"
+-SRC_URI[sha256sum] = "607865b0bb1598b153793892101d881466bd5a991de12bd6229abb18b1c86136"
+-PYPI_PACKAGE = "djangorestframework"
+-
+-inherit pypi
+-
+-RDEPENDS_${PN} += "\
+-    ${PYTHON_PN}-django \
+-"
+\ No newline at end of file
+diff --git a/meta-python/recipes-devtools/python/python3-djangorestframework_3.9.0.bb b/meta-python/recipes-devtools/python/python3-djangorestframework_3.9.0.bb
+index 9ed6d1726..438a5e19a 100644
+--- a/meta-python/recipes-devtools/python/python3-djangorestframework_3.9.0.bb
++++ b/meta-python/recipes-devtools/python/python3-djangorestframework_3.9.0.bb
+@@ -1,2 +1,16 @@
+-require python-djangorestframework.inc
+-inherit setuptools3
+\ No newline at end of file
++SUMMARY =  "djangorestframework"
++DESCRIPTION = "pip3 install djangorestframework"
++HOMEPAGE = "https://pypi.python.org/pypi/djangorestframework"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=7879a5a716147a784f7e524c9cf103c1"
++
++SRC_URI[md5sum] = "0d481bf8dbb87bb927b46798edc1a9bd"
++SRC_URI[sha256sum] = "607865b0bb1598b153793892101d881466bd5a991de12bd6229abb18b1c86136"
++PYPI_PACKAGE = "djangorestframework"
++
++inherit pypi setuptools3
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-django \
++"
 -- 
 2.17.1
 
