@@ -1,130 +1,105 @@
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web12.69289.1597768082676902620
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com [209.85.160.193])
+ by mx.groups.io with SMTP id smtpd.web10.70615.1597770060891288613
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Aug 2020 09:28:02 -0700
+ Tue, 18 Aug 2020 10:01:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=CgY0bdzC;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id f193so10209438pfa.12
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2020 09:28:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=tafUmbKH;
+ spf=pass (domain: gmail.com, ip: 209.85.160.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f193.google.com with SMTP id t23so15662661qto.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Aug 2020 10:01:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=eDyHNCjaXhmwsq2ACxCpgQLkRlIEQzddxP+XNCD/nPY=;
-        b=CgY0bdzCWK7y8xdDWwG5xJSOb2VqgvwEzS8Z+WqA4gxiLe0r5AAWxo3v41DkM2gxsA
-         Z6bZ1mbGcal52G2uj8ZN9fKd9CRPx560IYQCLoWratpH1njNlGwh8c3Lbj1oZECSLv3I
-         Ct9eIroMfz4/1xn4Vz3DCHvqjjtNOEmmzCx343UziBsB1oLpjdpVbCNPju+BBEH9kwn0
-         EHoKqN34H6X33Nahabg4dzoRPHi9xxLFdHWONPZI7KU5lSHiLac4jQmjKOq7SIhCwiTu
-         wXCHN3KTIom48/wHRqxvEVRmiVTpDlcfKzLnyLEDjnD25uMuWNNN0YdT7KTngAVSMuaD
-         Dhbg==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=QbBGAz7V9MUGeBYsbu7EPYs831z62I4ss37onfs5o88=;
+        b=tafUmbKHVxsoyTxK0CdElcIoYdbvgTGWrBJQ86betzDkDWaEp3xDSBqszFf2TCb25W
+         ehSKcLIcT9Y54xW0p9t8F72O0qG3FIiZW2uupgx4gbgq/DslyfZj4qeyx3Ko0S3Ab5zW
+         PC+ZdPCVg6gH0EswRjKVbX2TF/Iix1vGgVUz7bG9lFWcPxC+lVAiLclYeovfZH5oy1t7
+         hLHS+bwHuIsqfNYfYZfxacmTFT+32hKsYmL2ifAuZaYEq456ZiAfDjBGeIcOvHuyepiq
+         OdF1tgJOtty0aJ2ah+knFvE0iAkGjlsC3zCrSV0Z6+lUfOu5cwoKthf1Rx1cHc41suOT
+         YR0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=eDyHNCjaXhmwsq2ACxCpgQLkRlIEQzddxP+XNCD/nPY=;
-        b=NyNQlBxUbAU0Lv2P3GI3qPcqj8mIAQIyv0e5DECLYssAkah2pVNkFyTzZPfRXeii5C
-         C3MotEWBZDyi0gSCZgiR1EiBdYyYqulWaPIXSxn4VpQiZprYmbVO4GhQIij4Afdr42cc
-         rT6FbxXdJedYXjPHMw0/Hn7TjNBFNDPkO602O0PfCh9MU6XIYpParJTRV0ZJNczerXnq
-         pC1g0DyFoj0xZ6Yb/LafwIlYlT5LgmGtSsOXwhUtPqn+FwtLsblF9zEmN91ObfDzuY5g
-         e0cE0MqcWdUZg8PmTOQc5feagY2pdeyB3ylgbVqg2I05AS+rvy3WpXaTAcrC7BoUkr09
-         GBtw==
-X-Gm-Message-State: AOAM532zNf9n1Z77c1nOMlic/r7YfHzkMsxCI0gZ72LH98U7wFw3IyPY
-	s+zDZfYKlQpLS9UnSImBaTqFR++cnSLBbg==
-X-Google-Smtp-Source: ABdhPJwroZ2KGRkMye9HvaaPsHUhMik43dBryB/i1LTeWASYAmLyrOkJ2O5SxeKW63EN20bBgxSC2w==
-X-Received: by 2002:aa7:9f46:: with SMTP id h6mr15863768pfr.321.1597768081688;
-        Tue, 18 Aug 2020 09:28:01 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::37ae])
-        by smtp.gmail.com with ESMTPSA id t14sm22236840pgb.51.2020.08.18.09.28.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 Aug 2020 09:28:01 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] minifi-cpp: Fix linking with libxml2
-Date: Tue, 18 Aug 2020 09:27:59 -0700
-Message-Id: <20200818162759.1867769-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=QbBGAz7V9MUGeBYsbu7EPYs831z62I4ss37onfs5o88=;
+        b=jzeGHSGewFkwgin09DoNvzym6JPswJM/5pCQ1GF85bTb4Ka5eDx5h2UPtMqWBSFL+l
+         4YmmZzkSvZN7UTnNFJsTR9K5gsTwyIXlZ6ZwfQDDPjwfjAvmHC658g3HiwaTTZGe0vTD
+         OyCVwR1anLLvQgVJGSksSSUpHVXAR0hhsg2ZyQc8Y84/56gh4j/xUERQ/vvvqebGGOf2
+         JfvCdGklx4zvqjvM5wbNWAP9/6P66lXJY0otEqk2WYzcmY9IJKzYBX7ZBdsb4IZu/JQI
+         q+W8/lTc4dQhWROluOom1Hz6x+OBAknHpy6kLaRmjjh+B2h+KRcFKI9lWsAM5mdxHdEJ
+         /GmA==
+X-Gm-Message-State: AOAM532oWVJq+sjGYtvftXTsmIx7o2Q7v/mMDwuW8WkAEOmwXtmaD4Im
+	x12a++FPamTgBxr4w+T9NDOauWqcuA1QJ3oKgIY=
+X-Google-Smtp-Source: ABdhPJyuzgWfwYCNb8gMiswyCk8gM2c2klR5aoYTBMOQgLmrjH69h3AnWVIbQ5albdJH1AIOAaIG+sr4dkc1cGH0oR4=
+X-Received: by 2002:ac8:748b:: with SMTP id v11mr18745480qtq.293.1597770059782;
+ Tue, 18 Aug 2020 10:00:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20200818154958.333-1-joe.slater@windriver.com>
+In-Reply-To: <20200818154958.333-1-joe.slater@windriver.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Tue, 18 Aug 2020 10:00:33 -0700
+Message-ID: <CAMKF1sq=kB9FaV74eWJg99k2KEi390oTRbLGuOAdzAhnBTh_0w@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][V2][PATCH 1/1] aoetool: make builds reproducible
+To: Joe Slater <joe.slater@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Randy MacLeod <randy.macleod@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
 
-when libxml2-native is staged, then on x86 it starts to detect that for
-target and fail to build
+I merged V1 since that sounded least disruptive.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...l2-to-linker-cmdline-of-xml-is-found.patch | 39 +++++++++++++++++++
- .../minifi-cpp/minifi-cpp_0.7.0.bb            |  3 +-
- 2 files changed, 41 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/0001-Add-lxml2-to-linker-cmdline-of-xml-is-found.patch
-
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0001-Add-lxml2-to-linker-cmdline-of-xml-is-found.patch b/meta-oe/recipes-extended/minifi-cpp/files/0001-Add-lxml2-to-linker-cmdline-of-xml-is-found.patch
-new file mode 100644
-index 0000000000..d813b37f99
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/0001-Add-lxml2-to-linker-cmdline-of-xml-is-found.patch
-@@ -0,0 +1,39 @@
-+From 609e1745d26d6f42d426018a4dd8d2342d6fc170 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 18 Aug 2020 08:37:57 -0700
-+Subject: [PATCH] Add -lxml2 to linker cmdline of xml is found
-+
-+When cross compiling for systems where static libs
-+for libxml are not available cmake's detection mechanism
-+resort to linking with libxml.so but doesnt use -lxml2
-+liblldbHost.a however requires libxml on linker
-+cmdline _after_ itself so its use of symbols from libxml2
-+can be resolved. Here check for libxml2 being detected and
-+add it if its found.
-+
-+Fixes
-+minifi-cpp/0.7.0-r0/recipe-sysroot-native/usr/lib/libxml2.so is incompatible with elf32-i386
-+| clang-11: error: linker command failed with exit code 1 (use -v to see invocation)
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ thirdparty/libarchive-3.3.2/CMakeLists.txt | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/thirdparty/libarchive-3.3.2/CMakeLists.txt b/thirdparty/libarchive-3.3.2/CMakeLists.txt
-+index 0c1ea6f7..cde0cc51 100644
-+--- a/thirdparty/libarchive-3.3.2/CMakeLists.txt
-++++ b/thirdparty/libarchive-3.3.2/CMakeLists.txt
-+@@ -1031,7 +1031,7 @@ ENDIF()
-+ IF(LIBXML2_FOUND)
-+   CMAKE_PUSH_CHECK_STATE()	# Save the state of the variables
-+   INCLUDE_DIRECTORIES(${LIBXML2_INCLUDE_DIR})
-+-  LIST(APPEND ADDITIONAL_LIBS ${LIBXML2_LIBRARIES})
-++  LIST(APPEND ADDITIONAL_LIBS xml2)
-+   SET(HAVE_LIBXML2 1)
-+   # libxml2's include files use iconv.h
-+   SET(CMAKE_REQUIRED_INCLUDES ${ICONV_INCLUDE_DIR} ${LIBXML2_INCLUDE_DIR})
-+-- 
-+2.28.0
-+
-diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-index 92baa98314..37036ebbb4 100644
---- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-+++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-@@ -7,7 +7,7 @@ SECTION = "console/network"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f9534eb5f4ab800b573a37bffc62f3a7"
- 
--DEPENDS = "virtual/crypt expat flex python3 bison-native"
-+DEPENDS = "virtual/crypt expat flex python3 bison-native libxml2"
- RDEPENDS_${PN} = "python3-core"
- 
- SRCREV = "aa42957a2e227df41510047cece3cd606dc1cb6a"
-@@ -20,6 +20,7 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git \
-             file://fix-osspuuid-musl-compile.patch \
-             file://fix-rocksdb-cross-compile.patch \
-             file://remove_const_due_to_std_lock_guard.patch \
-+            file://0001-Add-lxml2-to-linker-cmdline-of-xml-is-found.patch \
-             file://minifi.service \
-             file://systemd-volatile.conf \
-             file://sysvinit-volatile.conf \
--- 
-2.28.0
-
+On Tue, Aug 18, 2020 at 8:50 AM Joe Slater <joe.slater@windriver.com> wrote:
+>
+> Strip host path infomation out of binaries by not suppressing
+> default CFLAGS.
+>
+> Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> ---
+>  .../aoetools/reproducible-build.patch         | 21 +++++++++++++++++++
+>  .../recipes-support/aoetools/aoetools_36.bb   |  1 +
+>  2 files changed, 22 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch
+>
+> diff --git a/meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch b/meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch
+> new file mode 100644
+> index 000000000..2cbd5016d
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/aoetools/aoetools/reproducible-build.patch
+> @@ -0,0 +1,21 @@
+> +aoetools: modify CFLAGS for reproducible build
+> +
+> +Use the build system CFLAGS, if provided.
+> +
+> +Upstream-Status:  Pending
+> +
+> +Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> +
+> +
+> +--- aoetools-36.orig/Makefile
+> ++++ aoetools-36/Makefile
+> +@@ -40,7 +40,8 @@ NPERSHELF=16
+> + CONF_SCRIPTS = aoe-discover aoe-interfaces aoe-mkshelf aoe-revalidate aoe-flush aoe-stat
+> + PROGS = aoeping aoecfg aoe-sancheck
+> + COMMANDS := ${CONF_SCRIPTS} aoe-mkdevs aoe-version coraid-update ${PROGS}
+> +-CFLAGS = -Wall -O -g
+> ++# Provide a default.
+> ++CFLAGS ?= -Wall -O -g
+> + SANCHECKLIBS = -lpthread
+> +
+> + AOE_PING_OBJ = aoeping.o linux.o
+> diff --git a/meta-networking/recipes-support/aoetools/aoetools_36.bb b/meta-networking/recipes-support/aoetools/aoetools_36.bb
+> index 9b73b442a..60f3dc9b2 100644
+> --- a/meta-networking/recipes-support/aoetools/aoetools_36.bb
+> +++ b/meta-networking/recipes-support/aoetools/aoetools_36.bb
+> @@ -13,6 +13,7 @@ RRECOMMENDS_${PN} = "kernel-module-aoe"
+>  SRC_URI = "http://sourceforge.net/projects/${BPN}/files/${BPN}/${BPN}-${PV}.tar.gz \
+>             file://aoe-stat-no-bashism.patch \
+>             file://makefile-add-ldflags.patch \
+> +           file://reproducible-build.patch \
+>          "
+>  SRC_URI[md5sum] = "bff30daa988a65f69d4448ce4726a6db"
+>  SRC_URI[sha256sum] = "fb5e2cd0de7644cc1ec04ee3aeb43211cf7445a0c19e13d6b3ed5a8fbdf215ff"
+> --
+> 2.24.1
+>
+> 
