@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.68139.1597764898949255847
+ by mx.groups.io with SMTP id smtpd.web11.68844.1597764899334445307
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 18 Aug 2020 08:34:59 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=45392 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1k83dZ-0004rN-Ng; Tue, 18 Aug 2020 18:34:58 +0300
+	id 1k83dY-0004rN-SR; Tue, 18 Aug 2020 18:34:57 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/6] python3-python-vlc: Upgrade 3.0.10114 -> 3.0.11115
-Date: Tue, 18 Aug 2020 18:34:41 +0300
-Message-Id: <20200818153444.15728-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/6] python3-sentry-sdk: Upgrade 0.16.3 -> 0.16.5
+Date: Tue, 18 Aug 2020 18:34:40 +0300
+Message-Id: <20200818153444.15728-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200818153444.15728-1-leon.anavi@konsulko.com>
 References: <20200818153444.15728-1-leon.anavi@konsulko.com>
@@ -30,34 +30,38 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.0.11115:
+Upgrade to release 0.16.5:
 
-- Position is now an enum
-- Add Media.get_meta tests
-- Fix typo in play_buffer example
+- Fix a bug that caused Django apps to crash if the view didn't
+  have a __name__ attribute.
+- Add experiment to avoid trunchating span descriptions. Initialize
+  with init(_experiments={"smart_transaction_trimming": True}).
+- Add a span around the Django view in transactions to distinguish
+  its operations from middleware operations.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ython-vlc_3.0.10114.bb => python3-python-vlc_3.0.11115.bb} | 4 ++--
+ ...hon3-sentry-sdk_0.16.3.bb => python3-sentry-sdk_0.16.5.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-python-vlc_3.0.10114.bb => python3-python-vlc_3.0.11115.bb} (65%)
+ rename meta-python/recipes-devtools/python/{python3-sentry-sdk_0.16.3.bb => python3-sentry-sdk_0.16.5.bb} (72%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.11115.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb
-rename to meta-python/recipes-devtools/python/python3-python-vlc_3.0.11115.bb
-index 7f8affb4f..014509d55 100644
---- a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb
-+++ b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.11115.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "wiki.videolan.org/PythonBinding"
- LICENSE = "LGPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.16.3.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.16.5.bb
+similarity index 72%
+rename from meta-python/recipes-devtools/python/python3-sentry-sdk_0.16.3.bb
+rename to meta-python/recipes-devtools/python/python3-sentry-sdk_0.16.5.bb
+index ee84f6b0b..ad01f6f5b 100644
+--- a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.16.3.bb
++++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.16.5.bb
+@@ -5,8 +5,8 @@ HOMEPAGE = "https://github.com/getsentry/sentry-python"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
  
--SRC_URI[md5sum] = "17dba9a55903cdcae10814080fcadb8f"
--SRC_URI[sha256sum] = "c1a8a295bea8277fa3d9a07dcdf873fe18c5f11a0e4d1f618df47c316fe0003b"
-+SRC_URI[md5sum] = "422fd025294af2e55dfdcf9bc7d7dbac"
-+SRC_URI[sha256sum] = "a4d3bdddfce84a8fb1b2d5447193a0239c55c16ca246e5194d48efd59c4e236b"
+-SRC_URI[md5sum] = "41ac61676030401bcf22b47ac6a2709f"
+-SRC_URI[sha256sum] = "21b17d6aa064c0fb703a7c00f77cf6c9c497cf2f83345c28892980a5e742d116"
++SRC_URI[md5sum] = "6d65fda758929b6a8d16e6030302c811"
++SRC_URI[sha256sum] = "e12eb1c2c01cd9e9cfe70608dbda4ef451f37ef0b7cbb92e5d43f87c341d6334"
  
+ PYPI_PACKAGE = "sentry-sdk"
  inherit pypi setuptools3
 -- 
 2.17.1
