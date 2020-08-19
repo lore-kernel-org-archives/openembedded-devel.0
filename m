@@ -1,17 +1,17 @@
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.68])
- by mx.groups.io with SMTP id smtpd.web12.93613.1597860403363596267
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.60])
+ by mx.groups.io with SMTP id smtpd.web10.94359.1597860416409951844
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Aug 2020 11:06:43 -0700
+ Wed, 19 Aug 2020 11:06:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=BLDUTiPJ;
- spf=pass (domain: windriver.com, ip: 40.107.92.68, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=DhKqpJ8d;
+ spf=pass (domain: windriver.com, ip: 40.107.94.60, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BC4Ba8+/UWtXNZAFdj99hPwzmLSRfHEHcWYsI2s7wWVuMue8lp5edQMF99L0KVUaUcPf2EgsxRgub8kIBlNohny702l91uQvIQQNhOaJJDWvD+vIVLJhjdOHSngIErgWBWhKjH5Q1gmL71xzQHVVG7bOa694rl/YM1P9v0zt58Hb3AERJNKv+0qGgrtwdUOJ2hYm6IDRdaHSlnUrAGHRxV6D7fYiUCy47qRpv0AMFst2Z61o1CSnwjANdqM8EGWA3969Y/TtPv+CEv/4XoQv4DKgFG2plXCSr0j2c1UVL0a2niEs+h3zrizUPsmTTzqZ1BlMlihlotytvCR1WYxTPw==
+ b=N/irB/7qeduadWZaoauEhhA3mfWINcYtvDyeabHGKFiCgnqXp8Xcr0dV1ROicxF7f6Z9r4ZDnTOKnZCTrZYLl0mfgTEW4238L7HvlV7E8/tx8muRPpcnTHUZ7Ztctma1DNSn1l/i46WuvgmJwcxB2dFuPgFOxM33fhJNgZTLWJeokq3f9B/0IBmiW89uGcGUWeeNuV9i5hm8MfP8XDfwvVC7URwLGg/Nv4Lwmjf/CyPKIXtDy4EkLKG11jCZei3fZAaQIaB/EEQACUqZcKRAgrDOG0RQoVhO1nyUK5TI6nxVjWB9uTxJMhda77dC/ruz0MhSz9LcPAkFZ2SqCrSl1w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8tUXsF4GkeywL7lCzMhnZMwiyUg6sGP72K91wzeHd9s=;
- b=eZITXrWu8+4bOxF3+twOm46IOhXFN00PIJp7U/oT66FFjx+QeMJjfZqDb7ZeOkb3clSd+TrN3QCmlc8/oLnOXzXVj+QjFtIMIvVruWUwyTAyM4H279t+otyyT1PNgCF+fvSZGTe0talykO8zxGELHU20YR9CCNnPzHoxQmO6Ihq54TPG+evLYHiClXc/JonXC56mN5+y1l7w4ZYAk6xo2KuMCNSjNkDednPukGX171suJL/6cHKjWeAPt7zAhoz67jZMFq+psDZETLT0zUEfOYUgt4I0C2ma5gAs9Mjms4jBSuFZU1TVT+Cb1SlLaoypIZhDl2xcWezs2aXGg67GsA==
+ bh=wwcYadT0OcSmJdjoHGrqC67mC63O8W8XjXdDmpRBfKA=;
+ b=dnrqD7kUHASEpb4HsirlgZrg0O0mYnzOXSrEHQsqvSifh+iCBieh1eRR7NY/3uj3nnq0IM2S/J8MufYU4MSW6EeayhHHJubDLgE2yGfRA0gmWhTkKmlCfHvk01V8HMimfsfPSlJElC8fxBvWu0eXvVonymwekZxsHEGMeZ0H5FAKiuNfSWHOrDJLcvtjfg3bMMv6UY2ovHWNBsKmpP/SYaZm8a1aH8QdseSNGWKQ7Bsho/M7Nxb2MBl/etNsPpA7QOeCWHfISxlfLjl6AYnhWa9nd3P8+HKsjRrS3JzZxr7q18TmwjAtNcnrAmDSamzpIqenfHWM+E/xpuuAbQnRbQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8tUXsF4GkeywL7lCzMhnZMwiyUg6sGP72K91wzeHd9s=;
- b=BLDUTiPJMuHt1LWkaTmaKBQ76avhgyi1v9XgJodYLZ3clVQEgugde3jG22GzCsNnywZLQnyHmEaY7UNvqVfGA2urew+UHKLFOJbj03bLSavXiAvyX9K/yj8RsMjutsLTWwBOPDr2TUQe5TDhZqTTTdQFrTuHB1xzhthAT+6Gc94=
+ bh=wwcYadT0OcSmJdjoHGrqC67mC63O8W8XjXdDmpRBfKA=;
+ b=DhKqpJ8dXXTOOSnosBBoR0kJAJfC3P52QdzoTBt+SNW6dMoF6bwdvTnHppsphVrbZD/8/IJevBBP6cEAmemKiepxBSaoVgD7twgjJIv6/9FN6leFlFyrAgspBtywSD5u1ScF8sWjCViJjBvzu9WIIqi4O9x4c7MnhO0+tvslo50=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,99 +28,102 @@ Received: from DM6PR11MB3913.namprd11.prod.outlook.com (2603:10b6:5:193::33)
  by DM5PR11MB0073.namprd11.prod.outlook.com (2603:10b6:4:67::37) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.28; Wed, 19 Aug
- 2020 18:06:40 +0000
+ 2020 18:06:52 +0000
 Received: from DM6PR11MB3913.namprd11.prod.outlook.com
  ([fe80::fb:781c:eb42:b4f]) by DM6PR11MB3913.namprd11.prod.outlook.com
  ([fe80::fb:781c:eb42:b4f%4]) with mapi id 15.20.3305.024; Wed, 19 Aug 2020
- 18:06:40 +0000
-Subject: Re: [oe] [meta-python][PATCH 3/6] python3-python-vlc: Upgrade 3.0.10114 -> 3.0.11115
+ 18:06:52 +0000
+Subject: Re: [oe] [meta-python][PATCH 4/6] python3-pytest-asyncio: Upgrade 0.12.0 -> 0.14.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200818153444.15728-1-leon.anavi@konsulko.com>
- <20200818153444.15728-3-leon.anavi@konsulko.com>
+ <20200818153444.15728-4-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <c6a2246c-3e13-3275-d3c7-1c3b4b31d6d5@windriver.com>
-Date: Wed, 19 Aug 2020 14:06:38 -0400
+Message-ID: <e09f85f3-d2b4-786f-9666-69a84c1798cd@windriver.com>
+Date: Wed, 19 Aug 2020 14:06:49 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200818153444.15728-3-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTXPR0101CA0018.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00::31) To DM6PR11MB3913.namprd11.prod.outlook.com
+In-Reply-To: <20200818153444.15728-4-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTXPR0101CA0014.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00::27) To DM6PR11MB3913.namprd11.prod.outlook.com
  (2603:10b6:5:193::33)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from 255.255.255.255 (255.255.255.255) by YTXPR0101CA0018.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.24 via Frontend Transport; Wed, 19 Aug 2020 18:06:39 +0000
+Received: from 255.255.255.255 (255.255.255.255) by YTXPR0101CA0014.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::27) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.24 via Frontend Transport; Wed, 19 Aug 2020 18:06:52 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 5c9c0150-2e41-444a-ab13-08d8446a9f3e
+X-MS-Office365-Filtering-Correlation-Id: e64f8929-7d66-40f5-79eb-08d8446aa690
 X-MS-TrafficTypeDiagnostic: DM5PR11MB0073:
 X-Microsoft-Antispam-PRVS: 
-	<DM5PR11MB007379BEAD0B59278F85ADBA9F5D0@DM5PR11MB0073.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:173;
+	<DM5PR11MB0073DA787318D1C0B6D988509F5D0@DM5PR11MB0073.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1079;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	FSA32q8ifJqyP75azbEZ0pgaxEUYgkiWMdxV2M4pSO32rK7Hd7KzO2mJ5e/3hRhK50eYkPuRqU2J9WispTfdyvAWRA1W92HVHVlzkJeYVz6ETtRatnhpABBnMRaMkY2UUnN7gPiwahnRHvqoZs4QRPMm65Qd7L25PaeZ3W2oP8zdWWDS+B2Q9W0UlvFRM0qRZN0TYO38xbE+k7b/aVyBNKWdzENXdScqZNkEyqSel7lkTXQ6d6Hlj+xWhV9awSUopwcA1hH0jG+hA3cv5pEHqL5pP7mLFQk22i3tbwm23PdOG6GATzGzIB9MxgO1KgV4E1QNIK9CAUXTU65qGRxss/wAg8Dn3nME1dAyiysAckOLXyHAyN7Ak4N5d9UVte4GM3gcqHdgDMSNJhvTCBpaAZ+GDZr/EnwTx7PZtTck5WImHtJW0raGHrlfHWTVPx+0u/CVvud0wjioJEQBNh/ntD1cxlBPLu2g5QHOzQa7w0qzq6ODhsEOCsQG/9CKNOw2
+	UPhg6vqPG9neHqHMquw90Qij2AqsmrqG0T8y4ve4qo+yVa6vcqbDtv/MxCZ2ui+uowg73s1zwmvePoJJohRESI3B3lGrP3H4z4tFyOloKxunM1t1V/51F9qyIcaWfqdTtnRnFllWYrFuD3N9v2rzgdDptVEELYt1y/HLZyFXNPybJ/xN+3TdR/ky4xcD8wmphGn5A9BjX8tvbG8PncyqeM/A6Y/2GcDDRZ2sbWLk0wSPBSDBul85PrRPADyHtmL5WavplbrIioWa2K4ioKc5TGtfKHwJ3/u3nOo39XhtWq7RdIZruKeryPy4c58+fkcmSQ98yUWw3QxD4DDPMudcBgPePcxUkqWSD+b+zFk2RSR/LanNCMxsLyeqya6mVw6sI2oI3IbLR2mZIXVT2pyh4ifhyCaeomH+gDIXutxtlIAXOqZJ4TiY9cYXspkFPilidfQlDoNo7NKzPfFFZVJShKgYv+hVgE3lk01sS0s658O24wiHLs5Q2OCDkK5ln9H2
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3913.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(136003)(376002)(346002)(366004)(39850400004)(396003)(44832011)(36756003)(966005)(33964004)(6486002)(16576012)(186003)(5660300002)(110011004)(31696002)(478600001)(53546011)(2616005)(83380400001)(956004)(66476007)(26005)(66946007)(86362001)(8676002)(8936002)(316002)(66556008)(166002)(2906002)(31686004)(52116002)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3913.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(136003)(376002)(346002)(366004)(39850400004)(396003)(44832011)(36756003)(966005)(33964004)(6486002)(16576012)(186003)(5660300002)(110011004)(31696002)(478600001)(53546011)(2616005)(83380400001)(956004)(66476007)(26005)(66946007)(86362001)(8676002)(8936002)(6666004)(316002)(66556008)(166002)(2906002)(31686004)(52116002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	5caYtHtGoPT0yNDD3u1Ap69LyEtxPThFXvYEDEreWILOJKW1gEaX7hJSCQBySImIJyv2Tgsf1nr1BbyvcdtvNEUi3+eANrvvO1UeyoisahtadPT0NjFerOSd8eXTZJfqfoxVoruMH7dYqW13E3Ge4s0imumcmCUT0wAhaQiDEfkcs8Grx2dDcwwj9jZUD76ElOrqYIC0sObb0HoyT3idMa6XCpUOebSbb1LRQgcvDmOzVkfSiFFwEqJb7b9wGktSSfWeKfCjFAJCMM9dR133nLB0Gb8u/MqejhqDvwXxxxYFYXRYEbh7BRLJeZCdUNIhvYHLpMAaN4DQJIT/H82WAZLQxOF9t65I3lFpqEFoeVG/BjUKvAHMhHqcwZB3EGyIsqhJekmDN/U3Q47DD/ojVoJHozsJNaHZ8mmZ2PEMHo7AEiZyOhLvDEvN1K5BPkR3XOiDtT+35sWAaf28GTBfLXVeoD+4dvmg9S9W/If8ZEtgiAr/BC/R15vQMUJ3viE/qWrCBIPwX+sXiaSRWVrKILLpJbED7Tr6Kkfd/ifelpFhI69UmVkApBhOqvzp8hTGM+nLtV3R5t0uHPTHejSNiAzgl1r+ZzNkz2N94v2GCsH1CefvdwTbI1mcwgqOYTerXC8m4pIVwXdtpXA9VT1AWg==
+	2H9676q+/HJFryZBqJ2HDWR0nmQtuHXRRhh/WlDO+/nGzHtfB+kIYxItk2w+osbeBp4kq36XJV4kL1krUzVHMmMO9cE5V1igUcUjQxAARVXFgQbQLpLo877UZfGO0WTp+B8mOYYB1cfXeHVuwEw4L2xxdbca9jHaMEcQoMgzrW+ycxnzAd1qM/8S2r1kDg72h2aoR6Gwp1iQn4PCgDUBLYjzoxqyukfD2oPJEYIIXY45o1eZTWRsqZ9kvW63TcR7UCIt+N0UsV1zh7bHRH0+HewjLo1CxId/AfJ/SN7G0lddbeAoHaKfTTsJO2Ts0G6fJdE9q/WPAWN/t3zi0xh1U/6FPMl0ojXcAjL5gPKDk9vhd4W1rpbVLv5qG8GCc/HJsVlnXFPH2NSEZkLbn0X5ePSyD5k8zo0+FCQaacLpko8OA23xMybaMG5P+muxqdjxxKkt+J9BFIRgdhW9f+qu51BEuQmVbviSZ66uvL6ppXXoNU1p9X7+n7HSCrPYzwQFefLEYvApBCSJjNknNRlI4KF9ovVfxm+qp750OUiW/z7SPuhCgfKyDDHNeMBvqsrX1ERDB56sAEbSL23n4+MPwNumDnf5GDqio61V+RQMtmTF+bMuxtXzt1G/nJ/M9B38GKjQZ7qDE1bO/FxgYr/T1Q==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5c9c0150-2e41-444a-ab13-08d8446a9f3e
+X-MS-Exchange-CrossTenant-Network-Message-Id: e64f8929-7d66-40f5-79eb-08d8446aa690
 X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3913.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2020 18:06:40.3170
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2020 18:06:52.5882
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: C0Nb0eSADiixypQTYAJxPrqxFWG6RwvTJeOtcjFmTKbVT7j6ShEzKRfk5lRo0eENwEQUPylE/n7ExfqRjER+WNygv7n1WQk9GX/t03nP4a8=
+X-MS-Exchange-CrossTenant-UserPrincipalName: ttik69HdejjgHIzSFKZUvgm59ofxbvLXFoT6+YUhBDNV3yFBvrh5LlTQfV/2GTrbJ5tOdA8WmPR2nOaIWl+nnrcKrpC3mifziF1Pik2brrE=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB0073
 Content-Type: multipart/alternative;
- boundary="------------CC6A684609122E0E0A05EB88"
+ boundary="------------920073F4193AA6C7073EEE23"
 Content-Language: en-US
 
---------------CC6A684609122E0E0A05EB88
+--------------920073F4193AA6C7073EEE23
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 8/18/20 11:34 AM, Leon Anavi wrote:
-> Upgrade to release 3.0.11115:
+> Upgrade to release 0.14.0:
 >
-> - Position is now an enum
-> - Add Media.get_meta tests
-> - Fix typo in play_buffer example
+> - event_loop fixture behavior now is coherent on all scopes.
+>
+> License-Update: Use file LICENSE to check the license.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...ython-vlc_3.0.10114.bb => python3-python-vlc_3.0.11115.bb} | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-python-vlc_3.0.10114.bb => python3-python-vlc_3.0.11115.bb} (65%)
+>   ...st-asyncio_0.12.0.bb => python3-pytest-asyncio_0.14.0.bb} | 5 +++--
+>   1 file changed, 3 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-pytest-asyncio_0.12.0.bb => python3-pytest-asyncio_0.14.0.bb} (54%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.11115.bb
-> similarity index 65%
-> rename from meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb
-> rename to meta-python/recipes-devtools/python/python3-python-vlc_3.0.11115.bb
-> index 7f8affb4f..014509d55 100644
-> --- a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb
-> +++ b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.11115.bb
-> @@ -3,7 +3,7 @@ HOMEPAGE = "wiki.videolan.org/PythonBinding"
->   LICENSE = "LGPL-2.0"
->   LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+> diff --git a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.12.0.bb b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.14.0.bb
+> similarity index 54%
+> rename from meta-python/recipes-devtools/python/python3-pytest-asyncio_0.12.0.bb
+> rename to meta-python/recipes-devtools/python/python3-pytest-asyncio_0.14.0.bb
+> index d83c42de3..1e94c25f7 100644
+> --- a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.12.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.14.0.bb
+> @@ -1,9 +1,10 @@
+>   DESCRIPTION = "pytest-asyncio is an Apache2 licensed library, written in Python, for testing asyncio code with pytest"
 >   
-> -SRC_URI[md5sum] = "17dba9a55903cdcae10814080fcadb8f"
-> -SRC_URI[sha256sum] = "c1a8a295bea8277fa3d9a07dcdf873fe18c5f11a0e4d1f618df47c316fe0003b"
-> +SRC_URI[md5sum] = "422fd025294af2e55dfdcf9bc7d7dbac"
-> +SRC_URI[sha256sum] = "a4d3bdddfce84a8fb1b2d5447193a0239c55c16ca246e5194d48efd59c4e236b"
+>   LICENSE = "Apache-2.0"
+> -LIC_FILES_CHKSUM = "file://README.rst;md5=3faed73a08162b5b5367cdcaee996f75"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
+>   
+> -SRC_URI[sha256sum] = "475bd2f3dc0bc11d2463656b3cbaafdbec5a47b47508ea0b329ee693040eebd2"
+> +SRC_URI[md5sum] = "b63593bc08f445f6e3f14c34128a68ed"
+> +SRC_URI[sha256sum] = "9882c0c6b24429449f5f969a5158b528f39bde47dc32e85b9f0403965017e700"
 >   
 >   inherit pypi setuptools3
+>   
 >
 > 
 
---------------CC6A684609122E0E0A05EB88
+--------------920073F4193AA6C7073EEE23
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -132,40 +135,43 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 8/18/20 11:34 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200818153444.15728-3-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 3.0.11115:
+    <blockquote type="cite" cite="mid:20200818153444.15728-4-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 0.14.0:
 
-- Position is now an enum
-- Add Media.get_meta tests
-- Fix typo in play_buffer example
+- event_loop fixture behavior now is coherent on all scopes.
+
+License-Update: Use file LICENSE to check the license.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200818153444.15728-3-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200818153444.15728-4-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...ython-vlc_3.0.10114.bb =&gt; python3-python-vlc_3.0.11115.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-python-vlc_3.0.10114.bb =&gt; python3-python-vlc_3.0.11115.bb} (65%)
+ ...st-asyncio_0.12.0.bb =&gt; python3-pytest-asyncio_0.14.0.bb} | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pytest-asyncio_0.12.0.bb =&gt; python3-pytest-asyncio_0.14.0.bb} (54%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.11115.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb
-rename to meta-python/recipes-devtools/python/python3-python-vlc_3.0.11115.bb
-index 7f8affb4f..014509d55 100644
---- a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.10114.bb
-+++ b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.11115.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = &quot;wiki.videolan.org/PythonBinding&quot;
- LICENSE = &quot;LGPL-2.0&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=4fbd65380cdd255951079008b364516c">&quot;file://COPYING;md5=4fbd65380cdd255951079008b364516c&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.12.0.bb b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.14.0.bb
+similarity index 54%
+rename from meta-python/recipes-devtools/python/python3-pytest-asyncio_0.12.0.bb
+rename to meta-python/recipes-devtools/python/python3-pytest-asyncio_0.14.0.bb
+index d83c42de3..1e94c25f7 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.12.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.14.0.bb
+@@ -1,9 +1,10 @@
+ DESCRIPTION = &quot;pytest-asyncio is an Apache2 licensed library, written in Python, for testing asyncio code with pytest&quot;
  
--SRC_URI[md5sum] = &quot;17dba9a55903cdcae10814080fcadb8f&quot;
--SRC_URI[sha256sum] = &quot;c1a8a295bea8277fa3d9a07dcdf873fe18c5f11a0e4d1f618df47c316fe0003b&quot;
-+SRC_URI[md5sum] = &quot;422fd025294af2e55dfdcf9bc7d7dbac&quot;
-+SRC_URI[sha256sum] = &quot;a4d3bdddfce84a8fb1b2d5447193a0239c55c16ca246e5194d48efd59c4e236b&quot;
+ LICENSE = &quot;Apache-2.0&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://README.rst;md5=3faed73a08162b5b5367cdcaee996f75">&quot;file://README.rst;md5=3faed73a08162b5b5367cdcaee996f75&quot;</a>
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=d2794c0df5b907fdace235a619d80314">&quot;file://LICENSE;md5=d2794c0df5b907fdace235a619d80314&quot;</a>
+ 
+-SRC_URI[sha256sum] = &quot;475bd2f3dc0bc11d2463656b3cbaafdbec5a47b47508ea0b329ee693040eebd2&quot;
++SRC_URI[md5sum] = &quot;b63593bc08f445f6e3f14c34128a68ed&quot;
++SRC_URI[sha256sum] = &quot;9882c0c6b24429449f5f969a5158b528f39bde47dc32e85b9f0403965017e700&quot;
  
  inherit pypi setuptools3
+ 
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -175,4 +181,4 @@ index 7f8affb4f..014509d55 100644
   </body>
 </html>
 
---------------CC6A684609122E0E0A05EB88--
+--------------920073F4193AA6C7073EEE23--
