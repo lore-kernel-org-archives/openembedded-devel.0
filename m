@@ -1,17 +1,17 @@
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com (NAM11-CO1-obe.outbound.protection.outlook.com [40.107.220.62])
- by mx.groups.io with SMTP id smtpd.web10.94328.1597860351669208925
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (NAM11-CO1-obe.outbound.protection.outlook.com [40.107.220.81])
+ by mx.groups.io with SMTP id smtpd.web11.94105.1597860381119390329
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Aug 2020 11:05:52 -0700
+ Wed, 19 Aug 2020 11:06:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=p9RrItZE;
- spf=pass (domain: windriver.com, ip: 40.107.220.62, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=RipzwS2S;
+ spf=pass (domain: windriver.com, ip: 40.107.220.81, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=oC1BvKhCfbZngYx5ZMCFH+0453ZgQz24lY/FL7SFsnc+ftdMweqvbr6O37BxigwXkLozYBhQA3ICbeKFdL5YJSqY7CmtM4schWkhlJ/78ZbezBoDtpVwQx26vrvsyRx4TRIZfrZn6RBZzbLrWA3bpZjv/IGUOeyvW4kGUkkQBEJyo2d0PhJtOfRvm49TRk9zOgNj6IRt/Mw3ejgHS5E5jrODyEhXiPIIaVzoppaBkZtHlPzm1lezlEWmHd3pNl+4UcGMit6/4OCAJzSpF7rLBdukQk95NHRXUp099fhYLtSEWgEbbPHpHBmcLMr492vJYOrVP4UlGUfk833V6BuB9g==
+ b=MEYnupPF9PyxzdXmXngDSozwOx2FAm2bnNNCcvIbT1UwhIRiWYRjQDwe+anV9e2bMIYQh9tmIBPgSxI0lqt3WgkQvuQ/P0OzfYXHl2jRI47Q1dACD3wQf4+Q6hPReifgX0Un3WF0WBW6KpWmoN66RXvx/FI55bTZL7sv+7vodzMNXOmZyciWMPs4bTky0VKFO8bEEoM/Y9ooT9cAprZu/iGfvcuhtBiysLXJTpLNsUv9HwV0BeZk0NL6wahwyi6aTs87sz2a7pxXFjgK+Xe95lbXOWfrbMWomVsD/8tIkXj7itzgSTudoseatYh9e5t/b69hZe4SB5/WmR+vv2Npig==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3wirAsltFPM62LwWp77ot/cRL2LQuHV6nme0zEemF0k=;
- b=MSYDW80MYyr5MOd+lhE2JmiPadaQ8tr1A2cG687Jti9tHDaAdhxaoyzRxZdtUmo7JQ3nUmiejsW29PPzgbdyVu7TKFnCrQVZk2FatX7K+1eli5DzlaiFg5/a89Gi4iCzMUQa0XYnp+Mfmroy4Xze2TzhL5hbahKG/7lEjJB5p4LwEZKjh5XrV/5Nz/swju+1uEQAiscgd7GwQm53y6VeYLdJGU7rFATJyArA9F9+P5PNFlZ0uBdnTWdOwzVHYwW9RjSXXsqM+GR9Gux6Qv2+Yhepm+045nc+SMBArTcFDNm0aX0GvN/kILe/vbYR/l5HldMAzEpJyA4P9BAQfCh57w==
+ bh=drrFfCv+GwNklgs0omEyUUlei3vMTfb4u2ytDvcjoHk=;
+ b=Oqlg7v5f+mlTK9uCqLtPzZSUoPdWvIAn4FVA1iRTiRJQgtXcira/4Z9J4iDnCDIoenNRqIoP9Wn0gAgbhP8lqxmI/msYTeLG0NqELIj83YOYIUxYJqOOj95t+31oLMJweTGm/POLKQAmJFLNv+5aWNikvE88NX3xNRGsG5BpCLLTXlE2LZENqi1dNzqTEywNB5I2RiZzVtXTUb7Jjp1pSbnx38VR+RiW2rx07COWbzeB9uwhC/T4Bo5VKwSWMEp6XpHsK7LaB484vWTXebtQg1XXwAHVL7iClfVpgj1AEwh80M+JhWI4Jj+CZJFTimDendusAwUJ4cujlyzNOl5oRw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,115 +19,144 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3wirAsltFPM62LwWp77ot/cRL2LQuHV6nme0zEemF0k=;
- b=p9RrItZEL5JD+BoVKifbfyQZMuocrEpVZ1I3I/FhkYoUtywkcvwTo/N1JoTgsrwX2KVrXtqELIE6/lz2KTW8i5Se94kqca5+g2vUcTLO0J+n3WK/NE8sW0Z3qRGlXLauOJGBDcAzjkq44lAblSQX2hSNF/gzP+ZZaFWjghCgoLI=
-Authentication-Results: konsulko.com; dkim=none (message not signed)
- header.d=none;konsulko.com; dmarc=none action=none header.from=windriver.com;
+ bh=drrFfCv+GwNklgs0omEyUUlei3vMTfb4u2ytDvcjoHk=;
+ b=RipzwS2S42exI3ph1KwiPYekqUWDjz4mu/k0gLqasDMxdQJIQfIwWBIjVHymXGKmlWRwgrGdqvBP/J3z/O2hhk/Kzh7kvCewbvavYsiOqnpT7S1Lqt4I0LX8sp8JA8RvvUbTBQ71NQGM6Q1jZSlFych+ObSWwf8pXsN/ckAgAHU=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
 Received: from DM6PR11MB3913.namprd11.prod.outlook.com (2603:10b6:5:193::33)
  by DM5PR11MB1468.namprd11.prod.outlook.com (2603:10b6:4:4::20) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3305.24; Wed, 19 Aug 2020 18:05:49 +0000
+ 15.20.3305.24; Wed, 19 Aug 2020 18:06:20 +0000
 Received: from DM6PR11MB3913.namprd11.prod.outlook.com
  ([fe80::fb:781c:eb42:b4f]) by DM6PR11MB3913.namprd11.prod.outlook.com
  ([fe80::fb:781c:eb42:b4f%4]) with mapi id 15.20.3305.024; Wed, 19 Aug 2020
- 18:05:49 +0000
-Subject: Re: [oe] [meta-python][PATCH] python3-pybind11: install both python wheel and cmake build
-To: Jack Mitchell <ml@embed.me.uk>, openembedded-devel@lists.openembedded.org
-Cc: Philip Balister <philip@balister.org>,
- Leon Anavi <leon.anavi@konsulko.com>
-References: <20200818085215.538731-1-ml@embed.me.uk>
+ 18:06:19 +0000
+Subject: Re: [oe] [meta-python][PATCH 1/6] python3-sqlalchemy: Upgrade 1.3.18 -> 1.3.19
+To: Leon Anavi <leon.anavi@konsulko.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20200818153444.15728-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <576058d9-25f0-f552-ae8d-d877f6163f63@windriver.com>
-Date: Wed, 19 Aug 2020 14:05:47 -0400
+Message-ID: <27ca0f4b-a64f-6dd6-e1dc-0b1b9ffb6600@windriver.com>
+Date: Wed, 19 Aug 2020 14:06:17 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200818085215.538731-1-ml@embed.me.uk>
-X-ClientProxiedBy: YTXPR0101CA0021.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00::34) To DM6PR11MB3913.namprd11.prod.outlook.com
+In-Reply-To: <20200818153444.15728-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTXPR0101CA0022.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00::35) To DM6PR11MB3913.namprd11.prod.outlook.com
  (2603:10b6:5:193::33)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from 255.255.255.255 (255.255.255.255) by YTXPR0101CA0021.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.24 via Frontend Transport; Wed, 19 Aug 2020 18:05:48 +0000
+Received: from 255.255.255.255 (255.255.255.255) by YTXPR0101CA0022.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::35) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.25 via Frontend Transport; Wed, 19 Aug 2020 18:06:19 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 48cb5ac4-77ba-46b9-b5f3-08d8446a80c6
+X-MS-Office365-Filtering-Correlation-Id: c5f265ee-8a3a-40de-6a6d-08d8446a9300
 X-MS-TrafficTypeDiagnostic: DM5PR11MB1468:
 X-Microsoft-Antispam-PRVS: 
-	<DM5PR11MB1468FADE8EC02528260C5CC89F5D0@DM5PR11MB1468.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:549;
+	<DM5PR11MB146873ADA34506E3133724429F5D0@DM5PR11MB1468.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	vXmHqgS/XgU3cLVSO2wOnghANyI5Q4UypxqzrkKF8cwAN/3mkoJA0kMgJhDyvfRMkRCDQDk3twwnhlwmEx4kXVLKfwrWh7DXIdMXsw9PRuS3ZmPdsHOaszJf6CMN8RZksoOcfI/j1U9LcPTFr5uRkUQjrwAUhqdd32kwMwqpn1kz+7K4V7b56O8yclH4KC52QEbtUJwto73wcrGGlvLLbMRaPxaTxQEDLqrO4COfOIWCEeJZI1V6MVHo0BN+DxVY1NlyzUbjhaa3kjhbjOSlVVRngNqdWTxXE9Oc3nNAyEEvzlJWCsi8jGnNu/Q2b6/Qz7WvAg6YhYQicVUruHKt2772P6RvqCpYLXAWmeMg6RHHv9qDIw6zzeFB8FsrcWfMpgPy9j8GGdpyrWfucl44Ub+YOkeEVqamcOb0V5dRNN65kDIfC3oSFsPoT9TCPsteVpdOb7Rg7ukQXIer3VVhwbZxeBxlIZjwr92NjzCuyBI=
+	aU51TxpAJISBTaJ8aLpq7fJo3HrNUumYx/U7e29FLhU/lEl1fXmTN+R5XCdrJvG5moZLB676GCGhS8nrYYndWbujmu/JypIjXhybYtwjaDGCjDgKDk3LVoqNhs7uq+ZB1ndNLG9QrFEWIRDYkhW2CuIYlsR/NNghsBL54tG0ZcWmpvOT/ryXJ0KzEfo4Qim2CL3GEu+CwalqLqOnnwyBDicKlgu9O2DtqzTFAmn8lukH+dTJK6m9U/RRh60Z1l3w+rmnjWHdlJg3WBFrPBPZ90/Q9PAWRkKrFtOFUr01WXsBIcKJ0/+/AtfFDRNWE7qC6ea/QahSdEgFmHoBV3Ngaxlhv+SRupHAdZb8agFvXDZaxib4VteYdWlzF5vwkQBsQMTaoxmq8hCDNd3oDP72zFcAVLnJe9sAH0s6OVASEX2w52k+lj+yqGJztnQxMhCVkuYucKm2/E/UIHqdbsNOgmH3P4iO2kDpym18ENZv8P4=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3913.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(376002)(366004)(396003)(136003)(346002)(39850400004)(2906002)(8676002)(186003)(54906003)(33964004)(316002)(16576012)(26005)(83380400001)(166002)(110011004)(53546011)(31696002)(44832011)(52116002)(2616005)(8936002)(956004)(478600001)(86362001)(4326008)(36756003)(5660300002)(66556008)(66476007)(31686004)(66946007)(6486002)(966005)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3913.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(376002)(366004)(396003)(136003)(346002)(39850400004)(21615005)(2906002)(8676002)(186003)(33964004)(316002)(16576012)(26005)(83380400001)(166002)(110011004)(53546011)(31696002)(44832011)(52116002)(2616005)(8936002)(956004)(478600001)(86362001)(36756003)(5660300002)(66556008)(66476007)(31686004)(66946007)(6486002)(966005)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	NryouEouj4WrZf0QLjwucju1NzFcJQlBb4OsYOJ/BdPsmORkdvOmtORCFU2fAwTHxOIfmJYFke7mBlBs9a4jrjg2RcoMw3m5WBFc1bHpHhJaKuFeZVpz+R5Nc90FNFzGURSot/85K2l5VKgTP+VBEj+GpPWzZfqglyj/eij+yLJiicy1Dzugc0lJg4wbYQxyQDtg1S0KEZiqf7isoBnun9I6LB3RJArp/xAhM+SxUYnLMk6Kz1RGO0G9BC5dU9J3CEEI5ef+8E3W3HNp2kBNVODGZUWhs14icE056lmJPYaFjs5JX61pW9Bc5rI6rXoI7IyZn9elQR4Pwz3baX77K1qV77c5uqPGTNaZvM4EFgZBwf123pvzu6BdoXmYzGNO+po32S/q237EEM8pjvIHEw6Fv5afEB5cpkOZ+Fg1ytsgwNzHxllHh8Xj6x4iMJTaoIcz9VHcbJ95ZxDDrLBiNHgknL13lKu3rKPl753aTwjZOjfIFjiFemuS43jUU0Dl+BqZ/fImy5QHSxvHAoBqM02RuPOjfz3OgfHAZWwqv5uaetwokLw4GsNWU28KaGwt8jxLwhAgqrsvS4WDmwIy1yvnDPjTFtARxDR9tKp2e+qee+vJ4s8PFKpEbJ7PDcc/4Iol7omzsUJGqKnZufauGA==
+	HfUkCEUEoqy6PwoM9l8/vMO8+lJFZXmxVdrFylL23jcKeO+NvfIH78eU4D7gbyHAXcxZ30h5LUI9dp30T43/lstEjOwBcn8MdJl3SHms/0s04yRzNs4jr2wiS97c8As8GEkE+BQglseU8ejUoLKSVfHqOMtgj8wuRiGSxoqAPb24zoAy3r6pcJQRJM7/DkGlbtrN+ufdtAi6PyiZjYhYHRTruoTslDItqeWs/i4gvMfxtTCq8NmuBhYegSuYEK2Apw8WIZJsS8ckoCijuwyyi60Q1AeFO8vzkocG0jKjLcEwx2LCihslZ2f3y/m5K9JCWMoKEQf+2gpFdnaKjKrq6aHJsrTwBh6q3tBFOyfMr5xfcuunmwLMMYBgE/xwtdrG2DPF+raNvAOZN6bSOvaKbeNsgsTD6PlEBJl0aKDHPeBjpfNYb92atfj33VgT53WuvclrXbiPz/Cfk5afySRAqw54x7VZakvXxeyJwoqWQppWUNzBzkuaandhswxcOA+S82v3XuT7K45G4gfHxM92AZz4Yib4Pbil3KEXHRYX0WRXJ6IbHsdXAovaw/AayjoldTGcCSse9/z/Tpb3Zr9WgCxVVr2TaZi9+yComhY5dCdAyDhsGHhO9thhJBtROKy6gRbuuXUXwTo2gpvz/jkgqQ==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 48cb5ac4-77ba-46b9-b5f3-08d8446a80c6
+X-MS-Exchange-CrossTenant-Network-Message-Id: c5f265ee-8a3a-40de-6a6d-08d8446a9300
 X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3913.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2020 18:05:49.2082
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2020 18:06:19.8154
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: wa5p1dlf6x8OMgZWyk9LBpe2TGVLQDzQb7lU3RMoMosyaUUYqZkQM5rAMDlEGvxrOXVQg+NUPueOaTpgag/VCCkK4OwzqF07jD0b1Alcuek=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 28O2aFt6Dd6O1IEAfaevI/C4FAS4W6/NzBvvt2y3FFas0zxtq/IOwoWaJcz0PeS54/dp5IcEt6X/CesVySG0uj/zHQcSXfeGDkI0hN8QBxY=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1468
 Content-Type: multipart/alternative;
- boundary="------------66B1E091D756C3502EEDB940"
+ boundary="------------E655F3170B997739FEB10137"
 Content-Language: en-US
 
---------------66B1E091D756C3502EEDB940
+--------------E655F3170B997739FEB10137
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 
-On 8/18/20 4:52 AM, Jack Mitchell wrote:
-> The wheel for this module doesn't install the required cmake
-> files, yet the cmake build doesn't install the required
-> python module files. Therefore use manual calls to the cmake
-> and distutils classes in order to get both into the final
-> package. This method is also what other popular distros use
-> such as Archlinux.
+On 8/18/20 11:34 AM, Leon Anavi wrote:
+> Upgrade to release 1.3.19:
 >
-> Signed-off-by: Jack Mitchell <ml@embed.me.uk>
+> - orm: Adjusted the workings of the Mapper.all_orm_descriptors()
+>    accessor to represent the attributes in the order that they are
+>    located in a deterministic way, assuming the use of Python 3.6
+>    or higher which maintains the sorting order of class attributes
+>    based on how they were declared. This sorting is not guaranteed
+>    to match the declared order of attributes in all cases however;
+>    see the method documentation for the exact scheme.
+> - orm: The name of the virtual column used when using the
+>    AbstractConcreteBase and ConcreteBase classes can now be
+>    customized, to allow for models that have a column that is
+>    actually named type.
+> - sql: Repaired an issue where the "ORDER BY" clause rendering a
+>    label name rather than a complete expression, which is
+>    particularly important for SQL Server, would fail to occur if
+>    the expression were enclosed in a parenthesized grouping in some
+>    cases. This case has been added to test support. The change
+>    additionally adjusts the "automatically add ORDER BY columns
+>    when DISTINCT is present" behavior of ORM query, deprecated in
+>    1.4, to more accurately detect column expressions that are
+>    already present.
+> - mysql: The MySQL dialect will render FROM DUAL for a SELECT
+>    statement that has no FROM clause but has a WHERE clause. This
+>    allows things like "SELECT 1 WHERE EXISTS (subquery)" kinds of
+>    queries to be used as well as other use cases.
+> - sqlite: Applied a sweep through all included dialects to ensure
+>    names that contain single or double quotes are properly escaped
+>    when querying system tables, for all Inspector methods that
+>    accept object names as an argument (e.g. table names, view
+>    names, etc). SQLite and MSSQL contained two quoting issues that
+>    were repaired.
+> - mssql: Fixed bug where the mssql dialect incorrectly escaped
+>    object names that contained ‘]’ character(s).
+> - Added a **kw argument to the DeclarativeMeta.__init__() method.
+>    This allows a class to support the PEP 487 metaclass hook
+>    __init_subclass__.
+>
+> For more details have a look at the complete changelog:
+> https://docs.sqlalchemy.org/en/13/changelog/changelog_13.html
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python3-pybind11_2.5.0.bb             | 16 +++++++++++++++-
->   1 file changed, 15 insertions(+), 1 deletion(-)
+>   ...hon3-sqlalchemy_1.3.18.bb => python3-sqlalchemy_1.3.19.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.3.18.bb => python3-sqlalchemy_1.3.19.bb} (78%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb b/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb
-> index 46bba8d8d..9674ec093 100644
-> --- a/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb
-> @@ -17,4 +17,18 @@ BBCLASSEXTEND = "native"
+> diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.18.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.19.bb
+> similarity index 78%
+> rename from meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.18.bb
+> rename to meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.19.bb
+> index a5e1737b0..52e7bf376 100644
+> --- a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.18.bb
+> +++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.19.bb
+> @@ -4,8 +4,8 @@ HOMEPAGE = "http://www.sqlalchemy.org/"
+>   LICENSE = "MIT"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=c19467890539ff718c00a019c9c7a7b2"
 >   
->   EXTRA_OECMAKE =  "-DPYBIND11_TEST=OFF"
+> -SRC_URI[md5sum] = "96e085d318297b1ad36ef2685f54287a"
+> -SRC_URI[sha256sum] = "da2fb75f64792c1fc64c82313a00c728a7c301efe6a60b7a9fe35b16b4368ce7"
+> +SRC_URI[md5sum] = "a5710b0aee19a743e513f3bf002072a8"
+> +SRC_URI[sha256sum] = "3bba2e9fbedb0511769780fe1d63007081008c5c2d7d715e91858c94dbaa260e"
 >   
-> -inherit cmake python3native
-> +inherit cmake setuptools3 python3native
-> +
-> +do_configure() {
-> +	cmake_do_configure
-> +}
-> +
-> +do_compile() {
-> +	distutils3_do_compile
-> +	cmake_do_compile
-> +}
-> +
-> +do_install() {
-> +	distutils3_do_install
-> +	cmake_do_install
-> +}
+>   PYPI_PACKAGE = "SQLAlchemy"
+>   inherit pypi setuptools3
 >
 > 
 
---------------66B1E091D756C3502EEDB940
+--------------E655F3170B997739FEB10137
 Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -135,50 +164,78 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 8/18/20 4:52 AM, Jack Mitchell
-      wrote:<br>
+    <div class="moz-cite-prefix">On 8/18/20 11:34 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200818085215.538731-1-ml@embed.me.uk">
-      <pre class="moz-quote-pre" wrap="">The wheel for this module doesn't install the required cmake
-files, yet the cmake build doesn't install the required
-python module files. Therefore use manual calls to the cmake
-and distutils classes in order to get both into the final
-package. This method is also what other popular distros use
-such as Archlinux.
+    <blockquote type="cite" cite="mid:20200818153444.15728-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.3.19:
 
-Signed-off-by: Jack Mitchell <a class="moz-txt-link-rfc2396E" href="mailto:ml@embed.me.uk">&lt;ml@embed.me.uk&gt;</a></pre>
+- orm: Adjusted the workings of the Mapper.all_orm_descriptors()
+  accessor to represent the attributes in the order that they are
+  located in a deterministic way, assuming the use of Python 3.6
+  or higher which maintains the sorting order of class attributes
+  based on how they were declared. This sorting is not guaranteed
+  to match the declared order of attributes in all cases however;
+  see the method documentation for the exact scheme.
+- orm: The name of the virtual column used when using the
+  AbstractConcreteBase and ConcreteBase classes can now be
+  customized, to allow for models that have a column that is
+  actually named type.
+- sql: Repaired an issue where the &quot;ORDER BY&quot; clause rendering a
+  label name rather than a complete expression, which is
+  particularly important for SQL Server, would fail to occur if
+  the expression were enclosed in a parenthesized grouping in some
+  cases. This case has been added to test support. The change
+  additionally adjusts the &quot;automatically add ORDER BY columns
+  when DISTINCT is present&quot; behavior of ORM query, deprecated in
+  1.4, to more accurately detect column expressions that are
+  already present.
+- mysql: The MySQL dialect will render FROM DUAL for a SELECT
+  statement that has no FROM clause but has a WHERE clause. This
+  allows things like &quot;SELECT 1 WHERE EXISTS (subquery)&quot; kinds of
+  queries to be used as well as other use cases.
+- sqlite: Applied a sweep through all included dialects to ensure
+  names that contain single or double quotes are properly escaped
+  when querying system tables, for all Inspector methods that
+  accept object names as an argument (e.g. table names, view
+  names, etc). SQLite and MSSQL contained two quoting issues that
+  were repaired.
+- mssql: Fixed bug where the mssql dialect incorrectly escaped
+  object names that contained ‘]’ character(s).
+- Added a **kw argument to the DeclarativeMeta.__init__() method.
+  This allows a class to support the PEP 487 metaclass hook
+  __init_subclass__.
+
+For more details have a look at the complete changelog:
+<a class="moz-txt-link-freetext" href="https://docs.sqlalchemy.org/en/13/changelog/changelog_13.html">https://docs.sqlalchemy.org/en/13/changelog/changelog_13.html</a>
+
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
-    <blockquote type="cite" cite="mid:20200818085215.538731-1-ml@embed.me.uk">
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
+    <blockquote type="cite" cite="mid:20200818153444.15728-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python3-pybind11_2.5.0.bb             | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+ ...hon3-sqlalchemy_1.3.18.bb =&gt; python3-sqlalchemy_1.3.19.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.3.18.bb =&gt; python3-sqlalchemy_1.3.19.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb b/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb
-index 46bba8d8d..9674ec093 100644
---- a/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pybind11_2.5.0.bb
-@@ -17,4 +17,18 @@ BBCLASSEXTEND = &quot;native&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.18.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.19.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.18.bb
+rename to meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.19.bb
+index a5e1737b0..52e7bf376 100644
+--- a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.18.bb
++++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.19.bb
+@@ -4,8 +4,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://www.sqlalchemy.org/">&quot;http://www.sqlalchemy.org/&quot;</a>
+ LICENSE = &quot;MIT&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=c19467890539ff718c00a019c9c7a7b2">&quot;file://LICENSE;md5=c19467890539ff718c00a019c9c7a7b2&quot;</a>
  
- EXTRA_OECMAKE =  &quot;-DPYBIND11_TEST=OFF&quot;
+-SRC_URI[md5sum] = &quot;96e085d318297b1ad36ef2685f54287a&quot;
+-SRC_URI[sha256sum] = &quot;da2fb75f64792c1fc64c82313a00c728a7c301efe6a60b7a9fe35b16b4368ce7&quot;
++SRC_URI[md5sum] = &quot;a5710b0aee19a743e513f3bf002072a8&quot;
++SRC_URI[sha256sum] = &quot;3bba2e9fbedb0511769780fe1d63007081008c5c2d7d715e91858c94dbaa260e&quot;
  
--inherit cmake python3native
-+inherit cmake setuptools3 python3native
-+
-+do_configure() {
-+	cmake_do_configure
-+}
-+
-+do_compile() {
-+	distutils3_do_compile
-+	cmake_do_compile
-+}
-+
-+do_install() {
-+	distutils3_do_install
-+	cmake_do_install
-+}
+ PYPI_PACKAGE = &quot;SQLAlchemy&quot;
+ inherit pypi setuptools3
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -188,4 +245,4 @@ index 46bba8d8d..9674ec093 100644
   </body>
 </html>
 
---------------66B1E091D756C3502EEDB940--
+--------------E655F3170B997739FEB10137--
