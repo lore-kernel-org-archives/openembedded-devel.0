@@ -1,227 +1,90 @@
-Received: from mail-ej1-f66.google.com (mail-ej1-f66.google.com [209.85.218.66])
- by mx.groups.io with SMTP id smtpd.web12.90114.1597851398791391809
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+ by mx.groups.io with SMTP id smtpd.web10.93678.1597858604818806264
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Aug 2020 08:36:39 -0700
+ Wed, 19 Aug 2020 10:36:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=R1ehNdhR;
- spf=pass (domain: gmail.com, ip: 209.85.218.66, mailfrom: rehsack@gmail.com)
-Received: by mail-ej1-f66.google.com with SMTP id d6so26824088ejr.5
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2020 08:36:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=sender:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=6q2+5tJNqCvqD2OAb0QXkeealaBHGYHBAiQ2QCD400Y=;
-        b=R1ehNdhR8jFmvHGpjqRg2VmuBROKt11TNHB5VrU8nuaktFAEx2iEN4EWkbH+e+mQCL
-         TnGdf+3CJ5/8YNSG62bKgGZ1wZ3Eog1+TOWV1ljvWe5r7rbUDy+iVTm8lXeeeZUhTgxE
-         32Nfur5NEoT0CvgKCj5MrW9zcH3jcuuVTX59ZwCw5HJtnexIx9UtxULB4ks+WzY34l8j
-         9ww3vSVC2ke9iFR3HwhPmU08Y3G9wnXdY1r85uVgOrZhuKPGpILUcZzOO/8PR5n16CIH
-         wryfmbCvwhLtKUrecw2FcvoMz77RW/y2ID8R+/0RKjpdUKErL7mx6A7IE+zgpf0Lbhsi
-         GSEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
-         :mime-version:content-transfer-encoding;
-        bh=6q2+5tJNqCvqD2OAb0QXkeealaBHGYHBAiQ2QCD400Y=;
-        b=DAUEv2cyO/U8QI+471RgwYrojKGVWHAr7n+EEYy556z602l5uJTB1+Lt4YbUBCMl3J
-         c0ymfcT6uPdzs9u2MRiLCdxLb1PmaFImcPQlT4rwJQGXRoMj/h0uiN0EH8G8UwgCquoJ
-         sV4PG+u6/dWaaOwyVd2gNvLVAz6EGThqzkziaKNojPnauhkik1SFrHGYVEiHMqiv68Q/
-         pYK/S++qDS38fdDdLxVJNucLmnEhRxYqTJrAY1MYXFuBmvEM7suwhdGoqnFEh36sndrl
-         8RnwPyd/ASdvGadePVPELDHYw3TAHyS0v72TtUHeZ1qb9PAwt3x0H4sY8YrhSTCvT/CE
-         wiqw==
-X-Gm-Message-State: AOAM532/uNl9E82KPxi2W3/B8AGJ619WYKdaSEaO89JUyBw+bz3nBRPc
-	7vU+JM7Rov0+lfKhxPl0EZJXCA5Fzw4=
-X-Google-Smtp-Source: ABdhPJyvEvQJVhAi+MfkXn1kV/5tPl+Q+/4RizA1qB4NoTk27tODjnWSdEkuR/+9034Ewmsry5vzxg==
-X-Received: by 2002:a17:906:36d7:: with SMTP id b23mr25379239ejc.149.1597851396754;
-        Wed, 19 Aug 2020 08:36:36 -0700 (PDT)
-Return-Path: <rehsack@gmail.com>
-Received: from beaker.muppets.liwing.de (p5b25b03a.dip0.t-ipconnect.de. [91.37.176.58])
-        by smtp.gmail.com with ESMTPSA id d25sm18096978edr.78.2020.08.19.08.36.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Aug 2020 08:36:35 -0700 (PDT)
-Sender: Jens Rehsack <rehsack@gmail.com>
-From: "Jens Rehsack" <rehsack@gmail.com>
+ dkim=pass header.i=@stusta.de header.s=default header.b=GQpxirLT;
+ spf=pass (domain: stusta.mhn.de, ip: 141.84.69.5, mailfrom: srs0=vdtb=b5=stusta.de=bunk@stusta.mhn.de)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 4BWw210xfKz4X
+	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2020 19:36:39 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1597858601;
+	bh=GyIfM/kM9aTr+GfoIh0Fm4iaa07NQQiSzyUZPRTQG1k=;
+	h=From:To:Subject:Date:From;
+	b=GQpxirLTZkg0zf2hFzK8oE+NO5XTZnXnc+pFeWI4TlYXk6F9neqjizhoJHLtZcWim
+	 42T8EThY9pk9xautny8VI9nVIBzCn1CQdshCdI1ceieKBSugs9qNQdDrnH+0RDE3Vp
+	 pLNPiCv01r8YcejFz3Kr3SwmnNFkfmjQOv3jQRsrcSyScUlBisBdFpJgm6mSIUbWVA
+	 zmA0iEfGClCxfoKL2GfSLYYjiI1Y05InCXf0ml39gfGQALFE61Uv3jYUZzo2DzhceK
+	 hysBudhJB5BvO+U3ZK01yL1sdSKztWs7dsXzIuFIHMQAK4b/nPjmu30J9jUmLT3L7t
+	 VVqgZPefN3j0gMfBFIuvUFxyZkrslwDBBEMa613CoM3mhOiFl+EycC9XSFgIW3kvg0
+	 egiPB3Kbv9ucv1Z3hM0/6wPiQkXkz+GhwNZh3R46OfmKf4eJPUooVylb5qtcKC8azX
+	 t9EGhlXH/SybJZivk6siu+wS7zpXwEqDeD9psNjvyYEqDn0vYi/7O++Ce1U3Bl9t3s
+	 gjIJuN1z2WCSrV0OrqSGx34Od26g2XgTJjngAUGlt6UOo5tBRK8ZXk67NrMFkPpcrP
+	 0zB28wqmcUnzbAjgCTje90AtKq6piHwzVTNEDgssZnrtegQBahPA/1ddApRjxDUPqi
+	 q0NElj48qj3jX86BHNYdQRE0=
+From: "Adrian Bunk" <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Jens Rehsack <sno@netbsd.org>
-Subject: [meta-networking][PATCH v2] bearssl: add new recipe
-Date: Wed, 19 Aug 2020 17:36:27 +0200
-Message-Id: <20200819153627.22166-1-sno@netbsd.org>
+Subject: [meta-gnome][dunfell][PATCH] gnome-settings-daemon: Backport 3.36 fix for building without wayland
+Date: Wed, 19 Aug 2020 20:36:39 +0300
+Message-Id: <20200819173639.26172-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-Add recipe for BearSSL - an an implementation of the SSL/TLS protocol with
-the approach of:
-* Be correct and secure.
-* Be small
-* Be highly portable
-* Be feature-rich and extensible
+/usr/src/debug/gnome-settings-daemon/3.34.2-r0/build/../gnome-settings-daemon-3.34.2/plugins/wacom/gsd-wacom-manager.c:195: undefined reference to `gdk_wayland_device_get_node_path'
 
-See https://bearssl.org for more details.
-
-Signed-off-by: Jens Rehsack <sno@netbsd.org>
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- ....mk-remove-fixed-command-definitions.patch | 57 +++++++++++++++++++
- ..._x509.c-fix-potential-overflow-issue.patch | 41 +++++++++++++
- .../bearssl/bearssl_0.6.bb                    | 35 ++++++++++++
- 3 files changed, 133 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/bearssl/bearssl/0001-conf-Unix.mk-remove-fixed-command-definitions.patch
- create mode 100644 meta-networking/recipes-connectivity/bearssl/bearssl/0002-test-test_x509.c-fix-potential-overflow-issue.patch
- create mode 100644 meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb
+ ...gins-wacom-Fix-build-without-WAYLAND.patch | 27 +++++++++++++++++++
+ .../gnome-settings-daemon_3.34.2.bb           |  2 ++
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-settings-daemon/files/0001-plugins-wacom-Fix-build-without-WAYLAND.patch
 
-diff --git a/meta-networking/recipes-connectivity/bearssl/bearssl/0001-conf-Unix.mk-remove-fixed-command-definitions.patch b/meta-networking/recipes-connectivity/bearssl/bearssl/0001-conf-Unix.mk-remove-fixed-command-definitions.patch
+diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/files/0001-plugins-wacom-Fix-build-without-WAYLAND.patch b/meta-gnome/recipes-gnome/gnome-settings-daemon/files/0001-plugins-wacom-Fix-build-without-WAYLAND.patch
 new file mode 100644
-index 000000000..00be22499
+index 000000000..d84fa984e
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/bearssl/bearssl/0001-conf-Unix.mk-remove-fixed-command-definitions.patch
-@@ -0,0 +1,57 @@
-+From 4ba61c59d3488c263d106d486b656854a57ad79f Mon Sep 17 00:00:00 2001
-+From: Jens Rehsack <sno@netbsd.org>
-+Date: Thu, 13 Aug 2020 15:26:30 +0200
-+Subject: [PATCH 1/2] conf/Unix.mk: remove fixed command definitions
++++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/files/0001-plugins-wacom-Fix-build-without-WAYLAND.patch
+@@ -0,0 +1,27 @@
++From ec6982cc8b3fccc35dbd5df3c4e22ab94709c66d Mon Sep 17 00:00:00 2001
++From: Vlad Banea <vlb@xiphos.ca>
++Date: Tue, 31 Dec 2019 15:35:41 -0500
++Subject: plugins/wacom: Fix build without WAYLAND
 +
-+For cross compiling in Yocto or with appropriate SDKs, commands like
-+`$CC` are reasonably predefined.
-+
-+Upstream-Status: Inappropriate
-+
-+Signed-off-by: Jens Rehsack <sno@netbsd.org>
++Upstream-Status: Backport
++Signed-off-by: Adrian Bunk <bunk@stusta.de>
 +---
-+ conf/Unix.mk | 10 +++-------
-+ 1 file changed, 3 insertions(+), 7 deletions(-)
++ plugins/wacom/gsd-wacom-manager.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/conf/Unix.mk b/conf/Unix.mk
-+index 02f2b2b..05979fc 100644
-+--- a/conf/Unix.mk
-++++ b/conf/Unix.mk
-+@@ -37,23 +37,19 @@ RM = rm -f
-+ MKDIR = mkdir -p
-+ 
-+ # C compiler and flags.
-+-CC = cc
-+-CFLAGS = -W -Wall -Os -fPIC
-+ CCOUT = -c -o 
-+ 
-+ # Static library building tool.
-+-AR = ar
-+ ARFLAGS = -rcs
-+ AROUT =
-+ 
-+ # DLL building tool.
-+-LDDLL = cc
-++LDDLL = $(CCLD)
-+ LDDLLFLAGS = -shared
-+ LDDLLOUT = -o 
-+ 
-+ # Static linker.
-+-LD = cc
-+-LDFLAGS = 
-++LD = $(CCLD)
-+ LDOUT = -o 
-+ 
-+ # C# compiler; we assume usage of Mono.
-+@@ -63,7 +59,7 @@ RUNT0COMP = mono T0Comp.exe
-+ # Set the values to 'no' to disable building of the corresponding element
-+ # by default. Building can still be invoked with an explicit target call
-+ # (e.g. 'make dll' to force build the DLL).
-+-#STATICLIB = no
-++STATICLIB = no
-+ #DLL = no
-+ #TOOLS = no
-+ #TESTS = no
++diff --git a/plugins/wacom/gsd-wacom-manager.c b/plugins/wacom/gsd-wacom-manager.c
++index e1c8eaa7..92fd96c3 100644
++--- a/plugins/wacom/gsd-wacom-manager.c
+++++ b/plugins/wacom/gsd-wacom-manager.c
++@@ -190,7 +190,7 @@ gsd_wacom_manager_class_init (GsdWacomManagerClass *klass)
++ static gchar *
++ get_device_path (GdkDevice *device)
++ {
++-#ifdef HAVE_WAYLAND
+++#if HAVE_WAYLAND
++         if (gnome_settings_is_wayland ())
++                 return g_strdup (gdk_wayland_device_get_node_path (device));
++         else
 +-- 
-+2.17.1
++2.20.1
 +
-diff --git a/meta-networking/recipes-connectivity/bearssl/bearssl/0002-test-test_x509.c-fix-potential-overflow-issue.patch b/meta-networking/recipes-connectivity/bearssl/bearssl/0002-test-test_x509.c-fix-potential-overflow-issue.patch
-new file mode 100644
-index 000000000..94abd27fa
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/bearssl/bearssl/0002-test-test_x509.c-fix-potential-overflow-issue.patch
-@@ -0,0 +1,41 @@
-+From 542380a13f178d97851751b57054a6b5be555d1c Mon Sep 17 00:00:00 2001
-+From: Jens Rehsack <sno@netbsd.org>
-+Date: Thu, 13 Aug 2020 16:16:44 +0200
-+Subject: [PATCH 2/2] test/test_x509.c: fix potential overflow issue
+diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.34.2.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.34.2.bb
+index db422c57c..57912bab9 100644
+--- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.34.2.bb
++++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.34.2.bb
+@@ -31,6 +31,8 @@ UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
+ SRC_URI[archive.md5sum] = "493332fa0f36645188468fed41c0060b"
+ SRC_URI[archive.sha256sum] = "9fbae67e217e53b99e4f9e7d392c91ffbe31253941c9b136ef09c2d9db7ad7ed"
+ 
++SRC_URI += "file://0001-plugins-wacom-Fix-build-without-WAYLAND.patch"
 +
-+Instead of doing a memcpy() which does static overflow checking, use
-+snprintf() for string copying which does the check dynamically.
-+
-+Fixes:
-+| In file included from .../recipe-sysroot/usr/include/string.h:519,
-+|                  from test/test_x509.c:27:
-+| In function 'memcpy',
-+|     inlined from 'parse_keyvalue' at test/test_x509.c:845:2,
-+|     inlined from 'process_conf_file' at test/test_x509.c:1360:7,
-+|     inlined from 'main' at test/test_x509.c:2038:2:
-+| .../recipe-sysroot/usr/include/bits/string_fortified.h:34:10: warning: '__builtin_memcpy' specified bound 4294967295 exceeds maximum object size 2147483647 [-Wstringop-overflow=]
-+|    34 |   return __builtin___memcpy_chk (__dest, __src, __len, __bos0 (__dest));
-+|       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Signed-off-by: Jens Rehsack <sno@netbsd.org>
-+---
-+ test/test_x509.c | 3 +--
-+ 1 file changed, 1 insertion(+), 2 deletions(-)
-+
-+diff --git a/test/test_x509.c b/test/test_x509.c
-+index 2c61cf5..76f6ab9 100644
-+--- a/test/test_x509.c
-++++ b/test/test_x509.c
-+@@ -842,8 +842,7 @@ parse_keyvalue(HT *d)
-+ 		return -1;
-+ 	}
-+ 	name = xmalloc(u + 1);
-+-	memcpy(name, buf, u);
-+-	name[u] = 0;
-++	snprintf(name, u, "%s", buf);
-+ 	if (HT_get(d, name) != NULL) {
-+ 		xfree(name);
-+ 		return -1;
-+-- 
-+2.17.1
-+
-diff --git a/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb b/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb
-new file mode 100644
-index 000000000..a0f64e933
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb
-@@ -0,0 +1,35 @@
-+SUMMARY = "BearSSL is an implementation of the SSL/TLS protocol (RFC 5246) written in C"
-+DESCRIPTION = "BearSSL is an implementation of the SSL/TLS protocol (RFC \
-+5246) written in C. It aims at offering the following features: \
-+  * Be correct and secure. In particular, insecure protocol versions and \
-+    choices of algorithms are not supported, by design; cryptographic \
-+    algorithm implementations are constant-time by default. \
-+  * Be small, both in RAM and code footprint. For instance, a minimal \
-+    server implementation may fit in about 20 kilobytes of compiled code \
-+    and 25 kilobytes of RAM. \
-+  * Be highly portable. BearSSL targets not only “big” operating systems \
-+    like Linux and Windows, but also small embedded systems and even special \
-+    contexts like bootstrap code. \
-+  * Be feature-rich and extensible. SSL/TLS has many defined cipher suites \
-+    and extensions; BearSSL should implement most of them, and allow extra \
-+    algorithm implementations to be added afterwards, possibly from third \
-+    parties."
-+HOMEPAGE = "https://bearssl.org"
-+
-+SECTION = "libs"
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=1fc37e1037ae673975fbcb96a98f7191"
-+
-+SRCREV = "8ef7680081c61b486622f2d983c0d3d21e83caad"
-+SRC_URI = "git://www.bearssl.org/git/BearSSL;protocol=https;nobranch=1 \
-+	   file://0001-conf-Unix.mk-remove-fixed-command-definitions.patch \
-+	   file://0002-test-test_x509.c-fix-potential-overflow-issue.patch \
-+	   "
-+
-+# without compile errors like 
-+# <..>/ld: build/obj/ghash_pclmul.o: warning: relocation against `br_ghash_pclmul' in read-only section `.text'
-+CFLAGS += "-fPIC"
-+
-+S = "${WORKDIR}/git"
-+B = "${S}"
+ UNKNOWN_CONFIGURE_WHITELIST = "introspection"
+ 
+ # allow cross build mixed with build of native tools
 -- 
 2.17.1
 
