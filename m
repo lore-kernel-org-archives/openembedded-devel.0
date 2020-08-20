@@ -1,292 +1,783 @@
-Received: from mail-vs1-f42.google.com (mail-vs1-f42.google.com [209.85.217.42])
- by mx.groups.io with SMTP id smtpd.web10.108298.1597919195031869683
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+ by mx.groups.io with SMTP id smtpd.web11.107833.1597920019753347077
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Aug 2020 03:26:35 -0700
+ Thu, 20 Aug 2020 03:40:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=p2lavcyk;
- spf=pass (domain: gmail.com, ip: 209.85.217.42, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-vs1-f42.google.com with SMTP id a127so794866vsd.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2020 03:26:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=imPdp3/l6fcDAqMZfxoMpb3W78E+hVwfdXEXvIlZh8k=;
-        b=p2lavcykzZ53zq0AlB8hloIMT2OubaK+wemjUx+K/y/wTVZTKRT22j/w7a0MCh6oDs
-         UurLSOvEbBNf1AuFG/Y5ormUXil+mI6XB9KvC8MykuXLUeP6M+zcIniy4sdeSPl2vpMs
-         /PPbskcHEn2ZO5gwQMMVHCs9ZVovE43vxrUAno6uq4oTV2xI1RicRh4Q56pvB3LH6y2+
-         As56K5n0kHFdM9au3CO+r1YfXFYCwMPnaDwzJBAwpUzt6kBbTvv0i/M2b76Ei1Dz19u0
-         jyRecCMaJrAYKQmbqE6t56x8T3rqjMrphhU8VkNmJJGNHkUVoAwP4ZH/bDSfrYQGNGWW
-         GbyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=imPdp3/l6fcDAqMZfxoMpb3W78E+hVwfdXEXvIlZh8k=;
-        b=cCIPWUMsLGDd1C0ChXxagHzJm33FPZYEFMSMc87/0L7p0INSOYVC9OjEYDn8P4zvGc
-         GNOtOxFJLdrIVX4R8eGP3e8jlfeowDj/waj6pDYDbJPT8dmm6J2L6jLmSXyWanixKdBa
-         UESjGCp9kScFbHabeYy7whZ03GpsPrAl3SLB0mZV5XpceuGUIeR9FxkLadRSXJZjU5Hr
-         jXoZlOi2A8eB+oMK39sMFE0b8Jx/d+xVzpkzmebEbqvhUGLaK8h7AndtZY0I6hZ1hLNX
-         mXmqspldMP2QxOqlg6BEJytdnekIeb1VFfInpFdJ1VsvlSnXkAFIh6IaQ05Eks0t63Ll
-         9vwA==
-X-Gm-Message-State: AOAM530RKuILdbKlr6DHY15HDezV6l3h6jslmwrormP8BQjezS2j+nDA
-	02Op2Jw9D6tIMgb04wVGDiGsaQzjXPmEtHA1zwY=
-X-Google-Smtp-Source: ABdhPJyS5Qj+S5llC6JZxObr98Qj9l0s9Z8BQlxVpj+6suqMeODTcIDGYI5dD6y0LiiOOb4YRGWGcWZqzbz6sBslESA=
-X-Received: by 2002:a67:fb0f:: with SMTP id d15mr1333722vsr.83.1597919194137;
- Thu, 20 Aug 2020 03:26:34 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=KxY3l4zz;
+ spf=pass (domain: skidata.com, ip: 91.230.2.91, mailfrom: richard.leitner@skidata.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+  t=1597920019; x=1629456019;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=EFrutMQqjr71u0s4LyIdOrrTSELQ8eaYWQPbSLbM4E0=;
+  b=KxY3l4zz9P8v+49IHTw1cUl2s6fjde/aYZJM3meyFF98W+CzYA+llndf
+   k37uKWrrosRBgw/29Vffmg59vV38I54VHrptq/CYZUNUopuDPh4YLB7sv
+   +C0+lxZ95flhFrR1M9xIHQQn6BO47ELdsAFaHaUL7AcufCOUthWIhsrT7
+   +IzUKSvG5iXScoYnrOov+vRQJTVulllCqwyL71nU80qFHZl25ak9tLUxn
+   7tHmGtX1HAbZpO1FRoSPzwCnAapLNgMZT1eBUbvtAjTmmcOmdO/jFslbk
+   Pc/+j1lQrmyxuiyKbfcSAZIuIUdasc6E3v+IhjpqZ3p5+zwAMH+I1ASoK
+   w==;
+IronPort-SDR: uWETgwsnAM+r+NTguIyaTa9uupLoLCfoqNus3ntgdj7xIiADR/VSEE/2BvQgdmRvcU33Tq0rmt
+ v9tutGqlP2HR+i6ZaFu/PKgC+TxTxKnIweqaMDZ3351MrjNdboAeBlNGwHBO7pWefj8Bc/23BT
+ PRgO6mzuNgBdSpoch2uQE01f0/dwtlTA13DjcnUnXXtuGVbeCcRMjq5ugTTB1gGyB7Ensr2bne
+ fBxNmjXnHgIjmoQwbq2dZy5kJL5u5l1OMv4F2JIEb78/ZZW7vH0AQQEDp9DTQ9pgUSUDwoPE0u
+ Rog=
+X-IronPort-AV: E=Sophos;i="5.76,332,1592863200"; 
+   d="scan'208";a="2646561"
+From: "Richard Leitner" <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Richard Leitner <richard.leitner@skidata.com>
+Subject: [meta-java][PATCH] openjdk-14: add 14.0.1
+Date: Thu, 20 Aug 2020 12:39:56 +0200
+Message-ID: <20200820103956.63938-1-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-References: <20200813162756.24193-1-alex.kanavin@gmail.com> <20200820101019.GB51054@pcleri>
-In-Reply-To: <20200820101019.GB51054@pcleri>
-From: "Alexander Kanavin" <alex.kanavin@gmail.com>
-Date: Thu, 20 Aug 2020 12:26:22 +0200
-Message-ID: <CANNYZj-0FffY0wvrfybRVsQ_Jg8eJu1fm9XCW7otjD=O-GcYxQ@mail.gmail.com>
-Subject: Re: [oe] [meta-java][PATCHv2] openjdk-8: add a glibc 2.32 compatibility patch
-To: Richard Leitner <richard.leitner@skidata.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000f24a4d05ad4c8dd9"
+Return-Path: richard.leitner@skidata.com
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
+ sdex5srv.skidata.net (192.168.111.83)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
---000000000000f24a4d05ad4c8dd9
-Content-Type: text/plain; charset="UTF-8"
+Add support for OpenJDK and OpenJRE v14.0.1.
 
-Thanks Richard.
+This version of OpenJDK is bootstrapped from a host-provided JDK. The
+host provided JDK is used to build openjdk-14-native. The native build
+is then used as build-jdk for the cross version.
 
-There's also a problem with te cacao recipe: upstream has disappeared,
-which renders fresh builds impossible:
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+---
+ README                                        |  26 ++-
+ .../{bootstrap-flow.txt => bootstrap-flow.md} |   8 +
+ lib/oeqa/runtime/cases/java.py                |   4 +-
+ recipes-core/openjdk/openjdk-14-common.inc    | 155 ++++++++++++++++++
+ recipes-core/openjdk/openjdk-14-release.inc   |  12 ++
+ recipes-core/openjdk/openjdk-14_14.0.1.bb     |   7 +
+ recipes-core/openjdk/openjre-14_14.0.1.bb     |   5 +
+ ...oconf-remove-hard-dependency-on-cups.patch | 154 +++++++++++++++++
+ ...olchain-remove-invalid-compiler-chec.patch |  45 +++++
+ ..._libsctp_link_errors_caused_by_GCC10.patch |  64 ++++++++
+ ...le_definition_link_errors_with_GCC10.patch |  49 ++++++
+ ...le_definition_link_errors_with_GCC10.patch |  48 ++++++
+ .../images/openjdk-14-test-image.bb           |   3 +
+ .../images/openjre-14-test-image.bb           |   3 +
+ 14 files changed, 573 insertions(+), 10 deletions(-)
+ rename docs/{bootstrap-flow.txt => bootstrap-flow.md} (94%)
+ create mode 100644 recipes-core/openjdk/openjdk-14-common.inc
+ create mode 100644 recipes-core/openjdk/openjdk-14-release.inc
+ create mode 100644 recipes-core/openjdk/openjdk-14_14.0.1.bb
+ create mode 100644 recipes-core/openjdk/openjre-14_14.0.1.bb
+ create mode 100644 recipes-core/openjdk/patches-openjdk-14/0001-make-autoconf-remove-hard-dependency-on-cups.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-14/0002-make-autoconf-toolchain-remove-invalid-compiler-chec.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-14/fixed_libsctp_link_errors_caused_by_GCC10.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-14/libj2gss_NativeFunc_multiple_definition_link_errors_with_GCC10.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-14/libjava_childproc_multiple_definition_link_errors_with_GCC10.patch
+ create mode 100644 recipes-images/images/openjdk-14-test-image.bb
+ create mode 100644 recipes-images/images/openjre-14-test-image.bb
 
---2020-08-20 10:22:51--
-https://bitbucket.org/cacaovm/cacao-staging/get/2d6f6c14daf9.zip
-Resolving bitbucket.org (bitbucket.org)... 2406:da00:ff00::22c5:2ef4,
-2406:da00:ff00::22c3:9b0a, 2406:da00:ff00::22c2:513, ...
-Connecting to bitbucket.org (bitbucket.org)|2406:da00:ff00::22c5:2ef4|:443...
-connected.
-HTTP request sent, awaiting response... 403 Forbidden
-2020-08-20 10:22:52 ERROR 403: Forbidden.
+diff --git a/README b/README
+index f97378d..d46bbc6 100644
+--- a/README
++++ b/README
+@@ -73,7 +73,6 @@ way is to add the following configuration to your local.conf:
+ 
+ SANITY_TESTED_DISTROS = ""
+ INHERIT += "testimage"
+-TESTIMAGE_AUTO = "1"
+ 
+ Then you should be able to use the open{jre,jdk}-{7,8}-test-image recipes.
+ Furthermore you could also include the tests provided in lib/oeqa/runtime/cases
+@@ -110,6 +109,19 @@ list at openembedded-devel@lists.openembedded.org.
+ Usage instructions
+ ------------------
+ 
++Simply rely on openjdk-7-jre, openjdk-7, openjdk-8 or openjre-8.
++
++For conf/bblayers.conf you have to add
++
++BBLAYERS ?= " \
++   ...
++  path_to_source/meta-openembedded/meta-oe \
++  path_to_source/sources/meta-java \
++  "
++
++Extra usage instructions OpenJDK-7 & OpenJDK-8
++----------------------------------------------
++
+ You should define at least the following variables in a distro include file or local.conf
+ 
+ # Possible provider: cacao-initial-native and jamvm-initial-native
+@@ -121,15 +133,13 @@ PREFERRED_PROVIDER_virtual/java-native = "jamvm-native"
+ # Optional since there is only one provider for now
+ PREFERRED_PROVIDER_virtual/javac-native = "ecj-bootstrap-native"
+ 
+-Simply rely on openjdk-7-jre, openjdk-7, openjdk-8 or openjre-8.
++Extra usage instructions OpenJDK-14
++-----------------------------------
+ 
+-For conf/bblayers.conf you have to add
++You should define at least the following variables in a distro include file or local.conf
+ 
+-BBLAYERS ?= " \
+-   ...
+-  path_to_source/meta-openembedded/meta-oe \
+-  path_to_source/sources/meta-java \
+-  "
++# The boot-jdk used to bootstrap openjdk-14-native (needs to be jdk v13 || v14)
++OPENJDK14_BOOT_JDK = "/path/to/boot-jdk"
+ 
+ Build host dependencies
+ -----------------------
+diff --git a/docs/bootstrap-flow.txt b/docs/bootstrap-flow.md
+similarity index 94%
+rename from docs/bootstrap-flow.txt
+rename to docs/bootstrap-flow.md
+index 602eab7..96d18e6 100644
+--- a/docs/bootstrap-flow.txt
++++ b/docs/bootstrap-flow.md
+@@ -1,3 +1,11 @@
++# meta-java OpenJDK bootstrap workflow #
++
++## OpenJDK-14 ##
++
++ * TODO
++
++## OpenJDK-7 and OpenJDK-8 ##
++
+ * first jikes-native is compiled
+   * a Java 1.4-capable compiler that does not need a runtime or
+     (strictly) a class library to work
+diff --git a/lib/oeqa/runtime/cases/java.py b/lib/oeqa/runtime/cases/java.py
+index c1e1498..efee6e1 100644
+--- a/lib/oeqa/runtime/cases/java.py
++++ b/lib/oeqa/runtime/cases/java.py
+@@ -69,12 +69,12 @@ class JavaTest(OERuntimeTestCase):
+ 
+     # As OpenJDK-8 doesn't support compiled mode (JIT) for arm yet we skip this
+     # test for now.
+-    @OEHasPackage(["openjre-8", "openjdk-8"])
++    @OEHasPackage(["!openjdk-7-jre", "!openjdk-7"])
+     @OETestDepends(['java.JavaTest.test_java_exists'])
+     @skipIfInDataVar('TUNE_FEATURES', 'armv4', 'OpenJDK 8 compiled mode not yet supported for armv4')
+     @skipIfInDataVar('TUNE_FEATURES', 'armv5', 'OpenJDK 8 compiled mode not yet supported for armv5')
+     @skipIfInDataVar('TUNE_FEATURES', 'armv6', 'OpenJDK 8 compiled mode not yet supported for armv6')
+-    def test_java8_jar_comp_mode(self):
++    def test_java_jar_comp_mode(self):
+         status, output = self.target.run('java -showversion -Xcomp -jar /tmp/test.jar')
+         msg = 'Exit status was not 0. Output: %s' % output
+         self.assertEqual(status, 0, msg=msg)
+diff --git a/recipes-core/openjdk/openjdk-14-common.inc b/recipes-core/openjdk/openjdk-14-common.inc
+new file mode 100644
+index 0000000..36451b8
+--- /dev/null
++++ b/recipes-core/openjdk/openjdk-14-common.inc
+@@ -0,0 +1,155 @@
++# Copyright (C) 2020 Richard Leitner <richard.leitner@skidata.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
++
++SUMMARY = "Java runtime based upon the OpenJDK Project"
++HOMEPAGE = "http://openjdk.java.net/"
++LICENSE  = "GPL-2.0-with-classpath-exception"
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3e0b59f8fac05c3c03d4a26bbda13f8f"
++
++DEPENDS = "\
++    alsa-lib \
++    bash \
++    fontconfig \
++    freetype \
++    giflib \
++    jpeg \
++    libpng \
++    libx11 xorgproto libxt libxext libxrender libxtst libxrandr \
++    unzip-native \
++    zip-native \
++    zlib \
++    "
++
++DEPENDS_append_class-target = "\
++    cups \
++    openjdk-14-native \
++    "
++
++SRC_URI = "\
++    https://hg.openjdk.java.net/jdk-updates/jdk14u/archive/jdk-${PV}-ga.tar.bz2;name=jdk \
++    file://0001-make-autoconf-remove-hard-dependency-on-cups.patch \
++    file://0002-make-autoconf-toolchain-remove-invalid-compiler-chec.patch \
++    "
++
++S = "${WORKDIR}/jdk14u-jdk-${PV}-ga"
++
++require openjdk-common.inc
++
++JAVA_HOME = "${libdir_jvm}/${PN}"
++
++AUTOTOOLS_SCRIPT_PATH = "${S}/make/autoconf"
++
++EXTRA_OECONF_append = "\
++    --with-jobs=${@openjdk_build_helper_get_parallel_make(d)} \
++    --with-tools-dir='${STAGING_DIR_NATIVE}' \
++    --with-extra-cflags='${CFLAGS}' \
++    --with-extra-cxxflags='${CXXFLAGS}' \
++    --with-extra-ldflags='${LDFLAGS}' \
++    --with-alsa-include='${STAGING_INCDIR}/alsa' \
++    --with-alsa-lib='${STAGING_LIBDIR}' \
++    --with-fontconfig-include='${STAGING_INCDIR}' \
++    --with-freetype-include='${STAGING_INCDIR}/freetype2' \
++    --with-freetype-lib='${STAGING_LIBDIR}' \
++    --with-giflib=bundled \
++    --with-libjpeg=bundled \
++    --with-libpng=bundled \
++    --with-zlib=bundled \
++    --x-includes='${STAGING_INCDIR}/X11' \
++    --x-libraries='${STAGING_LIBDIR}' \
++    --with-vendor-name='meta-java' \
++    --disable-manpages \
++    --disable-warnings-as-errors \
++    "
++
++CONFIGUREOPTS_remove_class-native = "--host=${HOST_SYS}"
++CONFIGUREOPTS_remove_class-native = "--target=${TARGET_SYS}"
++
++EXTRA_OECONF_append_class-native = "\
++    --with-boot-jdk='${OPENJDK14_BOOT_JDK}' \
++    --enable-headless-only \
++    --enable-openjdk-only \
++    --without-cups \
++    "
++
++EXTRA_OECONF_append_class-target = "\
++    --with-sys-root='${STAGING_DIR_HOST}' \
++    --with-boot-jdk='${STAGING_LIBDIR_NATIVE}/jvm/openjdk-14-native' \
++    "
++
++do_patch_append() {
++    bb.build.exec_func('do_fix_configure', d)
++}
++
++do_fix_configure() {
++    chmod a+x ${S}/configure
++}
++
++do_configure_prepend () {
++    export TOPDIR=${S}
++    export CXXFILT="c++filt"
++    unset CFLAGS CXXFLAGS LDFLAGS
++}
++
++EXTRA_OEMAKE_append = '\
++    STRIP_POLICY=no_strip \
++    QUIETLY= \
++    jdk-image \
++    legacy-jre-image \
++'
++
++do_install() {
++    rm -rf ${D}${JAVA_HOME}
++    mkdir -p ${D}${JAVA_HOME}
++    if [[ "${PN}" = openjre* ]]; then
++        cp -rp ${B}/images/jre/* ${D}${JAVA_HOME}
++    else
++        cp -rp ${B}/images/jdk/* ${D}${JAVA_HOME}
++    fi
++    chown -R root:root ${D}${JAVA_HOME}
++    #install -m644 ${WORKDIR}/jvm.cfg  ${D}${JAVA_HOME}/jre/lib/${JDK_ARCH}/
++    find ${D}${JAVA_HOME} -name "*.debuginfo" -exec rm {} \;
++}
++
++PACKAGES_append = " \
++    ${PN}-demo \
++    ${PN}-jmods \
++"
++
++FILES_${PN}-demo = " ${JAVA_HOME}/demo ${JAVA_HOME}/sample "
++FILES_${PN}-jmods = " ${JAVA_HOME}/jmods "
++
++FILES_${PN}_append = "\
++    ${JAVA_HOME}/bin/[a-z]* \
++    ${JAVA_HOME}/lib/[a-z]* \
++    ${JAVA_HOME}/jre/bin/[a-z]* \
++    ${JAVA_HOME}/jre/lib/[a-z]* \
++    ${JAVA_HOME}/LICENSE \
++    ${JAVA_HOME}/jre/LICENSE \
++    ${JAVA_HOME}/release \
++    ${JAVA_HOME}/conf \
++"
++
++FILES_${PN}-dev_append = "\
++    ${JAVA_HOME}/include \
++"
++
++FILES_${PN}-doc_append = "\
++    ${JAVA_HOME}/man \
++    ${JAVA_HOME}/ASSEMBLY_EXCEPTION \
++    ${JAVA_HOME}/THIRD_PARTY_README \
++    ${JAVA_HOME}/jre/ASSEMBLY_EXCEPTION \
++    ${JAVA_HOME}/jre/THIRD_PARTY_README \
++    ${JAVA_HOME}/legal \
++"
++
++inherit update-alternatives
++
++ALTERNATIVE_PRIORITY = "100"
++
++ALTERNATIVE_openjdk-14 = "java javac"
++ALTERNATIVE_openjre-14 = "java"
++ALTERNATIVE_LINK_NAME[java] = "${bindir}/java"
++ALTERNATIVE_TARGET[java] = "${JAVA_HOME}/bin/java"
++ALTERNATIVE_LINK_NAME[javac] = "${bindir}/javac"
++ALTERNATIVE_TARGET[javac] = "${JAVA_HOME}/bin/javac"
+diff --git a/recipes-core/openjdk/openjdk-14-release.inc b/recipes-core/openjdk/openjdk-14-release.inc
+new file mode 100644
+index 0000000..33b3966
+--- /dev/null
++++ b/recipes-core/openjdk/openjdk-14-release.inc
+@@ -0,0 +1,12 @@
++# Copyright (C) 2020 Richard Leitner <richard.leitner@skidata.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
++
++SRC_URI[jdk.sha256sum] = "f9c4a55ac858f858222bc5fe6e4b890f9b4a3f942fd0211575b0418aec5c14d6"
++
++FILESPATH =. "${FILE_DIRNAME}/patches-openjdk-14:"
++
++SRC_URI_append = "\
++    file://libjava_childproc_multiple_definition_link_errors_with_GCC10.patch \
++    file://libj2gss_NativeFunc_multiple_definition_link_errors_with_GCC10.patch \
++    file://fixed_libsctp_link_errors_caused_by_GCC10.patch \
++    "
+diff --git a/recipes-core/openjdk/openjdk-14_14.0.1.bb b/recipes-core/openjdk/openjdk-14_14.0.1.bb
+new file mode 100644
+index 0000000..f94b25a
+--- /dev/null
++++ b/recipes-core/openjdk/openjdk-14_14.0.1.bb
+@@ -0,0 +1,7 @@
++# Copyright (C) 2020 Richard Leitner <richard.leitner@skidata.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
++
++require openjdk-14-common.inc
++require openjdk-14-release.inc
++
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/recipes-core/openjdk/openjre-14_14.0.1.bb b/recipes-core/openjdk/openjre-14_14.0.1.bb
+new file mode 100644
+index 0000000..04cd23e
+--- /dev/null
++++ b/recipes-core/openjdk/openjre-14_14.0.1.bb
+@@ -0,0 +1,5 @@
++# Copyright (C) 2020 Richard Leitner <richard.leitner@skidata.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
++
++require openjdk-14-common.inc
++require openjdk-14-release.inc
+diff --git a/recipes-core/openjdk/patches-openjdk-14/0001-make-autoconf-remove-hard-dependency-on-cups.patch b/recipes-core/openjdk/patches-openjdk-14/0001-make-autoconf-remove-hard-dependency-on-cups.patch
+new file mode 100644
+index 0000000..51999b6
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-14/0001-make-autoconf-remove-hard-dependency-on-cups.patch
+@@ -0,0 +1,154 @@
++From 3f77089a24c5073c59321d0ac5fdfe5057d8c06b Mon Sep 17 00:00:00 2001
++From: Richard Leitner <richard.leitner@skidata.com>
++Date: Wed, 13 May 2020 13:34:33 +0200
++Subject: [PATCH 1/2] make: autoconf: remove hard dependency on cups
++
++In our native build we don't want to have a dependency on cups,
++therefore enable --without-cups for all platforms.
++
++Upstream-Status: Inappropriate [disable feature]
++Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
++---
++ make/autoconf/lib-cups.m4   | 30 ++++++++++++------------------
++ make/autoconf/libraries.m4  |  8 --------
++ make/autoconf/spec.gmk.in   |  1 +
++ make/lib/Awt2dLibraries.gmk | 13 ++++++++++++-
++ 4 files changed, 25 insertions(+), 27 deletions(-)
++
++diff --git a/make/autoconf/lib-cups.m4 b/make/autoconf/lib-cups.m4
++index 0a7df8b381..e8b6a683a3 100644
++--- a/make/autoconf/lib-cups.m4
+++++ b/make/autoconf/lib-cups.m4
++@@ -34,25 +34,18 @@ AC_DEFUN_ONCE([LIB_SETUP_CUPS],
++   AC_ARG_WITH(cups-include, [AS_HELP_STRING([--with-cups-include],
++       [specify directory for the cups include files])])
++ 
++-  if test "x$NEEDS_LIB_CUPS" = xfalse; then
++-    if (test "x${with_cups}" != x && test "x${with_cups}" != xno) || \
++-        (test "x${with_cups_include}" != x && test "x${with_cups_include}" != xno); then
++-      AC_MSG_WARN([[cups not used, so --with-cups[-*] is ignored]])
++-    fi
+++
+++  WITH_CUPS="false"
+++  if test "x${with_cups}" = xno || test "x${with_cups_include}" = xno; then
+++    AC_MSG_WARN([Disable the use of cups.])
++     CUPS_CFLAGS=
++   else
++-    CUPS_FOUND=no
++-
++-    if test "x${with_cups}" = xno || test "x${with_cups_include}" = xno; then
++-      AC_MSG_ERROR([It is not possible to disable the use of cups. Remove the --without-cups option.])
++-    fi
++-
++     if test "x${with_cups}" != x; then
++       AC_MSG_CHECKING([for cups headers])
++       if test -s "${with_cups}/include/cups/cups.h"; then
++         CUPS_CFLAGS="-I${with_cups}/include"
++-        CUPS_FOUND=yes
++-        AC_MSG_RESULT([$CUPS_FOUND])
+++        WITH_CUPS="true"
+++        AC_MSG_RESULT([$WITH_CUPS])
++       else
++         AC_MSG_ERROR([Can't find 'include/cups/cups.h' under ${with_cups} given with the --with-cups option.])
++       fi
++@@ -61,25 +54,26 @@ AC_DEFUN_ONCE([LIB_SETUP_CUPS],
++       AC_MSG_CHECKING([for cups headers])
++       if test -s "${with_cups_include}/cups/cups.h"; then
++         CUPS_CFLAGS="-I${with_cups_include}"
++-        CUPS_FOUND=yes
++-        AC_MSG_RESULT([$CUPS_FOUND])
+++        WITH_CUPS="true"
+++        AC_MSG_RESULT([$WITH_CUPS])
++       else
++         AC_MSG_ERROR([Can't find 'cups/cups.h' under ${with_cups_include} given with the --with-cups-include option.])
++       fi
++     fi
++-    if test "x$CUPS_FOUND" = xno; then
+++    if test "x$WITH_CUPS" = "xfalse"; then
++       # Are the cups headers installed in the default /usr/include location?
++       AC_CHECK_HEADERS([cups/cups.h cups/ppd.h], [
++-          CUPS_FOUND=yes
+++          WITH_CUPS="true"
++           CUPS_CFLAGS=
++           DEFAULT_CUPS=yes
++       ])
++     fi
++-    if test "x$CUPS_FOUND" = xno; then
+++    if test "x$WITH_CUPS" = "xfalse"; then
++       HELP_MSG_MISSING_DEPENDENCY([cups])
++       AC_MSG_ERROR([Could not find cups! $HELP_MSG ])
++     fi
++   fi
++ 
++   AC_SUBST(CUPS_CFLAGS)
+++  AC_SUBST(WITH_CUPS)
++ ])
++diff --git a/make/autoconf/libraries.m4 b/make/autoconf/libraries.m4
++index 5f16f08b20..8d64c6e8b7 100644
++--- a/make/autoconf/libraries.m4
+++++ b/make/autoconf/libraries.m4
++@@ -59,14 +59,6 @@ AC_DEFUN_ONCE([LIB_DETERMINE_DEPENDENCIES],
++     NEEDS_LIB_FONTCONFIG=true
++   fi
++ 
++-  # Check if cups is needed
++-  if test "x$OPENJDK_TARGET_OS" = xwindows; then
++-    # Windows have a separate print system
++-    NEEDS_LIB_CUPS=false
++-  else
++-    NEEDS_LIB_CUPS=true
++-  fi
++-
++   # A custom hook may have set this already
++   if test "x$NEEDS_LIB_FREETYPE" = "x"; then
++     NEEDS_LIB_FREETYPE=true
++diff --git a/make/autoconf/spec.gmk.in b/make/autoconf/spec.gmk.in
++index 3a85303e80..b1253daa5d 100644
++--- a/make/autoconf/spec.gmk.in
+++++ b/make/autoconf/spec.gmk.in
++@@ -370,6 +370,7 @@ FREETYPE_LIBS:=@FREETYPE_LIBS@
++ FREETYPE_CFLAGS:=@FREETYPE_CFLAGS@
++ FONTCONFIG_CFLAGS:=@FONTCONFIG_CFLAGS@
++ CUPS_CFLAGS:=@CUPS_CFLAGS@
+++WITH_CUPS := @WITH_CUPS@
++ ALSA_LIBS:=@ALSA_LIBS@
++ ALSA_CFLAGS:=@ALSA_CFLAGS@
++ LIBFFI_LIBS:=@LIBFFI_LIBS@
++diff --git a/make/lib/Awt2dLibraries.gmk b/make/lib/Awt2dLibraries.gmk
++index a38d416673..d0eeab35c6 100644
++--- a/make/lib/Awt2dLibraries.gmk
+++++ b/make/lib/Awt2dLibraries.gmk
++@@ -141,7 +141,11 @@ ifeq ($(call isTargetOs, windows), true)
++ endif
++ 
++ ifeq ($(call isTargetOs, solaris linux macosx aix), true)
++-  LIBAWT_EXFILES += awt_Font.c CUPSfuncs.c fontpath.c X11Color.c
+++  LIBAWT_EXFILES += awt_Font.c fontpath.c X11Color.c
+++endif
+++
+++ifeq ($(WITH_CUPS), false)
+++  LIBAWT_EXFILES += CUPSfuncs.c
++ endif
++ 
++ ifeq ($(call isTargetOs, macosx), true)
++@@ -461,10 +465,17 @@ ifeq ($(call isTargetOs, windows macosx), false)
++   LIBAWT_HEADLESS_CFLAGS := $(CUPS_CFLAGS) $(FONTCONFIG_CFLAGS) $(X_CFLAGS) \
++       -DHEADLESS=true
++ 
+++
+++  LIBAWT_HEADLESS_EXFILES :=
+++  ifeq ($(WITH_CUPS), false)
+++    LIBAWT_HEADLESS_EXFILES += CUPSfuncs.c
+++  endif
+++
++   $(eval $(call SetupJdkLibrary, BUILD_LIBAWT_HEADLESS, \
++       NAME := awt_headless, \
++       EXTRA_SRC := $(LIBAWT_HEADLESS_EXTRA_SRC), \
++       EXCLUDES := $(LIBAWT_HEADLESS_EXCLUDES), \
+++      EXCLUDE_FILES := $(LIBAWT_HEADLESS_EXFILES), \
++       OPTIMIZATION := LOW, \
++       CFLAGS := $(CFLAGS_JDKLIB) \
++           $(LIBAWT_HEADLESS_CFLAGS), \
++-- 
++2.26.2
++
+diff --git a/recipes-core/openjdk/patches-openjdk-14/0002-make-autoconf-toolchain-remove-invalid-compiler-chec.patch b/recipes-core/openjdk/patches-openjdk-14/0002-make-autoconf-toolchain-remove-invalid-compiler-chec.patch
+new file mode 100644
+index 0000000..9997e70
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-14/0002-make-autoconf-toolchain-remove-invalid-compiler-chec.patch
+@@ -0,0 +1,45 @@
++From 93a94cd79b5657bc7954a23d6d3f9eda0addf773 Mon Sep 17 00:00:00 2001
++From: Richard Leitner <richard.leitner@skidata.com>
++Date: Wed, 13 May 2020 13:41:49 +0200
++Subject: [PATCH 2/2] make: autoconf: toolchain: remove invalid compiler
++ checking
++
++The checking of CC and CXX was faulty as it doesn't supported
++program arguments.
++To make things work remove the check and trust it is valid.
++
++Upstream-Status: Inappropriate [configuration]
++Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
++---
++ make/autoconf/toolchain.m4 | 15 ---------------
++ 1 file changed, 15 deletions(-)
++
++diff --git a/make/autoconf/toolchain.m4 b/make/autoconf/toolchain.m4
++index 341b2d1786..24f9f03948 100644
++--- a/make/autoconf/toolchain.m4
+++++ b/make/autoconf/toolchain.m4
++@@ -526,21 +526,6 @@ AC_DEFUN([TOOLCHAIN_FIND_COMPILER],
++   if test "x[$]$1" != x; then
++     # User has supplied compiler name already, always let that override.
++     AC_MSG_NOTICE([Will use user supplied compiler $1=[$]$1])
++-    if test "x`basename [$]$1`" = "x[$]$1"; then
++-      # A command without a complete path is provided, search $PATH.
++-
++-      AC_PATH_PROGS(POTENTIAL_$1, [$]$1)
++-      if test "x$POTENTIAL_$1" != x; then
++-        $1=$POTENTIAL_$1
++-      else
++-        AC_MSG_ERROR([User supplied compiler $1=[$]$1 could not be found])
++-      fi
++-    else
++-      # Otherwise it might already be a complete path
++-      if test ! -x "[$]$1"; then
++-        AC_MSG_ERROR([User supplied compiler $1=[$]$1 does not exist])
++-      fi
++-    fi
++   else
++     # No user supplied value. Locate compiler ourselves.
++ 
++-- 
++2.26.2
++
+diff --git a/recipes-core/openjdk/patches-openjdk-14/fixed_libsctp_link_errors_caused_by_GCC10.patch b/recipes-core/openjdk/patches-openjdk-14/fixed_libsctp_link_errors_caused_by_GCC10.patch
+new file mode 100644
+index 0000000..8111fa7
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-14/fixed_libsctp_link_errors_caused_by_GCC10.patch
+@@ -0,0 +1,64 @@
++
++# HG changeset patch
++# User qpzhang
++# Date 1580894055 -28800
++# Node ID 8e6fa89397ca26bf9f573888755d89d7104afcd4
++# Parent  eaefceb7f52e0b17c070c9388e2b2578d48dcf3e
++8238386: (sctp) jdk.sctp/unix/native/libsctp/SctpNet.c "multiple definition" link errors with GCC10
++Summary: Fixed libsctp link errors caused by GCC10 default -fno-common
++Reviewed-by: chegar
++
++diff -r eaefceb7f52e -r 8e6fa89397ca src/jdk.sctp/unix/native/libsctp/Sctp.h
++--- a/src/jdk.sctp/unix/native/libsctp/Sctp.h	Tue Feb 11 14:24:31 2020 +0530
+++++ b/src/jdk.sctp/unix/native/libsctp/Sctp.h	Wed Feb 05 17:14:15 2020 +0800
++@@ -1,5 +1,5 @@
++ /*
++- * Copyright (c) 2009, 2012, Oracle and/or its affiliates. All rights reserved.
+++ * Copyright (c) 2009, 2020, Oracle and/or its affiliates. All rights reserved.
++  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++  *
++  * This code is free software; you can redistribute it and/or modify it
++@@ -322,12 +322,12 @@
++ 
++ #endif /* __linux__ */
++ 
++-sctp_getladdrs_func* nio_sctp_getladdrs;
++-sctp_freeladdrs_func* nio_sctp_freeladdrs;
++-sctp_getpaddrs_func* nio_sctp_getpaddrs;
++-sctp_freepaddrs_func* nio_sctp_freepaddrs;
++-sctp_bindx_func* nio_sctp_bindx;
++-sctp_peeloff_func* nio_sctp_peeloff;
+++extern sctp_getladdrs_func* nio_sctp_getladdrs;
+++extern sctp_freeladdrs_func* nio_sctp_freeladdrs;
+++extern sctp_getpaddrs_func* nio_sctp_getpaddrs;
+++extern sctp_freepaddrs_func* nio_sctp_freepaddrs;
+++extern sctp_bindx_func* nio_sctp_bindx;
+++extern sctp_peeloff_func* nio_sctp_peeloff;
++ 
++ jboolean loadSocketExtensionFuncs(JNIEnv* env);
++ 
++diff -r eaefceb7f52e -r 8e6fa89397ca src/jdk.sctp/unix/native/libsctp/SctpNet.c
++--- a/src/jdk.sctp/unix/native/libsctp/SctpNet.c	Tue Feb 11 14:24:31 2020 +0530
+++++ b/src/jdk.sctp/unix/native/libsctp/SctpNet.c	Wed Feb 05 17:14:15 2020 +0800
++@@ -1,5 +1,5 @@
++ /*
++- * Copyright (c) 2009, 2019, Oracle and/or its affiliates. All rights reserved.
+++ * Copyright (c) 2009, 2020, Oracle and/or its affiliates. All rights reserved.
++  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++  *
++  * This code is free software; you can redistribute it and/or modify it
++@@ -43,6 +43,13 @@
++ static const char* nativeSctpLib = "libsctp.so.1";
++ static jboolean funcsLoaded = JNI_FALSE;
++ 
+++sctp_getladdrs_func* nio_sctp_getladdrs;
+++sctp_freeladdrs_func* nio_sctp_freeladdrs;
+++sctp_getpaddrs_func* nio_sctp_getpaddrs;
+++sctp_freepaddrs_func* nio_sctp_freepaddrs;
+++sctp_bindx_func* nio_sctp_bindx;
+++sctp_peeloff_func* nio_sctp_peeloff;
+++
++ JNIEXPORT jint JNICALL DEF_JNI_OnLoad
++   (JavaVM *vm, void *reserved) {
++     return JNI_VERSION_1_2;
++
+diff --git a/recipes-core/openjdk/patches-openjdk-14/libj2gss_NativeFunc_multiple_definition_link_errors_with_GCC10.patch b/recipes-core/openjdk/patches-openjdk-14/libj2gss_NativeFunc_multiple_definition_link_errors_with_GCC10.patch
+new file mode 100644
+index 0000000..66d480e
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-14/libj2gss_NativeFunc_multiple_definition_link_errors_with_GCC10.patch
+@@ -0,0 +1,49 @@
++
++# HG changeset patch
++# User qpzhang
++# Date 1580905869 -28800
++# Node ID 9e54ea7d9cd9566d28cfcd9269118a1995fc361c
++# Parent  932418820c80a87b77d96ad5f5525d282f00e82e
++8238388: libj2gss/NativeFunc.o "multiple definition" link errors with GCC10
++Summary: Fixed libj2gss link errors caused by GCC10 default -fno-common
++Reviewed-by: weijun
++
++diff -r 932418820c80 -r 9e54ea7d9cd9 src/java.security.jgss/share/native/libj2gss/NativeFunc.c
++--- a/src/java.security.jgss/share/native/libj2gss/NativeFunc.c	Wed Feb 05 10:45:39 2020 +0100
+++++ b/src/java.security.jgss/share/native/libj2gss/NativeFunc.c	Wed Feb 05 20:31:09 2020 +0800
++@@ -1,5 +1,5 @@
++ /*
++- * Copyright (c) 2005, 2018, Oracle and/or its affiliates. All rights reserved.
+++ * Copyright (c) 2005, 2020, Oracle and/or its affiliates. All rights reserved.
++  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++  *
++  * This code is free software; you can redistribute it and/or modify it
++@@ -27,6 +27,9 @@
++ #include <stdlib.h>
++ #include "NativeFunc.h"
++ 
+++/* global GSS function table */
+++GSS_FUNCTION_TABLE_PTR ftab;
+++
++ /* standard GSS method names (ordering is from mapfile) */
++ static const char RELEASE_NAME[]                = "gss_release_name";
++ static const char IMPORT_NAME[]                 = "gss_import_name";
++diff -r 932418820c80 -r 9e54ea7d9cd9 src/java.security.jgss/share/native/libj2gss/NativeFunc.h
++--- a/src/java.security.jgss/share/native/libj2gss/NativeFunc.h	Wed Feb 05 10:45:39 2020 +0100
+++++ b/src/java.security.jgss/share/native/libj2gss/NativeFunc.h	Wed Feb 05 20:31:09 2020 +0800
++@@ -1,5 +1,5 @@
++ /*
++- * Copyright (c) 2005, 2019, Oracle and/or its affiliates. All rights reserved.
+++ * Copyright (c) 2005, 2020, Oracle and/or its affiliates. All rights reserved.
++  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++  *
++  * This code is free software; you can redistribute it and/or modify it
++@@ -277,6 +277,6 @@
++ typedef GSS_FUNCTION_TABLE *GSS_FUNCTION_TABLE_PTR;
++ 
++ /* global GSS function table */
++-GSS_FUNCTION_TABLE_PTR ftab;
+++extern GSS_FUNCTION_TABLE_PTR ftab;
++ 
++ #endif
++
+diff --git a/recipes-core/openjdk/patches-openjdk-14/libjava_childproc_multiple_definition_link_errors_with_GCC10.patch b/recipes-core/openjdk/patches-openjdk-14/libjava_childproc_multiple_definition_link_errors_with_GCC10.patch
+new file mode 100644
+index 0000000..a972bc6
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-14/libjava_childproc_multiple_definition_link_errors_with_GCC10.patch
+@@ -0,0 +1,48 @@
++
++# HG changeset patch
++# User qpzhang
++# Date 1580822830 -28800
++# Node ID 6925fca959590dd0f747a9cffa5f0664ec02c7b1
++# Parent  8f6ffa575f63db3f07f96e52c97883fbaff459b4
++8238380: java.base/unix/native/libjava/childproc.c "multiple definition" link errors with GCC10
++Reviewed-by: stuefe, clanger, rriggs
++Contributed-by: patrick@os.amperecomputing.com
++
++diff -r 8f6ffa575f63 -r 6925fca95959 src/java.base/unix/native/libjava/childproc.c
++--- a/src/java.base/unix/native/libjava/childproc.c	Tue Feb 11 11:17:37 2020 +0800
+++++ b/src/java.base/unix/native/libjava/childproc.c	Tue Feb 04 21:27:10 2020 +0800
++@@ -1,5 +1,5 @@
++ /*
++- * Copyright (c) 2013, 2019, Oracle and/or its affiliates. All rights reserved.
+++ * Copyright (c) 2013, 2020, Oracle and/or its affiliates. All rights reserved.
++  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++  *
++  * This code is free software; you can redistribute it and/or modify it
++@@ -34,6 +34,7 @@
++ 
++ #include "childproc.h"
++ 
+++const char * const *parentPathv;
++ 
++ ssize_t
++ restartableWrite(int fd, const void *buf, size_t count)
++diff -r 8f6ffa575f63 -r 6925fca95959 src/java.base/unix/native/libjava/childproc.h
++--- a/src/java.base/unix/native/libjava/childproc.h	Tue Feb 11 11:17:37 2020 +0800
+++++ b/src/java.base/unix/native/libjava/childproc.h	Tue Feb 04 21:27:10 2020 +0800
++@@ -1,5 +1,5 @@
++ /*
++- * Copyright (c) 2013, 2015, Oracle and/or its affiliates. All rights reserved.
+++ * Copyright (c) 2013, 2020, Oracle and/or its affiliates. All rights reserved.
++  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++  *
++  * This code is free software; you can redistribute it and/or modify it
++@@ -126,7 +126,7 @@
++  * The cached and split version of the JDK's effective PATH.
++  * (We don't support putenv("PATH=...") in native code)
++  */
++-const char * const *parentPathv;
+++extern const char * const *parentPathv;
++ 
++ ssize_t restartableWrite(int fd, const void *buf, size_t count);
++ int restartableDup2(int fd_from, int fd_to);
++
+diff --git a/recipes-images/images/openjdk-14-test-image.bb b/recipes-images/images/openjdk-14-test-image.bb
+new file mode 100644
+index 0000000..62be748
+--- /dev/null
++++ b/recipes-images/images/openjdk-14-test-image.bb
+@@ -0,0 +1,3 @@
++IMAGE_INSTALL_append = " openjdk-14 "
++
++inherit openjdk-test-image
+diff --git a/recipes-images/images/openjre-14-test-image.bb b/recipes-images/images/openjre-14-test-image.bb
+new file mode 100644
+index 0000000..e950fe3
+--- /dev/null
++++ b/recipes-images/images/openjre-14-test-image.bb
+@@ -0,0 +1,3 @@
++IMAGE_INSTALL_append = " openjre-14 "
++
++inherit openjre-test-image
+-- 
+2.26.2
 
-I guess we need to put the zip somewhere else, and fetch it from there?
-
-Alex
-
-
-On Thu, 20 Aug 2020 at 12:10, Richard Leitner <richard.leitner@skidata.com>
-wrote:
-
-> Hi,
-> thank you for your patch!
->
-> This is a note to let you know that I've just added this patch to the
-> master-next branch of the meta-java repository at
->         git://git.yoctoproject.org/meta-java
->
-> As soon as it has gone through some more testing it will likely be
-> merged to the master branch.
->
-> If you have any questions, please let me know.
->
-> regards;rl
->
-> On Thu, Aug 13, 2020 at 06:27:56PM +0200, Alexander Kanavin wrote:
-> > Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-> > ---
-> >  .../openjdk/openjdk-8-release-common.inc      |  1 +
-> >  .../2010-Remove-usage-of-sys-sysctl.h.patch   | 39 +++++++++++++++++++
-> >  2 files changed, 40 insertions(+)
-> >  create mode 100644
-> recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
-> >
-> > diff --git a/recipes-core/openjdk/openjdk-8-release-common.inc
-> b/recipes-core/openjdk/openjdk-8-release-common.inc
-> > index 02210a1..c43fd22 100644
-> > --- a/recipes-core/openjdk/openjdk-8-release-common.inc
-> > +++ b/recipes-core/openjdk/openjdk-8-release-common.inc
-> > @@ -20,6 +20,7 @@ PATCHES_URI = "\
-> >      file://2007-jdk-no-genx11-in-headless.patch \
-> >      file://2008-jdk-no-unused-deps.patch \
-> >
-> file://2009-jdk-use-gcc-instead-of-ld-to-link-genSocketOptionRegistry.patch
-> \
-> > +    file://2010-Remove-usage-of-sys-sysctl.h.patch \
-> >  "
-> >  HOTSPOT_UB_PATCH = "\
-> >      file://1001-hotspot-fix-crash-on-JNI_CreateJavaVM.patch \
-> > diff --git
-> a/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
-> b/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
-> > new file mode 100644
-> > index 0000000..f6d7681
-> > --- /dev/null
-> > +++
-> b/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
-> > @@ -0,0 +1,39 @@
-> > +From 3ed9b4a109cf2f31b97ab8ba317d67886452523c Mon Sep 17 00:00:00 2001
-> > +From: Alexander Kanavin <alex.kanavin@gmail.com>
-> > +Date: Thu, 13 Aug 2020 17:59:42 +0200
-> > +Subject: [PATCH] Remove usage of sys/sysctl.h
-> > +
-> > +This header has been removed in glibc 2.32, and isn't used for
-> > +anything.
-> > +
-> > +Upstream-Status: Pending
-> > +Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-> > +---
-> > + jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c | 1 -
-> > + jdk/src/solaris/native/java/net/PlainSocketImpl.c         | 1 -
-> > + 2 files changed, 2 deletions(-)
-> > +
-> > +diff --git a/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
-> b/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
-> > +index cd15654e..4d8abe03 100644
-> > +--- a/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
-> > ++++ b/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
-> > +@@ -41,7 +41,6 @@
-> > + #endif
-> > + #ifdef __linux__
-> > + #include <unistd.h>
-> > +-#include <sys/sysctl.h>
-> > + #include <sys/utsname.h>
-> > + #include <netinet/ip.h>
-> > +
-> > +diff --git a/jdk/src/solaris/native/java/net/PlainSocketImpl.c
-> b/jdk/src/solaris/native/java/net/PlainSocketImpl.c
-> > +index 170957e7..9aafbc09 100644
-> > +--- a/jdk/src/solaris/native/java/net/PlainSocketImpl.c
-> > ++++ b/jdk/src/solaris/native/java/net/PlainSocketImpl.c
-> > +@@ -43,7 +43,6 @@
-> > + #endif
-> > + #ifdef __linux__
-> > + #include <unistd.h>
-> > +-#include <sys/sysctl.h>
-> > + #endif
-> > +
-> > + #include "jvm.h"
-> > --
-> > 2.28.0
-> >
->
-
---000000000000f24a4d05ad4c8dd9
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Thanks Richard.</div><div><br></div><div>There&#39;s =
-also a problem with te cacao recipe: upstream has disappeared, which render=
-s fresh builds impossible:</div><div><br></div><div>--2020-08-20 10:22:51--=
- =C2=A0<a href=3D"https://bitbucket.org/cacaovm/cacao-staging/get/2d6f6c14d=
-af9.zip">https://bitbucket.org/cacaovm/cacao-staging/get/2d6f6c14daf9.zip</=
-a><br>Resolving <a href=3D"http://bitbucket.org">bitbucket.org</a> (<a href=
-=3D"http://bitbucket.org">bitbucket.org</a>)... 2406:da00:ff00::22c5:2ef4, =
-2406:da00:ff00::22c3:9b0a, 2406:da00:ff00::22c2:513, ...<br>Connecting to <=
-a href=3D"http://bitbucket.org">bitbucket.org</a> (<a href=3D"http://bitbuc=
-ket.org">bitbucket.org</a>)|2406:da00:ff00::22c5:2ef4|:443... connected.<br=
->HTTP request sent, awaiting response... 403 Forbidden<br>2020-08-20 10:22:=
-52 ERROR 403: Forbidden.</div><div><br></div><div>I guess we need to put th=
-e zip somewhere else, and fetch it from there? <br></div><div><br></div><di=
-v>Alex<br></div><div><br></div></div><br><div class=3D"gmail_quote"><div di=
-r=3D"ltr" class=3D"gmail_attr">On Thu, 20 Aug 2020 at 12:10, Richard Leitne=
-r &lt;<a href=3D"mailto:richard.leitner@skidata.com">richard.leitner@skidat=
-a.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"ma=
-rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
-1ex">Hi,<br>
-thank you for your patch!<br>
-<br>
-This is a note to let you know that I&#39;ve just added this patch to the<b=
-r>
-master-next branch of the meta-java repository at<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 git://<a href=3D"http://git.yoctoproject.org/me=
-ta-java" rel=3D"noreferrer" target=3D"_blank">git.yoctoproject.org/meta-jav=
-a</a><br>
-<br>
-As soon as it has gone through some more testing it will likely be<br>
-merged to the master branch.<br>
-<br>
-If you have any questions, please let me know.<br>
-<br>
-regards;rl<br>
-<br>
-On Thu, Aug 13, 2020 at 06:27:56PM +0200, Alexander Kanavin wrote:<br>
-&gt; Signed-off-by: Alexander Kanavin &lt;<a href=3D"mailto:alex.kanavin@gm=
-ail.com" target=3D"_blank">alex.kanavin@gmail.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 .../openjdk/openjdk-8-release-common.inc=C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 1 +<br>
-&gt;=C2=A0 .../2010-Remove-usage-of-sys-sysctl.h.patch=C2=A0 =C2=A0| 39 +++=
-++++++++++++++++<br>
-&gt;=C2=A0 2 files changed, 40 insertions(+)<br>
-&gt;=C2=A0 create mode 100644 recipes-core/openjdk/patches-openjdk-8/2010-R=
-emove-usage-of-sys-sysctl.h.patch<br>
-&gt; <br>
-&gt; diff --git a/recipes-core/openjdk/openjdk-8-release-common.inc b/recip=
-es-core/openjdk/openjdk-8-release-common.inc<br>
-&gt; index 02210a1..c43fd22 100644<br>
-&gt; --- a/recipes-core/openjdk/openjdk-8-release-common.inc<br>
-&gt; +++ b/recipes-core/openjdk/openjdk-8-release-common.inc<br>
-&gt; @@ -20,6 +20,7 @@ PATCHES_URI =3D &quot;\<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 file://2007-jdk-no-genx11-in-headless.patch \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 file://2008-jdk-no-unused-deps.patch \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 file://2009-jdk-use-gcc-instead-of-ld-to-link-genS=
-ocketOptionRegistry.patch \<br>
-&gt; +=C2=A0 =C2=A0 file://2010-Remove-usage-of-sys-sysctl.h.patch \<br>
-&gt;=C2=A0 &quot;<br>
-&gt;=C2=A0 HOTSPOT_UB_PATCH =3D &quot;\<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 file://1001-hotspot-fix-crash-on-JNI_CreateJavaVM.=
-patch \<br>
-&gt; diff --git a/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-=
-of-sys-sysctl.h.patch b/recipes-core/openjdk/patches-openjdk-8/2010-Remove-=
-usage-of-sys-sysctl.h.patch<br>
-&gt; new file mode 100644<br>
-&gt; index 0000000..f6d7681<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-=
-sysctl.h.patch<br>
-&gt; @@ -0,0 +1,39 @@<br>
-&gt; +From 3ed9b4a109cf2f31b97ab8ba317d67886452523c Mon Sep 17 00:00:00 200=
-1<br>
-&gt; +From: Alexander Kanavin &lt;<a href=3D"mailto:alex.kanavin@gmail.com"=
- target=3D"_blank">alex.kanavin@gmail.com</a>&gt;<br>
-&gt; +Date: Thu, 13 Aug 2020 17:59:42 +0200<br>
-&gt; +Subject: [PATCH] Remove usage of sys/sysctl.h<br>
-&gt; +<br>
-&gt; +This header has been removed in glibc 2.32, and isn&#39;t used for<br=
->
-&gt; +anything.<br>
-&gt; +<br>
-&gt; +Upstream-Status: Pending<br>
-&gt; +Signed-off-by: Alexander Kanavin &lt;<a href=3D"mailto:alex.kanavin@g=
-mail.com" target=3D"_blank">alex.kanavin@gmail.com</a>&gt;<br>
-&gt; +---<br>
-&gt; + jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c | 1 -<br>
-&gt; + jdk/src/solaris/native/java/net/PlainSocketImpl.c=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0| 1 -<br>
-&gt; + 2 files changed, 2 deletions(-)<br>
-&gt; +<br>
-&gt; +diff --git a/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.=
-c b/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c<br>
-&gt; +index cd15654e..4d8abe03 100644<br>
-&gt; +--- a/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c<br>
-&gt; ++++ b/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c<br>
-&gt; +@@ -41,7 +41,6 @@<br>
-&gt; + #endif<br>
-&gt; + #ifdef __linux__<br>
-&gt; + #include &lt;unistd.h&gt;<br>
-&gt; +-#include &lt;sys/sysctl.h&gt;<br>
-&gt; + #include &lt;sys/utsname.h&gt;<br>
-&gt; + #include &lt;netinet/ip.h&gt;<br>
-&gt; + <br>
-&gt; +diff --git a/jdk/src/solaris/native/java/net/PlainSocketImpl.c b/jdk/=
-src/solaris/native/java/net/PlainSocketImpl.c<br>
-&gt; +index 170957e7..9aafbc09 100644<br>
-&gt; +--- a/jdk/src/solaris/native/java/net/PlainSocketImpl.c<br>
-&gt; ++++ b/jdk/src/solaris/native/java/net/PlainSocketImpl.c<br>
-&gt; +@@ -43,7 +43,6 @@<br>
-&gt; + #endif<br>
-&gt; + #ifdef __linux__<br>
-&gt; + #include &lt;unistd.h&gt;<br>
-&gt; +-#include &lt;sys/sysctl.h&gt;<br>
-&gt; + #endif<br>
-&gt; + <br>
-&gt; + #include &quot;jvm.h&quot;<br>
-&gt; -- <br>
-&gt; 2.28.0<br>
-&gt; <br>
-</blockquote></div>
-
---000000000000f24a4d05ad4c8dd9--
