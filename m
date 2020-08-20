@@ -1,147 +1,209 @@
-Received: from mail-io1-f48.google.com (mail-io1-f48.google.com [209.85.166.48])
- by mx.groups.io with SMTP id smtpd.web10.110862.1597929940848250015
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+ by mx.groups.io with SMTP id smtpd.web12.110171.1597931392015823066
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Aug 2020 06:25:41 -0700
+ Thu, 20 Aug 2020 06:49:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=NiWV1R15;
- spf=pass (domain: gmail.com, ip: 209.85.166.48, mailfrom: jonatan.p@gmail.com)
-Received: by mail-io1-f48.google.com with SMTP id b16so2155789ioj.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2020 06:25:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=F2w41wSyxTpUpFbAv/sFnYbqnJYAkP10UDVui3lUZZM=;
-        b=NiWV1R15W7po5ubMKXG9E5MXOcgoEo6di6FOfrLfjqfcVIjSX06oJVR4tqt/8awmeB
-         1oPe2uTbqwheePhGcfzysPfJX7h3dCDiUKjjpY0XPD8Su7o3MuT7OKynBo+dpZpHDi2i
-         p8ROi8SJUtU+bTxTyIPoKv5yYcgS3KK/1X/EDKp6dJemsM8NbmxxVtZjyMvtMoxBB3bW
-         xi6aEhjECsQMF8G3P+J3lTiRy7/7HeChooVlcmtkqBMgjxlfZWUF8Q3RS0B7enEZ0O3d
-         PAF3G3ZG2a3+ufLAMVACyGRydOC/53jDTQg4luBRKS+ueGlp2tI26Kub6taQFc/LSbND
-         A48g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=F2w41wSyxTpUpFbAv/sFnYbqnJYAkP10UDVui3lUZZM=;
-        b=of5qnCJvkO61DCOBWy7ySwFvNmjY25LlFoO/vCIn2Pc1ZAkE1iUMPJPiuZ5T+uL05j
-         4rH8p2Ad1z5qFb/L8d07uYVWGrMZY/EDcK7eiRMGECbnln5DWuyGIU/izgu8PCtJnRl5
-         jT8CEfaLPW8153UBbUaiH9CF5tYKxqYoAwNACxHdYk6xVtmya3iemazxbd+rU26pZsal
-         9N9A9vWbKlnaAnHUlVHKjJmEG1OWZet4AZJn6PySo224FOkfjcLzLxXU2fuTjnagKMha
-         S5ERUbuSyT62rDKMXpNGMNHq7jBm17/LZ+97PnsjURJIcluRlP1e+qzxmTPTTSaIS+QS
-         bObw==
-X-Gm-Message-State: AOAM532mCNzfjY60MpU4UVHw+6GfAwpMNoqNTyxjiUaBGaadAdml/Z4c
-	JyQYrbSxDN3s3diyZyF1EOb5kHddikPi6h9YH+k=
-X-Google-Smtp-Source: ABdhPJxhqtq9y43SD3C1gGXNmJ5LjlblKQAAQcJDAnW0ga3edY7iMg5FiU0GnRCaR0g1QM1NsHu6aqjK5etM5vFH1Qo=
-X-Received: by 2002:a05:6602:2106:: with SMTP id x6mr2529798iox.84.1597929940065;
- Thu, 20 Aug 2020 06:25:40 -0700 (PDT)
+ dkim=pass header.i=@skidata.com header.s=selector1 header.b=RfgkcCER;
+ spf=pass (domain: skidata.com, ip: 91.230.2.91, mailfrom: prvs=494692112=richard.leitner@skidata.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+  t=1597931392; x=1629467392;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=AlRj+3jXD8M2e/Eylx7Hq6hkEB5b5/XLx9UE1Zuc3js=;
+  b=RfgkcCERzmQZ2oUSbAm4PD17G00BwzsHuwsMTRQI6ty9DtFazexpVvjD
+   9Tn95gW/5T7Mgrq3TfKxLugpkYfLh4GjFEp3w0qtCufVBEU58idlbNhWI
+   lZaimLk0xfbvmHDWp3nVxkdnx1nwR8OA3v/27GW+CvSLK2k5mTQIHwoF3
+   SDvGOnBfC1iAO7AiVvu/lhUF+QYRF6qsd9Zb1Mn0CiPRir79JDVVRx/zs
+   ZlY4hVUqm1+7/9/bZpqx/69Pv5H91yuwhjzEiZ8QzmzHHJGYXr0HJQW73
+   TJ0ZO1u3UkkcXLZhR8+PmY5xGGh6WdxVmhl+Lv6sIJInbnlh3f1moS+rh
+   w==;
+IronPort-SDR: Hp3EKpLbfZRE+VgGIFjQnXVQZn8vEf2w4icrMpo9YNufW1fBjpdJMxmZ6RMjCwBO3focBLhQw6
+ qv7MT8uKasoUG4thSz55nnVVK84FlXwtpzoFZwHOvDT7a1aEiHjLDCksIP8V2wqrQq72PgMFQk
+ dhT2bRZfYmeRmHdgwWlznznSdemfXWR/Z7NfpbJU7JvWQPh14wCWTZo+5A5Zomo3TVRHjtCvpP
+ aUnE7x/Mv2kJd/9P5Bn3hP2BOxeMp6zwFSRJO8vK7GjG5qo7V/R/pQI6LCwEiVJLG5h5At1iHm
+ f0U=
+X-IronPort-AV: E=Sophos;i="5.76,333,1592863200"; 
+   d="scan'208";a="2646770"
+From: "Richard Leitner" <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <alex.kanavin@gmail.com>, Richard Leitner <richard.leitner@skidata.com>
+Subject: [meta-java][PATCH] cacao: update to latest git version
+Date: Thu, 20 Aug 2020 15:49:27 +0200
+Message-ID: <20200820134927.69462-1-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-References: <16285DBF18FAF8F7.27500@lists.openembedded.org>
- <CAKm+giMq=wbHhLn4WDM0xfnv4J2GJEQYfUzKts3vJukgBm2cYw@mail.gmail.com> <20200820101218.GC51054@pcleri>
-In-Reply-To: <20200820101218.GC51054@pcleri>
-From: =?UTF-8?B?Sm9uYXRhbiBQw6Vsc3Nvbg==?= <jonatan.p@gmail.com>
-Date: Thu, 20 Aug 2020 15:25:28 +0200
-Message-ID: <CAKm+giO7SSxDfhXR2-=VGe+O_gyH3Zwoar+FwdyZ_iMC4cZ7aQ@mail.gmail.com>
-Subject: Re: [oe] [PATCH] openjdk-8: Convert do_unpack postfunc to _append
-To: Richard Leitner <richard.leitner@skidata.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Return-Path: richard.leitner@skidata.com
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
+ sdex5srv.skidata.net (192.168.111.83)
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hi Robert,
+As the cacao-staging mercurial repository was removed update the recipe
+to use the git repository instead. Furthermore update to the latest
+revision.
 
-On Thu, Aug 20, 2020 at 12:12 PM Richard Leitner
-<richard.leitner@skidata.com> wrote:
->
-> Hi,
-> thanks for your patch!
-> Unfortunately we already have a similar one in master-next (commit
-> b8e6267 (WORKDIR and ARCHIVER_WORKDIR support, 2020-05-09)).
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+---
+ ...1-java.in-Do-not-use-hardcode-paths.patch} | 33 +++++++++++--------
+ ...se-system-s-boehm-garbage-collector.patch} | 21 +++++++++---
+ .../{cacao_2d6f6c14daf9.bb => cacao_git.bb}   | 12 +++----
+ 3 files changed, 41 insertions(+), 25 deletions(-)
+ rename recipes-core/cacao/{cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch => cacao/0001-java.in-Do-not-use-hardcode-paths.patch} (63%)
+ rename recipes-core/cacao/{cacao-2d6f6c14daf9/system-boehm-gc.patch => cacao/0002-cacao-use-system-s-boehm-garbage-collector.patch} (64%)
+ rename recipes-core/cacao/{cacao_2d6f6c14daf9.bb => cacao_git.bb} (85%)
 
-Ah, I didn't see that. I've tested the patch from master-next now, and
-it fixes my issues too.
+diff --git a/recipes-core/cacao/cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch b/recipes-core/cacao/cacao/0001-java.in-Do-not-use-hardcode-paths.patch
+similarity index 63%
+rename from recipes-core/cacao/cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch
+rename to recipes-core/cacao/cacao/0001-java.in-Do-not-use-hardcode-paths.patch
+index 665377b..521814e 100644
+--- a/recipes-core/cacao/cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch
++++ b/recipes-core/cacao/cacao/0001-java.in-Do-not-use-hardcode-paths.patch
+@@ -1,25 +1,31 @@
+-java.in: Do not use hardcode paths
++From 51a63cdac93caf69d1b6ace40f73f6147ba37de5 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Erkka=20K=C3=A4=C3=A4ri=C3=A4?= <erkka.kaaria@intel.com>
++Date: Thu, 20 Aug 2020 13:48:38 +0200
++Subject: [PATCH 1/2] java.in: Do not use hardcode paths
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
+ 
+ Cacao uses hardcoded paths to various files, if these paths are not
+ provided. This causes issues when sharing sstate with otherwise
+ identical workers, if build time paths are not identical.
+ 
+-Signed-off-by: Erkka Kääriä <erkka.kaaria@intel.com>
+-
+ Upstream-Status: Inappropriate [Yocto-specific fixes]
+ 
++Signed-off-by: Erkka Kääriä <erkka.kaaria@intel.com>
++Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+ ---
+- cacao-1.6.1/src/scripts/java.in | 16 ++++++++++++++--
+- 1 file changed, 14 insertions(+), 2 deletions(-)
++ src/scripts/java.in | 15 +++++++++++++--
++ 1 file changed, 13 insertions(+), 2 deletions(-)
+ 
+-diff --git cacao-1.6.1/src/scripts/java.in cacao-1.6.1/src/scripts/java.in
+-index 0790f02..2118de7 100644
+---- cacao-1.6.1/src/scripts/java.in
+-+++ cacao-1.6.1/src/scripts/java.in
+-@@ -22,5 +22,17 @@
++diff --git a/src/scripts/java.in b/src/scripts/java.in
++index 0790f0255..a4f16ecdc 100644
++--- a/src/scripts/java.in
+++++ b/src/scripts/java.in
++@@ -22,5 +22,16 @@
+  ## Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ## 02110-1301, USA.
+-
++ 
+ -IFS=""
+ -exec $(dirname ${0})/cacao ${1+"$@"}
+ +SH_DIR=`dirname "$0"`
+@@ -35,7 +41,6 @@ index 0790f02..2118de7 100644
+ +export BOOTCLASSPATH="${PARENT_DIR}/share/cacao/vm.zip:${PARENT_DIR}/share/classpath/glibj.zip"
+ +LIBRARY_PATH="-Djava.library.path=${PARENT_DIR}/lib/classpath"
+ +exec ${REAL_DIR}/cacao ${LIBRARY_PATH} ${1+"$@"}
+-+
+---
+-2.7.4
++-- 
++2.28.0
+ 
+diff --git a/recipes-core/cacao/cacao-2d6f6c14daf9/system-boehm-gc.patch b/recipes-core/cacao/cacao/0002-cacao-use-system-s-boehm-garbage-collector.patch
+similarity index 64%
+rename from recipes-core/cacao/cacao-2d6f6c14daf9/system-boehm-gc.patch
+rename to recipes-core/cacao/cacao/0002-cacao-use-system-s-boehm-garbage-collector.patch
+index c30f5be..102e9a7 100644
+--- a/recipes-core/cacao/cacao-2d6f6c14daf9/system-boehm-gc.patch
++++ b/recipes-core/cacao/cacao/0002-cacao-use-system-s-boehm-garbage-collector.patch
+@@ -1,4 +1,7 @@
+-cacao: use system's boehm garbage collector
++From 7833101c8c8938d58a32e355b9af1b56e4229a87 Mon Sep 17 00:00:00 2001
++From: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
++Date: Thu, 20 Aug 2020 13:50:47 +0200
++Subject: [PATCH 2/2] cacao: use system's boehm garbage collector
+ 
+ This is a Gentoo's patch [1] to force the use of system's bdwgc.
+ 
+@@ -10,11 +13,17 @@ with the system's version.
+ Upstream-Status: Inappropriate [not author]
+ 
+ Signed-off-by: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
++Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
++---
++ configure.ac       | 8 ++------
++ src/mm/Makefile.am | 9 ++++-----
++ 2 files changed, 6 insertions(+), 11 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
++index aceb2033b..db8a9770e 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -691,6 +691,8 @@
++@@ -738,6 +738,8 @@ AC_CHECK_ENABLE_GCC_PR40134
+  
+  AC_CHECK_ENABLE_PIC_ASM
+  
+@@ -23,7 +32,7 @@ diff --git a/configure.ac b/configure.ac
+  dnl Define version numbers.
+  AC_VERSION_DETAIL
+  AC_VERSION_CONFIG
+-@@ -793,12 +795,6 @@
++@@ -855,12 +857,6 @@ AC_CONFIG_FILES([Makefile]
+  )
+  
+  
+@@ -37,9 +46,10 @@ diff --git a/configure.ac b/configure.ac
+  
+  
+ diff --git a/src/mm/Makefile.am b/src/mm/Makefile.am
++index 9d0945a29..cbd7dc963 100644
+ --- a/src/mm/Makefile.am
+ +++ b/src/mm/Makefile.am
+-@@ -35,14 +35,13 @@
++@@ -35,14 +35,13 @@ GC_FILE = \
+  endif
+  
+  if ENABLE_GC_BOEHM
+@@ -58,3 +68,6 @@ diff --git a/src/mm/Makefile.am b/src/mm/Makefile.am
+  endif
+  
+  if ENABLE_GC_CACAO
++-- 
++2.28.0
++
+diff --git a/recipes-core/cacao/cacao_2d6f6c14daf9.bb b/recipes-core/cacao/cacao_git.bb
+similarity index 85%
+rename from recipes-core/cacao/cacao_2d6f6c14daf9.bb
+rename to recipes-core/cacao/cacao_git.bb
+index 0e50b68..1a61e12 100644
+--- a/recipes-core/cacao/cacao_2d6f6c14daf9.bb
++++ b/recipes-core/cacao/cacao_git.bb
+@@ -10,14 +10,12 @@ PROVIDES_class-native = "virtual/java-native"
+ DEPENDS = "zlib libtool classpath virtual/javac-native bdwgc"
+ RPROVIDES_${PN} = "java2-runtime"
+ 
+-SRC_URI = "https://bitbucket.org/cacaovm/cacao-staging/get/${PV}.zip \
+-           file://system-boehm-gc.patch \
+-           file://cacao-1.6.1-do-not-rely-on-absolute-paths.patch \
++SRCREV = "6c4694f9bd175386a8c451531e9a5ad97aa23b6f"
++SRC_URI = "git://bitbucket.org/cacaovm/cacao.git;protocol=https \
++           file://0001-java.in-Do-not-use-hardcode-paths.patch \
++           file://0002-cacao-use-system-s-boehm-garbage-collector.patch \
+ "
+-S = "${WORKDIR}/cacaovm-cacao-staging-${PV}"
+-
+-SRC_URI[md5sum] = "5157d0bb9eb1332f7a6b6186eaac01aa"
+-SRC_URI[sha256sum] = "34b51d660d69c2a83225fd75eab5e1fac002fb5974cb4a74b7478baf923a76cd"
++S = "${WORKDIR}/git"
+ 
+ inherit java autotools-brokensep update-alternatives pkgconfig features_check
+ 
+-- 
+2.26.2
 
-Thanks!
-
->
-> Would you please have a look at it and if applicable send a rebased
-> (master-next) version?
->
-> regards;rl
->
-> On Wed, Aug 19, 2020 at 11:31:17AM +0200, Jonatan Palsson wrote:
-> > Ping
-> >
-> > On Wed, Aug 5, 2020 at 2:05 PM Jonatan P=C3=A5lsson via
-> > lists.openembedded.org <jonatan.p=3Dgmail.com@lists.openembedded.org>
-> > wrote:
-> > >
-> > > archiver.bbclass will invoke do_unpack as a function (rather than a
-> > > task) during do_unpack_and_patch. When invoked as a function, the
-> > > postfuncs of do_unpack are not executed.
-> > >
-> > > Convert the postfuncs into an _append fragment on do_unpack instead.
-> > >
-> > > Fixes:
-> > >
-> > >     .. snip ..
-> > >     No file to patch.  Skipping patch.
-> > >     1 out of 1 hunk ignored
-> > >     Patch 1001-hotspot-fix-crash-on-JNI_CreateJavaVM.patch does not =
-apply (enforce with -f)
-> > >     ERROR: Logfile of failure stored in: .. snip .. /build/tmp/work/=
-x86_64-linux/openjdk-8-native/252-r0/temp/log.do_unpack_and_patch.220625
-> > >     ERROR: Task (.. snip .. /sources/openembedded-core/meta-java/rec=
-ipes-core/openjdk/openjdk-8-native_252.bb:do_unpack_and_patch) failed with =
-exit code '1'
-> > > ---
-> > >  recipes-core/openjdk/openjdk-8-common.inc | 10 +++++++---
-> > >  1 file changed, 7 insertions(+), 3 deletions(-)
-> > >
-> > > diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-cor=
-e/openjdk/openjdk-8-common.inc
-> > > index c78bb2a..123e896 100644
-> > > --- a/recipes-core/openjdk/openjdk-8-common.inc
-> > > +++ b/recipes-core/openjdk/openjdk-8-common.inc
-> > > @@ -46,6 +46,13 @@ do_unpack_delete_X11_wrappers() {
-> > >      find ${S}/jdk/src/solaris/classes/sun/awt/X11 -maxdepth 1 -name=
- '*.java' -delete
-> > >  }
-> > >
-> > > +do_unpack_append() {
-> > > +    bb.build.exec_func('do_unpack_extract_submodules', d)
-> > > +
-> > > +    if not bb.utils.filter('PACKAGECONFIG', 'x11', d):
-> > > +        bb.build.exec_func('do_unpack_delete_X11_wrappers', d)
-> > > +}
-> > > +
-> > >  def package_config_option_cleanup(d):
-> > >      distro_x11 =3D bb.utils.contains('DISTRO_FEATURES', 'x11', True=
-, False, d)
-> > >      distro_alsa =3D bb.utils.contains('DISTRO_FEATURES', 'alsa', Tr=
-ue, False, d)
-> > > @@ -155,9 +162,6 @@ def jdk_configure_options(d):
-> > >      options =3D package_config_option_cleanup(d)
-> > >      return options[3]
-> > >
-> > > -do_unpack[postfuncs] +=3D "do_unpack_extract_submodules"
-> > > -do_unpack[postfuncs] +=3D "${@bb.utils.contains('PACKAGECONFIG', 'x=
-11', '', 'do_unpack_delete_X11_wrappers', d)}"
-> > > -
-> > >  export DEBUG_BINARIES =3D "true"
-> > >
-> > >  ALTERNATIVE_PRIORITY =3D "50"
-> > > --
-> > > 2.26.1
-> > >
-> > >=20
->
-> --
-> Richard Leitner
-> Hardware R&D / Senior Embedded Linux Engineer
->
-> SKIDATA | Driving Your Digital Future
->
-> SKIDATA GmbH
-> Untersbergstra=C3=9Fe 40 | 5083 Gr=C3=B6dig/Salzburg | Austria
-> [t] +43-6246-888-4245 | [m] +43-664-88616370
-> [w] www.skidata.com
