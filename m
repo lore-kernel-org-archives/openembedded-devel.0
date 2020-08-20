@@ -1,84 +1,163 @@
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web11.106719.1597913650070310442
+Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com [209.85.222.182])
+ by mx.groups.io with SMTP id smtpd.web11.106777.1597913954446519863
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Aug 2020 01:54:10 -0700
+ Thu, 20 Aug 2020 01:59:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ae7Po7GQ;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id mw10so691275pjb.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2020 01:54:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=qmiHh1nf;
+ spf=pass (domain: gmail.com, ip: 209.85.222.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f182.google.com with SMTP id p25so918098qkp.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2020 01:59:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=xwCM57fK8ECfSkS6t100wfMfc1lwuqHF83Wbghpxj0Q=;
-        b=ae7Po7GQrKyHilvH2sIk3QRyJB5bBv0rQOV9wDMs86u3EXFTR8kC1CwI6EZ5+Fm6KI
-         NKA0uaniK+tgiHeYMiHDjQ9YYaNBqjSEHd+6O+dReD8cTzzuQ8IYVjHJa924jSF8XH1i
-         PQbUwV9qMRuySaYGkQ2xN12Uyaas2S+gjIeWuWkK6/Hvz/b7htgbZL2Mpo09Gj42phIA
-         G+wC6I+mx8HoCFfZX83swTz2t0OENzIg+LjiGTtZIgNyf5gtsfCkCFmXHxuH6lq/HJtu
-         hVKCfuimYO2CS4yNnHuSzGkKznK3x7AxdZ1ykYhS7w1BHsjov+D9VcnLdU+gGD4o6EHl
-         1gWA==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Zep2OrGLSPPdjWShoI0fZ+p6lXzDiKWtFrdvxqDx0AM=;
+        b=qmiHh1nfqNMrFpkyx/FOYNfDCBjEcL2ZjTyzeT7DucrVH/Fl0qhTOJMIla6Ieg5xRi
+         0Ik+KLG3cpnw/HSSmX0l2YTN4hVBH+ig2IZnwhuNvunv+hzYFp9ETYH4qnZNTKxSJNHH
+         7MMyG/RYd2jaXksOji9AlFEdCzhIjzhB0350Wo6py08fg57Nonu5NPRD1OP1CUa1z9z5
+         2RzAMWy3q9wD+2cuI/mpvbGsfzz6Zs/9ihv7X/KcW43Qc0uFx9Le8qLnOKuwkx2NrBdu
+         qVsSeaqB/tXkw1cAYhgIyb9tscDkk15q9nIiz04yxKtUfFT552JTQJfFQ5yakWSCxF2s
+         4dqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=xwCM57fK8ECfSkS6t100wfMfc1lwuqHF83Wbghpxj0Q=;
-        b=iLF01js4JB00GrpuY1gq6mhcoHUZLSzYps5Ryp+2RTRgUynRkZwUZihtJlm/Ct3CZY
-         shQMwZsqj+5GgrAw++2lsQspb7inyR6b05wqCxg++/XH8fyNZFFVJEZYTXPDP0nLYOSc
-         8pofJu1lKlRpLwUgF7iqPmxdoPrdEgiFWCR1OV+LTLCRqo2xQR5QO5YTHXMnxUZRmRTN
-         eF54KiuWW3NHSMAYNMJlCbiCY6FtHoxs8fY0G6oWOciDzNBPtTYSikY4iReJvhComt+P
-         jCNxFNZU+kgsuyFk9DoYjcPeURI/mj2yVS6P4tO4XqTNRBtUJq9FmeR1A4ZK44CAm3Fn
-         r8xQ==
-X-Gm-Message-State: AOAM532wKuoyKP8sWB1MRZZ3uv9coA6RaoxQi4Ed9EsaIakQyfhZQTJ5
-	Vzy6EhvdNZsNMH/moYJmIInZXJuQY0ieFA==
-X-Google-Smtp-Source: ABdhPJzKtusb1PFOuvnvERSo3netlog+fzGo+Lsw2d2knTbw+kIxcJHABcGPavyx+eZxpxBgQAZbMQ==
-X-Received: by 2002:a17:902:6b81:: with SMTP id p1mr1794653plk.183.1597913649064;
-        Thu, 20 Aug 2020 01:54:09 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::37ae])
-        by smtp.gmail.com with ESMTPSA id q10sm1937780pfs.75.2020.08.20.01.54.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Aug 2020 01:54:08 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Martin Jansa <martin.jansa@gmail.com>,
-	Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-oe][PATCH] valijson: Move it to networking-layer under BBFILES_DYNAMIC
-Date: Thu, 20 Aug 2020 01:54:06 -0700
-Message-Id: <20200820085406.2785032-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Zep2OrGLSPPdjWShoI0fZ+p6lXzDiKWtFrdvxqDx0AM=;
+        b=GVacsZvk4aQ+fY1r7NnHFmwNo54sHcdflVstlpz6f/YQevUvsSD6c24Xv3Y/ilbWMg
+         gvTxn/UwyQXq8GkP1YrV3BuuTprTDYlykmOU2w3A+NRLDVKyyaM4uZBpCAwjhwCFxks7
+         V5rg9/t1NCDQfZsnI3iYZGs6Pta7Ehl+1d0TpSOink/VrlBbqGDSQ4lNvPrS/p9WEpov
+         OzgMxXRxVLYqGioBGEBhAHUzlZnV0WaJtNw+LLRH6DxdyBF/YXHp7fiKTMEFJvp/vKcm
+         V4fNNJoNbVFoBliQSO5vfWE3/BG3Jwl9lQFBmpzi1/OOCGpcKeMqxpOE0QRl9GH88rkl
+         rDzA==
+X-Gm-Message-State: AOAM532q362hiWLswH8rlhVTBkji9nV6w9Co/doH3bq0glbUtDeMnd9V
+	EL4qQpeP4oRDC7xB3MqTBz0sxgJGv6ceki6tQPw=
+X-Google-Smtp-Source: ABdhPJznrvOlMtjWTVlq8HCrCQWZXrLkrn9Y5jF5XzxUI3RsTWVB8WqQB6pLZNr+PorKU1hCxJXA8upQg3TeYeSoNHk=
+X-Received: by 2002:a05:620a:48:: with SMTP id t8mr1719078qkt.474.1597913953411;
+ Thu, 20 Aug 2020 01:59:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20200726130737.57830-1-open.source@oleksandr-kravchuk.com>
+ <CA+chaQfFzhLFHYX0BY9-HwBhnk8kmmv2cRULaONWqXzTtwh=rw@mail.gmail.com>
+ <9e1e222e-d467-9fb7-f028-9902315876a7@oleksandr-kravchuk.com> <CA+chaQd4dEhhZm3Z51o0tcOcMaeY88YJPBxWOouTVd_xGyEicg@mail.gmail.com>
+In-Reply-To: <CA+chaQd4dEhhZm3Z51o0tcOcMaeY88YJPBxWOouTVd_xGyEicg@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 20 Aug 2020 01:58:47 -0700
+Message-ID: <CAMKF1spojOC3-H0cURSTO2mTrUCDF03TmWS0m3McX_6pmZu8gw@mail.gmail.com>
+Subject: Re: [oe] [PATCH][meta-oe] valijson: update to 0.3
+To: Martin Jansa <Martin.Jansa@gmail.com>
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-it has a hard dependency on curlpp package which comes from
-meta-networking
+On Wed, Aug 19, 2020 at 2:24 PM Martin Jansa <Martin.Jansa@gmail.com> wrote:
+>
+> Any update on this?
+>
+> Can we revert the upgrade until you figure it out?
+>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- meta-oe/conf/layer.conf                                          | 1 +
- .../networking-layer}/recipes-devtools/valijson/valijson_0.3.bb  | 0
- 2 files changed, 1 insertion(+)
- rename meta-oe/{ => dynamic-layers/networking-layer}/recipes-devtools/valijson/valijson_0.3.bb (100%)
+For once, I have fixed it myself since reverts are not my best choice,
+I would appreciate all patch submitters taking responsibility of
+addressing comments and feedback posted to their patches in timely
+manner
 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index 5bf1f6cfd9..5178678da2 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -27,6 +27,7 @@ BBFILE_PRIORITY_openembedded-layer = "6"
- # to ensure yocto compatibility check pass
- BBFILES_DYNAMIC += " \
- meta-python:${LAYERDIR}/dynamic-layers/meta-python/recipes-*/*/*.bb \
-+networking-layer:${LAYERDIR}/dynamic-layers/networking-layer/recipes-*/*/*.bb \
- perl-layer:${LAYERDIR}/dynamic-layers/perl-layer/recipes-*/*/*.bb \
- "
- 
-diff --git a/meta-oe/recipes-devtools/valijson/valijson_0.3.bb b/meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.3.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/valijson/valijson_0.3.bb
-rename to meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.3.bb
--- 
-2.28.0
-
+> On Mon, Aug 3, 2020 at 1:51 PM Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com> wrote:
+>>
+>> Hi,
+>>
+>> Oh, I was not aware those layers cannot depend on each other. I'll see what can be done.
+>>
+>> On 02/08/2020 22:03, Martin Jansa wrote:
+>>
+>> Hi,
+>>
+>> new dependency curlpp is only available in meta-networking, so this recipe in meta-oe cannot depend on it, either move it to meta-networking as well, or make it optional with PACKAGECONFIG if possible.
+>>
+>> Now it causes:
+>> ERROR: Nothing PROVIDES 'curlpp' (but meta-openembedded/meta-oe/recipes-devtools/valijson/valijson_0.3.bb DEPENDS on or otherwise requires it). Close matches:
+>>
+>> Regards,
+>>
+>> On Sun, Jul 26, 2020 at 3:09 PM Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com> wrote:
+>>>
+>>> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+>>> ---
+>>>  .../recipes-devtools/valijson/valijson_0.3.bb | 36 +++++++++++++++++++
+>>>  .../recipes-devtools/valijson/valijson_git.bb | 21 -----------
+>>>  2 files changed, 36 insertions(+), 21 deletions(-)
+>>>  create mode 100644 meta-oe/recipes-devtools/valijson/valijson_0.3.bb
+>>>  delete mode 100644 meta-oe/recipes-devtools/valijson/valijson_git.bb
+>>>
+>>> diff --git a/meta-oe/recipes-devtools/valijson/valijson_0.3.bb b/meta-oe/recipes-devtools/valijson/valijson_0.3.bb
+>>> new file mode 100644
+>>> index 0000000000..049cdeffc0
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-devtools/valijson/valijson_0.3.bb
+>>> @@ -0,0 +1,36 @@
+>>> +SUMMARY = "Header-only C++ library for JSON Schema validation"
+>>> +HOMEPAGE = "https://github.com/tristanpenman/valijson"
+>>> +LICENSE = "BSD-2-Clause"
+>>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=015106c62262b2383f6c72063f0998f2"
+>>> +
+>>> +SRC_URI = "git://github.com/tristanpenman/valijson.git"
+>>> +SRCREV = "7a52fc88cdffd6678c009ca2fad700151f7363c6"
+>>> +
+>>> +S = "${WORKDIR}/git"
+>>> +
+>>> +inherit cmake
+>>> +
+>>> +EXTRA_OECMAKE = "-DINSTALL_HEADERS=1 -DBUILD_TESTS=0"
+>>> +
+>>> +DEPENDS = "curlpp"
+>>> +
+>>> +# valijson is a header only C++ library, so the main package will be empty.
+>>> +RDEPENDS_${PN}-dev = ""
+>>> +
+>>> +BBCLASSEXTEND = "native nativesdk"
+>>> +
+>>> +do_install() {
+>>> +    install -d ${D}${includedir}/compat
+>>> +    install -d ${D}${includedir}/valijson
+>>> +    install -d ${D}${includedir}/valijson/adapters
+>>> +    install -d ${D}${includedir}/valijson/constraints
+>>> +    install -d ${D}${includedir}/valijson/internal
+>>> +    install -d ${D}${includedir}/valijson/utils
+>>> +
+>>> +    install -m 0644 ${S}/include/compat/* ${D}${includedir}/compat
+>>> +    install -D -m 0644 ${S}/include/valijson/*.hpp -t ${D}${includedir}/valijson
+>>> +    install -D -m 0644 ${S}/include/valijson/adapters/*.hpp -t ${D}${includedir}/valijson/adapters
+>>> +    install -D -m 0644 ${S}/include/valijson/constraints/*.hpp -t ${D}${includedir}/valijson/constraints
+>>> +    install -D -m 0644 ${S}/include/valijson/internal/*.hpp -t ${D}${includedir}/valijson/internal
+>>> +    install -D -m 0644 ${S}/include/valijson/utils/*.hpp -t ${D}${includedir}/valijson/utils
+>>> +}
+>>> diff --git a/meta-oe/recipes-devtools/valijson/valijson_git.bb b/meta-oe/recipes-devtools/valijson/valijson_git.bb
+>>> deleted file mode 100644
+>>> index c3254d16e7..0000000000
+>>> --- a/meta-oe/recipes-devtools/valijson/valijson_git.bb
+>>> +++ /dev/null
+>>> @@ -1,21 +0,0 @@
+>>> -SUMMARY = "Header-only C++ library for JSON Schema validation"
+>>> -HOMEPAGE = "https://github.com/tristanpenman/valijson"
+>>> -LICENSE = "BSD-2-Clause"
+>>> -LIC_FILES_CHKSUM = "file://LICENSE;md5=015106c62262b2383f6c72063f0998f2"
+>>> -
+>>> -SRC_URI = "git://github.com/tristanpenman/valijson.git"
+>>> -PV = "0.1+git${SRCPV}"
+>>> -
+>>> -SRCREV = "c2f22fddf599d04dc33fcd7ed257c698a05345d9"
+>>> -
+>>> -S = "${WORKDIR}/git"
+>>> -
+>>> -inherit cmake
+>>> -
+>>> -EXTRA_OECMAKE = "-DINSTALL_HEADERS=1 -DBUILD_TESTS=0"
+>>> -
+>>> -# valijson is a header only C++ library, so the main package will be empty.
+>>> -RDEPENDS_${PN}-dev = ""
+>>> -
+>>> -BBCLASSEXTEND = "native nativesdk"
+>>> -
+>>> --
+>>> 2.25.1
+>>>
+>>>
+> 
