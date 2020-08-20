@@ -1,79 +1,83 @@
-Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com [209.85.216.68])
- by mx.groups.io with SMTP id smtpd.web11.121461.1597962055418677432
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web12.121525.1597964221971535853
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Aug 2020 15:20:55 -0700
+ Thu, 20 Aug 2020 15:57:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=uXW1hiwy;
- spf=pass (domain: gmail.com, ip: 209.85.216.68, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f68.google.com with SMTP id c10so56349pjn.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2020 15:20:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=VRJSusGf;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: mfitz.payne@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id t6so97779pjr.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2020 15:57:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=X6VNYlq+RRlCrQWg7Lp6F0XRiNWx44j9uarFL1gELQE=;
-        b=uXW1hiwyQTy5s3kgwWvHDkZEf4eeSwtxYkVg18zr879PFhzU6ieT45ubMYfsavdA9q
-         U3UXZC0uTq7K3nKbqFP1HHHCEzKpvPniq2R+DfpHlagLTsdIT3vKNZ1+ZtxH/dN9qLMP
-         yvnSvqm1619NclBxkBLFVnvUcPwbb1FB5+3ZFDKz/ayFKjnO8WUKS9zqrrjNeow1JSdw
-         bsLVvUkD+kMNcfPltwQewaovPDI94oO3BgaFtnCOqaRsnv6w81ICForgn803XQgXnwTN
-         vTcEoG3M8T7Z9LrgdFfHJuYJ4GIiiMiDmldJxfRSFRVaWbaUlN/wEo+mLkK4X6jEirxQ
-         ZwfA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=kIJplTw3fOLIeDICtnNsky1XkfgYOvzQU9NE2Ae9dDo=;
+        b=VRJSusGfGANt7zAam1uWKqOxVBpQX8DUW9GcyQSDPmOJJsB05ojTAkDwVdzACjF+A1
+         6P6S/PE8FoKZE+grVc++WIIKkF+FaZKw1j44ioC7CwHJUOzR3dTylosFir3+07LdH5Xu
+         vhf83V74R8LhMqosmKGwyXaapu+F/D3DBcXkAcUDwJzv5sJq2V8TXUJ8G/32TsgsBkaP
+         Lfhk41kOX+XXVkleaIHn1yNhPQthhnvj1J2/zmUrv5+1OVzwTvczS9XNXCUoDV+sxkgn
+         oGIoMAuB7DCBAlwkTRpi3jBux93K+sO3b6YN1HzNJgFEKtKAG+9MGn4Hgc2RrtiUF0HP
+         FzuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=X6VNYlq+RRlCrQWg7Lp6F0XRiNWx44j9uarFL1gELQE=;
-        b=n8Amjfg9GdYIgVZCI4XxtlZyJ/qM7Dc99WoNWuvmV8g58FanT/aeV8Bu3QE+5Md0Vv
-         zbzoCnOiV3VmMoebSZGEIlX1NA7soAx7WJbni/PkdBt2c7ua3JdTx+unQGosjeCIz+hO
-         g4xONRwaMlqkfYQXFm7JVRt4U/52leT4njKtf87EL4py/KvM+tgmMjA0r1B210IoIFA9
-         Ji9/LgUjJSRr5iXJgq/JCYIdR1ltzBn4EERCSyT5tm1A13wnd3Q/JqSXb71PmOjzoYl4
-         wuHd1CeypuZ9paXdHZ0mUI6pUeeeRiRbgf9k1B7BHX2Pn9rm7EqMQnKXHaNKUwQt2y+M
-         MOpQ==
-X-Gm-Message-State: AOAM532tk2ljXcTwFzdnIVBbxyGpCyIVdAXegMK7hKUuW3gY+VHF9gmK
-	+8vSkq2sTSeR8Be5sXkeJN19bEFhZVJd+Q==
-X-Google-Smtp-Source: ABdhPJytoWiOfHjunyTDnHrW8AR+ahVKAsP2CirR/UUOQB8+nNFHWvemDGaXiVXD/N97Er1fWUjNpw==
-X-Received: by 2002:a17:902:e78d:: with SMTP id cp13mr408737plb.105.1597962054599;
-        Thu, 20 Aug 2020 15:20:54 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net (c-73-63-224-124.hsd1.ca.comcast.net. [73.63.224.124])
-        by smtp.gmail.com with ESMTPSA id q66sm61849pjq.17.2020.08.20.15.20.53
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=kIJplTw3fOLIeDICtnNsky1XkfgYOvzQU9NE2Ae9dDo=;
+        b=HwtdXDhqE9iAxMYhZgl0ZWiuiI+nvZmoPR/lR56QN82MeZ/8SlqNpCTSy45Jty5A/U
+         AZji8084Cqn2CRCncWXiBnzvVg2izoDVU9eFUUQip30tAZwdIn/sAEXh5Xc39pdmHCRi
+         /c9nrkiAl2i4ynIIMN+aWH0OY3ZTQ/vLC4TVnGpLznu3WoULtA0e0AXBE8fKnQA06Tr8
+         J8Q076AkO1CjxuyEYr6EIEIdsF3N3k7rXG1tKVmRdTj+zFtrL5CO6AegkOMht5BTGgdf
+         oOUhn/GVoLjExxXvZ6GIyskdJMQSi2tk+KMv3WNrpewPaRzCt0ltQY3622/++IcjoaJs
+         i8cQ==
+X-Gm-Message-State: AOAM533se/ELXwMyMTHwXDXyjkJm1tmvH37vz8E5s3IPWl7+NnUAZW6q
+	sGeBvnxld+e9u8ruXz8aEwQFjLCsu7c=
+X-Google-Smtp-Source: ABdhPJwgZXjgAzwJztqdKrhDd8YMrRA36OQHD+cSjXmYIdir4WMnJTpn/Zsv7iWyrrddr3kFOIxDBQ==
+X-Received: by 2002:a17:90a:e94c:: with SMTP id kp12mr17817pjb.115.1597964221176;
+        Thu, 20 Aug 2020 15:57:01 -0700 (PDT)
+Return-Path: <mfitz.payne@gmail.com>
+Received: from localhost.localdomain (n175-36-189-13.mrk2.qld.optusnet.com.au. [175.36.189.13])
+        by smtp.gmail.com with ESMTPSA id u8sm39007pjy.35.2020.08.20.15.56.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Aug 2020 15:20:53 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Thu, 20 Aug 2020 15:57:00 -0700 (PDT)
+From: "Michael Fitz-Payne" <mfitz.payne@gmail.com>
+X-Google-Original-From: Michael Fitz-Payne <michael.fitz-payne@digi.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] kernel-selftest: Tests in 5.8 depend on libhugetlbfs.h
-Date: Thu, 20 Aug 2020 15:20:50 -0700
-Message-Id: <20200820222050.1300359-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200820222050.1300359-1-raj.khem@gmail.com>
-References: <20200820222050.1300359-1-raj.khem@gmail.com>
+Cc: Michael Fitz-Payne <michael.fitz-payne@digi.com>
+Subject: [meta-python][PATCH] python3-greenstalk: add recipe for greenstalk python package.
+Date: Fri, 21 Aug 2020 08:56:49 +1000
+Message-Id: <20200820225649.200821-1-michael.fitz-payne@digi.com>
+X-Mailer: git-send-email 2.25.4
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Fixes
-| hmm-tests.c:24:10: fatal error: hugetlbfs.h: No such file or directory
-|    24 | #include <hugetlbfs.h>
-|       |          ^~~~~~~~~~~~~
+Greenstalk is a small and unopinionated Python client library for
+communicating with the beanstalkd work queue. The API provided mostly
+maps one-to-one with commands in the protocol.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Michael Fitz-Payne <michael.fitz-payne@digi.com>
 ---
- meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../python/python3-greenstalk_1.0.1.bb               | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-greenstalk_1.0.1.bb
 
-diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-index 3687c267e1..2a41aec23c 100644
---- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-+++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
- 
- LIC_FILES_CHKSUM = "file://../COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
- 
--DEPENDS = "rsync-native llvm-native"
-+DEPENDS = "rsync-native llvm-native libhugetlbfs"
- 
- # for musl libc
- SRC_URI_append_libc-musl = "\
+diff --git a/meta-python/recipes-devtools/python/python3-greenstalk_1.0.1.bb b/meta-python/recipes-devtools/python/python3-greenstalk_1.0.1.bb
+new file mode 100644
+index 000000000..9447c1836
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-greenstalk_1.0.1.bb
+@@ -0,0 +1,12 @@
++SUMMARY = "A Python 3 client for the beanstalkd work queue"
++HOMEPAGE = "https://github.com/mayhewj/greenstalk"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=8f98432ba1fce3933c556430fd47298f"
++
++SRC_URI[md5sum] = "3374649586a8016fecaf0ce5ecf9985d"
++SRC_URI[sha256sum] = "0c9f2af79ac8ea526891ae8d7e9500341a0f657465a541d6eaedb35ff70f4fe3"
++
++RDEPENDS_${PN} += "python3-io python3-core"
++
++inherit pypi
++inherit setuptools3
 -- 
-2.28.0
+2.25.4
 
