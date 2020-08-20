@@ -1,371 +1,166 @@
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.web12.97599.1597872245877691585
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web11.105897.1597908750518783568
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Aug 2020 14:24:06 -0700
+ Thu, 20 Aug 2020 00:32:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=MfM0NPKR;
- spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f43.google.com with SMTP id g19so121705ejc.9
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Aug 2020 14:24:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=JMqnP0mhaBKnpznV3HD31gcy+K6kJ9e6LD6zY83nK7A=;
-        b=MfM0NPKRC8gpA7vD8rvO8u6h5BXFUrXT5Zfk5LYzDcriUK1w/orHtYxjy89CSXoaQO
-         2/OX+hdIChMd0JK3nm9BwQvhKvt41l5pEF/o4P8q54uLi7yVtnxhJ2v5miLHl5sEK2CD
-         82UdhOcU9iwgxbFEw4+QJVdyCExFF5Y3nVn53HRnpQcpmCEGMuCR4rRXDhLxzSTi8Mrq
-         RCT703k48sWIh0Ld0I9UuIauOC/GsSH9V/6P+srb7h/hB4oU2F2ANRE4PPOuCnM6p2KE
-         NQ17v0l3lgmvehaVMtIWES09nx3NFTx4vTax0rszVuA6AhJk+HF/0HIgBnakSWhe7vUj
-         3ZIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=JMqnP0mhaBKnpznV3HD31gcy+K6kJ9e6LD6zY83nK7A=;
-        b=cY/qehCNn+EcsHB5nx6xqosEysMbZ1zkBVlivcoEMxsiIrl3mDSmjt79UB1yzovhZa
-         SigBjwOj/n+vXWj5QuGSt0+qZb5PDEIWytJo9qX1Ix8LEUAm0guL3y4+f89flMExKTRD
-         k+qM+0MFRsHiXEoui434mFurp5T736eOwpCJak9HoXMVtALUJy9M3OdlW/d0RcAPc3jF
-         T66QJFMzmwH0TBQfP7knAXjJc/XU/hvZuUUW9RpBrAkUdR0xDDd7R1KXbOvdvFa9yeaB
-         NQoB/aA1Wabtn1W0icH73EhBd3J9bNyR+VM0/g//QLfNbF/llU9SU8MFWMGIdIpGgC+P
-         G9NA==
-X-Gm-Message-State: AOAM533x5Zj8pi0S8p+OaYOiCI6oQBQe4g7w1mVDslJl6r7cugc+Iw4a
-	pgNqW5qDLTDWF1m1gmc390uOXtvb0tAfdn5kQJQ=
-X-Google-Smtp-Source: ABdhPJz20mgEMCdDUj2NNqqFJBo/MTlPZTWABrofdsMoQRTIb2ndXG6zF1qYzoMA/HNOJmvK5zZD4R5XVggZlGxpAHQ=
-X-Received: by 2002:a17:907:11dd:: with SMTP id va29mr271862ejb.470.1597872244239;
- Wed, 19 Aug 2020 14:24:04 -0700 (PDT)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: mingli.yu@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 07K7WS3T008106
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2020 00:32:29 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.40) with Microsoft SMTP Server id 14.3.487.0; Thu, 20 Aug 2020
+ 00:32:28 -0700
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] mariadb: package executables named with mariadb
+Date: Thu, 20 Aug 2020 00:32:28 -0700
+Message-ID: <20200820073228.98628-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20200726130737.57830-1-open.source@oleksandr-kravchuk.com>
- <CA+chaQfFzhLFHYX0BY9-HwBhnk8kmmv2cRULaONWqXzTtwh=rw@mail.gmail.com> <9e1e222e-d467-9fb7-f028-9902315876a7@oleksandr-kravchuk.com>
-In-Reply-To: <9e1e222e-d467-9fb7-f028-9902315876a7@oleksandr-kravchuk.com>
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-Date: Wed, 19 Aug 2020 23:23:53 +0200
-Message-ID: <CA+chaQd4dEhhZm3Z51o0tcOcMaeY88YJPBxWOouTVd_xGyEicg@mail.gmail.com>
-Subject: Re: [oe] [PATCH][meta-oe] valijson: update to 0.3
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="00000000000083b25a05ad419fdf"
+Content-Type: text/plain
 
---00000000000083b25a05ad419fdf
-Content-Type: text/plain; charset="UTF-8"
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Any update on this?
+After mariadb upgrades to 10.5.x, the below commit introduced:
+9e1b3af4a49 MDEV-21303 Make executables MariaDB named
 
-Can we revert the upgrade until you figure it out?
+Before the above commit:
+ $ ls -l tmp-glibc/work/core2-64-wrs-linux/mariadb/10.4.12-r0/build/scripts/mysql_install_db
+ -rwxr-xr-x 1 myu users 21649 Aug 20 10:36 tmp-glibc/work/core2-64-wrs-linux/mariadb/10.4.12-r0/build/scripts/mysql_install_db
+ $ ls -l tmp-glibc/work/core2-64-wrs-linux/mariadb/10.4.12-r0/build/scripts/mariadb-install-db
+ lrwxrwxrwx 1 myu users 16 Aug 20 10:36 tmp-glibc/work/core2-64-wrs-linux/mariadb/10.4.12-r0/build/scripts/mariadb-install-db -> mysql_install_db
 
-On Mon, Aug 3, 2020 at 1:51 PM Oleksandr Kravchuk <
-open.source@oleksandr-kravchuk.com> wrote:
+After the above commit:
+ $ ls -l tmp-glibc/work/corei7-64-wrs-linux/mariadb/10.5.4-r0/build/scripts/mysql_install_db
+ lrwxrwxrwx 1 myu users 18 Aug 19 15:02 tmp-glibc/work/corei7-64-wrs-linux/mariadb/10.5.4-r0/build/scripts/mysql_install_db -> mariadb-install-db
+ $ ls -l tmp-glibc/work/corei7-64-wrs-linux/mariadb/10.5.4-r0/build/scripts/mariadb-install-db
+ -rwxr-xr-x 1 myu users 21630 Aug 19 15:02 tmp-glibc/work/corei7-64-wrs-linux/mariadb/10.5.4-r0/build/scripts/mariadb-install-db
 
-> Hi,
->
-> Oh, I was not aware those layers cannot depend on each other. I'll see
-> what can be done.
->
-> On 02/08/2020 22:03, Martin Jansa wrote:
->
-> Hi,
->
-> new dependency curlpp is only available in meta-networking, so this recipe
-> in meta-oe cannot depend on it, either move it to meta-networking as well,
-> or make it optional with PACKAGECONFIG if possible.
->
-> Now it causes:
-> ERROR: Nothing PROVIDES 'curlpp' (but
-> meta-openembedded/meta-oe/recipes-devtools/valijson/valijson_0.3.bb
-> DEPENDS on or otherwise requires it). Close matches:
->
-> Regards,
->
-> On Sun, Jul 26, 2020 at 3:09 PM Oleksandr Kravchuk <
-> open.source@oleksandr-kravchuk.com> wrote:
->
->> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
->> ---
->>  .../recipes-devtools/valijson/valijson_0.3.bb | 36 +++++++++++++++++++
->>  .../recipes-devtools/valijson/valijson_git.bb | 21 -----------
->>  2 files changed, 36 insertions(+), 21 deletions(-)
->>  create mode 100644 meta-oe/recipes-devtools/valijson/valijson_0.3.bb
->>  delete mode 100644 meta-oe/recipes-devtools/valijson/valijson_git.bb
->>
->> diff --git a/meta-oe/recipes-devtools/valijson/valijson_0.3.bb
->> b/meta-oe/recipes-devtools/valijson/valijson_0.3.bb
->> new file mode 100644
->> index 0000000000..049cdeffc0
->> --- /dev/null
->> +++ b/meta-oe/recipes-devtools/valijson/valijson_0.3.bb
->> @@ -0,0 +1,36 @@
->> +SUMMARY = "Header-only C++ library for JSON Schema validation"
->> +HOMEPAGE = "https://github.com/tristanpenman/valijson"
->> +LICENSE = "BSD-2-Clause"
->> +LIC_FILES_CHKSUM = "file://LICENSE;md5=015106c62262b2383f6c72063f0998f2"
->> +
->> +SRC_URI = "git://github.com/tristanpenman/valijson.git"
->> +SRCREV = "7a52fc88cdffd6678c009ca2fad700151f7363c6"
->> +
->> +S = "${WORKDIR}/git"
->> +
->> +inherit cmake
->> +
->> +EXTRA_OECMAKE = "-DINSTALL_HEADERS=1 -DBUILD_TESTS=0"
->> +
->> +DEPENDS = "curlpp"
->> +
->> +# valijson is a header only C++ library, so the main package will be
->> empty.
->> +RDEPENDS_${PN}-dev = ""
->> +
->> +BBCLASSEXTEND = "native nativesdk"
->> +
->> +do_install() {
->> +    install -d ${D}${includedir}/compat
->> +    install -d ${D}${includedir}/valijson
->> +    install -d ${D}${includedir}/valijson/adapters
->> +    install -d ${D}${includedir}/valijson/constraints
->> +    install -d ${D}${includedir}/valijson/internal
->> +    install -d ${D}${includedir}/valijson/utils
->> +
->> +    install -m 0644 ${S}/include/compat/* ${D}${includedir}/compat
->> +    install -D -m 0644 ${S}/include/valijson/*.hpp -t
->> ${D}${includedir}/valijson
->> +    install -D -m 0644 ${S}/include/valijson/adapters/*.hpp -t
->> ${D}${includedir}/valijson/adapters
->> +    install -D -m 0644 ${S}/include/valijson/constraints/*.hpp -t
->> ${D}${includedir}/valijson/constraints
->> +    install -D -m 0644 ${S}/include/valijson/internal/*.hpp -t
->> ${D}${includedir}/valijson/internal
->> +    install -D -m 0644 ${S}/include/valijson/utils/*.hpp -t
->> ${D}${includedir}/valijson/utils
->> +}
->> diff --git a/meta-oe/recipes-devtools/valijson/valijson_git.bb
->> b/meta-oe/recipes-devtools/valijson/valijson_git.bb
->> deleted file mode 100644
->> index c3254d16e7..0000000000
->> --- a/meta-oe/recipes-devtools/valijson/valijson_git.bb
->> +++ /dev/null
->> @@ -1,21 +0,0 @@
->> -SUMMARY = "Header-only C++ library for JSON Schema validation"
->> -HOMEPAGE = "https://github.com/tristanpenman/valijson"
->> -LICENSE = "BSD-2-Clause"
->> -LIC_FILES_CHKSUM = "file://LICENSE;md5=015106c62262b2383f6c72063f0998f2"
->> -
->> -SRC_URI = "git://github.com/tristanpenman/valijson.git"
->> -PV = "0.1+git${SRCPV}"
->> -
->> -SRCREV = "c2f22fddf599d04dc33fcd7ed257c698a05345d9"
->> -
->> -S = "${WORKDIR}/git"
->> -
->> -inherit cmake
->> -
->> -EXTRA_OECMAKE = "-DINSTALL_HEADERS=1 -DBUILD_TESTS=0"
->> -
->> -# valijson is a header only C++ library, so the main package will be
->> empty.
->> -RDEPENDS_${PN}-dev = ""
->> -
->> -BBCLASSEXTEND = "native nativesdk"
->> -
->> --
->> 2.25.1
->>
->> 
->>
->
+So package the corresponding mariadb named executables to -server and
+-client packages and also correct MULTILIB_SCRIPTS part accordingly.
 
---00000000000083b25a05ad419fdf
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Also cleanup some deprecated files defined for mariadb-server
+and mariadb-client.
 
-<div dir=3D"ltr">Any update on this?<div><br></div><div>Can we revert the u=
-pgrade until you figure it out?</div></div><br><div class=3D"gmail_quote"><=
-div dir=3D"ltr" class=3D"gmail_attr">On Mon, Aug 3, 2020 at 1:51 PM Oleksan=
-dr Kravchuk &lt;<a href=3D"mailto:open.source@oleksandr-kravchuk.com">open.=
-source@oleksandr-kravchuk.com</a>&gt; wrote:<br></div><blockquote class=3D"=
-gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(20=
-4,204,204);padding-left:1ex">
-  
-    
-  
-  <div>
-    <div>Hi,</div>
-    <div><br>
-    </div>
-    <div>Oh, I was not aware those layers cannot
-      depend on each other. I&#39;ll see what can be done.<br>
-    </div>
-    <div><br>
-    </div>
-    <div>On 02/08/2020 22:03, Martin Jansa
-      wrote:<br>
-    </div>
-    <blockquote type=3D"cite">
-      
-      <div dir=3D"ltr">Hi,
-        <div><br>
-        </div>
-        <div>new dependency curlpp is only available in meta-networking,
-          so this recipe in meta-oe cannot depend on it, either move it
-          to meta-networking as well, or make it optional with
-          PACKAGECONFIG if possible.</div>
-        <div><br>
-        </div>
-        <div>Now it causes:</div>
-        <div>ERROR: Nothing PROVIDES &#39;curlpp&#39; (but
-          meta-openembedded/meta-oe/recipes-devtools/valijson/<a href=3D"h=
-ttp://valijson_0.3.bb" target=3D"_blank">valijson_0.3.bb</a>
-          DEPENDS on or otherwise requires it). Close matches:<br>
-        </div>
-        <div><br>
-        </div>
-        <div>Regards,</div>
-      </div>
-      <br>
-      <div class=3D"gmail_quote">
-        <div dir=3D"ltr" class=3D"gmail_attr">On Sun, Jul 26, 2020 at 3:09
-          PM Oleksandr Kravchuk &lt;<a href=3D"mailto:open.source@oleksand=
-r-kravchuk.com" target=3D"_blank">open.source@oleksandr-kravchuk.com</a>&gt=
-;
-          wrote:<br>
-        </div>
-        <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
-x;border-left:1px solid rgb(204,204,204);padding-left:1ex">Signed-off-by:
-          Oleksandr Kravchuk &lt;<a href=3D"mailto:open.source@oleksandr-k=
-ravchuk.com" target=3D"_blank">open.source@oleksandr-kravchuk.com</a>&gt;<b=
-r>
-          ---<br>
-          =C2=A0.../recipes-devtools/valijson/<a href=3D"http://valijson_0=
-.3.bb" rel=3D"noreferrer" target=3D"_blank">valijson_0.3.bb</a> |
-          36 +++++++++++++++++++<br>
-          =C2=A0.../recipes-devtools/valijson/<a href=3D"http://valijson_g=
-it.bb" rel=3D"noreferrer" target=3D"_blank">valijson_git.bb</a> |
-          21 -----------<br>
-          =C2=A02 files changed, 36 insertions(+), 21 deletions(-)<br>
-          =C2=A0create mode 100644 meta-oe/recipes-devtools/valijson/<a hr=
-ef=3D"http://valijson_0.3.bb" rel=3D"noreferrer" target=3D"_blank">valijson=
-_0.3.bb</a><br>
-          =C2=A0delete mode 100644 meta-oe/recipes-devtools/valijson/<a hr=
-ef=3D"http://valijson_git.bb" rel=3D"noreferrer" target=3D"_blank">valijson=
-_git.bb</a><br>
-          <br>
-          diff --git a/meta-oe/recipes-devtools/valijson/<a href=3D"http:/=
-/valijson_0.3.bb" rel=3D"noreferrer" target=3D"_blank">valijson_0.3.bb</a>
-          b/meta-oe/recipes-devtools/valijson/<a href=3D"http://valijson_0=
-.3.bb" rel=3D"noreferrer" target=3D"_blank">valijson_0.3.bb</a><br>
-          new file mode 100644<br>
-          index 0000000000..049cdeffc0<br>
-          --- /dev/null<br>
-          +++ b/meta-oe/recipes-devtools/valijson/<a href=3D"http://valijs=
-on_0.3.bb" rel=3D"noreferrer" target=3D"_blank">valijson_0.3.bb</a><br>
-          @@ -0,0 +1,36 @@<br>
-          +SUMMARY =3D &quot;Header-only C++ library for JSON Schema
-          validation&quot;<br>
-          +HOMEPAGE =3D &quot;<a href=3D"https://github.com/tristanpenman/=
-valijson" rel=3D"noreferrer" target=3D"_blank">https://github.com/tristanpe=
-nman/valijson</a>&quot;<br>
-          +LICENSE =3D &quot;BSD-2-Clause&quot;<br>
-          +LIC_FILES_CHKSUM =3D
-          <a>&quot;file://LICENSE;md5=3D015106c62262b2383f6c72063f0998f2&q=
-uot;</a><br>
-          +<br>
-          +SRC_URI =3D &quot;git://<a href=3D"http://github.com/tristanpen=
-man/valijson.git" rel=3D"noreferrer" target=3D"_blank">github.com/tristanpe=
-nman/valijson.git</a>&quot;<br>
-          +SRCREV =3D &quot;7a52fc88cdffd6678c009ca2fad700151f7363c6&quot;=
-<br>
-          +<br>
-          +S =3D &quot;${WORKDIR}/git&quot;<br>
-          +<br>
-          +inherit cmake<br>
-          +<br>
-          +EXTRA_OECMAKE =3D &quot;-DINSTALL_HEADERS=3D1 -DBUILD_TESTS=3D0=
-&quot;<br>
-          +<br>
-          +DEPENDS =3D &quot;curlpp&quot;<br>
-          +<br>
-          +# valijson is a header only C++ library, so the main package
-          will be empty.<br>
-          +RDEPENDS_${PN}-dev =3D &quot;&quot;<br>
-          +<br>
-          +BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
-          +<br>
-          +do_install() {<br>
-          +=C2=A0 =C2=A0 install -d ${D}${includedir}/compat<br>
-          +=C2=A0 =C2=A0 install -d ${D}${includedir}/valijson<br>
-          +=C2=A0 =C2=A0 install -d ${D}${includedir}/valijson/adapters<br=
->
-          +=C2=A0 =C2=A0 install -d ${D}${includedir}/valijson/constraints=
-<br>
-          +=C2=A0 =C2=A0 install -d ${D}${includedir}/valijson/internal<br=
->
-          +=C2=A0 =C2=A0 install -d ${D}${includedir}/valijson/utils<br>
-          +<br>
-          +=C2=A0 =C2=A0 install -m 0644 ${S}/include/compat/*
-          ${D}${includedir}/compat<br>
-          +=C2=A0 =C2=A0 install -D -m 0644 ${S}/include/valijson/*.hpp -t
-          ${D}${includedir}/valijson<br>
-          +=C2=A0 =C2=A0 install -D -m 0644 ${S}/include/valijson/adapters=
-/*.hpp
-          -t ${D}${includedir}/valijson/adapters<br>
-          +=C2=A0 =C2=A0 install -D -m 0644
-          ${S}/include/valijson/constraints/*.hpp -t
-          ${D}${includedir}/valijson/constraints<br>
-          +=C2=A0 =C2=A0 install -D -m 0644 ${S}/include/valijson/internal=
-/*.hpp
-          -t ${D}${includedir}/valijson/internal<br>
-          +=C2=A0 =C2=A0 install -D -m 0644 ${S}/include/valijson/utils/*.=
-hpp -t
-          ${D}${includedir}/valijson/utils<br>
-          +}<br>
-          diff --git a/meta-oe/recipes-devtools/valijson/<a href=3D"http:/=
-/valijson_git.bb" rel=3D"noreferrer" target=3D"_blank">valijson_git.bb</a>
-          b/meta-oe/recipes-devtools/valijson/<a href=3D"http://valijson_g=
-it.bb" rel=3D"noreferrer" target=3D"_blank">valijson_git.bb</a><br>
-          deleted file mode 100644<br>
-          index c3254d16e7..0000000000<br>
-          --- a/meta-oe/recipes-devtools/valijson/<a href=3D"http://valijs=
-on_git.bb" rel=3D"noreferrer" target=3D"_blank">valijson_git.bb</a><br>
-          +++ /dev/null<br>
-          @@ -1,21 +0,0 @@<br>
-          -SUMMARY =3D &quot;Header-only C++ library for JSON Schema
-          validation&quot;<br>
-          -HOMEPAGE =3D &quot;<a href=3D"https://github.com/tristanpenman/=
-valijson" rel=3D"noreferrer" target=3D"_blank">https://github.com/tristanpe=
-nman/valijson</a>&quot;<br>
-          -LICENSE =3D &quot;BSD-2-Clause&quot;<br>
-          -LIC_FILES_CHKSUM =3D
-          <a>&quot;file://LICENSE;md5=3D015106c62262b2383f6c72063f0998f2&q=
-uot;</a><br>
-          -<br>
-          -SRC_URI =3D &quot;git://<a href=3D"http://github.com/tristanpen=
-man/valijson.git" rel=3D"noreferrer" target=3D"_blank">github.com/tristanpe=
-nman/valijson.git</a>&quot;<br>
-          -PV =3D &quot;0.1+git${SRCPV}&quot;<br>
-          -<br>
-          -SRCREV =3D &quot;c2f22fddf599d04dc33fcd7ed257c698a05345d9&quot;=
-<br>
-          -<br>
-          -S =3D &quot;${WORKDIR}/git&quot;<br>
-          -<br>
-          -inherit cmake<br>
-          -<br>
-          -EXTRA_OECMAKE =3D &quot;-DINSTALL_HEADERS=3D1 -DBUILD_TESTS=3D0=
-&quot;<br>
-          -<br>
-          -# valijson is a header only C++ library, so the main package
-          will be empty.<br>
-          -RDEPENDS_${PN}-dev =3D &quot;&quot;<br>
-          -<br>
-          -BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
-          -<br>
-          -- <br>
-          2.25.1<br>
-          <br>
-          <br>
-        </blockquote>
-      </div>
-    </blockquote>
-  </div>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ meta-oe/recipes-dbs/mysql/mariadb.inc | 52 ++++++++++++++++-----------
+ 1 file changed, 31 insertions(+), 21 deletions(-)
 
-</blockquote></div>
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 1aa1f68cd..46a64006d 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -31,7 +31,8 @@ BINCONFIG_GLOB = "mysql_config"
+ 
+ inherit cmake gettext binconfig update-rc.d useradd systemd multilib_script
+ 
+-MULTILIB_SCRIPTS = "${PN}-server:${bindir}/mysql_install_db ${PN}-server:${bindir}/mysqld_safe"
++MULTILIB_SCRIPTS = "${PN}-server:${bindir}/mariadbd-safe \
++                    ${PN}-server:${bindir}/mariadb-install-db"
+ 
+ INITSCRIPT_PACKAGES = "${PN}-server ${PN}-setupdb"
+ INITSCRIPT_NAME_${PN}-server = "mysqld"
+@@ -243,69 +244,78 @@ FILES_libmysqld-dev = "\
+ FILES_${PN}-client = "\
+     ${bindir}/myisam_ftdump \
+     ${bindir}/mysql \
++    ${bindir}/mariadb \
+     ${bindir}/mysql_client_test \
++    ${bindir}/mariadb-client-test \
+     ${bindir}/mysql_client_test_embedded \
++    ${bindir}/mariadb-client-test-embedded \
+     ${bindir}/mysql_find_rows \
++    ${bindir}/mariadb-find-rows \
+     ${bindir}/mysql_fix_extensions \
++    ${bindir}/mariadb-fix-extensions \
+     ${bindir}/mysql_waitpid \
++    ${bindir}/mariadb-waitpid \
+     ${bindir}/mysqlaccess \
++    ${bindir}/mariadb-access \
+     ${bindir}/mysqladmin \
+-    ${bindir}/mysqlbug \
++    ${bindir}/mariadb-admin \
+     ${bindir}/mysqlcheck \
++    ${bindir}/mariadb-check \
+     ${bindir}/mysqldump \
++    ${bindir}/mariadb-dump \
+     ${bindir}/mysqldumpslow \
++    ${bindir}/mariadb-dumpslow \
+     ${bindir}/mysqlimport \
++    ${bindir}/mariadb-import \
+     ${bindir}/mysqlshow \
++    ${bindir}/mariadb-show \
+     ${bindir}/mysqlslap \
++    ${bindir}/mariadb-slap \
+     ${bindir}/mysqltest_embedded \
++    ${bindir}/mariadb-test-embedded \
+     ${libexecdir}/mysqlmanager \
+     ${sysconfdir}/my.cnf.d/mysql-clients.cnf"
+ 
+ FILES_${PN}-server = "\
+-    ${bindir}/comp_err \
+-    ${bindir}/isamchk \
+-    ${bindir}/isamlog \
+     ${bindir}/msql2mysql \
+     ${bindir}/my_print_defaults \
+     ${bindir}/myisamchk \
+     ${bindir}/myisamlog \
+     ${bindir}/myisampack \
+     ${bindir}/mysql_convert_table_format \
+-    ${bindir}/mysql_fix_privilege_tables \
++    ${bindir}/mariadb-convert-table-format \
+     ${bindir}/mysql_install_db \
++    ${bindir}/mariadb-install-db \
+     ${bindir}/mysql_secure_installation \
++    ${bindir}/mariadb-secure-installation \
+     ${bindir}/mysql_setpermission \
++    ${bindir}/mariadb-setpermission \
+     ${bindir}/mysql-systemd-start \
+     ${bindir}/mysql_tzinfo_to_sql \
++    ${bindir}/mariadb-tzinfo-to-sql \
+     ${bindir}/mysql_upgrade \
++    ${bindir}/mariadb-upgrade \
+     ${bindir}/mysql_plugin \
+-    ${bindir}/mysql_zap \
++    ${bindir}/mariadb-plugin \
+     ${bindir}/mysqlbinlog \
++    ${bindir}/mariadb-binlog \
+     ${bindir}/mysqld_multi \
++    ${bindir}/mariadbd-multi \
++    ${bindir}/mariadbd-safe \
+     ${bindir}/mysqld_safe \
+     ${bindir}/mysqld_safe_helper \
++    ${bindir}/mariadbd-safe-helper \
+     ${bindir}/mysqlhotcopy \
++    ${bindir}/mariadb-hotcopy \
+     ${bindir}/mysqltest \
+-    ${bindir}/ndb_delete_all \
+-    ${bindir}/ndb_desc \
+-    ${bindir}/ndb_drop_index \
+-    ${bindir}/ndb_drop_table \
+-    ${bindir}/ndb_mgm \
+-    ${bindir}/ndb_restore \
+-    ${bindir}/ndb_select_all \
+-    ${bindir}/ndb_select_count \
+-    ${bindir}/ndb_show_tables \
+-    ${bindir}/ndb_waiter \
+-    ${bindir}/pack_isam \
++    ${bindir}/mariadb-test \
+     ${bindir}/perror \
+     ${bindir}/replace \
+     ${bindir}/resolve_stack_dump \
+     ${bindir}/resolveip \
+     ${libexecdir}/mysqld \
+     ${sbindir}/mysqld \
+-    ${sbindir}/ndb_cpcd \
+-    ${sbindir}/ndbd \
+-    ${sbindir}/ndb_mgmd \
++    ${sbindir}/mariadbd \
+     ${libdir}/plugin/*.so \
+     ${libdir}/security/*.so \
+     ${libdir}/plugin/auth_pam_tool_dir/auth_pam_tool \
+-- 
+2.17.1
 
---00000000000083b25a05ad419fdf--
