@@ -1,112 +1,125 @@
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.web10.107762.1597916330275621486
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+ by mx.groups.io with SMTP id smtpd.web10.108106.1597918222735954389
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Aug 2020 02:38:50 -0700
+ Thu, 20 Aug 2020 03:10:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gPRCf3Pv;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id p14so998161wmg.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Aug 2020 02:38:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=R98gYvgxFiXTAF/bcWwXyR3clnmOxrvPE0qLIptmwoU=;
-        b=gPRCf3PvyvIm8nCw1YjBwqrdMFh9oyB5xAPcO/Ato5AJJMJuAsj/xIcwNKVe74u71v
-         1BCaB61UYg1l/5/Gb2mFy+fO6xrgFBVnvU/qV7jQn5vG8LuxznlZoSvubIZrQFrC81pq
-         223aFpsNM/CXfCtC50wXiTCSklEWpjZFl3tSU94xYXyFTcofqzUuQVjLVN02bcIcP4nh
-         otEbCqO8hm7s/QSzmUmDtmPc9pDg1zqSroFKDqGtmC1+KnShbtxRcQ/I6Dex4gd/RXYF
-         dSNpy7VWDmZXlrCrPLklvkxyhoix51H0FlcjeocH9KR0EjXxTYkGejl8aOhRaagDuAms
-         RMIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=R98gYvgxFiXTAF/bcWwXyR3clnmOxrvPE0qLIptmwoU=;
-        b=o4C+Xvf+HFiVVEqBO1wKbiJYAR9ubyOi0CzkxjTccZOY8YklsPFz/ubv3vvufQ3N8f
-         um14c+gbiLUy40WcCCU82i/LF8a5mL5D8mYdDQUd3pIXfgQz9DMgWlw0Os0G5SQohGkn
-         OrpNqoqjHNU4AlHjwteGlCMnIzR/E9AwS8W698AIq2NbM5i/ty/SMfL0PrWBTChI7TkO
-         /ewX8Jcx4A66SZAu5yMxBrsKCsUuagUI8wjQiFaKL2MiUsTbKJfILf8vNzc0WYJv+8FS
-         XeldtppbCq08I1LCjE0VALhHEsOluB94+48Cvdopizsobkg1LB6VCU5aJZOryPApU/CM
-         Gq6A==
-X-Gm-Message-State: AOAM533ki1T7zrMl6eZ/+0iaDxSjKMN1VAkbSTTR9sSnmSqKPir64HpR
-	XQnMiomP9Qak6YfHUXM7Gdm/WFqppLY=
-X-Google-Smtp-Source: ABdhPJyUFvIrNVWTrUiMqE8B+oSW5Xx3uVcnLW8og75VVrDRuzw/L+ZIDwV7nTvYISIPsNiSq5Dwww==
-X-Received: by 2002:a7b:c10d:: with SMTP id w13mr2594964wmi.2.1597916328529;
-        Thu, 20 Aug 2020 02:38:48 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id j5sm3319129wma.45.2020.08.20.02.38.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Aug 2020 02:38:47 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Martin Jansa <Martin.Jansa@gmail.com>,
-	Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-oe][PATCHv2] valijson: Move it to networking-layer under BBFILES_DYNAMIC
-Date: Thu, 20 Aug 2020 11:38:45 +0200
-Message-Id: <20200820093845.507549-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=qXlnN4KH;
+ spf=pass (domain: skidata.com, ip: 91.230.2.99, mailfrom: richard.leitner@skidata.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+  t=1597918222; x=1629454222;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=bvapssDo2wCxft/g3lQ3BVXZYIcFY6KAura8H9x3wHw=;
+  b=qXlnN4KH5OBOlVUgAv1EtxPoskDJZ/NDQ6H+B992SAJ33MnBD6cmg+62
+   rzbPI3/MUJImuAYu55osOm+02EY4wv79ZNUYYZ1/+Gh672iD0OXCIhTHv
+   2ZJHhihbmzkwzRiZQRGeLypJdQzVFyQxv3zgaTnpbaYzQATag8XPV0xWi
+   MA5+z9DpohIhjH2yJV+GzWDveXfuFitmtlB7TEtBWZ6H7a/20u5x+xFxf
+   Z/uwTRj6Wr0N5GM6aBrgKYvaBOhAT9ws/R42Kurv5/8XCYH1glfqqSLMo
+   JCLNw5Rh780afFlQMsw6IDd2HA9nsL9k85U901oAzi0Eesg+dKU8zN2xw
+   g==;
+IronPort-SDR: ccX54mwZjtGaXD7knEY7nabUtLItmEp6J5k/YwAzJBan31I7aPOsneQOQZzJutK5pPxKFACZFy
+ F1RjnFTksf+2dVvrZFWHk958B36Tg9W2ooBBuF/T0lUeDfTPkUfBFbHVibcItJg+kKWnftsjR+
+ FwtIG97tO9CaP0tYQvJPRgtZAa3W6zGxzh/ndN1+WrYaIIB/g4anI0CtefNGwSSZZTg/WzwNdD
+ EaGAzprztF9AB7F7o0NAs1Zeif97uEkI8CuKaI9sNQiH6uDRjRkVzk+euAb2SqVYxWZIH8nvqM
+ /kI=
+X-IronPort-AV: E=Sophos;i="5.76,332,1592863200"; 
+   d="scan'208";a="26246936"
+Date: Thu, 20 Aug 2020 12:10:19 +0200
+From: "Richard Leitner" <richard.leitner@skidata.com>
+To: Alexander Kanavin <alex.kanavin@gmail.com>
+CC: <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-java][PATCHv2] openjdk-8: add a glibc 2.32 compatibility patch
+Message-ID: <20200820101019.GB51054@pcleri>
+References: <20200813162756.24193-1-alex.kanavin@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200813162756.24193-1-alex.kanavin@gmail.com>
+Return-Path: richard.leitner@skidata.com
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
+ sdex5srv.skidata.net (192.168.111.83)
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-From: Khem Raj <raj.khem@gmail.com>
+Hi,
+thank you for your patch!
 
-it has a hard dependency on curlpp package which comes from
-meta-networking
+This is a note to let you know that I've just added this patch to the
+master-next branch of the meta-java repository at
+	git://git.yoctoproject.org/meta-java
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- meta-oe/conf/layer.conf                                        | 1 +
- .../recipes-core/packagegroups/packagegroup-meta-oe.bbappend   | 3 +++
- .../recipes-devtools/valijson/valijson_0.3.bb                  | 0
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb     | 2 +-
- 4 files changed, 5 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/dynamic-layers/networking-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
- rename meta-oe/{ => dynamic-layers/networking-layer}/recipes-devtools/valijson/valijson_0.3.bb (100%)
+As soon as it has gone through some more testing it will likely be
+merged to the master branch.
 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index 5bf1f6cfd9..5178678da2 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -27,6 +27,7 @@ BBFILE_PRIORITY_openembedded-layer = "6"
- # to ensure yocto compatibility check pass
- BBFILES_DYNAMIC += " \
- meta-python:${LAYERDIR}/dynamic-layers/meta-python/recipes-*/*/*.bb \
-+networking-layer:${LAYERDIR}/dynamic-layers/networking-layer/recipes-*/*/*.bb \
- perl-layer:${LAYERDIR}/dynamic-layers/perl-layer/recipes-*/*/*.bb \
- "
- 
-diff --git a/meta-oe/dynamic-layers/networking-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend b/meta-oe/dynamic-layers/networking-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
-new file mode 100644
-index 0000000000..b39a4d68ff
---- /dev/null
-+++ b/meta-oe/dynamic-layers/networking-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
-@@ -0,0 +1,3 @@
-+RDEPENDS_packagegroup-meta-oe-devtools += "\
-+    valijson \
-+"
-diff --git a/meta-oe/recipes-devtools/valijson/valijson_0.3.bb b/meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.3.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/valijson/valijson_0.3.bb
-rename to meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.3.bb
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 0812da1af6..4dc3afe454 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -116,7 +116,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
-     mpich msgpack-c nlohmann-json openocd pax-utils \
-     ipc-run libdbd-mysql-perl libdbi-perl libio-pty-perl php \
-     protobuf protobuf-c \
--    rapidjson serialcheck sip3 tclap uftrace uw-imap valijson \
-+    rapidjson serialcheck sip3 tclap uftrace uw-imap \
-     xmlrpc-c yajl yasm \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geany geany-plugins glade tk", "", d)} \
-     ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "nodejs", "", d)} \
--- 
-2.25.1
+If you have any questions, please let me know.
 
+regards;rl
+
+On Thu, Aug 13, 2020 at 06:27:56PM +0200, Alexander Kanavin wrote:
+> Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+> ---
+>  .../openjdk/openjdk-8-release-common.inc      |  1 +
+>  .../2010-Remove-usage-of-sys-sysctl.h.patch   | 39 +++++++++++++++++++
+>  2 files changed, 40 insertions(+)
+>  create mode 100644 recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
+> 
+> diff --git a/recipes-core/openjdk/openjdk-8-release-common.inc b/recipes-core/openjdk/openjdk-8-release-common.inc
+> index 02210a1..c43fd22 100644
+> --- a/recipes-core/openjdk/openjdk-8-release-common.inc
+> +++ b/recipes-core/openjdk/openjdk-8-release-common.inc
+> @@ -20,6 +20,7 @@ PATCHES_URI = "\
+>      file://2007-jdk-no-genx11-in-headless.patch \
+>      file://2008-jdk-no-unused-deps.patch \
+>      file://2009-jdk-use-gcc-instead-of-ld-to-link-genSocketOptionRegistry.patch \
+> +    file://2010-Remove-usage-of-sys-sysctl.h.patch \
+>  "
+>  HOTSPOT_UB_PATCH = "\
+>      file://1001-hotspot-fix-crash-on-JNI_CreateJavaVM.patch \
+> diff --git a/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch b/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
+> new file mode 100644
+> index 0000000..f6d7681
+> --- /dev/null
+> +++ b/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
+> @@ -0,0 +1,39 @@
+> +From 3ed9b4a109cf2f31b97ab8ba317d67886452523c Mon Sep 17 00:00:00 2001
+> +From: Alexander Kanavin <alex.kanavin@gmail.com>
+> +Date: Thu, 13 Aug 2020 17:59:42 +0200
+> +Subject: [PATCH] Remove usage of sys/sysctl.h
+> +
+> +This header has been removed in glibc 2.32, and isn't used for
+> +anything.
+> +
+> +Upstream-Status: Pending
+> +Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+> +---
+> + jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c | 1 -
+> + jdk/src/solaris/native/java/net/PlainSocketImpl.c         | 1 -
+> + 2 files changed, 2 deletions(-)
+> +
+> +diff --git a/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c b/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
+> +index cd15654e..4d8abe03 100644
+> +--- a/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
+> ++++ b/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
+> +@@ -41,7 +41,6 @@
+> + #endif
+> + #ifdef __linux__
+> + #include <unistd.h>
+> +-#include <sys/sysctl.h>
+> + #include <sys/utsname.h>
+> + #include <netinet/ip.h>
+> + 
+> +diff --git a/jdk/src/solaris/native/java/net/PlainSocketImpl.c b/jdk/src/solaris/native/java/net/PlainSocketImpl.c
+> +index 170957e7..9aafbc09 100644
+> +--- a/jdk/src/solaris/native/java/net/PlainSocketImpl.c
+> ++++ b/jdk/src/solaris/native/java/net/PlainSocketImpl.c
+> +@@ -43,7 +43,6 @@
+> + #endif
+> + #ifdef __linux__
+> + #include <unistd.h>
+> +-#include <sys/sysctl.h>
+> + #endif
+> + 
+> + #include "jvm.h"
+> -- 
+> 2.28.0
+> 
