@@ -1,125 +1,123 @@
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
- by mx.groups.io with SMTP id smtpd.web10.108106.1597918222735954389
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+ by mx.groups.io with SMTP id smtpd.web12.106975.1597918341307900417
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Aug 2020 03:10:24 -0700
+ Thu, 20 Aug 2020 03:12:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=qXlnN4KH;
- spf=pass (domain: skidata.com, ip: 91.230.2.99, mailfrom: richard.leitner@skidata.com)
+ dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=tLDj9FQF;
+ spf=pass (domain: skidata.com, ip: 91.230.2.91, mailfrom: richard.leitner@skidata.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-  t=1597918222; x=1629454222;
+  t=1597918341; x=1629454341;
   h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=bvapssDo2wCxft/g3lQ3BVXZYIcFY6KAura8H9x3wHw=;
-  b=qXlnN4KH5OBOlVUgAv1EtxPoskDJZ/NDQ6H+B992SAJ33MnBD6cmg+62
-   rzbPI3/MUJImuAYu55osOm+02EY4wv79ZNUYYZ1/+Gh672iD0OXCIhTHv
-   2ZJHhihbmzkwzRiZQRGeLypJdQzVFyQxv3zgaTnpbaYzQATag8XPV0xWi
-   MA5+z9DpohIhjH2yJV+GzWDveXfuFitmtlB7TEtBWZ6H7a/20u5x+xFxf
-   Z/uwTRj6Wr0N5GM6aBrgKYvaBOhAT9ws/R42Kurv5/8XCYH1glfqqSLMo
-   JCLNw5Rh780afFlQMsw6IDd2HA9nsL9k85U901oAzi0Eesg+dKU8zN2xw
-   g==;
-IronPort-SDR: ccX54mwZjtGaXD7knEY7nabUtLItmEp6J5k/YwAzJBan31I7aPOsneQOQZzJutK5pPxKFACZFy
- F1RjnFTksf+2dVvrZFWHk958B36Tg9W2ooBBuF/T0lUeDfTPkUfBFbHVibcItJg+kKWnftsjR+
- FwtIG97tO9CaP0tYQvJPRgtZAa3W6zGxzh/ndN1+WrYaIIB/g4anI0CtefNGwSSZZTg/WzwNdD
- EaGAzprztF9AB7F7o0NAs1Zeif97uEkI8CuKaI9sNQiH6uDRjRkVzk+euAb2SqVYxWZIH8nvqM
- /kI=
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=8Oz7tPoTQsOdhBG2cVQUTFHBeSDMu+Jf8BVzRXJrjbc=;
+  b=tLDj9FQFDzY8wcYSWJhfKULBPUHRI+NNDQhSCPCE3ZceqASOA8lLT6Km
+   031FHle+u4q6XbYuHS2wHFbJobgzFPCrfVoWlfVspLJFyrwtMmqHYjrgP
+   PuI4AReLm9GxtrclyYe93Ie2B2pvURHO7rMI9G4qK8DE7LkPP+tRO4fh6
+   f1j5MTmTgdmPbcJYdKkeSEEkq8HGP0NJxKlh9FxzHeWUfAMAK/Re+O8Yv
+   sflig32bSbEveraCEUIhnOgCdJRXvNSZcdjSGpe2V6Y+iZkJctjZlZq4f
+   738uw+KVfA8l16ivyl9N5uoNcz6wa9sVYLC5Pzt8pxCcnVPksNUz+Sc0H
+   Q==;
+IronPort-SDR: jZ6Ags3IGQIMn5SpGhynbPHFyO6cgXKo7nZbtzjjrp+PNKmqkHuRbp2ao4fgUIGKQQ5kZd0Fl0
+ KeQ+VYR3+kPwPc0YkM7+tUNNAY7hpP2DGw2/8N2xvoNPdO+iyqncgwEH4+LGhwu12+Qk1jlkCY
+ lnRx4tyX48bVa9U2oNqotQ036qkwitWLuYlaMK8DpPpYhqnbMWI/Zpi9QVe7UqlJOEQpr37fgc
+ PObonLloZv85RF9un7J8XZPGLf85Kx5qe0gK1/vG1F+w8mBQFzxTUFgnUTieyBSwRFJA0f/+td
+ jX4=
 X-IronPort-AV: E=Sophos;i="5.76,332,1592863200"; 
-   d="scan'208";a="26246936"
-Date: Thu, 20 Aug 2020 12:10:19 +0200
+   d="scan'208";a="2646536"
+Date: Thu, 20 Aug 2020 12:12:18 +0200
 From: "Richard Leitner" <richard.leitner@skidata.com>
-To: Alexander Kanavin <alex.kanavin@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-java][PATCHv2] openjdk-8: add a glibc 2.32 compatibility patch
-Message-ID: <20200820101019.GB51054@pcleri>
-References: <20200813162756.24193-1-alex.kanavin@gmail.com>
+To: Jonatan Palsson <jonatan.p@gmail.com>
+CC: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [PATCH] openjdk-8: Convert do_unpack postfunc to _append
+Message-ID: <20200820101218.GC51054@pcleri>
+References: <16285DBF18FAF8F7.27500@lists.openembedded.org>
+ <CAKm+giMq=wbHhLn4WDM0xfnv4J2GJEQYfUzKts3vJukgBm2cYw@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20200813162756.24193-1-alex.kanavin@gmail.com>
+In-Reply-To: <CAKm+giMq=wbHhLn4WDM0xfnv4J2GJEQYfUzKts3vJukgBm2cYw@mail.gmail.com>
 Return-Path: richard.leitner@skidata.com
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
  sdex5srv.skidata.net (192.168.111.83)
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
 Hi,
-thank you for your patch!
+thanks for your patch!
+Unfortunately we already have a similar one in master-next (commit
+b8e6267 (WORKDIR and ARCHIVER_WORKDIR support, 2020-05-09)).
 
-This is a note to let you know that I've just added this patch to the
-master-next branch of the meta-java repository at
-	git://git.yoctoproject.org/meta-java
-
-As soon as it has gone through some more testing it will likely be
-merged to the master branch.
-
-If you have any questions, please let me know.
+Would you please have a look at it and if applicable send a rebased
+(master-next) version?
 
 regards;rl
 
-On Thu, Aug 13, 2020 at 06:27:56PM +0200, Alexander Kanavin wrote:
-> Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-> ---
->  .../openjdk/openjdk-8-release-common.inc      |  1 +
->  .../2010-Remove-usage-of-sys-sysctl.h.patch   | 39 +++++++++++++++++++
->  2 files changed, 40 insertions(+)
->  create mode 100644 recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
+On Wed, Aug 19, 2020 at 11:31:17AM +0200, Jonatan Palsson wrote:
+> Ping
 > 
-> diff --git a/recipes-core/openjdk/openjdk-8-release-common.inc b/recipes-core/openjdk/openjdk-8-release-common.inc
-> index 02210a1..c43fd22 100644
-> --- a/recipes-core/openjdk/openjdk-8-release-common.inc
-> +++ b/recipes-core/openjdk/openjdk-8-release-common.inc
-> @@ -20,6 +20,7 @@ PATCHES_URI = "\
->      file://2007-jdk-no-genx11-in-headless.patch \
->      file://2008-jdk-no-unused-deps.patch \
->      file://2009-jdk-use-gcc-instead-of-ld-to-link-genSocketOptionRegistry.patch \
-> +    file://2010-Remove-usage-of-sys-sysctl.h.patch \
->  "
->  HOTSPOT_UB_PATCH = "\
->      file://1001-hotspot-fix-crash-on-JNI_CreateJavaVM.patch \
-> diff --git a/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch b/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
-> new file mode 100644
-> index 0000000..f6d7681
-> --- /dev/null
-> +++ b/recipes-core/openjdk/patches-openjdk-8/2010-Remove-usage-of-sys-sysctl.h.patch
-> @@ -0,0 +1,39 @@
-> +From 3ed9b4a109cf2f31b97ab8ba317d67886452523c Mon Sep 17 00:00:00 2001
-> +From: Alexander Kanavin <alex.kanavin@gmail.com>
-> +Date: Thu, 13 Aug 2020 17:59:42 +0200
-> +Subject: [PATCH] Remove usage of sys/sysctl.h
-> +
-> +This header has been removed in glibc 2.32, and isn't used for
-> +anything.
-> +
-> +Upstream-Status: Pending
-> +Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-> +---
-> + jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c | 1 -
-> + jdk/src/solaris/native/java/net/PlainSocketImpl.c         | 1 -
-> + 2 files changed, 2 deletions(-)
-> +
-> +diff --git a/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c b/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
-> +index cd15654e..4d8abe03 100644
-> +--- a/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
-> ++++ b/jdk/src/solaris/native/java/net/PlainDatagramSocketImpl.c
-> +@@ -41,7 +41,6 @@
-> + #endif
-> + #ifdef __linux__
-> + #include <unistd.h>
-> +-#include <sys/sysctl.h>
-> + #include <sys/utsname.h>
-> + #include <netinet/ip.h>
-> + 
-> +diff --git a/jdk/src/solaris/native/java/net/PlainSocketImpl.c b/jdk/src/solaris/native/java/net/PlainSocketImpl.c
-> +index 170957e7..9aafbc09 100644
-> +--- a/jdk/src/solaris/native/java/net/PlainSocketImpl.c
-> ++++ b/jdk/src/solaris/native/java/net/PlainSocketImpl.c
-> +@@ -43,7 +43,6 @@
-> + #endif
-> + #ifdef __linux__
-> + #include <unistd.h>
-> +-#include <sys/sysctl.h>
-> + #endif
-> + 
-> + #include "jvm.h"
-> -- 
-> 2.28.0
-> 
+> On Wed, Aug 5, 2020 at 2:05 PM Jonatan Pålsson via
+> lists.openembedded.org <jonatan.p=gmail.com@lists.openembedded.org>
+> wrote:
+> >
+> > archiver.bbclass will invoke do_unpack as a function (rather than a
+> > task) during do_unpack_and_patch. When invoked as a function, the
+> > postfuncs of do_unpack are not executed.
+> >
+> > Convert the postfuncs into an _append fragment on do_unpack instead.
+> >
+> > Fixes:
+> >
+> >     .. snip ..
+> >     No file to patch.  Skipping patch.
+> >     1 out of 1 hunk ignored
+> >     Patch 1001-hotspot-fix-crash-on-JNI_CreateJavaVM.patch does not apply (enforce with -f)
+> >     ERROR: Logfile of failure stored in: .. snip .. /build/tmp/work/x86_64-linux/openjdk-8-native/252-r0/temp/log.do_unpack_and_patch.220625
+> >     ERROR: Task (.. snip .. /sources/openembedded-core/meta-java/recipes-core/openjdk/openjdk-8-native_252.bb:do_unpack_and_patch) failed with exit code '1'
+> > ---
+> >  recipes-core/openjdk/openjdk-8-common.inc | 10 +++++++---
+> >  1 file changed, 7 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+> > index c78bb2a..123e896 100644
+> > --- a/recipes-core/openjdk/openjdk-8-common.inc
+> > +++ b/recipes-core/openjdk/openjdk-8-common.inc
+> > @@ -46,6 +46,13 @@ do_unpack_delete_X11_wrappers() {
+> >      find ${S}/jdk/src/solaris/classes/sun/awt/X11 -maxdepth 1 -name '*.java' -delete
+> >  }
+> >
+> > +do_unpack_append() {
+> > +    bb.build.exec_func('do_unpack_extract_submodules', d)
+> > +
+> > +    if not bb.utils.filter('PACKAGECONFIG', 'x11', d):
+> > +        bb.build.exec_func('do_unpack_delete_X11_wrappers', d)
+> > +}
+> > +
+> >  def package_config_option_cleanup(d):
+> >      distro_x11 = bb.utils.contains('DISTRO_FEATURES', 'x11', True, False, d)
+> >      distro_alsa = bb.utils.contains('DISTRO_FEATURES', 'alsa', True, False, d)
+> > @@ -155,9 +162,6 @@ def jdk_configure_options(d):
+> >      options = package_config_option_cleanup(d)
+> >      return options[3]
+> >
+> > -do_unpack[postfuncs] += "do_unpack_extract_submodules"
+> > -do_unpack[postfuncs] += "${@bb.utils.contains('PACKAGECONFIG', 'x11', '', 'do_unpack_delete_X11_wrappers', d)}"
+> > -
+> >  export DEBUG_BINARIES = "true"
+> >
+> >  ALTERNATIVE_PRIORITY = "50"
+> > --
+> > 2.26.1
+> >
+> > 
+
+-- 
+Richard Leitner
+Hardware R&D / Senior Embedded Linux Engineer
+
+SKIDATA | Driving Your Digital Future
+
+SKIDATA GmbH
+Untersbergstraße 40 | 5083 Grödig/Salzburg | Austria
+[t] +43-6246-888-4245 | [m] +43-664-88616370
+[w] www.skidata.com
