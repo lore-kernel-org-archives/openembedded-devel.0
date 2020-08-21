@@ -1,69 +1,92 @@
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
- by mx.groups.io with SMTP id smtpd.web12.134361.1598020366911965773
+Received: from mail-vs1-f42.google.com (mail-vs1-f42.google.com [209.85.217.42])
+ by mx.groups.io with SMTP id smtpd.web12.134509.1598020841381318464
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Aug 2020 07:32:48 -0700
+ Fri, 21 Aug 2020 07:40:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@wittra.se header.s=google header.b=Ij7eprv7;
- spf=pass (domain: wittra.se, ip: 209.85.208.45, mailfrom: chencheng@wittra.se)
-Received: by mail-ed1-f45.google.com with SMTP id c10so1594192edk.6
-        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2020 07:32:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=j0RX5H4s;
+ spf=pass (domain: gmail.com, ip: 209.85.217.42, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-vs1-f42.google.com with SMTP id i129so933726vsi.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2020 07:40:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=wittra.se; s=google;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=Ca8P7FbTXJDcnrFdc9RT0ZITkcmwaD/10wJs3Fgamu4=;
-        b=Ij7eprv7uLbpXg5cJ6zqLgGhycpZTRX+PCc9UWS8SZG1OiTjMwvirOYBm9SecGAeOI
-         05rxuX2Z08qyEzZEgcGlbs4Po/pEyj4JyN+mcAfZlPinm4vAfNfGj+Y/VOVvorzh4w4M
-         jUjpJ44m8XgIbKiE8HqAdgNGWyhCiIvzO3D+Ft1yxbWr9olA5sByafMKAx5aiH6znXaW
-         Km1uD1Xf7s5Amme351XYZ9UOM/7eeQglmbAzt9FUXzvZSkLcmjbDURaX8ua045ReOsVI
-         v6c9aMVaq7TUoSeqDjSIaNrs/E994EMpx2QMzCXNqSdTqL8fgJjLA8UcHo/WCSUEzGl4
-         u3TQ==
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=lTaIEYk/ior2ELNCJjt/7eTz4MJBtSP3sUummAO4m+g=;
+        b=j0RX5H4sRU4P2s/gQWE2ADP3O5LDp6XX7Ddz4RpdlVwc7Ilji7KcXIqPTIrPV6/+hn
+         hNulcp2YK1qZ58KsbYQviIJUzngBOcLO7RMjU6IApX7tPj2goBcrLufB2aBY9Qw9p8SB
+         Wv1uSZ/vJoGi7NqGMoC4Xq7ANPnDi+EVSVmhBodzqsuxfKr9KWrjU4rUch4TqlhjsE8l
+         mHslkgVkzxiz4xrlkpFCx37KvfDnu2K4bBLXF+YcU8AHIPsq3FMrVm8h88iyo/z8gqXK
+         zWC+BySjHBegzb7EM++k5lmAIHf7jY3a1Xt7IDBjralpJ/jXxPY1KK5qjavAwDsQSJfE
+         rw3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=Ca8P7FbTXJDcnrFdc9RT0ZITkcmwaD/10wJs3Fgamu4=;
-        b=GfPIoRem7pLw3D3XVKUuv2kxYfldeN1YJ0pQyGdGHb+7EbeBF2QsFRkLJKbc+UZg4K
-         hg0M8rUpyQA9UMYPm/GOFvOUn41b2MpJehJfRJ0WWnp8czC9hMLhIlQSBF/AadBRuIeP
-         CxdDqtOEyC1s2WsR30DlHmP6leGJICfm2UHdKQ9RLBRe4oTXzHGp2j8HIMeqZDLd4uVH
-         PSBEnzEehC//0SQareOrsrf2INhMFzSBXU61MhjIdEf7oBqhRrOxI4rv/ff5PndUB4oY
-         FkrAKjFJBYb2Ux39uzE/knAN4I2RDXzzgKTH26ZtzMDYYc7zEQtrxlBJMHLv8iRWGu+i
-         XOGg==
-X-Gm-Message-State: AOAM530rkzfxznxknhsN/ANiVaIMSVgPcrmtRC7KBUzcnHz5Gb1tRxmy
-	RQrdB+M+2Bh8fiRLg6kEKO+UUZNA/NDD4SIj5beQkw==
-X-Google-Smtp-Source: ABdhPJzUyCR8A07m1XpR5fouFuHmc3sAsWTEB3yR1/Z7OE/RPbVR+xXIzROZC1mIr1L3AbmfTc9HpoxwADfny+7avko=
-X-Received: by 2002:a05:6402:847:: with SMTP id b7mr3208782edz.39.1598020365218;
- Fri, 21 Aug 2020 07:32:45 -0700 (PDT)
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=lTaIEYk/ior2ELNCJjt/7eTz4MJBtSP3sUummAO4m+g=;
+        b=L+HZthA8Vmt5YOFmF9PSHweH63MpO0hlkuGQuWh0818lode0n9/bHQvzLIz4xTYi51
+         upcTes3Y0IuaDs4lqvYHh2LD75SAQm5nKqGeBQrKLLieXRdesAOCqnKkM8Rb8d8xniSS
+         Q//mJIQVbTd2BLo5Dt182lCDuDRbbffVzFJeT+8Ca7HG6STF+hN4BwDpTM2suLDNjw26
+         qUxof0dP38zCsp8843GQ/gpoHivu/nxjfzhkaztzPswC61g5kFba6IQUfY4/1PzGqCay
+         dTLzPTDrHm5OdQfAXbkGylmPz1rnu9RTdlRzNEwEoDGNEK/OXX4RLcHks2jnbnYnvCm0
+         k8+A==
+X-Gm-Message-State: AOAM532Hck4UwcZTpzia/oVgp/hsJJfD7msDZ1MqajV851f0PUUC1LkX
+	aQ7YRKIjla5orMI6XbuAdeNE2cAZc7VLrOkizH0=
+X-Google-Smtp-Source: ABdhPJz2Mr9AOUPHBENrO3FfJHvmDrEANa0DDYQA1bWrR+tKCo+hm/dick4djbbNjw+EBbPrKxHnGpY424Z6KLNEwlM=
+X-Received: by 2002:a67:f550:: with SMTP id z16mr2018046vsn.94.1598020840516;
+ Fri, 21 Aug 2020 07:40:40 -0700 (PDT)
 MIME-Version: 1.0
-From: chencheng@wittra.se
-Date: Fri, 21 Aug 2020 16:32:34 +0200
-Message-ID: <CAE5diG1AoUDZrO=V7pMjvgv3Gu5cMk3dvPzM82Dem1Sc8X3Wvg@mail.gmail.com>
-Subject: Failed to fetch URL https://bitbucket.org/cacaovm/cacao-staging/get/2d6f6c14daf9.zip
-To: richard.leitner@skidata.com, ricardo@ribalda.com, alex.kiernan@gmail.com, 
-	openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000003690a405ad641cf5"
+References: <CAE5diG1AoUDZrO=V7pMjvgv3Gu5cMk3dvPzM82Dem1Sc8X3Wvg@mail.gmail.com>
+In-Reply-To: <CAE5diG1AoUDZrO=V7pMjvgv3Gu5cMk3dvPzM82Dem1Sc8X3Wvg@mail.gmail.com>
+From: "Alexander Kanavin" <alex.kanavin@gmail.com>
+Date: Fri, 21 Aug 2020 16:40:26 +0200
+Message-ID: <CANNYZj8dyU6LpUBiM--YNsF8of56SG4-+VxMsM2B9_SwY0+1dA@mail.gmail.com>
+Subject: Re: [oe] Failed to fetch URL https://bitbucket.org/cacaovm/cacao-staging/get/2d6f6c14daf9.zip
+To: Chencheng Zhang <chencheng@wittra.se>
+Cc: Richard Leitner <richard.leitner@skidata.com>, ricardo@ribalda.com, 
+	Alex Kiernan <alex.kiernan@gmail.com>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="0000000000008aefe805ad6438bf"
 
---0000000000003690a405ad641cf5
+--0000000000008aefe805ad6438bf
 Content-Type: text/plain; charset="UTF-8"
 
-Hi,
+A fix should be arriving to meta-java shortly and a patch was already
+posted here yesterday.
 
-The source of cacao seems to be invalid which makes the repice falsified:
-https://layers.openembedded.org/layerindex/recipe/23632/
-And this prevents Yocto from building openjre.
+Alex
 
-Could someone be kind enough to update the cacao recipe?
-Thanks & Regards,
-Chencheng
+On Fri, 21 Aug 2020 at 16:32, Chencheng Zhang <chencheng@wittra.se> wrote:
 
---0000000000003690a405ad641cf5
+> Hi,
+>
+> The source of cacao seems to be invalid which makes the repice falsified:
+> https://layers.openembedded.org/layerindex/recipe/23632/
+> And this prevents Yocto from building openjre.
+>
+> Could someone be kind enough to update the cacao recipe?
+> Thanks & Regards,
+> Chencheng
+> 
+>
+
+--0000000000008aefe805ad6438bf
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">Hi,<div><br></div><div>The source of cacao seems to be inv=
-alid which makes the repice falsified: <a href=3D"https://layers.openembedd=
-ed.org/layerindex/recipe/23632/">https://layers.openembedded.org/layerindex=
-/recipe/23632/</a></div><div>And this prevents Yocto from building openjre.=
-</div><div><br></div><div>Could someone be kind enough to update the cacao =
-recipe?</div><div>Thanks &amp;=C2=A0Regards,</div><div>Chencheng</div></div=
->
+<div dir=3D"ltr"><div>A fix should be arriving to meta-java shortly and a p=
+atch was already posted here yesterday.</div><div><br></div><div>Alex<br></=
+div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_at=
+tr">On Fri, 21 Aug 2020 at 16:32, Chencheng Zhang &lt;<a href=3D"mailto:che=
+ncheng@wittra.se">chencheng@wittra.se</a>&gt; wrote:<br></div><blockquote c=
+lass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px soli=
+d rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr">Hi,<div><br></div><di=
+v>The source of cacao seems to be invalid which makes the repice falsified:=
+ <a href=3D"https://layers.openembedded.org/layerindex/recipe/23632/" targe=
+t=3D"_blank">https://layers.openembedded.org/layerindex/recipe/23632/</a></=
+div><div>And this prevents Yocto from building openjre.</div><div><br></div=
+><div>Could someone be kind enough to update the cacao recipe?</div><div>Th=
+anks &amp;=C2=A0Regards,</div><div>Chencheng</div></div>
+<br>
+</blockquote></div>
 
---0000000000003690a405ad641cf5--
+--0000000000008aefe805ad6438bf--
