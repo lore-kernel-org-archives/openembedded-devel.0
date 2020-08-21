@@ -1,76 +1,61 @@
-Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com [209.85.215.193])
- by mx.groups.io with SMTP id smtpd.web10.130108.1597997060893659730
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web10.130733.1598000867890893393
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Aug 2020 01:04:20 -0700
+ Fri, 21 Aug 2020 02:07:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=THcsisYZ;
- spf=pass (domain: gmail.com, ip: 209.85.215.193, mailfrom: jonatan.p@gmail.com)
-Received: by mail-pg1-f193.google.com with SMTP id d19so630620pgl.10
-        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2020 01:04:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=/3cATWhBEklL7RMCcOeRMHc58q1fd3fOPZyN0JWq0yA=;
-        b=THcsisYZ73fCgo4uIItHMx/miTIuarHGvdkPsGKIPcaXMCyCbsNCyHzVhFoIgQ+i8B
-         fywMJGD+9iBreTzy7UMqzK/7lSK4BU80b2qUtzS+89J9f1pwAkMfYO/O3TVoR3vMMMRj
-         nKrM/kgbbAb1z/HR7TPjo5xnl4O2TrUzCgE+Rts1782ERLyuKPHYfTOP5RSPoA2GydG6
-         a0aw6sPzCrZs7nwMfqzxAu7rt4tKBFYiyno/Ll+1NLvCu0AjiSgrKLabcSh3CMIQfiio
-         2c6bVw14+QzMGGqD7m9UGrdkzXjXRMz5eJy0jcCHlmWJyTRvx6M2KwbhL/1lcWfK44x2
-         UDLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=/3cATWhBEklL7RMCcOeRMHc58q1fd3fOPZyN0JWq0yA=;
-        b=T9ZIaj8IEmv2U3sHQ/jXOKP9FNrKyw8mQ7W+JieZa/L0cbOtd+q/nsudo1JOBZFP+u
-         o+LMgr/nU2ykgpm9dkk0HgonIemVO9JNuh+LUNnuxgd2v8xsvrGBq6OgeOooRbQ5M288
-         B161Xux07HIP4YaXXy8oL3mlOMF9yLj8WhywSl69CUuauHXtdAqkLEcmAHezymhfGaFT
-         jLj2SSmp9iD5obDTHhPiBIVVhVAnHRtQJ0hl3wvJySl5M9YuqoEhcLTvxJEu1Y2g79TI
-         Gk39IRnj/x6XHvtSA3chfF9j3TQTMD7m2ry6RIx19DBvfWP6taocrRhGDicq3auRzb2u
-         byBw==
-X-Gm-Message-State: AOAM532A9eQ3wmTYHhvioGG41YAeVxCeIW98/c/CROc/BHnq0YvVPc+Z
-	qLdoSuXQcrA2oT5icWt+ezJagW5Jzjc=
-X-Google-Smtp-Source: ABdhPJzrauISvBzLA0c/Mnv5Dy5VcZs9UZnulmJVcvIB/+jdZz/VETxk7u/PLEKelwUy9X30v19Gcw==
-X-Received: by 2002:a62:1dc3:: with SMTP id d186mr1550236pfd.93.1597997060024;
-        Fri, 21 Aug 2020 01:04:20 -0700 (PDT)
-Return-Path: <jonatan.p@gmail.com>
-Received: from X1.corp.ad.wrs.com (h-170-217-237.A357.priv.bahnhof.se. [81.170.217.237])
-        by smtp.gmail.com with ESMTPSA id v20sm1092145pju.14.2020.08.21.01.04.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Aug 2020 01:04:19 -0700 (PDT)
-From: =?UTF-8?B?Sm9uYXRhbiBQw6Vsc3Nvbg==?= <jonatan.p@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Jonatan=20P=C3=A5lsson?= <jonatan.p@gmail.com>
-Subject: [meta-java][PATCH] openjdk-8-native: Don't warn for stripped libfreetype.so.6
-Date: Fri, 21 Aug 2020 10:03:50 +0200
-Message-Id: <20200821080350.2936495-1-jonatan.p@gmail.com>
-X-Mailer: git-send-email 2.26.1
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.76,335,1592841600"; 
+   d="scan'208";a="98384378"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 21 Aug 2020 17:07:40 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 311DE48990D0
+	for <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2020 17:07:39 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Fri, 21 Aug 2020 17:07:40 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-oe] [PATCH] sanlock: upgrade 3.8.1 -> 3.8.2
+Date: Sat, 22 Aug 2020 05:07:33 +0800
+Message-ID: <1598044054-6555-4-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1598044054-6555-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+References: <1598044054-6555-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: 311DE48990D0.A1324
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-Mimic the approach used in openjdk-8-cross.inc and add INSANE_SKIP for
-"already-skipped" to avoid the following warning:
-
-    WARNING: openjdk-8-native-252-r0 do_populate_sysroot: File '.. snip .. /build/tmp/work/x86_64-linux/openjdk-8-native/252-r0/recipe-sysroot-native/usr/lib/jvm/openjdk-8-native/jre/lib/amd64/libfreetype.so.6' from openjdk-8-native was already stripped, this will prevent future debugging!
-
-Signed-off-by: Jonatan Pålsson <jonatan.p@gmail.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- recipes-core/openjdk/openjdk-8-native.inc | 3 +++
- 1 file changed, 3 insertions(+)
+ .../sanlock/{sanlock_3.8.1.bb => sanlock_3.8.2.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/sanlock/{sanlock_3.8.1.bb => sanlock_3.8.2.bb} (96%)
 
-diff --git a/recipes-core/openjdk/openjdk-8-native.inc b/recipes-core/openjdk/openjdk-8-native.inc
-index 24b6f20..92d9473 100644
---- a/recipes-core/openjdk/openjdk-8-native.inc
-+++ b/recipes-core/openjdk/openjdk-8-native.inc
-@@ -88,3 +88,6 @@ do_install() {
-         ln -sf "../lib/jvm/${JDK_DIR}/bin/$tool" ${D}${bindir}/$tool
-     done
- }
-+
-+# FIXME libfreetype.so.6 is copied from STAGING_LIBDIR which is already stripped
-+INSANE_SKIP_${PN} = "already-stripped"
+diff --git a/meta-oe/recipes-extended/sanlock/sanlock_3.8.1.bb b/meta-oe/recipes-extended/sanlock/sanlock_3.8.2.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/sanlock/sanlock_3.8.1.bb
+rename to meta-oe/recipes-extended/sanlock/sanlock_3.8.2.bb
+index abae36252..6f3685c4b 100644
+--- a/meta-oe/recipes-extended/sanlock/sanlock_3.8.1.bb
++++ b/meta-oe/recipes-extended/sanlock/sanlock_3.8.2.bb
+@@ -16,7 +16,7 @@ PV .= "+git${SRCPV}"
+ SRC_URI = "git://pagure.io/sanlock.git;protocol=http \
+            file://0001-sanlock-Replace-cp-a-with-cp-R-no-dereference-preser.patch;patchdir=../ \
+           "
+-SRCREV = "07ab65afb10c8f8c008880a73b7b7aaedbde0e15"
++SRCREV = "01b727adf1ce3c0ed5b95299d60f62bc66d98eb5"
+ 
+ S = "${WORKDIR}/git/python"
+ 
 -- 
-2.26.1
+2.25.1
+
+
 
