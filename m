@@ -1,459 +1,93 @@
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com [209.85.215.196])
- by mx.groups.io with SMTP id smtpd.web10.142875.1598041538336851125
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.web12.141691.1598041697443700279
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Aug 2020 13:25:38 -0700
+ Fri, 21 Aug 2020 13:28:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=HH8mp4N0;
- spf=pass (domain: gmail.com, ip: 209.85.215.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f196.google.com with SMTP id o13so1532488pgf.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2020 13:25:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=rkJPtiai;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id h2so1400994plr.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2020 13:28:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:references:from:message-id:date:user-agent:mime-version
          :in-reply-to:content-language:content-transfer-encoding;
-        bh=XnoFrW/BzYgbVmeWdGAUqPgGt6vR1kfCrehrF6O7pkY=;
-        b=HH8mp4N0j7CkBTctJQa7DZOmTKAOh7LzAYOTePjvB6cC3W8C/b8F/Zh2Bl9KOnJcbx
-         9s+iRanwVEZc69w9MJZpNC08Us652+PakJ4Ih5R1HnJnfnSW9hPMX6uMOpTukfLFE2AM
-         QZsNE7YKfOaDUX+AgyLlQHIYZc+7QT/K6I5Dy1LSjPmcJYVF7xDLFXHGnlqF8pC/MVu1
-         fQOSDWSkQStyvS4a46eDtlJV+uW2mOYsyBR+pFxLK+fSkh4mkiagv4UQ6WgBZKIRLfrZ
-         Dr7594Pg9AN4GOmluAWK5vvz6TuPiVcYW/WTVw2qeLgrnfaBQjYFGykSbCnDrS+1xSmu
-         Ov0A==
+        bh=Bg/mj1C0MFvGimU37k1OV+3YslTQ0J7maQRN0qLBKhc=;
+        b=rkJPtiaiicYDF5u/qla1vvkjX31YTTW2neDmothxIFpYWWXOYu0hvymx0AWcsUk316
+         l+PQ5VLofXTtHcS11ztvHWjoaBxcPB9A/L9V63YVt+g50RvBaA9Ki0US90zd7L0FCMeG
+         clrYZgO8Bcpbwwd+93bl5AJ62kmmWFZQkHKcTPcSXbKB6ywawMax16xxV+OuSpI8uQWc
+         Ml3YPuGcfyijADp3Lt2nYIEyCH2FD+eusHZ6IgxrG1Mr7tQ2aaG3zM4SFVOkS4tz7qG8
+         jHABX5LGF7K5RIZcYjvUr4cbBjN0cExIG2Su6DiEFQfD7/jLWOq87+nNCRLUNcVHgkPH
+         DSzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=XnoFrW/BzYgbVmeWdGAUqPgGt6vR1kfCrehrF6O7pkY=;
-        b=drlQgmeUVQoeMj8px7SbX1OUeBt5VnWrBXiI2yKts/u1HVbPEn0oldXCNvwuCXYAjJ
-         Rd+YzVieIK+sb56ossPOZUTUpYShTqh2n5T51sP9QVbk/XVAY38ZdDKASj4FMGoa+wZ5
-         Utr6s73Ikcc8fHhOJX39wJWCTyfjFRyH+5p0WFKoOsTFVW/ax04n3RoacEuQdVnmyXS4
-         hrZfoBlBuQCb8Hhhw/xzLYutDUvX3hTifWA+ilb6/ckdBUkntY3F/jppbyMrlEdbwTkP
-         JB2CCK2JKOlE2dpuT2wnmfYFnhY7d4N8fGnrLG44K0bvFmLuugYn056AjkWF3YpvZ/xj
-         90lg==
-X-Gm-Message-State: AOAM531tkEmD1kDMbhqpLUu/oJWbpTeFqMdtxovXm7BCcJvDEnFfbkwd
-	zfHATlHgIScGWddSQfXyEeZXEO1gdos0kg==
-X-Google-Smtp-Source: ABdhPJyb9hzBQH9WKlYLEi3mtvA5g5rCfVnqXT7H4RnSKQ4QF2zIxJYx0nTU0E/DaNa726inrnN9lQ==
-X-Received: by 2002:a63:705b:: with SMTP id a27mr3173163pgn.405.1598041537009;
-        Fri, 21 Aug 2020 13:25:37 -0700 (PDT)
+        bh=Bg/mj1C0MFvGimU37k1OV+3YslTQ0J7maQRN0qLBKhc=;
+        b=HzplQIu8a7fTFG3+wvMQlwVB1zKM91HbRo0o2t9EBzP9wNpfA5Iyt+3XhVMbgrfTY5
+         2mW1N2btRP/6Tnrk085VRY0QCtyHCQYlxTa8lKqNDcQ55dKNCzkDMB60dEIETcVo/wFb
+         Z8UEdi+L7aS3fMgNNoeTLCLCMD/GYOTby8mW5/I38vNOdsuDo+JJmfbhJv5skMQ4KlU8
+         m8NE5NbUuKfhSZAZq8tEOvaElLDgYYQel16fywhHhVP6nRH6g7rT63OQc40RBkgqbTXl
+         l9NWuyVyE2AJPmaaePK9/vTzm/yw0QCeaho68wWtfwfJO4TGTSOVH6TwQ6OQv6d1E31X
+         r2ZQ==
+X-Gm-Message-State: AOAM531Wrrve1rtvmxsak+9sKgY8vyhrFcChgD7KSbC7hnMiubEogzJZ
+	icechsu/nng9eScesrS/ddUEA13spdNEHg==
+X-Google-Smtp-Source: ABdhPJwBtoZfL1Vvo4wIgzcr3h4oYNg+PMpi21V1ENb+B5Z7ek4e096O5U2qLXi+BATJVEqhU2D6bA==
+X-Received: by 2002:a17:902:8307:: with SMTP id bd7mr3597465plb.159.1598041696521;
+        Fri, 21 Aug 2020 13:28:16 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from ?IPv6:2601:646:9200:4e0::e8c? ([2601:646:9200:4e0::e8c])
-        by smtp.gmail.com with ESMTPSA id r21sm2615909pjo.39.2020.08.21.13.25.36
+        by smtp.gmail.com with ESMTPSA id 2sm3625187pfv.27.2020.08.21.13.28.15
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 21 Aug 2020 13:25:36 -0700 (PDT)
-Subject: Re: [oe] [PATCH] emacs: Create a new recipe for emacs
-To: Alejandro Hernandez Samaniego <alejandro@enedino.org>,
+        Fri, 21 Aug 2020 13:28:15 -0700 (PDT)
+Subject: Re: [oe] [PATCH] asio: extend recipe to add native support
+To: Bjarne Michelsen <bjarne_michelsen@hotmail.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200821072620.6328-1-alejandro@enedino.org>
+References: <20200821165614.52984-1-bjarne_michelsen@hotmail.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Message-ID: <7adabc21-208c-e57e-0001-9a8b927c5d5e@gmail.com>
-Date: Fri, 21 Aug 2020 13:25:35 -0700
+Message-ID: <b7abc274-041d-25e3-5897-b70195e576da@gmail.com>
+Date: Fri, 21 Aug 2020 13:28:15 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <20200821072620.6328-1-alejandro@enedino.org>
+In-Reply-To: <20200821165614.52984-1-bjarne_michelsen@hotmail.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
 
 
-On 8/21/20 12:26 AM, Alejandro Hernandez Samaniego wrote:
-> Emacs is for obvious reasons one of the most important
-> and powerful editors, being the first program released
-> by the GNU project and being maintained for many years.
+On 8/21/20 9:56 AM, Bjarne Michelsen wrote:
+> Native support is not required by anything in oe-core, but may be useful
+> for some project specfic use cases.
 > 
-> Its not the obvious choice when being used on a small
-> or resource constrained device, but, on this recipe
-> I was able to split it into three different packages
-> to fit different needs for those who decide to use it,
-> the emacs-minimal package would install a working emacs
-> requiring around 2 MB of storage space, the emacs-base
-> package includes some themes, syntax highlighting for
-> some of the most used programming languages, as well
-> as some extra functionality like a working shell,
-> requiring less than 5 MB, which should work for a wide
-> spectrum of workflows, and lasty, the emacs-full
-> package contains the a fully working emacs using around
-> 30 MB of space trading off size for functionality.
-> 
-> This recipe also uses BBCLASSEXTEND=native to build some
-> tools that emacs itself requires to build for target,
-> but does not built a full native emacs since that is not
-> necessary.
-> 
-> Simply installing emacs will use the emacs-base package
-> as default.
-> 
-> Signed-off-by: Alejandro Hernandez Samaniego <alejandro@enedino.org>
+> Signed-off-by: Bjarne Michelsen <bjarne_michelsen@hotmail.com>
 > ---
->   meta-oe/recipes-support/emacs/emacs_27.1.bb   | 260 ++++++++++++++++++
->   .../emacs/files/usemake-docfile-native.patch  |  85 ++++++
->   2 files changed, 345 insertions(+)
->   create mode 100644 meta-oe/recipes-support/emacs/emacs_27.1.bb
->   create mode 100644 meta-oe/recipes-support/emacs/files/usemake-docfile-native.patch
+>   meta-oe/recipes-support/asio/asio_1.16.1.bb | 4 ++++
+>   1 file changed, 4 insertions(+)
 > 
-> diff --git a/meta-oe/recipes-support/emacs/emacs_27.1.bb b/meta-oe/recipes-support/emacs/emacs_27.1.bb
-> new file mode 100644
-> index 000000000..67a395503
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/emacs/emacs_27.1.bb
-> @@ -0,0 +1,260 @@
-> +SUMMARY = "Emacs is the extensible, customizable, self-documenting real-time display editor"
-> +HOMEPAGE = "https://www.gnu.org/software/emacs/"
+> diff --git a/meta-oe/recipes-support/asio/asio_1.16.1.bb b/meta-oe/recipes-support/asio/asio_1.16.1.bb
+> index f381d12fb..11b9730c9 100644
+> --- a/meta-oe/recipes-support/asio/asio_1.16.1.bb
+> +++ b/meta-oe/recipes-support/asio/asio_1.16.1.bb
+> @@ -25,3 +25,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/asio/${BP}.tar.bz2"
+>   PACKAGECONFIG ??= "boost"
+>   
+>   PACKAGECONFIG[boost] = "--with-boost,--without-boost,boost"
 > +
-> +LICENSE = "GPLv3"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
-> +
-> +SRC_URI = "https://ftp.gnu.org/pub/gnu/emacs/emacs-${PV}.tar.xz"
-> +
-> +SRC_URI_append_class-target = " file://usemake-docfile-native.patch"
-> +
-> +SRC_URI[sha256sum] = "4a4c128f915fc937d61edfc273c98106711b540c9be3cd5d2e2b9b5b2f172e41"
-> +
-> +PACKAGECONFIG[gnutls] = "--with-gnutls=yes,--with-gnutls=no,gnutls"
-> +PACKAGECONFIG[kerberos] = "--with-kerberos=yes,--with-kerberos=no,krb5"
-> +PACKAGECONFIG[libgmp] = "--with-libgmp=yes,--with-libgmp=no,gmp"
-> +
-> +PACKAGECONFIG = "gnutls kerberos libgmp"
+> +EXTRA_OECONF_append_class-native += "--with-boost=${STAGING_LIBDIR_NATIVE}"
 
-should this be ?= here perhaps ?
-> +
-> +# We could use --without-all but its better to
-> +# split it into several packages (size of minimal doesnt change)
-> +EXTRA_OECONF = " --with-x=no --with-dumping=none"
-> +
-> +DEPENDS = "ncurses"
-> +DEPENDS_append_class-target = " emacs-native"
-> +
-> +inherit autotools mime-xdg
-> +
-> +
-> +# The following does NOT build a native emacs.
-> +# It only builds some parts of it that are
-> +# required to by the build for target emacs.
-> +BBCLASSEXTEND = "native"
+This should be something like
+EXTRA_OECONF_append_class-native = " --with-boost=${STAGING_LIBDIR_NATIVE}"
 
-move this extend to end.
+but I wonder if its needed if we had
 
+PACKAGECONFIG[boost] = 
+"--with-boost=${STAGING_LIBDIR},--without-boost,boost"
+
+can you check that out ?
 > +
-> +do_compile_class-native (){
-> +    cd ${B}/lib-src
-> +    oe_runmake make-docfile
-> +    oe_runmake make-fingerprint
-> +}
-> +do_install_class-native(){
-> +    install -d ${D}${bindir}
-> +    install -m 755 ${B}/lib-src/make-docfile ${D}/${bindir}/
-> +    install -m 755 ${B}/lib-src/make-fingerprint ${D}/${bindir}/
-> +}
-> +
-> +
-> +do_install_append(){
-> +    # Delete systemd stuff, extend using DISTRO_FEATURES?
-> +    rm -rf ${D}/${libdir}
-> +    # Extra stuff which isnt needed
-> +    rm -rf ${D}/${datadir}/metainfo
-> +    rm -rf ${D}/${datadir}/info
-> +    # Emacs copies files to ${D} while building, which were unpacked
-> +    # by a different user, we need to restore those
-> +    chown -R root:root ${D}${datadir}
-> +}
-> +
-> +
-> +# Use a similar strategy to how we build python:
-> +# Create three packages
-> +# minimal - A working lisp based text editor
-> +# base - What would probably work for most
-> +# full - A fully working emacs
-> +# The lists of files are long but are worth it
-> +# Installing "emacs" installs the base package
-> +PACKAGE_BEFORE_PN = "${PN}-minimal ${PN}-base ${PN}-full"
-> +RPROVIDES_${PN}-base = "${PN}"
-> +RDEPENDS_${PN}-base_class-target = "${PN}-minimal"
-> +RDEPENDS_${PN}-full_class-target = "${PN}"
-> +
-> +
-> +# A minimal version of emacs that works
-> +FILES_${PN}-minimal = " \
-> +    ${datadir}/${BPN}/${PV}/lisp/loadup.el \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/byte-run.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/backquote.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/subr.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/version.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/widget.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/custom.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/map-ynp.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/international/mule.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/international/mule-conf.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/env.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/format.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/bindings.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/window.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/files.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/macroexp.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/cus-face.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/faces.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/button.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/loaddefs.el \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/nadvice.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/cl-preloaded.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/obarray.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/abbrev.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/simple.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/jka-cmpr-hook.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/epa-hook.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/international/mule-cmds.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/case-table.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/international/charprop.el \
-> +    ${datadir}/${BPN}/${PV}/lisp/international/characters.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/international/charscript.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/composite.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/chinese.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/cyrillic.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/indian.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/sinhala.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/english.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/ethiopic.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/european.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/czech.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/slovak.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/romanian.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/greek.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/hebrew.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/international/cp51932.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/international/eucjp-ms.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/japanese.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/korean.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/lao.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/tai-viet.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/thai.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/tibetan.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/vietnamese.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/misc-lang.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/utf-8-lang.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/georgian.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/khmer.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/burmese.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/language/cham.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/indent.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/cl-generic.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/minibuffer.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/frame.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/startup.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/term/tty-colors.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/font-core.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/facemenu.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/syntax.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/font-lock.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/jit-lock.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/mouse.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/select.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/timer.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/isearch.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/rfn-eshadow.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/menu-bar.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/tab-bar.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/lisp.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/textmodes/page.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/register.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/textmodes/paragraphs.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/prog-mode.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/lisp-mode.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/elisp-mode.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/textmodes/text-mode.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/textmodes/fill.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/newcomment.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/replace.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/tabulated-list.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/buff-menu.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/float-sup.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/vc/vc-hooks.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/vc/ediff-hook.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/uniquify.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/electric.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/eldoc.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/cus-start.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/tooltip.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/simple.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/regexp-opt.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/term/xterm.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/bytecomp.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/cconv.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/gv.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/byte-opt.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/image.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/ldefs-boot.el \
-> +    ${datadir}/${BPN}/${PV}/lisp/help.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/international/uni*.el \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/vc/warnings.elc \
-> +    ${datadir}/${BPN}/${PV}/etc/charsets/ \
-> +    ${bindir}/emacs* \
-> +    ${prefix}/libexec \
-> +"
-> +
-> +
-> +# What works for "most" is relative, but this can be easily extended if needed
-> +FILES_${PN}-base = " \
-> +    ${datadir}/${BPN}/${PV}/etc/srecode \
-> +    ${datadir}/${BPN}/${PV}/etc/e \
-> +    ${datadir}/${BPN}/${PV}/etc/forms \
-> +    ${datadir}/${BPN}/${PV}/lisp/cedet \
-> +    ${datadir}/${BPN}/${PV}/site-lisp/ \
-> +    ${datadir}/${BPN}/${PV}/lisp/subdirs.el \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/cc-mode.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/cc-defs.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/cc-vars.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/cc-engine.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/cc-styles.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/cc-fonts.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/cc-cmds.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/cc-align.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/cc-menus.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/cc-guess.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/cl-lib.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/cl-macs.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/pcase.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/inline.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/cl-seq.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/easymenu.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/python* \
-> +    ${datadir}/${BPN}/${PV}/lisp/ansi-color.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/comint.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/ring.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/json.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/map.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/seq.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/subr-x.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/seq.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/net/tramp-sh.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/net/tramp.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/net/tramp-compat.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/auth-source.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/password-cache.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/eieio.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/eieio-core.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/format-spec.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/ls-lisp.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/calendar/parse-time.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/calendar/iso8601.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/calendar/time-date.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/shell.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/pcomplete.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/net/tramp-integration.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/files-x.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/net/trampver.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/net/tramp-loaddefs.el \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/*perl* \
-> +    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/smie.elc \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/*asm* \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/cpp* \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/make* \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/sh-script* \
-> +    ${datadir}/${BPN}/${PV}/etc/themes/adwaita-theme.el \
-> +    ${datadir}/${BPN}/${PV}/etc/themes/wheatgrass-theme.el \
-> +    ${datadir}/${BPN}/${PV}/etc/themes/deeper-blue-theme.el \
-> +    ${datadir}/${BPN}/${PV}/etc/themes/light-blue-theme.el \
-> +    ${datadir}/${BPN}/${PV}/etc/themes/misterioso-theme.el \
-> +    ${datadir}/${BPN}/${PV}/etc/themes/tango-theme.el \
-> +    ${datadir}/${BPN}/${PV}/etc/themes/wombat-theme.el \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/prog* \
-> +    ${datadir}/${BPN}/${PV}/lisp/progmodes/executable* \
-> +"
-> +
-> +# Restore FILES for the full package to catch everything left
-> +FILES_${PN}-full = "${FILES_${PN}}"
-> +FILES_${PN}-full_append = " ${datadir}/icons"
-> diff --git a/meta-oe/recipes-support/emacs/files/usemake-docfile-native.patch b/meta-oe/recipes-support/emacs/files/usemake-docfile-native.patch
-> new file mode 100644
-> index 000000000..cc0b05c79
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/emacs/files/usemake-docfile-native.patch
-> @@ -0,0 +1,85 @@
-> +Upstream-Status: Inappropriate  [OE-Specific]
-> +
-> +When building emacs, it builds some tools for the HOST
-> +that are then used to build for target, such as
-> +make-fingerprint and make-docfile, this needs to be
-> +adapted to be used by bitbake, otherwise the compiled
-> +executables arent compatible with the HOST.
-> +
-> +Use the above mentioned tools provided by the native
-> +version of the recipe instead.
-> +
-> +Signed-off-by: Alejandro Enedino Hernandez Samaniego <alejandro@enedino.org>
-> +
-> +Index: emacs-27.1/src/Makefile.in
-> +===================================================================
-> +--- emacs-27.1.orig/src/Makefile.in
-> ++++ emacs-27.1/src/Makefile.in
-> +@@ -472,7 +472,7 @@ ifeq ($(CHECK_STRUCTS),true)
-> + pdumper.o: dmpstruct.h
-> + endif
-> + dmpstruct.h: $(srcdir)/dmpstruct.awk
-> +-dmpstruct.h: $(libsrc)/make-fingerprint$(EXEEXT) $(dmpstruct_headers)
-> ++dmpstruct.h:  $(dmpstruct_headers)
-> + 	$(AM_V_GEN)POSIXLY_CORRECT=1 awk -f $(srcdir)/dmpstruct.awk \
-> + 		$(dmpstruct_headers) > $@
-> +
-> +@@ -566,8 +566,7 @@ ${lispintdir}/characters.elc: ${charscri
-> + ## Strictly speaking, emacs does not depend directly on all of $lisp,
-> + ## since not all pieces are used on all platforms.  But DOC depends
-> + ## on all of $lisp, and emacs depends on DOC, so it is ok to use $lisp here.
-> +-emacs$(EXEEXT): temacs$(EXEEXT) \
-> +-                lisp.mk $(etc)/DOC $(lisp) \
-> ++emacs$(EXEEXT): lisp.mk $(etc)/DOC $(lisp) \
-> +                 $(lispsource)/international/charprop.el ${charsets}
-> + ifeq ($(DUMPING),unexec)
-> + 	LC_ALL=C $(RUN_TEMACS) -batch $(BUILD_DETAILS) -l loadup --temacs=dump
-> +@@ -596,15 +595,15 @@ endif
-> + ## for the first time, this prevents any variation between configurations
-> + ## in the contents of the DOC file.
-> + ##
-> +-$(etc)/DOC: lisp.mk $(libsrc)/make-docfile$(EXEEXT) $(obj) $(lisp)
-> ++$(etc)/DOC: lisp.mk $(obj) $(lisp)
-> + 	$(AM_V_GEN)$(MKDIR_P) $(etc)
-> + 	$(AM_V_at)rm -f $(etc)/DOC
-> +-	$(AM_V_at)$(libsrc)/make-docfile -d $(srcdir) \
-> ++	make-docfile -d $(srcdir) \
-> + 	  $(SOME_MACHINE_OBJECTS) $(obj) > $(etc)/DOC
-> +-	$(AM_V_at)$(libsrc)/make-docfile -a $(etc)/DOC -d $(lispsource) \
-> ++	make-docfile -a $(etc)/DOC -d $(lispsource) \
-> + 	  $(shortlisp)
-> +
-> +-$(libsrc)/make-docfile$(EXEEXT) $(libsrc)/make-fingerprint$(EXEEXT): \
-> ++$(libsrc)/make-fingerprint$(EXEEXT): \
-> +   $(lib)/libgnu.a
-> + 	$(MAKE) -C $(dir $@) $(notdir $@)
-> +
-> +@@ -622,8 +621,8 @@ am__v_GLOBALS_ = $(am__v_GLOBALS_@AM_DEF
-> + am__v_GLOBALS_0 = @echo "  GEN     " globals.h;
-> + am__v_GLOBALS_1 =
-> +
-> +-gl-stamp: $(libsrc)/make-docfile$(EXEEXT) $(GLOBAL_SOURCES)
-> +-	$(AM_V_GLOBALS)$(libsrc)/make-docfile -d $(srcdir) -g $(obj) > globals.tmp
-> ++gl-stamp: $(GLOBAL_SOURCES)
-> ++	make-docfile -d $(srcdir) -g $(obj) > globals.tmp
-> + 	$(AM_V_at)$(top_srcdir)/build-aux/move-if-change globals.tmp globals.h
-> + 	$(AM_V_at)echo timestamp > $@
-> +
-> +@@ -637,7 +636,7 @@ $(LIBEGNU_ARCHIVE): $(config_h)
-> + 	$(MAKE) -C $(dir $@) all
-> +
-> + ifeq ($(HAVE_PDUMPER),yes)
-> +-  MAKE_PDUMPER_FINGERPRINT = $(libsrc)/make-fingerprint$(EXEEXT)
-> ++  MAKE_PDUMPER_FINGERPRINT = make-fingerprint
-> + else
-> +   MAKE_PDUMPER_FINGERPRINT =
-> + endif
-> +@@ -647,7 +646,7 @@ endif
-> + ## This goes on to affect various things, and the emacs binary fails
-> + ## to start if Vinstallation_directory has the wrong value.
-> + temacs$(EXEEXT): $(LIBXMENU) $(ALLOBJS) $(LIBEGNU_ARCHIVE) $(EMACSRES) \
-> +-  $(charsets) $(charscript) $(MAKE_PDUMPER_FINGERPRINT)
-> ++  $(charsets) $(charscript)
-> + 	$(AM_V_CCLD)$(CC) -o $@.tmp \
-> + 	  $(ALL_CFLAGS) $(TEMACS_LDFLAGS) $(LDFLAGS) \
-> + 	  $(ALLOBJS) $(LIBEGNU_ARCHIVE) $(W32_RES_LINK) $(LIBES)
+> +BBCLASSEXTEND = "native nativesdk"
 > 
 > 
 > 
