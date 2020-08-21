@@ -1,63 +1,87 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web11.130052.1598000871950512148
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com [209.85.208.65])
+ by mx.groups.io with SMTP id smtpd.web11.130544.1598003596925135626
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Aug 2020 02:07:52 -0700
+ Fri, 21 Aug 2020 02:53:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.76,335,1592841600"; 
-   d="scan'208";a="98384382"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 21 Aug 2020 17:07:40 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 2830648990CF
-	for <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2020 17:07:37 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 21 Aug 2020 17:07:38 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] openldap: upgrade 2.4.50 -> 2.4.51
-Date: Sat, 22 Aug 2020 05:07:31 +0800
-Message-ID: <1598044054-6555-2-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1598044054-6555-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-References: <1598044054-6555-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 2830648990CF.AFBD1
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Pe9H2aAe;
+ spf=pass (domain: gmail.com, ip: 209.85.208.65, mailfrom: rehsack@gmail.com)
+Received: by mail-ed1-f65.google.com with SMTP id l23so920022edv.11
+        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2020 02:53:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=sender:from:to:cc:subject:date:message-id;
+        bh=DBnalphubos4xDBM0F4oMK+4AVCde17u1S6QyzIef8I=;
+        b=Pe9H2aAeUzvGy657c1zMUqhT7QgS5s5ovAERMe0UuQzyCE/TO8dC3Q+XcheR5YAKYE
+         8CNlannleWvfJNY1eLykdRTywhStNS/O8pq/R/VnT1s9moQHhw5cCYkJ0Y6SwOOh//3E
+         R8A2zSpF6m/nDgjfku7yMAH9rEN75mNDvxe7/Y6EHKYG4irXp3UAB53A8MSMReg7GFAl
+         Wp9hBq++6ye1LUxNsISOhEI/RD49Ojv3u2NNKlA6T5Ub2CVF3mMBIONB9YWO++dtO//C
+         g9VcpDcZbDnVIah3QB69sMys2KlCQ8b05HlC70cp9h98CvFGk1Qnokd/k8pSUwFo3QUo
+         JKYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+        bh=DBnalphubos4xDBM0F4oMK+4AVCde17u1S6QyzIef8I=;
+        b=kUy6c92pmYKq9x4bFfl3noYsm1ubMiac8qY60C5An73Z0GutvNnbUZsUe22r/lANDJ
+         mfdbLeZlz/7NRMCoGMPDTU7c+tZd0voTun1OorWc60w1d2LvMhzKhQipLxdMRAaBNmlq
+         3HFv4/FwVzcAlC3uU4d2QwlLp4FOAAt4cBd8p3niXtGbpL/vqXSVQbSCkvJxhF2wB8/E
+         4ePD4G7pLFJWL55yNcURNpJNKIlLmDanIZYcSaHmq1CtyocTE+X9yBotkqvxXvNgDaW9
+         H5ZS8yxLNlv6M+aQkS4xEyXqjkL6jP5int8bP/hJ6+qQqTRvSM94cswsQ9YAl7dJCiRF
+         TBzA==
+X-Gm-Message-State: AOAM532CCKO2of1+CRp08TMioeQ0rsvE4vP5Im/I2Z11/1D8BR/VkenA
+	PU2Z+7Q5FxFUj8KNZd7Q9HW8i3sWfKc=
+X-Google-Smtp-Source: ABdhPJxtcaQ9UA8RNq2tg3sN6vkgutUkIwRjQNOXZcT+LSExwY1T2E5yuZM3kK7O5r2tg1UfJi6UuA==
+X-Received: by 2002:aa7:d3c2:: with SMTP id o2mr2005632edr.11.1598003594850;
+        Fri, 21 Aug 2020 02:53:14 -0700 (PDT)
+Return-Path: <rehsack@gmail.com>
+Received: from beaker.muppets.liwing.de (p5b25b03a.dip0.t-ipconnect.de. [91.37.176.58])
+        by smtp.gmail.com with ESMTPSA id j3sm787833edd.92.2020.08.21.02.53.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 21 Aug 2020 02:53:14 -0700 (PDT)
+Sender: Jens Rehsack <rehsack@gmail.com>
+From: "Jens Rehsack" <rehsack@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Jens Rehsack <sno@netbsd.org>
+Subject: [meta-networking][PATCH] bearssl: fix missing install
+Date: Fri, 21 Aug 2020 11:52:55 +0200
+Message-Id: <20200821095255.4830-1-sno@netbsd.org>
+X-Mailer: git-send-email 2.17.1
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Default Makefile of bearssl doesn't have a make target which hadn't
+enough attraction when creating the recipe.
+
+Add missing functionality.
+
+Signed-off-by: Jens Rehsack <sno@netbsd.org>
 ---
- .../openldap/{openldap_2.4.50.bb => openldap_2.4.51.bb}       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/openldap/{openldap_2.4.50.bb => openldap_2.4.51.bb} (98%)
+ .../recipes-connectivity/bearssl/bearssl_0.6.bb        | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.50.bb b/meta-oe/recipes-support/openldap/openldap_2.4.51.bb
-similarity index 98%
-rename from meta-oe/recipes-support/openldap/openldap_2.4.50.bb
-rename to meta-oe/recipes-support/openldap/openldap_2.4.51.bb
-index 3a130f970..d2c574608 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.50.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.51.bb
-@@ -25,8 +25,8 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
-     file://remove-user-host-pwd-from-version.patch \
- "
+diff --git a/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb b/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb
+index a0f64e933..74a876987 100644
+--- a/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb
++++ b/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb
+@@ -18,6 +18,8 @@ HOMEPAGE = "https://bearssl.org"
  
--SRC_URI[md5sum] = "f9ed44ef373abed04c9e4c8586260f9e"
--SRC_URI[sha256sum] = "5cb57d958bf5c55a678c6a0f06821e0e5504d5a92e6a33240841fbca1db586b8"
-+SRC_URI[md5sum] = "0d2025896cf1c17af7304ecc57ec9531"
-+SRC_URI[sha256sum] = "f490775ea4c6506b7210ee55a102c8f4aacfe9d1c8eaa633c7316d33a714be62"
+ SECTION = "libs"
  
- DEPENDS = "util-linux groff-native"
++inherit lib_package
++
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=1fc37e1037ae673975fbcb96a98f7191"
  
+@@ -33,3 +35,11 @@ CFLAGS += "-fPIC"
+ 
+ S = "${WORKDIR}/git"
+ B = "${S}"
++
++do_install() {
++    mkdir -p ${D}/${bindir} ${D}/${libdir}
++    install -m 0644 ${B}/build/brssl ${D}/${bindir}
++    install -m 0644 ${B}/build/libbearssl.so ${D}/${libdir}/libbearssl.so.6.0.0
++    ln -s libbearssl.so.6.0.0 ${D}/${libdir}/libbearssl.so.6
++    ln -s libbearssl.so.6.0.0 ${D}/${libdir}/libbearssl.so
++}
 -- 
-2.25.1
-
-
+2.17.1
 
