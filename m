@@ -1,59 +1,69 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [])
  by mx.groups.io with SMTP id smtpd.web12.127423.1597988054250929534
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 20 Aug 2020 22:34:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: <nil>, mailfrom: zangrc.fnst@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.76,335,1592841600"; 
-   d="scan'208";a="98374598"
+   d="scan'208";a="98374599"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
   by heian.cn.fujitsu.com with ESMTP; 21 Aug 2020 13:34:09 +0800
 Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 77F7D48990D3
-	for <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2020 13:34:04 +0800 (CST)
+	by cn.fujitsu.com (Postfix) with ESMTP id C0DA648990DD
+	for <openembedded-devel@lists.openembedded.org>; Fri, 21 Aug 2020 13:34:07 +0800 (CST)
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 21 Aug 2020 13:34:04 +0800
+ (TLS) id 15.0.1497.2; Fri, 21 Aug 2020 13:34:08 +0800
 From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-networking] [PATCH] lftp: upgrade 4.9.1 -> 4.9.2
-Date: Sat, 22 Aug 2020 01:33:53 +0800
-Message-ID: <1598031241-3582-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] leptonica: upgrade 1.79.0 -> 1.80.0
+Date: Sat, 22 Aug 2020 01:33:55 +0800
+Message-ID: <1598031241-3582-3-git-send-email-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1598031241-3582-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+References: <1598031241-3582-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
 X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 77F7D48990D3.A458C
+X-yoursite-MailScanner-ID: C0DA648990DD.A7ECA
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
 Content-Type: text/plain
 
+-License-Update: Copyright year updated to 2020.
+
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../lftp/{lftp_4.9.1.bb => lftp_4.9.2.bb}                     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/lftp/{lftp_4.9.1.bb => lftp_4.9.2.bb} (89%)
+ .../leptonica/{leptonica_1.79.0.bb => leptonica_1.80.0.bb}  | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-graphics/leptonica/{leptonica_1.79.0.bb => leptonica_1.80.0.bb} (72%)
 
-diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.9.1.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.9.2.bb
-similarity index 89%
-rename from meta-networking/recipes-connectivity/lftp/lftp_4.9.1.bb
-rename to meta-networking/recipes-connectivity/lftp/lftp_4.9.2.bb
-index 79a380ada..e6240a58e 100644
---- a/meta-networking/recipes-connectivity/lftp/lftp_4.9.1.bb
-+++ b/meta-networking/recipes-connectivity/lftp/lftp_4.9.2.bb
-@@ -7,8 +7,8 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-oe/recipes-graphics/leptonica/leptonica_1.79.0.bb b/meta-oe/recipes-graphics/leptonica/leptonica_1.80.0.bb
+similarity index 72%
+rename from meta-oe/recipes-graphics/leptonica/leptonica_1.79.0.bb
+rename to meta-oe/recipes-graphics/leptonica/leptonica_1.80.0.bb
+index a6de1f795..a861bba5b 100644
+--- a/meta-oe/recipes-graphics/leptonica/leptonica_1.79.0.bb
++++ b/meta-oe/recipes-graphics/leptonica/leptonica_1.80.0.bb
+@@ -1,13 +1,13 @@
+ DESCRIPTION = "A pedagogically-oriented open source site containing software that is broadly useful for image processing and image analysis applications"
+ DEPENDS = "jpeg tiff libpng zlib"
+ LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://leptonica-license.txt;md5=34aa579294e8284b7b848c8d5d361e8f"
++LIC_FILES_CHKSUM = "file://leptonica-license.txt;md5=809b282cea2df68975fbe0ffe02b560f"
  
- SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.bz2"
--SRC_URI[md5sum] = "19ce64012bc722ad61667372fa262382"
--SRC_URI[sha256sum] = "a692fd081c19e2cc045869ab721a4fb3d7571040849a4406c4042f735232414c"
-+SRC_URI[md5sum] = "42ec1793c386702bc2734ffbc8a5cff1"
-+SRC_URI[sha256sum] = "8a07cbf4df09b107fe3fc41d133ee2f6cea6ef4c33ccf06c8448ad058cd96b7e"
+ UPSTREAM_CHECK_URI = "https://github.com/DanBloomberg/leptonica/releases"
  
- inherit autotools gettext pkgconfig
+ SRC_URI = "http://www.leptonica.org/source/leptonica-${PV}.tar.gz"
+-SRC_URI[md5sum] = "a545654b1dae7d29e2ea346b29095f84"
+-SRC_URI[sha256sum] = "045966c9c5d60ebded314a9931007a56d9d2f7a6ac39cb5cc077c816f62300d8"
++SRC_URI[md5sum] = "d640d684234442a84c9e8902f0b3ff36"
++SRC_URI[sha256sum] = "ec9c46c2aefbb960fb6a6b7f800fe39de48343437b6ce08e30a8d9688ed14ba4"
  
+ EXTRA_OECONF += " \
+     --without-libwebp \
 -- 
 2.25.1
 
