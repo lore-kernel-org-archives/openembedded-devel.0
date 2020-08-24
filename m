@@ -1,82 +1,80 @@
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com [209.85.128.65])
- by mx.groups.io with SMTP id smtpd.web11.180940.1598212109006204652
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+ by mx.groups.io with SMTP id smtpd.web10.189866.1598248987968359477
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Aug 2020 12:48:29 -0700
+ Sun, 23 Aug 2020 23:03:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=VNDrTR9h;
- spf=pass (domain: gmail.com, ip: 209.85.128.65, mailfrom: robert.berger.oe.devel@gmail.com)
-Received: by mail-wm1-f65.google.com with SMTP id s20so1390661wmj.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 23 Aug 2020 12:48:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=/mvWgMX9Uq75gHG5P8S48YD3zNaJ92U3pvpowN7yruI=;
-        b=VNDrTR9hRThNCjABWcm73QiV1JcRkCUpyFvn6ym1rbrddZcTSOxqnAdicUPp2ChZrF
-         LeEnbeYi+e5uG0eLdr703lXvZG5XL3te8smW6lXZCVoa8ZoOtJGvKUoBYlgXriQ/+38A
-         3eK4zBKXFUXjdGyIjn3p8izn5hgbmscAQOuksIgX9PS22M8bjJfEcXbBW3MvO4hVMh+5
-         sCmsuF++07pqTOyNmr4Zktxdgp9vFr9X1p8eNToY0Aq793UFINHgk5o9hie7Z48evz93
-         Ok+sFCB8XTKbWqDqsKQ4GW28x8FCV9uGcnt+LmouKEwdUfOTyFL2AiknH7thMynNl+15
-         rVqA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=/mvWgMX9Uq75gHG5P8S48YD3zNaJ92U3pvpowN7yruI=;
-        b=FJ9/W9vqc+Zmdj5NSYndfUq57uBvb/Ze32mAmvlt++GtwesByEr8uVZhO0isdxVw7j
-         sL/voZ1pY8xYJZt13byDF6Ybk1/yf4zkfsTdg/sbxi7yz9ngVEtmG+lIsxPeZpM6Lxkq
-         5z5yRCJ3n6jlT+sEDrcNFHjXCVBy6mzCUiFUM8x8S/4FRIherqbnAHfVOHMjISwCSiTj
-         HRLIt71JA1Keoma9QAeGmhWWgAhY3lAOnlXAuaoiP1ZHAGBHJUblY5bGcABEmvZ9Z3ld
-         dr2Ot79u5hDXu+wAUbUpAECygxUWnmDe/nQBEOKy2vULmWYXd8jJ7EW0vAHMkPlZmSZD
-         yZsA==
-X-Gm-Message-State: AOAM531JHE8EKpDLrbLo+tjerYM+LRSaCxhHX7pn02bqyuqbIiHYMqT2
-	ZSP/L+Vr8HJpEUzpokTio0MYD/Ev7bk=
-X-Google-Smtp-Source: ABdhPJyB5s8SUuxFXwYHc5E8XldIHXTKfOPwTTKSrf8SWxStjmyeYBARbcjSg1SnQYNtVEetYkjkXg==
-X-Received: by 2002:a1c:e288:: with SMTP id z130mr2619908wmg.32.1598212106998;
-        Sun, 23 Aug 2020 12:48:26 -0700 (PDT)
-Return-Path: <robert.berger.oe.devel@gmail.com>
-Received: from [192.168.42.52] (ppp-2-86-237-227.home.otenet.gr. [2.86.237.227])
-        by smtp.gmail.com with ESMTPSA id h13sm17922132wrx.17.2020.08.23.12.48.26
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 23 Aug 2020 12:48:26 -0700 (PDT)
-Subject: Re: [oe] [PATCH] openjdk-8: Convert do_unpack postfunc to _append
-To: =?UTF-8?Q?Jonatan_P=c3=a5lsson?= <jonatan.p@gmail.com>
-Cc: Richard Leitner <richard.leitner@skidata.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-References: <16285DBF18FAF8F7.27500@lists.openembedded.org>
- <CAKm+giMq=wbHhLn4WDM0xfnv4J2GJEQYfUzKts3vJukgBm2cYw@mail.gmail.com>
- <20200820101218.GC51054@pcleri>
- <CAKm+giO7SSxDfhXR2-=VGe+O_gyH3Zwoar+FwdyZ_iMC4cZ7aQ@mail.gmail.com>
-From: "Robert Berger" <robert.berger.oe.devel@gmail.com>
-Message-ID: <089cbef0-2017-d58f-94e4-55d2aae9a98c@gmail.com>
-Date: Sun, 23 Aug 2020 22:48:24 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ dkim=pass header.i=@skidata.com header.s=selector1 header.b=K9iZR2jF;
+ spf=pass (domain: skidata.com, ip: 91.230.2.99, mailfrom: prvs=498d700d9=richard.leitner@skidata.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+  t=1598248988; x=1629784988;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=s3J6pNVFwylkJmaxA5yFACdQOxMQcbpRN28EmHGP8MQ=;
+  b=K9iZR2jF5ttSkVtNWdSFRDC4eGfXgg8f4O+QzhRgag15ctL2gHHAA4sg
+   mk/R6nwppX5ZnBiiMosqIkpDSI+4AEKAoBC1F2QSwQBvws4Fveb98CSIk
+   NhutICjc1v7byQy3eW98WaKBMeyFyT2B6ELNZofzIIO6EWjQQY5WsAqem
+   DD0IPfWYxpdgVeAtquVTMr2xwZ1JkNK88uSt3SqKP7mUUSvTNWsARCsps
+   x7lSIaePqwVKqDC81m/frWJ0V/xVOMX08NrJE6nVLzn2GwATMtEOji0qL
+   Og0hwXueEr+/dA1H/s1XI1htwZmK1Rw5nIPUfYD9s9VZSbdDp4Wffkigb
+   A==;
+IronPort-SDR: +C3F25c842CdzK9EY39WdfrCPaUQvVEAsd5MrCqahkyfVOcIco2Pmog7WOOD342q9vpqh9iYGD
+ 2r5OVuBvFD8QfcSSOHMFscptYKHGxWmUUUf4NiPkYQ8gcl/LWnQkZFdKXgVYkn+uSCct/sV6Y0
+ 3VF99cgT0EA6XG+7rEsvxMVBqrFBufycJet7bFImv95RBC2sD88JsF7SByrPfF8F8efk60CDRA
+ 4Ck7UlcA7l2RIpwRtWSwT3tJvErANg/n6PK1TldrxC3l4ygSFmJDwKOoyLkyjt3Ru6abtS6DtF
+ vpY=
+X-IronPort-AV: E=Sophos;i="5.76,347,1592863200"; 
+   d="scan'208";a="26326761"
+From: "Richard Leitner" <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <raj.khem@gmail.com>, Richard Leitner <richard.leitner@skidata.com>
+Subject: [meta-oe][PATCH] liburing: add v0.7
+Date: Mon, 24 Aug 2020 08:02:35 +0200
+Message-ID: <20200824060235.196568-1-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <CAKm+giO7SSxDfhXR2-=VGe+O_gyH3Zwoar+FwdyZ_iMC4cZ7aQ@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Return-Path: richard.leitner@skidata.com
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
+ sdex5srv.skidata.net (192.168.111.83)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Hi Jonatan,
+Add initial support for liburing v0.7.
 
-I am the author of this patch[1] which I guess fixes your issue as well. 
-I didn't check yet if it's happy with the new functionality of the 
-archiver class in dunfell.
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+---
+ .../recipes-support/liburing/liburing_git.bb  | 21 +++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-oe/recipes-support/liburing/liburing_git.bb
 
-[1] 
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/commit/?h=master-next&id=b8e62679d99f57a5af4f2c59ac36bea5c7087d4f
-
-You use do_unpack_append() while I use do_patch_prepend(). Otherwise 
-it's pretty much the same.
-
-Do you see any reason why do_unpack_append() might be preferable over 
-do_patch_prepend()?
-
-Regards,
-
-Robert
-
-
+diff --git a/meta-oe/recipes-support/liburing/liburing_git.bb b/meta-oe/recipes-support/liburing/liburing_git.bb
+new file mode 100644
+index 000000000..87c919e13
+--- /dev/null
++++ b/meta-oe/recipes-support/liburing/liburing_git.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "This is the io_uring library, liburing."
++DESCRIPTION = "liburing provides helpers to setup and teardown io_uring \
++instances, and also a simplified interface for applications that don't need \
++(or want) to deal with the full kernel side implementation."
++HOMEPAGE = "https://github.com/axboe/liburing"
++BUGTRACKER = "https://github.com/axboe/liburing/issues"
++SECTION = "libs"
++
++LICENSE = "LGPLv2.1 | MIT"
++LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=d51b5805e2a675685e6a66ca50904cf9"
++
++SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https;name=git"
++PV = "0.7"
++SRCREV_git = "45f0735219a615ae848033c47c7e2d85d101d43e"
++S = "${WORKDIR}/git"
++
++EXTRA_OEMAKE = "'CC=${CC}' 'RANLIB=${RANLIB}' 'AR=${AR}' 'CFLAGS=${CFLAGS} -I${S}/include -DWITHOUT_XATTR' 'BUILDDIR=${S}'"
++
++do_install () {
++    oe_runmake install DESTDIR=${D} SBINDIR=${sbindir} MANDIR=${mandir} INCLUDEDIR=${includedir}
++}
+-- 
+2.28.0
 
