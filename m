@@ -1,130 +1,78 @@
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
- by mx.groups.io with SMTP id smtpd.web12.189277.1598250145302724542
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+ by mx.groups.io with SMTP id smtpd.web10.190064.1598250149145422362
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Aug 2020 23:22:25 -0700
+ Sun, 23 Aug 2020 23:22:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=OhAXmtRK;
- spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f195.google.com with SMTP id n129so6477474qkd.6
-        for <openembedded-devel@lists.openembedded.org>; Sun, 23 Aug 2020 23:22:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=xy5QJQHFSNNvy7L1YMXwkHuvbokMO+ljemZ52eInmD0=;
-        b=OhAXmtRK8vl9Qm7gpKFvjxeZSWauz+3/ualYCN5XGko86gp8hT7W3VR0tqsuJSSfqE
-         uopDpkTrHvIUdGhJDOwT18cLJYzCe1uukmWBhQpwHL8n2zmQQSq+8mhAh4kauF2rSMEP
-         cPnWVvTAZVepXlnqhXYSyDMJkBzx3Ves+i9IdFgvKLoTGcrTu3pCM30I9MOe9chSl2JL
-         Wuf8TexgWNMN4ikmrzq3G8jrqU+LAFVCDa4X++PxfF2kwZLeW2BsS0CeJx9PK1Ohpk7T
-         vjp2Yc2r3uZpfHig+GHW3F6AD9lnegFgPSXIo24+lDMpTX0H1b3/KFbz17IwDijm8kOM
-         0ekg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=xy5QJQHFSNNvy7L1YMXwkHuvbokMO+ljemZ52eInmD0=;
-        b=BdesoLcbjDIQ547WjJzb63TE7ChZ0bFsaloN6/8Zp84WhoqJRGPWAynXbaBym40LpZ
-         8KxzzicRAxP63RX6X45Aep6ElUXZIC3iGLMtAOKNhE0OMGHnAT4VQKJyuaVAqfCwjc6n
-         hARypLqD7yuAL4Ixsac3UakiqQj5DlhG/ZVd3hR8rkBoSIaCLt6qZR6AZFjfF4RWoHPS
-         5Ths6sTNfJ2IAvrOEzSRs27/VegRnBZ9WH56jAqqCR2oCaFd3djGX4o0ubQY1bY5gpe2
-         XtlwJG3mhqKxvoXac8M/5SEu9B4w4f7/+qsTKYnvy9/Lzumzq3ijZuY7iZSQHpfKCPq3
-         aqQw==
-X-Gm-Message-State: AOAM532ZsxKdbCj9Tw3Z2rgpHVUWzPANQBGKAFSxKmRxpLSyPJGsP0Cm
-	0Z5x9g/0kniTqux8WumVTPB+PjiSYt5LJro37dI=
-X-Google-Smtp-Source: ABdhPJwJ2Ub1ZcjluTc4mjMMVLfvUsq/i+vKqqAaP92k+MdjAjb47YszikEC/X+gDgTxThX9dZO8JW40NNh6tbLxKpo=
-X-Received: by 2002:a05:620a:48:: with SMTP id t8mr3449949qkt.474.1598250144335;
- Sun, 23 Aug 2020 23:22:24 -0700 (PDT)
+ dkim=pass header.i=@skidata.com header.s=selector1 header.b=C8189Dvu;
+ spf=pass (domain: skidata.com, ip: 91.230.2.99, mailfrom: prvs=498d700d9=richard.leitner@skidata.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+  t=1598250149; x=1629786149;
+  h=date:from:to:cc:subject:message-id:mime-version;
+  bh=FVGx4I7GcQtKpJ4xVglwtvoVYpvBu8aKpuVYLWO/AZI=;
+  b=C8189DvuyY4RKPUmvx2L1tpAhqh7E+bemF37Xqa8Z9A580t0Bwe4fCa/
+   CtHaqjs/Hr+flgYiwkns/KGL1yFMXDJz3bdM+XmrXPc95Arx6G+01GGr+
+   JRLl3mBAEacL3bDO6zsJB+ovkfitIQy+v/a1mR8WkkOKihELuGRmRrmCV
+   jkf7uo+RwPYLb87Tn45sXWs3VIKJZ+SBPG4BTT1fctQFQi3Es1IWkGsyd
+   fBzvevn2uMtuQAAPmCbhGm9p5kaEd4XbuxZwesTVtsN/UZPATBO0p8yGz
+   +uZDnK1tFXJl9rATCcVIAEGDpnlVj7u1P9FQuRwGFjGEcQNh65hfdFnR8
+   g==;
+IronPort-SDR: z/90b0AFq3czz62KnWyfZm2IvX+vgJBOoaKw1x4jA+JP3WtyoK2qXRNm9lPGMwaq8xmG2FKtdF
+ Jzxjc6hBSNVKpRpNBbdoCvJGo4RuhCC34Jqhbh6M2rf0GSSZDdy3V5EG6LvcauLWonAjRtixHg
+ MkZUOwMrjIX7a2Fw1/spyLTBHDBrQEieFu4Nd36Au7lewVGglzFdJOPoot5qzlysTiA5ENKuMZ
+ tTf36QyhwJnXvtNIKWtkfo5k2hsOwu3ytYPTg39LxsNOGYSUPwPxCSV5GUXSdxjpnrHD2MkwQF
+ lB4=
+X-IronPort-AV: E=Sophos;i="5.76,347,1592863200"; 
+   d="scan'208";a="26327128"
+Date: Mon, 24 Aug 2020 08:22:25 +0200
+From: "Richard Leitner" <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <alex.kanavin@gmail.com>, <jpuhlman@mvista.com>,
+	<Vyacheslav.Yurkov@bruker.com>, <fabio.berton@ossystems.com.br>,
+	<robert.berger@reliableembeddedsystems.com>
+Subject: [meta-java] Changes from master-next merged to master
+Message-ID: <20200824062225.GD65616@pcleri>
 MIME-Version: 1.0
-References: <20200824060235.196568-1-richard.leitner@skidata.com>
- <CAMKF1sr022VGqvOj1SjBUofe_PGiTBNScXxv6rbip1P8BZjgDg@mail.gmail.com> <20200824061139.GC65616@pcleri>
-In-Reply-To: <20200824061139.GC65616@pcleri>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sun, 23 Aug 2020 23:21:58 -0700
-Message-ID: <CAMKF1soSvpMctpqNouSwMm5mtBXWX03mUU2Fs+T4A68NCEHOXw@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] liburing: add v0.7
-To: Richard Leitner <richard.leitner@skidata.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Return-Path: richard.leitner@skidata.com
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
+ sdex5srv.skidata.net (192.168.111.83)
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On Sun, Aug 23, 2020 at 11:11 PM Richard Leitner
-<richard.leitner@skidata.com> wrote:
->
-> On Sun, Aug 23, 2020 at 11:06:14PM -0700, Khem Raj wrote:
-> > On Sun, Aug 23, 2020 at 11:03 PM Richard Leitner
-> > <richard.leitner@skidata.com> wrote:
-> > >
-> > > Add initial support for liburing v0.7.
-> > >
-> > > Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-> > > ---
-> > >  .../recipes-support/liburing/liburing_git.bb  | 21 +++++++++++++++++=
-++
-> >
-> > better to embed the PV in recipe name, so call it liburing_0.7.bb
->
-> Ok. So we're using PV in the recipe name also for recipes where the
-> SRCREV is a git commit id?
+Hi,
+this is a note to let you know that I've just merged the following
+changes from master-next to master:
 
-right. its easy that way to bbappend it etc.
 
-> Wasn't aware of that. Thanks.
->
-> >
-> > >  1 file changed, 21 insertions(+)
-> > >  create mode 100644 meta-oe/recipes-support/liburing/liburing_git.bb
-> > >
-> > > diff --git a/meta-oe/recipes-support/liburing/liburing_git.bb b/meta-=
-oe/recipes-support/liburing/liburing_git.bb
-> > > new file mode 100644
-> > > index 000000000..87c919e13
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-support/liburing/liburing_git.bb
-> > > @@ -0,0 +1,21 @@
-> > > +SUMMARY =3D "This is the io_uring library, liburing."
-> > > +DESCRIPTION =3D "liburing provides helpers to setup and teardown io_=
-uring \
-> > > +instances, and also a simplified interface for applications that don=
-'t need \
-> > > +(or want) to deal with the full kernel side implementation."
-> > > +HOMEPAGE =3D "https://github.com/axboe/liburing"
-> > > +BUGTRACKER =3D "https://github.com/axboe/liburing/issues"
-> > > +SECTION =3D "libs"
-> > > +
-> > > +LICENSE =3D "LGPLv2.1 | MIT"
-> > > +LIC_FILES_CHKSUM =3D "file://README;beginline=3D41;endline=3D44;md5=
-=3Dd51b5805e2a675685e6a66ca50904cf9"
-> > > +
-> > > +SRC_URI =3D "git://github.com/axboe/liburing.git;branch=3Dmaster;pro=
-tocol=3Dhttps;name=3Dgit"
-> >
-> > No need of name=3D
->
-> Oh, you're right. Thanks. I'll send a v2 soon.
->
-> >
-> > > +PV =3D "0.7"
-> > > +SRCREV_git =3D "45f0735219a615ae848033c47c7e2d85d101d43e"
-> > > +S =3D "${WORKDIR}/git"
-> > > +
-> > > +EXTRA_OEMAKE =3D "'CC=3D${CC}' 'RANLIB=3D${RANLIB}' 'AR=3D${AR}' 'CF=
-LAGS=3D${CFLAGS} -I${S}/include -DWITHOUT_XATTR' 'BUILDDIR=3D${S}'"
-> > > +
-> > > +do_install () {
-> > > +    oe_runmake install DESTDIR=3D${D} SBINDIR=3D${sbindir} MANDIR=3D=
-${mandir} INCLUDEDIR=3D${includedir}
-> > > +}
-> > > --
-> > > 2.28.0
-> > >
->
-> --
-> Richard Leitner
-> Hardware R&D / Senior Embedded Linux Engineer
->
-> SKIDATA | Driving Your Digital Future
->
-> SKIDATA GmbH
-> Untersbergstra=C3=9Fe 40 | 5083 Gr=C3=B6dig/Salzburg | Austria
-> [t] +43-6246-888-4245 | [m] +43-664-88616370
-> [w] www.skidata.com
+Alexander Kanavin (1):
+      openjdk-8: add a glibc 2.32 compatibility patch
+
+Fabio Berton (2):
+      openjdk-8-native: Add libxtst-native to x11 packageconfig
+      openjdk-8-native: Build cups-native when using cups packageconfig
+
+Jeremy Puhlman (1):
+      icedtea7-native: set ALT_CUPS_HEADERS_PATH to staging
+
+Richard Leitner (2):
+      openjdk-8: refresh patches
+      cacao: update to latest git version
+      openjdk-8: update to latest ga version 265
+
+Robert Berger (2):
+      icedtea7-native: host gcc-9, extra CFLAGS needed
+      WORKDIR and ARCHIVER_WORKDIR support
+
+Vyacheslav Yurkov (2):
+      jlex: set unique file name for download
+      icedtea7-native: set unique download file names
+
+
+If you want to see any of those changes backported to stable branches
+please just reply to this mail or send a patch.
+
+The patch "icedtea7-native: set ALT_CUPS_HEADERS_PATH to staging" by
+Jeremy is already scheduled for dunfell as mentioned in the patch.
+
+regards;rl
