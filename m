@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.196104.1598280617359861133
+ by mx.groups.io with SMTP id smtpd.web10.197021.1598280617866028517
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Aug 2020 07:50:17 -0700
+ Mon, 24 Aug 2020 07:50:18 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=39680 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kADnc-0006gX-Gn; Mon, 24 Aug 2020 17:50:16 +0300
+	id 1kADnd-0006gX-0G; Mon, 24 Aug 2020 17:50:17 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/7] python3-inflection: Upgrade 0.5.0 -> 0.5.1
-Date: Mon, 24 Aug 2020 17:50:01 +0300
-Message-Id: <20200824145004.12568-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/7] python3-typing-extensions: Upgrade 3.7.4.2 -> 3.7.4.3
+Date: Mon, 24 Aug 2020 17:50:02 +0300
+Message-Id: <20200824145004.12568-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200824145004.12568-1-leon.anavi@konsulko.com>
 References: <20200824145004.12568-1-leon.anavi@konsulko.com>
@@ -30,33 +30,37 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.5.1:
+Upgrade to release 3.7.4.3:
 
-- Fix type hints not working
+- Add SupportsIndex, added in Python 3.8
+- Make tests for Annotated work with Python 3.9
+- Add PEP 613 TypeAlias to typing_extensions
+- Add tox.ini for typing_extensions
+- Remove extra 'use' in readme
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ython3-inflection_0.5.0.bb => python3-inflection_0.5.1.bb} | 4 ++--
+ ...nsions_3.7.4.2.bb => python3-typing-extensions_3.7.4.3.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-inflection_0.5.0.bb => python3-inflection_0.5.1.bb} (77%)
+ rename meta-python/recipes-devtools/python/{python3-typing-extensions_3.7.4.2.bb => python3-typing-extensions_3.7.4.3.bb} (66%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-inflection_0.5.0.bb b/meta-python/recipes-devtools/python/python3-inflection_0.5.1.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-inflection_0.5.0.bb
-rename to meta-python/recipes-devtools/python/python3-inflection_0.5.1.bb
-index 0a3b7734c..b5cde669f 100644
---- a/meta-python/recipes-devtools/python/python3-inflection_0.5.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-inflection_0.5.1.bb
-@@ -4,8 +4,8 @@ LICENSE = "MIT"
- SECTION = "devel/python"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=2fb6fa1a6f1792d78de19ad1bb653c31"
+diff --git a/meta-python/recipes-devtools/python/python3-typing-extensions_3.7.4.2.bb b/meta-python/recipes-devtools/python/python3-typing-extensions_3.7.4.3.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python3-typing-extensions_3.7.4.2.bb
+rename to meta-python/recipes-devtools/python/python3-typing-extensions_3.7.4.3.bb
+index 51e9eda2e..8ef15fab7 100644
+--- a/meta-python/recipes-devtools/python/python3-typing-extensions_3.7.4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-typing-extensions_3.7.4.3.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=64fc2b30b67d0a8423c250e0386ed72f"
+ # The name on PyPi is slightly different.
+ PYPI_PACKAGE = "typing_extensions"
  
--SRC_URI[md5sum] = "87b2ab6ffdd6e15aa31d109ce5ff10bb"
--SRC_URI[sha256sum] = "f576e85132d34f5bf7df5183c2c6f94cfb32e528f53065345cf71329ba0b8924"
-+SRC_URI[md5sum] = "c3287d4f0e3bdf625a52d655cc514403"
-+SRC_URI[sha256sum] = "1a29730d366e996aaacffb2f1f1cb9593dc38e2ddd30c91250c6dde09ea9b417"
+-SRC_URI[md5sum] = "f2674282966dc088d10170c2347431cc"
+-SRC_URI[sha256sum] = "79ee589a3caca649a9bfd2a8de4709837400dfa00b6cc81962a1e6a1815969ae"
++SRC_URI[md5sum] = "5fcbfcb22e6f8c9bf23fb9f8e020f6ee"
++SRC_URI[sha256sum] = "99d4073b617d30288f569d3f13d2bd7548c3a7e4c8de87db09a9d29bb3a4a60c"
  
- inherit pypi setuptools3 ptest
+ inherit pypi setuptools3
  
 -- 
 2.17.1
