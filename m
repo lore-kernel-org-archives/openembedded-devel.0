@@ -1,17 +1,17 @@
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.48])
- by mx.groups.io with SMTP id smtpd.web10.12725.1598359312721286100
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.48])
+ by mx.groups.io with SMTP id smtpd.web10.12734.1598359332344975023
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Aug 2020 05:41:52 -0700
+ Tue, 25 Aug 2020 05:42:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=KDPUhQQt;
- spf=pass (domain: windriver.com, ip: 40.107.223.48, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=hh1ewYuL;
+ spf=pass (domain: windriver.com, ip: 40.107.237.48, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WzNMw35tk9yov1KTC6QY9F5mfH8lLnxN1evQ4GNt/FI8B3Qe6/6UcZh4UJ9Pfk8h7AM7Eq5XN8ensDNr6E8PEBslc3H641hwXn4s2dZ/roEGOrTolreZtjcengUsJEDIW2aFVKAq6+x+VUPGzHRepJBnoNOz34mwe1V4YXqeBFkYynMiEnUxavwEoswVW8st+lJooKLjnJdf4XkYrH6NhDRj8snUB6u57U3ORXXNDN+soEP1uGuWTw5pj8g+nR/b21Oz3pUcX10180K9Bbk5SMUlHgs6PlY60elPI0+qal8k/u237WdrA7NARPuCxwQdLL6srzI4T9Jend00Nb7PGQ==
+ b=YZSBUwIfRSdoeTmYgA6FQo+tRMKBLvrpxmyohANedAcSGc+0ob7VpPp7aEHvNQ2fKx/ScXhs2QG8t2GpcA24SgZQF/3xljtCdmRtjrhjvlqzkth3mo0NpIMCmKowgZTZAqowYSF5jA4gj6GgCOc2THxXgVe8nqeo9aQZVxmvncvOFqDBE4qYKBg9o6Fzli5cdBeqyp55KK8Z7EsY06bCy5vnXZvYQaIphF4HkpyySbNxNeiOD+sdntx7Gz/MNeVAahz5lzyI0KzWs5vV6WDipgvybsYb9Q78d0SMRDfgOntg8Wd2OU2WascVTKfGSrvndHxbEpzwMT+GQSMEBSmvUg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hApfAMLh+XFGVR+960Y1KMBw6uP7GkZhoyWqC0sOEFA=;
- b=a77o1mC0xMziO7avi5dklz7UrHIO3i+h9xnPsE116QnqDSk1UU2ym8kjlnU5nCNmVrbHQ5LHOY8mDmT3KEj0ZKwLxcfFPwi7Vuvl/zRApmo7yApfwHJk20lFJcYCEn0V3jHOzxlRvKR1xPnGK17KjAFMNfZ+eHaW9IKivUfajKDkh8oLHYx9KxNiCoG9maA0SvnzDZxTm4e/BEBN0k8eklC2I5y+itFaHNMXRar1UtjpbsFHh9wfJgplYzhUQv+05cHXoLMy5M+US00Q0BTKk+JeOoE9C3XPzawn8gmktrzl0TGKQZyew3kLPDgAfUv4kVAD2oWnLzPYt11e5/MK3g==
+ bh=PkL42C5SAHx8tCTUeT+HSZGMxeDc205z/NY8uH/k8w4=;
+ b=BxVbiY/NhrQ8le84mg3Y8xfQ841gZRlsqpL3SkfFBzqb3iq5dGnhFNunYWS9Crd9Ml58OWaW1BB3JiGLvcjsIp3qj86isWhsFtn3yNzeZp1YCCb7SWdIboYgksHDki0a6/Gijmw2CY8snGGtbJmg6n5CZTW6wefIJdCAL4Tp6KunMVlje+pnppRlUW7Ev97SHRAaP+Iat51GNd7OY2KksQkHZams4yOQhIeheQLsiNcUumvqes0NCMzK3u9ciK6Z0HZKQu4KqGjzGWlbseoS2PyQ6378UCUWqAImCbLdqMwiIcieXe7UynMzVeXx4O8Cqw7aD02HRGyZN0xI7Cxi0Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,114 +19,103 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hApfAMLh+XFGVR+960Y1KMBw6uP7GkZhoyWqC0sOEFA=;
- b=KDPUhQQtCF5pft6GZF1yavEFtvvrMv1v94hy9iwcLKdFlHKsaqhyJqGeGAx8rrG9KQTAbU/PcqSwXqs3fhZXUpv9FFsC19RG77hbg5V5DcamX5xD3frYbr7T1m7fi5aKKLyiF7sfw61O5/Lr//hbidmK+J4PNZi8Iubx3cKtHMw=
+ bh=PkL42C5SAHx8tCTUeT+HSZGMxeDc205z/NY8uH/k8w4=;
+ b=hh1ewYuLsStPzwTKDU2ijvLQ74JGQxsK9Ijh9dY1KrHl3OlPx3Z4JRaIRq4/hF60rIhn9TVICq3/p2sot8eUFiB+whBuEk2+sleQA1ZY+cEH7mGWPNokSvmYeazLGn0uUR6OFNaK6D/4WvkGzUOM6mmu450HAryWcWp11E+3xYQ=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BY5PR11MB4260.namprd11.prod.outlook.com (2603:10b6:a03:1ba::30) with
+ by BYAPR11MB3766.namprd11.prod.outlook.com (2603:10b6:a03:b5::22) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.26; Tue, 25 Aug
- 2020 12:41:51 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.25; Tue, 25 Aug
+ 2020 12:42:11 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8%7]) with mapi id 15.20.3326.019; Tue, 25 Aug 2020
- 12:41:51 +0000
-Subject: Re: [oe] [meta-python][PATCH 06/11] python3-custom-inherit: Add recipe
+ 12:42:11 +0000
+Subject: Re: [oe] [meta-python][PATCH 07/11] python3-nocasedict: Add recipe
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200821234504.719-1-leon.anavi@konsulko.com>
- <20200821234504.719-6-leon.anavi@konsulko.com>
+ <20200821234504.719-7-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <3130f4a4-1993-69e4-0b43-93b2146bae69@windriver.com>
-Date: Tue, 25 Aug 2020 08:41:49 -0400
+Message-ID: <df223842-f59f-9ebf-4018-55ee518ac103@windriver.com>
+Date: Tue, 25 Aug 2020 08:42:07 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200821234504.719-6-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTOPR0101CA0001.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:15::14) To BY5PR11MB3909.namprd11.prod.outlook.com
+In-Reply-To: <20200821234504.719-7-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTOPR0101CA0036.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:15::49) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from 255.255.255.255 (255.255.255.255) by YTOPR0101CA0001.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::14) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.19 via Frontend Transport; Tue, 25 Aug 2020 12:41:51 +0000
+Received: from 255.255.255.255 (255.255.255.255) by YTOPR0101CA0036.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::49) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.24 via Frontend Transport; Tue, 25 Aug 2020 12:42:10 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: ac36c98e-a70c-4e20-1eaf-08d848f43d8b
-X-MS-TrafficTypeDiagnostic: BY5PR11MB4260:
+X-MS-Office365-Filtering-Correlation-Id: 9b4fd2c5-db5d-4f75-8c27-08d848f44908
+X-MS-TrafficTypeDiagnostic: BYAPR11MB3766:
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB426070E2D0CD4732A7F6C4B99F570@BY5PR11MB4260.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
+	<BYAPR11MB376621C617AFB5FA19AF15F99F570@BYAPR11MB3766.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:404;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	TmwfJnyusKP5GfXIC6jDpE34kTjwV54rqTHztf7a/fBtY+qkd7jRacm82CElmmVlfIH1+79gaCxdtiHGzYog9UwsIxqA1C0gDx72Dl2cx3BTz79e4VSUgx8t6bGBWkeQpiORsOxMIc+txMbuIEOT2Nsj4JNr3TXJ7nFLrpQxCgVBEUbu8pwL9ydRNKHokp681Pb7An0Pt2n5dRnMv1JfnTtBEoTsPMBGA+lboMUoh61mbPNdyn0sJsAMIcmxOULqK0L1wEWS2AC0Mgq+ofM21Kf8B+vAeiZoSniG/URf2qznC1lwXVGvm/PpsgNQ9ToTeK55HMEVm7weKKZqKZhkSOw2DgaftGz18+W4xM9ImuYizF3sZJSf0CJh2oUxUQ5ayG+r0CR6upF7CXG1RFgT50Jb8LKoRKir4RGvUbtjvfBgorAut/n/50m2/uVtTSuX0ZEHWsiyJYuoDgbjtVYnSw==
+	ZIwIE9Mh/IzYtAcWg5L/J6Aspf/ximHOgFc+APJ7AuZaE4MusV+w5EuONnYsg/CuoBnt6MjsuEhn6dhJWFdHH0rypMNyy5D5Kkk7yRGwHrIjkFD9/Kp8/IjXU1wuImQXjyDiFbbITycDF2NFVM0qoET7Om+7SV7BE6LeiFLKJPbmYLPD2mYeStM+6tI5SEbocyl4t+TrVaxsjCHe5s0yk+46K5J4QS+0Tc//WmJjxjWyXzgYbf1iqRCo3L9Sd48e9Bv/JkR4iPmxBzNPWBN1qSEmLLkoHC63fU4/JO3mkb2Z0OtAzcdrnjSnL7ozDFE6HOtoJeGY85CGMvKEPe57+WeErLHGVT00slThpw3wLqZejBTOsSriZhLBF7spipvbr68ZXG+LY8sAs6HyuTzd1u9Kl7wRrkcELE5V76r6aWyY3inixoTxUevzL53w0b/4BCkdBXVGCbgINun84Sf2Yw==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(39850400004)(376002)(396003)(136003)(366004)(186003)(66556008)(66476007)(52116002)(66946007)(6486002)(966005)(8676002)(36756003)(33964004)(316002)(5660300002)(16576012)(31686004)(31696002)(26005)(86362001)(53546011)(2616005)(956004)(44832011)(166002)(478600001)(83380400001)(2906002)(8936002)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(366004)(346002)(39850400004)(136003)(396003)(2616005)(8676002)(5660300002)(6666004)(26005)(956004)(44832011)(86362001)(53546011)(316002)(33964004)(186003)(6486002)(52116002)(16576012)(31686004)(478600001)(966005)(83380400001)(166002)(31696002)(36756003)(8936002)(66946007)(2906002)(66556008)(66476007)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	8BfHcdpPYz/dNrvItTnKWIZgz7bJFAPdCk6L39wRXQq6H2tbxytqs5DpiNfGuvQkh5cql5vtv/WTae8/aOdP8sVgwaenbIkIYLdqSh8kdh+DNiWup5XNzH8WKIGlRgJ4ElYrmz1xIhCeEjUOHAQCYuu9BdTjI5gnBJFjEuRVzIfswkKJDNz+dpm07Xi8UBL0XKeflhUZeGgkUhTwBQzIvWEiVq4BoHzGuV6URmlKB5tBoLSyM5t1y7e16EDbULd8wrJqFO+WJ7s9bLZtf+PGLEb5Uz/4e4HENfch+4S1UJ96VZjHeFJiBbvt35wt7Dpk8S7a+rC1RInomqtT/u/LOoZw/C/yuy7DAK8pdRtNiFm1nD4AWYy0r4OAydBHP3HjLJfZwR894dd6DLi2fJEOMxVJgR5qj5RYOfwF6FhhjoKgww12FloE/uA0xOkUg85t+kK3KqWIqCT7zMRD3KeYtnzxXRG/kiP+WFELjbLJwF6FEoizkXPhjA0GDUE9Tq42jYBKPFY/2gqpetV5aJjRYgKRNuEpie/mCWsln58ESYqBn1pRNexj2Usxv0bJGyEkKxbk98+CRs62SFkn1IjhuBYQBzDum6Tx8tKuIT+ZQmDUXQAyJ12AK+fGobMRxTxkFUjiyW9As2bmPBHV0zVMog==
+	O+S78vcEbssUpKMaPXXC05kI/fkoRkjU4hvtq59Iz82AgNauD61ZSnWaZh5ZFT3mzViTkpA3vprxx/yYoVrNWWiJSV7biLU08HGaKJOd5YB9l9CQhHV7srPdDChsA+E/Eb/+fT8Tf2jFwjw93C7y5ZYbfa4jZcaUYrBWIIp+RxcL90+ScsybLoEypULeh2N9D60l+p4pDxb2AiDeAeO4OMkKiNC9lWnrtwPhH6ANn0xRxvnpxoe205eX9q3AgK9MYxRt/chb4LMTc156N2nCR/NyQTZdZ/hTa6dhEUyeizKXw2vg6/CKqVdRSIV6EPeytAZU3kc7l7AAis6wjB/vA/YmHTF4M/WX9u503Nsqu6u5huk6Yrf17zvrqWpYNTtVprbLXBpujmzJvaQRvbTfxPI5x4KKkc930+OLRvGsWK8zDaRdeqmPmtrLUpy64vlIOllXl1oZ/GN3ZbzGBVUXmUOl0XNNchkVArw1gIG3FL/ztHhVALRcxnsuClQmOm4/Muf85IvBX1RVYKErX3xOFciwumd6vrWCb02OFCeG+lNG7E4DXKocJX+Dom25P/mgPVJdIhX7t1wdboYGTbBwlRZLl+C8Gcm5qHOnFOZt1vRhikvHFKUC71OJh4mmvEMmYGQSiFKmvcNr/4j+RfAufg==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ac36c98e-a70c-4e20-1eaf-08d848f43d8b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9b4fd2c5-db5d-4f75-8c27-08d848f44908
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2020 12:41:51.6451
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2020 12:42:10.9171
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +klr4W7ZIY+7tdq88o6eN4dabUqn+E9r+dArqb88e1oKMHOFNDm5lGAHklUF6iLRd/F4JF6/VN3q8QvLVTYjhXUHjJZwhME28RhwVeqmkik=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4260
+X-MS-Exchange-CrossTenant-UserPrincipalName: I+9z/G25TogVMzzU6k7yiesCcN4YcTIqb+GiMSZQh50Q+tGSamk7T1Ud4gN3ZLWFzuiV2OHZTcl3d4Aq6EChQ2e66Nr/Kv/rqwhC5vWd0j8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3766
 Content-Type: multipart/alternative;
- boundary="------------050EEC0E474BEEBDE27E7F28"
+ boundary="------------365D09B17878FCA56EB70A83"
 Content-Language: en-US
 
---------------050EEC0E474BEEBDE27E7F28
+--------------365D09B17878FCA56EB70A83
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 8/21/20 7:44 PM, Leon Anavi wrote:
-> Add recipe for custom-inherit, a Python package that provides
-> customized docstring inheritance schemes between derived classes
-> and their parents. Changelog for release 2.3.0:
->
-> - Add three new built-in styles, numpy_with_merge,
->    google_with_merge, and numpy_napoleon_with_merge, which permit
->    users to concatenate the respective sections of a parent's and
->    child's docstrings.
-> - Also add is the ability to configure DocInheritMeta so that
->    special methods will have their docstrings inherited as well.
+On 8/21/20 7:45 PM, Leon Anavi wrote:
+> Add recipe for nocasedict, a case-insensitive ordered dictionary
+> for Python.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python3-custom-inherit_2.3.0.bb           | 12 ++++++++++++
->   1 file changed, 12 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb
+>   .../recipes-devtools/python/python3-nocasedict_0.5.0.bb  | 9 +++++++++
+>   1 file changed, 9 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb b/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb b/meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb
 > new file mode 100644
-> index 000000000..489e71984
+> index 000000000..440cf5109
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb
-> @@ -0,0 +1,12 @@
-> +SUMMARY = "A Python package that provides customized docstring inheritance schemes between derived classes and their parents."
-> +HOMEPAGE = "https://github.com/rsokl/custom_inherit"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=adc1f231c76ee2f1f36025d56926ba2c"
+> +++ b/meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb
+> @@ -0,0 +1,9 @@
+> +SUMMARY = "A case-insensitive ordered dictionary for Python"
+> +HOMEPAGE = "https://github.com/pywbem/nocasedict"
+> +LICENSE = "LGPLv2.1"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742"
 > +
-> +PYPI_PACKAGE = "custom_inherit"
-> +PYPI_SRC_URI = "https://files.pythonhosted.org/packages/0e/82/c5bb7ec49a7892a2c583e1017597e3921c59171f10602086ca93c8a83baa/custom_inherit-${PV}.tar.gz"
-> +
-> +SRC_URI[md5sum] = "adf2850dc0e488df959821a5d4c16cbd"
-> +SRC_URI[sha256sum] = "1609d283c2cffce3a58baf7c0c22b655c55f85e1ec39c4717a4423d34610723a"
+> +SRC_URI[md5sum] = "b1037d65f1f73322c3c2d76681195bb3"
+> +SRC_URI[sha256sum] = "ed74b83c7b81505ccaf4b09b0581477fdd5c1099c929098a6a170a91ec26fd33"
 > +
 > +inherit pypi setuptools3
 >
 > 
 
---------------050EEC0E474BEEBDE27E7F28
+--------------365D09B17878FCA56EB70A83
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -136,46 +125,35 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 8/21/20 7:44 PM, Leon Anavi wrote:<br>
+    <div class="moz-cite-prefix">On 8/21/20 7:45 PM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200821234504.719-6-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Add recipe for custom-inherit, a Python package that provides
-customized docstring inheritance schemes between derived classes
-and their parents. Changelog for release 2.3.0:
-
-- Add three new built-in styles, numpy_with_merge,
-  google_with_merge, and numpy_napoleon_with_merge, which permit
-  users to concatenate the respective sections of a parent's and
-  child's docstrings.
-- Also add is the ability to configure DocInheritMeta so that
-  special methods will have their docstrings inherited as well.
+    <blockquote type="cite" cite="mid:20200821234504.719-7-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Add recipe for nocasedict, a case-insensitive ordered dictionary
+for Python.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200821234504.719-6-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200821234504.719-7-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python3-custom-inherit_2.3.0.bb           | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb
+ .../recipes-devtools/python/python3-nocasedict_0.5.0.bb  | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb b/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb b/meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb
 new file mode 100644
-index 000000000..489e71984
+index 000000000..440cf5109
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb
-@@ -0,0 +1,12 @@
-+SUMMARY = &quot;A Python package that provides customized docstring inheritance schemes between derived classes and their parents.&quot;
-+HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/rsokl/custom_inherit">&quot;https://github.com/rsokl/custom_inherit&quot;</a>
-+LICENSE = &quot;MIT&quot;
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=adc1f231c76ee2f1f36025d56926ba2c">&quot;file://PKG-INFO;beginline=8;endline=8;md5=adc1f231c76ee2f1f36025d56926ba2c&quot;</a>
++++ b/meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb
+@@ -0,0 +1,9 @@
++SUMMARY = &quot;A case-insensitive ordered dictionary for Python&quot;
++HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/pywbem/nocasedict">&quot;https://github.com/pywbem/nocasedict&quot;</a>
++LICENSE = &quot;LGPLv2.1&quot;
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742">&quot;file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742&quot;</a>
 +
-+PYPI_PACKAGE = &quot;custom_inherit&quot;
-+PYPI_SRC_URI = <a class="moz-txt-link-rfc2396E" href="https://files.pythonhosted.org/packages/0e/82/c5bb7ec49a7892a2c583e1017597e3921c59171f10602086ca93c8a83baa/custom_inherit-${PV}.tar.gz">&quot;https://files.pythonhosted.org/packages/0e/82/c5bb7ec49a7892a2c583e1017597e3921c59171f10602086ca93c8a83baa/custom_inherit-${PV}.tar.gz&quot;</a>
-+
-+SRC_URI[md5sum] = &quot;adf2850dc0e488df959821a5d4c16cbd&quot;
-+SRC_URI[sha256sum] = &quot;1609d283c2cffce3a58baf7c0c22b655c55f85e1ec39c4717a4423d34610723a&quot;
++SRC_URI[md5sum] = &quot;b1037d65f1f73322c3c2d76681195bb3&quot;
++SRC_URI[sha256sum] = &quot;ed74b83c7b81505ccaf4b09b0581477fdd5c1099c929098a6a170a91ec26fd33&quot;
 +
 +inherit pypi setuptools3
 </pre>
@@ -187,4 +165,4 @@ index 000000000..489e71984
   </body>
 </html>
 
---------------050EEC0E474BEEBDE27E7F28--
+--------------365D09B17878FCA56EB70A83--
