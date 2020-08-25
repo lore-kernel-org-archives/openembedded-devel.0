@@ -1,53 +1,62 @@
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
- by mx.groups.io with SMTP id smtpd.web12.13015.1598361015598282677
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.13505.1598362008272796076
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Aug 2020 06:10:16 -0700
+ Tue, 25 Aug 2020 06:26:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: siemens.com, ip: 192.35.17.28, mailfrom: andrej.valek@siemens.com)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id 07PDAD4d002791
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2020 15:10:13 +0200
-Received: from dev.vm6.ccp.siemens.com ([167.87.244.214])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id 07PDADST026923;
-	Tue, 25 Aug 2020 15:10:13 +0200
-Received: from mail1.siemens.de (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id BFA93986D68;
-	Tue, 25 Aug 2020 15:10:12 +0200 (CEST)
-From: "Andrej Valek" <andrej.valek@siemens.com>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=56752 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kAYyK-0001xr-No; Tue, 25 Aug 2020 16:26:45 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Andrej Valek <andrej.valek@siemens.com>
-Subject: [oe][meta-networking][PATCH] squid: upgrade 4.12 -> 4.13
-Date: Tue, 25 Aug 2020 15:10:07 +0200
-Message-Id: <20200825131007.28575-1-andrej.valek@siemens.com>
-X-Mailer: git-send-email 2.11.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/7] python3-bitarray: Upgrade 1.5.2 -> 1.5.3
+Date: Tue, 25 Aug 2020 16:26:27 +0300
+Message-Id: <20200825132633.875-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Changes are found at: http://www.squid-cache.org/Versions/v4/changesets
+Upgrade to release 1.5.3:
 
-Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+- add optional index parameter to `.index()` to invert single bit
+- fix `sys.getsizeof(bitarray)` by adding `.__sizeof__()`
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-daemons/squid/{squid_4.12.bb => squid_4.13.bb}            | 4 ++--
+ .../{python3-bitarray_1.5.2.bb => python3-bitarray_1.5.3.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-daemons/squid/{squid_4.12.bb => squid_4.13.bb} (97%)
+ rename meta-python/recipes-devtools/python/{python3-bitarray_1.5.2.bb => python3-bitarray_1.5.3.bb} (68%)
 
-diff --git a/meta-networking/recipes-daemons/squid/squid_4.12.bb b/meta-networking/recipes-daemons/squid/squid_4.13.bb
-similarity index 97%
-rename from meta-networking/recipes-daemons/squid/squid_4.12.bb
-rename to meta-networking/recipes-daemons/squid/squid_4.13.bb
-index 6e49790fe..873d09344 100644
---- a/meta-networking/recipes-daemons/squid/squid_4.12.bb
-+++ b/meta-networking/recipes-daemons/squid/squid_4.13.bb
-@@ -28,8 +28,8 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.5.2.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.5.3.bb
+similarity index 68%
+rename from meta-python/recipes-devtools/python/python3-bitarray_1.5.2.bb
+rename to meta-python/recipes-devtools/python/python3-bitarray_1.5.3.bb
+index 15393001a..e36a17027 100644
+--- a/meta-python/recipes-devtools/python/python3-bitarray_1.5.2.bb
++++ b/meta-python/recipes-devtools/python/python3-bitarray_1.5.3.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
  
- SRC_URI_remove_toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
+-SRC_URI[md5sum] = "ccd872c5effef77bf4028c67c0619f6c"
+-SRC_URI[sha256sum] = "38fe66d5f7720835703a07fe8d0a4b5eda87f692f3cf4fb01543407b79857edf"
++SRC_URI[md5sum] = "7cfa242b99351646fab0d76b05aab747"
++SRC_URI[sha256sum] = "567631fc922b1c2c528c376795f18dcc0604d18702e0b8b50e8e35f0474214a5"
  
--SRC_URI[md5sum] = "5d058f7f8f1db9fa4ce3db910a008b0e"
--SRC_URI[sha256sum] = "eae0ad993921e472ce36cce34674c47a224fc2868b65ef0c4b41b2f5f18378a0"
-+SRC_URI[md5sum] = "31e524a416715d6bfef30e072d2ca076"
-+SRC_URI[sha256sum] = "d09d3c31e3a7d158bda75501e763bd1cd3c3a99f5af6781ec1fd30eed2f771ed"
+ inherit setuptools3 pypi
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://errors/COPYRIGHT;md5=4c3268f394af77fbbf541875cef96a6c \
 -- 
-2.11.0
+2.17.1
 
