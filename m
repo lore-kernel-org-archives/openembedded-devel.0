@@ -1,37 +1,49 @@
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
- by mx.groups.io with SMTP id smtpd.web10.8221.1598335089510164964
+Received: from mail-lj1-f182.google.com (mail-lj1-f182.google.com [209.85.208.182])
+ by mx.groups.io with SMTP id smtpd.web10.8300.1598335560138097828
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Aug 2020 22:58:10 -0700
+ Mon, 24 Aug 2020 23:06:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=OjLiArbl;
- spf=pass (domain: skidata.com, ip: 91.230.2.91, mailfrom: prvs=499bf77a6=richard.leitner@skidata.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-  t=1598335089; x=1629871089;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=vTqWR4ZR4bKTVWylwbxr/9fSk2bQ6UHSBAXV67ZzOnk=;
-  b=OjLiArbl/cCk8lQLscQ2dz6Tl8/NYfcqAxZLyqIJJEFWSPi2Oenjh5Nu
-   bSS/vh9C7LgyapqUYdTKY/bnTPgi0KNnfUUXiFkGacmjuwur9H6eOipSd
-   y5TimRoTbwxAubUHFTc4B24FMoaDDye9jidj9xrBsHgyUKRjWAQ5mqNHs
-   0gS9mF6nucI7MeXNiWhj6hKhsiNCRRqCsU3cUi+LK1trBt+LrecXj+L55
-   +wlPwHRs/59fXOIOTGGDbQjTnICyZT71MG1tL6+FLH6X2Acv9hEHEmnzi
-   BwoZ0CxPEJtVk13uh4bOPYnwCbjmblffl+7/rMa9owOUL+etJZgqO4pSi
-   g==;
-IronPort-SDR: Me645r4zkuyzDN7pWdLNCkqB8EqeKaIll3rxOw5O16nEfAYNKx93i6kzXBuvfv4noceFqe55Oj
- gxM/pcg01h+qfz1Hs1PHSXi101PgG9PMLFGin8Ox+J01je0eOrbvda/dQQk5EiomhYvVlsO77F
- FnbeBXO45QQ2yqzRFHEzDUtkKiJZhXbQ3d+StY35CqRLcnsclr76iyzS5M0AA2vUL0QnM4jmYW
- VK63orCwNxk6QZOk372XB+v0dHwh4NmOp3me9vkRe2w6RVHcYTEp46EeOovwZeImKfCmAd6XdA
- LqU=
-X-IronPort-AV: E=Sophos;i="5.76,351,1592863200"; 
-   d="scan'208";a="2650126"
-Date: Tue, 25 Aug 2020 07:58:00 +0200
-From: "Richard Leitner" <richard.leitner@skidata.com>
-To: Alexander Kanavin <alex.kanavin@gmail.com>
-CC: Jacob Kroon <jacob.kroon@gmail.com>, OpenEmbedded Devel List
-	<openembedded-devel@lists.openembedded.org>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=WwA+rwB0;
+ spf=pass (domain: gmail.com, ip: 209.85.208.182, mailfrom: jacob.kroon@gmail.com)
+Received: by mail-lj1-f182.google.com with SMTP id w25so12352535ljo.12
+        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Aug 2020 23:05:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=o14H91faUk+yieiSGBaFeFGP0TENC/Acu/hiKPsIFdM=;
+        b=WwA+rwB0lpgwQyK+ADxsKduEwxq4hTXJTnabQw69V7tChjcsXj45Mm4NNTTfugXWHH
+         afJjbAVdMFp6v4OUs7ZUOt8KjYmTrU1t0iwKWahXCqeqRt72HN/NKy81/rtlho1jCwXc
+         lYnSRDm2D/tu2kTiI09JttTMdsjy6tExiduX7UZlJlyt2zp0jUrJMScpexbLAdv8wxBd
+         1Bxye8ERup2XG92175+IhVNdrKuERsEtgrxiy5zICeOnLDpBkU0KArTyuvnEYJt/VfQy
+         oiuKtPP5uJ1WZs+Q2IhQfAxr1eG/IRYa9pnYzqMNRCGJRHugZifHF7SOldt33OE4DcRH
+         CmDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=o14H91faUk+yieiSGBaFeFGP0TENC/Acu/hiKPsIFdM=;
+        b=g18IbDvmfJbVZVk3zLZ3xEGdPVPEJkdF/Znlx4dZBwpWbuqU5MrqdZu6xouzLYpaBL
+         oojXP7PR66GM7f7yYK4416W1XzO7rYCX9uLKQaEK4xoSx9CVTviVL/a9uo7IiHcOBtC5
+         chTyG+xdQ7vABdDF3HuzRfyWqfVF3BF8VIml7Ta5er/+eCZr1xIGeaRzL06g/d1FFaDz
+         vFEbQ2UL9J8es5Kg5LxqkyXInhogNYiUMjwUKXELWhZOARBZ79SgbxqE+G/TELW+SDx/
+         OhQ0ZKbjx5yyAy3AL60t+LUd06cZKApfNcuNCFuP3bMUkvLWO0/pk38fYg8vvWru2NRy
+         108g==
+X-Gm-Message-State: AOAM532xqBhcuCY+rdDYLWw9MkpbrNct4/hunYuNaDNpQ/XjANuL6bHy
+	E2jFHXaR0RmlzjI8xJLW2D8Gfr1SQK3vBQ==
+X-Google-Smtp-Source: ABdhPJzy6K4GZhccj/aYd7S754eNfgEoO0aEppZAkqkq7TiB4FM2qdQ0RKlU5zpibY+ME78wkHhwug==
+X-Received: by 2002:a2e:8ed4:: with SMTP id e20mr4429481ljl.403.1598335557749;
+        Mon, 24 Aug 2020 23:05:57 -0700 (PDT)
+Return-Path: <jacob.kroon@gmail.com>
+Received: from localhost.localdomain ([213.185.29.22])
+        by smtp.gmail.com with ESMTPSA id f23sm2593999ljk.74.2020.08.24.23.05.56
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 24 Aug 2020 23:05:57 -0700 (PDT)
 Subject: Re: [oe] [meta-java] Changes from master-next merged to master
-Message-ID: <20200825055800.GA37583@pcleri>
+To: Richard Leitner <richard.leitner@skidata.com>,
+ Alexander Kanavin <alex.kanavin@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 References: <20200824062225.GD65616@pcleri>
  <30416287-890a-4fd1-2262-21b2a9b68ffd@gmail.com>
  <20200824083345.GG65616@pcleri>
@@ -42,24 +54,30 @@ References: <20200824062225.GD65616@pcleri>
  <CANNYZj_LT1m2gSbhL+Di1PaFGzSYGmPVYsEus0YnSx19sOZ8jw@mail.gmail.com>
  <162E2BC2BA50B6B6.12673@lists.openembedded.org>
  <CANNYZj8fWMk1Ya+G-HbC2VVbC4HWV6x=4T=ni_cdW5-qNG1YnA@mail.gmail.com>
+ <20200825055800.GA37583@pcleri>
+From: "Jacob Kroon" <jacob.kroon@gmail.com>
+Message-ID: <1e7c4c2f-d332-de8d-42d4-83614b6266ec@gmail.com>
+Date: Tue, 25 Aug 2020 08:05:56 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <CANNYZj8fWMk1Ya+G-HbC2VVbC4HWV6x=4T=ni_cdW5-qNG1YnA@mail.gmail.com>
-Return-Path: richard.leitner@skidata.com
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
- sdex5srv.skidata.net (192.168.111.83)
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+In-Reply-To: <20200825055800.GA37583@pcleri>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-On Mon, Aug 24, 2020 at 09:36:42PM +0200, Alexander Kanavin wrote:
-> I think the site and the downloads are now properly back.
-
-Thanks for the info and sorry for my misunderstanding regarding the
-java.net site.
-
-So you are able to build 8u265 with the current master?
-
-regards;rl
+On 8/25/20 7:58 AM, Richard Leitner wrote:
+> On Mon, Aug 24, 2020 at 09:36:42PM +0200, Alexander Kanavin wrote:
+>> I think the site and the downloads are now properly back.
 > 
-> Alex
+> Thanks for the info and sorry for my misunderstanding regarding the
+> java.net site.
 > 
+> So you are able to build 8u265 with the current master?
+> 
+
+I can build master now. Must have been temporary server problems as you 
+stated. Sorry for the noise.
+
+Regards
+Jacob
