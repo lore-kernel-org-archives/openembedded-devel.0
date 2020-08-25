@@ -1,125 +1,62 @@
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com [209.85.222.196])
- by mx.groups.io with SMTP id smtpd.web10.1621.1598380802606561061
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com [209.85.208.65])
+ by mx.groups.io with SMTP id smtpd.web11.3213.1598385702581307617
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Aug 2020 11:40:02 -0700
+ Tue, 25 Aug 2020 13:01:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=qBABNsEA;
- spf=pass (domain: gmail.com, ip: 209.85.222.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f196.google.com with SMTP id p4so11972483qkf.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2020 11:40:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=6d48A7dORcJMZkWLWJb53TmnseKJCfQ6aEF3pBewDwU=;
-        b=qBABNsEArVZZJrVpfrfOuIU5ZOKpVrlp4OfzNEVwmPMuTZPO8PMBT/Fwdqvslux0dP
-         ysDpJK3CZ9fEICKIJlq/X6jhLUZWaS+9zooyoy5A3QAEQEf1eQ+ZbfOKYzSfb96doT/P
-         viMDBFvYkcwU58Hj4wmI6kivSNWigc0V75KYc61iH1yKdrKMoxiyPAlQK0/4s52yxfXX
-         ta6q0hqgigXCP4tP+gtCRbScHodoAqME2/EF4SdRVS/jmCgBLnqy+hliz/BSGbpv2SLu
-         1tk986g2fHpdknKjpFv4VvWXfNK4KXfAKTcAIC7AnTK4w+1PIG15xq2H7TFfQDlDTX7f
-         UROw==
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.208.65, mailfrom: bjarne.michelsen@gmail.com)
+Received: by mail-ed1-f65.google.com with SMTP id c8so8944973edn.8
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2020 13:01:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=6d48A7dORcJMZkWLWJb53TmnseKJCfQ6aEF3pBewDwU=;
-        b=ZaZF/1BziNmhz/63BdMDmOHue6HMkFoKPw9+72UhfxGOejvzQF28W9pToKnHE3B0R+
-         STeoPSPycwVvwjFoHvJzLpGHLzVAfsreK4hA+MVkLkJTk+3QUVqv9aiS7CAkbto3/LqY
-         34ttRCysnKrx3/uc2GiRwySAoCHUfXCQi0mXU4HfCXR9VSH6++XJBELVG4noRBwxcGK1
-         MAetJBIAXIl/sLeL4zdSN42p9Rszej/IrvOCd52niw8B2+2XJIR76VNaRuTDUsOjhK8W
-         8quY1CqjuHV+NF9Pf0kkgKfj84115tUMK9rghracgHuOVVB0k0knKnBEuHRazmKFQ1Wm
-         h/Hw==
-X-Gm-Message-State: AOAM532LX8X0MDouzK43cRAn/6MbugDk/fDKLmGrtHpizcAyFRdW3cP8
-	UXNiEMZQT+swGI9vdmqu1Vf2rXoKdEod9iDCvzU=
-X-Google-Smtp-Source: ABdhPJycbXCU96DhIHYfN/BTAVWBcD42M/karPCQUU9Ho1kZtA0fQYyibSdBp02mQ2+zaZALONr0aYYNsJbYCzR1B18=
-X-Received: by 2002:a37:9e91:: with SMTP id h139mr10211568qke.71.1598380801676;
- Tue, 25 Aug 2020 11:40:01 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=lMm3vPxw+VhILW/xhjoKIWGyoPNIJEvqio3vA+8Sqqg=;
+        b=pNuho60S+j7bg7icmKXfSMKli6szEdHQbozLpidOdAOdwpSJKBipfXfQ0MKI9nXNlp
+         ryyoiVtsVtBtXVtowVhMwG3TlGCdBvFFowMlXkEj3+pWTsvvRqpRRnyIU9wq7yc/1wXG
+         JDJEOGG/0liDXn/+yop/f5KOGnW4oX1CVqbvL9yD8wi2vd8hvumh58mwTRyxseISTrNP
+         /9wm6K7FCcG0WVeQr3ePzfyVFW+2oL+agvbXhvwIYIMOjCNHvDOFLnzI+oUs3CyxYNwy
+         fvUKfE0kjE8p7pKhPy0mHJFDcUaC+2T8gV88pKMlx0Hha9+OxtXVumeROWCeG22m7gW7
+         VzpQ==
+X-Gm-Message-State: AOAM532DdfaMBZ41YyAcA6ZtRVgd/qkIZcj+M+Q1xwSlNOi5E9+9BrvU
+	OyLAv1Mw9WZEaeqvQ+V9wBHtksiAGo4DXqoO
+X-Google-Smtp-Source: ABdhPJwdeqUI2hVm6n0JnTzeq2cfiHhsDcuCZJg0D0N+6q7f1iJIa13gTmOgwENHPtXUr6Ter5Egpw==
+X-Received: by 2002:a05:6402:17a2:: with SMTP id j2mr11761379edy.79.1598385700582;
+        Tue, 25 Aug 2020 13:01:40 -0700 (PDT)
+Return-Path: <bjarne.michelsen@gmail.com>
+Received: from bjarne-ThinkPad-X1-Extreme-2nd.fritz.box (ip5b402d63.dynamic.kabel-deutschland.de. [91.64.45.99])
+        by smtp.gmail.com with ESMTPSA id z16sm14592676eju.96.2020.08.25.13.01.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 25 Aug 2020 13:01:39 -0700 (PDT)
+From: "Bjarne Michelsen" <bjarne_michelsen@hotmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Bjarne Michelsen <bjarne_michelsen@hotmail.com>
+Subject: [PATCH] asio: extend recipe to add native support
+Date: Tue, 25 Aug 2020 22:00:39 +0200
+Message-Id: <20200825200039.2025025-1-bjarne_michelsen@hotmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20200825154524.188696-1-diego.rondini@kynetics.com>
- <CA+chaQdtuKCqc31WB1s=-K29kv-4G2fh9g87PpBzBywxE6djRQ@mail.gmail.com>
- <CAMfw5YowytuBeL3hr_82NEwrCTJjSqvJO8N-8dFVvYCH6cDHiw@mail.gmail.com> <CA+chaQf0ZC1pts6MtZzsu+bfxzppnzjaBY=ENq3sQbazpgosVw@mail.gmail.com>
-In-Reply-To: <CA+chaQf0ZC1pts6MtZzsu+bfxzppnzjaBY=ENq3sQbazpgosVw@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Tue, 25 Aug 2020 11:39:35 -0700
-Message-ID: <CAMKF1sqQGujU46Xk1Pn47uapZDMW9kigK_9CUqwaENCNkKZYGw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] libeigen: update SRC_URI to download from gitlab
-To: Martin Jansa <Martin.Jansa@gmail.com>
-Cc: Diego Rondini <diego.rondini@kynetics.com>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Tue, Aug 25, 2020 at 10:59 AM Martin Jansa <Martin.Jansa@gmail.com> wrote:
->
-> OK, I've overlooked that it's from gitlab, but are you sure that gitlab archives aren't re-generated from time to time like the github archives are?
->
-> Or are you sure that https://gitlab.com/libeigen/eigen/-/releases are developer uploaded archives? It looks like gitlab creates them automatically:
-> https://docs.gitlab.com/ee/user/project/releases/
-> like github does with tag archives.
->
+Native support is not required by anything in oe-core, but may be useful
+for some project specfic use cases.
 
-while it fixes the issue it is trying to fix, it would be better to
-fix the non-deterministic archive issue as well while here, I dont
-know if gitlab's archiving is reproducible perhaps a question for
-gitlab, but it would be ok to switch to using git fetcher to avoid
-that suspicion. What do you think?
+Signed-off-by: Bjarne Michelsen <bjarne_michelsen@hotmail.com>
+---
+ meta-oe/recipes-support/asio/asio_1.16.1.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-> On Tue, Aug 25, 2020 at 6:36 PM Diego Rondini <diego.rondini@kynetics.com> wrote:
->>
->> Hi Martin,
->>
->> On Tue, Aug 25, 2020 at 5:57 PM Martin Jansa <martin.jansa@gmail.com> wrote:
->> >
->> > Doesn't this trigger src-uri-bad QA warning? It would be better to use git fetcher.
->>
->> No warning because this is from git*lab*.
->>
->> Also, this the URL of an official release tarball taken from:
->> https://gitlab.com/libeigen/eigen/-/releases
->>
->> See also first comment here:
->> https://patchwork.openembedded.org/patch/161360/
->>
->> Regards,
->> Diego Rondini
->>
->>
->> >
->> > On Tue, Aug 25, 2020 at 5:45 PM Diego <diego.rondini@kynetics.com> wrote:
->> >>
->> >> Bitbucket is no longer the official home of eigen, which has moved to
->> >> gitlab. Update SRC_URI to download releases from gitlab, fixing:
->> >> WARNING: libeigen-3.3.7-r0 do_fetch: Failed to fetch URL
->> >> https://bitbucket.org/eigen/eigen/get/3.3.7.tar.bz2;downloadfilename=libeigen-3.3.7.tar.bz2,
->> >> attempting MIRRORS if available
->> >>
->> >> Signed-off-by: Diego Rondini <diego.rondini@kynetics.com>
->> >> ---
->> >>  meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb | 8 ++++----
->> >>  1 file changed, 4 insertions(+), 4 deletions(-)
->> >>
->> >> diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
->> >> index f638848d1..9c3d962f4 100644
->> >> --- a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
->> >> +++ b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
->> >> @@ -4,11 +4,11 @@ HOMEPAGE = "http://eigen.tuxfamily.org/"
->> >>  LICENSE = "MPL-2.0"
->> >>  LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
->> >>
->> >> -SRC_URI = "https://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2;downloadfilename=${BP}.tar.bz2"
->> >> -SRC_URI[md5sum] = "05b1f7511c93980c385ebe11bd3c93fa"
->> >> -SRC_URI[sha256sum] = "9f13cf90dedbe3e52a19f43000d71fdf72e986beb9a5436dddcd61ff9d77a3ce"
->> >> +SRC_URI = "https://gitlab.com/libeigen/eigen/-/archive/${PV}/eigen-${PV}.tar.bz2"
->> >> +SRC_URI[md5sum] = "b9e98a200d2455f06db9c661c5610496"
->> >> +SRC_URI[sha256sum] = "685adf14bd8e9c015b78097c1dc22f2f01343756f196acdc76a678e1ae352e11"
->> >>
->> >> -S = "${WORKDIR}/eigen-eigen-323c052e1731"
->> >> +S = "${WORKDIR}/eigen-${PV}"
->> >>
->> >>  inherit cmake
->> >>
->> >> --
->> >> 2.26.2
->> >>
->> >>
->
-> 
+diff --git a/meta-oe/recipes-support/asio/asio_1.16.1.bb b/meta-oe/recipes-support/asio/asio_1.16.1.bb
+index f381d12fb..0f79c0787 100644
+--- a/meta-oe/recipes-support/asio/asio_1.16.1.bb
++++ b/meta-oe/recipes-support/asio/asio_1.16.1.bb
+@@ -24,4 +24,6 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/asio/${BP}.tar.bz2"
+ 
+ PACKAGECONFIG ??= "boost"
+ 
+-PACKAGECONFIG[boost] = "--with-boost,--without-boost,boost"
++PACKAGECONFIG[boost] = "--with-boost=${STAGING_LIBDIR},--without-boost,boost"
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.25.1
+
