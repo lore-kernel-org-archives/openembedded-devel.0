@@ -1,17 +1,17 @@
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.85])
- by mx.groups.io with SMTP id smtpd.web12.12541.1598359437369628271
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.63])
+ by mx.groups.io with SMTP id smtpd.web10.12771.1598359450661156545
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Aug 2020 05:43:57 -0700
+ Tue, 25 Aug 2020 05:44:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=O2zR34/3;
- spf=pass (domain: windriver.com, ip: 40.107.223.85, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=N7wz7T+C;
+ spf=pass (domain: windriver.com, ip: 40.107.94.63, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bdKDtc4arNnwqxYFtZjwjyyJ2yxBR3JQrj8wZ14fw3bHtbz06Fi4kSJibgUk8WyR2Fb6HKbJ9pmWWFYwKs+EZEWnKFIV8YOReY9EaQ0sGZQUBYePIy/mxSRXPLJEMrzakJgXr/hZTiskpJ3USMTs0ZjhBEB3uSUgliqAQUcWfbJ1gvqDvVsEMoHHPM2aL7CaM70WZpD6MCrpwG9XWpFqcFFrx2X/CBtYlIGgM14/MzFIGOterRyAFdEwm+hRkgOpX3HgPFHyWyUvfoQ3ylNeQFk0nyFpA3LuYdVCzXGlQuKiJkvgTuv4DimTOL6cgtBjp5f/aP7IopPKdJ39HsP9WA==
+ b=PlZT7vfEoMzBU0+hylO8j7IpI5b2/8kWoXhK02wXsFKFLU37wN4iUHQjxIUP3dcCyf3s47Eiv13ueQ3ryWKT3Jk7Sdm0wXAyFbtNiumo+KyJlzInPTh1iecZVMBzRSI9zgEtiqt2rlDHiCJb5B9aUSVd82S2hv++D0cgEULdG26PKjXNJJjk/ZINrGyj2fel0417MAmMv2ahw5cer7sKL7fL7htCAc9vtcjP3G/un/Fo6oRFoRsZo3nMpS0VE8PRvMomGBrw0OB6V7lr4+S1z0eWJYbaqMQlbKlnmrnKf0rVt/kgA8xrUenOWt0kradZj94lxBoM2HHxoPuOdS7/3g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3KGST4WqkK+Tj+5WBUa4EnNGp80Lqn/0Cv4EsrvfqPQ=;
- b=QBOKIRnxVP9robT2iLa/ojw2k/iQoVf9MrFcJ1h7ZHcMJy2JlSEjXdAeMCjPBQgGmu+evhdWjss0awZJNP/Jc3Cf598dBqr3tBFqd4iiBza0m3Lna1f4bW238qYjOjYekQPsKs3NpyHmVjeuKOz29Rwb2nOc/PjOawxSivYj7d/YMIrLokQnXe0kXPZLrhM6MwtA6BYD9bDuFdGx0L90iGWmM2tdbrzfLNokCNGm429BVW70GP1BDMVV3RUI6/wRJg8UllBcHoi/x39CJOFY8k4Deq3PGWDvHYm9mdazWE1O3KeU+RuQPIwtyB6gCtHlfPjxMUgVMCkFpGwqcoidMw==
+ bh=3G6hKNsPaZNnBXFYtAz/fvCiIU4YZPudv86fmnRYx1A=;
+ b=GpSNtB8Fs1WEMkrRGa5kp892VJgXTgpezvAYQR851WInI2rIR/F9whGG3FvRVlnqoidTiLkFnzM30ivjz5tY1Tc7vC12CKy/Wd4Q0EHQSPFK/vsLc+v8Wfg9jHkGPZDIxTUpQ12tQbkB0SlfMdMWqFmMYPHWEVmYKzPA0g79a6zm4ejETcFwbPizy6Ooi7+RrSHki5p1pHqnfwHEK8h/eXymbVnTdqpkouu9+Ynh4B71jIV9GQrCeYSnlpO647aBNvO/goWq7MNZ8Rver+vI4VMp7e4SwzSToROWSy4MMLVL+QoI1aRs4gqfzrDq6xAGmwy5S2cuXtskax/1FPjqyw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3KGST4WqkK+Tj+5WBUa4EnNGp80Lqn/0Cv4EsrvfqPQ=;
- b=O2zR34/3eEaI4xXUsBLqlEPwVHsJajWF7CN53WgI/X2yestsEQt7Jkt4cSc+rO+3eTdEAsiwdwDaH+h8BT1wJY5OfJZ8Ktcm1jiKEDOhDjvLKmXQsaw2nJa+2mmgdHt7ZeVB1Eo4pgsY1eLAPnyM6cCASduPqohJjwsd2MlViw8=
+ bh=3G6hKNsPaZNnBXFYtAz/fvCiIU4YZPudv86fmnRYx1A=;
+ b=N7wz7T+CHs0PrA7TnrF8terUDjTD8VNvNYFOZ2Z57uGE3Vtdlp7t98oJYQN7oFmFjx/WBoMQkvQJxDAmR1UM40tXLDnlxCYTPMoUjaayc0ZipC14JjjejpDNM1CyOrnBdgzEcw2MGsCRu78AFJUvyvyiQG0KLlhr1vKLcAp+2aI=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,107 +28,98 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BY5PR11MB4260.namprd11.prod.outlook.com (2603:10b6:a03:1ba::30) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.26; Tue, 25 Aug
- 2020 12:43:56 +0000
+ 2020 12:44:09 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8%7]) with mapi id 15.20.3326.019; Tue, 25 Aug 2020
- 12:43:56 +0000
-Subject: Re: [oe] [meta-python][PATCH 1/5] python3-diskcache: Upgrade 4.1.0 -> 5.0.1
+ 12:44:09 +0000
+Subject: Re: [oe] [meta-python][PATCH 2/5] python3-langtable: Upgrade 0.0.51 -> 0.0.52
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200824091457.3360-1-leon.anavi@konsulko.com>
+ <20200824091457.3360-2-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <2a59492e-bba7-107b-f2b4-071f2b63aa58@windriver.com>
-Date: Tue, 25 Aug 2020 08:43:53 -0400
+Message-ID: <9aff0ff3-041b-0060-56e5-080ee25b6e77@windriver.com>
+Date: Tue, 25 Aug 2020 08:44:06 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200824091457.3360-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0151.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::30) To BY5PR11MB3909.namprd11.prod.outlook.com
+In-Reply-To: <20200824091457.3360-2-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0084.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2d::23) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from 255.255.255.255 (255.255.255.255) by YT1PR01CA0151.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::30) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.19 via Frontend Transport; Tue, 25 Aug 2020 12:43:55 +0000
+Received: from 255.255.255.255 (255.255.255.255) by YT1PR01CA0084.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::23) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.25 via Frontend Transport; Tue, 25 Aug 2020 12:44:08 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 7c5bbe68-efb7-45ae-e501-08d848f487c5
+X-MS-Office365-Filtering-Correlation-Id: bbfcbeb5-81ec-4fe4-f4c1-08d848f48f93
 X-MS-TrafficTypeDiagnostic: BY5PR11MB4260:
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB4260129CAE46A35948A47FBF9F570@BY5PR11MB4260.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:262;
+	<BY5PR11MB426010422A0AA1F3A7607A0B9F570@BY5PR11MB4260.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:173;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	b5WX2PS/2MPdU5Et4HcPN/9Xw4VoBuXQRwApdROaLcz62v9d88BjsoyQCP6kXwPoKWuYzq4RzLULAxpjAYpvtgidDkjKbvI3hLtzC57UVyE24+CCwj5FtYmiAF8s/35xYBxcKOhil3ztwSej40SMB5rk05meiGAScszn29fajRTy5aXihIYFtSvpNoKWt68SqEBp3t8rRl+hGmUq14hj0p9JVxwObdHpDXWiY9fg3r0IH5icGnmxNVTab17xadQGm8cW/Aqp/uI1K4ohUgcwp4ZW8L7aNxQt/+37Dz3Q+J2wzbmpx4LRHpj385MFrPCRm3pNs38+wn48U2XxGeTCsIZB6Kfkf2bBMwi6YosSNdg/Xh7f6oRGijao5gNr7w5DVHb8wJ1DQvNUHFNfuSy3/tIBBBmIzMseIMw9ydnBDGdV+DgqbYfMYLXC5fngzKpiezwaWH4Mod2WdlIlbk4u2A==
+	hv919UpMxVwCegPk4Fi/s7hrNdtSLK1mZX95Z0YTb6wnrvYOdEyvVX12GyKr4BTLMRz6X5tXgV0vrQySHeCdUnWESYiVJuCK7VCx3/6fqQIsS5l7o+g1ZMkBuyb7pyFSrvKXZoKBNesS9NOWa3B5CbzMQgJS1MnT69v0NAS39meGYB79a6LRRm0nxZPk+W1iVP6ZXib72CZKMLBDKrVI6ByjE2iWFS9D2jwcSvcpIRD9Le3R2wE4vZqWAvfsOtWIjoiayLt/525hQr67kNaTXz0t9N03/jgPNrJV1WxFLMdhgFZT6oGupyA3/JYgN8RUdtZI+SUhrpOPhU75fCOn2gZDWPHB9DCCpPBwkDk0Ty0PafkS21wC5ZuPW7gkkL7zSPVaEAgIJk3hucrPQ76YGEIvNe3x6rreiBxLZNvkikKENyjX1hP1zccpVq6gwhDMWvLDZq5HP0RlDIGNnYn1vA==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(366004)(136003)(376002)(39850400004)(346002)(86362001)(2616005)(956004)(53546011)(26005)(83380400001)(2906002)(8936002)(44832011)(478600001)(166002)(8676002)(36756003)(33964004)(966005)(186003)(66556008)(66476007)(52116002)(6486002)(66946007)(31696002)(5660300002)(316002)(31686004)(16576012)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	c/xW77ULg4/otCynEyQz9RyUDDvs9n3h83UyqgIaVuOW6Kj+NJbt5IbOddZr8+zhDrCgcJWBG9RU1PDkxebmRe4yFvNYvRlmy7HHHiAkLLXMsZ+BEmc/2JK2sSq0xvtH0ueAKnIv7zUDbwSqtpSpt3bhRmqs+DF4N9ljKM2UfANnnY5PSOdCHwq1Ph9mt+Ihldo4t6OdsS4Kro6+JLjUkJlrnyr7amsFxIPJ873/X3bgU3Y68YCn7uAYYIxKzDk9QKeJxoWwuuMWuVji0j9GCJYb1rvze94Vcb0kxLkPXV4YTIuI/crJvyqI/TM7iDuABVsjgrDg/pUTxfEvnMj9v/b0bLNiK/jvUW9Ex/BdFCocdt3sDyD9OfajynSYEeS55SOxOVm7E8XCaTdCIvh9pyGDgvoLlO01g+lO2zTemEqvdbmaiskM8KKs2TyZuIeU50sY4OtQZpU4MCE5qaLlqS133LGLO/+ZzwgLjiFewv+XY6nGAxJbJvREzm+Cxptil5JoeWzvGL+1K3LqYwpqXF/2cnYILda35un+T6vv4n/r5lUCqZbX2iHfXYrl9azbrOgLVcPvv3SCG0RecJTHC3A1Uw+CtqsLm0ObF+14UMBgGlORKHYqbcfLCyAOpn4UVpoCX4zhD+DYUROptvsTZw==
+	SbrqZhBg5e6CXsDFHO6cAkYHP94AfU4Jr9IaplXOG27Ja1HkTxI4CsP59eMzMrJVjGOfijdFykpsAVlB4iDVJuBRjs/HcqSnh8w6NBFKJ2wqft/I1YZaVBegypCpKvHAbOkh6lf9CL5Q5EV2IpsMvoLdW5STUC6NHeyWIJX4QXdwxkhGR5PJ5GPFYG6MGvGwFULNv98j3eGO+ru6h2aJrcGsqGpYGaaBBJkb6++WVrqRnjIdWmM0Y60yW+8OmrNQe7lBV+byVxq0WHVIEhqOlPCneKqFCTOiGTFJFL9j6D/Ir1FdTz55QGrQM0rFg2qZ11w1EgbTDNTOb2Gw8cJ5AnVK7JpiZoBOaqm2RbToMx6tCGeg8Zi6mTQxu+Sb+4kUojacd1M7D/OAQMHHYwdxQsx7TfAewdbJHp9LmZoYJoFoi9bZLClGASimG9LsbDuaZwJ8Dz2YxbDbbjzl4JCkq5KpciuyRLRYhhpwjIqBkKW37fjvmVUXqZnZXYEE/Q+k0gijghEZMJjiyCugV3zluf5TaMPAFzsZlQpPdVBEG5d3FgqUZ//UF7Sset/V/IJhTOfaBPMmVM+NVLWzdUzQgIxU0BQ2BGj1ReStPsXtmQvtAigLZYctw5+flOz4aDpR//0BIfz6XySZs8DSDGwfZQ==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7c5bbe68-efb7-45ae-e501-08d848f487c5
+X-MS-Exchange-CrossTenant-Network-Message-Id: bbfcbeb5-81ec-4fe4-f4c1-08d848f48f93
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2020 12:43:56.1897
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2020 12:44:09.5610
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: AKyHKzC4eNBd9mlaP031/KopDUfiH5A7bFmiJP0emsTl5xiBrBXiPdPlb7Fi7QirpC4iej6FWRTnziZT5RhQt4/wlAYc3pYT3m8DvhAoYPk=
+X-MS-Exchange-CrossTenant-UserPrincipalName: iBDl2eschGzH44eEhYm1KdegF8USlZUIk1dqB16zk0QnfsyM3SOV+4yBIkAmOXRW+UMBL4GnqVHxEFnlP7ffm627xHeeK764gx+RvP05RYA=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4260
 Content-Type: multipart/alternative;
- boundary="------------FB1870D116E5C1430C5D1D93"
+ boundary="------------C5BC2A820DC3DE9DCE59833E"
 Content-Language: en-US
 
---------------FB1870D116E5C1430C5D1D93
+--------------C5BC2A820DC3DE9DCE59833E
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 8/24/20 5:14 AM, Leon Anavi wrote:
-> Upgrade to release 5.0.1:
+> Upgrade to release 0.0.52:
 >
-> - Drop Python 2.7 and 3.4 testing and add 3.8
-> - Use unittest.mock in tests
-> - Remove unused "env" setting from pytest section
-> - Remove nose references
-> - Add locked method to Lock
-> - Add paragraph to caveats about cache volume for Issue
->
-> License-Update: Update year
+> - add list_common_keyboards() to public api
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...ython3-diskcache_4.1.0.bb => python3-diskcache_5.0.1.bb} | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-diskcache_4.1.0.bb => python3-diskcache_5.0.1.bb} (50%)
+>   ...ython3-langtable_0.0.51.bb => python3-langtable_0.0.52.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-langtable_0.0.51.bb => python3-langtable_0.0.52.bb} (79%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-diskcache_4.1.0.bb b/meta-python/recipes-devtools/python/python3-diskcache_5.0.1.bb
-> similarity index 50%
-> rename from meta-python/recipes-devtools/python/python3-diskcache_4.1.0.bb
-> rename to meta-python/recipes-devtools/python/python3-diskcache_5.0.1.bb
-> index 91cff0cd1..9f92fde22 100644
-> --- a/meta-python/recipes-devtools/python/python3-diskcache_4.1.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-diskcache_5.0.1.bb
-> @@ -1,10 +1,10 @@
->   DESCRIPTION = "Disk Cache -- Disk and file backed persistent cache."
->   HOMEPAGE = "http://www.grantjenks.com/docs/diskcache/"
->   LICENSE = "Apache-2.0"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=9e046ce8fae71087134866418f646ec3"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=c985b6a9269e57a1073d5f142d68eb68"
+> diff --git a/meta-python/recipes-devtools/python/python3-langtable_0.0.51.bb b/meta-python/recipes-devtools/python/python3-langtable_0.0.52.bb
+> similarity index 79%
+> rename from meta-python/recipes-devtools/python/python3-langtable_0.0.51.bb
+> rename to meta-python/recipes-devtools/python/python3-langtable_0.0.52.bb
+> index 8340382d1..e6ccd7b54 100644
+> --- a/meta-python/recipes-devtools/python/python3-langtable_0.0.51.bb
+> +++ b/meta-python/recipes-devtools/python/python3-langtable_0.0.52.bb
+> @@ -6,8 +6,8 @@ SECTION = "devel/python"
 >   
-> -SRC_URI[md5sum] = "21c9945e7707799e1c64956f8a54d4c3"
-> -SRC_URI[sha256sum] = "bcee5a59f9c264e2809e58d01be6569a3bbb1e36a1e0fb83f7ef9b2075f95ce0"
-> +SRC_URI[md5sum] = "5c8c5789f584a36eacc7240921eee35c"
-> +SRC_URI[sha256sum] = "b24a2da03d6a45edcec14ea6ef7129ddf0de78f04497557308d1461753d90633"
+>   LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 >   
->   PYPI_PACKAGE = "diskcache"
+> -SRC_URI[md5sum] = "5d28198fa933dac5c037108d8f5cf3bb"
+> -SRC_URI[sha256sum] = "8d4615cc0bb0fa49faa05b55ff49b1f41122b8092ca18a5d10f1e1699d6d7b3c"
+> +SRC_URI[md5sum] = "240a62b84ed29f6530ceae60609f7eff"
+> +SRC_URI[sha256sum] = "a2c499704c91c0a23e5db92e80ad1d45e51466b82ffaee478e5bb781460b3db5"
+>   
+>   inherit pypi setuptools3 python3native
 >   
 >
 > 
 
---------------FB1870D116E5C1430C5D1D93
+--------------C5BC2A820DC3DE9DCE59833E
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -140,48 +131,38 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 8/24/20 5:14 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200824091457.3360-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 5.0.1:
+    <blockquote type="cite" cite="mid:20200824091457.3360-2-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 0.0.52:
 
-- Drop Python 2.7 and 3.4 testing and add 3.8
-- Use unittest.mock in tests
-- Remove unused &quot;env&quot; setting from pytest section
-- Remove nose references
-- Add locked method to Lock
-- Add paragraph to caveats about cache volume for Issue
-
-License-Update: Update year
+- add list_common_keyboards() to public api
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200824091457.3360-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200824091457.3360-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...ython3-diskcache_4.1.0.bb =&gt; python3-diskcache_5.0.1.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-diskcache_4.1.0.bb =&gt; python3-diskcache_5.0.1.bb} (50%)
+ ...ython3-langtable_0.0.51.bb =&gt; python3-langtable_0.0.52.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-langtable_0.0.51.bb =&gt; python3-langtable_0.0.52.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-diskcache_4.1.0.bb b/meta-python/recipes-devtools/python/python3-diskcache_5.0.1.bb
-similarity index 50%
-rename from meta-python/recipes-devtools/python/python3-diskcache_4.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-diskcache_5.0.1.bb
-index 91cff0cd1..9f92fde22 100644
---- a/meta-python/recipes-devtools/python/python3-diskcache_4.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-diskcache_5.0.1.bb
-@@ -1,10 +1,10 @@
- DESCRIPTION = &quot;Disk Cache -- Disk and file backed persistent cache.&quot;
- HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://www.grantjenks.com/docs/diskcache/">&quot;http://www.grantjenks.com/docs/diskcache/&quot;</a>
- LICENSE = &quot;Apache-2.0&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=9e046ce8fae71087134866418f646ec3">&quot;file://LICENSE;md5=9e046ce8fae71087134866418f646ec3&quot;</a>
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=c985b6a9269e57a1073d5f142d68eb68">&quot;file://LICENSE;md5=c985b6a9269e57a1073d5f142d68eb68&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-langtable_0.0.51.bb b/meta-python/recipes-devtools/python/python3-langtable_0.0.52.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-langtable_0.0.51.bb
+rename to meta-python/recipes-devtools/python/python3-langtable_0.0.52.bb
+index 8340382d1..e6ccd7b54 100644
+--- a/meta-python/recipes-devtools/python/python3-langtable_0.0.51.bb
++++ b/meta-python/recipes-devtools/python/python3-langtable_0.0.52.bb
+@@ -6,8 +6,8 @@ SECTION = &quot;devel/python&quot;
  
--SRC_URI[md5sum] = &quot;21c9945e7707799e1c64956f8a54d4c3&quot;
--SRC_URI[sha256sum] = &quot;bcee5a59f9c264e2809e58d01be6569a3bbb1e36a1e0fb83f7ef9b2075f95ce0&quot;
-+SRC_URI[md5sum] = &quot;5c8c5789f584a36eacc7240921eee35c&quot;
-+SRC_URI[sha256sum] = &quot;b24a2da03d6a45edcec14ea6ef7129ddf0de78f04497557308d1461753d90633&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=d32239bcb673463ab874e80d47fae504">&quot;file://COPYING;md5=d32239bcb673463ab874e80d47fae504&quot;</a>
  
- PYPI_PACKAGE = &quot;diskcache&quot;
+-SRC_URI[md5sum] = &quot;5d28198fa933dac5c037108d8f5cf3bb&quot;
+-SRC_URI[sha256sum] = &quot;8d4615cc0bb0fa49faa05b55ff49b1f41122b8092ca18a5d10f1e1699d6d7b3c&quot;
++SRC_URI[md5sum] = &quot;240a62b84ed29f6530ceae60609f7eff&quot;
++SRC_URI[sha256sum] = &quot;a2c499704c91c0a23e5db92e80ad1d45e51466b82ffaee478e5bb781460b3db5&quot;
+ 
+ inherit pypi setuptools3 python3native
  
 </pre>
       <br>
@@ -192,4 +173,4 @@ index 91cff0cd1..9f92fde22 100644
   </body>
 </html>
 
---------------FB1870D116E5C1430C5D1D93--
+--------------C5BC2A820DC3DE9DCE59833E--
