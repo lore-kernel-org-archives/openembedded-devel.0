@@ -1,103 +1,110 @@
-Received: from mail-ej1-f66.google.com (mail-ej1-f66.google.com [209.85.218.66])
- by mx.groups.io with SMTP id smtpd.web10.75.1598373404605223774
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
+ by mx.groups.io with SMTP id smtpd.web11.352.1598375147534519447
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Aug 2020 09:36:45 -0700
+ Tue, 25 Aug 2020 10:05:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kynetics-com.20150623.gappssmtp.com header.s=20150623 header.b=LbPlFgV7;
- spf=neutral (domain: kynetics.com, ip: 209.85.218.66, mailfrom: diego.rondini@kynetics.com)
-Received: by mail-ej1-f66.google.com with SMTP id oz20so12460039ejb.5
-        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2020 09:36:44 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=rvpxjLvT;
+ spf=pass (domain: linaro.org, ip: 209.85.216.46, mailfrom: arthur.she@linaro.org)
+Received: by mail-pj1-f46.google.com with SMTP id 2so1569457pjx.5
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2020 10:05:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kynetics-com.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=zhA7sCFi5JhpGCfL3cwk0maGfMk4KzuUhviUIQ3A1+Q=;
-        b=LbPlFgV70aVTEGTnOkTfvk+7EMuO4QzkTVYDv1DrqVt4dd1/w8v25MLf0C+6wPSy0g
-         KN3Ezq1QA33UYkvuTv3OCvbAmKp7a0YIxYVCz+MJ/pYHvvgQh9v2k8MouSK0B/RJg/U3
-         7iBqnFbSG2C8tkZu/2NvRyvT7TCAQ9LTqUcT5Fu6jWFfHoaudt/MY++g0yl+cYXfHGbD
-         NCFqFgEv/kAykmRYTXs45/ccDaoQEQBRKyHuYM1R+llcq6oJdKgkJr+ZGfWphOd/HeMS
-         L+Sic7ezZaY4mXdUKO5Ebu+j8MkrVU9A51IHD8ZJ+n6RcJYDXnMdbnmqswWdOA2Oes64
-         ipvQ==
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GN05tiPRl4fl6YqduwQRxN/zYw8mTnH++3IAYNaUbiU=;
+        b=rvpxjLvTl+SRmS6OwtFGCUcZlzBJFExfPdscG0tHuhBY/fBCWrPLsmJz+o+wMvx3Xj
+         u6xhEdVpvRzwG3Hu/uqoPTvZF0feE7FHJkYJbKCOgqIZzDyYlha5l/NtnZgLv7qS0ns/
+         HFVuTzF0MurtDsMzf7tT9W9Q+dkGrk7YIh4Xh1rdREZgpWmD7uZpesJbkm7Uh1SahGGe
+         Jp8SRP5kYZOeCYw3Lw91Z1fSiyfzxKl8+5AcRWPexM7MGLLDqtGTYDoVa6gdEqxob42U
+         i94OVpaKaujNRM9xSBr0imnRLKpWKgHZFX+PgUCb2NZtnPQk2O0vUFgPgRWDtJGSKsY+
+         9tWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=zhA7sCFi5JhpGCfL3cwk0maGfMk4KzuUhviUIQ3A1+Q=;
-        b=QSPjPbxhOez50WL4hdyApauH4+tBlUKI9mbBk30rq6itSyo62kVb7cAmRsah8GsRJE
-         L80GISoVc/fRiQ8dKxmEa73NAqzGuKmMX46fKy5VUf48ahB/bJW0Yw2kEA4blDQ976H2
-         7CLskH3w5UJqsfOu6ssvPSWzxjnKNyShsx+RKMHNxELWDLacclRKWZ51uIFdweeSRhtI
-         OAy2cs36AUR4f2sVLkHGfPTdfrBjIrNkJySQtpcml0IwQwHEU9KAuPi8N30HRs+13bQY
-         qAzqN4eg3wNsUKewUcEMsH4uyxz7xnZ+eMjPtiRkd7lyHDSdk2ycXcuThJ4XFkykH1QF
-         5fog==
-X-Gm-Message-State: AOAM532QQWHXNNkh8f11wlgAGZP8NNkqRW6QDwou+kQwVFHXN2juziGm
-	xMJK1C6rSINuAdvvVlFnpm08W+7hgTcsjktgX/XsjQ==
-X-Google-Smtp-Source: ABdhPJxXvhd8mD8smjH/ttGYaHIv/J4na14QYiN4aTSzFVEyEAgNuEfTUyTd0iEgW0tVxsS0Myl9FcWxCNBoOxIzJKA=
-X-Received: by 2002:a17:906:d187:: with SMTP id c7mr11798093ejz.196.1598373402929;
- Tue, 25 Aug 2020 09:36:42 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GN05tiPRl4fl6YqduwQRxN/zYw8mTnH++3IAYNaUbiU=;
+        b=gkUO4t7UT3IfCrgOWT/swXDRiX8mkj7xcoXL9ldVQIMCYC7fXF3tJlpaJkLS68G9Mf
+         FJn5xEzh4gMQ+lXlZhIIuync2+n8j9XQDrKjE1axB4oO5LdWBBFdaZJyeoGsgDdv/UFA
+         a72MJZr4sHlPRYGzmnmFoS3cpdQSbOyLESdJGJWRMm528+SGQPHLo+kV5MXqu8wbh48r
+         yWeouhf0eUXGVqTO1JrZIFWvNihimL9n/IHxnx1puoDBYzhAXWxrZSWnVXcdBBCT0P42
+         kDSqYcfrVl80ldlyWyKvuYEkpJ+MHzT2KW9kxGbKDEC9baNjaHn1t6FvalikVdKLTSSt
+         7Y0A==
+X-Gm-Message-State: AOAM533Q+p63qRMeqzrow2ZqJLQzZHYUG88UvJajLOAKrFMIhic74wJQ
+	OriTMm65k+Ex3ZkK0O24WF0/cInS9GwC6A==
+X-Google-Smtp-Source: ABdhPJw2gK7r9QKR5vCKAyZPbBJ5h4RZjdxFuLGBDQuOs2pDOSnaDNuMuZb+qljomup9yCvesHWE8g==
+X-Received: by 2002:a17:90a:b78e:: with SMTP id m14mr2338985pjr.94.1598375146819;
+        Tue, 25 Aug 2020 10:05:46 -0700 (PDT)
+Return-Path: <arthur.she@linaro.org>
+Received: from arthur-X1E.hitronhub.home (S0106a84e3f840fe3.vn.shawcable.net. [50.68.230.12])
+        by smtp.gmail.com with ESMTPSA id j4sm13487162pgf.8.2020.08.25.10.05.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 25 Aug 2020 10:05:46 -0700 (PDT)
+From: "Arthur She" <arthur.she@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: Arthur She <arthur.she@linaro.org>
+Subject: [meta-oe][PATCH v2] xmlrpc-c: fix Makefile macro error
+Date: Tue, 25 Aug 2020 10:05:43 -0700
+Message-Id: <20200825170543.75398-1-arthur.she@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20200825154524.188696-1-diego.rondini@kynetics.com> <CA+chaQdtuKCqc31WB1s=-K29kv-4G2fh9g87PpBzBywxE6djRQ@mail.gmail.com>
-In-Reply-To: <CA+chaQdtuKCqc31WB1s=-K29kv-4G2fh9g87PpBzBywxE6djRQ@mail.gmail.com>
-From: "Diego" <diego.rondini@kynetics.com>
-Date: Tue, 25 Aug 2020 18:36:32 +0200
-Message-ID: <CAMfw5YowytuBeL3hr_82NEwrCTJjSqvJO8N-8dFVvYCH6cDHiw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] libeigen: update SRC_URI to download from gitlab
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-Hi Martin,
+This error caused the curl library wouldn't to be linked correctly.
 
-On Tue, Aug 25, 2020 at 5:57 PM Martin Jansa <martin.jansa@gmail.com> wrote:
->
-> Doesn't this trigger src-uri-bad QA warning? It would be better to use git fetcher.
+Signed-off-by: Arthur She <arthur.she@linaro.org>
+---
+ ...rc-Makefile-Fix-Makefile-macro-error.patch | 29 +++++++++++++++++++
+ .../xmlrpc-c/xmlrpc-c_1.54.02.bb              |  1 +
+ 2 files changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0003-src-Makefile-Fix-Makefile-macro-error.patch
 
-No warning because this is from git*lab*.
+diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0003-src-Makefile-Fix-Makefile-macro-error.patch b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0003-src-Makefile-Fix-Makefile-macro-error.patch
+new file mode 100644
+index 000000000..3d861fc62
+--- /dev/null
++++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0003-src-Makefile-Fix-Makefile-macro-error.patch
+@@ -0,0 +1,29 @@
++From ea4ca50ca9cab755f3722096158a46deec0e663a Mon Sep 17 00:00:00 2001
++From: Arthur She <arthur.she@linaro.org>
++Date: Tue, 25 Aug 2020 09:51:26 -0700
++Subject: [PATCH] src/Makefile: Fix Makefile macro error
++
++This error caused the curl library wouldn't be linked correctly.
++
++Upstream-Status: Pending
++Signed-off-by: Arthur She <arthur.she@linaro.org>
++---
++ src/Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/Makefile b/src/Makefile
++index 1cdf8b0..acd04dd 100644
++--- a/src/Makefile
+++++ b/src/Makefile
++@@ -57,7 +57,7 @@ ifeq ($(MUST_BUILD_CURL_CLIENT),yes)
++   TRANSPORT_MODS += $(BLDDIR)/lib/curl_transport/xmlrpc_curl_transport
++   TRANSPORT_MODS += $(BLDDIR)/lib/curl_transport/curltransaction
++   TRANSPORT_MODS += $(BLDDIR)/lib/curl_transport/curlmulti
++-  TRANSPORT_LIBDEP += $(shell $CURL_CONFIG --libs)
+++  TRANSPORT_LIBDEP += $(shell $(CURL_CONFIG) --libs)
++   TRANSPORT_INCLUDES += -Isrcdir/lib/curl_transport
++ endif
++ ifeq ($(MUST_BUILD_LIBWWW_CLIENT),yes)
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb
+index c1f0b78ca..aba6dfd88 100644
+--- a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb
++++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://doc/COPYING;md5=aefbf81ba0750f02176b6f86752ea951"
+ SRC_URI = "git://github.com/mirror/xmlrpc-c.git \
+            file://0001-test-cpp-server_abyss-Fix-build-with-clang-libc.patch \
+            file://0002-fix-formatting-issues.patch \
++           file://0003-src-Makefile-Fix-Makefile-macro-error.patch \
+            "
+ 
+ #Release 1.54.02
+-- 
+2.25.1
 
-Also, this the URL of an official release tarball taken from:
-https://gitlab.com/libeigen/eigen/-/releases
-
-See also first comment here:
-https://patchwork.openembedded.org/patch/161360/
-
-Regards,
-Diego Rondini
-
-
->
-> On Tue, Aug 25, 2020 at 5:45 PM Diego <diego.rondini@kynetics.com> wrote:
->>
->> Bitbucket is no longer the official home of eigen, which has moved to
->> gitlab. Update SRC_URI to download releases from gitlab, fixing:
->> WARNING: libeigen-3.3.7-r0 do_fetch: Failed to fetch URL
->> https://bitbucket.org/eigen/eigen/get/3.3.7.tar.bz2;downloadfilename=libeigen-3.3.7.tar.bz2,
->> attempting MIRRORS if available
->>
->> Signed-off-by: Diego Rondini <diego.rondini@kynetics.com>
->> ---
->>  meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb | 8 ++++----
->>  1 file changed, 4 insertions(+), 4 deletions(-)
->>
->> diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
->> index f638848d1..9c3d962f4 100644
->> --- a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
->> +++ b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
->> @@ -4,11 +4,11 @@ HOMEPAGE = "http://eigen.tuxfamily.org/"
->>  LICENSE = "MPL-2.0"
->>  LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
->>
->> -SRC_URI = "https://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2;downloadfilename=${BP}.tar.bz2"
->> -SRC_URI[md5sum] = "05b1f7511c93980c385ebe11bd3c93fa"
->> -SRC_URI[sha256sum] = "9f13cf90dedbe3e52a19f43000d71fdf72e986beb9a5436dddcd61ff9d77a3ce"
->> +SRC_URI = "https://gitlab.com/libeigen/eigen/-/archive/${PV}/eigen-${PV}.tar.bz2"
->> +SRC_URI[md5sum] = "b9e98a200d2455f06db9c661c5610496"
->> +SRC_URI[sha256sum] = "685adf14bd8e9c015b78097c1dc22f2f01343756f196acdc76a678e1ae352e11"
->>
->> -S = "${WORKDIR}/eigen-eigen-323c052e1731"
->> +S = "${WORKDIR}/eigen-${PV}"
->>
->>  inherit cmake
->>
->> --
->> 2.26.2
->>
->> 
