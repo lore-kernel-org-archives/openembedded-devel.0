@@ -1,95 +1,110 @@
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
- by mx.groups.io with SMTP id smtpd.web11.1237.1598379941333346432
+Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
+ by mx.groups.io with SMTP id smtpd.web11.1398.1598380471706408313
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Aug 2020 11:25:41 -0700
+ Tue, 25 Aug 2020 11:34:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=qV4bkZ0j;
- spf=pass (domain: gmail.com, ip: 209.85.160.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f195.google.com with SMTP id i2so6504264qtb.8
-        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2020 11:25:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=iHiMIKDW;
+ spf=pass (domain: gmail.com, ip: 209.85.160.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f169.google.com with SMTP id e5so9732132qth.5
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2020 11:34:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=LBmqqZe9dI/NKBS7Pmom/eRs36ropIZPL+lWzyhGVQs=;
-        b=qV4bkZ0jw8aA2/XXLQTAhKB4FjkgDbUi8+WUg0HEf0/fpE+m0GTxQJEBRv1oYnLMGs
-         q3q/WEGq8ug8dRlEO3DqqLGySX+bkjQ2DHJaVfKso7rz1z9XiPEFrWD352DTJPPyX1hV
-         mJSW+5MOhZpU1pKd4n1n1u38CDXXGr1dhpqbGWFKnrjL+4y/zdo+S/7UDzCQwYNdYeI6
-         C6WWMGpAznaOzHo6YBHZREoiyvRgjtssa+k+eBDsc2wqQddh7DPL68RUL8fSYs2xIu8K
-         PhPqeEkqW13QxNe6tPqp1HH1Jx8/ry6aolcgXZv799jrZy5kuV5yr8Gj/hOhJsI8KNYk
-         iAew==
+        bh=gwXutSHpYQ0anRuwrCVk1ddJIDiuygxdaRxscXeHbHI=;
+        b=iHiMIKDWUah7yj/1+hUx7nwbpHixMvyZtoKnxbwNtiT1U6VAS/hhFQXI7UAV2Gw2sM
+         TQ3xwf9ozgBHu3ASF8cCu48MWMDfqFznPZYVZkJcAMPwXPB/wUOVdZqLHlH9AvovocNy
+         5BgedqoToXb+6qnG7EHxRDdTbmkOZ2zRnL6+yWJ6Ah8vzpc4ICdwZD2D66tf8UV+ad9e
+         TMOITX5ZsFe2T84KLaU4uFwe2/AUZd+s4Jw/TPBefGWGxzLohcwiFn4T1pcI0qGScLar
+         Hlc+CKOJpH/RoUpND7aM0k5qP6P0s0l3W3Gji918s5nA6pFPmFDcaUaOkre1X8EVJDlD
+         n9Mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=LBmqqZe9dI/NKBS7Pmom/eRs36ropIZPL+lWzyhGVQs=;
-        b=Iv8RscfjUbyGvOnbCYlknzzlriTDkMACZAcWMUeBweqNzTGa+gVePjU/BV57GdZW8l
-         54WaLbXydTL/Ktwsx7zYPxmTm8ilKF54gNNfyj9Nmk//SsFJ5xV6/Wqqr/F4YZ5FRU1E
-         TL7210ovWiPSqqfUaO4ik9TAGRG/e8tbDE7Cl9FwcmhrBIoNi8rTschuTgYydYCZRFYb
-         R3KBN9STL1Jg/swd9KJrJP82uxSoponK+P0+VmtvxKTnJ4jV/OvM8+y5SOMGozC8gUdx
-         LlB7iJt20tEIOSA0Ht54oZY+89VZxNrJogInmpnomewe4JxtQdGDpaMtvpWfF0BHnywt
-         kGgw==
-X-Gm-Message-State: AOAM531lx4TEe2Lp7pcN2imRWMn5edBmeBaYyTiOteqNNfQrw4mHrs0m
-	WZv6xYsceOeMWye+djrYwC/42ApzQU/ZTFFxTzI=
-X-Google-Smtp-Source: ABdhPJw2YkSJM52F3S8mZ1nhUYw+iitL653fSy4GF1WuqmswlR/V4NMLrilNkeCLljn76X7ixrxjz2eHrvL07yI310A=
-X-Received: by 2002:ac8:70cd:: with SMTP id g13mr10688995qtp.53.1598379940294;
- Tue, 25 Aug 2020 11:25:40 -0700 (PDT)
+        bh=gwXutSHpYQ0anRuwrCVk1ddJIDiuygxdaRxscXeHbHI=;
+        b=IbpI5OmuXiIdT6PpLU+TC8zrVADZTx2cEylIbwAE1xYlYZV4tWkVFK7ondsTN9LsKR
+         qLDXw3hrjs7mMIC2JgseK3C5j7OtdRZA6NtiqIl7ydv2xBXUQniJ7MZRNOXaehp5yqtI
+         JSIH5xD1BGy7cTFGsy7sYWD//Jg4BkaHfyFMAena9WP9zbiYtpQfTRTsWEe1rwS55XFm
+         ZOtNy95q9fAOvlbJLYwT9OYWQqAK3RQZgc35gpg7rMGqybwjPsAVdjXxZKKTSwH8WhnE
+         q4tAffv3KtIPQTCLKBbMBsngePEobPPhukHf9rxH6RIW0FAvNGapDyOz5liQHN7hfG+D
+         j2sA==
+X-Gm-Message-State: AOAM531u32LAKqj3gzK4qu+o7o4bX+ycz7jVqJEdRP881ozAkNNW31DY
+	ACSTUVp8GbDUAcKigW/c5CJpK9jANT8hVE7JTNg=
+X-Google-Smtp-Source: ABdhPJxyaTPm42Db3UnxMh1Zxrdfs2ZLQmkN8DfrijVC1GhZwIejVL+eDPXz6S+S8oekIW7TT7AKR6PoXqDoR6CGOS8=
+X-Received: by 2002:ac8:4d0c:: with SMTP id w12mr10421247qtv.194.1598380470735;
+ Tue, 25 Aug 2020 11:34:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200825095407.18867-1-leon.anavi@konsulko.com>
-In-Reply-To: <20200825095407.18867-1-leon.anavi@konsulko.com>
+References: <20200825040803.837645-1-arthur.she@linaro.org>
+In-Reply-To: <20200825040803.837645-1-arthur.she@linaro.org>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Tue, 25 Aug 2020 11:25:14 -0700
-Message-ID: <CAMKF1soynk8yNEZA5LZL4K-DpY6v2S2sRwQJQgp7dQ8BkqZgSw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/3] doxygen: Upgrade 1.8.17 -> 1.8.20
-To: Leon Anavi <leon.anavi@konsulko.com>
+Date: Tue, 25 Aug 2020 11:34:04 -0700
+Message-ID: <CAMKF1sp9NYtca+=CE3RpYDTg4cSOYEhjg0kRecnbmVvM3n_QQQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] xmlrpc-c: fix Makefile macro error
+To: Arthur She <arthur.she@linaro.org>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-Fails to patch doxygen-native :(
-
-
-On Tue, Aug 25, 2020 at 2:54 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
+On Mon, Aug 24, 2020 at 9:08 PM Arthur She <arthur.she@linaro.org> wrote:
 >
-> Upgrade to release 1.8.20:
+> This error caused the curl library not to be linked.
 >
-> - Add configuration setting to have docstrings not as preformatted
->   text but as normal documentation
-> - Bug fix: void return type reported as not documented
-> - Bug fix: Doxywizard 1.8.19 (Windows): Source code directory
->   seems to be ignored
-> - Bug fix: The Doxygen uses too much memory (or has probably a
->   memory leak)
-> - Bug fix: Doxygen doesn't stop on errors
-> - Bug fix: C++ grouped functions in namespace have disappeard
-> - Improvement of line count for e.g. warnings
-> - Improved layout on the bibliography page
-> - Updated the swedish language translation to 1.8.19
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> Signed-off-by: Arthur She <arthur.she@linaro.org>
 > ---
->  .../doxygen/{doxygen_1.8.17.bb => doxygen_1.8.20.bb}          | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-devtools/doxygen/{doxygen_1.8.17.bb => doxygen_1.8.20.bb} (79%)
+>  .../0003-Fix-Makefile-macro-error.patch       | 26 +++++++++++++++++++
+>  .../xmlrpc-c/xmlrpc-c_1.54.02.bb              |  1 +
+>  2 files changed, 27 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0003-Fix-Makefile-macro-error.patch
 >
-> diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.20.bb
-> similarity index 79%
-> rename from meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb
-> rename to meta-oe/recipes-devtools/doxygen/doxygen_1.8.20.bb
-> index 45de71826..d4ac3b720 100644
-> --- a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb
-> +++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.20.bb
-> @@ -10,8 +10,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
->             file://0001-build-don-t-look-for-Iconv.patch \
->  "
->  SRC_URI_append_class-native = " file://doxygen-native-only-check-python3.patch"
-> -SRC_URI[md5sum] = "7997a15c73a8bd6d003eaba5c2ee2b47"
-> -SRC_URI[sha256sum] = "2cba988af2d495541cbbe5541b3bee0ee11144dcb23a81eada19f5501fd8b599"
-> +SRC_URI[md5sum] = "8729936a843232a66fe970ef65f3c3e4"
-> +SRC_URI[sha256sum] = "e0db6979286fd7ccd3a99af9f97397f2bae50532e4ecb312aa18862f8401ddec"
+> diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0003-Fix-Makefile-macro-error.patch b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0003-Fix-Makefile-macro-error.patch
+> new file mode 100644
+> index 000000000..e0be24bf7
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0003-Fix-Makefile-macro-error.patch
+> @@ -0,0 +1,26 @@
+> +From bb4057f06dd4a0b7823c1952b14cee7882664f1b Mon Sep 17 00:00:00 2001
+> +From: Arthur She <arthur.she@linaro.org>
+> +Date: Mon, 24 Aug 2020 20:50:58 -0700
+> +Subject: [PATCH] Fix Makefile macro error
+> +
+> +The libcurl will not be liked due to this error.
+> +---
+> + src/Makefile | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/src/Makefile b/src/Makefile
+> +index 1cdf8b0..acd04dd 100644
+> +--- a/src/Makefile
+> ++++ b/src/Makefile
+> +@@ -57,7 +57,7 @@ ifeq ($(MUST_BUILD_CURL_CLIENT),yes)
+> +   TRANSPORT_MODS += $(BLDDIR)/lib/curl_transport/xmlrpc_curl_transport
+> +   TRANSPORT_MODS += $(BLDDIR)/lib/curl_transport/curltransaction
+> +   TRANSPORT_MODS += $(BLDDIR)/lib/curl_transport/curlmulti
+> +-  TRANSPORT_LIBDEP += $(shell $CURL_CONFIG --libs)
+> ++  TRANSPORT_LIBDEP += $(shell $(CURL_CONFIG) --libs)
+
+do we then point CURL_CONFIG to PKGCONFIG or pkgconfig ?
+I think it would be better to do so as well while here.
+
+> +   TRANSPORT_INCLUDES += -Isrcdir/lib/curl_transport
+> + endif
+> + ifeq ($(MUST_BUILD_LIBWWW_CLIENT),yes)
+> +--
+> +2.25.1
+> +
+> diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb
+> index c1f0b78ca..eec945824 100644
+> --- a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb
+> +++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb
+> @@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://doc/COPYING;md5=aefbf81ba0750f02176b6f86752ea951"
+>  SRC_URI = "git://github.com/mirror/xmlrpc-c.git \
+>             file://0001-test-cpp-server_abyss-Fix-build-with-clang-libc.patch \
+>             file://0002-fix-formatting-issues.patch \
+> +           file://0003-Fix-Makefile-macro-error.patch \
+>             "
 >
->  inherit cmake python3native
->
+>  #Release 1.54.02
 > --
-> 2.17.1
+> 2.25.1
 >
 > 
