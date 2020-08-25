@@ -1,17 +1,17 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.48])
- by mx.groups.io with SMTP id smtpd.web10.12734.1598359332344975023
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.58])
+ by mx.groups.io with SMTP id smtpd.web10.12740.1598359348976726903
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Aug 2020 05:42:12 -0700
+ Tue, 25 Aug 2020 05:42:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=hh1ewYuL;
- spf=pass (domain: windriver.com, ip: 40.107.237.48, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=UDsgfuf4;
+ spf=pass (domain: windriver.com, ip: 40.107.223.58, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YZSBUwIfRSdoeTmYgA6FQo+tRMKBLvrpxmyohANedAcSGc+0ob7VpPp7aEHvNQ2fKx/ScXhs2QG8t2GpcA24SgZQF/3xljtCdmRtjrhjvlqzkth3mo0NpIMCmKowgZTZAqowYSF5jA4gj6GgCOc2THxXgVe8nqeo9aQZVxmvncvOFqDBE4qYKBg9o6Fzli5cdBeqyp55KK8Z7EsY06bCy5vnXZvYQaIphF4HkpyySbNxNeiOD+sdntx7Gz/MNeVAahz5lzyI0KzWs5vV6WDipgvybsYb9Q78d0SMRDfgOntg8Wd2OU2WascVTKfGSrvndHxbEpzwMT+GQSMEBSmvUg==
+ b=SCmCoxMCOnpEk04H1oLSPoMyQQKk/lae0El6a51efz4SqDqnMYEszJdE3uqZtv+ZBlmiz1thWgZgQbIpufPQZkcvpTpOcVRNG5R6Z7kedma9wFCImb/EFIpDA94v8AWqN2X9A3Kzpc77w6fxQZtvpGh/jL/gy5HNAs59+KCVcSq4CAQ4okaoIo4xxPuR5k+H5sedsZNFhY2AuIJGiMxu93lYI7tsCduclmJIyy/ReTjVtEApCtL/uqxrIBiq/JmBsvW1WJUhTjNTU+FeFzshuVZnM//lN28+Dn4hU/xnO8s73QIrWI0SyH72J5Suqh5uT98weqmGH6GGstqk4MZdyA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PkL42C5SAHx8tCTUeT+HSZGMxeDc205z/NY8uH/k8w4=;
- b=BxVbiY/NhrQ8le84mg3Y8xfQ841gZRlsqpL3SkfFBzqb3iq5dGnhFNunYWS9Crd9Ml58OWaW1BB3JiGLvcjsIp3qj86isWhsFtn3yNzeZp1YCCb7SWdIboYgksHDki0a6/Gijmw2CY8snGGtbJmg6n5CZTW6wefIJdCAL4Tp6KunMVlje+pnppRlUW7Ev97SHRAaP+Iat51GNd7OY2KksQkHZams4yOQhIeheQLsiNcUumvqes0NCMzK3u9ciK6Z0HZKQu4KqGjzGWlbseoS2PyQ6378UCUWqAImCbLdqMwiIcieXe7UynMzVeXx4O8Cqw7aD02HRGyZN0xI7Cxi0Q==
+ bh=N2iUkPeij8WEkeGPXCzvDrHwVQaS2j9eiSFEOMQQS04=;
+ b=BUR2rWgd4DHzgfBWIbyb1JMsQEJORAZpeTMyb9dh6QjKeFevUoYzpUeSz0BjJN93umM4QGWYB+eBz81ms8svXgXb7ZD4UfnGQId7JKD/P2K4kIWBAhI6hb3RERBmv3a84wJy+eJVrgE/x/DbIchx9L9gxTr4fZFG37QUZBLY28Imytog19nJWz4ChXRQ1YMvhxPeh4X0y+hAqFS+jKEapcr78hvfutY4rZ7njuFvDfV9kwanOHtWrhhcFIDblvl0q7VlBaRT+zASrjc9NxLiyLovemr7ZcE6IuTezARxtv7ywRTllO+x6bIb09dnMQWxUTcmFztfjMbTeIPDgiGzVg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,105 +19,114 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PkL42C5SAHx8tCTUeT+HSZGMxeDc205z/NY8uH/k8w4=;
- b=hh1ewYuLsStPzwTKDU2ijvLQ74JGQxsK9Ijh9dY1KrHl3OlPx3Z4JRaIRq4/hF60rIhn9TVICq3/p2sot8eUFiB+whBuEk2+sleQA1ZY+cEH7mGWPNokSvmYeazLGn0uUR6OFNaK6D/4WvkGzUOM6mmu450HAryWcWp11E+3xYQ=
+ bh=N2iUkPeij8WEkeGPXCzvDrHwVQaS2j9eiSFEOMQQS04=;
+ b=UDsgfuf4u4dvNGElA8rxtAGb4nGOmWIhT6L4zDR0uAgFrzLPhExdU7rSN1X1d21tFqabAsV1mhXpexqfI6nT05TAub2aUt8IAsxAQt4BCWZVXgWtGHC5o53qgdjHFgSNRtQyh5svkkKx2OC5iLfmZuTDqc8l9cmWS/aQlm/uUmg=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB3766.namprd11.prod.outlook.com (2603:10b6:a03:b5::22) with
+ by BY5PR11MB4260.namprd11.prod.outlook.com (2603:10b6:a03:1ba::30) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.25; Tue, 25 Aug
- 2020 12:42:11 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.26; Tue, 25 Aug
+ 2020 12:42:28 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8%7]) with mapi id 15.20.3326.019; Tue, 25 Aug 2020
- 12:42:11 +0000
-Subject: Re: [oe] [meta-python][PATCH 07/11] python3-nocasedict: Add recipe
+ 12:42:28 +0000
+Subject: Re: [oe] [meta-python][PATCH 08/11] python3-nocaselist: Add recipe
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200821234504.719-1-leon.anavi@konsulko.com>
- <20200821234504.719-7-leon.anavi@konsulko.com>
+ <20200821234504.719-8-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <df223842-f59f-9ebf-4018-55ee518ac103@windriver.com>
-Date: Tue, 25 Aug 2020 08:42:07 -0400
+Message-ID: <6f7b42b7-4aee-bb6f-84e4-4f507f048986@windriver.com>
+Date: Tue, 25 Aug 2020 08:42:24 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200821234504.719-7-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTOPR0101CA0036.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:15::49) To BY5PR11MB3909.namprd11.prod.outlook.com
+In-Reply-To: <20200821234504.719-8-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTOPR0101CA0019.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:15::32) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from 255.255.255.255 (255.255.255.255) by YTOPR0101CA0036.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::49) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.24 via Frontend Transport; Tue, 25 Aug 2020 12:42:10 +0000
+Received: from 255.255.255.255 (255.255.255.255) by YTOPR0101CA0019.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::32) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.25 via Frontend Transport; Tue, 25 Aug 2020 12:42:27 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 9b4fd2c5-db5d-4f75-8c27-08d848f44908
-X-MS-TrafficTypeDiagnostic: BYAPR11MB3766:
+X-MS-Office365-Filtering-Correlation-Id: 5b516a97-4615-4715-53bf-08d848f45324
+X-MS-TrafficTypeDiagnostic: BY5PR11MB4260:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB376621C617AFB5FA19AF15F99F570@BYAPR11MB3766.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:404;
+	<BY5PR11MB4260102D9C596A5919F058E59F570@BY5PR11MB4260.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6790;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	ZIwIE9Mh/IzYtAcWg5L/J6Aspf/ximHOgFc+APJ7AuZaE4MusV+w5EuONnYsg/CuoBnt6MjsuEhn6dhJWFdHH0rypMNyy5D5Kkk7yRGwHrIjkFD9/Kp8/IjXU1wuImQXjyDiFbbITycDF2NFVM0qoET7Om+7SV7BE6LeiFLKJPbmYLPD2mYeStM+6tI5SEbocyl4t+TrVaxsjCHe5s0yk+46K5J4QS+0Tc//WmJjxjWyXzgYbf1iqRCo3L9Sd48e9Bv/JkR4iPmxBzNPWBN1qSEmLLkoHC63fU4/JO3mkb2Z0OtAzcdrnjSnL7ozDFE6HOtoJeGY85CGMvKEPe57+WeErLHGVT00slThpw3wLqZejBTOsSriZhLBF7spipvbr68ZXG+LY8sAs6HyuTzd1u9Kl7wRrkcELE5V76r6aWyY3inixoTxUevzL53w0b/4BCkdBXVGCbgINun84Sf2Yw==
+	ugq3ILHvJ/8FAbv5eMBpq6f+ydnrPKHxHnzvoZ2DHR+RzRrlLt9jy8ai7UP6n05JmMhgSa76DctWSedOnqPs6JQq8A/0DMqxa35Z0SoSthNKVjZIp4UcwVpxKveOxLc1dbqtzSVAQqEGe/BjL7Ae0g1ho9U7pwufTTuEMIh1Va1cxbx/EO0vn17nLvlFxAnSfJdgEa0TXXsHVMZ6ydiMQs3eObOiPPKC+h2Zr1kwsrNPrr334t61ctZ/C+LE6V4EKYKzSQds1Dpj6qvgvtYfZHMo44uuwlvmP/bZlKJDM+tZTa3jCEtOr4b9F6CbL/rMOkLTXSp7IqdRqz1TBLjLnW7XYr6VfL3Jn/uHmWEcp5/UtP6v7X0Ed9W5EX2psTMvbpshUJ/+W0cShpr+EYqpLDSrleL4Ot5fs5kmcZm+KrzVKK6v1P/g4kwaICkrPc/r3LWKyXjHJwkUcjsPYIqAMA==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(366004)(346002)(39850400004)(136003)(396003)(2616005)(8676002)(5660300002)(6666004)(26005)(956004)(44832011)(86362001)(53546011)(316002)(33964004)(186003)(6486002)(52116002)(16576012)(31686004)(478600001)(966005)(83380400001)(166002)(31696002)(36756003)(8936002)(66946007)(2906002)(66556008)(66476007)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(39850400004)(376002)(396003)(136003)(366004)(186003)(66556008)(66476007)(52116002)(66946007)(6486002)(966005)(8676002)(36756003)(33964004)(316002)(5660300002)(16576012)(31686004)(31696002)(26005)(6666004)(86362001)(53546011)(2616005)(956004)(44832011)(166002)(478600001)(83380400001)(2906002)(8936002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	O+S78vcEbssUpKMaPXXC05kI/fkoRkjU4hvtq59Iz82AgNauD61ZSnWaZh5ZFT3mzViTkpA3vprxx/yYoVrNWWiJSV7biLU08HGaKJOd5YB9l9CQhHV7srPdDChsA+E/Eb/+fT8Tf2jFwjw93C7y5ZYbfa4jZcaUYrBWIIp+RxcL90+ScsybLoEypULeh2N9D60l+p4pDxb2AiDeAeO4OMkKiNC9lWnrtwPhH6ANn0xRxvnpxoe205eX9q3AgK9MYxRt/chb4LMTc156N2nCR/NyQTZdZ/hTa6dhEUyeizKXw2vg6/CKqVdRSIV6EPeytAZU3kc7l7AAis6wjB/vA/YmHTF4M/WX9u503Nsqu6u5huk6Yrf17zvrqWpYNTtVprbLXBpujmzJvaQRvbTfxPI5x4KKkc930+OLRvGsWK8zDaRdeqmPmtrLUpy64vlIOllXl1oZ/GN3ZbzGBVUXmUOl0XNNchkVArw1gIG3FL/ztHhVALRcxnsuClQmOm4/Muf85IvBX1RVYKErX3xOFciwumd6vrWCb02OFCeG+lNG7E4DXKocJX+Dom25P/mgPVJdIhX7t1wdboYGTbBwlRZLl+C8Gcm5qHOnFOZt1vRhikvHFKUC71OJh4mmvEMmYGQSiFKmvcNr/4j+RfAufg==
+	Lt+sUZu7J47PejJi2MbsJF20NFn/cQ00FE0pijnJfanPlL2dg/eok5KV6pxyXNGlMopKZJJsy00N6vCwMqx4xoj0SoOdacr55JSMPGhDNBF5c1JLJ7pUEMhGVDur0W70Xfo7zS0sjkmxGNlXEAXQCVX8ZDknzdCDYUeHbyMNvw/Hst2kJMNEhiACC3Svh39fwodsXtuX//7VEKbh1rK2uJ1vZaemlxTg23GhEv2N/7jSzhrQMDcD8lvmz4bCLrgJ/icl2yC6pI1DeF69jRlL8wCiExUv/+9YSJZsoJFsyqn8vWxFVQiOaHm/i5Sey7zMTyOH7wtDrn4/9+gxwDeeVB1R6GWRwkUWljxwuyqqP+DED8ZLX6qw5UBL2L+trdPDDrMj+78kVqwexu0/zq0icHgASneqE3vWC8zbOR+SdZkc4jKLH3QQ4USLt+M54zxorXjiElDZTHLTK1FI3k4wPw9nqato89sfPQZePyOH96tZHwmNPdkPentZ2f5OdTZBy0AoqdzDWrZnC8Cte984xETrvcZ+ZBStoKwxLcFUjKkbw9syIl6HtCcxqo1Wz6H4xnkLaiAQj0naAqGwBdPgPtG/sRDuZvtW833wSTQVm8c5UqqOTq/ZdQjJRNJzDnWd7w8f/Wx5OhKTP/B+VaZvog==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9b4fd2c5-db5d-4f75-8c27-08d848f44908
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5b516a97-4615-4715-53bf-08d848f45324
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2020 12:42:10.9171
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2020 12:42:27.8733
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: I+9z/G25TogVMzzU6k7yiesCcN4YcTIqb+GiMSZQh50Q+tGSamk7T1Ud4gN3ZLWFzuiV2OHZTcl3d4Aq6EChQ2e66Nr/Kv/rqwhC5vWd0j8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3766
+X-MS-Exchange-CrossTenant-UserPrincipalName: YauvcBFcMY1pCrZwg7rFpKPhfBUN57yXdlcyysFD/lv4q2+IIHxxituHWBKmObYRG7jjR11EjIUkLlvqYMSZulb1Yth6DouessZXC6nsT78=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4260
 Content-Type: multipart/alternative;
- boundary="------------365D09B17878FCA56EB70A83"
+ boundary="------------146801834D8DE719B05E6972"
 Content-Language: en-US
 
---------------365D09B17878FCA56EB70A83
+--------------146801834D8DE719B05E6972
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 
 On 8/21/20 7:45 PM, Leon Anavi wrote:
-> Add recipe for nocasedict, a case-insensitive ordered dictionary
-> for Python.
+> Add recipe for nocaselist, a case-insensitive list for Python.
+> Changelog for 1.0.1:
+>
+> - Fixed the incorrect behavior of the ‘+’ and ‘+=’ operators to
+>    now (correctly) treat the right hand operand as an iterable of
+>    items to be added, instead of (incorrectly) as a single item.
+>    For ‘+’, the right hand operand now must be a list, consistent
+>    with the built-in list class.
+> - Fixed the incorrect behavior of the * and *= operators to now
+>    validate that the number is an integer and raise TypeError
+>    otherwise, consistent with the built-in list class.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-devtools/python/python3-nocasedict_0.5.0.bb  | 9 +++++++++
+>   .../recipes-devtools/python/python3-nocaselist_1.0.1.bb  | 9 +++++++++
 >   1 file changed, 9 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb
+>   create mode 100644 meta-python/recipes-devtools/python/python3-nocaselist_1.0.1.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb b/meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-nocaselist_1.0.1.bb b/meta-python/recipes-devtools/python/python3-nocaselist_1.0.1.bb
 > new file mode 100644
-> index 000000000..440cf5109
+> index 000000000..9a6b24e75
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-nocaselist_1.0.1.bb
 > @@ -0,0 +1,9 @@
-> +SUMMARY = "A case-insensitive ordered dictionary for Python"
-> +HOMEPAGE = "https://github.com/pywbem/nocasedict"
-> +LICENSE = "LGPLv2.1"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742"
+> +SUMMARY = "A case-insensitive list for Python"
+> +HOMEPAGE = "https://nocaselist.readthedocs.io/en/latest/"
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 > +
-> +SRC_URI[md5sum] = "b1037d65f1f73322c3c2d76681195bb3"
-> +SRC_URI[sha256sum] = "ed74b83c7b81505ccaf4b09b0581477fdd5c1099c929098a6a170a91ec26fd33"
+> +SRC_URI[md5sum] = "a2654766ee683906ba6c77ac1e89f556"
+> +SRC_URI[sha256sum] = "87dc37f97cf52f6e10e1e4a82f56359067462a713222b52976045bf227a40eda"
 > +
 > +inherit pypi setuptools3
 >
 > 
 
---------------365D09B17878FCA56EB70A83
+--------------146801834D8DE719B05E6972
 Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -127,33 +136,42 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 8/21/20 7:45 PM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200821234504.719-7-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Add recipe for nocasedict, a case-insensitive ordered dictionary
-for Python.
+    <blockquote type="cite" cite="mid:20200821234504.719-8-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Add recipe for nocaselist, a case-insensitive list for Python.
+Changelog for 1.0.1:
+
+- Fixed the incorrect behavior of the ‘+’ and ‘+=’ operators to
+  now (correctly) treat the right hand operand as an iterable of
+  items to be added, instead of (incorrectly) as a single item.
+  For ‘+’, the right hand operand now must be a list, consistent
+  with the built-in list class.
+- Fixed the incorrect behavior of the * and *= operators to now
+  validate that the number is an integer and raise TypeError
+  otherwise, consistent with the built-in list class.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200821234504.719-7-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200821234504.719-8-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python3-nocasedict_0.5.0.bb  | 9 +++++++++
+ .../recipes-devtools/python/python3-nocaselist_1.0.1.bb  | 9 +++++++++
  1 file changed, 9 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-nocaselist_1.0.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb b/meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-nocaselist_1.0.1.bb b/meta-python/recipes-devtools/python/python3-nocaselist_1.0.1.bb
 new file mode 100644
-index 000000000..440cf5109
+index 000000000..9a6b24e75
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-nocasedict_0.5.0.bb
++++ b/meta-python/recipes-devtools/python/python3-nocaselist_1.0.1.bb
 @@ -0,0 +1,9 @@
-+SUMMARY = &quot;A case-insensitive ordered dictionary for Python&quot;
-+HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/pywbem/nocasedict">&quot;https://github.com/pywbem/nocasedict&quot;</a>
-+LICENSE = &quot;LGPLv2.1&quot;
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742">&quot;file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742&quot;</a>
++SUMMARY = &quot;A case-insensitive list for Python&quot;
++HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://nocaselist.readthedocs.io/en/latest/">&quot;https://nocaselist.readthedocs.io/en/latest/&quot;</a>
++LICENSE = &quot;Apache-2.0&quot;
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327">&quot;file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327&quot;</a>
 +
-+SRC_URI[md5sum] = &quot;b1037d65f1f73322c3c2d76681195bb3&quot;
-+SRC_URI[sha256sum] = &quot;ed74b83c7b81505ccaf4b09b0581477fdd5c1099c929098a6a170a91ec26fd33&quot;
++SRC_URI[md5sum] = &quot;a2654766ee683906ba6c77ac1e89f556&quot;
++SRC_URI[sha256sum] = &quot;87dc37f97cf52f6e10e1e4a82f56359067462a713222b52976045bf227a40eda&quot;
 +
 +inherit pypi setuptools3
 </pre>
@@ -165,4 +183,4 @@ index 000000000..440cf5109
   </body>
 </html>
 
---------------365D09B17878FCA56EB70A83--
+--------------146801834D8DE719B05E6972--
