@@ -1,98 +1,107 @@
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com [209.85.210.194])
- by mx.groups.io with SMTP id smtpd.web12.6170.1598324708668215217
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web11.6896.1598328488037592486
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Aug 2020 20:05:08 -0700
+ Mon, 24 Aug 2020 21:08:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dWCeuh/k;
- spf=pass (domain: gmail.com, ip: 209.85.210.194, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f194.google.com with SMTP id t185so3070050pfd.13
-        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Aug 2020 20:05:08 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=X7SftyU4;
+ spf=pass (domain: linaro.org, ip: 209.85.216.41, mailfrom: arthur.she@linaro.org)
+Received: by mail-pj1-f41.google.com with SMTP id j13so528587pjd.4
+        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Aug 2020 21:08:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
+        d=linaro.org; s=google;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=/2d6rLVdbiu3k4KHPzVDHMijrQX311QFjaaa3Wo4FbU=;
-        b=dWCeuh/kvMKbGf1lg6k76mNe7chIu49KYGcnIJUlZBluIKZUa6fwB4rGvxyu4z5ma7
-         AAwITuSDM0T9yfnDo9qpNnODeKJ3dc+eVGgKTHYv+tqSBCw3OVkeap1d4u1YLdR4Q90N
-         2HpoDyBWY7ERKk5Sqw8Pavq9sztfoV0PkPF+YwTH3w5KgEAL09u8G+2ohuo8Dh6w9+23
-         pxd9Hu/QcozKrWJQEEdvB3ZQhKVQ1FlIQ68n6HZwFx5tx7jo6NHqLHkKVwnfC+hTZ8s7
-         m5DPbR20InI7WESzPsaMf/t/AVJZXpfbWEi8QQc/BrVInbWWSJJLQBr4OcLLVnr+vylT
-         Yx8Q==
+        bh=A99qIK0jkvvupujf+zX9ERJ7dnPaovQSYzfUNTMs2ko=;
+        b=X7SftyU4RIe+DaAFxj7txRUhf9P10l6T87iOkApgq5Re2a/PDTkeuO1nOCBu2IgMgT
+         GW5hXQCgShCWax4JSr/0RLnh/5eB4yrkZt/O1iFsAM9ujNfCjQ1ULDCpzPpgGeTB3lB8
+         t43WAtQM/OmTSwP8DdlJYpEQ6YpvmeAyGWTXXN29Z/pf0fVVEcHBw3A+DbpJE4fMjRE1
+         SK8SxjS2BxyisNS5Ms4oB5DD3oFvX2AeNxuU4DGK5CMgJahwyEvAcjzn4ZFns+1YejMP
+         ODq5Z3Er2f8bhFglvGwjoHN8p0WdFSESWYMLnR2gj8VDf/NLU5815Rlk4N4F5QgEpBA0
+         BG1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=/2d6rLVdbiu3k4KHPzVDHMijrQX311QFjaaa3Wo4FbU=;
-        b=kwI0fQlfU7TyS3H86BOmb4Z0Wq1vKUhtUvttYv1MjYqTM/+EG+rbnELb/ORVpkd2Ru
-         pS3Eva88BfnnpEUAav9jydFCCfOQmeTfLqfc/GtZnmnpCT957SXAuy4IZkYuErKuFVGR
-         V8YXEA89P96Liexg2E/1dpo+OI9oyLBrzUFv3/jHQiD0Ix7i+tyLtLL1o7JU2/BbMTEw
-         /Qh3iifNF2kCZz/aZrNFhB5oMVy2iq5GWMAg1eVOzI3quPXijfvvaVcfDhOl4fbc5s96
-         yxEfyw2CXsCpv4RuVjaerU3xj/oEEP92zlGmKd6ZNB/fX6GKR4G848ej2rbniWwksEqf
-         ndrg==
-X-Gm-Message-State: AOAM533C8/Ud9Lx0djd0HHAwsDoJM1w8t0qksqre1N9PhjTBkdkQMOmF
-	ETH6cQvZrMtt9E5wRfMCW06V5n8AradecQ==
-X-Google-Smtp-Source: ABdhPJzdCI1U3xwXnYyz1pvM87qSqg0Jfr8Hcx4Wc/lVwNcFa9KMH0TQooDJSe/j9fjF7obkMcSv0g==
-X-Received: by 2002:a63:8448:: with SMTP id k69mr4347714pgd.69.1598324707702;
-        Mon, 24 Aug 2020 20:05:07 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::55db])
-        by smtp.gmail.com with ESMTPSA id 5sm13399984pfw.25.2020.08.24.20.05.06
+        bh=A99qIK0jkvvupujf+zX9ERJ7dnPaovQSYzfUNTMs2ko=;
+        b=PhjlaX11Su8/BQ/v2ZMgwmaCbZ2NmEGqgb/1U4wWatyFHhM9AwrS5AgecLSXry8CTk
+         zMuJW5RtFmh+NF8nTVz0O2v5kZbxc9Sesa7x9jNx583OAm9e2oOumGcHHszwSXd/Fv/h
+         GpYjyE3aeqXHQNmeL8o9pyRNq1cPeiJHroMkMHFZXraMBmtiDIbL/BxJXocdQ7qBak3C
+         Avu62vXaWseuOq54z/1raZb28m6NNX8e7AGFoupOb+N9EbhZgyB0AxDxSZdljRkXORgt
+         oFNEX2teMDQ6vVg7hHiiDb3NP8/sgdKp2xqCIc0GPmjUNjGaSlQscJHU/+Qr6tEiQcyh
+         p2NQ==
+X-Gm-Message-State: AOAM530D9IXnDYoSwaqQ15DeqCyss/LMfMBrSdcr0cvZIbKOtYMoNxmu
+	6q9LoyfJsB4+9k6gtPU1R/mx3p4yLyCx/w==
+X-Google-Smtp-Source: ABdhPJwHPsGNfXGd/WzJnCKoa69x6n9beg3mNg8izr/mvP4RlrL06rW5MwVE8oOx5D1W0ENZdj4EHQ==
+X-Received: by 2002:a17:90a:aa90:: with SMTP id l16mr20114pjq.210.1598328486933;
+        Mon, 24 Aug 2020 21:08:06 -0700 (PDT)
+Return-Path: <arthur.she@linaro.org>
+Received: from arthur-X1E.hitronhub.home (S0106a84e3f840fe3.vn.shawcable.net. [50.68.230.12])
+        by smtp.gmail.com with ESMTPSA id m22sm998081pja.36.2020.08.24.21.08.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 Aug 2020 20:05:06 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Mon, 24 Aug 2020 21:08:06 -0700 (PDT)
+From: "Arthur She" <arthur.she@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Richard Leitner <richard.leitner@skidata.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] v2 liburing: add v0.7
-Date: Mon, 24 Aug 2020 20:05:04 -0700
-Message-Id: <20200825030504.1549416-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
+Cc: Arthur She <arthur.she@linaro.org>
+Subject: [meta-oe][PATCH] xmlrpc-c: fix Makefile macro error
+Date: Mon, 24 Aug 2020 21:08:03 -0700
+Message-Id: <20200825040803.837645-1-arthur.she@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Richard Leitner <richard.leitner@skidata.com>
+This error caused the curl library not to be linked.
 
-Add initial support for liburing v0.7.
-Fix build with musl by linking and depending on libucontext
-
-Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Arthur She <arthur.she@linaro.org>
 ---
-v2: Fix build with musl C library
+ .../0003-Fix-Makefile-macro-error.patch       | 26 +++++++++++++++++++
+ .../xmlrpc-c/xmlrpc-c_1.54.02.bb              |  1 +
+ 2 files changed, 27 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0003-Fix-Makefile-macro-error.patch
 
- .../recipes-support/liburing/liburing_0.7.bb  | 23 +++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-oe/recipes-support/liburing/liburing_0.7.bb
-
-diff --git a/meta-oe/recipes-support/liburing/liburing_0.7.bb b/meta-oe/recipes-support/liburing/liburing_0.7.bb
+diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0003-Fix-Makefile-macro-error.patch b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0003-Fix-Makefile-macro-error.patch
 new file mode 100644
-index 0000000000..c66021156c
+index 000000000..e0be24bf7
 --- /dev/null
-+++ b/meta-oe/recipes-support/liburing/liburing_0.7.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "This is the io_uring library, liburing."
-+DESCRIPTION = "liburing provides helpers to setup and teardown io_uring \
-+instances, and also a simplified interface for applications that don't need \
-+(or want) to deal with the full kernel side implementation."
-+HOMEPAGE = "https://github.com/axboe/liburing"
-+BUGTRACKER = "https://github.com/axboe/liburing/issues"
-+SECTION = "libs"
++++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0003-Fix-Makefile-macro-error.patch
+@@ -0,0 +1,26 @@
++From bb4057f06dd4a0b7823c1952b14cee7882664f1b Mon Sep 17 00:00:00 2001
++From: Arthur She <arthur.she@linaro.org>
++Date: Mon, 24 Aug 2020 20:50:58 -0700
++Subject: [PATCH] Fix Makefile macro error
 +
-+LICENSE = "LGPLv2.1 | MIT"
-+LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=d51b5805e2a675685e6a66ca50904cf9"
++The libcurl will not be liked due to this error.
++---
++ src/Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https"
-+SRCREV = "45f0735219a615ae848033c47c7e2d85d101d43e"
-+S = "${WORKDIR}/git"
++diff --git a/src/Makefile b/src/Makefile
++index 1cdf8b0..acd04dd 100644
++--- a/src/Makefile
+++++ b/src/Makefile
++@@ -57,7 +57,7 @@ ifeq ($(MUST_BUILD_CURL_CLIENT),yes)
++   TRANSPORT_MODS += $(BLDDIR)/lib/curl_transport/xmlrpc_curl_transport
++   TRANSPORT_MODS += $(BLDDIR)/lib/curl_transport/curltransaction
++   TRANSPORT_MODS += $(BLDDIR)/lib/curl_transport/curlmulti
++-  TRANSPORT_LIBDEP += $(shell $CURL_CONFIG --libs)
+++  TRANSPORT_LIBDEP += $(shell $(CURL_CONFIG) --libs)
++   TRANSPORT_INCLUDES += -Isrcdir/lib/curl_transport
++ endif
++ ifeq ($(MUST_BUILD_LIBWWW_CLIENT),yes)
++-- 
++2.25.1
 +
-+DEPENDS_append_libc-musl = " libucontext"
-+XCFLAGS_append_libc-musl = " -lucontext"
-+
-+EXTRA_OEMAKE = "'CC=${CC}' 'RANLIB=${RANLIB}' 'AR=${AR}' 'CFLAGS=${CFLAGS} -I${S}/include -DWITHOUT_XATTR' 'LDFLAGS=${LDFLAGS}' 'XCFLAGS=${XCFLAGS}' 'BUILDDIR=${S}'"
-+
-+do_install () {
-+    oe_runmake install DESTDIR=${D} SBINDIR=${sbindir} MANDIR=${mandir} INCLUDEDIR=${includedir}
-+}
+diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb
+index c1f0b78ca..eec945824 100644
+--- a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb
++++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://doc/COPYING;md5=aefbf81ba0750f02176b6f86752ea951"
+ SRC_URI = "git://github.com/mirror/xmlrpc-c.git \
+            file://0001-test-cpp-server_abyss-Fix-build-with-clang-libc.patch \
+            file://0002-fix-formatting-issues.patch \
++           file://0003-Fix-Makefile-macro-error.patch \
+            "
+ 
+ #Release 1.54.02
 -- 
-2.28.0
+2.25.1
 
