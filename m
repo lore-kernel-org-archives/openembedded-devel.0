@@ -1,102 +1,72 @@
-Received: from outbound.soverin.net (outbound.soverin.net [116.202.65.218])
- by mx.groups.io with SMTP id smtpd.web12.9741.1598345801989907005
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.10494.1598349259386414493
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Aug 2020 01:56:43 -0700
+ Tue, 25 Aug 2020 02:54:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: embed.me.uk, ip: 116.202.65.218, mailfrom: ml@embed.me.uk)
-Received: from smtp.soverin.net (unknown [10.10.3.24])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
-	(No client certificate requested)
-	by outbound.soverin.net (Postfix) with ESMTPS id 1CF0360AEC
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2020 08:56:39 +0000 (UTC)
-Received: from smtp.soverin.net (smtp.soverin.net [159.69.232.138]) by soverin.net
-From: "Jack Mitchell" <ml@embed.me.uk>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=54770 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kAVeh-0003Eu-8j; Tue, 25 Aug 2020 12:54:16 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jack Mitchell <ml@embed.me.uk>
-Subject: [meta-networking][PATCH] meta-networking: dhcpcd: backport ALIGN compile error fix
-Date: Tue, 25 Aug 2020 09:56:21 +0100
-Message-Id: <20200825085621.3445046-1-ml@embed.me.uk>
-MIME-Version: 1.0
-X-Virus-Scanned: clamav-milter 0.102.4 at c03mi01
-X-Virus-Status: Clean
-Content-Transfer-Encoding: quoted-printable
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH 1/3] doxygen: Upgrade 1.8.17 -> 1.8.20
+Date: Tue, 25 Aug 2020 12:54:05 +0300
+Message-Id: <20200825095407.18867-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Fails to build on an aarch64 system with ipv6 disabled. This backported
-patch fixes it.
+Upgrade to release 1.8.20:
 
-Signed-off-by: Jack Mitchell <ml@embed.me.uk>
+- Add configuration setting to have docstrings not as preformatted
+  text but as normal documentation
+- Bug fix: void return type reported as not documented
+- Bug fix: Doxywizard 1.8.19 (Windows): Source code directory
+  seems to be ignored
+- Bug fix: The Doxygen uses too much memory (or has probably a
+  memory leak)
+- Bug fix: Doxygen doesn't stop on errors
+- Bug fix: C++ grouped functions in namespace have disappeard
+- Improvement of line count for e.g. warnings
+- Improved layout on the bibliography page
+- Updated the swedish language translation to 1.8.19
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../dhcpcd/dhcpcd_9.1.4.bb                    |  3 +-
- ...-on-systems-that-do-not-define-ALIGN.patch | 34 +++++++++++++++++++
- 2 files changed, 36 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-connectivity/dhcpcd/files/000=
-2-Fix-compile-without-IPv6-on-systems-that-do-not-define-ALIGN.patch
+ .../doxygen/{doxygen_1.8.17.bb => doxygen_1.8.20.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/doxygen/{doxygen_1.8.17.bb => doxygen_1.8.20.bb} (79%)
 
-diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_9.1.4.bb =
-b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_9.1.4.bb
-index defd3420f..766df3a2b 100644
---- a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_9.1.4.bb
-+++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_9.1.4.bb
-@@ -12,7 +12,8 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D9674cc803c5d=
-71306941e6e8b5c002f2"
- UPSTREAM_CHECK_URI =3D "https://roy.marples.name/downloads/dhcpcd/"
-=20
- SRC_URI =3D "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.x=
-z \
--           file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch"
-+           file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch \
-+	   file://0002-Fix-compile-without-IPv6-on-systems-that-do-not-define-A=
-LIGN.patch"
-=20
- SRC_URI[sha256sum] =3D "5fe133e5497d8af6d26bd6e6b8dd48ab12d124d6cc4cefe6=
-de6536ff97f76820"
-=20
-diff --git a/meta-networking/recipes-connectivity/dhcpcd/files/0002-Fix-c=
-ompile-without-IPv6-on-systems-that-do-not-define-ALIGN.patch b/meta-netw=
-orking/recipes-connectivity/dhcpcd/files/0002-Fix-compile-without-IPv6-on=
--systems-that-do-not-define-ALIGN.patch
-new file mode 100644
-index 000000000..2c7f24ebf
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/dhcpcd/files/0002-Fix-compile-=
-without-IPv6-on-systems-that-do-not-define-ALIGN.patch
-@@ -0,0 +1,34 @@
-+From 7643b6615aab4de290ead6c1a6b56f10a82bbe6f Mon Sep 17 00:00:00 2001
-+From: Roy Marples <roy@marples.name>
-+Date: Sat, 4 Jul 2020 13:21:09 +0100
-+Subject: [PATCH] Fix compile without IPv6 on systems that do not define =
-ALIGN
-+
-+Upstream-Status: backport
-+
-+---
-+ src/dhcpcd.h | 5 -----
-+ 1 file changed, 5 deletions(-)
-+
-+diff --git a/src/dhcpcd.h b/src/dhcpcd.h
-+index 61a6a081..d9719c0a 100644
-+--- a/src/dhcpcd.h
-++++ b/src/dhcpcd.h
-+@@ -96,7 +96,6 @@ TAILQ_HEAD(if_head, interface);
-+=20
-+ #include "privsep.h"
-+=20
-+-#ifdef INET6
-+ /* dhcpcd requires CMSG_SPACE to evaluate to a compile time constant. *=
-/
-+ #if defined(__QNX) || \
-+ 	(defined(__NetBSD_Version__) && __NetBSD_Version__ < 600000000)
-+@@ -113,10 +112,6 @@ TAILQ_HEAD(if_head, interface);
-+ #define	CMSG_SPACE(len)	(ALIGN(sizeof(struct cmsghdr)) + ALIGN(len))
-+ #endif
-+=20
-+-#define IP6BUFLEN	(CMSG_SPACE(sizeof(struct in6_pktinfo)) + \
-+-			CMSG_SPACE(sizeof(int)))
-+-#endif
-+-
-+ struct passwd;
-+=20
-+ struct dhcpcd_ctx {
---=20
-2.28.0
+diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.20.bb
+similarity index 79%
+rename from meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb
+rename to meta-oe/recipes-devtools/doxygen/doxygen_1.8.20.bb
+index 45de71826..d4ac3b720 100644
+--- a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb
++++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.20.bb
+@@ -10,8 +10,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
+            file://0001-build-don-t-look-for-Iconv.patch \
+ "
+ SRC_URI_append_class-native = " file://doxygen-native-only-check-python3.patch"
+-SRC_URI[md5sum] = "7997a15c73a8bd6d003eaba5c2ee2b47"
+-SRC_URI[sha256sum] = "2cba988af2d495541cbbe5541b3bee0ee11144dcb23a81eada19f5501fd8b599"
++SRC_URI[md5sum] = "8729936a843232a66fe970ef65f3c3e4"
++SRC_URI[sha256sum] = "e0db6979286fd7ccd3a99af9f97397f2bae50532e4ecb312aa18862f8401ddec"
+ 
+ inherit cmake python3native
+ 
+-- 
+2.17.1
 
