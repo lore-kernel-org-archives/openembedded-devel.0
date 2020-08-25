@@ -1,123 +1,95 @@
-Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com [209.85.219.47])
- by mx.groups.io with SMTP id smtpd.web10.1067.1598379256010178922
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
+ by mx.groups.io with SMTP id smtpd.web11.1237.1598379941333346432
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Aug 2020 11:14:16 -0700
+ Tue, 25 Aug 2020 11:25:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=kmhjWATW;
- spf=pass (domain: gmail.com, ip: 209.85.219.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f47.google.com with SMTP id w2so5932923qvh.12
-        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2020 11:14:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=qV4bkZ0j;
+ spf=pass (domain: gmail.com, ip: 209.85.160.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f195.google.com with SMTP id i2so6504264qtb.8
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2020 11:25:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=2k48g8t24FGSUbcwTVDxvlEQ0u9749k9s14BF15YWgk=;
-        b=kmhjWATWY/K2wTWhsGN/Qor10rjbQoxB7obMQy010Y67/MNHH0BkjB8BP62mXJ04jB
-         SumYYvZ0sBX/ZRa+84uSNKx66J/XzkLW+GGP6L0TIdJJZvtDANgIwOWYMcivAS3tdAo4
-         D+Z10+i3aKzQlINpEX7TT01dkB0rsnjgByL1ky8wZ+w8X365EEuB6NwW+HqZFiNdijKO
-         HEPKDFJXgJFyv9IlPHkAONEOZOdCPtuOsQHvQj6ocdNfIE8+dJJfEU+xQNbzFMUH2PlC
-         JkZA14lN7RQvd3Kjot+vHMCxzZ06jZVLTCBxvfkfQ2i1ZOCd8JgXWW+lQmJM6CXic6fH
-         IS2w==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=LBmqqZe9dI/NKBS7Pmom/eRs36ropIZPL+lWzyhGVQs=;
+        b=qV4bkZ0jw8aA2/XXLQTAhKB4FjkgDbUi8+WUg0HEf0/fpE+m0GTxQJEBRv1oYnLMGs
+         q3q/WEGq8ug8dRlEO3DqqLGySX+bkjQ2DHJaVfKso7rz1z9XiPEFrWD352DTJPPyX1hV
+         mJSW+5MOhZpU1pKd4n1n1u38CDXXGr1dhpqbGWFKnrjL+4y/zdo+S/7UDzCQwYNdYeI6
+         C6WWMGpAznaOzHo6YBHZREoiyvRgjtssa+k+eBDsc2wqQddh7DPL68RUL8fSYs2xIu8K
+         PhPqeEkqW13QxNe6tPqp1HH1Jx8/ry6aolcgXZv799jrZy5kuV5yr8Gj/hOhJsI8KNYk
+         iAew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=2k48g8t24FGSUbcwTVDxvlEQ0u9749k9s14BF15YWgk=;
-        b=WEUb4JsZ+n/7lXWWVz4FBza5V+kiyhpCx9o5gVleqQawHRrZRpDXeYiAw6EfSWkMjR
-         MD0+zg+Pg6qpvfxbENLtgh9xoDd+bKHBR0shwLznHEFR6h41Et8GJDgOddoL8DKW91Ee
-         D4WDpdkeYAu+E4N60P2LOQjRPzPyBNDqCmuHHzkLcTxA0LKyy+ykeHVkKm7Rv8f2STD3
-         7crj5asByREOTaRKuq7bAPYTbecbPB7HLfniRwzIlj4jAGjnRoFozzwoLVZt8MLBeFI8
-         8hay1vDNh6H7hW1I1XTkJSOisuY6uu8v6hhYlwtVY4QdefvdP/gIGsN4R2IHY/J2xLlL
-         DYKg==
-X-Gm-Message-State: AOAM531c8BSJSe6zcM4w2W6IMWuDQ/RVq6d5yoVyoonBertqhhS8MKOe
-	22H61ELrVh76BxIkRmw5RtpTSgVjQWirRw==
-X-Google-Smtp-Source: ABdhPJw+vlfSedZvkrF0L+sLuIfBcY15t4KdUn1EAG1Nv6QaBFIU+VHV3h4XLOznZ21P9bslpWnr7g==
-X-Received: by 2002:ad4:46e7:: with SMTP id h7mr10220178qvw.153.1598379254845;
-        Tue, 25 Aug 2020 11:14:14 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.cable.comcast.com ([2601:646:9200:4e0::55db])
-        by smtp.gmail.com with ESMTPSA id f3sm5410208qth.56.2020.08.25.11.14.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 25 Aug 2020 11:14:14 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Subject: [meta-oe][PATCH] vulkan-cts: Update to 1.2.3.2
-Date: Tue, 25 Aug 2020 11:14:10 -0700
-Message-Id: <20200825181410.1693069-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200825181410.1693069-1-raj.khem@gmail.com>
-References: <20200825181410.1693069-1-raj.khem@gmail.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=LBmqqZe9dI/NKBS7Pmom/eRs36ropIZPL+lWzyhGVQs=;
+        b=Iv8RscfjUbyGvOnbCYlknzzlriTDkMACZAcWMUeBweqNzTGa+gVePjU/BV57GdZW8l
+         54WaLbXydTL/Ktwsx7zYPxmTm8ilKF54gNNfyj9Nmk//SsFJ5xV6/Wqqr/F4YZ5FRU1E
+         TL7210ovWiPSqqfUaO4ik9TAGRG/e8tbDE7Cl9FwcmhrBIoNi8rTschuTgYydYCZRFYb
+         R3KBN9STL1Jg/swd9KJrJP82uxSoponK+P0+VmtvxKTnJ4jV/OvM8+y5SOMGozC8gUdx
+         LlB7iJt20tEIOSA0Ht54oZY+89VZxNrJogInmpnomewe4JxtQdGDpaMtvpWfF0BHnywt
+         kGgw==
+X-Gm-Message-State: AOAM531lx4TEe2Lp7pcN2imRWMn5edBmeBaYyTiOteqNNfQrw4mHrs0m
+	WZv6xYsceOeMWye+djrYwC/42ApzQU/ZTFFxTzI=
+X-Google-Smtp-Source: ABdhPJw2YkSJM52F3S8mZ1nhUYw+iitL653fSy4GF1WuqmswlR/V4NMLrilNkeCLljn76X7ixrxjz2eHrvL07yI310A=
+X-Received: by 2002:ac8:70cd:: with SMTP id g13mr10688995qtp.53.1598379940294;
+ Tue, 25 Aug 2020 11:25:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20200825095407.18867-1-leon.anavi@konsulko.com>
+In-Reply-To: <20200825095407.18867-1-leon.anavi@konsulko.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Tue, 25 Aug 2020 11:25:14 -0700
+Message-ID: <CAMKF1soynk8yNEZA5LZL4K-DpY6v2S2sRwQJQgp7dQ8BkqZgSw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/3] doxygen: Upgrade 1.8.17 -> 1.8.20
+To: Leon Anavi <leon.anavi@konsulko.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Expand SRCREV_FORMAT to cover all repos in SRC_URI
-Drop using tags since they force bitbake to enquire remote, use
-corresponding SRCREV instead
+Fails to patch doxygen-native :(
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
----
- meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc            | 4 ++--
- meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb   | 3 ++-
- .../{vulkan-cts_1.2.3.0.bb => vulkan-cts_1.2.3.2.bb}          | 3 ++-
- 3 files changed, 6 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-graphics/vk-gl-cts/{vulkan-cts_1.2.3.0.bb => vulkan-cts_1.2.3.2.bb} (90%)
 
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-index 4a297c313a..e64a935dda 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-@@ -2,7 +2,7 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
- SRC_URI = "\
--	git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https;tag=${BPN}-${PV};name=vk-gl-cts \
-+	git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https;name=vk-gl-cts;nobranch=1 \
- 	git://github.com/google/amber;protocol=https;destsuffix=git/external/amber/src;name=amber;branch=main \
- 	git://github.com/KhronosGroup/glslang.git;protocol=https;destsuffix=git/external/glslang/src;name=glslang \
- 	git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;destsuffix=git/external/spirv-headers/src;name=spirv-headers \
-@@ -12,7 +12,7 @@ SRC_URI = "\
- 
- S = "${WORKDIR}/git"
- 
--SRCREV_FORMAT = "vk-gl-cts"
-+SRCREV_FORMAT = "vk-gl-cts_amber_glslang_spirv-headers_spirv-tools"
- 
- S = "${WORKDIR}/git"
- 
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb
-index 0e50fd9474..5e0076b207 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb
-@@ -1,7 +1,8 @@
- DESCRIPTION = "OpenGL CTS"
- 
- require khronos-cts.inc
--
-+# opengl-es-cts-3.2.6.1
-+SRCREV_vk-gl-cts = "7e023f81b4fff54b558882fe739d7c959d0a02a8"
- SRCREV_amber = "d26ee22dd7faab1845a531d410f7ec1db407402a"
- SRCREV_glslang = "c538b5d796fb24dd418fdd650c7f76e56bcc3dd8"
- SRCREV_spirv-headers = "e4322e3be589e1ddd44afb20ea842a977c1319b8"
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.2.3.0.bb b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.2.3.2.bb
-similarity index 90%
-rename from meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.2.3.0.bb
-rename to meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.2.3.2.bb
-index 77064d4ede..f07b12decd 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.2.3.0.bb
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.2.3.2.bb
-@@ -1,7 +1,8 @@
- DESCRIPTION = "Vulkan CTS"
- 
- require khronos-cts.inc
--
-+# vulkan-cts-1.2.3.2
-+SRCREV_vk-gl-cts = "5cd2240b60825fbbf6bd9ddda6af176ee3100c70"
- SRCREV_amber = "a40bef4dba98d2d80b48e5a940d8574fbfceb197"
- SRCREV_glslang = "b5f003d7a3ece37db45578a8a3140b370036fc64"
- SRCREV_spirv-headers = "f8bf11a0253a32375c32cad92c841237b96696c0"
--- 
-2.28.0
-
+On Tue, Aug 25, 2020 at 2:54 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
+>
+> Upgrade to release 1.8.20:
+>
+> - Add configuration setting to have docstrings not as preformatted
+>   text but as normal documentation
+> - Bug fix: void return type reported as not documented
+> - Bug fix: Doxywizard 1.8.19 (Windows): Source code directory
+>   seems to be ignored
+> - Bug fix: The Doxygen uses too much memory (or has probably a
+>   memory leak)
+> - Bug fix: Doxygen doesn't stop on errors
+> - Bug fix: C++ grouped functions in namespace have disappeard
+> - Improvement of line count for e.g. warnings
+> - Improved layout on the bibliography page
+> - Updated the swedish language translation to 1.8.19
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> ---
+>  .../doxygen/{doxygen_1.8.17.bb => doxygen_1.8.20.bb}          | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-devtools/doxygen/{doxygen_1.8.17.bb => doxygen_1.8.20.bb} (79%)
+>
+> diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.20.bb
+> similarity index 79%
+> rename from meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb
+> rename to meta-oe/recipes-devtools/doxygen/doxygen_1.8.20.bb
+> index 45de71826..d4ac3b720 100644
+> --- a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb
+> +++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.20.bb
+> @@ -10,8 +10,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
+>             file://0001-build-don-t-look-for-Iconv.patch \
+>  "
+>  SRC_URI_append_class-native = " file://doxygen-native-only-check-python3.patch"
+> -SRC_URI[md5sum] = "7997a15c73a8bd6d003eaba5c2ee2b47"
+> -SRC_URI[sha256sum] = "2cba988af2d495541cbbe5541b3bee0ee11144dcb23a81eada19f5501fd8b599"
+> +SRC_URI[md5sum] = "8729936a843232a66fe970ef65f3c3e4"
+> +SRC_URI[sha256sum] = "e0db6979286fd7ccd3a99af9f97397f2bae50532e4ecb312aa18862f8401ddec"
+>
+>  inherit cmake python3native
+>
+> --
+> 2.17.1
+>
+> 
