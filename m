@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.13508.1598362011711580263
+ by mx.groups.io with SMTP id smtpd.web12.13392.1598362012218718509
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 25 Aug 2020 06:26:52 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=56752 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kAYyP-0001xr-S9; Tue, 25 Aug 2020 16:26:50 +0300
+	id 1kAYyQ-0001xr-Pz; Tue, 25 Aug 2020 16:26:51 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/7] python3-openpyxl: Upgrade 3.0.4 -> 3.0.5
-Date: Tue, 25 Aug 2020 16:26:29 +0300
-Message-Id: <20200825132633.875-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/7] python3-cmd2: Upgrade 1.3.3 -> 1.3.4
+Date: Tue, 25 Aug 2020 16:26:30 +0300
+Message-Id: <20200825132633.875-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200825132633.875-1-leon.anavi@konsulko.com>
 References: <20200825132633.875-1-leon.anavi@konsulko.com>
@@ -30,39 +30,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.0.5 with the following bugfixes:
+Upgrade to release 1.3.4:
 
-- Incorrectly consider currency format as datetime
-- Cannot copy worksheets with merged cells
-- Empty worksheets do not return generators when looping
-- Hyperlinks duplicated on multiple saves
-- Incorrectly literal format as datetime
-- Links set to range of cells not preserved
-- Exception when opening workbook with chartsheets and tables
+- Fixed AttributeError when CommandSet that uses
+  as_subcommand_to decorator is loaded during cmd2.Cmd.__init__()
+- Improved exception messages when using mock without spec=True
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-openpyxl_3.0.4.bb => python3-openpyxl_3.0.5.bb}  | 4 ++--
+ .../python/{python3-cmd2_1.3.3.bb => python3-cmd2_1.3.4.bb}   | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-openpyxl_3.0.4.bb => python3-openpyxl_3.0.5.bb} (81%)
+ rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.3.bb => python3-cmd2_1.3.4.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-openpyxl_3.0.4.bb b/meta-python/recipes-devtools/python/python3-openpyxl_3.0.5.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-openpyxl_3.0.4.bb
-rename to meta-python/recipes-devtools/python/python3-openpyxl_3.0.5.bb
-index d0946e49a..0aa9fb020 100644
---- a/meta-python/recipes-devtools/python/python3-openpyxl_3.0.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-openpyxl_3.0.5.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148
+diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.3.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.3.4.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.3.bb
+rename to meta-python/recipes-devtools/python/python3-cmd2_1.3.4.bb
+index a44f02f00..ab05b82e1 100644
+--- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.3.bb
++++ b/meta-python/recipes-devtools/python/python3-cmd2_1.3.4.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def"
+ 
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+ 
+-SRC_URI[md5sum] = "c8ffa926c50673f00fd8ff8533e9f959"
+-SRC_URI[sha256sum] = "38015008ff4639edfd66591063a0e9bb75a62dccb14ee3ec7bf3a6cb130de5cf"
++SRC_URI[md5sum] = "6b746468d1fd606b5dd96058dde0c5ac"
++SRC_URI[sha256sum] = "b56f82f3ef3c9a0aa08423e25a97516a3e19239b051426be5686611786fd6032"
  
  inherit pypi setuptools3
  
--SRC_URI[md5sum] = "8491219f6bd83ca6ad8334bf77435cf5"
--SRC_URI[sha256sum] = "d88dd1480668019684c66cfff3e52a5de4ed41e9df5dd52e008cbf27af0dbf87"
-+SRC_URI[md5sum] = "526b7149538575d58e55df1bd37807c1"
-+SRC_URI[sha256sum] = "18e11f9a650128a12580a58e3daba14e00a11d9e907c554a17ea016bf1a2c71b"
- 
- RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-jdcal ${PYTHON_PN}-et-xmlfile"
 -- 
 2.17.1
 
