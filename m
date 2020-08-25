@@ -1,66 +1,85 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.13510.1598362014890922143
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com [209.85.221.65])
+ by mx.groups.io with SMTP id smtpd.web10.16644.1598370350865385543
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Aug 2020 06:26:55 -0700
+ Tue, 25 Aug 2020 08:45:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=56752 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kAYyT-0001xr-2j; Tue, 25 Aug 2020 16:26:53 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=pass header.i=@kynetics-com.20150623.gappssmtp.com header.s=20150623 header.b=IlXAdFSM;
+ spf=neutral (domain: kynetics.com, ip: 209.85.221.65, mailfrom: diego.rondini@kynetics.com)
+Received: by mail-wr1-f65.google.com with SMTP id y3so13189531wrl.4
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2020 08:45:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=kynetics-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=XSBMCmM3NIJzjDUdAafmNkcxcGJf1HXhGbjlPpnpFbA=;
+        b=IlXAdFSMuSpEIl5JAv+oHv9i7PYgEISIC1gTi+dtOZGwsynNZQf3t92gDcYuLhOdS+
+         HWdIRQOP5ci++uFRM6HXpF6bBtVFkTY7+c9BRmwVo102UX8a7mnnmqe299vH4r91iWjX
+         uPHXHUTMeK0iLzQ2uKx3Jeho0snaivKNpWIM0k4a71ZwZdzh9l23V23En0+Z1OitGA78
+         aSZeso4GEWHiz3DMTbF/MIL6AQxiDSkysv4vesjQrCz9fVM1cMFPmM5gJ3+17GtQcPx0
+         vU+axHvTl7zNdP+yMHeXHLLo3bjIPxRINslY9yTOxuTnMZO0aUEU2ayjuH7ImNtafM/b
+         aqkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=XSBMCmM3NIJzjDUdAafmNkcxcGJf1HXhGbjlPpnpFbA=;
+        b=YediOsxE46mtrYjZTdQr25d1DXOQdj26SeNzd+KwbUbQDIpRp8c/lX+TYN9ib0T/Cr
+         jdETv313fX0lMXcDecFaDhdAU9b5svw2vFRp1+NSv2fjiyrcM3JXcv4BmK9Ez/m9BX97
+         iDHOhWvr1nzACEudaeW6ZwkhTcSZinfeTZWg+FEFFLpLI5MTRTXT+JQC0gtkI4VDmY76
+         xcpn42I8TrIot8n2c3Cdufahtr6/mNqhU8tABLIcRHe1QpkI6GlFHTNp4tIYkT4aJoP4
+         QlOe54tdWaBGlc5g8nROrPQuFgrmTcgH1gMj2zHiIcdhR6FoPaNnZH89caxBY8s86+Bq
+         PqEg==
+X-Gm-Message-State: AOAM533Ulpgdc/JW84G5IHhI+4Wa0+NStDsg9WgAQGkmJ4qaunnHJJo1
+	el4Wzmylk5FJdv9yWXNxF1GtyH9RjjmFJw==
+X-Google-Smtp-Source: ABdhPJz6IfQboBAWcKhmKtSH3plC1IFEH2xxvu5qidJf+u0s0RKZLA6A06iTmpPjjdQqaqyadJunrA==
+X-Received: by 2002:adf:ee83:: with SMTP id b3mr10955936wro.163.1598370349034;
+        Tue, 25 Aug 2020 08:45:49 -0700 (PDT)
+Return-Path: <diego.rondini@kynetics.com>
+Received: from localhost.lan (mob-109-119-218-57.net.vodafone.it. [109.119.218.57])
+        by smtp.gmail.com with ESMTPSA id j7sm4347745wrw.35.2020.08.25.08.45.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 25 Aug 2020 08:45:48 -0700 (PDT)
+From: "Diego" <diego.rondini@kynetics.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 7/7] python3-flask: Upgrade 1.1.1 -> 1.1.2
-Date: Tue, 25 Aug 2020 16:26:33 +0300
-Message-Id: <20200825132633.875-7-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200825132633.875-1-leon.anavi@konsulko.com>
-References: <20200825132633.875-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Cc: Diego Rondini <diego.rondini@kynetics.com>
+Subject: [meta-oe][PATCH] libeigen: update SRC_URI to download from gitlab
+Date: Tue, 25 Aug 2020 17:45:24 +0200
+Message-Id: <20200825154524.188696-1-diego.rondini@kynetics.com>
+X-Mailer: git-send-email 2.26.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 1.1.2:
+Bitbucket is no longer the official home of eigen, which has moved to
+gitlab. Update SRC_URI to download releases from gitlab, fixing:
+WARNING: libeigen-3.3.7-r0 do_fetch: Failed to fetch URL
+https://bitbucket.org/eigen/eigen/get/3.3.7.tar.bz2;downloadfilename=libeigen-3.3.7.tar.bz2,
+attempting MIRRORS if available
 
-- Work around an issue when running the flask command with an
-  external debugger on Windows.
-- The static route will not catch all URLs if the Flask
-  static_folder argument ends with a slash.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Diego Rondini <diego.rondini@kynetics.com>
 ---
- .../python/{python3-flask_1.1.1.bb => python3-flask_1.1.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-flask_1.1.1.bb => python3-flask_1.1.2.bb} (79%)
+ meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask_1.1.1.bb b/meta-python/recipes-devtools/python/python3-flask_1.1.2.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-flask_1.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-flask_1.1.2.bb
-index fbe1ca00e..23799617f 100644
---- a/meta-python/recipes-devtools/python/python3-flask_1.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask_1.1.2.bb
-@@ -6,8 +6,8 @@ HOMEPAGE = "https://github.com/mitsuhiko/flask/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
+diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
+index f638848d1..9c3d962f4 100644
+--- a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
++++ b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
+@@ -4,11 +4,11 @@ HOMEPAGE = "http://eigen.tuxfamily.org/"
+ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
  
--SRC_URI[md5sum] = "0e3ed44ece1c489ed835d1b7047e349c"
--SRC_URI[sha256sum] = "13f9f196f330c7c2c5d7a5cf91af894110ca0215ac051b5844701f2bfd934d52"
-+SRC_URI[md5sum] = "0da4145d172993cd28a6c619630cc19c"
-+SRC_URI[sha256sum] = "4efa1ae2d7c9865af48986de8aeb8504bf32c7f3d6fdc9353d34b21f4b127060"
+-SRC_URI = "https://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2;downloadfilename=${BP}.tar.bz2"
+-SRC_URI[md5sum] = "05b1f7511c93980c385ebe11bd3c93fa"
+-SRC_URI[sha256sum] = "9f13cf90dedbe3e52a19f43000d71fdf72e986beb9a5436dddcd61ff9d77a3ce"
++SRC_URI = "https://gitlab.com/libeigen/eigen/-/archive/${PV}/eigen-${PV}.tar.bz2"
++SRC_URI[md5sum] = "b9e98a200d2455f06db9c661c5610496"
++SRC_URI[sha256sum] = "685adf14bd8e9c015b78097c1dc22f2f01343756f196acdc76a678e1ae352e11"
  
- PYPI_PACKAGE = "Flask"
+-S = "${WORKDIR}/eigen-eigen-323c052e1731"
++S = "${WORKDIR}/eigen-${PV}"
+ 
+ inherit cmake
  
 -- 
-2.17.1
+2.26.2
 
