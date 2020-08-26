@@ -1,87 +1,60 @@
-Received: from mail.kapsi.fi (mail.kapsi.fi [91.232.154.25])
- by mx.groups.io with SMTP id smtpd.web10.8564.1598433325201462188
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.15202.1598456434236940686
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Aug 2020 02:15:25 -0700
+ Wed, 26 Aug 2020 08:40:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: lakka.kapsi.fi, ip: 91.232.154.25, mailfrom: mcfrisk@lakka.kapsi.fi)
-Received: from kapsi.fi ([2001:67c:1be8::11] helo=lakka.kapsi.fi)
-	by mail.kapsi.fi with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.89)
-	(envelope-from <mcfrisk@lakka.kapsi.fi>)
-	id 1kArWa-0001mF-Pc; Wed, 26 Aug 2020 12:15:21 +0300
-Received: from mcfrisk by lakka.kapsi.fi with local (Exim 4.92)
-	(envelope-from <mcfrisk@lakka.kapsi.fi>)
-	id 1kArWa-000AK0-Nh; Wed, 26 Aug 2020 12:15:20 +0300
-From: "Mikko Rapeli" <mikko.rapeli@bmw.de>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=50396 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kAxXI-0002yf-Qm; Wed, 26 Aug 2020 18:40:31 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Mikko Rapeli <mikko.rapeli@bmw.de>
-Subject: [meta-oe][PATCH] nss: fix postinst script for nativesdk build
-Date: Wed, 26 Aug 2020 12:15:03 +0300
-Message-Id: <20200826091503.35364-1-mikko.rapeli@bmw.de>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-X-Rspam-Score: 2.3 (++)
-X-Rspam-Report: Action: no action
- Symbol: RCVD_TLS_LAST(0.00)
- Symbol: ARC_NA(0.00)
- Symbol: DMARC_POLICY_SOFTFAIL(0.10)
- Symbol: FROM_HAS_DN(0.00)
- Symbol: TO_DN_SOME(0.00)
- Symbol: R_MISSING_CHARSET(2.50)
- Symbol: TO_MATCH_ENVRCPT_ALL(0.00)
- Symbol: MIME_GOOD(-0.10)
- Symbol: BROKEN_CONTENT_TYPE(1.50)
- Symbol: RCPT_COUNT_TWO(0.00)
- Symbol: MID_CONTAINS_FROM(1.00)
- Symbol: NEURAL_HAM(-0.00)
- Symbol: R_SPF_NA(0.00)
- Symbol: FORGED_SENDER(0.30)
- Symbol: R_DKIM_NA(0.00)
- Symbol: MIME_TRACE(0.00)
- Symbol: ASN(0.00)
- Symbol: FROM_NEQ_ENVFROM(0.00)
- Symbol: BAYES_HAM(-3.00)
- Symbol: RCVD_COUNT_TWO(0.00)
- Message-ID: 20200826091503.35364-1-mikko.rapeli@bmw.de
-X-SA-Exim-Connect-IP: 2001:67c:1be8::11
-X-SA-Exim-Mail-From: mcfrisk@lakka.kapsi.fi
-X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/6] python3-diskcache: Upgrade 5.0.1 -> 5.0.2
+Date: Wed, 26 Aug 2020 18:40:15 +0300
+Message-Id: <20200826154020.29208-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-It's better to refer to binaries in postinst script with
-full path which also works on SDK when
-/opt/nativesysroot/usr/bin is not in PATH.
+Stay up to date and upgrade to latest release following the recent
+"bump version to 5.0.2" commit in the GitHub upstream repo.
 
-Fixes install of nativesdk-nss:
-
-Configuring nativesdk-nss.
-/var/lib/opkg/info/nativesdk-nss.postinst: line 14: signlibs.sh: not found
-
-Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-support/nss/nss_3.54.bb | 4 ++--
+ ...{python3-diskcache_5.0.1.bb => python3-diskcache_5.0.2.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-diskcache_5.0.1.bb => python3-diskcache_5.0.2.bb} (67%)
 
-diff --git a/meta-oe/recipes-support/nss/nss_3.54.bb b/meta-oe/recipes-support/nss/nss_3.54.bb
-index 4923f6868..dc5cafbf1 100644
---- a/meta-oe/recipes-support/nss/nss_3.54.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.54.bb
-@@ -244,13 +244,13 @@ pkg_postinst_${PN} () {
-             DN=`dirname $I`
-             BN=`basename $I .chk`
-             FN=$DN/$BN.so
--            shlibsign -i $FN
-+            ${bindir}/shlibsign -i $FN
-             if [ $? -ne 0 ]; then
-                 exit 1
-             fi
-         done
-     else
--        signlibs.sh
-+        ${bindir}/signlibs.sh
-     fi
- }
+diff --git a/meta-python/recipes-devtools/python/python3-diskcache_5.0.1.bb b/meta-python/recipes-devtools/python/python3-diskcache_5.0.2.bb
+similarity index 67%
+rename from meta-python/recipes-devtools/python/python3-diskcache_5.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-diskcache_5.0.2.bb
+index 9f92fde22..7eda65fa0 100644
+--- a/meta-python/recipes-devtools/python/python3-diskcache_5.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-diskcache_5.0.2.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.grantjenks.com/docs/diskcache/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c985b6a9269e57a1073d5f142d68eb68"
+ 
+-SRC_URI[md5sum] = "5c8c5789f584a36eacc7240921eee35c"
+-SRC_URI[sha256sum] = "b24a2da03d6a45edcec14ea6ef7129ddf0de78f04497557308d1461753d90633"
++SRC_URI[md5sum] = "b8061d293045b29b83201cf9a62b1da2"
++SRC_URI[sha256sum] = "6e350e795e197f979316a3f524a729edb13d1739959c6e9cb5df78a0a72c8255"
+ 
+ PYPI_PACKAGE = "diskcache"
  
 -- 
-2.20.1
+2.17.1
 
