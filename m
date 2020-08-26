@@ -1,117 +1,85 @@
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web12.8316.1598430871085709054
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com [209.85.221.67])
+ by mx.groups.io with SMTP id smtpd.web12.8464.1598431908305298833
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Aug 2020 01:34:31 -0700
+ Wed, 26 Aug 2020 01:51:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=AygK9naC;
- spf=pass (domain: konsulko.com, ip: 209.85.128.48, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f48.google.com with SMTP id x9so885749wmi.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Aug 2020 01:34:30 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=Znv8aRt3;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.67, mailfrom: brgl@bgdev.pl)
+Received: by mail-wr1-f67.google.com with SMTP id b18so950714wrs.7
+        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Aug 2020 01:51:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=IcWDXU1lHMyatpFod0p2lFpsDdgRqyyeNo9i66bUfSs=;
-        b=AygK9naCdgiaiWHK/dS3A3of1lhH+gA9/r4cEdUZkYqyA6jCuMeTUgqR3AJYrqVMSd
-         dfRX5keOy2AJ15mTjUFfaNvG7y0Y+NN7uaxxrx/npOwAVR9tOEN7nRTius/m4Gpgjuwu
-         f4NYTFLOQWhQpCNuUzcxCC1oyttLGENrkLeaU=
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=mKkpnGDX0ZtUuxUIYJvW39vqMtglaQRvPlP8JPhKUSA=;
+        b=Znv8aRt3kp/Ro8VLdcncX4Oc9V76a5GoenPkLcuHiXs7dzmMHw8BTO8z9Pfk2IuJEX
+         XbeQcA7K73xDY64xC8DMLn1EWwp+4dBjji/NhyUEZ7Fv9evoLdxhrgdBsOJhkbqSZOr3
+         MqJVweo+e4sC1HHUI6rO8tdQmYHKa/XhVNiW+7HNFga38XecgZk35gNbDfVr4kN4LC6i
+         t1DsVQYickGEGjOVk6LDwoIZ+OnScL+31RMFZpFSndDVz/I9/t1nOw9VEcTMRtdNks6z
+         SCU+tmRXkNjIHQ8cuWqTQXiWBdoQOaJTzjKN8Ali74794jZ/qMkFWN6nhS0uRa6qkoxu
+         n0eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=IcWDXU1lHMyatpFod0p2lFpsDdgRqyyeNo9i66bUfSs=;
-        b=m4vtiT26+Lh0whqxY/a01fYr4M0DHKL3FZzz1vAER+HEO1AEKSWH9sqhJEgV+A3kXy
-         rdAwGRCv6lhEOY28XJmj8s/jgtug5ROjWnAtL58PW9oimriXiLXdXJF7zs3T9h/m3TeR
-         0VQrTHWXQMjn1Y77sKoqbvsmIeZr/GPdvT+6Xb5ijSGzpunWHatcvr2MtAxrUKwEhaRq
-         DvcCeDl0hXGR+IdMW6N27Lao7U3xjxrIQCJssqeiw26/p1Zfav/iPxzVr61L8XGiYaSB
-         GCVGkSGsyV+jY4b8rAfeDgyjEzfyVYDXvvSavlX7yw2vWi4g5pH3Yu2GBfURGWhjcszB
-         +2Kw==
-X-Gm-Message-State: AOAM531FPun9dxFGVolQDLhAHiU+KnMHOKf8T0seGArhhkk4fbpiw9HU
-	DfFMdByzP+RmQIYNckpKcJGlnJSGEEqLFw==
-X-Google-Smtp-Source: ABdhPJxRC/0ymBMOdUOgOfcnsf1v14Roa6tVI6P3edc7zmwWzeedeA8tyaDtNk/EaHq6W49vyAphdg==
-X-Received: by 2002:a1c:a385:: with SMTP id m127mr6266401wme.189.1598430868978;
-        Wed, 26 Aug 2020 01:34:28 -0700 (PDT)
-Return-Path: <leon.anavi@konsulko.com>
-Received: from [192.168.4.166] ([78.130.197.211])
-        by smtp.gmail.com with ESMTPSA id c9sm4071189wmf.3.2020.08.26.01.34.27
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 26 Aug 2020 01:34:28 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][PATCH 1/3] doxygen: Upgrade 1.8.17 -> 1.8.20
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-References: <20200825095407.18867-1-leon.anavi@konsulko.com>
- <CAMKF1soynk8yNEZA5LZL4K-DpY6v2S2sRwQJQgp7dQ8BkqZgSw@mail.gmail.com>
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-Message-ID: <713966e3-8576-7782-17b3-966713f48b99@konsulko.com>
-Date: Wed, 26 Aug 2020 11:34:26 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=mKkpnGDX0ZtUuxUIYJvW39vqMtglaQRvPlP8JPhKUSA=;
+        b=SnL8Zpeg4MvDOR6xJTFHzSZODCDna518pSYMn8JVhs8l3gn9Wo/7A5y8BWLTDxIssM
+         SdlwleuZ4qqXn6IAwPOlsrGPP2B+tP3qystppCgwqebx5bzToMFRse8pTt+eSuKRg9yT
+         vWDWyt8ylV2u1y1xgJOWK33Qpc693YHXu3RVAFmyushXEyRnT2bPcaSDEN/Bdf/rUAWo
+         qwW1JpgiA4dRU2GrRzzjLa4n1eQ5WmcIZgK1RW64EGV2PQRAg7iGoqRWO48I1Ucd9nnZ
+         nvJsqDxH6Nrz/JRk+i0UIlymS2ZUWWUZyVzWTI4GG/Nagtlid66cOggTehs/kbZ8tDJS
+         sZeQ==
+X-Gm-Message-State: AOAM532wt1Dw8K2tPd1tXqpvewytxgWU8vJuSjbFRtF/RaozBOwjRDm4
+	LQiiyYzXfXp841Yy8UYLkeph7Q==
+X-Google-Smtp-Source: ABdhPJzBAVF4X5TvNo2ML3LcTe3JkV+L68q/6J2ffqafvT0sqITBaSmdTVW7NpxPiNPdY4SkFL4Zyg==
+X-Received: by 2002:adf:80c7:: with SMTP id 65mr14209301wrl.35.1598431906532;
+        Wed, 26 Aug 2020 01:51:46 -0700 (PDT)
+Return-Path: <brgl@bgdev.pl>
+Received: from debian-brgl.home (lfbn-nic-1-68-20.w2-15.abo.wanadoo.fr. [2.15.159.20])
+        by smtp.gmail.com with ESMTPSA id x133sm3935798wmg.39.2020.08.26.01.51.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 26 Aug 2020 01:51:45 -0700 (PDT)
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster808@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [meta-oe PATCH] libgpiod: update v1.4.3 -> v1.4.4
+Date: Wed, 26 Aug 2020 10:51:43 +0200
+Message-Id: <20200826085143.22246-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.26.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1soynk8yNEZA5LZL4K-DpY6v2S2sRwQJQgp7dQ8BkqZgSw@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
 
-Hi Khem,
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-On 25.08.20 г. 21:25 ч., Khem Raj wrote:
-> Fails to patch doxygen-native :(
+This is a bug-fix release fixing the issue with reading line values for
+bulks of lineevents.
 
-Thank you for reporting this issue. I fixed it and I've just submitted 
-v2 of this patch.
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+---
+ .../libgpiod/{libgpiod_1.4.3.bb => libgpiod_1.4.4.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/libgpiod/{libgpiod_1.4.3.bb => libgpiod_1.4.4.bb} (80%)
 
-Thanks,
-Leon
->
->
-> On Tue, Aug 25, 2020 at 2:54 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
->> Upgrade to release 1.8.20:
->>
->> - Add configuration setting to have docstrings not as preformatted
->>    text but as normal documentation
->> - Bug fix: void return type reported as not documented
->> - Bug fix: Doxywizard 1.8.19 (Windows): Source code directory
->>    seems to be ignored
->> - Bug fix: The Doxygen uses too much memory (or has probably a
->>    memory leak)
->> - Bug fix: Doxygen doesn't stop on errors
->> - Bug fix: C++ grouped functions in namespace have disappeard
->> - Improvement of line count for e.g. warnings
->> - Improved layout on the bibliography page
->> - Updated the swedish language translation to 1.8.19
->>
->> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
->> ---
->>   .../doxygen/{doxygen_1.8.17.bb => doxygen_1.8.20.bb}          | 4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
->>   rename meta-oe/recipes-devtools/doxygen/{doxygen_1.8.17.bb => doxygen_1.8.20.bb} (79%)
->>
->> diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.20.bb
->> similarity index 79%
->> rename from meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb
->> rename to meta-oe/recipes-devtools/doxygen/doxygen_1.8.20.bb
->> index 45de71826..d4ac3b720 100644
->> --- a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.17.bb
->> +++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.20.bb
->> @@ -10,8 +10,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
->>              file://0001-build-don-t-look-for-Iconv.patch \
->>   "
->>   SRC_URI_append_class-native = " file://doxygen-native-only-check-python3.patch"
->> -SRC_URI[md5sum] = "7997a15c73a8bd6d003eaba5c2ee2b47"
->> -SRC_URI[sha256sum] = "2cba988af2d495541cbbe5541b3bee0ee11144dcb23a81eada19f5501fd8b599"
->> +SRC_URI[md5sum] = "8729936a843232a66fe970ef65f3c3e4"
->> +SRC_URI[sha256sum] = "e0db6979286fd7ccd3a99af9f97397f2bae50532e4ecb312aa18862f8401ddec"
->>
->>   inherit cmake python3native
->>
->> --
->> 2.17.1
->>
->> 
-
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
+similarity index 80%
+rename from meta-oe/recipes-support/libgpiod/libgpiod_1.4.3.bb
+rename to meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
+index a6320da8e..a9a462866 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.3.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
+@@ -2,8 +2,8 @@ require libgpiod.inc
+ 
+ DEPENDS += "autoconf-archive-native"
+ 
+-SRC_URI[md5sum] = "d4826720a8de13379436f9c207237bc0"
+-SRC_URI[sha256sum] = "0ad080d1eb89c422cf13001293ffa72869ca13028e85dab5f6b3ba90f88da46d"
++SRC_URI[md5sum] = "064c2627397e6641c52de09a26951112"
++SRC_URI[sha256sum] = "f1cda2789e6a13a92aefc012a76e5a7cc57a1b402d66f71df8719ee314b67699"
+ 
+ # enable cxx bindings
+ PACKAGECONFIG ?= "cxx"
 -- 
-Leon Anavi
-Software Engineer
-konsulko.com
+2.26.1
 
