@@ -1,95 +1,141 @@
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web10.6850.1598422855516245281
+Received: from mail-ej1-f67.google.com (mail-ej1-f67.google.com [209.85.218.67])
+ by mx.groups.io with SMTP id smtpd.web12.7575.1598426186866110635
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Aug 2020 23:20:55 -0700
+ Wed, 26 Aug 2020 00:16:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=QMnlGzHo;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id mt12so403113pjb.4
-        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Aug 2020 23:20:55 -0700 (PDT)
+ dkim=pass header.i=@kynetics-com.20150623.gappssmtp.com header.s=20150623 header.b=nzucO+Z9;
+ spf=neutral (domain: kynetics.com, ip: 209.85.218.67, mailfrom: diego.rondini@kynetics.com)
+Received: by mail-ej1-f67.google.com with SMTP id o18so1410242eje.7
+        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Aug 2020 00:16:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:references:from:message-id:date:user-agent:mime-version
-         :in-reply-to:content-language:content-transfer-encoding;
-        bh=tH7I4NblecGUVEK/dEPvmSxZAtiCnyWigTWCSDuJY1Q=;
-        b=QMnlGzHo9K8XNeJQePv9SW1VphNJGVe5eu6IwYKw6beuTLH3ndkb0FzIWqqRGdIGuk
-         GSmcMRheNOGnrenkok8KLHCW7pw9nLj9QRIsBcvNYkaDd6dpPSnyALPTnlNBO8QyrcTZ
-         MFIf2Z8oJ2LVF/h4tGopRQ3r6Gf1EZmne3s5mf3W4misbANxe1B5zHXY5PsrWoNODupf
-         gb9LjNiD4+A5VH1RTALzUC1cJuwuoi+CvG/jm2txe1BKg31a3w/YHhY8/Z/A+H+RLpnP
-         4L2uss05OjZVwt9xpiAnxGZfxzyFBqpyGtib7kMqonWk7qT9slZKqSkK2uTEEXXr5GhV
-         8Gfw==
+        d=kynetics-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=SDz6cIwzz0N+4yg4gP2iAqbXYV780EszD1EXVaWCp8o=;
+        b=nzucO+Z9Nb1XTId4tfizxwQ+UoQXbK0XqWVNlfSe30cStlPB37qT1QfHdwQYij7594
+         jyzNkwfSNOwTQ3+G60nTFqjmOGx+NAO+qxo782yAiOBBtE+ehEaYuFD7tvzTU0Hv0siR
+         MQuhzEZAn7BX/83ZtUGJjcVkiUbdAjx9uAp9ErYTrqC04cMFU2sM9VSNDkxZ/B2CkcRh
+         tLg0+H1KN5r6ri9ZTlNTaubEFrv/xgr06AKqQ9DU3FrxNSaTZpXl07cTgk1+b9zhzu05
+         CJKyhRFiPEjzD5e+aPg55foBZcbeoExJwRV+GutMwnco+NaB1ppJxKEYo54ic/Vg5SPn
+         0ASA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=tH7I4NblecGUVEK/dEPvmSxZAtiCnyWigTWCSDuJY1Q=;
-        b=I2YHST4z4D83nKQC8b6zGGabLHTbTnHfGmSth60PYPR1fdCibpGEhzGGuTcrtuPiPg
-         wtR4FdpNskHHVFBAX2uNumlaaadEChS6ppssJXT6Ly9lZSqGSFHorBNLheYilow7i8lA
-         OqxCfwW8PBdjqh0j+WvhR1+ergohsUzg84aklY65LqObYzLYO4NhveOD2lZuqJnSCfLC
-         KalLfxzaPhd6EnJImvbptYV4F1QfedhnZt4UdPiqGj9GXzbA7jM4J/6bp5ukfNFZvbFx
-         dFyBIgRsyNn+wrCe0nAvO/vWmly8RxNl1FuC9xjRSGAr4duBOZCJrjzlqYy5RwVmVopJ
-         323g==
-X-Gm-Message-State: AOAM532ZN7CuKUc5l7sxnd52A3olMu/2zQRg9MmJaAVkKUCceXdqGvmt
-	ifZh53uPPo4PDMXNbQu9JCNfZmHmS5wDIw==
-X-Google-Smtp-Source: ABdhPJxAOgxqg1T+LjdDBwgIS/k9gL2WKHWJKIMkFLocKMrt+iky2dBp8DzoVbGAzMUr2049Hp/etw==
-X-Received: by 2002:a17:90a:450d:: with SMTP id u13mr4437623pjg.99.1598422854499;
-        Tue, 25 Aug 2020 23:20:54 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:4e0:e8b6:ed97:4b5a:9e46? ([2601:646:9200:4e0:e8b6:ed97:4b5a:9e46])
-        by smtp.gmail.com with ESMTPSA id t5sm975890pji.51.2020.08.25.23.20.53
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 25 Aug 2020 23:20:53 -0700 (PDT)
-Subject: Re: [oe][meta-oe][patch] openocd: Update to latest git version
-To: Marc <marc@cpdesign.com.au>, openembedded-devel@lists.openembedded.org
-References: <20200825110103.15581-1-marc@cpdesign.com.au>
-From: "Khem Raj" <raj.khem@gmail.com>
-Message-ID: <764789f3-5b02-bfdb-7801-03e92b5183d8@gmail.com>
-Date: Tue, 25 Aug 2020 23:20:52 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.11.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=SDz6cIwzz0N+4yg4gP2iAqbXYV780EszD1EXVaWCp8o=;
+        b=FbGnEuyDdTMapTLemwsoWc88l6KowSiI7cKSizT5IM5Oe7ybdqok9fG9T6qxpv545s
+         dMaYRPOSwIZo7rIvmD49d84paYMwhSM1iM5OJ48Mmha7uxAf9fEdljxDFfm7bm2vdWmc
+         GVn4Cb+J/hKHQR/rnE9lUmH3DTlt1gBQQiQkcToQ44EroEM40GU8zbwxYYgWRXKzCR+D
+         uwWNFFRzXplwITExFtIvGX7x/1zto7L1R49IAJXEGbuXkzyAKxE547rbzuFYM74GRVSh
+         rJKldBUq0XkxLRRiCmfqwNffGKleXAEkVw+PeTlkKorPYLhMSf1Gu4YxRFbTIBRo5W3p
+         Ta3w==
+X-Gm-Message-State: AOAM53219RPlVfk7gmwwV4dmTkssHAkEmC9IqYb4pivcCVQuhviCoaLa
+	Km++H19Taf914lgsva5/xcdMpl3Zcp6LstWD5GWDMQ==
+X-Google-Smtp-Source: ABdhPJyzr7xnbr/ir1lIUQycMwUjrOhlo1OpnYmnxU11sTGE8G+C/jsFIq4bP014ujXpO2EmLSeUr17br1gx1DtFrSk=
+X-Received: by 2002:a17:906:a8d:: with SMTP id y13mr11692129ejf.400.1598426185150;
+ Wed, 26 Aug 2020 00:16:25 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200825110103.15581-1-marc@cpdesign.com.au>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+References: <20200825154524.188696-1-diego.rondini@kynetics.com>
+ <CA+chaQdtuKCqc31WB1s=-K29kv-4G2fh9g87PpBzBywxE6djRQ@mail.gmail.com>
+ <CAMfw5YowytuBeL3hr_82NEwrCTJjSqvJO8N-8dFVvYCH6cDHiw@mail.gmail.com>
+ <CA+chaQf0ZC1pts6MtZzsu+bfxzppnzjaBY=ENq3sQbazpgosVw@mail.gmail.com> <CAMKF1sqQGujU46Xk1Pn47uapZDMW9kigK_9CUqwaENCNkKZYGw@mail.gmail.com>
+In-Reply-To: <CAMKF1sqQGujU46Xk1Pn47uapZDMW9kigK_9CUqwaENCNkKZYGw@mail.gmail.com>
+From: "Diego" <diego.rondini@kynetics.com>
+Date: Wed, 26 Aug 2020 09:16:14 +0200
+Message-ID: <CAMfw5YoY0Yty2sWQjNa-zZpTh0-UfC5gDrSSyLJ3zaYxV6q0pw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] libeigen: update SRC_URI to download from gitlab
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Martin Jansa <Martin.Jansa@gmail.com>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Marc
+Hi Khem,
 
-Can you rebase this on top of latest master and resend please ?
+On Tue, Aug 25, 2020 at 8:40 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Tue, Aug 25, 2020 at 10:59 AM Martin Jansa <Martin.Jansa@gmail.com> wrote:
+> >
+> > OK, I've overlooked that it's from gitlab, but are you sure that gitlab archives aren't re-generated from time to time like the github archives are?
+> >
+> > Or are you sure that https://gitlab.com/libeigen/eigen/-/releases are developer uploaded archives? It looks like gitlab creates them automatically:
+> > https://docs.gitlab.com/ee/user/project/releases/
+> > like github does with tag archives.
+> >
+>
+> while it fixes the issue it is trying to fix, it would be better to
+> fix the non-deterministic archive issue as well while here, I dont
+> know if gitlab's archiving is reproducible perhaps a question for
+> gitlab, but it would be ok to switch to using git fetcher to avoid
+> that suspicion. What do you think?
 
-On 8/25/20 4:01 AM, Marc wrote:
-> The 0001-Do-not-include-sysctrl.h-with-glibc.patch is no longer needed,
-> and is thus removed.
-> 
-> Signed-off-by: Marc Reilly <marc@cpdesign.com.au>
-> ---
->   meta-oe/recipes-devtools/openocd/openocd_git.bb | 7 +++----
->   1 file changed, 3 insertions(+), 4 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-> index e95f1cfa5..4f6aaa8a6 100644
-> --- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
-> +++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-> @@ -9,14 +9,13 @@ SRC_URI = " \
->       git://repo.or.cz/r/git2cl.git;protocol=http;destsuffix=tools/git2cl;name=git2cl \
->       git://repo.or.cz/r/jimtcl.git;protocol=http;destsuffix=git/jimtcl;name=jimtcl \
->       git://repo.or.cz/r/libjaylink.git;protocol=http;destsuffix=git/src/jtag/drivers/libjaylink;name=libjaylink \
-> -    file://0001-Do-not-include-syscrtl.h-with-glibc.patch \
->   "
->   
->   SRCREV_FORMAT = "openocd"
-> -SRCREV_openocd = "ded67990255cc1e63c77832ffd6e6bef9120873d"
-> +SRCREV_openocd = "d46f28c2ea2611f5fbbc679a5eed253d3dcd2fe3"
->   SRCREV_git2cl = "8373c9f74993e218a08819cbcdbab3f3564bbeba"
-> -SRCREV_jimtcl = "dc4ba7770d580800634f90b67a24e077b4a26d98"
-> -SRCREV_libjaylink = "cfccbc9d6763733f1d14dff3c2dc5b75aaef136b"
-> +SRCREV_jimtcl = "0aa0fb4e3a38d38a49de9eb585d93d63a370dcf6"
-> +SRCREV_libjaylink = "9aa7a5957c07bb6e862fc1a6d3153d109c7407e4"
->   
->   PV = "0.10+gitr${SRCPV}"
->   S = "${WORKDIR}/git"
-> 
-> 
-> 
-> 
+I've posted the question, so we get an answer for all the other gitlab
+projects that are out there:
+https://forum.gitlab.com/t/gitlab-release-tarball-stability/41888
+
+Let's see what the answer is.
+
+Regards,
+Diego Rondini
+
+
+>
+> > On Tue, Aug 25, 2020 at 6:36 PM Diego Rondini <diego.rondini@kynetics.com> wrote:
+> >>
+> >> Hi Martin,
+> >>
+> >> On Tue, Aug 25, 2020 at 5:57 PM Martin Jansa <martin.jansa@gmail.com> wrote:
+> >> >
+> >> > Doesn't this trigger src-uri-bad QA warning? It would be better to use git fetcher.
+> >>
+> >> No warning because this is from git*lab*.
+> >>
+> >> Also, this the URL of an official release tarball taken from:
+> >> https://gitlab.com/libeigen/eigen/-/releases
+> >>
+> >> See also first comment here:
+> >> https://patchwork.openembedded.org/patch/161360/
+> >>
+> >> Regards,
+> >> Diego Rondini
+> >>
+> >>
+> >> >
+> >> > On Tue, Aug 25, 2020 at 5:45 PM Diego <diego.rondini@kynetics.com> wrote:
+> >> >>
+> >> >> Bitbucket is no longer the official home of eigen, which has moved to
+> >> >> gitlab. Update SRC_URI to download releases from gitlab, fixing:
+> >> >> WARNING: libeigen-3.3.7-r0 do_fetch: Failed to fetch URL
+> >> >> https://bitbucket.org/eigen/eigen/get/3.3.7.tar.bz2;downloadfilename=libeigen-3.3.7.tar.bz2,
+> >> >> attempting MIRRORS if available
+> >> >>
+> >> >> Signed-off-by: Diego Rondini <diego.rondini@kynetics.com>
+> >> >> ---
+> >> >>  meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb | 8 ++++----
+> >> >>  1 file changed, 4 insertions(+), 4 deletions(-)
+> >> >>
+> >> >> diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
+> >> >> index f638848d1..9c3d962f4 100644
+> >> >> --- a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
+> >> >> +++ b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
+> >> >> @@ -4,11 +4,11 @@ HOMEPAGE = "http://eigen.tuxfamily.org/"
+> >> >>  LICENSE = "MPL-2.0"
+> >> >>  LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
+> >> >>
+> >> >> -SRC_URI = "https://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2;downloadfilename=${BP}.tar.bz2"
+> >> >> -SRC_URI[md5sum] = "05b1f7511c93980c385ebe11bd3c93fa"
+> >> >> -SRC_URI[sha256sum] = "9f13cf90dedbe3e52a19f43000d71fdf72e986beb9a5436dddcd61ff9d77a3ce"
+> >> >> +SRC_URI = "https://gitlab.com/libeigen/eigen/-/archive/${PV}/eigen-${PV}.tar.bz2"
+> >> >> +SRC_URI[md5sum] = "b9e98a200d2455f06db9c661c5610496"
+> >> >> +SRC_URI[sha256sum] = "685adf14bd8e9c015b78097c1dc22f2f01343756f196acdc76a678e1ae352e11"
+> >> >>
+> >> >> -S = "${WORKDIR}/eigen-eigen-323c052e1731"
+> >> >> +S = "${WORKDIR}/eigen-${PV}"
+> >> >>
+> >> >>  inherit cmake
+> >> >>
+> >> >> --
+> >> >> 2.26.2
+> >> >>
+> >> >>
+> >
+> > 
