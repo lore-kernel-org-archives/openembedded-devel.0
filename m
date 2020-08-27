@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.20663.1598540121637351464
+ by mx.groups.io with SMTP id smtpd.web11.20668.1598540124244152090
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Aug 2020 07:55:22 -0700
+ Thu, 27 Aug 2020 07:55:24 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=58886 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kBJJA-0001it-Nm; Thu, 27 Aug 2020 17:55:21 +0300
+	id 1kBJJD-0001it-8G; Thu, 27 Aug 2020 17:55:24 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/7] python3-flask-migrate: Upgrade 2.5.2 -> 2.5.3
-Date: Thu, 27 Aug 2020 17:55:00 +0300
-Message-Id: <20200827145504.29147-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/7] python3-flask-restful: Consolidate in a single file
+Date: Thu, 27 Aug 2020 17:55:01 +0300
+Message-Id: <20200827145504.29147-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200827145504.29147-1-leon.anavi@konsulko.com>
 References: <20200827145504.29147-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-0.7
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,42 +30,60 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.5.3:
-
-- Allow Path objects to be used as directory parameter
-- Use same database URLs as Flask-SQLAlchemy
-- Document how to set up with init_app method
-- Document how to include a message in initial migrate
-- Remove checks for alembic 0.7.0. Flask-Migrate requires alembic
-  >= 0.7 in its setup.py file, which makes all the checks for
-  this version obsolete.
-- Use sys.executable in tests, also re-order imports
-- Cosmetic improvements to help messages
+Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...-flask-migrate_2.5.2.bb => python3-flask-migrate_2.5.3.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-flask-migrate_2.5.2.bb => python3-flask-migrate_2.5.3.bb} (71%)
+ .../python/python-flask-restful.inc            | 16 ----------------
+ .../python/python3-flask-restful_0.3.7.bb      | 18 ++++++++++++++++--
+ 2 files changed, 16 insertions(+), 18 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-flask-restful.inc
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask-migrate_2.5.2.bb b/meta-python/recipes-devtools/python/python3-flask-migrate_2.5.3.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python3-flask-migrate_2.5.2.bb
-rename to meta-python/recipes-devtools/python/python3-flask-migrate_2.5.3.bb
-index 78ec665ef..54fa1dd97 100644
---- a/meta-python/recipes-devtools/python/python3-flask-migrate_2.5.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask-migrate_2.5.3.bb
-@@ -2,8 +2,8 @@ DESCRIPTION = "SQLAlchemy database migrations for Flask applications using Alemb
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b69377f79f3f48c661701236d5a6a85"
- 
--SRC_URI[md5sum] = "bedeb0366740fda6912fea683be11968"
--SRC_URI[sha256sum] = "a96ff1875a49a40bd3e8ac04fce73fdb0870b9211e6168608cbafa4eb839d502"
-+SRC_URI[md5sum] = "707d4a5fd4e11d3113a1228aa7793176"
-+SRC_URI[sha256sum] = "a69d508c2e09d289f6e55a417b3b8c7bfe70e640f53d2d9deb0d056a384f37ee"
- 
- PYPI_PACKAGE = "Flask-Migrate"
- 
+diff --git a/meta-python/recipes-devtools/python/python-flask-restful.inc b/meta-python/recipes-devtools/python/python-flask-restful.inc
+deleted file mode 100644
+index dcbcd0d76..000000000
+--- a/meta-python/recipes-devtools/python/python-flask-restful.inc
++++ /dev/null
+@@ -1,16 +0,0 @@
+-SUMMARY = "Simple framework for creating REST APIs"
+-DESCRIPTION = "\
+-Flask-RESTful is an extension for Flask that adds support for quickly building \
+-REST APIs"
+-HOMEPAGE = "https://github.com/flask-restful/flask-restful"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=685bb55ed99a366bb431995f5eef2783"
+-
+-SRC_URI[md5sum] = "a7217ef1159be38af5faf61aa09aabef"
+-SRC_URI[sha256sum] = "f8240ec12349afe8df1db168ea7c336c4e5b0271a36982bff7394f93275f2ca9"
+-
+-inherit pypi
+-
+-PYPI_PACKAGE = "Flask-RESTful"
+-
+-RDEPENDS_${PN} = "${PYTHON_PN}-flask"
+diff --git a/meta-python/recipes-devtools/python/python3-flask-restful_0.3.7.bb b/meta-python/recipes-devtools/python/python3-flask-restful_0.3.7.bb
+index 6bff59a56..ad2757838 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-restful_0.3.7.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-restful_0.3.7.bb
+@@ -1,2 +1,16 @@
+-inherit setuptools3
+-require python-flask-restful.inc
++SUMMARY = "Simple framework for creating REST APIs"
++DESCRIPTION = "\
++Flask-RESTful is an extension for Flask that adds support for quickly building \
++REST APIs"
++HOMEPAGE = "https://github.com/flask-restful/flask-restful"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=685bb55ed99a366bb431995f5eef2783"
++
++SRC_URI[md5sum] = "a7217ef1159be38af5faf61aa09aabef"
++SRC_URI[sha256sum] = "f8240ec12349afe8df1db168ea7c336c4e5b0271a36982bff7394f93275f2ca9"
++
++inherit pypi setuptools3
++
++PYPI_PACKAGE = "Flask-RESTful"
++
++RDEPENDS_${PN} = "${PYTHON_PN}-flask"
 -- 
 2.17.1
 
