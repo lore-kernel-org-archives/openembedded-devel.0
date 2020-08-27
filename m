@@ -1,17 +1,17 @@
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.77])
- by mx.groups.io with SMTP id smtpd.web10.25682.1598552432058644701
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.51])
+ by mx.groups.io with SMTP id smtpd.web12.25577.1598552449767668013
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Aug 2020 11:20:32 -0700
+ Thu, 27 Aug 2020 11:20:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=bDtM3A9d;
- spf=pass (domain: windriver.com, ip: 40.107.93.77, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=NiWIU8kK;
+ spf=pass (domain: windriver.com, ip: 40.107.243.51, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HSL0IaBFhpqGkTz5DKLfCv32fTLm+r9advoksGFm/O029vURz1Hk4MEwBWy+n7a+pfoQcgYOTGT9Tir7zx346dBoK/nr2nvg1o8KfPD4IzuH7+5iRNPIob8FrzRoSj4vO5AC7NrynmjQ2/4SMKGCean5Gn2ve2ZcpbVUZ4I2PHIgMEfesGxBjf62h5wrRY/uNnIl9J+3sSSA8RWDxHizupkNRDgCK+o9dje04hDTKCKPqwbn5D7TB/F9gqDqc3fV76RBIDpyctdpgd6ba2MNhdeoaGlXcgs7i73nmZTIvEuXOikpzLg8KPUZjwIYA8TKDUykopJehQg5xvLBefpI7w==
+ b=PmkyGxKY43xFlxiomVi4W4dlM2pEBWOKqTMjVk/RNzUlUWKx4CCDtnvsvL9mezGsUfCgB/E3W9OFEfppNbg5KDmGOBg5dWbnTRkMe2vGBBXUypJKtU9f8FYWazYniUS1A/N2cgGFoLhAyW+6Vi6x4f+Ir+F3mIZUBzB5vtNdOl2Ub7yzopWb4jZVCllfZw5JmcR7kMDEGrjZ9+L1v2aRlwe/LKAQpDxvsXjfxa17GbOQDwHWssUL+Pen9zwhSXakAPtlg43iDK9nhKeSl9RPJEqSfRI6Fh9zDug0NZ7ko7GQwUxj5LuoZeLsa9tARyqJssJMAiKAYXKiPyRroK8s3A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HIcayycOKB3Yjmc53St+lsQZvNORTguQfhF9Z696aXI=;
- b=iais6AFrYJdzksph8ryG9AW+KfWVnJbqy78coZgxFYecA9NWXySw1OAMUyUX3kyxfNxLQJq3lhmOrSoHwNCqt8yraSmVCDxN1DyXnC5er4KO1aR9rlimVH3sTplZG/iz+7Ngog9R81q26CdKNLEgYBhY6q3FnZXz9Zzi6pT+4n8Ys5h3ui7S9ZnFMzZnf/mjOFf15RExMPOivcT8QIiru316pO+DtLqCkdyzO2P+PLORoZCSA5QYorP2vVeiqbDn/j/e0friOFmxlKDKB/oofRw1+CrYm3MPsNBnXqjjAOE/U8J9lFdLYPRde3iARCd6OUSXXxHNq1F0h21jL3Z99w==
+ bh=2L9kKNq2n1GUbDZZr3W3I65AZdgX3Jy/fdkti6pzc+A=;
+ b=WjzMFaL57Lsv1zo7SnQ86AYGNdUaBGdHpzJs9tH47kyeo1uESjVGdfWSXX6JiGjMevneJPIZKeXGezWZ7x6EMDyxVetvGAOjuAfkN+J69Yge9/k9nYVt6T22K9HKZjEvE+32vzO1KOwLc+OEBBrkpVbHAggHTBgpDA/3pt7bv6yWahyOd3h7n0OjsV756AsnWz04unelaOLwEwsrJo2F7k/o8NCLs4hni3b4LUpmNzthWAx6YGYArNZ12KBZz47znwfXMjJDYXOvci/o77MxK1S2ahNLC4inEPT6v8oY9sj64xmZvIrUEUwIaoIw0cjZQvTzqSgSxTMqgS9AZvy8ZQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HIcayycOKB3Yjmc53St+lsQZvNORTguQfhF9Z696aXI=;
- b=bDtM3A9dGw+g4oiwBvuXE6XZTChajRMk07T/+FlDYmJeid3nhDa2ThPWnps1ZEU5ZFbYhjkFdPmMrOqc8tDs/WjUTu4cTjd4aHOAaPTdOiui4EC60rL1XRel3b2ZbLQ+mQ8cQAnlAUt7mM/06fC/Op9tyxTWPw3RvUtAEE0nIrA=
+ bh=2L9kKNq2n1GUbDZZr3W3I65AZdgX3Jy/fdkti6pzc+A=;
+ b=NiWIU8kKB21XwLA4bzO1fSNNuZaQldJC1lMXeeyH0pPTIWJivEuwek7EZiVsSg0v/bxtqeZVDLWSaTXszNxPcZyP1qLATixWQ27OwTdAQ2qtk/CeNXGUv28aytA3uPmr7PS/PHYqjNP0zjtJAsxxBS6AkIs9gI0Urrt1c85Ui7w=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,100 +28,128 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB2726.namprd11.prod.outlook.com (2603:10b6:a02:be::19) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.19; Thu, 27 Aug
- 2020 18:20:31 +0000
+ 2020 18:20:48 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8%7]) with mapi id 15.20.3326.019; Thu, 27 Aug 2020
- 18:20:31 +0000
-Subject: Re: [oe] [meta-python][PATCH 4/6] python3-flask-wtf: Upgrade 0.14.2 -> 0.14.3
+ 18:20:48 +0000
+Subject: Re: [oe] [meta-python][PATCH 5/6] python3-flask-socketio: Consolidate in a single file
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200826154020.29208-1-leon.anavi@konsulko.com>
- <20200826154020.29208-4-leon.anavi@konsulko.com>
+ <20200826154020.29208-5-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <e6615822-8d4b-2c94-220b-e9d92282a97f@windriver.com>
-Date: Thu, 27 Aug 2020 14:20:28 -0400
+Message-ID: <bf6e01a8-a2df-d63c-88ee-f2a50a9cac70@windriver.com>
+Date: Thu, 27 Aug 2020 14:20:43 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
-In-Reply-To: <20200826154020.29208-4-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0019.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::32)
- To BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
+In-Reply-To: <20200826154020.29208-5-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0065.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2e::34) To BY5PR11MB3909.namprd11.prod.outlook.com
+ (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from 255.255.255.255 (255.255.255.255) by YT1PR01CA0019.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::32) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.19 via Frontend Transport; Thu, 27 Aug 2020 18:20:30 +0000
+Received: from 255.255.255.255 (255.255.255.255) by YT1PR01CA0065.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.19 via Frontend Transport; Thu, 27 Aug 2020 18:20:47 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2fa468e2-428f-4106-8761-08d84ab5e19b
+X-MS-Office365-Filtering-Correlation-Id: 1ed4d33f-5e65-4d3e-81ff-08d84ab5ec22
 X-MS-TrafficTypeDiagnostic: BYAPR11MB2726:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB272614BB2DA0B5C5AA8CD31A9F550@BYAPR11MB2726.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:22;
+	<BYAPR11MB27263B53BAAA543B7F51FF139F550@BYAPR11MB2726.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:207;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	xinMMPYY6fIol7oO4m5xv+dVjm8d03QtsjRdKhWwYogrn5RrAUr4WfV31pgxmoOLugWbKSAjtn4AUee22apH44o07GvCOgXgL3Os0z/VmGE4Z68YqO9E9+3yx9e/KdwV0C3IyjT/0U1VZkTp8weKBNyr2CapP0cjT9oa54KI4PAKsT31BazklLnsl/hmZZ7pLLoQ5KrWMWUZuEUsiJ47X0+7azF/eHcL+l2GY9ZIO4YJCun4xAC31ZAQM7tMzfHya9qVYurlmDJKPI1qsmNov1J0KZrGcl1mf8AR/FmJFY9qwGnYjr5BwG29r4H8UCwCBB0od8D8A8J24+x4QHGr1AszRyFy9l+ZSYZWtJOqqH7VQysd0yhr5VxFHCqEn2Q5E4gvWQcsHf2hmMAbnQI2Yu2jYAPx8EHzKY2FnhiBvf2RqfYjYg6YWLCQ9TmuGdeeKCpVE8U7JHhmr79Kl0vnQw==
+	LYzcN+tIdMuJ4tZGzhkIlzgoHKSFQbhY5XxTNgCFYwtqqPz7FvYIo4wsgBE29XzqNPbcdKUdDegWU7CBOrXYyR6MBYqXx/HUeXPqAf49bhkCSC/OIJ0b23uai1Fe8xGEQRryfhS3XTcdmbgEJ30WqM6zF4qCDAd4tsrMtArCv3ICtKvnf2K1HR1jjlyzzhCOhvMCct4vrqMWuAdS+ZxEtWU9HNSIe+yWUzkuHvrE55uTpmrWO74QRdSiXN8e0/VTB94u5B9ULz2WW8AuIPs3O8ZgvyA0FoNcX+JTjlPmuOhbv8/MvLZQ45MhjUAOZ4XrJWLE2aPXRYJf15LE2J6NOoA/GfI1X/4t108YYu9/fpcSS+4XJwpx833Op9f11xS8kcXXp7n41wZ1hv0xbt8WI6fDtRyE181dxtZY16plTgD2u6ANi9X5AF/iobUampa/zudzCPYZEnTdKdUUd0ypqQ==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(39850400004)(396003)(366004)(136003)(346002)(5660300002)(66556008)(2616005)(956004)(26005)(31696002)(8936002)(6486002)(83380400001)(33964004)(966005)(66946007)(31686004)(86362001)(2906002)(186003)(66476007)(53546011)(52116002)(166002)(8676002)(36756003)(316002)(478600001)(44832011)(16576012)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(39850400004)(396003)(366004)(136003)(346002)(5660300002)(66556008)(6666004)(2616005)(956004)(26005)(31696002)(8936002)(6486002)(83380400001)(33964004)(966005)(66946007)(31686004)(86362001)(2906002)(186003)(66476007)(53546011)(52116002)(166002)(8676002)(36756003)(316002)(478600001)(44832011)(16576012)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	TOjK3xW33hWUnVXkwV3sgHkg38gCZWHBpgJuDAz4FUo/V+ZFobazi1j1dW2B0shHIJGcp4zQO6lWumEC6LSrfMKXDxOuytrpcCy6br/RvXCwNqZFhgNN6eWGjOXAe1stx1mMogGAYV/VruGC9JH4T/eq1zOJCVfwjOEfcun6hTTvHpZrUs96c7rsqw9j9/4Vi/d3Vdl209DgmzHNaYK/fbC9j6SoBlapPy0gv09ER7bQbiMPWfcqkQY5aaKA6nZ7LqiO+f98Ikl3DytvspKm31fntslezUr53LnlzHYSa9klM7bLTQ6ms5hUEhqBa/EWWjzPmHwSXaxIOHxpHk9X5xV+6JAplE94fXj8E9QyBdgHsWe+fvUoAPaz9KgJNqfBM9xiQQxJxI+FJ2kXkmG4l2j7KtYNrgGi+zxU8cjM5+44GdmxqE4PMG/BELe/sjynzI8OFR+RE8x3OBk+PwEc57mIxW0bLBBnYogrRp1pW720oxIh7YloD2OESOp56yNgAVCmOx1eSXq2l1lY5azTs4giXOsJrV4PMhT+2trQdxVLRsu/0RRhiHQbRMVe8JjyOU0WYsjg5bBxTRoFgV5QuJDRz0DHqYEsq++Su2PCQheQAsSHHzb6tVzt1RqACxRJZoEqUCtxyXHS9pHH79CLSQ==
+	kAIT9lpqOKwlGXFYfRf7Z0KI4UpPQEasNaryJp1W01prjG2AUleIiu4Op7n6hROZHAjji7ENOEO9nWSFEYvh+saYUSEabGbQMQY8fWH9jMV8/QEVrwt6p1HBHsMl7FMxp3oZnmErBdXTeMWk8I1sLHtK1Ln9GBWo52l5ONOVQGtuOBrBP1P3zaOm6R2SsLcI/1cex7JY4TxWsildmenfPwUJvP+hcXl1e1q5OXJcxnzG7Zwib9ZfqH75QOS88c1ZjtDuF8QaU93QJdjco1zDBxUG6RH4mHIB4dN+mJXkkYbuSRVUminBZEFVA4L2LzbmN10JpcbkgizRzyzLV+CacpM/C2Lur/mUYRv57LgqfEDPkc6d+dons6vpS1ldmloGPfRtSupF/iNueCA0eLJW+TBYMBnaVrnHqGjhCKULY1osrVfGjzCY71qQJPYwnC2A0SK65mb+mVwLDDwWWDgwGJTcPF6gSTv0MP2N+RQeGll6vCSiPzz5kPpmAjZEbtz4kHESXrrjChpP1DjvvRzb48Xo7MvW14wqDwvkP+6mzzwGBpq3tHnZTxLDx98fMu4JXyN5fJrMd4r0YTs4emmbMHdWpxjG1V47dze5Vlwxe5Pb42WSFlftoVqCL49WuSUpUCbussDQi0ra0r3RoB4CYQ==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2fa468e2-428f-4106-8761-08d84ab5e19b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1ed4d33f-5e65-4d3e-81ff-08d84ab5ec22
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2020 18:20:30.8706
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2020 18:20:48.5584
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: nRZRSvZ9oL1l2cVPoXtZ/HMo8tz0SfzAMtODVv5LIhMkeIzyLfhBJ7knE54XeswXukpdx90/j9BrBfVktJDTlUiwpqzaBiqtFRXIQZnGuLI=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 4XN6ilTDfpe6HadDL+g6RH8wsdEhMfeYrB8IkP0G3HzvFDd+42ZN9/7mAlOJsHCJD5z10JjWT2z7usNIgFbHJtA+nOpNfnj/2/iKvUHJBMw=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2726
 Content-Type: multipart/alternative;
- boundary="------------2E9C966D28774C96ECDC152E"
+ boundary="------------6A60E3772C548E8374973647"
 Content-Language: en-US
 
---------------2E9C966D28774C96ECDC152E
+--------------6A60E3772C548E8374973647
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 8/26/20 11:40 AM, Leon Anavi wrote:
-> Upgrade to release 0.14.3:
->
-> - xrange changed to range, python3 compatible
-> - Move Iterable import to _compat module
-> - Fix deprecation warning
-> - Remove flaskr example
+> Consolidate inc and bb files into a single bb file.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...ython3-flask-wtf_0.14.2.bb => python3-flask-wtf_0.14.3.bb} | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-flask-wtf_0.14.2.bb => python3-flask-wtf_0.14.3.bb} (70%)
+>   .../python/python-flask-socketio.inc          | 18 -----------------
+>   .../python/python3-flask-socketio_4.2.1.bb    | 20 +++++++++++++++++--
+>   2 files changed, 18 insertions(+), 20 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python-flask-socketio.inc
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-flask-wtf_0.14.2.bb b/meta-python/recipes-devtools/python/python3-flask-wtf_0.14.3.bb
-> similarity index 70%
-> rename from meta-python/recipes-devtools/python/python3-flask-wtf_0.14.2.bb
-> rename to meta-python/recipes-devtools/python/python3-flask-wtf_0.14.3.bb
-> index 33387045e..213a0b58b 100644
-> --- a/meta-python/recipes-devtools/python/python3-flask-wtf_0.14.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-flask-wtf_0.14.3.bb
-> @@ -2,8 +2,8 @@ DESCRIPTION = "Simple integration of Flask and WTForms."
->   LICENSE = "BSD-3-Clause"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=3ca6bb31670492f791e6a9f2fb9f8a80"
->   
-> -SRC_URI[md5sum] = "586f50f233926cade42e3d744aca3e8f"
-> -SRC_URI[sha256sum] = "5d14d55cfd35f613d99ee7cba0fc3fbbe63ba02f544d349158c14ca15561cc36"
-> +SRC_URI[md5sum] = "1b60b7dd1245b0d0173c21123717af61"
-> +SRC_URI[sha256sum] = "d417e3a0008b5ba583da1763e4db0f55a1269d9dd91dcc3eb3c026d3c5dbd720"
->   
->   PYPI_PACKAGE = "Flask-WTF"
->   
+> diff --git a/meta-python/recipes-devtools/python/python-flask-socketio.inc b/meta-python/recipes-devtools/python/python-flask-socketio.inc
+> deleted file mode 100644
+> index 8d778d4bf..000000000
+> --- a/meta-python/recipes-devtools/python/python-flask-socketio.inc
+> +++ /dev/null
+> @@ -1,18 +0,0 @@
+> -SUMMARY = "Socket.IO integration for Flask applications"
+> -HOMEPAGE = "https://github.com/miguelgrinberg/Flask-SocketIO/"
+> -SECTION = "devel/python"
+> -
+> -LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=38cc21254909604298ce763a6e4440a0"
+> -
+> -inherit pypi
+> -
+> -PYPI_PACKAGE = "Flask-SocketIO"
+> -
+> -SRC_URI[md5sum] = "b23222fb7dd2f0676d78bbe24153fd80"
+> -SRC_URI[sha256sum] = "2172dff1e42415ba480cee02c30c2fc833671ff326f1598ee3d69aa02cf768ec"
+> -
+> -RDEPENDS_${PN} += "\
+> -    ${PYTHON_PN}-flask \
+> -    ${PYTHON_PN}-socketio \
+> -    "
+> diff --git a/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb b/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb
+> index ffc4aa7fd..e5fc54136 100644
+> --- a/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb
+> @@ -1,2 +1,18 @@
+> -inherit setuptools3
+> -require python-flask-socketio.inc
+> +SUMMARY = "Socket.IO integration for Flask applications"
+> +HOMEPAGE = "https://github.com/miguelgrinberg/Flask-SocketIO/"
+> +SECTION = "devel/python"
+> +
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=38cc21254909604298ce763a6e4440a0"
+> +
+> +inherit pypi setuptools3
+> +
+> +PYPI_PACKAGE = "Flask-SocketIO"
+> +
+> +SRC_URI[md5sum] = "b23222fb7dd2f0676d78bbe24153fd80"
+> +SRC_URI[sha256sum] = "2172dff1e42415ba480cee02c30c2fc833671ff326f1598ee3d69aa02cf768ec"
+> +
+> +RDEPENDS_${PN} += "\
+> +    ${PYTHON_PN}-flask \
+> +    ${PYTHON_PN}-socketio \
+> +    "
 >
 > 
 
---------------2E9C966D28774C96ECDC152E
+--------------6A60E3772C548E8374973647
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -133,42 +161,69 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 8/26/20 11:40 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200826154020.29208-4-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 0.14.3:
-
-- xrange changed to range, python3 compatible
-- Move Iterable import to _compat module
-- Fix deprecation warning
-- Remove flaskr example
+    <blockquote type="cite" cite="mid:20200826154020.29208-5-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200826154020.29208-4-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200826154020.29208-5-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...ython3-flask-wtf_0.14.2.bb =&gt; python3-flask-wtf_0.14.3.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-flask-wtf_0.14.2.bb =&gt; python3-flask-wtf_0.14.3.bb} (70%)
+ .../python/python-flask-socketio.inc          | 18 -----------------
+ .../python/python3-flask-socketio_4.2.1.bb    | 20 +++++++++++++++++--
+ 2 files changed, 18 insertions(+), 20 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-flask-socketio.inc
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask-wtf_0.14.2.bb b/meta-python/recipes-devtools/python/python3-flask-wtf_0.14.3.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-flask-wtf_0.14.2.bb
-rename to meta-python/recipes-devtools/python/python3-flask-wtf_0.14.3.bb
-index 33387045e..213a0b58b 100644
---- a/meta-python/recipes-devtools/python/python3-flask-wtf_0.14.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask-wtf_0.14.3.bb
-@@ -2,8 +2,8 @@ DESCRIPTION = &quot;Simple integration of Flask and WTForms.&quot;
- LICENSE = &quot;BSD-3-Clause&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=3ca6bb31670492f791e6a9f2fb9f8a80">&quot;file://LICENSE;md5=3ca6bb31670492f791e6a9f2fb9f8a80&quot;</a>
- 
--SRC_URI[md5sum] = &quot;586f50f233926cade42e3d744aca3e8f&quot;
--SRC_URI[sha256sum] = &quot;5d14d55cfd35f613d99ee7cba0fc3fbbe63ba02f544d349158c14ca15561cc36&quot;
-+SRC_URI[md5sum] = &quot;1b60b7dd1245b0d0173c21123717af61&quot;
-+SRC_URI[sha256sum] = &quot;d417e3a0008b5ba583da1763e4db0f55a1269d9dd91dcc3eb3c026d3c5dbd720&quot;
- 
- PYPI_PACKAGE = &quot;Flask-WTF&quot;
- 
+diff --git a/meta-python/recipes-devtools/python/python-flask-socketio.inc b/meta-python/recipes-devtools/python/python-flask-socketio.inc
+deleted file mode 100644
+index 8d778d4bf..000000000
+--- a/meta-python/recipes-devtools/python/python-flask-socketio.inc
++++ /dev/null
+@@ -1,18 +0,0 @@
+-SUMMARY = &quot;Socket.IO integration for Flask applications&quot;
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/miguelgrinberg/Flask-SocketIO/">&quot;https://github.com/miguelgrinberg/Flask-SocketIO/&quot;</a>
+-SECTION = &quot;devel/python&quot;
+-
+-LICENSE = &quot;MIT&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=38cc21254909604298ce763a6e4440a0">&quot;file://LICENSE;md5=38cc21254909604298ce763a6e4440a0&quot;</a>
+-
+-inherit pypi
+-
+-PYPI_PACKAGE = &quot;Flask-SocketIO&quot;
+-
+-SRC_URI[md5sum] = &quot;b23222fb7dd2f0676d78bbe24153fd80&quot;
+-SRC_URI[sha256sum] = &quot;2172dff1e42415ba480cee02c30c2fc833671ff326f1598ee3d69aa02cf768ec&quot;
+-
+-RDEPENDS_${PN} += &quot;\
+-    ${PYTHON_PN}-flask \
+-    ${PYTHON_PN}-socketio \
+-    <a class="moz-txt-link-rfc2396E" href="mailto:diff--gita/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bbb/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bbindexffc4aa7fd..e5fc54136100644---a/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb+++b/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb@@-1,2+1,18@@-inheritsetuptools3-requirepython-flask-socketio.inc+SUMMARY=">&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb b/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb
+index ffc4aa7fd..e5fc54136 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb
+@@ -1,2 +1,18 @@
+-inherit setuptools3
+-require python-flask-socketio.inc
++SUMMARY = &quot;</a>Socket.IO integration for Flask applications&quot;
++HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/miguelgrinberg/Flask-SocketIO/">&quot;https://github.com/miguelgrinberg/Flask-SocketIO/&quot;</a>
++SECTION = &quot;devel/python&quot;
++
++LICENSE = &quot;MIT&quot;
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=38cc21254909604298ce763a6e4440a0">&quot;file://LICENSE;md5=38cc21254909604298ce763a6e4440a0&quot;</a>
++
++inherit pypi setuptools3
++
++PYPI_PACKAGE = &quot;Flask-SocketIO&quot;
++
++SRC_URI[md5sum] = &quot;b23222fb7dd2f0676d78bbe24153fd80&quot;
++SRC_URI[sha256sum] = &quot;2172dff1e42415ba480cee02c30c2fc833671ff326f1598ee3d69aa02cf768ec&quot;
++
++RDEPENDS_${PN} += &quot;\
++    ${PYTHON_PN}-flask \
++    ${PYTHON_PN}-socketio \
++    &quot;
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -178,4 +233,4 @@ index 33387045e..213a0b58b 100644
   </body>
 </html>
 
---------------2E9C966D28774C96ECDC152E--
+--------------6A60E3772C548E8374973647--
