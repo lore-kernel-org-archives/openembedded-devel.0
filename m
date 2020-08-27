@@ -1,127 +1,135 @@
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web11.10307.1598494921238755298
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
+ by mx.groups.io with SMTP id smtpd.web12.13581.1598511835839876891
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Aug 2020 19:22:01 -0700
+ Thu, 27 Aug 2020 00:03:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=BJPX4DTd;
- spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id y206so2278174pfb.10
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Aug 2020 19:22:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=c1TCna7R;
+ spf=pass (domain: gmail.com, ip: 209.85.222.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f170.google.com with SMTP id p4so5048668qkf.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Aug 2020 00:03:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=hvezPOqf/hdFDaijI/xPbNqk5dl9YhBom/etketGMW8=;
-        b=BJPX4DTdG8JzFqxbzgxnj8CSu4ydHhskmBSfhMiKKB02RyrepjUlJBJtMJmho7ptYl
-         zPwsF8eM0sg/x5okDvVwHaz2FTTNOxmSx1WtA0N99CbcsBve0Y6JGNinUJLczh331668
-         pTjHNMwUy08PJEOMVZiVedDiUe9AC1t+aXj822NP7AcGlBZmzOkTdhIthaMNjg7KpmWg
-         4Tzp18Eo75TQErx7V7OSiyGVhfgNuhWOn1Zlhyd4J7jzSjxBd7e2/mpT9Ak/diTMGZqI
-         pJTgfjOAlSwuWPOE8U2F8iF80bQws1QYltPKqK8N6PhbyRXwnun2aNTvHMCLVXnlfySl
-         A4pw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=SAx8yYZMzLGWAuZ8inpBavB7V7T9UH9R4qhaFLZ5gig=;
+        b=c1TCna7Rw4ZkVphH2DsIYXOqsPJdLXXBaiDZXfzi09+Xj1Mm9XuMpt0WFiDtL64iXV
+         BHag+7l48v1wfVLnmZrj5bMBHWkOsdTuEIvTdqf/gtL1aDFJr7M0aLEvUtYjTbJnbKX7
+         1XksEex4rSYT/s9a5CUCrKWb0dr8qQ6JzpqFFBQR7vreoOysE/oQNrnUWGSC4+hKxeNO
+         xu7L+uqvDBqt1PKecL4r386AjKeWyA4QgmLclEUrJKE3iIq4qABOw0DGCkaylYfjV9tE
+         F8VefxN24JHMRy39kbiYv3fQxj9a23/PTVzpWq2GFUFGpB4f5Evn6SFmML2BB6x+pJBT
+         DY2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=hvezPOqf/hdFDaijI/xPbNqk5dl9YhBom/etketGMW8=;
-        b=IYUzUXKcxyymdQ0jbGiZIKEpzVtQxF7Czj7MyYST4EWXsztb/cMe5knQ3wH2FLcRyT
-         1V6XNbmQdS3E3FToCO8LMQlnHlwxzMD+ooX8/J1QVvBWlz8NJcxe4L5V+i0rh8vHrTGX
-         bG0BV1cJImQQB95bFg0vxtWqJEDouUBWZWRyjIOatIlbjS5mkj4hfVE8C5v8zeYPhrfB
-         qUcHLsmIaMUxyZkfQpmSLyL0xPVzh8gIEMz1A/8vyN8etn5mYiou8oHmJ8zLwyZPLb8Z
-         QxXjXIMCRWTAJpJAlsyob/BPHCRx98QRGGTA+WvLOaILsyt8kxnWLGZGpcM7wrFfIdJH
-         +lMA==
-X-Gm-Message-State: AOAM533KUZ5VdBnPLcElW9intzliB16nlCHcrYDUmzvKRrEeyfkNVnEg
-	1jXy3lFLjPEtevgmZBPCG1ZhVLghrtruxQ==
-X-Google-Smtp-Source: ABdhPJzqUHdfXsIFqLioqEp7bqUQ4Kb5Z+5ur6n6rOJgaJeidzdhKTX6oUcWIzmOEOlQfu39ECZIWA==
-X-Received: by 2002:a65:6545:: with SMTP id a5mr13146163pgw.43.1598494920448;
-        Wed, 26 Aug 2020 19:22:00 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::4fbd])
-        by smtp.gmail.com with ESMTPSA id s198sm339363pgc.4.2020.08.26.19.21.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Aug 2020 19:21:59 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] nss: Avoid converting enum to void*
-Date: Wed, 26 Aug 2020 19:21:58 -0700
-Message-Id: <20200827022158.1505111-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=SAx8yYZMzLGWAuZ8inpBavB7V7T9UH9R4qhaFLZ5gig=;
+        b=WnV/2uaf0k45J/MV8Fe2tycCoCuRKPbDnCz7thERz1maJw6Spm994eq10VIltR6Ikk
+         fFBvgRhg59E5lAfa34VT0Rzvy45F0asZtKPXDv5Hds4WYtcU6+sWEVMxebbJsrvjGQ6l
+         KGyl9whJjEidwYq+jVKvq74o3rM6rCMQ5adbGRe8QkaKPy51kyFyeENius66Twh4fSRa
+         qzj34SRmx6hhyOrxLhaq+oGuobX046qIIdd3MNiFEau+aDfW2RaR1Oqiq2OMcd010SH9
+         rDGK3GWO1/DJ0ONale9VOyAfl14Z2pyb7NfqDS5hmEB5kjrHvo54PYOztLgUu7aodr30
+         Je2g==
+X-Gm-Message-State: AOAM533yr8N9hHklVgZEA8QcyM9Udb36G+1UI3vHoWXmOznDAzfev6TI
+	507FQGuUgEGgFMXKjqln5cgOTvKPAn1uQdzXlZgQalWOICKb/w==
+X-Google-Smtp-Source: ABdhPJw5sBtefpDUxsOkcxVLGg0L0XKF4+W8icqjZgFuz6WllAYnLwcDD8EFwAtDAnsudF77bu+3nItsrf4WoFpbwJI=
+X-Received: by 2002:a05:620a:48:: with SMTP id t8mr17679502qkt.474.1598511834816;
+ Thu, 27 Aug 2020 00:03:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20200827011803.26737-1-marc@cpdesign.com.au>
+In-Reply-To: <20200827011803.26737-1-marc@cpdesign.com.au>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 27 Aug 2020 00:03:28 -0700
+Message-ID: <CAMKF1srsA3njBCb0eBsZWn-YAk=v4q=nBfpL3dh6OTNwnUTqBQ@mail.gmail.com>
+Subject: Re: [oe][meta-oe][patch v2] openocd: Update to latest git version
+To: Marc <marc@cpdesign.com.au>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Found with clang-11
+This fails to apply patch during build see
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...ix-Do-not-use-NULL-where-0-is-needed.patch | 46 +++++++++++++++++++
- meta-oe/recipes-support/nss/nss_3.54.bb       |  1 +
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-oe/recipes-support/nss/nss/0001-pkix-Do-not-use-NULL-where-0-is-needed.patch
+https://errors.yoctoproject.org/Errors/Details/496922/
 
-diff --git a/meta-oe/recipes-support/nss/nss/0001-pkix-Do-not-use-NULL-where-0-is-needed.patch b/meta-oe/recipes-support/nss/nss/0001-pkix-Do-not-use-NULL-where-0-is-needed.patch
-new file mode 100644
-index 0000000000..432312da25
---- /dev/null
-+++ b/meta-oe/recipes-support/nss/nss/0001-pkix-Do-not-use-NULL-where-0-is-needed.patch
-@@ -0,0 +1,46 @@
-+From 1136cad77c2dc7d8e1daa317877676733e805f29 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 26 Aug 2020 17:30:40 -0700
-+Subject: [PATCH] pkix: Do not use NULL where 0 is needed
-+
-+Clang finds this error
-+
-+pkix_logger.c:316:32: error: cast to smaller integer type 'PKIX_ERRORCLASS' from 'void *' [-Werror,-Wvoid-pointer-to-enum-cast]
-+        logger->logComponent = (PKIX_ERRORCLASS)NULL;
-+                               ^~~~~~~~~~~~~~~~~~~~~
-+pkix_logger.c:617:32: error: cast to smaller integer type 'PKIX_ERRORCLASS' from 'void *' [-Werror,-Wvoid-pointer-to-enum-cast]
-+        logger->logComponent = (PKIX_ERRORCLASS)NULL;
-+                               ^~~~~~~~~~~~~~~~~~~~~
-+2 errors generated.
-+
-+Upstream-Status: Submitted [https://bugzilla.mozilla.org/show_bug.cgi?id=1661378]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ nss/lib/libpkix/pkix/util/pkix_logger.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/nss/lib/libpkix/pkix/util/pkix_logger.c b/nss/lib/libpkix/pkix/util/pkix_logger.c
-+index a916e6e..10f537a 100644
-+--- a/nss/lib/libpkix/pkix/util/pkix_logger.c
-++++ b/nss/lib/libpkix/pkix/util/pkix_logger.c
-+@@ -313,7 +313,7 @@ pkix_Logger_Destroy(
-+ 
-+         logger->callback = NULL;
-+         PKIX_DECREF(logger->context);
-+-        logger->logComponent = (PKIX_ERRORCLASS)NULL;
-++        logger->logComponent = (PKIX_ERRORCLASS)0;
-+ 
-+ cleanup:
-+ 
-+@@ -614,7 +614,7 @@ PKIX_Logger_Create(
-+ 
-+         logger->callback = callback;
-+         logger->maxLevel = 0;
-+-        logger->logComponent = (PKIX_ERRORCLASS)NULL;
-++        logger->logComponent = (PKIX_ERRORCLASS)0;
-+ 
-+         PKIX_INCREF(loggerContext);
-+         logger->context = loggerContext;
-+-- 
-+2.28.0
-+
-diff --git a/meta-oe/recipes-support/nss/nss_3.54.bb b/meta-oe/recipes-support/nss/nss_3.54.bb
-index dc5cafbf1c..882145c1ef 100644
---- a/meta-oe/recipes-support/nss/nss_3.54.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.54.bb
-@@ -32,6 +32,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
-            file://system-pkcs11.txt \
-            file://nss-fix-nsinstall-build.patch \
-            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
-+           file://0001-pkix-Do-not-use-NULL-where-0-is-needed.patch \
-            "
- 
- SRC_URI[sha256sum] = "dab18bbfcf5e347934cda664df75ce9fd912a5772686c40d3c805e53c08d6e43"
--- 
-2.28.0
+I would prefer a patch is tested before sending to ml otherwise mark
+it untested so folks know.
 
+On Wed, Aug 26, 2020 at 6:19 PM Marc <marc@cpdesign.com.au> wrote:
+>
+> The 0001-Do-not-include-sysctrl.h-with-glibc.patch is no longer needed,
+> and is thus removed.
+>
+> Signed-off-by: Marc Reilly <marc@cpdesign.com.au>
+>
+> # Conflicts:
+> #       meta-oe/recipes-devtools/openocd/openocd_git.bb
+> ---
+>  ...-Do-not-include-syscrtl.h-with-glibc.patch | 33 -------------------
+>  .../recipes-devtools/openocd/openocd_git.bb   |  7 ++--
+>  2 files changed, 3 insertions(+), 37 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/openocd/openocd/0001-Do-not-include-syscrtl.h-with-glibc.patch
+>
+> diff --git a/meta-oe/recipes-devtools/openocd/openocd/0001-Do-not-include-syscrtl.h-with-glibc.patch b/meta-oe/recipes-devtools/openocd/openocd/0001-Do-not-include-syscrtl.h-with-glibc.patch
+> deleted file mode 100644
+> index 618ce2689..000000000
+> --- a/meta-oe/recipes-devtools/openocd/openocd/0001-Do-not-include-syscrtl.h-with-glibc.patch
+> +++ /dev/null
+> @@ -1,33 +0,0 @@
+> -From a763610719e7d7f6cdc45569b6fbfdb91bb7c87b Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Sat, 27 Jul 2019 14:30:08 -0700
+> -Subject: [PATCH] Do not include syscrtl.h with glibc
+> -
+> -glibc 2.30 has deprecated it see [1]
+> -Fixes
+> -sys/sysctl.h:21:2: error: "The <sys/sysctl.h> header is deprecated and will be removed." [-Werror,-W#warnings]
+> -
+> -[1] https://sourceware.org/git/?p=glibc.git;a=commit;h=744e829637162bb7d5029632aacf341c64b86990
+> -
+> -Upstream-Status: Pending
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ----
+> - src/helper/options.c | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+> -
+> -diff --git a/src/helper/options.c b/src/helper/options.c
+> -index 12755e010..4007e37f6 100644
+> ---- a/src/helper/options.c
+> -+++ b/src/helper/options.c
+> -@@ -34,7 +34,7 @@
+> - #if IS_DARWIN
+> - #include <libproc.h>
+> - #endif
+> --#ifdef HAVE_SYS_SYSCTL_H
+> -+#if defined(HAVE_SYS_SYSCTL_H) && !defined(__GLIBC__)
+> - #include <sys/sysctl.h>
+> - #endif
+> - #if IS_WIN32 && !IS_CYGWIN
+> ---
+> -2.22.0
+> -
+> diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+> index c7d754fdb..b2a4033b4 100644
+> --- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
+> +++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+> @@ -9,15 +9,14 @@ SRC_URI = " \
+>      git://repo.or.cz/r/git2cl.git;protocol=http;destsuffix=tools/git2cl;name=git2cl \
+>      git://repo.or.cz/r/jimtcl.git;protocol=http;destsuffix=git/jimtcl;name=jimtcl \
+>      git://repo.or.cz/r/libjaylink.git;protocol=http;destsuffix=git/src/jtag/drivers/libjaylink;name=libjaylink \
+> -    file://0001-Do-not-include-syscrtl.h-with-glibc.patch \
+>      file://0001-bitbang-Make-bitbang_swd-extern-definition.patch \
+>  "
+>
+>  SRCREV_FORMAT = "openocd"
+> -SRCREV_openocd = "ded67990255cc1e63c77832ffd6e6bef9120873d"
+> +SRCREV_openocd = "d46f28c2ea2611f5fbbc679a5eed253d3dcd2fe3"
+>  SRCREV_git2cl = "8373c9f74993e218a08819cbcdbab3f3564bbeba"
+> -SRCREV_jimtcl = "dc4ba7770d580800634f90b67a24e077b4a26d98"
+> -SRCREV_libjaylink = "3322dfa5e7aa56f5b12b7f2197e3e6b850b7b66e"
+> +SRCREV_jimtcl = "0aa0fb4e3a38d38a49de9eb585d93d63a370dcf6"
+> +SRCREV_libjaylink = "9aa7a5957c07bb6e862fc1a6d3153d109c7407e4"
+>
+>  PV = "0.10+gitr${SRCPV}"
+>  S = "${WORKDIR}/git"
+> --
+> 2.26.2
+>
+> 
