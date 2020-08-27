@@ -1,236 +1,193 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.51])
- by mx.groups.io with SMTP id smtpd.web12.25577.1598552449767668013
+Received: from out103-7-vmse02.mailcluster.com.au (out103-7-vmse02.mailcluster.com.au [103.250.20.7])
+ by mx.groups.io with SMTP id smtpd.web11.30832.1598567277233149307
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Aug 2020 11:20:49 -0700
+ Thu, 27 Aug 2020 15:27:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=NiWIU8kK;
- spf=pass (domain: windriver.com, ip: 40.107.243.51, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PmkyGxKY43xFlxiomVi4W4dlM2pEBWOKqTMjVk/RNzUlUWKx4CCDtnvsvL9mezGsUfCgB/E3W9OFEfppNbg5KDmGOBg5dWbnTRkMe2vGBBXUypJKtU9f8FYWazYniUS1A/N2cgGFoLhAyW+6Vi6x4f+Ir+F3mIZUBzB5vtNdOl2Ub7yzopWb4jZVCllfZw5JmcR7kMDEGrjZ9+L1v2aRlwe/LKAQpDxvsXjfxa17GbOQDwHWssUL+Pen9zwhSXakAPtlg43iDK9nhKeSl9RPJEqSfRI6Fh9zDug0NZ7ko7GQwUxj5LuoZeLsa9tARyqJssJMAiKAYXKiPyRroK8s3A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2L9kKNq2n1GUbDZZr3W3I65AZdgX3Jy/fdkti6pzc+A=;
- b=WjzMFaL57Lsv1zo7SnQ86AYGNdUaBGdHpzJs9tH47kyeo1uESjVGdfWSXX6JiGjMevneJPIZKeXGezWZ7x6EMDyxVetvGAOjuAfkN+J69Yge9/k9nYVt6T22K9HKZjEvE+32vzO1KOwLc+OEBBrkpVbHAggHTBgpDA/3pt7bv6yWahyOd3h7n0OjsV756AsnWz04unelaOLwEwsrJo2F7k/o8NCLs4hni3b4LUpmNzthWAx6YGYArNZ12KBZz47znwfXMjJDYXOvci/o77MxK1S2ahNLC4inEPT6v8oY9sj64xmZvIrUEUwIaoIw0cjZQvTzqSgSxTMqgS9AZvy8ZQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2L9kKNq2n1GUbDZZr3W3I65AZdgX3Jy/fdkti6pzc+A=;
- b=NiWIU8kKB21XwLA4bzO1fSNNuZaQldJC1lMXeeyH0pPTIWJivEuwek7EZiVsSg0v/bxtqeZVDLWSaTXszNxPcZyP1qLATixWQ27OwTdAQ2qtk/CeNXGUv28aytA3uPmr7PS/PHYqjNP0zjtJAsxxBS6AkIs9gI0Urrt1c85Ui7w=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB2726.namprd11.prod.outlook.com (2603:10b6:a02:be::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.19; Thu, 27 Aug
- 2020 18:20:48 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::50e6:fd64:b821:78e8]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::50e6:fd64:b821:78e8%7]) with mapi id 15.20.3326.019; Thu, 27 Aug 2020
- 18:20:48 +0000
-Subject: Re: [oe] [meta-python][PATCH 5/6] python3-flask-socketio: Consolidate in a single file
-To: Leon Anavi <leon.anavi@konsulko.com>,
- openembedded-devel@lists.openembedded.org
-References: <20200826154020.29208-1-leon.anavi@konsulko.com>
- <20200826154020.29208-5-leon.anavi@konsulko.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <bf6e01a8-a2df-d63c-88ee-f2a50a9cac70@windriver.com>
-Date: Thu, 27 Aug 2020 14:20:43 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
-In-Reply-To: <20200826154020.29208-5-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0065.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2e::34) To BY5PR11MB3909.namprd11.prod.outlook.com
- (2603:10b6:a03:191::13)
-Return-Path: trevor.gamblin@windriver.com
+ dkim=pass header.i=@cpdesign.com.au header.s=default header.b=LJ5ABBxm;
+ spf=pass (domain: cpdesign.com.au, ip: 103.250.20.7, mailfrom: marc@cpdesign.com.au)
+Received: from vmcp03.web-servers.com.au ([116.90.56.28])
+	by vmse02.mailcluster.com.au with esmtps (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+	(Exim 4.92)
+	(envelope-from <marc@cpdesign.com.au>)
+	id 1kBQMt-0004e2-DJ; Fri, 28 Aug 2020 08:27:54 +1000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=cpdesign.com.au; s=default; h=Content-Transfer-Encoding:MIME-Version:
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=DpYAcOnTmLiiQJryN2nBBNIujqbyHuHnCWAkmWE3lVs=; b=LJ5ABBxmU7pTQfjPJFAUWxEmoc
+	kDK0kqUi9XOQbp3FUTd44oeIm6l/VE1k1JSHc45FX1noyfVNaAMl25ET88vlyfqEYvsZcStHpOYFa
+	fhbJMNBhctHZToIEqMfCSIKstzsUDd63kBztNV/2lCH2QME4TiHM3d852JxbqhB/GucBZ0FVn5YRT
+	C+qK0kg9il5u21TtwsbhOCsxIQKhv6vKIZTNlWRniNX0L2nKHYTfB5iD2rMf2aQbILlzLYIh+105r
+	G79uCowtkY5sJ6Jmy5hu1C9KpxxSfDV7hCnI539b6lSguIC612FKpZVGm7DJQ+jmDrjdUCQSIMPb4
+	O5Zno1Hw==;
+Received: from 14-201-30-55.tpgi.com.au ([14.201.30.55]:47010 helo=localhost.localdomain)
+	by vmcp03.web-servers.com.au with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.93)
+	(envelope-from <marc@cpdesign.com.au>)
+	id 1kBQMD-006qZx-Jo; Fri, 28 Aug 2020 08:26:57 +1000
+From: "Marc" <marc@cpdesign.com.au>
+To: openembedded-devel@lists.openembedded.org
+Cc: Marc Reilly <marc@cpdesign.com.au>
+Subject: [oe][meta-oe][patch v3] openocd: Update to latest git version
+Date: Fri, 28 Aug 2020 08:25:36 +1000
+Message-Id: <20200827222536.31450-1-marc@cpdesign.com.au>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from 255.255.255.255 (255.255.255.255) by YT1PR01CA0065.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.19 via Frontend Transport; Thu, 27 Aug 2020 18:20:47 +0000
-X-Originating-IP: [174.115.236.231]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 1ed4d33f-5e65-4d3e-81ff-08d84ab5ec22
-X-MS-TrafficTypeDiagnostic: BYAPR11MB2726:
-X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB27263B53BAAA543B7F51FF139F550@BYAPR11MB2726.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:207;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	LYzcN+tIdMuJ4tZGzhkIlzgoHKSFQbhY5XxTNgCFYwtqqPz7FvYIo4wsgBE29XzqNPbcdKUdDegWU7CBOrXYyR6MBYqXx/HUeXPqAf49bhkCSC/OIJ0b23uai1Fe8xGEQRryfhS3XTcdmbgEJ30WqM6zF4qCDAd4tsrMtArCv3ICtKvnf2K1HR1jjlyzzhCOhvMCct4vrqMWuAdS+ZxEtWU9HNSIe+yWUzkuHvrE55uTpmrWO74QRdSiXN8e0/VTB94u5B9ULz2WW8AuIPs3O8ZgvyA0FoNcX+JTjlPmuOhbv8/MvLZQ45MhjUAOZ4XrJWLE2aPXRYJf15LE2J6NOoA/GfI1X/4t108YYu9/fpcSS+4XJwpx833Op9f11xS8kcXXp7n41wZ1hv0xbt8WI6fDtRyE181dxtZY16plTgD2u6ANi9X5AF/iobUampa/zudzCPYZEnTdKdUUd0ypqQ==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(39850400004)(396003)(366004)(136003)(346002)(5660300002)(66556008)(6666004)(2616005)(956004)(26005)(31696002)(8936002)(6486002)(83380400001)(33964004)(966005)(66946007)(31686004)(86362001)(2906002)(186003)(66476007)(53546011)(52116002)(166002)(8676002)(36756003)(316002)(478600001)(44832011)(16576012)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	kAIT9lpqOKwlGXFYfRf7Z0KI4UpPQEasNaryJp1W01prjG2AUleIiu4Op7n6hROZHAjji7ENOEO9nWSFEYvh+saYUSEabGbQMQY8fWH9jMV8/QEVrwt6p1HBHsMl7FMxp3oZnmErBdXTeMWk8I1sLHtK1Ln9GBWo52l5ONOVQGtuOBrBP1P3zaOm6R2SsLcI/1cex7JY4TxWsildmenfPwUJvP+hcXl1e1q5OXJcxnzG7Zwib9ZfqH75QOS88c1ZjtDuF8QaU93QJdjco1zDBxUG6RH4mHIB4dN+mJXkkYbuSRVUminBZEFVA4L2LzbmN10JpcbkgizRzyzLV+CacpM/C2Lur/mUYRv57LgqfEDPkc6d+dons6vpS1ldmloGPfRtSupF/iNueCA0eLJW+TBYMBnaVrnHqGjhCKULY1osrVfGjzCY71qQJPYwnC2A0SK65mb+mVwLDDwWWDgwGJTcPF6gSTv0MP2N+RQeGll6vCSiPzz5kPpmAjZEbtz4kHESXrrjChpP1DjvvRzb48Xo7MvW14wqDwvkP+6mzzwGBpq3tHnZTxLDx98fMu4JXyN5fJrMd4r0YTs4emmbMHdWpxjG1V47dze5Vlwxe5Pb42WSFlftoVqCL49WuSUpUCbussDQi0ra0r3RoB4CYQ==
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1ed4d33f-5e65-4d3e-81ff-08d84ab5ec22
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2020 18:20:48.5584
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4XN6ilTDfpe6HadDL+g6RH8wsdEhMfeYrB8IkP0G3HzvFDd+42ZN9/7mAlOJsHCJD5z10JjWT2z7usNIgFbHJtA+nOpNfnj/2/iKvUHJBMw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2726
-Content-Type: multipart/alternative;
- boundary="------------6A60E3772C548E8374973647"
-Content-Language: en-US
+X-Authenticated-User: marc@cpdesign.com.au
+X-Authenticator: dovecot_plain
+X-Originating-IP: 116.90.56.28
+X-SpamExperts-Domain: panthur-sh-outbound0.mailcluster.com.au
+X-SpamExperts-Username: 116.90.56.28
+Authentication-Results: mailcluster.com.au; auth=pass smtp.auth=116.90.56.28@panthur-sh-outbound0.mailcluster.com.au
+X-SpamExperts-Outgoing-Class: ham
+X-SpamExperts-Outgoing-Evidence: SB/global_tokens (0.00232268007432)
+X-Recommended-Action: accept
+X-Filter-ID: Mvzo4OR0dZXEDF/gcnlw0fJi3Ojdyt5h9PLOIGvr3lipSDasLI4SayDByyq9LIhVIxf9wa4IsjtR
+ BJmNdv3T7kTNWdUk1Ol2OGx3IfrIJKyP9eGNFz9TW9u+Jt8z2T3KoWFgMvF+XPPkibGoK9ILBB00
+ RFZrIi+ZJEJo7wxsO/7VAI0YaYoxzUzqeY0RKlIbl3vtzsnCjVjO/qBQZyPHPxtd7FIegon359AS
+ 01xfP6cAsqjVfPl6xs9mFo2LToBFcciY2z4hq7SqXAJrAGow5GfoFWZw01PZOinlBH25TcLuNaT6
+ dAR4/fSS+hfMzDXVyZl6POixVpGcLrHJaCKcDQMZ3Rc1FPM37mYbhKZuZQPQzE4pWsN9DMOCoUO6
+ aPH3rtVmombMJ4e2pn5C0yBMHei5BhbfeHQcd06QKJAOFJmwhlcqbDNsZPhW+lMvQRvnhtPcSzO8
+ hsBsHZnLTV3/sheOR1N5VnaoZbH/AdGlfrxb2fBAlhZ0D8R9hqWf+kKKqZJPq0P98FvWTwEpOhyA
+ dK6qvRqKQ68kD4O7N4Xhv7JB75tz6v0zFYS4i1UpWw5yXHKXjy/UUyfBKxS3I/qxqt9fxN2oReTD
+ HAyOynaY0ClayFlzfg/9spYg1tMhQDojmOPV3l6ehn5j5fYkfZoQxBkgoL0bckEue7jwJnlVscnY
+ 5Qx4fJOk03R5fJtf/Dv/9m9+uP0zyEETyQahh1k9uyjKIDVyymCVyC1ptYnJbMxr5klyEuc987+Y
+ wjK9ZCkWcQjLwb0HH0huSx9DiSHOBCy52WbhZLyFpHQgjgal0ZiGyUuX4D8uO6Mr+k9B+cnhY/sO
+ vQiauShko72/x+ONfS32EoSnB0KQ6B3xt8UP9IpG18TJfl7S+nSryIOjiGo+YAvNrlNPDcRjUdyh
+ 4v23HATugv1leQFvfCG5Mo+bZdrcOTYyZlLVDrZYjWY+Z5btw7Dhb2MjgFHaOhtDC8OUUxNU4pLh
+ CvFXI4ziX4KdIOgKPa7nWoyyMidZrfrm/y7/VFVfzq9HJCcKwi0t4S0aPa9bEM2vZpXu3r/CFxu/
+ JfMd/XyjuM/4DpMjE4bsJtdCg/GAJCwW2QYU//No1Sz2NlNwYzVIo6KuHW8hVCQ7X76eh5iKSy3v
+ OUL7u1Fz6ckdlPTAIqGU1JNSgwiNIesPRfn+6OKMfGXpI6vVUgXgRhqh2Dwf8plwptnx2pP0zfML
+ So+O6aenwaZ6/X2ea4ZBUw==
+X-Report-Abuse-To: spam@vmse01.mailcluster.com.au
+Content-Transfer-Encoding: 8bit
 
---------------6A60E3772C548E8374973647
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+The 0001-Do-not-include-sysctrl.h-with-glibc.patch is no longer needed,
+and is thus removed.
+The 0001-bitbang-Make-bitbang_swd-extern-definition.patch was fixed
+upstream in c60252ac2b636c4d99b766a574b9df0966151696 and is thus removed.
 
-
-On 8/26/20 11:40 AM, Leon Anavi wrote:
-> Consolidate inc and bb files into a single bb file.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   .../python/python-flask-socketio.inc          | 18 -----------------
->   .../python/python3-flask-socketio_4.2.1.bb    | 20 +++++++++++++++++--
->   2 files changed, 18 insertions(+), 20 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python-flask-socketio.inc
->
-> diff --git a/meta-python/recipes-devtools/python/python-flask-socketio.inc b/meta-python/recipes-devtools/python/python-flask-socketio.inc
-> deleted file mode 100644
-> index 8d778d4bf..000000000
-> --- a/meta-python/recipes-devtools/python/python-flask-socketio.inc
-> +++ /dev/null
-> @@ -1,18 +0,0 @@
-> -SUMMARY = "Socket.IO integration for Flask applications"
-> -HOMEPAGE = "https://github.com/miguelgrinberg/Flask-SocketIO/"
-> -SECTION = "devel/python"
-> -
-> -LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=38cc21254909604298ce763a6e4440a0"
-> -
-> -inherit pypi
-> -
-> -PYPI_PACKAGE = "Flask-SocketIO"
-> -
-> -SRC_URI[md5sum] = "b23222fb7dd2f0676d78bbe24153fd80"
-> -SRC_URI[sha256sum] = "2172dff1e42415ba480cee02c30c2fc833671ff326f1598ee3d69aa02cf768ec"
-> -
-> -RDEPENDS_${PN} += "\
-> -    ${PYTHON_PN}-flask \
-> -    ${PYTHON_PN}-socketio \
-> -    "
-> diff --git a/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb b/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb
-> index ffc4aa7fd..e5fc54136 100644
-> --- a/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb
-> @@ -1,2 +1,18 @@
-> -inherit setuptools3
-> -require python-flask-socketio.inc
-> +SUMMARY = "Socket.IO integration for Flask applications"
-> +HOMEPAGE = "https://github.com/miguelgrinberg/Flask-SocketIO/"
-> +SECTION = "devel/python"
-> +
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=38cc21254909604298ce763a6e4440a0"
-> +
-> +inherit pypi setuptools3
-> +
-> +PYPI_PACKAGE = "Flask-SocketIO"
-> +
-> +SRC_URI[md5sum] = "b23222fb7dd2f0676d78bbe24153fd80"
-> +SRC_URI[sha256sum] = "2172dff1e42415ba480cee02c30c2fc833671ff326f1598ee3d69aa02cf768ec"
-> +
-> +RDEPENDS_${PN} += "\
-> +    ${PYTHON_PN}-flask \
-> +    ${PYTHON_PN}-socketio \
-> +    "
->
-> 
-
---------------6A60E3772C548E8374973647
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 8/26/20 11:40 AM, Leon Anavi wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20200826154020.29208-5-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Consolidate inc and bb files into a single bb file.
-
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200826154020.29208-5-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">
+Signed-off-by: Marc Reilly <marc@cpdesign.com.au>
 ---
- .../python/python-flask-socketio.inc          | 18 -----------------
- .../python/python3-flask-socketio_4.2.1.bb    | 20 +++++++++++++++++--
- 2 files changed, 18 insertions(+), 20 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-flask-socketio.inc
+ ...-Do-not-include-syscrtl.h-with-glibc.patch | 33 ---------------
+ ...g-Make-bitbang_swd-extern-definition.patch | 42 -------------------
+ .../recipes-devtools/openocd/openocd_git.bb   |  8 ++--
+ 3 files changed, 3 insertions(+), 80 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/openocd/openocd/0001-Do-not-include-syscrtl.h-with-glibc.patch
+ delete mode 100644 meta-oe/recipes-devtools/openocd/openocd/0001-bitbang-Make-bitbang_swd-extern-definition.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-flask-socketio.inc b/meta-python/recipes-devtools/python/python-flask-socketio.inc
+diff --git a/meta-oe/recipes-devtools/openocd/openocd/0001-Do-not-include-syscrtl.h-with-glibc.patch b/meta-oe/recipes-devtools/openocd/openocd/0001-Do-not-include-syscrtl.h-with-glibc.patch
 deleted file mode 100644
-index 8d778d4bf..000000000
---- a/meta-python/recipes-devtools/python/python-flask-socketio.inc
+index 618ce2689..000000000
+--- a/meta-oe/recipes-devtools/openocd/openocd/0001-Do-not-include-syscrtl.h-with-glibc.patch
 +++ /dev/null
-@@ -1,18 +0,0 @@
--SUMMARY = &quot;Socket.IO integration for Flask applications&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/miguelgrinberg/Flask-SocketIO/">&quot;https://github.com/miguelgrinberg/Flask-SocketIO/&quot;</a>
--SECTION = &quot;devel/python&quot;
+@@ -1,33 +0,0 @@
+-From a763610719e7d7f6cdc45569b6fbfdb91bb7c87b Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 27 Jul 2019 14:30:08 -0700
+-Subject: [PATCH] Do not include syscrtl.h with glibc
 -
--LICENSE = &quot;MIT&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=38cc21254909604298ce763a6e4440a0">&quot;file://LICENSE;md5=38cc21254909604298ce763a6e4440a0&quot;</a>
+-glibc 2.30 has deprecated it see [1]
+-Fixes
+-sys/sysctl.h:21:2: error: "The <sys/sysctl.h> header is deprecated and will be removed." [-Werror,-W#warnings]
 -
--inherit pypi
+-[1] https://sourceware.org/git/?p=glibc.git;a=commit;h=744e829637162bb7d5029632aacf341c64b86990
 -
--PYPI_PACKAGE = &quot;Flask-SocketIO&quot;
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/helper/options.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
 -
--SRC_URI[md5sum] = &quot;b23222fb7dd2f0676d78bbe24153fd80&quot;
--SRC_URI[sha256sum] = &quot;2172dff1e42415ba480cee02c30c2fc833671ff326f1598ee3d69aa02cf768ec&quot;
+-diff --git a/src/helper/options.c b/src/helper/options.c
+-index 12755e010..4007e37f6 100644
+---- a/src/helper/options.c
+-+++ b/src/helper/options.c
+-@@ -34,7 +34,7 @@
+- #if IS_DARWIN
+- #include <libproc.h>
+- #endif
+--#ifdef HAVE_SYS_SYSCTL_H
+-+#if defined(HAVE_SYS_SYSCTL_H) && !defined(__GLIBC__)
+- #include <sys/sysctl.h>
+- #endif
+- #if IS_WIN32 && !IS_CYGWIN
+--- 
+-2.22.0
 -
--RDEPENDS_${PN} += &quot;\
--    ${PYTHON_PN}-flask \
--    ${PYTHON_PN}-socketio \
--    <a class="moz-txt-link-rfc2396E" href="mailto:diff--gita/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bbb/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bbindexffc4aa7fd..e5fc54136100644---a/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb+++b/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb@@-1,2+1,18@@-inheritsetuptools3-requirepython-flask-socketio.inc+SUMMARY=">&quot;
-diff --git a/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb b/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb
-index ffc4aa7fd..e5fc54136 100644
---- a/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask-socketio_4.2.1.bb
-@@ -1,2 +1,18 @@
--inherit setuptools3
--require python-flask-socketio.inc
-+SUMMARY = &quot;</a>Socket.IO integration for Flask applications&quot;
-+HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/miguelgrinberg/Flask-SocketIO/">&quot;https://github.com/miguelgrinberg/Flask-SocketIO/&quot;</a>
-+SECTION = &quot;devel/python&quot;
-+
-+LICENSE = &quot;MIT&quot;
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=38cc21254909604298ce763a6e4440a0">&quot;file://LICENSE;md5=38cc21254909604298ce763a6e4440a0&quot;</a>
-+
-+inherit pypi setuptools3
-+
-+PYPI_PACKAGE = &quot;Flask-SocketIO&quot;
-+
-+SRC_URI[md5sum] = &quot;b23222fb7dd2f0676d78bbe24153fd80&quot;
-+SRC_URI[sha256sum] = &quot;2172dff1e42415ba480cee02c30c2fc833671ff326f1598ee3d69aa02cf768ec&quot;
-+
-+RDEPENDS_${PN} += &quot;\
-+    ${PYTHON_PN}-flask \
-+    ${PYTHON_PN}-socketio \
-+    &quot;
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-  </body>
-</html>
+diff --git a/meta-oe/recipes-devtools/openocd/openocd/0001-bitbang-Make-bitbang_swd-extern-definition.patch b/meta-oe/recipes-devtools/openocd/openocd/0001-bitbang-Make-bitbang_swd-extern-definition.patch
+deleted file mode 100644
+index d42b628da..000000000
+--- a/meta-oe/recipes-devtools/openocd/openocd/0001-bitbang-Make-bitbang_swd-extern-definition.patch
++++ /dev/null
+@@ -1,42 +0,0 @@
+-From 428f9f3c4a5be973e4c7fc1325ae9dbe41040df2 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 13 Aug 2020 17:47:35 -0700
+-Subject: [PATCH] bitbang: Make bitbang_swd extern definition
+-
+-Fixes build with gcc10+
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/jtag/drivers/bitbang.c | 1 +
+- src/jtag/drivers/bitbang.h | 2 +-
+- 2 files changed, 2 insertions(+), 1 deletion(-)
+-
+-diff --git a/src/jtag/drivers/bitbang.c b/src/jtag/drivers/bitbang.c
+-index b5078c080..f8612aade 100644
+---- a/src/jtag/drivers/bitbang.c
+-+++ b/src/jtag/drivers/bitbang.c
+-@@ -43,6 +43,7 @@ static int bitbang_stableclocks(int num_cycles);
+- static void bitbang_swd_write_reg(uint8_t cmd, uint32_t value, uint32_t ap_delay_clk);
+- 
+- struct bitbang_interface *bitbang_interface;
+-+const struct swd_driver bitbang_swd;
+- 
+- /* DANGER!!!! clock absolutely *MUST* be 0 in idle or reset won't work!
+-  *
+-diff --git a/src/jtag/drivers/bitbang.h b/src/jtag/drivers/bitbang.h
+-index 577717ebd..0faf5d9ae 100644
+---- a/src/jtag/drivers/bitbang.h
+-+++ b/src/jtag/drivers/bitbang.h
+-@@ -57,7 +57,7 @@ struct bitbang_interface {
+- 	void (*swdio_drive)(bool on);
+- };
+- 
+--const struct swd_driver bitbang_swd;
+-+extern const struct swd_driver bitbang_swd;
+- 
+- extern bool swd_mode;
+- 
+--- 
+-2.28.0
+-
+diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+index c7d754fdb..4f6aaa8a6 100644
+--- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
++++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+@@ -9,15 +9,13 @@ SRC_URI = " \
+     git://repo.or.cz/r/git2cl.git;protocol=http;destsuffix=tools/git2cl;name=git2cl \
+     git://repo.or.cz/r/jimtcl.git;protocol=http;destsuffix=git/jimtcl;name=jimtcl \
+     git://repo.or.cz/r/libjaylink.git;protocol=http;destsuffix=git/src/jtag/drivers/libjaylink;name=libjaylink \
+-    file://0001-Do-not-include-syscrtl.h-with-glibc.patch \
+-    file://0001-bitbang-Make-bitbang_swd-extern-definition.patch \
+ "
+ 
+ SRCREV_FORMAT = "openocd"
+-SRCREV_openocd = "ded67990255cc1e63c77832ffd6e6bef9120873d"
++SRCREV_openocd = "d46f28c2ea2611f5fbbc679a5eed253d3dcd2fe3"
+ SRCREV_git2cl = "8373c9f74993e218a08819cbcdbab3f3564bbeba"
+-SRCREV_jimtcl = "dc4ba7770d580800634f90b67a24e077b4a26d98"
+-SRCREV_libjaylink = "3322dfa5e7aa56f5b12b7f2197e3e6b850b7b66e"
++SRCREV_jimtcl = "0aa0fb4e3a38d38a49de9eb585d93d63a370dcf6"
++SRCREV_libjaylink = "9aa7a5957c07bb6e862fc1a6d3153d109c7407e4"
+ 
+ PV = "0.10+gitr${SRCPV}"
+ S = "${WORKDIR}/git"
+-- 
+2.26.2
 
---------------6A60E3772C548E8374973647--
