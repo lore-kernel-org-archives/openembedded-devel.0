@@ -1,24 +1,22 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.15157.1598520603428297228
+ by mx.groups.io with SMTP id smtpd.web11.20640.1598540065512777555
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Aug 2020 02:30:03 -0700
+ Thu, 27 Aug 2020 07:54:25 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=58710 helo=localhost.localdomain)
+Received: from [78.130.197.211] (port=58882 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kBEEM-0005Nx-2n; Thu, 27 Aug 2020 12:30:02 +0300
+	id 1kBJID-00019B-K6; Thu, 27 Aug 2020 17:54:22 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-twitter: Upgrade 3.8.0 -> 3.9.0
-Date: Thu, 27 Aug 2020 12:29:51 +0300
-Message-Id: <20200827092951.15749-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH] python3-ntplib: Upgrade 0.3.3 -> 0.3.4
+Date: Thu, 27 Aug 2020 17:54:09 +0300
+Message-Id: <20200827145409.29077-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200827092951.15749-1-leon.anavi@konsulko.com>
-References: <20200827092951.15749-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,71 +28,43 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade tweepy to release 3.9.0:
+Upgrade to release 0.3.4:
+- Use setuptools
+- update URL
 
-- Add API.create_media_metadata
-- Update allowed parameters for API.update_status
-- Add allowed parameters to API.get_status
-- Add allowed parameters to API.statuses_lookup
-- Improve API.lookup_users
-- Improve and optimize API.statuses_lookup,
-  API.create_media_metadata, API.update_status
-- Add reverse as allowed parameter for API.lists_all
-- Add count as allowed parameter for API.lists_memberships
-- Add count as allowed parameter for API.lists_subscriptions
-- Add include_entities as allowed parameter for API.list_timeline
-- Add allowed parameters to API.list_subscribers
-- Add support for Python 3.8
-- Update and improve setup.py
-- Use requests socks extra instead of requiring PySocks directly
-- Allow uploading of images with file names without extensions
-- Support uploading WebP images
-- Add missing attributes to Relationship model
-- Update max allowed size for uploaded GIFs
-- Add _json attribute to DirectMessage model
-- Update and improve tests
-- Add documentation for extended Tweets
-- Document API.lookup_users
-- Add documentation for running tests
-- Add Korean translation of documentation
-- Add Polish translation of documentation
-- Document API.lookup_friendships
-- Update and improve various documentation
-- Fix handling of invalid credentials for API.verify_credentials
-- Handle boolean value for API.verify_credentials include_email
-  parameter
-- Allow Cursor to be used with API.list_direct_messages by adding
-  DMCursorIterator
-
-License-Update: Use the exact line from PKG-INFO.
+Use source from the GitHub repository instead of pypi because
+appropriate archive for this release is not available at pypi.org.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-twitter_3.8.0.bb => python3-twitter_3.9.0.bb}  | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-twitter_3.8.0.bb => python3-twitter_3.9.0.bb} (53%)
+ .../{python3-ntplib_0.3.3.bb => python3-ntplib_0.3.4.bb} | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-ntplib_0.3.3.bb => python3-ntplib_0.3.4.bb} (55%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-twitter_3.8.0.bb b/meta-python/recipes-devtools/python/python3-twitter_3.9.0.bb
-similarity index 53%
-rename from meta-python/recipes-devtools/python/python3-twitter_3.8.0.bb
-rename to meta-python/recipes-devtools/python/python3-twitter_3.9.0.bb
-index 78f66a443..01bbf831a 100644
---- a/meta-python/recipes-devtools/python/python3-twitter_3.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-twitter_3.9.0.bb
-@@ -2,10 +2,10 @@ SUMMARY = "Twitter for Python"
- DESCRIPTION = "Python module to support twitter API"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb b/meta-python/recipes-devtools/python/python3-ntplib_0.3.4.bb
+similarity index 55%
+rename from meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
+rename to meta-python/recipes-devtools/python/python3-ntplib_0.3.4.bb
+index ce2618b81..ae4c10f38 100644
+--- a/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
++++ b/meta-python/recipes-devtools/python/python3-ntplib_0.3.4.bb
+@@ -3,12 +3,11 @@ SECTION = "devel/python"
  LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=8f702b489acb6863cec8b261a55931d8"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
+ LIC_FILES_CHKSUM = "file://ntplib.py;beginline=1;endline=23;md5=afa07338a9595257e94c205c3e72224d"
  
--SRC_URI[md5sum] = "8aeff278b7cefcd384c65929bc921e2c"
--SRC_URI[sha256sum] = "8abd828ba51a85a2b5bb7373715d6d3bb32d18ac624e3a4db02e4ef8ab48316b"
-+SRC_URI[md5sum] = "b5bc640fa9f6baff6471c127aba1fec0"
-+SRC_URI[sha256sum] = "bfd19a5c11f35f7f199c795f99d9cbf8a52eb33f0ecfb6c91ee10b601180f604"
+-SRCNAME = "ntplib"
+-SRC_URI[md5sum] = "c7cc8e9b09f40c84819859d70b7784ca"
+-SRC_URI[sha256sum] = "c4621b64d50be9461d9bd9a71ba0b4af06fbbf818bbd483752d95c1a4e273ede"
++SRC_URI = "git://github.com/cf-natali/ntplib.git"
++SRCREV ?= "aea7925c26152024ca8cf207e77f403f8127727a"
  
- PYPI_PACKAGE = "tweepy"
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
++S = "${WORKDIR}/git"
  
+-inherit setuptools3 python3native pypi
++inherit setuptools3 python3native
+ 
+ RDEPENDS_${PN} += "${PYTHON_PN}-datetime ${PYTHON_PN}-io"
 -- 
 2.17.1
 
