@@ -1,26 +1,28 @@
 Received: from mail.desaster-games.net (mail.desaster-games.net [176.9.84.136])
- by mx.groups.io with SMTP id smtpd.web12.42367.1598620397666391615
+ by mx.groups.io with SMTP id smtpd.web11.42748.1598620397864267075
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 28 Aug 2020 06:13:18 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: iodoru.org, ip: 176.9.84.136, mailfrom: jubalh@iodoru.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mail.desaster-games.net (Postfix) with ESMTP id 85C95E;
-	Fri, 28 Aug 2020 15:13:07 +0200 (CEST)
+	by mail.desaster-games.net (Postfix) with ESMTP id 37F977;
+	Fri, 28 Aug 2020 15:13:08 +0200 (CEST)
 X-Virus-Scanned: Amavis at mail.desaster-games.com
 Received: from mail.desaster-games.net ([127.0.0.1])
 	by localhost (mail.desaster-games.net [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id tDn8JujOobo4; Fri, 28 Aug 2020 15:12:53 +0200 (CEST)
+	with ESMTP id MTQuyvR5UbER; Fri, 28 Aug 2020 15:12:54 +0200 (CEST)
 Received: from ymir.suse.de (unknown [195.135.221.27])
-	by mail.desaster-games.net (Postfix) with ESMTPSA id 8A2107;
-	Fri, 28 Aug 2020 15:12:53 +0200 (CEST)
+	by mail.desaster-games.net (Postfix) with ESMTPSA id 65019C;
+	Fri, 28 Aug 2020 15:12:54 +0200 (CEST)
 From: "Michael Vetter" <jubalh@iodoru.org>
 To: openembedded-devel@lists.openembedded.org
 Cc: Michael Vetter <jubalh@iodoru.org>
-Subject: [PATCH 1/1] README: Use quotation marks for subject prefix
-Date: Fri, 28 Aug 2020 15:13:00 +0200
-Message-Id: <20200828131301.20736-1-jubalh@iodoru.org>
+Subject: [meta-oe][PATCH] README: Use quotation marks for subject prefix
+Date: Fri, 28 Aug 2020 15:13:01 +0200
+Message-Id: <20200828131301.20736-2-jubalh@iodoru.org>
 X-Mailer: git-send-email 2.16.4
+In-Reply-To: <20200828131301.20736-1-jubalh@iodoru.org>
+References: <20200828131301.20736-1-jubalh@iodoru.org>
 
 On zsh it otherwise returns:
 ```
@@ -28,8 +30,6 @@ zsh: bad pattern: --subject-prefix=meta-oe][PATCH
 ```
 
 With quotation marks it should work on all shells.
-
-Signed-off-by: Michael Vetter <jubalh@iodoru.org>
 ---
  meta-oe/README | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
