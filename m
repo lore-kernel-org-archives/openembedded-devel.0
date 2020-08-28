@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.43119.1598622707737719838
+ by mx.groups.io with SMTP id smtpd.web12.43121.1598622708333891667
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 28 Aug 2020 06:51:48 -0700
 Authentication-Results: mx.groups.io;
@@ -8,14 +8,16 @@ Received: from [78.130.197.211] (port=49752 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kBenA-0004K0-Ht; Fri, 28 Aug 2020 16:51:45 +0300
+	id 1kBenD-0004K0-1W; Fri, 28 Aug 2020 16:51:47 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-ecdsa: Upgrade 0.15 -> 0.16.0
-Date: Fri, 28 Aug 2020 16:51:27 +0300
-Message-Id: <20200828135131.26321-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-cryptography-vectors: Upgrade 3.0 -> 3.1
+Date: Fri, 28 Aug 2020 16:51:29 +0300
+Message-Id: <20200828135131.26321-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200828135131.26321-1-leon.anavi@konsulko.com>
+References: <20200828135131.26321-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,49 +30,50 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.16.0:
+Upgrade to release 3.1:
 
-- Support for reading and writing private keys in PKCS#8 format.
-- to_pem and to_der now accept new parameter, format, to specify
-  the format of the encoded files, either the dafault, legacy
-  "ssleay", or the new pkcs8 to use PKCS#8. Note that only
-  unencrypted PKCS#8 files are supported
-- Add allow_truncate to verify in VerifyingKey, it defaults to
-  True, when specified as False, use of large hashes smaller than
-  curves will be disallowed (as it was in 0.14.1 and earlier)
-- Correctly calculate signatures for private keys equal to n-1
-- Make PointJacobi and thus SigningKey and VerifyingKey pickleable
-- to_pem functions return bytes not str, document them as such
-- from_pem and from_pem in SigningKey returns SigningKey, document
-  them as such
-- Ensure that version checks will work with Python 4.
-- Format the source with black.
-- Fix uses of assert_ in test suite.
-- Use newer Ubuntu in Travis to test against OpenSSL 1.1.1 (and
-  thus test the interoperability of ECDH code in Travis).
+- BACKWARDS INCOMPATIBLE: Removed support for idna based
+  :term:`U-label` parsing in various X.509 classes. This support
+  was originally deprecated in version 2.1 and moved to an extra
+  in 2.5.
+- Deprecated OpenSSL 1.0.2 support. OpenSSL 1.0.2 is no longer
+  supported by the OpenSSL project. The next version of
+  cryptography will drop support for it.
+- Deprecated support for Python 3.5. This version sees very little
+  use and will be removed in the next release.
+- backend arguments to functions are no longer required and the
+  default backend will automatically be selected if no backend is
+  provided.
+- Added initial support for parsing certificates from PKCS7 files
+- Calling update or update_into on
+  :class:`~cryptography.hazmat.primitives.ciphers.CipherContext`
+  with data longer than 231 bytes no longer raises an
+  OverflowError. This also resolves the same issue in
+  :doc:`/fernet`.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-ecdsa_0.15.bb => python3-ecdsa_0.16.0.bb}  | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-ecdsa_0.15.bb => python3-ecdsa_0.16.0.bb} (69%)
+ ...phy-vectors_3.0.bb => python3-cryptography-vectors_3.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_3.0.bb => python3-cryptography-vectors_3.1.bb} (73%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb b/meta-python/recipes-devtools/python/python3-ecdsa_0.16.0.bb
-similarity index 69%
-rename from meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb
-rename to meta-python/recipes-devtools/python/python3-ecdsa_0.16.0.bb
-index aba62f3ef..36bb246fd 100644
---- a/meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb
-+++ b/meta-python/recipes-devtools/python/python3-ecdsa_0.16.0.bb
-@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=66ffc5e30f76cbb5358fe54b645e5a1d"
- DEPENDS += "python3-pip python3-pbr"
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.0.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-cryptography-vectors_3.0.bb
+rename to meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.bb
+index 26f1a2389..59347c94e 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.bb
+@@ -4,8 +4,8 @@ SECTION = "devel/python"
+ LICENSE = "Apache-2.0 | BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
  
- PYPI_PACKAGE = "ecdsa"
--SRC_URI[sha256sum] = "8f12ac317f8a1318efa75757ef0a651abe12e51fc1af8838fb91079445227277"
-+SRC_URI[md5sum] = "d593df1ab57da611dca76f7328c47b21"
-+SRC_URI[sha256sum] = "494c6a853e9ed2e9be33d160b41d47afc50a6629b993d2b9c5ad7bb226add892"
+-SRC_URI[md5sum] = "689e44b945870a2ed197c0c35e4a0330"
+-SRC_URI[sha256sum] = "52eff0457b3148ebbdc16dc7ad569bb88ccb2578414936c8b2137a3ddf334239"
++SRC_URI[md5sum] = "1ba5b0743e2876e909f7cfc28b744f27"
++SRC_URI[sha256sum] = "2660bc3a720d3955341803195ae5352a236c5f26e01a178c44fc5ee1f0ef1182"
  
- inherit pypi setuptools3
+ PYPI_PACKAGE = "cryptography_vectors"
  
 -- 
 2.17.1
