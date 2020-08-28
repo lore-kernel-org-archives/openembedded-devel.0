@@ -1,26 +1,28 @@
 Received: from mail.desaster-games.net (mail.desaster-games.net [176.9.84.136])
- by mx.groups.io with SMTP id smtpd.web12.42252.1598620049970684431
+ by mx.groups.io with SMTP id smtpd.web11.42624.1598620050537227152
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 28 Aug 2020 06:07:30 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: iodoru.org, ip: 176.9.84.136, mailfrom: jubalh@iodoru.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mail.desaster-games.net (Postfix) with ESMTP id 34040C;
-	Fri, 28 Aug 2020 15:07:19 +0200 (CEST)
+	by mail.desaster-games.net (Postfix) with ESMTP id 1BCAFA;
+	Fri, 28 Aug 2020 15:07:20 +0200 (CEST)
 X-Virus-Scanned: Amavis at mail.desaster-games.com
 Received: from mail.desaster-games.net ([127.0.0.1])
 	by localhost (mail.desaster-games.net [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id doCf9BDcvCQl; Fri, 28 Aug 2020 15:07:19 +0200 (CEST)
+	with ESMTP id eU-eCogWSUe1; Fri, 28 Aug 2020 15:07:20 +0200 (CEST)
 Received: from ymir.suse.de (unknown [195.135.221.27])
-	by mail.desaster-games.net (Postfix) with ESMTPSA id 0FA267;
+	by mail.desaster-games.net (Postfix) with ESMTPSA id F068ED;
 	Fri, 28 Aug 2020 15:07:19 +0200 (CEST)
-From: jubalh@iodoru.org
+From: "Michael Vetter" <jubalh@iodoru.org>
 To: openembedded-devel@lists.openembedded.org
 Cc: Michael Vetter <jubalh@iodoru.org>
-Subject: [PATCH 1/1] jasper: Use new repo URL
-Date: Fri, 28 Aug 2020 15:07:25 +0200
-Message-Id: <20200828130726.19916-1-jubalh@iodoru.org>
+Subject: [meta-oe][PATCH] jasper: Use new repo URL
+Date: Fri, 28 Aug 2020 15:07:26 +0200
+Message-Id: <20200828130726.19916-2-jubalh@iodoru.org>
 X-Mailer: git-send-email 2.16.4
+In-Reply-To: <20200828130726.19916-1-jubalh@iodoru.org>
+References: <20200828130726.19916-1-jubalh@iodoru.org>
 
 The official repo is now https://github.com/jasper-software/jasper.
 https://github.com/mdadams/jasper will forward there.
