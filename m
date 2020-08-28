@@ -1,52 +1,64 @@
-Received: from mail.desaster-games.net (mail.desaster-games.net [176.9.84.136])
- by mx.groups.io with SMTP id smtpd.web11.42748.1598620397864267075
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.43120.1598622707752399652
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Aug 2020 06:13:18 -0700
+ Fri, 28 Aug 2020 06:51:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: iodoru.org, ip: 176.9.84.136, mailfrom: jubalh@iodoru.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.desaster-games.net (Postfix) with ESMTP id 37F977;
-	Fri, 28 Aug 2020 15:13:08 +0200 (CEST)
-X-Virus-Scanned: Amavis at mail.desaster-games.com
-Received: from mail.desaster-games.net ([127.0.0.1])
-	by localhost (mail.desaster-games.net [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id MTQuyvR5UbER; Fri, 28 Aug 2020 15:12:54 +0200 (CEST)
-Received: from ymir.suse.de (unknown [195.135.221.27])
-	by mail.desaster-games.net (Postfix) with ESMTPSA id 65019C;
-	Fri, 28 Aug 2020 15:12:54 +0200 (CEST)
-From: "Michael Vetter" <jubalh@iodoru.org>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=49752 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kBenC-0004K0-Hh; Fri, 28 Aug 2020 16:51:47 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Michael Vetter <jubalh@iodoru.org>
-Subject: [meta-oe][PATCH] README: Use quotation marks for subject prefix
-Date: Fri, 28 Aug 2020 15:13:01 +0200
-Message-Id: <20200828131301.20736-2-jubalh@iodoru.org>
-X-Mailer: git-send-email 2.16.4
-In-Reply-To: <20200828131301.20736-1-jubalh@iodoru.org>
-References: <20200828131301.20736-1-jubalh@iodoru.org>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-luma-core: Upgrade 1.15.0 -> 1.16.0
+Date: Fri, 28 Aug 2020 16:51:28 +0300
+Message-Id: <20200828135131.26321-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200828135131.26321-1-leon.anavi@konsulko.com>
+References: <20200828135131.26321-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-On zsh it otherwise returns:
-```
-zsh: bad pattern: --subject-prefix=meta-oe][PATCH
-```
+Upgrade to release 1.16.0:
 
-With quotation marks it should work on all shells.
+- Embedded font parallel device (for upcoming HD44780, Winstar
+  character devices)
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/README | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...ython3-luma-core_1.15.0.bb => python3-luma-core_1.16.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-luma-core_1.15.0.bb => python3-luma-core_1.16.0.bb} (75%)
 
-diff --git a/meta-oe/README b/meta-oe/README
-index 347816b0d..6a0d7c0a1 100644
---- a/meta-oe/README
-+++ b/meta-oe/README
-@@ -17,7 +17,7 @@ pacman -S lib32-gcc-libs lib32-glibc
- Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]' in the subject'
+diff --git a/meta-python/recipes-devtools/python/python3-luma-core_1.15.0.bb b/meta-python/recipes-devtools/python/python3-luma-core_1.16.0.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-luma-core_1.15.0.bb
+rename to meta-python/recipes-devtools/python/python3-luma-core_1.16.0.bb
+index 17445e727..ce1e7ba03 100644
+--- a/meta-python/recipes-devtools/python/python3-luma-core_1.15.0.bb
++++ b/meta-python/recipes-devtools/python/python3-luma-core_1.16.0.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7"
  
- When sending single patches, please use something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-oe][PATCH'
-+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix="meta-oe][PATCH"'
+ inherit pypi setuptools3
  
- You are encouraged to fork the mirror on GitHub https://github.com/openembedded/openembedded-core
- to share your patches, this is preferred for patch sets consisting of more than one patch.
+-SRC_URI[md5sum] = "9c890fa8e387a035ff0d1ae96a0715f1"
+-SRC_URI[sha256sum] = "e0e14c762695fb8758e8b15cfd28cd4c1618bf2fd93157c8770a2e8e0e254ae5"
++SRC_URI[md5sum] = "52ab2cdce4222aa71d9ac254a806dccc"
++SRC_URI[sha256sum] = "ca523f606f8fff2c9843d48b415a0a748bb2c96270eccac97d9caa9ae6810c94"
+ 
+ CLEANBROKEN = "1"
+ 
 -- 
-2.16.4
+2.17.1
 
