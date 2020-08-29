@@ -1,144 +1,207 @@
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web11.2382.1598660361005604974
+Received: from mail-ej1-f65.google.com (mail-ej1-f65.google.com [209.85.218.65])
+ by mx.groups.io with SMTP id smtpd.web11.6755.1598684097130702577
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Aug 2020 17:19:21 -0700
+ Fri, 28 Aug 2020 23:54:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=GedO3dF1;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id z15so398685plo.7
-        for <openembedded-devel@lists.openembedded.org>; Fri, 28 Aug 2020 17:19:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=JBc8taQB;
+ spf=pass (domain: gmail.com, ip: 209.85.218.65, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-ej1-f65.google.com with SMTP id oz20so1979708ejb.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 28 Aug 2020 23:54:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=pnJ+DrMP5iDKduTuLWoSMZsYOhqRTcduBa+dhT4Zf0I=;
-        b=GedO3dF1JI36zTKn+D8hB2YEby9JdTb9DlCv56ZVdHGrU39F8Jo783kdLFAynimegc
-         IidWZ8zGi61ppLMjF+Da76azgYQrK7ALP+Lyjp+BMqPqAirGdhqqD7HuR8sQ28T3FFeP
-         wUZcbmRNpJaNKGSAh7OEeG2+2glDn8GOHpXz6wANn2TIwe2LIp7YWSCqtLLBUY4DUvQd
-         12jiyV/3Vy3skxaiE+rTkY8QJ3gJJ7mpuDD6J/8BPNMPmxY/NXAMuS0+2XbaLRYhOq1i
-         HCAc/gPwXfnMiooA28QhtVkNO6VGLJZTGWHAwX3C4lNpAbTnaI1uBHEjTt9WrDMXuCIz
-         yutg==
+        h=from:to:cc:subject:date:message-id;
+        bh=4pQwWEf8ysoXt4gqxCDOmZfjABM6qGilBbdhEkL97x8=;
+        b=JBc8taQBHhTIJwhlQuZttRLStRCK2AGnDMg4SnTAtKfdyPFpWzh++hDZTbv3Pzy9f2
+         lrp+4DyneT5E47fQwIC7eYXlZKRxlKfW93m9SvyF+WE31PmltlODPOs/wzgh0cfrGisK
+         hwNnLf6i9GNiFZl8g4EUoeI4bOGsF5tZ/8zr/mjGk6OixobbesJT2oxpiLYzboJ81LYY
+         0k6ScXlngbRwIkBQSf/ch1MQhyV1qTllyAhivND3o+EBA0bJGME8l6lg2VWK8VOFUrkc
+         ix/yQzpQdVR0f0S99LHZiavWYH1Mr1HAOW/OHoU/gB4jrrr6Go7zB/esavcuiWHEqTT3
+         Xm8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=pnJ+DrMP5iDKduTuLWoSMZsYOhqRTcduBa+dhT4Zf0I=;
-        b=ZmzCCr9sXaUv5/eznanKqSbvvuBmN+3c7IZjD/9gz9dGJlb8Ltcu8eJVWLKWVz/1ge
-         lNuirRWwIW4tuW2mnmX/ngNTImifA/4i20aDT4xsoWMxj9Qkjzt3vaGyelpjBPVVAGb7
-         55A7d2YKJVmUtjewhzSo0FsQk9Djy8IIQ0Y55syiADCy5W5ENjdrk+H1NypWcYvd0sMt
-         8lY2IhpCq+0qS1p+uWd/dWSZcctpdz8IxBzjY0Mq0WLzGlKFw2W4DiOt36GpTeUy3YMM
-         cL1v1XlgJmheDFjjevL+Ij+8UlHXiIvxI2GGl+0Jyc8chN7amkHG6h+qFaIwJ6jQDLhf
-         AN3w==
-X-Gm-Message-State: AOAM530ammsPKmH5+wqz071lwuOOf0OPivfGtcBWisHZH/etxnKAPueY
-	5Dl9I3a506MavUXPhOTteiIRtHmPBy9ctw==
-X-Google-Smtp-Source: ABdhPJzRgJ2ZABEnYROzNQmiSkabeUW9F3dhshBRSaH9xtITEhySkHN58KG/GZ8y+eD5bg5h6MxrAQ==
-X-Received: by 2002:a17:90a:2bc8:: with SMTP id n8mr1188494pje.189.1598660359817;
-        Fri, 28 Aug 2020 17:19:19 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::4fbd])
-        by smtp.gmail.com with ESMTPSA id v10sm561431pff.192.2020.08.28.17.19.18
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=4pQwWEf8ysoXt4gqxCDOmZfjABM6qGilBbdhEkL97x8=;
+        b=oAJraFIhYSfAgth1G6pcgIgaShK/Ga/CpOzHljj7gxGnpl5gj1MZF3M4QrTUpyLBPj
+         EmX7DGNgF1Vcf8FMhQLzbShJc26Ot+82hrydl24g1kQdhUCRjmS66WWB9rVZBNa33Xa2
+         wlb3g4MzBpi9wN1q27GvUCiu/GISthPPrjV2Fnk3MtXNiN5RK9UWSX8OCiWogQyoKzrE
+         ZS1eROnUl5GDtQmcZf5Qo0pUhLlpTYWiCO6wWYwmQw42Q9HeojxyWVL1V6in0qa2bIZi
+         hlHezL3jmHZGPjLm8RaQgjMqi0ieK2r9+kf/xBvpY2kD7o9eybpTumqC6mxQqnyy3iDD
+         4nTg==
+X-Gm-Message-State: AOAM533+3qZWRZnDbnc6IDEj+ZGc1MTeZMtY2fcoLJPMaiPtjnY/6ov5
+	vZ801vfmi+Ckcw+J9iXO3z4i6LoEXi0=
+X-Google-Smtp-Source: ABdhPJzwsE4sDRpVOroNZX63CAAD5WOBYJI/2V/WnQa2rmBEt6hKqhOloQDZqrR+RDMTNhrRzYdIQg==
+X-Received: by 2002:a17:906:f6c9:: with SMTP id jo9mr2336117ejb.152.1598684094777;
+        Fri, 28 Aug 2020 23:54:54 -0700 (PDT)
+Return-Path: <costamagna.gianfranco@gmail.com>
+Received: from localhost.localdomain (mob-2-43-97-65.net.vodafone.it. [2.43.97.65])
+        by smtp.gmail.com with ESMTPSA id w12sm1334907edv.55.2020.08.28.23.54.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 28 Aug 2020 17:19:18 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Fri, 28 Aug 2020 23:54:53 -0700 (PDT)
+From: "Gianfranco" <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH v3] nss: Upgrade to 3.56
-Date: Fri, 28 Aug 2020 17:19:16 -0700
-Message-Id: <20200829001916.1598276-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <locutusofborg@debian.org>
+Subject: [meta-oe][PATCH] dlt-daemon: superseed upstream pr #238 patch with pr #245 due to unexpected behaviour
+Date: Sat, 29 Aug 2020 08:54:45 +0200
+Message-Id: <20200829065445.1952-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.17.1
 
-Forward port 0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch
+Upstream commented to use the second one
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 ---
-v2: Update armv8 hw crypto patch to work on arm32
-v3: Check for compiler passed define instead of Makefile/env one
+ .../wvdial/wvstreams/ftbfs-gcc-10.patch       | 27 ++++++++++
+ .../wvdial/wvstreams_4.6.1.bb                 |  1 +
+ .../dlt-daemon/{238.patch => 245.patch}       | 53 ++++++++++++++++---
+ .../dlt-daemon/dlt-daemon_2.18.5.bb           |  2 +-
+ 4 files changed, 75 insertions(+), 8 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/ftbfs-gcc-10.patch
+ rename meta-oe/recipes-extended/dlt-daemon/dlt-daemon/{238.patch => 245.patch} (65%)
 
- ...figure-option-to-disable-ARM-HW-cryp.patch | 33 +++++++------------
- .../nss/{nss_3.54.bb => nss_3.56.bb}          |  3 +-
- 2 files changed, 12 insertions(+), 24 deletions(-)
- rename meta-oe/recipes-support/nss/{nss_3.54.bb => nss_3.56.bb} (99%)
-
-diff --git a/meta-oe/recipes-support/nss/nss/0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch b/meta-oe/recipes-support/nss/nss/0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch
-index 1a87a0577f..bfc375e83a 100644
---- a/meta-oe/recipes-support/nss/nss/0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch
-+++ b/meta-oe/recipes-support/nss/nss/0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch
-@@ -14,21 +14,18 @@ Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-  nss/lib/freebl/gcm.c    | 2 ++
-  2 files changed, 6 insertions(+)
- 
--diff --git a/nss/lib/freebl/Makefile b/nss/lib/freebl/Makefile
--index f99f769..b0ec81b 100644
- --- a/nss/lib/freebl/Makefile
- +++ b/nss/lib/freebl/Makefile
--@@ -125,6 +125,9 @@ else
--         DEFINES += -DNSS_X86
-+@@ -126,6 +126,8 @@ else
-  endif
-  endif
--+
-+ ifdef NS_USE_GCC
- +ifdef NSS_USE_ARM_HW_CRYPTO
- +    DEFINES += -DNSS_USE_ARM_HW_CRYPTO
-  ifeq ($(CPU_ARCH),aarch64)
--     DEFINES += -DUSE_HW_AES -DUSE_HW_SHA2
--     EXTRA_SRCS += aes-armv8.c gcm-aarch64.c sha256-armv8.c
--@@ -148,6 +151,7 @@ endif
-+     DEFINES += -DUSE_HW_AES -DUSE_HW_SHA1 -DUSE_HW_SHA2
-+     EXTRA_SRCS += aes-armv8.c gcm-aarch64.c sha1-armv8.c sha256-armv8.c
-+@@ -150,6 +152,7 @@ endif
-          endif
-      endif
-  endif
-@@ -36,23 +33,15 @@ index f99f769..b0ec81b 100644
-  
-  ifeq ($(OS_TARGET),OSF1)
-      DEFINES += -DMP_ASSEMBLY_MULTIPLY -DMP_NO_MP_WORD
--diff --git a/nss/lib/freebl/gcm.c b/nss/lib/freebl/gcm.c
--index c2cc18d..b77f573 100644
- --- a/nss/lib/freebl/gcm.c
- +++ b/nss/lib/freebl/gcm.c
--@@ -18,6 +18,7 @@
-- 
-- #include <limits.h>
-- 
--+#ifdef NSS_USE_ARM_HW_CRYPTO
-+@@ -21,7 +21,9 @@
-  /* old gcc doesn't support some poly64x2_t intrinsic */
-  #if defined(__aarch64__) && defined(IS_LITTLE_ENDIAN) && \
-      (defined(__clang__) || defined(__GNUC__) && __GNUC__ > 6)
--@@ -27,6 +28,7 @@
-- /* We don't test on big endian platform, so disable this on big endian. */
-++# ifdef NSS_USE_ARM_HW_CRYPTO
-  #define USE_ARM_GCM
-- #endif
--+#endif
-- 
-- /* Forward declarations */
-- SECStatus gcm_HashInit_hw(gcmHashContext *ghash);
-++# endif
-+ #elif defined(__arm__) && defined(IS_LITTLE_ENDIAN) && \
-+     !defined(NSS_DISABLE_ARM32_NEON)
-+ /* We don't test on big endian platform, so disable this on big endian. */
-diff --git a/meta-oe/recipes-support/nss/nss_3.54.bb b/meta-oe/recipes-support/nss/nss_3.56.bb
-similarity index 99%
-rename from meta-oe/recipes-support/nss/nss_3.54.bb
-rename to meta-oe/recipes-support/nss/nss_3.56.bb
-index 1cc94735bb..4aa5d29ec2 100644
---- a/meta-oe/recipes-support/nss/nss_3.54.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.56.bb
-@@ -34,8 +34,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
-            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
-            file://0001-pkix-Do-not-use-NULL-where-0-is-needed.patch \
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/ftbfs-gcc-10.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/ftbfs-gcc-10.patch
+new file mode 100644
+index 000000000..03d2889f1
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/ftbfs-gcc-10.patch
+@@ -0,0 +1,27 @@
++Description: Fix a build failure with gcc-10.
++ version_major is declared as unsigned int, so "-1" value makes no sense here.
++ Also, we don't want to change the variable to a public interface, better just ignore this
++ debug use-case nobody probably ever used.
++Author: Gianfranco Costamagna <locutusofborg@debian.org>
++Bug-Debian: https://bugs.debian.org/957964
++Last-Update: 2020-08-15
++
++--- wvstreams-4.6.1.orig/xplc/moduleloader.cc
+++++ wvstreams-4.6.1/xplc/moduleloader.cc
++@@ -63,11 +63,11 @@ Module* Module::loadModule(const char* m
++   }
++ 
++   switch(moduleinfo->version_major) {
++-#ifdef UNSTABLE
++-  case -1:
++-    /* nothing to do */
++-    break;
++-#endif
+++//#ifdef UNSTABLE
+++//  case -1:
+++//    /* nothing to do */
+++//    break;
+++//#endif
++   default:
++     loaderClose(dlh);
++     return NULL;
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+index 20becaf57..15c0a59ee 100644
+--- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+@@ -23,6 +23,7 @@ SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz \
+            file://openssl-buildfix.patch \
+            file://0001-Forward-port-to-OpenSSL-1.1.x.patch \
+            file://0001-Fix-narrowing-conversion-error.patch \
++           file://ftbfs-gcc-10.patch \
             "
--
--SRC_URI[sha256sum] = "dab18bbfcf5e347934cda664df75ce9fd912a5772686c40d3c805e53c08d6e43"
-+SRC_URI[sha256sum] = "f875e0e8ed3b5ce92d675be4a55aa25a8c1199789a4a01f69b5f2327e2048e9c"
  
- UPSTREAM_CHECK_URI = "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/NSS_Releases"
- UPSTREAM_CHECK_REGEX = "NSS_(?P<pver>.+)_release_notes"
+ SRC_URI[md5sum] = "2760dac31a43d452a19a3147bfde571c"
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/238.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/245.patch
+similarity index 65%
+rename from meta-oe/recipes-extended/dlt-daemon/dlt-daemon/238.patch
+rename to meta-oe/recipes-extended/dlt-daemon/dlt-daemon/245.patch
+index 14c44e6ed..43057489c 100644
+--- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/238.patch
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/245.patch
+@@ -1,6 +1,6 @@
+-From 214f8c71552fc096077f0b916dad75b31eefea3d Mon Sep 17 00:00:00 2001
++From 57fd61ea5c58a4f9fcd7140b53ac6cd6e971ef47 Mon Sep 17 00:00:00 2001
+ From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+-Date: Fri, 31 Jul 2020 15:26:35 +0200
++Date: Fri, 31 Jul 2020 15:16:02 +0200
+ Subject: [PATCH] dlt_offline: fix build failures with gcc-10
+ 
+ see bug report: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=957140
+@@ -14,11 +14,26 @@ see bug report: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=957140
+ /usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_event_handler.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: multiple definition of `g_logstorage_cache_max'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: first defined here
+ /usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_offline_logstorage.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: multiple definition of `g_logstorage_cache_max'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: first defined here
+ ---
+- src/offlinelogstorage/dlt_offline_logstorage.h | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
++ src/daemon/dlt_daemon_offline_logstorage.c              | 1 +
++ src/offlinelogstorage/dlt_offline_logstorage.h          | 4 ++--
++ src/offlinelogstorage/dlt_offline_logstorage_behavior.c | 1 +
++ tests/gtest_dlt_daemon_offline_log.cpp                  | 1 +
++ 4 files changed, 5 insertions(+), 2 deletions(-)
+ 
++diff --git a/src/daemon/dlt_daemon_offline_logstorage.c b/src/daemon/dlt_daemon_offline_logstorage.c
++index 0b3c14f..db9637e 100644
++--- a/src/daemon/dlt_daemon_offline_logstorage.c
+++++ b/src/daemon/dlt_daemon_offline_logstorage.c
++@@ -56,6 +56,7 @@ DLT_STATIC DltReturnValue dlt_logstorage_split_ecuid(char *key,
++     return DLT_RETURN_OK;
++ }
++ 
+++unsigned int g_logstorage_cache_max;
++ /**
++  * dlt_logstorage_split_ctid
++  *
+ diff --git a/src/offlinelogstorage/dlt_offline_logstorage.h b/src/offlinelogstorage/dlt_offline_logstorage.h
+-index b58da70..8ad84b8 100644
++index b58da70..c9bc93b 100644
+ --- a/src/offlinelogstorage/dlt_offline_logstorage.h
+ +++ b/src/offlinelogstorage/dlt_offline_logstorage.h
+ @@ -114,9 +114,9 @@
+@@ -26,10 +41,34 @@ index b58da70..8ad84b8 100644
+  
+  /* logstorage max cache */
+ -unsigned int g_logstorage_cache_max;
+-+static unsigned int g_logstorage_cache_max;
+++extern unsigned int g_logstorage_cache_max;
+  /* current logstorage cache size */
+ -unsigned int g_logstorage_cache_size;
+-+static unsigned int g_logstorage_cache_size;
+++extern unsigned int g_logstorage_cache_size;
+  
+  typedef struct
+  {
++diff --git a/src/offlinelogstorage/dlt_offline_logstorage_behavior.c b/src/offlinelogstorage/dlt_offline_logstorage_behavior.c
++index afbf8c4..edef482 100644
++--- a/src/offlinelogstorage/dlt_offline_logstorage_behavior.c
+++++ b/src/offlinelogstorage/dlt_offline_logstorage_behavior.c
++@@ -32,6 +32,7 @@
++ #include "dlt_offline_logstorage_behavior.h"
++ #include "dlt_offline_logstorage_behavior_internal.h"
++ 
+++unsigned int g_logstorage_cache_size;
++ /**
++  * dlt_logstorage_log_file_name
++  *
++diff --git a/tests/gtest_dlt_daemon_offline_log.cpp b/tests/gtest_dlt_daemon_offline_log.cpp
++index b8965de..0bd4d5e 100644
++--- a/tests/gtest_dlt_daemon_offline_log.cpp
+++++ b/tests/gtest_dlt_daemon_offline_log.cpp
++@@ -29,6 +29,7 @@ extern "C"
++ #include <fcntl.h>
++ }
++ 
+++unsigned int g_logstorage_cache_max;
++ /* Begin Method: dlt_logstorage::t_dlt_logstorage_list_add*/
++ TEST(t_dlt_logstorage_list_add, normal)
++ {
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
+index 3a2b40515..f3fcee4d2 100644
+--- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
+@@ -17,8 +17,8 @@ DEPENDS = "zlib gzip-native"
+ SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=https \
+     file://0002-Don-t-execute-processes-as-a-specific-user.patch \
+     file://0004-Modify-systemd-config-directory.patch \
+-    file://238.patch \
+     file://241.patch \
++    file://245.patch \
+ "
+ SRCREV = "f1ac087c766827b1d0ed9c3a814b3cc052e948f2"
+ 
 -- 
-2.28.0
+2.17.1
 
