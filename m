@@ -1,84 +1,77 @@
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web10.47585.1598851870641401756
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web11.47265.1598851871475009220
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Aug 2020 22:31:10 -0700
+ Sun, 30 Aug 2020 22:31:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=WTW8aB9+;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id q3so2478393pls.11
-        for <openembedded-devel@lists.openembedded.org>; Sun, 30 Aug 2020 22:31:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=KrJyrUlz;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id g6so2396011pjl.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 30 Aug 2020 22:31:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=8RYGac51lZ15/5sKhHDiFfuSiX1VS67BwVxWSnKLLmQ=;
-        b=WTW8aB9+yFiEzDlMKP30zBazCZMf9ZYNmhzJUOFfiK2EV6vvuRKNyMKcPyXbMoiU8e
-         uqrfetjyvqKJqbSYxOe6iYxpIBzdELtU3M/4S76OEXbikWS3SIpG3tQfbk2GaUY0WN/e
-         U/ebTCNoNNs9czSvaruBS7oXlorgJnTm8GyhLI3gXEkbz64QKZsgqZ7n7ZLiXNWE8AxU
-         mNyiVUnu204YNMTPS9U91sYJ0Hv8h5TUWbZ1EMWW4ChtvNbwImeKCsoXzp2udpHCxJHM
-         LGvL1HMxl+Z8W7FmuUcqnx0mHp8WwE41zH52yYDJ6OvlFlm5lDpX8uz7l6WrklyS+MIk
-         4fkg==
+        bh=IKmz67eGF3qQi5MgZ3YgMEcqf46sg8yaoQrNyp/151Q=;
+        b=KrJyrUlz34aKKZnLpMG5Ca3BrPotpt4DEtEu3ntztgH6mPzJCugqZubV2lTf7zXrmx
+         jRxczsS1fgSR25R5JRo2gUhTDIl+TYR6EjoRMOMPRAs8ovaJLTK95Ldgu5iYem9WW1u+
+         I1rzOe4WJn0P6M3wtmqiBRiQUhUU4mgMH/W2Wy3igUloVtiRvDhWUj5M3Lbhqp+f2O3+
+         h6hFiumejNDlE2uVDZ1uISG7VvoK90qMOffUUe/fEkb+x9v1CbVMsKL7X/7qycAItVIf
+         R4mVWa+EzAVNUFnP3u+LsFZoAb35okwLsl2DXbIf5AiFH9ZlXRiVYQBOeqwfbxoFEqsf
+         lYNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=8RYGac51lZ15/5sKhHDiFfuSiX1VS67BwVxWSnKLLmQ=;
-        b=X4nvkPV3PsbSQzCzr7RwV4kOT576FPCyQtFehFY/ZjDdOfc4LgGuR2Rd9UnCubYN2y
-         h+64uMWFX0R8LdtQDNvmHbTiwvnb1RIC/fBZndyiiR1/i+A3kwMk+xGqAQIzUnZi5Uju
-         7Lyp+b0MvHAm4XNWqN5WzUuhg1aAGjwBBghNJfn2DXajiYCO/tA+hbh6gwrp8Z+HlF8l
-         oxwGs2T3sf6kQTaH0qW245dj/LCYf+nF7gNpAMdw+hfRmr9spi0ZjFgSjz+OmqZ5ka2f
-         2Iv63y/gQfsTDb/rCW0p1dulnO6lOb9w7UfE9m9xOhR0xG9QoI0FGsOwBY6HQD/TRiei
-         zVWg==
-X-Gm-Message-State: AOAM533a/hiz1h05zi1pkIvUBIXeQyn9O7GllLNmzJkLzWla8SI/DiKM
-	Zt+xHKretGFUeVqQY9f5ZEnBWUMSCPqFLw==
-X-Google-Smtp-Source: ABdhPJwAieSPZ2iEGnZ4GOlLNgz8r1rj9fS+nxAqimcPj2+oa0MtnltwbhEKDiGzOS62W/W9d0zfIw==
-X-Received: by 2002:a17:90a:e7ca:: with SMTP id kb10mr74248pjb.217.1598851869489;
-        Sun, 30 Aug 2020 22:31:09 -0700 (PDT)
+        bh=IKmz67eGF3qQi5MgZ3YgMEcqf46sg8yaoQrNyp/151Q=;
+        b=tg+1UAJ1aPXVjdKCLMF+W8SwC/Ke98wTHy5V/A6+Ozei/+/lMxgKSxminMJ2XOYiya
+         FbW6Xhzusb7qKU7jlMxlljDN3IYbCNnyJXCVkdlvsK9MgDeUhq7c8VtON02zqF8V4r7Y
+         vdoZQHh3ioKXBiZRhe6CGwMIFx8Q0yHY5BmEAvNPricHdeIkt+1zoECqcDDNCYZMsfhP
+         tGQltz4CigzKozbzGWDhj0H2QMBOk35MCiV1lS4nirpLB9sCfIet8h1dFvqF+FPhjYM7
+         s9RnYbFiH8TLc1oBW5LWojYh4IpJ6vN25YIFt/BJ55TIraMgvGFktPVxRwia08ZLQk6e
+         TyRw==
+X-Gm-Message-State: AOAM531WHAU6T/noyhrdcYcHqrb7NAvP37U4FWRCPOk5aNQBRDyOm4Bc
+	AXCVA4f+p7DjMcrsJg0t/qsy6N71kaKcXA==
+X-Google-Smtp-Source: ABdhPJwjmLpwZeULjkk6g2G1wcparVR3FoJKCKHTz7kpqQr1ntgyayOSChs+WHzl9RtVl6AG6ZYDGw==
+X-Received: by 2002:a17:90a:f0d7:: with SMTP id fa23mr87615pjb.91.1598851870797;
+        Sun, 30 Aug 2020 22:31:10 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e89d])
-        by smtp.gmail.com with ESMTPSA id y9sm1568350pfn.85.2020.08.30.22.31.08
+        by smtp.gmail.com with ESMTPSA id y9sm1568350pfn.85.2020.08.30.22.31.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 30 Aug 2020 22:31:08 -0700 (PDT)
+        Sun, 30 Aug 2020 22:31:10 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 7/8] sblim-sfcb: Fix target postinst
-Date: Sun, 30 Aug 2020 22:30:56 -0700
-Message-Id: <20200831053057.1541321-7-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 8/8] hexedit: Define update alternatives
+Date: Sun, 30 Aug 2020 22:30:57 -0700
+Message-Id: <20200831053057.1541321-8-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200831053057.1541321-1-raj.khem@gmail.com>
 References: <20200831053057.1541321-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Separate out target specific postintalls into pkg_postinst_ontarget_PN
-
-Fixes
-/mnt/b/yoe/master/build/tmp/work/qemuarm64-yoe-linux/meta-oe-ptest-image/1.0-r0/rootfs//var/lib/opkg/info/sblim-sfcb.postinst: line 6: /usr/share/sfcb/genSslCert.sh: No such file or directory
+hexedit can also be provided by toybox
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/recipes-extended/hexedit/hexedit_1.4.2.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-index 3e4ed7c03c..9a3a66c2a8 100644
---- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-@@ -69,10 +69,10 @@ do_install() {
- }
+diff --git a/meta-oe/recipes-extended/hexedit/hexedit_1.4.2.bb b/meta-oe/recipes-extended/hexedit/hexedit_1.4.2.bb
+index 050b7da3d7..3e7fb2a076 100644
+--- a/meta-oe/recipes-extended/hexedit/hexedit_1.4.2.bb
++++ b/meta-oe/recipes-extended/hexedit/hexedit_1.4.2.bb
+@@ -13,4 +13,8 @@ SRCREV = "800e4b2e6280531a84fd23ee0b48e16baeb90878"
  
- pkg_postinst_${PN} () {
--    if [ x"$D" != "x" ]; then
--        $INTERCEPT_DIR/postinst_intercept delay_to_first_boot ${PKG} mlprefix=${MLPREFIX}
--    fi
-+    $INTERCEPT_DIR/postinst_intercept delay_to_first_boot ${PKG} mlprefix=${MLPREFIX}
-+}
+ S = "${WORKDIR}/git"
  
-+pkg_postinst_ontarget_${PN} () {
-     ${datadir}/sfcb/genSslCert.sh ${sysconfdir}/sfcb
-     ${bindir}/sfcbrepos -f
- }
+-inherit autotools-brokensep
++inherit autotools-brokensep update-alternatives
++
++ALTERNATIVE_${PN} = "hexedit"
++ALTERNATIVE_LINK_NAME[hexedit] = "${bindir}/hexedit"
++
 -- 
 2.28.0
 
