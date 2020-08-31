@@ -1,102 +1,100 @@
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.web10.47583.1598851865722201667
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com [209.85.214.193])
+ by mx.groups.io with SMTP id smtpd.web10.47584.1598851866802956962
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Aug 2020 22:31:05 -0700
+ Sun, 30 Aug 2020 22:31:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=q0BILf4a;
- spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f173.google.com with SMTP id d22so3933150pfn.5
-        for <openembedded-devel@lists.openembedded.org>; Sun, 30 Aug 2020 22:31:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=OEYT591M;
+ spf=pass (domain: gmail.com, ip: 209.85.214.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f193.google.com with SMTP id j11so2478321plk.9
+        for <openembedded-devel@lists.openembedded.org>; Sun, 30 Aug 2020 22:31:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=sopWEdNzdkH5wVRAmqS1iTtMs0VbQU+ENdJD5lAfiBY=;
-        b=q0BILf4ayN3O+tgD7LogrqTi148nkFk4L6F+TN7Brdq/2evEfT6Xt/Bx5mY4osJb9Y
-         bcEvwBP4M2CeZWMWLXKrSlTx3fOz6EOzv7MQbRY0c3xMFvECV0/ReZEiycIAyfzARcoF
-         fg50uReCttkIDXNkIePmmnsZO92jGzR7R8AhzNKUlMD/mV9MBFSn3W3UrSulxgTCWjcx
-         b8W/lrSCq3r2fZ5yEg5D4hBcqLWPgqPz9qTccKlCCRCEsL0CvWjDzbpv/aB50ppXvNA1
-         USrH4Fd6IyxqAMYpHZYCOYmZE3eo6kMFTzpS6ouVl9Kp7D78qvG92SFb8l+uADHNWF7q
-         tV+g==
+        bh=zLvRGX9DP2V2FcJN85TXHsFZW9wmCVStJsRKD927H7A=;
+        b=OEYT591MRqWopcAl4O4l/woHuYD5IDgsQFZap64FgMqeT1NNMdca4I8R/wR4AiOvcY
+         Wi74sjcyCld5QkpHxRth9phNZ52Q29pDFotqZfUUiQMFd+Jy5EjQYwKkdxnVoxMoZxyl
+         9Firik4edjl0YsFZaKrYXtrrSSDcRRdo66xHxWF0OVM9KbNaT8fqnImkp2RsMX22OWlj
+         iVgsrHUpD0enZAgLwJwPLirmCUjEtBm5DeysB8yNdoyXjoE/un0hCu/cDBVR3KRjvdWl
+         ZZmU3Wa0dtOPeUews9b4NUC8fButb6mTxVFDyyYjR80xXOlV8cPXbXK2FZAjU2CNhNiW
+         nEAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=sopWEdNzdkH5wVRAmqS1iTtMs0VbQU+ENdJD5lAfiBY=;
-        b=fE1ZLTEzZGapnSNjR9HfUB/RiEA7Go1oR7qxe2/0K/pvZphxLbVGSK5Gf7SFq4xc0E
-         AlkeDhMWX2OV7yWJ5q8jOZkFO4moPP32zxoZtkH2c315mCqEMCQ8K/u9k7brH5kDw31N
-         fPgmGw79vauzRxAit8J5fkRy+4reMIwW57n+CuLl/G/i4Gh0GMl0tsl3ZBpugUgpevNb
-         d7nSWLowT/llMFeBRfSeLTtwtqndEfYpEz/bvoWVXSMPqReFtdt+qhgf8ji9ZWkH8BZY
-         emecF44B5R82p32mlBeAhM2QxtEVuYrt1AZ6E5nQKo/0lTAX9sXGUM74KrmiUoosUPNU
-         dPwg==
-X-Gm-Message-State: AOAM533mPBhpIn2JsuYjzTkKjdCAVSC9il/K+RhgjzsoaCuRBs/Yd1zh
-	xysX9Z7ogQE47hVw+kI3q/0df03jXLSuVw==
-X-Google-Smtp-Source: ABdhPJxvtya/YM1DIiAByWCgEB/vr0TAv7n28wcfwLCgGqePbUWgSMUeohgHz+l1p7KuJCEtWOZhfw==
-X-Received: by 2002:a63:fc4b:: with SMTP id r11mr34988pgk.342.1598851865008;
+        bh=zLvRGX9DP2V2FcJN85TXHsFZW9wmCVStJsRKD927H7A=;
+        b=qFoJUO0CwPyvfPmuwXLAy4+xHrK514CfwDOdPl3SPCS+jayL6QoQQpJ4vnWKbbxIFx
+         FJkEJNMbVjcBCp1o3K5hriBGxNW8Q0VBpO8BDPPB5UcX5/Dne96WLQk6lTiGcxqSRD7/
+         EMgemv01icYSKjPPk8Zf2ZRfSxH3GIFpJXChmdauGvkmw6nE4DdYe28bcFd2DS9oYrXY
+         Dq0v6b+lfxyWGW5tJ1SWe9V/fGbzvWEmpq1TdKyyw/pUAAknHpUrToZEX1UICNy4muHb
+         nLdQZak5xt6YIxWUAaIjH4+QE5OS12QP2Iv60B3I/tCqlPSNU68Xet+NGWZt7L+uu4d5
+         24/Q==
+X-Gm-Message-State: AOAM533pBD1hJIWrPu7WQq8kT8Gy6wb4PJKm/TMFDvSja0ABSoWKuQO8
+	GaIhJ3bFrNwb9+i650OCWpAX6R+POXddLA==
+X-Google-Smtp-Source: ABdhPJxt4qo6DZVH0d88Sium136ludLy5erSTJ5R5X1OnsVFEx2kaU+XHBVUuKx82wfF77NPK/czRQ==
+X-Received: by 2002:a17:90b:282:: with SMTP id az2mr125923pjb.66.1598851865882;
         Sun, 30 Aug 2020 22:31:05 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e89d])
-        by smtp.gmail.com with ESMTPSA id y9sm1568350pfn.85.2020.08.30.22.31.04
+        by smtp.gmail.com with ESMTPSA id y9sm1568350pfn.85.2020.08.30.22.31.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 30 Aug 2020 22:31:04 -0700 (PDT)
+        Sun, 30 Aug 2020 22:31:05 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/8] mime-support: Use update-alternatives
-Date: Sun, 30 Aug 2020 22:30:51 -0700
-Message-Id: <20200831053057.1541321-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/8] canutils: Use update-alternatives
+Date: Sun, 30 Aug 2020 22:30:52 -0700
+Message-Id: <20200831053057.1541321-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200831053057.1541321-1-raj.khem@gmail.com>
 References: <20200831053057.1541321-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-mime.types is also provided by mailcap so use update-alternatives to
-install is policy when both are added into image
+canutils provides applications which conflict with can-utils recipe.
+update-alternatives helps fix this when both are installed
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/mailcap/mailcap_2.1.49.bb         | 5 +++++
- meta-oe/recipes-support/mime-support/mime-support_3.48.bb | 6 ++++++
- 2 files changed, 11 insertions(+)
+ meta-oe/recipes-extended/socketcan/can-utils_git.bb  | 6 +++++-
+ meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb | 7 +++++++
+ 2 files changed, 12 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/mailcap/mailcap_2.1.49.bb b/meta-oe/recipes-support/mailcap/mailcap_2.1.49.bb
-index ff3047f325..537c458747 100644
---- a/meta-oe/recipes-support/mailcap/mailcap_2.1.49.bb
-+++ b/meta-oe/recipes-support/mailcap/mailcap_2.1.49.bb
-@@ -21,6 +21,11 @@ SRC_URI = "https://releases.pagure.org/${BPN}/${BP}.tar.xz"
- SRC_URI[md5sum] = "d5701a1a541383c0eda328f4a6518751"
- SRC_URI[sha256sum] = "f7381516bc1a937348efd1d0e14618e0a2afc5d59fe821dd248632d5601b59b5"
+diff --git a/meta-oe/recipes-extended/socketcan/can-utils_git.bb b/meta-oe/recipes-extended/socketcan/can-utils_git.bb
+index 519368817f..e3ad04f598 100644
+--- a/meta-oe/recipes-extended/socketcan/can-utils_git.bb
++++ b/meta-oe/recipes-extended/socketcan/can-utils_git.bb
+@@ -12,4 +12,8 @@ PV = "2020.02.04"
+ 
+ S = "${WORKDIR}/git"
+ 
+-inherit autotools pkgconfig
++inherit autotools pkgconfig update-alternatives
++
++ALTERNATIVE_${PN} = "candump cansend"
++ALTERNATIVE_LINK_NAME[candump] = "${bindir}/candump"
++ALTERNATIVE_LINK_NAME[cansend] = "${bindir}/cansend"
+diff --git a/meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb b/meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb
+index e1508af857..aaa2653483 100644
+--- a/meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb
++++ b/meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb
+@@ -12,9 +12,16 @@ SRC_URI = "git://git.pengutronix.de/git/tools/canutils.git;protocol=git \
+     file://0001-canutils-candump-Add-error-frame-s-handling.patch \
+ "
  
 +inherit update-alternatives
 +
- do_install() {
-     oe_runmake install DESTDIR=${D} sysconfdir=${sysconfdir} mandir=${mandir}
- }
-+
-+ALTERNATIVE_${PN} = "mime.types"
-+ALTERNATIVE_LINK_NAME[mime.types] = "${sysconfdir}/mime.types"
-diff --git a/meta-oe/recipes-support/mime-support/mime-support_3.48.bb b/meta-oe/recipes-support/mime-support/mime-support_3.48.bb
-index d617b6620c..1137f5012a 100644
---- a/meta-oe/recipes-support/mime-support/mime-support_3.48.bb
-+++ b/meta-oe/recipes-support/mime-support/mime-support_3.48.bb
-@@ -10,6 +10,8 @@ RRECOMMENDS_${PN} = "file"
- SRC_URI = "${DEBIAN_MIRROR}/main/m/mime-support/mime-support_${PV}-1.tar.gz"
- S = "${WORKDIR}/${BPN}"
+ S = "${WORKDIR}/git"
  
-+inherit update-alternatives
-+
- FILES_${PN} += " ${libdir}/mime"
+ inherit autotools pkgconfig
  
- docdir_append = "/${BPN}"
-@@ -56,3 +58,7 @@ do_install () {
- 
- SRC_URI[md5sum] = "d6e5d715e331147352c50c158dbdec6d"
- SRC_URI[sha256sum] = "a529c7892cb786f514af71f4ca5a4c3ebc58b538a49ff959c0d97592d38f040a"
+ # Busybox ip doesn't support can interface configuration, use the real thing
+ RDEPENDS_${PN} += "iproute2"
 +
 +ALTERNATIVE_PRIORITY = "90"
-+ALTERNATIVE_${PN} = "mime.types"
-+ALTERNATIVE_LINK_NAME[mime.types] = "${sysconfdir}/mime.types"
++ALTERNATIVE_${PN} = "candump cansend"
++ALTERNATIVE_LINK_NAME[candump] = "${bindir}/candump"
++ALTERNATIVE_LINK_NAME[cansend] = "${bindir}/cansend"
 -- 
 2.28.0
 
