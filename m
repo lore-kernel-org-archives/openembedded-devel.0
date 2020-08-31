@@ -1,84 +1,70 @@
-Received: from mail-vs1-f50.google.com (mail-vs1-f50.google.com [209.85.217.50])
- by mx.groups.io with SMTP id smtpd.web10.39887.1598820378860740411
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web11.44322.1598838330962126970
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Aug 2020 13:46:19 -0700
+ Sun, 30 Aug 2020 18:45:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=H/0n+tcQ;
- spf=pass (domain: gmail.com, ip: 209.85.217.50, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-vs1-f50.google.com with SMTP id p3so2246819vsr.4
-        for <openembedded-devel@lists.openembedded.org>; Sun, 30 Aug 2020 13:46:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=jRZfssCC9JUHigb60qaJnIWwcRrtjcDFNEnpa23HQzI=;
-        b=H/0n+tcQgwJ3vFXtkra97vBm3Xdn1X9NaFTfuweEEZoiHCUO7Hm+Db83OzU+iiJKKR
-         Ca3xJ18++CJYuTNaQLbCdyhCf6rhbwYufiVZEu42BvlNL2jrKGDQb9z533xibhAmyfwl
-         zWNlpSVdh4nMnWbEcO3nBVt47xIYVlSebzGW0B/ZI1gKPHcSoN555xZ8gDTnUcLuMcym
-         8vSPstFCxe8Pr6WuGlqV/O9WtBGKTjVFUr2uNGxg+mP6pZpvX91kqO7FI8pFxMLTA6Rl
-         VBZjlIDNh5h1cYMPahByEz2SVDU54VOUO6y2TSDoU3R0d/ludW40RjvWYbnHO1Q1RmeR
-         xugw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=jRZfssCC9JUHigb60qaJnIWwcRrtjcDFNEnpa23HQzI=;
-        b=p+HuUX8dYTaG/+baSiysQ6HcCJd2vHzcLwiQ6KiyB5akLQEYBimUC13K4DJcYLn+Mz
-         RlIuoBL2drG0BV5CunubX+BH+THIqPsXjmgRd0ev6gtq7Bnt7V8zWzBHJz4w6nDsFT/Q
-         un6BYQyR4hmSeq9md6qoF9QlS8JHCqNjzGiSI42zAD3LY0SIpS99nCyNloV8qf0LUgk3
-         asCEAm6TJE0PatqIPJWm8SYE/YEnYM1cHkw4uC+w6YOey/4H8KRzznH8b2u6Jn5WxksI
-         8pS+keIBzrnDsi40ax9UslGDMfCu96ausaAh1ALbyoOS0evZZhj8iq7qck12x4KSjQFY
-         J6UQ==
-X-Gm-Message-State: AOAM531+l27unUSUMCDnwQP3Bvmf/YljLG9ycRJxpNth682GuzfSatUO
-	LFyUEZMoEQukdGJr/1bA2iW12V3I9A28/g3wPDk=
-X-Google-Smtp-Source: ABdhPJw7RC3+e8b0ns9mvYbax3oXDXb8DN8bqSQJ1iDxhHlfRcCfqj4m/XWYZIw5ODh55vQtU+vvif1O5Sg/BSBMKhE=
-X-Received: by 2002:a67:b408:: with SMTP id x8mr574370vsl.47.1598820378082;
- Sun, 30 Aug 2020 13:46:18 -0700 (PDT)
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.76,373,1592841600"; 
+   d="scan'208";a="98715789"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 31 Aug 2020 09:45:26 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 1428648990E1
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Aug 2020 09:45:26 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Mon, 31 Aug 2020 09:45:30 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] [oe] [meta-oe] [PATCH] iperf3: upgrade 3.7 -> 3.9
+Date: Mon, 31 Aug 2020 21:45:25 +0800
+Message-ID: <1598881526-68512-2-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1598881526-68512-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+References: <1598881526-68512-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-References: <20200824083345.GG65616@pcleri> <CANNYZj9BA_nPnJCHDAUcxtzz9Lz3zn8WSPh7jeKJY9omCTHRaA@mail.gmail.com>
- <20200824091401.GB2286@pcleri> <CANNYZj_+KTOwyvBhrDQ7NuecOBFe=Poh8Khc_ntDU4M5iGL=Gg@mail.gmail.com>
- <20200824093831.GC2286@pcleri> <CANNYZj_LT1m2gSbhL+Di1PaFGzSYGmPVYsEus0YnSx19sOZ8jw@mail.gmail.com>
- <162E2BC2BA50B6B6.12673@lists.openembedded.org> <CANNYZj8fWMk1Ya+G-HbC2VVbC4HWV6x=4T=ni_cdW5-qNG1YnA@mail.gmail.com>
- <20200825055800.GA37583@pcleri> <CANNYZj-n4T1bkX4k36B5LgG+7nJANO+sVKGXbyf1mFZTMx-t1Q@mail.gmail.com>
- <20200825110343.GE37583@pcleri>
-In-Reply-To: <20200825110343.GE37583@pcleri>
-From: "Alexander Kanavin" <alex.kanavin@gmail.com>
-Date: Sun, 30 Aug 2020 22:46:06 +0200
-Message-ID: <CANNYZj-a5HeUKExws6KNoofbPy4EQmmzx=2-ZtsD+N8j70g-HQ@mail.gmail.com>
-Subject: Re: [oe] [meta-java] Changes from master-next merged to master
-To: Richard Leitner <richard.leitner@skidata.com>
-Cc: Jacob Kroon <jacob.kroon@gmail.com>, 
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000b2014d05ae1e6051"
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: 1428648990E1.A12EB
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
---000000000000b2014d05ae1e6051
-Content-Type: text/plain; charset="UTF-8"
+-License-Update: Copyright year updated to 2020.
 
-On Tue, 25 Aug 2020 at 13:03, Richard Leitner <richard.leitner@skidata.com>
-wrote:
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ .../recipes-benchmark/iperf3/{iperf3_3.7.bb => iperf3_3.9.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-benchmark/iperf3/{iperf3_3.7.bb => iperf3_3.9.bb} (88%)
 
-> Great. Thanks for the feedback.
-> dunfell-next and warrior-next are already available. I'll merge them to
-> the real stable branches soon.
->
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.7.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.9.bb
+similarity index 88%
+rename from meta-oe/recipes-benchmark/iperf3/iperf3_3.7.bb
+rename to meta-oe/recipes-benchmark/iperf3/iperf3_3.9.bb
+index c7ad91b24..d969555c2 100644
+--- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.7.bb
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.9.bb
+@@ -9,13 +9,13 @@ SECTION = "console/network"
+ BUGTRACKER = "https://github.com/esnet/iperf/issues"
+ AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=f9088fe7ffdccd042f7645f1012d7f70"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b7fb682e9941a49f1214dcd7441410d7"
+ 
+ SRC_URI = "git://github.com/esnet/iperf.git \
+            file://0002-Remove-pg-from-profile_CFLAGS.patch \
+            "
+ 
+-SRCREV = "dfcea9f6a09ead01089a3c9d20c7032f2c0af2c1"
++SRCREV = "1f8fb13297f3e3e40169ebcd12e171167e394473"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.25.1
 
-ping - I think dunfell is still at the old revision?
 
-Alex
 
---000000000000b2014d05ae1e6051
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">On Tue, 25 Aug 2020 at 13:03, Richard Lei=
-tner &lt;<a href=3D"mailto:richard.leitner@skidata.com">richard.leitner@ski=
-data.com</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquote cla=
-ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid =
-rgb(204,204,204);padding-left:1ex">Great. Thanks for the feedback.<br>
-dunfell-next and warrior-next are already available. I&#39;ll merge them to=
-<br>
-the real stable branches soon.<br></blockquote><div><br></div><div>ping - I=
- think dunfell is still at the old revision?</div><div><br></div><div>Alex<=
-br></div></div></div>
-
---000000000000b2014d05ae1e6051--
