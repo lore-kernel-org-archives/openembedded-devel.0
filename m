@@ -1,148 +1,84 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.60172.1598898601324952945
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web10.1641.1598917869862817863
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 Aug 2020 11:30:01 -0700
+ Mon, 31 Aug 2020 16:51:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=59358 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kCoZ3-00055X-8k; Mon, 31 Aug 2020 21:29:59 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=uhnhbqCz;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id h2so4039127plr.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 31 Aug 2020 16:51:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=7CAlZEsiyi3kep8Uw5isiOhTZJxed3IbGok9JZrOugQ=;
+        b=uhnhbqCzas9shuIU2lDXwQqvgPrGI9GQ1O9ccizftFHTGMuY6OgxD7QfBTXHPsWmdo
+         AlSRg3o+pxaqaod5ypi+ekIWWAYmlmZoTotCBUiphjBL8z7knKBdc7rVDY6PyLI+tc0x
+         t1sR1fyHyf03tZxb5llaNcjfnNsldhjCuBADfm61FS0Mq5zVqI5CdXM3MsjzFD9+XdE8
+         jXyWdEjOAtGek9/obOKIM+umAUkw81jfez8q2Fcbhx3fmgQkswBImW6RdqLz5Tca7SUL
+         zImKk96CKU/2lTX0SJBjVoEydTa8lgCgND/Oa2VKArUJ0v18Vp1zUORS3WeZACHANRiU
+         B/0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=7CAlZEsiyi3kep8Uw5isiOhTZJxed3IbGok9JZrOugQ=;
+        b=Axam2f12aF1RFuNA1KzWOD7P3PnA0QyNVLVqmm1JjeqAMlHz0ZKVRvkYJP8GXM5SHa
+         ZQTroITJ9Xp9IKFz9Tadc11+XyKMzvhnDcjZFeuwWsDC4wW8MtTeX3JCsLXEgShd485b
+         KquLtitvBiMGd3BoTraXEavlRlxW/z3fDfwRtitSkRCaH9gWRkZL0L3Sv1AupJtkoOUQ
+         8B6YTjvyWiDLRhFFvixR8KVq4JQYxcdLnlyOpB8gEX/ba39ogM3DQ/gqgYQiCF5CZIKD
+         dm7L+qJfsfDdImmK7f6TkOMt898UcsJlSoXF90sBzM73d8iGphGp4tMAxdI4TmPNBkUs
+         LZcQ==
+X-Gm-Message-State: AOAM531QgoeXu2LUQEdyR+Ype4akHyPKo9wZwbWbNB5cU9u8+xHcUG3l
+	roUAxQ8FbRaY3Fna4b2xxjbOIUue3yydDg==
+X-Google-Smtp-Source: ABdhPJwxKLbuXoFOUhVaa0kXOFuONFBb5yICWBF0cE5PGqmGY4rcAiuQjOsObifT7Qgf+q/fg9S/iw==
+X-Received: by 2002:a17:902:e789:: with SMTP id cp9mr2894113plb.215.1598917869057;
+        Mon, 31 Aug 2020 16:51:09 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e89d])
+        by smtp.gmail.com with ESMTPSA id b15sm2892293pft.84.2020.08.31.16.51.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 31 Aug 2020 16:51:08 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCH] php: Upgrade 7.4.4 -> 7.4.9
-Date: Mon, 31 Aug 2020 21:29:49 +0300
-Message-Id: <20200831182949.7769-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.2
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Cc: Khem Raj <raj.khem@gmail.com>,
+	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Subject: [meta-xfce][PATCH 1/2] layer.conf: fixes icon-theme signature changes
+Date: Mon, 31 Aug 2020 16:51:05 -0700
+Message-Id: <20200831235106.48150-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.28.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 7.4.9:
+openzone and rodent-icon-theme are allarch but recently
 
-- Fixed: Upgrade apache2handler's php_apache_sapi_get_request_time
-  to return usec
-- Fixed: BSTR to PHP string conversion not binary safe
-- Fixed: DCOM does not work with Username, Password parameter
-- Fixed: serialize() and unserialize() methods can not be called
-  statically
-- Fixed: Segfault in php_str_replace_common
-- Fixed: Assertion failure if dumping closure with unresolved
-  static variable
-- Fixed: Assertion failure when assigning property of string
-  offset by reference
-- Fixed: HT iterators not removed if empty array is destroyed
-- Fixed: Changing array during undef index RW error segfaults
-- Fixed: Use after free if changing array during undef var during
-  array write fetch
-- Fixed: Use after free if string used in undefined index warning
-  is changed
-- Fixed: Public non-static property in child should take priority
-  over private static
-- Fixed: getimagesize function silently truncates after a null
-  byte
-- Fixed: finfo_file crash (FILEINFO_MIME)
-- Fixed: ftp_size on large files
-- Fixed: mb_strimwidth does not trim string
-- Fixed: Use of freed hash key in the phar_parse_zipfile function
-- Fixed: ::getStaticProperties() ignores property modifications
-- Fixed: ::getStaticPropertyValue() throws on protected props
-- Fixed: Use after free when type duplicated into
-  ReflectionProperty gets resolved
-- Fixed: Can't copy() large 'data://' with open_basedir
-- Fixed: dns_check_record() always return true on Alpine
-- Fixed: array_walk() does not respect property types
+gtk-icon-cache, since commit 31e3d34c8a9c3e8481aa837aa0bf52adf095fe62
+[gtk-icon-cache.bbclass: add runtime dependency], it start depend on
+non-allarch packages gdk-pixbuf and gtk+3, which make it's signature
+changes when machine changed.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../php/php/debian-php-fixheader.patch        | 27 ++++++++++---------
- .../php/{php_7.4.4.bb => php_7.4.9.bb}        |  5 ++--
- 2 files changed, 17 insertions(+), 15 deletions(-)
- mode change 100755 => 100644 meta-oe/recipes-devtools/php/php/debian-php-fixheader.patch
- rename meta-oe/recipes-devtools/php/{php_7.4.4.bb => php_7.4.9.bb} (98%)
+ meta-xfce/conf/layer.conf | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/php/php/debian-php-fixheader.patch b/meta-oe/recipes-devtools/php/php/debian-php-fixheader.patch
-old mode 100755
-new mode 100644
-index 21050f760..a4804d184
---- a/meta-oe/recipes-devtools/php/php/debian-php-fixheader.patch
-+++ b/meta-oe/recipes-devtools/php/php/debian-php-fixheader.patch
-@@ -1,31 +1,32 @@
--php: remove host specific info from header file
-+From 1234a8ef7c5ab88e24bc5908f0ccfd55af21aa39 Mon Sep 17 00:00:00 2001
-+From: Leon Anavi <leon.anavi@konsulko.com>
-+Date: Mon, 31 Aug 2020 16:03:27 +0300
-+Subject: [PATCH] php: remove host specific info from header file
+diff --git a/meta-xfce/conf/layer.conf b/meta-xfce/conf/layer.conf
+index 199c69e7b2..7e4bb178e0 100644
+--- a/meta-xfce/conf/layer.conf
++++ b/meta-xfce/conf/layer.conf
+@@ -20,3 +20,10 @@ LAYERDEPENDS_xfce-layer += "meta-python"
+ LAYERDEPENDS_xfce-layer += "networking-layer"
  
-+Based on:
- https://sources.debian.org/data/main/p/php7.3/7.3.6-1/debian/patches/
-         0036-php-5.4.9-fixheader.patch
- 
- Upstream-Status: Inappropriate [not author]
- Signed-off-by: Joe Slater <joe.slater@windriver.com>
--
-----
--From: Debian PHP Maintainers <pkg-php-maint@lists.alioth.debian.org>
--Date: Sat, 2 May 2015 10:26:56 +0200
--Subject: php-5.4.9-fixheader
--
--Make generated php_config.h constant across rebuilds.
-+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
- ---
-  configure.ac | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/configure.ac b/configure.ac
--index 433d7e6..41893d7 100644
-+index 2a474ba36d..6d22a21630 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -1357,7 +1357,7 @@ PHP_BUILD_DATE=`date -u +%Y-%m-%d`
-+@@ -1323,7 +1323,7 @@ PHP_BUILD_DATE=`date -u +%Y-%m-%d`
-  fi
-  AC_DEFINE_UNQUOTED(PHP_BUILD_DATE,"$PHP_BUILD_DATE",[PHP build date])
-  
---PHP_UNAME=`uname -a | xargs`
--+PHP_UNAME=`uname | xargs`
-+-UNAME=`uname -a | xargs`
-++UNAME=`uname | xargs`
-+ PHP_UNAME=${PHP_UNAME:-$UNAME}
-  AC_DEFINE_UNQUOTED(PHP_UNAME,"$PHP_UNAME",[uname -a output])
-  PHP_OS=`uname | xargs`
-- AC_DEFINE_UNQUOTED(PHP_OS,"$PHP_OS",[uname output])
-+-- 
-+2.17.1
+ LAYERSERIES_COMPAT_xfce-layer = "thud warrior zeus dunfell"
 +
-diff --git a/meta-oe/recipes-devtools/php/php_7.4.4.bb b/meta-oe/recipes-devtools/php/php_7.4.9.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/php/php_7.4.4.bb
-rename to meta-oe/recipes-devtools/php/php_7.4.9.bb
-index f74533c1d..abd8b1672 100644
---- a/meta-oe/recipes-devtools/php/php_7.4.4.bb
-+++ b/meta-oe/recipes-devtools/php/php_7.4.9.bb
-@@ -31,9 +31,10 @@ SRC_URI_append_class-target = " \
-             file://0001-opcache-config.m4-enable-opcache.patch \
-             file://xfail_two_bug_tests.patch \
-           "
-+
- S = "${WORKDIR}/php-${PV}"
--SRC_URI[md5sum] = "262c258a3b8b5699fcca89a64e58758c"
--SRC_URI[sha256sum] = "308e8f4182ec8a2767b0b1b8e1e7c69fb149b37cfb98ee4a37475e082fa9829f"
-+SRC_URI[md5sum] = "e68a66c54b080d108831f6dc2e1e403d"
-+SRC_URI[sha256sum] = "2e270958a4216480da7886743438ccc92b6acf32ea96fefda88d07e0a5095deb"
- 
- inherit autotools pkgconfig python3native gettext
- 
++SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
++  openzone->gdk-pixbuf \
++  openzone->gtk+3 \
++  rodent-icon-theme->gdk-pixbuf \
++  rodent-icon-theme->gtk+3 \
++"
 -- 
-2.17.1
+2.28.0
 
