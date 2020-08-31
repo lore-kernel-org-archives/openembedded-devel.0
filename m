@@ -1,106 +1,77 @@
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
- by mx.groups.io with SMTP id smtpd.web11.47263.1598851867569921649
+Received: from mail-pj1-f65.google.com (mail-pj1-f65.google.com [209.85.216.65])
+ by mx.groups.io with SMTP id smtpd.web12.47289.1598851868390361286
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Aug 2020 22:31:07 -0700
+ Sun, 30 Aug 2020 22:31:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=WGVvR5uU;
- spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f175.google.com with SMTP id c142so3861828pfb.7
-        for <openembedded-devel@lists.openembedded.org>; Sun, 30 Aug 2020 22:31:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=BQARm1U7;
+ spf=pass (domain: gmail.com, ip: 209.85.216.65, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f65.google.com with SMTP id i13so2540204pjv.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 30 Aug 2020 22:31:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=mId0P5RdNK8UfxHMR7GQI63UnwZC9xtA4QSrPad0uAs=;
-        b=WGVvR5uUkWOtgrPLISVqk2rXkTHQHJv0Wml1ip/B7tA9rrTu0hGqDJj/GLPfMy9FaD
-         krWZmhcmPFFNEq2V+HyNIxBPvfP7dcI8pztUfzh2ym1Me/Xx7+gtjUu4ixMGaoSV11a/
-         yPQldYNwFjqAkJK+QBbVEcmchgblwfPjoyf4BqaDpWuW+teLQUZUrtsrEm6FW6Og8Z9Z
-         Qvk8FCOJ0xVZk8A/rRLjE2zuAAYU+TCr/3f52D/Ih3T5zRhDUWslElCJkwrLpkANCDbN
-         n/YdyORPlHixBmbv1y1JlQ2eWh9kcCrkW3UUL+v14aL2ZjEyUpdQ8/98JvILzUJZdluZ
-         RE+Q==
+        bh=qgw/MyMOt/+XLfzRCm1Z/YSd9RZpMJCIho2Q6Kl+a9s=;
+        b=BQARm1U7tlH6s/ObXDE8yNlEPizG5cZ4wPVRdKPZXvMCEOM6iR6svDv+ffa4PJfrMi
+         pkojvJsjznkqtdhazX30W3+1Hkf8JTQPFAD4WIZIYACDHkcwffgrRje54egZKhA15r/9
+         Xd77MmflJQ/6EiL+kJ3kAeJDMNYk7dJ5+pbROQMpgB7JMLk7BqYIM2O9RaH59O9UJAKt
+         70w4ZF+0qFAWzOuW6WcrqrYVWxLxFYpl2pkyDPBzgfbHDoI5jcBekB02X8lefIRiz4XK
+         +exuh1ttFHPoTH6Er3mE2ZEi29QGLtYDNe7+qU6oc3SuQKCNJEdQ/KTk/E6YPrRU3aGO
+         +JlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=mId0P5RdNK8UfxHMR7GQI63UnwZC9xtA4QSrPad0uAs=;
-        b=dZaWD7oyvQEsvEyJFJRpITn4Zq/Pb2KsMBafjtaNKOHzFvld1QbNyTMHYvbatB2ByE
-         JduNROS/5vUavUWdJcwpqxNPvbCsHfo06hOUyzlnD4isIaFf5yPO539tkLrhilRYG95j
-         LflzzQ9/VCm+j/DzWfOC3m+s1q24BQC0rvoiROfFwksS3A6ghlmA5wlSEVlLv877xYwn
-         RMZS5mfMG4gAfAlpfdpw9gKuapIGwUlC1OapAFQ/3EsbxA3Qg7/kDZRPn9PYjkbn/8AV
-         sC0VbGsDvBtbSFrQ6yAmybeyBdtgkok5EV4kjK+lDjo6qUyjXuYEREVL++1seasWDgoA
-         aGvg==
-X-Gm-Message-State: AOAM533lsfPf5gQaPaHA3soZKgHBzPi0hjeLg6tOxMzbn3xeQnsa4vKZ
-	CEpK12jqlQDxAk4PTRnV7jW21ZDYb5Fqlg==
-X-Google-Smtp-Source: ABdhPJwa0GfOO+V/v5BI+xOtpnJEj/qmCAlrpwYs53yXdmnQgsUsfYjheZpFxN0ckiGMutaRx6M4Kg==
-X-Received: by 2002:a63:584e:: with SMTP id i14mr12293pgm.433.1598851866803;
-        Sun, 30 Aug 2020 22:31:06 -0700 (PDT)
+        bh=qgw/MyMOt/+XLfzRCm1Z/YSd9RZpMJCIho2Q6Kl+a9s=;
+        b=Glb2Xil3WKsiFwgUNKpAUK59uVOv3HZQ91XahCI+nb756blB6piSdUk/xpcLGMpnvr
+         f1kd+7SdQzUDJnqiZh2ooJsO4AwhcobscxMTQYbtDvBH0GplRGab0S9s165WxULpx+p6
+         Bq4R7qDqGkwI3Wod9gBCaQwiqbze1aAGZpAlWSdWWbjOwMYSHp9ad/eyrudWXJ8JRWKI
+         5QDtNsV/pl7kdeT7vOsvU/27G9pPj/GdfstRJhB/ECF5lOe+jXZ6ju51miVTzBlB6ihV
+         DWByBGCe4ds9TsKA4jbCt9oUhQ/FTtwFXhlh750m6eNsgQlPeStq8vPYo6ySLVgx7IoV
+         7Gwg==
+X-Gm-Message-State: AOAM531csg84Zv/N2ZgsZef3R7fxbk+yFvAb7Mvk9NQZ+YufEAoxjzJ4
+	dvTJZu/VaMF48LzB0O6I3KdMofs80sXWRQ==
+X-Google-Smtp-Source: ABdhPJxBBik9ZfphvtYeWhRS6geCja2o+NbqwadxiicIc0th3yoDN51AIoa1F8WaoaZyUbwiZMjx9A==
+X-Received: by 2002:a17:90a:9503:: with SMTP id t3mr78840pjo.171.1598851867677;
+        Sun, 30 Aug 2020 22:31:07 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e89d])
         by smtp.gmail.com with ESMTPSA id y9sm1568350pfn.85.2020.08.30.22.31.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 30 Aug 2020 22:31:06 -0700 (PDT)
+        Sun, 30 Aug 2020 22:31:07 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 4/8] libusbgx: Use update-alternatives
-Date: Sun, 30 Aug 2020 22:30:53 -0700
-Message-Id: <20200831053057.1541321-4-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 5/8] ttf-liberation-sans-narrow: Do not install normal liberation fonts
+Date: Sun, 30 Aug 2020 22:30:54 -0700
+Message-Id: <20200831053057.1541321-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200831053057.1541321-1-raj.khem@gmail.com>
 References: <20200831053057.1541321-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-gadget-acm-ecm show-gadgets are also provided by older libusbg recipe
+They are provided by ttf-liberation recipe, this avoids install time
+conflicts
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/libusbg/libusbg_git.bb   | 5 ++++-
- meta-oe/recipes-support/libusbgx/libusbgx_git.bb | 7 ++++++-
- 2 files changed, 10 insertions(+), 2 deletions(-)
+ .../ttf-fonts/ttf-liberation-sans-narrow_1.07.4.bb              | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/libusbg/libusbg_git.bb b/meta-oe/recipes-support/libusbg/libusbg_git.bb
-index 97d60a6a8a..b1c4663525 100644
---- a/meta-oe/recipes-support/libusbg/libusbg_git.bb
-+++ b/meta-oe/recipes-support/libusbg/libusbg_git.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c"
- 
--inherit autotools
-+inherit autotools update-alternatives
- 
- PV = "0.1.0"
- SRCREV = "a826d136e0e8fa53815f1ba05893e6dd74208c15"
-@@ -14,3 +14,6 @@ SRC_URI = "git://github.com/libusbg/libusbg.git \
- 
- S = "${WORKDIR}/git"
- 
-+ALTERNATIVE_${PN} = "gadget-acm-ecm show-gadgets"
-+ALTERNATIVE_LINK_NAME[gadget-acm-ecm] = "${bindir}/gadget-acm-ecm"
-+ALTERNATIVE_LINK_NAME[show-gadgets] = "${bindir}/show-gadgets"
-diff --git a/meta-oe/recipes-support/libusbgx/libusbgx_git.bb b/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
-index d73ca61060..48fc911434 100644
---- a/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
-+++ b/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
- 
- DEPENDS = "libconfig"
- 
--inherit autotools pkgconfig systemd update-rc.d
-+inherit autotools pkgconfig systemd update-rc.d update-alternatives
- 
- PV = "0.2.0+git${SRCPV}"
- SRCREV = "45c14ef4d5d7ced0fbf984208de44ced6d5ed898"
-@@ -38,3 +38,8 @@ do_install_append() {
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow_1.07.4.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow_1.07.4.bb
+index 5b406bc653..57efea86ae 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow_1.07.4.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow_1.07.4.bb
+@@ -24,6 +24,8 @@ do_install_append () {
+     install -m 0644 LiberationSansNarrow*.ttf ${D}${datadir}/fonts/TTF/
+     install -D -m 0644 ${WORKDIR}/30-0-liberation-sans-narrow.conf ${D}${sysconfdir}/conf.avail/30-${PN}-sans.conf
+     install -D -m 0644 ${S}/License.txt ${D}${datadir}/licenses/${PN}/LICENSE
++    # normal liberation fonts come from ttf-liberation recipe so delete here
++    rm -rf ${D}${datadir}/fonts/truetype
  }
  
- RDEPENDS_${PN} += "libusbgx-config"
-+
-+ALTERNATIVE_PRIORITY = "90"
-+ALTERNATIVE_${PN} = "gadget-acm-ecm show-gadgets"
-+ALTERNATIVE_LINK_NAME[gadget-acm-ecm] = "${bindir}/gadget-acm-ecm"
-+ALTERNATIVE_LINK_NAME[show-gadgets] = "${bindir}/show-gadgets"
+ PACKAGES = "${PN}"
 -- 
 2.28.0
 
