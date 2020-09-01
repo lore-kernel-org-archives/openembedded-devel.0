@@ -1,72 +1,61 @@
-Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com [209.85.216.68])
- by mx.groups.io with SMTP id smtpd.web10.7331.1598942843326720839
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.8314.1598947920176900467
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 Aug 2020 23:47:23 -0700
+ Tue, 01 Sep 2020 01:12:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=C3gIhQdT;
- spf=pass (domain: gmail.com, ip: 209.85.216.68, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f68.google.com with SMTP id q1so142683pjd.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 31 Aug 2020 23:47:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=OXxn2YQzqf8mFoyI/7ZWkwkF0kb59qr54vq6gHWt7do=;
-        b=C3gIhQdTpIA/gi1wpXR0FLLuf/am0NMAhTh5dTO6dSVNpDmVpMyE6NIQGsVDJA4u/U
-         cAwgcHOCEDQlxGiG8LXoWIgjGXPyw4X+ckrxzb1ZYzXX675wLZXJGP1aS4Bzml10GtLj
-         eGvx1CrrVoQ2lfHFMbnBRwl93MQEn8oL4A6llPRpuaaF7CUvd77jJklVMHpKvbgEim07
-         BHuOblRo2bBS5wNU9s2K7fwmjoE4U/kT5ryrI+LoR0htOSBy1YDRlCF5Hujui5rSl8Q6
-         7AL5FJKvCJfiBlRzdIP41qv2oEHzV0tWWQA7NHa0PMR8yMapP7JiyqWq29GtiF6/wOGA
-         7GPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=OXxn2YQzqf8mFoyI/7ZWkwkF0kb59qr54vq6gHWt7do=;
-        b=T//e8ywhma2gDJawccsA2SvW9kolR4APAbBEc+zDLSnTaC035FO/yxl+RnODWDQgJR
-         bH8NAkPadL39ihd7em4aVnDXXtaXqklgogGHYJAjr+Vh65BwtPreMR6H8BgrnHLRtWcQ
-         V6cF4vrf75vZO60ZfmeD9yseSQZgl1Ag9Ak1aV5+n/ik27dZVXdw1DZeO94u38+Eq+IG
-         RQIaEUqOTqDEpjnSmTD9/y7V1adyTS9UJE1s/qUPuPX+0GTkaer1y26aJslctIH+aKdC
-         V5uLa6w+ptjHoNFrFq/9qntsnwGrZmihQw8njU1GItTcQAAxVQhw+HRCKkJNv+Gf3Kj/
-         MDmQ==
-X-Gm-Message-State: AOAM530vDkzfKGweqBONXrNTWBi3FpEbf/8kXyWcKRSquQM9geNNQ1s1
-	Qpfp22gubU0KNEhDKn7zn1E0WodoNUj/ww==
-X-Google-Smtp-Source: ABdhPJyFIM7iPKVIXN9l8/mEQ40wzNalCET2Y//EpjJ36IzgNx1NN9LBoduAtx/IiJOk0ESUNh8jOA==
-X-Received: by 2002:a17:90a:2e0f:: with SMTP id q15mr194141pjd.49.1598942842607;
-        Mon, 31 Aug 2020 23:47:22 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e89d])
-        by smtp.gmail.com with ESMTPSA id a13sm778384pgn.17.2020.08.31.23.47.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 31 Aug 2020 23:47:22 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=39232 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kD1OW-0002Vq-BR; Tue, 01 Sep 2020 11:11:57 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 5/5] packagegroup-meta-oe: Exclude from world builds
-Date: Mon, 31 Aug 2020 23:47:14 -0700
-Message-Id: <20200901064714.2206751-5-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200901064714.2206751-1-raj.khem@gmail.com>
-References: <20200901064714.2206751-1-raj.khem@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-luma-core: Upgrade 1.16.0 -> 1.16.1
+Date: Tue,  1 Sep 2020 11:11:43 +0300
+Message-Id: <20200901081147.13556-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Upgrade to release 1.16.1:
+
+- Fix bug in bitmap_font: glyph_index now computed correctly
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ ...ython3-luma-core_1.16.0.bb => python3-luma-core_1.16.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-luma-core_1.16.0.bb => python3-luma-core_1.16.1.bb} (75%)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 52171a5fac..55d623d95e 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -936,3 +936,6 @@ RDEPENDS_packagegroup-meta-oe-fortran-packages = "\
- # spdlog span-lite uthash websocketpp catch2 properties-cpp
+diff --git a/meta-python/recipes-devtools/python/python3-luma-core_1.16.0.bb b/meta-python/recipes-devtools/python/python3-luma-core_1.16.1.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-luma-core_1.16.0.bb
+rename to meta-python/recipes-devtools/python/python3-luma-core_1.16.1.bb
+index ce1e7ba03..3428dbe9f 100644
+--- a/meta-python/recipes-devtools/python/python3-luma-core_1.16.0.bb
++++ b/meta-python/recipes-devtools/python/python3-luma-core_1.16.1.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7"
  
- # rsyslog conflicts with syslog-ng so its not included here
-+
-+EXCLUDE_FROM_WORLD = "1"
-+
+ inherit pypi setuptools3
+ 
+-SRC_URI[md5sum] = "52ab2cdce4222aa71d9ac254a806dccc"
+-SRC_URI[sha256sum] = "ca523f606f8fff2c9843d48b415a0a748bb2c96270eccac97d9caa9ae6810c94"
++SRC_URI[md5sum] = "de7bda49c4146ba242923a88c587cd7a"
++SRC_URI[sha256sum] = "2181a60906fea3104dcfa3923f9654928502cd7541ff9b4d76c6ae29c6a9d9fc"
+ 
+ CLEANBROKEN = "1"
+ 
 -- 
-2.28.0
+2.17.1
 
