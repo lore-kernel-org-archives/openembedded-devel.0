@@ -1,21 +1,21 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web11.9115.1598952147951420111
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.9131.1598952268727040571
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Sep 2020 02:22:28 -0700
+ Tue, 01 Sep 2020 02:24:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: ovidiu.panait@windriver.com)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: ovidiu.panait@windriver.com)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 0819MQHS014961
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0819O8Ei023258
 	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 1 Sep 2020 02:22:27 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 1 Sep 2020 02:24:18 -0700
 Received: from otp-linux01.wrs.com (128.224.126.17) by ALA-HCB.corp.ad.wrs.com
  (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Tue, 1 Sep 2020
- 02:22:08 -0700
+ 02:23:57 -0700
 From: "Ovidiu Panait" <ovidiu.panait@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [dunfell][meta-networking][PATCH] net-snmp: Fix CVE-2020-15861 and CVE-2020-15862
-Date: Tue, 1 Sep 2020 12:22:00 +0300
-Message-ID: <20200901092200.18034-1-ovidiu.panait@windriver.com>
+Subject: [zeus][meta-networking][PATCH] net-snmp: Fix CVE-2020-15861 and CVE-2020-15862
+Date: Tue, 1 Sep 2020 12:23:49 +0300
+Message-ID: <20200901092349.18117-1-ovidiu.panait@windriver.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -814,13 +814,13 @@ index 000000000..419a0c21b
 +2.17.1
 +
 diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-index 67316db0d..6b4b6ce8e 100644
+index 192b6b506..2a95cd108 100644
 --- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
 +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-@@ -29,6 +29,12 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
+@@ -27,6 +27,12 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
+            file://reproducibility-have-printcap.patch \
+            file://reproducibility-accept-configure-options-from-env.patch \
             file://0001-net-snmp-fix-compile-error-disable-des.patch \
-            file://0001-Add-pkg-config-support-for-building-applications-and.patch \
-            file://CVE-2019-20892.patch \
 +           file://CVE-2020-15861-0001.patch \
 +           file://CVE-2020-15861-0002.patch \
 +           file://CVE-2020-15861-0003.patch \
