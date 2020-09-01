@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.8493.1598947924654984082
+ by mx.groups.io with SMTP id smtpd.web12.8494.1598947925628273308
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Sep 2020 01:12:05 -0700
+ Tue, 01 Sep 2020 01:12:06 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=39232 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kD1Oc-0002Vq-MV; Tue, 01 Sep 2020 11:12:03 +0300
+	id 1kD1Od-0002Vq-Io; Tue, 01 Sep 2020 11:12:04 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-flask-mail: Consolidate in a single file
-Date: Tue,  1 Sep 2020 11:11:46 +0300
-Message-Id: <20200901081147.13556-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-flask-pymongo: Consolidate in a single file
+Date: Tue,  1 Sep 2020 11:11:47 +0300
+Message-Id: <20200901081147.13556-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200901081147.13556-1-leon.anavi@konsulko.com>
 References: <20200901081147.13556-1-leon.anavi@konsulko.com>
@@ -34,49 +34,55 @@ Consolidate inc and bb files into a single bb file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python-flask-mail.inc  | 12 ------------
- .../python/python3-flask-mail_0.9.1.bb             | 14 +++++++++++++-
- 2 files changed, 13 insertions(+), 13 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-flask-mail.inc
+ .../python/python-flask-pymongo.inc             | 15 ---------------
+ .../python/python3-flask-pymongo_2.3.0.bb       | 17 ++++++++++++++++-
+ 2 files changed, 16 insertions(+), 16 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-flask-pymongo.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-flask-mail.inc b/meta-python/recipes-devtools/python/python-flask-mail.inc
+diff --git a/meta-python/recipes-devtools/python/python-flask-pymongo.inc b/meta-python/recipes-devtools/python/python-flask-pymongo.inc
 deleted file mode 100644
-index 0df276d15..000000000
---- a/meta-python/recipes-devtools/python/python-flask-mail.inc
+index 5fc35c193..000000000
+--- a/meta-python/recipes-devtools/python/python-flask-pymongo.inc
 +++ /dev/null
-@@ -1,12 +0,0 @@
--SUMMARY = "Flask extension for sending email"
--DESCRIPTION = "A Flask extension for sending email"
--HOMEPAGE = " https://github.com/rduplain/flask-email"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=5b16dfa6d3f275ace5985bb92949f770"
+@@ -1,15 +0,0 @@
+-SUMMARY = "PyMongo support for Flask applications"
+-DESCRIPTION = "PyMongo support for Flask applications."
+-HOMEPAGE = "https://github.com/mitsuhiko/flask/"
+-SECTION = "devel/python"
+-LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://flask_pymongo/wrappers.py;beginline=1;endline=24;md5=424c4e1047d28e01b4e4634a069c019d"
 -
--SRC_URI[md5sum] = "04b35a42a44ec7aa724ec8ce55e2e08e"
--SRC_URI[sha256sum] = "22e5eb9a940bf407bcf30410ecc3708f3c56cc44b29c34e1726fe85006935f41"
+-SRC_URI[md5sum] = "94df71e6800b1d7915cc91a74b70f959"
+-SRC_URI[sha256sum] = "620eb02dc8808a5fcb90f26cab6cba9d6bf497b15032ae3ca99df80366e33314"
 -
--PYPI_PACKAGE = "Flask-Mail"
+-PYPI_PACKAGE = "Flask-PyMongo"
 -
--RDEPENDS_${PN} = "${PYTHON_PN}-flask"
-diff --git a/meta-python/recipes-devtools/python/python3-flask-mail_0.9.1.bb b/meta-python/recipes-devtools/python/python3-flask-mail_0.9.1.bb
-index 0b963be56..7a89cac9d 100644
---- a/meta-python/recipes-devtools/python/python3-flask-mail_0.9.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask-mail_0.9.1.bb
-@@ -1,2 +1,14 @@
-+SUMMARY = "Flask extension for sending email"
-+DESCRIPTION = "A Flask extension for sending email"
-+HOMEPAGE = " https://github.com/rduplain/flask-email"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=5b16dfa6d3f275ace5985bb92949f770"
+-DEPENDS = "${PYTHON_PN}-vcversioner ${PYTHON_PN}-vcversioner-native"
+-
+-RDEPENDS_${PN} = "${PYTHON_PN}-pymongo ${PYTHON_PN}-flask"
+diff --git a/meta-python/recipes-devtools/python/python3-flask-pymongo_2.3.0.bb b/meta-python/recipes-devtools/python/python3-flask-pymongo_2.3.0.bb
+index 2102554b6..e3c744d92 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-pymongo_2.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-pymongo_2.3.0.bb
+@@ -1,2 +1,17 @@
++SUMMARY = "PyMongo support for Flask applications"
++DESCRIPTION = "PyMongo support for Flask applications."
++HOMEPAGE = "https://github.com/mitsuhiko/flask/"
++SECTION = "devel/python"
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://flask_pymongo/wrappers.py;beginline=1;endline=24;md5=424c4e1047d28e01b4e4634a069c019d"
 +
-+SRC_URI[md5sum] = "04b35a42a44ec7aa724ec8ce55e2e08e"
-+SRC_URI[sha256sum] = "22e5eb9a940bf407bcf30410ecc3708f3c56cc44b29c34e1726fe85006935f41"
++SRC_URI[md5sum] = "94df71e6800b1d7915cc91a74b70f959"
++SRC_URI[sha256sum] = "620eb02dc8808a5fcb90f26cab6cba9d6bf497b15032ae3ca99df80366e33314"
 +
-+PYPI_PACKAGE = "Flask-Mail"
++PYPI_PACKAGE = "Flask-PyMongo"
 +
  inherit pypi setuptools3
--require python-flask-mail.inc
+-require python-flask-pymongo.inc
 +
-+RDEPENDS_${PN} = "${PYTHON_PN}-flask"
++DEPENDS = "${PYTHON_PN}-vcversioner ${PYTHON_PN}-vcversioner-native"
++
++RDEPENDS_${PN} = "${PYTHON_PN}-pymongo ${PYTHON_PN}-flask"
 -- 
 2.17.1
 
