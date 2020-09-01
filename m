@@ -1,62 +1,104 @@
-Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com [209.85.215.193])
- by mx.groups.io with SMTP id smtpd.web12.13480.1598967931289243583
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web10.3209.1598985879793691283
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Sep 2020 06:45:31 -0700
+ Tue, 01 Sep 2020 11:44:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=iAKQkSXP;
- spf=pass (domain: gmail.com, ip: 209.85.215.193, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-pg1-f193.google.com with SMTP id 7so697798pgm.11
-        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Sep 2020 06:45:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=Sgdd3rOZgDerCBa3sN2AcaUAHyzOuL3rcG9TpAXuZaU=;
-        b=iAKQkSXPgw5/CipNvP/hkIFamyM2PHZKN0So+Yvbd14XEjeJzJWZZ+sevFarwvljuH
-         KwYfux0npvDrsw5Tfq/UEVIsyjpxl0mh++rWYTf2Rvi1pZ3kNIOZT7XM5DC+Wf55jIF5
-         WIZckZEbc5SidRBmlISfYSbfKRF0bY4UigYiTcmnxu1rCkaTJtdMbgKmAY6xISf5yQir
-         cBj2+8kOz9NcQFaMIPq08BQjSq0moeD+oyVtnrpDmGxYhMMJKVIvqaRPBOdvEs4MaHjQ
-         tVItM26NLmTTG8TExQoAlItH8oxEmoLQPLzEEjyn6URA0ZiRNc+raOT/OzOwGbAQnjUM
-         qfbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=Sgdd3rOZgDerCBa3sN2AcaUAHyzOuL3rcG9TpAXuZaU=;
-        b=nW7y9Ro/KuZNLHSIHSn0nIk5WtYddH8Zb/LJ7F7vOwWtCZfRT9M+ovdE6eDNIw+x5R
-         dp2yzPrm4v1eim9UXOoyM6XNj1zWDfX/sR+DBNMDprpxWnWNW2Tp1PD+FjiZrM7HMqtw
-         BXB/ywxbQ/M7aqME710PW4080fDcLs0utq2GSjJ+uxtjAlEeCuBJNTfRTNKyr/GYUmON
-         bVvKqVY5IS7NNwKtH5Rp623k/NW3d1/VpxuNqpBNs1DkYHJzXaUkk/B5PtiQ8v3YydJf
-         3Q/iRlOxTyY1RT+wljpbyBn4GTwvswSNW2++BtUheRkD59vlojrlIVCmaes+o6uvPd6U
-         2QWg==
-X-Gm-Message-State: AOAM5338jq3A69Rc5xQHoyYdZwjywZPNNGiVfO2BDT++ZxdDMPIuKICU
-	kgDw0QcZ1QCsWS147FZRq+sMSpjm0yNBhqVoRHc=
-X-Google-Smtp-Source: ABdhPJxvCdkwrWJRCKoiu47AJ+QKFoMBJb17EKG1X1LGwcjZ4aqQInPSRZTZ7vCSirr2LPmU/VqxRjGAekORHqe+hug=
-X-Received: by 2002:a05:6a00:7ca:: with SMTP id n10mr1970027pfu.129.1598967930716;
- Tue, 01 Sep 2020 06:45:30 -0700 (PDT)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: joe.slater@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 081IicjG024990
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 1 Sep 2020 11:44:39 -0700 (PDT)
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.40) with Microsoft SMTP Server id 14.3.487.0; Tue, 1 Sep 2020
+ 11:44:38 -0700
+From: "Joe Slater" <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
+Subject: [meta-oe][PATCH 1/1] openjpeg: fix CVE-2020-15389
+Date: Tue, 1 Sep 2020 11:44:37 -0700
+Message-ID: <20200901184437.26767-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20200831235106.48150-1-raj.khem@gmail.com>
-In-Reply-To: <20200831235106.48150-1-raj.khem@gmail.com>
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-Date: Tue, 1 Sep 2020 15:45:19 +0200
-Message-ID: <CALbNGRSbBrsWM3Od8SK_pey3a=JhVD0-g3PusCro6fdk03LODw@mail.gmail.com>
-Subject: Re: [meta-xfce][PATCH 1/2] layer.conf: fixes icon-theme signature changes
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-On Tue, Sep 1, 2020 at 1:51 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> openzone and rodent-icon-theme are allarch but recently
->
-> gtk-icon-cache, since commit 31e3d34c8a9c3e8481aa837aa0bf52adf095fe62
-> [gtk-icon-cache.bbclass: add runtime dependency], it start depend on
-> non-allarch packages gdk-pixbuf and gtk+3, which make it's signature
-> changes when machine changed.
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Cc: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-Thanks for fixing
+Backport from github meta-xilinx-tools.
 
-Andreas
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
+---
+ .../openjpeg/openjpeg/CVE-2020-15389.patch    | 51 +++++++++++++++++++
+ .../openjpeg/openjpeg_2.3.1.bb                |  1 +
+ 2 files changed, 52 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-15389.patch
+
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-15389.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-15389.patch
+new file mode 100644
+index 000000000..5c5d3f48e
+--- /dev/null
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-15389.patch
+@@ -0,0 +1,51 @@
++From e8e258ab049240c2dd1f1051b4e773b21e2d3dc0 Mon Sep 17 00:00:00 2001
++From: Even Rouault <even.rouault@spatialys.com>
++Date: Sun, 28 Jun 2020 14:19:59 +0200
++Subject: [PATCH] opj_decompress: fix double-free on input directory with mix
++ of valid and invalid images (CVE-2020-15389)
++
++Fixes #1261
++
++Credits to @Ruia-ruia for reporting and analysis.
++---
++ src/bin/jp2/opj_decompress.c | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
++ 
++--- end of original header ---
++
++CVE: CVE-2020-15389
++
++Upstream-Status: Backport [git://github/uclouvain/openjpeg.git]
++
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
++
++---
++diff --git a/src/bin/jp2/opj_decompress.c b/src/bin/jp2/opj_decompress.c
++index 7eeb0952..2634907f 100644
++--- a/src/bin/jp2/opj_decompress.c
+++++ b/src/bin/jp2/opj_decompress.c
++@@ -1316,10 +1316,6 @@ static opj_image_t* upsample_image_components(opj_image_t* original)
++ int main(int argc, char **argv)
++ {
++     opj_decompress_parameters parameters;           /* decompression parameters */
++-    opj_image_t* image = NULL;
++-    opj_stream_t *l_stream = NULL;              /* Stream */
++-    opj_codec_t* l_codec = NULL;                /* Handle to a decompressor */
++-    opj_codestream_index_t* cstr_index = NULL;
++ 
++     OPJ_INT32 num_images, imageno;
++     img_fol_t img_fol;
++@@ -1393,6 +1389,10 @@ int main(int argc, char **argv)
++ 
++     /*Decoding image one by one*/
++     for (imageno = 0; imageno < num_images ; imageno++)  {
+++        opj_image_t* image = NULL;
+++        opj_stream_t *l_stream = NULL;              /* Stream */
+++        opj_codec_t* l_codec = NULL;                /* Handle to a decompressor */
+++        opj_codestream_index_t* cstr_index = NULL;
++ 
++         if (!parameters.quiet) {
++             fprintf(stderr, "\n");
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
+index 42011efa9..a0740a274 100644
+--- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
+@@ -10,6 +10,7 @@ SRC_URI = " \
+     file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
+     file://CVE-2020-6851.patch \
+     file://CVE-2020-8112.patch \
++    file://CVE-2020-15389.patch \
+ "
+ SRCREV = "57096325457f96d8cd07bd3af04fe81d7a2ba788"
+ S = "${WORKDIR}/git"
+-- 
+2.17.1
+
