@@ -1,76 +1,105 @@
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web10.8336.1598999779919506264
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web12.8335.1598999781110881179
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Sep 2020 15:36:20 -0700
+ Tue, 01 Sep 2020 15:36:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=V0M4gIr1;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id np15so1240754pjb.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Sep 2020 15:36:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=GwGxEvrt;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id u128so1676596pfb.6
+        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Sep 2020 15:36:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=evITPnGUGjKqy7+ZODtVDh1tH0hDOAEmXJxC0AU42Mw=;
-        b=V0M4gIr1seO7uoBGBoTjPdMbFptle9LYKFx50VuYgjY2sbFYiK6/rzfR03qG37zmaA
-         yiO7U0ik/1gopjkI9RO99QlAx0KZKVjVDlhR13stOicvJ7iA2FXctaSDaDu0KTLAU9NI
-         j8flHtnA+vd4ctE7r2CuDj5+oaxi1BHOI7sAcBRJMNQYcxVSE37j5SCO7DAy+wv0uwLv
-         n3fXlpWOXLkXHyWX5j+2a8e/3tdD4vx6wbxFm/74EjCPo7NzAhWAmQRc9Xen84HgXPcK
-         7wI/QXXt7BsEgQ9BwJAwHhOOpVs7PgtOwVCYJvfwbZQWNRqBCSEMc2LQ3VlSJH1OrUtv
-         hv6Q==
+        bh=ko1VthjcyfR79xW/YsbT5XZVkRTYNPqjxLhhaYQtREk=;
+        b=GwGxEvrtwYBTKbFflo04VUxy4k5wnRHwGy90Y1emX09IGiC4303SeYyyKOGB4uJsLO
+         aJEgTyyOOjpt0NEaTvnfQdPpHaaNY7gyPuNVW0/ZMP3v/KVDa4FQ8JQ0h0KfTZXLrZ2p
+         vBs7/wJ/y9/C8Z8zemURfktQ6U43rdBVfKjRdVaLZuRbbVfdcGw7lIpP7izyp1hso5kC
+         ktSPinvB9XoL5nSSJQfEN3OrU/LUSKVlpF5EdnFbHAUSAR6J9vQxqYlK/ekXWKij2GrS
+         X5xjYnIiUKC/CRXROUVDiMM9y6VbhMLwfh1/1iNqa0wW2FYvVRHXdhUJYDqyezC7fzf+
+         hdFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=evITPnGUGjKqy7+ZODtVDh1tH0hDOAEmXJxC0AU42Mw=;
-        b=Fxb6w4DfA3ImgshbZgBeXF+ytJU8Sjb/CFsGDOL5f7r7SoqSor+R7wRmhSDtN+tuB9
-         6WSb1bqUdzZ7HYtgWQ1KWg9eRuwttx6aIoyZ3CJvTiXPI36bipSD3BX3/PR/ErbDNBnB
-         pREnarXxKm8gO8B+2Za68zSkOtCKsgrDw6AhuGzzru0dukwtHug3dDeytIeNVeLijnSs
-         t5AkJ7KmM4JsBao7MNi2x37dL6MikKpUdaVtpNlKhIBVR970qFBK8OiXIrT1pwPrEKuG
-         fAyIJbaM3sHvo4KQJz2OkOgZVXsbNH1MfZ50W0LuUIV1gfyRYjMroQUgrcbZeuNkkLbQ
-         7hsA==
-X-Gm-Message-State: AOAM531X/q4DVsz56BaxcfwiBrOBS2LsITYWfLawN/nnqoy7/v/Xbi5z
-	4752vxxF/9LYE5P8zKFyT3w9qeSo+0l33Q==
-X-Google-Smtp-Source: ABdhPJwQ8VBmkg216kZ5UXfk5MTFxD7Hc1o6tFxHW9e7idYfP1p9Ut4mxLcEwk7LxOLhmi+Az/q8tA==
-X-Received: by 2002:a17:902:bf41:: with SMTP id u1mr3195008pls.73.1598999779087;
-        Tue, 01 Sep 2020 15:36:19 -0700 (PDT)
+        bh=ko1VthjcyfR79xW/YsbT5XZVkRTYNPqjxLhhaYQtREk=;
+        b=VtgAmRKjMDMXjQ1UcsUcyGvl7N26mR7A9t16uKQDNHrzAtIEBSb5Ok45awMLKHWIhP
+         kGbP4y43lp3+PyMQFp487i4Diu5y1NBX0GA/ueJ6OOTffmXsJFGZ9TPHTZ/X4Iezm9IL
+         8aAQe5wDC3HlmAGBN7qaOADOxg/IbyYQQBfmcHWp3/0QVNFpdYmF0oGDQs3mmqEls/RP
+         GIHvl0fLx1OzfxOJ5Rzy8GNlU6NjRx3tBbEDPnvDUUwR0pM7dISsvVfGhNTPWHbLvZDv
+         5WnwZGwl2/k4Izv3SP63iMj0tP3IXuVab3/dyE/asCPKj1gjs377EEkwJZNxpI/nrIDI
+         YKcA==
+X-Gm-Message-State: AOAM530oCoXFRtiH/XdDZ4JSLxErs9hWTkqMTfobR89GFSMIsmpq3yzM
+	vvePzW69knOnDlpmp7a7EqOnEwOIndPOJg==
+X-Google-Smtp-Source: ABdhPJzM1t5dqugMarhSJYXERFCasWBfgECSQfa//HEZ7eX2IBqQ2WJygldnNPq2ApGb7npVhenvtQ==
+X-Received: by 2002:a65:68d6:: with SMTP id k22mr3250903pgt.136.1598999780191;
+        Tue, 01 Sep 2020 15:36:20 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e89d])
-        by smtp.gmail.com with ESMTPSA id q34sm3157964pgl.28.2020.09.01.15.36.17
+        by smtp.gmail.com with ESMTPSA id q34sm3157964pgl.28.2020.09.01.15.36.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Sep 2020 15:36:17 -0700 (PDT)
+        Tue, 01 Sep 2020 15:36:19 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 04/10] autossh: Depend on ssh instead of hardcoding openssh
-Date: Tue,  1 Sep 2020 15:36:06 -0700
-Message-Id: <20200901223612.1386026-4-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 05/10] quagga,pimd: Use update-alternatives for pimd
+Date: Tue,  1 Sep 2020 15:36:07 -0700
+Message-Id: <20200901223612.1386026-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200901223612.1386026-1-raj.khem@gmail.com>
 References: <20200901223612.1386026-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This helps it to use dropbear
+pimd is provided by both quagga and pimd, prefer quagga over pimd when
+both are in image
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-protocols/quagga/quagga.inc | 6 +++++-
+ meta-networking/recipes-support/pimd/pimd_2.3.2.bb  | 6 +++++-
+ 2 files changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb b/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb
-index a84fd9ac1a..9b69601e7b 100644
---- a/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb
-+++ b/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb
-@@ -8,7 +8,7 @@ SRC_URI = "https://www.harding.motd.ca/autossh/${BP}.tgz"
- SRC_URI[md5sum] = "2b804bc1bf6d2f2afaa526d02df7c0a2"
- SRC_URI[sha256sum] = "5fc3cee3361ca1615af862364c480593171d0c54ec156de79fc421e31ae21277"
+diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
+index 70c32b7a4e..11b7d576a0 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga.inc
++++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+@@ -40,7 +40,7 @@ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
+ PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
+ PACKAGECONFIG[pam] = "--with-libpam, --without-libpam, libpam"
  
--RDEPENDS_${PN} = "openssh"
-+RDEPENDS_${PN} = "ssh"
+-inherit autotools update-rc.d useradd systemd pkgconfig multilib_header
++inherit autotools update-rc.d useradd systemd pkgconfig multilib_header update-alternatives
  
- CFLAGS_prepend = "-I${WORKDIR}/build "
+ CFLAGS += "-fcommon"
  
+@@ -237,3 +237,7 @@ pkg_prerm_${PN}-ripngd () {
+ pkg_prerm_${PN}-isisd () {
+     ${sysconfdir}/init.d/quagga stop isisd
+ }
++
++ALTERNATIVE_${PN} = "pimd"
++ALTERNATIVE_LINK_NAME[pimd] = "${sbindir}/pimd"
++
+diff --git a/meta-networking/recipes-support/pimd/pimd_2.3.2.bb b/meta-networking/recipes-support/pimd/pimd_2.3.2.bb
+index 2faa7cb1ce..df9e85d7de 100644
+--- a/meta-networking/recipes-support/pimd/pimd_2.3.2.bb
++++ b/meta-networking/recipes-support/pimd/pimd_2.3.2.bb
+@@ -12,9 +12,13 @@ SRC_URI[sha256sum] = "c77a9812751f114490a28a6839b16aac8b020c8d9fd6aa22bf3880c054
+ 
+ EXTRA_OECONF_append_libc-musl = " --embedded-libc"
+ 
+-inherit autotools-brokensep
++inherit autotools-brokensep update-alternatives
+ 
+ do_configure() {
+     oe_runconf
+ }
+ 
++ALTERNATIVE_PRIORITY = "100"
++
++ALTERNATIVE_${PN} = "pimd"
++ALTERNATIVE_LINK_NAME[pimd] = "${sbindir}/pimd"
 -- 
 2.28.0
 
