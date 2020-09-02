@@ -1,17 +1,17 @@
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.84])
- by mx.groups.io with SMTP id smtpd.web12.10184.1599060529921133086
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.71])
+ by mx.groups.io with SMTP id smtpd.web11.10206.1599060540273383848
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Sep 2020 08:28:50 -0700
+ Wed, 02 Sep 2020 08:29:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Y2ESfsai;
- spf=pass (domain: windriver.com, ip: 40.107.236.84, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=miBku2s6;
+ spf=pass (domain: windriver.com, ip: 40.107.236.71, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VzcJZk9a/XjvdiwIimb/XEotZLIpQU61SltSMvBYXQH5jYzGuisBulXnFICxq43ktnYY2neblEBG87rutu3+WYLlowHAp4f0gkR/9ZPTzUP868eA7lMEVw226BAFQRUQnsNz152KB4/n3fKfFrBBtQSFGwa+M1T3tdGqi8abrej+AWZ75yMFnb18IlagBGAcaNrPI8z5XyvQ95nFlKqA+74UEi8cq8usenWpQtpKWsNZG1rEDAcPW+uTY8Gw/92kTzER48MyZE5yMrW1Lkaq86OqAH5oQent8kyl59Plvv/Ccu+4A/CswA6VeYSgsmBo3ATJbSrTGaz02TTqqKw8Ow==
+ b=QZsmeLWnZaEDWTuUvADXq0DbspiHa7hf4bqXSLyUd7FPyY9no6pCHN6VaGo/ndrAO3BdU7ZLKtSG+X6rEECuT4BvknnOwabS6zB4jcUqvhL7dVPrWPtlf/GXIS3Jdxt4w8D5Et7ZNnKqC/TJvf1opvZhBV1TwLbXahnLEDHgXn/aoAZ9Y0HW92vSxTfZ4e/oHkuhDRXbp27sfeBNQRcnmp0k4kAsHRv1vLhDgyE8zYI8GAm3CwIv579v7TnskCs61vJ9tmVnxAsLvuXJFTByIkj75P3Guaj7wferYSTu7WSqxX0Q6/LbXi2OOdr0cj2/fGPYWk2uCXw1UbE7XvkZgQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Dl799qTkR8wskQ0oIT6uz0FU37glKJcoQ7+hIJJU4qk=;
- b=kJcj6srFPa+VV5pMbYf5ESZRknQ4EeJ8vaZPsIauFWjGOBTHc3Xo/nHVqjEucwn0Fz7HhVRz/M8i+z2UhWzNEoI/alrN4lwBAXBFUG4K/fqf2+Zh/5eb5cwWFRwHZZOiAti5ROp2Y0kipWyWzduosTar0Vlye/Fgnn17MJyk2qYBxVbQSEE87Z4ooV4SUTJ80lbgXWee0bZLzUI8XB2g2QI+c8O3tmva+razmCxG+mpMHizyHxIumiYOKu77f3EJbII2iAZ7ISw5xTaujOHwwO6rWoGnqPQ5VWZqy1beYCoiCZrYpNzBNETLnNBhmydxY2ftq9pS/BgUkGAbZnXO4Q==
+ bh=xwgYFGjP4/ZHjpfAnI71ehpT0eF5FTleo4hu+yzAuzw=;
+ b=FAY/TcUs+tupNtCCAkmtlM+pN9IjIggrSRU2TLyxEP/3HL81p+BrGcc+h72wNVJC3Snh3MdeMgyTInQr+unAoIhQY2j/3tQewTdz8jeb3LmGMfcRxCy0iIf7X3RuoswahOftScEs0nYAL/iPiBuGnNU7hmnBHDTArtB3M31mVVmxBZC6u/XEUIZ7BRqe8u0KqInmpx0aQTqSTBpS3Oqo5Qm8/CUbqIIluHwO7lVx9hk9IkeC4dM7D5zOKp7Oh+0QZDUX/GOlZe6kOjpQ0GtrkvO4b54rW6Sw9ohmfPjUl4KlPXmVAuTqgVHpY/XMiDuX5Wd2vTsAcffO6cCtk5JfGA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Dl799qTkR8wskQ0oIT6uz0FU37glKJcoQ7+hIJJU4qk=;
- b=Y2ESfsaiDczomPHt70iVSFAhG4SHyjNAD6tVcJp/psaZf0Qj1dbooU1T7CI7WQlMCTI8OE3MANf8Hq+HYcvJLBPJGxeD2fDKFzS8fs8ffp5z5X3RhsvV8EBaClwwViKwq/u3e88TRC1aMpJrxC6cGpaQNRPFTQyqcKlHpx+OhZ0=
+ bh=xwgYFGjP4/ZHjpfAnI71ehpT0eF5FTleo4hu+yzAuzw=;
+ b=miBku2s65/a4KP++oQd9D/6sMRxIk+1XjToqaIVzQPXl037JG51P5+AoWdq+5dqgrKov1Y10HU9T0Z0J/n4Cjt4VttBhxj2MltuVgOjkM4vvpMfmvyHAngzGlSXaFUh3Ap7EuXZJ2rPEW5S0Qy+73A7kVEOUsx+RRHb2my14bbI=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,102 +28,101 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB3030.namprd11.prod.outlook.com (2603:10b6:a03:87::27) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.21; Wed, 2 Sep
- 2020 15:28:48 +0000
+ 2020 15:28:58 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8%7]) with mapi id 15.20.3348.015; Wed, 2 Sep 2020
- 15:28:48 +0000
-Subject: Re: [oe] [meta-python][PATCH 01/10] python3-cmd2: Upgrade 1.3.5 -> 1.3.8
+ 15:28:58 +0000
+Subject: Re: [oe] [meta-python][PATCH 02/10] python3-sh: Upgrade 1.13.1 -> 1.14.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200831070318.6573-1-leon.anavi@konsulko.com>
+ <20200831070318.6573-2-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <d4219d30-6bec-79cb-b8d7-5412c93a13cb@windriver.com>
-Date: Wed, 2 Sep 2020 11:28:45 -0400
+Message-ID: <8498403e-7490-7d3a-6a4c-a60ce73caa93@windriver.com>
+Date: Wed, 2 Sep 2020 11:28:56 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
-In-Reply-To: <20200831070318.6573-1-leon.anavi@konsulko.com>
+In-Reply-To: <20200831070318.6573-2-leon.anavi@konsulko.com>
 X-ClientProxiedBy: YT1PR01CA0010.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::23)
  To BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from 255.255.255.255 (255.255.255.255) by YT1PR01CA0010.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::23) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3348.15 via Frontend Transport; Wed, 2 Sep 2020 15:28:47 +0000
+Received: from 255.255.255.255 (255.255.255.255) by YT1PR01CA0010.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::23) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3348.15 via Frontend Transport; Wed, 2 Sep 2020 15:28:58 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 98c1d732-28e9-4ae8-cd5b-08d84f54e347
+X-MS-Office365-Filtering-Correlation-Id: 6f90c7b7-ab16-4796-0074-08d84f54e968
 X-MS-TrafficTypeDiagnostic: BYAPR11MB3030:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB3030D05939F5F3E3F6E5EB189F2F0@BYAPR11MB3030.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:923;
+	<BYAPR11MB303036442641B94BB636D5B89F2F0@BYAPR11MB3030.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:635;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	XHWOlD4hhNW0mnIp8EXZb5jFRxVBwkbNmz7ufpCycdejUvGZDh9Cr9+WK5xG9yWeP/n17ot2G61tUGC8Y5swWliK05t3apVZxIWQQjqhYViC0D45sO4IAC4H1ci7Z3KX3v3k7hMEWeqPRyrU/nPQIF+lIrTSHmsKez/4X3t/vlyyrl/3vxqEXXFXZyJPTtOhH83MuN4oUIH/QzXJixxCRZvPfCe/lTqf/Ku4lPOi1bt89Jown2ddEdw5EWQVQXQKImNNzE8c7TMBzCiAOdwdM/GRwCpAzc6G7AS+6m63Wh0nnC6/vsPGE67puyYtc7TneIXCXh6OU/mVb2xNJMujTw5GFJSYe2OBM3e/uYcsSA3aRQ9y+ALa/doblpDBYQxMvMcF6Ps65Mvbg7iO5ZRgyeE7b79n1fwtIYgioMRCDaCJg2lwGuf4EmHLoATt7yMlg8GHv/fhpalRSbBgASbX4Q==
+	hb43swXzLxjot/S8H5dNNr+XHCz/LPjH/+d9/2lRKaYP4SENIphi6z4YGeSXFAfuYWYFESnLdf8fZ6wUAsJ+fDWltGR4IGMoFV/fR5Klqz5ZgOXRvYTsok1xeCwEHQRzp6k7WL8g/E9Gc89VSBK6qMd43FokQL8egpgGyRzHhnXQiaoYIrb0gAH6RSbwEpMUJtz3bBjNUmm4n7Ei5WIZXyRsHePye7fJX2br0VRodyuTbXCOGqolyqDi4RgM61z20VSCZP4y9rOCk+DiXxp3Oyd1dfnc8uzKDIKezTA8HNkusIy3oJtjDGcfQILTVnVAx4sUXMukwPYu6P1/py0g9yHbSVfu64U+jgFJrwlWQxHDNTG87+w/4VgMn1bm4DRiCemA5yLcU+125tRZjQtwP+ZuuBHlsVXDDUK/wji6VLcp3wyDa+pbWR18nMK8YPCFfmivjXRoKm/BXM0+NSXTiw==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(39850400004)(366004)(376002)(346002)(6486002)(316002)(966005)(31686004)(86362001)(5660300002)(16576012)(2906002)(2616005)(52116002)(66476007)(8936002)(478600001)(186003)(66946007)(44832011)(36756003)(8676002)(26005)(53546011)(956004)(83380400001)(166002)(66556008)(31696002)(33964004)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	N3GTdOTRwSZMcOnVmhv61wqjrOtNh5/yWxZ21TRUHUpmOerwc8XhxqYJmyBCVhHwzKUbzbC/MTxpTz7Gf3OzeJCaG9U8f7zwr8VkrBf1INnnReMyMfy2zqc7rC06qNtR10lL1yNpPddNTwUlmELg+2ViQ2OL6/UJsWbvhCFfMYaMJWskslM0ICApVtzL0Tn9XtJksiuYcfa/mDVNYJ+iZdtHBI36NtoYYSIB0YaGKjxdiIR+0mhbrT7OeyswmrFKOZIbFx40kw3VxxcpUu34unB71f2pjLcTApAP7lMwZB53q1/3FMGtbXjrJ/6g3mhngHm7CLQG7TvCUjfO1ud0YtztJP3V6LES1GT7rSQqNAqxGGdcNIf3MZ3OtsNN8mklbPKSykFMdpBiEWXgC4ezRjqqPye5NFuNNYavcs3HzbRtyfKHIkFF9q6XEcDG8urAVDc43tBJhcxHumy26ESJ/2jwDH9F7I5V7kWUWufohah7hV+lTF7GQccs2L39cVsDY8IWoaDpiimIASqZaDfcN2jsKDHbUyjzV3FzN2zZKTh2FFZhY1TgQcABfqeWUGoMgbsv/W4ICSzJiOlAxlQahu2vFMZ+w6Fpb7Ifjtm8JV0X2SShfhpCZqUd13p3wrOb/jE/iTx4nz1PaR860GHzGw==
+	SEWrytf+X1wjJjfUYcXR0gfMrgi1Lbm5eLViz8kMxu/lTwGivW6RLvLwJBH3wSZRS7Yyhdb8GTfnnxdG/ulgh27U4cs1N9Ap7qMT8JmMyxb10oOo8g0GRS1XjF4/1g/xM4LWRaxfVYWYprAYvAY54nNW33lCuEWd7hnEUw2ERzryc1u6wqyUgO5p9SuBIllxWJmEJzMa5/pqv3FNu8Vs+ENyPvXZIuupgBIzU8ELsc+ZBsr9G6E0GzpttPUSbcpF0WQzjZFDbwo26Stq2qbrg6IsHBRH2OhPraQpXoRdCwhFBEsBKsbCDOcP1SmBQw8uYzF9QMR/gsAGMPAe6BjsFTa7spLVag3CjSVK7GjECxMfLBlJcmOt+V8a7lN0qNSI0M9tJKt/I3yT8WObvtpZxwWwf2DtmMyvYnmYpdqHgZNM+tcCSbzB+QR/unF0xImX4qsHqbYhQnop0NCHWti31SzNYiZmxfZIasLM2vvn9L3VgaZsxWu+8GxyElV5XW3IBLqEPAwO9f6Up/dupQgTJEt2Tk1VNRCfLlB8r5hiBpLsLC91CXtHfBrxKZJCKtjRefzWCzYbsWplEfRDKlBfYB1toNFOS/PcItAppbYaFH8wHzsOQYEBUd3h/bFHDEVUz2oOSWpoYKut30Y4LdLV+Q==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 98c1d732-28e9-4ae8-cd5b-08d84f54e347
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6f90c7b7-ab16-4796-0074-08d84f54e968
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2020 15:28:48.4824
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2020 15:28:58.7767
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: C/n2YWL5sUjQHlp7v4n30urdl71FMc1es5sxco8qbPVbmAgyhVGwwXuyT2eR3vzPLyx8LwUILCUInizBAdtM94EF6o740xvBUgvwcmA6uzI=
+X-MS-Exchange-CrossTenant-UserPrincipalName: OckqlJ8RyjPKnkKWsc88xeDPawnuf/LsiAl8vpVSfj2eNsykZrvHf6x5dFWO3ggiDH6XzPrqZ8zfBJiLDVpX8Lp/rgvZ3A+EvInympIKsoQ=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3030
 Content-Type: multipart/alternative;
- boundary="------------0F8CE0DF055A04A46FBEA51E"
+ boundary="------------D808FE95017D3C615611F161"
 Content-Language: en-US
 
---------------0F8CE0DF055A04A46FBEA51E
+--------------D808FE95017D3C615611F161
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 8/31/20 3:03 AM, Leon Anavi wrote:
-> Upgrade to release 1.3.8:
+> Upgrade to release 1.14.0:
 >
-> - Fixed issue where subcommand added with
->    @as_subcommand_to decorator did not display help when called
->    with -h/--help.
-> - add_help=False no longer has to be passed to parsers used in
->    @as_subcommand_to decorator. Only pass this if your subcommand
->    should not have the -h/--help help option (as stated in argparse
->    documentation).
+> - _env now more lenient in accepting dictionary-like objects
+> - None and False arguments now do not pass through to underlying
+>    command
+> - Implemented find_spec on the fancy importer, which fixes some
+>    Python3.4+ issues
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-cmd2_1.3.5.bb => python3-cmd2_1.3.8.bb}   | 4 ++--
+>   .../python/{python3-sh_1.13.1.bb => python3-sh_1.14.0.bb}     | 4 ++--
 >   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.5.bb => python3-cmd2_1.3.8.bb} (75%)
+>   rename meta-python/recipes-devtools/python/{python3-sh_1.13.1.bb => python3-sh_1.14.0.bb} (78%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.5.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.3.8.bb
-> similarity index 75%
-> rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.5.bb
-> rename to meta-python/recipes-devtools/python/python3-cmd2_1.3.8.bb
-> index c0daec42a..9fc7b95e2 100644
-> --- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.5.bb
-> +++ b/meta-python/recipes-devtools/python/python3-cmd2_1.3.8.bb
-> @@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def"
+> diff --git a/meta-python/recipes-devtools/python/python3-sh_1.13.1.bb b/meta-python/recipes-devtools/python/python3-sh_1.14.0.bb
+> similarity index 78%
+> rename from meta-python/recipes-devtools/python/python3-sh_1.13.1.bb
+> rename to meta-python/recipes-devtools/python/python3-sh_1.14.0.bb
+> index 2a6d9bcc6..7724f4be0 100644
+> --- a/meta-python/recipes-devtools/python/python3-sh_1.13.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-sh_1.14.0.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/amoffat/sh"
+>   LICENSE = "MIT"
+>   LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5317094292296f03405f59ae5f6544b6"
 >   
->   DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+> -SRC_URI[md5sum] = "7e3dd3a6b49c06db93746994a68cb8cf"
+> -SRC_URI[sha256sum] = "97a3d2205e3c6a842d87ebbc9ae93acae5a352b1bc4609b428d0fd5bb9e286a3"
+> +SRC_URI[md5sum] = "4cbbcb85c081d78f4b0f00d634db9bb9"
+> +SRC_URI[sha256sum] = "05c7e520cdf70f70a7228a03b589da9f96c6e0d06fc487ab21fc62b26a592e59"
 >   
-> -SRC_URI[md5sum] = "a4a35ebe43179bf071430e2e8c7963e7"
-> -SRC_URI[sha256sum] = "d9ef1d657e98b1c6898bca75019fd661db410f81febe6e1aedded9667f39f37e"
-> +SRC_URI[md5sum] = "255ba85d8aaa9f00d84917be38b11a86"
-> +SRC_URI[sha256sum] = "b6f6254def8ba479088702f97bca1b999c12e0c38ac5d82dc50a44db93c7108c"
->   
->   inherit pypi setuptools3
+>   PYPI_PACKAGE = "sh"
 >   
 >
 > 
 
---------------0F8CE0DF055A04A46FBEA51E
+--------------D808FE95017D3C615611F161
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -135,44 +134,42 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 8/31/20 3:03 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200831070318.6573-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.3.8:
+    <blockquote type="cite" cite="mid:20200831070318.6573-2-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.14.0:
 
-- Fixed issue where subcommand added with
-  @as_subcommand_to decorator did not display help when called
-  with -h/--help.
-- add_help=False no longer has to be passed to parsers used in
-  @as_subcommand_to decorator. Only pass this if your subcommand
-  should not have the -h/--help help option (as stated in argparse
-  documentation).
+- _env now more lenient in accepting dictionary-like objects
+- None and False arguments now do not pass through to underlying
+  command
+- Implemented find_spec on the fancy importer, which fixes some
+  Python3.4+ issues
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200831070318.6573-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200831070318.6573-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-cmd2_1.3.5.bb =&gt; python3-cmd2_1.3.8.bb}   | 4 ++--
+ .../python/{python3-sh_1.13.1.bb =&gt; python3-sh_1.14.0.bb}     | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.5.bb =&gt; python3-cmd2_1.3.8.bb} (75%)
+ rename meta-python/recipes-devtools/python/{python3-sh_1.13.1.bb =&gt; python3-sh_1.14.0.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.5.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.3.8.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.5.bb
-rename to meta-python/recipes-devtools/python/python3-cmd2_1.3.8.bb
-index c0daec42a..9fc7b95e2 100644
---- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-cmd2_1.3.8.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def">&quot;file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-sh_1.13.1.bb b/meta-python/recipes-devtools/python/python3-sh_1.14.0.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-sh_1.13.1.bb
+rename to meta-python/recipes-devtools/python/python3-sh_1.14.0.bb
+index 2a6d9bcc6..7724f4be0 100644
+--- a/meta-python/recipes-devtools/python/python3-sh_1.13.1.bb
++++ b/meta-python/recipes-devtools/python/python3-sh_1.14.0.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/amoffat/sh">&quot;https://github.com/amoffat/sh&quot;</a>
+ LICENSE = &quot;MIT&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=5317094292296f03405f59ae5f6544b6">&quot;file://LICENSE.txt;md5=5317094292296f03405f59ae5f6544b6&quot;</a>
  
- DEPENDS += &quot;${PYTHON_PN}-setuptools-scm-native&quot;
+-SRC_URI[md5sum] = &quot;7e3dd3a6b49c06db93746994a68cb8cf&quot;
+-SRC_URI[sha256sum] = &quot;97a3d2205e3c6a842d87ebbc9ae93acae5a352b1bc4609b428d0fd5bb9e286a3&quot;
++SRC_URI[md5sum] = &quot;4cbbcb85c081d78f4b0f00d634db9bb9&quot;
++SRC_URI[sha256sum] = &quot;05c7e520cdf70f70a7228a03b589da9f96c6e0d06fc487ab21fc62b26a592e59&quot;
  
--SRC_URI[md5sum] = &quot;a4a35ebe43179bf071430e2e8c7963e7&quot;
--SRC_URI[sha256sum] = &quot;d9ef1d657e98b1c6898bca75019fd661db410f81febe6e1aedded9667f39f37e&quot;
-+SRC_URI[md5sum] = &quot;255ba85d8aaa9f00d84917be38b11a86&quot;
-+SRC_URI[sha256sum] = &quot;b6f6254def8ba479088702f97bca1b999c12e0c38ac5d82dc50a44db93c7108c&quot;
- 
- inherit pypi setuptools3
+ PYPI_PACKAGE = &quot;sh&quot;
  
 </pre>
       <br>
@@ -183,4 +180,4 @@ index c0daec42a..9fc7b95e2 100644
   </body>
 </html>
 
---------------0F8CE0DF055A04A46FBEA51E--
+--------------D808FE95017D3C615611F161--
