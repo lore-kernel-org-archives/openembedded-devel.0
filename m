@@ -1,105 +1,99 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.5171.1599046107205540645
+Received: from mail-ej1-f66.google.com (mail-ej1-f66.google.com [209.85.218.66])
+ by mx.groups.io with SMTP id smtpd.web11.6110.1599049522980839736
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Sep 2020 04:28:27 -0700
+ Wed, 02 Sep 2020 05:25:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=46718 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kDQwC-0000FC-VN; Wed, 02 Sep 2020 14:28:25 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 7/7] python3-gevent: Upgrade 1.4.0 -> 20.6.2
-Date: Wed,  2 Sep 2020 14:28:08 +0300
-Message-Id: <20200902112808.18547-7-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200902112808.18547-1-leon.anavi@konsulko.com>
-References: <20200902112808.18547-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=pass header.i=@kynetics-com.20150623.gappssmtp.com header.s=20150623 header.b=RE1yeo9M;
+ spf=neutral (domain: kynetics.com, ip: 209.85.218.66, mailfrom: diego.rondini@kynetics.com)
+Received: by mail-ej1-f66.google.com with SMTP id z22so6335851ejl.7
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Sep 2020 05:25:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=kynetics-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=u3RvsvSs47T3GUbelIPNnlTENmvBenSHZ/33EP24+QA=;
+        b=RE1yeo9MHYN7ofOifv9eSD32Gb0kvbc40xI0NOAzcW1ggAIAdWz8FSUfsMyne+wHKD
+         fuVxcNME+rB3vSio+eAJ9r3u01LwnSv27gw09uQpFwQnJwvln7ElrOmghPZG468EDlp2
+         AP6MM7fsCcJBKfx4mVpti9Yl8jOJ0m+TzvCBd02d1PKsegcs7q2DiezlIL6qUkbquLdL
+         1WwI878Emiw9gQpUU2VUsY+Y591TGTlLcHl7TVvmELtRYjeMtfLeN2eN6AOf+5VzpAff
+         0XBKLWfq1h4h2DHxDoDRdKISSiQwGpbq4i6ZKdZRPCuKT1a4PGfd56vBIAfV3zFbYZ9n
+         bW+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=u3RvsvSs47T3GUbelIPNnlTENmvBenSHZ/33EP24+QA=;
+        b=rTb70MNwl8Tk2RCc4xsiYkl4j7jKKybgD2fAhYmb3BqKOs5g2Bgm2WCOf1PWN5qLDC
+         lIj7HG9yeRpe94WAwjZll3vaQIBcN2MfDjnXjnUj7K9U2l+FmqTMa3FsLHGKALNclLPi
+         6vLFqjkPz22E6tHvIMkeQC2ccyIgtjhIzIzukAan4HxUOZDU+o3bsM7jl1lnWyy/kT2Z
+         7QDnLgx54rceaZu6+dz7f9e/KdGwOJsp2qJjWW8xSl0zmNXpsw4teVPnbOCF3Z6sx58g
+         WceC6F5NYLJR8iN04k1X94J5Cvc5u3n11DJdOUzE/TO0AyxR4zfrz8QWgiqj+U++0TH1
+         dRIg==
+X-Gm-Message-State: AOAM5301iMNpLoR95qf2EViL/s4IT2RelOtBWsWWAu8IwCiSbHo0f21K
+	ZiIVLYZJpizpjceUR4z++jcWGxySCVt/MMQiku7U5g==
+X-Google-Smtp-Source: ABdhPJxop5XgtELTUYfW1cDPlpYr3aKlaQ9limxUBv8g+MMXMhoKurFIKF/C+cbUwTR3vVirAZ0jBl4Zm0PEJSAPPcU=
+X-Received: by 2002:a17:906:f8d1:: with SMTP id lh17mr5857138ejb.409.1599049521207;
+ Wed, 02 Sep 2020 05:25:21 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200825154524.188696-1-diego.rondini@kynetics.com>
+ <CA+chaQdtuKCqc31WB1s=-K29kv-4G2fh9g87PpBzBywxE6djRQ@mail.gmail.com>
+ <CAMfw5YowytuBeL3hr_82NEwrCTJjSqvJO8N-8dFVvYCH6cDHiw@mail.gmail.com>
+ <CA+chaQf0ZC1pts6MtZzsu+bfxzppnzjaBY=ENq3sQbazpgosVw@mail.gmail.com>
+ <CAMKF1sqQGujU46Xk1Pn47uapZDMW9kigK_9CUqwaENCNkKZYGw@mail.gmail.com> <CAMfw5YoY0Yty2sWQjNa-zZpTh0-UfC5gDrSSyLJ3zaYxV6q0pw@mail.gmail.com>
+In-Reply-To: <CAMfw5YoY0Yty2sWQjNa-zZpTh0-UfC5gDrSSyLJ3zaYxV6q0pw@mail.gmail.com>
+From: "Diego" <diego.rondini@kynetics.com>
+Date: Wed, 2 Sep 2020 14:25:10 +0200
+Message-ID: <CAMfw5Yo0iRaV8-cas1MPwRmCD6SWR66k-8yph5mVgnQM9GieDw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] libeigen: update SRC_URI to download from gitlab
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Martin Jansa <Martin.Jansa@gmail.com>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Upgrade to release 20.6.2:
+Hi,
 
-- It is now possible to build and use the embedded libuv on a
-  Cygwin platform.
-- Bug fix: relax the version constraint for psutil on PyPy.
-- The include directories used to compile the C extensions have
-  been tweaked with the intent of making it easier to use older
-  debug versions of Python.
+On Wed, Aug 26, 2020 at 9:16 AM Diego Rondini
+<diego.rondini@kynetics.com> wrote:
+>
+> Hi Khem,
+>
+> On Tue, Aug 25, 2020 at 8:40 PM Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > On Tue, Aug 25, 2020 at 10:59 AM Martin Jansa <Martin.Jansa@gmail.com> wrote:
+> > >
+> > > OK, I've overlooked that it's from gitlab, but are you sure that gitlab archives aren't re-generated from time to time like the github archives are?
+> > >
+> > > Or are you sure that https://gitlab.com/libeigen/eigen/-/releases are developer uploaded archives? It looks like gitlab creates them automatically:
+> > > https://docs.gitlab.com/ee/user/project/releases/
+> > > like github does with tag archives.
+> > >
+> >
+> > while it fixes the issue it is trying to fix, it would be better to
+> > fix the non-deterministic archive issue as well while here, I dont
+> > know if gitlab's archiving is reproducible perhaps a question for
+> > gitlab, but it would be ok to switch to using git fetcher to avoid
+> > that suspicion. What do you think?
+>
+> I've posted the question, so we get an answer for all the other gitlab
+> projects that are out there:
+> https://forum.gitlab.com/t/gitlab-release-tarball-stability/41888
+>
+> Let's see what the answer is.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- ...etup.py-do-not-query-for-include-dir.patch | 26 -------------------
- ...vent_1.4.0.bb => python3-gevent_20.6.2.bb} |  5 ++--
- 2 files changed, 2 insertions(+), 29 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-gevent/0002-setup.py-do-not-query-for-include-dir.patch
- rename meta-python/recipes-devtools/python/{python3-gevent_1.4.0.bb => python3-gevent_20.6.2.bb} (85%)
+So we have an initial answer:
+https://forum.gitlab.com/t/gitlab-release-tarball-stability/41888/3?u=diegorondini
 
-diff --git a/meta-python/recipes-devtools/python/python-gevent/0002-setup.py-do-not-query-for-include-dir.patch b/meta-python/recipes-devtools/python/python-gevent/0002-setup.py-do-not-query-for-include-dir.patch
-deleted file mode 100644
-index 7536b71a6..000000000
---- a/meta-python/recipes-devtools/python/python-gevent/0002-setup.py-do-not-query-for-include-dir.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From a53ed6b2f967a5f95e69d51cad3f8c120d7df65b Mon Sep 17 00:00:00 2001
--From: Alexander Kanavin <alex.kanavin@gmail.com>
--Date: Thu, 7 Feb 2019 15:21:15 +0100
--Subject: [PATCH] setup.py: do not query for include dir
--
--As this will return the native python directory erroneously.
--
--Upstream-Status: Inappropriate [oe-core specific]
--Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-----
-- setup.py | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/setup.py b/setup.py
--index 86d6c5a..5d22291 100755
----- a/setup.py
--+++ b/setup.py
--@@ -52,7 +52,7 @@ from _setupares import ARES
-- # Get access to the greenlet header file.
-- # The sysconfig dir is not enough if we're in a virtualenv
-- # See https://github.com/pypa/pip/issues/4610
---include_dirs = [sysconfig.get_path("include")]
--+include_dirs = []
-- venv_include_dir = os.path.join(sys.prefix, 'include', 'site',
--                                 'python' + sysconfig.get_python_version())
-- venv_include_dir = os.path.abspath(venv_include_dir)
-diff --git a/meta-python/recipes-devtools/python/python3-gevent_1.4.0.bb b/meta-python/recipes-devtools/python/python3-gevent_20.6.2.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-gevent_1.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-gevent_20.6.2.bb
-index e42980d38..dbeb3a60c 100644
---- a/meta-python/recipes-devtools/python/python3-gevent_1.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-gevent_20.6.2.bb
-@@ -18,11 +18,10 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/python-gevent:"
- 
- SRC_URI_append = " \
-     file://libev-conf.patch;patch=1;pnum=1 \
--    file://0002-setup.py-do-not-query-for-include-dir.patch \
- "
- 
--SRC_URI[md5sum] = "6b9dd98917061803d9158e5258b8f412"
--SRC_URI[sha256sum] = "1eb7fa3b9bd9174dfe9c3b59b7a09b768ecd496debfc4976a9530a3e15c990d1"
-+SRC_URI[md5sum] = "27b07fe9fdfff2d75e3d140e890489b1"
-+SRC_URI[sha256sum] = "a23c2abf08e851c988723f6a2996d495f513a2c0dc70f9956af03af8debdb5d1"
- 
- # The python-gevent has no autoreconf ability
- # and the logic for detecting a cross compile is flawed
--- 
-2.17.1
+The summary is: tarballs can be regenerated, but they are regenerated
+identical by git archive according to the manual.
+The use of git archive in the source code is not guaranteed in the
+future as at the moment there is no immutability test in the gitaly
+service.
 
+Martin, Khem, what do you suggest to do?
+
+Regards,
+Diego Rondini
+Sr. Embedded Engineer
+
+Kynetics
+www.kynetics.com
