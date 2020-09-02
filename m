@@ -1,17 +1,17 @@
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com (NAM11-CO1-obe.outbound.protection.outlook.com [40.107.220.42])
- by mx.groups.io with SMTP id smtpd.web10.10319.1599060420881682300
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.69])
+ by mx.groups.io with SMTP id smtpd.web11.10158.1599060433170816821
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Sep 2020 08:27:01 -0700
+ Wed, 02 Sep 2020 08:27:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=ZMEjWpbv;
- spf=pass (domain: windriver.com, ip: 40.107.220.42, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=ZWihgC6G;
+ spf=pass (domain: windriver.com, ip: 40.107.92.69, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=khkmgzLo+vXtunjFkA2JJgYzi1PsGrM6R14KgSasE3V5/+U/TCQtQT3UioA9L4AyYPOaAM8S550f7OZcEPIsNqwEIB2NJIgkx27YG5Q4enxilnv1kBAWJIcvi7pJhBWFQ1bkPhBZ1NM8WfqdPdXDBoa3VC4ZdLrlc5etlBFRZjsvyheHF1uqwe/M7gx/7lQe4MfmYdrmD5eGMMPpbUcF68l3Lr1paKjgbbAISYGhIFE9EP1He6ixcOf603onFo6eSCNInxefeeifAjT+nGMYyzeYQFi9ZTBhb9JDhuhzOGtd5h4JYNuNSDJ+I+u2c/5MVvqGCG6bIZVX4cQOdVxDvg==
+ b=Q7VNwfmuMPrT2uPTkxFEfxfI9BiGoBg/HKz/ghTCjw1sjAZOAI72tdEWRocwNIaUdMibQTeMl7KqU5gCadUK8hPiZZPngzwyQQhj9VWP/xbdi2hcsIuHWx2jKXAiUs6d0QwPGV6icuDbo2w72gKfxg3dW34+BgX0bhVdW32QpYI+4bGu1D3rrKbfIHCVbkDXpdENQa6IIWvl0qxBqwXLlvWqd0CkEigltAENmOj771wNguzQTNxOT55vYtV8EREUYHJJHxCrKfT5V7uAmnkpGQ2CoQFKSOIJnQohbsQY8iBK6csKjeyPn5XfVWFqiQe4p4YNkN5/4+JUa41tYazW8w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Ngd2vBem8/to6HFYT7qT5GHES4e+oriPvQiL7rv6mpw=;
- b=LHhO+qZrW4wimXCxAjH6xl1p9xIFNXZJWZeMaVS5bjwdsKQfmVK3d/2WZcCBhFsbRjZfW7MvR8uj1SIbRWgMLc3Ep9w+FPuyVe2WYIbphhFLRIIKymiBlmtmNcnBupp0IADb82nIqIxVu+50GxPxDdzn8WNolpc6M5fILhbbzsEpiCZOOcPo5wfxlFZokE6UTYsaDelLXOxAjpDY+lFwLAzDkDXU5IW9njydp/wqozGzoi0W3pLK6JkhalFuuEX09bIvORdYwvjHFdaj0FA3DhhFediijLVXQn2VV+SqcKG76Ai3ZcgC30X0C/YFTuMHgF1VtJ+eEYyfCjYp/wLitQ==
+ bh=MBbNIckGeJXpP7VwqhvBg0h1p279fm13aW+D+pBtuaw=;
+ b=iKeD1fzQyasUjOAXXzOZHsDKmjDmNIAfaC/l0jr70760+HNDIDNFQqPGAgJPJSdGOFb7VQ8z5cyxUp8cpT2fwgKda7j5erkb6wk++rFJXF8cRlgYJnShkcMKslXjlTpFAUbIrAFMyc4yh128whhCjuzZSqONRsiiEcd+WwjyDDqlQaVuXqlTN+g9WNfWzk356k6K8xRzrwelxKUrdzi2E5hxNwOo6EHF1kQu/lhAwG9JcMZItEgjbtpuPdYH+8urx+kWNFtb4Lyc2tcaTTx0d/ikRjDBk4FWJERKodzDMp8F/XvnjiIyiAIVPTmvxCF2Kg/QQPGRyv1oqIGSxcsYLA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,122 +19,108 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Ngd2vBem8/to6HFYT7qT5GHES4e+oriPvQiL7rv6mpw=;
- b=ZMEjWpbvuLK9C9WMBDQqqRxhU/u05IzfO0y5XSoUG+hX4/N8I7D+snRnmTGznWjadv2o93VmBD/HxXgl3LFiNefGAtB9X4AWm1S0qRLt+OLCnWQ7xdzsTEybpgarY5PO/oHaRRYjDBN5aecgt3wmJbfLMnXG5vUIJMXJHbTbVTw=
+ bh=MBbNIckGeJXpP7VwqhvBg0h1p279fm13aW+D+pBtuaw=;
+ b=ZWihgC6GNBEmSBU2au+GobaIfRfyV3P1Rzzsgun4YIaxzvwlWi7Y/AkLbYoHB+5P3zS+5C31F4gKogn6CTpL2f0ifGZ/qq02lzmtsythYTsTliW3FFiqwWZVlQSVcwXHQYDRt/YVKg960SLUIazN5YeknUJUJTAtVpe4HTa+hI4=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB3030.namprd11.prod.outlook.com (2603:10b6:a03:87::27) with
+ by BYAPR11MB3352.namprd11.prod.outlook.com (2603:10b6:a03:1d::26) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.21; Wed, 2 Sep
- 2020 15:26:58 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.19; Wed, 2 Sep
+ 2020 15:27:11 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8%7]) with mapi id 15.20.3348.015; Wed, 2 Sep 2020
- 15:26:58 +0000
-Subject: Re: [oe] [meta-python][PATCH 1/5] python3-ecdsa: Upgrade 0.15 -> 0.16.0
+ 15:27:11 +0000
+Subject: Re: [oe] [meta-python][PATCH 2/5] python3-luma-core: Upgrade 1.15.0 -> 1.16.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200828135131.26321-1-leon.anavi@konsulko.com>
+ <20200828135131.26321-2-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <1e82cf4d-7725-0df1-10f8-0b52c981ae3d@windriver.com>
-Date: Wed, 2 Sep 2020 11:26:55 -0400
+Message-ID: <d71f81c9-af2a-a774-59d3-4d45f6c49877@windriver.com>
+Date: Wed, 2 Sep 2020 11:27:09 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
-In-Reply-To: <20200828135131.26321-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTXPR0101CA0059.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:1::36) To BY5PR11MB3909.namprd11.prod.outlook.com
+In-Reply-To: <20200828135131.26321-2-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTXPR0101CA0065.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:1::42) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from 255.255.255.255 (255.255.255.255) by YTXPR0101CA0059.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:1::36) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3348.15 via Frontend Transport; Wed, 2 Sep 2020 15:26:57 +0000
+Received: from 255.255.255.255 (255.255.255.255) by YTXPR0101CA0065.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:1::42) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3348.15 via Frontend Transport; Wed, 2 Sep 2020 15:27:10 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a3dd60d8-2a05-44c8-b55d-08d84f54a17f
-X-MS-TrafficTypeDiagnostic: BYAPR11MB3030:
+X-MS-Office365-Filtering-Correlation-Id: bc743467-87ab-43a2-f3cc-08d84f54a987
+X-MS-TrafficTypeDiagnostic: BYAPR11MB3352:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB3030ED2B1D067A7D075D15EA9F2F0@BYAPR11MB3030.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5236;
+	<BYAPR11MB3352350505944D4B99DFED529F2F0@BYAPR11MB3352.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:262;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	issQ4KAGS5jVuRqF6SqBfTePNJ0m7zrRu9QZ0oNfTix9G5+uGoy81KjUtzAF0o+sImiJJapjPsSy5seFVvna2ZF6Mjg2bwAaErO9lHz/6FxnuDagcxnT5SqyvdII3K6Vs8N6HMuGhAe4haqiVs5RypIYHu+0WZknJO9Q2falyvnjsKnMyD/N3nWs/VXBiYIXB7/CgUOsw/RFgPGm77Aa6LlN9SNXgveCt3frNNPbvEFn9gnyQZEEPCc4LQc/En1QeVWH2cW8TvFC6vIxd5H/pycZh1O3bAvuyKiaMzjtW2umLywU1V9iQ5NgSRK27f10IJtDWjNs2V4oivOQ4vDV6WgG4IodLbYkRRSBM8r51f8+G8x0mWDvcwccHb8E6A2GUNk6rSC7soi9hTNey1htwh+zmc3drHIMB+LsO8VBKb4nxz6WRls1rBwNsNDIFEHbilFIjZYMTulGjKqAcqXvVQ==
+	OsnMhdxHI1GbL/DhUgaew0sq/iTunNJG7SSVxJD0DunyZ/dLuJK7D+NoxofqoT9WAyiTQO0fa82NHPF+Mg0wSmCTIkJ/wAlOIJA46IzniHBTUObusPuh1op5MuzM+ZNf49mc0UsyTfaffKiH73dBYvtesfamj5NcwTEOXr1g0Dn4qQZe1OiRdT+lyyqg5tnsLoJdXAQjOnE2G2LfNpOJM3THOXFMBDw/6xYpV7cAGUpDcrXhV5dWvPqYm9qr/A7VrZgRRSooWUcp/52QEKLZTO3S7LDWHO3vsXLzbQ4gBa8jF6jXfkTBVbhk5079PM9k91GHn/CFQyE1kkbu6p8e6XjT379Em6yZQI2nLs2C6Wj93IsZtcrO0IkEuBTgr1ddlza6t37LKPRWg6uKjEXZpVSD2702PGQjuV7mR4fI4Bs52G6aigfnMmVWkMSH0/DJenALIP1mV57xpy+TksWDCQ==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(39850400004)(366004)(376002)(346002)(6486002)(316002)(966005)(31686004)(86362001)(5660300002)(16576012)(2906002)(2616005)(52116002)(66476007)(8936002)(478600001)(186003)(66946007)(44832011)(36756003)(8676002)(26005)(53546011)(956004)(83380400001)(166002)(66556008)(31696002)(33964004)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(366004)(39850400004)(396003)(376002)(136003)(66556008)(53546011)(966005)(52116002)(31696002)(83380400001)(26005)(8936002)(2906002)(16576012)(36756003)(5660300002)(31686004)(33964004)(2616005)(66476007)(44832011)(66946007)(956004)(316002)(478600001)(6486002)(166002)(8676002)(86362001)(186003)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	gdYQ81ztZmJ3pxOESBNQwH5UU1rMU6DrwQZs9WI9NuMaWpoU0Y47JN7DLBhIiKwgRutw2ydGUWNA3ZKnV0ZRL1ur0pY40simWTD1H91rSJmppuSOWXXGNJEvwvgQbzoOzClc7ZNbO1t981qZ30RwysPUYyqk1tF85eehekEMLTpiotmOovSwCGU8b0L+Xh8HP1+Y2jRkLyb9ejPk6A/HmElapsA0hlQgKlD3Mw7YXReEtO6kLBti9rj6X2SOm1R8wdTzvI8nQYX5UvBmYGRz8y5pY/zyEF7EoNWp9Ql78loCnd3cLP8hiZHrECYO1gWAgVn4fZbEVi9XVr4RwNKVfAfy2M/CDTE5hGjHoAKvLjARJVQyWqOyVoYqL8chtWWako86COt+N+jLwuvWeghzNrF2zg2bpH1tOs/YJTwlNsgSVhTG4QgIotGaO80vWVHBNU/JbK/GikCghw9IcTBiB+AK8lBOhO90otAI9ax118Qp4hSQA8E4gGLJiXYH4IxO227dW2wrn2wbnk1EOBrzoflTKcn2IGYrpsF1555WhMVRrDhHJvlQLfXC7JxszFSY9yjP7cWc0U24O4B5UrfC9ypXbuAm5+am+k6PRJt+SMALu5y1NdDadSKugQDNvoVDKGDWRE1DY9T23CQ9UR4fhQ==
+	FI0JVpG6TWPSWotudWjhc8HejmK9SG0MglSydWsgz9fiRxBh1cWOYfYlyVI2t7/n0AOghySL0R3hCwS/rh7P/Tz6FlB4+jHfhATs/x1PM4Vf5XXIgz/0u/r9ViXg06QaUYutJ4pzehESrnbDQJFyzYVAYev6HLWcXGwBGrhFeoBRtww0hj5R4wl7KOGO30n6DkWjiHWnVHcsd+IEymBLD0RBCtGRaT0j0FhMBwOBPhLSyqqkBcfr6cJT2CwI6sBj+2WRywID2LgasqSIQeaUP7skpo1913y7KvxmB9xmFY8FPKcUcoFU9LTHSQrhFTDPqQeaRGpCtlCwvFuijwDJFllobSaSQH2WqCSPmRQdPxW4iliB+48qurlOiMx27vGIj6PV39w4ShroAuXskk6n63xBnn4MHFU9W1ZeBq00p+olLIObdaFRLXGvTlIABbavqD51sFCMwx5A3vLYUGXnLU8O1FB6IRzGIQKASk9cZILQXQdiq4gJ0jtMSgb7ZSLH/NjKQdpBsJfUF0YvGNYENiUPPgU4+dxxryVQTI4wmYAa00nZRfVpCLurhOXXOBrwY0irs753l1f16HvVtUoZ6V/G0SRqs77c4h+WZ5KXdxyZ23eaOpZh7/8dHZ3ZCphxpzDxtulEVdHXRtme9YazBg==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a3dd60d8-2a05-44c8-b55d-08d84f54a17f
+X-MS-Exchange-CrossTenant-Network-Message-Id: bc743467-87ab-43a2-f3cc-08d84f54a987
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2020 15:26:58.1321
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2020 15:27:11.5980
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hbwBrzJ3d8lgLz+LJQNwErW5aodNROTP2BFyoCYn2G5TbHDF/iR75yrJqOd7gvWLuqKkyCHrKJDGlkzp1s7RS1Iba66sv2oEUDynHp84wc4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3030
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8wUI5F6pryAU+G2WQVhcQ2KplGeyQnPHxDowkEWlgJeU12JT+J6hM+aEUI/oblqRHwxNkh9mA1j+TdD32PRUWer4qy14vODP/8ZDCrslJ4c=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3352
 Content-Type: multipart/alternative;
- boundary="------------563FAA8AA26B8A861CDC6DAF"
+ boundary="------------097324539A5EB60BF24A969D"
 Content-Language: en-US
 
---------------563FAA8AA26B8A861CDC6DAF
+--------------097324539A5EB60BF24A969D
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 8/28/20 9:51 AM, Leon Anavi wrote:
-> Upgrade to release 0.16.0:
+> Upgrade to release 1.16.0:
 >
-> - Support for reading and writing private keys in PKCS#8 format.
-> - to_pem and to_der now accept new parameter, format, to specify
->    the format of the encoded files, either the dafault, legacy
->    "ssleay", or the new pkcs8 to use PKCS#8. Note that only
->    unencrypted PKCS#8 files are supported
-> - Add allow_truncate to verify in VerifyingKey, it defaults to
->    True, when specified as False, use of large hashes smaller than
->    curves will be disallowed (as it was in 0.14.1 and earlier)
-> - Correctly calculate signatures for private keys equal to n-1
-> - Make PointJacobi and thus SigningKey and VerifyingKey pickleable
-> - to_pem functions return bytes not str, document them as such
-> - from_pem and from_pem in SigningKey returns SigningKey, document
->    them as such
-> - Ensure that version checks will work with Python 4.
-> - Format the source with black.
-> - Fix uses of assert_ in test suite.
-> - Use newer Ubuntu in Travis to test against OpenSSL 1.1.1 (and
->    thus test the interoperability of ECDH code in Travis).
+> - Embedded font parallel device (for upcoming HD44780, Winstar
+>    character devices)
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-ecdsa_0.15.bb => python3-ecdsa_0.16.0.bb}  | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
->   rename meta-python/recipes-devtools/python/{python3-ecdsa_0.15.bb => python3-ecdsa_0.16.0.bb} (69%)
+>   ...ython3-luma-core_1.15.0.bb => python3-luma-core_1.16.0.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-luma-core_1.15.0.bb => python3-luma-core_1.16.0.bb} (75%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb b/meta-python/recipes-devtools/python/python3-ecdsa_0.16.0.bb
-> similarity index 69%
-> rename from meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb
-> rename to meta-python/recipes-devtools/python/python3-ecdsa_0.16.0.bb
-> index aba62f3ef..36bb246fd 100644
-> --- a/meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb
-> +++ b/meta-python/recipes-devtools/python/python3-ecdsa_0.16.0.bb
-> @@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=66ffc5e30f76cbb5358fe54b645e5a1d"
->   DEPENDS += "python3-pip python3-pbr"
->   
->   PYPI_PACKAGE = "ecdsa"
-> -SRC_URI[sha256sum] = "8f12ac317f8a1318efa75757ef0a651abe12e51fc1af8838fb91079445227277"
-> +SRC_URI[md5sum] = "d593df1ab57da611dca76f7328c47b21"
-> +SRC_URI[sha256sum] = "494c6a853e9ed2e9be33d160b41d47afc50a6629b993d2b9c5ad7bb226add892"
+> diff --git a/meta-python/recipes-devtools/python/python3-luma-core_1.15.0.bb b/meta-python/recipes-devtools/python/python3-luma-core_1.16.0.bb
+> similarity index 75%
+> rename from meta-python/recipes-devtools/python/python3-luma-core_1.15.0.bb
+> rename to meta-python/recipes-devtools/python/python3-luma-core_1.16.0.bb
+> index 17445e727..ce1e7ba03 100644
+> --- a/meta-python/recipes-devtools/python/python3-luma-core_1.15.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-luma-core_1.16.0.bb
+> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7"
 >   
 >   inherit pypi setuptools3
+>   
+> -SRC_URI[md5sum] = "9c890fa8e387a035ff0d1ae96a0715f1"
+> -SRC_URI[sha256sum] = "e0e14c762695fb8758e8b15cfd28cd4c1618bf2fd93157c8770a2e8e0e254ae5"
+> +SRC_URI[md5sum] = "52ab2cdce4222aa71d9ac254a806dccc"
+> +SRC_URI[sha256sum] = "ca523f606f8fff2c9843d48b415a0a748bb2c96270eccac97d9caa9ae6810c94"
+>   
+>   CLEANBROKEN = "1"
 >   
 >
 > 
 
---------------563FAA8AA26B8A861CDC6DAF
+--------------097324539A5EB60BF24A969D
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -146,54 +132,39 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 8/28/20 9:51 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200828135131.26321-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 0.16.0:
+    <blockquote type="cite" cite="mid:20200828135131.26321-2-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.16.0:
 
-- Support for reading and writing private keys in PKCS#8 format.
-- to_pem and to_der now accept new parameter, format, to specify
-  the format of the encoded files, either the dafault, legacy
-  &quot;ssleay&quot;, or the new pkcs8 to use PKCS#8. Note that only
-  unencrypted PKCS#8 files are supported
-- Add allow_truncate to verify in VerifyingKey, it defaults to
-  True, when specified as False, use of large hashes smaller than
-  curves will be disallowed (as it was in 0.14.1 and earlier)
-- Correctly calculate signatures for private keys equal to n-1
-- Make PointJacobi and thus SigningKey and VerifyingKey pickleable
-- to_pem functions return bytes not str, document them as such
-- from_pem and from_pem in SigningKey returns SigningKey, document
-  them as such
-- Ensure that version checks will work with Python 4.
-- Format the source with black.
-- Fix uses of assert_ in test suite.
-- Use newer Ubuntu in Travis to test against OpenSSL 1.1.1 (and
-  thus test the interoperability of ECDH code in Travis).
+- Embedded font parallel device (for upcoming HD44780, Winstar
+  character devices)
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
-    <blockquote type="cite" cite="mid:20200828135131.26321-1-leon.anavi@konsulko.com">
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
+    <blockquote type="cite" cite="mid:20200828135131.26321-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-ecdsa_0.15.bb =&gt; python3-ecdsa_0.16.0.bb}  | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-ecdsa_0.15.bb =&gt; python3-ecdsa_0.16.0.bb} (69%)
+ ...ython3-luma-core_1.15.0.bb =&gt; python3-luma-core_1.16.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-luma-core_1.15.0.bb =&gt; python3-luma-core_1.16.0.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb b/meta-python/recipes-devtools/python/python3-ecdsa_0.16.0.bb
-similarity index 69%
-rename from meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb
-rename to meta-python/recipes-devtools/python/python3-ecdsa_0.16.0.bb
-index aba62f3ef..36bb246fd 100644
---- a/meta-python/recipes-devtools/python/python3-ecdsa_0.15.bb
-+++ b/meta-python/recipes-devtools/python/python3-ecdsa_0.16.0.bb
-@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=66ffc5e30f76cbb5358fe54b645e5a1d">&quot;file://LICENSE;md5=66ffc5e30f76cbb5358fe54b645e5a1d&quot;</a>
- DEPENDS += &quot;python3-pip python3-pbr&quot;
- 
- PYPI_PACKAGE = &quot;ecdsa&quot;
--SRC_URI[sha256sum] = &quot;8f12ac317f8a1318efa75757ef0a651abe12e51fc1af8838fb91079445227277&quot;
-+SRC_URI[md5sum] = &quot;d593df1ab57da611dca76f7328c47b21&quot;
-+SRC_URI[sha256sum] = &quot;494c6a853e9ed2e9be33d160b41d47afc50a6629b993d2b9c5ad7bb226add892&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-luma-core_1.15.0.bb b/meta-python/recipes-devtools/python/python3-luma-core_1.16.0.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-luma-core_1.15.0.bb
+rename to meta-python/recipes-devtools/python/python3-luma-core_1.16.0.bb
+index 17445e727..ce1e7ba03 100644
+--- a/meta-python/recipes-devtools/python/python3-luma-core_1.15.0.bb
++++ b/meta-python/recipes-devtools/python/python3-luma-core_1.16.0.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7">&quot;file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7&quot;</a>
  
  inherit pypi setuptools3
+ 
+-SRC_URI[md5sum] = &quot;9c890fa8e387a035ff0d1ae96a0715f1&quot;
+-SRC_URI[sha256sum] = &quot;e0e14c762695fb8758e8b15cfd28cd4c1618bf2fd93157c8770a2e8e0e254ae5&quot;
++SRC_URI[md5sum] = &quot;52ab2cdce4222aa71d9ac254a806dccc&quot;
++SRC_URI[sha256sum] = &quot;ca523f606f8fff2c9843d48b415a0a748bb2c96270eccac97d9caa9ae6810c94&quot;
+ 
+ CLEANBROKEN = &quot;1&quot;
  
 </pre>
       <br>
@@ -204,4 +175,4 @@ index aba62f3ef..36bb246fd 100644
   </body>
 </html>
 
---------------563FAA8AA26B8A861CDC6DAF--
+--------------097324539A5EB60BF24A969D--
