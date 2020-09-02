@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.2876.1599035633601866007
+ by mx.groups.io with SMTP id smtpd.web10.2887.1599035634074946690
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 02 Sep 2020 01:33:54 -0700
 Authentication-Results: mx.groups.io;
@@ -8,14 +8,16 @@ Received: from [78.130.197.211] (port=46602 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kDODD-0004fH-7M; Wed, 02 Sep 2020 11:33:49 +0300
+	id 1kDODH-0004fH-23; Wed, 02 Sep 2020 11:33:51 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-meh: Upgrade 0.48 -> 0.49
-Date: Wed,  2 Sep 2020 11:33:38 +0300
-Message-Id: <20200902083342.22101-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-stevedore: Upgrade 3.2.0 -> 3.2.1
+Date: Wed,  2 Sep 2020 11:33:39 +0300
+Message-Id: <20200902083342.22101-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200902083342.22101-1-leon.anavi@konsulko.com>
+References: <20200902083342.22101-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,49 +30,34 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.49:
+Upgrade to release 3.2.1:
 
-- Fix make archive command after pot file removal
-- Add Readme with description and translation badge
-- Add pot file to the git ignore
-- Pause release when making bumpver to check and solve
-  translations
-- Remove unused PREFIX from Makefile
-- Remove Zanata
-- Push translations to our translation repository
-- Download translations from Weblate
-- Remove pot file
+- Bug fix: there were some syntax errors in the comment of
+  stevedore code
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python-meh/{python3-meh_0.48.bb => python3-meh_0.49.bb}   | 4 ++--
+ ...{python3-stevedore_3.2.0.bb => python3-stevedore_3.2.1.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-extended/python-meh/{python3-meh_0.48.bb => python3-meh_0.49.bb} (90%)
+ rename meta-python/recipes-devtools/python/{python3-stevedore_3.2.0.bb => python3-stevedore_3.2.1.bb} (72%)
 
-diff --git a/meta-python/recipes-extended/python-meh/python3-meh_0.48.bb b/meta-python/recipes-extended/python-meh/python3-meh_0.49.bb
-similarity index 90%
-rename from meta-python/recipes-extended/python-meh/python3-meh_0.48.bb
-rename to meta-python/recipes-extended/python-meh/python3-meh_0.49.bb
-index 9ca7a56bd..7fba21f7d 100644
---- a/meta-python/recipes-extended/python-meh/python3-meh_0.48.bb
-+++ b/meta-python/recipes-extended/python-meh/python3-meh_0.49.bb
-@@ -3,6 +3,7 @@ DESCRIPTION = "The python-meh package is a python library for handling, saving,
- exceptions."
- HOMEPAGE = "http://git.fedorahosted.org/git/?p=python-meh.git"
- LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-python/recipes-devtools/python/python3-stevedore_3.2.0.bb b/meta-python/recipes-devtools/python/python3-stevedore_3.2.1.bb
+similarity index 72%
+rename from meta-python/recipes-devtools/python/python3-stevedore_3.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-stevedore_3.2.1.bb
+index 0a2bffdcc..c3c368c34 100644
+--- a/meta-python/recipes-devtools/python/python3-stevedore_3.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-stevedore_3.2.1.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://docs.openstack.org/stevedore/latest/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
- inherit setuptools3
+-SRC_URI[md5sum] = "6a39764d7aecc63a0990cf4635cb430d"
+-SRC_URI[sha256sum] = "38791aa5bed922b0a844513c5f9ed37774b68edc609e5ab8ab8d8fe0ce4315e5"
++SRC_URI[md5sum] = "5f5660cebaefebbde4607e44e050a3b2"
++SRC_URI[sha256sum] = "a34086819e2c7a7f86d5635363632829dab8014e5fd7be2454c7cba84ac7514e"
  
-@@ -10,8 +11,7 @@ S = "${WORKDIR}/git"
- 
- SRC_URI = "git://github.com/rhinstaller/python-meh.git;protocol=https;branch=master \
- "
--SRCREV = "760f78a634ecf0e2380abcbd751bc233d29300ef"
--LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+SRCREV = "50c09e5c4c76757099d686c316b4bf42f72db71b"
- 
- FILES_${PN} += "${datadir}/*"
+ DEPENDS += "${PYTHON_PN}-pbr-native"
  
 -- 
 2.17.1
