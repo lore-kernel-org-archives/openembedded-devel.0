@@ -1,65 +1,72 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.2864.1599035635695536650
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+ by mx.groups.io with SMTP id smtpd.web12.3000.1599036237650483661
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Sep 2020 01:33:56 -0700
+ Wed, 02 Sep 2020 01:43:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=46602 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kDODJ-0004fH-Ip; Wed, 02 Sep 2020 11:33:54 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-pycurl: Upgrade 7.43.0.5 -> 7.43.0.6
-Date: Wed,  2 Sep 2020 11:33:42 +0300
-Message-Id: <20200902083342.22101-5-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200902083342.22101-1-leon.anavi@konsulko.com>
-References: <20200902083342.22101-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=lJz28oLH;
+ spf=pass (domain: skidata.com, ip: 91.230.2.99, mailfrom: prvs=507acaa50=richard.leitner@skidata.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+  t=1599036237; x=1630572237;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=Lv6OQuAAWkb1N0TNCriBLEXNjP+Fvx21ZS0TeQgU1e4=;
+  b=lJz28oLHHyfGm5JKyBz16hfUWeepy2i5tdMOhJRSqj0Lfmfzgnp6S/Ep
+   +zFusGYXNih2bD66WJ4maj6QTKp+z5xGuohjo4V9elSG/TOVznbUck9eY
+   AQhB/rT565+k779aD5TnWsviGPLD1jAEM+cCutTEqAK9vw3SKtOA0sdhr
+   BM86xqtSK2+x+UKJs5QBSPiS8Ot6i/91arCm5omNhW/uvhon/tpnG0tpu
+   nezzFJK7EgGeBy5Xec44XLZ0FvkyUCs7E5W1mXZDcWpSJjP4RBAHHV7Ys
+   +E3jIK2uo2w3zckI/I4LRI/oV79/g9x2CfLdTVGWRjEbxFsq3lBNxvkiP
+   Q==;
+IronPort-SDR: VE6i9HNz1Pi6V0prmjL8qxVrJm7Z71UcJpgXDoqntMBf0iuEGfCuBJoGNXFoxyzUX2CpvE3vX+
+ 3dX9516t9+eSw8Y8TY7hOTOjeuoaGjap4iDx8sCHLWXJFwXv0F5HLDIBsgR2IPr5t6flwFNqaI
+ ROPmPZZptHYVqfuTj24SvqlsyvB8uf1ely8i37fWrIZ3xp3sSnRo3+oVreeXXnc9WAlmglazKX
+ ejoM5mjL0TzWFzMspR2WfvtXZmCB0aWrbZdHtQMh+ie5sccDy4EDJmCsA82NtNTJrLgqWeWElq
+ 2iM=
+X-IronPort-AV: E=Sophos;i="5.76,381,1592863200"; 
+   d="scan'208";a="26541719"
+Date: Wed, 2 Sep 2020 10:43:48 +0200
+From: "Richard Leitner" <richard.leitner@skidata.com>
+To: Alexander Kanavin <alex.kanavin@gmail.com>
+CC: Jacob Kroon <jacob.kroon@gmail.com>, OpenEmbedded Devel List
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-java] Changes from master-next merged to master
+Message-ID: <20200902084348.GB81961@pcleri>
+References: <20200824091401.GB2286@pcleri>
+ <CANNYZj_+KTOwyvBhrDQ7NuecOBFe=Poh8Khc_ntDU4M5iGL=Gg@mail.gmail.com>
+ <20200824093831.GC2286@pcleri>
+ <CANNYZj_LT1m2gSbhL+Di1PaFGzSYGmPVYsEus0YnSx19sOZ8jw@mail.gmail.com>
+ <162E2BC2BA50B6B6.12673@lists.openembedded.org>
+ <CANNYZj8fWMk1Ya+G-HbC2VVbC4HWV6x=4T=ni_cdW5-qNG1YnA@mail.gmail.com>
+ <20200825055800.GA37583@pcleri>
+ <CANNYZj-n4T1bkX4k36B5LgG+7nJANO+sVKGXbyf1mFZTMx-t1Q@mail.gmail.com>
+ <20200825110343.GE37583@pcleri>
+ <CANNYZj-a5HeUKExws6KNoofbPy4EQmmzx=2-ZtsD+N8j70g-HQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CANNYZj-a5HeUKExws6KNoofbPy4EQmmzx=2-ZtsD+N8j70g-HQ@mail.gmail.com>
+Return-Path: richard.leitner@skidata.com
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
+ sdex5srv.skidata.net (192.168.111.83)
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Upgrade to release 7.43.0.6:
+On Sun, Aug 30, 2020 at 10:46:06PM +0200, Alexander Kanavin wrote:
+> On Tue, 25 Aug 2020 at 13:03, Richard Leitner <richard.leitner@skidata.com>
+> wrote:
+> 
+> > Great. Thanks for the feedback.
+> > dunfell-next and warrior-next are already available. I'll merge them to
+> > the real stable branches soon.
+> >
+> 
+> ping - I think dunfell is still at the old revision?
 
-- Improve SSL backend detection on various systems
-- Add support for libcurl's multiple SSL backend functionality
-- Add support for several libcurl options
+Thanks for the reminder.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- ...{python3-pycurl_7.43.0.5.bb => python3-pycurl_7.43.0.6.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pycurl_7.43.0.5.bb => python3-pycurl_7.43.0.6.bb} (81%)
+dunfell and warrior should be up2date now.
 
-diff --git a/meta-python/recipes-devtools/python/python3-pycurl_7.43.0.5.bb b/meta-python/recipes-devtools/python/python3-pycurl_7.43.0.6.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-pycurl_7.43.0.5.bb
-rename to meta-python/recipes-devtools/python/python3-pycurl_7.43.0.6.bb
-index 5a1c1797a..0437a6cc9 100644
---- a/meta-python/recipes-devtools/python/python3-pycurl_7.43.0.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-pycurl_7.43.0.6.bb
-@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
-                     file://COPYING-MIT;md5=60872a112595004233b769b6cbfd65b6 \
-                     "
- 
--SRC_URI[md5sum] = "0b387d4609ed20c88baede8579a4d425"
--SRC_URI[sha256sum] = "ec7dd291545842295b7b56c12c90ffad2976cc7070c98d7b1517b7b6cd5994b3"
-+SRC_URI[md5sum] = "3e121d895101022c30619e1bbf97eb97"
-+SRC_URI[sha256sum] = "8301518689daefa53726b59ded6b48f33751c383cf987b0ccfbbc4ed40281325"
- 
- inherit pypi setuptools3
- 
--- 
-2.17.1
+regards;rl
 
+> 
+> Alex
