@@ -1,17 +1,17 @@
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.81])
- by mx.groups.io with SMTP id smtpd.web11.10187.1599060496727126412
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.84])
+ by mx.groups.io with SMTP id smtpd.web12.10184.1599060529921133086
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Sep 2020 08:28:17 -0700
+ Wed, 02 Sep 2020 08:28:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=JM9uff3C;
- spf=pass (domain: windriver.com, ip: 40.107.92.81, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Y2ESfsai;
+ spf=pass (domain: windriver.com, ip: 40.107.236.84, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Zc9bQFSzgLcpDXgvy7OJD7AhBYsCq0qIN4AIjm3ZC2D/zWsgBbaN25tl3NqR0jV87JFyR+DoWsABLwgcnAn4zdSmX6n/BAhwTTc+kcyUHupOZUyWNmaZovwEG92mcmP9Qje7pl7MGF/9ujtVP1NqqHWgJvEJSv0LviI5GLcKFYPANU5g3uTWd+WCMGMuwM7+bDJeWDLtYY5jgJUnbp/OCHnkHg+8W5jC0+XPpchM4/9vTDMoMd6S5NqJCdtRsTnix3hH3WULBQIZBW1DZfXIdsGf4udnDF7oARyKtmYUPkAF8BJewofIfq9H4GAyW0XNfF7U0uOn3qXNrqNAK8yPDA==
+ b=VzcJZk9a/XjvdiwIimb/XEotZLIpQU61SltSMvBYXQH5jYzGuisBulXnFICxq43ktnYY2neblEBG87rutu3+WYLlowHAp4f0gkR/9ZPTzUP868eA7lMEVw226BAFQRUQnsNz152KB4/n3fKfFrBBtQSFGwa+M1T3tdGqi8abrej+AWZ75yMFnb18IlagBGAcaNrPI8z5XyvQ95nFlKqA+74UEi8cq8usenWpQtpKWsNZG1rEDAcPW+uTY8Gw/92kTzER48MyZE5yMrW1Lkaq86OqAH5oQent8kyl59Plvv/Ccu+4A/CswA6VeYSgsmBo3ATJbSrTGaz02TTqqKw8Ow==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2H4Ihah2bWSUA64GWet63gJznrNacVl5DTePif+enW8=;
- b=oVq1ZfcfEUeQsqkn5oEDgSPqik6fyI1QYF68u0ChNlP8rijbEKqFmhSZ2gGsXQ+wRI5Xfx42ARqj/jAhLyjpbCfylbsJv1w6STjJLaByLmcYZt4V5zWia4jS45VkkLNVGG9VHOoU/usjNYcz05Pe3NY7rm4MwsVzAC5UG4w2s42pekSSt6z+ShFCbSdMkZVDMC3Wq1JsMexj/B0xC6mI7BvS35IQyDk+E/DSJzayb9kGpsYNMG0fBouq2lBNbliDRLkb3Sg0blDc2V8tWnDd+iXzLBxSPU83vhXVg6TbQR9S7izcXK9gV7l6xWd7yVOcUGeuQiq8gtBBLWg9lzVTMg==
+ bh=Dl799qTkR8wskQ0oIT6uz0FU37glKJcoQ7+hIJJU4qk=;
+ b=kJcj6srFPa+VV5pMbYf5ESZRknQ4EeJ8vaZPsIauFWjGOBTHc3Xo/nHVqjEucwn0Fz7HhVRz/M8i+z2UhWzNEoI/alrN4lwBAXBFUG4K/fqf2+Zh/5eb5cwWFRwHZZOiAti5ROp2Y0kipWyWzduosTar0Vlye/Fgnn17MJyk2qYBxVbQSEE87Z4ooV4SUTJ80lbgXWee0bZLzUI8XB2g2QI+c8O3tmva+razmCxG+mpMHizyHxIumiYOKu77f3EJbII2iAZ7ISw5xTaujOHwwO6rWoGnqPQ5VWZqy1beYCoiCZrYpNzBNETLnNBhmydxY2ftq9pS/BgUkGAbZnXO4Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,135 +19,111 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2H4Ihah2bWSUA64GWet63gJznrNacVl5DTePif+enW8=;
- b=JM9uff3C/N2PCPQ9FTCo9aMZmwrmUiHNOXEjt5Xkz5TIYy2Fjv+wrfo9uNlaf07wGYoAnkZF2+eBPHIvG3xwJOK8Wkih8kueS9htcV1Cq9QrxfyHRTMqhKWxy4u97hTl8jTP1JttF0lh3K+74pMjnOyov6Z0TY+n6n8OA+n6LwQ=
+ bh=Dl799qTkR8wskQ0oIT6uz0FU37glKJcoQ7+hIJJU4qk=;
+ b=Y2ESfsaiDczomPHt70iVSFAhG4SHyjNAD6tVcJp/psaZf0Qj1dbooU1T7CI7WQlMCTI8OE3MANf8Hq+HYcvJLBPJGxeD2fDKFzS8fs8ffp5z5X3RhsvV8EBaClwwViKwq/u3e88TRC1aMpJrxC6cGpaQNRPFTQyqcKlHpx+OhZ0=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB3352.namprd11.prod.outlook.com (2603:10b6:a03:1d::26) with
+ by BYAPR11MB3030.namprd11.prod.outlook.com (2603:10b6:a03:87::27) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.19; Wed, 2 Sep
- 2020 15:28:15 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.21; Wed, 2 Sep
+ 2020 15:28:48 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8%7]) with mapi id 15.20.3348.015; Wed, 2 Sep 2020
- 15:28:15 +0000
-Subject: Re: [oe] [meta-python][PATCH 5/5] python3-flask-user: Consolidate in a single file
+ 15:28:48 +0000
+Subject: Re: [oe] [meta-python][PATCH 01/10] python3-cmd2: Upgrade 1.3.5 -> 1.3.8
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200828135131.26321-1-leon.anavi@konsulko.com>
- <20200828135131.26321-5-leon.anavi@konsulko.com>
+References: <20200831070318.6573-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <8995f16f-032e-a025-de0e-b0b499de4ae5@windriver.com>
-Date: Wed, 2 Sep 2020 11:28:12 -0400
+Message-ID: <d4219d30-6bec-79cb-b8d7-5412c93a13cb@windriver.com>
+Date: Wed, 2 Sep 2020 11:28:45 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
-In-Reply-To: <20200828135131.26321-5-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0004.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::17)
+In-Reply-To: <20200831070318.6573-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0010.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::23)
  To BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from 255.255.255.255 (255.255.255.255) by YT1PR01CA0004.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::17) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3348.15 via Frontend Transport; Wed, 2 Sep 2020 15:28:14 +0000
+Received: from 255.255.255.255 (255.255.255.255) by YT1PR01CA0010.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::23) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3348.15 via Frontend Transport; Wed, 2 Sep 2020 15:28:47 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 96afaf8f-798e-4590-b907-08d84f54cf78
-X-MS-TrafficTypeDiagnostic: BYAPR11MB3352:
+X-MS-Office365-Filtering-Correlation-Id: 98c1d732-28e9-4ae8-cd5b-08d84f54e347
+X-MS-TrafficTypeDiagnostic: BYAPR11MB3030:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB3352049A48B503BB52AC5C0E9F2F0@BYAPR11MB3352.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:207;
+	<BYAPR11MB3030D05939F5F3E3F6E5EB189F2F0@BYAPR11MB3030.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:923;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	uU+UTh4ZddFT/FJyv7eRkpnXuLZIgBpM9Dcpm5YKb3VNwpWc4y+Sxf7lz6USNeQZe6eQlpLZbASfsywnePVe4XLtC2uP74jaKM9N9Do/26G4ROL2CcjXcyzN/j5bNugeDILDwYbzl6Sq6v8MtCa1qruPr9aWATi+E6ipoQOQ0dL3laVd1FslRorU2o3kvF1NBSAL8mM7Ki3L1Zhvnwlu3P74poodWyO8D7fuaeoUObUwoDtYhIJST7gBcrU4BjDY9ymgIcQG82p2e7i7WO7nr341+Q8H/mgBpC6kh9w9lZIah69wlAZpFwlZkBlrhg/9uzZ9xuWnqFPgPAeGNCjyMxIUTMXjeUnZ8BVHQyrAIhnHNDQyYX6ZwE55ayNtbFFoQvroROB5qJ++rik/1YiiUOoBGr/ohiaH+jm6wt+bDTVQPK6bvPQ3hZa98kn06ICswAg97ATUySLHawuR4yAYiA==
+	XHWOlD4hhNW0mnIp8EXZb5jFRxVBwkbNmz7ufpCycdejUvGZDh9Cr9+WK5xG9yWeP/n17ot2G61tUGC8Y5swWliK05t3apVZxIWQQjqhYViC0D45sO4IAC4H1ci7Z3KX3v3k7hMEWeqPRyrU/nPQIF+lIrTSHmsKez/4X3t/vlyyrl/3vxqEXXFXZyJPTtOhH83MuN4oUIH/QzXJixxCRZvPfCe/lTqf/Ku4lPOi1bt89Jown2ddEdw5EWQVQXQKImNNzE8c7TMBzCiAOdwdM/GRwCpAzc6G7AS+6m63Wh0nnC6/vsPGE67puyYtc7TneIXCXh6OU/mVb2xNJMujTw5GFJSYe2OBM3e/uYcsSA3aRQ9y+ALa/doblpDBYQxMvMcF6Ps65Mvbg7iO5ZRgyeE7b79n1fwtIYgioMRCDaCJg2lwGuf4EmHLoATt7yMlg8GHv/fhpalRSbBgASbX4Q==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(366004)(39850400004)(396003)(376002)(136003)(66556008)(53546011)(966005)(52116002)(31696002)(83380400001)(26005)(8936002)(2906002)(16576012)(36756003)(5660300002)(31686004)(33964004)(2616005)(66476007)(44832011)(66946007)(956004)(316002)(478600001)(6486002)(166002)(8676002)(86362001)(186003)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(39850400004)(366004)(376002)(346002)(6486002)(316002)(966005)(31686004)(86362001)(5660300002)(16576012)(2906002)(2616005)(52116002)(66476007)(8936002)(478600001)(186003)(66946007)(44832011)(36756003)(8676002)(26005)(53546011)(956004)(83380400001)(166002)(66556008)(31696002)(33964004)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	9WoCxCqAxlazy4iU6GRfXsRmjxvAT+dxsm4S3/3fJW1F63hAIboO7zX/IILSrBH4hX/uWsLmLmHigH3GE+x+1Py4dV/HqNd4W+JEedJqLbllSdpAfR/b5oLBh09y0b6ZViLBHiLpMaLVvqXih8bUuA8c8G2iAUJGG1v5nW7RKr59BwI6OSK7mAXe2/8/9oWGdxIFYNTAPm/2eyvhHqrm4eaf3zO9vdVMBm5xnwX1MNhtC+gv/I+nq8xngcrpVjryTrhGs5LFwHBZzH062jFEiV5hABv7jkzl0dMXmk72KHRLZWIyhg3zVMQ4HY5ZLtiyUbGFgfB4P1uxoJfWCtBCaoZh3vlmtJZ+bY3CureM4DBqzCQKmTC+Pu/6TyXBNbl4M16WzM6jzDQX+XkioDHMj46OnTkWraCgBVKohnAMZqXCSvC6gcSYW/TnV7TnKmlsCsBuQxYFavg9w6GLIbGFmq9jNBGUExzD6eEM6FvUQ1TmsKe7yHE8CK1wKVISVAelRsgZyBvkcYgv7jDS+sIdTaJt9Ma08xP6kWi6fyxkpf3tgUcTKUZ34YzOjv5cXm1e123tgOO5l+4EfMCGFbAq59BjZIuZ7DSRDTrTtaAowoYbR2MdnsfN/2cPBhOQ/GfGl82IZ7roDQvlc6yI5A3JJA==
+	N3GTdOTRwSZMcOnVmhv61wqjrOtNh5/yWxZ21TRUHUpmOerwc8XhxqYJmyBCVhHwzKUbzbC/MTxpTz7Gf3OzeJCaG9U8f7zwr8VkrBf1INnnReMyMfy2zqc7rC06qNtR10lL1yNpPddNTwUlmELg+2ViQ2OL6/UJsWbvhCFfMYaMJWskslM0ICApVtzL0Tn9XtJksiuYcfa/mDVNYJ+iZdtHBI36NtoYYSIB0YaGKjxdiIR+0mhbrT7OeyswmrFKOZIbFx40kw3VxxcpUu34unB71f2pjLcTApAP7lMwZB53q1/3FMGtbXjrJ/6g3mhngHm7CLQG7TvCUjfO1ud0YtztJP3V6LES1GT7rSQqNAqxGGdcNIf3MZ3OtsNN8mklbPKSykFMdpBiEWXgC4ezRjqqPye5NFuNNYavcs3HzbRtyfKHIkFF9q6XEcDG8urAVDc43tBJhcxHumy26ESJ/2jwDH9F7I5V7kWUWufohah7hV+lTF7GQccs2L39cVsDY8IWoaDpiimIASqZaDfcN2jsKDHbUyjzV3FzN2zZKTh2FFZhY1TgQcABfqeWUGoMgbsv/W4ICSzJiOlAxlQahu2vFMZ+w6Fpb7Ifjtm8JV0X2SShfhpCZqUd13p3wrOb/jE/iTx4nz1PaR860GHzGw==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 96afaf8f-798e-4590-b907-08d84f54cf78
+X-MS-Exchange-CrossTenant-Network-Message-Id: 98c1d732-28e9-4ae8-cd5b-08d84f54e347
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2020 15:28:15.2855
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2020 15:28:48.4824
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: MC5oTP1R8gVd7GxDAWolkJa2UWQuEOkvKisNeY84Lj7ytk5asDbJVg30kqPbjfCm1Jweyh6HSgVb2UDsAXcXzndL/yZWiMt2lSpcW3/MyME=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3352
+X-MS-Exchange-CrossTenant-UserPrincipalName: C/n2YWL5sUjQHlp7v4n30urdl71FMc1es5sxco8qbPVbmAgyhVGwwXuyT2eR3vzPLyx8LwUILCUInizBAdtM94EF6o740xvBUgvwcmA6uzI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3030
 Content-Type: multipart/alternative;
- boundary="------------53C9B3EE438BF94E7D186261"
+ boundary="------------0F8CE0DF055A04A46FBEA51E"
 Content-Language: en-US
 
---------------53C9B3EE438BF94E7D186261
+--------------0F8CE0DF055A04A46FBEA51E
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 8/28/20 9:51 AM, Leon Anavi wrote:
-> Consolidate inc and bb files into a single bb file.
+On 8/31/20 3:03 AM, Leon Anavi wrote:
+> Upgrade to release 1.3.8:
+>
+> - Fixed issue where subcommand added with
+>    @as_subcommand_to decorator did not display help when called
+>    with -h/--help.
+> - add_help=False no longer has to be passed to parsers used in
+>    @as_subcommand_to decorator. Only pass this if your subcommand
+>    should not have the -h/--help help option (as stated in argparse
+>    documentation).
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python-flask-user.inc              | 17 -----------------
->   .../python/python3-flask-user_0.6.19.bb       | 19 ++++++++++++++++++-
->   2 files changed, 18 insertions(+), 18 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python-flask-user.inc
+>   .../python/{python3-cmd2_1.3.5.bb => python3-cmd2_1.3.8.bb}   | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.5.bb => python3-cmd2_1.3.8.bb} (75%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python-flask-user.inc b/meta-python/recipes-devtools/python/python-flask-user.inc
-> deleted file mode 100644
-> index adef32cc8..000000000
-> --- a/meta-python/recipes-devtools/python/python-flask-user.inc
-> +++ /dev/null
-> @@ -1,17 +0,0 @@
-> -SUMMARY = "Customizable user account management for Flask"
-> -DESCRIPTION = "Customizable User Account Management for Flask; Register \
-> -Confirm email, Login, Change username, Change password, Forgot Password \
-> -and more."
-> -HOMEPAGE = " https://github.com/lingthio/Flask-User"
-> -LICENSE = "BSD-2-Clause"
-> -LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=97de97cd9d6e23c88129d884588ce71a"
-> -
-> -SRC_URI[md5sum] = "f7965e66ca139c8436896da07e66c21f"
-> -SRC_URI[sha256sum] = "601abcc0343dfbae0c56273d98362d5cdc266ac84d20b3f65a212e4a2c83b302"
-> -
-> -PYPI_PACKAGE = "Flask-User"
-> -
-> -RDEPENDS_${PN} = "${PYTHON_PN}-flask \
-> -    ${PYTHON_PN}-flask-login \
-> -    ${PYTHON_PN}-flask-mail \
-> -    ${PYTHON_PN}-babel"
-> diff --git a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb b/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
-> index 251017f81..a59019af8 100644
-> --- a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
-> +++ b/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
-> @@ -1,2 +1,19 @@
-> +SUMMARY = "Customizable user account management for Flask"
-> +DESCRIPTION = "Customizable User Account Management for Flask; Register \
-> +Confirm email, Login, Change username, Change password, Forgot Password \
-> +and more."
-> +HOMEPAGE = " https://github.com/lingthio/Flask-User"
-> +LICENSE = "BSD-2-Clause"
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=97de97cd9d6e23c88129d884588ce71a"
-> +
-> +SRC_URI[md5sum] = "f7965e66ca139c8436896da07e66c21f"
-> +SRC_URI[sha256sum] = "601abcc0343dfbae0c56273d98362d5cdc266ac84d20b3f65a212e4a2c83b302"
-> +
-> +PYPI_PACKAGE = "Flask-User"
-> +
+> diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.5.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.3.8.bb
+> similarity index 75%
+> rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.5.bb
+> rename to meta-python/recipes-devtools/python/python3-cmd2_1.3.8.bb
+> index c0daec42a..9fc7b95e2 100644
+> --- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.5.bb
+> +++ b/meta-python/recipes-devtools/python/python3-cmd2_1.3.8.bb
+> @@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def"
+>   
+>   DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+>   
+> -SRC_URI[md5sum] = "a4a35ebe43179bf071430e2e8c7963e7"
+> -SRC_URI[sha256sum] = "d9ef1d657e98b1c6898bca75019fd661db410f81febe6e1aedded9667f39f37e"
+> +SRC_URI[md5sum] = "255ba85d8aaa9f00d84917be38b11a86"
+> +SRC_URI[sha256sum] = "b6f6254def8ba479088702f97bca1b999c12e0c38ac5d82dc50a44db93c7108c"
+>   
 >   inherit pypi setuptools3
-> -require python-flask-user.inc
-> +
-> +RDEPENDS_${PN} = "${PYTHON_PN}-flask \
-> +    ${PYTHON_PN}-flask-login \
-> +    ${PYTHON_PN}-flask-mail \
-> +    ${PYTHON_PN}-babel"
+>   
 >
 > 
 
---------------53C9B3EE438BF94E7D186261
+--------------0F8CE0DF055A04A46FBEA51E
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -157,70 +133,47 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 8/28/20 9:51 AM, Leon Anavi wrote:<br>
+    <div class="moz-cite-prefix">On 8/31/20 3:03 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200828135131.26321-5-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Consolidate inc and bb files into a single bb file.
+    <blockquote type="cite" cite="mid:20200831070318.6573-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.3.8:
+
+- Fixed issue where subcommand added with
+  @as_subcommand_to decorator did not display help when called
+  with -h/--help.
+- add_help=False no longer has to be passed to parsers used in
+  @as_subcommand_to decorator. Only pass this if your subcommand
+  should not have the -h/--help help option (as stated in argparse
+  documentation).
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200828135131.26321-5-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200831070318.6573-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python-flask-user.inc              | 17 -----------------
- .../python/python3-flask-user_0.6.19.bb       | 19 ++++++++++++++++++-
- 2 files changed, 18 insertions(+), 18 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-flask-user.inc
+ .../python/{python3-cmd2_1.3.5.bb =&gt; python3-cmd2_1.3.8.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.5.bb =&gt; python3-cmd2_1.3.8.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python-flask-user.inc b/meta-python/recipes-devtools/python/python-flask-user.inc
-deleted file mode 100644
-index adef32cc8..000000000
---- a/meta-python/recipes-devtools/python/python-flask-user.inc
-+++ /dev/null
-@@ -1,17 +0,0 @@
--SUMMARY = &quot;Customizable user account management for Flask&quot;
--DESCRIPTION = &quot;Customizable User Account Management for Flask; Register \
--Confirm email, Login, Change username, Change password, Forgot Password \
--and more.&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/lingthio/Flask-User">&quot; https://github.com/lingthio/Flask-User&quot;</a>
--LICENSE = &quot;BSD-2-Clause&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=97de97cd9d6e23c88129d884588ce71a">&quot;file://LICENSE.txt;md5=97de97cd9d6e23c88129d884588ce71a&quot;</a>
--
--SRC_URI[md5sum] = &quot;f7965e66ca139c8436896da07e66c21f&quot;
--SRC_URI[sha256sum] = &quot;601abcc0343dfbae0c56273d98362d5cdc266ac84d20b3f65a212e4a2c83b302&quot;
--
--PYPI_PACKAGE = &quot;Flask-User&quot;
--
--RDEPENDS_${PN} = &quot;${PYTHON_PN}-flask \
--    ${PYTHON_PN}-flask-login \
--    ${PYTHON_PN}-flask-mail \
--    ${PYTHON_PN}-babel&quot;
-diff --git a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb b/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
-index 251017f81..a59019af8 100644
---- a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
-@@ -1,2 +1,19 @@
-+SUMMARY = &quot;Customizable user account management for Flask&quot;
-+DESCRIPTION = &quot;Customizable User Account Management for Flask; Register \
-+Confirm email, Login, Change username, Change password, Forgot Password \
-+and more.&quot;
-+HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/lingthio/Flask-User">&quot; https://github.com/lingthio/Flask-User&quot;</a>
-+LICENSE = &quot;BSD-2-Clause&quot;
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=97de97cd9d6e23c88129d884588ce71a">&quot;file://LICENSE.txt;md5=97de97cd9d6e23c88129d884588ce71a&quot;</a>
-+
-+SRC_URI[md5sum] = &quot;f7965e66ca139c8436896da07e66c21f&quot;
-+SRC_URI[sha256sum] = &quot;601abcc0343dfbae0c56273d98362d5cdc266ac84d20b3f65a212e4a2c83b302&quot;
-+
-+PYPI_PACKAGE = &quot;Flask-User&quot;
-+
+diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.5.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.3.8.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.5.bb
+rename to meta-python/recipes-devtools/python/python3-cmd2_1.3.8.bb
+index c0daec42a..9fc7b95e2 100644
+--- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.5.bb
++++ b/meta-python/recipes-devtools/python/python3-cmd2_1.3.8.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def">&quot;file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def&quot;</a>
+ 
+ DEPENDS += &quot;${PYTHON_PN}-setuptools-scm-native&quot;
+ 
+-SRC_URI[md5sum] = &quot;a4a35ebe43179bf071430e2e8c7963e7&quot;
+-SRC_URI[sha256sum] = &quot;d9ef1d657e98b1c6898bca75019fd661db410f81febe6e1aedded9667f39f37e&quot;
++SRC_URI[md5sum] = &quot;255ba85d8aaa9f00d84917be38b11a86&quot;
++SRC_URI[sha256sum] = &quot;b6f6254def8ba479088702f97bca1b999c12e0c38ac5d82dc50a44db93c7108c&quot;
+ 
  inherit pypi setuptools3
--require python-flask-user.inc
-+
-+RDEPENDS_${PN} = &quot;${PYTHON_PN}-flask \
-+    ${PYTHON_PN}-flask-login \
-+    ${PYTHON_PN}-flask-mail \
-+    ${PYTHON_PN}-babel&quot;
+ 
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -230,4 +183,4 @@ index 251017f81..a59019af8 100644
   </body>
 </html>
 
---------------53C9B3EE438BF94E7D186261--
+--------------0F8CE0DF055A04A46FBEA51E--
