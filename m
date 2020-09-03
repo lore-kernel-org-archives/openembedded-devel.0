@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.12726.1599135963498227694
+ by mx.groups.io with SMTP id smtpd.web10.12709.1599135967115636102
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Sep 2020 05:26:03 -0700
+ Thu, 03 Sep 2020 05:26:07 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=45678 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kDoJW-0007Jp-FC; Thu, 03 Sep 2020 15:26:02 +0300
+	id 1kDoJX-0007Jp-S4; Thu, 03 Sep 2020 15:26:06 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCH 2/3] hwdata: Upgrade 0.336 -> 0.339
-Date: Thu,  3 Sep 2020 15:25:51 +0300
-Message-Id: <20200903122552.14524-2-leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH 3/3] xscreensaver: Add HOMEPAGE
+Date: Thu,  3 Sep 2020 15:25:52 +0300
+Message-Id: <20200903122552.14524-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200903122552.14524-1-leon.anavi@konsulko.com>
 References: <20200903122552.14524-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-1.0
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,30 +30,24 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.339:
-
-- Update pci, usb and vendor ids
+Set https://www.jwz.org/xscreensaver/ as HOMEPAGE.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-support/hwdata/hwdata_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.44.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/hwdata/hwdata_git.bb b/meta-oe/recipes-support/hwdata/hwdata_git.bb
-index 035a11c89..42b92106b 100644
---- a/meta-oe/recipes-support/hwdata/hwdata_git.bb
-+++ b/meta-oe/recipes-support/hwdata/hwdata_git.bb
-@@ -5,8 +5,8 @@ SECTION = "System/Base"
- LICENSE = "GPL-2.0+"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
+diff --git a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.44.bb b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.44.bb
+index 6cad97f15..9131c754d 100644
+--- a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.44.bb
++++ b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.44.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "X screen saver and locker"
+-
++HOMEPAGE = "https://www.jwz.org/xscreensaver/"
+ LICENSE = "BSD-0-Clause"
+ LIC_FILES_CHKSUM = "file://driver/xscreensaver.h;endline=10;md5=2b97002f72fbfc9329b4336e798f2463"
  
--PV = "0.336"
--SRCREV = "e0e15bc7930f6d7befa4e7060fd03cc4935f6190"
-+PV = "0.339"
-+SRCREV = "1cd8ee29eb2dcb954961be008b96cfbf982f0700"
- SRC_URI = "git://github.com/vcrhonek/${BPN}.git"
- 
- S = "${WORKDIR}/git"
 -- 
 2.17.1
 
