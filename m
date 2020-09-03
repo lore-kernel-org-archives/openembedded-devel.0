@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.14021.1599140129752009037
+ by mx.groups.io with SMTP id smtpd.web10.14095.1599140130962665324
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Sep 2020 06:35:30 -0700
+ Thu, 03 Sep 2020 06:35:31 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=47596 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kDpOi-0007vv-Pt; Thu, 03 Sep 2020 16:35:29 +0300
+	id 1kDpOj-0007vv-9g; Thu, 03 Sep 2020 16:35:30 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-traitlets: 5.0.0 -> 5.0.2
-Date: Thu,  3 Sep 2020 16:35:19 +0300
-Message-Id: <20200903133520.19437-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-sentry-sdk: Upgrade 0.17.2 -> 0.17.3
+Date: Thu,  3 Sep 2020 16:35:20 +0300
+Message-Id: <20200903133520.19437-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200903133520.19437-1-leon.anavi@konsulko.com>
 References: <20200903133520.19437-1-leon.anavi@konsulko.com>
@@ -30,34 +30,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 5.0.2:
+Upgrade to release 0.17.3:
 
-- update cast_unicode with Python's standard decode method
+- Fix an issue with the pure_eval integration in interaction with
+  trimming where pure_eval would create a lot of useless local
+  variables that then drown out the useful ones in trimming.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-traitlets_5.0.0.bb => python3-traitlets_5.0.2.bb} | 4 ++--
+ ...hon3-sentry-sdk_0.17.2.bb => python3-sentry-sdk_0.17.3.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-traitlets_5.0.0.bb => python3-traitlets_5.0.2.bb} (72%)
+ rename meta-python/recipes-devtools/python/{python3-sentry-sdk_0.17.2.bb => python3-sentry-sdk_0.17.3.bb} (72%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-traitlets_5.0.0.bb b/meta-python/recipes-devtools/python/python3-traitlets_5.0.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.2.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.3.bb
 similarity index 72%
-rename from meta-python/recipes-devtools/python/python3-traitlets_5.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-traitlets_5.0.2.bb
-index 8aa0ce5ba..49255fcf5 100644
---- a/meta-python/recipes-devtools/python/python3-traitlets_5.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-traitlets_5.0.2.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING.md;md5=eec4de4d599518742e54e75954e33b46"
+rename from meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.2.bb
+rename to meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.3.bb
+index 9eddbbfdd..0a39fb142 100644
+--- a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.2.bb
++++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.3.bb
+@@ -5,8 +5,8 @@ HOMEPAGE = "https://github.com/getsentry/sentry-python"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
  
- PYPI_PACKAGE = "traitlets"
+-SRC_URI[md5sum] = "a9d68b19c457d6a9ff70396ab341fca2"
+-SRC_URI[sha256sum] = "bbfe5633aee4dacb53d79d303ab6bfacf1749fb717750c112fb1658e5accce0d"
++SRC_URI[md5sum] = "5d4abcc416cbd0b9443bf56588b02b55"
++SRC_URI[sha256sum] = "0af429c221670e602f960fca85ca3f607c85510a91f11e8be8f742a978127f78"
  
--SRC_URI[md5sum] = "3dec5b73409c07bf48cd5db220431ee9"
--SRC_URI[sha256sum] = "0d9c4005506b306b0a99551e96174b8bedc675c2dd048f92b3bbbb7d86ac93a9"
-+SRC_URI[md5sum] = "7dc642d19d1268a8268f46f33ff871c6"
-+SRC_URI[sha256sum] = "4c9a7212db9642056ea4fcd4ba9e18d302eb617daf679f45fd8cb5d19687b640"
- 
- RDEPENDS_${PN} = "\
-     ${PYTHON_PN}-ipython-genutils \
+ PYPI_PACKAGE = "sentry-sdk"
+ inherit pypi setuptools3
 -- 
 2.17.1
 
