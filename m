@@ -1,89 +1,93 @@
-Received: from mail-qv1-f43.google.com (mail-qv1-f43.google.com [209.85.219.43])
- by mx.groups.io with SMTP id smtpd.web10.15743.1599144445590199061
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
+ by mx.groups.io with SMTP id smtpd.web10.15873.1599144776297307631
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Sep 2020 07:47:25 -0700
+ Thu, 03 Sep 2020 07:52:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=CcDdciSv;
- spf=pass (domain: gmail.com, ip: 209.85.219.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f43.google.com with SMTP id cy2so1456776qvb.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2020 07:47:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ruQpSiyW;
+ spf=pass (domain: gmail.com, ip: 209.85.160.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f195.google.com with SMTP id n10so2109006qtv.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Sep 2020 07:52:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=mqVeHyZbNk/uyIhKqhzlsHDgvGVsnwO8fAtJmL2dPMY=;
-        b=CcDdciSva44/SOfx0L5LWN6+TGc8gY1F3RefCl0Yys0S9ul7/S3vslCBzA+5Fl9RYh
-         j+SZeXy74zYDE/UgEh5pmBPMNJiZbKXqJpT2mRUV9KHI26giUoGzxn0ldjcPONSn8vzT
-         iQElryd1zHmATSEURqPHOsvEa1DwEc/+RMFrazJvphGk1uoIdgbSC6uLLVdf78uXjHjY
-         7v13slRTKY3KvuigF2trgcsO8YqfM5xxFUPI4EoUUhw6VscHpRN0VbU6VsXYStzvtO8t
-         h0VR8tseoUIThht035BOJfjXYl1qgeMSH/CPTuv6MfoP2kCOCha71aKla/yVAzwbHca5
-         XY9w==
+        bh=9veu8XCQHybfFxYsT6OLXGkZ8xoXERro+3c980ia7Zs=;
+        b=ruQpSiyWGSjAsrqgUhj7PKhflzFSnf8Njpa7Ca93XiW12wFIS5mdlo2LSL4fCnrLQ4
+         A5nwzWmEYoPozkKg2+g65m3216UQDxAw1xJ7kURHYyy/VPKQj600ztFCYrjs9GfUU4fW
+         Kd0gbZ5YQ4vs9kxyc/epw0UrirHv5/8OUkgAMFjerT8oxRut2xGTrfA4LPvJCbRm1E3m
+         E2x+rIq8g9z0lIRBgvMCV5bJNl+6Bog8QSj3JwgDTTvtsOOhCpAOCGM5EJrCCrT1m2k/
+         lcsqSmI52b9qKpzGj6HYvBKXYPGNz0oYmYxVcWCB64YEEM6TjcO3lJykci+yBIbA2eqm
+         X4ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=mqVeHyZbNk/uyIhKqhzlsHDgvGVsnwO8fAtJmL2dPMY=;
-        b=ie37dutVWa7CfjKzUKujeC2MPjVggu07/TC+zCyURJ8OUMUkZ5JiS05AVI+fh5bGUn
-         v4TInMGu4fVgQ0dMK6TJssLpOF/dEAIPUXyqJ5SlzgzAatLCUq/MTFzTbAFtZ/7s5HO3
-         bdyj6xZLcuFw1TfUN6kckFHvIarJsH2ZscPRal2BnH0CeasY8uBLq4Jy6a99E0w7me5O
-         dgAT8H3eTb+ki4Ko9GkyRIe5/ABWFKwjXid663zY/ixZwJ16QMM4DPn5agD9dMwPXbhN
-         MwQBBufrlfxOp/hVv6KYzFmNx7qLSgVBzYRrAD0k+HROJx1eIBQ3U+Pyl1p99iRd/c6v
-         fG2A==
-X-Gm-Message-State: AOAM532D/V/i/aMSTTcFJLC7J6EW7PSWUuJj/Y1Y3rjOAgSORa9Duzi/
-	GxnuSvARXtkjXc+1YEdoMHMAi69oUn/YyiQQTWc=
-X-Google-Smtp-Source: ABdhPJygvv6xxx6G+vsnd3xiWn3goh4g4RzqNMK/49iydwXnQH2cE4nd45r5tagw120ZJLcuQeXXHQ+vBub5sUQ6UHQ=
-X-Received: by 2002:a0c:d44e:: with SMTP id r14mr3266834qvh.105.1599144444569;
- Thu, 03 Sep 2020 07:47:24 -0700 (PDT)
+        bh=9veu8XCQHybfFxYsT6OLXGkZ8xoXERro+3c980ia7Zs=;
+        b=GtP+lDO381IQFbVtBs7Mo0BwWNngwVZM/o1A6xM5umJbs8S9Rtu5+VxmbjnZjKbD6T
+         fMYdyXItoQFgQ/t5aQE9r5u1CaWC/dm5SuLEqpJyc0BM3syg5MITk6CpBHxjQbr9nTXk
+         7exYs5IpFkOfqQMBygztIXF8xr9Fx4d7KqLVkK2gOJzREmkK/352hscLF7n+ZgErN2fC
+         BlH9oyd+cDRjbCvdofFklIwCmIml7x+Q7f2Im41OjmAJHwTIf5Z3IId5tRnb4J+0vPvp
+         M9sFenMvNXLeZmilsawA8HIdJRLRyRhygtPok8cF5Ip86cjJDG+2jxJ5DCcBjk7LKaeS
+         2mgw==
+X-Gm-Message-State: AOAM530phoQlFMey91YVr5+EEUFDIJCRL/9oMXMbNX60crXLQcU8yVG8
+	CKhRblA9a+KTIKyItoq71EqP/sMN7g7E+lZsQbk=
+X-Google-Smtp-Source: ABdhPJyn8ZQ6kaEAjDinrJYW5XkZ9eg71XNI/c1V3tONc7HJwNUbsHta16LDdP81EnWnu79t6fP//1Gb/k+P9kQzyn0=
+X-Received: by 2002:ac8:2495:: with SMTP id s21mr3814804qts.194.1599144775195;
+ Thu, 03 Sep 2020 07:52:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200903135825.71432-1-joe.slater@windriver.com>
-In-Reply-To: <20200903135825.71432-1-joe.slater@windriver.com>
+References: <20200902080332.6083-1-costamagnagianfranco@yahoo.it>
+In-Reply-To: <20200902080332.6083-1-costamagnagianfranco@yahoo.it>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 3 Sep 2020 07:46:58 -0700
-Message-ID: <CAMKF1sphB0y3vZjBMhY3iyZPecc1ZOaW6X+RkqLwpSU6+c87Xg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/1] luajit: advance SRCREV to fix two CVE's
-To: Joe Slater <joe.slater@windriver.com>
+Date: Thu, 3 Sep 2020 07:52:29 -0700
+Message-ID: <CAMKF1sr=Aq0qt4h=YaNxmimHFRZGQTEx9PMyMx8vHLww2oOVqQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] brotli: update to 1.0.9
+To: Gianfranco <costamagna.gianfranco@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Randy MacLeod <randy.macleod@windriver.com>
+	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>, 
+	Gianfranco Costamagna <locutusofborg@debian.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Sep 3, 2020 at 6:58 AM Joe Slater <joe.slater@windriver.com> wrote:
+I am seeing cpprest failure and it seems to be related to this
+
+https://errors.yoctoproject.org/Errors/Details/498414/
+
+Fails with
+
+arm-yoe-linux-gnueabi-g++: error: unrecognized command-line option '-R'
+arm-yoe-linux-gnueabi-g++: error: unrecognized command-line option '-R'
+
+somewhere in log I see.
+
+-R/usr/lib  -lbrotlidec  -R/usr/lib  -lbrotlienc
+
+On Wed, Sep 2, 2020 at 1:03 AM Gianfranco
+<costamagna.gianfranco@gmail.com> wrote:
 >
-> Fix CVE-2020-15890 and CVE-2020-24372.
->
-> Also change PV format because the reference to 2.1.0-beta3
-> was already far behind the SRCREV.  Now, base PV on the branch
-> name and date of SRCREV commit.
->
-> Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+> Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 > ---
->  meta-oe/recipes-devtools/luajit/luajit_git.bb | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
+>  .../brotli/{brotli_1.0.7.bb => brotli_1.0.9.bb}               | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-extended/brotli/{brotli_1.0.7.bb => brotli_1.0.9.bb} (91%)
 >
-> diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-> index cc9039416..820722195 100644
-> --- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
-> +++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-> @@ -3,13 +3,15 @@ LICENSE = "MIT"
->  LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d739bb9250a55c124a545b588fd76771"
->  HOMEPAGE = "http://luajit.org"
+> diff --git a/meta-oe/recipes-extended/brotli/brotli_1.0.7.bb b/meta-oe/recipes-extended/brotli/brotli_1.0.9.bb
+> similarity index 91%
+> rename from meta-oe/recipes-extended/brotli/brotli_1.0.7.bb
+> rename to meta-oe/recipes-extended/brotli/brotli_1.0.9.bb
+> index 32f855844..642e18f4a 100644
+> --- a/meta-oe/recipes-extended/brotli/brotli_1.0.7.bb
+> +++ b/meta-oe/recipes-extended/brotli/brotli_1.0.9.bb
+> @@ -7,8 +7,8 @@ LICENSE = "MIT"
+>  LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=941ee9cd1609382f946352712a319b4b"
 >
-> -PV = "2.1.0~beta3"
-> -SRCREV = "0ad60ccbc3768fa8e3e726858adf261950edbc22"
->  SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
->             file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
->             file://clang.patch \
->             "
->
-> +# Set PV to the branch and date associated with SRCREV.
-> +PV = "v2.1-200809"
-
-does this sort above 2.1.0~beta3 ? and below 2.1.0
-
-> +SRCREV = "94d4abcca966df2cc423e821bcacd04898f73117"
-> +
+>  SRC_URI = "git://github.com/google/brotli.git"
+> -# tag 1.0.7
+> -SRCREV= "d6d98957ca8ccb1ef45922e978bb10efca0ea541"
+> +# tag 1.0.9
+> +SRCREV= "e61745a6b7add50d380cfd7d3883dd6c62fc2c71"
 >  S = "${WORKDIR}/git"
 >
->  inherit pkgconfig binconfig siteinfo
+>  inherit cmake lib_package
 > --
 > 2.17.1
 >
