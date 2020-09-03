@@ -1,65 +1,59 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.14095.1599140130962665324
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web12.14621.1599141529673268653
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Sep 2020 06:35:31 -0700
+ Thu, 03 Sep 2020 06:58:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=47596 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kDpOj-0007vv-9g; Thu, 03 Sep 2020 16:35:30 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-sentry-sdk: Upgrade 0.17.2 -> 0.17.3
-Date: Thu,  3 Sep 2020 16:35:20 +0300
-Message-Id: <20200903133520.19437-3-leon.anavi@konsulko.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: joe.slater@windriver.com)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 083Dwl5x001424
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 3 Sep 2020 06:58:48 -0700 (PDT)
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCB.corp.ad.wrs.com
+ (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Thu, 3 Sep 2020
+ 06:58:25 -0700
+From: "Joe Slater" <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
+Subject: [meta-oe][PATCH 1/1] luajit: advance SRCREV to fix two CVE's
+Date: Thu, 3 Sep 2020 06:58:25 -0700
+Message-ID: <20200903135825.71432-1-joe.slater@windriver.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200903133520.19437-1-leon.anavi@konsulko.com>
-References: <20200903133520.19437-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+MIME-Version: 1.0
+Content-Type: text/plain
 
-Upgrade to release 0.17.3:
+Fix CVE-2020-15890 and CVE-2020-24372.
 
-- Fix an issue with the pure_eval integration in interaction with
-  trimming where pure_eval would create a lot of useless local
-  variables that then drown out the useful ones in trimming.
+Also change PV format because the reference to 2.1.0-beta3
+was already far behind the SRCREV.  Now, base PV on the branch
+name and date of SRCREV commit.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- ...hon3-sentry-sdk_0.17.2.bb => python3-sentry-sdk_0.17.3.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-sentry-sdk_0.17.2.bb => python3-sentry-sdk_0.17.3.bb} (72%)
+ meta-oe/recipes-devtools/luajit/luajit_git.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.2.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.3.bb
-similarity index 72%
-rename from meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.2.bb
-rename to meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.3.bb
-index 9eddbbfdd..0a39fb142 100644
---- a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.3.bb
-@@ -5,8 +5,8 @@ HOMEPAGE = "https://github.com/getsentry/sentry-python"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+index cc9039416..820722195 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+@@ -3,13 +3,15 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d739bb9250a55c124a545b588fd76771"
+ HOMEPAGE = "http://luajit.org"
  
--SRC_URI[md5sum] = "a9d68b19c457d6a9ff70396ab341fca2"
--SRC_URI[sha256sum] = "bbfe5633aee4dacb53d79d303ab6bfacf1749fb717750c112fb1658e5accce0d"
-+SRC_URI[md5sum] = "5d4abcc416cbd0b9443bf56588b02b55"
-+SRC_URI[sha256sum] = "0af429c221670e602f960fca85ca3f607c85510a91f11e8be8f742a978127f78"
+-PV = "2.1.0~beta3"
+-SRCREV = "0ad60ccbc3768fa8e3e726858adf261950edbc22"
+ SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
+            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
+            file://clang.patch \
+            "
  
- PYPI_PACKAGE = "sentry-sdk"
- inherit pypi setuptools3
++# Set PV to the branch and date associated with SRCREV.
++PV = "v2.1-200809"
++SRCREV = "94d4abcca966df2cc423e821bcacd04898f73117"
++
+ S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig binconfig siteinfo
 -- 
 2.17.1
 
