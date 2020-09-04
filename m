@@ -1,60 +1,50 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web12.38734.1599227976845643679
+Received: from fanzine.igalia.com (fanzine.igalia.com [178.60.130.6])
+ by mx.groups.io with SMTP id smtpd.web12.2485.1599243450460694517
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Sep 2020 06:59:37 -0700
+ Fri, 04 Sep 2020 11:17:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: trevor.gamblin@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 084DxW4l022032
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
-	Fri, 4 Sep 2020 06:59:33 -0700 (PDT)
-Received: from yow-tgamblin-fedora2.wrs.com (128.224.56.206) by
- ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
- 14.3.487.0; Fri, 4 Sep 2020 06:59:25 -0700
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] packagegroup-meta-python: fix PACKAGES and default ptest recipe name
-Date: Fri, 4 Sep 2020 09:59:24 -0400
-Message-ID: <20200904135924.800776-1-trevor.gamblin@windriver.com>
-X-Mailer: git-send-email 2.26.2
+ dkim=pass header.i=@igalia.com header.s=20170329 header.b=nFQJzWJ+;
+ spf=pass (domain: igalia.com, ip: 178.60.130.6, mailfrom: jdapena@igalia.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; s=20170329;
+	h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From; bh=z9nqh0rtRDVGaPs8xQaH0YuplYLPZe/pdge4iKrcfuc=;
+	b=nFQJzWJ+wavlaEE3/ODPsd9N0ccyWVGus07+lqZ0g6g5Y0zEW7jTAnAiUS3/uFZUNi0prdQxU+f5H6IoXsH9iQ8rz2WVGoarroeWzRqeBhG/K1OIHzmfg/M1K2uu13ZJnunZwhG6zdMgeWDFb7f3SD69MQ9tbO1osNehkYbUeu/KWteCuSvh9di3T/7w3ZSdFOLxZi+5Qn+MX1+YTk81Yao+QuPfwAIDkk5UPLred/9iCwqyx8XAvqStYBb4fvAx+hVGT0MzKe07ILJp65KYXjAQ+qyvWzzskQMJ3dsiKSwAkzP5sqlsKDKV7zebThzdarolUvz5IBl3tzCGUPlkyA==;
+Received: from 120.red-83-51-59.dynamicip.rima-tde.net ([83.51.59.120] helo=localhost.localdomain)
+	by fanzine.igalia.com with esmtpsa 
+	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
+	id 1kEGHA-0004bw-0a; Fri, 04 Sep 2020 20:17:28 +0200
+From: jdapena@igalia.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Jose Dapena Paz <jdapena@igalia.com>
+Subject: [meta-oe][dunfell][PATCH] xmlsec1: do not use system libraries for non nss
+Date: Fri,  4 Sep 2020 20:16:42 +0200
+Message-Id: <20200904181642.252108-1-jdapena@igalia.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-From: Trevor Gamblin <tvgamblin@gmail.com>
+In case PACKAGECONFIG[nss] is not set, in case system includes
+nss or nspr, it will still try to compile using system libraries.
 
-Remove packagegroup-meta-python3-ptest from PACKAGES in packagegroup-meta-python.bb
-to fix QA issue, and change python3-cryptography to python3-cryptography-ptest in
-RDEPENDS_packagegroup-meta-python3-ptest to be consistent with how other ptest images
-list RDEPENDS.
-
-Signed-off-by: Trevor Gamblin <tvgamblin@gmail.com>
+To avoid that, this change explicitely uses --with-nss=no and
+--with-nspr=no so configure does not try to find those libraries
+if they are disabled.
 ---
- .../recipes-core/packagegroups/packagegroup-meta-python.bb     | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.30.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 0aea30e33..61623ac98 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -5,7 +5,6 @@ inherit packagegroup
- PROVIDES = "${PACKAGES}"
- PACKAGES = ' \
-     packagegroup-meta-python3 \
--    packagegroup-meta-python3-ptest \
- '
+diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.30.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.30.bb
+index 20c7b2d37..93b0d6a67 100644
+--- a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.30.bb
++++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.30.bb
+@@ -32,7 +32,7 @@ inherit autotools-brokensep ptest pkgconfig
+ PACKAGECONFIG ??= "gnutls libgcrypt nss openssl des"
+ PACKAGECONFIG[gnutls] = ",,gnutls"
+ PACKAGECONFIG[libgcrypt] = ",,libgcrypt"
+-PACKAGECONFIG[nss] = "--with-nss=${STAGING_DIR_HOST} --with-nspr=${STAGING_DIR_HOST},,nss nspr"
++PACKAGECONFIG[nss] = "--with-nss=${STAGING_DIR_HOST} --with-nspr=${STAGING_DIR_HOST},--with-nss=no --with-nspr=no,nss nspr"
+ PACKAGECONFIG[openssl] = ",,openssl"
+ PACKAGECONFIG[des] = ",--disable-des,,"
  
- RDEPENDS_packagegroup-meta-python3 = "\
-@@ -454,7 +453,7 @@ RDEPENDS_packagegroup-meta-python3-connectivity = "\
- "
- 
- RDEPENDS_packagegroup-meta-python3-ptest = "\
--    python3-cryptography \
-+    python3-cryptography-ptest \
-     "
- 
- EXCLUDE_FROM_WORLD = "1"
 -- 
-2.26.2
+2.25.1
 
