@@ -1,77 +1,61 @@
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com [209.85.221.67])
- by mx.groups.io with SMTP id smtpd.web11.38465.1599226056162629001
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.38426.1599227242280170503
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Sep 2020 06:27:36 -0700
+ Fri, 04 Sep 2020 06:47:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kynetics-com.20150623.gappssmtp.com header.s=20150623 header.b=fDt3GSZt;
- spf=neutral (domain: kynetics.com, ip: 209.85.221.67, mailfrom: diego.rondini@kynetics.com)
-Received: by mail-wr1-f67.google.com with SMTP id x14so6718481wrl.12
-        for <openembedded-devel@lists.openembedded.org>; Fri, 04 Sep 2020 06:27:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kynetics-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=zl9mSnnn02Wto70arI+yH7GTbgW8D60BpBVqD8n9UyU=;
-        b=fDt3GSZtkvpFFHavI13cOwaoA29sSB51Yw1kMfYRbW0XvW3qNHtECaZrvMQqlK2gDY
-         ib/7gjnRAFgUqTJzcyWK7uNvpO2UIH236ZvRaLWJDKon8/0uy6GFzHScSfG8D7Xs9dcS
-         TEbkV3BkBEwICn1gAVsEl8wXZCKRF8dwkEJawD5c4vx+SQ7zoDPRju4CDgL3YcNarrt5
-         xx5V68xHIl/qoL7Pg9RvVJ8RGgX+jqUZVR1qH4ySeHPoS+xIQDOp45q7KSqOs3GjtlFB
-         9EQWhbqtDDIdLPE91x72Cfw3p6j/SooqP8F3nIhNS9XynqEz2+s7ConNizwBuBMMa+Ge
-         bTWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=zl9mSnnn02Wto70arI+yH7GTbgW8D60BpBVqD8n9UyU=;
-        b=kdnNbfbHLoQrU3EKlmUqbsNAqXUNnbSXkhis+bL4PK3ggQQTzc/zVi0XszxLFRHB1U
-         BrOYk0dsaaFpM4wAzNCguZeo86zpFzH728GsoPubi1poC7y3M659FMTa5AD1uHv1FirG
-         HtiqK69omWJNQcBVvaDLzeEwXHjcnfUE5CoPKFfSIgLwfIOmnAjYC8wAwYWe63HgH6Ak
-         sfhfXOraqrdu3dDChGtF6r6i5GzIOngJKXL1otf//aPi7Yfc2YtK30unC+pGbHFbSqNY
-         KGfW+dxuxWskZGkHZIK/WeuZWUbYI8iSuJPdl2Domsh5YfaOjrHtXR55EAFNMRIrkEVq
-         ijtQ==
-X-Gm-Message-State: AOAM530e9NHLMy/dtMqUpmhrg/h153r6oEXrrz3eTseXv3JG+ZsmEPKu
-	e0daX9Dd5ckOkx72nlkbJUu//zhEKHbzjg==
-X-Google-Smtp-Source: ABdhPJybLhleRp9jTRlUmZM5AbHOzPOcW7r6kN4u9t68U129wVepD8uHKDFIj48OCLkuS+6HPCw+pw==
-X-Received: by 2002:adf:e74d:: with SMTP id c13mr7285990wrn.45.1599226054281;
-        Fri, 04 Sep 2020 06:27:34 -0700 (PDT)
-Return-Path: <diego.rondini@kynetics.com>
-Received: from localhost.lan (217-133-17-98.static.clienti.tiscali.it. [217.133.17.98])
-        by smtp.gmail.com with ESMTPSA id h2sm11636027wrp.69.2020.09.04.06.27.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Sep 2020 06:27:33 -0700 (PDT)
-From: "Diego" <diego.rondini@kynetics.com>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=38492 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kEC3i-0000aK-KU; Fri, 04 Sep 2020 16:47:19 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Diego Rondini <diego.rondini@kynetics.com>
-Subject: [meta-gnome][PATCH] gvfs: adjust fuse packageconfig to fuse3
-Date: Fri,  4 Sep 2020 15:27:23 +0200
-Message-Id: <20200904132723.754430-1-diego.rondini@kynetics.com>
-X-Mailer: git-send-email 2.26.2
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 01/10] python3-ruamel-yaml: Upgrade 0.16.10 -> 0.16.11
+Date: Fri,  4 Sep 2020 16:47:04 +0300
+Message-Id: <20200904134713.13164-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Adjust fuse packageconfig to depend on fuse3, which is the only supported
-option in gvfs ≥ 1.41.
-https://gitlab.gnome.org/GNOME/gvfs/-/commit/7a0a06186b6fef07b8fce2360c04fd075fc84ed1
+Upgrade to release 0.16.11:
 
-Signed-off-by: Diego Rondini <diego.rondini@kynetics.com>
+- workaround issue with setuptools 0.50 and importing pip
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-gnome/recipes-gnome/gvfs/gvfs_1.44.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...-ruamel-yaml_0.16.10.bb => python3-ruamel-yaml_0.16.11.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-ruamel-yaml_0.16.10.bb => python3-ruamel-yaml_0.16.11.bb} (72%)
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.44.1.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.44.1.bb
-index ec0ac2b29..ad5dab5ec 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.44.1.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.44.1.bb
-@@ -62,7 +62,7 @@ PACKAGECONFIG[samba] = "-Dsmb=true, -Dsmb=false, samba"
- PACKAGECONFIG[systemd] = "-Dsystemduserunitdir=${systemd_user_unitdir} -Dtmpfilesdir=${libdir}/tmpfiles.d, -Dsystemduserunitdir=no -Dtmpfilesdir=no, systemd"
+diff --git a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.10.bb b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.11.bb
+similarity index 72%
+rename from meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.10.bb
+rename to meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.11.bb
+index 076721a09..9b3a2e1d9 100644
+--- a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.10.bb
++++ b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.11.bb
+@@ -8,8 +8,8 @@ PYPI_PACKAGE = "ruamel.yaml"
  
- # needs meta-filesystems
--PACKAGECONFIG[fuse] = "-Dfuse=true, -Dfuse=false, fuse"
-+PACKAGECONFIG[fuse] = "-Dfuse=true, -Dfuse=false, fuse3"
+ inherit pypi setuptools3
  
- # libcdio-paranoia recipe doesn't exist yet
- PACKAGECONFIG[cdda] = "-Dcdda=true, -Dcdda=false, libcdio-paranoia"
+-SRC_URI[md5sum] = "02774e7ed3273b3d8eee6c08326b91c4"
+-SRC_URI[sha256sum] = "099c644a778bf72ffa00524f78dd0b6476bca94a1da344130f4bf3381ce5b954"
++SRC_URI[md5sum] = "020a0140d06b2e32f53944d4335f9877"
++SRC_URI[sha256sum] = "43bf19037937f78845775d84582dd6f3ac966bc1b7748de898fad35638c74771"
+ 
+ do_install_prepend() {
+     export RUAMEL_NO_PIP_INSTALL_CHECK=1
 -- 
-2.26.2
+2.17.1
 
