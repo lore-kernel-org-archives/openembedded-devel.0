@@ -1,79 +1,60 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.38451.1599227251365733988
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web12.38734.1599227976845643679
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Sep 2020 06:47:31 -0700
+ Fri, 04 Sep 2020 06:59:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=38492 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kEC3t-0000aK-Na; Fri, 04 Sep 2020 16:47:30 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 10/10] python3-fann2: Consolidate in a single file
-Date: Fri,  4 Sep 2020 16:47:13 +0300
-Message-Id: <20200904134713.13164-10-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200904134713.13164-1-leon.anavi@konsulko.com>
-References: <20200904134713.13164-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.7
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: trevor.gamblin@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 084DxW4l022032
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
+	Fri, 4 Sep 2020 06:59:33 -0700 (PDT)
+Received: from yow-tgamblin-fedora2.wrs.com (128.224.56.206) by
+ ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+ 14.3.487.0; Fri, 4 Sep 2020 06:59:25 -0700
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] packagegroup-meta-python: fix PACKAGES and default ptest recipe name
+Date: Fri, 4 Sep 2020 09:59:24 -0400
+Message-ID: <20200904135924.800776-1-trevor.gamblin@windriver.com>
+X-Mailer: git-send-email 2.26.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Consolidate inc and bb files into a single bb file.
+From: Trevor Gamblin <tvgamblin@gmail.com>
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Remove packagegroup-meta-python3-ptest from PACKAGES in packagegroup-meta-python.bb
+to fix QA issue, and change python3-cryptography to python3-cryptography-ptest in
+RDEPENDS_packagegroup-meta-python3-ptest to be consistent with how other ptest images
+list RDEPENDS.
+
+Signed-off-by: Trevor Gamblin <tvgamblin@gmail.com>
 ---
- .../recipes-devtools/python/python-fann2.inc        |  9 ---------
- .../recipes-devtools/python/python3-fann2_1.1.2.bb  | 13 +++++++++++--
- 2 files changed, 11 insertions(+), 11 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-fann2.inc
+ .../recipes-core/packagegroups/packagegroup-meta-python.bb     | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-fann2.inc b/meta-python/recipes-devtools/python/python-fann2.inc
-deleted file mode 100644
-index c415b35a9..000000000
---- a/meta-python/recipes-devtools/python/python-fann2.inc
-+++ /dev/null
-@@ -1,9 +0,0 @@
--SUMMARY = "Python bindings for Fast Artificial Neural Networks 2.2.0 (FANN >= 2.2.0)"
--SECTION = "devel/python"
--LICENSE = "LGPLv2"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=c73b943dc75f6f65e007c56ac6515c8f"
--
--SRC_URI[md5sum] = "0b85b418018746d63ed66b55465697a9"
--SRC_URI[sha256sum] = "cdca0a65ad48e08320672affe38c3dd4ea15e27821e5e1db9fa2b34299bdd41e"
--
--DEPENDS += "swig-native libfann"
-diff --git a/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb b/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
-index a04c961f4..3fdc1363c 100644
---- a/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
-@@ -1,4 +1,13 @@
--require python-fann2.inc
--inherit pypi setuptools3
-+SUMMARY = "Python bindings for Fast Artificial Neural Networks 2.2.0 (FANN >= 2.2.0)"
-+SECTION = "devel/python"
-+LICENSE = "LGPLv2"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=c73b943dc75f6f65e007c56ac6515c8f"
-+
-+SRC_URI[md5sum] = "0b85b418018746d63ed66b55465697a9"
-+SRC_URI[sha256sum] = "cdca0a65ad48e08320672affe38c3dd4ea15e27821e5e1db9fa2b34299bdd41e"
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index 0aea30e33..61623ac98 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -5,7 +5,6 @@ inherit packagegroup
+ PROVIDES = "${PACKAGES}"
+ PACKAGES = ' \
+     packagegroup-meta-python3 \
+-    packagegroup-meta-python3-ptest \
+ '
  
- SRC_URI += " file://0001-setup.py-Don-t-hardcode-swig-and-fann2-binary-locati.patch"
-+
-+inherit pypi setuptools3
-+
-+DEPENDS += "swig-native libfann"
+ RDEPENDS_packagegroup-meta-python3 = "\
+@@ -454,7 +453,7 @@ RDEPENDS_packagegroup-meta-python3-connectivity = "\
+ "
+ 
+ RDEPENDS_packagegroup-meta-python3-ptest = "\
+-    python3-cryptography \
++    python3-cryptography-ptest \
+     "
+ 
+ EXCLUDE_FROM_WORLD = "1"
 -- 
-2.17.1
+2.26.2
 
