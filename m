@@ -1,23 +1,23 @@
 Received: from mail.kapsi.fi (mail.kapsi.fi [91.232.154.25])
- by mx.groups.io with SMTP id smtpd.web12.3850.1599327016295763018
+ by mx.groups.io with SMTP id smtpd.web12.3851.1599327019937277493
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Sep 2020 10:30:16 -0700
+ Sat, 05 Sep 2020 10:30:20 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: lakka.kapsi.fi, ip: 91.232.154.25, mailfrom: mcfrisk@lakka.kapsi.fi)
 Received: from kapsi.fi ([2001:67c:1be8::11] helo=lakka.kapsi.fi)
 	by mail.kapsi.fi with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.89)
 	(envelope-from <mcfrisk@lakka.kapsi.fi>)
-	id 1kEc10-0003Np-4j; Sat, 05 Sep 2020 20:30:14 +0300
+	id 1kEc13-0003Re-Em; Sat, 05 Sep 2020 20:30:18 +0300
 Received: from mcfrisk by lakka.kapsi.fi with local (Exim 4.92)
 	(envelope-from <mcfrisk@lakka.kapsi.fi>)
-	id 1kEc10-0009Q2-0c; Sat, 05 Sep 2020 20:30:14 +0300
+	id 1kEc13-0009V6-2C; Sat, 05 Sep 2020 20:30:17 +0300
 From: "Mikko Rapeli" <mikko.rapeli@bmw.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Mikko Rapeli <mikko.rapeli@bmw.de>
-Subject: [meta-networking][PATCH 2/3] mdns: set CVE_PRODUCT to "apple:mdnsresponder"
-Date: Sat,  5 Sep 2020 20:29:50 +0300
-Message-Id: <20200905172951.31808-2-mikko.rapeli@bmw.de>
+Subject: [meta-networking][PATCH 3/3] mdns: add BSD-3-Clause to LICENSE
+Date: Sat,  5 Sep 2020 20:29:51 +0300
+Message-Id: <20200905172951.31808-3-mikko.rapeli@bmw.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200905172951.31808-1-mikko.rapeli@bmw.de>
 References: <20200905172951.31808-1-mikko.rapeli@bmw.de>
@@ -44,33 +44,46 @@ X-Rspam-Report: Action: no action
  Symbol: FROM_NEQ_ENVFROM(0.00)
  Symbol: BAYES_HAM(-3.00)
  Symbol: RCVD_COUNT_TWO(0.00)
- Message-ID: 20200905172951.31808-2-mikko.rapeli@bmw.de
+ Message-ID: 20200905172951.31808-3-mikko.rapeli@bmw.de
 X-SA-Exim-Connect-IP: 2001:67c:1be8::11
 X-SA-Exim-Mail-From: mcfrisk@lakka.kapsi.fi
 X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
 Content-Transfer-Encoding: 8bit
 
-This is used in CVEs like
-https://nvd.nist.gov/vuln/detail/CVE-2015-7987
+The LICENSE file in source tree says:
+
+The majority of the source code in the mDNSResponder project is licensed
+under the terms of the Apache License, Version 2.0, available from:
+   <http://www.apache.org/licenses/LICENSE-2.0>
+
+To accommodate license compatibility with the widest possible range
+of client code licenses, the shared library code, which is linked
+at runtime into the same address space as the client using it, is
+licensed under the terms of the "Three-Clause BSD License".
+
+The Linux Name Service Switch code, contributed by National ICT
+Australia Ltd (NICTA) is licensed under the terms of the NICTA Public
+Software Licence (which is substantially similar to the "Three-Clause
+BSD License", with some additional language pertaining to Australian law).
 
 Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
 ---
- meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb b/meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb
-index 88521c1b2..a87b02a78 100644
+index a87b02a78..086b40869 100644
 --- a/meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb
 +++ b/meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb
-@@ -25,6 +25,8 @@ SRC_URI = "https://opensource.apple.com/tarballs/mDNSResponder/mDNSResponder-${P
- SRC_URI[md5sum] = "ac766013bbcb323e9db4c80805b2552a"
- SRC_URI[sha256sum] = "b86f4816b4145915198e7c5bf0bc56dbbfd960e9a4518bb6486baa40cdcca7e6"
+@@ -1,7 +1,7 @@
+ SUMMARY = "Publishes & browses available services on a link according to the Zeroconf / Bonjour protocol"
+ DESCRIPTION = "Bonjour, also known as zero-configuration networking, enables automatic discovery of computers, devices, and services on IP networks."
+ HOMEPAGE = "http://developer.apple.com/networking/bonjour/"
+-LICENSE = "Apache-2.0"
++LICENSE = "Apache-2.0 & BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://../LICENSE;md5=31c50371921e0fb731003bbc665f29bf"
  
-+CVE_PRODUCT = "apple:mdnsresponder"
-+
- PARALLEL_MAKE = ""
- 
- S = "${WORKDIR}/mDNSResponder-${PV}/mDNSPosix"
+ COMPATIBLE_HOST_libc-musl = 'null'
 -- 
 2.20.1
 
