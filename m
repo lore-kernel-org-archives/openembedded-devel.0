@@ -1,866 +1,1063 @@
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com [209.85.210.194])
- by mx.groups.io with SMTP id smtpd.web10.3049.1599324985554228939
+Received: from mail.kapsi.fi (mail.kapsi.fi [91.232.154.25])
+ by mx.groups.io with SMTP id smtpd.web12.3845.1599327013529892343
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Sep 2020 09:56:25 -0700
+ Sat, 05 Sep 2020 10:30:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gE11QzEg;
- spf=pass (domain: gmail.com, ip: 209.85.210.194, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f194.google.com with SMTP id c196so849986pfc.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 05 Sep 2020 09:56:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=RUP7MKOV4EJMY82uNFdhXXm1bk1/vnyR+zdmwdcmQdc=;
-        b=gE11QzEgS14bmSnprvM4GOmQ50a1+sVYc0eQ0LyO/c9uz+R8Qc0hzGXqp4yHSCsLbm
-         0P06x053s2qQbZC25+x/LyZOP6ooB7ZT7xoYwggD/rE/0ddOSNgC64cq+f3ezS7BCcD1
-         DASQGIqUH9qmguIpwUpyPR3uF5HSnDCG+Ydrm84ZB2b1L8TBhKvOicMcRmehtCfvfoJD
-         1iel2KIS1AFmAIIw1bTthD1M3/MajRd1ZC1SSk+nuLaHUhRp/29nyVpdq8VsG2iyg+fV
-         zzd9+VpRVJiVdwLsnUCYkLTO8KljblH3rLmUkLoZ4FISsywYFNBXxAmJKJw1uxa7e1dr
-         fuLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=RUP7MKOV4EJMY82uNFdhXXm1bk1/vnyR+zdmwdcmQdc=;
-        b=Mty3gs0v8wU26deOKEAq1OkPAWgfHcLyPgfk1UCuWDbZ7TXX5eHq6JXM+I+Or9xXaM
-         i2pAvUfa4yNWYpRyy72zl+yNMKDLxgyIQm76JVqkhsjkfBzLlqk1aRpF7XRHKBQyfuGn
-         jH1X2oC0zZee9pcd6tVA4GlCi4eq6Kvts28q+Hx4gNpdLmGYqxfVxLFtRAsmBmW3KKSt
-         FqhwFwKcQLerIqoMtp+8RJmtEYCVMQ4GRvenCyMPhOrZYDY6U5yALE44WRSFZPt3ibnR
-         Q+7bzx25D2n9EdzgUuWUwdo7q9hSSR62XCPDZg/oyJu0sZsJRBn4QM2f8fJVXBohK2KA
-         JeIw==
-X-Gm-Message-State: AOAM531Xyb6LcaYe1MWEq6S8L4RLnBMivSH/seme77B9Oi1/pAA2ThTv
-	/UQCBdqtIfF1E1b+oEAG34gUbohs9Rs=
-X-Google-Smtp-Source: ABdhPJx5yZfDqrngs/N0H4hQoltRGGWeyMD0WHE+urCTh7DMyVmuu/Z82cvc/ncAhk0Ig9/mdIMSvA==
-X-Received: by 2002:a63:3241:: with SMTP id y62mr11653353pgy.305.1599324984406;
-        Sat, 05 Sep 2020 09:56:24 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:745b:fcae:da87:5147])
-        by smtp.gmail.com with ESMTPSA id lb1sm7410944pjb.26.2020.09.05.09.56.23
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 05 Sep 2020 09:56:23 -0700 (PDT)
-From: "akuster" <akuster808@gmail.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: lakka.kapsi.fi, ip: 91.232.154.25, mailfrom: mcfrisk@lakka.kapsi.fi)
+Received: from kapsi.fi ([2001:67c:1be8::11] helo=lakka.kapsi.fi)
+	by mail.kapsi.fi with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.89)
+	(envelope-from <mcfrisk@lakka.kapsi.fi>)
+	id 1kEc0u-0003J7-1v; Sat, 05 Sep 2020 20:30:08 +0300
+Received: from mcfrisk by lakka.kapsi.fi with local (Exim 4.92)
+	(envelope-from <mcfrisk@lakka.kapsi.fi>)
+	id 1kEc0t-0008jq-Ui; Sat, 05 Sep 2020 20:30:07 +0300
+From: "Mikko Rapeli" <mikko.rapeli@bmw.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 20/20] net-snmp: Fix CVE-2020-15861 and CVE-2020-15862
-Date: Sat,  5 Sep 2020 09:56:03 -0700
-Message-Id: <d7b41ced4b9a9a68083b0fcceff3b226298cff8b.1599324864.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1599324864.git.akuster808@gmail.com>
-References: <cover.1599324864.git.akuster808@gmail.com>
+Cc: Mikko Rapeli <mikko.rapeli@bmw.de>,
+	Nate Karstens <nate.karstens@garmin.com>,
+	Paul Eggleton <paul.eggleton@linux.intel.com>
+Subject: [meta-networking][PATCH 1/3] mdns: update to version 1096.40.7
+Date: Sat,  5 Sep 2020 20:29:49 +0300
+Message-Id: <20200905172951.31808-1-mikko.rapeli@bmw.de>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+X-Rspam-Score: 2.3 (++)
+X-Rspam-Report: Action: no action
+ Symbol: RCVD_TLS_LAST(0.00)
+ Symbol: ARC_NA(0.00)
+ Symbol: DMARC_POLICY_SOFTFAIL(0.10)
+ Symbol: FROM_HAS_DN(0.00)
+ Symbol: RCPT_COUNT_THREE(0.00)
+ Symbol: R_MISSING_CHARSET(2.50)
+ Symbol: TO_MATCH_ENVRCPT_ALL(0.00)
+ Symbol: MIME_GOOD(-0.10)
+ Symbol: BROKEN_CONTENT_TYPE(1.50)
+ Symbol: TO_DN_SOME(0.00)
+ Symbol: MID_CONTAINS_FROM(1.00)
+ Symbol: NEURAL_HAM(-0.00)
+ Symbol: R_SPF_NA(0.00)
+ Symbol: FORGED_SENDER(0.30)
+ Symbol: R_DKIM_NA(0.00)
+ Symbol: MIME_TRACE(0.00)
+ Symbol: ASN(0.00)
+ Symbol: FROM_NEQ_ENVFROM(0.00)
+ Symbol: BAYES_HAM(-3.00)
+ Symbol: RCVD_COUNT_TWO(0.00)
+ Message-ID: 20200905172951.31808-1-mikko.rapeli@bmw.de
+X-SA-Exim-Connect-IP: 2001:67c:1be8::11
+X-SA-Exim-Mail-From: mcfrisk@lakka.kapsi.fi
+X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
+Content-Transfer-Encoding: 8bit
 
-From: Ovidiu Panait <ovidiu.panait@windriver.com>
+Refresh Makefile patch (build.patch) to properly cross compile
+mdns. Then try refresh patches which still apply. Following patches
+don't apply anymore due to refactoring done on mdns side so thus
+dropping patches:
 
-Net-SNMP through 5.7.3 allows Escalation of Privileges because of UNIX symbolic
-link (symlink) following.
+ * 0005-Handle-noisy-netlink-sockets.patch
+ * 0007-Indicate-loopback-interface-to-mDNS-core.patch
 
-Net-SNMP through 5.7.3 has Improper Privilege Management because SNMP WRITE
-access to the EXTEND MIB provides the ability to run arbitrary commands as
-root.
-
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2020-15861
-https://nvd.nist.gov/vuln/detail/CVE-2020-15862
-
-Upstream patches:
-https://github.com/net-snmp/net-snmp/commit/2b3e300ade4add03b889e61d610b0db77d300fc3
-https://github.com/net-snmp/net-snmp/commit/9cfb38b0aa95363da1466ca81dd929989ba27c1f
-https://github.com/net-snmp/net-snmp/commit/114e4c2cec2601ca56e8afb1f441520f75a9a312
-https://github.com/net-snmp/net-snmp/commit/2968b455e6f182f329746e2bca1043f368618c73
-https://github.com/net-snmp/net-snmp/commit/4fd9a450444a434a993bc72f7c3486ccce41f602
-https://github.com/net-snmp/net-snmp/commit/77f6c60f57dba0aaea5d8ef1dd94bcd0c8e6d205
-
-CVE-2020-15861-0005.patch is the actual fix for CVE-2020-15861 and
-CVE-2020-15861-0001.patch through CVE-2020-15861-0004.patch are context
-patches needed by the fix to apply cleanly.
-
-Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
 ---
- .../net-snmp/CVE-2020-15861-0001.patch        | 164 ++++++++
- .../net-snmp/CVE-2020-15861-0002.patch        |  44 +++
- .../net-snmp/CVE-2020-15861-0003.patch        |  40 ++
- .../net-snmp/CVE-2020-15861-0004.patch        |  33 ++
- .../net-snmp/CVE-2020-15861-0005.patch        | 349 ++++++++++++++++++
- .../net-snmp/net-snmp/CVE-2020-15862.patch    |  87 +++++
- .../net-snmp/net-snmp_5.8.bb                  |   6 +
- 7 files changed, 723 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0001.patch
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0002.patch
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0003.patch
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0004.patch
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0005.patch
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15862.patch
+ ...utine-for-cleaning-recent-interfaces.patch |  21 +-
+ .../0001-mdns-include-stddef.h-for-NULL.patch |  40 ++++
+ ...-cross-compilation-fixes-for-bitbake.patch | 145 ++++++++++++
+ ...0004-Use-list-for-changed-interfaces.patch |  28 +--
+ .../0005-Handle-noisy-netlink-sockets.patch   | 212 ------------------
+ ...cate-loopback-interface-to-mDNS-core.patch | 129 -----------
+ ...ic-allocation-to-file-scope-variable.patch |  20 +-
+ .../recipes-protocols/mdns/files/build.patch  | 167 --------------
+ .../{mdns_878.270.2.bb => mdns_1096.40.7.bb}  |   9 +-
+ 9 files changed, 224 insertions(+), 547 deletions(-)
+ create mode 100644 meta-networking/recipes-protocols/mdns/files/0001-mdns-include-stddef.h-for-NULL.patch
+ create mode 100644 meta-networking/recipes-protocols/mdns/files/0002-mdns-cross-compilation-fixes-for-bitbake.patch
+ delete mode 100644 meta-networking/recipes-protocols/mdns/files/0005-Handle-noisy-netlink-sockets.patch
+ delete mode 100644 meta-networking/recipes-protocols/mdns/files/0007-Indicate-loopback-interface-to-mDNS-core.patch
+ delete mode 100644 meta-networking/recipes-protocols/mdns/files/build.patch
+ rename meta-networking/recipes-protocols/mdns/{mdns_878.270.2.bb => mdns_1096.40.7.bb} (91%)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0001.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0001.patch
+diff --git a/meta-networking/recipes-protocols/mdns/files/0001-Create-subroutine-for-cleaning-recent-interfaces.patch b/meta-networking/recipes-protocols/mdns/files/0001-Create-subroutine-for-cleaning-recent-interfaces.patch
+index 692c344db..f8efc1044 100644
+--- a/meta-networking/recipes-protocols/mdns/files/0001-Create-subroutine-for-cleaning-recent-interfaces.patch
++++ b/meta-networking/recipes-protocols/mdns/files/0001-Create-subroutine-for-cleaning-recent-interfaces.patch
+@@ -1,7 +1,7 @@
+-From 89ea6ac4a8840e8c2be0140a9805c6522c6c5280 Mon Sep 17 00:00:00 2001
++From 6d90f9fdaf008f5c3b8fd8d91594fa1461437888 Mon Sep 17 00:00:00 2001
+ From: Nate Karstens <nate.karstens@garmin.com>
+ Date: Wed, 28 Jun 2017 17:30:00 -0500
+-Subject: [PATCH 01/11] Create subroutine for cleaning recent interfaces
++Subject: [PATCH] Create subroutine for cleaning recent interfaces
+ 
+ Moves functionality for cleaning the list of recent
+ interfaces into its own subroutine.
+@@ -10,14 +10,14 @@ Upstream-Status: Submitted [dts@apple.com]
+ 
+ Signed-off-by: Nate Karstens <nate.karstens@garmin.com>
+ ---
+- mDNSPosix/mDNSPosix.c | 24 ++++++++++++++----------
+- 1 file changed, 14 insertions(+), 10 deletions(-)
++ mDNSPosix/mDNSPosix.c | 23 ++++++++++++++---------
++ 1 file changed, 14 insertions(+), 9 deletions(-)
+ 
+ diff --git a/mDNSPosix/mDNSPosix.c b/mDNSPosix/mDNSPosix.c
+-index 0e10bd5..ffc9696 100644
++index a63cd19..7aeee7b 100755
+ --- a/mDNSPosix/mDNSPosix.c
+ +++ b/mDNSPosix/mDNSPosix.c
+-@@ -856,6 +856,19 @@ mDNSlocal int SetupSocket(struct sockaddr *intfAddr, mDNSIPPort port, int interf
++@@ -1199,6 +1199,19 @@ mDNSlocal int SetupSocket(struct sockaddr *intfAddr, mDNSIPPort port, int interf
+      return err;
+  }
+  
+@@ -37,11 +37,10 @@ index 0e10bd5..ffc9696 100644
+  // Creates a PosixNetworkInterface for the interface whose IP address is
+  // intfAddr and whose name is intfName and registers it with mDNS core.
+  mDNSlocal int SetupOneInterface(mDNS *const m, struct sockaddr *intfAddr, struct sockaddr *intfMask, const char *intfName, int intfIndex)
+-@@ -1010,16 +1023,7 @@ mDNSlocal int SetupInterfaceList(mDNS *const m)
+- 
++@@ -1388,15 +1401,7 @@ mDNSlocal int SetupInterfaceList(mDNS *const m)
+      // Clean up.
+-     if (intfList != NULL) free_ifi_info(intfList);
+--
++     if (intfList != NULL) freeifaddrs(intfList);
++ 
+ -    // Clean up any interfaces that have been hanging around on the RecentInterfaces list for more than a minute
+ -    PosixNetworkInterface **ri = &gRecentInterfaces;
+ -    const mDNSs32 utc = mDNSPlatformUTC();
+@@ -56,5 +55,5 @@ index 0e10bd5..ffc9696 100644
+      return err;
+  }
+ -- 
+-2.17.1
++2.20.1
+ 
+diff --git a/meta-networking/recipes-protocols/mdns/files/0001-mdns-include-stddef.h-for-NULL.patch b/meta-networking/recipes-protocols/mdns/files/0001-mdns-include-stddef.h-for-NULL.patch
 new file mode 100644
-index 0000000000..f43803a663
+index 000000000..3e9be7d6a
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0001.patch
-@@ -0,0 +1,164 @@
-+From c449946b9d06571b447fce3fc0dcad89e8df05b5 Mon Sep 17 00:00:00 2001
-+From: Bart Van Assche <bvanassche@acm.org>
-+Date: Wed, 15 May 2019 14:09:25 +0200
-+Subject: [PATCH 1/5] CHANGES: libsnmp: Scan MIB directories in alphabetical
-+ order
-+
-+This guarantees that e.g. mibs/RFC1213-MIB.txt is read before mibs/SNMPv2-MIB.txt.
-+The order in which these MIBs is read matters because both define sysLocation but
-+with different attributes.
-+
-+CVE: CVE-2020-15861
-+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/2b3e300ade4add03b889e61d610b0db77d300fc3]
-+
-+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
-+---
-+ snmplib/parse.c | 113 +++++++++++++++++++++++++++++++++++-------------
-+ 1 file changed, 82 insertions(+), 31 deletions(-)
-+
-+diff --git a/snmplib/parse.c b/snmplib/parse.c
-+index 7678b35..51d119b 100644
-+--- a/snmplib/parse.c
-++++ b/snmplib/parse.c
-+@@ -4894,6 +4894,79 @@ add_mibfile(const char* tmpstr, const char* d_name, FILE *ip )
-+     }
-+ }
-+ 
-++static int elemcmp(const void *a, const void *b)
-++{
-++    const char *const *s1 = a, *const *s2 = b;
-++
-++    return strcmp(*s1, *s2);
-++}
-++
-++/*
-++ * Scan a directory and return all filenames found as an array of pointers to
-++ * directory entries (@result).
-++ */
-++static int scan_directory(char ***result, const char *dirname)
-++{
-++    DIR            *dir, *dir2;
-++    struct dirent  *file;
-++    char          **filenames = NULL;
-++    int             fname_len, i, filename_count = 0, array_size = 0;
-++    char           *tmpstr;
-++
-++    *result = NULL;
-++
-++    dir = opendir(dirname);
-++    if (!dir)
-++        return -1;
-++
-++    while ((file = readdir(dir))) {
-++        /*
-++         * Only parse file names that don't begin with a '.'
-++         * Also skip files ending in '~', or starting/ending
-++         * with '#' which are typically editor backup files.
-++         */
-++        fname_len = strlen(file->d_name);
-++        if (fname_len > 0 && file->d_name[0] != '.'
-++            && file->d_name[0] != '#'
-++            && file->d_name[fname_len-1] != '#'
-++            && file->d_name[fname_len-1] != '~') {
-++            if (asprintf(&tmpstr, "%s/%s", dirname, file->d_name) < 0)
-++                continue;
-++            dir2 = opendir(tmpstr);
-++            if (dir2) {
-++                /* file is a directory, don't read it */
-++                closedir(dir2);
-++            } else {
-++                if (filename_count >= array_size) {
-++                    char **new_filenames;
-++
-++                    array_size = (array_size + 16) * 2;
-++                    new_filenames = realloc(filenames,
-++                                        array_size * sizeof(filenames[0]));
-++                    if (!new_filenames) {
-++                        free(tmpstr);
-++                        for (i = 0; i < filename_count; i++)
-++                            free(filenames[i]);
-++                        free(filenames);
-++                        closedir(dir);
-++                        return -1;
-++                    }
-++                    filenames = new_filenames;
-++                }
-++                filenames[filename_count++] = tmpstr;
-++                tmpstr = NULL;
-++            }
-++            free(tmpstr);
-++        }
-++    }
-++    closedir(dir);
-++
-++    qsort(filenames, filename_count, sizeof(filenames[0]), elemcmp);
-++    *result = filenames;
-++
-++    return filename_count;
-++}
-++
-+ /* For Win32 platforms, the directory does not maintain a last modification
-+  * date that we can compare with the modification date of the .index file.
-+  * Therefore there is no way to know whether any .index file is valid.
-+@@ -4904,12 +4977,11 @@ int
-+ add_mibdir(const char *dirname)
-+ {
-+     FILE           *ip;
-+-    DIR            *dir, *dir2;
-+     const char     *oldFile = File;
-+-    struct dirent  *file;
-++    char          **filenames;
-+     char            tmpstr[300];
-+     int             count = 0;
-+-    int             fname_len = 0;
-++    int             filename_count, i;
-+ #if !(defined(WIN32) || defined(cygwin))
-+     char           *token;
-+     char space;
-+@@ -4957,36 +5029,15 @@ add_mibdir(const char *dirname)
-+         DEBUGMSGTL(("parse-mibs", "No index\n"));
-+ #endif
-+ 
-+-    if ((dir = opendir(dirname))) {
-+-        ip = netsnmp_mibindex_new( dirname );
-+-        while ((file = readdir(dir))) {
-+-            /*
-+-             * Only parse file names that don't begin with a '.' 
-+-             * Also skip files ending in '~', or starting/ending
-+-             * with '#' which are typically editor backup files.
-+-             */
-+-            if (file->d_name != NULL) {
-+-              fname_len = strlen( file->d_name );
-+-              if (fname_len > 0 && file->d_name[0] != '.' 
-+-                                && file->d_name[0] != '#'
-+-                                && file->d_name[fname_len-1] != '#'
-+-                                && file->d_name[fname_len-1] != '~') {
-+-                snprintf(tmpstr, sizeof(tmpstr), "%s/%s", dirname, file->d_name);
-+-                tmpstr[ sizeof(tmpstr)-1 ] = 0;
-+-                if ((dir2 = opendir(tmpstr))) {
-+-                    /*
-+-                     * file is a directory, don't read it 
-+-                     */
-+-                    closedir(dir2);
-+-                } else {
-+-                    if ( !add_mibfile( tmpstr, file->d_name, ip ))
-+-                        count++;
-+-                }
-+-              }
-+-            }
-++    filename_count = scan_directory(&filenames, dirname);
-++
-++    if (filename_count >= 0) {
-++        ip = netsnmp_mibindex_new(dirname);
-++        for (i = 0; i < filename_count; i++) {
-++            if (add_mibfile(filenames[i], strrchr(filenames[i], '/'), ip) == 0)
-++                count++;
-+         }
-+         File = oldFile;
-+-        closedir(dir);
-+         if (ip)
-+             fclose(ip);
-+         return (count);
-+-- 
-+2.17.1
-+
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0002.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0002.patch
-new file mode 100644
-index 0000000000..e54a8b4acb
---- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0002.patch
-@@ -0,0 +1,44 @@
-+From 50118392c58c8d9554580373c0dbc542336b58a9 Mon Sep 17 00:00:00 2001
-+From: Bart Van Assche <bvanassche@acm.org>
-+Date: Thu, 16 May 2019 13:49:05 +0200
-+Subject: [PATCH 2/5] libsnmp: Fix two recently introduced issues in the MIB
-+ parsing code
-+
-+Ensure that the first argument passed to qsort() is not NULL. Free the memory
-+that holds the directory contents.
-+
-+Fixes: 2b3e300ade4a ("CHANGES: libsnmp: Scan MIB directories in alphabetical order")
-+
-+CVE: CVE-2020-15861
-+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/9cfb38b0aa95363da1466ca81dd929989ba27c1f]
-+
-+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
-+---
-+ snmplib/parse.c | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/snmplib/parse.c b/snmplib/parse.c
-+index 51d119b..200ba25 100644
-+--- a/snmplib/parse.c
-++++ b/snmplib/parse.c
-+@@ -4961,7 +4961,8 @@ static int scan_directory(char ***result, const char *dirname)
-+     }
-+     closedir(dir);
-+ 
-+-    qsort(filenames, filename_count, sizeof(filenames[0]), elemcmp);
-++    if (filenames)
-++        qsort(filenames, filename_count, sizeof(filenames[0]), elemcmp);
-+     *result = filenames;
-+ 
-+     return filename_count;
-+@@ -5040,6 +5041,7 @@ add_mibdir(const char *dirname)
-+         File = oldFile;
-+         if (ip)
-+             fclose(ip);
-++        free(filenames);
-+         return (count);
-+     }
-+     else
-+-- 
-+2.17.1
-+
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0003.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0003.patch
-new file mode 100644
-index 0000000000..03acbbab92
---- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0003.patch
++++ b/meta-networking/recipes-protocols/mdns/files/0001-mdns-include-stddef.h-for-NULL.patch
 @@ -0,0 +1,40 @@
-+From c98808036c86a4ac4877ea13dbcef096b57e49f8 Mon Sep 17 00:00:00 2001
-+From: Bart Van Assche <bvanassche@acm.org>
-+Date: Wed, 22 May 2019 10:08:53 +0200
-+Subject: [PATCH 3/5] libsnmp: Fix a compiler warning
++From d744609c56f9872e5aa71707f1f71feec9867f51 Mon Sep 17 00:00:00 2001
++From: Mikko Rapeli <mikko.rapeli@bmw.de>
++Date: Tue, 14 Jul 2020 16:36:29 +0000
++Subject: [PATCH 1/2] mdns: include <stddef.h> for NULL
 +
-+Avoid that the compiler complains on Windows systems that tmpstr[] is not used.
++Fixes build error with version 1096.40.7:
 +
-+Fixes: 2b3e300ade4a ("CHANGES: libsnmp: Scan MIB directories in alphabetical order")
++../mDNSCore/mDNS.c:11385:26: error: 'NULL' undeclared (first use in this function)
++11385 |     const char *reason = NULL;
++      |                          ^~~~
++../mDNSCore/mDNS.c:56:1: note: 'NULL' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
++   55 | #include "dns_sd_internal.h"
++  +++ |+#include <stddef.h>
++   56 |
++../mDNSCore/mDNS.c:11385:26: note: each undeclared identifier is reported only once for each function it appears in
++11385 |     const char *reason = NULL;
++      |                          ^~~~
 +
-+CVE: CVE-2020-15861
-+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/114e4c2cec2601ca56e8afb1f441520f75a9a312]
++Upstream-Status: Pending
 +
-+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
++Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
 +---
-+ snmplib/parse.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/snmplib/parse.c b/snmplib/parse.c
-+index 200ba25..0414337 100644
-+--- a/snmplib/parse.c
-++++ b/snmplib/parse.c
-+@@ -4980,7 +4980,6 @@ add_mibdir(const char *dirname)
-+     FILE           *ip;
-+     const char     *oldFile = File;
-+     char          **filenames;
-+-    char            tmpstr[300];
-+     int             count = 0;
-+     int             filename_count, i;
-+ #if !(defined(WIN32) || defined(cygwin))
-+@@ -4988,6 +4987,7 @@ add_mibdir(const char *dirname)
-+     char space;
-+     char newline;
-+     struct stat     dir_stat, idx_stat;
-++    char            tmpstr[300];
-+     char            tmpstr1[300];
-+ #endif
-+ 
-+-- 
-+2.17.1
-+
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0004.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0004.patch
-new file mode 100644
-index 0000000000..f0e709636e
---- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0004.patch
-@@ -0,0 +1,33 @@
-+From 545742d1867d70a645a63161ede4a391456691fc Mon Sep 17 00:00:00 2001
-+From: Bill Fenner <fenner@gmail.com>
-+Date: Mon, 3 Jun 2019 10:01:08 -0700
-+Subject: [PATCH 4/5] libsnmp: free filenames from directory listing
-+
-+Free each filename as we use it, as well as freeing the
-+list of filenames.
-+
-+Fixes: 2b3e300ade4a ("CHANGES: libsnmp: Scan MIB directories in alphabetical order")
-+
-+CVE: CVE-2020-15861
-+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/2968b455e6f182f329746e2bca1043f368618c73]
-+
-+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
-+---
-+ snmplib/parse.c | 1 +
++ mDNSCore/mDNS.c | 1 +
 + 1 file changed, 1 insertion(+)
 +
-+diff --git a/snmplib/parse.c b/snmplib/parse.c
-+index 0414337..7f98542 100644
-+--- a/snmplib/parse.c
-++++ b/snmplib/parse.c
-+@@ -5037,6 +5037,7 @@ add_mibdir(const char *dirname)
-+         for (i = 0; i < filename_count; i++) {
-+             if (add_mibfile(filenames[i], strrchr(filenames[i], '/'), ip) == 0)
-+                 count++;
-++	    free(filenames[i]);
-+         }
-+         File = oldFile;
-+         if (ip)
-+-- 
-+2.17.1
-+
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0005.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0005.patch
-new file mode 100644
-index 0000000000..66a16f6dbf
---- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0005.patch
-@@ -0,0 +1,349 @@
-+From 83d6c5181828921b3731878588b3728de704d490 Mon Sep 17 00:00:00 2001
-+From: Bart Van Assche <bvanassche@acm.org>
-+Date: Wed, 22 May 2019 09:56:21 +0200
-+Subject: [PATCH 5/5] CHANGES: snmpd: Stop reading and writing the
-+ mib_indexes/* files
-+
-+Caching directory contents is something the operating system should do
-+and is not something Net-SNMP should do. Instead of storing a copy of
-+the directory contents in ${tmp_dir}/mib_indexes/${n}, always scan a
-+MIB directory.
-+
-+CVE: CVE-2020-15861
-+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/4fd9a450444a434a993bc72f7c3486ccce41f602]
-+
-+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
-+---
-+ .gitignore                       |   1 -
-+ include/net-snmp/library/mib.h   |   3 -
-+ include/net-snmp/library/parse.h |   2 +-
-+ snmplib/mib.c                    | 148 +------------------------------
-+ snmplib/parse.c                  |  57 +-----------
-+ 5 files changed, 4 insertions(+), 207 deletions(-)
-+
-+diff --git a/.gitignore b/.gitignore
-+index 2d37bc6..94da568 100644
-+--- a/.gitignore
-++++ b/.gitignore
-+@@ -75,7 +75,6 @@ Makefile
-+ man/*.[1358]
-+ man/default_store.3.h
-+ man/manaliases
-+-mibs/.index
-+ mk/
-+ module_tmp_header.h
-+ net-snmp-5*
-+diff --git a/include/net-snmp/library/mib.h b/include/net-snmp/library/mib.h
-+index ab36853..3e81634 100644
-+--- a/include/net-snmp/library/mib.h
-++++ b/include/net-snmp/library/mib.h
-+@@ -124,9 +124,6 @@ SOFTWARE.
-+     NETSNMP_IMPORT
-+     char            *netsnmp_get_mib_directory(void);
-+     void            netsnmp_fixup_mib_directory(void);
-+-    void            netsnmp_mibindex_load( void );
-+-    char *          netsnmp_mibindex_lookup( const char * );
-+-    FILE *          netsnmp_mibindex_new( const char * );
-+     int             sprint_realloc_description(u_char ** buf, size_t * buf_len,
-+                                 size_t * out_len, int allow_realloc,
-+                                 oid * objid, size_t objidlen, int width);
-+diff --git a/include/net-snmp/library/parse.h b/include/net-snmp/library/parse.h
-+index ce46ab9..7c33d3f 100644
-+--- a/include/net-snmp/library/parse.h
-++++ b/include/net-snmp/library/parse.h
-+@@ -201,7 +201,7 @@ SOFTWARE.
-+ #endif
-+     void            netsnmp_init_mib_internals(void);
-+     void            unload_all_mibs(void);
-+-    int             add_mibfile(const char*, const char*, FILE *);
-++    int             add_mibfile(const char*, const char*);
-+     int             which_module(const char *);
-+     NETSNMP_IMPORT
-+     char           *module_name(int, char *);
-+diff --git a/snmplib/mib.c b/snmplib/mib.c
-+index 1c875c0..30d6cde 100644
-+--- a/snmplib/mib.c
-++++ b/snmplib/mib.c
-+@@ -2717,7 +2717,6 @@ netsnmp_init_mib(void)
-+     env_var = strdup(netsnmp_get_mib_directory());
-+     if (!env_var)
-+         return;
-+-    netsnmp_mibindex_load();
-+ 
-+     DEBUGMSGTL(("init_mib",
-+                 "Seen MIBDIRS: Looking in '%s' for mib dirs ...\n",
-+@@ -2737,7 +2736,7 @@ netsnmp_init_mib(void)
-+         else
-+             entry = strtok_r(env_var, ENV_SEPARATOR, &st);
-+         while (entry) {
-+-            add_mibfile(entry, NULL, NULL);
-++            add_mibfile(entry, NULL);
-+             entry = strtok_r(NULL, ENV_SEPARATOR, &st);
-+         }
-+     }
-+@@ -2888,142 +2887,6 @@ init_mib(void)
-+ #endif
-+ 
-+ 
-+-/*
-+- * Handle MIB indexes centrally
-+- */
-+-static int _mibindex     = 0;   /* Last index in use */
-+-static int _mibindex_max = 0;   /* Size of index array */
-+-char     **_mibindexes   = NULL;
-+-
-+-int _mibindex_add( const char *dirname, int i );
-+-void
-+-netsnmp_mibindex_load( void )
-+-{
-+-    DIR *dir;
-+-    struct dirent *file;
-+-    FILE *fp;
-+-    char tmpbuf[ 300];
-+-    char tmpbuf2[300];
-+-    int  i;
-+-    char *cp;
-+-
-+-    /*
-+-     * Open the MIB index directory, or create it (empty)
-+-     */
-+-    snprintf( tmpbuf, sizeof(tmpbuf), "%s/mib_indexes",
-+-              get_persistent_directory());
-+-    tmpbuf[sizeof(tmpbuf)-1] = 0;
-+-    dir = opendir( tmpbuf );
-+-    if ( dir == NULL ) {
-+-        DEBUGMSGTL(("mibindex", "load: (new)\n"));
-+-        mkdirhier( tmpbuf, NETSNMP_AGENT_DIRECTORY_MODE, 0);
-+-        return;
-+-    }
-+-
-+-    /*
-+-     * Create a list of which directory each file refers to
-+-     */
-+-    while ((file = readdir( dir ))) {
-+-        if ( !isdigit((unsigned char)(file->d_name[0])))
-+-            continue;
-+-        i = atoi( file->d_name );
-+-
-+-        snprintf( tmpbuf, sizeof(tmpbuf), "%s/mib_indexes/%d",
-+-              get_persistent_directory(), i );
-+-        tmpbuf[sizeof(tmpbuf)-1] = 0;
-+-        fp = fopen( tmpbuf, "r" );
-+-        if (!fp)
-+-            continue;
-+-        cp = fgets( tmpbuf2, sizeof(tmpbuf2), fp );
-+-        fclose( fp );
-+-        if ( !cp ) {
-+-            DEBUGMSGTL(("mibindex", "Empty MIB index (%d)\n", i));
-+-            continue;
-+-        }
-+-        if ( strncmp( tmpbuf2, "DIR ", 4 ) != 0 ) {
-+-            DEBUGMSGTL(("mibindex", "Malformed MIB index (%d)\n", i));
-+-            continue;
-+-        }
-+-        tmpbuf2[strlen(tmpbuf2)-1] = 0;
-+-        DEBUGMSGTL(("mibindex", "load: (%d) %s\n", i, tmpbuf2));
-+-        (void)_mibindex_add( tmpbuf2+4, i );  /* Skip 'DIR ' */
-+-    }
-+-    closedir( dir );
-+-}
-+-
-+-char *
-+-netsnmp_mibindex_lookup( const char *dirname )
-+-{
-+-    int i;
-+-    static char tmpbuf[300];
-+-
-+-    for (i=0; i<_mibindex; i++) {
-+-        if ( _mibindexes[i] &&
-+-             strcmp( _mibindexes[i], dirname ) == 0) {
-+-             snprintf(tmpbuf, sizeof(tmpbuf), "%s/mib_indexes/%d",
-+-                      get_persistent_directory(), i);
-+-             tmpbuf[sizeof(tmpbuf)-1] = 0;
-+-             DEBUGMSGTL(("mibindex", "lookup: %s (%d) %s\n", dirname, i, tmpbuf ));
-+-             return tmpbuf;
-+-        }
-+-    }
-+-    DEBUGMSGTL(("mibindex", "lookup: (none)\n"));
-+-    return NULL;
-+-}
-+-
-+-int
-+-_mibindex_add( const char *dirname, int i )
-+-{
-+-    const int old_mibindex_max = _mibindex_max;
-+-
-+-    DEBUGMSGTL(("mibindex", "add: %s (%d)\n", dirname, i ));
-+-    if ( i == -1 )
-+-        i = _mibindex++;
-+-    if ( i >= _mibindex_max ) {
-+-        /*
-+-         * If the index array is full (or non-existent)
-+-         *   then expand (or create) it
-+-         */
-+-        _mibindex_max = i + 10;
-+-        _mibindexes = realloc(_mibindexes,
-+-                              _mibindex_max * sizeof(_mibindexes[0]));
-+-        netsnmp_assert(_mibindexes);
-+-        memset(_mibindexes + old_mibindex_max, 0,
-+-               (_mibindex_max - old_mibindex_max) * sizeof(_mibindexes[0]));
-+-    }
-+-
-+-    _mibindexes[ i ] = strdup( dirname );
-+-    if ( i >= _mibindex )
-+-        _mibindex = i+1;
-+-
-+-    DEBUGMSGTL(("mibindex", "add: %d/%d/%d\n", i, _mibindex, _mibindex_max ));
-+-    return i;
-+-}
-+-    
-+-FILE *
-+-netsnmp_mibindex_new( const char *dirname )
-+-{
-+-    FILE *fp;
-+-    char  tmpbuf[300];
-+-    char *cp;
-+-    int   i;
-+-
-+-    cp = netsnmp_mibindex_lookup( dirname );
-+-    if (!cp) {
-+-        i  = _mibindex_add( dirname, -1 );
-+-        snprintf( tmpbuf, sizeof(tmpbuf), "%s/mib_indexes/%d",
-+-                  get_persistent_directory(), i );
-+-        tmpbuf[sizeof(tmpbuf)-1] = 0;
-+-        cp = tmpbuf;
-+-    }
-+-    DEBUGMSGTL(("mibindex", "new: %s (%s)\n", dirname, cp ));
-+-    fp = fopen( cp, "w" );
-+-    if (fp)
-+-        fprintf( fp, "DIR %s\n", dirname );
-+-    return fp;
-+-}
-+-
-+-
-+ /**
-+  * Unloads all mibs.
++diff --git a/mDNSCore/mDNS.c b/mDNSCore/mDNS.c
++index 2fbea04..d4b9af5 100755
++--- a/mDNSCore/mDNS.c
+++++ b/mDNSCore/mDNS.c
++@@ -23,6 +23,7 @@
++  * routines, or types (which may or may not be present on any given platform).
 +  */
-+@@ -3038,15 +2901,6 @@ shutdown_mib(void)
-+     }
-+     tree_head = NULL;
-+     Mib = NULL;
-+-    if (_mibindexes) {
-+-        int i;
-+-        for (i = 0; i < _mibindex; ++i)
-+-            SNMP_FREE(_mibindexes[i]);
-+-        free(_mibindexes);
-+-        _mibindex = 0;
-+-        _mibindex_max = 0;
-+-        _mibindexes = NULL;
-+-    }
-+     if (Prefix != NULL && Prefix != &Standard_Prefix[0])
-+         SNMP_FREE(Prefix);
-+     if (Prefix)
-+diff --git a/snmplib/parse.c b/snmplib/parse.c
-+index 7f98542..58d777e 100644
-+--- a/snmplib/parse.c
-++++ b/snmplib/parse.c
-+@@ -607,8 +607,6 @@ static int     read_module_replacements(const char *);
-+ static int     read_import_replacements(const char *,
-+                                          struct module_import *);
 + 
-+-static void     new_module(const char *, const char *);
-+-
-+ static struct node *merge_parse_objectid(struct node *, FILE *, char *);
-+ static struct index_list *getIndexes(FILE * fp, struct index_list **);
-+ static struct varbind_list *getVarbinds(FILE * fp, struct varbind_list **);
-+@@ -4859,7 +4857,7 @@ snmp_get_token(FILE * fp, char *token, int maxtlen)
-+ #endif /* NETSNMP_FEATURE_REMOVE_PARSE_GET_TOKEN */
-+ 
-+ int
-+-add_mibfile(const char* tmpstr, const char* d_name, FILE *ip )
-++add_mibfile(const char* tmpstr, const char* d_name)
-+ {
-+     FILE           *fp;
-+     char            token[MAXTOKEN], token2[MAXTOKEN];
-+@@ -4884,8 +4882,6 @@ add_mibfile(const char* tmpstr, const char* d_name, FILE *ip )
-+      */
-+     if (get_token(fp, token2, MAXTOKEN) == DEFINITIONS) {
-+         new_module(token, tmpstr);
-+-        if (ip)
-+-            fprintf(ip, "%s %s\n", token, d_name);
-+         fclose(fp);
-+         return 0;
-+     } else {
-+@@ -4977,71 +4973,22 @@ static int scan_directory(char ***result, const char *dirname)
-+ int
-+ add_mibdir(const char *dirname)
-+ {
-+-    FILE           *ip;
-+     const char     *oldFile = File;
-+     char          **filenames;
-+     int             count = 0;
-+     int             filename_count, i;
-+-#if !(defined(WIN32) || defined(cygwin))
-+-    char           *token;
-+-    char space;
-+-    char newline;
-+-    struct stat     dir_stat, idx_stat;
-+-    char            tmpstr[300];
-+-    char            tmpstr1[300];
-+-#endif
-+ 
-+     DEBUGMSGTL(("parse-mibs", "Scanning directory %s\n", dirname));
-+-#if !(defined(WIN32) || defined(cygwin))
-+-    token = netsnmp_mibindex_lookup( dirname );
-+-    if (token && stat(token, &idx_stat) == 0 && stat(dirname, &dir_stat) == 0) {
-+-        if (dir_stat.st_mtime < idx_stat.st_mtime) {
-+-            DEBUGMSGTL(("parse-mibs", "The index is good\n"));
-+-            if ((ip = fopen(token, "r")) != NULL) {
-+-                fgets(tmpstr, sizeof(tmpstr), ip); /* Skip dir line */
-+-                while (fscanf(ip, "%127s%c%299[^\n]%c", token, &space, tmpstr,
-+-		    &newline) == 4) {
-+-
-+-		    /*
-+-		     * If an overflow of the token or tmpstr buffers has been
-+-		     * found log a message and break out of the while loop,
-+-		     * thus the rest of the file tokens will be ignored.
-+-		     */
-+-		    if (space != ' ' || newline != '\n') {
-+-			snmp_log(LOG_ERR,
-+-			    "add_mibdir: strings scanned in from %s/%s " \
-+-			    "are too large.  count = %d\n ", dirname,
-+-			    ".index", count);
-+-			    break;
-+-		    }
-+-		   
-+-		    snprintf(tmpstr1, sizeof(tmpstr1), "%s/%s", dirname, tmpstr);
-+-                    tmpstr1[ sizeof(tmpstr1)-1 ] = 0;
-+-                    new_module(token, tmpstr1);
-+-                    count++;
-+-                }
-+-                fclose(ip);
-+-                return count;
-+-            } else
-+-                DEBUGMSGTL(("parse-mibs", "Can't read index\n"));
-+-        } else
-+-            DEBUGMSGTL(("parse-mibs", "Index outdated\n"));
-+-    } else
-+-        DEBUGMSGTL(("parse-mibs", "No index\n"));
-+-#endif
-+ 
-+     filename_count = scan_directory(&filenames, dirname);
-+ 
-+     if (filename_count >= 0) {
-+-        ip = netsnmp_mibindex_new(dirname);
-+         for (i = 0; i < filename_count; i++) {
-+-            if (add_mibfile(filenames[i], strrchr(filenames[i], '/'), ip) == 0)
-++            if (add_mibfile(filenames[i], strrchr(filenames[i], '/')) == 0)
-+                 count++;
-+ 	    free(filenames[i]);
-+         }
-+         File = oldFile;
-+-        if (ip)
-+-            fclose(ip);
-+         free(filenames);
-+         return (count);
-+     }
+++#include <stddef.h> /* for NULL */
++ #include "DNSCommon.h"                  // Defines general DNS utility routines
++ #include "uDNS.h"                       // Defines entry points into unicast-specific routines
++ #include "nsec.h"
 +-- 
-+2.17.1
++2.20.1
 +
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15862.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15862.patch
+diff --git a/meta-networking/recipes-protocols/mdns/files/0002-mdns-cross-compilation-fixes-for-bitbake.patch b/meta-networking/recipes-protocols/mdns/files/0002-mdns-cross-compilation-fixes-for-bitbake.patch
 new file mode 100644
-index 0000000000..419a0c21bb
+index 000000000..33590ffc5
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15862.patch
-@@ -0,0 +1,87 @@
-+From de36cf1ecbb13a9541ec5d43ce20ab5030861837 Mon Sep 17 00:00:00 2001
-+From: Wes Hardaker <opensource@hardakers.net>
-+Date: Thu, 23 Jul 2020 16:17:27 -0700
-+Subject: [PATCH 1/1] make the extend mib read-only by default
++++ b/meta-networking/recipes-protocols/mdns/files/0002-mdns-cross-compilation-fixes-for-bitbake.patch
+@@ -0,0 +1,145 @@
++From 72405143f9d16514e70b88bc4843c9634b88036a Mon Sep 17 00:00:00 2001
++From: Brendan Le Foll <brendan.le.foll@intel.com>
++Date: Tue, 3 Mar 2015 11:42:57 +0000
++Subject: [PATCH 2/2] mdns: cross compilation fixes for bitbake
 +
-+CVE: CVE-2020-15862
-+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/77f6c60f57dba0aaea5d8ef1dd94bcd0c8e6d205]
++Fixes several build errors when incorrect compiler or
++compiler flags are used.
 +
-+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
++Upstream-Status: Inappropriate [OE-specific]
++
++Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
++Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
 +---
-+ agent/mibgroup/agent/extend.c | 18 ++++++++++++------
-+ 1 file changed, 12 insertions(+), 6 deletions(-)
++ mDNSPosix/Makefile | 44 ++++++++++++++++++++------------------------
++ 1 file changed, 20 insertions(+), 24 deletions(-)
 +
-+diff --git a/agent/mibgroup/agent/extend.c b/agent/mibgroup/agent/extend.c
-+index 5f8cedc..38a6c50 100644
-+--- a/agent/mibgroup/agent/extend.c
-++++ b/agent/mibgroup/agent/extend.c
-+@@ -16,6 +16,12 @@
-+ #define SHELLCOMMAND 3
-+ #endif
++diff --git a/mDNSPosix/Makefile b/mDNSPosix/Makefile
++index 78222e0..18a3af5 100755
++--- a/mDNSPosix/Makefile
+++++ b/mDNSPosix/Makefile
++@@ -50,6 +50,7 @@
 + 
-++/*  This mib is potentially dangerous to turn on by default, since it
-++ *  allows arbitrary commands to be set by anyone with SNMP WRITE
-++ *  access to the MIB table.  If all of your users are "root" level
-++ *  users, then it may be safe to turn on. */
-++#define ENABLE_EXTEND_WRITE_ACCESS 0
-++
-+ netsnmp_feature_require(extract_table_row_data)
-+ netsnmp_feature_require(table_data_delete_table)
-+ #ifndef NETSNMP_NO_WRITE_SUPPORT
-+@@ -742,7 +748,7 @@ handle_nsExtendConfigTable(netsnmp_mib_handler          *handler,
-+          *
-+          **********/
++ LIBVERS = 1
 + 
-+-#ifndef NETSNMP_NO_WRITE_SUPPORT
-++#if !defined(NETSNMP_NO_WRITE_SUPPORT) && ENABLE_EXTEND_WRITE_ACCESS
-+         case MODE_SET_RESERVE1:
-+             /*
-+              * Validate the new assignments
-+@@ -1068,7 +1074,7 @@ handle_nsExtendConfigTable(netsnmp_mib_handler          *handler,
-+                 }
-+             }
-+             break;
-+-#endif /* !NETSNMP_NO_WRITE_SUPPORT */ 
-++#endif /* !NETSNMP_NO_WRITE_SUPPORT and ENABLE_EXTEND_WRITE_ACCESS */
+++POSIXDIR = ../mDNSPosix
++ COREDIR = ../mDNSCore
++ SHAREDDIR ?= ../mDNSShared
++ DSODIR ?= ../DSO
++@@ -62,16 +63,16 @@ else ifeq ($(SYSTEM), Linux)
++   os=linux
++ endif
 + 
-+         default:
-+             netsnmp_set_request_error(reqinfo, request, SNMP_ERR_GENERR);
-+@@ -1076,7 +1082,7 @@ handle_nsExtendConfigTable(netsnmp_mib_handler          *handler,
-+         }
-+     }
++-CC = cc
++-BISON = bison
++-FLEX = flex
++-ST = strip
++-LD = ld
+++CC ?= cc
+++BISON ?= bison
+++FLEX ?= flex
+++ST ?= strip
+++LD ?= ld
++ SOOPTS = -shared
++ CP = cp
++ RM = rm
++ LN = ln -s -f
++-CFLAGS_COMMON = -I$(COREDIR) -I$(SHAREDDIR) -I$(DSODIR) -I$(PROXYDIR) -I$(OBJDIR) -fwrapv -W -Wall -DPID_FILE=\"/var/run/mdnsd.pid\" -DMDNS_UDS_SERVERPATH=\"/var/run/mdnsd\"
+++CFLAGS_COMMON = -I$(POSIXDIR) -I$(COREDIR) -I$(SHAREDDIR) -I$(DSODIR) -I$(PROXYDIR) -I$(OBJDIR) -fwrapv -W -Wall -DPID_FILE=\"/var/run/mdnsd.pid\" -DMDNS_UDS_SERVERPATH=\"/var/run/mdnsd\"
++ CFLAGS_PTHREAD =
++ LINKOPTS =
++ LINKOPTS_PTHREAD = -lpthread
++@@ -85,6 +86,7 @@ CFLAGS_OPEN_SOURCE=
++ endif
 + 
-+-#ifndef NETSNMP_NO_WRITE_SUPPORT
-++#if !defined(NETSNMP_NO_WRITE_SUPPORT) && ENABLE_EXTEND_WRITE_ACCESS
-+     /*
-+      * If we're marking a given row as active,
-+      *  then we need to check that it's ready.
-+@@ -1101,7 +1107,7 @@ handle_nsExtendConfigTable(netsnmp_mib_handler          *handler,
-+             }
-+         }
-+     }
-+-#endif /* !NETSNMP_NO_WRITE_SUPPORT */
-++#endif /* !NETSNMP_NO_WRITE_SUPPORT && ENABLE_EXTEND_WRITE_ACCESS */
-+     
-+     return SNMP_ERR_NOERROR;
-+ }
-+@@ -1590,7 +1596,7 @@ fixExec2Error(int action,
-+     idx = name[name_len-1] -1;
-+     exten = &compatability_entries[ idx ];
++ # Set up diverging paths for debug vs. prod builds
+++DEBUG ?= 1
++ ifeq "$(DEBUG)" "1"
++ CFLAGS_DEBUGGING = -g -DMDNS_DEBUGMSGS=2
++ OBJDIR = objects/debug
++@@ -101,8 +103,8 @@ else
++ # 1. We want to make small binaries, suitable for putting into hardware devices
++ # 2. Some of the code analysis warnings only work when some form of optimization is enabled
++ CFLAGS_DEBUGGING = -g -DMDNS_DEBUGMSGS=0
++-OBJDIR ?= objects/prod
++-BUILDDIR ?= build/prod
+++OBJDIR = objects/prod
+++BUILDDIR = build/prod
++ STRIP = $(ST) -S
++ endif
++ endif
++@@ -125,7 +127,7 @@ else
++ # any target that contains the string "linux"
++ ifeq ($(findstring linux,$(os)),linux)
++ CFLAGS_OS = -D_GNU_SOURCE -DHAVE_IPV6 -DNOT_HAVE_SA_LEN -DUSES_NETLINK -DHAVE_LINUX -DTARGET_OS_LINUX -ftabstop=4
++-LD = $(CC)
+++LD ?= $(CC)
++ SOOPTS = -shared
++ FLEXFLAGS_OS = -l
++ JAVACFLAGS_OS += -I$(JDK)/include/linux
++@@ -276,8 +278,7 @@ Daemon: setup $(BUILDDIR)/mdnsd
++ 	@echo "Responder daemon done"
 + 
-+-#ifndef NETSNMP_NO_WRITE_SUPPORT
-++#if !defined(NETSNMP_NO_WRITE_SUPPORT) && ENABLE_EXTEND_WRITE_ACCESS
-+     switch (action) {
-+     case MODE_SET_RESERVE1:
-+         if (var_val_type != ASN_INTEGER) {
-+@@ -1611,7 +1617,7 @@ fixExec2Error(int action,
-+     case MODE_SET_COMMIT:
-+         netsnmp_cache_check_and_reload( exten->efix_entry->cache );
-+     }
-+-#endif /* !NETSNMP_NO_WRITE_SUPPORT */
-++#endif /* !NETSNMP_NO_WRITE_SUPPORT && ENABLE_EXTEND_WRITE_ACCESS */
-+     return SNMP_ERR_NOERROR;
-+ }
-+ #endif /* USING_UCD_SNMP_EXTENSIBLE_MODULE */
++ $(BUILDDIR)/mdnsd: $(DAEMONOBJS)
++-	$(CC) -o $@ $+ $(LINKOPTS)
++-	$(STRIP) $@
+++	$(LD) -o $@ $+
++ 
++ # libdns_sd target builds the client library
++ libdns_sd: setup $(BUILDDIR)/libdns_sd.$(LDSUFFIX)
++@@ -286,13 +287,9 @@ libdns_sd: setup $(BUILDDIR)/libdns_sd.$(LDSUFFIX)
++ CLIENTLIBOBJS = $(OBJDIR)/dnssd_clientlib.c.so.o $(OBJDIR)/dnssd_clientstub.c.so.o $(OBJDIR)/dnssd_ipc.c.so.o
++ 
++ $(BUILDDIR)/libdns_sd.$(LDSUFFIX): $(CLIENTLIBOBJS)
++-	$(LD) $(SOOPTS) $(LINKOPTS) -o $@ $+
++-	$(STRIP) $@
++-
++-Clients: setup libdns_sd ../Clients/build/dns-sd
++-	@echo "Clients done"
+++	$(LD) -shared $(LINKOPTS) -Wl,-soname,libdns_sd.$(LDSUFFIX).1 -o $@ $+
++ 
++-../Clients/build/dns-sd: ../Clients/dns-sd.c
+++Clients: setup libdns_sd
++ 	$(MAKE) -C ../Clients DEBUG=$(DEBUG) SUPMAKE_CFLAGS="$(MDNSCFLAGS)"
++ 
++ # nss_mdns target builds the Name Service Switch module
++@@ -300,8 +297,7 @@ nss_mdns: setup $(BUILDDIR)/$(NSSLIBFILE)
++ 	@echo "Name Service Switch module done"
++ 
++ $(BUILDDIR)/$(NSSLIBFILE): $(CLIENTLIBOBJS) $(OBJDIR)/nss_mdns.c.so.o
++-	$(LD) $(SOOPTS) $(LINKOPTS) -o $@ $+
++-	$(STRIP) $@
+++	$(LD) -shared $(LINKOPTS) -o $@ $+
++ 
++ #############################################################################
++ 
++@@ -494,21 +490,21 @@ dnsextd: setup $(BUILDDIR)/dnsextd
++ 	@echo "dnsextd done"
++ 
++ $(BUILDDIR)/mDNSClientPosix:         $(APPOBJ)     $(OBJDIR)/Client.c.o
++-	$(CC) $+ -o $@ $(LINKOPTS)
+++	$(CC) $+ -o $@
++ 
++ $(BUILDDIR)/mDNSResponderPosix:      $(COMMONOBJ)  $(OBJDIR)/Responder.c.o
++-	$(CC) $+ -o $@ $(LINKOPTS)
+++	$(CC) $+ -o $@
++ 
++ $(BUILDDIR)/mDNSProxyResponderPosix: $(COMMONOBJ)  $(OBJDIR)/ProxyResponder.c.o
++-	$(CC) $+ -o $@ $(LINKOPTS)
+++	$(CC) $+ -o $@
++ 
++ $(BUILDDIR)/mDNSNetMonitor:          $(SPECIALOBJ) $(OBJDIR)/NetMonitor.c.o
++-	$(CC) $+ -o $@ $(LINKOPTS)
+++	$(CC) $+ -o $@
++ 
++ $(OBJDIR)/NetMonitor.c.o:            $(COREDIR)/mDNS.c # Note: NetMonitor.c textually imports mDNS.c
++ 
++ $(BUILDDIR)/dnsextd:                 $(DNSEXTDOBJ) $(OBJDIR)/dnsextd.c.threadsafe.o
++-	$(CC) $+ -o $@ $(LINKOPTS) $(LINKOPTS_PTHREAD)
+++	$(CC) $+ -o $@ $(LINKOPTS_PTHREAD)
++ 
++ #############################################################################
++ 
 +-- 
-+2.17.1
++2.20.1
 +
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-index 67316db0d2..6b4b6ce8ed 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-@@ -29,6 +29,12 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-            file://0001-net-snmp-fix-compile-error-disable-des.patch \
-            file://0001-Add-pkg-config-support-for-building-applications-and.patch \
-            file://CVE-2019-20892.patch \
-+           file://CVE-2020-15861-0001.patch \
-+           file://CVE-2020-15861-0002.patch \
-+           file://CVE-2020-15861-0003.patch \
-+           file://CVE-2020-15861-0004.patch \
-+           file://CVE-2020-15861-0005.patch \
-+           file://CVE-2020-15862.patch \
+diff --git a/meta-networking/recipes-protocols/mdns/files/0004-Use-list-for-changed-interfaces.patch b/meta-networking/recipes-protocols/mdns/files/0004-Use-list-for-changed-interfaces.patch
+index 05ad49b9f..db3a63ea4 100644
+--- a/meta-networking/recipes-protocols/mdns/files/0004-Use-list-for-changed-interfaces.patch
++++ b/meta-networking/recipes-protocols/mdns/files/0004-Use-list-for-changed-interfaces.patch
+@@ -1,4 +1,4 @@
+-From e1f483510a1011e37540fdee8f3bc36111fa45a0 Mon Sep 17 00:00:00 2001
++From 798bfb5e984845a27874d1a244686db6e384d7b8 Mon Sep 17 00:00:00 2001
+ From: Nate Karstens <nate.karstens@garmin.com>
+ Date: Thu, 13 Jul 2017 09:00:00 -0500
+ Subject: [PATCH 04/11] Use list for changed interfaces
+@@ -15,10 +15,10 @@ Signed-off-by: Nate Karstens <nate.karstens@garmin.com>
+  1 file changed, 52 insertions(+), 15 deletions(-)
+ 
+ diff --git a/mDNSPosix/mDNSPosix.c b/mDNSPosix/mDNSPosix.c
+-index 8fe22be..699855a 100644
++index 195d04b..bb883c1 100755
+ --- a/mDNSPosix/mDNSPosix.c
+ +++ b/mDNSPosix/mDNSPosix.c
+-@@ -75,6 +75,14 @@ struct IfChangeRec
++@@ -67,6 +67,14 @@ struct IfChangeRec
+  };
+  typedef struct IfChangeRec IfChangeRec;
+  
+@@ -31,9 +31,9 @@ index 8fe22be..699855a 100644
+ +typedef struct NetworkInterfaceIndex NetworkInterfaceIndex;
+ +
+  // Note that static data is initialized to zero in (modern) C.
+- static fd_set gEventFDs;
+- static int gMaxFD;                              // largest fd in gEventFDs
+-@@ -1071,6 +1079,32 @@ mDNSlocal mStatus OpenIfNotifySocket(int *pFD)
++ static PosixEventSource *gEventSources;             // linked list of PosixEventSource's
++ static sigset_t gEventSignalSet;                // Signals which event loop listens for
++@@ -1458,6 +1466,32 @@ mDNSlocal mStatus OpenIfNotifySocket(int *pFD)
+      return err;
+  }
+  
+@@ -66,7 +66,7 @@ index 8fe22be..699855a 100644
+  #if MDNS_DEBUGMSGS
+  mDNSlocal void      PrintNetLinkMsg(const struct nlmsghdr *pNLMsg)
+  {
+-@@ -1098,14 +1132,13 @@ mDNSlocal void      PrintNetLinkMsg(const struct nlmsghdr *pNLMsg)
++@@ -1485,14 +1519,13 @@ mDNSlocal void      PrintNetLinkMsg(const struct nlmsghdr *pNLMsg)
+  }
+  #endif
+  
+@@ -82,7 +82,7 @@ index 8fe22be..699855a 100644
+  
+      // The structure here is more complex than it really ought to be because,
+      // unfortunately, there's no good way to size a buffer in advance large
+-@@ -1141,9 +1174,9 @@ mDNSlocal mDNSu32       ProcessRoutingNotification(int sd)
++@@ -1528,9 +1561,9 @@ mDNSlocal mDNSu32       ProcessRoutingNotification(int sd)
+  
+          // Process the NetLink message
+          if (pNLMsg->nlmsg_type == RTM_GETLINK || pNLMsg->nlmsg_type == RTM_NEWLINK)
+@@ -94,7 +94,7 @@ index 8fe22be..699855a 100644
+  
+          // Advance pNLMsg to the next message in the buffer
+          if ((pNLMsg->nlmsg_flags & NLM_F_MULTI) != 0 && pNLMsg->nlmsg_type != NLMSG_DONE)
+-@@ -1154,8 +1187,6 @@ mDNSlocal mDNSu32       ProcessRoutingNotification(int sd)
++@@ -1541,8 +1574,6 @@ mDNSlocal mDNSu32       ProcessRoutingNotification(int sd)
+          else
+              break;  // all done!
+      }
+@@ -103,7 +103,7 @@ index 8fe22be..699855a 100644
+  }
+  
+  #else // USES_NETLINK
+-@@ -1187,14 +1218,13 @@ mDNSlocal void      PrintRoutingSocketMsg(const struct ifa_msghdr *pRSMsg)
++@@ -1574,14 +1605,13 @@ mDNSlocal void      PrintRoutingSocketMsg(const struct ifa_msghdr *pRSMsg)
+  }
+  #endif
+  
+@@ -119,7 +119,7 @@ index 8fe22be..699855a 100644
+  
+      readCount = read(sd, buff, sizeof buff);
+      if (readCount < (ssize_t) sizeof(struct ifa_msghdr))
+-@@ -1209,12 +1239,10 @@ mDNSlocal mDNSu32       ProcessRoutingNotification(int sd)
++@@ -1596,12 +1626,10 @@ mDNSlocal mDNSu32       ProcessRoutingNotification(int sd)
+          pRSMsg->ifam_type == RTM_IFINFO)
+      {
+          if (pRSMsg->ifam_type == RTM_IFINFO)
+@@ -134,7 +134,7 @@ index 8fe22be..699855a 100644
+  }
+  
+  #endif // USES_NETLINK
+-@@ -1224,7 +1252,8 @@ mDNSlocal void InterfaceChangeCallback(int fd, short filter, void *context)
++@@ -1611,7 +1639,8 @@ mDNSlocal void InterfaceChangeCallback(int fd, void *context)
+  {
+      IfChangeRec     *pChgRec = (IfChangeRec*) context;
+      fd_set readFDs;
+@@ -144,7 +144,7 @@ index 8fe22be..699855a 100644
+      struct timeval zeroTimeout = { 0, 0 };
+  
+      (void)fd; // Unused
+-@@ -1233,17 +1262,25 @@ mDNSlocal void InterfaceChangeCallback(int fd, short filter, void *context)
++@@ -1619,17 +1648,25 @@ mDNSlocal void InterfaceChangeCallback(int fd, void *context)
+      FD_ZERO(&readFDs);
+      FD_SET(pChgRec->NotifySD, &readFDs);
+  
+@@ -173,5 +173,5 @@ index 8fe22be..699855a 100644
+  
+  // Register with either a Routing Socket or RtNetLink to listen for interface changes.
+ -- 
+-2.17.1
++2.20.1
+ 
+diff --git a/meta-networking/recipes-protocols/mdns/files/0005-Handle-noisy-netlink-sockets.patch b/meta-networking/recipes-protocols/mdns/files/0005-Handle-noisy-netlink-sockets.patch
+deleted file mode 100644
+index f2b171e55..000000000
+--- a/meta-networking/recipes-protocols/mdns/files/0005-Handle-noisy-netlink-sockets.patch
++++ /dev/null
+@@ -1,212 +0,0 @@
+-From 92025cab86619f548bf3eb816a1804ef40507ca7 Mon Sep 17 00:00:00 2001
+-From: Nate Karstens <nate.karstens@garmin.com>
+-Date: Mon, 24 Jul 2017 09:38:55 -0500
+-Subject: [PATCH 05/11] Handle noisy netlink sockets
+-
+-The POSIX implementation currently clears all network interfaces
+-when netlink indicates that there has been a change. This causes
+-the following problems:
+-
+-  1) Applications are informed that all of the services they are
+-     tracking have been removed.
+-  2) Increases network load because the client must re-query for
+-     all records it is interested in.
+-
+-This changes netlink notification handling by:
+-
+-  1) Always comparing with the latest interface list returned
+-     by the OS.
+-  2) Confirming that the interface has been changed in a way
+-     that we care about.
+-
+-Upstream-Status: Submitted [dts@apple.com]
+-
+-Signed-off-by: Nate Karstens <nate.karstens@garmin.com>
+----
+- mDNSPosix/mDNSPosix.c | 143 +++++++++++++++++++++++++++++++++++++++---
+- 1 file changed, 133 insertions(+), 10 deletions(-)
+-
+-diff --git a/mDNSPosix/mDNSPosix.c b/mDNSPosix/mDNSPosix.c
+-index 699855a..59a8b8c 100644
+---- a/mDNSPosix/mDNSPosix.c
+-+++ b/mDNSPosix/mDNSPosix.c
+-@@ -1247,14 +1247,38 @@ mDNSlocal void          ProcessRoutingNotification(int sd, GenLinkedList *change
+- 
+- #endif // USES_NETLINK
+- 
+-+// Test whether the given PosixNetworkInterface matches the given struct ifi_info
+-+mDNSlocal mDNSBool InterfacesMatch(PosixNetworkInterface *intf, struct ifi_info *ifi)
+-+{
+-+    mDNSBool match = mDNSfalse;
+-+    mDNSAddr ip, mask;
+-+
+-+    if((intf->index == ifi->ifi_index) &&
+-+       (intf->sa_family == ifi->ifi_addr->sa_family) &&
+-+       (strcmp(intf->coreIntf.ifname, ifi->ifi_name) == 0))
+-+        {
+-+        SockAddrTomDNSAddr(ifi->ifi_addr,    &ip,   NULL);
+-+        SockAddrTomDNSAddr(ifi->ifi_netmask, &mask, NULL);
+-+
+-+        match = mDNSSameAddress(&intf->coreIntf.ip, &ip) &&
+-+                mDNSSameAddress(&intf->coreIntf.mask, &mask);
+-+        }
+-+
+-+    return match;
+-+}
+-+
+- // Called when data appears on interface change notification socket
+- mDNSlocal void InterfaceChangeCallback(int fd, short filter, void *context)
+- {
+-     IfChangeRec     *pChgRec = (IfChangeRec*) context;
+-+    mDNS            *m = pChgRec->mDNS;
+-     fd_set readFDs;
+-     GenLinkedList changedInterfaces;
+-     NetworkInterfaceIndex *changedInterface;
+-     struct timeval zeroTimeout = { 0, 0 };
+-+    struct ifi_info *ifi_list, **ifi, *ifi_free, *ifi_loop4 = NULL;
+-+    PosixNetworkInterface *intf, *intfNext;
+-+    mDNSBool found, foundav4;
+- 
+-     (void)fd; // Unused
+-     (void)filter; // Unused
+-@@ -1270,12 +1294,115 @@ mDNSlocal void InterfaceChangeCallback(int fd, short filter, void *context)
+-     }
+-     while (0 < select(pChgRec->NotifySD + 1, &readFDs, (fd_set*) NULL, (fd_set*) NULL, &zeroTimeout));
+- 
+--    // Currently we rebuild the entire interface list whenever any interface change is
+--    // detected. If this ever proves to be a performance issue in a multi-homed
+--    // configuration, more care should be paid to changedInterfaces.
+--    if (changedInterfaces.Head != NULL)
+--        mDNSPlatformPosixRefreshInterfaceList(pChgRec->mDNS);
+-+    CleanRecentInterfaces();
+-+
+-+    if (changedInterfaces.Head == NULL) goto cleanup;
+-+
+-+    ifi_list = get_ifi_info(AF_INET, mDNStrue);
+-+    if (ifi_list == NULL) goto cleanup;
+-+
+-+#if HAVE_IPV6
+-+    /* Link the IPv6 list to the end of the IPv4 list */
+-+    ifi = &ifi_list;
+-+    while (*ifi != NULL) ifi = &(*ifi)->ifi_next;
+-+    *ifi = get_ifi_info(AF_INET6, mDNStrue);
+-+#endif
+-+
+-+    for (intf = (PosixNetworkInterface*)(m->HostInterfaces); intf != NULL; intf = intfNext)
+-+    {
+-+        intfNext = (PosixNetworkInterface*)(intf->coreIntf.next);
+-+
+-+        // Loopback interface(s) are handled later
+-+        if (intf->coreIntf.Loopback) continue;
+-+
+-+        found = mDNSfalse;
+-+        for (ifi = &ifi_list; *ifi != NULL; ifi = &(*ifi)->ifi_next)
+-+        {
+-+            if (InterfacesMatch(intf, *ifi))
+-+            {
+-+                found = mDNStrue;
+-+
+-+                // Removes unchanged from ifi_list
+-+                ifi_free = *ifi;
+-+                *ifi = (*ifi)->ifi_next;
+-+                ifi_free->ifi_next = NULL;
+-+                free_ifi_info(ifi_free);
+-+
+-+                break;
+-+            }
+-+        }
+-+
+-+        // Removes changed and old interfaces from m->HostInterfaces
+-+        if (!found) TearDownInterface(m, intf);
+-+    }
+-+
+-+    // Add new and changed interfaces in ifi_list
+-+    // Save off loopback interface in case it is needed later
+-+    for (ifi = &ifi_list; *ifi != NULL; ifi = &(*ifi)->ifi_next)
+-+    {
+-+        if ((ifi_loop4 == NULL) &&
+-+            ((*ifi)->ifi_addr->sa_family == AF_INET) &&
+-+            ((*ifi)->ifi_flags & IFF_UP) &&
+-+            ((*ifi)->ifi_flags & IFF_LOOPBACK))
+-+        {
+-+            ifi_loop4 = *ifi;
+-+            continue;
+-+        }
+-+
+-+        if (     (((*ifi)->ifi_addr->sa_family == AF_INET)
+-+#if HAVE_IPV6
+-+                  || ((*ifi)->ifi_addr->sa_family == AF_INET6)
+-+#endif
+-+                  ) && ((*ifi)->ifi_flags & IFF_UP)
+-+                    && !((*ifi)->ifi_flags & IFF_POINTOPOINT)
+-+                    && !((*ifi)->ifi_flags & IFF_LOOPBACK))
+-+        {
+-+            SetupOneInterface(m, *ifi);
+-+        }
+-+    }
+-+
+-+    // Determine if there is at least one non-loopback IPv4 interface. This is to work around issues
+-+    // with multicast loopback on IPv6 interfaces -- see corresponding logic in SetupInterfaceList().
+-+    foundav4 = mDNSfalse;
+-+    for (intf = (PosixNetworkInterface*)(m->HostInterfaces); intf != NULL; intf = (PosixNetworkInterface*)(intf->coreIntf.next))
+-+    {
+-+        if (intf->sa_family == AF_INET && !intf->coreIntf.Loopback)
+-+        {
+-+            foundav4 = mDNStrue;
+-+            break;
+-+        }
+-+    }
+-+
+-+    if (foundav4)
+-+    {
+-+        for (intf = (PosixNetworkInterface*)(m->HostInterfaces); intf != NULL; intf = intfNext)
+-+        {
+-+            intfNext = (PosixNetworkInterface*)(intf->coreIntf.next);
+-+            if (intf->coreIntf.Loopback) TearDownInterface(m, intf);
+-+        }
+-+    }
+-+    else
+-+    {
+-+        found = mDNSfalse;
+-+
+-+        for (intf = (PosixNetworkInterface*)(m->HostInterfaces); intf != NULL; intf = (PosixNetworkInterface*)(intf->coreIntf.next))
+-+        {
+-+            if (intf->coreIntf.Loopback)
+-+            {
+-+                found = mDNStrue;
+-+                break;
+-+            }
+-+        }
+-+
+-+        if (!found && (ifi_loop4 != NULL))
+-+        {
+-+            SetupOneInterface(m, ifi_loop4);
+-+        }
+-+    }
+-+
+-+    if (ifi_list != NULL) free_ifi_info(ifi_list);
+- 
+-+cleanup:
+-     while ((changedInterface = (NetworkInterfaceIndex*)changedInterfaces.Head) != NULL)
+-     {
+-         RemoveFromList(&changedInterfaces, changedInterface);
+-@@ -1400,15 +1527,11 @@ mDNSexport void mDNSPlatformClose(mDNS *const m)
+- #endif
+- }
+- 
+--// This is used internally by InterfaceChangeCallback.
+--// It's also exported so that the Standalone Responder (mDNSResponderPosix)
+-+// This is exported so that the Standalone Responder (mDNSResponderPosix)
+- // can call it in response to a SIGHUP (mainly for debugging purposes).
+- mDNSexport mStatus mDNSPlatformPosixRefreshInterfaceList(mDNS *const m)
+- {
+-     int err;
+--    // This is a pretty heavyweight way to process interface changes --
+--    // destroying the entire interface list and then making fresh one from scratch.
+--    // We should make it like the OS X version, which leaves unchanged interfaces alone.
+-     ClearInterfaceList(m);
+-     err = SetupInterfaceList(m);
+-     return PosixErrorToStatus(err);
+--- 
+-2.17.1
+-
+diff --git a/meta-networking/recipes-protocols/mdns/files/0007-Indicate-loopback-interface-to-mDNS-core.patch b/meta-networking/recipes-protocols/mdns/files/0007-Indicate-loopback-interface-to-mDNS-core.patch
+deleted file mode 100644
+index 86201c650..000000000
+--- a/meta-networking/recipes-protocols/mdns/files/0007-Indicate-loopback-interface-to-mDNS-core.patch
++++ /dev/null
+@@ -1,129 +0,0 @@
+-From 07a9401d84804d7f0181aa4fb0f13a54b2a1c9a8 Mon Sep 17 00:00:00 2001
+-From: Nate Karstens <nate.karstens@garmin.com>
+-Date: Tue, 1 Aug 2017 17:06:01 -0500
+-Subject: [PATCH 07/11] Indicate loopback interface to mDNS core
+-
+-Tells the mDNS core if an interface is a loopback interface,
+-similar to AddInterfaceToList() in the MacOS implementation.
+-Also reorganizes SetupOneInterface() to use a const struct
+-rather than growing its parameter list again.
+-
+-Upstream-Status: Submitted [dts@apple.com]
+-
+-Signed-off-by: Nate Karstens <nate.karstens@garmin.com>
+----
+- mDNSPosix/mDNSPosix.c | 37 ++++++++++++++++++-------------------
+- 1 file changed, 18 insertions(+), 19 deletions(-)
+-
+-diff --git a/mDNSPosix/mDNSPosix.c b/mDNSPosix/mDNSPosix.c
+-index 3fc5451..798ab10 100644
+---- a/mDNSPosix/mDNSPosix.c
+-+++ b/mDNSPosix/mDNSPosix.c
+-@@ -889,16 +889,14 @@ mDNSlocal void CleanRecentInterfaces(void)
+- 
+- // Creates a PosixNetworkInterface for the interface whose IP address is
+- // intfAddr and whose name is intfName and registers it with mDNS core.
+--mDNSlocal int SetupOneInterface(mDNS *const m, struct sockaddr *intfAddr, struct sockaddr *intfMask, const char *intfName, int intfIndex)
+-+mDNSlocal int SetupOneInterface(mDNS *const m, struct ifi_info *const ifi)
+- {
+-     int err = 0;
+-     PosixNetworkInterface *intf;
+-     PosixNetworkInterface *alias = NULL;
+- 
+-     assert(m != NULL);
+--    assert(intfAddr != NULL);
+--    assert(intfName != NULL);
+--    assert(intfMask != NULL);
+-+    assert(ifi != NULL);
+- 
+-     // Allocate the interface structure itself.
+-     intf = (PosixNetworkInterface*)calloc(1, sizeof(*intf));
+-@@ -907,26 +905,27 @@ mDNSlocal int SetupOneInterface(mDNS *const m, struct sockaddr *intfAddr, struct
+-     // And make a copy of the intfName.
+-     if (err == 0)
+-     {
+--        intf->intfName = strdup(intfName);
+-+        intf->intfName = strdup(ifi->ifi_name);
+-         if (intf->intfName == NULL) { assert(0); err = ENOMEM; }
+-     }
+- 
+-     if (err == 0)
+-     {
+-         // Set up the fields required by the mDNS core.
+--        SockAddrTomDNSAddr(intfAddr, &intf->coreIntf.ip, NULL);
+--        SockAddrTomDNSAddr(intfMask, &intf->coreIntf.mask, NULL);
+-+        SockAddrTomDNSAddr(ifi->ifi_addr, &intf->coreIntf.ip, NULL);
+-+        SockAddrTomDNSAddr(ifi->ifi_netmask, &intf->coreIntf.mask, NULL);
+- 
+-         //LogMsg("SetupOneInterface: %#a %#a",  &intf->coreIntf.ip,  &intf->coreIntf.mask);
+--        strncpy(intf->coreIntf.ifname, intfName, sizeof(intf->coreIntf.ifname));
+-+        strncpy(intf->coreIntf.ifname, ifi->ifi_name, sizeof(intf->coreIntf.ifname));
+-         intf->coreIntf.ifname[sizeof(intf->coreIntf.ifname)-1] = 0;
+-         intf->coreIntf.Advertise = m->AdvertiseLocalAddresses;
+-         intf->coreIntf.McastTxRx = mDNStrue;
+-+        intf->coreIntf.Loopback = ((ifi->ifi_flags & IFF_LOOPBACK) != 0) ? mDNStrue : mDNSfalse;
+- 
+-         // Set up the extra fields in PosixNetworkInterface.
+-         assert(intf->intfName != NULL);         // intf->intfName already set up above
+--        intf->index                = intfIndex;
+--        intf->sa_family            = intfAddr->sa_family;
+-+        intf->index                = ifi->ifi_index;
+-+        intf->sa_family            = ifi->ifi_addr->sa_family;
+-         intf->multicastSocket4     = -1;
+- #if HAVE_IPV6
+-         intf->multicastSocket6     = -1;
+-@@ -936,17 +935,17 @@ mDNSlocal int SetupOneInterface(mDNS *const m, struct sockaddr *intfAddr, struct
+-         intf->coreIntf.InterfaceID = (mDNSInterfaceID)alias;
+- 
+-         if (alias != intf)
+--            debugf("SetupOneInterface: %s %#a is an alias of %#a", intfName, &intf->coreIntf.ip, &alias->coreIntf.ip);
+-+            debugf("SetupOneInterface: %s %#a is an alias of %#a", ifi->ifi_name, &intf->coreIntf.ip, &alias->coreIntf.ip);
+-     }
+- 
+-     // Set up the multicast socket
+-     if (err == 0)
+-     {
+--        if (alias->multicastSocket4 == -1 && intfAddr->sa_family == AF_INET)
+--            err = SetupSocket(intfAddr, MulticastDNSPort, intf->index, &alias->multicastSocket4);
+-+        if (alias->multicastSocket4 == -1 && ifi->ifi_addr->sa_family == AF_INET)
+-+            err = SetupSocket(ifi->ifi_addr, MulticastDNSPort, intf->index, &alias->multicastSocket4);
+- #if HAVE_IPV6
+--        else if (alias->multicastSocket6 == -1 && intfAddr->sa_family == AF_INET6)
+--            err = SetupSocket(intfAddr, MulticastDNSPort, intf->index, &alias->multicastSocket6);
+-+        else if (alias->multicastSocket6 == -1 && ifi->ifi_addr->sa_family == AF_INET6)
+-+            err = SetupSocket(ifi->ifi_addr, MulticastDNSPort, intf->index, &alias->multicastSocket6);
+- #endif
+-     }
+- 
+-@@ -973,8 +972,8 @@ mDNSlocal int SetupOneInterface(mDNS *const m, struct sockaddr *intfAddr, struct
+-     }
+-     else
+-     {
+--        // Use intfName instead of intf->intfName in the next line to avoid dereferencing NULL.
+--        debugf("SetupOneInterface: %s %#a failed to register %d", intfName, &intf->coreIntf.ip, err);
+-+        // Use ifi->ifi_name instead of intf->intfName in the next line to avoid dereferencing NULL.
+-+        debugf("SetupOneInterface: %s %#a failed to register %d", ifi->ifi_name, &intf->coreIntf.ip, err);
+-         if (intf) { FreePosixNetworkInterface(intf); intf = NULL; }
+-     }
+- 
+-@@ -1023,7 +1022,7 @@ mDNSlocal int SetupInterfaceList(mDNS *const m)
+-                 }
+-                 else
+-                 {
+--                    if (SetupOneInterface(m, i->ifi_addr, i->ifi_netmask, i->ifi_name, i->ifi_index) == 0)
+-+                    if (SetupOneInterface(m, i) == 0)
+-                         if (i->ifi_addr->sa_family == AF_INET)
+-                             foundav4 = mDNStrue;
+-                 }
+-@@ -1037,7 +1036,7 @@ mDNSlocal int SetupInterfaceList(mDNS *const m)
+-         // In the interim, we skip loopback interface only if we found at least one v4 interface to use
+-         // if ((m->HostInterfaces == NULL) && (firstLoopback != NULL))
+-         if (!foundav4 && firstLoopback)
+--            (void) SetupOneInterface(m, firstLoopback->ifi_addr, firstLoopback->ifi_netmask, firstLoopback->ifi_name, firstLoopback->ifi_index);
+-+            (void) SetupOneInterface(m, firstLoopback);
+-     }
+- 
+-     // Clean up.
+--- 
+-2.17.1
+-
+diff --git a/meta-networking/recipes-protocols/mdns/files/0011-Change-a-dynamic-allocation-to-file-scope-variable.patch b/meta-networking/recipes-protocols/mdns/files/0011-Change-a-dynamic-allocation-to-file-scope-variable.patch
+index d64fb35db..d9adde04c 100644
+--- a/meta-networking/recipes-protocols/mdns/files/0011-Change-a-dynamic-allocation-to-file-scope-variable.patch
++++ b/meta-networking/recipes-protocols/mdns/files/0011-Change-a-dynamic-allocation-to-file-scope-variable.patch
+@@ -1,7 +1,7 @@
+-From 19de26db69408f02241e232b39224589a0f630df Mon Sep 17 00:00:00 2001
++From 9ff06108cd44e84ba6c68bfa6737e793f117e303 Mon Sep 17 00:00:00 2001
+ From: Nate Karstens <nate.karstens@garmin.com>
+ Date: Thu, 10 Aug 2017 08:46:03 -0500
+-Subject: [PATCH 11/11] Change a dynamic allocation to file-scope variable
++Subject: [PATCH] Change a dynamic allocation to file-scope variable
+ 
+ Changes a variable from being dynamically-allocated to being
+ statically-allocated at the file scope. Addresses a Coverity
+@@ -11,14 +11,14 @@ Upstream-Status: Submitted [dts@apple.com]
+ 
+ Signed-off-by: Nate Karstens <nate.karstens@garmin.com>
+ ---
+- mDNSPosix/mDNSPosix.c | 12 ++++--------
+- 1 file changed, 4 insertions(+), 8 deletions(-)
++ mDNSPosix/mDNSPosix.c | 14 ++++----------
++ 1 file changed, 4 insertions(+), 10 deletions(-)
+ 
+ diff --git a/mDNSPosix/mDNSPosix.c b/mDNSPosix/mDNSPosix.c
+-index 84af26b..b7795ed 100644
++index 7aeee7b..2d25016 100755
+ --- a/mDNSPosix/mDNSPosix.c
+ +++ b/mDNSPosix/mDNSPosix.c
+-@@ -91,6 +91,7 @@ static sigset_t gEventSignalSet;                // Signals which event loop list
++@@ -81,6 +81,7 @@ static sigset_t gEventSignalSet;                // Signals which event loop list
+  static sigset_t gEventSignals;                  // Signals which were received while inside loop
+  
+  static PosixNetworkInterface *gRecentInterfaces;
+@@ -26,13 +26,13 @@ index 84af26b..b7795ed 100644
+  
+  // ***************************************************************************
+  // Globals (for debugging)
+-@@ -1412,16 +1413,11 @@ cleanup:
++@@ -1641,18 +1642,11 @@ mDNSlocal void InterfaceChangeCallback(int fd, void *context)
+  mDNSlocal mStatus WatchForInterfaceChange(mDNS *const m)
+  {
+      mStatus err;
+ -    IfChangeRec *pChgRec;
+  
+--    pChgRec = (IfChangeRec*) mDNSPlatformMemAllocate(sizeof *pChgRec);
++-    pChgRec = (IfChangeRec*) mDNSPlatformMemAllocateClear(sizeof *pChgRec);
+ -    if (pChgRec == NULL)
+ -        return mStatus_NoMemoryErr;
+ -
+@@ -42,10 +42,12 @@ index 84af26b..b7795ed 100644
+ +    err = OpenIfNotifySocket(&gChgRec.NotifySD);
+      if (err == 0)
+ -        err = mDNSPosixAddFDToEventLoop(pChgRec->NotifySD, InterfaceChangeCallback, pChgRec);
++-    if (err)
++-        mDNSPlatformMemFree(pChgRec);
+ +        err = mDNSPosixAddFDToEventLoop(gChgRec.NotifySD, InterfaceChangeCallback, &gChgRec);
+  
+      return err;
+  }
+ -- 
+-2.17.1
++2.20.1
+ 
+diff --git a/meta-networking/recipes-protocols/mdns/files/build.patch b/meta-networking/recipes-protocols/mdns/files/build.patch
+deleted file mode 100644
+index 4ab9d23bf..000000000
+--- a/meta-networking/recipes-protocols/mdns/files/build.patch
++++ /dev/null
+@@ -1,167 +0,0 @@
+-From 43b6e98c9c37afd0d914949dcff4eab81f5a995f Mon Sep 17 00:00:00 2001
+-From: Brendan Le Foll <brendan.le.foll@intel.com>
+-Date: Tue, 3 Mar 2015 11:42:57 +0000
+-
+-Upstream-Status: Inappropriate [OE-specific]
+-
+-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+-
+----
+- mDNSPosix/Makefile | 54 +++++++++++++++++++++++++-----------------------------
+- 1 file changed, 25 insertions(+), 29 deletions(-)
+-
+-diff --git a/mDNSPosix/Makefile b/mDNSPosix/Makefile
+-index 4f98e90..8ac97ad 100755
+---- a/mDNSPosix/Makefile
+-+++ b/mDNSPosix/Makefile
+-@@ -50,6 +50,7 @@
+- 
+- LIBVERS = 1
+- 
+-+POSIXDIR = ../mDNSPosix
+- COREDIR = ../mDNSCore
+- SHAREDDIR ?= ../mDNSShared
+- JDK = /usr/jdk
+-@@ -58,11 +59,11 @@ CC = @cc
+- BISON = @bison
+- FLEX = @flex
+- ST = @strip
+--LD = ld -shared
+-+LD =@LD
+- CP = cp
+- RM = rm
+- LN = ln -s -f
+--CFLAGS_COMMON = -I$(COREDIR) -I$(SHAREDDIR) -I$(OBJDIR) -fwrapv -W -Wall -DPID_FILE=\"/var/run/mdnsd.pid\" -DMDNS_UDS_SERVERPATH=\"/var/run/mdnsd\"
+-+CFLAGS_COMMON = -I$(POSIXDIR) -I$(COREDIR) -I$(SHAREDDIR) -I$(OBJDIR) -fwrapv -W -Wall -DPID_FILE=\"/var/run/mdnsd.pid\" -DMDNS_UDS_SERVERPATH=\"/var/run/mdnsd\"
+- CFLAGS_PTHREAD =
+- LINKOPTS =
+- LINKOPTS_PTHREAD = -lpthread
+-@@ -70,7 +71,7 @@ LDSUFFIX = so
+- JAVACFLAGS_OS = -fPIC -shared -ldns_sd
+- 
+- # Set up diverging paths for debug vs. prod builds
+--DEBUG=0
+-+DEBUG?=1
+- ifeq ($(DEBUG),1)
+- CFLAGS_DEBUG = -g -DMDNS_DEBUGMSGS=2
+- OBJDIR = objects/debug
+-@@ -213,7 +214,7 @@ endif
+- endif
+- endif
+- 
+--CFLAGS = $(CFLAGS_COMMON) $(CFLAGS_OS) $(CFLAGS_DEBUG)
+-+CFLAGS_BUILD = $(CFLAGS) $(CFLAGS_COMMON) $(CFLAGS_OS) $(CFLAGS_DEBUG)
+- 
+- #############################################################################
+- 
+-@@ -249,8 +250,7 @@ Daemon: setup $(BUILDDIR)/mdnsd
+- 	@echo "Responder daemon done"
+- 
+- $(BUILDDIR)/mdnsd: $(DAEMONOBJS)
+--	$(CC) -o $@ $+ $(LINKOPTS)
+--	@$(STRIP) $@
+-+	$(CC) -o $@ $+
+- 
+- # libdns_sd target builds the client library
+- libdns_sd: setup $(BUILDDIR)/libdns_sd.$(LDSUFFIX)
+-@@ -259,22 +259,18 @@ libdns_sd: setup $(BUILDDIR)/libdns_sd.$(LDSUFFIX)
+- CLIENTLIBOBJS = $(OBJDIR)/dnssd_clientlib.c.so.o $(OBJDIR)/dnssd_clientstub.c.so.o $(OBJDIR)/dnssd_ipc.c.so.o
+- 
+- $(BUILDDIR)/libdns_sd.$(LDSUFFIX): $(CLIENTLIBOBJS)
+--	@$(LD) $(LINKOPTS) -o $@ $+
+--	@$(STRIP) $@
+-+	$(LD) -shared $(LINKOPTS) -Wl,-soname,libdns_sd.$(LDSUFFIX).1 -o $@ $+
+- 
+--Clients: setup libdns_sd ../Clients/build/dns-sd
+-+Clients: setup libdns_sd
+-+	@$(MAKE) -C ../Clients DEBUG=${DEBUG}
+- 	@echo "Clients done"
+- 
+--../Clients/build/dns-sd:
+--	@$(MAKE) -C ../Clients
+--
+- # nss_mdns target builds the Name Service Switch module
+- nss_mdns: setup $(BUILDDIR)/$(NSSLIBFILE)
+- 	@echo "Name Service Switch module done"
+- 
+- $(BUILDDIR)/$(NSSLIBFILE): $(CLIENTLIBOBJS) $(OBJDIR)/nss_mdns.c.so.o
+--	@$(LD) $(LINKOPTS) -o $@ $+
+--	@$(STRIP) $@
+-+	$(LD) -shared $(LINKOPTS) -o $@ $+
+- 
+- #############################################################################
+- 
+-@@ -470,55 +466,55 @@ dnsextd: setup $(BUILDDIR)/dnsextd
+- 	@echo "dnsextd done"
+- 
+- $(BUILDDIR)/mDNSClientPosix:         $(APPOBJ)     $(OBJDIR)/Client.c.o
+--	$(CC) $+ -o $@ $(LINKOPTS)
+-+	$(CC) $+ -o $@
+- 
+- $(BUILDDIR)/mDNSResponderPosix:      $(COMMONOBJ)  $(OBJDIR)/Responder.c.o
+--	$(CC) $+ -o $@ $(LINKOPTS)
+-+	$(CC) $+ -o $@
+- 
+- $(BUILDDIR)/mDNSProxyResponderPosix: $(COMMONOBJ)  $(OBJDIR)/ProxyResponder.c.o
+--	$(CC) $+ -o $@ $(LINKOPTS)
+-+	$(CC) $+ -o $@
+- 
+- $(BUILDDIR)/mDNSIdentify:            $(SPECIALOBJ) $(OBJDIR)/Identify.c.o
+--	$(CC) $+ -o $@ $(LINKOPTS)
+-+	$(CC) $+ -o $@
+- 
+- $(OBJDIR)/Identify.c.o:              $(COREDIR)/mDNS.c # Note: Identify.c textually imports mDNS.c
+- 
+- $(BUILDDIR)/mDNSNetMonitor:          $(SPECIALOBJ) $(OBJDIR)/NetMonitor.c.o
+--	$(CC) $+ -o $@ $(LINKOPTS)
+-+	$(CC) $+ -o $@
+- 
+- $(OBJDIR)/NetMonitor.c.o:            $(COREDIR)/mDNS.c # Note: NetMonitor.c textually imports mDNS.c
+- 
+- $(BUILDDIR)/dnsextd:                 $(DNSEXTDOBJ) $(OBJDIR)/dnsextd.c.threadsafe.o
+--	$(CC) $+ -o $@ $(LINKOPTS) $(LINKOPTS_PTHREAD)
+-+	$(CC) $+ -o $@ $(LINKOPTS_PTHREAD)
+- 
+- #############################################################################
+- 
+- # Implicit rules
+- $(OBJDIR)/%.c.o:	%.c
+--	$(CC) $(CFLAGS) -c -o $@ $<
+-+	$(CC) $(CFLAGS_BUILD) -c -o $@ $<
+- 
+- $(OBJDIR)/%.c.o:	$(COREDIR)/%.c
+--	$(CC) $(CFLAGS) -c -o $@ $<
+-+	$(CC) $(CFLAGS_BUILD) -c -o $@ $<
+- 
+- $(OBJDIR)/%.c.o:	$(SHAREDDIR)/%.c
+--	$(CC) $(CFLAGS) -c -o $@ $<
+-+	$(CC) $(CFLAGS_BUILD) -c -o $@ $<
+- 
+- $(OBJDIR)/%.c.threadsafe.o:	%.c
+--	$(CC) $(CFLAGS) $(CFLAGS_PTHREAD) -D_REENTRANT -c -o $@ $<
+-+	$(CC) $(CFLAGS_BUILD) $(CFLAGS_PTHREAD) -D_REENTRANT -c -o $@ $<
+- 
+- $(OBJDIR)/%.c.threadsafe.o:	$(SHAREDDIR)/%.c
+--	$(CC) $(CFLAGS) $(CFLAGS_PTHREAD) -D_REENTRANT -c -o $@ $<
+-+	$(CC) $(CFLAGS_BUILD) $(CFLAGS_PTHREAD) -D_REENTRANT -c -o $@ $<
+- 
+- $(OBJDIR)/%.c.so.o:	%.c
+--	$(CC) $(CFLAGS) -c -fPIC -o $@ $<
+-+	$(CC) $(CFLAGS_BUILD) -c -fPIC -o $@ $<
+- 
+- $(OBJDIR)/%.c.so.o:	$(SHAREDDIR)/%.c
+--	$(CC) $(CFLAGS) -c -fPIC -o $@ $<
+-+	$(CC) $(CFLAGS_BUILD) -c -fPIC -o $@ $<
+- 
+- $(OBJDIR)/%.y.o: $(SHAREDDIR)/%.y
+- 	$(BISON)              -o $(OBJDIR)/$*.c -d $<
+--	$(CC) $(CFLAGS) -c -o $@ $(OBJDIR)/$*.c
+-+	$(CC) $(CFLAGS_BUILD) -c -o $@ $(OBJDIR)/$*.c
+- 
+- $(OBJDIR)/%.l.o: $(SHAREDDIR)/%.l
+- 	$(FLEX) $(FLEXFLAGS_OS) -i             -o$(OBJDIR)/$*.l.c $<
+--	$(CC) $(CFLAGS) -Wno-error -c -o $@ $(OBJDIR)/$*.l.c
+-+	$(CC) $(CFLAGS_BUILD) -Wno-error -c -o $@ $(OBJDIR)/$*.l.c
+--- 
+-2.9.5
+-
+diff --git a/meta-networking/recipes-protocols/mdns/mdns_878.270.2.bb b/meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb
+similarity index 91%
+rename from meta-networking/recipes-protocols/mdns/mdns_878.270.2.bb
+rename to meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb
+index 0f8dc92df..88521c1b2 100644
+--- a/meta-networking/recipes-protocols/mdns/mdns_878.270.2.bb
++++ b/meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb
+@@ -9,22 +9,21 @@ COMPATIBLE_HOST_libc-musl = 'null'
+ RPROVIDES_${PN} += "libdns_sd.so"
+ 
+ SRC_URI = "https://opensource.apple.com/tarballs/mDNSResponder/mDNSResponder-${PV}.tar.gz \
+-           file://build.patch;patchdir=.. \
+            file://mdns.service \
++           file://0001-mdns-include-stddef.h-for-NULL.patch;patchdir=.. \
++           file://0002-mdns-cross-compilation-fixes-for-bitbake.patch;patchdir=.. \
+            file://0001-Create-subroutine-for-cleaning-recent-interfaces.patch;patchdir=.. \
+            file://0002-Create-subroutine-for-tearing-down-an-interface.patch;patchdir=.. \
+            file://0003-Track-interface-socket-family.patch;patchdir=.. \
+            file://0004-Use-list-for-changed-interfaces.patch;patchdir=.. \
+-           file://0005-Handle-noisy-netlink-sockets.patch;patchdir=.. \
+            file://0006-Remove-unneeded-function.patch;patchdir=.. \
+-           file://0007-Indicate-loopback-interface-to-mDNS-core.patch;patchdir=.. \
+            file://0008-Mark-deleted-interfaces-as-being-changed.patch;patchdir=.. \
+            file://0009-Fix-possible-NULL-dereference.patch;patchdir=.. \
+            file://0010-Handle-errors-from-socket-calls.patch;patchdir=.. \
+            file://0011-Change-a-dynamic-allocation-to-file-scope-variable.patch;patchdir=.. \
             "
- SRC_URI[md5sum] = "63bfc65fbb86cdb616598df1aff6458a"
- SRC_URI[sha256sum] = "b2fc3500840ebe532734c4786b0da4ef0a5f67e51ef4c86b3345d697e4976adf"
+-SRC_URI[md5sum] = "4e139a8e1133349006b0436291c9e29b"
+-SRC_URI[sha256sum] = "2cef0ee9900504c5277fb81de0a28e6c0835fe482ebecf1067c6864f5c4eda74"
++SRC_URI[md5sum] = "ac766013bbcb323e9db4c80805b2552a"
++SRC_URI[sha256sum] = "b86f4816b4145915198e7c5bf0bc56dbbfd960e9a4518bb6486baa40cdcca7e6"
+ 
+ PARALLEL_MAKE = ""
+ 
 -- 
-2.17.1
+2.20.1
 
