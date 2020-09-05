@@ -1,135 +1,73 @@
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web11.3133.1599324970566910579
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web11.3134.1599324971293734135
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Sep 2020 09:56:10 -0700
+ Sat, 05 Sep 2020 09:56:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=jGUsDwk5;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id 2so4622927pjx.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 05 Sep 2020 09:56:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=nIxgPOmz;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id y6so2544003plk.10
+        for <openembedded-devel@lists.openembedded.org>; Sat, 05 Sep 2020 09:56:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=YjKUBTTeVTSBB80M/a0ns6nQm43UjKsnmvSarKvrJtU=;
-        b=jGUsDwk5QZmJbARKur5RFp0XMblEWGdKLf+UdbgeSKGg3sMXTyYTKoXybPwKlgk3Un
-         2y83NSVtgNYI5wJsWQuap+eLZ1h6orw7eqkmJrcLswan4KQ7FRUeW+TtrNGt0cSwqpJz
-         U+X5AwXJX1H1lMp9T5o+JfGod5PGJ9Uc4K5H9gcsNjfx2CRrJ5qWUi3v66nVXquAu1N8
-         tigpwBrlLe9JahtXjt7WIdk5N3FndeVlRnju+66RHw6NcOerGFbsSo0dxaNxbzX9TTIR
-         +q28EQaSY8hT2PSBwM8nxWarTzbc5FMRV+PdGLlJkkxg05NeQH3uDVaOhWClWbqpAzKw
-         Fn+A==
+        h=from:to:subject:date:message-id:in-reply-to:references;
+        bh=jL+ldrvedLBNvZpeNzTfZ3TPW2/oGg/mqQuDmzN0Q6w=;
+        b=nIxgPOmzSPUkuV4WHjcohikH7nzIBQjnksQwX2XSiRFrFgxw3TVXQDwKVG5e1Vvann
+         tuZiiZlwHER1owykUZVCzXgECPOtZI+uISmJnha2jRURZJHycVIMq8OUa/SxnXRL2DZ0
+         O35D8utkbCP4rznSauN467ASsseMDv5ifUmZgoOqALjCkzHd8e52aLQ5U04MipS1x9qz
+         0gMrKOlIyG2BcXi3BdcMCMLHBcYrkGcsmQPPkyljxECaveoR0NGs+aE/NlvjtkITYuQK
+         GVCp2Hbri8ZrT4Q7BCJ3g+1CcKQbm5vmTcQ5FCHUp847Fyk9RZVA//bpyqLx01IktWVw
+         8ZGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=YjKUBTTeVTSBB80M/a0ns6nQm43UjKsnmvSarKvrJtU=;
-        b=QGquxNePr0bZ4WUnhYbkEa7wtwwTxBM4FfbwFUEI/z4ZjQE7471w1vE3dBcNDp9MFy
-         9JxhK1bVUX7ywUy/2BkrJ5xEFqVnDnL/qUSk+oLJahwaBDnXTuQGiw/xxTYJIEj51A16
-         4CAYOffuhXIxss273a/DINsNPBMyCbHUX4qZfrtFFDk3Y994RZJ/Nh/4twKJQXX5oVwV
-         Z4+zstdcSgnVyehXnDSR+ysPQtJc+brsWc+4XkYTw9roJqxc6lgH4Ot2az350col13au
-         yFJ6HVQdzWjcJQpy5clDbj43WyqJSnDdyBlN1398BBzXgZ1xTDbOc68UYDV+LqcCwTyU
-         kTdQ==
-X-Gm-Message-State: AOAM5320fd0eq/GhB55dd9ykPn9gSm4+9aR0TnTRk91r5REPlc5RB0YF
-	3h8nP+hxwTP4FJ6Kqe8qqhPWOIYYZCg=
-X-Google-Smtp-Source: ABdhPJxhgfLlNsifGGUlznvUkcAGtqWHAX5nHr1AZK77BQVNDSZ9J/KnJ/woFUiEVw4AUq4g240Alg==
-X-Received: by 2002:a17:90a:384c:: with SMTP id l12mr12579748pjf.27.1599324969845;
-        Sat, 05 Sep 2020 09:56:09 -0700 (PDT)
+         :references;
+        bh=jL+ldrvedLBNvZpeNzTfZ3TPW2/oGg/mqQuDmzN0Q6w=;
+        b=ryT+0kgPP3TvZbxbleRvak2LfhIXNWK99Pqj7mTGOGZt6CRKwZMVVlQQUAIw8f8YbC
+         6M/JZE7vh9vXexHg1twHzQM0lLhdslVNaDA4SyR0+21MBINgPA+8MV9idCDz0BBwtkvn
+         WfuXhW3rec5wl39+ieAjvu6ilTXhO76AXLD3MaP6rYc7F8a4YjRlqGwe4IdU+ja6Mx17
+         Fp4Lqa6+B0Ag23bLVtMV/9DkUXfYAzMbDsV+BF09JB0MdDNwDe5re8Zw+E2GXR2LHb8e
+         Uc0aq6JGTGPh//v2RNA2qLnPXnfARPJ5v+MNUdEG1UHJA05elhwkDCahHsaZWZaiDpIX
+         oMjw==
+X-Gm-Message-State: AOAM531PIaWpF/YiZhTGFzOhNlZmqJ30aZw1zhh61jhYvPRO6dBgdvoi
+	xpB3N8OzyGlJDhrcbXAw4UYOVGNrAdY=
+X-Google-Smtp-Source: ABdhPJyXTakD6ysxQi/RCnvjk6V887QEYFxGluTaltnce7nuwdBUG2/O9YIXRzZiJ5o7yhsBpTv3iw==
+X-Received: by 2002:a17:90a:414e:: with SMTP id m14mr12448944pjg.186.1599324970579;
+        Sat, 05 Sep 2020 09:56:10 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:745b:fcae:da87:5147])
         by smtp.gmail.com with ESMTPSA id lb1sm7410944pjb.26.2020.09.05.09.56.09
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 05 Sep 2020 09:56:09 -0700 (PDT)
+        Sat, 05 Sep 2020 09:56:10 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 04/20] radvd: add /etc/radvd.conf
-Date: Sat,  5 Sep 2020 09:55:47 -0700
-Message-Id: <022b5a307cb60273ac2922ae11af4e5ed219e8ff.1599324864.git.akuster808@gmail.com>
+Subject: [dunfell 05/20] python3-obd: Add missing setuptools RDEPENDS
+Date: Sat,  5 Sep 2020 09:55:48 -0700
+Message-Id: <135307cf51ba010dfcdbaeb8ddd08af5be9a65e6.1599324864.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1599324864.git.akuster808@gmail.com>
 References: <cover.1599324864.git.akuster808@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-From: Changqing Li <changqing.li@windriver.com>
+From: Alistair Francis <alistair@alistair23.me>
 
-When starting radvd without any configuration the following errors would
-be triggered.
-
-"""
-root@intel-x86-64:~# systemctl status radvd
-● radvd.service - Router advertisement daemon for IPv6
-Loaded: loaded (/lib/systemd/system/radvd.service; enabled; vendor preset:
-	enabled)
-Active: inactive (dead)
-        Condition: start condition failed at Tue 2019-09-24 13:29:36 UTC; 3s ago
-	    └─ ConditionPathExists=/etc/radvd.conf was not met
-"""
-
-Normally the user should create and configrue the /etc/radvd.conf
-manually.  However the radvd provide a example file for redhad located
-at "radvd/redhat/radvd.conf.empty". When installing, it would copy
-radvd/redhat/radvd.conf.empty to /etc/radvd.conf. Also add this empty
-conf here to used as an example of configuration
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Alistair Francis <alistair@alistair23.me>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 5af77740a46c334978adc7f37f53ea9a318d3a33)
+(cherry picked from commit 9cf730f22266d63df3cf63998c87918dfa540fb7)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-daemons/radvd/files/radvd.conf     | 18 ++++++++++++++++++
- .../recipes-daemons/radvd/radvd.inc            |  5 ++++-
- 2 files changed, 22 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-daemons/radvd/files/radvd.conf
+ meta-python/recipes-devtools/python/python3-obd_0.7.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-daemons/radvd/files/radvd.conf b/meta-networking/recipes-daemons/radvd/files/radvd.conf
-new file mode 100644
-index 0000000000..c006f86313
---- /dev/null
-+++ b/meta-networking/recipes-daemons/radvd/files/radvd.conf
-@@ -0,0 +1,18 @@
-+# NOTE: there is no such thing as a working "by-default" configuration file. 
-+#       At least the prefix needs to be specified.  Please consult the radvd.conf(5)
-+#       man page and/or /usr/share/doc/radvd-*/radvd.conf.example for help.
-+#
-+#
-+#interface eth0
-+#{
-+#	AdvSendAdvert on;
-+#	MinRtrAdvInterval 30;
-+#	MaxRtrAdvInterval 100;
-+#	prefix 2001:db8:1:0::/64
-+#	{
-+#		AdvOnLink on;
-+#		AdvAutonomous on;
-+#		AdvRouterAddr off;
-+#	};
-+#
-+#};
-diff --git a/meta-networking/recipes-daemons/radvd/radvd.inc b/meta-networking/recipes-daemons/radvd/radvd.inc
-index 59a07d78dc..802dbe34e9 100644
---- a/meta-networking/recipes-daemons/radvd/radvd.inc
-+++ b/meta-networking/recipes-daemons/radvd/radvd.inc
-@@ -18,7 +18,8 @@ SRC_URI = "http://v6web.litech.org/radvd/dist/radvd-${PV}.tar.gz \
-            file://radvd.init \
-            file://radvd.service \
-            file://volatiles.03_radvd \
--           file://radvd.default"
-+           file://radvd.default \
-+           file://radvd.conf"
+diff --git a/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb b/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb
+index eb8a5a7474..8f17068a48 100644
+--- a/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb
++++ b/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb
+@@ -7,4 +7,4 @@ SRC_URI[sha256sum] = "8b81ea5896157b6e861af12e173c10b001cb6cca6ebb04db2c01d32681
  
- inherit autotools useradd pkgconfig systemd
+ inherit setuptools3 pypi
  
-@@ -52,6 +53,8 @@ do_install_append () {
-     for i in radvd.conf.example README; do \
-         install -m 0644 ${S}/$i ${D}${docdir}/radvd; \
-     done
-+
-+    install -m 0644 ${WORKDIR}/radvd.conf ${D}${sysconfdir}/radvd.conf
- }
- 
- USERADD_PACKAGES = "${PN}"
+-RDEPENDS_${PN} += "${PYTHON_PN}-pyserial ${PYTHON_PN}-pint ${PYTHON_PN}-setuptools"
++RDEPENDS_${PN} += "${PYTHON_PN}-pyserial ${PYTHON_PN}-pint ${PYTHON_PN}-setuptools ${PYTHON_PN}-packaging"
 -- 
 2.17.1
 
