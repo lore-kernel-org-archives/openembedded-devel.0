@@ -1,79 +1,866 @@
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web12.3146.1599324984087539153
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com [209.85.210.194])
+ by mx.groups.io with SMTP id smtpd.web10.3049.1599324985554228939
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Sep 2020 09:56:24 -0700
+ Sat, 05 Sep 2020 09:56:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=qI3NFoDx;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id a9so1426656pjg.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 05 Sep 2020 09:56:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=gE11QzEg;
+ spf=pass (domain: gmail.com, ip: 209.85.210.194, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f194.google.com with SMTP id c196so849986pfc.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 05 Sep 2020 09:56:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=+rzWpBC/WuPT9ecX2ZhO/L6DVUstr5Ud6mXUCy32Q/o=;
-        b=qI3NFoDxBqzF2/pXXYPYs9TMfAj3X7wjW8Fp7DrLmng+X2XAnDdWct0mAnK4dURV8J
-         pV6p9qecJqhP4FwwIHj+rTE5y703s3YQhxHySZbZmt5Z+QXR4voIGZGjgdxAgAqT1Fv9
-         fIOu0npB2a3yJsgJtgZgc5oqYPwEAkKKzo5nWtuY9NJxyA5HPnKX4+8Aa+jpsMvw5YK+
-         MF7rBRiqoOvsglgoRRh7p1r/+vnOf9pOu2hmdBPAeCfpDRrqXKXxtK6ciwNo3kW6FVno
-         MiTMb3Z4lOqCwqfZ6IxcaJ8Lob+P1WuTvs5qc+0VJIhjtjoadEZoGJye54ZKtu1D8i4+
-         muTA==
+        bh=RUP7MKOV4EJMY82uNFdhXXm1bk1/vnyR+zdmwdcmQdc=;
+        b=gE11QzEgS14bmSnprvM4GOmQ50a1+sVYc0eQ0LyO/c9uz+R8Qc0hzGXqp4yHSCsLbm
+         0P06x053s2qQbZC25+x/LyZOP6ooB7ZT7xoYwggD/rE/0ddOSNgC64cq+f3ezS7BCcD1
+         DASQGIqUH9qmguIpwUpyPR3uF5HSnDCG+Ydrm84ZB2b1L8TBhKvOicMcRmehtCfvfoJD
+         1iel2KIS1AFmAIIw1bTthD1M3/MajRd1ZC1SSk+nuLaHUhRp/29nyVpdq8VsG2iyg+fV
+         zzd9+VpRVJiVdwLsnUCYkLTO8KljblH3rLmUkLoZ4FISsywYFNBXxAmJKJw1uxa7e1dr
+         fuLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=+rzWpBC/WuPT9ecX2ZhO/L6DVUstr5Ud6mXUCy32Q/o=;
-        b=oFyvZFEraBJZWkvyEXmgRX3zY/+Cvys1HEZgujsUzX25lw/dLk6AE+d0B+2VX9Zlff
-         3O5a11Y6HVstx30lBvtzBKo5tKtFLr0K43xzCNyG3mBmfEa/CvdBCCFE2RBKwZpyldGB
-         x++2FUa41iDa8O/G/rUaKbJLKoQdqxT1I0G577pVR0XoeC1TNCVlpjD5eBUQxoLQt0Mb
-         yahxar8EU6CyQYq4Fyn1JRRun5c6Yc/I59JP0DoMAhIcnVYtyw31TUAu1DGXjY1T7WpB
-         QaqEMPapnUdMszpL4GEIAoXuNb8AV59UjqogbTErEf+XMNsiUVEjLJePdhcdfP/bYjvk
-         vLqw==
-X-Gm-Message-State: AOAM530eYFDIhQXmZ0X3FmpKUcB1SXjK8+rG9BEsfYXsCCXrtYoDq+3C
-	f8hAbOH6yxmmS/5QM08bUBzi/qIZ8E8=
-X-Google-Smtp-Source: ABdhPJzhMhGpxsLAHZX8vtkoaorWYyLY/enxsqchiqBHT3/UlWgkVIwAKl2oC6drhqRu5e0Qtlh8ZQ==
-X-Received: by 2002:a17:902:c253:: with SMTP id 19mr1698356plg.65.1599324983484;
-        Sat, 05 Sep 2020 09:56:23 -0700 (PDT)
+        bh=RUP7MKOV4EJMY82uNFdhXXm1bk1/vnyR+zdmwdcmQdc=;
+        b=Mty3gs0v8wU26deOKEAq1OkPAWgfHcLyPgfk1UCuWDbZ7TXX5eHq6JXM+I+Or9xXaM
+         i2pAvUfa4yNWYpRyy72zl+yNMKDLxgyIQm76JVqkhsjkfBzLlqk1aRpF7XRHKBQyfuGn
+         jH1X2oC0zZee9pcd6tVA4GlCi4eq6Kvts28q+Hx4gNpdLmGYqxfVxLFtRAsmBmW3KKSt
+         FqhwFwKcQLerIqoMtp+8RJmtEYCVMQ4GRvenCyMPhOrZYDY6U5yALE44WRSFZPt3ibnR
+         Q+7bzx25D2n9EdzgUuWUwdo7q9hSSR62XCPDZg/oyJu0sZsJRBn4QM2f8fJVXBohK2KA
+         JeIw==
+X-Gm-Message-State: AOAM531Xyb6LcaYe1MWEq6S8L4RLnBMivSH/seme77B9Oi1/pAA2ThTv
+	/UQCBdqtIfF1E1b+oEAG34gUbohs9Rs=
+X-Google-Smtp-Source: ABdhPJx5yZfDqrngs/N0H4hQoltRGGWeyMD0WHE+urCTh7DMyVmuu/Z82cvc/ncAhk0Ig9/mdIMSvA==
+X-Received: by 2002:a63:3241:: with SMTP id y62mr11653353pgy.305.1599324984406;
+        Sat, 05 Sep 2020 09:56:24 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:745b:fcae:da87:5147])
-        by smtp.gmail.com with ESMTPSA id lb1sm7410944pjb.26.2020.09.05.09.56.22
+        by smtp.gmail.com with ESMTPSA id lb1sm7410944pjb.26.2020.09.05.09.56.23
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 05 Sep 2020 09:56:22 -0700 (PDT)
+        Sat, 05 Sep 2020 09:56:23 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 19/20] gnome-settings-daemon: Remove duplicate outdated SRC_URI hashes
-Date: Sat,  5 Sep 2020 09:56:02 -0700
-Message-Id: <b72b233d268c51376ecfa277ea8346621f632467.1599324864.git.akuster808@gmail.com>
+Subject: [dunfell 20/20] net-snmp: Fix CVE-2020-15861 and CVE-2020-15862
+Date: Sat,  5 Sep 2020 09:56:03 -0700
+Message-Id: <d7b41ced4b9a9a68083b0fcceff3b226298cff8b.1599324864.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1599324864.git.akuster808@gmail.com>
 References: <cover.1599324864.git.akuster808@gmail.com>
 
-From: Adrian Bunk <bunk@stusta.de>
+From: Ovidiu Panait <ovidiu.panait@windriver.com>
 
-They got overwritten later with the correct values.
+Net-SNMP through 5.7.3 allows Escalation of Privileges because of UNIX symbolic
+link (symlink) following.
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 0b22ed995fec7ee23c23a9eed8323685af1e1403)
+Net-SNMP through 5.7.3 has Improper Privilege Management because SNMP WRITE
+access to the EXTEND MIB provides the ability to run arbitrary commands as
+root.
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2020-15861
+https://nvd.nist.gov/vuln/detail/CVE-2020-15862
+
+Upstream patches:
+https://github.com/net-snmp/net-snmp/commit/2b3e300ade4add03b889e61d610b0db77d300fc3
+https://github.com/net-snmp/net-snmp/commit/9cfb38b0aa95363da1466ca81dd929989ba27c1f
+https://github.com/net-snmp/net-snmp/commit/114e4c2cec2601ca56e8afb1f441520f75a9a312
+https://github.com/net-snmp/net-snmp/commit/2968b455e6f182f329746e2bca1043f368618c73
+https://github.com/net-snmp/net-snmp/commit/4fd9a450444a434a993bc72f7c3486ccce41f602
+https://github.com/net-snmp/net-snmp/commit/77f6c60f57dba0aaea5d8ef1dd94bcd0c8e6d205
+
+CVE-2020-15861-0005.patch is the actual fix for CVE-2020-15861 and
+CVE-2020-15861-0001.patch through CVE-2020-15861-0004.patch are context
+patches needed by the fix to apply cleanly.
+
+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../gnome-settings-daemon/gnome-settings-daemon_3.34.2.bb      | 3 ---
- 1 file changed, 3 deletions(-)
+ .../net-snmp/CVE-2020-15861-0001.patch        | 164 ++++++++
+ .../net-snmp/CVE-2020-15861-0002.patch        |  44 +++
+ .../net-snmp/CVE-2020-15861-0003.patch        |  40 ++
+ .../net-snmp/CVE-2020-15861-0004.patch        |  33 ++
+ .../net-snmp/CVE-2020-15861-0005.patch        | 349 ++++++++++++++++++
+ .../net-snmp/net-snmp/CVE-2020-15862.patch    |  87 +++++
+ .../net-snmp/net-snmp_5.8.bb                  |   6 +
+ 7 files changed, 723 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0001.patch
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0002.patch
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0003.patch
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0004.patch
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0005.patch
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15862.patch
 
-diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.34.2.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.34.2.bb
-index e2fbcb401d..1b77582433 100644
---- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.34.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.34.2.bb
-@@ -6,9 +6,6 @@ GNOMEBASEBUILDCLASS = "meson"
- 
- inherit gnomebase gsettings gobject-introspection gettext features_check upstream-version-is-even
- 
--SRC_URI[archive.md5sum] = "528b0b7cc2dd22c6026a9c8739c71fa7"
--SRC_URI[archive.sha256sum] = "7ce4979817866911a94ecb75b36db56797e038c0c524c5c1a81aefccafc17337"
--
- DEPENDS = " \
-     colord \
-     geocode-glib \
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0001.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0001.patch
+new file mode 100644
+index 0000000000..f43803a663
+--- /dev/null
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0001.patch
+@@ -0,0 +1,164 @@
++From c449946b9d06571b447fce3fc0dcad89e8df05b5 Mon Sep 17 00:00:00 2001
++From: Bart Van Assche <bvanassche@acm.org>
++Date: Wed, 15 May 2019 14:09:25 +0200
++Subject: [PATCH 1/5] CHANGES: libsnmp: Scan MIB directories in alphabetical
++ order
++
++This guarantees that e.g. mibs/RFC1213-MIB.txt is read before mibs/SNMPv2-MIB.txt.
++The order in which these MIBs is read matters because both define sysLocation but
++with different attributes.
++
++CVE: CVE-2020-15861
++Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/2b3e300ade4add03b889e61d610b0db77d300fc3]
++
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
++---
++ snmplib/parse.c | 113 +++++++++++++++++++++++++++++++++++-------------
++ 1 file changed, 82 insertions(+), 31 deletions(-)
++
++diff --git a/snmplib/parse.c b/snmplib/parse.c
++index 7678b35..51d119b 100644
++--- a/snmplib/parse.c
+++++ b/snmplib/parse.c
++@@ -4894,6 +4894,79 @@ add_mibfile(const char* tmpstr, const char* d_name, FILE *ip )
++     }
++ }
++ 
+++static int elemcmp(const void *a, const void *b)
+++{
+++    const char *const *s1 = a, *const *s2 = b;
+++
+++    return strcmp(*s1, *s2);
+++}
+++
+++/*
+++ * Scan a directory and return all filenames found as an array of pointers to
+++ * directory entries (@result).
+++ */
+++static int scan_directory(char ***result, const char *dirname)
+++{
+++    DIR            *dir, *dir2;
+++    struct dirent  *file;
+++    char          **filenames = NULL;
+++    int             fname_len, i, filename_count = 0, array_size = 0;
+++    char           *tmpstr;
+++
+++    *result = NULL;
+++
+++    dir = opendir(dirname);
+++    if (!dir)
+++        return -1;
+++
+++    while ((file = readdir(dir))) {
+++        /*
+++         * Only parse file names that don't begin with a '.'
+++         * Also skip files ending in '~', or starting/ending
+++         * with '#' which are typically editor backup files.
+++         */
+++        fname_len = strlen(file->d_name);
+++        if (fname_len > 0 && file->d_name[0] != '.'
+++            && file->d_name[0] != '#'
+++            && file->d_name[fname_len-1] != '#'
+++            && file->d_name[fname_len-1] != '~') {
+++            if (asprintf(&tmpstr, "%s/%s", dirname, file->d_name) < 0)
+++                continue;
+++            dir2 = opendir(tmpstr);
+++            if (dir2) {
+++                /* file is a directory, don't read it */
+++                closedir(dir2);
+++            } else {
+++                if (filename_count >= array_size) {
+++                    char **new_filenames;
+++
+++                    array_size = (array_size + 16) * 2;
+++                    new_filenames = realloc(filenames,
+++                                        array_size * sizeof(filenames[0]));
+++                    if (!new_filenames) {
+++                        free(tmpstr);
+++                        for (i = 0; i < filename_count; i++)
+++                            free(filenames[i]);
+++                        free(filenames);
+++                        closedir(dir);
+++                        return -1;
+++                    }
+++                    filenames = new_filenames;
+++                }
+++                filenames[filename_count++] = tmpstr;
+++                tmpstr = NULL;
+++            }
+++            free(tmpstr);
+++        }
+++    }
+++    closedir(dir);
+++
+++    qsort(filenames, filename_count, sizeof(filenames[0]), elemcmp);
+++    *result = filenames;
+++
+++    return filename_count;
+++}
+++
++ /* For Win32 platforms, the directory does not maintain a last modification
++  * date that we can compare with the modification date of the .index file.
++  * Therefore there is no way to know whether any .index file is valid.
++@@ -4904,12 +4977,11 @@ int
++ add_mibdir(const char *dirname)
++ {
++     FILE           *ip;
++-    DIR            *dir, *dir2;
++     const char     *oldFile = File;
++-    struct dirent  *file;
+++    char          **filenames;
++     char            tmpstr[300];
++     int             count = 0;
++-    int             fname_len = 0;
+++    int             filename_count, i;
++ #if !(defined(WIN32) || defined(cygwin))
++     char           *token;
++     char space;
++@@ -4957,36 +5029,15 @@ add_mibdir(const char *dirname)
++         DEBUGMSGTL(("parse-mibs", "No index\n"));
++ #endif
++ 
++-    if ((dir = opendir(dirname))) {
++-        ip = netsnmp_mibindex_new( dirname );
++-        while ((file = readdir(dir))) {
++-            /*
++-             * Only parse file names that don't begin with a '.' 
++-             * Also skip files ending in '~', or starting/ending
++-             * with '#' which are typically editor backup files.
++-             */
++-            if (file->d_name != NULL) {
++-              fname_len = strlen( file->d_name );
++-              if (fname_len > 0 && file->d_name[0] != '.' 
++-                                && file->d_name[0] != '#'
++-                                && file->d_name[fname_len-1] != '#'
++-                                && file->d_name[fname_len-1] != '~') {
++-                snprintf(tmpstr, sizeof(tmpstr), "%s/%s", dirname, file->d_name);
++-                tmpstr[ sizeof(tmpstr)-1 ] = 0;
++-                if ((dir2 = opendir(tmpstr))) {
++-                    /*
++-                     * file is a directory, don't read it 
++-                     */
++-                    closedir(dir2);
++-                } else {
++-                    if ( !add_mibfile( tmpstr, file->d_name, ip ))
++-                        count++;
++-                }
++-              }
++-            }
+++    filename_count = scan_directory(&filenames, dirname);
+++
+++    if (filename_count >= 0) {
+++        ip = netsnmp_mibindex_new(dirname);
+++        for (i = 0; i < filename_count; i++) {
+++            if (add_mibfile(filenames[i], strrchr(filenames[i], '/'), ip) == 0)
+++                count++;
++         }
++         File = oldFile;
++-        closedir(dir);
++         if (ip)
++             fclose(ip);
++         return (count);
++-- 
++2.17.1
++
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0002.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0002.patch
+new file mode 100644
+index 0000000000..e54a8b4acb
+--- /dev/null
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0002.patch
+@@ -0,0 +1,44 @@
++From 50118392c58c8d9554580373c0dbc542336b58a9 Mon Sep 17 00:00:00 2001
++From: Bart Van Assche <bvanassche@acm.org>
++Date: Thu, 16 May 2019 13:49:05 +0200
++Subject: [PATCH 2/5] libsnmp: Fix two recently introduced issues in the MIB
++ parsing code
++
++Ensure that the first argument passed to qsort() is not NULL. Free the memory
++that holds the directory contents.
++
++Fixes: 2b3e300ade4a ("CHANGES: libsnmp: Scan MIB directories in alphabetical order")
++
++CVE: CVE-2020-15861
++Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/9cfb38b0aa95363da1466ca81dd929989ba27c1f]
++
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
++---
++ snmplib/parse.c | 4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
++
++diff --git a/snmplib/parse.c b/snmplib/parse.c
++index 51d119b..200ba25 100644
++--- a/snmplib/parse.c
+++++ b/snmplib/parse.c
++@@ -4961,7 +4961,8 @@ static int scan_directory(char ***result, const char *dirname)
++     }
++     closedir(dir);
++ 
++-    qsort(filenames, filename_count, sizeof(filenames[0]), elemcmp);
+++    if (filenames)
+++        qsort(filenames, filename_count, sizeof(filenames[0]), elemcmp);
++     *result = filenames;
++ 
++     return filename_count;
++@@ -5040,6 +5041,7 @@ add_mibdir(const char *dirname)
++         File = oldFile;
++         if (ip)
++             fclose(ip);
+++        free(filenames);
++         return (count);
++     }
++     else
++-- 
++2.17.1
++
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0003.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0003.patch
+new file mode 100644
+index 0000000000..03acbbab92
+--- /dev/null
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0003.patch
+@@ -0,0 +1,40 @@
++From c98808036c86a4ac4877ea13dbcef096b57e49f8 Mon Sep 17 00:00:00 2001
++From: Bart Van Assche <bvanassche@acm.org>
++Date: Wed, 22 May 2019 10:08:53 +0200
++Subject: [PATCH 3/5] libsnmp: Fix a compiler warning
++
++Avoid that the compiler complains on Windows systems that tmpstr[] is not used.
++
++Fixes: 2b3e300ade4a ("CHANGES: libsnmp: Scan MIB directories in alphabetical order")
++
++CVE: CVE-2020-15861
++Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/114e4c2cec2601ca56e8afb1f441520f75a9a312]
++
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
++---
++ snmplib/parse.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/snmplib/parse.c b/snmplib/parse.c
++index 200ba25..0414337 100644
++--- a/snmplib/parse.c
+++++ b/snmplib/parse.c
++@@ -4980,7 +4980,6 @@ add_mibdir(const char *dirname)
++     FILE           *ip;
++     const char     *oldFile = File;
++     char          **filenames;
++-    char            tmpstr[300];
++     int             count = 0;
++     int             filename_count, i;
++ #if !(defined(WIN32) || defined(cygwin))
++@@ -4988,6 +4987,7 @@ add_mibdir(const char *dirname)
++     char space;
++     char newline;
++     struct stat     dir_stat, idx_stat;
+++    char            tmpstr[300];
++     char            tmpstr1[300];
++ #endif
++ 
++-- 
++2.17.1
++
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0004.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0004.patch
+new file mode 100644
+index 0000000000..f0e709636e
+--- /dev/null
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0004.patch
+@@ -0,0 +1,33 @@
++From 545742d1867d70a645a63161ede4a391456691fc Mon Sep 17 00:00:00 2001
++From: Bill Fenner <fenner@gmail.com>
++Date: Mon, 3 Jun 2019 10:01:08 -0700
++Subject: [PATCH 4/5] libsnmp: free filenames from directory listing
++
++Free each filename as we use it, as well as freeing the
++list of filenames.
++
++Fixes: 2b3e300ade4a ("CHANGES: libsnmp: Scan MIB directories in alphabetical order")
++
++CVE: CVE-2020-15861
++Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/2968b455e6f182f329746e2bca1043f368618c73]
++
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
++---
++ snmplib/parse.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/snmplib/parse.c b/snmplib/parse.c
++index 0414337..7f98542 100644
++--- a/snmplib/parse.c
+++++ b/snmplib/parse.c
++@@ -5037,6 +5037,7 @@ add_mibdir(const char *dirname)
++         for (i = 0; i < filename_count; i++) {
++             if (add_mibfile(filenames[i], strrchr(filenames[i], '/'), ip) == 0)
++                 count++;
+++	    free(filenames[i]);
++         }
++         File = oldFile;
++         if (ip)
++-- 
++2.17.1
++
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0005.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0005.patch
+new file mode 100644
+index 0000000000..66a16f6dbf
+--- /dev/null
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0005.patch
+@@ -0,0 +1,349 @@
++From 83d6c5181828921b3731878588b3728de704d490 Mon Sep 17 00:00:00 2001
++From: Bart Van Assche <bvanassche@acm.org>
++Date: Wed, 22 May 2019 09:56:21 +0200
++Subject: [PATCH 5/5] CHANGES: snmpd: Stop reading and writing the
++ mib_indexes/* files
++
++Caching directory contents is something the operating system should do
++and is not something Net-SNMP should do. Instead of storing a copy of
++the directory contents in ${tmp_dir}/mib_indexes/${n}, always scan a
++MIB directory.
++
++CVE: CVE-2020-15861
++Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/4fd9a450444a434a993bc72f7c3486ccce41f602]
++
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
++---
++ .gitignore                       |   1 -
++ include/net-snmp/library/mib.h   |   3 -
++ include/net-snmp/library/parse.h |   2 +-
++ snmplib/mib.c                    | 148 +------------------------------
++ snmplib/parse.c                  |  57 +-----------
++ 5 files changed, 4 insertions(+), 207 deletions(-)
++
++diff --git a/.gitignore b/.gitignore
++index 2d37bc6..94da568 100644
++--- a/.gitignore
+++++ b/.gitignore
++@@ -75,7 +75,6 @@ Makefile
++ man/*.[1358]
++ man/default_store.3.h
++ man/manaliases
++-mibs/.index
++ mk/
++ module_tmp_header.h
++ net-snmp-5*
++diff --git a/include/net-snmp/library/mib.h b/include/net-snmp/library/mib.h
++index ab36853..3e81634 100644
++--- a/include/net-snmp/library/mib.h
+++++ b/include/net-snmp/library/mib.h
++@@ -124,9 +124,6 @@ SOFTWARE.
++     NETSNMP_IMPORT
++     char            *netsnmp_get_mib_directory(void);
++     void            netsnmp_fixup_mib_directory(void);
++-    void            netsnmp_mibindex_load( void );
++-    char *          netsnmp_mibindex_lookup( const char * );
++-    FILE *          netsnmp_mibindex_new( const char * );
++     int             sprint_realloc_description(u_char ** buf, size_t * buf_len,
++                                 size_t * out_len, int allow_realloc,
++                                 oid * objid, size_t objidlen, int width);
++diff --git a/include/net-snmp/library/parse.h b/include/net-snmp/library/parse.h
++index ce46ab9..7c33d3f 100644
++--- a/include/net-snmp/library/parse.h
+++++ b/include/net-snmp/library/parse.h
++@@ -201,7 +201,7 @@ SOFTWARE.
++ #endif
++     void            netsnmp_init_mib_internals(void);
++     void            unload_all_mibs(void);
++-    int             add_mibfile(const char*, const char*, FILE *);
+++    int             add_mibfile(const char*, const char*);
++     int             which_module(const char *);
++     NETSNMP_IMPORT
++     char           *module_name(int, char *);
++diff --git a/snmplib/mib.c b/snmplib/mib.c
++index 1c875c0..30d6cde 100644
++--- a/snmplib/mib.c
+++++ b/snmplib/mib.c
++@@ -2717,7 +2717,6 @@ netsnmp_init_mib(void)
++     env_var = strdup(netsnmp_get_mib_directory());
++     if (!env_var)
++         return;
++-    netsnmp_mibindex_load();
++ 
++     DEBUGMSGTL(("init_mib",
++                 "Seen MIBDIRS: Looking in '%s' for mib dirs ...\n",
++@@ -2737,7 +2736,7 @@ netsnmp_init_mib(void)
++         else
++             entry = strtok_r(env_var, ENV_SEPARATOR, &st);
++         while (entry) {
++-            add_mibfile(entry, NULL, NULL);
+++            add_mibfile(entry, NULL);
++             entry = strtok_r(NULL, ENV_SEPARATOR, &st);
++         }
++     }
++@@ -2888,142 +2887,6 @@ init_mib(void)
++ #endif
++ 
++ 
++-/*
++- * Handle MIB indexes centrally
++- */
++-static int _mibindex     = 0;   /* Last index in use */
++-static int _mibindex_max = 0;   /* Size of index array */
++-char     **_mibindexes   = NULL;
++-
++-int _mibindex_add( const char *dirname, int i );
++-void
++-netsnmp_mibindex_load( void )
++-{
++-    DIR *dir;
++-    struct dirent *file;
++-    FILE *fp;
++-    char tmpbuf[ 300];
++-    char tmpbuf2[300];
++-    int  i;
++-    char *cp;
++-
++-    /*
++-     * Open the MIB index directory, or create it (empty)
++-     */
++-    snprintf( tmpbuf, sizeof(tmpbuf), "%s/mib_indexes",
++-              get_persistent_directory());
++-    tmpbuf[sizeof(tmpbuf)-1] = 0;
++-    dir = opendir( tmpbuf );
++-    if ( dir == NULL ) {
++-        DEBUGMSGTL(("mibindex", "load: (new)\n"));
++-        mkdirhier( tmpbuf, NETSNMP_AGENT_DIRECTORY_MODE, 0);
++-        return;
++-    }
++-
++-    /*
++-     * Create a list of which directory each file refers to
++-     */
++-    while ((file = readdir( dir ))) {
++-        if ( !isdigit((unsigned char)(file->d_name[0])))
++-            continue;
++-        i = atoi( file->d_name );
++-
++-        snprintf( tmpbuf, sizeof(tmpbuf), "%s/mib_indexes/%d",
++-              get_persistent_directory(), i );
++-        tmpbuf[sizeof(tmpbuf)-1] = 0;
++-        fp = fopen( tmpbuf, "r" );
++-        if (!fp)
++-            continue;
++-        cp = fgets( tmpbuf2, sizeof(tmpbuf2), fp );
++-        fclose( fp );
++-        if ( !cp ) {
++-            DEBUGMSGTL(("mibindex", "Empty MIB index (%d)\n", i));
++-            continue;
++-        }
++-        if ( strncmp( tmpbuf2, "DIR ", 4 ) != 0 ) {
++-            DEBUGMSGTL(("mibindex", "Malformed MIB index (%d)\n", i));
++-            continue;
++-        }
++-        tmpbuf2[strlen(tmpbuf2)-1] = 0;
++-        DEBUGMSGTL(("mibindex", "load: (%d) %s\n", i, tmpbuf2));
++-        (void)_mibindex_add( tmpbuf2+4, i );  /* Skip 'DIR ' */
++-    }
++-    closedir( dir );
++-}
++-
++-char *
++-netsnmp_mibindex_lookup( const char *dirname )
++-{
++-    int i;
++-    static char tmpbuf[300];
++-
++-    for (i=0; i<_mibindex; i++) {
++-        if ( _mibindexes[i] &&
++-             strcmp( _mibindexes[i], dirname ) == 0) {
++-             snprintf(tmpbuf, sizeof(tmpbuf), "%s/mib_indexes/%d",
++-                      get_persistent_directory(), i);
++-             tmpbuf[sizeof(tmpbuf)-1] = 0;
++-             DEBUGMSGTL(("mibindex", "lookup: %s (%d) %s\n", dirname, i, tmpbuf ));
++-             return tmpbuf;
++-        }
++-    }
++-    DEBUGMSGTL(("mibindex", "lookup: (none)\n"));
++-    return NULL;
++-}
++-
++-int
++-_mibindex_add( const char *dirname, int i )
++-{
++-    const int old_mibindex_max = _mibindex_max;
++-
++-    DEBUGMSGTL(("mibindex", "add: %s (%d)\n", dirname, i ));
++-    if ( i == -1 )
++-        i = _mibindex++;
++-    if ( i >= _mibindex_max ) {
++-        /*
++-         * If the index array is full (or non-existent)
++-         *   then expand (or create) it
++-         */
++-        _mibindex_max = i + 10;
++-        _mibindexes = realloc(_mibindexes,
++-                              _mibindex_max * sizeof(_mibindexes[0]));
++-        netsnmp_assert(_mibindexes);
++-        memset(_mibindexes + old_mibindex_max, 0,
++-               (_mibindex_max - old_mibindex_max) * sizeof(_mibindexes[0]));
++-    }
++-
++-    _mibindexes[ i ] = strdup( dirname );
++-    if ( i >= _mibindex )
++-        _mibindex = i+1;
++-
++-    DEBUGMSGTL(("mibindex", "add: %d/%d/%d\n", i, _mibindex, _mibindex_max ));
++-    return i;
++-}
++-    
++-FILE *
++-netsnmp_mibindex_new( const char *dirname )
++-{
++-    FILE *fp;
++-    char  tmpbuf[300];
++-    char *cp;
++-    int   i;
++-
++-    cp = netsnmp_mibindex_lookup( dirname );
++-    if (!cp) {
++-        i  = _mibindex_add( dirname, -1 );
++-        snprintf( tmpbuf, sizeof(tmpbuf), "%s/mib_indexes/%d",
++-                  get_persistent_directory(), i );
++-        tmpbuf[sizeof(tmpbuf)-1] = 0;
++-        cp = tmpbuf;
++-    }
++-    DEBUGMSGTL(("mibindex", "new: %s (%s)\n", dirname, cp ));
++-    fp = fopen( cp, "w" );
++-    if (fp)
++-        fprintf( fp, "DIR %s\n", dirname );
++-    return fp;
++-}
++-
++-
++ /**
++  * Unloads all mibs.
++  */
++@@ -3038,15 +2901,6 @@ shutdown_mib(void)
++     }
++     tree_head = NULL;
++     Mib = NULL;
++-    if (_mibindexes) {
++-        int i;
++-        for (i = 0; i < _mibindex; ++i)
++-            SNMP_FREE(_mibindexes[i]);
++-        free(_mibindexes);
++-        _mibindex = 0;
++-        _mibindex_max = 0;
++-        _mibindexes = NULL;
++-    }
++     if (Prefix != NULL && Prefix != &Standard_Prefix[0])
++         SNMP_FREE(Prefix);
++     if (Prefix)
++diff --git a/snmplib/parse.c b/snmplib/parse.c
++index 7f98542..58d777e 100644
++--- a/snmplib/parse.c
+++++ b/snmplib/parse.c
++@@ -607,8 +607,6 @@ static int     read_module_replacements(const char *);
++ static int     read_import_replacements(const char *,
++                                          struct module_import *);
++ 
++-static void     new_module(const char *, const char *);
++-
++ static struct node *merge_parse_objectid(struct node *, FILE *, char *);
++ static struct index_list *getIndexes(FILE * fp, struct index_list **);
++ static struct varbind_list *getVarbinds(FILE * fp, struct varbind_list **);
++@@ -4859,7 +4857,7 @@ snmp_get_token(FILE * fp, char *token, int maxtlen)
++ #endif /* NETSNMP_FEATURE_REMOVE_PARSE_GET_TOKEN */
++ 
++ int
++-add_mibfile(const char* tmpstr, const char* d_name, FILE *ip )
+++add_mibfile(const char* tmpstr, const char* d_name)
++ {
++     FILE           *fp;
++     char            token[MAXTOKEN], token2[MAXTOKEN];
++@@ -4884,8 +4882,6 @@ add_mibfile(const char* tmpstr, const char* d_name, FILE *ip )
++      */
++     if (get_token(fp, token2, MAXTOKEN) == DEFINITIONS) {
++         new_module(token, tmpstr);
++-        if (ip)
++-            fprintf(ip, "%s %s\n", token, d_name);
++         fclose(fp);
++         return 0;
++     } else {
++@@ -4977,71 +4973,22 @@ static int scan_directory(char ***result, const char *dirname)
++ int
++ add_mibdir(const char *dirname)
++ {
++-    FILE           *ip;
++     const char     *oldFile = File;
++     char          **filenames;
++     int             count = 0;
++     int             filename_count, i;
++-#if !(defined(WIN32) || defined(cygwin))
++-    char           *token;
++-    char space;
++-    char newline;
++-    struct stat     dir_stat, idx_stat;
++-    char            tmpstr[300];
++-    char            tmpstr1[300];
++-#endif
++ 
++     DEBUGMSGTL(("parse-mibs", "Scanning directory %s\n", dirname));
++-#if !(defined(WIN32) || defined(cygwin))
++-    token = netsnmp_mibindex_lookup( dirname );
++-    if (token && stat(token, &idx_stat) == 0 && stat(dirname, &dir_stat) == 0) {
++-        if (dir_stat.st_mtime < idx_stat.st_mtime) {
++-            DEBUGMSGTL(("parse-mibs", "The index is good\n"));
++-            if ((ip = fopen(token, "r")) != NULL) {
++-                fgets(tmpstr, sizeof(tmpstr), ip); /* Skip dir line */
++-                while (fscanf(ip, "%127s%c%299[^\n]%c", token, &space, tmpstr,
++-		    &newline) == 4) {
++-
++-		    /*
++-		     * If an overflow of the token or tmpstr buffers has been
++-		     * found log a message and break out of the while loop,
++-		     * thus the rest of the file tokens will be ignored.
++-		     */
++-		    if (space != ' ' || newline != '\n') {
++-			snmp_log(LOG_ERR,
++-			    "add_mibdir: strings scanned in from %s/%s " \
++-			    "are too large.  count = %d\n ", dirname,
++-			    ".index", count);
++-			    break;
++-		    }
++-		   
++-		    snprintf(tmpstr1, sizeof(tmpstr1), "%s/%s", dirname, tmpstr);
++-                    tmpstr1[ sizeof(tmpstr1)-1 ] = 0;
++-                    new_module(token, tmpstr1);
++-                    count++;
++-                }
++-                fclose(ip);
++-                return count;
++-            } else
++-                DEBUGMSGTL(("parse-mibs", "Can't read index\n"));
++-        } else
++-            DEBUGMSGTL(("parse-mibs", "Index outdated\n"));
++-    } else
++-        DEBUGMSGTL(("parse-mibs", "No index\n"));
++-#endif
++ 
++     filename_count = scan_directory(&filenames, dirname);
++ 
++     if (filename_count >= 0) {
++-        ip = netsnmp_mibindex_new(dirname);
++         for (i = 0; i < filename_count; i++) {
++-            if (add_mibfile(filenames[i], strrchr(filenames[i], '/'), ip) == 0)
+++            if (add_mibfile(filenames[i], strrchr(filenames[i], '/')) == 0)
++                 count++;
++ 	    free(filenames[i]);
++         }
++         File = oldFile;
++-        if (ip)
++-            fclose(ip);
++         free(filenames);
++         return (count);
++     }
++-- 
++2.17.1
++
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15862.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15862.patch
+new file mode 100644
+index 0000000000..419a0c21bb
+--- /dev/null
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15862.patch
+@@ -0,0 +1,87 @@
++From de36cf1ecbb13a9541ec5d43ce20ab5030861837 Mon Sep 17 00:00:00 2001
++From: Wes Hardaker <opensource@hardakers.net>
++Date: Thu, 23 Jul 2020 16:17:27 -0700
++Subject: [PATCH 1/1] make the extend mib read-only by default
++
++CVE: CVE-2020-15862
++Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/77f6c60f57dba0aaea5d8ef1dd94bcd0c8e6d205]
++
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
++---
++ agent/mibgroup/agent/extend.c | 18 ++++++++++++------
++ 1 file changed, 12 insertions(+), 6 deletions(-)
++
++diff --git a/agent/mibgroup/agent/extend.c b/agent/mibgroup/agent/extend.c
++index 5f8cedc..38a6c50 100644
++--- a/agent/mibgroup/agent/extend.c
+++++ b/agent/mibgroup/agent/extend.c
++@@ -16,6 +16,12 @@
++ #define SHELLCOMMAND 3
++ #endif
++ 
+++/*  This mib is potentially dangerous to turn on by default, since it
+++ *  allows arbitrary commands to be set by anyone with SNMP WRITE
+++ *  access to the MIB table.  If all of your users are "root" level
+++ *  users, then it may be safe to turn on. */
+++#define ENABLE_EXTEND_WRITE_ACCESS 0
+++
++ netsnmp_feature_require(extract_table_row_data)
++ netsnmp_feature_require(table_data_delete_table)
++ #ifndef NETSNMP_NO_WRITE_SUPPORT
++@@ -742,7 +748,7 @@ handle_nsExtendConfigTable(netsnmp_mib_handler          *handler,
++          *
++          **********/
++ 
++-#ifndef NETSNMP_NO_WRITE_SUPPORT
+++#if !defined(NETSNMP_NO_WRITE_SUPPORT) && ENABLE_EXTEND_WRITE_ACCESS
++         case MODE_SET_RESERVE1:
++             /*
++              * Validate the new assignments
++@@ -1068,7 +1074,7 @@ handle_nsExtendConfigTable(netsnmp_mib_handler          *handler,
++                 }
++             }
++             break;
++-#endif /* !NETSNMP_NO_WRITE_SUPPORT */ 
+++#endif /* !NETSNMP_NO_WRITE_SUPPORT and ENABLE_EXTEND_WRITE_ACCESS */
++ 
++         default:
++             netsnmp_set_request_error(reqinfo, request, SNMP_ERR_GENERR);
++@@ -1076,7 +1082,7 @@ handle_nsExtendConfigTable(netsnmp_mib_handler          *handler,
++         }
++     }
++ 
++-#ifndef NETSNMP_NO_WRITE_SUPPORT
+++#if !defined(NETSNMP_NO_WRITE_SUPPORT) && ENABLE_EXTEND_WRITE_ACCESS
++     /*
++      * If we're marking a given row as active,
++      *  then we need to check that it's ready.
++@@ -1101,7 +1107,7 @@ handle_nsExtendConfigTable(netsnmp_mib_handler          *handler,
++             }
++         }
++     }
++-#endif /* !NETSNMP_NO_WRITE_SUPPORT */
+++#endif /* !NETSNMP_NO_WRITE_SUPPORT && ENABLE_EXTEND_WRITE_ACCESS */
++     
++     return SNMP_ERR_NOERROR;
++ }
++@@ -1590,7 +1596,7 @@ fixExec2Error(int action,
++     idx = name[name_len-1] -1;
++     exten = &compatability_entries[ idx ];
++ 
++-#ifndef NETSNMP_NO_WRITE_SUPPORT
+++#if !defined(NETSNMP_NO_WRITE_SUPPORT) && ENABLE_EXTEND_WRITE_ACCESS
++     switch (action) {
++     case MODE_SET_RESERVE1:
++         if (var_val_type != ASN_INTEGER) {
++@@ -1611,7 +1617,7 @@ fixExec2Error(int action,
++     case MODE_SET_COMMIT:
++         netsnmp_cache_check_and_reload( exten->efix_entry->cache );
++     }
++-#endif /* !NETSNMP_NO_WRITE_SUPPORT */
+++#endif /* !NETSNMP_NO_WRITE_SUPPORT && ENABLE_EXTEND_WRITE_ACCESS */
++     return SNMP_ERR_NOERROR;
++ }
++ #endif /* USING_UCD_SNMP_EXTENSIBLE_MODULE */
++-- 
++2.17.1
++
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+index 67316db0d2..6b4b6ce8ed 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+@@ -29,6 +29,12 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
+            file://0001-net-snmp-fix-compile-error-disable-des.patch \
+            file://0001-Add-pkg-config-support-for-building-applications-and.patch \
+            file://CVE-2019-20892.patch \
++           file://CVE-2020-15861-0001.patch \
++           file://CVE-2020-15861-0002.patch \
++           file://CVE-2020-15861-0003.patch \
++           file://CVE-2020-15861-0004.patch \
++           file://CVE-2020-15861-0005.patch \
++           file://CVE-2020-15862.patch \
+            "
+ SRC_URI[md5sum] = "63bfc65fbb86cdb616598df1aff6458a"
+ SRC_URI[sha256sum] = "b2fc3500840ebe532734c4786b0da4ef0a5f67e51ef4c86b3345d697e4976adf"
 -- 
 2.17.1
 
