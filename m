@@ -1,21 +1,21 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web10.33361.1599446997885949235
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web12.33508.1599447327463856562
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 06 Sep 2020 19:49:58 -0700
+ Sun, 06 Sep 2020 19:55:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: wenlin.kang@windriver.com)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: wenlin.kang@windriver.com)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 0872nui7009874
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0872t60Z029579
 	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Sun, 6 Sep 2020 19:49:57 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 6 Sep 2020 19:55:16 -0700
 Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
  (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Sun, 6 Sep 2020
- 19:49:55 -0700
+ 19:54:55 -0700
 From: "wenlin.kang@windriver.com" <wenlin.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][zeus][PATCH] lua: fix CVE-2020-24371
-Date: Sun, 6 Sep 2020 19:49:55 -0700
-Message-ID: <20200907024955.123559-1-wenlin.kang@windriver.com>
+Subject: [oe][meta-oe][PATCH] lua: fix CVE-2020-24371
+Date: Sun, 6 Sep 2020 19:54:55 -0700
+Message-ID: <20200907025455.125273-1-wenlin.kang@windriver.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -126,13 +126,13 @@ index 000000000..a302874d7
 +1.9.1
 +
 diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-index ae41e627f..7713cff17 100644
+index 4f89579c7..7d84ea60b 100644
 --- a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
 +++ b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-@@ -7,6 +7,7 @@ HOMEPAGE = "http://www.lua.org/"
- SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
-            file://lua.pc.in \
+@@ -9,6 +9,7 @@ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
             file://0001-Allow-building-lua-without-readline-on-Linux.patch \
+            file://CVE-2020-15888.patch \
+            file://CVE-2020-15945.patch \
 +           file://0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch \
             "
  
