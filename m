@@ -1,59 +1,142 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web12.32330.1599441989717191672
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web10.33361.1599446997885949235
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 06 Sep 2020 18:26:30 -0700
+ Sun, 06 Sep 2020 19:49:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.76,400,1592841600"; 
-   d="scan'208";a="98949231"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 07 Sep 2020 09:26:28 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 82AAF48990E1
-	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Sep 2020 09:26:27 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Mon, 7 Sep 2020 09:26:25 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: wenlin.kang@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 0872nui7009874
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 6 Sep 2020 19:49:57 -0700 (PDT)
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Sun, 6 Sep 2020
+ 19:49:55 -0700
+From: "wenlin.kang@windriver.com" <wenlin.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] gperftools: upgrade 2.7.90 -> 2.8
-Date: Mon, 7 Sep 2020 21:26:17 +0800
-Message-ID: <1599485177-64893-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+Subject: [oe][meta-oe][zeus][PATCH] lua: fix CVE-2020-24371
+Date: Sun, 6 Sep 2020 19:49:55 -0700
+Message-ID: <20200907024955.123559-1-wenlin.kang@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 82AAF48990E1.A40F9
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Fix CVE-2020-24371
+
+Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
 ---
- .../gperftools/{gperftools_2.7.90.bb => gperftools_2.8.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/gperftools/{gperftools_2.7.90.bb => gperftools_2.8.bb} (97%)
+ ...rriers-cannot-be-active-during-sweep.patch | 90 +++++++++++++++++++
+ meta-oe/recipes-devtools/lua/lua_5.3.5.bb     |  1 +
+ 2 files changed, 91 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch
 
-diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.7.90.bb b/meta-oe/recipes-support/gperftools/gperftools_2.8.bb
-similarity index 97%
-rename from meta-oe/recipes-support/gperftools/gperftools_2.7.90.bb
-rename to meta-oe/recipes-support/gperftools/gperftools_2.8.bb
-index b7b783931..662777b47 100644
---- a/meta-oe/recipes-support/gperftools/gperftools_2.7.90.bb
-+++ b/meta-oe/recipes-support/gperftools/gperftools_2.8.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/gperftools/gperftools"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
+diff --git a/meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch b/meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch
+new file mode 100644
+index 000000000..a302874d7
+--- /dev/null
++++ b/meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch
+@@ -0,0 +1,90 @@
++From 1e6df25ac28dcd89f0324177bb55019422404b44 Mon Sep 17 00:00:00 2001
++From: Roberto Ierusalimschy <roberto@inf.puc-rio.br>
++Date: Thu, 3 Sep 2020 15:32:17 +0800
++Subject: [PATCH] Fixed bug: barriers cannot be active during sweep
++
++Barriers cannot be active during sweep, even in generational mode.
++(Although gen. mode is not incremental, it can hit a barrier when
++deleting a thread and closing its upvalues.)  The colors of objects are
++being changed during sweep and, therefore, cannot be trusted.
++
++Upstream-Status: Backport [https://github.com/lua/lua/commit/a6da1472c0c5e05ff249325f979531ad51533110]
++CVE: CVE-2020-24371
++
++[Adjust code KGC_INC -> KGC_NORMAL, refer 69371c4b84becac09c445aae01d005b49658ef82]
++Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
++---
++ src/lgc.c | 33 ++++++++++++++++++++++++---------
++ 1 file changed, 24 insertions(+), 9 deletions(-)
++
++diff --git a/src/lgc.c b/src/lgc.c
++index 973c269..7af23d5 100644
++--- a/src/lgc.c
+++++ b/src/lgc.c
++@@ -142,10 +142,17 @@ static int iscleared (global_State *g, const TValue *o) {
++ 
++ 
++ /*
++-** barrier that moves collector forward, that is, mark the white object
++-** being pointed by a black object. (If in sweep phase, clear the black
++-** object to white [sweep it] to avoid other barrier calls for this
++-** same object.)
+++** Barrier that moves collector forward, that is, marks the white object
+++** 'v' being pointed by the black object 'o'.  In the generational
+++** mode, 'v' must also become old, if 'o' is old; however, it cannot
+++** be changed directly to OLD, because it may still point to non-old
+++** objects. So, it is marked as OLD0. In the next cycle it will become
+++** OLD1, and in the next it will finally become OLD (regular old). By
+++** then, any object it points to will also be old.  If called in the
+++** incremental sweep phase, it clears the black object to white (sweep
+++** it) to avoid other barrier calls for this same object. (That cannot
+++** be done is generational mode, as its sweep does not distinguish
+++** whites from deads.)
++ */
++ void luaC_barrier_ (lua_State *L, GCObject *o, GCObject *v) {
++   global_State *g = G(L);
++@@ -154,7 +161,8 @@ void luaC_barrier_ (lua_State *L, GCObject *o, GCObject *v) {
++     reallymarkobject(g, v);  /* restore invariant */
++   else {  /* sweep phase */
++     lua_assert(issweepphase(g));
++-    makewhite(g, o);  /* mark main obj. as white to avoid other barriers */
+++    if (g->gckind == KGC_NORMAL)  /* incremental mode? */
+++      makewhite(g, o);  /* mark 'o' as white to avoid other barriers */
++   }
++ }
++ 
++@@ -299,10 +307,15 @@ static void markbeingfnz (global_State *g) {
++ 
++ 
++ /*
++-** Mark all values stored in marked open upvalues from non-marked threads.
++-** (Values from marked threads were already marked when traversing the
++-** thread.) Remove from the list threads that no longer have upvalues and
++-** not-marked threads.
+++** For each non-marked thread, simulates a barrier between each open
+++** upvalue and its value. (If the thread is collected, the value will be
+++** assigned to the upvalue, but then it can be too late for the barrier
+++** to act. The "barrier" does not need to check colors: A non-marked
+++** thread must be young; upvalues cannot be older than their threads; so
+++** any visited upvalue must be young too.) Also removes the thread from
+++** the list, as it was already visited. Removes also threads with no
+++** upvalues, as they have nothing to be checked. (If the thread gets an
+++** upvalue later, it will be linked in the list again.)
++ */
++ static void remarkupvals (global_State *g) {
++   lua_State *thread;
++@@ -313,9 +326,11 @@ static void remarkupvals (global_State *g) {
++       p = &thread->twups;  /* keep marked thread with upvalues in the list */
++     else {  /* thread is not marked or without upvalues */
++       UpVal *uv;
+++      lua_assert(!isold(thread) || thread->openupval == NULL);
++       *p = thread->twups;  /* remove thread from the list */
++       thread->twups = thread;  /* mark that it is out of list */
++       for (uv = thread->openupval; uv != NULL; uv = uv->u.open.next) {
+++        lua_assert(getage(uv) <= getage(thread));
++         if (uv->u.open.touched) {
++           markvalue(g, uv->v);  /* remark upvalue's value */
++           uv->u.open.touched = 0;
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
+index ae41e627f..7713cff17 100644
+--- a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
++++ b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
+@@ -7,6 +7,7 @@ HOMEPAGE = "http://www.lua.org/"
+ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
+            file://lua.pc.in \
+            file://0001-Allow-building-lua-without-readline-on-Linux.patch \
++           file://0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch \
+            "
  
--SRCREV = "db7aa547abb5abdd558587a15502584cbc825438"
-+SRCREV = "180bfa10d7cb38e8b3784d60943d50e8fcef0dcb"
- SRC_URI = "git://github.com/gperftools/gperftools \
-            file://0001-Support-Atomic-ops-on-clang.patch \
-            file://0001-fix-build-with-musl-libc.patch \
+ # if no test suite matches PV release of Lua exactly, download the suite for the closest Lua release.
 -- 
-2.25.1
-
-
+2.17.1
 
