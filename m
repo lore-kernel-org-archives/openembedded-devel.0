@@ -1,145 +1,176 @@
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web12.2834.1599501222349844658
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.web10.3070.1599501772916839441
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Sep 2020 10:53:42 -0700
+ Mon, 07 Sep 2020 11:02:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=DulAPEUv;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id a8so4752143plm.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2020 10:53:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=O9IN6PSQ;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id 67so8309085pgd.12
+        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2020 11:02:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:autocrypt:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=27N8UVA81FSQwlTH+IYw4WwvI6i66V9bMNrqIQtSzoI=;
-        b=DulAPEUv19452M9b5HSgnnNOQfvR4Q4y97Q5y+wk67pApn6zz/GTyfq069Jyagy/i2
-         OfeN5bTNE86CT7/5nepDct/DHUKbl+Xb+GFXSCvN88RHEkRcAoCro/O0k4T4DiB2LhiK
-         elqUKAFh9c5GCZq88F8Ikd+ewqtwDbZfe/DyImp0P91wekuEzQtWDUJuVfx/n3vRRJ/q
-         nK1q7VscQGwpW8Iq7aVcVKaNRVY5Z9Rd1ycgeCq7fY/JEQYLayVu8Ne6x9rgZehJvlqw
-         B6PircuRDG6ICyRuVwwSquABwI+YBuWQjowJpILpAJeT885/co8SaUY6ShOWb8GnJosC
-         iXzA==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=EvrdBaThqIwHVhHW3B7msUr3B6/WklAlo0guJC97R54=;
+        b=O9IN6PSQ9m/xhaMHbcgMhxNjRiWv/dOMqXytWgjNsCK9JeslwlbGm9mS/IRo1Bfsnr
+         28xB7X4P42YIXy41e+9JlUblrq2UxO4uyNLdbIMpiv4LHCL9RKP3reYccXdceTA9xAB5
+         pE0GnI5xbxYVcQMOfaT8hm6+4nyB3nrqkKnMulqUgzJiGeoK68D5pUkvsJ6PVBKBRO+v
+         HR3EEihXuiKqK2Ytsy7DAzdgc4qlAmL7BLETu3yQHkCp1AwAvayvZgt/wq16lB9LALsJ
+         dCNCVmi/l5lMBXC5D8N8sdyU7qXGc50yXxRfgnsfmCbvTxCLx1N3aCubenls3YOAOKGB
+         4SjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
-         :date:user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=27N8UVA81FSQwlTH+IYw4WwvI6i66V9bMNrqIQtSzoI=;
-        b=GXMDBbZ4IFB/xswD/Tf0hV2feIDTa9a+GRG/x2d3ADU68xGzccGO/42QPOoxBvkJ4P
-         KcARC4X/T6/Ne2O+Qr/UL9tvEuAah1zdmxD60/AAZ4x0f98DJ+Eqz+ZnRR1sgVEb9/R0
-         oT9mzahbSV8ULKHktX2yuymuXKF89kAUnBM3/cYcfNJAgLUTdTba0gi2yybxfU4sm4Js
-         rqLzYvVsEaK4fPt5UaFkDWmmxWTmQcUr5pgauU5cg/cbnqdz2FMUTOOA4bRQYZybeLIC
-         e2I7qP8sS/NbD921kIGJe6whwPJnG20Hyu/QWRFNHVZpBOovFjhqtX9JoEGmHZQFQFVX
-         4Cxw==
-X-Gm-Message-State: AOAM531bcjdfVhB6lpwexmFvlRCtY1D3ivZxH1OveVzeHA4XCbm/UeO+
-	x9+J5yle9GmXN+swRujbMYp+nwcDSzM=
-X-Google-Smtp-Source: ABdhPJzCXRqD3ve/EGn/U9Y+/C27X71ggB935OnrbdyjTvCI1LamwzO9O3l6vcns1byGrH3Ff722mg==
-X-Received: by 2002:a17:90a:194b:: with SMTP id 11mr391595pjh.46.1599501221407;
-        Mon, 07 Sep 2020 10:53:41 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=EvrdBaThqIwHVhHW3B7msUr3B6/WklAlo0guJC97R54=;
+        b=ReN7BRFl3LGe9iuARPmYZU4k/ju0KiBmx04fn75z9shFunfErlpvrisXvExKqI7pBx
+         TEEj3C1DTL9IrBdnI8NFRUMmyclXBlZERdrLURa/Le+QVq+0OpdPnC6P2BWeEQ047v0G
+         AolM5hZixxmChycjD1igQAFWNnxx2f4CIZ3Zu97ZYFqPvbZvEIe6gUABIWrFUBjN/RiG
+         5UVeM+AUUf/tbJAR1p/4UMx543JNedXKcfNKo1wxX5R+bk6fwDRhkjMk6U0Fgq4G/3EW
+         JEAbKL202dIeej3oRtcWovSnsf7EbQ+g2A6NWN6k12q79+DHrM+oRB6KzxjHyZUrGJVv
+         lHxg==
+X-Gm-Message-State: AOAM530jQ33RwPPn5hZASZjOM6JI6xDT7C7vY25xH43tdja/Y9RNpqnt
+	ph6eyHwwuyxYQotR1A4UGThYW2FTHCI=
+X-Google-Smtp-Source: ABdhPJxtppjzhXoRsC4oLEwjb7htdlFzMrdTXu5Q/1outwiSqCbmkgETP8aUNyOmeRHWDyRKpNhxXQ==
+X-Received: by 2002:a63:f1d:: with SMTP id e29mr3833602pgl.358.1599501771685;
+        Mon, 07 Sep 2020 11:02:51 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:5e2:c7ea:56cb:5d37? ([2601:202:4180:a5c0:5e2:c7ea:56cb:5d37])
-        by smtp.gmail.com with ESMTPSA id gq14sm3634772pjb.44.2020.09.07.10.53.40
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 07 Sep 2020 10:53:40 -0700 (PDT)
-Subject: Re: [oe] [meta-networking][PATCH 3/3] mdns: add BSD-3-Clause to LICENSE
-To: Mikko Rapeli <mikko.rapeli@bmw.de>,
- openembedded-devel@lists.openembedded.org
-References: <20200905172951.31808-1-mikko.rapeli@bmw.de>
- <20200905172951.31808-3-mikko.rapeli@bmw.de>
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:5e2:c7ea:56cb:5d37])
+        by smtp.gmail.com with ESMTPSA id e125sm1987446pfe.154.2020.09.07.11.02.50
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 07 Sep 2020 11:02:51 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
- 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
- 8CS2NxU=
-Message-ID: <a9c5a31f-ddd3-3e1b-c7ef-032c64708d16@gmail.com>
-Date: Mon, 7 Sep 2020 10:53:39 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+To: openembedded-devel@lists.openembedded.org
+Subject: [dunfell 00/20] Merge request Sept 7
+Date: Mon,  7 Sep 2020 11:02:24 -0700
+Message-Id: <cover.1599501595.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20200905172951.31808-3-mikko.rapeli@bmw.de>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+Please consider these changes for Dunfell.
 
+The following changes since commit 654ad8bea49f142d20b2b96c0dd44810a6be233a:
 
-On 9/5/20 10:29 AM, Mikko Rapeli wrote:
-> The LICENSE file in source tree says:
->
-> The majority of the source code in the mDNSResponder project is licensed
-> under the terms of the Apache License, Version 2.0, available from:
->    <http://www.apache.org/licenses/LICENSE-2.0>
->
-> To accommodate license compatibility with the widest possible range
-> of client code licenses, the shared library code, which is linked
-> at runtime into the same address space as the client using it, is
-> licensed under the terms of the "Three-Clause BSD License".
->
-> The Linux Name Service Switch code, contributed by National ICT
-> Australia Ltd (NICTA) is licensed under the terms of the NICTA Public
-> Software Licence (which is substantially similar to the "Three-Clause
-> BSD License", with some additional language pertaining to Australian law).
+  jsoncpp: add PE do to revert to older PV (2020-07-18 07:24:39 -0700)
 
-Does this also affect other version like the one in Dunfell?
+are available in the Git repository at:
 
--armin
->
-> Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
-> ---
->  meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb b/meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb
-> index a87b02a78..086b40869 100644
-> --- a/meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb
-> +++ b/meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb
-> @@ -1,7 +1,7 @@
->  SUMMARY = "Publishes & browses available services on a link according to the Zeroconf / Bonjour protocol"
->  DESCRIPTION = "Bonjour, also known as zero-configuration networking, enables automatic discovery of computers, devices, and services on IP networks."
->  HOMEPAGE = "http://developer.apple.com/networking/bonjour/"
-> -LICENSE = "Apache-2.0"
-> +LICENSE = "Apache-2.0 & BSD-3-Clause"
->  LIC_FILES_CHKSUM = "file://../LICENSE;md5=31c50371921e0fb731003bbc665f29bf"
->  
->  COMPATIBLE_HOST_libc-musl = 'null'
->
-> 
+  git://git.openembedded.org/meta-openembedded dunfell-next
+  http://cgit.openembedded.org/meta-openembedded/log/?h=dunfell-next
+
+Adrian Bunk (1):
+  gnome-settings-daemon: Remove duplicate outdated SRC_URI hashes
+
+Alistair Francis (1):
+  python3-obd: Add missing setuptools RDEPENDS
+
+Andreas Müller (1):
+  exiv2: upgrade 0.27.1 -> 0.27.3
+
+Armin Kuster (3):
+  vlc: fix loop initial declarations are only allowed in C99 mode
+  babl-native: fix build issue
+  gnome-settings-daemon: Backport 3.36 fix for building without wayland
+
+Changqing Li (1):
+  radvd: add /etc/radvd.conf
+
+Julius Hemanth Pitti (1):
+  netkit-telnetd: Fix buffer overflow in netoprintf
+
+Kai Kang (2):
+  lvm2: remove service template from SYSTEMD_SERVICE
+  rdist: fix parallel build
+
+Khem Raj (2):
+  samba: Fix conflicts with nss.h from glibc
+  flashrom: Fix build failure with glibc 2.32
+
+Leon Anavi (1):
+  python3-pandas: Upgrade 1.0.3 -> 1.0.5
+
+Martin Jansa (1):
+  lcov: fix lcov-native build
+
+Mingli Yu (2):
+  freeradius: fix the existed certificate error
+  freeradius: fix the occasional verification failure
+
+Ovidiu Panait (1):
+  net-snmp: Fix CVE-2020-15861 and CVE-2020-15862
+
+Ryan Rowe (1):
+  python3-pint: add setuptools and packaging to RDEPENDS
+
+Yi Zhao (1):
+  samba: upgrade 4.10.15 -> 4.10.17
+
+Yue Tao (1):
+  lua: Security Advisory - lua - CVE-2020-15888
+
+ meta-gnome/recipes-gimp/babl/babl_0.1.74.bb   |   2 +
+ ...gins-wacom-Fix-build-without-WAYLAND.patch |  27 ++
+ .../gnome-settings-daemon_3.34.2.bb           |   5 +-
+ .../recipes-multimedia/vlc/vlc_3.0.9.2.bb     |   2 +-
+ ...file-fix-the-existed-certificate-err.patch |  55 +++
+ ...file-fix-the-occasional-verification.patch | 135 +++++++
+ .../freeradius/freeradius_3.0.20.bb           |   2 +
+ .../rdist-6.1.5-fix-parallel-build.patch      |  31 ++
+ .../recipes-connectivity/rdist/rdist_6.1.5.bb |   1 +
+ ....c-Avoid-nss-function-conflicts-with.patch |  96 +++++
+ .../0001-util-Simplify-input-validation.patch |  59 +++
+ ...n-FreeBSD-by-avoiding-NSS_BUFLEN_PAS.patch |  79 ++++
+ ...larger-buffer-if-getpwuid_r-returns-.patch |  50 +++
+ .../{samba_4.10.15.bb => samba_4.10.17.bb}    |   8 +-
+ .../recipes-daemons/radvd/files/radvd.conf    |  18 +
+ .../recipes-daemons/radvd/radvd.inc           |   5 +-
+ ....c-Fix-buffer-overflow-in-netoprintf.patch |  56 +++
+ .../netkit-telnet/netkit-telnet_0.17.bb       |   1 +
+ .../net-snmp/CVE-2020-15861-0001.patch        | 164 ++++++++
+ .../net-snmp/CVE-2020-15861-0002.patch        |  44 +++
+ .../net-snmp/CVE-2020-15861-0003.patch        |  40 ++
+ .../net-snmp/CVE-2020-15861-0004.patch        |  33 ++
+ .../net-snmp/CVE-2020-15861-0005.patch        | 349 ++++++++++++++++++
+ .../net-snmp/net-snmp/CVE-2020-15862.patch    |  87 +++++
+ .../net-snmp/net-snmp_5.8.bb                  |   6 +
+ ...or-last-line-only-from-preprocessed-.patch |  57 +++
+ meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb  |   1 +
+ .../lua/lua/CVE-2020-15888.patch              |  45 +++
+ meta-oe/recipes-devtools/lua/lua_5.3.5.bb     |   1 +
+ ...-protection-only-if-compiler-arch-su.patch |  40 ++
+ .../{exiv2_0.27.1.bb => exiv2_0.27.3.bb}      |   7 +-
+ meta-oe/recipes-support/lcov/lcov_1.14.bb     |   7 +-
+ meta-oe/recipes-support/lvm2/lvm2_2.03.06.bb  |   8 +-
+ .../recipes-devtools/python/python-pint.inc   |   5 +
+ .../python/python3-obd_0.7.1.bb               |   2 +-
+ ...andas_1.0.3.bb => python3-pandas_1.0.5.bb} |   4 +-
+ 36 files changed, 1516 insertions(+), 16 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-settings-daemon/files/0001-plugins-wacom-Fix-build-without-WAYLAND.patch
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-raddb-certs-Makefile-fix-the-existed-certificate-err.patch
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-raddb-certs-Makefile-fix-the-occasional-verification.patch
+ create mode 100644 meta-networking/recipes-connectivity/rdist/rdist-6.1.5/rdist-6.1.5-fix-parallel-build.patch
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba/0001-nsswitch-nsstest.c-Avoid-nss-function-conflicts-with.patch
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba/0001-util-Simplify-input-validation.patch
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba/0002-util-Fix-build-on-FreeBSD-by-avoiding-NSS_BUFLEN_PAS.patch
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba/0003-util-Reallocate-larger-buffer-if-getpwuid_r-returns-.patch
+ rename meta-networking/recipes-connectivity/samba/{samba_4.10.15.bb => samba_4.10.17.bb} (96%)
+ create mode 100644 meta-networking/recipes-daemons/radvd/files/radvd.conf
+ create mode 100644 meta-networking/recipes-netkit/netkit-telnet/files/0001-telnetd-utility.c-Fix-buffer-overflow-in-netoprintf.patch
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0001.patch
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0002.patch
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0003.patch
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0004.patch
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15861-0005.patch
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2020-15862.patch
+ create mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/0001-Makefile-Check-for-last-line-only-from-preprocessed-.patch
+ create mode 100644 meta-oe/recipes-devtools/lua/lua/CVE-2020-15888.patch
+ create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0001-Use-compiler-fcf-protection-only-if-compiler-arch-su.patch
+ rename meta-oe/recipes-support/exiv2/{exiv2_0.27.1.bb => exiv2_0.27.3.bb} (52%)
+ rename meta-python/recipes-devtools/python/{python3-pandas_1.0.3.bb => python3-pandas_1.0.5.bb} (81%)
+
+-- 
+2.17.1
 
