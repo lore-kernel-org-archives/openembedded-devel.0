@@ -1,30 +1,30 @@
 Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.31905.1599440966480780401
+ by mx.groups.io with SMTP id smtpd.web12.32256.1599441675832332100
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 06 Sep 2020 18:09:27 -0700
+ Sun, 06 Sep 2020 18:21:16 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.76,400,1592841600"; 
-   d="scan'208";a="98948653"
+   d="scan'208";a="98949052"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 07 Sep 2020 09:09:19 +0800
+  by heian.cn.fujitsu.com with ESMTP; 07 Sep 2020 09:21:13 +0800
 Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 4BA1848990D9
-	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Sep 2020 09:09:16 +0800 (CST)
+	by cn.fujitsu.com (Postfix) with ESMTP id B48FE48990E1
+	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Sep 2020 09:21:12 +0800 (CST)
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Mon, 7 Sep 2020 09:09:17 +0800
+ (TLS) id 15.0.1497.2; Mon, 7 Sep 2020 09:21:14 +0800
 From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] dash: upgrade 0.5.11.1 -> 0.5.11.2
-Date: Mon, 7 Sep 2020 21:09:15 +0800
-Message-ID: <1599484155-64462-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+Subject: [oe] [meta-filesystems] [PATCH] fuse3: upgrade 3.9.2 -> 3.9.3
+Date: Mon, 7 Sep 2020 21:21:05 +0800
+Message-ID: <1599484865-64779-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
 X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 4BA1848990D9.A27A2
+X-yoursite-MailScanner-ID: B48FE48990E1.A3662
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
@@ -32,27 +32,25 @@ Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../dash/{dash_0.5.11.1.bb => dash_0.5.11.2.bb}               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-shells/dash/{dash_0.5.11.1.bb => dash_0.5.11.2.bb} (85%)
+ .../recipes-support/fuse/{fuse3_3.9.2.bb => fuse3_3.9.3.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-filesystems/recipes-support/fuse/{fuse3_3.9.2.bb => fuse3_3.9.3.bb} (95%)
 
-diff --git a/meta-oe/recipes-shells/dash/dash_0.5.11.1.bb b/meta-oe/recipes-shells/dash/dash_0.5.11.2.bb
-similarity index 85%
-rename from meta-oe/recipes-shells/dash/dash_0.5.11.1.bb
-rename to meta-oe/recipes-shells/dash/dash_0.5.11.2.bb
-index c6914007d..f59e6d1f7 100644
---- a/meta-oe/recipes-shells/dash/dash_0.5.11.1.bb
-+++ b/meta-oe/recipes-shells/dash/dash_0.5.11.2.bb
-@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b5262b4a1a1bff72b48e935531976d2e"
- inherit autotools update-alternatives
+diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.9.3.bb
+similarity index 95%
+rename from meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
+rename to meta-filesystems/recipes-support/fuse/fuse3_3.9.3.bb
+index 357a1de1d..8ef9ee12c 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse3_3.9.3.bb
+@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://GPL2.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
  
- SRC_URI = "http://gondor.apana.org.au/~herbert/${BPN}/files/${BP}.tar.gz"
--SRC_URI[md5sum] = "df978fd0324f60a6ff45f686fe269fdc"
--SRC_URI[sha256sum] = "73c881f146e329ac54962766760fd62cb8bdff376cd6c2f5772eecc1570e1611"
-+SRC_URI[md5sum] = "b9b71c72e40fdc4db9b4ffb81fc3bebc"
-+SRC_URI[sha256sum] = "00fb7d68b7599cc41ab151051c06c01e9500540183d8aa72116cb9c742bd6d5f"
+ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.xz \
+ "
+-SRC_URI[sha256sum] = "6999b6d48e7c0a79628fa901f6e66def3513cab4ffdd8097821e7dc3cdeae08a"
++SRC_URI[sha256sum] = "cd45270a064d2ae14f17cfc914f1555106d6c5091025b0b2698b860399d4ede6"
  
- EXTRA_OECONF += "--bindir=${base_bindir}"
+ S = "${WORKDIR}/fuse-${PV}"
  
 -- 
 2.25.1
