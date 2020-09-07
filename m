@@ -1,142 +1,62 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web12.33508.1599447327463856562
+Received: from 5.mo2.mail-out.ovh.net (5.mo2.mail-out.ovh.net [87.98.181.248])
+ by mx.groups.io with SMTP id smtpd.web11.35993.1599460708801429081
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 06 Sep 2020 19:55:27 -0700
+ Sun, 06 Sep 2020 23:38:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: wenlin.kang@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0872t60Z029579
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Sun, 6 Sep 2020 19:55:16 -0700
-Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Sun, 6 Sep 2020
- 19:54:55 -0700
-From: "wenlin.kang@windriver.com" <wenlin.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][PATCH] lua: fix CVE-2020-24371
-Date: Sun, 6 Sep 2020 19:54:55 -0700
-Message-ID: <20200907025455.125273-1-wenlin.kang@windriver.com>
+ dkim=missing; spf=softfail (domain: 3mdeb.com, ip: 87.98.181.248, mailfrom: jakub.lecki@3mdeb.com)
+Received: from player159.ha.ovh.net (unknown [10.108.54.13])
+	by mo2.mail-out.ovh.net (Postfix) with ESMTP id 5EB4F1E70A6
+	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Sep 2020 08:38:26 +0200 (CEST)
+Received: from 3mdeb.com (85-222-117-222.dynamic.chello.pl [85.222.117.222])
+	(Authenticated sender: jakub.lecki@3mdeb.com)
+	by player159.ha.ovh.net (Postfix) with ESMTPSA id A82D615DC8914;
+	Mon,  7 Sep 2020 06:38:24 +0000 (UTC)
+Authentication-Results: garm.ovh; auth=pass (GARM-97G002398c1af9-e213-491f-9e30-923026dbecc9,
+                    9BCB9AB12DB878E5A2078035E2D2BE51E997A089) smtp.auth=jakub.lecki@3mdeb.com
+From: jakub.lecki@3mdeb.com
+To: openembedded-devel@lists.openembedded.org
+Cc: maciej.pijanowski@3mdeb.com
+Subject: [meta-oe][PATCH] cukinia: new package
+Date: Mon,  7 Sep 2020 08:37:51 +0200
+Message-Id: <20200907063751.13480-1-jakub.lecki@3mdeb.com>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain
+X-Ovh-Tracer-Id: 15375570603705375560
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduiedrudegledgheekucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvffufffkofestddtredtredttdenucfhrhhomheplhgvtghkihhjrghkuhgsuceojhgrkhhusgdrlhgvtghkihesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepvdegvdffteefgedtleefgefgleelgfethfeihedvffduudefiefghefhtddtvddtnecuffhomhgrihhnpehgihhthhhusgdrtghomhenucfkpheptddrtddrtddrtddpkeehrddvvddvrdduudejrddvvddvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmohguvgepshhmthhpqdhouhhtpdhhvghlohepphhlrgihvghrudehledrhhgrrdhovhhhrdhnvghtpdhinhgvtheptddrtddrtddrtddpmhgrihhlfhhrohhmpehjrghkuhgsrdhlvggtkhhiseefmhguvggsrdgtohhmpdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrgh
 
-Fix CVE-2020-24371
-
-Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
+Signed-off-by: leckijakub <jakub.lecki@3mdeb.com>
 ---
- ...rriers-cannot-be-active-during-sweep.patch | 90 +++++++++++++++++++
- meta-oe/recipes-devtools/lua/lua_5.3.5.bb     |  1 +
- 2 files changed, 91 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch
+ meta-oe/recipes-test/cukinia/cukinia_git.bb | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-oe/recipes-test/cukinia/cukinia_git.bb
 
-diff --git a/meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch b/meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch
+diff --git a/meta-oe/recipes-test/cukinia/cukinia_git.bb b/meta-oe/recipes-test/cukinia/cukinia_git.bb
 new file mode 100644
-index 000000000..a302874d7
+index 000000000000..fc723671d5f7
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch
-@@ -0,0 +1,90 @@
-+From 1e6df25ac28dcd89f0324177bb55019422404b44 Mon Sep 17 00:00:00 2001
-+From: Roberto Ierusalimschy <roberto@inf.puc-rio.br>
-+Date: Thu, 3 Sep 2020 15:32:17 +0800
-+Subject: [PATCH] Fixed bug: barriers cannot be active during sweep
++++ b/meta-oe/recipes-test/cukinia/cukinia_git.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "Linux firmware validation framework" 
++DESCRIPTION = "Cukinia is designed to help Linux-based embedded firmware \
++developers run simple system-level validation tests on their firmware." 
++HOMEPAGE = "https://github.com/savoirfairelinux/cukinia"
++LICENSE = "GPLv3 & Apache-2.0"
 +
-+Barriers cannot be active during sweep, even in generational mode.
-+(Although gen. mode is not incremental, it can hit a barrier when
-+deleting a thread and closing its upvalues.)  The colors of objects are
-+being changed during sweep and, therefore, cannot be trusted.
++LIC_FILES_CHKSUM = "file://LICENSE.GPLv3;md5=d32239bcb673463ab874e80d47fae504 \
++                    file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
 +
-+Upstream-Status: Backport [https://github.com/lua/lua/commit/a6da1472c0c5e05ff249325f979531ad51533110]
-+CVE: CVE-2020-24371
++SRC_URI = "git://github.com/savoirfairelinux/cukinia.git;protocol=https;branch=master"
 +
-+[Adjust code KGC_INC -> KGC_NORMAL, refer 69371c4b84becac09c445aae01d005b49658ef82]
-+Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
-+---
-+ src/lgc.c | 33 ++++++++++++++++++++++++---------
-+ 1 file changed, 24 insertions(+), 9 deletions(-)
++PV = "0.5.1"
++SRCREV = "ea934c5393ad99c37bec3c621a364122720cce02"
 +
-+diff --git a/src/lgc.c b/src/lgc.c
-+index 973c269..7af23d5 100644
-+--- a/src/lgc.c
-++++ b/src/lgc.c
-+@@ -142,10 +142,17 @@ static int iscleared (global_State *g, const TValue *o) {
-+ 
-+ 
-+ /*
-+-** barrier that moves collector forward, that is, mark the white object
-+-** being pointed by a black object. (If in sweep phase, clear the black
-+-** object to white [sweep it] to avoid other barrier calls for this
-+-** same object.)
-++** Barrier that moves collector forward, that is, marks the white object
-++** 'v' being pointed by the black object 'o'.  In the generational
-++** mode, 'v' must also become old, if 'o' is old; however, it cannot
-++** be changed directly to OLD, because it may still point to non-old
-++** objects. So, it is marked as OLD0. In the next cycle it will become
-++** OLD1, and in the next it will finally become OLD (regular old). By
-++** then, any object it points to will also be old.  If called in the
-++** incremental sweep phase, it clears the black object to white (sweep
-++** it) to avoid other barrier calls for this same object. (That cannot
-++** be done is generational mode, as its sweep does not distinguish
-++** whites from deads.)
-+ */
-+ void luaC_barrier_ (lua_State *L, GCObject *o, GCObject *v) {
-+   global_State *g = G(L);
-+@@ -154,7 +161,8 @@ void luaC_barrier_ (lua_State *L, GCObject *o, GCObject *v) {
-+     reallymarkobject(g, v);  /* restore invariant */
-+   else {  /* sweep phase */
-+     lua_assert(issweepphase(g));
-+-    makewhite(g, o);  /* mark main obj. as white to avoid other barriers */
-++    if (g->gckind == KGC_NORMAL)  /* incremental mode? */
-++      makewhite(g, o);  /* mark 'o' as white to avoid other barriers */
-+   }
-+ }
-+ 
-+@@ -299,10 +307,15 @@ static void markbeingfnz (global_State *g) {
-+ 
-+ 
-+ /*
-+-** Mark all values stored in marked open upvalues from non-marked threads.
-+-** (Values from marked threads were already marked when traversing the
-+-** thread.) Remove from the list threads that no longer have upvalues and
-+-** not-marked threads.
-++** For each non-marked thread, simulates a barrier between each open
-++** upvalue and its value. (If the thread is collected, the value will be
-++** assigned to the upvalue, but then it can be too late for the barrier
-++** to act. The "barrier" does not need to check colors: A non-marked
-++** thread must be young; upvalues cannot be older than their threads; so
-++** any visited upvalue must be young too.) Also removes the thread from
-++** the list, as it was already visited. Removes also threads with no
-++** upvalues, as they have nothing to be checked. (If the thread gets an
-++** upvalue later, it will be linked in the list again.)
-+ */
-+ static void remarkupvals (global_State *g) {
-+   lua_State *thread;
-+@@ -313,9 +326,11 @@ static void remarkupvals (global_State *g) {
-+       p = &thread->twups;  /* keep marked thread with upvalues in the list */
-+     else {  /* thread is not marked or without upvalues */
-+       UpVal *uv;
-++      lua_assert(!isold(thread) || thread->openupval == NULL);
-+       *p = thread->twups;  /* remove thread from the list */
-+       thread->twups = thread;  /* mark that it is out of list */
-+       for (uv = thread->openupval; uv != NULL; uv = uv->u.open.next) {
-++        lua_assert(getage(uv) <= getage(thread));
-+         if (uv->u.open.touched) {
-+           markvalue(g, uv->v);  /* remark upvalue's value */
-+           uv->u.open.touched = 0;
-+-- 
-+1.9.1
++S = "${WORKDIR}/git"
 +
-diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-index 4f89579c7..7d84ea60b 100644
---- a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-+++ b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-@@ -9,6 +9,7 @@ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
-            file://0001-Allow-building-lua-without-readline-on-Linux.patch \
-            file://CVE-2020-15888.patch \
-            file://CVE-2020-15945.patch \
-+           file://0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch \
-            "
- 
- # if no test suite matches PV release of Lua exactly, download the suite for the closest Lua release.
++do_install () {
++    install -d ${D}${sbindir}
++    install -m 0744 ${S}/cukinia ${D}${sbindir}
++}
 -- 
 2.17.1
 
