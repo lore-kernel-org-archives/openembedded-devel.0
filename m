@@ -1,100 +1,78 @@
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com [209.85.210.194])
- by mx.groups.io with SMTP id smtpd.web11.27897.1599591392820170354
+Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com [209.85.210.193])
+ by mx.groups.io with SMTP id smtpd.web12.31298.1599599275769280926
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Sep 2020 11:56:32 -0700
+ Tue, 08 Sep 2020 14:07:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=TqZTSxRa;
- spf=pass (domain: gmail.com, ip: 209.85.210.194, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f194.google.com with SMTP id v196so58269pfc.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Sep 2020 11:56:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=nydjbd2V;
+ spf=pass (domain: gmail.com, ip: 209.85.210.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f193.google.com with SMTP id b124so172302pfg.13
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Sep 2020 14:07:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=vdZrHqElzNzVupURm1Jc7PlDq1z6PYujCA7S+wdrkdU=;
-        b=TqZTSxRaSmAgeD6AKLzPOMFXReyyscvzRV6F5sBFvLODzZGlRyboe72HNpnZYeGtxl
-         Cu4yKPCwMsXWJoqHh9r2IEjbwZjOV9UXcB9ot9xd4b2qJRli2NC34E0RTi86TinaLdlz
-         rizLL3YBEYcykf93yxuNS8N1ti8F7gGBzQCALvgt36N+UqfiTIUiH7fCKcv/4R9bUm1q
-         PzeN4wmQww2zCDT697gME2zvo8vUfru/d86tLrjPewyaXK6dCpkWZfU7YrF9svMJTWth
-         nFRnsld9Ly2hjeCqI3GOQq1U8rnMN7HsVPLDQ5+wEzCnbzGxB++N4cn35CpG0jlGu3+F
-         ZV0Q==
+        bh=jeuxWOCU7vs5QufrHiBHGO7haB7DAemwo3bz9I0joJU=;
+        b=nydjbd2VuCZB6ly4kCNe+ahvb/mICrDO3w6sDtNgQNuWM5eWYDqay0PUrE2Y2IBO/D
+         nu4dwbjyBdyPOmpgZCeF8GXFyzqPEeLrRaaelR7DjN4EKEbgrOqhWYpS1ZQonQXJoKTw
+         WdZ4a/LG/x3OmjQTge7Bvv6bK3ExbgI0AUqsQAZfYmNaILS9pfgkAAbBG4Qq2k4ytGcO
+         8tkSz5YYW/947lui975dGHaddQeXXTkvSSjN7cR4efcuGyMb7sqysEjJGnWwhuDSKDkA
+         cdTrDoxkXHei172KBSleRajp+gDtoYZV2eCHNg3liCYjGmGQxuwTvFQIQwqj8/Gcapl8
+         R9yQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=vdZrHqElzNzVupURm1Jc7PlDq1z6PYujCA7S+wdrkdU=;
-        b=khMWXkOq0ufiVXBdU0mf6WfE/WlstswCKFvlODWaVCj+qrfUnzGdg76a7Rb7qHrIHO
-         2doanviHCc8NnsRBjflLyeZLsETPsylgKrkK4DjkdLdb81ckzODvWtyF1l8iACPA3nCo
-         6VUro4n4BIWhqRY1qcRUCu5zPNju8TS+O3d97FCkORNu/fhqt5mTfFX5L4mjeACR+5Lp
-         DSOsKiAJeF4w7MPwFO138olm+b//r6vsoL8/ZE3TF7iDXC/3PcrFrM3j1OkVLmrxHfHu
-         LBfCVO7W48gIYypnE4RNWlGlnWZ8Al2OQ8ugLMo3VznwZs3G9F6LkeQ4THsoXpUiNKmI
-         D1eg==
-X-Gm-Message-State: AOAM531EpR7zCP0vShT1Vlb+3bYiLKbMyEDepl5WkzqNJjm3c4YW8iId
-	F5jPCHPf+h0S2cbygT3UKFtKdzPlGeEaig==
-X-Google-Smtp-Source: ABdhPJzjPQPP5elb2tlmNaeZYVcCA5mFCSiq+uOBW0LcF+3R5aLenV+80LjFw4fZNkdMmAKlsgR58g==
-X-Received: by 2002:a17:902:850c:b029:d0:cbe1:e747 with SMTP id bj12-20020a170902850cb02900d0cbe1e747mr414915plb.34.1599591391928;
-        Tue, 08 Sep 2020 11:56:31 -0700 (PDT)
+        bh=jeuxWOCU7vs5QufrHiBHGO7haB7DAemwo3bz9I0joJU=;
+        b=baav/eqGZt3V/K4q5x5whVdc+U2piBRdwSTkw+Pq+BpulcJNOCYeK7vXXWFBKrOBG8
+         82LNLzcYO1KPszMlHGhw5pRQ4LjKwSv2WJz6X8gQUJGOaMsZvckbQcvhEVUcUbO8aO6Z
+         32Fx53HluVcM+ERvXUgrlE4mI+GxUX2FVqjlx5Yil8IHdCVVUIaAZybiN8QSlb48Puao
+         foV53HDz+GlavJjbyTS13NGbhv+JemyyHRRT5dsK0kfZDfTLiqAaP+3n/vIWHIadxA3C
+         LiKiT08QOi+w2gl+9aI6InBjyPEUhB9gim8QRD75MAJ8z9SLijjbZpz+ili5dov1NbKy
+         rYNA==
+X-Gm-Message-State: AOAM530VGGHubB3SJSAAhi9AL+LTjQWuyCIa3jK2XEW5fZd95PoS10YH
+	dk03aIjtX+iMZ7Y0yl/e3Mr5QKCgqhTOAw==
+X-Google-Smtp-Source: ABdhPJz4VDZ5bHXzvxB/EkfsXybgrvWxnh+/dQ3KjiEVlHKaineenhRtay3RiKUec3c3NZsAfnad0A==
+X-Received: by 2002:a17:902:7b81:b029:d0:89f3:28ca with SMTP id w1-20020a1709027b81b02900d089f328camr857145pll.6.1599599274731;
+        Tue, 08 Sep 2020 14:07:54 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::d92c])
-        by smtp.gmail.com with ESMTPSA id a10sm145881pfn.219.2020.09.08.11.56.31
+        by smtp.gmail.com with ESMTPSA id q190sm338320pfq.99.2020.09.08.14.07.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Sep 2020 11:56:31 -0700 (PDT)
+        Tue, 08 Sep 2020 14:07:54 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Madhavan Krishnan <madhavan.krishnan@linaro.org>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH] libcamera: Bumped to latest revision and added pkgconfig to enable gstreamer
-Date: Tue,  8 Sep 2020 11:56:28 -0700
-Message-Id: <20200908185628.1061981-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] iwd: Upgrade to 1.9
+Date: Tue,  8 Sep 2020 14:07:52 -0700
+Message-Id: <20200908210752.1821098-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Madhavan Krishnan <madhavan.krishnan@linaro.org>
+Need this upgrade to work with ell >= 0.33
 
-Bumped to latest source revision of libcamera, and added packageconfig
-to enable the gstreamer during build, and to generate and install the
-gstreamer library.
-
-Signed-off-by: Madhavan Krishnan <madhavan.krishnan@linaro.org>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-multimedia/libcamera/libcamera.bb         | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+ meta-oe/recipes-connectivity/iwd/{iwd_1.8.bb => iwd_1.9.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/iwd/{iwd_1.8.bb => iwd_1.9.bb} (96%)
 
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-index c66c93ec5a..5505626d3e 100644
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-@@ -12,15 +12,20 @@ SRC_URI = " \
-         git://linuxtv.org/libcamera.git;protocol=git \
- "
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.8.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.9.bb
+similarity index 96%
+rename from meta-oe/recipes-connectivity/iwd/iwd_1.8.bb
+rename to meta-oe/recipes-connectivity/iwd/iwd_1.9.bb
+index bfbf3c7fa6..25500e6501 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd_1.8.bb
++++ b/meta-oe/recipes-connectivity/iwd/iwd_1.9.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
+ DEPENDS = "ell"
  
--SRCREV = "5f2f9406cebc668f0d69007d1ea59ef3c56ef28c"
-+SRCREV = "1e8c91b65695449c5246d17ba7dc439c8058b781"
- 
--PV = "202006+git${SRCPV}"
-+PV = "202008+git${SRCPV}"
- 
+ SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
+-SRCREV = "a01754f56aacdc641c819f983c3c0ad374be77b2"
++SRCREV = "aa3dc1b95348dea177e9d8c2c3063b29e20fe2e9"
  S = "${WORKDIR}/git"
  
- DEPENDS = "python3-pyyaml-native udev gnutls boost chrpath-native"
- DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
- 
-+PACKAGES =+ "${PN}-gst"
-+
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[gst] = "-Dgstreamer=enabled,-Dgstreamer=disabled,gstreamer1.0 gstreamer1.0-plugins-base"
-+
- RDEPENDS_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayland', '', d)}"
- 
- inherit meson pkgconfig python3native
-@@ -44,4 +49,4 @@ do_recalculate_ipa_signatures_package() {
- 
- FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig"
- FILES_${PN} += " ${libdir}/libcamera.so"
--
-+FILES_${PN}-gst = "${libdir}/gstreamer-1.0/libgstlibcamera.so"
+ inherit autotools manpages pkgconfig python3native systemd
 -- 
 2.28.0
 
