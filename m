@@ -1,198 +1,100 @@
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com [209.85.222.193])
- by mx.groups.io with SMTP id smtpd.web12.27494.1599589938282578935
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com [209.85.210.194])
+ by mx.groups.io with SMTP id smtpd.web11.27897.1599591392820170354
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Sep 2020 11:32:18 -0700
+ Tue, 08 Sep 2020 11:56:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Bj5Fstl7;
- spf=pass (domain: gmail.com, ip: 209.85.222.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f193.google.com with SMTP id d20so41708qka.5
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Sep 2020 11:32:18 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=TqZTSxRa;
+ spf=pass (domain: gmail.com, ip: 209.85.210.194, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f194.google.com with SMTP id v196so58269pfc.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Sep 2020 11:56:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=DNyNj4PqRQYbP1e5jvvashNVX/+vrmjBAbfsZf2XEPU=;
-        b=Bj5Fstl7tfYsX1qze3aTZeBBPMpYqCYeCzB01kRdtAY1RJs0bm7Fz7186XFr/hOa9C
-         ujI4OOGwvArnJP0jnA1ZpBIwsh3lF3R4BRMdZzci21tNSvU2rj9c7dvqZPu7N+MCee4B
-         XuA609aVuuzEJRBCWdmF1OuMC6AXHoBSliNZCnn9ad4oKGKhqqN52/edyRcUKmh0h6qY
-         J0AWxqYgacZmarCx4XSn/c189mSZdTj1IrL72o8XoFkpSjMvUA31JT3IssiUXt/CGzA4
-         3oYpkUyl/o0AnnNJoEIqq6MUTJlqgAfeN0Wd6Z5qjuAXMaHq/asDuyBqYQdjYeYgoM3g
-         a2vA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=vdZrHqElzNzVupURm1Jc7PlDq1z6PYujCA7S+wdrkdU=;
+        b=TqZTSxRaSmAgeD6AKLzPOMFXReyyscvzRV6F5sBFvLODzZGlRyboe72HNpnZYeGtxl
+         Cu4yKPCwMsXWJoqHh9r2IEjbwZjOV9UXcB9ot9xd4b2qJRli2NC34E0RTi86TinaLdlz
+         rizLL3YBEYcykf93yxuNS8N1ti8F7gGBzQCALvgt36N+UqfiTIUiH7fCKcv/4R9bUm1q
+         PzeN4wmQww2zCDT697gME2zvo8vUfru/d86tLrjPewyaXK6dCpkWZfU7YrF9svMJTWth
+         nFRnsld9Ly2hjeCqI3GOQq1U8rnMN7HsVPLDQ5+wEzCnbzGxB++N4cn35CpG0jlGu3+F
+         ZV0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=DNyNj4PqRQYbP1e5jvvashNVX/+vrmjBAbfsZf2XEPU=;
-        b=oyRCSGREabUynGzeLOBU9EBwHb7XAJszb92+IEd0QVtQv7vs4qYiTXb/m/zaEUADfC
-         db8zYU/PaRVFxzG8A3kW5BQYYwCz+DuEh6rE+oA60b1Sd39sf7NM+zgl+dk5WzeJGYQ1
-         jhlFvImUSe27zrWBdto/gvm9sH9k4W+qOr5+J9KsgEF41vq1YLCLIpumvg8EnkiO9du1
-         cJHz43Ejb+rmy9xm9wpA2EWU4Qi1qIXkIMKxQTfm10a3wScjyweU1jsENYoFfNEFuBqm
-         klDthtTcMm/S8QSjR/oCYBjO1Dcwag588Qtw5/ZQuImpCXgwtdD1ZNRqhUpDCeOGcpgJ
-         xG9w==
-X-Gm-Message-State: AOAM532XIQAEsUTeRQxhGBwiqqtGW4K+OiEmqLWGtc0C3AV3MKizLw/s
-	6kkAp4Eqlas5LWXJGP9g+GoUFgeNM9bdd4CzVO8YJyfWeA4=
-X-Google-Smtp-Source: ABdhPJz3Yyq00MY5Fd47fksQzarKVqHpTIf++GRe3nmt6p3EksADO6Eq6NUHetk6042vdxF1PznoEmh7ra5nJ3VDNhE=
-X-Received: by 2002:a37:6f43:: with SMTP id k64mr1353779qkc.212.1599589937129;
- Tue, 08 Sep 2020 11:32:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200907063751.13480-1-jakub.lecki@3mdeb.com>
-In-Reply-To: <20200907063751.13480-1-jakub.lecki@3mdeb.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=vdZrHqElzNzVupURm1Jc7PlDq1z6PYujCA7S+wdrkdU=;
+        b=khMWXkOq0ufiVXBdU0mf6WfE/WlstswCKFvlODWaVCj+qrfUnzGdg76a7Rb7qHrIHO
+         2doanviHCc8NnsRBjflLyeZLsETPsylgKrkK4DjkdLdb81ckzODvWtyF1l8iACPA3nCo
+         6VUro4n4BIWhqRY1qcRUCu5zPNju8TS+O3d97FCkORNu/fhqt5mTfFX5L4mjeACR+5Lp
+         DSOsKiAJeF4w7MPwFO138olm+b//r6vsoL8/ZE3TF7iDXC/3PcrFrM3j1OkVLmrxHfHu
+         LBfCVO7W48gIYypnE4RNWlGlnWZ8Al2OQ8ugLMo3VznwZs3G9F6LkeQ4THsoXpUiNKmI
+         D1eg==
+X-Gm-Message-State: AOAM531EpR7zCP0vShT1Vlb+3bYiLKbMyEDepl5WkzqNJjm3c4YW8iId
+	F5jPCHPf+h0S2cbygT3UKFtKdzPlGeEaig==
+X-Google-Smtp-Source: ABdhPJzjPQPP5elb2tlmNaeZYVcCA5mFCSiq+uOBW0LcF+3R5aLenV+80LjFw4fZNkdMmAKlsgR58g==
+X-Received: by 2002:a17:902:850c:b029:d0:cbe1:e747 with SMTP id bj12-20020a170902850cb02900d0cbe1e747mr414915plb.34.1599591391928;
+        Tue, 08 Sep 2020 11:56:31 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::d92c])
+        by smtp.gmail.com with ESMTPSA id a10sm145881pfn.219.2020.09.08.11.56.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Sep 2020 11:56:31 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Tue, 8 Sep 2020 11:32:06 -0700
-Message-ID: <CAMKF1sry=-RUJFQKVPYz7Q4wEWPbEW73RCEMvDvP8MZb5bQyhg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] cukinia: new package
-To: leckijakub <jakub.lecki@3mdeb.com>
-Cc: maciej.pijanowski@3mdeb.com, openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000fd2c1a05aed18d7c"
+To: openembedded-devel@lists.openembedded.org
+Cc: Madhavan Krishnan <madhavan.krishnan@linaro.org>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH] libcamera: Bumped to latest revision and added pkgconfig to enable gstreamer
+Date: Tue,  8 Sep 2020 11:56:28 -0700
+Message-Id: <20200908185628.1061981-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.28.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
---000000000000fd2c1a05aed18d7c
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Madhavan Krishnan <madhavan.krishnan@linaro.org>
 
-On Sun, Sep 6, 2020 at 11:38 PM leckijakub <jakub.lecki@3mdeb.com> wrote:
+Bumped to latest source revision of libcamera, and added packageconfig
+to enable the gstreamer during build, and to generate and install the
+gstreamer library.
 
-> Signed-off-by: leckijakub <jakub.lecki@3mdeb.com>
->
-> ---
->
->  meta-oe/recipes-test/cukinia/cukinia_git.bb | 20 ++++++++++++++++++++
->
->  1 file changed, 20 insertions(+)
->
->  create mode 100644 meta-oe/recipes-test/cukinia/cukinia_git.bb
->
->
->
-> diff --git a/meta-oe/recipes-test/cukinia/cukinia_git.bb
-> b/meta-oe/recipes-test/cukinia/cukinia_git.bb
->
-> new file mode 100644
->
-> index 000000000000..fc723671d5f7
->
-> --- /dev/null
->
-> +++ b/meta-oe/recipes-test/cukinia/cukinia_git.bb
->
-> @@ -0,0 +1,20 @@
->
-> +SUMMARY =3D "Linux firmware validation framework"
->
-> +DESCRIPTION =3D "Cukinia is designed to help Linux-based embedded firmw=
-are \
->
-> +developers run simple system-level validation tests on their firmware."
->
-> +HOMEPAGE =3D "https://github.com/savoirfairelinux/cukinia"
->
-> +LICENSE =3D "GPLv3 & Apache-2.0"
->
-> +
->
-> +LIC_FILES_CHKSUM =3D
-> "file://LICENSE.GPLv3;md5=3Dd32239bcb673463ab874e80d47fae504 \
->
-> +                    file://LICENSE;md5=3De3fc50a88d0a364313df4b21ef20c2=
-9e"
->
-> +
->
-> +SRC_URI =3D "git://
-> github.com/savoirfairelinux/cukinia.git;protocol=3Dhttps;branch=3Dmaster=
-"
->
-> +
->
-> +PV =3D "0.5.1"
+Signed-off-by: Madhavan Krishnan <madhavan.krishnan@linaro.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-multimedia/libcamera/libcamera.bb         | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
+diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+index c66c93ec5a..5505626d3e 100644
+--- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
++++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+@@ -12,15 +12,20 @@ SRC_URI = " \
+         git://linuxtv.org/libcamera.git;protocol=git \
+ "
+ 
+-SRCREV = "5f2f9406cebc668f0d69007d1ea59ef3c56ef28c"
++SRCREV = "1e8c91b65695449c5246d17ba7dc439c8058b781"
+ 
+-PV = "202006+git${SRCPV}"
++PV = "202008+git${SRCPV}"
+ 
+ S = "${WORKDIR}/git"
+ 
+ DEPENDS = "python3-pyyaml-native udev gnutls boost chrpath-native"
+ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
+ 
++PACKAGES =+ "${PN}-gst"
++
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[gst] = "-Dgstreamer=enabled,-Dgstreamer=disabled,gstreamer1.0 gstreamer1.0-plugins-base"
++
+ RDEPENDS_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayland', '', d)}"
+ 
+ inherit meson pkgconfig python3native
+@@ -44,4 +49,4 @@ do_recalculate_ipa_signatures_package() {
+ 
+ FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig"
+ FILES_${PN} += " ${libdir}/libcamera.so"
+-
++FILES_${PN}-gst = "${libdir}/gstreamer-1.0/libgstlibcamera.so"
+-- 
+2.28.0
 
-Let=E2=80=99s call the recipe cukinia_0.5.1.bb and remove this
-
-
->
-> +SRCREV =3D "ea934c5393ad99c37bec3c621a364122720cce02"
->
-> +
->
-> +S =3D "${WORKDIR}/git"
->
-> +
->
-> +do_install () {
->
-> +    install -d ${D}${sbindir}
->
-> +    install -m 0744 ${S}/cukinia ${D}${sbindir}
-
-
-Why not 0755 perms here
-
->
->
-> +}
->
-> --
->
-> 2.17.1
->
->
->
->=20
->
->
-
---000000000000fd2c1a05aed18d7c
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Sun, Sep 6, 2020 at 11:38 PM leckijakub &lt;<a href=3D"=
-mailto:jakub.lecki@3mdeb.com">jakub.lecki@3mdeb.com</a>&gt; wrote:<br></div=
-><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
--left-width:1px;border-left-style:solid;padding-left:1ex;border-left-color:=
-rgb(204,204,204)">Signed-off-by: leckijakub &lt;<a href=3D"mailto:jakub.lec=
-ki@3mdeb.com" target=3D"_blank">jakub.lecki@3mdeb.com</a>&gt;<br><br>---<br=
-><br>=C2=A0meta-oe/recipes-test/cukinia/<a href=3D"http://cukinia_git.bb" r=
-el=3D"noreferrer" target=3D"_blank">cukinia_git.bb</a> | 20 +++++++++++++++=
-+++++<br><br>=C2=A01 file changed, 20 insertions(+)<br><br>=C2=A0create mod=
-e 100644 meta-oe/recipes-test/cukinia/<a href=3D"http://cukinia_git.bb" rel=
-=
-=3D"noreferrer" target=3D"_blank">cukinia_git.bb</a><br><br><br><br>diff -=
--git a/meta-oe/recipes-test/cukinia/<a href=3D"http://cukinia_git.bb" rel=
-=3D"noreferrer" target=3D"_blank">cukinia_git.bb</a> b/meta-oe/recipes-tes=
-t/cukinia/<a href=3D"http://cukinia_git.bb" rel=3D"noreferrer" target=3D"_b=
-lank">cukinia_git.bb</a><br><br>new file mode 100644<br><br>index 000000000=
-000..fc723671d5f7<br><br>--- /dev/null<br><br>+++ b/meta-oe/recipes-test/cu=
-kinia/<a href=3D"http://cukinia_git.bb" rel=3D"noreferrer" target=3D"_blank=
-">cukinia_git.bb</a><br><br>@@ -0,0 +1,20 @@<br><br>+SUMMARY =3D &quot;Linu=
-x firmware validation framework&quot; <br><br>+DESCRIPTION =3D &quot;Cukini=
-a is designed to help Linux-based embedded firmware \<br><br>+developers ru=
-n simple system-level validation tests on their firmware.&quot; <br><br>+HO=
-MEPAGE =3D &quot;<a href=3D"https://github.com/savoirfairelinux/cukinia" re=
-l=3D"noreferrer" target=3D"_blank">https://github.com/savoirfairelinux/cuki=
-nia</a>&quot;<br><br>+LICENSE =3D &quot;GPLv3 &amp; Apache-2.0&quot;<br><br=
->+<br><br>+LIC_FILES_CHKSUM =3D &quot;file://LICENSE.GPLv3;md5=3Dd32239bcb6=
-73463ab874e80d47fae504 \<br><br>+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 file://LICENSE;md5=3De3fc50a88d0a364313df4b21e=
-f20c29e&quot;<br><br>+<br><br>+SRC_URI =3D &quot;git://<a href=3D"http://gi=
-thub.com/savoirfairelinux/cukinia.git;protocol=3Dhttps;branch=3Dmaster" rel=
-=
-=3D"noreferrer" target=3D"_blank">github.com/savoirfairelinux/cukinia.git;=
-protocol=3Dhttps;branch=3Dmaster</a>&quot;<br><br>+<br><br>+PV =3D &quot;0.=
-5.1&quot;</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Let=E2=
-=80=99s call the recipe <a href=3D"http://cukinia_0.5.1.bb">cukinia_0.5.1.=
-bb</a> and remove this</div><div dir=3D"auto"><br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;b=
-order-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,204)"=
- dir=3D"auto"><br><br>+SRCREV =3D &quot;ea934c5393ad99c37bec3c621a364122720=
-cce02&quot;<br><br>+<br><br>+S =3D &quot;${WORKDIR}/git&quot;<br><br>+<br><=
-br>+do_install () {<br><br>+=C2=A0 =C2=A0 install -d ${D}${sbindir}<br><br>=
-+=C2=A0 =C2=A0 install -m 0744 ${S}/cukinia ${D}${sbindir}</blockquote><div=
- dir=3D"auto"><br></div><div dir=3D"auto">Why not 0755 perms here=C2=A0</di=
-v><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;borde=
-r-left-width:1px;border-left-style:solid;padding-left:1ex;border-left-color=
-:rgb(204,204,204)" dir=3D"auto"><br><br>+}<br><br>-- <br><br>2.17.1<br><br>=
-<br><br><br><br></blockquote></div></div>
-
---000000000000fd2c1a05aed18d7c--
