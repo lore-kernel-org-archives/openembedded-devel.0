@@ -1,201 +1,58 @@
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com [209.85.160.172])
- by mx.groups.io with SMTP id smtpd.web12.3756.1599503787063899412
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web10.15276.1599550900593857638
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Sep 2020 11:36:27 -0700
+ Tue, 08 Sep 2020 00:41:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gZ4ye/CD;
- spf=pass (domain: gmail.com, ip: 209.85.160.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f172.google.com with SMTP id k25so9360579qtu.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Sep 2020 11:36:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=bs6DtmarOAtT2ppwHCUBuedQ2mZtejoMmqCY10C9Keg=;
-        b=gZ4ye/CDgqhwJUz6G2SjWVpN2StJFnvWF2bOAutf8QTgwiSHz3SXyW1g1w45+I6QcT
-         usml5wQbzcuNdHeZUHL3jSBdQNZwDzsVI1mR9P3aTVR/JPJFCz4NCv7RcAJLR2hOLLmd
-         dPGSZIp2KTj3X9hq3f4PSLn+WCCB/lD77ycaS2qzAXgAQnVTZq+EN9MP6EvHWxP81PCi
-         7V6HPnD5F/rsrRQep9nxU+ZYsqy0qS30BgZzI67hoZSoF6XaBCcJd3ce08UKyNX8OiYw
-         C1JFx2EtNVRHuu9/oDgxMArWRE0klFN8+1JwcCJF5h6uHO2HCdLIEIARatTu6+oHqtOG
-         Xi9w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=bs6DtmarOAtT2ppwHCUBuedQ2mZtejoMmqCY10C9Keg=;
-        b=WhWw9DVwrH9D3wrq+yn6fzJFcr+NYtgn0Lhy7BSvqYwbtswm59dBWIoSAFsWXUoOUz
-         lgf2RX3ykFINH/9KnbJxC0ofxPA99CJJL0yYzmlxnQ1g5K5d9bRNz4/GVlgpcB9BV0Om
-         kpaWhUBjsdHyrIUm/6NGA6WDlPda767k10sqqbpLhig+K46p6ZgiePmK+3WBHvxmnoyS
-         1678MXDl9OHPByAqVybOBCPaKNK471pnPR+YQpo5wAZum2ZZaZPVdnEa3pFb8YjEAeJl
-         N/v6LDtNErOcVuAHJDlLUIF7z+x3KkYTBThZaFQGxi8ZCFiCVXE64ZZ5kCszsG/9zqf8
-         milA==
-X-Gm-Message-State: AOAM533mg6UsqAse0gTBqWvrKy0TKzt+6uto3uSV/GCdjmPwGprZP9Av
-	DB9OsV3GFW1qj4B+RRrHEPkiwWqJbiikJdb2CgE=
-X-Google-Smtp-Source: ABdhPJxZym0XRCTZFnIy7y2kaCr2n4qZkRwZI7tNswtr8HwuamG2mLi9G90gzHmyexTMBm2J5/6i0YDluFU6EZ62JRc=
-X-Received: by 2002:ac8:120a:: with SMTP id x10mr13123814qti.88.1599503786002;
- Mon, 07 Sep 2020 11:36:26 -0700 (PDT)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: mingli.yu@windriver.com)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 0887fZMV003643
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 8 Sep 2020 00:41:36 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
+ (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Tue, 8 Sep 2020
+ 00:41:23 -0700
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] opencv: improve reproducibility
+Date: Tue, 8 Sep 2020 00:41:23 -0700
+Message-ID: <20200908074123.51398-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <cover.1599501595.git.akuster808@gmail.com>
-In-Reply-To: <cover.1599501595.git.akuster808@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 7 Sep 2020 11:36:00 -0700
-Message-ID: <CAMKF1soArTcwa=ZC9rXu4=xTwe5R5B_Vio4sO9TLRvadBTmXSw@mail.gmail.com>
-Subject: Re: [oe] [dunfell 00/20] Merge request Sept 7
-To: akuster <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-On Mon, Sep 7, 2020 at 11:03 AM akuster <akuster808@gmail.com> wrote:
->
-> Please consider these changes for Dunfell.
->
-> The following changes since commit 654ad8bea49f142d20b2b96c0dd44810a6be2=
-33a:
->
->   jsoncpp: add PE do to revert to older PV (2020-07-18 07:24:39 -0700)
->
-> are available in the Git repository at:
->
->   git://git.openembedded.org/meta-openembedded dunfell-next
->   http://cgit.openembedded.org/meta-openembedded/log/?h=3Ddunfell-next
->
+From: Mingli Yu <mingli.yu@windriver.com>
 
-merged into dunfell. Thanks Armin
+Remove the build host info to improve reproducibility, otherwise there
+comes below detailed build host info when run below command on target.
+  # python3 /usr/share/opencv4/samples/python/opencv_version.py --build
+[snip]
+  Extra modules:
+    Location (extra):            /buildarea1/master-wr/build/User/customized_next/build/tmp/work/corei7-64-wrs-linux/opencv/4.3.0-r0/contrib/modules
+[snip]
 
-> Adrian Bunk (1):
->   gnome-settings-daemon: Remove duplicate outdated SRC_URI hashes
->
-> Alistair Francis (1):
->   python3-obd: Add missing setuptools RDEPENDS
->
-> Andreas M=C3=BCller (1):
->   exiv2: upgrade 0.27.1 -> 0.27.3
->
-> Armin Kuster (3):
->   vlc: fix loop initial declarations are only allowed in C99 mode
->   babl-native: fix build issue
->   gnome-settings-daemon: Backport 3.36 fix for building without wayland
->
-> Changqing Li (1):
->   radvd: add /etc/radvd.conf
->
-> Julius Hemanth Pitti (1):
->   netkit-telnetd: Fix buffer overflow in netoprintf
->
-> Kai Kang (2):
->   lvm2: remove service template from SYSTEMD_SERVICE
->   rdist: fix parallel build
->
-> Khem Raj (2):
->   samba: Fix conflicts with nss.h from glibc
->   flashrom: Fix build failure with glibc 2.32
->
-> Leon Anavi (1):
->   python3-pandas: Upgrade 1.0.3 -> 1.0.5
->
-> Martin Jansa (1):
->   lcov: fix lcov-native build
->
-> Mingli Yu (2):
->   freeradius: fix the existed certificate error
->   freeradius: fix the occasional verification failure
->
-> Ovidiu Panait (1):
->   net-snmp: Fix CVE-2020-15861 and CVE-2020-15862
->
-> Ryan Rowe (1):
->   python3-pint: add setuptools and packaging to RDEPENDS
->
-> Yi Zhao (1):
->   samba: upgrade 4.10.15 -> 4.10.17
->
-> Yue Tao (1):
->   lua: Security Advisory - lua - CVE-2020-15888
->
->  meta-gnome/recipes-gimp/babl/babl_0.1.74.bb   |   2 +
->  ...gins-wacom-Fix-build-without-WAYLAND.patch |  27 ++
->  .../gnome-settings-daemon_3.34.2.bb           |   5 +-
->  .../recipes-multimedia/vlc/vlc_3.0.9.2.bb     |   2 +-
->  ...file-fix-the-existed-certificate-err.patch |  55 +++
->  ...file-fix-the-occasional-verification.patch | 135 +++++++
->  .../freeradius/freeradius_3.0.20.bb           |   2 +
->  .../rdist-6.1.5-fix-parallel-build.patch      |  31 ++
->  .../recipes-connectivity/rdist/rdist_6.1.5.bb |   1 +
->  ....c-Avoid-nss-function-conflicts-with.patch |  96 +++++
->  .../0001-util-Simplify-input-validation.patch |  59 +++
->  ...n-FreeBSD-by-avoiding-NSS_BUFLEN_PAS.patch |  79 ++++
->  ...larger-buffer-if-getpwuid_r-returns-.patch |  50 +++
->  .../{samba_4.10.15.bb =3D> samba_4.10.17.bb}    |   8 +-
->  .../recipes-daemons/radvd/files/radvd.conf    |  18 +
->  .../recipes-daemons/radvd/radvd.inc           |   5 +-
->  ....c-Fix-buffer-overflow-in-netoprintf.patch |  56 +++
->  .../netkit-telnet/netkit-telnet_0.17.bb       |   1 +
->  .../net-snmp/CVE-2020-15861-0001.patch        | 164 ++++++++
->  .../net-snmp/CVE-2020-15861-0002.patch        |  44 +++
->  .../net-snmp/CVE-2020-15861-0003.patch        |  40 ++
->  .../net-snmp/CVE-2020-15861-0004.patch        |  33 ++
->  .../net-snmp/CVE-2020-15861-0005.patch        | 349 ++++++++++++++++++
->  .../net-snmp/net-snmp/CVE-2020-15862.patch    |  87 +++++
->  .../net-snmp/net-snmp_5.8.bb                  |   6 +
->  ...or-last-line-only-from-preprocessed-.patch |  57 +++
->  meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb  |   1 +
->  .../lua/lua/CVE-2020-15888.patch              |  45 +++
->  meta-oe/recipes-devtools/lua/lua_5.3.5.bb     |   1 +
->  ...-protection-only-if-compiler-arch-su.patch |  40 ++
->  .../{exiv2_0.27.1.bb =3D> exiv2_0.27.3.bb}      |   7 +-
->  meta-oe/recipes-support/lcov/lcov_1.14.bb     |   7 +-
->  meta-oe/recipes-support/lvm2/lvm2_2.03.06.bb  |   8 +-
->  .../recipes-devtools/python/python-pint.inc   |   5 +
->  .../python/python3-obd_0.7.1.bb               |   2 +-
->  ...andas_1.0.3.bb =3D> python3-pandas_1.0.5.bb} |   4 +-
->  36 files changed, 1516 insertions(+), 16 deletions(-)
->  create mode 100644 meta-gnome/recipes-gnome/gnome-settings-daemon/files=
-/0001-plugins-wacom-Fix-build-without-WAYLAND.patch
->  create mode 100644 meta-networking/recipes-connectivity/freeradius/file=
-s/0001-raddb-certs-Makefile-fix-the-existed-certificate-err.patch
->  create mode 100644 meta-networking/recipes-connectivity/freeradius/file=
-s/0001-raddb-certs-Makefile-fix-the-occasional-verification.patch
->  create mode 100644 meta-networking/recipes-connectivity/rdist/rdist-6.1=
-.5/rdist-6.1.5-fix-parallel-build.patch
->  create mode 100644 meta-networking/recipes-connectivity/samba/samba/000=
-1-nsswitch-nsstest.c-Avoid-nss-function-conflicts-with.patch
->  create mode 100644 meta-networking/recipes-connectivity/samba/samba/000=
-1-util-Simplify-input-validation.patch
->  create mode 100644 meta-networking/recipes-connectivity/samba/samba/000=
-2-util-Fix-build-on-FreeBSD-by-avoiding-NSS_BUFLEN_PAS.patch
->  create mode 100644 meta-networking/recipes-connectivity/samba/samba/000=
-3-util-Reallocate-larger-buffer-if-getpwuid_r-returns-.patch
->  rename meta-networking/recipes-connectivity/samba/{samba_4.10.15.bb =3D=
-> samba_4.10.17.bb} (96%)
->  create mode 100644 meta-networking/recipes-daemons/radvd/files/radvd.co=
-nf
->  create mode 100644 meta-networking/recipes-netkit/netkit-telnet/files/0=
-001-telnetd-utility.c-Fix-buffer-overflow-in-netoprintf.patch
->  create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/=
-CVE-2020-15861-0001.patch
->  create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/=
-CVE-2020-15861-0002.patch
->  create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/=
-CVE-2020-15861-0003.patch
->  create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/=
-CVE-2020-15861-0004.patch
->  create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/=
-CVE-2020-15861-0005.patch
->  create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/=
-CVE-2020-15862.patch
->  create mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/0001-Makefile-=
-Check-for-last-line-only-from-preprocessed-.patch
->  create mode 100644 meta-oe/recipes-devtools/lua/lua/CVE-2020-15888.patc=
-h
->  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0001-Use-compile=
-r-fcf-protection-only-if-compiler-arch-su.patch
->  rename meta-oe/recipes-support/exiv2/{exiv2_0.27.1.bb =3D> exiv2_0.27.3=
-.bb} (52%)
->  rename meta-python/recipes-devtools/python/{python3-pandas_1.0.3.bb =3D=
-> python3-pandas_1.0.5.bb} (81%)
->
-> --
-> 2.17.1
->
->=20
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ meta-oe/recipes-support/opencv/opencv_4.4.0.bb | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.4.0.bb b/meta-oe/recipes-support/opencv/opencv_4.4.0.bb
+index 372e15cd0..c83186de0 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.4.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.4.0.bb
+@@ -199,6 +199,13 @@ RDEPENDS_python3-opencv = "python3-core python3-numpy"
+ 
+ RDEPENDS_${PN}-apps  = "bash"
+ 
++do_compile_prepend() {
++    # remove the build host info to improve reproducibility
++    if [ -f ${WORKDIR}/build/modules/core/version_string.inc ]; then
++        sed -i "s#${WORKDIR}#/workdir#g" ${WORKDIR}/build/modules/core/version_string.inc
++    fi
++}
++
+ do_install_append() {
+     # Move Python files into correct library folder (for multilib build)
+     if [ "$libdir" != "/usr/lib" -a -d ${D}/usr/lib ]; then
+-- 
+2.17.1
+
