@@ -1,81 +1,108 @@
-Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com [209.85.222.169])
- by mx.groups.io with SMTP id smtpd.web12.14287.1599660098739643026
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com [209.85.160.181])
+ by mx.groups.io with SMTP id smtpd.web11.1623.1599671567826229761
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Sep 2020 07:01:39 -0700
+ Wed, 09 Sep 2020 10:12:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=v8Dp1lJb;
- spf=pass (domain: ossystems.com.br, ip: 209.85.222.169, mailfrom: otavio.salvador@ossystems.com.br)
-Received: by mail-qk1-f169.google.com with SMTP id o16so2459572qkj.10
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2020 07:01:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=BLIG6CnD;
+ spf=pass (domain: gmail.com, ip: 209.85.160.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f181.google.com with SMTP id p65so2558069qtd.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2020 10:12:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-        h=from:mime-version:references:in-reply-to:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=AAC540baHIduTSrDJpQ3EfljhKXW/nEifMS3akawQBs=;
-        b=v8Dp1lJbhr8rgpV0y1+DZIk97VaA0ZyO3/Q1/YoVqHPdMscgHB+eMiNZTahmGWbJLb
-         JzGD+SHEodJ675q/jeTk808TwzeKVyKR/Zq7el9enUUvl8BShb5a3torANs2I6BzY17q
-         aOS9KIYqTJ5e9yQvTjTjV2XXJtNeQVGFqUj2Huf/JpPn/pIEKPXqH+G3zefOQoarX4pk
-         68RuzQhJ2vuBZcYeG4j3w2GsemSlKxX3HVfFRjWQoXU7rm744wUyam8MMR3FEBW4oZoh
-         G/qFD/DE2GP2sqyTg2GkQD3PXwpJRvXVCTetL+bL2eWM1igjB0a1vKq5gnzGW4EdeD4D
-         0BkA==
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=acIYthd4xKG7P5DXobkwbeu95Zv94S53kmONNNY6JRk=;
+        b=BLIG6CnDgF6Z+kEbjY/UVdewbixfkx/QBgW7wc57IUMq5YVgL3DnpUC6fgpzYpZkvX
+         TY3lj4VTZ0FwdBzMGIlfdyKt4OOznNqPArAV76gaZnQxEqlcry2g1c8LlkM07P15jyGT
+         cwK+gR8Wa6FaI7GuR5sZWHX0NMOtEDEBlndvZkAC2EGoUbig+CXehCKIf7UdgFKvDnaR
+         dV11xuRFbwZTTDANNM0Btn8FDcD86aDsza1a1unxuDHH9FS8NDbcSOue2zwuMgSN/G3A
+         LX0MTPJR43LBULHNcc6QWbJy6PpQCnuNNhNdpQxbPICufIrHPj+hAImfhSd5uDUa/QSb
+         zZoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:mime-version:references:in-reply-to:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=AAC540baHIduTSrDJpQ3EfljhKXW/nEifMS3akawQBs=;
-        b=T6RnwRYuqgxy4qOo1+6UExpbWEGCN+HSfhQOoyBehzw00WaVNTB0OkWD3eT4IpK+4K
-         MUoOptXnJC1A/33KPevq/NiFJvvvXJrbY3Dc038EqRzFyWtBA1OH4kXnr+y0nKdUOlCv
-         qkXgy5Mabw5ZLfEXGFn5KCGT8bFzqpiSlHNg26TyGvhjmPysZYkGrI/o+0/61axW4GhK
-         K0FdycImqJoKAxbc4C2kVx+rWdgYxMysY2pL4bg6GununCsT0OTOhcWG/p1xl+xyHRF7
-         H5WsZDpaJgfbBMF/hD9k698devpvjhng0uPM9HXYvOoNuOwfZmE5fO8DvTmxmYXoEmqu
-         Q/cQ==
-X-Gm-Message-State: AOAM530PFKWtTbPcGGCivWa+Ifo3LDWJ0Pe6dghPPPk+TkUD5BPpaAUv
-	jAAmvzwt04XB77e1y7aJLVr4Ksiq353dPw5r
-X-Google-Smtp-Source: ABdhPJyqM1M2dyNgjop5Fst511urKz2b2SQ8mY7Yws2pMl2yVNKZzpnugFD4QtfQMKiIDgY/cCMXZQ==
-X-Received: by 2002:a37:b8c2:: with SMTP id i185mr3281535qkf.87.1599660096005;
-        Wed, 09 Sep 2020 07:01:36 -0700 (PDT)
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com. [209.85.222.175])
-        by smtp.gmail.com with ESMTPSA id x59sm3081649qte.14.2020.09.09.07.01.35
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Sep 2020 07:01:35 -0700 (PDT)
-From: "Otavio Salvador" <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-qk1-f175.google.com with SMTP id v123so2462202qkd.9
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2020 07:01:35 -0700 (PDT)
-X-Received: by 2002:a37:27d7:: with SMTP id n206mr3336997qkn.197.1599660094637;
- Wed, 09 Sep 2020 07:01:34 -0700 (PDT)
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=acIYthd4xKG7P5DXobkwbeu95Zv94S53kmONNNY6JRk=;
+        b=R9SeDi/053AIEX8xaCdHBZkrWcpal1SaQtlIcydQXnRsd8ve+mVdHlPgOx8UoduVRx
+         UuBLIlygijPk2KqMOo4o3llfSH11GY2Ji67RY8ZfyLqvtVxYiwPdfjGR9bEpI5qE6vCx
+         316PTrA3dS7HPDGkWs29/Xz2BoxDjcNFkHT/vCMNQc2Sxk8wGpZgMrgkGFKKoksGU6eF
+         x5mnCzD2Z8g2bJ9fnAx9myFBRZ6FtHmkDlFncDUv0aJaatAwOowrZV6JzZniQltwZmBo
+         /OTKWX4mstFFw2gzRFvbBSpznr5Vj3ex0SSwl8RYC5lw+OGJpwyZ+NtZD0MFbwCZfYFl
+         AM3g==
+X-Gm-Message-State: AOAM5303HvmQw2vMEtigJs50dve7a4/l1WeGB03NZaTrDNnO8Xxm18rY
+	AvCtC4bs6BxMUONkRfaO7TBYxak3mF+YkGBkK2suL849YvficQ==
+X-Google-Smtp-Source: ABdhPJzowzSo6A5Dp3ccpw/6tjM3ydDWJf2sBJ+WZcxwgJRrliaIxqsy8ozdsJksAwpHcwd8tbnrj6ZMtCK6QyKvwjs=
+X-Received: by 2002:ac8:3fcb:: with SMTP id v11mr4174781qtk.80.1599671566654;
+ Wed, 09 Sep 2020 10:12:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200909122322.12899-1-fabio.berton@ossystems.com.br> <20200909122322.12899-2-fabio.berton@ossystems.com.br>
-In-Reply-To: <20200909122322.12899-2-fabio.berton@ossystems.com.br>
-Date: Wed, 9 Sep 2020 11:01:22 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKpns0XsQv=Y7M=7kiMDUzkh-ybBbhy4JU1-4M482Jsk4A@mail.gmail.com>
-Message-ID: <CAP9ODKpns0XsQv=Y7M=7kiMDUzkh-ybBbhy4JU1-4M482Jsk4A@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 2/2] libqmi: Update 1.26.0 -> 1.26.4
-To: Fabio Berton <fabio.berton@ossystems.com.br>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+References: <20200909084218.802654-1-m.tretter@pengutronix.de>
+In-Reply-To: <20200909084218.802654-1-m.tretter@pengutronix.de>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Wed, 9 Sep 2020 10:12:20 -0700
+Message-ID: <CAMKF1so-Zfiv+vbFf1J1-bSkBMSTN4gx548YJ5=cUK42YS--cg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] apitrace: add new recipe
+To: Michael Tretter <m.tretter@pengutronix.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Hello Fabio,
-
-Em qua., 9 de set. de 2020 =C3=A0s 09:23, Fabio Berton
-<fabio.berton@ossystems.com.br> escreveu:
+On Wed, Sep 9, 2020 at 2:54 AM Michael Tretter <m.tretter@pengutronix.de> wrote:
 >
-> Switch to autotools-brokensep to use the same directory for build and sou=
-rce avoiding error:
+> apitrace consists of a set of tools to:
 >
->   configure: error: source directory already configured; run "make distcl=
-ean" there first
+>  - trace OpenGL, OpenGL ES, Direct3D, and DirectDraw APIs calls to a file;
 >
-> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+>  - replay OpenGL and OpenGL ES calls from a file;
+>
+>  - inspect OpenGL state at any call while retracing;
+>
+>  - visualize and edit trace files.
+>
 
-The brokensep change can be undone as the 1.26.4 tarball has fixed the
-issue I reported. So the distroclean likely is not needed anymore as
-well.
+Thanks for contributing new recipe, they also need to go into
+appropriate packagegroup in packagegroup-meta-oe.bb
+so it can be built in testing images.
 
---=20
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
+> Signed-off-by: Michael Tretter <m.tretter@pengutronix.de>
+> ---
+>  .../recipes-devtools/apitrace/apitrace_9.0.bb | 28 +++++++++++++++++++
+>  1 file changed, 28 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
+>
+> diff --git a/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb b/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
+> new file mode 100644
+> index 000000000000..6e61683cde92
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
+> @@ -0,0 +1,28 @@
+> +SUMMARY = "Tools for tracing OpenGL, Direct3D, and other graphics APIs"
+> +HOMEPAGE = "http://apitrace.github.io/"
+> +SECTION = "console/tools"
+> +LICENSE = "MIT & BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=aeb969185a143c3c25130bc2c3ef9a50 \
+> +                    file://thirdparty/snappy/COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
+> +
+> +SRCREV = "cae55f54c53449fd07f8a917dcd0874db2c15032"
+> +SRC_URI = "git://github.com/${BPN}/${BPN}.git"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +DEPENDS += "zlib libpng python3-native"
+> +
+> +inherit cmake
+> +
+> +EXTRA_OECMAKE += "\
+> +    -DENABLE_GUI=OFF \
+> +    -DENABLE_X11=OFF \
+> +    -DENABLE_STATIC_LIBGCC=OFF \
+> +    -DENABLE_STATIC_LIBSTDCXX=OFF \
+> +    -DPython3_ROOT_DIR=/usr/bin/python3-native \
+> +"
+> +
+> +# Use the bundled snappy library
+> +EXTRA_OECMAKE += "\
+> +    -DENABLE_STATIC_SNAPPY=ON \
+> +"
+> --
+> 2.20.1
+>
+> 
