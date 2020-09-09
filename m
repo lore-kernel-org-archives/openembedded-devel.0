@@ -1,51 +1,51 @@
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.web10.9261.1599640972962908102
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com [209.85.221.65])
+ by mx.groups.io with SMTP id smtpd.web10.9262.1599640973961688556
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Sep 2020 01:42:53 -0700
+ Wed, 09 Sep 2020 01:42:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="unable to parse pub key" header.i=@blade-group.com header.s=google header.b=OlsBdujI;
- spf=pass (domain: blade-group.com, ip: 209.85.221.52, mailfrom: yann.dirson@blade-group.com)
-Received: by mail-wr1-f52.google.com with SMTP id m6so2027631wrn.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2020 01:42:52 -0700 (PDT)
+ dkim=fail reason="unable to parse pub key" header.i=@blade-group.com header.s=google header.b=K01CG8/X;
+ spf=pass (domain: blade-group.com, ip: 209.85.221.65, mailfrom: yann.dirson@blade-group.com)
+Received: by mail-wr1-f65.google.com with SMTP id s12so1971483wrw.11
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2020 01:42:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=blade-group.com; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=m2D6l806AUZjeE3Mq/Hm6ey3MfjEs76xn7jjpJdCE0Q=;
-        b=OlsBdujIfxJ48688/ECLvE8X+ndVbZM2BmYgHprbCxPQW8SiGN4q4LdZUFOJM634C6
-         G48VIMbTCeZzfnUoMp2ahgIdIWhbs5xz82EMVs1vHjUhdVg0F6vsmQZZYdOtsf3ekAYT
-         5LlTWwMtu7U+MJdD5crraLBARUtG5Eax7jS1uKlH/0Vf/lde4eF+bOnYuGlGl4ECoxLx
-         jSSSB3cZmf5PZBYZO7ESzQKX9abLwMRhCFM8z3PXIalBwgGOGLL/payhIvZdQNzR1icb
-         RNYqtpQSPLUzjQFJDZc+9iWBQUp9MXgVhe7Jc0JjGlJQDwejSJMRaCBGYBDoVJBw38AD
-         lJ4w==
+        bh=ONU4gmLB8SWDx3MAOF2kaLSghK96ewLBq2/7tBrJWrg=;
+        b=K01CG8/XrSkrWsIcv6t1ERc0aAwH7LPcTvU6SE1YCC221Al1VoQwunL0bvieQfqshp
+         Scn2vnehiG1kO/vQ8AJd9KlymUrDOVyjjPFqMSvDnsAvRhCyOeWxGb1LWTIj6WzJqUY3
+         Udq0kZhkq8dFDw11RN+/BUvY5o8UzRnwEJN6K+gCj4WJHqL7Kap5XFo1UDelJC6epqYr
+         C3EiQVzpmsZqsjkfJM9ImUhIkGqCw2Oz2SuewXZjyCklPe/EOZopKQkciWBcxuLsGCpk
+         5viP+Y3c+IIXtd+e0euKPiuNCY8IWa9q+/HKKRmtxBPVNiZ2VCRRx4FVT501ZO/uY928
+         Ak4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=m2D6l806AUZjeE3Mq/Hm6ey3MfjEs76xn7jjpJdCE0Q=;
-        b=amSMbe/1qORF89MDAbln4MDEtW6GxNeXDMI6eI/mTsvWNVJqv2T5dLq1atZ1CXcKmM
-         WBj1bymovOdx4rj4ht7PWdyeLRgEL1idk4Tnj2ikDGsYQN1y5PkvbjDni/h62fObfXPc
-         Of/CzxXowPgc4TWZGNK7h0a0KnlaDGd+W1Aydw9Xkd3GydBw3sqb7yt/+VWO1EHVLfFS
-         Sf60wKyN7cJ6sR+amg3SdbESr9pTe0GWnHAgY1I7AySPqRwHiqz1uut6ISe9Ax90pD8V
-         4osPNmfeLVsD/uCtxNWxO1uEBGLRoM3tHPLNY6mrLr6PjHIkmfHrqdY08WJFOIp6XpqQ
-         lvTA==
-X-Gm-Message-State: AOAM533n7xUYDKZ9pfQo0wvLQCC/dFy/fxcz3y0H55c7ion0g5aGoqNS
-	8apSmML24HOMrzpdvwNDZqm0v1kYdDht2Pgn
-X-Google-Smtp-Source: ABdhPJyOILDjoKTCaQfeAqW/i+kG5LpjY0j0NgV1MtIAbGqv4lw8VHtNILPcxpf/RKi83DNL+OOUZA==
-X-Received: by 2002:adf:f890:: with SMTP id u16mr2583125wrp.183.1599640971096;
-        Wed, 09 Sep 2020 01:42:51 -0700 (PDT)
+        bh=ONU4gmLB8SWDx3MAOF2kaLSghK96ewLBq2/7tBrJWrg=;
+        b=lArbPKzaMQYP+SrIOpZjDbT+zWhDfATxVThwrWAw6uKkCe2c7VHbbTTqfbWx2ppyKM
+         7dM6P8/cm8wZCWK5Ibc1oLXT/4YrW4UP+Ix4d+0QNgGTpCZhKnOIbmdSIYhfT/FEy4Xn
+         EsqhZ9XCB9eUS20rAiymvRyc9FJ2TzppUcBH81TEoMoS2hubaeuxIgjBPpwJuWu6/UIy
+         CtKhttV9dppMZM5XDF3cZkvyr6C40TTwKYKHlRwv8nq/MoZd9+VKJ8ZhNfYafMgngl1P
+         3VYNgPZTp2LBpEpW0WIIVUjvn1iITFJFGVpSZrC9VoPgAeUwhlofXgLXcHnN1SRtC7Bq
+         AfaA==
+X-Gm-Message-State: AOAM533xHcWDjtMRPWxhDl01gDgqJxRdkG3gzwn/gc4YwTy0S7HmMcNP
+	8bBKF570TaCGu9zthz3Nh7MVT2H9bOGqQVTm
+X-Google-Smtp-Source: ABdhPJwbRk+tkF25ph+ka/yWPvC8HLmMe1MLSJmAihx7a/g5wUUaB2AhQz5Sy6IcM6A4uysDvqI5Rw==
+X-Received: by 2002:adf:cf0b:: with SMTP id o11mr2717573wrj.94.1599640972044;
+        Wed, 09 Sep 2020 01:42:52 -0700 (PDT)
 Return-Path: <yann.dirson@blade-group.com>
 Received: from blanquette.lan ([88.120.44.86])
-        by smtp.gmail.com with ESMTPSA id o4sm3027825wrv.86.2020.09.09.01.42.50
+        by smtp.gmail.com with ESMTPSA id o4sm3027825wrv.86.2020.09.09.01.42.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Sep 2020 01:42:50 -0700 (PDT)
+        Wed, 09 Sep 2020 01:42:51 -0700 (PDT)
 From: "Yann Dirson" <yann.dirson@blade-group.com>
 X-Google-Original-From: yann@blade-group.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Yann Dirson <yann@blade-group.com>
-Subject: [meta-oe][patch] New terminal emulator: st 0.8.4
-Date: Wed,  9 Sep 2020 10:41:51 +0200
-Message-Id: <20200909084154.178795-2-yann@blade-group.com>
+Subject: [meta-oe][patch 2/4] libcec: build with Linux CEC API
+Date: Wed,  9 Sep 2020 10:41:52 +0200
+Message-Id: <20200909084154.178795-3-yann@blade-group.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200909084154.178795-1-yann@blade-group.com>
 References: <20200909084154.178795-1-yann@blade-group.com>
@@ -54,49 +54,30 @@ Content-Transfer-Encoding: 8bit
 
 From: Yann Dirson <yann@blade-group.com>
 
-Can be used as a replacement for matchbox-terminal, with much less
-dependencies (does not need gtk and vte), and supports "-e" flag.
+The Linux CEC API is available in linux-kernel-headers 4.10 and newer,
+and supported since libcec 5.0.0, though they still default to the
+legacy Raspberry Pi API.
 
 Signed-off-by: Yann Dirson <yann@blade-group.com>
 ---
- meta-oe/recipes-graphics/suckless/st_0.8.4.bb | 28 +++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/suckless/st_0.8.4.bb
+ meta-oe/recipes-extended/libcec/libcec_6.0.2.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/suckless/st_0.8.4.bb b/meta-oe/recipes-graphics/suckless/st_0.8.4.bb
-new file mode 100644
-index 000000000..7d7c20e46
---- /dev/null
-+++ b/meta-oe/recipes-graphics/suckless/st_0.8.4.bb
-@@ -0,0 +1,28 @@
-+SECTION = "shadow"
-+LICENSE = "MIT-X"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=04c3ca13a702147c62db90f556c5b3ca"
-+SRC_URI = " \
-+ http://dl.suckless.org/${BPN}/${BPN}-${PV}.tar.gz \
-+"
+diff --git a/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb b/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb
+index c4aeb8c55..94d967f4c 100644
+--- a/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb
++++ b/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb
+@@ -20,6 +20,10 @@ S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
++# default config is for RaspberryPi API, use the Linux 4.10+ API by default
++PLATFORM_CMAKE_FLAGS ?= "-DHAVE_LINUX_API=1 -DHAVE_RPI_API=0"
++EXTRA_OECMAKE += "${PLATFORM_CMAKE_FLAGS}"
 +
-+inherit pkgconfig
-+
-+SRC_URI[sha256sum] = "d42d3ceceb4d6a65e32e90a5336e3d446db612c3fbd9ebc1780bc6c9a03346a6"
-+
-+DEPENDS += "libx11 libxft fontconfig"
-+
-+RDEPENDS_${PN} += "libx11-locale"
-+
-+do_compile() {
-+    make INCS='-I. `pkg-config --cflags x11 fontconfig xft`' LIBS='-lm -lutil `pkg-config --libs x11 fontconfig xft`'
-+}
-+
-+# don't use "make install" which builds terminfo, already in
-+# ncurses-terminfo (and requires ncurses-native for "tic")
-+
-+do_install() {
-+    mkdir -p ${D}${bindir}
-+    install -m755 ${B}/st ${D}${bindir}/
-+}
-+
-+RRECOMMENDS_${PN} += "ncurses-terminfo"
+ # Put client tools into a separate package
+ PACKAGE_BEFORE_PN += "${PN}-tools"
+ FILES_${PN}-tools = "${bindir}"
 -- 
 2.28.0
 
