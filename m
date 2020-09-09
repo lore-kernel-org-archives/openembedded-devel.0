@@ -1,89 +1,81 @@
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com [209.85.222.193])
- by mx.groups.io with SMTP id smtpd.web12.12376.1599654210551227064
+Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com [209.85.222.169])
+ by mx.groups.io with SMTP id smtpd.web12.14287.1599660098739643026
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Sep 2020 05:23:30 -0700
+ Wed, 09 Sep 2020 07:01:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=oAsjDJ9D;
- spf=pass (domain: ossystems.com.br, ip: 209.85.222.193, mailfrom: fabio.berton@ossystems.com.br)
-Received: by mail-qk1-f193.google.com with SMTP id p4so2193977qkf.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2020 05:23:30 -0700 (PDT)
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=v8Dp1lJb;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.222.169, mailfrom: otavio.salvador@ossystems.com.br)
+Received: by mail-qk1-f169.google.com with SMTP id o16so2459572qkj.10
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2020 07:01:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :organization:content-transfer-encoding;
-        bh=evVaCx/RtggdmE/XXH/za4ucU2ihJxZY766GhhThzx8=;
-        b=oAsjDJ9D4dJABVM9NLG3LoZ088kFSzbpckt74bYprOBmzJOJfhJKIihDS05lreHkI1
-         BopBcOShV8dVrByVVjBd+oeH8VzQNsfI/0SecoDENFG/6IQqt7Lv5aMelz2qXTzRFoPb
-         c9nuVjRm0y9RqOk1pD/aUGFwNQHg/NC75/wyYi27QviT/8EbQHDDDyShI5qREmDLfZdi
-         XdDL87aZpLLuqkG8oa1gEsv1fzCP8MnKl/9BNcLUFAb6fEGVwNFgzz7Muf0w4/gMo2DJ
-         OHy2p8DKdsWtISBsP73vtBZR7ywJl45T5l8h2QAnPG+dk+rH6MYb1w8AA5fYSTuRWC19
-         0Qvw==
+        h=from:mime-version:references:in-reply-to:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=AAC540baHIduTSrDJpQ3EfljhKXW/nEifMS3akawQBs=;
+        b=v8Dp1lJbhr8rgpV0y1+DZIk97VaA0ZyO3/Q1/YoVqHPdMscgHB+eMiNZTahmGWbJLb
+         JzGD+SHEodJ675q/jeTk808TwzeKVyKR/Zq7el9enUUvl8BShb5a3torANs2I6BzY17q
+         aOS9KIYqTJ5e9yQvTjTjV2XXJtNeQVGFqUj2Huf/JpPn/pIEKPXqH+G3zefOQoarX4pk
+         68RuzQhJ2vuBZcYeG4j3w2GsemSlKxX3HVfFRjWQoXU7rm744wUyam8MMR3FEBW4oZoh
+         G/qFD/DE2GP2sqyTg2GkQD3PXwpJRvXVCTetL+bL2eWM1igjB0a1vKq5gnzGW4EdeD4D
+         0BkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:organization:content-transfer-encoding;
-        bh=evVaCx/RtggdmE/XXH/za4ucU2ihJxZY766GhhThzx8=;
-        b=A41XKucnii7gLw77dMmhXk/tzt6+5gh0amB2j+E4EdTbsu84w5btc9aWhX6l5OE9ad
-         NmTliOElFZP/XzY1Y6UOw2HmgVJt9SLGHRobYkLeXRIELmtM9M6TISyKeDD5FFn6bZCd
-         06EfmXh3CGEbn0iVpXB0dDW1yRHtuRC1NqNWbaufdfczJowCCuc0rg4LWUGxM+JlDgzj
-         JKapZNbHhxheKIOTAHlOnMb/ai/PsYUYRQ0NPLvIhG7ETJohFDAuyGbn0CRO8Uehw8rV
-         QmUTUMXcpybtp9OQyB0QgeSfwp6WM8G6OpamBEhH8JlOwkpGbkWUiZFK48SfjQ/AZQOU
-         kayw==
-X-Gm-Message-State: AOAM5337+YUy/Iy/QiPEIoHU9XRrW8d1ZIF0o8Af7R7iITbPjNh2ZAOr
-	9Ul8cwoVEb2JnB3gTFSvK6elWJf9pcWEm2Se
-X-Google-Smtp-Source: ABdhPJzeDPWrpdobN1WJhAljr9GgHxXzg4tuUbOiw6q+qZ6Q+gVFL6z/+8JWouU/sjrvc4uJaPrrhA==
-X-Received: by 2002:a37:6109:: with SMTP id v9mr2911445qkb.418.1599654209212;
-        Wed, 09 Sep 2020 05:23:29 -0700 (PDT)
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from centrium.lab.ossystems ([181.220.78.182])
-        by smtp.gmail.com with ESMTPSA id z74sm2455222qkb.11.2020.09.09.05.23.27
+        h=x-gm-message-state:from:mime-version:references:in-reply-to:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=AAC540baHIduTSrDJpQ3EfljhKXW/nEifMS3akawQBs=;
+        b=T6RnwRYuqgxy4qOo1+6UExpbWEGCN+HSfhQOoyBehzw00WaVNTB0OkWD3eT4IpK+4K
+         MUoOptXnJC1A/33KPevq/NiFJvvvXJrbY3Dc038EqRzFyWtBA1OH4kXnr+y0nKdUOlCv
+         qkXgy5Mabw5ZLfEXGFn5KCGT8bFzqpiSlHNg26TyGvhjmPysZYkGrI/o+0/61axW4GhK
+         K0FdycImqJoKAxbc4C2kVx+rWdgYxMysY2pL4bg6GununCsT0OTOhcWG/p1xl+xyHRF7
+         H5WsZDpaJgfbBMF/hD9k698devpvjhng0uPM9HXYvOoNuOwfZmE5fO8DvTmxmYXoEmqu
+         Q/cQ==
+X-Gm-Message-State: AOAM530PFKWtTbPcGGCivWa+Ifo3LDWJ0Pe6dghPPPk+TkUD5BPpaAUv
+	jAAmvzwt04XB77e1y7aJLVr4Ksiq353dPw5r
+X-Google-Smtp-Source: ABdhPJyqM1M2dyNgjop5Fst511urKz2b2SQ8mY7Yws2pMl2yVNKZzpnugFD4QtfQMKiIDgY/cCMXZQ==
+X-Received: by 2002:a37:b8c2:: with SMTP id i185mr3281535qkf.87.1599660096005;
+        Wed, 09 Sep 2020 07:01:36 -0700 (PDT)
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com. [209.85.222.175])
+        by smtp.gmail.com with ESMTPSA id x59sm3081649qte.14.2020.09.09.07.01.35
         for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Sep 2020 05:23:28 -0700 (PDT)
-From: "Fabio Berton" <fabio.berton@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] libqmi: Update 1.26.0 -> 1.26.4
-Date: Wed,  9 Sep 2020 09:23:22 -0300
-Message-Id: <20200909122322.12899-2-fabio.berton@ossystems.com.br>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20200909122322.12899-1-fabio.berton@ossystems.com.br>
-References: <20200909122322.12899-1-fabio.berton@ossystems.com.br>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 09 Sep 2020 07:01:35 -0700 (PDT)
+From: "Otavio Salvador" <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-qk1-f175.google.com with SMTP id v123so2462202qkd.9
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2020 07:01:35 -0700 (PDT)
+X-Received: by 2002:a37:27d7:: with SMTP id n206mr3336997qkn.197.1599660094637;
+ Wed, 09 Sep 2020 07:01:34 -0700 (PDT)
 MIME-Version: 1.0
-Organization: O.S. Systems Software LTDA.
-Content-Transfer-Encoding: 8bit
+References: <20200909122322.12899-1-fabio.berton@ossystems.com.br> <20200909122322.12899-2-fabio.berton@ossystems.com.br>
+In-Reply-To: <20200909122322.12899-2-fabio.berton@ossystems.com.br>
+Date: Wed, 9 Sep 2020 11:01:22 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKpns0XsQv=Y7M=7kiMDUzkh-ybBbhy4JU1-4M482Jsk4A@mail.gmail.com>
+Message-ID: <CAP9ODKpns0XsQv=Y7M=7kiMDUzkh-ybBbhy4JU1-4M482Jsk4A@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 2/2] libqmi: Update 1.26.0 -> 1.26.4
+To: Fabio Berton <fabio.berton@ossystems.com.br>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Switch to autotools-brokensep to use the same directory for build and source avoiding error:
+Hello Fabio,
 
-  configure: error: source directory already configured; run "make distclean" there first
+Em qua., 9 de set. de 2020 =C3=A0s 09:23, Fabio Berton
+<fabio.berton@ossystems.com.br> escreveu:
+>
+> Switch to autotools-brokensep to use the same directory for build and sou=
+rce avoiding error:
+>
+>   configure: error: source directory already configured; run "make distcl=
+ean" there first
+>
+> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 
-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
----
- .../libqmi/{libqmi_1.26.0.bb => libqmi_1.26.4.bb}            | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.26.0.bb => libqmi_1.26.4.bb} (78%)
+The brokensep change can be undone as the 1.26.4 tarball has fixed the
+issue I reported. So the distroclean likely is not needed anymore as
+well.
 
-diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.26.0.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.26.4.bb
-similarity index 78%
-rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.26.0.bb
-rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.26.4.bb
-index 3a1b70b80..2d1a4c47e 100644
---- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.26.0.bb
-+++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.26.4.bb
-@@ -10,12 +10,11 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS = "glib-2.0 glib-2.0-native"
- 
--inherit autotools pkgconfig bash-completion gobject-introspection
-+inherit autotools-brokensep pkgconfig bash-completion gobject-introspection
- 
- SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
- 
--SRC_URI[md5sum] = "8da95a97e893311878f8ce12dcf8fad0"
--SRC_URI[sha256sum] = "7f0429e0ae58792e21512d09ca2412537840ea42696762795af1284a65fd6e40"
-+SRC_URI[sha256sum] = "c0adcb84ba452e3e13edeb3f94f7b003ea927b354bc187629e05efb333ce270b"
- 
- PACKAGECONFIG ??= "udev mbim"
- PACKAGECONFIG[udev] = ",--without-udev,libgudev"
--- 
-2.27.0
-
+--=20
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
