@@ -1,108 +1,78 @@
-Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com [209.85.160.181])
- by mx.groups.io with SMTP id smtpd.web11.1623.1599671567826229761
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com [209.85.160.179])
+ by mx.groups.io with SMTP id smtpd.web12.1779.1599671984592066398
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Sep 2020 10:12:48 -0700
+ Wed, 09 Sep 2020 10:19:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=BLIG6CnD;
- spf=pass (domain: gmail.com, ip: 209.85.160.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f181.google.com with SMTP id p65so2558069qtd.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2020 10:12:47 -0700 (PDT)
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=FpRXlHqu;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.160.179, mailfrom: fabio.berton@ossystems.com.br)
+Received: by mail-qt1-f179.google.com with SMTP id y11so2539211qtn.9
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2020 10:19:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=acIYthd4xKG7P5DXobkwbeu95Zv94S53kmONNNY6JRk=;
-        b=BLIG6CnDgF6Z+kEbjY/UVdewbixfkx/QBgW7wc57IUMq5YVgL3DnpUC6fgpzYpZkvX
-         TY3lj4VTZ0FwdBzMGIlfdyKt4OOznNqPArAV76gaZnQxEqlcry2g1c8LlkM07P15jyGT
-         cwK+gR8Wa6FaI7GuR5sZWHX0NMOtEDEBlndvZkAC2EGoUbig+CXehCKIf7UdgFKvDnaR
-         dV11xuRFbwZTTDANNM0Btn8FDcD86aDsza1a1unxuDHH9FS8NDbcSOue2zwuMgSN/G3A
-         LX0MTPJR43LBULHNcc6QWbJy6PpQCnuNNhNdpQxbPICufIrHPj+hAImfhSd5uDUa/QSb
-         zZoA==
+        d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+        h=from:to:subject:date:message-id:mime-version:organization
+         :content-transfer-encoding;
+        bh=Z6frZXwdfYK+If2cv0Q4NwIVhlW6wJC6roMmedhtKQs=;
+        b=FpRXlHquV3Dv4GS36OUaoO+xbulSQ+iPn+VyMH0JLyGjQ/jQL2EH0yc+8IgOwSVpGp
+         sMpQNIOfc9k9CGgh8s2j0EGl5KAIC1tLw41U6Q9aEkRNT1XbJ96JiVGezOeaQAu3EG4G
+         CIUP3OafIMGSEgsvUIeFhWZuHKaeIrs7ZiUq0lTif31QkrZorY0FqoFutkGv7JN81ofR
+         eBQzO1gh49/Dwa2iBZX7yUee/f6ptmjaJI1LI+rx3Qy4R/Ke/FaGnjdmvFKfXoWV+GRu
+         YWFVHvAp1zMYJR0jQy+A5AD/4/jUvGH1vUrAc3NTm/rhT4dSc+TIMLK/zlNp3qiepAYZ
+         59ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=acIYthd4xKG7P5DXobkwbeu95Zv94S53kmONNNY6JRk=;
-        b=R9SeDi/053AIEX8xaCdHBZkrWcpal1SaQtlIcydQXnRsd8ve+mVdHlPgOx8UoduVRx
-         UuBLIlygijPk2KqMOo4o3llfSH11GY2Ji67RY8ZfyLqvtVxYiwPdfjGR9bEpI5qE6vCx
-         316PTrA3dS7HPDGkWs29/Xz2BoxDjcNFkHT/vCMNQc2Sxk8wGpZgMrgkGFKKoksGU6eF
-         x5mnCzD2Z8g2bJ9fnAx9myFBRZ6FtHmkDlFncDUv0aJaatAwOowrZV6JzZniQltwZmBo
-         /OTKWX4mstFFw2gzRFvbBSpznr5Vj3ex0SSwl8RYC5lw+OGJpwyZ+NtZD0MFbwCZfYFl
-         AM3g==
-X-Gm-Message-State: AOAM5303HvmQw2vMEtigJs50dve7a4/l1WeGB03NZaTrDNnO8Xxm18rY
-	AvCtC4bs6BxMUONkRfaO7TBYxak3mF+YkGBkK2suL849YvficQ==
-X-Google-Smtp-Source: ABdhPJzowzSo6A5Dp3ccpw/6tjM3ydDWJf2sBJ+WZcxwgJRrliaIxqsy8ozdsJksAwpHcwd8tbnrj6ZMtCK6QyKvwjs=
-X-Received: by 2002:ac8:3fcb:: with SMTP id v11mr4174781qtk.80.1599671566654;
- Wed, 09 Sep 2020 10:12:46 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :organization:content-transfer-encoding;
+        bh=Z6frZXwdfYK+If2cv0Q4NwIVhlW6wJC6roMmedhtKQs=;
+        b=PoCu7x+dh0hBu9NuuBUxM6a/AbhSUr4LGBN9FK3WiIFtS7PcdwyWaWsrbD1O78KP9C
+         fWN5Twxldh5LqeRtRMHGy+lNE8yxEfC7EcoAydJvbLcHJis+eCKMsSwu5ryFeFAnJ0TR
+         3NgcW3mcaN65CO9L4MlNldF+bDdQ/w2lAHbBX1B5ntBDdy0mZoLLott4j6Nin0TmeaEm
+         RqFZQkoRPKCSPEBCGA2RZFh347xLmcIcA3akGpc2nbqCUZjAkSbSevFAzgmebn39BlKP
+         jNueIkc8Ad8Kpl1g/C9F4OrD5wzAZRDAIgAKwRZLFMpghotl7q7uyuoHqotroLMBv+mi
+         uTpA==
+X-Gm-Message-State: AOAM530MrrDds6N1pGZrHMuNwayJWDQhpbXX0Yc9Xsqxt5txHBjudkXL
+	Pp417At1uKQrG4osZqInwqEoPNgeSYYVwKcN
+X-Google-Smtp-Source: ABdhPJzY5mLjDu9XhgA9fugT4nVTMNC+XDMnWnkk1u8Jla1BRzMqv5iZWpkLm4psyn5CRRXdjedgxg==
+X-Received: by 2002:ac8:75d3:: with SMTP id z19mr4318237qtq.186.1599671983123;
+        Wed, 09 Sep 2020 10:19:43 -0700 (PDT)
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from centrium.lab.ossystems ([181.220.78.182])
+        by smtp.gmail.com with ESMTPSA id g18sm3359528qtu.69.2020.09.09.10.19.41
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Sep 2020 10:19:42 -0700 (PDT)
+From: "Fabio Berton" <fabio.berton@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH v2] libqmi: Update 1.26.0 -> 1.26.4
+Date: Wed,  9 Sep 2020 14:19:38 -0300
+Message-Id: <20200909171938.1094201-1-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-References: <20200909084218.802654-1-m.tretter@pengutronix.de>
-In-Reply-To: <20200909084218.802654-1-m.tretter@pengutronix.de>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 9 Sep 2020 10:12:20 -0700
-Message-ID: <CAMKF1so-Zfiv+vbFf1J1-bSkBMSTN4gx548YJ5=cUK42YS--cg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] apitrace: add new recipe
-To: Michael Tretter <m.tretter@pengutronix.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Organization: O.S. Systems Software LTDA.
+Content-Transfer-Encoding: 8bit
 
-On Wed, Sep 9, 2020 at 2:54 AM Michael Tretter <m.tretter@pengutronix.de> wrote:
->
-> apitrace consists of a set of tools to:
->
->  - trace OpenGL, OpenGL ES, Direct3D, and DirectDraw APIs calls to a file;
->
->  - replay OpenGL and OpenGL ES calls from a file;
->
->  - inspect OpenGL state at any call while retracing;
->
->  - visualize and edit trace files.
->
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+---
+ .../libqmi/{libqmi_1.26.0.bb => libqmi_1.26.4.bb}              | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.26.0.bb => libqmi_1.26.4.bb} (85%)
 
-Thanks for contributing new recipe, they also need to go into
-appropriate packagegroup in packagegroup-meta-oe.bb
-so it can be built in testing images.
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.26.0.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.26.4.bb
+similarity index 85%
+rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.26.0.bb
+rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.26.4.bb
+index 3a1b70b80..f778ffac4 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.26.0.bb
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.26.4.bb
+@@ -14,8 +14,7 @@ inherit autotools pkgconfig bash-completion gobject-introspection
+ 
+ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
+ 
+-SRC_URI[md5sum] = "8da95a97e893311878f8ce12dcf8fad0"
+-SRC_URI[sha256sum] = "7f0429e0ae58792e21512d09ca2412537840ea42696762795af1284a65fd6e40"
++SRC_URI[sha256sum] = "c0adcb84ba452e3e13edeb3f94f7b003ea927b354bc187629e05efb333ce270b"
+ 
+ PACKAGECONFIG ??= "udev mbim"
+ PACKAGECONFIG[udev] = ",--without-udev,libgudev"
+-- 
+2.27.0
 
-> Signed-off-by: Michael Tretter <m.tretter@pengutronix.de>
-> ---
->  .../recipes-devtools/apitrace/apitrace_9.0.bb | 28 +++++++++++++++++++
->  1 file changed, 28 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
->
-> diff --git a/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb b/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
-> new file mode 100644
-> index 000000000000..6e61683cde92
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
-> @@ -0,0 +1,28 @@
-> +SUMMARY = "Tools for tracing OpenGL, Direct3D, and other graphics APIs"
-> +HOMEPAGE = "http://apitrace.github.io/"
-> +SECTION = "console/tools"
-> +LICENSE = "MIT & BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=aeb969185a143c3c25130bc2c3ef9a50 \
-> +                    file://thirdparty/snappy/COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
-> +
-> +SRCREV = "cae55f54c53449fd07f8a917dcd0874db2c15032"
-> +SRC_URI = "git://github.com/${BPN}/${BPN}.git"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +DEPENDS += "zlib libpng python3-native"
-> +
-> +inherit cmake
-> +
-> +EXTRA_OECMAKE += "\
-> +    -DENABLE_GUI=OFF \
-> +    -DENABLE_X11=OFF \
-> +    -DENABLE_STATIC_LIBGCC=OFF \
-> +    -DENABLE_STATIC_LIBSTDCXX=OFF \
-> +    -DPython3_ROOT_DIR=/usr/bin/python3-native \
-> +"
-> +
-> +# Use the bundled snappy library
-> +EXTRA_OECMAKE += "\
-> +    -DENABLE_STATIC_SNAPPY=ON \
-> +"
-> --
-> 2.20.1
->
-> 
