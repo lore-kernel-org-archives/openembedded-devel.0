@@ -1,87 +1,88 @@
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.web12.9356.1599641163529826947
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
+ by mx.groups.io with SMTP id smtpd.web12.9309.1599640946713978170
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Sep 2020 01:46:03 -0700
+ Wed, 09 Sep 2020 01:42:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="unable to parse pub key" header.i=@blade-group.com header.s=google header.b=hzCPgMwS;
- spf=pass (domain: blade-group.com, ip: 209.85.221.54, mailfrom: yann.dirson@blade-group.com)
-Received: by mail-wr1-f54.google.com with SMTP id z4so2022155wrr.4
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2020 01:46:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=blade-group.com; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=bbd94GrZR4VCSF2OzfTvaC3pivCnP2J8dF7XEnK39MM=;
-        b=hzCPgMwS0Cuavsl/IcxpTFyWzXMaEPJkvUo0s4iCQNyT9rx+lDQnPkNE2Kicc2gDmW
-         5/IlC3+qhoLYmoYSOVJLDznXpzakK1jO21iIePAdSEuNW/MwBlXUTLToDbbYOG8P5SNh
-         DYQ4d/5JS6Prjw4dOCIeEA8S+0lbn1XkEtMX5YHC3Il0E8HbxLa8hckWo/nfcTkLf+LR
-         BWo7OxlAeY820ALsPgMnaWbcXsIFV7HeN5wphgupNMeS4qezMaaUM9fyirwhvHRfp9wV
-         GbFIAGB+UbmagX03eMS58cgIkNrqlrCR1Q0+zJwwEkUF+wrhUhwQj5z7fULI2+PaOUu6
-         Bg3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=bbd94GrZR4VCSF2OzfTvaC3pivCnP2J8dF7XEnK39MM=;
-        b=ZNm9lxS5EZthWVPnZHnAQJk1DYn0JZp3G1ghjmElUDs+ot5bvS+/Pvn3BpXCFcPAiB
-         XkunuVwGK1iPy+60gu+c7tmYHbGkmv6lX2Rxk6ftya1Do4G1b9KzPuamQxbPie6AdjFw
-         SC7GKzwdxucAcooEgew41kwA46VP/8J70+LRtlyPQEn35zsBGQKqROe2Imyvo2EOqLAT
-         PNLNBJt1m1iiHWBYx3p7IKXpYyFsCJnYxv6+FWCvBjvTdG1aMUwvYr7EDQwNZUWlSk8y
-         tfQrAMyolm9YcQMkkG2Jkar0WCOpMlQAQiflGaQAW8HOrVu+OjDRTUTBEU1pye2nGMB9
-         wi7A==
-X-Gm-Message-State: AOAM532xcuOycUABrT074BhjfEAnSqG5z0KufHQiXkj6VLrFJDK1D+U5
-	73+ctJy904Uay8UkwB3QmTHbF+aiCvOw0/UE
-X-Google-Smtp-Source: ABdhPJzx5DPDkGPtJDRmeCIL3o+P8v5C69RjbWNoxo9ZDbX0QmxP/b+82sN7Y4c9G3qjc3xfjyhvQw==
-X-Received: by 2002:a5d:43cf:: with SMTP id v15mr2934691wrr.149.1599641161734;
-        Wed, 09 Sep 2020 01:46:01 -0700 (PDT)
-Return-Path: <yann.dirson@blade-group.com>
-Received: from blanquette.lan ([88.120.44.86])
-        by smtp.gmail.com with ESMTPSA id y1sm2816452wmi.36.2020.09.09.01.46.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Sep 2020 01:46:01 -0700 (PDT)
-From: "Yann Dirson" <yann.dirson@blade-group.com>
-X-Google-Original-From: yann@blade-group.com
+ dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: mtr@pengutronix.de)
+Received: from [2a0a:edc0:0:1101:1d::39] (helo=dude03.red.stw.pengutronix.de)
+	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <mtr@pengutronix.de>)
+	id 1kFvgN-0007Ic-Hj; Wed, 09 Sep 2020 10:42:24 +0200
+Received: from mtr by dude03.red.stw.pengutronix.de with local (Exim 4.92)
+	(envelope-from <mtr@dude03.red.stw.pengutronix.de>)
+	id 1kFvgM-003Mom-3G; Wed, 09 Sep 2020 10:42:22 +0200
+From: "Michael Tretter" <m.tretter@pengutronix.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yann Dirson <yann@blade-group.com>
-Subject: [meta-oe][patch 4/4] libcec: split the python example into a separate package
-Date: Wed,  9 Sep 2020 10:45:40 +0200
-Message-Id: <20200909084540.178949-4-yann@blade-group.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200909084540.178949-1-yann@blade-group.com>
-References: <20200909084540.178949-1-yann@blade-group.com>
+Cc: Michael Tretter <m.tretter@pengutronix.de>
+Date: Wed,  9 Sep 2020 10:42:18 +0200
+Message-Id: <20200909084218.802654-1-m.tretter@pengutronix.de>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:1101:1d::39
+X-SA-Exim-Mail-From: mtr@pengutronix.de
+X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on
+	metis.ext.pengutronix.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.3 required=4.0 tests=AWL,BAYES_00,RDNS_NONE,
+	SPF_HELO_NONE,SPF_SOFTFAIL autolearn=no autolearn_force=no
+	version=3.4.2
+Subject: [meta-oe][PATCH] apitrace: add new recipe
+X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
+X-SA-Exim-Scanned: Yes (on metis.ext.pengutronix.de)
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
 Content-Transfer-Encoding: 8bit
 
-From: Yann Dirson <yann@blade-group.com>
+apitrace consists of a set of tools to:
 
-It does not provide more functionality than the C-based examples, so
-is of little value on a target except for checking the python module
-is working.
+ - trace OpenGL, OpenGL ES, Direct3D, and DirectDraw APIs calls to a file;
 
-Signed-off-by: Yann Dirson <yann@blade-group.com>
+ - replay OpenGL and OpenGL ES calls from a file;
+
+ - inspect OpenGL state at any call while retracing;
+
+ - visualize and edit trace files.
+
+Signed-off-by: Michael Tretter <m.tretter@pengutronix.de>
 ---
- meta-oe/recipes-extended/libcec/libcec_6.0.2.bb | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ .../recipes-devtools/apitrace/apitrace_9.0.bb | 28 +++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
 
-diff --git a/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb b/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb
-index f55801c39..48be1fdac 100644
---- a/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb
-+++ b/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb
-@@ -24,10 +24,11 @@ inherit cmake pkgconfig
- PLATFORM_CMAKE_FLAGS ?= "-DHAVE_LINUX_API=1 -DHAVE_RPI_API=0"
- EXTRA_OECMAKE += "${PLATFORM_CMAKE_FLAGS}"
- 
--# Put client examples into a separate package
--PACKAGE_BEFORE_PN += "${PN}-examples"
-+# Put client examples into separate packages
-+PACKAGE_BEFORE_PN += "${PN}-examples-python ${PN}-examples"
-+FILES_${PN}-examples-python = "${bindir}/py*"
- FILES_${PN}-examples = "${bindir}"
--RDEPENDS_${PN}-examples = "python3-${BPN} python3-core"
-+RDEPENDS_${PN}-examples-python = "python3-${BPN} python3-core"
- 
- # Create the wrapper for python3
- PACKAGES += "python3-${BPN}"
+diff --git a/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb b/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
+new file mode 100644
+index 000000000000..6e61683cde92
+--- /dev/null
++++ b/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "Tools for tracing OpenGL, Direct3D, and other graphics APIs"
++HOMEPAGE = "http://apitrace.github.io/"
++SECTION = "console/tools"
++LICENSE = "MIT & BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=aeb969185a143c3c25130bc2c3ef9a50 \
++                    file://thirdparty/snappy/COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
++
++SRCREV = "cae55f54c53449fd07f8a917dcd0874db2c15032"
++SRC_URI = "git://github.com/${BPN}/${BPN}.git"
++
++S = "${WORKDIR}/git"
++
++DEPENDS += "zlib libpng python3-native"
++
++inherit cmake
++
++EXTRA_OECMAKE += "\
++    -DENABLE_GUI=OFF \
++    -DENABLE_X11=OFF \
++    -DENABLE_STATIC_LIBGCC=OFF \
++    -DENABLE_STATIC_LIBSTDCXX=OFF \
++    -DPython3_ROOT_DIR=/usr/bin/python3-native \
++"
++
++# Use the bundled snappy library
++EXTRA_OECMAKE += "\
++    -DENABLE_STATIC_SNAPPY=ON \
++"
 -- 
-2.28.0
+2.20.1
 
