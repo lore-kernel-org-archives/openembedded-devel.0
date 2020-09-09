@@ -1,113 +1,117 @@
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
- by mx.groups.io with SMTP id smtpd.web11.6518.1599626370391365402
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.web10.9260.1599640971967255749
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Sep 2020 21:39:30 -0700
+ Wed, 09 Sep 2020 01:42:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=FACEj0gP;
- spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f169.google.com with SMTP id o20so1033058pfp.11;
-        Tue, 08 Sep 2020 21:39:30 -0700 (PDT)
+ dkim=fail reason="unable to parse pub key" header.i=@blade-group.com header.s=google header.b=QPgV302B;
+ spf=pass (domain: blade-group.com, ip: 209.85.221.44, mailfrom: yann.dirson@blade-group.com)
+Received: by mail-wr1-f44.google.com with SMTP id c18so1975932wrm.9
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Sep 2020 01:42:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=to:from:subject:autocrypt:message-id:date:user-agent:mime-version
-         :content-transfer-encoding:content-language;
-        bh=0DiRblMDZxOr4A9Z741EOS5B1g3HBhrUCYYxV5rRtF4=;
-        b=FACEj0gP13YRnk2S8mAlI/1xtpXU4D7yMiC36gnm3wdVYZFSgB5Zg22l7dYlLPtTCg
-         NEonXwrGw+/RgDPm7WgdRlzNeoZpd209Dzx/oEKsSOcToO7uPseNeyhLcrUvWvzCV0er
-         WryHLoprmzZg+tLe0k2oED96ush0uq46SqLYt0VQzwssDG6gEsldQxlWQpa0pa4zqVRm
-         F+pUNW7HagdeffU0GCXlDmJJW4C5yBwP5BQRixLoBaxVoQJF1uGJrPMr2q9a0CebshP8
-         O62Z0IuirAyOE5oTDrTUUpOwTJ2D41+xAKWd4fAHZi8N5cuO37mpt78XOyzs1ZLbHBIH
-         j/Lg==
+        d=blade-group.com; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=MB5RXiS64RSGKJ/Jv4lIBAwdphlZkeuJpqxjBBxya1k=;
+        b=QPgV302BC/OP9rpOUfW0rT0z8gbWTgz0SoOpXcb5yQo5QUyKG4998gMeKi02BQ3rGE
+         bMEIBgdV2B2dS8zW8ClhwSEAQV9H8vQO3cNc68d4E2Foo/numa7+7k2iWJ7N+81LMI/f
+         gEfvx5kdtS9OEG2kjCwrSjHLGwOIfFIbXUfdkfglKZZB2mv10/AZPBcyyYUX6uPlbJ7i
+         nd7DEP0OL2JbZAbTWdDHmBCZOqm5g6cydsBVzpJ2aI06r1OjJ8gLDXpNznLCUygnH287
+         tzT0SLWIHGFOV7Q/vAOr5MtkCK4l6h7FKvxT6OndtdtKsVGQav9i69QmUuCEHoO3B2uq
+         6b1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:to:from:subject:autocrypt:message-id:date
-         :user-agent:mime-version:content-transfer-encoding:content-language;
-        bh=0DiRblMDZxOr4A9Z741EOS5B1g3HBhrUCYYxV5rRtF4=;
-        b=MKBkkX/d1XGytKVOK7Bnt/tM1xJVTvA7DRFH9vm2u8juUo4yuCIUKHe/xJv58MBmCL
-         RFHaxXs62qMNo34Z7yfCFacQRyCcboW9visJHWcOW1lPNS2ArufCqVKGEjHMQEs/RDvu
-         YJ7D1K1PEsaZkuWEQsphi7R2gNTqbYPNpycZy/mMwAhAT5nnrzqufy1Ib6mMliE1a4Il
-         8+OYjkVkKJVuwc7UEHsDccJqac6EN1ZH5MCX+ol2EpsHk0O2JNPMZLOI3VKIhz0etj3o
-         xs2/nTot5aaaptro0KRDAmnyX0XGcs35/qC9Sg88N3WpcfCtS+AqPk7aZ/4p6CzAvWkk
-         r+1w==
-X-Gm-Message-State: AOAM532R1F1GRyDdq/GpNmiElny40u0taVPE+71e8O1FEE9KtVV08R79
-	ua7OgUn1ulrT/8MP05T0XLvB6MJ+VjA=
-X-Google-Smtp-Source: ABdhPJwwCllM9EzNQRdLI25HtJ06lkELpK5xT6Qk0BrKc0SCEsQ/59Dp1mBK6paF7wl7TXgm/ko76Q==
-X-Received: by 2002:a63:f606:: with SMTP id m6mr1624527pgh.193.1599626369614;
-        Tue, 08 Sep 2020 21:39:29 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:812e:2d2f:a669:186f? ([2601:202:4180:a5c0:812e:2d2f:a669:186f])
-        by smtp.gmail.com with ESMTPSA id z23sm957244pfg.220.2020.09.08.21.39.28
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 08 Sep 2020 21:39:29 -0700 (PDT)
-To: "openembedded-core@openembedded.org"
- <openembedded-core@openembedded.org>,
- "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
- "bitbake-devel@lists.openembedded.org" <bitbake-devel@lists.openembedded.org>
-From: "akuster" <akuster808@gmail.com>
-Subject: Warrior and Thud stable branches
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
- 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
- 8CS2NxU=
-Message-ID: <da499e18-c719-1164-dc86-782da15a9c4b@gmail.com>
-Date: Tue, 8 Sep 2020 21:39:28 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=MB5RXiS64RSGKJ/Jv4lIBAwdphlZkeuJpqxjBBxya1k=;
+        b=iBa1eOaJTA2Z3M5qKTyU10SHwlYuW20H5i6Fs+m6cm/uuQOSl7wlGNHxFH8pTdVuIz
+         pDbMBykSH7adORJDiozAoxLpdA8qmc2/CBNokGOILnHxw4rM5Fx9TTzjOzYi1Jcc9k4W
+         zk/8Zv2rgAGhsvHyIayMGMmLWPYhnejEKn7jSNMgyZpPJc8BAUXcIR75WfVy+neGOsYj
+         GcQIx/l5NHhfhMaaI1tX1KZNoHN5k08xV6EI1AEo53Etkg4wsY4JPrxJy5LiLQ2R+KlR
+         Fsb1oCJCJ2B+3scqHGUuST3dIks7Txg9XD73J+HY0ZVSKQmm9MKL8LGsDovoBM/ERnHH
+         ZL2w==
+X-Gm-Message-State: AOAM531aCZe3gUZSGbktHYLG+WvvV6tDSzt0CISzn2+i/orf5iRYpUq2
+	NNOcmpNj+PrRsIO4MHosMjCk6aa9LDE5LGLF
+X-Google-Smtp-Source: ABdhPJwohXh1TwzM4tdCGgf4VVN700SmSwBjN8P0JwCxi2zUrKegCyC1sZR2dTAaXpYiDeI1SKOi2w==
+X-Received: by 2002:adf:82d5:: with SMTP id 79mr3128124wrc.60.1599640969996;
+        Wed, 09 Sep 2020 01:42:49 -0700 (PDT)
+Return-Path: <yann.dirson@blade-group.com>
+Received: from blanquette.lan ([88.120.44.86])
+        by smtp.gmail.com with ESMTPSA id o4sm3027825wrv.86.2020.09.09.01.42.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Sep 2020 01:42:49 -0700 (PDT)
+From: "Yann Dirson" <yann.dirson@blade-group.com>
+X-Google-Original-From: yann@blade-group.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Yann Dirson <yann@blade-group.com>
+Subject: [meta-oe][patch 1/4] libcec: workaround wrong choice of PYTHON_PKG_DIR when building on Debian
+Date: Wed,  9 Sep 2020 10:41:50 +0200
+Message-Id: <20200909084154.178795-1-yann@blade-group.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-Hello,
+From: Yann Dirson <yann@blade-group.com>
 
-A few words regarding the older stable releases, Thud and Warrior.
+As described in https://github.com/Pulse-Eight/libcec/issues/530 the
+cmake code looks at the host to make decisions about the target, and
+we can't even override this with a flag.
 
-Thud no longer has an active Community Maintainer so this release with
-be move to the=C2=A0 EOL state.=C2=A0 Warrior did have a volunteer but no=
- activity
-to date and this branch will also move to the EOL state. This will take
-affect tomorrow (Wednesday PST).
+Signed-off-by: Yann Dirson <yann@blade-group.com>
+---
+ ...buggy-test-confusing-host-and-target.patch | 31 +++++++++++++++++++
+ .../recipes-extended/libcec/libcec_6.0.2.bb   |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/libcec/libcec/0001-Remove-buggy-test-confusing-host-and-target.patch
 
-regards,
-Armin
+diff --git a/meta-oe/recipes-extended/libcec/libcec/0001-Remove-buggy-test-confusing-host-and-target.patch b/meta-oe/recipes-extended/libcec/libcec/0001-Remove-buggy-test-confusing-host-and-target.patch
+new file mode 100644
+index 000000000..7c29e15e2
+--- /dev/null
++++ b/meta-oe/recipes-extended/libcec/libcec/0001-Remove-buggy-test-confusing-host-and-target.patch
+@@ -0,0 +1,31 @@
++From 8ce50bf569ec2d931735180079bbe507730626c8 Mon Sep 17 00:00:00 2001
++From: Yann Dirson <yann@blade-group.com>
++Date: Mon, 7 Sep 2020 18:17:21 +0200
++Subject: [PATCH] Remove buggy test confusing host and target
++
++---
++ src/libcec/cmake/CheckPlatformSupport.cmake | 8 --------
++ 1 file changed, 8 deletions(-)
++
++diff --git a/src/libcec/cmake/CheckPlatformSupport.cmake b/src/libcec/cmake/CheckPlatformSupport.cmake
++index 1d99bd8..31dac4f 100644
++--- a/src/libcec/cmake/CheckPlatformSupport.cmake
+++++ b/src/libcec/cmake/CheckPlatformSupport.cmake
++@@ -266,14 +266,6 @@ else()
++                 DESTINATION python/cec)
++       endif()
++     else()
++-      if(EXISTS "/etc/os-release")
++-        file(READ "/etc/os-release" OS_RELEASE)
++-        string(REGEX MATCH "ID(_LIKE)?=debian" IS_DEBIAN ${OS_RELEASE})
++-        if (IS_DEBIAN)
++-          SET(PYTHON_PKG_DIR "dist-packages")
++-        endif()
++-      endif()
++-
++       if (NOT PYTHON_PKG_DIR)
++         SET(PYTHON_PKG_DIR "site-packages")
++       endif()
++-- 
++2.28.0
++
+diff --git a/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb b/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb
+index 894ee52f9..c4aeb8c55 100644
+--- a/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb
++++ b/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb
+@@ -13,6 +13,7 @@ SRCREV = "29d82c80bcc62be2878a9ac080de7eb286c4beb9"
+ SRC_URI = "git://github.com/Pulse-Eight/libcec.git;branch=release \
+            file://0001-CheckPlatformSupport.cmake-Do-not-hardcode-lib-path.patch \
+            file://0001-Enhance-reproducibility.patch \
++           file://0001-Remove-buggy-test-confusing-host-and-target.patch \
+           "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.28.0
 
