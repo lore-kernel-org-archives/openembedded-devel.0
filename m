@@ -1,37 +1,39 @@
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
- by mx.groups.io with SMTP id smtpd.web11.5095.1599819691985015125
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+ by mx.groups.io with SMTP id smtpd.web11.5096.1599819695607728988
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Sep 2020 03:21:33 -0700
+ Fri, 11 Sep 2020 03:21:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=dNNpGLCf;
- spf=pass (domain: skidata.com, ip: 91.230.2.91, mailfrom: prvs=516bca272=richard.leitner@skidata.com)
+ dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=Rhx77Jmd;
+ spf=pass (domain: skidata.com, ip: 91.230.2.99, mailfrom: prvs=516bca272=richard.leitner@skidata.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-  t=1599819692; x=1631355692;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=I5VCJV9nZE2yYZg9Z+PFS8jAHfvJE0V/TFuZapunM3I=;
-  b=dNNpGLCfCJpMv7rkFmQd/aZFSh7Kxu5ZnisrOrYU9A3XoRT5sG0g8vJn
-   +ySb5IXHi9QVQoh/ZL2+BYLxSkbeByZYDaAAW81wqy3FoLLD1cs4pntfa
-   4gPxhskRk9rOj4dlXlxZyNx/wpNUKtt2pv7QLEmXlSNouH+6sIPg/osJm
-   BUwvp2wJmnGUoy/75JO4Uz1l2ERJtwp5Hi9tx6qMA/iPjdeEnZufeCKzu
-   fkWnMptV/phjwE9ec+fDQ0Pu5isZ1iU1ZRsdlRp+uwpC/yHfACGy7j+WC
-   +sO4oMj0JCQfZnxetzLPXrcLSZHcaUw+WFt4mzzdf4ib1QTWLnNv1rPYj
-   Q==;
-IronPort-SDR: 2ZL+z/SHVojvZcqY/QBswxCh9pruZJi46GyHqzvySOluNXZoq7nTNCx2u5+Wwb3Q1WNww0pd+f
- yGSR8TGRBKhSVCeph3Uq2ljNy9ONuA1Bn37FjnIflXCrADgXsTg5tYhh6AA80xWLRmKVRyrRrb
- 9gFqfrO8qtpeVyR9WOJd2uxt5U4HLM6AyZB6DRyGaKQTdcDAgteZ7T02SM+E+cYsxMKhNa7u+4
- OMZYVQWumesPv16NvotOweMlErGgql9Pe3GthLbW+S/dpY9wTsvLbOdlyrhuTDjBQUlcX03s/t
- r4s=
+  t=1599819695; x=1631355695;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=mJHK8PTyzibggXQv/Cb1ZuSkjBG12kKs0f0fcPzKVro=;
+  b=Rhx77JmdN6jlkzr7l4MrvtHzRgm7OsgGaWPLLElkB5xjpH2qVJowNh/W
+   VN0peFdVervEnU6HurESAusYIIaHF6VanMHF3oWL7Ap8BEXo6X0UCt6WB
+   sApHIIubC+k9pKs+/ScMGHO2gM82RyvfWPd43uHno9//iSjchPfxL0pXF
+   +8U8Tgm8s2n65VHCK7odSAeyTiFb8QfRqtKP/AE0k+MUWLDi2dsHM5GNv
+   qYnfgPI2NieQaUtJoNgAn6nHGEqMVZYdlo7k8Y5O1OeO3YmduE/PoFpnH
+   lJR9hqWowS8Kk/mr7pdUlwd3l73Mlsx9nzgo99vXiadlyiDuyDarkOXve
+   A==;
+IronPort-SDR: F+NSJBvvV12SHHzBDnqmxCjBI2L8ZGojOuq2XIf8jNPSgRzWWFG9DZAvp4y+UIE7pkxqjjs4p4
+ Qiv7ujJ782hA/ndJnwASFlr5Pv68STriQuELieO23fK45P5bMDJZyssF+QwCcn0oZnLIVB9HOq
+ UiQZ6aN8QIuwpl/ELdz10Km7gLzm0uIT+A1GWEOnvaFYguhyof7XXcuF8B4SDx3TWH0bpwboml
+ CiSybCJu40ymZzfFNi+eHyWUNr+z7jOLyOli0OXvoXgicHyP6uqV7juSKlDLSzCLtgBVxmd9X4
+ 9wc=
 X-IronPort-AV: E=Sophos;i="5.76,414,1592863200"; 
-   d="scan'208";a="2665878"
+   d="scan'208";a="26744771"
 From: "Richard Leitner" <richard.leitner@skidata.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Richard Leitner <richard.leitner@skidata.com>
-Subject: [meta-java][PATCH 1/3] openjdk-8: add ALTERNATIVE for "keytool"
-Date: Fri, 11 Sep 2020 12:21:14 +0200
-Message-ID: <20200911102116.597001-1-richard.leitner@skidata.com>
+Subject: [meta-java][PATCH 2/3] openjre-8: add ALTERNATIVE for "keytool"
+Date: Fri, 11 Sep 2020 12:21:15 +0200
+Message-ID: <20200911102116.597001-2-richard.leitner@skidata.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200911102116.597001-1-richard.leitner@skidata.com>
+References: <20200911102116.597001-1-richard.leitner@skidata.com>
 MIME-Version: 1.0
 Return-Path: richard.leitner@skidata.com
 X-Originating-IP: [192.168.111.252]
@@ -45,27 +47,27 @@ for the keytool.
 
 Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
 ---
- recipes-core/openjdk/openjdk-8_265.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ recipes-core/openjdk/openjre-8_265.bb | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-core/openjdk/openjdk-8_265.bb b/recipes-core/openjdk/openjdk-8_265.bb
-index bc6ce51..f9049e5 100644
---- a/recipes-core/openjdk/openjdk-8_265.bb
-+++ b/recipes-core/openjdk/openjdk-8_265.bb
-@@ -53,9 +53,12 @@ inherit update-alternatives
+diff --git a/recipes-core/openjdk/openjre-8_265.bb b/recipes-core/openjdk/openjre-8_265.bb
+index ce6392a..55ca1ec 100644
+--- a/recipes-core/openjdk/openjre-8_265.bb
++++ b/recipes-core/openjdk/openjre-8_265.bb
+@@ -38,7 +38,11 @@ RPROVIDES_${PN} = "java2-runtime"
  
- ALTERNATIVE_PRIORITY = "100"
+ inherit update-alternatives
  
--ALTERNATIVE_${PN} = "java javac"
-+ALTERNATIVE_${PN} = "java javac keytool"
+-ALTERNATIVE_${PN} = "java"
++ALTERNATIVE_PRIORITY = "100"
++
++ALTERNATIVE_${PN} = "java keytool"
  ALTERNATIVE_LINK_NAME[java] = "${bindir}/java"
- ALTERNATIVE_TARGET[java] = "${JDK_HOME}/bin/java"
- 
- ALTERNATIVE_LINK_NAME[javac] = "${bindir}/javac"
- ALTERNATIVE_TARGET[javac] = "${JDK_HOME}/bin/javac"
+ ALTERNATIVE_TARGET[java] = "${JRE_HOME}/bin/java"
+-ALTERNATIVE_PRIORITY[java] = "100"
 +
 +ALTERNATIVE_LINK_NAME[keytool] = "${bindir}/keytool"
-+ALTERNATIVE_TARGET[keytool] = "${JDK_HOME}/bin/keytool"
++ALTERNATIVE_TARGET[keytool] = "${JRE_HOME}/bin/keytool"
 -- 
 2.26.2
 
