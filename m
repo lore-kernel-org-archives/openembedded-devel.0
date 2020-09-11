@@ -1,72 +1,90 @@
-Received: from mail2.skidata.com (mail2.skidata.com [])
- by mx.groups.io with SMTP id smtpd.web11.5095.1599819691985015125
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web12.8962.1599833439391457933
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Sep 2020 03:21:37 -0700
+ Fri, 11 Sep 2020 07:10:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@skidata.com header.s=selector1 header.b=D5aoDkom;
- spf=softfail (domain: skidata.com, ip: <nil>, mailfrom: prvs=516bca272=richard.leitner@skidata.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-  t=1599819695; x=1631355695;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=DVhy7czyxRZ2vZIms5QG/kiNamFcxza8m/gJ4LKxf44=;
-  b=D5aoDkomm/xNChhzzO+BamRT3Zj6GHm3Gf3wviBJ2vKF9xyrR5eyO0bI
-   WtuJC9PK/x2bJBYYfCCWNny5SG/k1xgb2FoE83HgTv7I9qlWMgJLHU1CE
-   CHzE7UM+eql7jx5EaxzMgz9ajvJMxIFpa6ASHRx8KYwQIJZvuav5ed8/v
-   LL9IPdR9MoKfGQgedl0YFgfRyFJt0d507YQt0qGii3h6NB0mYK0ecObPj
-   4due/0TIbrwtTy5Kgl8ZzfOL7OZrOLz11teMjqYQFExuB7TTq0gelJ4of
-   3R9X3ydwS9RFT8/oqqC64Kf+L2qUtb4/iKhELJeOkBXA34ZkS49AGimYR
-   g==;
-IronPort-SDR: gvyzLFaCKAG3Icq6uicLtuLsHTVADszVCv1Ld0ohe8xXNxNJs208Hsfd6LMxznadKueKdmLexj
- pOwToD2Fd4ken/u0zpE0ZczERIWZyevaaV5NP2q7y3O0iC2ispZTGOcnZ9f1etMVf7SVPbjY0u
- +wRVNU0hlNs0ke5a+HyvPS75F+hBVAdDPNfbU00I2xFRbjdquxtNZvjZC+K7Kvk9LLWFFPgrmQ
- uiWi7Et9DA9xIqYsvmGoM8mA9cd6fQ2caCKn1iQo5eg8q058rng9Pmpv/NVf+7XGMKFWEKtrlI
- lmg=
-X-IronPort-AV: E=Sophos;i="5.76,414,1592863200"; 
-   d="scan'208";a="2665879"
-From: "Richard Leitner" <richard.leitner@skidata.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: trevor.gamblin@windriver.com)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 08BEAWuu011114
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2020 07:10:33 -0700 (PDT)
+Received: from yow-tgamblin-fedora2.wrs.com (128.224.56.206) by
+ ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+ 14.3.487.0; Fri, 11 Sep 2020 07:10:09 -0700
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Richard Leitner <richard.leitner@skidata.com>
-Subject: [meta-java][PATCH 3/3] openjdk-8-common: fix soundless evaluation
-Date: Fri, 11 Sep 2020 12:21:16 +0200
-Message-ID: <20200911102116.597001-3-richard.leitner@skidata.com>
+Subject: [meta-python][PATCH] python3-django: upgrade 2.2.13 -> 2.2.16
+Date: Fri, 11 Sep 2020 10:10:09 -0400
+Message-ID: <20200911141009.1409578-1-trevor.gamblin@windriver.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200911102116.597001-1-richard.leitner@skidata.com>
-References: <20200911102116.597001-1-richard.leitner@skidata.com>
 MIME-Version: 1.0
-Return-Path: richard.leitner@skidata.com
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
- sdex5srv.skidata.net (192.168.111.83)
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-If only alsa and not pulseaudio was in PACKAGECONFIG soundless was
-configured. This is incorrect for obvious reasons, therefore set
-soundless only if alsa and pulseaudio isn't set.
+Summary of release notes from https://docs.djangoproject.com/en/2.2/releases/
 
-Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+2.2.14 release notes:
+
+- Fixed messages of InvalidCacheKey exceptions and CacheKeyWarning warnings
+  raised by cache key validation (#31654).
+
+2.2.15 release notes:
+
+- Allowed setting the SameSite cookie flag in HttpResponse.delete_cookie()
+  (#31790).
+- Fixed crash when sending emails to addresses with display names longer than
+  75 chars on Python 3.6.11+, 3.7.8+, and 3.8.4+ (#31784).
+
+2.2.16 release notes:
+
+- Fixed CVE-2020-24583: Incorrect permissions on intermediate-level directories
+  on Python 3.7+
+- Fixed CVE-2020-24584: Permission escalation in intermediate-level directories
+  of the file system cache on Python 3.7+
+- Fixed a data loss possibility in the select_for_update(). When using related
+  fields pointing to a proxy model in the of argument, the corresponding model
+  was not locked (#31866).
+- Fixed a data loss possibility, following a regression in Django 2.0, when
+  copying model instances with a cached fields value (#31863).
+
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 ---
- recipes-core/openjdk/openjdk-8-common.inc | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ .../recipes-devtools/python/python3-django_2.2.13.bb     | 9 ---------
+ .../recipes-devtools/python/python3-django_2.2.16.bb     | 9 +++++++++
+ 2 files changed, 9 insertions(+), 9 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-django_2.2.13.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-django_2.2.16.bb
 
-diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
-index 04acc59..70585a6 100644
---- a/recipes-core/openjdk/openjdk-8-common.inc
-+++ b/recipes-core/openjdk/openjdk-8-common.inc
-@@ -111,10 +111,7 @@ def package_config_option_cleanup(d):
-     if not option_headless and not with_cups:
-         option_headless = True
- 
--    if not option_soundless and not with_alsa:
--        option_soundless = True
+diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.13.bb b/meta-python/recipes-devtools/python/python3-django_2.2.13.bb
+deleted file mode 100644
+index 55eacdff2..000000000
+--- a/meta-python/recipes-devtools/python/python3-django_2.2.13.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require python-django.inc
+-inherit setuptools3
 -
--    if not option_soundless and not with_pulseaudio:
-+    if not option_soundless and not with_pulseaudio and not with_alsa:
-         option_soundless = True
- 
-     options = {'make': [], 'cpp': [], 'env': [], 'configure': ["--disable-ccache"] }
+-SRC_URI[md5sum] = "30c688af9b63c4800ef9b044e0dd4145"
+-SRC_URI[sha256sum] = "84f370f6acedbe1f3c41e1a02de44ac206efda3355e427139ecb785b5f596d80"
+-
+-RDEPENDS_${PN} += "\
+-    ${PYTHON_PN}-sqlparse \
+-"
+diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.16.bb b/meta-python/recipes-devtools/python/python3-django_2.2.16.bb
+new file mode 100644
+index 000000000..0715abbd4
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-django_2.2.16.bb
+@@ -0,0 +1,9 @@
++require python-django.inc
++inherit setuptools3
++
++SRC_URI[md5sum] = "93faf5bbd54a19ea49f4932a813b9758"
++SRC_URI[sha256sum] = "62cf45e5ee425c52e411c0742e641a6588b7e8af0d2c274a27940931b2786594"
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-sqlparse \
++"
 -- 
 2.26.2
 
