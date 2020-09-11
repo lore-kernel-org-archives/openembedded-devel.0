@@ -1,17 +1,17 @@
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.77])
- by mx.groups.io with SMTP id smtpd.web10.5812.1599860410519829799
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.82])
+ by mx.groups.io with SMTP id smtpd.web10.6320.1599861976556922936
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Sep 2020 14:40:11 -0700
+ Fri, 11 Sep 2020 15:06:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=QXgFi9Ia;
- spf=pass (domain: windriver.com, ip: 40.107.236.77, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=hL50FLKe;
+ spf=pass (domain: windriver.com, ip: 40.107.243.82, mailfrom: joe.slater@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LdVwrnMCqWrsi7xMKU5jn3hlGeTdBuHkpeyp/w/fXktk1ujUTv79me8xhF93fi7jZvDXTBsNA0zhji7Q7e3guRxXPiHaEnq3FBup3rkmBzEn6jnI2z7XY8Fct/IVlo+P9NZ9Ne3GZVGZ+oG+4vIeKzgtwwUCLsFTGweFoZ6LS/C6yu15ctRpsR+O1nDwtnWoUizB6mCGaJt0aVgs7uD4IdDb+UWp5pZA8+MToYzvwjit2yqTbOGZgW8f4U3brXVGDrs4FoWWw4c95DxUprKT1eKMcICEUZnW5H6hnTwyVLRQxQv7kt4i6N2p8etc7tNZ/B6rXow7SzJ2K0mfjH7Jng==
+ b=KhzXM18kFWR32muvhMze9VQCvCkVvEY77aEc/luNvY95x0WxKoUIFV6vrGSkG16oOMa9zR2r9JSVFYqwyW36YKlwOheVYCG7T7rNogwE4lvnq+my+QM4DObCFW+sGcFScBHdteNhJizZ6BiHy9hNv10+3tHKhIgmsWTNsi5pvAEOqGOCeQLlCz18hV8woKOqzvqFVMw5S/CzvAE4HoB0y28qsxaDqKIySTS5+RY3jtuVxskB7LgZ3UtMbj+pj0wZDfvMNq/wLP7YlAZkTa1Gf6tau0HiZG4IBzN+Y85BLws8wiwr3tmukQuOsxPxcm4GKrOuyfL4S8nawgD4wE5gqQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=w6IQwn8XzzsiBQw3ZZcUfiQ4UYSFyH/vdPSyx9SUVTs=;
- b=jvxeo86W3M8QoT4vwM3wE0AWUSxlvFgq4owSMmsncmzGjJfIosJE4YDksVKn3QrjgaoKZWW4ePQii3v2gEPYhFhI3S3Vz/LsfiH7/92mZecsfmhvefr8DSHf5lu8TJN8qLzQvdpCMPH9dP1PQUzK1bHuP2u6IR8beWCE7t/lpj+ORHjCxBSnlfWdjgMW5wohKw9+VNPjmkjzjNrPTxPvWOewXG0k4533YD+vMR/G4UcXfG7f8IQiyY7+wcuv0yWnvyuE4Bst7jlxXQiHbDxywDcy2BgkTicc5rPJjLImJBGx7SUjqralfCbHjA5E28ahz6n5ja+PSQeui3oTnS7nAw==
+ bh=m0sunXJbzCJcZQC3oKl4TphXUf8imMvg2oKb5vV7f0M=;
+ b=AnH0TGpgIhYet+S2t3hscLmhAzpuQLbUPMt85x3m9cvmMwVNgJxCkxmDp6lqNXrhaE3PYcqZO8Q21qbv13Q66zo7g2uP4kFVhcIQEs+65OW6TQoaP6sDAizMWqkfu205j18zpTGNezZ8H5OdBPQrxNQf5DiwZpjFKlxTxrsMdJXXy/0MpO0mUa5sQKwvmygdGLP0vcZmoDRQ15w8AcnHHVrB6oo7tAebHKR/t4OaolUdGBfUwtt8IME+8Fyit1r1EbAcrw5yOeXYOHCeygdfhkqR1M29T62SQM8hLKUPrn7HoPsunPtzHf64/5YrNKbp24v8Dm9QtQlg+OK24p3kSg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,244 +19,117 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=w6IQwn8XzzsiBQw3ZZcUfiQ4UYSFyH/vdPSyx9SUVTs=;
- b=QXgFi9Iarjmt/g56mF4JyZUxY7SxstgRh3utlxqz34dI/3KU6g/kOWfMnUiCXojjj7fs8t+W/Xcngq0ScuwjxDT+qSBnwg089mw/4WCIJGeBR250+8OdoshoGz0qv3Gr1HPSaIpVBxoxOmYYuq+TfiRQf7C4F1Oz/reklEypUl4=
-Authentication-Results: gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BY5PR11MB4324.namprd11.prod.outlook.com (2603:10b6:a03:1bd::21) with
+ bh=m0sunXJbzCJcZQC3oKl4TphXUf8imMvg2oKb5vV7f0M=;
+ b=hL50FLKeNIzp4JcrKNHC5u7YDsoh+r5caVyOmf3oDnAngZ97lK++h9CAlJHU5GkssUMfV3YIkNU+Qy2E1GsCPppfABz7n+vgFEF2ZOeMMh6y5PbwmnDEkgKOia7juwrzMg4UWszU4/RrkIizdXr+wgW8ZfCzXMcEH7XnqXcqSYw=
+Received: from BY5PR11MB3992.namprd11.prod.outlook.com (2603:10b6:a03:188::10)
+ by BYAPR11MB3317.namprd11.prod.outlook.com (2603:10b6:a03:7b::22) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3370.16; Fri, 11 Sep
- 2020 21:40:08 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::50e6:fd64:b821:78e8]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::50e6:fd64:b821:78e8%7]) with mapi id 15.20.3370.017; Fri, 11 Sep 2020
- 21:40:08 +0000
-Subject: Re: [oe] [meta-python][PATCH] python3-django: add recipe for 3.1.1
-To: Tim Orling <ticotimo@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
-References: <20200911142637.1435646-1-trevor.gamblin@windriver.com>
- <CANx9H-CDW+55z5cHQX0pvnmoCsN72hATBpDz8+H_ud2ukiopRw@mail.gmail.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <a07d51b2-fd5d-5422-4b58-4c358c37b106@windriver.com>
-Date: Fri, 11 Sep 2020 17:40:04 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-In-Reply-To: <CANx9H-CDW+55z5cHQX0pvnmoCsN72hATBpDz8+H_ud2ukiopRw@mail.gmail.com>
-X-ClientProxiedBy: YTOPR0101CA0061.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:14::38) To BY5PR11MB3909.namprd11.prod.outlook.com
- (2603:10b6:a03:191::13)
-Return-Path: trevor.gamblin@windriver.com
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3348.15; Fri, 11 Sep
+ 2020 22:06:15 +0000
+Received: from BY5PR11MB3992.namprd11.prod.outlook.com
+ ([fe80::80ee:21bc:b0aa:d35c]) by BY5PR11MB3992.namprd11.prod.outlook.com
+ ([fe80::80ee:21bc:b0aa:d35c%7]) with mapi id 15.20.3370.017; Fri, 11 Sep 2020
+ 22:06:15 +0000
+From: "Joe Slater" <joe.slater@windriver.com>
+To: "Slater, Joseph" <joe.slater@windriver.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+CC: "MacLeod, Randy" <Randy.MacLeod@windriver.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/1] luajit: advance SRCREV to fix two CVE's
+Thread-Topic: [oe] [meta-oe][PATCH 1/1] luajit: advance SRCREV to fix two
+ CVE's
+Thread-Index: AQHWgfpkseX86deQpUy75Yi94EEpPqlkC00A
+Date: Fri, 11 Sep 2020 22:06:15 +0000
+Message-ID: 
+ <BY5PR11MB39926180521D6CA4F1A98A9D88240@BY5PR11MB3992.namprd11.prod.outlook.com>
+References: <16314ABFB8306B25.8972@lists.openembedded.org>
+In-Reply-To: <16314ABFB8306B25.8972@lists.openembedded.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: windriver.com; dkim=none (message not signed)
+ header.d=none;windriver.com; dmarc=none action=none
+ header.from=windriver.com;
+x-originating-ip: [24.4.218.114]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 64bb4fbb-caa6-4617-f7f4-08d8569ee6fb
+x-ms-traffictypediagnostic: BYAPR11MB3317:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: 
+ <BYAPR11MB3317AEF151D6BF7EEEE69F9588240@BYAPR11MB3317.namprd11.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:163;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ wHIohqFx1owOI7RzYdAhaozBnxBoJ7/EZkCNyc1/8omaaNs3n20Gp3lPdruv23Zc8OPiOi9k+di10ys6XXZ1Fx7gBv16vERnX4j4CcoxrBZZF2VIJCcbQ0i25pO5oy2OUJ+PGrGE7A6OPLfN7wpPc6H2Woby2kLS0NCTO+iX5VBMP8/zO4mvFP5xCcn8bfHk0iLzsvzGWDrwTsWIwPrCA65oiYy9RajS68cLCYoiMNvFhiU3CeX788aUwpzGXZmPL846z5rvgSFYMZHo2b2ulciYTN8wy5V/8o3G478AFOfq7azh3ZytWGHdzUbALzBIqPyISQc/gAYlzrJMFqQLKGAM7dnbxKQOc3lC8ov0opWwUQAXcoVQyFYjHFkaGdx8XYXWnl9BzTh7IgdBelvFGw==
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3992.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(366004)(346002)(39850400004)(376002)(136003)(7696005)(26005)(83380400001)(33656002)(4326008)(2906002)(5660300002)(53546011)(52536014)(6506007)(9686003)(76116006)(186003)(55016002)(478600001)(110136005)(66556008)(8936002)(86362001)(66446008)(64756008)(107886003)(66946007)(71200400001)(8676002)(316002)(66476007);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata: 
+ eGh10S6x5H17tQpK8qG80VxZCfm/AZo2Jq6vbHCGKzRNQbbITz/0sL5IIbpforYGYDJwgbhe35vVRGXiCjIPKv/p6gHvfW6zNm5ljaz1YaBeusiQJauXl63rIsMDQqc+2+3UNG2ZG+HlZ0tpuEyNJNi2DS7d2DIxnYh0Jrb2yfELz+jA+4ftCuMZ5r2diggFI42K5wYjzMx6ZTmxmVlFdzWm7DYgIwVLRxKZ+N7PGhMEFym2yu8U76GMC7Lhcyfm9yiqqby3N9UAd/gHXiS6MQUlWWWLgLmzaktk4O723UUcLsDT2jOrKPcN9n88S3VZWn1kQoUmFIBQtysVUQS/Ur+V/kE3zNolz2wa8i77Nh/7dRupdKyR0kmIQ7QKd6M1qumAEv4H/5ObCZZcKQ/yfNiSB1zpA+iatlHfpMBSMjw9gkdU6jgqWtX1l4VsGsXnn2PwQJYA95ZD25sn4wgJCQ9KPTp85DfGSkxmCk7cEk+JjuEd8Ge6wW2whJs6lRfll3Qe/cUiLmvIw3sUl8nz2XF8Wll3F4nIY4AV/O5Az076bydz8tAj7w2aPQ6PpWbGqbamAcSkO/r3Bw25aR49PXlxLKek5VJUg6ratidCidGMVd/38jF+WtihAnQAytH2G2qHJrJi08GcTK2LRePCcg==
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by YTOPR0101CA0061.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:14::38) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3370.16 via Frontend Transport; Fri, 11 Sep 2020 21:40:07 +0000
-X-Originating-IP: [174.115.236.231]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 5ab129d4-6d51-4a80-28b6-08d8569b40ad
-X-MS-TrafficTypeDiagnostic: BY5PR11MB4324:
-X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB43242E75C97390498093B4829F240@BY5PR11MB4324.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:3173;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	rg9cWI99MMJHyqqnngZb1xuvRsxv0vznIqCuUhHUY+jcSqHIL/L+4YCb2rtb2IcnvBld+sdf9NiguFpPIb1FZEJnoIz2yM/RXgcq2rQ4GqTGfMBN5CY+NkH1hxKxxvJpdenTYkut9AcyPoVUD4FIZFEka6mmCxQsmKEN5JgDRsoQkEazP/XzMkbTcPeR8+TGHkRd5WoWGJb2X1fhl3mhd4EYnoy7AzbWdxXI9Wg2y4iXcOJDQqXcd7kYysn9UAmQEqxhc04RAanoMeryNM6jAxujcQdUgBQ9neCytMgV07dHVDc0Wwkxvo3WTPW6VGXRGK5twKIb5uHB6zdXwDUWb84d2S3a6IRw1w9a1yqmK6NaEv0VXUvY6Yik1XaTlDXsg+TW7B8AZ04N4bDHwCRhXsL0Epj+94LKyNm/ZbB8e+6DQCtQI54A4dyreD2udma4ziTOLXLl51hfT+AF3HppLw==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(376002)(346002)(136003)(366004)(396003)(16576012)(83380400001)(478600001)(36756003)(2616005)(52116002)(33964004)(2906002)(6916009)(6486002)(966005)(4326008)(8936002)(86362001)(31696002)(316002)(166002)(16526019)(186003)(53546011)(31686004)(26005)(66556008)(44832011)(66476007)(5660300002)(66946007)(6666004)(8676002)(956004)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	k9CCyNYuQZ3yCWpX+yvKAu6aL43YvSqWtKNGEIbjQoLe5ANZLRer7vf8UQ4UjfPVr3wMap9gc8gmfLCxGe5HJN0p6tOMKCCjdi3CeYOcRsB2uSUeRm1J0iHbmtqJ/XIlW6KqAVXluXYlrTER03emFX/ueY/WCLLYGTQgqfU5GYVtDs9CvD+O1hHlgUCfC1Ei86+NfKgr3C2yEYWTAdjbx1Zrl6ExWxGjIrvzrVts8gB20c5dyUFBNsNeIsMxvFIVNyCSW+XwWxDP6FsaltW9Y3bDObjfkNa9hDxZnNdriqX1b55qD+ps47ebnWMFcL9G8Tt43OY3ho+wMYOVCIzBMGOGJxpKBCx98riMojCdktW+nrHNmOPIrOTWIaAB6Jg3BKnTqai87LbOlaM7LIKN8KCWhWY8SS/G0StPuksjEblG8fCku2cj9RKPuKx6UGabRn7pzqCyrDcYQwV0xVUMxGVEK2fi0WGhyPqB1ofCu9zpXJreQEqk+5mRDUfxJ56bGqy6DtjRmFn7DajnVcYvZresGYac+5765BDjmlR/eCOUsr1IWDAyiqY+5JVBMRkUIPVm6SV8u22s4XpJRHEuOXgkyg/F2qO+Qj4xhBfq+2Ro9u1QHpucYA48XJE+XGFvYbnATiTRvm/YTl8CVrAC8A==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5ab129d4-6d51-4a80-28b6-08d8569b40ad
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2020 21:40:08.1812
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3992.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 64bb4fbb-caa6-4617-f7f4-08d8569ee6fb
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Sep 2020 22:06:15.1400
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /iv6MOeibcP1wmB05mtVYOyCXBzwM5hoAUT08mpJVKwZV5Yf/qABt4wnYnAH9kl7UUoybqaRDcLYYjD+jthCfwS+o0jm9Krj+EpeUP95Vqg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4324
-Content-Type: multipart/alternative;
- boundary="------------27119DCD825447D82B2912CA"
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: /sfXOUUptxOPQlf594iFUMS0dmAHjsdxjy77+l4x7/0NY8TLcVJAQaf7pJk71aIAf3bRAs4f7YaqmkdGiUz6hRSuUFUtdnUtJyuQH9fse/o=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3317
 Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
---------------27119DCD825447D82B2912CA
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+No comments on this?   I do not see it has been accepted.     Joe
 
+-----Original Message-----
+From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.o=
+penembedded.org> On Behalf Of Joe Slater
+Sent: Thursday, September 3, 2020 6:58 AM
+To: openembedded-devel@lists.openembedded.org
+Cc: Slater, Joseph <joe.slater@windriver.com>; MacLeod, Randy <Randy.MacLeo=
+d@windriver.com>
+Subject: [oe] [meta-oe][PATCH 1/1] luajit: advance SRCREV to fix two CVE's
 
-On 9/11/20 5:02 PM, Tim Orling wrote:
-> The reason for Django 2.2 is it is LTS. This version will now override 
-> unless the user sets PREFERRED_VERSION. The thrash on non-LTS Django 
-> is a PITA to support...
-Alright, let's hold off on merging this one then. I'll revisit it some 
-time in the future.
->
-> On Fri, Sep 11, 2020 at 7:26 AM Trevor Gamblin 
-> <trevor.gamblin@windriver.com <mailto:trevor.gamblin@windriver.com>> 
-> wrote:
->
->     meta-python only contains a recipe for django 2.2.x, so
->
->     add a recipe file for the newest branch.
->
->
->
->     Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com
->     <mailto:trevor.gamblin@windriver.com>>
->
->     ---
->
->      .../recipes-devtools/python/python3-django_3.1.1.bb
->     <http://python3-django_3.1.1.bb>     | 9 +++++++++
->
->      1 file changed, 9 insertions(+)
->
->      create mode 100644
->     meta-python/recipes-devtools/python/python3-django_3.1.1.bb
->     <http://python3-django_3.1.1.bb>
->
->
->
->     diff --git
->     a/meta-python/recipes-devtools/python/python3-django_3.1.1.bb
->     <http://python3-django_3.1.1.bb>
->     b/meta-python/recipes-devtools/python/python3-django_3.1.1.bb
->     <http://python3-django_3.1.1.bb>
->
->     new file mode 100644
->
->     index 000000000..b36cfb699
->
->     --- /dev/null
->
->     +++ b/meta-python/recipes-devtools/python/python3-django_3.1.1.bb
->     <http://python3-django_3.1.1.bb>
->
->     @@ -0,0 +1,9 @@
->
->     +require python-django.inc
->
->     +inherit setuptools3
->
->     +
->
->     +SRC_URI[md5sum] = "d5e894fb3c46064e84e9dc68a08a46d0"
->
->     +SRC_URI[sha256sum] =
->     "59c8125ca873ed3bdae9c12b146fbbd6ed8d0f743e4cf5f5817af50c51f1fc2f"
->
->     +
->
->     +RDEPENDS_${PN} += "\
->
->     +    ${PYTHON_PN}-sqlparse \
->
->     +"
->
->     -- 
->
->     2.26.2
->
->
->
->     
->
+Fix CVE-2020-15890 and CVE-2020-24372.
 
---------------27119DCD825447D82B2912CA
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Also change PV format because the reference to 2.1.0-beta3 was already far =
+behind the SRCREV.  Now, base PV on the branch name and date of SRCREV comm=
+it.
 
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 9/11/20 5:02 PM, Tim Orling wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:CANx9H-CDW+55z5cHQX0pvnmoCsN72hATBpDz8+H_ud2ukiopRw@mail.gmail.com">
-      
-      <div dir="auto">The reason for Django 2.2 is it is LTS. This
-        version will now override unless the user sets
-        PREFERRED_VERSION. The thrash on non-LTS Django is a PITA to
-        support...</div>
-    </blockquote>
-    Alright, let's hold off on merging this one then. I'll revisit it
-    some time in the future.<br>
-    <blockquote type="cite" cite="mid:CANx9H-CDW+55z5cHQX0pvnmoCsN72hATBpDz8+H_ud2ukiopRw@mail.gmail.com">
-      <div><br>
-        <div class="gmail_quote">
-          <div dir="ltr" class="gmail_attr">On Fri, Sep 11, 2020 at 7:26
-            AM Trevor Gamblin &lt;<a href="mailto:trevor.gamblin@windriver.com" moz-do-not-send="true">trevor.gamblin@windriver.com</a>&gt;
-            wrote:<br>
-          </div>
-          <blockquote class="gmail_quote" style="margin:0 0 0
-            .8ex;border-left:1px #ccc solid;padding-left:1ex">meta-python
-            only contains a recipe for django 2.2.x, so<br>
-            <br>
-            add a recipe file for the newest branch.<br>
-            <br>
-            <br>
-            <br>
-            Signed-off-by: Trevor Gamblin &lt;<a href="mailto:trevor.gamblin@windriver.com" target="_blank" moz-do-not-send="true">trevor.gamblin@windriver.com</a>&gt;<br>
-            <br>
-            ---<br>
-            <br>
-            &nbsp;.../recipes-devtools/python/<a href="http://python3-django_3.1.1.bb" rel="noreferrer" target="_blank" moz-do-not-send="true">python3-django_3.1.1.bb</a>&nbsp;
-            &nbsp; &nbsp; | 9 +++++++++<br>
-            <br>
-            &nbsp;1 file changed, 9 insertions(+)<br>
-            <br>
-            &nbsp;create mode 100644 meta-python/recipes-devtools/python/<a href="http://python3-django_3.1.1.bb" rel="noreferrer" target="_blank" moz-do-not-send="true">python3-django_3.1.1.bb</a><br>
-            <br>
-            <br>
-            <br>
-            diff --git a/meta-python/recipes-devtools/python/<a href="http://python3-django_3.1.1.bb" rel="noreferrer" target="_blank" moz-do-not-send="true">python3-django_3.1.1.bb</a>
-            b/meta-python/recipes-devtools/python/<a href="http://python3-django_3.1.1.bb" rel="noreferrer" target="_blank" moz-do-not-send="true">python3-django_3.1.1.bb</a><br>
-            <br>
-            new file mode 100644<br>
-            <br>
-            index 000000000..b36cfb699<br>
-            <br>
-            --- /dev/null<br>
-            <br>
-            +++ b/meta-python/recipes-devtools/python/<a href="http://python3-django_3.1.1.bb" rel="noreferrer" target="_blank" moz-do-not-send="true">python3-django_3.1.1.bb</a><br>
-            <br>
-            @@ -0,0 +1,9 @@<br>
-            <br>
-            +require python-django.inc<br>
-            <br>
-            +inherit setuptools3<br>
-            <br>
-            +<br>
-            <br>
-            +SRC_URI[md5sum] = &quot;d5e894fb3c46064e84e9dc68a08a46d0&quot;<br>
-            <br>
-            +SRC_URI[sha256sum] =
-            &quot;59c8125ca873ed3bdae9c12b146fbbd6ed8d0f743e4cf5f5817af50c51f1fc2f&quot;<br>
-            <br>
-            +<br>
-            <br>
-            +RDEPENDS_${PN} += &quot;\<br>
-            <br>
-            +&nbsp; &nbsp; ${PYTHON_PN}-sqlparse \<br>
-            <br>
-            +&quot;<br>
-            <br>
-            -- <br>
-            <br>
-            2.26.2<br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-          </blockquote>
-        </div>
-      </div>
-    </blockquote>
-  </body>
-</html>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
+---
+ meta-oe/recipes-devtools/luajit/luajit_git.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
---------------27119DCD825447D82B2912CA--
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/recipe=
+s-devtools/luajit/luajit_git.bb
+index cc9039416..820722195 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+@@ -3,13 +3,15 @@ LICENSE =3D "MIT"
+ LIC_FILES_CHKSUM =3D "file://COPYRIGHT;md5=3Dd739bb9250a55c124a545b588fd76=
+771"
+ HOMEPAGE =3D "http://luajit.org"
+=20
+-PV =3D "2.1.0~beta3"
+-SRCREV =3D "0ad60ccbc3768fa8e3e726858adf261950edbc22"
+ SRC_URI =3D "git://luajit.org/git/luajit-2.0.git;protocol=3Dhttp;branch=3D=
+v2.1 \
+            file://0001-Do-not-strip-automatically-this-leaves-the-strippin=
+g.patch \
+            file://clang.patch \
+            "
+=20
++# Set PV to the branch and date associated with SRCREV.
++PV =3D "v2.1-200809"
++SRCREV =3D "94d4abcca966df2cc423e821bcacd04898f73117"
++
+ S =3D "${WORKDIR}/git"
+=20
+ inherit pkgconfig binconfig siteinfo
+--
+2.17.1
+
