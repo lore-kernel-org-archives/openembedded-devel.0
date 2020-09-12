@@ -1,184 +1,223 @@
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.web12.11828.1599886171634020570
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.web12.14504.1599903302085213123
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Sep 2020 21:49:31 -0700
+ Sat, 12 Sep 2020 02:35:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=IHqfegzc;
- spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id y1so1579676pgk.8
-        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Sep 2020 21:49:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=M2lpZq5V;
+ spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f47.google.com with SMTP id z22so16646587ejl.7
+        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Sep 2020 02:35:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:organization:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language;
-        bh=n+SSG1VQtrVCm1kK05/YmhBbwOzWSiwP4nLPNyE+LwE=;
-        b=IHqfegzcoYD9hl2Q0G5voI9WRxZTzDweJxx0MtOyhrVBuA34OCO633B810BEXOEQn6
-         SGT1K3aarvuO22Jn0qpRyRQa/b2HoE05xknyS28mgBJWIuyTryLTVjjyVESceFoEC8hU
-         i0tMWOohCLlUt+JSaKwMzbFaZCSH5AEQQ1Cd1y5bYH3cwSN4QzJ3Gtg2jgXhh7m/CxYJ
-         TniMtDAvczU1TzvkVrCyPX1nUWxu+6C/O5EcfZs3TYNs4pCDVrVYkYHrxMEMZ223IILN
-         7lT1/CxTQlYSXNR6Zad/KB8lAhzyBt5MZCUomTQHj9YABrXNVs68PvzNHLnYBaV/VtPX
-         M/Qg==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=epuDZylyzAbZQKH4Mlm92BCZL7VRu11oLmKLvxeNPcI=;
+        b=M2lpZq5VNHmQgNyP5ovlf5UU1xKNrUZOK1I62WTyKNGwT08/7eV7lsU1ksyUWBOqBc
+         MnzrIC5vVQbdK1v2A+9cil767yuVkFTOTb5dLdXpm0czKQcLpc+AuZFbg57lmfxP6Ry1
+         kd4hLcpp4EBXxPI1Y4RPwxKddMAyemnluK1L2XqjGK0uA2E9LPId1rWYBqkuF/ncZ5jx
+         oBZQ8pfRmu/WXnIi7ftVqSmVkp3KOaY2uIH9e0nASNq2/2tO0oOqLsBRB7Nmop4jUrlS
+         oae3u4oyJdPrzIfnEXnmb9ciKM+f2PL5QgxftlcZrtxzkJ9UGLO9HyFkCFQCBJusTkf3
+         a+Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language;
-        bh=n+SSG1VQtrVCm1kK05/YmhBbwOzWSiwP4nLPNyE+LwE=;
-        b=tk30XBkZx7BrhX8V9jSrYq4GcZsXTL1nODpHE3FuvywzcvjG+tArvGtiemLaHgcNy9
-         CDQxIB3cx1sxiXIl6+5od3YFny2ZS9zfMoVnmgeXqvY8Z3r209C8N4o7GdYL9GiMxAlE
-         IjznaMx47nqGEMrQAF96Eyrw5qU6oagOp7BHeD8h+cjK9Z4HM2Ge1IeDxAaGD+mt+qOp
-         qw+ouw5MHd3w0IY6HSSDrWomXDpSjrTxxJWqjvR6jubUDYfwnz+mwU/1/tzGwbXv28ss
-         qJsnWVgW/4khjZT6x5wNx+2KP3czpp3bFsD+MXw9OZiep2ExFLxRY69wtUm1We7bbrVo
-         fq8w==
-X-Gm-Message-State: AOAM532qAyDqR5fQT6DF2vVqAreDJzp85rOwrgL1NCJfWQsY2kzjHP2X
-	MQCPFObIzPPfOq831MGi5EI=
-X-Google-Smtp-Source: ABdhPJxetvbh9lhKA2pIT1GxM1a1MtD0rWTmqwNycEhlg2hGnXMjKv3mqy9iRG8lQhbUPO60EAo6zA==
-X-Received: by 2002:a63:5966:: with SMTP id j38mr3911216pgm.187.1599886171007;
-        Fri, 11 Sep 2020 21:49:31 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:4e0::2dcb? ([2601:646:9200:4e0::2dcb])
-        by smtp.gmail.com with ESMTPSA id q193sm3837652pfq.127.2020.09.11.21.49.29
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 11 Sep 2020 21:49:30 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][PATCH 1/1] luajit: advance SRCREV to fix two CVE's
-To: Joe Slater <joe.slater@windriver.com>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-Cc: "MacLeod, Randy" <Randy.MacLeod@windriver.com>
-References: <16314ABFB8306B25.8972@lists.openembedded.org>
- <BY5PR11MB39926180521D6CA4F1A98A9D88240@BY5PR11MB3992.namprd11.prod.outlook.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-X-Pep-Version: 2.0
-Organization: HIMVIS LLC
-Message-ID: <ac6084ed-0e65-3cd3-6f6f-c0dcc02dc677@gmail.com>
-Date: Fri, 11 Sep 2020 21:49:28 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=epuDZylyzAbZQKH4Mlm92BCZL7VRu11oLmKLvxeNPcI=;
+        b=pqcrHPKa0L2blBUoeosIaRFLGP4st5i8s0mlr/9yceHxPcFNExVBd4w/9DSJ6L9a7U
+         l9UfU6Rn3ETwEp7exRmH1Fi6cYCol2NeJc1Gu/IuSvMp7/944E4YyyMJrj9cQo8qDloB
+         MGTtJ4ZHr0CfY/WiQkdx+16OfEF2aRoXwVluRE9jpH2A/KY20iq56Mc7c5L81uj7vidu
+         OW92SiR/gE/+ooHHCOY4015u02WPBWwyuSGvKBbDqG1UAZwztPiRiYFq1H4hAr8rJob+
+         wVzH4/X/f1dRQzBbzrUP+Nhq8PXplX25eCDRHjwwiIRt9QrfXSJ+3+D2a+0ru8yjiEcI
+         FWLg==
+X-Gm-Message-State: AOAM533ApijoJsk0LLL8DoP/bOv3zx7RSrcL12Pzw/WIB7IcQUG45eEe
+	3dCA7+l6AM7Ywmyw1PsQZDW0Kmf2x+harI1oNqo=
+X-Google-Smtp-Source: ABdhPJx3WtBS4cK4P/zQjuVn1r0Bh44E5K1tYQnCp4iuhpzLaRqJATPbkL6TKYl6kuvWyR8r2Qd4Eb+KNyUKeR3l5Ls=
+X-Received: by 2002:a17:907:444f:: with SMTP id on23mr5322165ejb.392.1599903299294;
+ Sat, 12 Sep 2020 02:34:59 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <BY5PR11MB39926180521D6CA4F1A98A9D88240@BY5PR11MB3992.namprd11.prod.outlook.com>
-X-Groupsio-MsgNum: 87018
-Content-Type: multipart/mixed;
- boundary="------------98B70DC85FA80CC9E4CBE8C7"
-Content-Language: en-US
+References: <20200903121411.3017527-1-yann@blade-group.com> <20200903121411.3017527-2-yann@blade-group.com>
+In-Reply-To: <20200903121411.3017527-2-yann@blade-group.com>
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+Date: Sat, 12 Sep 2020 11:34:48 +0200
+Message-ID: <CA+chaQdv+PCxy-qwBJp8A1tEoPkUXRqJX8+5OifA303-KWm-Ag@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][patch v2 1/1] New terminal emulator: st 0.8.4
+To: Yann Dirson <yann.dirson@blade-group.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Yann Dirson <yann@blade-group.com>
+Content-Type: multipart/alternative; boundary="000000000000d457f305af1a8357"
 
---------------98B70DC85FA80CC9E4CBE8C7
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+--000000000000d457f305af1a8357
+Content-Type: text/plain; charset="UTF-8"
 
+This is missing x11 in REQUIRED_DISTRO_FEATURES and the inherit, will send
+patch shortly.
 
+On Thu, Sep 3, 2020 at 2:15 PM Yann Dirson <yann.dirson@blade-group.com>
+wrote:
 
-On 9/11/20 3:06 PM, Joe Slater wrote:
-> No comments on this?   I do not see it has been accepted.     Joe
-
-Thanks for reminder, there was a comment I made
-
-https://lists.openembedded.org/g/openembedded-devel/topic/76607300#86861
-
-patchwork also noticed it.
-
-https://patchwork.openembedded.org/patch/176016/
-
->=20
-> -----Original Message-----
-> From: openembedded-devel@lists.openembedded.org <openembedded-devel@list=
-s.openembedded.org> On Behalf Of Joe Slater
-> Sent: Thursday, September 3, 2020 6:58 AM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Slater, Joseph <joe.slater@windriver.com>; MacLeod, Randy <Randy.Mac=
-Leod@windriver.com>
-> Subject: [oe] [meta-oe][PATCH 1/1] luajit: advance SRCREV to fix two CVE=
-'s
->=20
-> Fix CVE-2020-15890 and CVE-2020-24372.
->=20
-> Also change PV format because the reference to 2.1.0-beta3 was already f=
-ar behind the SRCREV.  Now, base PV on the branch name and date of SRCREV c=
-ommit.
->=20
-> Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> From: Yann Dirson <yann@blade-group.com>
+>
+> Can be used as a replacement for matchbox-terminal, with much less
+> dependencies (does not need gtk and vte), and supports "-e" flag.
+>
+> Signed-off-by: Yann Dirson <yann@blade-group.com>
 > ---
->  meta-oe/recipes-devtools/luajit/luajit_git.bb | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/rec=
-ipes-devtools/luajit/luajit_git.bb
-> index cc9039416..820722195 100644
-> --- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
-> +++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-> @@ -3,13 +3,15 @@ LICENSE =3D "MIT"
->  LIC_FILES_CHKSUM =3D "file://COPYRIGHT;md5=3Dd739bb9250a55c124a545b588f=
-d76771"
->  HOMEPAGE =3D "http://luajit.org"
->  
-> -PV =3D "2.1.0~beta3"
-> -SRCREV =3D "0ad60ccbc3768fa8e3e726858adf261950edbc22"
->  SRC_URI =3D "git://luajit.org/git/luajit-2.0.git;protocol=3Dhttp;branch=
-=
-=3Dv2.1 \
->             file://0001-Do-not-strip-automatically-this-leaves-the-strip=
-ping.patch \
->             file://clang.patch \
->             "
->  
-> +# Set PV to the branch and date associated with SRCREV.
-> +PV =3D "v2.1-200809"
-> +SRCREV =3D "94d4abcca966df2cc423e821bcacd04898f73117"
+>  .../packagegroups/packagegroup-meta-oe.bb     |  1 +
+>  meta-oe/recipes-graphics/suckless/st_0.8.4.bb | 25 +++++++++++++++++++
+>  2 files changed, 26 insertions(+)
+>  create mode 100644 meta-oe/recipes-graphics/suckless/st_0.8.4.bb
+>
+> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> index 55d623d95..d67b2fb69 100644
+> --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> @@ -455,6 +455,7 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
+>      openbox \
+>      packagegroup-fonts-truetype \
+>      qrencode \
+> +    st \
+>      takao-fonts \
+>      leptonica \
+>      libvncserver \
+> diff --git a/meta-oe/recipes-graphics/suckless/st_0.8.4.bb
+> b/meta-oe/recipes-graphics/suckless/st_0.8.4.bb
+> new file mode 100644
+> index 000000000..1f4961cb2
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/suckless/st_0.8.4.bb
+> @@ -0,0 +1,25 @@
+> +SECTION = "shadow"
+> +LICENSE = "MIT-X"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=04c3ca13a702147c62db90f556c5b3ca"
+> +SRC_URI = " \
+> + http://dl.suckless.org/${BPN}/${BPN}-${PV}.tar.gz \
+> +"
 > +
->  S =3D "${WORKDIR}/git"
->  
->  inherit pkgconfig binconfig siteinfo
+> +inherit pkgconfig
+> +
+> +SRC_URI[sha256sum] =
+> "d42d3ceceb4d6a65e32e90a5336e3d446db612c3fbd9ebc1780bc6c9a03346a6"
+> +
+> +DEPENDS += "libx11 libxft fontconfig ncurses-native"
+> +
+> +RDEPENDS_${PN} += "libx11-locale"
+> +
+> +do_compile() {
+> +    make INCS='-I. `pkg-config --cflags x11 fontconfig xft`' LIBS='-lm
+> -lutil `pkg-config --libs x11 fontconfig xft`'
+> +}
+> +do_install() {
+> +    make install DESTDIR=${D} PREFIX=/usr TERMINFO=${D}${datadir}/terminfo
+> +}
+> +
+> +FILES_${PN} += " \
+> +  ${datadir}/terminfo \
+> +"
 > --
-> 2.17.1
->=20
->=20
->=20
->=20
+> 2.28.0
+>
+> 
+>
 
---------------98B70DC85FA80CC9E4CBE8C7
-Content-Type: application/pgp-keys;
- name="pEpkey.asc"
+--000000000000d457f305af1a8357
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
- filename="pEpkey.asc"
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+<div dir=3D"ltr">This is missing x11 in REQUIRED_DISTRO_FEATURES and the in=
+herit, will send patch shortly.</div><br><div class=3D"gmail_quote"><div di=
+r=3D"ltr" class=3D"gmail_attr">On Thu, Sep 3, 2020 at 2:15 PM Yann Dirson &=
+lt;<a href=3D"mailto:yann.dirson@blade-group.com">yann.dirson@blade-group.c=
+om</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
+n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
+">From: Yann Dirson &lt;<a href=3D"mailto:yann@blade-group.com" target=3D"_=
+blank">yann@blade-group.com</a>&gt;<br>
+<br>
+Can be used as a replacement for matchbox-terminal, with much less<br>
+dependencies (does not need gtk and vte), and supports &quot;-e&quot; flag=
+.<br>
+<br>
+Signed-off-by: Yann Dirson &lt;<a href=3D"mailto:yann@blade-group.com" tar=
+get=3D"_blank">yann@blade-group.com</a>&gt;<br>
+---<br>
+=C2=A0.../packagegroups/<a href=3D"http://packagegroup-meta-oe.bb" rel=3D"=
+noreferrer" target=3D"_blank">packagegroup-meta-oe.bb</a>=C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 1 +<br>
+=C2=A0meta-oe/recipes-graphics/suckless/<a href=3D"http://st_0.8.4.bb" rel=
+=
+=3D"noreferrer" target=3D"_blank">st_0.8.4.bb</a> | 25 +++++++++++++++++++=
+<br>
+=C2=A02 files changed, 26 insertions(+)<br>
+=C2=A0create mode 100644 meta-oe/recipes-graphics/suckless/<a href=3D"http=
+://st_0.8.4.bb" rel=3D"noreferrer" target=3D"_blank">st_0.8.4.bb</a><br>
+<br>
+diff --git a/meta-oe/recipes-core/packagegroups/<a href=3D"http://packageg=
+roup-meta-oe.bb" rel=3D"noreferrer" target=3D"_blank">packagegroup-meta-oe.=
+bb</a> b/meta-oe/recipes-core/packagegroups/<a href=3D"http://packagegroup-=
+meta-oe.bb" rel=3D"noreferrer" target=3D"_blank">packagegroup-meta-oe.bb</a=
+><br>
+index 55d623d95..d67b2fb69 100644<br>
+--- a/meta-oe/recipes-core/packagegroups/<a href=3D"http://packagegroup-me=
+ta-oe.bb" rel=3D"noreferrer" target=3D"_blank">packagegroup-meta-oe.bb</a><=
+br>
++++ b/meta-oe/recipes-core/packagegroups/<a href=3D"http://packagegroup-me=
+ta-oe.bb" rel=3D"noreferrer" target=3D"_blank">packagegroup-meta-oe.bb</a><=
+br>
+@@ -455,6 +455,7 @@ RDEPENDS_packagegroup-meta-oe-graphics =3D&quot;\<br>
+=C2=A0 =C2=A0 =C2=A0openbox \<br>
+=C2=A0 =C2=A0 =C2=A0packagegroup-fonts-truetype \<br>
+=C2=A0 =C2=A0 =C2=A0qrencode \<br>
++=C2=A0 =C2=A0 st \<br>
+=C2=A0 =C2=A0 =C2=A0takao-fonts \<br>
+=C2=A0 =C2=A0 =C2=A0leptonica \<br>
+=C2=A0 =C2=A0 =C2=A0libvncserver \<br>
+diff --git a/meta-oe/recipes-graphics/suckless/<a href=3D"http://st_0.8.4.=
+bb" rel=3D"noreferrer" target=3D"_blank">st_0.8.4.bb</a> b/meta-oe/recipes-=
+graphics/suckless/<a href=3D"http://st_0.8.4.bb" rel=3D"noreferrer" target=
+=3D"_blank">st_0.8.4.bb</a><br>
+new file mode 100644<br>
+index 000000000..1f4961cb2<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-graphics/suckless/<a href=3D"http://st_0.8.4.bb" rel=
+=
+=3D"noreferrer" target=3D"_blank">st_0.8.4.bb</a><br>
+@@ -0,0 +1,25 @@<br>
++SECTION =3D &quot;shadow&quot;<br>
++LICENSE =3D &quot;MIT-X&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D04c3ca13a702147c62db90f55=
+6c5b3ca&quot;<br>
++SRC_URI =3D &quot; \<br>
++ <a href=3D"http://dl.suckless.org/$%7BBPN%7D/$%7BBPN%7D-$%7BPV%7D.tar.gz=
+" rel=3D"noreferrer" target=3D"_blank">http://dl.suckless.org/${BPN}/${BPN}=
+-${PV}.tar.gz</a> \<br>
++&quot;<br>
++<br>
++inherit pkgconfig<br>
++<br>
++SRC_URI[sha256sum] =3D &quot;d42d3ceceb4d6a65e32e90a5336e3d446db612c3fbd9=
+ebc1780bc6c9a03346a6&quot;<br>
++<br>
++DEPENDS +=3D &quot;libx11 libxft fontconfig ncurses-native&quot;<br>
++<br>
++RDEPENDS_${PN} +=3D &quot;libx11-locale&quot;<br>
++<br>
++do_compile() {<br>
++=C2=A0 =C2=A0 make INCS=3D&#39;-I. `pkg-config --cflags x11 fontconfig xf=
+t`&#39; LIBS=3D&#39;-lm -lutil `pkg-config --libs x11 fontconfig xft`&#39;<=
+br>
++}<br>
++do_install() {<br>
++=C2=A0 =C2=A0 make install DESTDIR=3D${D} PREFIX=3D/usr TERMINFO=3D${D}${=
+datadir}/terminfo<br>
++}<br>
++<br>
++FILES_${PN} +=3D &quot; \<br>
++=C2=A0 ${datadir}/terminfo \<br>
++&quot;<br>
+-- <br>
+2.28.0<br>
+<br>
+<br>
+</blockquote></div>
 
-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
-=3Dsj8j
------END PGP PUBLIC KEY BLOCK-----
-
---------------98B70DC85FA80CC9E4CBE8C7--
+--000000000000d457f305af1a8357--
