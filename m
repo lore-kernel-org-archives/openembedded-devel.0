@@ -1,87 +1,134 @@
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com [209.85.208.66])
- by mx.groups.io with SMTP id smtpd.web12.14815.1599905061659416869
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web11.15759.1599908126633267591
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 12 Sep 2020 03:04:22 -0700
+ Sat, 12 Sep 2020 03:55:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ytnzr9fd;
- spf=pass (domain: gmail.com, ip: 209.85.208.66, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f66.google.com with SMTP id j2so2044129eds.9
-        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Sep 2020 03:04:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=iVqiwHp1;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id r7so16761907ejs.11
+        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Sep 2020 03:55:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=s2a5RYazcNmYMOSmJxqDOg+9RA8qqE0cjdrGr3N/i+U=;
-        b=Ytnzr9fd0b8u0OSQxAzXNpnVXwmWaPDrdF1XQnvWZU2mE2isggfb8arTdLZ7/YDzIj
-         A7Y5xgzkEt832zp5H0tWb4RWMaIpcdmgFVRUQzTDrJeXTQGykwBQ8VNFCnuAomlLzT3v
-         fkIQ77Jwc2/PzlBOPajeBBZTKn7pwDtjHL2UoocaXRxEF9qTY7tCHKQQenRssCuAPI5V
-         FooBV3kbgJ4iEhbjghep/3oCsiahi4QjYRDsboi8esYguZV5SugbY3jv8vUm30qcw3dp
-         qIMrK+JZ5jgjnm3i37h0kdkid651Bhi1igGkVZ/cRBRtGbSsDFIzIy0Iis0Gvg0YdgRm
-         tsOQ==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=qeC+RwXwxwVDmc+fR7PhtWiOVjeZ+lOt9FtB8JP4mGU=;
+        b=iVqiwHp1KbgRnKJAYohmIHq2eDqfJ23Jm0HJMfpNL4YPrVSNp2f2uak1XiDwnF/Ttx
+         QmseHQGCzX4dflvwJ2c70tSX2LskEuiAxgt6M/wVtQDqjRmHvTOBNjbN16/2NzmqfoVf
+         fu5XXRbVwk5jutUnXID5jq7vdWvm92ehCBZ52vkBqoE2Sejjxbu/ojnORJpxBX2zxmlT
+         if05zKR9NgkNR5psIhO7q7D2uOtO7SiUn9R+mA+toRF35BjdRKp4KEK2wN7/8EOt2nj2
+         rfgLbbPqa4aDGh5vjjc3b9CB1t4v55uAmi9WsVo4Zz04/tkMlFRaLeZdvmzkJuMta7TV
+         80+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=s2a5RYazcNmYMOSmJxqDOg+9RA8qqE0cjdrGr3N/i+U=;
-        b=sSz8BCWS5ejlAE0QU7NVfkRsDL8IQKm5rZrPf8qIhlGRCI8rpdNvC1v/86bzv8rRmd
-         gfceQZ2MJIC0z3JIu2MYdnTyaU9PZhkmX8Pr1uu/636VzK4wwMBP3EAKgV7tajP7MZly
-         3XL79gBZ7AW5T+TpMQf81oyN3sSSpV2m6Q7nbJXlutamXl/hphy9XPPJtVgZTdhku4m9
-         DX2imSPwXrehy+aOiyuw9FR0ur04N+qt8lwnTN5uX6Aj4ErtvQRFv1SX21JIZf9FHO5M
-         b3mtCkF5MkAhxTICdsOlg2+gQ09P0F0E2kn9bZldIzb3on3rVUvZVdttwybaMFPrx/Kt
-         hGPQ==
-X-Gm-Message-State: AOAM531+UlIsJkmNbWdBGOM7Kg7ag5AAZo6Nih+aXhQZ8iMa11Vz4EDO
-	r19yUnSfJYyHRxNnjn6Eaig6Vg3wDtI=
-X-Google-Smtp-Source: ABdhPJzSEKTSG9P/u3305NRosT8wqE+VKt/zbiaVDZRipM3Tg6XVCHM4mQ4YtOy0ioz68XEOqpeEGQ==
-X-Received: by 2002:aa7:dcd9:: with SMTP id w25mr7082510edu.280.1599905059954;
-        Sat, 12 Sep 2020 03:04:19 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id 35sm4257059edg.71.2020.09.12.03.04.19
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=qeC+RwXwxwVDmc+fR7PhtWiOVjeZ+lOt9FtB8JP4mGU=;
+        b=V+ZjrXmw6LsxccV8HkXSqvamlaSf95wT9FnFH74w1LkAgcv8CTnbCxlczhjauWwSdD
+         u6r086tKuh44NaCYJjtylMRxxWAHq7KMmmz6eifCXRbIahg08op8IusPrxVtpFVEaUH/
+         yvdZSNik7JO6lQsgXiLTEH0vb/ZlmUlzwibeUBappeKPEExI5cVjaowyFLxiw9+kK+Cj
+         QREW0MR4YrIn7E1lNvGwweloez4CuKJFRRmanyZ4d1Eo39dk/OtG7KtuSH/XhSKrg9Qt
+         dGjs8WqO4BoAtdTja5qF6aBUksjMze0aN4OnKAKf6ob+A6ZgvoYm9bp22GwLN1wb3MAx
+         i9xQ==
+X-Gm-Message-State: AOAM532x6vpmAuDyy1H5YEFUzGnLzgi/cjZCrcXwwUX7Vbi7WNCB5WiF
+	w9teTmQYRyrb+uWfjBRHXvOmag+s/5Y=
+X-Google-Smtp-Source: ABdhPJy54fciZkcVXZsiJvIlZ2nLFrEpSYecWv5m8lWyMxhL1DfFWxPXPbjLBVm5qFPufX6Ow2AS0w==
+X-Received: by 2002:a17:906:9712:: with SMTP id k18mr5545954ejx.76.1599908124450;
+        Sat, 12 Sep 2020 03:55:24 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from superandy.speedport.ip (p200300f07f09d547e003a5d689f02ebc.dip0.t-ipconnect.de. [2003:f0:7f09:d547:e003:a5d6:89f0:2ebc])
+        by smtp.gmail.com with ESMTPSA id n4sm2984650ejj.19.2020.09.12.03.55.23
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 12 Sep 2020 03:04:19 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+        Sat, 12 Sep 2020 03:55:23 -0700 (PDT)
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/2] st: fix indentation
-Date: Sat, 12 Sep 2020 11:44:27 +0200
-Message-Id: <20200912094427.3904-2-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200912094427.3904-1-Martin.Jansa@gmail.com>
-References: <20200912094427.3904-1-Martin.Jansa@gmail.com>
+Subject: [PATCH 1/3] Initial add source-code-pro-fonts 2.030_1.050
+Date: Sat, 12 Sep 2020 12:55:13 +0200
+Message-Id: <20200912105515.72222-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* using combination of 4, 2 and 1 space for indentation in the same file
-  sucks almost the same as tabs and spaces in the same file!
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-oe/recipes-graphics/suckless/st_0.8.4.bb | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ meta-oe/conf/layer.conf                       |  1 +
+ .../44-source-code-pro-fonts-fontconfig.conf  | 17 +++++++++++
+ .../source-code-pro-fonts_2.030_1.050.bb      | 29 +++++++++++++++++++
+ 3 files changed, 47 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts/44-source-code-pro-fonts-fontconfig.conf
+ create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts_2.030_1.050.bb
 
-diff --git a/meta-oe/recipes-graphics/suckless/st_0.8.4.bb b/meta-oe/recipes-graphics/suckless/st_0.8.4.bb
-index 7d859e1478..906179501b 100644
---- a/meta-oe/recipes-graphics/suckless/st_0.8.4.bb
-+++ b/meta-oe/recipes-graphics/suckless/st_0.8.4.bb
-@@ -1,9 +1,7 @@
- SECTION = "shadow"
- LICENSE = "MIT-X"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=04c3ca13a702147c62db90f556c5b3ca"
--SRC_URI = " \
-- http://dl.suckless.org/${BPN}/${BPN}-${PV}.tar.gz \
--"
-+SRC_URI = "http://dl.suckless.org/${BPN}/${BP}.tar.gz"
- 
- inherit pkgconfig features_check
- 
-@@ -23,5 +21,5 @@ do_install() {
- }
- 
- FILES_${PN} += " \
--  ${datadir}/terminfo \
-+    ${datadir}/terminfo \
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index 5178678da2..5b79b59b71 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -92,6 +92,7 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+   source-han-sans-jp-fonts->fontconfig \
+   source-han-sans-kr-fonts->fontconfig \
+   source-han-sans-tw-fonts->fontconfig \
++  source-code-pro-fonts->fontconfig \
  "
+ 
+ DEFAULT_TEST_SUITES_pn-meta-oe-ptest-image = " ${PTESTTESTSUITE}"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts/44-source-code-pro-fonts-fontconfig.conf b/meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts/44-source-code-pro-fonts-fontconfig.conf
+new file mode 100644
+index 0000000000..badb1b0115
+--- /dev/null
++++ b/meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts/44-source-code-pro-fonts-fontconfig.conf
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
++<fontconfig>
++  <alias>
++    <family>monospace</family>
++    <prefer>
++      <family>Source Code Pro</family>
++    </prefer>
++  </alias>
++  <alias>
++    <family>Source Code Pro</family>
++    <default>
++      <family>monospace</family>
++    </default>
++  </alias>
++</fontconfig>
++
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts_2.030_1.050.bb b/meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts_2.030_1.050.bb
+new file mode 100644
+index 0000000000..5d10195f73
+--- /dev/null
++++ b/meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts_2.030_1.050.bb
+@@ -0,0 +1,29 @@
++require ttf.inc
++
++SUMMARY = "Adobe Source Code Pro"
++HOMEPAGE = "https://github.com/adobe-fonts/source-code-pro"
++LICENSE = "OFL-1.1"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c7c16bdc2c96af797293d68503e5c65c"
++
++inherit allarch fontcache
++
++SRC_URI = " \
++    https://github.com/adobe-fonts/source-code-pro/releases/download/2.030R-ro/1.050R-it/source-code-pro-2.030R-ro-1.050R-it.zip \
++    file://44-source-code-pro-fonts-fontconfig.conf \
++"
++SRC_URI[sha256sum] = "da2ac159497d31b0c6d9daa8fc390fb8252e75b4a9805ace6a2c9cccaed4932e"
++S = "${WORKDIR}/source-code-pro-2.030R-ro-1.050R-it"
++
++do_install() {
++    install -d ${D}${sysconfdir}/fonts/conf.d/
++    install -m 0644 ${WORKDIR}/44-source-code-pro-fonts-fontconfig.conf ${D}${sysconfdir}/fonts/conf.d/
++
++    install -d ${D}${datadir}/fonts/truetype/
++    find ./ -name '*.otf' -exec install -m 0644 {} ${D}${datadir}/fonts/truetype/ \;
++}
++
++FILES_${PN} = " \
++    ${sysconfdir}/fonts \
++    ${datadir}/fonts \
++"
++
 -- 
-2.25.1
+2.26.2
 
