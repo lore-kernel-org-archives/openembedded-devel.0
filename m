@@ -1,83 +1,87 @@
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.web12.14814.1599905060906501455
+Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com [209.85.208.66])
+ by mx.groups.io with SMTP id smtpd.web12.14815.1599905061659416869
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 12 Sep 2020 03:04:21 -0700
+ Sat, 12 Sep 2020 03:04:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=UjItW7nR;
- spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f47.google.com with SMTP id lo4so16684122ejb.8
-        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Sep 2020 03:04:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ytnzr9fd;
+ spf=pass (domain: gmail.com, ip: 209.85.208.66, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f66.google.com with SMTP id j2so2044129eds.9
+        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Sep 2020 03:04:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=z819fDgmb4AFevid1bu14xPbG8pdP7sVsiiFHPMamKE=;
-        b=UjItW7nRxE0Ua/IZSaSeOzG8IaTpnKOp+q7QDfjC2p6P5Sbjf+7EeNDQKgkrOwwwj4
-         VttC0Q20dv/0HBM8tx9I0olQn0QQbZoesvv0jLg0VKNrMOXrZF6KIUfbLAF/CWHVQ74I
-         sHPVFbrA+n7KsjkBx9oKdu4Q2M/JV2IEcAXPEeZOYpYgF1JvYaOpUB+d0COY/+gzL2td
-         hYp0zSwmz0ansPg24vWIg6sRnsf2wCHmsH2mLlEJQj1B2MhySaPVlqmsd+/FPINpyFtv
-         UxEUe76w7uEzJY2AKGP4PPqoU2IPEuA5mH/AUKv5wAQWLpr/CatSeXo+F2M+0/k/KW7K
-         AqZg==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=s2a5RYazcNmYMOSmJxqDOg+9RA8qqE0cjdrGr3N/i+U=;
+        b=Ytnzr9fd0b8u0OSQxAzXNpnVXwmWaPDrdF1XQnvWZU2mE2isggfb8arTdLZ7/YDzIj
+         A7Y5xgzkEt832zp5H0tWb4RWMaIpcdmgFVRUQzTDrJeXTQGykwBQ8VNFCnuAomlLzT3v
+         fkIQ77Jwc2/PzlBOPajeBBZTKn7pwDtjHL2UoocaXRxEF9qTY7tCHKQQenRssCuAPI5V
+         FooBV3kbgJ4iEhbjghep/3oCsiahi4QjYRDsboi8esYguZV5SugbY3jv8vUm30qcw3dp
+         qIMrK+JZ5jgjnm3i37h0kdkid651Bhi1igGkVZ/cRBRtGbSsDFIzIy0Iis0Gvg0YdgRm
+         tsOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=z819fDgmb4AFevid1bu14xPbG8pdP7sVsiiFHPMamKE=;
-        b=i3EH/YWsQ9r0RHdt6WfIMM2jB1tv5Tiknhs9q3A/ar8ToR0GU08E3THeDKMmoVFjYt
-         KJEdCBC+kianylKkvF+agbf9Pq7j7zlYFB0ZYU6PCAgXymydlLnPvRMijE233LCGH5Pp
-         AgjL67kxwavS0ZTO8WJHFy8ZtCGRCQuVSoVy57P7bPQJ+q4nKQlyA0mdXmH9YBgLeGYr
-         GRa5VdMZgvLZAftv70aZ4FmR1SSdUC+0mS4OVt8Iwbt7jauB3mxc0qM/+R4vTvGLkOz5
-         7lEUlzx5QAXbM48avkaXVR1aOK6E2DYugPqIUoYpxWa/zY9gIDcHS5QZI/TOMqC0BNzH
-         cjBw==
-X-Gm-Message-State: AOAM533BwATvd3fn48261b+4voAECiTGUxhxrCX8emlF5M+BJyKyUwVs
-	t+0DGc8mSs9QQetfpy6uwtg4SoOcN5Y=
-X-Google-Smtp-Source: ABdhPJyVKUcxUjzOTjYMkk4GpyDDpGYEkF+tcj8nlyroWDjsdttNNEEP2ekoWzEEukIWGtG+xE780g==
-X-Received: by 2002:a17:906:5812:: with SMTP id m18mr5748197ejq.204.1599905059014;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=s2a5RYazcNmYMOSmJxqDOg+9RA8qqE0cjdrGr3N/i+U=;
+        b=sSz8BCWS5ejlAE0QU7NVfkRsDL8IQKm5rZrPf8qIhlGRCI8rpdNvC1v/86bzv8rRmd
+         gfceQZ2MJIC0z3JIu2MYdnTyaU9PZhkmX8Pr1uu/636VzK4wwMBP3EAKgV7tajP7MZly
+         3XL79gBZ7AW5T+TpMQf81oyN3sSSpV2m6Q7nbJXlutamXl/hphy9XPPJtVgZTdhku4m9
+         DX2imSPwXrehy+aOiyuw9FR0ur04N+qt8lwnTN5uX6Aj4ErtvQRFv1SX21JIZf9FHO5M
+         b3mtCkF5MkAhxTICdsOlg2+gQ09P0F0E2kn9bZldIzb3on3rVUvZVdttwybaMFPrx/Kt
+         hGPQ==
+X-Gm-Message-State: AOAM531+UlIsJkmNbWdBGOM7Kg7ag5AAZo6Nih+aXhQZ8iMa11Vz4EDO
+	r19yUnSfJYyHRxNnjn6Eaig6Vg3wDtI=
+X-Google-Smtp-Source: ABdhPJzSEKTSG9P/u3305NRosT8wqE+VKt/zbiaVDZRipM3Tg6XVCHM4mQ4YtOy0ioz68XEOqpeEGQ==
+X-Received: by 2002:aa7:dcd9:: with SMTP id w25mr7082510edu.280.1599905059954;
         Sat, 12 Sep 2020 03:04:19 -0700 (PDT)
 Return-Path: <martin.jansa@gmail.com>
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id n4sm2927060ejj.19.2020.09.12.03.04.18
+        by smtp.gmail.com with ESMTPSA id 35sm4257059edg.71.2020.09.12.03.04.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 12 Sep 2020 03:04:18 -0700 (PDT)
+        Sat, 12 Sep 2020 03:04:19 -0700 (PDT)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 1/2] st: add x11 to REQUIRED_DISTRO_FEATURES to suck less
-Date: Sat, 12 Sep 2020 11:44:26 +0200
-Message-Id: <20200912094427.3904-1-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 2/2] st: fix indentation
+Date: Sat, 12 Sep 2020 11:44:27 +0200
+Message-Id: <20200912094427.3904-2-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200912094427.3904-1-Martin.Jansa@gmail.com>
+References: <20200912094427.3904-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-* errors like:
-  ERROR: Nothing PROVIDES 'libx11' (but meta-openembedded/meta-oe/recipes-graphics/suckless/st_0.8.4.bb DEPENDS on or otherwise requires it)
-  ERROR: Nothing PROVIDES 'libxft' (but meta-openembedded/meta-oe/recipes-graphics/suckless/st_0.8.4.bb DEPENDS on or otherwise requires it)
-  ERROR: Nothing RPROVIDES 'st' (but meta-openembedded/meta-oe/recipes-graphics/suckless/st_0.8.4.bb RDEPENDS on or otherwise requires it)
-  ERROR: Nothing RPROVIDES 'libx11-locale' (but meta-openembedded/meta-oe/recipes-graphics/suckless/st_0.8.4.bb RDEPENDS on or otherwise requires it)
-  ERROR: Nothing RPROVIDES 'st-dev' (but meta-openembedded/meta-oe/recipes-graphics/suckless/st_0.8.4.bb RDEPENDS on or otherwise requires it)
-  in bitbake world suck
+* using combination of 4, 2 and 1 space for indentation in the same file
+  sucks almost the same as tabs and spaces in the same file!
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-graphics/suckless/st_0.8.4.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-oe/recipes-graphics/suckless/st_0.8.4.bb | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
 diff --git a/meta-oe/recipes-graphics/suckless/st_0.8.4.bb b/meta-oe/recipes-graphics/suckless/st_0.8.4.bb
-index 1f4961cb20..7d859e1478 100644
+index 7d859e1478..906179501b 100644
 --- a/meta-oe/recipes-graphics/suckless/st_0.8.4.bb
 +++ b/meta-oe/recipes-graphics/suckless/st_0.8.4.bb
-@@ -5,7 +5,9 @@ SRC_URI = " \
-  http://dl.suckless.org/${BPN}/${BPN}-${PV}.tar.gz \
+@@ -1,9 +1,7 @@
+ SECTION = "shadow"
+ LICENSE = "MIT-X"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=04c3ca13a702147c62db90f556c5b3ca"
+-SRC_URI = " \
+- http://dl.suckless.org/${BPN}/${BPN}-${PV}.tar.gz \
+-"
++SRC_URI = "http://dl.suckless.org/${BPN}/${BP}.tar.gz"
+ 
+ inherit pkgconfig features_check
+ 
+@@ -23,5 +21,5 @@ do_install() {
+ }
+ 
+ FILES_${PN} += " \
+-  ${datadir}/terminfo \
++    ${datadir}/terminfo \
  "
- 
--inherit pkgconfig
-+inherit pkgconfig features_check
-+
-+REQUIRED_DISTRO_FEATURES = "x11"
- 
- SRC_URI[sha256sum] = "d42d3ceceb4d6a65e32e90a5336e3d446db612c3fbd9ebc1780bc6c9a03346a6"
- 
 -- 
 2.25.1
 
