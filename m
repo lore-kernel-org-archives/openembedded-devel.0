@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.56479.1600074270272305927
+ by mx.groups.io with SMTP id smtpd.web10.56480.1600074270272641168
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 14 Sep 2020 02:04:30 -0700
 Authentication-Results: mx.groups.io;
@@ -8,14 +8,16 @@ Received: from [78.130.197.211] (port=52584 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kHkPS-0007z1-ID; Mon, 14 Sep 2020 12:04:27 +0300
+	id 1kHkPU-0007z1-17; Mon, 14 Sep 2020 12:04:28 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 01/10] python3-hyperframe: Upgrade 5.2.0 -> 6.0.0
-Date: Mon, 14 Sep 2020 12:04:10 +0300
-Message-Id: <20200914090419.19171-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 02/10] python3-traitlets: Upgrade 5.0.3 -> 5.0.4
+Date: Mon, 14 Sep 2020 12:04:11 +0300
+Message-Id: <20200914090419.19171-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200914090419.19171-1-leon.anavi@konsulko.com>
+References: <20200914090419.19171-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,70 +30,39 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 6.0.0:
+Upgrade to release 5.0.4:
 
-API Changes (Backward-incompatible):
-- Introduce HyperframeError base exception class for all errors
-  raised within hyperframe.
-- Change exception base class of UnknownFrameError to
-  HyperframeError
-- Change exception base class of InvalidPaddingError to
-  HyperframeError
-- Change exception base class of InvalidFrameError to
-  HyperframeError
-- Invalid frames with wrong stream id (zero vs. non-zero) now
-  raise InvalidDataError.
-- Invalid SETTINGS frames (non-empty but ACK) now raise
-  InvalidDataError.
-- Invalid ALTSVC frames with non-bytestring field or origin now
-  raise InvalidDataError.
-
-API Changes (Backward-compatible)
-- Deprecate total_padding - use pad_length instead.
-- Improve repr() output for all frame classes.
-- Introduce Frame.explain(data) for quick introspection of raw
-  data.
-
-Bugfixes
-- Fixed padding parsing for PushPromiseFrame.
-- Fixed unchecked frame length for PriorityFrame. It now correctly
-  raises InvalidFrameError.
-- Fixed promised stream id validation for PushPromiseFrame. It now
-  raises InvalidDataError.
-- Fixed unchecked frame length for WindowUpdateFrame. It now
-  correctly raises InvalidFrameError.
-- Fixed window increment value range validation. It now raises
-  InvalidDataError.
-- Fixed parsing of SettingsFrame with mutual exclusion of ACK flag
-  and payload.
-
-Other Changes
-- Removed support for Python 2.7, 3.4, 3.5, pypy.
-- Added support for Python 3.8.
+- Support deprecated use of byte-literals for bytes on the
+  command-line: ipython kernel --Session.key="b'abc'". The b
+  prefix is no longer needed in traitlets 5.0, but is supported
+  for backward-compatibility
+- Improve output of configuration errors, especially when help
+  output would make it hard to find the helpful error message
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ython3-hyperframe_5.2.0.bb => python3-hyperframe_6.0.0.bb} | 4 ++--
+ ...{python3-traitlets_5.0.3.bb => python3-traitlets_5.0.4.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-connectivity/python-hyperframe/{python3-hyperframe_5.2.0.bb => python3-hyperframe_6.0.0.bb} (61%)
+ rename meta-python/recipes-devtools/python/{python3-traitlets_5.0.3.bb => python3-traitlets_5.0.4.bb} (72%)
 
-diff --git a/meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_5.2.0.bb b/meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_6.0.0.bb
-similarity index 61%
-rename from meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_5.2.0.bb
-rename to meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_6.0.0.bb
-index e5ef1ff38..4a936b49a 100644
---- a/meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_5.2.0.bb
-+++ b/meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_6.0.0.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT"
+diff --git a/meta-python/recipes-devtools/python/python3-traitlets_5.0.3.bb b/meta-python/recipes-devtools/python/python3-traitlets_5.0.4.bb
+similarity index 72%
+rename from meta-python/recipes-devtools/python/python3-traitlets_5.0.3.bb
+rename to meta-python/recipes-devtools/python/python3-traitlets_5.0.4.bb
+index 02908dea9..194193f63 100644
+--- a/meta-python/recipes-devtools/python/python3-traitlets_5.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-traitlets_5.0.4.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING.md;md5=eec4de4d599518742e54e75954e33b46"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5bf1c68e73fbaec2b1687b7e71514393"
+ PYPI_PACKAGE = "traitlets"
  
--SRC_URI[md5sum] = "6919183242feb26d8bce3b4cba81defd"
--SRC_URI[sha256sum] = "a9f5c17f2cc3c719b917c4f33ed1c61bd1f8dfac4b1bd23b7c80b3400971b41f"
-+SRC_URI[md5sum] = "30136a712e092b1a45ae3cad3ae93131"
-+SRC_URI[sha256sum] = "742d2a4bc3152a340a49d59f32e33ec420aa8e7054c1444ef5c7efff255842f1"
+-SRC_URI[md5sum] = "66b76cfffd590c39861bc11c247725a5"
+-SRC_URI[sha256sum] = "a2e91709a0330b6c5d497ed470b2feb1ed8da5c9dd807c6daab41f727b9391c9"
++SRC_URI[md5sum] = "592dde72b6b706d09ea624cce9af3cf5"
++SRC_URI[sha256sum] = "86c9351f94f95de9db8a04ad8e892da299a088a64fd283f9f6f18770ae5eae1b"
  
- inherit pypi setuptools3
+ RDEPENDS_${PN} = "\
+     ${PYTHON_PN}-ipython-genutils \
 -- 
 2.17.1
 
