@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.60141.1600089349157600939
+ by mx.groups.io with SMTP id smtpd.web10.60117.1600089349684683487
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Sep 2020 06:15:49 -0700
+ Mon, 14 Sep 2020 06:15:50 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=52716 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kHoKf-0000ED-GC; Mon, 14 Sep 2020 16:15:46 +0300
+	id 1kHoKi-0000ED-3z; Mon, 14 Sep 2020 16:15:48 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 01/10] python3-diskcache: Upgrade 5.0.2 -> 5.0.3
-Date: Mon, 14 Sep 2020 16:15:27 +0300
-Message-Id: <20200914131536.6072-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 02/10] python3-haversine: Upgrade 2.2.0 -> 2.3.0
+Date: Mon, 14 Sep 2020 16:15:28 +0300
+Message-Id: <20200914131536.6072-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200914131536.6072-1-leon.anavi@konsulko.com>
+References: <20200914131536.6072-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,33 +30,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 5.0.3:
+Upgrade to release 2.3.0:
 
-- Add python_requires kwarg to setup
+- Added the comb parameter for haversine_vector
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-diskcache_5.0.2.bb => python3-diskcache_5.0.3.bb} | 4 ++--
+ ...{python3-haversine_2.2.0.bb => python3-haversine_2.3.0.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-diskcache_5.0.2.bb => python3-diskcache_5.0.3.bb} (67%)
+ rename meta-python/recipes-devtools/python/{python3-haversine_2.2.0.bb => python3-haversine_2.3.0.bb} (65%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-diskcache_5.0.2.bb b/meta-python/recipes-devtools/python/python3-diskcache_5.0.3.bb
-similarity index 67%
-rename from meta-python/recipes-devtools/python/python3-diskcache_5.0.2.bb
-rename to meta-python/recipes-devtools/python/python3-diskcache_5.0.3.bb
-index 7eda65fa0..7e89fa68a 100644
---- a/meta-python/recipes-devtools/python/python3-diskcache_5.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-diskcache_5.0.3.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.grantjenks.com/docs/diskcache/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c985b6a9269e57a1073d5f142d68eb68"
+diff --git a/meta-python/recipes-devtools/python/python3-haversine_2.2.0.bb b/meta-python/recipes-devtools/python/python3-haversine_2.3.0.bb
+similarity index 65%
+rename from meta-python/recipes-devtools/python/python3-haversine_2.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-haversine_2.3.0.bb
+index fc2cc7d6f..6e02fcf71 100644
+--- a/meta-python/recipes-devtools/python/python3-haversine_2.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-haversine_2.3.0.bb
+@@ -2,8 +2,8 @@ SUMMARY = "Calculate the distance between 2 points on Earth"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
  
--SRC_URI[md5sum] = "b8061d293045b29b83201cf9a62b1da2"
--SRC_URI[sha256sum] = "6e350e795e197f979316a3f524a729edb13d1739959c6e9cb5df78a0a72c8255"
-+SRC_URI[md5sum] = "86fb97b0ff87cc5f1b31654ee0d341a1"
-+SRC_URI[sha256sum] = "5f4bc2018d653a1d7bbdcdecce45ea12061bf8d3b5f0323b7a5402054a285c52"
+-SRC_URI[md5sum] = "6b1badeb63aac6214c978d07a4ecd171"
+-SRC_URI[sha256sum] = "b710aaf32c442a6d04aa89678be55e3f6c11f9752fc01c216e89b13120b36269"
++SRC_URI[md5sum] = "ff2d43a74195ec00c42ccd5da2a3f3de"
++SRC_URI[sha256sum] = "72c76855ac25e6ad054c7ed380e95c1a96803185f005dd11f40ccaa9620b551f"
  
- PYPI_PACKAGE = "diskcache"
+ inherit pypi setuptools3
  
 -- 
 2.17.1
