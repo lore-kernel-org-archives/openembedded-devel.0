@@ -1,499 +1,167 @@
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web11.64446.1600098567593884784
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.78])
+ by mx.groups.io with SMTP id smtpd.web12.64131.1600099757038358922
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Sep 2020 08:49:28 -0700
+ Mon, 14 Sep 2020 09:09:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=O2Sj4FMG;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: vincent.prince.fr@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id k15so151501wrn.10
-        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2020 08:49:27 -0700 (PDT)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=jpnkHBQh;
+ spf=pass (domain: windriver.com, ip: 40.107.237.78, mailfrom: joe.slater@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=b2NeCjOmQNydeC0hw5iGByN5Kg7IE6BS9t/AtrlX2ifb7UhCGa+x9ErWbHRY3wHykFUVNo2MtNU8nmSIjlgTcbnN7ca+tffBm95V2n5m7zB3hjLLvFwAK9TOtaYfeI8y+GPw4Fgr1K+20LOomlXXd2J/ncpedqSxJlLVAGJBScubXH1tNPzJullJN+cCUv2nfAE2oGtkkfDc21qVARrbv0ylIlxHW2aXsUcA1WG0Qtl2wbZhsNOpPTDkIf1u+4mNB5KIxrxOCIZe0LPXKSh3Jt6+1/xN4QBvfhN/XhA0we/xEq9HtSgyo3Vw2DAKpOIfXKsegi8fyvXZbJ8uyOR5iw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Aabp3nAueygVgYFzETsxuBW+8Z4ZyovrABJkfXPvAHo=;
+ b=lT1ZCf4fuDUHa7d9XN4wXfb8kAVVh7sVm5/QfkQuU5or35dsTqxzb4gjXJez7IQh2QyMiweKZkH2Qb28KIlOTGax3sfK/nekPxUtCTRbWAg9TkEGejyMJZcBBKCf6+AJp/TEGPst0u8bVs4QdNMBRuzchAJaAQXg66I6Tq3fOC3Z5vgTbC+UHF5WwqSvwaK5sCxUZ8+7J4YLQJR1GqBkMX2keE8lqz5rGaF/pdgxE8u4HuJjkJyv55aGIMquRr2CoqVZxc+y1LHLp23zxZrzUfG432uDelggTWVU0hl7WPui4eXZBEO5MOsht0kbM3/BMezEvefg6Y61PwYkDGF6Ug==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ARClf1uU5eJr5MDDA046h3g+bh0S+h0FrNlsT+Lhzyw=;
-        b=O2Sj4FMGHjUS8bRg2CVQDb+KpVrF4xf79DSzVYaKM0u2xc8TW6iseJIJTmRKVZPPs/
-         tMkXuwOULdNLQt4ZiWFuCR6OzaJmUvieBMPabnZQBy9WafGMhlqkpB2slJN3I+vxCeYp
-         r5OYamEV2QXj/hZ9ucjsjeBg7IL/6FLep2Xon/LQTZPWvQDUKd1xw5KXj8WC/rCDOICt
-         6p7XaNgUKw67CQb/tbwctOeT1NZE8pop62u7vN8/UxJPUxTpmZqnkZxiQjK7WGCL4Str
-         alAzeSHmaNIghMD+l/jK6s7XGfyqoDWQiupVYKV1lOHF9Bz599EqeY12wOZNMTRqbpVX
-         svpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ARClf1uU5eJr5MDDA046h3g+bh0S+h0FrNlsT+Lhzyw=;
-        b=V3SuoBZWFJO5/b+vC6o/fVbJJBVasTJ1Oqt/XqXfQvFWRv9ThySw9w530QlNcc/34V
-         0zuiqgdPWL8/igfS6V+uKtDpFog/6omyeq46n1K+EsHUMpjIuQbFhXCsCZ13VtsMIoBu
-         aiUQ8Sv450cEV5xi9iYOyHx4VOvkakZ3RRBpoN3zDL9O57ZXqBBdtC5CWtqHXCP8iDHb
-         DzKtV1JdEehfB4Jej7YqsPqrtLOEDFClGyXAS0s97rHaC6ujx/YA0RwUWByTuajnNOqU
-         hUy+sjKohD8Z28UcUGYZ/f27vJl4JSxXcI7iNLcBhfarHmg2uzoNlyPd3ye85uvUfGr8
-         Sj2A==
-X-Gm-Message-State: AOAM532lyAbyi+fVdurGonwys81oeGrZUFlL7FxgWx3TVJ/wS8/zknCg
-	7K8AzRKTBVfPeoPxPbe4CYbnhcqmy7YRLQ==
-X-Google-Smtp-Source: ABdhPJwdUS2w/5uqfD5hEgQEEPFSPDIEP6y7aevd4fNpG2cjmVC0v2bnR8fuXjeN163yJnbEvgZaig==
-X-Received: by 2002:a5d:5404:: with SMTP id g4mr15948211wrv.134.1600098565665;
-        Mon, 14 Sep 2020 08:49:25 -0700 (PDT)
-Return-Path: <vincent.prince.fr@gmail.com>
-Received: from vpr-vm.corporate.saft.org (i19-lef01-ix2-176-180-94-235.dsl.dyn.abo.bbox.fr. [176.180.94.235])
-        by smtp.gmail.com with ESMTPSA id 11sm20071325wmi.14.2020.09.14.08.49.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 14 Sep 2020 08:49:24 -0700 (PDT)
-From: "nefethael" <vincent.prince.fr@gmail.com>
-X-Google-Original-From: Vincent Prince <vincent.prince.external@saftbatteries.com>
-To: openembedded-devel@lists.openembedded.org,
-	raj.khem@gmail.com
-Cc: Vincent Prince <vincent.prince.fr@gmail.com>,
-	Vincent Prince <vincent.prince.fr@gmail.com.com>
-Subject: [oe] [meta-oe] [PATCH v2] mongodb: bump to r4.4.1 version
-Date: Mon, 14 Sep 2020 17:49:02 +0200
-Message-Id: <20200914154902.19553-1-vincent.prince.external@saftbatteries.com>
-X-Mailer: git-send-email 2.24.0
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Aabp3nAueygVgYFzETsxuBW+8Z4ZyovrABJkfXPvAHo=;
+ b=jpnkHBQh/UP++eliLpW0P5xtfi2BLgTn1EQvBnP69lSDfqfYQlIK8CqJNtHLFmIBZGhYr/vdhZ7jSDke+jNEagvJ25vfLkwEyxFQjAxJHtQppUj78NGppVD0n3v9v2s7y7FhQaAJlXKjwgKYYK5S4RpuzYQ+J48E8/wFkLiZn7k=
+Received: from BY5PR11MB3992.namprd11.prod.outlook.com (2603:10b6:a03:188::10)
+ by BYAPR11MB3319.namprd11.prod.outlook.com (2603:10b6:a03:77::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3348.15; Mon, 14 Sep
+ 2020 16:09:14 +0000
+Received: from BY5PR11MB3992.namprd11.prod.outlook.com
+ ([fe80::80ee:21bc:b0aa:d35c]) by BY5PR11MB3992.namprd11.prod.outlook.com
+ ([fe80::80ee:21bc:b0aa:d35c%7]) with mapi id 15.20.3370.019; Mon, 14 Sep 2020
+ 16:09:14 +0000
+From: "Joe Slater" <joe.slater@windriver.com>
+To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+CC: "MacLeod, Randy" <Randy.MacLeod@windriver.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/1] luajit: advance SRCREV to fix two CVE's
+Thread-Topic: [oe] [meta-oe][PATCH 1/1] luajit: advance SRCREV to fix two
+ CVE's
+Thread-Index: AQHWgfpkseX86deQpUy75Yi94EEpPqlkC00AgABw7wCAA+FuwA==
+Date: Mon, 14 Sep 2020 16:09:14 +0000
+Message-ID: 
+ <BY5PR11MB39923B0DDC75D87A03F27CB088230@BY5PR11MB3992.namprd11.prod.outlook.com>
+References: <16314ABFB8306B25.8972@lists.openembedded.org>
+ <BY5PR11MB39926180521D6CA4F1A98A9D88240@BY5PR11MB3992.namprd11.prod.outlook.com>
+ <ac6084ed-0e65-3cd3-6f6f-c0dcc02dc677@gmail.com>
+In-Reply-To: <ac6084ed-0e65-3cd3-6f6f-c0dcc02dc677@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: gmail.com; dkim=none (message not signed)
+ header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
+x-originating-ip: [24.4.218.114]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: e1b6392c-5658-4a34-c95a-08d858c88675
+x-ms-traffictypediagnostic: BYAPR11MB3319:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: 
+ <BYAPR11MB331985F4FB8515C4498BFAED88230@BYAPR11MB3319.namprd11.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:8882;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ Tr+iVPTtVjUTOa+DkhzE8QWhmEtDotaq7vOORanjWp+2AjHRZcaONLNX0lViDgY1FsqKibbYG5KU3ABsohN8b1L6Cb4jLSPE2AFlFavHfErY5DA/Uc7MDEy3yvuPHyHW8Zhr9lC1IVmrxcnjKxvcK1mr0HF3zjMgRQCp0D8WFg+/4oxNpiDrkzuw/MxhSHGE3UYgqfwwsXY8sjWeBG+xcqZR+XYLbcJGszFzMkkudaX8z58XKNqQKNoyz1ebW/eGutoAWEAHUDRsoEu3dErIF0nxbFQKt+XDYjPIvy77EcT5byYzqlqYrTmaEJoSTbvbfoUoI1hb0Ui/3fajE8k86IYSZ6AsFZ0hq7mo+QpFedJAnNEttT+e1pKSX7wWBk5La83kIs5G7oPPUGpGInGuhg==
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3992.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(39850400004)(366004)(396003)(136003)(346002)(66446008)(64756008)(86362001)(66556008)(55016002)(66476007)(8676002)(966005)(66946007)(83380400001)(316002)(2906002)(110136005)(5660300002)(4326008)(53546011)(186003)(33656002)(26005)(71200400001)(9686003)(7696005)(107886003)(478600001)(76116006)(8936002)(52536014)(6506007);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata: 
+ uQ8bY8HTQqydbIxte1nd2ouo43FbuWyGxvTCXLLNhA1/UUF3/nzj8kjzJmOrf4QE/RcDHpLkEHyNEOxjvRu/L7R8L6v/GYg6+7jcjtXHg2kOMki+7xqUHdEfxq0pQCrarNDi639b9TuTmAwX5I1oIYWIHhC5DwvCN9HuJaSe5u4hpIol7cAyP1UKU+4bGV2M2P/92F7qyigz8obKMmU0cLy/HK9vETZx85S3gCeGvV25w/Zgea9ISjngoGG289AlyXDsHHEaIl27pgXL5BKx3cqD50aNQUF+h9I6//8pgf8GoyfXFz41qvzr6Rtx8Qxm6q6vutNTMSRz2qMARHGuCG3J/DOONqQyBztmo7lLeUAUY+E/pA7bCHbPHj01FHRjnR/a6sQCDVQgP67mmnnLU6Eg3lrRNp4bxSB/4pvECeZhfoh34lo2y4RHPEr6B2aq/tBvnu58gSNqPO2SMjZlfBetssM8ahuhraZUM1GhaBp/CpGkmZPiJYI5LEfrMmQI6R00HwJa7BT+BsUZzCbaMHONa76pmconFTvzkmr2PsOzW5EmaOG1S4wF1O7NvAWXGo8Sw4If3ZwNdZay1H8GQfZDsPDdxXZ8HnMkVXou3uMa5SPvdwgpslyByk5g/cvZbVBI2XVlnjKwded5lcWYEg==
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3992.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e1b6392c-5658-4a34-c95a-08d858c88675
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Sep 2020 16:09:14.3206
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: cZ1GMee0aYtjOYGEV8cuZI4v7/KezYTSVcec3xz7OvxrCNfvIb55TSaCgYIRwjAwNWSBsBfERKFczIj5tmpJtGjcrrmg3LwZkOfUxlqNybQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3319
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Vincent Prince <vincent.prince.fr@gmail.com>
+Yeah, I should have checked that out, but why below 2.1.0?  If we change th=
+e format, we will never have a 2.1.0,
+But maybe a format of 2.1.0~? or 2.1.0-? would be better.
 
-Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com.com>
----
-Changes in v2:
- - remove shell option from packageconfig
- - reformat tabs
- - replace bbwarn by bbnote when binary is not compiled
+Joe
 
- ...e-build-settings-from-environment-va.patch | 25 ++++----
- ...-control-use-of-gnu_get_libc_version.patch |  8 +--
- ...001-Use-long-long-instead-of-int64_t.patch | 15 ++---
- ...ion-for-the-macro-__ELF_NATIVE_CLASS.patch | 13 ++--
- .../mongodb/0003-Fix-unknown-prefix-env.patch |  2 +-
- .../recipes-dbs/mongodb/mongodb/1296.patch    | 12 ++--
- .../mongodb/mongodb/arm64-support.patch       | 14 ++---
- .../recipes-dbs/mongodb/mongodb_git.bb        | 61 +++++++++++++++----
- 8 files changed, 97 insertions(+), 53 deletions(-)
+-----Original Message-----
+From: Khem Raj <raj.khem@gmail.com>=20
+Sent: Friday, September 11, 2020 9:49 PM
+To: Slater, Joseph <joe.slater@windriver.com>; openembedded-devel@lists.op=
+enembedded.org
+Cc: MacLeod, Randy <Randy.MacLeod@windriver.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/1] luajit: advance SRCREV to fix two C=
+VE's
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Tell-scons-to-use-build-settings-from-environment-va.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Tell-scons-to-use-build-settings-from-environment-va.patch
-index 190884624..b8a325295 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Tell-scons-to-use-build-settings-from-environment-va.patch
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Tell-scons-to-use-build-settings-from-environment-va.patch
-@@ -1,4 +1,4 @@
--From 1b2e24e14ee72e54e466be2512c78272f62d60b4 Mon Sep 17 00:00:00 2001
-+From 8295bb6a60896fed54d6450bca091aea4eea4fb2 Mon Sep 17 00:00:00 2001
- From: Vincent Prince <vincent.prince.fr@gmail.com>
- Date: Mon, 16 Sep 2019 13:21:44 +0200
- Subject: [PATCH 01/10] Tell scons to use build settings from environment
-@@ -7,14 +7,14 @@ Subject: [PATCH 01/10] Tell scons to use build settings from environment
- Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
- Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
- ---
-- SConstruct                | 8 ++++++--
-- 1 files changed, 8 insertions(+), 2 deletions(-)
-+ SConstruct | 8 ++++++--
-+ 1 file changed, 6 insertions(+), 2 deletions(-)
- 
- diff --git a/SConstruct b/SConstruct
--index 7ebbcbc..e63cf15 100644
-+index 89c044ab78..2044c0ddb8 100644
- --- a/SConstruct
- +++ b/SConstruct
--@@ -608,6 +608,7 @@ def variable_arch_converter(val):
-+@@ -593,6 +593,7 @@ def variable_arch_converter(val):
-          'amd64':  'x86_64',
-          'emt64':   'x86_64',
-          'x86':    'i386',
-@@ -22,7 +22,7 @@ index 7ebbcbc..e63cf15 100644
-      }
-      val = val.lower()
-  
--@@ -695,7 +696,8 @@ env_vars.Add(
-+@@ -723,7 +724,8 @@ env_vars.Add(
-  )
-  
-  env_vars.Add('CC',
-@@ -32,7 +32,7 @@ index 7ebbcbc..e63cf15 100644
-  
-  env_vars.Add('CCFLAGS',
-      help='Sets flags for the C and C++ compiler',
--@@ -715,7 +717,8 @@ env_vars.Add('CPPPATH',
-+@@ -743,7 +745,8 @@ env_vars.Add('CPPPATH',
-      converter=variable_shlex_converter)
-  
-  env_vars.Add('CXX',
-@@ -42,15 +42,14 @@ index 7ebbcbc..e63cf15 100644
-  
-  env_vars.Add('CXXFLAGS',
-      help='Sets flags for the C++ compiler',
--@@ -1018,6 +1021,7 @@ envDict = dict(BUILD_ROOT=buildDir,
--                )
-+@@ -1127,6 +1130,7 @@ if get_option('build-tools') == 'next' or get_option('ninja') == 'next':
-+     SCons.Tool.DefaultToolpath.insert(0, os.path.abspath('site_scons/site_tools/next'))
-  
-  env = Environment(variables=env_vars, **envDict)
- +env.PrependENVPath('PATH', os.getenv('PATH'))
-- del envDict
-- 
-- for var in ['CC', 'CXX']:
-  
-+ # Only print the spinner if stdout is a tty
-+ if sys.stdout.isatty():
- -- 
--2.7.4
-+2.24.0
- 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Use-__GLIBC__-to-control-use-of-gnu_get_libc_version.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Use-__GLIBC__-to-control-use-of-gnu_get_libc_version.patch
-index d98fa56cb..8d82be1b5 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Use-__GLIBC__-to-control-use-of-gnu_get_libc_version.patch
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Use-__GLIBC__-to-control-use-of-gnu_get_libc_version.patch
-@@ -1,4 +1,4 @@
--From d701ceeb15662038435b80ba556a80c17f76d2dc Mon Sep 17 00:00:00 2001
-+From 6332823f9fdcb571305b716330e67d0b38810868 Mon Sep 17 00:00:00 2001
- From: Vincent Prince <vincent.prince.fr@gmail.com>
- Date: Mon, 16 Sep 2019 13:30:13 +0200
- Subject: [PATCH 03/10] Use __GLIBC__ to control use of gnu_get_libc_version
-@@ -10,7 +10,7 @@ Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
-  1 file changed, 4 insertions(+), 4 deletions(-)
- 
- diff --git a/src/mongo/util/processinfo_linux.cpp b/src/mongo/util/processinfo_linux.cpp
--index cccb91c..45c4b7d 100644
-+index a968c54727..0d8b8874e2 100644
- --- a/src/mongo/util/processinfo_linux.cpp
- +++ b/src/mongo/util/processinfo_linux.cpp
- @@ -44,10 +44,10 @@
-@@ -27,7 +27,7 @@ index cccb91c..45c4b7d 100644
-  #endif
-  
-  #include <boost/filesystem.hpp>
--@@ -546,7 +546,7 @@ void ProcessInfo::SystemInfo::collectSystemInfo() {
-+@@ -617,7 +617,7 @@ void ProcessInfo::SystemInfo::collectSystemInfo() {
-      std::stringstream ss;
-      ss << "uClibc-" << __UCLIBC_MAJOR__ << "." << __UCLIBC_MINOR__ << "." << __UCLIBC_SUBLEVEL__;
-      bExtra.append("libcVersion", ss.str());
-@@ -37,5 +37,5 @@ index cccb91c..45c4b7d 100644
-  #endif
-      if (!verSig.empty())
- -- 
--2.7.4
-+2.24.0
- 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Use-long-long-instead-of-int64_t.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Use-long-long-instead-of-int64_t.patch
-index b9c670407..958e09c3d 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Use-long-long-instead-of-int64_t.patch
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Use-long-long-instead-of-int64_t.patch
-@@ -1,4 +1,4 @@
--From 20fcbf2a05ee6542aba942f6006d149db70fb9ce Mon Sep 17 00:00:00 2001
-+From 4e7f15346682482bc2071c7209dec97507d3bc4c Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 2 Sep 2017 10:03:37 -0700
- Subject: [PATCH 02/10] Use long long instead of int64_t
-@@ -8,12 +8,13 @@ error: call to member function 'appendNumber' is ambiguous
- since this function expects long long as parameter and not int64_t
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
- ---
-  src/mongo/util/procparser.cpp | 10 +++++-----
-  1 file changed, 5 insertions(+), 5 deletions(-)
- 
- diff --git a/src/mongo/util/procparser.cpp b/src/mongo/util/procparser.cpp
--index c574a3f..5ea66b7 100644
-+index 24b9d1e2c9..0f274cfff6 100644
- --- a/src/mongo/util/procparser.cpp
- +++ b/src/mongo/util/procparser.cpp
- @@ -261,7 +261,7 @@ Status parseProcStat(const std::vector<StringData>& keys,
-@@ -23,7 +24,7 @@ index c574a3f..5ea66b7 100644
- -                    uint64_t value;
- +                    long long  value;
-  
--                     if (!parseNumberFromString(stringValue, &value).isOK()) {
-+                     if (!NumberParser{}(stringValue, &value).isOK()) {
-                          value = 0;
- @@ -273,7 +273,7 @@ Status parseProcStat(const std::vector<StringData>& keys,
-              } else {
-@@ -32,7 +33,7 @@ index c574a3f..5ea66b7 100644
- -                uint64_t value;
- +                long long value;
-  
--                 if (!parseNumberFromString(stringValue, &value).isOK()) {
-+                 if (!NumberParser{}(stringValue, &value).isOK()) {
-                      value = 0;
- @@ -366,7 +366,7 @@ Status parseProcMemInfo(const std::vector<StringData>& keys,
-  
-@@ -41,7 +42,7 @@ index c574a3f..5ea66b7 100644
- -            uint64_t value;
- +            long long value;
-  
--             if (!parseNumberFromString(stringValue, &value).isOK()) {
-+             if (!NumberParser{}(stringValue, &value).isOK()) {
-                  value = 0;
- @@ -522,7 +522,7 @@ Status parseProcDiskStats(const std::vector<StringData>& disks,
-                            StringData data,
-@@ -59,8 +60,8 @@ index c574a3f..5ea66b7 100644
- -                uint64_t value;
- +                long long value;
-  
--                 if (!parseNumberFromString(stringValue, &value).isOK()) {
-+                 if (!NumberParser{}(stringValue, &value).isOK()) {
-                      value = 0;
- -- 
--2.7.4
-+2.24.0
- 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0002-Add-a-definition-for-the-macro-__ELF_NATIVE_CLASS.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0002-Add-a-definition-for-the-macro-__ELF_NATIVE_CLASS.patch
-index 869d2849d..57f4168f5 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0002-Add-a-definition-for-the-macro-__ELF_NATIVE_CLASS.patch
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0002-Add-a-definition-for-the-macro-__ELF_NATIVE_CLASS.patch
-@@ -1,4 +1,4 @@
--From 73c6374ceb0c062e91210cc9ef3e0e9fa30ee514 Mon Sep 17 00:00:00 2001
-+From 28f34191eef1e70c24d2f81b66e4dd40dbefcd35 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 2 Sep 2017 12:42:30 -0700
- Subject: [PATCH 04/10] Add a definition for the macro __ELF_NATIVE_CLASS
-@@ -6,17 +6,18 @@ Subject: [PATCH 04/10] Add a definition for the macro __ELF_NATIVE_CLASS
- It depends on the native arch's word size.
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
- ---
-  src/mongo/util/stacktrace_posix.cpp | 9 +++++++++
-  1 file changed, 9 insertions(+)
- 
- diff --git a/src/mongo/util/stacktrace_posix.cpp b/src/mongo/util/stacktrace_posix.cpp
--index 1d7b3d7..f81e329 100644
-+index 531e21bdc2..fa611499e4 100644
- --- a/src/mongo/util/stacktrace_posix.cpp
- +++ b/src/mongo/util/stacktrace_posix.cpp
--@@ -39,6 +39,15 @@
-+@@ -42,6 +42,15 @@
-+ #include <iostream>
-  #include <string>
-- #include <sys/utsname.h>
-  
- +#if !defined(__GLIBC__)
- +#if defined __x86_64__ && !defined __ILP32__
-@@ -28,8 +29,8 @@ index 1d7b3d7..f81e329 100644
- +#endif
- +
-  #include "mongo/base/init.h"
-+ #include "mongo/bson/json.h"
-  #include "mongo/config.h"
-- #include "mongo/db/jsobj.h"
- -- 
--2.7.4
-+2.24.0
- 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0003-Fix-unknown-prefix-env.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0003-Fix-unknown-prefix-env.patch
-index 3a27aacfe..910ef0b5f 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0003-Fix-unknown-prefix-env.patch
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0003-Fix-unknown-prefix-env.patch
-@@ -2,7 +2,7 @@ Index: git/SConstruct
- ===================================================================
- --- git.orig/SConstruct
- +++ git/SConstruct
--@@ -884,6 +884,14 @@ env_vars.Add('WINDOWS_OPENSSL_BIN',
-+@@ -977,6 +977,14 @@ env_vars.Add('WINDOWS_OPENSSL_BIN',
-      help='Sets the path to the openssl binaries for packaging',
-      default='c:/openssl/bin')
-  
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/1296.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/1296.patch
-index ae84bcb56..e4ae30776 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/1296.patch
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/1296.patch
-@@ -15,15 +15,16 @@ src/mongo/util/net/ssl_manager.cpp:575:79: error: invalid conversion from 'size_
-   if (mongoUnsignedAddOverflow64(tagAndLengthByteCount, derLength, outLength) ||
- 
- Signed-off-by: Fabrice Fontaine <fontaine.fabrice@gmail.com>
-+Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
- ---
-  src/mongo/util/net/ssl_manager.cpp | 6 +++---
-  1 file changed, 3 insertions(+), 3 deletions(-)
- 
- diff --git a/src/mongo/util/net/ssl_manager.cpp b/src/mongo/util/net/ssl_manager.cpp
--index b93ebe84a4a3..3511eb5d998f 100644
-+index 455a1662a5..e8497bc0d1 100644
- --- a/src/mongo/util/net/ssl_manager.cpp
- +++ b/src/mongo/util/net/ssl_manager.cpp
--@@ -782,7 +782,7 @@ class DERToken {
-+@@ -810,7 +810,7 @@ public:
-       *
-       * Returns a DERToken which consists of the (tag, length, value) tuple.
-       */
-@@ -32,7 +33,7 @@ index b93ebe84a4a3..3511eb5d998f 100644
-  
-  private:
-      DERType _type{DERType::EndOfContent};
--@@ -799,7 +799,7 @@ struct DataType::Handler<DERToken> {
-+@@ -827,7 +827,7 @@ struct DataType::Handler<DERToken> {
-                         size_t length,
-                         size_t* advanced,
-                         std::ptrdiff_t debug_offset) {
-@@ -41,7 +42,7 @@ index b93ebe84a4a3..3511eb5d998f 100644
-  
-          auto swPair = DERToken::parse(ConstDataRange(ptr, length), &outLength);
-  
--@@ -844,7 +844,7 @@ StatusWith<std::string> readDERString(ConstDataRangeCursor& cdc) {
-+@@ -889,7 +889,7 @@ StatusWith<DERInteger> readDERInt(ConstDataRangeCursor& cdc) {
-  }
-  
-  
-@@ -50,3 +51,6 @@ index b93ebe84a4a3..3511eb5d998f 100644
-      const size_t kTagLength = 1;
-      const size_t kTagLengthAndInitialLengthByteLength = kTagLength + 1;
-  
-+-- 
-+2.24.0
-+
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/arm64-support.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/arm64-support.patch
-index 15bd7da70..1a7bf0fc5 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/arm64-support.patch
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/arm64-support.patch
-@@ -1,4 +1,4 @@
--From c9fc9e9a44b0fb764ce86a5e57f17d3c5bbfd8cd Mon Sep 17 00:00:00 2001
-+From 298d958148f1fb2bb7725fed15c68c09677c14c9 Mon Sep 17 00:00:00 2001
- From: Vincent Prince <vincent.prince.fr@gmail.com>
- Date: Mon, 16 Sep 2019 13:37:10 +0200
- Subject: [PATCH 05/10] Add alises for arm64 which is same as aarch64
-@@ -12,10 +12,10 @@ Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
-  3 files changed, 3 insertions(+), 2 deletions(-)
- 
- diff --git a/SConstruct b/SConstruct
--index e63cf15..5593c78 100644
-+index 448939bdd0..abfd816f3e 100644
- --- a/SConstruct
- +++ b/SConstruct
--@@ -1129,6 +1129,7 @@ elif endian == "big":
-+@@ -1228,6 +1228,7 @@ if endian == "auto":
-  processor_macros = {
-      'arm'        : { 'endian': 'little', 'defines': ('__arm__',) },
-      'aarch64'    : { 'endian': 'little', 'defines': ('__arm64__', '__aarch64__')},
-@@ -24,10 +24,10 @@ index e63cf15..5593c78 100644
-      'ppc64le'    : { 'endian': 'little', 'defines': ('__powerpc64__',)},
-      's390x'      : { 'endian': 'big',    'defines': ('__s390x__',)},
- diff --git a/src/third_party/IntelRDFPMathLib20U1/SConscript b/src/third_party/IntelRDFPMathLib20U1/SConscript
--index f23c071..fb82cd6 100644
-+index 58e1b7ba65..bffe83b462 100644
- --- a/src/third_party/IntelRDFPMathLib20U1/SConscript
- +++ b/src/third_party/IntelRDFPMathLib20U1/SConscript
--@@ -308,7 +308,7 @@ if processor == 'i386' or processor == 'emscripten':
-+@@ -309,7 +309,7 @@ if processor == 'i386' or processor == 'emscripten':
-  elif processor == 'arm':
-      cpp_defines['IA32'] = '1'
-      cpp_defines['ia32'] = '1'
-@@ -37,7 +37,7 @@ index f23c071..fb82cd6 100644
-      cpp_defines['EFI2'] = '1'
-  # Using 64 bit little endian
- diff --git a/src/third_party/wiredtiger/SConscript b/src/third_party/wiredtiger/SConscript
--index cdd090b..97a1b3b 100644
-+index d6bd665e23..2f1e656a19 100644
- --- a/src/third_party/wiredtiger/SConscript
- +++ b/src/third_party/wiredtiger/SConscript
- @@ -152,7 +152,7 @@ condition_map = {
-@@ -50,5 +50,5 @@ index cdd090b..97a1b3b 100644
-      'X86_HOST'     : env['TARGET_ARCH'] == 'x86_64',
-      'ZSERIES_HOST' : env['TARGET_ARCH'] == 's390x',
- -- 
--2.7.4
-+2.24.0
- 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-index 58841ef31..b8691df9e 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-@@ -9,12 +9,12 @@ DEPENDS = "openssl libpcap zlib boost curl python3 \
-            python3-psutil-native python3-regex-native \
-            "
- 
--inherit scons dos2unix siteinfo python3native
-+inherit scons dos2unix siteinfo python3native systemd useradd
- 
--PV = "4.2.2"
--#v4.2.2
--SRCREV = "a0bbbff6ada159e19298d37946ac8dc4b497eadf"
--SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.2 \
-+PV = "4.4.1"
-+#v4.4.1
-+SRCREV = "ad91a93a5a31e175f5cbf8c69561e788bbc55ce1"
-+SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4 \
-            file://0001-Tell-scons-to-use-build-settings-from-environment-va.patch \
-            file://0001-Use-long-long-instead-of-int64_t.patch \
-            file://0001-Use-__GLIBC__-to-control-use-of-gnu_get_libc_version.patch \
-@@ -35,6 +35,7 @@ SRC_URI_append_toolchain-clang = "\
-            file://0001-asio-Dont-use-experimental-with-clang.patch \
-            "
- 
-+
- S = "${WORKDIR}/git"
- 
- COMPATIBLE_HOST ?= '(x86_64|i.86|powerpc64|arm|aarch64).*-linux'
-@@ -51,26 +52,64 @@ PACKAGECONFIG[tcmalloc] = "--use-system-tcmalloc,--allocator=system,gperftools,"
- PACKAGECONFIG[shell] = ",--js-engine=none,,"
- PACKAGECONFIG[system-pcre] = "--use-system-pcre,,libpcre,"
- 
--EXTRA_OESCONS = "--prefix=${D}${prefix} \
-+EXTRA_OESCONS = "PREFIX=${prefix} \
-+                 DESTDIR=${D} \
-                  LIBPATH=${STAGING_LIBDIR} \
-                  LINKFLAGS='${LDFLAGS}' \
-                  CXXFLAGS='${CXXFLAGS}' \
-                  TARGET_ARCH=${TARGET_ARCH} \
-+                 MONGO_VERSION=${PV} \
-                  --ssl \
-                  --disable-warnings-as-errors \
-                  --use-system-zlib \
-                  --nostrip \
-                  --endian=${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
-                  --wiredtiger=${@['off','on'][d.getVar('SITEINFO_BITS') != '32']} \
--                 ${PACKAGECONFIG_CONFARGS} \
--                 core"
-+                 --separate-debug \
-+                 ${PACKAGECONFIG_CONFARGS}"
-+
-+
-+USERADD_PACKAGES = "${PN}"
-+USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/${BPN} --shell /bin/false --user-group ${BPN}"
-+
- 
- scons_do_compile() {
--        ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} ${EXTRA_OESCONS} || \
-+        ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} ${EXTRA_OESCONS} install-core || \
-         die "scons build execution failed."
- }
- 
- scons_do_install() {
--        ${STAGING_BINDIR_NATIVE}/scons install ${EXTRA_OESCONS}|| \
--        die "scons install execution failed."
-+        # install binaries
-+        install -d ${D}${bindir}
-+        for i in mongod mongos mongo
-+        do
-+            if [ -f ${B}/build/opt/mongo/${i} ]
-+            then
-+                install -m 0755 ${B}/build/opt/mongo/${i} ${D}${bindir}/${i}
-+            else
-+                bbnote "${i} does not exist"
-+            fi
-+        done
-+
-+        # install config
-+        install -d ${D}${sysconfdir}
-+        install -m 0644 ${S}/debian/mongod.conf ${D}${sysconfdir}/
-+
-+        # install systemd service
-+        install -d ${D}${systemd_system_unitdir}
-+        install -m 0644 ${S}/debian/mongod.service ${D}${systemd_system_unitdir}
-+
-+        # install mongo data folder
-+        install -m 755 -d ${D}${localstatedir}/lib/${BPN}
-+        chown ${PN}:${PN} ${D}${localstatedir}/lib/${BPN}
-+
-+        # Log files
-+        install -m 755 -d ${D}${localstatedir}/log/${BPN}
-+        chown ${PN}:${PN} ${D}${localstatedir}/log/${BPN}
- }
-+
-+CONFFILES_${PN} = "${sysconfdir}/mongod.conf"
-+
-+SYSTEMD_SERVICE_${PN} = "mongod.service"
-+
-+
--- 
-2.24.0
 
+
+On 9/11/20 3:06 PM, Joe Slater wrote:
+> No comments on this?   I do not see it has been accepted.     Joe
+
+Thanks for reminder, there was a comment I made
+
+https://lists.openembedded.org/g/openembedded-devel/topic/76607300#86861
+
+patchwork also noticed it.
+
+https://patchwork.openembedded.org/patch/176016/
+
+>=20
+> -----Original Message-----
+> From: openembedded-devel@lists.openembedded.org <openembedded-devel@list=
+s.openembedded.org> On Behalf Of Joe Slater
+> Sent: Thursday, September 3, 2020 6:58 AM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Slater, Joseph <joe.slater@windriver.com>; MacLeod, Randy <Randy.Mac=
+Leod@windriver.com>
+> Subject: [oe] [meta-oe][PATCH 1/1] luajit: advance SRCREV to fix two CVE=
+'s
+>=20
+> Fix CVE-2020-15890 and CVE-2020-24372.
+>=20
+> Also change PV format because the reference to 2.1.0-beta3 was already f=
+ar behind the SRCREV.  Now, base PV on the branch name and date of SRCREV c=
+ommit.
+>=20
+> Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> ---
+>  meta-oe/recipes-devtools/luajit/luajit_git.bb | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/rec=
+ipes-devtools/luajit/luajit_git.bb
+> index cc9039416..820722195 100644
+> --- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
+> +++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+> @@ -3,13 +3,15 @@ LICENSE =3D "MIT"
+>  LIC_FILES_CHKSUM =3D "file://COPYRIGHT;md5=3Dd739bb9250a55c124a545b588f=
+d76771"
+>  HOMEPAGE =3D "http://luajit.org"
+>  
+> -PV =3D "2.1.0~beta3"
+> -SRCREV =3D "0ad60ccbc3768fa8e3e726858adf261950edbc22"
+>  SRC_URI =3D "git://luajit.org/git/luajit-2.0.git;protocol=3Dhttp;branch=
+=
+=3Dv2.1 \
+>             file://0001-Do-not-strip-automatically-this-leaves-the-strip=
+ping.patch \
+>             file://clang.patch \
+>             "
+>  
+> +# Set PV to the branch and date associated with SRCREV.
+> +PV =3D "v2.1-200809"
+> +SRCREV =3D "94d4abcca966df2cc423e821bcacd04898f73117"
+> +
+>  S =3D "${WORKDIR}/git"
+>  
+>  inherit pkgconfig binconfig siteinfo
+> --
+> 2.17.1
+>=20
+>=20
+>=20
+>=20
