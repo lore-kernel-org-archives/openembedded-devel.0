@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.57253.1600074273058443838
+ by mx.groups.io with SMTP id smtpd.web10.56483.1600074273614270691
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Sep 2020 02:04:33 -0700
+ Mon, 14 Sep 2020 02:04:34 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=52584 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kHkPX-0007z1-PA; Mon, 14 Sep 2020 12:04:32 +0300
+	id 1kHkPY-0007z1-9B; Mon, 14 Sep 2020 12:04:32 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 07/10] python3-trafaret: Upgrade 2.0.2 -> 2.1.0
-Date: Mon, 14 Sep 2020 12:04:16 +0300
-Message-Id: <20200914090419.19171-7-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 08/10] python3-tqdm: Upgrade 4.48.2 -> 4.49.0
+Date: Mon, 14 Sep 2020 12:04:17 +0300
+Message-Id: <20200914090419.19171-8-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200914090419.19171-1-leon.anavi@konsulko.com>
 References: <20200914090419.19171-1-leon.anavi@konsulko.com>
@@ -30,31 +30,41 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.1.0:
+Upgrade to release 4.49.0:
 
-- fix for `Dict` merge
-- new `is_valid` method
+- CLI: add --tee
+- CLI: add --update and --update_to
+- CLI: add --null
+- CLI: accept - instead of _ in options (e.g. --update-to)
+- make update() return True on display to ease efficient use of
+  custom callbacks
+- fix py>=3 CLI --delim encoding error
+- fix py>=3.5 version detection in tqdm.auto
+- fix final ETA when using initial
+- update documentation
+- add & update tests
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-trafaret_2.0.2.bb => python3-trafaret_2.1.0.bb}   | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-trafaret_2.0.2.bb => python3-trafaret_2.1.0.bb} (72%)
+ .../python/{python3-tqdm_4.48.2.bb => python3-tqdm_4.49.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-tqdm_4.48.2.bb => python3-tqdm_4.49.0.bb} (65%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-trafaret_2.0.2.bb b/meta-python/recipes-devtools/python/python3-trafaret_2.1.0.bb
-similarity index 72%
-rename from meta-python/recipes-devtools/python/python3-trafaret_2.0.2.bb
-rename to meta-python/recipes-devtools/python/python3-trafaret_2.1.0.bb
-index 4e814073b..96602016e 100644
---- a/meta-python/recipes-devtools/python/python3-trafaret_2.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-trafaret_2.1.0.bb
-@@ -3,7 +3,8 @@ SUMMARY = "Ultimate transformation library that supports validation, contexts an
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=21ecc7aa8f699874e706fc1354903437"
+diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.48.2.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.49.0.bb
+similarity index 65%
+rename from meta-python/recipes-devtools/python/python3-tqdm_4.48.2.bb
+rename to meta-python/recipes-devtools/python/python3-tqdm_4.49.0.bb
+index 831468095..26eb1073d 100644
+--- a/meta-python/recipes-devtools/python/python3-tqdm_4.48.2.bb
++++ b/meta-python/recipes-devtools/python/python3-tqdm_4.49.0.bb
+@@ -5,8 +5,8 @@ SECTION = "devel/python"
+ LICENSE = "MIT & MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=7ea57584e3f8bbde2ae3e1537551de25"
  
--SRC_URI[sha256sum] = "61dfc25b574f70bfdf7ee3a808ec423061811c13a10b8d3c9e11ab539b96ab65"
-+SRC_URI[sha256sum] = "72c342ede27fb34cd219b62855119380ae1c87006b6106be163c01159eb955ff"
-+SRC_URI[md5sum] = "228675376012fb27dd7f70ab685e7766"
+-SRC_URI[md5sum] = "d29c836d74d2f2ec6a10d052937f7371"
+-SRC_URI[sha256sum] = "564d632ea2b9cb52979f7956e093e831c28d441c11751682f84c86fc46e4fd21"
++SRC_URI[md5sum] = "c2afde3f1d5aa108376fdd0f4b20821d"
++SRC_URI[sha256sum] = "faf9c671bd3fad5ebaeee366949d969dca2b2be32c872a7092a1e1a9048d105b"
  
  inherit pypi setuptools3
  
