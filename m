@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.56480.1600074270272641168
+ by mx.groups.io with SMTP id smtpd.web10.56481.1600074271171910517
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Sep 2020 02:04:30 -0700
+ Mon, 14 Sep 2020 02:04:31 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=52584 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kHkPU-0007z1-17; Mon, 14 Sep 2020 12:04:28 +0300
+	id 1kHkPV-0007z1-Fs; Mon, 14 Sep 2020 12:04:30 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 02/10] python3-traitlets: Upgrade 5.0.3 -> 5.0.4
-Date: Mon, 14 Sep 2020 12:04:11 +0300
-Message-Id: <20200914090419.19171-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 04/10] python3-iso8601: Upgrade 0.1.12 -> 0.1.13
+Date: Mon, 14 Sep 2020 12:04:13 +0300
+Message-Id: <20200914090419.19171-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200914090419.19171-1-leon.anavi@konsulko.com>
 References: <20200914090419.19171-1-leon.anavi@konsulko.com>
@@ -30,39 +30,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 5.0.4:
+Upgrade to release 0.1.13:
 
-- Support deprecated use of byte-literals for bytes on the
-  command-line: ipython kernel --Session.key="b'abc'". The b
-  prefix is no longer needed in traitlets 5.0, but is supported
-  for backward-compatibility
-- Improve output of configuration errors, especially when help
-  output would make it hard to find the helpful error message
+- Move project source code to GitHub
+- Remove python 2.6, 3.2, 3.3 and 3.4 from tests
+- Add python 3.7 and 3.8 to tests
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-traitlets_5.0.3.bb => python3-traitlets_5.0.4.bb} | 4 ++--
+ .../{python3-iso8601_0.1.12.bb => python3-iso8601_0.1.13.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-traitlets_5.0.3.bb => python3-traitlets_5.0.4.bb} (72%)
+ rename meta-python/recipes-devtools/python/{python3-iso8601_0.1.12.bb => python3-iso8601_0.1.13.bb} (69%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-traitlets_5.0.3.bb b/meta-python/recipes-devtools/python/python3-traitlets_5.0.4.bb
-similarity index 72%
-rename from meta-python/recipes-devtools/python/python3-traitlets_5.0.3.bb
-rename to meta-python/recipes-devtools/python/python3-traitlets_5.0.4.bb
-index 02908dea9..194193f63 100644
---- a/meta-python/recipes-devtools/python/python3-traitlets_5.0.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-traitlets_5.0.4.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING.md;md5=eec4de4d599518742e54e75954e33b46"
+diff --git a/meta-python/recipes-devtools/python/python3-iso8601_0.1.12.bb b/meta-python/recipes-devtools/python/python3-iso8601_0.1.13.bb
+similarity index 69%
+rename from meta-python/recipes-devtools/python/python3-iso8601_0.1.12.bb
+rename to meta-python/recipes-devtools/python/python3-iso8601_0.1.13.bb
+index 74b5bdcb8..9e7494b3e 100644
+--- a/meta-python/recipes-devtools/python/python3-iso8601_0.1.12.bb
++++ b/meta-python/recipes-devtools/python/python3-iso8601_0.1.13.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://pyiso8601.readthedocs.org/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b05625f2336fa024e8d57e65c6595844"
  
- PYPI_PACKAGE = "traitlets"
+-SRC_URI[md5sum] = "4de940f691c5ea759fb254384c8ddcf6"
+-SRC_URI[sha256sum] = "49c4b20e1f38aa5cf109ddcd39647ac419f928512c869dc01d5c7098eddede82"
++SRC_URI[md5sum] = "df6e924305fd799d90be63336b2ab8b3"
++SRC_URI[sha256sum] = "f7dec22af52025d4526be94cc1303c7d8f5379b746a3f54a8c8446384392eeb1"
  
--SRC_URI[md5sum] = "66b76cfffd590c39861bc11c247725a5"
--SRC_URI[sha256sum] = "a2e91709a0330b6c5d497ed470b2feb1ed8da5c9dd807c6daab41f727b9391c9"
-+SRC_URI[md5sum] = "592dde72b6b706d09ea624cce9af3cf5"
-+SRC_URI[sha256sum] = "86c9351f94f95de9db8a04ad8e892da299a088a64fd283f9f6f18770ae5eae1b"
+ inherit pypi setuptools3
  
- RDEPENDS_${PN} = "\
-     ${PYTHON_PN}-ipython-genutils \
 -- 
 2.17.1
 
