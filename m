@@ -1,72 +1,61 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web11.9385.1600161589977856517
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.12704.1600174496139432058
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 15 Sep 2020 02:19:50 -0700
+ Tue, 15 Sep 2020 05:54:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: haiqing.bai@windriver.com)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 08F9Jmdr023316
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2020 02:19:48 -0700 (PDT)
-Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCB.corp.ad.wrs.com
- (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Tue, 15 Sep 2020
- 02:19:35 -0700
-From: "haiqing" <haiqing.bai@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <haiqing.bai@windriver.com>
-Subject: [oe][meta-oe][zeus][PATCH] rsyslog: fix wrong option of PACKAGECONFIG[valgrind]
-Date: Tue, 15 Sep 2020 17:18:49 +0800
-Message-ID: <20200915091850.215655-1-Haiqing.Bai@windriver.com>
-X-Mailer: git-send-email 2.23.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=47684 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kIAU0-0005Ha-N2; Tue, 15 Sep 2020 15:54:53 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-ruamel-yaml: Upgrade 0.16.11 -> 0.16.12
+Date: Tue, 15 Sep 2020 15:54:46 +0300
+Message-Id: <20200915125447.14197-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-The source configure.ac shows:
---enable-valgrind: Enable somes special code that rsyslog core developers
-                   consider useful for testing.Do NOT use if you don't
-                   exactly know what you are doing, except if told so
-                   by rsyslog developers.
-                   NOT to be used by distro maintainers for building regular
-                   packages.
+Upgrade to release 0.16.12:
 
---without-valgrind-testbench:
-                   Don't use valgrind in testbench
+- update links in doc
 
-PACKAGECONFIG[valgrind] should use '--without-valgrind-testbench'
-And after this fix, the code which removes the valgrind depended
-ptest cases for arm,mips is no longer needed.
-
-Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb | 8 +-------
- 1 file changed, 1 insertion(+), 7 deletions(-)
+ ...-ruamel-yaml_0.16.11.bb => python3-ruamel-yaml_0.16.12.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-ruamel-yaml_0.16.11.bb => python3-ruamel-yaml_0.16.12.bb} (72%)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb
-index 8287d2b7f..5b8af8d37 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb
-@@ -74,7 +74,7 @@ PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,"
- PACKAGECONFIG[postgresql] = "--enable-pgsql,--disable-pgsql,postgresql,"
- PACKAGECONFIG[libdbi] = "--enable-libdbi,--disable-libdbi,libdbi,"
- PACKAGECONFIG[mail] = "--enable-mail,--disable-mail,,"
--PACKAGECONFIG[valgrind] = "--enable-valgrind,--disable-valgrind,valgrind,"
-+PACKAGECONFIG[valgrind] = ",--without-valgrind-testbench,valgrind,"
+diff --git a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.11.bb b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
+similarity index 72%
+rename from meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.11.bb
+rename to meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
+index 9b3a2e1d9..ec8545dae 100644
+--- a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.11.bb
++++ b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
+@@ -8,8 +8,8 @@ PYPI_PACKAGE = "ruamel.yaml"
  
- TESTDIR = "tests"
- do_compile_ptest() {
-@@ -98,12 +98,6 @@ do_install_ptest() {
-     # fix the abs_top_builddir
-     sed -i 's,^\(abs_top_builddir = \).*,\1${PTEST_PATH}/,' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
+ inherit pypi setuptools3
  
--    # valgrind is not compatible with arm and mips,
--    # so remove related test cases if there is no valgrind.
--    if [ x${VALGRIND} = x ]; then
--        sed -i '/udp-msgreduc-/d' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
--    fi
--
-     # install test-driver
-     install -m 644 ${S}/test-driver ${D}${PTEST_PATH}
+-SRC_URI[md5sum] = "020a0140d06b2e32f53944d4335f9877"
+-SRC_URI[sha256sum] = "43bf19037937f78845775d84582dd6f3ac966bc1b7748de898fad35638c74771"
++SRC_URI[md5sum] = "c7e4b216d9554d80be42011b448b7c61"
++SRC_URI[sha256sum] = "076cc0bc34f1966d920a49f18b52b6ad559fbe656a0748e3535cf7b3f29ebf9e"
  
+ do_install_prepend() {
+     export RUAMEL_NO_PIP_INSTALL_CHECK=1
 -- 
-2.23.0
+2.17.1
 
