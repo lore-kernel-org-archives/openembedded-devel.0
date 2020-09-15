@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.9362.1600160595099899175
+ by mx.groups.io with SMTP id smtpd.web10.9301.1600160595469112811
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 15 Sep 2020 02:03:15 -0700
 Authentication-Results: mx.groups.io;
@@ -8,15 +8,17 @@ Received: from [78.130.197.211] (port=43802 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kI6rk-0007I7-5y; Tue, 15 Sep 2020 12:03:12 +0300
+	id 1kI6rp-0007I7-BZ; Tue, 15 Sep 2020 12:03:14 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 01/10] python3-cffi: Upgrade 1.14.2 -> 1.14.3
-Date: Tue, 15 Sep 2020 12:02:54 +0300
-Message-Id: <20200915090303.14367-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 02/10] python3-google-api-python-client: Upgrade 1.11.0 -> 1.12.1
+Date: Tue, 15 Sep 2020 12:02:55 +0300
+Message-Id: <20200915090303.14367-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.0
+In-Reply-To: <20200915090303.14367-1-leon.anavi@konsulko.com>
+References: <20200915090303.14367-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -28,37 +30,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.14.3:
+Upgrade to release 1.12.1:
 
-- Don't call PyEval_InitThreads() on CPython >= 3.7, where it
-  should always be a no-op.  It is explicitly deprecated in 3.9.
-- Let the test run directly on pypy too
-- Remove extremely old and outdated .gitignore
+- deps: require six>=1.13.0
+- add quota_project, credentials_file, and scopes support
+- convert print statement to function
+- remove http from batch execute docs
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-cffi_1.14.2.bb => python3-cffi_1.14.3.bb} | 4 ++--
+ ...t_1.11.0.bb => python3-google-api-python-client_1.12.1.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cffi_1.14.2.bb => python3-cffi_1.14.3.bb} (75%)
+ rename meta-python/recipes-devtools/python/{python3-google-api-python-client_1.11.0.bb => python3-google-api-python-client_1.12.1.bb} (69%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.14.2.bb b/meta-python/recipes-devtools/python/python3-cffi_1.14.3.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-cffi_1.14.2.bb
-rename to meta-python/recipes-devtools/python/python3-cffi_1.14.3.bb
-index 57c28954a..dbdd16f66 100644
---- a/meta-python/recipes-devtools/python/python3-cffi_1.14.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-cffi_1.14.3.bb
-@@ -4,8 +4,8 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
- DEPENDS += "libffi ${PYTHON_PN}-pycparser"
+diff --git a/meta-python/recipes-devtools/python/python3-google-api-python-client_1.11.0.bb b/meta-python/recipes-devtools/python/python3-google-api-python-client_1.12.1.bb
+similarity index 69%
+rename from meta-python/recipes-devtools/python/python3-google-api-python-client_1.11.0.bb
+rename to meta-python/recipes-devtools/python/python3-google-api-python-client_1.12.1.bb
+index c14b17254..d79ac3c39 100644
+--- a/meta-python/recipes-devtools/python/python3-google-api-python-client_1.11.0.bb
++++ b/meta-python/recipes-devtools/python/python3-google-api-python-client_1.12.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=94023d14f6b58272fd885e4e3f2f08b3"
  
--SRC_URI[md5sum] = "3cc2f1daf62dd66eda79b4d6281cebfc"
--SRC_URI[sha256sum] = "ae8f34d50af2c2154035984b8b5fc5d9ed63f32fe615646ab435b05b132ca91b"
-+SRC_URI[md5sum] = "c2a47ffd5d183b193ac8ed3414dcfd07"
-+SRC_URI[sha256sum] = "f92f789e4f9241cd262ad7a555ca2c648a98178a953af117ef7fad46aa1d5591"
+-SRC_URI[md5sum] = "b9a09d60cffda35887a8e09b600a73b0"
+-SRC_URI[sha256sum] = "caf4015800ef1a18d06d117f47f0219c0c0641f21978f6b1bb5ede7912fab97b"
++SRC_URI[md5sum] = "92106822131f76ca77b77009674e78e4"
++SRC_URI[sha256sum] = "ddadc243ce627512c2a27e11d369f5ddf658ef80dbffb247787499486ef1ea98"
  
  inherit pypi setuptools3
- 
 -- 
 2.17.1
 
