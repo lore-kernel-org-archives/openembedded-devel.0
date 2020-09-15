@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.9155.1600160603303585375
+ by mx.groups.io with SMTP id smtpd.web11.9156.1600160604242539261
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 15 Sep 2020 02:03:23 -0700
+ Tue, 15 Sep 2020 02:03:24 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=43802 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kI6rx-0007I7-43; Tue, 15 Sep 2020 12:03:22 +0300
+	id 1kI6ry-0007I7-3D; Tue, 15 Sep 2020 12:03:23 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 09/10] python3-pychromecast: Upgrade 7.2.1 -> 7.3.0
-Date: Tue, 15 Sep 2020 12:03:02 +0300
-Message-Id: <20200915090303.14367-9-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 10/10] python3-pyrsistent: Upgrade 0.16.0 -> 0.17.3
+Date: Tue, 15 Sep 2020 12:03:03 +0300
+Message-Id: <20200915090303.14367-10-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200915090303.14367-1-leon.anavi@konsulko.com>
 References: <20200915090303.14367-1-leon.anavi@konsulko.com>
@@ -30,37 +30,46 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 7.3.0:
+Upgrade 0.17.3:
 
-- add support for QUEUE_INSERT
-- Run black and flake8 on examples
-- Fix get_chromecasts non blocking mode
-- Black 20.8b1
+- Remove Python 2 support code. This includes dropping some
+  compatibility code and the dependency on six.
+- Python 3 exception chaining. This is a minor backwards
+  incompatibility, hence stepping to 0.17.0.
+- Restrict package to Python >= 3.5 to not break unpinned
+  Python 2 dependencies.
+- Release v0.17.3 with proper meta data requiring Python >= 3.5.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...n3-pychromecast_7.2.1.bb => python3-pychromecast_7.3.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pychromecast_7.2.1.bb => python3-pychromecast_7.3.0.bb} (66%)
+ ...on3-pyrsistent_0.16.0.bb => python3-pyrsistent_0.17.3.bb} | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pyrsistent_0.16.0.bb => python3-pyrsistent_0.17.3.bb} (66%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.2.1.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.3.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyrsistent_0.16.0.bb b/meta-python/recipes-devtools/python/python3-pyrsistent_0.17.3.bb
 similarity index 66%
-rename from meta-python/recipes-devtools/python/python3-pychromecast_7.2.1.bb
-rename to meta-python/recipes-devtools/python/python3-pychromecast_7.3.0.bb
-index 6a3b16c38..b444df05d 100644
---- a/meta-python/recipes-devtools/python/python3-pychromecast_7.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pychromecast_7.3.0.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
+rename from meta-python/recipes-devtools/python/python3-pyrsistent_0.16.0.bb
+rename to meta-python/recipes-devtools/python/python3-pyrsistent_0.17.3.bb
+index dec661143..72736c891 100644
+--- a/meta-python/recipes-devtools/python/python3-pyrsistent_0.16.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyrsistent_0.17.3.bb
+@@ -3,14 +3,13 @@ HOMEPAGE = "https://github.com/tobgu/pyrsistent"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
+ LIC_FILES_CHKSUM = "file://LICENCE.mit;md5=ca574f2891cf528b3e7a2ee570337e7c"
  
--SRC_URI[md5sum] = "a39b87178f866dda52da494eac0afe07"
--SRC_URI[sha256sum] = "9aad074d0361791af8ccb8fb7ea0f1646db3d89600fed85c5562b64c8b1aa899"
-+SRC_URI[md5sum] = "7ab862743ff33dafc93206c1435abc5e"
-+SRC_URI[sha256sum] = "f594231efb34b86eeb463611662bca21a6962793885d3ad68195286940f7473d"
+-SRC_URI[md5sum] = "4ba30da6f0a63554e70ac6c4c1904929"
+-SRC_URI[sha256sum] = "28669905fe725965daa16184933676547c5bb40a5153055a8dee2a4bd7933ad3"
++SRC_URI[md5sum] = "cd38658ea772a7f9b12b6f9485a7018b"
++SRC_URI[sha256sum] = "2e636185d9eb976a18a8a8e96efce62f2905fea90041958d8cc2a189756ebf3e"
  
- PYPI_PACKAGE = "PyChromecast"
+ inherit pypi setuptools3
  
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-numbers \
+-    ${PYTHON_PN}-six \
+ "
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
