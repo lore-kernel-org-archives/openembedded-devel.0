@@ -1,114 +1,77 @@
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web11.3339.1600132133829375550
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net [217.70.183.196])
+ by mx.groups.io with SMTP id smtpd.web12.6258.1600144218717107005
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Sep 2020 18:08:53 -0700
+ Mon, 14 Sep 2020 21:30:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dkjntnOj;
- spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id f18so936951pfa.10
-        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Sep 2020 18:08:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=zJq4jQOwrGDlwfqiEIhFjPiayyTNt39DHh0SR3j1EWA=;
-        b=dkjntnOjJz6SwBJ+FzwR0Azwu36nQmYwnNmN5aAH9MK0pp4059NPh/j00wZpWv+eVQ
-         O7aPM/jqHGhO0sASwJLTDwLjEJ3LQqnXAMK3m1lvi1RnZtpspaQzcYeWuKFlRjL8bXGA
-         kKCQqQvYNeAzYgdPUUuKD2BaqAeEapECZK17AKLI3P34KJmY/vbedp6Z7D58ETIfYnvo
-         kcj6I7V5C8LuN7QCuA6njjIAnxaTQW27v1S/ImhSyc5nQAqMEtAJxiD48ovbpxDXwpzP
-         wXedbot81IIB8YyO7uncG+5lbTXnE3/yGaEhh6rU7ZLZ7QUQIs3N83bpPuGI/pt1XGFQ
-         K7Fg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=zJq4jQOwrGDlwfqiEIhFjPiayyTNt39DHh0SR3j1EWA=;
-        b=RX7X9ydXTiVmayI8GnTzcDd7relfsIWIGgbDbFn/lXvgVq//m8xuUScQsMdvrTDJ0C
-         nW+DgWiRchSOdE+mOn7080kcxxPBzS+SNre/z441udMJ2GzLm5JYhRRt1pjiZr8p8KnQ
-         KKdPzn2R7l05fKYqJUxnMwcpoONn8Jbn0EUYwNfdbYr4je31UlXsRq0pyVkTNRgKNcrT
-         aoFpytqx432BdDx9wiX+RvGfm2br+cAWq2AXWavtJBgkdRq70NH6DHE5N9cVcocEYtNy
-         n3tjsItgeJ5porLfedNFeaD9vDJCPnEiA994JfO1MQXcwyQAoSTMJ8R5U9ZMYXxkXL06
-         vJqA==
-X-Gm-Message-State: AOAM532w/0WpkKfzUFQ/X8WVlGrwpz97d3y/wgrTwHWU+0R7PrEDB1Is
-	jbWZUARaRfCBu6Cs8MAaGtNxnHMvzYHQdw==
-X-Google-Smtp-Source: ABdhPJzwR/IuCchXfrkStWBgHw8SF+p4qlFDGyl3d+ogU/R/N07kp6R9Aggtq14todliSnJZ6Eb67Q==
-X-Received: by 2002:a63:6d7:: with SMTP id 206mr13173759pgg.167.1600132132817;
-        Mon, 14 Sep 2020 18:08:52 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::1759])
-        by smtp.gmail.com with ESMTPSA id z84sm11569791pfc.105.2020.09.14.18.08.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 14 Sep 2020 18:08:52 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: redrectangle.org, ip: 217.70.183.196, mailfrom: robert.joslyn@redrectangle.org)
+X-Originating-IP: 173.197.191.182
+Received: from localhost.localdomain (rrcs-173-197-191-182.west.biz.rr.com [173.197.191.182])
+	(Authenticated sender: robert.joslyn@redrectangle.org)
+	by relay4-d.mail.gandi.net (Postfix) with ESMTPSA id 6BB0BE0005;
+	Tue, 15 Sep 2020 04:30:14 +0000 (UTC)
+From: "Robert Joslyn" <robert.joslyn@redrectangle.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Vincent Prince <vincent.prince.fr@gmail.com.com>
-Subject: [meta-oe][PATCH] mongodb: Fix build with musl
-Date: Mon, 14 Sep 2020 18:08:50 -0700
-Message-Id: <20200915010850.2079174-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.28.0
+Cc: Robert Joslyn <robert.joslyn@redrectangle.org>
+Subject: [meta-oe][dunfell][PATCH] postgresql: Update to 12.4
+Date: Mon, 14 Sep 2020 21:29:43 -0700
+Message-Id: <20200915042943.1192873-1-robert.joslyn@redrectangle.org>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a patch to include ssize_t definition
-Pass OBJCOPY to scons so it does not use the host
-objcopy but cross objcopy, which is the right tool
-to invoke
+createlang, droplang, and the tsearch2 module were all removed in the
+10.0 release. More details are in the release notes:
+https://www.postgresql.org/docs/10/release-10.html
 
-Fixes
-objcopy: Unable to recognise the format of the input file `build/opt/mongo/mongos'
+The update from 12.3 to 12.4 is a minor release with bug and security
+fixes:
+https://www.postgresql.org/docs/current/release-12-4.html
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Vincent Prince <vincent.prince.fr@gmail.com.com>
+Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
 ---
- .../recipes-dbs/mongodb/mongodb/ssize_t.patch   | 17 +++++++++++++++++
- .../recipes-dbs/mongodb/mongodb_git.bb          |  2 ++
- 2 files changed, 19 insertions(+)
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/ssize_t.patch
+ meta-oe/recipes-dbs/postgresql/postgresql.inc                 | 4 +---
+ .../postgresql/{postgresql_12.3.bb => postgresql_12.4.bb}     | 3 +--
+ 2 files changed, 2 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_12.3.bb => postgresql_12.4.bb} (63%)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/ssize_t.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/ssize_t.patch
-new file mode 100644
-index 0000000000..d297691b69
---- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/ssize_t.patch
-@@ -0,0 +1,17 @@
-+ssize_t is provided by sys/types.h, musl does not like
-+it if the header is not included, for glibc it is included
-+indirectly.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+--- a/src/third_party/kms-message/src/kms_request_str.h
-++++ b/src/third_party/kms-message/src/kms_request_str.h
-+@@ -24,6 +24,7 @@
-+ #include <stdbool.h>
-+ #include <stdint.h>
-+ #include <string.h>
-++#include <sys/types.h>
-+ 
-+ #if defined(_WIN32)
-+ #include <basetsd.h>
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-index b8691df9eb..2be7de02a9 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-@@ -24,6 +24,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4 \
-            file://0001-Support-deprecated-resolver-functions.patch \
-            file://0003-Fix-unknown-prefix-env.patch \
-            file://1296.patch \
-+           file://ssize_t.patch \
-            "
- SRC_URI_append_libc-musl ="\
-            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
-@@ -59,6 +60,7 @@ EXTRA_OESCONS = "PREFIX=${prefix} \
-                  CXXFLAGS='${CXXFLAGS}' \
-                  TARGET_ARCH=${TARGET_ARCH} \
-                  MONGO_VERSION=${PV} \
-+                 OBJCOPY=${OBJCOPY} \
-                  --ssl \
-                  --disable-warnings-as-errors \
-                  --use-system-zlib \
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+index 5b20098a7..5b5bfb088 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
++++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+@@ -247,10 +247,8 @@ FILES_${PN} += "${sysconfdir}/init.d/${BPN}-server \
+ 
+ FILES_${PN}-client = "${bindir}/clusterdb \
+     ${bindir}/createdb \
+-    ${bindir}/createlang \
+     ${bindir}/createuser \
+     ${bindir}/dropdb \
+-    ${bindir}/droplang \
+     ${bindir}/dropuser \
+     ${bindir}/pg_dump \
+     ${bindir}/pg_dumpall \
+@@ -332,7 +330,7 @@ FILES_${PN}-contrib = " ${bindir}/oid2name ${bindir}/pg_standby \
+     ${libdir}/${BPN}/sslinfo.so \
+     ${libdir}/${BPN}/tablefunc.so \
+     ${libdir}/${BPN}/test_parser.so ${libdir}/${BPN}/timetravel.so \
+-    ${libdir}/${BPN}/tsearch2.so ${libdir}/${BPN}/uuid-ossp.so \
++    ${libdir}/${BPN}/uuid-ossp.so \
+     ${libdir}/${BPN}/pgxml.so ${libdir}/${BPN}/passwordcheck.so \
+     ${libdir}/${BPN}/pg_upgrade_support.so ${libdir}/${BPN}/.so \
+     ${libdir}/${BPN}/unaccent.so \
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_12.3.bb b/meta-oe/recipes-dbs/postgresql/postgresql_12.4.bb
+similarity index 63%
+rename from meta-oe/recipes-dbs/postgresql/postgresql_12.3.bb
+rename to meta-oe/recipes-dbs/postgresql/postgresql_12.4.bb
+index cc7e3ff52..6ea9acc00 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_12.3.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_12.4.bb
+@@ -8,5 +8,4 @@ SRC_URI += "\
+    file://0001-Improve-reproducibility.patch \
+ "
+ 
+-SRC_URI[md5sum] = "a30c023dd7088e44d73be71af2ef404a"
+-SRC_URI[sha256sum] = "94ed64a6179048190695c86ec707cc25d016056ce10fc9d229267d9a8f1dcf41"
++SRC_URI[sha256sum] = "bee93fbe2c32f59419cb162bcc0145c58da9a8644ee154a30b9a5ce47de606cc"
 -- 
-2.28.0
+2.26.2
 
