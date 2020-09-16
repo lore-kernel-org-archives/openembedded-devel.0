@@ -1,147 +1,111 @@
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com [209.85.210.195])
- by mx.groups.io with SMTP id smtpd.web11.11295.1600215075991822629
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web10.12810.1600220456955407058
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 15 Sep 2020 17:11:16 -0700
+ Tue, 15 Sep 2020 18:40:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=fdYBVd9u;
- spf=pass (domain: gmail.com, ip: 209.85.210.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f195.google.com with SMTP id z18so370987pfg.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2020 17:11:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=WbqUMErp;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id q12so283327plr.12
+        for <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2020 18:40:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Zzu5vILSK+7fHtDt6ounX3Wig0Iz01SXJhaNTRRkSpU=;
-        b=fdYBVd9uzvK8+25MZsv5zZjrPQxlYRPmnZKbGq5t09n3KcMWGYfCavNP19ID/atV37
-         hT+KSsXnv/o4qvRiwRDZUFo9JiwSXu7j/AX7Av5fcZ0WqVEyXLCJH8lIMFr9gKzFUHfy
-         q17e6GPtndYDcwNt51TSsTADRDJcyjiWj5yEVhg3B7FkrkUzVyxpGqObUabBhvAiMN4q
-         Br+L7b1SQhf+QINviKzXDyYKg4zH1PvHwq8FZLHp8xBuAOkZU/UwxpmSnEXJ+ScK3j9I
-         j9etyXnM/GuuWgxywWln3iSu8ChYY3E8FeIC9eYpUJKKC63ViwqDCLu1Gu2Uu8FF5hwj
-         l8Yg==
+        bh=bFAHX3gj4I/JNDS24hZZT2vqdwX3l2VwnDaFWkj7wDQ=;
+        b=WbqUMErpAmRgiPg60N2PW9C8aegoohMS2rGO/t1Yj056uEC+LcidKnrMsAzkAUVdkl
+         pFKnRRTTnBjF4+tmXeYKHgRz70FevTkLP6Ckm3ZcMB01TPcdWs1wowoBsjlO9jUfP0om
+         pcohR+csq3T5+jvbXU/rQjs6peRm2QnOhI+hzz2s7hs4xhKZHZLC5fBw7QtYXTj4J2+D
+         MFVsmJhcg+OLTHJgOHWrT/Ui7FFirRZH1spCLQT9kJwEBpVFxZJ1RXfb3AnSE2TLGyBf
+         kVqAQgIjhOcwmUNrHcIbQCMqhg6t7u7jCLXRfa7oJBueL5NGosh7sfsZt4Dk6ho5i7AW
+         v19Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Zzu5vILSK+7fHtDt6ounX3Wig0Iz01SXJhaNTRRkSpU=;
-        b=stiAJx2WwMne7YN4NXjEBRzoejQkgyb2yUssKNUcFbu1QhfBTgHFDJCILqR305Tjji
-         jxFZU133Y616sz3JaabzPX7EwNj7FdfQv9lYd0wh8upHQgRQgdu0lfbJ5IVCa5fjDrVo
-         AZ6JfDKiejEro1E1TP1c7Gu3k2jRmN7gP4drGD42lIMUedWhOB01iI+HCVTAdX1unqMB
-         aQv8/+7QXVGydOIhLvneMdRnIxP274mJoLxL5ZDK/u94bH3Mt9pCXKArB5JkQ69Kgfn8
-         ePBbkXO8kJO8Mzr0tOevg94urc7iNfs+WhCtFhyj8qba2R7n1jKwVvFkJfC7/fKy3E5S
-         i0tQ==
-X-Gm-Message-State: AOAM530DVrIKsLax9X25N+GMepnW1jmYtqUbSv6OqFY1cFBu4CV2/kxi
-	9jLMcg9ma+H9CGwh+07edEmEORZ4dJMK1A==
-X-Google-Smtp-Source: ABdhPJxauW1XEEpYYuHZljiPKc+bqFzVsScJvtvs5I1eVL9ujxH1tEty5PlxCHzO4U8kQ8CQGGw1+Q==
-X-Received: by 2002:a65:4505:: with SMTP id n5mr16211435pgq.229.1600215074866;
-        Tue, 15 Sep 2020 17:11:14 -0700 (PDT)
+        bh=bFAHX3gj4I/JNDS24hZZT2vqdwX3l2VwnDaFWkj7wDQ=;
+        b=YtX6yjxn+ggva6jN3lj6ipHhmiTvq1PwFsHMTrpJCktmG0YFYeTA1LWyQjSovnRWVz
+         iUWULmWuut1JbjxjyuiBZeiVlFP0lL5uem6lHzSVkRlFhZlgY/dLXRE8eBCDIsIC8cD5
+         SDq8z9rP/z8ktIe7LvRyYuIpdW/RICap8EYseoLaNV+Lv+dHBA281a+zXHmH1uVR4guR
+         V5/NxFKmtI3TTwPelaYWpOFkn2Nmc8mRaTLeXHqLjcmDHkuUy+2vnMe+r1XmrzsujBZd
+         GpMVcSC4b3MWV0rthBVgJfze5cYakKUoa24M+DC8w+NyhWgHCX4++s486idg+g5lic+2
+         EfUQ==
+X-Gm-Message-State: AOAM533YbuiULaKvkb2qZ1GA5Qo7uCqc9XSuawfzFm57woa1Wv1cI1Tr
+	gWTn6bWF7cylAm2uBglsGSsCx/RIE9lYTw==
+X-Google-Smtp-Source: ABdhPJx5JiN85oi7+64DwpN8UgKUTe7eyFtU+LaixLq2rDxmKUoiA77ddlBEjEjKsU/ftyvgRKVGFQ==
+X-Received: by 2002:a17:902:758b:b029:d1:bb0f:25fc with SMTP id j11-20020a170902758bb02900d1bb0f25fcmr17955998pll.40.1600220456119;
+        Tue, 15 Sep 2020 18:40:56 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::1759])
-        by smtp.gmail.com with ESMTPSA id u4sm15090042pfk.166.2020.09.15.17.11.14
+        by smtp.gmail.com with ESMTPSA id q65sm12349541pga.88.2020.09.15.18.40.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 15 Sep 2020 17:11:14 -0700 (PDT)
+        Tue, 15 Sep 2020 18:40:55 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] tesseract: update to 4.1.1
-Date: Tue, 15 Sep 2020 17:11:12 -0700
-Message-Id: <20200916001112.83283-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH] mongodb: Fix i386 builds for non-glibc systems
+Date: Tue, 15 Sep 2020 18:40:53 -0700
+Message-Id: <20200916014053.1178161-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+stacktrace depends on internal glibc defines which may not be available
+for other libc implementations e.g. __ELF_NATIVE_CLASS
 
-License-Update: file that mentioned licencing information was replaced
-with an actual license file
-
-Add patch to fix build with musl
-
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../tesseract/0001-include-sys-time.h.patch   | 34 +++++++++++++++++++
- .../{tesseract_git.bb => tesseract_4.1.1.bb}  | 15 ++++----
- 2 files changed, 43 insertions(+), 6 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/0001-include-sys-time.h.patch
- rename meta-oe/recipes-graphics/tesseract/{tesseract_git.bb => tesseract_4.1.1.bb} (51%)
+ ...-stacktrace-Define-ARCH_BITS-for-x86.patch | 29 +++++++++++++++++++
+ .../recipes-dbs/mongodb/mongodb_git.bb        |  1 +
+ 2 files changed, 30 insertions(+)
+ create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-stacktrace-Define-ARCH_BITS-for-x86.patch
 
-diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/0001-include-sys-time.h.patch b/meta-oe/recipes-graphics/tesseract/tesseract/0001-include-sys-time.h.patch
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-stacktrace-Define-ARCH_BITS-for-x86.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-stacktrace-Define-ARCH_BITS-for-x86.patch
 new file mode 100644
-index 0000000000..de1fa75b7c
+index 0000000000..a92883516c
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/tesseract/tesseract/0001-include-sys-time.h.patch
-@@ -0,0 +1,34 @@
-+From b47fa9532a7090d76521603dbc818bdec100085f Mon Sep 17 00:00:00 2001
++++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-stacktrace-Define-ARCH_BITS-for-x86.patch
+@@ -0,0 +1,29 @@
++From efd79bda1b85a5a4398a71e5ea2bc00ee4b0ea46 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 15 Sep 2020 17:04:27 -0700
-+Subject: [PATCH] include sys/time.h
++Date: Tue, 15 Sep 2020 18:20:27 -0700
++Subject: [PATCH] stacktrace: Define ARCH_BITS for x86
 +
-+This provides missing definitions of timeval stuct
-+
-+Fixes
-+| ../../../git/src/ccutil/ocrclass.h:154:7: error: member access into
-+incomplete type 'struct timeval'
-+|     tv->tv_usec = (millisecs.count() % 1000) * 1000;
++stacktrace_somap.cpp:92:33: error: 'ELFCLASSARCH_BITS' was not declared in this scope
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/ccutil/ocrclass.h | 2 ++
-+ 1 file changed, 2 insertions(+)
++ src/mongo/util/stacktrace_somap.cpp | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/ccutil/ocrclass.h b/src/ccutil/ocrclass.h
-+index d39a6dd6..96395c9b 100644
-+--- a/src/ccutil/ocrclass.h
-++++ b/src/ccutil/ocrclass.h
-+@@ -28,6 +28,8 @@
-+ 
-+ #include <chrono>
-+ #include <ctime>
-++#include <sys/time.h>
-++
-+ #ifdef _WIN32
-+ #include <winsock2.h> // for timeval
-+ #endif
++diff --git a/src/mongo/util/stacktrace_somap.cpp b/src/mongo/util/stacktrace_somap.cpp
++index f7ba66a142..2231948ce8 100644
++--- a/src/mongo/util/stacktrace_somap.cpp
+++++ b/src/mongo/util/stacktrace_somap.cpp
++@@ -83,7 +83,7 @@ void addUnameToSoMap(BSONObjBuilder* soMap) {
++ #define ARCH_BITS __ELF_NATIVE_CLASS
++ #elif defined(__x86_64__) || defined(__aarch64__)
++ #define ARCH_BITS 64
++-#elif defined(__arm__)
+++#elif defined(__i386__) || defined(__arm__)
++ #define ARCH_BITS 32
++ #else
++ #error Unknown target architecture.
 +-- 
 +2.28.0
 +
-diff --git a/meta-oe/recipes-graphics/tesseract/tesseract_git.bb b/meta-oe/recipes-graphics/tesseract/tesseract_4.1.1.bb
-similarity index 51%
-rename from meta-oe/recipes-graphics/tesseract/tesseract_git.bb
-rename to meta-oe/recipes-graphics/tesseract/tesseract_4.1.1.bb
-index 89d09a0f55..3b5032f06d 100644
---- a/meta-oe/recipes-graphics/tesseract/tesseract_git.bb
-+++ b/meta-oe/recipes-graphics/tesseract/tesseract_4.1.1.bb
-@@ -1,19 +1,22 @@
- SUMMARY = "A commercial quality OCR engine "
-+HOMEPAGE = "https://github.com/tesseract-ocr/tesseract"
-+BUGTRACKER = "https://github.com/tesseract-ocr/tesseract/issues"
- 
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://COPYING;md5=7ea4f9a43aba9d3c849fe5c203a0ed40"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
-+
-+BRANCH = "4.1"
-+SRCREV = "f4ef2f2050f4c25b28bdbf0063b7d2eb30f41cf7"
-+SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=${BRANCH} \
-+           file://0001-include-sys-time.h.patch \
-+          "
- 
--BRANCH = "3.05"
--PV = "${BRANCH}.01+git${SRCPV}"
--SRCREV = "215866151e774972c9502282111b998d7a053562"
--SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=${BRANCH}"
- S = "${WORKDIR}/git"
- 
- DEPENDS = "leptonica"
- 
- EXTRA_OECONF += "LIBLEPT_HEADERSDIR=${STAGING_INCDIR}/leptonica"
- 
--
- inherit autotools pkgconfig
- 
- FILES_${PN} += "${datadir}/tessdata"
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
+index 7aa69b11cb..a153498480 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
+@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4 \
+            file://0003-Fix-unknown-prefix-env.patch \
+            file://1296.patch \
+            file://0001-Fix-compilation-with-fno-common.patch \
++           file://0001-stacktrace-Define-ARCH_BITS-for-x86.patch \
+            "
+ SRC_URI_append_libc-musl ="\
+            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
 -- 
 2.28.0
 
