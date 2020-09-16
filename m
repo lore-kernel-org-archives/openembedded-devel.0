@@ -1,63 +1,43 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.18338.1600248104765432369
+Received: from mail.desaster-games.net (mail.desaster-games.net [176.9.84.136])
+ by mx.groups.io with SMTP id smtpd.web12.19339.1600251195951270859
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Sep 2020 02:21:45 -0700
+ Wed, 16 Sep 2020 03:13:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=35260 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kITdF-0000SY-3t; Wed, 16 Sep 2020 12:21:43 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: iodoru.org, ip: 176.9.84.136, mailfrom: jubalh@iodoru.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.desaster-games.net (Postfix) with ESMTP id 92BCA1E003;
+	Wed, 16 Sep 2020 12:13:08 +0200 (CEST)
+X-Virus-Scanned: Amavis at mail.desaster-games.com
+Received: from mail.desaster-games.net ([127.0.0.1])
+	by localhost (mail.desaster-games.net [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id wj9izUdjR4kt; Wed, 16 Sep 2020 12:12:54 +0200 (CEST)
+Received: from ymir.suse.de (unknown [195.135.221.27])
+	by mail.desaster-games.net (Postfix) with ESMTPSA id 9E43C20009;
+	Wed, 16 Sep 2020 12:12:54 +0200 (CEST)
+From: "Michael Vetter" <jubalh@iodoru.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-sentry-sdk: Upgrade 0.17.5 -> 0.17.6
-Date: Wed, 16 Sep 2020 12:21:33 +0300
-Message-Id: <20200916092133.11861-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200916092133.11861-1-leon.anavi@konsulko.com>
-References: <20200916092133.11861-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Cc: Michael Vetter <jubalh@iodoru.org>
+Subject: [PATCH 1/1] jasper: use correct homepage
+Date: Wed, 16 Sep 2020 12:12:57 +0200
+Message-Id: <20200916101258.26430-1-jubalh@iodoru.org>
+X-Mailer: git-send-email 2.16.4
 
-Upgrade to release 0.17.6:
-
-- Support for Flask 0.10 (only relaxing verson check)
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Michael Vetter <jubalh@iodoru.org>
 ---
- ...hon3-sentry-sdk_0.17.5.bb => python3-sentry-sdk_0.17.6.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-sentry-sdk_0.17.5.bb => python3-sentry-sdk_0.17.6.bb} (72%)
+ meta-oe/recipes-graphics/jasper/jasper_2.0.20.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.5.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.6.bb
-similarity index 72%
-rename from meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.5.bb
-rename to meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.6.bb
-index 5495fa0d3a..5f566a8264 100644
---- a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.6.bb
-@@ -5,8 +5,8 @@ HOMEPAGE = "https://github.com/getsentry/sentry-python"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
+diff --git a/meta-oe/recipes-graphics/jasper/jasper_2.0.20.bb b/meta-oe/recipes-graphics/jasper/jasper_2.0.20.bb
+index 356c78c0d..c2e376df0 100644
+--- a/meta-oe/recipes-graphics/jasper/jasper_2.0.20.bb
++++ b/meta-oe/recipes-graphics/jasper/jasper_2.0.20.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Jpeg 2000 implementation"
+-HOMEPAGE = "https://github.com/jasper-software/jasper"
++HOMEPAGE = "https://jasper-software.github.io/jasper/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a80440d1d8f17d041c71c7271d6e06eb"
  
--SRC_URI[md5sum] = "dcdf0d4f84f4f6ea02ad3f15dfcff2d9"
--SRC_URI[sha256sum] = "02f2a72698453f722b102562eb6430d2a82d6c6c40f2b991ed69e7628142de6a"
-+SRC_URI[md5sum] = "f48cccd128b10a9a4d19db89d1a74a58"
-+SRC_URI[sha256sum] = "1a086486ff9da15791f294f6e9915eb3747d161ef64dee2d038a4d0b4a369b24"
- 
- PYPI_PACKAGE = "sentry-sdk"
- inherit pypi setuptools3
 -- 
-2.17.1
+2.16.4
 
