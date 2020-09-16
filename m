@@ -1,299 +1,181 @@
-Received: from mail-ej1-f66.google.com (mail-ej1-f66.google.com [209.85.218.66])
- by mx.groups.io with SMTP id smtpd.web10.20539.1600257223203889325
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (NAM11-CO1-obe.outbound.protection.outlook.com [40.107.220.75])
+ by mx.groups.io with SMTP id smtpd.web11.22374.1600263373148535189
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Sep 2020 04:53:43 -0700
+ Wed, 16 Sep 2020 06:36:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=RP39ivYZ;
- spf=pass (domain: gmail.com, ip: 209.85.218.66, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f66.google.com with SMTP id nw23so9923477ejb.4
-        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Sep 2020 04:53:42 -0700 (PDT)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=HBs9tmDu;
+ spf=pass (domain: windriver.com, ip: 40.107.220.75, mailfrom: trevor.gamblin@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=KqPlM9PPsy9SYxVFXBdR9jX50Kp1KWACGo/mRhQUoKxYWelh60xYuVGpmZbBdXEHRdtbjc1lU0vYiBD5W8YXjoXmgVCpLLhqazq3NJkDQ9ubs1DfowTit9wJFiaYh8eEAo0KzkosY4frfeQb4mkNilI822kwiMpVN7zMDwO85JizRKxnTNeKGtKfKHqedqJb/Z6ii/+lDfRaVxwOsSW4MJnSIxvJpQfl21z8mDYc+nXQCDmj590XqS16+Og6IzRmnpZJswM7v/5iGu2jbGSrPVSIbuPh/w11FOaKAoK9Twx5fLchevquJEIMOb22qWtgiZVRX/b95DZwT7LiGmhiPw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NUi2yLABsja5EgPQkkra7GPm/n6wPgyS/qLG3s0yqqY=;
+ b=OXzA0VsAiNErKiktMndHQOWjLi8CojBOYVfQoe5e0RH6FZQ+bRi/28gRs3xZq7wfSvB4h+anjK8AJ3uDZsNA7hjcWgFlNQqwUv8U2KhkEX18QXLoU9s5o7duU9+5aAAEx2rMOzvdt8xwIwVvtvOA+0KW5NyCfedgX7Q/TqXGTZjvF5gNq828NetZgMYa91yWH5QAIgHjbsAwK1hmHBxkg69fbVu7MtRD0opuxm62xUTMyxyZdxXbMmQaL+SW30Gz6r/XqBAD1aMj/A4b7gl/qo+DqdRM7swRY98GS/f9XWGFfxv+6dKFYvpQv97wjQFfL+Zvy4utIbzghy26xsbuIQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=RDWK8iOAplhzAEszOuVtaaQ9RsQAcT+f9OdyqB9eujw=;
-        b=RP39ivYZdOjZew8F404ByJUmagymEyKs2cuX7QpPzfhFPAWJXhJyWuziGEmaMindfe
-         E1BN4bhyJQdx0WZ1zx50swsexpl/1pcARLPao1PTQEACM67rv1cTgEseW7tU6SmGWNt+
-         VxQLrTGO5wW0ebWB4ysKp47F1vLcSSMXrfLccoIkQvjhlKccsib6GB6lhAhyC3I22oeb
-         twhLQ84rMeSHNU4+9NTIFZnOuMptynPEs95EL8aMpeL779FMMZAPVRKoxlWh1N96jtdZ
-         LrvDf9xUfoh0u0/D2OzS56UvVq6TA7FqqZ7Sm09e1AChzgh4GgCLwqOyg8GiowvUI+aF
-         VZZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=RDWK8iOAplhzAEszOuVtaaQ9RsQAcT+f9OdyqB9eujw=;
-        b=Xd3TjFEt2ze0khfYqU/QL95Ur6oRmQ8TgqJU2cMO/fcDstCHiS6lMoTRiJa88UGwfa
-         2m13WVeRnjnfN5b2wFJWDTIIZivgz9JEHfOBi+kjumu6FCMBRlCitdHOgHKR4CNjRfbG
-         9OoIQFAk9nJ4l+CFeioxSXbYMerqL7xK8LJzXMyUY+F8hFdAAuzAbamDJwxH94hAYVT8
-         e+XggMaHIcuKi7AQIIpNBtps2gP0VM+M6rOnOISVajGBsCNBH1sxvSap/+KATAq/xJvC
-         ijc57SDFeXveT4XgJswIqxVh3yk1750SvPFDkGxI5fvFOWJLq1lVmu07Cb208Fvexz7P
-         5woQ==
-X-Gm-Message-State: AOAM531zoSzM7Btlc7A3Dd/HpKH/U77jyhjAMc7AhKZI9oRjU/PTrVsD
-	xZAhmjhJ+Ka0BnehBsaWjqiX8uTDtWM=
-X-Google-Smtp-Source: ABdhPJzoFPhOPG2Rw09z6IWso+X7tMu5SfZtqtc8NcbY82+wA4I7JIFWv+ndAv4zPfwTq6iyADxqhQ==
-X-Received: by 2002:a17:906:d14e:: with SMTP id br14mr23350311ejb.299.1600257220930;
-        Wed, 16 Sep 2020 04:53:40 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id d6sm14401717edm.31.2020.09.16.04.53.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Sep 2020 04:53:40 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] bhugetlbfs: revert one commit from 2.23 to work around build error on arm
-Date: Wed, 16 Sep 2020 13:53:37 +0200
-Message-Id: <20200916115337.3202969-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <163540CAE7998AC0.16285@lists.openembedded.org>
-References: <163540CAE7998AC0.16285@lists.openembedded.org>
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NUi2yLABsja5EgPQkkra7GPm/n6wPgyS/qLG3s0yqqY=;
+ b=HBs9tmDu5d8YjBmRzs5xc3FM5a+rqehddxpSLhde8JiqRTowlaKuaUGm3TGpBD3sBtz2brBakgxieQx5U0DaoUfP39ZAdZW6fmYYJYzwwtLR5aZw84ij8EXMBsO0JHJzVMfsY6dXxCq91xO8lrtAZL7Z2J+OPtWO90Rp+MMAaK8=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
+ by BYAPR11MB3765.namprd11.prod.outlook.com (2603:10b6:a03:f6::25) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3391.11; Wed, 16 Sep
+ 2020 13:36:11 +0000
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::50e6:fd64:b821:78e8]) by BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::50e6:fd64:b821:78e8%7]) with mapi id 15.20.3391.014; Wed, 16 Sep 2020
+ 13:36:11 +0000
+Subject: Re: [oe] [meta-python][PATCH 01/10] python3-cffi: Upgrade 1.14.2 -> 1.14.3
+To: Leon Anavi <leon.anavi@konsulko.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20200915090303.14367-1-leon.anavi@konsulko.com>
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+Message-ID: <b78a9f84-8747-8ade-0966-aa82d6341780@windriver.com>
+Date: Wed, 16 Sep 2020 09:36:07 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+In-Reply-To: <20200915090303.14367-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0073.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2d::12) To BY5PR11MB3909.namprd11.prod.outlook.com
+ (2603:10b6:a03:191::13)
+Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0073.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::12) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3370.19 via Frontend Transport; Wed, 16 Sep 2020 13:36:10 +0000
+X-Originating-IP: [174.115.236.231]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 950b910a-79fa-4bb6-d39d-08d85a457938
+X-MS-TrafficTypeDiagnostic: BYAPR11MB3765:
+X-Microsoft-Antispam-PRVS: 
+	<BYAPR11MB37655D8B3589433821DD0ED69F210@BYAPR11MB3765.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:454;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	7XwSabphTRfGEVg9LdqZys4BBZ+C4oGFnOEqVfghlgOh+mfGCAQPT8LMkQoYFKHWsguGD/J3kwkjNHnweo978F+TNvXq9IqqlIG2gXiRV0gbmbMNThLONcb4BXtqZEJaSvRyc+pu/TWunYseH9Ul1fuKo5l3qPOsckr1iwZ+KSfbv+Az0Hcj+qJa7dmwfzRZP8RGtSSzCQEHpKOfNmr1NDO2bnVGe/fAd0SSxcZ60MTkNCI5+yfaz4Ijky7usJsOTJrgrNM88Ja2pOVhpuAtVhjTdOruDlHPz5DcyJSMxFwyhD0zaMbj+ZnGppRmiDjjj/0olhcgrBNmc8zWSgz+471ep8rvhDIuWcuMAHAH5UYfdrBgrK79kTKzThKcyYN+V2lnMQttT76blEQvJyHKKMv4nYdPAiWfm9Y9P2+mSVLt04W2Y95XR+qFdbvI09HPwVAXYj6OWKHAzA1QbN3wEQ==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(376002)(346002)(366004)(396003)(39830400003)(44832011)(966005)(26005)(66946007)(478600001)(31686004)(66476007)(956004)(2616005)(53546011)(66556008)(6486002)(33964004)(166002)(8676002)(8936002)(16576012)(186003)(83380400001)(52116002)(31696002)(86362001)(6666004)(316002)(16526019)(5660300002)(2906002)(36756003)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	wJAXuAOb3B0hXEKXSIdan6noYGnt0Ff0PfblX4Xd9m3jj/srH8XIe3ZkF9ipbIDltF2nT2oxWXbIia/UY6yf9Ot7LyJnRsllN4tR/IpGsmcNcIJElEPvBvpLwwzBD1pUyDrocFID4rZ3J0lVBkoFNLZeYz04r472ORprOESU+A7d24OBELG51MYSQE5Zsn9XLDfx8zg7CTgDvusYV8dFk5vfwP2O4jwyn9KTCEEo8AFzXDqUGUxq0HG9i2XIN2ocF5OZmowiGnyQj0HyRQ4xWdLP4Z9YSyYd8DnOPJjlVbWB0e3Nn/3EimQ6fBilyKN5RBAvEEN/dadltAwVwty+Dbuqbl14WQ9/a6hN2CD39btD6U+s3J0xTpE8D3VNtsI2zBNcd2nAr/9tIEjYFtnsuETLuNHRoHWuqupRkYg8h8MW30V/ch61r4IdHOrWo4+LHU1QL44m0BuORb258saz13ZQeMEZS+IT3SbKY00sTuSGKNRWwdkzO2/QSy1Dm9SY9zZYCabyDIIcyLDy0+cD0IAncRnPcHT2rrQCAOd6UK8WNtSOT391J3apGVknE5I+MFGaAipFMi3bDkFUAZgCc7seH9n4VICBkts2Wb/HQpQmiaIYZ9PoMuIKlkIenOiLQqQmnugVsYCuSWsHiV7XqA==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 950b910a-79fa-4bb6-d39d-08d85a457938
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2020 13:36:10.9553
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: uqXrODFVUTIT3gcCUc/1K6V38EDB24TWP/ceC2uJJNs2bo5rDWtnEJYhLxFbNe70hg2NoXB9RO8kOZD4uaCwOQIBQj7BMthGa4XywNA/i1s=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3765
+Content-Type: multipart/alternative;
+ boundary="------------42349C5D1A6E91551511003C"
+Content-Language: en-US
 
-* works around
-  ERROR: libhugetlbfs-1_2.23-r0 do_populate_sysroot: Fatal errors occurred in subprocesses:
-  Command '['arm-oe-linux-gnueabi-strip', '--remove-section=.comment', '--remove-section=.note', 'libhugetlbfs/1_2.23-r0/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/linkhuge_rw']' returned non-zero exit status 1.
-  Subprocess output:arm-oe-linux-gnueabi-strip:
-  libhugetlbfs/1_2.23-r0/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/stmuFa58: error: PHDR segment not covered by LOAD segment
-  arm-oe-linux-gnueabi-strip: libhugetlbfs/1_2.23-r0/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/stmuFa58[.interp]: file format not recognized
+--------------42349C5D1A6E91551511003C
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+On 9/15/20 5:02 AM, Leon Anavi wrote:
+> Upgrade to release 1.14.3:
+>
+> - Don't call PyEval_InitThreads() on CPython >= 3.7, where it
+>    should always be a no-op.  It is explicitly deprecated in 3.9.
+> - Let the test run directly on pypy too
+> - Remove extremely old and outdated .gitignore
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>   .../python/{python3-cffi_1.14.2.bb => python3-cffi_1.14.3.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-cffi_1.14.2.bb => python3-cffi_1.14.3.bb} (75%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.14.2.bb b/meta-python/recipes-devtools/python/python3-cffi_1.14.3.bb
+> similarity index 75%
+> rename from meta-python/recipes-devtools/python/python3-cffi_1.14.2.bb
+> rename to meta-python/recipes-devtools/python/python3-cffi_1.14.3.bb
+> index 57c28954a..dbdd16f66 100644
+> --- a/meta-python/recipes-devtools/python/python3-cffi_1.14.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-cffi_1.14.3.bb
+> @@ -4,8 +4,8 @@ LICENSE = "MIT"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
+>   DEPENDS += "libffi ${PYTHON_PN}-pycparser"
+>   
+> -SRC_URI[md5sum] = "3cc2f1daf62dd66eda79b4d6281cebfc"
+> -SRC_URI[sha256sum] = "ae8f34d50af2c2154035984b8b5fc5d9ed63f32fe615646ab435b05b132ca91b"
+> +SRC_URI[md5sum] = "c2a47ffd5d183b193ac8ed3414dcfd07"
+> +SRC_URI[sha256sum] = "f92f789e4f9241cd262ad7a555ca2c648a98178a953af117ef7fad46aa1d5591"
+>   
+>   inherit pypi setuptools3
+>   
+>
+> 
+
+--------------42349C5D1A6E91551511003C
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 9/15/20 5:02 AM, Leon Anavi wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:20200915090303.14367-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.14.3:
+
+- Don't call PyEval_InitThreads() on CPython &gt;= 3.7, where it
+  should always be a no-op.  It is explicitly deprecated in 3.9.
+- Let the test run directly on pypy too
+- Remove extremely old and outdated .gitignore
+
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+    </blockquote>
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
+    <blockquote type="cite" cite="mid:20200915090303.14367-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">
 ---
- ...bfs-fix-Ttext-segment-argument-on-AA.patch | 210 ++++++++++++++++++
- .../libhugetlbfs/libhugetlbfs_git.bb          |   1 +
- 2 files changed, 211 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch
+ .../python/{python3-cffi_1.14.2.bb =&gt; python3-cffi_1.14.3.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cffi_1.14.2.bb =&gt; python3-cffi_1.14.3.bb} (75%)
 
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch
-new file mode 100644
-index 0000000000..0787ef27d2
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch
-@@ -0,0 +1,210 @@
-+From 0a163f60b4a316c4b6f1726a71c84755f3bd85e7 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <martin.jansa@lge.com>
-+Date: Wed, 16 Sep 2020 04:36:04 -0700
-+Subject: [PATCH] Revert "ld.hugetlbfs: fix -Ttext-segment argument on AArch64"
-+
-+This reverts commit 852dcc963ce44861ed7c4e225aa92ff2b5b43579.
-+
-+* works around
-+  ERROR: libhugetlbfs-1_2.23-r0 do_populate_sysroot: Fatal errors occurred in subprocesses:
-+  Command '['arm-oe-linux-gnueabi-strip', '--remove-section=.comment', '--remove-section=.note', 'libhugetlbfs/1_2.23-r0/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/linkhuge_rw']' returned non-zero exit status 1.
-+  Subprocess output:arm-oe-linux-gnueabi-strip:
-+  libhugetlbfs/1_2.23-r0/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/stmuFa58: error: PHDR segment not covered by LOAD segment
-+  arm-oe-linux-gnueabi-strip: libhugetlbfs/1_2.23-r0/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/stmuFa58[.interp]: file format not recognized
-+
-+I don't see anything suspicious in the build (the same cmdline as in 2.22
-+version), but it uses
-+
-+libhugetlbfs/1_2.22-r0-old/temp/log.do_compile:arm-oe-linux-gnueabi-gcc
-+ -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 -Wl,-O1
-+-Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,relro,-z,now
-+-fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security
-+-Werror=format-security -Werror=return-type
-+--sysroot=/jenkins/mjansa/build/ros/oe-melodic-gatesgarth/libhugetlbfs/1_2.22-r0/recipe-sysroot
-+-I.. -O2 -Wall -g -o obj32/linkhuge_rw.o -c linkhuge_rw.c
-+libhugetlbfs/1_2.22-r0-old/temp/log.do_compile:arm-oe-linux-gnueabi-gcc
-+ -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 -Wl,-O1
-+-Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,relro,-z,now
-+-fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security
-+-Werror=format-security -Werror=return-type
-+--sysroot=/jenkins/mjansa/build/ros/oe-melodic-gatesgarth/libhugetlbfs/1_2.22-r0/recipe-sysroot
-+-B./obj32 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,relro,-z,now
-+-ldl -L../obj32 -o obj32/linkhuge_rw -Wl,--no-as-needed -lpthread -ldl
-+-lhugetlbfs_privutils -Wl,--hugetlbfs-align obj32/linkhuge_rw.o
-+obj32/testutils.o
-+libhugetlbfs/1_2.23-r0-new/temp/log.do_compile:arm-oe-linux-gnueabi-gcc
-+ -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 -Wl,-O1
-+-Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,relro,-z,now
-+-fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security
-+-Werror=format-security -Werror=return-type
-+--sysroot=/jenkins/mjansa/build/ros/oe-melodic-gatesgarth/libhugetlbfs/1_2.23-r0/recipe-sysroot
-+-I.. -O2 -Wall -g -o obj32/linkhuge_rw.o -c linkhuge_rw.c
-+libhugetlbfs/1_2.23-r0-new/temp/log.do_compile:arm-oe-linux-gnueabi-gcc
-+ -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 -Wl,-O1
-+-Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,relro,-z,now
-+-fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security
-+-Werror=format-security -Werror=return-type
-+--sysroot=/jenkins/mjansa/build/ros/oe-melodic-gatesgarth/libhugetlbfs/1_2.23-r0/recipe-sysroot
-+-B./obj32 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,relro,-z,now
-+-ldl -L../obj32 -o obj32/linkhuge_rw -Wl,--no-as-needed -lpthread -ldl
-+-lhugetlbfs_privutils -Wl,--hugetlbfs-align obj32/linkhuge_rw.o
-+obj32/testutils.o
-+
-+And the git log between 2.22 and 2.23 is also very short and looks
-+reasonable.
-+https://github.com/libhugetlbfs/libhugetlbfs/compare/2.22...2.23
-+
-+When checking with readelf -l it also shows the error about PHDR segment:
-+arm-oe-linux-gnueabi-readelf -l
-+./1_2.22-r0-old/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/linkhuge_rw
-+
-+Elf file type is DYN (Shared object file)
-+Entry point 0x201105
-+There are 10 program headers, starting at offset 52
-+
-+Program Headers:
-+  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
-+  PHDR           0x000034 0x00200034 0x00200034 0x00140 0x00140 R   0x4
-+  INTERP         0x000174 0x00200174 0x00200174 0x0001d 0x0001d R   0x1
-+      [Requesting program interpreter: /usr/lib/ld-linux-armhf.so.3]
-+  LOAD           0x000000 0x00200000 0x00200000 0x1222c 0x1222c R E 0x200000
-+  LOAD           0x1ffdf0 0x005ffdf0 0x005ffdf0 0x102e0 0x202ec RW  0x200000
-+  DYNAMIC        0x1ffdf8 0x005ffdf8 0x005ffdf8 0x00128 0x00128 RW  0x4
-+  NOTE           0x000194 0x00200194 0x00200194 0x00044 0x00044 R   0x4
-+  GNU_EH_FRAME   0x012224 0x00212224 0x00212224 0x00008 0x00008 R   0x4
-+  GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RW  0x10
-+  EXIDX          0x001c5c 0x00201c5c 0x00201c5c 0x00008 0x00008 R   0x4
-+  GNU_RELRO      0x1ffdf0 0x005ffdf0 0x005ffdf0 0x00210 0x00210 RW  0x4
-+
-+ Section to Segment mapping:
-+  Segment Sections...
-+   00
-+   01     .interp
-+   02     .interp .note.ABI-tag .note.gnu.build-id .dynsym .dynstr
-+.gnu.hash .gnu.version .gnu.version_r .rel.dyn .rel.plt .init .plt .text
-+.fini .ARM.extab .ARM.exidx .rodata .eh_frame .eh_frame_hdr
-+   03     .fini_array .init_array .dynamic .got .data .bss
-+   04     .dynamic
-+   05     .note.ABI-tag .note.gnu.build-id
-+   06     .eh_frame_hdr
-+   07
-+   08     .ARM.extab .ARM.exidx
-+   09     .fini_array .init_array .dynamic .got
-+
-+arm-oe-linux-gnueabi-readelf -l
-+./1_2.23-r0-new/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/linkhuge_rw
-+
-+Elf file type is DYN (Shared object file)
-+Entry point 0x31cd1
-+There are 10 program headers, starting at offset 52
-+
-+Program Headers:
-+  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
-+  PHDR           0x000000 0x00000000 0x00000000 0x00000 0x00000 R   0
-+readelf: Error: the PHDR segment is not covered by a LOAD segment
-+  INTERP         0x030d40 0x00030d40 0x00030d40 0x0001d 0x0001d R   0x1
-+      [Requesting program interpreter: /usr/lib/ld-linux-armhf.so.3]
-+  LOAD           0x030d40 0x00030d40 0x00030d40 0x120b8 0x120b8 R E 0x200000
-+  LOAD           0x1ffdf0 0x003ffdf0 0x003ffdf0 0x102e0 0x202ec RW  0x200000
-+  DYNAMIC        0x1ffdf8 0x003ffdf8 0x003ffdf8 0x00128 0x00128 RW  0x4
-+  NOTE           0x030d60 0x00030d60 0x00030d60 0x00044 0x00044 R   0x4
-+  GNU_EH_FRAME   0x042df0 0x00042df0 0x00042df0 0x00008 0x00008 R   0x4
-+  GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RW  0x10
-+  EXIDX          0x032828 0x00032828 0x00032828 0x00008 0x00008 R   0x4
-+  GNU_RELRO      0x1ffdf0 0x003ffdf0 0x003ffdf0 0x00210 0x00210 RW  0x4
-+
-+ Section to Segment mapping:
-+  Segment Sections...
-+   00
-+   01     .interp
-+   02     .interp .note.ABI-tag .note.gnu.build-id .dynsym .dynstr
-+.gnu.hash .gnu.version .gnu.version_r .rel.dyn .rel.plt .init .plt .text
-+.fini .ARM.extab .ARM.exidx .rodata .eh_frame .eh_frame_hdr
-+   03     .fini_array .init_array .dynamic .got .data .bss
-+   04     .dynamic
-+   05     .note.ABI-tag .note.gnu.build-id
-+   06     .eh_frame_hdr
-+   07
-+   08     .ARM.extab .ARM.exidx
-+   09     .fini_array .init_array .dynamic .got
-+
-+And the diff between these 2:
-+
-+1_2.22-r0-old/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/linkhuge_rw.readelf
-+1_2.23-r0-new/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/linkhuge_rw.readelf
-+ Elf file type is DYN (Shared object file)
-+-Entry point 0x201105
-++Entry point 0x31cd1
-+ There are 10 program headers, starting at offset 52
-+
-+ Program Headers:
-+   Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
-+-  PHDR           0x000034 0x00200034 0x00200034 0x00140 0x00140 R   0x4
-+-  INTERP         0x000174 0x00200174 0x00200174 0x0001d 0x0001d R   0x1
-++  PHDR           0x000000 0x00000000 0x00000000 0x00000 0x00000 R   0
-++readelf: Error: the PHDR segment is not covered by a LOAD segment
-++  INTERP         0x030d40 0x00030d40 0x00030d40 0x0001d 0x0001d R   0x1
-+       [Requesting program interpreter: /usr/lib/ld-linux-armhf.so.3]
-+-  LOAD           0x000000 0x00200000 0x00200000 0x1222c 0x1222c R E 0x200000
-+-  LOAD           0x1ffdf0 0x005ffdf0 0x005ffdf0 0x102e0 0x202ec RW  0x200000
-+-  DYNAMIC        0x1ffdf8 0x005ffdf8 0x005ffdf8 0x00128 0x00128 RW  0x4
-+-  NOTE           0x000194 0x00200194 0x00200194 0x00044 0x00044 R   0x4
-+-  GNU_EH_FRAME   0x012224 0x00212224 0x00212224 0x00008 0x00008 R   0x4
-++  LOAD           0x030d40 0x00030d40 0x00030d40 0x120b8 0x120b8 R E 0x200000
-++  LOAD           0x1ffdf0 0x003ffdf0 0x003ffdf0 0x102e0 0x202ec RW  0x200000
-++  DYNAMIC        0x1ffdf8 0x003ffdf8 0x003ffdf8 0x00128 0x00128 RW  0x4
-++  NOTE           0x030d60 0x00030d60 0x00030d60 0x00044 0x00044 R   0x4
-++  GNU_EH_FRAME   0x042df0 0x00042df0 0x00042df0 0x00008 0x00008 R   0x4
-+   GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RW  0x10
-+-  EXIDX          0x001c5c 0x00201c5c 0x00201c5c 0x00008 0x00008 R   0x4
-+-  GNU_RELRO      0x1ffdf0 0x005ffdf0 0x005ffdf0 0x00210 0x00210 RW  0x4
-++  EXIDX          0x032828 0x00032828 0x00032828 0x00008 0x00008 R   0x4
-++  GNU_RELRO      0x1ffdf0 0x003ffdf0 0x003ffdf0 0x00210 0x00210 RW  0x4
-+
-+  Section to Segment mapping:
-+
-+Revert fixes this build issue, but I still don't see why it fails this way.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+
-+# Please enter the commit message for your changes. Lines starting
-+# with '#' will be ignored, and an empty message aborts the commit.
-+#
-+# Date:      Wed Sep 16 13:43:09 2020 +0200
-+#
-+# On branch jansa/master
-+# Changes to be committed:
-+#	new file:   meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch
-+#	modified:   meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-+#
-+# Untracked files:
-+#	counts.txt
-+#	diff
-+#	log.svn
-+#	log.svn2
-+#	wip/
-+#
-+---
-+ ld.hugetlbfs | 4 +---
-+ 1 file changed, 1 insertion(+), 3 deletions(-)
-+
-+diff --git a/ld.hugetlbfs b/ld.hugetlbfs
-+index 5e4e497..6ee8238 100755
-+--- a/ld.hugetlbfs
-++++ b/ld.hugetlbfs
-+@@ -130,9 +130,7 @@ if [ "$HTLB_ALIGN" == "slice" ]; then
-+ 	# targeting the ARM platform one needs to explicitly set the text segment offset
-+ 	# otherwise it will be NULL.
-+ 	case "$EMU" in
-+-	armelf*_linux_eabi|aarch64elf*|aarch64linux*)
-+-		printf -v TEXTADDR "%x" "$SLICE_SIZE"
-+-		HTLBOPTS="$HTLBOPTS -Ttext-segment=$TEXTADDR" ;;
-++	armelf*_linux_eabi|aarch64elf*|aarch64linux*)	HTLBOPTS="$HTLBOPTS -Ttext-segment=$SLICE_SIZE" ;;
-+ 	elf_i386)		HTLBOPTS="$HTLBOPTS -Ttext-segment=0x08000000" ;;
-+ 	elf64ppc|elf64lppc)
-+ 		if [ "$MMU_TYPE" == "Hash" ] ; then
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-index b349096ec2..2f07c938bb 100644
---- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-@@ -25,6 +25,7 @@ SRC_URI = " \
-     file://0005-Include-dirent.h-for-ino_t.patch \
-     file://0006-include-limits.h-for-PATH_MAX.patch \
-     file://0001-huge_page_setup_helper-use-python3-interpreter.patch \
-+    file://0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.14.2.bb b/meta-python/recipes-devtools/python/python3-cffi_1.14.3.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-cffi_1.14.2.bb
+rename to meta-python/recipes-devtools/python/python3-cffi_1.14.3.bb
+index 57c28954a..dbdd16f66 100644
+--- a/meta-python/recipes-devtools/python/python3-cffi_1.14.2.bb
++++ b/meta-python/recipes-devtools/python/python3-cffi_1.14.3.bb
+@@ -4,8 +4,8 @@ LICENSE = &quot;MIT&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf">&quot;file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf&quot;</a>
+ DEPENDS += &quot;libffi ${PYTHON_PN}-pycparser&quot;
  
- UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
--- 
-2.25.1
+-SRC_URI[md5sum] = &quot;3cc2f1daf62dd66eda79b4d6281cebfc&quot;
+-SRC_URI[sha256sum] = &quot;ae8f34d50af2c2154035984b8b5fc5d9ed63f32fe615646ab435b05b132ca91b&quot;
++SRC_URI[md5sum] = &quot;c2a47ffd5d183b193ac8ed3414dcfd07&quot;
++SRC_URI[sha256sum] = &quot;f92f789e4f9241cd262ad7a555ca2c648a98178a953af117ef7fad46aa1d5591&quot;
+ 
+ inherit pypi setuptools3
+ 
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+    </blockquote>
+  </body>
+</html>
 
+--------------42349C5D1A6E91551511003C--
