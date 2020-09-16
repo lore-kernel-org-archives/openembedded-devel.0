@@ -1,123 +1,147 @@
-Received: from mail-il1-f193.google.com (mail-il1-f193.google.com [209.85.166.193])
- by mx.groups.io with SMTP id smtpd.web12.10080.1600210781069552245
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com [209.85.210.195])
+ by mx.groups.io with SMTP id smtpd.web11.11295.1600215075991822629
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 15 Sep 2020 15:59:41 -0700
+ Tue, 15 Sep 2020 17:11:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=RWg+9GAB;
- spf=pass (domain: gmail.com, ip: 209.85.166.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-il1-f193.google.com with SMTP id a19so4601681ilq.10
-        for <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2020 15:59:40 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=fdYBVd9u;
+ spf=pass (domain: gmail.com, ip: 209.85.210.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f195.google.com with SMTP id z18so370987pfg.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 15 Sep 2020 17:11:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=E7bYPo+PwOCI+5N+5EY6deQ1GehFlLB9vRNzOfo7D80=;
-        b=RWg+9GABuN0Di/R/UPcJIMIStnFklQlJFpHkXcGdffHELSXNjZMslJri6IMP/zMk5y
-         CQwReFMex4lGlWviaCa0Fph9xA5PT0Zw1ClGTEiySKYnRBxqw1MOfGTGZs0MAkIH+PAJ
-         eJgN5D7ommaEDd3IU+HyEvXa+dkUUGCEIcz994MeNMPFVsqr4FJY7LIZV4TmWypbEdnl
-         ZMdhr5Tdi7gIOTFFcj370iKXI3/w0wSWwU3kLmRBMvbKNjcWsAaBlbRzMkK5htC5oj1G
-         etkwvrEqmL5BSBDx7csdCP9VzFK7lnndExhrZVUj5oHlE1dLZ2HVdpoQ28YYLnoLYNAJ
-         EQLA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Zzu5vILSK+7fHtDt6ounX3Wig0Iz01SXJhaNTRRkSpU=;
+        b=fdYBVd9uzvK8+25MZsv5zZjrPQxlYRPmnZKbGq5t09n3KcMWGYfCavNP19ID/atV37
+         hT+KSsXnv/o4qvRiwRDZUFo9JiwSXu7j/AX7Av5fcZ0WqVEyXLCJH8lIMFr9gKzFUHfy
+         q17e6GPtndYDcwNt51TSsTADRDJcyjiWj5yEVhg3B7FkrkUzVyxpGqObUabBhvAiMN4q
+         Br+L7b1SQhf+QINviKzXDyYKg4zH1PvHwq8FZLHp8xBuAOkZU/UwxpmSnEXJ+ScK3j9I
+         j9etyXnM/GuuWgxywWln3iSu8ChYY3E8FeIC9eYpUJKKC63ViwqDCLu1Gu2Uu8FF5hwj
+         l8Yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=E7bYPo+PwOCI+5N+5EY6deQ1GehFlLB9vRNzOfo7D80=;
-        b=VoEfGBiW+JnRTHxyDrhV6Y8dnQPNWGV1Cb7CAjWz+AFTDBc6dvLKzztwsnMs6wAYIc
-         ofe3RzXHEb9WlnXmnOeTO4BHxZjDVDwK1pjydMDe3e23rniG2ch1LzibR6zhQvwE9a9K
-         /D+pG3w42G4zMS47dfFkyGFNxIorts0qiYcVrwFejiDPgyMFXU/DGrP5BwEELhlN/pxy
-         fC7vyDPq9CjQLS7QimIFAjSPvHRiH+LxztcCYlf5BVX5rrBCBOtkPBH48DWMiuA1bXJM
-         MfPSYwVE/0mWOmLAYTpDIcWPxuMZ2NQ1LtbR4jbr01UMPud0z1b8EE8ZBIFL+y8uRKUL
-         2H5Q==
-X-Gm-Message-State: AOAM533L8d/fs8nUcNYNppZhEQH9V4mavohoCEljBiCiKCq2b1PX47iq
-	EAvsAGvgoMWr3jzFaP2uDhdcv8LacbgBisXOr5a5nuVxpA8w6g==
-X-Google-Smtp-Source: ABdhPJzQnQIVNQ7oSAmP4In6sOThdg51d+x5U+hK6wyasgL1NGLTKNLamM7k/IlDXXfo2Uw3vFp0dF3il1rufkoW1yo=
-X-Received: by 2002:a05:6e02:8b3:: with SMTP id a19mr11676350ilt.174.1600210780155;
- Tue, 15 Sep 2020 15:59:40 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200909084218.802654-1-m.tretter@pengutronix.de> <CAMKF1so-Zfiv+vbFf1J1-bSkBMSTN4gx548YJ5=cUK42YS--cg@mail.gmail.com>
-In-Reply-To: <CAMKF1so-Zfiv+vbFf1J1-bSkBMSTN4gx548YJ5=cUK42YS--cg@mail.gmail.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Zzu5vILSK+7fHtDt6ounX3Wig0Iz01SXJhaNTRRkSpU=;
+        b=stiAJx2WwMne7YN4NXjEBRzoejQkgyb2yUssKNUcFbu1QhfBTgHFDJCILqR305Tjji
+         jxFZU133Y616sz3JaabzPX7EwNj7FdfQv9lYd0wh8upHQgRQgdu0lfbJ5IVCa5fjDrVo
+         AZ6JfDKiejEro1E1TP1c7Gu3k2jRmN7gP4drGD42lIMUedWhOB01iI+HCVTAdX1unqMB
+         aQv8/+7QXVGydOIhLvneMdRnIxP274mJoLxL5ZDK/u94bH3Mt9pCXKArB5JkQ69Kgfn8
+         ePBbkXO8kJO8Mzr0tOevg94urc7iNfs+WhCtFhyj8qba2R7n1jKwVvFkJfC7/fKy3E5S
+         i0tQ==
+X-Gm-Message-State: AOAM530DVrIKsLax9X25N+GMepnW1jmYtqUbSv6OqFY1cFBu4CV2/kxi
+	9jLMcg9ma+H9CGwh+07edEmEORZ4dJMK1A==
+X-Google-Smtp-Source: ABdhPJxauW1XEEpYYuHZljiPKc+bqFzVsScJvtvs5I1eVL9ujxH1tEty5PlxCHzO4U8kQ8CQGGw1+Q==
+X-Received: by 2002:a65:4505:: with SMTP id n5mr16211435pgq.229.1600215074866;
+        Tue, 15 Sep 2020 17:11:14 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::1759])
+        by smtp.gmail.com with ESMTPSA id u4sm15090042pfk.166.2020.09.15.17.11.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 15 Sep 2020 17:11:14 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Tue, 15 Sep 2020 15:58:50 -0700
-Message-ID: <CAMKF1srwBFPAxpd4BZGkC9TaC7gM2jYB2c9RmqeADxkRRf1fWQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] apitrace: add new recipe
-To: Michael Tretter <m.tretter@pengutronix.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] tesseract: update to 4.1.1
+Date: Tue, 15 Sep 2020 17:11:12 -0700
+Message-Id: <20200916001112.83283-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.28.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-additionally, it fails to build on qemux86-64
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 
+License-Update: file that mentioned licencing information was replaced
+with an actual license file
 
-/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/apitrace/9.0-r0/git/retrace/process_name.cpp:52:1:
-error: redefinition of a 'extern inline' function 'readlink' is not
-supported in C++
-readlink(const char *pathname, char *buf, size_t bufsiz)
-^
-/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/apitrace/9.0-r0/recipe-sysroot/usr/include/bits/unistd.h:145:8:
-note: previous definition is here
-__NTH (readlink (const char *__restrict __path, char *__restrict __buf,
-       ^
+Add patch to fix build with musl
 
-On Wed, Sep 9, 2020 at 10:12 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Wed, Sep 9, 2020 at 2:54 AM Michael Tretter <m.tretter@pengutronix.de> wrote:
-> >
-> > apitrace consists of a set of tools to:
-> >
-> >  - trace OpenGL, OpenGL ES, Direct3D, and DirectDraw APIs calls to a file;
-> >
-> >  - replay OpenGL and OpenGL ES calls from a file;
-> >
-> >  - inspect OpenGL state at any call while retracing;
-> >
-> >  - visualize and edit trace files.
-> >
->
-> Thanks for contributing new recipe, they also need to go into
-> appropriate packagegroup in packagegroup-meta-oe.bb
-> so it can be built in testing images.
->
-> > Signed-off-by: Michael Tretter <m.tretter@pengutronix.de>
-> > ---
-> >  .../recipes-devtools/apitrace/apitrace_9.0.bb | 28 +++++++++++++++++++
-> >  1 file changed, 28 insertions(+)
-> >  create mode 100644 meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
-> >
-> > diff --git a/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb b/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
-> > new file mode 100644
-> > index 000000000000..6e61683cde92
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
-> > @@ -0,0 +1,28 @@
-> > +SUMMARY = "Tools for tracing OpenGL, Direct3D, and other graphics APIs"
-> > +HOMEPAGE = "http://apitrace.github.io/"
-> > +SECTION = "console/tools"
-> > +LICENSE = "MIT & BSD-3-Clause"
-> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=aeb969185a143c3c25130bc2c3ef9a50 \
-> > +                    file://thirdparty/snappy/COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
-> > +
-> > +SRCREV = "cae55f54c53449fd07f8a917dcd0874db2c15032"
-> > +SRC_URI = "git://github.com/${BPN}/${BPN}.git"
-> > +
-> > +S = "${WORKDIR}/git"
-> > +
-> > +DEPENDS += "zlib libpng python3-native"
-> > +
-> > +inherit cmake
-> > +
-> > +EXTRA_OECMAKE += "\
-> > +    -DENABLE_GUI=OFF \
-> > +    -DENABLE_X11=OFF \
-> > +    -DENABLE_STATIC_LIBGCC=OFF \
-> > +    -DENABLE_STATIC_LIBSTDCXX=OFF \
-> > +    -DPython3_ROOT_DIR=/usr/bin/python3-native \
-> > +"
-> > +
-> > +# Use the bundled snappy library
-> > +EXTRA_OECMAKE += "\
-> > +    -DENABLE_STATIC_SNAPPY=ON \
-> > +"
-> > --
-> > 2.20.1
-> >
-> > 
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../tesseract/0001-include-sys-time.h.patch   | 34 +++++++++++++++++++
+ .../{tesseract_git.bb => tesseract_4.1.1.bb}  | 15 ++++----
+ 2 files changed, 43 insertions(+), 6 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/tesseract/tesseract/0001-include-sys-time.h.patch
+ rename meta-oe/recipes-graphics/tesseract/{tesseract_git.bb => tesseract_4.1.1.bb} (51%)
+
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract/0001-include-sys-time.h.patch b/meta-oe/recipes-graphics/tesseract/tesseract/0001-include-sys-time.h.patch
+new file mode 100644
+index 0000000000..de1fa75b7c
+--- /dev/null
++++ b/meta-oe/recipes-graphics/tesseract/tesseract/0001-include-sys-time.h.patch
+@@ -0,0 +1,34 @@
++From b47fa9532a7090d76521603dbc818bdec100085f Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 15 Sep 2020 17:04:27 -0700
++Subject: [PATCH] include sys/time.h
++
++This provides missing definitions of timeval stuct
++
++Fixes
++| ../../../git/src/ccutil/ocrclass.h:154:7: error: member access into
++incomplete type 'struct timeval'
++|     tv->tv_usec = (millisecs.count() % 1000) * 1000;
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/ccutil/ocrclass.h | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/src/ccutil/ocrclass.h b/src/ccutil/ocrclass.h
++index d39a6dd6..96395c9b 100644
++--- a/src/ccutil/ocrclass.h
+++++ b/src/ccutil/ocrclass.h
++@@ -28,6 +28,8 @@
++ 
++ #include <chrono>
++ #include <ctime>
+++#include <sys/time.h>
+++
++ #ifdef _WIN32
++ #include <winsock2.h> // for timeval
++ #endif
++-- 
++2.28.0
++
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract_git.bb b/meta-oe/recipes-graphics/tesseract/tesseract_4.1.1.bb
+similarity index 51%
+rename from meta-oe/recipes-graphics/tesseract/tesseract_git.bb
+rename to meta-oe/recipes-graphics/tesseract/tesseract_4.1.1.bb
+index 89d09a0f55..3b5032f06d 100644
+--- a/meta-oe/recipes-graphics/tesseract/tesseract_git.bb
++++ b/meta-oe/recipes-graphics/tesseract/tesseract_4.1.1.bb
+@@ -1,19 +1,22 @@
+ SUMMARY = "A commercial quality OCR engine "
++HOMEPAGE = "https://github.com/tesseract-ocr/tesseract"
++BUGTRACKER = "https://github.com/tesseract-ocr/tesseract/issues"
+ 
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=7ea4f9a43aba9d3c849fe5c203a0ed40"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
++
++BRANCH = "4.1"
++SRCREV = "f4ef2f2050f4c25b28bdbf0063b7d2eb30f41cf7"
++SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=${BRANCH} \
++           file://0001-include-sys-time.h.patch \
++          "
+ 
+-BRANCH = "3.05"
+-PV = "${BRANCH}.01+git${SRCPV}"
+-SRCREV = "215866151e774972c9502282111b998d7a053562"
+-SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=${BRANCH}"
+ S = "${WORKDIR}/git"
+ 
+ DEPENDS = "leptonica"
+ 
+ EXTRA_OECONF += "LIBLEPT_HEADERSDIR=${STAGING_INCDIR}/leptonica"
+ 
+-
+ inherit autotools pkgconfig
+ 
+ FILES_${PN} += "${datadir}/tessdata"
+-- 
+2.28.0
+
