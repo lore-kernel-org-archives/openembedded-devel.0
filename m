@@ -1,17 +1,17 @@
-Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.42])
- by mx.groups.io with SMTP id smtpd.web11.22443.1600263494018831680
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.62])
+ by mx.groups.io with SMTP id smtpd.web11.22454.1600263509920827743
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Sep 2020 06:38:14 -0700
+ Wed, 16 Sep 2020 06:38:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=RparSqE0;
- spf=pass (domain: windriver.com, ip: 40.107.75.42, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=hxiQuFQR;
+ spf=pass (domain: windriver.com, ip: 40.107.94.62, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bgbYj9zZBQ+yJjiY1N7RkG3nHfrmaqga/+QPDCp97Op6PrZ556fG4Plb2DvF91W1NK7Dki/93L4B0zKeIDHL4ZKVqdBeTCbIXtLiJR9XlunpIc/snqdDtUBrxuwGSQMUjnZwV6ePHg8YKvnpH7naQ4XKawuz/rNR8z0ubpT8txTGUi6tcOeRPbJ3fNv4EgKernRrkbWLEB6KS9kw2wuFuIoiaSGGPD595JujJEGdJoXY7seZl4q+LiPjLJ3ak9+D/7fTiaGOZd5wLsrKZAqtutJs/8cmUqJ27deUYk/zhXYdr9RU1yJyIah9hwpV/hSDuUaQt2BMiCX3YcOJGFJUIw==
+ b=FedKJKJlnS15cH3htCXettN7/78pSLwjt1LIsZ8HBTY8CtE1yi5hupcW16zDEm5VvD35teACBjI1wIGTHx8vsGtR4fJS2MRkQNvSZje5bmB5MFJ4DS7/2g+b+SmW8+onlLqg9nV926XQU1gJ2DewZRJ4IruoZztuMzHaie7K+LQV1DR6msHHWKfYiE/zY2azJmgYJ4Bq3aIf8w4K8Pouul8j8f/e2shgB1QlhKEMlqUy4l4ne24X7YlULXWFnR+0r9Gd22nZ8AaH/4WURi2QYbTOJdj0DsxMbXd0dPDs6OIMVe19i5nlvL+eEPYlPPW/krhWQuQCCzjoS1ADGLT2cA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aanRrnKvhm0BmvfUbuc96L9eeuAiLXlcHyI2J6PgYRY=;
- b=Z4sOhSidcgdHUv9lzKw70zi+OCQYY54vc8U5LPMsSap79WdididK6y/Ug0fFCVqSYX4dlrY+6FZ4d930wSn7kLzskPZwqbgejQMxNzAxjjScaXFQRmTAEMY1nbKF20Zj1j2YT1Y+yMRQhs5Z3LzKg/lDcINnijFMxOt47H2D11GUvJen8OH9qpZJ1JxRCprVoHFxKxQlNdxI9oFtVAWjYPhLiD61+j2S85dEgWLzGzTSo++DoQA4dfIqc8Ki3XGLeh2BAnfmT5bwZ1wQ4LAV/9tydbAy44iGTae8LcISdmjnhR4tqIj0Z6uPfjfPs/iOR+u21GVsPkOrcvvIXGdPDg==
+ bh=qzaTTIgZr/Gz0+1sI3RansH5ooskHT3PAyIc0ynYSNg=;
+ b=OZfkukNIaiAVrycS+nhkIsebkE1H5d836ISGwqh5/FMucBk2yETya/jJisacbo6swRhT7owt8wHjDnsY5cDPYo5Ph/umj1ai7Qimon3JJkvgEExKjrCPdSdGNevv5jxhrRgMecSqaSwQa5e+hmIggr69TpR3muNzruplpcpXLuZ5AadmIdczMBeq9w8KnEalY1HdK8Uewvkl1QPSVyVM/GRo4jbAJxsQ0Q1zUbVQIBZrLBiAtrW9vtWawcY13nNB+TMDXW44nJ7/WRUde70eJAAuQ3mj5f5aAaZaHEmegGps5+BqG39Q6n06EzL71i7KJLWTF3iAlBDD4yNPdvNrHA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,106 +19,112 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aanRrnKvhm0BmvfUbuc96L9eeuAiLXlcHyI2J6PgYRY=;
- b=RparSqE0T5kiGfNcQ2jVgjdTPs6uytXhoXoBsN3R0OjACXsWCImgynVDQMiN/WeG7O8x16kMhuUGPSfJfB/YOKfk9WbjJ0HLjC5iUXswAFNjECJ2PGx2aZhmVkFKqQZL3TyB3oD/88Lu9K26s6FovHZfhzzN92vtOSqCa2whjIE=
+ bh=qzaTTIgZr/Gz0+1sI3RansH5ooskHT3PAyIc0ynYSNg=;
+ b=hxiQuFQRGBon+VUhJ4iGoPGHuQo++J/xybEG4CRWg8MdtOz3DpHTtsL3yzdnDNpMXZlu76dyjbX3weYi7QPRY9iJoj6KaaHi5KOxXfX/DDOEDq/F+xubvs1+1su4D/X4FmNVmgy7zsK06Xsdyy3iz1D1w+4dutD5ALIdnQiUqe0=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BY5PR11MB4306.namprd11.prod.outlook.com (2603:10b6:a03:1bb::17) with
+ by BYAPR11MB2679.namprd11.prod.outlook.com (2603:10b6:a02:c7::17) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3370.17; Wed, 16 Sep
- 2020 13:38:12 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3391.11; Wed, 16 Sep
+ 2020 13:38:29 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8%7]) with mapi id 15.20.3391.014; Wed, 16 Sep 2020
- 13:38:12 +0000
-Subject: Re: [oe] [meta-python][PATCH 1/2] python3-ruamel-yaml: Upgrade 0.16.11 -> 0.16.12
+ 13:38:29 +0000
+Subject: Re: [oe] [meta-python][PATCH 2/2] python3-msk: Upgrade 0.3.15 -> 0.3.16
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200915125447.14197-1-leon.anavi@konsulko.com>
+ <20200915125447.14197-2-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <8c150a1b-e2a3-b491-105c-382d32cba39f@windriver.com>
-Date: Wed, 16 Sep 2020 09:38:10 -0400
+Message-ID: <c6400df2-ee5a-7c84-0bc4-0c373a4d50f4@windriver.com>
+Date: Wed, 16 Sep 2020 09:38:26 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
-In-Reply-To: <20200915125447.14197-1-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0086.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2d::25) To BY5PR11MB3909.namprd11.prod.outlook.com
+In-Reply-To: <20200915125447.14197-2-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0089.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2d::28) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0086.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::25) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3391.13 via Frontend Transport; Wed, 16 Sep 2020 13:38:11 +0000
+Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0089.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3391.14 via Frontend Transport; Wed, 16 Sep 2020 13:38:28 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 67b99d9b-35b2-4e2b-d86c-08d85a45c1ba
-X-MS-TrafficTypeDiagnostic: BY5PR11MB4306:
+X-MS-Office365-Filtering-Correlation-Id: 73c60dcf-3b85-43e9-c34c-08d85a45cb80
+X-MS-TrafficTypeDiagnostic: BYAPR11MB2679:
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB430689979470F553EFA6217C9F210@BY5PR11MB4306.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:173;
+	<BYAPR11MB267972063E9C2ACCF3E047BE9F210@BYAPR11MB2679.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:262;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	WmYw7ezCHnw0+AMeW8nWLiZ0A+TWZn2R9AnnLsEGEdrHronvir5pyPcj6PNHYESt4qYvCt/zPRauVlOCadVI5MLQ8TEgN36ST0RrUmdoMuIeSz3EUOg7PXsNO/+eSaUQCFavZr2CBYkYIeJoMyxCAykAzU3e6ZPLUeDVAr8tZtCcdrKhG+uTN3FEerAFujUdvDuK4HricXwKOJIz7+Co89bYwV1Cr/tWB1b977cMgDOdbCF5lxYRdog/BU6bFO2ZrjxFhHCEAFxwcZLqv3ZH2DwlP9zF6iJwzwLr0M6pvfX5aYqxzuI8odiTtYNtsvxxvMr+XbVMTDQZOk9rRmplsgcVWStWnxmTsVb9CCYcPQ+xC05R+BTpla8T7n6LneSnkCRrNK3X0tcV/1qQ8PJ3Nsd8NStFXg5555i1h0ydBgjVAuGsvZuazTotlbQgDptE6s1pHiDsZQlwHrJxk42YGA==
+	SE7RroTnCTJvNU+2Nq8QbtY1r3F8FBAl925QyaABNfBQRgZ1piTOhrq5SSE8suX7WMNZBS6MAobW+uGj57IYafOmJGXRXG7z7WGuvJUWxekdPBrEIH13mNzz6LQJL6LQpy7XW7/Jkj6VL6XfD88BDOPKWoKi6Y566J4xCRh6vXTysitZUFYJCRFP7r9id45fmewUh0Lvtu64A1i0tBVJ9i0pwuhC/G5UbtdmPGyk+JAG2lnme4oloHA0Na/8RRGJva3GFKYTev2GNafu8Jo6HJtz2eMryzJoSwlYAedvrB84YUNoccweZOl4ecxVWWBySubxSKynFMprHvrvDTVRY6vcPHcnfjr/w1LwW/DfqkUcNxygZ1YNo0Tb1er7NbzTb8E/L7zyOC6efPQELtXiPWWFs920glRhHIVPG/uCaYppxLTk5OMYmZFI/PT641i1XylG8oIAlyn717UrKWXL9w==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39830400003)(396003)(366004)(136003)(376002)(346002)(83380400001)(956004)(8676002)(5660300002)(2616005)(966005)(53546011)(478600001)(26005)(44832011)(166002)(8936002)(316002)(31686004)(6486002)(86362001)(31696002)(16526019)(66476007)(186003)(52116002)(33964004)(2906002)(66556008)(66946007)(16576012)(36756003)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(39850400004)(346002)(376002)(396003)(366004)(66476007)(66946007)(52116002)(478600001)(66556008)(966005)(33964004)(53546011)(316002)(44832011)(16576012)(2616005)(16526019)(26005)(186003)(5660300002)(956004)(36756003)(83380400001)(31686004)(2906002)(8936002)(8676002)(166002)(31696002)(86362001)(6486002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	iVWw6lx0/amXyYMaPX5bMFcWhcoS1j0dXcjYHfNPeHsHyh1+tr8sdwztl5Q3RX/7z4KjGuVHeFe3Yq8JJ2mlHabkvvrTjywoHMXKx/Y4Dk9mx4ZcMojfm6Wmtor3RRROuhd2cyVT3kyVEqn/Um3i8nWNX15p/Wk0jWFVcoD4VLleZOdahkd1EtBTeGpIbfcVgqMJs2cg1D4NNyM8r5LseRnK19qg8NRMhPTHBxRt/JZps1tOPUv8sepyEt19RGWA6+IZEZ5o3mfu6EMelv8nx0LVnkwrsh5QKLF65lR6cWc9E2Vf+ryIEpNXAQJf7uM6qhrtR2dHx7VDT2gMnKRgYtDZa1FsYuZOPJtF8Spkz9UneOx5UG3cYPzgUEpgMmxo4di+xcYzrL1yaGgzomOW/KkqxOloSLe//LcNDQiYTjVRtx7JpxJaKJ1oMI/JIet+6C7hQh7G4cHz4f7QYsecxiFkAkXIarPqXTsMnnU/fMn8YCi1+bbX9rR9Hx14wt5u9G/QkzRv0+bvLE4qRkkG/utk11O0wk+9vk5zsG+oigD0qF/sE2x09PLFrq08obTk0X8ycTT9A7wiTJz+KAFHPq7tjRVbOHhaTEujzvqJ6++4kKwXFlXYY3DEAZc9Q1DY+/Ko2mThHBR+DYixKPTDBQ==
+	1Kcx/NtHJQ9/qmfYEpv2z5l6+K11DdE9n/9P3EMC6nMI+In4FprbtB9BIWtxlN+xdMm/fAQvl4evWOV2gDiCF5v8oZRGr9seiozqRSBTE8s+XfKoEy9quyUKCTHHcb50F24L8yKvC9BDmQ7VJURe210YI/g8J+LIh4BA4JJnnue7tg4TudiVahbV2bbZL74QJadGLhXXwV3r6LUge1iJHQ3lSsxwk0KAi8RJ1QcmyajPApI7vb+qd7+vs/ylBy8Wgo7qJ45hG3g+Kh2DPoeNqGoRT8UII6ssoSF50wgcHupmkLeV8y5n6WvznD6t3p2B5mh8Dch/3qCWjl7KB+Lwx5zI4i/33TogvgIngW2hCMT5A+TzLyVAd7kwMPt3NUI30Y5+kQJtIqd2GRKH5GWt0QUTDxGyKt8xgc6wFaynP0a7nXRGFWZD/LvpuCpECWZMDEhjanNtL8F3FgYPaOAHMgZBlp2AU1FSQ1RmvJS2+4aNV7YjSBYTSR82LnT/3yYfDj2Gl2VL/MFOLx33GjBNeK5A2JUTo0UTmboJxqE0SOfBS3vuXqe8RcTBOSSdbMhMoSc5V+1Q/PWPO7w5mxzFdQ2hJuCfoGSsUUDU4ovzMIhwYiBGznLuGP9W20SLbayUbeRlXmXIFofP2C2F4jdNqw==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 67b99d9b-35b2-4e2b-d86c-08d85a45c1ba
+X-MS-Exchange-CrossTenant-Network-Message-Id: 73c60dcf-3b85-43e9-c34c-08d85a45cb80
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2020 13:38:12.5654
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2020 13:38:28.9260
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tXnL65mVNtTU2M2z0guTrbxnrKlY8eEWnTzSLxDnmNn8F+OD0s4LaWCUHuXFgZHmU/2AibERfkGlVPM7ysY8LypbVznwoYUKBghrs/6jfCI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4306
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6vxZZWzEj9WWZafjnXiVsU6oCYgO15By2UyIrWdfvCEClQHD7hP9QxwHaSKGKIdl0wwDj/u3/yl8EnnRSQPUL/qBaOfVw/QiPMIUXmiPJOI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2679
 Content-Type: multipart/alternative;
- boundary="------------8FE192977D75D55231830C1E"
+ boundary="------------6D294F6A00AD5BD1E694DAD0"
 Content-Language: en-US
 
---------------8FE192977D75D55231830C1E
+--------------6D294F6A00AD5BD1E694DAD0
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 9/15/20 8:54 AM, Leon Anavi wrote:
-> Upgrade to release 0.16.12:
+> Upgrade to release 0.3.16:
 >
-> - update links in doc
+> - Ensure local HEAD matches remote during upgrade
+> - Remove typing dependency - only required for Python <= 3.4
+> - Include license file in sdist package
+> - Add default icon and color during Skill creation
+> - Improved category selection and display
+> - Improve PyPI listing info
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...-ruamel-yaml_0.16.11.bb => python3-ruamel-yaml_0.16.12.bb} | 4 ++--
+>   .../python/{python3-msk_0.3.15.bb => python3-msk_0.3.16.bb}   | 4 ++--
 >   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-ruamel-yaml_0.16.11.bb => python3-ruamel-yaml_0.16.12.bb} (72%)
+>   rename meta-python/recipes-devtools/python/{python3-msk_0.3.15.bb => python3-msk_0.3.16.bb} (69%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.11.bb b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
-> similarity index 72%
-> rename from meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.11.bb
-> rename to meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
-> index 9b3a2e1d9..ec8545dae 100644
-> --- a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.11.bb
-> +++ b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
-> @@ -8,8 +8,8 @@ PYPI_PACKAGE = "ruamel.yaml"
+> diff --git a/meta-python/recipes-devtools/python/python3-msk_0.3.15.bb b/meta-python/recipes-devtools/python/python3-msk_0.3.16.bb
+> similarity index 69%
+> rename from meta-python/recipes-devtools/python/python3-msk_0.3.15.bb
+> rename to meta-python/recipes-devtools/python/python3-msk_0.3.16.bb
+> index af011ccf8..a3206f79b 100644
+> --- a/meta-python/recipes-devtools/python/python3-msk_0.3.15.bb
+> +++ b/meta-python/recipes-devtools/python/python3-msk_0.3.16.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/MycroftAI/mycroft-skills-kit"
+>   LICENSE = "Apache-2.0"
+>   LIC_FILES_CHKSUM = "file://README.md;md5=2f90e43663eddf1c33087419fbb35e28"
+>   
+> -SRC_URI[md5sum] = "dcb286c489d24d8b0fb8413835f7478a"
+> -SRC_URI[sha256sum] = "56d3557889ee2ceebc72284f979aa6ddd4c7fbe2af31142eb6f51404f14516d5"
+> +SRC_URI[md5sum] = "8a4fc92a074544f81f482da2c21ef989"
+> +SRC_URI[sha256sum] = "c6a717fc068f7c69ddc8cb21dbeeda7cfa97a4e9f41690459c9fbec68b16ee87"
 >   
 >   inherit pypi setuptools3
 >   
-> -SRC_URI[md5sum] = "020a0140d06b2e32f53944d4335f9877"
-> -SRC_URI[sha256sum] = "43bf19037937f78845775d84582dd6f3ac966bc1b7748de898fad35638c74771"
-> +SRC_URI[md5sum] = "c7e4b216d9554d80be42011b448b7c61"
-> +SRC_URI[sha256sum] = "076cc0bc34f1966d920a49f18b52b6ad559fbe656a0748e3535cf7b3f29ebf9e"
->   
->   do_install_prepend() {
->       export RUAMEL_NO_PIP_INSTALL_CHECK=1
 >
 > 
 
---------------8FE192977D75D55231830C1E
+--------------6D294F6A00AD5BD1E694DAD0
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -130,39 +136,44 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 9/15/20 8:54 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200915125447.14197-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 0.16.12:
+    <blockquote type="cite" cite="mid:20200915125447.14197-2-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 0.3.16:
 
-- update links in doc
+- Ensure local HEAD matches remote during upgrade
+- Remove typing dependency - only required for Python &lt;= 3.4
+- Include license file in sdist package
+- Add default icon and color during Skill creation
+- Improved category selection and display
+- Improve PyPI listing info
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200915125447.14197-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200915125447.14197-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...-ruamel-yaml_0.16.11.bb =&gt; python3-ruamel-yaml_0.16.12.bb} | 4 ++--
+ .../python/{python3-msk_0.3.15.bb =&gt; python3-msk_0.3.16.bb}   | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-ruamel-yaml_0.16.11.bb =&gt; python3-ruamel-yaml_0.16.12.bb} (72%)
+ rename meta-python/recipes-devtools/python/{python3-msk_0.3.15.bb =&gt; python3-msk_0.3.16.bb} (69%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.11.bb b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
-similarity index 72%
-rename from meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.11.bb
-rename to meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
-index 9b3a2e1d9..ec8545dae 100644
---- a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.11.bb
-+++ b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
-@@ -8,8 +8,8 @@ PYPI_PACKAGE = &quot;ruamel.yaml&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-msk_0.3.15.bb b/meta-python/recipes-devtools/python/python3-msk_0.3.16.bb
+similarity index 69%
+rename from meta-python/recipes-devtools/python/python3-msk_0.3.15.bb
+rename to meta-python/recipes-devtools/python/python3-msk_0.3.16.bb
+index af011ccf8..a3206f79b 100644
+--- a/meta-python/recipes-devtools/python/python3-msk_0.3.15.bb
++++ b/meta-python/recipes-devtools/python/python3-msk_0.3.16.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/MycroftAI/mycroft-skills-kit">&quot;https://github.com/MycroftAI/mycroft-skills-kit&quot;</a>
+ LICENSE = &quot;Apache-2.0&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://README.md;md5=2f90e43663eddf1c33087419fbb35e28">&quot;file://README.md;md5=2f90e43663eddf1c33087419fbb35e28&quot;</a>
+ 
+-SRC_URI[md5sum] = &quot;dcb286c489d24d8b0fb8413835f7478a&quot;
+-SRC_URI[sha256sum] = &quot;56d3557889ee2ceebc72284f979aa6ddd4c7fbe2af31142eb6f51404f14516d5&quot;
++SRC_URI[md5sum] = &quot;8a4fc92a074544f81f482da2c21ef989&quot;
++SRC_URI[sha256sum] = &quot;c6a717fc068f7c69ddc8cb21dbeeda7cfa97a4e9f41690459c9fbec68b16ee87&quot;
  
  inherit pypi setuptools3
  
--SRC_URI[md5sum] = &quot;020a0140d06b2e32f53944d4335f9877&quot;
--SRC_URI[sha256sum] = &quot;43bf19037937f78845775d84582dd6f3ac966bc1b7748de898fad35638c74771&quot;
-+SRC_URI[md5sum] = &quot;c7e4b216d9554d80be42011b448b7c61&quot;
-+SRC_URI[sha256sum] = &quot;076cc0bc34f1966d920a49f18b52b6ad559fbe656a0748e3535cf7b3f29ebf9e&quot;
- 
- do_install_prepend() {
-     export RUAMEL_NO_PIP_INSTALL_CHECK=1
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -172,4 +183,4 @@ index 9b3a2e1d9..ec8545dae 100644
   </body>
 </html>
 
---------------8FE192977D75D55231830C1E--
+--------------6D294F6A00AD5BD1E694DAD0--
