@@ -1,83 +1,96 @@
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com [209.85.222.181])
- by mx.groups.io with SMTP id smtpd.web11.10012.1600326562478087965
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com [209.85.221.68])
+ by mx.groups.io with SMTP id smtpd.web11.458.1600353849104349518
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Sep 2020 00:09:22 -0700
+ Thu, 17 Sep 2020 07:44:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=l5fUgtYn;
- spf=pass (domain: gmail.com, ip: 209.85.222.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f181.google.com with SMTP id q63so1264274qkf.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Sep 2020 00:09:22 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=W0Umzx5f;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.68, mailfrom: brgl@bgdev.pl)
+Received: by mail-wr1-f68.google.com with SMTP id z1so2385795wrt.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Sep 2020 07:44:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=3Q8S88JdEXhAfoE5a/paM5s2zZSwCfDWg/7bjQOmYqQ=;
-        b=l5fUgtYnP96I0dalCUdyvhLGW9cD+L/jyedFjqOVbaI9hVY1W9w0kkLTq58e08TbKl
-         DSFt+g+0PZMHmKKdNcKW573dLroiaNSXptMaHxj+k8NtsfDKYMR/dtFRHQlP6eHL/4l/
-         bQLWHFZjjBvUddEvgyae2sZG/dkKCIToQcU0oEK1yBZ6uEcw9He982/aLKFQjH9LXaXP
-         oWUhDSAKbctw8QcJiDNthyP2WBkPFtwxHWf2n1uI22ld4WRO/ol/pjuu/D74xHy4gYNo
-         L1BzKxhSXRoNbEp5y547mgUGDgPLcDMEEUoiKfDOT/YtBQlv4E1MLlXXAPKdU2KUimiB
-         0P4Q==
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TujOU9u3BU2EIj3fQQxQwRJEdH8oAy6YKYP63Xvetng=;
+        b=W0Umzx5fQDAzZMdA1Nf77kdhr8pONc86tkxpklw5p0Sif58NZUC/88oaKqgvY8ffeH
+         Mgdx1pxIIJfpyWkszQA0PSKl6pE/jxyU8L5CfBqRyXvlqrfhVKvtEJa4ZAcqKmbPgfLT
+         ZlKTveFsg266K8JPkKnJT+/OG/URZzrxj9BxVPoalNB1uekCiIysSitOHm8alSSWRe2x
+         T/N6Lm6ll2TvYSNMTG5RNCBMgPDEL9VxvvealBvDMagE4RkOADPXE3XjDRisa3ANytRc
+         ZlO9cHauKyeIVGmsB6lIbzSQrOnvSlBXou5T4bVo3u+Jk4UM33/WoytJRHq7IFlfCzBA
+         mqYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=3Q8S88JdEXhAfoE5a/paM5s2zZSwCfDWg/7bjQOmYqQ=;
-        b=l35ev523oiCnjnKW+XBX8+ckhZ11rObbVA4lVDEozU7VySJFH+hvLd0LQXtU6zbndm
-         f/xy9yxIa1pMAnuQ0fVxIXjB2m4b0SXQNzMSFxppCE92ryS6h0aWzcSEwJdQ8Jy0uyhI
-         ZTHGU0GAVRKge6/4EMcg8H9NCFDK3lw3wyMl8YWOQQuGu1NLZc6A88jQCD+ohV9SVIhA
-         ry48fhsTvYh2N5vvuxKLcMcd81Jm5nF2+HghGJj4Tkp1yDNCWJh3/M6Mdqehv9DHD704
-         L+DGU4DUgYE3iLBojd2f49olNNwQiQku7+/St0HqX0iCy/EdZ1Ae+QvTDB9ytoX/Xkj5
-         C+YA==
-X-Gm-Message-State: AOAM531qRRZl2PHbyyBkd1Sb7Bj24PFcdsEUYHV8+eqlOr8EUhGO5XsN
-	Eme7udoDyN2BHC0GDLKUGgyuxon0mFG676xqRTE=
-X-Google-Smtp-Source: ABdhPJwQYY1xucfI+N1gTxpW6UqNFcgTjyA/YqHRT6K9pdtgeLydh/oVTSkSAjMtb9dXdUGwUvBp1Vn3mOKrFtQk0fI=
-X-Received: by 2002:a05:620a:7f6:: with SMTP id k22mr26875112qkk.337.1600326561550;
- Thu, 17 Sep 2020 00:09:21 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TujOU9u3BU2EIj3fQQxQwRJEdH8oAy6YKYP63Xvetng=;
+        b=ccS0n2p7KPJ0gYGwQN3nrVfWMYex2+8XOD5y2rBSolk0VimL1G1fe/q5qVGvcBqurM
+         jE6Ico5HiB/5Ok4jhZ5Pea4Nkq6tVDrFdICAug5AmD7ErbxxrqaV0OCf+ZMJxplE/5nI
+         SmiMSMp5AYr/p0jGvxBBOd3ZYeJIjk74SPcV64HfAMizFUJtuj4QPllbw+Sz61WV3dk2
+         N4n0eFTP6r/Gqgwa5+oAo4jvAZE91D/UAUkb6kYJkeSIIdFP4xSgmA6RqgBKJLqqnXvn
+         FuyMKA1hnq6cpIIfAJmw5omyCMXNFgZGm0aq+IHPljfANABEd5efB3Anz69thYCuU/Td
+         LVmA==
+X-Gm-Message-State: AOAM5327SgMhgB3rUsjqoKei4vXKCCQZlSNtEKZRcuS8ppfu5T9athbM
+	u7H12sBJR/wjmCCZTeivMH3gBw==
+X-Google-Smtp-Source: ABdhPJzHdp8povBrYkVh+L44hgFGOQM7JCBOot0z8rsZIn0saKSBYqwHn/LAYu2A0f4ST2iI4+1JlQ==
+X-Received: by 2002:adf:f58b:: with SMTP id f11mr32501499wro.250.1600353847267;
+        Thu, 17 Sep 2020 07:44:07 -0700 (PDT)
+Return-Path: <brgl@bgdev.pl>
+Received: from debian-brgl.home (lfbn-nic-1-68-20.w2-15.abo.wanadoo.fr. [2.15.159.20])
+        by smtp.gmail.com with ESMTPSA id c14sm37896730wrv.12.2020.09.17.07.44.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 17 Sep 2020 07:44:06 -0700 (PDT)
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster808@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [meta-oe][PATCH] libgpiod: drop support for 0.3.3
+Date: Thu, 17 Sep 2020 16:44:04 +0200
+Message-Id: <20200917144404.805-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.26.1
 MIME-Version: 1.0
-References: <1600348715-4366-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-In-Reply-To: <1600348715-4366-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 17 Sep 2020 00:08:53 -0700
-Message-ID: <CAMKF1spDKjkdwdp3ORONHztyvbG89z6ZcPqdv25Ms-RAV6J8BQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH] fio: upgrade 3.22 -> 3.23
-To: zangrc <zangrc.fnst@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-fails on mips
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-https://errors.yoctoproject.org/Errors/Details/498924/
+I no longer support the v0.x.y series. Remove the recipe for v0.3.3.
+While at it: the tests PACKAGECONFIG is duplicated so remove one
+instance.
 
-On Wed, Sep 16, 2020 at 6:18 PM zangrc <zangrc.fnst@cn.fujitsu.com> wrote:
->
-> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-> ---
->  meta-oe/recipes-benchmark/fio/{fio_3.22.bb => fio_3.23.bb} | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-oe/recipes-benchmark/fio/{fio_3.22.bb => fio_3.23.bb} (96%)
->
-> diff --git a/meta-oe/recipes-benchmark/fio/fio_3.22.bb b/meta-oe/recipes-benchmark/fio/fio_3.23.bb
-> similarity index 96%
-> rename from meta-oe/recipes-benchmark/fio/fio_3.22.bb
-> rename to meta-oe/recipes-benchmark/fio/fio_3.23.bb
-> index b50ed9f279..49bca59550 100644
-> --- a/meta-oe/recipes-benchmark/fio/fio_3.22.bb
-> +++ b/meta-oe/recipes-benchmark/fio/fio_3.23.bb
-> @@ -22,7 +22,7 @@ PACKAGECONFIG_NUMA_armeb = ""
->  PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
->  PACKAGECONFIG[numa] = ",--disable-numa,numactl"
->
-> -SRCREV = "477b6753ad068983d49fea0abc91fab82da9bad0"
-> +SRCREV = "8650ad75b47d9d9f45a25f4dd46ec0a997332de2"
->  SRC_URI = "git://git.kernel.dk/fio.git \
->  "
->
-> --
-> 2.25.1
->
->
->
->
-> 
->
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+---
+ meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb | 8 --------
+ meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb | 2 --
+ 2 files changed, 10 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
+
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
+deleted file mode 100644
+index c4d2bddf4..000000000
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require libgpiod.inc
+-
+-PACKAGECONFIG ?= ""
+-
+-PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
+-
+-SRC_URI[md5sum] = "2aa1e1a80c3c919ae142ab9a55fb59ca"
+-SRC_URI[sha256sum] = "b773e557af1a497f786825462a776b7bf90168e67ee0a5bc5d2473a5674dc38c"
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
+index a9a462866..b5a64a554 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
+@@ -9,8 +9,6 @@ SRC_URI[sha256sum] = "f1cda2789e6a13a92aefc012a76e5a7cc57a1b402d66f71df8719ee314
+ PACKAGECONFIG ?= "cxx"
+ 
+ PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
+-PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
+-
+ PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
+ 
+ inherit python3native
+-- 
+2.26.1
+
