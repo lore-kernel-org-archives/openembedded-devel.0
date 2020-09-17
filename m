@@ -1,85 +1,85 @@
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com [209.85.160.194])
- by mx.groups.io with SMTP id smtpd.web12.1084.1600367371445501141
+Received: from mail-oi1-f193.google.com (mail-oi1-f193.google.com [209.85.167.193])
+ by mx.groups.io with SMTP id smtpd.web10.2533.1600371480454893966
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Sep 2020 11:29:31 -0700
+ Thu, 17 Sep 2020 12:38:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@foundries-io.20150623.gappssmtp.com header.s=20150623 header.b=R7rim7WY;
- spf=softfail (domain: foundries.io, ip: 209.85.160.194, mailfrom: ricardo@foundries.io)
-Received: by mail-qt1-f194.google.com with SMTP id h6so2703691qtd.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Sep 2020 11:29:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=eSSnBCik;
+ spf=pass (domain: gmail.com, ip: 209.85.167.193, mailfrom: george.mccollister@gmail.com)
+Received: by mail-oi1-f193.google.com with SMTP id n2so3865449oij.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Sep 2020 12:38:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=foundries-io.20150623.gappssmtp.com; s=20150623;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=xWw4H3e1aw1PKfXDduMMa4VTND2pEIrmAoKwT7ygS4A=;
-        b=R7rim7WYxNX+h1COCWiZpnQSYGLRPN+HNZq5VnDBsomMWz+BMXokG6w5qac3rbnKW8
-         P+VEup53LH3JVLOBdZ7oh74kRlFMnXgZMIgL0PWdkOLjmZrcuCEJ02kYNbbCiodJJ11c
-         liR4B1dXBWnNLmo4zQSpLxpd5neid1lIukeVnHCOcIVrUPMKxgtjjY3fuUr2SNmMrZqO
-         ELviy4pZ4XkzzAg1dxyafdMd2Dj7sftPbqXmbui8NUBL3TjEXAppVtBPc6Wn66jnd07Z
-         +2Gl4jZsTi6E+/d89wUZwbGQS3OR4+M4Puch8EJUDNNG61jkqGxKYeqQH6I+VBAn8Xvc
-         B4tA==
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=r/sGnfmS7V1QDg9xXOQuUXOFDInQtbidF8b7/HTTFbs=;
+        b=eSSnBCikiIj3fU5Z6p/9Wpzz9VaZo7A2+/dt81HPdiA99dOTgpkvdRjJYWOSf383sc
+         bkqADCt8c5Sw2zrkrKfTyk3OU5wRCTr1SoORKndX2NfLNwKGdpLZcz5HdK+7W9Rtl8UV
+         7BZyrSoUk1UgNS1qj/nm2zejOf8C0BRhj8eaiu0Dk3BpRAiEY0YLEeHXeGs+5vkSANO5
+         VeuW3Cgx4G7s3Mnf8JIDk8bjK4SJTwUyQIUuV1dvWI2Gv5EO3xghVe31krrO4PWiEYjB
+         ydKsI61p+0upM36+uz4B1BfRTSrGLTTErA2FqG76WEUOwH+HOsQ8ImI3J7Mb8kbtIksO
+         FQig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=xWw4H3e1aw1PKfXDduMMa4VTND2pEIrmAoKwT7ygS4A=;
-        b=movuuIQvdwRy6yjSUJoMqGtBc2SNVRrnsmMtadJvGwaX0xR1BbITEi+l8jXQ3McxvO
-         JBMnouZfAy/WdOzA0mdTPJj4IySsH/X9Vhl/lgWUsnKPn1N/aYR40GnQC/2vbAxpECq2
-         nmV+HUI2Dz6nI2Xb5TP3YYnvlEGDaIuecNwsyhhp0GU4WdeOqZ8Rf6cNxg22iD8lL1Og
-         q6ox/thm2ksnj1BrsUmQBbsoZ1uGFo8PGudXvudBp/mB8fSdQmbpjKzexfuFPkG8qUgH
-         kRkYLm4qUSAeBNl4tL6Pk7szQ2LS3iT5RnMshIW2mqpz+Ir0fO/0BV1s6nTAvWIdJwnG
-         i0Eg==
-X-Gm-Message-State: AOAM532+iHXVaupuGmDHI4Gma4i9JGe7bSQe+QFuhnqHYR7vlqhCSAPu
-	OrgDLzqwT9nG89ZBvL8jcH25D3iSKfL9
-X-Google-Smtp-Source: ABdhPJzN4pxZT8MQylO1kr3XNuqDr8Zyst5QP1MObDER52o/kzry4o6LkoCLhDoUh1xilbJ08b9xbA==
-X-Received: by 2002:ac8:6f0d:: with SMTP id g13mr30187393qtv.236.1600367370141;
-        Thu, 17 Sep 2020 11:29:30 -0700 (PDT)
-Return-Path: <ricardo@foundries.io>
-Received: from localhost.localdomain ([2804:7f5:f480:f722:44f9:7b2f:8a1f:cf52])
-        by smtp.gmail.com with ESMTPSA id k185sm387415qkd.94.2020.09.17.11.29.28
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 17 Sep 2020 11:29:29 -0700 (PDT)
-From: "Ricardo Salveti" <ricardo@foundries.io>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] pcsc-lite: upgrade 1.8.26 -> 1.9.0
-Date: Thu, 17 Sep 2020 15:29:04 -0300
-Message-Id: <20200917182904.22753-1-ricardo@foundries.io>
-X-Mailer: git-send-email 2.28.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=r/sGnfmS7V1QDg9xXOQuUXOFDInQtbidF8b7/HTTFbs=;
+        b=U/cOQkFfi7EMYfqc0WNhFCc9zyQtNZBjzxTaIRr9LUDReeZRf6X5OqRdmT/L90mZmB
+         WP6FuxmVFOz4DA7yhdThEM26YOyYSzXpKMsh+BK4Qts5y0bJNEWbmNLGaHAo+3eEQobP
+         0Yebgprm3Sa+HRMKbwtv3DcZJXONp1ggaF8NiqrHij5kgwrFULfUv5i2EPLCwt7fTwnr
+         jSPSqgPYThBZHpaYfc5S4TaplJu52/0sehlstl5gH+m+EQxOgDG5RQmdhfNjOnQdWFkQ
+         /gbYKruOSkGky6F0c+rxeLUOPGzNFRc70lqXnmnGJ+1CSvCNsAC2EaEpPRAuJT8RDFtF
+         /PZg==
+X-Gm-Message-State: AOAM530RGHhwj510XM2i+TjZIdyrPWoHrJq6IMifxhSyrtNVyY655thR
+	QupGekwKYrWKgRL7r/eaG6svwa40T200YdyRiw==
+X-Google-Smtp-Source: ABdhPJyt8WFthuPfTZku8UBd68sHZTrwdoymT7IfJZpKhOrYV0uYeAZl8vAHCkemzZ6QtCwPtNV+S6Iq3DfR20NzoT0=
+X-Received: by 2002:aca:cf88:: with SMTP id f130mr6770828oig.122.1600371479712;
+ Thu, 17 Sep 2020 12:37:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20200915171003.30632-1-leon.anavi@konsulko.com>
+In-Reply-To: <20200915171003.30632-1-leon.anavi@konsulko.com>
+From: "George McCollister" <george.mccollister@gmail.com>
+Date: Thu, 17 Sep 2020 14:37:47 -0500
+Message-ID: <CAFSKS=PkM5Ki1ettwe+jsw3rp9oJAQ1p71PWucsthNnuJTD9Fg@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][dunfell][PATCH] libldb: upgrade 1.5.7 -> 1.5.8
+To: Leon Anavi <leon.anavi@konsulko.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Yi Zhao <yi.zhao@windriver.com>, Khem Raj <raj.khem@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 
-Changelog:
-- SCardEndTransaction(): greatly improve performances (x300)
-- tokenparser: accept any Unicode character in a reader name
-- Use /run instead of /var/run by default
-- Fix a memory leak from a polkit call
-- Some other minor improvements
-
-Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
----
- .../pcsc-lite/{pcsc-lite_1.8.26.bb => pcsc-lite_1.9.0.bb}     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/pcsc-lite/{pcsc-lite_1.8.26.bb => pcsc-lite_1.9.0.bb} (92%)
-
-diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.9.0.bb
-similarity index 92%
-rename from meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb
-rename to meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.9.0.bb
-index 91d77ac93..6f38d65e0 100644
---- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb
-+++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.9.0.bb
-@@ -14,8 +14,8 @@ SRC_URI = "\
- 	https://pcsclite.apdu.fr/files/${BP}.tar.bz2 \
- 	file://0001-pcsc-spy-use-python3-only.patch \
- "
--SRC_URI[md5sum] = "9d36882998449daceec267c68a21ff0d"
--SRC_URI[sha256sum] = "3eb7be7d6ef618c0a444316cf5c1f2f9d7227aedba7a192f389fe3e7c0dfbbd9"
-+SRC_URI[md5sum] = "eb595f2d398ff229207a6ec09fbc4e98"
-+SRC_URI[sha256sum] = "0148d403137124552c5d0f10f8cdab2cbb8dfc7c6ce75e018faf667be34f2ef9"
- 
- inherit autotools systemd pkgconfig perlnative
- 
--- 
-2.28.0
-
+On Tue, Sep 15, 2020 at 12:10 PM Leon Anavi <leon.anavi@konsulko.com> wrote:
+>
+> From: Yi Zhao <yi.zhao@windriver.com>
+>
+> Samba version 4.10.17 which has been already available in Dunfell
+> depends on version 1.5.8 of libldb.
+>
+> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> ---
+>  .../libldb/{libldb_1.5.7.bb => libldb_1.5.8.bb}               | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-networking/recipes-support/libldb/{libldb_1.5.7.bb => libldb_1.5.8.bb} (95%)
+>
+> diff --git a/meta-networking/recipes-support/libldb/libldb_1.5.7.bb b/meta-networking/recipes-support/libldb/libldb_1.5.8.bb
+> similarity index 95%
+> rename from meta-networking/recipes-support/libldb/libldb_1.5.7.bb
+> rename to meta-networking/recipes-support/libldb/libldb_1.5.8.bb
+> index da77a2389..199db797a 100644
+> --- a/meta-networking/recipes-support/libldb/libldb_1.5.7.bb
+> +++ b/meta-networking/recipes-support/libldb/libldb_1.5.8.bb
+> @@ -33,8 +33,8 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
+>                      file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
+>                      file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
+>
+> -SRC_URI[md5sum] = "4d72bbfe7c7fcdf592482a98c853d222"
+> -SRC_URI[sha256sum] = "b9eeb77ecb94f3b53caeff7cbc1850b6294fa937be4364c53a92a62c6548c001"
+> +SRC_URI[md5sum] = "d9b4bea8b48cd4c4d0c492e65881164b"
+> +SRC_URI[sha256sum] = "ddf7f770643e0a0dda60f2818913f883caeed37fa1e8d6eda0dfe9588c1e3a83"
+>
+>  inherit waf-samba
+>
+> --
+> 2.17.1
+>
+> 
