@@ -1,59 +1,54 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.5489.1600305926726256742
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+ by mx.groups.io with SMTP id smtpd.web12.7787.1600313865253338376
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Sep 2020 18:25:27 -0700
+ Wed, 16 Sep 2020 20:37:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.76,434,1592841600"; 
-   d="scan'208";a="99331810"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 17 Sep 2020 09:25:26 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id EE66748990C1
-	for <openembedded-devel@lists.openembedded.org>; Thu, 17 Sep 2020 09:25:19 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 17 Sep 2020 09:25:19 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-networking] [PATCH] znc: upgrade 1.8.1 -> 1.8.2
-Date: Thu, 17 Sep 2020 21:25:22 +0800
-Message-ID: <1600349122-4710-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: EE66748990C1.A1F7A
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+ dkim=missing; spf=pass (domain: intel.com, ip: 192.55.52.151, mailfrom: naveen.kumar.saini@intel.com)
+IronPort-SDR: S8nc4GvFCdk1mRp81SYAx7R7zfNnlvj0Bp2Z5DVD6gCLau8MP95MSsUPWsZqyaPQWPrfnoGDEU
+ ITZvxR8XAFGA==
+X-IronPort-AV: E=McAfee;i="6000,8403,9746"; a="139623858"
+X-IronPort-AV: E=Sophos;i="5.76,434,1592895600"; 
+   d="scan'208";a="139623858"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2020 20:37:44 -0700
+IronPort-SDR: PXNWB3YKY0/zwMIKZu9L2+VO4mdrBxE/B3IAziIqkj2olFn3YS10Uh6az9f2Mo7Lq7uwVhOfGO
+ NE5Jf2pnTQNA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.76,434,1592895600"; 
+   d="scan'208";a="307297771"
+Received: from andromeda02.png.intel.com ([10.221.183.11])
+  by orsmga006.jf.intel.com with ESMTP; 16 Sep 2020 20:37:43 -0700
+From: "Naveen Saini" <naveen.kumar.saini@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] tbb: upgrade 2020.2 -> 2020.3
+Date: Thu, 17 Sep 2020 11:37:40 +0800
+Message-Id: <1600313860-14122-1-git-send-email-naveen.kumar.saini@intel.com>
+X-Mailer: git-send-email 2.7.4
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
 ---
- meta-networking/recipes-irc/znc/{znc_1.8.1.bb => znc_1.8.2.bb} | 2 +-
+ meta-oe/recipes-support/tbb/{tbb_2020.2.bb => tbb_2020.3.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-irc/znc/{znc_1.8.1.bb => znc_1.8.2.bb} (94%)
+ rename meta-oe/recipes-support/tbb/{tbb_2020.2.bb => tbb_2020.3.bb} (97%)
 
-diff --git a/meta-networking/recipes-irc/znc/znc_1.8.1.bb b/meta-networking/recipes-irc/znc/znc_1.8.2.bb
-similarity index 94%
-rename from meta-networking/recipes-irc/znc/znc_1.8.1.bb
-rename to meta-networking/recipes-irc/znc/znc_1.8.2.bb
-index c54e617fde..806d622d70 100644
---- a/meta-networking/recipes-irc/znc/znc_1.8.1.bb
-+++ b/meta-networking/recipes-irc/znc/znc_1.8.2.bb
-@@ -8,7 +8,7 @@ DEPENDS = "openssl zlib icu"
- SRC_URI = "git://github.com/znc/znc.git;name=znc \
-            git://github.com/jimloco/Csocket.git;destsuffix=git/third_party/Csocket;name=Csocket \
-           "
--SRCREV_znc = "0a3909beaa15e0da499473d6d041e5b75c14e885"
-+SRCREV_znc = "bf253640d33d03331310778e001fb6f5aba2989e"
- SRCREV_Csocket = "e8d9e0bb248c521c2c7fa01e1c6a116d929c41b4"
- 
- # This constructs a composite revision based on multiple SRCREV's.
+diff --git a/meta-oe/recipes-support/tbb/tbb_2020.2.bb b/meta-oe/recipes-support/tbb/tbb_2020.3.bb
+similarity index 97%
+rename from meta-oe/recipes-support/tbb/tbb_2020.2.bb
+rename to meta-oe/recipes-support/tbb/tbb_2020.3.bb
+index 2f9fd7f58..e66d23f0b 100644
+--- a/meta-oe/recipes-support/tbb/tbb_2020.2.bb
++++ b/meta-oe/recipes-support/tbb/tbb_2020.3.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "https://software.intel.com/en-us/tbb"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+ BRANCH = "tbb_2020"
+-SRCREV = "60b7d0a78f8910976678ba63a19fdaee22c0ef65"
++SRCREV = "eca91f16d7490a8abfdee652dadf457ec820cc37"
+ SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
+            file://cross-compile.patch \
+            file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
 -- 
-2.25.1
-
-
+2.17.1
 
