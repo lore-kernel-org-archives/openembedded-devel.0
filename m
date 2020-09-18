@@ -1,115 +1,91 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.11155.1600430328528859525
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com [209.85.222.193])
+ by mx.groups.io with SMTP id smtpd.web12.12586.1600435077471025520
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Sep 2020 04:58:48 -0700
+ Fri, 18 Sep 2020 06:17:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=59702 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kJF2M-0005BI-BT; Fri, 18 Sep 2020 14:58:47 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-rfc3339-validator: Upgrade 0.1.1 -> 0.1.2
-Date: Fri, 18 Sep 2020 14:58:35 +0300
-Message-Id: <20200918115835.4742-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200918115835.4742-1-leon.anavi@konsulko.com>
-References: <20200918115835.4742-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=X89xr5nw;
+ spf=pass (domain: gmail.com, ip: 209.85.222.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f193.google.com with SMTP id d20so5982143qka.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Sep 2020 06:17:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=uLWmPO9y65mp4aIGnBAnKUm9wG2tvgnxHxbZbhJp8U8=;
+        b=X89xr5nwZ2cO6tHVTFBIEUluMpFVDt5y83AWhgdLGFZ6CR7qO0H9rykHp1ZBU0VLQ0
+         rgOkMQ2Dj7JNe4MquWxZDP36KHHX+2I4cJijsB1TQrJ5wzvxLXbK1u53HZ4pKcqWDPKI
+         cI8y7Q0TEQ23nHMGltmdOpLA13mZXiFC21wGH3V5ib1C4BVZ4+QiTaSdjQ5RIUBxn++f
+         iCW1nVPR5wHRNJ35XAAHLSKq+/7NYcYIbnFtp6Wgz2KqQBcNUdEeIfx0dKOhRXHBOybQ
+         EsWJbdiHHHI5JzC1azmthNobT+yxr8toieu+FD9OFcoEyuAPJUHMay9wUf7B5fzzVGDQ
+         GDJg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=uLWmPO9y65mp4aIGnBAnKUm9wG2tvgnxHxbZbhJp8U8=;
+        b=sxsDm79My7fPHKoOxpJms3L3L+fuexB6BywcjYDnsI5IO4iHjmfwspE7Q2AylRCDL3
+         ICIIfJX7UlJ09H58/WBjijDFF6mu1s/EVXnuO8J7XsiPpjStNhET0MmHbFMfX/MevOKC
+         Xl0WSzC2/Mdvj4ySxfOpTzoJC8VvwNnrluaZlW2GENHSW8k0lAvlxFki2uHbaWDQt8fs
+         oHzvz3IWrKE8w4EoN8kAO5VCtRvb33+D5OZ+3Y+FTiedUlWlynncN5DPyCwwTZbEgloB
+         W+YgIxk7vLeNZoqCzpfuds2D7KzkrEaADGKPcMuYWf49lPYGQAet7HgWndbinATnPe0r
+         kjMw==
+X-Gm-Message-State: AOAM530NBDdZLUWUxPV2eob5JA9Cqhe2F+HZ0PW0QKKC2btr0Q6MGEpa
+	2NBUW24V7J6E4+IkLVwh336dEFjHwgqNZ7hJa9U=
+X-Google-Smtp-Source: ABdhPJzlHRkVG8PUZGxrN36tyVWDV8WXlNw932Th0SOGQOAr/wgkcNfg0RpOf5Hw+RsPybiQ7BdakPcwD4JgZvTLHSo=
+X-Received: by 2002:a37:9046:: with SMTP id s67mr33062433qkd.212.1600435076602;
+ Fri, 18 Sep 2020 06:17:56 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200918080126.34608-1-hongxu.jia@windriver.com>
+In-Reply-To: <20200918080126.34608-1-hongxu.jia@windriver.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 18 Sep 2020 06:17:29 -0700
+Message-ID: <CAMKF1srbs8OQ5udXzXBW-sj4DmcjNsSJrj3vgKkE9qi_nfyosQ@mail.gmail.com>
+Subject: Re: [meta-python][PATCH] python3-argcomplete: add recipe 1.12.0
+To: Hongxu Jia <hongxu.jia@windriver.com>
+Cc: Trevor Gamblin <trevor.gamblin@windriver.com>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Upgrade to release 0.1.2:
+please add it to rdeps in packagegroup-meta-python.bb
+as well
 
-- setup.py: move pytest-runner to test_requirements
-
-Patch has been removed from the recipe because it has been already
-upstreamed in the new release.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- ...e-pytest-runner-to-test_requirements.patch | 32 -------------------
- ....bb => python3-rfc3339-validator_0.1.2.bb} |  8 ++---
- 2 files changed, 2 insertions(+), 38 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-rfc3339-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch
- rename meta-python/recipes-devtools/python/{python3-rfc3339-validator_0.1.1.bb => python3-rfc3339-validator_0.1.2.bb} (65%)
-
-diff --git a/meta-python/recipes-devtools/python/python-rfc3339-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch b/meta-python/recipes-devtools/python/python-rfc3339-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch
-deleted file mode 100644
-index ce8ca0bc8c..0000000000
---- a/meta-python/recipes-devtools/python/python-rfc3339-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From 2de281fdca88f223ace1eb6428a77b9903c69264 Mon Sep 17 00:00:00 2001
--From: Nicola Lunghi <nicola.lunghi@jci.com>
--Date: Thu, 14 Nov 2019 11:58:28 +0000
--Subject: [PATCH] setup.py: move pytest-runner to test_requirements
--
--This fixes an issue with yocto build.
--pytest-runner is only needed when running tests.
--
--Upstream-Status: Pending
-----
-- setup.py | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/setup.py b/setup.py
--index 9a50767..e3b1c6e 100644
----- a/setup.py
--+++ b/setup.py
--@@ -12,9 +12,9 @@ requirements = [
--     'six',
-- ]
-- 
---setup_requirements = ['pytest-runner', ]
--+setup_requirements = []
-- 
---test_requirements = ['pytest>=3', ]
--+test_requirements = ['pytest>=3', 'pytest-runner']
-- 
-- setup(
--     author="Nicolas Aimetti",
---- 
--2.20.1
--
-diff --git a/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.1.bb b/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.2.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.2.bb
-index 1f5d91d3b2..e226e11b75 100644
---- a/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.2.bb
-@@ -5,17 +5,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a21b13b5a996f08f7e0b088aa38ce9c6"
- 
- FILESEXTRAPATHS_prepend := "${THISDIR}/python-rfc3339-validator:"
- 
--SRC_URI[md5sum] = "9d8899041d83f98180bddd8b62ee7e99"
--SRC_URI[sha256sum] = "20a600d01fbb1f793cbb6f4ec4ebb2104f4c9e80d74d5f78350b63ecc6cccd08"
-+SRC_URI[md5sum] = "2c233007189d5ef21046cb2afac51a96"
-+SRC_URI[sha256sum] = "c9659c3183488a1875c4d327c9873d9e92c54cdcd69dfbfae7546ad8b27baf9a"
- 
- PYPI_PACKAGE = "rfc3339_validator"
- 
- inherit pypi setuptools3
- 
--SRC_URI_append = " \
--    file://0001-setup.py-move-pytest-runner-to-test_requirements.patch \
--"
--
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-core \
-     ${PYTHON_PN}-datetime \
--- 
-2.17.1
-
+On Fri, Sep 18, 2020 at 1:02 AM Hongxu Jia <hongxu.jia@windriver.com> wrote:
+>
+> Tab complete all the things!
+>
+> Argcomplete provides easy, extensible command line tab completion of
+> arguments for your Python script.
+>
+> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> ---
+>  .../python/python3-argcomplete_1.12.0.bb       | 18 ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-argcomplete_1.12.0.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-argcomplete_1.12.0.bb b/meta-python/recipes-devtools/python/python3-argcomplete_1.12.0.bb
+> new file mode 100644
+> index 000000000..dd749dd9e
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-argcomplete_1.12.0.bb
+> @@ -0,0 +1,18 @@
+> +SUMMARY = "Argcomplete provides easy, extensible command line tab completion of arguments for your Python script."
+> +HOMEPAGE = "https://github.com/kislyuk/argcomplete"
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=2ee41112a44fe7014dce33e26468ba93"
+> +
+> +SRC_URI[md5sum] = "47e2a3db821f57165be8f3d3ec1e5259"
+> +SRC_URI[sha256sum] = "2fbe5ed09fd2c1d727d4199feca96569a5b50d44c71b16da9c742201f7cc295c"
+> +
+> +PYPI_PACKAGE = "argcomplete"
+> +
+> +inherit pypi setuptools3
+> +
+> +RDEPENDS_${PN} += "\
+> +    ${PYTHON_PN}-core \
+> +"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> +
+> --
+> 2.18.2
+>
