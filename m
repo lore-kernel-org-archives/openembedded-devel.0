@@ -1,116 +1,80 @@
-Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com [209.85.218.68])
- by mx.groups.io with SMTP id smtpd.web10.10030.1600426010676866497
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.10974.1600430328413828822
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Sep 2020 03:46:51 -0700
+ Fri, 18 Sep 2020 04:58:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=KoxQT24q;
- spf=pass (domain: gmail.com, ip: 209.85.218.68, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f68.google.com with SMTP id lo4so7454702ejb.8
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Sep 2020 03:46:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=soj/54MVSzUAHp6jqkUjT7tgImbQ8iFGEABHD2MwE30=;
-        b=KoxQT24qS6r/7eCJV8eYrnqpWmizmWrbvgQCZ7X3etQ8xidF6dVtV7+ZrhDuJByjy9
-         X0ppG2gW0MPBOHRWEV+2xLJF4VjJaHGfXYxdEjS8Hkl+kE0WSRZITW7VdDvE3KBq9VIw
-         4s8svgJQqj7SsowBa7LAvIhcIrQAEKKHO0N7tVAWuOZaIWFXd/bWkRzyD1r68/0kfRjk
-         iMW8FYLmhLDGp1cJtzlVgefsv3y1SJLmZIKvvEVj2d923VExT0+Q/JhIkqQ/i6HhBe67
-         8E+LNAa6R8GPGxqt/P2qSMj2EERsTZLwd9kliwTZIRUQaOq2qIkMJpJ9Moanl1W8wEpf
-         GlDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=soj/54MVSzUAHp6jqkUjT7tgImbQ8iFGEABHD2MwE30=;
-        b=CbdI7KDAsfUnvy0rXVU2scKB3nw+ACwCRKUkUvypSWDsMADee0dtR0REmhBAPwa5gD
-         PZE5YDfQf17Fdp6D4p9Ur2bXgCxwmxHQnFZiitT5NeAOHftHJ98Ewe942PS5lEik9XUo
-         75RR5mGZp+IQ1QeP4VoC7BPrhm4rpv9gNPiDHW7LIqOUppan39d5kh0/RwkMl38Xn1nv
-         i7T7u0574TlQFoj0bMWZE/6njlavrY4RZCd709ylfrNOtNOlcqMF2YRwb+tJe/pi/+sc
-         Hs5Ys25Q8edjAY3/oAA+Snm5F4sdxys6Q+yXrQPEUgB3gH3Vfwulc+jgkf5Kf9hscsUs
-         j5CQ==
-X-Gm-Message-State: AOAM530kab4YIL1MvdyZXGwlqmgkB3VzJKjyuXd7oGFw8WoFf0U1tlXE
-	Bz992Os6brA5kO9B5LB6PEHo/LN4l4Q=
-X-Google-Smtp-Source: ABdhPJyIOOKfb2C0Chx3y4pXqEYLEmV88OFaECdkbUZrdHbsvCjwSy9i2GcObQIWMLPmW/nvmL5+iw==
-X-Received: by 2002:a17:906:fcc7:: with SMTP id qx7mr37054251ejb.254.1600426008660;
-        Fri, 18 Sep 2020 03:46:48 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id m16sm1990547ejl.69.2020.09.18.03.46.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Sep 2020 03:46:48 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=59702 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kJF2K-0005BI-Li; Fri, 18 Sep 2020 14:58:45 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-networking][PATCH] ssmtp: adjust u-a
-Date: Fri, 18 Sep 2020 12:46:46 +0200
-Message-Id: <20200918104646.374988-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-cmd2: Upgrade 1.3.9 -> 1.3.10
+Date: Fri, 18 Sep 2020 14:58:34 +0300
+Message-Id: <20200918115835.4742-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-* it's newaliases not newalias in sbindir
-* drop u-a for man pages, because only ssmtp.8 was created which shouldn't
-  conflict with esmpt
+Upgrade to release 1.3.10:
 
-In my build I don't have mailq, sendmail, newaliases as man pages, but binaries in sbindir (and the sbinbinary is called newaliases, not newalias)
+- Added user-settable option called always_show_hint. If True,
+  then tab completion hints will always display even when tab
+  completion suggestions print. Arguments whose help or hint text
+  is suppressed will not display hints even when this setting is
+  True.
+- argparse tab completion now groups flag names which run the same
+  action. Optional flags are wrapped in brackets like it is done
+  in argparse usage text.
+- default category decorators are now heritable by default and
+  will propagate the category down the class hierarchy until
+  overridden. There's a new optional flag to set heritable to
+  false.
+- Added --silent flag to alias/macro create. If used, then no
+  confirmation message will be printed when aliases and macros
+  are created or overwritten.
+- Added --with_silent flag to alias/macro list. Use this option
+  when saving to a startup script that should silently create
+  aliases and macros.
+- Fixed issue where flag names weren't always sorted correctly in
+  argparse tab completion
 
-tmp-glibc/work/core2-64-oe-linux/ssmtp/2.64-r0/image/
-tmp-glibc/work/core2-64-oe-linux/ssmtp/2.64-r0/image/usr
-tmp-glibc/work/core2-64-oe-linux/ssmtp/2.64-r0/image/usr/share
-tmp-glibc/work/core2-64-oe-linux/ssmtp/2.64-r0/image/usr/share/man
-tmp-glibc/work/core2-64-oe-linux/ssmtp/2.64-r0/image/usr/share/man/man8
-tmp-glibc/work/core2-64-oe-linux/ssmtp/2.64-r0/image/usr/share/man/man8/ssmtp.8
-tmp-glibc/work/core2-64-oe-linux/ssmtp/2.64-r0/image/usr/sbin
-tmp-glibc/work/core2-64-oe-linux/ssmtp/2.64-r0/image/usr/sbin/mailq
-tmp-glibc/work/core2-64-oe-linux/ssmtp/2.64-r0/image/usr/sbin/sendmail
-tmp-glibc/work/core2-64-oe-linux/ssmtp/2.64-r0/image/usr/sbin/newaliases
-tmp-glibc/work/core2-64-oe-linux/ssmtp/2.64-r0/image/usr/sbin/ssmtp
-tmp-glibc/work/core2-64-oe-linux/ssmtp/2.64-r0/image/etc
-tmp-glibc/work/core2-64-oe-linux/ssmtp/2.64-r0/image/etc/ssmtp
-tmp-glibc/work/core2-64-oe-linux/ssmtp/2.64-r0/image/etc/ssmtp/revaliases
-
-this added u-a is causing following warnings:
-
-WARNING: ssmtp-2.64-r0 do_package: ssmtp: alternative target (/usr/share/man/man1/mailq.1 or /usr/share/man/man1/mailq.1.ssmtp) does not exist, skipping...
-WARNING: ssmtp-2.64-r0 do_package: ssmtp: alternative target (/usr/share/man/man1/newaliases.1 or /usr/share/man/man1/newaliases.1.ssmtp) does not exist, skipping...
-WARNING: ssmtp-2.64-r0 do_package: ssmtp: alternative target (/usr/share/man/man1/sendmail.1 or /usr/share/man/man1/sendmail.1.ssmtp) does not exist, skipping...
-WARNING: ssmtp-2.64-r0 do_package: ssmtp: alternative target (/usr/sbin/newalias or /usr/sbin/newalias.ssmtp) does not exist, skipping...
-WARNING: ssmtp-2.64-r0 do_package: ssmtp: NOT adding alternative provide /usr/share/man/man1/mailq.1: /usr/share/man/man1/mailq.1.ssmtp does not exist
-WARNING: ssmtp-2.64-r0 do_package: ssmtp: NOT adding alternative provide /usr/share/man/man1/newaliases.1: /usr/share/man/man1/newaliases.1.ssmtp does not exist
-WARNING: ssmtp-2.64-r0 do_package: ssmtp: NOT adding alternative provide /usr/share/man/man1/sendmail.1: /usr/share/man/man1/sendmail.1.ssmtp does not exist
-WARNING: ssmtp-2.64-r0 do_package: ssmtp: NOT adding alternative provide /usr/sbin/newalias: /usr/sbin/newalias.ssmtp does not exist
-WARNING: ssmtp-2.64-r0 do_package: ssmtp: alt_link == alt_target: /usr/share/man/man1/mailq.1 == /usr/share/man/man1/mailq.1
-WARNING: ssmtp-2.64-r0 do_package: ssmtp: alt_link == alt_target: /usr/share/man/man1/newaliases.1 == /usr/share/man/man1/newaliases.1
-WARNING: ssmtp-2.64-r0 do_package: ssmtp: alt_link == alt_target: /usr/share/man/man1/sendmail.1 == /usr/share/man/man1/sendmail.1
-WARNING: ssmtp-2.64-r0 do_package: ssmtp: alt_link == alt_target: /usr/sbin/newalias == /usr/sbin/newalias
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb | 10 ++--------
- 1 file changed, 2 insertions(+), 8 deletions(-)
+ .../python/{python3-cmd2_1.3.9.bb => python3-cmd2_1.3.10.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.9.bb => python3-cmd2_1.3.10.bb} (75%)
 
-diff --git a/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb b/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb
-index 3739c496a5..bae29aa80e 100644
---- a/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb
-+++ b/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb
-@@ -36,13 +36,7 @@ do_install_append () {
+diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.9.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.3.10.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.9.bb
+rename to meta-python/recipes-devtools/python/python3-cmd2_1.3.10.bb
+index e677a69620..7b74187838 100644
+--- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.9.bb
++++ b/meta-python/recipes-devtools/python/python3-cmd2_1.3.10.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def"
  
- ALTERNATIVE_PRIORITY_${PN} = "100"
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
  
--ALTERNATIVE_${PN} = "mailq newalias sendmail"
-+ALTERNATIVE_${PN} = "mailq newaliases sendmail"
- ALTERNATIVE_LINK_NAME[sendmail] = "${sbindir}/sendmail"
--ALTERNATIVE_LINK_NAME[newalias] = "${sbindir}/newalias"
-+ALTERNATIVE_LINK_NAME[newaliases] = "${sbindir}/newaliases"
- ALTERNATIVE_LINK_NAME[mailq] = "${sbindir}/mailq"
--
--ALTERNATIVE_PRIORITY_${PN}-doc = "100"
--ALTERNATIVE_${PN}-doc += "mailq.1 newaliases.1 sendmail.1"
--ALTERNATIVE_LINK_NAME[mailq.1] = "${mandir}/man1/mailq.1"
--ALTERNATIVE_LINK_NAME[newaliases.1] = "${mandir}/man1/newaliases.1"
--ALTERNATIVE_LINK_NAME[sendmail.1] = "${mandir}/man1/sendmail.1"
+-SRC_URI[md5sum] = "f5fbd528e7b5977ad71466947af61f99"
+-SRC_URI[sha256sum] = "7f8035faafda15d26098bf2ffe16aaba1c78511ce13e0815d2efe58ba392b501"
++SRC_URI[md5sum] = "39258e1af392e0bcefceb1982d7716bd"
++SRC_URI[sha256sum] = "960d8288c8e3a093d04975e3dd8461ce2e43c1d0c70e54873f622f8f0b77d6f5"
+ 
+ inherit pypi setuptools3
+ 
 -- 
-2.25.1
+2.17.1
 
