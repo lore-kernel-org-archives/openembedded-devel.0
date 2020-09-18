@@ -1,85 +1,122 @@
-Received: from mail-oi1-f193.google.com (mail-oi1-f193.google.com [209.85.167.193])
- by mx.groups.io with SMTP id smtpd.web10.2533.1600371480454893966
+Received: from mail-io1-f65.google.com (mail-io1-f65.google.com [209.85.166.65])
+ by mx.groups.io with SMTP id smtpd.web11.7559.1600413571315362439
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Sep 2020 12:38:00 -0700
+ Fri, 18 Sep 2020 00:19:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=eSSnBCik;
- spf=pass (domain: gmail.com, ip: 209.85.167.193, mailfrom: george.mccollister@gmail.com)
-Received: by mail-oi1-f193.google.com with SMTP id n2so3865449oij.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Sep 2020 12:38:00 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=CzRGtnQW;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.166.65, mailfrom: brgl@bgdev.pl)
+Received: by mail-io1-f65.google.com with SMTP id r25so5810917ioj.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Sep 2020 00:19:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=r/sGnfmS7V1QDg9xXOQuUXOFDInQtbidF8b7/HTTFbs=;
-        b=eSSnBCikiIj3fU5Z6p/9Wpzz9VaZo7A2+/dt81HPdiA99dOTgpkvdRjJYWOSf383sc
-         bkqADCt8c5Sw2zrkrKfTyk3OU5wRCTr1SoORKndX2NfLNwKGdpLZcz5HdK+7W9Rtl8UV
-         7BZyrSoUk1UgNS1qj/nm2zejOf8C0BRhj8eaiu0Dk3BpRAiEY0YLEeHXeGs+5vkSANO5
-         VeuW3Cgx4G7s3Mnf8JIDk8bjK4SJTwUyQIUuV1dvWI2Gv5EO3xghVe31krrO4PWiEYjB
-         ydKsI61p+0upM36+uz4B1BfRTSrGLTTErA2FqG76WEUOwH+HOsQ8ImI3J7Mb8kbtIksO
-         FQig==
+        bh=dLUT1PsYFsDf3lWAUlFq/K2SvIPwmwLX2c1l4Eqg6nY=;
+        b=CzRGtnQWhRVOLtB9Mf+VST35+OFQN9lLRqoidynDjEAZQPJS50l5+Qwv8hraUqQf7g
+         oqU9EQ0Jr0pVcNj0SWPkrR6ZxvvIjV1oH8a1WsSoAoqFJk2s0hDlOJLKqCfA0tzmbCCD
+         m/BykXpwVcPc7amIkXpJ903rSUiZsPF9lMVT7ZKd7tKD1zLKxkmGlqIzhJM9b+MrLDDx
+         Q225zy2cTmlr/Q7gXW9330LHmZjUlPY0zW62tMEAGl6YFOYgobrl+G4zJYvDksabv1E6
+         49RnLA45FSNLkDnaqmIa/N1Z1ZHxfzJkKlqOjNsVu4RnazXG/pViNFnAPeTwCOXCSC3M
+         GK5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=r/sGnfmS7V1QDg9xXOQuUXOFDInQtbidF8b7/HTTFbs=;
-        b=U/cOQkFfi7EMYfqc0WNhFCc9zyQtNZBjzxTaIRr9LUDReeZRf6X5OqRdmT/L90mZmB
-         WP6FuxmVFOz4DA7yhdThEM26YOyYSzXpKMsh+BK4Qts5y0bJNEWbmNLGaHAo+3eEQobP
-         0Yebgprm3Sa+HRMKbwtv3DcZJXONp1ggaF8NiqrHij5kgwrFULfUv5i2EPLCwt7fTwnr
-         jSPSqgPYThBZHpaYfc5S4TaplJu52/0sehlstl5gH+m+EQxOgDG5RQmdhfNjOnQdWFkQ
-         /gbYKruOSkGky6F0c+rxeLUOPGzNFRc70lqXnmnGJ+1CSvCNsAC2EaEpPRAuJT8RDFtF
-         /PZg==
-X-Gm-Message-State: AOAM530RGHhwj510XM2i+TjZIdyrPWoHrJq6IMifxhSyrtNVyY655thR
-	QupGekwKYrWKgRL7r/eaG6svwa40T200YdyRiw==
-X-Google-Smtp-Source: ABdhPJyt8WFthuPfTZku8UBd68sHZTrwdoymT7IfJZpKhOrYV0uYeAZl8vAHCkemzZ6QtCwPtNV+S6Iq3DfR20NzoT0=
-X-Received: by 2002:aca:cf88:: with SMTP id f130mr6770828oig.122.1600371479712;
- Thu, 17 Sep 2020 12:37:59 -0700 (PDT)
+        bh=dLUT1PsYFsDf3lWAUlFq/K2SvIPwmwLX2c1l4Eqg6nY=;
+        b=BmKtrxp4AiAxY80VYXJmvITij2q1nIHQ012onuYcCsxWizd75ur9IlrdytyL6NE5X0
+         KKYR3r5uNTadWMeSoUae5np8OVZuyNHOzNR2fN05K5l2LoTFJ250lLias+fqtcbl4LQc
+         9zot8P7goTKIcbxvJjU3JUCEyfR4H1PY1zneBGy/VlneyKzoUH4TZvJHsJOA8UgLZ6hR
+         kv7kwC3H+iNKywMR80Ixa+fIUIbJqGrgl4Kk6fq1bLbQ4qLivwMieK4vwUzRiaBxhc2Z
+         k5Aca4ywhirEQU3/PVFlKG8ail55K2P5/hRmIuHnTsyccitXSfYBO2J7Vsu4Hs96MW8C
+         OQYA==
+X-Gm-Message-State: AOAM533s1XLr4iRt6KG7Og6PniJnLwmUnyxuNhYsWxKW2OFMbhqjg+GY
+	PQr56/gmmWWpv4S2zwSvcqtwT3h43R2o+clBXxas5A==
+X-Google-Smtp-Source: ABdhPJzziwo/xowGdI7sF2UcI/R7mRSh2Ij8GW1QJnd3PPACPHtqHKd3PK65Q53O4cF+7rJoBXFoWOiWDvV1DQfVP4Q=
+X-Received: by 2002:a05:6638:14c8:: with SMTP id l8mr29762048jak.136.1600413570514;
+ Fri, 18 Sep 2020 00:19:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200915171003.30632-1-leon.anavi@konsulko.com>
-In-Reply-To: <20200915171003.30632-1-leon.anavi@konsulko.com>
-From: "George McCollister" <george.mccollister@gmail.com>
-Date: Thu, 17 Sep 2020 14:37:47 -0500
-Message-ID: <CAFSKS=PkM5Ki1ettwe+jsw3rp9oJAQ1p71PWucsthNnuJTD9Fg@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][dunfell][PATCH] libldb: upgrade 1.5.7 -> 1.5.8
-To: Leon Anavi <leon.anavi@konsulko.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Yi Zhao <yi.zhao@windriver.com>, Khem Raj <raj.khem@gmail.com>
+References: <20200917144404.805-1-brgl@bgdev.pl> <CAMKF1sr_D-WUU6vhxxG65oHvjc8b6Eh8n=eportP+p-iKaQs1w@mail.gmail.com>
+ <CAMpxmJVWrjaORA6qqqa28TJWgEZT3rTUd=yCfjTZ=Kf2VeUs8w@mail.gmail.com> <CAMKF1sqFLLOFX5cafTb4F5ZO8E5QWL1_CwTDYj-5JQwS_dKriA@mail.gmail.com>
+In-Reply-To: <CAMKF1sqFLLOFX5cafTb4F5ZO8E5QWL1_CwTDYj-5JQwS_dKriA@mail.gmail.com>
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+Date: Fri, 18 Sep 2020 09:19:19 +0200
+Message-ID: <CAMRc=MfeqiZQpPphZp=jO0OZ_+TkyG99+DL2=_DqWW3aYLzKbA@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] libgpiod: drop support for 0.3.3
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>, Armin Kuster <akuster808@gmail.com>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Sep 15, 2020 at 12:10 PM Leon Anavi <leon.anavi@konsulko.com> wrote:
+On Thu, Sep 17, 2020 at 7:21 PM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> From: Yi Zhao <yi.zhao@windriver.com>
+> On Thu, Sep 17, 2020 at 8:49 AM Bartosz Golaszewski
+> <bgolaszewski@baylibre.com> wrote:
+> >
+> > On Thu, Sep 17, 2020 at 5:23 PM Khem Raj <raj.khem@gmail.com> wrote:
+> > >
+> > > is 1.4.4 backward compatible?
+> > >
+> > > On Thu, Sep 17, 2020 at 7:44 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+> > > >
+> > > > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> > > >
+> > > > I no longer support the v0.x.y series. Remove the recipe for v0.3.3.
+> > > > While at it: the tests PACKAGECONFIG is duplicated so remove one
+> > > > instance.
+> > > >
+> > > > Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> > > > ---
+> > > >  meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb | 8 --------
+> > > >  meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb | 2 --
+> > > >  2 files changed, 10 deletions(-)
+> > > >  delete mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
+> > > >
+> > > > diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
+> > > > deleted file mode 100644
+> > > > index c4d2bddf4..000000000
+> > > > --- a/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
+> > > > +++ /dev/null
+> > > > @@ -1,8 +0,0 @@
+> > > > -require libgpiod.inc
+> > > > -
+> > > > -PACKAGECONFIG ?= ""
+> > > > -
+> > > > -PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
+> > > > -
+> > > > -SRC_URI[md5sum] = "2aa1e1a80c3c919ae142ab9a55fb59ca"
+> > > > -SRC_URI[sha256sum] = "b773e557af1a497f786825462a776b7bf90168e67ee0a5bc5d2473a5674dc38c"
+> > > > diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
+> > > > index a9a462866..b5a64a554 100644
+> > > > --- a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
+> > > > +++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
+> > > > @@ -9,8 +9,6 @@ SRC_URI[sha256sum] = "f1cda2789e6a13a92aefc012a76e5a7cc57a1b402d66f71df8719ee314
+> > > >  PACKAGECONFIG ?= "cxx"
+> > > >
+> > > >  PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
+> > > > -PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
+> > > > -
+> > > >  PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
+> > > >
+> > > >  inherit python3native
+> > > > --
+> > > > 2.26.1
+> > > >
+> >
+> > No, it was a major release with a new API but 0.x was never meant to
+> > even be stable, it was largely a development series before we nailed
+> > down a good interface and released v1.0.
 >
-> Samba version 4.10.17 which has been already available in Dunfell
-> depends on version 1.5.8 of libldb.
+> OK, perhaps a deprecation notice for a release might have been better,
+> but since you maintain this recipe and
+> perhaps has better idea of its users, I will defer that judgment to you.
 >
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> ---
->  .../libldb/{libldb_1.5.7.bb => libldb_1.5.8.bb}               | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-networking/recipes-support/libldb/{libldb_1.5.7.bb => libldb_1.5.8.bb} (95%)
->
-> diff --git a/meta-networking/recipes-support/libldb/libldb_1.5.7.bb b/meta-networking/recipes-support/libldb/libldb_1.5.8.bb
-> similarity index 95%
-> rename from meta-networking/recipes-support/libldb/libldb_1.5.7.bb
-> rename to meta-networking/recipes-support/libldb/libldb_1.5.8.bb
-> index da77a2389..199db797a 100644
-> --- a/meta-networking/recipes-support/libldb/libldb_1.5.7.bb
-> +++ b/meta-networking/recipes-support/libldb/libldb_1.5.8.bb
-> @@ -33,8 +33,8 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
->                      file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
->                      file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
->
-> -SRC_URI[md5sum] = "4d72bbfe7c7fcdf592482a98c853d222"
-> -SRC_URI[sha256sum] = "b9eeb77ecb94f3b53caeff7cbc1850b6294fa937be4364c53a92a62c6548c001"
-> +SRC_URI[md5sum] = "d9b4bea8b48cd4c4d0c492e65881164b"
-> +SRC_URI[sha256sum] = "ddf7f770643e0a0dda60f2818913f883caeed37fa1e8d6eda0dfe9588c1e3a83"
->
->  inherit waf-samba
->
-> --
-> 2.17.1
->
-> 
+> >
+> > Bart
+
+Yes, it's fine - this branch hasn't received any updates for over two
+years. It doesn't even support all kernel features. I maintain the
+library itself and don't have any intention of bringing v0.3 back to
+life.
+
+Thanks,
+Bartosz
