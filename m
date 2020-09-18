@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.10974.1600430328413828822
+ by mx.groups.io with SMTP id smtpd.web12.11155.1600430328528859525
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 18 Sep 2020 04:58:48 -0700
 Authentication-Results: mx.groups.io;
@@ -8,15 +8,17 @@ Received: from [78.130.197.211] (port=59702 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kJF2K-0005BI-Li; Fri, 18 Sep 2020 14:58:45 +0300
+	id 1kJF2M-0005BI-BT; Fri, 18 Sep 2020 14:58:47 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/2] python3-cmd2: Upgrade 1.3.9 -> 1.3.10
-Date: Fri, 18 Sep 2020 14:58:34 +0300
-Message-Id: <20200918115835.4742-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-rfc3339-validator: Upgrade 0.1.1 -> 0.1.2
+Date: Fri, 18 Sep 2020 14:58:35 +0300
+Message-Id: <20200918115835.4742-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.5
+In-Reply-To: <20200918115835.4742-1-leon.anavi@konsulko.com>
+References: <20200918115835.4742-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -28,53 +30,86 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.3.10:
+Upgrade to release 0.1.2:
 
-- Added user-settable option called always_show_hint. If True,
-  then tab completion hints will always display even when tab
-  completion suggestions print. Arguments whose help or hint text
-  is suppressed will not display hints even when this setting is
-  True.
-- argparse tab completion now groups flag names which run the same
-  action. Optional flags are wrapped in brackets like it is done
-  in argparse usage text.
-- default category decorators are now heritable by default and
-  will propagate the category down the class hierarchy until
-  overridden. There's a new optional flag to set heritable to
-  false.
-- Added --silent flag to alias/macro create. If used, then no
-  confirmation message will be printed when aliases and macros
-  are created or overwritten.
-- Added --with_silent flag to alias/macro list. Use this option
-  when saving to a startup script that should silently create
-  aliases and macros.
-- Fixed issue where flag names weren't always sorted correctly in
-  argparse tab completion
+- setup.py: move pytest-runner to test_requirements
+
+Patch has been removed from the recipe because it has been already
+upstreamed in the new release.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-cmd2_1.3.9.bb => python3-cmd2_1.3.10.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.9.bb => python3-cmd2_1.3.10.bb} (75%)
+ ...e-pytest-runner-to-test_requirements.patch | 32 -------------------
+ ....bb => python3-rfc3339-validator_0.1.2.bb} |  8 ++---
+ 2 files changed, 2 insertions(+), 38 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-rfc3339-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch
+ rename meta-python/recipes-devtools/python/{python3-rfc3339-validator_0.1.1.bb => python3-rfc3339-validator_0.1.2.bb} (65%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.9.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.3.10.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.9.bb
-rename to meta-python/recipes-devtools/python/python3-cmd2_1.3.10.bb
-index e677a69620..7b74187838 100644
---- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.9.bb
-+++ b/meta-python/recipes-devtools/python/python3-cmd2_1.3.10.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def"
+diff --git a/meta-python/recipes-devtools/python/python-rfc3339-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch b/meta-python/recipes-devtools/python/python-rfc3339-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch
+deleted file mode 100644
+index ce8ca0bc8c..0000000000
+--- a/meta-python/recipes-devtools/python/python-rfc3339-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From 2de281fdca88f223ace1eb6428a77b9903c69264 Mon Sep 17 00:00:00 2001
+-From: Nicola Lunghi <nicola.lunghi@jci.com>
+-Date: Thu, 14 Nov 2019 11:58:28 +0000
+-Subject: [PATCH] setup.py: move pytest-runner to test_requirements
+-
+-This fixes an issue with yocto build.
+-pytest-runner is only needed when running tests.
+-
+-Upstream-Status: Pending
+----
+- setup.py | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/setup.py b/setup.py
+-index 9a50767..e3b1c6e 100644
+---- a/setup.py
+-+++ b/setup.py
+-@@ -12,9 +12,9 @@ requirements = [
+-     'six',
+- ]
+- 
+--setup_requirements = ['pytest-runner', ]
+-+setup_requirements = []
+- 
+--test_requirements = ['pytest>=3', ]
+-+test_requirements = ['pytest>=3', 'pytest-runner']
+- 
+- setup(
+-     author="Nicolas Aimetti",
+--- 
+-2.20.1
+-
+diff --git a/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.1.bb b/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.2.bb
+similarity index 65%
+rename from meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.2.bb
+index 1f5d91d3b2..e226e11b75 100644
+--- a/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.2.bb
+@@ -5,17 +5,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a21b13b5a996f08f7e0b088aa38ce9c6"
  
- DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+ FILESEXTRAPATHS_prepend := "${THISDIR}/python-rfc3339-validator:"
  
--SRC_URI[md5sum] = "f5fbd528e7b5977ad71466947af61f99"
--SRC_URI[sha256sum] = "7f8035faafda15d26098bf2ffe16aaba1c78511ce13e0815d2efe58ba392b501"
-+SRC_URI[md5sum] = "39258e1af392e0bcefceb1982d7716bd"
-+SRC_URI[sha256sum] = "960d8288c8e3a093d04975e3dd8461ce2e43c1d0c70e54873f622f8f0b77d6f5"
+-SRC_URI[md5sum] = "9d8899041d83f98180bddd8b62ee7e99"
+-SRC_URI[sha256sum] = "20a600d01fbb1f793cbb6f4ec4ebb2104f4c9e80d74d5f78350b63ecc6cccd08"
++SRC_URI[md5sum] = "2c233007189d5ef21046cb2afac51a96"
++SRC_URI[sha256sum] = "c9659c3183488a1875c4d327c9873d9e92c54cdcd69dfbfae7546ad8b27baf9a"
+ 
+ PYPI_PACKAGE = "rfc3339_validator"
  
  inherit pypi setuptools3
  
+-SRC_URI_append = " \
+-    file://0001-setup.py-move-pytest-runner-to-test_requirements.patch \
+-"
+-
+ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-core \
+     ${PYTHON_PN}-datetime \
 -- 
 2.17.1
 
