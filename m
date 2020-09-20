@@ -1,50 +1,50 @@
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web10.20581.1600613459711850993
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web12.20526.1600613461283881492
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Sep 2020 07:51:00 -0700
+ Sun, 20 Sep 2020 07:51:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=f6116aGy;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id gr14so14361155ejb.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Sep 2020 07:50:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=jQAuwqTY;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id u21so14333361eja.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Sep 2020 07:51:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=FGylluzvVp3zeYF4EJXnHdqcvcRhLITpmfu3scn70cw=;
-        b=f6116aGyvcpGiK9NFTY9jz6R49gXQkP4B+tJ1JbD7u7P6B+jbJ7aECFVuROCl7FEva
-         hXpv0AdnJAV3j+5ocIzrFUgMLgW3f9yXgG5TdFjXzU7+m4OMUjfNdaqHpgiNOSrHS5kg
-         M/of61NOEijuEGUF8pc9voPEVolIQO58O3o4VXxic/zhbkDF48eE3hpB9knwniFIJwHX
-         Nji0gu/HPtznAkNfiFm6mvOUePPoBsQoZN4PUMJilWMr4dQFc1ehoT5j2ffxQdY0rU6p
-         Re3U221+oCsjgjhmN4iO8tYktQqgKqVtO+dLs54zrAFgD0v1rGZjCF5iBj92HpR+Icak
-         UUpg==
+        bh=vlG+VX1HltacT6uFABwOo9Xz8QwveyIo1OTCooUQgjs=;
+        b=jQAuwqTYj3VcLtV1TEg8sdi+JulWXkfzUzmryS9M272QJYwB/ztS5xvBtX1jGtv9CK
+         J7+GD7yeyKwWKlbx9NLlLN8/pVElYVlDb/ZBrcQDQ+kWI4A/rq0kegXhtMouBjbnJjst
+         KrRDD0RXVpM6wpuwT33jnApGmqK0pVt95cr+tX2YEPqNdXJOBi8i4ZLKyk3vRtuXTKIm
+         RTbWdhvTxMRyCT7Of1ZDecbZAuwDKRbla/rbNtKjhcJdg+oo+KF1bZfkc52RCbgTqJk7
+         gfdag7RGB3OnekDvk+V3jyOfPxbc3PKV0H3xiwYe5wlBlICcqBl/eoWAoUE9DmDjkeTn
+         TbFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=FGylluzvVp3zeYF4EJXnHdqcvcRhLITpmfu3scn70cw=;
-        b=b0w2Inkg/8nEAhC4/VKxencVB9QqxLyBjI+YcSC1S5SWiy9sGZZjF+G3phdDoaek/8
-         Htx1IXgsdxBrZ9A9pjH9orcVKsngTo2KvJlbMbWE/iXAwImlyaqJaVInaE31wrbPN2fl
-         f7Z6Yj+QSysRNzOCqP6C6gtZf3VSxMO1zbkxkl6zbuVvEA3wqfRkvrbPHGfHXv+ekVQn
-         wD9ndMemN7H0TAMiuXlxup39kDGKHY6KrOLDXsm12sSqSZA7rS3qXF09i3XVVRcAPfJT
-         PJ5Vl0PrNI0A4A2YmzQYh+QiPG0Nuz5/dqzFkuZwrta0CTK8wukF9GyqzODuU1grYr8Z
-         iZCA==
-X-Gm-Message-State: AOAM531kP7yLPmJWcui1HHpGjkNOmi9o6RlrZC4C2QVudfCi3AkZk4Dj
-	Kr93zknBJrpLKSQXutUOSQVS8RKYFBM=
-X-Google-Smtp-Source: ABdhPJzAi5+2tT0PFnhkrdoDMFjtESUOj3r4aP/gAngFFheWfEibpAlQUavGIhqKsXQVU8oxKZR8Vg==
-X-Received: by 2002:a17:906:68cd:: with SMTP id y13mr45640431ejr.132.1600613457863;
-        Sun, 20 Sep 2020 07:50:57 -0700 (PDT)
+        bh=vlG+VX1HltacT6uFABwOo9Xz8QwveyIo1OTCooUQgjs=;
+        b=mGbz90Jxt8qHJJY8gTm/EWkHDhQjlm75tDkWknXZ0fM/fJjqzw3D5cdS+3DDZtWmi/
+         IUykJ5P/wIj74Q+Z4JSQCYBJ4ULNfhLzcVu9ikMeszKUB6d05jpppY8qUbOxsK6fDRoJ
+         u2oxqE3FmUgVfCndqsh7rGUas+lPDa7PlWox64zk56wIGAlG69f3IbGoI+GQ3u2BSxRe
+         Eru6XYMlsVzZOg770kMq4+hdS7MUkSIPV8z4i5DAmrM8YcclJOZkQ/H9iYNVMTcZaHhG
+         n8JxlERoPH6C6B/78jXQs45KHEuLfykvzp1UKvjfC4Mr2uO+y3b93pdQ/hlnNtrmoBqI
+         JTkQ==
+X-Gm-Message-State: AOAM533X9KMNeXcDa/6mQR5Kp5wuqdlIN86sZ5AgVpJxrz4MWGORLc3u
+	m0eRUDwi5LJcqYnUpmPrEOwuV31PMQI=
+X-Google-Smtp-Source: ABdhPJwNXTGt8BMIEpI4Y+xJT9YjbykZijVd9/BSpM/HEHwvqaCRaBzKxsXiU6NaUFc52gHZpENAuQ==
+X-Received: by 2002:a17:906:a1d8:: with SMTP id bx24mr44481335ejb.161.1600613459412;
+        Sun, 20 Sep 2020 07:50:59 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f33b24861ef8a9f58bb5121.dip0.t-ipconnect.de. [2003:f0:7f33:b248:61ef:8a9f:58bb:5121])
-        by smtp.gmail.com with ESMTPSA id m10sm6785777edf.11.2020.09.20.07.50.56
+        by smtp.gmail.com with ESMTPSA id m10sm6785777edf.11.2020.09.20.07.50.57
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Sep 2020 07:50:57 -0700 (PDT)
+        Sun, 20 Sep 2020 07:50:58 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 09/11] xfce4-notifyd: upgrade 0.6.1 -> 0.6.2
-Date: Sun, 20 Sep 2020 16:50:37 +0200
-Message-Id: <20200920145039.2240-9-schnitzeltony@gmail.com>
+Subject: [PATCH 10/11] live555: upgrade 20200721 -> 20200819
+Date: Sun, 20 Sep 2020 16:50:38 +0200
+Message-Id: <20200920145039.2240-10-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200920145039.2240-1-schnitzeltony@gmail.com>
 References: <20200920145039.2240-1-schnitzeltony@gmail.com>
@@ -52,51 +52,28 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes for 0.6.2
-=======================
-- Switch to new app icon and rDNS icon name
-- Default to session autostart instead of DBus (Fixes #27)
-- Add configurable log size limit (default: 100)
-- Make buttons on non-1st notifications work
-- panel-plugin: Add option to hide "Clear log" dialog
-- log: properly handle iso8601 timestamps
-- log: Use SHA-1 data hash in icon cache paths (bug #16825)
-- log: Improve performance of adding notifications (bug #14865)
-- log: Refactor log keyfile element insertion into a separate function
-- Add basic GitLab pipeline
-- Fix GTimeVal deprecation (Bug #16805)
-- Remove unused expire_timeout variable
-- Fix memory leaks
-- settings: Switch to symbolic close icon
-- Translation Updates:
-  Bulgarian, Catalan, Chinese (China), Danish, Dutch, Eastern Armenian,
-  Estonian, Finnish, French, Galician, German, Hebrew, Indonesian,
-  Italian, Japanese, Kazakh, Korean, Lithuanian, Norwegian Bokmål,
-  Portuguese, Portuguese (Brazil), Russian, Serbian, Spanish, Turkish
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{xfce4-notifyd_0.6.1.bb => xfce4-notifyd_0.6.2.bb}         | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-xfce/recipes-apps/xfce4-notifyd/{xfce4-notifyd_0.6.1.bb => xfce4-notifyd_0.6.2.bb} (84%)
+ .../live555/{live555_20200721.bb => live555_20200819.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-multimedia/live555/{live555_20200721.bb => live555_20200819.bb} (97%)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.6.1.bb b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.6.2.bb
-similarity index 84%
-rename from meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.6.1.bb
-rename to meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.6.2.bb
-index aed5ce4dc..5476b20bd 100644
---- a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.6.1.bb
-+++ b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.6.2.bb
-@@ -14,8 +14,7 @@ DEPENDS = " \
+diff --git a/meta-oe/recipes-multimedia/live555/live555_20200721.bb b/meta-oe/recipes-multimedia/live555/live555_20200819.bb
+similarity index 97%
+rename from meta-oe/recipes-multimedia/live555/live555_20200721.bb
+rename to meta-oe/recipes-multimedia/live555/live555_20200819.bb
+index df85cd484..c746b6e97 100644
+--- a/meta-oe/recipes-multimedia/live555/live555_20200721.bb
++++ b/meta-oe/recipes-multimedia/live555/live555_20200819.bb
+@@ -16,7 +16,7 @@ SRC_URI = "https://download.videolan.org/pub/contrib/live555/live.${URLV}.tar.gz
+ # only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
+ MIRRORS += "http://www.live555.com/liveMedia/public/ http://download.videolan.org/contrib/live555/ \n"
  
- inherit xfce-app
+-SRC_URI[sha256sum] = "89b2d99589de2ce9b4007ea6625dfce28317421604cf5131f4e1bf5bf7040b63"
++SRC_URI[sha256sum] = "af3af7f2510b0b45f38892c232abca2cee2ab36a62503e7085b47ed2c3c2c537"
  
--SRC_URI[md5sum] = "58e70621d6b9e0e66399ed41ab402a47"
--SRC_URI[sha256sum] = "9b5274999c89bf296a7de03b375e8233eef37940b7444502130b92dfb6a089b4"
-+SRC_URI[sha256sum] = "19ab84c6665c7819998f2269322d53f462c30963ce26042df23ae525e7d16545"
+ S = "${WORKDIR}/live"
  
- # Avoid trouble with other desktops e.g KDE which also ships dbus service named
- # org.freedesktop.Notifications
 -- 
 2.26.2
 
