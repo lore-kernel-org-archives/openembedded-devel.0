@@ -1,76 +1,75 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web12.12801.1600435682795840108
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
+ by mx.groups.io with SMTP id smtpd.web12.20521.1600613450997610519
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Sep 2020 06:28:03 -0700
+ Sun, 20 Sep 2020 07:50:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: hongxu.jia@windriver.com)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 08IDROPi014290
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
-	Fri, 18 Sep 2020 06:27:35 -0700
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
- (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Fri, 18 Sep 2020
- 06:27:07 -0700
-From: "hongxu" <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>, <trevor.gamblin@windriver.com>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH V2] python3-argcomplete: add recipe 1.12.0
-Date: Fri, 18 Sep 2020 21:27:06 +0800
-Message-ID: <20200918132706.16113-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.18.2
-In-Reply-To: <CAMKF1srbs8OQ5udXzXBW-sj4DmcjNsSJrj3vgKkE9qi_nfyosQ@mail.gmail.com>
-References: <CAMKF1srbs8OQ5udXzXBW-sj4DmcjNsSJrj3vgKkE9qi_nfyosQ@mail.gmail.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=TlItUYKK;
+ spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f46.google.com with SMTP id lo4so14265054ejb.8
+        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Sep 2020 07:50:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=KapgjJWArhcWBr1QfG25g+bgziA7yWOcnl4K11CM5uc=;
+        b=TlItUYKKwgtxe9cegcvrJSBG5qeigTKqSFqyu3o53vGIhmHtyx0Ujk9TyOgJXoXdeF
+         gYeSjECxl4dHFDgNrE9ql9qaXh9rkr6YeuOaP2KQdjkDI00CFZhCQpgRJeHfMsfo6bvb
+         lxRi6qoAd1mkxTYaHDcKz3VyA6q8gQVkc6WqlwtXQPyHqaafGa9d+bVE0jT5kam6+u96
+         oFGW8rgzYQ0TnEMS8PWWk2R5FVUUAAiOwiSTlLjSqnxFHizgPpKoikesWaKUxMvvQeNy
+         OnB6b70I1Lt6iUvU/HgwG+8VGoDPsGCLJa7JYvKtU0iDSiYBiZCfrY7HMByxBxerBuQt
+         Ipbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=KapgjJWArhcWBr1QfG25g+bgziA7yWOcnl4K11CM5uc=;
+        b=KECaHynugq12+pDoJd14HD3cN74KafXe2ZoqNlzkpVzqH1pLRuSx4grIsuCliwXibc
+         ZXko/T3UeC1G7KkAfzgO4n+LrxImNsBNZHOc5xogS9FIs0jH/Qxxt25aIpsMKMrcw7Wc
+         5Cag07mkACTpswZgXXzUmgrwE2dPyEIejbSt42kPAfCPrSKiptFuHgzEumZmJE1VwEgl
+         BtBuLUVRutU27OGNqhvPiY1fAy1z5U3W0FlvVYHndLSfL5+oWH1ZoaD86xdGop7rUZ0c
+         Q1HhN3dSpfxf1N6BP8JW3Bg9UhWKOXiZZQBCYLMO7sLmzLRpnmt7JLUnt/vnvAtHnWG8
+         niHw==
+X-Gm-Message-State: AOAM532vzu1tbQABW12bqIQFWZgJ9z6sRLlfUbYDjIcZiKebmsIMWEST
+	YbATy+A/hpeJE0d/9EJvjARaioWPyzQ=
+X-Google-Smtp-Source: ABdhPJxRfbzD766A464zMe8r+XZvS02IMLi50WQJjAs0cjGQXpDH1sRyka0cA0sCxNvlttil9wVFCA==
+X-Received: by 2002:a17:906:d9c3:: with SMTP id qk3mr33563512ejb.207.1600613448716;
+        Sun, 20 Sep 2020 07:50:48 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from superandy.speedport.ip (p200300f07f33b24861ef8a9f58bb5121.dip0.t-ipconnect.de. [2003:f0:7f33:b248:61ef:8a9f:58bb:5121])
+        by smtp.gmail.com with ESMTPSA id m10sm6785777edf.11.2020.09.20.07.50.47
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 20 Sep 2020 07:50:47 -0700 (PDT)
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 01/11] gnome-settings-daemon: Remove wrong RDEPEND
+Date: Sun, 20 Sep 2020 16:50:29 +0200
+Message-Id: <20200920145039.2240-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Tab complete all the things!
+* Since variable was misspelled it was a no-op
+* There is no gdbus package (gdbus is in glib-2.0-utils)
+* Did not find any pointer in the source that gdbus has to be installed on
+  target
 
-Argcomplete provides easy, extensible command line tab completion of
-arguments for your Python script.
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../packagegroups/packagegroup-meta-python.bb  |  1 +
- .../python/python3-argcomplete_1.12.0.bb       | 18 ++++++++++++++++++
- 2 files changed, 19 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-argcomplete_1.12.0.bb
+ .../gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb       | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 61623ac98..914359a86 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -42,6 +42,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-alembic \
-     python3-ansi2html \
-     python3-ansicolors \
-+    python3-argcomplete \
-     python3-argexec \
-     python3-appdirs \
-     python3-apply-defaults \
-diff --git a/meta-python/recipes-devtools/python/python3-argcomplete_1.12.0.bb b/meta-python/recipes-devtools/python/python3-argcomplete_1.12.0.bb
-new file mode 100644
-index 000000000..dd749dd9e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-argcomplete_1.12.0.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Argcomplete provides easy, extensible command line tab completion of arguments for your Python script."
-+HOMEPAGE = "https://github.com/kislyuk/argcomplete"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=2ee41112a44fe7014dce33e26468ba93"
-+
-+SRC_URI[md5sum] = "47e2a3db821f57165be8f3d3ec1e5259"
-+SRC_URI[sha256sum] = "2fbe5ed09fd2c1d727d4199feca96569a5b50d44c71b16da9c742201f7cc295c"
-+
-+PYPI_PACKAGE = "argcomplete"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-core \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
-+
+diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb
+index d14d6b503..e14891a23 100644
+--- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb
+@@ -55,5 +55,3 @@ FILES_${PN} += " \
+     ${systemd_user_unitdir} \
+     ${libdir}/gnome-settings-daemon-3.0/libgsd.so \
+ "
+-
+-RDEPEND_${PN} += "gdbus"
 -- 
-2.18.2
+2.26.2
 
