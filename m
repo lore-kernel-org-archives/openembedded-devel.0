@@ -1,75 +1,85 @@
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
- by mx.groups.io with SMTP id smtpd.web12.20521.1600613450997610519
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+ by mx.groups.io with SMTP id smtpd.web11.20561.1600613451577906939
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 20 Sep 2020 07:50:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=TlItUYKK;
- spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f46.google.com with SMTP id lo4so14265054ejb.8
-        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Sep 2020 07:50:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=IpLCzQ/U;
+ spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f45.google.com with SMTP id nw23so14272505ejb.4
+        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Sep 2020 07:50:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=KapgjJWArhcWBr1QfG25g+bgziA7yWOcnl4K11CM5uc=;
-        b=TlItUYKKwgtxe9cegcvrJSBG5qeigTKqSFqyu3o53vGIhmHtyx0Ujk9TyOgJXoXdeF
-         gYeSjECxl4dHFDgNrE9ql9qaXh9rkr6YeuOaP2KQdjkDI00CFZhCQpgRJeHfMsfo6bvb
-         lxRi6qoAd1mkxTYaHDcKz3VyA6q8gQVkc6WqlwtXQPyHqaafGa9d+bVE0jT5kam6+u96
-         oFGW8rgzYQ0TnEMS8PWWk2R5FVUUAAiOwiSTlLjSqnxFHizgPpKoikesWaKUxMvvQeNy
-         OnB6b70I1Lt6iUvU/HgwG+8VGoDPsGCLJa7JYvKtU0iDSiYBiZCfrY7HMByxBxerBuQt
-         Ipbg==
+        bh=/z2HEtWYCGmoW5ZpFXRddwrWyPMbTT6wkOrfeX8nJ14=;
+        b=IpLCzQ/Uzji/igB7HSzv52oBarSMSpBpbPXZj1C5rW5PcM9R5s8DLjLqh6cT2VLStY
+         V2haa80zXjpeRLJ9HJ9L7Sxgvhn5eCOEM7v0HnNVMSNnsfs2CbJ/P1yef9VqEJOu624Z
+         u1oTbrY0H5VSdZqQJw/yeaJeghwIFdpD4Nmlh884XMxxYf+lQe2/R/gVJnK6nhTJfhZA
+         Od/BNM29FcoyGNLH3puGCRv6yiKpbkXArZbFmL+B3X++dqjZIhRN5KzlCCLVD/EyaoG1
+         0gIaKoN+SwOCZLDzzDFIrSfzk/qodsNd8TpNU646+v0NzG70FglAosjhb0OqOWDGaGI4
+         v/Ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=KapgjJWArhcWBr1QfG25g+bgziA7yWOcnl4K11CM5uc=;
-        b=KECaHynugq12+pDoJd14HD3cN74KafXe2ZoqNlzkpVzqH1pLRuSx4grIsuCliwXibc
-         ZXko/T3UeC1G7KkAfzgO4n+LrxImNsBNZHOc5xogS9FIs0jH/Qxxt25aIpsMKMrcw7Wc
-         5Cag07mkACTpswZgXXzUmgrwE2dPyEIejbSt42kPAfCPrSKiptFuHgzEumZmJE1VwEgl
-         BtBuLUVRutU27OGNqhvPiY1fAy1z5U3W0FlvVYHndLSfL5+oWH1ZoaD86xdGop7rUZ0c
-         Q1HhN3dSpfxf1N6BP8JW3Bg9UhWKOXiZZQBCYLMO7sLmzLRpnmt7JLUnt/vnvAtHnWG8
-         niHw==
-X-Gm-Message-State: AOAM532vzu1tbQABW12bqIQFWZgJ9z6sRLlfUbYDjIcZiKebmsIMWEST
-	YbATy+A/hpeJE0d/9EJvjARaioWPyzQ=
-X-Google-Smtp-Source: ABdhPJxRfbzD766A464zMe8r+XZvS02IMLi50WQJjAs0cjGQXpDH1sRyka0cA0sCxNvlttil9wVFCA==
-X-Received: by 2002:a17:906:d9c3:: with SMTP id qk3mr33563512ejb.207.1600613448716;
-        Sun, 20 Sep 2020 07:50:48 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=/z2HEtWYCGmoW5ZpFXRddwrWyPMbTT6wkOrfeX8nJ14=;
+        b=Cz3b/1aieXAIXwfj+ckMPAYjfDWSt4RScXnATHP1dZ30xTdxbr3TAei/ljX/Jlt7Jd
+         81LZuUPCKMpaNHPAch9PO9TYaIkd1KElcasnOEnJp0trRcDb1+ufKG8KQRZDtJf2Cku6
+         Opcc+sbfVxFpt4XOksc5ShswBXOkeMpSefhWUc0uMBCooeNDmc8EGF/q9jldv8XtufjT
+         giCe7gOmqvmT5rZ8JwvzzholnVvvVgpqgTgychPZAzQyFt7f+M5LP/PGDTdxjuEuSDBy
+         MKLxepOVKhVS3CHAdYiPvGuOeK75gfkD47hHC447Po8LrVcYphW/k3N+LQulVQ09Hv17
+         nrbA==
+X-Gm-Message-State: AOAM532WDpDZUfmEbfumz793oi64wTKsIFJHIiZwrpsuJsMFOdfLTMJt
+	QAzYkQd5amrF74jKlpdNybmG+zP45kc=
+X-Google-Smtp-Source: ABdhPJwpj7FdytIxqR06fZngAf5Axy/bbiAZ/GBt2B2iF3ImLARuNG3IVdHy1xvwami/PDVQDHZHnA==
+X-Received: by 2002:a17:906:488d:: with SMTP id v13mr44817810ejq.524.1600613449635;
+        Sun, 20 Sep 2020 07:50:49 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f33b24861ef8a9f58bb5121.dip0.t-ipconnect.de. [2003:f0:7f33:b248:61ef:8a9f:58bb:5121])
-        by smtp.gmail.com with ESMTPSA id m10sm6785777edf.11.2020.09.20.07.50.47
+        by smtp.gmail.com with ESMTPSA id m10sm6785777edf.11.2020.09.20.07.50.48
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Sep 2020 07:50:47 -0700 (PDT)
+        Sun, 20 Sep 2020 07:50:48 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 01/11] gnome-settings-daemon: Remove wrong RDEPEND
-Date: Sun, 20 Sep 2020 16:50:29 +0200
-Message-Id: <20200920145039.2240-1-schnitzeltony@gmail.com>
+Subject: [PATCH 02/11] gnome-desktop3: upgrade 3.36.5 -> 3.36.6
+Date: Sun, 20 Sep 2020 16:50:30 +0200
+Message-Id: <20200920145039.2240-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200920145039.2240-1-schnitzeltony@gmail.com>
+References: <20200920145039.2240-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* Since variable was misspelled it was a no-op
-* There is no gdbus package (gdbus is in glib-2.0-utils)
-* Did not find any pointer in the source that gdbus has to be installed on
-  target
+===============
+Version 3.36.6
+===============
+
+- No changes
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb       | 2 --
- 1 file changed, 2 deletions(-)
+ .../{gnome-desktop3_3.36.5.bb => gnome-desktop3_3.36.6.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gnome-desktop/{gnome-desktop3_3.36.5.bb => gnome-desktop3_3.36.6.bb} (92%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb
-index d14d6b503..e14891a23 100644
---- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.36.1.bb
-@@ -55,5 +55,3 @@ FILES_${PN} += " \
-     ${systemd_user_unitdir} \
-     ${libdir}/gnome-settings-daemon-3.0/libgsd.so \
- "
--
--RDEPEND_${PN} += "gdbus"
+diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.5.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.6.bb
+similarity index 92%
+rename from meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.5.bb
+rename to meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.6.bb
+index fcdb2aee4..a383da479 100644
+--- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.5.bb
++++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.36.6.bb
+@@ -16,7 +16,7 @@ inherit gnomebase itstool pkgconfig upstream-version-is-even gobject-introspecti
+ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+ UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
+ 
+-SRC_URI[archive.sha256sum] = "eea1242994109fa3f05793963ee25c3df23bc84b0f0b81f03ec3c294c27ab753"
++SRC_URI[archive.sha256sum] = "d23c76947c781f447fb39538dec509408b161b291a75a4ce1c14c2b3d33344f6"
+ 
+ SRC_URI += " \
+     file://gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch \
 -- 
 2.26.2
 
