@@ -1,17 +1,17 @@
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.63])
- by mx.groups.io with SMTP id smtpd.web11.44669.1600701741312684483
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.63])
+ by mx.groups.io with SMTP id smtpd.web11.44674.1600701752412826561
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Sep 2020 08:22:21 -0700
+ Mon, 21 Sep 2020 08:22:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=XMEw0Ycu;
- spf=pass (domain: windriver.com, ip: 40.107.94.63, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=GYa9Q5y9;
+ spf=pass (domain: windriver.com, ip: 40.107.236.63, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XVZhRzma40ymZ8tDfyM6IieEfet+VVWlzqgBEFdDp1H2lws2Z4VlA+XUzLwu640Q6X6DWpGphJlf/oWnOAEPRcCAisg2LNb/msyf5S79WYvr6mwBNwPPlpsRX49yhIv+hGGQrfDh0P2XP2p+FTs168kgq3ZdWYYl5d3UjHLKl/gdmrTt+LoWNmKZTZ0f7JtNNeYTdo6WB2B0E5MP0X2B0QJRnqQwoqFLX44Tj68DgfhB5kizL2kPkfj9yES4wuBtnRp8yoesuhw4ynCkqYGOknZV+xQbeSWbhM54+Y2EjS6d4NUr+lyLGP63+7i1m9fhRu2cDGMkgF9ax0P9nD5Nxw==
+ b=aE7WkQwIyeSk3k1sLI3BBAqx3bwLMvV2hasesar6HjOQ4KJTU8X7FvKAJF/hpRKCQ+Tx1oF/u4VmXk+A5DT8cySjgZoRmS570ZD8+LEuf4A916wTpCeOpOfrSbc3+ow6Bx17mubuxW2Stood/X9CHhUagjhaOxln7dCxa+BO8UCmEuvC4vXiKimDH0dmY7IKXDm+qtJU5j33cfaYhH05YIXRsGvkXwGq9cPA7eR+2TOvmHTy8Ihe8cCmSKMTY04DhhIlbQsMZqsciFH1b6nKRm69XN/DQxuFAbkDF4EizavNeu+Dv1fsvAgbXlCtD00CckJzovbj4MX1dB706csQtQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dorVvOdNu3NxxkY/Td7PAt2P2RfUVwEkuxyjPr9YRa0=;
- b=gW9T4mYsG7FioOJmM4D8/Wd0ISdP0YsBYO2l98KmOhGEcTxePSCDy1GjuikbjfXsKgGyM7yjuhngOznZ8DS496QVVx1q8JaWuC/V+Fyra95g7KNvYuuj2GtQZt/YG3Y2JZ6XDMZeO4DmZWGSzW91g3YpFfHyZEa9myI2xRT1uDIJ5jZgYwDk1PMqNbbLCXknNYsfDrc5cr0mrS2NgcfqDa5J01x2liJMULda51V5uk1GZb3PwjK7MrToK46Mq/FwqfAC64MPSPwANWZcEvE+k4F18yE5aoZeWRocGqKRU9p5tCIQYl5m3EpUyc7WC2AGDHgyebgKxeoVjHpYZ0TPcQ==
+ bh=J09RyPcWOBK51TrD1W95zv1x2URHxZ+nVktvQ42wq9k=;
+ b=M4SXBaLWp5ZaV+vf4CUU9Y66y9lbSP/YuexgG8qYFhEJZXLv9p4QXaWMWyBroJ5YWOiXfMsYqJbbj7Ro8kf9Xs4GBm6TXDviZbzZre/4P2xmEUkGW5uHudeQG68VC5wjbbVIaEg6xhQQrZ5GsIQv+XUJmdN3kP6rpWcif+KLZ7JS2kzNxwciM4vfYLQMkJwz5DWMbTE6V1A7OB5EGciRVcU1ICfhMYWeDlplSZ0dfOtq3cVP+QDgM2zg1mVRTezo45558YP96t88WBcC0w1GydeQ5OkZaJBSH0xGyTjAywKd3CP7/DleNRA10g7Aa6SeUvDbVtqQtb1oU9cm/fW9xg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,107 +19,126 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dorVvOdNu3NxxkY/Td7PAt2P2RfUVwEkuxyjPr9YRa0=;
- b=XMEw0YcuEUNtXVQT22SXpu1p2wMSTpb+0JsX27nqlvIzN3ffQEo72PGhEKYC+5b72PYAjbeXBW7CV9eJ9D50Bf1vBFJ1cVC/5TOMuOUh2N9laBfmF707bktfmubqQnug6o1vyv34EL+gAcDov0ZQRH8njC7195TwEAd7eoz7yjY=
+ bh=J09RyPcWOBK51TrD1W95zv1x2URHxZ+nVktvQ42wq9k=;
+ b=GYa9Q5y9gitQuMrk/y1tSA9fyCE+bHKXBg6fl3E2pflLLUKWAeg2XvevmPINwqHunt5IuOxeHqXdKCFSsnaHzYeg1WbCrooIgZRbTxzjPwVJ3Cmnv+PeQxbPj+papxVpFiH06LduyCqOuzFjy+DJnI9qNJpwRR9qHru+sedzpso=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB2680.namprd11.prod.outlook.com (2603:10b6:a02:c9::21) with
+ by BY5PR11MB4307.namprd11.prod.outlook.com (2603:10b6:a03:1bd::27) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3391.11; Mon, 21 Sep
- 2020 15:22:15 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3370.16; Mon, 21 Sep
+ 2020 15:22:29 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8%7]) with mapi id 15.20.3391.026; Mon, 21 Sep 2020
- 15:22:15 +0000
-Subject: Re: [oe] [meta-python][PATCH 2/2] python3-sentry-sdk: Upgrade 0.17.5 -> 0.17.6
+ 15:22:29 +0000
+Subject: Re: [oe] [meta-python][PATCH 1/2] python3-cmd2: Upgrade 1.3.9 -> 1.3.10
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
-References: <20200916092133.11861-1-leon.anavi@konsulko.com>
- <20200916092133.11861-2-leon.anavi@konsulko.com>
+References: <20200918115835.4742-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <b7139d10-27c7-f071-4e78-bdf703bfd6a6@windriver.com>
-Date: Mon, 21 Sep 2020 11:22:12 -0400
+Message-ID: <b0369d23-1aa1-7a41-bd47-a55235b6990e@windriver.com>
+Date: Mon, 21 Sep 2020 11:22:26 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
-In-Reply-To: <20200916092133.11861-2-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YT1PR01CA0121.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2c::30) To BY5PR11MB3909.namprd11.prod.outlook.com
+In-Reply-To: <20200918115835.4742-1-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YT1PR01CA0120.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2c::29) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0121.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2c::30) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3391.14 via Frontend Transport; Mon, 21 Sep 2020 15:22:14 +0000
+Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0120.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2c::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3391.13 via Frontend Transport; Mon, 21 Sep 2020 15:22:28 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 7f268be5-69fa-4031-a061-08d85e421e88
-X-MS-TrafficTypeDiagnostic: BYAPR11MB2680:
+X-MS-Office365-Filtering-Correlation-Id: ad204a05-ec72-4afc-ec31-08d85e422749
+X-MS-TrafficTypeDiagnostic: BY5PR11MB4307:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB268065DCFA23BBA85C580D499F3A0@BYAPR11MB2680.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:262;
+	<BY5PR11MB4307C0E32536F75719FE9DF99F3A0@BY5PR11MB4307.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2201;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	b2MDLVzTpgxAI7+hparowpDLV6ifSwmtERuwq0j1httYlhZPKfYu1ClST/o/Gyzzzu0it4EaxvS554Au/XWpcxDSg2CBkPV19z+j4UoaAnfsfRz9GLoRYPpEd1a+MP+erbx8+gDZq0HSDkAHyaVdLDyWLi9BsFATkmWTyANCeEb5udaBwXVBQNO7kd4OfUYZxr5wSqvAiFuT053b/QvQBKcWoVxU+dE0ieztL5JW5AlLPAU1S+xJjifG550j7OXBGk0QL++wij86qkOr6tfee/qaWpYlOENuy5KYTYHXNZu1MPlqCOJXNFs0Pj2rkVBKuw8AYklck9JVn3z5syv52IdDnXZCNVBiznWG+UlBFxpy7OgebMQrTR/FpKZBjPgqtIAyRkIux1ERHS6XRuM7K6CwvUhICN/fMwAwMvp6cMDJc2rkgbTCqoho6/KL6wrOFpJOMMPuWAcDNB1ryMghFA==
+	7jUdyeEq0Fz7Yj98aJMJRrfVVkpWAn/yR8agQsL1aJ92nlQm1WSOP71dqS4RvBaq3a5dAhqG3KQMNL767WFGZaJBhSQDLvEL5oCFGBJx6iTMIXMrdUj1isD1DyIefYV5yIwSeLhU4nlAxWQN0/TqrmMMMQ6fZuTFaBAj59oJ1veDI/Sj4pFf3wcHHbqCRTQ2I4cCmFSm8RHCJReurQRPNK2CeBLHTMv2Iy2WD8+akvQ5Phv8ajvfdTtD6u3nsRk74KhUwLWiUf+Udkl6E/pQyvC5ksPdaxoT1NdtjfnJz3n3m6Kp8JjsnYRGyLP99cyn6Sin6iK4B96/hupc42ln1UOYQBEUyLDI3sDvzqR4zU318qiqDZ4oZlLnwueeNRz6cZbboVnq2XBOVggaMqhJtth5F29v8trdszbFMRfkBCkIHvbFqaSWchANopORcTn8rxU3J7LcNuMeHVBZ9+Y0Ng==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(39850400004)(396003)(346002)(376002)(366004)(2906002)(31686004)(53546011)(36756003)(31696002)(8936002)(2616005)(83380400001)(33964004)(956004)(52116002)(16576012)(316002)(16526019)(26005)(478600001)(166002)(186003)(44832011)(86362001)(6486002)(8676002)(66476007)(66946007)(5660300002)(66556008)(966005)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(376002)(366004)(136003)(346002)(39850400004)(478600001)(8676002)(86362001)(36756003)(966005)(44832011)(53546011)(956004)(2616005)(66556008)(66476007)(2906002)(66946007)(52116002)(186003)(16576012)(31696002)(31686004)(26005)(33964004)(5660300002)(166002)(16526019)(8936002)(6486002)(316002)(83380400001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	2I8jnDP0O7MlUnN/TgPW7k78jWZCJSUvR2yTnHGZGb/SYIFSfsD6+ttDDG9VeGfeHQ1PndXUt/C51CTy4rC2DJtF2sEGYsmNrk1FEIn1Qub0V35qkxXP2o0CVz3OoO0NOnrQzSV6mZBzfWygWTyLMH4g9RpE67hWMj9id35Bfvsjye/hVGFghabujmnbjpM2PLZZ0zebOt20h5BefQiUehkEd9AJzLLfHw4UyguzFnnJ7ua2vCYU7FaBOdBLpTkQ1qSHS+uf0deMCiPgoY6lBN7sgLSANFOqTcCA7iGFKojZ7jnTjgFWopc7fhgUuVykWgrqY3C2EZcMvYKiMm8Jopz0LkhvyirEd1yh+qK2RuFeu5yXm6Crx66dPdmATbNHb4PUUdsP/iMz6cz085ryRr/00Z9sfbXmklFCOwqHCfOfNCzwQqzVju9Gg+Vc1Mj3amzv+jd43TWiXvJWHU6MpgLLRxaidGUJ1k34PXKUZ4wlvfIMqSD4Rs6FnBiNK7QCKUbtxusOXUM0GWGuiTG2hbZCsmmU8d4MQFcVfXVLj/IKhZJ1j5OLIQTkS7fXOPX2bi/mO5DgGy7gid1Gq5uYFXbhSezsOtX6i3vxLZWA9REh4MyB4KSAjDTWw0477zqdKHwyBGgB1lBudDx6YbE4lQ==
+	eKC/yZ5C8dRB37hcB/JiJn4NJW8DU7CCoi1pyWIQj71G0SiUjr3ZdV/jPvOk4p8BFd6YagBznpr4PjlMRZwSpcrfcj8NUbKE62kldU9IdGLTy1VGPoIIz/Tz3b6OjzLp4CQQQHOpYCV6cfUaJr9XktTp4w9pCrHATQXiRD6IuWLID6PosZkCEh625sjw+uK3bxrkr89qpSpWPGnGZsQtBj3pJ+m81ZmNA7fLBGM2YvFFB9MfDv1SwWaa5eEOOdO3vKs9HZPnrlIelscCdIBTrJvgr/K+vNl8dnghbLziu2HwChcW8omB8LsZbFkNUcQ6105xErP6aRJobIDbflAea8Ch7B+c5CtVlPsP4VfSdj40AhYLUHrAzaLf+LaUUJACP1O6e9ICkXOuRrqjEtnX3b+G9iT68okKYNPtQK59IsAKVTMqq5senZCE4m9KLK2rwNNobthZUTffnttBcnXdsRLZA2ts2Ffb0QYwy7fzSd9szy10GUZQaNgaQTwhLpF/d5insl4eyF8SY5TTXmuysmIdu1BuqVSpJwMgyWa/deMhX5GxKQKSHSsOYVg6wS4JZXsYVk5APq+cUoOV/63cVuxBSzq5sl2iL7gtSYV17aMS/QaQH+Sq+kOT2ht7yPiw3P07n9Q31ljR34Qe9RyEtg==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7f268be5-69fa-4031-a061-08d85e421e88
+X-MS-Exchange-CrossTenant-Network-Message-Id: ad204a05-ec72-4afc-ec31-08d85e422749
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2020 15:22:14.9286
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2020 15:22:29.6081
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: UcERuy8ObBv3u0xOmwp422U9MR9qe4IMKwUhMIVkMHUiYzYB+AmRuxASnhQPHmLAUQNMaFZP5pUyI86WOq1x+hWHWd+ezTWiSBo+FUqEmKI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2680
+X-MS-Exchange-CrossTenant-UserPrincipalName: wsWJwWYU3x6cv5DtgC5oBuTP6NxRNKt8w7DKRqKIcnviZTObt73ewt64bcla0vQt1d2V+evN7jyuhJox8m+r4FCAS24jhrxNf8P2+vs1dpA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4307
 Content-Type: multipart/alternative;
- boundary="------------17C78B3AFA5193A2B647726B"
+ boundary="------------EE1C794BB254F4C36BA20B72"
 Content-Language: en-US
 
---------------17C78B3AFA5193A2B647726B
+--------------EE1C794BB254F4C36BA20B72
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 9/16/20 5:21 AM, Leon Anavi wrote:
-> Upgrade to release 0.17.6:
+On 9/18/20 7:58 AM, Leon Anavi wrote:
+> Upgrade to release 1.3.10:
 >
-> - Support for Flask 0.10 (only relaxing verson check)
+> - Added user-settable option called always_show_hint. If True,
+>    then tab completion hints will always display even when tab
+>    completion suggestions print. Arguments whose help or hint text
+>    is suppressed will not display hints even when this setting is
+>    True.
+> - argparse tab completion now groups flag names which run the same
+>    action. Optional flags are wrapped in brackets like it is done
+>    in argparse usage text.
+> - default category decorators are now heritable by default and
+>    will propagate the category down the class hierarchy until
+>    overridden. There's a new optional flag to set heritable to
+>    false.
+> - Added --silent flag to alias/macro create. If used, then no
+>    confirmation message will be printed when aliases and macros
+>    are created or overwritten.
+> - Added --with_silent flag to alias/macro list. Use this option
+>    when saving to a startup script that should silently create
+>    aliases and macros.
+> - Fixed issue where flag names weren't always sorted correctly in
+>    argparse tab completion
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...hon3-sentry-sdk_0.17.5.bb => python3-sentry-sdk_0.17.6.bb} | 4 ++--
+>   .../python/{python3-cmd2_1.3.9.bb => python3-cmd2_1.3.10.bb}  | 4 ++--
 >   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-sentry-sdk_0.17.5.bb => python3-sentry-sdk_0.17.6.bb} (72%)
+>   rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.9.bb => python3-cmd2_1.3.10.bb} (75%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.5.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.6.bb
-> similarity index 72%
-> rename from meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.5.bb
-> rename to meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.6.bb
-> index 5495fa0d3a..5f566a8264 100644
-> --- a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.5.bb
-> +++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.6.bb
-> @@ -5,8 +5,8 @@ HOMEPAGE = "https://github.com/getsentry/sentry-python"
->   LICENSE = "BSD-2-Clause"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
+> diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.9.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.3.10.bb
+> similarity index 75%
+> rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.9.bb
+> rename to meta-python/recipes-devtools/python/python3-cmd2_1.3.10.bb
+> index e677a69620..7b74187838 100644
+> --- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.9.bb
+> +++ b/meta-python/recipes-devtools/python/python3-cmd2_1.3.10.bb
+> @@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def"
 >   
-> -SRC_URI[md5sum] = "dcdf0d4f84f4f6ea02ad3f15dfcff2d9"
-> -SRC_URI[sha256sum] = "02f2a72698453f722b102562eb6430d2a82d6c6c40f2b991ed69e7628142de6a"
-> +SRC_URI[md5sum] = "f48cccd128b10a9a4d19db89d1a74a58"
-> +SRC_URI[sha256sum] = "1a086486ff9da15791f294f6e9915eb3747d161ef64dee2d038a4d0b4a369b24"
+>   DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
 >   
->   PYPI_PACKAGE = "sentry-sdk"
+> -SRC_URI[md5sum] = "f5fbd528e7b5977ad71466947af61f99"
+> -SRC_URI[sha256sum] = "7f8035faafda15d26098bf2ffe16aaba1c78511ce13e0815d2efe58ba392b501"
+> +SRC_URI[md5sum] = "39258e1af392e0bcefceb1982d7716bd"
+> +SRC_URI[sha256sum] = "960d8288c8e3a093d04975e3dd8461ce2e43c1d0c70e54873f622f8f0b77d6f5"
+>   
 >   inherit pypi setuptools3
+>   
 >
 > 
+>
 
---------------17C78B3AFA5193A2B647726B
+--------------EE1C794BB254F4C36BA20B72
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -129,48 +148,69 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 9/16/20 5:21 AM, Leon Anavi wrote:<br>
+    <div class="moz-cite-prefix">On 9/18/20 7:58 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200916092133.11861-2-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 0.17.6:
+    <blockquote type="cite" cite="mid:20200918115835.4742-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.3.10:
 
-- Support for Flask 0.10 (only relaxing verson check)
+- Added user-settable option called always_show_hint. If True,
+  then tab completion hints will always display even when tab
+  completion suggestions print. Arguments whose help or hint text
+  is suppressed will not display hints even when this setting is
+  True.
+- argparse tab completion now groups flag names which run the same
+  action. Optional flags are wrapped in brackets like it is done
+  in argparse usage text.
+- default category decorators are now heritable by default and
+  will propagate the category down the class hierarchy until
+  overridden. There's a new optional flag to set heritable to
+  false.
+- Added --silent flag to alias/macro create. If used, then no
+  confirmation message will be printed when aliases and macros
+  are created or overwritten.
+- Added --with_silent flag to alias/macro list. Use this option
+  when saving to a startup script that should silently create
+  aliases and macros.
+- Fixed issue where flag names weren't always sorted correctly in
+  argparse tab completion
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200916092133.11861-2-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200918115835.4742-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...hon3-sentry-sdk_0.17.5.bb =&gt; python3-sentry-sdk_0.17.6.bb} | 4 ++--
+ .../python/{python3-cmd2_1.3.9.bb =&gt; python3-cmd2_1.3.10.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-sentry-sdk_0.17.5.bb =&gt; python3-sentry-sdk_0.17.6.bb} (72%)
+ rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.9.bb =&gt; python3-cmd2_1.3.10.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.5.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.6.bb
-similarity index 72%
-rename from meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.5.bb
-rename to meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.6.bb
-index 5495fa0d3a..5f566a8264 100644
---- a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.6.bb
-@@ -5,8 +5,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/getsentry/sentry-python">&quot;https://github.com/getsentry/sentry-python&quot;</a>
- LICENSE = &quot;BSD-2-Clause&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341">&quot;file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.9.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.3.10.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.9.bb
+rename to meta-python/recipes-devtools/python/python3-cmd2_1.3.10.bb
+index e677a69620..7b74187838 100644
+--- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.9.bb
++++ b/meta-python/recipes-devtools/python/python3-cmd2_1.3.10.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def">&quot;file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def&quot;</a>
  
--SRC_URI[md5sum] = &quot;dcdf0d4f84f4f6ea02ad3f15dfcff2d9&quot;
--SRC_URI[sha256sum] = &quot;02f2a72698453f722b102562eb6430d2a82d6c6c40f2b991ed69e7628142de6a&quot;
-+SRC_URI[md5sum] = &quot;f48cccd128b10a9a4d19db89d1a74a58&quot;
-+SRC_URI[sha256sum] = &quot;1a086486ff9da15791f294f6e9915eb3747d161ef64dee2d038a4d0b4a369b24&quot;
+ DEPENDS += &quot;${PYTHON_PN}-setuptools-scm-native&quot;
  
- PYPI_PACKAGE = &quot;sentry-sdk&quot;
+-SRC_URI[md5sum] = &quot;f5fbd528e7b5977ad71466947af61f99&quot;
+-SRC_URI[sha256sum] = &quot;7f8035faafda15d26098bf2ffe16aaba1c78511ce13e0815d2efe58ba392b501&quot;
++SRC_URI[md5sum] = &quot;39258e1af392e0bcefceb1982d7716bd&quot;
++SRC_URI[sha256sum] = &quot;960d8288c8e3a093d04975e3dd8461ce2e43c1d0c70e54873f622f8f0b77d6f5&quot;
+ 
  inherit pypi setuptools3
+ 
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
       <pre class="moz-quote-pre" wrap="">
+
+
 </pre>
     </blockquote>
   </body>
 </html>
 
---------------17C78B3AFA5193A2B647726B--
+--------------EE1C794BB254F4C36BA20B72--
