@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.42493.1600695858180772765
+ by mx.groups.io with SMTP id smtpd.web12.42364.1600695858294045817
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 21 Sep 2020 06:44:18 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=37232 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kKM76-0004UL-Eq; Mon, 21 Sep 2020 16:44:17 +0300
+	id 1kKM75-0004UL-S2; Mon, 21 Sep 2020 16:44:16 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-xlsxwriter: Upgrade 1.3.3 -> 1.3.4
-Date: Mon, 21 Sep 2020 16:44:04 +0300
-Message-Id: <20200921134405.676-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-isort: Upgrade 5.5.2 -> 5.5.3
+Date: Mon, 21 Sep 2020 16:44:03 +0300
+Message-Id: <20200921134405.676-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200921134405.676-1-leon.anavi@konsulko.com>
 References: <20200921134405.676-1-leon.anavi@konsulko.com>
@@ -30,36 +30,35 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.3.4:
+Upgrade to release 5.5.3:
 
-- Replaced internal MD5 digest used to check for duplicate images
-  with a SHA256 digest to avoid issues on operating systems such
-  as Red Hat in FIPS mode which don't support MD5 for security
-  reasons
+- Bug fix: in rare cases isort can mangle yield from or raise
+  from statements.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ython3-xlsxwriter_1.3.3.bb => python3-xlsxwriter_1.3.4.bb} | 4 ++--
+ .../python/{python3-isort_5.5.2.bb => python3-isort_5.5.3.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-xlsxwriter_1.3.3.bb => python3-xlsxwriter_1.3.4.bb} (68%)
+ rename meta-python/recipes-devtools/python/{python3-isort_5.5.2.bb => python3-isort_5.5.3.bb} (73%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.3.bb b/meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.4.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.3.bb
-rename to meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.4.bb
-index e2a304437d..61a9c69b51 100644
---- a/meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.4.bb
-@@ -8,7 +8,7 @@ inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-isort_5.5.2.bb b/meta-python/recipes-devtools/python/python3-isort_5.5.3.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-isort_5.5.2.bb
+rename to meta-python/recipes-devtools/python/python3-isort_5.5.3.bb
+index 0d04157862..00978ec59d 100644
+--- a/meta-python/recipes-devtools/python/python3-isort_5.5.2.bb
++++ b/meta-python/recipes-devtools/python/python3-isort_5.5.3.bb
+@@ -4,8 +4,8 @@ LICENSE = "MIT"
+ SECTION = "devel/python"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=8227180126797a0148f94f483f3e1489"
  
- PYPI_PACKAGE = "XlsxWriter"
+-SRC_URI[md5sum] = "844c49ad1bf16a957b490c27b3b9844f"
+-SRC_URI[sha256sum] = "171c5f365791073426b5ed3a156c2081a47f88c329161fd28228ff2da4c97ddb"
++SRC_URI[md5sum] = "5200f5b09a2a648775d0e8dbf0c0d3c8"
++SRC_URI[sha256sum] = "6187a9f1ce8784cbc6d1b88790a43e6083a6302f03e9ae482acc0f232a98c843"
  
--SRC_URI[md5sum] = "7c7191afe3149e41dca0e17d535421fb"
--SRC_URI[sha256sum] = "830cad0a88f0f95e5a8945ee082182aa68ab89e7d9725d0c32c196207634244b"
-+SRC_URI[md5sum] = "7ea11261cbd5c763d106eea64471cf2f"
-+SRC_URI[sha256sum] = "d804881beb944c4fd73deed0ef2666b84437f30d72bdc1b3a6f0230458facbfd"
+ inherit pypi setuptools3
  
- BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
