@@ -1,98 +1,93 @@
-Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com [209.85.216.66])
- by mx.groups.io with SMTP id smtpd.web11.954.1600750067076868130
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com [209.85.160.174])
+ by mx.groups.io with SMTP id smtpd.web11.1379.1600752051680425057
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Sep 2020 21:47:47 -0700
+ Mon, 21 Sep 2020 22:20:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=PPBUnc3d;
- spf=pass (domain: gmail.com, ip: 209.85.216.66, mailfrom: ticotimo@gmail.com)
-Received: by mail-pj1-f66.google.com with SMTP id md22so753881pjb.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2020 21:47:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=OZqfDjkr;
+ spf=pass (domain: gmail.com, ip: 209.85.160.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f174.google.com with SMTP id c18so14652011qtw.5
+        for <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2020 22:20:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=bZ5ev//53cQms5lMk4WKcUgvYmwOYsf2fll8YoE9gbc=;
-        b=PPBUnc3dGCF2LFTTWWiqr7vKBp9IHgSY+Vr9k9W2HWFQStkO9LrWJDaqaAwx8R2KVs
-         0hrv6+sfkFG1GVAa6FTVdDSTp6lARWPg7PmOSI2NV7KhoAq/lsZsXWHuQkcUy9OnqIhv
-         yomD0HEX1pxsCoHQXLTrmbNNJkuIveqftT/3Zs4f7tHfyV8Xgz/6jvfZ3ixxIbstMITw
-         jArQ6xysO4fMyL0klHEwJvp6bFRYKSwllgzorYs5kGcgW8H2jNZbtAODaN++B5CWDrQx
-         NFcTTGnmHxvoLJ53Zx0JIndw12I1Itg7v/mLjqXbCUMJc1odkxmw0jHMfLQ694o906I5
-         EFlQ==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=PC99D+EUpKbH/fNxOlPynID+gjo91lx/8gptSzYDARc=;
+        b=OZqfDjkrJw1vg9HN/zpOrrmYfJb83q7JCzwY5+LoTpLUVcmUGQLK4kKXkBP+thtphP
+         +aZoQBkAyn0zAqx9hB/TEgYBfOkiplKdxC/LpbHRLwrkXCm1y2k0f+jVraQjP/SXAyQa
+         /cUg4ty/m1g3mgqyPILWUhHVM0N2ylDkgGq+E1qWcLjfw6NxfMapZFAQlf5y6ywzgWTr
+         DQMIPmK6pp1LscrR89xqJxvvmG5d055MilqMiwK4EEjrrQW51Nlzf6QKKQcV5UZxE2hY
+         IxwjxGwTmkZ4uDKbTKfRMpCPsonuZhz7hiD1SCr/6UWNkU6BQ3yEk9bmQhUnVfl53Aw8
+         0SHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=bZ5ev//53cQms5lMk4WKcUgvYmwOYsf2fll8YoE9gbc=;
-        b=XFtEhumqnRqQYBxYOGxN2WyUzUyn/9X5tUGM2Y1GKRexBEpYxfPsrDCUSrqi7DEoTz
-         WCplFwzuHFyCv+iNWwk/UQ6mg5vMgGOLrAMvSNFv2rZCLeTfmEp1iVG2k/QuHvGPB5VN
-         xPik8N3iFrG1ELyiAu5vM8dGv+IQEi7agoWeH73d+0SCD/Bs14VBcg5wf0UzZIO3TH/+
-         3iwD08efT6XckVXtHbnTRoZKrjN6dw7mZMgG1rHwFa96IhHyes3+4tU14ia2AOkM+D42
-         m+Xqw4Y2YgBgAsfrxP9MvjzSpckwXywqbQBhFg4lyGr6lcneTHOFUSjSzfbPigzJjLTb
-         PHjQ==
-X-Gm-Message-State: AOAM532emGTOLDyNS3eTjnshmlzhGwr8kqfLBC7Wbz+Hays73/Yp6MoV
-	sLA3YFw6MA22FNaigSHey7ZI8cF6GKA=
-X-Google-Smtp-Source: ABdhPJxdOOUN/kkN8fSd0spmOn3RaZEfIzvgtbG+AK2h9jIADMYoYBkkO5QtHkZj910M7Z+DyJLYTA==
-X-Received: by 2002:a17:90a:db05:: with SMTP id g5mr2362412pjv.22.1600750065713;
-        Mon, 21 Sep 2020 21:47:45 -0700 (PDT)
-Return-Path: <ticotimo@gmail.com>
-Received: from thetis.hsd1.or.comcast.net ([2601:1c0:6000:9640:8176:7362:ce41:2f0c])
-        by smtp.gmail.com with ESMTPSA id y13sm13563533pfr.141.2020.09.21.21.47.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 21 Sep 2020 21:47:45 -0700 (PDT)
-From: "Tim Orling" <ticotimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <ticotimo@gmail.com>
-Subject: [meta-python][PATCH 3/3] packagegroup-meta-python: -jinja2 -markupsafe => -ptest
-Date: Mon, 21 Sep 2020 21:47:27 -0700
-Message-Id: <20200922044727.18107-3-ticotimo@gmail.com>
-X-Mailer: git-send-email 2.25.0
-In-Reply-To: <20200922044727.18107-1-ticotimo@gmail.com>
-References: <20200922044727.18107-1-ticotimo@gmail.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=PC99D+EUpKbH/fNxOlPynID+gjo91lx/8gptSzYDARc=;
+        b=Xflz7E2uzWyNgN1HOzlA6oVfMRfwEqzn/jjqM97D6jR5ptCNjEFjA/CKYg2ZqdazgD
+         YDobU2Z3WC8fPFHfsS9rlu73hTtV/+cfG5JyIBmiQATgRtFCByLC3wX3Pi7UaHQmcSAT
+         0+Kbs+Y9XUD7NbT3e4rqm9wdvsNET77IY/4E/xRz4PhZxKmlq29AN/VX3D2mUdImwNhx
+         dDci0Rt/BxXn6JRjsF7u7+ooSg+aAVzEtTXJH8HSA+aXZUgvpB6WVgPe+vE8gyRgHeRQ
+         Iw/RmNvK0UO276XCa3J/E/kC93A9rysJAyeCxfDU4zVwRiYDCLnjyKYgzD1K/4Oh5rye
+         YuyQ==
+X-Gm-Message-State: AOAM5315B6r3/KdfJ+I1kcPdoPdSbdm1/0v3jw+zwD2wrfUnSsp9vFRN
+	ffYkIJ3fiCzRbwfVpak4V4Eh2STs6wqYlxkQhZc=
+X-Google-Smtp-Source: ABdhPJxVOes38eVHA4gqX0NqIVI38I1dmWOWRwarWqvU+m6d3yOKuvdzv+OLRHrAsuMsX6z4U/nMiZASIki6I5y5WLA=
+X-Received: by 2002:ac8:3f3d:: with SMTP id c58mr3134136qtk.53.1600752050728;
+ Mon, 21 Sep 2020 22:20:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <cover.1600744944.git.akuster808@gmail.com>
+In-Reply-To: <cover.1600744944.git.akuster808@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Mon, 21 Sep 2020 22:20:24 -0700
+Message-ID: <CAMKF1sqec9PH=nd74khjDeaSwNfdFNGQbFM4n6J+tm=RAkTe6A@mail.gmail.com>
+Subject: Re: [oe] [dunfell 0/5] Merge request Sept 21
+To: akuster <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-From: Tim Orling <ticotimo@gmail.com>
+merged now thanks
 
-The main recipes for python3-jinja2 and python3-markupsafe
-have moved to oe-core. No need to duplicate them here.
-
-Instead, we add them to meta-python3-ptest sub-package, since
-we do enable ptest with bbappends.
-
-Signed-off-by: Tim Orling <ticotimo@gmail.com>
----
- .../recipes-core/packagegroups/packagegroup-meta-python.bb  | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index c03f610da8d..e1624df6e7b 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -17,13 +17,13 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-rfc3987 python3-xlrd python3-bandit python3-constantly python3-inflection \
-     python3-javaobj-py3 python3-sh python3-pycrypto python3-pyasn1 python3-pydbus python3-wtforms \
-     python3-pybluez python3-babel python3-parse-type python3-bitarray python3-django-south \
--    python3-pyusb python3-prctl python3-jinja2 python3-werkzeug python3-pyjks python3-requests-ftp \
-+    python3-pyusb python3-prctl python3-werkzeug python3-pyjks python3-requests-ftp \
-     python3-behave python3-pyyaml python3-tzlocal python3-pretend python3-stevedore \
-     python3-sijax python3-langtable python3-requests-file python3-crcmod python3-robotframework \
-     python3-pint python3-coverage python3-iso8601 python3-ndg-httpsclient python3-yappi python3-twofish \
-     python3-speaklater python3-smbus python3-djangorestframework python3-msgpack python3-jsonpointer \
-     python3-flask-script python3-cassandra-driver python3-ujson python3-aws-iot-device-sdk-python \
--    python3-pytest-runner python3-pyiface python3-flask-login python3-markupsafe python3-setuptools-scm \
-+    python3-pytest-runner python3-pyiface python3-flask-login python3-setuptools-scm \
-     python3-semver python3-sdnotify python3-flask-user python3-tornado python3-jsonpatch python3-pexpect \
-     python3-progress python3-jsonschema python3-xstatic python3-pyroute2 python3-idna python3-sqlalchemy \
-     python3-urllib3 python3-flask-mail python3-asn1crypto python3-pyinotify python3-intervals python3-pyperclip \
-@@ -68,7 +68,7 @@ RDEPENDS_packagegroup-meta-python3-connectivity = "\
- "
- 
- RDEPENDS_packagegroup-meta-python3-ptest = "\
--    python3-cryptography \
-+    python3-cryptography python3-jinja2 python3-markupsafe \
-     "
- 
- EXCLUDE_FROM_WORLD = "1"
--- 
-2.25.0
-
+On Mon, Sep 21, 2020 at 8:24 PM akuster <akuster808@gmail.com> wrote:
+>
+> Please merge these to dunfell.
+> This series was already on the list for review.
+>
+> The following changes since commit d7b41ced4b9a9a68083b0fcceff3b226298cff8b:
+>
+>   net-snmp: Fix CVE-2020-15861 and CVE-2020-15862 (2020-09-03 08:28:37 -0700)
+>
+> are available in the Git repository at:
+>
+>   git://git.openembedded.org/meta-openembedded dunfell-next
+>   http://cgit.openembedded.org/meta-openembedded/log/?h=dunfell-next
+>
+> Khem Raj (1):
+>   iwd: Upgrade to 1.9
+>
+> Oleksandr Kravchuk (1):
+>   iwd: update to 1.8
+>
+> Pierre-Jean Texier (1):
+>   iwd: upgrade 1.6 -> 1.7
+>
+> Robert Joslyn (1):
+>   postgresql: Update to 12.4
+>
+> Yi Zhao (1):
+>   libldb: upgrade 1.5.7 -> 1.5.8
+>
+>  .../libldb/{libldb_1.5.7.bb => libldb_1.5.8.bb}               | 4 ++--
+>  meta-oe/recipes-connectivity/iwd/{iwd_1.6.bb => iwd_1.9.bb}   | 2 +-
+>  meta-oe/recipes-dbs/postgresql/postgresql.inc                 | 4 +---
+>  .../postgresql/{postgresql_12.3.bb => postgresql_12.4.bb}     | 3 +--
+>  4 files changed, 5 insertions(+), 8 deletions(-)
+>  rename meta-networking/recipes-support/libldb/{libldb_1.5.7.bb => libldb_1.5.8.bb} (95%)
+>  rename meta-oe/recipes-connectivity/iwd/{iwd_1.6.bb => iwd_1.9.bb} (96%)
+>  rename meta-oe/recipes-dbs/postgresql/{postgresql_12.3.bb => postgresql_12.4.bb} (63%)
+>
+> --
+> 2.17.1
+>
+>
+> 
+>
