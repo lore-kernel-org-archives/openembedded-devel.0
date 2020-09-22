@@ -1,92 +1,98 @@
-Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com [209.85.160.174])
- by mx.groups.io with SMTP id smtpd.web11.1379.1600752051680425057
+Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com [209.85.219.67])
+ by mx.groups.io with SMTP id smtpd.web10.1448.1600752227223284306
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Sep 2020 22:20:51 -0700
+ Mon, 21 Sep 2020 22:23:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=OZqfDjkr;
- spf=pass (domain: gmail.com, ip: 209.85.160.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f174.google.com with SMTP id c18so14652011qtw.5
-        for <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2020 22:20:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=f63b1z6I;
+ spf=pass (domain: gmail.com, ip: 209.85.219.67, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f67.google.com with SMTP id ef16so8877226qvb.8
+        for <openembedded-devel@lists.openembedded.org>; Mon, 21 Sep 2020 22:23:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=PC99D+EUpKbH/fNxOlPynID+gjo91lx/8gptSzYDARc=;
-        b=OZqfDjkrJw1vg9HN/zpOrrmYfJb83q7JCzwY5+LoTpLUVcmUGQLK4kKXkBP+thtphP
-         +aZoQBkAyn0zAqx9hB/TEgYBfOkiplKdxC/LpbHRLwrkXCm1y2k0f+jVraQjP/SXAyQa
-         /cUg4ty/m1g3mgqyPILWUhHVM0N2ylDkgGq+E1qWcLjfw6NxfMapZFAQlf5y6ywzgWTr
-         DQMIPmK6pp1LscrR89xqJxvvmG5d055MilqMiwK4EEjrrQW51Nlzf6QKKQcV5UZxE2hY
-         IxwjxGwTmkZ4uDKbTKfRMpCPsonuZhz7hiD1SCr/6UWNkU6BQ3yEk9bmQhUnVfl53Aw8
-         0SHA==
+        bh=4TqOrwxaoV9dO/xfDHZSGHr9oyntSnCjpmcyrK9MgxU=;
+        b=f63b1z6I1iusTUArN6ei+mN5R/0IaG3QUFBIJvb+nxsJn0MNuCn3HCFgWBOApus0Z9
+         u4D9oTMQ32OE0dpP6iJTqOL8c1uSJheH4Y1Dfb9l2aBVdXmjRtqpVDKQ7SSRr3F/BnzS
+         rgfK1USUu7kDMNqL2/EEC/KMfVrJBwU8mmmMLm3+5I/HBy2mO5DejYwREBKSNanQFu/0
+         yz7R/UohXOjMG/KkFokpSikWlXOjZnGVCGpBaIrUj4qnDIanO49YL0WJDGXsS/9XUDuc
+         8YuILCcK4Rd7aXG7xe4wV3K9dQuzjN+6hr/nQ9UakPA8SZZ+fDBiPsp13jVB1taHsQnp
+         gRug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=PC99D+EUpKbH/fNxOlPynID+gjo91lx/8gptSzYDARc=;
-        b=Xflz7E2uzWyNgN1HOzlA6oVfMRfwEqzn/jjqM97D6jR5ptCNjEFjA/CKYg2ZqdazgD
-         YDobU2Z3WC8fPFHfsS9rlu73hTtV/+cfG5JyIBmiQATgRtFCByLC3wX3Pi7UaHQmcSAT
-         0+Kbs+Y9XUD7NbT3e4rqm9wdvsNET77IY/4E/xRz4PhZxKmlq29AN/VX3D2mUdImwNhx
-         dDci0Rt/BxXn6JRjsF7u7+ooSg+aAVzEtTXJH8HSA+aXZUgvpB6WVgPe+vE8gyRgHeRQ
-         Iw/RmNvK0UO276XCa3J/E/kC93A9rysJAyeCxfDU4zVwRiYDCLnjyKYgzD1K/4Oh5rye
-         YuyQ==
-X-Gm-Message-State: AOAM5315B6r3/KdfJ+I1kcPdoPdSbdm1/0v3jw+zwD2wrfUnSsp9vFRN
-	ffYkIJ3fiCzRbwfVpak4V4Eh2STs6wqYlxkQhZc=
-X-Google-Smtp-Source: ABdhPJxVOes38eVHA4gqX0NqIVI38I1dmWOWRwarWqvU+m6d3yOKuvdzv+OLRHrAsuMsX6z4U/nMiZASIki6I5y5WLA=
-X-Received: by 2002:ac8:3f3d:: with SMTP id c58mr3134136qtk.53.1600752050728;
- Mon, 21 Sep 2020 22:20:50 -0700 (PDT)
+        bh=4TqOrwxaoV9dO/xfDHZSGHr9oyntSnCjpmcyrK9MgxU=;
+        b=p1KlATDHELNIuREa0U1kx8EUATQhQAmmUOcreVy84mf5r+27Cg3dhEVNSBVIPjioHe
+         0W0S1z4KHkI/XXXag5+HRdpUwVwO75f2dP2lhJlVs7evHkXgHeH8QYETrt53VTwd5OPJ
+         OhHZF2GIR9CFRbFBKXmE9OPNma5jBfcgEkxUNwVMNrHo2V25W9je67gsJY3ymItd7yH/
+         O+Tr4MLawj2TMte/ANXZBjUFAMRW4tuKiIg8n/plKXs76K71sxJBInbvWPqoDJdkuY3J
+         40txRw3Mvy9n/myxNDP+gDYmZnvvcjfx3etPyMr1RIKEdmeg759Vg32gvd+5HjuGsRTx
+         PxRg==
+X-Gm-Message-State: AOAM530/IY3ToYf+n3KfQCqFGOFNJN9vub6ANlEylkSwqfMdugKepjK2
+	FKXLgwPGsts+qyqFbjoBsnNkPDg+Lw+jcfS7gN4=
+X-Google-Smtp-Source: ABdhPJzM0o86NaK0Yl6tv0hWcU1b9g0t88nxfD6nt861KkG0WtSxNnbfVIw1ROXr0Hx/ciYgwY+VBwqs6E90dGsfZ68=
+X-Received: by 2002:a05:6214:7a1:: with SMTP id v1mr4049161qvz.19.1600752226325;
+ Mon, 21 Sep 2020 22:23:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1600744944.git.akuster808@gmail.com>
-In-Reply-To: <cover.1600744944.git.akuster808@gmail.com>
+References: <20200922044727.18107-1-ticotimo@gmail.com> <20200922044727.18107-3-ticotimo@gmail.com>
+In-Reply-To: <20200922044727.18107-3-ticotimo@gmail.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 21 Sep 2020 22:20:24 -0700
-Message-ID: <CAMKF1sqec9PH=nd74khjDeaSwNfdFNGQbFM4n6J+tm=RAkTe6A@mail.gmail.com>
-Subject: Re: [oe] [dunfell 0/5] Merge request Sept 21
-To: akuster <akuster808@gmail.com>
+Date: Mon, 21 Sep 2020 22:23:20 -0700
+Message-ID: <CAMKF1sowfj_AzyhkoJvrNxPpmg6HpN2P8b+++zDmz-pGckGadA@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 3/3] packagegroup-meta-python: -jinja2 -markupsafe => -ptest
+To: Tim Orling <ticotimo@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-merged now thanks
+please rebase it on latest master and resend.
 
-On Mon, Sep 21, 2020 at 8:24 PM akuster <akuster808@gmail.com> wrote:
+On Mon, Sep 21, 2020 at 9:47 PM Tim Orling <ticotimo@gmail.com> wrote:
 >
-> Please merge these to dunfell.
-> This series was already on the list for review.
+> From: Tim Orling <ticotimo@gmail.com>
 >
-> The following changes since commit d7b41ced4b9a9a68083b0fcceff3b226298cff8b:
+> The main recipes for python3-jinja2 and python3-markupsafe
+> have moved to oe-core. No need to duplicate them here.
 >
->   net-snmp: Fix CVE-2020-15861 and CVE-2020-15862 (2020-09-03 08:28:37 -0700)
+> Instead, we add them to meta-python3-ptest sub-package, since
+> we do enable ptest with bbappends.
 >
-> are available in the Git repository at:
+> Signed-off-by: Tim Orling <ticotimo@gmail.com>
+> ---
+>  .../recipes-core/packagegroups/packagegroup-meta-python.bb  | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 >
->   git://git.openembedded.org/meta-openembedded dunfell-next
->   http://cgit.openembedded.org/meta-openembedded/log/?h=dunfell-next
+> diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> index c03f610da8d..e1624df6e7b 100644
+> --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> @@ -17,13 +17,13 @@ RDEPENDS_packagegroup-meta-python3 = "\
+>      python3-rfc3987 python3-xlrd python3-bandit python3-constantly python3-inflection \
+>      python3-javaobj-py3 python3-sh python3-pycrypto python3-pyasn1 python3-pydbus python3-wtforms \
+>      python3-pybluez python3-babel python3-parse-type python3-bitarray python3-django-south \
+> -    python3-pyusb python3-prctl python3-jinja2 python3-werkzeug python3-pyjks python3-requests-ftp \
+> +    python3-pyusb python3-prctl python3-werkzeug python3-pyjks python3-requests-ftp \
+>      python3-behave python3-pyyaml python3-tzlocal python3-pretend python3-stevedore \
+>      python3-sijax python3-langtable python3-requests-file python3-crcmod python3-robotframework \
+>      python3-pint python3-coverage python3-iso8601 python3-ndg-httpsclient python3-yappi python3-twofish \
+>      python3-speaklater python3-smbus python3-djangorestframework python3-msgpack python3-jsonpointer \
+>      python3-flask-script python3-cassandra-driver python3-ujson python3-aws-iot-device-sdk-python \
+> -    python3-pytest-runner python3-pyiface python3-flask-login python3-markupsafe python3-setuptools-scm \
+> +    python3-pytest-runner python3-pyiface python3-flask-login python3-setuptools-scm \
+>      python3-semver python3-sdnotify python3-flask-user python3-tornado python3-jsonpatch python3-pexpect \
+>      python3-progress python3-jsonschema python3-xstatic python3-pyroute2 python3-idna python3-sqlalchemy \
+>      python3-urllib3 python3-flask-mail python3-asn1crypto python3-pyinotify python3-intervals python3-pyperclip \
+> @@ -68,7 +68,7 @@ RDEPENDS_packagegroup-meta-python3-connectivity = "\
+>  "
 >
-> Khem Raj (1):
->   iwd: Upgrade to 1.9
+>  RDEPENDS_packagegroup-meta-python3-ptest = "\
+> -    python3-cryptography \
+> +    python3-cryptography python3-jinja2 python3-markupsafe \
+>      "
 >
-> Oleksandr Kravchuk (1):
->   iwd: update to 1.8
->
-> Pierre-Jean Texier (1):
->   iwd: upgrade 1.6 -> 1.7
->
-> Robert Joslyn (1):
->   postgresql: Update to 12.4
->
-> Yi Zhao (1):
->   libldb: upgrade 1.5.7 -> 1.5.8
->
->  .../libldb/{libldb_1.5.7.bb => libldb_1.5.8.bb}               | 4 ++--
->  meta-oe/recipes-connectivity/iwd/{iwd_1.6.bb => iwd_1.9.bb}   | 2 +-
->  meta-oe/recipes-dbs/postgresql/postgresql.inc                 | 4 +---
->  .../postgresql/{postgresql_12.3.bb => postgresql_12.4.bb}     | 3 +--
->  4 files changed, 5 insertions(+), 8 deletions(-)
->  rename meta-networking/recipes-support/libldb/{libldb_1.5.7.bb => libldb_1.5.8.bb} (95%)
->  rename meta-oe/recipes-connectivity/iwd/{iwd_1.6.bb => iwd_1.9.bb} (96%)
->  rename meta-oe/recipes-dbs/postgresql/{postgresql_12.3.bb => postgresql_12.4.bb} (63%)
->
+>  EXCLUDE_FROM_WORLD = "1"
 > --
-> 2.17.1
+> 2.25.0
 >
 >
 > 
