@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.8292.1600847933038377913
+ by mx.groups.io with SMTP id smtpd.web12.8110.1600847935615576848
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2020 00:58:53 -0700
+ Wed, 23 Sep 2020 00:58:56 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=58518 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kKzft-0005D6-PA; Wed, 23 Sep 2020 10:58:51 +0300
+	id 1kKzfv-0005D6-SY; Wed, 23 Sep 2020 10:58:54 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/7] python3-pint: Upgrade 0.16 -> 0.16.1
-Date: Wed, 23 Sep 2020 10:58:27 +0300
-Message-Id: <20200923075830.30859-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/7] python3-zipp: Upgrade 3.1.0 -> 3.2.0
+Date: Wed, 23 Sep 2020 10:58:28 +0300
+Message-Id: <20200923075830.30859-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200923075830.30859-1-leon.anavi@konsulko.com>
 References: <20200923075830.30859-1-leon.anavi@konsulko.com>
@@ -30,33 +30,37 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.16.1:
+Upgrade to release 3.2.0:
 
-- Fix unpickling, now it is using the APP_REGISTRY as expected.
+- Mutate the passed ZipFile object type instead of making a copy.
+  Prevents issues when both the local copy and the caller's copy
+  attempt to close the same file handle.
+- Path._next now honors subclasses.
+- Path.is_file() now returns False for non-existent names.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-pint_0.16.bb => python3-pint_0.16.1.bb}   | 4 ++--
+ .../python/{python3-zipp_3.1.0.bb => python3-zipp_3.2.0.bb}   | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pint_0.16.bb => python3-pint_0.16.1.bb} (83%)
+ rename meta-python/recipes-devtools/python/{python3-zipp_3.1.0.bb => python3-zipp_3.2.0.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pint_0.16.bb b/meta-python/recipes-devtools/python/python3-pint_0.16.1.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-pint_0.16.bb
-rename to meta-python/recipes-devtools/python/python3-pint_0.16.1.bb
-index 7775d733a7..d96659592a 100644
---- a/meta-python/recipes-devtools/python/python3-pint_0.16.bb
-+++ b/meta-python/recipes-devtools/python/python3-pint_0.16.1.bb
-@@ -10,8 +10,8 @@ PYPI_PACKAGE := "Pint"
+diff --git a/meta-python/recipes-devtools/python/python3-zipp_3.1.0.bb b/meta-python/recipes-devtools/python/python3-zipp_3.2.0.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-zipp_3.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-zipp_3.2.0.bb
+index a29e2981f2..59d71500d5 100644
+--- a/meta-python/recipes-devtools/python/python3-zipp_3.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-zipp_3.2.0.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/jaraco/zipp"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=7a7126e068206290f3fe9f8d6c713ea6"
  
- inherit pypi ptest setuptools3
+-SRC_URI[md5sum] = "199da7385f080ec45da6c1942e2b5996"
+-SRC_URI[sha256sum] = "c599e4d75c98f6798c509911d08a22e6c021d074469042177c8c86fb92eefd96"
++SRC_URI[md5sum] = "321a0dfa1080d58e5de0800a26565452"
++SRC_URI[sha256sum] = "b52f22895f4cfce194bc8172f3819ee8de7540aa6d873535a8668b730b8b411f"
  
--SRC_URI[md5sum] = "ec78e4e42512b93f80b9093416ad7417"
--SRC_URI[sha256sum] = "e437420e65fa72a2805f4036f986669c48d54944eeb0e47c8ba16f98cbdcd599"
-+SRC_URI[md5sum] = "d4a7bbdf505dee964eb1e5e6e7f80c34"
-+SRC_URI[sha256sum] = "d43a2e9ae003164978b60fdf8cd920d8581e1a5991df8dded29b00f4850ec83a"
- 
- DEPENDS += "python3-setuptools-scm-native"
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
  
 -- 
 2.17.1
