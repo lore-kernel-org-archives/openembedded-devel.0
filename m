@@ -1,77 +1,86 @@
-Received: from mail-lf1-f68.google.com (mail-lf1-f68.google.com [209.85.167.68])
- by mx.groups.io with SMTP id smtpd.web10.2321.1600884672743631386
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web11.3271.1600886973674181142
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2020 11:11:13 -0700
+ Wed, 23 Sep 2020 11:49:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=mt8MF/T5;
- spf=pass (domain: gmail.com, ip: 209.85.167.68, mailfrom: liu.ming50@gmail.com)
-Received: by mail-lf1-f68.google.com with SMTP id y2so883135lfy.10
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2020 11:11:12 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=um773TgU;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id y14so237709pgf.12
+        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2020 11:49:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=SgQr4Ygdo47EKICfy4Bcz2lSepuSVeSvoj1rp/1a2a0=;
-        b=mt8MF/T5wf5+KHg65wvCIVS1vGTmxV8W+z6C/oPfPJG70C3Sp1MLS8j3N2ECQX4iPr
-         lwzIyxCvXFTo+Th4KE5kgOBaRgjjZibPxG0dtqJv2uYe6v+hEbGwb0XnqpqwcY+CLlK6
-         g8WLumr3sYuJ7EJIfIOnwJQF6qVNAOfEZtH4r4qnF0GKdrrnckGLFpj/1FfHmfGlU59N
-         tdmZGsMWp3ekJ4re+1KA4+IwnsUnsUe9/Si1o4NmEY+i1Oule9Z3aeNMmbnvr+SsBDqE
-         rXpO6F4xo3nWRYbpEAiQyZMsqEvKFdjdVmpnGA3YPtUekAa3vn6LIsaF+j4Q5Mlb2ljM
-         ASTg==
+        h=subject:to:references:from:organization:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=rJ4DcmCDFgIaxIqz8ARwI7qE/rASxxY9IZX4+7zjqvg=;
+        b=um773TgU3Pri50zDT9bHaQ4PvfcKs5R0XspuuCn690Phs0XEW5xR1q1MS2gMxWAJO6
+         cYSJM8g1hQoTKqyWT0b1GJSSaEJg5DZZScdSoAiB/bVOIbQ3ItByvgMYHgi0kZzd2h2p
+         GasFLNRlTMqh+OO6lTU0hSAZbU93KmtTCkyrMU2lqEBx2wL+H2X1hkEwg9sRrH92RvPj
+         9S0HPVStnJRNAfO1aTO3qojT2O9Zv6z1JjP6O9/zsvGGp29YushuExeHENoLL9ubCc8Y
+         ENRchVZMdIMQ1tU4Ss/xzZFuXjaFDWO6x4QhUwnG4G+Zo9kWVB4UosxW3yrsJIL/Aos3
+         +3jQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=SgQr4Ygdo47EKICfy4Bcz2lSepuSVeSvoj1rp/1a2a0=;
-        b=eqE5UpcjtYdF0TXQFGcXCKtBHU8NR8GqZb1q5kwCM8FGCEXzQvBpLRI4fPAmLv/Oed
-         bC2W8+x6zGWH42atpAzc3w/PNMx6wpZqOBCsHIcm4YTfi3EvdworJEMnIRbtOdb1Q04z
-         k/ZFESwWe/+bLOKaySRTcnBzdowD0BNrCDUt4ugdOQzXcYO2cNAG2e7d9mV03bxvWU3Y
-         gVrhpi5SncA9Q4A4rvGZ+Lp882svjpJzW0J6r/Wz9oWHscdV5jZmsYc4IDQZDgFZkVcV
-         s6+eAlJNv+JvuZh1plSevrcNh1aLCXYljYBuOJa0RryRz743LuWKK3ohOSKwsR5sKn7Z
-         svfw==
-X-Gm-Message-State: AOAM530ZO6SnslEt+sIvuCMV6CT8nlMMsK1+wD3+ruPQpmhq9tD/F6b0
-	dwXCDos1ADL5aeTl3kA5LYn/FZfgwQ205w==
-X-Google-Smtp-Source: ABdhPJwApGUDPsMESHRJQvBz9TACIU7Fr+S5mtzle19Zwm6tzh6WWjSbBEJaT/lNMLslICpMYab/AQ==
-X-Received: by 2002:a19:4b84:: with SMTP id y126mr307230lfa.360.1600884670251;
-        Wed, 23 Sep 2020 11:11:10 -0700 (PDT)
-Return-Path: <liu.ming50@gmail.com>
-Received: from peterliu-Precision-7530.lan (c-3ffb72d5.022-417-73746f13.bbcust.telenor.se. [213.114.251.63])
-        by smtp.gmail.com with ESMTPSA id q7sm276943lfr.16.2020.09.23.11.11.09
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 23 Sep 2020 11:11:09 -0700 (PDT)
-From: "Ming Liu" <liu.ming50@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-browser] [PATCH] chromium: change to python3
-Date: Wed, 23 Sep 2020 20:11:24 +0200
-Message-Id: <20200923181124.1029-1-liu.ming50@gmail.com>
-X-Mailer: git-send-email 2.28.0
+        h=x-gm-message-state:subject:to:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=rJ4DcmCDFgIaxIqz8ARwI7qE/rASxxY9IZX4+7zjqvg=;
+        b=rsqetui1mcg4dIC+waxdYA8zfoMIaDE8Vg/0M74u/LtHfHIOFeJNjhDfVQZhFBlZdK
+         Nt2IdZhVAasSDQypgsdsVfM608qYPvh77pXVosC9plQTA/QU1h3tbkqu1PsFRLqUyxKH
+         4JcmxZgu34kOI7vEqHvIC4Nq7W3lXoqytcsclzhGaunc1iGcXiFP1ecXNsrs8H5Ab65t
+         4BSwOfcjqT1hTu7glDLQ7eGw+BH385Tz7osVW+bXrS3lOakJX4RqFrQqoDC6I+tTj0JI
+         vIhYMtVWU2ij6xZzyQ1Ps1xvggx/lS67rGdptVoRHFnCrqJcCX6A8xDSIwRPYKrS+o4w
+         Op6A==
+X-Gm-Message-State: AOAM531m5uJa6/KaMcE8howESNUtfHmFCu6o5SjWFWcCTmND6sVAWTSE
+	YrLfwUK0z+m+Pv4Mm9s3bYcgC3Xh+Bm9Dg==
+X-Google-Smtp-Source: ABdhPJxtCpKdKkD8/c4foHPw1mvKzm3AefzZMc0Qud6MOP1NidP7gX+Iov5ZTCsXjG7rNHhQqprGRw==
+X-Received: by 2002:a65:594b:: with SMTP id g11mr945475pgu.382.1600886972338;
+        Wed, 23 Sep 2020 11:49:32 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:4e0:6542:959:8931:2e8c? ([2601:646:9200:4e0:6542:959:8931:2e8c])
+        by smtp.gmail.com with ESMTPSA id ml20sm244774pjb.20.2020.09.23.11.49.31
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 23 Sep 2020 11:49:31 -0700 (PDT)
+Subject: Re: [oe] dunfell: zbar linking broken
+To: Marek Belisko <marek.belisko@gmail.com>,
+ OpenEmbedded Development mailing list
+ <openembedded-devel@lists.openembedded.org>
+References: <CAAfyv36V01GDPqHp614ti5E4UBuVPSz=cUj98HwaThUDAYsh+w@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <02f068f0-b7c5-33d7-4689-e29ba8f26058@gmail.com>
+Date: Wed, 23 Sep 2020 11:49:30 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.2.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAAfyv36V01GDPqHp614ti5E4UBuVPSz=cUj98HwaThUDAYsh+w@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-From: Ming Liu <liu.ming50@gmail.com>
 
-python support has been dropped from OE since dunfell, let's change to
-python3.
 
-Signed-off-by: Ming Liu <liu.ming50@gmail.com>
----
- recipes-browser/chromium/chromium.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 9/23/20 1:39 AM, Marek Belisko wrote:
+> Hi,
+> 
+> adding zbar as dependency of some binary fails to link with this error:
+> recipe-sysroot/usr/lib/libzbar.so: undefined reference to `dsprintbuf'
+> 
+> when checked zbar code dsprintbuf is a static method and it's not exported.
+> Any ideas?
 
-diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
-index b351114..0d1a761 100644
---- a/recipes-browser/chromium/chromium.inc
-+++ b/recipes-browser/chromium/chromium.inc
-@@ -18,7 +18,7 @@ TOOLCHAIN = "clang"
- # to build the native recipes (e.g. GN) with clang too.
- TOOLCHAIN_class-native = "clang"
- 
--inherit pythonnative setuptools
-+inherit python3native setuptools3
- 
- # Chromium itself is licensed under the 3-clause BSD license. However, it
- # depends upon several other projects whose copyright files are listed in
--- 
-2.28.0
+It seems the function is defined only when DEBUG_EAN is set in compiler 
+cmdline, but uses of this function in not appropriately guarded. So a 
+fix would be to find the use of this function within the code and guard 
+it with DEBUG_EAN as well. As a workaround you can try compiling zbar with
 
+CFLAGS += "-DDEBUG_EAN"
+
+> 
+> Thanks,
+> 
+> marek
+> 
+> 
+> 
+> 
+> 
