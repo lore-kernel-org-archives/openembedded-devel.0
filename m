@@ -1,64 +1,89 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.8297.1600847940138143338
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web11.8504.1600848884481550054
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2020 00:59:00 -0700
+ Wed, 23 Sep 2020 01:14:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=58518 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kKzg0-0005D6-K9; Wed, 23 Sep 2020 10:58:58 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 7/7] python3-greenlet: Upgrade 0.4.16 -> 0.4.17
-Date: Wed, 23 Sep 2020 10:58:30 +0300
-Message-Id: <20200923075830.30859-7-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200923075830.30859-1-leon.anavi@konsulko.com>
-References: <20200923075830.30859-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: hongxu.jia@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 08N8Ef4e025583
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
+	Wed, 23 Sep 2020 01:14:41 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.40) with Microsoft SMTP Server id 14.3.487.0; Wed, 23 Sep 2020
+ 01:14:40 -0700
+From: "hongxu" <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>, <trevor.gamblin@windriver.com>
+CC: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python][PATCH V2] python3-docopt: add version 0.6.2
+Date: Wed, 23 Sep 2020 16:14:38 +0800
+Message-ID: <20200923081438.32716-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.18.2
+In-Reply-To: <16375A080EFE1B42.13575@lists.openembedded.org>
+References: <16375A080EFE1B42.13575@lists.openembedded.org>
+MIME-Version: 1.0
+Content-Type: text/plain
 
-Upgrade to release 0.4.17:
+It is required by python3-pykwalify cli
+...
+$ pykwalify -h
+x86_64-wrlinuxsdk-linux/usr/lib/python3.8/site-packages/pykwalify/cli.py", line 11, in <module>
+    from docopt import docopt
+ModuleNotFoundError: No module named 'docopt'
+...
 
-- Provide support for PEP 567 ContextVars
-- Provide a feature flag indicating whether we handle context vars
-- Switch contextvars when switching greenlets
+(LOCAL REV: NOT UPSTREAM) -- Sent to oe-dev on 20200923
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Issue: LINUXEXEC-10213
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- ...{python3-greenlet_0.4.16.bb => python3-greenlet_0.4.17.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-greenlet_0.4.16.bb => python3-greenlet_0.4.17.bb} (65%)
+ .../packagegroups/packagegroup-meta-python.bb         |  1 +
+ .../recipes-devtools/python/python3-docopt_0.6.2.bb   | 11 +++++++++++
+ .../python/python3-pykwalify_1.7.0.bb                 |  1 +
+ 3 files changed, 13 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-docopt_0.6.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-greenlet_0.4.16.bb b/meta-python/recipes-devtools/python/python3-greenlet_0.4.17.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-greenlet_0.4.16.bb
-rename to meta-python/recipes-devtools/python/python3-greenlet_0.4.17.bb
-index 4556d499fa..744265e1fa 100644
---- a/meta-python/recipes-devtools/python/python3-greenlet_0.4.16.bb
-+++ b/meta-python/recipes-devtools/python/python3-greenlet_0.4.17.bb
-@@ -3,7 +3,7 @@ LICENSE = "MIT & PSF"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
-                     file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index 61623ac98..a7c71e37c 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -261,6 +261,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
+     python3-pyiface \
+     python3-pyjwt \
+     python3-pykwalify \
++    python3-docopt \
+     python3-pylint \
+     python3-pynetlinux \
+     python3-pickleshare \
+diff --git a/meta-python/recipes-devtools/python/python3-docopt_0.6.2.bb b/meta-python/recipes-devtools/python/python3-docopt_0.6.2.bb
+new file mode 100644
+index 000000000..a2432068c
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-docopt_0.6.2.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "Pythonic argument parser, that will make you smile"
++HOMEPAGE = "http://docopt.org/"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=09b77fb74986791a3d4a0e746a37d88f"
++
++inherit setuptools3 pypi
++
++SRC_URI[md5sum] = "4bc74561b37fad5d3e7d037f82a4c3b1"
++SRC_URI[sha256sum] = "49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491"
++
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb b/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
+index 4440723d3..7a30f1f67 100644
+--- a/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
+@@ -12,6 +12,7 @@ inherit setuptools3 pypi
+ unset _PYTHON_SYSCONFIGDATA_NAME
  
--SRC_URI[md5sum] = "9aebea08f7beb6b87143d0588578c984"
--SRC_URI[sha256sum] = "6e06eac722676797e8fce4adb8ad3dc57a1bb3adfb0dd3fdf8306c055a38456c"
-+SRC_URI[md5sum] = "d964c95c2d2f0f02f36c75e158d8e3dc"
-+SRC_URI[sha256sum] = "41d8835c69a78de718e466dd0e6bfd4b46125f21a67c3ff6d76d8d8059868d6b"
- 
- inherit pypi distutils3
+ RDEPENDS_${PN} = "\
++    ${PYTHON_PN}-docopt \
+     ${PYTHON_PN}-dateutil \
+     ${PYTHON_PN}-pyyaml \
+ "
 -- 
-2.17.1
+2.18.2
 
