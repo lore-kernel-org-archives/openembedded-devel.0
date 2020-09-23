@@ -1,65 +1,52 @@
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
- by mx.groups.io with SMTP id smtpd.web11.8832.1600850388793775511
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web12.8732.1600850765817057637
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2020 01:39:49 -0700
+ Wed, 23 Sep 2020 01:46:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=G9oWceYv;
- spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: marek.belisko@gmail.com)
-Received: by mail-ej1-f46.google.com with SMTP id i26so26563819ejb.12
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2020 01:39:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=nsWa+ewMQIKQnVG635S5vud5vz2zNDiExXjYFXWZITk=;
-        b=G9oWceYvQ0ngj8gp4D3vGUWF0EfdpmaVn0TOeGmgYqnSyBUFVYpN8gzVE1P7zP3Kl0
-         fmj0nQRyLiFawFkA0VbHulYLreTAWqN0dIQCSl0JRX9yXpUwgaP712yV91lLTuV+K19v
-         PAspLLRxrHab/gUfrlnoMv+vrePFpdPbtQI8F3DGYQiqY9RzihE7FQ6D8HKENbWsTFl0
-         S1WVGfGdAliDqF7LE6z+GJp+uWd/G92J7c6Pj+JW+qlcfemXd+j8P0xmppj60Ew89FIZ
-         GNuBmuhRnNSihVw4JHNNbnaB2yQXbkVRkVvjGqWV5C5+pkZDaL9qSZjAgYg8sYH27RQa
-         YJMQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=nsWa+ewMQIKQnVG635S5vud5vz2zNDiExXjYFXWZITk=;
-        b=NQjlfu7GGOQ11FAj/1z7oyD/1cJPZ43rznmG3XoW3ICTjJbBMaJoIhrAcG8p5UZkwm
-         OizYECOPdRTlQ9xajwAXXemA7Yy6ffylcBQK92YYfyaAiz/VplLlcZpk6UqFkayH9TCA
-         roF2kjE3wdqCe+kH7qNt5Mvryz2GVBbe5KhD2cHt9Iu6dyCGsE0BqwRz/qbO9HpjOl+Y
-         oLoZa7cszw2mUYiCsUKbm/i/JC0FjwzbhZMCpnUqephigich3szDW5ku8ps+m8ppVQyy
-         bd9qSOuMUEtO9HipIsxRxVJCZ0lMQIr+rw2cpNHrUTWmsLe+XDzrtjMwIEO7igkMhlRF
-         oLjw==
-X-Gm-Message-State: AOAM531+epdDho8I5+AGW+QcGElKEIsK6gb6cinP1wk/0eWpmxDaaEVw
-	45ixXyYQ3/FQcFLkg2NM1thMKUpC14qXwobsoVEm+854gPWgTw==
-X-Google-Smtp-Source: ABdhPJyNuVjctXDvWTsYcKI9Q4EeMQ68z7hhM0tExvccwQE2onotEV4E0zA/X9Cs8jS9xuemmFVrwjuZnemcKGtAhho=
-X-Received: by 2002:a17:906:cf82:: with SMTP id um2mr9059487ejb.49.1600850386784;
- Wed, 23 Sep 2020 01:39:46 -0700 (PDT)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: mingli.yu@windriver.com)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 08N8k3M4003854
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2020 01:46:04 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+ 14.3.487.0; Wed, 23 Sep 2020 01:45:50 -0700
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH 1/2] ippool: Remove obsolete setting in service file
+Date: Wed, 23 Sep 2020 16:45:04 +0800
+Message-ID: <20200923084505.29027-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-From: "Marek Belisko" <marek.belisko@gmail.com>
-Date: Wed, 23 Sep 2020 10:39:35 +0200
-Message-ID: <CAAfyv36V01GDPqHp614ti5E4UBuVPSz=cUj98HwaThUDAYsh+w@mail.gmail.com>
-Subject: dunfell: zbar linking broken
-To: OpenEmbedded Development mailing list <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Hi,
+From: Mingli Yu <mingli.yu@windriver.com>
 
-adding zbar as dependency of some binary fails to link with this error:
-recipe-sysroot/usr/lib/libzbar.so: undefined reference to `dsprintbuf'
+The Standard error type "syslog" is obsolete, causing a warning since systemd
+version 246 [1].
 
-when checked zbar code dsprintbuf is a static method and it's not exported.
-Any ideas?
+Please consider using "journal" or "journal+console"
 
-Thanks,
+[1] https://github.com/systemd/systemd/blob/master/NEWS#L202
 
-marek
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ meta-networking/recipes-daemons/ippool/ippool/ippool.service | 1 -
+ 1 file changed, 1 deletion(-)
 
+diff --git a/meta-networking/recipes-daemons/ippool/ippool/ippool.service b/meta-networking/recipes-daemons/ippool/ippool/ippool.service
+index e5917fc14..281ae5fd1 100644
+--- a/meta-networking/recipes-daemons/ippool/ippool/ippool.service
++++ b/meta-networking/recipes-daemons/ippool/ippool/ippool.service
+@@ -9,7 +9,6 @@ Type=simple
+ ExecStart=@SBINDIR@/ippoold -f
+ # Normal output will go to syslog, so suppress stdout.
+ StandardOutput=null
+-StandardError=syslog
+ # ExecStop is not needed. systemd will send SIGTERM
+ # and ippoold will exit status 1.
+ SuccessExitStatus=1
 -- 
-as simple and primitive as possible
--------------------------------------------------
-Marek Belisko - OPEN-NANDRA
-Freelance Developer
+2.26.2
 
-Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
-Tel: +421 915 052 184
-skype: marekwhite
-twitter: #opennandra
-web: http://open-nandra.com
