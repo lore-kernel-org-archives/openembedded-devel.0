@@ -1,17 +1,17 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.65])
- by mx.groups.io with SMTP id smtpd.web12.13121.1600866664197667988
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.67])
+ by mx.groups.io with SMTP id smtpd.web12.13133.1600866704584189921
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2020 06:11:04 -0700
+ Wed, 23 Sep 2020 06:11:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=mMsQV+ls;
- spf=pass (domain: windriver.com, ip: 40.107.237.65, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=XGprOQGm;
+ spf=pass (domain: windriver.com, ip: 40.107.93.67, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZRzWqTOFEw2atIX/bxK9I9PyXw5bJePAACGodKUJhAZdES8IYvhZf0YQTbz9R1qQGVzzomivi75km4iVuparhNZRyH5AOJteZnYFOstu6QO2Y6ddJXapK0/cFrDmio3Kj0Lf2He8tV29NgwsFhtGAURd7BT4Y07Gpnt6eIq/o1x3TXMK8yyktD18gmNKA4n9yxbk1yruT3tsTRxAvqsBpZUJmBckZj0IeKrmMrOwvH2h92z5/usUN0UkJe18L270e+wHxYdr2CZ5HPjhZTmdhh9rt59GnhXb6yCQLoVJOgRJhsYDe5Z8W3lp+EDeEnETR0wmdJGeeUHXjxyCSKnkUQ==
+ b=dTmXDbfGgwZvIFlCF+XQVpt9ifXtXyqJREWFkCl66kVNOPObGh5wcIPdQAHJyNLBwdscH0f6nEHtm7q+gsaq2Zk6StV7s5xUaT8R+VJBzfuid88mRmRB398+cw9DmMW+unA/fuCwJFgDqGB+KvS1ElR6047aZDiz4TcXULc+lKlm4Hy3HSCWoee4re0omwiqRwz0gank1TqPlOCIGu1VcBrZj51jDR+ZWxawtFA9HuQvylmpACWi9206uAx/zm2HLNo3+unEGYl5BUov6r4rPo2UcsJSbxdJuCeGF6tPYFfjh37/eKPHvv9n6NmT6b4r9Id8mcuTbNlpVSTgsAM8vQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pOgBbnmop4ojkmdqMcJ13y123hnvZ+y/4hLtKmjFrMk=;
- b=Api18uMYS225N1G2n2gJrVjAlIUdvxBY9xomS4CdDXv3PGKbR5nu/jqQS2BOaCcnpmvpTMpwOfogF056UCLua3wwJVVo8JiGagJA1u4HPUd6zUGF0R5brNhoJYAce5Rm6cNRzUfW89M5kbX2nCeo5U7XPixYsbSpMBMcuds1g+6InE28QYmq5n7fTbyCgto99H10SV4T8KyBbvAyjpopdS4Cy5GC3Alhj3bRhvkRD1g6jr7e9Rqnx9ZmRzWJwlOpV1fVPGk0oS3IUs+kyEe+XbLaLRRnr1b/1p7V/ncHBOQrxnF2YFy0jkBm35sKMh3+9p4FfVCIKZsYFg3JWIoGLQ==
+ bh=c5Hd0cdhXi7flmlJ97J8WgCzQBvNjDbpjJTNkpiWzcI=;
+ b=YMgJzzvLVltHJEvHqAYlbxLjRz4psfT4tT3Jc0DBjcxWCih3h9CskLRKKtTZBk3qbzowitIci3QLXJTsX35xoGOHBpp4Isp2KeD4KenlzYRNFua05V3W7R75bNu76g2c6Gi2FpiwviNGf++ZcTUIErasnnh+5iIhAtWo6nj/+xi3+CXY++5gq2H+l20ejBFzSucpuaItI6Kv3Rz4ZZ+dmXe+qGTlE0Ug1rQpwg8mNgSjThMMnC0hz5K6Sy92yBsf2cConrFhq5paggX/8WBk3MDpWKl9i1XknQtZzUlXA8oTFYYTdTxvMLV7xWBQfRXmZfdj1Yi34bEcXlrSQTA4kQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,108 +19,109 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pOgBbnmop4ojkmdqMcJ13y123hnvZ+y/4hLtKmjFrMk=;
- b=mMsQV+lsm3cPBh2IjwNYw4aD5kHkl9yNko0/xfa8WOVOGNhpx870XT6M0OGAaosNhouqMwFRPMCtT9JrDkV4I7vL0+4GCNQAHoh1se6mSHqFDJEH5QyR5O99vEJq/jUVYqB+ErkNTTP/Qd0QQpr/p/KbyYdwyhCp9OvNupX2d/o=
+ bh=c5Hd0cdhXi7flmlJ97J8WgCzQBvNjDbpjJTNkpiWzcI=;
+ b=XGprOQGmubjOzN9d2TfKaSP4wKUq0MB6qIKHO+S/UfqDFZzVQdANsK2z1kQOh3Q3wvuTER2MG/UyxKUeihVm81hmDfQu9N9gjoSCR7dEKoPx+wTS0qcjC1fGbcCpetc0HvtH7VFdfsSiS+12aXAtv1AehAgz0q1xLwYWQT3S1IM=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB2952.namprd11.prod.outlook.com (2603:10b6:a03:82::11) with
+ by BY5PR11MB4103.namprd11.prod.outlook.com (2603:10b6:a03:18c::29) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3370.16; Wed, 23 Sep
- 2020 13:11:02 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3391.14; Wed, 23 Sep
+ 2020 13:11:42 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8%7]) with mapi id 15.20.3391.026; Wed, 23 Sep 2020
- 13:11:02 +0000
-Subject: Re: [oe] [meta-python][PATCH 2/5] python3-luma-core: Upgrade 1.16.1 -> 1.16.2
+ 13:11:42 +0000
+Subject: Re: [oe] [meta-python][PATCH 3/5] python3-isort: Upgrade 5.5.2 -> 5.5.3
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200921134405.676-1-leon.anavi@konsulko.com>
- <20200921134405.676-2-leon.anavi@konsulko.com>
+ <20200921134405.676-3-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <915aa19b-6c90-6331-1fc6-bdec7b63f986@windriver.com>
-Date: Wed, 23 Sep 2020 09:10:59 -0400
+Message-ID: <a61b4a1c-2f91-12ea-1424-ee7b3858416d@windriver.com>
+Date: Wed, 23 Sep 2020 09:11:38 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
-In-Reply-To: <20200921134405.676-2-leon.anavi@konsulko.com>
-X-ClientProxiedBy: YTOPR0101CA0017.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:15::30) To BY5PR11MB3909.namprd11.prod.outlook.com
+In-Reply-To: <20200921134405.676-3-leon.anavi@konsulko.com>
+X-ClientProxiedBy: YTOPR0101CA0034.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:15::47) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by YTOPR0101CA0017.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::30) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3412.21 via Frontend Transport; Wed, 23 Sep 2020 13:11:01 +0000
+Received: from [192.168.0.55] (174.115.236.231) by YTOPR0101CA0034.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::47) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3412.22 via Frontend Transport; Wed, 23 Sep 2020 13:11:41 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 68de1588-670e-4143-a153-08d85fc21f02
-X-MS-TrafficTypeDiagnostic: BYAPR11MB2952:
+X-MS-Office365-Filtering-Correlation-Id: 5b6f3997-8635-4f0b-101b-08d85fc236eb
+X-MS-TrafficTypeDiagnostic: BY5PR11MB4103:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB295264676124159DD6D5F21B9F380@BYAPR11MB2952.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:173;
+	<BY5PR11MB41033474B277FFE13483920B9F380@BY5PR11MB4103.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:568;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	d9Uw/mBqfzIFjD+oTd3251JBCrDKivdo6UNuvaASJGXySL1cYZUeUyZeLRW8JD7wMiR0ak+5xkxEW1ZVFhdBnnKEp4lAo24dMfHFU5F6q0KQr3K3XR2arwUNgmHxZzUKOpG3ja8F/EP8FR9PYH6Jw3i+TvQDh8OwbqxHdtyGGszGCzn7IxkZTFIa4pdfytLA6PIJn5nSTkpgXoHFag28TMCKdw/vYaMrlDro0fK3btipIytATB4585OaWrv6xlHS3/ot59x8GKYuNKrkhubdC1D6WOd6QH7hX+AuxqEHNzE6IsRx6W1OA44VpfacDk1k/NeZrPVYrmHhGe2IrJoa54ZXOZ0kq/zgMUtQ0tWGCcP3rcmApac/nZZ3UJPsYshiXD5v0QFJEApXD6YstSUC8D+c+LomLmvbs+hoTMpeOgXb3rt+25yy6Mk4MbkfVUrO3E0Ni4Wk+J63+b5rKOuIQQ==
+	TQMCRPenTVhwzeBKwIpjZq/jgWJdPM4b7t8VTVPDMEZ7OrJd3W/T+8WYpk04E2t3I3oJtZHfRBs78HeuegwSJpHQ6sXr27BitDf9Tpx3yjA2mHSTpWmqexVTr6uSJBWF3qr5/kmepxiQOm9R9Gz3fPfaAUnkaFu9RjanFFaawGZYsXuz73YBDwpWe9lKp8GqMV5jZCH+j8Y1OTo5TlrX1aTXLFZO3wRnSZRllEq6a6Tkh9iYmDrYl8iG8Emqz+VU773ub14RGs98LWxViJfye9GmYQIMl084wG/+Qz5xdhBzqGJe5FVuNdFiNKRZoyb+dPu/DOCTxHbynz+xZHgXZBTZFxLAkd/ZfglcyTODgFfR5kNMxZhz/FJRmtpBCXjuwd6F6SSgsC5Grdf8z2Axodb7RHzlFnthKwAywkEHQ4pydXAj8f7FIUAtVdCUtJsM+oqjAnf4Qc+2Qlg06Hf5dyPkkGvKNvqBpfg3SXjhUTWNyfgopPnl31pxaShOOTth
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(39850400004)(366004)(346002)(376002)(136003)(52116002)(2906002)(33964004)(26005)(53546011)(66556008)(2616005)(16576012)(66946007)(16526019)(44832011)(66476007)(478600001)(186003)(5660300002)(316002)(36756003)(956004)(31686004)(83380400001)(6486002)(966005)(86362001)(8936002)(31696002)(166002)(8676002)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(346002)(39850400004)(376002)(396003)(136003)(2906002)(33964004)(316002)(16576012)(5660300002)(36756003)(478600001)(52116002)(66946007)(66476007)(8676002)(66556008)(83380400001)(53546011)(966005)(956004)(31686004)(86362001)(2616005)(6666004)(6486002)(31696002)(8936002)(44832011)(166002)(186003)(16526019)(26005)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	It4NetMu1NRk5UA4w4KPe0O0RP/WRrmgW3wMrFrAVCtEQ/eaEeVab8Edu+Df7+nt7KbESvUixLPhTZ7StSQU8ZLoRkIPem9X6CKQqKvvz1pVQbURBa8CeWLUq8E/6Vw8xKM4vrLtuFRKqezv3ZzKdZ+DM9epesMTkmWWofkuErZqUNab/aT2vSI5Ky4/R2up11Tx7bDmvR6jajlBCrIgtDJnTdzu9x1b2FwChLZB7DECsjc8d3zLvhuP4baZl8MfpTMFa+OOWYmik8B5yT8jzR5+j54t8Brdefb+//+s5hiJO02ccO2PbpIUl7C/7BkKGywE/ViFJk7kjDcHxU995ed7wUj9hQU1VRlQzXsVwyWcKUcv0My6ISOiz7N8Eurj1UhSsBUbBO99t9GMnFgflTKVD/v4O21lNWd7uykku1D8KJaexNkkgiFinwRHskWl4wepRgBtADTbpdzllxB+hDQFggyauBhQF+vLgzo3JSEzOndW19ijs2vTk53bSVQAJYx09ZXrIVKhJ/FyVrJLvMkOO33yVpyLhEyXA0RdB2iElxPVRxUv/l6Oxoa1po4bWayVEqsbQ/8jUTll+iRw84bdzUi72ZcgLnq1kn6cNWr+zCoFxZI6rtFP5foIsppVbrcoCFFFP0o/2Tx1BLiPLg==
+	GHq5CwfPjl9KbtLkTDwCcBZRNycZhK4gQxbg80Xht18rtpHSADTHDpfaL8YgWeEtU5axlYdB45bJVyGobYnmEbKispj3m3eYVPp587WJjipl/NSTKrs7uOLdxeGBy+isaWzF/JMa0P3NRrl3YN9D2Olvn4lF1Dgk/oi7m4bro+3NMXKJ1dcpQ3Mv3h0DiPI2cRcFVyaFmKTIL5za47sLt4JQeqjCqRDCfR10XYxDOlq2LgRJy1Ag3FG+xHHUQ5TDzw3B0GIyK5rlLargsg2TXp0yBBIafsZkSJTMJkWcggfhHKUp8wjtADoZITG7NFfjI89hrOY7/VkzJ35RSPRV1IiY8EUXWBjWDgMC6Je+oOtgD06NRq49yHRMmv29gbdPDU6s1PvBTT2HnidQ/66B8LC4THEB2aw4ExGb+lTt/gaVA6F1YShTxunfbj4ZLO+jNyOd0LR1ViiBYcYYh2+Yq+ek1FGS/M6ik7n35dmj9DI4yUM71sroMLngiEE5xHlrq2ntN53vSk6a2hdSrNMQ2wJo8sD2DrVCCgzs1ooiw2DUT6cX7lU0TTr6gvEwQaFEzmNPvvKRrt4GgBrbubwk5WRL8LIMiCBJ4FPLKQY4zZEpBy0L+DxlHrscrbwtoUnIpROME5mqg65CaKk1kc5fUg==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 68de1588-670e-4143-a153-08d85fc21f02
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5b6f3997-8635-4f0b-101b-08d85fc236eb
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2020 13:11:02.3124
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2020 13:11:42.3873
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: b/7ppX/k+IsUDcqUD5A3lB66bGbpSV7iBkKah3UmxFHwWL9aKdD7/y+DR3bxE7eNa5wUOxik4gDNDCP0OA8AfVhAaWIccIBHxG5O686q52E=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2952
+X-MS-Exchange-CrossTenant-UserPrincipalName: +h7SoWTR8djgM2krAMm2XfSHpee7A3UQwUDwZ3zj89wsL5obfYtjfkSEY4la543llqDI7/fbke+0IV9FalK8jLTpVdMM6RToQK51S38/yDY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4103
 Content-Type: multipart/alternative;
- boundary="------------07A276DF62FDE4E99D26F1EC"
+ boundary="------------649B125B89D2A51CC5093983"
 Content-Language: en-US
 
---------------07A276DF62FDE4E99D26F1EC
+--------------649B125B89D2A51CC5093983
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 9/21/20 9:44 AM, Leon Anavi wrote:
-> Upgrade to release 1.16.2:
-> - Added new parallel interface module
-> - Renamed parallel class to bitbang_6800; moved to parallel module
+> Upgrade to release 5.5.3:
+>
+> - Bug fix: in rare cases isort can mangle yield from or raise
+>    from statements.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...ython3-luma-core_1.16.1.bb => python3-luma-core_1.16.2.bb} | 4 ++--
+>   .../python/{python3-isort_5.5.2.bb => python3-isort_5.5.3.bb} | 4 ++--
 >   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-luma-core_1.16.1.bb => python3-luma-core_1.16.2.bb} (75%)
+>   rename meta-python/recipes-devtools/python/{python3-isort_5.5.2.bb => python3-isort_5.5.3.bb} (73%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-luma-core_1.16.1.bb b/meta-python/recipes-devtools/python/python3-luma-core_1.16.2.bb
-> similarity index 75%
-> rename from meta-python/recipes-devtools/python/python3-luma-core_1.16.1.bb
-> rename to meta-python/recipes-devtools/python/python3-luma-core_1.16.2.bb
-> index 3428dbe9f8..e8a61ad062 100644
-> --- a/meta-python/recipes-devtools/python/python3-luma-core_1.16.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-luma-core_1.16.2.bb
-> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7"
+> diff --git a/meta-python/recipes-devtools/python/python3-isort_5.5.2.bb b/meta-python/recipes-devtools/python/python3-isort_5.5.3.bb
+> similarity index 73%
+> rename from meta-python/recipes-devtools/python/python3-isort_5.5.2.bb
+> rename to meta-python/recipes-devtools/python/python3-isort_5.5.3.bb
+> index 0d04157862..00978ec59d 100644
+> --- a/meta-python/recipes-devtools/python/python3-isort_5.5.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-isort_5.5.3.bb
+> @@ -4,8 +4,8 @@ LICENSE = "MIT"
+>   SECTION = "devel/python"
+>   LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=8227180126797a0148f94f483f3e1489"
+>   
+> -SRC_URI[md5sum] = "844c49ad1bf16a957b490c27b3b9844f"
+> -SRC_URI[sha256sum] = "171c5f365791073426b5ed3a156c2081a47f88c329161fd28228ff2da4c97ddb"
+> +SRC_URI[md5sum] = "5200f5b09a2a648775d0e8dbf0c0d3c8"
+> +SRC_URI[sha256sum] = "6187a9f1ce8784cbc6d1b88790a43e6083a6302f03e9ae482acc0f232a98c843"
 >   
 >   inherit pypi setuptools3
->   
-> -SRC_URI[md5sum] = "de7bda49c4146ba242923a88c587cd7a"
-> -SRC_URI[sha256sum] = "2181a60906fea3104dcfa3923f9654928502cd7541ff9b4d76c6ae29c6a9d9fc"
-> +SRC_URI[md5sum] = "8889ee9eb95c3441ee65b4b5f4a022eb"
-> +SRC_URI[sha256sum] = "518fe4e3286a4e2a75788713a58de403e6bba6d4c909fa5ce0fe14aceb05b85e"
->   
->   CLEANBROKEN = "1"
 >   
 >
 > 
 >
 
---------------07A276DF62FDE4E99D26F1EC
+--------------649B125B89D2A51CC5093983
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -132,38 +133,39 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 9/21/20 9:44 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20200921134405.676-2-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.16.2:
-- Added new parallel interface module
-- Renamed parallel class to bitbang_6800; moved to parallel module
+    <blockquote type="cite" cite="mid:20200921134405.676-3-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 5.5.3:
+
+- Bug fix: in rare cases isort can mangle yield from or raise
+  from statements.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20200921134405.676-2-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20200921134405.676-3-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...ython3-luma-core_1.16.1.bb =&gt; python3-luma-core_1.16.2.bb} | 4 ++--
+ .../python/{python3-isort_5.5.2.bb =&gt; python3-isort_5.5.3.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-luma-core_1.16.1.bb =&gt; python3-luma-core_1.16.2.bb} (75%)
+ rename meta-python/recipes-devtools/python/{python3-isort_5.5.2.bb =&gt; python3-isort_5.5.3.bb} (73%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-luma-core_1.16.1.bb b/meta-python/recipes-devtools/python/python3-luma-core_1.16.2.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-luma-core_1.16.1.bb
-rename to meta-python/recipes-devtools/python/python3-luma-core_1.16.2.bb
-index 3428dbe9f8..e8a61ad062 100644
---- a/meta-python/recipes-devtools/python/python3-luma-core_1.16.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-luma-core_1.16.2.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7">&quot;file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-isort_5.5.2.bb b/meta-python/recipes-devtools/python/python3-isort_5.5.3.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-isort_5.5.2.bb
+rename to meta-python/recipes-devtools/python/python3-isort_5.5.3.bb
+index 0d04157862..00978ec59d 100644
+--- a/meta-python/recipes-devtools/python/python3-isort_5.5.2.bb
++++ b/meta-python/recipes-devtools/python/python3-isort_5.5.3.bb
+@@ -4,8 +4,8 @@ LICENSE = &quot;MIT&quot;
+ SECTION = &quot;devel/python&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=6;endline=6;md5=8227180126797a0148f94f483f3e1489">&quot;file://PKG-INFO;beginline=6;endline=6;md5=8227180126797a0148f94f483f3e1489&quot;</a>
+ 
+-SRC_URI[md5sum] = &quot;844c49ad1bf16a957b490c27b3b9844f&quot;
+-SRC_URI[sha256sum] = &quot;171c5f365791073426b5ed3a156c2081a47f88c329161fd28228ff2da4c97ddb&quot;
++SRC_URI[md5sum] = &quot;5200f5b09a2a648775d0e8dbf0c0d3c8&quot;
++SRC_URI[sha256sum] = &quot;6187a9f1ce8784cbc6d1b88790a43e6083a6302f03e9ae482acc0f232a98c843&quot;
  
  inherit pypi setuptools3
- 
--SRC_URI[md5sum] = &quot;de7bda49c4146ba242923a88c587cd7a&quot;
--SRC_URI[sha256sum] = &quot;2181a60906fea3104dcfa3923f9654928502cd7541ff9b4d76c6ae29c6a9d9fc&quot;
-+SRC_URI[md5sum] = &quot;8889ee9eb95c3441ee65b4b5f4a022eb&quot;
-+SRC_URI[sha256sum] = &quot;518fe4e3286a4e2a75788713a58de403e6bba6d4c909fa5ce0fe14aceb05b85e&quot;
- 
- CLEANBROKEN = &quot;1&quot;
  
 </pre>
       <br>
@@ -176,4 +178,4 @@ index 3428dbe9f8..e8a61ad062 100644
   </body>
 </html>
 
---------------07A276DF62FDE4E99D26F1EC--
+--------------649B125B89D2A51CC5093983--
