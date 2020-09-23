@@ -1,96 +1,61 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web11.8939.1600850797402848614
+Received: from mgw-02.mpynet.fi (mgw-02.mpynet.fi [82.197.21.91])
+ by mx.groups.io with SMTP id smtpd.web12.11248.1600861017100055023
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2020 01:46:37 -0700
+ Wed, 23 Sep 2020 04:36:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: mingli.yu@windriver.com)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 08N8kGF7007132
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2020 01:46:26 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
- 14.3.487.0; Wed, 23 Sep 2020 01:46:05 -0700
-From: "Yu, Mingli" <mingli.yu@windriver.com>
+ dkim=missing; spf=pass (domain: tuxera.com, ip: 82.197.21.91, mailfrom: vladimir@tuxera.com)
+Received: from pps.filterd (mgw-02.mpynet.fi [127.0.0.1])
+	by mgw-02.mpynet.fi (8.16.0.42/8.16.0.42) with SMTP id 08NBX5vQ049662;
+	Wed, 23 Sep 2020 14:36:54 +0300
+Received: from ex13.tuxera.com (ex13.tuxera.com [178.16.184.72])
+	by mgw-02.mpynet.fi with ESMTP id 33n5nvvbh6-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
+	Wed, 23 Sep 2020 14:36:53 +0300
+Received: from localhost (194.100.106.190) by tuxera-exch.ad.tuxera.com
+ (10.20.48.11) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 23 Sep
+ 2020 14:36:53 +0300
+From: "Vladimir Zapolskiy" <vladimir@tuxera.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH 2/2] strongswan: Remove obsolete setting regarding the Standard Output
-Date: Wed, 23 Sep 2020 16:45:05 +0800
-Message-ID: <20200923084505.29027-2-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200923084505.29027-1-mingli.yu@windriver.com>
-References: <20200923084505.29027-1-mingli.yu@windriver.com>
+CC: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] cifs-utils: remove explicitly set PV variable
+Date: Wed, 23 Sep 2020 14:36:47 +0300
+Message-ID: <20200923113647.28344-1-vladimir@tuxera.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+X-Originating-IP: [194.100.106.190]
+X-ClientProxiedBy: tuxera-exch.ad.tuxera.com (10.20.48.11) To
+ tuxera-exch.ad.tuxera.com (10.20.48.11)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235,18.0.687
+ definitions=2020-09-23_07:2020-09-23,2020-09-23 signatures=0
+X-Proofpoint-Spam-Details: rule=mpy_notspam policy=mpy score=0 suspectscore=1 adultscore=0
+ mlxlogscore=852 bulkscore=0 spamscore=0 phishscore=0 malwarescore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2006250000 definitions=main-2009230093
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Mingli Yu <mingli.yu@windriver.com>
+There is no need to set and then tediously modify PV variable on every
+upgrade, what's worse it may happen that the PV is not modified like it
+happened on the recent upgrade from cifs-utils-6.10 to cifs-utils-6.11.
 
-The Standard output type "syslog" is obsolete, causing a warning since systemd
-version 246 [1].
-
-Please consider using "journal" or "journal+console"
-
-[1] https://github.com/systemd/systemd/blob/master/NEWS#L202
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Vladimir Zapolskiy <vladimir@tuxera.com>
 ---
- ...setting-regarding-the-Standard-Outpu.patch | 34 +++++++++++++++++++
- .../strongswan/strongswan_5.8.4.bb            |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-networking/recipes-support/strongswan/files/0001-Remove-obsolete-setting-regarding-the-Standard-Outpu.patch
+ meta-networking/recipes-support/cifs/cifs-utils_6.11.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/strongswan/files/0001-Remove-obsolete-setting-regarding-the-Standard-Outpu.patch b/meta-networking/recipes-support/strongswan/files/0001-Remove-obsolete-setting-regarding-the-Standard-Outpu.patch
-new file mode 100644
-index 000000000..78adcf813
---- /dev/null
-+++ b/meta-networking/recipes-support/strongswan/files/0001-Remove-obsolete-setting-regarding-the-Standard-Outpu.patch
-@@ -0,0 +1,34 @@
-+From 7b1e376d7d22244feab466e9889ba77561117357 Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Wed, 23 Sep 2020 16:20:22 +0800
-+Subject: [PATCH] Remove obsolete setting regarding the Standard Output
-+
-+The Standard output type "syslog" is obsolete, causing a warning since systemd
-+version 246 [1].
-+
-+Please consider using "journal" or "journal+console"
-+
-+[1] https://github.com/systemd/systemd/blob/master/NEWS#L202
-+
-+Upstream-Status: Submitted [https://github.com/strongswan/strongswan/pull/181]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ init/systemd-starter/strongswan-starter.service.in | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/init/systemd-starter/strongswan-starter.service.in b/init/systemd-starter/strongswan-starter.service.in
-+index 474284a19..6a0672352 100644
-+--- a/init/systemd-starter/strongswan-starter.service.in
-++++ b/init/systemd-starter/strongswan-starter.service.in
-+@@ -4,7 +4,6 @@ After=syslog.target network-online.target
-+ 
-+ [Service]
-+ ExecStart=@SBINDIR@/@IPSEC_SCRIPT@ start --nofork
-+-StandardOutput=syslog
-+ Restart=on-abnormal
-+ 
-+ [Install]
-+-- 
-+2.17.1
-+
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb b/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
-index 0a2733195..8a8809243 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
-@@ -10,6 +10,7 @@ DEPENDS = "gmp openssl flex-native flex bison-native"
- SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-            file://fix-funtion-parameter.patch \
-            file://0001-memory.h-Include-stdint.h-for-uintptr_t.patch \
-+           file://0001-Remove-obsolete-setting-regarding-the-Standard-Outpu.patch \
-            "
+diff --git a/meta-networking/recipes-support/cifs/cifs-utils_6.11.bb b/meta-networking/recipes-support/cifs/cifs-utils_6.11.bb
+index 09b793119..de3fbb094 100644
+--- a/meta-networking/recipes-support/cifs/cifs-utils_6.11.bb
++++ b/meta-networking/recipes-support/cifs/cifs-utils_6.11.bb
+@@ -4,8 +4,6 @@ SECTION = "otherosfs"
+ LICENSE = "GPLv3 & LGPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
- SRC_URI[md5sum] = "0634e7f40591bd3f6770e583c3f27d29"
+-PV = "6.10"
+-
+ SRCREV = "ded4e81796a18cde73329e838357f084aa05720f"
+ SRC_URI = "git://git.samba.org/cifs-utils.git"
+ 
 -- 
-2.26.2
+2.11.0
 
