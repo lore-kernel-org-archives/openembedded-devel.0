@@ -1,143 +1,214 @@
-Received: from mail-ej1-f66.google.com (mail-ej1-f66.google.com [209.85.218.66])
- by mx.groups.io with SMTP id smtpd.web11.3511.1600887656332747655
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web12.561.1600894022034559924
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2020 12:00:56 -0700
+ Wed, 23 Sep 2020 13:47:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=cpXHC3DZ;
- spf=pass (domain: gmail.com, ip: 209.85.218.66, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f66.google.com with SMTP id j11so1159795ejk.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2020 12:00:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=4DEWeWb0nNwfpsQUGj6hxsZFxwC/eD91cUuTehPvHaU=;
-        b=cpXHC3DZhX9yIdSWBnQWL47fd4IQl6kHc/8dIFSD9IR6kYblCY8/coV0S1yHFPbeT5
-         q/aWT+cx1wLzQfCsrfdp9D9dR0ihToUn7OlHDmIHE2QajGt12kmGhPFVelc9L+jfQ/sn
-         liKlTAhLTnmrEIssDgL+cnw4sOiQsJxhulQDpuus8AXU4CkqpIgWhxKZNdr9BwIK7YTJ
-         jg2AXe4Y6n/3swBiRTsr9zyZTD5E6O2F05ib20bs//du9AtMmND3UUI+2tuXKI9G7Ihs
-         LwwS0YQ+/a01TRMuwzx43nY6W73DhtZcJblj8qJ/qTYpeKifQDODBU0tbQvcDewERvBs
-         51Rw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=4DEWeWb0nNwfpsQUGj6hxsZFxwC/eD91cUuTehPvHaU=;
-        b=AC2SqvSoFlaArsUuRTyWMVbKnS7O93xL2V5KZMxF53FxAg0vQ+QbMEpq3R/AML7A2s
-         e1oKCU6NAhDj2cSxK+443StmcHi2iHD7jGHqsP01g0l9ofQbXNeK+sCAOSGnEpFJDGEt
-         zJL8SHnnUxnnz0P3fWObrHtcMOtvmq4EklVHoLVtPH3JLOKzfP5XOzfgeT8pIkacFV8L
-         oR2z/4h2HtwDc3STIlFKtZyGyZJzqv7dS645dWYeJe/Z5nBTnpBpUTxWbz357MQHO0OM
-         1/UkI5Qfdin5LnxT8XnM+YM4BIasiYRKlFPLBOdqdlTPvD8NK9pbRUsBSLLbDKbaiE1g
-         AppQ==
-X-Gm-Message-State: AOAM531LYrWWAHrYbSELFft1gJYCEyuhIBlWCUVlS9Say8NJA92Sc3Xy
-	dwFTNJgulh5PWZp3ehGBdRxz5IKxkFKh2DNGrZU=
-X-Google-Smtp-Source: ABdhPJzCE2IgB3GwTi74fDC5Xy1G7m5aitjawVY8G8tbp+2bGo4y7zE+LQVZW696LVU6aCnljhTqURKNqKFb5cgaKeM=
-X-Received: by 2002:a17:906:4b18:: with SMTP id y24mr1013125eju.471.1600887654716;
- Wed, 23 Sep 2020 12:00:54 -0700 (PDT)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: randy.macleod@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 08NKktfi000516
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2020 13:46:56 -0700 (PDT)
+Received: from [172.25.44.2] (172.25.44.2) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 23 Sep
+ 2020 13:46:55 -0700
+Subject: Re: [oe] [meta-oe][PATCH] libssh2: enable ptest
+To: Sakib Sajal <sakib.sajal@windriver.com>,
+        <openembedded-devel@lists.openembedded.org>
+References: <20200922160751.26050-1-sakib.sajal@windriver.com>
+From: "Randy MacLeod" <randy.macleod@windriver.com>
+Message-ID: <72f2910a-99c3-2e65-bcf6-ae6b7d2c708e@windriver.com>
+Date: Wed, 23 Sep 2020 16:46:52 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-References: <20200923181124.1029-1-liu.ming50@gmail.com>
-In-Reply-To: <20200923181124.1029-1-liu.ming50@gmail.com>
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-Date: Wed, 23 Sep 2020 21:00:43 +0200
-Message-ID: <CA+chaQdUcX+4f=RNM+LPWaSF_ZPqo3VCDLwoRVMk5yrhHaKtZw@mail.gmail.com>
-Subject: Re: [oe] [meta-browser] [PATCH] chromium: change to python3
-To: Ming Liu <liu.ming50@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000fc1cc105afffb30f"
+In-Reply-To: <20200922160751.26050-1-sakib.sajal@windriver.com>
+X-Originating-IP: [172.25.44.2]
+Content-Type: multipart/alternative;
+	boundary="------------881C70B17CCDFD711630C93A"
+Content-Language: en-CA
 
---000000000000fc1cc105afffb30f
-Content-Type: text/plain; charset="UTF-8"
+--------------881C70B17CCDFD711630C93A
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-https://bugs.chromium.org/p/chromium/issues/detail?id=942720
-
-is still far from finished.
-
-Using python from host and assuming it's python2 is much worse than
-pythonnative inherit and using meta-python2.
-
-On Wed, Sep 23, 2020 at 8:11 PM Ming Liu <liu.ming50@gmail.com> wrote:
-
-> From: Ming Liu <liu.ming50@gmail.com>
->
-> python support has been dropped from OE since dunfell, let's change to
-> python3.
->
-> Signed-off-by: Ming Liu <liu.ming50@gmail.com>
+On 2020-09-22 12:07 p.m., Sakib Sajal wrote:
+> Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
 > ---
->  recipes-browser/chromium/chromium.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>   meta-oe/recipes-support/libssh2/files/run-ptest |  7 +++++++
+>   .../recipes-support/libssh2/libssh2_1.9.0.bb    | 17 ++++++++++++++++-
+>   2 files changed, 23 insertions(+), 1 deletion(-)
+>   create mode 100644 meta-oe/recipes-support/libssh2/files/run-ptest
 >
-> diff --git a/recipes-browser/chromium/chromium.inc
-> b/recipes-browser/chromium/chromium.inc
-> index b351114..0d1a761 100644
-> --- a/recipes-browser/chromium/chromium.inc
-> +++ b/recipes-browser/chromium/chromium.inc
-> @@ -18,7 +18,7 @@ TOOLCHAIN = "clang"
->  # to build the native recipes (e.g. GN) with clang too.
->  TOOLCHAIN_class-native = "clang"
->
-> -inherit pythonnative setuptools
-> +inherit python3native setuptools3
->
->  # Chromium itself is licensed under the 3-clause BSD license. However, it
->  # depends upon several other projects whose copyright files are listed in
-> --
-> 2.28.0
->
+> diff --git a/meta-oe/recipes-support/libssh2/files/run-ptest b/meta-oe/recipes-support/libssh2/files/run-ptest
+> new file mode 100644
+> index 000000000..2a7922f1a
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libssh2/files/run-ptest
+> @@ -0,0 +1,7 @@
+> +#!/bin/sh
+> +
+> +ptestdir=$(dirname "$(readlink -f "$0")")
+> +for test in $(ls $ptestdir/tests)
+> +do
+> +	./test-driver --test-name $test --log-file $test.log --trs-file $test.trs --color-tests no --enable-hard-errors yes --expect-failure no -- ./tests/$test
+> +done
+> diff --git a/meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb b/meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb
+> index c1f337a44..a1d85617a 100644
+> --- a/meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb
+> +++ b/meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb
+> @@ -9,11 +9,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c5cf34fc0acb44b082ef50ef5e4354ca"
+>   
+>   SRC_URI = "http://www.libssh2.org/download/${BP}.tar.gz \
+>              file://CVE-2019-17498.patch \
+> +           file://run-ptest \
+>   "
+>   SRC_URI[md5sum] = "1beefafe8963982adc84b408b2959927"
+>   SRC_URI[sha256sum] = "d5fb8bd563305fd1074dda90bd053fb2d29fc4bce048d182f96eaa466dfadafd"
+>   
+> -inherit autotools pkgconfig
+> +inherit autotools pkgconfig ptest
+>   
+>   EXTRA_OECONF += "\
+>                    --with-libz \
+> @@ -26,3 +27,17 @@ PACKAGECONFIG[openssl] = "--with-crypto=openssl --with-libssl-prefix=${STAGING_L
+>   PACKAGECONFIG[gcrypt] = "--with-crypto=libgcrypt --with-libgcrypt-prefix=${STAGING_EXECPREFIXDIR}, , libgcrypt"
+>   
+>   BBCLASSEXTEND = "native nativesdk"
+> +
+> +RDEPENDS_${PN}-ptest = "bash"
+
+
+Your long log should explain why you need bash specifically rather
+than any old shell?
+
+Have you tried to fix the shell script(s) to make it work with any /bin/sh?
+
+Also, there were some useful examples that we talked about
+packaging up, can you do that as a follow-up commit?
+
+../Randy
+
+> +
+> +do_compile_ptest() {
+> +	sed -i "/\$(MAKE) \$(AM_MAKEFLAGS) check-TESTS/d" tests/Makefile
+> +	oe_runmake check
+> +}
+> +
+> +do_install_ptest() {
+> +	install -d ${D}${PTEST_PATH}/tests
+> +	install -m 0755 ${B}/tests/.libs/simple ${D}${PTEST_PATH}/tests/
+> +	install -m 0755 ${S}/tests/mansyntax.sh ${D}${PTEST_PATH}/tests/
+> +	install -m 0755 ${S}/test-driver ${D}${PTEST_PATH}/
+> +}
 >
 > 
 >
->
 
---000000000000fc1cc105afffb30f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-- 
+# Randy MacLeod
+# Wind River Linux
 
-<div dir=3D"ltr"><a href=3D"https://bugs.chromium.org/p/chromium/issues/det=
-ail?id=3D942720">https://bugs.chromium.org/p/chromium/issues/detail?id=3D94=
-2720</a><br><div><br></div><div>is still far from finished.</div><div><br><=
-/div><div>Using python from host and assuming it&#39;s python2 is much wors=
-e than pythonnative inherit and using meta-python2.</div></div><br><div cla=
-ss=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Sep 23, 20=
-20 at 8:11 PM Ming Liu &lt;<a href=3D"mailto:liu.ming50@gmail.com">liu.ming=
-50@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
-e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
-g-left:1ex">From: Ming Liu &lt;<a href=3D"mailto:liu.ming50@gmail.com" targ=
-et=3D"_blank">liu.ming50@gmail.com</a>&gt;<br>
-<br>
-python support has been dropped from OE since dunfell, let&#39;s change to=
-<br>
-python3.<br>
-<br>
-Signed-off-by: Ming Liu &lt;<a href=3D"mailto:liu.ming50@gmail.com" target=
-=
-=3D"_blank">liu.ming50@gmail.com</a>&gt;<br>
----<br>
-=C2=A0recipes-browser/chromium/chromium.inc | 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-<br>
-diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chrom=
-ium/chromium.inc<br>
-index b351114..0d1a761 100644<br>
---- a/recipes-browser/chromium/chromium.inc<br>
-+++ b/recipes-browser/chromium/chromium.inc<br>
-@@ -18,7 +18,7 @@ TOOLCHAIN =3D &quot;clang&quot;<br>
-=C2=A0# to build the native recipes (e.g. GN) with clang too.<br>
-=C2=A0TOOLCHAIN_class-native =3D &quot;clang&quot;<br>
-<br>
--inherit pythonnative setuptools<br>
-+inherit python3native setuptools3<br>
-<br>
-=C2=A0# Chromium itself is licensed under the 3-clause BSD license. Howeve=
-r, it<br>
-=C2=A0# depends upon several other projects whose copyright files are list=
-ed in<br>
--- <br>
-2.28.0<br>
-<br>
-<br>
-<br>
-<br>
-</blockquote></div>
 
---000000000000fc1cc105afffb30f--
+--------------881C70B17CCDFD711630C93A
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <div class="moz-cite-prefix">On 2020-09-22 12:07 p.m., Sakib Sajal
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:20200922160751.26050-1-sakib.sajal@windriver.com">
+      <pre class="moz-quote-pre" wrap="">Signed-off-by: Sakib Sajal <a class="moz-txt-link-rfc2396E" href="mailto:sakib.sajal@windriver.com">&lt;sakib.sajal@windriver.com&gt;</a>
+---
+ meta-oe/recipes-support/libssh2/files/run-ptest |  7 +++++++
+ .../recipes-support/libssh2/libssh2_1.9.0.bb    | 17 ++++++++++++++++-
+ 2 files changed, 23 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/libssh2/files/run-ptest
+
+diff --git a/meta-oe/recipes-support/libssh2/files/run-ptest b/meta-oe/recipes-support/libssh2/files/run-ptest
+new file mode 100644
+index 000000000..2a7922f1a
+--- /dev/null
++++ b/meta-oe/recipes-support/libssh2/files/run-ptest
+@@ -0,0 +1,7 @@
++#!/bin/sh
++
++ptestdir=$(dirname "$(readlink -f "$0")")
++for test in $(ls $ptestdir/tests)
++do
++	./test-driver --test-name $test --log-file $test.log --trs-file $test.trs --color-tests no --enable-hard-errors yes --expect-failure no -- ./tests/$test
++done
+diff --git a/meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb b/meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb
+index c1f337a44..a1d85617a 100644
+--- a/meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb
++++ b/meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb
+@@ -9,11 +9,12 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=c5cf34fc0acb44b082ef50ef5e4354ca">"file://COPYING;md5=c5cf34fc0acb44b082ef50ef5e4354ca"</a>
+ 
+ SRC_URI = <a class="moz-txt-link-rfc2396E" href="http://www.libssh2.org/download/${BP}.tar.gz\file://CVE-2019-17498.patch\+file://run-ptest\">"http://www.libssh2.org/download/${BP}.tar.gz \
+            file://CVE-2019-17498.patch \
++           file://run-ptest \
+ "</a>
+ SRC_URI[md5sum] = "1beefafe8963982adc84b408b2959927"
+ SRC_URI[sha256sum] = "d5fb8bd563305fd1074dda90bd053fb2d29fc4bce048d182f96eaa466dfadafd"
+ 
+-inherit autotools pkgconfig
++inherit autotools pkgconfig ptest
+ 
+ EXTRA_OECONF += "\
+                  --with-libz \
+@@ -26,3 +27,17 @@ PACKAGECONFIG[openssl] = "--with-crypto=openssl --with-libssl-prefix=${STAGING_L
+ PACKAGECONFIG[gcrypt] = "--with-crypto=libgcrypt --with-libgcrypt-prefix=${STAGING_EXECPREFIXDIR}, , libgcrypt"
+ 
+ BBCLASSEXTEND = "native nativesdk"
++
++RDEPENDS_${PN}-ptest = "bash"</pre>
+    </blockquote>
+    <p><br>
+    </p>
+    <p>Your long log should explain why you need bash specifically
+      rather <br>
+      than any old shell?</p>
+    <p>Have you tried to fix the shell script(s) to make it work with
+      any /bin/sh?</p>
+    <p>Also, there were some useful examples that we talked about <br>
+      packaging up, can you do that as a follow-up commit?<br>
+    </p>
+    <p>../Randy<br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:20200922160751.26050-1-sakib.sajal@windriver.com">
+      <pre class="moz-quote-pre" wrap="">
++
++do_compile_ptest() {
++	sed -i "/\$(MAKE) \$(AM_MAKEFLAGS) check-TESTS/d" tests/Makefile
++	oe_runmake check
++}
++
++do_install_ptest() {
++	install -d ${D}${PTEST_PATH}/tests
++	install -m 0755 ${B}/tests/.libs/simple ${D}${PTEST_PATH}/tests/
++	install -m 0755 ${S}/tests/mansyntax.sh ${D}${PTEST_PATH}/tests/
++	install -m 0755 ${S}/test-driver ${D}${PTEST_PATH}/
++}
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+
+
+</pre>
+    </blockquote>
+    <p><br>
+    </p>
+    <pre class="moz-signature" cols="72">-- 
+# Randy MacLeod
+# Wind River Linux</pre>
+  </body>
+</html>
+
+--------------881C70B17CCDFD711630C93A--
