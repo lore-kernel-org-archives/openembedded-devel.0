@@ -1,86 +1,143 @@
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.web11.3271.1600886973674181142
+Received: from mail-ej1-f66.google.com (mail-ej1-f66.google.com [209.85.218.66])
+ by mx.groups.io with SMTP id smtpd.web11.3511.1600887656332747655
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2020 11:49:33 -0700
+ Wed, 23 Sep 2020 12:00:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=um773TgU;
- spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id y14so237709pgf.12
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2020 11:49:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=cpXHC3DZ;
+ spf=pass (domain: gmail.com, ip: 209.85.218.66, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f66.google.com with SMTP id j11so1159795ejk.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2020 12:00:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:organization:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=rJ4DcmCDFgIaxIqz8ARwI7qE/rASxxY9IZX4+7zjqvg=;
-        b=um773TgU3Pri50zDT9bHaQ4PvfcKs5R0XspuuCn690Phs0XEW5xR1q1MS2gMxWAJO6
-         cYSJM8g1hQoTKqyWT0b1GJSSaEJg5DZZScdSoAiB/bVOIbQ3ItByvgMYHgi0kZzd2h2p
-         GasFLNRlTMqh+OO6lTU0hSAZbU93KmtTCkyrMU2lqEBx2wL+H2X1hkEwg9sRrH92RvPj
-         9S0HPVStnJRNAfO1aTO3qojT2O9Zv6z1JjP6O9/zsvGGp29YushuExeHENoLL9ubCc8Y
-         ENRchVZMdIMQ1tU4Ss/xzZFuXjaFDWO6x4QhUwnG4G+Zo9kWVB4UosxW3yrsJIL/Aos3
-         +3jQ==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=4DEWeWb0nNwfpsQUGj6hxsZFxwC/eD91cUuTehPvHaU=;
+        b=cpXHC3DZhX9yIdSWBnQWL47fd4IQl6kHc/8dIFSD9IR6kYblCY8/coV0S1yHFPbeT5
+         q/aWT+cx1wLzQfCsrfdp9D9dR0ihToUn7OlHDmIHE2QajGt12kmGhPFVelc9L+jfQ/sn
+         liKlTAhLTnmrEIssDgL+cnw4sOiQsJxhulQDpuus8AXU4CkqpIgWhxKZNdr9BwIK7YTJ
+         jg2AXe4Y6n/3swBiRTsr9zyZTD5E6O2F05ib20bs//du9AtMmND3UUI+2tuXKI9G7Ihs
+         LwwS0YQ+/a01TRMuwzx43nY6W73DhtZcJblj8qJ/qTYpeKifQDODBU0tbQvcDewERvBs
+         51Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=rJ4DcmCDFgIaxIqz8ARwI7qE/rASxxY9IZX4+7zjqvg=;
-        b=rsqetui1mcg4dIC+waxdYA8zfoMIaDE8Vg/0M74u/LtHfHIOFeJNjhDfVQZhFBlZdK
-         Nt2IdZhVAasSDQypgsdsVfM608qYPvh77pXVosC9plQTA/QU1h3tbkqu1PsFRLqUyxKH
-         4JcmxZgu34kOI7vEqHvIC4Nq7W3lXoqytcsclzhGaunc1iGcXiFP1ecXNsrs8H5Ab65t
-         4BSwOfcjqT1hTu7glDLQ7eGw+BH385Tz7osVW+bXrS3lOakJX4RqFrQqoDC6I+tTj0JI
-         vIhYMtVWU2ij6xZzyQ1Ps1xvggx/lS67rGdptVoRHFnCrqJcCX6A8xDSIwRPYKrS+o4w
-         Op6A==
-X-Gm-Message-State: AOAM531m5uJa6/KaMcE8howESNUtfHmFCu6o5SjWFWcCTmND6sVAWTSE
-	YrLfwUK0z+m+Pv4Mm9s3bYcgC3Xh+Bm9Dg==
-X-Google-Smtp-Source: ABdhPJxtCpKdKkD8/c4foHPw1mvKzm3AefzZMc0Qud6MOP1NidP7gX+Iov5ZTCsXjG7rNHhQqprGRw==
-X-Received: by 2002:a65:594b:: with SMTP id g11mr945475pgu.382.1600886972338;
-        Wed, 23 Sep 2020 11:49:32 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:4e0:6542:959:8931:2e8c? ([2601:646:9200:4e0:6542:959:8931:2e8c])
-        by smtp.gmail.com with ESMTPSA id ml20sm244774pjb.20.2020.09.23.11.49.31
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 23 Sep 2020 11:49:31 -0700 (PDT)
-Subject: Re: [oe] dunfell: zbar linking broken
-To: Marek Belisko <marek.belisko@gmail.com>,
- OpenEmbedded Development mailing list
- <openembedded-devel@lists.openembedded.org>
-References: <CAAfyv36V01GDPqHp614ti5E4UBuVPSz=cUj98HwaThUDAYsh+w@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <02f068f0-b7c5-33d7-4689-e29ba8f26058@gmail.com>
-Date: Wed, 23 Sep 2020 11:49:30 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.2.2
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=4DEWeWb0nNwfpsQUGj6hxsZFxwC/eD91cUuTehPvHaU=;
+        b=AC2SqvSoFlaArsUuRTyWMVbKnS7O93xL2V5KZMxF53FxAg0vQ+QbMEpq3R/AML7A2s
+         e1oKCU6NAhDj2cSxK+443StmcHi2iHD7jGHqsP01g0l9ofQbXNeK+sCAOSGnEpFJDGEt
+         zJL8SHnnUxnnz0P3fWObrHtcMOtvmq4EklVHoLVtPH3JLOKzfP5XOzfgeT8pIkacFV8L
+         oR2z/4h2HtwDc3STIlFKtZyGyZJzqv7dS645dWYeJe/Z5nBTnpBpUTxWbz357MQHO0OM
+         1/UkI5Qfdin5LnxT8XnM+YM4BIasiYRKlFPLBOdqdlTPvD8NK9pbRUsBSLLbDKbaiE1g
+         AppQ==
+X-Gm-Message-State: AOAM531LYrWWAHrYbSELFft1gJYCEyuhIBlWCUVlS9Say8NJA92Sc3Xy
+	dwFTNJgulh5PWZp3ehGBdRxz5IKxkFKh2DNGrZU=
+X-Google-Smtp-Source: ABdhPJzCE2IgB3GwTi74fDC5Xy1G7m5aitjawVY8G8tbp+2bGo4y7zE+LQVZW696LVU6aCnljhTqURKNqKFb5cgaKeM=
+X-Received: by 2002:a17:906:4b18:: with SMTP id y24mr1013125eju.471.1600887654716;
+ Wed, 23 Sep 2020 12:00:54 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAAfyv36V01GDPqHp614ti5E4UBuVPSz=cUj98HwaThUDAYsh+w@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+References: <20200923181124.1029-1-liu.ming50@gmail.com>
+In-Reply-To: <20200923181124.1029-1-liu.ming50@gmail.com>
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+Date: Wed, 23 Sep 2020 21:00:43 +0200
+Message-ID: <CA+chaQdUcX+4f=RNM+LPWaSF_ZPqo3VCDLwoRVMk5yrhHaKtZw@mail.gmail.com>
+Subject: Re: [oe] [meta-browser] [PATCH] chromium: change to python3
+To: Ming Liu <liu.ming50@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000fc1cc105afffb30f"
 
+--000000000000fc1cc105afffb30f
+Content-Type: text/plain; charset="UTF-8"
 
+https://bugs.chromium.org/p/chromium/issues/detail?id=942720
 
-On 9/23/20 1:39 AM, Marek Belisko wrote:
-> Hi,
-> 
-> adding zbar as dependency of some binary fails to link with this error:
-> recipe-sysroot/usr/lib/libzbar.so: undefined reference to `dsprintbuf'
-> 
-> when checked zbar code dsprintbuf is a static method and it's not exported.
-> Any ideas?
+is still far from finished.
 
-It seems the function is defined only when DEBUG_EAN is set in compiler 
-cmdline, but uses of this function in not appropriately guarded. So a 
-fix would be to find the use of this function within the code and guard 
-it with DEBUG_EAN as well. As a workaround you can try compiling zbar with
+Using python from host and assuming it's python2 is much worse than
+pythonnative inherit and using meta-python2.
 
-CFLAGS += "-DDEBUG_EAN"
+On Wed, Sep 23, 2020 at 8:11 PM Ming Liu <liu.ming50@gmail.com> wrote:
 
+> From: Ming Liu <liu.ming50@gmail.com>
+>
+> python support has been dropped from OE since dunfell, let's change to
+> python3.
+>
+> Signed-off-by: Ming Liu <liu.ming50@gmail.com>
+> ---
+>  recipes-browser/chromium/chromium.inc | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/recipes-browser/chromium/chromium.inc
+> b/recipes-browser/chromium/chromium.inc
+> index b351114..0d1a761 100644
+> --- a/recipes-browser/chromium/chromium.inc
+> +++ b/recipes-browser/chromium/chromium.inc
+> @@ -18,7 +18,7 @@ TOOLCHAIN = "clang"
+>  # to build the native recipes (e.g. GN) with clang too.
+>  TOOLCHAIN_class-native = "clang"
+>
+> -inherit pythonnative setuptools
+> +inherit python3native setuptools3
+>
+>  # Chromium itself is licensed under the 3-clause BSD license. However, it
+>  # depends upon several other projects whose copyright files are listed in
+> --
+> 2.28.0
+>
+>
 > 
-> Thanks,
-> 
-> marek
-> 
-> 
-> 
-> 
-> 
+>
+>
+
+--000000000000fc1cc105afffb30f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><a href=3D"https://bugs.chromium.org/p/chromium/issues/det=
+ail?id=3D942720">https://bugs.chromium.org/p/chromium/issues/detail?id=3D94=
+2720</a><br><div><br></div><div>is still far from finished.</div><div><br><=
+/div><div>Using python from host and assuming it&#39;s python2 is much wors=
+e than pythonnative inherit and using meta-python2.</div></div><br><div cla=
+ss=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Sep 23, 20=
+20 at 8:11 PM Ming Liu &lt;<a href=3D"mailto:liu.ming50@gmail.com">liu.ming=
+50@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
+g-left:1ex">From: Ming Liu &lt;<a href=3D"mailto:liu.ming50@gmail.com" targ=
+et=3D"_blank">liu.ming50@gmail.com</a>&gt;<br>
+<br>
+python support has been dropped from OE since dunfell, let&#39;s change to=
+<br>
+python3.<br>
+<br>
+Signed-off-by: Ming Liu &lt;<a href=3D"mailto:liu.ming50@gmail.com" target=
+=
+=3D"_blank">liu.ming50@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0recipes-browser/chromium/chromium.inc | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chrom=
+ium/chromium.inc<br>
+index b351114..0d1a761 100644<br>
+--- a/recipes-browser/chromium/chromium.inc<br>
++++ b/recipes-browser/chromium/chromium.inc<br>
+@@ -18,7 +18,7 @@ TOOLCHAIN =3D &quot;clang&quot;<br>
+=C2=A0# to build the native recipes (e.g. GN) with clang too.<br>
+=C2=A0TOOLCHAIN_class-native =3D &quot;clang&quot;<br>
+<br>
+-inherit pythonnative setuptools<br>
++inherit python3native setuptools3<br>
+<br>
+=C2=A0# Chromium itself is licensed under the 3-clause BSD license. Howeve=
+r, it<br>
+=C2=A0# depends upon several other projects whose copyright files are list=
+ed in<br>
+-- <br>
+2.28.0<br>
+<br>
+<br>
+<br>
+<br>
+</blockquote></div>
+
+--000000000000fc1cc105afffb30f--
