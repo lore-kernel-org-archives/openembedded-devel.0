@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.8107.1600847926881620267
+ by mx.groups.io with SMTP id smtpd.web11.8289.1600847928389791652
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2020 00:58:47 -0700
+ Wed, 23 Sep 2020 00:58:48 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=58518 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kKzfl-0005D6-9s; Wed, 23 Sep 2020 10:58:43 +0300
+	id 1kKzfo-0005D6-Pd; Wed, 23 Sep 2020 10:58:47 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/7] python3-paho-mqtt: Upgrade 1.5.0 -> 1.5.1
-Date: Wed, 23 Sep 2020 10:58:24 +0300
-Message-Id: <20200923075830.30859-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/7] python3-sentry-sdk: Upgrade 0.17.6 -> 0.17.7
+Date: Wed, 23 Sep 2020 10:58:25 +0300
+Message-Id: <20200923075830.30859-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200923075830.30859-1-leon.anavi@konsulko.com>
+References: <20200923075830.30859-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,38 +30,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.5.1:
+Upgrade to release 0.17.7:
 
-- Exceptions that occur in callbacks are no longer suppressed by
-  default. They can optionally be suppressed by setting
-  `client.suppress_exceptions = True`.
-- Fix PUBREL remaining length of > 2 not being accepted for MQTT
-  v5 message flows.
+- Internal: Change data category for transaction envelopes.
+- Fix a bug under Celery 4.2+ that may have caused disjoint
+  traces or missing transactions.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-paho-mqtt_1.5.0.bb => python3-paho-mqtt_1.5.1.bb} | 4 ++--
+ ...hon3-sentry-sdk_0.17.6.bb => python3-sentry-sdk_0.17.7.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-paho-mqtt_1.5.0.bb => python3-paho-mqtt_1.5.1.bb} (80%)
+ rename meta-python/recipes-devtools/python/{python3-sentry-sdk_0.17.6.bb => python3-sentry-sdk_0.17.7.bb} (72%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-paho-mqtt_1.5.0.bb b/meta-python/recipes-devtools/python/python3-paho-mqtt_1.5.1.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-paho-mqtt_1.5.0.bb
-rename to meta-python/recipes-devtools/python/python3-paho-mqtt_1.5.1.bb
-index 8bf80e601a..d93bc884ee 100644
---- a/meta-python/recipes-devtools/python/python3-paho-mqtt_1.5.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-paho-mqtt_1.5.1.bb
-@@ -8,8 +8,8 @@ SRCNAME = "paho-mqtt"
+diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.6.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.7.bb
+similarity index 72%
+rename from meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.6.bb
+rename to meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.7.bb
+index 5f566a8264..27f68fcb21 100644
+--- a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.6.bb
++++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.17.7.bb
+@@ -5,8 +5,8 @@ HOMEPAGE = "https://github.com/getsentry/sentry-python"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
  
+-SRC_URI[md5sum] = "f48cccd128b10a9a4d19db89d1a74a58"
+-SRC_URI[sha256sum] = "1a086486ff9da15791f294f6e9915eb3747d161ef64dee2d038a4d0b4a369b24"
++SRC_URI[md5sum] = "eda3a8d9aae8459ef6efe540293a9ca8"
++SRC_URI[sha256sum] = "a698993f3abbe06e88e8a3c8b61c8a79c12f62e503f1a23eda30c3921f0525a9"
+ 
+ PYPI_PACKAGE = "sentry-sdk"
  inherit pypi setuptools3
- 
--SRC_URI[md5sum] = "45e80d9b8066a8d0ba1ecfffe271bd3d"
--SRC_URI[sha256sum] = "e3d286198baaea195c8b3bc221941d25a3ab0e1507fc1779bdb7473806394be4"
-+SRC_URI[md5sum] = "32f93c0ed92c7439f7a715ed258fd35d"
-+SRC_URI[sha256sum] = "9feb068e822be7b3a116324e01fb6028eb1d66412bf98595ae72698965cb1cae"
- 
- DEPENDS += "${PYTHON_PN}-pytest-runner-native"
- 
 -- 
 2.17.1
 
