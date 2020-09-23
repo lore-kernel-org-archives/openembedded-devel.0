@@ -1,25 +1,25 @@
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web11.8504.1600848884481550054
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web10.8327.1600849045740326426
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2020 01:14:44 -0700
+ Wed, 23 Sep 2020 01:17:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: hongxu.jia@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 08N8Ef4e025583
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: hongxu.jia@windriver.com)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 08N8GlbY006467
 	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
-	Wed, 23 Sep 2020 01:14:41 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.40) with Microsoft SMTP Server id 14.3.487.0; Wed, 23 Sep 2020
- 01:14:40 -0700
+	Wed, 23 Sep 2020 01:16:58 -0700
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
+ (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Wed, 23 Sep 2020
+ 01:16:23 -0700
 From: "hongxu" <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>, <trevor.gamblin@windriver.com>
 CC: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH V2] python3-docopt: add version 0.6.2
-Date: Wed, 23 Sep 2020 16:14:38 +0800
-Message-ID: <20200923081438.32716-1-hongxu.jia@windriver.com>
+Subject: [meta-python][PATCH V3] python3-docopt: add version 0.6.2
+Date: Wed, 23 Sep 2020 16:16:21 +0800
+Message-ID: <20200923081621.32822-1-hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.18.2
-In-Reply-To: <16375A080EFE1B42.13575@lists.openembedded.org>
-References: <16375A080EFE1B42.13575@lists.openembedded.org>
+In-Reply-To: <16375B943F866857.15058@lists.openembedded.org>
+References: <16375B943F866857.15058@lists.openembedded.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 
@@ -30,10 +30,6 @@ x86_64-wrlinuxsdk-linux/usr/lib/python3.8/site-packages/pykwalify/cli.py", line 
     from docopt import docopt
 ModuleNotFoundError: No module named 'docopt'
 ...
-
-(LOCAL REV: NOT UPSTREAM) -- Sent to oe-dev on 20200923
-
-Issue: LINUXEXEC-10213
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
