@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.8110.1600847935615576848
+ by mx.groups.io with SMTP id smtpd.web10.8083.1600847937819884324
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2020 00:58:56 -0700
+ Wed, 23 Sep 2020 00:58:58 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=58518 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kKzfv-0005D6-SY; Wed, 23 Sep 2020 10:58:54 +0300
+	id 1kKzfy-0005D6-EA; Wed, 23 Sep 2020 10:58:56 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/7] python3-zipp: Upgrade 3.1.0 -> 3.2.0
-Date: Wed, 23 Sep 2020 10:58:28 +0300
-Message-Id: <20200923075830.30859-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 6/7] python3-xlsxwriter: Upgrade 1.3.4 -> 1.3.5
+Date: Wed, 23 Sep 2020 10:58:29 +0300
+Message-Id: <20200923075830.30859-6-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200923075830.30859-1-leon.anavi@konsulko.com>
 References: <20200923075830.30859-1-leon.anavi@konsulko.com>
@@ -30,38 +30,38 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.2.0:
+Upgrade to release 1.3.5:
 
-- Mutate the passed ZipFile object type instead of making a copy.
-  Prevents issues when both the local copy and the caller's copy
-  attempt to close the same file handle.
-- Path._next now honors subclasses.
-- Path.is_file() now returns False for non-existent names.
+- Fixed issue where relative url links in images didn't work.
+- Added ``use_zip64`` as a constructor option.
+- Added check, and warning, for worksheet tables with no data row.
+  Either with or without a header row.
+- Add a warning when the string length in
+  :func:`write_rich_string()` exceeds Excel's limit.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-zipp_3.1.0.bb => python3-zipp_3.2.0.bb}   | 4 ++--
+ ...ython3-xlsxwriter_1.3.4.bb => python3-xlsxwriter_1.3.5.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-zipp_3.1.0.bb => python3-zipp_3.2.0.bb} (77%)
+ rename meta-python/recipes-devtools/python/{python3-xlsxwriter_1.3.4.bb => python3-xlsxwriter_1.3.5.bb} (68%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-zipp_3.1.0.bb b/meta-python/recipes-devtools/python/python3-zipp_3.2.0.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-zipp_3.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-zipp_3.2.0.bb
-index a29e2981f2..59d71500d5 100644
---- a/meta-python/recipes-devtools/python/python3-zipp_3.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-zipp_3.2.0.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/jaraco/zipp"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=7a7126e068206290f3fe9f8d6c713ea6"
+diff --git a/meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.4.bb b/meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.5.bb
+similarity index 68%
+rename from meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.4.bb
+rename to meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.5.bb
+index 61a9c69b51..b4b0e2eb2e 100644
+--- a/meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.4.bb
++++ b/meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.5.bb
+@@ -8,7 +8,7 @@ inherit pypi setuptools3
  
--SRC_URI[md5sum] = "199da7385f080ec45da6c1942e2b5996"
--SRC_URI[sha256sum] = "c599e4d75c98f6798c509911d08a22e6c021d074469042177c8c86fb92eefd96"
-+SRC_URI[md5sum] = "321a0dfa1080d58e5de0800a26565452"
-+SRC_URI[sha256sum] = "b52f22895f4cfce194bc8172f3819ee8de7540aa6d873535a8668b730b8b411f"
+ PYPI_PACKAGE = "XlsxWriter"
  
- DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+-SRC_URI[md5sum] = "7ea11261cbd5c763d106eea64471cf2f"
+-SRC_URI[sha256sum] = "d804881beb944c4fd73deed0ef2666b84437f30d72bdc1b3a6f0230458facbfd"
++SRC_URI[md5sum] = "0b65976905bf3841bc6cae3f8c47295b"
++SRC_URI[sha256sum] = "de54547f3aa1a611453e32a8ae46380edb5556e823c6803f8673b4b770e50b3b"
  
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
