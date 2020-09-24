@@ -1,54 +1,50 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web10.12796.1600940196169322255
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by mx.groups.io with SMTP id smtpd.web10.13704.1600943738610415497
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Sep 2020 02:36:36 -0700
+ Thu, 24 Sep 2020 03:35:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: kai.kang@windriver.com)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 08O9aEmD024901
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Sep 2020 02:36:24 -0700
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
- 14.3.487.0; Thu, 24 Sep 2020 02:35:46 -0700
-From: "kai" <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH] crda: rdepends on wireless-regdb-static
-Date: Thu, 24 Sep 2020 17:35:39 +0800
-Message-ID: <20200924093539.23693-1-kai.kang@windriver.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: enedino.org, ip: 13.77.154.182, mailfrom: alejandro@enedino.org)
+Received: from ALSAMON-X.corp.microsoft.com (unknown [131.107.159.250])
+	by linux.microsoft.com (Postfix) with ESMTPSA id 963A920B7179
+	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Sep 2020 03:35:37 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 963A920B7179
+From: "Alejandro Hernandez Samaniego" <alejandro@enedino.org>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH v2] gedit: Add gsettings-desktop-schemas to RDEPENDS
+Date: Thu, 24 Sep 2020 03:35:32 -0700
+Message-Id: <20200924103532.14677-1-alejandro@enedino.org>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain
 
-From: Robert Yang <liezhi.yang@windriver.com>
+gedit isn't able to start at all, showing the following error:
 
-The wireless-regdb has been moved to oe-core. According the commit
-message:
+(org.gnome.gedit:32150): GLib-GIO-ERROR **: 04:29:21.795: Settings schema \
+'org.gnome.desktop.lockdown' is not installed
+Trace/breakpoint trap
 
-wireless-regdb-static should be used with kernel >= 4.15.
-wireless-regdb can be used with older kernels and is mostly
-irrelevant here, but keeping it in meta-networking would
-create needless recipe duplication.
+gedit tries to look for the lockdown schema which is part of the
+gsettings-desktop-schemas package.
 
-it should replace runtime dependency wireless-regdb with
-wireless-regdb-static.
+Add gsettings-desktop-schemas to RDEPENDS_gedit so when gedit is installed it
+finds the required files in the rootfs.
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Alejandro Hernandez Samaniego <alejandro@enedino.org>
 ---
- meta-networking/recipes-connectivity/crda/crda_3.18.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-gnome/recipes-gnome/gedit/gedit_3.36.2.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-index b380eaf94..e59d2f437 100644
---- a/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-+++ b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-@@ -35,4 +35,4 @@ do_install() {
-     oe_runmake SBINDIR=${sbindir}/ install
- }
+diff --git a/meta-gnome/recipes-gnome/gedit/gedit_3.36.2.bb b/meta-gnome/recipes-gnome/gedit/gedit_3.36.2.bb
+index afd9146ac..4da44b605 100644
+--- a/meta-gnome/recipes-gnome/gedit/gedit_3.36.2.bb
++++ b/meta-gnome/recipes-gnome/gedit/gedit_3.36.2.bb
+@@ -16,7 +16,8 @@ DEPENDS = " \
+     tepl \
+ "
  
--RDEPENDS_${PN} = "udev wireless-regdb"
-+RDEPENDS_${PN} = "udev wireless-regdb-static"
++RDEPENDS_${PN} += "gsettings-desktop-schemas"
++
+ inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc vala gettext features_check upstream-version-is-even mime-xdg
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
 -- 
 2.17.1
 
