@@ -1,17 +1,17 @@
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.73])
- by mx.groups.io with SMTP id smtpd.web12.26032.1600976612800649653
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.56])
+ by mx.groups.io with SMTP id smtpd.web10.26204.1600976640241539939
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Sep 2020 12:43:33 -0700
+ Thu, 24 Sep 2020 12:44:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=HfNgSJcc;
- spf=pass (domain: windriver.com, ip: 40.107.223.73, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=OY5rZBd/;
+ spf=pass (domain: windriver.com, ip: 40.107.93.56, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=iFtmMPUZnTTZehxx2uw7lfrfpKsPkauMZyky/+n+SbQU9jv17k7lH3EEy9/GBJ31W+CprwmwGte9EpkXG8EhT5AeOMVVMZMwtFjt1kgwLzFLqykD8fxP/k2GkLBnzhDfPx3OEdUJREp35RGC8wJXGcfQEcXNoUn8Vr/wIVAVflw1OVd9y62CdVqAx0mpIsFtG1ZMzazAyApe7UImY5vAzOCbGeN6HmXSFkautBb6+HsVxddv3aep8CY8tS6o5gimCNkYh5qFgArEr+oBUeWRbuVtrdlnAz9hzz+QtFkEzyNadRHC96YCmRZWfH9Ld7wFW7VKbqKCtM3Cxq+Dvj+eEw==
+ b=FnoHAkTijhDQlTfx0Ji2SSB9+jkoreCT1B8QSq5ftuZuITk370QGNr6f+AWutxxvW+6uO4t+sehlpYOkV+p4OAXWoa9A/JNwWLi5cWE7TF+9WLNa21UxA7JcuIZVU5MeIm4KkQp6EPaXbLpDVlvRtFjffpCp8mH5Hv+35BpM7TUJTWDvyi+r6oQDffsKd8kDi/jmAAOgDS5LzqW6APKLYXTGh3KvAmttwigCnh6SzU3xeenZB5tJ4C1w2HfAkVTvUqq7wKbERk+YMwN2Iskw1Ei31nJrvJef6v2OG2YZCJtcLghOtAdQbdZoEUJUWUBX4AbWONF7d3At6hhse4jqeA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aaovujJAm7oh3sX5IeFufI1WqEUyDlzeKs0MWtdI05g=;
- b=hgictoTuRk/QQPMLfKZx7KgfbJLF4M0BTdAcwQGpO89LRSkCzGHYXL7ppGNdxGhJFWr9i1p8Q1CzS8ASaay2nGKgtkbppnwklsTFIQaDyS588yuKOJb5faEa2cf+Oxtd2ir1UQ4tcb0Ead1kYkw0Wi/bIlNwjjl/oGNuTK7nHd5+WJ12FRLhTk7509seyjk9a8bk5OesDEqC7Tpdm5yeiY7aLz3e9SfCkdHhQS9tiEB2fSl5sLDpZqbfBTaW5ynyVc0dlGz6SZvBRPhHvPyGbiFbCHFxHhmq9OsbClQKLibp3VUgJQ5+hqX4N7SWBrO4aU45xz4lGZ4z6/Aj117GFQ==
+ bh=+14piqq7QMPrSbVhxNmHZb2h5TvTNOLbbEVXovWEcac=;
+ b=EfJJ7NIKUeWCQBS4ZykELM4rx3wjVVm7okSZuJqAhHEGf+wmEls0xWMGbEsLJEHOfXSa3O+Pq5/1qxIAtWW0qgr6L0lRGAd1FCl+p2jCTEsC4mFshdSxMXidfqNCv96Qn0/Rv1+mA3KSV22KCu2oBX7eZNzdhi/uPOHVnhdcpnA0dGHx152t2k5cpaEeT4vb5TBzqw0nn6cl7WN9UOGkRIsqjLy6bkuwOX4S5j9M1xFlJpzu5fDrkNUC4oAm8QGir8nmRUc7qNnG3100SKtClWsTeDgbA8p0egDfO5MdkbSXjFS+coqXHDRRt0pm0PAWssJZscuY52R/bkMLikfakQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,99 +19,111 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aaovujJAm7oh3sX5IeFufI1WqEUyDlzeKs0MWtdI05g=;
- b=HfNgSJcc5TKvPK/Bu52cmQ4byWTA5jKbImPERRBO9sUBgF7UUlFTZXo96r9qm9T8Pf8dmZJldGCppCcO0kkCVgg2yHAy90wCEc3e2r4/Boj8RPtlwQ/FdgiiyI2xOzvHBc58jY+0FBg3Tk24W5Z1YKhbIIlULcOw0vqcNkc+imE=
+ bh=+14piqq7QMPrSbVhxNmHZb2h5TvTNOLbbEVXovWEcac=;
+ b=OY5rZBd/LpXfeY0wpfzD755ccenxfn9c4s68UZn/OBj46GDJxq0W94bfLSauJuHQrzenwlZ2lOOzzXOQUEwUn0Zopo7k6wzR3/jWRaxxnJoNaiN+AtR5ndSXK1VUESqqifpZIZqOzxIlAh47GgLLlFdVJaJHQgeiryh3hriYscE=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB2839.namprd11.prod.outlook.com (2603:10b6:a02:c8::33) with
+ by BYAPR11MB3559.namprd11.prod.outlook.com (2603:10b6:a03:f7::12) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3391.15; Thu, 24 Sep
- 2020 19:43:28 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3391.19; Thu, 24 Sep
+ 2020 19:43:58 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::50e6:fd64:b821:78e8%7]) with mapi id 15.20.3391.026; Thu, 24 Sep 2020
- 19:43:28 +0000
-Subject: Re: [meta-python][PATCH] python3-dateutil/python3-pykwalify: add nativesdk support
+ 19:43:58 +0000
+Subject: Re: [meta-python][PATCH] python3-docopt: add version 0.6.2
 To: Hongxu Jia <hongxu.jia@windriver.com>, raj.khem@gmail.com
 Cc: openembedded-devel@lists.openembedded.org
-References: <20200923071214.39852-1-hongxu.jia@windriver.com>
+References: <20200923074531.23290-1-hongxu.jia@windriver.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <99be805b-35ee-830d-3c1a-30448c8528ae@windriver.com>
-Date: Thu, 24 Sep 2020 15:43:24 -0400
+Message-ID: <e0737100-1b1a-d619-d444-466d056d3bc2@windriver.com>
+Date: Thu, 24 Sep 2020 15:43:54 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
-In-Reply-To: <20200923071214.39852-1-hongxu.jia@windriver.com>
-X-ClientProxiedBy: YT1PR01CA0016.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::29)
+In-Reply-To: <20200923074531.23290-1-hongxu.jia@windriver.com>
+X-ClientProxiedBy: YT1PR01CA0009.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::22)
  To BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0016.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3412.21 via Frontend Transport; Thu, 24 Sep 2020 19:43:27 +0000
+Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0009.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3412.20 via Frontend Transport; Thu, 24 Sep 2020 19:43:57 +0000
 X-Originating-IP: [174.115.236.231]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 1476a86d-5ab6-4684-b7bb-08d860c21b98
-X-MS-TrafficTypeDiagnostic: BYAPR11MB2839:
+X-MS-Office365-Filtering-Correlation-Id: d56bead5-2b8a-4581-e3a8-08d860c22dc6
+X-MS-TrafficTypeDiagnostic: BYAPR11MB3559:
 X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB2839EB74F46981CBCC825CE39F390@BYAPR11MB2839.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1824;
+	<BYAPR11MB3559D930DABEB83A7AB0ABAE9F390@BYAPR11MB3559.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:335;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	OXiBacU+5XOhDanFnVzB6VeVhkkqxVIZ0MI5yxJoDQNRqW8PoXaQoEwiAlUA8JMpY73A6BC+Ni8+1EG8OL4/LBnKxzOAmf1vxFaFijMgN/ZdPTws+GUMfyhwCcl4whfSgNt9jRUdrIi4xXhA+u9vDw+VXcX1fCVWz2TQJLtWtUgV0kt03D739gi3YeA4IU3WXODZ02fotH6gSjiO2seQOKMYxyw3YdjpI6VkPoIaDDjMtE0zsPZqrWtnj2ZvrWOo+23bmQ6CnZyT/BG22iWKhHMp4wUrpugFm9svtQB9/0iZbiY5hNWOfypWN/ffNBxThbuJWPvOKuuWNyqyJV0DurMOIxU2Izgax48Mnm9jM5hScyHScHS036boFfvbwOas
+	GuXqQZLRAwwaZzQpKd0ce1+ezfJHcOEDQSYo99U1vNwFnmlYNrTKCcav8bTAd489ozgaaAT67sHmkTDk4t42EDsZNCtDs+zV8KM8/TUdrWzZ87sX60Cbp9CzxJqpZ+KmYU7zY1ldACqe+a/kxCeVSF/csMN3fUSTVngNVLT5ncwmAbk9Mo4r8DFvlGyMyB6gtQRK5XCpWhUv66wo22gbaH0TurLjNdzDL7SHTOXAwrahmw3odZj7swW4Ad99/RQ2TpoTcgKEQlUmiQfGuiV9+qgFjVyVVH12zHnF01TZmNRBkTsX4WhAWNjM5YrABCy0yOy5TAiH7JZMQHRDX/x+jcf+W+VH5TItyU8OhGKPPssDPskxzIdP2vGRg4CJwCFk52h1S8tUIYgIsxg9LAHBtwMESne1dNhCzNiOGg6srJcJ7SUmtRDokUwOZosbemIIAd7HaAKAO7sScX9E4nYy04yiP1DX2Xrm1GVDvta12POeLtW2F5jsRjZEbhXxaGwh
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(366004)(376002)(346002)(39850400004)(396003)(16576012)(83380400001)(2616005)(52116002)(66946007)(478600001)(26005)(53546011)(6486002)(316002)(44832011)(36756003)(16526019)(4326008)(186003)(8676002)(66476007)(6666004)(956004)(66556008)(86362001)(8936002)(31696002)(2906002)(5660300002)(31686004)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(136003)(346002)(376002)(366004)(396003)(66476007)(26005)(52116002)(53546011)(36756003)(8676002)(44832011)(6666004)(86362001)(316002)(2906002)(66556008)(8936002)(4326008)(31696002)(31686004)(66946007)(956004)(6486002)(5660300002)(186003)(478600001)(16576012)(2616005)(16526019)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	LYjjAv+L4geBTZtPXKimYiwA5N1gSYQGnLQ8w0atOnzoFGu3Hf5DFCkuOiAfazemJ06BZq5tKvDX54TtVQweC13UqQKn0gNyTgOzW++MLlCKibBUvJh9WMAPC+OGeP0yGXfWFRp4hL0HuVjhnKZQYnZPo23/0wAPtJ7q8s0x8EiEt+XOuuMgV4hjaq1nl9BRnb3z5cZTdYTZnewnZcE2BotWuwyKmM6WVRLLmvuwgdBritj593++HtmroYSgDC56N0IEzI4Dcl5ttahnbV86nOm62Nwbi8dBGXorHvmRpoJG5ZM+LqP/kMwolPSH2YguGYF9ruOvcHcaq3txEfM6TTWPo9tTpPEqIMQL6WqUTNspXv/dTR4KnsnktnbaYdMv93qrJ4H3Nc58hbBotULI62PZBw0BJl+wz7ZAI5OdCg6fyW0WOK28c5S6xy7JujnoUVWJliuy3Qk+2bpJehtz5Aa7E84er61jiGvFWf5cgPUfkQ5ZDGTv9E3B5R3dNZhUzJ7bVWoxnrwFbVzyb4nh4Cm+FWPWL6QXcLJ9ls9Z+1T3kkXM+o8vnyWJS1wQ9mYsSsROgGf6ceMO2UTq9uGVSWD+crOKgINDaxnVXsI1JsP6di+bfRYuuS4T0oa1qBvKMJNszvYKkDNFzQaAltii/g==
+	XUlmsxKKExaQWynPLNOv09PmSXiyNy2OdSwZRu1FpuxJurZzQqGncP4u18x+shJAlyCPRE9AcNbFjI5+IXJRoeIYADSC/Tt1UmN6mh7a3e1DTadWhiBhzt2pAW4493EB3Pzlb8kT6CPwR9SQM/QOHF0BRgstHcgBwihQu7twz7SzsEDjDMxLCxPHsu+2xMU/1QdrfF6FQWktZU4eDJqRBJh4r5dzvfAB1v5xGyXFuxUYPEL0bjM/Uk7k6iVDMiVK3ndpFjN5TT2ucG3/ym7t96BGUys7IoGLF5sORPF7/u1nmoWbqTKtBfvCF9qHVbgotBpQ3gauWB06pcKhzelyU37yw4OHVHT8AG98ubqFQTwQVauCR/+AUjmouEHqQFUA7v2jMvtpn4rBVWYNzJiJCI3L++EPasGRMXkKPIzQ2HuyCBwdYUogLkIuv6/ilDM5EF3TyoEO1oJ93zIJCGW/KdTg64eY0iJfJzdX1t62/DInwyo6s7Tz596X2YZFtdvn6LXTjLJnhRwZxuABezIsRysSEpdTbH5FC9LSXsH8jmgFHTuOhllL/UH+XOg61XLkP+WH9ttkT4DNQOLFUULJg248KWfw5E94g3B55PcWIVcga/50tluYYhN7LsQ/elggthd+tZF2ZomeY/IWlUr+zw==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1476a86d-5ab6-4684-b7bb-08d860c21b98
+X-MS-Exchange-CrossTenant-Network-Message-Id: d56bead5-2b8a-4581-e3a8-08d860c22dc6
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2020 19:43:28.1257
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2020 19:43:58.3464
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: oeD0B3GffFoB5/UX3Sm8EbzoJZH8629p5Oh3X2f7oCyRa1Ix/NrNFPnpG8WdsMhPUHXL1qguJU2PuV1lPWyTeFuCt/x0aHmM48lGjpvXn6U=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2839
+X-MS-Exchange-CrossTenant-UserPrincipalName: Sgs+gqvpZbdUhtu3rJIdI4ypbaKmAG1EvOGKVA9GFcMhOg7K5Zkfb5MXe0JVMG+V+lWtoN+5l/kd+EGK3BJ4I19SQhDXyhz8L49nUDA9S40=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3559
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
-On 9/23/20 3:12 AM, Hongxu Jia wrote:
-> Call pykwalify module in SDK
+On 9/23/20 3:45 AM, Hongxu Jia wrote:
+> It is required by python3-pykwalify cli
+> ...
+> $ pykwalify -h
+> x86_64-wrlinuxsdk-linux/usr/lib/python3.8/site-packages/pykwalify/cli.py", line 11, in <module>
+>      from docopt import docopt
+> ModuleNotFoundError: No module named 'docopt'
+> ...
 >
 > Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-
-It'd be good to split these out in the future. OK for this time.
-
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-
 > ---
->   meta-python/recipes-devtools/python/python3-dateutil_2.8.1.bb  | 2 +-
->   meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb | 2 +-
->   2 files changed, 2 insertions(+), 2 deletions(-)
+>   .../recipes-devtools/python/python3-docopt_0.6.2.bb   | 11 +++++++++++
+>   .../python/python3-pykwalify_1.7.0.bb                 |  1 +
+>   2 files changed, 12 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-docopt_0.6.2.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-dateutil_2.8.1.bb b/meta-python/recipes-devtools/python/python3-dateutil_2.8.1.bb
-> index fb7db162c..5326924e6 100644
-> --- a/meta-python/recipes-devtools/python/python3-dateutil_2.8.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-dateutil_2.8.1.bb
-> @@ -22,4 +22,4 @@ RDEPENDS_${PN} = "\
->       ${PYTHON_PN}-stringold \
->   "
->   
-> -BBCLASSEXTEND = "native"
+> diff --git a/meta-python/recipes-devtools/python/python3-docopt_0.6.2.bb b/meta-python/recipes-devtools/python/python3-docopt_0.6.2.bb
+> new file mode 100644
+> index 000000000..a2432068c
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-docopt_0.6.2.bb
+> @@ -0,0 +1,11 @@
+> +SUMMARY = "Pythonic argument parser, that will make you smile"
+> +HOMEPAGE = "http://docopt.org/"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=09b77fb74986791a3d4a0e746a37d88f"
+> +
+> +inherit setuptools3 pypi
+> +
+> +SRC_URI[md5sum] = "4bc74561b37fad5d3e7d037f82a4c3b1"
+> +SRC_URI[sha256sum] = "49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491"
+> +
 > +BBCLASSEXTEND = "native nativesdk"
 > diff --git a/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb b/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
-> index 5d029bd76..4440723d3 100644
+> index 4440723d3..7a30f1f67 100644
 > --- a/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
 > +++ b/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
-> @@ -16,4 +16,4 @@ RDEPENDS_${PN} = "\
+> @@ -12,6 +12,7 @@ inherit setuptools3 pypi
+>   unset _PYTHON_SYSCONFIGDATA_NAME
+>   
+>   RDEPENDS_${PN} = "\
+> +    ${PYTHON_PN}-docopt \
+>       ${PYTHON_PN}-dateutil \
 >       ${PYTHON_PN}-pyyaml \
 >   "
->   
-> -BBCLASSEXTEND = "native"
-> +BBCLASSEXTEND = "native nativesdk"
