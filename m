@@ -1,76 +1,83 @@
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com [209.85.222.196])
- by mx.groups.io with SMTP id smtpd.web12.26351.1600977443233357013
+Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com [209.85.210.193])
+ by mx.groups.io with SMTP id smtpd.web10.382.1600983394214771136
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Sep 2020 12:57:23 -0700
+ Thu, 24 Sep 2020 14:36:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=a74QIieS;
- spf=pass (domain: gmail.com, ip: 209.85.222.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f196.google.com with SMTP id g72so676561qke.8
-        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Sep 2020 12:57:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=LnUX4a9y;
+ spf=pass (domain: gmail.com, ip: 209.85.210.193, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pf1-f193.google.com with SMTP id z19so796054pfn.8
+        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Sep 2020 14:36:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=xQH4hANEe6WMScKEcqXZ0zxzfQIDlbh6Qh9CaIiaLCU=;
-        b=a74QIieSdobrk154qzOF5Qv9CZJJkkyh4p9GznPiy3d1EkwjAFvANntjZ5l01TCOVL
-         oDmCD343AMdWJ54NZckNRVrWqG7uMAAgHbMjcWtV3o325YD2G5SYPht7ZcKqOpbO++aH
-         p0dGSSl7rIFKnaEmGPrA/YvuQV9jl9jImBR0ZgidyPmUjtl1zOWkqru9mGiv1A66qwC3
-         EzW83pqcJUgBWIHdTLxctoIWZntB/L8BYDiRt1QlBVWT2fKyAHjXkV3ZLi2ez3QvTEFo
-         FdzPiriryRaXm8m7xzI2qvxqSLrdr3bDF/ShpVRbtefMGAy7lAiQleBZO1gQXJhWsT39
-         txIg==
+        bh=BIXLFYjBW8Rrh6nVmmH12qMuWGKXk1QFeIuqFz1Z268=;
+        b=LnUX4a9y0HmrF1gLJ2PiEBNuSnk6nOzh4oykf8V5LjJLTdLy2NgG4ickdxlz+YPDgO
+         tq7H0m6tA2I/7maiOlqZSVFvzUx6MPKBtNI8NflVHR9D9uQlsRltG38ROCd6zMFGFhii
+         rYD0HQ8qzUGrRVQDiQHHVtqK4rVWfGSyJbm1EyhKAhPWaD/y/VTTVV4BD//hf1K7rJSl
+         aU0ehHOKZAuHJAqfDqlszJH1hrIbsZ79j8k9+I3rtVlz2rw5eTZWpXjf6TSaTPaWhSeK
+         4qTa9BjhwkiVh1NLx84UKIMoAwckSupKWCsyxMudjHOtzQCXTJDlc8fv17LGXaH4uEbS
+         kuVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=xQH4hANEe6WMScKEcqXZ0zxzfQIDlbh6Qh9CaIiaLCU=;
-        b=NfvY6PcPF3TryFZm1aFuvhlKMNZ03CcawXN6pE5eUC9xOAGIdDkJskMGkCt/E4O80r
-         FB+jnUvY5rocvxZgLXms2VHpJE1nEtVubol906dR4shgTkvHVNFWVuKg/YlXDoDP4Iwk
-         i4idsra4GcZwZNMpa8q4xPo0KcPoNsf7Xz968SrF5fDAVJ8ymP/j99ki/viq3n3L6Sl3
-         zb5XX79BZ47ypJwJX7jJRUC4yp5pDtdvx3uBL37nQzS17+ashIw7bVFaNIupULkLVbwt
-         aTw6NjrDOFkcE4Q26KVA3GTiNvsj5pC9Ab4UiCvjOz5n3aHCWlbDkn9YqQRrz/fTgamU
-         WTHA==
-X-Gm-Message-State: AOAM530G6ihZkJVDuFCeKoKQNcR5MPeQRJaITViKdtlz8UUfMV7vsObl
-	nEZqK04zadjdB+ciaggoShgLxHkf2AxsxQNNv7o=
-X-Google-Smtp-Source: ABdhPJxdkGRIX4YS0lL5qrZlIGCxPisF5veLwAJvJumNqv1gwGPE6OLVElUqC1fDZMkGYuqH1WQuJ4yGbP1FPiGSvrw=
-X-Received: by 2002:a37:c408:: with SMTP id d8mr741666qki.71.1600977442218;
- Thu, 24 Sep 2020 12:57:22 -0700 (PDT)
+        bh=BIXLFYjBW8Rrh6nVmmH12qMuWGKXk1QFeIuqFz1Z268=;
+        b=Bj1HH8MK2/D2TPymoKd4TkInrOxrwQibjdTTKLRRqmLCW6L3IhwaTtt5JYaap/irfN
+         piOZ95EH1LuAOI6FayB4pp73cqqaMhMl/+47F7p2RNUg08ETlH0Rm4JGiLWdvZwM74+V
+         PWA+hnwHzwHq7+mWwMOroeRoyGSJf0rQMrbHw4/VtbxOpOXuDtqWUvPtU7Z8kMrAl8QP
+         v00LzWuvSv7Afp0JaG99r9NEOYnPryadHByVhz/C7oY2MwEk6+o79tE3a+SYfQBoe6U0
+         5rCRrLpDPNxj+oJcFS53W/qzcYGFU3Jyr/AsayjQ1i6mvi5fPYemwX3OUCp+5BbFdlD/
+         wLNg==
+X-Gm-Message-State: AOAM530FL48YEqiNJIhX5yu+DpLFOwusGkDGpf+gr1MNysTTZdjQd3XG
+	wVbIV+MCwyP+y+7kMIm7qFaCwnn66oLag1hnYl0=
+X-Google-Smtp-Source: ABdhPJwAc9GKRSNQQcAzissqfL+lkqscd30wZ1FDVjqNVccumvMq4w3xgtLKcEH+qWz/4tBU3Qq/0a1pMf8F4Y6q750=
+X-Received: by 2002:a17:902:ac96:b029:d2:6394:3a3f with SMTP id
+ h22-20020a170902ac96b02900d263943a3fmr220365plr.60.1600983393592; Thu, 24 Sep
+ 2020 14:36:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200924144749.23149-1-sgaikova@yow-lpggp3.wrs.com>
-In-Reply-To: <20200924144749.23149-1-sgaikova@yow-lpggp3.wrs.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 24 Sep 2020 12:56:56 -0700
-Message-ID: <CAMKF1sr1eeJuFYbUpovsW+sH8+6a4jW8FucqSibi=QO+nDxwFQ@mail.gmail.com>
-Subject: Re: [meta-browser][PATCH] conf/layer.conf: Add meta-python2 to LAYERDEPENDS
-To: Stacy Gaikovaia <sgaikova@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Maksim Sisov <msisov@igalia.com>, Robert Yang <liezhi.yang@windriver.com>, 
-	Stacy Gaikovaia <sgaikova@yow-lpggp3.wrs.com>
+References: <20200924093539.23693-1-kai.kang@windriver.com>
+In-Reply-To: <20200924093539.23693-1-kai.kang@windriver.com>
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Date: Thu, 24 Sep 2020 23:36:21 +0200
+Message-ID: <CALbNGRS_hYCpvLcnsdXL9Pj-gFx0vGEGHgxyBVJonKTfPE8VOA@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH] crda: rdepends on wireless-regdb-static
+To: kai <kai.kang@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-Can you post this series via a github pull request please ?
-
-On Thu, Sep 24, 2020 at 7:49 AM Stacy Gaikovaia <sgaikova@windriver.com> wrote:
+On Thu, Sep 24, 2020 at 11:36 AM kai <kai.kang@windriver.com> wrote:
 >
 > From: Robert Yang <liezhi.yang@windriver.com>
 >
-> The recipes-browser/chromium/chromium.inc requires pythonnative which is in meta-python2.
+> The wireless-regdb has been moved to oe-core. According the commit
+> message:
+>
+> wireless-regdb-static should be used with kernel >= 4.15.
+> wireless-regdb can be used with older kernels and is mostly
+> irrelevant here, but keeping it in meta-networking would
+> create needless recipe duplication.
+>
+> it should replace runtime dependency wireless-regdb with
+> wireless-regdb-static.
 >
 > Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-> Signed-off-by: Stacy Gaikovaia <sgaikova@yow-lpggp3.wrs.com>
+> Signed-off-by: Kai Kang <kai.kang@windriver.com>
 > ---
->  conf/layer.conf | 2 +-
+>  meta-networking/recipes-connectivity/crda/crda_3.18.bb | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/conf/layer.conf b/conf/layer.conf
-> index 2572211..5fb9beb 100644
-> --- a/conf/layer.conf
-> +++ b/conf/layer.conf
-> @@ -112,4 +112,4 @@ BBFILE_PRIORITY_browser-layer = "7"
->  LAYERVERSION_browser-layer = "1"
->  LAYERSERIES_COMPAT_browser-layer = "warrior zeus dunfell gatesgarth"
+> diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
+> index b380eaf94..e59d2f437 100644
+> --- a/meta-networking/recipes-connectivity/crda/crda_3.18.bb
+> +++ b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
+> @@ -35,4 +35,4 @@ do_install() {
+>      oe_runmake SBINDIR=${sbindir}/ install
+>  }
 >
-> -LAYERDEPENDS_browser-layer = "clang-layer core openembedded-layer"
-> +LAYERDEPENDS_browser-layer = "clang-layer core openembedded-layer meta-python2"
-> --
-> 2.27.0
->
+> -RDEPENDS_${PN} = "udev wireless-regdb"
+> +RDEPENDS_${PN} = "udev wireless-regdb-static"
+It was wrong/at least dangerous before this - but the operator '+='
+should be used
+
+Andreas
