@@ -1,18 +1,18 @@
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by mx.groups.io with SMTP id smtpd.web10.9169.1600922556425103753
+ by mx.groups.io with SMTP id smtpd.web11.9179.1600922569290996104
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Sep 2020 21:42:36 -0700
+ Wed, 23 Sep 2020 21:42:49 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: enedino.org, ip: 13.77.154.182, mailfrom: alejandro@enedino.org)
 Received: from ALSAMON-X.corp.microsoft.com (unknown [131.107.159.250])
-	by linux.microsoft.com (Postfix) with ESMTPSA id 9B19920B7179
-	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2020 21:42:35 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 9B19920B7179
+	by linux.microsoft.com (Postfix) with ESMTPSA id C2B7120B7179
+	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Sep 2020 21:42:48 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com C2B7120B7179
 From: "Alejandro Hernandez Samaniego" <alejandro@enedino.org>
 To: openembedded-devel@lists.openembedded.org
 Subject: [PATCH] gedit: Add gsettings-desktop-schemas to RDEPENDS
-Date: Wed, 23 Sep 2020 21:42:18 -0700
-Message-Id: <20200924044218.33009-1-alejandro@enedino.org>
+Date: Wed, 23 Sep 2020 21:42:46 -0700
+Message-Id: <20200924044246.33064-1-alejandro@enedino.org>
 X-Mailer: git-send-email 2.17.1
 
 gedit isn't able to start at all, showing the following error:
