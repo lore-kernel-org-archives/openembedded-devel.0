@@ -1,221 +1,59 @@
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web10.4159.1600995152034278557
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web11.1037.1601011866041376670
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Sep 2020 17:52:32 -0700
+ Thu, 24 Sep 2020 22:31:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: kai.kang@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 08P0qSrH018427
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
-	Thu, 24 Sep 2020 17:52:28 -0700 (PDT)
-Received: from [128.224.162.131] (128.224.162.131) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Thu, 24 Sep 2020
- 17:52:27 -0700
-Subject: Re: [oe] [meta-networking][PATCH] crda: rdepends on wireless-regdb-static
-To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
-CC: openembeded-devel <openembedded-devel@lists.openembedded.org>
-References: <20200924093539.23693-1-kai.kang@windriver.com>
- <CALbNGRS_hYCpvLcnsdXL9Pj-gFx0vGEGHgxyBVJonKTfPE8VOA@mail.gmail.com>
-From: "kai" <kai.kang@windriver.com>
-Message-ID: <92d5d20b-4c01-80ce-0ea5-56428cd08a28@windriver.com>
-Date: Fri, 25 Sep 2020 08:51:52 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.77,300,1596470400"; 
+   d="scan'208";a="99602546"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 25 Sep 2020 13:31:04 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 3F33548990DF
+	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Sep 2020 13:30:58 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Fri, 25 Sep 2020 13:30:57 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-networking] [PATCH] arno-iptables-firewall: upgrade 2.1.0 -> 2.1.1
+Date: Sat, 26 Sep 2020 01:31:02 +0800
+Message-ID: <1601055062-37577-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRS_hYCpvLcnsdXL9Pj-gFx0vGEGHgxyBVJonKTfPE8VOA@mail.gmail.com>
-Content-Type: multipart/alternative;
-	boundary="------------67651F7A856589B04E1434F0"
-Content-Language: en-US
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: 3F33548990DF.A032E
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
---------------67651F7A856589B04E1434F0
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mail.windriver.com id 08P0qSrH018427
-
-On 9/25/20 5:36 AM, Andreas M=C3=BCller wrote:
-> On Thu, Sep 24, 2020 at 11:36 AM kai <kai.kang@windriver.com> wrote:
->> From: Robert Yang <liezhi.yang@windriver.com>
->>
->> The wireless-regdb has been moved to oe-core. According the commit
->> message:
->>
->> wireless-regdb-static should be used with kernel >=3D 4.15.
->> wireless-regdb can be used with older kernels and is mostly
->> irrelevant here, but keeping it in meta-networking would
->> create needless recipe duplication.
->>
->> it should replace runtime dependency wireless-regdb with
->> wireless-regdb-static.
->>
->> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
->> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->> ---
->>   meta-networking/recipes-connectivity/crda/crda_3.18.bb | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb b/m=
-eta-networking/recipes-connectivity/crda/crda_3.18.bb
->> index b380eaf94..e59d2f437 100644
->> --- a/meta-networking/recipes-connectivity/crda/crda_3.18.bb
->> +++ b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
->> @@ -35,4 +35,4 @@ do_install() {
->>       oe_runmake SBINDIR=3D${sbindir}/ install
->>   }
->>
->> -RDEPENDS_${PN} =3D "udev wireless-regdb"
->> +RDEPENDS_${PN} =3D "udev wireless-regdb-static"
-> It was wrong/at least dangerous before this - but the operator '+=3D'
-> should be used
-
-Hi Andreas,
-
-Thanks for your comment.
-
-I do not get your point why it is dangerous. From output of 'bitbake -e=20
-crda', RDEPENDS_crda is evaluated by:
-
-# $RDEPENDS_crda [2 operations]
-#=C2=A0=C2=A0 set=20
-/buildarea6/kkang/Yocto/meta-openembedded/meta-networking/recipes-connecti=
-vity/crda/crda_3.18.bb:38
-#=C2=A0=C2=A0=C2=A0=C2=A0 "udev wireless-regdb-static"
-#=C2=A0=C2=A0 rename from RDEPENDS_${PN} data.py:104 [expandKeys]
-#=C2=A0=C2=A0=C2=A0=C2=A0 "udev wireless-regdb-static"
-# pre-expansion value:
-#=C2=A0=C2=A0 "udev wireless-regdb-static"
-RDEPENDS_crda=3D"udev wireless-regdb-static"
-
-It does not show differences compares to other recipes that=20
-"RDEPENDS_${PN} =3D" widely used.
-
-Regards,
-Kai
-
->
-> Andreas
->
->=20
->
-
---=20
-Kai Kang
-Wind River Linux
-
-
---------------67651F7A856589B04E1434F0
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mail.windriver.com id 08P0qSrH018427
-
-<html>
-  <head>
-    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-=
-8">
-  </head>
-  <body>
-    <div class=3D"moz-cite-prefix">On 9/25/20 5:36 AM, Andreas M=C3=BCller
-      wrote:<br>
-    </div>
-    <blockquote type=3D"cite"
-cite=3D"mid:CALbNGRS_hYCpvLcnsdXL9Pj-gFx0vGEGHgxyBVJonKTfPE8VOA@mail.gmail=
-.com">
-      <pre class=3D"moz-quote-pre" wrap=3D"">On Thu, Sep 24, 2020 at 11:36=
- AM kai <a class=3D"moz-txt-link-rfc2396E" href=3D"mailto:kai.kang@windrive=
-r.com">&lt;kai.kang@windriver.com&gt;</a> wrote:
-</pre>
-      <blockquote type=3D"cite">
-        <pre class=3D"moz-quote-pre" wrap=3D"">
-From: Robert Yang <a class=3D"moz-txt-link-rfc2396E" href=3D"mailto:liezhi=
-.yang@windriver.com">&lt;liezhi.yang@windriver.com&gt;</a>
-
-The wireless-regdb has been moved to oe-core. According the commit
-message:
-
-wireless-regdb-static should be used with kernel &gt;=3D 4.15.
-wireless-regdb can be used with older kernels and is mostly
-irrelevant here, but keeping it in meta-networking would
-create needless recipe duplication.
-
-it should replace runtime dependency wireless-regdb with
-wireless-regdb-static.
-
-Signed-off-by: Robert Yang <a class=3D"moz-txt-link-rfc2396E" href=3D"mail=
-to:liezhi.yang@windriver.com">&lt;liezhi.yang@windriver.com&gt;</a>
-Signed-off-by: Kai Kang <a class=3D"moz-txt-link-rfc2396E" href=3D"mailto:=
-kai.kang@windriver.com">&lt;kai.kang@windriver.com&gt;</a>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-networking/recipes-connectivity/crda/crda_3.18.bb | 2 +-
+ ...tables-firewall_2.1.0.bb => arno-iptables-firewall_2.1.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-filter/arno-iptables-firewall/{arno-iptables-firewall_2.1.0.bb => arno-iptables-firewall_2.1.1.bb} (97%)
 
-diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb b/meta=
--networking/recipes-connectivity/crda/crda_3.18.bb
-index b380eaf94..e59d2f437 100644
---- a/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-+++ b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-@@ -35,4 +35,4 @@ do_install() {
-     oe_runmake SBINDIR=3D${sbindir}/ install
- }
-
--RDEPENDS_${PN} =3D "udev wireless-regdb"
-+RDEPENDS_${PN} =3D "udev wireless-regdb-static"
-</pre>
-      </blockquote>
-      <pre class=3D"moz-quote-pre" wrap=3D"">It was wrong/at least dangero=
-us before this - but the operator '+=3D'
-should be used</pre>
-    </blockquote>
-    <p>Hi Andreas,</p>
-    <p>Thanks for your comment.<br>
-    </p>
-    <p>I do not get your point why it is dangerous. From output of
-      'bitbake -e crda', RDEPENDS_crda is evaluated by:</p>
-    <p># $RDEPENDS_crda [2 operations]<br>
-      #=C2=A0=C2=A0 set
-/buildarea6/kkang/Yocto/meta-openembedded/meta-networking/recipes-connecti=
-vity/crda/crda_3.18.bb:38<br>
-      #=C2=A0=C2=A0=C2=A0=C2=A0 "udev wireless-regdb-static"<br>
-      #=C2=A0=C2=A0 rename from RDEPENDS_${PN} data.py:104 [expandKeys]<br=
->
-      #=C2=A0=C2=A0=C2=A0=C2=A0 "udev wireless-regdb-static"<br>
-      # pre-expansion value:<br>
-      #=C2=A0=C2=A0 "udev
-wireless-regdb-static"=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
-      <br>
-      RDEPENDS_crda=3D"udev wireless-regdb-static"</p>
-    <p>It does not show differences compares to other recipes that
-      "RDEPENDS_${PN} =3D" widely used.</p>
-    <p>Regards,<br>
-      Kai<br>
-    </p>
-    <blockquote type=3D"cite"
-cite=3D"mid:CALbNGRS_hYCpvLcnsdXL9Pj-gFx0vGEGHgxyBVJonKTfPE8VOA@mail.gmail=
-.com">
-      <pre class=3D"moz-quote-pre" wrap=3D"">
-
-Andreas
-</pre>
-      <br>
-      <fieldset class=3D"mimeAttachmentHeader"></fieldset>
-      <pre class=3D"moz-quote-pre" wrap=3D"">
+diff --git a/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.0.bb b/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.1.bb
+similarity index 97%
+rename from meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.0.bb
+rename to meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.1.bb
+index 115353fec7..bc9297eab6 100644
+--- a/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.0.bb
++++ b/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.1.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://rocky.eld.leidenuniv.nl/joomla/index.php?option=com_content&v
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://gpl_license.txt;md5=11c7b65c4a4acb9d5175f7e9bf99c403"
+ 
+-SRCREV = "39276d14b659684c4c0612725ab83ea841c6ef99"
++SRCREV = "a96b81da4a9b619e4045805f5f13a1e982c95663"
+ SRC_URI = "git://github.com/arno-iptables-firewall/aif"
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.25.1
 
 
-</pre>
-    </blockquote>
-    <p><br>
-    </p>
-    <pre class=3D"moz-signature" cols=3D"72">--=20
-Kai Kang
-Wind River Linux</pre>
-  </body>
-</html>
 
---------------67651F7A856589B04E1434F0--
