@@ -1,120 +1,131 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.5632.1601033013649854337
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web12.5927.1601034285859566239
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Sep 2020 04:23:34 -0700
+ Fri, 25 Sep 2020 04:44:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=56930 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kLlp5-0008RR-0g; Fri, 25 Sep 2020 14:23:32 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/4] python3-pycrypto: Consolidate in a single file
-Date: Fri, 25 Sep 2020 14:23:21 +0300
-Message-Id: <20200925112321.3195-4-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200925112321.3195-1-leon.anavi@konsulko.com>
-References: <20200925112321.3195-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.7
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=z2yf7HnL;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.54, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f54.google.com with SMTP id e2so2958464wme.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Sep 2020 04:44:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=YaK2zteiuy+foY5rIxA5Y0U2xCcwEzSXX5+Aa7PLOSA=;
+        b=z2yf7HnLgb0kX6onKIaKRh4QGTwkd1qYE0REkFjf7NQAE3dSQSHgIB8umpyFg9kLu+
+         J19rrzL+cb8di/8FCzj/IgVd4M7AYPXnk9BLwLzo+W/UoWyWTpoLr73vkJIbgKLMUnVY
+         rIYnCrsiPhiFBE605u5dYB1QBnF588fb5u48qstpqH+Yw5iFucRYYk7q1mPkLZBgXzVL
+         XZiZDJz569mMO1IntKxwbXb1EM9YoQKZGvcrcogXrpABtP2BPYfPe4fOtVJu8wiUojkS
+         lU99wAEEIfsj1Jsscgkdhr+H3HRPOoAXcCpyi+v+NoQLe5zqJhdtfjt49dgHxnzRW7EH
+         djIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=YaK2zteiuy+foY5rIxA5Y0U2xCcwEzSXX5+Aa7PLOSA=;
+        b=QsbITBcsQu/wvJAyUfC1yvVpRrcNI7hesbuVe0zADSGmbi0MDOw22FZK76YDUA1xOe
+         vtBGZHR+9rU1hsMwg5kbED/SlBi9ziar6zbBtYBT2MeztChk9hdaumDis+oaEAt/+mNp
+         Aim8baliHN8XPVAuRkCG6ILwXSSEjkcgMTkM2PvjhbQ5afzYSKaGzxswJ97xDZ5EPpJm
+         y3sEMsyDi0vFmDk3T9U6fH69TisZFJI2QokWG4Z4YSfspTExZ9x2+97bOajRcGaGEjZf
+         ta774OxdOZOPRl/+abPrYRMLb5uVQsGd3WCxq2K81G9dW48RNagfulTk+t/aYnxrd9De
+         L3wQ==
+X-Gm-Message-State: AOAM530DnnLKofaiEgBE8mRzE8jRWugafrlW6pr8KLSAff3CXhONljrD
+	5QrxZMJ5OOsuMjreYgNqyKOqHQ==
+X-Google-Smtp-Source: ABdhPJyfyzRgBlh7r3/jdQ2a0Bw0Tt1I2oXHSWNMPwYBq20nn0R0qusjZ+mu3N8mef6WeMR/LbLPFw==
+X-Received: by 2002:a7b:cd8b:: with SMTP id y11mr2728400wmj.172.1601034284226;
+        Fri, 25 Sep 2020 04:44:44 -0700 (PDT)
+Return-Path: <brgl@bgdev.pl>
+Received: from debian-brgl.home (lfbn-nic-1-68-20.w2-15.abo.wanadoo.fr. [2.15.159.20])
+        by smtp.gmail.com with ESMTPSA id o15sm2524459wmh.29.2020.09.25.04.44.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 25 Sep 2020 04:44:43 -0700 (PDT)
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster808@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [meta-oe][PATCH] libgpiod: refactor the recipe
+Date: Fri, 25 Sep 2020 13:44:41 +0200
+Message-Id: <20200925114441.13905-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.26.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Consolidate inc and bb files into a single bb file.
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+After dropping the support for v0.3.x let's refactor the entire recipe.
+Let's move most definitions into libgpiod.inc and only leave the hashes
+in libgpiod_1.4.4.bb. Let's use ${BPN} in the URL, consolidate certain
+variables and add some explanatory comments.
+
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 ---
- .../python/python-pycrypto.inc                | 21 ----------------
- .../CVE-2013-7459.patch                       |  0
- .../cross-compiling.patch                     |  0
- .../python/python3-pycrypto_2.6.1.bb          | 24 ++++++++++++++++---
- 4 files changed, 21 insertions(+), 24 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pycrypto.inc
- rename meta-python/recipes-devtools/python/{python-pycrypto => python3-pycrypto}/CVE-2013-7459.patch (100%)
- rename meta-python/recipes-devtools/python/{python-pycrypto => python3-pycrypto}/cross-compiling.patch (100%)
+ meta-oe/recipes-support/libgpiod/libgpiod.inc | 21 ++++++++++++++-----
+ .../libgpiod/libgpiod_1.4.4.bb                | 15 -------------
+ 2 files changed, 16 insertions(+), 20 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pycrypto.inc b/meta-python/recipes-devtools/python/python-pycrypto.inc
-deleted file mode 100644
-index 232cdb7116..0000000000
---- a/meta-python/recipes-devtools/python/python-pycrypto.inc
-+++ /dev/null
-@@ -1,21 +0,0 @@
--DESCRIPTION = "Cryptographic modules for Python."
--HOMEPAGE = "http://www.pycrypto.org/"
--LICENSE = "PSFv2"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=35f354d199e8cb7667b059a23578e63d"
--
--FILESEXTRAPATHS_prepend := "${THISDIR}/python-pycrypto:"
--
--DEPENDS += " gmp"
--
--inherit pypi autotools-brokensep
--
--SRC_URI += "file://cross-compiling.patch \
--            file://CVE-2013-7459.patch \
--           "
--
--SRC_URI[md5sum] = "55a61a054aa66812daf5161a0d5d7eda"
--SRC_URI[sha256sum] = "f2ce1e989b272cfcb677616763e0a2e7ec659effa67a88aa92b3a65528f60a3c"
--
--do_compile[noexec] = "1"
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-pycrypto/CVE-2013-7459.patch b/meta-python/recipes-devtools/python/python3-pycrypto/CVE-2013-7459.patch
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pycrypto/CVE-2013-7459.patch
-rename to meta-python/recipes-devtools/python/python3-pycrypto/CVE-2013-7459.patch
-diff --git a/meta-python/recipes-devtools/python/python-pycrypto/cross-compiling.patch b/meta-python/recipes-devtools/python/python3-pycrypto/cross-compiling.patch
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pycrypto/cross-compiling.patch
-rename to meta-python/recipes-devtools/python/python3-pycrypto/cross-compiling.patch
-diff --git a/meta-python/recipes-devtools/python/python3-pycrypto_2.6.1.bb b/meta-python/recipes-devtools/python/python3-pycrypto_2.6.1.bb
-index a20eafec43..78a1ef2ac0 100644
---- a/meta-python/recipes-devtools/python/python3-pycrypto_2.6.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pycrypto_2.6.1.bb
-@@ -1,7 +1,23 @@
--inherit distutils3
--require python-pycrypto.inc
-+DESCRIPTION = "Cryptographic modules for Python."
-+HOMEPAGE = "http://www.pycrypto.org/"
-+LICENSE = "PSFv2"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=35f354d199e8cb7667b059a23578e63d"
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod.inc b/meta-oe/recipes-support/libgpiod/libgpiod.inc
+index cae3145dd..ec81b3bdd 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod.inc
++++ b/meta-oe/recipes-support/libgpiod/libgpiod.inc
+@@ -3,17 +3,28 @@ SUMMARY = "C library and tools for interacting with the linux GPIO character dev
+ LICENSE = "LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
  
--SRC_URI += "file://0001-Replace-time.clock-with-time.process_time.patch"
-+DEPENDS += " gmp"
-+
-+export HOST_SYS
-+
-+inherit pypi autotools-brokensep distutils3
-+
-+SRC_URI += "file://cross-compiling.patch \
-+            file://CVE-2013-7459.patch \
-+            file://0001-Replace-time.clock-with-time.process_time.patch \
-+           "
-+
-+SRC_URI[md5sum] = "55a61a054aa66812daf5161a0d5d7eda"
-+SRC_URI[sha256sum] = "f2ce1e989b272cfcb677616763e0a2e7ec659effa67a88aa92b3a65528f60a3c"
-+
-+do_compile[noexec] = "1"
+-SRC_URI = "https://www.kernel.org/pub/software/libs/libgpiod/${BP}.tar.xz"
++SRC_URI = "https://www.kernel.org/pub/software/libs/${BPN}/${BP}.tar.xz"
  
- # We explicitly call distutils_do_install, since we want it to run, but
- # *don't* want the autotools install to run, since this package doesn't
-@@ -9,3 +25,5 @@ SRC_URI += "file://0001-Replace-time.clock-with-time.process_time.patch"
- do_install() {
-        distutils3_do_install
- }
+-inherit autotools pkgconfig
++inherit autotools pkgconfig python3native
+ 
+ PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
++PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
++PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
+ 
++# Enable cxx bindings by default.
++PACKAGECONFIG ?= "cxx"
 +
-+BBCLASSEXTEND = "native nativesdk"
++# Always build tools - they don't have any additional
++# requirements over the library.
+ EXTRA_OECONF = "--enable-tools"
+ 
+-PACKAGES =+ " ${PN}-tools"
++DEPENDS += "autoconf-archive-native"
+ 
++PACKAGES =+ "${PN}-tools libgpiodcxx"
+ FILES_${PN}-tools = "${bindir}/*"
+-
+-PACKAGES =+ "libgpiodcxx"
+ FILES_libgpiodcxx = "${libdir}/libgpiodcxx.so.*"
++
++PACKAGES =+ "${PN}-python"
++FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
++RRECOMMENDS_PYTHON = "${@bb.utils.contains('PACKAGECONFIG', 'python3', '${PN}-python', '',d)}"
++RRECOMMENDS_${PN}-python += "${RRECOMMENDS_PYTHON}"
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
+index b5a64a554..6cb43f994 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
+@@ -1,19 +1,4 @@
+ require libgpiod.inc
+ 
+-DEPENDS += "autoconf-archive-native"
+-
+ SRC_URI[md5sum] = "064c2627397e6641c52de09a26951112"
+ SRC_URI[sha256sum] = "f1cda2789e6a13a92aefc012a76e5a7cc57a1b402d66f71df8719ee314b67699"
+-
+-# enable cxx bindings
+-PACKAGECONFIG ?= "cxx"
+-
+-PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
+-PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
+-
+-inherit python3native
+-
+-PACKAGES =+ "${PN}-python"
+-FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
+-RRECOMMENDS_PYTHON = "${@bb.utils.contains('PACKAGECONFIG', 'python3', '${PN}-python', '',d)}"
+-RRECOMMENDS_${PN}-python += "${RRECOMMENDS_PYTHON}"
 -- 
-2.17.1
+2.26.1
 
