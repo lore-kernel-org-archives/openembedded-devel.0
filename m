@@ -1,175 +1,62 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [])
- by mx.groups.io with SMTP id smtpd.web11.1037.1601011866041376670
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.5762.1601033011072616467
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Sep 2020 22:31:12 -0700
+ Fri, 25 Sep 2020 04:23:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: <nil>, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.77,300,1596470400"; 
-   d="scan'208";a="99602560"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 25 Sep 2020 13:31:11 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 786D348990FB
-	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Sep 2020 13:31:07 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 25 Sep 2020 13:31:07 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] numactl: upgrade 2.0.13 -> 2.0.14
-Date: Sat, 26 Sep 2020 01:31:12 +0800
-Message-ID: <1601055072-37639-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 786D348990FB.A0FFF
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=56930 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kLlp1-0008RR-2r; Fri, 25 Sep 2020 14:23:28 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/4] python3-cryptography: Upgrade 3.1 -> 3.1.1
+Date: Fri, 25 Sep 2020 14:23:18 +0300
+Message-Id: <20200925112321.3195-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-numactl/0001-numademo-fix-error-on-32bit-system.patch
-Removed since this is included in 2.0.14
+Upgrade to release 3.1.1:
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+- Updated Windows, macOS, and manylinux wheels to be compiled with
+  OpenSSL 1.1.1h.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...1-numademo-fix-error-on-32bit-system.patch | 100 ------------------
- .../recipes-support/numactl/numactl_git.bb    |   5 +-
- 2 files changed, 2 insertions(+), 103 deletions(-)
- delete mode 100644 meta-oe/recipes-support/numactl/numactl/0001-numademo-fix-error-on-32bit-system.patch
+ ...hon3-cryptography_3.1.bb => python3-cryptography_3.1.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cryptography_3.1.bb => python3-cryptography_3.1.1.bb} (91%)
 
-diff --git a/meta-oe/recipes-support/numactl/numactl/0001-numademo-fix-error-on-32bit-system.patch b/meta-oe/recipes-support/numactl/numactl/0001-numademo-fix-error-on-32bit-system.patch
-deleted file mode 100644
-index 506101711a..0000000000
---- a/meta-oe/recipes-support/numactl/numactl/0001-numademo-fix-error-on-32bit-system.patch
-+++ /dev/null
-@@ -1,100 +0,0 @@
--From 68485f8516884377e54c623b0deff73f97321d96 Mon Sep 17 00:00:00 2001
--From: "Hongzhi.Song" <hongzhi.song@windriver.com>
--Date: Thu, 19 Sep 2019 04:32:31 -0400
--Subject: [PATCH] numademo: fix error on 32bit system
--
--Error Info on 32bit:
--root@intel-x86:~# numademo -t -e 1M
--Configured Nodes does not match available memory nodes
--
--That's because sizeof(long)=4Word, but sizeof(long long)=8Word
--on 32bit. So (long long) assigning to (long) maybe cause overflow.
--
--long numa_node_size(int node, long *freep)
--{
--    ...
--    long sz = numa_node_size64_int(node, &f2);
--    ~^^~
--    return sz;
--    ...
--}
--long long numa_node_size64(int node, long long *freep)
--~^^   ^^~
--{
--    ...
--}
--
--Unify the return type of above functions.
--
--Upstream-Status: Accepted [next version is after 2.0.13 or 2.0.14]
--[https://github.com/numactl/numactl/commit/a7c4bc790a191d3e42b63850b409c1a72b75a4e1]
--                 Submitted [https://github.com/numactl/numactl/pull/79]
--[The first patch was merged but has a error, then the second fix it.]
--
--Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
-----
-- libnuma.c         | 4 ++--
-- numa.h            | 2 +-
-- numademo.c        | 2 +-
-- test/move_pages.c | 2 +-
-- 4 files changed, 5 insertions(+), 5 deletions(-)
--
--diff --git a/libnuma.c b/libnuma.c
--index cac8851..8b5c6aa 100644
----- a/libnuma.c
--+++ b/libnuma.c
--@@ -791,10 +791,10 @@ long long numa_node_size64(int node, long long *freep)
-- 
-- make_internal_alias(numa_node_size64);
-- 
---long numa_node_size(int node, long *freep)
--+long long numa_node_size(int node, long long *freep)
-- {
-- 	long long f2;
---	long sz = numa_node_size64_int(node, &f2);
--+	long long sz = numa_node_size64_int(node, &f2);
-- 	if (freep)
-- 		*freep = f2;
-- 	return sz;
--diff --git a/numa.h b/numa.h
--index 3a8c543..268fb1d 100644
----- a/numa.h
--+++ b/numa.h
--@@ -143,7 +143,7 @@ int numa_preferred(void);
-- 
-- /* Return node size and free memory */
-- long long numa_node_size64(int node, long long *freep);
---long numa_node_size(int node, long *freep);
--+long long numa_node_size(int node, long long *freep);
-- 
-- int numa_pagesize(void);
-- 
--diff --git a/numademo.c b/numademo.c
--index a720db0..8c56da8 100644
----- a/numademo.c
--+++ b/numademo.c
--@@ -301,7 +301,7 @@ int max_node, numnodes;
-- int get_node_list(void)
-- {
--         int a, got_nodes = 0;
---        long free_node_sizes;
--+        long long free_node_sizes;
-- 
--         numnodes = numa_num_configured_nodes();
--         node_to_use = (int *)malloc(numnodes * sizeof(int));
--diff --git a/test/move_pages.c b/test/move_pages.c
--index d1d8436..f8ff25d 100644
----- a/test/move_pages.c
--+++ b/test/move_pages.c
--@@ -26,7 +26,7 @@ int *node_to_use;
-- int get_node_list()
-- {
--         int a, got_nodes = 0, max_node, numnodes;
---        long free_node_sizes;
--+        long long free_node_sizes;
-- 
--         numnodes = numa_num_configured_nodes();
--         node_to_use = (int *)malloc(numnodes * sizeof(int));
---- 
--2.23.0
--
-diff --git a/meta-oe/recipes-support/numactl/numactl_git.bb b/meta-oe/recipes-support/numactl/numactl_git.bb
-index 20b7fed862..75e4435db0 100644
---- a/meta-oe/recipes-support/numactl/numactl_git.bb
-+++ b/meta-oe/recipes-support/numactl/numactl_git.bb
-@@ -10,15 +10,14 @@ inherit autotools-brokensep ptest
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography_3.1.bb b/meta-python/recipes-devtools/python/python3-cryptography_3.1.1.bb
+similarity index 91%
+rename from meta-python/recipes-devtools/python/python3-cryptography_3.1.bb
+rename to meta-python/recipes-devtools/python/python3-cryptography_3.1.1.bb
+index 9ac23cda4f..1d6a9b32e0 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography_3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography_3.1.1.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=097f805837700cfac572ac274cd38124"
  
- LIC_FILES_CHKSUM = "file://README.md;beginline=19;endline=32;md5=f8ff2391624f28e481299f3f677b21bb"
+ LDSHARED += "-pthread"
  
--SRCREV = "5d9f16722e3df49dc618a9f361bd482559695db7"
--PV = "2.0.13+git${SRCPV}"
-+SRCREV = "dd6de072c92c892a86e18c0fd0dfa1ba57a9a05d"
-+PV = "2.0.14+git${SRCPV}"
+-SRC_URI[md5sum] = "aa91e4974981b29e99b863c54034c361"
+-SRC_URI[sha256sum] = "26409a473cc6278e4c90f782cd5968ebad04d3911ed1c402fc86908c17633e08"
++SRC_URI[md5sum] = "c3807891d36aa9de8187e9db8b2bb457"
++SRC_URI[sha256sum] = "9d9fc6a16357965d282dd4ab6531013935425d0dc4950df2e0cf2a1b1ac1017d"
  
- SRC_URI = "git://github.com/numactl/numactl \
-     file://Fix-the-test-output-format.patch \
-     file://Makefile \
+ SRC_URI += " \
      file://run-ptest \
-     file://0001-define-run-test-target.patch \
--    file://0001-numademo-fix-error-on-32bit-system.patch \
- "
- 
- S = "${WORKDIR}/git"
 -- 
-2.25.1
-
-
+2.17.1
 
