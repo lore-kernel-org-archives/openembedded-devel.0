@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.5630.1601033011222632596
+ by mx.groups.io with SMTP id smtpd.web12.5629.1601033011879769242
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Sep 2020 04:23:31 -0700
+ Fri, 25 Sep 2020 04:23:32 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=56930 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kLlp3-0008RR-Os; Fri, 25 Sep 2020 14:23:30 +0300
+	id 1kLlp4-0008RR-9V; Fri, 25 Sep 2020 14:23:30 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/4] python3-cryptography-vectors: Upgrade 3.1 -> 3.1.1
-Date: Fri, 25 Sep 2020 14:23:19 +0300
-Message-Id: <20200925112321.3195-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/4] python3-gevent: Upgrade 20.6.2 -> 20.9.0
+Date: Fri, 25 Sep 2020 14:23:20 +0300
+Message-Id: <20200925112321.3195-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200925112321.3195-1-leon.anavi@konsulko.com>
 References: <20200925112321.3195-1-leon.anavi@konsulko.com>
@@ -30,35 +30,48 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.1.1:
+Upgrade to release 20.9.0:
 
-- Updated Windows, macOS, and manylinux wheels to be compiled with
-  OpenSSL 1.1.1h.
+- The embedded libev is now asked to detect the availability of
+  clock_gettime and use the realtime and/or monotonic clocks, if
+  they are available. On Linux, this can reduce the number of
+  system calls libev makes. Originally provided by Josh Snyder.
+- On CPython, depend on greenlet >= 0.4.17. This version is binary
+  incompatible with earlier releases on CPython 3.7 and later.
+- On Python 3.7 and above, the module gevent.contextvars is no
+  longer monkey-patched into the standard library. contextvars are
+  now both greenlet and asyncio task local.
+- The DummyThread objects created automatically by certain
+  operations when the standard library threading module is
+  monkey-patched now match the naming convention the standard
+  library uses ("Dummy-12345"). Previously (since gevent 1.2a2)
+  they used "DummyThread-12345".
+- Fix compatibility with dnspython 2.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...y-vectors_3.1.bb => python3-cryptography-vectors_3.1.1.bb} | 4 ++--
+ .../{python3-gevent_20.6.2.bb => python3-gevent_20.9.0.bb}    | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_3.1.bb => python3-cryptography-vectors_3.1.1.bb} (73%)
+ rename meta-python/recipes-devtools/python/{python3-gevent_20.6.2.bb => python3-gevent_20.9.0.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.1.bb
-similarity index 73%
-rename from meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.bb
-rename to meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.1.bb
-index 59347c94e5..9486fe2350 100644
---- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.1.bb
-@@ -4,8 +4,8 @@ SECTION = "devel/python"
- LICENSE = "Apache-2.0 | BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
+diff --git a/meta-python/recipes-devtools/python/python3-gevent_20.6.2.bb b/meta-python/recipes-devtools/python/python3-gevent_20.9.0.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-gevent_20.6.2.bb
+rename to meta-python/recipes-devtools/python/python3-gevent_20.9.0.bb
+index dbeb3a60c1..06c45f2ed9 100644
+--- a/meta-python/recipes-devtools/python/python3-gevent_20.6.2.bb
++++ b/meta-python/recipes-devtools/python/python3-gevent_20.9.0.bb
+@@ -20,8 +20,8 @@ SRC_URI_append = " \
+     file://libev-conf.patch;patch=1;pnum=1 \
+ "
  
--SRC_URI[md5sum] = "1ba5b0743e2876e909f7cfc28b744f27"
--SRC_URI[sha256sum] = "2660bc3a720d3955341803195ae5352a236c5f26e01a178c44fc5ee1f0ef1182"
-+SRC_URI[md5sum] = "fbc43f8b155b52f9ed163d3555ea5e83"
-+SRC_URI[sha256sum] = "5529c516194122fec7db1682812e2314ddff4221fdf993169118f9c0d291e2f6"
+-SRC_URI[md5sum] = "27b07fe9fdfff2d75e3d140e890489b1"
+-SRC_URI[sha256sum] = "a23c2abf08e851c988723f6a2996d495f513a2c0dc70f9956af03af8debdb5d1"
++SRC_URI[md5sum] = "9366ee7eebed48003f8a748568ef1f70"
++SRC_URI[sha256sum] = "5f6d48051d336561ec08995431ee4d265ac723a64bba99cc58c3eb1a4d4f5c8d"
  
- PYPI_PACKAGE = "cryptography_vectors"
- 
+ # The python-gevent has no autoreconf ability
+ # and the logic for detecting a cross compile is flawed
 -- 
 2.17.1
 
