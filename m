@@ -1,129 +1,133 @@
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com [209.85.160.193])
- by mx.groups.io with SMTP id smtpd.web12.1300.1601078876866779777
+Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com [209.85.219.67])
+ by mx.groups.io with SMTP id smtpd.web12.3164.1601085898753034118
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Sep 2020 17:07:57 -0700
+ Fri, 25 Sep 2020 19:04:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Epwncy65;
- spf=pass (domain: gmail.com, ip: 209.85.160.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f193.google.com with SMTP id o21so3149313qtp.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Sep 2020 17:07:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=RBfeSJny;
+ spf=pass (domain: gmail.com, ip: 209.85.219.67, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f67.google.com with SMTP id cr8so2438224qvb.10
+        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Sep 2020 19:04:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=WNQm2NMGN8GDs83buURAhQuIwx8frOOzzz+pPwZv0r0=;
-        b=Epwncy65sLt6Dahc5iDTmBeeT+dBPKwA2i4NcZolyBjVt1Q2BD8FaSks0ZOOQHUIul
-         y2yOp/+hn6XRjCNRijV3VUqozkDfkVPzkGs5CIubJXSMN18QDv2xamETxPczq2UVVzmX
-         CCGhotowZJ9/onpovlFgVQl3A019DCWRhYfC2Mm//0jNPG9PxONJSIGiMD4uIbNgF8nY
-         7QRvKoI+hb2QRP8gzIjC9/ay4YvDEMFP9SxLT7dVKIuwhEESn0P6tyPp7yXHCggmuapz
-         2DeEQuw0yVFAXTyVicuXbffzeGZiFdkB4JNNdF3ym/mobJAJ++hUj5Zrns/PTRUFN1dM
-         KYDA==
+        bh=OOTNKVr4jcvUswzUmmfuaVLuipEWd/dYz8xW9+oPeGQ=;
+        b=RBfeSJnynOBdfLHjB/WOS6qvYtAEPkrWxKGyMJRX5iMMARgAI9XfxRQx4/08/rfycV
+         ReiLMorKufcw7iOaI3qijz/qpIWLuJqwMmWpfdwVf4PS2Tbl+XfzWug3O6J61UP2GZB6
+         kVYDZcjBNVV0mQpJSa2DoFR2k0o5dlpVc61cH4NkesHvcVPWips3ZboMY7mODgPX6HRb
+         aV/eTljkzcR2Q/5NqkFNYRr8SqR5qpdTiOezhLK21L1c7O3y248KM2uAs1LNU8BF210F
+         QcqwP41c0uDNGYACRcIVFO/fTTcoFxK5UzQN3/BN40uG2EeAEoz8jdxUIOopiBEaAAUC
+         xHrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=WNQm2NMGN8GDs83buURAhQuIwx8frOOzzz+pPwZv0r0=;
-        b=HWzEaZAEesXxgna5W9Di7wzymuzMa6IcyizOfkITFLKTfKEg7Bd178D3I06JfiP2CD
-         2DKaWJcP5crlv90FLOIzg/zSVXgoYg1Xmh2+g2U7ewsucrmhS30l6mS69DwAbRocB+8b
-         oDpc5mquDDnRNbi6/MWw4A6dxVtqCkmEzZqEiOMdvEJ288fM4BSoZ908BchctrF+Dki0
-         Js4OQz2Ipj12oaDk7FeVNj6nRSDzOZPrr0+KBETVJLrr2zvnolY48LqjixP/o45rnt3w
-         CdH6eK2ZC9ubME/r93LLUC0p1kXQlukxSEpa8dJACB4CANHIBM8qzjM2v3BcINRnbXAi
-         rtWQ==
-X-Gm-Message-State: AOAM5316TGJlJO4dcjJ/1yqdnuv3H5qZTQVWoNZfSkROVuMMYpU/UKy3
-	LS71WtulhOQVpYIpanRmUAQ2KjPF5IhsX5UmN48=
-X-Google-Smtp-Source: ABdhPJzpgHp7IG7lLB4m51tGqn2tU+nvpjy7wxrQxTg3adfB6AGgRmNMtaf5PsGOcabTVgxDmy5dqqdHOlTJoXqQpxg=
-X-Received: by 2002:ac8:544f:: with SMTP id d15mr2428532qtq.378.1601078875795;
- Fri, 25 Sep 2020 17:07:55 -0700 (PDT)
+        bh=OOTNKVr4jcvUswzUmmfuaVLuipEWd/dYz8xW9+oPeGQ=;
+        b=g43XjsDDtdY0BYVhe+JwVAchDSRHwkT8q98p8P92FlVv0fH3xCPELOq7x7bRrxpnUR
+         1t9aWFkK/msGO4VtgMJBL1cyBBui4Fv461Wb3784CQHMIrPi/stT48o37BnlOAIQOQP8
+         eo1LGH17aD9fT2vvYdITq+QWvzcoKZTDHdWxptzNgcsB/GkJLs99GUaZuWMU62DBeP//
+         H3RC1QZg85iCaG+eUptynOL4c1Iyqt6ytHCTJW6xDROocV+/unn+WeYtsnH/hvmwCEO0
+         ID0QqK8rkj1ZJDm4Lwq2GhAFeIcxIMxTwMdUPuec85Z8eeMsBQYAXG8yNkc7ZLp48Ha2
+         2ayg==
+X-Gm-Message-State: AOAM530F817zAILJeBA/CrWSM2QpV67bQVAx+Nw1fHb0xhEjaPDC7SeJ
+	vghSHVA9fn4cf27dO6O7cxfGpvqUHYrAVwwAShw=
+X-Google-Smtp-Source: ABdhPJwX8EBb/+ovUzV9CfGjW/7ttmnYMewbSYGXohNmyWxzUA+VKJiKFDHwi+4UfLHV/nah709kvup9EljKrBFUPjU=
+X-Received: by 2002:a0c:b29e:: with SMTP id r30mr1706497qve.38.1601085897757;
+ Fri, 25 Sep 2020 19:04:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200925212051.18414-1-akuster808@gmail.com>
-In-Reply-To: <20200925212051.18414-1-akuster808@gmail.com>
+References: <20200925114441.13905-1-brgl@bgdev.pl>
+In-Reply-To: <20200925114441.13905-1-brgl@bgdev.pl>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Fri, 25 Sep 2020 17:07:29 -0700
-Message-ID: <CAMKF1sq_NeerBCsR1LKAMA0QMFtSWrZRm9czC8ALNSh8Xuk02Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] cmocka: add recipe
-To: akuster <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Armin Kuster <akuster@mvista.com>
+Date: Fri, 25 Sep 2020 19:04:31 -0700
+Message-ID: <CAMKF1sqd4OscNS9sFLfcaQxoCANdnB1KoEt8s9O0GKcF-m5jDQ@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] libgpiod: refactor the recipe
+To: Bartosz Golaszewski <brgl@bgdev.pl>
+Cc: Armin Kuster <akuster808@gmail.com>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Bartosz Golaszewski <bgolaszewski@baylibre.com>
 Content-Type: text/plain; charset="UTF-8"
 
-Can you add it to appropriate packagegroups too for testing purposes
+Usually, the recipes are moving otherway. include files are useful
+only when there should be multiple recipes sharing common stuff. For a
+single recipe it would be an overkill IMO
 
-On Fri, Sep 25, 2020 at 2:20 PM akuster <akuster808@gmail.com> wrote:
+On Fri, Sep 25, 2020 at 4:44 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
 >
-> From: Armin Kuster <akuster@mvista.com>
+> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 >
-> includes ptest and bundling of examples that can be used for testing
+> After dropping the support for v0.3.x let's refactor the entire recipe.
+> Let's move most definitions into libgpiod.inc and only leave the hashes
+> in libgpiod_1.4.4.bb. Let's use ${BPN} in the URL, consolidate certain
+> variables and add some explanatory comments.
 >
-> Signed-off-by: Armin Kuster <akuster@mvista.com>
+> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 > ---
->  meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb | 37 +++++++++++++++++++++
->  meta-oe/recipes-test/cmocka/files/run-ptest | 10 ++++++
->  2 files changed, 47 insertions(+)
->  create mode 100644 meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb
->  create mode 100644 meta-oe/recipes-test/cmocka/files/run-ptest
+>  meta-oe/recipes-support/libgpiod/libgpiod.inc | 21 ++++++++++++++-----
+>  .../libgpiod/libgpiod_1.4.4.bb                | 15 -------------
+>  2 files changed, 16 insertions(+), 20 deletions(-)
 >
-> diff --git a/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb b/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb
-> new file mode 100644
-> index 0000000000..6125d116cd
-> --- /dev/null
-> +++ b/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb
-> @@ -0,0 +1,37 @@
-> +DESCRIPTION = "cmocka is an elegant unit testing framework for C with support for mock \
-> +objects. It only requires the standard C library, works on a range of computing \
-> +platforms (including embedded) and with different compilers."
-> +HOMEPAGE = "https://cmocka.org/"
+> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod.inc b/meta-oe/recipes-support/libgpiod/libgpiod.inc
+> index cae3145dd..ec81b3bdd 100644
+> --- a/meta-oe/recipes-support/libgpiod/libgpiod.inc
+> +++ b/meta-oe/recipes-support/libgpiod/libgpiod.inc
+> @@ -3,17 +3,28 @@ SUMMARY = "C library and tools for interacting with the linux GPIO character dev
+>  LICENSE = "LGPLv2.1+"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
+>
+> -SRC_URI = "https://www.kernel.org/pub/software/libs/libgpiod/${BP}.tar.xz"
+> +SRC_URI = "https://www.kernel.org/pub/software/libs/${BPN}/${BP}.tar.xz"
+>
+> -inherit autotools pkgconfig
+> +inherit autotools pkgconfig python3native
+>
+>  PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
+> +PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
+> +PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
+>
+> +# Enable cxx bindings by default.
+> +PACKAGECONFIG ?= "cxx"
 > +
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
+> +# Always build tools - they don't have any additional
+> +# requirements over the library.
+>  EXTRA_OECONF = "--enable-tools"
+>
+> -PACKAGES =+ " ${PN}-tools"
+> +DEPENDS += "autoconf-archive-native"
+>
+> +PACKAGES =+ "${PN}-tools libgpiodcxx"
+>  FILES_${PN}-tools = "${bindir}/*"
+> -
+> -PACKAGES =+ "libgpiodcxx"
+>  FILES_libgpiodcxx = "${libdir}/libgpiodcxx.so.*"
 > +
-> +SRCREV = "56eb3a183fc222120f86d0c54fd033992c30135e"
-> +SRC_URI = "git://git.cryptomilk.org/projects/cmocka.git \
-> +           file://run-ptest "
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit cmake ptest
-> +
-> +EXTRA_OECMAKE = "${@bb.utils.contains('PTEST_ENABLED', '1', '-DCMAKE_BUILD_TYPE=Debug -DUNIT_TESTING=ON', '', d)}"
-> +
-> +do_install_append () {
-> +    install -d ${D}${datadir}/${BPN}/example
-> +    install -d ${D}${datadir}/${BPN}/example/mock/chef_wrap
-> +    install -d ${D}${datadir}/${BPN}/example/mock/uptime
-> +
-> +    install -m 0755 ${B}/example/*_test ${D}/${datadir}/${BPN}/example
-> +    install -m 0755 ${B}/example/mock/chef_wrap/waiter_test_wrap ${D}/${datadir}/${BPN}/example/mock/chef_wrap
-> +    install -m 0755 ${B}/example/mock/uptime/uptime ${D}/${datadir}/${BPN}/example/mock/uptime
-> +    install -m 0755 ${B}/example/mock/uptime/test_uptime ${D}/${datadir}/${BPN}/example/mock/uptime
-> +}
-> +
-> +do_install_ptest () {
-> +    install -d ${D}${PTEST_PATH}/tests
-> +    install -m 0755 ${B}/tests/test_* ${D}${PTEST_PATH}/tests
-> +}
-> +
-> +PACKAGE_BEFORE_PN += "${PN}-examples"
-> +
-> +FILES_${PN}-examples = "${datadir}/${BPN}/example"
-> diff --git a/meta-oe/recipes-test/cmocka/files/run-ptest b/meta-oe/recipes-test/cmocka/files/run-ptest
-> new file mode 100644
-> index 0000000000..48b9cd9fc5
-> --- /dev/null
-> +++ b/meta-oe/recipes-test/cmocka/files/run-ptest
-> @@ -0,0 +1,10 @@
-> +#!/bin/sh
-> +
-> +cd tests
-> +for i in `ls *`; do
-> +   if [ ./$i ] ; then
-> +       echo "PASS: $i"
-> +   else
-> +       echo "FAIL: $i"
-> +   fi
-> +done
+> +PACKAGES =+ "${PN}-python"
+> +FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
+> +RRECOMMENDS_PYTHON = "${@bb.utils.contains('PACKAGECONFIG', 'python3', '${PN}-python', '',d)}"
+> +RRECOMMENDS_${PN}-python += "${RRECOMMENDS_PYTHON}"
+> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
+> index b5a64a554..6cb43f994 100644
+> --- a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
+> +++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
+> @@ -1,19 +1,4 @@
+>  require libgpiod.inc
+>
+> -DEPENDS += "autoconf-archive-native"
+> -
+>  SRC_URI[md5sum] = "064c2627397e6641c52de09a26951112"
+>  SRC_URI[sha256sum] = "f1cda2789e6a13a92aefc012a76e5a7cc57a1b402d66f71df8719ee314b67699"
+> -
+> -# enable cxx bindings
+> -PACKAGECONFIG ?= "cxx"
+> -
+> -PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
+> -PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
+> -
+> -inherit python3native
+> -
+> -PACKAGES =+ "${PN}-python"
+> -FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
+> -RRECOMMENDS_PYTHON = "${@bb.utils.contains('PACKAGECONFIG', 'python3', '${PN}-python', '',d)}"
+> -RRECOMMENDS_${PN}-python += "${RRECOMMENDS_PYTHON}"
 > --
-> 2.17.1
->
->
-> 
+> 2.26.1
 >
