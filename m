@@ -1,113 +1,81 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web12.7518.1601185711078497936
+Received: from mail-qv1-f66.google.com (mail-qv1-f66.google.com [209.85.219.66])
+ by mx.groups.io with SMTP id smtpd.web11.7600.1601186897618297443
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Sep 2020 22:48:31 -0700
+ Sat, 26 Sep 2020 23:08:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: kai.kang@windriver.com)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 08R5mAwi024552
-	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Sat, 26 Sep 2020 22:48:20 -0700
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
- 14.3.487.0; Sat, 26 Sep 2020 22:47:59 -0700
-From: "kai" <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH 2/2] python3-pytest: 5.4.3 -> 6.1.0
-Date: Sun, 27 Sep 2020 13:47:41 +0800
-Message-ID: <20200927054741.11210-3-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200927054741.11210-1-kai.kang@windriver.com>
-References: <20200927054741.11210-1-kai.kang@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=sj+EwFOq;
+ spf=pass (domain: gmail.com, ip: 209.85.219.66, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f66.google.com with SMTP id di5so3758058qvb.13
+        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Sep 2020 23:08:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Umbf+pkae8uNVJGAK3688+Es0jW7AlxBAOunhFjETFo=;
+        b=sj+EwFOqzF5PiMYjZIxSKwfh6v5s+pmoeibXQvSgMndREELVQqbwhuT3+SD+UTA3GE
+         BdLbr3k5/bx6eN4AWPUwkEEwwIAdyAFVKmMRa2AL/guwKyU8m9RJUsrMDmiXW06Upqzb
+         l7WLUZnOSKTvTrrGaUmZNOUIMaK7+He6YSlud2rPFF2kN48h4vhCfL+RKhBUZc4ZV3kT
+         baXzr4nyhlnsaCvlUxXacDVIA9/vgly8SEg1szsbFCNjXQWzRCMBNOAM6nfXgcd6xpnF
+         wE6AeUrOmRlbIIJDB+I+LGQnIuBH/0n6jugWMCAjMHXuLBZdmRgBhW99otNq6A45XInV
+         Hi2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Umbf+pkae8uNVJGAK3688+Es0jW7AlxBAOunhFjETFo=;
+        b=hLRSg0yBTJXb44jPYxSYlJV+SD/UDEIdYjFVjjHY504RqurSGlatMFCRcQZXvmJEI6
+         yTvy+c1B8a9aWzYLI7gVVP7h+ON19Aki85hHryrSgneeGxEhQKkggZz2b16KAp4vXFtY
+         CW//eR1CskB9WCLBZNQQZeqSWyavQ/4dXOlxKUcsgA1F2ZdArDD2SQ+2XIuJ77DZT978
+         pZ00HJsrxBe4MafK7GtXu89nBTiETClmXtkBwSH11UB30I/y9X1lEn05KAAsIezk2ByE
+         uTao89KYvwsxAbL6t4FK8UmhxOVHyu+1RIyFZTsxO5dDMoYhZtVN/ih/1z8q4/ch/N0E
+         ubdg==
+X-Gm-Message-State: AOAM530btGexlJKnhh+ES3XW4mh8hvYGR5sPKOhw5OCJkLacy/b/BJBY
+	zrM4EiqQhEoy2pIwUwSpiA1wtIs9OfXMkFzYUvkYQoM7WkQ=
+X-Google-Smtp-Source: ABdhPJzYDAi0TYGhsC3Kl4io5cYiBJVoi7VKXtKwt3t2RnlbC082lZy1keOr/+GL0FXH/z+zFlBHPeXAZyxfELczB8M=
+X-Received: by 2002:a05:6214:7a1:: with SMTP id v1mr6444993qvz.19.1601186896613;
+ Sat, 26 Sep 2020 23:08:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20200927054741.11210-1-kai.kang@windriver.com> <20200927054741.11210-2-kai.kang@windriver.com>
+In-Reply-To: <20200927054741.11210-2-kai.kang@windriver.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Sat, 26 Sep 2020 23:07:50 -0700
+Message-ID: <CAMKF1sqy_CDdQgaaunBm=JDcqyEBk8eaXjyNnwtgv9UAfaSh_w@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 1/2] python3-iniconfig: add recipe
+To: kai <kai.kang@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-From: Kai Kang <kai.kang@windriver.com>
+please add it to packagegroup-meta-python as well.
 
-Upgrade python3-pytest from 5.4.3 to 6.1.0.  And the release changes are
-listed at:
-https://docs.pytest.org/en/stable/changelog.html
-
-* add runtime dependency python3-iniconfig
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- ...he-setup_requires-for-setuptools-scm.patch | 35 ++++++++++---------
- ...ytest_5.4.3.bb => python3-pytest_6.1.0.bb} |  3 +-
- 2 files changed, 21 insertions(+), 17 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pytest_5.4.3.bb => python3-pytest_6.1.0.bb} (89%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch b/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
-index c29fb12de..8c5c17247 100644
---- a/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
-+++ b/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
-@@ -14,23 +14,26 @@ Upstream-Status: Inappropriate [oe specific]
- Signed-off-by: Derek Straka <derek@asterius.io>
- 
- Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
-+
-+Rebase for pytest 6.1.0.
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
- ---
-- setup.py | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/setup.py b/setup.py
--index adbafb5..75fdd09 100644
----- a/setup.py
--+++ b/setup.py
--@@ -19,7 +19,7 @@ INSTALL_REQUIRES = [
-- def main():
--     setup(
--         use_scm_version={"write_to": "src/_pytest/_version.py"},
---        setup_requires=["setuptools-scm", "setuptools>=40.0"],
--+        setup_requires=["setuptools>=40.0"],
--         package_dir={"": "src"},
--         extras_require={
--             "testing": [
-+ setup.cfg | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/setup.cfg b/setup.cfg
-+index 60f6564..c4d1471 100644
-+--- a/setup.cfg
-++++ b/setup.cfg
-+@@ -55,7 +55,6 @@ package_dir =
-+ 	=src
-+ setup_requires = 
-+ 	setuptools>=40.0
-+-	setuptools-scm
-+ zip_safe = no
-+ 
-+ [options.entry_points]
- -- 
- 2.17.1
- 
-diff --git a/meta-python/recipes-devtools/python/python3-pytest_5.4.3.bb b/meta-python/recipes-devtools/python/python3-pytest_6.1.0.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-pytest_5.4.3.bb
-rename to meta-python/recipes-devtools/python/python3-pytest_6.1.0.bb
-index ca67223db..1da43c4f9 100644
---- a/meta-python/recipes-devtools/python/python3-pytest_5.4.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pytest_6.1.0.bb
-@@ -3,7 +3,7 @@ SUMMARY = "Simple powerful testing with python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=81eb9f71d006c6b268cf4388e3c98f7b"
- 
--SRC_URI[sha256sum] = "7979331bfcba207414f5e1263b5a0f8f521d0f457318836a7355531ed1a4c7d8"
-+SRC_URI[sha256sum] = "d010e24666435b39a4cf48740b039885642b6c273a3f77be3e7e03554d2806b7"
- 
- SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch "
- 
-@@ -13,6 +13,7 @@ RDEPENDS_${PN}_class-target += " \
-     ${PYTHON_PN}-attrs \
-     ${PYTHON_PN}-debugger \
-     ${PYTHON_PN}-doctest \
-+    ${PYTHON_PN}-iniconfig \
-     ${PYTHON_PN}-json \
-     ${PYTHON_PN}-pluggy \
-     ${PYTHON_PN}-py \
--- 
-2.17.1
-
+On Sat, Sep 26, 2020 at 10:48 PM kai <kai.kang@windriver.com> wrote:
+>
+> From: Kai Kang <kai.kang@windriver.com>
+>
+> python3-iniconfig is required by pytest 6.1.0.
+>
+> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> ---
+>  .../recipes-devtools/python/python3-iniconfig_1.0.1.bb    | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-iniconfig_1.0.1.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-iniconfig_1.0.1.bb b/meta-python/recipes-devtools/python/python3-iniconfig_1.0.1.bb
+> new file mode 100644
+> index 000000000..9ed0e033b
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-iniconfig_1.0.1.bb
+> @@ -0,0 +1,8 @@
+> +SUMMARY = "A small and simple INI-file parser module"
+> +
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=a6bb0320b04a0a503f12f69fea479de9"
+> +
+> +SRC_URI[sha256sum] = "e5f92f89355a67de0595932a6c6c02ab4afddc6fcdc0bfc5becd0d60884d3f69"
+> +
+> +inherit pypi setuptools3
+> --
+> 2.17.1
+>
+>
+> 
+>
