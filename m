@@ -1,251 +1,196 @@
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web12.28373.1601261805174008324
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web11.30590.1601273569515021300
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Sep 2020 19:56:45 -0700
+ Sun, 27 Sep 2020 23:12:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=K9iizXDp;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id b17so2713381pji.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2020 19:56:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:references:from:autocrypt:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=pmMQ8S1lS8D3rUMs0k41Y8VVxjMot/sIJ50FIbjWTIg=;
-        b=K9iizXDpipTfnM0UMNHQiBWslTeaArT3Wn/eNUjA1eH6xoNcQyBxq1kPcSrccmaXb0
-         ISMFQ8sFlOFfA/5eQa2LA4kNwQ3HqiRYpcPvQlYiRX5A65esARalwofbiE5yqni716BO
-         UXnsbmf81t5065e3CfSP90k54paUnArOAXkMqUzXIXazcUtghWTTwCl25EAW8bXuAVF6
-         /lRtuaSkUtBwIcry0yiTZeHibtyQHvXYGtrBtT0vFOB/KDmHCv8uItfqxQHU+0hL0zHX
-         Q/qQSM4lkPL/X5jBuoIppbdxNgQpld9j9HJgi7l3L0Ni0K9toAcJ79u4TU2cwJXFo98C
-         gMCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
-         :date:user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=pmMQ8S1lS8D3rUMs0k41Y8VVxjMot/sIJ50FIbjWTIg=;
-        b=e+9bvb8RcL2Nj/KsVAD9l4J8vh3h6DmE+XOqW6oKcDbVx/NDSqCHBl+XBl2FUoS5Oz
-         dwMCLXf4zklSfD8chF6joVam3XZN2trg9VRvZNj5KcJFEQxRtUUbIlHsK7KGodciVKOP
-         ZgXbRRCPMHx3KCDVBKkyUofR7pj5gNgIo/OnGmjRMiRganSTHEzu7DO1Tyrqet2ORZ9K
-         dS9fHZ/lwcLWI8GKtX48ArIgvkDa0nUE1u6vCMoX3sT0xbOw3sLZYYjJH6iiIh6As9la
-         xRCSYPwfiTHVpVsbHlp4ZdJU0Eu1fiesR9zmCJ/+lbHn5Xwq3R4vpYUZU6Mj84gpIRSE
-         +DOg==
-X-Gm-Message-State: AOAM531ZfXG7D17rWOtsXAymbo8TlclgjfiYbfs1uULF62QBlOR4ceMs
-	1cnz+a+Vu4ZT6Kse0wWAUZgk6qJgiJY=
-X-Google-Smtp-Source: ABdhPJzyqjupknGDOUcYahFkIrFcemJqIikn2l8TlElh6K7YZsVh03A+Hoc5rP082yXiluJWHCGlWQ==
-X-Received: by 2002:a17:90a:f407:: with SMTP id ch7mr7371256pjb.142.1601261804474;
-        Sun, 27 Sep 2020 19:56:44 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0::41a6? ([2601:202:4180:a5c0::41a6])
-        by smtp.gmail.com with ESMTPSA id a5sm8238289pgk.13.2020.09.27.19.56.43
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 27 Sep 2020 19:56:44 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][PATCH] cmocka: add recipe
-To: openembedded-devel@lists.openembedded.org
-References: <1638D3150C3D8D68.17423@lists.openembedded.org>
-From: "akuster" <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
- 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
- 8CS2NxU=
-Message-ID: <4c4629b2-7df6-c7e5-9faa-3a60b2332cce@gmail.com>
-Date: Sun, 27 Sep 2020 19:56:42 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: yi.zhao@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 08S6Cib0011685
+	(version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2020 23:12:45 -0700 (PDT)
+Received: from localhost (128.224.162.174) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.487.0; Sun, 27 Sep
+ 2020 23:12:43 -0700
+From: "Yi Zhao" <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <wonjong.lee@windriver.com>
+Subject: [meta-oe][PATCH 1/2] minifi-cpp: do not download source during compile
+Date: Mon, 28 Sep 2020 14:12:35 +0800
+Message-ID: <20200928061236.7572-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <1638D3150C3D8D68.17423@lists.openembedded.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-Originating-IP: [128.224.162.174]
+Content-Type: text/plain
 
-ignore. forgot to include [v2] in subject
+The minifi-cpp needs to download and compile several sources
+during compile. Add these sources to SRC_URI to make sure they are
+downloaded in do_fetch not in do_compile.
 
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ ...ts.txt-use-curl-local-source-tarball.patch | 34 +++++++++++++++++++
+ ...make-use-libressl-local-source-tarba.patch | 32 +++++++++++++++++
+ ...PUUID.cmake-use-ossp-uuid-local-sour.patch | 34 +++++++++++++++++++
+ .../minifi-cpp/minifi-cpp_0.7.0.bb            | 14 ++++++++
+ 4 files changed, 114 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/0001-CMakeLists.txt-use-curl-local-source-tarball.patch
+ create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/0002-cmake-LibreSSL.cmake-use-libressl-local-source-tarba.patch
+ create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/0003-cmake-BundledOSSPUUID.cmake-use-ossp-uuid-local-sour.patch
 
-On 9/27/20 7:55 PM, akuster via lists.openembedded.org wrote:
-> includes ptest and bundling of examples that can be used for testing
->
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
->
-> --
-> V2]
-> Backport the OE Samba fix
-> amba: fix build on qemumips64 with musl
-> https://git.openembedded.org/meta-openembedded/commit/meta-networking/recipes-connectivity/samba?id=b758150d30a5fbdc47c465d0e9dca3a7e6d71f3c
->
-> The cmocka fix "Don't redefine uintptr_t" did not address the musl failure.
-> https://git.cryptomilk.org/projects/cmocka.git/commit/?id=28ce16b29911e5adc60140b572dee177adc7a178
->
-> WIll have to submit the samba fix to cmacka and see how it goes.
-> ---
->  meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb   | 39 ++++++++++++++
->  .../cmocka/files/cmocka-uintptr_t.patch       | 53 +++++++++++++++++++
->  meta-oe/recipes-test/cmocka/files/run-ptest   | 10 ++++
->  3 files changed, 102 insertions(+)
->  create mode 100644 meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb
->  create mode 100644 meta-oe/recipes-test/cmocka/files/cmocka-uintptr_t.patch
->  create mode 100644 meta-oe/recipes-test/cmocka/files/run-ptest
->
-> diff --git a/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb b/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb
-> new file mode 100644
-> index 0000000000..5aee5ef931
-> --- /dev/null
-> +++ b/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb
-> @@ -0,0 +1,39 @@
-> +DESCRIPTION = "cmocka is an elegant unit testing framework for C with support for mock \
-> +objects. It only requires the standard C library, works on a range of computing \
-> +platforms (including embedded) and with different compilers."
-> +HOMEPAGE = "https://cmocka.org/"
-> +
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
-> +
-> +SRCREV = "56eb3a183fc222120f86d0c54fd033992c30135e"
-> +SRC_URI = "git://git.cryptomilk.org/projects/cmocka.git \
-> +           file://run-ptest \
-> +           file://cmocka-uintptr_t.patch \
-> +          "
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit cmake ptest
-> +
-> +EXTRA_OECMAKE = "${@bb.utils.contains('PTEST_ENABLED', '1', '-DCMAKE_BUILD_TYPE=Debug -DUNIT_TESTING=ON', '', d)}"
-> +
-> +do_install_append () {
-> +    install -d ${D}${datadir}/${BPN}/example
-> +    install -d ${D}${datadir}/${BPN}/example/mock/chef_wrap
-> +    install -d ${D}${datadir}/${BPN}/example/mock/uptime
-> +
-> +    install -m 0755 ${B}/example/*_test ${D}/${datadir}/${BPN}/example
-> +    install -m 0755 ${B}/example/mock/chef_wrap/waiter_test_wrap ${D}/${datadir}/${BPN}/example/mock/chef_wrap
-> +    install -m 0755 ${B}/example/mock/uptime/uptime ${D}/${datadir}/${BPN}/example/mock/uptime
-> +    install -m 0755 ${B}/example/mock/uptime/test_uptime ${D}/${datadir}/${BPN}/example/mock/uptime
-> +}
-> +
-> +do_install_ptest () {
-> +    install -d ${D}${PTEST_PATH}/tests
-> +    install -m 0755 ${B}/tests/test_* ${D}${PTEST_PATH}/tests
-> +}
-> +
-> +PACKAGE_BEFORE_PN += "${PN}-examples"
-> +
-> +FILES_${PN}-examples = "${datadir}/${BPN}/example"
-> diff --git a/meta-oe/recipes-test/cmocka/files/cmocka-uintptr_t.patch b/meta-oe/recipes-test/cmocka/files/cmocka-uintptr_t.patch
-> new file mode 100644
-> index 0000000000..8d3b73b631
-> --- /dev/null
-> +++ b/meta-oe/recipes-test/cmocka/files/cmocka-uintptr_t.patch
-> @@ -0,0 +1,53 @@
-> +From 5bd7b5d04435bd593349825973ce32290f5f604d Mon Sep 17 00:00:00 2001
-> +From: Changqing Li <changqing.li@windriver.com>
-> +Date: Wed, 25 Jul 2018 09:55:25 +0800
-> +Subject: [PATCH] samba: cmocka.h: fix musl libc conflicting types error
-> +
-> +Fix build on qemumips64(el)
-> +
-> +taken from:
-> +[PATCH] libldb: fix musl libc conflicting types error
-> +
-> +/third_party/cmocka/cmocka.h:126:28: error: conflicting types for 'uintptr_t'
-> +            typedef unsigned int uintptr_t;
-> +                                 ^~~~~~~~~
-> +use __DEFINED_uintptr_t in alltypes.h to check if uintptr already defined
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> +Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> +
-> +Taken from [PATCH] samba: cmocka.h: fix musl libc conflicting types error
-> +https://git.openembedded.org/meta-openembedded/commit/meta-networking/recipes-connectivity/samba?id=b758150d30a5fbdc47c465d0e9dca3a7e6d71f3c
-> +
-> +Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> +
-> +This fix is not in cmocka, so pending pending??
-> +
-> +
-> +Index: git/include/cmocka.h
-> +===================================================================
-> +--- git.orig/include/cmocka.h
-> ++++ git/include/cmocka.h
-> +@@ -116,7 +116,7 @@ typedef uintmax_t LargestIntegralType;
-> +     ((LargestIntegralType)(value))
-> + 
-> + /* Smallest integral type capable of holding a pointer. */
-> +-#if !defined(_UINTPTR_T) && !defined(_UINTPTR_T_DEFINED)
-> ++#if !defined(__DEFINED_uintptr_t)
-> + # if defined(_WIN32)
-> +     /* WIN32 is an ILP32 platform */
-> +     typedef unsigned int uintptr_t;
-> +@@ -140,9 +140,8 @@ typedef uintmax_t LargestIntegralType;
-> + #  endif /* __WORDSIZE */
-> + # endif /* _WIN32 */
-> + 
-> +-# define _UINTPTR_T
-> +-# define _UINTPTR_T_DEFINED
-> +-#endif /* !defined(_UINTPTR_T) || !defined(_UINTPTR_T_DEFINED) */
-> ++# define __DEFINED_uintptr_t
-> ++#endif /* !defined(__DEFINED_uintptr_t) */
-> + 
-> + /* Perform an unsigned cast to uintptr_t. */
-> + #define cast_to_pointer_integral_type(value) \
-> diff --git a/meta-oe/recipes-test/cmocka/files/run-ptest b/meta-oe/recipes-test/cmocka/files/run-ptest
-> new file mode 100644
-> index 0000000000..48b9cd9fc5
-> --- /dev/null
-> +++ b/meta-oe/recipes-test/cmocka/files/run-ptest
-> @@ -0,0 +1,10 @@
-> +#!/bin/sh
-> +
-> +cd tests
-> +for i in `ls *`; do
-> +   if [ ./$i ] ; then
-> +       echo "PASS: $i"
-> +   else
-> +       echo "FAIL: $i"
-> +   fi
-> +done
->
-> 
->
+diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0001-CMakeLists.txt-use-curl-local-source-tarball.patch b/meta-oe/recipes-extended/minifi-cpp/files/0001-CMakeLists.txt-use-curl-local-source-tarball.patch
+new file mode 100644
+index 000000000..183a006e8
+--- /dev/null
++++ b/meta-oe/recipes-extended/minifi-cpp/files/0001-CMakeLists.txt-use-curl-local-source-tarball.patch
+@@ -0,0 +1,34 @@
++From 8d99edeefb23c9d7574a0b5a0e2e3f41b0433490 Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Thu, 10 Sep 2020 16:14:10 +0800
++Subject: [PATCH] CMakeLists.txt: use curl local source tarball
++
++Do not download curl source during compile.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ CMakeLists.txt | 6 +-----
++ 1 file changed, 1 insertion(+), 5 deletions(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 7cd550fb..215a4ef4 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -314,11 +314,7 @@ endif()
++ 
++   ExternalProject_Add(
++     curl-external
++-    GIT_REPOSITORY "https://github.com/curl/curl.git"
++-    GIT_TAG "f3294d9d86e6a7915a967efff2842089b8b0d071"  # Version 7.64.0
++-    SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/curl-src"
++-    LIST_SEPARATOR % # This is needed for passing semicolon-separated lists
++-    TLS_VERIFY OFF
+++    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/curl-7.64.0"
++     CMAKE_ARGS ${PASSTHROUGH_CMAKE_ARGS}
++                "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/thirdparty/curl-install"
++                "-DCMAKE_INSTALL_LIBDIR=lib${LIBSUFFIX}"
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0002-cmake-LibreSSL.cmake-use-libressl-local-source-tarba.patch b/meta-oe/recipes-extended/minifi-cpp/files/0002-cmake-LibreSSL.cmake-use-libressl-local-source-tarba.patch
+new file mode 100644
+index 000000000..da5ee9754
+--- /dev/null
++++ b/meta-oe/recipes-extended/minifi-cpp/files/0002-cmake-LibreSSL.cmake-use-libressl-local-source-tarba.patch
+@@ -0,0 +1,32 @@
++From 5a5317044b0039e9e19aabcecb7b666a3f13e136 Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Thu, 10 Sep 2020 15:08:19 +0800
++Subject: [PATCH] cmake/LibreSSL.cmake: use libressl local source tarball
++
++Do not download libressl source during compile.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ cmake/LibreSSL.cmake | 4 +---
++ 1 file changed, 1 insertion(+), 3 deletions(-)
++
++diff --git a/cmake/LibreSSL.cmake b/cmake/LibreSSL.cmake
++index 57319e40..bab30129 100644
++--- a/cmake/LibreSSL.cmake
+++++ b/cmake/LibreSSL.cmake
++@@ -43,9 +43,7 @@ function(use_libre_ssl SOURCE_DIR BINARY_DIR)
++ 
++ 	ExternalProject_Add(
++ 	libressl-portable
++-	URL https://cdn.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.8.3.tar.gz https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.8.3.tar.gz https://gentoo.osuosl.org/distfiles/libressl-2.8.3.tar.gz
++-	URL_HASH "SHA256=9b640b13047182761a99ce3e4f000be9687566e0828b4a72709e9e6a3ef98477"
++-	SOURCE_DIR "${BINARY_DIR}/thirdparty/libressl-src"
+++	SOURCE_DIR "${SOURCE_DIR}/thirdparty/libressl-2.8.3"
++ 	PATCH_COMMAND ${PATCH}
++ 	CMAKE_ARGS ${PASSTHROUGH_CMAKE_ARGS}
++ 				"-DCMAKE_INSTALL_PREFIX=${BINARY_DIR}/thirdparty/libressl-install"
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0003-cmake-BundledOSSPUUID.cmake-use-ossp-uuid-local-sour.patch b/meta-oe/recipes-extended/minifi-cpp/files/0003-cmake-BundledOSSPUUID.cmake-use-ossp-uuid-local-sour.patch
+new file mode 100644
+index 000000000..a39e15b79
+--- /dev/null
++++ b/meta-oe/recipes-extended/minifi-cpp/files/0003-cmake-BundledOSSPUUID.cmake-use-ossp-uuid-local-sour.patch
+@@ -0,0 +1,34 @@
++From 74ade26f7ccd0dbc4ad97cb3082204118a67c92b Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Thu, 10 Sep 2020 15:12:41 +0800
++Subject: [PATCH] cmake/BundledOSSPUUID.cmake: use ossp-uuid local source
++ tarball
++
++Do not download ossp-uuid source during compile.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ cmake/BundledOSSPUUID.cmake | 4 +---
++ 1 file changed, 1 insertion(+), 3 deletions(-)
++
++diff --git a/cmake/BundledOSSPUUID.cmake b/cmake/BundledOSSPUUID.cmake
++index 1103156d..0cf4bac0 100644
++--- a/cmake/BundledOSSPUUID.cmake
+++++ b/cmake/BundledOSSPUUID.cmake
++@@ -47,10 +47,8 @@ function(use_bundled_osspuuid SOURCE_DIR BINARY_DIR)
++ 
++     ExternalProject_Add(
++             ossp-uuid-external
++-            URL "https://deb.debian.org/debian/pool/main/o/ossp-uuid/ossp-uuid_1.6.2.orig.tar.gz"
++-            URL_HASH "SHA256=11a615225baa5f8bb686824423f50e4427acd3f70d394765bdff32801f0fd5b0"
++             BUILD_IN_SOURCE true
++-            SOURCE_DIR "${BINARY_DIR}/thirdparty/ossp-uuid-src"
+++            SOURCE_DIR "${SOURCE_DIR}/thirdparty/uuid-1.6.2"
++             BUILD_COMMAND make
++             CMAKE_COMMAND ""
++             UPDATE_COMMAND ""
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
+index 37036ebbb..d6f92128c 100644
+--- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
++++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
+@@ -12,6 +12,9 @@ RDEPENDS_${PN} = "python3-core"
+ 
+ SRCREV = "aa42957a2e227df41510047cece3cd606dc1cb6a"
+ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git \
++            https://curl.haxx.se/download/curl-7.64.0.tar.bz2;name=curl;subdir=git/thirdparty \
++            https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.8.3.tar.gz;name=libressl;subdir=git/thirdparty \
++            ${DEBIAN_MIRROR}/main/o/ossp-uuid/ossp-uuid_1.6.2.orig.tar.gz;name=ossp-uuid;subdir=git/thirdparty \
+             file://fix-minifi-compile.patch \
+             file://fix-libressl-compile.patch \
+             file://fix-libressl-avoid-BSWAP-assembly-for-ARM-v6.patch \
+@@ -21,10 +24,21 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git \
+             file://fix-rocksdb-cross-compile.patch \
+             file://remove_const_due_to_std_lock_guard.patch \
+             file://0001-Add-lxml2-to-linker-cmdline-of-xml-is-found.patch \
++            file://0001-CMakeLists.txt-use-curl-local-source-tarball.patch \
++            file://0002-cmake-LibreSSL.cmake-use-libressl-local-source-tarba.patch \
++            file://0003-cmake-BundledOSSPUUID.cmake-use-ossp-uuid-local-sour.patch \
+             file://minifi.service \
+             file://systemd-volatile.conf \
+             file://sysvinit-volatile.conf \
+             "
++
++SRC_URI[curl.md5sum] = "d0bcc586873cfef08b4b9594e5395a33"
++SRC_URI[curl.sha256sum] = "d573ba1c2d1cf9d8533fadcce480d778417964e8d04ccddcc76e591d544cf2eb"
++SRC_URI[libressl.md5sum] = "0f1127bd21b4aa8495a910379c2ad936"
++SRC_URI[libressl.sha256sum] = "9b640b13047182761a99ce3e4f000be9687566e0828b4a72709e9e6a3ef98477"
++SRC_URI[ossp-uuid.md5sum] = "5db0d43a9022a6ebbbc25337ae28942f"
++SRC_URI[ossp-uuid.sha256sum] = "11a615225baa5f8bb686824423f50e4427acd3f70d394765bdff32801f0fd5b0"
++
+ S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig cmake systemd
+-- 
+2.17.1
 
