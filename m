@@ -1,193 +1,251 @@
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
- by mx.groups.io with SMTP id smtpd.web12.28365.1601261768474217143
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.web12.28373.1601261805174008324
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Sep 2020 19:56:08 -0700
+ Sun, 27 Sep 2020 19:56:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=rID/Rhvt;
- spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f177.google.com with SMTP id b124so7986254pfg.13
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2020 19:56:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=K9iizXDp;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id b17so2713381pji.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2020 19:56:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id;
-        bh=gnpT9JiUyic5rcgvWbIcskCIBtqTIqOamZt0XjdXzJQ=;
-        b=rID/RhvtguwemGaG+bekhEyo29eZ0XOE6m7DBsjDNLvS9t3bALZxGs93Xgfd3uvWZs
-         kgOJojXOHXYASzoXgIapUt5OKaAX0wxhKydyrVOs1aW1fewhxArvNKYBD6J2nf54QsEU
-         d3ZlDHWAbpfKU64+IEDnFoMDxDB/+aeBDoYosvDDAzzHABRst3DrG/uUGf2Q/xb34U2A
-         rvh8pPyQ9fYYI8iKcG1UVuQCEgEIbdZET4ZAiToi8+Yu7eeU7csq03KBsjqf9VBE2svy
-         ZoZRjiaPJh1on17hPyPU4QNOx+QAXCg1GS8MaQoiZh40HMtEPmYEXS75uDB8z/QFlGFF
-         NkEA==
+        h=subject:to:references:from:autocrypt:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=pmMQ8S1lS8D3rUMs0k41Y8VVxjMot/sIJ50FIbjWTIg=;
+        b=K9iizXDpipTfnM0UMNHQiBWslTeaArT3Wn/eNUjA1eH6xoNcQyBxq1kPcSrccmaXb0
+         ISMFQ8sFlOFfA/5eQa2LA4kNwQ3HqiRYpcPvQlYiRX5A65esARalwofbiE5yqni716BO
+         UXnsbmf81t5065e3CfSP90k54paUnArOAXkMqUzXIXazcUtghWTTwCl25EAW8bXuAVF6
+         /lRtuaSkUtBwIcry0yiTZeHibtyQHvXYGtrBtT0vFOB/KDmHCv8uItfqxQHU+0hL0zHX
+         Q/qQSM4lkPL/X5jBuoIppbdxNgQpld9j9HJgi7l3L0Ni0K9toAcJ79u4TU2cwJXFo98C
+         gMCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id;
-        bh=gnpT9JiUyic5rcgvWbIcskCIBtqTIqOamZt0XjdXzJQ=;
-        b=mVH0ahjz0LylqjshAk4EKtrk9NAXOWfCaL5gwM+LgqV3IrATqSVFj0mxDr1WBm7QXC
-         M7ijO9k38pdEXbSL3pgOfjqWot5FFebzROsRC0eMiR527/jk3ul44oCEkTXlD8uNf3hR
-         B3jaFPvBr6C94T2CqDaiGruVGXkdEz/5dlvo+0RJ+RLXaGyEXUSTO00cDWvkFbNpJMdN
-         KoXn2YbH2Dgf+CRJgjKwcwxTz258iXc25QL8CrPqwS7pO+9VSkWgaWRdZpH3tehr3+Jc
-         1+jVh8ztuv18eVlLQOAbA5Qeh/4EROSqPjzm7heOpjRdcgZM2cvGk5dYjWC7uJJ0PC8g
-         jKhA==
-X-Gm-Message-State: AOAM532MTf0Q6xhG7LGc52QhD8otMXjqqzUTuS3DpXFDvfuxpfnq0pOB
-	kOnwekFYYkne02LbNWpF7tKnh05gp7g=
-X-Google-Smtp-Source: ABdhPJxICvA9cvBqQGNWyOMxobBC6kouMhc7fnWuXadyAQcQwC2hzSZhoEYgQPFnfLt9NFUeyhXlPw==
-X-Received: by 2002:aa7:911a:0:b029:13e:d13d:a13d with SMTP id 26-20020aa7911a0000b029013ed13da13dmr8800471pfh.37.1601261767690;
-        Sun, 27 Sep 2020 19:56:07 -0700 (PDT)
+        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
+         :date:user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=pmMQ8S1lS8D3rUMs0k41Y8VVxjMot/sIJ50FIbjWTIg=;
+        b=e+9bvb8RcL2Nj/KsVAD9l4J8vh3h6DmE+XOqW6oKcDbVx/NDSqCHBl+XBl2FUoS5Oz
+         dwMCLXf4zklSfD8chF6joVam3XZN2trg9VRvZNj5KcJFEQxRtUUbIlHsK7KGodciVKOP
+         ZgXbRRCPMHx3KCDVBKkyUofR7pj5gNgIo/OnGmjRMiRganSTHEzu7DO1Tyrqet2ORZ9K
+         dS9fHZ/lwcLWI8GKtX48ArIgvkDa0nUE1u6vCMoX3sT0xbOw3sLZYYjJH6iiIh6As9la
+         xRCSYPwfiTHVpVsbHlp4ZdJU0Eu1fiesR9zmCJ/+lbHn5Xwq3R4vpYUZU6Mj84gpIRSE
+         +DOg==
+X-Gm-Message-State: AOAM531ZfXG7D17rWOtsXAymbo8TlclgjfiYbfs1uULF62QBlOR4ceMs
+	1cnz+a+Vu4ZT6Kse0wWAUZgk6qJgiJY=
+X-Google-Smtp-Source: ABdhPJzyqjupknGDOUcYahFkIrFcemJqIikn2l8TlElh6K7YZsVh03A+Hoc5rP082yXiluJWHCGlWQ==
+X-Received: by 2002:a17:90a:f407:: with SMTP id ch7mr7371256pjb.142.1601261804474;
+        Sun, 27 Sep 2020 19:56:44 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0::41a6])
-        by smtp.gmail.com with ESMTPSA id q16sm9853717pfj.117.2020.09.27.19.56.07
+Received: from ?IPv6:2601:202:4180:a5c0::41a6? ([2601:202:4180:a5c0::41a6])
+        by smtp.gmail.com with ESMTPSA id a5sm8238289pgk.13.2020.09.27.19.56.43
         for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2020 19:56:07 -0700 (PDT)
-From: "akuster" <akuster808@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 27 Sep 2020 19:56:44 -0700 (PDT)
+Subject: Re: [oe] [meta-oe][PATCH] cmocka: add recipe
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][v2][PATCH] cmocka: add recipe
-Date: Sun, 27 Sep 2020 19:56:06 -0700
-Message-Id: <20200928025606.8552-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
+References: <1638D3150C3D8D68.17423@lists.openembedded.org>
+From: "akuster" <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+ 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
+ 8CS2NxU=
+Message-ID: <4c4629b2-7df6-c7e5-9faa-3a60b2332cce@gmail.com>
+Date: Sun, 27 Sep 2020 19:56:42 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <1638D3150C3D8D68.17423@lists.openembedded.org>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-includes ptest and bundling of examples that can be used for testing
+ignore. forgot to include [v2] in subject
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
 
---
-V2]
-Backport the OE Samba fix
-amba: fix build on qemumips64 with musl
-https://git.openembedded.org/meta-openembedded/commit/meta-networking/recipes-connectivity/samba?id=b758150d30a5fbdc47c465d0e9dca3a7e6d71f3c
-
-The cmocka fix "Don't redefine uintptr_t" did not address the musl failure.
-https://git.cryptomilk.org/projects/cmocka.git/commit/?id=28ce16b29911e5adc60140b572dee177adc7a178
-
-WIll have to submit the samba fix to cmacka and see how it goes.
----
- meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb   | 39 ++++++++++++++
- .../cmocka/files/cmocka-uintptr_t.patch       | 53 +++++++++++++++++++
- meta-oe/recipes-test/cmocka/files/run-ptest   | 10 ++++
- 3 files changed, 102 insertions(+)
- create mode 100644 meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb
- create mode 100644 meta-oe/recipes-test/cmocka/files/cmocka-uintptr_t.patch
- create mode 100644 meta-oe/recipes-test/cmocka/files/run-ptest
-
-diff --git a/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb b/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb
-new file mode 100644
-index 0000000000..5aee5ef931
---- /dev/null
-+++ b/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb
-@@ -0,0 +1,39 @@
-+DESCRIPTION = "cmocka is an elegant unit testing framework for C with support for mock \
-+objects. It only requires the standard C library, works on a range of computing \
-+platforms (including embedded) and with different compilers."
-+HOMEPAGE = "https://cmocka.org/"
-+
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
-+
-+SRCREV = "56eb3a183fc222120f86d0c54fd033992c30135e"
-+SRC_URI = "git://git.cryptomilk.org/projects/cmocka.git \
-+           file://run-ptest \
-+           file://cmocka-uintptr_t.patch \
-+          "
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake ptest
-+
-+EXTRA_OECMAKE = "${@bb.utils.contains('PTEST_ENABLED', '1', '-DCMAKE_BUILD_TYPE=Debug -DUNIT_TESTING=ON', '', d)}"
-+
-+do_install_append () {
-+    install -d ${D}${datadir}/${BPN}/example
-+    install -d ${D}${datadir}/${BPN}/example/mock/chef_wrap
-+    install -d ${D}${datadir}/${BPN}/example/mock/uptime
-+
-+    install -m 0755 ${B}/example/*_test ${D}/${datadir}/${BPN}/example
-+    install -m 0755 ${B}/example/mock/chef_wrap/waiter_test_wrap ${D}/${datadir}/${BPN}/example/mock/chef_wrap
-+    install -m 0755 ${B}/example/mock/uptime/uptime ${D}/${datadir}/${BPN}/example/mock/uptime
-+    install -m 0755 ${B}/example/mock/uptime/test_uptime ${D}/${datadir}/${BPN}/example/mock/uptime
-+}
-+
-+do_install_ptest () {
-+    install -d ${D}${PTEST_PATH}/tests
-+    install -m 0755 ${B}/tests/test_* ${D}${PTEST_PATH}/tests
-+}
-+
-+PACKAGE_BEFORE_PN += "${PN}-examples"
-+
-+FILES_${PN}-examples = "${datadir}/${BPN}/example"
-diff --git a/meta-oe/recipes-test/cmocka/files/cmocka-uintptr_t.patch b/meta-oe/recipes-test/cmocka/files/cmocka-uintptr_t.patch
-new file mode 100644
-index 0000000000..8d3b73b631
---- /dev/null
-+++ b/meta-oe/recipes-test/cmocka/files/cmocka-uintptr_t.patch
-@@ -0,0 +1,53 @@
-+From 5bd7b5d04435bd593349825973ce32290f5f604d Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Wed, 25 Jul 2018 09:55:25 +0800
-+Subject: [PATCH] samba: cmocka.h: fix musl libc conflicting types error
-+
-+Fix build on qemumips64(el)
-+
-+taken from:
-+[PATCH] libldb: fix musl libc conflicting types error
-+
-+/third_party/cmocka/cmocka.h:126:28: error: conflicting types for 'uintptr_t'
-+            typedef unsigned int uintptr_t;
-+                                 ^~~~~~~~~
-+use __DEFINED_uintptr_t in alltypes.h to check if uintptr already defined
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-+
-+Taken from [PATCH] samba: cmocka.h: fix musl libc conflicting types error
-+https://git.openembedded.org/meta-openembedded/commit/meta-networking/recipes-connectivity/samba?id=b758150d30a5fbdc47c465d0e9dca3a7e6d71f3c
-+
-+Signed-off-by: Armin Kuster <akuster808@gmail.com>
-+
-+This fix is not in cmocka, so pending pending??
-+
-+
-+Index: git/include/cmocka.h
-+===================================================================
-+--- git.orig/include/cmocka.h
-++++ git/include/cmocka.h
-+@@ -116,7 +116,7 @@ typedef uintmax_t LargestIntegralType;
-+     ((LargestIntegralType)(value))
-+ 
-+ /* Smallest integral type capable of holding a pointer. */
-+-#if !defined(_UINTPTR_T) && !defined(_UINTPTR_T_DEFINED)
-++#if !defined(__DEFINED_uintptr_t)
-+ # if defined(_WIN32)
-+     /* WIN32 is an ILP32 platform */
-+     typedef unsigned int uintptr_t;
-+@@ -140,9 +140,8 @@ typedef uintmax_t LargestIntegralType;
-+ #  endif /* __WORDSIZE */
-+ # endif /* _WIN32 */
-+ 
-+-# define _UINTPTR_T
-+-# define _UINTPTR_T_DEFINED
-+-#endif /* !defined(_UINTPTR_T) || !defined(_UINTPTR_T_DEFINED) */
-++# define __DEFINED_uintptr_t
-++#endif /* !defined(__DEFINED_uintptr_t) */
-+ 
-+ /* Perform an unsigned cast to uintptr_t. */
-+ #define cast_to_pointer_integral_type(value) \
-diff --git a/meta-oe/recipes-test/cmocka/files/run-ptest b/meta-oe/recipes-test/cmocka/files/run-ptest
-new file mode 100644
-index 0000000000..48b9cd9fc5
---- /dev/null
-+++ b/meta-oe/recipes-test/cmocka/files/run-ptest
-@@ -0,0 +1,10 @@
-+#!/bin/sh
-+
-+cd tests
-+for i in `ls *`; do
-+   if [ ./$i ] ; then
-+       echo "PASS: $i"
-+   else
-+       echo "FAIL: $i"
-+   fi
-+done
--- 
-2.17.1
+On 9/27/20 7:55 PM, akuster via lists.openembedded.org wrote:
+> includes ptest and bundling of examples that can be used for testing
+>
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+>
+> --
+> V2]
+> Backport the OE Samba fix
+> amba: fix build on qemumips64 with musl
+> https://git.openembedded.org/meta-openembedded/commit/meta-networking/recipes-connectivity/samba?id=b758150d30a5fbdc47c465d0e9dca3a7e6d71f3c
+>
+> The cmocka fix "Don't redefine uintptr_t" did not address the musl failure.
+> https://git.cryptomilk.org/projects/cmocka.git/commit/?id=28ce16b29911e5adc60140b572dee177adc7a178
+>
+> WIll have to submit the samba fix to cmacka and see how it goes.
+> ---
+>  meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb   | 39 ++++++++++++++
+>  .../cmocka/files/cmocka-uintptr_t.patch       | 53 +++++++++++++++++++
+>  meta-oe/recipes-test/cmocka/files/run-ptest   | 10 ++++
+>  3 files changed, 102 insertions(+)
+>  create mode 100644 meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb
+>  create mode 100644 meta-oe/recipes-test/cmocka/files/cmocka-uintptr_t.patch
+>  create mode 100644 meta-oe/recipes-test/cmocka/files/run-ptest
+>
+> diff --git a/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb b/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb
+> new file mode 100644
+> index 0000000000..5aee5ef931
+> --- /dev/null
+> +++ b/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb
+> @@ -0,0 +1,39 @@
+> +DESCRIPTION = "cmocka is an elegant unit testing framework for C with support for mock \
+> +objects. It only requires the standard C library, works on a range of computing \
+> +platforms (including embedded) and with different compilers."
+> +HOMEPAGE = "https://cmocka.org/"
+> +
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
+> +
+> +SRCREV = "56eb3a183fc222120f86d0c54fd033992c30135e"
+> +SRC_URI = "git://git.cryptomilk.org/projects/cmocka.git \
+> +           file://run-ptest \
+> +           file://cmocka-uintptr_t.patch \
+> +          "
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +inherit cmake ptest
+> +
+> +EXTRA_OECMAKE = "${@bb.utils.contains('PTEST_ENABLED', '1', '-DCMAKE_BUILD_TYPE=Debug -DUNIT_TESTING=ON', '', d)}"
+> +
+> +do_install_append () {
+> +    install -d ${D}${datadir}/${BPN}/example
+> +    install -d ${D}${datadir}/${BPN}/example/mock/chef_wrap
+> +    install -d ${D}${datadir}/${BPN}/example/mock/uptime
+> +
+> +    install -m 0755 ${B}/example/*_test ${D}/${datadir}/${BPN}/example
+> +    install -m 0755 ${B}/example/mock/chef_wrap/waiter_test_wrap ${D}/${datadir}/${BPN}/example/mock/chef_wrap
+> +    install -m 0755 ${B}/example/mock/uptime/uptime ${D}/${datadir}/${BPN}/example/mock/uptime
+> +    install -m 0755 ${B}/example/mock/uptime/test_uptime ${D}/${datadir}/${BPN}/example/mock/uptime
+> +}
+> +
+> +do_install_ptest () {
+> +    install -d ${D}${PTEST_PATH}/tests
+> +    install -m 0755 ${B}/tests/test_* ${D}${PTEST_PATH}/tests
+> +}
+> +
+> +PACKAGE_BEFORE_PN += "${PN}-examples"
+> +
+> +FILES_${PN}-examples = "${datadir}/${BPN}/example"
+> diff --git a/meta-oe/recipes-test/cmocka/files/cmocka-uintptr_t.patch b/meta-oe/recipes-test/cmocka/files/cmocka-uintptr_t.patch
+> new file mode 100644
+> index 0000000000..8d3b73b631
+> --- /dev/null
+> +++ b/meta-oe/recipes-test/cmocka/files/cmocka-uintptr_t.patch
+> @@ -0,0 +1,53 @@
+> +From 5bd7b5d04435bd593349825973ce32290f5f604d Mon Sep 17 00:00:00 2001
+> +From: Changqing Li <changqing.li@windriver.com>
+> +Date: Wed, 25 Jul 2018 09:55:25 +0800
+> +Subject: [PATCH] samba: cmocka.h: fix musl libc conflicting types error
+> +
+> +Fix build on qemumips64(el)
+> +
+> +taken from:
+> +[PATCH] libldb: fix musl libc conflicting types error
+> +
+> +/third_party/cmocka/cmocka.h:126:28: error: conflicting types for 'uintptr_t'
+> +            typedef unsigned int uintptr_t;
+> +                                 ^~~~~~~~~
+> +use __DEFINED_uintptr_t in alltypes.h to check if uintptr already defined
+> +
+> +Upstream-Status: Pending
+> +
+> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> +Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> +
+> +Taken from [PATCH] samba: cmocka.h: fix musl libc conflicting types error
+> +https://git.openembedded.org/meta-openembedded/commit/meta-networking/recipes-connectivity/samba?id=b758150d30a5fbdc47c465d0e9dca3a7e6d71f3c
+> +
+> +Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> +
+> +This fix is not in cmocka, so pending pending??
+> +
+> +
+> +Index: git/include/cmocka.h
+> +===================================================================
+> +--- git.orig/include/cmocka.h
+> ++++ git/include/cmocka.h
+> +@@ -116,7 +116,7 @@ typedef uintmax_t LargestIntegralType;
+> +     ((LargestIntegralType)(value))
+> + 
+> + /* Smallest integral type capable of holding a pointer. */
+> +-#if !defined(_UINTPTR_T) && !defined(_UINTPTR_T_DEFINED)
+> ++#if !defined(__DEFINED_uintptr_t)
+> + # if defined(_WIN32)
+> +     /* WIN32 is an ILP32 platform */
+> +     typedef unsigned int uintptr_t;
+> +@@ -140,9 +140,8 @@ typedef uintmax_t LargestIntegralType;
+> + #  endif /* __WORDSIZE */
+> + # endif /* _WIN32 */
+> + 
+> +-# define _UINTPTR_T
+> +-# define _UINTPTR_T_DEFINED
+> +-#endif /* !defined(_UINTPTR_T) || !defined(_UINTPTR_T_DEFINED) */
+> ++# define __DEFINED_uintptr_t
+> ++#endif /* !defined(__DEFINED_uintptr_t) */
+> + 
+> + /* Perform an unsigned cast to uintptr_t. */
+> + #define cast_to_pointer_integral_type(value) \
+> diff --git a/meta-oe/recipes-test/cmocka/files/run-ptest b/meta-oe/recipes-test/cmocka/files/run-ptest
+> new file mode 100644
+> index 0000000000..48b9cd9fc5
+> --- /dev/null
+> +++ b/meta-oe/recipes-test/cmocka/files/run-ptest
+> @@ -0,0 +1,10 @@
+> +#!/bin/sh
+> +
+> +cd tests
+> +for i in `ls *`; do
+> +   if [ ./$i ] ; then
+> +       echo "PASS: $i"
+> +   else
+> +       echo "FAIL: $i"
+> +   fi
+> +done
+>
+> 
+>
 
