@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.31547.1601280077197671128
+ by mx.groups.io with SMTP id smtpd.web10.31548.1601280084156694515
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Sep 2020 01:01:17 -0700
+ Mon, 28 Sep 2020 01:01:24 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=40866 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kMo5x-0001Xq-C4; Mon, 28 Sep 2020 11:01:14 +0300
+	id 1kMo62-0001Xq-Ft; Mon, 28 Sep 2020 11:01:23 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/6] python3-pychromecast: Upgrade 7.3.0 -> 7.5.0
-Date: Mon, 28 Sep 2020 11:00:54 +0300
-Message-Id: <20200928080059.18929-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/6] python3-beautifulsoup4: Upgrade 4.9.1 -> 4.9.2
+Date: Mon, 28 Sep 2020 11:00:55 +0300
+Message-Id: <20200928080059.18929-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200928080059.18929-1-leon.anavi@konsulko.com>
+References: <20200928080059.18929-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,36 +30,41 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 7.5.0:
-
-- Allow passing additional media information through to play_media
-- Add support for lists, playQueues, and playlists on Plex
-  controller
-- Misc spelling changes
+- Fixed a bug that caused too many tags to be popped from the tag
+  stack during tree building, when encountering a closing tag that
+  had no matching opening tag.
+- Fixed a bug that inconsistently moved elements over when passing
+  a Tag, rather than a list, into Tag.extend().
+- Specify the soupsieve dependency in a way that complies with
+  PEP 508.
+- Change the signatures for BeautifulSoup.insert_before and
+  insert_after (which are not implemented) to match
+  PageElement.insert_before and insert_after, quieting warnings in
+  some IDEs.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...n3-pychromecast_7.3.0.bb => python3-pychromecast_7.5.0.bb} | 4 ++--
+ ...eautifulsoup4_4.9.1.bb => python3-beautifulsoup4_4.9.2.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pychromecast_7.3.0.bb => python3-pychromecast_7.5.0.bb} (66%)
+ rename meta-python/recipes-devtools/python/{python3-beautifulsoup4_4.9.1.bb => python3-beautifulsoup4_4.9.2.bb} (71%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.3.0.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.5.0.bb
-similarity index 66%
-rename from meta-python/recipes-devtools/python/python3-pychromecast_7.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-pychromecast_7.5.0.bb
-index b444df05d8..adfdbb17b8 100644
---- a/meta-python/recipes-devtools/python/python3-pychromecast_7.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pychromecast_7.5.0.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
+diff --git a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.2.bb
+similarity index 71%
+rename from meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb
+rename to meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.2.bb
+index 910de12f8a..fb5fb1a6b8 100644
+--- a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb
++++ b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.2.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1"
  
--SRC_URI[md5sum] = "7ab862743ff33dafc93206c1435abc5e"
--SRC_URI[sha256sum] = "f594231efb34b86eeb463611662bca21a6962793885d3ad68195286940f7473d"
-+SRC_URI[md5sum] = "d35c610f57cae909348ff6c60e5e9256"
-+SRC_URI[sha256sum] = "2f346a88ddc27a19cc68bc2d3e8929d89276298cb1c11871b82a87fbdafb95a8"
+-SRC_URI[md5sum] = "57502b5b34ccfd97b180260071f5799a"
+-SRC_URI[sha256sum] = "73cc4d115b96f79c7d77c1c7f7a0a8d4c57860d1041df407dd1aae7f07a77fd7"
++SRC_URI[md5sum] = "5672f9b9bdfb0c6ab3ef074396bf59aa"
++SRC_URI[sha256sum] = "1edf5e39f3a5bc6e38b235b369128416c7239b34f692acccececb040233032a1"
  
- PYPI_PACKAGE = "PyChromecast"
+ inherit pypi setuptools3
  
 -- 
 2.17.1
