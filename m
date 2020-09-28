@@ -1,48 +1,48 @@
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web11.28280.1601261754660873963
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web12.28365.1601261768474217143
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Sep 2020 19:55:54 -0700
+ Sun, 27 Sep 2020 19:56:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=evJD5xkZ;
- spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id o25so7051454pgm.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2020 19:55:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=rID/Rhvt;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id b124so7986254pfg.13
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Sep 2020 19:56:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id;
         bh=gnpT9JiUyic5rcgvWbIcskCIBtqTIqOamZt0XjdXzJQ=;
-        b=evJD5xkZoj9cP2kQo/G30ytmgp6jogEM86r3KOhKp4aiC9po01Y074Og7Rs3BCcNCo
-         Ls7nta/v3VLlVqzDjkUGKxGgTpgz0Kr68dhOc2iYEmJvlsri3TAAhQGxhzb+fuOQkbYp
-         5MleQtpeSpR/0CaGXRZiGfz5V+t+G+As0k/EsGTENbvloNaPUeNJur9X0aoeZ+sheIAr
-         y6hO0h+aNMb1VzBCWXy1heZSVbUvbxm9WObYWR4Bp8w1nCffPoreXmQAO3utrOgbzdJ3
-         e/Rd0AZMPz3gx0n+3X5lKmxQY8g/s2AvUGINwfXG8J78AGrWAaC1daHwPYLTkHvcfOSg
-         8tiA==
+        b=rID/RhvtguwemGaG+bekhEyo29eZ0XOE6m7DBsjDNLvS9t3bALZxGs93Xgfd3uvWZs
+         kgOJojXOHXYASzoXgIapUt5OKaAX0wxhKydyrVOs1aW1fewhxArvNKYBD6J2nf54QsEU
+         d3ZlDHWAbpfKU64+IEDnFoMDxDB/+aeBDoYosvDDAzzHABRst3DrG/uUGf2Q/xb34U2A
+         rvh8pPyQ9fYYI8iKcG1UVuQCEgEIbdZET4ZAiToi8+Yu7eeU7csq03KBsjqf9VBE2svy
+         ZoZRjiaPJh1on17hPyPU4QNOx+QAXCg1GS8MaQoiZh40HMtEPmYEXS75uDB8z/QFlGFF
+         NkEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id;
         bh=gnpT9JiUyic5rcgvWbIcskCIBtqTIqOamZt0XjdXzJQ=;
-        b=AW0Y+B7KkayOo94R+Hf4vEQnv+t7CrXFGZBHWHbTybnVE+7+1e/YFnCQal3ZKzm34v
-         CrIPQZICpDjihzRiWbOjIG1lZVMNvMM830s6y5Wq/U6HSexh55TDTw0qRWU98vUkTGVX
-         G0PVPiYDeDcFJsRkXwvlVUYmv632NkVjPYq2H0+Gtt5Rs4mg38DsxSf6aInuO3A7W5u8
-         1TNSsNa6ciEqRXfbCnyY4/oO2Hf0EjiaJ2iL+HndSkByYtRGEoprkcp+r2777m2fjG34
-         sHSm5SxPaaD1wbD19CZR2EHQLbYQzOaQDkOB613AQV6D7JGvn2OxOvJimC5RQg3NWNcq
-         k34w==
-X-Gm-Message-State: AOAM5315pg0Y32nnugUf6BVRA6F9XRclo+2hCB7Cyk41cHVA1yPAVqwc
-	ktDh+F4EYQbmu65wNIGMXqeNSlBlGUg=
-X-Google-Smtp-Source: ABdhPJw6ECgCa76N7RT1PYQRj3sIqzCj9MYxMWwCm8+gxfFHDQoLtSN2/a4cBeZkz/0xXdFIxIGOdQ==
-X-Received: by 2002:a17:902:bccc:b029:d2:8cba:8f7e with SMTP id o12-20020a170902bcccb02900d28cba8f7emr1224199pls.3.1601261753414;
-        Sun, 27 Sep 2020 19:55:53 -0700 (PDT)
+        b=mVH0ahjz0LylqjshAk4EKtrk9NAXOWfCaL5gwM+LgqV3IrATqSVFj0mxDr1WBm7QXC
+         M7ijO9k38pdEXbSL3pgOfjqWot5FFebzROsRC0eMiR527/jk3ul44oCEkTXlD8uNf3hR
+         B3jaFPvBr6C94T2CqDaiGruVGXkdEz/5dlvo+0RJ+RLXaGyEXUSTO00cDWvkFbNpJMdN
+         KoXn2YbH2Dgf+CRJgjKwcwxTz258iXc25QL8CrPqwS7pO+9VSkWgaWRdZpH3tehr3+Jc
+         1+jVh8ztuv18eVlLQOAbA5Qeh/4EROSqPjzm7heOpjRdcgZM2cvGk5dYjWC7uJJ0PC8g
+         jKhA==
+X-Gm-Message-State: AOAM532MTf0Q6xhG7LGc52QhD8otMXjqqzUTuS3DpXFDvfuxpfnq0pOB
+	kOnwekFYYkne02LbNWpF7tKnh05gp7g=
+X-Google-Smtp-Source: ABdhPJxICvA9cvBqQGNWyOMxobBC6kouMhc7fnWuXadyAQcQwC2hzSZhoEYgQPFnfLt9NFUeyhXlPw==
+X-Received: by 2002:aa7:911a:0:b029:13e:d13d:a13d with SMTP id 26-20020aa7911a0000b029013ed13da13dmr8800471pfh.37.1601261767690;
+        Sun, 27 Sep 2020 19:56:07 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0::41a6])
-        by smtp.gmail.com with ESMTPSA id q4sm9484158pfs.193.2020.09.27.19.55.52
+        by smtp.gmail.com with ESMTPSA id q16sm9853717pfj.117.2020.09.27.19.56.07
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2020 19:55:52 -0700 (PDT)
+        Sun, 27 Sep 2020 19:56:07 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] cmocka: add recipe
-Date: Sun, 27 Sep 2020 19:55:51 -0700
-Message-Id: <20200928025551.8500-1-akuster808@gmail.com>
+Subject: [meta-oe][v2][PATCH] cmocka: add recipe
+Date: Sun, 27 Sep 2020 19:56:06 -0700
+Message-Id: <20200928025606.8552-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 
 includes ptest and bundling of examples that can be used for testing
