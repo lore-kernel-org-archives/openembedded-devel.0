@@ -1,57 +1,62 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web11.14312.1601358353498164814
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.16190.1601368016052159575
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Sep 2020 22:45:54 -0700
+ Tue, 29 Sep 2020 01:26:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.77,317,1596470400"; 
-   d="scan'208";a="99702185"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 29 Sep 2020 13:45:50 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 3C0F048990F2
-	for <openembedded-devel@lists.openembedded.org>; Tue, 29 Sep 2020 13:45:49 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Tue, 29 Sep 2020 13:45:46 +0800
-From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] dnf-plugin-tui: upgrade 1.1 -> 1.2
-Date: Tue, 29 Sep 2020 13:45:23 +0800
-Message-ID: <1601358323-110594-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
-X-yoursite-MailScanner-ID: 3C0F048990F2.A66E9
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=46838 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kNAyK-0004Ji-3L; Tue, 29 Sep 2020 11:26:53 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-regex: Upgrade 2020.7.14 -> 2020.9.27
+Date: Tue, 29 Sep 2020 11:26:44 +0300
+Message-Id: <20200929082645.32560-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Upgrade to release 2020.9.27:
+
+- Fix Memory Error - regex.findall. The problem was caused by a
+  lazy repeat looping forever, growing the backtracking stack.
+  Greedy repeats were OK.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb | 4 ++--
+ ...{python3-regex_2020.7.14.bb => python3-regex_2020.9.27.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-regex_2020.7.14.bb => python3-regex_2020.9.27.bb} (68%)
 
-diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-index 406494ebbc..2a42093447 100644
---- a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-+++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-@@ -4,8 +4,8 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-python/recipes-devtools/python/python3-regex_2020.7.14.bb b/meta-python/recipes-devtools/python/python3-regex_2020.9.27.bb
+similarity index 68%
+rename from meta-python/recipes-devtools/python/python3-regex_2020.7.14.bb
+rename to meta-python/recipes-devtools/python/python3-regex_2020.9.27.bb
+index 5c608c989f..fb891f8716 100644
+--- a/meta-python/recipes-devtools/python/python3-regex_2020.7.14.bb
++++ b/meta-python/recipes-devtools/python/python3-regex_2020.9.27.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=ee7987010dadc17745
  
- SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master "
--SRCREV = "c5416adeb210154dc4ccc4c3e1c5297d83ebd41e"
--PV = "1.1"
-+SRCREV = "95f3c6ab36840fb1e0f4935f34dbf8f708b7780c"
-+PV = "1.2"
+ inherit pypi setuptools3
  
- SRC_URI_append_class-target = "file://oe-remote.repo.sample"
+-SRC_URI[md5sum] = "c3a53929c3797289566368be4b6b964a"
+-SRC_URI[sha256sum] = "3a3af27a8d23143c49a3420efe5b3f8cf1a48c6fc8bc6856b03f638abc1833bb"
++SRC_URI[md5sum] = "195f5e867e9f87a39f921ad0e5761a61"
++SRC_URI[sha256sum] = "a6f32aea4260dfe0e55dc9733ea162ea38f0ea86aa7d0f77b15beac5bf7b369d"
  
+ BBCLASSEXTEND = "native nativesdk"
 -- 
-2.25.1
-
-
+2.17.1
 
