@@ -1,108 +1,101 @@
-Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com [209.85.222.175])
- by mx.groups.io with SMTP id smtpd.web10.6629.1601504180291896057
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com [209.85.160.194])
+ by mx.groups.io with SMTP id smtpd.web10.6636.1601504199006365438
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Sep 2020 15:16:20 -0700
+ Wed, 30 Sep 2020 15:16:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZhoPYQqK;
- spf=pass (domain: gmail.com, ip: 209.85.222.175, mailfrom: chaoscodecircuits@gmail.com)
-Received: by mail-qk1-f175.google.com with SMTP id w12so3245288qki.6
-        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2020 15:16:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ocmj5K+W;
+ spf=pass (domain: gmail.com, ip: 209.85.160.194, mailfrom: chaoscodecircuits@gmail.com)
+Received: by mail-qt1-f194.google.com with SMTP id k25so2678972qtu.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2020 15:16:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:references:from:message-id:date:user-agent:mime-version
          :in-reply-to:content-language;
-        bh=x3yUFxkm1Dq1t+vs1jL+6vPdKNdaRU0x02tNWXXBmUE=;
-        b=ZhoPYQqKgZ9r7aiczD4Vo0rXANcjf3TkGVclko2dt9RzDZ8jYqjKlrLcPkfjZ+td6i
-         HyuaHFQK3Xq06mMWK1S1kfv7oo0MX7d/gN97ZoDXhReRZJG6HQAlRF7Lhhq1o6PgzT1X
-         n8lauqlq+OnNo2srC/ivO9BOdPk2Ou9AlJ55dhLPWRFoMRYZ2ZdQs1IhfSPTdME2SjNm
-         ui5bhzOS/+3ufETl9jDxJiR4GbBOhVyd72GNBMZmgcxtp/T8JkvX3UvL/Ssg8Me9Y5zy
-         +wQzqZ8TfoFyV8hv5LXV/A5fOWeF8HjktE9C0RqcACWgjy1nP0nB7DMErVwgcUBez8fd
-         FKhQ==
+        bh=wW6wYIeJy7tyZLU1AXD6iXk+CvWa75FwGdPH8vwCcW8=;
+        b=Ocmj5K+W8aPukUoHttGiCBkgTtZlCmNA70rG0MGd+TQt9rI1LYZYAIgromRvZAqp6R
+         tpYkDAUn1goJq+5L+EIq7kpwWkYiQduUrPq8ZcLozkkq0+NQH/DynDXTbt9dqEFYNFbs
+         WOJ7uZ8Y4u40WYi5ADkyBb9CjVnEXNu6vAmwR2K32D7fiwoQHzT4GbTcnxNX+5HQsG0Q
+         ScF269YDyaNdkI8l69dpBAnhHJeZheTsFKa7Ka30QgpU/tCAnWMkWeuU39WhOfrEelfj
+         erLCHM0Gok0EGcpubObjec/NM2x4eju4IpzSbH3xQKVR4ATqINxhCnNI+9AGJmoTfKe0
+         VZwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-language;
-        bh=x3yUFxkm1Dq1t+vs1jL+6vPdKNdaRU0x02tNWXXBmUE=;
-        b=fC8Kao6FSMdih/JkCCK0jaeCkHGBwOeRBsrEof2Ao1tc+QttY5PvgyFLH0bmkcQDP2
-         8HbKdMxopeTEMtGnUVqW5rp60rz2DV16481iOZxZ+Ns1CqlrP5R8erolly7qdcxw0TF8
-         6yTWpb+nFZIE+DAQMMyNE4D55QAp0pyE4U9LwjIAffubE8Z0Bj72vChN0m8gE174WdZM
-         W6tiUobqBR/ReDyGXbMxWUfgqmOzunb7Nh3E5Em1aZiYD1mPF1qjXpNSdwAtVmQR6kPl
-         mCml3aX/zceoKzA3Xy7/isVRSrwYWkFmLnxOOGNOSQQcHxXyQmXDh1V3gWBiscXrKoi8
-         jPXQ==
-X-Gm-Message-State: AOAM530KIZOpl2tOPWim9l+SaFEpzNE+qY3UsnWYhiQnYA4VShHgMbJV
-	KlLLYAawkdvDr4f0EfjGpXm7V6EPvr1UiA==
-X-Google-Smtp-Source: ABdhPJyz4QweVc97xqb76DtcYBsi2LXnXe0zen8MTYfnC3EJ7KHA1C1NLk0ezklHkz9hCV0+tmUHRA==
-X-Received: by 2002:a05:620a:683:: with SMTP id f3mr4950493qkh.491.1601504179306;
-        Wed, 30 Sep 2020 15:16:19 -0700 (PDT)
+        bh=wW6wYIeJy7tyZLU1AXD6iXk+CvWa75FwGdPH8vwCcW8=;
+        b=H8e2euSoEvzK2Gr/ndCoPSMKFjQ0oo3WJGNmImdzFlHPRXACQ/kMV5GHV9ed/stEss
+         GqDz/o6UKr3WaTxnpUSV0LOGlLy13Z17807FkaY1/QSHjuCltJK9/P5T6EQfSEpM8uUe
+         0HW6NlQBOPJ9/Y3+xcmNI8QUGJCIk7SYIWbiDt1bW7eJRxzpDUU2wcuPDik2ykb5j/cg
+         mJ/LKVoMfv0tp8CyEiK6w5zb2r1etjNdtZcu7u6L5FplAPV4QXasfAgPXSgDau+Jvvsr
+         8usbLaVZtVsr8+8z4p9p53Cou/JKKOpvtEj7MwH3zgoh9Us64Sy6nD91F3UKGdDqt4VV
+         Dfjg==
+X-Gm-Message-State: AOAM533qMV+NYCX4fyTbYWRrNunHVr0AkvZPVkYeRAK7j9nF5CETISKw
+	XXTQ099rFpVcmI5vF6VevVCCJtzqZJ1Eqg==
+X-Google-Smtp-Source: ABdhPJw2IsSUbRPVKExHoHFRyZqQiLTPRiuV/DLbhfCBw7g+G5xaNVB2LDWYXRoQj4E3QGuvzUoogw==
+X-Received: by 2002:ac8:2f12:: with SMTP id j18mr4464763qta.10.1601504198033;
+        Wed, 30 Sep 2020 15:16:38 -0700 (PDT)
 Return-Path: <chaoscodecircuits@gmail.com>
 Received: from [192.168.0.55] (CPE64777de11593-CM64777de11590.cpe.net.cable.rogers.com. [174.115.236.231])
-        by smtp.gmail.com with ESMTPSA id g45sm4277541qtb.60.2020.09.30.15.16.18
+        by smtp.gmail.com with ESMTPSA id b12sm3813570qtj.12.2020.09.30.15.16.37
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 30 Sep 2020 15:16:18 -0700 (PDT)
-Subject: Re: [oe] [meta-python][PATCH 3/6] python3-tqdm: Upgrade 4.49.0 -> 4.50.0
+        Wed, 30 Sep 2020 15:16:37 -0700 (PDT)
+Subject: Re: [oe] [meta-python][PATCH 4/6] python3-argcomplete: Upgrade 1.12.0 -> 1.12.1
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200928080059.18929-1-leon.anavi@konsulko.com>
- <20200928080059.18929-3-leon.anavi@konsulko.com>
+ <20200928080059.18929-4-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <chaoscodecircuits@gmail.com>
-Message-ID: <a5723d1b-6323-718c-7bdd-f67301082950@gmail.com>
-Date: Wed, 30 Sep 2020 18:16:18 -0400
+Message-ID: <2113b017-f1bf-4a2f-5d2b-dfa1084e8570@gmail.com>
+Date: Wed, 30 Sep 2020 18:16:37 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <20200928080059.18929-3-leon.anavi@konsulko.com>
+In-Reply-To: <20200928080059.18929-4-leon.anavi@konsulko.com>
 Content-Type: multipart/alternative;
- boundary="------------D19B73F52D9817FEB363CDAE"
+ boundary="------------DE8E29B396837813E7C1D2A9"
 Content-Language: en-US
 
---------------D19B73F52D9817FEB363CDAE
+--------------DE8E29B396837813E7C1D2A9
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 9/28/20 4:00 AM, Leon Anavi wrote:
-> Upgrade to release 4.50.0:
+> Upgrade to release 1.12.1:
 >
-> - add bar colour option
-> - for notebook as well as std/CLI
-> - plain text as well as hex (e.g. 'green' or '#00ff00')
-> - notebook improvements: split bar description into separate
->    widget and improve reset() (handle width and colour)
-> - fix exceptions when file is closed
-> - add & update tests
-> - minor documentation updates
-> - move and configure issue/pr templates
+> - Update importlib-metadata dependency version range
+> - Bash nounset mode fixes
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-tqdm_4.49.0.bb => python3-tqdm_4.50.0.bb} | 4 ++--
+>   ...n3-argcomplete_1.12.0.bb => python3-argcomplete_1.12.1.bb} | 4 ++--
 >   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-tqdm_4.49.0.bb => python3-tqdm_4.50.0.bb} (65%)
+>   rename meta-python/recipes-devtools/python/{python3-argcomplete_1.12.0.bb => python3-argcomplete_1.12.1.bb} (74%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.49.0.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.50.0.bb
-> similarity index 65%
-> rename from meta-python/recipes-devtools/python/python3-tqdm_4.49.0.bb
-> rename to meta-python/recipes-devtools/python/python3-tqdm_4.50.0.bb
-> index 26eb1073de..bf0385410e 100644
-> --- a/meta-python/recipes-devtools/python/python3-tqdm_4.49.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-tqdm_4.50.0.bb
-> @@ -5,8 +5,8 @@ SECTION = "devel/python"
->   LICENSE = "MIT & MPL-2.0"
->   LIC_FILES_CHKSUM = "file://LICENCE;md5=7ea57584e3f8bbde2ae3e1537551de25"
+> diff --git a/meta-python/recipes-devtools/python/python3-argcomplete_1.12.0.bb b/meta-python/recipes-devtools/python/python3-argcomplete_1.12.1.bb
+> similarity index 74%
+> rename from meta-python/recipes-devtools/python/python3-argcomplete_1.12.0.bb
+> rename to meta-python/recipes-devtools/python/python3-argcomplete_1.12.1.bb
+> index dd749dd9eb..c14a7eba12 100644
+> --- a/meta-python/recipes-devtools/python/python3-argcomplete_1.12.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-argcomplete_1.12.1.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/kislyuk/argcomplete"
+>   LICENSE = "Apache-2.0"
+>   LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=2ee41112a44fe7014dce33e26468ba93"
 >   
-> -SRC_URI[md5sum] = "c2afde3f1d5aa108376fdd0f4b20821d"
-> -SRC_URI[sha256sum] = "faf9c671bd3fad5ebaeee366949d969dca2b2be32c872a7092a1e1a9048d105b"
-> +SRC_URI[md5sum] = "4352d89e2c6d6b017f40f244baddfc51"
-> +SRC_URI[sha256sum] = "93b7a6a9129fce904f6df4cf3ae7ff431d779be681a95c3344c26f3e6c09abfa"
+> -SRC_URI[md5sum] = "47e2a3db821f57165be8f3d3ec1e5259"
+> -SRC_URI[sha256sum] = "2fbe5ed09fd2c1d727d4199feca96569a5b50d44c71b16da9c742201f7cc295c"
+> +SRC_URI[md5sum] = "2262d0466a40d42267b424bba5010a0b"
+> +SRC_URI[sha256sum] = "849c2444c35bb2175aea74100ca5f644c29bf716429399c0f2203bb5d9a8e4e6"
 >   
->   inherit pypi setuptools3
+>   PYPI_PACKAGE = "argcomplete"
 >   
 >
 > 
 >
 
---------------D19B73F52D9817FEB363CDAE
+--------------DE8E29B396837813E7C1D2A9
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -116,47 +109,40 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 9/28/20 4:00 AM, Leon Anavi wrote:<br>
     </div>
     <blockquote type="cite"
-      cite="mid:20200928080059.18929-3-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">Upgrade to release 4.50.0:
+      cite="mid:20200928080059.18929-4-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.12.1:
 
-- add bar colour option
-- for notebook as well as std/CLI
-- plain text as well as hex (e.g. 'green' or '#00ff00')
-- notebook improvements: split bar description into separate
-  widget and improve reset() (handle width and colour)
-- fix exceptions when file is closed
-- add &amp; update tests
-- minor documentation updates
-- move and configure issue/pr templates
+- Update importlib-metadata dependency version range
+- Bash nounset mode fixes
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
     <blockquote type="cite"
-      cite="mid:20200928080059.18929-3-leon.anavi@konsulko.com">
+      cite="mid:20200928080059.18929-4-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-tqdm_4.49.0.bb =&gt; python3-tqdm_4.50.0.bb} | 4 ++--
+ ...n3-argcomplete_1.12.0.bb =&gt; python3-argcomplete_1.12.1.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-tqdm_4.49.0.bb =&gt; python3-tqdm_4.50.0.bb} (65%)
+ rename meta-python/recipes-devtools/python/{python3-argcomplete_1.12.0.bb =&gt; python3-argcomplete_1.12.1.bb} (74%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.49.0.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.50.0.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-tqdm_4.49.0.bb
-rename to meta-python/recipes-devtools/python/python3-tqdm_4.50.0.bb
-index 26eb1073de..bf0385410e 100644
---- a/meta-python/recipes-devtools/python/python3-tqdm_4.49.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-tqdm_4.50.0.bb
-@@ -5,8 +5,8 @@ SECTION = "devel/python"
- LICENSE = "MIT &amp; MPL-2.0"
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENCE;md5=7ea57584e3f8bbde2ae3e1537551de25">"file://LICENCE;md5=7ea57584e3f8bbde2ae3e1537551de25"</a>
+diff --git a/meta-python/recipes-devtools/python/python3-argcomplete_1.12.0.bb b/meta-python/recipes-devtools/python/python3-argcomplete_1.12.1.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python3-argcomplete_1.12.0.bb
+rename to meta-python/recipes-devtools/python/python3-argcomplete_1.12.1.bb
+index dd749dd9eb..c14a7eba12 100644
+--- a/meta-python/recipes-devtools/python/python3-argcomplete_1.12.0.bb
++++ b/meta-python/recipes-devtools/python/python3-argcomplete_1.12.1.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/kislyuk/argcomplete">"https://github.com/kislyuk/argcomplete"</a>
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.rst;md5=2ee41112a44fe7014dce33e26468ba93">"file://LICENSE.rst;md5=2ee41112a44fe7014dce33e26468ba93"</a>
  
--SRC_URI[md5sum] = "c2afde3f1d5aa108376fdd0f4b20821d"
--SRC_URI[sha256sum] = "faf9c671bd3fad5ebaeee366949d969dca2b2be32c872a7092a1e1a9048d105b"
-+SRC_URI[md5sum] = "4352d89e2c6d6b017f40f244baddfc51"
-+SRC_URI[sha256sum] = "93b7a6a9129fce904f6df4cf3ae7ff431d779be681a95c3344c26f3e6c09abfa"
+-SRC_URI[md5sum] = "47e2a3db821f57165be8f3d3ec1e5259"
+-SRC_URI[sha256sum] = "2fbe5ed09fd2c1d727d4199feca96569a5b50d44c71b16da9c742201f7cc295c"
++SRC_URI[md5sum] = "2262d0466a40d42267b424bba5010a0b"
++SRC_URI[sha256sum] = "849c2444c35bb2175aea74100ca5f644c29bf716429399c0f2203bb5d9a8e4e6"
  
- inherit pypi setuptools3
+ PYPI_PACKAGE = "argcomplete"
  
 </pre>
       <br>
@@ -169,4 +155,4 @@ index 26eb1073de..bf0385410e 100644
   </body>
 </html>
 
---------------D19B73F52D9817FEB363CDAE--
+--------------DE8E29B396837813E7C1D2A9--
