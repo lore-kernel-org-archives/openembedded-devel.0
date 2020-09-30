@@ -1,100 +1,100 @@
-Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
- by mx.groups.io with SMTP id smtpd.web11.6562.1601504163240949848
+Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com [209.85.222.175])
+ by mx.groups.io with SMTP id smtpd.web10.6629.1601504180291896057
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Sep 2020 15:16:03 -0700
+ Wed, 30 Sep 2020 15:16:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=UDOT1PP/;
- spf=pass (domain: gmail.com, ip: 209.85.222.171, mailfrom: chaoscodecircuits@gmail.com)
-Received: by mail-qk1-f171.google.com with SMTP id 16so3242179qkf.4
-        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2020 15:16:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZhoPYQqK;
+ spf=pass (domain: gmail.com, ip: 209.85.222.175, mailfrom: chaoscodecircuits@gmail.com)
+Received: by mail-qk1-f175.google.com with SMTP id w12so3245288qki.6
+        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2020 15:16:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:references:from:message-id:date:user-agent:mime-version
          :in-reply-to:content-language;
-        bh=K8nul8fGbc3VA4wEoODYjKBQv8nkxx+zCxIjuEVUQ8Q=;
-        b=UDOT1PP/7yGTreJmG4WJtEGH9xslQesnl0S9IQ28zn7k/Y/tfyCKTrcOC4BsCXcN8y
-         ELpz7NruMclK4SUagPD5af/XBTrhweUpGkUaIMpPuaLcJ/Nmo70s8S8GBHUPHHuRzzmS
-         qqqmrps5NUyj8Er5U64V+pX1aGY1q8QJ8qCvsy0onuaPvV9OnvqOFV70AR07fZZFnWl3
-         clYdfh1aY8KpeeEP4oi0PZ7tFjTDz4au235GpOIfD6z3A7Vro1n0EJLQBcrOj9YvXU8M
-         96KrcFcckR00ajpZuuFvzo/5SX8mNBukBe+Ob6YmRysOsKMpoCIbImbIN96oE6x17j5i
-         cGVA==
+        bh=x3yUFxkm1Dq1t+vs1jL+6vPdKNdaRU0x02tNWXXBmUE=;
+        b=ZhoPYQqKgZ9r7aiczD4Vo0rXANcjf3TkGVclko2dt9RzDZ8jYqjKlrLcPkfjZ+td6i
+         HyuaHFQK3Xq06mMWK1S1kfv7oo0MX7d/gN97ZoDXhReRZJG6HQAlRF7Lhhq1o6PgzT1X
+         n8lauqlq+OnNo2srC/ivO9BOdPk2Ou9AlJ55dhLPWRFoMRYZ2ZdQs1IhfSPTdME2SjNm
+         ui5bhzOS/+3ufETl9jDxJiR4GbBOhVyd72GNBMZmgcxtp/T8JkvX3UvL/Ssg8Me9Y5zy
+         +wQzqZ8TfoFyV8hv5LXV/A5fOWeF8HjktE9C0RqcACWgjy1nP0nB7DMErVwgcUBez8fd
+         FKhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-language;
-        bh=K8nul8fGbc3VA4wEoODYjKBQv8nkxx+zCxIjuEVUQ8Q=;
-        b=n+bNqhbnlVDdbCp+34WCtTj/rm7JANXemVs2qvgUCXvvdCBVSRLZg+pUoEX+WWqE4z
-         xFZfebeguhEQ6xo0Lf3lqdcEbZul7cIq4Qey5wdz1k9OwgA6WM0d73f6fajy5Rl2ckmZ
-         ynnCJKzpCBdbtknAXuaGVoAUe/ViUgBz/TMaEOWHVgYSsGhp7VbWbrdh0SVDj44vUkuH
-         U0mA6O1nkoC73EcbIFNb27Z7uVgUR+86VEpnUBtv37/9e4H4mxPrVgFBtFyXOw/3c7Dr
-         JUS4p7geCFZSTywjvtAts/GA46+raElEJKNJIX1DVJTTI6JAWzRF+uHSI026TBnKv8qB
-         vt7A==
-X-Gm-Message-State: AOAM531xCdboTeCn5jEOd6chSUGOKfIRlH4U4Fdma+jJqbw9OJF38O/2
-	YW3zfNyhXzCqvFtito8qtLHilGpOllfurw==
-X-Google-Smtp-Source: ABdhPJz5rZvp2UDpGal3JkarAkD4fbrj9Ws7I00lUGUtV0uxB+CDAM9UVwpsehJ6NE6jinxqZHShjQ==
-X-Received: by 2002:a05:620a:1381:: with SMTP id k1mr4872948qki.140.1601504162052;
-        Wed, 30 Sep 2020 15:16:02 -0700 (PDT)
+        bh=x3yUFxkm1Dq1t+vs1jL+6vPdKNdaRU0x02tNWXXBmUE=;
+        b=fC8Kao6FSMdih/JkCCK0jaeCkHGBwOeRBsrEof2Ao1tc+QttY5PvgyFLH0bmkcQDP2
+         8HbKdMxopeTEMtGnUVqW5rp60rz2DV16481iOZxZ+Ns1CqlrP5R8erolly7qdcxw0TF8
+         6yTWpb+nFZIE+DAQMMyNE4D55QAp0pyE4U9LwjIAffubE8Z0Bj72vChN0m8gE174WdZM
+         W6tiUobqBR/ReDyGXbMxWUfgqmOzunb7Nh3E5Em1aZiYD1mPF1qjXpNSdwAtVmQR6kPl
+         mCml3aX/zceoKzA3Xy7/isVRSrwYWkFmLnxOOGNOSQQcHxXyQmXDh1V3gWBiscXrKoi8
+         jPXQ==
+X-Gm-Message-State: AOAM530KIZOpl2tOPWim9l+SaFEpzNE+qY3UsnWYhiQnYA4VShHgMbJV
+	KlLLYAawkdvDr4f0EfjGpXm7V6EPvr1UiA==
+X-Google-Smtp-Source: ABdhPJyz4QweVc97xqb76DtcYBsi2LXnXe0zen8MTYfnC3EJ7KHA1C1NLk0ezklHkz9hCV0+tmUHRA==
+X-Received: by 2002:a05:620a:683:: with SMTP id f3mr4950493qkh.491.1601504179306;
+        Wed, 30 Sep 2020 15:16:19 -0700 (PDT)
 Return-Path: <chaoscodecircuits@gmail.com>
 Received: from [192.168.0.55] (CPE64777de11593-CM64777de11590.cpe.net.cable.rogers.com. [174.115.236.231])
-        by smtp.gmail.com with ESMTPSA id 196sm3634065qkm.49.2020.09.30.15.16.01
+        by smtp.gmail.com with ESMTPSA id g45sm4277541qtb.60.2020.09.30.15.16.18
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 30 Sep 2020 15:16:01 -0700 (PDT)
-Subject: Re: [oe] [meta-python][PATCH 2/6] python3-beautifulsoup4: Upgrade 4.9.1 -> 4.9.2
+        Wed, 30 Sep 2020 15:16:18 -0700 (PDT)
+Subject: Re: [oe] [meta-python][PATCH 3/6] python3-tqdm: Upgrade 4.49.0 -> 4.50.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20200928080059.18929-1-leon.anavi@konsulko.com>
- <20200928080059.18929-2-leon.anavi@konsulko.com>
+ <20200928080059.18929-3-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <chaoscodecircuits@gmail.com>
-Message-ID: <d9267549-e952-900e-2b89-41e5fcd9dda3@gmail.com>
-Date: Wed, 30 Sep 2020 18:16:01 -0400
+Message-ID: <a5723d1b-6323-718c-7bdd-f67301082950@gmail.com>
+Date: Wed, 30 Sep 2020 18:16:18 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <20200928080059.18929-2-leon.anavi@konsulko.com>
+In-Reply-To: <20200928080059.18929-3-leon.anavi@konsulko.com>
 Content-Type: multipart/alternative;
- boundary="------------4054B4BE78B00E8D1ECC74D4"
+ boundary="------------D19B73F52D9817FEB363CDAE"
 Content-Language: en-US
 
---------------4054B4BE78B00E8D1ECC74D4
+--------------D19B73F52D9817FEB363CDAE
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 9/28/20 4:00 AM, Leon Anavi wrote:
-> - Fixed a bug that caused too many tags to be popped from the tag
->    stack during tree building, when encountering a closing tag that
->    had no matching opening tag.
-> - Fixed a bug that inconsistently moved elements over when passing
->    a Tag, rather than a list, into Tag.extend().
-> - Specify the soupsieve dependency in a way that complies with
->    PEP 508.
-> - Change the signatures for BeautifulSoup.insert_before and
->    insert_after (which are not implemented) to match
->    PageElement.insert_before and insert_after, quieting warnings in
->    some IDEs.
+> Upgrade to release 4.50.0:
+>
+> - add bar colour option
+> - for notebook as well as std/CLI
+> - plain text as well as hex (e.g. 'green' or '#00ff00')
+> - notebook improvements: split bar description into separate
+>    widget and improve reset() (handle width and colour)
+> - fix exceptions when file is closed
+> - add & update tests
+> - minor documentation updates
+> - move and configure issue/pr templates
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...eautifulsoup4_4.9.1.bb => python3-beautifulsoup4_4.9.2.bb} | 4 ++--
+>   .../python/{python3-tqdm_4.49.0.bb => python3-tqdm_4.50.0.bb} | 4 ++--
 >   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-beautifulsoup4_4.9.1.bb => python3-beautifulsoup4_4.9.2.bb} (71%)
+>   rename meta-python/recipes-devtools/python/{python3-tqdm_4.49.0.bb => python3-tqdm_4.50.0.bb} (65%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.2.bb
-> similarity index 71%
-> rename from meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb
-> rename to meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.2.bb
-> index 910de12f8a..fb5fb1a6b8 100644
-> --- a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.2.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
->   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1"
+> diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.49.0.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.50.0.bb
+> similarity index 65%
+> rename from meta-python/recipes-devtools/python/python3-tqdm_4.49.0.bb
+> rename to meta-python/recipes-devtools/python/python3-tqdm_4.50.0.bb
+> index 26eb1073de..bf0385410e 100644
+> --- a/meta-python/recipes-devtools/python/python3-tqdm_4.49.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-tqdm_4.50.0.bb
+> @@ -5,8 +5,8 @@ SECTION = "devel/python"
+>   LICENSE = "MIT & MPL-2.0"
+>   LIC_FILES_CHKSUM = "file://LICENCE;md5=7ea57584e3f8bbde2ae3e1537551de25"
 >   
-> -SRC_URI[md5sum] = "57502b5b34ccfd97b180260071f5799a"
-> -SRC_URI[sha256sum] = "73cc4d115b96f79c7d77c1c7f7a0a8d4c57860d1041df407dd1aae7f07a77fd7"
-> +SRC_URI[md5sum] = "5672f9b9bdfb0c6ab3ef074396bf59aa"
-> +SRC_URI[sha256sum] = "1edf5e39f3a5bc6e38b235b369128416c7239b34f692acccececb040233032a1"
+> -SRC_URI[md5sum] = "c2afde3f1d5aa108376fdd0f4b20821d"
+> -SRC_URI[sha256sum] = "faf9c671bd3fad5ebaeee366949d969dca2b2be32c872a7092a1e1a9048d105b"
+> +SRC_URI[md5sum] = "4352d89e2c6d6b017f40f244baddfc51"
+> +SRC_URI[sha256sum] = "93b7a6a9129fce904f6df4cf3ae7ff431d779be681a95c3344c26f3e6c09abfa"
 >   
 >   inherit pypi setuptools3
 >   
@@ -102,7 +102,7 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
 >
 
---------------4054B4BE78B00E8D1ECC74D4
+--------------D19B73F52D9817FEB363CDAE
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -116,45 +116,45 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 9/28/20 4:00 AM, Leon Anavi wrote:<br>
     </div>
     <blockquote type="cite"
-      cite="mid:20200928080059.18929-2-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Fixed a bug that caused too many tags to be popped from the tag
-  stack during tree building, when encountering a closing tag that
-  had no matching opening tag.
-- Fixed a bug that inconsistently moved elements over when passing
-  a Tag, rather than a list, into Tag.extend().
-- Specify the soupsieve dependency in a way that complies with
-  PEP 508.
-- Change the signatures for BeautifulSoup.insert_before and
-  insert_after (which are not implemented) to match
-  PageElement.insert_before and insert_after, quieting warnings in
-  some IDEs.
+      cite="mid:20200928080059.18929-3-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 4.50.0:
+
+- add bar colour option
+- for notebook as well as std/CLI
+- plain text as well as hex (e.g. 'green' or '#00ff00')
+- notebook improvements: split bar description into separate
+  widget and improve reset() (handle width and colour)
+- fix exceptions when file is closed
+- add &amp; update tests
+- minor documentation updates
+- move and configure issue/pr templates
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
     <blockquote type="cite"
-      cite="mid:20200928080059.18929-2-leon.anavi@konsulko.com">
+      cite="mid:20200928080059.18929-3-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...eautifulsoup4_4.9.1.bb =&gt; python3-beautifulsoup4_4.9.2.bb} | 4 ++--
+ .../python/{python3-tqdm_4.49.0.bb =&gt; python3-tqdm_4.50.0.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-beautifulsoup4_4.9.1.bb =&gt; python3-beautifulsoup4_4.9.2.bb} (71%)
+ rename meta-python/recipes-devtools/python/{python3-tqdm_4.49.0.bb =&gt; python3-tqdm_4.50.0.bb} (65%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.2.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb
-rename to meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.2.bb
-index 910de12f8a..fb5fb1a6b8 100644
---- a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.2.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://www.crummy.com/software/BeautifulSoup/bs4">" https://www.crummy.com/software/BeautifulSoup/bs4"</a>
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1">"file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1"</a>
+diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.49.0.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.50.0.bb
+similarity index 65%
+rename from meta-python/recipes-devtools/python/python3-tqdm_4.49.0.bb
+rename to meta-python/recipes-devtools/python/python3-tqdm_4.50.0.bb
+index 26eb1073de..bf0385410e 100644
+--- a/meta-python/recipes-devtools/python/python3-tqdm_4.49.0.bb
++++ b/meta-python/recipes-devtools/python/python3-tqdm_4.50.0.bb
+@@ -5,8 +5,8 @@ SECTION = "devel/python"
+ LICENSE = "MIT &amp; MPL-2.0"
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENCE;md5=7ea57584e3f8bbde2ae3e1537551de25">"file://LICENCE;md5=7ea57584e3f8bbde2ae3e1537551de25"</a>
  
--SRC_URI[md5sum] = "57502b5b34ccfd97b180260071f5799a"
--SRC_URI[sha256sum] = "73cc4d115b96f79c7d77c1c7f7a0a8d4c57860d1041df407dd1aae7f07a77fd7"
-+SRC_URI[md5sum] = "5672f9b9bdfb0c6ab3ef074396bf59aa"
-+SRC_URI[sha256sum] = "1edf5e39f3a5bc6e38b235b369128416c7239b34f692acccececb040233032a1"
+-SRC_URI[md5sum] = "c2afde3f1d5aa108376fdd0f4b20821d"
+-SRC_URI[sha256sum] = "faf9c671bd3fad5ebaeee366949d969dca2b2be32c872a7092a1e1a9048d105b"
++SRC_URI[md5sum] = "4352d89e2c6d6b017f40f244baddfc51"
++SRC_URI[sha256sum] = "93b7a6a9129fce904f6df4cf3ae7ff431d779be681a95c3344c26f3e6c09abfa"
  
  inherit pypi setuptools3
  
@@ -169,4 +169,4 @@ index 910de12f8a..fb5fb1a6b8 100644
   </body>
 </html>
 
---------------4054B4BE78B00E8D1ECC74D4--
+--------------D19B73F52D9817FEB363CDAE--
