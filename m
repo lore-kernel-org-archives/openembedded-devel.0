@@ -1,159 +1,102 @@
-Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com [209.85.219.68])
- by mx.groups.io with SMTP id smtpd.web12.6561.1601504089600229465
+Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
+ by mx.groups.io with SMTP id smtpd.web12.6601.1601504154156439107
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Sep 2020 15:14:49 -0700
+ Wed, 30 Sep 2020 15:15:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=NhcJPo1G;
- spf=pass (domain: gmail.com, ip: 209.85.219.68, mailfrom: chaoscodecircuits@gmail.com)
-Received: by mail-qv1-f68.google.com with SMTP id di5so1805460qvb.13
-        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2020 15:14:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=M65UbTvZ;
+ spf=pass (domain: gmail.com, ip: 209.85.219.44, mailfrom: chaoscodecircuits@gmail.com)
+Received: by mail-qv1-f44.google.com with SMTP id z18so1818535qvp.6
+        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Sep 2020 15:15:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language;
-        bh=3++FAL/dkz0cHVr0I9byeCneX27qUOY+QPo75UMROls=;
-        b=NhcJPo1GodisKWqyMRNdUqT2RwYuhEhMfjTzAZHgmOE8mZxrxvogIhwrLu1/gs2CMx
-         M5dFELIQgEDTMwWTafOUgXLQmov0quF44xcPJHlnhxVm+2dchQ8wjqFmWF6yIMB2Q+Az
-         pF/FtcQvnGoIVvR78Mb8XBuYM426DzAVSg/oq1Mn2Bx0W+eaA5ClsZybXCz6lFVF2VgD
-         J5G9u5meRZ0JRqrkJPUlwFIUJuJapSERvsNSUT5bLwTLGRcFGD1nEsoSDxxzPnLwhKq1
-         jek796aEtj6V6wDmM14m+g64ui3LMutdR3hqGn5e7gBjesxTKQxqDrk8MVsD07ZdulfW
-         ZrTA==
+        h=subject:to:references:from:message-id:date:user-agent:mime-version
+         :in-reply-to:content-language;
+        bh=EBChBYe5XjJQ/OrEhzDaQtsX3s616WJq3RSO4nGyxcY=;
+        b=M65UbTvZZrrTO+wnQJJLGR15OOtOtPb2HXzyC26DqWg77XgZYI7z/VF7Q+NxLe3V4k
+         oEugfy35xeZ3lizpK7NffWoiUQ5/gPbV17ulVyD7zkbS5RNszpQnA9HODQS8OzUor0z/
+         Q8sQ5A1HE3SoYzm5SdiWGa3ty3pbt2tj/zH6Hqv5KqlcLBEm8yUueEiq57YgbGIavEKK
+         U2n+u+njUvPv6bJ47QVhBBOE89W5TBLyM7i4J3EzBxpCrkxwy9mGVrf46l34Is00tRtR
+         +2iIiEcfs5UWhf6pYEhzefJvabJaLdC/pcKDnU+FHjgHA4jYt1CkX87eymLdFcuNL/Yl
+         KpfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+        h=x-gm-message-state:subject:to:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-language;
-        bh=3++FAL/dkz0cHVr0I9byeCneX27qUOY+QPo75UMROls=;
-        b=DG8jbxjjzOsoOCQ6fJDNrWikm3CzTraNUfhLGaHEfD95VHNvWqaEjXfXxvrkgj74ng
-         BA0Ds6N0WT+yMPpm2hmlgxG03Geo2z0QyqLliMs+QsiUNWseC2YzKRwscxN9m7PAkaN1
-         syza+33jv0/TdOP0Eo0EHIHk1dTtIuo3It69ZGKh/i29knAOAjksb4Oq3d07oY2Z6fS4
-         ol30vHsag3WIuxXHtVyDj4zRYC4ij56bsrheCColu+oRoXah9tFXstUgSeaFM2Ecqs2p
-         8pFR0K+m/vJeGIefCfwPr3l52dV7+K5sJZUqVIidMEZPS55fpUwCYNJTzb0UymOpwLCh
-         VG3Q==
-X-Gm-Message-State: AOAM532/fVvKc7afhFt+vWim5vPdhknIndqczJ7dA4It1Bj7YoVpDbkM
-	FQaBHZnGyyZ21zQ66b8vg04=
-X-Google-Smtp-Source: ABdhPJxusJ2YD58IsplaM52kKk9hdl4j5PoDog6R9L0C5zWxJUbhEI+b5G2ix7dlMcJZxOiQQQjKLQ==
-X-Received: by 2002:ad4:408f:: with SMTP id l15mr4837179qvp.4.1601504088801;
-        Wed, 30 Sep 2020 15:14:48 -0700 (PDT)
+        bh=EBChBYe5XjJQ/OrEhzDaQtsX3s616WJq3RSO4nGyxcY=;
+        b=FlxCzyHa5LGKFnx7/a9FgnL8AV8DQPUJ3GnCpfUsuveYylp3xbxpvLvxbZN8hRAViz
+         gLB0kIrXNmy6NA/QdM3WAOCvk6te5zZSt/0nBb5gG0/9Zuiu2UjgcfvZ8YX5BcB/OhnW
+         qUi9vM5B3dplPy3mQ3kXXgyaFUaDN72JAd6ykNyPcU+YamYB+pYp9W3aE0OxIjxT3yEo
+         ltBRuE2UzWeNssbR21+0XwEizeuZtyo57p/2l10J3Kl2CKpE618k+7VqYc0PQsKhPykn
+         gY3suQA5HvwS9GgGy6wItIy94xydvodPhrbfeP0PIZx2MjHqI97prOU2BMF5fIxGLlDW
+         5pJg==
+X-Gm-Message-State: AOAM531YSfn0lDhMMOuU/oANN40EIoo7lwmDfLg06R90iLdr1Xsufj6U
+	GhzbPiLWJxHZpVaO/1NKTSOHfRAozJlcKQ==
+X-Google-Smtp-Source: ABdhPJwhsYvO7lmgKlgv7JNK5w0uMII3G3KL9Brqq0UeTLpx4uOs9tdV3ivB6h9VCRi2juvg3P+79w==
+X-Received: by 2002:a05:6214:bd1:: with SMTP id ff17mr4590919qvb.59.1601504153054;
+        Wed, 30 Sep 2020 15:15:53 -0700 (PDT)
 Return-Path: <chaoscodecircuits@gmail.com>
 Received: from [192.168.0.55] (CPE64777de11593-CM64777de11590.cpe.net.cable.rogers.com. [174.115.236.231])
-        by smtp.gmail.com with ESMTPSA id m67sm3817663qkf.98.2020.09.30.15.14.48
+        by smtp.gmail.com with ESMTPSA id h18sm3827314qkl.12.2020.09.30.15.15.52
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 30 Sep 2020 15:14:48 -0700 (PDT)
-Subject: Re: [oe] [meta-python][PATCH v2 2/2] python3-pytest: 5.4.3 -> 6.1.0
-To: kai <kai.kang@windriver.com>, raj.khem@gmail.com
-Cc: openembedded-devel@lists.openembedded.org, ticotimo@gmail.com
-References: <20200927084320.17334-1-kai.kang@windriver.com>
- <20200927084320.17334-3-kai.kang@windriver.com>
+        Wed, 30 Sep 2020 15:15:52 -0700 (PDT)
+Subject: Re: [oe] [meta-python][PATCH 1/6] python3-pychromecast: Upgrade 7.3.0 -> 7.5.0
+To: Leon Anavi <leon.anavi@konsulko.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20200928080059.18929-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <chaoscodecircuits@gmail.com>
-Message-ID: <02d0a421-c32a-16bd-3cd2-8880e8c24141@gmail.com>
-Date: Wed, 30 Sep 2020 18:14:47 -0400
+Message-ID: <3d911798-f9bf-1961-8ec0-37e9234f2458@gmail.com>
+Date: Wed, 30 Sep 2020 18:15:52 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <20200927084320.17334-3-kai.kang@windriver.com>
+In-Reply-To: <20200928080059.18929-1-leon.anavi@konsulko.com>
 Content-Type: multipart/alternative;
- boundary="------------CF26D818D491785E529BB368"
+ boundary="------------5E48B3D47D84EB6E575315C7"
 Content-Language: en-US
 
---------------CF26D818D491785E529BB368
+--------------5E48B3D47D84EB6E575315C7
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 9/27/20 4:43 AM, kai wrote:
-> From: Kai Kang <kai.kang@windriver.com>
+On 9/28/20 4:00 AM, Leon Anavi wrote:
+> Upgrade to release 7.5.0:
 >
-> Upgrade python3-pytest from 5.4.3 to 6.1.0
-> * add runtime dependency python3-iniconfig
+> - Allow passing additional media information through to play_media
+> - Add support for lists, playQueues, and playlists on Plex
+>    controller
+> - Misc spelling changes
 >
-> And the release changelog is at:
->
-> https://docs.pytest.org/en/stable/changelog.html#pytest-6-1-0-2020-09-26
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...he-setup_requires-for-setuptools-scm.patch | 35 ++++++++++---------
->   ...ytest_5.4.3.bb => python3-pytest_6.1.0.bb} |  3 +-
->   2 files changed, 21 insertions(+), 17 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-pytest_5.4.3.bb => python3-pytest_6.1.0.bb} (89%)
+>   ...n3-pychromecast_7.3.0.bb => python3-pychromecast_7.5.0.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-pychromecast_7.3.0.bb => python3-pychromecast_7.5.0.bb} (66%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch b/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
-> index c29fb12de..8c5c17247 100644
-> --- a/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
-> +++ b/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
-> @@ -14,23 +14,26 @@ Upstream-Status: Inappropriate [oe specific]
->   Signed-off-by: Derek Straka <derek@asterius.io>
->   
->   Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
-> +
-> +Rebase for pytest 6.1.0.
-> +
-> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
->   ---
-> - setup.py | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/setup.py b/setup.py
-> -index adbafb5..75fdd09 100644
-> ---- a/setup.py
-> -+++ b/setup.py
-> -@@ -19,7 +19,7 @@ INSTALL_REQUIRES = [
-> - def main():
-> -     setup(
-> -         use_scm_version={"write_to": "src/_pytest/_version.py"},
-> --        setup_requires=["setuptools-scm", "setuptools>=40.0"],
-> -+        setup_requires=["setuptools>=40.0"],
-> -         package_dir={"": "src"},
-> -         extras_require={
-> -             "testing": [
-> + setup.cfg | 1 -
-> + 1 file changed, 1 deletion(-)
-> +
-> +diff --git a/setup.cfg b/setup.cfg
-> +index 60f6564..c4d1471 100644
-> +--- a/setup.cfg
-> ++++ b/setup.cfg
-> +@@ -55,7 +55,6 @@ package_dir =
-> + 	=src
-> + setup_requires =
-> + 	setuptools>=40.0
-> +-	setuptools-scm
-> + zip_safe = no
-> +
-> + [options.entry_points]
->   --
->   2.17.1
->   
-> diff --git a/meta-python/recipes-devtools/python/python3-pytest_5.4.3.bb b/meta-python/recipes-devtools/python/python3-pytest_6.1.0.bb
-> similarity index 89%
-> rename from meta-python/recipes-devtools/python/python3-pytest_5.4.3.bb
-> rename to meta-python/recipes-devtools/python/python3-pytest_6.1.0.bb
-> index ca67223db..1da43c4f9 100644
-> --- a/meta-python/recipes-devtools/python/python3-pytest_5.4.3.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pytest_6.1.0.bb
-> @@ -3,7 +3,7 @@ SUMMARY = "Simple powerful testing with python"
+> diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.3.0.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.5.0.bb
+> similarity index 66%
+> rename from meta-python/recipes-devtools/python/python3-pychromecast_7.3.0.bb
+> rename to meta-python/recipes-devtools/python/python3-pychromecast_7.5.0.bb
+> index b444df05d8..adfdbb17b8 100644
+> --- a/meta-python/recipes-devtools/python/python3-pychromecast_7.3.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pychromecast_7.5.0.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
 >   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=81eb9f71d006c6b268cf4388e3c98f7b"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
 >   
-> -SRC_URI[sha256sum] = "7979331bfcba207414f5e1263b5a0f8f521d0f457318836a7355531ed1a4c7d8"
-> +SRC_URI[sha256sum] = "d010e24666435b39a4cf48740b039885642b6c273a3f77be3e7e03554d2806b7"
+> -SRC_URI[md5sum] = "7ab862743ff33dafc93206c1435abc5e"
+> -SRC_URI[sha256sum] = "f594231efb34b86eeb463611662bca21a6962793885d3ad68195286940f7473d"
+> +SRC_URI[md5sum] = "d35c610f57cae909348ff6c60e5e9256"
+> +SRC_URI[sha256sum] = "2f346a88ddc27a19cc68bc2d3e8929d89276298cb1c11871b82a87fbdafb95a8"
 >   
->   SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch "
+>   PYPI_PACKAGE = "PyChromecast"
 >   
-> @@ -13,6 +13,7 @@ RDEPENDS_${PN}_class-target += " \
->       ${PYTHON_PN}-attrs \
->       ${PYTHON_PN}-debugger \
->       ${PYTHON_PN}-doctest \
-> +    ${PYTHON_PN}-iniconfig \
->       ${PYTHON_PN}-json \
->       ${PYTHON_PN}-pluggy \
->       ${PYTHON_PN}-py \
 >
 > 
 >
 
---------------CF26D818D491785E529BB368
+--------------5E48B3D47D84EB6E575315C7
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -164,102 +107,46 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 9/27/20 4:43 AM, kai wrote:<br>
+    <div class="moz-cite-prefix">On 9/28/20 4:00 AM, Leon Anavi wrote:<br>
     </div>
     <blockquote type="cite"
-      cite="mid:20200927084320.17334-3-kai.kang@windriver.com">
-      <pre class="moz-quote-pre" wrap="">From: Kai Kang <a class="moz-txt-link-rfc2396E" href="mailto:kai.kang@windriver.com">&lt;kai.kang@windriver.com&gt;</a>
+      cite="mid:20200928080059.18929-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 7.5.0:
 
-Upgrade python3-pytest from 5.4.3 to 6.1.0
-* add runtime dependency python3-iniconfig
+- Allow passing additional media information through to play_media
+- Add support for lists, playQueues, and playlists on Plex
+  controller
+- Misc spelling changes
 
-And the release changelog is at:
-
-<a class="moz-txt-link-freetext" href="https://docs.pytest.org/en/stable/changelog.html#pytest-6-1-0-2020-09-26">https://docs.pytest.org/en/stable/changelog.html#pytest-6-1-0-2020-09-26</a>
-
-Signed-off-by: Kai Kang <a class="moz-txt-link-rfc2396E" href="mailto:kai.kang@windriver.com">&lt;kai.kang@windriver.com&gt;</a></pre>
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
     <blockquote type="cite"
-      cite="mid:20200927084320.17334-3-kai.kang@windriver.com">
+      cite="mid:20200928080059.18929-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...he-setup_requires-for-setuptools-scm.patch | 35 ++++++++++---------
- ...ytest_5.4.3.bb =&gt; python3-pytest_6.1.0.bb} |  3 +-
- 2 files changed, 21 insertions(+), 17 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pytest_5.4.3.bb =&gt; python3-pytest_6.1.0.bb} (89%)
+ ...n3-pychromecast_7.3.0.bb =&gt; python3-pychromecast_7.5.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pychromecast_7.3.0.bb =&gt; python3-pychromecast_7.5.0.bb} (66%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch b/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
-index c29fb12de..8c5c17247 100644
---- a/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
-+++ b/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
-@@ -14,23 +14,26 @@ Upstream-Status: Inappropriate [oe specific]
- Signed-off-by: Derek Straka <a class="moz-txt-link-rfc2396E" href="mailto:derek@asterius.io">&lt;derek@asterius.io&gt;</a>
- 
- Signed-off-by: Yuan Chao <a class="moz-txt-link-rfc2396E" href="mailto:yuanc.fnst@cn.fujitsu.com">&lt;yuanc.fnst@cn.fujitsu.com&gt;</a>
-+
-+Rebase for pytest 6.1.0.
-+
-+Signed-off-by: Kai Kang <a class="moz-txt-link-rfc2396E" href="mailto:kai.kang@windriver.com">&lt;kai.kang@windriver.com&gt;</a>
- ---
-- setup.py | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/setup.py b/setup.py
--index adbafb5..75fdd09 100644
----- a/setup.py
--+++ b/setup.py
--@@ -19,7 +19,7 @@ INSTALL_REQUIRES = [
-- def main():
--     setup(
--         use_scm_version={"write_to": "src/_pytest/_version.py"},
---        setup_requires=["setuptools-scm", "setuptools&gt;=40.0"],
--+        setup_requires=["setuptools&gt;=40.0"],
--         package_dir={"": "src"},
--         extras_require={
--             "testing": [
-+ setup.cfg | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/setup.cfg b/setup.cfg
-+index 60f6564..c4d1471 100644
-+--- a/setup.cfg
-++++ b/setup.cfg
-+@@ -55,7 +55,6 @@ package_dir =
-+ 	=src
-+ setup_requires = 
-+ 	setuptools&gt;=40.0
-+-	setuptools-scm
-+ zip_safe = no
-+ 
-+ [options.entry_points]
- -- 
- 2.17.1
- 
-diff --git a/meta-python/recipes-devtools/python/python3-pytest_5.4.3.bb b/meta-python/recipes-devtools/python/python3-pytest_6.1.0.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-pytest_5.4.3.bb
-rename to meta-python/recipes-devtools/python/python3-pytest_6.1.0.bb
-index ca67223db..1da43c4f9 100644
---- a/meta-python/recipes-devtools/python/python3-pytest_5.4.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pytest_6.1.0.bb
-@@ -3,7 +3,7 @@ SUMMARY = "Simple powerful testing with python"
+diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.3.0.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.5.0.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python3-pychromecast_7.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-pychromecast_7.5.0.bb
+index b444df05d8..adfdbb17b8 100644
+--- a/meta-python/recipes-devtools/python/python3-pychromecast_7.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pychromecast_7.5.0.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/balloob/pychromecast">"https://github.com/balloob/pychromecast"</a>
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=81eb9f71d006c6b268cf4388e3c98f7b">"file://LICENSE;md5=81eb9f71d006c6b268cf4388e3c98f7b"</a>
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5">"file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"</a>
  
--SRC_URI[sha256sum] = "7979331bfcba207414f5e1263b5a0f8f521d0f457318836a7355531ed1a4c7d8"
-+SRC_URI[sha256sum] = "d010e24666435b39a4cf48740b039885642b6c273a3f77be3e7e03554d2806b7"
+-SRC_URI[md5sum] = "7ab862743ff33dafc93206c1435abc5e"
+-SRC_URI[sha256sum] = "f594231efb34b86eeb463611662bca21a6962793885d3ad68195286940f7473d"
++SRC_URI[md5sum] = "d35c610f57cae909348ff6c60e5e9256"
++SRC_URI[sha256sum] = "2f346a88ddc27a19cc68bc2d3e8929d89276298cb1c11871b82a87fbdafb95a8"
  
- SRC_URI_append = <a class="moz-txt-link-rfc2396E" href="file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch">" file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch "</a>
+ PYPI_PACKAGE = "PyChromecast"
  
-@@ -13,6 +13,7 @@ RDEPENDS_${PN}_class-target += " \
-     ${PYTHON_PN}-attrs \
-     ${PYTHON_PN}-debugger \
-     ${PYTHON_PN}-doctest \
-+    ${PYTHON_PN}-iniconfig \
-     ${PYTHON_PN}-json \
-     ${PYTHON_PN}-pluggy \
-     ${PYTHON_PN}-py \
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -271,4 +158,4 @@ index ca67223db..1da43c4f9 100644
   </body>
 </html>
 
---------------CF26D818D491785E529BB368--
+--------------5E48B3D47D84EB6E575315C7--
