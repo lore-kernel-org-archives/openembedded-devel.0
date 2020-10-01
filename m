@@ -1,56 +1,93 @@
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
- by mx.groups.io with SMTP id smtpd.web10.8523.1601544405891402066
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com [209.85.128.66])
+ by mx.groups.io with SMTP id smtpd.web11.8654.1601544553083673102
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Oct 2020 02:26:46 -0700
+ Thu, 01 Oct 2020 02:29:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: intel.com, ip: 134.134.136.126, mailfrom: chee.yang.lee@intel.com)
-IronPort-SDR: nhPgQXwiCFdKEhv3e2QlDcQ+QEbc5PCOo49B9tWm6GyIIBX5sMCT7E1ftEQhFhkXZ6aVJ8ysNe
- MgksbLKRGj5A==
-X-IronPort-AV: E=McAfee;i="6000,8403,9760"; a="150463093"
-X-IronPort-AV: E=Sophos;i="5.77,323,1596524400"; 
-   d="scan'208";a="150463093"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Oct 2020 02:26:45 -0700
-IronPort-SDR: Dx6s4RNCkorte8Y68WTBpeZRAbUiPvALmlAr7ZGmEd1DNJOvaHiIeVGsImGlAShHCFNsdz0/kT
- gXMsfjBlypSw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.77,323,1596524400"; 
-   d="scan'208";a="339476106"
-Received: from unknown (HELO guest1-ubuntu1804.png.intel.com) ([10.221.183.51])
-  by fmsmga004.fm.intel.com with ESMTP; 01 Oct 2020 02:26:44 -0700
-From: "Lee Chee Yang" <chee.yang.lee@intel.com>
+ dkim=pass header.i=@kynetics-com.20150623.gappssmtp.com header.s=20150623 header.b=K4WS6bFO;
+ spf=neutral (domain: kynetics.com, ip: 209.85.128.66, mailfrom: diego.rondini@kynetics.com)
+Received: by mail-wm1-f66.google.com with SMTP id j136so962885wmj.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2020 02:29:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=kynetics-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=OYOzTElDD+eHe5YeZ2AV9RtEUzZjPHGxxsfCX9AZJn8=;
+        b=K4WS6bFOCfuu5Gz/v+Q1sQD8yDMQFVvadRt1GykbGUvEpKUzMlJnUjCbMra26nggec
+         75hZVjLpLf8E9OxcgCM1fqkPBATd6IoRcl9MxLm4G9orF2gi5P9qSpWeQ8Ir6WQtEJeL
+         hzSbEoWxNvR6zL8sU94VKwitD1c+HZp/GHP/PWHqFI/uHqnQvxAmUiaXWrpvdSsAZUZ4
+         xnXI4dTv8Vf1xWKtqreiDUX9IrVfvlHcin+0EPOm/TOolUnpBcc2DPnbejOWtrxsOKms
+         CB/Si/x8g+c9STogfBfzJIo3rX2rfUAa4GOUQ5/2Ca7uT6p0igdOZJk2yuQ6duRR6JkS
+         hLXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=OYOzTElDD+eHe5YeZ2AV9RtEUzZjPHGxxsfCX9AZJn8=;
+        b=W9+HpjzpEF6Hsu8fQZL9sG+dAtJHfLs7slEZML6iM7cK4X7h5ASiP7jlAHRumlb1OX
+         NxBHw5WAsq9ddHHPR1DaESvRwvw3ID7W5ud+KTBmV5IYOygjoGQdCMs9shOUXvUPPL8t
+         uCLxkI9GnGBbZdxQKcLBJQWluxltwDsuQA2ElGb/YW+rDMJ1WEMIXDRwQfxn8MkIdnZ7
+         M8IEXHk2J+onqEzbbMRmE/Ukhk8f3MDmQSAOatHEvV1tBI8LxyO74Hu5OXWQG5FHE55l
+         Mr3mA/SqiHai72Qy/1xIO8BlIQABbrhYJvy5YzZcafqBDFCc4t3eV/OToYMBsLYt518o
+         fYXQ==
+X-Gm-Message-State: AOAM5329S5E0sB8x5FYKWhlQQSnT3Qjcjtd6/ZXMTpexj/hju7qzg4qQ
+	XF5cHL7Bi03FqEAvBQz1Gjce+FO5OwxIpg==
+X-Google-Smtp-Source: ABdhPJzNoJzXKxYPnn0uofCiMOWy2v7WHzudHX20jgrL6EByI81lEpYf6LDRiIdu4fvjH3QN1hKYMA==
+X-Received: by 2002:a7b:cbd4:: with SMTP id n20mr7897725wmi.105.1601544551005;
+        Thu, 01 Oct 2020 02:29:11 -0700 (PDT)
+Return-Path: <diego.rondini@kynetics.com>
+Received: from localhost.lan (217-133-17-98.static.clienti.tiscali.it. [217.133.17.98])
+        by smtp.gmail.com with ESMTPSA id i6sm8451182wra.1.2020.10.01.02.29.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 01 Oct 2020 02:29:10 -0700 (PDT)
+From: "Diego" <diego.rondini@kynetics.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH][meta-oe] glog : improve reproducibility
-Date: Thu,  1 Oct 2020 17:26:43 +0800
-Message-Id: <20201001092643.10205-1-chee.yang.lee@intel.com>
-X-Mailer: git-send-email 2.17.1
+Cc: Diego Rondini <diego.rondini@kynetics.com>
+Subject: [meta-oe][PATCH] README: fix incorrect links
+Date: Thu,  1 Oct 2020 11:28:57 +0200
+Message-Id: <20201001092857.264894-1-diego.rondini@kynetics.com>
+X-Mailer: git-send-email 2.26.2
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Lee Chee Yang <chee.yang.lee@intel.com>
+Fix incorrect links and replace the defunct "gitorious" with now popular
+"GitLab".
 
-remove WORKDIR info from config file to improve reproducibility
-
-Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
+Signed-off-by: Diego Rondini <diego.rondini@kynetics.com>
 ---
- meta-oe/recipes-support/glog/glog_0.3.5.bb | 7 +++++++
- 1 file changed, 7 insertions(+)
+ meta-multimedia/README | 2 +-
+ meta-oe/README         | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/glog/glog_0.3.5.bb b/meta-oe/recipes-support/glog/glog_0.3.5.bb
-index 9a8332836b..56bf515544 100644
---- a/meta-oe/recipes-support/glog/glog_0.3.5.bb
-+++ b/meta-oe/recipes-support/glog/glog_0.3.5.bb
-@@ -25,3 +25,10 @@ PACKAGECONFIG_remove_riscv32 = "unwind"
+diff --git a/meta-multimedia/README b/meta-multimedia/README
+index 3c4b1af7f..b4c2455a1 100644
+--- a/meta-multimedia/README
++++ b/meta-multimedia/README
+@@ -14,6 +14,6 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-mult
+ When sending single patches, please use something like:
+ 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-multimedia][PATCH
  
- PACKAGECONFIG[unwind] = "-DWITH_UNWIND=ON,-DWITH_UNWIND=OFF,libunwind,libunwind"
- PACKAGECONFIG[shared] = "-DBUILD_SHARED_LIBS=ON,-DBUILD_SHARED_LIBS=OFF,,"
-+
-+do_configure_append() {
-+    # remove WORKDIR info to improve reproducibility
-+    if [ -f  "${B}/config.h" ] ; then
-+        sed -i 's/'$(echo ${WORKDIR} | sed 's_/_\\/_g')'/../g' ${B}/config.h
-+    fi
-+}
+-You are encouraged to fork the mirror on github https://github.com/openembedded/meta-oe/ to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like gitorious, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
++You are encouraged to fork the mirror on github https://github.com/openembedded/meta-openembedded to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like GitLab, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
+ 
+ Layer maintainer: Andreas Müller <schnitzeltony@gmail.com>
+diff --git a/meta-oe/README b/meta-oe/README
+index 6a0d7c0a1..8d787df68 100644
+--- a/meta-oe/README
++++ b/meta-oe/README
+@@ -19,10 +19,10 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]'
+ When sending single patches, please use something like:
+ 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix="meta-oe][PATCH"'
+ 
+-You are encouraged to fork the mirror on GitHub https://github.com/openembedded/openembedded-core
++You are encouraged to fork the mirror on GitHub https://github.com/openembedded/meta-openembedded
+ to share your patches, this is preferred for patch sets consisting of more than one patch.
+ 
+-Other services like gitorious, repo.or.cz or self-hosted setups are of course accepted as well,
++Other services like GitLab, repo.or.cz or self-hosted setups are of course accepted as well,
+ 'git fetch <remote>' works the same on all of them. We recommend GitHub because it is free, easy
+ to use, has been proven to be reliable and has a really good web GUI.
+ 
 -- 
-2.17.1
+2.26.2
 
