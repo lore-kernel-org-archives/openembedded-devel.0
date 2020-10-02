@@ -1,49 +1,50 @@
-Received: from mail-yb1-f194.google.com (mail-yb1-f194.google.com [209.85.219.194])
- by mx.groups.io with SMTP id smtpd.web10.3696.1601667791357759935
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
+ by mx.groups.io with SMTP id smtpd.web12.4522.1601670071953372195
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 02 Oct 2020 12:43:11 -0700
+ Fri, 02 Oct 2020 13:21:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@google.com header.s=20161025 header.b=X1UHh5kG;
- spf=pass (domain: google.com, ip: 209.85.219.194, mailfrom: maxims@google.com)
-Received: by mail-yb1-f194.google.com with SMTP id h9so1975821ybm.4
-        for <openembedded-devel@lists.openembedded.org>; Fri, 02 Oct 2020 12:43:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=rMkxxbRr;
+ spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f195.google.com with SMTP id x201so3297447qkb.11
+        for <openembedded-devel@lists.openembedded.org>; Fri, 02 Oct 2020 13:21:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
+        d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=lloVTTHQ41t71IzXwq1mmR89tZuwk1jYh03kfcZVfPA=;
-        b=X1UHh5kG7TCDEEddLAOvFSeSlaPAWHaB5yxWJdi0ZEWaZAlXPjt4PbsHcB7lAHVd1G
-         Uo7uAbIu7EXnP5/OtvFZgq/bHUSLnIDJIneUfahaLQJe7wuvk2dP3iGVL+b0zjlsnn/W
-         8NMhK3uJ9PfwdpRHhDDL6lP+sJ+cM0oXHULXpv9AH4iJ9CY30WLsvD54N/YlkRNuRcGg
-         Dx9p/NhSS3qtRdbbBzvLnciPT8e3UKKlnXe9Fyt5tzeeFPIAVe6EJ55Oz+yfqmYjGYqf
-         LVBgJ3LE5qaOEU7nKzmqYSt29qflowWlSjkNIghk8mEFy6oB3ag5eq5YquJBGwqn84ww
-         UtUA==
+        bh=hee/wPVZ3ncnZUjQP0s35f7uVYmufDILiDuGFvloXQY=;
+        b=rMkxxbRr6hxERsEOMfjuVI/31BN54RbLRbnKdaoS9aRh4nLJJERT720ldL6P6kPnDe
+         A2bBi3aOrioTnULmRdGY91OXvh/KNKijL46lbnUAFTfHMfMMPCQbtTsxW8+2fRBVnD8v
+         Utla7qoUFn2udDbK1n2zhssbPLlet9mfNQYuMIUNBL8v+WypFEbUYtTiVBngBXHfiAlW
+         PzakI0QTzJtHBsKs3318LENP8W2ik3qKQ8TbndG4b3SFr8SHBBzIWw8X21aE+LnNPFLm
+         7jEJ2c8b7FH4bj6ibGg35gSj2hzlRtNFPLtzPG9cggjpi+cZRbjWPHjgG//AhvZ56w6J
+         rcDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=lloVTTHQ41t71IzXwq1mmR89tZuwk1jYh03kfcZVfPA=;
-        b=BGY3bxf2jfvJxZhiS5JXU+Loby3bKFNAEDL3zDl6f4ONhdH0qXcC9MHX5LX7+MXXTt
-         NtK2Cli8wiovaQoCI5TBO2yoAV9YHl2VJXGh0k13/TzR9adayQ4HH1JLTZUI40SCt2Qx
-         2yPlzyBKwq9R0HYriZowUHLGnbkHTwMyoUY/+8PulCow/WMdJEm6WCGc/9H9fOXa5sCP
-         PvFBzeOO/0H8NmJEe1KM2bqLwMf/OTYgFAMLHqsHilImv70oBxuSpDafcT9wrC5hgIkl
-         P9Mi60CTGvrJBuKzJbFwdxVV3fd2MeO/PmR6h0xo0vatYdJwNtB3JlYmWZ12AEIEP6SR
-         PQrQ==
-X-Gm-Message-State: AOAM532TMhhWBGOWnfuq4XuQBbXPcRwAKQziQyh5wuGkdMYUE2Sahjzm
-	wjG3qDlstu55Tqs5V84hdRfRGA52NZy0JWLqdp//5Q==
-X-Google-Smtp-Source: ABdhPJzI3MWTSEpuZKa3irgNFtIrqNXVGeqAvV03c+n1u6KbParT5jKHoS2a9+Iax92QWbDq+f7RlURkVPwiUKYRV9E=
-X-Received: by 2002:a25:500c:: with SMTP id e12mr5189893ybb.125.1601667790265;
- Fri, 02 Oct 2020 12:43:10 -0700 (PDT)
+        bh=hee/wPVZ3ncnZUjQP0s35f7uVYmufDILiDuGFvloXQY=;
+        b=e/7P5Dq49XWZBzvKTopwjVnqu/eqhtUIF0S5++BTxTSsY5DcYPixxJxY6A+75+rLeb
+         FZVzq2x9LE5XaL+m0IIm6WKTuAzDHavl0daIGmDwQBH8ZKNo2b6BCbdlnEEmaQJozSO1
+         wXhVbJpztIaFwuFgqhRKPNO3/hOsCsSYbffKDmMjZfK/jwZm48IS16RMGQA2bkoJHBiS
+         jO0ZcRbMhNloUVBJiQqbHTrsoNgBpKqxAM9zdWXOQDk5D2XSFiltrmO5C5zLyEWj7Bk9
+         n2tCQ8LEE0p0q9b+zs2qvdhjH1kso/jqvQLUX4zb1K78LuTdEWE6t6B0bcj4XROfUvx0
+         qAEA==
+X-Gm-Message-State: AOAM531x9MlEuNKbO796caKOhHtb8UfhKgOkBY/68OxsOQ3wkz6rQEeu
+	ihw4rS92VBnrJFJe9OuiKnE/WOC7f/GB8N6oRaY=
+X-Google-Smtp-Source: ABdhPJwYBZ3Dgz9AkeXZfW0em5ZoTq8YdGEnewMoA1l+Akka8+L2jnHLtk9KfwRx8rinQIwWoaFcxFvigl/DQiOrDNY=
+X-Received: by 2002:a05:620a:1670:: with SMTP id d16mr3888843qko.474.1601670070892;
+ Fri, 02 Oct 2020 13:21:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAFR_W8q+7wJegtG-CNAxur=+EMi2jXKoP80=KuyqBY-zMkbLTQ@mail.gmail.com>
  <CADkTA4PYpOZwrstc6XcF_J3j0aRwEEAWZwRT==JMFJ0p==d_FQ@mail.gmail.com>
 In-Reply-To: <CADkTA4PYpOZwrstc6XcF_J3j0aRwEEAWZwRT==JMFJ0p==d_FQ@mail.gmail.com>
-From: "Maxim Sloyko" <maxims@google.com>
-Date: Fri, 2 Oct 2020 12:42:59 -0700
-Message-ID: <CAFR_W8qXXWtuW3vLWGz+-=nAXgJ9kbmfTD2a=9yFesgX8adE0A@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 2 Oct 2020 13:20:44 -0700
+Message-ID: <CAMKF1soKALxESKSnmS7HDRRnNcJD3ratQOVVvqyd-K=iebu4TA@mail.gmail.com>
 Subject: Re: [oe] Tracking dependencies on kernel configration
 To: Bruce Ashfield <bruce.ashfield@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Cc: maxims@google.com, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
 On Fri, Oct 2, 2020 at 11:28 AM Bruce Ashfield <bruce.ashfield@gmail.com> wrote:
@@ -102,7 +103,11 @@ On Fri, Oct 2, 2020 at 11:28 AM Bruce Ashfield <bruce.ashfield@gmail.com> wrote:
 > Making that generic to cross multiple kernel versions, machines,
 > etc, that's the hard part (so I suggest staying out of that mess).
 
-OK, that makes sense. Thanks, Bruce.
+I think its an interesting problem, meta-raspberrypi tries to create knobs
+for config metadata that translates into .config options and can also be
+used in other recipes to validate a feature being compiled-in or out
+but doing it comprehensively for all kernel config options is a whole
+different game.
 
 >
 > Cheers,
@@ -120,7 +125,7 @@ OK, that makes sense. Thanks, Bruce.
 > > --
 > > -MS
 > >
-> > 
+> >
 > >
 >
 >
@@ -128,8 +133,6 @@ OK, that makes sense. Thanks, Bruce.
 > - Thou shalt not follow the NULL pointer, for chaos and madness await
 > thee at its end
 > - "Use the force Harry" - Gandalf, Star Trek II
-
-
-
--- 
--MS
+>
+> 
+>
