@@ -1,173 +1,78 @@
-Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com [209.85.208.67])
- by mx.groups.io with SMTP id smtpd.web11.1146.1601565143404633764
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.web11.254.1601656010675496992
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Oct 2020 08:12:23 -0700
+ Fri, 02 Oct 2020 09:26:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=iH/CQ+/g;
- spf=pass (domain: gmail.com, ip: 209.85.208.67, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f67.google.com with SMTP id g4so6045286edk.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Oct 2020 08:12:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=UaLOi1Gv;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id m34so1089235pgl.9
+        for <openembedded-devel@lists.openembedded.org>; Fri, 02 Oct 2020 09:26:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=kD388I2snWLAUN6UrS7o9eZ2POMg3XVKuyFIM6f0JT0=;
-        b=iH/CQ+/gN09LlXwGAHnwDZ4Oq1bHq//nFB8SxcLAISEmT/p+9TpHvLM+AGki5LSPEW
-         ZBWfSADzYFrUVtFNExndM764txnE2YM2VXBFFjn+pyX23WB05FmStw9XQ1FMyv8s/l/7
-         Axa1tE0IwrAQLkzuC/YKNPNpFTNGwsFEvF7lCqKeGpCA+UHc2AQ/piuOMmxR2F3dm6MO
-         PGI9bROPKYUCdj6hU1I8gbXiukMPoVOpoN8V2bxB2S4dHxNjVCDHyDJhB6CnRkRu3Zee
-         hi6KYr6SVxE2ip0C1gcR5mqLv0lAWAY8gZbZfi3Z2+KwZZvfOTOuFONDi1ACEquWobrD
-         3A0g==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zGAJHI15dh8BmcwESNYtwAICKDhoCB3SGSkRn8UFsa4=;
+        b=UaLOi1GvHmTF3LlN5v5/+eO4rGnF4QOXeQg+ozLarjYvw+3SdWx7xlBDd734jvWciu
+         c2B8li2DT5puy3wzhRgmcS47f3IjeAMTH+DYok3wSD8C3LJu0AMNzvUmyiRROD1tkpAL
+         76f7OmigD3cQE+5ZFcUJgFdVI8K1XarLhm4Fhj7r8NuNS9TpJIToVQ2n70dPfx+m23qg
+         e1LcAOon/2VJ75RqdgpKBIEsFWQ5hJlwZiV82wkmDTBa+DUKbfcpP6e+5ri/iiurOzLd
+         XcAjO0iV3QN+NVDIgh0ciCI+U81qrkVtNomi7ERxNJqwVImM8Wj6oQmvZ3o95PqR6+8x
+         P2Fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=kD388I2snWLAUN6UrS7o9eZ2POMg3XVKuyFIM6f0JT0=;
-        b=WJTM639SYCdtxxT5nzLVWwdJgyl1u0wv+7m6bSLqNhLLiuiLxPNkkLXunz96nYxXWN
-         6bJwDeKxDQIIY4tBD09BBDs+aLmSW5TsMBQlrltZi9oTKbZNHXEoucD4Y3my1gg1niR4
-         hQdxF+Im9pgLhOanqBlfuOV47SrsTjBo6/r+umPvc6aqYCVbuyDTUjC7hX2Gk51j1CQD
-         clH6adAC0vMKqmmho/mMhU4g3n9shXmamVk03fpY8ZBXsX+3o6YY0+j1Qz3zwG7fdz5T
-         ZHAy+1+XEPVnvO994dCdZ3j1Jf0PQR/ScLDDPHu2+OsYQfe/i0ZWmBbGDUCIEk7omexs
-         ILEA==
-X-Gm-Message-State: AOAM532sD1SCcOeyZ6lMBjpeT2BCXWPlkoBNTOblSIjYnkzds/f2WOQc
-	ivn5H/0LX9YCmpAl2BXF5zMY91If+2E4DNEi+tY=
-X-Google-Smtp-Source: ABdhPJw6/jn7Ny4Zu4hju7k+qCpTxo6GSQZoGJOL3vHEgKwkcvr+KuyilAARxV7SwNDiRp7b5dkl7CcaVkW5Fxmd4ZI=
-X-Received: by 2002:a05:6402:2214:: with SMTP id cq20mr4443908edb.311.1601565141751;
- Thu, 01 Oct 2020 08:12:21 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zGAJHI15dh8BmcwESNYtwAICKDhoCB3SGSkRn8UFsa4=;
+        b=S93FWeUh/uG38mGZphDe71UQ24hdFbhfMZ5ZGPpAJy+o9onuS/75j/8nWyghcqzOm8
+         ao+zzeX1TWn7IW3fmcEpFxv0pgdieiBWfDY17tyjMMkUK+PPEBL+meUhn9SdCjrKbg5v
+         Vd11IszMuQKxXtwqI5N5dixgeUK1gmrRhbIWJJZNBm2/K6pQvsBpf0kZOmgu/XYMvgZU
+         ZTC6xonRC0Rm49Pn0cHxwLP4EY9I2xiIZlSMTPNIx8On7Y7nG7DBEj6X5FYneBM78lRl
+         TdEgWrCvne08Q8d5qayDrTCc4I25v99nauGUKFVBXQr9vIETEvBDtdhY4HdNXeVaSLUv
+         ZGCQ==
+X-Gm-Message-State: AOAM5339sf/pzIjZiIiH8fFs2SBBcqZ12Ki11uR3jP0g6blZ9buLF1YL
+	MN5vCgEHbDDe5KA8ajAlvdY8DVjXGeVpHg==
+X-Google-Smtp-Source: ABdhPJxcqLB/zlaCKejj7Osdkd9+gokzRWM0t6mZ+w09dyb2fLyaR+Utraj4T04VUQwidtI8zBbL0g==
+X-Received: by 2002:a63:7d8:: with SMTP id 207mr2869765pgh.173.1601656009837;
+        Fri, 02 Oct 2020 09:26:49 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0:923a:5c32:ada4:3e27])
+        by smtp.gmail.com with ESMTPSA id p6sm2480131pfn.63.2020.10.02.09.26.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 02 Oct 2020 09:26:49 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH V2] numactl: Link with libatomic on rv64/rv32
+Date: Fri,  2 Oct 2020 09:26:47 -0700
+Message-Id: <20201002162647.176613-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-References: <20200930232008.1342160-1-zig@zigsystem.com> <CAHQecY7n9s1JXXwxLScCVp58qSF60ggmz5a=Ji2ucuKRKDBHRw@mail.gmail.com>
-In-Reply-To: <CAHQecY7n9s1JXXwxLScCVp58qSF60ggmz5a=Ji2ucuKRKDBHRw@mail.gmail.com>
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-Date: Thu, 1 Oct 2020 17:12:10 +0200
-Message-ID: <CA+chaQcHN8fNEZCnTfyg6fYOe8JfAC=cbXGhi3P_LB8uZ8uryw@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][PATCH] libuvc: add recipe
-To: tom king <ka6sox@gmail.com>
-Cc: Zig Globulin <zig@zigsystem.com>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000005bde7e05b09d71f9"
+Content-Transfer-Encoding: 8bit
 
---0000000000005bde7e05b09d71f9
-Content-Type: text/plain; charset="UTF-8"
+Fixes
+riscv64-yoe-linux/10.2.0/ld: ./.libs/libnuma.so: undefined reference to `__atomic_fetch_and_1'
 
-Why? It's fetching from git which doesn't use checksums, just SRCREV.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+v2: Also fix rv32
 
-On Thu, Oct 1, 2020 at 5:10 PM tom king <ka6sox@gmail.com> wrote:
+ meta-oe/recipes-support/numactl/numactl_git.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-> Please add SRC_URI[md5sum] and SRC_URI[sha256sum] to recipe
->
-> Thanks
->
-> Tom
->
-> On Wed, Sep 30, 2020 at 4:20 PM Zig Globulin <zig@zigsystem.com> wrote:
->
->> Signed-off-by: Zig Globulin <zig@zigsystem.com>
->> ---
->>  meta-multimedia/recipes-multimedia/libuvc/libuvc.bb | 13 +++++++++++++
->>  1 file changed, 13 insertions(+)
->>  create mode 100644 meta-multimedia/recipes-multimedia/libuvc/libuvc.bb
->>
->> diff --git a/meta-multimedia/recipes-multimedia/libuvc/libuvc.bb
->> b/meta-multimedia/recipes-multimedia/libuvc/libuvc.bb
->> new file mode 100644
->> index 000000000..27cc17bc6
->> --- /dev/null
->> +++ b/meta-multimedia/recipes-multimedia/libuvc/libuvc.bb
->> @@ -0,0 +1,13 @@
->> +SUMMARY = "library for USB video devices built atop libusb"
->> +HOMEPAGE = "https://github.com/libuvc/libuvc.git"
->> +LICENSE = "BSD"
->> +LIC_FILES_CHKSUM =
->> "file://LICENSE.txt;md5=2f1963e0bb88c93463af750daf9ba0c2"
->> +DEPENDS = "libusb jpeg"
->> +
->> +SRC_URI = "git://github.com/libuvc/libuvc.git"
->> +SRCREV = "ad6c72a4e390367f0d2be81aac00cfc0b6680d74"
->> +PV = "v0.0.6+git${SRCPV}"
->> +
->> +S = "${WORKDIR}/git"
->> +
->> +inherit cmake
->> --
->> 2.28.0
->>
->>
->>
->>
->>
->>
-> 
->
->
+diff --git a/meta-oe/recipes-support/numactl/numactl_git.bb b/meta-oe/recipes-support/numactl/numactl_git.bb
+index 75e4435db0..504fe03275 100644
+--- a/meta-oe/recipes-support/numactl/numactl_git.bb
++++ b/meta-oe/recipes-support/numactl/numactl_git.bb
+@@ -25,6 +25,9 @@ S = "${WORKDIR}/git"
+ # ARM does not currently support NUMA
+ COMPATIBLE_HOST = "^((?!arm).*)$"
+ 
++LDFLAGS_append_riscv64 = " -latomic"
++LDFLAGS_append_riscv32 = " -latomic"
++
+ do_install() {
+     oe_runmake DESTDIR=${D} prefix=${D}/usr install
+     #remove the empty man2 directory
+-- 
+2.28.0
 
---0000000000005bde7e05b09d71f9
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Why? It&#39;s fetching from git which doesn&#39;t use chec=
-ksums, just SRCREV.</div><br><div class=3D"gmail_quote"><div dir=3D"ltr" cl=
-ass=3D"gmail_attr">On Thu, Oct 1, 2020 at 5:10 PM tom king &lt;<a href=3D"m=
-ailto:ka6sox@gmail.com">ka6sox@gmail.com</a>&gt; wrote:<br></div><blockquot=
-e class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px s=
-olid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr">Please add SRC_URI=
-[md5sum] and SRC_URI[sha256sum] to recipe<div><br></div><div>Thanks</div><d=
-iv><br></div><div>Tom</div></div><br><div class=3D"gmail_quote"><div dir=3D=
-"ltr" class=3D"gmail_attr">On Wed, Sep 30, 2020 at 4:20 PM Zig Globulin &lt=
-;<a href=3D"mailto:zig@zigsystem.com" target=3D"_blank">zig@zigsystem.com</=
-a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0p=
-x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Si=
-gned-off-by: Zig Globulin &lt;<a href=3D"mailto:zig@zigsystem.com" target=
-=3D"_blank">zig@zigsystem.com</a>&gt;<br>
----<br>
-=C2=A0meta-multimedia/recipes-multimedia/libuvc/<a href=3D"http://libuvc.b=
-b" rel=3D"noreferrer" target=3D"_blank">libuvc.bb</a> | 13 +++++++++++++<br=
->
-=C2=A01 file changed, 13 insertions(+)<br>
-=C2=A0create mode 100644 meta-multimedia/recipes-multimedia/libuvc/<a href=
-=
-=3D"http://libuvc.bb" rel=3D"noreferrer" target=3D"_blank">libuvc.bb</a><b=
-r>
-<br>
-diff --git a/meta-multimedia/recipes-multimedia/libuvc/<a href=3D"http://l=
-ibuvc.bb" rel=3D"noreferrer" target=3D"_blank">libuvc.bb</a> b/meta-multime=
-dia/recipes-multimedia/libuvc/<a href=3D"http://libuvc.bb" rel=3D"noreferre=
-r" target=3D"_blank">libuvc.bb</a><br>
-new file mode 100644<br>
-index 000000000..27cc17bc6<br>
---- /dev/null<br>
-+++ b/meta-multimedia/recipes-multimedia/libuvc/<a href=3D"http://libuvc.b=
-b" rel=3D"noreferrer" target=3D"_blank">libuvc.bb</a><br>
-@@ -0,0 +1,13 @@<br>
-+SUMMARY =3D &quot;library for USB video devices built atop libusb&quot;<b=
-r>
-+HOMEPAGE =3D &quot;<a href=3D"https://github.com/libuvc/libuvc.git" rel=
-=3D"noreferrer" target=3D"_blank">https://github.com/libuvc/libuvc.git</a>=
-&quot;<br>
-+LICENSE =3D &quot;BSD&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE.txt;md5=3D2f1963e0bb88c93463af7=
-50daf9ba0c2&quot;<br>
-+DEPENDS =3D &quot;libusb jpeg&quot;<br>
-+<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://github.com/libuvc/libuvc.git" r=
-el=3D"noreferrer" target=3D"_blank">github.com/libuvc/libuvc.git</a>&quot;<=
-br>
-+SRCREV =3D &quot;ad6c72a4e390367f0d2be81aac00cfc0b6680d74&quot;<br>
-+PV =3D &quot;v0.0.6+git${SRCPV}&quot;<br>
-+<br>
-+S =3D &quot;${WORKDIR}/git&quot;<br>
-+<br>
-+inherit cmake<br>
--- <br>
-2.28.0<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-</blockquote></div>
-<br>
-<br>
-<br>
-</blockquote></div>
-
---0000000000005bde7e05b09d71f9--
