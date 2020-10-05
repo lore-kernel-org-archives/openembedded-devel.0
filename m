@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.32915.1601898915874442994
+ by mx.groups.io with SMTP id smtpd.web12.33284.1601898915886498806
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 05 Oct 2020 04:55:16 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=44266 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kPP5F-0004NT-8z; Mon, 05 Oct 2020 14:55:14 +0300
+	id 1kPP5G-0004NT-2s; Mon, 05 Oct 2020 14:55:14 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-google-api-python-client: Upgrade 1.12.2 -> 1.12.3
-Date: Mon,  5 Oct 2020 14:55:04 +0300
-Message-Id: <20201005115507.11563-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] beautifulsoup4: Upgrade 4.9.2 -> 4.9.3
+Date: Mon,  5 Oct 2020 14:55:05 +0300
+Message-Id: <20201005115507.11563-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201005115507.11563-1-leon.anavi@konsulko.com>
 References: <20201005115507.11563-1-leon.anavi@konsulko.com>
@@ -30,33 +30,35 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.12.3:
+Upgrade to release 4.9.3:
 
-- deps: update setup.py to install httplib2>=0.15.0
+- Implemented a significant performance optimization to the
+  process of searching the parse tree.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...t_1.12.2.bb => python3-google-api-python-client_1.12.3.bb} | 4 ++--
+ ...eautifulsoup4_4.9.2.bb => python3-beautifulsoup4_4.9.3.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-google-api-python-client_1.12.2.bb => python3-google-api-python-client_1.12.3.bb} (69%)
+ rename meta-python/recipes-devtools/python/{python3-beautifulsoup4_4.9.2.bb => python3-beautifulsoup4_4.9.3.bb} (71%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-api-python-client_1.12.2.bb b/meta-python/recipes-devtools/python/python3-google-api-python-client_1.12.3.bb
-similarity index 69%
-rename from meta-python/recipes-devtools/python/python3-google-api-python-client_1.12.2.bb
-rename to meta-python/recipes-devtools/python/python3-google-api-python-client_1.12.3.bb
-index 4fcdb66b0d..cf65044627 100644
---- a/meta-python/recipes-devtools/python/python3-google-api-python-client_1.12.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-google-api-python-client_1.12.3.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=94023d14f6b58272fd885e4e3f2f08b3"
+diff --git a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.2.bb b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.3.bb
+similarity index 71%
+rename from meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.2.bb
+rename to meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.3.bb
+index fb5fb1a6b8..5e03ad5e9e 100644
+--- a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.2.bb
++++ b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.9.3.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1"
  
--SRC_URI[md5sum] = "94d58d98a32b85cf455d8b4f0737b4b5"
--SRC_URI[sha256sum] = "54a7d330833a2e7b0587446d7e4ae6d0244925a9a8e1dfe878f3f7e06cdedb62"
-+SRC_URI[md5sum] = "24e87dbe11fbbe3d97f23c230f518531"
-+SRC_URI[sha256sum] = "844ef76bda585ea0ea2d5e7f8f9a0eb10d6e2eba66c4fea0210ec7843941cb1a"
+-SRC_URI[md5sum] = "5672f9b9bdfb0c6ab3ef074396bf59aa"
+-SRC_URI[sha256sum] = "1edf5e39f3a5bc6e38b235b369128416c7239b34f692acccececb040233032a1"
++SRC_URI[md5sum] = "57fd468ae3eb055f6871106e8f7813e2"
++SRC_URI[sha256sum] = "84729e322ad1d5b4d25f805bfa05b902dd96450f43842c4e99067d5e1369eb25"
  
  inherit pypi setuptools3
+ 
 -- 
 2.17.1
 
