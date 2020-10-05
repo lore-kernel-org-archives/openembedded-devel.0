@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.32917.1601898916712469930
+ by mx.groups.io with SMTP id smtpd.web12.33285.1601898917420413004
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 05 Oct 2020 04:55:17 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=44266 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kPP5G-0004NT-V9; Mon, 05 Oct 2020 14:55:15 +0300
+	id 1kPP5H-0004NT-PQ; Mon, 05 Oct 2020 14:55:16 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-humanize: Upgrade 3.0.0 -> 3.0.1
-Date: Mon,  5 Oct 2020 14:55:06 +0300
-Message-Id: <20201005115507.11563-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-zipp: Upgrade 3.2.0 -> 3.3.0
+Date: Mon,  5 Oct 2020 14:55:07 +0300
+Message-Id: <20201005115507.11563-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201005115507.11563-1-leon.anavi@konsulko.com>
 References: <20201005115507.11563-1-leon.anavi@konsulko.com>
@@ -30,33 +30,35 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.0.1:
+Upgrade to release 3.3.0:
 
-- Fix some translation for id_ID
+- Path objects now expose a .filename attribute and rely on that
+  to resolve .name and .parent when the Path object is at the
+  root of the zipfile.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-humanize_3.0.0.bb => python3-humanize_3.0.1.bb}  | 4 ++--
+ .../python/{python3-zipp_3.2.0.bb => python3-zipp_3.3.0.bb}   | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-humanize_3.0.0.bb => python3-humanize_3.0.1.bb} (71%)
+ rename meta-python/recipes-devtools/python/{python3-zipp_3.2.0.bb => python3-zipp_3.3.0.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-humanize_3.0.0.bb b/meta-python/recipes-devtools/python/python3-humanize_3.0.1.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python3-humanize_3.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-humanize_3.0.1.bb
-index 386fb1e136..92831bf135 100644
---- a/meta-python/recipes-devtools/python/python3-humanize_3.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-humanize_3.0.1.bb
-@@ -4,8 +4,8 @@ HOMEPAGE = "http://github.com/jmoiron/humanize"
+diff --git a/meta-python/recipes-devtools/python/python3-zipp_3.2.0.bb b/meta-python/recipes-devtools/python/python3-zipp_3.3.0.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-zipp_3.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-zipp_3.3.0.bb
+index 59d71500d5..746f9cea52 100644
+--- a/meta-python/recipes-devtools/python/python3-zipp_3.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-zipp_3.3.0.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/jaraco/zipp"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=7a7126e068206290f3fe9f8d6c713ea6"
  
--SRC_URI[md5sum] = "779b291ac40b73a0fd6006c0485c1794"
--SRC_URI[sha256sum] = "db08acbd8e31954f146467a213a112c4b80a5b8e319e06b76aa184a679bd8b48"
-+SRC_URI[md5sum] = "53faa88dedddba1227f9c41d65440c54"
-+SRC_URI[sha256sum] = "8ff8f292c9bf52bbefdc620410e7defd1c95e7eeb1a5cfc2859aaea4b1877ff5"
+-SRC_URI[md5sum] = "321a0dfa1080d58e5de0800a26565452"
+-SRC_URI[sha256sum] = "b52f22895f4cfce194bc8172f3819ee8de7540aa6d873535a8668b730b8b411f"
++SRC_URI[md5sum] = "87a53f0bf48671f6bf6d3e9938218509"
++SRC_URI[sha256sum] = "64ad89efee774d1897a58607895d80789c59778ea02185dd846ac38394a8642b"
  
- inherit pypi setuptools3
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
  
 -- 
 2.17.1
