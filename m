@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.32826.1601898573625340225
+ by mx.groups.io with SMTP id smtpd.web12.33283.1601898914233889020
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Oct 2020 04:49:34 -0700
+ Mon, 05 Oct 2020 04:55:14 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=44260 helo=localhost.localdomain)
+Received: from [78.130.197.211] (port=44266 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kPOzg-0000GP-IT; Mon, 05 Oct 2020 14:49:30 +0300
+	id 1kPP5D-0004NT-7a; Mon, 05 Oct 2020 14:55:12 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
 Subject: [meta-python][PATCH 1/5] python3-nocasedict: Upgrade 1.0.0 -> 1.0.1
-Date: Mon,  5 Oct 2020 14:49:19 +0300
-Message-Id: <20201005114923.11799-1-leon.anavi@konsulko.com>
+Date: Mon,  5 Oct 2020 14:55:03 +0300
+Message-Id: <20201005115507.11563-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
