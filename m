@@ -1,80 +1,92 @@
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web10.26900.1601867965223961372
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.web12.26878.1601867965876259614
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 04 Oct 2020 20:19:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=BCDEklO8;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id t7so5108693pjd.3
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=tIlmjgzt;
+ spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f169.google.com with SMTP id g29so5097211pgl.2
         for <openembedded-devel@lists.openembedded.org>; Sun, 04 Oct 2020 20:19:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=+x7MlP9Rnnnh9knZtWHLftVpmUcBrvjcjyzaFyslU7U=;
-        b=BCDEklO8kPugGo6w13idQuMiMPB8aZimGTklx/Us28e8/imgJVoos9mbtSOYIUQ3BB
-         TdtUL2/5d9XBamzU85pz+qFAlEhCXt2efM715xP0jWS7jjNPFYPng9nmMP52HNZYf5in
-         1cpO0dEJE1KLnkL067X5qm2EisrLvlm0RNqX1waD2US9BMVekEIPAZMNHRnQGjnsrg7E
-         Jne/Rxg2t+ujGigk4ukzfzRaB+amHmjkuqVTXundH0Darj91prNum5jPqqYOscTIKsY8
-         GTt/r9EhTeN9YMJGfAxBuJhoPCS4E0cmjt5hB6eHpZEp8HO+1E2ptAHOdCkoSWQmdJek
-         B6Ww==
+        bh=3VojG/3CxjvGhwdaU9vxRkjhJ5SABPmprFOgRbfI8ok=;
+        b=tIlmjgztLhjzBSrEaDzM8rcY0lP8b4cPLFz9oPftHXydPHCuPMAsoE9RfFwfhyXJ7v
+         hCUU2s6YB4FCCYCHRJhvYpAPHEE38qx+xIYDgrLzJQkB3DlKROGpYwBG6MdiCiWpnFNq
+         QJhlF8d9oYprUJCxT00xULmD/pXq+yEEKWl8M1cUIlBaZpPnLn+2GaDJHT+OFGMcCD5/
+         7XTy234PchOvSOmvDkvZwPB2xIbkKL0+TfbUhCpQdc5ei35xz3nLyYZaNKsmhSLfF+5Y
+         A0i5HsPswjPvN2YTAPRK+pvmfD/mF1l+lEpLlwxGzDzAgPpelX0UGrmpWH51AAPGNxwW
+         pnyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=+x7MlP9Rnnnh9knZtWHLftVpmUcBrvjcjyzaFyslU7U=;
-        b=qn3SXY+yspWe6UCYbqX4gVAcEcAwFjITUmJKA6K7shIUv5wwObs3SvTRyr2tXTKJBr
-         sPcR2O5VupXH3N9nDggDTb9fGhCXSAYF8HWdElGcBm7ugkpTlZTI2WgDj+KqNwOGAyFi
-         9Wiuh/S4hcOohI4yGsv+MdOoNEZSkHpnV/WjIhm5MCEf6zOETaiTCEz7ivMSBf/oQtEF
-         ZUVmNxvuoG/gRbwb92huV4uRa/fwqlBIuVBNZLp3PodkvhvCB8JLU07FKpZlUBL1iUYL
-         ZHo43nfNjNkO2CXtvN2pqsjwoUFh1ESmyMYgZ2sJhqxG52a4Ahusk5siqV2Bg2eWLzZI
-         iVjg==
-X-Gm-Message-State: AOAM530Pec2xfJ6mdJhS/xUuf2w/Xnjr434VwMCu6XKVtprnmdd4gmOB
-	SCxiZRBOBe2DyP7dPKsjog2G86yPpjY=
-X-Google-Smtp-Source: ABdhPJyKpNHPuUofTZT0ROpawRTc7apOXONhjsjT5QkU0POIY3GCOyCzsIjmOdR9j2OCIAabMXakIA==
-X-Received: by 2002:a17:90a:6685:: with SMTP id m5mr14233608pjj.235.1601867964508;
-        Sun, 04 Oct 2020 20:19:24 -0700 (PDT)
+        bh=3VojG/3CxjvGhwdaU9vxRkjhJ5SABPmprFOgRbfI8ok=;
+        b=Z59WacSmYJSzCh7CSgIr2/65pnxfrA9rH8FqRf9ZhwW6LrrJCHBms3c4oQLJLZNsc0
+         dzsUC82bS3Tjy22OluRfBJt5USbwZk5+3CGFZvZgyLdQacWo8FPMKHiBb1jhCJ/Ef0GQ
+         o1O5KjvZuZkG4JJelzzGXU6aI3rAhAUlA2disdjc+KNKIbZY5jwk/od2kqM7BkWLPN4P
+         JCwOtC1hI23HEmgenxD++qsHO8F43vt/v1QmFFtFqyjsZTmhbOh7wPbh0nbn1R63HzmE
+         FSoyhlm+xPzcidmIJBnCPvQO7ZJ96RiLiAj4LTQMVKcfaMmvBPYLDEkIXQIfhQpe1nUV
+         2qGA==
+X-Gm-Message-State: AOAM530XpkOMBp/dL0dJl0HJsDNoxZjvGyFVieN9X+7SRjZGefNc7Bq8
+	PlQBlynwAyTCDOsEsgBRR/pYYUWrlWY=
+X-Google-Smtp-Source: ABdhPJwQGZrc0CO7PLXk1x6BK8RB8gG7zv3eBbQMmssTYlBI7kDcth9ch9XS+oFUSPkFSqyfELj1gQ==
+X-Received: by 2002:a63:4742:: with SMTP id w2mr12334118pgk.258.1601867965276;
+        Sun, 04 Oct 2020 20:19:25 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:1c02:d346:ee81:b86d])
-        by smtp.gmail.com with ESMTPSA id e8sm8825023pgj.8.2020.10.04.20.19.23
+        by smtp.gmail.com with ESMTPSA id e8sm8825023pgj.8.2020.10.04.20.19.24
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sun, 04 Oct 2020 20:19:24 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 2/9] netkit-rsh: inherit update-alternatives
-Date: Sun,  4 Oct 2020 20:19:12 -0700
-Message-Id: <c1c83ca19a6700384dbeaac1367e94218373a724.1601867756.git.akuster808@gmail.com>
+Subject: [dunfell 3/9] ssmtp: Use update alternatives for conflicts with esmtp
+Date: Sun,  4 Oct 2020 20:19:13 -0700
+Message-Id: <d4dbbab0a4d19f39db2ebf575d5014a4be43c07e.1601867756.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1601867756.git.akuster808@gmail.com>
 References: <cover.1601867756.git.akuster808@gmail.com>
 
-From: Martin Jansa <martin.jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-* fixes:
-  netkit-rsh-0.17-r0 do_package_qa: QA Issue: netkit-rsh: recipe defines ALTERNATIVE_netkit-rsh-client but doesn't inherit update-alternatives. This might fail during do_rootfs later! [missing-update-alternatives]
-  netkit-rsh-0.17-r0 do_package_qa: QA Issue: netkit-rsh: recipe defines ALTERNATIVE_netkit-rsh-server but doesn't inherit update-alternatives. This might fail during do_rootfs later! [missing-update-alternatives]
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e48aabf951c8759d3c3cb93aed87f1b03a788fe3)
+(cherry picked from commit 916b6f15efe924dc66d7908ac0bea554eaf7ac92)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-support/ssmtp/ssmtp_2.64.bb           | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-index f6c05daa18..70fb4cf5fa 100644
---- a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-@@ -31,7 +31,7 @@ PAM_SRC_URI = "file://rexec.pam \
- "
- SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)}"
+diff --git a/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb b/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb
+index 07e3ffed42..3739c496a5 100644
+--- a/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb
++++ b/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb
+@@ -12,7 +12,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/s/${BPN}/${BPN}_${PV}.orig.tar.bz2 \
+ SRC_URI[md5sum] = "65b4e0df4934a6cd08c506cabcbe584f"
+ SRC_URI[sha256sum] = "22c37dc90c871e8e052b2cab0ad219d010fa938608cd66b21c8f3c759046fa36"
  
--inherit pkgconfig
-+inherit pkgconfig update-alternatives
+-inherit autotools
++inherit autotools update-alternatives
  
- CFLAGS += " -D_GNU_SOURCE -Wno-deprecated-declarations"
- LDFLAGS += " -L${STAGING_LIBDIR} -lutil -lcrypt"
+ PACKAGECONFIG ?= "ssl ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
+ 
+@@ -33,3 +33,16 @@ do_install_append () {
+     ln -s ssmtp ${D}${sbindir}/newaliases
+     ln -s ssmtp ${D}${sbindir}/mailq
+ }
++
++ALTERNATIVE_PRIORITY_${PN} = "100"
++
++ALTERNATIVE_${PN} = "mailq newalias sendmail"
++ALTERNATIVE_LINK_NAME[sendmail] = "${sbindir}/sendmail"
++ALTERNATIVE_LINK_NAME[newalias] = "${sbindir}/newalias"
++ALTERNATIVE_LINK_NAME[mailq] = "${sbindir}/mailq"
++
++ALTERNATIVE_PRIORITY_${PN}-doc = "100"
++ALTERNATIVE_${PN}-doc += "mailq.1 newaliases.1 sendmail.1"
++ALTERNATIVE_LINK_NAME[mailq.1] = "${mandir}/man1/mailq.1"
++ALTERNATIVE_LINK_NAME[newaliases.1] = "${mandir}/man1/newaliases.1"
++ALTERNATIVE_LINK_NAME[sendmail.1] = "${mandir}/man1/sendmail.1"
 -- 
 2.17.1
 
