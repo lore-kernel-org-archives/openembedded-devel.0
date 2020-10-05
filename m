@@ -1,96 +1,80 @@
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web10.26899.1601867964222292649
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web10.26900.1601867965223961372
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Oct 2020 20:19:24 -0700
+ Sun, 04 Oct 2020 20:19:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=S/SGf56p;
- spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id q123so5883915pfb.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 04 Oct 2020 20:19:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=BCDEklO8;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id t7so5108693pjd.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 04 Oct 2020 20:19:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=HstfAmErUQ0oNOgYnrVc9cGRVtDLvx1tw7g8xYp3hVg=;
-        b=S/SGf56pX/0SCCZH2vtv7Y5YyfCrx/cmg2p+TH0F3jEfoE9zahkspSLcxU5hHlHoIX
-         hjoVCb1K1WlMLKM5+kls5UBVLEn122Ko8JG1+kEbXgFeYP4+yI/osYsMOVwEG09PG1Rd
-         BpUXrNdT4rMXrt9TrVOSWwDVLz/LjUCAaHmFLXdOmW63PKElM5G6FiMcCDQYi0x9rEdI
-         QK1A7RY9rlCoQ4/NyWsX0FSTadjaLOuPeNo/4WY+I9yrkMYyLpj/Xudea/K96WlhkFiR
-         gIjM0jU7X5yZT0nlnBp6zbCPUD8QrBQCOjrkgbsyNQquV7xkAP/iEXk1lNMx1to1oCQ6
-         vH7A==
+        bh=+x7MlP9Rnnnh9knZtWHLftVpmUcBrvjcjyzaFyslU7U=;
+        b=BCDEklO8kPugGo6w13idQuMiMPB8aZimGTklx/Us28e8/imgJVoos9mbtSOYIUQ3BB
+         TdtUL2/5d9XBamzU85pz+qFAlEhCXt2efM715xP0jWS7jjNPFYPng9nmMP52HNZYf5in
+         1cpO0dEJE1KLnkL067X5qm2EisrLvlm0RNqX1waD2US9BMVekEIPAZMNHRnQGjnsrg7E
+         Jne/Rxg2t+ujGigk4ukzfzRaB+amHmjkuqVTXundH0Darj91prNum5jPqqYOscTIKsY8
+         GTt/r9EhTeN9YMJGfAxBuJhoPCS4E0cmjt5hB6eHpZEp8HO+1E2ptAHOdCkoSWQmdJek
+         B6Ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=HstfAmErUQ0oNOgYnrVc9cGRVtDLvx1tw7g8xYp3hVg=;
-        b=AIAiPSQlu9acAy3o8mU3tuK+oG6OVfk6WIiJGAB+AexUUqg1Jei1YQgXTMOs63hn03
-         Md27tM75CplZtkTr1wVJF5+BeZ7p0/ZHtqr5OdfD8DIf7aEoW7polASgJxvut4Nniczk
-         poYgpZJcAKMglWo2uF85+gAYO1RNDTtgUI0V2cz8BZjbjZ9vnc7c3ofEUMDikVFLT3RA
-         HMZIa6v5MQeYXZxQJTEspztk+afHeuo9XduJL5WZhycwiNklvFkIB+FSnudsxQB422Bu
-         S7UGIy78hYU1HbfIIHPkjfULvad5HgozJcILW+EAK7W6CJW3Q8ZbOeeOkjKKbQfhkKOc
-         6HzQ==
-X-Gm-Message-State: AOAM531goED3mFTD9HZ0ykydtRpNFQvzDM+J1RrS2rxsp2U1dF3LC3H8
-	O9rg30Y+KhKcdPPpG5s62e59sEkT4VA=
-X-Google-Smtp-Source: ABdhPJzHBf0nrK6++Hah988MAdDEg1F81ReE0PWuye880DpDNql2Ch8wFQ3GHEJp0VNeM14JJb1R+g==
-X-Received: by 2002:a62:26c1:0:b029:142:2501:35ef with SMTP id m184-20020a6226c10000b0290142250135efmr14089802pfm.79.1601867963601;
-        Sun, 04 Oct 2020 20:19:23 -0700 (PDT)
+        bh=+x7MlP9Rnnnh9knZtWHLftVpmUcBrvjcjyzaFyslU7U=;
+        b=qn3SXY+yspWe6UCYbqX4gVAcEcAwFjITUmJKA6K7shIUv5wwObs3SvTRyr2tXTKJBr
+         sPcR2O5VupXH3N9nDggDTb9fGhCXSAYF8HWdElGcBm7ugkpTlZTI2WgDj+KqNwOGAyFi
+         9Wiuh/S4hcOohI4yGsv+MdOoNEZSkHpnV/WjIhm5MCEf6zOETaiTCEz7ivMSBf/oQtEF
+         ZUVmNxvuoG/gRbwb92huV4uRa/fwqlBIuVBNZLp3PodkvhvCB8JLU07FKpZlUBL1iUYL
+         ZHo43nfNjNkO2CXtvN2pqsjwoUFh1ESmyMYgZ2sJhqxG52a4Ahusk5siqV2Bg2eWLzZI
+         iVjg==
+X-Gm-Message-State: AOAM530Pec2xfJ6mdJhS/xUuf2w/Xnjr434VwMCu6XKVtprnmdd4gmOB
+	SCxiZRBOBe2DyP7dPKsjog2G86yPpjY=
+X-Google-Smtp-Source: ABdhPJyKpNHPuUofTZT0ROpawRTc7apOXONhjsjT5QkU0POIY3GCOyCzsIjmOdR9j2OCIAabMXakIA==
+X-Received: by 2002:a17:90a:6685:: with SMTP id m5mr14233608pjj.235.1601867964508;
+        Sun, 04 Oct 2020 20:19:24 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:1c02:d346:ee81:b86d])
-        by smtp.gmail.com with ESMTPSA id e8sm8825023pgj.8.2020.10.04.20.19.22
+        by smtp.gmail.com with ESMTPSA id e8sm8825023pgj.8.2020.10.04.20.19.23
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Oct 2020 20:19:23 -0700 (PDT)
+        Sun, 04 Oct 2020 20:19:24 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 1/9] haveged: upgrade 1.9.9 -> 1.9.13
-Date: Sun,  4 Oct 2020 20:19:11 -0700
-Message-Id: <4909600c4247f31cf25b381d5f155cb921c38c10.1601867756.git.akuster808@gmail.com>
+Subject: [dunfell 2/9] netkit-rsh: inherit update-alternatives
+Date: Sun,  4 Oct 2020 20:19:12 -0700
+Message-Id: <c1c83ca19a6700384dbeaac1367e94218373a724.1601867756.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1601867756.git.akuster808@gmail.com>
 References: <cover.1601867756.git.akuster808@gmail.com>
 
-From: Pierre-Jean Texier <pjtexier@koncepto.io>
+From: Martin Jansa <martin.jansa@gmail.com>
 
-This includes the following changes:
+* fixes:
+  netkit-rsh-0.17-r0 do_package_qa: QA Issue: netkit-rsh: recipe defines ALTERNATIVE_netkit-rsh-client but doesn't inherit update-alternatives. This might fail during do_rootfs later! [missing-update-alternatives]
+  netkit-rsh-0.17-r0 do_package_qa: QA Issue: netkit-rsh: recipe defines ALTERNATIVE_netkit-rsh-server but doesn't inherit update-alternatives. This might fail during do_rootfs later! [missing-update-alternatives]
 
-1.9.10:
- - fix ordering cycle with private tmp
-
-1.9.11:
- - Fixed wrong version string in v1.9.10
-
-1.9.12:
- - Fix a memory leak in havege_destroy
-
-1.9.13:
- - Added support for --version
- - Updated systemd SystemCallFilter settings
-
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 7e82d252fa558ebb6fe0d07b50a4be6abe40a725)
-[Bug fix only update, also fixes https://github.com/openembedded/meta-openembedded/issues/277]
+(cherry picked from commit e48aabf951c8759d3c3cb93aed87f1b03a788fe3)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../haveged/{haveged_1.9.9.bb => haveged_1.9.13.bb}             | 2 +-
+ meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/haveged/{haveged_1.9.9.bb => haveged_1.9.13.bb} (97%)
 
-diff --git a/meta-oe/recipes-extended/haveged/haveged_1.9.9.bb b/meta-oe/recipes-extended/haveged/haveged_1.9.13.bb
-similarity index 97%
-rename from meta-oe/recipes-extended/haveged/haveged_1.9.9.bb
-rename to meta-oe/recipes-extended/haveged/haveged_1.9.13.bb
-index c1839b37a8..50326ea2f4 100644
---- a/meta-oe/recipes-extended/haveged/haveged_1.9.9.bb
-+++ b/meta-oe/recipes-extended/haveged/haveged_1.9.13.bb
-@@ -6,7 +6,7 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM="file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- # v1.9.9
--SRCREV = "6da706c8026b629d9bb7ebebc32239305a03da8e"
-+SRCREV = "1283a65c541c4a83e152024a63faf7b267b9b1cd"
- SRC_URI = "git://github.com/jirka-h/haveged.git \
+diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
+index f6c05daa18..70fb4cf5fa 100644
+--- a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
+@@ -31,7 +31,7 @@ PAM_SRC_URI = "file://rexec.pam \
  "
- S = "${WORKDIR}/git"
+ SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)}"
+ 
+-inherit pkgconfig
++inherit pkgconfig update-alternatives
+ 
+ CFLAGS += " -D_GNU_SOURCE -Wno-deprecated-declarations"
+ LDFLAGS += " -L${STAGING_LIBDIR} -lutil -lcrypt"
 -- 
 2.17.1
 
