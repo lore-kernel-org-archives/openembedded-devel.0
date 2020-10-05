@@ -1,203 +1,73 @@
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- by mx.groups.io with SMTP id smtpd.web10.229.1601915888533172313
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com [209.85.160.193])
+ by mx.groups.io with SMTP id smtpd.web11.216.1601919866410470365
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Oct 2020 09:38:09 -0700
+ Mon, 05 Oct 2020 10:44:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mailbox.org header.s=mail20150812 header.b=DGkc3Q0T;
- spf=pass (domain: mailbox.org, ip: 80.241.56.171, mailfrom: crg7475@mailbox.org)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [80.241.60.241])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4C4mVj5xFmzQlWP
-	for <openembedded-devel@lists.openembedded.org>; Mon,  5 Oct 2020 18:38:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mailbox.org; h=
-	content-language:content-type:content-type:in-reply-to
-	:mime-version:date:date:message-id:from:from:references:subject
-	:subject:received; s=mail20150812; t=1601915879; bh=BfVDYcRGNb/e
-	YhJCIrhzoB/4Jm2RD66n62pLDaJE8J4=; b=DGkc3Q0TQNZZO0m7JLCWV5vNiOPP
-	UhbLytuihrQ1hdt/CpELN+G9UKxcFDDw1wxYmseVgm262HHCX6aRaINncxUdq0DW
-	8j8ZKtcb5sJmbfXHSoPvEQmZY1eNA2E9kWgbX7gleu65P55j6LX3wC1UhWsFtGqg
-	K++uMPCUkIJqqMO79Ev9yf3NYkovZbBHURXWFuypdFQnHGXQ2wyaocX72cLsT+t/
-	5eLg7XzJXmvvcThoa3YZHE+FcdIWSwik073EMGQUgDwwbNPtwlNTovPU8RGIUsz3
-	Sw8PDnZj7qIeuYcBvOVDZsMj/eEeHbdYu9TzpYHf+uWOUkOn75xFy4sluw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1601915881;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=gfEdGFqJvTYffUgESlGiHlsUPUUDaSW27tyWMmzhG0A=;
-	b=qsF1lE9eERLWEPrMwOtdR8SUaBcZkfSUow2jXxzzBXGax0qypkq/TAAq4RuI+EJc6C90y4
-	Up/F1EoepJYswzHzNOhGY12B5xOsdsQopSiIba0bJm8Riiqajpm7ofHGSvRGgTEYxo9gLI
-	L27lBnqmWAhpcYe125tS9QVhJorGE7NE+lBqc6PsDh6bMNM0y1uQKM7paqB5pdmOm0GGj5
-	IIntSVIz/IfombqLcqgotAncRyxpzBcDETM2zCnuFMFZZe31P3bdNdoWbW5FzriB59xlOT
-	xG7b3OWS6df9lY9+R7T24MzLbLMA2/whHVz0UK0noKDwS9tBiOm1BBLPmMYmZg==
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-Received: from smtp2.mailbox.org ([80.241.60.241])
-	by spamfilter01.heinlein-hosting.de (spamfilter01.heinlein-hosting.de [80.241.56.115]) (amavisd-new, port 10030)
-	with ESMTP id XnP66OSNmyLJ
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Oct 2020 18:37:59 +0200 (CEST)
-Subject: Re: [oe] [PATCH] Alliance for Open Media: new library
-To: openembedded-devel@lists.openembedded.org
-References: <20201005095019.30755-1-siew.hoon.lim@intel.com>
- <CAMKF1sojaqMS-FTVcLMj92750DqHykb2HhsWqMEFr1P-7-O5OA@mail.gmail.com>
-From: "Carlos Rafael Giani" <crg7475@mailbox.org>
-Message-ID: <4ad399ed-27ae-40e1-4a4b-2e4e6d568db0@mailbox.org>
-Date: Mon, 5 Oct 2020 18:37:59 +0200
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=GzugNHld;
+ spf=pass (domain: gmail.com, ip: 209.85.160.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f193.google.com with SMTP id y11so10324645qtn.9
+        for <openembedded-devel@lists.openembedded.org>; Mon, 05 Oct 2020 10:44:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=ENSlfDLfh5KIvAEcSw73P6w8h/5TbIA/ZiAKbYq/x6Q=;
+        b=GzugNHldbUByBPKPtTjhwv4kd5e2rLGNxzE7+qtFuiH31T+0YNYCMuibPbV9vRBD9E
+         zOpfba6bv1zUN6jcpWmek1rAnRZtS+x8yRLIN5JA9AQ/GEEAfVC6J/vQTt8SrScnyQHV
+         Gjdp4OsdfJ5weRjcm8hmTCiDh3qVq09mQbtsYfEFQRQZB2lkgqjw1a0hmRX4/ga49cbd
+         uC9hHT978qhQU4RNYQjqXi8Kv22cMSJfon49ntE5ff2d0ZGBz9mD0VfPoRch4G7dzbG8
+         kbcmV8PtSigpmbW1/GS74xbJzAyz9bC2AnwG99/tRXUNv+RN/WuI7proR4CcZD8/fnsZ
+         uw0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=ENSlfDLfh5KIvAEcSw73P6w8h/5TbIA/ZiAKbYq/x6Q=;
+        b=Q+0yz8k6/TSUMoWMlFSGGoGTB39i6mDPasCXooRVOG7W7Hfn+/+bmzH3VKt6bfgusj
+         PjQ69iSCpRYw115ZjWn9VrJ92UrLtwtQuLeZElwiZUD1wNgxzu7plKNRiQySFm0uX/hc
+         cx4v2Sa8d96WbR7kb2umtTHc7hNfXNhuVgcY0zPqYVs3Y4JZ+TGM6oMdvjFKEBmke6WB
+         p0H+i7S4EUWHcfVfbuPUJMC6xGrGXdgHpV85SBcrpSOa8sXX/d7UJYwGxMUdGq9vam1I
+         oFEM+PlzMT+ZFhNBm3hN4S9ew8fYXqCLwNRAmuvw2Zv+CHEE/LBkyu6fQ+fByEtZvBny
+         v5mg==
+X-Gm-Message-State: AOAM5335oiN+9q3k5H/ssQTLbkmufl2C2tqzuIt10mz1uDZZaCHDa5n0
+	mccgee5IznZvhhrEG05GO2uVApN0oP8Va7dhXEo=
+X-Google-Smtp-Source: ABdhPJyASU00rz17reDvU88q+RsC/OMWhdb4DO5N82hojcV0Yi2EigtuwqmYQUl/wLQ/AwgnSkxRAfxlrBlay+DG1w0=
+X-Received: by 2002:ac8:3417:: with SMTP id u23mr1035833qtb.80.1601919865471;
+ Mon, 05 Oct 2020 10:44:25 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sojaqMS-FTVcLMj92750DqHykb2HhsWqMEFr1P-7-O5OA@mail.gmail.com>
-X-MBO-SPAM-Probability: 
-X-Rspamd-Score: -1.13 / 15.00 / 15.00
-X-Rspamd-Queue-Id: 7619D1706
-X-Rspamd-UID: 9c7ea5
-Content-Type: multipart/alternative;
- boundary="------------D03231EAC6AAA50AD4B9E917"
-Content-Language: en-US
+References: <20200928124526.27734-1-brgl@bgdev.pl> <CAMRc=McQ99QcMtdOH-2Y17QOrs=RyWMZHQ60aPAaTurR7VC3Fg@mail.gmail.com>
+In-Reply-To: <CAMRc=McQ99QcMtdOH-2Y17QOrs=RyWMZHQ60aPAaTurR7VC3Fg@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Mon, 5 Oct 2020 10:43:59 -0700
+Message-ID: <CAMKF1spW28RWdNLD9GJkP4iDLvt6OjitGj_sJfA+ULZNY6B+nQ@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] libgpiod: consolidate the recipe files
+To: Bartosz Golaszewski <brgl@bgdev.pl>
+Cc: Armin Kuster <akuster808@gmail.com>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
 
---------------D03231EAC6AAA50AD4B9E917
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-I'd also add this to meta-multimedia instead. After all, the whole idea 
-of these newer meta-* sublayers was to organize the content of meta-oe 
-better, wasn't it?
-
-On 05.10.20 18:34, Khem Raj wrote:
-> I wonder if this should be part of meta-multimedia, secondly add it to
-> one of packagegroups e.g. packagegroups-meta-oe or
-> packagegroups-meta-multimedia if it is in meta-multimedia.
+On Mon, Oct 5, 2020 at 4:25 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
 >
+> On Mon, Sep 28, 2020 at 2:45 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+> >
+> > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> >
+> > After dropping the support for v0.3.x, we no longer need the split into
+> > .bb and .inc files. Let's move the contents of libgpiod.inc into
+> > libgpiod_1.4.4.bb.
+> >
+> > While at it: do some refactoring: let's use ${BPN} in the URL, consolidate
+> > certain variables and add some explanatory comments.
+> >
+> > Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> > ---
 >
-> On Mon, Oct 5, 2020 at 2:50 AM Lim Siew Hoon <siew.hoon.lim@intel.com> wrote:
->> Signed-off-by: Yong, Jonathan <jonathan.yong@intel.com>
->> Signed-off-by: Lim Siew Hoon <siew.hoon.lim@intel.com>
->> ---
->>   meta-oe/recipes-multimedia/aom/aom_2.0.0.bb | 16 ++++++++++++++++
->>   1 file changed, 16 insertions(+)
->>   create mode 100644 meta-oe/recipes-multimedia/aom/aom_2.0.0.bb
->>
->> diff --git a/meta-oe/recipes-multimedia/aom/aom_2.0.0.bb b/meta-oe/recipes-multimedia/aom/aom_2.0.0.bb
->> new file mode 100644
->> index 000000000..4b388d57f
->> --- /dev/null
->> +++ b/meta-oe/recipes-multimedia/aom/aom_2.0.0.bb
->> @@ -0,0 +1,16 @@
->> +SUMMARY = "Alliance for Open Media - AV1 Codec Library"
->> +DESCRIPTION = "Alliance for Open Media AV1 codec library"
->> +
->> +LICENSE = "BSD-2-Clause"
->> +LIC_FILES_CHKSUM = "file://LICENSE;md5=6ea91368c1bbdf877159435572b931f5"
->> +
->> +SRC_URI = "git://aomedia.googlesource.com/aom;protocol=https"
->> +
->> +SRCREV = "d1d1226af626a61f7ca664b270dd473b92228984"
->> +
->> +S = "${WORKDIR}/git"
->> +
->> +DEPENDS_append = " yasm-native"
-> Just use DEPENDS +=
+> Hi Khem, Armin,
 >
->> +
->> +inherit pkgconfig cmake perlnative python3native
->> +EXTRA_OECMAKE_append = " -DBUILD_SHARED_LIBS=1"
-> Use EXTRA_OECMAKE +=
+> Are you fine with this change? There's been no follow-up on this since
+> last week.
+
+This looks good to me. It escaped patchwork for some reason
 >
->> --
->> 2.17.1
->>
->>
->>
->>
->>
->> 
->>
-
---------------D03231EAC6AAA50AD4B9E917
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p>I'd also add this to meta-multimedia instead. After all, the
-      whole idea of these newer meta-* sublayers was to organize the
-      content of meta-oe better, wasn't it?<br>
-    </p>
-    <div class="moz-cite-prefix">On 05.10.20 18:34, Khem Raj wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CAMKF1sojaqMS-FTVcLMj92750DqHykb2HhsWqMEFr1P-7-O5OA@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">I wonder if this should be part of meta-multimedia, secondly add it to
-one of packagegroups e.g. packagegroups-meta-oe or
-packagegroups-meta-multimedia if it is in meta-multimedia.
-
-
-On Mon, Oct 5, 2020 at 2:50 AM Lim Siew Hoon <a class="moz-txt-link-rfc2396E" href="mailto:siew.hoon.lim@intel.com">&lt;siew.hoon.lim@intel.com&gt;</a> wrote:
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">
-Signed-off-by: Yong, Jonathan <a class="moz-txt-link-rfc2396E" href="mailto:jonathan.yong@intel.com">&lt;jonathan.yong@intel.com&gt;</a>
-Signed-off-by: Lim Siew Hoon <a class="moz-txt-link-rfc2396E" href="mailto:siew.hoon.lim@intel.com">&lt;siew.hoon.lim@intel.com&gt;</a>
----
- meta-oe/recipes-multimedia/aom/aom_2.0.0.bb | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/aom/aom_2.0.0.bb
-
-diff --git a/meta-oe/recipes-multimedia/aom/aom_2.0.0.bb b/meta-oe/recipes-multimedia/aom/aom_2.0.0.bb
-new file mode 100644
-index 000000000..4b388d57f
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/aom/aom_2.0.0.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "Alliance for Open Media - AV1 Codec Library"
-+DESCRIPTION = "Alliance for Open Media AV1 codec library"
-+
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=6ea91368c1bbdf877159435572b931f5">"file://LICENSE;md5=6ea91368c1bbdf877159435572b931f5"</a>
-+
-+SRC_URI = "git://aomedia.googlesource.com/aom;protocol=https"
-+
-+SRCREV = "d1d1226af626a61f7ca664b270dd473b92228984"
-+
-+S = "${WORKDIR}/git"
-+
-+DEPENDS_append = " yasm-native"
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Just use DEPENDS +=
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+
-+inherit pkgconfig cmake perlnative python3native
-+EXTRA_OECMAKE_append = " -DBUILD_SHARED_LIBS=1"
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Use EXTRA_OECMAKE +=
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">--
-2.17.1
-
-
-
-
-</pre>
-        <br>
-        <fieldset class="mimeAttachmentHeader"></fieldset>
-        <pre class="moz-quote-pre" wrap="">
-
-
-</pre>
-      </blockquote>
-    </blockquote>
-  </body>
-</html>
-
---------------D03231EAC6AAA50AD4B9E917--
+> Bartosz
