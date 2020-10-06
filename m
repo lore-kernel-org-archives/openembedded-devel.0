@@ -1,73 +1,55 @@
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com [209.85.160.193])
- by mx.groups.io with SMTP id smtpd.web11.216.1601919866410470365
+Received: from mail.desaster-games.net (mail.desaster-games.net [176.9.84.136])
+ by mx.groups.io with SMTP id smtpd.web11.9068.1601969484608126645
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Oct 2020 10:44:26 -0700
+ Tue, 06 Oct 2020 00:31:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=GzugNHld;
- spf=pass (domain: gmail.com, ip: 209.85.160.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f193.google.com with SMTP id y11so10324645qtn.9
-        for <openembedded-devel@lists.openembedded.org>; Mon, 05 Oct 2020 10:44:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=ENSlfDLfh5KIvAEcSw73P6w8h/5TbIA/ZiAKbYq/x6Q=;
-        b=GzugNHldbUByBPKPtTjhwv4kd5e2rLGNxzE7+qtFuiH31T+0YNYCMuibPbV9vRBD9E
-         zOpfba6bv1zUN6jcpWmek1rAnRZtS+x8yRLIN5JA9AQ/GEEAfVC6J/vQTt8SrScnyQHV
-         Gjdp4OsdfJ5weRjcm8hmTCiDh3qVq09mQbtsYfEFQRQZB2lkgqjw1a0hmRX4/ga49cbd
-         uC9hHT978qhQU4RNYQjqXi8Kv22cMSJfon49ntE5ff2d0ZGBz9mD0VfPoRch4G7dzbG8
-         kbcmV8PtSigpmbW1/GS74xbJzAyz9bC2AnwG99/tRXUNv+RN/WuI7proR4CcZD8/fnsZ
-         uw0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=ENSlfDLfh5KIvAEcSw73P6w8h/5TbIA/ZiAKbYq/x6Q=;
-        b=Q+0yz8k6/TSUMoWMlFSGGoGTB39i6mDPasCXooRVOG7W7Hfn+/+bmzH3VKt6bfgusj
-         PjQ69iSCpRYw115ZjWn9VrJ92UrLtwtQuLeZElwiZUD1wNgxzu7plKNRiQySFm0uX/hc
-         cx4v2Sa8d96WbR7kb2umtTHc7hNfXNhuVgcY0zPqYVs3Y4JZ+TGM6oMdvjFKEBmke6WB
-         p0H+i7S4EUWHcfVfbuPUJMC6xGrGXdgHpV85SBcrpSOa8sXX/d7UJYwGxMUdGq9vam1I
-         oFEM+PlzMT+ZFhNBm3hN4S9ew8fYXqCLwNRAmuvw2Zv+CHEE/LBkyu6fQ+fByEtZvBny
-         v5mg==
-X-Gm-Message-State: AOAM5335oiN+9q3k5H/ssQTLbkmufl2C2tqzuIt10mz1uDZZaCHDa5n0
-	mccgee5IznZvhhrEG05GO2uVApN0oP8Va7dhXEo=
-X-Google-Smtp-Source: ABdhPJyASU00rz17reDvU88q+RsC/OMWhdb4DO5N82hojcV0Yi2EigtuwqmYQUl/wLQ/AwgnSkxRAfxlrBlay+DG1w0=
-X-Received: by 2002:ac8:3417:: with SMTP id u23mr1035833qtb.80.1601919865471;
- Mon, 05 Oct 2020 10:44:25 -0700 (PDT)
+ dkim=missing; spf=none, err=permanent DNS error (domain: iodoru.org, ip: 176.9.84.136, mailfrom: jubalh@iodoru.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.desaster-games.net (Postfix) with ESMTP id 24B7CB;
+	Tue,  6 Oct 2020 09:31:19 +0200 (CEST)
+X-Virus-Scanned: Amavis at mail.desaster-games.com
+Received: from mail.desaster-games.net ([127.0.0.1])
+	by localhost (mail.desaster-games.net [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id LVWTBDOhQokq; Tue,  6 Oct 2020 09:31:05 +0200 (CEST)
+Received: from ymir.suse.de (unknown [195.135.221.27])
+	by mail.desaster-games.net (Postfix) with ESMTPSA id 1C6549;
+	Tue,  6 Oct 2020 09:31:05 +0200 (CEST)
+From: "Michael Vetter" <jubalh@iodoru.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: Michael Vetter <jubalh@iodoru.org>
+Subject: [PATCH 1/1] jasper: upgrade 2.0.21 -> 2.0.22
+Date: Tue,  6 Oct 2020 09:31:06 +0200
+Message-Id: <20201006073107.11952-1-jubalh@iodoru.org>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-References: <20200928124526.27734-1-brgl@bgdev.pl> <CAMRc=McQ99QcMtdOH-2Y17QOrs=RyWMZHQ60aPAaTurR7VC3Fg@mail.gmail.com>
-In-Reply-To: <CAMRc=McQ99QcMtdOH-2Y17QOrs=RyWMZHQ60aPAaTurR7VC3Fg@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 5 Oct 2020 10:43:59 -0700
-Message-ID: <CAMKF1spW28RWdNLD9GJkP4iDLvt6OjitGj_sJfA+ULZNY6B+nQ@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] libgpiod: consolidate the recipe files
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: Armin Kuster <akuster808@gmail.com>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 5, 2020 at 4:25 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
->
-> On Mon, Sep 28, 2020 at 2:45 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
-> >
-> > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> >
-> > After dropping the support for v0.3.x, we no longer need the split into
-> > .bb and .inc files. Let's move the contents of libgpiod.inc into
-> > libgpiod_1.4.4.bb.
-> >
-> > While at it: do some refactoring: let's use ${BPN} in the URL, consolidate
-> > certain variables and add some explanatory comments.
-> >
-> > Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> > ---
->
-> Hi Khem, Armin,
->
-> Are you fine with this change? There's been no follow-up on this since
-> last week.
+Signed-off-by: Michael Vetter <jubalh@iodoru.org>
+---
+ .../jasper/{jasper_2.0.21.bb =3D> jasper_2.0.22.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-graphics/jasper/{jasper_2.0.21.bb =3D> jasper_2.0=
+.22.bb} (93%)
 
-This looks good to me. It escaped patchwork for some reason
->
-> Bartosz
+diff --git a/meta-oe/recipes-graphics/jasper/jasper_2.0.21.bb b/meta-oe/r=
+ecipes-graphics/jasper/jasper_2.0.22.bb
+similarity index 93%
+rename from meta-oe/recipes-graphics/jasper/jasper_2.0.21.bb
+rename to meta-oe/recipes-graphics/jasper/jasper_2.0.22.bb
+index be87d07c0..b2b053a28 100644
+--- a/meta-oe/recipes-graphics/jasper/jasper_2.0.21.bb
++++ b/meta-oe/recipes-graphics/jasper/jasper_2.0.22.bb
+@@ -4,7 +4,7 @@ LICENSE =3D "MIT"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da80440d1d8f17d041c71c7271d6e0=
+6eb"
+=20
+ SRC_URI =3D "git://github.com/jasper-software/jasper.git;protocol=3Dhttp=
+s"
+-SRCREV =3D "2c3ab8c542a66eb5def030d30602fa455d1adbd9"
++SRCREV =3D "95b2f0583a71c92cddefb54b522efe717b7a5adc"
+=20
+ S =3D "${WORKDIR}/git"
+=20
+--=20
+2.26.2
+
