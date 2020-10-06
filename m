@@ -1,56 +1,67 @@
-Received: from mail.desaster-games.net (mail.desaster-games.net [176.9.84.136])
- by mx.groups.io with SMTP id smtpd.web10.9146.1601969485098209053
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.10120.1601975137752359432
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Oct 2020 00:31:25 -0700
+ Tue, 06 Oct 2020 02:05:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: iodoru.org, ip: 176.9.84.136, mailfrom: jubalh@iodoru.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.desaster-games.net (Postfix) with ESMTP id 2D735C;
-	Tue,  6 Oct 2020 09:31:20 +0200 (CEST)
-X-Virus-Scanned: Amavis at mail.desaster-games.com
-Received: from mail.desaster-games.net ([127.0.0.1])
-	by localhost (mail.desaster-games.net [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id gM1apPoL0DcG; Tue,  6 Oct 2020 09:31:06 +0200 (CEST)
-Received: from ymir.suse.de (unknown [195.135.221.27])
-	by mail.desaster-games.net (Postfix) with ESMTPSA id 146A6A;
-	Tue,  6 Oct 2020 09:31:06 +0200 (CEST)
-From: "Michael Vetter" <jubalh@iodoru.org>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=59138 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kPiua-0007g5-9p; Tue, 06 Oct 2020 12:05:34 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Michael Vetter <jubalh@iodoru.org>
-Subject: [meta-oe][PATCH] jasper: upgrade 2.0.21 -> 2.0.22
-Date: Tue,  6 Oct 2020 09:31:07 +0200
-Message-Id: <20201006073107.11952-2-jubalh@iodoru.org>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201006073107.11952-1-jubalh@iodoru.org>
-References: <20201006073107.11952-1-jubalh@iodoru.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-cmd2: Upgrade 1.3.10 -> 1.3.11
+Date: Tue,  6 Oct 2020 12:05:22 +0300
+Message-Id: <20201006090526.24310-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
+Upgrade to release 1.3.11:
+
+- Fixed issue where quoted redirectors and terminators in aliases
+  and macros were not being restored when read from a startup
+  script.
+- Fixed issue where instantiating more than one cmd2-based class
+  which uses the @as_subcommand_to decorator resulted in
+  duplicated help text in the base command the subcommands belong
+  to.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../jasper/{jasper_2.0.21.bb =3D> jasper_2.0.22.bb}               | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-graphics/jasper/{jasper_2.0.21.bb =3D> jasper_2.0=
-.22.bb} (93%)
+ .../python/{python3-cmd2_1.3.10.bb => python3-cmd2_1.3.11.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.10.bb => python3-cmd2_1.3.11.bb} (75%)
 
-diff --git a/meta-oe/recipes-graphics/jasper/jasper_2.0.21.bb b/meta-oe/r=
-ecipes-graphics/jasper/jasper_2.0.22.bb
-similarity index 93%
-rename from meta-oe/recipes-graphics/jasper/jasper_2.0.21.bb
-rename to meta-oe/recipes-graphics/jasper/jasper_2.0.22.bb
-index be87d07c0..b2b053a28 100644
---- a/meta-oe/recipes-graphics/jasper/jasper_2.0.21.bb
-+++ b/meta-oe/recipes-graphics/jasper/jasper_2.0.22.bb
-@@ -4,7 +4,7 @@ LICENSE =3D "MIT"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da80440d1d8f17d041c71c7271d6e0=
-6eb"
-=20
- SRC_URI =3D "git://github.com/jasper-software/jasper.git;protocol=3Dhttp=
-s"
--SRCREV =3D "2c3ab8c542a66eb5def030d30602fa455d1adbd9"
-+SRCREV =3D "95b2f0583a71c92cddefb54b522efe717b7a5adc"
-=20
- S =3D "${WORKDIR}/git"
-=20
---=20
-2.26.2
+diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.10.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.3.11.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.10.bb
+rename to meta-python/recipes-devtools/python/python3-cmd2_1.3.11.bb
+index 7b74187838..3b2aa5b744 100644
+--- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.10.bb
++++ b/meta-python/recipes-devtools/python/python3-cmd2_1.3.11.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def"
+ 
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+ 
+-SRC_URI[md5sum] = "39258e1af392e0bcefceb1982d7716bd"
+-SRC_URI[sha256sum] = "960d8288c8e3a093d04975e3dd8461ce2e43c1d0c70e54873f622f8f0b77d6f5"
++SRC_URI[md5sum] = "7e3dbe0aefa331e80f515d3c41cc3b8c"
++SRC_URI[sha256sum] = "826a288ee6d9c4ec1184e64e9566c09d3b73be8f4283c1898fa4332f1daf8dbf"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.17.1
 
