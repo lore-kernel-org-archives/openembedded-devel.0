@@ -1,115 +1,79 @@
-Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com [209.85.160.179])
- by mx.groups.io with SMTP id smtpd.web11.2135.1602012061083896875
+Received: from mail-pj1-f67.google.com (mail-pj1-f67.google.com [209.85.216.67])
+ by mx.groups.io with SMTP id smtpd.web10.6514.1602048313251546963
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Oct 2020 12:21:01 -0700
+ Tue, 06 Oct 2020 22:25:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=bLGdrO0o;
- spf=pass (domain: gmail.com, ip: 209.85.160.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f179.google.com with SMTP id c23so6867703qtp.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Oct 2020 12:21:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=q0y9690P;
+ spf=pass (domain: gmail.com, ip: 209.85.216.67, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f67.google.com with SMTP id a17so474609pju.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Oct 2020 22:25:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=Ga0AAWGwrDEYHiliciTgB6accvoiwOdAl0xzDXKDWX0=;
-        b=bLGdrO0oHK71lMfgUHco1ey40PEGybccMk5jdcX8bSGritDU60y/+WttYn9ToKDtPa
-         pAYjbioVk3TrDa2OUiGNw+TGZixPopN13IHITeNWZsswsj46dhC7fwr9kVrZ+yfef2xg
-         aV/kUifkNBUSaDSuYeA+tSPz6iIRPch8xU0ZrDM07GVVxarZfx0kTV/HXp2mcSGoQimP
-         r9VzOsfVid4W1jf5YPJjbwhvT+Fc4HgdjWiffGHvK4RiffWYqDdH437/icnryJK3WVfJ
-         kd19aIfCrqJNZ4LgG3l4+Nk0yhunnezYO4yndDo9lQ8UPxpKHj5IiRXop96thFBOFxLV
-         12iw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=HPunfe3lw2HJBB2banLSJgV2Oyah/zC7K1PApSeviDQ=;
+        b=q0y9690PaRo/CODAWIZ2BD5hmkzH1+MEvysHM6v13YeNyTyuEzX+fG1I7UCqFr0tmA
+         ySFDsjca/RNvnjiFj9jUASdv5Dk3tEzz8zJWPd6FHol2BMthTcZ1BtN1arEcm0+xzThX
+         mXCwMIGz9rhil/9Um6vo1Ezoqm7sdicoYoM7c97xqNLhUJgctNypz1J2bGI6J8Gx8wAh
+         LYJxltYbc9b47bRuQwjZe0Ahu7LIsRezSCAhO7PMtaJMEdSJ9Nqo5zqPewKHz2+B67ha
+         PTwN65X3o2F9vhTbFWSJsldJg80zehGLRgY/ZRzRnQe0CNpQTdWNaulft8e15D1nnaXg
+         zipQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=Ga0AAWGwrDEYHiliciTgB6accvoiwOdAl0xzDXKDWX0=;
-        b=ec8WJC+ry3zvnLpbI6ltex2/Fxpn0TT+Gi1TCcI3cUd0t7RCbZd8SYQPD2mAczJP+n
-         QBNVc3ViFwHPpeqRhTTcY914jDLc3KJ1KELRkw2o+YSStBt9aTJQZxMrHA4qDDRohefl
-         RhYEG+zSvVxHWFjhwpvXZpLQI3CahtRjNKt53eBwD4E/95KA7mf2YbNW1XLZHkmcj2FR
-         Ra/tP3csUrgjxqFIqs/6xTtjqucen86KNeEqiZQ6ouzMBvCnZU/vMCu5h+U4FNe95TnS
-         cp9vgHpepvSNGPxURhlM8Ycu4LuvGPi9U8NZdsCav9CbJWHTfbb7YE89c9W0lM7gP5Am
-         YedA==
-X-Gm-Message-State: AOAM5301DUIoT9Up8f9JOqMaWuxlkv7dWyu+eLiIYiZj/UeTwAKgEsrF
-	bPjb46tnENbB0pEfrdm3xYkr8fH2DuRoUxiZxWA=
-X-Google-Smtp-Source: ABdhPJw/D/yu093VLd0ezcoXLz0PflLQAoRH7e+cDDe6CI4jnlNEoHiLCk90YfZJnAmD/oZ6URCh4OjMLS+3jjTpdbo=
-X-Received: by 2002:ac8:3417:: with SMTP id u23mr6658045qtb.80.1602012060040;
- Tue, 06 Oct 2020 12:21:00 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAAfyv35EHVpu64e8pYG9qrMSGCFBZewXD2dZ+c9aM_mJfxidhw@mail.gmail.com>
- <10765.1602004777092046892@lists.openembedded.org> <7783209f-0e7e-fc17-d7ab-49cc9ba1afee@gmail.com>
- <CAMKF1sq3kGPdu2B1bO7mt-g7=NaCN3tSX7cfLaoLsxSrbJHi2Q@mail.gmail.com> <CAAfyv35kN7jZhn-CZ5ztJ=Ocsy-8VGt80PMJX5fNtdgbew-nSw@mail.gmail.com>
-In-Reply-To: <CAAfyv35kN7jZhn-CZ5ztJ=Ocsy-8VGt80PMJX5fNtdgbew-nSw@mail.gmail.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=HPunfe3lw2HJBB2banLSJgV2Oyah/zC7K1PApSeviDQ=;
+        b=h7shg8Xd2apXC43jOoGHrnPNOPnb/CPl3n9EfnSV+NI+Kx8E97chfJ/9kp+TD9lJ4w
+         IZeUhHd4gfKGEq5SM72veVvSJoEXJDpa4O1avJujXLHB9/1ZyxIIM7GtHJYrkWXq1isv
+         HjUxP3YBoaC7z2ZQeGDo5QNll+5Kd/W+UnA7Zf+c07h7F66xNaywMOfTsWRgHAAZ0I1c
+         MbteE48pAinKlW6yGCH0KuNTnvl3qygbmhxDlmSdLBXEJ+8IZ7qOhnfNXZFvq3T4MzNC
+         lhPgCUnhydGxbBKxuyYU1DktrRCt+thmJRCoeyww9bSBJCUUshIF87f8JMw8q5P3AB6C
+         9+jw==
+X-Gm-Message-State: AOAM5324YaOBVKiD1g+ho4/k5dzZiC5cI/qKRj+Pl0qtwROBFzENzE/k
+	TBevsgDFN0PIFSylqpPboo2Ct49tmIGfcQ==
+X-Google-Smtp-Source: ABdhPJz0izTK8JYKDD0gClpCSDJcIz/+XiOXs4dtBmafCQnYloST3YhvcjEeH61eQTOhRDNK5mIUMQ==
+X-Received: by 2002:a17:902:bccb:b029:d3:89e2:7a21 with SMTP id o11-20020a170902bccbb02900d389e27a21mr1366141pls.30.1602048312470;
+        Tue, 06 Oct 2020 22:25:12 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0:923a:5c32:ada4:3e27])
+        by smtp.gmail.com with ESMTPSA id k15sm1143212pfp.217.2020.10.06.22.25.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 06 Oct 2020 22:25:11 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Tue, 6 Oct 2020 12:20:34 -0700
-Message-ID: <CAMKF1sq6QcgpzYSQi6tr9GQ-2MOr34YneNMbE73dn9avAaqRFQ@mail.gmail.com>
-Subject: Re: [oe] wireguard-module broken in dunfell
-To: Belisko Marek <marek.belisko@gmail.com>
-Cc: akuster <akuster808@gmail.com>, veilleux.cedric@gmail.com, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Siming Yuan <siyuan@cisco.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-paramiko: fixing runtime dependencies
+Date: Tue,  6 Oct 2020 22:25:09 -0700
+Message-Id: <20201007052509.3526946-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.28.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-On Tue, Oct 6, 2020 at 12:04 PM Belisko Marek <marek.belisko@gmail.com> wrote:
->
-> On Tue, Oct 6, 2020 at 8:25 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > On Tue, Oct 6, 2020 at 11:20 AM akuster <akuster808@gmail.com> wrote:
-> > >
-> > >
-> > >
-> > > On 10/6/20 10:19 AM, veilleux.cedric@gmail.com wrote:
-> > > > I had the same issue and could not figure out what broke the
-> > > > wireguard-module package.
-> > > >
-> > > > I had to resort to bissecting changes in meta-yocto.
-> > > >
-> > > > I finally isolated the change that breaks wireguard-module:
-> > > >
-> > > > 87c9d29635 package: get_package_mapping: avoid dependency mapping if
-> > > > renamed package provides original name
-> > > >
-> > > > http://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?id=87c9d296357638082f5a7131a87365285fc813c4
-> > > >
-> > > > It seems the package renaming that wireguard-module does (PKG_${PN} =
-> > > > "kernel-module-${MODULE_NAME}") no longer works after the above commit.
-> > >
-> > > I have not seen this on any of my dunfell world builds.
-> >
-> > it only happens with master.
-> hmm nope. I have it on dunfell also.
+From: Siming Yuan <siyuan@cisco.com>
 
-Oh right, it got backported it dunfell recently hmm
+added rdepends to bcrypt, cryptography, pynacl as required by the
+actual python package
 
-> >
-> > >
-> > > Do you mind providing a reproducer e.g local.conf ?
-> > >
-> > > -armin
-> > > >
-> > > > At this point I do not understand the change regarding renamed package
-> > > > names and dependencies enough to recommend the appropriate fix to
-> > > > wireguard-module. I have been able to workaround the issue by renaming
-> > > > the package kernel-module-wireguard and thus avoiding the rename
-> > > > altogether.
-> > > >
-> > > >
-> > > >
-> > >
-> > >
-> > >
-> > >
-> >
-> > 
-> >
->
->
-> --
-> as simple and primitive as possible
-> -------------------------------------------------
-> Marek Belisko - OPEN-NANDRA
-> Freelance Developer
->
-> Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
-> Tel: +421 915 052 184
-> skype: marekwhite
-> twitter: #opennandra
-> web: http://open-nandra.com
+Signed-off-by: Siming Yuan <siyuan@cisco.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-devtools/python/python3-paramiko_2.7.2.bb        | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/meta-python/recipes-devtools/python/python3-paramiko_2.7.2.bb b/meta-python/recipes-devtools/python/python3-paramiko_2.7.2.bb
+index 324847c31b..1b81171f68 100644
+--- a/meta-python/recipes-devtools/python/python3-paramiko_2.7.2.bb
++++ b/meta-python/recipes-devtools/python/python3-paramiko_2.7.2.bb
+@@ -12,3 +12,8 @@ inherit pypi setuptools3
+ 
+ CLEANBROKEN = "1"
+ 
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-bcrypt \
++    ${PYTHON_PN}-cryptography \
++    ${PYTHON_PN}-pynacl \
++"
+-- 
+2.28.0
+
