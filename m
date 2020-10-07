@@ -1,17 +1,17 @@
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.62])
- by mx.groups.io with SMTP id smtpd.web12.1589.1602078551204146233
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.76])
+ by mx.groups.io with SMTP id smtpd.web10.1506.1602078565403297487
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Oct 2020 06:49:11 -0700
+ Wed, 07 Oct 2020 06:49:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=A3GKGu3a;
- spf=pass (domain: windriver.com, ip: 40.107.236.62, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=n0Yj89D+;
+ spf=pass (domain: windriver.com, ip: 40.107.236.76, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TkSxgpi2uKbZEiTsZMF8xlW5Vm/sRqL1uf1M5YkPMnL0WtQHm14NUdLGOomr+LeX7JgP2Zek3+Th9MXDabuckZKqheCu8RA6FueyXG5j5HXgv2KyJLDUTLTAJptDWnWHYcAedb8GT1quH2Bzh4hdYafnYtwsVr56kQv6jj3sEwBT2RHnU9Zu3MeOX8jc3nF4vQn0KaUBPkrlg8F49r/Vk3usHI8ZTd1PRPNW5OnyA4L6BQZWqvPaKBnZ4zhLe5VPshJp3YE2kS7OVEKdvd6h6QnOULNYsqZbE48/ifHwkud2nsqFQs1g9pjmpUDuFEw3JngZAxCKdt5oSsq/pZ8Hhw==
+ b=K7+akaAeVFyN/ggbo+Yruc5LwQyizdPZhLmsX5PBpaNwKo7pVCkBJ/sgncjbM5G3QRwvDQITnifPtPDehTPxrBBZ42GvD7S00X5TOvsC8CsgDo2NVskZZECvuUXyvRqYlK4h0UQmTiBi/tlx/qxdnfuCi7Emw480SnKUnKY1K7m1Goo3EebgcmOAAVJLXR1LEMLNz2Y4H6kk/48EbUtwB/EIUCtvadkL54EuahnHJ4wrevybaIEtY9gWMZtIqjhq2Tw1tFpQ2qBsvwPo/lQG5f1beq78JqeJ24qHUu2DebymHJdSlGe/gw9zZNh2upscNq/aki5vmvDA0uiC8v29Dg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uqJM98kJclY4LPbNOKGSzeQFyWTyEUm+/WpH6Him9Vo=;
- b=gPmnpH1hDqrkO+3ni/HAmz/OPaUqmKtkd7a1MHUg3CpCk/3H0rceGDAJO0WeLF7dyY6+6W8Ot9nU/T04iiuHYOeOyLiMXH8znbNqVtmg3dI0eG1ZWa+nr76SY4czDbwTh2SGOFI531RBGQeIDv0KPg02Redjx6RZF4z23KSrMd/Re8JDTQmfCfTz6crqHpk3t4hcFddMq6ZIOVPtC1p/rnCkVHH8ySQPxw3MCCKt/iDYSUpfRZNqaFKnQK/uHLveoIEr1X6ajn8PTGGUVi4WoTyYzFI9ZKwZDSgWJ8sVjr+W3/kDscqehtES+5K7OwpLxhZNFNuio89+m/BsNfP5CQ==
+ bh=SaV9MwoI3QfpY9plHs4CBcP5uKwSn5OwOR0Q20s7EeE=;
+ b=Ms6SOQvFopSessLcsSz8xF0SdnFFsH2OK3/i9pw0TpabdM1axv5SLjiMYG66IyM2bj/4G2fT7Fv8mrbJrFKwg+Z4j+I7Ix14R04orh8eccSovocgu/iPMex2dfL1k2HzmGlpkctmNsIgk+TH9l/Y8cb9cmeI5GAf0YUh62Y8BzfPiJ2cPD5BbiDk3PWlZ5fUmigNs1qS+9StTyPAaiDhikLeRFShkz1RX6YP8PxSfZbiTnhMG64muCo3VuAuvHu4aNxvjjTwsVht2l+uQAriuRfqZwlXlRYQdQw7QtjKeYMjSW1Ie5dHKxODrRXuguNiHx1O9bhSGQhlr7+wAdzLrA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uqJM98kJclY4LPbNOKGSzeQFyWTyEUm+/WpH6Him9Vo=;
- b=A3GKGu3aCIP8nmY/5TUM1zEXWBntTNHH2BCI/J9pb9StS8vVeOK4E0tOGBx33JAUjaZYFBveaqxVpdqslJqWOtyLLlZGCKQBvQ+0YNFfLPKMDyWA8NF01QligcrY43bQm1j0wZt1ima5hbtOWDI3VL16Ln0VjYnAmXIUdqKERPk=
+ bh=SaV9MwoI3QfpY9plHs4CBcP5uKwSn5OwOR0Q20s7EeE=;
+ b=n0Yj89D+aLChtU4qfqOHRM7DJfRw/hu5IkY9oB5FMXiLrJNoSNd8K/FbKGZWGVAC3VoV7bxK/fQJ2csTcfLyLm06fpTsF3oIvC083fBEm7FYvrYH/LM+cSwrRQ06zGx1g6Xm7LFP8BR201cLyQUb1xJbqnaZePEojs0YsuFyDXk=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,137 +28,99 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB2536.namprd11.prod.outlook.com (2603:10b6:a02:c4::32) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3455.21; Wed, 7 Oct
- 2020 13:49:09 +0000
+ 2020 13:49:24 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::7875:99b3:15ae:5df2]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::7875:99b3:15ae:5df2%7]) with mapi id 15.20.3433.045; Wed, 7 Oct 2020
- 13:49:09 +0000
-Subject: Re: [oe] [meta-python][PATCH 3/5] python3-prettytable: Upgrade 0.7.2 -> 1.0.0
+ 13:49:24 +0000
+Subject: Re: [oe] [meta-python][PATCH 4/5] python3-nocaselist: Upgrade 1.0.2 -> 1.0.3
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20201006090526.24310-1-leon.anavi@konsulko.com>
- <20201006090526.24310-3-leon.anavi@konsulko.com>
+ <20201006090526.24310-4-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <42e62fb0-9130-b657-8c33-3c8156d737b6@windriver.com>
-Date: Wed, 7 Oct 2020 09:49:07 -0400
+Message-ID: <fcde4e0b-bc59-d308-a319-f64b2749d8f8@windriver.com>
+Date: Wed, 7 Oct 2020 09:49:21 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
-In-Reply-To: <20201006090526.24310-3-leon.anavi@konsulko.com>
+In-Reply-To: <20201006090526.24310-4-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: YT1PR01CA0074.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2d::13) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: YT1PR01CA0081.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2d::20) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0074.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::13) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3455.21 via Frontend Transport; Wed, 7 Oct 2020 13:49:09 +0000
+Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0081.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3455.21 via Frontend Transport; Wed, 7 Oct 2020 13:49:23 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 1d24f19e-91d4-4d63-8ba5-08d86ac7c41e
+X-MS-Office365-Filtering-Correlation-Id: 33bdda0f-1c94-42ec-2a65-08d86ac7cca2
 X-MS-TrafficTypeDiagnostic: BYAPR11MB2536:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB25364B13AC18176E1B25D8E09F0A0@BYAPR11MB2536.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+	<BYAPR11MB2536D1C6F2A2839BBB7C388D9F0A0@BYAPR11MB2536.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1079;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	fuP85g9QcFlYiyQBs0pHeuS68BxDr61gCn/tV2PCHctTjRWJ55uMeehu6IYCvqzoMbjdHngmlfE4V+EV2B38COedS7tWbFCzC8hwIa1eLR5Z4mZx7IVXlY5OMeLK9EtfuqWM3falfg67v/BHV2Im/3QleJFPR10uImtot52JiTsMyu3AeVFoE8B6m0MdvlEebMMMXPCx+4/Cat5NwprPqKHE8pkrPIXO1JOeVHbThZYq8rAvTYTPUUX8UESc4pfLIHUL4fA3CM9VHvr5vqqjW72uyZzVAyYq8E6A956vYxNN6I7z/nUIY+gkT1kD4nvaHg1LFV5Efeaod9YqMhlL6mVGikh/Yfqqc6xK76k33qx+c7HWj9+ONs7ZmL1VtS4esYqQGqdiN7HtKXy0fy/865OzfKDtOSYsCdbtJlncqznEkiMx8Ycz9WeTM849/74AWwPjk8ayWNP54lRqsdbCNFWjnCnd0P0m/08YuYn/FrU=
+	WtnPtFuIv/MPW6C4eazDqADCaOypPKuZRtsM7wQfSwxKsx82WwIpsLjyru0I0hiDSbzAZ7w1qSwak9a5F2DKtxSJqX23pliU09zk+nueMq+5l50ev8RbkOr59JEqw/H3DLQEDucl9Go7F/+XMczsw336iMsnUD4lUVZt8sAZiQa83F7pq/D7ke0aNzTuPnvXjpw9s5HrcT6Mqd6Nw3jqrafkBcZcxFWvkqmzodYU5R0EE8GRevHjmFqZkjfx6CDsImSsNF0CwPt4J8jakR3Ei6d7Ky5lCpI/pbdibIyyFxsZAfc37UgyUmYEF9Jzf3u0oCxGyqaX+agSoLykGXr5kQcU2qhFkMPbse3LUGuRHZ6CFFVHueasE4jbQnuQ/Mtf278LlHKm/81HQXi8uKvZ/eIHW6F4prTo9w66ezggy88zCEyJrMhBOcSQbVoxkokorFspU+WsKS2bzadKqUZFug==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39840400004)(136003)(346002)(376002)(366004)(396003)(86362001)(16526019)(26005)(186003)(166002)(66556008)(66476007)(66946007)(83380400001)(2616005)(956004)(316002)(52116002)(16576012)(8936002)(8676002)(31696002)(6486002)(33964004)(5660300002)(83080400001)(53546011)(478600001)(19273905006)(36756003)(966005)(44832011)(2906002)(31686004)(43740500002)(563064011);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39840400004)(136003)(346002)(376002)(366004)(396003)(86362001)(16526019)(26005)(186003)(166002)(66556008)(66476007)(66946007)(83380400001)(2616005)(956004)(316002)(52116002)(16576012)(8936002)(8676002)(31696002)(6486002)(33964004)(5660300002)(83080400001)(53546011)(478600001)(36756003)(966005)(44832011)(2906002)(31686004)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	YkLugv11oCNA6n8pE7nfpMD9E2ei40y5ak9+v0BwRtc3wjWTTDEn0J/t+8cHgWmOn+Z9PIgmIiGINw9HqJWm1D7OFsRWbuUjhvNkCYRGEhqHJW9rf2+aJIF0JzSOGzTsWVI3FLHqW8W2QGcD+VhussBiAc7Dy0Rhuobr4mwCYLmy3b31D3l/2H2aTiyc8EdnmgiRwTQA/4YBU9d5WnPrkKxS1rXhEW0lM8KV5dwX34yaw8EYvEwEhW5mcPjrEf53EeuKFT+wRo+EMN2nNF+Ftw+3xJ9Fm0gTbrELejSJkbO+k+mW1hy28MVLnundqya6X4BQ4G4zSdXBf1nnAhOcyp+uB2QPnhgZ74nCc4fb7VIE5O589YlcooM7bGbPHKhkCv2UiEa5wEe0r9/RC3DPpHqj1PXs8P325w9+PK08044cmKynYnr1YFiTcJQHLY+dwKCYuuHzWcvWIc/OB0Pcmq8xcta9kCZdaXjYdUAZs7btc7QzsVXvuJrg3mGsGLrC+1OAJ6nfTuiNfRTMKAKw1G0fo2DRx2e9H9TaQYxlDKCi94cl1AGsUhRb3lYw3CJHcMGC9Oxk2T12D0aDjl7k92kfl8Q+2V2AEPdY1E7FfioTnkQlKhCN87XmSyMf7uMVSz78ZYERrciH4jdpbGxcRA==
+	GaWBVFjT+/zFZ6yCDMlhe15EnxN1XxBsLkXMp0gXI65Uni9SBn30UyY4T9hxfp9hWTfD2VTDaZheX0wN77799m2MPFIxC5JEBm+XtrksGJtXOtnuw+pZwNY+GpESdBxs7S+WuQB+HJQn50QdhGeCAAu5mi5xv+UAltKgSsb/H06EVZVZPpUqVSW1FCy+N1cQBtlb2z4DpZpQI7wGAXFlVDbuJZC8OPcZshHex3oPomlN0YzzqGvcQG+YtMKDR3QaO1l9doOBexewGCrd7bqmQldH+FFREudpkwR2oPuiqGAXthw+ylhLwDuP/Uuh/r8DQpjBl5fEATa5WyS8dyXjTNBcqS10n4K1qa5MxfShj8sOaBYSpBhX52y3shEHpcZL2pIm8WXfPx1P2M3RpQjMxFWpwnDAmqGUI2Y2vZlt1ZC1XYanUvtCDj4HTOqr+JveNJy7RAmQG8wclMlJgD8rQB5IXyZKRkEnECdVCcpik7mwqh5hQOydq0TMd0tz/bN5yDGts7t23FYwTQ2F8QJW1q8TegqtxS5QW0aJeCVMVQh80SvBuuqhl/eIHJfdCnrJRHjhdmyWUJ2ZkYK2M4qUFcOJCEI1EpNg2E4s/lbAmREHs5z1LyLid+tHqqykxLorkb1n6JfS/SaQLo3pvD5USw==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1d24f19e-91d4-4d63-8ba5-08d86ac7c41e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 33bdda0f-1c94-42ec-2a65-08d86ac7cca2
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Oct 2020 13:49:09.7315
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Oct 2020 13:49:24.0279
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dCQNK+rjbfryTRttPXsssuTdUWW/P8tfBNpPXoqz8mw0936AfNrOT5B5PemmE4GBMDLf4+yPUFMFkDMVqZ23hVFPtWNQ9CQxQMQTEsXbEtM=
+X-MS-Exchange-CrossTenant-UserPrincipalName: i+Ye/ieDM4Q2IPgl0Kr8x5PvKAQZaanmiOZlNNF1Q2Isw4BVKnQ3XPgLeQWipqkIFn0A+HDuuiVxWFPSNnpLYlzQp22LOR1U/ItgXWKfxQM=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2536
 Content-Type: multipart/alternative;
- boundary="------------77AF5FC4DE20A56F414180D5"
+ boundary="------------0C0E2C0F79ADD7BADBBD42AD"
 Content-Language: en-US
 
---------------77AF5FC4DE20A56F414180D5
+--------------0C0E2C0F79ADD7BADBBD42AD
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 10/6/20 5:05 AM, Leon Anavi wrote:
-> - Dropped support for EOL Python 2.4-2.6 and 3.0-3.4.
-> - Added support for Python 3.5-3.9.
-> - Added del_column(field_name).
-> - Added get_csv_string with delimiter option (comma or tab) and
->    optional header.
-> - Use wcwidth for better wide char support.
-> - New paginate method can be used to produce strings suitable for
->    piping to lp/lpr.
-> - from_html now handles HTML tables with colspan, rather than
->    choking on them.
-> - Added min_width, min_table_width and max_table_width
->    attribute/options for better control of table sizing.
-> - Added "title" attribute/option for table titles.
-> - When slice syntax is used to create a new sub-table out of an
->    existing table, the rows are sorted before, not after, the
->    slicing. The old behaviour (slice then sort) can be achieved
->    by setting oldsortslice=True.
-> - The from_csv table factory now accepts CSV format parameters as
->    keyword arguments (e.g. delimiter, doublequote, escapechar, etc.)
-> - Added 0x000f to the list of special characters with width 0, to
->    fix problems with coloured strings produced by the Blessings
->    library.
-> - Fixed constructor argument float_format to work as intended.
-> - Removed print_html() from README.
-> - Added from_json and get_json_string to PrettyTable.
-> - Fixed PLAIN_COLUMN to PLAIN_COLUMNS in README.
-> - Added Markdown and Org mode styles.
->
-> License-Update: Use wcwidth for better wide char support
+> - Test: Fixed issue with virtualenv raising AttributeError during
+>    installtest on Python 3.4.
+> - Added checking for no expected warning. Adjusted a testcase to
+>    accomodate the new check.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...-prettytable_0.7.2.bb => python3-prettytable_1.0.0.bb} | 8 +++++---
->   1 file changed, 5 insertions(+), 3 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-prettytable_0.7.2.bb => python3-prettytable_1.0.0.bb} (74%)
+>   ...ython3-nocaselist_1.0.2.bb => python3-nocaselist_1.0.3.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-nocaselist_1.0.2.bb => python3-nocaselist_1.0.3.bb} (61%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb b/meta-python/recipes-devtools/python/python3-prettytable_1.0.0.bb
-> similarity index 74%
-> rename from meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
-> rename to meta-python/recipes-devtools/python/python3-prettytable_1.0.0.bb
-> index 18f3390619..e5688a3866 100644
-> --- a/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-prettytable_1.0.0.bb
-> @@ -1,10 +1,10 @@
->   SUMMARY = "Python library for displaying tabular data in a ASCII table format"
->   HOMEPAGE = "http://code.google.com/p/prettytable"
->   LICENSE = "BSD-3-Clause"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=3e73500ffa52de5071cff65990055282"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=c9a6829fcd174d9535b46211917c7671"
+> diff --git a/meta-python/recipes-devtools/python/python3-nocaselist_1.0.2.bb b/meta-python/recipes-devtools/python/python3-nocaselist_1.0.3.bb
+> similarity index 61%
+> rename from meta-python/recipes-devtools/python/python3-nocaselist_1.0.2.bb
+> rename to meta-python/recipes-devtools/python/python3-nocaselist_1.0.3.bb
+> index 8509cd0c94..1119c7f38e 100644
+> --- a/meta-python/recipes-devtools/python/python3-nocaselist_1.0.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-nocaselist_1.0.3.bb
+> @@ -3,7 +3,7 @@ HOMEPAGE = "https://nocaselist.readthedocs.io/en/latest/"
+>   LICENSE = "Apache-2.0"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 >   
-> -SRC_URI[md5sum] = "a6b80afeef286ce66733d54a0296b13b"
-> -SRC_URI[sha256sum] = "2d5460dc9db74a32bcc8f9f67de68b2c4f4d2f01fa3bd518764c69156d9cacd9"
-> +SRC_URI[md5sum] = "fb31d4c94fef42f2caf9784c44d8ea82"
-> +SRC_URI[sha256sum] = "98a3b74b1980e6a9392498e3a2a5406f6bd836f412843c2be23d9c88671747ac"
+> -SRC_URI[md5sum] = "10e58542c1225aff3f057e89e9ae4394"
+> -SRC_URI[sha256sum] = "3cfe964c436991cd6bd9f2cf23375c484ec7cf0c7488471381eff13a4fdac902"
+> +SRC_URI[md5sum] = "42ba878fd70611cf345c61edd83f5fb0"
+> +SRC_URI[sha256sum] = "7e6decb7d85563b9044913c9087ef4b691bc3da4d7ad1d88968cdea409553326"
 >   
->   do_install_append() {
->       perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
-> @@ -23,6 +23,8 @@ SRC_URI += " \
->   	file://run-ptest \
->   "
->   
-> +DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
-> +
->   RDEPENDS_${PN} += " \
->   	${PYTHON_PN}-math \
->   	${PYTHON_PN}-html \
+>   inherit pypi setuptools3
 >
 > 
 >
 
---------------77AF5FC4DE20A56F414180D5
+--------------0C0E2C0F79ADD7BADBBD42AD
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -170,77 +132,39 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 10/6/20 5:05 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20201006090526.24310-3-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Dropped support for EOL Python 2.4-2.6 and 3.0-3.4.
-- Added support for Python 3.5-3.9.
-- Added del_column(field_name).
-- Added get_csv_string with delimiter option (comma or tab) and
-  optional header.
-- Use wcwidth for better wide char support.
-- New paginate method can be used to produce strings suitable for
-  piping to lp/lpr.
-- from_html now handles HTML tables with colspan, rather than
-  choking on them.
-- Added min_width, min_table_width and max_table_width
-  attribute/options for better control of table sizing.
-- Added &quot;title&quot; attribute/option for table titles.
-- When slice syntax is used to create a new sub-table out of an
-  existing table, the rows are sorted before, not after, the
-  slicing. The old behaviour (slice then sort) can be achieved
-  by setting oldsortslice=True.
-- The from_csv table factory now accepts CSV format parameters as
-  keyword arguments (e.g. delimiter, doublequote, escapechar, etc.)
-- Added 0x000f to the list of special characters with width 0, to
-  fix problems with coloured strings produced by the Blessings
-  library.
-- Fixed constructor argument float_format to work as intended.
-- Removed print_html() from README.
-- Added from_json and get_json_string to PrettyTable.
-- Fixed PLAIN_COLUMN to PLAIN_COLUMNS in README.
-- Added Markdown and Org mode styles.
-
-License-Update: Use wcwidth for better wide char support
+    <blockquote type="cite" cite="mid:20201006090526.24310-4-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">- Test: Fixed issue with virtualenv raising AttributeError during
+  installtest on Python 3.4.
+- Added checking for no expected warning. Adjusted a testcase to
+  accomodate the new check.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20201006090526.24310-3-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20201006090526.24310-4-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...-prettytable_0.7.2.bb =&gt; python3-prettytable_1.0.0.bb} | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-prettytable_0.7.2.bb =&gt; python3-prettytable_1.0.0.bb} (74%)
+ ...ython3-nocaselist_1.0.2.bb =&gt; python3-nocaselist_1.0.3.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-nocaselist_1.0.2.bb =&gt; python3-nocaselist_1.0.3.bb} (61%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb b/meta-python/recipes-devtools/python/python3-prettytable_1.0.0.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
-rename to meta-python/recipes-devtools/python/python3-prettytable_1.0.0.bb
-index 18f3390619..e5688a3866 100644
---- a/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-prettytable_1.0.0.bb
-@@ -1,10 +1,10 @@
- SUMMARY = &quot;Python library for displaying tabular data in a ASCII table format&quot;
- HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://code.google.com/p/prettytable">&quot;http://code.google.com/p/prettytable&quot;</a>
- LICENSE = &quot;BSD-3-Clause&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=3e73500ffa52de5071cff65990055282">&quot;file://COPYING;md5=3e73500ffa52de5071cff65990055282&quot;</a>
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=c9a6829fcd174d9535b46211917c7671">&quot;file://COPYING;md5=c9a6829fcd174d9535b46211917c7671&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-nocaselist_1.0.2.bb b/meta-python/recipes-devtools/python/python3-nocaselist_1.0.3.bb
+similarity index 61%
+rename from meta-python/recipes-devtools/python/python3-nocaselist_1.0.2.bb
+rename to meta-python/recipes-devtools/python/python3-nocaselist_1.0.3.bb
+index 8509cd0c94..1119c7f38e 100644
+--- a/meta-python/recipes-devtools/python/python3-nocaselist_1.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-nocaselist_1.0.3.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://nocaselist.readthedocs.io/en/latest/">&quot;https://nocaselist.readthedocs.io/en/latest/&quot;</a>
+ LICENSE = &quot;Apache-2.0&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327">&quot;file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327&quot;</a>
  
--SRC_URI[md5sum] = &quot;a6b80afeef286ce66733d54a0296b13b&quot;
--SRC_URI[sha256sum] = &quot;2d5460dc9db74a32bcc8f9f67de68b2c4f4d2f01fa3bd518764c69156d9cacd9&quot;
-+SRC_URI[md5sum] = &quot;fb31d4c94fef42f2caf9784c44d8ea82&quot;
-+SRC_URI[sha256sum] = &quot;98a3b74b1980e6a9392498e3a2a5406f6bd836f412843c2be23d9c88671747ac&quot;
+-SRC_URI[md5sum] = &quot;10e58542c1225aff3f057e89e9ae4394&quot;
+-SRC_URI[sha256sum] = &quot;3cfe964c436991cd6bd9f2cf23375c484ec7cf0c7488471381eff13a4fdac902&quot;
++SRC_URI[md5sum] = &quot;42ba878fd70611cf345c61edd83f5fb0&quot;
++SRC_URI[sha256sum] = &quot;7e6decb7d85563b9044913c9087ef4b691bc3da4d7ad1d88968cdea409553326&quot;
  
- do_install_append() {
-     perm_files=`find &quot;${D}${PYTHON_SITEPACKAGES_DIR}/&quot; -name &quot;*.txt&quot; -o -name &quot;PKG-INFO&quot;`
-@@ -23,6 +23,8 @@ SRC_URI += &quot; \
- 	<a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
- &quot;
- 
-+DEPENDS += &quot;${PYTHON_PN}-setuptools-scm-native&quot;
-+
- RDEPENDS_${PN} += &quot; \
- 	${PYTHON_PN}-math \
- 	${PYTHON_PN}-html \
+ inherit pypi setuptools3
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -252,4 +176,4 @@ index 18f3390619..e5688a3866 100644
   </body>
 </html>
 
---------------77AF5FC4DE20A56F414180D5--
+--------------0C0E2C0F79ADD7BADBBD42AD--
