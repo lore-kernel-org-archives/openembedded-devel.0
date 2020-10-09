@@ -1,70 +1,62 @@
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.web12.6422.1602218379040397938
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.10728.1602239745561287333
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Oct 2020 21:39:39 -0700
+ Fri, 09 Oct 2020 03:35:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Y1U9HqaD;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id o25so6200135pgm.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Oct 2020 21:39:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=v6hoXLRaMQqx0aUBuw58vxoN4UuzeTO/M1YWUxh61V4=;
-        b=Y1U9HqaDkWsWhYthhwg0+8TsmoBMW64anKxq7oQoB7h9a77+s1y8qtr1hrpEpFHySz
-         xiNny2igu6G5Oq3AneJlmisENAgJwgdHTdpQcTDfRbMPDdBYXHyVRodwrFkh0O71koow
-         xXoG0hC380GdFpYksh1MOjvjKGTuZVR/do4eUd+SD5XgVyABXXHhjsTIHD+vTLzWlTdB
-         SexkT1ITzhozZGworhe2PQJrczZQJvpT6oR3vI/lg/mvUwwHKFNR5weeLGvLSeWUWhF1
-         XC2GbfShN7gxUPr/b7WmdRJFxfHvfGD+V4NtjpyemAuYywLAtAFDJSO2KSllJRDkY/C0
-         MDKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=v6hoXLRaMQqx0aUBuw58vxoN4UuzeTO/M1YWUxh61V4=;
-        b=oyXHk5Z9Ojn35NsVkj1WHWwTbK4RFQ9Gj6ywR1BVkPDx+ASbOthx9Wkdngwn9LtrMX
-         Fv6gKLKtEYwKTNY++B8RWgRP2lgLe36v25J1fptIYlG6Xh7jPIMbrFAR1OMmOrpbNG6G
-         1gwhDpSRnLyrpjbSQSjq6RS+bgSp23m7gIL2Y2oV0eKa4VmtwyJ3AnpdEOZJlQOgteyi
-         P0KwXalkbWOb/9VbC7sPf9fDXe56wggNampeYH5Gzd5OM49Vwf41C5lkmvgDU7x8xCcB
-         gEkCElBLv6fNG9OycmT14kWhF1qebP9POkrsz8K2hdNDcz2rLmu7XB5uPINWutBKsdg5
-         ofUg==
-X-Gm-Message-State: AOAM530SjcX0dAiFoT8sSQO0Qgzqpkm1VRg6eDlYBoyT4LbsJPK/Ljza
-	RhsTXkUvKcRG3TOBz+wx9sy5Ubtt7pk=
-X-Google-Smtp-Source: ABdhPJz+fygBN65pbjcsyJI8mwrw82+ZM8TyDGwYG0VDxa+XFMmm5bkB3xoQhVRmhQPAQ29u0Om8zg==
-X-Received: by 2002:a17:90a:ba0c:: with SMTP id s12mr2672665pjr.2.1602218378496;
-        Thu, 08 Oct 2020 21:39:38 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:f1c6:e45a:6950:664b])
-        by smtp.gmail.com with ESMTPSA id v5sm8412183pfu.151.2020.10.08.21.39.37
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Oct 2020 21:39:38 -0700 (PDT)
-From: "akuster" <akuster808@gmail.com>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=59440 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kQpkT-0007Jc-AU; Fri, 09 Oct 2020 13:35:42 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 3/3] Add template-toolkit to pkg grp
-Date: Thu,  8 Oct 2020 21:39:35 -0700
-Message-Id: <20201009043935.18597-3-akuster808@gmail.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-configparser: Upgrade 5.0.0 -> 5.0.1
+Date: Fri,  9 Oct 2020 13:35:31 +0300
+Message-Id: <20201009103535.31339-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201009043935.18597-1-akuster808@gmail.com>
-References: <20201009043935.18597-1-akuster808@gmail.com>
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Upgrade to release 5.0.1:
+
+- Synced with Python 3.9.0.
+- Refreshed package metadata.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb | 1 +
- 1 file changed, 1 insertion(+)
+ ...n3-configparser_5.0.0.bb => python3-configparser_5.0.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-configparser_5.0.0.bb => python3-configparser_5.0.1.bb} (78%)
 
-diff --git a/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb b/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
-index 3fa56d4390..533db5db0e 100644
---- a/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
-+++ b/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
-@@ -81,6 +81,7 @@ RDEPENDS_packagegroup-meta-perl = "\
- RDEPENDS_packagegroup-meta-perl-extended = "\
-     logcheck \
-     mime-construct \
-+    template-toolkit \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-configparser_5.0.0.bb b/meta-python/recipes-devtools/python/python3-configparser_5.0.1.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-configparser_5.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-configparser_5.0.1.bb
+index 6b2af125fb..b78de58447 100644
+--- a/meta-python/recipes-devtools/python/python3-configparser_5.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-configparser_5.0.1.bb
+@@ -5,8 +5,8 @@ LICENSE = "MIT"
  
- RDEPENDS_packagegroup-meta-perl-ptest-packages = "\
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=10;endline=10;md5=23f9ad5cad3d8cc0336e2a5d8a87e1fa"
+ 
+-SRC_URI[md5sum] = "558114054aa5610365df1b34d3fea349"
+-SRC_URI[sha256sum] = "2ca44140ee259b5e3d8aaf47c79c36a7ab0d5e94d70bd4105c03ede7a20ea5a1"
++SRC_URI[md5sum] = "5faf185693cd21d83f6a3bc01b5733fa"
++SRC_URI[sha256sum] = "005c3b102c96f4be9b8f40dafbd4997db003d07d1caa19f37808be8031475f2a"
+ 
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native ${PYTHON_PN}-toml-native"
+ inherit pypi setuptools3
 -- 
 2.17.1
 
