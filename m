@@ -1,106 +1,133 @@
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web12.15755.1602255354184509771
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web11.972.1602267594120660663
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Oct 2020 07:55:54 -0700
+ Fri, 09 Oct 2020 11:19:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=RiS6d+5T;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id g10so7077833pfc.8
-        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Oct 2020 07:55:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=j+VjC0r1;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: marek.belisko@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id t20so4013444edr.11
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Oct 2020 11:19:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3iWiC4QIUHs1KUDtGLL8x1w1mW8ilNYAy3Sn/SXZROM=;
-        b=RiS6d+5TKH2CcZtmDXG6oIrSdIv2jVWgx8ZfpCJ1Xl9aLyzcUAdFBVKjVoPxVBhYCG
-         bYvHeRO0gFssO05OtNPW3t5Mpe+02n3qVo3/XEL+NqWqXoy1zsf82kYC0Wbne4VtgnGD
-         tqE8t3Im0I/VMwel+z/o3nzu5V3t3EjEYFf75z/omPeS1Mlulupo6FurAuXkjuYHIr5O
-         IzaU15xGRpOpqsAk73FZlTimHysde4X1gdE+xD3V9EW4/EkXA9Is0vwt0XtVhZ5e3IiZ
-         /4OgUZcywjHPAGNksmzoO4aLLrpjxhtoXAcvvjEz44E49j/V9zHJxRR/JDkKfYj/Zskp
-         yMUw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=V7hTGjHJ+2HkT1GTeZ4I4aV1YfND8LzD5e/MBq6FNCU=;
+        b=j+VjC0r11d9Im/PzDGCXWMzaOs1/gt5mBeUnh7Vj6ZEoYF5t2DjLysepda3eCdCh6G
+         HSA7rat2w5G2qZwVBSwp8gL2mxtJjEvVNuFW73ObM3fzORAh0HzS9NuAddOPM9jAvF7A
+         C/65qGmKoTVpGzvZb9if1JKxTiJXnegMkRzUwbPVQDFKdKnMKSeg349jljhL9Rs7Z5XU
+         LM5WvDdV9LWAZOYFcySHkisiRa3ZUlYG46unTyx0D7QfCQPkzMEwYI81/V3Mpt1UQxZS
+         yHuiBnoj+tqO2pCLdFoZG1T6+TJv1d7Peicd7WuRvbLkASVUFP/LfCCYo9ZUbe50AFyC
+         jNGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3iWiC4QIUHs1KUDtGLL8x1w1mW8ilNYAy3Sn/SXZROM=;
-        b=DVHsdGMChU2ZD2AKMjGXh96gKPmKfXGzXvqF8o5J5UDwbpaieVdxglbF7VmdlxUvpd
-         JbDxpfoxbW5uMmccZ0JINd6mgiaU6lQaoTNt7411rNZ0k1hFBsHHXPmedv+aGwK1jd+a
-         8BjHP/mufApkLEwY3c2J9Ha5G6f420Wl1/s0huSSmNCrAqeKqMNDVnPFidFCAjCGjFef
-         KExaMVBpMfUpNedkrLFiCcWxV13oPxnxTcBeiZLgdcoghWzBRi8vs3xv34LZQZAFwd2F
-         pQnXd7N//yjycvgH/rJoWPaH1etXq1PJd0HJX0IDMriqtJ2B1AtQ34ozxpn24DimEl3k
-         n0Rg==
-X-Gm-Message-State: AOAM5335AvuzMRmQP9QWogx054NHzrjUWxRC/J3am4inanHBgfnQmjsC
-	2uIDNUtOxVfb1JiWmwMOORwwZgbu0q0=
-X-Google-Smtp-Source: ABdhPJxcXfzlwc3nlgpBk+7rjysnP3GGPbgLvI2YZUvZ8VxM8uNogdVR558ym43g4f3yvTIujJ9Niw==
-X-Received: by 2002:a17:90a:4e47:: with SMTP id t7mr4868995pjl.26.1602255353490;
-        Fri, 09 Oct 2020 07:55:53 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:f1c6:e45a:6950:664b])
-        by smtp.gmail.com with ESMTPSA id z10sm11642010pff.218.2020.10.09.07.55.52
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Oct 2020 07:55:53 -0700 (PDT)
-From: "akuster" <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 0/9] pull request
-Date: Fri,  9 Oct 2020 07:55:33 -0700
-Message-Id: <cover.1602255255.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=V7hTGjHJ+2HkT1GTeZ4I4aV1YfND8LzD5e/MBq6FNCU=;
+        b=owIDeXRd3Ji/ZRg+WX8782qbMUS0crDVFkd9u7/afWw8+Lq/7Fick7YIiXGD1hVJt7
+         wkaanYOgWG3dAFZUZfmSBLJ5nIRfhwvfgVJVZT1C0o+wD8xZ4kIeqr+5tUFe4Od56f7i
+         7ggWfzMELDoP/DiXtc1r0tlKUsAOa+we05g24PDzispCFvHyGKdRybu4HzRs50iup1Kx
+         RP0uaHrQZe8UaJEFIx82AVTLOLCSx1b9KDDdfSZ++a183suaYexZ6lgxYO+ysWrA7rwL
+         h9s2WRjsCX4+0B2i2ws8Qd7wshHoNelM2ksQIKcPYaHm4hOG9MUJ67Oef7+JqCWCVBTW
+         QvMQ==
+X-Gm-Message-State: AOAM531mTnYLIhw0zheHReQg/zII0CR+KiWkZ5huntUs5FoWmHiK8xP0
+	WNUUKFcgLiJbTM5/qaR0vrWM0DPKMJl5LAEK9JQ=
+X-Google-Smtp-Source: ABdhPJxDrQV0l5uEnlH+fbJ/HKMsgQwEsLKaUGSTX+v5wDfMiWX1ZPu5ZhYbQtd80gyNgQOKZS/7AT+AhfKMJ+UBSkw=
+X-Received: by 2002:a05:6402:1148:: with SMTP id g8mr473758edw.271.1602267592491;
+ Fri, 09 Oct 2020 11:19:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <CAAfyv35EHVpu64e8pYG9qrMSGCFBZewXD2dZ+c9aM_mJfxidhw@mail.gmail.com>
+ <10765.1602004777092046892@lists.openembedded.org> <7783209f-0e7e-fc17-d7ab-49cc9ba1afee@gmail.com>
+ <CAMKF1sq3kGPdu2B1bO7mt-g7=NaCN3tSX7cfLaoLsxSrbJHi2Q@mail.gmail.com>
+ <CAAfyv35kN7jZhn-CZ5ztJ=Ocsy-8VGt80PMJX5fNtdgbew-nSw@mail.gmail.com> <CAMKF1sq6QcgpzYSQi6tr9GQ-2MOr34YneNMbE73dn9avAaqRFQ@mail.gmail.com>
+In-Reply-To: <CAMKF1sq6QcgpzYSQi6tr9GQ-2MOr34YneNMbE73dn9avAaqRFQ@mail.gmail.com>
+From: "Marek Belisko" <marek.belisko@gmail.com>
+Date: Fri, 9 Oct 2020 20:19:40 +0200
+Message-ID: <CAAfyv34i61gF_LsojeLDaasie67h=fyVyC3-TCAbzGxnDNQ8Lg@mail.gmail.com>
+Subject: Re: [oe] wireguard-module broken in dunfell
+To: Khem Raj <raj.khem@gmail.com>
+Cc: akuster <akuster808@gmail.com>, veilleux.cedric@gmail.com, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Cover letter only
+On Tue, Oct 6, 2020 at 9:21 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Tue, Oct 6, 2020 at 12:04 PM Belisko Marek <marek.belisko@gmail.com> wrote:
+> >
+> > On Tue, Oct 6, 2020 at 8:25 PM Khem Raj <raj.khem@gmail.com> wrote:
+> > >
+> > > On Tue, Oct 6, 2020 at 11:20 AM akuster <akuster808@gmail.com> wrote:
+> > > >
+> > > >
+> > > >
+> > > > On 10/6/20 10:19 AM, veilleux.cedric@gmail.com wrote:
+> > > > > I had the same issue and could not figure out what broke the
+> > > > > wireguard-module package.
+> > > > >
+> > > > > I had to resort to bissecting changes in meta-yocto.
+> > > > >
+> > > > > I finally isolated the change that breaks wireguard-module:
+> > > > >
+> > > > > 87c9d29635 package: get_package_mapping: avoid dependency mapping if
+> > > > > renamed package provides original name
+> > > > >
+> > > > > http://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?id=87c9d296357638082f5a7131a87365285fc813c4
+> > > > >
+> > > > > It seems the package renaming that wireguard-module does (PKG_${PN} =
+> > > > > "kernel-module-${MODULE_NAME}") no longer works after the above commit.
+> > > >
+> > > > I have not seen this on any of my dunfell world builds.
+> > >
+> > > it only happens with master.
+> > hmm nope. I have it on dunfell also.
+>
+> Oh right, it got backported it dunfell recently hmm
+Can we please revert backport so we have working wireguard again? Thanks.
+>
+> > >
+> > > >
+> > > > Do you mind providing a reproducer e.g local.conf ?
+> > > >
+> > > > -armin
+> > > > >
+> > > > > At this point I do not understand the change regarding renamed package
+> > > > > names and dependencies enough to recommend the appropriate fix to
+> > > > > wireguard-module. I have been able to workaround the issue by renaming
+> > > > > the package kernel-module-wireguard and thus avoiding the rename
+> > > > > altogether.
+> > > > >
+> > > > >
+> > > > >
+> > > >
+> > > >
+> > > >
+> > > >
+> > >
+> > > 
+> > >
+> >
+> >
+> > --
+> > as simple and primitive as possible
+> > -------------------------------------------------
+> > Marek Belisko - OPEN-NANDRA
+> > Freelance Developer
+> >
+> > Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
+> > Tel: +421 915 052 184
+> > skype: marekwhite
+> > twitter: #opennandra
+> > web: http://open-nandra.com
 
-please merge this to dunfell
 
-The following changes since commit 144077083457ccb75700777d5e6b1da9aaff01aa:
-
-  iwd: Upgrade to 1.9 (2020-09-19 11:22:44 -0700)
-
-are available in the Git repository at:
-
-  git://git.openembedded.org/meta-openembedded dunfell-next
-  http://cgit.openembedded.org/meta-openembedded/log/?h=dunfell-next
-
-Andreas Müller (1):
-  gnome-settings-daemon: Remove wrong RDEPEND
-
-Hongxu Jia (1):
-  python3-pykwalify: fix missing comma
-
-Khem Raj (1):
-  ssmtp: Use update alternatives for conflicts with esmtp
-
-Martin Jansa (2):
-  netkit-rsh: inherit update-alternatives
-  ssmtp: adjust u-a
-
-Mingli Yu (2):
-  smartmontools: Remove obsolete setting regarding the Standard Output
-  strongswan: Remove obsolete setting regarding the Standard Output
-
-Pierre-Jean Texier (1):
-  haveged: upgrade 1.9.9 -> 1.9.13
-
-Robert Yang (1):
-  crda: rdepends on wireless-regdb-static
-
- .../gnome-settings-daemon_3.34.2.bb           |  2 --
- .../recipes-connectivity/crda/crda_3.18.bb    |  2 +-
- .../netkit-rsh/netkit-rsh_0.17.bb             |  2 +-
- .../recipes-support/ssmtp/ssmtp_2.64.bb       |  9 ++++-
- ...setting-regarding-the-Standard-Outpu.patch | 34 +++++++++++++++++++
- .../strongswan/strongswan_5.8.4.bb            |  1 +
- .../{haveged_1.9.9.bb => haveged_1.9.13.bb}   |  2 +-
- .../smartmontools/files/smartd.service        |  1 -
- .../0001-rule.py-fix-missing-comma.patch      | 34 +++++++++++++++++++
- .../python/python3-pykwalify_1.7.0.bb         |  2 ++
- 10 files changed, 82 insertions(+), 7 deletions(-)
- create mode 100644 meta-networking/recipes-support/strongswan/files/0001-Remove-obsolete-setting-regarding-the-Standard-Outpu.patch
- rename meta-oe/recipes-extended/haveged/{haveged_1.9.9.bb => haveged_1.9.13.bb} (97%)
- create mode 100644 meta-python/recipes-devtools/python/python3-pykwalify/0001-rule.py-fix-missing-comma.patch
 
 -- 
-2.17.1
+as simple and primitive as possible
+-------------------------------------------------
+Marek Belisko - OPEN-NANDRA
+Freelance Developer
 
+Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
+Tel: +421 915 052 184
+skype: marekwhite
+twitter: #opennandra
+web: http://open-nandra.com
