@@ -1,112 +1,67 @@
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com [209.85.222.194])
- by mx.groups.io with SMTP id smtpd.web12.6370.1602218107465908803
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web11.6303.1602218377573469554
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Oct 2020 21:35:07 -0700
+ Thu, 08 Oct 2020 21:39:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=jDC171Eo;
- spf=pass (domain: gmail.com, ip: 209.85.222.194, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f194.google.com with SMTP id c2so9359603qkf.10
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Oct 2020 21:35:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=gu/b2JE7;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id x13so3190345pfa.9
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Oct 2020 21:39:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=q+fxpxHH6wW/khBpgz1VIyus3kzt9vR/UNBaPEsNT1A=;
-        b=jDC171EoZTRLgPelQAOcnDIkQv3bsLPeYL2mRkSX2nerDDgPJjAv6no/fK+l1PsU/p
-         hoh/t3Wj0rUL0g7Pry7NumnoIngLkZhkpd/Ctv7NbbQ4SDntYFTqETmV/NFWykLR0MTS
-         er0YfD++OpxWxmGJkGOLoZ385F1tTxCQ+GCa7fvShB6zfyQgz+9p8/gAxK4cKoZBShQF
-         Kj+Q5yXGhWW+cAHu1r5+MVMjWwzJUvF2S61lvJaaX2QHm9RXPdwdw9y17SX3bJcw6Da6
-         psvzJkuajol9Qq4vhFFciTkYdZnT/MyODM++4mmnhBY17yDup1cXztOlMV3JBZ1AP/GO
-         UOUg==
+        h=from:to:subject:date:message-id;
+        bh=omJq7uIgGyC0zlPhJB/mqYOIUdkfydhzkDkGijG+D+U=;
+        b=gu/b2JE7sbr0yaa5ezLrf1Ezg8nOTIZdc1dU+PqLjhVZMCu9nDk0kWcef+tHb/uC/v
+         trCdBBgyu7xyekF8fbw9FRvZ8LASA1UMXuMSVVqoINq8roxEkg4PHdoFL07N8s2Bfw01
+         BKcQzj0NvxmTYMktFBA7g5CBroHgee6rIYOZeeROmBRYjOVCsgcKqqO7J3bWEdqFg2nT
+         RS6Gc/OlZSwlBKwcoDLIJfBDJH+q27hHMoGph2Nf5THGXyihV7sb/ereN83+qHfmzgo9
+         sIWjYK5RRKqhb9ME1R1N5yeAzzqakmJankt2l+nQ+8VIKiH/JAdZzkAI5eepQwsHnAa1
+         zHHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=q+fxpxHH6wW/khBpgz1VIyus3kzt9vR/UNBaPEsNT1A=;
-        b=jzoPFMZaRwPMgd9fMJkGJDPz6TkDUpGbxy18GVt41oLYgUMou32g/JmA1EDYHGcrAi
-         bEQHH6n4TRnIkVUkDx5y3rSmrN29AtwABPU+75El8c4jnSe3bmMe8VbzAPTcY71KjyYQ
-         u1lgeUrGyhhdqTyR307UiRpY7f0mMmxAMBSqaySddWL4A1eYvGFUTurWcHr9w6bQywfs
-         MuZTwwewSAKs1Tl3p1+LLHhcnTp2ILGz/BhhDUsxHj9LuGSRnQsVfHaO0i8F6taxI/og
-         FFfLKJHqn/hN6UZ9gsM0pltBMd3vmhBXnyIY3R0CNKDduYSZj3a94oOw5FZWyU7EVIm7
-         +6rQ==
-X-Gm-Message-State: AOAM530JHF+jm39L4OfrV9oB6nOtK+3aZ1PTsewgtZioZF5L7XEWyoxv
-	jL3YSy9naPHxkCTZMZLKOf9XCA0JESnxjepDV5o=
-X-Google-Smtp-Source: ABdhPJxY6P9IyqwiGD7HlFY9si2B/G67HpeL4Blf2EuYmCwDJ8ot6Dp+voupXFJwN+aALLDIdIDqKhtF7mwrOYa625Y=
-X-Received: by 2002:a37:c408:: with SMTP id d8mr10912061qki.71.1602218106516;
- Thu, 08 Oct 2020 21:35:06 -0700 (PDT)
-MIME-Version: 1.0
-References: <20201009031546.17121-1-akuster808@gmail.com>
-In-Reply-To: <20201009031546.17121-1-akuster808@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 8 Oct 2020 21:34:40 -0700
-Message-ID: <CAMKF1spvz8K3LsUb0izu7fAtGW5nSTYOCV0oMaxgZzYwuJXnGQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][v2][PATCH] musl-nscd: add package
-To: akuster <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+        h=x-gm-message-state:from:to:subject:date:message-id;
+        bh=omJq7uIgGyC0zlPhJB/mqYOIUdkfydhzkDkGijG+D+U=;
+        b=KufOl5wT+1HfUFcuS8IgaoFwhK1adpQ64F184CnbgYSSpgmvovTA2IJdqSyQVA35qq
+         bHMEBQmAxCtKfb4qHQi2l2YFaVjAmoAG3N1K0aqh+fFGJEn3l3684wxN0uamSCdUzoO9
+         sM+TGXo1+mvLuSnA8OQk7jFiPKbCx9wmwl/ce2NPsdvTkKWky8XB0DH5bpxw+EqoMPKu
+         uH+DZWICjO7Odn5jJ0JJD6zO9otIO3PMNnMLFkQ8lMDhYihrP74m5oqBwlf11XVyEz7I
+         mKpPzpCze3lFKTusOY2jHwT1tHxZsjAicfrR0RFTzh7TaJTT9By87CWFwZzrMjZara51
+         P+RA==
+X-Gm-Message-State: AOAM530D0F3kCxhboKTTqeDUng6hfvgs4l8DbfRMTu1iWmUZTS2gJ43X
+	lk6Jk9IE2ycGXSh/rHLw6/EOoImzrVM=
+X-Google-Smtp-Source: ABdhPJzOrb/Os38rMB+MIcjEM34/4bZHGAdkQ96YPi4MJGybPlKe5N6A74hP4jeMrOm5EZTHZaihHA==
+X-Received: by 2002:a17:90a:ec13:: with SMTP id l19mr2608567pjy.51.1602218376762;
+        Thu, 08 Oct 2020 21:39:36 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:f1c6:e45a:6950:664b])
+        by smtp.gmail.com with ESMTPSA id v5sm8412183pfu.151.2020.10.08.21.39.35
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 08 Oct 2020 21:39:36 -0700 (PDT)
+From: "akuster" <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH 1/3] add musl-nscd to pkg grps
+Date: Thu,  8 Oct 2020 21:39:33 -0700
+Message-Id: <20201009043935.18597-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
-On Thu, Oct 8, 2020 at 8:15 PM akuster <akuster808@gmail.com> wrote:
->
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
->
-> --
-> V2]
-> Drop INSANE.
-> The DEBUG flag is either -g or -s. Remove -s from LDFLAGS_AUTO
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-can you also add it to packagegroup-meta-oe
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 9bfc8ffaa4..5a4375d72a 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -284,6 +284,7 @@ RDEPENDS_packagegroup-meta-oe-devtools_append_x86 = " cpuid msr-tools pmtools"
+ RDEPENDS_packagegroup-meta-oe-devtools_append_x86-64 = " cpuid msr-tools pcimem pmtools"
+ RDEPENDS_packagegroup-meta-oe-devtools_append_arm = " pcimem"
+ RDEPENDS_packagegroup-meta-oe-devtools_append_aarch64 = " pcimem"
++RDEPENDS_packagegroup-meta-oe-devtools_append_libc-musl = " musl-nscd"
+ 
+ RDEPENDS_packagegroup-meta-oe-devtools_remove_arm = "concurrencykit"
+ RDEPENDS_packagegroup-meta-oe-devtools_remove_armv5 = "uftrace nodejs"
+-- 
+2.17.1
 
-> ---
->  .../recipes-devtools/musl/musl-nscd_git.bb    | 37 +++++++++++++++++++
->  1 file changed, 37 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/musl/musl-nscd_git.bb
->
-> diff --git a/meta-oe/recipes-devtools/musl/musl-nscd_git.bb b/meta-oe/recipes-devtools/musl/musl-nscd_git.bb
-> new file mode 100644
-> index 0000000000..374f944096
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/musl/musl-nscd_git.bb
-> @@ -0,0 +1,37 @@
-> +# Copyright (C) 2020 Armin Kuster <akuster808@gmail.com>
-> +# Released under the MIT license (see COPYING.MIT for the terms)
-> +
-> +DESCRIPTION = "Musl-nscd is an implementation of the NSCD protocol, suitable for use with musl and with standard NSS modules"
-> +HOMEPAGE = "https://github.com/pikhq/musl-nscd"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=9bf479a145bcaff8489e743da58afeee"
-> +SECTION = "utils"
-> +
-> +PV = "1.0.2"
-> +
-> +CFLAGS += "-fcommon"
-> +
-> +SRCREV = "8f278675e1b6a3a02c8ee1b8ca000f80570dc5d6"
-> +SRC_URI = "git://github.com/pikhq/musl-nscd"
-> +
-> +UPSTREAM_CHECK_COMMITS = "1"
-> +
-> +inherit autotools-brokensep
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +do_configure () {
-> +    # no debug set -s flag
-> +    sed -i -e 's/LDFLAGS_AUTO=-s/LDFLAGS_AUTO=/' ${S}/configure
-> +    ${S}/configure ${CONFIGUREOPTS} ${EXTRA_OECONF}
-> +}
-> +
-> +do_compile () {
-> +    oe_runmake
-> +}
-> +
-> +do_install () {
-> +    make DESTDIR=${D} install
-> +}
-> +
-> +COMPATIBLE_HOST = ".*-musl.*"
-> --
-> 2.17.1
->
->
-> 
->
