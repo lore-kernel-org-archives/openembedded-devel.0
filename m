@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.10637.1602239748122533026
+ by mx.groups.io with SMTP id smtpd.web10.10729.1602239748908449240
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Oct 2020 03:35:48 -0700
+ Fri, 09 Oct 2020 03:35:49 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=59440 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kQpkY-0007Jc-2r; Fri, 09 Oct 2020 13:35:47 +0300
+	id 1kQpkZ-0007Jc-7T; Fri, 09 Oct 2020 13:35:48 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-markdown: Upgrade 3.2.2 -> 3.3
-Date: Fri,  9 Oct 2020 13:35:34 +0300
-Message-Id: <20201009103535.31339-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-tqdm: Upgrade 4.50.0 -> 4.50.2
+Date: Fri,  9 Oct 2020 13:35:35 +0300
+Message-Id: <20201009103535.31339-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201009103535.31339-1-leon.anavi@konsulko.com>
 References: <20201009103535.31339-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,72 +30,39 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.3:
-- The prefix language- is now prepended to all language classes
-  by default on code blocks.
-- Attribute Lists are more strict.
-- All Pygments' options are now available for syntax highlighting.
-- Fenced Code Blocks now work with Attribute Lists when syntax
-  highlighting is disabled. Any random HTML attribute can be
-  defined and set on the <code> tag of fenced code blocks when the
-  attr_list extension is enabled.
-- The HTML parser has been completely replaced. The new HTML
-  parser is built on Python's html.parser.HTMLParser, which
-  alleviates various bugs and simplify maintenance of the code.
-- The Markdown in HTML extension has been rebuilt on the new HTML
-  Parser, which drastically simplifies it. Note that raw HTML
-  elements with a markdown attribute defined are now converted to
-  ElementTree Elements and are rendered by the serializer. Various
-  bugs have been fixed.
-- Link reference parsing, abbreviation reference parsing and
-  footnote reference parsing has all been moved from preprocessors
-  to blockprocessors, which allows them to be nested within other
-  block level elements. Specifically, this change was necessary to
-  maintain the current behavior in the rebuilt Markdown in HTML
-  extension. A few random edge-case bugs (see the included tests)
-  were resolved in the process.
-- An alternate function markdown.extensions.headerid.slugify_unicode
-  has been included with the Table of Contents extension which
-  supports Unicode characters in table of contents slugs. The old
-  markdown.extensions.headerid.slugify method which removes
-  non-ASCII characters remains the default. Import and pass
-  markdown.extensions.headerid.slugify_unicode to the slugify
-  configuration option to use the new behavior.
-- Support was added for Python 3.9 and dropped for Python 3.5.
-- Document how to pass configuration options to Extra.
-- Fix HR which follows strong em.
-- Support short reference image links.
-- Avoid a RecursionError from deeply nested blockquotes.
-- Fix issues with complex emphasis.
-- Fix unescaping of HTML characters <> in CodeHilite.
-- Fix complex scenarios involving lists and admonitions.
-- Fix complex scenarios with nested ordered and unordered lists in
-  a definition list.
+Upgrade to release 4.50.2:
+
+- fixed platform.system() causing fork() warnings
+- fixed contrib.concurrent.process_map pickling error with
+  threading.RLock
+- updated documentation & examples
+- updated CI framework
+- updated tests
+- misc code tidy
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-markdown_3.2.2.bb => python3-markdown_3.3.bb}   | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-markdown_3.2.2.bb => python3-markdown_3.3.bb} (51%)
+ .../python/{python3-tqdm_4.50.0.bb => python3-tqdm_4.50.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-tqdm_4.50.0.bb => python3-tqdm_4.50.2.bb} (65%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-markdown_3.2.2.bb b/meta-python/recipes-devtools/python/python3-markdown_3.3.bb
-similarity index 51%
-rename from meta-python/recipes-devtools/python/python3-markdown_3.2.2.bb
-rename to meta-python/recipes-devtools/python/python3-markdown_3.3.bb
-index ce5dde63ea..db8311be5d 100644
---- a/meta-python/recipes-devtools/python/python3-markdown_3.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-markdown_3.3.bb
-@@ -5,9 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=745aaad0c69c60039e638bff9ffc59ed"
+diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.50.0.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.50.2.bb
+similarity index 65%
+rename from meta-python/recipes-devtools/python/python3-tqdm_4.50.0.bb
+rename to meta-python/recipes-devtools/python/python3-tqdm_4.50.2.bb
+index bf0385410e..9c2d06ba94 100644
+--- a/meta-python/recipes-devtools/python/python3-tqdm_4.50.0.bb
++++ b/meta-python/recipes-devtools/python/python3-tqdm_4.50.2.bb
+@@ -5,8 +5,8 @@ SECTION = "devel/python"
+ LICENSE = "MIT & MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=7ea57584e3f8bbde2ae3e1537551de25"
+ 
+-SRC_URI[md5sum] = "4352d89e2c6d6b017f40f244baddfc51"
+-SRC_URI[sha256sum] = "93b7a6a9129fce904f6df4cf3ae7ff431d779be681a95c3344c26f3e6c09abfa"
++SRC_URI[md5sum] = "2e56a15d28aa1fa06eeb31031c16c1f3"
++SRC_URI[sha256sum] = "69dfa6714dee976e2425a9aab84b622675b7b1742873041e3db8a8e86132a4af"
+ 
  inherit pypi setuptools3
- 
- PYPI_PACKAGE = "Markdown"
--PYPI_SRC_URI = "https://files.pythonhosted.org/packages/44/30/cb4555416609a8f75525e34cbacfc721aa5b0044809968b2cf553fd879c7/Markdown-${PV}.tar.gz"
--SRC_URI[md5sum] = "6e8daf1e566bf3572c137ada399fe40b"
--SRC_URI[sha256sum] = "1fafe3f1ecabfb514a5285fca634a53c1b32a81cb0feb154264d55bf2ff22c17"
-+SRC_URI[md5sum] = "76eb34a058bb8b637ccadc4ce384bae4"
-+SRC_URI[sha256sum] = "4f4172a4e989b97f96860fa434b89895069c576e2b537c4b4eed265266a7affc"
- 
- BBCLASSEXTEND = "native"
  
 -- 
 2.17.1
