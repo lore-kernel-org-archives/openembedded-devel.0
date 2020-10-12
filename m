@@ -1,23 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.41285.1602511232192418940
+ by mx.groups.io with SMTP id smtpd.web11.41286.1602511233110914505
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Oct 2020 07:00:32 -0700
+ Mon, 12 Oct 2020 07:00:33 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=39076 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kRyNI-00026S-9b; Mon, 12 Oct 2020 17:00:29 +0300
+	id 1kRyNK-00026S-IA; Mon, 12 Oct 2020 17:00:32 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-pywbem: Upgrade 1.0.2 -> 1.1.0
-Date: Mon, 12 Oct 2020 17:00:18 +0300
-Message-Id: <20201012140022.15761-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-regex: Upgrade 2020.9.27 -> 2020.10.11
+Date: Mon, 12 Oct 2020 17:00:19 +0300
+Message-Id: <20201012140022.15761-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-X-OutGoing-Spam-Status: No, score=-0.5
+In-Reply-To: <20201012140022.15761-1-leon.anavi@konsulko.com>
+References: <20201012140022.15761-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -28,47 +29,56 @@ X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-Upgrade to release 1.1.0:
+Upgrade to release 2020.10.11:
 
-- Test: Fixed dependency issues with ‘pyrsistent’ package on
-  Python 2.7 and Python 3.4.
-- Increased minimum versions of nocasedict to 1.0.0 and nocaselist
-  to 1.0.2 to pick up fixes needed for pywbem.
-- Windows install: Upgraded WinOpenSSL to 1.1.1h.
-- Test: Changed collection of .yaml files in function tests to
-  address DeprecationWarning issued by pytest.
-- Upgraded the minimum versions of nocasedict to 1.0.3 and of
-  nocaselist to 1.0.1, to pick up fixes in these packages.
-- Removed dependency on package custom-inherit and removed package
-  from pywbem.
+- Updated .yml file for Python 3.9.
+- Didn't parse regex comments property when in VERBOSE mode.
+
+License-Update: Changed to Apache Software License
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pywbem_1.0.2.bb => python3-pywbem_1.1.0.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-extended/pywbem/{python3-pywbem_1.0.2.bb => python3-pywbem_1.1.0.bb} (91%)
+ .../python/python3-regex_2020.10.11.bb                | 11 +++++++++++
+ .../python/python3-regex_2020.9.27.bb                 | 11 -----------
+ 2 files changed, 11 insertions(+), 11 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-regex_2020.10.11.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-regex_2020.9.27.bb
 
-diff --git a/meta-python/recipes-extended/pywbem/python3-pywbem_1.0.2.bb b/meta-python/recipes-extended/pywbem/python3-pywbem_1.1.0.bb
-similarity index 91%
-rename from meta-python/recipes-extended/pywbem/python3-pywbem_1.0.2.bb
-rename to meta-python/recipes-extended/pywbem/python3-pywbem_1.1.0.bb
-index da731989da..d68ae9abf0 100644
---- a/meta-python/recipes-extended/pywbem/python3-pywbem_1.0.2.bb
-+++ b/meta-python/recipes-extended/pywbem/python3-pywbem_1.1.0.bb
-@@ -16,8 +16,8 @@ HOMEPAGE = "http://pywbem.github.io"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
- 
--SRC_URI[md5sum] = "0f171e365e294554f8e7624ccf511067"
--SRC_URI[sha256sum] = "66d8ec82d30f2b95d8b4bd51659429066c2879d3f46292561f5fdbc7fed10f3d"
-+SRC_URI[md5sum] = "6ade0cda6a997542d61f15713c2dd971"
-+SRC_URI[sha256sum] = "4e2baa4b4b88943cca32c7eb588fffff22ce86c748ba7544e01149f9638014fe"
- 
- inherit pypi setuptools3 update-alternatives
- 
+diff --git a/meta-python/recipes-devtools/python/python3-regex_2020.10.11.bb b/meta-python/recipes-devtools/python/python3-regex_2020.10.11.bb
+new file mode 100644
+index 0000000000..df2c00bbaa
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-regex_2020.10.11.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "Alternative regular expression module, to replace re."
++HOMEPAGE = "https://bitbucket.org/mrabarnett/mrab-regex/src"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=f0a3e4a2554ebb89c046c93d45d8e4bc"
++
++inherit pypi setuptools3
++
++SRC_URI[md5sum] = "642c259122a3b578cec66d8bba5665e4"
++SRC_URI[sha256sum] = "463e770c48da76a8da82b8d4a48a541f314e0df91cbb6d873a341dbe578efafd"
++
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-regex_2020.9.27.bb b/meta-python/recipes-devtools/python/python3-regex_2020.9.27.bb
+deleted file mode 100644
+index fb891f8716..0000000000
+--- a/meta-python/recipes-devtools/python/python3-regex_2020.9.27.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-SUMMARY = "Alternative regular expression module, to replace re."
+-HOMEPAGE = "https://bitbucket.org/mrabarnett/mrab-regex/src"
+-LICENSE = "PSF"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=ee7987010dadc17745d623f406b500ec"
+-
+-inherit pypi setuptools3
+-
+-SRC_URI[md5sum] = "195f5e867e9f87a39f921ad0e5761a61"
+-SRC_URI[sha256sum] = "a6f32aea4260dfe0e55dc9733ea162ea38f0ea86aa7d0f77b15beac5bf7b369d"
+-
+-BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
