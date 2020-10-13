@@ -1,17 +1,17 @@
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.81])
- by mx.groups.io with SMTP id smtpd.web11.9141.1602632541224908349
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.55])
+ by mx.groups.io with SMTP id smtpd.web12.9229.1602632553477604675
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Oct 2020 16:42:21 -0700
+ Tue, 13 Oct 2020 16:42:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=cl433eX4;
- spf=pass (domain: windriver.com, ip: 40.107.236.81, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=db25m2ek;
+ spf=pass (domain: windriver.com, ip: 40.107.236.55, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XAaWJ67WFyQvRYeuKutnB0oFegy9/8TVJ16tCCxeD+1EA0q/8QfqPyxgODrmuJ9Esqyg1t0oBewGZ1G0xPgSQCGCpRkdTCKaBTCt6XTpDkuF/T5Tk/NuCKlccuNYZf7qlYSDdIRLTmZIFnqLQfX3CuocqudOvpxfYfRS3KgjSpkAr8PM/IvzZeh3izGGUyPtg6bkV0BsArhGgm7qNzUhLibDLrtYgbZyKmB2I+JuHbWN7q2VgsweKJUDFEnve/BXd0jW8Z8cup6Hk0qYHDZziI+aYeHOHAmZP5oZYQ46S50L8zouY3XebWKA/aDdS8BCsZn+ZyXoSiRDsMRUhKPJHQ==
+ b=m3blPo1FSZFK8RxbuiOvA03FcwkhmyPMQ8ZecnfvUcZk9OmfBqHI0BRIxyF8JhP8V7/o2xGr1nbI51lNDJQ6+rDa/8og0HD/GmiXLDa3IA8pZNuIupgTfxDjT03XBzCc88hMDrBOUbThGr+/ja6QW1pvOtd0AENZdO4VG4IOeoNL3710Pxb+udWkn5HKBJ1l4gkuuJwJ9cYr/mXHOgo5w/Sgo3lMJql1h1pBFCT6AJ0wXKPvg6B65+fxxuQIAOLCy6jL3GA7v4dLcUhKe9cpfsmhmggW2uFzzM8050wdSHNu3Vca0a31+UdmaJ9abiSVclArBOdOcBmuK0SU4IeKKA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MTzLV0wqZaArq3hVdm+DxAT8yJeZ3ivU6mZUiHaASvk=;
- b=G53yOoJchAqz4uTwJXcGDEFVDrEoe+wczaUbFKNhD0aV5XlccJ+kpxuY+kvV28foy2zZkV7/wHHNNnuXvxYbYXh0VZBk0qbThEU4K0P0PMPUDFEAdHT6aeK9ecgchlPNvyfVkN5EViJrOLBPceJ90wfcRuZ4170avK55n11G/+8jZBdvyqSJ06OlGe+0fzZHSJenltiGxlyXnVylBY7Cce2J0meK+e9TSDQz0PvQuDKpmFCbZ2jHWEVop8XtIck3jLI9U4myBYgakqmeAokiDcdfluhtsp16Tuxcn+f/yE9E1i3syC6lKCcyfsam/m+sOyqiUoIwD5aF1O7YNZ6c9A==
+ bh=6eO4rVg304fRgsgBdBkvYDjlitoOAuvkLMY06Ickm74=;
+ b=OTK4pdJwZY6niJpAu/X/I/gzVvuloRyPqYc8Mt4nYNJR8CjJrG+d2DG9KbPIj67YzDrdwrWgK2ileC/0SIcH34J/xMe6P6oG2HGXDCJWwG+TfqTl/aV7LG1+KymuB9iN32w/qlZGgNeqsAVD0EReCUslxTc/9JTEVq15ZylKKP7NHMM0V/90w+UJwXWMct6O73NyoDcVXuieN/k3oCFk4XpQYr2hBH3e1E+o3IRHN+xa3/E4DJX+K0sPcx7wXVwCTLYtFWsWsHlMCYNI8KbNHWbaMBQ9ycVPBMRbDzEy8XtSnK4tMNIR3mXkuEp6kz926ebL72x31nQ/Vz0aIbRlug==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MTzLV0wqZaArq3hVdm+DxAT8yJeZ3ivU6mZUiHaASvk=;
- b=cl433eX4Zq59I4707I+oKLkMd8InjL7LKBh55diLyIC1zf7DXlC5py8AbAco0zl9KFB2yMhOKT8rWBNr/7tPr9oMDyUzFOtRKmc3aShe2cyqv8B38koWsSGM3IHD2hE1bjwOhgusHVrwDp3BanMnKVActMJJes+hsyJWA3PYnz8=
+ bh=6eO4rVg304fRgsgBdBkvYDjlitoOAuvkLMY06Ickm74=;
+ b=db25m2ekLyME4JmjZaX0O21XPhmt6h4gHWbZgTYFseR182vEaU/N+OnlgHG30+NCVHk8JCGfnEWrDICKnuYz5p5FlIpvGQ07yehVpHa7Awi4pKOlOcoXLCJ+eJz2f3LqiAECHVNm4cIPLhjgefNwibsvh+Y7nLU/2WlzxWd/YF8=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,118 +28,101 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB3445.namprd11.prod.outlook.com (2603:10b6:a03:77::12) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3455.27; Tue, 13 Oct
- 2020 23:42:16 +0000
+ 2020 23:42:32 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::7875:99b3:15ae:5df2]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::7875:99b3:15ae:5df2%7]) with mapi id 15.20.3455.030; Tue, 13 Oct 2020
- 23:42:16 +0000
-Subject: Re: [oe] [meta-python][PATCH 2/5] python3-regex: Upgrade 2020.9.27 -> 2020.10.11
+ 23:42:32 +0000
+Subject: Re: [oe] [meta-python][PATCH 3/5] python3-multidict: Upgrade 4.7.6 -> 5.0.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20201012140022.15761-1-leon.anavi@konsulko.com>
- <20201012140022.15761-2-leon.anavi@konsulko.com>
+ <20201012140022.15761-3-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <c146ff79-1a95-5b4e-4961-3df4e461c5f0@windriver.com>
-Date: Tue, 13 Oct 2020 19:42:14 -0400
+Message-ID: <47bc7921-edfc-8062-9b5a-719393f4a06d@windriver.com>
+Date: Tue, 13 Oct 2020 19:42:29 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
-In-Reply-To: <20201012140022.15761-2-leon.anavi@konsulko.com>
+In-Reply-To: <20201012140022.15761-3-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BY5PR04CA0011.namprd04.prod.outlook.com
- (2603:10b6:a03:1d0::21) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BY5PR04CA0003.namprd04.prod.outlook.com
+ (2603:10b6:a03:1d0::13) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BY5PR04CA0011.namprd04.prod.outlook.com (2603:10b6:a03:1d0::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.20 via Frontend Transport; Tue, 13 Oct 2020 23:42:15 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BY5PR04CA0003.namprd04.prod.outlook.com (2603:10b6:a03:1d0::13) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.20 via Frontend Transport; Tue, 13 Oct 2020 23:42:30 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 59b18492-09a9-4526-2d8e-08d86fd19e07
+X-MS-Office365-Filtering-Correlation-Id: 3d604149-accc-4b2c-fb5b-08d86fd1a6f6
 X-MS-TrafficTypeDiagnostic: BYAPR11MB3445:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB344576660079C67FBC4A0E0F9F040@BYAPR11MB3445.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:663;
+	<BYAPR11MB344513EFBD8CCBD86929A5849F040@BYAPR11MB3445.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1303;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	Fim+L92XNuwVNvM4/+y4TwXQ839oJLzodazkCRqj5NhC9zdf7RBwLfR3h7U3BEgVyAmC5zXWwBHi78jFy1cjAY2BGQ3BO1DOwMvXzcAPZw5T9V++7+TVLdG5UsAVzLYjXedSeta0vKpdYAPnoVCmvN6u6e8psC6exIXCBd634NlAUyql7f2IHqnituUb+UJo6fxNfu4zVPI4SRFp76ewbFgdxw/HpooD56wZFBlixPYBfk43w5ApYAZeC8YSrwRsFdtFzJJD4TFk+butG9S7Hr3caa+BXTSk3LBsfbuXD1Nmf1t9KUcu7MyYCy7rQD3ysS4uoCyoZ9vyIbgF6SB16k7gLkOTdKysOolNUv+yoEM1Iihw9I3z+Odgr2pT5RWJFDDVVSwNWbAFV3Q7o8w9IqOJpoAB/sp/sAvK5ASjZFFmpezDea3/jgT4RO+m2bQVOzw7SgOjK+9SvP1fCnZqNA==
+	YCCyAdCU2BzE3av2CA9+vy5/CVfaJbkYOlHmK1i06U3rF4fWYtVY2BkGrqFL5KumsWDnd/bmBo+Nvjt2UPXJV04OzMfXM0CLucPA2CE0ootCsCsLr86mPLzGNwXRNxMuaRLjU1DOMK/JvGjxbwcOCgUQPx2tD2tB/gmyQjndvqOPnFVxdDpe0w6L+Et7lVGE0miTcN7tjwCu5DejmE/06WHloBbOKf5ratrIZSQ5QIeXBTphmTcRHBye6z4QWVEBCDt3Kk6GuGLQeXcIqvsm7mA/uq+116Al+r8TWTNodiuC6+6Mwz0hVkI+QzAux0rFCqflzOcUlrmXB/PmbokRQ3MX8SClS2Xb2YrX08yPfe3hhqNUmuDOskznAO0X63l1X9D4wmewjgZyZY3ihQkLS030kGXeyQLTFg4CGyBMs5feuaSkYXWkmoEraCyUrHdyHkEaD7K0m5vHsoWiW15kRg==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(346002)(376002)(136003)(366004)(39840400004)(166002)(26005)(53546011)(31686004)(478600001)(2906002)(83080400001)(33964004)(86362001)(52116002)(6486002)(5660300002)(83380400001)(8936002)(316002)(66476007)(186003)(31696002)(44832011)(16526019)(8676002)(36756003)(956004)(966005)(16576012)(66556008)(2616005)(66946007)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(39840400004)(136003)(376002)(346002)(396003)(16526019)(44832011)(66476007)(186003)(8676002)(31696002)(16576012)(66946007)(2616005)(66556008)(316002)(36756003)(956004)(966005)(86362001)(52116002)(6486002)(53546011)(31686004)(166002)(26005)(83080400001)(33964004)(478600001)(2906002)(5660300002)(83380400001)(8936002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	YctEVD3P2u5I3GC2fUsXGwgLfnuUl8+87u6riZ1IxiOxoinxaVVng6CnYR/cOE8VirnJjePClcY37uh8MElLr1ao2Dcy1bU/Pp4EQLauSsZYLo+4cnAMhrm4COS4jP7pbVv3SYLXY0xUSZU2c+1DsMAIFCaVBYMMOxUFpSEhilHzMHb+JJuvGEYRWtmrCU/bqpASND6eIwevy1l0+hiIENgdjnHdKJgf9tbFv5WF+lJLqHeOrRcjjf91ZI/Neo999P7EHaL+da5Ge1Kekk70t9JJzfl3B/z7i8p5VG9FxNnUJHUJzmUkovdycDvfVTAbQJtug54nGeidYdUcaKeoYdeYfVPXqVTAOVzJRIXwQxyaIQX9W4rG85Z0nIHJII7PeQByRQ7O5ribT2/C5zRI2yGadOjqslwRK/JnzCqX0SRdfAuhI/3Uf4TJaWqHYDDeBR1KGBMTUe52JFx/OWxAPt2ZbcRVR/n2UNRsIpc6JtfGv4nC5qeWkBt8n16JJEJkwHhyP6VDssvLAxgBggmOFz5Uv1SVxqb2/KpG+WSaTs6fvTRFYnDmU+2UQ1daSftfRm/0WSWoIcE1yxepwE5/w2eRvIvTaixXhKl1olOxkQaDDncrRZ5iMG5kYSf7n2IwCHtYubZSlXwTxEFt6f191w==
+	In/XPC1sDl42w3hmrlfnKzIs6HVdDTNqb+nT0BlvQ5CJynKZE8gihfQ28w+DUvSiVEzE4kx1Nq29jHs4XoH7p1Vmf01VcXYGeEDPSLNPpvo4wqM2zHYgWhicoyASF2wvtHoFg2DKnv0HovSRAd4lPj3PJhK1Kp3CAEi0FlIcgnAlTAz3x/oMUi11OrSrP8e91ASV2RFb12j07lZuNwrbu2McyA4tFwA3l+Lz0WcswnHK9pBfNMuct2jOKsvugcE4mBJPwGn5ao0cLcV7MpsNP9w+PO5bZreQniuCa0dCRKh60ONyPVhByEeXdfnyZFEn8jmVlF7S5mj9kaD4V0hpcnz9iMo10AuuKdTuYZ9c6qVlg+sIIGsgYgTMCurdSgjPBb8NSviNQJGRpzxIzmswNKzjwAhtH+4Lka2ahaU9cdc9sqVjZgFGEE4GpN9ui7yaaM9s5mK4Obxi/mLQvNA4Xo9oGCiBYOmkn2zv4v+MMFfwJYjR1/VMWYUb2v4ELlNKNahWk6ukSR48EX5UoHROO7MgpdsAfqt6Sr57UfAfxmxi+cZ6sc56Zq/AmlCbDPxr7qjYpiotZO25PKpyRPtf9/bkJExm97JZGY8mS1iHNT+EY8VrEkDeV+A1FTKyCfPIFLnoNP8ixDd/wg27U8a6tQ==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 59b18492-09a9-4526-2d8e-08d86fd19e07
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3d604149-accc-4b2c-fb5b-08d86fd1a6f6
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2020 23:42:16.5452
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2020 23:42:32.1422
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: uzK1q3+svLmK/OnJQuAHAAd5GjivXmnsrHWXW0GC4dY2JUBSHR83OohX+4q4lG/J2W5MOu1/YwWN5Zj0RfjlhwdJQKdO7Til1w784ciuJic=
+X-MS-Exchange-CrossTenant-UserPrincipalName: sOq9C5E6RwumNGW6IxGldsJS4uS6QcZSCpH9CNhoGVtV+ElgrSS53lqjQ01vuC8FGTbql91Etxvt5q8YmqSdhV7vyi6NvO6ksmdGaB0Pfdc=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3445
 Content-Type: multipart/alternative;
- boundary="------------BC8ADDC08EC470F0DD52D155"
+ boundary="------------68A0CC6353100BA8C49F2590"
 Content-Language: en-US
 
---------------BC8ADDC08EC470F0DD52D155
+--------------68A0CC6353100BA8C49F2590
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 10/12/20 10:00 AM, Leon Anavi wrote:
-> - Updated .yml file for Python 3.9.
-> - Didn't parse regex comments property when in VERBOSE mode.
->
-> License-Update: Changed to Apache Software License
+> - Provide wheels for aarch64, i686, ppc64le, s390x architectures
+>    on Linux as well as x86_64.
+> - Provide wheels for Python 3.9.
+> - Drop Python 3.5 support; Python 3.6 is the minimum supported
+>    Python version.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python3-regex_2020.10.11.bb                | 11 +++++++++++
->   .../python/python3-regex_2020.9.27.bb                 | 11 -----------
->   2 files changed, 11 insertions(+), 11 deletions(-)
->   create mode 100644 meta-python/recipes-devtools/python/python3-regex_2020.10.11.bb
->   delete mode 100644 meta-python/recipes-devtools/python/python3-regex_2020.9.27.bb
+>   ...{python3-multidict_4.7.6.bb => python3-multidict_5.0.0.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-multidict_4.7.6.bb => python3-multidict_5.0.0.bb} (78%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-regex_2020.10.11.bb b/meta-python/recipes-devtools/python/python3-regex_2020.10.11.bb
-> new file mode 100644
-> index 0000000000..df2c00bbaa
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-regex_2020.10.11.bb
-> @@ -0,0 +1,11 @@
-> +SUMMARY = "Alternative regular expression module, to replace re."
-> +HOMEPAGE = "https://bitbucket.org/mrabarnett/mrab-regex/src"
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=f0a3e4a2554ebb89c046c93d45d8e4bc"
-> +
-> +inherit pypi setuptools3
-> +
-> +SRC_URI[md5sum] = "642c259122a3b578cec66d8bba5665e4"
-> +SRC_URI[sha256sum] = "463e770c48da76a8da82b8d4a48a541f314e0df91cbb6d873a341dbe578efafd"
-> +
-> +BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-regex_2020.9.27.bb b/meta-python/recipes-devtools/python/python3-regex_2020.9.27.bb
-> deleted file mode 100644
-> index fb891f8716..0000000000
-> --- a/meta-python/recipes-devtools/python/python3-regex_2020.9.27.bb
-> +++ /dev/null
-> @@ -1,11 +0,0 @@
-> -SUMMARY = "Alternative regular expression module, to replace re."
-> -HOMEPAGE = "https://bitbucket.org/mrabarnett/mrab-regex/src"
-> -LICENSE = "PSF"
-> -LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=ee7987010dadc17745d623f406b500ec"
-> -
-> -inherit pypi setuptools3
-> -
-> -SRC_URI[md5sum] = "195f5e867e9f87a39f921ad0e5761a61"
-> -SRC_URI[sha256sum] = "a6f32aea4260dfe0e55dc9733ea162ea38f0ea86aa7d0f77b15beac5bf7b369d"
-> -
-> -BBCLASSEXTEND = "native nativesdk"
+> diff --git a/meta-python/recipes-devtools/python/python3-multidict_4.7.6.bb b/meta-python/recipes-devtools/python/python3-multidict_5.0.0.bb
+> similarity index 78%
+> rename from meta-python/recipes-devtools/python/python3-multidict_4.7.6.bb
+> rename to meta-python/recipes-devtools/python/python3-multidict_5.0.0.bb
+> index 02c541b4c2..676fbae7ed 100644
+> --- a/meta-python/recipes-devtools/python/python3-multidict_4.7.6.bb
+> +++ b/meta-python/recipes-devtools/python/python3-multidict_5.0.0.bb
+> @@ -4,8 +4,8 @@ HOMEPAGE = "https://github.com/aio-libs/multidict/"
+>   LICENSE = "Apache-2.0"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a"
+>   
+> -SRC_URI[md5sum] = "40b6ca77171ac8af55f7aa60049f3cdf"
+> -SRC_URI[sha256sum] = "fbb77a75e529021e7c4a8d4e823d88ef4d23674a202be4f5addffc72cbb91430"
+> +SRC_URI[md5sum] = "c2c3311e25636a6f213e998cd1e80d72"
+> +SRC_URI[sha256sum] = "1b324444299c3a49b601b1bf621fc21704e29066f6ac2b7d7e4034a4a18662a1"
+>   
+>   inherit pypi setuptools3 ptest
+>   
 >
 > 
 >
 
---------------BC8ADDC08EC470F0DD52D155
+--------------68A0CC6353100BA8C49F2590
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -151,58 +134,41 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 10/12/20 10:00 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20201012140022.15761-2-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Updated .yml file for Python 3.9.
-- Didn't parse regex comments property when in VERBOSE mode.
-
-License-Update: Changed to Apache Software License
+    <blockquote type="cite" cite="mid:20201012140022.15761-3-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">- Provide wheels for aarch64, i686, ppc64le, s390x architectures
+  on Linux as well as x86_64.
+- Provide wheels for Python 3.9.
+- Drop Python 3.5 support; Python 3.6 is the minimum supported
+  Python version.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20201012140022.15761-2-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20201012140022.15761-3-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python3-regex_2020.10.11.bb                | 11 +++++++++++
- .../python/python3-regex_2020.9.27.bb                 | 11 -----------
- 2 files changed, 11 insertions(+), 11 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-regex_2020.10.11.bb
- delete mode 100644 meta-python/recipes-devtools/python/python3-regex_2020.9.27.bb
+ ...{python3-multidict_4.7.6.bb =&gt; python3-multidict_5.0.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-multidict_4.7.6.bb =&gt; python3-multidict_5.0.0.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-regex_2020.10.11.bb b/meta-python/recipes-devtools/python/python3-regex_2020.10.11.bb
-new file mode 100644
-index 0000000000..df2c00bbaa
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-regex_2020.10.11.bb
-@@ -0,0 +1,11 @@
-+SUMMARY = &quot;Alternative regular expression module, to replace re.&quot;
-+HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://bitbucket.org/mrabarnett/mrab-regex/src">&quot;https://bitbucket.org/mrabarnett/mrab-regex/src&quot;</a>
-+LICENSE = &quot;Apache-2.0&quot;
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=f0a3e4a2554ebb89c046c93d45d8e4bc">&quot;file://PKG-INFO;beginline=8;endline=8;md5=f0a3e4a2554ebb89c046c93d45d8e4bc&quot;</a>
-+
-+inherit pypi setuptools3
-+
-+SRC_URI[md5sum] = &quot;642c259122a3b578cec66d8bba5665e4&quot;
-+SRC_URI[sha256sum] = &quot;463e770c48da76a8da82b8d4a48a541f314e0df91cbb6d873a341dbe578efafd&quot;
-+
-+BBCLASSEXTEND = &quot;native nativesdk&quot;
-diff --git a/meta-python/recipes-devtools/python/python3-regex_2020.9.27.bb b/meta-python/recipes-devtools/python/python3-regex_2020.9.27.bb
-deleted file mode 100644
-index fb891f8716..0000000000
---- a/meta-python/recipes-devtools/python/python3-regex_2020.9.27.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--SUMMARY = &quot;Alternative regular expression module, to replace re.&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://bitbucket.org/mrabarnett/mrab-regex/src">&quot;https://bitbucket.org/mrabarnett/mrab-regex/src&quot;</a>
--LICENSE = &quot;PSF&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=ee7987010dadc17745d623f406b500ec">&quot;file://PKG-INFO;beginline=8;endline=8;md5=ee7987010dadc17745d623f406b500ec&quot;</a>
--
--inherit pypi setuptools3
--
--SRC_URI[md5sum] = &quot;195f5e867e9f87a39f921ad0e5761a61&quot;
--SRC_URI[sha256sum] = &quot;a6f32aea4260dfe0e55dc9733ea162ea38f0ea86aa7d0f77b15beac5bf7b369d&quot;
--
--BBCLASSEXTEND = &quot;native nativesdk&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-multidict_4.7.6.bb b/meta-python/recipes-devtools/python/python3-multidict_5.0.0.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-multidict_4.7.6.bb
+rename to meta-python/recipes-devtools/python/python3-multidict_5.0.0.bb
+index 02c541b4c2..676fbae7ed 100644
+--- a/meta-python/recipes-devtools/python/python3-multidict_4.7.6.bb
++++ b/meta-python/recipes-devtools/python/python3-multidict_5.0.0.bb
+@@ -4,8 +4,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/aio-libs/multidict/">&quot;https://github.com/aio-libs/multidict/&quot;</a>
+ LICENSE = &quot;Apache-2.0&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a">&quot;file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a&quot;</a>
+ 
+-SRC_URI[md5sum] = &quot;40b6ca77171ac8af55f7aa60049f3cdf&quot;
+-SRC_URI[sha256sum] = &quot;fbb77a75e529021e7c4a8d4e823d88ef4d23674a202be4f5addffc72cbb91430&quot;
++SRC_URI[md5sum] = &quot;c2c3311e25636a6f213e998cd1e80d72&quot;
++SRC_URI[sha256sum] = &quot;1b324444299c3a49b601b1bf621fc21704e29066f6ac2b7d7e4034a4a18662a1&quot;
+ 
+ inherit pypi setuptools3 ptest
+ 
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -214,4 +180,4 @@ index fb891f8716..0000000000
   </body>
 </html>
 
---------------BC8ADDC08EC470F0DD52D155--
+--------------68A0CC6353100BA8C49F2590--
