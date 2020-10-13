@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.7600.1602579565934555120
+ by mx.groups.io with SMTP id smtpd.web10.7580.1602579566445156336
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 13 Oct 2020 01:59:26 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=58486 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kSG9U-0002BF-1C; Tue, 13 Oct 2020 11:59:25 +0300
+	id 1kSG9V-0002BF-4W; Tue, 13 Oct 2020 11:59:25 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/7] python3-croniter: Upgrade 0.3.34 -> 0.3.35
-Date: Tue, 13 Oct 2020 11:59:11 +0300
-Message-Id: <20201013085914.31580-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/7] python3-isort: Upgrade 5.5.4 -> 5.6.4
+Date: Tue, 13 Oct 2020 11:59:12 +0300
+Message-Id: <20201013085914.31580-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201013085914.31580-1-leon.anavi@konsulko.com>
 References: <20201013085914.31580-1-leon.anavi@konsulko.com>
@@ -30,51 +30,31 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.3.35:
+Upgrade to release 5.6.4:
 
-- Handle L in ranges.
-- Add a new initializaton paramter max_years_between_matches to
-  support finding the next/previous date beyond the default 1 year
-  window, if so desired. Updated README to include additional
-  notes and example of this usage.
-- The croniter_range() function was updated to automatically
-  determines the appropriate max_years_between_matches value, this
-  preventing handling of the CroniterBadDateError exception.
-- Updated exception handling classes: CroniterBadDateError now
-  only applies during date finding operations (next/prev), and all
-  parsing errors can now be caught using CroniterBadCronError. The
-  CroniterNotAlphaError exception is now a subclass of
-  CroniterBadCronError. A breif description of each exception
-  class was added as an inline docstring.
-- Updated iterable interfaces to replace the CroniterBadDateError
-  with StopIteration if (and only if) the max_years_between_matches
-  argument is provided. The rationale here is that if the user has
-  specified the max tollernace between matches, then there's no need
-  to further inform them of no additional matches. Just stop the
-  iteration. This also keeps backwards compatibility.
-- Minor docs update.
+- Fix: Empty line added between imports that should be skipped.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-croniter_0.3.34.bb => python3-croniter_0.3.35.bb} | 4 ++--
+ .../python/{python3-isort_5.5.4.bb => python3-isort_5.6.4.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-croniter_0.3.34.bb => python3-croniter_0.3.35.bb} (68%)
+ rename meta-python/recipes-devtools/python/{python3-isort_5.5.4.bb => python3-isort_5.6.4.bb} (73%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-croniter_0.3.34.bb b/meta-python/recipes-devtools/python/python3-croniter_0.3.35.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-croniter_0.3.34.bb
-rename to meta-python/recipes-devtools/python/python3-croniter_0.3.35.bb
-index 123d176137..388885c158 100644
---- a/meta-python/recipes-devtools/python/python3-croniter_0.3.34.bb
-+++ b/meta-python/recipes-devtools/python/python3-croniter_0.3.35.bb
+diff --git a/meta-python/recipes-devtools/python/python3-isort_5.5.4.bb b/meta-python/recipes-devtools/python/python3-isort_5.6.4.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-isort_5.5.4.bb
+rename to meta-python/recipes-devtools/python/python3-isort_5.6.4.bb
+index 0c5842790f..66a5332be7 100644
+--- a/meta-python/recipes-devtools/python/python3-isort_5.5.4.bb
++++ b/meta-python/recipes-devtools/python/python3-isort_5.6.4.bb
 @@ -4,8 +4,8 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=b8ee59850b882cbf623188489ea748e2"
+ SECTION = "devel/python"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=8227180126797a0148f94f483f3e1489"
  
- PYPI_PACKAGE = "croniter"
--SRC_URI[md5sum] = "adfeeb0032ab7aeccba908fa2eb09c33"
--SRC_URI[sha256sum] = "7186b9b464f45cf3d3c83a18bc2344cc101d7b9fd35a05f2878437b14967e964"
-+SRC_URI[md5sum] = "8bb1443b90123f96ad64d7fae26df342"
-+SRC_URI[sha256sum] = "b9075573d9d18fdc4c67ad6741c4bfa4b446b1b1d7f03279757244c8a75abedf"
+-SRC_URI[md5sum] = "6b90dd55851a8ccb3a19fe2cb82cb82f"
+-SRC_URI[sha256sum] = "ba040c24d20aa302f78f4747df549573ae1eaf8e1084269199154da9c483f07f"
++SRC_URI[md5sum] = "d2dfc32943b1d64311facec6a05c2f98"
++SRC_URI[sha256sum] = "dcaeec1b5f0eca77faea2a35ab790b4f3680ff75590bfcb7145986905aab2f58"
  
  inherit pypi setuptools3
  
