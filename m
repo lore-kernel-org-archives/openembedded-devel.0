@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.7602.1602579567464110371
+ by mx.groups.io with SMTP id smtpd.web10.7581.1602579568297416705
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Oct 2020 01:59:27 -0700
+ Tue, 13 Oct 2020 01:59:28 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=58486 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kSG9V-0002BF-LP; Tue, 13 Oct 2020 11:59:26 +0300
+	id 1kSG9W-0002BF-Lt; Tue, 13 Oct 2020 11:59:27 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 6/7] python3-prompt-toolkit: Upgrade 3.0.7 -> 3.0.8
-Date: Tue, 13 Oct 2020 11:59:13 +0300
-Message-Id: <20201013085914.31580-6-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 7/7] python3-yarl: Upgrade 1.6.0 -> 1.6.2
+Date: Tue, 13 Oct 2020 11:59:14 +0300
+Message-Id: <20201013085914.31580-7-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201013085914.31580-1-leon.anavi@konsulko.com>
 References: <20201013085914.31580-1-leon.anavi@konsulko.com>
@@ -30,43 +30,48 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.0.8:
+Upgrade to release 1.6.2:
 
-- Added `validator` parameter to `input_dialog`.
-- Cope with stdout not having a working `fileno`.
-- Handle situation when /dev/null is piped into stdin, or when
-  stdin is closed somehow.
-- Fix for telnet/ssh server: `isatty` method was not implemented.
-- Display correct error when a tuple is passed into
-  `to_formatted_text`.
-- Pass along WORD parameter in `Document._is_word_before_cursor_complete`.
-  Fixes some key bindings.
-- Expose `ProgressBarCounter` in shortcuts module.
+- Provide generated .c files in TarBall distribution.
+- Provide wheels for aarch64, i686, ppc64le, s390x architectures
+  on Linux as well as x86_64.
+- Provide wheels for Python 3.9.
+- human_repr() now always produces valid representation equivalent
+  to the original URL (if the original URL is valid).
+- Fixed requoting a single percent followed by a percent-encoded
+  character in the Cython implementation.
+- Fix ValueError when decoding % which is not followed by two
+  hexadecimal digits.
+- Fix decoding % followed by a space and hexadecimal digit.
+- Fix annotation of with_query()/update_query() methods for
+  key=[val1, val2] case.
+- Drop Python 3.5 support; Python 3.6 is the minimal supported
+  Python version.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...rompt-toolkit_3.0.7.bb => python3-prompt-toolkit_3.0.8.bb} | 4 ++--
+ .../python/{python3-yarl_1.6.0.bb => python3-yarl_1.6.2.bb}   | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_3.0.7.bb => python3-prompt-toolkit_3.0.8.bb} (80%)
+ rename meta-python/recipes-devtools/python/{python3-yarl_1.6.0.bb => python3-yarl_1.6.2.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.7.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.8.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.7.bb
-rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.8.bb
-index 7b0d1a0696..0debba48d2 100644
---- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.8.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://python-prompt-toolkit.readthedocs.io/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
+diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.6.0.bb b/meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-yarl_1.6.0.bb
+rename to meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
+index 543acc51ba..dbb5d23bd2 100644
+--- a/meta-python/recipes-devtools/python/python3-yarl_1.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/aio-libs/yarl/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b334fc90d45983db318f54fd5bf6c90b"
  
--SRC_URI[md5sum] = "f1b34c688ef7dccccb951130f008f6fe"
--SRC_URI[sha256sum] = "822f4605f28f7d2ba6b0b09a31e25e140871e96364d1d377667b547bb3bf4489"
-+SRC_URI[md5sum] = "cf3ca19873fa9e7f6162296cf6bae419"
-+SRC_URI[sha256sum] = "25c95d2ac813909f813c93fde734b6e44406d1477a9faef7c915ff37d39c0a8c"
+-SRC_URI[md5sum] = "802bb27ebdb260fbbaecbcc8168d6f28"
+-SRC_URI[sha256sum] = "61d3ea3c175fe45f1498af868879c6ffeb989d4143ac542163c45538ba5ec21b"
++SRC_URI[md5sum] = "65c3346f694e37f45045f4e29a60d280"
++SRC_URI[sha256sum] = "c45b49b59a5724869899798e1bbd447ac486215269511d3b76b4c235a1b766b6"
  
- inherit pypi setuptools3
- 
+ SRC_URI += " \
+     file://run-ptest \
 -- 
 2.17.1
 
