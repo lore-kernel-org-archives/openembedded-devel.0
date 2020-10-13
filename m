@@ -1,60 +1,120 @@
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
- by mx.groups.io with SMTP id smtpd.web11.578.1602606695136598149
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com [209.85.160.179])
+ by mx.groups.io with SMTP id smtpd.web10.884.1602610618050252712
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Oct 2020 09:31:35 -0700
+ Tue, 13 Oct 2020 10:36:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denx.de, ip: 212.18.0.9, mailfrom: marex@denx.de)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
-	by mail-out.m-online.net (Postfix) with ESMTP id 4C9gzS72jMz1r760;
-	Tue, 13 Oct 2020 18:31:32 +0200 (CEST)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
-	by mail.m-online.net (Postfix) with ESMTP id 4C9gzS6nzVz1sM9c;
-	Tue, 13 Oct 2020 18:31:32 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
-	by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new, port 10024)
-	with ESMTP id msZL5lgCQt5S; Tue, 13 Oct 2020 18:31:32 +0200 (CEST)
-X-Auth-Info: yYiORXORTN7frGMPQbJx+dIzBCLsk5rhXY4GdK5cLCs=
-Received: from [IPv6:::1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mail.mnet-online.de (Postfix) with ESMTPSA;
-	Tue, 13 Oct 2020 18:31:32 +0200 (CEST)
-Subject: Re: [meta-oe][PATCH] freerdp: Add missing libxkbcommon WL dependency
-To: openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com
-References: <20200824155337.9092-1-marex@denx.de>
-From: "Marek Vasut" <marex@denx.de>
-Message-ID: <cce025f9-708a-cd03-d66d-8ab7b9d0c2a8@denx.de>
-Date: Tue, 13 Oct 2020 18:31:31 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=CxYPMU01;
+ spf=pass (domain: gmail.com, ip: 209.85.160.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f179.google.com with SMTP id e6so446325qtw.10
+        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2020 10:36:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=1bZBLgIIkrC1VcZ32/Eu2vL34jYMh3zXB1Ais7czuyQ=;
+        b=CxYPMU01z7ErX+D9A/rL0A6BCOhUiHwITHIXd9ukCngX6MmrGWtlDtNMljU2GDiLTf
+         AoaJYRZmSBRA+O/hX7EnVvUEl4fkV2Iqbi0qK9ZaEmMpl1LJorxPQ5fXO7FY7QKUCe9z
+         TBGbXwNiwjZxWqqp07oovh5b4a9lBneXkaoeLclILE9Iy8T95wNeqyhi22Y+1rAeGV6q
+         iHThZ9x/G0nOW7gi9cUjxXPwMxR/TSvXcOOIkNWlCSiSDXgShHrejl+ph7Uy8fIW/b7f
+         vAgJ5m/n3ix6+thfMJ4MD59p8rgvPQSZy7KOlH9bO7t3hiN3PNrFwgiGJtJufNJVRM/L
+         HCNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=1bZBLgIIkrC1VcZ32/Eu2vL34jYMh3zXB1Ais7czuyQ=;
+        b=Ykjt4xxSJ1jYs/nc5q4MiaKPS0o2O6dIjn3YKspDjoIYaQX6l1ojg11o4RyXzyuPng
+         VhI27cL9MQHzm7Uicuu3yWP62r5YaQhUzRTrBJFEQMXmDEHG4x5afWTA63cgD1QLPydF
+         Qc+TnOLRsd0/N3XTtnhgs8xTvxGGR/efJbXDy1pS3pU5oSdLMf8RpibEi0IozkIUFNep
+         1KdXO9P+VEoloLrGyZmclsLvV27iW6/q8JC8rX06FJ3Q7MyhWPsh80idYcqdGvZ5McLS
+         3BOCIfXWyXWah0bwOILKVesrNjN2Q1VA96mGtNmjgaFtSnRYIsGwF373vIXN5HRe9uks
+         sujA==
+X-Gm-Message-State: AOAM532Uu4Wvo9DWESNv1RscMRk0itldUTUa2TQo5z9Rx58LiM6soc5p
+	zzSAR8sYBN+l0JbOQC7ZBAHEtMornHZJs12gkFw=
+X-Google-Smtp-Source: ABdhPJxnQ71B1JRmhpI7nFcE9tmHJR0qS3kNzrvcAaOTTks9m8iOQpS4qPaILyBI75RBFc59Axu+R8q7x0pFQ1iFPJU=
+X-Received: by 2002:ac8:5a82:: with SMTP id c2mr804164qtc.378.1602610617046;
+ Tue, 13 Oct 2020 10:36:57 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200824155337.9092-1-marex@denx.de>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <163C5AC1761FD67D.15658@lists.openembedded.org> <2de8951e-11bb-3027-957c-f47f4829191f@gmail.com>
+In-Reply-To: <2de8951e-11bb-3027-957c-f47f4829191f@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Tue, 13 Oct 2020 10:36:30 -0700
+Message-ID: <CAMKF1soBXRVXd0+zRgj7oXhj4+c_9YqFhgERUVM9_bmZdT_-Mw@mail.gmail.com>
+Subject: Re: [oe] [dunfell 0/9] pull request
+To: akuster808 <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 8/24/20 5:53 PM, Marek Vasut wrote:
-> The WL build depends on libxkbcommon, so add the dependency.
-> 
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
->  meta-oe/recipes-support/freerdp/freerdp_2.2.0.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.2.0.bb b/meta-oe/recipes-support/freerdp/freerdp_2.2.0.bb
-> index 6a97c24c2..d446a31a5 100644
-> --- a/meta-oe/recipes-support/freerdp/freerdp_2.2.0.bb
-> +++ b/meta-oe/recipes-support/freerdp/freerdp_2.2.0.bb
-> @@ -38,7 +38,7 @@ PACKAGECONFIG ??= " \
->  
->  X11_DEPS = "virtual/libx11 libxinerama libxext libxcursor libxv libxi libxrender libxfixes libxdamage libxrandr libxkbfile"
->  PACKAGECONFIG[x11] = "-DWITH_X11=ON -DWITH_XINERAMA=ON -DWITH_XEXT=ON -DWITH_XCURSOR=ON -DWITH_XV=ON -DWITH_XI=ON -DWITH_XRENDER=ON -DWITH_XFIXES=ON -DWITH_XDAMAGE=ON -DWITH_XRANDR=ON -DWITH_XKBFILE=ON,-DWITH_X11=OFF,${X11_DEPS}"
-> -PACKAGECONFIG[wayland] = "-DWITH_WAYLAND=ON,-DWITH_WAYLAND=OFF,wayland wayland-native"
-> +PACKAGECONFIG[wayland] = "-DWITH_WAYLAND=ON,-DWITH_WAYLAND=OFF,wayland wayland-native libxkbcommon"
->  PACKAGECONFIG[directfb] = "-DWITH_DIRECTFB=ON,-DWITH_DIRECTFB=OFF,directfb"
->  PACKAGECONFIG[pam] = "-DWITH_PAM=ON,-DWITH_PAM=OFF,libpam"
->  PACKAGECONFIG[pulseaudio] = "-DWITH_PULSEAUDIO=ON,-DWITH_PULSEAUDIO=OFF,pulseaudio"
+On Tue, Oct 13, 2020 at 8:05 AM akuster808 <akuster808@gmail.com> wrote:
+>
+>
+>
+> On 10/9/20 7:55 AM, akuster via lists.openembedded.org wrote:
+> > Cover letter only
+> >
+> > please merge this to dunfell
+>
+> ping
 
-Can this patch be applied ?
+merged now thanks
+
+>
+> >
+> > The following changes since commit 144077083457ccb75700777d5e6b1da9aaf=
+f01aa:
+> >
+> >   iwd: Upgrade to 1.9 (2020-09-19 11:22:44 -0700)
+> >
+> > are available in the Git repository at:
+> >
+> >   git://git.openembedded.org/meta-openembedded dunfell-next
+> >   http://cgit.openembedded.org/meta-openembedded/log/?h=3Ddunfell-next
+> >
+> > Andreas M=C3=BCller (1):
+> >   gnome-settings-daemon: Remove wrong RDEPEND
+> >
+> > Hongxu Jia (1):
+> >   python3-pykwalify: fix missing comma
+> >
+> > Khem Raj (1):
+> >   ssmtp: Use update alternatives for conflicts with esmtp
+> >
+> > Martin Jansa (2):
+> >   netkit-rsh: inherit update-alternatives
+> >   ssmtp: adjust u-a
+> >
+> > Mingli Yu (2):
+> >   smartmontools: Remove obsolete setting regarding the Standard Output
+> >   strongswan: Remove obsolete setting regarding the Standard Output
+> >
+> > Pierre-Jean Texier (1):
+> >   haveged: upgrade 1.9.9 -> 1.9.13
+> >
+> > Robert Yang (1):
+> >   crda: rdepends on wireless-regdb-static
+> >
+> >  .../gnome-settings-daemon_3.34.2.bb           |  2 --
+> >  .../recipes-connectivity/crda/crda_3.18.bb    |  2 +-
+> >  .../netkit-rsh/netkit-rsh_0.17.bb             |  2 +-
+> >  .../recipes-support/ssmtp/ssmtp_2.64.bb       |  9 ++++-
+> >  ...setting-regarding-the-Standard-Outpu.patch | 34 ++++++++++++++++++=
++
+> >  .../strongswan/strongswan_5.8.4.bb            |  1 +
+> >  .../{haveged_1.9.9.bb =3D> haveged_1.9.13.bb}   |  2 +-
+> >  .../smartmontools/files/smartd.service        |  1 -
+> >  .../0001-rule.py-fix-missing-comma.patch      | 34 ++++++++++++++++++=
++
+> >  .../python/python3-pykwalify_1.7.0.bb         |  2 ++
+> >  10 files changed, 82 insertions(+), 7 deletions(-)
+> >  create mode 100644 meta-networking/recipes-support/strongswan/files/0=
+001-Remove-obsolete-setting-regarding-the-Standard-Outpu.patch
+> >  rename meta-oe/recipes-extended/haveged/{haveged_1.9.9.bb =3D> havege=
+d_1.9.13.bb} (97%)
+> >  create mode 100644 meta-python/recipes-devtools/python/python3-pykwal=
+ify/0001-rule.py-fix-missing-comma.patch
+> >
+> >
+> >=20
+> >
+>
