@@ -1,120 +1,186 @@
-Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com [209.85.160.179])
- by mx.groups.io with SMTP id smtpd.web10.884.1602610618050252712
+Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com [209.85.219.65])
+ by mx.groups.io with SMTP id smtpd.web10.911.1602610671355723016
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Oct 2020 10:36:58 -0700
+ Tue, 13 Oct 2020 10:37:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=CxYPMU01;
- spf=pass (domain: gmail.com, ip: 209.85.160.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f179.google.com with SMTP id e6so446325qtw.10
-        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2020 10:36:57 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=F8xblrLw;
+ spf=pass (domain: gmail.com, ip: 209.85.219.65, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f65.google.com with SMTP id de3so358509qvb.5
+        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Oct 2020 10:37:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=1bZBLgIIkrC1VcZ32/Eu2vL34jYMh3zXB1Ais7czuyQ=;
-        b=CxYPMU01z7ErX+D9A/rL0A6BCOhUiHwITHIXd9ukCngX6MmrGWtlDtNMljU2GDiLTf
-         AoaJYRZmSBRA+O/hX7EnVvUEl4fkV2Iqbi0qK9ZaEmMpl1LJorxPQ5fXO7FY7QKUCe9z
-         TBGbXwNiwjZxWqqp07oovh5b4a9lBneXkaoeLclILE9Iy8T95wNeqyhi22Y+1rAeGV6q
-         iHThZ9x/G0nOW7gi9cUjxXPwMxR/TSvXcOOIkNWlCSiSDXgShHrejl+ph7Uy8fIW/b7f
-         vAgJ5m/n3ix6+thfMJ4MD59p8rgvPQSZy7KOlH9bO7t3hiN3PNrFwgiGJtJufNJVRM/L
-         HCNQ==
+         :cc;
+        bh=PTC7ZqhyGEwtBMnUTKFYIfGJN6yR7lcAKc96VwFlZEI=;
+        b=F8xblrLwNHrKWehf0U72Dz2w99hGQ4H3EhGTBQFQIAx2St8KueP+qaddtWtTexrkkl
+         jeh2BUl4JNoHfRr8WKEN4eg8pL41dZvpCPEFs+tyJLhLYMajeCaZY6Wyff1QQkTKSEuq
+         ed1zqciXOZP5Bj/djVaGQv87TWY5igsXjqEMPiwiyNAqAgxjvEIIc5BT+6vZWD1RYa0J
+         5UYUUN9Vq8gGnEKh3Klz3Sskoc0/Mb5BqIXCtINbYH9NrkiLKxftdbtj2yDItohWZj3d
+         2PYhYbAS6+XTewVTM69steolT2du9kkLjeSPq01grXqv1XzadgSYWyAvP3fIJChV5H7z
+         umVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=1bZBLgIIkrC1VcZ32/Eu2vL34jYMh3zXB1Ais7czuyQ=;
-        b=Ykjt4xxSJ1jYs/nc5q4MiaKPS0o2O6dIjn3YKspDjoIYaQX6l1ojg11o4RyXzyuPng
-         VhI27cL9MQHzm7Uicuu3yWP62r5YaQhUzRTrBJFEQMXmDEHG4x5afWTA63cgD1QLPydF
-         Qc+TnOLRsd0/N3XTtnhgs8xTvxGGR/efJbXDy1pS3pU5oSdLMf8RpibEi0IozkIUFNep
-         1KdXO9P+VEoloLrGyZmclsLvV27iW6/q8JC8rX06FJ3Q7MyhWPsh80idYcqdGvZ5McLS
-         3BOCIfXWyXWah0bwOILKVesrNjN2Q1VA96mGtNmjgaFtSnRYIsGwF373vIXN5HRe9uks
-         sujA==
-X-Gm-Message-State: AOAM532Uu4Wvo9DWESNv1RscMRk0itldUTUa2TQo5z9Rx58LiM6soc5p
-	zzSAR8sYBN+l0JbOQC7ZBAHEtMornHZJs12gkFw=
-X-Google-Smtp-Source: ABdhPJxnQ71B1JRmhpI7nFcE9tmHJR0qS3kNzrvcAaOTTks9m8iOQpS4qPaILyBI75RBFc59Axu+R8q7x0pFQ1iFPJU=
-X-Received: by 2002:ac8:5a82:: with SMTP id c2mr804164qtc.378.1602610617046;
- Tue, 13 Oct 2020 10:36:57 -0700 (PDT)
+         :message-id:subject:to:cc;
+        bh=PTC7ZqhyGEwtBMnUTKFYIfGJN6yR7lcAKc96VwFlZEI=;
+        b=AY0SGl2kbWOv7g6PmFOJ8W1rXDhhWwoRMXqSWKpwN+CyEz7+jfabsOoWVZxxGUwPYR
+         /wS8uf2fRjxncZv7LBRa5jQAljyv5ArCJBhHW845hRYJv9+utklx9rIj1YA3+D6dQTZq
+         goRAhchRWO/zzlyvSUouuln/HAz7sNX9Yozia1QL/8F56XoW1+IPEWlTYBbVf+1XHHFI
+         oD/NbY6arbXSV/LRwhovJoqUSCQ093sHUEOVfcAtzNn3fP/CYDWnF7gKuTY9mETvnmH0
+         oGr2s5AUE7FclxZXT0Dt6eT8ph6XevHvSYEtqh0mpEUIrRgIkEyHYAwRRAKN+R1gPxaz
+         I8Yw==
+X-Gm-Message-State: AOAM5305l6SpF82KjRjblaqwYw62NW7MKpzh7yE8m3cunIvVZfjGwK5M
+	ltAwshAJnxPP8dRzur+3PJ5AXdSlbEvz/403tEI=
+X-Google-Smtp-Source: ABdhPJxKLWBFxX+3N10OYBiE3ZHXqpNvtpGkHInW7YPy+JPOSPgX4ak0vv33eF+e4z2n6TH6a43v74/mGqlZRyNbzmk=
+X-Received: by 2002:a05:6214:16d0:: with SMTP id d16mr1117761qvz.38.1602610670370;
+ Tue, 13 Oct 2020 10:37:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <163C5AC1761FD67D.15658@lists.openembedded.org> <2de8951e-11bb-3027-957c-f47f4829191f@gmail.com>
-In-Reply-To: <2de8951e-11bb-3027-957c-f47f4829191f@gmail.com>
+References: <20201013090826.23778-1-mingli.yu@windriver.com> <25212fd4-b0dd-f207-7702-2b896c78ef7a@windriver.com>
+In-Reply-To: <25212fd4-b0dd-f207-7702-2b896c78ef7a@windriver.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Tue, 13 Oct 2020 10:36:30 -0700
-Message-ID: <CAMKF1soBXRVXd0+zRgj7oXhj4+c_9YqFhgERUVM9_bmZdT_-Mw@mail.gmail.com>
-Subject: Re: [oe] [dunfell 0/9] pull request
-To: akuster808 <akuster808@gmail.com>
+Date: Tue, 13 Oct 2020 10:37:24 -0700
+Message-ID: <CAMKF1sqKK2Q3gbRJiWM1ty+nO8qEYNeefmANmMwVGXa5O-XipA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] mariadb: Upgrade to 10.5.6
+To: "Yu, Mingli" <mingli.yu@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 13, 2020 at 8:05 AM akuster808 <akuster808@gmail.com> wrote:
->
->
->
-> On 10/9/20 7:55 AM, akuster via lists.openembedded.org wrote:
-> > Cover letter only
-> >
-> > please merge this to dunfell
->
-> ping
+please rebase it on master or master-next and resend.
 
-merged now thanks
-
+On Tue, Oct 13, 2020 at 2:10 AM Yu, Mingli <mingli.yu@windriver.com> wrote:
 >
-> >
-> > The following changes since commit 144077083457ccb75700777d5e6b1da9aaf=
-f01aa:
-> >
-> >   iwd: Upgrade to 1.9 (2020-09-19 11:22:44 -0700)
-> >
-> > are available in the Git repository at:
-> >
-> >   git://git.openembedded.org/meta-openembedded dunfell-next
-> >   http://cgit.openembedded.org/meta-openembedded/log/?h=3Ddunfell-next
-> >
-> > Andreas M=C3=BCller (1):
-> >   gnome-settings-daemon: Remove wrong RDEPEND
-> >
-> > Hongxu Jia (1):
-> >   python3-pykwalify: fix missing comma
-> >
-> > Khem Raj (1):
-> >   ssmtp: Use update alternatives for conflicts with esmtp
-> >
-> > Martin Jansa (2):
-> >   netkit-rsh: inherit update-alternatives
-> >   ssmtp: adjust u-a
-> >
-> > Mingli Yu (2):
-> >   smartmontools: Remove obsolete setting regarding the Standard Output
-> >   strongswan: Remove obsolete setting regarding the Standard Output
-> >
-> > Pierre-Jean Texier (1):
-> >   haveged: upgrade 1.9.9 -> 1.9.13
-> >
-> > Robert Yang (1):
-> >   crda: rdepends on wireless-regdb-static
-> >
-> >  .../gnome-settings-daemon_3.34.2.bb           |  2 --
-> >  .../recipes-connectivity/crda/crda_3.18.bb    |  2 +-
-> >  .../netkit-rsh/netkit-rsh_0.17.bb             |  2 +-
-> >  .../recipes-support/ssmtp/ssmtp_2.64.bb       |  9 ++++-
-> >  ...setting-regarding-the-Standard-Outpu.patch | 34 ++++++++++++++++++=
-+
-> >  .../strongswan/strongswan_5.8.4.bb            |  1 +
-> >  .../{haveged_1.9.9.bb =3D> haveged_1.9.13.bb}   |  2 +-
-> >  .../smartmontools/files/smartd.service        |  1 -
-> >  .../0001-rule.py-fix-missing-comma.patch      | 34 ++++++++++++++++++=
-+
-> >  .../python/python3-pykwalify_1.7.0.bb         |  2 ++
-> >  10 files changed, 82 insertions(+), 7 deletions(-)
-> >  create mode 100644 meta-networking/recipes-support/strongswan/files/0=
-001-Remove-obsolete-setting-regarding-the-Standard-Outpu.patch
-> >  rename meta-oe/recipes-extended/haveged/{haveged_1.9.9.bb =3D> havege=
-d_1.9.13.bb} (97%)
-> >  create mode 100644 meta-python/recipes-devtools/python/python3-pykwal=
-ify/0001-rule.py-fix-missing-comma.patch
-> >
-> >
-> >=20
-> >
+> From: Mingli Yu <mingli.yu@windriver.com>
+>
+> Fixes for the following security vulnerabilities:
+> - CVE-2020-15180
+>
+> Rebase one patch and remove one backported patch
+>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>   ...ive_10.5.4.bb => mariadb-native_10.5.6.bb} |  0
+>   meta-oe/recipes-dbs/mysql/mariadb.inc         |  3 +-
+>   .../mariadb/0001-Fix-library-LZ4-lookup.patch |  4 +-
+>   ...DB-undefined-reference-to-crc32c_arm.patch | 48 -------------------
+>   .../{mariadb_10.5.4.bb => mariadb_10.5.6.bb}  |  0
+>   5 files changed, 3 insertions(+), 52 deletions(-)
+>   rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.5.4.bb =>
+> mariadb-native_10.5.6.bb} (100%)
+>   delete mode 100644
+> meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch
+>   rename meta-oe/recipes-dbs/mysql/{mariadb_10.5.4.bb =>
+> mariadb_10.5.6.bb} (100%)
+>
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.4.bb
+> b/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.6.bb
+> similarity index 100%
+> rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.5.4.bb
+> rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.5.6.bb
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc
+> b/meta-oe/recipes-dbs/mysql/mariadb.inc
+> index 46a64006d..7c92bbaad 100644
+> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
+> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+> @@ -19,9 +19,8 @@ SRC_URI =
+> "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
+>              file://clang_version_header_conflict.patch \
+>              file://fix-arm-atomic.patch \
+>              file://0001-Fix-library-LZ4-lookup.patch \
+> -
+> file://0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch \
+>             "
+> -SRC_URI[sha256sum] =
+> "26db2becc9cec37e99a4e73390bd2eaa74568e21f9cf110359f4f68b37154c72"
+> +SRC_URI[sha256sum] =
+> "ff05dd69e9f6992caf1053242db704f04eda6f9accbcc98b74edfaf6013c45c4"
+>    UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
+>   diff --git
+> a/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-library-LZ4-lookup.patch
+> b/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-library-LZ4-lookup.patch
+> index 574dfd317..0cf0560e1 100644
+> --- a/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-library-LZ4-lookup.patch
+> +++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-library-LZ4-lookup.patch
+> @@ -14,12 +14,12 @@ index e97dd63e2b0..2f4694e727c 100644
+>   +++ b/cmake/FindLZ4.cmake
+>   @@ -1,5 +1,10 @@
+>   -find_path(LZ4_INCLUDE_DIR NAMES lz4.h)
+> --find_library(LZ4_LIBRARY NAMES lz4)
+> +-find_library(LZ4_LIBRARIES NAMES lz4)
+>   +find_path(LZ4_INCLUDE_DIR
+>   +  NAMES      lz4.h
+>   +  NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
+>   +
+> -+find_library(LZ4_LIBRARY
+> ++find_library(LZ4_LIBRARIES
+>   +  NAMES lz4
+>   +  NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
+>    diff --git
+> a/meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch
+> b/meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch
+> deleted file mode 100644
+> index 1856c1af7..000000000
+> ---
+> a/meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-23137-RocksDB-undefined-reference-to-crc32c_arm.patch
+> +++ /dev/null
+> @@ -1,48 +0,0 @@
+> -From d88ea260882ca414e940cd6af225617f00503f71 Mon Sep 17 00:00:00 2001
+> -From: Krunal Bauskar <krunalbauskar@gmail.com>
+> -Date: Mon, 27 Jul 2020 18:38:10 +0800
+> -Subject: [PATCH] MDEV-23137: RocksDB: undefined reference to crc32c_arm64
+> -
+> -RocksDB fails to build on arm64: undefined reference to
+> -            `crc32c_arm64(unsigned int, unsigned char const*, unsigned
+> int)'
+> -
+> -MariaDB uses storage/rocksdb/build_rocksdb.cmake to compile RocksDB.
+> -Said cmake missed adding crc32c_arm64 compilation target so if
+> -machine native architecture supported crc32 then complier would enable
+> -usage of function defined in crc32c_arm64 causing the listed error.
+> -
+> -Added crc32c_arm64 complition target.
+> -
+> -closes #1642
+> -
+> -Upstream-Status: Backport
+> -
+> -Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ----
+> - storage/rocksdb/build_rocksdb.cmake | 10 ++++++++++
+> - 1 file changed, 10 insertions(+)
+> -
+> -diff --git a/storage/rocksdb/build_rocksdb.cmake
+> b/storage/rocksdb/build_rocksdb.cmake
+> -index 3f3dca7e990..7d2252c5f77 100644
+> ---- a/storage/rocksdb/build_rocksdb.cmake
+> -+++ b/storage/rocksdb/build_rocksdb.cmake
+> -@@ -442,6 +442,16 @@ else()
+> -       util/crc32c_ppc.c
+> -       util/crc32c_ppc_asm.S)
+> -   endif(CMAKE_SYSTEM_PROCESSOR MATCHES "ppc64")
+> -+  # aarch
+> -+  if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|AARCH64")
+> -+    CHECK_CXX_COMPILER_FLAG("-march=armv8-a+crc+crypto" HAS_ARMV8_CRC)
+> -+    if(HAS_ARMV8_CRC)
+> -+      message(STATUS " HAS_ARMV8_CRC yes")
+> -+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}
+> -march=armv8-a+crc+crypto -Wno-unused-function")
+> -+      list(APPEND ROCKSDB_SOURCES
+> -+        util/crc32c_arm64.cc)
+> -+    endif(HAS_ARMV8_CRC)
+> -+  endif(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|AARCH64")
+> - endif()
+> - SET(SOURCES)
+> - FOREACH(s ${ROCKSDB_SOURCES})
+> --- -2.17.1
+> -
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.5.4.bb
+> b/meta-oe/recipes-dbs/mysql/mariadb_10.5.6.bb
+> similarity index 100%
+> rename from meta-oe/recipes-dbs/mysql/mariadb_10.5.4.bb
+> rename to meta-oe/recipes-dbs/mysql/mariadb_10.5.6.bb
+> --
+> 2.17.1
+>
+>
+> 
 >
