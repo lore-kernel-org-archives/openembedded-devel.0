@@ -1,88 +1,65 @@
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com [209.85.215.195])
- by mx.groups.io with SMTP id smtpd.web12.7135.1602663563626273514
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com [209.85.215.193])
+ by mx.groups.io with SMTP id smtpd.web12.7590.1602665554310432295
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Oct 2020 01:19:23 -0700
+ Wed, 14 Oct 2020 01:52:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Yy9do0/b;
- spf=pass (domain: gmail.com, ip: 209.85.215.195, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-pg1-f195.google.com with SMTP id n9so1485843pgt.8
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2020 01:19:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=rPSkn9WX;
+ spf=pass (domain: gmail.com, ip: 209.85.215.193, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pg1-f193.google.com with SMTP id g29so1550182pgl.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Oct 2020 01:52:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=Y0VWCX6AyKp5Q9cMXE477ZZcROFpBc7EfJ8Nigpns0o=;
-        b=Yy9do0/bXzDwd8gYzYnmMCiDUS5mDjxu4ohvuUWgnQL94oo4p9D2c1aJAZDa3HFZ5F
-         u1jOXPK2Nvyv7ZCrRSlrTcS6MSIOxVmExcHbCtol4u0G/2tv/ezR1ZYynoKX2rceADMt
-         BDYbfcAuUD4ivdmn+EL7uACKnvQSujZp1llyJoTtGzMcK5q3xu+mgsKsmy35GwEZgehr
-         qRiu2A3uEyhNTUVby5Pjyksfb3rQXMi5FtG5LE87j6+0/25jZCedXX6KqO1Q+NscPqW6
-         TRHZZhjxQBFmNgSP0xJRybJ2hOXcjceExTSSho4k2kTLwRQ+vNwhwC/dvcdo4pfnFanh
-         3tzg==
+         :cc;
+        bh=Uj/OzIvXJpMnpIBzb8usZ9Zp037kxpjg7D3rUtT5AFo=;
+        b=rPSkn9WX6CrotkOIABY4i7qfT2koRAs5TqdmsjrqiaXDHu4OSAkJN64APES3h9N5Ie
+         Pkwm8YagMP8yYG1C9jlI2Xdupgb3PjW/pSoGE/XNrGAZLUdhOWX5JckcdiMNz8n3frn1
+         JnThFGqgq3uIjiaI15gSlkD00JxgDnDkaspVkndpNjIIRBA4lcwRBBNYq31ehaIsaFa6
+         4WODwZRz2oe+3qv0jqXcd7OOFcl0STw6T0xBSAkIeFmNg/C4dpgdaXGp7c6JyCq5vsic
+         /F6leRyXST9daz/53DYKPG9quIP88OQzBGfg/GJd5zZp5rzZIsiIj1JEGWeK2WHAYJWZ
+         HU/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=Y0VWCX6AyKp5Q9cMXE477ZZcROFpBc7EfJ8Nigpns0o=;
-        b=cYi0sMn+sMF8rvoPLrNmZTEGjTjxRdxTvRoR4+W7xQNySDvOOge8kEp9JoWEzPhthD
-         ZX/E/Nz86VrHt5GF4LNbJAXDoO7P3phggBnAXMbJCR3ehiX+K6m7qqljHqZVaIIOWrJw
-         tdWkFN5MOyrdF7w9AIMDCtbOIiDMqkowOZ6g1NUtHWTwtWC7Z3rRpkqmn7lM2D55s8HH
-         hTqzD2M6GKKqxYmniuL5ogAoclXKJf61MuPEUk6yWKVB7ikmabjBJIGWORmsj6OJz46K
-         VFMUqjfAJDau3bqfIrtX5Ed9//L7X4P8BZwsYorUiN8xrOZe3ZeoomxLzecEQlIUf2UF
-         eo8Q==
-X-Gm-Message-State: AOAM530pnXmPbZnva8Fbh3IR+OfSVqnn+9+G8Qr2gVjcKgrRASfN57tM
-	dYGSfZiFnWuERPe/WAOrxZzKmb5Vu/UuhMLkO58=
-X-Google-Smtp-Source: ABdhPJyBdtFlS1rT1saZKSiKjNvSdJwGORxCebKyPTs6gXMlwrBKDGzfea/E0UfWq7oFCwTC2baJOJ6UiTxYUTkgLwE=
-X-Received: by 2002:aa7:9492:0:b029:152:545f:90d with SMTP id
- z18-20020aa794920000b0290152545f090dmr3269968pfk.9.1602663563012; Wed, 14 Oct
- 2020 01:19:23 -0700 (PDT)
+         :message-id:subject:to:cc;
+        bh=Uj/OzIvXJpMnpIBzb8usZ9Zp037kxpjg7D3rUtT5AFo=;
+        b=fIsu1G1U8UGF6nCrrmNbFSDI+cY5uAZTCnEvgQkIaYGq+SxdSaFQYVOYE0Z6yht9XR
+         qcOTWgdB2Qv+0Mpy2kwo2PvQejUfBxBpbVuZDzViDtvvNJNDVzh9aoOwVhRHbk6oLZQ7
+         M7id0ew2dM6upUk4FgS7zGPC/hvniKFu62oD4r7TJezHU6cymlvxCs9nb6NL/kZ4PFyJ
+         SvIFLc8R8jkLfC4eJ+ZByDMS6KAqWIDeJAeHueteULOVihHkTuGjMO5gpWqbdc27O+go
+         qsPbDB6ALrfbriR0V15Xluhiqbs4KivmomcLjBj6/8F10akshCiPI0+JovUI8t115KFK
+         ag5A==
+X-Gm-Message-State: AOAM532n8eCNWK1yobkjIVdVWgjnpUQ7HMCmGYbB0V55XaIawm7PR9LP
+	UryIMr6qx4n2/LIc76gWQug7WnBmYgX6CYZNHvc=
+X-Google-Smtp-Source: ABdhPJy5DAmUTx1c6Pj9LHMv6E11KU5Xcy04D3luobX6jk0zkfDF1YivRV8HR1/d8Tlqk1+wF4cgig7+rW0j+yDC/8M=
+X-Received: by 2002:a63:4f17:: with SMTP id d23mr2983939pgb.319.1602665553771;
+ Wed, 14 Oct 2020 01:52:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20201014010617.1086948-1-schnitzeltony@gmail.com>
- <20201014010617.1086948-4-schnitzeltony@gmail.com> <CAMKF1spCYTg55rSRn39s1q230z86KQu9cvMpP5EpPxQ_OY4qqQ@mail.gmail.com>
-In-Reply-To: <CAMKF1spCYTg55rSRn39s1q230z86KQu9cvMpP5EpPxQ_OY4qqQ@mail.gmail.com>
+ <20201014010617.1086948-3-schnitzeltony@gmail.com> <CAMKF1sr5XQrxteG2Qg3dmgZ=EuVeRixnT-yp6thHFYreohL4SA@mail.gmail.com>
+In-Reply-To: <CAMKF1sr5XQrxteG2Qg3dmgZ=EuVeRixnT-yp6thHFYreohL4SA@mail.gmail.com>
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-Date: Wed, 14 Oct 2020 10:19:10 +0200
-Message-ID: <CALbNGRTPfbD+PPfr4UwgTQNe=CDp5sKkb9nJBm6DP4KjGVjDiQ@mail.gmail.com>
-Subject: Re: [oe] [PATCH 4/8] wxwidgets: Add what's necessary so that consumers of wxwidgets_git can find it
+Date: Wed, 14 Oct 2020 10:52:21 +0200
+Message-ID: <CALbNGRQ_KfvVcWYO-VXO40PEb-vsd4PKSUktWXyAeLTAtCQm7Q@mail.gmail.com>
+Subject: Re: [oe] [PATCH 3/8] wxwidgets: add opengl PACKAGECONFIG / enable it if opengl is in DISTRO_FEATURES
 To: Khem Raj <raj.khem@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 14, 2020 at 7:48 AM Khem Raj <raj.khem@gmail.com> wrote:
+On Wed, Oct 14, 2020 at 7:50 AM Khem Raj <raj.khem@gmail.com> wrote:
+> > -PACKAGECONFIG ?= "gtk"
+> > +PACKAGECONFIG ?= "gtk ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
 >
-> On Tue, Oct 13, 2020 at 6:06 PM Andreas M=C3=BCller <schnitzeltony@gmail.=
-com> wrote:
-> >
-> > When I created wxwidgets recipe I had no test case for consumers of wxw=
-idgets.
-> > This changed now and it showed that wxwidgets is building fine but is
-> > completely useless: It is a collection of libraries that are impossible=
- to
-> > find for other recipes.
-> >
-> > To get rid wxwidgets now inherits binconfig: wxwidgets creates wx-confi=
-g that
-> > at least cmake relies upon. wx-config content had to be adjusted:
-> >
-> > * As is it is a symlink to a useless file: Make it a file with usable c=
-ontents
-> > * To let wx-config report correct libraries a patch was added disabling=
- cross
-> >   magic not working here.
-> > * Set full sysroot paths for includedir/libdir/bindir so that sstate ca=
-n adjust
-> >   them when creating recipe-sysroot for recipes depending on wxwidgets
-> >
->
-> is wx-config wrapping pkg-config? if so then perhaps it would be
-> better to make pkgconfig work here instead
+> libglu also needs X11, so checking for opengl won't be enough
+It's not that simple:
 
-Thought about creating a pkg-config either but:
-* wx-config is a tailored script that reports way more than just standard f=
-lags
-* cmake ships a module (and projects ship copies of this on their own)
-that does magic stuff with wx-config.
+* wxwidgets has three PACKAGECONFIGs for the backend: no_gui/gtk/qt
+and users should (there is a note in the recipe) select exactly one of
+them.
+* For qt and gtk x11 is added to REQUIRED_DISTRO_FEATURES
+* PACKAGECONFIG no_gui (the only non x11) is marked as conflicting with opengl
 
-Going that way is a minefield
+=> To select opengl successfully, x11 must be in DISTRO_FEATURES. Hope
+that's good enough
 
 Andreas
