@@ -1,63 +1,59 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.7041.1602746535288025691
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web11.7124.1602746923130114102
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Oct 2020 00:22:15 -0700
+ Thu, 15 Oct 2020 00:28:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=40534 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kSxaV-0005mO-DB; Thu, 15 Oct 2020 10:22:12 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-iniconfig: Upgrade 1.0.1 -> 1.1.1
-Date: Thu, 15 Oct 2020 10:22:01 +0300
-Message-Id: <20201015072201.13634-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201015072201.13634-1-leon.anavi@konsulko.com>
-References: <20201015072201.13634-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.77,378,1596470400"; 
+   d="scan'208";a="100184719"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 15 Oct 2020 15:28:35 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 20C4948990F9
+	for <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2020 15:28:32 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Thu, 15 Oct 2020 15:28:32 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-oe] [PATCH] poppler: upgrade 20.09.0 -> 20.10.0
+Date: Thu, 15 Oct 2020 15:28:30 +0800
+Message-ID: <1602746910-13496-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: 20C4948990F9.A1409
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-Upgrade to release 1.1.1:
-
-- typing stubs
-- ci fixes
-- fix version determination
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../{python3-iniconfig_1.0.1.bb => python3-iniconfig_1.1.1.bb} | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-iniconfig_1.0.1.bb => python3-iniconfig_1.1.1.bb} (54%)
+ .../poppler/{poppler_20.09.0.bb => poppler_20.10.0.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/poppler/{poppler_20.09.0.bb => poppler_20.10.0.bb} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-iniconfig_1.0.1.bb b/meta-python/recipes-devtools/python/python3-iniconfig_1.1.1.bb
-similarity index 54%
-rename from meta-python/recipes-devtools/python/python3-iniconfig_1.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-iniconfig_1.1.1.bb
-index 9ed0e033b7..af4291bbf4 100644
---- a/meta-python/recipes-devtools/python/python3-iniconfig_1.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-iniconfig_1.1.1.bb
-@@ -3,6 +3,7 @@ SUMMARY = "A small and simple INI-file parser module"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a6bb0320b04a0a503f12f69fea479de9"
+diff --git a/meta-oe/recipes-support/poppler/poppler_20.09.0.bb b/meta-oe/recipes-support/poppler/poppler_20.10.0.bb
+similarity index 96%
+rename from meta-oe/recipes-support/poppler/poppler_20.09.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_20.10.0.bb
+index ceff2d0d65..0f04b88f2d 100644
+--- a/meta-oe/recipes-support/poppler/poppler_20.09.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_20.10.0.bb
+@@ -7,7 +7,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://basename-include.patch \
+            "
+-SRC_URI[sha256sum] = "4ed6eb5ddc4c37f2435c9d78ff9c7c4036455aea3507d1ce8400070aab745363"
++SRC_URI[sha256sum] = "434ecbbb539c1a75955030a1c9b24c7b58200b7f68d2e4269e29acf2f8f13336"
  
--SRC_URI[sha256sum] = "e5f92f89355a67de0595932a6c6c02ab4afddc6fcdc0bfc5becd0d60884d3f69"
-+SRC_URI[md5sum] = "0b7f3be87481211c183eae095bcea6f1"
-+SRC_URI[sha256sum] = "bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
  
- inherit pypi setuptools3
 -- 
-2.17.1
+2.25.1
+
+
 
