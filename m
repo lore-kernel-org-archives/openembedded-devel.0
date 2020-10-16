@@ -1,17 +1,17 @@
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com (NAM02-SN1-obe.outbound.protection.outlook.com [40.107.77.75])
- by mx.groups.io with SMTP id smtpd.web10.21311.1602868640985295676
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.53])
+ by mx.groups.io with SMTP id smtpd.web11.21284.1602868664190650611
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Oct 2020 10:17:21 -0700
+ Fri, 16 Oct 2020 10:17:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=hRVqH6x2;
- spf=pass (domain: windriver.com, ip: 40.107.77.75, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Xu3bVSyv;
+ spf=pass (domain: windriver.com, ip: 40.107.94.53, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mPD5RzOsOie4q2fv3TXb8B09gwtiWPBo2GVf/pVeVmeSEVFtSxCuHe5aCBTtqRkuNkq+JHMLQFqzP5NYCQcyOz3rO7X7dTkO4TeNOIUe6EbyrR9Oj1kyYylzAnLFCFHiDFS9oCy0jGlrOEIPA46oJ21m6Yf++MqS3R/IAsXK1Dn2n7VcQ2kD9dvYUHh4ZsZ22jwc37WUfNXIkd1vS8cziuyGZAd4CcQrWcTajee0VbZrN1M97TKtgJWZ29BD7pJzVmvbAjcLPYA5wwo/U5pHGGMVJr6u4g1ifhgWfJFQk5+dzKgCgBWkktFuh4HhkjrrdJF2X9Uj+fAi2coaRni0dQ==
+ b=QG9zMX8+/uU0caccR/soHbgl3eY2MYaSYjxNm88hHAm6LDtFHBuxqgfuJdurv7keMMZS3mUMHXUJgxa1X19HwFB5anFjB8tH2PGZvnqYPn0QIdpjfKyXOWqDpEbqjWYDS+T0J4OMr/Z0HP47LnYT0ZmLX42Bt2tPwk8nzP72CPyE20BLKKA9R89IYL7+59LzTvOkN4MASjAgs8kpdVRw5HklH2zJYyfAjEtaraq/arRn8plTXEHBx9XcULdS9MAbDiWO7535EBH2WY6YIdZGgZjWKBNJnHBF3C7lF3pI/XReoO9NYxd7Wv2W3pHdywUn9yG3cPJ0gALOFm8kNTntOQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3+itRV1P0QkFvom0f2W32Jz/b+7LPok0/Jah4zRUdYk=;
- b=QP62KqEuJofjgYiCE+7eJufkasr2G1o/GGjwy6JakkuAN2zaJV51yKx0DpaxK6ubRduq9I/mRyehR+kTx6Yi8KQO1H5KFcJ5OYXwTtP5zdIn+BiiZ1IVcSse27NHLQPRbsKEEqqYLJxgAeI6I0WedRGkChnCvA5c2I6okab7FgVg3lGj4oCfE/Tg6NnSYS3Wr0YqSvVSUJVeUDvyRsXuG6EaUCsORKIctNNY9DeCbuTsHu3bvmIOdhTD94nWee08uGYS3s8jIKqkZuht3p2oH+rgsVZ/ChrU9gp2Khq/VpfRihXuF1tFIhdeFky0FSiWM5OWw/gsYmpKJ82niv8onA==
+ bh=b+DV9Cxyha1wEmTr18yTKLKR/ha2IANgt80kpmb884s=;
+ b=hzoOGpm/Cv44GxuFqtJetmDKDJpYmEIYX5jSmxM1iqr50lUplF3aInNJSeOqMf9TrXJWXsQpxaxgUGiinDoMUyigeOlkky6+08/pILE/uskBJR5KvCJ1rXlnJ07HHC8kttaWaurAS9Oj5h7e6MXZQUkPrLzJM03u7I0whgUTP0YD20rvuIT6Z5yuFHllUkPT6snUebXws79fhx90oDKYE2B6EEWvXg0VB7b5dCsrn4kc7On3MYPxoWtHsS6AXDZhAN85u0TSlZFCGhvOHIOSwit45jLGvNjdTJ11uL4RmNtI1RhutkhWp7xtE28DVm0RL+P7uAARD+DvdjVjun3RGA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,120 +19,240 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3+itRV1P0QkFvom0f2W32Jz/b+7LPok0/Jah4zRUdYk=;
- b=hRVqH6x2fbYsjJzuFNDZpKr8kQxmCZ2cyB6bvP6fG8Y8S+F632q4pg7uRvrcqPleEBOvf/5xy5JlKZ5pZBuuKne6XzNUtKtybuRxN4dVVV69/k7NGf6oVieeaqcW1lNFPs6uiPkgFf7v0TzcrdEt66vLWgxcVvYCi+ZpbQDpbA4=
+ bh=b+DV9Cxyha1wEmTr18yTKLKR/ha2IANgt80kpmb884s=;
+ b=Xu3bVSyvxlukV9ogDcb1FChlZzAKMebMIlHOCZu4+5uhMqISzqRBT1P9maMRWIzg10Wv02GqcuroEz5G1ZBUUMZeVbhkp9dAvuJfjm2ZmUgandMZ/5tx8xEM4tCkpvu8M6sEh2Hr56wwi1Li0PUDgsKi0CebC4PiuGpJ+Ij/rcg=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BY5PR11MB4241.namprd11.prod.outlook.com (2603:10b6:a03:1ca::13) with
+ by BY5PR11MB4226.namprd11.prod.outlook.com (2603:10b6:a03:1bf::12) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.25; Fri, 16 Oct
- 2020 17:17:19 +0000
+ 2020 17:17:42 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::7875:99b3:15ae:5df2]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::7875:99b3:15ae:5df2%7]) with mapi id 15.20.3477.025; Fri, 16 Oct 2020
- 17:17:19 +0000
-Subject: Re: [oe] [meta-python][PATCH 7/7] python3-yarl: Upgrade 1.6.0 -> 1.6.2
+ 17:17:42 +0000
+Subject: Re: [oe] [meta-python][PATCH 1/3] python3-sqlparse: Upgrade 0.3.1 -> 0.4.1
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
-References: <20201013085914.31580-1-leon.anavi@konsulko.com>
- <20201013085914.31580-7-leon.anavi@konsulko.com>
+References: <20201013114654.5610-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <cd12cd11-1e34-4fa1-cb6a-7fa5b76b0938@windriver.com>
-Date: Fri, 16 Oct 2020 13:17:17 -0400
+Message-ID: <8eae0aef-4f2e-6ee9-5af4-db4673ace011@windriver.com>
+Date: Fri, 16 Oct 2020 13:17:39 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
-In-Reply-To: <20201013085914.31580-7-leon.anavi@konsulko.com>
+In-Reply-To: <20201013114654.5610-1-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BY5PR17CA0051.namprd17.prod.outlook.com
- (2603:10b6:a03:167::28) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BY5PR17CA0061.namprd17.prod.outlook.com
+ (2603:10b6:a03:167::38) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BY5PR17CA0051.namprd17.prod.outlook.com (2603:10b6:a03:167::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.21 via Frontend Transport; Fri, 16 Oct 2020 17:17:19 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BY5PR17CA0061.namprd17.prod.outlook.com (2603:10b6:a03:167::38) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.23 via Frontend Transport; Fri, 16 Oct 2020 17:17:41 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 24fbedeb-385a-49d9-1c65-08d871f7567e
-X-MS-TrafficTypeDiagnostic: BY5PR11MB4241:
+X-MS-Office365-Filtering-Correlation-Id: 1a1d3a95-eca3-4a22-cca6-08d871f763b8
+X-MS-TrafficTypeDiagnostic: BY5PR11MB4226:
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB4241FC144FCB0E8A9033FE9E9F030@BY5PR11MB4241.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:4714;
+	<BY5PR11MB4226AD49010889798236AE9B9F030@BY5PR11MB4226.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:5516;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	0P6Bf1N4V1ZZYYDipRhibUBrmB60dV4//mZPRwKuOuDwAoJzy/2to/9bssYvxZkB/g4apVSIJKduBeLF7vDSMNibD271jTG9JjAMT4NoTwwrdl2DZ8RwEx7VNiErbhAlp9bVrfFmo5S6cj761NyyeQ9VarMxSxX7YGrZsmugfUo4vO4z3PX7tkY2blrbg3i1TLXkhp7o5emRuo8BCz0MKJaXxVJLtS8AyLuPxZBJDjycmG3Zi2dW4MMZr+9wEZqX8j4YEA1yUZ5SpdIoWlZsEYha9ump1y6G1X0LpdRI8qyHrZ73e3g2KoVw7sNCRdEEiJlyi5xYm4J2gzJwwh8r1qmiVWymDxQdXQ029z/uXPTBVRZ3nPivx/Gh/2RUK3bj9bXJviTURWfXe+lEgaQf9bsQUthMqBgO0RXc9hYriHcI5PNOkA7fWx29wQRCJQpITZx3xw8P0jYwKwrl+bYe0riM3Oe+UrvNbaUzG5QyGnrSffBTt4lZccVtvRC2KH55
+	IKUs7/hP+RA06EYpoVeY/xjGXLC7RIuoB8JTrJdgMx0K7tV4ATojFriM6zzWhdZVDk0dy2xb9/py1xnCefo86zVn4KTT5KXtnU2W4y4C7C7E4CYu24Kc3EsQ5+pkrclR0ehWFtTtHnQQBkgvDVztVVtsAB3FLmFRVHXvvWjULtFFwe8dwWjmFNtFzu92TWO5PI3k9K2VT8TFFQ/rUyuS2blmv+avyTRYB00ppt3zbSJpRHeegww/4pczbN2+wisne8MN6z/wTmC6R8k2L+iNngltgWJVy02iuz5+pN01zlnPMZWP7gj8KGUHMRoNCq7Q1LNAsKoP/c0t9nLaBcQf1kpd+B+ITYvHIP/C9qmBFBVB3OJ/Gccv1bu86msX1uEAhyF7Sk0FR4xq4eofKsslBtbdXBI66aUI5rU8+mOKOQBiBXjPoEu/1F7YgOvxJLqg6/y/B+x1i+CWa/elpWgiDZGcWPVr0bjwS9IPqbjDNdo=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(346002)(136003)(366004)(376002)(396003)(83380400001)(16526019)(44832011)(166002)(2906002)(478600001)(966005)(26005)(86362001)(6486002)(2616005)(956004)(186003)(53546011)(34490700002)(66476007)(66556008)(66946007)(316002)(31686004)(52116002)(5660300002)(33964004)(31696002)(16576012)(8936002)(8676002)(36756003)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(136003)(396003)(366004)(346002)(39850400004)(16576012)(66946007)(86362001)(31686004)(478600001)(2906002)(44832011)(966005)(66476007)(33964004)(6486002)(316002)(31696002)(66556008)(34490700002)(83380400001)(166002)(36756003)(16526019)(2616005)(956004)(5660300002)(30864003)(52116002)(8676002)(8936002)(26005)(53546011)(186003)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	FfSZfBm+se9tcp23RoxZ8nczn2bRmSRXqPOtcVVNaXsw9SIfoPNYjJp4FMwuxnzBG1bvg0kWgB0dflr0P/2OV9jGZbIyNOQaZoTH2WuFtc5kOI21ewZNGMoSg6A4o8EEWOBPi7kOmYq0cxuDOYiaTq1mcakZKwBtGq2BMdA9XYKag+655WGVNzpdAcmGNiRxtqqgnpPrci1PDYI1bA/l4Uilgl0VVNCrHeI/HXaZuIbqaOg/8Mdt8agx/DKaPY/3e4vRENXkKgSlEfVza1mKHnQCBO0889/PlRyg7DUIcr7+FJsE2kyWNmb+SAOyVyTZ5QyAIvthgndTRbsavKBGYHjbPjQr/uOBxS/GytLC4vDG1+M0vU5P8v65W9Wb9e7zOCLjCG/QbfD82ea6C+Aj6Q1H182tyIcPxoaTVscJXV5OrOoSKGvYAYuhcnrtPxi5WTx94+p8rteEwujYJhrO6DbdxYAElOTbqMZCa9AobufNgiulb55Icd3mPJ8GconJu2veX/q6JrVL9yVN/mJJ7xDpp1/nYjw51tjCJt/4/2N1D27e5s/CMY2UE9rjhBs/tsVeD86res2WJlZ/TENviX62of/vDnQvFpeQJ6jzHyv36mCSf/aRuXaL6ffBPd2gAfP+EeV8y9RnXvAwuLVsrQ==
+	hYIQ9PbiBAwNTHE++meG23zO1/L1GWU2af2idP+H8JnIh63wWzLdrGXtBOUmXLDRVOnfFj/F5fl4mXVW5WeVvrniIFTj3ORqO/FyR1CVRnECbW8NVEdf6GDvvKJE79tuN1AdOhq3JIeBwIN/+tEYoLIKBWMCWC3f3eGwODP0nND16IIvld/yCkWpIKCH1obrluXbRjLxIKeTGNYHF6cRH6shUdWrpizbr75xh1sfL8/XzOM3NggexOjuw7HB2iJdS7pPIyU7RwwZF+0KrsOylNMxIhmyOEF/5VLTjUeZVRIKSrsvSrOAmanudXMWvluGHWJ6mhL+4Ly3YbTWMIeoVPnESFqCXQmhIZNjLaf93aCAVc9yDQbMvXkzGtIlBQ6uN5sP/LBTXtRCnvSVFyJPrlh9gFSq2U1OEzq1vpSvuSVLwtyhcSu3/4RJ6sTwwK0siD7t754ktPYE0L/hUTt/aic+l13xzHwpJTzwBlclz257t5MzRS5ohskBVaIhaPE9o4CfsH+xH2bpyfnY25BcBnyhPVuKf2/N4HXt0Lx9lp6S8SJdgqNRLoNUZePCTVKhwSe6KZ6tWopTYZ4Kpi7KDPF7K0laSSgahK7qzYy0cDc/mJ1opvqnuG2TgOM1u81RxXqPqRdXK+hYzRwK1ghh9Q==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 24fbedeb-385a-49d9-1c65-08d871f7567e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1a1d3a95-eca3-4a22-cca6-08d871f763b8
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2020 17:17:19.6780
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2020 17:17:42.0239
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: IwOcIwCDdkrSMIIh6ri7oK7P4WG4kJbOMOywKSMPBxSQUrq7JffVIbxf7RUu20OTk4MmhNOwRQcD9eaPYxcjIEPP8wHzGuCQ5mf/Oa2UeuQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4241
+X-MS-Exchange-CrossTenant-UserPrincipalName: qTIfiCw33BDMTENZDRjrg+HIswljSlmHy7YiKZh2IpV9B+kY0ryFUngY3MGVjqgnPaJN4c8zOTThnYXsOyHA4WvKEoFZ9FNVFkB0nbgi+II=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4226
 Content-Type: multipart/alternative;
- boundary="------------C7996EB8FFE81AE0E9A6C9F5"
+ boundary="------------553F15D5FC3C674A8E0EEC60"
 Content-Language: en-US
 
---------------C7996EB8FFE81AE0E9A6C9F5
+--------------553F15D5FC3C674A8E0EEC60
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 10/13/20 4:59 AM, Leon Anavi wrote:
-> - Provide generated .c files in TarBall distribution.
-> - Provide wheels for aarch64, i686, ppc64le, s390x architectures
->    on Linux as well as x86_64.
-> - Provide wheels for Python 3.9.
-> - human_repr() now always produces valid representation equivalent
->    to the original URL (if the original URL is valid).
-> - Fixed requoting a single percent followed by a percent-encoded
->    character in the Cython implementation.
-> - Fix ValueError when decoding % which is not followed by two
->    hexadecimal digits.
-> - Fix decoding % followed by a space and hexadecimal digit.
-> - Fix annotation of with_query()/update_query() methods for
->    key=[val1, val2] case.
-> - Drop Python 3.5 support; Python 3.6 is the minimal supported
->    Python version.
+On 10/13/20 7:46 AM, Leon Anavi wrote:
+> - Just removed a debug print statement
+> - Remove support for end-of-life Python 2.7 and 3.4. Python 3.5+
+>    is now required.
+> - Remaining strings that only consist of whitespaces are not
+>    treated as statements anymore. Code that ignored the last
+>    element from sqlparse.split() should be updated accordingly
+>    since that function now doesn't return an empty string as the
+>    last element in some cases.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-yarl_1.6.0.bb => python3-yarl_1.6.2.bb}   | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-yarl_1.6.0.bb => python3-yarl_1.6.2.bb} (79%)
+>   ...1-sqlparse-change-shebang-to-python3.patch | 90 +++++++++++++++----
+>   ...rse_0.3.1.bb => python3-sqlparse_0.4.1.bb} |  4 +-
+>   2 files changed, 77 insertions(+), 17 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-sqlparse_0.3.1.bb => python3-sqlparse_0.4.1.bb} (81%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.6.0.bb b/meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
-> similarity index 79%
-> rename from meta-python/recipes-devtools/python/python3-yarl_1.6.0.bb
-> rename to meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
-> index 543acc51ba..dbb5d23bd2 100644
-> --- a/meta-python/recipes-devtools/python/python3-yarl_1.6.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/aio-libs/yarl/"
->   LICENSE = "Apache-2.0"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=b334fc90d45983db318f54fd5bf6c90b"
+> diff --git a/meta-python/recipes-devtools/python/python3-sqlparse/0001-sqlparse-change-shebang-to-python3.patch b/meta-python/recipes-devtools/python/python3-sqlparse/0001-sqlparse-change-shebang-to-python3.patch
+> index ad6c50ff77..94121340d5 100644
+> --- a/meta-python/recipes-devtools/python/python3-sqlparse/0001-sqlparse-change-shebang-to-python3.patch
+> +++ b/meta-python/recipes-devtools/python/python3-sqlparse/0001-sqlparse-change-shebang-to-python3.patch
+> @@ -1,4 +1,4 @@
+> -From 10c9d3341d64d697f678a64ae707f6bda21565bb Mon Sep 17 00:00:00 2001
+> +From 7fd00ab8c1b663052d57e735b6b956d5c92fbaed Mon Sep 17 00:00:00 2001
+>   From: Changqing Li <changqing.li@windriver.com>
+>   Date: Mon, 9 Mar 2020 13:10:37 +0800
+>   Subject: [PATCH] sqlparse: change shebang to python3
+> @@ -10,42 +10,102 @@ we can only make this change after python2 is offcially
+>   dropped.
 >   
-> -SRC_URI[md5sum] = "802bb27ebdb260fbbaecbcc8168d6f28"
-> -SRC_URI[sha256sum] = "61d3ea3c175fe45f1498af868879c6ffeb989d4143ac542163c45538ba5ec21b"
-> +SRC_URI[md5sum] = "65c3346f694e37f45045f4e29a60d280"
-> +SRC_URI[sha256sum] = "c45b49b59a5724869899798e1bbd447ac486215269511d3b76b4c235a1b766b6"
+>   Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> +Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+>   ---
+> - setup.py             | 2 +-
+> - sqlparse/__main__.py | 2 +-
+> - sqlparse/cli.py      | 2 +-
+> - 3 files changed, 3 insertions(+), 3 deletions(-)
+> + 0001-sqlparse-change-shebang-to-python3.patch | 51 +++++++++++++++++++
+> + setup.py                                      |  2 +-
+> + sqlparse/__main__.py                          |  2 +-
+> + sqlparse/cli.py                               |  2 +-
+> + 4 files changed, 54 insertions(+), 3 deletions(-)
+> + create mode 100644 0001-sqlparse-change-shebang-to-python3.patch
 >   
->   SRC_URI += " \
->       file://run-ptest \
+> +diff --git a/0001-sqlparse-change-shebang-to-python3.patch b/0001-sqlparse-change-shebang-to-python3.patch
+> +new file mode 100644
+> +index 0000000..ad6c50f
+> +--- /dev/null
+> ++++ b/0001-sqlparse-change-shebang-to-python3.patch
+> +@@ -0,0 +1,51 @@
+> ++From 10c9d3341d64d697f678a64ae707f6bda21565bb Mon Sep 17 00:00:00 2001
+> ++From: Changqing Li <changqing.li@windriver.com>
+> ++Date: Mon, 9 Mar 2020 13:10:37 +0800
+> ++Subject: [PATCH] sqlparse: change shebang to python3
+> ++
+> ++Upstream-Status: Pending
+> ++
+> ++Don't send upstream since upstream still support python2,
+> ++we can only make this change after python2 is offcially
+> ++dropped.
+> ++
+> ++Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> ++---
+> ++ setup.py             | 2 +-
+> ++ sqlparse/__main__.py | 2 +-
+> ++ sqlparse/cli.py      | 2 +-
+> ++ 3 files changed, 3 insertions(+), 3 deletions(-)
+> ++
+> ++diff --git a/setup.py b/setup.py
+> ++index 345d0ce..ce3abc3 100644
+> ++--- a/setup.py
+> +++++ b/setup.py
+> ++@@ -1,4 +1,4 @@
+> ++-#!/usr/bin/env python
+> +++#!/usr/bin/env python3
+> ++ # -*- coding: utf-8 -*-
+> ++ #
+> ++ # Copyright (C) 2009-2018 the sqlparse authors and contributors
+> ++diff --git a/sqlparse/__main__.py b/sqlparse/__main__.py
+> ++index 867d75d..dd0c074 100644
+> ++--- a/sqlparse/__main__.py
+> +++++ b/sqlparse/__main__.py
+> ++@@ -1,4 +1,4 @@
+> ++-#!/usr/bin/env python
+> +++#!/usr/bin/env python3
+> ++ # -*- coding: utf-8 -*-
+> ++ #
+> ++ # Copyright (C) 2009-2018 the sqlparse authors and contributors
+> ++diff --git a/sqlparse/cli.py b/sqlparse/cli.py
+> ++index 25555a5..8bf050a 100755
+> ++--- a/sqlparse/cli.py
+> +++++ b/sqlparse/cli.py
+> ++@@ -1,4 +1,4 @@
+> ++-#!/usr/bin/env python
+> +++#!/usr/bin/env python3
+> ++ # -*- coding: utf-8 -*-
+> ++ #
+> ++ # Copyright (C) 2009-2018 the sqlparse authors and contributors
+> ++--
+> ++2.7.4
+> ++
+>   diff --git a/setup.py b/setup.py
+> -index 345d0ce..ce3abc3 100644
+> +index ede0aff..dc6a323 100644
+>   --- a/setup.py
+>   +++ b/setup.py
+>   @@ -1,4 +1,4 @@
+>   -#!/usr/bin/env python
+>   +#!/usr/bin/env python3
+> - # -*- coding: utf-8 -*-
+>    #
+> - # Copyright (C) 2009-2018 the sqlparse authors and contributors
+> + # Copyright (C) 2009-2020 the sqlparse authors and contributors
+> + # <see AUTHORS file>
+>   diff --git a/sqlparse/__main__.py b/sqlparse/__main__.py
+> -index 867d75d..dd0c074 100644
+> +index 2bf2513..6a3a115 100644
+>   --- a/sqlparse/__main__.py
+>   +++ b/sqlparse/__main__.py
+>   @@ -1,4 +1,4 @@
+>   -#!/usr/bin/env python
+>   +#!/usr/bin/env python3
+> - # -*- coding: utf-8 -*-
+>    #
+> - # Copyright (C) 2009-2018 the sqlparse authors and contributors
+> + # Copyright (C) 2009-2020 the sqlparse authors and contributors
+> + # <see AUTHORS file>
+>   diff --git a/sqlparse/cli.py b/sqlparse/cli.py
+> -index 25555a5..8bf050a 100755
+> +index 7a8aacb..9c727e8 100755
+>   --- a/sqlparse/cli.py
+>   +++ b/sqlparse/cli.py
+>   @@ -1,4 +1,4 @@
+>   -#!/usr/bin/env python
+>   +#!/usr/bin/env python3
+> - # -*- coding: utf-8 -*-
+>    #
+> - # Copyright (C) 2009-2018 the sqlparse authors and contributors
+> + # Copyright (C) 2009-2020 the sqlparse authors and contributors
+> + # <see AUTHORS file>
+>   --
+> -2.7.4
+> +2.17.1
+>   
+> diff --git a/meta-python/recipes-devtools/python/python3-sqlparse_0.3.1.bb b/meta-python/recipes-devtools/python/python3-sqlparse_0.4.1.bb
+> similarity index 81%
+> rename from meta-python/recipes-devtools/python/python3-sqlparse_0.3.1.bb
+> rename to meta-python/recipes-devtools/python/python3-sqlparse_0.4.1.bb
+> index 1aef28be03..c8a64c1095 100644
+> --- a/meta-python/recipes-devtools/python/python3-sqlparse_0.3.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-sqlparse_0.4.1.bb
+> @@ -8,8 +8,8 @@ SRC_URI += "file://0001-sqlparse-change-shebang-to-python3.patch \
+>               file://run-ptest \
+>   	    "
+>   
+> -SRC_URI[md5sum] = "423047887a3590b04dd18f8caf843a2f"
+> -SRC_URI[sha256sum] = "e162203737712307dfe78860cc56c8da8a852ab2ee33750e33aeadf38d12c548"
+> +SRC_URI[md5sum] = "eebbc6b5f1033054873033e54b0c1266"
+> +SRC_URI[sha256sum] = "0f91fd2e829c44362cbcfab3e9ae12e22badaa8a29ad5ff599f9ec109f0454e8"
+>   
+>   export BUILD_SYS
+>   export HOST_SYS
 >
 > 
 >
 
---------------C7996EB8FFE81AE0E9A6C9F5
+--------------553F15D5FC3C674A8E0EEC60
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -142,53 +262,174 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 10/13/20 4:59 AM, Leon Anavi wrote:<br>
+    <div class="moz-cite-prefix">On 10/13/20 7:46 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20201013085914.31580-7-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Provide generated .c files in TarBall distribution.
-- Provide wheels for aarch64, i686, ppc64le, s390x architectures
-  on Linux as well as x86_64.
-- Provide wheels for Python 3.9.
-- human_repr() now always produces valid representation equivalent
-  to the original URL (if the original URL is valid).
-- Fixed requoting a single percent followed by a percent-encoded
-  character in the Cython implementation.
-- Fix ValueError when decoding % which is not followed by two
-  hexadecimal digits.
-- Fix decoding % followed by a space and hexadecimal digit.
-- Fix annotation of with_query()/update_query() methods for
-  key=[val1, val2] case.
-- Drop Python 3.5 support; Python 3.6 is the minimal supported
-  Python version.
+    <blockquote type="cite" cite="mid:20201013114654.5610-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">- Just removed a debug print statement
+- Remove support for end-of-life Python 2.7 and 3.4. Python 3.5+
+  is now required.
+- Remaining strings that only consist of whitespaces are not
+  treated as statements anymore. Code that ignored the last
+  element from sqlparse.split() should be updated accordingly
+  since that function now doesn't return an empty string as the
+  last element in some cases.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20201013085914.31580-7-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20201013114654.5610-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-yarl_1.6.0.bb =&gt; python3-yarl_1.6.2.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-yarl_1.6.0.bb =&gt; python3-yarl_1.6.2.bb} (79%)
+ ...1-sqlparse-change-shebang-to-python3.patch | 90 +++++++++++++++----
+ ...rse_0.3.1.bb =&gt; python3-sqlparse_0.4.1.bb} |  4 +-
+ 2 files changed, 77 insertions(+), 17 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-sqlparse_0.3.1.bb =&gt; python3-sqlparse_0.4.1.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.6.0.bb b/meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-yarl_1.6.0.bb
-rename to meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
-index 543acc51ba..dbb5d23bd2 100644
---- a/meta-python/recipes-devtools/python/python3-yarl_1.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/aio-libs/yarl/">&quot;https://github.com/aio-libs/yarl/&quot;</a>
- LICENSE = &quot;Apache-2.0&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=b334fc90d45983db318f54fd5bf6c90b">&quot;file://LICENSE;md5=b334fc90d45983db318f54fd5bf6c90b&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-sqlparse/0001-sqlparse-change-shebang-to-python3.patch b/meta-python/recipes-devtools/python/python3-sqlparse/0001-sqlparse-change-shebang-to-python3.patch
+index ad6c50ff77..94121340d5 100644
+--- a/meta-python/recipes-devtools/python/python3-sqlparse/0001-sqlparse-change-shebang-to-python3.patch
++++ b/meta-python/recipes-devtools/python/python3-sqlparse/0001-sqlparse-change-shebang-to-python3.patch
+@@ -1,4 +1,4 @@
+-From 10c9d3341d64d697f678a64ae707f6bda21565bb Mon Sep 17 00:00:00 2001
++From 7fd00ab8c1b663052d57e735b6b956d5c92fbaed Mon Sep 17 00:00:00 2001
+ From: Changqing Li <a class="moz-txt-link-rfc2396E" href="mailto:changqing.li@windriver.com">&lt;changqing.li@windriver.com&gt;</a>
+ Date: Mon, 9 Mar 2020 13:10:37 +0800
+ Subject: [PATCH] sqlparse: change shebang to python3
+@@ -10,42 +10,102 @@ we can only make this change after python2 is offcially
+ dropped.
  
--SRC_URI[md5sum] = &quot;802bb27ebdb260fbbaecbcc8168d6f28&quot;
--SRC_URI[sha256sum] = &quot;61d3ea3c175fe45f1498af868879c6ffeb989d4143ac542163c45538ba5ec21b&quot;
-+SRC_URI[md5sum] = &quot;65c3346f694e37f45045f4e29a60d280&quot;
-+SRC_URI[sha256sum] = &quot;c45b49b59a5724869899798e1bbd447ac486215269511d3b76b4c235a1b766b6&quot;
+ Signed-off-by: Changqing Li <a class="moz-txt-link-rfc2396E" href="mailto:changqing.li@windriver.com">&lt;changqing.li@windriver.com&gt;</a>
++Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a>
+ ---
+- setup.py             | 2 +-
+- sqlparse/__main__.py | 2 +-
+- sqlparse/cli.py      | 2 +-
+- 3 files changed, 3 insertions(+), 3 deletions(-)
++ 0001-sqlparse-change-shebang-to-python3.patch | 51 +++++++++++++++++++
++ setup.py                                      |  2 +-
++ sqlparse/__main__.py                          |  2 +-
++ sqlparse/cli.py                               |  2 +-
++ 4 files changed, 54 insertions(+), 3 deletions(-)
++ create mode 100644 0001-sqlparse-change-shebang-to-python3.patch
  
- SRC_URI += &quot; \
-     <a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
++diff --git a/0001-sqlparse-change-shebang-to-python3.patch b/0001-sqlparse-change-shebang-to-python3.patch
++new file mode 100644
++index 0000000..ad6c50f
++--- /dev/null
+++++ b/0001-sqlparse-change-shebang-to-python3.patch
++@@ -0,0 +1,51 @@
+++From 10c9d3341d64d697f678a64ae707f6bda21565bb Mon Sep 17 00:00:00 2001
+++From: Changqing Li <a class="moz-txt-link-rfc2396E" href="mailto:changqing.li@windriver.com">&lt;changqing.li@windriver.com&gt;</a>
+++Date: Mon, 9 Mar 2020 13:10:37 +0800
+++Subject: [PATCH] sqlparse: change shebang to python3
+++
+++Upstream-Status: Pending
+++
+++Don't send upstream since upstream still support python2,
+++we can only make this change after python2 is offcially
+++dropped.
+++
+++Signed-off-by: Changqing Li <a class="moz-txt-link-rfc2396E" href="mailto:changqing.li@windriver.com">&lt;changqing.li@windriver.com&gt;</a>
+++---
+++ setup.py             | 2 +-
+++ sqlparse/__main__.py | 2 +-
+++ sqlparse/cli.py      | 2 +-
+++ 3 files changed, 3 insertions(+), 3 deletions(-)
+++
+++diff --git a/setup.py b/setup.py
+++index 345d0ce..ce3abc3 100644
+++--- a/setup.py
++++++ b/setup.py
+++@@ -1,4 +1,4 @@
+++-#!/usr/bin/env python
++++#!/usr/bin/env python3
+++ # -*- coding: utf-8 -*-
+++ #
+++ # Copyright (C) 2009-2018 the sqlparse authors and contributors
+++diff --git a/sqlparse/__main__.py b/sqlparse/__main__.py
+++index 867d75d..dd0c074 100644
+++--- a/sqlparse/__main__.py
++++++ b/sqlparse/__main__.py
+++@@ -1,4 +1,4 @@
+++-#!/usr/bin/env python
++++#!/usr/bin/env python3
+++ # -*- coding: utf-8 -*-
+++ #
+++ # Copyright (C) 2009-2018 the sqlparse authors and contributors
+++diff --git a/sqlparse/cli.py b/sqlparse/cli.py
+++index 25555a5..8bf050a 100755
+++--- a/sqlparse/cli.py
++++++ b/sqlparse/cli.py
+++@@ -1,4 +1,4 @@
+++-#!/usr/bin/env python
++++#!/usr/bin/env python3
+++ # -*- coding: utf-8 -*-
+++ #
+++ # Copyright (C) 2009-2018 the sqlparse authors and contributors
+++-- 
+++2.7.4
+++
+ diff --git a/setup.py b/setup.py
+-index 345d0ce..ce3abc3 100644
++index ede0aff..dc6a323 100644
+ --- a/setup.py
+ +++ b/setup.py
+ @@ -1,4 +1,4 @@
+ -#!/usr/bin/env python
+ +#!/usr/bin/env python3
+- # -*- coding: utf-8 -*-
+  #
+- # Copyright (C) 2009-2018 the sqlparse authors and contributors
++ # Copyright (C) 2009-2020 the sqlparse authors and contributors
++ # &lt;see AUTHORS file&gt;
+ diff --git a/sqlparse/__main__.py b/sqlparse/__main__.py
+-index 867d75d..dd0c074 100644
++index 2bf2513..6a3a115 100644
+ --- a/sqlparse/__main__.py
+ +++ b/sqlparse/__main__.py
+ @@ -1,4 +1,4 @@
+ -#!/usr/bin/env python
+ +#!/usr/bin/env python3
+- # -*- coding: utf-8 -*-
+  #
+- # Copyright (C) 2009-2018 the sqlparse authors and contributors
++ # Copyright (C) 2009-2020 the sqlparse authors and contributors
++ # &lt;see AUTHORS file&gt;
+ diff --git a/sqlparse/cli.py b/sqlparse/cli.py
+-index 25555a5..8bf050a 100755
++index 7a8aacb..9c727e8 100755
+ --- a/sqlparse/cli.py
+ +++ b/sqlparse/cli.py
+ @@ -1,4 +1,4 @@
+ -#!/usr/bin/env python
+ +#!/usr/bin/env python3
+- # -*- coding: utf-8 -*-
+  #
+- # Copyright (C) 2009-2018 the sqlparse authors and contributors
++ # Copyright (C) 2009-2020 the sqlparse authors and contributors
++ # &lt;see AUTHORS file&gt;
+ -- 
+-2.7.4
++2.17.1
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-sqlparse_0.3.1.bb b/meta-python/recipes-devtools/python/python3-sqlparse_0.4.1.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-sqlparse_0.3.1.bb
+rename to meta-python/recipes-devtools/python/python3-sqlparse_0.4.1.bb
+index 1aef28be03..c8a64c1095 100644
+--- a/meta-python/recipes-devtools/python/python3-sqlparse_0.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-sqlparse_0.4.1.bb
+@@ -8,8 +8,8 @@ SRC_URI += <a class="moz-txt-link-rfc2396E" href="file://0001-sqlparse-change-shebang-to-python3.patch\file://run-ptest\">&quot;file://0001-sqlparse-change-shebang-to-python3.patch \
+             file://run-ptest \
+ 	    &quot;</a>
+ 
+-SRC_URI[md5sum] = &quot;423047887a3590b04dd18f8caf843a2f&quot;
+-SRC_URI[sha256sum] = &quot;e162203737712307dfe78860cc56c8da8a852ab2ee33750e33aeadf38d12c548&quot;
++SRC_URI[md5sum] = &quot;eebbc6b5f1033054873033e54b0c1266&quot;
++SRC_URI[sha256sum] = &quot;0f91fd2e829c44362cbcfab3e9ae12e22badaa8a29ad5ff599f9ec109f0454e8&quot;
+ 
+ export BUILD_SYS
+ export HOST_SYS
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -200,4 +441,4 @@ index 543acc51ba..dbb5d23bd2 100644
   </body>
 </html>
 
---------------C7996EB8FFE81AE0E9A6C9F5--
+--------------553F15D5FC3C674A8E0EEC60--
