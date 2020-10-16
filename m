@@ -1,100 +1,126 @@
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.76])
- by mx.groups.io with SMTP id smtpd.web12.10166.1602833780131724158
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
+ by mx.groups.io with SMTP id smtpd.web10.16152.1602856248540238786
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Oct 2020 00:36:20 -0700
+ Fri, 16 Oct 2020 06:50:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=cZCfxQ+A;
- spf=pass (domain: windriver.com, ip: 40.107.93.76, mailfrom: qi.chen@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bRlxR10p88TdqzTinnPcOSilzfj2x2km8pHKWnwv7lCyMIfoAhDa8Bq0fXwdWAMAWuzsqYel0Xgpwri6DAyt8qheK9RXbaQo7cpXAU7Qgf7oEhB3Lwb+MXja7pS4jnliFcDFo7gA8tJTNXup3pcUpzbDurNvDeuTdO3z30q+jBPXxuBpgwEXyCuppuRslJgoraFwbfuNkt7k67YhxRmZ8FoC3grgKjriEiBqnBc6yd+RiwEhjpJrQx5nzBUxsh9pNvC+rbk1pgHzGvsWmE7Y4x0aI5MKttMlweNIUJ2hcVCAlG0TkjLJ0sHLS2NuxSejOME1VY4xNsWatywOFGmNjA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=F3er1+dVq7C02xsbrPoQ4Kwd+f7a15GMetz892vnEWI=;
- b=Osq+pwupjwib9KPg/Uy/IH6EbODdWXx9JqpdugvlF5ua58O1SWv4nUfOHPYejfkmhXyBx778XCd9wGfs9OX+f4KurWZWeswlMzRF6OrYOHmxq2919UxjXrnrfpVPAfzS31NHRNrwuP4JWjsR1e82mW8BY7wzgpyUlTpTvo/4MUFovWdB+Nh50x+KhQBdAfuQf3FRS1mLl69kHJIr5v//C+O7XRxc37BrHurScQOaANnJP7wkdQn2bukgiknaBwYfE52tVzBjP6ltldERFOwDitZ5xik7X0uOern3f9TwGpf36pbBC4hC9J1ai+1hikBxxUdOyKUF33D8CL6hIT8adQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=F3er1+dVq7C02xsbrPoQ4Kwd+f7a15GMetz892vnEWI=;
- b=cZCfxQ+A5oXOFDSFVfiWscGXbpgMvnzGw2/i+iizK+mYYBTvJl1p7LXH0gjYcFp0iD7Lab80gjczZl2Km0YlgwyPJZfDz3DhQhqCHb10xP7j6EItsSpFlr0Of09EQbJvDUBeoWJ1AiDcGZ3OyFA1eIYpMcdHiK6PT3aMUrbImUw=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BYAPR11MB3480.namprd11.prod.outlook.com (2603:10b6:a03:79::27)
- by BY5PR11MB4101.namprd11.prod.outlook.com (2603:10b6:a03:18e::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3455.28; Fri, 16 Oct
- 2020 07:36:19 +0000
-Received: from BYAPR11MB3480.namprd11.prod.outlook.com
- ([fe80::4c97:65e4:a822:4cc1]) by BYAPR11MB3480.namprd11.prod.outlook.com
- ([fe80::4c97:65e4:a822:4cc1%7]) with mapi id 15.20.3455.031; Fri, 16 Oct 2020
- 07:36:19 +0000
-From: "Chen Qi" <Qi.Chen@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-networking][PATCH] cyrus-sasl: use /run instead of /var/run for systemd service file
-Date: Fri, 16 Oct 2020 15:36:04 +0800
-Message-Id: <20201016073604.36461-1-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.17.1
-X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: HK2PR06CA0022.apcprd06.prod.outlook.com
- (2603:1096:202:2e::34) To BYAPR11MB3480.namprd11.prod.outlook.com
- (2603:10b6:a03:79::27)
-Return-Path: Qi.Chen@windriver.com
+ dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: mtr@pengutronix.de)
+Received: from ptx.hi.pengutronix.de ([2001:67c:670:100:1d::c0])
+	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <mtr@pengutronix.de>)
+	id 1kTQ85-0007W0-OR; Fri, 16 Oct 2020 15:50:45 +0200
+Received: from mtr by ptx.hi.pengutronix.de with local (Exim 4.92)
+	(envelope-from <mtr@pengutronix.de>)
+	id 1kTQ85-00016w-6a; Fri, 16 Oct 2020 15:50:45 +0200
+Date: Fri, 16 Oct 2020 15:50:45 +0200
+From: "Michael Tretter" <m.tretter@pengutronix.de>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-oe][PATCH] apitrace: add new recipe
+Message-ID: <20201016135045.GA3743@pengutronix.de>
+References: <20200909084218.802654-1-m.tretter@pengutronix.de>
+ <CAMKF1so-Zfiv+vbFf1J1-bSkBMSTN4gx548YJ5=cUK42YS--cg@mail.gmail.com>
+ <CAMKF1srwBFPAxpd4BZGkC9TaC7gM2jYB2c9RmqeADxkRRf1fWQ@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from pek-lpg-core3.wrs.com (60.247.85.82) by HK2PR06CA0022.apcprd06.prod.outlook.com (2603:1096:202:2e::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.21 via Frontend Transport; Fri, 16 Oct 2020 07:36:17 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 24ec5366-5a6b-4b04-bde9-08d871a62bc2
-X-MS-TrafficTypeDiagnostic: BY5PR11MB4101:
-X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB4101D45E0F66405568847E30ED030@BY5PR11MB4101.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:439;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	SHjgazOouuCj41e7r+2P5kI3ftPnaawLJCv28gKwrch7CCHsFavmLKi+7LMWcPqSIzk2SHWrpUBsvs/32HvNRcajS1LWb23KxWiNfM+u38JElsbap0LxDy80TII6zdWnT8NRpaBnxnUWZNqYIJlj+P/YX5cPXUaMxMvaXCEV+2AUOZOm3/mkXrLEfllQwkt3W1kXj6ZYqB5fwDjwC+WWEBeo6AtfmMPpyXOK4nFkWnEZfUbl/87TYcB+Lh79SLubUuvXDNusOkIuP8UHzM/0n6HpmUzie3XBIxkORjz02kRHWHyKiZ3CCFSmnO/ew9xI+Ed6hRuZkFin67E6mkp6sslXLlCeWqdkqwnObRmb1K4RVdkfhEaq6bDir2LnJyL1
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR11MB3480.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(39850400004)(346002)(366004)(136003)(376002)(34490700002)(83380400001)(6666004)(66946007)(66476007)(66556008)(2906002)(5660300002)(16526019)(4744005)(956004)(2616005)(478600001)(26005)(6512007)(52116002)(6486002)(1076003)(36756003)(6916009)(6506007)(316002)(186003)(86362001)(8936002)(8676002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	A/qoCmQuXZ+IvTEOCL/FwJH5b5PmFxgSFGGmquz05gUN7/BeaoIGVibOszM89eRhO1/pLSinFplc6YDxwtPvU4KICB7mGi8MbJgCittO2H3haIlqiXitt0dFpbcd/d1aMuwMoo17wPoJl9cVIIV5295/EUYQBbXv2ESjV3rak8Q8ySfieXnFP0TDc4pQJV29g4QFtVxHQyoZbTtyQ0Rvh7umaGZy5ucJ5ahNqBr1ow1gWinotpFj9/yoRLxieu5N/IEpf8ZY2qC4P4oDffDu2oG5lOPAaf8aZUv6LFJL3SU+sRy5cvXR6lFU10fq8dzd6gkwb4b5g2keNS3jvTwzPH6WyUfLzL6O+hIaTcDo0xVKMPIPxbv2Zaj+o0YTBjgM6y5IangNRwSeXpE+naE+CwFGW/7z5Erh4Faw+wnkohLXaytqhQGfRMV+2QiUp0CQAaUcjrpUqpLpEpajX8VH8gB2kESJGLz7y9LDRcrrEdlR3Oyfl3e0tXSb6EaWgTPkubf7VsvhiFDuZHOCkH6U8DRgnmENnZjFp01USF11CZKPL1h2tmIgTRLFZ2dNG21Tvrx2JvnxpBQGXXBBTyoo8EurHr7ikfmHEttTjSmPexqChIEGh6B6rxG/lrTtHPoaeWJnmUwJPbVpU0+Cps3wcw==
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 24ec5366-5a6b-4b04-bde9-08d871a62bc2
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR11MB3480.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2020 07:36:18.8696
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: oPY+VVUb64hpiKArYCXjhtUvPwNia3Ke/TCTn+yG4Mwm38n4zG4yvL2NyvMgsI6506S+q9kWZaXWGZ/+XD7F/w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4101
-Content-Type: text/plain
+In-Reply-To: <CAMKF1srwBFPAxpd4BZGkC9TaC7gM2jYB2c9RmqeADxkRRf1fWQ@mail.gmail.com>
+X-Sent-From: Pengutronix Hildesheim
+X-URL: http://www.pengutronix.de/
+X-IRC: #ptxdist @freenode
+X-Accept-Language: de,en
+X-Accept-Content-Type: text/plain
+X-Uptime: 15:48:52 up 239 days, 21:19, 147 users,  load average: 0.02, 0.09,
+ 0.14
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::c0
+X-SA-Exim-Mail-From: mtr@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-/var/run has been deprecated by systemd, so use /run instead,
-as suggested by systemd.
+On Tue, 15 Sep 2020 15:58:50 -0700, Khem Raj wrote:
+> additionally, it fails to build on qemux86-64
+> 
+> 
+> /mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/apitrace/9.0-r0/git/retrace/process_name.cpp:52:1:
+> error: redefinition of a 'extern inline' function 'readlink' is not
+> supported in C++
+> readlink(const char *pathname, char *buf, size_t bufsiz)
+> ^
+> /mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/apitrace/9.0-r0/recipe-sysroot/usr/include/bits/unistd.h:145:8:
+> note: previous definition is here
+> __NTH (readlink (const char *__restrict __path, char *__restrict __buf,
+>        ^
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- .../recipes-daemons/cyrus-sasl/cyrus-sasl/saslauthd.service     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I cannot reproduce the build failure, but successfully built apitrace with
+this recipe on qemux86-64 with poky.
 
-diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/saslauthd.service b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/saslauthd.service
-index 96dbae378..e63592af6 100644
---- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/saslauthd.service
-+++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/saslauthd.service
-@@ -4,7 +4,7 @@ After=syslog.target
- 
- [Service]
- Type=forking
--PIDFile=@LOCALSTATEDIR@/run/saslauthd/saslauthd.pid
-+PIDFile=/run/saslauthd/saslauthd.pid
- EnvironmentFile=@SYSCONFDIR@/default/saslauthd
- ExecStart=@SBINDIR@/saslauthd -m $SOCKETDIR -a $MECH $FLAGS
- 
--- 
-2.17.1
+Can you provide more details on your build failure?
 
+Michael
+
+> 
+> On Wed, Sep 9, 2020 at 10:12 AM Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > On Wed, Sep 9, 2020 at 2:54 AM Michael Tretter <m.tretter@pengutronix.de> wrote:
+> > >
+> > > apitrace consists of a set of tools to:
+> > >
+> > >  - trace OpenGL, OpenGL ES, Direct3D, and DirectDraw APIs calls to a file;
+> > >
+> > >  - replay OpenGL and OpenGL ES calls from a file;
+> > >
+> > >  - inspect OpenGL state at any call while retracing;
+> > >
+> > >  - visualize and edit trace files.
+> > >
+> >
+> > Thanks for contributing new recipe, they also need to go into
+> > appropriate packagegroup in packagegroup-meta-oe.bb
+> > so it can be built in testing images.
+> >
+> > > Signed-off-by: Michael Tretter <m.tretter@pengutronix.de>
+> > > ---
+> > >  .../recipes-devtools/apitrace/apitrace_9.0.bb | 28 +++++++++++++++++++
+> > >  1 file changed, 28 insertions(+)
+> > >  create mode 100644 meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
+> > >
+> > > diff --git a/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb b/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
+> > > new file mode 100644
+> > > index 000000000000..6e61683cde92
+> > > --- /dev/null
+> > > +++ b/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
+> > > @@ -0,0 +1,28 @@
+> > > +SUMMARY = "Tools for tracing OpenGL, Direct3D, and other graphics APIs"
+> > > +HOMEPAGE = "http://apitrace.github.io/"
+> > > +SECTION = "console/tools"
+> > > +LICENSE = "MIT & BSD-3-Clause"
+> > > +LIC_FILES_CHKSUM = "file://LICENSE;md5=aeb969185a143c3c25130bc2c3ef9a50 \
+> > > +                    file://thirdparty/snappy/COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
+> > > +
+> > > +SRCREV = "cae55f54c53449fd07f8a917dcd0874db2c15032"
+> > > +SRC_URI = "git://github.com/${BPN}/${BPN}.git"
+> > > +
+> > > +S = "${WORKDIR}/git"
+> > > +
+> > > +DEPENDS += "zlib libpng python3-native"
+> > > +
+> > > +inherit cmake
+> > > +
+> > > +EXTRA_OECMAKE += "\
+> > > +    -DENABLE_GUI=OFF \
+> > > +    -DENABLE_X11=OFF \
+> > > +    -DENABLE_STATIC_LIBGCC=OFF \
+> > > +    -DENABLE_STATIC_LIBSTDCXX=OFF \
+> > > +    -DPython3_ROOT_DIR=/usr/bin/python3-native \
+> > > +"
+> > > +
+> > > +# Use the bundled snappy library
+> > > +EXTRA_OECMAKE += "\
+> > > +    -DENABLE_STATIC_SNAPPY=ON \
+> > > +"
+> > > --
+> > > 2.20.1
+> > >
+> > > 
+> 
