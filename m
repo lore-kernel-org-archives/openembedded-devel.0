@@ -1,80 +1,75 @@
-Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com [209.85.216.66])
- by mx.groups.io with SMTP id smtpd.web11.17088.1602858848507482469
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.web12.17469.1602859066255096953
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Oct 2020 07:34:08 -0700
+ Fri, 16 Oct 2020 07:37:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=TAALcpjL;
- spf=pass (domain: gmail.com, ip: 209.85.216.66, mailfrom: ticotimo@gmail.com)
-Received: by mail-pj1-f66.google.com with SMTP id hk7so1626140pjb.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2020 07:34:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=spivn5Th;
+ spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: ticotimo@gmail.com)
+Received: by mail-pg1-f169.google.com with SMTP id o3so1555426pgr.11
+        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2020 07:37:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=vqkcUQJjvMQsHxQ98xWPKEmscwwxrQ+Z+Z3DiveuyR8=;
-        b=TAALcpjLPQg07+fEo5AwfN5ER/5qCiRjFxN8TyQxdssVvnpQzuadv+KEtdoUTWtnfA
-         y1gYVxUYr80nG3DvUuyVv6z+So1HtirdODDVhNW7eRegHWHOHdKtShuEBWEaPeXNKIMe
-         pfXR1vNRcbeXCJaSFxIn+xs1v40vNZth78NCLn/lTNkuqjMOzXqnTYQzv4b7SdiD7QOW
-         XpSYZi6ume0emXs6Ul/M3o63tf8udk3m4EmtXZustztQyrbQo/KkscsjpqHEFCW/lJYn
-         zOktqdPN9asAMNNexCw+b1eoVCAkshVWsko58JXkqM9sN+Y58bBwEHFl0xqgmKls41kb
-         LrnQ==
+        bh=9e2el0TKshmYhjd6RK1UFhWfg7ZrvKaTa4flCfWOw0w=;
+        b=spivn5ThKfCl05utfxouANJ78GCcdQ54jDV+4+pTtn6xs8cK1M5Mjl71X3Z0MYzfEv
+         VTjSIJMQnLvlEfHfr75Q0m9XrE1vQ53Hj6qAX3x8sYd3cd+DGAro1xvK4UUOXuIQGLGO
+         CnwmABIG1nGm3cdythzDYXbwSnxIxQEhwtrNGNKXhJqtSTZV3XL2Zal5h2rsu8hdWdvD
+         TmCFOS5vJBTHCFO7BRM0AOLRg/gUdyqo7UwAIl4q5vhjZD+MkeaZfKYymirsQ/9krJrE
+         sQlo8HTQWF8qZD1dQq3h8BnUlW3DizJ69De2Ox+jyYEHpE2Sht38qe2yY4f1qtvawrvy
+         NhZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=vqkcUQJjvMQsHxQ98xWPKEmscwwxrQ+Z+Z3DiveuyR8=;
-        b=ui4RwA76nCExDV63RvJGLWszn23HArD7nhru+G982LYkTTusHEgErqry9qeA+/xvKx
-         pVlcIdD9ZI4Soo4YsFY5tpH1kVp+rs7MrrXOJ/CMwQCpIX9FIwiJEF+fnRL5yWAh4GhA
-         yL5k1eL2ISyA1HG8+iZih9fVqchilj1Wx+DBuW33+YopwuiAEM3y9/6hkwfwK0gLtlLB
-         dfDVIwDEruFrLi51Hj3OxczZV5saxPoPVOScrSYC7A0fyOxL8hFScr34wL9api808l1r
-         RFRSiHyi0K7jNkKqXe+foKgtJ00B0A4htwO+z0j59/SPSZnvPfm2IydtR9k5gmecnqxG
-         r0bA==
-X-Gm-Message-State: AOAM533DEIqO/Eau1fHcKvIwrlgK8Iu60K3DgeSMCHo+o8RucR8FKZ1C
-	B4CUV9L5oz5wrOigmTMQruuUIoPVsvGdvA==
-X-Google-Smtp-Source: ABdhPJz/buHAtKep33CabF0YSdrbJwm1OesLX4os6y8vZmvAY6k6cQ1+nFU5uqUpilOW8r6CNK/vww==
-X-Received: by 2002:a17:902:930c:b029:d3:b362:7939 with SMTP id bc12-20020a170902930cb02900d3b3627939mr4428746plb.54.1602858847648;
-        Fri, 16 Oct 2020 07:34:07 -0700 (PDT)
+        bh=9e2el0TKshmYhjd6RK1UFhWfg7ZrvKaTa4flCfWOw0w=;
+        b=m2/2dEkJcORoXA+ULkQ9rjWENSfj8MhzujoYpJnXwpbMWImOCOftHvJmSFqOy4aW74
+         6eSALgbj/4gEsU4MPx1HnN5s8z3OU2lKcjQG2DrTI0B5gDKhhp1f9julfMLEUDh6iKTu
+         cHWkY+5JO4FZSJR1InvT+iqYN3abrAx9Qg+YtBScbSVo+0J6r0ghPhX6vf6BwnWKQNtt
+         E9DH3pSFm+IeEJbr8o6lEHF4/eKDODG6+eOTqY6Ecu9xFkd11vIsjNiruXsMwn/q+LxF
+         QBv3gQ3woSkBvIMMl48aGOlNuMvkUHv3EukkDExQWdY8ITlWgdf9CxU7GEdq80XKsPXN
+         90Dg==
+X-Gm-Message-State: AOAM533E5oTR9Ps66suumc79NvKfJfD4CQTLbZPSyyTWogDNAK5KRhwg
+	55oC21L46XI0rOqZa1ivZn0UeyKnChidmA==
+X-Google-Smtp-Source: ABdhPJyC+BRZmyDT1OEML3MErdPcOU9iFEFXX1R69oZ1+MJ6mw5S+e/yRlCgwFDAP7TTOhWyLcFjMQ==
+X-Received: by 2002:a62:2985:0:b029:142:2501:3969 with SMTP id p127-20020a6229850000b029014225013969mr4118247pfp.46.1602859065612;
+        Fri, 16 Oct 2020 07:37:45 -0700 (PDT)
 Return-Path: <ticotimo@gmail.com>
 Received: from thetis.hsd1.or.comcast.net ([2601:1c0:6000:9640:4938:26a4:cb77:8681])
-        by smtp.gmail.com with ESMTPSA id x16sm3082036pff.14.2020.10.16.07.34.06
+        by smtp.gmail.com with ESMTPSA id 128sm3087352pfd.110.2020.10.16.07.37.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Oct 2020 07:34:06 -0700 (PDT)
+        Fri, 16 Oct 2020 07:37:45 -0700 (PDT)
 From: "Tim Orling" <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Tim Orling <ticotimo@gmail.com>
-Subject: [meta-python2][PATCH] README: added recipes must add to packagroup
-Date: Fri, 16 Oct 2020 07:33:57 -0700
-Message-Id: <20201016143357.20699-1-ticotimo@gmail.com>
+Subject: [meta-python2][PATCH] conf/layer.conf: LAYERSERIES_COMPAT gatesgarth
+Date: Fri, 16 Oct 2020 07:37:42 -0700
+Message-Id: <20201016143742.23076-1-ticotimo@gmail.com>
 X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-When new recipes are added, they must also be
-accompanied by a patch adding them to the
-packagroup-meta-python2
-
-This packagegroup is critical to the function of
-the CI system behind this layer.
+In preparation for the release of Yocto Project 3.2,
+"gatesgarth", change development branch to be only
+compatible with the new release.
 
 Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- README | 3 +++
- 1 file changed, 3 insertions(+)
+ conf/layer.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/README b/README
-index e81533e2..a34cbb0c 100644
---- a/README
-+++ b/README
-@@ -78,6 +78,9 @@ It is expected that ANY upgrades to a recipe will have undergone run-time testin
- the upgrade. Many other developers depend upon the quality of this layer and will be quite upset with
- you when you break their builds.
+diff --git a/conf/layer.conf b/conf/layer.conf
+index b25c9ef9..a5738d96 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -14,6 +14,6 @@ LAYERVERSION_meta-python2 = "1"
  
-+It is expected that any patch adding a new recipe will also add the recipe to packagegroup-meta-python2.
-+This packagegroup is critical to the function of the CI system behind maintenance of this layer.
-+
- Commit messages must include a "Signed-off-by:" line, including a valid email address and a legal name
- (not a nickname). The "Signed-off-by:" line means that you are either the author or have the legal right
- to submit the work. Please refer to the "Submitting a patch to OpenEmbedded" [6] and "Commit Patch
+ LAYERDEPENDS_meta-python2 = "core openembedded-layer"
+ 
+-LAYERSERIES_COMPAT_meta-python2 = "dunfell"
++LAYERSERIES_COMPAT_meta-python2 = "gatesgarth"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
 -- 
 2.25.0
 
