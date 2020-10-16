@@ -1,83 +1,130 @@
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com [209.85.214.193])
- by mx.groups.io with SMTP id smtpd.web10.17761.1602860280670679315
+Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
+ by mx.groups.io with SMTP id smtpd.web10.20680.1602867124377567808
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Oct 2020 07:58:00 -0700
+ Fri, 16 Oct 2020 09:52:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=kqg0iv44;
- spf=pass (domain: gmail.com, ip: 209.85.214.193, mailfrom: ticotimo@gmail.com)
-Received: by mail-pl1-f193.google.com with SMTP id t18so1435602plo.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2020 07:58:00 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@axis.com header.s=axis-central1 header.b=PO0bjmeT;
+ spf=pass (domain: axis.com, ip: 195.60.68.17, mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=96GSxWzCasaLQbzgUIX9OoSOuaul4LUIWKV4YjULwug=;
-        b=kqg0iv44W0kebH+YoiRxDTbhtBWHYHFZno2E7jZMGRZiYTcJGZVUiDu1l65p80mYj2
-         0dvVl8Raigk7wfsGuiL0BtNWdkI4LBd87KArFSE09f7MBzz2fuoE9pMR1yn6kMgPANbS
-         MEVHm4u3JztzwIhxNPkgG99qcmvBZIn0vv6CwLg7PvZ3/pDaEGu2+WmsYu495KH8g0b/
-         FyMamYPbRK15DCrMCcbpSNjW4yP45IFH320CPqDX0gWXvx5jCGLT6rnxWF6DsQSEK42y
-         a5RaeNyD9dHA3H5UXonRB8k8apM8fXPqDFneNL2jHqjBYPi9xWpW+5VSWYv7FRJ9GG4w
-         2qHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=96GSxWzCasaLQbzgUIX9OoSOuaul4LUIWKV4YjULwug=;
-        b=dKjkbW0qFirur3Y2qa42SBeiCLoTk7KubYNbprCeJ9uThANZ69rS1SextnGV96Qura
-         ab94Psa1EvOSzXtLEE6HhfaqtCfnc472HVX+v3T6VAMdy0SqAkbeOu8JJjdBM0NED947
-         Yq6TLrrY3ZVQcq3Yu3AUkQtE6EpHycpygQnC9xLmQiL12wgc9DACKxF0/N272Jrcym4+
-         nPCxqMiA7v8CtJuojc8qBw2pPZQZYtdmaWrxhIta4rrNDVF/sY9FlEDt/mrVJoqNcvNU
-         zpEoPrCR2d0M3t4t7bU/P2Q2B/d7WZ29Z0cOMEaO4KhayV2dtbp5dlJVgmKSdPpz8LqE
-         q3ug==
-X-Gm-Message-State: AOAM530zTF89w0xmVHR0sT4IwS2RWHSJFsFYlOrdP55YxTrJ7KtO1bHP
-	uFkUxO3wVLdNUtdBywpEnA54gxyxHQRnNQ==
-X-Google-Smtp-Source: ABdhPJxDY0SbU9t0w+LUd46jDIwA9VwwdyaPKAkfYzwP6fKELvcqXhB6s0YFEhhZTJmydaNDh25S9g==
-X-Received: by 2002:a17:90b:180c:: with SMTP id lw12mr4447248pjb.181.1602860279684;
-        Fri, 16 Oct 2020 07:57:59 -0700 (PDT)
-Return-Path: <ticotimo@gmail.com>
-Received: from thetis.hsd1.or.comcast.net ([2601:1c0:6000:9640:4938:26a4:cb77:8681])
-        by smtp.gmail.com with ESMTPSA id q16sm3006510pfu.206.2020.10.16.07.57.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Oct 2020 07:57:59 -0700 (PDT)
-From: "Tim Orling" <ticotimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <ticotimo@gmail.com>
-Subject: [meta-python2][PATCH v2] README: added recipes must add to packagegroup
-Date: Fri, 16 Oct 2020 07:57:55 -0700
-Message-Id: <20201016145755.9147-1-ticotimo@gmail.com>
-X-Mailer: git-send-email 2.25.0
+  d=axis.com; l=3658; q=dns/txt; s=axis-central1;
+  t=1602867124; x=1634403124;
+  h=from:to:subject:date:message-id:references:in-reply-to:
+   content-transfer-encoding:mime-version;
+  bh=8gzv5s09GZXaUWecEyQh0uJnwAeLitpCaUOg7T2os2U=;
+  b=PO0bjmeTLaU4i+o0deOS6ksToE5kv3MetqLXsfrpxpyAmSYm+26iYRnK
+   QOXYgISJ+omwSC1QqJtsCGY9IUGxzA/foY6i+hC7B+SfTmd4waVNxdP47
+   eGO+ZZ13S0oFJTBxnXXA0SQLatkhbZiYz8BdXfsgo43GbcIqzoXsPdaEb
+   z5jd0Zbr+6+aHex3pmkP1fTYAjzVcuvdNxuwFf+aXfAny8OrvRbwU4Mav
+   aWvJ3KVrdMgVZhmXNa9YfMXVk0ba/If9Z+ksj4IptlrHFODYpp1pndTfX
+   ee4gYs5B9BmrQljk+nW4IyIlX63ltdGNiD7SFzmvfcUpuGATx3NlHiG42
+   A==;
+IronPort-SDR: C1vxUm8hz+q6pwpkfOQJkM1h0P7e/C0Vl04qdN+CaLqFJNf4yk98j/jtCoHORe3Qp69E7aIAxa
+ IsVXng3v7qjgYY5npMf0Z4QIUPt2NOO5B2x20GmdNNcwhmJL0qtaxO702bfCwQpZWUg5L0wrI1
+ D30vyj/6YSvzvh5co7twsmRGn4cIhOK0hEOcdHEi9x6VAHeiygtlIJqW6IWyney+uPDsOFH6VF
+ 0rk8YOyL5eAbAo82Xkq4QFIAEg/nk9vqU0wJaevjjJc0Lle35m9MtFHkdBOa2GUvZhnuGfsM1F
+ c4w=
+X-IronPort-AV: E=Sophos;i="5.77,383,1596492000"; 
+   d="scan'208";a="14110002"
+From: "Peter Kjellerstedt" <peter.kjellerstedt@axis.com>
+To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-networking][PATCH 1/2] samba,arptables,ncp: Use new license names in LIC_FILES_CHKSUM
+Thread-Topic: [oe] [meta-networking][PATCH 1/2] samba,arptables,ncp: Use new
+ license names in LIC_FILES_CHKSUM
+Thread-Index: AQHWo2MvTgX5HEmCT0i/BHpQf/WJTqmab9mQ
+Date: Fri, 16 Oct 2020 16:51:54 +0000
+Message-ID: <743957163ca545a7a0b42d0da4b6149e@XBOX03.axis.com>
+References: <20201016022206.489864-1-raj.khem@gmail.com>
+In-Reply-To: <20201016022206.489864-1-raj.khem@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-When new recipes are added, they must also be
-accompanied by a patch adding them to the
-packagegroup-meta-python2
+> -----Original Message-----
+> From: openembedded-devel@lists.openembedded.org <openembedded-
+> devel@lists.openembedded.org> On Behalf Of Khem Raj
+> Sent: den 16 oktober 2020 04:22
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Khem Raj <raj.khem@gmail.com>
+> Subject: [oe] [meta-networking][PATCH 1/2] samba,arptables,ncp: Use new l=
+icense names in LIC_FILES_CHKSUM
+>=20
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-networking/recipes-connectivity/samba/samba_4.10.18.bb | 4 ++--
+>  meta-networking/recipes-support/arptables/arptables_git.bb  | 2 +-
+>  meta-networking/recipes-support/ncp/ncp_1.2.4.bb            | 2 +-
+>  3 files changed, 4 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb =
+b/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb
+> index b5085c913b..cfbb113c7f 100644
+> --- a/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb
+> +++ b/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb
+> @@ -3,8 +3,8 @@ SECTION =3D "console/network"
+>=20
+>  LICENSE =3D "GPL-3.0+ & LGPL-3.0+ & GPL-2.0+"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
+504 \
+> -                    file://${COREBASE}/meta/files/common-licenses/LGPL-3=
+.0;md5=3Dbfccfe952269fff2b407dd11f2f3083b \
+> -                    file://${COREBASE}/meta/files/common-licenses/GPL-2.=
+0;md5=3D801f80980d171dd6425610833a22dbe6 "
+> +                    file://${COREBASE}/meta/files/common-licenses/LGPL-3=
+.0-only;md5=3Dbfccfe952269fff2b407dd11f2f3083b \
+> +                    file://${COREBASE}/meta/files/common-licenses/GPL-2.=
+0-only;md5=3D801f80980d171dd6425610833a22dbe6"
 
-This packagegroup is critical to the function of
-the CI system behind this layer.
+Based on LICENSE above, that should rather be LGPL-3.0-or-later and=20
+GPL-2.0-or-later. The same also applies to libconfig-autoconf-perl,=20
+libfile-slurper-perl, libunix-statgrab and libtest-warnings-perl=20
+that you also sent patches for. That of course assumes those=20
+license files are added first...
 
-Signed-off-by: Tim Orling <ticotimo@gmail.com>
----
-Changes since v1:
-  Fix typo of packagroup in gitlog
+//Peter
 
- README | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/README b/README
-index e81533e2..a34cbb0c 100644
---- a/README
-+++ b/README
-@@ -78,6 +78,9 @@ It is expected that ANY upgrades to a recipe will have undergone run-time testin
- the upgrade. Many other developers depend upon the quality of this layer and will be quite upset with
- you when you break their builds.
- 
-+It is expected that any patch adding a new recipe will also add the recipe to packagegroup-meta-python2.
-+This packagegroup is critical to the function of the CI system behind maintenance of this layer.
-+
- Commit messages must include a "Signed-off-by:" line, including a valid email address and a legal name
- (not a nickname). The "Signed-off-by:" line means that you are either the author or have the legal right
- to submit the work. Please refer to the "Submitting a patch to OpenEmbedded" [6] and "Commit Patch
--- 
-2.25.0
+>=20
+>  SAMBA_MIRROR =3D "http://samba.org/samba/ftp"
+>  MIRRORS +=3D "\
+> diff --git a/meta-networking/recipes-support/arptables/arptables_git.bb b=
+/meta-networking/recipes-support/arptables/arptables_git.bb
+> index c02a19944d..5afec7663a 100644
+> --- a/meta-networking/recipes-support/arptables/arptables_git.bb
+> +++ b/meta-networking/recipes-support/arptables/arptables_git.bb
+> @@ -1,7 +1,7 @@
+>  SUMMARY =3D "Administration tool for arp packet filtering"
+>  SECTION =3D "net"
+>  LICENSE =3D "GPL-2.0"
+> -LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/GPL-=
+2.0;md5=3D801f80980d171dd6425610833a22dbe6"
+> +LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/GPL-=
+2.0-only;md5=3D801f80980d171dd6425610833a22dbe6"
+>  SRCREV =3D "efae8949e31f8b2eb6290f377a28384cecaf105a"
+>  PV =3D "0.0.5+git${SRCPV}"
+>=20
+> diff --git a/meta-networking/recipes-support/ncp/ncp_1.2.4.bb b/meta-netw=
+orking/recipes-support/ncp/ncp_1.2.4.bb
+> index f42223b1f8..a2f0ccc069 100644
+> --- a/meta-networking/recipes-support/ncp/ncp_1.2.4.bb
+> +++ b/meta-networking/recipes-support/ncp/ncp_1.2.4.bb
+> @@ -4,7 +4,7 @@ security or integrity checking, no throttling, no feature=
+s, except \
+>  one: you don't have to type the coordinates of your peer."
+>  HOMEPAGE =3D "http://www.fefe.de/ncp"
+>  LICENSE =3D "GPLv2"
+> -LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/GPL-=
+2.0;md5=3D801f80980d171dd6425610833a22dbe6"
+> +LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/GPL-=
+2.0-only;md5=3D801f80980d171dd6425610833a22dbe6"
+>  DEPENDS =3D "libowfat"
+>=20
+>  SRC_URI =3D "https://dl.fefe.de/${BP}.tar.bz2"
+> --
+> 2.28.0
 
