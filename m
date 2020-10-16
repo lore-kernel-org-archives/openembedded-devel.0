@@ -1,17 +1,17 @@
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com (NAM02-SN1-obe.outbound.protection.outlook.com [40.107.77.89])
- by mx.groups.io with SMTP id smtpd.web12.21559.1602868635005702323
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com (NAM02-SN1-obe.outbound.protection.outlook.com [40.107.77.75])
+ by mx.groups.io with SMTP id smtpd.web10.21311.1602868640985295676
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Oct 2020 10:17:15 -0700
+ Fri, 16 Oct 2020 10:17:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=UVs0jwtV;
- spf=pass (domain: windriver.com, ip: 40.107.77.89, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=hRVqH6x2;
+ spf=pass (domain: windriver.com, ip: 40.107.77.75, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=T+ac7e9/IVIgmNcT2z8LGyfbiAHv7iIQEP6DSPoGFPCV5MFR47p5ZY/WMG6ZCCaC+fQReY1IBUg6+BVZj2Oow1BDM/Qy1WGgsN569KSZCYxUyi2LAHFqI5V4/UFVCqjzOdx6VImaMG+Zje5uvAeKVDZ0wWhqEMwPmcURHN7BOUnOqz8KtIaQ4PVFv2bKHV8s0LhrkgyaZPCdvlWaIjr+JmiUh9Izkfg1Xxtht3M0dWLOUQawzre8dBD9sqiZ8CC350sxZA978H6CoTVPZfHNubI1HjRyhklp2KEg58Bst4ymLP76EvIee0KhI0a6P4f0zo3LTJbXSIT34ismj9ynhw==
+ b=mPD5RzOsOie4q2fv3TXb8B09gwtiWPBo2GVf/pVeVmeSEVFtSxCuHe5aCBTtqRkuNkq+JHMLQFqzP5NYCQcyOz3rO7X7dTkO4TeNOIUe6EbyrR9Oj1kyYylzAnLFCFHiDFS9oCy0jGlrOEIPA46oJ21m6Yf++MqS3R/IAsXK1Dn2n7VcQ2kD9dvYUHh4ZsZ22jwc37WUfNXIkd1vS8cziuyGZAd4CcQrWcTajee0VbZrN1M97TKtgJWZ29BD7pJzVmvbAjcLPYA5wwo/U5pHGGMVJr6u4g1ifhgWfJFQk5+dzKgCgBWkktFuh4HhkjrrdJF2X9Uj+fAi2coaRni0dQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LiK94qfoHzNZyiF3Kh8q8lGj28s1eBxAw9o8NJvEYcw=;
- b=UthG0u/Y55Th7Bpj0TGMHixGP2LMjDsl71OrZ5D7cE/GRe0UcAChkaBWXv3eDD+qZzVkOMVzZaeXqIYSDIoc4BE09H7zwEbiIhEaIMs1dIbK9j0uVFSuUpL+H9U6xJjKJUILznMxA2M/olvwiEikxOJjxEb9MDddQJxLaOlqv6WxW91aZxT+ndcok4q5Yy06XnprfZwvzYnIkySNI9fMwm6SEXGryRcOxpU6RPjLuqEd7NmMeBoO8tIxsng8Qy8C15WfMdCMEFf08dgwqatuF+uT9UMsLaa1smnMcAaZmEtk0aueyXaDxIs9g/mVjsk/K+YIJnmMMQQYEKOSjKQALQ==
+ bh=3+itRV1P0QkFvom0f2W32Jz/b+7LPok0/Jah4zRUdYk=;
+ b=QP62KqEuJofjgYiCE+7eJufkasr2G1o/GGjwy6JakkuAN2zaJV51yKx0DpaxK6ubRduq9I/mRyehR+kTx6Yi8KQO1H5KFcJ5OYXwTtP5zdIn+BiiZ1IVcSse27NHLQPRbsKEEqqYLJxgAeI6I0WedRGkChnCvA5c2I6okab7FgVg3lGj4oCfE/Tg6NnSYS3Wr0YqSvVSUJVeUDvyRsXuG6EaUCsORKIctNNY9DeCbuTsHu3bvmIOdhTD94nWee08uGYS3s8jIKqkZuht3p2oH+rgsVZ/ChrU9gp2Khq/VpfRihXuF1tFIhdeFky0FSiWM5OWw/gsYmpKJ82niv8onA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LiK94qfoHzNZyiF3Kh8q8lGj28s1eBxAw9o8NJvEYcw=;
- b=UVs0jwtVlwyuU4xzQdaxQQGqB2axm2FtNf8sYaGR/b4X9JZkWKRYkmNibygMvmwXFwLtDHy5PH+xcFGMlmuluSDl8jZAnI/KNXoMlS45rp9c0Lz3tBbjEXQpp3TpmJV5vXjCKDotqkoab7KtGU+o0283Ukwv2fxUbKXrBgxa3N0=
+ bh=3+itRV1P0QkFvom0f2W32Jz/b+7LPok0/Jah4zRUdYk=;
+ b=hRVqH6x2fbYsjJzuFNDZpKr8kQxmCZ2cyB6bvP6fG8Y8S+F632q4pg7uRvrcqPleEBOvf/5xy5JlKZ5pZBuuKne6XzNUtKtybuRxN4dVVV69/k7NGf6oVieeaqcW1lNFPs6uiPkgFf7v0TzcrdEt66vLWgxcVvYCi+ZpbQDpbA4=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,106 +28,111 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BY5PR11MB4241.namprd11.prod.outlook.com (2603:10b6:a03:1ca::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.25; Fri, 16 Oct
- 2020 17:17:11 +0000
+ 2020 17:17:19 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::7875:99b3:15ae:5df2]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::7875:99b3:15ae:5df2%7]) with mapi id 15.20.3477.025; Fri, 16 Oct 2020
- 17:17:11 +0000
-Subject: Re: [oe] [meta-python][PATCH 6/7] python3-prompt-toolkit: Upgrade 3.0.7 -> 3.0.8
+ 17:17:19 +0000
+Subject: Re: [oe] [meta-python][PATCH 7/7] python3-yarl: Upgrade 1.6.0 -> 1.6.2
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20201013085914.31580-1-leon.anavi@konsulko.com>
- <20201013085914.31580-6-leon.anavi@konsulko.com>
+ <20201013085914.31580-7-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <d597a77f-ee6b-6773-b951-bd2d6a29ccde@windriver.com>
-Date: Fri, 16 Oct 2020 13:17:08 -0400
+Message-ID: <cd12cd11-1e34-4fa1-cb6a-7fa5b76b0938@windriver.com>
+Date: Fri, 16 Oct 2020 13:17:17 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
-In-Reply-To: <20201013085914.31580-6-leon.anavi@konsulko.com>
+In-Reply-To: <20201013085914.31580-7-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BY5PR17CA0062.namprd17.prod.outlook.com
- (2603:10b6:a03:167::39) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BY5PR17CA0051.namprd17.prod.outlook.com
+ (2603:10b6:a03:167::28) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BY5PR17CA0062.namprd17.prod.outlook.com (2603:10b6:a03:167::39) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.22 via Frontend Transport; Fri, 16 Oct 2020 17:17:10 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BY5PR17CA0051.namprd17.prod.outlook.com (2603:10b6:a03:167::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.21 via Frontend Transport; Fri, 16 Oct 2020 17:17:19 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3e79ba78-74f0-48e2-98bd-08d871f75147
+X-MS-Office365-Filtering-Correlation-Id: 24fbedeb-385a-49d9-1c65-08d871f7567e
 X-MS-TrafficTypeDiagnostic: BY5PR11MB4241:
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB42411299945560BA032ADDFE9F030@BY5PR11MB4241.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:632;
+	<BY5PR11MB4241FC144FCB0E8A9033FE9E9F030@BY5PR11MB4241.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4714;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	e0zRnpj8NpUPs6ziKsyTbSm3uuhbsr6hWOkBD9fxMeRI13puJg36/AstHxHvV4uQEF0IWlojV6W15nqVixrW1q2mgHtlm6TSdR86eCywofTCxsH0dgUClSsyChrgFB93aBPgVgl438katfNzfChenL16Gw1rcsLhWqhzDVmtVLgpstue6IAn3xhN42trVsZjud7EyGoBcyAd/i/PzIcJWJeJtycHjlZ/WrP2rVUXhRAlQFPJIlvm9PqdXl0M8UfR4yOLWfgYQwwTw1a6fInYCUfWRs4k2k7ByLtilN49q+eGIYeS1jxCHMcESxYjzi3+9R2rhm3MtfVULg7NGH/kVBf1BkDB52B3IBLk3oBL01duTxf/uix5VmhQjZuQtl5IUsXAMBBXk6PRxIIrTzJMaBy0Xyx0mJcEauLG0us7jcj1DldOdTa0N76TDnvTWnmB7uEkFK+C5KFnGDU/ZBvvO3B2qqr/9M6CdT+X2Res9Fo=
+	0P6Bf1N4V1ZZYYDipRhibUBrmB60dV4//mZPRwKuOuDwAoJzy/2to/9bssYvxZkB/g4apVSIJKduBeLF7vDSMNibD271jTG9JjAMT4NoTwwrdl2DZ8RwEx7VNiErbhAlp9bVrfFmo5S6cj761NyyeQ9VarMxSxX7YGrZsmugfUo4vO4z3PX7tkY2blrbg3i1TLXkhp7o5emRuo8BCz0MKJaXxVJLtS8AyLuPxZBJDjycmG3Zi2dW4MMZr+9wEZqX8j4YEA1yUZ5SpdIoWlZsEYha9ump1y6G1X0LpdRI8qyHrZ73e3g2KoVw7sNCRdEEiJlyi5xYm4J2gzJwwh8r1qmiVWymDxQdXQ029z/uXPTBVRZ3nPivx/Gh/2RUK3bj9bXJviTURWfXe+lEgaQf9bsQUthMqBgO0RXc9hYriHcI5PNOkA7fWx29wQRCJQpITZx3xw8P0jYwKwrl+bYe0riM3Oe+UrvNbaUzG5QyGnrSffBTt4lZccVtvRC2KH55
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(346002)(136003)(366004)(376002)(396003)(83380400001)(16526019)(44832011)(166002)(2906002)(478600001)(966005)(26005)(86362001)(6486002)(2616005)(956004)(186003)(53546011)(34490700002)(66476007)(66556008)(66946007)(316002)(31686004)(52116002)(5660300002)(33964004)(31696002)(16576012)(8936002)(8676002)(36756003)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	HtuSu74vAR8CNorO4p7u57FvpugPBezQOUrA3hN3ESPHeWoCg3T8crUUru8hfl/0tmmE4LPqG7u4KEmDNZkx0nV4R4DnzK7IHqiZtgPEvnFzvNOXbowro/FqkZ5q1YxJzw6TCzYfiq7En5/zZRV6PmSGxmYkBe4wIHRsc1qTz4UcrcGfX0IrVfgmbwYQvpHQ4oSzscAAnhypnYpHcahNcZq+aPUEzxpdO6wewKlGKePeU3mTLnfNLJHxie5L1l1aYzi9Orx9YjVZnm/axEmHLwZFuCG3bBrf7hkk1gF/Mf5iL65KDofB/M8PmLR1oY+wqnsXFxvmauUAV8CQssJpINUx/Vv88CO/Kji/b2hsYPCkatrsunvwugHicnIBlVdyF2+OqoZthJI/Zi1TvfpVCly55QYEVXJRELHcrO0AS4PPKVkec1Pxm5PSrvZzhqJDd9NVldcxD3DPEAtWcnVQIf289gnKoLkK7FKPiq6RBLMfgVHjNPZdjHc5LjARsNXfRr2PfvG4WifcOW2SxGNNb+Cg0KvGLCDF3hiw+TI2HwbBBjcMR2HcPdqTqwUkOs16HoTpFvnsVO5zE1P3MXo1xxmnco5OtKTZS/iAatNCjv5GAau3dKwXNzIQfx0w7W5VRycQib8a+d17KZx7kk0kWg==
+	FfSZfBm+se9tcp23RoxZ8nczn2bRmSRXqPOtcVVNaXsw9SIfoPNYjJp4FMwuxnzBG1bvg0kWgB0dflr0P/2OV9jGZbIyNOQaZoTH2WuFtc5kOI21ewZNGMoSg6A4o8EEWOBPi7kOmYq0cxuDOYiaTq1mcakZKwBtGq2BMdA9XYKag+655WGVNzpdAcmGNiRxtqqgnpPrci1PDYI1bA/l4Uilgl0VVNCrHeI/HXaZuIbqaOg/8Mdt8agx/DKaPY/3e4vRENXkKgSlEfVza1mKHnQCBO0889/PlRyg7DUIcr7+FJsE2kyWNmb+SAOyVyTZ5QyAIvthgndTRbsavKBGYHjbPjQr/uOBxS/GytLC4vDG1+M0vU5P8v65W9Wb9e7zOCLjCG/QbfD82ea6C+Aj6Q1H182tyIcPxoaTVscJXV5OrOoSKGvYAYuhcnrtPxi5WTx94+p8rteEwujYJhrO6DbdxYAElOTbqMZCa9AobufNgiulb55Icd3mPJ8GconJu2veX/q6JrVL9yVN/mJJ7xDpp1/nYjw51tjCJt/4/2N1D27e5s/CMY2UE9rjhBs/tsVeD86res2WJlZ/TENviX62of/vDnQvFpeQJ6jzHyv36mCSf/aRuXaL6ffBPd2gAfP+EeV8y9RnXvAwuLVsrQ==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3e79ba78-74f0-48e2-98bd-08d871f75147
+X-MS-Exchange-CrossTenant-Network-Message-Id: 24fbedeb-385a-49d9-1c65-08d871f7567e
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2020 17:17:11.0870
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2020 17:17:19.6780
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Oc1oOiuhgpzOXHv2BpY/dWiCXdfcmCSJ+xzkzLtvQnc+Ld/Xi96H/sQPkiCIgrhETqb7owKdnBcuw5fSWtKcnS836bkHwKsH6S6u8kOLHP8=
+X-MS-Exchange-CrossTenant-UserPrincipalName: IwOcIwCDdkrSMIIh6ri7oK7P4WG4kJbOMOywKSMPBxSQUrq7JffVIbxf7RUu20OTk4MmhNOwRQcD9eaPYxcjIEPP8wHzGuCQ5mf/Oa2UeuQ=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4241
 Content-Type: multipart/alternative;
- boundary="------------3127A95859B548ED0883AD07"
+ boundary="------------C7996EB8FFE81AE0E9A6C9F5"
 Content-Language: en-US
 
---------------3127A95859B548ED0883AD07
+--------------C7996EB8FFE81AE0E9A6C9F5
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 10/13/20 4:59 AM, Leon Anavi wrote:
-> - Added `validator` parameter to `input_dialog`.
-> - Cope with stdout not having a working `fileno`.
-> - Handle situation when /dev/null is piped into stdin, or when
->    stdin is closed somehow.
-> - Fix for telnet/ssh server: `isatty` method was not implemented.
-> - Display correct error when a tuple is passed into
->    `to_formatted_text`.
-> - Pass along WORD parameter in `Document._is_word_before_cursor_complete`.
->    Fixes some key bindings.
-> - Expose `ProgressBarCounter` in shortcuts module.
+> - Provide generated .c files in TarBall distribution.
+> - Provide wheels for aarch64, i686, ppc64le, s390x architectures
+>    on Linux as well as x86_64.
+> - Provide wheels for Python 3.9.
+> - human_repr() now always produces valid representation equivalent
+>    to the original URL (if the original URL is valid).
+> - Fixed requoting a single percent followed by a percent-encoded
+>    character in the Cython implementation.
+> - Fix ValueError when decoding % which is not followed by two
+>    hexadecimal digits.
+> - Fix decoding % followed by a space and hexadecimal digit.
+> - Fix annotation of with_query()/update_query() methods for
+>    key=[val1, val2] case.
+> - Drop Python 3.5 support; Python 3.6 is the minimal supported
+>    Python version.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...rompt-toolkit_3.0.7.bb => python3-prompt-toolkit_3.0.8.bb} | 4 ++--
+>   .../python/{python3-yarl_1.6.0.bb => python3-yarl_1.6.2.bb}   | 4 ++--
 >   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_3.0.7.bb => python3-prompt-toolkit_3.0.8.bb} (80%)
+>   rename meta-python/recipes-devtools/python/{python3-yarl_1.6.0.bb => python3-yarl_1.6.2.bb} (79%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.7.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.8.bb
-> similarity index 80%
-> rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.7.bb
-> rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.8.bb
-> index 7b0d1a0696..0debba48d2 100644
-> --- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.7.bb
-> +++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.8.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE = "https://python-prompt-toolkit.readthedocs.io/"
->   LICENSE = "BSD-3-Clause"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
+> diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.6.0.bb b/meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
+> similarity index 79%
+> rename from meta-python/recipes-devtools/python/python3-yarl_1.6.0.bb
+> rename to meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
+> index 543acc51ba..dbb5d23bd2 100644
+> --- a/meta-python/recipes-devtools/python/python3-yarl_1.6.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/aio-libs/yarl/"
+>   LICENSE = "Apache-2.0"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=b334fc90d45983db318f54fd5bf6c90b"
 >   
-> -SRC_URI[md5sum] = "f1b34c688ef7dccccb951130f008f6fe"
-> -SRC_URI[sha256sum] = "822f4605f28f7d2ba6b0b09a31e25e140871e96364d1d377667b547bb3bf4489"
-> +SRC_URI[md5sum] = "cf3ca19873fa9e7f6162296cf6bae419"
-> +SRC_URI[sha256sum] = "25c95d2ac813909f813c93fde734b6e44406d1477a9faef7c915ff37d39c0a8c"
+> -SRC_URI[md5sum] = "802bb27ebdb260fbbaecbcc8168d6f28"
+> -SRC_URI[sha256sum] = "61d3ea3c175fe45f1498af868879c6ffeb989d4143ac542163c45538ba5ec21b"
+> +SRC_URI[md5sum] = "65c3346f694e37f45045f4e29a60d280"
+> +SRC_URI[sha256sum] = "c45b49b59a5724869899798e1bbd447ac486215269511d3b76b4c235a1b766b6"
 >   
->   inherit pypi setuptools3
->   
+>   SRC_URI += " \
+>       file://run-ptest \
 >
 > 
 >
 
---------------3127A95859B548ED0883AD07
+--------------C7996EB8FFE81AE0E9A6C9F5
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -139,46 +144,51 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 10/13/20 4:59 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20201013085914.31580-6-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Added `validator` parameter to `input_dialog`.
-- Cope with stdout not having a working `fileno`.
-- Handle situation when /dev/null is piped into stdin, or when
-  stdin is closed somehow.
-- Fix for telnet/ssh server: `isatty` method was not implemented.
-- Display correct error when a tuple is passed into
-  `to_formatted_text`.
-- Pass along WORD parameter in `Document._is_word_before_cursor_complete`.
-  Fixes some key bindings.
-- Expose `ProgressBarCounter` in shortcuts module.
+    <blockquote type="cite" cite="mid:20201013085914.31580-7-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">- Provide generated .c files in TarBall distribution.
+- Provide wheels for aarch64, i686, ppc64le, s390x architectures
+  on Linux as well as x86_64.
+- Provide wheels for Python 3.9.
+- human_repr() now always produces valid representation equivalent
+  to the original URL (if the original URL is valid).
+- Fixed requoting a single percent followed by a percent-encoded
+  character in the Cython implementation.
+- Fix ValueError when decoding % which is not followed by two
+  hexadecimal digits.
+- Fix decoding % followed by a space and hexadecimal digit.
+- Fix annotation of with_query()/update_query() methods for
+  key=[val1, val2] case.
+- Drop Python 3.5 support; Python 3.6 is the minimal supported
+  Python version.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20201013085914.31580-6-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20201013085914.31580-7-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...rompt-toolkit_3.0.7.bb =&gt; python3-prompt-toolkit_3.0.8.bb} | 4 ++--
+ .../python/{python3-yarl_1.6.0.bb =&gt; python3-yarl_1.6.2.bb}   | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_3.0.7.bb =&gt; python3-prompt-toolkit_3.0.8.bb} (80%)
+ rename meta-python/recipes-devtools/python/{python3-yarl_1.6.0.bb =&gt; python3-yarl_1.6.2.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.7.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.8.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.7.bb
-rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.8.bb
-index 7b0d1a0696..0debba48d2 100644
---- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.8.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://python-prompt-toolkit.readthedocs.io/">&quot;https://python-prompt-toolkit.readthedocs.io/&quot;</a>
- LICENSE = &quot;BSD-3-Clause&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f">&quot;file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.6.0.bb b/meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-yarl_1.6.0.bb
+rename to meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
+index 543acc51ba..dbb5d23bd2 100644
+--- a/meta-python/recipes-devtools/python/python3-yarl_1.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/aio-libs/yarl/">&quot;https://github.com/aio-libs/yarl/&quot;</a>
+ LICENSE = &quot;Apache-2.0&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=b334fc90d45983db318f54fd5bf6c90b">&quot;file://LICENSE;md5=b334fc90d45983db318f54fd5bf6c90b&quot;</a>
  
--SRC_URI[md5sum] = &quot;f1b34c688ef7dccccb951130f008f6fe&quot;
--SRC_URI[sha256sum] = &quot;822f4605f28f7d2ba6b0b09a31e25e140871e96364d1d377667b547bb3bf4489&quot;
-+SRC_URI[md5sum] = &quot;cf3ca19873fa9e7f6162296cf6bae419&quot;
-+SRC_URI[sha256sum] = &quot;25c95d2ac813909f813c93fde734b6e44406d1477a9faef7c915ff37d39c0a8c&quot;
+-SRC_URI[md5sum] = &quot;802bb27ebdb260fbbaecbcc8168d6f28&quot;
+-SRC_URI[sha256sum] = &quot;61d3ea3c175fe45f1498af868879c6ffeb989d4143ac542163c45538ba5ec21b&quot;
++SRC_URI[md5sum] = &quot;65c3346f694e37f45045f4e29a60d280&quot;
++SRC_URI[sha256sum] = &quot;c45b49b59a5724869899798e1bbd447ac486215269511d3b76b4c235a1b766b6&quot;
  
- inherit pypi setuptools3
- 
+ SRC_URI += &quot; \
+     <a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -190,4 +200,4 @@ index 7b0d1a0696..0debba48d2 100644
   </body>
 </html>
 
---------------3127A95859B548ED0883AD07--
+--------------C7996EB8FFE81AE0E9A6C9F5--
