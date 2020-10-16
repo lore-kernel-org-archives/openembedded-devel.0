@@ -1,17 +1,17 @@
-Received: from NAM04-SN1-obe.outbound.protection.outlook.com (NAM04-SN1-obe.outbound.protection.outlook.com [40.107.70.60])
- by mx.groups.io with SMTP id smtpd.web12.9090.1602829096172880547
+Received: from NAM04-CO1-obe.outbound.protection.outlook.com (NAM04-CO1-obe.outbound.protection.outlook.com [40.107.69.87])
+ by mx.groups.io with SMTP id smtpd.web10.9976.1602833516397530277
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Oct 2020 23:18:16 -0700
+ Fri, 16 Oct 2020 00:31:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=nu7IXYFx;
- spf=pass (domain: windriver.com, ip: 40.107.70.60, mailfrom: qi.chen@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=gjtpLU/w;
+ spf=pass (domain: windriver.com, ip: 40.107.69.87, mailfrom: qi.chen@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gd1rmwcPJyBF0T7ZsNudioq7w/mJfBlB4yLlMdU4TQeXQBV0TE2h5vAiTNiTZYpv5xpCOcYRG4KfLWyVfp+XrBddRfm9Y6gjw7qVtjwc1+Zj/2/Iftv88aF16f31EpOy3268RXqRecZe7QBBx2DD9wCilq4rL0EZJ7fSuGDg6H7Tn3rCvJGCEyCN9UlRxUHBCgMn9nUMvzDvozMlrvUjN6/tqpFzkkCcjiQKZwAXN2QGS4kKEhNvYN1vKe3vuFv996B1O1CMW3OD397KnVqkX824M2mQjBRanTK015dCnl2xEh6OyuB3mrU+iKxNEK/Ilz+ieKCBCzDzBbllugVIow==
+ b=grtdzoAMNVyu1X9VoNjKzagSDbgbdGWii5vwolQQxbQWVGP10MLHf7+UcFaFikkU2YWiIN5xkFdsaX2D8KU+z+/NWIWQ5GeichN6qcbcyGFxJT30ORPIgLFIDQybSPCm0oktWFDLwBFYxuRRuN24iqu8g1fegdue40w8pjeLBisJO/p5Rgw1FTO35KJ+ptJ0QB6qXpTpck/tBk9zH1/C7YhpB070yqxlrURiz9ifMpDdYNzz+mENDAFwjLwbMkrQJoXzuzzvrjETmXRuSqpGp4gAO2U1zImRzC3nipeJh4oHJngc7zmKEhTvh4xZ14rAept/w+qKrMHmssYX4QlhOQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2QIR7ZxUeUB394EWLdleBsjku/gedzn2gK8Ln+Pf43g=;
- b=OqY2tUDt6dIsKCC+jaV7NZLqz6xpPMVfYvKrnO92VzQNoHPSXm9CsBIcPPtuZcDkNQ+RJM+a2X9E5yVPedWr2rJZ1XiGBswluo/l/p6MgUMOm92p6gMJbuMB4kbpPhpArXjbkLTrw1K4JcUG/elH10JnCBnkQlHjhdu5wKhzopeGMnNBgSeHXEBCX3pSJpWlyo2qi1rs4lFlIRWf9iCKVjXPkMCqk3RFSdtd0i6hlSGfEkEmhusplujZ2Hk0gH9iEk/U27SzzWM3Ba/KVUnGrGL8kG7j7EgcSjNoktgefoOiBxgJUCwIfSB0BSLQb8s7t0IUSUdzVLgr9nNiI5ZnLA==
+ bh=GgtcguClCI4CcXVo4f9SyGwTcEvwkIzGJcc+RHFHm/4=;
+ b=HQRggODA9kcHKbKNngkUGeWPd9R74REB35NxP3Dlbjs4yupxnhEVf7kxsESc+RFZ/f9PWz3LTHuk3L9UXwlw96MAL1ne/oDKywSuA+SUSV1s7cyAVuxXhRXpQBMJwM20Y1sbbwWGd/38Qy5bnlUwu0YjFqCPNjwCPNiYxzKA7VkvvzA0i8KU0yUJ0uFtrSJCmFSjuCozyXsYwop3g9WuIK/p5TQdV4fqcj02VcaZqt6ccCHBzcctIP4ZmBIpZV4APsj2UfsZzLgMcT09nFd0qphxS+MR/KBTGV9A2TqJ1smelSy2ZAvpfCe+MY6cUJnLZpkPCurdvQcFhFPYwpsXKQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,82 +19,133 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2QIR7ZxUeUB394EWLdleBsjku/gedzn2gK8Ln+Pf43g=;
- b=nu7IXYFx78oPSQFtVyqr7UuvBbYR9zwHHZrTTyRHl0O5JdMGcULwSKc5+CrepiGkjSxZHyWuBAiU+mXd6q5nbAlyuJA5GqsXvRNUK5FXLp227Sbm/W9QwGshw9HNDuqEzuvhgQWgS2Qd2QfPc1ElwEX/6edJkWpuEBoMZY7ZKHY=
+ bh=GgtcguClCI4CcXVo4f9SyGwTcEvwkIzGJcc+RHFHm/4=;
+ b=gjtpLU/wdLlOKGzWMRFsJLrZjF8ZCs+Y5Pgsn8pjB+GN0qtUBytCqlXyf74dEv4kN7t7uUv2QNlAoTlo25Od3BJnCW3AbJWiY0d2CSFx6xw9Lk3mALF+r/Zhf5RFY3J09/JuPBsVfZPMHiRJDSosvS/DPJxy1Fckkj8K6cws760=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BYAPR11MB3480.namprd11.prod.outlook.com (2603:10b6:a03:79::27)
- by BY5PR11MB4226.namprd11.prod.outlook.com (2603:10b6:a03:1bf::12) with
+ by BYAPR11MB2903.namprd11.prod.outlook.com (2603:10b6:a03:89::31) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3455.22; Fri, 16 Oct
- 2020 06:18:15 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.21; Fri, 16 Oct
+ 2020 07:31:53 +0000
 Received: from BYAPR11MB3480.namprd11.prod.outlook.com
  ([fe80::4c97:65e4:a822:4cc1]) by BYAPR11MB3480.namprd11.prod.outlook.com
  ([fe80::4c97:65e4:a822:4cc1%7]) with mapi id 15.20.3455.031; Fri, 16 Oct 2020
- 06:18:14 +0000
+ 07:31:53 +0000
 From: "Chen Qi" <Qi.Chen@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][PATCH] php: use /run instead /var/run in systemd service file
-Date: Fri, 16 Oct 2020 14:17:47 +0800
-Message-Id: <20201016061747.40695-1-Qi.Chen@windriver.com>
+Subject: [oe][meta-oe][PATCH] lmsensors: use /run instead of /var/run for systemd service
+Date: Fri, 16 Oct 2020 15:31:32 +0800
+Message-Id: <20201016073132.25745-1-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 2.17.1
 X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: HK2PR06CA0002.apcprd06.prod.outlook.com
- (2603:1096:202:2e::14) To BYAPR11MB3480.namprd11.prod.outlook.com
+X-ClientProxiedBy: HK2PR0401CA0012.apcprd04.prod.outlook.com
+ (2603:1096:202:2::22) To BYAPR11MB3480.namprd11.prod.outlook.com
  (2603:10b6:a03:79::27)
 Return-Path: Qi.Chen@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from pek-lpg-core3.wrs.com (60.247.85.82) by HK2PR06CA0002.apcprd06.prod.outlook.com (2603:1096:202:2e::14) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.22 via Frontend Transport; Fri, 16 Oct 2020 06:18:13 +0000
+Received: from pek-lpg-core3.wrs.com (60.247.85.82) by HK2PR0401CA0012.apcprd04.prod.outlook.com (2603:1096:202:2::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.21 via Frontend Transport; Fri, 16 Oct 2020 07:31:52 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 9d1a6b86-4fe9-4cbb-5d87-08d8719b43d2
-X-MS-TrafficTypeDiagnostic: BY5PR11MB4226:
+X-MS-Office365-Filtering-Correlation-Id: 057f9362-b786-4e91-091d-08d871a58d5d
+X-MS-TrafficTypeDiagnostic: BYAPR11MB2903:
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB4226C77FE1D4BE59656799FAED030@BY5PR11MB4226.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:335;
+	<BYAPR11MB2903608CD0B090CB38863DEEED030@BYAPR11MB2903.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:3826;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	HiPP968nf289LQwtwLVBZNBOykWy7IrZpiqDK7AbHskfUetJvGufXVUY6bXohY+s0MlKn32Bh3mShcPLS3WQ6yai8YfQW3weWsu4h5DwFqC/kawrhmn0WCZ/PSmAUY1tLGfOW+k4i44y67O8kCh/NwKM3mxiKLfsjfqvX/coJsZBot/gHtoe/5DiL9WCAk9uOAPR5qFi/dRdV9t4hG17Zg+iKa9vEPPBHYZDKXgRJzbdOpCW0u2CVuJGiIlemi6J3Ty9HZ9AMo9Fx6+QUXldogqV54TG1qftuJEO1bHt7SbTiHh5mm3Qrky0RMbMgI08ANeA/vuovpR/O4/wmhG9doINe09H6D0543SAowAqjxcA0aX4O4m0SbP3buRnPUB0
+	CF02DJJT1pHHCM6257pL6bYldGfam4hCamhhawiU02U/ea6JTQ235S13zye+Qs/z6vGiGKVgo27ICdy7Yq99YoTxs0KlaMUQLBKJzMxcmEV/Oabk8K89ndDG6NvY2G4jlf0U6+crXnLwjL8BKaW5qBAhn0PiEaHovcePz1vOQKGWOdMSs7dGxtBVvc+oCcmTpokW/irA4AG03boab7RLRHSki4wPFoYRCkRmR+9u5XrKlJYgFP46s0nhZWZOdRLXIAZiFR8tmjxN9fcOW5hjTAQmFrAm1apP2V4fF8NL0f4+yPh/bWpy9AE3wsg0Jd6+i9gemKDIcVs+Wgvs1hYKgt6KIGUUZaWF5DEbZEvYTHVTgzrhWrUkG2WlHS8PqxBF
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR11MB3480.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(376002)(346002)(39850400004)(396003)(366004)(6666004)(34490700002)(66556008)(1076003)(36756003)(8936002)(2906002)(956004)(66946007)(8676002)(316002)(6506007)(26005)(52116002)(186003)(6512007)(4744005)(86362001)(66476007)(5660300002)(6486002)(478600001)(6916009)(83380400001)(2616005)(16526019);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR11MB3480.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(39850400004)(346002)(376002)(366004)(136003)(66946007)(66476007)(66556008)(52116002)(6512007)(6506007)(26005)(36756003)(2616005)(956004)(316002)(5660300002)(478600001)(8676002)(186003)(1076003)(86362001)(6916009)(6666004)(8936002)(83380400001)(34490700002)(6486002)(16526019)(2906002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	+y777P5cfnF/LXDhjpEWhsTjftcKJ1Kwl8vWyhtmBKHDHKhkIs9JgvFu4zYpylayWSn0sFV98lJk0CG1Z6U3S0GoR7xyoXzgWWxeKMM8BB7TolUanumB90QzPxC4015ivFgqW0OLbTyUIovS8o1iIF5t7orYmZEgVAwb/dAnJJGNPtHDsu+ZuQXvbzImxH0qxS8AgYjih+it6ujUiCD+mE41FZAFIuTF4fC8XVjAR0D9c39MmkI1ReBQA7RdbagZoA6PHy3JbhLe+2f8e45WkDU6T18y7qzdw1YLcVP2TjT161hKaRxyLVn4uzD4B/0Xi9FQlgJ84BWw3gFdAGFoF8VjfwmYlQOzGrChTi+cm0Rb1GSCp+mK8yhX01TFJpLSWvNttpzNLbGP/q1l19RyO72WS6hHLjiCOUuF34jSd5qAzpsC//vY0yPBQfX8gYDdgK5/grSwRKxuDzKTmVzPkfhfw0zKwpWmqscZDFaxpwS2Judi5RUs87M3HIMCO7neDWvGeNp9KQ8UKfOLo9bz13C2NVKX2vnacUtvVejbV7kYHE+Bl6cfbHt3CHXfvlkO3j+zrDCkVVhnVNWqIoML1cRICeD1kdYeUO4braou1ozwr9y/zDg3993oXP9cZhH9AgE13jiteNauBiQ3bY1DcQ==
+	sMypbY5vk1NAzUg/XdVhsarx1vDqKAlDRoe8XZNgutnVgx1iKLNHdO9q1HgeHvp51VoyoufLiN64qFfsYxbQzB8B/E008vkpInxWspsq4Vm+Y4MIrzQFbj5+cYuRaWcMLlHmxHjjG77VIIoWd/+5q6DFp7GuHLb79E4JScVOkWRVDZHXhvcDXH7XycH9aKH9n3DBxCxETOi9XnXmtiTwEe87y3ycKC0gFBwuHTctNhME13UVpWi/remKUWPHVjZTfUhofp3a5Ii7O3VwtBMWlJfDExwezspqwp1ozYQjWA4izLhDY01kugWD92FZRlEn9gEB1ba3SwQfuQG2A0rHctNZilflg2DQ+K3bFDjH0CSDslXmJJKo1KuIkJ9vKAS8v0HM7tdlvd3K/V4dXQlFjg5qKDLyYLE134N12dwiblamlU8+Q+vK0/gSsPxp+2WKZGjIAZCQXTbv1SPSJotNclTCCLYYG+OKk3lUsW0KiWZ3COHp/8Fe+AsJKr1X4SQjKtFIV+UMUWN932B+1H3prgJ0zXJjtc579BoLBphPd7VAvs+vVMViutqjMWRNwlCbNUN3onasXU6i13/8e2k6T+PlIwOGHZ0evswQeOr9NJMUg/E1ZokyLUrUaMy4/d55BpltqG5xajae9uoUXFUfPg==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9d1a6b86-4fe9-4cbb-5d87-08d8719b43d2
+X-MS-Exchange-CrossTenant-Network-Message-Id: 057f9362-b786-4e91-091d-08d871a58d5d
 X-MS-Exchange-CrossTenant-AuthSource: BYAPR11MB3480.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2020 06:18:14.8022
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2020 07:31:53.0720
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DraSJ5+pbeIrdszh95c+L7GBgooADclGoeB0t1ac8SGMbDM7tdT6+rW6EC83KqA5qz8FsMX1gk/UPKG95be04A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4226
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8wSHrMikICdFa4xoi+y2D33Oo/4Nkbq/BVRSYarlDOjWPgRx+NH1a4g3Lyo1kZrb13Fh6s11QI5ls6X4mcK5HQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2903
 Content-Type: text/plain
 
-/var/run has been deprecated by systemd, so use /run instead,
-as suggested by systemd.
+Backport patch to use /run instead of /var/run for systemd service
+files.
 
 Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- meta-oe/recipes-devtools/php/php/php-fpm.service | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...nge-PIDFile-path-from-var-run-to-run.patch | 44 +++++++++++++++++++
+ .../recipes-bsp/lm_sensors/lmsensors_3.6.0.bb |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-oe/recipes-bsp/lm_sensors/lmsensors/0001-Change-PIDFile-path-from-var-run-to-run.patch
 
-diff --git a/meta-oe/recipes-devtools/php/php/php-fpm.service b/meta-oe/recipes-devtools/php/php/php-fpm.service
-index ac79dc931..eec76fb56 100644
---- a/meta-oe/recipes-devtools/php/php/php-fpm.service
-+++ b/meta-oe/recipes-devtools/php/php/php-fpm.service
-@@ -3,7 +3,7 @@ Description=PHP-FPM
- After=network.target
- [Service]
- Type=forking
--PIDFile=@LOCALSTATEDIR@/run/php-fpm.pid
-+PIDFile=/run/php-fpm.pid
- ExecStart=@SYSCONFDIR@/init.d/php-fpm start
- ExecStop=@SYSCONFDIR@/init.d/php-fpm stop
- [Install]
+diff --git a/meta-oe/recipes-bsp/lm_sensors/lmsensors/0001-Change-PIDFile-path-from-var-run-to-run.patch b/meta-oe/recipes-bsp/lm_sensors/lmsensors/0001-Change-PIDFile-path-from-var-run-to-run.patch
+new file mode 100644
+index 000000000..c34db695f
+--- /dev/null
++++ b/meta-oe/recipes-bsp/lm_sensors/lmsensors/0001-Change-PIDFile-path-from-var-run-to-run.patch
+@@ -0,0 +1,44 @@
++From 25f4f8793730ef3d170f1f2bd729a82fd61a4784 Mon Sep 17 00:00:00 2001
++From: puneetse <22071208+puneetse@users.noreply.github.com>
++Date: Wed, 11 Mar 2020 09:36:51 -0700
++Subject: [PATCH] Change PIDFile path from /var/run to /run
++
++/var/run is considered a legacy directory by systemd 239+ and having it in unit files causes a warning to be emitted to the journal.
++
++Upstream-Status: Backport [25f4f8793730ef3d170f1f2bd729a82fd61a4784]
++
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
++---
++ prog/init/fancontrol.service | 2 +-
++ prog/init/sensord.service    | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/prog/init/fancontrol.service b/prog/init/fancontrol.service
++index 3ac1ed02..43293141 100644
++--- a/prog/init/fancontrol.service
+++++ b/prog/init/fancontrol.service
++@@ -5,7 +5,7 @@ After=lm_sensors.service
++ 
++ [Service]
++ Type=simple
++-PIDFile=/var/run/fancontrol.pid
+++PIDFile=/run/fancontrol.pid
++ ExecStart=/usr/sbin/fancontrol
++ 
++ [Install]
++diff --git a/prog/init/sensord.service b/prog/init/sensord.service
++index 2448beeb..af2f0ae9 100644
++--- a/prog/init/sensord.service
+++++ b/prog/init/sensord.service
++@@ -5,7 +5,7 @@ After=lm_sensors.service
++ [Service]
++ EnvironmentFile=/etc/sysconfig/sensord
++ Type=forking
++-PIDFile=/var/run/sensord.pid
+++PIDFile=/run/sensord.pid
++ ExecStart=/usr/sbin/sensord -i $INTERVAL -l $LOG_INTERVAL -f daemon
++ 
++ [Install]
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
+index 9c561e9f4..4ee96df98 100644
+--- a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
++++ b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
+@@ -13,6 +13,7 @@ DEPENDS = " \
+ SRC_URI = "git://github.com/lm-sensors/lm-sensors.git;protocol=https \
+            file://fancontrol.init \
+            file://sensord.init \
++           file://0001-Change-PIDFile-path-from-var-run-to-run.patch \
+ "
+ SRCREV = "1667b850a1ce38151dae17156276f981be6fb557"
+ 
 -- 
 2.17.1
 
