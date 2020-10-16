@@ -1,190 +1,102 @@
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web11.19415.1602786628870967112
+Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com [209.85.216.66])
+ by mx.groups.io with SMTP id smtpd.web12.5920.1602814931395204658
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Oct 2020 11:30:28 -0700
+ Thu, 15 Oct 2020 19:22:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=sUpED6Z9;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id e7so2520165pfn.12
-        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2020 11:30:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=F/BKqgEM;
+ spf=pass (domain: gmail.com, ip: 209.85.216.66, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f66.google.com with SMTP id u3so571144pjr.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Oct 2020 19:22:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=J39+4yxw2pXxNHS1FkMLiL79x9/Vwi86OIOLMGn83V0=;
-        b=sUpED6Z98a4j9dL+JASdvL9AnwACvgNAcADQ2aodY0QI0xZyA4v4TZ9j1l7zmuEK4m
-         bdtH8lFOPENzQ3TNiqJjC5BBhKHGX66IcIF+h5Keivf7q1DZ16tHVr2pInqawvLu8EfO
-         wGorwesiVk7aVqts4wif1BJ1StZMnWrShtYzTsPasjyFFNUZSK3fwdZSbePqxn9iNZLX
-         /rodEqxt72x1q0+eFaSu7V/oBxrASoiYzGxQzF2QqiybphmCv/WxT9d4jbkvdeZS17c9
-         bHzmgaWeXLNft3j1JoyfkAayZUY+nkddCPj/SrCTbZwwSYAzL31WrW+0snPoC7IWTEP/
-         22yg==
+        bh=9NBWxbJNC1VdoFNL2BbcPrViAnK/m3CByfjY7pzCw8k=;
+        b=F/BKqgEMwFrifUUc+r+JhnGXhsoyieq8Ymed/xKy7fK79NHNIilsIhhr3pvEl1EIZE
+         j6wJktoO+Y67Krq5g3ei1XVJvc3pEEWroqWz9ixKoU6h2F99TFeSj0TvDdv4SO/2vyXT
+         IJ7KqbNYl57ZeGGSsGLwTfJVn/QxeBBZ8IN2/GBCulPCxNFxCfrsgTM5D93VEgucJQE9
+         +h9ve/f35Z4duCBjswZ2kFoanjZNRrS2GFEMH/ZrJ+nvv4LFaflFLDYwPTDcfGJY8iOm
+         PaFnFuJMByjwA13PZh/QDf+6dB1o8XOSzUAIdPCSGZwpJERwmG9AoqBXtKLJL2coAWJ7
+         Vcug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=J39+4yxw2pXxNHS1FkMLiL79x9/Vwi86OIOLMGn83V0=;
-        b=M5Sq5gIE0r7mlGNu78jf8Nz+CMbtmYQ7XD9wxBtgpCADDZ0dtMdgxl5iIn83Nm7CSO
-         vHSKHxp+kqvLVxJQa+lpBYN7hg/22/zLfrCwVQRoUmVmFNzBeJGkyCIxzspl2tz6ZLlV
-         Jj3C/2+HLg0+jl8p2iIVLhlqADHQczbPImjs1JxI8iKAKA17/WOoXVEdKLLjnPx45Yy2
-         KywXSB3ciPpLkL4mTzfYqQRpJrosvXTs2x1V8eccQ/W2+YBd7YsCwJwG0NGkCKAWobd9
-         VUi04JwoNNX/VhOlZ+JTNlW6/tM7lgGOBN6H4q8Xnpr8vBkoH66MJZ6eqpHGNCMzt8lu
-         DzSA==
-X-Gm-Message-State: AOAM533shyGUJKV9y2M7L9tHYW//qINUTCB8fTrAvVoKTFfTcJJYIhUZ
-	qFXK3jjte1z37nJndZAvkqEN9+gkEDj9Ew==
-X-Google-Smtp-Source: ABdhPJwkYElFehZ+FnqLLJAkdUx4sQU/HGpF3VlvHdgq6e3yIHPUNpVMF0Uyej8HABl9o/fxGS78WA==
-X-Received: by 2002:a62:ab0e:0:b029:156:1dfe:ae74 with SMTP id p14-20020a62ab0e0000b02901561dfeae74mr5006996pff.7.1602786627991;
-        Thu, 15 Oct 2020 11:30:27 -0700 (PDT)
+        bh=9NBWxbJNC1VdoFNL2BbcPrViAnK/m3CByfjY7pzCw8k=;
+        b=Btk4vTYSVVkJYv2GXBkOANd3lEXdpzlmoZIpYWfjTNZ4xDhqtviCEpS2bft6tgTsEn
+         017HsjLVUUp6HUP9PfJ2+Xj8sQy4VfNC96X9XWb7aQ5fgj3gXzSqC1+XYQ17u951Kq6j
+         cPxeez4buLzRkxJDCh2O+rI6FbGW7NAqGiNsX2MWBzOZIw7FktVw9vYU/SAG9Ix7ur0Y
+         P5DP1rNZORdV2NPdE4UrsU3SlcC/HI3UuicglKP1OSLXG53evW5WyxsGKhP/wEr+YyBB
+         tJlA9a960r4XW+56WnAFiB/QxGVxuguPLkUDhAPbojsZg955GJzQDPgYCvC2SRdEmje5
+         eS4A==
+X-Gm-Message-State: AOAM533DjwVjfuxKwatXxhDgaTzUjuoZ1vvnVRn33wUG4nJjTf5PoKCO
+	30ZCfNBq4u6s62PeM0MFz1s5mxp9rtcPdw==
+X-Google-Smtp-Source: ABdhPJxpdjMLUEs582O0AgcP3PLpjAhJLPZlaUdJnWNLx34+KCurB6yOv1ycR8u4Uyx3CShYRnAorQ==
+X-Received: by 2002:a17:90a:680b:: with SMTP id p11mr1657476pjj.232.1602814930239;
+        Thu, 15 Oct 2020 19:22:10 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::4467])
-        by smtp.gmail.com with ESMTPSA id m6sm44690pjn.47.2020.10.15.11.30.26
+        by smtp.gmail.com with ESMTPSA id gi20sm711123pjb.28.2020.10.15.19.22.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Oct 2020 11:30:26 -0700 (PDT)
+        Thu, 15 Oct 2020 19:22:09 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH v2] meta-openembedded: Add gatesgarth to LAYERSERIES_COMPAT
-Date: Thu, 15 Oct 2020 11:30:22 -0700
-Message-Id: <20201015183022.991822-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 1/2] samba,arptables,ncp: Use new license names in LIC_FILES_CHKSUM
+Date: Thu, 15 Oct 2020 19:22:05 -0700
+Message-Id: <20201016022206.489864-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Remove older releases from COMPAT
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-filesystems/conf/layer.conf | 2 +-
- meta-gnome/conf/layer.conf       | 2 +-
- meta-initramfs/conf/layer.conf   | 2 +-
- meta-multimedia/conf/layer.conf  | 2 +-
- meta-networking/conf/layer.conf  | 2 +-
- meta-oe/conf/layer.conf          | 2 +-
- meta-perl/conf/layer.conf        | 2 +-
- meta-python/conf/layer.conf      | 2 +-
- meta-webserver/conf/layer.conf   | 2 +-
- meta-xfce/conf/layer.conf        | 2 +-
- 10 files changed, 10 insertions(+), 10 deletions(-)
+ meta-networking/recipes-connectivity/samba/samba_4.10.18.bb | 4 ++--
+ meta-networking/recipes-support/arptables/arptables_git.bb  | 2 +-
+ meta-networking/recipes-support/ncp/ncp_1.2.4.bb            | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-filesystems/conf/layer.conf b/meta-filesystems/conf/layer.conf
-index be1635deea..47c99063fa 100644
---- a/meta-filesystems/conf/layer.conf
-+++ b/meta-filesystems/conf/layer.conf
-@@ -15,4 +15,4 @@ LAYERVERSION_filesystems-layer = "1"
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb b/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb
+index b5085c913b..cfbb113c7f 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb
+@@ -3,8 +3,8 @@ SECTION = "console/network"
  
- LAYERDEPENDS_filesystems-layer = "core openembedded-layer"
+ LICENSE = "GPL-3.0+ & LGPL-3.0+ & GPL-2.0+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+-                    file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
+-                    file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6 "
++                    file://${COREBASE}/meta/files/common-licenses/LGPL-3.0-only;md5=bfccfe952269fff2b407dd11f2f3083b \
++                    file://${COREBASE}/meta/files/common-licenses/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
  
--LAYERSERIES_COMPAT_filesystems-layer = "thud warrior zeus dunfell"
-+LAYERSERIES_COMPAT_filesystems-layer = "gatesgarth"
-diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
-index 7706b7ca6b..ac581e6939 100644
---- a/meta-gnome/conf/layer.conf
-+++ b/meta-gnome/conf/layer.conf
-@@ -17,7 +17,7 @@ LAYERVERSION_gnome-layer = "1"
+ SAMBA_MIRROR = "http://samba.org/samba/ftp"
+ MIRRORS += "\
+diff --git a/meta-networking/recipes-support/arptables/arptables_git.bb b/meta-networking/recipes-support/arptables/arptables_git.bb
+index c02a19944d..5afec7663a 100644
+--- a/meta-networking/recipes-support/arptables/arptables_git.bb
++++ b/meta-networking/recipes-support/arptables/arptables_git.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Administration tool for arp packet filtering"
+ SECTION = "net"
+ LICENSE = "GPL-2.0"
+-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
++LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
+ SRCREV = "efae8949e31f8b2eb6290f377a28384cecaf105a"
+ PV = "0.0.5+git${SRCPV}"
  
- LAYERDEPENDS_gnome-layer = "core openembedded-layer networking-layer"
+diff --git a/meta-networking/recipes-support/ncp/ncp_1.2.4.bb b/meta-networking/recipes-support/ncp/ncp_1.2.4.bb
+index f42223b1f8..a2f0ccc069 100644
+--- a/meta-networking/recipes-support/ncp/ncp_1.2.4.bb
++++ b/meta-networking/recipes-support/ncp/ncp_1.2.4.bb
+@@ -4,7 +4,7 @@ security or integrity checking, no throttling, no features, except \
+ one: you don't have to type the coordinates of your peer."
+ HOMEPAGE = "http://www.fefe.de/ncp"
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
++LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
+ DEPENDS = "libowfat"
  
--LAYERSERIES_COMPAT_gnome-layer = "thud warrior zeus dunfell"
-+LAYERSERIES_COMPAT_gnome-layer = "gatesgarth"
- 
- SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
-   faenza-icon-theme->gdk-pixbuf \
-diff --git a/meta-initramfs/conf/layer.conf b/meta-initramfs/conf/layer.conf
-index 634e0883c6..9752a5a2c5 100644
---- a/meta-initramfs/conf/layer.conf
-+++ b/meta-initramfs/conf/layer.conf
-@@ -16,7 +16,7 @@ BBFILE_PATTERN_meta-initramfs := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-initramfs = "8"
- LAYERDEPENDS_meta-initramfs = "core"
- 
--LAYERSERIES_COMPAT_meta-initramfs = "thud warrior zeus dunfell"
-+LAYERSERIES_COMPAT_meta-initramfs = "gatesgarth"
- 
- SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
-   dracut->virtual/kernel \
-diff --git a/meta-multimedia/conf/layer.conf b/meta-multimedia/conf/layer.conf
-index 2d52fb938a..be0e2b362e 100644
---- a/meta-multimedia/conf/layer.conf
-+++ b/meta-multimedia/conf/layer.conf
-@@ -31,4 +31,4 @@ LAYERVERSION_multimedia-layer = "1"
- 
- LAYERDEPENDS_multimedia-layer = "core meta-python"
- 
--LAYERSERIES_COMPAT_multimedia-layer = "thud warrior zeus dunfell"
-+LAYERSERIES_COMPAT_multimedia-layer = "gatesgarth"
-diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
-index 7bc0702ba7..bd0a44cae6 100644
---- a/meta-networking/conf/layer.conf
-+++ b/meta-networking/conf/layer.conf
-@@ -17,7 +17,7 @@ LAYERDEPENDS_networking-layer = "core"
- LAYERDEPENDS_networking-layer += "openembedded-layer"
- LAYERDEPENDS_networking-layer += "meta-python"
- 
--LAYERSERIES_COMPAT_networking-layer = "thud warrior zeus dunfell"
-+LAYERSERIES_COMPAT_networking-layer = "gatesgarth"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index 5b79b59b71..a964a99fba 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -37,7 +37,7 @@ LAYERVERSION_openembedded-layer = "1"
- 
- LAYERDEPENDS_openembedded-layer = "core"
- 
--LAYERSERIES_COMPAT_openembedded-layer = "thud warrior zeus dunfell"
-+LAYERSERIES_COMPAT_openembedded-layer = "gatesgarth"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
-diff --git a/meta-perl/conf/layer.conf b/meta-perl/conf/layer.conf
-index 1361fe0842..f97527c554 100644
---- a/meta-perl/conf/layer.conf
-+++ b/meta-perl/conf/layer.conf
-@@ -15,4 +15,4 @@ LAYERVERSION_perl-layer = "1"
- 
- LAYERDEPENDS_perl-layer = "core openembedded-layer"
- 
--LAYERSERIES_COMPAT_perl-layer = "thud warrior zeus dunfell"
-+LAYERSERIES_COMPAT_perl-layer = "gatesgarth"
-diff --git a/meta-python/conf/layer.conf b/meta-python/conf/layer.conf
-index 0dbc4296eb..47ab154b54 100644
---- a/meta-python/conf/layer.conf
-+++ b/meta-python/conf/layer.conf
-@@ -14,6 +14,6 @@ LAYERVERSION_meta-python = "1"
- 
- LAYERDEPENDS_meta-python = "core (>= 12) openembedded-layer"
- 
--LAYERSERIES_COMPAT_meta-python = "thud warrior zeus dunfell"
-+LAYERSERIES_COMPAT_meta-python = "gatesgarth"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
-diff --git a/meta-webserver/conf/layer.conf b/meta-webserver/conf/layer.conf
-index 24469115e4..94489983e3 100644
---- a/meta-webserver/conf/layer.conf
-+++ b/meta-webserver/conf/layer.conf
-@@ -17,7 +17,7 @@ LAYERVERSION_webserver = "1"
- 
- LAYERDEPENDS_webserver = "core openembedded-layer"
- 
--LAYERSERIES_COMPAT_webserver = "thud warrior zeus dunfell"
-+LAYERSERIES_COMPAT_webserver = "gatesgarth"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
-diff --git a/meta-xfce/conf/layer.conf b/meta-xfce/conf/layer.conf
-index 7e4bb178e0..a71eb8fe58 100644
---- a/meta-xfce/conf/layer.conf
-+++ b/meta-xfce/conf/layer.conf
-@@ -19,7 +19,7 @@ LAYERDEPENDS_xfce-layer += "multimedia-layer"
- LAYERDEPENDS_xfce-layer += "meta-python"
- LAYERDEPENDS_xfce-layer += "networking-layer"
- 
--LAYERSERIES_COMPAT_xfce-layer = "thud warrior zeus dunfell"
-+LAYERSERIES_COMPAT_xfce-layer = "gatesgarth"
- 
- SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
-   openzone->gdk-pixbuf \
+ SRC_URI = "https://dl.fefe.de/${BP}.tar.bz2"
 -- 
 2.28.0
 
