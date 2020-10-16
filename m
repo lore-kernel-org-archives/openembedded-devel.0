@@ -1,184 +1,80 @@
-Received: from mail-il1-f171.google.com (mail-il1-f171.google.com [209.85.166.171])
- by mx.groups.io with SMTP id smtpd.web11.16921.1602858444996864586
+Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com [209.85.216.66])
+ by mx.groups.io with SMTP id smtpd.web11.17088.1602858848507482469
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Oct 2020 07:27:25 -0700
+ Fri, 16 Oct 2020 07:34:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=LiIDuzTC;
- spf=pass (domain: gmail.com, ip: 209.85.166.171, mailfrom: ticotimo@gmail.com)
-Received: by mail-il1-f171.google.com with SMTP id p16so2853810ilq.5
-        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2020 07:27:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=TAALcpjL;
+ spf=pass (domain: gmail.com, ip: 209.85.216.66, mailfrom: ticotimo@gmail.com)
+Received: by mail-pj1-f66.google.com with SMTP id hk7so1626140pjb.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Oct 2020 07:34:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=qHiTyvBxYPHi1SnOJMs2pZcEmlVQtR7CGBII0B396jU=;
-        b=LiIDuzTCYoLuxLarUhrmqbahNQcWYx5Ca35o5GojjRoqmWEKIDNYJVhrzNVS0aEBky
-         iQBQpplY5sHAMITo8iNTfk5qYg8R2aGLu6gUhXpDbpsFhRfGUpFdyXXw0tWJYfuNmwqj
-         U2wocP40X3dbaZdvJzNwwwM+CzY14GIxnG7E5ylgg2rucPBgzHGKyQwi8zT4QakDR0Pt
-         /b4Hus4lBSjD9IXVlxIcMEpzWJrnQ06kIAXP6j2j2juliG8sgN8Xgxi+RD12g0ZAXDAC
-         j5AP1YZulgacyU/5WvquTG0l3Mpuz72WkHUMQdM1bm5VzOZoohOJgZ62dKfHgwtl49nC
-         t3ZQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=vqkcUQJjvMQsHxQ98xWPKEmscwwxrQ+Z+Z3DiveuyR8=;
+        b=TAALcpjLPQg07+fEo5AwfN5ER/5qCiRjFxN8TyQxdssVvnpQzuadv+KEtdoUTWtnfA
+         y1gYVxUYr80nG3DvUuyVv6z+So1HtirdODDVhNW7eRegHWHOHdKtShuEBWEaPeXNKIMe
+         pfXR1vNRcbeXCJaSFxIn+xs1v40vNZth78NCLn/lTNkuqjMOzXqnTYQzv4b7SdiD7QOW
+         XpSYZi6ume0emXs6Ul/M3o63tf8udk3m4EmtXZustztQyrbQo/KkscsjpqHEFCW/lJYn
+         zOktqdPN9asAMNNexCw+b1eoVCAkshVWsko58JXkqM9sN+Y58bBwEHFl0xqgmKls41kb
+         LrnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=qHiTyvBxYPHi1SnOJMs2pZcEmlVQtR7CGBII0B396jU=;
-        b=L3aZR7CM5njlQ54DQ/QKrduEQZIU6+LLcu5TCJrVT5UTzuVI2Npcj4thEVSFFpbQQx
-         Weu9Ao8VLCwoW2LAWJBGeEG6seANa1W8m0NTj98cH+qhnhpae3X0sm2iyKFOR/1rIvqc
-         WcM8ZcexS9hQELdIjoryif0wKlh/CTskQRqqNZvzKhjAbjSX+FBIvnyLUFjQCfJ+B5Ar
-         FQax/035GqoWxncjvTfPeGstwUlA1qzr5msf8bDuwz2nSqo0MzMAdunwihvbg6QFi5jh
-         CQAK+j5c9x3Z9FFsEsqCeJ42srIW+nCNCHXzgDU01HV9VGk4oI3UGs/BC4eYxFJjkHNw
-         Q0vg==
-X-Gm-Message-State: AOAM531Rv6DVz2MBC/i7Sg80uuqzrUcfXHUdML53y3EUiz0W673wO0pd
-	21pOwxkvsA6Tq1r2DJgbLW+FMsP3PZGoSv3zHVY=
-X-Google-Smtp-Source: ABdhPJwViAAVg6E8fk+322AWVhPgj2CV1MnvIX4AwW3byq6oUOpHJgNeej/izA+Q/32dQfHynPRzo3E5YWOmpA/YnFs=
-X-Received: by 2002:a92:d9cc:: with SMTP id n12mr2722500ilq.122.1602858444375;
- Fri, 16 Oct 2020 07:27:24 -0700 (PDT)
-MIME-Version: 1.0
-References: <20201012004603.990-1-babak.sarashki@windriver.com>
-In-Reply-To: <20201012004603.990-1-babak.sarashki@windriver.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=vqkcUQJjvMQsHxQ98xWPKEmscwwxrQ+Z+Z3DiveuyR8=;
+        b=ui4RwA76nCExDV63RvJGLWszn23HArD7nhru+G982LYkTTusHEgErqry9qeA+/xvKx
+         pVlcIdD9ZI4Soo4YsFY5tpH1kVp+rs7MrrXOJ/CMwQCpIX9FIwiJEF+fnRL5yWAh4GhA
+         yL5k1eL2ISyA1HG8+iZih9fVqchilj1Wx+DBuW33+YopwuiAEM3y9/6hkwfwK0gLtlLB
+         dfDVIwDEruFrLi51Hj3OxczZV5saxPoPVOScrSYC7A0fyOxL8hFScr34wL9api808l1r
+         RFRSiHyi0K7jNkKqXe+foKgtJ00B0A4htwO+z0j59/SPSZnvPfm2IydtR9k5gmecnqxG
+         r0bA==
+X-Gm-Message-State: AOAM533DEIqO/Eau1fHcKvIwrlgK8Iu60K3DgeSMCHo+o8RucR8FKZ1C
+	B4CUV9L5oz5wrOigmTMQruuUIoPVsvGdvA==
+X-Google-Smtp-Source: ABdhPJz/buHAtKep33CabF0YSdrbJwm1OesLX4os6y8vZmvAY6k6cQ1+nFU5uqUpilOW8r6CNK/vww==
+X-Received: by 2002:a17:902:930c:b029:d3:b362:7939 with SMTP id bc12-20020a170902930cb02900d3b3627939mr4428746plb.54.1602858847648;
+        Fri, 16 Oct 2020 07:34:07 -0700 (PDT)
+Return-Path: <ticotimo@gmail.com>
+Received: from thetis.hsd1.or.comcast.net ([2601:1c0:6000:9640:4938:26a4:cb77:8681])
+        by smtp.gmail.com with ESMTPSA id x16sm3082036pff.14.2020.10.16.07.34.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 16 Oct 2020 07:34:06 -0700 (PDT)
 From: "Tim Orling" <ticotimo@gmail.com>
-Date: Fri, 16 Oct 2020 07:27:13 -0700
-Message-ID: <CANx9H-B38g=au5r6iVy8uVqCB+dq5NaxfmvCAmRnPBFQeL-LBw@mail.gmail.com>
-Subject: Re: [oe] [meta-python2][PATCH 1/3] package port: python-kombu version 4.6.6
-To: Babak Sarashki <babak.sarashki@windriver.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="00000000000033d8b205b1ca9058"
+To: openembedded-devel@lists.openembedded.org
+Cc: Tim Orling <ticotimo@gmail.com>
+Subject: [meta-python2][PATCH] README: added recipes must add to packagroup
+Date: Fri, 16 Oct 2020 07:33:57 -0700
+Message-Id: <20201016143357.20699-1-ticotimo@gmail.com>
+X-Mailer: git-send-email 2.25.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
---00000000000033d8b205b1ca9058
-Content-Type: text/plain; charset="UTF-8"
-
-Please also submit a patch to add these three recipes to
+When new recipes are added, they must also be
+accompanied by a patch adding them to the
 packagroup-meta-python2
-https://git.openembedded.org/meta-python2/tree/recipes-core/packagegroups/packagegroup-meta-python2.bb
 
-The CI system behind this layer depends on the packagroup staying up to
-date.
+This packagegroup is critical to the function of
+the CI system behind this layer.
 
-On Sun, Oct 11, 2020 at 5:46 PM Babak Sarashki <babak.sarashki@windriver.com>
-wrote:
+Signed-off-by: Tim Orling <ticotimo@gmail.com>
+---
+ README | 3 +++
+ 1 file changed, 3 insertions(+)
 
-> Signed-off-by: Babak Sarashki <babak.sarashki@windriver.com>
-> ---
->  recipes-devtools/python/python-kombu_4.6.6.bb | 23 +++++++++++++++++++
->  1 file changed, 23 insertions(+)
->  create mode 100644 recipes-devtools/python/python-kombu_4.6.6.bb
->
-> diff --git a/recipes-devtools/python/python-kombu_4.6.6.bb
-> b/recipes-devtools/python/python-kombu_4.6.6.bb
-> new file mode 100644
-> index 0000000..72a9d90
-> --- /dev/null
-> +++ b/recipes-devtools/python/python-kombu_4.6.6.bb
-> @@ -0,0 +1,23 @@
-> +SUMMARY = "The aim of Kombu is to make messaging in Python as easy as
-> possible by providing \
-> +an idiomatic high-level interface for the AMQ protocol, and also provide
-> proven and tested \
-> +solutions to common messaging problems."
-> +
-> +DESCRIPTION = "A messaging framework for Python"
-> +BUGTRACKER = "http://github.com/celery/kombu/issues/"
-> +HOMEPAGE = "http://kombu.readthedocs.org"
-> +SECTION = "devel/python"
-> +LICENSE = "BSD"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=daea7c168428449fbee05e644df929f4"
-> +
-> +SRC_URI[md5sum] = "5f751ea817b1f6a4293d4e3a01040d4f"
-> +SRC_URI[sha256sum] =
-> "1760b54b1d15a547c9a26d3598a1c8cdaf2436386ac1f5561934bc8a3cbbbd86"
-> +
-> +inherit setuptools pypi
-> +
-> +PYPI_PACKAGE = "kombu"
-> +
-> +FILES_${PN}-doc += "${datadir}/${SRCNAME}"
-> +
-> +RDEPENDS_${PN} = " \
-> +        python-amqp \
-> +        "
-> --
-> 2.17.1
->
->
-> 
->
->
+diff --git a/README b/README
+index e81533e2..a34cbb0c 100644
+--- a/README
++++ b/README
+@@ -78,6 +78,9 @@ It is expected that ANY upgrades to a recipe will have undergone run-time testin
+ the upgrade. Many other developers depend upon the quality of this layer and will be quite upset with
+ you when you break their builds.
+ 
++It is expected that any patch adding a new recipe will also add the recipe to packagegroup-meta-python2.
++This packagegroup is critical to the function of the CI system behind maintenance of this layer.
++
+ Commit messages must include a "Signed-off-by:" line, including a valid email address and a legal name
+ (not a nickname). The "Signed-off-by:" line means that you are either the author or have the legal right
+ to submit the work. Please refer to the "Submitting a patch to OpenEmbedded" [6] and "Commit Patch
+-- 
+2.25.0
 
---00000000000033d8b205b1ca9058
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Please also submit a patch to add these three recipes to p=
-ackagroup-meta-python2<div><a href=3D"https://git.openembedded.org/meta-pyt=
-hon2/tree/recipes-core/packagegroups/packagegroup-meta-python2.bb">https://=
-git.openembedded.org/meta-python2/tree/recipes-core/packagegroups/packagegr=
-oup-meta-python2.bb</a><br></div><div><br></div><div>The CI system behind t=
-his layer depends on the packagroup staying up to date.</div></div><br><div=
- class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Sun, Oct 11=
-, 2020 at 5:46 PM Babak Sarashki &lt;<a href=3D"mailto:babak.sarashki@windr=
-iver.com">babak.sarashki@windriver.com</a>&gt; wrote:<br></div><blockquote =
-class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
-id rgb(204,204,204);padding-left:1ex">Signed-off-by: Babak Sarashki &lt;<a =
-href=3D"mailto:babak.sarashki@windriver.com" target=3D"_blank">babak.sarash=
-ki@windriver.com</a>&gt;<br>
----<br>
-=C2=A0recipes-devtools/python/<a href=3D"http://python-kombu_4.6.6.bb" rel=
-=
-=3D"noreferrer" target=3D"_blank">python-kombu_4.6.6.bb</a> | 23 +++++++++=
-++++++++++<br>
-=C2=A01 file changed, 23 insertions(+)<br>
-=C2=A0create mode 100644 recipes-devtools/python/<a href=3D"http://python-=
-kombu_4.6.6.bb" rel=3D"noreferrer" target=3D"_blank">python-kombu_4.6.6.bb<=
-/a><br>
-<br>
-diff --git a/recipes-devtools/python/<a href=3D"http://python-kombu_4.6.6.=
-bb" rel=3D"noreferrer" target=3D"_blank">python-kombu_4.6.6.bb</a> b/recipe=
-s-devtools/python/<a href=3D"http://python-kombu_4.6.6.bb" rel=3D"noreferre=
-r" target=3D"_blank">python-kombu_4.6.6.bb</a><br>
-new file mode 100644<br>
-index 0000000..72a9d90<br>
---- /dev/null<br>
-+++ b/recipes-devtools/python/<a href=3D"http://python-kombu_4.6.6.bb" rel=
-=
-=3D"noreferrer" target=3D"_blank">python-kombu_4.6.6.bb</a><br>
-@@ -0,0 +1,23 @@<br>
-+SUMMARY =3D &quot;The aim of Kombu is to make messaging in Python as easy=
- as possible by providing \<br>
-+an idiomatic high-level interface for the AMQ protocol, and also provide =
-proven and tested \<br>
-+solutions to common messaging problems.&quot;<br>
-+<br>
-+DESCRIPTION =3D &quot;A messaging framework for Python&quot;<br>
-+BUGTRACKER =3D &quot;<a href=3D"http://github.com/celery/kombu/issues/" r=
-el=3D"noreferrer" target=3D"_blank">http://github.com/celery/kombu/issues/<=
-/a>&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"http://kombu.readthedocs.org" rel=3D"norefe=
-rrer" target=3D"_blank">http://kombu.readthedocs.org</a>&quot;<br>
-+SECTION =3D &quot;devel/python&quot;<br>
-+LICENSE =3D &quot;BSD&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Ddaea7c168428449fbee05e644=
-df929f4&quot;<br>
-+<br>
-+SRC_URI[md5sum] =3D &quot;5f751ea817b1f6a4293d4e3a01040d4f&quot;<br>
-+SRC_URI[sha256sum] =3D &quot;1760b54b1d15a547c9a26d3598a1c8cdaf2436386ac1=
-f5561934bc8a3cbbbd86&quot;<br>
-+<br>
-+inherit setuptools pypi<br>
-+<br>
-+PYPI_PACKAGE =3D &quot;kombu&quot;<br>
-+<br>
-+FILES_${PN}-doc +=3D &quot;${datadir}/${SRCNAME}&quot;<br>
-+<br>
-+RDEPENDS_${PN} =3D &quot; \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 python-amqp \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
--- <br>
-2.17.1<br>
-<br>
-<br>
-<br>
-<br>
-</blockquote></div>
-
---00000000000033d8b205b1ca9058--
