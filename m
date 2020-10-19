@@ -1,54 +1,116 @@
-Received: from david.siemens.de (david.siemens.de [192.35.17.14])
- by mx.groups.io with SMTP id smtpd.web09.10585.1603103350820809618
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com [209.85.167.67])
+ by mx.groups.io with SMTP id smtpd.web10.11502.1603108073420804437
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Oct 2020 03:29:11 -0700
+ Mon, 19 Oct 2020 04:47:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: siemens.com, ip: 192.35.17.14, mailfrom: andrej.valek@siemens.com)
-Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
-	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id 09JAT8iW022328
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2020 12:29:08 +0200
-Received: from dev.vm6.ccp.siemens.com ([167.87.137.119])
-	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id 09JAT7jb003613;
-	Mon, 19 Oct 2020 12:29:08 +0200
-Received: from mail2.siemens.de (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 3CA4A950AAA;
-	Mon, 19 Oct 2020 12:29:05 +0200 (CEST)
-From: "Andrej Valek" <andrej.valek@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: andrej.kozemcak@siemens.com, Andrej Valek <andrej.valek@siemens.com>
-Subject: [oe][meta-oe][PATCH 2/2] nspr: upgrade 4.26 -> 4.29
-Date: Mon, 19 Oct 2020 12:25:59 +0200
-Message-Id: <20201019102559.19491-3-andrej.valek@siemens.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20201019102559.19491-1-andrej.valek@siemens.com>
-References: <20201019102559.19491-1-andrej.valek@siemens.com>
+ dkim=pass header.i=@burtonini-com.20150623.gappssmtp.com header.s=20150623 header.b=SWfhAyq3;
+ spf=pass (domain: burtonini.com, ip: 209.85.167.67, mailfrom: ross@burtonini.com)
+Received: by mail-lf1-f67.google.com with SMTP id d24so13755289lfa.8
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2020 04:47:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=burtonini-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:cc;
+        bh=iVNKn6gZid8So3s8IQT8JV0995jy4QeEsqV2KuDxnko=;
+        b=SWfhAyq3mJFxTQ0bERITvVWHow8cU6kmt6xV9t9gJdKQaG6N12HmTkWDZpB9yrTkVu
+         whPEk9yvP3deMgpRWmSFYuBihhHIgp2qC50qQsKI//BoCwF4NiAiwxvfh2RchBUst4oS
+         xvXsAlFEsqeJYEOytoFEteL0YMAaq1Bk77JCFuzsJg/aWa8k8RQV9PjvzOYTI1aNzFV5
+         RzsSSQpTUxfNRNxqdiQFrZO6V7gCRiwODXztySDY7/aEmKx9SeUd7iAWhEj8q5dZgJWs
+         jzNp4qs5BNnyD/0Rnd5ot0byvPcOp4POf+tNhtLuYUV3YKeI6bt0OmZCHnHTdJeBl+U9
+         rdeg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:cc;
+        bh=iVNKn6gZid8So3s8IQT8JV0995jy4QeEsqV2KuDxnko=;
+        b=U79oryr7M+rFDtpBpAfeddspxeCN5o1CcXFoVisiQhR4j4oCg8Jej4H48xc1xj7Hi0
+         T+Y89M/YTSdsvrtpX1nxF/6LNKFo7HX1dcOn0DWS+47ZLYqof/oIqYg8W948EOQjdEAw
+         VcegxWR9sQkPg0nMm5pLn+J7kb4ZfXU+IMEIrn7eDRoEkujFe2sGg99ZUZ7zOUHLM1Ba
+         YuMIigMy81+XIeEpHfn3+7oaGlK4DmGPS2RxjUxgLlKUR9Wd4xR0F/daSElrH2PG81FP
+         NqBnjTxlqXOemWwXo/oAoWUFE58wjVpynmqp6dWRDgjnI8ILjtL9eJzNLv04Cw680qoq
+         Q68A==
+X-Gm-Message-State: AOAM531it6i5QFM/ryLXY9IZtsAyaaoml4aMKMipJ0uGZlkG2axQIriI
+	gXfGtCCMPBx3Df8TS3MUBRWmYOsGwa5k0MhJkvFRBYNZrniAaP4b
+X-Google-Smtp-Source: ABdhPJyCOxXNSp3wLBUgtfhtvITl4SVET/krkIpronen1xwFAlSX22gszbFQpIiiu5S5lGfPL3XPI8lg1ZVv4CeKR/A=
+X-Received: by 2002:a19:4281:: with SMTP id p123mr5231471lfa.398.1603108070977;
+ Mon, 19 Oct 2020 04:47:50 -0700 (PDT)
+MIME-Version: 1.0
+References: <20201008161850.3097336-1-ross.burton@arm.com> <CAAnfSTuaLNpSAdLHLMAa9LEQsHp8AAoN+5ZzeWhjk=HdSoukAg@mail.gmail.com>
+In-Reply-To: <CAAnfSTuaLNpSAdLHLMAa9LEQsHp8AAoN+5ZzeWhjk=HdSoukAg@mail.gmail.com>
+From: "Ross Burton" <ross@burtonini.com>
+Date: Mon, 19 Oct 2020 12:47:39 +0100
+Message-ID: <CAAnfSTvGDpim26Jty7voLVDdCwarp_K506C5swh-upE9ECPU-A@mail.gmail.com>
+Subject: Re: [oe] [PATCH 1/2] mpv: fetch waf in do_fetch
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
-Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
----
- meta-oe/recipes-support/nspr/{nspr_4.26.bb => nspr_4.29.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/nspr/{nspr_4.26.bb => nspr_4.29.bb} (97%)
+The waf changes have been integrated into master now, so these can be merged.
 
-diff --git a/meta-oe/recipes-support/nspr/nspr_4.26.bb b/meta-oe/recipes-support/nspr/nspr_4.29.bb
-similarity index 97%
-rename from meta-oe/recipes-support/nspr/nspr_4.26.bb
-rename to meta-oe/recipes-support/nspr/nspr_4.29.bb
-index a15afd667..6307c159e 100644
---- a/meta-oe/recipes-support/nspr/nspr_4.26.bb
-+++ b/meta-oe/recipes-support/nspr/nspr_4.29.bb
-@@ -23,8 +23,8 @@ CACHED_CONFIGUREVARS_append_libc-musl = " CFLAGS='${CFLAGS} -D_PR_POLL_AVAILABLE
- UPSTREAM_CHECK_URI = "http://ftp.mozilla.org/pub/nspr/releases/"
- UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+)/"
- 
--SRC_URI[md5sum] = "615695d57eaafa1fca085d3891befd68"
--SRC_URI[sha256sum] = "fc9d142d85b74ffd2e6374a0c9016f3f2dac074225e24df3070e5a72d31b773d"
-+SRC_URI[md5sum] = "a546926d3c8e887be02c668c1293da92"
-+SRC_URI[sha256sum] = "22286bdb8059d74632cc7c2865c139e63953ecfb33bf4362ab58827e86e92582"
- 
- CVE_PRODUCT = "netscape_portable_runtime"
- 
--- 
-2.11.0
+Ross
 
+On Thu, 8 Oct 2020 at 17:26, Ross Burton <ross@burtonini.com> wrote:
+>
+> Note that this and the related glmark2 patch both depend on a change I
+> just submitted to oe-core[1].
+>
+> Ross
+> [1] https://patchwork.openembedded.org/patch/177061/
+>
+> On Thu, 8 Oct 2020 at 17:18, Ross Burton via lists.openembedded.org
+> <ross=burtonini.com@lists.openembedded.org> wrote:
+> >
+> > The mpv git repository doesn't include a copy of waf, instead there is a
+> > bootstrap script to fetch it.
+> >
+> > This recipe calls the bootstrap script in a do_patch postfunc, but
+> > downloading should be done in do_fetch. Instead of calling
+> > ./bootstrap.sh simply add waf to the SRC_URI so that Bitbake can use the
+> > mirrors/proxies/caching/checksum functionality.
+> >
+> > This is both better code and also works in buildtools environments
+> > where urllib2 can't make secure connections without configuration.
+> >
+> > [ YOCTO #14073 ]
+> >
+> > Signed-off-by: Ross Burton <ross.burton@arm.com>
+> > ---
+> >  meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb | 12 +++++-------
+> >  1 file changed, 5 insertions(+), 7 deletions(-)
+> >
+> > diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
+> > index e5f1096b6..5273fc040 100644
+> > --- a/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
+> > +++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
+> > @@ -18,7 +18,9 @@ LICENSE_FLAGS = "commercial"
+> >  SRCREV_mpv = "70b991749df389bcc0a4e145b5687233a03b4ed7"
+> >  SRC_URI = " \
+> >      git://github.com/mpv-player/mpv;name=mpv \
+> > +    https://waf.io/waf-2.0.20;name=waf;subdir=git \
+> >  "
+> > +SRC_URI[waf.sha256sum] = "bf971e98edc2414968a262c6aa6b88541a26c3cd248689c89f4c57370955ee7f"
+> >
+> >  S = "${WORKDIR}/git"
+> >
+> > @@ -101,14 +103,10 @@ EXTRA_OECONF = " \
+> >      ${PACKAGECONFIG_CONFARGS} \
+> >  "
+> >
+> > -do_patch[postfuncs] += "get_waf"
+> > -
+> > -get_waf() {
+> > -    cd ${S}
+> > -    ./bootstrap.py
+> > -    sed -i -e 's|/usr/bin/env python|/usr/bin/env python3|g' ${S}/waf
+> > -    cd -
+> > +link_waf() {
+> > +    ln -s waf-2.0.20 ${S}/waf
+> >  }
+> > +do_unpack[postfuncs] += "link_waf"
+> >
+> >  FILES_${PN} += " \
+> >      ${datadir}/icons \
+> > --
+> > 2.25.1
+> >
+> >
+> > 
+> >
