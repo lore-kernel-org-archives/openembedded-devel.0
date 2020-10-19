@@ -1,185 +1,134 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.11539.1603109159741290449
+Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com [209.85.218.68])
+ by mx.groups.io with SMTP id smtpd.web11.12169.1603110134081542383
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Oct 2020 05:06:00 -0700
+ Mon, 19 Oct 2020 05:22:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=40188 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kUTvF-0005AN-3k; Mon, 19 Oct 2020 15:05:56 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCH] transmission: Upgrade 2.94 -> 3.00
-Date: Mon, 19 Oct 2020 15:05:47 +0300
-Message-Id: <20201019120547.29869-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=quXDuA4U;
+ spf=pass (domain: gmail.com, ip: 209.85.218.68, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f68.google.com with SMTP id qp15so13606762ejb.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2020 05:22:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Va4BcVYGwRLm0e8MI5cwVPNrH0fSXo2OLFt9A0rBV88=;
+        b=quXDuA4UrSpI6cP9kE5oC21kpcL5ISzU7kAoWnTIWjmcgKZRxAy2RjV3NQ5c3pqfcM
+         ClKSsGMjpi4NCH1TMbCX+WP90JUIT6GTvPFFa/Kk9Htbrnl8D6IwayICwgoLjMuhWRzE
+         cVcH8lBaIYOzusBDHg1CpFRwaJoCj47x2UtrKqlXae+pity7ixvFi53c6rmTk0bwv/wg
+         eO2cGhrNKnQx10CfeKvQz/KJopTisKKWC6dFyQQiPg7NlP3LiMcDfgu7BddCw1nGtgg2
+         p+KGZNxIAeMXCfCKzeAHIWMuLbAoYK9f3zALba5GuYUpj2l8ApV+7lTTCdtccc8duJl+
+         okWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Va4BcVYGwRLm0e8MI5cwVPNrH0fSXo2OLFt9A0rBV88=;
+        b=IHEcR6hDg0nlNnA8hpeczCjmbwOlhubwnnf7T0VRoC1wB9tquG4NkZ+kvOnaYPOb35
+         9HpeBCl7Yv9XcT1O0NSFErUpYjVNVt3SD0BTJ/xQdIArcmFWhRh7G9iSEgTyUq35WIsA
+         ewiASv2RvGsjEm7kUZrNZ35JbBEYDERtkv1cJ9k4Jl5ENpsaDZ3go7ggxMEIqIVEpL8S
+         qNqdvuhT4b8I1UsQPhDGE9Z1maqVtqNZY1WVyWN4sSlKc1VNPeBWkRaF1ftMMITwTfb7
+         6defs1xcvScGzMgxQoZr9+h7IvN4tE7NR5MbL7exExhM+DXm1tgn1Hs7YgdTdtplNNk9
+         kmQQ==
+X-Gm-Message-State: AOAM533avyuKV84v33W6xHKrtqCetLVnT59dGO0ov4fqNoymJv2Dr5cg
+	C/iTzrjNmMwThxfvAbwsPpo8579C6nYqmKPdGjs=
+X-Google-Smtp-Source: ABdhPJxg6ju9NcZUOpEP/cSxJAoen78eG9ZtD62UcLbvM6LcuxKRby7FqyDrA+HPoc2Wne+LCy4xw+UpAyNJe/y5myc=
+X-Received: by 2002:a17:906:bc57:: with SMTP id s23mr16846372ejv.94.1603110132540;
+ Mon, 19 Oct 2020 05:22:12 -0700 (PDT)
+MIME-Version: 1.0
+References: <20201016143742.23076-1-ticotimo@gmail.com>
+In-Reply-To: <20201016143742.23076-1-ticotimo@gmail.com>
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+Date: Mon, 19 Oct 2020 14:22:01 +0200
+Message-ID: <CA+chaQctGbV_5AEqOoFvpmVHDijKKJCd6yX8kRTB+wutetqgLA@mail.gmail.com>
+Subject: Re: [oe] [meta-python2][PATCH] conf/layer.conf: LAYERSERIES_COMPAT gatesgarth
+To: Tim Orling <ticotimo@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000fc6a3e05b205294c"
 
-Upgrade to release 3.00:
+--000000000000fc6a3e05b205294c
+Content-Type: text/plain; charset="UTF-8"
 
-- Allow the RPC server to listen on an IPv6 address
-- Change TR_CURL_SSL_VERIFY to TR_CURL_SSL_NO_VERIFY and enable
-  verification by default
-- Go back to using hash as base name for resume and torrent files
-  (those stored in configuration directory)
-- Handle "fields" argument in "session-get" RPC request; if
-  "fields" array is present in arguments, only return session
-  fields specified; otherwise return all the fields as before
-- Limit the number of incorrect authentication attempts in
-  embedded web server to 100 to prevent brute-force attacks
-- Set idle seed limit range to 1..40320 (4 weeks tops) in all
-  clients
-- Add Peer ID for Xfplay, PicoTorrent, Free Download Manager,
-  Folx, Baidu Netdisk torrent clients
-- Announce INT64_MAX as size left if the value is unknown
-  (helps with e.g. Amazon S3 trackers)
-- Add TCP_FASTOPEN support (should result in slight speedup)
-- Improve ToS handling on IPv6 connections
-- Abort handshake if establishing DH shared secret fails (leads
-  to crash)
-- Don't switch trackers while announcing (leads to crash)
-- Improve completion scripts execution and error handling; add
-  support for .cmd and .bat files on Windows
-- Maintain a "session ID" file (in temporary directory) to better
-  detect whether session is local or remote; return the ID as
-  part of "session-get" response
-- Change torrent location even if no data move is needed
-- Support CIDR-notated blocklists
-- Update the resume file before running scripts
-- Make multiscrape limits adaptive
-- Add labels support to libtransmission and transmission-remote
-- Parse session-id header case-insensitively
-- Sanitize suspicious path components instead of rejecting them
-- Load CA certs from system store on Windows / OpenSSL
-- Add support for mbedtls (formely polarssl) and wolfssl (formely
-  cyassl), LibreSSL
-- Fix building against OpenSSL 1.1.0+
-- Fix quota support for uClibc-ng 1.0.18+ and DragonFly BSD
-- Fix a number of memory leaks (magnet loading, session shutdown,
-  bencoded data parsing)
-- Bump miniupnpc version to 2.0.20170509
-- CMake-related improvements (Ninja generator, libappindicator,
-  systemd, Solaris and macOS)
-- Switch to submodules to manage (most of) third-party
-  dependencies
-- Fail installation on Windows if UCRT is not installed
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-License-Update: Bump copyright to 2020
+Currently the last layer in my mix for LuneOS which doesn't parse until
+this hits master branch.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- ...onfigure.ac-Fix-no-libsystemd-daemon.patch | 40 -------------------
- .../transmission/transmission_git.bb          | 15 ++++---
- 2 files changed, 7 insertions(+), 48 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/transmission/files/0001-configure.ac-Fix-no-libsystemd-daemon.patch
+Please merge it soon.
 
-diff --git a/meta-oe/recipes-connectivity/transmission/files/0001-configure.ac-Fix-no-libsystemd-daemon.patch b/meta-oe/recipes-connectivity/transmission/files/0001-configure.ac-Fix-no-libsystemd-daemon.patch
-deleted file mode 100644
-index 130ead0842..0000000000
---- a/meta-oe/recipes-connectivity/transmission/files/0001-configure.ac-Fix-no-libsystemd-daemon.patch
-+++ /dev/null
-@@ -1,40 +0,0 @@
--From 73ee7e68402a77287054df779f0e44ae1a4f9f0b Mon Sep 17 00:00:00 2001
--From: Leon Anavi <leon.anavi@konsulko.com>
--Date: Mon, 11 May 2020 17:01:35 +0000
--Subject: [PATCH] configure.ac: Fix no libsystemd-daemon
--
--Replace libsystemd-daemon with libsystemd.
--
--Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-----
-- configure.ac | 5 ++---
-- 1 file changed, 2 insertions(+), 3 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index df8cb5007..9a6fb9b2e 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -249,10 +249,10 @@ AC_ARG_WITH([systemd-daemon], AS_HELP_STRING([--with-systemd-daemon],
--             [Add support for systemd startup notification (default is autodetected)]),
--             [USE_SYSTEMD_DAEMON=$withval], [USE_SYSTEMD_DAEMON=auto])
-- AS_IF([test "x$USE_SYSTEMD_DAEMON" != "xno"], [
---    PKG_CHECK_MODULES([SYSTEMD_DAEMON], [libsystemd-daemon],
--+    PKG_CHECK_MODULES([SYSTEMD_DAEMON], [libsystemd],
--         [AC_DEFINE(USE_SYSTEMD_DAEMON,1,[Use systemd startup notification])],
--         [AS_IF([test "x$USE_SYSTEMD_DAEMON" = "xyes"],
---            [AC_MSG_ERROR([systemd startup notification support requested, but libsystemd-daemon not found.])]
--+            [AC_MSG_ERROR([systemd startup notification support requested, but libsystemd not found.])]
--         )]
--     )
-- ])
--@@ -558,7 +558,6 @@ if test "x$enable_nls" = "xyes" ; then
--     GETTEXT_PACKAGE=transmission-gtk
--     AC_SUBST(GETTEXT_PACKAGE)
--     AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[Gettext package])
---    AM_GLIB_GNU_GETTEXT
--     transmissionlocaledir='${prefix}/${DATADIRNAME}/locale'
--     AC_SUBST(transmissionlocaledir)
-- fi
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-connectivity/transmission/transmission_git.bb b/meta-oe/recipes-connectivity/transmission/transmission_git.bb
-index 412bd9d3fa..297185de72 100644
---- a/meta-oe/recipes-connectivity/transmission/transmission_git.bb
-+++ b/meta-oe/recipes-connectivity/transmission/transmission_git.bb
-@@ -2,20 +2,19 @@ DESCRIPTION = "Transmission is a fast, easy, and free BitTorrent client"
- SECTION = "network"
- HOMEPAGE = "https://transmissionbt.com/"
- LICENSE = "GPL-2.0"
--LIC_FILES_CHKSUM = "file://COPYING;md5=0dd9fcdc1416ff123c41c785192a1895"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=73f535ddffcf2a0d3af4f381f84f9b33"
- 
- DEPENDS = "curl libevent gnutls openssl libtool intltool-native glib-2.0-native"
- RDEPENDS_${PN}-web = "${PN}"
- 
- SRC_URI = " \
--	git://github.com/transmission/transmission \
--	file://0001-configure.ac-Fix-no-libsystemd-daemon.patch \
-+	gitsm://github.com/transmission/transmission \
- 	file://transmission-daemon \
- "
- 
--# Transmission release 2.94
--SRCREV = "d8e60ee44f4295935bd98bf741f85ed19f5a7dfb"
--PV = "2.94"
-+# Transmission release 3.00
-+SRCREV = "bb6b5a062ee594dfd4b7a12a6b6e860c43849bfd"
-+PV = "3.00"
- 
- S = "${WORKDIR}/git"
- 
-@@ -25,7 +24,7 @@ PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)} \
-                  ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
- 
- PACKAGECONFIG[gtk] = " --with-gtk,--without-gtk,gtk+3,"
--PACKAGECONFIG[systemd] = "--with-systemd-daemon,--without-systemd-daemon,systemd,"
-+PACKAGECONFIG[systemd] = "--with-systemd,--without-systemd,systemd,"
- 
- # Weak default values for transmission user and group
- # Change them in bbappend if needed
-@@ -62,7 +61,7 @@ PACKAGES += "${PN}-gtk ${PN}-client ${PN}-web"
- FILES_${PN}-client = "${bindir}/transmission-remote ${bindir}/transmission-cli ${bindir}/transmission-create ${bindir}/transmission-show ${bindir}/transmission-edit"
- FILES_${PN}-gtk += "${bindir}/transmission-gtk ${datadir}/icons ${datadir}/applications ${datadir}/pixmaps"
- FILES_${PN}-web = "${datadir}/transmission/web"
--FILES_${PN} = "${bindir}/transmission-daemon ${sysconfdir}/init.d/transmission-daemon"
-+FILES_${PN} = "${bindir}/transmission-daemon ${sysconfdir}/init.d/transmission-daemon ${datadir}/appdata"
- 
- SYSTEMD_SERVICE_${PN} = "transmission-daemon.service"
- 
--- 
-2.17.1
+On Fri, Oct 16, 2020 at 4:37 PM Tim Orling <ticotimo@gmail.com> wrote:
 
+> In preparation for the release of Yocto Project 3.2,
+> "gatesgarth", change development branch to be only
+> compatible with the new release.
+>
+> Signed-off-by: Tim Orling <ticotimo@gmail.com>
+> ---
+>  conf/layer.conf | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index b25c9ef9..a5738d96 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -14,6 +14,6 @@ LAYERVERSION_meta-python2 = "1"
+>
+>  LAYERDEPENDS_meta-python2 = "core openembedded-layer"
+>
+> -LAYERSERIES_COMPAT_meta-python2 = "dunfell"
+> +LAYERSERIES_COMPAT_meta-python2 = "gatesgarth"
+>
+>  LICENSE_PATH += "${LAYERDIR}/licenses"
+> --
+> 2.25.0
+>
+>
+> 
+>
+>
+
+--000000000000fc6a3e05b205294c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Acked-by: Martin Jansa &lt;<a href=3D"mailto:Martin.Jansa@=
+gmail.com">Martin.Jansa@gmail.com</a>&gt;<br><div><br></div><div>Currently =
+the last layer in my mix for LuneOS which doesn&#39;t parse until this hits=
+ master branch.</div><div><br></div><div>Please merge it soon.</div></div><=
+br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri,=
+ Oct 16, 2020 at 4:37 PM Tim Orling &lt;<a href=3D"mailto:ticotimo@gmail.co=
+m">ticotimo@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_qu=
+ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
+4);padding-left:1ex">In preparation for the release of Yocto Project 3.2,<b=
+r>
+&quot;gatesgarth&quot;, change development branch to be only<br>
+compatible with the new release.<br>
+<br>
+Signed-off-by: Tim Orling &lt;<a href=3D"mailto:ticotimo@gmail.com" target=
+=
+=3D"_blank">ticotimo@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0conf/layer.conf | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/conf/layer.conf b/conf/layer.conf<br>
+index b25c9ef9..a5738d96 100644<br>
+--- a/conf/layer.conf<br>
++++ b/conf/layer.conf<br>
+@@ -14,6 +14,6 @@ LAYERVERSION_meta-python2 =3D &quot;1&quot;<br>
+<br>
+=C2=A0LAYERDEPENDS_meta-python2 =3D &quot;core openembedded-layer&quot;<br=
+>
+<br>
+-LAYERSERIES_COMPAT_meta-python2 =3D &quot;dunfell&quot;<br>
++LAYERSERIES_COMPAT_meta-python2 =3D &quot;gatesgarth&quot;<br>
+<br>
+=C2=A0LICENSE_PATH +=3D &quot;${LAYERDIR}/licenses&quot;<br>
+-- <br>
+2.25.0<br>
+<br>
+<br>
+<br>
+<br>
+</blockquote></div>
+
+--000000000000fc6a3e05b205294c--
