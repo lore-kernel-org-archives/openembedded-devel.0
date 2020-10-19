@@ -1,109 +1,185 @@
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
- by mx.groups.io with SMTP id smtpd.web09.11530.1603108244690624966
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.11539.1603109159741290449
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Oct 2020 04:50:45 -0700
+ Mon, 19 Oct 2020 05:06:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=k30DFyCp;
- spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f41.google.com with SMTP id z5so7648163ejw.7
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2020 04:50:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Yxn8m9P7GJL4gVyJs563uxTmzfInAh7VZ+fe9l24Yx0=;
-        b=k30DFyCpODcdWRmJ11f1MP0ye3VyP28+4OQiDCzf0dWYFrxhU4A286TJ4Zqm4ySku8
-         43ks4XXLhy9PX6S3caRXdG3xoFXgZeXljoudy3tfHwWjyuoSCIt8yqxHEqiigIlbEmgA
-         j2vbC10Uus67lTw1tL0awqHKvStRPbeXT6q9pIX3jXCI8dSGrgzZEcZ7TR9T7+J4uK9Y
-         ByXjetQ5mzqguF8i4xts7/7EVSEhZXtGuAMxQGawOkfVC4i2SV4q5zwdT+t9Pb/VjlrE
-         J+PEj5rkvVDsrhWJvupTSSLj0CPfSglJWd57FB4yQ67uSGRQ8gFLDQjB2IiVtlfek6Fg
-         j9Mg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Yxn8m9P7GJL4gVyJs563uxTmzfInAh7VZ+fe9l24Yx0=;
-        b=F5bYxKNSDSkftn59z1ew1z1GfN3Jcn0ogYAZWHEzcrMyytJtG14aiJQzr3hwx71UNW
-         cNysY1CHkpqVJGbKWSanfUtWmFmrMOWhpmqUfUVzvUG4P0rNLTMde+1Vs/ciwdT1IKqM
-         Yf9Li5AqfL0yXpEZgTs5KNurQcmktxunQGWlVlK076HekexuZYBHFZAe9TYWgg8AFizq
-         f5zL8mufwGifPC8bkJr8OFivw83EDFXZ+7c0sX73l4ur7TaVN+pc9iLzFKR9zBfJA/LT
-         xPFtb9fykPNjF4KdF+60P+aRvUM1evRyXR69y9iOjjt2SOB8affCDD5TV5R4b9SR1w5V
-         Gn7A==
-X-Gm-Message-State: AOAM533S1hDaEOa+DkD+3SgBuX37X0dlUUD1zcNPcjYFTKCpMtzUfe9F
-	skMpJwwPidcVWRQnOsVEYBLj+aqXqTc=
-X-Google-Smtp-Source: ABdhPJxG2wLeHZ1RtEitNfuWFT6xEnadfE146Kp0Fvi/oCaNRd23VHwSOdvHhV6+OcSAhEOv0rdPNg==
-X-Received: by 2002:a17:906:ae48:: with SMTP id lf8mr16558694ejb.345.1603108242890;
-        Mon, 19 Oct 2020 04:50:42 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id p16sm10475408edu.74.2020.10.19.04.50.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Oct 2020 04:50:42 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=40188 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kUTvF-0005AN-3k; Mon, 19 Oct 2020 15:05:56 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-multimedia][PATCH] mpd: add commercial LICENSE_FLAGS when ffmpeg or aac PACKAGECONFIG is enabled
-Date: Mon, 19 Oct 2020 13:50:40 +0200
-Message-Id: <20201019115040.17030-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH] transmission: Upgrade 2.94 -> 3.00
+Date: Mon, 19 Oct 2020 15:05:47 +0300
+Message-Id: <20201019120547.29869-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-* resolves bitbake world error:
-  ERROR: Nothing PROVIDES 'ffmpeg' (but meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb DEPENDS on or otherwise requires it)
-  ffmpeg was skipped: because it has a restricted license 'commercial'. Which is not whitelisted in LICENSE_FLAGS_WHITELIST
-  ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-  Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'mpd', 'ffmpeg']
+Upgrade to release 3.00:
 
-* aac is conditionally included in PACKAGECONFIG based on LICENSE_FLAGS
-  since:
+- Allow the RPC server to listen on an IPv6 address
+- Change TR_CURL_SSL_VERIFY to TR_CURL_SSL_NO_VERIFY and enable
+  verification by default
+- Go back to using hash as base name for resume and torrent files
+  (those stored in configuration directory)
+- Handle "fields" argument in "session-get" RPC request; if
+  "fields" array is present in arguments, only return session
+  fields specified; otherwise return all the fields as before
+- Limit the number of incorrect authentication attempts in
+  embedded web server to 100 to prevent brute-force attacks
+- Set idle seed limit range to 1..40320 (4 weeks tops) in all
+  clients
+- Add Peer ID for Xfplay, PicoTorrent, Free Download Manager,
+  Folx, Baidu Netdisk torrent clients
+- Announce INT64_MAX as size left if the value is unknown
+  (helps with e.g. Amazon S3 trackers)
+- Add TCP_FASTOPEN support (should result in slight speedup)
+- Improve ToS handling on IPv6 connections
+- Abort handshake if establishing DH shared secret fails (leads
+  to crash)
+- Don't switch trackers while announcing (leads to crash)
+- Improve completion scripts execution and error handling; add
+  support for .cmd and .bat files on Windows
+- Maintain a "session ID" file (in temporary directory) to better
+  detect whether session is local or remote; return the ID as
+  part of "session-get" response
+- Change torrent location even if no data move is needed
+- Support CIDR-notated blocklists
+- Update the resume file before running scripts
+- Make multiscrape limits adaptive
+- Add labels support to libtransmission and transmission-remote
+- Parse session-id header case-insensitively
+- Sanitize suspicious path components instead of rejecting them
+- Load CA certs from system store on Windows / OpenSSL
+- Add support for mbedtls (formely polarssl) and wolfssl (formely
+  cyassl), LibreSSL
+- Fix building against OpenSSL 1.1.0+
+- Fix quota support for uClibc-ng 1.0.18+ and DragonFly BSD
+- Fix a number of memory leaks (magnet loading, session shutdown,
+  bencoded data parsing)
+- Bump miniupnpc version to 2.0.20170509
+- CMake-related improvements (Ninja generator, libappindicator,
+  systemd, Solaris and macOS)
+- Switch to submodules to manage (most of) third-party
+  dependencies
+- Fail installation on Windows if UCRT is not installed
 
-  commit f5d271fd545c5b78d4a8fbc81e54df454fa0d5e4
-  Author: Armin Kuster <akuster808@gmail.com>
-  Date:   Mon Oct 1 08:05:28 2018 -0700
+License-Update: Bump copyright to 2020
 
-    mpd: enable aac PACKAGECONFIG only with commercial LICENSE_FLAGS
-
-  maybe we could use the same for ffmpeg, but the conditional should
-  be a bit more complicated, because the aac support is whitelisted by
-  either commercial, commercial_faad2 or faad2 in LICENSE_FLAGS_WHITELIST
-  not just currently checked 'commercial'.
-
-  and we cannot use LICENSE_FLAGS conditional in both, because that leads to
-  bb.data_smart.ExpansionError: Failure expanding variable LICENSE_FLAGS, expression was
-  ${@bb.utils.contains('PACKAGECONFIG', 'ffmpeg', 'commercial', '', d)}
-  which triggered exception RecursionError: maximum recursion depth exceeded
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ ...onfigure.ac-Fix-no-libsystemd-daemon.patch | 40 -------------------
+ .../transmission/transmission_git.bb          | 15 ++++---
+ 2 files changed, 7 insertions(+), 48 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/transmission/files/0001-configure.ac-Fix-no-libsystemd-daemon.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
-index 818b9271f9..b214672c62 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
-@@ -1,6 +1,9 @@
- SUMMARY = "Music Player Daemon"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+
-+LICENSE_FLAGS = "${@bb.utils.contains_any('PACKAGECONFIG', ['ffmpeg', 'aac'], 'commercial', '', d)}"
-+
- HOMEPAGE ="http://www.musicpd.org"
+diff --git a/meta-oe/recipes-connectivity/transmission/files/0001-configure.ac-Fix-no-libsystemd-daemon.patch b/meta-oe/recipes-connectivity/transmission/files/0001-configure.ac-Fix-no-libsystemd-daemon.patch
+deleted file mode 100644
+index 130ead0842..0000000000
+--- a/meta-oe/recipes-connectivity/transmission/files/0001-configure.ac-Fix-no-libsystemd-daemon.patch
++++ /dev/null
+@@ -1,40 +0,0 @@
+-From 73ee7e68402a77287054df779f0e44ae1a4f9f0b Mon Sep 17 00:00:00 2001
+-From: Leon Anavi <leon.anavi@konsulko.com>
+-Date: Mon, 11 May 2020 17:01:35 +0000
+-Subject: [PATCH] configure.ac: Fix no libsystemd-daemon
+-
+-Replace libsystemd-daemon with libsystemd.
+-
+-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+----
+- configure.ac | 5 ++---
+- 1 file changed, 2 insertions(+), 3 deletions(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index df8cb5007..9a6fb9b2e 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -249,10 +249,10 @@ AC_ARG_WITH([systemd-daemon], AS_HELP_STRING([--with-systemd-daemon],
+-             [Add support for systemd startup notification (default is autodetected)]),
+-             [USE_SYSTEMD_DAEMON=$withval], [USE_SYSTEMD_DAEMON=auto])
+- AS_IF([test "x$USE_SYSTEMD_DAEMON" != "xno"], [
+--    PKG_CHECK_MODULES([SYSTEMD_DAEMON], [libsystemd-daemon],
+-+    PKG_CHECK_MODULES([SYSTEMD_DAEMON], [libsystemd],
+-         [AC_DEFINE(USE_SYSTEMD_DAEMON,1,[Use systemd startup notification])],
+-         [AS_IF([test "x$USE_SYSTEMD_DAEMON" = "xyes"],
+--            [AC_MSG_ERROR([systemd startup notification support requested, but libsystemd-daemon not found.])]
+-+            [AC_MSG_ERROR([systemd startup notification support requested, but libsystemd not found.])]
+-         )]
+-     )
+- ])
+-@@ -558,7 +558,6 @@ if test "x$enable_nls" = "xyes" ; then
+-     GETTEXT_PACKAGE=transmission-gtk
+-     AC_SUBST(GETTEXT_PACKAGE)
+-     AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[Gettext package])
+--    AM_GLIB_GNU_GETTEXT
+-     transmissionlocaledir='${prefix}/${DATADIRNAME}/locale'
+-     AC_SUBST(transmissionlocaledir)
+- fi
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-connectivity/transmission/transmission_git.bb b/meta-oe/recipes-connectivity/transmission/transmission_git.bb
+index 412bd9d3fa..297185de72 100644
+--- a/meta-oe/recipes-connectivity/transmission/transmission_git.bb
++++ b/meta-oe/recipes-connectivity/transmission/transmission_git.bb
+@@ -2,20 +2,19 @@ DESCRIPTION = "Transmission is a fast, easy, and free BitTorrent client"
+ SECTION = "network"
+ HOMEPAGE = "https://transmissionbt.com/"
+ LICENSE = "GPL-2.0"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=0dd9fcdc1416ff123c41c785192a1895"
++LIC_FILES_CHKSUM = "file://COPYING;md5=73f535ddffcf2a0d3af4f381f84f9b33"
  
- inherit autotools useradd systemd pkgconfig
-@@ -27,8 +30,7 @@ S = "${WORKDIR}/git"
+ DEPENDS = "curl libevent gnutls openssl libtool intltool-native glib-2.0-native"
+ RDEPENDS_${PN}-web = "${PN}"
  
- EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
+ SRC_URI = " \
+-	git://github.com/transmission/transmission \
+-	file://0001-configure.ac-Fix-no-libsystemd-daemon.patch \
++	gitsm://github.com/transmission/transmission \
+ 	file://transmission-daemon \
+ "
  
--PACKAGECONFIG ??= "alsa ao bzip2 daemon ffmpeg fifo flac fluidsynth iso9660 jack libsamplerate libwrap httpd mms mpg123 modplug sndfile upnp openal opus oss recorder vorbis wavpack zlib"
--PACKAGECONFIG_append = " ${@bb.utils.contains('LICENSE_FLAGS', 'commercial', 'aac', '', d)}"
-+PACKAGECONFIG ??= "aac alsa ao bzip2 daemon ffmpeg fifo flac fluidsynth iso9660 jack libsamplerate libwrap httpd mms mpg123 modplug sndfile upnp openal opus oss recorder vorbis wavpack zlib"
+-# Transmission release 2.94
+-SRCREV = "d8e60ee44f4295935bd98bf741f85ed19f5a7dfb"
+-PV = "2.94"
++# Transmission release 3.00
++SRCREV = "bb6b5a062ee594dfd4b7a12a6b6e860c43849bfd"
++PV = "3.00"
  
- PACKAGECONFIG[aac] = "--enable-aac,--disable-aac,faad2"
- PACKAGECONFIG[alsa] = "--enable-alsa,--disable-alsa,alsa-lib"
+ S = "${WORKDIR}/git"
+ 
+@@ -25,7 +24,7 @@ PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)} \
+                  ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+ 
+ PACKAGECONFIG[gtk] = " --with-gtk,--without-gtk,gtk+3,"
+-PACKAGECONFIG[systemd] = "--with-systemd-daemon,--without-systemd-daemon,systemd,"
++PACKAGECONFIG[systemd] = "--with-systemd,--without-systemd,systemd,"
+ 
+ # Weak default values for transmission user and group
+ # Change them in bbappend if needed
+@@ -62,7 +61,7 @@ PACKAGES += "${PN}-gtk ${PN}-client ${PN}-web"
+ FILES_${PN}-client = "${bindir}/transmission-remote ${bindir}/transmission-cli ${bindir}/transmission-create ${bindir}/transmission-show ${bindir}/transmission-edit"
+ FILES_${PN}-gtk += "${bindir}/transmission-gtk ${datadir}/icons ${datadir}/applications ${datadir}/pixmaps"
+ FILES_${PN}-web = "${datadir}/transmission/web"
+-FILES_${PN} = "${bindir}/transmission-daemon ${sysconfdir}/init.d/transmission-daemon"
++FILES_${PN} = "${bindir}/transmission-daemon ${sysconfdir}/init.d/transmission-daemon ${datadir}/appdata"
+ 
+ SYSTEMD_SERVICE_${PN} = "transmission-daemon.service"
+ 
 -- 
-2.25.1
+2.17.1
 
