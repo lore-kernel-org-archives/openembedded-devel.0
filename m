@@ -1,116 +1,109 @@
-Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com [209.85.167.67])
- by mx.groups.io with SMTP id smtpd.web10.11502.1603108073420804437
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web09.11530.1603108244690624966
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Oct 2020 04:47:53 -0700
+ Mon, 19 Oct 2020 04:50:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@burtonini-com.20150623.gappssmtp.com header.s=20150623 header.b=SWfhAyq3;
- spf=pass (domain: burtonini.com, ip: 209.85.167.67, mailfrom: ross@burtonini.com)
-Received: by mail-lf1-f67.google.com with SMTP id d24so13755289lfa.8
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2020 04:47:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=k30DFyCp;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id z5so7648163ejw.7
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2020 04:50:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=burtonini-com.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:cc;
-        bh=iVNKn6gZid8So3s8IQT8JV0995jy4QeEsqV2KuDxnko=;
-        b=SWfhAyq3mJFxTQ0bERITvVWHow8cU6kmt6xV9t9gJdKQaG6N12HmTkWDZpB9yrTkVu
-         whPEk9yvP3deMgpRWmSFYuBihhHIgp2qC50qQsKI//BoCwF4NiAiwxvfh2RchBUst4oS
-         xvXsAlFEsqeJYEOytoFEteL0YMAaq1Bk77JCFuzsJg/aWa8k8RQV9PjvzOYTI1aNzFV5
-         RzsSSQpTUxfNRNxqdiQFrZO6V7gCRiwODXztySDY7/aEmKx9SeUd7iAWhEj8q5dZgJWs
-         jzNp4qs5BNnyD/0Rnd5ot0byvPcOp4POf+tNhtLuYUV3YKeI6bt0OmZCHnHTdJeBl+U9
-         rdeg==
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Yxn8m9P7GJL4gVyJs563uxTmzfInAh7VZ+fe9l24Yx0=;
+        b=k30DFyCpODcdWRmJ11f1MP0ye3VyP28+4OQiDCzf0dWYFrxhU4A286TJ4Zqm4ySku8
+         43ks4XXLhy9PX6S3caRXdG3xoFXgZeXljoudy3tfHwWjyuoSCIt8yqxHEqiigIlbEmgA
+         j2vbC10Uus67lTw1tL0awqHKvStRPbeXT6q9pIX3jXCI8dSGrgzZEcZ7TR9T7+J4uK9Y
+         ByXjetQ5mzqguF8i4xts7/7EVSEhZXtGuAMxQGawOkfVC4i2SV4q5zwdT+t9Pb/VjlrE
+         J+PEj5rkvVDsrhWJvupTSSLj0CPfSglJWd57FB4yQ67uSGRQ8gFLDQjB2IiVtlfek6Fg
+         j9Mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:cc;
-        bh=iVNKn6gZid8So3s8IQT8JV0995jy4QeEsqV2KuDxnko=;
-        b=U79oryr7M+rFDtpBpAfeddspxeCN5o1CcXFoVisiQhR4j4oCg8Jej4H48xc1xj7Hi0
-         T+Y89M/YTSdsvrtpX1nxF/6LNKFo7HX1dcOn0DWS+47ZLYqof/oIqYg8W948EOQjdEAw
-         VcegxWR9sQkPg0nMm5pLn+J7kb4ZfXU+IMEIrn7eDRoEkujFe2sGg99ZUZ7zOUHLM1Ba
-         YuMIigMy81+XIeEpHfn3+7oaGlK4DmGPS2RxjUxgLlKUR9Wd4xR0F/daSElrH2PG81FP
-         NqBnjTxlqXOemWwXo/oAoWUFE58wjVpynmqp6dWRDgjnI8ILjtL9eJzNLv04Cw680qoq
-         Q68A==
-X-Gm-Message-State: AOAM531it6i5QFM/ryLXY9IZtsAyaaoml4aMKMipJ0uGZlkG2axQIriI
-	gXfGtCCMPBx3Df8TS3MUBRWmYOsGwa5k0MhJkvFRBYNZrniAaP4b
-X-Google-Smtp-Source: ABdhPJyCOxXNSp3wLBUgtfhtvITl4SVET/krkIpronen1xwFAlSX22gszbFQpIiiu5S5lGfPL3XPI8lg1ZVv4CeKR/A=
-X-Received: by 2002:a19:4281:: with SMTP id p123mr5231471lfa.398.1603108070977;
- Mon, 19 Oct 2020 04:47:50 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Yxn8m9P7GJL4gVyJs563uxTmzfInAh7VZ+fe9l24Yx0=;
+        b=F5bYxKNSDSkftn59z1ew1z1GfN3Jcn0ogYAZWHEzcrMyytJtG14aiJQzr3hwx71UNW
+         cNysY1CHkpqVJGbKWSanfUtWmFmrMOWhpmqUfUVzvUG4P0rNLTMde+1Vs/ciwdT1IKqM
+         Yf9Li5AqfL0yXpEZgTs5KNurQcmktxunQGWlVlK076HekexuZYBHFZAe9TYWgg8AFizq
+         f5zL8mufwGifPC8bkJr8OFivw83EDFXZ+7c0sX73l4ur7TaVN+pc9iLzFKR9zBfJA/LT
+         xPFtb9fykPNjF4KdF+60P+aRvUM1evRyXR69y9iOjjt2SOB8affCDD5TV5R4b9SR1w5V
+         Gn7A==
+X-Gm-Message-State: AOAM533S1hDaEOa+DkD+3SgBuX37X0dlUUD1zcNPcjYFTKCpMtzUfe9F
+	skMpJwwPidcVWRQnOsVEYBLj+aqXqTc=
+X-Google-Smtp-Source: ABdhPJxG2wLeHZ1RtEitNfuWFT6xEnadfE146Kp0Fvi/oCaNRd23VHwSOdvHhV6+OcSAhEOv0rdPNg==
+X-Received: by 2002:a17:906:ae48:: with SMTP id lf8mr16558694ejb.345.1603108242890;
+        Mon, 19 Oct 2020 04:50:42 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id p16sm10475408edu.74.2020.10.19.04.50.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 Oct 2020 04:50:42 -0700 (PDT)
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-multimedia][PATCH] mpd: add commercial LICENSE_FLAGS when ffmpeg or aac PACKAGECONFIG is enabled
+Date: Mon, 19 Oct 2020 13:50:40 +0200
+Message-Id: <20201019115040.17030-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20201008161850.3097336-1-ross.burton@arm.com> <CAAnfSTuaLNpSAdLHLMAa9LEQsHp8AAoN+5ZzeWhjk=HdSoukAg@mail.gmail.com>
-In-Reply-To: <CAAnfSTuaLNpSAdLHLMAa9LEQsHp8AAoN+5ZzeWhjk=HdSoukAg@mail.gmail.com>
-From: "Ross Burton" <ross@burtonini.com>
-Date: Mon, 19 Oct 2020 12:47:39 +0100
-Message-ID: <CAAnfSTvGDpim26Jty7voLVDdCwarp_K506C5swh-upE9ECPU-A@mail.gmail.com>
-Subject: Re: [oe] [PATCH 1/2] mpv: fetch waf in do_fetch
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-The waf changes have been integrated into master now, so these can be merged.
+* resolves bitbake world error:
+  ERROR: Nothing PROVIDES 'ffmpeg' (but meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb DEPENDS on or otherwise requires it)
+  ffmpeg was skipped: because it has a restricted license 'commercial'. Which is not whitelisted in LICENSE_FLAGS_WHITELIST
+  ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
+  Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'mpd', 'ffmpeg']
 
-Ross
+* aac is conditionally included in PACKAGECONFIG based on LICENSE_FLAGS
+  since:
 
-On Thu, 8 Oct 2020 at 17:26, Ross Burton <ross@burtonini.com> wrote:
->
-> Note that this and the related glmark2 patch both depend on a change I
-> just submitted to oe-core[1].
->
-> Ross
-> [1] https://patchwork.openembedded.org/patch/177061/
->
-> On Thu, 8 Oct 2020 at 17:18, Ross Burton via lists.openembedded.org
-> <ross=burtonini.com@lists.openembedded.org> wrote:
-> >
-> > The mpv git repository doesn't include a copy of waf, instead there is a
-> > bootstrap script to fetch it.
-> >
-> > This recipe calls the bootstrap script in a do_patch postfunc, but
-> > downloading should be done in do_fetch. Instead of calling
-> > ./bootstrap.sh simply add waf to the SRC_URI so that Bitbake can use the
-> > mirrors/proxies/caching/checksum functionality.
-> >
-> > This is both better code and also works in buildtools environments
-> > where urllib2 can't make secure connections without configuration.
-> >
-> > [ YOCTO #14073 ]
-> >
-> > Signed-off-by: Ross Burton <ross.burton@arm.com>
-> > ---
-> >  meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb | 12 +++++-------
-> >  1 file changed, 5 insertions(+), 7 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
-> > index e5f1096b6..5273fc040 100644
-> > --- a/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
-> > +++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
-> > @@ -18,7 +18,9 @@ LICENSE_FLAGS = "commercial"
-> >  SRCREV_mpv = "70b991749df389bcc0a4e145b5687233a03b4ed7"
-> >  SRC_URI = " \
-> >      git://github.com/mpv-player/mpv;name=mpv \
-> > +    https://waf.io/waf-2.0.20;name=waf;subdir=git \
-> >  "
-> > +SRC_URI[waf.sha256sum] = "bf971e98edc2414968a262c6aa6b88541a26c3cd248689c89f4c57370955ee7f"
-> >
-> >  S = "${WORKDIR}/git"
-> >
-> > @@ -101,14 +103,10 @@ EXTRA_OECONF = " \
-> >      ${PACKAGECONFIG_CONFARGS} \
-> >  "
-> >
-> > -do_patch[postfuncs] += "get_waf"
-> > -
-> > -get_waf() {
-> > -    cd ${S}
-> > -    ./bootstrap.py
-> > -    sed -i -e 's|/usr/bin/env python|/usr/bin/env python3|g' ${S}/waf
-> > -    cd -
-> > +link_waf() {
-> > +    ln -s waf-2.0.20 ${S}/waf
-> >  }
-> > +do_unpack[postfuncs] += "link_waf"
-> >
-> >  FILES_${PN} += " \
-> >      ${datadir}/icons \
-> > --
-> > 2.25.1
-> >
-> >
-> > 
-> >
+  commit f5d271fd545c5b78d4a8fbc81e54df454fa0d5e4
+  Author: Armin Kuster <akuster808@gmail.com>
+  Date:   Mon Oct 1 08:05:28 2018 -0700
+
+    mpd: enable aac PACKAGECONFIG only with commercial LICENSE_FLAGS
+
+  maybe we could use the same for ffmpeg, but the conditional should
+  be a bit more complicated, because the aac support is whitelisted by
+  either commercial, commercial_faad2 or faad2 in LICENSE_FLAGS_WHITELIST
+  not just currently checked 'commercial'.
+
+  and we cannot use LICENSE_FLAGS conditional in both, because that leads to
+  bb.data_smart.ExpansionError: Failure expanding variable LICENSE_FLAGS, expression was
+  ${@bb.utils.contains('PACKAGECONFIG', 'ffmpeg', 'commercial', '', d)}
+  which triggered exception RecursionError: maximum recursion depth exceeded
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
+index 818b9271f9..b214672c62 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
+@@ -1,6 +1,9 @@
+ SUMMARY = "Music Player Daemon"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++
++LICENSE_FLAGS = "${@bb.utils.contains_any('PACKAGECONFIG', ['ffmpeg', 'aac'], 'commercial', '', d)}"
++
+ HOMEPAGE ="http://www.musicpd.org"
+ 
+ inherit autotools useradd systemd pkgconfig
+@@ -27,8 +30,7 @@ S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
+ 
+-PACKAGECONFIG ??= "alsa ao bzip2 daemon ffmpeg fifo flac fluidsynth iso9660 jack libsamplerate libwrap httpd mms mpg123 modplug sndfile upnp openal opus oss recorder vorbis wavpack zlib"
+-PACKAGECONFIG_append = " ${@bb.utils.contains('LICENSE_FLAGS', 'commercial', 'aac', '', d)}"
++PACKAGECONFIG ??= "aac alsa ao bzip2 daemon ffmpeg fifo flac fluidsynth iso9660 jack libsamplerate libwrap httpd mms mpg123 modplug sndfile upnp openal opus oss recorder vorbis wavpack zlib"
+ 
+ PACKAGECONFIG[aac] = "--enable-aac,--disable-aac,faad2"
+ PACKAGECONFIG[alsa] = "--enable-alsa,--disable-alsa,alsa-lib"
+-- 
+2.25.1
+
