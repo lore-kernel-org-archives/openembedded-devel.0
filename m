@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.8640.1603207570984971045
+ by mx.groups.io with SMTP id smtpd.web11.8647.1603207571406022607
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 20 Oct 2020 08:26:11 -0700
 Authentication-Results: mx.groups.io;
@@ -8,14 +8,16 @@ Received: from [78.130.197.211] (port=33424 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kUtWZ-0007NG-5r; Tue, 20 Oct 2020 18:26:08 +0300
+	id 1kUtWb-0007NG-Sv; Tue, 20 Oct 2020 18:26:10 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/3] python3-regex: Upgrade 2020.10.11 -> 2020.10.15
-Date: Tue, 20 Oct 2020 18:25:59 +0300
-Message-Id: <20201020152601.26261-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/3] python3-colorama: Upgrade 0.4.3 -> 0.4.4
+Date: Tue, 20 Oct 2020 18:26:00 +0300
+Message-Id: <20201020152601.26261-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20201020152601.26261-1-leon.anavi@konsulko.com>
+References: <20201020152601.26261-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,31 +30,40 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2020.10.15:
+Upgrade to release 0.4.4:
 
-- Fix GCC 10 warnings
+- Re-org of README, to put the most insteresting parts near
+  the top.
+- Added Linux makefile targets and Windows powershell scripts to
+  automate bootstrapping a development environment, and automate
+  the process of testing wheels before they are uploaded to PyPI.
+- Use stdlib unittest.mock where available
+- Travis CI now also builds on arm64
+- Demo06 demonstrates existing cursor positioning feature
+- Fix OSC regex & handling to prevent hang or crash
+- Document enterprise support by Tidelift
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ython3-regex_2020.10.11.bb => python3-regex_2020.10.15.bb} | 4 ++--
+ .../{python3-colorama_0.4.3.bb => python3-colorama_0.4.4.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-regex_2020.10.11.bb => python3-regex_2020.10.15.bb} (68%)
+ rename meta-python/recipes-devtools/python/{python3-colorama_0.4.3.bb => python3-colorama_0.4.4.bb} (65%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-regex_2020.10.11.bb b/meta-python/recipes-devtools/python/python3-regex_2020.10.15.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-regex_2020.10.11.bb
-rename to meta-python/recipes-devtools/python/python3-regex_2020.10.15.bb
-index df2c00bbaa..b72aabd0f4 100644
---- a/meta-python/recipes-devtools/python/python3-regex_2020.10.11.bb
-+++ b/meta-python/recipes-devtools/python/python3-regex_2020.10.15.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=f0a3e4a2554ebb89c0
+diff --git a/meta-python/recipes-devtools/python/python3-colorama_0.4.3.bb b/meta-python/recipes-devtools/python/python3-colorama_0.4.4.bb
+similarity index 65%
+rename from meta-python/recipes-devtools/python/python3-colorama_0.4.3.bb
+rename to meta-python/recipes-devtools/python/python3-colorama_0.4.4.bb
+index 31a523b0c1..54640de04e 100644
+--- a/meta-python/recipes-devtools/python/python3-colorama_0.4.3.bb
++++ b/meta-python/recipes-devtools/python/python3-colorama_0.4.4.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b4936429a56a652b84c5c01280dcaa26"
  
  inherit pypi setuptools3
  
--SRC_URI[md5sum] = "642c259122a3b578cec66d8bba5665e4"
--SRC_URI[sha256sum] = "463e770c48da76a8da82b8d4a48a541f314e0df91cbb6d873a341dbe578efafd"
-+SRC_URI[md5sum] = "ef9f43ab182949c79b2c8f869788f8aa"
-+SRC_URI[sha256sum] = "d25f5cca0f3af6d425c9496953445bf5b288bb5b71afc2b8308ad194b714c159"
+-SRC_URI[md5sum] = "02daee502863d24112a8c05a5d69a612"
+-SRC_URI[sha256sum] = "e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"
++SRC_URI[md5sum] = "57b22f2597f63df051b69906fbf310cc"
++SRC_URI[sha256sum] = "5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"
  
  BBCLASSEXTEND = "native nativesdk"
 -- 
