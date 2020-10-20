@@ -1,288 +1,136 @@
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.web10.10714.1603160425404319332
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.41])
+ by mx.groups.io with SMTP id smtpd.web11.950.1603171750624359391
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Oct 2020 19:20:25 -0700
+ Mon, 19 Oct 2020 22:29:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=s5mW9DRa;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: ticotimo@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id b26so254275pff.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Oct 2020 19:20:25 -0700 (PDT)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=hIaOYL8c;
+ spf=pass (domain: windriver.com, ip: 40.107.244.41, mailfrom: qi.chen@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Dg6sjhK6sVZcd0HRrlfTd4HnkJQOSK0NqV68BXJz/U6nTGB2Ct1zWhgUHGtZQhh0phHvlPTw0/WsF6K07bgMQLd97qEemoJZqOPkO0igRAdrPHpNDxCa+kHv+kIhxWAoKefthX4+FuuFj9f8Q/MNksRdOl9wI+fNnkHepQwcP/DJGE1O43/T5GJ25wO4QVZd7M5Hxh8Wi2lFtXTSTlD2vxDX3IlauyerzJpFDHAgXAYj0VLW5ojcDG0PLVD0rnlwh9BISfBGbRD+knyS7sG9SD9GwAD+GMpNMve17e/FeK6DAGzH+SyQyOZcxSy2SYXLg06Q6/RedINfjE298ev0RA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5Q4weNGnPlLZwAGGJAdiSbZu2NYVTGikM9ma3PvS4KY=;
+ b=fat6ED6q/9yvAyGhZIaVy6GTkHhSgEp0Rcse4jDv/mWoeZ+aUWA3B9J66/JWBeM373eWHZvqdtgqyUzQWjlTHwf9mSGL0NJUWxz/lzAsbv6pBm0HUufzpE3qV1cvibUlm4kc6IdYWrWnpEsqC2YtDw1j0FRe8np1qLmDq7DXePmByu4JvvWLN1QhUmoNvWDZl4kxGYJewrb/h0Csrmv5jgwdhdBSHHCX9feEpBpTmUqVV+MPUsGivcRnbSt6IWYA7tAgzVhSYkyxm1OUcaGCEqUNXT7CCusVYqTeB4S+3C/RgA3Rrt+yA9SKQ0w53+Ocv43HCQ4wCps13BNVHXXL6A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3uAD7FQ9vL1HAXE8tGQbgsaL7WPVN5FNFN89vFSr3U0=;
-        b=s5mW9DRaE8tLWa3jGCpEpI5km/eKXMNrWv0isLYIUA6+s7D+hALgiCjs77MyzCfpTA
-         WlgLMa/nIRdyQr4vfvKt/vi6CakrvAYafm96YF7Hkiy/4sTrDZ8xM94OZxGAekxLKDSn
-         yrJJ1sTSGyGjV1NaqIXV67A7YNjuJXl04Zm0WnR9AQI3WP6N4ev7IRdFYv2TOZAPJL9q
-         MQuKbocps10uJSVCUPHFaEEwElKJS/I7wzd09mTUWJyPRM0damzNr5f/DEa4kWgHoWO2
-         EwTEHOQQj7ikEt6KqaXv7nzLAH12pOdiaOspGaIqMrDN/2/+/HtKJ1shU/RwbYwIaA+Y
-         iYtw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3uAD7FQ9vL1HAXE8tGQbgsaL7WPVN5FNFN89vFSr3U0=;
-        b=mMYly4PnKyiZW+beyX51C8WTDcXf0X8Jb3qYBqup2X1bigUo/AUrjH3LO1zpmnAP9l
-         NWUAVpXCC0C+pi52osEU0rMLNV40t4mpVsV513m+Tqs7wR0udAa7pEf0QShI+KS1eIkJ
-         jp/6FXrAmftz5o133DQ5E391rNjnWae/MrHOcPgHRzGGF+wlfAl0gOx1Q/bKt6KUPn4H
-         n+SAGrASjH7AEriDOCvF5aENsSyES2PlCVDDa7c8Oq8ID3u0IU+0Rl7vbQ7nRvADMBMX
-         rHATItLPMzNp6jDngyY0UcmJ6s5F2cSInq++avcG/Br80Tw3qMiBFdeJtKQ8itl0Zjj4
-         dyLQ==
-X-Gm-Message-State: AOAM530SnYmJv8FhG1h4/hR5X/fEzrTOe72walst53blEUBP1dNkZYB4
-	hfss0eeLWMBdkNspc8Ghq73i2xoc8/ukTg==
-X-Google-Smtp-Source: ABdhPJy2N8XEGB4lcxdpAIjfhJGemPFe0rX2dvIToVulxrGW7vBZ9ktpOpZvy4F4+XOveIqLyPbMfw==
-X-Received: by 2002:a62:f94d:0:b029:15c:f1a3:cd47 with SMTP id g13-20020a62f94d0000b029015cf1a3cd47mr585500pfm.81.1603160424590;
-        Mon, 19 Oct 2020 19:20:24 -0700 (PDT)
-Return-Path: <ticotimo@gmail.com>
-Received: from thetis.hsd1.or.comcast.net ([2601:1c0:6000:9640:8da4:4c66:a47a:824f])
-        by smtp.gmail.com with ESMTPSA id y8sm248917pfg.104.2020.10.19.19.20.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Oct 2020 19:20:24 -0700 (PDT)
-From: "Tim Orling" <ticotimo@gmail.com>
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5Q4weNGnPlLZwAGGJAdiSbZu2NYVTGikM9ma3PvS4KY=;
+ b=hIaOYL8c9JAEEUJ5t3ZUm4eh1KVKj8CpIpvHegCOw6Fllz9gS8GXIBUz0ESXhRE/4Ty611tZuwuSZWLbMBWD/2AObLrmNSiJaXgcdgqRZbtJyubxWBbC6vJL5W+dZLajxdHxfVHhHpcAWYtBL0el4lHJ6Sr+TjxHbhZG/8X92dM=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from BYAPR11MB3480.namprd11.prod.outlook.com (2603:10b6:a03:79::27)
+ by BYAPR11MB3189.namprd11.prod.outlook.com (2603:10b6:a03:7c::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.28; Tue, 20 Oct
+ 2020 05:29:09 +0000
+Received: from BYAPR11MB3480.namprd11.prod.outlook.com
+ ([fe80::c4a4:4e3d:3154:98e4]) by BYAPR11MB3480.namprd11.prod.outlook.com
+ ([fe80::c4a4:4e3d:3154:98e4%5]) with mapi id 15.20.3477.028; Tue, 20 Oct 2020
+ 05:29:09 +0000
+From: "Chen Qi" <Qi.Chen@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <ticotimo@gmail.com>
-Subject: [meta-python2][master,gatesgarth][PATCH] kas: move kas and Pipenv to kas/
-Date: Mon, 19 Oct 2020 19:20:21 -0700
-Message-Id: <20201020022021.2572-1-ticotimo@gmail.com>
-X-Mailer: git-send-email 2.25.0
+Subject: [oe][meta-networking][PATCH] open-isns: use /run instead of /var/run in systemd service file
+Date: Tue, 20 Oct 2020 13:28:47 +0800
+Message-Id: <20201020052847.34507-1-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.17.1
+X-Originating-IP: [60.247.85.82]
+X-ClientProxiedBy: HK2PR02CA0139.apcprd02.prod.outlook.com
+ (2603:1096:202:16::23) To BYAPR11MB3480.namprd11.prod.outlook.com
+ (2603:10b6:a03:79::27)
+Return-Path: Qi.Chen@windriver.com
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from pek-lpg-core3.wrs.com (60.247.85.82) by HK2PR02CA0139.apcprd02.prod.outlook.com (2603:1096:202:16::23) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.21 via Frontend Transport; Tue, 20 Oct 2020 05:29:08 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 51f8f482-305e-4759-5973-08d874b911d6
+X-MS-TrafficTypeDiagnostic: BYAPR11MB3189:
+X-Microsoft-Antispam-PRVS: 
+	<BYAPR11MB31893C741730D6F00651A3F7ED1F0@BYAPR11MB3189.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:480;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	BKJTCb7n4nUlpj73pQ3T5ZwVhz5+wlL6FOFtyPLkib+P9LKSV6WPxsQldT2+luwqlUsjpMTsiN1XOcBfyYt0y4MmlJRm9emTM/oXLP6drknyRKPxUG3THiYiqpE6tqeDrpmO74tzfGe/8Z0PZRT919VKv9xIHg3HWnRRMSP7GieBZXjmqAbLS6KFlZkRgFj578VLbukLEhw6TEVOGWwR1mhxdKXBpCgPRVEbVUAUUMha3lkUmtu53u/vS1BQHXodQ3BjtRujgjgMxedRP2rMltKEL+Syq+WUk/v/3JsllPB2lL0frxc4w6APMidwGcNi
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR11MB3480.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(366004)(376002)(39850400004)(346002)(396003)(6916009)(6666004)(956004)(6512007)(2616005)(83380400001)(6486002)(1076003)(26005)(186003)(16526019)(316002)(66476007)(66556008)(86362001)(52116002)(36756003)(5660300002)(8676002)(8936002)(478600001)(6506007)(2906002)(66946007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	mvy+fKHRKq6Kq3Gm7534mpAZoqb8UnEICexBX58OydB0AITfE6js8jmFitaSOAJAjzaHVjCCrG0fp3MbqeGFq1v6IdPmq2G9vtUk8tC5YtG2YDG/eKqhGgq2H/t6r1DsGcQxdiX0L/m/U1VVP3tl1I6Xg06D+LNhzv75NP4ztoDcb53p6/lBKKd83bT44ZmgZsr/ebsMCo/lMAX7rOhwryimx+76j7aHmiBD0sskNT7J71mIgXnWfdHOITz7CoYBuDoO0CMVzPZq6PHRz42tKyfXgesCKyyEtc+9YJfPGm/+f10gi6FOTXL4PYXlQT3A++Sli5xCk1oMTMHmRtL2wG0zvBjx+Asa7dQyggLDBpm5Sp6A8dpdYWN6Mlf82K3fqpuJsbyZekM7lEjto3AQM5o+J9VITbMqUXsU/1l+Q235+qTxYh6rOmcdHLkMW1dP3ZG/A0KzN3oIg9c6+nO4+Y+xZQdT/Tf5W8EGllz7/NrCmJ3BjVlmLTazYoJbLIMdJAbm7HMl8xWRrqHG9vR0JzyWNDRu/QEJLS05E4Pk4kfly1ovyAbE9N6lopyH/oWZ+Jy3oFMP+dyOz+vCm6n+5fHh0WcrES9Xa6sDd238QJ3njIkWGtTLFxk35FFa9X6c8mbrHyyiaqdRqrZmRP1ZDQ==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 51f8f482-305e-4759-5973-08d874b911d6
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR11MB3480.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2020 05:29:09.2935
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kmDA0nRkkIBND90KJ5pQRwjEHXjS6mK4h3ImViLmXYVjCYfOIr/pBQl58sn8Ygdj/A4bEDZwNv5/gFFSM2hvXg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3189
+Content-Type: text/plain
 
-Move Pipenv, Pipenv.lock and kas*.yml files to kas
+/var/run has been deprecated by systemd, so use /run instead,
+as suggested by systemd.
 
-These kas specific workflow items do not need to
-clutter the root of git repo.
-
-Adjust .gitlab-ci.yml to the change.
-
-Signed-off-by: Tim Orling <ticotimo@gmail.com>
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .gitlab-ci.yml                       |  6 +-
- kas/Pipfile                          | 12 ++++
- kas/Pipfile.lock                     | 93 ++++++++++++++++++++++++++++
- kas/kas-meta-python2-image-base.yml  | 26 ++++++++
- kas/kas-meta-python2-image.yml       |  8 +++
- kas/kas-meta-python2-ptest-image.yml | 24 +++++++
- 6 files changed, 166 insertions(+), 3 deletions(-)
- create mode 100644 kas/Pipfile
- create mode 100644 kas/Pipfile.lock
- create mode 100644 kas/kas-meta-python2-image-base.yml
- create mode 100644 kas/kas-meta-python2-image.yml
- create mode 100644 kas/kas-meta-python2-ptest-image.yml
+ ...sd.socket-use-run-instead-of-var-run.patch | 26 +++++++++++++++++++
+ .../open-isns/open-isns_0.99.bb               |  4 ++-
+ 2 files changed, 29 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/open-isns/files/0001-isnsd.socket-use-run-instead-of-var-run.patch
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 81807699..5a478713 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -3,11 +3,11 @@ image: kasproject/kas:latest
- meta-python2-image:
-   stage: build
-   script:
--    - kas build kas-meta-python2-image.yml
-+    - kas build kas/kas-meta-python2-image.yml
- 
- meta-python2-ptest-image:
-   stage: build
-   script:
--    - kas build kas-meta-python2-ptest-image.yml
--    - kas build -c testimage kas-meta-python2-ptest-image.yml
-+    - kas build kas/kas-meta-python2-ptest-image.yml
-+    - kas build -c testimage kas/kas-meta-python2-ptest-image.yml
- 
-diff --git a/kas/Pipfile b/kas/Pipfile
+diff --git a/meta-networking/recipes-support/open-isns/files/0001-isnsd.socket-use-run-instead-of-var-run.patch b/meta-networking/recipes-support/open-isns/files/0001-isnsd.socket-use-run-instead-of-var-run.patch
 new file mode 100644
-index 00000000..4f2828fd
+index 000000000..1dde1cae8
 --- /dev/null
-+++ b/kas/Pipfile
-@@ -0,0 +1,12 @@
-+[[source]]
-+url = "https://pypi.python.org/simple"
-+verify_ssl = true
-+name = "pypi"
-+
-+[packages]
-+kas = "*"
-+
-+[dev-packages]
-+
-+[requires]
-+python_version = "3.7"
-diff --git a/kas/Pipfile.lock b/kas/Pipfile.lock
-new file mode 100644
-index 00000000..7b192e63
---- /dev/null
-+++ b/kas/Pipfile.lock
-@@ -0,0 +1,93 @@
-+{
-+    "_meta": {
-+        "hash": {
-+            "sha256": "807dcb4be569fc3eaf92f7e2c4df698b8797c43cfca5d6e28c1c2f7d3a29cc81"
-+        },
-+        "pipfile-spec": 6,
-+        "requires": {
-+            "python_version": "3.7"
-+        },
-+        "sources": [
-+            {
-+                "name": "pypi",
-+                "url": "https://pypi.python.org/simple",
-+                "verify_ssl": true
-+            }
-+        ]
-+    },
-+    "default": {
-+        "attrs": {
-+            "hashes": [
-+                "sha256:26b54ddbbb9ee1d34d5d3668dd37d6cf74990ab23c828c2888dccdceee395594",
-+                "sha256:fce7fc47dfc976152e82d53ff92fa0407700c21acd20886a13777a0d20e655dc"
-+            ],
-+            "version": "==20.2.0"
-+        },
-+        "distro": {
-+            "hashes": [
-+                "sha256:0e58756ae38fbd8fc3020d54badb8eae17c5b9dcbed388b17bb55b8a5928df92",
-+                "sha256:df74eed763e18d10d0da624258524ae80486432cd17392d9c3d96f5e83cd2799"
-+            ],
-+            "version": "==1.5.0"
-+        },
-+        "importlib-metadata": {
-+            "hashes": [
-+                "sha256:77a540690e24b0305878c37ffd421785a6f7e53c8b5720d211b211de8d0e95da",
-+                "sha256:cefa1a2f919b866c5beb7c9f7b0ebb4061f30a8a9bf16d609b000e2dfaceb9c3"
-+            ],
-+            "markers": "python_version < '3.8'",
-+            "version": "==2.0.0"
-+        },
-+        "jsonschema": {
-+            "hashes": [
-+                "sha256:4e5b3cf8216f577bee9ce139cbe72eca3ea4f292ec60928ff24758ce626cd163",
-+                "sha256:c8a85b28d377cc7737e46e2d9f2b4f44ee3c0e1deac6bf46ddefc7187d30797a"
-+            ],
-+            "version": "==3.2.0"
-+        },
-+        "kas": {
-+            "hashes": [
-+                "sha256:673e3857d1bd2e4070145cf355d6b221474fa3bd3a6a3f4b5dfae750f3887336"
-+            ],
-+            "index": "pypi",
-+            "version": "==2.2"
-+        },
-+        "pyrsistent": {
-+            "hashes": [
-+                "sha256:2e636185d9eb976a18a8a8e96efce62f2905fea90041958d8cc2a189756ebf3e"
-+            ],
-+            "version": "==0.17.3"
-+        },
-+        "pyyaml": {
-+            "hashes": [
-+                "sha256:06a0d7ba600ce0b2d2fe2e78453a470b5a6e000a985dd4a4e54e436cc36b0e97",
-+                "sha256:240097ff019d7c70a4922b6869d8a86407758333f02203e0fc6ff79c5dcede76",
-+                "sha256:4f4b913ca1a7319b33cfb1369e91e50354d6f07a135f3b901aca02aa95940bd2",
-+                "sha256:69f00dca373f240f842b2931fb2c7e14ddbacd1397d57157a9b005a6a9942648",
-+                "sha256:73f099454b799e05e5ab51423c7bcf361c58d3206fa7b0d555426b1f4d9a3eaf",
-+                "sha256:74809a57b329d6cc0fdccee6318f44b9b8649961fa73144a98735b0aaf029f1f",
-+                "sha256:7739fc0fa8205b3ee8808aea45e968bc90082c10aef6ea95e855e10abf4a37b2",
-+                "sha256:95f71d2af0ff4227885f7a6605c37fd53d3a106fcab511b8860ecca9fcf400ee",
-+                "sha256:b8eac752c5e14d3eca0e6dd9199cd627518cb5ec06add0de9d32baeee6fe645d",
-+                "sha256:cc8955cfbfc7a115fa81d85284ee61147059a753344bc51098f3ccd69b0d7e0c",
-+                "sha256:d13155f591e6fcc1ec3b30685d50bf0711574e2c0dfffd7644babf8b5102ca1a"
-+            ],
-+            "version": "==5.3.1"
-+        },
-+        "six": {
-+            "hashes": [
-+                "sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259",
-+                "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"
-+            ],
-+            "version": "==1.15.0"
-+        },
-+        "zipp": {
-+            "hashes": [
-+                "sha256:16522f69653f0d67be90e8baa4a46d66389145b734345d68a257da53df670903",
-+                "sha256:c1532a8030c32fd52ff6a288d855fe7adef5823ba1d26a29a68fd6314aa72baa"
-+            ],
-+            "version": "==3.3.1"
-+        }
-+    },
-+    "develop": {}
-+}
-diff --git a/kas/kas-meta-python2-image-base.yml b/kas/kas-meta-python2-image-base.yml
-new file mode 100644
-index 00000000..6b7293e0
---- /dev/null
-+++ b/kas/kas-meta-python2-image-base.yml
++++ b/meta-networking/recipes-support/open-isns/files/0001-isnsd.socket-use-run-instead-of-var-run.patch
 @@ -0,0 +1,26 @@
-+header:
-+  version: 8
++From 9413921d5af5e5e38541f97fee0f1aa40024a3ed Mon Sep 17 00:00:00 2001
++From: Chen Qi <Qi.Chen@windriver.com>
++Date: Tue, 20 Oct 2020 13:21:57 +0800
++Subject: [PATCH] isnsd.socket: use /run instead of /var/run
 +
-+machine: qemux86-64
-+distro: poky
-+target: meta-python2-image-base
++Upstream-Status: Pending
 +
-+repos:
-+  meta-python2:
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
++---
++ isnsd.socket | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+  poky:
-+    url: https://git.yoctoproject.org/git/poky
-+    refspec: master
-+    layers:
-+      meta:
-+      meta-poky:
++diff --git a/isnsd.socket b/isnsd.socket
++index 652cd46..7dfcf51 100644
++--- a/isnsd.socket
+++++ b/isnsd.socket
++@@ -1,5 +1,5 @@
++ [Socket]
++-ListenStream=/var/run/isnsctl
+++ListenStream=/run/isnsctl
++ PassCredentials=true
++ 
++ [Socket]
++-- 
++2.17.1
 +
-+  meta-openembedded:
-+    url: http://git.openembedded.org/meta-openembedded
-+    refspec: master
-+    layers:
-+      meta-oe:
-+
-+local_conf_header:
-+  reduce_diskspace: |
-+    INHERIT += "rm_work_and_downloads"
-diff --git a/kas/kas-meta-python2-image.yml b/kas/kas-meta-python2-image.yml
-new file mode 100644
-index 00000000..f5d82ba7
---- /dev/null
-+++ b/kas/kas-meta-python2-image.yml
-@@ -0,0 +1,8 @@
-+header:
-+  version: 8
-+  includes:
-+    - kas-meta-python2-image-base.yml
-+
-+machine: qemux86-64
-+distro: poky
-+target: meta-python2-image
-diff --git a/kas/kas-meta-python2-ptest-image.yml b/kas/kas-meta-python2-ptest-image.yml
-new file mode 100644
-index 00000000..a2ee8ca0
---- /dev/null
-+++ b/kas/kas-meta-python2-ptest-image.yml
-@@ -0,0 +1,24 @@
-+header:
-+  version: 8
-+  includes:
-+    - kas-meta-python2-image-base.yml
-+
-+machine: qemux86-64
-+distro: poky
-+target: meta-python2-ptest-image
-+
-+local_conf_header:
-+  enable_gtk_in_qemu: |
-+    DISTRO_FEATURES_append = "opengl"
-+    PACKAGECONFIG_pn-qemu-system-native = "fdt alsa kvm virglrenderer glx gtk+"
-+  enable_ptest_and_testimage: |
-+    IMAGE_CLASSES += " testimage"
-+    DISTRO_FEAURES_append = " ptest"
-+    EXTRA_IMAGE_FEATURES = "debug-tweaks"
-+    TESTIMAGE_AUTO = "1"
-+    TEST_SUITES = " ping ssh python2 ptest"
-+    TEST_QEMUPARAMS += "-smp 4 -m 8192"
-+    TEST_RUNQEMUPARAMS = "kvm gl-es gtk"
-+    IMAGE_ROOTFS_SIZE ?= "8192"
-+    IMAGE_ROOTFS_EXTRA_SPACE_append = "${@bb.utils.contains("DISTRO_FEATURES", "systemd", " + 4096", "", d)}"
-+    IMAGE_INSTALL_append = " ptest-runner dropbear procps coreutils iproute2 sysstat"
+diff --git a/meta-networking/recipes-support/open-isns/open-isns_0.99.bb b/meta-networking/recipes-support/open-isns/open-isns_0.99.bb
+index a03b92f5f..eb04dfae3 100644
+--- a/meta-networking/recipes-support/open-isns/open-isns_0.99.bb
++++ b/meta-networking/recipes-support/open-isns/open-isns_0.99.bb
+@@ -13,7 +13,9 @@ SECTION = "net"
+ 
+ DEPENDS = "openssl"
+ 
+-SRC_URI = "git://github.com/open-iscsi/open-isns"
++SRC_URI = "git://github.com/open-iscsi/open-isns \
++           file://0001-isnsd.socket-use-run-instead-of-var-run.patch \
++           "
+ 
+ SRCREV = "cfdbcff867ee580a71bc9c18c3a38a6057df0150"
+ 
 -- 
-2.25.0
+2.17.1
 
