@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.10195.1603278977701443343
+ by mx.groups.io with SMTP id smtpd.web08.10264.1603278978106517031
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 21 Oct 2020 04:16:18 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=40598 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kVC6J-0007Sd-1L; Wed, 21 Oct 2020 14:16:15 +0300
+	id 1kVC6J-0007Sd-Iw; Wed, 21 Oct 2020 14:16:16 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/7] python3-dominate: Upgrade 2.5.2 -> 2.6.0
-Date: Wed, 21 Oct 2020 14:16:04 +0300
-Message-Id: <20201021111609.28237-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/7] python3-urllib3: Upgrade 1.25.10 -> 1.25.11
+Date: Wed, 21 Oct 2020 14:16:05 +0300
+Message-Id: <20201021111609.28237-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201021111609.28237-1-leon.anavi@konsulko.com>
 References: <20201021111609.28237-1-leon.anavi@konsulko.com>
@@ -30,34 +30,39 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.6.0:
+Upgrade to release 1.25.11:
 
-- Add get_current() to return the current active element in a with
-  context
+- Fix retry backoff time parsed from Retry-After header when given
+  in the HTTP date format. The HTTP date was parsed as the local
+  timezone rather than accounting for the timezone in the HTTP
+  date (typically UTC)
+- Fix issue where an error would be raised when the SSLKEYLOGFILE
+  environment variable was set to the empty string. Now
+  SSLContext.keylog_file is not set in this situation
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-dominate_2.5.2.bb => python3-dominate_2.6.0.bb}  | 4 ++--
+ ...{python3-urllib3_1.25.10.bb => python3-urllib3_1.25.11.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-dominate_2.5.2.bb => python3-dominate_2.6.0.bb} (78%)
+ rename meta-python/recipes-devtools/python/{python3-urllib3_1.25.10.bb => python3-urllib3_1.25.11.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-dominate_2.5.2.bb b/meta-python/recipes-devtools/python/python3-dominate_2.6.0.bb
-similarity index 78%
-rename from meta-python/recipes-devtools/python/python3-dominate_2.5.2.bb
-rename to meta-python/recipes-devtools/python/python3-dominate_2.6.0.bb
-index 2044338942..b7c738d656 100644
---- a/meta-python/recipes-devtools/python/python3-dominate_2.5.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-dominate_2.6.0.bb
-@@ -2,8 +2,8 @@ SUMMARY = "Dominate is a Python library for creating and manipulating HTML docum
- LICENSE = "LGPLv3"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
+diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.25.11.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
+rename to meta-python/recipes-devtools/python/python3-urllib3_1.25.11.bb
+index db985a2ff4..980f4c53d2 100644
+--- a/meta-python/recipes-devtools/python/python3-urllib3_1.25.10.bb
++++ b/meta-python/recipes-devtools/python/python3-urllib3_1.25.11.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=65715c2eb961313d71b297dd5a04f85e"
  
--SRC_URI[md5sum] = "4a249c71cb009815923e9a47fa03ca08"
--SRC_URI[sha256sum] = "456facce7a7ccfd9363948109cf1e978d48c58e46a46b01c71b4c0adc73b1928"
-+SRC_URI[md5sum] = "9f714324ca99eee98bb3c3cdbe838de6"
-+SRC_URI[sha256sum] = "76ec2cde23700a6fc4fee098168b9dee43b99c2f1dd0ca6a711f683e8eb7e1e4"
+-SRC_URI[md5sum] = "94e3d4d472a14e788d4bd1a903fd102b"
+-SRC_URI[sha256sum] = "91056c15fa70756691db97756772bb1eb9678fa585d9184f24534b100dc60f4a"
++SRC_URI[md5sum] = "d47dd21a6e66a03c3633cac468ffd010"
++SRC_URI[sha256sum] = "8d7eaa5a82a1cac232164990f04874c594c9453ec55eef02eab885aa02fc17a2"
  
- inherit pypi setuptools3 ptest
+ inherit pypi setuptools3
  
 -- 
 2.17.1
