@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.8623.1603268738822284209
+ by mx.groups.io with SMTP id smtpd.web11.8575.1603268739347760447
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 21 Oct 2020 01:25:39 -0700
 Authentication-Results: mx.groups.io;
@@ -8,17 +8,17 @@ Received: from [78.130.197.211] (port=38626 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kV9R9-0005B2-OO; Wed, 21 Oct 2020 11:25:36 +0300
+	id 1kV9RA-0005B2-LH; Wed, 21 Oct 2020 11:25:37 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-semver: Upgrade 2.10.2 -> 2.13.0
-Date: Wed, 21 Oct 2020 11:25:29 +0300
-Message-Id: <20201021082530.10132-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-pydicti: Upgrade 1.1.3 -> 1.1.4
+Date: Wed, 21 Oct 2020 11:25:30 +0300
+Message-Id: <20201021082530.10132-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201021082530.10132-1-leon.anavi@konsulko.com>
 References: <20201021082530.10132-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=0.0
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,37 +30,35 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.13.0:
+Upgrade to release 1.1.4:
 
-- Document how to create subclass from VersionInfo
-- Ensure equal versions have equal hashes. Version equality means
-  for semver, that major, minor, patch, and prerelease parts are
-  equal in both versions you compare. The build part is ignored.
+- use str.casefold() on python3
+- make normalization function a parameter of build_dict, so that
+  user-defined normalization functions can be passed
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-semver_2.10.2.bb => python3-semver_2.13.0.bb}    | 4 ++--
+ .../{python3-pydicti_1.1.3.bb => python3-pydicti_1.1.4.bb}    | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-semver_2.10.2.bb => python3-semver_2.13.0.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-pydicti_1.1.3.bb => python3-pydicti_1.1.4.bb} (60%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-semver_2.10.2.bb b/meta-python/recipes-devtools/python/python3-semver_2.13.0.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-semver_2.10.2.bb
-rename to meta-python/recipes-devtools/python/python3-semver_2.13.0.bb
-index 71cb1acec3..8c7c424c6d 100644
---- a/meta-python/recipes-devtools/python/python3-semver_2.10.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-semver_2.13.0.bb
-@@ -4,8 +4,8 @@ BUGTRACKER = "https://github.com/k-bx/python-semver/issues"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e910b35b0ef4e1f665b9a75d6afb7709"
+diff --git a/meta-python/recipes-devtools/python/python3-pydicti_1.1.3.bb b/meta-python/recipes-devtools/python/python3-pydicti_1.1.4.bb
+similarity index 60%
+rename from meta-python/recipes-devtools/python/python3-pydicti_1.1.3.bb
+rename to meta-python/recipes-devtools/python/python3-pydicti_1.1.4.bb
+index bca0ba7378..29ad30e0f5 100644
+--- a/meta-python/recipes-devtools/python/python3-pydicti_1.1.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pydicti_1.1.4.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/coldfix/pydicti"
+ LICENSE = "WTFPL"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=389a9e29629d1f05e115f8f05c283df5"
  
--SRC_URI[md5sum] = "3e11ae9782121e8ffe9f8a8b763a8cb5"
--SRC_URI[sha256sum] = "c0a4a9d1e45557297a722ee9bac3de2ec2ea79016b6ffcaca609b0bc62cf4276"
-+SRC_URI[md5sum] = "e98b5fb283ea84daa5195087de83ebf1"
-+SRC_URI[sha256sum] = "fa0fe2722ee1c3f57eac478820c3a5ae2f624af8264cbdf9000c980ff7f75e3f"
+-SRC_URI[md5sum] = "b02ed35da91e400f1f17a57ab02ba06b"
+-SRC_URI[sha256sum] = "eea50576baa751a9b6b862f09f081c47d557e0298623ca8742851da72b00eec4"
++SRC_URI[md5sum] = "c8925e333a78766cb469c1626880bd35"
++SRC_URI[sha256sum] = "dcea4d1892fc68ca62aba835b1ed444a1eb48bd0cca0b4599efd45cbb6272b5c"
  
- inherit pypi setuptools3 ptest
- 
+ inherit pypi setuptools3
 -- 
 2.17.1
 
