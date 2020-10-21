@@ -1,62 +1,81 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.8681.1603268742839798684
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
+ by mx.groups.io with SMTP id smtpd.web09.9792.1603276417369363870
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2020 01:25:43 -0700
+ Wed, 21 Oct 2020 03:33:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=38626 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kV9R8-0005B2-M3; Wed, 21 Oct 2020 11:25:35 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=pass header.i=@bytesatwork-ch.20150623.gappssmtp.com header.s=20150623 header.b=fm2byrva;
+ spf=pass (domain: bytesatwork.ch, ip: 209.85.218.43, mailfrom: daniel.ammann@bytesatwork.ch)
+Received: by mail-ej1-f43.google.com with SMTP id t25so2405972ejd.13
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2020 03:33:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytesatwork-ch.20150623.gappssmtp.com; s=20150623;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Hb41qhrK8jShJv/X0woyuiP8lMtkB64tpML/sLY6dxM=;
+        b=fm2byrvaPjO/H7CFMnmLiF01d200PymEJUmKB0+jeDaBnIqdn6Bw56/vf13mQlQzQH
+         TZHAfbLVr7Av81PjeZNzty+ohgi3VVw5e1Ao0UJGq7ihVvUb+PUlEDHqgpY5lJViVQwN
+         b2SI44jxsLFnObgpUa45rZb/kjc4pwpdc/aO4Xv3LBD5EvmVSHFFJCDi5k3ag9XOyN7X
+         r2Fn38ji43cDZUdFK3gk8Bbtal4/olEkllfWI4NtFN/j9WvNtuwjw/gqfYMLGc+I6cwO
+         dFj8PIkGz5kziFZ6VHgqrfZXR9p8Mm8zC9VMQMrE9+UIVjx678wdxnSc1M/CFi0Lmm4O
+         yNnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Hb41qhrK8jShJv/X0woyuiP8lMtkB64tpML/sLY6dxM=;
+        b=ehSWqfnvJPGAx0sKxjJbO2JxdfOsWQv6H4lr72Flz325TT2+b7FA8gYxBmkAnwnzuw
+         FNd7N+Zf1JWC8ME55QZXxOIQTkSqmYhr9huXgbLfYz21n7/1RK7PjLoFvgrzc60fX7xr
+         8aHA1hkzxMDCgjInTWZoa6lM0clEq/osLeWB+UAbstb6RLO3cHFxObCeWGdUsRhr0Fsg
+         Tl/mGydCDwXLolblWq/JffLRZgEVHggSniq7uYyhHJZZk4Kb7kwFz0DSetYIftnaeDyQ
+         CUWJTiU91IKpbxY5xl3JtzEQ+l22HnKTuvIEbuCaNC6qNn2Rk+LGD6I5BYxGI5mSkqJY
+         iDlA==
+X-Gm-Message-State: AOAM530nTNUH3Zy3kxqd40pVhqPv7gD75mpQgfOrJ39Pnd+pBz1ag/4D
+	3roIU62tWv8XhamsQ7xgseQM6HDtXi8siyjF
+X-Google-Smtp-Source: ABdhPJyUQWl60cC7O7EgYW7/xEJ/UpvIEsaPS6jnUETUFCTexh4uqov6rHQCJSARp3WONJDRwFv8kA==
+X-Received: by 2002:a17:906:c094:: with SMTP id f20mr2881239ejz.550.1603276415646;
+        Wed, 21 Oct 2020 03:33:35 -0700 (PDT)
+Return-Path: <daniel.ammann@bytesatwork.ch>
+Received: from mimas.bytesatwork.ch (162.40.150.83.ftth.as8758.net. [83.150.40.162])
+        by smtp.gmail.com with ESMTPSA id k10sm2086348ejh.32.2020.10.21.03.33.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 21 Oct 2020 03:33:35 -0700 (PDT)
+From: "Daniel Ammann" <daniel.ammann@bytesatwork.ch>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/3] python3-pychromecast: Upgrade 7.5.0 -> 7.5.1
-Date: Wed, 21 Oct 2020 11:25:28 +0300
-Message-Id: <20201021082530.10132-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Subject: [PATCH] pcsc-tools: add new package
+Date: Wed, 21 Oct 2020 12:33:14 +0200
+Message-Id: <20201021103315.23613-1-daniel.ammann@bytesatwork.ch>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 7.5.1:
-
-- Use threading.Thread.is_alive
-- Bump flake8 from 3.8.3 to 3.8.4
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Daniel Ammann <daniel.ammann@bytesatwork.ch>
 ---
- ...n3-pychromecast_7.5.0.bb => python3-pychromecast_7.5.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pychromecast_7.5.0.bb => python3-pychromecast_7.5.1.bb} (66%)
+ .../pcsc-tools/pcsc-tools_1.5.7.bb               | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.5.7.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.5.0.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.5.1.bb
-similarity index 66%
-rename from meta-python/recipes-devtools/python/python3-pychromecast_7.5.0.bb
-rename to meta-python/recipes-devtools/python/python3-pychromecast_7.5.1.bb
-index adfdbb17b8..b7796251ec 100644
---- a/meta-python/recipes-devtools/python/python3-pychromecast_7.5.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pychromecast_7.5.1.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
- 
--SRC_URI[md5sum] = "d35c610f57cae909348ff6c60e5e9256"
--SRC_URI[sha256sum] = "2f346a88ddc27a19cc68bc2d3e8929d89276298cb1c11871b82a87fbdafb95a8"
-+SRC_URI[md5sum] = "9dee7207b7a5c73ebf8fad64be137f27"
-+SRC_URI[sha256sum] = "cf2e9fa795ea1e9d0d180adfbdccefd6b4f532eae56f41f15d1a75b323096f51"
- 
- PYPI_PACKAGE = "PyChromecast"
- 
+diff --git a/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.5.7.bb b/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.5.7.bb
+new file mode 100644
+index 000000000..875c97ef0
+--- /dev/null
++++ b/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.5.7.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "Test a PC/SC driver, card or reader or send commands"
++HOMEPAGE = "http://ludovic.rousseau.free.fr/softwares/pcsc-tools"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENCE;md5=94d55d512a9ba36caa9b7df079bae19f"
++
++SRC_URI = "git://github.com/LudovicRousseau/pcsc-tools;protocol=https"
++
++SRCREV = "34ac207adbba0d1a951b314c1676610a1d0bba01"
++
++inherit autotools pkgconfig
++
++S = "${WORKDIR}/git"
++
++DEPENDS = "pcsc-lite"
++
++FILES_${PN} += "/usr/share/pcsc/smartcard_list.txt"
 -- 
-2.17.1
+2.20.1
 
