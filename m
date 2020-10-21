@@ -1,23 +1,21 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.8575.1603268739347760447
+ by mx.groups.io with SMTP id smtpd.web09.8681.1603268742839798684
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2020 01:25:39 -0700
+ Wed, 21 Oct 2020 01:25:43 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=38626 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kV9RA-0005B2-LH; Wed, 21 Oct 2020 11:25:37 +0300
+	id 1kV9R8-0005B2-M3; Wed, 21 Oct 2020 11:25:35 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-pydicti: Upgrade 1.1.3 -> 1.1.4
-Date: Wed, 21 Oct 2020 11:25:30 +0300
-Message-Id: <20201021082530.10132-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-pychromecast: Upgrade 7.5.0 -> 7.5.1
+Date: Wed, 21 Oct 2020 11:25:28 +0300
+Message-Id: <20201021082530.10132-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201021082530.10132-1-leon.anavi@konsulko.com>
-References: <20201021082530.10132-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -30,35 +28,35 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.1.4:
+Upgrade to release 7.5.1:
 
-- use str.casefold() on python3
-- make normalization function a parameter of build_dict, so that
-  user-defined normalization functions can be passed
+- Use threading.Thread.is_alive
+- Bump flake8 from 3.8.3 to 3.8.4
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pydicti_1.1.3.bb => python3-pydicti_1.1.4.bb}    | 4 ++--
+ ...n3-pychromecast_7.5.0.bb => python3-pychromecast_7.5.1.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pydicti_1.1.3.bb => python3-pydicti_1.1.4.bb} (60%)
+ rename meta-python/recipes-devtools/python/{python3-pychromecast_7.5.0.bb => python3-pychromecast_7.5.1.bb} (66%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pydicti_1.1.3.bb b/meta-python/recipes-devtools/python/python3-pydicti_1.1.4.bb
-similarity index 60%
-rename from meta-python/recipes-devtools/python/python3-pydicti_1.1.3.bb
-rename to meta-python/recipes-devtools/python/python3-pydicti_1.1.4.bb
-index bca0ba7378..29ad30e0f5 100644
---- a/meta-python/recipes-devtools/python/python3-pydicti_1.1.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pydicti_1.1.4.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/coldfix/pydicti"
- LICENSE = "WTFPL"
- LIC_FILES_CHKSUM = "file://COPYING;md5=389a9e29629d1f05e115f8f05c283df5"
+diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.5.0.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.5.1.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python3-pychromecast_7.5.0.bb
+rename to meta-python/recipes-devtools/python/python3-pychromecast_7.5.1.bb
+index adfdbb17b8..b7796251ec 100644
+--- a/meta-python/recipes-devtools/python/python3-pychromecast_7.5.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pychromecast_7.5.1.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
  
--SRC_URI[md5sum] = "b02ed35da91e400f1f17a57ab02ba06b"
--SRC_URI[sha256sum] = "eea50576baa751a9b6b862f09f081c47d557e0298623ca8742851da72b00eec4"
-+SRC_URI[md5sum] = "c8925e333a78766cb469c1626880bd35"
-+SRC_URI[sha256sum] = "dcea4d1892fc68ca62aba835b1ed444a1eb48bd0cca0b4599efd45cbb6272b5c"
+-SRC_URI[md5sum] = "d35c610f57cae909348ff6c60e5e9256"
+-SRC_URI[sha256sum] = "2f346a88ddc27a19cc68bc2d3e8929d89276298cb1c11871b82a87fbdafb95a8"
++SRC_URI[md5sum] = "9dee7207b7a5c73ebf8fad64be137f27"
++SRC_URI[sha256sum] = "cf2e9fa795ea1e9d0d180adfbdccefd6b4f532eae56f41f15d1a75b323096f51"
  
- inherit pypi setuptools3
+ PYPI_PACKAGE = "PyChromecast"
+ 
 -- 
 2.17.1
 
