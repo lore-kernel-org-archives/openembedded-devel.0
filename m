@@ -1,87 +1,96 @@
-Received: from mail-il1-f170.google.com (mail-il1-f170.google.com [209.85.166.170])
- by mx.groups.io with SMTP id smtpd.web10.4640.1603241310890375489
- for <Openembedded-devel@lists.openembedded.org>;
- Tue, 20 Oct 2020 17:48:31 -0700
+Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com [66.111.4.27])
+ by mx.groups.io with SMTP id smtpd.web08.6607.1603252859448564059
+ for <openembedded-devel@lists.openembedded.org>;
+ Tue, 20 Oct 2020 21:01:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=uQoOzb8v;
- spf=pass (domain: gmail.com, ip: 209.85.166.170, mailfrom: ticotimo@gmail.com)
-Received: by mail-il1-f170.google.com with SMTP id g7so677280ilr.12;
-        Tue, 20 Oct 2020 17:48:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=2O0jDJ/MkxrpyGr47W+4d8p8FcJixz4UY8+17DNJ1Cs=;
-        b=uQoOzb8vfpEr8cjC+Q4p0mh9Gg2sG7Ke4ROlKvwcU9s9iTjCQVKnszuGmWvs4HxpZQ
-         Z1rXTqsNgGtwMHTc4r2yfkYSKMPORy1aKrrkGqS/PFLy5xHvwu2LDAGg/Puf65URjSfc
-         ouco463TYFZ9w+yXze9YMckOv6uuQnsDfHy35q8yg8IQFN04xKPgOIhz7G08w1p6wKSa
-         +pQ1OCYfoYXW5Ddok70pVmcSPgFTG3K5STSwm7B6E03cu9Fhd1IOxanpExhHIr71GWMi
-         /FUpavl5Q9h/pe+AKTHsNSnlWQgKLeL16CkUKYPoXUVScj93hRc0WY/8t9DXo+Fa0C4Z
-         mTrg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=2O0jDJ/MkxrpyGr47W+4d8p8FcJixz4UY8+17DNJ1Cs=;
-        b=TvkX8dnzJAphpYqfvfp0FU3FKmQKFC8If0mtURq4ls0ZVYivwtp+Z/Q0yR/8Xc1hKl
-         ewuMHio2LaQMbUO0x0pW2ehXoYSYRrgeCU6FUK3kH0T50rP+qQXmbhpiwxlUYuQQewKU
-         jJ7AdZr3yjNaPRwlH5yktFOLoPYlZMXmM7MbI98zCz+WIgx1XH7/iTX4MS7743TdouhA
-         7lpeVg8ZPaID/fWNafg6DaoM92cjG/3Cxcol6vWWAnIZ9ORcY46qGFNUnLY4QLu8iJeu
-         2m+R26EmsZOARqWWiyvnhnEsKyJ/SxoMzVPsvkmaPn8S2+NO0Oc6RLyi/bGl1EvlgERD
-         gDVw==
-X-Gm-Message-State: AOAM531AX1apfoOgrmt/pwiU2uypt0e1aXB/4z5klOdVNqQaSvKktiMI
-	A6Yc36/fidj8U0InNWW6r/tB08UUfWuHGBWItjoIXk5OI7A=
-X-Google-Smtp-Source: ABdhPJzFHp6assqwk9wWLOAsQe/NzCdGsat9sqFKjZvwPbmSfa/ymR8kVNSMNEFAVaKHXzzwmfQMGA3x6GhIK1jqTvo=
-X-Received: by 2002:a92:da0e:: with SMTP id z14mr451136ilm.151.1603241310150;
- Tue, 20 Oct 2020 17:48:30 -0700 (PDT)
+ dkim=pass header.i=@alistair23.me header.s=fm2 header.b=wBtP0iV5;
+ spf=none, err=permanent DNS error (domain: alistair23.me, ip: 66.111.4.27, mailfrom: alistair@alistair23.me)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+	by mailout.nyi.internal (Postfix) with ESMTP id B1A235C0092;
+	Wed, 21 Oct 2020 00:00:58 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute1.internal (MEProxy); Wed, 21 Oct 2020 00:00:58 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+	 h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding; s=fm2; bh=mSilHLSvzNPw14Z2Ko9dmNmSaO
+	SUSLTpIZWve8le96c=; b=wBtP0iV5Cv1SKnPmgYTHYmRiNlLPGzv0i7YZs20AZQ
+	V7oCC0lol/MdIuyKODj6RMwWABcsxoq0+OSuXeu/1d8RogUWDMT6kkeiGFgs5Zrr
+	W2KCXhoKdXxo9Vd1F34ESiS3pCfK/iWS6kMUMiVxw5lKzOBf53a4kI1h+/6NB0fc
+	miQn8wz9uOLfuPzY8KpxODDsZhPIoXP/2ONEvxNe3/FfqjwL+sG8McEPxfJ3m8xQ
+	OH3BLUPC2Hd/hqLAJ9nW/fpOqkqVpWXv2rSCFD3TtjwY81TpasgGJOlyGenqun28
+	91VNGMFCEJ9uYyLchAF+kD+P4aw4jAQuQciNo3r/Bz+w==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-transfer-encoding:date:from
+	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=mSilHLSvzNPw14Z2K
+	o9dmNmSaOSUSLTpIZWve8le96c=; b=dE3X0elSODTQGfnDD4PnHzQwh6kGsicHX
+	7Tawb3dtJNUoP6Y05AbFPQsE0J9cbvXr1WNW/tNWT6+t1i1I1eXN0vFz018V5wl1
+	6zAreR3MnW7GdGJcuHRJtQJAWXlAlAlWLIN8G/cYltBvc3rcB3DA1+VjifpEZ9NZ
+	BhRVcYGpYkjqnIR/asM2+bkcuVY0md8yMyOkWwaXykLWblICtdO0Lm9o443SnM4V
+	SfrwcMId0BnPDdUiX5ZvuelRf124c4azP1xo96+0ZpVhLPe9SYV8EqXPX+GK5kIP
+	28QN8lVretaBT6bsrs6f1ZZtW+FQQfeXGwis27NUpG8M5pg75cvEA==
+X-ME-Sender: <xms:erKPX0hnepuqN3XzQ93GmWtGIS9us8RiXQlEb6K-6H_Pcbs8Gko5qw>
+    <xme:erKPX9DFPhoRaNw1fUvi1gl5EGZIGzX0KwA_4l6v-WfpbKGXQcrWs7vFwx77V4K65
+    RWoNDDjlqv2TKjbiME>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedujedrjeeggdejjecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertdertd
+    dtnecuhfhrohhmpeetlhhishhtrghirhcuhfhrrghntghishcuoegrlhhishhtrghirhes
+    rghlihhsthgrihhrvdefrdhmvgeqnecuggftrfgrthhtvghrnhepjeeliefhvdetgfdtte
+    fhtdegffdtiefffeejiefffeevueeljeehjeevhfffueeknecukfhppeejfedrleefrdek
+    gedrvddtkeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhroh
+    hmpegrlhhishhtrghirhesrghlihhsthgrihhrvdefrdhmvg
+X-ME-Proxy: <xmx:erKPX8Fxk0W3guV6YrCXm3XC7TY8htIv2K3FzSLO27CFQc_IGEu5HQ>
+    <xmx:erKPX1RBypi7WMsaLUuEKMZb73XH_zG6vVuD2_AqKCLI-A4DuTi8OQ>
+    <xmx:erKPXxwNgxI5NnO1X1ByIiuJ0CB0Xbv9anZcuq_A5PvBqr5qOX44-A>
+    <xmx:erKPXw9zpUIhkkkX5CFr3B08LBWgTqpjbB-n5qtBSYh7tSDdgNy41w>
+Received: from alistair-xps-14z.alistair23.me (c-73-93-84-208.hsd1.ca.comcast.net [73.93.84.208])
+	by mail.messagingengine.com (Postfix) with ESMTPA id 142BE3064683;
+	Wed, 21 Oct 2020 00:00:58 -0400 (EDT)
+From: "Alistair" <alistair@alistair23.me>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alistair Francis <alistair@alistair23.me>
+Subject: [PATCH] wayland-init: Allow setting idle time to 0
+Date: Tue, 20 Oct 2020 21:00:49 -0700
+Message-Id: <20201021040049.933690-1-alistair@alistair23.me>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-From: "Tim Orling" <ticotimo@gmail.com>
-Date: Tue, 20 Oct 2020 17:48:19 -0700
-Message-ID: <CANx9H-DFtcdnZwDqHEPg4t5ySyJe++KS8hO9QDFX5r31KLz3Ww@mail.gmail.com>
-Subject: Let me tell you how I really feel. Zero filter. If you need meta-python2, you need to become a maintainer. Immediately. Period.
-To: yocto@lists.yoctoproject.org, 
-	openembedded-core <openembedded-core@lists.openembedded.org>, 
-	"openembedded-devel@lists.openembedded.org" <Openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000c7e5e805b223b489"
+Content-Transfer-Encoding: 8bit
 
---000000000000c7e5e805b223b489
-Content-Type: text/plain; charset="UTF-8"
+Add a PACKAGECONFIG that can be used to set the idle-time to 0. This is
+useful for always on machine (such as kiosks) and for debugging.
 
-I have absolutely no need for python2, I made this abundantly clear when I
-created the meta-python2 layer.
+Signed-off-by: Alistair Francis <alistair@alistair23.me>
+---
+ meta/recipes-graphics/wayland/weston-init.bb | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-If you depend upon continuing support of python2 via the meta-python2
-layer, this is your call to arms.
+diff --git a/meta/recipes-graphics/wayland/weston-init.bb b/meta/recipes-graphics/wayland/weston-init.bb
+index 07cec75fb3..b7a99be646 100644
+--- a/meta/recipes-graphics/wayland/weston-init.bb
++++ b/meta/recipes-graphics/wayland/weston-init.bb
+@@ -15,6 +15,10 @@ SRC_URI = "file://init \
+ 
+ S = "${WORKDIR}"
+ 
++PACKAGECONFIG ??= ""
++
++PACKAGECONFIG[no-idle-timeout] = ",,"
++
+ DEFAULTBACKEND ??= ""
+ DEFAULTBACKEND_qemuall ?= "fbdev"
+ DEFAULTBACKEND_qemuarm64 = "drm"
+@@ -45,6 +49,10 @@ do_install() {
+         if [ -n "${DEFAULTBACKEND}" ]; then
+ 		sed -i -e "/^\[core\]/a backend=${DEFAULTBACKEND}-backend.so" ${D}${sysconfdir}/xdg/weston/weston.ini
+ 	fi
++
++	if [ "${@bb.utils.contains('PACKAGECONFIG', 'no-idle-timeout', 'yes', 'no', d)}" = "yes" ]; then
++		echo "idle-time=0" >> ${D}${sysconfdir}/xdg/weston/weston.ini
++	fi
+ }
+ 
+ inherit update-rc.d features_check systemd
+-- 
+2.28.0
 
-I was originally intending to abdicate any support after the 3.1 "dunfell"
-release, but managed to somehow continue supporting it into the crest of
-the 3.2 "gatesgarth" release.
-
-I will stop all support and actively refuse lo respond to any emails and
-this layer will be dead and I have zero care in the world that it stops
-being useful. I do not use it. I do not depend upon it. You are not paying
-me to do this. You cannot pay me enough to do this. Period. Support
-yourself.
-
-If this is not clear enough, I am happy to have a virtual video call with
-you that you will not like.
-
---moto-timo
-
---000000000000c7e5e805b223b489
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">I have absolutely no need for python2, I made this abundan=
-tly clear when I created the meta-python2 layer.<div><br></div><div>If you =
-depend upon continuing support of python2 via the meta-python2 layer, this =
-is your call to arms.</div><div><br></div><div>I was originally intending t=
-o abdicate any support after the 3.1 &quot;dunfell&quot; release, but manag=
-ed to somehow continue supporting it into the crest of the 3.2 &quot;gatesg=
-arth&quot; release.</div><div><br></div><div>I will stop all support and ac=
-tively refuse lo respond to any emails and this layer will be dead and I ha=
-ve zero care in the world that it stops being useful. I do not use it. I do=
- not depend upon it. You are not paying me to do this. You cannot pay me en=
-ough to do this. Period. Support yourself.</div><div><br></div><div>If this=
- is not clear enough, I am happy to have a virtual video call with you that=
- you will not like.</div><div><br></div><div>--moto-timo</div></div>
-
---000000000000c7e5e805b223b489--
