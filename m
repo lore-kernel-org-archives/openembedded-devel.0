@@ -1,153 +1,150 @@
-Received: from NAM02-CY1-obe.outbound.protection.outlook.com (NAM02-CY1-obe.outbound.protection.outlook.com [40.107.76.43])
- by mx.groups.io with SMTP id smtpd.web08.1207.1603399706253039502
- for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Oct 2020 13:48:26 -0700
+Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com [209.85.218.68])
+ by mx.groups.io with SMTP id smtpd.web10.20.1603402631766015167
+ for <Openembedded-devel@lists.openembedded.org>;
+ Thu, 22 Oct 2020 14:37:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=QC8nxru5;
- spf=pass (domain: windriver.com, ip: 40.107.76.43, mailfrom: joe.slater@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fETfp6INWhGoMvCw5tyXThog25RUVFZdK3S8/Dhk6AY7u/I6d1nWsDces4J/iLFFH7Qw9+DlAxqfhr+eYJ2kvIDNal3ErPKiqjvFYgC2RSz9Jzw7nuKtiFVXJkG3KAmABfUxPmg3K0VePLx27m2mWoSQHqzkJEv0My/rpCI1qPrYjRe7ISBwAtkOpnF0YsumHQ+Das2s3u1KmLioeSN6FNJE/sOsJtuHZk/8VEslgsB7H1ebUHlvBkjvWmF9TRpb7EU1y0DrkgrQCp1gG7m3pPwAvUSBgGGLDPDBmELTJ7vc+mq4YZZligKF+nr1q9Ox2anRupwI5q3SRmk/16RH9w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BsxvSmfuFO62i7fjTPH4WeVXWa+AF93bfn+cIrnpwkQ=;
- b=LEWuroGFcqCcq9fXLNec2iKngv4TQTAkx2zdwOefeWHxszhekpyu+9uNfSYjjih4yVC+W3i/ZWEEvHB/mKAroDdsPMv7JGiQA+aoSdDR+mDbBUMY6TBPx3Fer9yAsuVDLyJBwPiToObFsE1S83+kiitgYdkSxEyyGQC+exKAZ/JvmmzIMfTo4aZAPMCP4um5IuLXzzug6oSN5vgx+F+Jxilb0cPqjUfGBFzp2wqhdkJv5NYOTL5Y4bxpzBLpIvUoijOvml1WnI6jc3iYVCrSPvtt+aOedRIQMdUDZGKbjn1BL3JNzOC/nSS6+buVrgWVBpJdpQAIll6KTXt/LnEF2g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=AD1OWGbM;
+ spf=pass (domain: gmail.com, ip: 209.85.218.68, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f68.google.com with SMTP id k3so4476439ejj.10;
+        Thu, 22 Oct 2020 14:37:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BsxvSmfuFO62i7fjTPH4WeVXWa+AF93bfn+cIrnpwkQ=;
- b=QC8nxru5tW/v8fWGLZzqcOpR56qgl0ky/W/LejgF2VigBoTyqmjGv/XyC8U3Pnjm+2iBihk+E80oLD0dAvIxFFtMn+jdbSfPmjEPEF2SPHh8GxmvJjs39+CYmqRRCIN4MP65U0VOtSs4NCMCbL8uBpf9iZRgea8zlTbIwc6r9ZE=
-Received: from BY5PR11MB3992.namprd11.prod.outlook.com (2603:10b6:a03:188::10)
- by BYAPR11MB3542.namprd11.prod.outlook.com (2603:10b6:a03:b2::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.20; Thu, 22 Oct
- 2020 20:48:25 +0000
-Received: from BY5PR11MB3992.namprd11.prod.outlook.com
- ([fe80::80ee:21bc:b0aa:d35c]) by BY5PR11MB3992.namprd11.prod.outlook.com
- ([fe80::80ee:21bc:b0aa:d35c%7]) with mapi id 15.20.3499.018; Thu, 22 Oct 2020
- 20:48:24 +0000
-From: "Joe Slater" <joe.slater@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: FW: [meta-oe][PATCH 1/1] multipathd: modify error handling for monitor buffer resizing
-Thread-Topic: [meta-oe][PATCH 1/1] multipathd:  modify error handling for
- monitor buffer resizing
-Thread-Index: AQHWqLRlXsX6ftNg10quyvbm2aF3A6mkF3/g
-Date: Thu, 22 Oct 2020 20:48:24 +0000
-Message-ID: 
- <BY5PR11MB3992704203F6798E649D1279881D0@BY5PR11MB3992.namprd11.prod.outlook.com>
-References: <20201022204617.51780-1-joe.slater@windriver.com>
-In-Reply-To: <20201022204617.51780-1-joe.slater@windriver.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-x-originating-ip: [24.5.219.90]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: dfe6c3f5-359a-4beb-83eb-08d876cbd227
-x-ms-traffictypediagnostic: BYAPR11MB3542:
-x-microsoft-antispam-prvs: 
- <BYAPR11MB354284D8E345795C5F0005B9881D0@BYAPR11MB3542.namprd11.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:5797;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- cLUzWMX8+ItOKxz12BXVbstoDcMKIPM11cFYwUVAbwbtEt4Ea8+8x3odBapPjWCRCxNesh8zZSjixiXbPtw/mWy+72Ocq1slaeK4W8Zkp2DGocTvbnZCD6IaJlwj7599QtGbxfLy/Aq4J/xo+gIzWyiLCVv7ZVB+fX9XnU4TF30osQilApCwN8mCaIk1rxOHGGD4Exh3Kau2C/am+HhHuuLlGMj+pzR5bZQXmxomUSZ28dXdu/QoL1adbl0u/w0568YZJONQo3tgkNWFDcOTSUVJ8+zDvorYYrdCBA5uzcdk/mesj26Wplohp/dllQipzQchKSFUePong2aFx0+YpQ==
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3992.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(136003)(396003)(376002)(346002)(366004)(8676002)(316002)(52536014)(53546011)(5660300002)(26005)(71200400001)(478600001)(55016002)(6506007)(186003)(86362001)(66476007)(66446008)(64756008)(76116006)(66946007)(9686003)(7696005)(6916009)(33656002)(8936002)(2906002)(66556008)(83380400001);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata: 
- hJzKJaHFEIv7uNgH5nRCKBi39Ase3GXa2h6UCN0kz2HqI4xPBkLxrpEiTIQMsgaWkR5U5BGU9kXq8FMP0E28bHqQRqpLR1JCXzOKXFiSPZh4vKuopkKIfLimoj5teWMX+SrB7SCdgstFvUJKxT4Aa6Ss/nXAwqf9pczIKE0qJVRk7vi59gXFBpgWBLBaP1J1yQBNS3WxcY+qIdvKD05vbdlXi+nXNmU9d1kqlxqot2JQ8CCc503hVoZDSPbfq+ecjlTMT7wS3laNKLVOW5G1TAhtkcL6PTirHP8SqYAr6U+x/Fz4XkeA/JfeMUmoyeRydnCqaJQ7voFyQhKo+8HSYD1oystqMK/ioBin6MqXD4NC1YJIfuA5Rg33zvc6He5z7F3/FriUTtL2YMWzm6ecUmqPWQANat+OSTj3ywSlXuroXvfebRXWuHadx5LcgLR0K6YMkDotp98J3iTwY1LT9odJGdTlusAFGDRZhkO49QH/ReTtlGpNjtIzdSzmoki6oo9KeT9S9dUs8QtsIvh0TEfEwElpgKd5WJK0PA/TBekuI2bdXrewatxi4Fb4MuH4hOXj+BXQPthGcBqepgPFmFoSAqIYMCiCJlww0rTbYlztP8NfieG2zi52R79PZzBgMQz0fCM9MDQf9h5LL7GG1g==
-x-ms-exchange-transport-forked: True
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=bIRfR1gc4T/RybYsh65SnZo+1zX3T7c/Dy8bUh8SVeo=;
+        b=AD1OWGbM/fbQH6CoKuY2zstraT9E+EKEx8dmpa17Q66y4V2QJoAHSqXT7H9Z7wgHQp
+         9kdNfN8AlwoYDJ1B/FMQwMKCA/AYTKE5ACSowWDz3hIi7cCUNpqzZuR8vN7nqQLWo0un
+         JlfkkPcGOWT5KaOAR8cZE+/uuLN8BQP6RbvUllRlacB0A4dZmWdCXkZZikArjWqWXxP1
+         Ji9kZMs+0g+tySWY58AFm5ZumHeOedY+v+xkDhneB6BTFseZorv7o/R2w3zAe5j3Qg5p
+         AC50cXfzy8RlWMtw0kqYw3NHVQHfLWfNhTqMwflPsA0MPk9sDSmmcrBOlHrjDTOVwTGC
+         AGTQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=bIRfR1gc4T/RybYsh65SnZo+1zX3T7c/Dy8bUh8SVeo=;
+        b=XeQAmE/SfDnDB9Un5pVfurnCLVHjNhySghG+5KHtuB1pSkIYdPoS0tN3zf+d6GZQFD
+         SD7CezhHsKIGiLB/8aAnPly4I07r5gBd51rlDWmPjcP2smTBMsurL5ua3yHw4AJ/MXAv
+         xbwu9fZTd7aUFsqVcXIhJtT6Kmr9R2NFBIOFm3Sr1B8CAzNV1hc3nWIygOvSS/RqCoK1
+         Nb3My6X2FDaq5QcG/wbzciG9Mk1Rv1Vr2Yy9IH0qbChGukELqKv9oknlQw/D5zQEykDF
+         FYftl148sw0eTxzju6ieDPyYbktUNlUME9b7JcduK5yR29UespUZ/OEZZByN+tobuVT1
+         Yp+w==
+X-Gm-Message-State: AOAM5325l6WOHTOcFJ9ncxpRZvo4RwlIS+IfxUuJQdpf7bcrIhK4IeKH
+	KnuOoezmoMMr4lki+8rFHiUjw8Evb45ldnJ2zGc=
+X-Google-Smtp-Source: ABdhPJxW/VdRrYpDmGlJ9NrbYbv2Sjz9Y/SA6kPt/0P6tiOu2CVUisH8Kkmt+uhzH+T1tx6m+usmiLoUF+EOFgTyWDE=
+X-Received: by 2002:a17:906:a454:: with SMTP id cb20mr4433273ejb.137.1603402630145;
+ Thu, 22 Oct 2020 14:37:10 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3992.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dfe6c3f5-359a-4beb-83eb-08d876cbd227
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Oct 2020 20:48:24.7639
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: pDFa1y6raraeG5wN7vBqGh1NHbQlptcnZku1cpWhek6szkUYvEeXgXsQWoD8Cy9EgDhikaE8klQ8C/Kr0E/uDGS3N2JIymIbIAx+uMG0ipA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3542
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+References: <CANx9H-DFtcdnZwDqHEPg4t5ySyJe++KS8hO9QDFX5r31KLz3Ww@mail.gmail.com>
+In-Reply-To: <CANx9H-DFtcdnZwDqHEPg4t5ySyJe++KS8hO9QDFX5r31KLz3Ww@mail.gmail.com>
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+Date: Thu, 22 Oct 2020 23:36:59 +0200
+Message-ID: <CA+chaQfL9RtRiJYph7=yGxMrgoiOPRovdfJOPf524vXY-bD7aQ@mail.gmail.com>
+Subject: Re: [OE-core] Let me tell you how I really feel. Zero filter. If you need meta-python2, you need to become a maintainer. Immediately. Period.
+To: Tim Orling <ticotimo@gmail.com>
+Cc: Yocto-mailing-list <yocto@lists.yoctoproject.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>, 
+	"openembedded-devel@lists.openembedded.org" <Openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="00000000000033ae5205b249441b"
+
+--00000000000033ae5205b249441b
+Content-Type: text/plain; charset="UTF-8"
+
+There were only a few changes needed between dunfell and gatesgarth to keep
+it building and I feel guilty for sending half of them - and pinging you on
+FB :).
+
+I don't have interest in python2, but it's still used by quite a few
+components included in other layers are care about (e.g. qtwebengine in
+meta-qt5, chromium in meta-browser -
+https://bugs.chromium.org/p/chromium/issues/detail?id=942720 is still quite
+far from finished) and at LGE we maintain meta-ros
+https://github.com/ros/meta-ros which contains support for ROS 1 Melodic
+which is usually used with python2 and support ends May 2023 (together with
+Ubuntu Bionic it's usually used with: http://wiki.ros.org/Distributions -
+just today I've separated meta-ros-python2 layer with python2 recipes which
+disappeared from oe-core in warrior and were never re-introduced in
+meta-python2 (like nose and numpy).
+
+If you're looking for someone just keeping it buildable, then you can sign
+me up. If it gets more annoying to maintain in future we can also split it
+for pythonnative.bbclass and python recipe itself - to keep just the bare
+minimum of recipes which are actively being used without all the other junk.
+
+Cheers,
+
+On Wed, Oct 21, 2020 at 2:48 AM Tim Orling <ticotimo@gmail.com> wrote:
+
+> I have absolutely no need for python2, I made this abundantly clear when I
+> created the meta-python2 layer.
+>
+> If you depend upon continuing support of python2 via the meta-python2
+> layer, this is your call to arms.
+>
+> I was originally intending to abdicate any support after the 3.1 "dunfell"
+> release, but managed to somehow continue supporting it into the crest of
+> the 3.2 "gatesgarth" release.
+>
+> I will stop all support and actively refuse lo respond to any emails and
+> this layer will be dead and I have zero care in the world that it stops
+> being useful. I do not use it. I do not depend upon it. You are not paying
+> me to do this. You cannot pay me enough to do this. Period. Support
+> yourself.
+>
+> If this is not clear enough, I am happy to have a virtual video call with
+> you that you will not like.
+>
+> --moto-timo
+>
+> 
+>
+>
+
+--00000000000033ae5205b249441b
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr">There were only a few changes needed between dunfell and g=
+atesgarth to keep it building and I feel guilty for sending half of them - =
+and pinging you on FB :).<div><br></div><div>I don&#39;t have interest in p=
+ython2, but it&#39;s still used by quite a few components included in other=
+ layers are care about (e.g. qtwebengine in meta-qt5, chromium in meta-brow=
+ser -=C2=A0<a href=3D"https://bugs.chromium.org/p/chromium/issues/detail?id=
+=
+=3D942720">https://bugs.chromium.org/p/chromium/issues/detail?id=3D942720<=
+/a> is still quite far from finished) and at LGE we maintain meta-ros=C2=A0=
+<a href=3D"https://github.com/ros/meta-ros">https://github.com/ros/meta-ros=
+</a> which contains support for ROS 1 Melodic which is usually used with py=
+thon2 and support ends May 2023 (together with Ubuntu Bionic it&#39;s usual=
+ly used with: <a href=3D"http://wiki.ros.org/Distributions">http://wiki.ros=
+.org/Distributions</a> - just today I&#39;ve separated meta-ros-python2 lay=
+er with python2 recipes which disappeared from oe-core in warrior and were =
+never re-introduced in meta-python2 (like nose and numpy).</div><div><br></=
+div><div>If you&#39;re looking for someone just keeping it buildable, then =
+you can sign me up. If it gets more annoying to maintain in future we can a=
+lso split it for pythonnative.bbclass and python recipe itself - to keep ju=
+st the bare minimum of recipes which are actively being used without all th=
+e other junk.</div><div><br></div><div>Cheers,</div></div><br><div class=3D=
+"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Oct 21, 2020 at=
+ 2:48 AM Tim Orling &lt;<a href=3D"mailto:ticotimo@gmail.com">ticotimo@gmai=
+l.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"ma=
+rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
+1ex"><div dir=3D"ltr">I have absolutely no need for python2, I made this ab=
+undantly clear when I created the meta-python2 layer.<div><br></div><div>If=
+ you depend upon continuing support of python2 via the meta-python2 layer, =
+this is your call to arms.</div><div><br></div><div>I was originally intend=
+ing to abdicate any support after the 3.1 &quot;dunfell&quot; release, but =
+managed to somehow continue supporting it into the crest of the 3.2 &quot;g=
+atesgarth&quot; release.</div><div><br></div><div>I will stop all support a=
+nd actively refuse lo respond to any emails and this layer will be dead and=
+ I have zero care in the world that it stops being useful. I do not use it.=
+ I do not depend upon it. You are not paying me to do this. You cannot pay =
+me enough to do this. Period. Support yourself.</div><div><br></div><div>If=
+ this is not clear enough, I am happy to have a virtual video call with you=
+ that you will not like.</div><div><br></div><div>--moto-timo</div></div>
+<br>
+<br>
+<br>
+</blockquote></div>
 
-
------Original Message-----
-From: Joe Slater <joe.slater@windriver.com>=20
-Sent: Thursday, October 22, 2020 1:46 PM
-To: Slater, Joseph <joe.slater@windriver.com>
-Cc: MacLeod, Randy <Randy.MacLeod@windriver.com>
-Subject: [meta-oe][PATCH 1/1] multipathd: modify error handling for monitor=
- buffer resizing
-
-udev_monitor_set_receive_buffer_size() will return a negative value if not =
-successful.  The assumption that it will return 0 for success is incorrect.
-
-Signed-off-by: Joe Slater <joe.slater@windriver.com>
----
- .../files/0001-recbuf-resize.patch            | 24 +++++++++++++++++++
- .../multipath-tools/multipath-tools_0.8.4.bb  |  1 +
- 2 files changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-support/multipath-tools/files/0001-recb=
-uf-resize.patch
-
-diff --git a/meta-oe/recipes-support/multipath-tools/files/0001-recbuf-resi=
-ze.patch b/meta-oe/recipes-support/multipath-tools/files/0001-recbuf-resize=
-.patch
-new file mode 100644
-index 000000000..5e073c4af
---- /dev/null
-+++ b/meta-oe/recipes-support/multipath-tools/files/0001-recbuf-resize.p
-+++ atch
-@@ -0,0 +1,24 @@
-+multipathd:  modify error handling for monitor buffer resizing
-+
-+udev_monitor_set_receive_buffer_size() will return a negative value if=20
-+not successful.  We do not generate a warning message if the failure is=20
-+due to not having permission to override kernel size limits.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Joe Slater <joe.slater@windriver.com>
-+
-+
-+--- a/libmultipath/uevent.c
-++++ b/libmultipath/uevent.c
-+@@ -810,7 +810,8 @@ int uevent_listen(struct udev *udev)
-+ 	}
-+ 	pthread_cleanup_push(monitor_cleanup, monitor);  #ifdef=20
-+LIBUDEV_API_RECVBUF
-+-	if (udev_monitor_set_receive_buffer_size(monitor, 128 * 1024 * 1024))
-++	err =3D udev_monitor_set_receive_buffer_size(monitor, 128 * 1024 * 1024)=
-;
-++	if (err < 0 && err !=3D -EACCES && err !=3D -EPERM)
-+ 		condlog(2, "failed to increase buffer size"); #endif
-+ 	fd =3D udev_monitor_get_fd(monitor);
-diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.=
-bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-index 331c0cd01..08b2ce87f 100644
---- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-+++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-@@ -47,6 +47,7 @@ SRC_URI =3D "git://git.opensvc.com/multipath-tools/.git;p=
-rotocol=3Dhttp \
-            file://0001-fix-bug-of-do_compile-and-do_install.patch \
-            file://0001-add-explicit-dependency-on-libraries.patch \
-            file://0001-fix-boolean-value-with-json-c-0.14.patch \
-+           file://0001-recbuf-resize.patch \
-            "
-=20
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D5f30f0716dfdd0d91eb439ebec522ec=
-2"
---
-2.17.1
-
+--00000000000033ae5205b249441b--
