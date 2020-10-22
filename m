@@ -1,92 +1,89 @@
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
- by mx.groups.io with SMTP id smtpd.web09.3169.1603326499562506743
+Received: from mail-il1-f194.google.com (mail-il1-f194.google.com [209.85.166.194])
+ by mx.groups.io with SMTP id smtpd.web11.5549.1603343277379029994
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2020 17:28:19 -0700
+ Wed, 21 Oct 2020 22:07:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=FRjpiJYo;
- spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f195.google.com with SMTP id b69so4677717qkg.8
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2020 17:28:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=sQvwuf8j;
+ spf=pass (domain: gmail.com, ip: 209.85.166.194, mailfrom: paulohefagundes@gmail.com)
+Received: by mail-il1-f194.google.com with SMTP id p10so542027ile.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2020 22:07:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=NWlsLQuHiqWoz4kDELcUopN24QMPLsEQwMrS6O0PFNU=;
-        b=FRjpiJYoNLRzAnRUxO4+EmC/Jyfu0G9/bEezV6GHVo/Ul3X1XzV++TJqsv3yRYyWD8
-         5H/dRDSP3R8z70mEab33U2CVdPdTrMgFBjjwAsGrbChgjr+Dg2u3pd+S+86VL0sJAxFV
-         gvYg95QoFtgcSxkFivAyVdXOtko3iA62NQUPK9q0uEPZwKOoJNm3aYnThnAotj4VyxjK
-         ZQBdup2tyPe2/DMD+54U6UAFNiRYisFBFaoJk+Adh+2OpUcGi9shsyoH+54b/FvBu/g8
-         S67kh/rpJYcwFBlBWOyMbtV1koOBHj5Mx2tE5c0JijaNZ95plF0qf9sAj6voaJ2a9+b6
-         kDBg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=RawqCqSfpD0CCwAbKvwuGEohZU0Ews0odnb/2g435EY=;
+        b=sQvwuf8jqx8yi9snI3xbBLFo5qx4uQUZuRXyGdksBesOGI8/eegzOkmC7Ji/geiueX
+         2ipXebmigQc4n10GCIATQ0VUgF7Evb4VokP6yteZEKW6vATn/j1q55CwWOv8rgLp9Fza
+         4h1h4zcxzDffSj7vKzUP8YogLBFc7s0Lk/2ltRdkORd/lo6lxqRqZKA5dR6AuSiOYQ4P
+         OKuyTJSNGuG+nxtvEHtNCCP/NOj4MjlTibZjlFEjwCTQP7f/8dFsJshyNZCHZfT9N/oi
+         +/se0mm081dVn4ZscxgnOe7bLcehduWK2oZUPLB5VmDCukWmMIjpTFWfOtjlQAacpLFs
+         znLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=NWlsLQuHiqWoz4kDELcUopN24QMPLsEQwMrS6O0PFNU=;
-        b=PNStzkDOs+Rv/xVJmFWHDrskTY657Pen6CB7zqASl/Wfo3gR71gVVwD0LYCXWtYJTM
-         lkONM3JjUJXygmiV7HECn4SAf4r1hr/PX5HPebfh9E7y5SXCwXF99GYJNpThFhcSaoZN
-         d57N8N1nBdhEMfiwvBGekjyfLoeRyrVDuTG7sbxZUYswvcwL/mBqVw0TRYV3vcLTinkx
-         8yV6Ea3RtmfizbN/IvhNLlfU2Z18SgKdmYzKcWJRRdEdn54eb9WFn7J52z7VV//htZBI
-         /21w1KWmagR0ouweNfhWXXqrgkm+nbv5c26+MYp1j8EYT2fTapnjN6DOfnNcbvOZC97E
-         vczA==
-X-Gm-Message-State: AOAM533mtvcZMU63GTEQPQ+PFCbGcgvHHi3uBGLXWzG6vxhIw/LuuHiC
-	ZgkhVlafbsSsy2MmT5SoGUgMvq9eiHk41tG+SZc=
-X-Google-Smtp-Source: ABdhPJyYn2CX9Vvwbw9qnDSlc6caiaT1TF32yMmefg63r0XUv+ErPFC5Hbczus0njdPBg9FBxgM26oueiOMfeenHe/g=
-X-Received: by 2002:a05:620a:1187:: with SMTP id b7mr59754qkk.212.1603326498543;
- Wed, 21 Oct 2020 17:28:18 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=RawqCqSfpD0CCwAbKvwuGEohZU0Ews0odnb/2g435EY=;
+        b=hLI6Bi/XDe8ATQ6b4r7LY1HdkZw3kitMbXZIOt1IrezDcYI/xXH0+VIobWp+YRBjky
+         1KnFqscKUyTp6oDC/sSKiofI4M4iisMwlIerqk/KuRPXby1xDZARDVurMoakizv0j4A9
+         cVFToOnaQ0+kn/joBPyF70nT3bu3hM4ragbFmAxnKucY+rIidJ0LDKo1iNEGJOpWPIlJ
+         o0GnRkwQuTY4m2hqLGUiyLXFfErWoGNSEcuWmyPEj7Mj2kQAaOLCW4X2bI+ENBYpRuIz
+         wrExPQooBiBLHzUNEleh3lhbNxUjKAKi66mbszHDO3o0zUpoKby4DDoxarP47QBWu6Ce
+         w1pw==
+X-Gm-Message-State: AOAM531Ho7jyJBluDsJmPJ6YZK1pADDPlO0eKEKgTb1kHXOc8JrHMoii
+	qUyN0uCk06zLhOyCJ1Z1Vazr1ybHQW0=
+X-Google-Smtp-Source: ABdhPJycqoAvQcAlujm69jncxHASJk5VuwirLZZP5MjIEYe5Ki8lGl8+QPRGHh6QARQXV2P+JuWuUw==
+X-Received: by 2002:a92:6410:: with SMTP id y16mr668142ilb.126.1603343276644;
+        Wed, 21 Oct 2020 22:07:56 -0700 (PDT)
+Return-Path: <paulohefagundes@gmail.com>
+Received: from localhost.localdomain (c-174-52-8-24.hsd1.ut.comcast.net. [174.52.8.24])
+        by smtp.gmail.com with ESMTPSA id t26sm254497ioi.11.2020.10.21.22.07.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 21 Oct 2020 22:07:56 -0700 (PDT)
+From: "Fagundes, Paulo" <paulohefagundes@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Paulo Fagundes <paulohefagundes@gmail.com>
+Subject: [meta-networking][PATCH] vnstat: add recipe
+Date: Wed, 21 Oct 2020 23:07:41 -0600
+Message-Id: <20201022050741.96065-1-paulohefagundes@gmail.com>
+X-Mailer: git-send-email 2.29.0
 MIME-Version: 1.0
-References: <20201021040049.933690-1-alistair@alistair23.me>
-In-Reply-To: <20201021040049.933690-1-alistair@alistair23.me>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 21 Oct 2020 17:27:52 -0700
-Message-ID: <CAMKF1soDAFv_tb8s0KkWxotDXh0nGhkJ2zSz6BLyB1DZ3QFf+A@mail.gmail.com>
-Subject: Re: [oe] [PATCH] wayland-init: Allow setting idle time to 0
-To: Alistair <alistair@alistair23.me>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-do you intend this for oe-core? if so then the mailing list its sent
-to should be oe-core ml
+vnStat is a console-based network traffic monitor for Linux and BSD
+that keeps a log of network traffic for the selected interface(s).
 
-On Tue, Oct 20, 2020 at 9:01 PM Alistair <alistair@alistair23.me> wrote:
->
-> Add a PACKAGECONFIG that can be used to set the idle-time to 0. This is
-> useful for always on machine (such as kiosks) and for debugging.
->
-> Signed-off-by: Alistair Francis <alistair@alistair23.me>
-> ---
->  meta/recipes-graphics/wayland/weston-init.bb | 8 ++++++++
->  1 file changed, 8 insertions(+)
->
-> diff --git a/meta/recipes-graphics/wayland/weston-init.bb b/meta/recipes-graphics/wayland/weston-init.bb
-> index 07cec75fb3..b7a99be646 100644
-> --- a/meta/recipes-graphics/wayland/weston-init.bb
-> +++ b/meta/recipes-graphics/wayland/weston-init.bb
-> @@ -15,6 +15,10 @@ SRC_URI = "file://init \
->
->  S = "${WORKDIR}"
->
-> +PACKAGECONFIG ??= ""
-> +
-> +PACKAGECONFIG[no-idle-timeout] = ",,"
-> +
->  DEFAULTBACKEND ??= ""
->  DEFAULTBACKEND_qemuall ?= "fbdev"
->  DEFAULTBACKEND_qemuarm64 = "drm"
-> @@ -45,6 +49,10 @@ do_install() {
->          if [ -n "${DEFAULTBACKEND}" ]; then
->                 sed -i -e "/^\[core\]/a backend=${DEFAULTBACKEND}-backend.so" ${D}${sysconfdir}/xdg/weston/weston.ini
->         fi
-> +
-> +       if [ "${@bb.utils.contains('PACKAGECONFIG', 'no-idle-timeout', 'yes', 'no', d)}" = "yes" ]; then
-> +               echo "idle-time=0" >> ${D}${sysconfdir}/xdg/weston/weston.ini
-> +       fi
->  }
->
->  inherit update-rc.d features_check systemd
-> --
-> 2.28.0
->
->
-> 
->
+Signed-off-by: Paulo Fagundes <paulohefagundes@gmail.com>
+---
+ .../recipes-support/vnstat/vnstat_2.6.bb      | 20 +++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-networking/recipes-support/vnstat/vnstat_2.6.bb
+
+diff --git a/meta-networking/recipes-support/vnstat/vnstat_2.6.bb b/meta-networking/recipes-support/vnstat/vnstat_2.6.bb
+new file mode 100644
+index 0000000000..2d6422b0da
+--- /dev/null
++++ b/meta-networking/recipes-support/vnstat/vnstat_2.6.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "vnStat is a console-based network traffic monitor for Linux and BSD that keeps a log of network traffic for the selected interface(s)."
++HOMEPAGE = "https://humdi.net/vnstat/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++SECTION = "net"
++DEPENDS = "gd sqlite3"
++
++SRC_URI = "https://github.com/vergoh/vnstat/releases/download/v${PV}/${BPN}-${PV}.tar.gz"
++SRC_URI[md5sum] = "fe2928a81243cc8a532a357f97221736"
++SRC_URI[sha256sum] = "89276e0a7281943edb554b874078278ad947dc312938a2451e03eb80679f7ff7"
++
++inherit autotools pkgconfig systemd
++
++EXTRA_OECONF = "--disable-extra-paths"
++
++do_install_append() {
++    install -Dm644 ${S}/examples/systemd/vnstat.service "${D}${systemd_system_unitdir}/vnstat.service"
++}
++
++FILES_${PN} += "${systemd_system_unitdir}"
+-- 
+2.29.0
+
