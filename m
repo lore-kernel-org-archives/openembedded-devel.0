@@ -1,67 +1,92 @@
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- by mx.groups.io with SMTP id smtpd.web09.15643.1603301951786071050
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
+ by mx.groups.io with SMTP id smtpd.web09.3169.1603326499562506743
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Oct 2020 10:39:12 -0700
+ Wed, 21 Oct 2020 17:28:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mailbox.org header.s=mail20150812 header.b=NhRWBE9z;
- spf=pass (domain: mailbox.org, ip: 80.241.56.171, mailfrom: crg7475@mailbox.org)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [80.241.60.240])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4CGd5m6g3FzQlWB
-	for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2020 19:39:08 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mailbox.org; h=
-	content-language:content-transfer-encoding:content-type
-	:content-type:mime-version:date:date:message-id:subject:subject
-	:from:from:received; s=mail20150812; t=1603301945; bh=GGA/GcXjl0
-	jjIF9R2FbhOsp51tNorxJjWU4DFfdDF1w=; b=NhRWBE9zXihIEjvmj4kte3oGDf
-	PNmTWuZb3W7oeDBncHq3SocK6FjIT3gooMopz3JVCfajTe0a6Iq0tTfCEHqr6IHn
-	fpFspbrbGbixMXDufyJXLKBNBycoBRMM9ab5u+VTDk0Ti43dMzR3ilJJ4VUxC7ha
-	w+riX/p8SpADamII+SPoCzsSLghIiowkqYQP4rUuq1L40Szs2I/lCk3SShbD0hYD
-	6eSY7YJfiv3gIriwqrNdg7ayrpMMoDDYbYE08MySX5QdEN/Ube/5Y8573GDnneKE
-	Pki9vYOwSszTSShG4BGY2bB2gj8Gyw7H322N9UxPeEO/giaAiWf63Y63NmgA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1603301947;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=5WC+vEXvnDwen2CQWxfEP/HDHgvwzUuF0w9cN9YViMI=;
-	b=MNdebMFgXQF+Gwfh7fLgE6905gCYFVSngRx1EihwlEtL2swy5WLqGxLal1WN5kE0JpBo4q
-	wPZX8wOE9RUBxHl6VZqO6RfpvOdSpKLSEdjIsRGPGzmVGF5ZdUej9JT3pmuukgXPsi6j4z
-	epX0ytGBxCnJfPwx6gQIchzdHGPaqQ+nUbAnZ/hgY2VXknqxJ2kbWzdpyfhSUxtGM5xI+8
-	vJ+EVsu2tiKbmdm3+K7J/Kfe5HYwxLQbMd1y09d1EQc9/oCAFdRma4gfm8NPw3im4w7dQG
-	zcPM4EP3e/rFO6g7Yv+4lqJ6TXHRUiXZXhWWYbAo5uMq6AMIdp1Tql1hreapuQ==
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-Received: from smtp1.mailbox.org ([80.241.60.240])
-	by spamfilter05.heinlein-hosting.de (spamfilter05.heinlein-hosting.de [80.241.56.123]) (amavisd-new, port 10030)
-	with ESMTP id ZH7jGNuoVLJm
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Oct 2020 19:39:05 +0200 (CEST)
-To: openembedded-devel@lists.openembedded.org
-From: "Carlos Rafael Giani" <crg7475@mailbox.org>
-Subject: qmake with Yocto SDK - is this possible?
-Message-ID: <23ddbc79-e01d-4cae-9820-416e188ec795@mailbox.org>
-Date: Wed, 21 Oct 2020 19:39:05 +0200
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=FRjpiJYo;
+ spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f195.google.com with SMTP id b69so4677717qkg.8
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Oct 2020 17:28:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=NWlsLQuHiqWoz4kDELcUopN24QMPLsEQwMrS6O0PFNU=;
+        b=FRjpiJYoNLRzAnRUxO4+EmC/Jyfu0G9/bEezV6GHVo/Ul3X1XzV++TJqsv3yRYyWD8
+         5H/dRDSP3R8z70mEab33U2CVdPdTrMgFBjjwAsGrbChgjr+Dg2u3pd+S+86VL0sJAxFV
+         gvYg95QoFtgcSxkFivAyVdXOtko3iA62NQUPK9q0uEPZwKOoJNm3aYnThnAotj4VyxjK
+         ZQBdup2tyPe2/DMD+54U6UAFNiRYisFBFaoJk+Adh+2OpUcGi9shsyoH+54b/FvBu/g8
+         S67kh/rpJYcwFBlBWOyMbtV1koOBHj5Mx2tE5c0JijaNZ95plF0qf9sAj6voaJ2a9+b6
+         kDBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=NWlsLQuHiqWoz4kDELcUopN24QMPLsEQwMrS6O0PFNU=;
+        b=PNStzkDOs+Rv/xVJmFWHDrskTY657Pen6CB7zqASl/Wfo3gR71gVVwD0LYCXWtYJTM
+         lkONM3JjUJXygmiV7HECn4SAf4r1hr/PX5HPebfh9E7y5SXCwXF99GYJNpThFhcSaoZN
+         d57N8N1nBdhEMfiwvBGekjyfLoeRyrVDuTG7sbxZUYswvcwL/mBqVw0TRYV3vcLTinkx
+         8yV6Ea3RtmfizbN/IvhNLlfU2Z18SgKdmYzKcWJRRdEdn54eb9WFn7J52z7VV//htZBI
+         /21w1KWmagR0ouweNfhWXXqrgkm+nbv5c26+MYp1j8EYT2fTapnjN6DOfnNcbvOZC97E
+         vczA==
+X-Gm-Message-State: AOAM533mtvcZMU63GTEQPQ+PFCbGcgvHHi3uBGLXWzG6vxhIw/LuuHiC
+	ZgkhVlafbsSsy2MmT5SoGUgMvq9eiHk41tG+SZc=
+X-Google-Smtp-Source: ABdhPJyYn2CX9Vvwbw9qnDSlc6caiaT1TF32yMmefg63r0XUv+ErPFC5Hbczus0njdPBg9FBxgM26oueiOMfeenHe/g=
+X-Received: by 2002:a05:620a:1187:: with SMTP id b7mr59754qkk.212.1603326498543;
+ Wed, 21 Oct 2020 17:28:18 -0700 (PDT)
 MIME-Version: 1.0
-X-MBO-SPAM-Probability: 
-X-Rspamd-Score: -3.70 / 15.00 / 15.00
-X-Rspamd-Queue-Id: E61EF17DB
-X-Rspamd-UID: f501cd
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+References: <20201021040049.933690-1-alistair@alistair23.me>
+In-Reply-To: <20201021040049.933690-1-alistair@alistair23.me>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Wed, 21 Oct 2020 17:27:52 -0700
+Message-ID: <CAMKF1soDAFv_tb8s0KkWxotDXh0nGhkJ2zSz6BLyB1DZ3QFf+A@mail.gmail.com>
+Subject: Re: [oe] [PATCH] wayland-init: Allow setting idle time to 0
+To: Alistair <alistair@alistair23.me>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-I've been trying to get qmake to work with Yocto-generated SDKs for 
-cross compiling qmake based projects.
+do you intend this for oe-core? if so then the mailing list its sent
+to should be oe-core ml
 
-No luck so far.
-
-What I've tried is to add nativesdk-packagegroup-qt5-toolchain-host to 
-TOOLCHAIN_HOST_TASK_append . However, when I try to run qmake, this happens:
-
-"Cannot find feature spec_pre.prf"
-
-Does anybody have any idea what I have to do to make qmake work with the 
-SDK's environment?
-
+On Tue, Oct 20, 2020 at 9:01 PM Alistair <alistair@alistair23.me> wrote:
+>
+> Add a PACKAGECONFIG that can be used to set the idle-time to 0. This is
+> useful for always on machine (such as kiosks) and for debugging.
+>
+> Signed-off-by: Alistair Francis <alistair@alistair23.me>
+> ---
+>  meta/recipes-graphics/wayland/weston-init.bb | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>
+> diff --git a/meta/recipes-graphics/wayland/weston-init.bb b/meta/recipes-graphics/wayland/weston-init.bb
+> index 07cec75fb3..b7a99be646 100644
+> --- a/meta/recipes-graphics/wayland/weston-init.bb
+> +++ b/meta/recipes-graphics/wayland/weston-init.bb
+> @@ -15,6 +15,10 @@ SRC_URI = "file://init \
+>
+>  S = "${WORKDIR}"
+>
+> +PACKAGECONFIG ??= ""
+> +
+> +PACKAGECONFIG[no-idle-timeout] = ",,"
+> +
+>  DEFAULTBACKEND ??= ""
+>  DEFAULTBACKEND_qemuall ?= "fbdev"
+>  DEFAULTBACKEND_qemuarm64 = "drm"
+> @@ -45,6 +49,10 @@ do_install() {
+>          if [ -n "${DEFAULTBACKEND}" ]; then
+>                 sed -i -e "/^\[core\]/a backend=${DEFAULTBACKEND}-backend.so" ${D}${sysconfdir}/xdg/weston/weston.ini
+>         fi
+> +
+> +       if [ "${@bb.utils.contains('PACKAGECONFIG', 'no-idle-timeout', 'yes', 'no', d)}" = "yes" ]; then
+> +               echo "idle-time=0" >> ${D}${sysconfdir}/xdg/weston/weston.ini
+> +       fi
+>  }
+>
+>  inherit update-rc.d features_check systemd
+> --
+> 2.28.0
+>
+>
+> 
+>
