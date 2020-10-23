@@ -1,103 +1,75 @@
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.88])
- by mx.groups.io with SMTP id smtpd.web08.12371.1603472589630647234
+Received: from mail-io1-f46.google.com (mail-io1-f46.google.com [209.85.166.46])
+ by mx.groups.io with SMTP id smtpd.web12.1766.1603481628466222123
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Oct 2020 10:03:10 -0700
+ Fri, 23 Oct 2020 12:33:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=NblmzIBx;
- spf=pass (domain: windriver.com, ip: 40.107.236.88, mailfrom: sakib.sajal@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ENeOsNgZIfzwT4a+YWu8nXN0QmLuommFNRaQnBbZmI/BsEjcTlyjapYp2YVMvAdkKROV/SGnQMJPZd0rNi8ZW82XCs15cVOsikNN2XTV8Ki6MHR3fi8sG20aTtu2aH9xT9f4iioEzCBPDltJ/lw0rQcGEl60pOZYdylTNsaikRMK83iuUndRiEdNdbbqCJ3/I5jDCuqc7vpWCk6BWyemAhmsFrAdccOJUKmlYAKS2V+fuoHDuyH+TpIQEdJ5AiCW6vXviKV9x795J+dWvNJax/CXd5aqBITJrvSe3oEsKyNFfZCswbL3hweXQg0RjNAArH5TIIXJq4mZEJ7Dsj1cIg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+PT3WFiAyAu1DVQDuzIYVgAPKotbQb2HDlTCDTunGfw=;
- b=GeeKJT2RM6Z/SKQbd338ai7abCqYlu8F/SQb6n7rB9TGYNgHv09oG34gTYii52GlRakrjbhCyV36htI2vc7uSj4X7QjhlU9PEdILhGrS6DaEjI32xBXVPvY3U3nPM0nhgn6j2quzQObtDgxf5bmrhVEp9OgmIGyvdPocgfbo/qvNSPKpyBtHNQUqgpXhfkERP4L7aV87HY722k0PN/4Da95M+Kqd2pRKTmRHj6/gtSPd32pcfdfHkNN91p6Z4GBp8CWcQW/kn0238u5draUiNHJjc38qQYnYRgCta4CmdhAUsoBPPC+nR09HmrQVf7RV4I2TG25uN2CEiFqSdcvzPw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=l2mYIPXR;
+ spf=pass (domain: gmail.com, ip: 209.85.166.46, mailfrom: paulohefagundes@gmail.com)
+Received: by mail-io1-f46.google.com with SMTP id q25so3196135ioh.4
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2020 12:33:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+PT3WFiAyAu1DVQDuzIYVgAPKotbQb2HDlTCDTunGfw=;
- b=NblmzIBx4aR12wHvoIvFXEZ/3E9zieeis+TGBDCdFKuWDU+Xu0qEJ9cIgVBf1/WKbD11s41WsckWNxEH3v8zMdUCweiApMpDIjcCoWIUC1f/dUYTI2twqrZqiUeis+tnfU9ficP3deCKDDJadwLZBqWn2qRNyoneB/MXqz1k3BI=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from DM6PR11MB2538.namprd11.prod.outlook.com (2603:10b6:5:be::20) by
- DM5PR11MB1578.namprd11.prod.outlook.com (2603:10b6:4:e::23) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3499.18; Fri, 23 Oct 2020 17:03:08 +0000
-Received: from DM6PR11MB2538.namprd11.prod.outlook.com
- ([fe80::e8b7:eec1:e6fb:35a]) by DM6PR11MB2538.namprd11.prod.outlook.com
- ([fe80::e8b7:eec1:e6fb:35a%7]) with mapi id 15.20.3477.028; Fri, 23 Oct 2020
- 17:03:08 +0000
-From: "Sakib Sajal" <sakib.sajal@windriver.com>
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=OiYr/XOnME2F60Wl6kJChxdT2TH0WQ7J1ObkNvv82ww=;
+        b=l2mYIPXRWP+0xlOaZWo98z9z++dHBI95rB8+LCC2ZYMluo5B3nOsF4XWA085Sqysg5
+         W0GeRQ+xU4/9JKUMh+TEJNCV7Zt/eBI79L2fHxikNisEuFzwRExiZNSze8qPsUZmQRXR
+         QA3ckHXStjBqfmCdUBQNLYXgZQQy5bptCwcSUGS7VyEiJSVE4IRuHFo49KvdCb6tLspO
+         casMJoD2e5mnhs4/IvHn0hQ839nM3YUhhVP4LdKWDDFkB4KGCfA+tD+GbpagHBdDpfor
+         J9U3N/uHBJ4C/UHmkS3x9FUkxh71tMJa34YrMBoC9h5P/tUYWE162wBpIiUqH/JSet3A
+         E2Rw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=OiYr/XOnME2F60Wl6kJChxdT2TH0WQ7J1ObkNvv82ww=;
+        b=A2X64HrLQNwQE38DTt5X86JOkJ1YKdfho/mfD2picrk0PXvGyxpDHB5w4hLF7KJTHD
+         YLLiLlNo1Q3RQapC+tdMG0q8EByao4UKPYA6ReudXKvyPBdPOguyG3td/ZhfA3Apceqq
+         mF7o3LQV/NNtaTNyiZG5zixrka8sedEDiaX+chBcbubETGz9ZNpthRETkjwhNfq3SJ9R
+         jW6lWhLdYxXGwhKwkEShmARj9jD7CKLyE3H+1Sr6hi12SCcGJtQQ0wATWavOE3aQemb9
+         x9QF/RzXUN4ELtxhlJlbCSHokr+x8m/vf+jnKpfAtm+fkTQ9LmfymxVGCT7bNR63LwVX
+         4vqA==
+X-Gm-Message-State: AOAM530Pw4F46R/gHfMELitrgOiDMHYpInRlyIl5v0HfrDhvnZjv4c5t
+	jmSCR+N9JIhm4rryYgIwxhcHWTAb/nY=
+X-Google-Smtp-Source: ABdhPJxJykIAoAgjiVficooRhiwX9zxR4ozfs1OmNQrcpiS02HenDIaZxoKJBS6MPpINmCoTwrD1PA==
+X-Received: by 2002:a6b:4a0d:: with SMTP id w13mr2144189iob.104.1603481627708;
+        Fri, 23 Oct 2020 12:33:47 -0700 (PDT)
+Return-Path: <paulohefagundes@gmail.com>
+Received: from paulo-pc.og.opengear.com (c-174-52-8-24.hsd1.ut.comcast.net. [174.52.8.24])
+        by smtp.gmail.com with ESMTPSA id b9sm1258716ilq.51.2020.10.23.12.33.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 23 Oct 2020 12:33:46 -0700 (PDT)
+From: "Fagundes, Paulo" <paulohefagundes@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-CC: Sakib Sajal <sakib.sajal@windriver.com>
-Subject: [meta-python][PATCH] python3-prettytable: add python3-wcwidth to RDEPENDS
-Date: Fri, 23 Oct 2020 13:02:46 -0400
-Message-ID: <20201023170246.7708-1-sakib.sajal@windriver.com>
-X-Mailer: git-send-email 2.26.2
-X-Originating-IP: [128.224.252.2]
-X-ClientProxiedBy: YTOPR0101CA0029.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:15::42) To DM6PR11MB2538.namprd11.prod.outlook.com
- (2603:10b6:5:be::20)
-Return-Path: sakib.sajal@windriver.com
+Cc: Paulo Fagundes <paulohefagundes@gmail.com>
+Subject: [meta-oe][PATCH] redis-plus-plus: upgrade 1.1.2 -> 1.2.1
+Date: Fri, 23 Oct 2020 13:33:37 -0600
+Message-Id: <20201023193337.10829-1-paulohefagundes@gmail.com>
+X-Mailer: git-send-email 2.29.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from yow-lpggp3.wrs.com (128.224.252.2) by YTOPR0101CA0029.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::42) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3499.18 via Frontend Transport; Fri, 23 Oct 2020 17:03:07 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: f23993e9-5374-424d-4a7c-08d8777583e6
-X-MS-TrafficTypeDiagnostic: DM5PR11MB1578:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<DM5PR11MB157874EB5DF436A2EA35D920F21A0@DM5PR11MB1578.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:67;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	wWYrPSBJO7WX28gP9NClgWnZN/VzIbsrEMp/8vg/dSg64tRo9BW16T4mhMwfivjwls1gFNOBalK2E/M9sfTh7L1+jWIQRDeBCEOnm0hUT5dvf/g8PQ2UeixgmjluDY5HY0uwyXlvTBM6cNPlpsoz6aOhL7ZlSDypL4zReNFsqael4ffl8UXVGgzY9Vhy8vEEpKUQX5LV0lvZGEMbwEsmPZ1ZwSZo3tRpbdTbfzixryVqygnYyet8/cj8LBpFRsxsDCQqIcayWNTAj9sOxSol5aCqX9AhnkYQKhD+gAoc0HvjYdXABouyng/65zOf9nKnjuOc4T0aOwHdzmCOI9y8Vg==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB2538.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(136003)(366004)(396003)(39850400004)(346002)(5660300002)(6512007)(6666004)(4744005)(66476007)(4326008)(1076003)(66556008)(66946007)(52116002)(956004)(6916009)(478600001)(8936002)(2616005)(16526019)(44832011)(316002)(36756003)(186003)(2906002)(86362001)(6506007)(107886003)(8676002)(6486002)(26005);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	qfzUCDBbP7rP1AdjVco6n9Z7UliJN9lzzQMmueDzvxuDgzdaMXXyCZdDn0GyJQKEssnP12Xzrn+qFNRkmk2+UoQdWvYEnxz0wGOZNoWF3C/TCS8i6TDtmcoMC+UnHk6adjdq5OijjM6aZHNruSZWC1Zfghyu/cSCUjwjqflk1/Sk1jDQaV+o05WyYk9HPH9dqHUs5wmd4BwDyjAo2QsHAzqrgf2wns2//bZgIBEryKWwZD/QgEDLGOAPDxfUbNNcQa4P2X7ChM6KR9ggzXIaYZ2dJCheACxX9KlPP2Ru57hA3cyjrEi3nGaCCrEjcPSpoJXcVM/uENL9wFcHNX5LqkC1+a9XuEHqvhI60tQEhrxedjnHMuHDX/78a0E/dG2DeVTll4f/FfbNZVX6w1cxi4UM4pGkUJ/a5eGDhxkpB4+pMcX9nrhO34RT4l0mswstmLjMk7mElzgLR/ZVXMQM1NdDbKc87K5ZNA9kBpcEVjGK5npASJmp2DvS/H/yJ6sLfjPfdPFmEbElvbWpoPCpxQnXFngovrL/XP1YVuHQXX9lqfwXueONoIl8TFTOHhvOiNxg0cRLFzfQd4tHY0QBmkwezMfAMsq1pXFaPrMS+nQt5n2OvidQkguymzY2se+lBhhgWU3ozsQHCmGVV92eEg==
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f23993e9-5374-424d-4a7c-08d8777583e6
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB2538.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2020 17:03:08.2150
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zABoWOFwf6wPn2mNZA8H3f5Ssui37dKO6CKG/PyhCowi47otac0YP1Bg9FJnWJevQDmYWFf3a29jrQSprP3+++tfNXYc60PI8zTGsdWqEjQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1578
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-Upstream prettytable uses wcwidth since v1.0.0,
-see commit 83689922af58c152993e8ef5bcf7dd1464371272.
-Hence, add python3-wcwidth to RDEPENDS .
-
-Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
 ---
- meta-python/recipes-devtools/python/python3-prettytable_1.0.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../{redis-plus-plus_1.1.2.bb => redis-plus-plus_1.2.1.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/redis-plus-plus/{redis-plus-plus_1.1.2.bb => redis-plus-plus_1.2.1.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-prettytable_1.0.1.=
-bb b/meta-python/recipes-devtools/python/python3-prettytable_1.0.1.bb
-index a065b6c47..79341b9d2 100644
---- a/meta-python/recipes-devtools/python/python3-prettytable_1.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-prettytable_1.0.1.bb
-@@ -28,6 +28,7 @@ DEPENDS +=3D "${PYTHON_PN}-setuptools-scm-native"
- RDEPENDS_${PN} +=3D " \
- 	${PYTHON_PN}-math \
- 	${PYTHON_PN}-html \
-+	${PYTHON_PN}-wcwidth \
- "
-=20
- RDEPENDS_${PN}-ptest +=3D " \
---=20
-2.26.2
+diff --git a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.1.2.bb b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.2.1.bb
+similarity index 89%
+rename from meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.1.2.bb
+rename to meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.2.1.bb
+index e23733b0f8..4059fd47e8 100644
+--- a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.1.2.bb
++++ b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.2.1.bb
+@@ -7,7 +7,7 @@ RDEPENDS_${PN} += "hiredis"
+ 
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+-SRCREV = "b08b36a9a91de00636e583307610f49af7876f50"
++SRCREV = "a9f9c301f8de1c181e6d45c573b5d1fe7b8200b1"
+ SRC_URI = "git://github.com/sewenew/redis-plus-plus"
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.29.0
 
