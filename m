@@ -1,59 +1,62 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [])
- by mx.groups.io with SMTP id smtpd.web10.4768.1603432812584168192
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web08.9769.1603463562075974218
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Oct 2020 23:00:24 -0700
+ Fri, 23 Oct 2020 07:32:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: <nil>, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.77,404,1596470400"; 
-   d="scan'208";a="100435533"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 23 Oct 2020 14:00:23 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id BC402486A854
-	for <openembedded-devel@lists.openembedded.org>; Fri, 23 Oct 2020 14:00:20 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 23 Oct 2020 14:00:21 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] protobuf: upgrade 3.13.0 -> 3.13.0.1
-Date: Fri, 23 Oct 2020 14:00:19 +0800
-Message-ID: <1603432819-100656-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: BC402486A854.AEE6F
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=34070 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kVy7T-0002Kz-EI; Fri, 23 Oct 2020 17:32:40 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-google-api-python-client: Upgrade 1.12.3 -> 1.12.5
+Date: Fri, 23 Oct 2020 17:32:33 +0300
+Message-Id: <20201023143233.6911-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20201023143233.6911-1-leon.anavi@konsulko.com>
+References: <20201023143233.6911-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Upgrade to release 1.12.5:
+
+- Don't raise when downloading zero byte files
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../protobuf/{protobuf_3.13.0.bb => protobuf_3.13.0.1.bb}       | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/protobuf/{protobuf_3.13.0.bb => protobuf_3.13.0.1.bb} (98%)
+ ...t_1.12.3.bb => python3-google-api-python-client_1.12.5.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-google-api-python-client_1.12.3.bb => python3-google-api-python-client_1.12.5.bb} (69%)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.13.0.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.13.0.1.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/protobuf/protobuf_3.13.0.bb
-rename to meta-oe/recipes-devtools/protobuf/protobuf_3.13.0.1.bb
-index f2c5e2bee6..8c349db4d0 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf_3.13.0.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.13.0.1.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
- DEPENDS = "zlib"
- DEPENDS_append_class-target = " protobuf-native"
+diff --git a/meta-python/recipes-devtools/python/python3-google-api-python-client_1.12.3.bb b/meta-python/recipes-devtools/python/python3-google-api-python-client_1.12.5.bb
+similarity index 69%
+rename from meta-python/recipes-devtools/python/python3-google-api-python-client_1.12.3.bb
+rename to meta-python/recipes-devtools/python/python3-google-api-python-client_1.12.5.bb
+index cf65044627..87c2212416 100644
+--- a/meta-python/recipes-devtools/python/python3-google-api-python-client_1.12.3.bb
++++ b/meta-python/recipes-devtools/python/python3-google-api-python-client_1.12.5.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=94023d14f6b58272fd885e4e3f2f08b3"
  
--SRCREV = "fde7cf7358ec7cd69e8db9be4f1fa6a5c431386a"
-+SRCREV = "d1eca4e4b421cd2997495c4b4e65cea6be4e9b8a"
+-SRC_URI[md5sum] = "24e87dbe11fbbe3d97f23c230f518531"
+-SRC_URI[sha256sum] = "844ef76bda585ea0ea2d5e7f8f9a0eb10d6e2eba66c4fea0210ec7843941cb1a"
++SRC_URI[md5sum] = "4aee3820666e80944f38c39176193d5c"
++SRC_URI[sha256sum] = "1892cd490d164e5ec2f2168dc3b4fa0af68f36ca15a88b91bca1826b3d4f2829"
  
- SRC_URI = "git://github.com/protocolbuffers/protobuf.git \
-            file://run-ptest \
+ inherit pypi setuptools3
 -- 
-2.25.1
-
-
+2.17.1
 
