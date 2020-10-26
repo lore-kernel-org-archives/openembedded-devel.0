@@ -1,24 +1,22 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.10230.1603702957766579335
+ by mx.groups.io with SMTP id smtpd.web12.11393.1603713051016524498
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Oct 2020 02:02:38 -0700
+ Mon, 26 Oct 2020 04:50:51 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=55296 helo=localhost.localdomain)
+Received: from [78.130.197.211] (port=55378 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kWyOi-0003YJ-3I; Mon, 26 Oct 2020 11:02:36 +0200
+	id 1kX11U-0007bv-CU; Mon, 26 Oct 2020 13:50:49 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-aiohttp: Upgrade 3.6.3 -> 3.7.1
-Date: Mon, 26 Oct 2020 11:02:17 +0200
-Message-Id: <20201026090217.21174-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-cryptography: Upgrade 3.1.1 -> 3.2
+Date: Mon, 26 Oct 2020 13:50:37 +0200
+Message-Id: <20201026115041.11671-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201026090217.21174-1-leon.anavi@konsulko.com>
-References: <20201026090217.21174-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.2
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,50 +28,44 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.7.1:
+Upgrade to release 3.2:
 
-- Fixed a type error caused by the conditional import of Protocol
-- Server doesn't send Content-Length for 1xx or 204
-- Fix run_app typing
-- Always require typing_extensions library
-- Fix a variable-shadowing bug causing ThreadedResolver.resolve
-  to return the resolved IP as the hostname in each record, which
-  prevented validation of HTTPS connections
-- Added annotations to all public attributes
-- Fix flaky test_when_timeout_smaller_second
-- Ensure sending a zero byte file does not throw an exception
-- Fix a bug in web.run_app() about Python version checking on
-  Windows
-
-License-Update: Update year
+- SECURITY ISSUE: Attempted to make RSA PKCS#1v1.5 decryption more
+  constant time, to protect against Bleichenbacher vulnerabilities.
+  Due to limitations imposed by our API, we cannot completely
+  mitigate this vulnerability and a future release will contain a
+  new API which is designed to be resilient to these for contexts
+  where it is required. Credit to Hubert Kario for reporting the
+  issue. CVE-2020-25659
+- Support for OpenSSL 1.0.2 has been removed. Users on older
+  version of OpenSSL will need to upgrade.
+- Added basic support for PKCS7 signing (including SMIME) via
+  :class:`~cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder`.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-aiohttp_3.6.3.bb => python3-aiohttp_3.7.1.bb}  | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-aiohttp_3.6.3.bb => python3-aiohttp_3.7.1.bb} (69%)
+ ...hon3-cryptography_3.1.1.bb => python3-cryptography_3.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cryptography_3.1.1.bb => python3-cryptography_3.2.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.6.3.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.7.1.bb
-similarity index 69%
-rename from meta-python/recipes-devtools/python/python3-aiohttp_3.6.3.bb
-rename to meta-python/recipes-devtools/python/python3-aiohttp_3.7.1.bb
-index 824bde5e25..8b5b1dd160 100644
---- a/meta-python/recipes-devtools/python/python3-aiohttp_3.6.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.7.1.bb
-@@ -2,10 +2,10 @@ SUMMARY = "Async http client/server framework"
- DESCRIPTION = "Asynchronous HTTP client/server framework for asyncio and Python"
- HOMEPAGE = "https://github.com/aio-libs/aiohttp"
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cf056e8e7a0a5477451af18b7b5aa98c"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3bf3d48554bdca1ea7fdb48de378c2ca"
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography_3.1.1.bb b/meta-python/recipes-devtools/python/python3-cryptography_3.2.bb
+similarity index 91%
+rename from meta-python/recipes-devtools/python/python3-cryptography_3.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-cryptography_3.2.bb
+index 1d6a9b32e0..cec37b0276 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography_3.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography_3.2.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=097f805837700cfac572ac274cd38124"
  
--SRC_URI[md5sum] = "13d02dc8379207dde1f6966d1fc5083d"
--SRC_URI[sha256sum] = "698cd7bc3c7d1b82bb728bae835724a486a8c376647aec336aa21a60113c3645"
-+SRC_URI[md5sum] = "ed78633cc420b29d3b61c7d877dc0901"
-+SRC_URI[sha256sum] = "04f9d70f6c4d089be5068d7df6281e638f6820d4f1b1ec3dc012b0b43fa997d2"
+ LDSHARED += "-pthread"
  
- PYPI_PACKAGE = "aiohttp"
- inherit setuptools3 pypi
+-SRC_URI[md5sum] = "c3807891d36aa9de8187e9db8b2bb457"
+-SRC_URI[sha256sum] = "9d9fc6a16357965d282dd4ab6531013935425d0dc4950df2e0cf2a1b1ac1017d"
++SRC_URI[md5sum] = "1e476287399bae923514e19429804155"
++SRC_URI[sha256sum] = "e4789b84f8dedf190148441f7c5bfe7244782d9cbb194a36e17b91e7d3e1cca9"
+ 
+ SRC_URI += " \
+     file://run-ptest \
 -- 
 2.17.1
 
