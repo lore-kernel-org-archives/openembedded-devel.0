@@ -1,70 +1,76 @@
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
- by mx.groups.io with SMTP id smtpd.web08.9244.1603692021292964901
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.10058.1603702953401735466
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 25 Oct 2020 23:00:22 -0700
+ Mon, 26 Oct 2020 02:02:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: uol@pengutronix.de)
-Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
-	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=55296 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
-	(envelope-from <uol@pengutronix.de>)
-	id 1kWvYI-0006Gu-LN; Mon, 26 Oct 2020 07:00:18 +0100
-Received: from uol by dude.hi.pengutronix.de with local (Exim 4.92)
-	(envelope-from <uol@pengutronix.de>)
-	id 1kWvYH-0007d0-8x; Mon, 26 Oct 2020 07:00:17 +0100
-From: "Ulrich ?lmann" <u.oelmann@pengutronix.de>
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kWyOY-0003YJ-L6; Mon, 26 Oct 2020 11:02:28 +0200
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Ulrich=20=C3=96lmann?= <u.oelmann@pengutronix.de>
-Subject: [meta-oe][dunfell][PATCH] usb-modeswitch, usb-modeswitch-data: fix usrmerge
-Date: Mon, 26 Oct 2020 07:00:17 +0100
-Message-Id: <20201026060017.29276-1-u.oelmann@pengutronix.de>
-X-Mailer: git-send-email 2.28.0
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
-X-SA-Exim-Mail-From: uol@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-psutil: Upgrade 5.7.2 -> 5.7.3
+Date: Mon, 26 Oct 2020 11:02:13 +0200
+Message-Id: <20201026090217.21174-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.2
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Signed-off-by: Ulrich Ölmann <u.oelmann@pengutronix.de>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 50a487fc0b0123b154db73f79bbb18b23eb234f0)
-Signed-off-by: Ulrich Ölmann <u.oelmann@pengutronix.de>
+Upgrade to release 5.7.3:
+
+- [FreeBSD] add support for Process.rlimit().
+- [BSD] add support for Process.environ()
+- [UNIX] net_if_stats()'s isup also checks whether the NIC is
+  running (meaning Wi-Fi or ethernet cable is connected)
+- [Linux] improved battery detection and charge "secsleft"
+  calculation
+- [Linux] physical cpu_count() result is incorrect on systems with
+  more than one CPU socket
+- [macOS] Process.exe() may raise FileNotFoundError if process is
+  still alive but the exe file which launched it got deleted
+- [macOS] fix missing include for getpagesize()
+- [Windows] Process.open_files() may cause a segfault due to a
+  NULL pointer
+- [Linux] sensors_battery(): if percent can be determined but not
+  the remaining values, still return a result instead of None.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../usb-modeswitch/usb-modeswitch-data_20191128.bb            | 4 ++--
- .../recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb    | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ .../{python3-psutil_5.7.2.bb => python3-psutil_5.7.3.bb}     | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-psutil_5.7.2.bb => python3-psutil_5.7.3.bb} (64%)
 
-diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20191128.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20191128.bb
-index 938c0f9c26bd..ca970e59bb3a 100644
---- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20191128.bb
-+++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20191128.bb
-@@ -11,9 +11,9 @@ SRC_URI[md5sum] = "e8fce7eb949cbe16c61fb71bade4cc17"
- SRC_URI[sha256sum] = "3f039b60791c21c7cb15c7986cac89650f076dc274798fa242231b910785eaf9"
+diff --git a/meta-python/recipes-devtools/python/python3-psutil_5.7.2.bb b/meta-python/recipes-devtools/python/python3-psutil_5.7.3.bb
+similarity index 64%
+rename from meta-python/recipes-devtools/python/python3-psutil_5.7.2.bb
+rename to meta-python/recipes-devtools/python/python3-psutil_5.7.3.bb
+index d61d501e9c..2f927d2da2 100644
+--- a/meta-python/recipes-devtools/python/python3-psutil_5.7.2.bb
++++ b/meta-python/recipes-devtools/python/python3-psutil_5.7.3.bb
+@@ -2,9 +2,8 @@ SUMMARY = "A cross-platform process and system utilities module for Python"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e35fd9f271d19d5f742f20a9d1f8bb8b"
  
- do_install() {
--    oe_runmake install DESTDIR=${D}
-+    oe_runmake install DESTDIR=${D} RULESDIR=${D}/${nonarch_base_libdir}/udev/rules.d
- }
+-PYPI_SRC_URI = "https://files.pythonhosted.org/packages/aa/3e/d18f2c04cf2b528e18515999b0c8e698c136db78f62df34eee89cee205f1/psutil-${PV}.tar.gz"
+-SRC_URI[md5sum] = "50bf39b4faa268ba1da8a9730bb38bb6"
+-SRC_URI[sha256sum] = "90990af1c3c67195c44c9a889184f84f5b2320dce3ee3acbd054e3ba0b4a7beb"
++SRC_URI[md5sum] = "b07a067e6a930608235f4e5d9b1f90f5"
++SRC_URI[sha256sum] = "af73f7bcebdc538eda9cc81d19db1db7bf26f103f91081d780bbacfcb620dee2"
  
- RDEPENDS_${PN} = "usb-modeswitch (>= 2.4.0)"
--FILES_${PN} += "${base_libdir}/udev/rules.d/ \
-+FILES_${PN} += "${nonarch_base_libdir}/udev/rules.d/ \
-                 ${datadir}/usb_modeswitch"
-diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
-index baad340908ac..6a5287af4959 100644
---- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
-+++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
-@@ -19,7 +19,7 @@ RDEPENDS_${PN} = "tcl"
- RRECOMMENDS_${PN} = "usb-modeswitch-data"
+ inherit pypi setuptools3
  
- do_install() {
--    oe_runmake DESTDIR=${D} install
-+    oe_runmake DESTDIR=${D} UDEVDIR=${D}/${nonarch_base_libdir}/udev install
-     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-         install -d ${D}/${systemd_unitdir}/system
-         install -m 644 ${S}/usb_modeswitch@.service ${D}/${systemd_unitdir}/system
 -- 
-2.28.0
+2.17.1
 
