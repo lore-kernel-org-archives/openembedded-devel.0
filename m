@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.11420.1603713055136818752
+ by mx.groups.io with SMTP id smtpd.web12.11404.1603713077366335722
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Oct 2020 04:50:55 -0700
+ Mon, 26 Oct 2020 04:51:17 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=55378 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kX11a-0007bv-1r; Mon, 26 Oct 2020 13:50:54 +0200
+	id 1kX11w-0007bv-BB; Mon, 26 Oct 2020 13:51:16 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-cryptography: Upgrade 3.1.1 -> 3.2
-Date: Mon, 26 Oct 2020 13:50:38 +0200
-Message-Id: <20201026115041.11671-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-u-msgpack-python: Upgrade 2.7.0 -> 2.7.1
+Date: Mon, 26 Oct 2020 13:50:39 +0200
+Message-Id: <20201026115041.11671-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201026115041.11671-1-leon.anavi@konsulko.com>
 References: <20201026115041.11671-1-leon.anavi@konsulko.com>
@@ -30,43 +30,35 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.2:
+Upgrade to release 2.7.1:
 
-- SECURITY ISSUE: Attempted to make RSA PKCS#1v1.5 decryption more
-  constant time, to protect against Bleichenbacher vulnerabilities.
-  Due to limitations imposed by our API, we cannot completely
-  mitigate this vulnerability and a future release will contain a
-  new API which is designed to be resilient to these for contexts
-  where it is required. Credit to Hubert Kario for reporting the
-  issue. CVE-2020-25659
-- Support for OpenSSL 1.0.2 has been removed. Users on older
-  version of OpenSSL will need to upgrade.
-- Added basic support for PKCS7 signing (including SMIME) via
-  :class:`~cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder`.
+- Add Ext type value validation to Ext class and
+  ext_serializable() decorator
+- Change string formatting from % to .format() throughout codebase
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...y-vectors_3.1.1.bb => python3-cryptography-vectors_3.2.bb} | 4 ++--
+ ...pack-python_2.7.0.bb => python3-u-msgpack-python_2.7.1.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_3.1.1.bb => python3-cryptography-vectors_3.2.bb} (73%)
+ rename meta-python/recipes-devtools/python/{python3-u-msgpack-python_2.7.0.bb => python3-u-msgpack-python_2.7.1.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.1.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.2.bb
-similarity index 73%
-rename from meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-cryptography-vectors_3.2.bb
-index 9486fe2350..2e7ed81696 100644
---- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.2.bb
-@@ -4,8 +4,8 @@ SECTION = "devel/python"
- LICENSE = "Apache-2.0 | BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
+diff --git a/meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.0.bb b/meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.1.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.0.bb
+rename to meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.1.bb
+index 4797a3535f..c5524d152e 100644
+--- a/meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.1.bb
+@@ -3,8 +3,8 @@ DESCRIPTION = "A portable, lightweight MessagePack serializer and deserializer w
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=9eb4691bcb66360acee473a8cf75f594"
  
--SRC_URI[md5sum] = "fbc43f8b155b52f9ed163d3555ea5e83"
--SRC_URI[sha256sum] = "5529c516194122fec7db1682812e2314ddff4221fdf993169118f9c0d291e2f6"
-+SRC_URI[md5sum] = "20976284d12ed99e31d38814be038ac1"
-+SRC_URI[sha256sum] = "785f06ffd0bbc73bdd69d0b164d72a7a7827c7c3bbf79ae9a235d7126afd98e4"
+-SRC_URI[md5sum] = "231609d87aa58459a1491c8f5df4e4cd"
+-SRC_URI[sha256sum] = "996e4c4454771f0ff0fd2a7566b1a159d305d3611cd755addf444e3533e2bc54"
++SRC_URI[md5sum] = "8691cea6bc7b44bce6e2115260a54323"
++SRC_URI[sha256sum] = "b7e7d433cab77171a4c752875d91836f3040306bab5063fb6dbe11f64ea69551"
  
- PYPI_PACKAGE = "cryptography_vectors"
+ inherit pypi setuptools3 ptest
  
 -- 
 2.17.1
