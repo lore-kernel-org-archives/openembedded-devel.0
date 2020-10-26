@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.11393.1603713051016524498
+ by mx.groups.io with SMTP id smtpd.web09.11420.1603713055136818752
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Oct 2020 04:50:51 -0700
+ Mon, 26 Oct 2020 04:50:55 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=55378 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kX11U-0007bv-CU; Mon, 26 Oct 2020 13:50:49 +0200
+	id 1kX11a-0007bv-1r; Mon, 26 Oct 2020 13:50:54 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-cryptography: Upgrade 3.1.1 -> 3.2
-Date: Mon, 26 Oct 2020 13:50:37 +0200
-Message-Id: <20201026115041.11671-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-cryptography: Upgrade 3.1.1 -> 3.2
+Date: Mon, 26 Oct 2020 13:50:38 +0200
+Message-Id: <20201026115041.11671-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20201026115041.11671-1-leon.anavi@konsulko.com>
+References: <20201026115041.11671-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -44,28 +46,28 @@ Upgrade to release 3.2:
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...hon3-cryptography_3.1.1.bb => python3-cryptography_3.2.bb} | 4 ++--
+ ...y-vectors_3.1.1.bb => python3-cryptography-vectors_3.2.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cryptography_3.1.1.bb => python3-cryptography_3.2.bb} (91%)
+ rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_3.1.1.bb => python3-cryptography-vectors_3.2.bb} (73%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cryptography_3.1.1.bb b/meta-python/recipes-devtools/python/python3-cryptography_3.2.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-cryptography_3.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-cryptography_3.2.bb
-index 1d6a9b32e0..cec37b0276 100644
---- a/meta-python/recipes-devtools/python/python3-cryptography_3.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-cryptography_3.2.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=097f805837700cfac572ac274cd38124"
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.1.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.2.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-cryptography-vectors_3.2.bb
+index 9486fe2350..2e7ed81696 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.2.bb
+@@ -4,8 +4,8 @@ SECTION = "devel/python"
+ LICENSE = "Apache-2.0 | BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
  
- LDSHARED += "-pthread"
+-SRC_URI[md5sum] = "fbc43f8b155b52f9ed163d3555ea5e83"
+-SRC_URI[sha256sum] = "5529c516194122fec7db1682812e2314ddff4221fdf993169118f9c0d291e2f6"
++SRC_URI[md5sum] = "20976284d12ed99e31d38814be038ac1"
++SRC_URI[sha256sum] = "785f06ffd0bbc73bdd69d0b164d72a7a7827c7c3bbf79ae9a235d7126afd98e4"
  
--SRC_URI[md5sum] = "c3807891d36aa9de8187e9db8b2bb457"
--SRC_URI[sha256sum] = "9d9fc6a16357965d282dd4ab6531013935425d0dc4950df2e0cf2a1b1ac1017d"
-+SRC_URI[md5sum] = "1e476287399bae923514e19429804155"
-+SRC_URI[sha256sum] = "e4789b84f8dedf190148441f7c5bfe7244782d9cbb194a36e17b91e7d3e1cca9"
+ PYPI_PACKAGE = "cryptography_vectors"
  
- SRC_URI += " \
-     file://run-ptest \
 -- 
 2.17.1
 
