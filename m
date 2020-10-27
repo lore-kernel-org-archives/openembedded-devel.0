@@ -1,71 +1,75 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.11377.1603713176193849805
+Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com [209.85.210.193])
+ by mx.groups.io with SMTP id smtpd.web10.8130.1603764960212038821
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Oct 2020 04:52:56 -0700
+ Mon, 26 Oct 2020 19:16:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=55384 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kX13X-0000PS-3K; Mon, 26 Oct 2020 13:52:55 +0200
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=dHY7iSCf;
+ spf=pass (domain: gmail.com, ip: 209.85.210.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f193.google.com with SMTP id j18so25268pfa.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Oct 2020 19:16:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=cPLeJRzlfdK/h/5+0gKRl4yPKCsZqbHovY6n/NyQZA4=;
+        b=dHY7iSCfUAFFDld0qLngIJWWfiy9a52cg3v8GIXfuouSSnNH1WWHEWJBnnNQreuLx4
+         13TI7BySFkMTIGJ+8Jy3o3Pn/54XQRcxuQK1GIfztw3iZcyi+i44w1McuTbSkwBKbMQk
+         yltibCYJxPJirlmob4Od7Q/Q5dhqccBURFrubXIuIhWMlQ9Yl8CNHe/gLUrwj9eSZROI
+         a8TSOlPxNaKeWKUkOGKx4TMzrI5QKyJOeGtKi0H/c+4N5U3b0lEmvK+GcXbph+ag1Jj0
+         m5fWXVoKctxeIcoolVzM3D4cC4Lz0eJnoG2/XQ1S0EhBMWH5Miwz3KAipVDOSqMSHTmj
+         ETew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=cPLeJRzlfdK/h/5+0gKRl4yPKCsZqbHovY6n/NyQZA4=;
+        b=mYKc4TMUklNr83jRDNTGg7Rf1T5ITemqosoIhYawlEz4Oc2kFkT5d+E/NuxranJwoE
+         J2Ks0j3QZXQ3625RYsUGPTN3Kr7r59IEH9R8dFNz1BCEaXvGThJhCXIHO8V84rUfrcjz
+         A3f2BUyj1gH2VQWssVUXFdxjgJPqkRXvbA+SZlZYLcYmbLKc19CW9UmvXcGaLLDdAvfZ
+         d3z2vpvXH9nr/U4rXPuXc5pheMWy9nhVPHJam67qvK4R22J2cWFWCVWjjrx0UZmGUvlV
+         O/6ZR0I+cbg6gcol0OCchALRUIhuyh/kuvA0FBs3wnex2tOlpHv51VM61HkBHB1hqzHP
+         sQjA==
+X-Gm-Message-State: AOAM533/VT308YNUVKxWlvva3YoBWhCxppGrrGD+2dOpw6ZxeZzpA8lu
+	vbs+X1PC6nw4qAgrUTmRT17UPI8jGrWgnw==
+X-Google-Smtp-Source: ABdhPJxJzd0lSUB2x0HerS6bFh/ZW/S8tkWRTr1W6+WSZWXKB+M5oBY+mTmSzizsK426OfPXPOHVag==
+X-Received: by 2002:a63:5821:: with SMTP id m33mr15680934pgb.16.1603764959286;
+        Mon, 26 Oct 2020 19:15:59 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::bc1e])
+        by smtp.gmail.com with ESMTPSA id b1sm70406pjd.11.2020.10.26.19.15.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 26 Oct 2020 19:15:58 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCHv2] python3-cryptography-vectors: Upgrade 3.1.1 -> 3.2
-Date: Mon, 26 Oct 2020 13:52:47 +0200
-Message-Id: <20201026115247.11902-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] minifi-cpp: Do not use lld on riscv32
+Date: Mon, 26 Oct 2020 19:15:56 -0700
+Message-Id: <20201027021556.344254-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.29.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 3.2:
+Fixes errors like
+|     riscv32-yoe-linux-ld.lld: error: init.c:(.text+0x0): relocation R_RISCV_ALIGN requires unimplemented linker relaxation; recompile with -mno-relax
+|     riscv32-yoe-linux-ld.lld: error: testCCompiler.c:(.text+0x0): relocation R_RISCV_ALIGN requires unimplemented linker relaxation; recompile with -mno-relax
 
-- SECURITY ISSUE: Attempted to make RSA PKCS#1v1.5 decryption more
-  constant time, to protect against Bleichenbacher vulnerabilities.
-  Due to limitations imposed by our API, we cannot completely
-  mitigate this vulnerability and a future release will contain a
-  new API which is designed to be resilient to these for contexts
-  where it is required. Credit to Hubert Kario for reporting the
-  issue. CVE-2020-25659
-- Support for OpenSSL 1.0.2 has been removed. Users on older
-  version of OpenSSL will need to upgrade.
-- Added basic support for PKCS7 signing (including SMIME) via
-  :class:`~cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder`.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...y-vectors_3.1.1.bb => python3-cryptography-vectors_3.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_3.1.1.bb => python3-cryptography-vectors_3.2.bb} (73%)
+ meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.1.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.2.bb
-similarity index 73%
-rename from meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-cryptography-vectors_3.2.bb
-index 9486fe2350..2e7ed81696 100644
---- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.2.bb
-@@ -4,8 +4,8 @@ SECTION = "devel/python"
- LICENSE = "Apache-2.0 | BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
+diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
+index 5127e11d81..9113fa67ad 100644
+--- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
++++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
+@@ -55,6 +55,7 @@ EXTRA_OECMAKE += " \
+     "
+ EXTRA_OECMAKE_append_toolchain-clang = " -DCMAKE_RANLIB=${STAGING_BINDIR_TOOLCHAIN}/${TARGET_PREFIX}llvm-ranlib"
+ LDFLAGS_append_toolchain-clang = " -fuse-ld=lld"
++LDFLAGS_remove_riscv32 = "-fuse-ld=lld"
  
--SRC_URI[md5sum] = "fbc43f8b155b52f9ed163d3555ea5e83"
--SRC_URI[sha256sum] = "5529c516194122fec7db1682812e2314ddff4221fdf993169118f9c0d291e2f6"
-+SRC_URI[md5sum] = "20976284d12ed99e31d38814be038ac1"
-+SRC_URI[sha256sum] = "785f06ffd0bbc73bdd69d0b164d72a7a7827c7c3bbf79ae9a235d7126afd98e4"
- 
- PYPI_PACKAGE = "cryptography_vectors"
- 
+ # There are endian issues when communicating with the x86 nifi on the the mips and the ppc machines.
+ COMPATIBLE_MACHINE_mips = "(!.*mips).*"
 -- 
-2.17.1
+2.29.1
 
