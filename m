@@ -1,17 +1,17 @@
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.50])
- by mx.groups.io with SMTP id smtpd.web12.10623.1603898538456052637
+Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.71])
+ by mx.groups.io with SMTP id smtpd.web12.10907.1603899639059854571
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 28 Oct 2020 08:22:18 -0700
+ Wed, 28 Oct 2020 08:40:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=EGsykdH9;
- spf=pass (domain: windriver.com, ip: 40.107.94.50, mailfrom: trevor.gamblin@windriver.com)
+ dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=JJ91ldJD;
+ spf=pass (domain: windriver.com, ip: 40.107.75.71, mailfrom: sakib.sajal@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=f8zz/XMDPdQEr3ycF2uEULe/ib4R1IWs5wKyVkfF+kUcCDSo3DbKyN5ndeeVF7GklZE5tL2Qae6lUzazJJeW55yD9q75qa1kanzcssWupmstQyj2Esuf5d0s1nFdMoHZCeSx+C0bOk9Y7sPqWHxWKe9+RpKBWUciz+oj6Uqf2GznHb6EQMxpAZTHCuemJs5iEAoNUnadlporY+dEjLBPdmoU80fwfkxg7qjvXFTTXiWHBPB6aXpCRFYLFy1shxAN6cpB5s3f/BcSK0Jrktii7Tb4JXU0i0+0lzHbFakEuqoZ73mNurWvQEZo9xqfU9vXysPuBMZqILCkd30tQiO71Q==
+ b=AiHYfNZlDaVvNK0I032wybXcIRgsxbjGAv9AEO6mYWTm4dsSeKszow4XvqMJOfJdUEPXXv3+WcIdclrhiY3pxEMBRFggl9WdQPomRLkoEP7V+3fMHS1MpLR+6XLVCcPmNMQvfEpIXtY4ulYaWLIzAqsBNK6jNKXwo2S1e3Cs+qtfQBQV4DVQ9pr4K5YFQ1x5CoF4p9bRlZVqEbV8TtGEEHGp1oHg6FD42fMmm+ngP5+a4fTPlR44em2D5bVMeLRQqHQxWMNw501+L8mhynEPoz2QyDFXqoa3E4hrUu1UVHCoRKOTEjVqrF+reGfthGvjlYiPqy6HcCaHir+u4c6QpQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JQnjELgf2MLIcB2++NT+Imsdu68Ws3cLFtRQiIAkAhw=;
- b=goJxAgX5IiqVafeY+QBazAN1jFOIEOcbZBOgUW52+tR4FlJoYA2uNkfmJwDVzjozeunRD+7PIsbPjUPTo077E3cjTL9qtbTzCFa4ns3z6kLAHiuKFBWN2g9c1dHWRecd7S/WJRkPP1MmfFZd8swGH65u/uEI5tg6c2SnnF4rqsWQUg/V0BBc/UzAOlpAFtoTtRmGn3tbMnn5ugQRisdMbjfPpUEzm+z7drs2KTFP6Xj7MBLFAG3jL2eR735T32fr8c/3Ovc+0tId9PMNBaOuWh1SU2pR0kPODMDI/y80OrUOxE8qtUsP8qwamP5mNTISa/em1Ze8rCDWnr84w7goKg==
+ bh=Uftzup0T2gfgwxacAC8JQco9/uMAXCTYFJaaWJFDUVA=;
+ b=SQGbGPpSPjoLu27NFk4jKVPtiJA2owq9WzSocuUIE4HRHD0vxRIes6MH9TKTVj1w5KUvzNUZW3MhbxuodVTnSYoTwptI6WfsCRUnXI9fn2xzIgnVIg57RD9wm61yQoPd3JB2BUaxm8thWh/MK+c0vnAI8MmCStDeBIOaT7lqDfapBRk1U5bOCezX9SZWHdBi1p7FMMqXjN1BPOd464AIpOXpy/+QhnXb7cHgGvIQvZCxTXx1EDRJ4FzZPvK+RmE4MR5RRiKofKlcu/P+01G1q6vtVVk/kmkivCnT2JqAIn9M0BNgHbd4xk/rMgh7OLoOA3/8K+sz+kdaF3npuFU1LA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,189 +19,83 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JQnjELgf2MLIcB2++NT+Imsdu68Ws3cLFtRQiIAkAhw=;
- b=EGsykdH9spNq6uqEyOsZiXQTbsLDHK9g5nvVmca3pDgvvqtmHNqDnZ5FEeNdx1cgabbR24PobXjY6tDnK1zB9VAO+UDW5/q9QZQ+RPK0CsLlGjigqCZQRTWDSo12xZThIvqNEReOXpGu2aRbH+GwxYrrXQroE74ejkZHuHsqabw=
+ bh=Uftzup0T2gfgwxacAC8JQco9/uMAXCTYFJaaWJFDUVA=;
+ b=JJ91ldJDkXVHVahgQolDFmw7tUuGWRx9/xehpfoqhEJ3JqGPBCGLnpL9EPa4lEcF0usGhLPN6gzgcJ7rlEclU0HoPfslEfqZF/l1KPxqLwpMjPZOglM6fHCSHk3Wt1UigX6N353xT+5Ul+CAUMl03IlUVYTRiMQjUyDu0OQdoPc=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB3189.namprd11.prod.outlook.com (2603:10b6:a03:7c::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3499.18; Wed, 28 Oct
- 2020 15:22:17 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::7875:99b3:15ae:5df2]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::7875:99b3:15ae:5df2%7]) with mapi id 15.20.3477.028; Wed, 28 Oct 2020
- 15:22:17 +0000
-Subject: Re: [oe] [meta-python][PATCH 5/5] python3-aiohttp: Upgrade 3.6.3 -> 3.7.1
-To: Leon Anavi <leon.anavi@konsulko.com>,
- openembedded-devel@lists.openembedded.org
-References: <20201026090217.21174-1-leon.anavi@konsulko.com>
- <20201026090217.21174-5-leon.anavi@konsulko.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <e4611b79-a5e4-f490-c40a-a7f919f3ee03@windriver.com>
-Date: Wed, 28 Oct 2020 11:22:15 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.3.1
-In-Reply-To: <20201026090217.21174-5-leon.anavi@konsulko.com>
-X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BY5PR13CA0004.namprd13.prod.outlook.com
- (2603:10b6:a03:180::17) To BY5PR11MB3909.namprd11.prod.outlook.com
- (2603:10b6:a03:191::13)
-Return-Path: trevor.gamblin@windriver.com
+Received: from DM6PR11MB2538.namprd11.prod.outlook.com (2603:10b6:5:be::20) by
+ DM5PR11MB0028.namprd11.prod.outlook.com (2603:10b6:4:67::30) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3499.18; Wed, 28 Oct 2020 15:40:37 +0000
+Received: from DM6PR11MB2538.namprd11.prod.outlook.com
+ ([fe80::e8b7:eec1:e6fb:35a]) by DM6PR11MB2538.namprd11.prod.outlook.com
+ ([fe80::e8b7:eec1:e6fb:35a%7]) with mapi id 15.20.3477.028; Wed, 28 Oct 2020
+ 15:40:37 +0000
+From: "Sakib Sajal" <sakib.sajal@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH] python3-prettytable: add wcwidth to RDEPENDS
+Date: Wed, 28 Oct 2020 11:40:23 -0400
+Message-ID: <20201028154023.3027-1-sakib.sajal@windriver.com>
+X-Mailer: git-send-email 2.27.0
+X-Originating-IP: [128.224.252.2]
+X-ClientProxiedBy: YT1PR01CA0073.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2d::12) To DM6PR11MB2538.namprd11.prod.outlook.com
+ (2603:10b6:5:be::20)
+Return-Path: sakib.sajal@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BY5PR13CA0004.namprd13.prod.outlook.com (2603:10b6:a03:180::17) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3499.7 via Frontend Transport; Wed, 28 Oct 2020 15:22:16 +0000
+Received: from yow-lpggp3.wrs.com (128.224.252.2) by YT1PR01CA0073.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::12) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3499.19 via Frontend Transport; Wed, 28 Oct 2020 15:40:37 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 6b497237-b57d-47b7-d2d4-08d87b55414f
-X-MS-TrafficTypeDiagnostic: BYAPR11MB3189:
+X-MS-Office365-Filtering-Correlation-Id: 8cbc186f-d595-4062-c9d5-08d87b57d125
+X-MS-TrafficTypeDiagnostic: DM5PR11MB0028:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB318976579027B1694178AEC19F170@BYAPR11MB3189.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:4125;
+	<DM5PR11MB002865D70DDCE22092D55757F2170@DM5PR11MB0028.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:170;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	LGZ8gjCWrRpyl7j8MlmV0/5fFWU8DEDZJCX6oxpGjtxfN+GkNun4oqr74LCQBQB0CRbDPFIvNyd/atUog+20Zy6PTCKHXHKGh8QqxltrgY/SCqS+VOY/Wm3P1cWKXS28ghNNy80HXPuiGImxkKFzANvWtviy0R7loAvLDTdtjp19s9WwvNWwO84V9ErzlRWifXSijBlM5ZMKFNh1EfOIrCIhIMnvc9UAAKnoVw6Bp+Cb3Qp0ROwQHhw8IW+gsrtQlPKsrmvAe1FHqEHLTKxuQlDoc/uNaXJ/ZExGtkin0rVssjYKrUgfYMOIsUKusFvXPDXholZWx5sdWmuZ9WGmipFRUxl4OkLEq3q9D31Y58VnJ+sbtHCyKOCW/ShzTewqzYAinGkbOBXx9g7oMbDcIdSt+M5X0OKRjs8fiTzkTRdLQnkcZyQYM2A0BkxmFGw1f3g1GmoYDWf2Eav2r+xrDw==
+	ZmOT0P7fH1ENsQZBn/7CYXOKfr4D3GcJ7QOVXYVtR6WYtfruAtmc/z7TfH9rIW9426JqDGG7sgehm802o7HbFSuyNMIecn1QcsoVyRh0jFauHsHwSMA0eSe1Zq7XFN9fRvHx2SpQ8yK6bs/DIP4fr8ySVhRUOULbZGgpt/cVRuVKzSbvmkNQHgywrn0vlS0G88rlIvKfVpXGPQsdO5UNsnRpkif6+zMf0JyissN+rE2IYvQHoIQLJSdYw6wrUVi0jtxQCzR8gyFBsUT0babWHkgemakhi4yQ7DxbfuqCsOFsDeYc1Ww4kuhs7/5hIt+K4pQZ6uLkVE5r77Qu+87gbQ==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(376002)(396003)(346002)(39850400004)(366004)(956004)(33964004)(2906002)(478600001)(316002)(83380400001)(26005)(166002)(6486002)(2616005)(186003)(8676002)(966005)(31686004)(8936002)(16526019)(66556008)(86362001)(66946007)(31696002)(44832011)(16576012)(5660300002)(36756003)(66476007)(52116002)(53546011)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB2538.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(376002)(366004)(396003)(136003)(39850400004)(44832011)(6916009)(26005)(66556008)(8936002)(16526019)(956004)(6666004)(66946007)(8676002)(6506007)(478600001)(66476007)(2616005)(86362001)(186003)(6486002)(36756003)(2906002)(316002)(6512007)(4744005)(5660300002)(1076003)(52116002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	34W561Y19BOgAyAG3O6lFixlMnmUAOVcmPS7xpG6KExRXvbC+OzVqfSXi16Lo3McDJMqsZvv8b8WgLMI4F81NOXrsJtsYJXrZjv23S1mGHnbJ8KN2Mc00mtjs3zLVQNCL7hDogzSWuDKUj1Hg+B7NTI9UH5eRASupokp7eesmI6Sf7DEPn0tq4TfkWtsjIIaQ/QQDL4R2vofuPoZY06ICU2dop51JQHwKMLRFDfsUmxJqmt+vQLpuaZ5eEK03ZSGVHEcSal9+RIV6TvMkJ8vC9FHxO23DRoQPUxcLFXjdMbA1oAr2Plqh5a7qxIw1JxOCe1/xze+zrXabkz9h7Rk8tVvULGI6U827jVLD12K6kNaX4X/L55+MzEd3Sf0Vxi0+3C9pjGYuJQnwLXZ8pCtB/Q8NkV4fjCLF9fFs5Lu50NMmB4/Jtr+iHAzsUmeWsACYYCHNkyHXibYHtwgr79qw5BRpADtOnlNcEabIW2rR2kWXi1xFmNH0tT2e6hjp6YX+E35nlmNiw/0qkBmKy9p7phi+1g8iN/PA0os38fcNBg97kQ7i1rFzbkHo985de0qeKuUGnTUAmk+qTgY2gjorjWxi2UOQKRgnPw4OdTEFg2OpOvXVPxkoS3Ci6c58UAcoAL2xiqkOh9MQuN1IVv9bw==
+	aenDq3sLJnYJW1YAS+6iFG4rf4osN8NMFKL/MXICNrW/fTtKWsjLizwwC+Z4guCnh6SUGGxfzNZtCNfpGcSLvKTCxn8ZD6CpNYC2eb6XkPWNRlZv4EwP+J4TWYnbkpY4YlRztXxx9pA6H64gsk7U1eVRfMKpykChWXM5/Fi+M6bNxzDJyQNJf9iX/YBFcJqUwv0Gy2LMVOrSlB1CxdMW3lryCI4Apt3XJtuCjdpFMXrteHll6XTLJOP3LcybjgfWmW9RjBqUk5LsHOzVCa732Dc3pLMRLx02k9TD+spbwKljc9yxVzE0we/8jWl/Fw+/XF3RG7ZCNSQnMXsxLqivc9fnJQO/0s53aP/RoxyxoBkLwsxwmnpRWQLYxsQnyX1phxdh0uNd4OJMtI1+drvRAsAGGQDpaAMqRGC8Vn2u4Kn2hXUWJtHhFxdkEVaokFFLn34c5gNCHT9oMu0/HYVNB0iWVLY/hb65mJm5Kki5qKOF/7mY2fIj4aUOdGi5wpTRKazcAKgwDOkgOPDJDQMBHLk21USpDCUz5Qvw//ioc4JhdQCWfaWMmM/DRa8WeORWBxymAcJa+1cRmuVv0TWTszDRgP5aNFldOVRxcqnwxgbbku5JvxCz+uhJtCdHrzLOrg9sn7AEie2qfQakVg1T5w==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6b497237-b57d-47b7-d2d4-08d87b55414f
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8cbc186f-d595-4062-c9d5-08d87b57d125
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB2538.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2020 15:22:17.2141
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2020 15:40:37.6609
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: VQXSSHSp3+bokGE29blNmmOczoYhjiHmL0Ol4MDirFGtwzF5B7R0obi/++k6Lq/v4Pz1mgHThm6A0lnj8lHolKm7aOvrAeKruy3WAQQbYbI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3189
-Content-Type: multipart/alternative;
- boundary="------------E71298527408980D9947ABE5"
-Content-Language: en-US
+X-MS-Exchange-CrossTenant-UserPrincipalName: etT3N99vyaxCdtqDbuqcQeYhUxA1u07RlU9psq86PCB7ohEZB0Z9VtM8swZJIH0BOnFk90UNmbRrpy0x54ce3yUyhB5gm/vIeKLI48Mut6c=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB0028
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
---------------E71298527408980D9947ABE5
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+prettytable uses wcwidth for better wide char support.
+See commit 83689922af58c152993e8ef5bcf7dd1464371272 in
+upstream prettytable, hence, add wcwidth to RDEPENDS.
 
-
-On 10/26/20 5:02 AM, Leon Anavi wrote:
-> - Fixed a type error caused by the conditional import of Protocol
-> - Server doesn't send Content-Length for 1xx or 204
-> - Fix run_app typing
-> - Always require typing_extensions library
-> - Fix a variable-shadowing bug causing ThreadedResolver.resolve
->    to return the resolved IP as the hostname in each record, which
->    prevented validation of HTTPS connections
-> - Added annotations to all public attributes
-> - Fix flaky test_when_timeout_smaller_second
-> - Ensure sending a zero byte file does not throw an exception
-> - Fix a bug in web.run_app() about Python version checking on
->    Windows
->
-> License-Update: Update year
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   .../{python3-aiohttp_3.6.3.bb => python3-aiohttp_3.7.1.bb}  | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-aiohttp_3.6.3.bb => python3-aiohttp_3.7.1.bb} (69%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.6.3.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.7.1.bb
-> similarity index 69%
-> rename from meta-python/recipes-devtools/python/python3-aiohttp_3.6.3.bb
-> rename to meta-python/recipes-devtools/python/python3-aiohttp_3.7.1.bb
-> index 824bde5e25..8b5b1dd160 100644
-> --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.6.3.bb
-> +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.7.1.bb
-> @@ -2,10 +2,10 @@ SUMMARY = "Async http client/server framework"
->   DESCRIPTION = "Asynchronous HTTP client/server framework for asyncio and Python"
->   HOMEPAGE = "https://github.com/aio-libs/aiohttp"
->   LICENSE = "Apache-2.0"
-> -LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cf056e8e7a0a5477451af18b7b5aa98c"
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3bf3d48554bdca1ea7fdb48de378c2ca"
->   
-> -SRC_URI[md5sum] = "13d02dc8379207dde1f6966d1fc5083d"
-> -SRC_URI[sha256sum] = "698cd7bc3c7d1b82bb728bae835724a486a8c376647aec336aa21a60113c3645"
-> +SRC_URI[md5sum] = "ed78633cc420b29d3b61c7d877dc0901"
-> +SRC_URI[sha256sum] = "04f9d70f6c4d089be5068d7df6281e638f6820d4f1b1ec3dc012b0b43fa997d2"
->   
->   PYPI_PACKAGE = "aiohttp"
->   inherit setuptools3 pypi
->
-> 
->
-
---------------E71298527408980D9947ABE5
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 10/26/20 5:02 AM, Leon Anavi wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20201026090217.21174-5-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Fixed a type error caused by the conditional import of Protocol
-- Server doesn't send Content-Length for 1xx or 204
-- Fix run_app typing
-- Always require typing_extensions library
-- Fix a variable-shadowing bug causing ThreadedResolver.resolve
-  to return the resolved IP as the hostname in each record, which
-  prevented validation of HTTPS connections
-- Added annotations to all public attributes
-- Fix flaky test_when_timeout_smaller_second
-- Ensure sending a zero byte file does not throw an exception
-- Fix a bug in web.run_app() about Python version checking on
-  Windows
-
-License-Update: Update year
-
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20201026090217.21174-5-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">
+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
 ---
- .../{python3-aiohttp_3.6.3.bb =&gt; python3-aiohttp_3.7.1.bb}  | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-aiohttp_3.6.3.bb =&gt; python3-aiohttp_3.7.1.bb} (69%)
+ meta-python/recipes-devtools/python/python3-prettytable_1.0.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.6.3.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.7.1.bb
-similarity index 69%
-rename from meta-python/recipes-devtools/python/python3-aiohttp_3.6.3.bb
-rename to meta-python/recipes-devtools/python/python3-aiohttp_3.7.1.bb
-index 824bde5e25..8b5b1dd160 100644
---- a/meta-python/recipes-devtools/python/python3-aiohttp_3.6.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.7.1.bb
-@@ -2,10 +2,10 @@ SUMMARY = &quot;Async http client/server framework&quot;
- DESCRIPTION = &quot;Asynchronous HTTP client/server framework for asyncio and Python&quot;
- HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/aio-libs/aiohttp">&quot;https://github.com/aio-libs/aiohttp&quot;</a>
- LICENSE = &quot;Apache-2.0&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=cf056e8e7a0a5477451af18b7b5aa98c">&quot;file://LICENSE.txt;md5=cf056e8e7a0a5477451af18b7b5aa98c&quot;</a>
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=3bf3d48554bdca1ea7fdb48de378c2ca">&quot;file://LICENSE.txt;md5=3bf3d48554bdca1ea7fdb48de378c2ca&quot;</a>
- 
--SRC_URI[md5sum] = &quot;13d02dc8379207dde1f6966d1fc5083d&quot;
--SRC_URI[sha256sum] = &quot;698cd7bc3c7d1b82bb728bae835724a486a8c376647aec336aa21a60113c3645&quot;
-+SRC_URI[md5sum] = &quot;ed78633cc420b29d3b61c7d877dc0901&quot;
-+SRC_URI[sha256sum] = &quot;04f9d70f6c4d089be5068d7df6281e638f6820d4f1b1ec3dc012b0b43fa997d2&quot;
- 
- PYPI_PACKAGE = &quot;aiohttp&quot;
- inherit setuptools3 pypi
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
+diff --git a/meta-python/recipes-devtools/python/python3-prettytable_1.0.1.=
+bb b/meta-python/recipes-devtools/python/python3-prettytable_1.0.1.bb
+index a065b6c47..79341b9d2 100644
+--- a/meta-python/recipes-devtools/python/python3-prettytable_1.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-prettytable_1.0.1.bb
+@@ -28,6 +28,7 @@ DEPENDS +=3D "${PYTHON_PN}-setuptools-scm-native"
+ RDEPENDS_${PN} +=3D " \
+ 	${PYTHON_PN}-math \
+ 	${PYTHON_PN}-html \
++	${PYTHON_PN}-wcwidth \
+ "
+=20
+ RDEPENDS_${PN}-ptest +=3D " \
+--=20
+2.27.0
 
-
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------E71298527408980D9947ABE5--
