@@ -1,329 +1,188 @@
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
- by mx.groups.io with SMTP id smtpd.web11.6521.1603965835491692855
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.web09.809.1603993524548335438
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Oct 2020 03:03:55 -0700
+ Thu, 29 Oct 2020 10:45:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=tlJ9IVqd;
- spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-ej1-f41.google.com with SMTP id bn26so2983573ejb.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2020 03:03:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=MhTOnfBF;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id r10so1661899plx.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Oct 2020 10:45:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=DiR+pRHauRP4c3PW6o4LY7KwqKPUCFmbBUcz0TjdntQ=;
-        b=tlJ9IVqdyGcJOsyYX+AnK857xRtBsIF223ed/zBKkSb2+85oOMiacIS4NNZjlOpgyC
-         ElijR4AMwFCP27G+CuFgZhgg9BFFhRvI8bwnM+621LHk9AtNuFZdDGO+1aFUNuR9QNum
-         tkGulFxkTDm2r/9vwn5Ynx4ns/Y4CEKNLiU2OWz5y1zRVMVi9i8xvFkzNvyQPFRN3Oiz
-         9GyUCZ82AfOQ7Q5eCbOJUW0loLKgCQmn1lE+8tnyySOjhoDhdlIzQdNpVtFkSrrocm33
-         6D3cAq/Dl0vnuC6RJRLUWhzPsFVAYqO9shuNARH3eRXXnAU15AB5vQ1a7CsE3D5pngAI
-         ck1w==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=dpODtvUuoYbkXpnh2MMtogMhoDiR5xKJes1gzqrsO3w=;
+        b=MhTOnfBF7xXpdZvGPwQbgGLvy1CSOafqljnKthe4xX6CNa4HbsVOWCghjpqWd9oFLb
+         hu4VGvEwuczXw+ZJzt2aZhDNakHF968GgxCK+n2mgCBFijOQu0mXNN3lj4j6vS3eTSzO
+         5TtRMp5W5xXowtJgTx2WuUvV16W6KzhoO40XYRA5ZSvtOs5B/DhFQgMkTko/x+IYKrgE
+         RINp2mC34LO1dTVUWULZ31WEtR+c6aCg6iN4Ssbci5Xz+NEu7j86g7IDMHAlHRyMtr55
+         V7npuYPsx3DEr07pLVqLdaTrq1oVVD+vwxiJKoX6QBISI+w5IdgAsoG15CKbuvFeBn2p
+         qIbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=DiR+pRHauRP4c3PW6o4LY7KwqKPUCFmbBUcz0TjdntQ=;
-        b=pT+WBIts+nJT5U61iv7jnaziKx3he/d5TQEuGZhtD5qAtMfPMCYzoKTS0LIe+64C3j
-         YGp4/RycsoAZb2N//jNym3SVw/Wx+kPyU/BVcgByPlYdbtpGbTVkBYAIaSTTDBY9wbcj
-         t/pfe8Q7xqmbWnKTs+vNpACvAhs0+nXtM17/UF0OI+PiTgxEcgtr4EC0XUiavOiIZyJE
-         YgrfkUwG0JqEJpEGp0YyIKAyNuJ6vv1DUK66rA2cE2B99HsySJ1BIGSniXlD/WqoFjWH
-         +7NQvRrL3VgFKQ4+NnHvMJ2DHXxHcN1QcLRoAv7DyXwSX13seH87+sxlUnDmWFPV4jbK
-         rmxw==
-X-Gm-Message-State: AOAM530aZEYF71TRLcRvBuh16YcZ/I9zfpDhdJZwl6CRRTIQ4T8ZmUSW
-	xGWAS50jSYH6KzFSLCRS8Uor5PkMq5Wh0Q==
-X-Google-Smtp-Source: ABdhPJxhKm2kvzvZDseFPo9w6eeFbpH/4nvCDn0+xlwr1EV8cq9u6m5tWmbEylW7bzJEGvTlvGyEiA==
-X-Received: by 2002:a17:906:5d9:: with SMTP id t25mr3155471ejt.443.1603965833529;
-        Thu, 29 Oct 2020 03:03:53 -0700 (PDT)
-Return-Path: <alex.kanavin@gmail.com>
-Received: from linux-f9zs.fritz.box ([2a02:2450:1011:4f7:596d:bf31:3950:5bda])
-        by smtp.gmail.com with ESMTPSA id q2sm1196316ejd.20.2020.10.29.03.03.51
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=dpODtvUuoYbkXpnh2MMtogMhoDiR5xKJes1gzqrsO3w=;
+        b=R1NOVflLgG4JfvgAGkuORpv9FiNTRNFwq8kdQt4TvfysEkUBkdB5f42levkEw2rciG
+         AMh270dOOqEegBdstsxKGBcCryY8IEqY74I1L7nquZC6M0wi+mX5rSf+aROFGy+JArFN
+         9VS4J74SdcxnDCq6j3h7toQLQklt1/rLXhhkwhZJTu2CRWQOxZ66ynf9epNPe6SuIX+o
+         CWB4Hzt+0UJI2PaBbhr10FpTmcw8XJLR9rniu3PQD2rNR/pO1xlbdtbDhehPZRFm3Guq
+         96VEtA51d7adfkE9Hf2ZC7p82q6v6GHi9Z0d3dDn/6bkA9QP2csAr2xwsuBrukZO/WZk
+         tSmA==
+X-Gm-Message-State: AOAM532ZAGJ6q4QJpIW48kuMv4ZQGSNGvoGyvqJ0DrR7N+nL/da+z7Pe
+	6uCrD69BF2PPDTAc42oDrbfF3vfy7JypMw==
+X-Google-Smtp-Source: ABdhPJyJm2DAH9/bHodk8MZIlXTfOSkhV4NkKbkS8S8/W2zmKbbz6xWAHl39uezFzJZMY6/XADSvTg==
+X-Received: by 2002:a17:902:b489:b029:d6:845b:8dc4 with SMTP id y9-20020a170902b489b02900d6845b8dc4mr5099121plr.46.1603993523563;
+        Thu, 29 Oct 2020 10:45:23 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::bc1e])
+        by smtp.gmail.com with ESMTPSA id x29sm3516251pfp.152.2020.10.29.10.45.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2020 03:03:53 -0700 (PDT)
-From: "Alexander Kanavin" <alex.kanavin@gmail.com>
+        Thu, 29 Oct 2020 10:45:23 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alexander Kanavin <alex.kanavin@gmail.com>
-Subject: [PATCH 4/4] gnome-calendar: update to 3.38.1, add libhandy 1.x support
-Date: Thu, 29 Oct 2020 11:03:39 +0100
-Message-Id: <20201029100339.26698-4-alex.kanavin@gmail.com>
-X-Mailer: git-send-email 2.29.0
-In-Reply-To: <20201029100339.26698-1-alex.kanavin@gmail.com>
-References: <20201029100339.26698-1-alex.kanavin@gmail.com>
+Cc: richard <richard@example.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] poco: Upgrade 1.9.4 -> 1.10.1
+Date: Thu, 29 Oct 2020 10:45:18 -0700
+Message-Id: <20201029174518.1779414-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.29.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
----
- ...61b6ce8f0f8053e1609decbdbdc164ec8448.patch | 242 ++++++++++++++++++
- ...dar_3.36.2.bb => gnome-calendar_3.38.1.bb} |   3 +-
- 2 files changed, 244 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-gnome/gnome-calendar/files/8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch
- rename meta-gnome/recipes-gnome/gnome-calendar/{gnome-calendar_3.36.2.bb => gnome-calendar_3.38.1.bb} (78%)
+From: richard <richard@example.com>
 
-diff --git a/meta-gnome/recipes-gnome/gnome-calendar/files/8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch b/meta-gnome/recipes-gnome/gnome-calendar/files/8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch
-new file mode 100644
-index 000000000..eabf61aa5
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-calendar/files/8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch
-@@ -0,0 +1,242 @@
-+From 8be361b6ce8f0f8053e1609decbdbdc164ec8448 Mon Sep 17 00:00:00 2001
-+From: Evangelos Ribeiro Tzaras <devrtz@fortysixandtwo.eu>
-+Date: Sat, 5 Sep 2020 02:06:34 +0200
-+Subject: [PATCH] project: Switch to libhandy-1
-+
-+This commit updates the dependencies for libhandy to the tagged 1.0
-+release and changes the code to accomodate the changes from
-+libhandy-0 to libhandy-1.
-+
-+Notable changes:
-+edit-dialog: HdyDialog has been dropped in [1]
-+alarm-row: action child type in HdyActionRow has been removed.
-+
-+[1] https://gitlab.gnome.org/GNOME/libhandy/-/merge_requests/434
-+Upstream-Status: Backport
-+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-+---
-+ build-aux/flatpak/org.gnome.Calendar.json |  4 ++--
-+ meson.build                               |  2 +-
-+ src/gui/gcal-alarm-row.c                  |  2 +-
-+ src/gui/gcal-alarm-row.ui                 |  2 +-
-+ src/gui/gcal-application.c                |  4 ++++
-+ src/gui/gcal-edit-dialog.c                |  4 ++--
-+ src/gui/gcal-edit-dialog.h                |  3 +--
-+ src/gui/gcal-edit-dialog.ui               | 20 ++++++++++----------
-+ 8 files changed, 22 insertions(+), 19 deletions(-)
-+
-+diff --git a/build-aux/flatpak/org.gnome.Calendar.json b/build-aux/flatpak/org.gnome.Calendar.json
-+index 18893ad6..0772ca8d 100644
-+--- a/build-aux/flatpak/org.gnome.Calendar.json
-++++ b/build-aux/flatpak/org.gnome.Calendar.json
-+@@ -174,8 +174,8 @@
-+             "sources" : [
-+                 {
-+                     "type" : "git",
-+-                    "url" : "https://source.puri.sm/Librem5/libhandy.git",
-+-                    "branch" : "libhandy-0-0"
-++                    "url" : "https://gitlab.gnome.org/GNOME/libhandy.git",
-++                    "tag" : "1.0.0"
-+                 }
-+             ]
-+         },
-+diff --git a/meson.build b/meson.build
-+index 2a546252..b81b95c9 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -165,7 +165,7 @@ libedataserver_dep = dependency('libedataserver-1.2', version: '>= 3.17.1')
-+ libecal_dep = dependency('libecal-2.0', version: '>= 3.33.2')
-+ libsoup_dep = dependency('libsoup-2.4')
-+ libdazzle_dep = dependency('libdazzle-1.0', version: '>= 3.33.1')
-+-libhandy_dep = dependency('libhandy-0.0', version: '>= 0.0.9')
-++libhandy_dep = dependency('libhandy-1', version: '>= 1.0.0')
-+ glib_dep = dependency('glib-2.0', version: '>= 2.58.0')
-+ gtk_dep = dependency('gtk+-3.0', version: '>= 3.22.20')
-+ gio_dep = dependency('gio-2.0', version: '>= 2.58.0')
-+diff --git a/src/gui/gcal-alarm-row.c b/src/gui/gcal-alarm-row.c
-+index 1f95426c..1ada82f4 100644
-+--- a/src/gui/gcal-alarm-row.c
-++++ b/src/gui/gcal-alarm-row.c
-+@@ -214,7 +214,7 @@ setup_alarm (GcalAlarmRow *self)
-+   duration = e_cal_component_alarm_trigger_get_duration (trigger);
-+   formatted_duration = format_alarm_duration (duration);
-+ 
-+-  hdy_action_row_set_title (HDY_ACTION_ROW (self), formatted_duration);
-++  hdy_preferences_row_set_title (HDY_PREFERENCES_ROW (self), formatted_duration);
-+ 
-+   action = e_cal_component_alarm_get_action (self->alarm);
-+   gtk_toggle_button_set_active (self->volume_button, action == E_CAL_COMPONENT_ALARM_AUDIO);
-+diff --git a/src/gui/gcal-alarm-row.ui b/src/gui/gcal-alarm-row.ui
-+index 7d416c4c..bca8af50 100644
-+--- a/src/gui/gcal-alarm-row.ui
-++++ b/src/gui/gcal-alarm-row.ui
-+@@ -3,7 +3,7 @@
-+   <template class="GcalAlarmRow" parent="HdyActionRow">
-+     <property name="visible">True</property>
-+     <property name="can_focus">False</property>
-+-    <child type="action">
-++    <child>
-+       <object class="GtkBox">
-+         <property name="visible">True</property>
-+         <property name="can_focus">False</property>
-+diff --git a/src/gui/gcal-application.c b/src/gui/gcal-application.c
-+index b9d46cec..591b95c8 100644
-+--- a/src/gui/gcal-application.c
-++++ b/src/gui/gcal-application.c
-+@@ -34,6 +34,7 @@
-+ #include <glib-object.h>
-+ #include <gio/gio.h>
-+ #include <glib/gi18n.h>
-++#include <handy.h>
-+ 
-+ struct _GcalApplication
-+ {
-+@@ -446,6 +447,9 @@ gcal_application_startup (GApplication *app)
-+   if ((g_application_get_flags (app) & G_APPLICATION_IS_SERVICE) != 0)
-+     g_application_set_inactivity_timeout (app, 3 * 60 * 1000);
-+ 
-++  /*  initialize libhandy */
-++  hdy_init();
-++
-+   GCAL_EXIT;
-+ }
-+ 
-+diff --git a/src/gui/gcal-edit-dialog.c b/src/gui/gcal-edit-dialog.c
-+index ae2b6714..5494a700 100644
-+--- a/src/gui/gcal-edit-dialog.c
-++++ b/src/gui/gcal-edit-dialog.c
-+@@ -47,7 +47,7 @@
-+ 
-+ struct _GcalEditDialog
-+ {
-+-  HdyDialog         parent;
-++  GtkDialog         parent;
-+ 
-+   gboolean          writable;
-+ 
-+@@ -133,7 +133,7 @@ static void          on_location_entry_changed_cb                (GtkEntry
-+ static void          on_add_alarm_button_clicked_cb              (GtkWidget          *button,
-+                                                                   GcalEditDialog     *self);
-+ 
-+-G_DEFINE_TYPE (GcalEditDialog, gcal_edit_dialog, HDY_TYPE_DIALOG)
-++G_DEFINE_TYPE (GcalEditDialog, gcal_edit_dialog, GTK_TYPE_DIALOG)
-+ 
-+ enum
-+ {
-+diff --git a/src/gui/gcal-edit-dialog.h b/src/gui/gcal-edit-dialog.h
-+index e4f44ec5..a557916b 100644
-+--- a/src/gui/gcal-edit-dialog.h
-++++ b/src/gui/gcal-edit-dialog.h
-+@@ -22,7 +22,6 @@
-+ #include "gcal-event.h"
-+ #include "gcal-manager.h"
-+ 
-+-#include <handy.h>
-+ 
-+ G_BEGIN_DECLS
-+ 
-+@@ -32,7 +31,7 @@ G_BEGIN_DECLS
-+ 
-+ #define GCAL_TYPE_EDIT_DIALOG                (gcal_edit_dialog_get_type ())
-+ 
-+-G_DECLARE_FINAL_TYPE (GcalEditDialog, gcal_edit_dialog, GCAL, EDIT_DIALOG, HdyDialog);
-++G_DECLARE_FINAL_TYPE (GcalEditDialog, gcal_edit_dialog, GCAL, EDIT_DIALOG, GtkDialog);
-+ 
-+ GtkWidget*           gcal_edit_dialog_new                     (void);
-+ 
-+diff --git a/src/gui/gcal-edit-dialog.ui b/src/gui/gcal-edit-dialog.ui
-+index a36d8ae6..c28c22bb 100644
-+--- a/src/gui/gcal-edit-dialog.ui
-++++ b/src/gui/gcal-edit-dialog.ui
-+@@ -1,6 +1,6 @@
-+ <?xml version="1.0" encoding="UTF-8"?>
-+ <interface>
-+-  <template class="GcalEditDialog" parent="HdyDialog">
-++  <template class="GcalEditDialog" parent="GtkDialog">
-+     <property name="can_focus">False</property>
-+     <property name="resizable">False</property>
-+     <property name="modal">True</property>
-+@@ -156,7 +156,7 @@
-+                         <property name="title" translatable="yes">Title</property>
-+                         <property name="activatable-widget">summary_entry</property>
-+ 
-+-                        <child type="action">
-++                        <child>
-+                           <object class="GtkEntry" id="summary_entry">
-+                             <property name="visible">True</property>
-+                             <property name="valign">center</property>
-+@@ -177,7 +177,7 @@
-+                         <property name="title" translatable="yes">Location</property>
-+                         <property name="activatable-widget">location_entry</property>
-+ 
-+-                        <child type="action">
-++                        <child>
-+                           <object class="GtkEntry" id="location_entry">
-+                             <property name="visible">True</property>
-+                             <property name="valign">center</property>
-+@@ -226,7 +226,7 @@
-+                         <property name="title" translatable="yes">All Day</property>
-+                         <property name="activatable-widget">all_day_switch</property>
-+ 
-+-                        <child type="action">
-++                        <child>
-+                           <object class="GtkSwitch" id="all_day_switch">
-+                             <property name="visible">True</property>
-+                             <property name="can_focus">True</property>
-+@@ -246,7 +246,7 @@
-+                         <property name="visible">True</property>
-+                         <property name="title" translatable="yes">Starts</property>
-+ 
-+-                        <child type="action">
-++                        <child>
-+                           <object class="GtkLabel" id="event_start_label">
-+                             <property name="visible">True</property>
-+                             <property name="can_focus">False</property>
-+@@ -294,7 +294,7 @@
-+                         <property name="visible">True</property>
-+                         <property name="title" translatable="yes">Ends</property>
-+ 
-+-                        <child type="action">
-++                        <child>
-+                           <object class="GtkLabel" id="event_end_label">
-+                             <property name="visible">True</property>
-+                             <property name="can_focus">False</property>
-+@@ -343,7 +343,7 @@
-+                         <property name="title" translatable="yes">Repeat</property>
-+                         <property name="activatable-widget">repeat_combo</property>
-+ 
-+-                        <child type="action">
-++                        <child>
-+                           <object class="GtkComboBoxText" id="repeat_combo">
-+                             <property name="visible">True</property>
-+                             <property name="can_focus">False</property>
-+@@ -372,7 +372,7 @@
-+                         <property name="title" translatable="yes">End Repeat</property>
-+                         <property name="activatable-widget">repeat_combo</property>
-+ 
-+-                        <child type="action">
-++                        <child>
-+                           <object class="GtkComboBoxText" id="repeat_duration_combo">
-+                             <property name="visible">True</property>
-+                             <property name="can_focus">False</property>
-+@@ -397,7 +397,7 @@
-+                         <property name="title" translatable="yes">Number of Occurrences</property>
-+                         <property name="activatable-widget">number_of_occurrences_spin</property>
-+ 
-+-                        <child type="action">
-++                        <child>
-+                           <object class = "GtkSpinButton" id="number_of_occurrences_spin">
-+                             <property name="input_purpose">number</property>
-+                             <property name="input-hints">no-emoji</property>
-+@@ -415,7 +415,7 @@
-+                         <property name="title" translatable="yes">End Repeat Date</property>
-+                         <property name="activatable-widget">until_date_selector</property>
-+ 
-+-                        <child type="action">
-++                        <child>
-+                           <object class = "GcalDateSelector" id="until_date_selector">
-+                             <property name="valign">center</property>
-+                           </object>
-+-- 
-+GitLab
-+
-diff --git a/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.36.2.bb b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.38.1.bb
-similarity index 78%
-rename from meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.36.2.bb
-rename to meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.38.1.bb
-index 4605857f5..67e251e16 100644
---- a/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.36.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.38.1.bb
-@@ -22,7 +22,8 @@ inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-versi
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...tall-non-existing-Encodings-testsuit.patch | 31 -------------------
+ ...ble-operations-when-using-double-flo.patch | 28 -----------------
+ .../poco/{poco_1.9.4.bb => poco_1.10.1.bb}    | 14 ++++-----
+ 3 files changed, 6 insertions(+), 67 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/poco/poco/0001-Don-t-try-to-install-non-existing-Encodings-testsuit.patch
+ delete mode 100644 meta-oe/recipes-support/poco/poco/0001-riscv-Enable-double-operations-when-using-double-flo.patch
+ rename meta-oe/recipes-support/poco/{poco_1.9.4.bb => poco_1.10.1.bb} (83%)
+
+diff --git a/meta-oe/recipes-support/poco/poco/0001-Don-t-try-to-install-non-existing-Encodings-testsuit.patch b/meta-oe/recipes-support/poco/poco/0001-Don-t-try-to-install-non-existing-Encodings-testsuit.patch
+deleted file mode 100644
+index f4a358f47f..0000000000
+--- a/meta-oe/recipes-support/poco/poco/0001-Don-t-try-to-install-non-existing-Encodings-testsuit.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From fa079dfc5e1d22ea35762bf4c5b09999bdc5e731 Mon Sep 17 00:00:00 2001
+-From: Jochen Sprickerhof <git@jochen.sprickerhof.de>
+-Date: Wed, 22 Aug 2018 21:42:09 +0200
+-Subject: [PATCH] Don't try to install non existing Encodings/testsuite/data
+-
+-Upstream-Status: Backport [https://github.com/pocoproject/poco/pull/2437]
+----
+- Encodings/testsuite/CMakeLists.txt | 5 +----
+- 1 file changed, 1 insertion(+), 4 deletions(-)
+-
+-diff --git a/Encodings/testsuite/CMakeLists.txt b/Encodings/testsuite/CMakeLists.txt
+-index 7508e5522..79495ae02 100644
+---- a/Encodings/testsuite/CMakeLists.txt
+-+++ b/Encodings/testsuite/CMakeLists.txt
+-@@ -19,12 +19,9 @@ POCO_SOURCES_AUTO_PLAT( TEST_SRCS WINCE
+- add_executable( ${TESTUNIT} ${TEST_SRCS} )
+- if(ANDROID)
+- 	add_test(NAME ${LIBNAME} WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+--			COMMAND ${CMAKE_COMMAND} -DANDROID_NDK=${ANDROID_NDK} "-DTEST_FILES=${CMAKE_CURRENT_SOURCE_DIR}/data;" -DLIBRARY_DIR=${CMAKE_BINARY_DIR}/lib -DUNITTEST=${CMAKE_BINARY_DIR}/bin/${TESTUNIT} -DTEST_PARAMETER=-all -P ${CMAKE_SOURCE_DIR}/cmake/ExecuteOnAndroid.cmake)
+-+			COMMAND ${CMAKE_COMMAND} -DANDROID_NDK=${ANDROID_NDK} -DLIBRARY_DIR=${CMAKE_BINARY_DIR}/lib -DUNITTEST=${CMAKE_BINARY_DIR}/bin/Encodings-testrunner -DTEST_PARAMETER=-all -P ${CMAKE_SOURCE_DIR}/cmake/ExecuteOnAndroid.cmake)
+- else()
+- 	add_test(NAME ${LIBNAME} WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMAND ${TESTUNIT} -all)
+--	# The test is run in the build directory. So the test data is copied there too
+--	add_custom_command(TARGET ${TESTUNIT} POST_BUILD
+--				   COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/data ${CMAKE_CURRENT_BINARY_DIR}/data )
+- endif()
+- #set_target_properties( ${TESTUNIT} PROPERTIES COMPILE_FLAGS ${RELEASE_CXX_FLAGS} )
+- target_link_libraries( ${TESTUNIT}  PocoEncodings PocoFoundation CppUnit )
+--- 
+-2.18.0
+-
+diff --git a/meta-oe/recipes-support/poco/poco/0001-riscv-Enable-double-operations-when-using-double-flo.patch b/meta-oe/recipes-support/poco/poco/0001-riscv-Enable-double-operations-when-using-double-flo.patch
+deleted file mode 100644
+index c0de32dafe..0000000000
+--- a/meta-oe/recipes-support/poco/poco/0001-riscv-Enable-double-operations-when-using-double-flo.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From 589a5442a841b156a1890bc2d26e7a5103e2f672 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 1 Nov 2019 17:53:50 -0700
+-Subject: [PATCH] riscv: Enable double operations when using double float abi
+-
+-Upstream-Status: Submitted [https://github.com/pocoproject/poco/pull/2825]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- Foundation/src/utils.h | 3 ++-
+- 1 file changed, 2 insertions(+), 1 deletion(-)
+-
+-diff --git a/Foundation/src/utils.h b/Foundation/src/utils.h
+-index 69cea1aca..ff7a5c9ce 100644
+---- a/Foundation/src/utils.h
+-+++ b/Foundation/src/utils.h
+-@@ -63,7 +63,8 @@
+-     defined(__SH4__) || defined(__alpha__) || \
+-     defined(_MIPS_ARCH_MIPS32R2) || \
+-     defined(__AARCH64EL__) || \
+--    defined(nios2) || defined(__nios2) || defined(__nios2__)
+-+    defined(nios2) || defined(__nios2) || defined(__nios2__) || \
+-+    (defined(__riscv) && defined(__riscv_float_abi_double))
+- #define DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS 1
+- #elif defined(_M_IX86) || defined(__i386__) || defined(__i386)
+- #if defined(_WIN32)
+--- 
+-2.23.0
+-
+diff --git a/meta-oe/recipes-support/poco/poco_1.9.4.bb b/meta-oe/recipes-support/poco/poco_1.10.1.bb
+similarity index 83%
+rename from meta-oe/recipes-support/poco/poco_1.9.4.bb
+rename to meta-oe/recipes-support/poco/poco_1.10.1.bb
+index fcd5219759..3f51e61187 100644
+--- a/meta-oe/recipes-support/poco/poco_1.9.4.bb
++++ b/meta-oe/recipes-support/poco/poco_1.10.1.bb
+@@ -10,11 +10,9 @@ DEPENDS = "libpcre zlib"
  
- REQUIRED_DISTRO_FEATURES = "x11"
+ SRC_URI = " \
+     git://github.com/pocoproject/poco.git;branch=poco-${PV} \
+-    file://0001-Don-t-try-to-install-non-existing-Encodings-testsuit.patch \
+-    file://0001-riscv-Enable-double-operations-when-using-double-flo.patch \
+     file://run-ptest \
+    "
+-SRCREV = "b95393dcc3640807838e8323b4e600e54d2e8116"
++SRCREV = "a3d827d80eb7f3329c58e73eb2906cb7ba829019"
  
--SRC_URI[archive.sha256sum] = "d0b05345c0555a085e6e5426eab49494aba2826c856eb06fd7fdb762ec0c4c1f"
-+SRC_URI += "file://8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch"
-+SRC_URI[archive.sha256sum] = "7280880a082d631624d02a102dd547ceb59498da368311f3e49a06cff897f512"
+ UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
  
- FILES_${PN} += " \
-     ${datadir}/gnome-shell \
+@@ -25,16 +23,17 @@ inherit cmake ptest
+ # By default the most commonly used poco components are built
+ # Foundation is built anyway and doesn't need to be listed explicitly
+ # these don't have dependencies outside oe-core
+-PACKAGECONFIG ??= "XML JSON MongoDB PDF Util Net NetSSL Crypto Data DataSQLite Zip Encodings Redis"
++PACKAGECONFIG ??= "XML JSON MongoDB PDF Util Net NetSSL Crypto JWT Data DataSQLite Zip Encodings Redis"
+ 
+-PACKAGECONFIG[XML] = "-DENABLE_XML=ON -DEXPAT_LIBRARY:STRING=expat,-DENABLE_XML=OFF,expat"
++PACKAGECONFIG[XML] = "-DENABLE_XML=ON,-DENABLE_XML=OFF,expat"
+ PACKAGECONFIG[JSON] = "-DENABLE_JSON=ON,-DENABLE_JSON=OFF"
+ PACKAGECONFIG[MongoDB] = "-DENABLE_MONGODB=ON,-DENABLE_MONGODB=OFF"
+ PACKAGECONFIG[PDF] = "-DENABLE_PDF=ON,-DENABLE_PDF=OFF,zlib"
+ PACKAGECONFIG[Util] = "-DENABLE_UTIL=ON,-DENABLE_UTIL=OFF"
+ PACKAGECONFIG[Net] = "-DENABLE_NET=ON,-DENABLE_NET=OFF"
+-PACKAGECONFIG[NetSSL] = "-DENABLE_NETSSL=ON -DOPENSSL_SSL_LIBRARY:STRING=ssl -DOPENSSL_CRYPTO_LIBRARY:STRING=crypto,-DENABLE_NETSSL=OFF,openssl"
+-PACKAGECONFIG[Crypto] = "-DENABLE_CRYPTO=ON -DOPENSSL_SSL_LIBRARY:STRING=ssl -DOPENSSL_CRYPTO_LIBRARY:STRING=crypto,-DENABLE_CRYPTO=OFF,openssl"
++PACKAGECONFIG[NetSSL] = "-DENABLE_NETSSL=ON,-DENABLE_NETSSL=OFF,openssl"
++PACKAGECONFIG[Crypto] = "-DENABLE_CRYPTO=ON,-DENABLE_CRYPTO=OFF,openssl"
++PACKAGECONFIG[JWT] = "-DENABLE_JWT=ON,-DENABLE_JWT=OFF,openssl"
+ PACKAGECONFIG[Data] = "-DENABLE_DATA=ON,-DENABLE_DATA=OFF"
+ PACKAGECONFIG[DataSQLite] = "-DENABLE_DATA_SQLITE=ON -DSQLITE3_LIBRARY:STRING=sqlite3,-DENABLE_DATA_SQLITE=OFF,sqlite3"
+ PACKAGECONFIG[Zip] = "-DENABLE_ZIP=ON,-DENABLE_ZIP=OFF"
+@@ -53,7 +52,6 @@ PACKAGECONFIG[PageCompilerFile2Page] = "-DENABLE_PAGECOMPILER_FILE2PAGE=ON,-DENA
+ PACKAGECONFIG[SevenZip] = "-DENABLE_SEVENZIP=ON,-DENABLE_SEVENZIP=OFF"
+ 
+ EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=RelWithDebInfo -DPOCO_UNBUNDLED=ON \
+-                  -DZLIB_LIBRARY_RELEASE:STRING=z -DPCRE_LIBRARY:STRING=pcre \
+                   -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
+                  ${@bb.utils.contains('PTEST_ENABLED', '1', '-DENABLE_TESTS=ON ', '', d)}"
+ 
 -- 
-2.29.0
+2.29.1
 
