@@ -1,257 +1,103 @@
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by mx.groups.io with SMTP id smtpd.web09.14930.1604069561733501244
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com [209.85.221.66])
+ by mx.groups.io with SMTP id smtpd.web12.16388.1604075218683864802
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Oct 2020 07:52:41 -0700
+ Fri, 30 Oct 2020 09:26:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linux.microsoft.com header.s=default header.b=YDGK3kNy;
- spf=pass (domain: linux.microsoft.com, ip: 13.77.154.182, mailfrom: anbelski@linux.microsoft.com)
-Received: from anbelski-lsg-linux-yocto-1.irsgb21fvobu5fvmalxug44hib.xx.internal.cloudapp.net (unknown [52.247.218.173])
-	by linux.microsoft.com (Postfix) with ESMTPSA id E5C0620B4905
-	for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2020 07:52:40 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com E5C0620B4905
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1604069560;
-	bh=emWCocK4Qf8Wx6kgWmcwnAKkABTSX75ENVuXsB33kqE=;
-	h=From:To:Subject:Date:From;
-	b=YDGK3kNygnJNnZ/b8AM9v0CJn42kaQr5/wnYbDd9pfZlWeEnhhK5w9VUDJfBSmJkI
-	 lNHPm8DaLnMcgkH3HQmzY9b8CYP0Oovg+/67xzUnGsi01y+m48Y8dPeZW4FWg4dGJE
-	 tIxzDAHVmSmlSA4RtmHw/m13L14qfQMK/TgWiz+A=
-From: "Anatol Belski" <anbelski@linux.microsoft.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=lDtI2296;
+ spf=pass (domain: gmail.com, ip: 209.85.221.66, mailfrom: quaresma.jose@gmail.com)
+Received: by mail-wr1-f66.google.com with SMTP id b8so7151431wrn.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2020 09:26:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zHHiM/HLiB1WLidiJrWNdOsHfNvkG3Y1DzVzggONrSk=;
+        b=lDtI2296RzI/qRjZn1gs5cPSwTMKxDQD0Tclv9flOHTmz9de+VcrPvIUyOBnmiZPJG
+         cdn+nJ5lfJPBegRKP+pNIHcuBzbp4WGG3ZGESM4vJ/kT/sRs6z9su85x4AuvR5wGwFHD
+         bD6tWbYnIfMR/C4PtEgNZUUHtitQ6LUKYiX1zbIr8bC6/kWURmOHUvKmGBGtH6BxWpkK
+         8vrwVJe9KSCMh7SR2eFeQlkxzPjqKYJL9ybummrDMHeHt+j/s6j60QXyDj9p8LghrGtA
+         vWFiCGm27GRCC1OzYUWes7ZoZJF/MMd3pg3T2L/EA7aey37Nv2t9ydSk0cW5VvELg3DT
+         wsQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zHHiM/HLiB1WLidiJrWNdOsHfNvkG3Y1DzVzggONrSk=;
+        b=NPEOaxuBH8IICF54hVpOfJBLV0I8m1UgI/0sq5zlqsuhCv9qlud+qvTk91mzCc+T4a
+         eT9qTUplGGSGLbVkXCUaHHvjiVRQf/+i5uA7a5gJpJvYshn6vB0wL8m4XL2FGMmX7eJM
+         wyRX2NhI9R9DU1RC87utvkSbKvwmdPrIlgWk6VJieeHNZEvqcB3XtYebIcc0F6l+EVjo
+         ijKAjHMWXsQpPe7B2uGdH7YhiTaYOqBzlaFnVT7cWsfVlDLLySktBY0fCFalsKl7MCd/
+         25pYFBeFmg7lGZLEO2yfKhdOuL90lcUixi2ZDrOIqVV9xTYg/NXUqNQykNgc8h5N7/sD
+         /l8A==
+X-Gm-Message-State: AOAM531Kg+UUSM/U78oXGOerd6zPeDNjW/z1GKHyVrP7JWFt2OdPSKnN
+	RSSJR8fHLCNx0uw8jRULkglReY3yIklV1g==
+X-Google-Smtp-Source: ABdhPJy65XObXAX+NOnbxYuREpRtl+33nVNSkzHasVzRds+EGEiO7Z8kSwzmtN2lX9FYJG6kGpBWrQ==
+X-Received: by 2002:adf:9066:: with SMTP id h93mr4436107wrh.166.1604075216860;
+        Fri, 30 Oct 2020 09:26:56 -0700 (PDT)
+Return-Path: <quaresma.jose@gmail.com>
+Received: from dragon.lan (176.57.115.89.rev.vodafone.pt. [89.115.57.176])
+        by smtp.gmail.com with ESMTPSA id q7sm11068161wrr.39.2020.10.30.09.26.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 30 Oct 2020 09:26:55 -0700 (PDT)
+From: "Jose Quaresma" <quaresma.jose@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] chrony: Patch CVE-2020-14367
-Date: Fri, 30 Oct 2020 14:52:31 +0000
-Message-Id: <20201030145231.9876-1-anbelski@linux.microsoft.com>
-X-Mailer: git-send-email 2.17.1
+Cc: Jose Quaresma <quaresma.jose@gmail.com>
+Subject: [meta-oe][PATCH] spirv-tools: moved into OE-core, delete from meta-oe
+Date: Fri, 30 Oct 2020 16:25:16 +0000
+Message-Id: <20201030162516.3615619-1-quaresma.jose@gmail.com>
+X-Mailer: git-send-email 2.29.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Anatol Belski <anbelski@linux.microsoft.com>
+https://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?id=5f6470eb2c1e5b5aa578031830f057d63d4ae230
+
+Signed-off-by: Jose Quaresma <quaresma.jose@gmail.com>
 ---
- .../chrony/chrony/CVE-2020-14367.patch        | 204 ++++++++++++++++++
- .../recipes-support/chrony/chrony_3.5.bb      |   1 +
- 2 files changed, 205 insertions(+)
- create mode 100644 meta-networking/recipes-support/chrony/chrony/CVE-2020-14367.patch
+ .../recipes-graphics/spir/spirv-tools_git.bb  | 35 -------------------
+ 1 file changed, 35 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/spir/spirv-tools_git.bb
 
-diff --git a/meta-networking/recipes-support/chrony/chrony/CVE-2020-14367.patch b/meta-networking/recipes-support/chrony/chrony/CVE-2020-14367.patch
-new file mode 100644
-index 000000000..79df1007e
---- /dev/null
-+++ b/meta-networking/recipes-support/chrony/chrony/CVE-2020-14367.patch
-@@ -0,0 +1,204 @@
-+From f00fed20092b6a42283f29c6ee1f58244d74b545 Mon Sep 17 00:00:00 2001
-+From: Miroslav Lichvar <mlichvar@redhat.com>
-+Date: Thu, 6 Aug 2020 09:31:11 +0200
-+Subject: main: create new file when writing pidfile
-+
-+When writing the pidfile, open the file with the O_CREAT|O_EXCL flags
-+to avoid following a symlink and writing the PID to an unexpected file,
-+when chronyd still has the root privileges.
-+
-+The Linux open(2) man page warns about O_EXCL not working as expected on
-+NFS versions before 3 and Linux versions before 2.6. Saving pidfiles on
-+a distributed filesystem like NFS is not generally expected, but if
-+there is a reason to do that, these old kernel and NFS versions are not
-+considered to be supported for saving files by chronyd.
-+
-+This is a minimal backport specific to this issue of the following
-+commits:
-+- commit 2fc8edacb810 ("use PATH_MAX")
-+- commit f4c6a00b2a11 ("logging: call exit() in LOG_Message()")
-+- commit 7a4c396bba8f ("util: add functions for common file operations")
-+- commit e18903a6b563 ("switch to new util file functions")
-+
-+Reported-by: Matthias Gerstner <mgerstner@suse.de>
-+
-+Upstream-Status: Backport [https://git.tuxfamily.org/chrony/chrony.git/commit/?id=f00fed20092b6a42283f29c6ee1f58244d74b545]
-+CVE: CVE-2020-14367
-+Signed-off-by: Anatol Belski <anbelski@linux.microsoft.com>
-+
-+diff --git a/logging.c b/logging.c
-+index d2296e0..fd7f900 100644
-+--- a/logging.c
-++++ b/logging.c
-+@@ -171,6 +171,7 @@ void LOG_Message(LOG_Severity severity,
-+         system_log = 0;
-+         log_message(1, severity, buf);
-+       }
-++      exit(1);
-+       break;
-+     default:
-+       assert(0);
-+diff --git a/main.c b/main.c
-+index 6ccf32e..8edb2e1 100644
-+--- a/main.c
-++++ b/main.c
-+@@ -281,13 +281,9 @@ write_pidfile(void)
-+   if (!pidfile[0])
-+     return;
-+ 
-+-  out = fopen(pidfile, "w");
-+-  if (!out) {
-+-    LOG_FATAL("Could not open %s : %s", pidfile, strerror(errno));
-+-  } else {
-+-    fprintf(out, "%d\n", (int)getpid());
-+-    fclose(out);
-+-  }
-++  out = UTI_OpenFile(NULL, pidfile, NULL, 'W', 0644);
-++  fprintf(out, "%d\n", (int)getpid());
-++  fclose(out);
-+ }
-+ 
-+ /* ================================================== */
-+diff --git a/sysincl.h b/sysincl.h
-+index 296c5e6..873a3bd 100644
-+--- a/sysincl.h
-++++ b/sysincl.h
-+@@ -37,6 +37,7 @@
-+ #include <glob.h>
-+ #include <grp.h>
-+ #include <inttypes.h>
-++#include <limits.h>
-+ #include <math.h>
-+ #include <netinet/in.h>
-+ #include <pwd.h>
-+diff --git a/util.c b/util.c
-+index e7e3442..83b3b20 100644
-+--- a/util.c
-++++ b/util.c
-+@@ -1179,6 +1179,101 @@ UTI_CheckDirPermissions(const char *path, mode_t perm, uid_t uid, gid_t gid)
-+ 
-+ /* ================================================== */
-+ 
-++static int
-++join_path(const char *basedir, const char *name, const char *suffix,
-++          char *buffer, size_t length, LOG_Severity severity)
-++{
-++  const char *sep;
-++
-++  if (!basedir) {
-++    basedir = "";
-++    sep = "";
-++  } else {
-++    sep = "/";
-++  }
-++
-++  if (!suffix)
-++    suffix = "";
-++
-++  if (snprintf(buffer, length, "%s%s%s%s", basedir, sep, name, suffix) >= length) {
-++    LOG(severity, "File path %s%s%s%s too long", basedir, sep, name, suffix);
-++    return 0;
-++  }
-++
-++  return 1;
-++}
-++
-++/* ================================================== */
-++
-++FILE *
-++UTI_OpenFile(const char *basedir, const char *name, const char *suffix,
-++             char mode, mode_t perm)
-++{
-++  const char *file_mode;
-++  char path[PATH_MAX];
-++  LOG_Severity severity;
-++  int fd, flags;
-++  FILE *file;
-++
-++  severity = mode >= 'A' && mode <= 'Z' ? LOGS_FATAL : LOGS_ERR;
-++
-++  if (!join_path(basedir, name, suffix, path, sizeof (path), severity))
-++    return NULL;
-++
-++  switch (mode) {
-++    case 'r':
-++    case 'R':
-++      flags = O_RDONLY;
-++      file_mode = "r";
-++      if (severity != LOGS_FATAL)
-++        severity = LOGS_DEBUG;
-++      break;
-++    case 'w':
-++    case 'W':
-++      flags = O_WRONLY | O_CREAT | O_EXCL;
-++      file_mode = "w";
-++      break;
-++    case 'a':
-++    case 'A':
-++      flags = O_WRONLY | O_CREAT | O_APPEND;
-++      file_mode = "a";
-++      break;
-++    default:
-++      assert(0);
-++      return NULL;
-++  }
-++
-++try_again:
-++  fd = open(path, flags, perm);
-++  if (fd < 0) {
-++    if (errno == EEXIST) {
-++      if (unlink(path) < 0) {
-++        LOG(severity, "Could not remove %s : %s", path, strerror(errno));
-++        return NULL;
-++      }
-++      DEBUG_LOG("Removed %s", path);
-++      goto try_again;
-++    }
-++    LOG(severity, "Could not open %s : %s", path, strerror(errno));
-++    return NULL;
-++  }
-++
-++  UTI_FdSetCloexec(fd);
-++
-++  file = fdopen(fd, file_mode);
-++  if (!file) {
-++    LOG(severity, "Could not open %s : %s", path, strerror(errno));
-++    close(fd);
-++    return NULL;
-++  }
-++
-++  DEBUG_LOG("Opened %s fd=%d mode=%c", path, fd, mode);
-++
-++  return file;
-++}
-++
-++/* ================================================== */
-++
-+ void
-+ UTI_DropRoot(uid_t uid, gid_t gid)
-+ {
-+diff --git a/util.h b/util.h
-+index e3d6767..a2481cc 100644
-+--- a/util.h
-++++ b/util.h
-+@@ -176,6 +176,17 @@ extern int UTI_CreateDirAndParents(const char *path, mode_t mode, uid_t uid, gid
-+    permissions and its uid/gid must match the specified values. */
-+ extern int UTI_CheckDirPermissions(const char *path, mode_t perm, uid_t uid, gid_t gid);
-+ 
-++/* Open a file.  The full path of the file is constructed from the basedir
-++   (may be NULL), '/' (if basedir is not NULL), name, and suffix (may be NULL).
-++   Created files have specified permissions (umasked).  Returns NULL on error.
-++   The following modes are supported (if the mode is an uppercase character,
-++   errors are fatal):
-++   r/R - open an existing file for reading
-++   w/W - open a new file for writing (remove existing file)
-++   a/A - open an existing file for appending (create if does not exist) */
-++extern FILE *UTI_OpenFile(const char *basedir, const char *name, const char *suffix,
-++                          char mode, mode_t perm);
-++
-+ /* Set process user/group IDs and drop supplementary groups */
-+ extern void UTI_DropRoot(uid_t uid, gid_t gid);
-+ 
-+-- 
-+cgit v0.10.2
-+
-diff --git a/meta-networking/recipes-support/chrony/chrony_3.5.bb b/meta-networking/recipes-support/chrony/chrony_3.5.bb
-index 7c6356d26..182ce13cc 100644
---- a/meta-networking/recipes-support/chrony/chrony_3.5.bb
-+++ b/meta-networking/recipes-support/chrony/chrony_3.5.bb
-@@ -34,6 +34,7 @@ SRC_URI = "https://download.tuxfamily.org/chrony/chrony-${PV}.tar.gz \
-     file://chrony.conf \
-     file://chronyd \
-     file://arm_eabi.patch \
-+    file://CVE-2020-14367.patch \
- "
- 
- SRC_URI_append_libc-musl = " \
+diff --git a/meta-oe/recipes-graphics/spir/spirv-tools_git.bb b/meta-oe/recipes-graphics/spir/spirv-tools_git.bb
+deleted file mode 100644
+index 8e8388e8d4..0000000000
+--- a/meta-oe/recipes-graphics/spir/spirv-tools_git.bb
++++ /dev/null
+@@ -1,35 +0,0 @@
+-SUMMARY  = "The SPIR-V Tools project provides an API and commands for \
+-processing SPIR-V modules"
+-DESCRIPTION = "The project includes an assembler, binary module parser, \
+-disassembler, validator, and optimizer for SPIR-V."
+-LICENSE  = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+-SECTION = "graphics"
+-
+-S = "${WORKDIR}/git"
+-DEST_DIR = "${S}/external" 
+-SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools.git;name=spirv-tools \
+-	git://github.com/KhronosGroup/SPIRV-Headers.git;name=spirv-headers;destsuffix=${DEST_DIR}/spirv-headers \
+-	git://github.com/google/effcee.git;name=effcee;destsuffix=${DEST_DIR}/effcee \
+-	git://github.com/google/re2.git;name=re2;destsuffix=${DEST_DIR}/re2 \
+-	git://github.com/google/googletest.git;name=googletest;destsuffix=${DEST_DIR}/googletest \
+-        file://0001-Respect-CMAKE_INSTALL_LIBDIR-in-installed-CMake-file.patch \
+-        file://0001-Avoid-pessimizing-std-move-3124.patch \
+-"
+-SRCREV_spirv-tools = "c413b982c316b14e784f50d941814fc737b55b4a"
+-SRCREV_spirv-headers = "af64a9e826bf5bb5fcd2434dd71be1e41e922563"
+-SRCREV_effcee = "cd25ec17e9382f99a895b9ef53ff3c277464d07d"
+-SRCREV_re2 = "5bd613749fd530b576b890283bfb6bc6ea6246cb"
+-SRCREV_googletest = "f2fb48c3b3d79a75a88a99fba6576b25d42ec528"
+-
+-inherit cmake python3native
+-
+-EXTRA_OECMAKE += "-DSPIRV_WERROR=OFF"
+-
+-do_install_append() {
+-	install -d ${D}/${includedir}/spirv
+-	install -m 0644 ${DEST_DIR}/spirv-headers/include/spirv/1.2/* ${D}/${includedir}/spirv	
+-}
+-
+-FILES_SOLIBSDEV = ""
+-FILES_${PN} += "${libdir}/*.so"
 -- 
-2.17.1
+2.29.2
 
