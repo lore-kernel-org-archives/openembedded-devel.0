@@ -1,24 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.13522.1604063331029840816
+ by mx.groups.io with SMTP id smtpd.web08.13152.1604063331703124296
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Oct 2020 06:08:51 -0700
+ Fri, 30 Oct 2020 06:08:52 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=59628 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kYU9B-0005mn-8I; Fri, 30 Oct 2020 15:08:50 +0200
+	id 1kYU9C-0005mn-3W; Fri, 30 Oct 2020 15:08:50 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-dateparser: Upgrade 0.7.6 -> 1.0.0
-Date: Fri, 30 Oct 2020 15:08:39 +0200
-Message-Id: <20201030130840.9169-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-langtable: Upgrade 0.0.53 -> 0.0.54
+Date: Fri, 30 Oct 2020 15:08:40 +0200
+Message-Id: <20201030130840.9169-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201030130840.9169-1-leon.anavi@konsulko.com>
 References: <20201030130840.9169-1-leon.anavi@konsulko.com>
-MIME-Version: 1.0
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -30,65 +29,34 @@ X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-Upgrade to release 1.0.0:
+Upgrade to release 0.0.54:
 
-- Drop support for Python 2.7 and pypy
-- Now DateDataParser.get_date_data() returns a DateData object
-  instead of a dict
-- From now wrong settings are not silenced and raise
-  SettingValidationError
-- Now dateparser.parse() is deterministic and doesn't try previous
-  locales. Also, DateDataParser.get_date_data() doesn't try the
-  previous locales by default
-- Remove the 'base-formats' parser
-- Extract the 'no-spaces-time' parser from the 'absolute-time'
-  parser and make it an optional parser
-- Remove numeral_translation_data
-- Remove the undocumented SKIP_TOKENS_PARSER and FUZZY settings
-- Remove support for using strings in date_formats
-- The undocumented ExactLanguageSearch class has been moved to the
-  private scope and some internal methods have changed
-- Changes in dateparser.utils: normalize_unicode() doesn't accept
-  bytes as input and convert_to_unicode has been deprecated
-- Add Python 3.9 support
-- Detect hours separated with a period/dot
-- Add support for "decade"
-- Add support for the hijri calendar in Python ≥ 3.6
-- New logo!
-- Improve the README and docs
-- Fix the "calendars" extra
-- Fix leap years when PREFER_DATES_FROM is set
-- Fix STRICT_PARSING setting in no-spaces-time parser
-- Consider RETURN_AS_TIME_PERIOD setting for relative-time parser
-- Parse the 24hr time format with meridian info
-- Other small improvements
+- Add list_common_languages derived from gnome-control-center
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ython3-dateparser_0.7.6.bb => python3-dateparser_1.0.0.bb} | 4 ++--
+ ...ython3-langtable_0.0.53.bb => python3-langtable_0.0.54.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-dateparser_0.7.6.bb => python3-dateparser_1.0.0.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-langtable_0.0.53.bb => python3-langtable_0.0.54.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-dateparser_0.7.6.bb b/meta-python/recipes-devtools/python/python3-dateparser_1.0.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-langtable_0.0.53.bb b/meta-python/recipes-devtools/python/python3-langtable_0.0.54.bb
 similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-dateparser_0.7.6.bb
-rename to meta-python/recipes-devtools/python/python3-dateparser_1.0.0.bb
-index e4683911e2..e3691dd83a 100644
---- a/meta-python/recipes-devtools/python/python3-dateparser_0.7.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-dateparser_1.0.0.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/scrapinghub/dateparser"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3d3ed25571191e7aa3f55d0a6efe0051"
+rename from meta-python/recipes-devtools/python/python3-langtable_0.0.53.bb
+rename to meta-python/recipes-devtools/python/python3-langtable_0.0.54.bb
+index 27b690f1a0..b9b4069fdc 100644
+--- a/meta-python/recipes-devtools/python/python3-langtable_0.0.53.bb
++++ b/meta-python/recipes-devtools/python/python3-langtable_0.0.54.bb
+@@ -6,8 +6,8 @@ SECTION = "devel/python"
  
--SRC_URI[md5sum] = "78b4bf317f9b844631562abad5ce040b"
--SRC_URI[sha256sum] = "e875efd8c57c85c2d02b238239878db59ff1971f5a823457fcc69e493bf6ebfa"
-+SRC_URI[md5sum] = "24a06a429597239004d47e6b93991aaf"
-+SRC_URI[sha256sum] = "159cc4e01a593706a15cd4e269a0b3345edf3aef8bf9278a57dac8adf5bf1e4a"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
- PYPI_PACKAGE = "dateparser"
+-SRC_URI[md5sum] = "d8f99adfb184f9def22539310f97ce80"
+-SRC_URI[sha256sum] = "fb17fd4d8e491c79159f81aa06ebacb18673fce59dac96f4e9d2d2db27a2e374"
++SRC_URI[md5sum] = "bf2db4302dbed534ff322612f5f5a16e"
++SRC_URI[sha256sum] = "2a6298267586fcade84ce977736fc35102ef95d68975bc90ceaa06117d42d5a6"
+ 
+ inherit pypi setuptools3 python3native
  
 -- 
 2.17.1
