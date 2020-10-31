@@ -1,282 +1,157 @@
-Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com [209.85.222.180])
- by mx.groups.io with SMTP id smtpd.web12.5626.1604115304106695734
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web08.5612.1604115798847848878
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Oct 2020 20:35:04 -0700
+ Fri, 30 Oct 2020 20:43:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=e47AiMZz;
- spf=pass (domain: gmail.com, ip: 209.85.222.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f180.google.com with SMTP id k9so6857076qki.6
-        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2020 20:35:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=gN13c0l8;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id f21so3953855plr.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Oct 2020 20:43:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=P9citFinzBZgFfYpeE5ZWmvgOOtbn66mdfas40H3eoE=;
-        b=e47AiMZz45yjF1n7TZe9T+9xcaL3P6xIjcG90GzOA8J3uqL/Gf+HyrgvQOw66qvxP0
-         sPdantG9tG4CkhSMPVAVqUPJpUPc/jMERLtW5cIPeKtAHzr8LYVRdU61iS+fGGGmQoNW
-         FcC7NP1bn/mpLF9P2+NIuzYDem4rBA/CE6b4INhcD9POC1r0srVqWifcPqd/l3uOAuCm
-         DvoETh5MOdPT939TSPNOlX/DsaD73k2/2pkyPQP/cr0cA1Z7nxMCOAwrdOgsgZuakRVR
-         he60PFspgOD+x+JA8kwi9mJy8N0PsNYn7Qz2fKHAJMyLnQ9NLR+Y25zIkN6eZa785lmd
-         U0qw==
+        h=subject:to:cc:references:from:organization:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language;
+        bh=ebjmz2oyEd5GFVN2yEz8Zz67D1cWoKf2zPnenHOKC2U=;
+        b=gN13c0l8y2pFqzoouXeDPk0ZTbc1FvA8K7Ac82n7Iwck8j6/b2aoHcOwGOhxGAENyg
+         yv4KvF3IBljR9o5x4qyFMTdIHW5B0I3WA2JMbtDeI+Nm55QQzZ0/anhz2xZpHkPr9kT1
+         /FwOuX+7Hb1jCgWA3yif3qQDbKMKiSvhXFhTAo9s2P3+/QQ+vig60ARSRbjI7OGul7HA
+         5Z3C+K28Jy9qQp0kbEykvOCAG8UtgpYwNLWrcGCs0xiRijLWgS83eQoV+hZyKebKB1ML
+         EI9Zp2Pzi/TvuRZpnUW6pvqPpJ6NcP/B0OCo1nmtMbY42Bpdy/chpDm5iszUGdUTFOs1
+         /yWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=P9citFinzBZgFfYpeE5ZWmvgOOtbn66mdfas40H3eoE=;
-        b=GID2KHBcKVnhyy6rB+Q/J7YOGiwHExx+9mKlssCdUHz6/ROdbBCgkX4luUVkPkWjse
-         SZ2tYaBggm9fete+wjnrsBK5g/nx9FT7kSbfzXIKxUjCzELMDAf1TPvEDvnFrxZRUeJX
-         UjL2EfNBngKlJ8dh8FM4vOxVvHmI+CqwLu6kR0HKc7DqJzPM0qU5GzYRgTGvHd4E69yJ
-         56Jq2/h0UCAnCERU6lKNmOErVWRLHhfoG0yz0sV8GCtfZFycAZfdNAAkMhMJGsPBY25W
-         GjFEMdtARBkyoXTU4YybsqeBweDpTZbkBaRdVQmXBWfgJYwlqW2Nfcsx4Quqm1so2GXK
-         qz1Q==
-X-Gm-Message-State: AOAM531G5jrfoN2orbBNpawGerNKteOfKm9eozgC2G+qYtgG5QtaTziK
-	t66YpLKYVRbTRzq4eQdKPwNBdJWQWFqmKvAa/Lh0PBdRGk5eKg==
-X-Google-Smtp-Source: ABdhPJxfAt8MOUV+fw5kWsOyYcAu72a4CHs/bMtRvgkjKNqH3oNnM71fPEQclPpDLnZrskbvKBMmvIkUIBI6KmUeNrI=
-X-Received: by 2002:a37:27c9:: with SMTP id n192mr5116837qkn.71.1604115302859;
- Fri, 30 Oct 2020 20:35:02 -0700 (PDT)
-MIME-Version: 1.0
-References: <20201030183022.1773487-1-randy.e.witt@linux.intel.com>
-In-Reply-To: <20201030183022.1773487-1-randy.e.witt@linux.intel.com>
+        h=x-gm-message-state:subject:to:cc:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language;
+        bh=ebjmz2oyEd5GFVN2yEz8Zz67D1cWoKf2zPnenHOKC2U=;
+        b=dGHx/dRHo0DKJA/ALsKvCprZbXQ9JD9cQZy8PmiUZNpuJBn0o0JIfvT3OXCuNwrGp5
+         7aDlHp5uMTHtiJkYVQ+ABqsjnST5aN6Gvn/jeFr5Q7bgEt4RA9hXTmCkRbzg1CDpZ+zy
+         9N7Ec39sRxB2SxhwpNqKO9T4NP6MFRC4gCwqsnuP4FYhh1Al6PjjCv+0CB+pHrkrzpJ+
+         xUce/QLC6MpuNQQh6pG+pY3z9JmIjjRz7TTIxq2x0RSlaCwbbPJ9g25YTIPfNo+f6Az7
+         zs93MoMDoXJzg/qNbFpwhgTCDVJZU/xP8pTHZi0nUfw3m7jEEuXu97F8D5j4hjlflcpP
+         DV0Q==
+X-Gm-Message-State: AOAM533Nukew3XGp/RDajd1KK2iENWFy7M7Guwp5TSJbz3wXPKmKvrq4
+	0JLYILBypSzw+TiyP2tmOL4=
+X-Google-Smtp-Source: ABdhPJzJFHRPbeG2EVJZfA1WWCW6fkjeW5Qaef1YjYHvDkOu/SHrffTyWf4DYtHy6+nwDgB0sMAR8A==
+X-Received: by 2002:a17:90a:f293:: with SMTP id fs19mr6470243pjb.41.1604115798350;
+        Fri, 30 Oct 2020 20:43:18 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:4e0::221d? ([2601:646:9200:4e0::221d])
+        by smtp.gmail.com with ESMTPSA id v3sm4745650pju.38.2020.10.30.20.43.16
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 30 Oct 2020 20:43:17 -0700 (PDT)
+Subject: Re: [oe] CPE update for polkit
+To: saloni <saloni.jain@kpit.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: "Nisha.parakkat@kpit.com" <Nisha.parakkat@kpit.com>,
+ Anuj Chougule <Anuj.Chougule@kpit.com>, Akash Hadke <Akash.Hadke@kpit.com>,
+ Aditya Tayade <Aditya.Tayade@kpit.com>, Nilesh Pawar <Nilesh.Pawar@kpit.com>
+References: <BM1PR01MB401942C1F999143BBD303E4E87150@BM1PR01MB4019.INDPRD01.PROD.OUTLOOK.COM>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Fri, 30 Oct 2020 20:34:34 -0700
-Message-ID: <CAMKF1sr5Jjbf7Fi-hEnoMUMy88A-46LH8CnReR0DY784FeAS6g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] numactl: Remove the recipe
-To: Randy Witt <randy.e.witt@linux.intel.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Pep-Version: 2.0
+Organization: HIMVIS LLC
+Message-ID: <57711827-0ce0-e6ef-28d5-13ba1eba7afd@gmail.com>
+Date: Fri, 30 Oct 2020 20:43:14 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
+MIME-Version: 1.0
+In-Reply-To: <BM1PR01MB401942C1F999143BBD303E4E87150@BM1PR01MB4019.INDPRD01.PROD.OUTLOOK.COM>
+X-Groupsio-MsgNum: 87748
+Content-Type: multipart/mixed;
+ boundary="------------D0C74C65D660AE143B29C71F"
+Content-Language: en-US
 
-before we delete this here please port
-https://git.openembedded.org/meta-openembedded/commit/?id=09d879ad3d604b46604149b035380c1690a5114a
-as well into OE-core, otherwise its going backwards.
+--------------D0C74C65D660AE143B29C71F
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 30, 2020 at 11:31 AM Randy Witt
-<randy.e.witt@linux.intel.com> wrote:
->
-> The numactl recipe now exists in openembedded-core, as of commit
-> dda815792b0939b2f233aa3ec7c140fc114a37d1 to oe-core. It was moved to
-> facilitate the requirement rt-tests now has on libnuma.
->
-> Signed-off-by: Randy Witt <randy.e.witt@linux.intel.com>
-> ---
->  .../numactl/0001-define-run-test-target.patch | 32 ----------
->  .../numactl/Fix-the-test-output-format.patch  | 64 -------------------
->  .../recipes-support/numactl/numactl/Makefile  |  7 --
->  .../recipes-support/numactl/numactl/run-ptest |  9 ---
->  .../recipes-support/numactl/numactl_git.bb    | 62 ------------------
->  5 files changed, 174 deletions(-)
->  delete mode 100644 meta-oe/recipes-support/numactl/numactl/0001-define-run-test-target.patch
->  delete mode 100644 meta-oe/recipes-support/numactl/numactl/Fix-the-test-output-format.patch
->  delete mode 100644 meta-oe/recipes-support/numactl/numactl/Makefile
->  delete mode 100755 meta-oe/recipes-support/numactl/numactl/run-ptest
->  delete mode 100644 meta-oe/recipes-support/numactl/numactl_git.bb
->
-> diff --git a/meta-oe/recipes-support/numactl/numactl/0001-define-run-test-target.patch b/meta-oe/recipes-support/numactl/numactl/0001-define-run-test-target.patch
-> deleted file mode 100644
-> index 78ffb22f8..000000000
-> --- a/meta-oe/recipes-support/numactl/numactl/0001-define-run-test-target.patch
-> +++ /dev/null
-> @@ -1,32 +0,0 @@
-> -rename test target as run-test
-> -
-> -Upstream-Statue: Pending
-> -
-> -test target not only compile the test files, but also run them, which is
-> -not suitable for cross-compile environment, so rename it as run-test.
-> -
-> -and define test target to compile the test files.
-> -
-> -Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ----
-> - Makefile.am | 4 +++-
-> - 1 file changed, 3 insertions(+), 1 deletion(-)
-> -
-> -diff --git a/Makefile.am b/Makefile.am
-> -index b6db339..de176c4 100644
-> ---- a/Makefile.am
-> -+++ b/Makefile.am
-> -@@ -124,7 +124,9 @@ regress2: $(check_PROGRAMS)
-> - test_numademo: numademo
-> -       ./numademo -t -e 10M
-> -
-> --test: all $(check_PROGRAMS) regress1 regress2 test_numademo
-> -+test: all $(check_PROGRAMS)
-> -+
-> -+run-test: all $(check_PROGRAMS) regress1 regress2 test_numademo
-> -
-> - TESTS_ENVIRONMENT = builddir='$(builddir)'; export builddir;
-> -
-> ---
-> -1.9.1
-> -
-> diff --git a/meta-oe/recipes-support/numactl/numactl/Fix-the-test-output-format.patch b/meta-oe/recipes-support/numactl/numactl/Fix-the-test-output-format.patch
-> deleted file mode 100644
-> index 9812ecc8b..000000000
-> --- a/meta-oe/recipes-support/numactl/numactl/Fix-the-test-output-format.patch
-> +++ /dev/null
-> @@ -1,64 +0,0 @@
-> -From 59fd750a84bbe5874dec936d2bee9ef11a1b6505 Mon Sep 17 00:00:00 2001
-> -From: Li xin <lixin.fnst@cn.fujitsu.com>
-> -Date: Tue, 21 Jul 2015 02:01:22 +0900
-> -Subject: [PATCH] Fix the test output format
-> -
-> -Upstream-Status: Pending
-> -
-> -Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> -Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> ----
-> - test/regress  |  6 +++---
-> - test/regress2 | 11 +++++------
-> - 2 files changed, 8 insertions(+), 9 deletions(-)
-> -
-> -diff --git a/test/regress b/test/regress
-> -index 2ce1705..d086a47 100755
-> ---- a/test/regress
-> -+++ b/test/regress
-> -@@ -74,6 +74,7 @@ probe_hardware()
-> -       if [ $numnodes -lt 2 ] ; then
-> -           echo "need at least two nodes with at least $NEEDPAGES each of"
-> -           echo "free memory for mempolicy regression tests"
-> -+          echo "FAIL: numa regress"
-> -           exit 77  # Skip test
-> -       fi
-> - }
-> -@@ -207,10 +208,9 @@ main()
-> -       rm A B
-> -
-> -       if [ "$EXIT" = 0 ] ; then
-> --              echo '========SUCCESS'
-> -+              echo 'PASS: numactl regress'
-> -       else
-> --              echo '========FAILURE'
-> --              exit 1
-> -+              echo 'FAIL: numactl regress'
-> -       fi
-> - }
-> -
-> -diff --git a/test/regress2 b/test/regress2
-> -index aa6ea41..450c510 100755
-> ---- a/test/regress2
-> -+++ b/test/regress2
-> -@@ -9,12 +9,11 @@ testdir=`dirname "$0"`
-> - export PATH=${builddir}:$PATH
-> -
-> - T() {
-> --       echo "$@"
-> --       if ! $VALGRIND "$@" ;  then
-> --        echo  $1 FAILED!!!!
-> --        exit 1
-> --       fi
-> --       echo
-> -+      if ! $VALGRIND "$@" 2>&1 1>/dev/null;  then
-> -+         echo  "FAIL: $1"
-> -+      else
-> -+         echo "PASS: $1"
-> -+      fi
-> - }
-> -
-> - # still broken
-> ---
-> -1.8.4.2
-> -
-> diff --git a/meta-oe/recipes-support/numactl/numactl/Makefile b/meta-oe/recipes-support/numactl/numactl/Makefile
-> deleted file mode 100644
-> index 9a5134c3f..000000000
-> --- a/meta-oe/recipes-support/numactl/numactl/Makefile
-> +++ /dev/null
-> @@ -1,7 +0,0 @@
-> -.PHONY: regress1 regress2
-> -
-> -regress1:
-> -       cd test ; ./regress
-> -
-> -regress2:
-> -       cd test ; ./regress2
-> diff --git a/meta-oe/recipes-support/numactl/numactl/run-ptest b/meta-oe/recipes-support/numactl/numactl/run-ptest
-> deleted file mode 100755
-> index 215f7c25b..000000000
-> --- a/meta-oe/recipes-support/numactl/numactl/run-ptest
-> +++ /dev/null
-> @@ -1,9 +0,0 @@
-> -#!/bin/sh
-> -make regress1
-> -make regress2
-> -if  numademo -t -e 10M; then
-> -       echo "PASS: numademo"
-> -else
-> -       echo "FAIL: numademo"
-> -fi
-> -
-> diff --git a/meta-oe/recipes-support/numactl/numactl_git.bb b/meta-oe/recipes-support/numactl/numactl_git.bb
-> deleted file mode 100644
-> index 504fe0327..000000000
-> --- a/meta-oe/recipes-support/numactl/numactl_git.bb
-> +++ /dev/null
-> @@ -1,62 +0,0 @@
-> -SUMMARY = "Development package for building Applications that use numa"
-> -HOMEPAGE = "http://oss.sgi.com/projects/libnuma/"
-> -DESCRIPTION = "Simple NUMA policy support. It consists of a numactl program \
-> -to run other programs with a specific NUMA policy and a libnuma to do \
-> -allocations with NUMA policy in applications."
-> -LICENSE = "GPL-2.0 & LGPL-2.1"
-> -SECTION = "apps"
-> -
-> -inherit autotools-brokensep ptest
-> -
-> -LIC_FILES_CHKSUM = "file://README.md;beginline=19;endline=32;md5=f8ff2391624f28e481299f3f677b21bb"
-> -
-> -SRCREV = "dd6de072c92c892a86e18c0fd0dfa1ba57a9a05d"
-> -PV = "2.0.14+git${SRCPV}"
-> -
-> -SRC_URI = "git://github.com/numactl/numactl \
-> -    file://Fix-the-test-output-format.patch \
-> -    file://Makefile \
-> -    file://run-ptest \
-> -    file://0001-define-run-test-target.patch \
-> -"
-> -
-> -S = "${WORKDIR}/git"
-> -
-> -# ARM does not currently support NUMA
-> -COMPATIBLE_HOST = "^((?!arm).*)$"
-> -
-> -LDFLAGS_append_riscv64 = " -latomic"
-> -LDFLAGS_append_riscv32 = " -latomic"
-> -
-> -do_install() {
-> -    oe_runmake DESTDIR=${D} prefix=${D}/usr install
-> -    #remove the empty man2 directory
-> -    rm -r ${D}${mandir}/man2
-> -}
-> -
-> -do_compile_ptest() {
-> -    oe_runmake test
-> -}
-> -
-> -do_install_ptest() {
-> -    #install tests binaries
-> -    local test_binaries="distance ftok mbind_mig_pages migrate_pages move_pages \
-> -    mynode    nodemap node-parse pagesize prefered randmap realloc_test \
-> -    tbitmap tshared"
-> -
-> -    [ ! -d ${D}/${PTEST_PATH}/test ] && mkdir -p ${D}/${PTEST_PATH}/test
-> -    for i in $test_binaries; do
-> -        install -m 0755 ${B}/test/.libs/$i ${D}${PTEST_PATH}/test
-> -    done
-> -
-> -    local test_scripts="checktopology checkaffinity printcpu regress regress2 \
-> -        shmtest  runltp bind_range"
-> -    for i in $test_scripts; do
-> -        install -m 0755 ${B}/test/$i ${D}${PTEST_PATH}/test
-> -    done
-> -
-> -    install -m 0755 ${WORKDIR}/Makefile ${D}${PTEST_PATH}/
-> -    install -m 0755 ${B}/.libs/numactl ${D}${PTEST_PATH}/
-> -}
-> -
-> -RDEPENDS_${PN}-ptest = "bash"
-> --
-> 2.26.2
->
->
-> 
->
+
+
+On 10/30/20 12:45 PM, saloni wrote:
+> Hello,
+>=20
+> I would like to make some restrictions to polkit CVE-2013-4288
+> https://nvd.nist.gov/vuln/detail/CVE-2013-4288
+>=20
+> The changes for the said CVE were fixed in Source-Version: 0.112-1 and
+> are now merged in the reported distributions on stable releases.
+> Please find the reference to the links and tar file attesting the same:
+>=20
+> http://snapshot.debian.org/archive/debian-security/20181206T212649Z/pool=
+/updates/main/p/policykit-1/policykit-1_0.105-18%2Bdeb9u1.debian.tar.xz
+> https://bugzilla.redhat.com/show_bug.cgi?id=3D1002375
+> https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D723717
+> https://ubuntu.com/security/notices/USN-1953-1
+> https://www.security-database.com/detail.php?alert=3DCVE-2013-4288
+> https://vuldb.com/?id.65188
+>=20
+> The references on above links claims that upgrading to stable releases
+> eliminates this vulnerability.
+>=20
+
+we are using 0.116 on master and dunfell so we should be good there.
+
+> Regards,=A0
+> Saloni Jain
+>=20
+> This message contains information that may be privileged or confidential
+> and is the property of the KPIT Technologies Ltd. It is intended only
+> for the person to whom it is addressed. If you are not the intended
+> recipient, you are not authorized to read, print, retain copy,
+> disseminate, distribute, or use this message or any part thereof. If you
+> receive this message in error, please notify the sender immediately and
+> delete all copies of this message. KPIT Technologies Ltd. does not
+> accept any liability for virus infected mails.
+>=20
+>=20
+>=20
+>=20
+
+--------------D0C74C65D660AE143B29C71F
+Content-Type: application/pgp-keys;
+ name="pEpkey.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="pEpkey.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQGiBEqXaJERBACUvFofpD3FsxD9675wcPv+rzguIfsRWilrrpSZ61JHjLHwkUnm
+DLpLSdfvZw2ZDXeaQbGU2thctxXTyYf6N1fY6P5Tww6mWKInuGU3yAv8Mg5p+Xd8
+itwOoVR41DOBkftVmiO2G7FtXsnqonB6F43a2yvc+h9OwPRVxAFss5mSmwCglSXP
+WndN1Ka4M/hzt7g+FmeyEssD/1V/G8lLeAS9gQCNjS7jch+uHMFJuWgHzMXdw99e
+1ywlIkvXN77NPkW+FLVxKxNAHyWZZ3wO4BQ9/GVR2y0s/rrF1lQSIcfnUmzZrh/B
+h0b1wVOSLhl0Vx4MI0/MbdL3xx17JAWy+s67evuKER4Y8ycTq3gbIGJtVrIJjWPC
+zWF8BACAA2u52uDmJ2pS8SIhEW0jMK/zYQ5Od9l9fM6BmS6QjnIlzzcuMvRdZn2I
+rnuE/YoC8yyzBK3mN+MVc2jWN9rfSg6ml7r14Zjem9Ee0O5Ca7Jg3ZvN6g3vSlrR
+JqKgsnq3vdatDF+5rd0NJ7ZKUy6x2i1Pavgtv3qaAgPGa1qQdLQdS2hlbSBSYWog
+PHJhai5raGVtQGdtYWlsLmNvbT6IYAQTEQIAIAUCSpdokQIbAwYLCQgHAwIEFQII
+AwQWAgMBAh4BAheAAAoJELsFM1WRnTMUhOMAoJJleT2hdT7uw9Fyn26+w+/K4i0g
+AJ9wRt36PqfjNe904evWolFf5cMmp7kEDQRKl2iREBAAjjbVQ55RAouAe0l0nPsK
+kWdtMuUHwBdLBkpF3rGM/f0uDlPaQzYGLjKT7xDoyRh8x2tFwWvOfiqrZFArxX8e
+4fsACmJdL0kahTbxC/8SmSWVHXi10JUX2fmZ5ufzlXAnl0ivXkWnrUfLX9DdNwL6
+DR4DeFK9qBFqtHmK5TQXMu87G+MJwgNJIwCKQX4iI9YJILMuqInVwaxg5/ALdKfE
+3QPmtadnKb/cuUm4gICdaJeyQfI6qdYLcSuyBWCbAEMM1wmhRAhw5RgzMRRIquZl
+xPt7lZkXXjals7M6juh87VGRoIJwYoQi97Q1ZHzPBo3AlMPe3haNihkd6D3lwvdB
+4pmjYG4I6bHCgtEhEss3hHvsBaqV9jV1dMUSs95ZxQtT9qtkOxydHgOlwRX3CG+r
+584J/s4vWm+iPQtLvDY1u4UFwOLjCOFe709BcLJdPR2GQiOPoyZF7lVY8nu/dtTr
+AEuiZFk4HD7afUlcr/IKwPWID1V9kRLoDlzdbNuoUy/XfVErK8wcoiGowerEMed4
+ajNoKxCxBweIkjxqKMt8CKgp30n9UxljglEcgf+/UumwSHxqZcCPVbWXtdhy/hwM
+k27shOdUvaiynep8OsVGqAzSseL4qZIJ5XzCcyV4KJCmwmdQzt5+ZylcVmeq6R4o
+b+d8JIDU0ELqdwxwIDiTj0cAAwUP/inN3/r8IFDms4g5xafPrCw31o2jIYahkIfN
+0WVPWI5K/hFCo2PczPStzDcTsZx7mN2qwpGOe3Lz9/0krZeksrz1ZIHNi5LTasuz
+XyFJbO05Y+eiHgV1rV7VVEipOrpV1496w112Y/0SZ/FhOfEmEA1TeDejy2sZiTOU
+W4gyzewbHMpE07d27F2qM2NfMMhKQCcvzr+N0VJmAOeATEivxPUHn+DpX/NniBWO
+cWv++wHlxv0Xr63gsRKSt62eFKGjgF50hHD5lM31ziqycc42sbgcqAZ+rYFlb9k0
+3JcKyq1XdVUSm+xcC2DMSstTI6iqFMGo6FnEO+gyE5VdceajbuZ1GOmJXJUCyYId
+GuvCyIoKjTE9lcIYSEEDZQej5xdiGk9eUz0MPmZEUwSR/nLmmwjHDJi0prVvs9xq
+e5bvS3ddPAqepvZ5UrisgtWD+TDI8ktkt5VLh3XsG9FuXUVAaahOvFMGiZtsioDX
+TorL4AfMeuA9f+yLwrCVQO3xmH/WA0Tgf/5gYB3t9KoHPjLBNruVOuQbAjubi0pv
+RAOUcMdBfmPofksK4uWS1zGtPWS7Uu1csuq7Hnb7vszlFYdbzeqjY81LSyxA0kcp
+gJxdLv9o7UuCEnHDZLPbHdQ83PmyyBKSI31AKe7RXlQNlB5grwH9o6uNtPbV7q/u
+RqmKq5EiiEkEGBECAAkFAkqXaJECGwwACgkQuwUzVZGdMxR1VACcCkdaO3rb8/gR
+prldmAH6eR49eo4AnjD3h3aTwv/1bl+BAz1twmZmz8ul
+=3Dsj8j
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------D0C74C65D660AE143B29C71F--
