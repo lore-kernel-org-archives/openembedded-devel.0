@@ -1,84 +1,95 @@
-Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com [209.85.208.67])
- by mx.groups.io with SMTP id smtpd.web10.9689.1604148738370110622
+Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com [209.85.219.170])
+ by mx.groups.io with SMTP id smtpd.web12.3345.1604166785769827305
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 31 Oct 2020 05:52:18 -0700
+ Sat, 31 Oct 2020 10:53:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=sp/mbMuN;
- spf=pass (domain: gmail.com, ip: 209.85.208.67, mailfrom: toertel@gmail.com)
-Received: by mail-ed1-f67.google.com with SMTP id g25so8634377edm.6
-        for <openembedded-devel@lists.openembedded.org>; Sat, 31 Oct 2020 05:52:18 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=YFyJK0X7;
+ spf=pass (domain: gmail.com, ip: 209.85.219.170, mailfrom: sakoman@gmail.com)
+Received: by mail-yb1-f170.google.com with SMTP id f140so8016956ybg.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 31 Oct 2020 10:53:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Cvpz6o4MbIiuzbD/jC8Z3TkrF04XueJkWJU1vvkR5CE=;
-        b=sp/mbMuNH9kQzIgeDB3GMsEweICCubUUwdW8yzStaktOR2ONqD2GpdNfbFJthyt6Yt
-         udl0eR1ZsCkk1UA+oacdieAhxfJ4sPmwDbPaxpk6tGW7mAPWk0IcXIP29o0eFFaJXdwk
-         2HNCEXQlffBg4V/Jd0sSwiFJUzQrf1BjOZhPJG5GhEXJATqyDiQMBFTYVIWBrjtTMbR0
-         PCLfeR7nhmjLVG29JQEO+R9lyn6unCYpR6csPG6/gDUw3Vj8LHbe7V79X/HsP5cMHPXZ
-         XF2mms9wrLKvGCp1KAor9PtVxGojLPCdWXZt5Xz29vvVWVrnFRFQyobDl+kJVs19DMqb
-         /5rw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=ENDqqv3FL6J43cwktYdQUSX3KT8KnzkW59D01wEu7m8=;
+        b=YFyJK0X7zwZURJfJYYEA6QYNWxXrovWbYk5PXCu5WjJoJFmq2gKg9pgcUIOwPqCAI8
+         7jNsr6Iv1RSBpJ6QRzqW6qbtiD4y7/cKsnf3pjWhYVb79eP5r3w/uSP0vWfoEXWbaTNS
+         aQCmsH4Pzviwry0bRHXJVPh0fu/LDGs4NCdUc7m4p34CJeUFf7RuI7bNcwzQG22V6Mu4
+         QoaDaCh2QRvZtkZWECDQX2CAxEvpC2SYDSaXgRgbZKzO179DI60JEZaoHX+4BAI9aqK8
+         8MeQrKVhUswikje1llL7gJiwBWoNGiWp2OE6Za1vb0d6B1GwS8pKstBmwYBzt/p8oHyB
+         kenQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Cvpz6o4MbIiuzbD/jC8Z3TkrF04XueJkWJU1vvkR5CE=;
-        b=t8aWZ13tWDol0jB9pgsE1sH9pVDxuQ2M555eAIOsVLrtmeTv5KAA8th1OmtJGD1O6U
-         +NZb5bBoU+ZLe1yovdzo15RVr8rS/sGeu4s/SuTgqoUnqlh37gsoAow1ojyf8j72YVtp
-         7Jl10RsjuOGW2FdCPFBXp4DGRMI6UIgSCs9nRD6Usc1TVZPaXRyqSvSTJWoWijYkg+ZY
-         aONC9V6nxzjPmWIPl7y+VthCraiT0Cy6DESQxPV5rD3YehzC9VndCxcMLxZXNbaMXZM3
-         ZdEJoqwAP9NE+E8B1ULFyAcc3RHud4uSyJCo+Td0jcdsr98VrsXNzzWYSn3ThYdx8vac
-         J/YQ==
-X-Gm-Message-State: AOAM5331FAdyYRgJV8RXvrn2c3uWt8cdtJEICHodHShiuzmwztHG228o
-	7hk5oLml6o4Rlyu9G/cH+6xrKxNoFaJ1Iw==
-X-Google-Smtp-Source: ABdhPJzMKwj5e/e5Cm2nUoLq5qoezba5b4PGTYyFErmTUR/0Km1ALwodWpHpMKZUUKS3YKwRZJRJHw==
-X-Received: by 2002:aa7:da4d:: with SMTP id w13mr7232093eds.266.1604148736611;
-        Sat, 31 Oct 2020 05:52:16 -0700 (PDT)
-Return-Path: <toertel@gmail.com>
-Received: from gigabyte.fritz.box (p200300cfaf2f4a00958d05857322ca74.dip0.t-ipconnect.de. [2003:cf:af2f:4a00:958d:585:7322:ca74])
-        by smtp.gmail.com with ESMTPSA id ds7sm4844369ejc.83.2020.10.31.05.52.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 31 Oct 2020 05:52:16 -0700 (PDT)
-From: "Mark Jonas" <toertel@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Mark Jonas <toertel@gmail.com>
-Subject: [PATCH] python3-pyinotify: Add missing ctypes dependency
-Date: Sat, 31 Oct 2020 13:52:10 +0100
-Message-Id: <20201031125210.12644-1-toertel@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=ENDqqv3FL6J43cwktYdQUSX3KT8KnzkW59D01wEu7m8=;
+        b=qR+tkKrex7RIeGO25DVa51tL1b8ROvgH2r7tc0r51vK/2kkzYoihttMR5HWsLcOJJT
+         LTJQzhM+raGl8jYzvHd7StoZqKGkp6hmYq5A39rc+hkcMlof/4zL+XDf4lkOIwRGW3xh
+         9xlIImUhDRfmUYvCWEwECs0UKk/LfZkJH7GcaYTaWaQv/a7/GmdCl0zBmFqp8FsG7JIB
+         Keh9heWbmcGQcS8UvwnduMN1hmJprg60xjinTH16uYX//2+5lVFeLhrFAtYoGG+Jx/vV
+         qq6K9sidPBLVsH9fgI4EEk3kfZPRzg1cZrlbs4ONZjtuESsLdcjiaKu+8fV/3IWJyzjW
+         UTBg==
+X-Gm-Message-State: AOAM531HI7YAaFizkoQcMXS+sbJ2UUYxeZhGZoVbpw3jmNeuF9xNg5Lg
+	EKrApOMVk/c1QbjeGRv4zEUoRhsuysSUxpM2jl8=
+X-Google-Smtp-Source: ABdhPJxhzXxXsciKbU6CkJYl3qGgDKy+SaoQaEYKXNnsBXrSDFItPjBrv3uTeyU+/HQbHwQhLEHKJlz7CkgeKb2B/1s=
+X-Received: by 2002:a25:84cd:: with SMTP id x13mr10533165ybm.430.1604166784911;
+ Sat, 31 Oct 2020 10:53:04 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <BM1PR01MB401942C1F999143BBD303E4E87150@BM1PR01MB4019.INDPRD01.PROD.OUTLOOK.COM>
+In-Reply-To: <BM1PR01MB401942C1F999143BBD303E4E87150@BM1PR01MB4019.INDPRD01.PROD.OUTLOOK.COM>
+From: "Steve Sakoman" <sakoman@gmail.com>
+Date: Sat, 31 Oct 2020 07:52:54 -1000
+Message-ID: <CAGDS+nmwC5mS4qLdLe2Kc3oiEBrSRd6MCnjMHfiv5oAQzJ21=Q@mail.gmail.com>
+Subject: Re: [oe] CPE update for polkit
+To: saloni <saloni.jain@kpit.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	"Nisha.parakkat@kpit.com" <Nisha.parakkat@kpit.com>, Anuj Chougule <Anuj.Chougule@kpit.com>, 
+	Akash Hadke <Akash.Hadke@kpit.com>, Aditya Tayade <Aditya.Tayade@kpit.com>, 
+	Nilesh Pawar <Nilesh.Pawar@kpit.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-pyinotify 0.9.6 has a runtime dependency on ctypes.
-See https://github.com/seb-m/pyinotify/blob/0.9.6/python3/pyinotify.py#L82
+Requests for CPE database updates should be sent to: cpe_dictionary@nist.go=
+v
 
-pyinotify prefers ctypes to inotify_syscalls. The latter is only a
-fallback.
-See https://github.com/seb-m/pyinotify/blob/0.9.6/python3/pyinotify.py#L129
+Sending them to the OE list won't result in any changes to the database ;-=
+)
 
-Signed-off-by: Mark Jonas <toertel@gmail.com>
----
- meta-python/recipes-devtools/python/python3-pyinotify_0.9.6.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Steve
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyinotify_0.9.6.bb b/meta-python/recipes-devtools/python/python3-pyinotify_0.9.6.bb
-index ab3395317..049c3c3cf 100644
---- a/meta-python/recipes-devtools/python/python3-pyinotify_0.9.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyinotify_0.9.6.bb
-@@ -3,11 +3,12 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=ab173cade7965b411528464589a08382"
- 
- RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-threading \
-+    ${PYTHON_PN}-ctypes \
-     ${PYTHON_PN}-io \
-     ${PYTHON_PN}-misc \
-     ${PYTHON_PN}-shell \
-     ${PYTHON_PN}-smtpd \
-+    ${PYTHON_PN}-threading \
- "
- 
- SRC_URI[md5sum] = "8e580fa1ff3971f94a6f81672b76c406"
--- 
-2.25.1
-
+On Fri, Oct 30, 2020 at 9:46 AM saloni <saloni.jain@kpit.com> wrote:
+>
+> Hello,
+>
+> I would like to make some restrictions to polkit CVE-2013-4288
+> https://nvd.nist.gov/vuln/detail/CVE-2013-4288
+>
+> The changes for the said CVE were fixed in Source-Version: 0.112-1 and a=
+re now merged in the reported distributions on stable releases.
+> Please find the reference to the links and tar file attesting the same:
+>
+> http://snapshot.debian.org/archive/debian-security/20181206T212649Z/pool=
+/updates/main/p/policykit-1/policykit-1_0.105-18%2Bdeb9u1.debian.tar.xz
+> https://bugzilla.redhat.com/show_bug.cgi?id=3D1002375
+> https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D723717
+> https://ubuntu.com/security/notices/USN-1953-1
+> https://www.security-database.com/detail.php?alert=3DCVE-2013-4288
+> https://vuldb.com/?id.65188
+>
+> The references on above links claims that upgrading to stable releases e=
+liminates this vulnerability.
+>
+> Regards,
+> Saloni Jain
+>
+> This message contains information that may be privileged or confidential=
+ and is the property of the KPIT Technologies Ltd. It is intended only for =
+the person to whom it is addressed. If you are not the intended recipient, =
+you are not authorized to read, print, retain copy, disseminate, distribute=
+, or use this message or any part thereof. If you receive this message in e=
+rror, please notify the sender immediately and delete all copies of this me=
+ssage. KPIT Technologies Ltd. does not accept any liability for virus infec=
+ted mails.
+>
+>=20
+>
