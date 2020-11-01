@@ -1,122 +1,84 @@
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web12.7665.1604186354707492573
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com [209.85.128.66])
+ by mx.groups.io with SMTP id smtpd.web12.16946.1604246749816912044
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 31 Oct 2020 16:19:14 -0700
+ Sun, 01 Nov 2020 08:05:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=cw5akUUb;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id w65so8015701pfd.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 31 Oct 2020 16:19:14 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=kiv8fYv1;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.66, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f66.google.com with SMTP id h62so2321840wme.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 01 Nov 2020 08:05:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=SzE0m9xNGakZ+KMN0lmdghPHdsMGiqHGPHckTMVOhes=;
-        b=cw5akUUb2iNNfA6zhuy+n5WLLmW2IiERkZaObGspW/W9BQXO+2UgISdojrQdYQkJdf
-         K7zS+lSlGwVKHIBHndzHTTmH9ULHnpxmzzY/pX0VGXrL/rCCA67zegujwekQYrzvsCTf
-         nhkrLvyfx5nDxl7WoVkpcYG9KeC6l74HzNHGHg63T7aXq9OguMBJK314USuKpeKd6hhO
-         2tKraY6UdsQc/mcvCkdMdjTK6YgRv0QNeEtwoEkp7R4selfZ0Q9twun+/U88wTkDxeQH
-         f2ra6e+1Syi/jBPrW7BM/h1FKM941D6c6DarlvDHbncMJEgMZBLfi5TuYWdgb2wHdmYq
-         LQ1g==
+        bh=veYS+x+hm7VCNzec8UAEwebZSTBCKXnGaWDjmPHid+c=;
+        b=kiv8fYv1fcyo48dVoyOlCeB66ZS2sfEi3Uhk5PDxbs6x5OJ2YD0ewQ5NIeeb13SyJd
+         4QcgGp5pIZuQhkLFRnFpY4X6/ls+O95rS8kvzzA9DzOpOuAAQfjcbbQ6hn4/ajx6vllR
+         M2VQXhG1OATgTCz9OYiOXbD1Q1VLTxwp1A4RWauqQkN1x4XG/vrXHK5ZM1gGILrYB9dS
+         YUwOfZAveaxrKJ4MhhN5stqfdRbAva/DawC39Z7oPjzjq8ypTx+kWmpFuv+QYjQqSokT
+         MqSwTTt55A0owCjI/qoqyYsPHP5bx68Scz8cinbGMxPOQPw45yM4/n0Fdmb68OnEXa37
+         81IA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=SzE0m9xNGakZ+KMN0lmdghPHdsMGiqHGPHckTMVOhes=;
-        b=HG2bQbP38igKFN/fTArsdFsTlUwZub+cVyHYZRaWIFxYyJX/NsfXXRTzLE1SM8BQvo
-         xjhmX3xcv0lNJP5V/x7dY2p4aVPyYyWoA15gam/XSt6Lp+SuZQd3B0XVJJeXutKDAc25
-         H/0R7XGTVVaDetFjhE6b7Oz4tmnjqxffycjMW1gM0BEgIC7ttuzk/BoUcUEas8MdWlPk
-         H93Z1903Gp9MbKSAAER9M5OxNNPJ6psGYwxQvryXP+SZFkIiqv5Z8hpGwcbJS0cRMjqP
-         0sRVflNVlRrOegAIzfb4p6vB0ne9EWS8gzfvOlv9gkyp911X+gvTEZyidjzwZ3KHXRah
-         02Kw==
-X-Gm-Message-State: AOAM5318qG0UhpwJ8bFP7dCtl6sBrVVetlG9Dxw+oAVAemeDDiKEPhP5
-	al7c+ss4GTklAK7Kdp9JCBaDK0YTvd9WIA==
-X-Google-Smtp-Source: ABdhPJyfcSQ+zpfD4SAlxEWqp1gjF3LUPQJhKta89angZGH95/BgshLWE1RxBRUFnpMENM5ITkp0eA==
-X-Received: by 2002:a62:768e:0:b029:18a:d54d:3921 with SMTP id r136-20020a62768e0000b029018ad54d3921mr1923230pfc.31.1604186353857;
-        Sat, 31 Oct 2020 16:19:13 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::4874])
-        by smtp.gmail.com with ESMTPSA id e15sm9465369pff.121.2020.10.31.16.19.13
+        bh=veYS+x+hm7VCNzec8UAEwebZSTBCKXnGaWDjmPHid+c=;
+        b=W+9rNOccXiHBX2rgw9Fnks5ljNttBvZyfiPd0nUXwux9QDQxdELiCiUBwO20h3Y94f
+         YSk33O0EplZUaH+LjMyC0Rm+HOK8fuAwCINLxFgZqy/TZ+jsynSE2SHC/UY7pchQYRFW
+         Sk49RGQoeY4kfvE697bd0BxqxWd/tv04NXMr0xr54DST867OBqcbORYLY4vqDLZ+lNBT
+         j9DUTI4OqJ52+mxtFRo8Y/y2aPUDP4xXEPy12cSQPKLgK6Tsf3yd028t5oUNgBBsZX/2
+         Y1p8Xw2mcaMGXoxqrBHzyMSwW7cHODiYP9t6bvN7K0pc1d+VEZt5yPk5+dR5FOoAZOti
+         lpeg==
+X-Gm-Message-State: AOAM5330+287vqIn7coZxJWiEGuDEyHJueUDce8P4TRXPPQ+hbCLqBjX
+	115T9o6UqaWx59yygXs+r29w0w==
+X-Google-Smtp-Source: ABdhPJyImw5H+l2dNhbgt5Jfrhy65aYCnJoCpkoDQttbJ9dmtYzABXDxnHqESwA+bKNHxAAo0Hfm0A==
+X-Received: by 2002:a1c:1dc1:: with SMTP id d184mr13175515wmd.169.1604246748236;
+        Sun, 01 Nov 2020 08:05:48 -0800 (PST)
+Return-Path: <brgl@bgdev.pl>
+Received: from debian-brgl.home (amarseille-656-1-4-167.w90-8.abo.wanadoo.fr. [90.8.158.167])
+        by smtp.gmail.com with ESMTPSA id z191sm12438623wme.30.2020.11.01.08.05.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 31 Oct 2020 16:19:13 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] gperftools: Fix build with new musl updates
-Date: Sat, 31 Oct 2020 16:19:10 -0700
-Message-Id: <20201031231910.3407505-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.29.2
+        Sun, 01 Nov 2020 08:05:47 -0800 (PST)
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster808@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [meta-oe][PATCH] libgpiod: update v1.4.4 -> v1.4.5
+Date: Sun,  1 Nov 2020 17:05:45 +0100
+Message-Id: <20201101160545.15697-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.29.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Latest musl shows build failures e.g.
-../git/src/profile-handler.cc:275:8: error: no member named '_sigev_un' in 'sigevent'
-  sevp._sigev_un._tid = sys_gettid();
-  ~~~~ ^
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+This bugfix release contains a couple fixes for C++ and Python bindings.
+
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 ---
- ...dler-Specify-libc-specific-thread_id.patch | 38 +++++++++++++++++++
- .../gperftools/gperftools_2.8.bb              |  1 +
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-oe/recipes-support/gperftools/gperftools/0001-profile-handler-Specify-libc-specific-thread_id.patch
+ .../libgpiod/{libgpiod_1.4.4.bb => libgpiod_1.4.5.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/libgpiod/{libgpiod_1.4.4.bb => libgpiod_1.4.5.bb} (89%)
 
-diff --git a/meta-oe/recipes-support/gperftools/gperftools/0001-profile-handler-Specify-libc-specific-thread_id.patch b/meta-oe/recipes-support/gperftools/gperftools/0001-profile-handler-Specify-libc-specific-thread_id.patch
-new file mode 100644
-index 0000000000..4029a69c5c
---- /dev/null
-+++ b/meta-oe/recipes-support/gperftools/gperftools/0001-profile-handler-Specify-libc-specific-thread_id.patch
-@@ -0,0 +1,38 @@
-+From 0a504852ed6e56620d1df26b503c4aa2b5b74760 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 31 Oct 2020 16:12:36 -0700
-+Subject: [PATCH] profile-handler: Specify libc specific thread_id
-+
-+We need to know internal _sigev_un is glibc specific, add an else for
-+musl case
-+
-+Fixes build issue
-+../git/src/profile-handler.cc:275:8: error: no member named '_sigev_un' in 'sigevent'
-+  sevp._sigev_un._tid = sys_gettid();
-+  ~~~~ ^
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/profile-handler.cc | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/src/profile-handler.cc b/src/profile-handler.cc
-+index 7fdcb69..5867118 100644
-+--- a/src/profile-handler.cc
-++++ b/src/profile-handler.cc
-+@@ -272,7 +272,11 @@ static void StartLinuxThreadTimer(int timer_type, int signal_number,
-+   struct itimerspec its;
-+   memset(&sevp, 0, sizeof(sevp));
-+   sevp.sigev_notify = SIGEV_THREAD_ID;
-++#ifdef __GLIBC__
-+   sevp._sigev_un._tid = sys_gettid();
-++#else
-++  sevp.sigev_notify_thread_id = sys_gettid();
-++#endif
-+   sevp.sigev_signo = signal_number;
-+   clockid_t clock = CLOCK_THREAD_CPUTIME_ID;
-+   if (timer_type == ITIMER_REAL) {
-+-- 
-+2.29.2
-+
-diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.8.bb b/meta-oe/recipes-support/gperftools/gperftools_2.8.bb
-index 662777b473..d9b310bceb 100644
---- a/meta-oe/recipes-support/gperftools/gperftools_2.8.bb
-+++ b/meta-oe/recipes-support/gperftools/gperftools_2.8.bb
-@@ -10,6 +10,7 @@ SRC_URI = "git://github.com/gperftools/gperftools \
-            file://0001-disbale-heap-checkers-and-debug-allocator-on-musl.patch \
-            file://disable_libunwind_aarch64.patch \
-            file://sgidef.patch \
-+           file://0001-profile-handler-Specify-libc-specific-thread_id.patch \
-            "
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.5.bb
+similarity index 89%
+rename from meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
+rename to meta-oe/recipes-support/libgpiod/libgpiod_1.4.5.bb
+index 6433675ca..aec50e7e6 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.4.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.5.bb
+@@ -5,8 +5,8 @@ LICENSE = "LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
  
- inherit autotools
+ SRC_URI = "https://www.kernel.org/pub/software/libs/${BPN}/${BP}.tar.xz"
+-SRC_URI[md5sum] = "064c2627397e6641c52de09a26951112"
+-SRC_URI[sha256sum] = "f1cda2789e6a13a92aefc012a76e5a7cc57a1b402d66f71df8719ee314b67699"
++SRC_URI[md5sum] = "0da9e11dcb0ac0149967b0c4d3ed9cfd"
++SRC_URI[sha256sum] = "a041b06907c956dd1c77836cccf4d392af29b9fe09c8ad18449a6da707b5ba2d"
+ 
+ inherit autotools pkgconfig python3native
+ 
 -- 
-2.29.2
+2.29.1
 
