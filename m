@@ -1,93 +1,83 @@
-Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com [209.85.210.196])
- by mx.groups.io with SMTP id smtpd.web11.1332.1604336138583047368
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.web12.602.1604348351045920580
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Nov 2020 08:55:38 -0800
+ Mon, 02 Nov 2020 12:19:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=hhOlAGql;
- spf=pass (domain: gmail.com, ip: 209.85.210.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f196.google.com with SMTP id b3so11639630pfo.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Nov 2020 08:55:38 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=jsbGhPAu;
+ spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: adrian.freihofer@gmail.com)
+Received: by mail-wr1-f45.google.com with SMTP id w1so16105391wrm.4
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Nov 2020 12:19:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:message-id:date:user-agent:mime-version
-         :in-reply-to:content-language:content-transfer-encoding;
-        bh=diliIsQc+0vRkCu73WjEJOwBAvhie6vtylRlYNaQ8Ss=;
-        b=hhOlAGql5Iq2e1K1LKvW+yaPJL0bpjzBgGSPpVwmWghPnGtlz8BFKhCoXeXwxuvgJK
-         3DdIq/uNj5Xno9WsVuATOiyl8XO4496C37IURFzYvP8HAkmkya+5D6G++ytAlseVBME8
-         a2bhBHNbd21c372CcZO7clS98JHwtoi4fWZquKCPe/sBTE7PnGzZjuxJd2RBvzb93TP4
-         /uyoqTs0c8oYh/wVJAdBIfAvY8zRtxk23vg9xYoAoZfka+aWoFHZnQocFJ0c6wAGVjh7
-         +0cKVs25TrvfXrHpJZQ/+g0CaKgEVW1JcYi1JXhnqL9K7BpMGqHnPqGPWwx8UyKyjVjA
-         dzhw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=wBNYH4yqI30/QksPY4LBNyl8uKOBYFlgdtvXCDfzrWw=;
+        b=jsbGhPAu5Nk0hxDohy3RRZ0+sKF9WXhDY4dF0D1OYvL4oI+f/chgKe6hJ2KDGs/Ttf
+         lQ/GsDl0+MX95tEaqW/7wByHpGJ6pzrS2aH93WTCnXVOmGWXLdOxAYhid9o3u6JpfK+P
+         2hEcvk6LocV9AoVh69CFSV7xFLj3b1dRwJBQU1mXV0DuMC3T/goBHXggcqAXHZH2cPOI
+         MTEq570IfjNLcGHOqvrebSbWYWtuKMcdSLi2zM2MMnfx9REpyLwf/Ull4lT10D00mi1q
+         t0RDnF/h/gzLtKAj7q9gpTKjRZ5ljsN/9ZERTsUWBQ37CQ8aIiyVLC3MGdPxFMT0Zd+L
+         bQtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=diliIsQc+0vRkCu73WjEJOwBAvhie6vtylRlYNaQ8Ss=;
-        b=MMIjGkNjBhGsWXa8seifZn5ULnGPMhxe46Yp8IVr6T5fwjwt0YKmJJ/nJR+41SBtph
-         0HuZ3Mdmvv1A4dZRgO33L0hwxLWE06POfDzewSzDnRWItEkdkdLFln/XRX37xzEzXt8M
-         hS5/frKnbWV+TXHpcyPdnedomOtwuQsorDgr1xrobA7F0HXvxFesyylVqJCJIHIPDCe8
-         MSJMxKe5iyUkbcvonCtvmX5UnI2Zj5ZNKrfSvA+hlnv1MbgShOQImEbikAhpiG470cCS
-         9EQDf4X72WGCRp0IcJK/RJ22w3ov47jgqAN6a4oRUU+swAFkhdIGZLeGCma7qe99WP/E
-         ERxw==
-X-Gm-Message-State: AOAM5330MFYeOwBMNLjs3f1Iu8nbBpHGYABNynfjHiiX8ri7dDymGTcM
-	Lcoewye93nDnKTVpmhHnJvZFaeThrQK6zA==
-X-Google-Smtp-Source: ABdhPJzGQke3ZTRsovznxXnZYppACQuwf2Vh+e+laHr3S83DcozcStiY9AZ66MG4p1g59A0Z6LjZGg==
-X-Received: by 2002:a62:3746:0:b029:164:4326:1e7a with SMTP id e67-20020a6237460000b029016443261e7amr22766460pfa.33.1604336137564;
-        Mon, 02 Nov 2020 08:55:37 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:4e0::4b05? ([2601:646:9200:4e0::4b05])
-        by smtp.gmail.com with ESMTPSA id k25sm14141269pfi.42.2020.11.02.08.55.36
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 02 Nov 2020 08:55:37 -0800 (PST)
-Subject: Re: [oe][master][zeus][PATCH] packagegroup-cross-canadian: repackage when multilibs gcc gdb binutils changes
+        bh=wBNYH4yqI30/QksPY4LBNyl8uKOBYFlgdtvXCDfzrWw=;
+        b=gqHzq5x4Xu6QdP6gUbhyP8h8pCJ9LNRG2SmkHUDUN07GRgl3G4u4F9sVvt7meuXMQb
+         OGPA583lQ3W0pjr3oUIrQDVtB4D8U0q1QN90bChuMV9RnK8SoEn/G4CpfwYG1ncO6PS2
+         QRG1xaPQOO/ljsYFSbTXFr9aWbdCyQt+5F1GnZLhsyUifYVIb7+HvyQFyl7Rgm8VDEgR
+         xwO2A4j8LU9jySaLOo/PSU7LsHPld8SY22rG8YP2uq+9AR/x8xbVUb49vpp1e/5VemRB
+         g6wJPE4f83dmgjhKqmflCcwVBFY+5S+pPSq1sjonc7JKYQxdIQHIJKRCUZHuLZLCT+Ji
+         k2GQ==
+X-Gm-Message-State: AOAM532ukVEysdu8YZvCsmTfDJUgA0K2i6DwK2iMYSOoELsEl1v2tTVi
+	gWDivTkb7ZCVRbxWROVrS3CcI8Fji/8ROVKS
+X-Google-Smtp-Source: ABdhPJyLhHbNfCI4HK4U5UGl4T1rwBvsemV67fy9fPrciYbW66bUVOeYAL5B59NNXbVn6FKDV1dzPw==
+X-Received: by 2002:a05:6000:4c:: with SMTP id k12mr21475019wrx.278.1604348349323;
+        Mon, 02 Nov 2020 12:19:09 -0800 (PST)
+Return-Path: <adrian.freihofer@gmail.com>
+Received: from md2ramxc.ad001.siemens.net (c-93-184-20-132.customer.ggaweb.ch. [93.184.20.132])
+        by smtp.gmail.com with ESMTPSA id k22sm567036wmi.34.2020.11.02.12.19.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Nov 2020 12:19:08 -0800 (PST)
+From: "Adrian Freihofer" <adrian.freihofer@gmail.com>
+X-Google-Original-From: Adrian Freihofer <adrian.freihofer@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20201102062955.73203-1-jiping.ma2@windriver.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Message-ID: <d6176089-0bd2-d786-99c4-f76f0acd872a@gmail.com>
-Date: Mon, 2 Nov 2020 08:55:36 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+Cc: Adrian Freihofer <adrian.freihofer@siemens.com>
+Subject: [meta-oe][PATCH] sdbus-c++-tools: fix reproducible builds
+Date: Mon,  2 Nov 2020 21:18:48 +0100
+Message-Id: <20201102201848.3556515-1-adrian.freihofer@siemens.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <20201102062955.73203-1-jiping.ma2@windriver.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Please resend it to oe-core mailing list.
+If the reproducible build class is active the following error occurs:
 
-On 11/1/20 10:29 PM, Jiping Ma wrote:
-> Signed-off-by: Jiping Ma <jiping.ma2@windriver.com>
-> ---
->   .../packagegroups/packagegroup-cross-canadian.bb  | 15 ++++++++++-----
->   1 file changed, 10 insertions(+), 5 deletions(-)
-> 
-> diff --git a/meta/recipes-core/packagegroups/packagegroup-cross-canadian.bb b/meta/recipes-core/packagegroups/packagegroup-cross-canadian.bb
-> index 3b430c0814..b6b3e5235f 100644
-> --- a/meta/recipes-core/packagegroups/packagegroup-cross-canadian.bb
-> +++ b/meta/recipes-core/packagegroups/packagegroup-cross-canadian.bb
-> @@ -17,8 +17,13 @@ RDEPENDS_${PN} = "\
->       meta-environment-${MACHINE} \
->       "
->   
-> -# When TUNE_ARCH changes but MACHINE does not (for example when a machine definition is updated),
-> -# cross-canadian.bbclass prevents variable dependency propagation to TRANSLATED_TARGET_ARCH
-> -# This will result in erroneous reuse of previous sstate packages. The following line
-> -# establishes a direct dependency instead.
-> -do_package[vardeps] += "TUNE_ARCH"
-> +# When TUNE_ARCH, GCC, GDB, BINUTILS changes but MACHINE does not (for example when a machine
-> +# definition is updated), cross-canadian.bbclass prevents variable dependency propagation to
-> +# TRANSLATED_TARGET_ARCH This will result in erroneous reuse of previous sstate packages. The
-> +# following line establishes a direct dependency instead.
-> +do_package[vardeps] += "\
-> +    ${@all_multilib_tune_values(d, 'BINUTILS')} \
-> +    ${@all_multilib_tune_values(d, 'GDB')} \
-> +    ${@all_multilib_tune_values(d, 'GCC')} \
-> +    TUNE_ARCH \
-> +    "
-> 
-> 
-> 
-> 
-> 
+ERROR: sdbus-c++-tools-native-0.8.1-r0 do_unpack: Error executing a python function in exec_python_func() autogenerated:
+...snip
+Exception: subprocess.CalledProcessError: Command '['git', 'log', '-1', '--pretty=%ct']' returned non-zero exit status 128.
+
+Remove the subpath to get git executed in the right derectory.
+
+Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
+---
+ meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.3.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.3.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.3.bb
+index 3b87c2265..ec720dc0c 100644
+--- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.3.bb
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.3.bb
+@@ -9,8 +9,8 @@ inherit cmake
+ DEPENDS += "expat"
+ 
+ SRCREV = "6e8e5aadb674cccea5bdd55141db5dad887fbacd"
+-SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master;subpath=tools"
++SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/tools"
++S = "${WORKDIR}/git/tools"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+-- 
+2.26.2
+
