@@ -1,87 +1,93 @@
-Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com [209.85.219.65])
- by mx.groups.io with SMTP id smtpd.web10.844.1604334401008085920
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com [209.85.210.196])
+ by mx.groups.io with SMTP id smtpd.web11.1332.1604336138583047368
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Nov 2020 08:26:41 -0800
+ Mon, 02 Nov 2020 08:55:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=f4b+UYoN;
- spf=pass (domain: gmail.com, ip: 209.85.219.65, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f65.google.com with SMTP id i17so4307771qvp.11
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Nov 2020 08:26:40 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=hhOlAGql;
+ spf=pass (domain: gmail.com, ip: 209.85.210.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f196.google.com with SMTP id b3so11639630pfo.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Nov 2020 08:55:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=I/9aMQPe+no2ygkIP/xPonAK5QjiPa4bBXn9CG56gJQ=;
-        b=f4b+UYoN8SFn1VoI08/U77G86son6G7cQT8v9FjEBaLGbHYEg3ab8YrDizNegDAajO
-         yQ8k/5zmaet+ibOWvt2caWscLT7Zkj6M9Vj8PkZxSiuhVEHf9DgCG4z3KW+qHLqkmq13
-         bEaEQb4179YiESW9uhCKP+WaRepzhAz+c71m1m1Zr+o5VTIF+VstXHmi9L2Zp/I39cKO
-         APYK3a4xxA+fj/8kIJW7FcVeqUkC4mYlSMP1HnbR3xy9YGOl+zgCnocCnuR7F93ueo06
-         bxpjnZVu6olbTrrzVGN9w3BfQG1B80vnqXqeoGAzay42iJV5q/XPw6gR9SSmgYtMT0Cj
-         4CQw==
+        h=subject:to:references:from:message-id:date:user-agent:mime-version
+         :in-reply-to:content-language:content-transfer-encoding;
+        bh=diliIsQc+0vRkCu73WjEJOwBAvhie6vtylRlYNaQ8Ss=;
+        b=hhOlAGql5Iq2e1K1LKvW+yaPJL0bpjzBgGSPpVwmWghPnGtlz8BFKhCoXeXwxuvgJK
+         3DdIq/uNj5Xno9WsVuATOiyl8XO4496C37IURFzYvP8HAkmkya+5D6G++ytAlseVBME8
+         a2bhBHNbd21c372CcZO7clS98JHwtoi4fWZquKCPe/sBTE7PnGzZjuxJd2RBvzb93TP4
+         /uyoqTs0c8oYh/wVJAdBIfAvY8zRtxk23vg9xYoAoZfka+aWoFHZnQocFJ0c6wAGVjh7
+         +0cKVs25TrvfXrHpJZQ/+g0CaKgEVW1JcYi1JXhnqL9K7BpMGqHnPqGPWwx8UyKyjVjA
+         dzhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=I/9aMQPe+no2ygkIP/xPonAK5QjiPa4bBXn9CG56gJQ=;
-        b=sdKhyBiFyMliaYQ/TLXGCRbp4ORDB6JU9lYOlwGfDv/juLLQD8ZBFFYMu/TsvIZrXB
-         4BrEykthtm5TePiPXhYeHAKa9qLdmcK68OOYAIyoegJKOZ7bCwi6H2wT66fLbtM2Gka3
-         cvRqMj5xfWsfiGzYZQ4Foq9b1QjL0m1mlo6n19FbPMeXHhEjksDNBf/QCLWr8MtqrrKs
-         b17kc8dkcYShJqFmjKc5H13XahtbH7RUX36PvzhloZxtfOEUXACNJgjCwL3WpfBAF3z/
-         Fsm5FXTMxUt/0L6xhWRB3Z8dE8SVbFLyGI36Q0VnqKCkTKNXQKBKOOP2A7la6LgUNNta
-         o8RQ==
-X-Gm-Message-State: AOAM531x+q7i3kUCtCDdqhO8DlXmGzFyUPbp0WSre3FdTqrWuOMRx6k+
-	xldE2tB53m2PQfN29pscjh4hrBljDmNNBxhBNGM=
-X-Google-Smtp-Source: ABdhPJyH/PCFGDPvhb6YB7TfLfZLw2C+DRQoe4z/38iC5L/sIiIce5i/masJjefJideGZOEki8P+lBiM2iE1suaiQIk=
-X-Received: by 2002:a05:6214:16d0:: with SMTP id d16mr23060744qvz.38.1604334400065;
- Mon, 02 Nov 2020 08:26:40 -0800 (PST)
-MIME-Version: 1.0
-References: <20201102091320.15732-1-yi.zhao@windriver.com>
-In-Reply-To: <20201102091320.15732-1-yi.zhao@windriver.com>
+        h=x-gm-message-state:subject:to:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=diliIsQc+0vRkCu73WjEJOwBAvhie6vtylRlYNaQ8Ss=;
+        b=MMIjGkNjBhGsWXa8seifZn5ULnGPMhxe46Yp8IVr6T5fwjwt0YKmJJ/nJR+41SBtph
+         0HuZ3Mdmvv1A4dZRgO33L0hwxLWE06POfDzewSzDnRWItEkdkdLFln/XRX37xzEzXt8M
+         hS5/frKnbWV+TXHpcyPdnedomOtwuQsorDgr1xrobA7F0HXvxFesyylVqJCJIHIPDCe8
+         MSJMxKe5iyUkbcvonCtvmX5UnI2Zj5ZNKrfSvA+hlnv1MbgShOQImEbikAhpiG470cCS
+         9EQDf4X72WGCRp0IcJK/RJ22w3ov47jgqAN6a4oRUU+swAFkhdIGZLeGCma7qe99WP/E
+         ERxw==
+X-Gm-Message-State: AOAM5330MFYeOwBMNLjs3f1Iu8nbBpHGYABNynfjHiiX8ri7dDymGTcM
+	Lcoewye93nDnKTVpmhHnJvZFaeThrQK6zA==
+X-Google-Smtp-Source: ABdhPJzGQke3ZTRsovznxXnZYppACQuwf2Vh+e+laHr3S83DcozcStiY9AZ66MG4p1g59A0Z6LjZGg==
+X-Received: by 2002:a62:3746:0:b029:164:4326:1e7a with SMTP id e67-20020a6237460000b029016443261e7amr22766460pfa.33.1604336137564;
+        Mon, 02 Nov 2020 08:55:37 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:4e0::4b05? ([2601:646:9200:4e0::4b05])
+        by smtp.gmail.com with ESMTPSA id k25sm14141269pfi.42.2020.11.02.08.55.36
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 02 Nov 2020 08:55:37 -0800 (PST)
+Subject: Re: [oe][master][zeus][PATCH] packagegroup-cross-canadian: repackage when multilibs gcc gdb binutils changes
+To: openembedded-devel@lists.openembedded.org
+References: <20201102062955.73203-1-jiping.ma2@windriver.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 2 Nov 2020 08:26:14 -0800
-Message-ID: <CAMKF1sr721emgcyE=+GHPPiz1VZThqjWOXe01WQndv4qVMKDPw@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] quagga: unify volatiles file name
-To: Yi Zhao <yi.zhao@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Message-ID: <d6176089-0bd2-d786-99c4-f76f0acd872a@gmail.com>
+Date: Mon, 2 Nov 2020 08:55:36 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
+MIME-Version: 1.0
+In-Reply-To: <20201102062955.73203-1-jiping.ma2@windriver.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 2, 2020 at 1:13 AM Yi Zhao <yi.zhao@windriver.com> wrote:
->
-> Make the volatiles file name starts with digital.
+Please resend it to oe-core mailing list.
 
-what does this get us ?
-
->
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+On 11/1/20 10:29 PM, Jiping Ma wrote:
+> Signed-off-by: Jiping Ma <jiping.ma2@windriver.com>
 > ---
->  meta-networking/recipes-protocols/quagga/quagga.inc | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
-> index 11b7d576a..6df72427b 100644
-> --- a/meta-networking/recipes-protocols/quagga/quagga.inc
-> +++ b/meta-networking/recipes-protocols/quagga/quagga.inc
-> @@ -81,7 +81,7 @@ do_install () {
->      install -m 0644 ${WORKDIR}/watchquagga.default ${D}${sysconfdir}/default/watchquagga
->      install -m 0755 ${WORKDIR}/quagga.init ${D}${sysconfdir}/init.d/quagga
->      install -m 0755 ${WORKDIR}/watchquagga.init ${D}${sysconfdir}/init.d/watchquagga
-> -    install -m 0644 ${WORKDIR}/volatiles.03_quagga  ${D}${sysconfdir}/default/volatiles/volatiles.03_quagga
-> +    install -m 0644 ${WORKDIR}/volatiles.03_quagga  ${D}${sysconfdir}/default/volatiles/03_quagga
->
->      # Install sample configurations for the daemons
->      for f in bgpd vtysh isisd ospfd ripngd zebra ripd ospf6d; do
-> @@ -106,7 +106,7 @@ do_install () {
->      sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/*
->      sed -i 's!/usr/bin/!${bindir}/!g' ${D}${sysconfdir}/init.d/quagga
->      sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/* ${D}${sysconfdir}/default/watchquagga
-> -    sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/* ${D}${sysconfdir}/default/volatiles/volatiles.03_quagga
-> +    sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/* ${D}${sysconfdir}/default/volatiles/03_quagga
->      sed -i 's!^PATH=.*!PATH=${base_sbindir}:${sbindir}:${base_bindir}:${bindir}!' ${D}${sysconfdir}/init.d/*
->      sed -i 's!--with-libtool-sysroot=[^ "]*!!' ${D}${includedir}/quagga/version.h
->
-> --
-> 2.17.1
->
->
+>   .../packagegroups/packagegroup-cross-canadian.bb  | 15 ++++++++++-----
+>   1 file changed, 10 insertions(+), 5 deletions(-)
 > 
->
+> diff --git a/meta/recipes-core/packagegroups/packagegroup-cross-canadian.bb b/meta/recipes-core/packagegroups/packagegroup-cross-canadian.bb
+> index 3b430c0814..b6b3e5235f 100644
+> --- a/meta/recipes-core/packagegroups/packagegroup-cross-canadian.bb
+> +++ b/meta/recipes-core/packagegroups/packagegroup-cross-canadian.bb
+> @@ -17,8 +17,13 @@ RDEPENDS_${PN} = "\
+>       meta-environment-${MACHINE} \
+>       "
+>   
+> -# When TUNE_ARCH changes but MACHINE does not (for example when a machine definition is updated),
+> -# cross-canadian.bbclass prevents variable dependency propagation to TRANSLATED_TARGET_ARCH
+> -# This will result in erroneous reuse of previous sstate packages. The following line
+> -# establishes a direct dependency instead.
+> -do_package[vardeps] += "TUNE_ARCH"
+> +# When TUNE_ARCH, GCC, GDB, BINUTILS changes but MACHINE does not (for example when a machine
+> +# definition is updated), cross-canadian.bbclass prevents variable dependency propagation to
+> +# TRANSLATED_TARGET_ARCH This will result in erroneous reuse of previous sstate packages. The
+> +# following line establishes a direct dependency instead.
+> +do_package[vardeps] += "\
+> +    ${@all_multilib_tune_values(d, 'BINUTILS')} \
+> +    ${@all_multilib_tune_values(d, 'GDB')} \
+> +    ${@all_multilib_tune_values(d, 'GCC')} \
+> +    TUNE_ARCH \
+> +    "
+> 
+> 
+> 
+> 
+> 
