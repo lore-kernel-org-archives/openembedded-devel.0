@@ -1,86 +1,72 @@
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web12.516.1604384830417194136
+Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com [209.85.208.68])
+ by mx.groups.io with SMTP id smtpd.web08.6266.1604419638555164275
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Nov 2020 22:27:10 -0800
+ Tue, 03 Nov 2020 08:07:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=eK2QwLSt;
- spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id i26so12883767pgl.5
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Nov 2020 22:27:10 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=bYX3yvxf;
+ spf=pass (domain: gmail.com, ip: 209.85.208.68, mailfrom: toertel@gmail.com)
+Received: by mail-ed1-f68.google.com with SMTP id k9so18886809edo.5
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Nov 2020 08:07:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=Dn/W8l/BtAWlb4s7bP9S3EI1+wmzlUBbA1qJQuARlNQ=;
-        b=eK2QwLStcU0CykPt/2qrPqQIFCGeV4BGz+H2iyafxHk1+nwrk6A12O/dW7e7R8Wz0V
-         wcJC98LZM2/q8Cnb4M8wMeSnOKvulrDnjmoVUHm9F1rcaY2Q2jgbsBkxnaJXHWlyKaT9
-         IPa772fZq7oaD4OpfPGj3lU3HtVJr8FJp4xI9++h9OvHM8cFlp8rwhph6OFPhTNic+hZ
-         /26wkVykh7d9jfQaCKFh7kPIPAyD2MPVGX+nz3xPU/1rEzB46vSGL3VrEYM7uufMoFYD
-         twQLZYjxDHdFJz1H38MdicEt8v4nJ+CpFHjD9OZaf57zvMNf3YXvsoJZN1UP4UKqbWbL
-         P+3Q==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=hU2a6XoOGXNJetmdE2lCuHysT+UjsSmMvU7oWXqJUVY=;
+        b=bYX3yvxfFdKuSHM0AlLOOCVbUX8fNAYcFXylLkSLu3q0mDLnSaVvgfLfLVnJLnBuw+
+         Tn6mOGpiVwZZU7x6QluYPpm1jiaAOsD0QDP0v+ENCnbt9zmsBbc4JebXzzu97Na9hPiX
+         BUBH6d4tFr/MAnAjlPn/degAUjr/efejTmjdQX40au6T9BLJGsJmT6Jx9eNHuI1omKnF
+         VBIX/jp6YgOL20oFMPfUjrcIg0fPd4nOvr3U6V+iE1dQW89s86DRMnCgvqXuhzaahSFw
+         K/HWURB7Qn+SfcY9OLbR96TRH9iSbAhaSwi1Ruj8fnly6x4W4clLuniramt3qtQZe6ES
+         NcDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=Dn/W8l/BtAWlb4s7bP9S3EI1+wmzlUBbA1qJQuARlNQ=;
-        b=OJfNheH1zirPMGb3/xxjsvwI8IYXQCwRYZoj1DhhVy2rjusFWEG7eyNsRtpdsPDtsL
-         Gpopzvc9qhZPmqToWq5ul5md/MvvrSl3nnJaG/oLqV1akLS5oN6f3qYZpt5v8U61lS0+
-         oUzJStBEpT7p5nsxvC/EYtm8K1vXq/NkWMzvVPExjNq1lO4zWo6VUWZIkKEyNiDOXJ0d
-         DASWnzfpglvJJ4iLvcnPDl4lGWdzYmcQ2aIw9Q9y7bOhUkjFpZsIfu2N3C2XUezXoZVH
-         IKNPptYIIZ8K9VIhejhlIjfesfPwJShr+BQxlDR1woPIHGGsO3feiGUpVXb40Aan9HNe
-         6X9w==
-X-Gm-Message-State: AOAM532V9GDJSYV8Y+Y0TJ3QSsCusD51LFUZqYSE7rCUMzAiqd3W3vX3
-	OsUuqGvyD7ujsB8mlGI1/LGAfrOQi633pg==
-X-Google-Smtp-Source: ABdhPJwFzFbvLkh5p23C4Ru4/gJoGXbAuPzGNrMBOAc0P+fMqYVb31yj5qeVG3saHRKmrrCw3n91Kg==
-X-Received: by 2002:a17:90b:4749:: with SMTP id ka9mr2208854pjb.197.1604384829705;
-        Mon, 02 Nov 2020 22:27:09 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::4b05])
-        by smtp.gmail.com with ESMTPSA id nv7sm1608907pjb.27.2020.11.02.22.27.08
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=hU2a6XoOGXNJetmdE2lCuHysT+UjsSmMvU7oWXqJUVY=;
+        b=iGpllIQCO9TQTY7dVn9CadYuWY2Tg4UwXyao5Ik+tmVXaUg0N1/rkvaQdfMMNh9M2A
+         CXf4rUJ/iELpDB6QkurS39kmOielhtBjbZS1T73vxjCJp//5EaB80Z7f/wzEWY206ccO
+         VoEpy5qop0nt3Y/ybDVvBSNP9MBgK1tJnJp+XfUhzUwQ2kj8I72V1H8XUlRuMPZKE0l1
+         M51xK7ce5lCJI2GKJPD+LIMbnuENC8FJ6lB5UQ6o1CxH3QOBkox7psBz2WfZb9/6QjvI
+         Zm6aOYZQSe/JMbnbNDRz4f1VsxeAkhIyfleyVwyjK2UnE4HXwHqkNL8EN0GVya4rZJNt
+         J31Q==
+X-Gm-Message-State: AOAM5333P6kvwZZkQF2eGVkzLvpa7H2ZO1iAhVV6nC+JlhzXeFwHiSL4
+	n7OS75sV7QuRaHO018UvemHkFj0a51+U1A==
+X-Google-Smtp-Source: ABdhPJw1hcbttTh2Zw0DpzI57XZiGMkjJNhJE2RdvcA0sNTd8vscfUzv8eHUkgy1EshjJ+W/KgezoA==
+X-Received: by 2002:a50:9e69:: with SMTP id z96mr17751532ede.226.1604419636826;
+        Tue, 03 Nov 2020 08:07:16 -0800 (PST)
+Return-Path: <toertel@gmail.com>
+Received: from gigabyte.fritz.box (p200300cfaf1974008871fa142a03af31.dip0.t-ipconnect.de. [2003:cf:af19:7400:8871:fa14:2a03:af31])
+        by smtp.gmail.com with ESMTPSA id y14sm11738077edo.69.2020.11.03.08.07.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Nov 2020 22:27:09 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Tue, 03 Nov 2020 08:07:16 -0800 (PST)
+From: "Mark Jonas" <toertel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] remmina: Update to 1.4.8
-Date: Mon,  2 Nov 2020 22:27:01 -0800
-Message-Id: <20201103062701.286774-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201103062701.286774-1-raj.khem@gmail.com>
-References: <20201103062701.286774-1-raj.khem@gmail.com>
+Cc: Mark Jonas <toertel@gmail.com>
+Subject: [meta-networking][PATCH] mbedtls: Fix typo in PACKAGECONFIG
+Date: Tue,  3 Nov 2020 17:07:09 +0100
+Message-Id: <20201103160709.439135-1-toertel@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Use git fetcher instead of gitlab archives
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Mark Jonas <toertel@gmail.com>
 ---
- .../remmina/{remmina_1.4.7.bb => remmina_1.4.8.bb}          | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/remmina/{remmina_1.4.7.bb => remmina_1.4.8.bb} (83%)
+ meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.6.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/remmina/remmina_1.4.7.bb b/meta-oe/recipes-support/remmina/remmina_1.4.8.bb
-similarity index 83%
-rename from meta-oe/recipes-support/remmina/remmina_1.4.7.bb
-rename to meta-oe/recipes-support/remmina/remmina_1.4.8.bb
-index 661673d6b2..336357088f 100644
---- a/meta-oe/recipes-support/remmina/remmina_1.4.7.bb
-+++ b/meta-oe/recipes-support/remmina/remmina_1.4.8.bb
-@@ -9,11 +9,11 @@ DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi libsodium libss
- DEPENDS_append_libc-musl = " libexecinfo"
- LDFLAGS_append_libc-musl = " -lexecinfo"
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.6.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.6.bb
+index 12ad39761..8e4b6c86c 100644
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.6.bb
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.6.bb
+@@ -29,7 +29,7 @@ SRC_URI[sha256sum] = "66455e23a6190a30142cdc1113f7418158839331a9d8e6b0778631d077
+ inherit cmake
  
--SRC_URI = "https://gitlab.com/Remmina/Remmina/-/archive/v${PV}/Remmina-v${PV}.tar.bz2 \
-+SRCREV = "7ebc497062de66881b71bbe7f54dabfda0129ac2"
-+SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https \
- "
--SRC_URI[sha256sum] = "7614d447dc588403aff2ff97b253f46c5f03a6347d024618e84490b8ab4cd87b"
+ PACKAGECONFIG ??= "shared-libs programs"
+-PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-USE_SHARED_MBEDTLS_LIBRARY=OFF"
++PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-DUSE_SHARED_MBEDTLS_LIBRARY=OFF"
+ PACKAGECONFIG[programs] = "-DENABLE_PROGRAMS=ON,-DENABLE_PROGRAMS=OFF"
  
--S = "${WORKDIR}/Remmina-v${PV}"
-+S = "${WORKDIR}/git"
- 
- inherit cmake features_check mime-xdg
- REQUIRED_DISTRO_FEATURES = "x11"
+ EXTRA_OECMAKE = "-DENABLE_TESTING=OFF -DLIB_INSTALL_DIR:STRING=${libdir}"
 -- 
-2.29.2
+2.25.1
 
