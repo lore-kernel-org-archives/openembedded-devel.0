@@ -1,247 +1,157 @@
-Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com [209.85.219.53])
- by mx.groups.io with SMTP id smtpd.web08.82.1604377951257290711
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com [209.85.215.196])
+ by mx.groups.io with SMTP id smtpd.web11.537.1604384825867889356
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Nov 2020 20:32:31 -0800
+ Mon, 02 Nov 2020 22:27:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=LeueICAC;
- spf=pass (domain: gmail.com, ip: 209.85.219.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f53.google.com with SMTP id g13so7235234qvu.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Nov 2020 20:32:31 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=MHtAawC4;
+ spf=pass (domain: gmail.com, ip: 209.85.215.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f196.google.com with SMTP id x13so12874219pgp.7
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Nov 2020 22:27:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=QKveD8nph7oRD9x1hU/0b1nDtysLz3+53hasuUA5ZlI=;
-        b=LeueICACRgKYbnNPHLt6FSTr4eR8Uyr+3Nbb7wGUrn6yyJSZNzrQtf4YYi++9fkVrI
-         fdTBBdc4coy+H6CXvpkJ0d3FF1lc8mRyusVPelYfHCc3E9aI8rT2qVsZOooKA7yKWBhL
-         34Get4SVI0xrVgsfKe8cEJsI1J7dKF4CB0wPxBqiSlA+gAkrIMgl+R+WZbpQuIYHfW/x
-         7xsZR9shFWIjp3g1c3iBD5lT6xK8qYqsFFB2cM0oE9x/g5f5EqXYw+xDVolRZz8QCfoU
-         LXMQCcb8iuHEcsTou//GWT7foFNgZuwFoYli48T89E+LDuG4cEDE+cvWbJpXUnTupQUC
-         cixQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=T2BNMAKRrOZGaVxg5Onfvco7JyheUMd8zEgGspWxXeU=;
+        b=MHtAawC4Q9jB6UeEQIL3wlEvG4kiFjV2ejefwSi1tI5Y1821fMkgNqAr05uZ9SD+vW
+         h87H/ddROyzZS2MOdd08oJ2Olaa1NtX3c0yFXEY+pffxBG3dljVy9OIkhTOPoWstpFwh
+         k8caTezQiVVQEhiLYHVGh3yTGF6GgSrtURdAC/MCNPp2OWLeiymCXEWJrGhbKrLtWUjj
+         vFLMCBKQ0V/PQqCGyyWMGiti0IRIvJpHYHQ8uoYlQyxzZ2JkSTBkELWrWcfgkw5WS2q3
+         4cEc/U4tfGNFlmjA6SmK26CbKLCGgakQR5zNTTBBVuBsc7f3q/LC6a0/nUAc3InS6K+O
+         lIuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=QKveD8nph7oRD9x1hU/0b1nDtysLz3+53hasuUA5ZlI=;
-        b=BCZqLvCIZzQtyofXMsN0At+olx4WasSgkCtriaotBeEsudIbStUvAu6VnoPr11Atwg
-         eXqSDNawwuTh3u2lKgKrKJREmBHQbN8WcmFjEDs/fq/U5i+Fc2dSYdR8MGKAQkW/xXOR
-         IqohwzTMzoWO9sn/yKGdSO+paR7mAXLptut3tMgvNe4ISorrKU9D5ctCQkmShUpTStYc
-         LIRa9TItjRwvch7FB3+lIH7CCvnLpSe4TIBGrDhN3jNo83bgkMd7sMi7civ03S87tKWW
-         1kbOOR/UFbIjJOQbxe+j6UwYjhfhcX8OH4jKX16oJUmp7qo3R5cqoSBMK6jzxpyxh8Xa
-         2a4Q==
-X-Gm-Message-State: AOAM53036Ag9diI7/kNCbdLkEK8IIUtYZ8RbMdwuv7F6Png/zNzNGK/Y
-	RqFbzAlqooORKjB0lqhSsQz2nuECDHSJYk6XMB4=
-X-Google-Smtp-Source: ABdhPJzdPXZVQ0gyFOqrOblYo+cQ0ykDvv4U6rqI5yHDP4A85i3yMmwEHjOyRjxfgqgPM5b61bz1W5dgWsrbeTk2R7E=
-X-Received: by 2002:a0c:b65b:: with SMTP id q27mr24416038qvf.8.1604377950326;
- Mon, 02 Nov 2020 20:32:30 -0800 (PST)
-MIME-Version: 1.0
-References: <20201102091320.15732-1-yi.zhao@windriver.com> <CAMKF1sr721emgcyE=+GHPPiz1VZThqjWOXe01WQndv4qVMKDPw@mail.gmail.com>
- <ced6967d-c807-4352-1d0f-0e239aa2111f@windriver.com> <CAMKF1sqHR3_UK42eLMxQM2Ue_YHguAaCCHgY__1_9yG7rUMDGw@mail.gmail.com>
- <4b3ed683-da39-a447-688d-486af619c333@windriver.com>
-In-Reply-To: <4b3ed683-da39-a447-688d-486af619c333@windriver.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=T2BNMAKRrOZGaVxg5Onfvco7JyheUMd8zEgGspWxXeU=;
+        b=aTfJqXWab0j4tu2DFedTA2vJhh0hpNFpjS9mwzRZgrL0pwspvZSkGj3TCeI6P+5rnZ
+         hggd3D5RIRmywJc4ELQ7BVr+HNdQmXLBwEoygTYOhPNLh53rCazJFa4Rcvz5hVVo5Xys
+         jbw4XYPMyf/aB0QeYSjLzMdKMc/fAc2GY1l2SFtSNAnmd5568nnPyKIFBl0MOCn8FaJc
+         be/BJV1mIAzO8f0EO6wB9UwphFRZDj9sbscclEuSWA2Geo8kJZK+qy5epo4C2jjDYI1R
+         QKER4KnSc80NFUCYZrZpP14TtzKwNY/Mxjse8C3XsT2vg8f87Kb+lo/cJvozM3w2szcw
+         hSnw==
+X-Gm-Message-State: AOAM532h0ZjBDbj8G98EQrCRZ6CliUxIsVcgZTARpxXNGYON3P86MY+I
+	7YQRbn+oG3jO4FntrHSvljkx7CLXTbUWpA==
+X-Google-Smtp-Source: ABdhPJwjCxBFnyAgwhxqs7v1pbyMiSSH2eoEJxXlMxOH0D9VVZff+/+a7c78BO6OjlLg2zi5BSd0TA==
+X-Received: by 2002:a63:4546:: with SMTP id u6mr16303433pgk.311.1604384825003;
+        Mon, 02 Nov 2020 22:27:05 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::4b05])
+        by smtp.gmail.com with ESMTPSA id nv7sm1608907pjb.27.2020.11.02.22.27.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Nov 2020 22:27:04 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 2 Nov 2020 20:32:19 -0800
-Message-ID: <CAMKF1sqoNEJ6rL5Lh-RsM+9ZNin-0A34599NSnb-pJVdbFH5bQ@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] quagga: unify volatiles file name
-To: Yi Zhao <yi.zhao@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000d092d505b32c5918"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] graphviz: Upgrade to 2.44.1 release
+Date: Mon,  2 Nov 2020 22:27:00 -0800
+Message-Id: <20201103062701.286774-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.29.2
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---000000000000d092d505b32c5918
-Content-Type: text/plain; charset="UTF-8"
+- Refresh patches to apply on new sources
+- Switch away from gitlab archives
+- Bypass pdf documentation generation for native package
 
-Ok, thanks.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...t-use_tcl-to-be-empty-string-if-tcl-is-disabled.patch | 2 +-
+ .../graphviz/graphviz/0001-Use-native-mkdefs.patch       | 9 ++-------
+ ...lugin-pango-Include-freetype-headers-explicitly.patch | 5 -----
+ .../graphviz/{graphviz_2.40.1.bb => graphviz_2.44.1.bb}  | 8 ++++----
+ 4 files changed, 7 insertions(+), 17 deletions(-)
+ rename meta-oe/recipes-graphics/graphviz/{graphviz_2.40.1.bb => graphviz_2.44.1.bb} (91%)
 
-On Mon, Nov 2, 2020 at 6:50 PM Yi Zhao <yi.zhao@windriver.com> wrote:
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/0001-Set-use_tcl-to-be-empty-string-if-tcl-is-disabled.patch b/meta-oe/recipes-graphics/graphviz/graphviz/0001-Set-use_tcl-to-be-empty-string-if-tcl-is-disabled.patch
+index 21bf1bcd5c..6d1d441c57 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz/0001-Set-use_tcl-to-be-empty-string-if-tcl-is-disabled.patch
++++ b/meta-oe/recipes-graphics/graphviz/graphviz/0001-Set-use_tcl-to-be-empty-string-if-tcl-is-disabled.patch
+@@ -11,7 +11,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ 
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -1676,7 +1676,7 @@ AC_ARG_ENABLE(tcl,
++@@ -1540,7 +1540,7 @@ AC_ARG_ENABLE(tcl,
+    [], [enable_tcl=yes])
+  
+  if test "x$enable_tcl" != "xyes"; then
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/0001-Use-native-mkdefs.patch b/meta-oe/recipes-graphics/graphviz/graphviz/0001-Use-native-mkdefs.patch
+index eb51d03d26..76ff08f63c 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz/0001-Use-native-mkdefs.patch
++++ b/meta-oe/recipes-graphics/graphviz/graphviz/0001-Use-native-mkdefs.patch
+@@ -13,12 +13,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+  lib/gvpr/Makefile.am | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+-diff --git a/lib/gvpr/Makefile.am b/lib/gvpr/Makefile.am
+-index ac3c098..4914854 100644
+ --- a/lib/gvpr/Makefile.am
+ +++ b/lib/gvpr/Makefile.am
+-@@ -57,7 +57,7 @@ endif
+- mkdefs_SOURCES = mkdefs.c
++@@ -59,7 +59,7 @@ mkdefs$(EXEEXT):
++ 	$(HOSTCC) $(srcdir)/mkdefs.c -o mkdefs$(EXEEXT)
+  
+  gdefs.h: $(top_srcdir)/lib/gvpr/gprdata mkdefs$(EXEEXT)
+ -	./mkdefs$(EXEEXT) gdefs.h < $(top_srcdir)/lib/gvpr/gprdata
+@@ -26,6 +24,3 @@ index ac3c098..4914854 100644
+  
+  EXTRA_DIST = $(man_MANS) $(pdf_DATA) gprdata mkdefs.c gdefs.h trie.c gvprlib.vcxproj*
+  
+--- 
+-2.20.1
+-
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/0001-plugin-pango-Include-freetype-headers-explicitly.patch b/meta-oe/recipes-graphics/graphviz/graphviz/0001-plugin-pango-Include-freetype-headers-explicitly.patch
+index a9b0352435..dd79510560 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz/0001-plugin-pango-Include-freetype-headers-explicitly.patch
++++ b/meta-oe/recipes-graphics/graphviz/graphviz/0001-plugin-pango-Include-freetype-headers-explicitly.patch
+@@ -18,8 +18,6 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  plugin/pango/gvtextlayout_pango.c | 4 ++++
+  1 file changed, 4 insertions(+)
+ 
+-diff --git a/plugin/pango/gvtextlayout_pango.c b/plugin/pango/gvtextlayout_pango.c
+-index d620b29..b0da11c 100644
+ --- a/plugin/pango/gvtextlayout_pango.c
+ +++ b/plugin/pango/gvtextlayout_pango.c
+ @@ -15,6 +15,10 @@
+@@ -33,6 +31,3 @@ index d620b29..b0da11c 100644
+  #include "gvplugin_render.h"
+  #include "agxbuf.h"
+  #include "utils.h"
+--- 
+-2.22.0
+-
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb b/meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb
+similarity index 91%
+rename from meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
+rename to meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb
+index aa5c0c8206..061be74970 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb
+@@ -26,7 +26,8 @@ inherit autotools-brokensep pkgconfig gettext
+ # get checksum errors. Fedora people seem to expect same so they use a versioned
+ # source - see https://src.fedoraproject.org/cgit/rpms/graphviz.git/tree/graphviz.spec
+ 
+-SRC_URI = "https://gitlab.com/graphviz/graphviz/-/archive/stable_release_${PV}/graphviz-stable_release_${PV}.tar.gz \
++SRCREV = "771bc4dbff3e6f358fa75cdc7774a413ccacad51"
++SRC_URI = "https://www2.graphviz.org/Packages/stable/portable_source/${BP}.tar.gz \
+            file://0001-plugin-pango-Include-freetype-headers-explicitly.patch \
+ "
+ # Use native mkdefs
+@@ -38,10 +39,9 @@ SRC_URI_append_class-nativesdk = "\
+            file://0001-Use-native-mkdefs.patch \
+            file://graphviz-setup.sh \
+ "
+-SRC_URI[md5sum] = "2acf30ca8e6cc8b001b0334db65fd072"
+-SRC_URI[sha256sum] = "e6c3f8dbfde1c4523055403927bef29f97f9fc12715c1042b5dcf648a2c1c62a"
++SRC_URI[sha256sum] = "8e1b34763254935243ccdb83c6ce108f531876d7a5dfd443f255e6418b8ea313"
+ 
+-S = "${WORKDIR}/${BPN}-stable_release_${PV}"
++EXTRA_OECONF_append_class-native = " PS2PDF=/bin/echo"
+ 
+ EXTRA_OECONF_class-target = "\
+                 --with-expatincludedir=${STAGING_INCDIR} \
+-- 
+2.29.2
 
->
-> On 11/3/20 10:33 AM, Khem Raj wrote:
-> > On Mon, Nov 2, 2020 at 6:31 PM Yi Zhao <yi.zhao@windriver.com> wrote:
-> >>
-> >> On 11/3/20 12:26 AM, Khem Raj wrote:
-> >>> On Mon, Nov 2, 2020 at 1:13 AM Yi Zhao <yi.zhao@windriver.com> wrote:
-> >>>> Make the volatiles file name starts with digital.
-> >>> what does this get us ?
-> >>
-> >> Just want to make all volatiles file names uniform. I searched oe-core
-> >> and meta-openembedded, only pulseaudio and quagga volatiles file names
-> >> are not start with number value.
-> >> $ ls /etc/default/volatiles
-> >> 00_core  01_bootlogd  99_dbus  99_sshd  99_wpa_supplicant
-> >> volatiles.03_quagga  volatiles.04_pulse
-> > this will change the order of their execution, is the new order still
-> > working without other side effects
->
->
-> I have tested the changes and didn't find any side effects:
-> 1. The volatile file only creates directories under /var/run or /var/log
-> for its own package. It doesn't impact other packages.
-> 2. The populate-volatile.sh service runs on RCS.d
-> 3. The 00_create volatile file always run first to make sure the base
-> directories /var/log, /var/run are created.
->
->
-> //Yi
->
->
-> >> //Yi
-> >>
-> >>
-> >>>> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> >>>> ---
-> >>>>    meta-networking/recipes-protocols/quagga/quagga.inc | 4 ++--
-> >>>>    1 file changed, 2 insertions(+), 2 deletions(-)
-> >>>>
-> >>>> diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc
-> b/meta-networking/recipes-protocols/quagga/quagga.inc
-> >>>> index 11b7d576a..6df72427b 100644
-> >>>> --- a/meta-networking/recipes-protocols/quagga/quagga.inc
-> >>>> +++ b/meta-networking/recipes-protocols/quagga/quagga.inc
-> >>>> @@ -81,7 +81,7 @@ do_install () {
-> >>>>        install -m 0644 ${WORKDIR}/watchquagga.default
-> ${D}${sysconfdir}/default/watchquagga
-> >>>>        install -m 0755 ${WORKDIR}/quagga.init
-> ${D}${sysconfdir}/init.d/quagga
-> >>>>        install -m 0755 ${WORKDIR}/watchquagga.init
-> ${D}${sysconfdir}/init.d/watchquagga
-> >>>> -    install -m 0644 ${WORKDIR}/volatiles.03_quagga
-> ${D}${sysconfdir}/default/volatiles/volatiles.03_quagga
-> >>>> +    install -m 0644 ${WORKDIR}/volatiles.03_quagga
-> ${D}${sysconfdir}/default/volatiles/03_quagga
-> >>>>
-> >>>>        # Install sample configurations for the daemons
-> >>>>        for f in bgpd vtysh isisd ospfd ripngd zebra ripd ospf6d; do
-> >>>> @@ -106,7 +106,7 @@ do_install () {
-> >>>>        sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/*
-> >>>>        sed -i 's!/usr/bin/!${bindir}/!g'
-> ${D}${sysconfdir}/init.d/quagga
-> >>>>        sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/*
-> ${D}${sysconfdir}/default/watchquagga
-> >>>> -    sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/*
-> ${D}${sysconfdir}/default/volatiles/volatiles.03_quagga
-> >>>> +    sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/*
-> ${D}${sysconfdir}/default/volatiles/03_quagga
-> >>>>        sed -i
-> 's!^PATH=.*!PATH=${base_sbindir}:${sbindir}:${base_bindir}:${bindir}!'
-> ${D}${sysconfdir}/init.d/*
-> >>>>        sed -i 's!--with-libtool-sysroot=[^ "]*!!'
-> ${D}${includedir}/quagga/version.h
-> >>>>
-> >>>> --
-> >>>> 2.17.1
-> >>>>
-> >>>>
-> >>>> 
-> >>>>
->
-
---000000000000d092d505b32c5918
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div>Ok, thanks.</div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
-class=3D"gmail_attr">On Mon, Nov 2, 2020 at 6:50 PM Yi Zhao &lt;<a href=3D"=
-mailto:yi.zhao@windriver.com">yi.zhao@windriver.com</a>&gt; wrote:<br></div=
-><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
--left-width:1px;border-left-style:solid;padding-left:1ex;border-left-color:=
-rgb(204,204,204)"><br>
-On 11/3/20 10:33 AM, Khem Raj wrote:<br>
-&gt; On Mon, Nov 2, 2020 at 6:31 PM Yi Zhao &lt;<a href=3D"mailto:yi.zhao@=
-windriver.com" target=3D"_blank">yi.zhao@windriver.com</a>&gt; wrote:<br>
-&gt;&gt;<br>
-&gt;&gt; On 11/3/20 12:26 AM, Khem Raj wrote:<br>
-&gt;&gt;&gt; On Mon, Nov 2, 2020 at 1:13 AM Yi Zhao &lt;<a href=3D"mailto:=
-yi.zhao@windriver.com" target=3D"_blank">yi.zhao@windriver.com</a>&gt; wrot=
-e:<br>
-&gt;&gt;&gt;&gt; Make the volatiles file name starts with digital.<br>
-&gt;&gt;&gt; what does this get us ?<br>
-&gt;&gt;<br>
-&gt;&gt; Just want to make all volatiles file names uniform. I searched oe=
--core<br>
-&gt;&gt; and meta-openembedded, only pulseaudio and quagga volatiles file =
-names<br>
-&gt;&gt; are not start with number value.<br>
-&gt;&gt; $ ls /etc/default/volatiles<br>
-&gt;&gt; 00_core=C2=A0 01_bootlogd=C2=A0 99_dbus=C2=A0 99_sshd=C2=A0 99_wp=
-a_supplicant<br>
-&gt;&gt; volatiles.03_quagga=C2=A0 volatiles.04_pulse<br>
-&gt; this will change the order of their execution, is the new order still=
-<br>
-&gt; working without other side effects<br>
-<br>
-<br>
-I have tested the changes and didn&#39;t find any side effects:<br>
-1. The volatile file only creates directories under /var/run or /var/log <=
-br>
-for its own package. It doesn&#39;t impact other packages.<br>
-2. The populate-volatile.sh service runs on RCS.d<br>
-3. The 00_create volatile file always run first to make sure the base <br>
-directories /var/log, /var/run are created.<br>
-<br>
-<br>
-//Yi<br>
-<br>
-<br>
-&gt;&gt; //Yi<br>
-&gt;&gt;<br>
-&gt;&gt;<br>
-&gt;&gt;&gt;&gt; Signed-off-by: Yi Zhao &lt;<a href=3D"mailto:yi.zhao@wind=
-river.com" target=3D"_blank">yi.zhao@windriver.com</a>&gt;<br>
-&gt;&gt;&gt;&gt; ---<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 meta-networking/recipes-protocols/quagga/qua=
-gga.inc | 4 ++--<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 1 file changed, 2 insertions(+), 2 deletions=
-(-)<br>
-&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt; diff --git a/meta-networking/recipes-protocols/quagga/qua=
-gga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc<br>
-&gt;&gt;&gt;&gt; index 11b7d576a..6df72427b 100644<br>
-&gt;&gt;&gt;&gt; --- a/meta-networking/recipes-protocols/quagga/quagga.inc=
-<br>
-&gt;&gt;&gt;&gt; +++ b/meta-networking/recipes-protocols/quagga/quagga.inc=
-<br>
-&gt;&gt;&gt;&gt; @@ -81,7 +81,7 @@ do_install () {<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 install -m 0644 ${WORKDIR}/wat=
-chquagga.default ${D}${sysconfdir}/default/watchquagga<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 install -m 0755 ${WORKDIR}/qua=
-gga.init ${D}${sysconfdir}/init.d/quagga<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 install -m 0755 ${WORKDIR}/wat=
-chquagga.init ${D}${sysconfdir}/init.d/watchquagga<br>
-&gt;&gt;&gt;&gt; -=C2=A0 =C2=A0 install -m 0644 ${WORKDIR}/volatiles.03_qu=
-agga=C2=A0 ${D}${sysconfdir}/default/volatiles/volatiles.03_quagga<br>
-&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 install -m 0644 ${WORKDIR}/volatiles.03_qu=
-agga=C2=A0 ${D}${sysconfdir}/default/volatiles/03_quagga<br>
-&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 # Install sample configuration=
-s for the daemons<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 for f in bgpd vtysh isisd ospf=
-d ripngd zebra ripd ospf6d; do<br>
-&gt;&gt;&gt;&gt; @@ -106,7 +106,7 @@ do_install () {<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 sed -i &#39;s!/usr/sbin/!${sbi=
-ndir}/!g&#39; ${D}${sysconfdir}/init.d/*<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 sed -i &#39;s!/usr/bin/!${bind=
-ir}/!g&#39; ${D}${sysconfdir}/init.d/quagga<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 sed -i &#39;s!/etc/!${sysconfd=
-ir}/!g&#39; ${D}${sysconfdir}/init.d/* ${D}${sysconfdir}/default/watchquagg=
-a<br>
-&gt;&gt;&gt;&gt; -=C2=A0 =C2=A0 sed -i &#39;s!/var/!${localstatedir}/!g&#3=
-9; ${D}${sysconfdir}/init.d/* ${D}${sysconfdir}/default/volatiles/volatiles=
-.03_quagga<br>
-&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 sed -i &#39;s!/var/!${localstatedir}/!g&#3=
-9; ${D}${sysconfdir}/init.d/* ${D}${sysconfdir}/default/volatiles/03_quagga=
-<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 sed -i &#39;s!^PATH=3D.*!PATH=
-=3D${base_sbindir}:${sbindir}:${base_bindir}:${bindir}!&#39; ${D}${sysconf=
-dir}/init.d/*<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 sed -i &#39;s!--with-libtool-s=
-ysroot=3D[^ &quot;]*!!&#39; ${D}${includedir}/quagga/version.h<br>
-&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt; --<br>
-&gt;&gt;&gt;&gt; 2.17.1<br>
-&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt; <br>
-&gt;&gt;&gt;&gt;<br>
-</blockquote></div></div>
-
---000000000000d092d505b32c5918--
