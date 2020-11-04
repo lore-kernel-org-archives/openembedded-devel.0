@@ -1,17 +1,17 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.53])
- by mx.groups.io with SMTP id smtpd.web09.13856.1604501113363544936
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.46])
+ by mx.groups.io with SMTP id smtpd.web09.13860.1604501134025361224
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Nov 2020 06:45:13 -0800
+ Wed, 04 Nov 2020 06:45:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=ZajzPDTv;
- spf=pass (domain: windriver.com, ip: 40.107.243.53, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Nd3hQCPf;
+ spf=pass (domain: windriver.com, ip: 40.107.243.46, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dPuxfayOFEvQ6vqqca3HmAHtPQnSWgOQmUyqW/0FAfI90kc41s8h1mEsabLJCZyPbjtJxkv7oxG6BLBiqq9p5G1oDqX7hdE5akaRxYBRHeaToX0Ohwc47s4Gvt4L0jMXvLsu/AlB2AmU0vkr4yaZPJ8/QFB6SVy3LP7brGKyKfjwLu/UjX7mphCYVw9o7/1BPEdRRPfXnQ4sXEUWE9P6gn31BrrXJzZcI9v8++mjm/R7kkH4tLjhdj+4B8LEQiTIAzuwv0lzJuT6i9+G94e6hcfLMqniL61KsbqMRJPsNcPUC7baveD6x50Hme5rPIAlCg9zhVjFH5GDWBTxDK16iw==
+ b=XSQmtR3/QKi1udW0+W+vSHWe0mkQ0uSUNqofDaWv3wE4khn83tHQLxwHKQbSvCZox8nSgawd+LQDuLSqzdboBHnCRLqEGVomKw6KSBxmbxI9QDAhDwgcd1XMV/9W5zSF7hyYar7DuqQJ75x5i484S/2F/Jk4oCwrUNdug+FUbGmxW3W0IZNhBxXK0ixTP8Xisz5vnd5PfE3CWtnY5J18L977UmGaYmVdNSL92LWzJqaRL009Nr43FNYyO7RwtKeXtHbfftJphPAvw20hsudSEUWGQvTVtswaQ7nXMCx5aqaFwsm3xWidU0kl3ZeSNQO6SdOHLu6mwEMkdxCPOnMpeQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=H33jGtvQiHFBxjIJWtW8ayZ2YZ8FSPlN90nRXw7vZpk=;
- b=Pkaq3ekRw5kJhm5g7voV6oImPtKfqoSJU3pUldPrDXjsZxxSjM6HAhpuyORnZBucn47oesYR8ud01kb3bVsnHirwUzuNT3isPlP/x4XvM1/xzSHyy0e3zuqs42IaPAZx7Mjx3n1IJFF5csJSw69WL8GpsWTrRyKoRpEkd8hH2XcJ9RIp9z/aRFtxqgOwfjRDQIuAkJs94ZaLJjYMDkQnI7OFBb0eXtzAIrITp4iGwwSlIwWPrg4aN9aZHJ0TyVpfPY802YSDAwMLfo8lXSp43GLMyDjFopB+i376VZon9iXIozAYfO+DWg+vo0N5xEFh3ZTSX7ASppUlz/LlxCGayw==
+ bh=3yPcdALIizRnWHT14yUTUY0zesOVATlxIaP0vxL3ZVc=;
+ b=lwo7a7DaPQRrqPApKdoT5gbieG39WvSCaOI7jZ0vcwTzRmlU/YRwHhvGY0CQ1Zogn5bhLpUDFxuJU1K+GJ3becs9XT0F5nXWfWskz7VZQEkt4xd+UFQrWSRktkyQkfpiG3uQFb/PMiVZ27Zj3LGRizY1E4z64y1OWkPHD1/82/tu7aOxiU8Lbx7gG/jtaCcKy0KtJCNk6Sz4QJkaF5JFJ7FgQMnDXXicOdV3l2ZrS9nFVDTWzICg44ardmnqSpj2XVFpwAEixbpivJc03p1fgmCPlor6/OE/WSbUX9dCD+1tkWbuP/QMPFbUlCTJicc0FD3ms/dYDTc4t3mfNIetkQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=H33jGtvQiHFBxjIJWtW8ayZ2YZ8FSPlN90nRXw7vZpk=;
- b=ZajzPDTvKUiwVTCX5dl9omipX1W0rQAzqPuN3HCtyKoWlh3J72szji5HyCINl4FUkWEekVcuQX+JPzap6WjGns76F6+bTIYm/DWhS5M1iy8OkVqFNqeMesCm03mXvcsWzskWUzr1Fd2tQH51zo0n0hbGLTJgUbeOa9DnphRd7H0=
+ bh=3yPcdALIizRnWHT14yUTUY0zesOVATlxIaP0vxL3ZVc=;
+ b=Nd3hQCPfKDl9a+/JxTv/orrwdVCQ8nA/kxJQIbY9wh5Il6zy6kkqRsVxa06oAGyg581/DMD0yA0JpcSh4bZiyU3qZCWc0lccV6SDrz/i+bhaFJQ139KVba0X2iwoYrcft51bi7s6gcQlVdRNC9rW9boZ/NSH7u6bW1WkjFWu06s=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,99 +28,107 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by SJ0PR11MB5085.namprd11.prod.outlook.com (2603:10b6:a03:2db::10) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3499.27; Wed, 4 Nov
- 2020 14:45:11 +0000
+ 2020 14:45:33 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::7875:99b3:15ae:5df2]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::7875:99b3:15ae:5df2%7]) with mapi id 15.20.3499.032; Wed, 4 Nov 2020
- 14:45:11 +0000
-Subject: Re: [oe] [meta-python][PATCH 3/5] python3-u-msgpack-python: Upgrade 2.7.0 -> 2.7.1
+ 14:45:33 +0000
+Subject: Re: [oe] [meta-python][PATCH 4/5] python3-luma-core: Upgrade 1.17.2 -> 1.17.3
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20201026115041.11671-1-leon.anavi@konsulko.com>
- <20201026115041.11671-3-leon.anavi@konsulko.com>
+ <20201026115041.11671-4-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <b67b2ebe-4763-8b0f-c601-1aab4f9b5e3e@windriver.com>
-Date: Wed, 4 Nov 2020 09:45:09 -0500
+Message-ID: <b8966f7e-8a61-5551-0f5d-632c913106ae@windriver.com>
+Date: Wed, 4 Nov 2020 09:45:30 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.3.1
-In-Reply-To: <20201026115041.11671-3-leon.anavi@konsulko.com>
+In-Reply-To: <20201026115041.11671-4-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BYAPR05CA0029.namprd05.prod.outlook.com
- (2603:10b6:a03:c0::42) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BYAPR05CA0004.namprd05.prod.outlook.com
+ (2603:10b6:a03:c0::17) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BYAPR05CA0029.namprd05.prod.outlook.com (2603:10b6:a03:c0::42) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.10 via Frontend Transport; Wed, 4 Nov 2020 14:45:10 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BYAPR05CA0004.namprd05.prod.outlook.com (2603:10b6:a03:c0::17) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.10 via Frontend Transport; Wed, 4 Nov 2020 14:45:32 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a6bffd55-a816-44b0-1e5c-08d880d03b36
+X-MS-Office365-Filtering-Correlation-Id: 100afe56-ff62-4d12-27ab-08d880d04844
 X-MS-TrafficTypeDiagnostic: SJ0PR11MB5085:
 X-Microsoft-Antispam-PRVS: 
-	<SJ0PR11MB50857B1C0EB7D0D9E0D74F0E9FEF0@SJ0PR11MB5085.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:102;
+	<SJ0PR11MB50850BFEFE3254CB054177449FEF0@SJ0PR11MB5085.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1091;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	eX1zi39+7MFEE0wyq8vPgsvdjBQjhQgEIdwAWoiDUeTI9pKYnXLQAxF0yCwe5gj5H1ijEGha24bjRT/ANrQvHh+1hmMA+A6D2qORVAZ1m8BspZEI9IISHY9M7FtkrVPfssTJ9dDP3Zk/4RqbO46XSRhl2pTW6LU0IjNdFHRNS79YTLqfhTt5Y9/KnBWSQLMa5rNMrsmZF/J63qD5rlX0Eivc7FTPfxhxeh1YB2VWtrm0ioIMe2LE6wCNCeD84UdBrB66kI335XgX/nuIbyJC1myPiBFOiknVrHRIbGFlTzBXBQShXGLnhCB+/8oETdq04Uu8X6doiq4FhuziTEHxguhvISsJJ+GmyyE4EcJvQXWRHyFNFgwSZttuxwpefKwDnhJWq4eIz1sv0rhyRuknDv/23VJaeflGRXgEfj7eu5EU8kTScONrqCPrP3mivUO21nLwirWAal+zeRtq5uDiHg==
+	hFonIfZ4KLKDwyABkx35QmBy58xVNxyECvEwri92y5Ng1tPjOYwy328ipTamBizmhrmkv9r72U/8OKofjnZ/dlW6/HmrS7ZeNuJr/+7sVF27RCgq8WzEzE/uOn12NWQA7fNAY45bw/kl0EUjFOBxSx91dqrQ1/ejYhooFZIEvnp3b4BXi84gDxuvzXeMDw31qbsnyEfdR/JI0y7FIr01dKI5cFMv98dqFYciZnw9OLHqEkeo7SvzZXN2Isj5JKSYgTX1mO6JAwwS+4VpxOO6hCmUzFZDEXBqabpMYaRw7b2EIKqKAra8g0s2EKMVEogMUUQrCR0weLQYSR9uBv/zRC3xMIkT20aHAub3FZGlKyR8rXiOoo4iB6Ujap1irIQcdcJrBwg3gRsSxO0QaobHxTgbDHO07imu/YjsDr8Owx94iM+7qSS1Ye4Y5pfeYxFFv3U1CdOi7ixb/bLi93msvw==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(396003)(39850400004)(136003)(366004)(376002)(8936002)(36756003)(6486002)(166002)(5660300002)(8676002)(33964004)(53546011)(66946007)(86362001)(66556008)(66476007)(44832011)(83380400001)(52116002)(478600001)(2616005)(956004)(2906002)(31686004)(316002)(186003)(16526019)(966005)(16576012)(26005)(31696002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	t5blMzfk1cmyEc6Iq5Lcdl+0nQqu/V8yxOGGu5IqkXoNlb8yg6ak0m7dS4XLiy50aTaxSNQZfR5Xm5jqtmXI8arfrhIq8ho+8euzcvr7XZsATYFu+IYalNJT3iCQFJ9bxzupqyLtamc+5kQ++xuTYzpkZfMYsmD+FCgZBj6Sn0Czygv8rkIG9WIsKBQ44Q02E88w/4zgjgTmeJffTdz001LL8O1SubtQcluBwnJV0PHc5Oi3zlDgMVjQ2jS802w4/InWD5bBzh7/mn5FfUnuIxqbhbaymhfeViXaNQ1YK7cnqymbehd4we1L8Wsdmmq1i+j6g4tqcLgYE9YUPpVK1E12xErRj/m4p/yk5yGd901iA+RkR35I0DE3vEWcvMjzoMF3gYvG90D84JIgjV5u4K9kydzdorR1bFz3SKSMPh0a3yYyHxuu4B3QGWoyM/MAOBrfnq+tePFfo+UpUgZZ96OVBw5sPX1F4E/CApFHQ48cvlUBH3dLHYrr6lth9XTBuBMnlMoBQWMyC5oW/gAYZq+1e8RnrbqoGCWAdg2MUJc2HcIWbdobOlkIgGKUXbbcC58DwVmZcMEK9frVJhrIXdP0OonXXWA2OO1CsEstfXqtlv56DXC/I6hhioDOgJQS/WNhmuJH0wOusr2rxKYyBQ==
+	1qrQBKv6kP8dSGr2RXp+dD8R/CJDh3WiX1edcIhDiaOqgZzrrHFSyYHruhSzO5dZYLYKWZomNZ1V4oQY1wxU7n6WGoWfZgFzRKYhp6ggEAO1Q6Y2dFNawfsN9MpxHrwY78L+njlVsAlM6Bt86LRuawJP50da2t7NRN/mwWCeAEm9nAHzhoqG7wMiGjSrvNhmuv45SRa0IiOGIOugX/Rr/Ua577A+Oqzm2eu6bKcmGG7vJHf4RAc1yQKcfaZsEyLU63G+9LEzZEmeSz8ssESFwt556QJRnhPEdDwdNGv+biWwyhxa65vw/vSEEEDZbpXRs3VtY+XLm82og/hOmglWSsbOE/dLzAGTW5Ak3Un5V+7CD09eSciGHTKQJy40y/b0BqYzYfbprpoTJuBv2poGpx+VMjWVeycthm5LqBt6kYDLAAsPEd+p1CtkHzQgxUNcyccZIrX3K0A3gblzJ4JSQ+Vl54UytgOjavYs517Uy1Fy5jIBwIwLCn2kvBOWCol6xKW5DYJdCSigQeserv/h+XRu5c1CunV1LV6vcDSfyVRxrN26NCyjtwhrhtHynzb8WVWWLFNndybNzxWpIPS++cj2NWbTtGGYuJRkY+ecovP2TZtyQiycXnI7NKPsSbBD4lOVZxu8zm2O8MWgbNFDYQ==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a6bffd55-a816-44b0-1e5c-08d880d03b36
+X-MS-Exchange-CrossTenant-Network-Message-Id: 100afe56-ff62-4d12-27ab-08d880d04844
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2020 14:45:11.0439
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2020 14:45:32.9412
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: J9F2L0dyLq9RIM9i6ZNCIkbO38UOvlqX2v74za0jNB1qf5heHiHO0f8WGItOpQRYsvffJOHsOg1lkgvdPxMTGIDbnbq74hVbz9xspm7uEP8=
+X-MS-Exchange-CrossTenant-UserPrincipalName: lKhhxL1MbASZTypI0gbea1w4NF5zdfrLr2Fa6Xm7yFOBGchRDlPM7wcjSmCBPVC0fgrZUSO0Death9kaLoDiYaGjjnx7VCneG1P7+LkICWM=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB5085
 Content-Type: multipart/alternative;
- boundary="------------50E5310F77FE45CEE81E3178"
+ boundary="------------69C8E033B2C6732FDE482FF9"
 Content-Language: en-US
 
---------------50E5310F77FE45CEE81E3178
+--------------69C8E033B2C6732FDE482FF9
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 10/26/20 7:50 AM, Leon Anavi wrote:
-> - Add Ext type value validation to Ext class and
->    ext_serializable() decorator
-> - Change string formatting from % to .format() throughout codebase
+> - Drop support for Python 3.5, only 3.6 or newer is supported now
+> - Add missing cmdline interfaces: "noop" & "gpio_cs_spi"
+> - Legacy proportional font wrapper raises user-friendly error
+>    message when character is not in the font table
+>
+> License-Update: Update year
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...pack-python_2.7.0.bb => python3-u-msgpack-python_2.7.1.bb} | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-u-msgpack-python_2.7.0.bb => python3-u-msgpack-python_2.7.1.bb} (77%)
+>   ...hon3-luma-core_1.17.2.bb => python3-luma-core_1.17.3.bb} | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-luma-core_1.17.2.bb => python3-luma-core_1.17.3.bb} (62%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.0.bb b/meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.1.bb
-> similarity index 77%
-> rename from meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.0.bb
-> rename to meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.1.bb
-> index 4797a3535f..c5524d152e 100644
-> --- a/meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.1.bb
-> @@ -3,8 +3,8 @@ DESCRIPTION = "A portable, lightweight MessagePack serializer and deserializer w
+> diff --git a/meta-python/recipes-devtools/python/python3-luma-core_1.17.2.bb b/meta-python/recipes-devtools/python/python3-luma-core_1.17.3.bb
+> similarity index 62%
+> rename from meta-python/recipes-devtools/python/python3-luma-core_1.17.2.bb
+> rename to meta-python/recipes-devtools/python/python3-luma-core_1.17.3.bb
+> index 97786ff456..8301d7f77a 100644
+> --- a/meta-python/recipes-devtools/python/python3-luma-core_1.17.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-luma-core_1.17.3.bb
+> @@ -2,12 +2,12 @@ SUMMARY = "A component library to support SBC display drivers"
+>   DESCRIPTION = "A component library to support SBC display drivers"
+>   HOMEPAGE = "https://github.com/rm-hull/luma.core"
 >   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=9eb4691bcb66360acee473a8cf75f594"
+> -LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7"
+> +LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=db07e3d471938ea7d7fd2135f88ac9a1"
 >   
-> -SRC_URI[md5sum] = "231609d87aa58459a1491c8f5df4e4cd"
-> -SRC_URI[sha256sum] = "996e4c4454771f0ff0fd2a7566b1a159d305d3611cd755addf444e3533e2bc54"
-> +SRC_URI[md5sum] = "8691cea6bc7b44bce6e2115260a54323"
-> +SRC_URI[sha256sum] = "b7e7d433cab77171a4c752875d91836f3040306bab5063fb6dbe11f64ea69551"
+>   inherit pypi setuptools3
 >   
->   inherit pypi setuptools3 ptest
+> -SRC_URI[md5sum] = "4e4a5e85ccf19eba001d11d95b33b174"
+> -SRC_URI[sha256sum] = "d66b98e23470f023a6423273e9632180a1a941849f1417c69a708ca51861c993"
+> +SRC_URI[md5sum] = "c13303a123c32c1a8dc5bc089a920822"
+> +SRC_URI[sha256sum] = "1c928ad8e42af5fd395260176f89eb68a8af61911971f94124fabc9c6b550689"
+>   
+>   CLEANBROKEN = "1"
 >   
 >
 > 
 >
 
---------------50E5310F77FE45CEE81E3178
+--------------69C8E033B2C6732FDE482FF9
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -132,38 +140,46 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 10/26/20 7:50 AM, Leon Anavi wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20201026115041.11671-3-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Add Ext type value validation to Ext class and
-  ext_serializable() decorator
-- Change string formatting from % to .format() throughout codebase
+    <blockquote type="cite" cite="mid:20201026115041.11671-4-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">- Drop support for Python 3.5, only 3.6 or newer is supported now
+- Add missing cmdline interfaces: &quot;noop&quot; &amp; &quot;gpio_cs_spi&quot;
+- Legacy proportional font wrapper raises user-friendly error
+  message when character is not in the font table
+
+License-Update: Update year
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
-    <blockquote type="cite" cite="mid:20201026115041.11671-3-leon.anavi@konsulko.com">
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
+    <blockquote type="cite" cite="mid:20201026115041.11671-4-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...pack-python_2.7.0.bb =&gt; python3-u-msgpack-python_2.7.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-u-msgpack-python_2.7.0.bb =&gt; python3-u-msgpack-python_2.7.1.bb} (77%)
+ ...hon3-luma-core_1.17.2.bb =&gt; python3-luma-core_1.17.3.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-luma-core_1.17.2.bb =&gt; python3-luma-core_1.17.3.bb} (62%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.0.bb b/meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.1.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.0.bb
-rename to meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.1.bb
-index 4797a3535f..c5524d152e 100644
---- a/meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-u-msgpack-python_2.7.1.bb
-@@ -3,8 +3,8 @@ DESCRIPTION = &quot;A portable, lightweight MessagePack serializer and deserializer w
+diff --git a/meta-python/recipes-devtools/python/python3-luma-core_1.17.2.bb b/meta-python/recipes-devtools/python/python3-luma-core_1.17.3.bb
+similarity index 62%
+rename from meta-python/recipes-devtools/python/python3-luma-core_1.17.2.bb
+rename to meta-python/recipes-devtools/python/python3-luma-core_1.17.3.bb
+index 97786ff456..8301d7f77a 100644
+--- a/meta-python/recipes-devtools/python/python3-luma-core_1.17.2.bb
++++ b/meta-python/recipes-devtools/python/python3-luma-core_1.17.3.bb
+@@ -2,12 +2,12 @@ SUMMARY = &quot;A component library to support SBC display drivers&quot;
+ DESCRIPTION = &quot;A component library to support SBC display drivers&quot;
+ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/rm-hull/luma.core">&quot;https://github.com/rm-hull/luma.core&quot;</a>
  LICENSE = &quot;MIT&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=9eb4691bcb66360acee473a8cf75f594">&quot;file://LICENSE;md5=9eb4691bcb66360acee473a8cf75f594&quot;</a>
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7">&quot;file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7&quot;</a>
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.rst;md5=db07e3d471938ea7d7fd2135f88ac9a1">&quot;file://LICENSE.rst;md5=db07e3d471938ea7d7fd2135f88ac9a1&quot;</a>
  
--SRC_URI[md5sum] = &quot;231609d87aa58459a1491c8f5df4e4cd&quot;
--SRC_URI[sha256sum] = &quot;996e4c4454771f0ff0fd2a7566b1a159d305d3611cd755addf444e3533e2bc54&quot;
-+SRC_URI[md5sum] = &quot;8691cea6bc7b44bce6e2115260a54323&quot;
-+SRC_URI[sha256sum] = &quot;b7e7d433cab77171a4c752875d91836f3040306bab5063fb6dbe11f64ea69551&quot;
+ inherit pypi setuptools3
  
- inherit pypi setuptools3 ptest
+-SRC_URI[md5sum] = &quot;4e4a5e85ccf19eba001d11d95b33b174&quot;
+-SRC_URI[sha256sum] = &quot;d66b98e23470f023a6423273e9632180a1a941849f1417c69a708ca51861c993&quot;
++SRC_URI[md5sum] = &quot;c13303a123c32c1a8dc5bc089a920822&quot;
++SRC_URI[sha256sum] = &quot;1c928ad8e42af5fd395260176f89eb68a8af61911971f94124fabc9c6b550689&quot;
+ 
+ CLEANBROKEN = &quot;1&quot;
  
 </pre>
       <br>
@@ -176,4 +192,4 @@ index 4797a3535f..c5524d152e 100644
   </body>
 </html>
 
---------------50E5310F77FE45CEE81E3178--
+--------------69C8E033B2C6732FDE482FF9--
