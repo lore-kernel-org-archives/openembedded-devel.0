@@ -1,209 +1,438 @@
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.56])
- by mx.groups.io with SMTP id smtpd.web09.13903.1604501302681982277
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+ by mx.groups.io with SMTP id smtpd.web09.14539.1604503842767967610
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Nov 2020 06:48:22 -0800
+ Wed, 04 Nov 2020 07:30:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=cm+bD4Ep;
- spf=pass (domain: windriver.com, ip: 40.107.94.56, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IxCrxNvj7QRkwdIXMEzkH8jZtZEIjOXiwjntV+wDLisj+ryL1glOvjQSd1dTX/n2B6IiPwLSh7JPWgR6mo+ry5hRek0MEcjO8lhNXjvgeIQ+KRPNhPwdnrdHv+qASVO+aHrP2H002MS1W+GsmSujz14hEaGOcTDkApvjO7FSN2kdJGZwzZeIiVfORdKUt72582cDa38xongAJTpE+0mbh9hNkOf2oMKNZoXPBDQCD5B1ItJJ33/wzTrEotJCCZc3UaEbVyPkuvV4XIFu2YmtTUMQ+O7rYmJH0d2UyHMYEOqlaDyic3abAwXpefBCLfnEzwMLl/HYQIGvczXZwX0snw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N48p8tnbzY3wWIuJc5smU8KlvaArOyCUVeC+47sEU3s=;
- b=eJuXdvCJ7uDrRssrEDIhwUn+BThXW7xNBDBbYz3MjXy7Vp6wh5exS9VXpECMjRrZvG4T31m7AZw8tkaiAYA/qMfPpfCZGeQY3RAyHd2Wna3PDr9tTRkGiOilpRBb7o94BjJnp56qOfClquFEDlEvL4OEQTU834Za+kxvUAOOEDTn7L/dUAA0mAAsrf9IcyN23u8P898TooX38OFczNhGepaaXve5Ex1nMbdFd3oLxLW3wDbakOThy+FQOzVE1by+wjwuyuOFm3d6isBYiytlTn5p0l10ivJehtOM1mKn2AFAT+p2rlmhal/EizcYlLO9Py4rSxFUpp2ZX0rcqksaRQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=XMQ8ojbS;
+ spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f175.google.com with SMTP id c21so7542571oic.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Nov 2020 07:30:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N48p8tnbzY3wWIuJc5smU8KlvaArOyCUVeC+47sEU3s=;
- b=cm+bD4EppMxUDSfMFPn2OcA+qV91fHNA4QryU8qRDKzZWycD72iY7CQkN+8NBn7TltSR99D+4gN9AXU4MkGEUOuGen866+5hocYwabClZiDV8FX8lqj6tbPDmpMnpUGFyoOer54EGfFFUmRJNnbi/gy+PXG1ZvfMNRuQSm+yUp0=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by SJ0PR11MB5085.namprd11.prod.outlook.com (2603:10b6:a03:2db::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3499.27; Wed, 4 Nov
- 2020 14:48:20 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::7875:99b3:15ae:5df2]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::7875:99b3:15ae:5df2%7]) with mapi id 15.20.3499.032; Wed, 4 Nov 2020
- 14:48:20 +0000
-Subject: Re: [oe] [meta-python][PATCH 3/3] python3-ipython: Upgrade 7.18.1 -> 7.19.0
-To: Leon Anavi <leon.anavi@konsulko.com>,
- openembedded-devel@lists.openembedded.org
-References: <20201102100303.2377-1-leon.anavi@konsulko.com>
- <20201102100303.2377-3-leon.anavi@konsulko.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <c34fe066-f4ca-87d7-7865-503d2e3de8b8@windriver.com>
-Date: Wed, 4 Nov 2020 09:48:17 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.3.1
-In-Reply-To: <20201102100303.2377-3-leon.anavi@konsulko.com>
-X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: SJ0PR03CA0210.namprd03.prod.outlook.com
- (2603:10b6:a03:2ef::35) To BY5PR11MB3909.namprd11.prod.outlook.com
- (2603:10b6:a03:191::13)
-Return-Path: trevor.gamblin@windriver.com
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=AnhsWnkkdUjglJS+D5ldkcA4ViDYi6NNEmjoRz/E5eY=;
+        b=XMQ8ojbSU3QtI/kKMW+CN5gMwwIhkOeJAmgRVHB9yepPM9UC4KkitLvxeOVckgB9OG
+         WQcVbqWBAWLxkYt3917JC8yrTEEur5ELclun69qJLcYGx3KNFa1bilYhLkUvoQdodwfk
+         Hz6suBK8H8Db3uAbN04g0Gi3kbjpsDdxM82Fk5xlW1bor676IeKcZRnndb97RZAlYslI
+         lKMD0hAy9QAzgsRPdxU4ilspqhOVMdTuPazkNRI/zGIIFPTwsA3UTvNzTrTNEhwOmDA8
+         oaAnpNT7Mr1JrrkjUUo29X9qTFEHEL1oEmpCODQTw9Qojg9Fn6OX+H6VuapFCLeSg7hR
+         w4FA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=AnhsWnkkdUjglJS+D5ldkcA4ViDYi6NNEmjoRz/E5eY=;
+        b=o7+2zF0/0pdNcKDAnjHAdkJ6WBmLy3dDhZbG8EeJWc+o7j46Pc21eYPJXk4GnBaVXz
+         Nh0h68Ck0t3aSGSqwuRPU3pI1R+xzCFRYRN17CaEnh5kbRv1Kd7vgyFG5NvEGCrwN2H6
+         rNDkkEgu4qScVKIWmBKINnCZ6llfmP8dvn8EzhndUpjLcAqaKBWv5hdNFkrG49gN58qF
+         vWGoNi4xOvVFaVkUVCREmnMdvWVVYLzgdNiydFGj/oobkE5Eh7FaRGeH6mmkwE9+C3/1
+         ddCvrB7ekrd0s6FrXmZbfkeZeVDan/Q2sKzUMPNHaSKk6a9c8KfXcRcP+tQS0mVhS2Qt
+         5dog==
+X-Gm-Message-State: AOAM531jFJEzy7Ka8soUMLeClAounsZWrJXo3lCn1mYmLjNfOd/YJYLy
+	BbRGvPClm1Wy6ukRAaTpXFoV/fvXs8c=
+X-Google-Smtp-Source: ABdhPJwVTifl5iKz+WV9be9LJo/P8XFIqHOYTY61n1998PwfETTCrfnqJ38PFszFcKqkYW3kFF0lKA==
+X-Received: by 2002:aca:a842:: with SMTP id r63mr1283886oie.57.1604503841608;
+        Wed, 04 Nov 2020 07:30:41 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:30:8e77:15b6:d55c])
+        by smtp.gmail.com with ESMTPSA id l204sm507402oia.32.2020.11.04.07.30.40
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Nov 2020 07:30:41 -0800 (PST)
+From: "akuster" <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] README: updated Maintainers list for Gatesgarth
+Date: Wed,  4 Nov 2020 07:30:39 -0800
+Message-Id: <20201104153039.4432-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by SJ0PR03CA0210.namprd03.prod.outlook.com (2603:10b6:a03:2ef::35) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3499.19 via Frontend Transport; Wed, 4 Nov 2020 14:48:19 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 5ff09db1-ef23-45af-dea9-08d880d0abe2
-X-MS-TrafficTypeDiagnostic: SJ0PR11MB5085:
-X-Microsoft-Antispam-PRVS: 
-	<SJ0PR11MB50854F45CB0CE99FEA599F1D9FEF0@SJ0PR11MB5085.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5797;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	Y436aDir+RvnADt+TRmruTErHnrYkPhLiNqyfscvboPy+qJTDWP3TKZFGjbAstYtyhJYbCaqiMZ5RarRi1/4YKyLzLr9SyZpEtlXO035G0PFhdW01hC8kvoGFyMBhJTOQfPwzH8+mltbqNfxlXjfL1Nf3iSDVDZ1eRkOiVCxBwReqSTSe8p1plb2+Fj8m3ug2R90XJm9rHXDr63FlNfZxJReayEG8287mpr6CCjgxG53MWdNLsGh9la98dLWHB7wq5hGM4H8sdQZS/sfRRPfLUAlXeIOtioqrIPFlRZG1BEyGcfZufxgAmQyxamgqSi+tUtY3oIMyAHLEPhUjiTjB1h/QL5noDPGMosNe0NSTujDzuvuZkIMF+oavx6BQ9nuLnrZMC0VIzbHGUB/k2LhLQw3Pn+ntw73y8A50makfrEiR41w5a3H4qTcceYATruHnr3OoEjF/ve+E5ypForAvw==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(396003)(39850400004)(136003)(366004)(376002)(8936002)(36756003)(6486002)(166002)(5660300002)(8676002)(33964004)(53546011)(66946007)(86362001)(66556008)(66476007)(44832011)(83380400001)(52116002)(478600001)(2616005)(956004)(2906002)(31686004)(316002)(186003)(16526019)(966005)(16576012)(26005)(31696002)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	94QTvhfzKRESiHvXFpA3bNnNAi/gaNJBHHCn0mO2YdVStZiMypLpNY9NZigU3pVdFSQMM2Mb68ahjVhrVj3yl0eRlSYi/FU86rNmnBBoMJWeEFUaPN7p59uZ1Rd//ikfrBvbHPZksR+v/UuxxnVws0j36R+Y8oTSAi68LxMN5KmDGRR8JKoaBvj21+QzfdnEXWOK01O+CKFKFJHpFQ0IhrrY1nJs+m0yGlJMIQ77sHXifw1vGxeYaBIIbPwOlwsTyrOdRbyzjZEg8giC0BiDMmb+j53DLRu1Z9Nzhn2QskolbX7/imSVgXB2+myXPZrXDrBslR6FM5ATXlPaE1k8XbR0d3qh5VlO7cAaBollTKH32fISRZIhholaVtlr3cFYMoxL0WJYmcaGopukcqZFXnbegD9yzDNu6MOhoMn5zfUOHOuN3vq2A3BKilKVceSFnm+OsyMglVRZfM3YQc31YG7swTwiOc+dnrUdkjkh9rydjWlLwUq2Q3BjgCsetF9MuiL272I3pOQAnuK090r5c+8ZkO8To+u/8VgY0UgxcsNV1JI5fLR9kD6LLTfwO/nhSl0LKc39jZKDdQOzb40na3MPAP+X+v3s4lGolHxGeHAfh+WSNwPw1hpGa4glcAxM2Hc19G9Ej5Ae770JFnatCw==
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5ff09db1-ef23-45af-dea9-08d880d0abe2
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2020 14:48:20.0508
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ls+yGS59Tg+2VT+WA7bzqbarTpwBElnp/buna8VrA80sIEY3MBLFynZAZ48JLmWhqq3aFJ32o8cJu1Uin27Q3L9Kp3J5/CDKgN8BfQQ/n0E=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB5085
-Content-Type: multipart/alternative;
- boundary="------------02B51AF107042765C916238E"
-Content-Language: en-US
+Content-Type: text/plain; charset=y
+Content-Transfer-Encoding: 8bit
 
---------------02B51AF107042765C916238E
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-
-On 11/2/20 5:03 AM, Leon Anavi wrote:
-> [Please note this e-mail is from an EXTERNAL e-mail address]
->
-> Upgrade to release 7.19.0:
->
-> - Fix to restore the ability to specify more than one extension
->    using command line flags when using traitlets 5.0
-> - Docs docs formatting that make the install commands work on zsh
-> - Always display the last frame in tracebacks even if hidden with
->    __traceback_hide__
-> - Avoid an issue where a callback can be registered multiple times.
-> - Avoid an issue in debugger mode where frames changes could be
->    lost.
-> - Never hide the frames that invoke a debugger, even if marked as
->    hidden by __traceback_hide__
-> - Fix calling the debugger in a recursive manner
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   .../{python3-ipython_7.18.1.bb => python3-ipython_7.19.0.bb}  | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-ipython_7.18.1.bb => python3-ipython_7.19.0.bb} (83%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-ipython_7.18.1.bb b/meta-python/recipes-devtools/python/python3-ipython_7.19.0.bb
-> similarity index 83%
-> rename from meta-python/recipes-devtools/python/python3-ipython_7.18.1.bb
-> rename to meta-python/recipes-devtools/python/python3-ipython_7.19.0.bb
-> index 8ee92167d7..d3ce9f5ff4 100644
-> --- a/meta-python/recipes-devtools/python/python3-ipython_7.18.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-ipython_7.19.0.bb
-> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
->
->   PYPI_PACKAGE = "ipython"
->
-> -SRC_URI[md5sum] = "f2db1158dc40d70a31b6bbef86e74789"
-> -SRC_URI[sha256sum] = "a331e78086001931de9424940699691ad49dfb457cea31f5471eae7b78222d5e"
-> +SRC_URI[md5sum] = "33bdc8287c827aae23699751b0ed3f7a"
-> +SRC_URI[sha256sum] = "cbb2ef3d5961d44e6a963b9817d4ea4e1fa2eb589c371a470fed14d8d40cbd6a"
->
->   RDEPENDS_${PN} = "\
->       ${PYTHON_PN}-setuptools \
-> --
-> 2.17.1
->
->
-> 
->
-
---------------02B51AF107042765C916238E
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 11/2/20 5:03 AM, Leon Anavi wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20201102100303.2377-3-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">[Please note this e-mail is from an EXTERNAL e-mail address]
-
-Upgrade to release 7.19.0:
-
-- Fix to restore the ability to specify more than one extension
-  using command line flags when using traitlets 5.0
-- Docs docs formatting that make the install commands work on zsh
-- Always display the last frame in tracebacks even if hidden with
-  __traceback_hide__
-- Avoid an issue where a callback can be registered multiple times.
-- Avoid an issue in debugger mode where frames changes could be
-  lost.
-- Never hide the frames that invoke a debugger, even if marked as
-  hidden by __traceback_hide__
-- Fix calling the debugger in a recursive manner
-
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20201102100303.2377-3-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{python3-ipython_7.18.1.bb =&gt; python3-ipython_7.19.0.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-ipython_7.18.1.bb =&gt; python3-ipython_7.19.0.bb} (83%)
+ README                      |  2 +-
+ meta-filesystems/README     | 10 +++++-----
+ meta-gnome/README           | 10 +++++-----
+ meta-initramfs/README       |  8 ++++----
+ meta-multimedia/README      | 10 +++++-----
+ meta-networking/MAINTAINERS | 32 +++-----------------------------
+ meta-networking/README      |  6 +++---
+ meta-oe/README              |  6 +++---
+ meta-perl/README            | 10 ++++------
+ meta-python/README          | 14 +++++---------
+ meta-webserver/README       |  8 ++++----
+ meta-xfce/README            | 10 +++++-----
+ 12 files changed, 47 insertions(+), 79 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ipython_7.18.1.bb b/meta-python/recipes-devtools/python/python3-ipython_7.19.0.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-ipython_7.18.1.bb
-rename to meta-python/recipes-devtools/python/python3-ipython_7.19.0.bb
-index 8ee92167d7..d3ce9f5ff4 100644
---- a/meta-python/recipes-devtools/python/python3-ipython_7.18.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-ipython_7.19.0.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f">&quot;file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f&quot;</a>
-
- PYPI_PACKAGE = &quot;ipython&quot;
-
--SRC_URI[md5sum] = &quot;f2db1158dc40d70a31b6bbef86e74789&quot;
--SRC_URI[sha256sum] = &quot;a331e78086001931de9424940699691ad49dfb457cea31f5471eae7b78222d5e&quot;
-+SRC_URI[md5sum] = &quot;33bdc8287c827aae23699751b0ed3f7a&quot;
-+SRC_URI[sha256sum] = &quot;cbb2ef3d5961d44e6a963b9817d4ea4e1fa2eb589c371a470fed14d8d40cbd6a&quot;
-
- RDEPENDS_${PN} = &quot;\
-     ${PYTHON_PN}-setuptools \
---
+diff --git a/README b/README
+index 7318f09cdb..66cb7af51e 100644
+--- a/README
++++ b/README
+@@ -1,6 +1,6 @@
+ Collection of layers for the OE-core universe
+ 
+-Main layer maintainer: Khem Raj <raj.khem@gmail.com>
++gatesgarth maintainer: Armin Kuster  <akuster808@gmail.com>
+ 
+ This repository is a collection of layers to suppliment OE-Core
+ with additional packages, Each layer have designated maintainer
+diff --git a/meta-filesystems/README b/meta-filesystems/README
+index edcf8bfeef..fe7b77e1af 100644
+--- a/meta-filesystems/README
++++ b/meta-filesystems/README
+@@ -11,26 +11,26 @@ This layer depends on:
+ 
+   URI: git://git.openembedded.org/openembedded-core
+   layers: meta
+-  branch: master
++  branch: gatesgarth
+ 
+   URI: git://git.openembedded.org/meta-openembedded
+   layers: meta-oe
+-  branch: master
++  branch: gatesgarth
+ 
+ Patches
+ =======
+ 
+ Please submit any patches against the filesystems layer to the
+ OpenEmbedded development mailing list (openembedded-devel@lists.openembedded.org)
+-with '[meta-filesystems]' in the subject.
++with '[meta-filesystems][gatesgarth]' in the subject.
+ 
+-Layer maintainer: Khem Raj <raj.khem@gmail.com>
++gatesgarth maintainer: Armin Kuster <akuster808@gmail.com>
+ 
+ When sending single patches, please use something like:
+ 
+    git send-email -1 -M \
+         --to openembedded-devel@lists.openembedded.org \
+-        --subject-prefix=meta-filesystems][PATCH
++        --subject-prefix=meta-filesystems][gatesgarth][PATCH
+ 
+ 
+ Table of Contents
+diff --git a/meta-gnome/README b/meta-gnome/README
+index a11815fb15..db6ad0b902 100644
+--- a/meta-gnome/README
++++ b/meta-gnome/README
+@@ -3,16 +3,16 @@ Dependencies
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+-branch: master
++branch: gatesgarth
+ revision: HEAD
+ 
+ URI: git://github.com/openembedded/meta-oe.git
+-branch: master
++branch: gatesgarth
+ revision: HEAD
+ 
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gnome]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gnome][gatesgarth]' in the subject'
+ 
+ When sending single patches, please using something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-gnome][PATCH'
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-gnome][gatesgarth][PATCH'
+ 
+-Layer maintainer: Andreas Müller <schnitzeltony@gmail.com>
++maintainer: Armin Kuster <akuster808@gmail.com>
+diff --git a/meta-initramfs/README b/meta-initramfs/README
+index 79244d43f0..079bf7e01c 100644
+--- a/meta-initramfs/README
++++ b/meta-initramfs/README
+@@ -12,7 +12,7 @@ Dependencies
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+-branch: master
++branch: gatesgarth
+ revision: HEAD
+ 
+ 
+@@ -20,12 +20,12 @@ Maintenance
+ -----------
+ 
+ Send patches / pull requests to openembedded-devel@lists.openembedded.org
+-with '[meta-initramfs]' in the subject.
++with '[meta-initramfs][gatesgarth]' in the subject.
+ 
+ When sending single patches, please using something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-initramfs][PATCH'
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-initramfs][gatesgarth][PATCH'
+ 
+-Interm layer maintainer: Khem Raj <raj.khem@gmail.com>
++gatesgarth maintainer: Armin Kuster <akuster808@gmail.com>
+ 
+ 
+ License
+diff --git a/meta-multimedia/README b/meta-multimedia/README
+index b4c2455a11..cf5c0dea35 100644
+--- a/meta-multimedia/README
++++ b/meta-multimedia/README
+@@ -1,19 +1,19 @@
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+-branch: master
++branch: gatesgarth
+ revision: HEAD
+ 
+ URI: git://github.com/openembedded/meta-oe.git
+ layers: meta-oe
+-branch: master
++branch: gatesgarth
+ revision: HEAD
+ 
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-multimedia]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-multimedia][gatesgarth]' in the subject'
+ 
+ When sending single patches, please use something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-multimedia][PATCH
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-multimedia][gatesgarth][PATCH
+ 
+ You are encouraged to fork the mirror on github https://github.com/openembedded/meta-openembedded to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like GitLab, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
+ 
+-Layer maintainer: Andreas Müller <schnitzeltony@gmail.com>
++gatesgarth maintainer: Armin Kuster <akuster808@gmail.com>
+diff --git a/meta-networking/MAINTAINERS b/meta-networking/MAINTAINERS
+index 5c4c4ce052..9f756a6735 100644
+--- a/meta-networking/MAINTAINERS
++++ b/meta-networking/MAINTAINERS
+@@ -2,38 +2,12 @@ This file contains a list of maintainers for the meta-networking layer.
+ 
+ Please submit any patches against meta-networking to the OpenEmbedded
+ development mailing list (openembedded-devel@lists.openembedded.org) with
+-'[meta-networking]' in the subject.
++'[meta-networking][gatesgarth]' in the subject.
+ 
+ When sending single patches, please use something like:
+ 
+    git send-email -1 -M \
+         --to openembedded-devel@lists.openembedded.org \
+-        --subject-prefix=meta-networking][PATCH
++        --subject-prefix=meta-networking][gatesgarth][PATCH
+ 
+-You may also contact the maintainers directly.
+-
+-Descriptions of section entries:
+-
+-        M: Mail patches to: FullName <address@domain>
+-        F: Files and directories with wildcard patterns.
+-           A trailing slash includes all files and subdirectory files.
+-           F: recipes-devtools/    all files in and below recipes-devtools
+-           F: recipes-selinux/*    all files in recipes-selinux, but not below
+-           One pattern per line.  Multiple F: lines acceptable.
+-
+-Please keep this list in alphabetical order.
+-
+-Maintainers List (try to look for most precise areas first)
+-
+-COMMON
+-M:      Khem Raj <raj.khem@gmail.com>
+-M:      "Joe MacDonald (backup)" <joe@deserted.net>
+-L:      openembedded-devel@lists.openembedded.org
+-Q:      https://patchwork.openembedded.org/project/oe/
+-S:      Maintained
+-F:      conf
+-F:      recipes-*
+-
+-NETKIT
+-M:      Armin Kuster <akuster808@gmail.com>
+-F:      recipes-netkit
++gatesgarth Maintainer:      Armin Kuster <akuster808@gmail.com>
+diff --git a/meta-networking/README b/meta-networking/README
+index e1ba27d83b..b761bc5e5a 100644
+--- a/meta-networking/README
++++ b/meta-networking/README
+@@ -18,19 +18,19 @@ Dependencies
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/openembedded-core.git
+-branch: master
++branch: gatesgarth
+ revision: HEAD
+ 
+ For some recipes, the meta-oe layer is required:
+ 
+ URI: git://github.com/openembedded/meta-openembedded.git
+ subdirectory: meta-oe
+-branch: master
++branch: gatesgarth
+ revision: HEAD
+ 
+ URI: git://github.com/openembedded/meta-openembedded.git
+ subdirectory: meta-python
+-branch: master
++branch: gatesgarth
+ revision: HEAD
+ 
+ Maintenance
+diff --git a/meta-oe/README b/meta-oe/README
+index 8d787df68b..65eea2b320 100644
+--- a/meta-oe/README
++++ b/meta-oe/README
+@@ -4,7 +4,7 @@ meta-oe
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/openembedded-core.git
+-branch: master
++branch: gatesgarth
+ revision: HEAD
+ 
+ luajit recipe requires host compiler to be able to generate 32bit code when target is 32bit
+@@ -14,7 +14,7 @@ e.g. on archlinux based distributions install prerequisites like below
+ 
+ pacman -S lib32-gcc-libs lib32-glibc
+ 
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe][gatesgarth]' in the subject'
+ 
+ When sending single patches, please use something like:
+ 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix="meta-oe][PATCH"'
+@@ -26,4 +26,4 @@ Other services like GitLab, repo.or.cz or self-hosted setups are of course accep
+ 'git fetch <remote>' works the same on all of them. We recommend GitHub because it is free, easy
+ to use, has been proven to be reliable and has a really good web GUI.
+ 
+-layer maintainer: Khem Raj <raj.khem@gmail.com>
++gatesgarth maintainer: Armin Kuster <akuster808@gmail.com>
+diff --git a/meta-perl/README b/meta-perl/README
+index 67f291079f..634c3bdb6e 100644
+--- a/meta-perl/README
++++ b/meta-perl/README
+@@ -52,7 +52,7 @@ Dependencies
+ This layer depends on:
+ 
+   URI: git://git.openembedded.org/openembedded-core
+-  branch: master
++  branch: gatesgarth
+   revision: HEAD
+   prio: default
+ 
+@@ -75,14 +75,12 @@ Maintenance
+ -----------
+ 
+ Send patches / pull requests to openembedded-devel@lists.openembedded.org with
+-'[meta-perl]' in the subject.
++'[meta-perl][gatesgarth]' in the subject.
+ 
+ When sending single patches, please using something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-perl][PATCH'
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-perl][gatesgarth][PATCH'
+ 
+-Layer maintainers:
+-    Hongxu Jia <hongxu.jia@windriver.com>
+-    Tim "moto-timo" Orling <ticotimo@gmail.com>
++gatesgarth maintainers: Armin kuster <akuster808@gmail.com>
+ 
+ License
+ -------
+diff --git a/meta-python/README b/meta-python/README
+index ca0a290d9f..fea3274584 100644
+--- a/meta-python/README
++++ b/meta-python/README
+@@ -13,12 +13,12 @@ The meta-python layer depends on:
+ 
+ 	URI: git://git.openembedded.org/openembedded-core
+ 	layers: meta
+-	branch: master
++	branch: gatesgarth
+ 	revision: HEAD
+ 
+ 	URI: git://git.openembedded.org/meta-openembedded
+ 	layers: meta-oe
+-	branch: master
++	branch: gatesgarth
+ 	revision: HEAD
+ 
+ Please follow the recommended setup procedures of your OE distribution.
+@@ -35,16 +35,12 @@ comments and patch review. It is subscriber only, so please register
+ before posting.
+ 
+ Send pull requests to openembedded-devel@lists.openembedded.org with
+-'[meta-python]' in the subject.
++'[meta-python][gatesgarth]' in the subject.
+ 
+ When sending single patches, please use something like: 
+-'git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix=meta-python][PATCH'
++'git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix=meta-python][gatesgarth][PATCH'
+ 
+ Maintenance
+ -------------------------
+ 
+-Layer Maintainers:
+-        Tim "moto-timo" Orling <TicoTimo@gmail.com>
+-        Derek Straka <derek@asterius.io>
+-        Trevor Gamblin <trevor.gamblin@windriver.com>
+-
++gatesgarth Maintainers: Armin Kuster <akuster808@gmail.com>
+diff --git a/meta-webserver/README b/meta-webserver/README
+index 7b60630700..26e666f3eb 100644
+--- a/meta-webserver/README
++++ b/meta-webserver/README
+@@ -13,14 +13,14 @@ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+ subdirectory: meta
+-branch: master
++branch: gatesgarth
+ revision: HEAD
+ 
+ For some recipes, the meta-oe layer is required:
+ 
+ URI: git://github.com/openembedded/meta-oe.git
+ subdirectory: meta-oe
+-branch: master
++branch: gatesgarth
+ revision: HEAD
+ 
+ 
+@@ -52,9 +52,9 @@ Maintenance
+ -----------
+ 
+ Send patches / pull requests to openembedded-devel@lists.openembedded.org
+-with '[meta-webserver]' in the subject.
++with '[meta-webserver][gatesgarth]' in the subject.
+ 
+-Layer maintainer: Derek Straka <derek@asterius.io>
++gatesgarth Maintainer: Armin Kuster <akuster808@gmail.com>
+ 
+ 
+ License
+diff --git a/meta-xfce/README b/meta-xfce/README
+index 70ad47a2d1..9d78a3d87c 100644
+--- a/meta-xfce/README
++++ b/meta-xfce/README
+@@ -1,11 +1,11 @@
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+-branch: master
++branch: gatesgarth
+ revision: HEAD
+ 
+ URI: git://github.com/openembedded/meta-oe.git
+-branch: master
++branch: gatesgarth
+ revision: HEAD
+ meta-xfce depends on meta-oe, meta-gnome and meta-multimedia in this repository.
+ 
+@@ -14,9 +14,9 @@ this to local.conf:
+ 
+ BBMASK = "meta-xfce/recipes-multimedia"
+ 
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce][gatesgarth]' in the subject'
+ 
+ When sending single patches, please using something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][PATCH'
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][gatesgarth][PATCH'
+ 
+-Layer maintainer: Kai Kang <kai.kang@windriver.com>
++gatesgarth Maintainer: Armin Kuster <akuster808@gmail.com>
+-- 
 2.17.1
 
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-
-
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------02B51AF107042765C916238E--
