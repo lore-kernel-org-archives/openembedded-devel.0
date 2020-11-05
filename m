@@ -1,78 +1,99 @@
-Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com [209.85.219.52])
- by mx.groups.io with SMTP id smtpd.web09.1601.1604605801449488795
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
+ by mx.groups.io with SMTP id smtpd.web11.2056.1604607663558903706
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Nov 2020 11:50:01 -0800
+ Thu, 05 Nov 2020 12:21:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gfr4aZ/K;
- spf=pass (domain: gmail.com, ip: 209.85.219.52, mailfrom: rosbrookn@gmail.com)
-Received: by mail-qv1-f52.google.com with SMTP id g19so1297494qvy.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2020 11:50:01 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=GgcQNyfo;
+ spf=pass (domain: gmail.com, ip: 209.85.222.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f195.google.com with SMTP id l2so2482668qkf.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2020 12:21:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=rR318AKlkj6tq0IWqyZL7JjZUXFAPdLPd6Whb6WYlvE=;
-        b=gfr4aZ/K6bDK4pBRTsEybiW7nxUi3siZHNMvLQYZe4plRRsZ1Nzza7dMZeeR+HvbHV
-         rU/ExTL9kO4hLwberfOA8UpFtXqzGixaah6o5mm/8iAhaLq2HMhJMhe9N6EjxOudk5Hs
-         ar/Io2+XGiBxZIIdSDx07rWn+Xz91KfdE9AIflhZfBWqxjcsBkTeKv10DK/smWV228Jl
-         XgXk5IHVBjDBVw+zuKK8j+wrzLy6lf+BGEwRK648i5HGZFElzszqnNRRj7T5Hszd3PY5
-         7qEVkUGHbX4z5GfLUkFupeEJfunCe35rOwuOEODDMhiMJa/HUkCSYzw/d3DvQLaUEsn4
-         H1lQ==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=tfY50ZhoVlsjGR0c9cYHOSzieaPFh3Nk7LAoLWZ+2Eo=;
+        b=GgcQNyfox6VuM/RLAac0OFSJzNHI6TkjH1YXdZxygTY/Yfl3S0TqXrAHV7VGuSWht/
+         SSjTd1T3HLBdOtF3G9txl6Sxwb2/W5WEBOsN+P3k3XfLjHv/l9TwRcCM71NdqKhKShnM
+         OMCOtYLO4/VN02RBhh5t92Sm2QKFMSODQcYjg4X8Ra3V5sDPnXC1bU72KBnQzscPF9U+
+         ItazOrIDObVqgxmNgn59f5vDAIqpg94X2HzDy7Q8M4Wmz3YERfRp6Aczr616I27RlxlL
+         kbnYp4ujAyXEz93/IPflPCVPZ2VX/6i/FwS8g0wfObkfjtGF1Q4ACEwrSQ1NGaEbfeOP
+         757w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=rR318AKlkj6tq0IWqyZL7JjZUXFAPdLPd6Whb6WYlvE=;
-        b=YyF8b1kRCtUANzojo/8iexQHOOOPfIwoywpgj4ZqptXt5X+62ZzQhdBUUgh+BStxG3
-         CvDQa99y1yi6Uy1twuqAf96hMiJSuXbTYH0GOPZTca60ABqyqFsRLCkVntkd1+5/coAH
-         dwME3KdF6CaVf1r2Metq/RXWShXIuZpcNPu7f2mQKgEjRRaM11Cnb1CpLg+W5uIQy8U4
-         1P5BHlvjI2j2OeYAlj/mOIZj/qOQuOhRFkVZNb1VfLJ1dI1Uf37nc/GZLYIfUXMLPzTe
-         xd8YkSdynyFFJV0yD7bC/IFHgb4xyM3annyrZrl4MWPX0yYWK7lhhv6N6fsMoq2si/3l
-         T+hg==
-X-Gm-Message-State: AOAM531+uGVhYn5dhB4hMi9txC47hP8t6+5M2fT04qnU1QHZf/DfjFh1
-	gmW7hmVnJc1pJPHeo1S6gS24kSB522Cy9Q==
-X-Google-Smtp-Source: ABdhPJzA852AcdBvHdN7bfM6QkWVaPK9hl+iSBmchYxPt3Z/yC7pt4Oap+spz6rI2dfZvsRs/fumTw==
-X-Received: by 2002:a0c:f3d0:: with SMTP id f16mr3955053qvm.42.1604605800242;
-        Thu, 05 Nov 2020 11:50:00 -0800 (PST)
-Return-Path: <rosbrookn@gmail.com>
-Received: from FED-nrosbr-BE.crux.rad.ainfosec.com (209-217-208-226.northland.net. [209.217.208.226])
-        by smtp.gmail.com with ESMTPSA id q27sm1694224qki.60.2020.11.05.11.49.58
-        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
-        Thu, 05 Nov 2020 11:49:59 -0800 (PST)
-From: "Nick Rosbrook" <rosbrookn@gmail.com>
-X-Google-Original-From: Nick Rosbrook <rosbrookn@ainfosec.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com,
-	Nick Rosbrook <rosbrookn@ainfosec.com>
-Subject: [meta-networking][PATCH 2/2] strongswan: add some PACKAGECONFIG options for EAP
-Date: Thu,  5 Nov 2020 14:49:53 -0500
-Message-Id: <4941002037351503fa2164149722ebca8cef9b58.1604605168.git.rosbrookn@ainfosec.com>
-X-Mailer: git-send-email 2.25.4
-In-Reply-To: <cover.1604605168.git.rosbrookn@ainfosec.com>
-References: <cover.1604605168.git.rosbrookn@ainfosec.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=tfY50ZhoVlsjGR0c9cYHOSzieaPFh3Nk7LAoLWZ+2Eo=;
+        b=lEWwa4oU5Er9AaipCcw7IAgpUU+Dc046QFbclBbS1r4pShGg70wUwBKG6skr1gCfRU
+         igzMm/66Krm5/Yo9uASN7WrJpMqwfB4/C6Umbps/0M1QPPZAzMZQbBLyC+9Ii7hn5smQ
+         GXv6PQApacC2yr7f1d/NRo+JY0rK8pvAzbEx9o8upmAiLshPbilweQZm0b4QYSXnMAyv
+         YV8ItzBn7kdcoMkyJcBeEOMxUJou6ylBnA1SyXP5x16CWzb3PWJUSfrPAPUj0G8Nsr3G
+         OAefSATA6UE6A1KzFe8z4EtO65VgMS0n2Hb7dt/cCU1Ihg9AVsg2SBUaf7NlEdOYeMwv
+         FFYA==
+X-Gm-Message-State: AOAM533fIculuUDe6Vg4R+Hb1f4RYRtdfJOOVuuH+bVLlsXNj7F2blZ2
+	nNjQ2BvnvDolX5PucXtGYUqh+Ek8alfZG7XyWuc=
+X-Google-Smtp-Source: ABdhPJxZb0lOQeyeEY0bfOq8BT7IuPZMM4z18kgT4GV8C3+HwO8BzKdDLaROiCWZeRtTrg9dMlPeGM9YtsBs1OYA6Gc=
+X-Received: by 2002:a05:620a:c07:: with SMTP id l7mr4061707qki.9.1604607662603;
+ Thu, 05 Nov 2020 12:21:02 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <cover.1604605168.git.rosbrookn@ainfosec.com> <78fd054347adbdb03d3faaae803d9ab3ad4da060.1604605168.git.rosbrookn@ainfosec.com>
+In-Reply-To: <78fd054347adbdb03d3faaae803d9ab3ad4da060.1604605168.git.rosbrookn@ainfosec.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 5 Nov 2020 12:20:36 -0800
+Message-ID: <CAMKF1srO7=d+ZWvd-3xYbamddv14=6NYUnmR+_BQgMZEc2XYHw@mail.gmail.com>
+Subject: Re: [meta-networking][PATCH 1/2] strongswan: do not use deprecated stroke and starter by default
+To: Nick Rosbrook <rosbrookn@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Nick Rosbrook <rosbrookn@ainfosec.com>
+Content-Type: text/plain; charset="UTF-8"
 
-Add options for eap-identity and eap-mschapv2 plugins.
+On Thu, Nov 5, 2020 at 11:49 AM Nick Rosbrook <rosbrookn@gmail.com> wrote:
+>
+> The swanctl and vici configuration of strongswan is preferred, as the stroke
+> plugin used with starter is deprecated. As a reasonable default, add swanctl
+> systemd-charon to PACKAGECONFIG by default, removing charon and stroke.
+>
+> While here, make sure strongswan-starter.service is only installed when
+> charon is enabled. The current unconditional installation of
+> strongswan-starter.service can break systems which install strongswan.service
+> for use with swanctl.
+>
+> Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
+> ---
+>  .../recipes-support/strongswan/strongswan_5.8.4.bb    | 11 +++++++++--
+>  1 file changed, 9 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb b/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
+> index 8a8809243..59641cb83 100644
+> --- a/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
+> +++ b/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
+> @@ -25,7 +25,7 @@ EXTRA_OECONF = " \
+>
+>  EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
+>
+> -PACKAGECONFIG ??= "charon curl gmp openssl stroke sqlite3 \
+> +PACKAGECONFIG ??= "curl gmp openssl sqlite3 swanctl systemd-charon \
+>          ${@bb.utils.filter('DISTRO_FEATURES', 'ldap', d)} \
 
-Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
----
- meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ldap is not a standard DISTRO_FEATURE so lets keep it disabled by
+default. secondly enabling systemd-charon here would mean it wont work
+with sysvinit so lets make that
+option depend on systemd DISTRO_FEATURE
 
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb b/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
-index 59641cb83..075982c77 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
-@@ -32,6 +32,8 @@ PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,,${PN}-plugin-aesni"
- PACKAGECONFIG[bfd] = "--enable-bfd-backtraces,--disable-bfd-backtraces,binutils"
- PACKAGECONFIG[charon] = "--enable-charon,--disable-charon,"
- PACKAGECONFIG[curl] = "--enable-curl,--disable-curl,curl,${PN}-plugin-curl"
-+PACKAGECONFIG[eap-identity] = "--enable-eap-identity,--disable-eap-identity,,${PN}-plugin-eap-identity"
-+PACKAGECONFIG[eap-mschapv2] = "--enable-eap-mschapv2,--disable-eap-mschapv2,,${PN}-plugin-eap-mschapv2"
- PACKAGECONFIG[gmp] = "--enable-gmp,--disable-gmp,gmp,${PN}-plugin-gmp"
- PACKAGECONFIG[ldap] = "--enable-ldap,--disable-ldap,openldap,${PN}-plugin-ldap"
- PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,${PN}-plugin-mysql"
--- 
-2.17.1
-
+>  "
+>  PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,,${PN}-plugin-aesni"
+> @@ -133,4 +133,11 @@ RDEPENDS_${PN} += "\
+>  RPROVIDES_${PN} += "${PN}-systemd"
+>  RREPLACES_${PN} += "${PN}-systemd"
+>  RCONFLICTS_${PN} += "${PN}-systemd"
+> -SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'swanctl', '${BPN}.service', '', d)} ${BPN}-starter.service"
+> +
+> +# The deprecated legacy 'strongswan-starter' service should only be used when charon and
+> +# stroke are enabled. When swanctl is in use, 'strongswan.service' is needed.
+> +# See: https://wiki.strongswan.org/projects/strongswan/wiki/Charon-systemd
+> +SYSTEMD_SERVICE_${PN} = " \
+> +    ${@bb.utils.contains('PACKAGECONFIG', 'swanctl', '${BPN}.service', '', d)} \
+> +    ${@bb.utils.contains('PACKAGECONFIG', 'charon', '${BPN}-starter.service', '', d)} \
+> +"
+> --
+> 2.17.1
+>
