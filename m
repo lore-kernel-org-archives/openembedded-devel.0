@@ -1,17 +1,17 @@
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.47])
- by mx.groups.io with SMTP id smtpd.web08.5206.1604568614263125378
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.58])
+ by mx.groups.io with SMTP id smtpd.web09.5143.1604568640250123250
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Nov 2020 01:30:14 -0800
+ Thu, 05 Nov 2020 01:30:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=ReD88WYi;
- spf=pass (domain: windriver.com, ip: 40.107.223.47, mailfrom: mingli.yu@windriver.com)
+ dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=JDCWEaZk;
+ spf=pass (domain: windriver.com, ip: 40.107.223.58, mailfrom: mingli.yu@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ItgtTx7atbtKYpcMqQ8Z7n3XI0X/EtCMGh9IPG9M4/Eo2EvoDmJj4FK/j3mfq1Ycyp8doZ87yL6mKlSYx5xWSm7vu/QF+T++PU1jIuc0A0ydKr3ax+aP9e6Mr0QHNjoQycZPTtONhHw5i/lGuUzaCQfEBjNV+2ukNpbgFbBEif1sDt2dgSWfxfeBMwhZ6xDAXHwrW6fwYr/gw02mlQyagBivhkuiJYS950ErMaggYtqmPFXU3Tgq2hKGxdnhy1mvf28PlLjQ42pUSPhX3pLuyKQwGmZO6d9TIMuHebl2evtCOJAq21rjw+b/X8YzjFkiijMIymxs0NpHXYtvXf87Zg==
+ b=c0O3bvwYhSePXVBpC7+1GhIReAkIb37WoSWfYA2BZ8BArHdSADD+AOwxsy3phvUc5u2qVC8prhXy2VvHMzHg7EzS7DXbXlaj7yjiffphTA5TPoM0ga1GJHdkCEv0EWsmxEAQHSvpNEtB4W2C45tcstj29bgtypm++2QyFxM210HIu+C3VQKW4A3c0jy9VYL+WfWmURSNB4K4WtE7fnZ6hVw5m8gdCxLrMFiOiTOl33ZHHxhcVrbfMkUFF/yx2BwliabEvrnCY7rchNDon7fGZhcC0tHCAc7RGssfKrMv4fC/4BqKtiQFMGsuzLM/qm9e+QWN87Fdpvm2PL4EfmHdBw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0Y6uZ1ZoJtaaF2jSG1dXmnQvxQsmUvCAhYHSQieiHmk=;
- b=VNnfa18GUkD/L+14ggmYCJx5P1qKGHtpdhSvhkgRqWdx1+1jSU9EIHLtNJzk/CVvGHMKgkJubgG1H9iWpN9fe9Y/wlDa2Dl7B7hsXR0yJWEHPgH3JLLLb0WUSEntp/YwLhdfWeuFUpzodP3KFGvM/hCWW63Fr+JQ8yLo842GmwuScK2UwFyqg32PbhrWQbUVBbNfVfo3os1FwVMpXW/RazsCejELIDR/lO1jVCBtNUmc3sG5mljQYvZ4n72Pmzw8KPta1rPM8yhzm1yBxXRhIRFYRJxcMuLy6ATcrRh61EK/fT6O4EXYNbzaFtGvju/dR1WrUOyeMttLeBUMTskYWQ==
+ bh=l+H3O2DUkj/8WnzbYyyEzeoP+yl3H2xEAx7krvkzIYQ=;
+ b=d3VqkJzW65SMNvvskD0p3rBxw83zD614E6NpT+vckhgCFhXwujg0r+NJOUqxK+Vh73McAUAoFXAMXR86D2Fsfiazx+CPbVFcMgn3TilIKrNZpFXfxoGp39mSs6rToarDvKMnbl9SQgMmbSn7T8yZBzvnydJEpwFKGTKktgOf7W/eEVXlpTY7RAykqcmJsswRMgC/vqFIiFIe47M8m6uMrZ0cEzJ3wFoANV+1VBP575ZLvSztDtzgzil2S4EcG3kk2jGc8PIQ5TAaIN1AVvDt8M/l7XAGrKEPjUAkhY3oh9n/p1vosqvLIguXbsH1JX15uRzmPYvyVag957haUEaEMQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0Y6uZ1ZoJtaaF2jSG1dXmnQvxQsmUvCAhYHSQieiHmk=;
- b=ReD88WYi55w6qLrB8+PCjC1sm1vjLSTk5WPy6xMFabiSnruGnn3sYJV/X90ObTcOVc+bCXDsamzYxn29tV5jCuBCmZLnF1oXOX9I5DcCyBkdnf3xuobHrCNaHCs6cg7TcB1P+l6r2o4mEBKmgGY7PqGLzuncZ+l4SNIPCH13jZs=
+ bh=l+H3O2DUkj/8WnzbYyyEzeoP+yl3H2xEAx7krvkzIYQ=;
+ b=JDCWEaZkcaVcPMYYNUMFENuuDhcr+5YYyIoR2FuN9GzMp30w8wWiLydMa2pCavQYplXctdOX043vreQCJGkEdRg7skgHLYIlSA/nxN99SwSaL4Q1vIeFuTBrBn+hYA9NFkGAxg/NtTzbH2tTfhlaHYdTHaBIOFw5yp9yBU8shCA=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,102 +28,97 @@ Received: from CO1PR11MB5009.namprd11.prod.outlook.com (2603:10b6:303:9e::11)
  by CO1PR11MB4817.namprd11.prod.outlook.com (2603:10b6:303:98::7) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3499.19; Thu, 5 Nov
- 2020 09:30:13 +0000
+ 2020 09:30:39 +0000
 Received: from CO1PR11MB5009.namprd11.prod.outlook.com
  ([fe80::105b:9105:2a38:9e9f]) by CO1PR11MB5009.namprd11.prod.outlook.com
  ([fe80::105b:9105:2a38:9e9f%7]) with mapi id 15.20.3499.032; Thu, 5 Nov 2020
- 09:30:13 +0000
-Subject: Re: [oe] [PATCH 1/4] libmaxminddb: add new recipe
+ 09:30:39 +0000
 From: "Yu, Mingli" <mingli.yu@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-References: <164492384A65F946.6094@lists.openembedded.org>
-Message-ID: <7f82ee81-b5b1-639d-ead3-6b040002537a@windriver.com>
-Date: Thu, 5 Nov 2020 17:28:03 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-In-Reply-To: <164492384A65F946.6094@lists.openembedded.org>
+Subject: [meta-networking][PATCH 1/4] libmaxminddb: add new recipe
+Date: Thu,  5 Nov 2020 17:30:12 +0800
+Message-ID: <20201105093015.36886-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.26.2
 X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: HK2P15301CA0005.APCP153.PROD.OUTLOOK.COM
- (2603:1096:202:1::15) To CO1PR11MB5009.namprd11.prod.outlook.com
+X-ClientProxiedBy: YT1PR01CA0132.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2f::11) To CO1PR11MB5009.namprd11.prod.outlook.com
  (2603:10b6:303:9e::11)
 Return-Path: mingli.yu@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [128.224.162.139] (60.247.85.82) by HK2P15301CA0005.APCP153.PROD.OUTLOOK.COM (2603:1096:202:1::15) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3564.6 via Frontend Transport; Thu, 5 Nov 2020 09:30:12 +0000
+Received: from pek-lpg-core2.corp.ad.wrs.com (60.247.85.82) by YT1PR01CA0132.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::11) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.21 via Frontend Transport; Thu, 5 Nov 2020 09:30:38 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3ec836c6-9673-4bca-2be8-08d8816d65a4
+X-MS-Office365-Filtering-Correlation-Id: a30bd6d7-19b4-4554-769f-08d8816d7529
 X-MS-TrafficTypeDiagnostic: CO1PR11MB4817:
 X-Microsoft-Antispam-PRVS: 
-	<CO1PR11MB48170EBF1E424F01371B338EF1EE0@CO1PR11MB4817.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
+	<CO1PR11MB4817DD6A6B45E758D78A88BAF1EE0@CO1PR11MB4817.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:5516;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	HnC215NbPZDI5nx5c4IU9lGHW8Mkh6l+DGg6OjIHWu9stLaLdY4niwuraMLpndv3Z/OXKvOv9cgp2aAyiV0FXUHqUnMer5Sc4YVfPXo3jNRUj7Dk6l+ROadXGUZTKLwzQFLOBw7WxQBQxzfSk9UJYS+KTLyT8U+8kKB5S+9zzhEAodU8gYeXb09onCbBjHWK1vov5SSyeiQ4web6cVHFuU61QlM3NZbn9U+tBoYU2tQnHZXzt12J6UqbIgR2oxayELBrSitG02CL+RRb3xdkYxy0BsW6YMuJHL6y5HSU14TCQ9nUwQn43xStak2B97U3P1tD51NE4nc5W5twNXjpX0PVXKL5czvKy23wsQU+FAMvPh4M2YRh+pQK7XD9+xVaK/Ou3XE6etNO1O3AtFFKRKf7aWuUttIhwl6l6bvA0z5rsFm5BG7sgpy9ZyXO4iOAbgOh89D3iYy40rq8NaJh+shG/l5u3aAmGJLxhHbfipc=
+	M1ZAwJI5OiZnmdKiwXRFwcQV6VlGEcwv4CBSHcGYeyY9AP50aYbpButZoxXmnuE1q3a4nOe1AxNZCveoCsYdW2jIV27mOXOfIwICs9avZ726AXJjc/pHALvcpjKUm7PO5cXZ0PiJnAjaJn32++nGa/wX4MpQOi971apOgekY7MSSB+z71jn4n/cZtO2NHDQZ2nIAj3eX7nfc0v5bl1SBSQ/jjlJT9sFOlLHGrSYRN88I0/A2gW4tDVJ6nbDSKl83Gdo9wP5gmQSo6zzd+E9ZTSeAkDmv8gsLpDc2DmWQHyWSeRHglKahuh4h4Q1+jDptMPevchnsbiG8J+tDpjoV9E1oL1p71tnClvCXARXdw/jUHhT+OWDRqpoKPnThL8qbpMKQPBxYZ+cbfecF6h1UXQ==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB5009.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(396003)(346002)(376002)(39850400004)(136003)(66556008)(5660300002)(66946007)(66476007)(6666004)(186003)(6916009)(52116002)(6706004)(83380400001)(53546011)(6486002)(86362001)(31686004)(16526019)(316002)(8936002)(26005)(966005)(31696002)(478600001)(16576012)(8676002)(956004)(36756003)(2906002)(2616005)(78286007)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB5009.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(396003)(346002)(376002)(39850400004)(136003)(66556008)(5660300002)(66946007)(66476007)(6666004)(186003)(6916009)(52116002)(83380400001)(6506007)(6486002)(86362001)(16526019)(316002)(8936002)(26005)(1076003)(478600001)(8676002)(6512007)(9686003)(956004)(36756003)(2906002)(2616005);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	Yi8Xhtx6b5eoIcAzgtVQ0lhKh/nVW1kP3PMl2JhWzqePblNiupbJhZoTM2ActNz8ZZ3BZHS/HPa1qHWuNrgieiOx/+iLz+L0Ndy9pIHD/uOAUmoJ0r7pucP+18oVgLv6afjQjM7Bi2vUH9Cg/9MQ+mbqLItSu7/iNLSmnuBENu8sSzPo09L/4FI7gfFsRTtnyibRBBtSConJWJ2YcdVg5pxSrdSpgj7HLZWbjvFE1CnBLHZSuUos01RTLZRVppA9bCsVl1dLLKdPzRkE3bOjGGOCnmxYLRzfObtNu++zr2rvM/EbfO7IttR4fL8otWBDIT7Tbm2L+2XZ6WuYzFxQa3bDnjZ2Tg4UhZLZL3D36BptL04+85wBZb+A6wN+jjJjyBZ0iQ8TDHIQSzL9vdyEfkKLKuJgTK4wMfsFmJ7ymndsA/JptASac3hNvF150Z4Wox+nPf4JF2x9o3lNWtaCNxjwCYj/zF2YTvZKsRkqg5dd5CQf8GzRMGm0jKe38Utbj2ZmDm6YkQcGCeA+hJ+CICE9h9xWu9Yv0HBSt72VoUlsaEoBBBgTL0ZPc8QwQiA+sfUWs+oAsKMqZIs8bQWQmLYcsNZJnDvI3fYKO4T9hZNXeDOvzR2xM5Jej3Zq4KMLKSyfhPddPdZ14VL2IXXmHQ==
+	OiOOeYxrbL53eYP2IM4O2Y0stnpmxMewMefRWGyQmO4NDXNLOy0CP6gxdapWw8PpDsrQOGo/xGuvdG+zeK8AYLqvVWjq/ajwxQJvQmKpo/6aCnyd7aglqqNo4R5qpDhctINd8kRvTe8e9eA521ONG8DPCCskieOnqOYjwdX9ycIktwfq43USAAIDuOV0DcCX+BnXsjwULXURLDH9xy6hB1jf2yck/l/wxFD/XywFCuWD40/mmiGwImFTJ/YyYFDtyoasomZtHfjMb+6QKgzXXwLkUxJPdbZ+POtvUMtGchY6snirqOc2OV2t2q/BLNYYYaJMUpANWozA/UGvVyqyox0GwnnqDptGK6uiYlV5UCstYvzJHdeihc5JNh9wi7NsC+LEsUMKB+41ImR6YCD2jhyJPJ18W1iOP0zghFG7I1dV4SITuT0QlO+p9mdWnRKP/GC0n85GyF9Nap2wNpedi5Q66BuKhNDSbk/RkAVtrmJSod+sfM51TUFvnbAFqSNgUpKbt7O/RqpBSa3cj/nThKxrwSTFCeqKsOxP15+yt9jpJocu6VeEPO04tPjrDFZtEq2F3D6ylIreTMbHqBCuC+XoePpdH93c+kCD3q8yvjAs5KLcqwPjCLMIYKMUoyaOOHp/Ob1eyb67c2V++gLUIQ==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3ec836c6-9673-4bca-2be8-08d8816d65a4
+X-MS-Exchange-CrossTenant-Network-Message-Id: a30bd6d7-19b4-4554-769f-08d8816d7529
 X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5009.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2020 09:30:13.0925
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2020 09:30:39.3678
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Y6ewsagE1eKW48r7vZ3EiBavkC/cNxFYTR8a/PMBdBKAYbqXVL2b5wsps/+vSPQ8Gi2u8PH1e9yPExNT9VvFig==
+X-MS-Exchange-CrossTenant-UserPrincipalName: KNGrxBpPbLS+67Ou/6D3+FgjDJ/FJbhJabCCAF6c4jQXcvnrDt+mW1Gh1n0J1B3qKWIAkUYFVEz3ogB+yRkb7Q==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR11MB4817
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-Please ignore this series, will resend with the sub-layer name in the 
-subject.
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Thanks,
+The libmaxminddb library provides a C library for reading MaxMind
+DB files, including the GeoIP2 databases from MaxMind.
 
-On 11/5/20 5:18 PM, Yu, Mingli wrote:
-> From: Mingli Yu <mingli.yu@windriver.com>
-> 
-> The libmaxminddb library provides a C library for reading MaxMind
-> DB files, including the GeoIP2 databases from MaxMind.
-> 
-> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-> ---
->   .../libmaxminddb/libmaxminddb_1.4.3.bb        | 20 +++++++++++++++++++
->   1 file changed, 20 insertions(+)
->   create mode 100644 meta-networking/recipes-support/libmaxminddb/libmaxminddb_1.4.3.bb
-> 
-> diff --git a/meta-networking/recipes-support/libmaxminddb/libmaxminddb_1.4.3.bb b/meta-networking/recipes-support/libmaxminddb/libmaxminddb_1.4.3.bb
-> new file mode 100644
-> index 000000000..d5c303861
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/libmaxminddb/libmaxminddb_1.4.3.bb
-> @@ -0,0 +1,20 @@
-> +SUMMARY = "C library for the MaxMind DB file format"
-> +DESCRIPTION = "The libmaxminddb library provides a C library for reading MaxMind DB files, \
-> +ncluding the GeoIP2 databases from MaxMind. This is a custom binary \
-> +format designed to facilitate fast lookups of IP addresses while allowing \
-> +for great flexibility in the type of data associated with an address."
-> +
-> +HOMEPAGE = "https://github.com/maxmind/libmaxminddb"
-> +SECTION = "libdevel"
-> +LICENSE = " Apache-2.0"
-> +
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57 \
-> +"
-> +SRC_URI = "https://github.com/maxmind/libmaxminddb/releases/download/${PV}/${BPN}-${PV}.tar.gz \
-> +"
-> +SRC_URI[sha256sum] = "a5fdf6c7b4880fdc7620f8ace5bd5cbe9f65650c9493034b5b9fc7d83551a439"
-> +
-> +S = "${WORKDIR}/${BPN}-${PV}"
-> +
-> +inherit autotools-brokensep
-> +
-> 
-> 
-> 
-> 
-> 
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ .../libmaxminddb/libmaxminddb_1.4.3.bb        | 20 +++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-networking/recipes-support/libmaxminddb/libmaxmind=
+db_1.4.3.bb
+
+diff --git a/meta-networking/recipes-support/libmaxminddb/libmaxminddb_1.4.=
+3.bb b/meta-networking/recipes-support/libmaxminddb/libmaxminddb_1.4.3.bb
+new file mode 100644
+index 000000000..d5c303861
+--- /dev/null
++++ b/meta-networking/recipes-support/libmaxminddb/libmaxminddb_1.4.3.bb
+@@ -0,0 +1,20 @@
++SUMMARY =3D "C library for the MaxMind DB file format"
++DESCRIPTION =3D "The libmaxminddb library provides a C library for reading=
+ MaxMind DB files, \
++ncluding the GeoIP2 databases from MaxMind. This is a custom binary \
++format designed to facilitate fast lookups of IP addresses while allowing =
+\
++for great flexibility in the type of data associated with an address."
++
++HOMEPAGE =3D "https://github.com/maxmind/libmaxminddb"
++SECTION =3D "libdevel"
++LICENSE =3D " Apache-2.0"
++
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd5=
+7 \
++"
++SRC_URI =3D "https://github.com/maxmind/libmaxminddb/releases/download/${P=
+V}/${BPN}-${PV}.tar.gz \
++"
++SRC_URI[sha256sum] =3D "a5fdf6c7b4880fdc7620f8ace5bd5cbe9f65650c9493034b5b=
+9fc7d83551a439"
++
++S =3D "${WORKDIR}/${BPN}-${PV}"
++
++inherit autotools-brokensep
++
+--=20
+2.26.2
+
