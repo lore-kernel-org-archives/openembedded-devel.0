@@ -1,292 +1,375 @@
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.web08.11030.1604597190752019092
+Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com [209.85.222.181])
+ by mx.groups.io with SMTP id smtpd.web08.1175.1604604037603656296
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Nov 2020 09:26:30 -0800
+ Thu, 05 Nov 2020 11:20:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=GGM6stQ0;
- spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f173.google.com with SMTP id y7so830267pfq.11
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2020 09:26:30 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=WV921CHY;
+ spf=pass (domain: gmail.com, ip: 209.85.222.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f181.google.com with SMTP id 11so2277935qkd.5
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Nov 2020 11:20:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:organization:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=Vj0Enk2Nuj+KpyYcQFfeUisrf9ONG+HYoqRPjH5uOjE=;
-        b=GGM6stQ0LuT1axQvPswesRTVZ9IdrFaYBnasI3MOjY/Q6XeiT4tjXlou5p0etm2jpZ
-         dSZLQqdtwm07AOfdNLR1BaiNjPHoAiEE1T0cIpZ9PJ9R9ZnFQ8/0aS28ZjLSKWOtW/pW
-         NuVNh3OcbmK2RaVKlum1xghaCX4xyc7cBp3OKRQHuF55EqF4e6TNWo8aig/MoptY6T4s
-         YbQq2uu8vixiuYTHOXbn8XgkhrsuWGCXGZOi4Gq7fxj9pVjBSpAP9rX9zTX06qstd+Pi
-         fbgv7aDZMc+BSLD9dOmuzERELKL2uRBoQ8smkcHMr/FVsGVUsctvxWb9M5FSXUGmNIrs
-         gQaw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=WJ6jlBMlbrxGk3gzzXy5jBdlgjTzyipiKzpBSQVFAB0=;
+        b=WV921CHYNZRtAL9aMrFzwERpfk06LMP7/T5rN9Bebes2zA/S/P9i47N4dtZy7leHFD
+         E/bFjKzQoiJkZPZNj7DuUi6pxgoo/+dqwAaj4yZDFr5V6gFEVAmkpYQXRkUbnYU3rIoc
+         Lavd60cD59j/o9CRwmD/lfJIuG4DXUp08snULrW3ixNpZhPRWULmr53RWnOOwCGIe2zi
+         SlnIS+sJVbVjSLScSloO9JWVP+D5RluTAVzxCxycnBw1NYX/qfXv+1JD+Ck0FVRoi5ki
+         4NMYXmz6e7FofGX5/Q9HjG6FRrL5wmxAM4VRYi0O2co+YEwc7Vlh3GGd2bTJyNpjK5HA
+         wmBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=Vj0Enk2Nuj+KpyYcQFfeUisrf9ONG+HYoqRPjH5uOjE=;
-        b=ZlgscFOy6vekPgu9uziZB10isa/AvWOSqQTiWa7wwOFuBH4VH5xbZ2p01baGy/UJ31
-         MjrracaNkD2j9tOnqDrF/g1lF243LLaa8EH7PdbnI/RNHy0dKW5q9wMJCyqBDRDBAXO1
-         wf1ERSU9zL+BNLZLEzvakLgxVPuSCIWoZaLvkORHrdRc9beHrWqLn6kvSWxwjVDTfEJr
-         7NaeyWbODf0K8V+s+WfbOdeIJ7vw6ZqRMj8+v5v5rXNtpo8nI/ajmWE2ke9+IrrXithh
-         5u5TkekUkmrJMaxCtUt7Fnl00a7ghm0lfaUEp/XK/UwAgJDUJJ+2blLoUua5jwV9s7cV
-         SdaQ==
-X-Gm-Message-State: AOAM531FrEe8PFjGuu+NkaJpDE45VsmJ/MIDk4h2b41Mww42N9KtZHD7
-	Qma63r3OXS+Klpp7qLw3GrE27KesI7gKCg==
-X-Google-Smtp-Source: ABdhPJy5nAhfLkDoE/tCQsJHbEwz3H1Na+0esV7orWyDufNmFYnzKlYWSm7vrVf0V0dLxkiNmphiMQ==
-X-Received: by 2002:a65:67c2:: with SMTP id b2mr3313081pgs.39.1604597189787;
-        Thu, 05 Nov 2020 09:26:29 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:4e0:6955:62e2:f0f4:7e8d? ([2601:646:9200:4e0:6955:62e2:f0f4:7e8d])
-        by smtp.gmail.com with ESMTPSA id k73sm2898663pga.88.2020.11.05.09.26.28
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 05 Nov 2020 09:26:29 -0800 (PST)
-Subject: Re: [oe] [gatesgarth][meta-oe][PATCH] Revert "numactl: Remove the recipe"
-To: Martin Jansa <Martin.Jansa@gmail.com>,
- openembedded-devel@lists.openembedded.org
-References: <20201105144712.1515317-1-Martin.Jansa@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <502c5a05-a437-0ed0-0dc3-ffc3ad3e7264@gmail.com>
-Date: Thu, 5 Nov 2020 09:26:28 -0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.4.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=WJ6jlBMlbrxGk3gzzXy5jBdlgjTzyipiKzpBSQVFAB0=;
+        b=ad9M+naDU3C34sKKWBpQ/UOTqJUJdzznOU+GI7aF05y/TtitGH2m55KSyNZvPfaXEa
+         W+Ap1kcCJvxTR3nMQQmMxAu3u7S43x/NipCv563Pgp0fXjJVT2e37pnfDx0M5lCeA8vv
+         O4Hb7tDnmlnmpKMdcuWRQBb7kvYHtjGVEFOdOKVr3azH2ZD7x8SnWX07O4RlaHpjGjvO
+         rU1NiXZH5w3hQBfBsy27gOtOtsPu+yyCGsKMTZr4D1Xcty10GiREpx6PetwOHlhWTUmH
+         g2hVE3W6dVIzJmwlcIAchl8Evl92gosuyZyyuclXeemDCAXNkcLD1wNo+4yJ49bX91QX
+         nw2w==
+X-Gm-Message-State: AOAM530hZI8D9ipSQPEjeLXh2bxt295oFo5QDlLlwK97ZO41/HxyAeKB
+	EbaH4H9Q8qn4cA8cVYKHX1S4oZVd+Nu5VDmIkMs=
+X-Google-Smtp-Source: ABdhPJzrSJEc3/HCJW8nfioEy9o6tqWRbCTy52D0c5jgl1VkjKrAtARMRsAxvfpYR4MHrnjFUcbZ4MAXmi1daeUHCsg=
+X-Received: by 2002:a37:6195:: with SMTP id v143mr3422499qkb.71.1604604036461;
+ Thu, 05 Nov 2020 11:20:36 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20201105144712.1515317-1-Martin.Jansa@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+References: <20201105093015.36886-1-mingli.yu@windriver.com> <20201105093015.36886-3-mingli.yu@windriver.com>
+In-Reply-To: <20201105093015.36886-3-mingli.yu@windriver.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 5 Nov 2020 11:20:10 -0800
+Message-ID: <CAMKF1srN3p5HPwq1n0qg51g8yU7sS0Di9iX_hb89Unjsfs6WLg@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH 3/4] ntopng: add new recipe
+To: "Yu, Mingli" <mingli.yu@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
+fails http://errors.yoctoproject.org/Errors/Details/511661/
 
-
-On 11/5/20 6:47 AM, Martin Jansa wrote:
-> This reverts commit e5d9133800f5c37172a6315d42a99464f9fe1902.
-> 
-> It exists in oe-core/master, but not in oe-core/gatesgarth, so this shouldn't
-> be included in meta-oe/gatesgarth.
-> 
-
-thanks for noticing it
-
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+On Thu, Nov 5, 2020 at 1:30 AM Yu, Mingli <mingli.yu@windriver.com> wrote:
+>
+> From: Mingli Yu <mingli.yu@windriver.com>
+>
+> ntopng is a web-based network traffic monitoring application
+> released under GPLv3. It is the new incarnation of the original
+> ntop written in 1998, and now revamped in terms of performance,
+> usability, and features.
+>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 > ---
->   .../numactl/0001-define-run-test-target.patch | 32 ++++++++++
->   .../numactl/Fix-the-test-output-format.patch  | 64 +++++++++++++++++++
->   .../recipes-support/numactl/numactl/Makefile  |  7 ++
->   .../recipes-support/numactl/numactl/run-ptest |  9 +++
->   .../recipes-support/numactl/numactl_git.bb    | 62 ++++++++++++++++++
->   5 files changed, 174 insertions(+)
->   create mode 100644 meta-oe/recipes-support/numactl/numactl/0001-define-run-test-target.patch
->   create mode 100644 meta-oe/recipes-support/numactl/numactl/Fix-the-test-output-format.patch
->   create mode 100644 meta-oe/recipes-support/numactl/numactl/Makefile
->   create mode 100755 meta-oe/recipes-support/numactl/numactl/run-ptest
->   create mode 100644 meta-oe/recipes-support/numactl/numactl_git.bb
-> 
-> diff --git a/meta-oe/recipes-support/numactl/numactl/0001-define-run-test-target.patch b/meta-oe/recipes-support/numactl/numactl/0001-define-run-test-target.patch
+>  ...kefile.in-don-t-use-the-internal-lua.patch | 39 +++++++++
+>  ...utogen.sh-generate-configure.ac-only.patch | 36 ++++++++
+>  ...1-configure.seed-fix-configure-error.patch | 42 ++++++++++
+>  ...onfigure.seed-fix-host-contamination.patch | 82 +++++++++++++++++++
+>  .../ntopng/files/ntopng.service               | 13 +++
+>  .../recipes-support/ntopng/ntopng_4.2.bb      | 47 +++++++++++
+>  6 files changed, 259 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/ntopng/files/0001-Makefile.in-don-t-use-the-internal-lua.patch
+>  create mode 100644 meta-networking/recipes-support/ntopng/files/0001-autogen.sh-generate-configure.ac-only.patch
+>  create mode 100644 meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-configure-error.patch
+>  create mode 100644 meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-host-contamination.patch
+>  create mode 100644 meta-networking/recipes-support/ntopng/files/ntopng.service
+>  create mode 100644 meta-networking/recipes-support/ntopng/ntopng_4.2.bb
+>
+> diff --git a/meta-networking/recipes-support/ntopng/files/0001-Makefile.in-don-t-use-the-internal-lua.patch b/meta-networking/recipes-support/ntopng/files/0001-Makefile.in-don-t-use-the-internal-lua.patch
 > new file mode 100644
-> index 0000000000..78ffb22f89
+> index 000000000..46724558c
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/numactl/numactl/0001-define-run-test-target.patch
-> @@ -0,0 +1,32 @@
-> +rename test target as run-test
+> +++ b/meta-networking/recipes-support/ntopng/files/0001-Makefile.in-don-t-use-the-internal-lua.patch
+> @@ -0,0 +1,39 @@
+> +From 65c15247d268566b79e4595b8e734b7e40679d75 Mon Sep 17 00:00:00 2001
+> +From: Mingli Yu <mingli.yu@windriver.com>
+> +Date: Wed, 4 Nov 2020 08:55:10 +0000
+> +Subject: [PATCH] Makefile.in: don't use the internal lua
 > +
-> +Upstream-Statue: Pending
+> +ntopng depends on lua and it will compile the lua under
+> +third-party sub dir of source tree, but this one supports
+> +cross-compiling badly, so use the one under RECIPE_SYSROOT.
 > +
-> +test target not only compile the test files, but also run them, which is
-> +not suitable for cross-compile environment, so rename it as run-test.
+> +Upstream-Status: Inappropriate [embedded specific]
 > +
-> +and define test target to compile the test files.
-> +
-> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> +Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 > +---
-> + Makefile.am | 4 +++-
-> + 1 file changed, 3 insertions(+), 1 deletion(-)
+> + Makefile.in | 2 --
+> + 1 file changed, 2 deletions(-)
 > +
-> +diff --git a/Makefile.am b/Makefile.am
-> +index b6db339..de176c4 100644
-> +--- a/Makefile.am
-> ++++ b/Makefile.am
-> +@@ -124,7 +124,9 @@ regress2: $(check_PROGRAMS)
-> + test_numademo: numademo
-> + 	./numademo -t -e 10M
+> +diff --git a/Makefile.in b/Makefile.in
+> +index 143535746..fc06a5341 100755
+> +--- a/Makefile.in
+> ++++ b/Makefile.in
+> +@@ -40,7 +40,6 @@ endif
 > +
-> +-test: all $(check_PROGRAMS) regress1 regress2 test_numademo
-> ++test: all $(check_PROGRAMS)
-> ++
-> ++run-test: all $(check_PROGRAMS) regress1 regress2 test_numademo
+> + LUA_HOME=${PWD}/third-party/lua-5.3.5
+> + LUA_INC=-I$(LUA_HOME)/src
+> +-LUA_LIB=$(LUA_HOME)/src/liblua.a
 > +
-> + TESTS_ENVIRONMENT = builddir='$(builddir)'; export builddir;
+> + ######
+> + LIBRRDTOOL_HOME=${PWD}/third-party/rrdtool-1.4.8
+> +@@ -118,7 +117,6 @@ RPM_PKG = $(TARGET)-$(NTOPNG_VERSION)-@REVISION@.$(PLATFORM).rpm
+> + RPM_DATA_PKG = $(TARGET)-data-$(NTOPNG_VERSION)-@REVISION@.noarch.rpm
+> + ######
 > +
+> +-LIB_TARGETS = $(LUA_LIB)
+> +
+> + ifneq ($(HAS_ZEROMQ), 0)
+> + LIB_TARGETS += $(ZEROMQ_LIB)
 > +--
-> +1.9.1
+> +2.26.2
 > +
-> diff --git a/meta-oe/recipes-support/numactl/numactl/Fix-the-test-output-format.patch b/meta-oe/recipes-support/numactl/numactl/Fix-the-test-output-format.patch
+> diff --git a/meta-networking/recipes-support/ntopng/files/0001-autogen.sh-generate-configure.ac-only.patch b/meta-networking/recipes-support/ntopng/files/0001-autogen.sh-generate-configure.ac-only.patch
 > new file mode 100644
-> index 0000000000..9812ecc8b3
+> index 000000000..8d62147b9
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/numactl/numactl/Fix-the-test-output-format.patch
-> @@ -0,0 +1,64 @@
-> +From 59fd750a84bbe5874dec936d2bee9ef11a1b6505 Mon Sep 17 00:00:00 2001
-> +From: Li xin <lixin.fnst@cn.fujitsu.com>
-> +Date: Tue, 21 Jul 2015 02:01:22 +0900
-> +Subject: [PATCH] Fix the test output format
+> +++ b/meta-networking/recipes-support/ntopng/files/0001-autogen.sh-generate-configure.ac-only.patch
+> @@ -0,0 +1,36 @@
+> +From 22f0bec462763f1b0b92daa33133e274d3b45f4f Mon Sep 17 00:00:00 2001
+> +From: Mingli Yu <mingli.yu@windriver.com>
+> +Date: Thu, 5 Nov 2020 00:05:21 -0800
+> +Subject: [PATCH] autogen.sh: generate configure.ac only
 > +
-> +Upstream-Status: Pending
+> +The autogen.sh should only generate configure.ac and the
+> +logic used to generate configure script should follow the
+> +autotools.bbclass in oe. Otherwise there may comes below
+> +do_configure error:
+> + | checking whether we are cross compiling... configure: error: in `/path/tmp/work/core2-64-poky-linux/ndpi/3.4-r0/git':
+> + | configure: error: cannot run C compiled programs.
+> + | If you meant to cross compile, use `--host'.
 > +
-> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> +Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> +Upstream-Status: Inappropriate [embedded specific]
+> +
+> +Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 > +---
-> + test/regress  |  6 +++---
-> + test/regress2 | 11 +++++------
-> + 2 files changed, 8 insertions(+), 9 deletions(-)
+> + autogen.sh | 5 -----
+> + 1 file changed, 5 deletions(-)
 > +
-> +diff --git a/test/regress b/test/regress
-> +index 2ce1705..d086a47 100755
-> +--- a/test/regress
-> ++++ b/test/regress
-> +@@ -74,6 +74,7 @@ probe_hardware()
-> + 	if [ $numnodes -lt 2 ] ; then
-> + 	    echo "need at least two nodes with at least $NEEDPAGES each of"
-> + 	    echo "free memory for mempolicy regression tests"
-> ++	    echo "FAIL: numa regress"
-> +	    exit 77  # Skip test
-> + 	fi
-> + }
-> +@@ -207,10 +208,9 @@ main()
-> + 	rm A B
+> +diff --git a/autogen.sh b/autogen.sh
+> +index 73f8d0ebe..15ff0aa84 100755
+> +--- a/autogen.sh
+> ++++ b/autogen.sh
+> +@@ -73,8 +73,3 @@ cat configure.seed | sed \
+> +     > configure.ac
 > +
-> + 	if [ "$EXIT" = 0 ] ; then
-> +-		echo '========SUCCESS'
-> ++		echo 'PASS: numactl regress'
-> + 	else
-> +-		echo '========FAILURE'
-> +-		exit 1
-> ++		echo 'FAIL: numactl regress'
-> + 	fi
-> + }
-> +
-> +diff --git a/test/regress2 b/test/regress2
-> +index aa6ea41..450c510 100755
-> +--- a/test/regress2
-> ++++ b/test/regress2
-> +@@ -9,12 +9,11 @@ testdir=`dirname "$0"`
-> + export PATH=${builddir}:$PATH
-> +
-> + T() {
-> +-       echo "$@"
-> +-       if ! $VALGRIND "$@" ;  then
-> +-	  echo	$1 FAILED!!!!
-> +-	  exit 1
-> +-       fi
-> +-       echo
-> ++	if ! $VALGRIND "$@" 2>&1 1>/dev/null;  then
-> ++	   echo  "FAIL: $1"
-> ++	else
-> ++	   echo "PASS: $1"
-> ++	fi
-> + }
-> +
-> + # still broken
+> + rm -f config.h config.h.in *~ #*
+> +-
+> +-echo "Wait please..."
+> +-autoreconf -if
+> +-echo ""
+> +-echo "Now run ./configure"
 > +--
-> +1.8.4.2
+> +2.17.1
 > +
-> diff --git a/meta-oe/recipes-support/numactl/numactl/Makefile b/meta-oe/recipes-support/numactl/numactl/Makefile
+> diff --git a/meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-configure-error.patch b/meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-configure-error.patch
 > new file mode 100644
-> index 0000000000..9a5134c3f2
+> index 000000000..dffab24ca
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/numactl/numactl/Makefile
-> @@ -0,0 +1,7 @@
-> +.PHONY: regress1 regress2
+> +++ b/meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-configure-error.patch
+> @@ -0,0 +1,42 @@
+> +From 29797dd037009d38e4976249ed21b2076240751e Mon Sep 17 00:00:00 2001
+> +From: Mingli Yu <mingli.yu@windriver.com>
+> +Date: Wed, 4 Nov 2020 04:36:46 +0000
+> +Subject: [PATCH] configure.seed: fix configure error
 > +
-> +regress1:
-> +	cd test ; ./regress
+> +fix the below error:
+> +configure: error: cannot run test program while cross compiling
 > +
-> +regress2:
-> +	cd test ; ./regress2
-> diff --git a/meta-oe/recipes-support/numactl/numactl/run-ptest b/meta-oe/recipes-support/numactl/numactl/run-ptest
-> new file mode 100755
-> index 0000000000..215f7c25b9
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/numactl/numactl/run-ptest
-> @@ -0,0 +1,9 @@
-> +#!/bin/sh
-> +make regress1
-> +make regress2
-> +if  numademo -t -e 10M; then
-> +	echo "PASS: numademo"
-> +else
-> +	echo "FAIL: numademo"
-> +fi
+> +Upstream-Status: Inappropriate [embedded specific]
 > +
-> diff --git a/meta-oe/recipes-support/numactl/numactl_git.bb b/meta-oe/recipes-support/numactl/numactl_git.bb
+> +Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> +---
+> + configure.seed | 13 +------------
+> + 1 file changed, 1 insertion(+), 12 deletions(-)
+> +
+> +diff --git a/configure.seed b/configure.seed
+> +index a321f9bbf..03f9a31b0 100644
+> +--- a/configure.seed
+> ++++ b/configure.seed
+> +@@ -642,18 +642,7 @@ if test x$radcli = xtrue; then
+> +   fi
+> + fi
+> +
+> +-AC_CACHE_CHECK([if pthread rwlocks are supported], [my_cv_rw_locks_supported], [
+> +-  AC_TRY_RUN([
+> +-  #include <pthread.h>
+> +-
+> +-  int main() {
+> +-    pthread_rwlock_t t;
+> +-    return 0;
+> +-  }
+> +-]
+> +-, [my_cv_rw_locks_supported=yes], [my_cv_rw_locks_supported=no])
+> +-]
+> +-)
+> ++AC_CACHE_CHECK([if pthread rwlocks are supported], [my_cv_rw_locks_supported])
+> +
+> + if test "$my_cv_rw_locks_supported" = yes; then
+> +   AC_DEFINE_UNQUOTED(HAVE_RW_LOCK, 1, [pthread rwlocks supported])
+> +--
+> +2.26.2
+> +
+> diff --git a/meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-host-contamination.patch b/meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-host-contamination.patch
 > new file mode 100644
-> index 0000000000..504fe03275
+> index 000000000..a5ac59fb3
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/numactl/numactl_git.bb
-> @@ -0,0 +1,62 @@
-> +SUMMARY = "Development package for building Applications that use numa"
-> +HOMEPAGE = "http://oss.sgi.com/projects/libnuma/"
-> +DESCRIPTION = "Simple NUMA policy support. It consists of a numactl program \
-> +to run other programs with a specific NUMA policy and a libnuma to do \
-> +allocations with NUMA policy in applications."
-> +LICENSE = "GPL-2.0 & LGPL-2.1"
-> +SECTION = "apps"
+> +++ b/meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-host-contamination.patch
+> @@ -0,0 +1,82 @@
+> +From 81e3512718f80965c26ccb1f9d694c91b121fea0 Mon Sep 17 00:00:00 2001
+> +From: Mingli Yu <mingli.yu@windriver.com>
+> +Date: Wed, 4 Nov 2020 06:28:28 +0000
+> +Subject: [PATCH] configure.seed: fix host contamination
 > +
-> +inherit autotools-brokensep ptest
+> +Fix below error:
+> +This autoconf log indicates errors, it looked at host include and/or
+> +library paths while determining system capabilities.
 > +
-> +LIC_FILES_CHKSUM = "file://README.md;beginline=19;endline=32;md5=f8ff2391624f28e481299f3f677b21bb"
+> +Upstream-Status: Inappropriate [OE specific]
 > +
-> +SRCREV = "dd6de072c92c892a86e18c0fd0dfa1ba57a9a05d"
-> +PV = "2.0.14+git${SRCPV}"
+> +Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> +---
+> + configure.seed | 47 +++++------------------------------------------
+> + 1 file changed, 5 insertions(+), 42 deletions(-)
 > +
-> +SRC_URI = "git://github.com/numactl/numactl \
-> +    file://Fix-the-test-output-format.patch \
-> +    file://Makefile \
-> +    file://run-ptest \
-> +    file://0001-define-run-test-target.patch \
+> +diff --git a/configure.seed b/configure.seed
+> +index 03f9a31b0..58aebb5b8 100644
+> +--- a/configure.seed
+> ++++ b/configure.seed
+> +@@ -79,31 +79,6 @@ fi
+> + #
+> + REVISION=`git log --pretty=oneline | wc -l`
+> +
+> +-if test -d "/usr/local/include"; then
+> +-  CFLAGS="${CFLAGS} -I/usr/local/include"
+> +-  CPPFLAGS="${CPPFLAGS} -I/usr/local/include"
+> +-fi
+> +-
+> +-if test -d "/usr/local/lib"; then
+> +-  LDFLAGS="${LDFLAGS} -L/usr/local/lib"
+> +-fi
+> +-
+> +-if test -d /opt/local/include; then :
+> +-  CFLAGS="${CFLAGS} -I/opt/local/include"
+> +-  CPPFLAGS="${CPPFLAGS} -I/opt/local/include"
+> +-fi
+> +-
+> +-if test -d /opt/local/lib; then :
+> +-  LDFLAGS="${LDFLAGS} -L/opt/local/lib"
+> +-fi
+> +-
+> +-if [ test -f /usr/bin/lsb_release ]; then
+> +-  CODENAME=`/usr/bin/lsb_release -c|cut -f 2`
+> +-  if [[ $CODENAME == "wheezy" ]]; then :
+> +-    CPPFLAGS="${CPPFLAGS} -DOLD_NETFILTER_INTERFACE=1"
+> +-  fi
+> +-fi
+> +-
+> + SHORT_MACHINE=`uname -m | cut -b1-3`
+> +
+> + GIT_RELEASE="@GIT_RELEASE@"
+> +@@ -214,23 +189,11 @@ dnl> fi
+> + pkg-config --exists libssl
+> + if test "$?" -ne 1; then
+> +   AC_DEFINE_UNQUOTED(NO_SSL_DL, 1, [has openssl])
+> +-  SSL_INC="`pkg-config --cflags libssl` -I/usr/include/openssl"
+> ++  SSL_INC="`pkg-config --cflags libssl`"
+> +   SSL_LIB="`pkg-config --libs libssl` -lssl -lcrypto"
+> + else
+> +-  dnl Workaround for MacOS Brew
+> +-  if test -d "/usr/local/opt/openssl/lib"; then
+> +-    AC_DEFINE_UNQUOTED(NO_SSL_DL, 1, [has openssl])
+> +-    SSL_INC="-I/usr/local/opt/openssl/include"
+> +-    SSL_LIB="-L/usr/local/opt/openssl/lib -lssl"
+> +-  dnl Workaround for FreeBSD
+> +-  elif test -f "/usr/lib/libssl.so"; then
+> +-    AC_DEFINE_UNQUOTED(NO_SSL_DL, 1, [has openssl])
+> +-    SSL_INC="-I/usr/include"
+> +-    SSL_LIB="-L/usr/lib -lssl -lcrypto"
+> +-  else
+> +-    echo "Please install openssl-dev(el) package prerequisite"
+> +-    exit -1
+> +-  fi
+> ++  echo "Please install openssl-dev(el) package prerequisite"
+> ++  exit -1
+> + fi
+> +
+> + AC_CHECK_LIB([gcrypt], [gcry_cipher_checktag], [LDFLAGS="${LDFLAGS} -lgcrypt"])
+> +--
+> +2.26.2
+> +
+> diff --git a/meta-networking/recipes-support/ntopng/files/ntopng.service b/meta-networking/recipes-support/ntopng/files/ntopng.service
+> new file mode 100644
+> index 000000000..66912fbef
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/ntopng/files/ntopng.service
+> @@ -0,0 +1,13 @@
+> +[Unit]
+> +Description=ntopng - High-Speed Web-based Traffic Analysis and Flow Collection Tool
+> +After=network.target
+> +
+> +[Service]
+> +Type=forking
+> +StandardOutput=syslog
+> +StandardError=inherit
+> +ExecStart=/usr/bin/ntopng -e -w 3000
+> +Restart=on-abort
+> +
+> +[Install]
+> +WantedBy=multi-user.target
+> diff --git a/meta-networking/recipes-support/ntopng/ntopng_4.2.bb b/meta-networking/recipes-support/ntopng/ntopng_4.2.bb
+> new file mode 100644
+> index 000000000..250fe8fbe
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/ntopng/ntopng_4.2.bb
+> @@ -0,0 +1,47 @@
+> +SUMMARY = "Web-based Traffic and Security Network Traffic Monitoring"
+> +DESCRIPTION = "ntopng is a web-based network traffic monitoring application \
+> +released under GPLv3. It is the new incarnation of the original \
+> +ntop written in 1998, and now revamped in terms of performance, \
+> +usability, and features."
+> +
+> +SECTION = "console/network"
+> +
+> +DEPENDS = "curl libmaxminddb libpcap lua mariadb ndpi json-c rrdtool zeromq"
+> +RDEPENDS_${PN} = "bash redis"
+> +LICENSE = "GPLv3"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+> +
+> +SRCREV = "5e649a2d1130b4a3ab0c5bb673d615172cc0bdbb"
+> +SRC_URI = "git://github.com/ntop/ntopng.git;protocol=git;branch=4.2-stable \
+> +           file://0001-configure.seed-fix-configure-error.patch \
+> +           file://0001-configure.seed-fix-host-contamination.patch \
+> +           file://0001-Makefile.in-don-t-use-the-internal-lua.patch \
+> +           file://0001-autogen.sh-generate-configure.ac-only.patch \
+> +           file://ntopng.service \
 > +"
 > +
 > +S = "${WORKDIR}/git"
 > +
-> +# ARM does not currently support NUMA
-> +COMPATIBLE_HOST = "^((?!arm).*)$"
+> +# don't use the lua under thirdparty as it supports cross compiling badly
+> +export LUA_LIB = "${STAGING_LIBDIR}/liblua.a"
 > +
-> +LDFLAGS_append_riscv64 = " -latomic"
-> +LDFLAGS_append_riscv32 = " -latomic"
+> +LDFLAGS_append_mipsarch = " -latomic"
+> +LDFLAGS_append_powerpc = " -latomic"
+> +inherit autotools-brokensep gettext systemd
 > +
-> +do_install() {
-> +    oe_runmake DESTDIR=${D} prefix=${D}/usr install
-> +    #remove the empty man2 directory
-> +    rm -r ${D}${mandir}/man2
+> +do_install_append() {
+> +    install -d ${D}${systemd_unitdir}/system/
+> +    install -m 0644 ${WORKDIR}/ntopng.service ${D}${systemd_unitdir}/system
 > +}
 > +
-> +do_compile_ptest() {
-> +    oe_runmake test
+> +FILES_${PN} += "\
+> +    ${systemd_unitdir}/system/ntopng.service"
+> +
+> +FILES_${PN}-doc += "\
+> +    /usr/man/man8/ntopng.8"
+> +
+> +do_configure_prepend() {
+> +    ${S}/autogen.sh
 > +}
 > +
-> +do_install_ptest() {
-> +    #install tests binaries
-> +    local test_binaries="distance ftok mbind_mig_pages migrate_pages move_pages \
-> +    mynode    nodemap node-parse pagesize prefered randmap realloc_test \
-> +    tbitmap tshared"
-> +
-> +    [ ! -d ${D}/${PTEST_PATH}/test ] && mkdir -p ${D}/${PTEST_PATH}/test
-> +    for i in $test_binaries; do
-> +        install -m 0755 ${B}/test/.libs/$i ${D}${PTEST_PATH}/test
-> +    done
-> +
-> +    local test_scripts="checktopology checkaffinity printcpu regress regress2 \
-> +        shmtest  runltp bind_range"
-> +    for i in $test_scripts; do
-> +        install -m 0755 ${B}/test/$i ${D}${PTEST_PATH}/test
-> +    done
-> +
-> +    install -m 0755 ${WORKDIR}/Makefile ${D}${PTEST_PATH}/
-> +    install -m 0755 ${B}/.libs/numactl ${D}${PTEST_PATH}/
-> +}
-> +
-> +RDEPENDS_${PN}-ptest = "bash"
+> +SYSTEMD_SERVICE_${PN} = "ntopng.service"
+> --
+> 2.26.2
+>
+>
 > 
-> 
-> 
-> 
-> 
+>
