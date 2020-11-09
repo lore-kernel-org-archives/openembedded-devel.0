@@ -1,458 +1,73 @@
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com [209.85.215.195])
- by mx.groups.io with SMTP id smtpd.web09.15256.1604943505077329714
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com [209.85.215.196])
+ by mx.groups.io with SMTP id smtpd.web12.15134.1604943506092843926
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Nov 2020 09:38:25 -0800
+ Mon, 09 Nov 2020 09:38:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Qkn+9DKw;
- spf=pass (domain: gmail.com, ip: 209.85.215.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f195.google.com with SMTP id f27so4347125pgl.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Nov 2020 09:38:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ht8r49N8;
+ spf=pass (domain: gmail.com, ip: 209.85.215.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f196.google.com with SMTP id i7so7740550pgh.6
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Nov 2020 09:38:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=9iOPzAooB6b5fVW44CWACzTXQk2lHAhmmHZTV+51RvM=;
-        b=Qkn+9DKwGKhl680xDS90efGIDwxCbX+fZbGJnDjQKjBv2sKxxkod4xmSC1JOI6jNN+
-         O0TukI8wsuatbkT04uyuN8mAbVl7xB/C0Ogx6/6zIsfAkFeeBZKy2COfzJPugNB9q1o5
-         x+BwFpDxYTSlABSQKYrP9y8fQp5VC74nGYGCu9AyIUhO/VpGJS4Vam6kOFyudgQI2XQP
-         XCGDO7rg9jTS7gIg72miH0K6pY3cvcX4044t28lOm7Jv4NkYac6lRpMYAmN82AocsaSK
-         5Yjbp/ug1p/u++ipY3uaZK6Rjc92QcXoc8L9mnFJSjC9Y9QZ8qtYhuDbSjPhXDcJ42FW
-         mD4A==
+        bh=VZg4S5AEVVbC12c/XrVJ7Nvj/kSbgx2VGQSY2WFV8CA=;
+        b=ht8r49N8r4Ba0imj+FpokdMb7FYNBPzxG/jkFOvY4aQF4P1z+rFOAhnB1k4Afj+DQT
+         otqd2/gQQjYMZmhSW84X6DTRLNOwx/ba4U1LwBv+nYOSBVF7uy5vA4KB6J3P1p4lks4v
+         /5FwLtlB+QYF6GqxkP62EjBO5NxteYT6LRlyTlwVlEf2E3fVxM1jsY+5qORDaEPjqGOz
+         cFpOpnmcsSVF9egCnhrmDQ+DOXg0KSfJ3K14wErE+xj+2cpjAItIi7+5r3KV66gZZECE
+         S/dvEmcwXCI6kvYNN5v+zoVJffux8zr7mQC0nFZ3z9qGZsG2RZPZkaUULr82F4uHhlF7
+         nhiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=9iOPzAooB6b5fVW44CWACzTXQk2lHAhmmHZTV+51RvM=;
-        b=IbLGSpUO6ljRnoXBWDz9ZQaJaELUbmXSORhw9koVElhgM04COd8RsXdirz9jLAZqJh
-         ewRTLHPhcUZiGdW5qHbnxjgJ5n4Q8iyF/EZc3NBpY82LkZigDpKA1PysC5pMTcMxu2zu
-         Km2Dfs6NOe2KNMWY2qIRrGZSkQMoTQmOg2/aBa4akTsafmGf01BmO7jKnq21YilcK0W/
-         xJKp2HLZjtKQg3MLPWDn7/3kAZNrjSxnpRPDtiKY6SbturV1qOfY86kgLmou1kPwLC9j
-         xdYcVT8y7lQqTgQgsxpmpvXhg1b8nMj2v9QqD5C3omdYiL63ypEQDBxvMi9HWn3q31ol
-         L36Q==
-X-Gm-Message-State: AOAM532Qo2wH9AJ7TJJUfuOAmecct2qx/ul1hUKa/k+nvR33ZON2DxHp
-	0yqtsBR26OlObegtbOx4WDGnXcXrUSU95Q==
-X-Google-Smtp-Source: ABdhPJzjNv46xXZcfRXhXf2TNgQBfOlyzHxKtG3/Yv4LkxAB4TdoBuA6VHY24opatPIUQ2jqj7Zt+w==
-X-Received: by 2002:a17:90a:fa93:: with SMTP id cu19mr266729pjb.117.1604943504046;
-        Mon, 09 Nov 2020 09:38:24 -0800 (PST)
+        bh=VZg4S5AEVVbC12c/XrVJ7Nvj/kSbgx2VGQSY2WFV8CA=;
+        b=FByIffrD1+nI80z1w45dgkS/emBv4nQZUHhVCyAKbrNr2wRYaqv1EfKIgKajatjeDZ
+         fnobHJyx28FHnp5ZdNMGPtM9EV37LMNiXZEM5/A6IrX55QU7kjPjVBSUX51jXow3eeIi
+         AU5fWga9kV4rSSGq6KOeXwYV5xH8vfDqITZkal7NXYMP8ZQXYMVoudFmxp+QCtKPf/aq
+         P/TYtxW2Gwk40T0+0l2i6czlKyTDWq/50xhDHbHK1ys9lh91f60dLtp5VeGzI5XXvxCs
+         Ik6FyVui9Yzgr5t+8MoYojemD16mRaz650uvz+sTypMIhjV3RwnodxIMy6wFv+4XU8fl
+         Z+7g==
+X-Gm-Message-State: AOAM532KTAqHT9+aKbxaEIPoSNeD0njeM5EwOnbAqyyq/zhiVMlBPUBz
+	+Qb7vSXmuFH/lP/MKXCBTDdm/2agSyzz6g==
+X-Google-Smtp-Source: ABdhPJyo5GLv5lrEO0C4lojuEz/4LQjotSJNundqcNSrWUfv95jDI25C3Z2P2vkG+Q7RrjYrTdyBYA==
+X-Received: by 2002:a17:90a:b797:: with SMTP id m23mr252544pjr.153.1604943505315;
+        Mon, 09 Nov 2020 09:38:25 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::740e])
-        by smtp.gmail.com with ESMTPSA id d7sm11198467pgh.17.2020.11.09.09.38.23
+        by smtp.gmail.com with ESMTPSA id d7sm11198467pgh.17.2020.11.09.09.38.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Nov 2020 09:38:23 -0800 (PST)
+        Mon, 09 Nov 2020 09:38:24 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 2/8] rdma-core: Upgrade to 31.1
-Date: Mon,  9 Nov 2020 09:38:14 -0800
-Message-Id: <20201109173820.3545516-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/8] opengl-es-cts: Disable LTO
+Date: Mon,  9 Nov 2020 09:38:15 -0800
+Message-Id: <20201109173820.3545516-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201109173820.3545516-1-raj.khem@gmail.com>
 References: <20201109173820.3545516-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Disable LTO, its uses ASM constructs for symbol versioning which are incompatible with LTO,
-they should migrate to gcc-10's mechanism for symbol versioning which is
-compatible with LTO
-
-disable manpages, it needs pandoc to build
+It needs upstream support
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...Remove-man-files-which-cant-be-built.patch | 352 ------------------
- .../{rdma-core_30.0.bb => rdma-core_31.1.bb}  |   6 +-
- 2 files changed, 4 insertions(+), 354 deletions(-)
- delete mode 100644 meta-networking/recipes-support/rdma-core/rdma-core/0001-Remove-man-files-which-cant-be-built.patch
- rename meta-networking/recipes-support/rdma-core/{rdma-core_30.0.bb => rdma-core_31.1.bb} (90%)
+ meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/rdma-core/rdma-core/0001-Remove-man-files-which-cant-be-built.patch b/meta-networking/recipes-support/rdma-core/rdma-core/0001-Remove-man-files-which-cant-be-built.patch
-deleted file mode 100644
-index 4b2e33e9ab..0000000000
---- a/meta-networking/recipes-support/rdma-core/rdma-core/0001-Remove-man-files-which-cant-be-built.patch
-+++ /dev/null
-@@ -1,352 +0,0 @@
--From cfcfb8a110b72b9d92cf7c56f374478f65473653 Mon Sep 17 00:00:00 2001
--From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
--Date: Wed, 5 Aug 2020 17:21:14 +0900
--Subject: [PATCH] Remove man files which cant be built
--
--Remove need for pandoc-prebuilt during cross build
--
--Fixes errors
--
--| CMake Error at libibumad/man/cmake_install.cmake:105 (file):
--|   file INSTALL cannot find
--|   "/mnt/a/oe/build/tmp/work/core2-64-bec-linux-musl/rdma-core/18.1-r0/git/buildlib/pandoc-prebuilt/41bbb0bed7a781be59e8c0dcd8b7278af2ce6882".
--| Call Stack (most recent call first):
--|   cmake_install.cmake:48 (include)
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--Update for version 26.1. Remove more man files which can no be built.
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
--
--Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-----
-- infiniband-diags/man/CMakeLists.txt | 34 ------------
-- libibumad/man/CMakeLists.txt        |  2 -
-- libibverbs/man/CMakeLists.txt       | 53 -------------------
-- librdmacm/man/CMakeLists.txt        |  2 -
-- providers/efa/man/CMakeLists.txt    |  2 -
-- providers/mlx4/man/CMakeLists.txt   |  1 -
-- providers/mlx5/man/CMakeLists.txt   | 82 -----------------------------
-- 7 files changed, 176 deletions(-)
--
--diff --git a/infiniband-diags/man/CMakeLists.txt b/infiniband-diags/man/CMakeLists.txt
--index 1f1f91c9..094a389f 100644
----- a/infiniband-diags/man/CMakeLists.txt
--+++ b/infiniband-diags/man/CMakeLists.txt
--@@ -46,40 +46,6 @@ rdma_rst_common(
-- )
-- 
-- rdma_man_pages(
---  check_lft_balance.8.in.rst
---  dump_fts.8.in.rst
---  ibaddr.8.in.rst
---  ibcacheedit.8.in.rst
---  ibccconfig.8.in.rst
---  ibccquery.8.in.rst
---  ibfindnodesusing.8.in.rst
---  ibhosts.8.in.rst
---  ibidsverify.8.in.rst
---  iblinkinfo.8.in.rst
---  ibnetdiscover.8.in.rst
---  ibnodes.8.in.rst
---  ibping.8.in.rst
---  ibportstate.8.in.rst
---  ibqueryerrors.8.in.rst
---  ibroute.8.in.rst
---  ibrouters.8.in.rst
---  ibstat.8.in.rst
---  ibstatus.8.in.rst
---  ibswitches.8.in.rst
---  ibsysstat.8.in.rst
---  ibtracert.8.in.rst
---  infiniband-diags.8.in.rst
---  perfquery.8.in.rst
---  saquery.8.in.rst
---  sminfo.8.in.rst
---  smpdump.8.in.rst
---  smpquery.8.in.rst
---  vendstat.8.in.rst
---  )
---
---rdma_alias_man_pages(
---  dump_fts.8 dump_lfts.8
---  dump_fts.8 dump_mfts.8
--   )
-- 
-- if (ENABLE_IBDIAGS_COMPAT)
--diff --git a/libibumad/man/CMakeLists.txt b/libibumad/man/CMakeLists.txt
--index 185584a0..857a4b8b 100644
----- a/libibumad/man/CMakeLists.txt
--+++ b/libibumad/man/CMakeLists.txt
--@@ -15,7 +15,6 @@ rdma_man_pages(
--   umad_get_mad_addr.3
--   umad_get_pkey.3
--   umad_get_port.3
---  umad_init.3.md
--   umad_open_port.3
--   umad_poll.3
--   umad_recv.3
--@@ -38,5 +37,4 @@ rdma_alias_man_pages(
--   umad_class_str.3 umad_method_str.3
--   umad_get_ca.3 umad_release_ca.3
--   umad_get_port.3 umad_release_port.3
---  umad_init.3 umad_done.3
--   )
--diff --git a/libibverbs/man/CMakeLists.txt b/libibverbs/man/CMakeLists.txt
--index 87f00185..92c68611 100644
----- a/libibverbs/man/CMakeLists.txt
--+++ b/libibverbs/man/CMakeLists.txt
--@@ -1,24 +1,18 @@
-- rdma_man_pages(
---  ibv_advise_mr.3.md
--   ibv_alloc_dm.3
--   ibv_alloc_mw.3
---  ibv_alloc_null_mr.3.md
--   ibv_alloc_parent_domain.3
--   ibv_alloc_pd.3
--   ibv_alloc_td.3
--   ibv_asyncwatch.1
---  ibv_attach_counters_point_flow.3.md
---  ibv_attach_mcast.3.md
--   ibv_bind_mw.3
--   ibv_create_ah.3
--   ibv_create_ah_from_wc.3
--   ibv_create_comp_channel.3
---  ibv_create_counters.3.md
--   ibv_create_cq.3
--   ibv_create_cq_ex.3
--   ibv_modify_cq.3
--   ibv_create_flow.3
---  ibv_create_flow_action.3.md
--   ibv_create_qp.3
--   ibv_create_qp_ex.3
--   ibv_create_rwq_ind_table.3
--@@ -27,17 +21,8 @@ rdma_man_pages(
--   ibv_create_wq.3
--   ibv_devices.1
--   ibv_devinfo.1
---  ibv_event_type_str.3.md
---  ibv_fork_init.3.md
--   ibv_get_async_event.3
--   ibv_get_cq_event.3
---  ibv_get_device_guid.3.md
---  ibv_get_device_index.3.md
---  ibv_get_device_list.3.md
---  ibv_get_device_name.3.md
---  ibv_get_pkey_index.3.md
---  ibv_get_srq_num.3.md
---  ibv_inc_rkey.3.md
--   ibv_modify_qp.3
--   ibv_modify_qp_rate_limit.3
--   ibv_modify_srq.3
--@@ -52,24 +37,15 @@ rdma_man_pages(
--   ibv_post_srq_recv.3
--   ibv_query_device.3
--   ibv_query_device_ex.3
---  ibv_query_gid.3.md
---  ibv_query_pkey.3.md
--   ibv_query_port.3
--   ibv_query_qp.3
--   ibv_query_rt_values_ex.3
--   ibv_query_srq.3
---  ibv_rate_to_mbps.3.md
---  ibv_rate_to_mult.3.md
--   ibv_rc_pingpong.1
---  ibv_read_counters.3.md
--   ibv_reg_mr.3
---  ibv_req_notify_cq.3.md
---  ibv_rereg_mr.3.md
---  ibv_resize_cq.3.md
--   ibv_srq_pingpong.1
--   ibv_uc_pingpong.1
--   ibv_ud_pingpong.1
---  ibv_wr_post.3.md
--   ibv_xsrq_pingpong.1
--   )
-- rdma_alias_man_pages(
--@@ -80,47 +56,18 @@ rdma_alias_man_pages(
--   ibv_alloc_mw.3 ibv_dealloc_mw.3
--   ibv_alloc_pd.3 ibv_dealloc_pd.3
--   ibv_alloc_td.3 ibv_dealloc_td.3
---  ibv_attach_mcast.3 ibv_detach_mcast.3
--   ibv_create_ah.3 ibv_destroy_ah.3
--   ibv_create_ah_from_wc.3 ibv_init_ah_from_wc.3
--   ibv_create_comp_channel.3 ibv_destroy_comp_channel.3
---  ibv_create_counters.3 ibv_destroy_counters.3
--   ibv_create_cq.3 ibv_destroy_cq.3
--   ibv_create_flow.3 ibv_destroy_flow.3
---  ibv_create_flow_action.3 ibv_destroy_flow_action.3
---  ibv_create_flow_action.3 ibv_modify_flow_action.3
--   ibv_create_qp.3 ibv_destroy_qp.3
--   ibv_create_rwq_ind_table.3 ibv_destroy_rwq_ind_table.3
--   ibv_create_srq.3 ibv_destroy_srq.3
--   ibv_create_wq.3 ibv_destroy_wq.3
---  ibv_event_type_str.3 ibv_node_type_str.3
---  ibv_event_type_str.3 ibv_port_state_str.3
--   ibv_get_async_event.3 ibv_ack_async_event.3
--   ibv_get_cq_event.3 ibv_ack_cq_events.3
---  ibv_get_device_list.3 ibv_free_device_list.3
--   ibv_open_device.3 ibv_close_device.3
--   ibv_open_xrcd.3 ibv_close_xrcd.3
---  ibv_rate_to_mbps.3 mbps_to_ibv_rate.3
---  ibv_rate_to_mult.3 mult_to_ibv_rate.3
--   ibv_reg_mr.3 ibv_dereg_mr.3
---  ibv_wr_post.3 ibv_wr_abort.3
---  ibv_wr_post.3 ibv_wr_complete.3
---  ibv_wr_post.3 ibv_wr_start.3
---  ibv_wr_post.3 ibv_wr_atomic_cmp_swp.3
---  ibv_wr_post.3 ibv_wr_atomic_fetch_add.3
---  ibv_wr_post.3 ibv_wr_bind_mw.3
---  ibv_wr_post.3 ibv_wr_local_inv.3
---  ibv_wr_post.3 ibv_wr_rdma_read.3
---  ibv_wr_post.3 ibv_wr_rdma_write.3
---  ibv_wr_post.3 ibv_wr_rdma_write_imm.3
---  ibv_wr_post.3 ibv_wr_send.3
---  ibv_wr_post.3 ibv_wr_send_imm.3
---  ibv_wr_post.3 ibv_wr_send_inv.3
---  ibv_wr_post.3 ibv_wr_send_tso.3
---  ibv_wr_post.3 ibv_wr_set_inline_data.3
---  ibv_wr_post.3 ibv_wr_set_inline_data_list.3
---  ibv_wr_post.3 ibv_wr_set_sge.3
---  ibv_wr_post.3 ibv_wr_set_sge_list.3
---  ibv_wr_post.3 ibv_wr_set_ud_addr.3
---  ibv_wr_post.3 ibv_wr_set_xrc_srqn.3
--   )
--diff --git a/librdmacm/man/CMakeLists.txt b/librdmacm/man/CMakeLists.txt
--index 2d1efbff..d016c926 100644
----- a/librdmacm/man/CMakeLists.txt
--+++ b/librdmacm/man/CMakeLists.txt
--@@ -20,7 +20,6 @@ rdma_man_pages(
--   rdma_destroy_qp.3
--   rdma_destroy_srq.3
--   rdma_disconnect.3
---  rdma_establish.3.md
--   rdma_event_str.3
--   rdma_free_devices.3
--   rdma_get_cm_event.3
--@@ -33,7 +32,6 @@ rdma_man_pages(
--   rdma_get_send_comp.3
--   rdma_get_src_port.3
--   rdma_getaddrinfo.3
---  rdma_init_qp_attr.3.md
--   rdma_join_multicast.3
--   rdma_join_multicast_ex.3
--   rdma_leave_multicast.3
--diff --git a/providers/efa/man/CMakeLists.txt b/providers/efa/man/CMakeLists.txt
--index d6a4f57b..376f293d 100644
----- a/providers/efa/man/CMakeLists.txt
--+++ b/providers/efa/man/CMakeLists.txt
--@@ -1,4 +1,2 @@
-- rdma_man_pages(
---  efadv_create_driver_qp.3.md
---  efadv.7.md
-- )
--diff --git a/providers/mlx4/man/CMakeLists.txt b/providers/mlx4/man/CMakeLists.txt
--index 3df77caf..99a75101 100644
----- a/providers/mlx4/man/CMakeLists.txt
--+++ b/providers/mlx4/man/CMakeLists.txt
--@@ -1,6 +1,5 @@
-- rdma_man_pages(
--   mlx4dv_init_obj.3
--   mlx4dv_query_device.3
---  mlx4dv_set_context_attr.3.md
--   mlx4dv.7
-- )
--diff --git a/providers/mlx5/man/CMakeLists.txt b/providers/mlx5/man/CMakeLists.txt
--index c3ad70a2..876b6fcf 100644
----- a/providers/mlx5/man/CMakeLists.txt
--+++ b/providers/mlx5/man/CMakeLists.txt
--@@ -1,89 +1,7 @@
-- rdma_man_pages(
---  mlx5dv_alloc_dm.3.md
---  mlx5dv_alloc_var.3.md
---  mlx5dv_create_cq.3.md
---  mlx5dv_create_flow.3.md
---  mlx5dv_create_flow_action_modify_header.3.md
---  mlx5dv_create_flow_action_packet_reformat.3.md
---  mlx5dv_create_flow_matcher.3.md
---  mlx5dv_create_mkey.3.md
---  mlx5dv_create_qp.3.md
---  mlx5dv_devx_alloc_uar.3.md
---  mlx5dv_devx_create_cmd_comp.3.md
---  mlx5dv_devx_create_event_channel.3.md
---  mlx5dv_devx_get_event.3.md
---  mlx5dv_devx_obj_create.3.md
---  mlx5dv_devx_qp_modify.3.md
---  mlx5dv_devx_query_eqn.3.md
---  mlx5dv_devx_subscribe_devx_event.3.md
---  mlx5dv_devx_umem_reg.3.md
---  mlx5dv_dr_flow.3.md
---  mlx5dv_dump.3.md
---  mlx5dv_flow_action_esp.3.md
--   mlx5dv_get_clock_info.3
--   mlx5dv_init_obj.3
---  mlx5dv_is_supported.3.md
---  mlx5dv_modify_qp_lag_port.3.md
---  mlx5dv_open_device.3.md
---  mlx5dv_pp_alloc.3.md
--   mlx5dv_query_device.3
---  mlx5dv_query_qp_lag_port.3.md
--   mlx5dv_ts_to_ns.3
---  mlx5dv_wr_post.3.md
--   mlx5dv.7
-- )
---rdma_alias_man_pages(
--- mlx5dv_alloc_var.3 mlx5dv_free_var.3
--- mlx5dv_create_mkey.3 mlx5dv_destroy_mkey.3
--- mlx5dv_devx_alloc_uar.3 mlx5dv_devx_free_uar.3
--- mlx5dv_devx_create_cmd_comp.3 mlx5dv_devx_destroy_cmd_comp.3
--- mlx5dv_devx_create_event_channel.3 mlx5dv_devx_destroy_event_channel.3
--- mlx5dv_devx_create_cmd_comp.3 mlx5dv_devx_get_async_cmd_comp.3
--- mlx5dv_devx_obj_create.3 mlx5dv_devx_general_cmd.3
--- mlx5dv_devx_obj_create.3 mlx5dv_devx_obj_destroy.3
--- mlx5dv_devx_obj_create.3 mlx5dv_devx_obj_query.3
--- mlx5dv_devx_obj_create.3 mlx5dv_devx_obj_query_async.3
--- mlx5dv_devx_obj_create.3 mlx5dv_devx_obj_modify.3
--- mlx5dv_devx_qp_modify.3 mlx5dv_devx_qp_query.3
--- mlx5dv_devx_qp_modify.3 mlx5dv_devx_cq_modify.3
--- mlx5dv_devx_qp_modify.3 mlx5dv_devx_cq_query.3
--- mlx5dv_devx_qp_modify.3 mlx5dv_devx_wq_modify.3
--- mlx5dv_devx_qp_modify.3 mlx5dv_devx_wq_query.3
--- mlx5dv_devx_qp_modify.3 mlx5dv_devx_srq_modify.3
--- mlx5dv_devx_qp_modify.3 mlx5dv_devx_srq_query.3
--- mlx5dv_devx_qp_modify.3 mlx5dv_devx_ind_tbl_modify.3
--- mlx5dv_devx_qp_modify.3 mlx5dv_devx_ind_tbl_query.3
--- mlx5dv_devx_subscribe_devx_event.3 mlx5dv_devx_subscribe_devx_event_fd.3
--- mlx5dv_devx_umem_reg.3 mlx5dv_devx_umem_dereg.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_action_create_dest_table.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_action_create_dest_ibv_qp.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_action_create_dest_vport.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_action_create_flow_counter.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_action_create_drop.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_action_create_default_miss.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_action_create_flow_meter.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_action_create_modify_header.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_action_create_packet_reformat.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_action_create_tag.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_action_destroy.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_action_modify_flow_meter.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_domain_create.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_domain_destroy.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_domain_sync.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_domain_set_reclaim_device_memory.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_matcher_create.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_matcher_destroy.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_rule_create.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_rule_destroy.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_table_create.3
--- mlx5dv_dr_flow.3 mlx5dv_dr_table_destroy.3
--- mlx5dv_dump.3 mlx5dv_dump_dr_domain.3
--- mlx5dv_dump.3 mlx5dv_dump_dr_matcher.3
--- mlx5dv_dump.3 mlx5dv_dump_dr_rule.3
--- mlx5dv_dump.3 mlx5dv_dump_dr_table.3
--- mlx5dv_pp_alloc.3 mlx5dv_pp_free.3
--- mlx5dv_wr_post.3 mlx5dv_wr_set_dc_addr.3
--- mlx5dv_wr_post.3 mlx5dv_qp_ex_from_ibv_qp_ex.3
--- mlx5dv_wr_post.3 mlx5dv_wr_mr_interleaved.3
--- mlx5dv_wr_post.3 mlx5dv_wr_mr_list.3
---)
---- 
--2.25.1
--
-diff --git a/meta-networking/recipes-support/rdma-core/rdma-core_30.0.bb b/meta-networking/recipes-support/rdma-core/rdma-core_31.1.bb
-similarity index 90%
-rename from meta-networking/recipes-support/rdma-core/rdma-core_30.0.bb
-rename to meta-networking/recipes-support/rdma-core/rdma-core_31.1.bb
-index 18c34fb59f..dc07c267c1 100644
---- a/meta-networking/recipes-support/rdma-core/rdma-core_30.0.bb
-+++ b/meta-networking/recipes-support/rdma-core/rdma-core_31.1.bb
-@@ -7,9 +7,8 @@ RDEPENDS_${PN} = "bash perl"
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb
+index 5e0076b207..801bd05c91 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb
++++ b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.6.1.bb
+@@ -27,3 +27,5 @@ do_install() {
+ }
  
- BRANCH = "stable-v${@d.getVar('PV').split('.')[0]}"
- SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=${BRANCH} \
--           file://0001-Remove-man-files-which-cant-be-built.patch \
-            "
--SRCREV = "0f4dd71d38a0f1b005635a3ff344e15791d2afa7"
-+SRCREV = "a4013e3d94cb5819f0e4cd93b298f775d5542a66"
- S = "${WORKDIR}/git"
- 
- #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
-@@ -20,8 +19,11 @@ LIC_FILES_CHKSUM = "file://COPYING.BSD_FB;md5=0ec18bae1a9df92c8d6ae01f94a289ae \
- EXTRA_OECMAKE = " \
-     -DCMAKE_INSTALL_SYSTEMD_SERVICEDIR=${systemd_system_unitdir} \
-     -DCMAKE_INSTALL_PERLDIR=${libdir}/perl5/${@get_perl_version(d)} \
-+    -DNO_MAN_PAGES=1 \
- "
- 
+ SECURITY_CFLAGS_riscv64 = "${SECURITY_NOPIE_CFLAGS}"
 +LTO = ""
 +
- FILES_SOLIBSDEV = ""
- FILES_${PN} += "${libdir}/*"
- INSANE_SKIP_${PN} += "dev-so"
 -- 
 2.29.2
 
