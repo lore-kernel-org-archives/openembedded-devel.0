@@ -1,17 +1,17 @@
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.44])
- by mx.groups.io with SMTP id smtpd.web11.8558.1604909517269453735
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.41])
+ by mx.groups.io with SMTP id smtpd.web12.8610.1604909722908956452
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Nov 2020 00:11:57 -0800
+ Mon, 09 Nov 2020 00:15:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=ULUO7Jef;
- spf=pass (domain: windriver.com, ip: 40.107.93.44, mailfrom: mingli.yu@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=mt3oJNX0;
+ spf=pass (domain: windriver.com, ip: 40.107.94.41, mailfrom: mingli.yu@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hmaXr+nqu2/803I6AzNrK/ABARqxFqxLxVlf84ktPrnsk/pA63o9lF3qGad4ANqo/HsP7WUnf/yZX8m9sZQwL8p/EZ17NzGVsceybQXJJ3JBq2WMXsETiIp0AuXZi5I0bJYu5va6hms+xYMoH/vgQYyYaVfR7S15wvUnLrLX2QK9O0pKxRDmfL7dUmhVqFL1UzEnlB34kpyyPLRGnbH/BOPUwfrK9BFdSeswe5FbFmAcbpk7rGUAXqwPmR91NCJkl44GfErlSCax8RWJKztSky/NWlAnkPRELpb7hCX1Nb1qT+1sQGeWwQGeZZIB6t8PAqM6cjrf9GvLUlwJ9+l3qw==
+ b=UNCViTpgJF8wUEOhlasKA2nMdTT/s/lEHick1lJBuM+acd73AE9LpRJTfO3Wyf61drCXQcA8218uETSFQm7MNFqGyWls6Or/7GRFr0Wwf5gFYBJWOV6Pi16yR48mW30K9bUaXO1PV2wrpoTvjfYeZbuzDCAi9z+YXMdavRucC9+gxkBs31F3nyKNrLWsO+mf5iFxc8Umb2o9BLQZK6tdcPGGKV5jKBRGnqaqUWrAi4CNKfjGqCDXd7tCUprmmzyWaroQCASUS1E4YVQZ7c5VlmZQi+CB9ENh6QAC0T7Ho26jes04iOZzyCcfaJk12IkBawXPa8ZVwe89gZ1vclDnxg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=38Hyxx1dLLTBITaMLFAcv0+/NQs+1tyL8kRSV8yo20c=;
- b=mE96m5IOnmHJtgxjMMpoOzuxUFGdETeYNGseAfuCwL3q2yU4h331PX8qQbyN43Lev+a/ek3m1n42eTvpqTnD9suWyVovFUDFVLIJ9gm9rzCYbkk2z3TsSkWl58usiz0sZkFxyPs0qlV7yTEth4gJMZqAmajxVovVghKtwDCPkqDVj7gtGt2Tg60iWYwY0srJEAWW2vMaTnhumCUZ1fDm4rpvmjp9QoGWiu09tCrKYUfMdeg8Wox8bfPW41QkIFL26Ppaq/H1Ng4myYt9H+sIE7aKafCd1ObMWpbVoCw/ID0sHZ5Wf3k0YrHxIz3tlDUZxKCuSqHsmOJ8sAfbNglTPw==
+ bh=+G4sh1bDtnT81OL/FAOyWm3xWVK1nsCrWbhL5Z+C+9Q=;
+ b=fMagLX6p3z0b6yAsnN8wBZCcs8i9MCSSpgdKT8NERb6sAoFpHdW23VxudU/SfHtA0CH//TeVvt5+Svz5h4/jOhNgxordwUAIT0D4cFG9jW/M0AUfRqtSnYxajYAnIT1N7hXTaMe3UlVJuSxXqQQYPVDJ1bgF9gaoJ2gOOUiVLPZZ9c87iW+cj2B1aGIMpkRfdCQvVOhl8Iiiuh8zD/iMhTTiFoHGDDIig1wKoVlMj9j6EDdFduIsmgd10pXGn/O5owYIPMuF37NXwhowaKowoHHrueXrrYFizY4sPHsM9jnotT3ctPEo/me4lj8bpEfG7A9AZoJ1ZU1xnWVB7ZC/4A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,69 +19,71 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=38Hyxx1dLLTBITaMLFAcv0+/NQs+1tyL8kRSV8yo20c=;
- b=ULUO7JefQJCkjoxMQw6xFBX1fopEdXuUNXUmqgF1bzmRESJ2mQVT8TW0kpJ9bHJwSIcpVB8Ycv2Epm/OrDVIEQI2MRii6FZMVn70bxW4Jte6vQfzPn+v9Xmz6546Hyj3IQAQnDLenGTcd4/ij81ei30Q5TL3ORbGwCSayyhdvNo=
+ bh=+G4sh1bDtnT81OL/FAOyWm3xWVK1nsCrWbhL5Z+C+9Q=;
+ b=mt3oJNX0YHMrYfrjETXDOi7tQuotq0wq2kiTlvX1fA5EqvPSEIX46IYe/3YjsQ7twnjJYRWVcIyCEpeDUmsDDCffAT3E5tGG5+MhK8VVw7cIKOYSLOtO91f1MBX4zLkOlUAwZDCnSlKmGg6f+bWV40HHMs3xrw+s4oC4CubeaLc=
 Authentication-Results: gmail.com; dkim=none (message not signed)
  header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
 Received: from CO1PR11MB5009.namprd11.prod.outlook.com (2603:10b6:303:9e::11)
- by MWHPR11MB1632.namprd11.prod.outlook.com (2603:10b6:301:11::11) with
+ by MWHPR11MB1423.namprd11.prod.outlook.com (2603:10b6:300:22::14) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.24; Mon, 9 Nov
- 2020 08:11:54 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.25; Mon, 9 Nov
+ 2020 08:15:20 +0000
 Received: from CO1PR11MB5009.namprd11.prod.outlook.com
  ([fe80::105b:9105:2a38:9e9f]) by CO1PR11MB5009.namprd11.prod.outlook.com
  ([fe80::105b:9105:2a38:9e9f%7]) with mapi id 15.20.3541.025; Mon, 9 Nov 2020
- 08:11:53 +0000
+ 08:15:20 +0000
 From: "Yu, Mingli" <mingli.yu@windriver.com>
 To: raj.khem@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH v2 4/4] ntop: remove the recipe
-Date: Mon,  9 Nov 2020 16:10:18 +0800
-Message-Id: <20201109081018.19474-1-mingli.yu@windriver.com>
+Subject: [meta-networking][PATCH v3 4/4] ntop: remove the recipe
+Date: Mon,  9 Nov 2020 16:15:03 +0800
+Message-Id: <20201109081503.19713-1-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <CAMKF1srZNRHHq20v2rE1jzRpzT562VjUK6U0_-rYyA3qr4SzyA@mail.gmail.com>
 References: <CAMKF1srZNRHHq20v2rE1jzRpzT562VjUK6U0_-rYyA3qr4SzyA@mail.gmail.com>
 X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: HKAPR03CA0035.apcprd03.prod.outlook.com
- (2603:1096:203:c9::22) To CO1PR11MB5009.namprd11.prod.outlook.com
+X-ClientProxiedBy: HK2PR03CA0055.apcprd03.prod.outlook.com
+ (2603:1096:202:17::25) To CO1PR11MB5009.namprd11.prod.outlook.com
  (2603:10b6:303:9e::11)
 Return-Path: mingli.yu@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from pek-lpg-core2.corp.ad.wrs.com (60.247.85.82) by HKAPR03CA0035.apcprd03.prod.outlook.com (2603:1096:203:c9::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3564.21 via Frontend Transport; Mon, 9 Nov 2020 08:11:52 +0000
+Received: from pek-lpg-core2.corp.ad.wrs.com (60.247.85.82) by HK2PR03CA0055.apcprd03.prod.outlook.com (2603:1096:202:17::25) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.21 via Frontend Transport; Mon, 9 Nov 2020 08:15:18 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: f5e5aeed-78d9-464f-8c34-08d884871e20
-X-MS-TrafficTypeDiagnostic: MWHPR11MB1632:
+X-MS-Office365-Filtering-Correlation-Id: 825415d9-93ae-48ac-cc02-08d88487992b
+X-MS-TrafficTypeDiagnostic: MWHPR11MB1423:
 X-Microsoft-Antispam-PRVS: 
-	<MWHPR11MB16329DA85FA8F37E43899805F1EA0@MWHPR11MB1632.namprd11.prod.outlook.com>
+	<MWHPR11MB14239433CB8FEEBA60B51F70F1EA0@MWHPR11MB1423.namprd11.prod.outlook.com>
 X-MS-Oob-TLC-OOBClassifiers: OLM:5516;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	qmxUXbYBcw/MOWfPh+WfnSq20CV4QlqV5FO046b/CZVXFKu+36ouSPNBJiFvHpVnUciSRe4HWY9LkzADUPWMYZAquSjRvDMa2GkAJ74W8vzl33q5mfX9RYRFzDhXsSymNTjpbEQLqOpQuQsJsyzExu1gmvB26idXtgI2fJgWFaNKxmP/d/6DrQNDsb5B04o+MLtZTn0Mur9joRbGh0iK2/0+Fqdw9/w+ZTmjKulR990SG5SHUO4UzhcnvXqL5ju8NuN9DXlxMYYwW1puzi7vT4O0mv24KBtJUKK3WODlQptAq0ScD1ARMyabahDNyGxO9W0WYv1hzIar1E5NJzVQuiHAav5UprW5wGQr9XPtwOuqKzTWci+vjHxWLZiAYxVt1VEnuQbfkX5qFy4ipP1Dtw==
+	s844pNtlk4jFzkUnGt4a+vYTRPhIXqn1bbsOM2yOc6s+h2Da+74uT1kI0EXEbnAkBVJN28IQZCuJyZiSOG3+Dh6QQ5AOHPh22fV33H8SVHfB9ByMh98MbVFtz/psMXvry7anKQANzxaNc9xZZTBfKRCHmTcIuNo8xlKh5GZOCB5RiOs0SuXv1LO+5Dnkfjeps3hznc+EDOhqNDGPNPiR5MaPMaUocFXZan3MLPrmly1fCUbecqzPrRkoqdtsBGKqnL9Fqx+3u0+EBrQqRwR4atHPyAIvXZXaiQrLWg6+vZyHpCHd4XccDTUuD12xWSzgtAnrGNc/Md15pxZEbnrMUasBLgoSQ0jrRXT2/1Rs8VFq90Hp56iDDnpErzqDOfc1FQL3RYSmgScDfly7o0eBGA==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB5009.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(346002)(39840400004)(366004)(376002)(8676002)(52116002)(6506007)(316002)(86362001)(5660300002)(1076003)(83380400001)(2906002)(66946007)(8936002)(66556008)(66476007)(36756003)(30864003)(966005)(478600001)(9686003)(6512007)(26005)(2616005)(956004)(6486002)(16526019)(186003)(6666004);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB5009.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(346002)(396003)(366004)(39840400004)(376002)(36756003)(83380400001)(9686003)(8936002)(6486002)(8676002)(6512007)(2906002)(478600001)(316002)(86362001)(6506007)(26005)(186003)(16526019)(1076003)(30864003)(52116002)(2616005)(956004)(66946007)(5660300002)(66476007)(6666004)(66556008)(966005);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	meHA1Fjx3yeCZbJrlPzowzlclFUxmiTpOM3bKPeBUhSQ5iZe5OgK7SJfTcuLhgeZkjAkSALruOeb0u5pv+5mP3A4RADfj9TgTq8Dq1yMp1EYXrk1FLXeKUessAiMF8C16eiPsVmkVhNwvvC7jB8+sHYvIchF6PdyekQDPTBNtBwid4ARsMmc7AutiSfdE5jm7DNAGbuw8nqk6Dq2Qhh5gBCR3koemDi4sgCC65UsNCij1gZREpUw/l+uoIv4NAH0Cuh8gghmXFrFYTbUvDcKgOpOaiKXXvSFyxyBHTgPsRCf3QCfM+fEhH1In0p2epQ9Os5CEC6pB+Y9I66mwz5e2q7ZVyU4sdRasVI3PyF45+WPGIvBQUzVjQESoJFDIrHSLQ48f1zJPFiO5I2AQlRcpfbw8WwArVs5ylo+J6mYBrWsQ1fzAvV7xI63jmh571RV/Hy4WGa2XAYU5i4mFvnKn3L2Mby6Xp2uJFZYqX1jvgn/f43QW9wlNhFgZRMSNp99Ordh6GXdmVaTFzVZZqcT6kSTA7Xzr4M7J+omzLs3GOtfgCeAOiuQfgP8oOGFmM/Rlr+DKAKUKtnyoeA5AYYqCJ1MdrZtDGAjzBEVV9BcSMnx47lehr64vTfGV1r4LYNMxVa2Cofw1K1VMwxKmD1pVg==
+	V8FI6FT3iaVwDzSAdYH461PJUZSMyqDGhKz312AaSm47xu+1DtFMSY35A5eoHYkCjJFhgdHe+YkCDF1VEKc5CA8lsXdH0+JDGI9xBONtxS3o7nrDtCb0e3LAXGg+WbT4xpMBDK3z+1gDACQOLoYC3DV/+675vwAey3rt9sKqwi1R1CyfGDHzo4yGupKwbKLXeWBtN1P/3cltRVZp0qg66AAASgC0EypOdcF3ZQq3mf7hDAFjfqfa9ZMwO5WESoOHb24rH+lyct+ZSnuXC3U+RH4f0PmUCFCIKEFChkTFzox++DgVn4kh3MfpGlL8qt3Q0npGrSkSZC4T5bkkpqe89hAOx05An/4TK4f7VkPR++md5fAWaZfu/v5QmRctZX2tUHq47bbgcb+NQSiWqeXp3qiVAKmxEThJw9tawTSK/tIxaFtPm2p4bTR9hrHkZ+9SnY/E7o2xnZXtA0LovgrfA/T5sg9jzwzykkODfgu7eTHIW0KGk7DI8gzXzd8AGQUKtIH/2Cm8kT4qN0yfYOvPbevhb6Lo8EowhLr4VuaRP0iUdO46GzeNqKPvLbH3dWovfmmR4zZEN45vB4BA//r9v5HcaL0Q4ynltd7YC37rEEyD9tH4lfVbLWFc99AOiMwooBJ5rOAjhxsaZLXoPslsvA==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f5e5aeed-78d9-464f-8c34-08d884871e20
+X-MS-Exchange-CrossTenant-Network-Message-Id: 825415d9-93ae-48ac-cc02-08d88487992b
 X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5009.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Nov 2020 08:11:53.6583
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Nov 2020 08:15:20.1386
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: SS8asQVj85t2PiNAyLaM2we4lPWXe9fZt552W/pYf1csv7YJUzoQx8h4j1rJUcpwA6diVgzqLN3ZOKAQOLV5Vg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR11MB1632
+X-MS-Exchange-CrossTenant-UserPrincipalName: yI7K5B4+rRGhsZV5RNGiQSf8XWLtQHhh5v+PukR1DwkI1zwO1EaJgxgfWGl8yPLcE6BjXnDNKbGtg1ZIDclKMA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR11MB1423
 Content-Type: text/plain
 
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
 The ntop project is inactive and there is no new version
 since 2012 [1] and it has been replaced by ntopng.
 
 [1] https://sourceforge.net/projects/ntop/files/ntop/Stable/
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
  .../ntop/0001-nDPI-Include-sys-types.h.patch  |  26 --
  ...-Makefile.am-fix-for-automake-1.16.1.patch |  74 ------
