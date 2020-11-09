@@ -1,454 +1,455 @@
-Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
- by mx.groups.io with SMTP id smtpd.web12.6480.1604891550248161517
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.83])
+ by mx.groups.io with SMTP id smtpd.web09.7099.1604896187299487369
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Nov 2020 19:12:30 -0800
+ Sun, 08 Nov 2020 20:29:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=E+Im6qvf;
- spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f178.google.com with SMTP id f27so2437317pgl.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Nov 2020 19:12:30 -0800 (PST)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=T8pF39UX;
+ spf=pass (domain: windriver.com, ip: 40.107.93.83, mailfrom: mingli.yu@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=kVP0kV/vcgIoKgVBazXOIESXM4z2lNOaW5+1hrLt4cM1q16cL+7Mh/7HzjrNaiDS7XK/28vrpKUqfuTg2qMy/marvdf8ak+oBGWDOSfA/MSUCrgElPbCGN8NeXs/F1Iz38rhSckoOMx+5ssL7SMe3v8huFEP+Whq18ik5v61yFxZ2p23PJxctO5l6ViFGXS5B8nlyXgyZb2Rd+/zyTE4e6TotAck1nReBt0TiJG4HrvsypwMH94XS/B/NKIzsdypas57ME76AmWvjm0+1CR/nglKDQUNRRMg6EXFfrJ9EVyuU2+P0pCqYuxmauauAutXHTFO6XpPKR0aPj5npNq2MQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=R2bgMC+m9o3vqtMwZv5HkMY00hOMZ282HxDkKRi9RJ8=;
+ b=EWS6ZAIH/9zYGIejFBIy/TlA6CwUf+aa+oCSjt1o4wDqjIrJkcGJJZSNLQ5yN2bjzlI1oPVV85lWVGUuYOmSPWmM5JRtRlnUoSSyJSTJIF/WXznREhohG0n/NvLUzwsiaUoxi4D2N4NPu8fMfajD59SlgpTqlnsLAcqTHTxbmrjyBkDecNqvXPUEn6N4NeuKGt9UqP/ThlwEaadljxJxRzxQjJyb9ymQUPeSOb8K7sxKJFYQBFnG1IikHLW9BHNY5jnpsN3HKJ39kOVvxpBZX5H/dyHwlQ/H85GQ/CBEPR4GgntBqChuYvhG96h3lTr06DerTNM9WKWbDEuaB3aRMw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Wt8fE3+viQm6QiZJ5xtwkU2jlav3Wd7QZH+05jIhQHM=;
-        b=E+Im6qvfJcLgP7p1ho1AppwVnNXnVdl7d5yI15zajXQMLkvMNYVsdoWgZ/SBdvyhX8
-         xnqe29+6iLp51iX8QE3jk9P37Z43uH3LYYiTFkqmNsDqmkl8Ih81NQVTugLKAuSjGMpU
-         zyDn3CQDS4xYD0rBjDoc6yxdE/rOQZiolTcsaxL78ga99Bcs6hMVgwECLew8NTEN1Wvm
-         u71EbSuLOzKOPXMUvorpE1lPlHdoAvG+URi21+mqfRgC/AjKbRAMj046NM2/pj519jWI
-         KgRmxJVylhELsCDrFhEUscI0RGj+UC1HgIIsmSkJVreME1scVa5AUdgAiYVI6/HGMOUk
-         dHJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Wt8fE3+viQm6QiZJ5xtwkU2jlav3Wd7QZH+05jIhQHM=;
-        b=b09dGyg3WI/g8jmEY+ff9QQy/ULh18ujPGvD2k0j2Demb+4INMbM4pmEWNsoSx3N0R
-         DHTUfUJSZ01fwA+jfj4l6KJx/fyRyNMbqJCEQSjSLNmYK23yNokdjjxAyCNiS8oUq9pP
-         3wwuLSm4tAITyS3aTuvu38Qym5BW8rmfL+MmufF2FXn+ATSmeTjSv5mTOQMe6fBBvNGq
-         7hd/f6kxP9SAcjQ9XgTcmJTiuvoHZCiuQ7cpa0hN776AvfCoW/eOAxCLlwtg/QrcP5Fg
-         3azhksMOnFPnIJb7We1x6IjDt8YNcgKDcYox+7JwmYm7VQrzmD0ddIlUAI31Bw2uzoek
-         Y/EA==
-X-Gm-Message-State: AOAM531B7zqmoUdsOmxFlfQ0LIZgWSMcBWcCy7lrhWSOt2l3MbPn5YOP
-	boYWzKVLYjxJZCerlSGNcVbvL+G3bOJzBA==
-X-Google-Smtp-Source: ABdhPJxxJROh1PPchVeKXfiR2tpNHe11fCrtisX1/YomVVUdPiTi71r3Av32LVjhnA6jsz6n8xgG4Q==
-X-Received: by 2002:a17:90a:f993:: with SMTP id cq19mr11047538pjb.173.1604891549015;
-        Sun, 08 Nov 2020 19:12:29 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::740e])
-        by smtp.gmail.com with ESMTPSA id v18sm9528959pfn.35.2020.11.08.19.12.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 08 Nov 2020 19:12:28 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] lksctp-tools: Update to latest master
-Date: Sun,  8 Nov 2020 19:12:25 -0800
-Message-Id: <20201109031225.68138-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.29.2
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=R2bgMC+m9o3vqtMwZv5HkMY00hOMZ282HxDkKRi9RJ8=;
+ b=T8pF39UXSLkAnIbZ+RJmoF3816F9rNOtzJi0CJg5srt370eHTRNj+nRRaX8n79VV8N6EdnRT40hHDqbrezTFYifX4L11oWbpwUP6TISBioIHJncHw7Ex6RzHsNqJMenUuUhLedgo0LUcKBFQSIwmjU3IpZQSCygSQqe++ov5Vs0=
+Authentication-Results: gmail.com; dkim=none (message not signed)
+ header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
+Received: from CO1PR11MB5009.namprd11.prod.outlook.com (2603:10b6:303:9e::11)
+ by CO1PR11MB4771.namprd11.prod.outlook.com (2603:10b6:303:9f::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.23; Mon, 9 Nov
+ 2020 04:29:46 +0000
+Received: from CO1PR11MB5009.namprd11.prod.outlook.com
+ ([fe80::105b:9105:2a38:9e9f]) by CO1PR11MB5009.namprd11.prod.outlook.com
+ ([fe80::105b:9105:2a38:9e9f%7]) with mapi id 15.20.3541.025; Mon, 9 Nov 2020
+ 04:29:46 +0000
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: raj.khem@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH v2 3/4] ntopng: add new recipe
+Date: Mon,  9 Nov 2020 12:29:30 +0800
+Message-Id: <20201109042930.40205-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <CAMKF1srN3p5HPwq1n0qg51g8yU7sS0Di9iX_hb89Unjsfs6WLg@mail.gmail.com>
+References: <CAMKF1srN3p5HPwq1n0qg51g8yU7sS0Di9iX_hb89Unjsfs6WLg@mail.gmail.com>
+X-Originating-IP: [60.247.85.82]
+X-ClientProxiedBy: HKAPR03CA0024.apcprd03.prod.outlook.com
+ (2603:1096:203:c9::11) To CO1PR11MB5009.namprd11.prod.outlook.com
+ (2603:10b6:303:9e::11)
+Return-Path: mingli.yu@windriver.com
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from pek-lpg-core2.corp.ad.wrs.com (60.247.85.82) by HKAPR03CA0024.apcprd03.prod.outlook.com (2603:1096:203:c9::11) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3564.13 via Frontend Transport; Mon, 9 Nov 2020 04:29:45 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 2a5db46e-d68a-457a-93cc-08d88468163e
+X-MS-TrafficTypeDiagnostic: CO1PR11MB4771:
+X-Microsoft-Antispam-PRVS: 
+	<CO1PR11MB4771F5BF8EC995D5AF539A6EF1EA0@CO1PR11MB4771.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	ATW1ju9L7hKQXRIe/31GlYMUuAPfzJ/RNeOEFQSMO8g1EB5riZDPlLISznRFMn7fA7tigPXSOtRpnPqR5EBWJYUYNr997StlOoMVGxTVMT8icIO1MGh603hK91IkvjvbiHpDHwy46RTrWzezrYpIJ/fINT6vDSaFcgGzEuHRuiGzdEWca7c0R6CSbAkyr5zw2CpQP5VBUWkkl6+UWMpucWZOg8mmPyqLAD+t4TqykK4XoBEuywVuyJ0CU8R9YUS+Jefme14wf3lf9fOq7aObouIY+ULk3dJDDolD0l6niSdwLpF9NNl5jsnWwvTGdwBjqqo4v1Rs9T/jryEYeArN0w==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB5009.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(346002)(376002)(39840400004)(396003)(366004)(36756003)(83380400001)(6486002)(1076003)(6666004)(30864003)(6506007)(52116002)(2906002)(6512007)(478600001)(186003)(66476007)(66556008)(66946007)(316002)(16526019)(2616005)(8936002)(5660300002)(956004)(8676002)(86362001)(26005)(9686003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	4tGhw/54UZypHivTlcM5BGbonwTfc1/km3HHR2mmjmtf9dt1pOFfLzTIl5qsc7vqleNXgQtRoPMQGRgfVCUQVBnvCwpTaEY9685SIGiDVnVHtW15+7vNUK5qcL664IFEnJICtokwNWwQMaqgLcnFPKabenGOoqw+VZlER9OMRf3jdcEfTWk+FjK3sqQX0+NPpEKbhY7I6sqpSdHonW3CN3dqA9D8u/U+Ii7JRU5RGCTp+ODZggEhKRo5eVDkrXZkFTISnJD+JkgyLi0B+BHu6rVvWeAJ+bYJebAXIQKZdzsLpCA4VogwSCkix5PVa7dzdSnfoilI+E9bldBLjF12tV6nqwibC1H2yyHIxNgF45tgS6PM0Zw+9WIQAiTV0swxXMzEQrhYR05Ez5Yd8ftll3HbMStRalZW65/RCpwxUARYXt4uXcn3Avz4Kdjq4f9V276i982ltJy7vyS+9pZs6ELCeYmfuHJIVzNTV90IXPQL6G3zgcNVI/7WOYdmCcrnPiLyXmTRwzsL/iSBcQiMh743pWkkYMaL/sR9HhaYEfzXeYxZ+y3Y0l8jQb/MXC69mMNxB57WImTYJpwJ5VLM7r50UA0S7RDHQ4B5g11yHzH3W35v19R0n0fKI4IidWf06T9ZlXBkQqg9otxv21DfWA==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2a5db46e-d68a-457a-93cc-08d88468163e
+X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5009.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Nov 2020 04:29:45.9969
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 60FrpdS5RB41v3n5NecC5mUJHvNjFGHmapSANK8d4HKulVDEnW/abZ6FoxrxOkUiHeVckchjVaMngt9HdyXz8g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR11MB4771
+Content-Type: text/plain
 
-Drop the patches which are upstream now
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ntopng is a web-based network traffic monitoring application
+released under GPLv3. It is the new incarnation of the original
+ntop written in 1998, and now revamped in terms of performance,
+usability, and features.
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- ...0dce7a36fb-actually-belongs-to-v4.19.patch | 31 --------
- ...x-netinet-sctp.h-not-to-be-installed.patch | 35 ---------
- ...uild-fix-probing-for-HAVE_SCTP_SENDV.patch | 35 ---------
- ...12-secondary-defines-in-favor-of-HAV.patch | 52 --------------
- ...-CURRENT-REVISION-and-AGE-for-libsct.patch | 71 -------------------
- ...1_events.c-initialize-event-properly.patch | 44 ------------
- ...tp-use-PACKAGE_VERSION-in-withsctp.h.patch | 43 -----------
- .../lksctp-tools/lksctp-tools_1.0.18.bb       |  9 +--
- 8 files changed, 1 insertion(+), 319 deletions(-)
- delete mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch
- delete mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-netinet-sctp.h-not-to-be-installed.patch
- delete mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch
- delete mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch
- delete mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch
- delete mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-test_1_to_1_events.c-initialize-event-properly.patch
- delete mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch
+ ...kefile.in-don-t-use-the-internal-lua.patch | 39 +++++++++
+ ...utogen.sh-generate-configure.ac-only.patch | 36 ++++++++
+ ...1-configure.seed-fix-configure-error.patch | 42 ++++++++++
+ ...onfigure.seed-fix-host-contamination.patch | 82 +++++++++++++++++++
+ ...nfigure.seed-not-check-clang-on-host.patch | 47 +++++++++++
+ .../ntopng/files/ntopng.service               | 13 +++
+ .../recipes-support/ntopng/ntopng_4.2.bb      | 48 +++++++++++
+ 7 files changed, 307 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ntopng/files/0001-Makefile.in-don-t-use-the-internal-lua.patch
+ create mode 100644 meta-networking/recipes-support/ntopng/files/0001-autogen.sh-generate-configure.ac-only.patch
+ create mode 100644 meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-configure-error.patch
+ create mode 100644 meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-host-contamination.patch
+ create mode 100644 meta-networking/recipes-support/ntopng/files/0001-configure.seed-not-check-clang-on-host.patch
+ create mode 100644 meta-networking/recipes-support/ntopng/files/ntopng.service
+ create mode 100644 meta-networking/recipes-support/ntopng/ntopng_4.2.bb
 
-diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch
-deleted file mode 100644
-index 7599b1bcfb..0000000000
---- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From e5952a0cdfa8b1b56a5823574835f1f771f14ae0 Mon Sep 17 00:00:00 2001
--From: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
--Date: Fri, 24 Aug 2018 09:53:00 -0300
--Subject: [PATCH] build: 0b0dce7a36fb actually belongs to v4.19
--
--Typo or not, this commit actually belongs to v4.19 and made me wonder why
--on v4.18 it didn't find this feature.
--
--Fixes: 817f0bfa248f ("build: add two defines for Peer Address Parameters extensions on sctp_paddrparams")
--Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
--Reviewed-by: Xin Long <lucien.xin@gmail.com>
-----
-- configure.ac | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/configure.ac b/configure.ac
--index f55775a..5de5c76 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -101,7 +101,7 @@ LKSCTP_CHECK_TYPE([struct sctp_prinfo], [HAVE_SCTP_SENDV])
-- # added on v4.16, 30f6ebf65bc4
-- LKSCTP_CHECK_DECL([SCTP_AUTH_NO_AUTH], [HAVE_SCTP_AUTH_NO_AUTH])
-- 
---# New members to sctp_paddrparams, added on v4.18, 0b0dce7a36fb
--+# New members to sctp_paddrparams, added on v4.19, 0b0dce7a36fb
-- LKSCTP_CHECK_MEMBER([struct sctp_paddrparams.spp_ipv6_flowlabel],
-- 		    [HAVE_SCTP_SPP_IPV6_FLOWLABEL])
-- LKSCTP_CHECK_MEMBER([struct sctp_paddrparams.spp_dscp],
---- 
--2.7.4
--
-diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-netinet-sctp.h-not-to-be-installed.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-netinet-sctp.h-not-to-be-installed.patch
-deleted file mode 100644
-index 03c6c4f737..0000000000
---- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-netinet-sctp.h-not-to-be-installed.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From 378560050a8f93786c590cc99a55461666205b61 Mon Sep 17 00:00:00 2001
--From: Xin Long <lucien.xin@gmail.com>
--Date: Fri, 24 Aug 2018 01:13:32 +0800
--Subject: [PATCH] build: fix netinet/sctp.h not to be installed
--
--After libcnetinet_HEADERS was set to sctp.h.in, netinet/sctp.h can
--no longer be installed into ${includedir}.
--
--Since "AC_CONFIG_HEADERS([src/include/netinet/sctp.h])" is already
--added into configure.ac, there's no need to generate sctp.h by
--automake.
--
--So we simply set libcnetinet_HEADERS back to sctp.h.
--
--Fixes: 9607dd85e70a ("netinet/sctp.h: dynamically build based on system setup")
--Signed-off-by: Xin Long <lucien.xin@gmail.com>
--Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
-----
-- src/include/netinet/Makefile.am | 3 +--
-- 1 file changed, 1 insertion(+), 2 deletions(-)
--
--diff --git a/src/include/netinet/Makefile.am b/src/include/netinet/Makefile.am
--index ca0aac2..965db8c 100644
----- a/src/include/netinet/Makefile.am
--+++ b/src/include/netinet/Makefile.am
--@@ -11,5 +11,4 @@ libcnetinetdir = $(includedir)/netinet
-- # API.
-- include_HEADERS =
-- 
---libcnetinet_HEADERS = sctp.h.in
---BUILT_SOURCES = sctp.h
--+libcnetinet_HEADERS = sctp.h
---- 
--2.7.4
--
-diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch
-deleted file mode 100644
-index 89c89835da..0000000000
---- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From 596efd6631b83069d41782fb0ee2d6cf76a50dfa Mon Sep 17 00:00:00 2001
--From: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
--Date: Fri, 24 Aug 2018 09:52:59 -0300
--Subject: [PATCH] build: fix probing for HAVE_SCTP_SENDV
--
--Somehow it was using a type that is non-existent. The right one is
--sctp_prinfo, introduced on ed63afb8a318 ("sctp: add support for PR-SCTP
--Information for sendmsg"), present on v4.17.
--
--Fixes: 1b798f1ca3b5 ("build: add define HAVE_SCTP_AUTH_NO_AUTH")
--Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
--Reviewed-by: Xin Long <lucien.xin@gmail.com>
-----
-- configure.ac | 5 ++---
-- 1 file changed, 2 insertions(+), 3 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index dad658c..f55775a 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -94,9 +94,8 @@ LKSCTP_CHECK_MEMBER([struct sctp_pdapi_event.pdapi_stream],
-- LKSCTP_CHECK_MEMBER([struct sctp_pdapi_event.pdapi_seq],
-- 		    [HAVE_SCTP_PDAPI_EVENT_PDAPI_SEQ])
-- 
---# PR-SCTP field used to probe for sendv/recvv support, added on v4.17
---LKSCTP_CHECK_MEMBER([struct sendv_prinfo.sctp_prinfo],
---		    [HAVE_SCTP_SENDV])
--+# PR-SCTP struct used to probe for sendv/recvv support, added on v4.17
--+LKSCTP_CHECK_TYPE([struct sctp_prinfo], [HAVE_SCTP_SENDV])
-- 
-- # This event indicates that the peer does not support SCTP authentication,
-- # added on v4.16, 30f6ebf65bc4
---- 
--2.7.4
--
-diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch
-deleted file mode 100644
-index d22cda6814..0000000000
---- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch
-+++ /dev/null
-@@ -1,52 +0,0 @@
--From db6d15bf12a0123e4320e5fd7cb688331dea1bdc Mon Sep 17 00:00:00 2001
--From: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
--Date: Fri, 24 Aug 2018 09:52:58 -0300
--Subject: [PATCH] build: remove v4.12 secondary defines in favor of
-- HAVE_SCTP_STREAM_RECONFIG
--
--These were backups, commented out since beginning.
--HAVE_SCTP_STREAM_RECONFIG is enough to identify that these are there, so
--lets use only one.
--
--Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
--Reviewed-by: Xin Long <lucien.xin@gmail.com>
-----
-- configure.ac                  | 8 --------
-- src/include/netinet/sctp.h.in | 2 --
-- 2 files changed, 10 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index 2ae36ec..dad658c 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -82,14 +82,6 @@ AC_CHECK_FUNCS([bzero gethostbyname gettimeofday memmove memset select socket \
-- LKSCTP_CHECK_MEMBER([struct sctp_event_subscribe.sctp_stream_reset_event],
-- 		    [HAVE_SCTP_STREAM_RESET_EVENT])
-- 
---# Support for assoc reset event, added on v4.12, c95129d127c6
---#LKSCTP_CHECK_MEMBER([struct sctp_event_subscribe.sctp_assoc_reset_event], \
---#		    [HAVE_SCTP_ASSOC_RESET_EVENT])
---
---# Support for stream change event, added on v4.12, b444153fb5a6
---#LKSCTP_CHECK_MEMBER([struct sctp_event_subscribe.sctp_stream_change_event], \
---#		    [HAVE_SCTP_STREAM_CHANGE_EVENT])
---
-- # RFC 6525 (Stream Reconf), finished on v4.12, c0d8bab6ae51
-- LKSCTP_CHECK_DECL([SCTP_RECONFIG_SUPPORTED], [HAVE_SCTP_STREAM_RECONFIG])
-- 
--diff --git a/src/include/netinet/sctp.h.in b/src/include/netinet/sctp.h.in
--index c049077..2009f1c 100644
----- a/src/include/netinet/sctp.h.in
--+++ b/src/include/netinet/sctp.h.in
--@@ -61,8 +61,6 @@ extern "C" {
-- #define HAVE_SCTP_CANSET_PRIMARY
-- 
-- #undef HAVE_SCTP_STREAM_RESET_EVENT
---#undef HAVE_SCTP_ASSOC_RESET_EVENT
---#undef HAVE_SCTP_STREAM_CHANGE_EVENT
-- #undef HAVE_SCTP_STREAM_RECONFIG
-- #undef HAVE_SCTP_PEELOFF_FLAGS
-- #undef HAVE_SCTP_PDAPI_EVENT_PDAPI_STREAM
---- 
--2.7.4
--
-diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch
-deleted file mode 100644
-index bec9bf0d1b..0000000000
---- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch
-+++ /dev/null
-@@ -1,71 +0,0 @@
--From 7de2bd7e769f10521e3d0c2cb42c6f6b9b505dd0 Mon Sep 17 00:00:00 2001
--From: Xin Long <lucien.xin@gmail.com>
--Date: Thu, 16 Aug 2018 14:12:30 +0800
--Subject: [PATCH] configure.ac: add CURRENT REVISION and AGE for libsctp and
-- libwithsctp
--
--Add CURRENT REVISION and AGE for libsctp and libwithsctp in
--configure.ac to update these 2 library version information.
--
--Compatible with before, they will start from 1:18:0. But each
--will get updated according to their definitions in the future.
--
--Signed-off-by: Xin Long <lucien.xin@gmail.com>
--Acked-by: Neil Horman <nhorman@tuxdriver.com>
--Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
-----
-- configure.ac             | 7 +++++++
-- src/lib/Makefile.am      | 7 +++++--
-- src/withsctp/Makefile.am | 3 ++-
-- 3 files changed, 14 insertions(+), 3 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index 275ef4e..2ae36ec 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -14,6 +14,13 @@ dnl reduce clutter in the root; if we put it below AM_INIT_AUTOMAKE,
-- dnl configure will fail ...)
-- 
-- AC_INIT([lksctp-tools], [1.0.18], [], [], [http://www.lksctp.org/])
--+AC_SUBST(LIBSCTP_CURRENT, 1)
--+AC_SUBST(LIBSCTP_REVISION, 18)
--+AC_SUBST(LIBSCTP_AGE, 0)
--+AC_SUBST(LIBWITHSCTP_CURRENT, 1)
--+AC_SUBST(LIBWITHSCTP_REVISION, 18)
--+AC_SUBST(LIBWITHSCTP_AGE, 0)
--+
-- AC_CONFIG_AUX_DIR(bin)
-- AC_CONFIG_SRCDIR([src/apps/sctp_darn.c])
-- AC_CONFIG_HEADERS([config.h])
--diff --git a/src/lib/Makefile.am b/src/lib/Makefile.am
--index 6100c56..1d62175 100644
----- a/src/lib/Makefile.am
--+++ b/src/lib/Makefile.am
--@@ -8,5 +8,8 @@ AM_CPPFLAGS = -I$(top_srcdir)/src/include
-- 
-- lib_LTLIBRARIES = libsctp.la
-- 
---libsctp_la_SOURCES = bindx.c connectx.c peeloff.c opt_info.c addrs.c sendmsg.c recvmsg.c Versions.map
---libsctp_la_LDFLAGS = -version-info 1:17:0 -Wl,--version-script=$(srcdir)/Versions.map
--+libsctp_la_SOURCES = bindx.c connectx.c peeloff.c opt_info.c \
--+		addrs.c sendmsg.c recvmsg.c Versions.map
--+libsctp_la_LDFLAGS = -version-info \
--+		@LIBSCTP_CURRENT@:@LIBSCTP_REVISION@:@LIBSCTP_AGE@ \
--+		-Wl,--version-script=$(srcdir)/Versions.map
--diff --git a/src/withsctp/Makefile.am b/src/withsctp/Makefile.am
--index 70b1cca..1f6ca37 100644
----- a/src/withsctp/Makefile.am
--+++ b/src/withsctp/Makefile.am
--@@ -14,7 +14,8 @@ AM_CPPFLAGS=-I$(top_srcdir)/src/include
-- pkglib_LTLIBRARIES = libwithsctp.la
-- libwithsctp_la_SOURCES = sctp_load_libs.c sctp_socket.c sctp_bind.c \
-- 	sctp_sockopt.c sctp_socket.h
---libwithsctp_la_LDFLAGS = -version-info 1:17:0 -ldl
--+libwithsctp_la_LDFLAGS = -version-info \
--+	@LIBWITHSCTP_CURRENT@:@LIBWITHSCTP_REVISION@:@LIBWITHSCTP_AGE@ -ldl
-- 
-- pkgdoc_DATA = sctp_load_libs.c sctp_socket.c sctp_bind.c \
-- 	sctp_sockopt.c sctp_socket.h checksctp.c
---- 
--2.7.4
--
-diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-test_1_to_1_events.c-initialize-event-properly.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-test_1_to_1_events.c-initialize-event-properly.patch
-deleted file mode 100644
-index 621e6f4693..0000000000
---- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-test_1_to_1_events.c-initialize-event-properly.patch
-+++ /dev/null
-@@ -1,44 +0,0 @@
--From e1e670defb84d51efdd124e5f3fa166a1a4b7c1d Mon Sep 17 00:00:00 2001
--From: Mingli Yu <Mingli.Yu@windriver.com>
--Date: Tue, 25 Sep 2018 11:39:43 +0800
--Subject: [PATCH] test_1_to_1_events.c: initialize event properly
--
--Initialize event properly to avoid below
--Segmentation fault when run below test
--related to AUTH_NO_AUTH.
--
-- # ./test_1_to_1_events
--test_1_to_1_events.c 1 PASS : COMM_UP notification on client socket - SUCCESS
--test_1_to_1_events.c 2 PASS : COMM_UP notification on server socket - SUCCESS
--test_1_to_1_events.c 3 BROK : Got a datamsg, expecting notification
--DUMP_CORE sctputil.c: 187
--[ 1468.733938] test_1_to_1_eve[2376]: segfault at 0 ip 0000561a4a3d5079 sp 00007ffd49101580 error 6 in test_1_to_1_events[561a4a3d4000+2000]
--[ 1468.734479] Code: ff bf 0a 00 00 00 e8 e6 ef ff ff b9 c9 00 00 00 48 8d 15 61 13 00 00 bf 01 00 00 00 31 c0 48 8d 35 c7 0f 00 00 e8 97 f0
--Segmentation fault
--
--Upstream-Status: Pending
--
--Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
-----
-- src/func_tests/test_1_to_1_events.c | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/src/func_tests/test_1_to_1_events.c b/src/func_tests/test_1_to_1_events.c
--index 46439bf..a086832 100644
----- a/src/func_tests/test_1_to_1_events.c
--+++ b/src/func_tests/test_1_to_1_events.c
--@@ -92,9 +92,11 @@ main(int argc, char *argv[])
-- 	/* Create the client socket.  */
-- 	clt_sk = test_socket(AF_INET, SOCK_STREAM, IPPROTO_SCTP);
-- 
--+	memset(&event, 0, sizeof(event));
-- 	event.sctp_data_io_event = 1;
-- 	event.sctp_association_event = 1;
-- 	event.sctp_shutdown_event = 1;
--+	event.sctp_authentication_event = 1;
-- 	len = sizeof(struct sctp_event_subscribe);
-- 	test_setsockopt(svr_sk, SCTP_EVENTS, &event, len);
-- 	test_setsockopt(clt_sk, SCTP_EVENTS, &event, len);
---- 
--2.7.4
--
-diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch
-deleted file mode 100644
-index 2537bb976a..0000000000
---- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From 7c0ef4d441b3833e721df58f56e2cb8c81b34df4 Mon Sep 17 00:00:00 2001
--From: Xin Long <lucien.xin@gmail.com>
--Date: Thu, 16 Aug 2018 14:12:01 +0800
--Subject: [PATCH] withsctp: use @PACKAGE_VERSION@ in withsctp.h
--
--use @PACKAGE_VERSION@ to replace the hardcode version.
--
--Signed-off-by: Xin Long <lucien.xin@gmail.com>
--Acked-by: Neil Horman <nhorman@tuxdriver.com>
--Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
-----
-- Makefile.rules           | 3 ++-
-- src/withsctp/withsctp.in | 3 ++-
-- 2 files changed, 4 insertions(+), 2 deletions(-)
--
--diff --git a/Makefile.rules b/Makefile.rules
--index 83f5f0c..d3693fa 100644
----- a/Makefile.rules
--+++ b/Makefile.rules
--@@ -15,4 +15,5 @@
-- edit = @sed \
-- 	-e "s|\@bindir\@|$(bindir)|" \
-- 	-e "s|\@libdir\@|$(libdir)|" \
---	-e "s|\@PACKAGE\@|$(PACKAGE)|"
--+	-e "s|\@PACKAGE\@|$(PACKAGE)|" \
--+	-e "s|\@PACKAGE_VERSION\@|$(PACKAGE_VERSION)|"
--diff --git a/src/withsctp/withsctp.in b/src/withsctp/withsctp.in
--index 7f182ba..fda5ebc 100644
----- a/src/withsctp/withsctp.in
--+++ b/src/withsctp/withsctp.in
--@@ -2,7 +2,8 @@
-- # -*- sh -*-
-- LIBDIR=@libdir@/@PACKAGE@
-- BINDIR=@bindir@
---export LD_PRELOAD=${LIBDIR}/libwithsctp.so.1.0.17
--+LIBVER=@PACKAGE_VERSION@
--+export LD_PRELOAD=${LIBDIR}/libwithsctp.so.${LIBVER}
-- if ! ${BINDIR}/checksctp 2> /dev/null
-- then
--     ${BINDIR}/checksctp;
---- 
--2.7.4
--
-diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
-index 3cabc4ff8d..1e2c644b41 100644
---- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
-+++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
-@@ -8,20 +8,13 @@ LIC_FILES_CHKSUM = " \
-     file://COPYING;md5=0c56db0143f4f80c369ee3af7425af6e \
- "
- 
--SRCREV = "1b077af62d83d53c34b1bde8bad6648149d5edf9"
-+SRCREV = "12c74404e09755561dee40cf194954f7ff5afd60"
- 
- PV .= "+git${SRCPV}"
- LK_REL = "1.0.18"
- 
- SRC_URI = " \
-     git://github.com/sctp/lksctp-tools.git \
--    file://0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch \
--    file://0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch \
--    file://0001-build-fix-netinet-sctp.h-not-to-be-installed.patch \
--    file://0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch \
--    file://0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch \
--    file://0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch \
--    file://0001-test_1_to_1_events.c-initialize-event-properly.patch \
-     file://run-ptest \
-     file://v4test.sh \
-     file://v6test.sh \
+diff --git a/meta-networking/recipes-support/ntopng/files/0001-Makefile.in-don-t-use-the-internal-lua.patch b/meta-networking/recipes-support/ntopng/files/0001-Makefile.in-don-t-use-the-internal-lua.patch
+new file mode 100644
+index 000000000..46724558c
+--- /dev/null
++++ b/meta-networking/recipes-support/ntopng/files/0001-Makefile.in-don-t-use-the-internal-lua.patch
+@@ -0,0 +1,39 @@
++From 65c15247d268566b79e4595b8e734b7e40679d75 Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Wed, 4 Nov 2020 08:55:10 +0000
++Subject: [PATCH] Makefile.in: don't use the internal lua
++
++ntopng depends on lua and it will compile the lua under
++third-party sub dir of source tree, but this one supports
++cross-compiling badly, so use the one under RECIPE_SYSROOT.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ Makefile.in | 2 --
++ 1 file changed, 2 deletions(-)
++
++diff --git a/Makefile.in b/Makefile.in
++index 143535746..fc06a5341 100755
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -40,7 +40,6 @@ endif
++ 
++ LUA_HOME=${PWD}/third-party/lua-5.3.5
++ LUA_INC=-I$(LUA_HOME)/src
++-LUA_LIB=$(LUA_HOME)/src/liblua.a
++ 
++ ######
++ LIBRRDTOOL_HOME=${PWD}/third-party/rrdtool-1.4.8
++@@ -118,7 +117,6 @@ RPM_PKG = $(TARGET)-$(NTOPNG_VERSION)-@REVISION@.$(PLATFORM).rpm
++ RPM_DATA_PKG = $(TARGET)-data-$(NTOPNG_VERSION)-@REVISION@.noarch.rpm
++ ######
++ 
++-LIB_TARGETS = $(LUA_LIB)
++ 
++ ifneq ($(HAS_ZEROMQ), 0)
++ LIB_TARGETS += $(ZEROMQ_LIB)
++-- 
++2.26.2
++
+diff --git a/meta-networking/recipes-support/ntopng/files/0001-autogen.sh-generate-configure.ac-only.patch b/meta-networking/recipes-support/ntopng/files/0001-autogen.sh-generate-configure.ac-only.patch
+new file mode 100644
+index 000000000..8d62147b9
+--- /dev/null
++++ b/meta-networking/recipes-support/ntopng/files/0001-autogen.sh-generate-configure.ac-only.patch
+@@ -0,0 +1,36 @@
++From 22f0bec462763f1b0b92daa33133e274d3b45f4f Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Thu, 5 Nov 2020 00:05:21 -0800
++Subject: [PATCH] autogen.sh: generate configure.ac only
++
++The autogen.sh should only generate configure.ac and the
++logic used to generate configure script should follow the
++autotools.bbclass in oe. Otherwise there may comes below
++do_configure error:
++ | checking whether we are cross compiling... configure: error: in `/path/tmp/work/core2-64-poky-linux/ndpi/3.4-r0/git':
++ | configure: error: cannot run C compiled programs.
++ | If you meant to cross compile, use `--host'.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ autogen.sh | 5 -----
++ 1 file changed, 5 deletions(-)
++
++diff --git a/autogen.sh b/autogen.sh
++index 73f8d0ebe..15ff0aa84 100755
++--- a/autogen.sh
+++++ b/autogen.sh
++@@ -73,8 +73,3 @@ cat configure.seed | sed \
++     > configure.ac
++ 
++ rm -f config.h config.h.in *~ #*
++-
++-echo "Wait please..."
++-autoreconf -if
++-echo ""
++-echo "Now run ./configure"
++-- 
++2.17.1
++
+diff --git a/meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-configure-error.patch b/meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-configure-error.patch
+new file mode 100644
+index 000000000..dffab24ca
+--- /dev/null
++++ b/meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-configure-error.patch
+@@ -0,0 +1,42 @@
++From 29797dd037009d38e4976249ed21b2076240751e Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Wed, 4 Nov 2020 04:36:46 +0000
++Subject: [PATCH] configure.seed: fix configure error
++
++fix the below error:
++configure: error: cannot run test program while cross compiling
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ configure.seed | 13 +------------
++ 1 file changed, 1 insertion(+), 12 deletions(-)
++
++diff --git a/configure.seed b/configure.seed
++index a321f9bbf..03f9a31b0 100644
++--- a/configure.seed
+++++ b/configure.seed
++@@ -642,18 +642,7 @@ if test x$radcli = xtrue; then
++   fi
++ fi
++ 
++-AC_CACHE_CHECK([if pthread rwlocks are supported], [my_cv_rw_locks_supported], [
++-  AC_TRY_RUN([
++-  #include <pthread.h>
++-
++-  int main() {
++-    pthread_rwlock_t t;
++-    return 0;
++-  }
++-]
++-, [my_cv_rw_locks_supported=yes], [my_cv_rw_locks_supported=no])
++-]
++-)
+++AC_CACHE_CHECK([if pthread rwlocks are supported], [my_cv_rw_locks_supported])
++ 
++ if test "$my_cv_rw_locks_supported" = yes; then
++   AC_DEFINE_UNQUOTED(HAVE_RW_LOCK, 1, [pthread rwlocks supported])
++-- 
++2.26.2
++
+diff --git a/meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-host-contamination.patch b/meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-host-contamination.patch
+new file mode 100644
+index 000000000..a5ac59fb3
+--- /dev/null
++++ b/meta-networking/recipes-support/ntopng/files/0001-configure.seed-fix-host-contamination.patch
+@@ -0,0 +1,82 @@
++From 81e3512718f80965c26ccb1f9d694c91b121fea0 Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Wed, 4 Nov 2020 06:28:28 +0000
++Subject: [PATCH] configure.seed: fix host contamination
++
++Fix below error:
++This autoconf log indicates errors, it looked at host include and/or
++library paths while determining system capabilities.
++
++Upstream-Status: Inappropriate [OE specific]
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ configure.seed | 47 +++++------------------------------------------
++ 1 file changed, 5 insertions(+), 42 deletions(-)
++
++diff --git a/configure.seed b/configure.seed
++index 03f9a31b0..58aebb5b8 100644
++--- a/configure.seed
+++++ b/configure.seed
++@@ -79,31 +79,6 @@ fi
++ #
++ REVISION=`git log --pretty=oneline | wc -l`
++ 
++-if test -d "/usr/local/include"; then
++-  CFLAGS="${CFLAGS} -I/usr/local/include"
++-  CPPFLAGS="${CPPFLAGS} -I/usr/local/include"
++-fi
++-
++-if test -d "/usr/local/lib"; then
++-  LDFLAGS="${LDFLAGS} -L/usr/local/lib"
++-fi
++-
++-if test -d /opt/local/include; then :
++-  CFLAGS="${CFLAGS} -I/opt/local/include"
++-  CPPFLAGS="${CPPFLAGS} -I/opt/local/include"
++-fi
++-
++-if test -d /opt/local/lib; then :
++-  LDFLAGS="${LDFLAGS} -L/opt/local/lib"
++-fi
++-
++-if [ test -f /usr/bin/lsb_release ]; then
++-  CODENAME=`/usr/bin/lsb_release -c|cut -f 2`
++-  if [[ $CODENAME == "wheezy" ]]; then :
++-    CPPFLAGS="${CPPFLAGS} -DOLD_NETFILTER_INTERFACE=1"
++-  fi
++-fi
++-
++ SHORT_MACHINE=`uname -m | cut -b1-3`
++ 
++ GIT_RELEASE="@GIT_RELEASE@"
++@@ -214,23 +189,11 @@ dnl> fi
++ pkg-config --exists libssl
++ if test "$?" -ne 1; then
++   AC_DEFINE_UNQUOTED(NO_SSL_DL, 1, [has openssl])
++-  SSL_INC="`pkg-config --cflags libssl` -I/usr/include/openssl"
+++  SSL_INC="`pkg-config --cflags libssl`"
++   SSL_LIB="`pkg-config --libs libssl` -lssl -lcrypto"
++ else
++-  dnl Workaround for MacOS Brew
++-  if test -d "/usr/local/opt/openssl/lib"; then
++-    AC_DEFINE_UNQUOTED(NO_SSL_DL, 1, [has openssl])
++-    SSL_INC="-I/usr/local/opt/openssl/include"
++-    SSL_LIB="-L/usr/local/opt/openssl/lib -lssl"
++-  dnl Workaround for FreeBSD
++-  elif test -f "/usr/lib/libssl.so"; then
++-    AC_DEFINE_UNQUOTED(NO_SSL_DL, 1, [has openssl])
++-    SSL_INC="-I/usr/include"
++-    SSL_LIB="-L/usr/lib -lssl -lcrypto"
++-  else
++-    echo "Please install openssl-dev(el) package prerequisite"
++-    exit -1
++-  fi
+++  echo "Please install openssl-dev(el) package prerequisite"
+++  exit -1
++ fi
++ 
++ AC_CHECK_LIB([gcrypt], [gcry_cipher_checktag], [LDFLAGS="${LDFLAGS} -lgcrypt"])
++-- 
++2.26.2
++
+diff --git a/meta-networking/recipes-support/ntopng/files/0001-configure.seed-not-check-clang-on-host.patch b/meta-networking/recipes-support/ntopng/files/0001-configure.seed-not-check-clang-on-host.patch
+new file mode 100644
+index 000000000..95d1f9948
+--- /dev/null
++++ b/meta-networking/recipes-support/ntopng/files/0001-configure.seed-not-check-clang-on-host.patch
+@@ -0,0 +1,47 @@
++From eead0c589b71d4256bf9f16492164786b0ee07e4 Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Mon, 9 Nov 2020 04:05:25 +0000
++Subject: [PATCH] configure.seed: not check clang on host
++
++Don't check clang on host to avoid host contamination.
++
++Upstream-Status: Inappropriate [OE specific]
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ configure.seed | 19 -------------------
++ 1 file changed, 19 deletions(-)
++
++diff --git a/configure.seed b/configure.seed
++index d0335b599..cb97adca2 100644
++--- a/configure.seed
+++++ b/configure.seed
++@@ -509,25 +509,6 @@ if test $SYSTEM = "Darwin"; then
++             CFLAGS="-fno-color-diagnostics $CFLAGS"
++       fi
++    fi
++-else
++-  if test $SYSTEM = "Linux"; then
++-    if [ test -f /usr/bin/clang++ ]; then
++-      CC=clang
++-      CXX=clang++
++-      AC_MSG_RESULT(Using clang++ compiler)
++-    fi
++-    
++-    if [ test -f /etc/redhat-release ]; then
++-       if [ test -f /usr/bin/lsb_release ]; then
++-       	  dnl> CentOS 7
++-	  CENTOS_N2N_DEP=", n2n"
++-       fi
++-    else
++-        if [ test -f /usr/bin/lsb_release ]; then
++-         OS=`/usr/bin/lsb_release -d|cut -d ':' -f 2`
++-        fi
++-    fi
++-  fi
++ fi
++ 
++ dnl> Remove spaces
++-- 
++2.26.2
++
+diff --git a/meta-networking/recipes-support/ntopng/files/ntopng.service b/meta-networking/recipes-support/ntopng/files/ntopng.service
+new file mode 100644
+index 000000000..66912fbef
+--- /dev/null
++++ b/meta-networking/recipes-support/ntopng/files/ntopng.service
+@@ -0,0 +1,13 @@
++[Unit]
++Description=ntopng - High-Speed Web-based Traffic Analysis and Flow Collection Tool
++After=network.target
++
++[Service]
++Type=forking
++StandardOutput=syslog
++StandardError=inherit
++ExecStart=/usr/bin/ntopng -e -w 3000
++Restart=on-abort
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-networking/recipes-support/ntopng/ntopng_4.2.bb b/meta-networking/recipes-support/ntopng/ntopng_4.2.bb
+new file mode 100644
+index 000000000..bd2b99fab
+--- /dev/null
++++ b/meta-networking/recipes-support/ntopng/ntopng_4.2.bb
+@@ -0,0 +1,48 @@
++SUMMARY = "Web-based Traffic and Security Network Traffic Monitoring"
++DESCRIPTION = "ntopng is a web-based network traffic monitoring application \
++released under GPLv3. It is the new incarnation of the original \
++ntop written in 1998, and now revamped in terms of performance, \
++usability, and features."
++
++SECTION = "console/network"
++
++DEPENDS = "curl libmaxminddb libpcap lua mariadb ndpi json-c rrdtool zeromq"
++RDEPENDS_${PN} = "bash redis"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++
++SRCREV = "5e649a2d1130b4a3ab0c5bb673d615172cc0bdbb"
++SRC_URI = "git://github.com/ntop/ntopng.git;protocol=git;branch=4.2-stable \
++           file://0001-configure.seed-fix-configure-error.patch \
++           file://0001-configure.seed-fix-host-contamination.patch \
++           file://0001-Makefile.in-don-t-use-the-internal-lua.patch \
++           file://0001-autogen.sh-generate-configure.ac-only.patch \
++           file://0001-configure.seed-not-check-clang-on-host.patch \
++           file://ntopng.service \
++"
++
++S = "${WORKDIR}/git"
++
++# don't use the lua under thirdparty as it supports cross compiling badly
++export LUA_LIB = "${STAGING_LIBDIR}/liblua.a"
++
++LDFLAGS_append_mipsarch = " -latomic"
++LDFLAGS_append_powerpc = " -latomic"
++inherit autotools-brokensep gettext systemd
++
++do_install_append() {
++    install -d ${D}${systemd_unitdir}/system/
++    install -m 0644 ${WORKDIR}/ntopng.service ${D}${systemd_unitdir}/system
++}
++
++FILES_${PN} += "\
++    ${systemd_unitdir}/system/ntopng.service"
++
++FILES_${PN}-doc += "\
++    /usr/man/man8/ntopng.8"
++
++do_configure_prepend() {
++    ${S}/autogen.sh
++}
++
++SYSTEMD_SERVICE_${PN} = "ntopng.service"
 -- 
-2.29.2
+2.17.1
 
