@@ -1,77 +1,257 @@
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
- by mx.groups.io with SMTP id smtpd.web12.13167.1604936075885609403
+Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net [217.70.183.200])
+ by mx.groups.io with SMTP id smtpd.web11.14557.1604940842177957111
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Nov 2020 07:34:36 -0800
+ Mon, 09 Nov 2020 08:54:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=HhodbxaW;
- spf=pass (domain: gmail.com, ip: 209.85.160.169, mailfrom: rosbrookn@gmail.com)
-Received: by mail-qt1-f169.google.com with SMTP id g15so2493983qtq.13
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Nov 2020 07:34:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=ZiVMBiw0JvWrCPl2U2KFjfR2wuhTXooptGGnaJpgJUw=;
-        b=HhodbxaWprzykICPExi+958NsWe1ClZasp4MS6+bM5cdMrmXfhxhRaYw0yxbyxSJtA
-         ua5nof/ZpNB6ny2AY11i1+w2i8HtTJ6e6RLlTmuhSxWuhy7jG/thR5mR49H5r5VQE6Sj
-         MONuWYCil/q0UtwKzlNucQ4pWQ4Rfb7Njed/xf6MECdChM385GHbWa2cHSxQi+SXRFT5
-         7PjdXxpZXZZ08aL5j0+xVgiz4Nw8b612j3Dguh1Mw+03xgJTpWKOUsmrNPb+0GQFYqXn
-         7RgXKD4ryMAFsO31/lUAFAdDyx9B0HgSdB+YhTbivlP73TERqnoX78hVAdGGpz7sZ/EQ
-         ABkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=ZiVMBiw0JvWrCPl2U2KFjfR2wuhTXooptGGnaJpgJUw=;
-        b=pT/Jiz/Z67f0XBUCyMYfe3EnhoLyBjE0lAuMZVw/vqm7MpQIk/YzZHuFmmaWIwuYyh
-         KF8SlIlA0Bb5JpvuleDW3G8/r0OsKL/yRGYYbhYJ/JbLqWVP6TpZCBQ5OECHKpimYYuA
-         2lXrbbAKQGEW8UWP3BGigfTS54MzTAyF0Zx55B2Si7X4nnzF3aEwjlq3IrgHyWRfdIY3
-         GUGKD6lD8GPWCWGAVna/ehlzFMUIokEhQKF2IolMU53v56eSN0chtm56vehO2nlBc1q0
-         B4+oiu8UzxjAv9ed813BS+WZsjLjGkUGoJXdT3DhDdlPm9IZpHXOZQpGHgbJNi2udYik
-         zHxg==
-X-Gm-Message-State: AOAM531gGRx/SmyfOtDypCmUhTA5O8PO3ZHEAiJWT1AlzMP4dcGHQeYR
-	Tjyq2GILfwsZAiQ/MzaocxM1pEYqHe2vIA==
-X-Google-Smtp-Source: ABdhPJxgN59VBI/F9fH/e2psqISJAhSl1jCH565I4rDZRcGvrdIs5zyuWKcQymNtuiTdvoTACoKMZw==
-X-Received: by 2002:ac8:7604:: with SMTP id t4mr14019132qtq.366.1604936074707;
-        Mon, 09 Nov 2020 07:34:34 -0800 (PST)
-Return-Path: <rosbrookn@gmail.com>
-Received: from FED-nrosbr-BE.crux.rad.ainfosec.com (209-217-208-226.northland.net. [209.217.208.226])
-        by smtp.gmail.com with ESMTPSA id b3sm5768656qte.85.2020.11.09.07.34.33
-        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
-        Mon, 09 Nov 2020 07:34:34 -0800 (PST)
-From: "Nick Rosbrook" <rosbrookn@gmail.com>
-X-Google-Original-From: Nick Rosbrook <rosbrookn@ainfosec.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: gpanders.com, ip: 217.70.183.200, mailfrom: greg@gpanders.com)
+X-Originating-IP: 98.32.4.57
+Received: from localhost.localdomain (c-98-32-4-57.hsd1.nm.comcast.net [98.32.4.57])
+	(Authenticated sender: greg@gpanders.com)
+	by relay7-d.mail.gandi.net (Postfix) with ESMTPSA id 76F0F20006;
+	Mon,  9 Nov 2020 16:53:57 +0000 (UTC)
+From: greg@gpanders.com
 To: openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com,
-	Nick Rosbrook <rosbrookn@ainfosec.com>
-Subject: [meta-networking][PATCH v2 2/2] strongswan: remove ldap from default PACKAGECONFIG
-Date: Mon,  9 Nov 2020 10:34:28 -0500
-Message-Id: <068c310e6cc47b62f592d69ee1a0ae9589c84c5c.1604935361.git.rosbrookn@ainfosec.com>
-X-Mailer: git-send-email 2.25.4
-In-Reply-To: <cover.1604935361.git.rosbrookn@ainfosec.com>
-References: <cover.1604935361.git.rosbrookn@ainfosec.com>
+Cc: Gregory Anders <greg@gpanders.com>
+Subject: [meta-oe][PATCH] Add suitesparse
+Date: Mon,  9 Nov 2020 09:53:44 -0700
+Message-Id: <20201109165344.14981-1-greg@gpanders.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Since ldap is not a standard DISTRO_FEATURE, leave it disabled by default.
-
-Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
 ---
- meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb | 1 -
- 1 file changed, 1 deletion(-)
+SuiteSparse is a sparse matrix processing library. It is used by e.g.  
+python3-cvxopt (which I am also submitting a patch for) to do things 
+like convex optimization.
 
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb b/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
-index abba86e39..8133b9943 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
-@@ -27,7 +27,6 @@ EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-syst
- 
- PACKAGECONFIG ??= "curl gmp openssl sqlite3 swanctl \
-         ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-charon', '', d)} \
--        ${@bb.utils.filter('DISTRO_FEATURES', 'ldap', d)} \
- "
- PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,,${PN}-plugin-aesni"
- PACKAGECONFIG[bfd] = "--enable-bfd-backtraces,--disable-bfd-backtraces,binutils"
+This is my first submission to meta-openembedded, so please give me 
+feedback if there is anything I can improve.
+
+ ...XXFLAGS-from-environment-in-Mongoose.patch | 43 +++++++++++
+ ...serve-links-when-installing-libmetis.patch | 22 ++++++
+ ...-Add-version-information-to-libmetis.patch | 49 ++++++++++++
+ .../suitesparse/suitesparse_5.8.1.bb          | 77 +++++++++++++++++++
+ 4 files changed, 191 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/suitesparse/suitesparse/0001-Preserve-CXXFLAGS-from-environment-in-Mongoose.patch
+ create mode 100644 meta-oe/recipes-devtools/suitesparse/suitesparse/0002-Preserve-links-when-installing-libmetis.patch
+ create mode 100644 meta-oe/recipes-devtools/suitesparse/suitesparse/0003-Add-version-information-to-libmetis.patch
+ create mode 100644 meta-oe/recipes-devtools/suitesparse/suitesparse_5.8.1.bb
+
+diff --git a/meta-oe/recipes-devtools/suitesparse/suitesparse/0001-Preserve-CXXFLAGS-from-environment-in-Mongoose.patch b/meta-oe/recipes-devtools/suitesparse/suitesparse/0001-Preserve-CXXFLAGS-from-environment-in-Mongoose.patch
+new file mode 100644
+index 000000000..c955b5fa7
+--- /dev/null
++++ b/meta-oe/recipes-devtools/suitesparse/suitesparse/0001-Preserve-CXXFLAGS-from-environment-in-Mongoose.patch
+@@ -0,0 +1,43 @@
++From 83628b471a1a79dae50bb158fca9448b668dd3a6 Mon Sep 17 00:00:00 2001
++From: Gregory Anders <greg@gpanders.com>
++Date: Wed, 21 Oct 2020 10:43:16 -0600
++Subject: [PATCH] Preserve CXXFLAGS from environment in Mongoose
++
++This allows CXXFLAGS set in the environment to also be used in the CMake
++build process, instead of overwriting them. This is useful in a cross
++compile context where the CXXFLAGS variable might contain necessary
++flags for cross compiling.
++---
++ Mongoose/CMakeLists.txt | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/Mongoose/CMakeLists.txt b/Mongoose/CMakeLists.txt
++index 7e134ab..91a7f70 100644
++--- a/Mongoose/CMakeLists.txt
+++++ b/Mongoose/CMakeLists.txt
++@@ -321,14 +321,14 @@ add_test(Unit_Test_EdgeSep ./tests/mongoose_unit_test_edgesep)
++ message(STATUS "CMAKE_CXX_COMPILER: " ${BoldBlue} ${CMAKE_CXX_COMPILER_ID} ${ColourReset})
++ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
++     # using Clang
++-    SET(CMAKE_CXX_FLAGS "-O3 -fwrapv")
+++    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fwrapv")
++     # Debug flags for Clang
++     SET(CMAKE_CXX_FLAGS_DEBUG "--coverage -g -fwrapv")
++     SET(CMAKE_C_FLAGS_DEBUG "--coverage -g")
++     SET(CMAKE_EXE_LINKER_FLAGS_DEBUG "--coverage -g")
++ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
++     # using GCC
++-    SET(CMAKE_CXX_FLAGS "-O3 -fwrapv")
+++    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fwrapv")
++     # Debug flags for GCC
++     if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.6")
++         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
++@@ -339,7 +339,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
++     SET(CMAKE_EXE_LINKER_FLAGS_DEBUG "-fprofile-arcs -ftest-coverage")
++ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
++     # using Intel C++
++-    SET(CMAKE_CXX_FLAGS "-O3 -no-prec-div -xHOST -ipo -fwrapv")
+++    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -no-prec-div -xHOST -ipo -fwrapv")
++     # Debug flags for Intel
++     SET(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -Wall -fwrapv")
++     SET(CMAKE_C_FLAGS_DEBUG "-g -O0 -Wall")
+diff --git a/meta-oe/recipes-devtools/suitesparse/suitesparse/0002-Preserve-links-when-installing-libmetis.patch b/meta-oe/recipes-devtools/suitesparse/suitesparse/0002-Preserve-links-when-installing-libmetis.patch
+new file mode 100644
+index 000000000..190eaf164
+--- /dev/null
++++ b/meta-oe/recipes-devtools/suitesparse/suitesparse/0002-Preserve-links-when-installing-libmetis.patch
+@@ -0,0 +1,22 @@
++From 31175fb408a4f5e85e39a9aabd4a29f9d9c1fe25 Mon Sep 17 00:00:00 2001
++From: Gregory Anders <greg@gpanders.com>
++Date: Wed, 21 Oct 2020 15:26:52 -0600
++Subject: [PATCH] Preserve links when installing libmetis
++
++---
++ Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile b/Makefile
++index 7631955..57fd022 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -76,7 +76,7 @@ ifeq (,$(MY_METIS_LIB))
++ 	@mkdir -p $(INSTALL_LIB)
++ 	@mkdir -p $(INSTALL_INCLUDE)
++ 	@mkdir -p $(INSTALL_DOC)
++-	- $(CP) lib/libmetis.* $(INSTALL_LIB)
+++	- $(CP) -d lib/libmetis.* $(INSTALL_LIB)
++ 	- $(CP) metis-5.1.0/manual/manual.pdf $(INSTALL_DOC)/METIS_manual.pdf
++ 	- $(CP) metis-5.1.0/README.txt $(INSTALL_DOC)/METIS_README.txt
++         # the following is needed only on the Mac, so *.dylib is hardcoded:
+diff --git a/meta-oe/recipes-devtools/suitesparse/suitesparse/0003-Add-version-information-to-libmetis.patch b/meta-oe/recipes-devtools/suitesparse/suitesparse/0003-Add-version-information-to-libmetis.patch
+new file mode 100644
+index 000000000..dee6039a8
+--- /dev/null
++++ b/meta-oe/recipes-devtools/suitesparse/suitesparse/0003-Add-version-information-to-libmetis.patch
+@@ -0,0 +1,49 @@
++From 11ab355fdda93b762fcc07ac3f7c6ab1be0a5f5a Mon Sep 17 00:00:00 2001
++From: Gregory Anders <greg@gpanders.com>
++Date: Wed, 21 Oct 2020 15:27:07 -0600
++Subject: [PATCH] Add version information to libmetis
++
++---
++ metis-5.1.0/Makefile                | 8 ++++----
++ metis-5.1.0/libmetis/CMakeLists.txt | 1 +
++ 2 files changed, 5 insertions(+), 4 deletions(-)
++
++diff --git a/metis-5.1.0/Makefile b/metis-5.1.0/Makefile
++index 9cc03b9..c445d85 100644
++--- a/metis-5.1.0/Makefile
+++++ b/metis-5.1.0/Makefile
++@@ -18,8 +18,11 @@ systype = $(shell uname -s)
++ 
++ BUILDDIR = build/$(systype)-$(cputype)
++ 
+++VERNUM=5.1.0
+++PKGNAME=metis-$(VERNUM)
+++
++ # Process configuration options.
++-CONFIG_FLAGS = 
+++CONFIG_FLAGS = -DMETIS_VERSION=$(VERNUM)
++ ifeq ($(gklib_path), not-set)
++     gklib_path = GKlib
++ endif
++@@ -52,9 +55,6 @@ ifneq ($(cc), not-set)
++     CONFIG_FLAGS += -DCMAKE_C_COMPILER=$(cc)
++ endif
++ 
++-VERNUM=5.1.0
++-PKGNAME=metis-$(VERNUM)
++-
++ JOBS ?= 1
++ 
++ define run-config
++diff --git a/metis-5.1.0/libmetis/CMakeLists.txt b/metis-5.1.0/libmetis/CMakeLists.txt
++index 120e94d..11bde87 100644
++--- a/metis-5.1.0/libmetis/CMakeLists.txt
+++++ b/metis-5.1.0/libmetis/CMakeLists.txt
++@@ -4,6 +4,7 @@ include_directories(.)
++ file(GLOB metis_sources *.c)
++ # Build libmetis.
++ add_library(metis ${METIS_LIBRARY_TYPE} ${GKlib_sources} ${metis_sources})
+++set_target_properties(metis PROPERTIES VERSION ${METIS_VERSION})
++ if(UNIX)
++   target_link_libraries(metis m)
++ endif()
+diff --git a/meta-oe/recipes-devtools/suitesparse/suitesparse_5.8.1.bb b/meta-oe/recipes-devtools/suitesparse/suitesparse_5.8.1.bb
+new file mode 100644
+index 000000000..af8b1f856
+--- /dev/null
++++ b/meta-oe/recipes-devtools/suitesparse/suitesparse_5.8.1.bb
+@@ -0,0 +1,77 @@
++LICENSE = "GPLv2 & GPLv3 & BSD-3-Clause & LGPL-2.0 & Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f9f2b9d61cb769a67c4cd079e1166de7"
++SRC_URI = "git://github.com/DrTimothyAldenDavis/SuiteSparse;protocol=https \
++           file://0001-Preserve-CXXFLAGS-from-environment-in-Mongoose.patch \
++           file://0002-Preserve-links-when-installing-libmetis.patch \
++           file://0003-Add-version-information-to-libmetis.patch \
++           "
++
++SRC_URI[md5sum] = "c414679bbc9432a3def01b31ad921140"
++SRC_URI[sha256sum] = "06726e471fbaa55f792578f9b4ab282ea9d008cf39ddcc3b42b73400acddef40"
++
++SRCREV = "v${PV}"
++
++S = "${WORKDIR}/git"
++
++DEPENDS = "cmake-native lapack gmp mpfr chrpath-native"
++
++PROVIDES = "mongoose graphblas"
++RPROVIDES_${PN} = "mongoose graphblas"
++
++# The values of $CC, $CXX, and $LD that Bitbake uses have spaces in them which
++# causes problems when the SuiteSparse Makefiles try to pass these values on
++# the command line. To get around this problem, set these variables to only the
++# program name and prepend the rest of the value onto the corresponding FLAGS
++# variable.
++CFLAGS_prepend := "${@" ".join(d.getVar('CC', True).split()[1:])} "
++export CC := "${@d.getVar('CC', True).split()[0]}"
++
++CXXFLAGS_prepend := "${@" ".join(d.getVar('CXX', True).split()[1:])} "
++export CXX := "${@d.getVar('CXX', True).split()[0]}"
++
++LDFLAGS_prepend := "${@" ".join(d.getVar('LD', True).split()[1:])} "
++export LD := "${@d.getVar('LD', True).split()[0]}"
++
++export CMAKE_OPTIONS = " \
++    -DCMAKE_INSTALL_PREFIX=${D}${prefix} \
++    -DCMAKE_INSTALL_LIBDIR=${baselib} \
++"
++
++do_compile () {
++	oe_runmake library
++}
++
++do_install () {
++	oe_runmake prefix=${D}${prefix} INSTALL=${D}${prefix} install
++
++        # Remove runtime paths from shared libraries
++        for file in ${D}${libdir}/*.so.*; do
++            if [ ! -L "$file" ]; then
++                chrpath -d "$file"
++            fi
++        done
++}
++
++FILES_${PN} += " \
++    ${libdir}/libmongoose.so.* \
++    ${libdir}/libgraphblas.so.* \
++    ${libdir}/libmetis.so.* \
++    ${libdir}/libsuitesparseconfig.so.* \
++    ${libdir}/libamd.so.* \
++    ${libdir}/libbtf.so.* \
++    ${libdir}/libcamd.so.* \
++    ${libdir}/libccolamd.so.* \
++    ${libdir}/libcolamd.so.* \
++    ${libdir}/libcholmod.so.* \
++    ${libdir}/libcxsparse.so.* \
++    ${libdir}/libldl.so.* \
++    ${libdir}/libklu.so.* \
++    ${libdir}/libumfpack.so.* \
++    ${libdir}/librbio.so.* \
++    ${libdir}/libspqr.so.* \
++    ${libdir}/libsliplu.so.* \
++    ${bindir}/mongoose \
++"
++
++FILES_${PN}-staticdev += "${libdir}/libmongoose.a"
++FILES_${PN}-dev += "${includedir} ${libdir}/*.so"
 -- 
-2.17.1
+2.29.2
 
