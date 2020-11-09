@@ -1,59 +1,89 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web12.8130.1604905318448252888
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
+ by mx.groups.io with SMTP id smtpd.web08.8191.1604905767666331944
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Nov 2020 23:01:58 -0800
+ Sun, 08 Nov 2020 23:09:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.77,462,1596470400"; 
-   d="scan'208";a="101082913"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 09 Nov 2020 15:01:37 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id DED274CE3A62
-	for <openembedded-devel@lists.openembedded.org>; Mon,  9 Nov 2020 15:01:35 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Mon, 9 Nov 2020 15:01:37 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] poppler: upgrade 20.10.0 -> 20.11.0
-Date: Mon, 9 Nov 2020 15:01:29 +0800
-Message-ID: <1604905289-63830-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: uol@pengutronix.de)
+Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
+	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <uol@pengutronix.de>)
+	id 1kc1Ir-00005H-26; Mon, 09 Nov 2020 08:09:25 +0100
+Received: from uol by dude.hi.pengutronix.de with local (Exim 4.92)
+	(envelope-from <uol@pengutronix.de>)
+	id 1kc1Iq-0007Ui-6m; Mon, 09 Nov 2020 08:09:24 +0100
+References: <16417565E85E3454.9771@lists.openembedded.org>
+User-agent: mu4e 1.4.9; emacs 26.1
+From: "Ulrich ?lmann" <u.oelmann@pengutronix.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Ulrich =?utf-8?Q?=C3=96lmann?= <u.oelmann@pengutronix.de>
+Subject: Re: [oe] [meta-oe][dunfell][PATCH] usb-modeswitch, usb-modeswitch-data: fix usrmerge
+In-reply-to: <16417565E85E3454.9771@lists.openembedded.org>
+Date: Mon, 09 Nov 2020 08:09:24 +0100
+Message-ID: <6rsg9j6m6z.fsf@pengutronix.de>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: DED274CE3A62.A3FBE
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
+X-SA-Exim-Mail-From: uol@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
----
- .../poppler/{poppler_20.10.0.bb => poppler_20.11.0.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/poppler/{poppler_20.10.0.bb => poppler_20.11.0.bb} (96%)
+Gentle ping!
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_20.10.0.bb b/meta-oe/recipes-support/poppler/poppler_20.11.0.bb
-similarity index 96%
-rename from meta-oe/recipes-support/poppler/poppler_20.10.0.bb
-rename to meta-oe/recipes-support/poppler/poppler_20.11.0.bb
-index 0f04b88f2..729923d40 100644
---- a/meta-oe/recipes-support/poppler/poppler_20.10.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_20.11.0.bb
-@@ -7,7 +7,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://0001-Do-not-overwrite-all-our-build-flags.patch \
-            file://basename-include.patch \
-            "
--SRC_URI[sha256sum] = "434ecbbb539c1a75955030a1c9b24c7b58200b7f68d2e4269e29acf2f8f13336"
-+SRC_URI[sha256sum] = "021557074516492375c2bb4226a413aad431159e9177f9f14dff4159d2723b14"
- 
- DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
- 
--- 
-2.25.1
-
-
-
+On Mon, Oct 26 2020 at 07:00 +0100, Ulrich ?lmann <u.oelmann@pengutronix.de=
+> wrote:
+> Signed-off-by: Ulrich =C3=96lmann <u.oelmann@pengutronix.de>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> (cherry picked from commit 50a487fc0b0123b154db73f79bbb18b23eb234f0)
+> Signed-off-by: Ulrich =C3=96lmann <u.oelmann@pengutronix.de>
+> ---
+>  .../usb-modeswitch/usb-modeswitch-data_20191128.bb            | 4 ++--
+>  .../recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb    | 2 +-
+>  2 files changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_2=
+0191128.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_201=
+91128.bb
+> index 938c0f9c26bd..ca970e59bb3a 100644
+> --- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20191128=
+.bb
+> +++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20191128=
+.bb
+> @@ -11,9 +11,9 @@ SRC_URI[md5sum] =3D "e8fce7eb949cbe16c61fb71bade4cc17"
+>  SRC_URI[sha256sum] =3D "3f039b60791c21c7cb15c7986cac89650f076dc274798fa2=
+42231b910785eaf9"
+>=20=20
+>  do_install() {
+> -    oe_runmake install DESTDIR=3D${D}
+> +    oe_runmake install DESTDIR=3D${D} RULESDIR=3D${D}/${nonarch_base_lib=
+dir}/udev/rules.d
+>  }
+>=20=20
+>  RDEPENDS_${PN} =3D "usb-modeswitch (>=3D 2.4.0)"
+> -FILES_${PN} +=3D "${base_libdir}/udev/rules.d/ \
+> +FILES_${PN} +=3D "${nonarch_base_libdir}/udev/rules.d/ \
+>                  ${datadir}/usb_modeswitch"
+> diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.=
+bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
+> index baad340908ac..6a5287af4959 100644
+> --- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
+> +++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
+> @@ -19,7 +19,7 @@ RDEPENDS_${PN} =3D "tcl"
+>  RRECOMMENDS_${PN} =3D "usb-modeswitch-data"
+>=20=20
+>  do_install() {
+> -    oe_runmake DESTDIR=3D${D} install
+> +    oe_runmake DESTDIR=3D${D} UDEVDIR=3D${D}/${nonarch_base_libdir}/udev=
+ install
+>      if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d=
+)}; then
+>          install -d ${D}/${systemd_unitdir}/system
+>          install -m 644 ${S}/usb_modeswitch@.service ${D}/${systemd_unitd=
+ir}/system
+--=20
+Pengutronix e.K.                           | Ulrich =C3=96lmann            =
+   |
+Industrial Linux Solutions                 | http://www.pengutronix.de/  |
+Peiner Str. 6-8, 31137 Hildesheim, Germany | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
