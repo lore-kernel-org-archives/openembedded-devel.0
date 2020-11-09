@@ -1,116 +1,454 @@
-Received: from NAM02-CY1-obe.outbound.protection.outlook.com (NAM02-CY1-obe.outbound.protection.outlook.com [40.107.76.53])
- by mx.groups.io with SMTP id smtpd.web12.5931.1604888005721876710
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
+ by mx.groups.io with SMTP id smtpd.web12.6480.1604891550248161517
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Nov 2020 18:13:25 -0800
+ Sun, 08 Nov 2020 19:12:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=eCq6OGUb;
- spf=pass (domain: windriver.com, ip: 40.107.76.53, mailfrom: mingli.yu@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nS2v4ivUa3oj4BQksh1TlWrvF7qAMyEMFeRLGaZg5PlkNlSqNSKiViMp3xsCT6YswBfm7g8emoOm2p7BNWQ37+WNqjUWS9++RXko9BWr+uXXGRw1f7MBZz4vV/rYZPVTO8xesqlqiDzPDVwxbCE7btgsGIedkxTfNYn3WBGmIm6Rk+eIYyiLDejkJsWDI3BgQvSyrkBJVut4XIGmaB6dcrzAmqrH7Ipw8POzFYIkvSfbDMLwpQNty++pqW8EXq5sXSzTWQPc202vte2jlvRq0Vmsp93j66i8g8b7tWC698rT2H1zAgGVJvMgUVD+0oAt6zPKIZg9vaIcq+aafWZ0fw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Axf2NV99Z9MzdQjW6lkFAHRVOkfQkCmlcIgRlQPfBv0=;
- b=cC+tzK/j4KJ1460nITOvT5glXtuWZpbS7psOaniUk08YIIlUqjDpJUozX4uo9uBQweIIXVijkW2PTZpTKe+BFr++ffbPDINnG6A+3m2jJppSFBF0YKNCby/DBMP+6ci0VF5HfygP2+X7rM54Xm4985zSYftCkkSzKwTjSsW7HGFbZ7PMamLOTBApaGR8Xrx7ZhKZc/rNlGlmrEKC3UoJgAM5JvCESdXkp4YxAngfMsapmW6gcIiyCvzqx+gKsmNt6wU8GFlbSSrKL42+ysg7PyJO+kSGFYnGt605FiPBlAPGEGVdOEdFPqAUKecBTU9KaOXn14TebMLqJOmyYr2Buw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=E+Im6qvf;
+ spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f178.google.com with SMTP id f27so2437317pgl.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Nov 2020 19:12:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Axf2NV99Z9MzdQjW6lkFAHRVOkfQkCmlcIgRlQPfBv0=;
- b=eCq6OGUbBu/QJxTPb5KzVkSOG7xi/hS+gjYj/MTJeP85OcrOwnVSAfnv48hsH1HTTv5L96y6/Kvq/fCFLjoSEzw8XhFYK4QJYpg5+xmC4IVLHMBFRcSqptGExJVxCYxQQG9HLnIWEtOPgKzA+5G4cwoZOfhJI09b3w9Lh67huFo=
-Authentication-Results: gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
-Received: from CO1PR11MB5009.namprd11.prod.outlook.com (2603:10b6:303:9e::11)
- by MW3PR11MB4539.namprd11.prod.outlook.com (2603:10b6:303:2f::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.22; Mon, 9 Nov
- 2020 02:13:23 +0000
-Received: from CO1PR11MB5009.namprd11.prod.outlook.com
- ([fe80::105b:9105:2a38:9e9f]) by CO1PR11MB5009.namprd11.prod.outlook.com
- ([fe80::105b:9105:2a38:9e9f%7]) with mapi id 15.20.3541.025; Mon, 9 Nov 2020
- 02:13:22 +0000
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-To: raj.khem@gmail.com,
-	openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH v2 1/4] libmaxminddb: add new recipe
-Date: Mon,  9 Nov 2020 10:13:06 +0800
-Message-Id: <20201109021306.47468-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <CAMKF1srN3p5HPwq1n0qg51g8yU7sS0Di9iX_hb89Unjsfs6WLg@mail.gmail.com>
-References: <CAMKF1srN3p5HPwq1n0qg51g8yU7sS0Di9iX_hb89Unjsfs6WLg@mail.gmail.com>
-X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: YT1PR01CA0062.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2e::31) To CO1PR11MB5009.namprd11.prod.outlook.com
- (2603:10b6:303:9e::11)
-Return-Path: mingli.yu@windriver.com
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Wt8fE3+viQm6QiZJ5xtwkU2jlav3Wd7QZH+05jIhQHM=;
+        b=E+Im6qvfJcLgP7p1ho1AppwVnNXnVdl7d5yI15zajXQMLkvMNYVsdoWgZ/SBdvyhX8
+         xnqe29+6iLp51iX8QE3jk9P37Z43uH3LYYiTFkqmNsDqmkl8Ih81NQVTugLKAuSjGMpU
+         zyDn3CQDS4xYD0rBjDoc6yxdE/rOQZiolTcsaxL78ga99Bcs6hMVgwECLew8NTEN1Wvm
+         u71EbSuLOzKOPXMUvorpE1lPlHdoAvG+URi21+mqfRgC/AjKbRAMj046NM2/pj519jWI
+         KgRmxJVylhELsCDrFhEUscI0RGj+UC1HgIIsmSkJVreME1scVa5AUdgAiYVI6/HGMOUk
+         dHJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Wt8fE3+viQm6QiZJ5xtwkU2jlav3Wd7QZH+05jIhQHM=;
+        b=b09dGyg3WI/g8jmEY+ff9QQy/ULh18ujPGvD2k0j2Demb+4INMbM4pmEWNsoSx3N0R
+         DHTUfUJSZ01fwA+jfj4l6KJx/fyRyNMbqJCEQSjSLNmYK23yNokdjjxAyCNiS8oUq9pP
+         3wwuLSm4tAITyS3aTuvu38Qym5BW8rmfL+MmufF2FXn+ATSmeTjSv5mTOQMe6fBBvNGq
+         7hd/f6kxP9SAcjQ9XgTcmJTiuvoHZCiuQ7cpa0hN776AvfCoW/eOAxCLlwtg/QrcP5Fg
+         3azhksMOnFPnIJb7We1x6IjDt8YNcgKDcYox+7JwmYm7VQrzmD0ddIlUAI31Bw2uzoek
+         Y/EA==
+X-Gm-Message-State: AOAM531B7zqmoUdsOmxFlfQ0LIZgWSMcBWcCy7lrhWSOt2l3MbPn5YOP
+	boYWzKVLYjxJZCerlSGNcVbvL+G3bOJzBA==
+X-Google-Smtp-Source: ABdhPJxxJROh1PPchVeKXfiR2tpNHe11fCrtisX1/YomVVUdPiTi71r3Av32LVjhnA6jsz6n8xgG4Q==
+X-Received: by 2002:a17:90a:f993:: with SMTP id cq19mr11047538pjb.173.1604891549015;
+        Sun, 08 Nov 2020 19:12:29 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::740e])
+        by smtp.gmail.com with ESMTPSA id v18sm9528959pfn.35.2020.11.08.19.12.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 08 Nov 2020 19:12:28 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] lksctp-tools: Update to latest master
+Date: Sun,  8 Nov 2020 19:12:25 -0800
+Message-Id: <20201109031225.68138-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from pek-lpg-core2.corp.ad.wrs.com (60.247.85.82) by YT1PR01CA0062.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.21 via Frontend Transport; Mon, 9 Nov 2020 02:13:20 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 7d4b7065-a7d9-4f99-efef-08d88455085e
-X-MS-TrafficTypeDiagnostic: MW3PR11MB4539:
-X-Microsoft-Antispam-PRVS: 
-	<MW3PR11MB45391B33AA94A028CBE349C6F1EA0@MW3PR11MB4539.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5516;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	JCvqXgCSvMWbzjSbherm7RhPTWX5HA+IOjQjDbUBpEBoxOmnBbswddW9/qESMx3yLR94ZrN7JK2huCAXh2XHUcyBe77qP7tY29BS4buLXkClpZcKIhdbDUzqNzm2INCPGD6Ht3ZsOfGRAYvwyLpGJN5PO/pXIFxa389oa8U5RFOzf1VAMv8OkxBTnxFA06HnzsWQaKSQUDEuyw+EgUUY1n3pnn0IIyhn7O4aDGY2lAyKVmpF9plSrEDX1hgOXlNj3ofa8/eiXX4Lvl3agSgtHnDqj5mmbVQdVNXkTYIuxcuPGKW7YqZ+KT76h7hMTMUxoBzuf2zDZd+RHBf/Pv7qY78gU1dcnB34bedWXrOjaH6h2z7ZcflTN3tiXONCHHFhmAGud/rWahc7tUD7dOGzvw==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB5009.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(376002)(396003)(366004)(136003)(39840400004)(2906002)(186003)(86362001)(83380400001)(6486002)(66476007)(66556008)(16526019)(6512007)(9686003)(8676002)(26005)(956004)(2616005)(6666004)(52116002)(8936002)(6506007)(1076003)(66946007)(316002)(36756003)(478600001)(5660300002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	QwUaYDGPECTaNIXTIgZrRmK19yNT5NR5JVCQq6O2c7oPazF+DklJpMV7Ok1OPLo7hKaE5/RTetxB6V5Nr6IX/fuMUE2NdLxIzPvqHenj5wAbcQ+f9IZuMGxSfdyy8xw3Ike4OTMW5xW39qy8Isflf43JJcD2N1Wveiik/ESJXJOUxGj3I3a2D4vb9S9MRJ8cY4+j9UGtZO9kqIpAmKM8BvawG/obcpvoOkVF00/VBjSXJVyqQSe0j6CUfO/4v5fx1mJgX+Lk73UEyFQrZ7V5b2IOUErXo0IcaMEPmcpC1GsvPCvbUSTVcwU9lIaR4Il82bQ7FgFaZdS1pWyVJOp1Rri388AtJFtPDpPveiNUUqZrhppRLCx93p3SXkBEJkN+xScTfun17YZnhd3THy6wIpn1EvqyKsHV0LxgCJ6UMhXpcHGB56CugqQgVjT6PCHVi1h2M0phlMbwraA7/kMnlo1j6uwC2LjPfX3b2Or1A0eTdv0ivZ71fiWVuKSQNp9+WhZNPt8iZoL6pvdUELNdsRhtLejKA99/zAbl7g5zYYdbzR7m3Lv8vDUpb1gjdwCaYtylNf3Wg7epxEaRH0AMPlBN7JRFW7pj3lcMpqI45RnHnbNGPepRC4JRw4XB8Vx3x3CNMCOueh4jyc5YmLY4jg==
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7d4b7065-a7d9-4f99-efef-08d88455085e
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5009.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Nov 2020 02:13:22.6136
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Yus6jJjAPeLnvQCHhjNlLO9RAcuoMeWxuDzL7D/H25LtsfaQVffwVtkzisk+YnsXALXA3M0WJEwNxxzlu975MQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR11MB4539
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Drop the patches which are upstream now
 
-The libmaxminddb library provides a C library for reading MaxMind
-DB files, including the GeoIP2 databases from MaxMind.
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libmaxminddb/libmaxminddb_1.4.3.bb         | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-networking/recipes-support/libmaxminddb/libmaxminddb_1.4.3.bb
+ ...0dce7a36fb-actually-belongs-to-v4.19.patch | 31 --------
+ ...x-netinet-sctp.h-not-to-be-installed.patch | 35 ---------
+ ...uild-fix-probing-for-HAVE_SCTP_SENDV.patch | 35 ---------
+ ...12-secondary-defines-in-favor-of-HAV.patch | 52 --------------
+ ...-CURRENT-REVISION-and-AGE-for-libsct.patch | 71 -------------------
+ ...1_events.c-initialize-event-properly.patch | 44 ------------
+ ...tp-use-PACKAGE_VERSION-in-withsctp.h.patch | 43 -----------
+ .../lksctp-tools/lksctp-tools_1.0.18.bb       |  9 +--
+ 8 files changed, 1 insertion(+), 319 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch
+ delete mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-netinet-sctp.h-not-to-be-installed.patch
+ delete mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch
+ delete mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch
+ delete mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch
+ delete mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-test_1_to_1_events.c-initialize-event-properly.patch
+ delete mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch
 
-diff --git a/meta-networking/recipes-support/libmaxminddb/libmaxminddb_1.4.3.bb b/meta-networking/recipes-support/libmaxminddb/libmaxminddb_1.4.3.bb
-new file mode 100644
-index 000000000..204148e63
---- /dev/null
-+++ b/meta-networking/recipes-support/libmaxminddb/libmaxminddb_1.4.3.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "C library for the MaxMind DB file format"
-+DESCRIPTION = "The libmaxminddb library provides a C library for reading MaxMind DB files, \
-+ncluding the GeoIP2 databases from MaxMind. This is a custom binary \
-+format designed to facilitate fast lookups of IP addresses while allowing \
-+for great flexibility in the type of data associated with an address."
-+
-+HOMEPAGE = "https://github.com/maxmind/libmaxminddb"
-+SECTION = "libs"
-+LICENSE = " Apache-2.0"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57 \
-+"
-+SRC_URI = "https://github.com/maxmind/libmaxminddb/releases/download/${PV}/${BPN}-${PV}.tar.gz \
-+"
-+SRC_URI[sha256sum] = "a5fdf6c7b4880fdc7620f8ace5bd5cbe9f65650c9493034b5b9fc7d83551a439"
-+
-+inherit autotools-brokensep
-+
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch
+deleted file mode 100644
+index 7599b1bcfb..0000000000
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From e5952a0cdfa8b1b56a5823574835f1f771f14ae0 Mon Sep 17 00:00:00 2001
+-From: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
+-Date: Fri, 24 Aug 2018 09:53:00 -0300
+-Subject: [PATCH] build: 0b0dce7a36fb actually belongs to v4.19
+-
+-Typo or not, this commit actually belongs to v4.19 and made me wonder why
+-on v4.18 it didn't find this feature.
+-
+-Fixes: 817f0bfa248f ("build: add two defines for Peer Address Parameters extensions on sctp_paddrparams")
+-Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
+-Reviewed-by: Xin Long <lucien.xin@gmail.com>
+----
+- configure.ac | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index f55775a..5de5c76 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -101,7 +101,7 @@ LKSCTP_CHECK_TYPE([struct sctp_prinfo], [HAVE_SCTP_SENDV])
+- # added on v4.16, 30f6ebf65bc4
+- LKSCTP_CHECK_DECL([SCTP_AUTH_NO_AUTH], [HAVE_SCTP_AUTH_NO_AUTH])
+- 
+--# New members to sctp_paddrparams, added on v4.18, 0b0dce7a36fb
+-+# New members to sctp_paddrparams, added on v4.19, 0b0dce7a36fb
+- LKSCTP_CHECK_MEMBER([struct sctp_paddrparams.spp_ipv6_flowlabel],
+- 		    [HAVE_SCTP_SPP_IPV6_FLOWLABEL])
+- LKSCTP_CHECK_MEMBER([struct sctp_paddrparams.spp_dscp],
+--- 
+-2.7.4
+-
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-netinet-sctp.h-not-to-be-installed.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-netinet-sctp.h-not-to-be-installed.patch
+deleted file mode 100644
+index 03c6c4f737..0000000000
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-netinet-sctp.h-not-to-be-installed.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From 378560050a8f93786c590cc99a55461666205b61 Mon Sep 17 00:00:00 2001
+-From: Xin Long <lucien.xin@gmail.com>
+-Date: Fri, 24 Aug 2018 01:13:32 +0800
+-Subject: [PATCH] build: fix netinet/sctp.h not to be installed
+-
+-After libcnetinet_HEADERS was set to sctp.h.in, netinet/sctp.h can
+-no longer be installed into ${includedir}.
+-
+-Since "AC_CONFIG_HEADERS([src/include/netinet/sctp.h])" is already
+-added into configure.ac, there's no need to generate sctp.h by
+-automake.
+-
+-So we simply set libcnetinet_HEADERS back to sctp.h.
+-
+-Fixes: 9607dd85e70a ("netinet/sctp.h: dynamically build based on system setup")
+-Signed-off-by: Xin Long <lucien.xin@gmail.com>
+-Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
+----
+- src/include/netinet/Makefile.am | 3 +--
+- 1 file changed, 1 insertion(+), 2 deletions(-)
+-
+-diff --git a/src/include/netinet/Makefile.am b/src/include/netinet/Makefile.am
+-index ca0aac2..965db8c 100644
+---- a/src/include/netinet/Makefile.am
+-+++ b/src/include/netinet/Makefile.am
+-@@ -11,5 +11,4 @@ libcnetinetdir = $(includedir)/netinet
+- # API.
+- include_HEADERS =
+- 
+--libcnetinet_HEADERS = sctp.h.in
+--BUILT_SOURCES = sctp.h
+-+libcnetinet_HEADERS = sctp.h
+--- 
+-2.7.4
+-
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch
+deleted file mode 100644
+index 89c89835da..0000000000
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From 596efd6631b83069d41782fb0ee2d6cf76a50dfa Mon Sep 17 00:00:00 2001
+-From: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
+-Date: Fri, 24 Aug 2018 09:52:59 -0300
+-Subject: [PATCH] build: fix probing for HAVE_SCTP_SENDV
+-
+-Somehow it was using a type that is non-existent. The right one is
+-sctp_prinfo, introduced on ed63afb8a318 ("sctp: add support for PR-SCTP
+-Information for sendmsg"), present on v4.17.
+-
+-Fixes: 1b798f1ca3b5 ("build: add define HAVE_SCTP_AUTH_NO_AUTH")
+-Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
+-Reviewed-by: Xin Long <lucien.xin@gmail.com>
+----
+- configure.ac | 5 ++---
+- 1 file changed, 2 insertions(+), 3 deletions(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index dad658c..f55775a 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -94,9 +94,8 @@ LKSCTP_CHECK_MEMBER([struct sctp_pdapi_event.pdapi_stream],
+- LKSCTP_CHECK_MEMBER([struct sctp_pdapi_event.pdapi_seq],
+- 		    [HAVE_SCTP_PDAPI_EVENT_PDAPI_SEQ])
+- 
+--# PR-SCTP field used to probe for sendv/recvv support, added on v4.17
+--LKSCTP_CHECK_MEMBER([struct sendv_prinfo.sctp_prinfo],
+--		    [HAVE_SCTP_SENDV])
+-+# PR-SCTP struct used to probe for sendv/recvv support, added on v4.17
+-+LKSCTP_CHECK_TYPE([struct sctp_prinfo], [HAVE_SCTP_SENDV])
+- 
+- # This event indicates that the peer does not support SCTP authentication,
+- # added on v4.16, 30f6ebf65bc4
+--- 
+-2.7.4
+-
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch
+deleted file mode 100644
+index d22cda6814..0000000000
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch
++++ /dev/null
+@@ -1,52 +0,0 @@
+-From db6d15bf12a0123e4320e5fd7cb688331dea1bdc Mon Sep 17 00:00:00 2001
+-From: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
+-Date: Fri, 24 Aug 2018 09:52:58 -0300
+-Subject: [PATCH] build: remove v4.12 secondary defines in favor of
+- HAVE_SCTP_STREAM_RECONFIG
+-
+-These were backups, commented out since beginning.
+-HAVE_SCTP_STREAM_RECONFIG is enough to identify that these are there, so
+-lets use only one.
+-
+-Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
+-Reviewed-by: Xin Long <lucien.xin@gmail.com>
+----
+- configure.ac                  | 8 --------
+- src/include/netinet/sctp.h.in | 2 --
+- 2 files changed, 10 deletions(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 2ae36ec..dad658c 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -82,14 +82,6 @@ AC_CHECK_FUNCS([bzero gethostbyname gettimeofday memmove memset select socket \
+- LKSCTP_CHECK_MEMBER([struct sctp_event_subscribe.sctp_stream_reset_event],
+- 		    [HAVE_SCTP_STREAM_RESET_EVENT])
+- 
+--# Support for assoc reset event, added on v4.12, c95129d127c6
+--#LKSCTP_CHECK_MEMBER([struct sctp_event_subscribe.sctp_assoc_reset_event], \
+--#		    [HAVE_SCTP_ASSOC_RESET_EVENT])
+--
+--# Support for stream change event, added on v4.12, b444153fb5a6
+--#LKSCTP_CHECK_MEMBER([struct sctp_event_subscribe.sctp_stream_change_event], \
+--#		    [HAVE_SCTP_STREAM_CHANGE_EVENT])
+--
+- # RFC 6525 (Stream Reconf), finished on v4.12, c0d8bab6ae51
+- LKSCTP_CHECK_DECL([SCTP_RECONFIG_SUPPORTED], [HAVE_SCTP_STREAM_RECONFIG])
+- 
+-diff --git a/src/include/netinet/sctp.h.in b/src/include/netinet/sctp.h.in
+-index c049077..2009f1c 100644
+---- a/src/include/netinet/sctp.h.in
+-+++ b/src/include/netinet/sctp.h.in
+-@@ -61,8 +61,6 @@ extern "C" {
+- #define HAVE_SCTP_CANSET_PRIMARY
+- 
+- #undef HAVE_SCTP_STREAM_RESET_EVENT
+--#undef HAVE_SCTP_ASSOC_RESET_EVENT
+--#undef HAVE_SCTP_STREAM_CHANGE_EVENT
+- #undef HAVE_SCTP_STREAM_RECONFIG
+- #undef HAVE_SCTP_PEELOFF_FLAGS
+- #undef HAVE_SCTP_PDAPI_EVENT_PDAPI_STREAM
+--- 
+-2.7.4
+-
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch
+deleted file mode 100644
+index bec9bf0d1b..0000000000
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch
++++ /dev/null
+@@ -1,71 +0,0 @@
+-From 7de2bd7e769f10521e3d0c2cb42c6f6b9b505dd0 Mon Sep 17 00:00:00 2001
+-From: Xin Long <lucien.xin@gmail.com>
+-Date: Thu, 16 Aug 2018 14:12:30 +0800
+-Subject: [PATCH] configure.ac: add CURRENT REVISION and AGE for libsctp and
+- libwithsctp
+-
+-Add CURRENT REVISION and AGE for libsctp and libwithsctp in
+-configure.ac to update these 2 library version information.
+-
+-Compatible with before, they will start from 1:18:0. But each
+-will get updated according to their definitions in the future.
+-
+-Signed-off-by: Xin Long <lucien.xin@gmail.com>
+-Acked-by: Neil Horman <nhorman@tuxdriver.com>
+-Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
+----
+- configure.ac             | 7 +++++++
+- src/lib/Makefile.am      | 7 +++++--
+- src/withsctp/Makefile.am | 3 ++-
+- 3 files changed, 14 insertions(+), 3 deletions(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 275ef4e..2ae36ec 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -14,6 +14,13 @@ dnl reduce clutter in the root; if we put it below AM_INIT_AUTOMAKE,
+- dnl configure will fail ...)
+- 
+- AC_INIT([lksctp-tools], [1.0.18], [], [], [http://www.lksctp.org/])
+-+AC_SUBST(LIBSCTP_CURRENT, 1)
+-+AC_SUBST(LIBSCTP_REVISION, 18)
+-+AC_SUBST(LIBSCTP_AGE, 0)
+-+AC_SUBST(LIBWITHSCTP_CURRENT, 1)
+-+AC_SUBST(LIBWITHSCTP_REVISION, 18)
+-+AC_SUBST(LIBWITHSCTP_AGE, 0)
+-+
+- AC_CONFIG_AUX_DIR(bin)
+- AC_CONFIG_SRCDIR([src/apps/sctp_darn.c])
+- AC_CONFIG_HEADERS([config.h])
+-diff --git a/src/lib/Makefile.am b/src/lib/Makefile.am
+-index 6100c56..1d62175 100644
+---- a/src/lib/Makefile.am
+-+++ b/src/lib/Makefile.am
+-@@ -8,5 +8,8 @@ AM_CPPFLAGS = -I$(top_srcdir)/src/include
+- 
+- lib_LTLIBRARIES = libsctp.la
+- 
+--libsctp_la_SOURCES = bindx.c connectx.c peeloff.c opt_info.c addrs.c sendmsg.c recvmsg.c Versions.map
+--libsctp_la_LDFLAGS = -version-info 1:17:0 -Wl,--version-script=$(srcdir)/Versions.map
+-+libsctp_la_SOURCES = bindx.c connectx.c peeloff.c opt_info.c \
+-+		addrs.c sendmsg.c recvmsg.c Versions.map
+-+libsctp_la_LDFLAGS = -version-info \
+-+		@LIBSCTP_CURRENT@:@LIBSCTP_REVISION@:@LIBSCTP_AGE@ \
+-+		-Wl,--version-script=$(srcdir)/Versions.map
+-diff --git a/src/withsctp/Makefile.am b/src/withsctp/Makefile.am
+-index 70b1cca..1f6ca37 100644
+---- a/src/withsctp/Makefile.am
+-+++ b/src/withsctp/Makefile.am
+-@@ -14,7 +14,8 @@ AM_CPPFLAGS=-I$(top_srcdir)/src/include
+- pkglib_LTLIBRARIES = libwithsctp.la
+- libwithsctp_la_SOURCES = sctp_load_libs.c sctp_socket.c sctp_bind.c \
+- 	sctp_sockopt.c sctp_socket.h
+--libwithsctp_la_LDFLAGS = -version-info 1:17:0 -ldl
+-+libwithsctp_la_LDFLAGS = -version-info \
+-+	@LIBWITHSCTP_CURRENT@:@LIBWITHSCTP_REVISION@:@LIBWITHSCTP_AGE@ -ldl
+- 
+- pkgdoc_DATA = sctp_load_libs.c sctp_socket.c sctp_bind.c \
+- 	sctp_sockopt.c sctp_socket.h checksctp.c
+--- 
+-2.7.4
+-
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-test_1_to_1_events.c-initialize-event-properly.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-test_1_to_1_events.c-initialize-event-properly.patch
+deleted file mode 100644
+index 621e6f4693..0000000000
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-test_1_to_1_events.c-initialize-event-properly.patch
++++ /dev/null
+@@ -1,44 +0,0 @@
+-From e1e670defb84d51efdd124e5f3fa166a1a4b7c1d Mon Sep 17 00:00:00 2001
+-From: Mingli Yu <Mingli.Yu@windriver.com>
+-Date: Tue, 25 Sep 2018 11:39:43 +0800
+-Subject: [PATCH] test_1_to_1_events.c: initialize event properly
+-
+-Initialize event properly to avoid below
+-Segmentation fault when run below test
+-related to AUTH_NO_AUTH.
+-
+- # ./test_1_to_1_events
+-test_1_to_1_events.c 1 PASS : COMM_UP notification on client socket - SUCCESS
+-test_1_to_1_events.c 2 PASS : COMM_UP notification on server socket - SUCCESS
+-test_1_to_1_events.c 3 BROK : Got a datamsg, expecting notification
+-DUMP_CORE sctputil.c: 187
+-[ 1468.733938] test_1_to_1_eve[2376]: segfault at 0 ip 0000561a4a3d5079 sp 00007ffd49101580 error 6 in test_1_to_1_events[561a4a3d4000+2000]
+-[ 1468.734479] Code: ff bf 0a 00 00 00 e8 e6 ef ff ff b9 c9 00 00 00 48 8d 15 61 13 00 00 bf 01 00 00 00 31 c0 48 8d 35 c7 0f 00 00 e8 97 f0
+-Segmentation fault
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+----
+- src/func_tests/test_1_to_1_events.c | 2 ++
+- 1 file changed, 2 insertions(+)
+-
+-diff --git a/src/func_tests/test_1_to_1_events.c b/src/func_tests/test_1_to_1_events.c
+-index 46439bf..a086832 100644
+---- a/src/func_tests/test_1_to_1_events.c
+-+++ b/src/func_tests/test_1_to_1_events.c
+-@@ -92,9 +92,11 @@ main(int argc, char *argv[])
+- 	/* Create the client socket.  */
+- 	clt_sk = test_socket(AF_INET, SOCK_STREAM, IPPROTO_SCTP);
+- 
+-+	memset(&event, 0, sizeof(event));
+- 	event.sctp_data_io_event = 1;
+- 	event.sctp_association_event = 1;
+- 	event.sctp_shutdown_event = 1;
+-+	event.sctp_authentication_event = 1;
+- 	len = sizeof(struct sctp_event_subscribe);
+- 	test_setsockopt(svr_sk, SCTP_EVENTS, &event, len);
+- 	test_setsockopt(clt_sk, SCTP_EVENTS, &event, len);
+--- 
+-2.7.4
+-
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch
+deleted file mode 100644
+index 2537bb976a..0000000000
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch
++++ /dev/null
+@@ -1,43 +0,0 @@
+-From 7c0ef4d441b3833e721df58f56e2cb8c81b34df4 Mon Sep 17 00:00:00 2001
+-From: Xin Long <lucien.xin@gmail.com>
+-Date: Thu, 16 Aug 2018 14:12:01 +0800
+-Subject: [PATCH] withsctp: use @PACKAGE_VERSION@ in withsctp.h
+-
+-use @PACKAGE_VERSION@ to replace the hardcode version.
+-
+-Signed-off-by: Xin Long <lucien.xin@gmail.com>
+-Acked-by: Neil Horman <nhorman@tuxdriver.com>
+-Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
+----
+- Makefile.rules           | 3 ++-
+- src/withsctp/withsctp.in | 3 ++-
+- 2 files changed, 4 insertions(+), 2 deletions(-)
+-
+-diff --git a/Makefile.rules b/Makefile.rules
+-index 83f5f0c..d3693fa 100644
+---- a/Makefile.rules
+-+++ b/Makefile.rules
+-@@ -15,4 +15,5 @@
+- edit = @sed \
+- 	-e "s|\@bindir\@|$(bindir)|" \
+- 	-e "s|\@libdir\@|$(libdir)|" \
+--	-e "s|\@PACKAGE\@|$(PACKAGE)|"
+-+	-e "s|\@PACKAGE\@|$(PACKAGE)|" \
+-+	-e "s|\@PACKAGE_VERSION\@|$(PACKAGE_VERSION)|"
+-diff --git a/src/withsctp/withsctp.in b/src/withsctp/withsctp.in
+-index 7f182ba..fda5ebc 100644
+---- a/src/withsctp/withsctp.in
+-+++ b/src/withsctp/withsctp.in
+-@@ -2,7 +2,8 @@
+- # -*- sh -*-
+- LIBDIR=@libdir@/@PACKAGE@
+- BINDIR=@bindir@
+--export LD_PRELOAD=${LIBDIR}/libwithsctp.so.1.0.17
+-+LIBVER=@PACKAGE_VERSION@
+-+export LD_PRELOAD=${LIBDIR}/libwithsctp.so.${LIBVER}
+- if ! ${BINDIR}/checksctp 2> /dev/null
+- then
+-     ${BINDIR}/checksctp;
+--- 
+-2.7.4
+-
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
+index 3cabc4ff8d..1e2c644b41 100644
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
+@@ -8,20 +8,13 @@ LIC_FILES_CHKSUM = " \
+     file://COPYING;md5=0c56db0143f4f80c369ee3af7425af6e \
+ "
+ 
+-SRCREV = "1b077af62d83d53c34b1bde8bad6648149d5edf9"
++SRCREV = "12c74404e09755561dee40cf194954f7ff5afd60"
+ 
+ PV .= "+git${SRCPV}"
+ LK_REL = "1.0.18"
+ 
+ SRC_URI = " \
+     git://github.com/sctp/lksctp-tools.git \
+-    file://0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch \
+-    file://0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch \
+-    file://0001-build-fix-netinet-sctp.h-not-to-be-installed.patch \
+-    file://0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch \
+-    file://0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch \
+-    file://0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch \
+-    file://0001-test_1_to_1_events.c-initialize-event-properly.patch \
+     file://run-ptest \
+     file://v4test.sh \
+     file://v6test.sh \
 -- 
-2.17.1
+2.29.2
 
