@@ -1,59 +1,51 @@
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.web10.31899.1605032403871891544
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com [209.85.128.68])
+ by mx.groups.io with SMTP id smtpd.web08.32012.1605033858869770707
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Nov 2020 10:20:04 -0800
+ Tue, 10 Nov 2020 10:44:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=aL9Fx4LM;
- spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: viktor.rosendahl@gmail.com)
-Received: by mail-wr1-f53.google.com with SMTP id 23so13780452wrc.8
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2020 10:20:03 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=RfyXh7q6;
+ spf=pass (domain: gmail.com, ip: 209.85.128.68, mailfrom: viktor.rosendahl@gmail.com)
+Received: by mail-wm1-f68.google.com with SMTP id a65so4183700wme.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2020 10:44:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=VY0maJjjMysHwMFtZssEyEYRWOLeB83QdFMjEtlBzgM=;
-        b=aL9Fx4LMstApugiLAL7hCE8PgeTFsQK2OOrF6/QcyNwJ1jSSUrqzi3XuotULLPKKPb
-         rwOefsHuoqNh9UK41TvlOpZXZvUs5lzYluLUjZef892/7RLrT4nFi5QA7UdouoUPdGxM
-         KJUBTfdK6MOl5SWrCPyg4XbBAqIRD/vvyEoMw9jIQ2vhifqp3NqTZnJPpt7jMvYY8yAc
-         FC0GxPIsOfBaMhgwlCMhRIpQUQA1376elDCmzz2FtDqi3sKrsbCZTm1b9PREuJIh1h0X
-         bPynlmZe80TuuzVCP3qiuEsbqaYU1Vcqmsemf4y+09wvMaqvQBmaPdRwr2LOrkmk3Ep4
-         rXEg==
+        h=from:to:cc:subject:date:message-id;
+        bh=uihLFBdErMQap9EtUx1myIFKUoWGSL2X8fiLOrbaFa4=;
+        b=RfyXh7q6N2hhto/8XMkEL4zFLZ1fTqVmilr/Vo9bz8OA01NQ2uWIcfIjasLujSdTUP
+         s4Xo4kFbyzl0B4ivRMJF+hB8baGnxHskM4JqKwc0XIIdnK1FLGvbVdbH6JYWRgaSTK5h
+         5yJh1bPzPwJh5KBjIQh5CpG/ox1eR1h73HdW/GhuCwhmH/agTlDxhH9+Kg8hHgJw2Iby
+         Qy+n46ZV61vLVuhxeCgbm/rsO3DQIxlWe/fDnQ66JS7JfNPqMcwJwzmesvI1M1qqpoIM
+         YczYsWM1BdQdGkyF+9KjmXDR82tDsHYp2oBOIzCSl42sLaybtLCqMGYgdh7Sj5wasxdm
+         t85Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=VY0maJjjMysHwMFtZssEyEYRWOLeB83QdFMjEtlBzgM=;
-        b=TpNhrXLJILqaYXJQcA7A3bUKzE+HJaDxX+ZoajyflP1mDbkTlNYBLBlG/Y2Sex2cWP
-         mxa8N/cqjHZeBYO4j3Z6mV0GOr6n2PiH6wBEHAS7BroPqnjw/oZRg7aRvOh11+DeZpUm
-         fdxISlD8A4O2PXRwFkgb4MQFiFxTsyV41VtQniyaAXW7VIkF117DvA2BDTBCDjDcidXb
-         QUeoUTQBzQVSQ0cpiC85+iFSlCeDf7BkRfxnDFz705WYmEis0VFLcLKdqjiYKxU8R4Xh
-         qp5uCGekLJINeoyLhLUBZ1vQToxyjv5DuND4uDOeCyf27iE6VMrh7++BvidBxzI38iMH
-         vw3w==
-X-Gm-Message-State: AOAM533e7eMaUPpPSv+MEnn6zRNztV0S41ouenFBsGDHU/ygSW++Qnm9
-	gr59G6hEE/LYcc+Z2qPaNXls2DtwE5UF
-X-Google-Smtp-Source: ABdhPJwArMD2Zxj0KFpYu7u7kNzvX0PfXbuJF9RVil2pFExAIyTa5djcHtOjT7Amh22PVqz7xhYNZw==
-X-Received: by 2002:adf:dd08:: with SMTP id a8mr14066715wrm.344.1605032401871;
-        Tue, 10 Nov 2020 10:20:01 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=uihLFBdErMQap9EtUx1myIFKUoWGSL2X8fiLOrbaFa4=;
+        b=hs3FlrAD3VixSsgQ0yngiUUJHXOH7u5ikBXVDKN71YoA8w/tzMZurv+pYBaKQPBIHl
+         abe5dxQF4D5AGfhDKztgsKweLBN0kCtYAmxbbwbjc+jS05EQOgyIP4iQyUEOgHxAn1wp
+         YOn+U4N/coGl1iisgQuUEi1mrS2nKbZUExP2OizEAaJWCx+ADdlnIuQ7cJtElG4vJWtw
+         w+VC8A62mC7ytJREdaCCK4JyNNvl/11qs2fFfKHJQvIP6EhX3lz3JPHrgEuMcIHazMfc
+         KGjfVGc764kCnkHMJuRJ0Z726RfBLTmKwAtL9iwJ1//s/lVNIpMxVfuAtuPvIpWk+eDa
+         cCIQ==
+X-Gm-Message-State: AOAM533q9WweMdB1QfT3YBRgebiXoIgYsTr7d3W51b1vgk+SrRBNWxUj
+	7shpRRReOXLDO7eZ1I3HfKcnZNIcqL4y
+X-Google-Smtp-Source: ABdhPJy5ilx0GufaoUL4e6ZTdjaaEm0hEAa/YupHgnLL8mXCbbku2c5MUIaLNm6BQ5jh+pY2+TJCXQ==
+X-Received: by 2002:a1c:5f45:: with SMTP id t66mr556959wmb.20.1605033856939;
+        Tue, 10 Nov 2020 10:44:16 -0800 (PST)
 Return-Path: <viktor.rosendahl@gmail.com>
 Received: from greenhouse.bmw-carit.intra ([212.118.206.70])
-        by smtp.gmail.com with ESMTPSA id v6sm20194471wrb.53.2020.11.10.10.20.00
+        by smtp.gmail.com with ESMTPSA id 90sm17618776wrl.30.2020.11.10.10.44.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Nov 2020 10:20:00 -0800 (PST)
+        Tue, 10 Nov 2020 10:44:16 -0800 (PST)
 From: "Viktor Rosendahl" <viktor.rosendahl@gmail.com>
 X-Google-Original-From: Viktor Rosendahl <viktor.rosendahl@bmw.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Viktor Rosendahl <viktor.rosendahl@bmw.de>,
 	Viktor Rosendahl <Viktor.Rosendahl@bmw.de>
-Subject: [dunfell][PATCH v2] jsoncpp: Fix broken handling of escape characters
-Date: Tue, 10 Nov 2020 19:19:57 +0100
-Message-Id: <20201110181957.23414-1-viktor.rosendahl@bmw.de>
+Subject: [dunfell][PATCH v3] jsoncpp: Fix broken handling of escape characters
+Date: Tue, 10 Nov 2020 19:44:12 +0100
+Message-Id: <20201110184412.24935-1-viktor.rosendahl@bmw.de>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-New in v2: I removed the unescaped characters from the quoted error
-message because it seems that they broke patchwork.
 
 Applying this backported patch from upstream fixes the following
 test failure:
@@ -62,8 +54,7 @@ test failure:
 /home/viktor/jsoncpp/src/test_lib_json/main.cpp(3370): expected == result
   Expected: '["\"","\\","\b","\f","\n","\r","\t","\u0278","\ud852\udf62"]
   '
-  Actual  : '["\"","\\","\b","\f","\n","\r","\t","<unescaped char>",
-  "<unescaped char>"]
+  Actual  : '["\"","\\","\b","\f","\n","\r","\t","",""]
   '
 
 This failure only happens on architectures that use unsigned char as
@@ -84,25 +75,22 @@ use version 1.9.3 of jsoncpp, which doesn't have the bug.
 
 Signed-off-by: Viktor Rosendahl <Viktor.Rosendahl@bmw.de>
 ---
- ...inverted-sense-in-isAnyCharRequiredQ.patch | 52 +++++++++++++++++++
+ ...inverted-sense-in-isAnyCharRequiredQ.patch | 49 +++++++++++++++++++
  .../recipes-devtools/jsoncpp/jsoncpp_1.9.2.bb |  5 +-
- 2 files changed, 56 insertions(+), 1 deletion(-)
+ 2 files changed, 53 insertions(+), 1 deletion(-)
  create mode 100644 meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-json_writer-fix-inverted-sense-in-isAnyCharRequiredQ.patch
 
 diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-json_writer-fix-inverted-sense-in-isAnyCharRequiredQ.patch b/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-json_writer-fix-inverted-sense-in-isAnyCharRequiredQ.patch
 new file mode 100644
-index 000000000..784f175ee
+index 000000000..ff03e0565
 --- /dev/null
 +++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-json_writer-fix-inverted-sense-in-isAnyCharRequiredQ.patch
-@@ -0,0 +1,52 @@
+@@ -0,0 +1,49 @@
 +From 2d5a94aeeab01f0448b5a0bb8d4a9a23a5b790d5 Mon Sep 17 00:00:00 2001
 +From: Andrew Childs <lorne@cons.org.nz>
 +Date: Sat, 28 Dec 2019 16:04:24 +0900
 +Subject: [PATCH] json_writer: fix inverted sense in isAnyCharRequiredQuoting
 + (#1120)
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
 +
 +This bug is only affects platforms where `char` is unsigned.
 +
@@ -118,7 +106,7 @@ index 000000000..784f175ee
 +/build/source/src/test_lib_json/main.cpp(3370): expected == result
 +  Expected: '["\"","\\","\b","\f","\n","\r","\t","\u0278","\ud852\udf62"]
 +  '
-+  Actual  : '["\"","\\","\b","\f","\n","\r","\t","ɸ","𤭢"]
++  Actual  : '["\"","\\","\b","\f","\n","\r","\t","",""]
 +  '
 +Upstream-Status: Backport [https://github.com/open-source-parsers/jsoncpp/commit/f11611c8785082ead760494cba06196f14a06dcb]
 +
