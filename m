@@ -1,82 +1,98 @@
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com [209.85.160.193])
- by mx.groups.io with SMTP id smtpd.web10.18632.1604957545201573463
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
+ by mx.groups.io with SMTP id smtpd.web10.20614.1604966485363723480
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Nov 2020 13:32:25 -0800
+ Mon, 09 Nov 2020 16:01:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ivgI9RGp;
- spf=pass (domain: gmail.com, ip: 209.85.160.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f193.google.com with SMTP id i7so7126147qti.6
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Nov 2020 13:32:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=fbJQnkJw;
+ spf=pass (domain: gmail.com, ip: 209.85.160.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f195.google.com with SMTP id g17so7409022qts.5
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Nov 2020 16:01:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=nx2/5zSBTcbhUYhPlIduA7Vo/8r0sF98MAasQbSHh7s=;
-        b=ivgI9RGpkcyIt1QrVvhpEodmQWKgvJTl3/UaMqhOC8xcivgZXspUK5h/hbXVMgAMWf
-         HVAi/agQyCsLaq5Wmvr8ug6TAJUCsVg1tPrhAkzfug3MY049h+N9KFpNDJLt9Vqd6Jf2
-         +gle1a8n3bJhi3w1rppRsv2mQhrsONd/CrhQecfd0yd2+SK7jbNt1voJwBuW7OUslgPh
-         CrQNM8dMwRr64AwRXmN0yA9PIicp9Dj7UUrPllYG22q0AyzaxmVeOswbgKq8lt3U+hCn
-         K+hABxDcT5ixF+paGWzaKNPqdj2BcUG8rHQuOEldq1bs3FscuMDi1ZaE9I59Qs+U0CCE
-         pViQ==
+        bh=NC4MgX0AJ3UdwWmFpg4AMDsdp5FbwQG46jLOmrAZ3x0=;
+        b=fbJQnkJw79y5f/6nxsOw09uDaxOS/FUgt+tEr0gywWMvraG+pdtzDSvWOYCcoKRj9r
+         WmkzrzcrVqYNiomjZSWKBFXEhZC0qOorIW4D4h6r7aFJCWyqPGgVi4f639M+9aVnAeTs
+         L/LiUSxwcybcP/OS3ei2NdCBQJMWBP+SzyAhw4cX7llMkRGl9yBK6P16RabjEkQFmwXy
+         FmDwX440PbF6fKtAfvWIBoxAeCqq8ThiUv4xTxKV+R9OkTMeJYe1cXzgJfnK+ACmNCwk
+         Ka4a+pIUDrBMCSKX9JTvJEG2sUQ3R0UoooJmGOmKxi2BYpMGg5m52tyfO9wUdTmYfuj9
+         QWNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=nx2/5zSBTcbhUYhPlIduA7Vo/8r0sF98MAasQbSHh7s=;
-        b=NTeZGpg8UKMm3B2Dj3/nCo3edol1/YR/ZWQHFzl++6YoBiitzDdOy1+9qQP6Romqzf
-         BZJNvu1NP0InsdUlCLW4U6OgTgZ0CPTDDfxKfMZFte8+tm+VWv/o6Xm4jHdNBQs0vRnq
-         Ikpi1Ysq+mJSlFrl1ccWOHNnGGSjFc4zagM8CUHLC1r0B0WAia8ewl78sU8iBTifQnpU
-         6ni+dWgtyf1eQoKfYFLUAAoGKZDl/LI+rDmnhVcMQUlc1vU4G5q9y+MJaqrzrw1OroZr
-         TWgP9sJdd2n9achyk0qoAigXB2z8RkSJk7CEy1eCqg+CLlPNJY/AZcUGTZ1ibXx7D0al
-         Jn6A==
-X-Gm-Message-State: AOAM530pwBl0VOLHtLMpP8ohAJAXcWcYrjBxxnN7vdAuFTwnpx5p26hC
-	+67b0P/v+YKHk3rwoMJqkTZ9QMo3imwsgxwaz9I=
-X-Google-Smtp-Source: ABdhPJyQdcDEFk2ZVDsYM3U+VHVYlxoWc0xmwiOAh3pWEQPrIFCgkQ/OCiQxNjjPlNLXdRbQt6qAkbBUoTKt4797pHc=
-X-Received: by 2002:a05:622a:1cb:: with SMTP id t11mr15676761qtw.378.1604957544182;
- Mon, 09 Nov 2020 13:32:24 -0800 (PST)
+        bh=NC4MgX0AJ3UdwWmFpg4AMDsdp5FbwQG46jLOmrAZ3x0=;
+        b=LHwi7ekJ1aLZXkQIjdNXwt6wg5FqvRRBwZ5tfCqXpoRk+vagV5HO/OK5nGU+Xv7Seo
+         +dW98w4k5LbIkS7L3AYLUjB/uzkjVdyU4hZOXiTs9Uova/U1C2qf7MAIQi0uKTZ9JDCp
+         5Bhzs4IVrlM6XLTkoxuYNj1ExYVm3W4/K/ujhwSwoX4ORRxv7YrCmKW7KnMlJE5nil3Z
+         HXqnO4iRYOOXb60Az9/XZsDSC2rcq2t1D798C8PzZopqtavAK7iRrR9QQH5Sb1GFlV3M
+         HvLeeqHaeIGWK1afj9je3wQ63oJpZ+0LGUSkt/px5wXceibIBriJisLbhwtw1BcLkF2E
+         BW3g==
+X-Gm-Message-State: AOAM531Z7qGTgoEjXWbxGaKMGEVkSZt3xi43Zvw/VQMEc8CVGv96vPTL
+	c52NRo6v5ph42cW55Jmo1P7+ZcA6pAMICEqiwoM=
+X-Google-Smtp-Source: ABdhPJwVF3G34weAU7+y251gtivsgJgns8MurzNIDDdI49igoyZOOdMWChEEUwKXJO8Fv77K5HfT1QObPcgjv8UC9B8=
+X-Received: by 2002:a05:622a:1cb:: with SMTP id t11mr16199716qtw.378.1604966484306;
+ Mon, 09 Nov 2020 16:01:24 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1604605168.git.rosbrookn@ainfosec.com> <4941002037351503fa2164149722ebca8cef9b58.1604605168.git.rosbrookn@ainfosec.com>
-In-Reply-To: <4941002037351503fa2164149722ebca8cef9b58.1604605168.git.rosbrookn@ainfosec.com>
+References: <cover.1604935361.git.rosbrookn@ainfosec.com> <b26c5c7085c0fea710a37de329a8972b66d9f3c8.1604935361.git.rosbrookn@ainfosec.com>
+In-Reply-To: <b26c5c7085c0fea710a37de329a8972b66d9f3c8.1604935361.git.rosbrookn@ainfosec.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 9 Nov 2020 13:31:57 -0800
-Message-ID: <CAMKF1sr03H0TbgdfxODcr6K2o1y8NmnucU+Fxtc954dddSH3Rw@mail.gmail.com>
-Subject: Re: [meta-networking][PATCH 2/2] strongswan: add some PACKAGECONFIG options for EAP
+Date: Mon, 9 Nov 2020 16:00:58 -0800
+Message-ID: <CAMKF1sriwh8+Z2P6FDd4B_mK8aqAipRffWCUvPmakiaCcR-02g@mail.gmail.com>
+Subject: Re: [meta-networking][PATCH v2 1/2] strongswan: do not use deprecated stroke and starter by default
 To: Nick Rosbrook <rosbrookn@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
 	Nick Rosbrook <rosbrookn@ainfosec.com>
 Content-Type: text/plain; charset="UTF-8"
 
-Hi Nick
+it seems to fail
 
-I am seeing a failure with clang compiler
+https://errors.yoctoproject.org/Errors/Details/537881/
 
-https://errors.yoctoproject.org/Errors/Details/537872/
-
-Other builds have not finished yet so don't know if its specific to
-clang or generic.
-
-On Thu, Nov 5, 2020 at 11:50 AM Nick Rosbrook <rosbrookn@gmail.com> wrote:
+On Mon, Nov 9, 2020 at 7:34 AM Nick Rosbrook <rosbrookn@gmail.com> wrote:
 >
-> Add options for eap-identity and eap-mschapv2 plugins.
+> The swanctl and vici configuration of strongswan is preferred, as the stroke
+> plugin used with starter is deprecated. As a reasonable default, add swanctl
+> and systemd-charon to PACKAGECONFIG by default, removing charon and stroke.
+>
+> While here, make sure strongswan-starter.service is only installed when
+> charon is enabled. The current unconditional installation of
+> strongswan-starter.service can break systems which install strongswan.service
+> for use with swanctl.
 >
 > Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
 > ---
->  meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb | 2 ++
->  1 file changed, 2 insertions(+)
+>  .../recipes-support/strongswan/strongswan_5.8.4.bb   | 12 ++++++++++--
+>  1 file changed, 10 insertions(+), 2 deletions(-)
 >
 > diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb b/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
-> index 59641cb83..075982c77 100644
+> index ca645ed2c..abba86e39 100644
 > --- a/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
 > +++ b/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
-> @@ -32,6 +32,8 @@ PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,,${PN}-plugin-aesni"
->  PACKAGECONFIG[bfd] = "--enable-bfd-backtraces,--disable-bfd-backtraces,binutils"
->  PACKAGECONFIG[charon] = "--enable-charon,--disable-charon,"
->  PACKAGECONFIG[curl] = "--enable-curl,--disable-curl,curl,${PN}-plugin-curl"
-> +PACKAGECONFIG[eap-identity] = "--enable-eap-identity,--disable-eap-identity,,${PN}-plugin-eap-identity"
-> +PACKAGECONFIG[eap-mschapv2] = "--enable-eap-mschapv2,--disable-eap-mschapv2,,${PN}-plugin-eap-mschapv2"
->  PACKAGECONFIG[gmp] = "--enable-gmp,--disable-gmp,gmp,${PN}-plugin-gmp"
->  PACKAGECONFIG[ldap] = "--enable-ldap,--disable-ldap,openldap,${PN}-plugin-ldap"
->  PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,${PN}-plugin-mysql"
+> @@ -25,7 +25,8 @@ EXTRA_OECONF = " \
+>
+>  EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
+>
+> -PACKAGECONFIG ??= "charon curl gmp openssl stroke sqlite3 \
+> +PACKAGECONFIG ??= "curl gmp openssl sqlite3 swanctl \
+> +        ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-charon', '', d)} \
+>          ${@bb.utils.filter('DISTRO_FEATURES', 'ldap', d)} \
+>  "
+>  PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,,${PN}-plugin-aesni"
+> @@ -135,4 +136,11 @@ RDEPENDS_${PN} += "\
+>  RPROVIDES_${PN} += "${PN}-systemd"
+>  RREPLACES_${PN} += "${PN}-systemd"
+>  RCONFLICTS_${PN} += "${PN}-systemd"
+> -SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'swanctl', '${BPN}.service', '', d)} ${BPN}-starter.service"
+> +
+> +# The deprecated legacy 'strongswan-starter' service should only be used when charon and
+> +# stroke are enabled. When swanctl is in use, 'strongswan.service' is needed.
+> +# See: https://wiki.strongswan.org/projects/strongswan/wiki/Charon-systemd
+> +SYSTEMD_SERVICE_${PN} = " \
+> +    ${@bb.utils.contains('PACKAGECONFIG', 'swanctl', '${BPN}.service', '', d)} \
+> +    ${@bb.utils.contains('PACKAGECONFIG', 'charon', '${BPN}-starter.service', '', d)} \
+> +"
 > --
 > 2.17.1
 >
