@@ -1,56 +1,59 @@
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com [209.85.221.68])
- by mx.groups.io with SMTP id smtpd.web08.31204.1605030576310876484
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.web10.31899.1605032403871891544
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Nov 2020 09:49:36 -0800
+ Tue, 10 Nov 2020 10:20:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=U7IWxrps;
- spf=pass (domain: gmail.com, ip: 209.85.221.68, mailfrom: viktor.rosendahl@gmail.com)
-Received: by mail-wr1-f68.google.com with SMTP id o15so5822390wru.6
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2020 09:49:36 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=aL9Fx4LM;
+ spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: viktor.rosendahl@gmail.com)
+Received: by mail-wr1-f53.google.com with SMTP id 23so13780452wrc.8
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Nov 2020 10:20:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=WwSYo/qkbuhTVNzu7aVadYqzaW2RR7z3bfXEhIXy5gA=;
-        b=U7IWxrpsqx9Mk8jcHUfCf0sgKqhR6TcyDVjSa2YzJOS1D0GT0mmjaSS0Olul1bc8rU
-         RxxpAQdxEdipYwpKQqYpG2qqdhwv7tolqxYB2Qehft4QmBNIFHMVUDqggk4k3WD0AGFN
-         iiUDjb6PCaamYsXU3CWryCJk+amwfwC/KpY8CYYfMvQkHBMsvVi36hkeCMy67J2uNpSw
-         9g3Sd9JXd93t/Wgl9OKTJLWvG+zQ5ow3FGPvXZXbXN7bI3DA5IWtZBt7hDOjjfGBAzVJ
-         B4OEwlmMRJ9P2Jz7hL9yEOpnfUlzyF8bwsXUD25KYjbvvz/KahsChiXe2eKPKalue3Dl
-         rnGg==
+        bh=VY0maJjjMysHwMFtZssEyEYRWOLeB83QdFMjEtlBzgM=;
+        b=aL9Fx4LMstApugiLAL7hCE8PgeTFsQK2OOrF6/QcyNwJ1jSSUrqzi3XuotULLPKKPb
+         rwOefsHuoqNh9UK41TvlOpZXZvUs5lzYluLUjZef892/7RLrT4nFi5QA7UdouoUPdGxM
+         KJUBTfdK6MOl5SWrCPyg4XbBAqIRD/vvyEoMw9jIQ2vhifqp3NqTZnJPpt7jMvYY8yAc
+         FC0GxPIsOfBaMhgwlCMhRIpQUQA1376elDCmzz2FtDqi3sKrsbCZTm1b9PREuJIh1h0X
+         bPynlmZe80TuuzVCP3qiuEsbqaYU1Vcqmsemf4y+09wvMaqvQBmaPdRwr2LOrkmk3Ep4
+         rXEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=WwSYo/qkbuhTVNzu7aVadYqzaW2RR7z3bfXEhIXy5gA=;
-        b=jh7GMEwrBrk5+P5cvxffxo5+OTYGwLiIAyedSctPA3W67npU3Top9Ywgx9JkFwMc3S
-         PoDzbHciS7vgUo/z22dCorjPEbstF3VkTMptg8YfmOgbMZzfvY1XMy45p16j1sM/GLkt
-         ckA524IVZ6eFxxZ36rU8pnp+jMVKZl/yaE60xBrQm0igSIwuRvTPLp8QGXn08YCBEYnD
-         LpP6uSs+DJcN4n5FmI8M9jiz53H91Q83QgfZahc8EbY5bTuEyWkaL5BZKujJo5WevBLf
-         6f/LxbT96ALoA4oO+92N4nttLbTxXvmRmwM1g27FolJbnKkI/0ngUI8BiBJv/8hzR4LY
-         LnXQ==
-X-Gm-Message-State: AOAM532/O1W4tJ1tMw/KMvrN1PAge8+x/XxHpZVFg3EGT696gbGcTY0z
-	mzhoMOwTPppsPYp6+soFGQUR/3fMK7aU
-X-Google-Smtp-Source: ABdhPJwgWkJ1ftltOMr730sHlBuyKbh19q2i95Pq+5KpB2m/dzX8T+1uMmGHY/uhO5lrMmZ1tArTrQ==
-X-Received: by 2002:a5d:5643:: with SMTP id j3mr15731362wrw.43.1605030574297;
-        Tue, 10 Nov 2020 09:49:34 -0800 (PST)
+        bh=VY0maJjjMysHwMFtZssEyEYRWOLeB83QdFMjEtlBzgM=;
+        b=TpNhrXLJILqaYXJQcA7A3bUKzE+HJaDxX+ZoajyflP1mDbkTlNYBLBlG/Y2Sex2cWP
+         mxa8N/cqjHZeBYO4j3Z6mV0GOr6n2PiH6wBEHAS7BroPqnjw/oZRg7aRvOh11+DeZpUm
+         fdxISlD8A4O2PXRwFkgb4MQFiFxTsyV41VtQniyaAXW7VIkF117DvA2BDTBCDjDcidXb
+         QUeoUTQBzQVSQ0cpiC85+iFSlCeDf7BkRfxnDFz705WYmEis0VFLcLKdqjiYKxU8R4Xh
+         qp5uCGekLJINeoyLhLUBZ1vQToxyjv5DuND4uDOeCyf27iE6VMrh7++BvidBxzI38iMH
+         vw3w==
+X-Gm-Message-State: AOAM533e7eMaUPpPSv+MEnn6zRNztV0S41ouenFBsGDHU/ygSW++Qnm9
+	gr59G6hEE/LYcc+Z2qPaNXls2DtwE5UF
+X-Google-Smtp-Source: ABdhPJwArMD2Zxj0KFpYu7u7kNzvX0PfXbuJF9RVil2pFExAIyTa5djcHtOjT7Amh22PVqz7xhYNZw==
+X-Received: by 2002:adf:dd08:: with SMTP id a8mr14066715wrm.344.1605032401871;
+        Tue, 10 Nov 2020 10:20:01 -0800 (PST)
 Return-Path: <viktor.rosendahl@gmail.com>
 Received: from greenhouse.bmw-carit.intra ([212.118.206.70])
-        by smtp.gmail.com with ESMTPSA id p4sm17635902wrm.51.2020.11.10.09.49.32
+        by smtp.gmail.com with ESMTPSA id v6sm20194471wrb.53.2020.11.10.10.20.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Nov 2020 09:49:33 -0800 (PST)
+        Tue, 10 Nov 2020 10:20:00 -0800 (PST)
 From: "Viktor Rosendahl" <viktor.rosendahl@gmail.com>
 X-Google-Original-From: Viktor Rosendahl <viktor.rosendahl@bmw.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Viktor Rosendahl <viktor.rosendahl@bmw.de>,
 	Viktor Rosendahl <Viktor.Rosendahl@bmw.de>
-Subject: [dunfell][PATCH] jsoncpp: Fix broken handling of escape characters
-Date: Tue, 10 Nov 2020 18:49:29 +0100
-Message-Id: <20201110174929.21796-1-viktor.rosendahl@bmw.de>
+Subject: [dunfell][PATCH v2] jsoncpp: Fix broken handling of escape characters
+Date: Tue, 10 Nov 2020 19:19:57 +0100
+Message-Id: <20201110181957.23414-1-viktor.rosendahl@bmw.de>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+
+New in v2: I removed the unescaped characters from the quoted error
+message because it seems that they broke patchwork.
 
 Applying this backported patch from upstream fixes the following
 test failure:
@@ -59,7 +62,8 @@ test failure:
 /home/viktor/jsoncpp/src/test_lib_json/main.cpp(3370): expected == result
   Expected: '["\"","\\","\b","\f","\n","\r","\t","\u0278","\ud852\udf62"]
   '
-  Actual  : '["\"","\\","\b","\f","\n","\r","\t","ɸ","𤭢"]
+  Actual  : '["\"","\\","\b","\f","\n","\r","\t","<unescaped char>",
+  "<unescaped char>"]
   '
 
 This failure only happens on architectures that use unsigned char as
