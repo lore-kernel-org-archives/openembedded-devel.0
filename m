@@ -1,134 +1,144 @@
-Received: from NAM02-CY1-obe.outbound.protection.outlook.com (NAM02-CY1-obe.outbound.protection.outlook.com [40.107.76.44])
- by mx.groups.io with SMTP id smtpd.web08.11775.1605217327224783483
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web09.13569.1605225463869895838
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Nov 2020 13:42:07 -0800
+ Thu, 12 Nov 2020 15:57:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=PZm3jbcl;
- spf=pass (domain: windriver.com, ip: 40.107.76.44, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bvPOyce761M1g+Du28CBj3qtqTDnv6Mv2YjNc1kSMc27jhLDOnhzt1T5ieBEB/0i+YY6jA49wLWot0lYtFvNPZp91ghRiJUTNRiEEiZjn00ziFuPUpfxs0CS2+DHoxDFHVuOI78tfLWVLLoaIbo2F2BfBnJdcMqk8jnltnbECsEAq0VipIoX85NPRYauOpevvDZFGOoYBIjW72TM+q3SoG3//ag8HDISqFFrE7QXpCn4tgzYjPgGmNtrERTkZwnKMW9jpaT9w/WRQsURs/bPEjjZ4I2jH/B/fdSAQRukUj1pkWaH72wJPVyaDNVvE2aR+64Twe4qDK4CeNZMAPJseg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jJIVkxV6AioW1lYstvLanEDWTOhwsYkGbyplhwKfopI=;
- b=XORW3aSSxzfOyEUZD6SEnsNXUcNs1Mj3+xyX8Q6kD/ZT6cjIa1q6iqZmKCTZTOzxQZoJjCbg6lRXvomOBy+d1n73kzjHtRDCSW/viBoYrlHMW+KjvgH5M4n8qpz8ODeUVGEHz3BpspQobVU+Jf/K99PrdRrdoIlrhvZIRFblXsEBGTRNPro7zVknSHMK/uUWRxFAqw77opHMqgiTU6y7sE6h32aNhKyukba9ZeJJ8mDLxUQ/Yv/N5xk7yTgB7j2vTPlsvauNsLpb/ZmnM/nfA6uPwu4xScQVz+DsDhOjhGU41DZxHhqawzXTlm8QAXbmYqbWnGj1wCqDvqieX8FVvg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@broadcom.com header.s=google header.b=UkH9ym1n;
+ spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: broadcom.com, ip: 209.85.210.179, mailfrom: scott.branden@broadcom.com)
+Received: by mail-pf1-f179.google.com with SMTP id b63so2433789pfg.12
+        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2020 15:57:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jJIVkxV6AioW1lYstvLanEDWTOhwsYkGbyplhwKfopI=;
- b=PZm3jbcllc8tn4hq2skg5LeNV5mHNhdgX53/QbqASClc1ILf5XehGmlXgJ+zhIlmX7zE3IbvrVHOeGtdnHMxLvWL9MDKu62q/hYPhD9I7nRLP92uEWqHn2cO6lt4Dhlx4jW5SFd9ftKHer5Hfouf39X4ZbduYZe07k+CFJ426AA=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BY5PR11MB3910.namprd11.prod.outlook.com (2603:10b6:a03:185::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.24; Thu, 12 Nov
- 2020 21:42:05 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::7875:99b3:15ae:5df2]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::7875:99b3:15ae:5df2%7]) with mapi id 15.20.3541.025; Thu, 12 Nov 2020
- 21:42:05 +0000
-Subject: Re: [meta-python][PATCH v4] Add python3-cvxopt
-To: Gregory Anders <greg@gpanders.com>,
- openembedded-devel@lists.openembedded.org
-References: <20201112210645.26343-1-greg@gpanders.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <da1ec791-8c13-909a-644a-065a918405e6@windriver.com>
-Date: Thu, 12 Nov 2020 16:42:02 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.4.0
-In-Reply-To: <20201112210645.26343-1-greg@gpanders.com>
-X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: YTXPR0101CA0028.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00::41) To BY5PR11MB3909.namprd11.prod.outlook.com
- (2603:10b6:a03:191::13)
-Return-Path: trevor.gamblin@windriver.com
+        d=broadcom.com; s=google;
+        h=to:from:subject:message-id:date:user-agent:mime-version;
+        bh=81qbgf7Z9gGGCyvdwZZyGTHVLiZXyxE3XOr9t40hUWk=;
+        b=UkH9ym1nWbzrDDwhUFaK+nxZh/kO/XKg4cXwZ1SRSkvzwZJ41jEfM9sj5mr/sCqFgO
+         XkyBhwq4gXM+fuzY0SUDNsPYozHTT4YobKLhkDijsviieqc/22pCNd53OaMwpL4sUU/2
+         xd+NJSdAm/JWgaaj6+P1avh6WE2c39mMkNg5w=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+         :mime-version;
+        bh=81qbgf7Z9gGGCyvdwZZyGTHVLiZXyxE3XOr9t40hUWk=;
+        b=LYivHOZq5ycGFcoeBj8fLt/UP/7B299LfNe0nh/BijvACXo6FIMGvVVDFMYMk2N0ur
+         Z7PU/xqROhz0saPjMsG5QUeoFgFEcA89pyjRQmx3uB8mYLKFoo7E0BHiGUtOnX5VraAC
+         fvGeNP20ug4ZRdbF6+7S/IU2f7YGK/FYbTyukt6r1HilAtl3Kd7hD09yKijMChlgdfjY
+         HUNX6aOcYy5f90WcQ3dCvtc0ClQWAaQW5vbEcLk/vbWu1ei9OdqRxhrSy9vsi1xTyEPS
+         eECn+2rgLhq157DcM10TcJVKZPBalHi3EflBobsLxRQjf/hNwRAa9ONojMYwEOQtNxe/
+         U7bw==
+X-Gm-Message-State: AOAM533kOttsNNdF2bCQ2XojLKHMLE7SE+F3fsY8vyezTMQ9qONTdjiF
+	zAwS+vsZDrn/8tZtRKS3phx5kDLH/LqOqN5yeR04gvT18j960UESrymaJQSZVkvdrPP+vquc3ED
+	Es136+bm+y5YBmFsjfZa955L0DC72Q+P37J2xvehdldUzotbKJE7VRrZehwyZg+IAbBdaTBnDYh
+	yvvSMnUiPtlPEgzhS83maRWt+w+BK3
+X-Google-Smtp-Source: ABdhPJwM5u7dMS1iSlNEDisPFbkDqO6aSMEgSS5YkXHycK5dpnYsmvaQ6FLjABOGpN81GfVOgGAfwg==
+X-Received: by 2002:a17:90a:c686:: with SMTP id n6mr247883pjt.21.1605225462779;
+        Thu, 12 Nov 2020 15:57:42 -0800 (PST)
+Return-Path: <scott.branden@broadcom.com>
+Received: from [10.136.13.65] ([192.19.228.250])
+        by smtp.gmail.com with ESMTPSA id 143sm492681pgh.57.2020.11.12.15.57.41
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 12 Nov 2020 15:57:41 -0800 (PST)
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+From: "Scott Branden" <scott.branden@broadcom.com>
+Subject: all external kernel modules fail to compile with with poky and linux 5.10-rc1
+Message-ID: <1787995e-ca28-2c7f-589d-de56b747b024@broadcom.com>
+Date: Thu, 12 Nov 2020 15:57:40 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by YTXPR0101CA0028.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::41) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.21 via Frontend Transport; Thu, 12 Nov 2020 21:42:03 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 446f6d26-684d-44f7-5203-08d88753cbac
-X-MS-TrafficTypeDiagnostic: BY5PR11MB3910:
-X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB3910A03F42492F911C5FA5649FE70@BY5PR11MB3910.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:551;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	YCJ5FtUNOj+BcBCfLSVFNzULTsEB6aCo+Ut9yzflxmdQHMd9uor43IaYW32F1L16l0uuNc2WPZJcELuzHR35xofbBAp6soWoK8Q6NAgz/pSvgKDzMFusi8HD874FmJJuIRJ3aEhwXBK2gdsrMjKcRp5LvZ8Z/YHHWRs7WkTmpKIS7VxgrxR5Eh1XUfJiVHGt6SErf360fQhQJ3MsQ/xFWDKMj5qhFaf7DPsVtZWfoWFiVAxgc5IMMNE1hf7DS1O0UH6IIf99hQIhlup3SYjwSfM//PWafOxWQkF4OiUkD37m3qMmwFY22Rp9xP3xFwEa26LhVNEpTw3a+eaIffsK7cREpdrkl98vOfzgi/yFdGXbJKIWMHSJeBcbrWNKLNoy5LB+PBxI6IyeApbDfPiIzgI4T47+KIGKDyvbdtiKSO4dVPITzeo0/FDP8Tvbx8dDIoWlOyRIzAb84MiKXRQOGw==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(346002)(39850400004)(376002)(366004)(2616005)(5660300002)(66556008)(956004)(478600001)(16576012)(8676002)(26005)(2906002)(53546011)(16526019)(31696002)(6486002)(52116002)(8936002)(186003)(66476007)(66946007)(31686004)(86362001)(316002)(36756003)(44832011)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	F+GPF+TxPauHFaBjsWtQAOBmG6ONOoMVkn+b8wHnNMPRRTuyJOADDhoBBBuQU9N9ZXrKYwgVFpB81siu3scRiAwynkY5tBwELtWARY6JtXGUqzHlXSp2a4854zoHRDxowISbR6L4n47eLEuatlQ32EVNkfs/Zipi5/uA16dZma/RIB7mRjkt8pZMQ2gmIQ3EVMlnQ3PxhLnNOxeTtjR6soIASg/78Z90Hg9LqEORnKMMSt4wsNIqzUOsMTyJWBXmtPbAiqKesSxZfWZLypcBMAZhxbSj8J15NkiCTHw9dGC4/vP7V4it2d2Fh3uHnUS0CwvBI5W6aXJSRUeYg7pYCN8HEnLPmdTf8SQxRz7jbSdW0aJKDAktarcTgcFW2VEEEO74TGKjDRCiCEAzo7Pc+17AoM80vH1ClvLmz/iFC750aTF+JIgso4EI72AHja65l/CQN5Mf6uv/sElKZD0Eq6XW1HjG+4VB0Gudv6bdP1sIVQkpW5AhExhzzVnyM8re+yv6kEZiNqhlMwV9fX0SmkH1lFn5ybrfHifhyF0wrruMqPOewZp9OhpLM7M9FthaYHQpe1Idh0K7X72IradVrNEL7TBJuGyw4m0TLouIob0W1xyf6nse08rc8pmvCfV5b1mEGJHELBpdLAzyR2kxQA==
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 446f6d26-684d-44f7-5203-08d88753cbac
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2020 21:42:05.1233
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3ED7cDGy1Y5f+HAWkOu9t6Xl6Y5dTqEppBFVtQwuycZZuF0mbTFw9dZNssmQ9Ey/Pmy7waXzBTOjG2VecY+TMui1MrhcklElSpZsSYtHe8A=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB3910
-Content-Type: text/plain; charset=utf-8; format=flowed
+X-Groupsio-MsgNum: 87908
+Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
+	boundary="0000000000008659fc05b3f1ad9b"
+
+--0000000000008659fc05b3f1ad9b
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Content-Language: en-CA
 
+It appears the all external modules fail to compile if you try using the 5.10-rc1 or later kernel due to this commit:
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=596b0474d3d9b1242eab713f84d8873f9887d980
 
-On 11/12/20 4:06 PM, Gregory Anders wrote:
-> [Please note this e-mail is from an EXTERNAL e-mail address]
->
-> Signed-off-by: Gregory Anders <greg@gpanders.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   .../packagegroups/packagegroup-meta-python.bb |  1 +
->   .../python/python3-cvxopt_1.2.5.bb            | 19 +++++++++++++++++++
->   2 files changed, 20 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-cvxopt_1.2.5.bb
->
-> diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> index b8265fcc5..142687f30 100644
-> --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> @@ -428,6 +428,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
->       python3-transitions \
->       python3-dill \
->       python3-cerberus \
-> +    python3-cvxopt \
->   "
->
->   RDEPENDS_packagegroup-meta-python3-extended = "\
-> diff --git a/meta-python/recipes-devtools/python/python3-cvxopt_1.2.5.bb b/meta-python/recipes-devtools/python/python3-cvxopt_1.2.5.bb
-> new file mode 100644
-> index 000000000..b440d62bd
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-cvxopt_1.2.5.bb
-> @@ -0,0 +1,19 @@
-> +SUMMARY = "Convex optimization package"
-> +HOMEPAGE = "http://cvxopt.org"
-> +LICENSE = "GPL-3.0"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=4905701d14049b3f8e4774c290aeee21"
-> +
-> +SRC_URI = "git://github.com/cvxopt/cvxopt;protocol=https"
-> +
-> +SRCREV = "5b59d87007bf6fdea464e14875543b35255b84b2"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +RDEPENDS_${PN} += "lapack suitesparse"
-> +DEPENDS += "lapack suitesparse"
-> +
-> +inherit setuptools3
-> +
-> +export CVXOPT_BLAS_LIB_DIR = "${STAGING_LIBDIR}"
-> +export CVXOPT_SUITESPARSE_LIB_DIR = "${STAGING_LIBDIR}"
-> +export CVXOPT_SUITESPARSE_INC_DIR = "${STAGING_INCDIR}"
-> --
-> 2.29.2
->
+Has anyone tried to compile the latest kernel or has a fix for yocto?
+
+--0000000000008659fc05b3f1ad9b
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+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
+I/3RRboOeC9M13VNr5feU91O0iDoMreAgPQJ0Lo7YrodKYug0Tt/fFDjkW3v3VIbEr2liUN69U0C
+AwEAAaOCAdEwggHNMA4GA1UdDwEB/wQEAwIFoDCBngYIKwYBBQUHAQEEgZEwgY4wTQYIKwYBBQUH
+MAKGQWh0dHA6Ly9zZWN1cmUuZ2xvYmFsc2lnbi5jb20vY2FjZXJ0L2dzcGVyc29uYWxzaWduMnNo
+YTJnM29jc3AuY3J0MD0GCCsGAQUFBzABhjFodHRwOi8vb2NzcDIuZ2xvYmFsc2lnbi5jb20vZ3Nw
+ZXJzb25hbHNpZ24yc2hhMmczME0GA1UdIARGMEQwQgYKKwYBBAGgMgEoCjA0MDIGCCsGAQUFBwIB
+FiZodHRwczovL3d3dy5nbG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzAJBgNVHRMEAjAAMEQGA1Ud
+HwQ9MDswOaA3oDWGM2h0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vZ3NwZXJzb25hbHNpZ24yc2hh
+MmczLmNybDAlBgNVHREEHjAcgRpzY290dC5icmFuZGVuQGJyb2FkY29tLmNvbTATBgNVHSUEDDAK
+BggrBgEFBQcDBDAfBgNVHSMEGDAWgBRpcoJiMWeVRIV3kYDEBDZJnXsLYTAdBgNVHQ4EFgQUWOK7
+qiyDSt/IDm/SRcNi/sTEiyswDQYJKoZIhvcNAQELBQADggEBAEe2edd4F9tpp0GPmrFrQ+xp9kY7
+uxBzPdCw588bgVrPemjLwiwV37XTT4iWJtNhPfEpaguM6jeLm58LCvHq5/IBjcyHyf4URQVwAg7B
+pqkH8/M+IBstu4/D+znPHB59X+c+au3Q8D+xoNFd7I30kaE+oJuBuFsGXRBc0Ci+FM86x9k7SF8U
+aui1E7Y9wDfsRSCL2TSwU773f09WkrvVdlKxNqQZj2z7bQUUn+yfXdFfBz0LqlYNfn7xJOpQE3HI
+H4jq6U9+b0Qf+J0n0wyysjXPSeQ7EKXVkT8dM2KSpIN86v5dd9LkAz3C1dmjuPRGEC8ZhI1IjMBt
+0itrn6C23NsxggJvMIICawIBATBtMF0xCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWdu
+IG52LXNhMTMwMQYDVQQDEypHbG9iYWxTaWduIFBlcnNvbmFsU2lnbiAyIENBIC0gU0hBMjU2IC0g
+RzMCDFtD165RQeUC8DvoCDANBglghkgBZQMEAgEFAKCB1DAvBgkqhkiG9w0BCQQxIgQglMVTVwIt
+HhMuyDbxC9KVXOAfotYzwUlFAabCyg/+65AwGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkq
+hkiG9w0BCQUxDxcNMjAxMTEyMjM1NzQzWjBpBgkqhkiG9w0BCQ8xXDBaMAsGCWCGSAFlAwQBKjAL
+BglghkgBZQMEARYwCwYJYIZIAWUDBAECMAoGCCqGSIb3DQMHMAsGCSqGSIb3DQEBCjALBgkqhkiG
+9w0BAQcwCwYJYIZIAWUDBAIBMA0GCSqGSIb3DQEBAQUABIIBAHSXi2ysFUUNFvpjCy0G2ZkJyclV
+pN7+Z+ZLD0kgyWEf2a8mqaeV3xnAWZZe9/IAxpUuTP0B6JARmjnbR+CjdgOqBTQ+oYFMpAd4LRgf
+Arf61ccKt14TXSrNWwdgLmmYcBUiLD0bc/JVTjY3l6y6QUq0oAIzhxuoN0QWcuRtNDTX/Jk0FWGb
+dDo2BHT/iVLq5yyvEqoXNcrYQ0BHN59hW7rcX2LjsoFR78ySAffXEdjjazhg+NXR2vRv9yW6LKk3
+mxjpCF9MTLVDl4XoflNnyAzxvoy/EC+rb+BHbarKRWTTeRKS908uEM9v2V7xfD95tuwf03ZfCFO8
+lUbzp1+kh2U=
+
+--0000000000008659fc05b3f1ad9b--
