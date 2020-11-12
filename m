@@ -1,96 +1,63 @@
-Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
- by mx.groups.io with SMTP id smtpd.web11.11044.1605118410318877487
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web08.2547.1605178597628216401
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Nov 2020 10:13:30 -0800
+ Thu, 12 Nov 2020 02:56:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ubbTjFq2;
- spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f178.google.com with SMTP id f27so1928659pgl.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Nov 2020 10:13:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=29U7rHOmIwU3s/19dUxYjAzlVQ4lhEbZOhUnlicn3bQ=;
-        b=ubbTjFq2RRlkD+zxvscEnMHy2qPA9ST3WjqYQp2YWSuLJ1AjLw53ih46dZhV/VjQPC
-         G15STGKuVuDJ1jgxJ95x47BK1g3mmp+24IgZmR+Xiwdo+s6ef6kflUIdqyb7yVRrblAV
-         POadEcu9pHAIGqWZAqet2ahAlun2mvvVe4lDSC7AN5vf27AaHNobZMHJtJRJsXl2f8EQ
-         LMGvhJDyZt5SNAB0SRo8AEn2mI7SnKsbcKs77dqZq4AKArOTnjil4ubVKKrq5OMdU7Fe
-         En1RTYX9ktS47hHKo39muHc97OJQsM2h7Qn1Y6tWuE7mIgtasNZ4JGTy675EUsMg6Mx8
-         036A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=29U7rHOmIwU3s/19dUxYjAzlVQ4lhEbZOhUnlicn3bQ=;
-        b=M9wsSYdW9FNRBKi9jiEhpXi18vfeTzy6LDlZuJVnyYCQ3FblhZMFC6W7Sv+mJ+cjzN
-         qiWBEA4ikN69SIWPOvCbh2CAK6PGm2+DGvkT2kJWNNNLu4VELrjCaCxPw1Taoj/fWSKq
-         rbgTkMeAVMpZEmv0EA396TTim+GYJHpUneouZoTxf3/Crn4MQvkTRGWjBKtydrxLQXuO
-         otCCAIUb9XXJgINg5guEbsQK9+D2Hx2ExoVrPhP+GAAyd8KOXWbnJ42tnfeHYIA8WvcR
-         W6tH7LOxAanm52d8oGMjDzaofnMZE9cS5+IWba7hxjXp9wYR1UqY+BcohI2JNKuwuQ8o
-         lHiA==
-X-Gm-Message-State: AOAM530hK6VGpjhNpw0g7YLZt7Rahopk7ssWSyqWoJ9dCRhjUg2aGHe6
-	SASR6NbZ8LLc/Iqto+DSSiX5ajzP/alzgQ==
-X-Google-Smtp-Source: ABdhPJzL8naOiW9m0JtO8aZwrPxlgvAbL6MYUph+p0DrMED/U0S83J/9vcdnq33Dh8BPw6V5ZRPR7g==
-X-Received: by 2002:a62:55c6:0:b029:160:1c33:a0f7 with SMTP id j189-20020a6255c60000b02901601c33a0f7mr24237787pfb.35.1605118409305;
-        Wed, 11 Nov 2020 10:13:29 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::740e])
-        by smtp.gmail.com with ESMTPSA id x4sm3264751pfm.98.2020.11.11.10.13.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2020 10:13:28 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=39606 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kdAHH-0006p6-Rc; Thu, 12 Nov 2020 12:56:35 +0200
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] suitesparse: Exclude from world
-Date: Wed, 11 Nov 2020 10:13:23 -0800
-Message-Id: <20201111181323.897884-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201111181323.897884-1-raj.khem@gmail.com>
-References: <20201111181323.897884-1-raj.khem@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-cmd2: Upgrade 1.3.11 -> 1.4.0
+Date: Thu, 12 Nov 2020 12:56:14 +0200
+Message-Id: <20201112105618.23773-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-It needs lapack which needs fortran
-Move suitesparse into packagegroup-meta-oe-fortran-packages
+Upgrade to release 1.4.0:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+- Fixed tab completion crash on Windows
+- Changed how multiline doc string help is formatted to match
+  style of other help messages
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 2 +-
- meta-oe/recipes-devtools/suitesparse/suitesparse_5.8.1.bb  | 3 +++
- 2 files changed, 4 insertions(+), 1 deletion(-)
+ .../python/{python3-cmd2_1.3.11.bb => python3-cmd2_1.4.0.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.11.bb => python3-cmd2_1.4.0.bb} (75%)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index c08d32bbdb..1c53ea971e 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -276,7 +276,6 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
-     rapidjson \
-     sip3 \
-     squashfs-tools-ng \
--    suitesparse \
-     uftrace \
-     libxerces-c \
-     xerces-c-samples \
-@@ -936,6 +935,7 @@ RDEPENDS_packagegroup-meta-oe-ptest-packages_remove_arm = "numactl-ptest"
- RDEPENDS_packagegroup-meta-oe-fortran-packages = "\
-     lapack \
-     octave \
-+    suitesparse \
- "
- # library-only or headers-only packages
- # They wont be built as part of images but might be interesting to include
-diff --git a/meta-oe/recipes-devtools/suitesparse/suitesparse_5.8.1.bb b/meta-oe/recipes-devtools/suitesparse/suitesparse_5.8.1.bb
-index af8b1f8568..9ccf2d0bff 100644
---- a/meta-oe/recipes-devtools/suitesparse/suitesparse_5.8.1.bb
-+++ b/meta-oe/recipes-devtools/suitesparse/suitesparse_5.8.1.bb
-@@ -75,3 +75,6 @@ FILES_${PN} += " \
+diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.11.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.4.0.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.11.bb
+rename to meta-python/recipes-devtools/python/python3-cmd2_1.4.0.bb
+index 3b2aa5b744..dfe493bd2a 100644
+--- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.11.bb
++++ b/meta-python/recipes-devtools/python/python3-cmd2_1.4.0.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def"
  
- FILES_${PN}-staticdev += "${libdir}/libmongoose.a"
- FILES_${PN}-dev += "${includedir} ${libdir}/*.so"
-+
-+EXCLUDE_FROM_WORLD = "1"
-+
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+ 
+-SRC_URI[md5sum] = "7e3dbe0aefa331e80f515d3c41cc3b8c"
+-SRC_URI[sha256sum] = "826a288ee6d9c4ec1184e64e9566c09d3b73be8f4283c1898fa4332f1daf8dbf"
++SRC_URI[md5sum] = "520afccc1d46f833d117a23fab76ed8f"
++SRC_URI[sha256sum] = "e59fa932418603af4e046a96c8985812b05af8a73bfd9d7a386cd1b02c6ab687"
+ 
+ inherit pypi setuptools3
+ 
 -- 
-2.29.2
+2.17.1
 
