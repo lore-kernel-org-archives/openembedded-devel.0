@@ -1,91 +1,242 @@
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web08.10236.1605211126315697431
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.60])
+ by mx.groups.io with SMTP id smtpd.web11.10173.1605211208011874785
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Nov 2020 11:58:46 -0800
+ Thu, 12 Nov 2020 12:00:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=b6nGLl8p;
- spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: alexander.kamensky42@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id a18so5546148pfl.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2020 11:58:46 -0800 (PST)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=gWAGXS53;
+ spf=pass (domain: windriver.com, ip: 40.107.236.60, mailfrom: trevor.gamblin@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=nKxvqkMmxXOCsQmCNVRXpQpQQV7l2vgBb4Fq1sxwuCFqgX267SiPyXtD0wjYym+c00NtJxbPk9fbUjEzjOwb1oLXr0VR3Y5sRQE9gLyGpMWtRI47xhKqaraP2e4BP6wuWcpHTGkcVHi5UpV4ZH+Rz//iz1a4O4z27VWyN2Sx7xSaeeaIJO+r41BJiUfBZeKjVLGLxxiGUlRXFYbFUI8U6d2WKaTnVObik34RYmjpDja7CvDV6h1b6PICquLmhUu6O56mHU4BVGjB6BPPGVKoI0yQHz4216xIkffim64J4deozO296qvVKB2Iz1cO7IPqWfpBXupqZDqA45vTofZgog==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jTiFpUAbDG3kMRh69BRQlcp9wUTKikycaIgbqCSkOlo=;
+ b=BtrKHUHfxVu+VrD57r2qVtEU8kc9zT1ZyTn0PX/BTXwib9ndM7FwizYKrUp9ekdnt2+m4krCm5BV5newhYQWs5XRI9AS+7wA4TbojjCRjD8iS6jEDq8m2UU177feksYzkSaCxWA5YB7yvOMZGVC/6ngw/bY1enEi7q7TGzzG9srvPKivXlwq6r4JZ2eJmwVFp3yeAkb2Ra4BJRtrpU76ds9DtYJ7FhrmWoWbBf21bjX3RG6OzZSOhCrYsEgG6QPDnl1hwecT55mL8q0DlvpFf1pB8kbmtJyEko3eEkoVDwAVy/KppwppZ6ph4+23nP3XPhJFqk0YHETeRKUoBFImuw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=V8n7p0aALtLQUupJLbZdF//ii7B/Y1ZCTQ1ki9MF9Nk=;
-        b=b6nGLl8phGY3q19iCFHVi7Zj6zzwbtzdpHwfvXSqRpPokltY++AszyG+gPYrp3LVCv
-         6wifVOGZ9S3ypi1B3hejl9EEW29dGM1lYYvafZwVSBbBhlwWDnchgloICae+hpnGH72x
-         Y8taZYfAynHxd5o/UdzUMpfLoK4lAFV7IwJUh0cQv6O7J9AtlnMW/yuDWBt/mmSTUQke
-         6o1XB/m6ryIE5oxKB12PcYWIdbLD1Pb+qYskS/YTjK3PCPrQjwz1Mm1DNnGH9kWbG9sK
-         +EjRvQJcPhYfPs4hUhiTx9uISYqnxf1ZP5Jb2nEF+PzOvaZIvZYBWj4ChbzwpegIlukR
-         9ukA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=V8n7p0aALtLQUupJLbZdF//ii7B/Y1ZCTQ1ki9MF9Nk=;
-        b=Yd/1RZtCcBswtItFwXIPmvnDY5DENLeIc2/47M79Y7WZcymvUCadEjpYzzHDS1/kWf
-         gt1HTJd6I7KPnEseBycjsS0irRQJaL8amHWVPMCqTMTQXSHNzptqyabyJSJpLLVJkFS7
-         G7M3ONMUNsKaiRr7vXXm+kpvNTTrx3tP1qLNkyKIuRAsQNZZzw4v6adpnEwpD3G1a6FX
-         q652gbwBGEFp63Y0sxED8BO1OKt7f8vQuLCglgJa2Ktiz74XEPtG3UDjqOcdjMWQzoH1
-         U3H3snemb5G6wJiaYO+xEu9mmDGPjtl2o+1alRfAqBqlL4sR9YyYQ6upNTBMzWTQxafj
-         nV+A==
-X-Gm-Message-State: AOAM531vN9rb1eIdq/mq0b9U6c6xec32BVAvm+Ga1MWs3r2JRg4B1+Hz
-	DS8I9jClGFjJzqpXpGXX9tj7i2FM8Cs=
-X-Google-Smtp-Source: ABdhPJxQ3z+pwlaVJd9oaaDWGqTDwBARQF3bHLJQhOxzNY9Q6kLoMMZ9M3D/crNlfF9EziiSPw6fNA==
-X-Received: by 2002:a17:90a:4483:: with SMTP id t3mr848801pjg.116.1605211125611;
-        Thu, 12 Nov 2020 11:58:45 -0800 (PST)
-Return-Path: <alexander.kamensky42@gmail.com>
-Received: from localhost.net ([2601:641:8080:1a70::ffbe])
-        by smtp.gmail.com with ESMTPSA id h16sm5138421pfo.185.2020.11.12.11.58.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Nov 2020 11:58:45 -0800 (PST)
-From: alexander.kamensky42@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Wang Mingyu <wangmy@cn.fujitsu.com>,
-	Mingli Yu <mingli.yu@windriver.com>,
-	Haiqing Bai <Haiqing.Bai@windriver.com>,
-	Alexander Kamensky <alexander.kamensky42@gmail.com>
-Subject: [meta-oe][PATCH] makedumpfile: add PACKAGECONFIG options for lzo and snappy compression
-Date: Thu, 12 Nov 2020 11:58:36 -0800
-Message-Id: <20201112195836.2953252-1-alexander.kamensky42@gmail.com>
-X-Mailer: git-send-email 2.26.2
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jTiFpUAbDG3kMRh69BRQlcp9wUTKikycaIgbqCSkOlo=;
+ b=gWAGXS53NB8FsaccXQm0ICY6rrxCYnDcj7jzIUvo4srWS//VwipB/rqqSMlCwWSXtnpUYLHCc7yMYSKxioBWYoiQFmjZWRFrglVQfaVKK9z4LiqNEYd5nobbS6S+ZqU/4myxoun1HVdNa7+m/kzE+Pm0XRmlh8gyDElG2BFi69g=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
+ by SJ0PR11MB4960.namprd11.prod.outlook.com (2603:10b6:a03:2ac::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.25; Thu, 12 Nov
+ 2020 20:00:05 +0000
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::7875:99b3:15ae:5df2]) by BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::7875:99b3:15ae:5df2%7]) with mapi id 15.20.3541.025; Thu, 12 Nov 2020
+ 20:00:05 +0000
+Subject: Re: [oe] [meta-python][PATCH v3] Add python3-cvxopt
+To: Gregory Anders <greg@gpanders.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20201109190048.26694-1-greg@gpanders.com>
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+Message-ID: <d810bd94-3812-683c-ed2c-1e81c91dc723@windriver.com>
+Date: Thu, 12 Nov 2020 15:00:03 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
+In-Reply-To: <20201109190048.26694-1-greg@gpanders.com>
+X-Originating-IP: [174.115.236.231]
+X-ClientProxiedBy: YTXPR0101CA0061.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:1::38) To BY5PR11MB3909.namprd11.prod.outlook.com
+ (2603:10b6:a03:191::13)
+Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.0.55] (174.115.236.231) by YTXPR0101CA0061.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:1::38) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.21 via Frontend Transport; Thu, 12 Nov 2020 20:00:05 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: f1d529d3-45ac-4370-cabf-08d887458ca1
+X-MS-TrafficTypeDiagnostic: SJ0PR11MB4960:
+X-Microsoft-Antispam-PRVS: 
+	<SJ0PR11MB49604EFF7C6F47617E0763E49FE70@SJ0PR11MB4960.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6430;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	iHH8/4X9KeopJwJEEocq7O8EvIv5k78Z89OArUH0MY+y+dR3N6mVI4opRh5nTTLGIJ3vWgMktTrjJW9oFXK3QXDr/Cvk23SDM/0HWW40v7/FM9E/YdR/uBb3yDEYnk5MxDRkEZGzhdCI66klZ+aSkzuY2rrE8WEF+Dgd24vOEzDdpHmyyw1ddIfPz+FqC+HsuzeOG0RNVk+edEr+wSWv/V327lwHZxO5uCyCa/9uZxnYRWtuy9jWw85pcLMqpH2+on189xQcS7w4jwDAVju31oNFvmnFBt2PEzVHruldKZ2EFhkrEoQ5TAs1spcjZLK5p+D23Aczk0y9zmNNRV3H3KkI8GA1HfoeohuCuUQQDHAAAch64f4+9fWO4GnEPLMoCnugfWOLN2RiJRrA1zO1/271ZioM0UKrA0xfk4E6eEQzuSqpKLX95RUKlZ40QmaWNP28cNfEzPu53TyHPUVhWQ==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(136003)(346002)(366004)(396003)(39850400004)(86362001)(16576012)(166002)(31696002)(53546011)(6486002)(8676002)(26005)(2906002)(66946007)(966005)(44832011)(186003)(16526019)(316002)(8936002)(31686004)(956004)(66556008)(478600001)(2616005)(52116002)(83380400001)(33964004)(36756003)(66476007)(5660300002)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	gkRVEL/NPJLruHxLRNCcIkJoGmuBzA5kUrSMm8Lq2JrSNDdonp/8elB9ZOj3/K2sA3WX9Fcq2/X/USyCn97PgbGOBVOn5Dz3aHxZaCvpQS2T1jjgil2OAzWhgtESHImYRP9nuQyWDe/7hJtHcSQuRpqspP8YkmKFFk+o3LXxyttVs7FUleL97VdBFTxyv8i8Hp3rIJC2aA4t0WFPPbqICChj76FwmpyAw+byLCadrc+1axmwqJroDP7pQ78u/dUL5QLZonG/2CSxEPU+PwEp5USrGTNHAQauvo+67pcQ69AkOZPfjAtT1yvbDt3JgeLc/B61aZDWxhfwIIt+Q9tmoSQOrP/KAXvNJZKkTcq2v+Uyi5wyf9i6KUQ7oApRzmdHXYseMONgrCaeBEPiBMJG/GcGn5I8AXTgaQzNc6en83aB254ZpCgtaL+NW0aeNRIk0eaPRHKAO/Ofmb7SY55jvW4zBIl/UmB1XASMBqM8eep014XTs9FP/EBoqYBoG0+R9rNpjNbTCqhc1O7s1usciiQptIwNEoeSAb9aDi/P7f65OpyH268JlEHysSp8ibgK96ljjWw2MGgYmjAPBcmvspnAO/455OgtPTrjdXdAMN2XSF0w6Qh7yHYP2LLYE/5bgbu6NoR+XgvBxhVLUoTjyw==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f1d529d3-45ac-4370-cabf-08d887458ca1
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2020 20:00:05.7350
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Q7AuFaGp4Cu5m+J3Nh4tDLpIyKX22AyPDwDlBzygxGsoUoOFaFHj7i03lzQZMQ+Op7Hhn7im9jygDN+VrQtBu45a5z/i8Y1tGyQJHjUZ7gI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB4960
+Content-Type: multipart/alternative;
+ boundary="------------4C25DEEEBAB114FD18CA7850"
+Content-Language: en-US
 
-makedumpfile can be compiled with lzo and/or snappy dump file compression
-support. Lzo and snappy offer faster compression time but slightly bigger
-compressed files. When reload time is important it might be beneficial to use
-lzo or snappy compression.
+--------------4C25DEEEBAB114FD18CA7850
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-But it brings additional dependencies and can make crash image bigger.
 
-Add makedumpfile PACKAGECONFIG that would allow to add lzo and/or snappy if so
-desired.
+On 11/9/20 2:00 PM, Gregory Anders wrote:
+> [Please note this e-mail is from an EXTERNAL e-mail address]
+>
+> ---
+> * Remove superfluous PV definition (not needed when version is in the
+>    recipe name)
+> * Use actual git revision instead of tag name for SRCREV
 
-Signed-off-by: Alexander Kamensky <alexander.kamensky42@gmail.com>
+This patch appears to be good, but there's no sign-off here. Can you 
+re-submit with your sign-off added?
+
+For example, mine would be "Signed-off-by: Trevor Gamblin 
+<trevor.gamblin@windriver.com>"
+
+You should be able to generate it automatically with git using the -s 
+option when you create or amend the commit.
+
+>
+>   .../packagegroups/packagegroup-meta-python.bb |  1 +
+>   .../python/python3-cvxopt_1.2.5.bb            | 19 +++++++++++++++++++
+>   2 files changed, 20 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-cvxopt_1.2.5.bb
+>
+> diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> index 6a3061986..0120fb873 100644
+> --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> @@ -425,6 +425,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
+>       python3-pycurl \
+>       gyp \
+>       python3-jsonref \
+> +    python3-cvxopt \
+>   "
+>
+>   RDEPENDS_packagegroup-meta-python3-extended = "\
+> diff --git a/meta-python/recipes-devtools/python/python3-cvxopt_1.2.5.bb b/meta-python/recipes-devtools/python/python3-cvxopt_1.2.5.bb
+> new file mode 100644
+> index 000000000..b440d62bd
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-cvxopt_1.2.5.bb
+> @@ -0,0 +1,19 @@
+> +SUMMARY = "Convex optimization package"
+> +HOMEPAGE = "http://cvxopt.org"
+> +LICENSE = "GPL-3.0"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=4905701d14049b3f8e4774c290aeee21"
+> +
+> +SRC_URI = "git://github.com/cvxopt/cvxopt;protocol=https"
+> +
+> +SRCREV = "5b59d87007bf6fdea464e14875543b35255b84b2"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +RDEPENDS_${PN} += "lapack suitesparse"
+> +DEPENDS += "lapack suitesparse"
+> +
+> +inherit setuptools3
+> +
+> +export CVXOPT_BLAS_LIB_DIR = "${STAGING_LIBDIR}"
+> +export CVXOPT_SUITESPARSE_LIB_DIR = "${STAGING_LIBDIR}"
+> +export CVXOPT_SUITESPARSE_INC_DIR = "${STAGING_INCDIR}"
+> --
+> 2.29.2
+>
+>
+> 
+>
+
+--------------4C25DEEEBAB114FD18CA7850
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 11/9/20 2:00 PM, Gregory Anders
+      wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:20201109190048.26694-1-greg@gpanders.com">
+      <pre class="moz-quote-pre" wrap="">[Please note this e-mail is from an EXTERNAL e-mail address]
+
 ---
- meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.7.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+* Remove superfluous PV definition (not needed when version is in the
+  recipe name)
+* Use actual git revision instead of tag name for SRCREV</pre>
+    </blockquote>
+    <p>This patch appears to be good, but there's no sign-off here. Can
+      you re-submit with your sign-off added?</p>
+    <p>For example, mine would be &quot;Signed-off-by: Trevor Gamblin
+      <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>&quot;</p>
+    <p>You should be able to generate it automatically with git using
+      the -s option when you create or amend the commit.<br>
+    </p>
+    <blockquote type="cite" cite="mid:20201109190048.26694-1-greg@gpanders.com">
+      <pre class="moz-quote-pre" wrap="">
 
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.7.bb b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.7.bb
-index 165e192cb..ad1e09c35 100644
---- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.7.bb
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.7.bb
-@@ -40,8 +40,13 @@ SECTION = "base"
- EXTRA_OEMAKE = "\
-     LINKTYPE=static \
-     TARGET=${TARGET_ARCH} \
-+    ${PACKAGECONFIG_CONFARGS} \
- "
- 
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[lzo] = "USELZO=on,USELZO=off,lzo"
-+PACKAGECONFIG[snappy] = "USESNAPPY=on,USESNAPPY=off,snappy"
+ .../packagegroups/packagegroup-meta-python.bb |  1 +
+ .../python/python3-cvxopt_1.2.5.bb            | 19 +++++++++++++++++++
+ 2 files changed, 20 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-cvxopt_1.2.5.bb
+
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index 6a3061986..0120fb873 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -425,6 +425,7 @@ RDEPENDS_packagegroup-meta-python3 = &quot;\
+     python3-pycurl \
+     gyp \
+     python3-jsonref \
++    python3-cvxopt \
+ &quot;
+
+ RDEPENDS_packagegroup-meta-python3-extended = &quot;\
+diff --git a/meta-python/recipes-devtools/python/python3-cvxopt_1.2.5.bb b/meta-python/recipes-devtools/python/python3-cvxopt_1.2.5.bb
+new file mode 100644
+index 000000000..b440d62bd
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-cvxopt_1.2.5.bb
+@@ -0,0 +1,19 @@
++SUMMARY = &quot;Convex optimization package&quot;
++HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://cvxopt.org">&quot;http://cvxopt.org&quot;</a>
++LICENSE = &quot;GPL-3.0&quot;
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=4905701d14049b3f8e4774c290aeee21">&quot;file://LICENSE;md5=4905701d14049b3f8e4774c290aeee21&quot;</a>
 +
- do_install () {
-     mkdir -p ${D}/usr/bin
-     install -m 755 ${S}/makedumpfile ${D}/usr/bin
--- 
-2.26.2
++SRC_URI = &quot;git://github.com/cvxopt/cvxopt;protocol=https&quot;
++
++SRCREV = &quot;5b59d87007bf6fdea464e14875543b35255b84b2&quot;
++
++S = &quot;${WORKDIR}/git&quot;
++
++RDEPENDS_${PN} += &quot;lapack suitesparse&quot;
++DEPENDS += &quot;lapack suitesparse&quot;
++
++inherit setuptools3
++
++export CVXOPT_BLAS_LIB_DIR = &quot;${STAGING_LIBDIR}&quot;
++export CVXOPT_SUITESPARSE_LIB_DIR = &quot;${STAGING_LIBDIR}&quot;
++export CVXOPT_SUITESPARSE_INC_DIR = &quot;${STAGING_INCDIR}&quot;
+--
+2.29.2
 
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+
+
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------4C25DEEEBAB114FD18CA7850--
