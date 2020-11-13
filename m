@@ -1,83 +1,46 @@
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web11.15079.1605234415431057151
+Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
+ by mx.groups.io with SMTP id smtpd.web11.3259.1605268891189416470
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Nov 2020 18:26:55 -0800
+ Fri, 13 Nov 2020 04:01:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=TiNdjPst;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: bruce.ashfield@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id 7so11097570ejm.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Nov 2020 18:26:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=gjR71OsTR4fzeKOF5zeK5XuOJ1au4R5xYQxdmtLrS4U=;
-        b=TiNdjPstfQlde+pSF1bRbGO1hh4cyNvf6WL6VivsZTJ6cjDqnMkuyo4EiQEpPcgEof
-         5ih/OZvAf67Lox2e4Pt9nn1YxjfvLOwynkj/lDAynKbd1O5vIsGQLwCpF/Hm4a20Ka6E
-         3mt+/kBbaKOl1Xcp4XzIICglnXoAP2VlQI2UsxkHZroe4NaSo9xtr2f9m1Fj4z0Y6K9+
-         cdBEQd15t/UW6npTFXbxIsjkDHzMvdebmJYgS2bgiDiWIr1ZdN4YXtluvEjq2QZu11vz
-         cvZ8qS5HVCAeOw150LXIr2Eyvw7uluCSLLjmGgNSsnXcSEIbovLB7y/O/CVxgntaehxF
-         aWpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=gjR71OsTR4fzeKOF5zeK5XuOJ1au4R5xYQxdmtLrS4U=;
-        b=bDUPxWDtSaJ0GUt1p8I+jGJP5pIvsnmi8JH+Zt8Ie6MuoVFg4ddb8sGHhABDeAt1rc
-         WJtNLGkO24SniIdZM6KKnqB2kRhmfO5eU+PPwJG8SdvgiahK5YIzf5UP9Ypj57jHkrsF
-         HpvKLcEcnFmd6a4/ljDZEZXnISVqNSSsBJMw8LHjYqwCcD/Yeh/rW02RSwtXRC07CfMA
-         1wFARNXV4VkTNhFF9uExPFO43hYOAkDMg4KBqrYCxXPc4OFLmWHCSErvKy2q/0CQVdpV
-         oSbpZQp2YCPMHc6rgSEoAkR+E5ffsWFLe+EkDY3nHU8DqIZPsu2PoEGVSGaOhoLAdkzj
-         9KMw==
-X-Gm-Message-State: AOAM530ajhx4Ighs0XY2SMeP2iCrud98G8b/mvTUTlUcgORExftl8thX
-	dPWE+Vsj8HsToEQFPcwrNZEVc94D0pWeJwtDyxA=
-X-Google-Smtp-Source: ABdhPJznCaJl7WAAjs9AouRWEIO0WENS/PVXsJkYUvK6ZZzm6QPzMAkv3YQOOuoAhW0Zqu9A+JdDwDfhg2Ibuiveq2A=
-X-Received: by 2002:a17:906:3644:: with SMTP id r4mr2187969ejb.517.1605234413836;
- Thu, 12 Nov 2020 18:26:53 -0800 (PST)
+ dkim=missing; spf=pass (domain: bootlin.com, ip: 217.70.183.198, mailfrom: kory.maincent@bootlin.com)
+X-Originating-IP: 163.172.53.213
+Received: from build.dedibox.fr (build.bootlin.com [163.172.53.213])
+	(Authenticated sender: kory.maincent@bootlin.com)
+	by relay6-d.mail.gandi.net (Postfix) with ESMTPSA id A73F7C0005
+	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Nov 2020 12:01:28 +0000 (UTC)
+From: kory.maincent@bootlin.com
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] libftdi: add swig-native to dependencies
+Date: Fri, 13 Nov 2020 13:01:28 +0100
+Message-Id: <20201113120128.2629082-1-kory.maincent@bootlin.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <1787995e-ca28-2c7f-589d-de56b747b024@broadcom.com> <dcffe9e8b3a47c0e0edaf91a294f92dcc4085553.camel@intel.com>
-In-Reply-To: <dcffe9e8b3a47c0e0edaf91a294f92dcc4085553.camel@intel.com>
-From: "Bruce Ashfield" <bruce.ashfield@gmail.com>
-Date: Thu, 12 Nov 2020 21:26:42 -0500
-Message-ID: <CADkTA4OR3O00pdBBQOXf7wuK=CNABTsvH3+D+UTKRpMPLwQDNw@mail.gmail.com>
-Subject: Re: [oe] all external kernel modules fail to compile with with poky and linux 5.10-rc1
-To: Anuj Mittal <anuj.mittal@intel.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>, 
-	"scott.branden@broadcom.com" <scott.branden@broadcom.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Thu, Nov 12, 2020 at 9:21 PM Anuj Mittal <anuj.mittal@intel.com> wrote:
->
-> On Thu, 2020-11-12 at 15:57 -0800, Scott Branden via
-> lists.openembedded.org wrote:
-> > It appears the all external modules fail to compile if you try using
-> > the 5.10-rc1 or later kernel due to this commit:
-> > https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=596b0474d3d9b1242eab713f84d8873f9887d980
-> >
-> > Has anyone tried to compile the latest kernel or has a fix for yocto?
->
-> Can you check if this resolves the problem:
->
-> https://lists.openembedded.org/g/openembedded-core/message/144539
+The build of libftdi-native return
+Error: Unable to find 'swig.swg'
+Error: Unable to find 'python.swg'
+Add swig-native in the dependencies to fix it.
 
-Yep, that's exactly what you need.
+Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+---
+ meta-oe/recipes-support/libftdi/libftdi_1.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I haven't had my other updates merged yet, so mine is still pending.
-
-Cheers,
-
-Bruce
-
->
-> Thanks,
->
-> Anuj
->
-> 
->
-
-
+diff --git a/meta-oe/recipes-support/libftdi/libftdi_1.4.bb b/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
+index c33c79111..8479b274e 100644
+--- a/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
++++ b/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM= "\
+     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
+ "
+ 
+-DEPENDS = "libusb1 python3"
++DEPENDS = "libusb1 python3 swig-native"
+ 
+ SRC_URI = "http://www.intra2net.com/en/developer/${BPN}/download/${BPN}1-${PV}.tar.bz2"
+ SRC_URI[md5sum] = "0c09fb2bb19a57c839fa6845c6c780a2"
 -- 
-- Thou shalt not follow the NULL pointer, for chaos and madness await
-thee at its end
-- "Use the force Harry" - Gandalf, Star Trek II
+2.25.1
+
