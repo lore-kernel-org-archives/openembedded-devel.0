@@ -1,106 +1,73 @@
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com [209.85.208.66])
- by mx.groups.io with SMTP id smtpd.web12.3862.1605345846761133445
+Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com [209.85.210.66])
+ by mx.groups.io with SMTP id smtpd.web10.5416.1605357227307435635
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2020 01:24:07 -0800
+ Sat, 14 Nov 2020 04:33:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=s3Yiti+E;
- spf=pass (domain: gmail.com, ip: 209.85.208.66, mailfrom: adrian.freihofer@gmail.com)
-Received: by mail-ed1-f66.google.com with SMTP id b9so13607389edu.10
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2020 01:24:06 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pyCvg5t5;
+ spf=pass (domain: gmail.com, ip: 209.85.210.66, mailfrom: toertel@gmail.com)
+Received: by mail-ot1-f66.google.com with SMTP id z16so11440020otq.6
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2020 04:33:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=message-id:subject:from:to:cc:date:in-reply-to:references
-         :user-agent:mime-version:content-transfer-encoding;
-        bh=7lU7ivpgHX590jQKW40Fx5sODWIVLEAZXwRYEsgCadc=;
-        b=s3Yiti+EHX6+0ktH1mM5edf+xMsCj0YwiNa63elqXHFqglOGuxUBp7+6ABAWRs/owZ
-         mJjCH1HiAOZ3FpbhcDCCNWweK8asAOwVfg+X6m8DRCJAwK4KRR3nPaXOnkMwChm3y1r3
-         i99iWJTD8kohj/8YsiJ1wja9w74UnWU3b6oGPepw38thO2pnLm8K31O6U5qCGa8L2IRs
-         ZSbnOIlassnLkPRTFSVZHlvMpyQsZ/Q6TYEaFwt6qb0XAJn8u9LZtZUkF+BoyyWbDuY9
-         gFDzZZ69UXejVgy+wFRO+Z1kSqaOAOt7WlCA3o52HiURS2a0cuGpYGZ4EiSMFEfi8sQ7
-         nodw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=6mH2aV3v5GZs0H9Nz2dKgHwST7n8XSDN6Hp8CYVc3pA=;
+        b=pyCvg5t5TNkuhZ0lZb1V6mQG6VivAiRnCyoqr3GxuFAe2N+xbLfG/RMEkS3i+jJO37
+         /HHjisa8cO92v4dpVEkqsOSFOOWcUbIpo1DhH6CjNU1xG3C9EulONOdLaxcpYn1WzknB
+         B93rkR3k3OUPDjfimiUxCgSaj7GdjSt8xodqYJQ+UTsnnn8RhhPesPYPGA7C2orrcWTn
+         Hl03OvZM7kFOE3nwrbhkh057kWmOWqN4VVvTjYVmtKCR2DdKIIv5bWSL/shQ9i2r8uvv
+         qpyZkKws0lFaKRRlP4hVJqT56ZCRS5c9SeBbTJGpJ1TMkX7VUIsfWym42ItjT60/F6Tx
+         6lLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-         :references:user-agent:mime-version:content-transfer-encoding;
-        bh=7lU7ivpgHX590jQKW40Fx5sODWIVLEAZXwRYEsgCadc=;
-        b=DMpj9iqLoOEq22zcZ2Lgv++CtlN/nc57GmOL87+WgV0rNAnVaF97bntMd4xobsgSSh
-         J8mCGJQ/PX42EJthWgXwtgJ2zhFyXHrVxsS1bApq6PY2/Czk5lotwtkFX139XunnbyqX
-         pLYCt5d42Kk4Wm8tyUdFru8Y12X9nYYxIn+yUsMhP9Mq13vOO88CTKD9256BL72xDay/
-         2VrgXfK42Ohiwlsptp2RsuINQJftcKxeXhMh9NIgoeMBqK81yL2CWPapX75M85vGczoR
-         Wq1Q8jCN4VWscu3DXewB6CWZwYe3VUkyT0HtRehAXEjZL7DyNkQ/LvyYxR54mvM+MaGu
-         PDfQ==
-X-Gm-Message-State: AOAM530G/r+elx9EDe+GQ16mVuvb6i++0kC5MraRzPCfA1iMRErAwR8m
-	wYijjc/1SSFuPiXznll8A7Q=
-X-Google-Smtp-Source: ABdhPJwxNtYHUm1nV1LjJEoAK8tGakmARrmkb4x0hPi93GuAsDxKD9CmaOwlP6lUoUADv5AomfQd+w==
-X-Received: by 2002:a50:9e05:: with SMTP id z5mr6386987ede.231.1605345845243;
-        Sat, 14 Nov 2020 01:24:05 -0800 (PST)
-Return-Path: <adrian.freihofer@gmail.com>
-Received: from md2ramxc.ad001.siemens.net (c-93-184-20-132.customer.ggaweb.ch. [93.184.20.132])
-        by smtp.gmail.com with ESMTPSA id w15sm6236466edx.37.2020.11.14.01.24.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2020 01:24:04 -0800 (PST)
-Message-ID: <02147df0d8b8afd481b6f87fb0a83f8c1e51e9f7.camel@gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] sdbus-c++-tools: fix reproducible builds
-From: "Adrian Freihofer" <adrian.freihofer@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, Adrian
-	Freihofer <adrian.freihofer@siemens.com>
-Date: Sat, 14 Nov 2020 10:24:03 +0100
-In-Reply-To: <CAMKF1sp5eL44BdFqZaE+1du96BObbBVJ1khfnPD9tpWsp4wCHA@mail.gmail.com>
-References: <20201102201848.3556515-1-adrian.freihofer@siemens.com>
-	 <CAMKF1sp5eL44BdFqZaE+1du96BObbBVJ1khfnPD9tpWsp4wCHA@mail.gmail.com>
-User-Agent: Evolution 3.36.5 (3.36.5-1.fc32) 
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=6mH2aV3v5GZs0H9Nz2dKgHwST7n8XSDN6Hp8CYVc3pA=;
+        b=LZZjnGV0TdcKHcVg6SbQZRMs3cce80vyL0VVRXMWArJ4IDWzZKx2RwsldaKi5Yu+Uj
+         1GSrWkQW9WtzPXSBANqPAooVSLKrDMEI/tdpzDNMYhDhW0gDWar9ushXkqzWDqApEIf8
+         /TpUnemnjhqb2C0nTKOj6Uh1CALazTCuVqJcGrLTiKDC7pplDVesM/iDraILhGX+pOQE
+         tOnLdiPzl1qXmTumxma80RAGDYAlT8xd7Hwn6AIe0+Uf/Qz4bN9GuWC+m3fEY/MA88QW
+         HLKfUhG9fZ6X3qsDcF1jP9mzu1x1PH/+T9lPM/tvIAS57lB43nXuBfRWj9fn2KRkXNJz
+         2anw==
+X-Gm-Message-State: AOAM532Ho2XLUzOyg4t7ABdTQh5SlK+oREPTLbDxXCfJYrtOqk2Np8pU
+	iAAZDmSwDu3NRe45ggXBh8kMpvtX9DCzHC6eOU0=
+X-Google-Smtp-Source: ABdhPJz1/r+pwmDzILNTWhe66s3//Nr5pcXuVhHhQ+i5cNh//zB9a2oEvKy9aDn2lSTR9vWsczM59dd1DIqLmV5E/4E=
+X-Received: by 2002:a9d:3be3:: with SMTP id k90mr5009600otc.50.1605357226654;
+ Sat, 14 Nov 2020 04:33:46 -0800 (PST)
 MIME-Version: 1.0
+References: <20201113184045.44235-1-toertel@gmail.com> <CAMKF1sqp6u=NOxP+hsFBxATN65YniNc9N=myyZTmW3AJp20b9A@mail.gmail.com>
+In-Reply-To: <CAMKF1sqp6u=NOxP+hsFBxATN65YniNc9N=myyZTmW3AJp20b9A@mail.gmail.com>
+From: "Mark Jonas" <toertel@gmail.com>
+Date: Sat, 14 Nov 2020 13:33:35 +0100
+Message-ID: <CAEE5dN282_-GkyYTe=c45g2wGch8Bfcto8XHkWGyO=Ew-0UHOA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] libsocketcan: Add PACKAGECONFIG options
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
 
-On Mon, 2020-11-02 at 12:41 -0800, Khem Raj wrote:
-> On Mon, Nov 2, 2020 at 12:19 PM Adrian Freihofer
-> <adrian.freihofer@gmail.com> wrote:
-> > If the reproducible build class is active the following error occurs:
-> > 
-> > ERROR: sdbus-c++-tools-native-0.8.1-r0 do_unpack: Error executing a python function in exec_python_func() autogenerated:
-> > ...snip
-> > Exception: subprocess.CalledProcessError: Command '['git', 'log', '-1', '--pretty=%ct']' returned non-zero exit status 128.
-> > 
-> > Remove the subpath to get git executed in the right derectory.
-> > 
-> 
-> this looks like a problem in core metadata rather, I am fine to accept
-> this as a workaround but I think you should bring this discussion to
-> oe-core
+Hi Khem,
 
-Khem, you're right. Please ignore the patch. After I understood the problem in detail,I went through all patches for reproducible builds on the poky master branch.
-I'm sure the problem is already solved properly with Yocto 3.2.
+> > +PACKAGECONFIG ?= ""
+> > +PACKAGECONFIG[debug] = "--enable-debug,--disable-debug"
+> > +PACKAGECONFIG[no-error-log] = "--disable-error-log,--enable-error-log"
+>
+> what are defaults for configure ?
+> perhaps its more readable if its
+> PACKAGECONFIG ?= "error-log"
+> PACKAGECONFIG[error-log] = "--enable-error-log,--disable-error-log"
 
-I will ask for cherry-picking the related patches to dunfell on the
-core mailing list. Thank you for the hint.
+For ./configure itself the default is --enable-error-log=yes. So right
+now everybody using the defaults has error-log enabled.
 
-> 
-> > Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
-> > ---
-> >  meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.3.bb | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.3.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.3.bb
-> > index 3b87c2265..ec720dc0c 100644
-> > --- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.3.bb
-> > +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.3.bb
-> > @@ -9,8 +9,8 @@ inherit cmake
-> >  DEPENDS += "expat"
-> > 
-> >  SRCREV = "6e8e5aadb674cccea5bdd55141db5dad887fbacd"
-> > -SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master;subpath=tools"
-> > +SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master"
-> > 
-> > -S = "${WORKDIR}/tools"
-> > +S = "${WORKDIR}/git/tools"
-> > 
-> >  BBCLASSEXTEND = "native nativesdk"
-> > --
-> > 2.26.2
-> > 
-> > 
-> > 
-> > 
+https://git.pengutronix.de/cgit/tools/libsocketcan/tree/configure.ac#n107
 
+I also thought about adding "error-log" as the default into
+PACKAGECONFIG but wasn't sure whether there would be an undesired
+side-effect if someone already used PACKAGECONFIG in a personal
+bbappend: In this case error-log would be suddenly gone.
+
+I have no problem changing it according to your proposal. Please tell
+me, I will update the patch accordingly.
+
+Greetings,
+Mark
