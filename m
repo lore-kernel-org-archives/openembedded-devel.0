@@ -1,57 +1,55 @@
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.web09.7593.1605368815961409245
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web11.7870.1605369623235385839
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2020 07:46:56 -0800
+ Sat, 14 Nov 2020 08:00:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=AiY4oIDE;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: quaresma.jose@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id d142so19120831wmd.4
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2020 07:46:55 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=h2AJZGig;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id cp9so5961288plb.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2020 08:00:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=UhtmWd8eTWsHxKzeD/+sCpjdfNeENS/YvEI8/OMDFIA=;
-        b=AiY4oIDEfJirDHqeI5qTt2zHY1qSN0AYBnzmYvO5CQOoL92fX9PUjKs/PH9UMkrWiU
-         hn9YjkQ5nGgsrJUVILBV251ojK0uJseft63GT8S2Bgx+q2TOu1uSVMHvOr75wWjJVcTW
-         AkIWuYJ8HQ7OnVuqu8osJi1Y4G74YCMMgTRUbLBO5o0kr6ysR9FNcEiiiEqZ7UmKG8h3
-         2yr+6skeli9XgMxE0gQMCT9yazMqB0qJDSjPiz9rigudYTM9L1sX14+Seg+75euJc6zk
-         xEG6SMcSirpcR+XFjz+lOy5jEwIYvrOqP4+GG8T3EH6O3Zeyx0MdqAdq8mLqaKhiqW3B
-         PzQw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=gfcqZOjg4l9+0FuMpo/JOWDzkbEAUO/1OGNrsxO0MKU=;
+        b=h2AJZGigAfRm+De6I81LPUjw8Z+aIZHIKBt/UsP6e2FXdUQMX0efRwe55BNTS32oyg
+         3oEks8lQs1k09U9r4BdxxrzWh8njcUoZgMUVTg+6/RHaMTBH/91SRU989ZXZQNeG2Abp
+         Q2FosDoF/P/pMPcBdWE/1nWI5ALEdjEniWPlKki45s1iEs8uAwRRTg9pa5Ycl5Bc/Zq2
+         MZcl8HvSlQVwxpnsWPXYwNW03RcOBKu2ngF2o5lGt0JS50cgwdl0zRFjW/k4RFqpo0aj
+         fCnEOQ5dPY0i2cyybH0Ju6rGbmB2f5cMK1iu1ZKaslYKqhoA0ppWCRtx+1T3O07BBVSb
+         2YIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=UhtmWd8eTWsHxKzeD/+sCpjdfNeENS/YvEI8/OMDFIA=;
-        b=gZ81KCtDaqznYeMkNKkW+vjeonIwGvDeT8kc2CxXIUO/8fhqCekEs0ZNuDOJYJj3PO
-         0Ulb7MCVh4mYKgFyuSFUuFp0vDNimQad0tK4s1jQWIvU4ty24dN3cbrBYdlRUzIwnF0U
-         PNKmEeUgeo/e4Z+dNBQhhoxqiSg6LjoRr5Qyt2A6cL01cTcu3at1Rvy96AUlUf/AT6CW
-         rDJ84VTkXo3mnvXCrEZBXms5M/X4guM0XHfeXTA9g+oNzxf2W1M/G27S3uAmz11kZrHk
-         3ud9l+qKTrEWjdDc0HQEMprjL2XWEPzRuFihsxRDLYv0MveGHIfWgFUdGy6VIxOTqU9T
-         49mw==
-X-Gm-Message-State: AOAM531Di1goXEHeKgdW06OV8J+yiQQtVmY9TSU8IWm11YIZ+cFaLao5
-	0fD2X3e8vPNK4rUmlGvylS1WbhImQPI9hg==
-X-Google-Smtp-Source: ABdhPJznnJxZZ0Qw0CXNfLatE+kBQDuK0tTd6gqb2Ldq9vUY8kclkA11LLIWvFDB7XrAYH70kMDf4Q==
-X-Received: by 2002:a1c:4909:: with SMTP id w9mr7220682wma.15.1605368814260;
-        Sat, 14 Nov 2020 07:46:54 -0800 (PST)
-Return-Path: <quaresma.jose@gmail.com>
-Received: from dragon.lan (176.57.115.89.rev.vodafone.pt. [89.115.57.176])
-        by smtp.gmail.com with ESMTPSA id 109sm15879810wra.29.2020.11.14.07.46.51
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=gfcqZOjg4l9+0FuMpo/JOWDzkbEAUO/1OGNrsxO0MKU=;
+        b=HJM4+OvFil5iei+COsNEM/OnqIs0JxFnrPvuVtkLYod8BU0EdJiX+XPuWTzryvT/d9
+         rjaTET2SIvHSAlRgvzH5PK2Y9gddWi66YtOZVuFcRYhvjLzknfxSPK05WJCsEdqHYf3P
+         l++DxNzO9song4jmVI7vGVUs1qziHDI7dbHveSdEu5VtfQ9pBhWvGjn5xA6cdcLunSqH
+         FPpVf0JxhP5bvaULmGL7vR76h4n0Gxv/DWXd1tqitBWx3TPG2JuFmuDTZhT13ZHINIUO
+         +61rn7SYKJlWWe2Abj61j+esOGKS2lbAOgl9O4L34iIwANFrWm+k8nJY2XNMh5QWFjaE
+         s+LA==
+X-Gm-Message-State: AOAM531ANZT5uCJnXeY+t3EyGnaAhsgI6QCozV6YeeGqWnsL0xbQu0Mk
+	nbSoNe+iN/9HjAus6lE7z/8s0hRDM0JH6ze9
+X-Google-Smtp-Source: ABdhPJyQx7u5FWrGWCLZ9BhAOQaQKmqWQoEi7SoPk5s+7UtFdkyHflqDoKu2nT+ACxhWMFkp3+xbYg==
+X-Received: by 2002:a17:902:aa06:b029:d6:da66:5048 with SMTP id be6-20020a170902aa06b02900d6da665048mr6569060plb.5.1605369622436;
+        Sat, 14 Nov 2020 08:00:22 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::740e])
+        by smtp.gmail.com with ESMTPSA id w196sm12647687pfd.177.2020.11.14.08.00.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2020 07:46:53 -0800 (PST)
-From: "Jose Quaresma" <quaresma.jose@gmail.com>
+        Sat, 14 Nov 2020 08:00:22 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jose Quaresma <quaresma.jose@gmail.com>
-Subject: [meta-multimedia][PATCH v2 2/2] packagegroup-meta-multimedia: add srt recipe
-Date: Sat, 14 Nov 2020 15:46:28 +0000
-Message-Id: <20201114154628.2669516-2-quaresma.jose@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 1/3] packagegroup-meta-multimedia: Add srt
+Date: Sat, 14 Nov 2020 08:00:17 -0800
+Message-Id: <20201114160019.1885976-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201114154628.2669516-1-quaresma.jose@gmail.com>
-References: <20201114154628.2669516-1-quaresma.jose@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Jose Quaresma <quaresma.jose@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  .../packagegroups/packagegroup-meta-multimedia.bb                | 1 +
  1 file changed, 1 insertion(+)
