@@ -1,73 +1,76 @@
 Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web10.13166.1605395292865958850
+ by mx.groups.io with SMTP id smtpd.web09.13122.1605395293892201698
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2020 15:08:12 -0800
+ Sat, 14 Nov 2020 15:08:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=qJMgqQ1i;
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=M+UCzvM1;
  spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id b3so6257682pls.11
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2020 15:08:12 -0800 (PST)
+Received: by mail-pl1-f175.google.com with SMTP id w11so6277910pll.8
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2020 15:08:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=yqXMFsQWO7vQDsZyS3E+65D/oQiXaAAmV5XQ/XlwCMc=;
-        b=qJMgqQ1i9suN8Twy9NjwslGEaycjQL9Pr0hZ9uAZcGPpKM3GP+1tVMZlTT6voi5G1/
-         Ch8J2gdwT/VMgK4Dtzr2AmBg7BNIufRNAhiKUHI+ReByGI36OJcp618NPKKXihWUddwe
-         pkWrE8+qOgRZB4eImeiaEJtDGAjoCjXOEadYxvf63whdPXJ9wuxmbUajtTEVG5S+6PyY
-         a846mgA3qKJCKYdVnJaQR9c2oB/Hr3cm03E/tUA3CO0gZO50VXoDBCtMGCueBsJciWGK
-         ih5IbLc0ci+TENGOwWpTXIMwsy/KVLSaeW9tMGEw33Gfy5yTjKQfhdsk0pD2lh+z0dl+
-         DEAQ==
+        bh=cxgM+QmHvDC7xb58P7iVBntPEhv4zdzoISmo/M6lhPE=;
+        b=M+UCzvM10QWAc44fyihvdG5SdBI5x/xANN2E+DX85I7n+7M4gKMz59L5X9qjBZbTEX
+         +VbYL7c779hoQJt8NzjbQ0UU6DeHf0tlCUJT5cl2u+vwCKcU7s7QdHJfzZzYdQwNWAxC
+         vsmwxuYnpEZlFF8JpPTmTTt0gTsXG3Z8TJkiD/mo5yq2mBkyGVzu1DF0DpxsnyP0dSrN
+         FaumRXOypyG5ZaKspxeuP17wo60tCJSg8Qiv5g5GSqpHoSCZLj6WowCON+AEQFy2x7jP
+         cMhnpunf40XABViAUqpNnvZt/QbBiQ3nzTbCU+7oXQLIpm2nPzIu9ub8bEiAgl6S0y1b
+         BDSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=yqXMFsQWO7vQDsZyS3E+65D/oQiXaAAmV5XQ/XlwCMc=;
-        b=sYESQyhyDW92xFhZNuO7fRWUrohC6Bz8NrTd2G7TUiKQRHacEr809bOtmyQbAVC0CV
-         dYm+OONiVZvGj5Ypun7YBELNWl849SCaQgcV1HnkV7kSqw2oTDGt6J3TLW8F2Ep3Doe+
-         NCjrNOQRh2Of2P6B44HDG59Rrv9Nf4M9IGi2ZlHNpoaUpstozSP4y4z7pxG328lqsfww
-         cIJCvUeguiCKIvvIBXBN6ekC/WZsv8tkW0XovK2+7FBL70KCVYKMtnsRl7pfomBnIPvK
-         98OL5nV0O2SdQC2LfmW1NmMEYjDxlWaogWQ9AVb175xCqr86byhW3sEiZejuO+KdYTet
-         uhhg==
-X-Gm-Message-State: AOAM532P+nakM0Vy+MeIuwP2FrVL1Fp2EVYWhA/PQvSTHLQQwbdGdgMO
-	3DLKJFURMDVH5vjWmqWKOCdBE31Donf4FXdI
-X-Google-Smtp-Source: ABdhPJzioz00a/CthbygZDYElrg8TETMmEf/Nlsy3cjW2uFWPiPJEjS4qTpaUrYIPC7n0lQdLhf+FQ==
-X-Received: by 2002:a17:902:a584:b029:d6:4a70:3241 with SMTP id az4-20020a170902a584b02900d64a703241mr7486023plb.81.1605395292205;
-        Sat, 14 Nov 2020 15:08:12 -0800 (PST)
+        bh=cxgM+QmHvDC7xb58P7iVBntPEhv4zdzoISmo/M6lhPE=;
+        b=pv1J2hTClAkSx5BYi3D+ibYR2F0nhkoFTq1haDeNItwwG1db7cHQ7YvPg5efNiVDyw
+         5yNKpXNuVnUECpnTeATIFHAgP7t3p2o4vaDRbBrTVVA+SpAiADVs8bEQy3NglQhJQtd6
+         71dayVOc939EN1+RvYM7tt6UVOtVD3GCJRzClUrAskgHtIIE3dLEvBZigMUGxXvmMw96
+         SEojMqTYNjddO5hnAvgPPv0dVac0+9I9c5CHNaRcEeTtCa7IwTwVUhmWwKSq3+yYQYKr
+         RpYohTM3zM4guJ8GMmGjH8AR5mTUfkAQ0f+vv5wMscWFMk7kKVGQ6nFO8XwwZ0kr/fqX
+         aGhA==
+X-Gm-Message-State: AOAM5313xImBIjLsppLorcvb2A0z8bqL+ct/uswsZCYzj6qgrgpHJRYm
+	F/t6IoNxSDx/dUKSO214dgSzcFSEd2NsBqIK
+X-Google-Smtp-Source: ABdhPJxxJWiEDu8CaxTWKw8rpuht3OCV1hiIz2lmdDQXjBd9Fk1M25tZsXkMb1NEmxuA6D0UjG75Lg==
+X-Received: by 2002:a17:90b:a4b:: with SMTP id gw11mr2399423pjb.157.1605395293239;
+        Sat, 14 Nov 2020 15:08:13 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::740e])
-        by smtp.gmail.com with ESMTPSA id v191sm13520318pfc.19.2020.11.14.15.08.11
+        by smtp.gmail.com with ESMTPSA id v191sm13520318pfc.19.2020.11.14.15.08.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2020 15:08:11 -0800 (PST)
+        Sat, 14 Nov 2020 15:08:12 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/4] botan: Mark incompatible with riscv32
-Date: Sat, 14 Nov 2020 15:08:04 -0800
-Message-Id: <20201114230806.370074-2-raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 3/4] projucer: Link with libatomic on rv32
+Date: Sat, 14 Nov 2020 15:08:05 -0800
+Message-Id: <20201114230806.370074-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201114230806.370074-1-raj.khem@gmail.com>
 References: <20201114230806.370074-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-CPU is not supported _yet_
+Fixes
+include/c++/10.2.0/bits/atomic_base.h:374: undefined reference to `__atomic_fetch_xor_8'
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-crypto/botan/botan_2.14.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-multimedia/recipes-multimedia/juce/projucer.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-crypto/botan/botan_2.14.0.bb b/meta-oe/recipes-crypto/botan/botan_2.14.0.bb
-index 42e89f639c..13b2c6649b 100644
---- a/meta-oe/recipes-crypto/botan/botan_2.14.0.bb
-+++ b/meta-oe/recipes-crypto/botan/botan_2.14.0.bb
-@@ -49,3 +49,5 @@ PACKAGES += "${PN}-python3"
- FILES_${PN}-python3 = "${libdir}/python3"
+diff --git a/meta-multimedia/recipes-multimedia/juce/projucer.inc b/meta-multimedia/recipes-multimedia/juce/projucer.inc
+index fc8baa45b4..ab0f23879f 100644
+--- a/meta-multimedia/recipes-multimedia/juce/projucer.inc
++++ b/meta-multimedia/recipes-multimedia/juce/projucer.inc
+@@ -34,6 +34,7 @@ EXTRA_OEMAKE = "V=1 JUCE_ARCH_LABEL=${TARGET_ARCH} TARGET_ARCH='-g'"
+ LDFLAGS_append_mipsarcho32 = " -latomic"
+ LDFLAGS_append_powerpc = " -latomic"
+ LDFLAGS_append_riscv64 = " -latomic"
++LDFLAGS_append_riscv32 = " -latomic"
+ LDFLAGS_append_armv5 = " -latomic"
  
- RDEPENDS_${PN}-python3 += "python3"
-+
-+COMPATIBLE_HOST_riscv32 = "null"
+ do_configure() {
 -- 
 2.29.2
 
