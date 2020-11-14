@@ -1,176 +1,141 @@
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web08.10278.1605380671242061491
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web09.10897.1605383759329622068
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2020 11:04:31 -0800
+ Sat, 14 Nov 2020 11:55:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=jD7XZFVf;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id j5so6096119plk.7
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2020 11:04:31 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=vVRQb5jF;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id y22so6146701plr.6
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2020 11:55:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=8u2dvgjYLBiH/f60o5cq3Faek+lmjMoOmdpwAFE4iKY=;
-        b=jD7XZFVfi+uUkTlHT30QMoUrGBFm0XhjVBaT8iwfLlpJj631J0SwhH3F6d34rtEuUK
-         wMiCHlB0Gxd1Rxi0SzZeZdSGEglNSesUSBjosG//QFYaftWwbtxfXTLtAB4lCnkTftkM
-         AfjK+8mVJegTrzu5EgYqqnFuBER6rf5nM2iB3CcIzeMGdpp+V7FznUq/BzwxsdCvVsBd
-         3JoWuvyyOJvJkGSyGRqFPCD6kGPuUE67jtWtpk6ngqjTKV7O3yjlDBHa2AFjngrC7/po
-         f1C9aNCYeD1BygsLPLzox+ILoBek9Y0Of7D1Sl6zaghwGWYvqtYyRBk6RG8ygOiy6SCN
-         HgoA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=oxvENvS2omJD2BzIehfndxrw0cBgeNNVLP5dKquOmA4=;
+        b=vVRQb5jFrmkXrUtujgg4cLnoitLqSkhsbQ9afCbI9Iar5nWZn745UrDqdQyJ9WEGnr
+         3AvdMG40EARvusxJc9kfGJnJGoXHxOg5INBOqfiVH4Jr1roBVvhcDpDsMQLgFI8YO+Eh
+         4j10i8aCvbyKgkZ6Y8BECiObltcVQAyr6oGR8G9pCs95OKMNTfLfj98Pp69qRyEPmHtE
+         IanSMzI3oktS2CZXfwLRH9+rujEW2WOaZ/iedbaI1IdBm1G4NR1oSdO9ZQIpl3xtHrC+
+         /fElL7TlWv7vWoVqoqcM8H03fz4JZOiiFFPyzSJOAZ6giZI7axlXhX+CQJqLqh4Tr+7u
+         MLnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=8u2dvgjYLBiH/f60o5cq3Faek+lmjMoOmdpwAFE4iKY=;
-        b=rByVnVwcqpK3wuAp6Ih/2IB/qmLDNLJ0DrqJ8cDROj8Sszh2q/lADSRKNpNM9hWgAQ
-         C2XxxJi9tkjRKjbjPDZJs9uv3MZVHmTNx7soMGB5LEd87loNXR52iz2ImxAtR/im+qqb
-         RqQe8wDU/LQNXPvJIfLGkiFZZd7Etii495TRgMU9qjaRT1zpuoNCZ120R5zLKAgLG2+f
-         EsaxwEA4QRYvqWPQJrp5gr5sj1/UlyEqfwLCNh8DZgeNyxyQPXon4FMeO5H2Koq/iot1
-         8heJmZxu6dU6IpxhSB426Pq99B8fGdt3xmKFyZwM22RQp3B4l++YnnJGO+Fwdg1zRn5R
-         LVEA==
-X-Gm-Message-State: AOAM530/3So3w6pjspXgqBZeMhJwSGg2uiIK8V5iXfAfBScxxHRVOZBb
-	ASFwQ1dKGs3F9YDrj2C+nJDLPms+7bJ01PtW
-X-Google-Smtp-Source: ABdhPJzzFfcGVxag3js6SvGnbX8AGxlUDWAl/sGvf06g77hOtD1VzPBnk57O5z/pg/bOyqz8GFWrJw==
-X-Received: by 2002:a17:90a:4593:: with SMTP id v19mr8827820pjg.217.1605380670291;
-        Sat, 14 Nov 2020 11:04:30 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=oxvENvS2omJD2BzIehfndxrw0cBgeNNVLP5dKquOmA4=;
+        b=t9b55+NAj0As5xBLcwN7vqClhOBHv+4nLfKDn8ae2x39QMK44HFB3NQVUW9P9WjKNO
+         eNYQMuS6liBrzPRdpf3V4dq5ykcpm06zhMMNRNVJXOlureG0xAScLE5d7IXKw0vwtJk1
+         rFR+ntZfJX/t2Evg4dfPhHe0VXzuRvQwfsLQbzWgg/FykgSacIO252cylWjuuvYhwJ8w
+         zDvjiSyC+2Pg9PuqZgSAY4xMbNUIrGLoPd2kuW2ywudAZmbjVzV2Y7Sh4grKrUJQFpHp
+         Zcr5dRafmagMx9GwQSDb5GsxjWwH2mRLlKCIbTvVWe86U+sCLVoAIEWL6PFBjgTldx8K
+         S1AQ==
+X-Gm-Message-State: AOAM532EYpI0TCorwcfqOBdbBH2e+0ey9+PlE8nBWi9CVBuq+p0PkEys
+	mQBJ8x/YPSx7HAc1G/fcCaSBIvmmp6Svh6Qq
+X-Google-Smtp-Source: ABdhPJxScWit7ZKcJghlBrzBklxOss6oKjprmtB26DtsgKg75m7iLP/ZOXQuPIOTb7bai6KDh0VEDw==
+X-Received: by 2002:a17:90a:bd0d:: with SMTP id y13mr8486551pjr.236.1605383758562;
+        Sat, 14 Nov 2020 11:55:58 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::740e])
-        by smtp.gmail.com with ESMTPSA id 82sm13274444pfv.149.2020.11.14.11.04.29
+        by smtp.gmail.com with ESMTPSA id z9sm11486467pji.48.2020.11.14.11.55.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2020 11:04:29 -0800 (PST)
+        Sat, 14 Nov 2020 11:55:58 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 5/5] recipe: Add leading whitespace for append operator
-Date: Sat, 14 Nov 2020 11:04:22 -0800
-Message-Id: <20201114190422.2777143-5-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] libgusb: Update to 0.3.5
+Date: Sat, 14 Nov 2020 11:55:55 -0800
+Message-Id: <20201114195555.2944938-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201114190422.2777143-1-raj.khem@gmail.com>
-References: <20201114190422.2777143-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+Changes are here [1]
+
+[1] https://github.com/hughsie/libgusb/commit/1f712812327091c42c62b1ab1148d738d1a22b51
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb | 2 +-
- meta-oe/recipes-devtools/grpc/grpc_1.24.3.bb              | 2 +-
- meta-oe/recipes-devtools/lua/lua_5.3.5.bb                 | 2 +-
- meta-oe/recipes-extended/gnuplot/gnuplot_5.2.8.bb         | 2 +-
- meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb  | 2 +-
- meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb   | 8 ++++----
- meta-oe/recipes-graphics/libyui/libyui-ncurses_2.55.0.bb  | 2 +-
- meta-oe/recipes-support/anthy/anthy_9100h.bb              | 4 ++--
- 8 files changed, 12 insertions(+), 12 deletions(-)
+ ...-script-Don-t-hard-code-the-path-of-.patch | 53 -------------------
+ .../{libgusb_0.3.4.bb => libgusb_0.3.5.bb}    |  3 +-
+ 2 files changed, 1 insertion(+), 55 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/libgusb/libgusb/0001-generate-version-script-Don-t-hard-code-the-path-of-.patch
+ rename meta-oe/recipes-support/libgusb/{libgusb_0.3.4.bb => libgusb_0.3.5.bb} (69%)
 
-diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-index 2a42093447..170663882e 100644
---- a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-+++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-@@ -7,7 +7,7 @@ SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master "
- SRCREV = "95f3c6ab36840fb1e0f4935f34dbf8f708b7780c"
- PV = "1.2"
+diff --git a/meta-oe/recipes-support/libgusb/libgusb/0001-generate-version-script-Don-t-hard-code-the-path-of-.patch b/meta-oe/recipes-support/libgusb/libgusb/0001-generate-version-script-Don-t-hard-code-the-path-of-.patch
+deleted file mode 100644
+index 41e64d7d80..0000000000
+--- a/meta-oe/recipes-support/libgusb/libgusb/0001-generate-version-script-Don-t-hard-code-the-path-of-.patch
++++ /dev/null
+@@ -1,53 +0,0 @@
+-From 76c23503ed1002d3aad0118795006fe2128006ae Mon Sep 17 00:00:00 2001
+-From: Ting-Wei Lan <lantw@src.gnome.org>
+-Date: Sat, 21 Mar 2020 22:13:57 +0800
+-Subject: [PATCH] generate-version-script: Don't hard-code the path of python3
+-
+-Python can be installed in different directories on different operating
+-systems, so we can't hard-code the path of it. Instead, use meson to
+-find it to avoid 'no such file or directory' error on the bad path.
+-
+-Upstream-Status: Backport [https://github.com/hughsie/libgusb/pull/36]
+-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+----
+- contrib/generate-version-script.py | 1 -
+- gusb/meson.build                   | 4 ++++
+- 2 files changed, 4 insertions(+), 1 deletion(-)
+- mode change 100755 => 100644 contrib/generate-version-script.py
+-
+-diff --git a/contrib/generate-version-script.py b/contrib/generate-version-script.py
+-old mode 100755
+-new mode 100644
+-index c4ee238ab0ab..0fe2b24e47e3
+---- a/contrib/generate-version-script.py
+-+++ b/contrib/generate-version-script.py
+-@@ -1,4 +1,3 @@
+--#!/usr/bin/python3
+- # pylint: disable=invalid-name,missing-docstring
+- #
+- # Copyright (C) 2017 Richard Hughes <richard@hughsie.com>
+-diff --git a/gusb/meson.build b/gusb/meson.build
+-index 10a6f537a642..28ca3c63e595 100644
+---- a/gusb/meson.build
+-+++ b/gusb/meson.build
+-@@ -142,6 +142,9 @@ libgusb_girtarget = gnome.generate_gir(gusb,
+- libgusb_gir = libgusb_girtarget[0]
+- libgusb_typelib = libgusb_girtarget[1]
+- 
+-+pymod = import('python')
+-+py_installation = pymod.find_installation('python3')
+-+
+- # Verify the map file is correct -- note we can't actually use the generated
+- # file for two reasons:
+- #
+-@@ -154,6 +157,7 @@ mapfile_target = custom_target('gusb_mapfile',
+-   input: libgusb_girtarget[0],
+-   output: 'libgusb.ver',
+-   command: [
+-+    py_installation,
+-     join_paths(meson.source_root(), 'contrib', 'generate-version-script.py'),
+-     'LIBGUSB',
+-     '@INPUT@',
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-support/libgusb/libgusb_0.3.4.bb b/meta-oe/recipes-support/libgusb/libgusb_0.3.5.bb
+similarity index 69%
+rename from meta-oe/recipes-support/libgusb/libgusb_0.3.4.bb
+rename to meta-oe/recipes-support/libgusb/libgusb_0.3.5.bb
+index bd88c8ed4c..c4b0ff3723 100644
+--- a/meta-oe/recipes-support/libgusb/libgusb_0.3.4.bb
++++ b/meta-oe/recipes-support/libgusb/libgusb_0.3.5.bb
+@@ -7,7 +7,6 @@ DEPENDS = "glib-2.0 libusb"
+ inherit meson gobject-introspection gtk-doc gettext vala
  
--SRC_URI_append_class-target = "file://oe-remote.repo.sample"
-+SRC_URI_append_class-target = " file://oe-remote.repo.sample"
- 
- inherit distutils3-base
- 
-diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.24.3.bb b/meta-oe/recipes-devtools/grpc/grpc_1.24.3.bb
-index 752562eb33..c25ce360e7 100644
---- a/meta-oe/recipes-devtools/grpc/grpc_1.24.3.bb
-+++ b/meta-oe/recipes-devtools/grpc/grpc_1.24.3.bb
-@@ -62,6 +62,6 @@ do_configure_prepend_toolchain-clang_x86() {
- 
- BBCLASSEXTEND = "native nativesdk"
- 
--SYSROOT_DIRS_BLACKLIST_append_class-target = "${baselib}/cmake/grpc"
-+SYSROOT_DIRS_BLACKLIST_append_class-target = " ${baselib}/cmake/grpc"
- 
- FILES_${PN}-dev += "${bindir}"
-diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-index 7d84ea60b6..60c33d6586 100644
---- a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-+++ b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-@@ -31,7 +31,7 @@ PACKAGECONFIG ??= "readline"
- PACKAGECONFIG[readline] = ",,readline"
- 
- UCLIBC_PATCHES += "file://uclibc-pthread.patch"
--SRC_URI_append_libc-uclibc = "${UCLIBC_PATCHES}"
-+SRC_URI_append_libc-uclibc = " ${UCLIBC_PATCHES}"
- 
- TARGET_CC_ARCH += " -fPIC ${LDFLAGS}"
- EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -fPIC' MYLDFLAGS='${LDFLAGS}'"
-diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot_5.2.8.bb b/meta-oe/recipes-extended/gnuplot/gnuplot_5.2.8.bb
-index 926d8851d2..b2c41756e5 100644
---- a/meta-oe/recipes-extended/gnuplot/gnuplot_5.2.8.bb
-+++ b/meta-oe/recipes-extended/gnuplot/gnuplot_5.2.8.bb
-@@ -32,7 +32,7 @@ BBCLASSEXTEND = "native"
- DEPENDS_class-native = "readline-native"
- PACKAGECONFIG_class-native = ""
- 
--SRC_URI_append_class-native = "file://0001-reduce-build-to-conversion-tools-for-native-build.patch"
-+SRC_URI_append_class-native = " file://0001-reduce-build-to-conversion-tools-for-native-build.patch"
- 
- do_install_class-native() {
-     install -d ${D}${bindir}
-diff --git a/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb b/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
-index a081cb17a8..27fe0e2c40 100644
---- a/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
-+++ b/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
-@@ -31,4 +31,4 @@ FILES_statgrab-dbg = "${bindir}/.debug/statgrab"
- FILES_saidar = "${bindir}/saidar"
- FILES_saidar-dbg = "${bindir}/.debug/saidar"
- FILES_${PN}-mrtg = "${bindir}/statgrab-make-mrtg-config ${bindir}/statgrab-make-mrtg-index"
--RDEPENDS_${PN}-mrtg_append = "perl statgrab"
-+RDEPENDS_${PN}-mrtg_append = " perl statgrab"
-diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-index 2b884e3a1b..b3ea44c3c3 100644
---- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-+++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-@@ -69,10 +69,10 @@ COMPATIBLE_MACHINE_mips = "(!.*mips).*"
- COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
- COMPATIBLE_MACHINE_powerpc = "(!.*ppc).*"
- 
--TARGET_CFLAGS_append_riscv32 += "-fpic"
--TARGET_CXXFLAGS_append_riscv32 += "-fpic"
--TARGET_CFLAGS_append_riscv64 += "-fpic"
--TARGET_CXXFLAGS_append_riscv64 += "-fpic"
-+TARGET_CFLAGS_append_riscv32 = " -fpic"
-+TARGET_CXXFLAGS_append_riscv32 = " -fpic"
-+TARGET_CFLAGS_append_riscv64 = " -fpic"
-+TARGET_CXXFLAGS_append_riscv64 = " -fpic"
- 
- do_install[cleandirs] += "${WORKDIR}/minifi-install"
- 
-diff --git a/meta-oe/recipes-graphics/libyui/libyui-ncurses_2.55.0.bb b/meta-oe/recipes-graphics/libyui/libyui-ncurses_2.55.0.bb
-index ba94a838a9..15c40ee31f 100644
---- a/meta-oe/recipes-graphics/libyui/libyui-ncurses_2.55.0.bb
-+++ b/meta-oe/recipes-graphics/libyui/libyui-ncurses_2.55.0.bb
-@@ -21,7 +21,7 @@ DEPENDS += "boost libyui ncurses"
- BBCLASSEXTEND = "nativesdk"
- 
- EXTRA_OECMAKE += "-DCMAKE_BUILD_TYPE=RELWITHDEBINFO"
--EXTRA_OECMAKE_append_toolchain-clang = "-DENABLE_WERROR=OFF"
-+EXTRA_OECMAKE_append_toolchain-clang = " -DENABLE_WERROR=OFF"
- 
- do_configure_prepend () {
-     cd ${S}
-diff --git a/meta-oe/recipes-support/anthy/anthy_9100h.bb b/meta-oe/recipes-support/anthy/anthy_9100h.bb
-index 9d78c3457c..a83efe03c8 100644
---- a/meta-oe/recipes-support/anthy/anthy_9100h.bb
-+++ b/meta-oe/recipes-support/anthy/anthy_9100h.bb
-@@ -12,8 +12,8 @@ SRC_URI = "http://osdn.dl.sourceforge.jp/anthy/37536/anthy-9100h.tar.gz \
-     file://2ch_t.patch \
- "
- 
--SRC_URI_append_class-target = "file://target-helpers.patch"
--SRC_URI_append_class-native = "file://native-helpers.patch"
-+SRC_URI_append_class-target = " file://target-helpers.patch"
-+SRC_URI_append_class-native = " file://native-helpers.patch"
- 
- SRC_URI[md5sum] = "1f558ff7ed296787b55bb1c6cf131108"
- SRC_URI[sha256sum] = "d256f075f018b4a3cb0d165ed6151fda4ba7db1621727e0eb54569b6e2275547"
+ SRC_URI = "git://github.com/hughsie/libgusb.git \
+-           file://0001-generate-version-script-Don-t-hard-code-the-path-of-.patch \
+            "
+-SRCREV = "377917fed85476d615f72279d0c97bc391d0f191"
++SRCREV = "1f712812327091c42c62b1ab1148d738d1a22b51"
+ S = "${WORKDIR}/git"
 -- 
 2.29.2
 
