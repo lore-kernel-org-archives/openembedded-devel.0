@@ -1,86 +1,83 @@
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
- by mx.groups.io with SMTP id smtpd.web11.39.1605311627782336473
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.web11.3888.1605344618903220809
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Nov 2020 15:53:47 -0800
+ Sat, 14 Nov 2020 01:03:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Baar9Mlq;
- spf=pass (domain: gmail.com, ip: 209.85.222.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f170.google.com with SMTP id v143so10969461qkb.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Nov 2020 15:53:47 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=UJWAduEH;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 10so17292447wml.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2020 01:03:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=41ugDJjkl8ZXdUaAIFeyGKfYAaHUqon3R4J30A4Ys2s=;
-        b=Baar9MlqJyI/EMvZaiDS2pwXKwWYRPWivgcg63VMQ8yDeIXolBJTfnAVjQDtrnyeiY
-         LguT1lcWtV+LMKivv7eJqRJM3mnkgVpUzST1aXa67UM8Avqr/H9ucYMqHUlDo7SAAnQu
-         +K3lQz4jVONYqKtUfx77epv7SQc0crALRA0dS2HBfM08gxMnnUT1KEPa/C0cChWpUa76
-         n2GR+s5PSFD8mrM+QgoOx5ypmcZOEt8V107qtPSZY/lHNbufDe89ja2blu3N9uDm+maw
-         WO5aiJeXfQLi+odUG2T12FQIxMAdVjt9kr7VizUl0fT15AIobVn8rJ1xHgUVYzVYhQYk
-         HgEQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=YZmrHiUaxbX9uFe4kFBq2DwDfJv6Kmz/iMrk/aJ0VKA=;
+        b=UJWAduEHrGOekU8k/jytaHlgY9Uff9fUKbv63GKTJ07bQ0PhOAf8BzlEnVNMS5umy1
+         cVhH6aNcOJwBMwItZTt1vLyKsJFEQgSgArNs4jrkuVw7Hr2bPD86FYNyWOEG1N7SZGzV
+         IORqEWlXhgXRfKrDvNs+XRkhEKohXm+7TrlekxG8ht5hKOziXkr1wYp8TPmZaMbwMHOa
+         hx3y9YmnUCYgCVgrTZBDqEGzZrMPh7rE5Hh0Xp3SRubErv5HFMXCe+J/+IpZiVtSLcL5
+         SHoJmty92KAUig7ml3c8mglSduuCg+5m/oGpHMEFGHuWQBDXLkHMYIO9Y5twPXEDySIu
+         imaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=41ugDJjkl8ZXdUaAIFeyGKfYAaHUqon3R4J30A4Ys2s=;
-        b=T1t1o5ngvBfdLZ9yTgU+ZzSQ+w6YpAKKIrkI1Zy/+w+I8lbN8WqprsZ3UduMjeTijq
-         JP/IoIgvh5HIna2nciHgE7T5PlYDp+pOLb3F4XoV/2HPVoG5ZN3BLpW86ow/w1/XaxXo
-         cxN3wuVdC/1JRqnkCAWHigrciKznDMB2wO+JuEo4bPQDERZBRG+6QnKrjW+4rSSFtFJB
-         wqEHmqK3E14NoNWa/e45xDSiy6b9g5hcvxMZqcGxxzuxwRReRIhMRKdv4jaSUoevt5K9
-         /QzBwH3/WuOK3eio9hn3SBo1RM/zdBcwb4rKTAfm0AKqV2bj0u6FVd1CW4pAasBX5Q4C
-         C6/Q==
-X-Gm-Message-State: AOAM533GJlCUDIs82W2xpdGjwbe6AzSKV7NIrcdt9kJxBildkx8aFE+Z
-	5NKvKxo5XzgrvfsT3vS5uQ6WzsNNn3gRIXVhTyM=
-X-Google-Smtp-Source: ABdhPJxHJPujH03ITprmZN4HN29/um/hXXNZ0Fq7/8gcRDwFXBcMHfTPPAtyZdD+8R95BOa1cHf+JSo2xu2h8AcM3a4=
-X-Received: by 2002:a37:8944:: with SMTP id l65mr319892qkd.9.1605311626812;
- Fri, 13 Nov 2020 15:53:46 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=YZmrHiUaxbX9uFe4kFBq2DwDfJv6Kmz/iMrk/aJ0VKA=;
+        b=tXO8BhV4mgTzhUPdVUE5v15uwbBaHCGQrfBiH6uCvrmxvPE6jB04B/KY5O1RwMrIlD
+         2v7ALQERGFn61cWOf9qJo6qKJ7fgxSx7/07Ocxp+cppqFYPRM3MObFP701+RNAmNRrJR
+         KSlLHA7WADd49xufpEzH4T6l85QceORqsYRk06K97S5lEdP692Xf7lMOxzF/WNKJRMlL
+         AjqktLwHgsZkbq8T7Tc1vVL9WmXOkYBL44bWF/CTTaPf12PRxvc2txAjE1WCRzk4gVlj
+         YDwvgyFwT8zELygdab9LrYGKFsGrZMXuUrF0dGzB2ps30h+UmoPZFSBSszMbqmnCEa0M
+         jvjw==
+X-Gm-Message-State: AOAM530OLcdP7XYRcVuFgLWGCw+pxzlwZ1nwNvgQMQNAAs+1MJAfBQz4
+	X9QwMSiWIE1Q2iCc5MkS9Mv6/mE+sz8=
+X-Google-Smtp-Source: ABdhPJxYm+aI3U2/neT5j8bBYNNF50pcHxnozV54BVpfjw3dth7BFqw2GM+oSeKQVr3oXR395zZfHw==
+X-Received: by 2002:a1c:41c4:: with SMTP id o187mr6068986wma.158.1605344616938;
+        Sat, 14 Nov 2020 01:03:36 -0800 (PST)
+Return-Path: <martin.jansa@gmail.com>
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id y200sm15051094wmc.23.2020.11.14.01.03.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 14 Nov 2020 01:03:36 -0800 (PST)
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [dunfell][meta-oe][PATCH] remmina: use git fetcher
+Date: Sat, 14 Nov 2020 10:03:32 +0100
+Message-Id: <20201114090332.217238-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-References: <20201113184045.44235-1-toertel@gmail.com>
-In-Reply-To: <20201113184045.44235-1-toertel@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Fri, 13 Nov 2020 15:53:20 -0800
-Message-ID: <CAMKF1sqp6u=NOxP+hsFBxATN65YniNc9N=myyZTmW3AJp20b9A@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] libsocketcan: Add PACKAGECONFIG options
-To: Mark Jonas <toertel@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Fri, Nov 13, 2020 at 10:41 AM Mark Jonas <toertel@gmail.com> wrote:
->
-> libsocketcan offers two configuration options.
->
-> debug: Compile for debugging. Off by default.
-> error-log: Logging of error events to stderr. On by default.
->
-> Because error-log is on by default the package config option is
-> no-error-log to retain existing recipe behavior.
->
-> Signed-off-by: Mark Jonas <toertel@gmail.com>
-> ---
->  meta-oe/recipes-extended/socketcan/libsocketcan_0.0.11.bb | 4 ++++
->  1 file changed, 4 insertions(+)
->
-> diff --git a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.11.bb b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.11.bb
-> index 0debe47e0..917f5e684 100644
-> --- a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.11.bb
-> +++ b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.11.bb
-> @@ -12,3 +12,7 @@ SRC_URI = "git://git.pengutronix.de/git/tools/libsocketcan.git;protocol=git"
->  S = "${WORKDIR}/git"
->
->  inherit autotools pkgconfig
-> +
-> +PACKAGECONFIG ?= ""
-> +PACKAGECONFIG[debug] = "--enable-debug,--disable-debug"
-> +PACKAGECONFIG[no-error-log] = "--disable-error-log,--enable-error-log"
+* fixes QA recently backported to dunfell:
+  WARNING: remmina-1.3.6-r0 do_package_qa: QA Issue: remmina: SRC_URI uses unstable GitHub/GitLab archives, convert recipe to use git protocol [src-uri-bad]
 
-what are defaults for configure ?
-perhaps its more readable if its
-PACKAGECONFIG ?= "error-log"
-PACKAGECONFIG[error-log] = "--enable-error-log,--disable-error-log"
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/remmina/remmina_1.3.6.bb | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-> --
-> 2.25.1
->
->
-> 
->
+diff --git a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+index 5b663489f8..1c2f270e32 100644
+--- a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
++++ b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+@@ -9,12 +9,11 @@ DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi-ui libsodium li
+ DEPENDS_append_libc-musl = " libexecinfo"
+ LDFLAGS_append_libc-musl = " -lexecinfo"
+ 
+-SRC_URI = "https://gitlab.com/Remmina/Remmina/-/archive/v${PV}/Remmina-v${PV}.tar.bz2 \
++SRCREV = "cc391370d8b4c07597617e0a771a9732f0802411"
++SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https \
+ "
+-SRC_URI[md5sum] = "6da599c3a5cab2df37a70f8fba2f5438"
+-SRC_URI[sha256sum] = "fbed745438bb0c21467b60cbd67c8148a9289b5ebc7482d06db443bea556af1a"
+ 
+-S = "${WORKDIR}/Remmina-v${PV}"
++S = "${WORKDIR}/git"
+ 
+ inherit cmake features_check mime-xdg
+ REQUIRED_DISTRO_FEATURES = "x11"
+-- 
+2.27.0
+
