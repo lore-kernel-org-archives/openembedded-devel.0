@@ -1,141 +1,151 @@
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web09.10897.1605383759329622068
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.web12.11644.1605388017611308465
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2020 11:55:59 -0800
+ Sat, 14 Nov 2020 13:06:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=vVRQb5jF;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id y22so6146701plr.6
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2020 11:55:59 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=jztZb8Rl;
+ spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: texier.pj2@gmail.com)
+Received: by mail-wm1-f52.google.com with SMTP id a65so19884882wme.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2020 13:06:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=oxvENvS2omJD2BzIehfndxrw0cBgeNNVLP5dKquOmA4=;
-        b=vVRQb5jFrmkXrUtujgg4cLnoitLqSkhsbQ9afCbI9Iar5nWZn745UrDqdQyJ9WEGnr
-         3AvdMG40EARvusxJc9kfGJnJGoXHxOg5INBOqfiVH4Jr1roBVvhcDpDsMQLgFI8YO+Eh
-         4j10i8aCvbyKgkZ6Y8BECiObltcVQAyr6oGR8G9pCs95OKMNTfLfj98Pp69qRyEPmHtE
-         IanSMzI3oktS2CZXfwLRH9+rujEW2WOaZ/iedbaI1IdBm1G4NR1oSdO9ZQIpl3xtHrC+
-         /fElL7TlWv7vWoVqoqcM8H03fz4JZOiiFFPyzSJOAZ6giZI7axlXhX+CQJqLqh4Tr+7u
-         MLnQ==
+        h=from:to:cc:subject:date:message-id;
+        bh=1ZTKwaXJTD71bsH6RzPpO9Y4+vUHwge733iyh+7X/PI=;
+        b=jztZb8Rl90bbz5NHZ9HpOSRplkQvNZvdCEuNTSJktMpYqsWXDOkR/pwFCv/DhGTkMo
+         t1cGsnSMnzCKG9oXq1DeSqsYnIELnpaFOMx7DYOVHW1jQN4r5D/46ILKqECURwv3l+jg
+         6DIz3mHMv/HZsMahONTZPQ4wrEa1C5DQoQhiJIg+hT5LIM8W73UeK9FdeH9Jm8i9xVfs
+         RYrYCZtQ00ANVVUeIESRufoRbyB7Rku9nBO7SMyQzA4OxdJjkaYSNi9pY7bvEq6zpRRD
+         mbTVyJ7v3P5q4jATGxBL6qS9CnL7H6VT650gsSGJzzMxgzTPcFht+cibi2BfK+ID5UD5
+         gBwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=oxvENvS2omJD2BzIehfndxrw0cBgeNNVLP5dKquOmA4=;
-        b=t9b55+NAj0As5xBLcwN7vqClhOBHv+4nLfKDn8ae2x39QMK44HFB3NQVUW9P9WjKNO
-         eNYQMuS6liBrzPRdpf3V4dq5ykcpm06zhMMNRNVJXOlureG0xAScLE5d7IXKw0vwtJk1
-         rFR+ntZfJX/t2Evg4dfPhHe0VXzuRvQwfsLQbzWgg/FykgSacIO252cylWjuuvYhwJ8w
-         zDvjiSyC+2Pg9PuqZgSAY4xMbNUIrGLoPd2kuW2ywudAZmbjVzV2Y7Sh4grKrUJQFpHp
-         Zcr5dRafmagMx9GwQSDb5GsxjWwH2mRLlKCIbTvVWe86U+sCLVoAIEWL6PFBjgTldx8K
-         S1AQ==
-X-Gm-Message-State: AOAM532EYpI0TCorwcfqOBdbBH2e+0ey9+PlE8nBWi9CVBuq+p0PkEys
-	mQBJ8x/YPSx7HAc1G/fcCaSBIvmmp6Svh6Qq
-X-Google-Smtp-Source: ABdhPJxScWit7ZKcJghlBrzBklxOss6oKjprmtB26DtsgKg75m7iLP/ZOXQuPIOTb7bai6KDh0VEDw==
-X-Received: by 2002:a17:90a:bd0d:: with SMTP id y13mr8486551pjr.236.1605383758562;
-        Sat, 14 Nov 2020 11:55:58 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::740e])
-        by smtp.gmail.com with ESMTPSA id z9sm11486467pji.48.2020.11.14.11.55.57
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=1ZTKwaXJTD71bsH6RzPpO9Y4+vUHwge733iyh+7X/PI=;
+        b=OKNzXK60jjiwzU65Js3VU+UsQ4kzTUrEn5zy8HycKqa4pdE9lnfZ3nXzPG8S4ZBMo4
+         EY6yiP9yio+CXEoBJUQOG7cHoM2FxNRqBgbZzXc8C7nBXRvDmuaxxOK/mGnu7Zy3Ta0d
+         /yOVGgc2DIceEZLZYLffT9iz8p0adb0y/B1UT8sVg30Z9u+uTUkqAYS6hpfDNLSY5/hr
+         OHUHYIkUqovdOPAB60+Z0L0DyEIBA6G1G95fQIx+dfJv6hsrxNA1+LIoD9Q2GNwnqasY
+         ly5dPWb0r8I1CVkVdQCe8obt/VroXn969qU8ai7dK8uoKh3H4pIi0vxa+zxbD4XUKsGb
+         BKUw==
+X-Gm-Message-State: AOAM532XkCDxiYpSJ15lKcpyNHQSZq2kaf+r5ChOSC+dFDNDx0+rDEUj
+	LFv09R3Xl25bRmXEYLfM3o5z6h9AI93ngg==
+X-Google-Smtp-Source: ABdhPJyFyN2Rjezcoa8IUAXHc3mQHqBMr0dSa23uJPCjJUB4g/0PMLfQZVT1uMx45tImQeYbHXocTw==
+X-Received: by 2002:a1c:87:: with SMTP id 129mr8269601wma.34.1605388015898;
+        Sat, 14 Nov 2020 13:06:55 -0800 (PST)
+Return-Path: <texier.pj2@gmail.com>
+Received: from menoah.home ([2a01:cb19:190:c500:207c:d256:8c6d:8ffd])
+        by smtp.gmail.com with ESMTPSA id a128sm14644657wmf.5.2020.11.14.13.06.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2020 11:55:58 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Sat, 14 Nov 2020 13:06:55 -0800 (PST)
+From: "Pierre-Jean Texier" <texier.pj2@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] libgusb: Update to 0.3.5
-Date: Sat, 14 Nov 2020 11:55:55 -0800
-Message-Id: <20201114195555.2944938-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.29.2
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Pierre-Jean Texier <texier.pj2@gmail.com>
+Subject: [meta-oe][PATCH] inotify-tools: upgrade 3.20.2.2 -> 3.20.11.0
+Date: Sat, 14 Nov 2020 22:06:53 +0100
+Message-Id: <20201114210653.25943-1-texier.pj2@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
-Changes are here [1]
+ - Drop patch (already in version)
 
-[1] https://github.com/hughsie/libgusb/commit/1f712812327091c42c62b1ab1148d738d1a22b51
+This includes the following changes:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+98e8dfa inotify-tools 3.20.11.0
+583492a Allow produce NULL-delimited output (#118)
+e38d78e Resolves Issue #72 (#113)
+8672a5e User $(id -u) over $USER
+e5f4ec6 Create FUNDING.yml
+8967735 Add integration test to test if chown is tracked successfully
+e114a35 Only call git clean -fdx if specified
+933dea5 Update issue templates
+6644476 Create CODE_OF_CONDUCT.md
+c03dcfc Added -P/--no-dereference to watch a symlink (#46)
+aa125f5 Use localtime_r over localtime
+d222aa9 Fix some issues pointed out by lgtm
+69829a8 cirrus-ci: disable the FreeBSD 13 builds
+c164cfd Add status for FreeBSD
+1b06e96 Stop running unit tests on FreeBSD
+7ddf451 Makefile.am: add build rule for README (#111)
+67b6e71 Add arm64 build
+
+Signed-off-by: Pierre-Jean Texier <texier.pj2@gmail.com>
 ---
- ...-script-Don-t-hard-code-the-path-of-.patch | 53 -------------------
- .../{libgusb_0.3.4.bb => libgusb_0.3.5.bb}    |  3 +-
- 2 files changed, 1 insertion(+), 55 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libgusb/libgusb/0001-generate-version-script-Don-t-hard-code-the-path-of-.patch
- rename meta-oe/recipes-support/libgusb/{libgusb_0.3.4.bb => libgusb_0.3.5.bb} (69%)
+ ...akefile.am-add-build-rule-for-README.patch | 46 -------------------
+ .../inotify-tools/inotify-tools_git.bb        |  8 ++--
+ 2 files changed, 3 insertions(+), 51 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/inotify-tools/inotify-tools/0001-Makefile.am-add-build-rule-for-README.patch
 
-diff --git a/meta-oe/recipes-support/libgusb/libgusb/0001-generate-version-script-Don-t-hard-code-the-path-of-.patch b/meta-oe/recipes-support/libgusb/libgusb/0001-generate-version-script-Don-t-hard-code-the-path-of-.patch
+diff --git a/meta-oe/recipes-support/inotify-tools/inotify-tools/0001-Makefile.am-add-build-rule-for-README.patch b/meta-oe/recipes-support/inotify-tools/inotify-tools/0001-Makefile.am-add-build-rule-for-README.patch
 deleted file mode 100644
-index 41e64d7d80..0000000000
---- a/meta-oe/recipes-support/libgusb/libgusb/0001-generate-version-script-Don-t-hard-code-the-path-of-.patch
+index 2c7cd9970..000000000
+--- a/meta-oe/recipes-support/inotify-tools/inotify-tools/0001-Makefile.am-add-build-rule-for-README.patch
 +++ /dev/null
-@@ -1,53 +0,0 @@
--From 76c23503ed1002d3aad0118795006fe2128006ae Mon Sep 17 00:00:00 2001
--From: Ting-Wei Lan <lantw@src.gnome.org>
--Date: Sat, 21 Mar 2020 22:13:57 +0800
--Subject: [PATCH] generate-version-script: Don't hard-code the path of python3
+@@ -1,46 +0,0 @@
+-From 22bff509e2a0e5640994bc92ded62c383d99bc37 Mon Sep 17 00:00:00 2001
+-From: Pierre-Jean Texier <pjtexier@koncepto.io>
+-Date: Mon, 24 Feb 2020 21:44:45 +0100
+-Subject: [PATCH] Makefile.am: add build rule for README
 -
--Python can be installed in different directories on different operating
--systems, so we can't hard-code the path of it. Instead, use meson to
--find it to avoid 'no such file or directory' error on the bad path.
+-Fixes:
 -
--Upstream-Status: Backport [https://github.com/hughsie/libgusb/pull/36]
--Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+-| configure.ac:17: installing 'config/config.sub'
+-| configure.ac:16: installing 'config/install-sh'
+-| configure.ac:16: installing 'config/missing'
+-| Makefile.am: error: required file './README' not found
+-| libinotifytools/src/Makefile.am: installing 'config/depcomp'
+-
+-Upstream-Status: Submitted [https://github.com/inotify-tools/inotify-tools/pull/111]
+-
+-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ----
-- contrib/generate-version-script.py | 1 -
-- gusb/meson.build                   | 4 ++++
-- 2 files changed, 4 insertions(+), 1 deletion(-)
-- mode change 100755 => 100644 contrib/generate-version-script.py
+- Makefile.am | 2 ++
+- autogen.sh  | 1 -
+- 2 files changed, 2 insertions(+), 1 deletion(-)
 -
--diff --git a/contrib/generate-version-script.py b/contrib/generate-version-script.py
--old mode 100755
--new mode 100644
--index c4ee238ab0ab..0fe2b24e47e3
----- a/contrib/generate-version-script.py
--+++ b/contrib/generate-version-script.py
--@@ -1,4 +1,3 @@
---#!/usr/bin/python3
-- # pylint: disable=invalid-name,missing-docstring
-- #
-- # Copyright (C) 2017 Richard Hughes <richard@hughsie.com>
--diff --git a/gusb/meson.build b/gusb/meson.build
--index 10a6f537a642..28ca3c63e595 100644
----- a/gusb/meson.build
--+++ b/gusb/meson.build
--@@ -142,6 +142,9 @@ libgusb_girtarget = gnome.generate_gir(gusb,
-- libgusb_gir = libgusb_girtarget[0]
-- libgusb_typelib = libgusb_girtarget[1]
+-diff --git a/Makefile.am b/Makefile.am
+-index 56e4531..d08c8fe 100644
+---- a/Makefile.am
+-+++ b/Makefile.am
+-@@ -2,6 +2,8 @@ ACLOCAL_AMFLAGS = -I m4
 - 
--+pymod = import('python')
--+py_installation = pymod.find_installation('python3')
+- SUBDIRS = libinotifytools src man
+- 
+-+README: README.md
 -+
-- # Verify the map file is correct -- note we can't actually use the generated
-- # file for two reasons:
-- #
--@@ -154,6 +157,7 @@ mapfile_target = custom_target('gusb_mapfile',
--   input: libgusb_girtarget[0],
--   output: 'libgusb.ver',
--   command: [
--+    py_installation,
--     join_paths(meson.source_root(), 'contrib', 'generate-version-script.py'),
--     'LIBGUSB',
--     '@INPUT@',
+- dist-hook:
+- # Automake official documentation states that dist-hook should assume files
+- # are not writable.
+-diff --git a/autogen.sh b/autogen.sh
+-index 48eb21d..31572c2 100755
+---- a/autogen.sh
+-+++ b/autogen.sh
+-@@ -1,4 +1,3 @@
+- #!/bin/sh
+- 
+--cp README.md README
+- autoreconf --install "$@" || exit 1
 --- 
--2.17.1
+-2.7.4
 -
-diff --git a/meta-oe/recipes-support/libgusb/libgusb_0.3.4.bb b/meta-oe/recipes-support/libgusb/libgusb_0.3.5.bb
-similarity index 69%
-rename from meta-oe/recipes-support/libgusb/libgusb_0.3.4.bb
-rename to meta-oe/recipes-support/libgusb/libgusb_0.3.5.bb
-index bd88c8ed4c..c4b0ff3723 100644
---- a/meta-oe/recipes-support/libgusb/libgusb_0.3.4.bb
-+++ b/meta-oe/recipes-support/libgusb/libgusb_0.3.5.bb
-@@ -7,7 +7,6 @@ DEPENDS = "glib-2.0 libusb"
- inherit meson gobject-introspection gtk-doc gettext vala
+diff --git a/meta-oe/recipes-support/inotify-tools/inotify-tools_git.bb b/meta-oe/recipes-support/inotify-tools/inotify-tools_git.bb
+index f42abeb2b..8206590a8 100644
+--- a/meta-oe/recipes-support/inotify-tools/inotify-tools_git.bb
++++ b/meta-oe/recipes-support/inotify-tools/inotify-tools_git.bb
+@@ -5,12 +5,10 @@ SECTION = "console/devel"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ac6c26e52aea428ee7f56dc2c56424c6"
  
- SRC_URI = "git://github.com/hughsie/libgusb.git \
--           file://0001-generate-version-script-Don-t-hard-code-the-path-of-.patch \
-            "
--SRCREV = "377917fed85476d615f72279d0c97bc391d0f191"
-+SRCREV = "1f712812327091c42c62b1ab1148d738d1a22b51"
+-SRCREV = "cfa93aa19f81d85b63cd64da30c7499890d4c07d"
+-PV = "3.20.2.2"
++SRCREV = "98e8dfa47eb6a6ba52e35de55d2de21b274a4af8"
++PV = "3.20.11.0"
+ 
+-SRC_URI = "git://github.com/rvoicilas/${BPN} \
+-           file://0001-Makefile.am-add-build-rule-for-README.patch \
+-           "
++SRC_URI = "git://github.com/rvoicilas/${BPN}"
+ 
  S = "${WORKDIR}/git"
+ 
 -- 
-2.29.2
+2.17.1
 
