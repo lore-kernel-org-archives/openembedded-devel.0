@@ -1,83 +1,106 @@
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web11.3888.1605344618903220809
+Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com [209.85.208.66])
+ by mx.groups.io with SMTP id smtpd.web12.3862.1605345846761133445
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2020 01:03:39 -0800
+ Sat, 14 Nov 2020 01:24:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=UJWAduEH;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 10so17292447wml.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2020 01:03:38 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=s3Yiti+E;
+ spf=pass (domain: gmail.com, ip: 209.85.208.66, mailfrom: adrian.freihofer@gmail.com)
+Received: by mail-ed1-f66.google.com with SMTP id b9so13607389edu.10
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2020 01:24:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=YZmrHiUaxbX9uFe4kFBq2DwDfJv6Kmz/iMrk/aJ0VKA=;
-        b=UJWAduEHrGOekU8k/jytaHlgY9Uff9fUKbv63GKTJ07bQ0PhOAf8BzlEnVNMS5umy1
-         cVhH6aNcOJwBMwItZTt1vLyKsJFEQgSgArNs4jrkuVw7Hr2bPD86FYNyWOEG1N7SZGzV
-         IORqEWlXhgXRfKrDvNs+XRkhEKohXm+7TrlekxG8ht5hKOziXkr1wYp8TPmZaMbwMHOa
-         hx3y9YmnUCYgCVgrTZBDqEGzZrMPh7rE5Hh0Xp3SRubErv5HFMXCe+J/+IpZiVtSLcL5
-         SHoJmty92KAUig7ml3c8mglSduuCg+5m/oGpHMEFGHuWQBDXLkHMYIO9Y5twPXEDySIu
-         imaw==
+        h=message-id:subject:from:to:cc:date:in-reply-to:references
+         :user-agent:mime-version:content-transfer-encoding;
+        bh=7lU7ivpgHX590jQKW40Fx5sODWIVLEAZXwRYEsgCadc=;
+        b=s3Yiti+EHX6+0ktH1mM5edf+xMsCj0YwiNa63elqXHFqglOGuxUBp7+6ABAWRs/owZ
+         mJjCH1HiAOZ3FpbhcDCCNWweK8asAOwVfg+X6m8DRCJAwK4KRR3nPaXOnkMwChm3y1r3
+         i99iWJTD8kohj/8YsiJ1wja9w74UnWU3b6oGPepw38thO2pnLm8K31O6U5qCGa8L2IRs
+         ZSbnOIlassnLkPRTFSVZHlvMpyQsZ/Q6TYEaFwt6qb0XAJn8u9LZtZUkF+BoyyWbDuY9
+         gFDzZZ69UXejVgy+wFRO+Z1kSqaOAOt7WlCA3o52HiURS2a0cuGpYGZ4EiSMFEfi8sQ7
+         nodw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=YZmrHiUaxbX9uFe4kFBq2DwDfJv6Kmz/iMrk/aJ0VKA=;
-        b=tXO8BhV4mgTzhUPdVUE5v15uwbBaHCGQrfBiH6uCvrmxvPE6jB04B/KY5O1RwMrIlD
-         2v7ALQERGFn61cWOf9qJo6qKJ7fgxSx7/07Ocxp+cppqFYPRM3MObFP701+RNAmNRrJR
-         KSlLHA7WADd49xufpEzH4T6l85QceORqsYRk06K97S5lEdP692Xf7lMOxzF/WNKJRMlL
-         AjqktLwHgsZkbq8T7Tc1vVL9WmXOkYBL44bWF/CTTaPf12PRxvc2txAjE1WCRzk4gVlj
-         YDwvgyFwT8zELygdab9LrYGKFsGrZMXuUrF0dGzB2ps30h+UmoPZFSBSszMbqmnCEa0M
-         jvjw==
-X-Gm-Message-State: AOAM530OLcdP7XYRcVuFgLWGCw+pxzlwZ1nwNvgQMQNAAs+1MJAfBQz4
-	X9QwMSiWIE1Q2iCc5MkS9Mv6/mE+sz8=
-X-Google-Smtp-Source: ABdhPJxYm+aI3U2/neT5j8bBYNNF50pcHxnozV54BVpfjw3dth7BFqw2GM+oSeKQVr3oXR395zZfHw==
-X-Received: by 2002:a1c:41c4:: with SMTP id o187mr6068986wma.158.1605344616938;
-        Sat, 14 Nov 2020 01:03:36 -0800 (PST)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id y200sm15051094wmc.23.2020.11.14.01.03.36
+        h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+         :references:user-agent:mime-version:content-transfer-encoding;
+        bh=7lU7ivpgHX590jQKW40Fx5sODWIVLEAZXwRYEsgCadc=;
+        b=DMpj9iqLoOEq22zcZ2Lgv++CtlN/nc57GmOL87+WgV0rNAnVaF97bntMd4xobsgSSh
+         J8mCGJQ/PX42EJthWgXwtgJ2zhFyXHrVxsS1bApq6PY2/Czk5lotwtkFX139XunnbyqX
+         pLYCt5d42Kk4Wm8tyUdFru8Y12X9nYYxIn+yUsMhP9Mq13vOO88CTKD9256BL72xDay/
+         2VrgXfK42Ohiwlsptp2RsuINQJftcKxeXhMh9NIgoeMBqK81yL2CWPapX75M85vGczoR
+         Wq1Q8jCN4VWscu3DXewB6CWZwYe3VUkyT0HtRehAXEjZL7DyNkQ/LvyYxR54mvM+MaGu
+         PDfQ==
+X-Gm-Message-State: AOAM530G/r+elx9EDe+GQ16mVuvb6i++0kC5MraRzPCfA1iMRErAwR8m
+	wYijjc/1SSFuPiXznll8A7Q=
+X-Google-Smtp-Source: ABdhPJwxNtYHUm1nV1LjJEoAK8tGakmARrmkb4x0hPi93GuAsDxKD9CmaOwlP6lUoUADv5AomfQd+w==
+X-Received: by 2002:a50:9e05:: with SMTP id z5mr6386987ede.231.1605345845243;
+        Sat, 14 Nov 2020 01:24:05 -0800 (PST)
+Return-Path: <adrian.freihofer@gmail.com>
+Received: from md2ramxc.ad001.siemens.net (c-93-184-20-132.customer.ggaweb.ch. [93.184.20.132])
+        by smtp.gmail.com with ESMTPSA id w15sm6236466edx.37.2020.11.14.01.24.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2020 01:03:36 -0800 (PST)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [dunfell][meta-oe][PATCH] remmina: use git fetcher
-Date: Sat, 14 Nov 2020 10:03:32 +0100
-Message-Id: <20201114090332.217238-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.27.0
+        Sat, 14 Nov 2020 01:24:04 -0800 (PST)
+Message-ID: <02147df0d8b8afd481b6f87fb0a83f8c1e51e9f7.camel@gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] sdbus-c++-tools: fix reproducible builds
+From: "Adrian Freihofer" <adrian.freihofer@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, Adrian
+	Freihofer <adrian.freihofer@siemens.com>
+Date: Sat, 14 Nov 2020 10:24:03 +0100
+In-Reply-To: <CAMKF1sp5eL44BdFqZaE+1du96BObbBVJ1khfnPD9tpWsp4wCHA@mail.gmail.com>
+References: <20201102201848.3556515-1-adrian.freihofer@siemens.com>
+	 <CAMKF1sp5eL44BdFqZaE+1du96BObbBVJ1khfnPD9tpWsp4wCHA@mail.gmail.com>
+User-Agent: Evolution 3.36.5 (3.36.5-1.fc32) 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-* fixes QA recently backported to dunfell:
-  WARNING: remmina-1.3.6-r0 do_package_qa: QA Issue: remmina: SRC_URI uses unstable GitHub/GitLab archives, convert recipe to use git protocol [src-uri-bad]
+On Mon, 2020-11-02 at 12:41 -0800, Khem Raj wrote:
+> On Mon, Nov 2, 2020 at 12:19 PM Adrian Freihofer
+> <adrian.freihofer@gmail.com> wrote:
+> > If the reproducible build class is active the following error occurs:
+> > 
+> > ERROR: sdbus-c++-tools-native-0.8.1-r0 do_unpack: Error executing a python function in exec_python_func() autogenerated:
+> > ...snip
+> > Exception: subprocess.CalledProcessError: Command '['git', 'log', '-1', '--pretty=%ct']' returned non-zero exit status 128.
+> > 
+> > Remove the subpath to get git executed in the right derectory.
+> > 
+> 
+> this looks like a problem in core metadata rather, I am fine to accept
+> this as a workaround but I think you should bring this discussion to
+> oe-core
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-support/remmina/remmina_1.3.6.bb | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+Khem, you're right. Please ignore the patch. After I understood the problem in detail,I went through all patches for reproducible builds on the poky master branch.
+I'm sure the problem is already solved properly with Yocto 3.2.
 
-diff --git a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
-index 5b663489f8..1c2f270e32 100644
---- a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
-+++ b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
-@@ -9,12 +9,11 @@ DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi-ui libsodium li
- DEPENDS_append_libc-musl = " libexecinfo"
- LDFLAGS_append_libc-musl = " -lexecinfo"
- 
--SRC_URI = "https://gitlab.com/Remmina/Remmina/-/archive/v${PV}/Remmina-v${PV}.tar.bz2 \
-+SRCREV = "cc391370d8b4c07597617e0a771a9732f0802411"
-+SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https \
- "
--SRC_URI[md5sum] = "6da599c3a5cab2df37a70f8fba2f5438"
--SRC_URI[sha256sum] = "fbed745438bb0c21467b60cbd67c8148a9289b5ebc7482d06db443bea556af1a"
- 
--S = "${WORKDIR}/Remmina-v${PV}"
-+S = "${WORKDIR}/git"
- 
- inherit cmake features_check mime-xdg
- REQUIRED_DISTRO_FEATURES = "x11"
--- 
-2.27.0
+I will ask for cherry-picking the related patches to dunfell on the
+core mailing list. Thank you for the hint.
+
+> 
+> > Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
+> > ---
+> >  meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.3.bb | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.3.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.3.bb
+> > index 3b87c2265..ec720dc0c 100644
+> > --- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.3.bb
+> > +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_0.8.3.bb
+> > @@ -9,8 +9,8 @@ inherit cmake
+> >  DEPENDS += "expat"
+> > 
+> >  SRCREV = "6e8e5aadb674cccea5bdd55141db5dad887fbacd"
+> > -SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master;subpath=tools"
+> > +SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master"
+> > 
+> > -S = "${WORKDIR}/tools"
+> > +S = "${WORKDIR}/git/tools"
+> > 
+> >  BBCLASSEXTEND = "native nativesdk"
+> > --
+> > 2.26.2
+> > 
+> > 
+> > 
+> > 
 
