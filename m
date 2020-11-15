@@ -1,133 +1,115 @@
-Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com [209.85.210.196])
- by mx.groups.io with SMTP id smtpd.web11.25276.1605472508214364628
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com [209.85.214.196])
+ by mx.groups.io with SMTP id smtpd.web10.25685.1605475645222271612
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Nov 2020 12:35:08 -0800
+ Sun, 15 Nov 2020 13:27:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=GK2CswPm;
- spf=pass (domain: gmail.com, ip: 209.85.210.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f196.google.com with SMTP id 131so891742pfb.9
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2020 12:35:08 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=SvbSfrzQ;
+ spf=pass (domain: gmail.com, ip: 209.85.214.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f196.google.com with SMTP id k7so7131959plk.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2020 13:27:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=FTZOLLrXzn84kIX5KaYMgfnX2prnnDGWz5KzEmDOcsM=;
-        b=GK2CswPmBR3JxFg5yT61ATybvESHoEuF1jlGdruyUEohaaF0UEr8hVzAFK4uURPbSM
-         h/6xTL/Knym4NuejFYYa4tdxyFpr30Yy5L13ehPNXAT1OM6L77qzPLB62o+bL96vhgQh
-         LjkBWl7WfQjRHZTw+/oWTCmkf/i59/mraKGaEk/Rf9+eWipkNq3P3xtTWEJCLKfFuU5U
-         d0sKvnc7LIsltQWTIWHe6GtQV2AXELjlkaAyX7eS8XRR4CLJBQsU21ymF0/sy6V5JI2d
-         7HZgfZdcU8sliQERKipJVhsWVl2Pi9rUjr4/zt2fplFvfrNb2Qbfnjw71QuqhnaIajVJ
-         isHA==
+        bh=BQ91Bez1lV2HdEJIAruw5elWpPFW4bsYz5D4+oDbjwc=;
+        b=SvbSfrzQFaR0f/8nEhBnOp9RjzaFd/UsnEC57lGqNSS8bM/UXugu/6VPz5CX80p+0r
+         dtEZ3h/GNO6CETa/kX5sFZj3LpXzUn5L1rmQxS8qm7WsghFAL78ICY+KTkQnbF0nDYP/
+         8N4pnfUz3/d82rfTXrLMyP5Puv2C7dspdntpHjlJutBdcfijcaMCNkIRnMpiZV84/xGn
+         dvQWR6J+0qLQLGO94ztCwMY7zQ0T9mWrH+JoS49II8zUkhHvz5CJ9MzSwvW+uIKrbMxp
+         63L7sVgR5ioiDQuaEyRuGIh9SwdL57RVKYWkpsiabp1OCG7klSFi2sWmSbUulHWJQQnH
+         cmSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=FTZOLLrXzn84kIX5KaYMgfnX2prnnDGWz5KzEmDOcsM=;
-        b=Okr5D9IZyPIzlqnpVEPqk8MgeH4YbMf/IL7gAPPBP6QcCUEItsrjnctQlxW+uw/A2s
-         Ygqw7gjv4TL4EethxrYbvRdhXAkjDoJ/3kT6x2oGl3opJ15dybNU/n61YEp2Wzbh1m6W
-         plrWHXxbZD581e974oBoppBfSAip7sp3KONcqT+6RrOMDHd+TagN8BGepbBZrB2a+uK7
-         N9CTGwTJO7uBGQ6vMoakG6/iBUc0qCnqgi0kD8q4rPlStApJTjE1dc/4dXlnxRBqA5aX
-         1rAwj5LgpFj5IJ+wu6AkbE6gqDkuDgL6LCp8pAcyzh1Yfa64njyMliUyDkoGKZm87mLH
-         CNOw==
-X-Gm-Message-State: AOAM532deRKFptt97PLQqjLVDJocyvmbl7nuBgmUC+63HWiLxPZlR5R5
-	9nvef7qVyz3tT6vC6aGk5hhElIlIQDnuSg==
-X-Google-Smtp-Source: ABdhPJxk6ZfQne7ZrBx2Ki7iYB6EfvGsnmZBIvRBdERjUch4s6399zVJL1jYacUti1uTL624rC6xrQ==
-X-Received: by 2002:a17:90a:7e0f:: with SMTP id i15mr10662740pjl.77.1605472507384;
-        Sun, 15 Nov 2020 12:35:07 -0800 (PST)
+        bh=BQ91Bez1lV2HdEJIAruw5elWpPFW4bsYz5D4+oDbjwc=;
+        b=hqOHPIElAg1ZBGmVNqyHEmx5tvHkY5G4qdL/WQhBB4LTrTsmbfOLtuYdXEqDpop1Z9
+         ++TXRR5cgiCYe0goOrYeJezSlfuO7HqY6Pc1vnh0cguv5ypSovXH9PQzCPVeJetpqbFg
+         xnhFY7/pz+e1stGnCeRJdNyh2NrL8PKwuzNo1svHWdO0wNXq38rB1FWPpVbneo/RufMW
+         sJol8JhrEYAGTrKEJv/YcWgSS6Tf2UDUifcK4EC5eaAjPnMGZFSi/iiIj+1JyWqAXeCR
+         NIIh4M2p2rpV55uKOpgC76XtNeUd7qPzjcmbTJKgyOojDXq/uqOw+H8xD8sAc/2oPDcy
+         NyqQ==
+X-Gm-Message-State: AOAM532buzC8mGBHBSxFkWinodlLzYwHVWHfMdii6r25bwmA2DMEefnA
+	Zwu0acMgLeVjR5X2idXcIO3kVxDW/McUig==
+X-Google-Smtp-Source: ABdhPJxLcCdlFM0VMbMgTOAesOH4NuqxRx31EuEbBUNdMDDzrLqR6/S4n3mDoMBkcpgcBl49Qhn43g==
+X-Received: by 2002:a17:902:bccb:b029:d6:fa5c:b481 with SMTP id o11-20020a170902bccbb02900d6fa5cb481mr10428633pls.17.1605475644483;
+        Sun, 15 Nov 2020 13:27:24 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::740e])
-        by smtp.gmail.com with ESMTPSA id m68sm14073212pga.46.2020.11.15.12.35.06
+        by smtp.gmail.com with ESMTPSA id a25sm16082046pfg.138.2020.11.15.13.27.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Nov 2020 12:35:06 -0800 (PST)
+        Sun, 15 Nov 2020 13:27:24 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] directfb: Fix build on riscv32
-Date: Sun, 15 Nov 2020 12:35:04 -0800
-Message-Id: <20201115203504.2817534-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] opensaf: Fix build on 32bit arches with 64bit time_t e.g. RISCV-32
+Date: Sun, 15 Nov 2020 13:27:21 -0800
+Message-Id: <20201115212721.2891211-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-graphics/directfb/directfb.inc    |  1 +
- ...ild-when-__NR_futex-is-not-available.patch | 54 +++++++++++++++++++
- 2 files changed, 55 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/directfb/directfb/0001-os-linux-Fix-build-when-__NR_futex-is-not-available.patch
+ ...rrect-printf-format-for-__fsblkcnt_t.patch | 36 +++++++++++++++++++
+ .../opensaf/opensaf_5.20.08.bb                |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0001-Use-correct-printf-format-for-__fsblkcnt_t.patch
 
-diff --git a/meta-oe/recipes-graphics/directfb/directfb.inc b/meta-oe/recipes-graphics/directfb/directfb.inc
-index f7dc668433..e11f7a60f6 100644
---- a/meta-oe/recipes-graphics/directfb/directfb.inc
-+++ b/meta-oe/recipes-graphics/directfb/directfb.inc
-@@ -22,6 +22,7 @@ SRC_URI = "http://downloads.yoctoproject.org/mirror/sources/DirectFB-${PV}.tar.g
-            file://fix-client-gfx_state-initialisation.patch \
-            file://fix-tslib-version-check.patch \
-            file://0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
-+           file://0001-os-linux-Fix-build-when-__NR_futex-is-not-available.patch \
-            "
- 
- S = "${WORKDIR}/DirectFB-${PV}"
-diff --git a/meta-oe/recipes-graphics/directfb/directfb/0001-os-linux-Fix-build-when-__NR_futex-is-not-available.patch b/meta-oe/recipes-graphics/directfb/directfb/0001-os-linux-Fix-build-when-__NR_futex-is-not-available.patch
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-Use-correct-printf-format-for-__fsblkcnt_t.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-Use-correct-printf-format-for-__fsblkcnt_t.patch
 new file mode 100644
-index 0000000000..db4417a3d6
+index 0000000000..0e113f533f
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/directfb/directfb/0001-os-linux-Fix-build-when-__NR_futex-is-not-available.patch
-@@ -0,0 +1,54 @@
-+From 7df69c3a784ab2cc4770bdb366cf788cdb78099a Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-Use-correct-printf-format-for-__fsblkcnt_t.patch
+@@ -0,0 +1,36 @@
++From 90f81c1fb3e560cfc99ee7ab9a48a1736e3929cd Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 15 Nov 2020 12:30:41 -0800
-+Subject: [PATCH] os/linux: Fix build when __NR_futex is not available
++Date: Sun, 15 Nov 2020 13:22:31 -0800
++Subject: [PATCH] Use correct printf format for __fsblkcnt_t
 +
-+Newer architectures like riscv32 do not define __NR_futex intentionally
-+since it uses 64bit time_t from very beginning, therefore only caters to
-+futex_time64 syscall
++This depends on time_t size and on some 32bit architectures e.g. riscv32
++this would be a 64bit value
++
++Fixes
++os_defs.c:920:40: error: format '%ld' expects argument of type 'long int', but argument 3 has type '__fsblkcnt_t' {aka 'long long unsigned int'} [-Werror=format=]
 +
 +Upstream-Status: Pending
-+
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ lib/direct/os/linux/glibc/system.c | 8 ++++++--
-+ 1 file changed, 6 insertions(+), 2 deletions(-)
++ src/base/os_defs.c | 4 ++++
++ 1 file changed, 4 insertions(+)
 +
-+diff --git a/lib/direct/os/linux/glibc/system.c b/lib/direct/os/linux/glibc/system.c
-+index 373a711..d027a70 100644
-+--- a/lib/direct/os/linux/glibc/system.c
-++++ b/lib/direct/os/linux/glibc/system.c
-+@@ -36,6 +36,7 @@
-+ 
-+ #include <errno.h>
-+ #include <signal.h>
-++#include <sys/syscall.h>
-+ #include <unistd.h>
-+ 
-+ #include <linux/unistd.h>
-+@@ -46,6 +47,10 @@
-+ #include <direct/system.h>
-+ #include <direct/util.h>
-+ 
-++#if !defined(SYS_futex) && defined(SYS_futex_time64)
-++# define SYS_futex SYS_futex_time64
++diff --git a/src/base/os_defs.c b/src/base/os_defs.c
++index 83458c2..655c190 100644
++--- a/src/base/os_defs.c
+++++ b/src/base/os_defs.c
++@@ -917,7 +917,11 @@ uint32_t ncs_os_posix_shm(NCS_OS_POSIX_SHM_REQ_INFO *req)
++ 			    ((statsvfs.f_bfree - 1) * statsvfs.f_frsize)) {
++ 				syslog(
++ 				    LOG_ERR,
+++#if __TIMESIZE == 64 && __WORDSIZE == 32
+++				    "Insufficient shared memory (%lld) to write the data of size: %" PRId64
+++#else
++ 				    "Insufficient shared memory (%ld) to write the data of size: %" PRId64
 ++#endif
-++
-+ D_LOG_DOMAIN( Direct_Futex, "Direct/Futex", "Direct Futex" );
-+ D_LOG_DOMAIN( Direct_Trap,  "Direct/Trap",  "Direct Trap" );
-+ 
-+@@ -239,10 +244,9 @@ direct_futex( int *uaddr, int op, int val, const struct timespec *timeout, int *
-+      }
-+ #endif
-+ 
-+-     ret = syscall( __NR_futex, uaddr, op, val, timeout, uaddr2, val3 );
-++     ret = syscall( SYS_futex, uaddr, op, val, timeout, uaddr2, val3 );
-+      if (ret < 0)
-+           return errno2result( errno );
-+ 
-+      return DR_OK;
-+ }
-+-
++ 				    "\n",
++ 				    (statsvfs.f_bfree * statsvfs.f_frsize),
++ 				    req->info.write.i_write_size);
 +-- 
 +2.29.2
 +
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.20.08.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.20.08.bb
+index 7c7051eff3..5516fc43ae 100644
+--- a/meta-networking/recipes-daemons/opensaf/opensaf_5.20.08.bb
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.20.08.bb
+@@ -27,6 +27,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
+            file://0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch \
+            file://0001-immom_python-convert-to-python3.patch \
+            file://0001-Fix-build-with-fno-common.patch \
++           file://0001-Use-correct-printf-format-for-__fsblkcnt_t.patch \
+            "
+ SRC_URI[md5sum] = "02cfe732d194339237da6adce8e54384"
+ SRC_URI[sha256sum] = "84268b90dc48a6675e5a77e2b20390a04bb59deb48a829102a9dbc4b9ac27483"
 -- 
 2.29.2
 
