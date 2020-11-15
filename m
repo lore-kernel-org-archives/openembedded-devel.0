@@ -1,115 +1,138 @@
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com [209.85.214.196])
- by mx.groups.io with SMTP id smtpd.web10.25685.1605475645222271612
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.web12.27005.1605481742817868252
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Nov 2020 13:27:25 -0800
+ Sun, 15 Nov 2020 15:09:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=SvbSfrzQ;
- spf=pass (domain: gmail.com, ip: 209.85.214.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f196.google.com with SMTP id k7so7131959plk.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2020 13:27:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=h6mm5V8c;
+ spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f170.google.com with SMTP id 62so11078953pgg.12
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2020 15:09:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=BQ91Bez1lV2HdEJIAruw5elWpPFW4bsYz5D4+oDbjwc=;
-        b=SvbSfrzQFaR0f/8nEhBnOp9RjzaFd/UsnEC57lGqNSS8bM/UXugu/6VPz5CX80p+0r
-         dtEZ3h/GNO6CETa/kX5sFZj3LpXzUn5L1rmQxS8qm7WsghFAL78ICY+KTkQnbF0nDYP/
-         8N4pnfUz3/d82rfTXrLMyP5Puv2C7dspdntpHjlJutBdcfijcaMCNkIRnMpiZV84/xGn
-         dvQWR6J+0qLQLGO94ztCwMY7zQ0T9mWrH+JoS49II8zUkhHvz5CJ9MzSwvW+uIKrbMxp
-         63L7sVgR5ioiDQuaEyRuGIh9SwdL57RVKYWkpsiabp1OCG7klSFi2sWmSbUulHWJQQnH
-         cmSg==
+        bh=4E9CLH2BHY+ZEuBEEcv/8qI5kjJrxcAvK22ItGKgtz4=;
+        b=h6mm5V8ceUiTjOmOUXFSTTRu/LCnzOWiu7CkOma4ffW+nwBXf2VM9ouUEbtxcgwGLA
+         D31temgdR217bpdrY9ywrEyc5KN/KfqJr0OtmBc7VFoltfSJuafNwmMLw1haDpKvKLtT
+         gYk7rIXtGXrSaiXJ0a2PW695Jjgo3zQag3ChmZfYC/4QacnM0HCxubFnrRbBe36aZGH2
+         xcwEbPpnJLUWgGtlR8hJEHZmEeCe2MT5o8PE6yj9oY4i8ixjJx0ukpOEEb2D47XxfL6C
+         xcGspJ4K24xVXYF3yZ9UTQS8zryU7IC8SI2R7k1T3SKiL5CMnSO2CqaOIOIoMmIZzrjA
+         gnzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=BQ91Bez1lV2HdEJIAruw5elWpPFW4bsYz5D4+oDbjwc=;
-        b=hqOHPIElAg1ZBGmVNqyHEmx5tvHkY5G4qdL/WQhBB4LTrTsmbfOLtuYdXEqDpop1Z9
-         ++TXRR5cgiCYe0goOrYeJezSlfuO7HqY6Pc1vnh0cguv5ypSovXH9PQzCPVeJetpqbFg
-         xnhFY7/pz+e1stGnCeRJdNyh2NrL8PKwuzNo1svHWdO0wNXq38rB1FWPpVbneo/RufMW
-         sJol8JhrEYAGTrKEJv/YcWgSS6Tf2UDUifcK4EC5eaAjPnMGZFSi/iiIj+1JyWqAXeCR
-         NIIh4M2p2rpV55uKOpgC76XtNeUd7qPzjcmbTJKgyOojDXq/uqOw+H8xD8sAc/2oPDcy
-         NyqQ==
-X-Gm-Message-State: AOAM532buzC8mGBHBSxFkWinodlLzYwHVWHfMdii6r25bwmA2DMEefnA
-	Zwu0acMgLeVjR5X2idXcIO3kVxDW/McUig==
-X-Google-Smtp-Source: ABdhPJxLcCdlFM0VMbMgTOAesOH4NuqxRx31EuEbBUNdMDDzrLqR6/S4n3mDoMBkcpgcBl49Qhn43g==
-X-Received: by 2002:a17:902:bccb:b029:d6:fa5c:b481 with SMTP id o11-20020a170902bccbb02900d6fa5cb481mr10428633pls.17.1605475644483;
-        Sun, 15 Nov 2020 13:27:24 -0800 (PST)
+        bh=4E9CLH2BHY+ZEuBEEcv/8qI5kjJrxcAvK22ItGKgtz4=;
+        b=BCxquPbXPtP8GrtIZT+SzL9F+r754NNngqwqvXWRWl3VAQvoH1eKuio40tGtfN1cdU
+         ITqvnNDZpEpt3C9H8y8XuxM4DgADHST6dKC+M7uVzHDz2hrMgnFymKe+6dTCPGJeHo9B
+         T1n8qSGS3Oz4ltse3ZRsI5elzzQ123/6SFyzCuNosrzZ3xd9FJxwHCbhdpEGJNmypGn5
+         FAjPp18QpvAtGOKhgdl+ByXwjketxvhwGOUuMViKh6Jauw5T4wrb5KN+lT1FGUSmUhFF
+         oU0yxnbU8WfLWH0u4fpTGaF4A43wB6a9sPV+UxUpIkQyizqZO0ynfiQp7Zgmzg0fjS+p
+         Wv3A==
+X-Gm-Message-State: AOAM5308LkpCW125vZAHQI1c1J/MUQ132vr/5mwtX9ECne1N3XDFtXMG
+	ZI3PzAZwApA0c8K0fk4TfuoT5h928cU3+g==
+X-Google-Smtp-Source: ABdhPJxuufEw6ZvD0Vnp33bkagWkzkcDJuHWg39jbaNQWoS2praeuTvu0zJvVKfax6VR0U8+/iIcOw==
+X-Received: by 2002:aa7:9786:0:b029:18b:746d:629f with SMTP id o6-20020aa797860000b029018b746d629fmr11576724pfp.68.1605481742022;
+        Sun, 15 Nov 2020 15:09:02 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::740e])
-        by smtp.gmail.com with ESMTPSA id a25sm16082046pfg.138.2020.11.15.13.27.23
+        by smtp.gmail.com with ESMTPSA id m30sm14478694pgn.49.2020.11.15.15.09.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Nov 2020 13:27:24 -0800 (PST)
+        Sun, 15 Nov 2020 15:09:01 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] opensaf: Fix build on 32bit arches with 64bit time_t e.g. RISCV-32
-Date: Sun, 15 Nov 2020 13:27:21 -0800
-Message-Id: <20201115212721.2891211-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] rocksdb: Update to 6.12.7
+Date: Sun, 15 Nov 2020 15:08:59 -0800
+Message-Id: <20201115230859.2906072-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+Add a patch to fix build on riscv32
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...rrect-printf-format-for-__fsblkcnt_t.patch | 36 +++++++++++++++++++
- .../opensaf/opensaf_5.20.08.bb                |  1 +
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0001-Use-correct-printf-format-for-__fsblkcnt_t.patch
+ ...0001-folly-Use-SYS_futex-for-syscall.patch | 47 +++++++++++++++++++
+ meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb    |  7 +--
+ 2 files changed, 51 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-folly-Use-SYS_futex-for-syscall.patch
 
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-Use-correct-printf-format-for-__fsblkcnt_t.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-Use-correct-printf-format-for-__fsblkcnt_t.patch
+diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-folly-Use-SYS_futex-for-syscall.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-folly-Use-SYS_futex-for-syscall.patch
 new file mode 100644
-index 0000000000..0e113f533f
+index 0000000000..aa291daa3e
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-Use-correct-printf-format-for-__fsblkcnt_t.patch
-@@ -0,0 +1,36 @@
-+From 90f81c1fb3e560cfc99ee7ab9a48a1736e3929cd Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-dbs/rocksdb/files/0001-folly-Use-SYS_futex-for-syscall.patch
+@@ -0,0 +1,47 @@
++From ddcc8a9f7e0f0bfee96f2f0a0c10f21f9fa9b05d Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 15 Nov 2020 13:22:31 -0800
-+Subject: [PATCH] Use correct printf format for __fsblkcnt_t
++Date: Sun, 15 Nov 2020 15:02:28 -0800
++Subject: [PATCH] folly: Use SYS_futex for syscall
 +
-+This depends on time_t size and on some 32bit architectures e.g. riscv32
-+this would be a 64bit value
++glibc defines SYS_futex and on newer 32bit CPUs like RISCV-32, arc there
++is no 32bit time_t therefore define SYS_futex in terms of SYS_futex_time64
 +
-+Fixes
-+os_defs.c:920:40: error: format '%ld' expects argument of type 'long int', but argument 3 has type '__fsblkcnt_t' {aka 'long long unsigned int'} [-Werror=format=]
-+
-+Upstream-Status: Pending
++Upstream-Status: Submitted [https://github.com/facebook/rocksdb/pull/7676]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/base/os_defs.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
++ third-party/folly/folly/detail/Futex.cpp | 10 ++++++++--
++ 1 file changed, 8 insertions(+), 2 deletions(-)
 +
-+diff --git a/src/base/os_defs.c b/src/base/os_defs.c
-+index 83458c2..655c190 100644
-+--- a/src/base/os_defs.c
-++++ b/src/base/os_defs.c
-+@@ -917,7 +917,11 @@ uint32_t ncs_os_posix_shm(NCS_OS_POSIX_SHM_REQ_INFO *req)
-+ 			    ((statsvfs.f_bfree - 1) * statsvfs.f_frsize)) {
-+ 				syslog(
-+ 				    LOG_ERR,
-++#if __TIMESIZE == 64 && __WORDSIZE == 32
-++				    "Insufficient shared memory (%lld) to write the data of size: %" PRId64
-++#else
-+ 				    "Insufficient shared memory (%ld) to write the data of size: %" PRId64
++diff --git a/third-party/folly/folly/detail/Futex.cpp b/third-party/folly/folly/detail/Futex.cpp
++index 62d6ea2b2..a914a8c73 100644
++--- a/third-party/folly/folly/detail/Futex.cpp
+++++ b/third-party/folly/folly/detail/Futex.cpp
++@@ -48,9 +48,15 @@ namespace {
++ #define FUTEX_CLOCK_REALTIME 256
++ #endif
++ 
+++/// Newer 32bit CPUs eg. RISCV-32 are defaulting to 64bit time_t from get go and
+++/// therefore do not define __NR_futex
+++#if !defined(SYS_futex) && defined(SYS_futex_time64)
+++# define SYS_futex SYS_futex_time64
 ++#endif
-+ 				    "\n",
-+ 				    (statsvfs.f_bfree * statsvfs.f_frsize),
-+ 				    req->info.write.i_write_size);
+++
++ int nativeFutexWake(const void* addr, int count, uint32_t wakeMask) {
++   long rv = syscall(
++-      __NR_futex,
+++      SYS_futex,
++       addr, /* addr1 */
++       FUTEX_WAKE_BITSET | FUTEX_PRIVATE_FLAG, /* op */
++       count, /* val */
++@@ -112,7 +118,7 @@ FutexResult nativeFutexWaitImpl(
++   // Unlike FUTEX_WAIT, FUTEX_WAIT_BITSET requires an absolute timeout
++   // value - http://locklessinc.com/articles/futex_cheat_sheet/
++   long rv = syscall(
++-      __NR_futex,
+++      SYS_futex,
++       addr, /* addr1 */
++       op, /* op */
++       expected, /* val */
 +-- 
 +2.29.2
 +
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.20.08.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.20.08.bb
-index 7c7051eff3..5516fc43ae 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf_5.20.08.bb
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.20.08.bb
-@@ -27,6 +27,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
-            file://0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch \
-            file://0001-immom_python-convert-to-python3.patch \
-            file://0001-Fix-build-with-fno-common.patch \
-+           file://0001-Use-correct-printf-format-for-__fsblkcnt_t.patch \
-            "
- SRC_URI[md5sum] = "02cfe732d194339237da6adce8e54384"
- SRC_URI[sha256sum] = "84268b90dc48a6675e5a77e2b20390a04bb59deb48a829102a9dbc4b9ac27483"
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+index 7ebc5ab1da..117a16b9e8 100644
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
++++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+@@ -6,13 +6,14 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
+ 
+-SRCREV = "48bfca38f6f175435052a59791922a1a453d9609"
+-SRCBRANCH = "6.11.fb"
+-PV = "6.11.4"
++SRCREV = "f3e33549c151f30ac4eb7c22356c6d0331f37652"
++SRCBRANCH = "6.12.fb"
++PV = "6.12.7"
+ 
+ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
+            file://0001-cmake-Add-check-for-atomic-support.patch \
+            file://0001-cmake-Use-exported-target-for-bz2.patch \
++           file://0001-folly-Use-SYS_futex-for-syscall.patch \
+           "
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.29.2
 
