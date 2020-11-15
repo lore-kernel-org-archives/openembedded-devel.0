@@ -1,118 +1,117 @@
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.web10.13167.1605395295061140389
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.web12.13776.1605400418633351133
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Nov 2020 15:08:15 -0800
+ Sat, 14 Nov 2020 16:33:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=GWNQaM3u;
- spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f50.google.com with SMTP id oc3so2179026pjb.4
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2020 15:08:15 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=KsI/L5VI;
+ spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f169.google.com with SMTP id 34so6541700pgp.10
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Nov 2020 16:33:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=8qV7jS/YfoZJBDNSny+BYv1j1faH93uf2sXTscIe/Uk=;
-        b=GWNQaM3u68z1zaiGAJjOYp7o4F+nkMB7h6m/4oSpE3P0ahb/lrKeQtVZwrQ/G0Lirc
-         X5laDUGAyaQuRjjv7jCin9KRJ2cIwvI26HO+Ixokf/hoLmd8toxBSTs4WVuMMyDvOXeM
-         C2k4A7KcgKjlagHK7VUQiHF11gNoSt5S3AeG3jCzB3tUOq4lYlOyP8+0pItD3beZC+ay
-         0t+c0Gg2eqMALldk/0uxnc7yMV2MN8eXpMxmfumSpid2WF5mVHrD8NyG2QQv9mQMzl6v
-         TZcNLWYv1vmcLgvHt9UktvwyUWGKWXP2RDeE+YrBPiGgNVjmbWYH1SY9pCHNaX4uEEL1
-         yBHw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ojQRuGDjOVaTpaKyxxxM4mnIliyrgkCY2WHoJj2sNjw=;
+        b=KsI/L5VICly+vwN+OBI8BSDqC67TgWSEjCCHW24OL+q2XQKj303TZa0ozHN4zMEAe1
+         +THI7KwmlvOJkvI9VzDpH0YKRi6tEgi9WQrFI/tJIf8Ao/frUfzvKaU4Dj9+f+sgUcsT
+         i3Nr588aBXmeDzQV/EdV0otebADICKwCbpKj4HwlWX6zLwEshWJuX3oXYOndL4fjbdmD
+         6h2eOaQ4b/fNm0ckeAmCwXL9nwqs59lRGh1ZckTdiPcVFBqC9tjSMI+A8Rq3JtKQc/WS
+         2QP5Degk2I8+EP7IRjc6pFvsp6NBRNwZl2OBRjOuncCHmfKewo8VzxrMNdV41QVkCwyO
+         JRIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=8qV7jS/YfoZJBDNSny+BYv1j1faH93uf2sXTscIe/Uk=;
-        b=dmSQf3BL+berOCUm1i7G9guA2LvoQIhiN1bnCnK6UVBnogoC7iWSLgd7OcQ7QgVy+j
-         I5JU3VrjSvqMCVwodE0n1/cK/7Wm5sZpF9rVCpUAueOLZ9lPDliJc4uUTgSgHL6xCSj7
-         5BZdCu67OgdnqFQxIgEL1Ui579H7Y+KzKhSvKXBFb51xmSLaje4OSWPS5ZIJzlU+GEur
-         A72cE/nkwhl4PuPPj4E5n0OUi1cabXLNaPAF4Hmtvg5nQwjmlEBMo01zLHGK+kMwKaRZ
-         a4adKHc0kZT69Zn/E1Bkro7Elw6qZ9CtskxAhBFgQI0+rsHA0G0vFknduEsjepMzOeqi
-         zUWQ==
-X-Gm-Message-State: AOAM5316kggzQ9oKzhWQ7TlI0ugmTQGV+I4JjApOjss6MTNkeb4A2dsy
-	0DrNyG+9PGeMQWo6SeO+ZawghNyC41mbbxr5
-X-Google-Smtp-Source: ABdhPJwFCPq60gh/OHsMPxiKSQvTdKXN/s2ttqZB33Uk2KMenqlMPMqres81s8aO9v6Jjme9Bl0SbA==
-X-Received: by 2002:a17:902:328:b029:d7:eba5:83ce with SMTP id 37-20020a1709020328b02900d7eba583cemr7545904pld.57.1605395294296;
-        Sat, 14 Nov 2020 15:08:14 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ojQRuGDjOVaTpaKyxxxM4mnIliyrgkCY2WHoJj2sNjw=;
+        b=J2MMkcGLsmDUodz7ClptQBaFE3Eh5JZ2p4ALTas+94fYUnvlSqf9vAiwnXVQMlGa/x
+         u7HNE5B07sQwURZuT03pZF7JHQYGeqj1xGwzPYphzpmj5L0ogUscum0fqDbmv+8ZdUwa
+         Jy0dT2+8wiLlXdq5ZhhMn/c4aMke7fv5Wrz8uY+ZDj/g8PiHhPeA3o3SmcW2An3nvZ4q
+         k+hMEUBdpY/Yernebv1KHlB6xWeByVuKFGOfZ0SGnYy6S0ITWBKwS5SjjscV2IOVD6wo
+         zsiOkLNob1/ShEXS11IfdXpKybwMSnkyeSZQhiSqgYNq1k7MAJMnXtkabmsPRaNj2qHs
+         l9IA==
+X-Gm-Message-State: AOAM533Jzwo37KsqTqPeaTNRAODMMVzqXWUC5Rk2QxzAn4D7DaM2R7dq
+	6nkKxjUqnHmmmncKuJdaeZ4XZRYtIoT81eLH
+X-Google-Smtp-Source: ABdhPJzUknNBJkXI8QIkNPt7uXVaD9/Xze4C5KViQ3oVexd1mE/PfynJH6s0zfqAyAoZgCFbFZeQ+Q==
+X-Received: by 2002:aa7:9595:0:b029:18e:ecd5:bcdc with SMTP id z21-20020aa795950000b029018eecd5bcdcmr8089054pfj.47.1605400417688;
+        Sat, 14 Nov 2020 16:33:37 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::740e])
-        by smtp.gmail.com with ESMTPSA id v191sm13520318pfc.19.2020.11.14.15.08.13
+        by smtp.gmail.com with ESMTPSA id a81sm13789761pfd.178.2020.11.14.16.33.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2020 15:08:13 -0800 (PST)
+        Sat, 14 Nov 2020 16:33:37 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 4/4] mariadb: Fix build on 32bit arches with 64bit time_t
-Date: Sat, 14 Nov 2020 15:08:06 -0800
-Message-Id: <20201114230806.370074-4-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] liburing: Fix build on 32-bit arches with 64-bit time_t
+Date: Sat, 14 Nov 2020 16:33:34 -0800
+Message-Id: <20201115003334.1666168-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201114230806.370074-1-raj.khem@gmail.com>
-References: <20201114230806.370074-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  1 +
- ...fine-__NR_futex-if-it-does-not-exist.patch | 37 +++++++++++++++++++
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch
+ ...n-32bit-architectures-with-6bit-time.patch | 35 +++++++++++++++++++
+ .../recipes-support/liburing/liburing_0.7.bb  |  4 ++-
+ 2 files changed, 38 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/liburing/liburing/0001-test-Fix-build-on-32bit-architectures-with-6bit-time.patch
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 7c92bbaad6..e3ce297618 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -19,6 +19,7 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
-            file://clang_version_header_conflict.patch \
-            file://fix-arm-atomic.patch \
-            file://0001-Fix-library-LZ4-lookup.patch \
-+           file://0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch \
-           "
- SRC_URI[sha256sum] = "ff05dd69e9f6992caf1053242db704f04eda6f9accbcc98b74edfaf6013c45c4"
- 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch
+diff --git a/meta-oe/recipes-support/liburing/liburing/0001-test-Fix-build-on-32bit-architectures-with-6bit-time.patch b/meta-oe/recipes-support/liburing/liburing/0001-test-Fix-build-on-32bit-architectures-with-6bit-time.patch
 new file mode 100644
-index 0000000000..0a2eed44f4
+index 0000000000..01c5ccd53a
 --- /dev/null
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch
-@@ -0,0 +1,37 @@
-+From d611f78198dee64bb6a05933d200b544e2510b76 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/liburing/liburing/0001-test-Fix-build-on-32bit-architectures-with-6bit-time.patch
+@@ -0,0 +1,35 @@
++From 0a9b12eda0f6e487398dad004121bdd1be792428 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 14 Nov 2020 14:37:13 -0800
-+Subject: [PATCH] innobase: Define __NR_futex if it does not exist
++Date: Sat, 14 Nov 2020 16:18:44 -0800
++Subject: [PATCH] test: Fix build on 32bit architectures with 6bit time_t
 +
-+__NR_futex is not defines by newer architectures e.g. arc, riscv32 as
-+they only have 64bit variant of time_t. Glibc defines SYS_futex interface based
-+on
-+__NR_futex, since this is used in applications, such applications start
-+to fail to build for these newer architectures. This patch defines a
-+fallback to alias __NR_futex to __NR_futex_tim64 so SYS_futex keeps
-+working
++It uses SYS_futex, which it expects from system C library.
++in glibc (/usr/include/bits/syscall.h defines it in terms of of NR_futex)
++rv32 is using 64bit time_t from get go unlike other 32bit architectures
++in glibc, therefore it wont have NR_futex defined but just NR_futex_time64
++this aliases it to NR_futex so that SYS_futex is then defined for rv32
 +
-+Upstream-Status: Pending
-+
++Upstream-Status: Submitted [https://github.com/axboe/liburing/pull/237]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ storage/innobase/log/log0sync.cc | 3 +++
-+ 1 file changed, 3 insertions(+)
++ test/35fa71a030ca-test.c | 4 ++++
++ 1 file changed, 4 insertions(+)
 +
-+diff --git a/storage/innobase/log/log0sync.cc b/storage/innobase/log/log0sync.cc
-+index 7799e605..4fab8f74 100644
-+--- a/storage/innobase/log/log0sync.cc
-++++ b/storage/innobase/log/log0sync.cc
-+@@ -66,6 +66,9 @@ Note that if write operation is very fast, a) or b) can be fine as alternative.
-+ #ifdef __linux__
++diff --git a/test/35fa71a030ca-test.c b/test/35fa71a030ca-test.c
++index 4ecf211..7f2124b 100644
++--- a/test/35fa71a030ca-test.c
+++++ b/test/35fa71a030ca-test.c
++@@ -24,6 +24,10 @@
++ 
 + #include <linux/futex.h>
-+ #include <sys/syscall.h>
++ 
 ++#if !defined(SYS_futex) && defined(SYS_futex_time64)
 ++# define SYS_futex SYS_futex_time64
 ++#endif
-+ #endif
-+ 
-+ #include <atomic>
+++
++ static void sleep_ms(uint64_t ms)
++ {
++   usleep(ms * 1000);
 +-- 
 +2.29.2
 +
+diff --git a/meta-oe/recipes-support/liburing/liburing_0.7.bb b/meta-oe/recipes-support/liburing/liburing_0.7.bb
+index 3a1eaef873..e122a907cd 100644
+--- a/meta-oe/recipes-support/liburing/liburing_0.7.bb
++++ b/meta-oe/recipes-support/liburing/liburing_0.7.bb
+@@ -9,7 +9,9 @@ SECTION = "libs"
+ LICENSE = "LGPLv2.1 | MIT"
+ LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=d51b5805e2a675685e6a66ca50904cf9"
+ 
+-SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https \
++           file://0001-test-Fix-build-on-32bit-architectures-with-6bit-time.patch \
++           "
+ SRCREV = "45f0735219a615ae848033c47c7e2d85d101d43e"
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.29.2
 
