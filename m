@@ -1,126 +1,120 @@
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
- by mx.groups.io with SMTP id smtpd.web08.24595.1605470070818031197
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.web11.25169.1605471981907732997
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Nov 2020 11:54:30 -0800
+ Sun, 15 Nov 2020 12:26:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=JXSJN6qN;
- spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f170.google.com with SMTP id p68so341606pga.6
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2020 11:54:30 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Td/3DJ/R;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id j19so4043321pgg.5
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Nov 2020 12:26:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=ij7w0vTO5topISQSbSNJVJu7impzd4bl385laRuZxVg=;
-        b=JXSJN6qNQe20k5SuORhjHgDVg1URC6htxJTchRIHDyiThua4pgOjzypdjyQKMGZdX4
-         hAr62ATaw1gjhgtHdvYq4Yh//9z7PJcFpnCKtilIaDuVW9hGVIfDJmyV3hSjucC5z5wq
-         bIRioIv3XpqBh3pqMcOZb+2TcHWatxv0DuuuaHdXaZuTOWxsUGsNUlCLjz6rLDX9sxn/
-         7XKSGRmcoIurKot3HpRTxfuPNg8G9PnSCjfv+ixsTG+tIyxmw+BCES/TmdxF47+0VzC6
-         eOpTWf29Us396G+8vnqEAjYBF0qpYZj3uVIhs9KwlTpwjO4ifSgqNH9CQ1IbM/oj3PkS
-         Ylow==
+        bh=BSoxh31GXjtceqpyt6u+65wQlp8KmzWBDQXGXPinT/w=;
+        b=Td/3DJ/R/4CMpfxqFzaFuZ5WxJfMIZMQZzmx6zpMFdm9MEklH8JTZsQ36VmBZwDgIB
+         8OhCNH9cJ0SXj/wa+SAXeq+kRXPO2DLlb5mJs6MJXnyczYsTXPZtOMnX1t/iv0F0gFmx
+         umwtnYO8uqn6BLgZQot+l9LX14KFAETIUdDwq6dSzLUycRiRmgJwLf1bC6qbsQzfrvl0
+         VuNx6mgVatmWYUOORdPrORiSNF6lmB+dScxsfFVUnrwQCDNepGF2ior9kYrCiCXGnQbU
+         Dm5M3Ht0unZHUXUsVmKlyQDGMCi60H8Nn0jaQiQ/L2KZMk8aCDz2XjsW1Yx9TROeOYXa
+         CPQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=ij7w0vTO5topISQSbSNJVJu7impzd4bl385laRuZxVg=;
-        b=Sbwz3rQYRJPG3hmOEt0KdNM5gaS6DeSx37DOB0Msg5si6SF8CYzjSGqxeHwf7ZQZLE
-         E9U95l7+qWZwhvMyRmGgcTD6yrBbUGfAJW1EaLgCF1ZptUHo3TIdFCLdCAKmPw15pvWx
-         Q7oAT19++fCJ3Potp7Lt3JS/YzvxEJKBdOHNB8MjBtQhHE73T5ZrfuwJWFfjZna8dfZt
-         rcV3Okg9lWbLEi1g14puaoeiMYaIr0+LrC1CTjpRMa18PWFElR2OExZnAU5KrMrE21J1
-         v9S9E2P2kgjpK4a4i7sYnv46KkqtyR2VRqefGHjVPDo7damBCsZx10ITpMpos9dUG8kh
-         uaPg==
-X-Gm-Message-State: AOAM533Pb4TCDRwsYocUWUSL5FZ/9d4IuwKSUwsdzhqcoPJ28TVonckJ
-	EuYJ6Dit6Im0V3HWT/ouzAymjNcztGzUQQ==
-X-Google-Smtp-Source: ABdhPJysNp1Rwcad68bFNchp/exyBT1Wj7vh+SpDe+P44KTw/a0upd22UdeIGgQMQzWSGo6QdGKi6Q==
-X-Received: by 2002:a17:90b:3781:: with SMTP id mz1mr12172580pjb.229.1605470069840;
-        Sun, 15 Nov 2020 11:54:29 -0800 (PST)
+        bh=BSoxh31GXjtceqpyt6u+65wQlp8KmzWBDQXGXPinT/w=;
+        b=qOsXodSazstS31cqQobvYnx+h1s55GgDkYPZnK1NW3Hr27lypMeWxJJinDw5u1jlT/
+         ZwhXCQigfP6KR0c5DRS9mMlM1MVMbp/cq++N2ZH4XwT/oEtZUEaghSUcgJipPrwHaw+V
+         FcwzL1gFEhBNVEgV3jl1gaAaQIgWCvRMe8pmf5aZ+Unock+19ek5Y0vvOJqakgkom3Fz
+         H+r3w8qkHkv4gIxuEnbVwTGlEw92qb8C697twLfvI7B9JA/QMt1VLPsmI96xHSFVtk/l
+         PTnKWKzHPhutBCOo5Vb6Bt0fztSp2Lo2ZzSmNtkuxIJ2XNCQwhQGgpR4Ol32pq8rbmMC
+         NsRg==
+X-Gm-Message-State: AOAM5317ENw7e+y/eOUjuigyxiwi/wrYz+8bIcarPuvPjTkCFN8UPBhr
+	uYbpJkRB7br71tiX4a7e0H7BrcnejOUNMw==
+X-Google-Smtp-Source: ABdhPJxl5TBRJOVJ9RSHFaQnaXnXjTpppW1Y5BzhI2ciHsSjj5jDZsqkQcRzrQ628MN9VtNwqmPbfg==
+X-Received: by 2002:a17:90a:f318:: with SMTP id ca24mr12480168pjb.100.1605471980993;
+        Sun, 15 Nov 2020 12:26:20 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::740e])
-        by smtp.gmail.com with ESMTPSA id c12sm14929287pgi.14.2020.11.15.11.54.29
+        by smtp.gmail.com with ESMTPSA id j13sm16126060pfd.97.2020.11.15.12.26.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Nov 2020 11:54:29 -0800 (PST)
+        Sun, 15 Nov 2020 12:26:20 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] poco: Add riscv32 support
-Date: Sun, 15 Nov 2020 11:54:26 -0800
-Message-Id: <20201115195426.2743750-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] capnproto: Fix build on 32bit arches with 64bit time_t defaults
+Date: Sun, 15 Nov 2020 12:26:18 -0800
+Message-Id: <20201115202618.2780819-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Add-support-of-arch-riscv32.patch    | 47 +++++++++++++++++++
- meta-oe/recipes-support/poco/poco_1.10.1.bb   |  1 +
- 2 files changed, 48 insertions(+)
- create mode 100644 meta-oe/recipes-support/poco/poco/0001-Add-support-of-arch-riscv32.patch
+ ...on-32-bit-architectures-using-64-bit.patch | 38 +++++++++++++++++++
+ .../capnproto/capnproto_0.8.0.bb              |  4 +-
+ 2 files changed, 41 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/capnproto/capnproto/0001-mutex-Fix-build-on-32-bit-architectures-using-64-bit.patch
 
-diff --git a/meta-oe/recipes-support/poco/poco/0001-Add-support-of-arch-riscv32.patch b/meta-oe/recipes-support/poco/poco/0001-Add-support-of-arch-riscv32.patch
+diff --git a/meta-oe/recipes-devtools/capnproto/capnproto/0001-mutex-Fix-build-on-32-bit-architectures-using-64-bit.patch b/meta-oe/recipes-devtools/capnproto/capnproto/0001-mutex-Fix-build-on-32-bit-architectures-using-64-bit.patch
 new file mode 100644
-index 0000000000..e6b673b11d
+index 0000000000..43da4a9ef7
 --- /dev/null
-+++ b/meta-oe/recipes-support/poco/poco/0001-Add-support-of-arch-riscv32.patch
-@@ -0,0 +1,47 @@
-+From 98d277655e411f56fba705c0bf2efc6562c23807 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-devtools/capnproto/capnproto/0001-mutex-Fix-build-on-32-bit-architectures-using-64-bit.patch
+@@ -0,0 +1,38 @@
++From e2a05a19e9dc51287e19cc9f11fd91449219e361 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 15 Nov 2020 11:37:33 -0800
-+Subject: [PATCH] Add support of arch riscv32
++Date: Sun, 15 Nov 2020 12:10:28 -0800
++Subject: [PATCH] mutex: Fix build on 32-bit architectures using 64-bit time_t
 +
-+Upstream-Status: Submitted [https://github.com/pocoproject/poco/pull/3138]
++mutex code uses SYS_futex, which it expects from system C library.
++in glibc (/usr/include/bits/syscall.h defines it in terms of of NR_futex)
++rv32 is using 64bit time_t from get go unlike other 32bit architectures
++in glibc, therefore it wont have NR_futex defined but just NR_futex_time64
++this aliases it to NR_futex so that SYS_futex is then defined for rv32
++
++Upstream-Status: Submitted [https://github.com/capnproto/capnproto/pull/1103]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ Foundation/include/Poco/Platform.h | 13 +++++++++----
-+ 1 file changed, 9 insertions(+), 4 deletions(-)
++ c++/src/kj/mutex.c++ | 6 ++++++
++ 1 file changed, 6 insertions(+)
 +
-+diff --git a/Foundation/include/Poco/Platform.h b/Foundation/include/Poco/Platform.h
-+index 799db417e..b8506a248 100644
-+--- a/Foundation/include/Poco/Platform.h
-++++ b/Foundation/include/Poco/Platform.h
-+@@ -135,6 +135,7 @@
-+ #define POCO_ARCH_AARCH64 0x0f
-+ #define POCO_ARCH_ARM64   0x0f // same as POCO_ARCH_AARCH64
-+ #define POCO_ARCH_RISCV64 0x10
-++#define POCO_ARCH_RISCV32 0x11
++diff --git a/c++/src/kj/mutex.c++ b/c++/src/kj/mutex.c++
++index c81cead7..e1594b11 100644
++--- a/c++/src/kj/mutex.c++
+++++ b/c++/src/kj/mutex.c++
++@@ -39,7 +39,13 @@
 + 
-+ 
-+ #if defined(__ALPHA) || defined(__alpha) || defined(__alpha__) || defined(_M_ALPHA)
-+@@ -225,12 +226,16 @@
-+ #elif defined(__AARCH64EB__)
-+ 	#define POCO_ARCH POCO_ARCH_AARCH64
-+ 	#define POCO_ARCH_BIG_ENDIAN 1
-+-#elif defined(__riscv) && (__riscv_xlen == 64)
-+-	#define POCO_ARCH POCO_ARCH_RISCV64
-+-	#define POCO_ARCH_LITTLE_ENDIAN 1
-++#elif defined(__riscv)
-++	#if (__riscv_xlen == 64)
-++		#define POCO_ARCH POCO_ARCH_RISCV64
-++		#define POCO_ARCH_LITTLE_ENDIAN 1
-++	#elif(__riscv_xlen == 32)
-++		#define POCO_ARCH POCO_ARCH_RISCV32
-++		#define POCO_ARCH_LITTLE_ENDIAN 1
-++	#endif
++ #ifndef SYS_futex
++ // Missing on Android/Bionic.
+++#ifdef __NR_futex
++ #define SYS_futex __NR_futex
+++#elif defined(SYS_futex_time64)
+++#define SYS_futex SYS_futex_time64
+++#else
+++#error "Need working SYS_futex"
+++#endif
 + #endif
 + 
-+-
-+ #if defined(__clang__)
-+ 	#define POCO_COMPILER_CLANG
-+ #elif defined(_MSC_VER)
++ #ifndef FUTEX_WAIT_PRIVATE
 +-- 
 +2.29.2
 +
-diff --git a/meta-oe/recipes-support/poco/poco_1.10.1.bb b/meta-oe/recipes-support/poco/poco_1.10.1.bb
-index 3f51e61187..48b31dd3f3 100644
---- a/meta-oe/recipes-support/poco/poco_1.10.1.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.10.1.bb
-@@ -10,6 +10,7 @@ DEPENDS = "libpcre zlib"
+diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_0.8.0.bb b/meta-oe/recipes-devtools/capnproto/capnproto_0.8.0.bb
+index 71f94badfa..54e9daee7b 100644
+--- a/meta-oe/recipes-devtools/capnproto/capnproto_0.8.0.bb
++++ b/meta-oe/recipes-devtools/capnproto/capnproto_0.8.0.bb
+@@ -5,7 +5,9 @@ SECTION = "console/tools"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://../LICENSE;md5=a05663ae6cca874123bf667a60dca8c9"
  
- SRC_URI = " \
-     git://github.com/pocoproject/poco.git;branch=poco-${PV} \
-+    file://0001-Add-support-of-arch-riscv32.patch \
-     file://run-ptest \
-    "
- SRCREV = "a3d827d80eb7f3329c58e73eb2906cb7ba829019"
+-SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV}"
++SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV} \
++           file://0001-mutex-Fix-build-on-32-bit-architectures-using-64-bit.patch;patchdir=../ \
++           "
+ SRCREV = "57a4ca5af5a7f55b768a9d9d6655250bffb1257f"
+ 
+ S = "${WORKDIR}/git/c++"
 -- 
 2.29.2
 
