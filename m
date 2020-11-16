@@ -1,61 +1,41 @@
-Received: from relay12.mail.gandi.net (relay12.mail.gandi.net [217.70.178.232])
- by mx.groups.io with SMTP id smtpd.web11.32564.1605520021653300934
+Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
+ by mx.groups.io with SMTP id smtpd.web12.32646.1605522687537023278
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2020 01:47:02 -0800
+ Mon, 16 Nov 2020 02:31:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: bootlin.com, ip: 217.70.178.232, mailfrom: kory.maincent@bootlin.com)
-Received: from kmaincent-XPS-13-7390 (212.208.113.78.rev.sfr.net [78.113.208.212])
+ dkim=missing; spf=pass (domain: bootlin.com, ip: 217.70.183.198, mailfrom: kory.maincent@bootlin.com)
+X-Originating-IP: 163.172.53.213
+Received: from build.dedibox.fr (build.bootlin.com [163.172.53.213])
 	(Authenticated sender: kory.maincent@bootlin.com)
-	by relay12.mail.gandi.net (Postfix) with ESMTPSA id A71A0200003;
-	Mon, 16 Nov 2020 09:46:58 +0000 (UTC)
-Date: Mon, 16 Nov 2020 10:46:56 +0100
+	by relay6-d.mail.gandi.net (Postfix) with ESMTPSA id 6F5BAC0010
+	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2020 10:31:24 +0000 (UTC)
 From: "Kory Maincent" <kory.maincent@bootlin.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-mono] Build error on the latest version of mono.
-Message-ID: <20201116104656.0a62f04a@kmaincent-XPS-13-7390>
-In-Reply-To: <9b5256a1-9ba1-3a16-46e2-27c5204e0db0@gmail.com>
-References: <20201113144333.64d57b47@kmaincent-XPS-13-7390>
-	<9b5256a1-9ba1-3a16-46e2-27c5204e0db0@gmail.com>
-Organization: bootlin
-X-Mailer: Claws Mail 3.16.0 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-mono][PATCH] mono: fix build dependencies
+Date: Mon, 16 Nov 2020 11:31:24 +0100
+Message-Id: <20201116103124.4024903-1-kory.maincent@bootlin.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hello Khem,
+Add libatomic-ops to dependencies to avoid this error:
+/include/private/gc_atomic_ops.h:105:11: fatal error: atomic_ops.h: No such file or directory
 
-On Fri, 13 Nov 2020 09:50:59 -0800
-Khem Raj <raj.khem@gmail.com> wrote:
+Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+---
+ recipes-mono/mono/mono-6.10.0.104.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> On 11/13/20 5:43 AM, Kory Maincent wrote:
-> > Hello,
-> >=20
-> > Got this error when trying to build mono:
-> > | ./include/private/gc_atomic_ops.h:105:11: fatal error: atomic_ops.h: =
-No
-> > such file or directory
-> > |   105 | # include "atomic_ops.h"
-> >=20
-> > I am on Dunfell version of OE.
-> > The last commit bring this error:
-> > 89f6d12 (HEAD -> dunfell, origin/dunfell) mono: add support for
-> > mono-6.10.0.104
-> >=20
-> > I have never dive into mono building, could someone give me a hint to s=
-olve
-> > that issue.
-> >  =20
->=20
-> can you try adding atomic-ops to DEPENDS and see if it helps
+diff --git a/recipes-mono/mono/mono-6.10.0.104.inc b/recipes-mono/mono/mono-6.10.0.104.inc
+index 27dff49..a1dd195 100644
+--- a/recipes-mono/mono/mono-6.10.0.104.inc
++++ b/recipes-mono/mono/mono-6.10.0.104.inc
+@@ -2,4 +2,4 @@ SRC_URI[sha256sum] = "b8d6eb70a252d2efad8384d66b529883dc59e581565d617fa57f8e7931
+ 
+ S = "${WORKDIR}/mono-${PV}"
+ 
+-DEPENDS += " cmake-native"
++DEPENDS += " cmake-native libatomic-ops"
+-- 
+2.25.1
 
-Thanks, it builds with this dependencies.
-I will sent a patch to add it.
-
-Regards,
-
-
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
