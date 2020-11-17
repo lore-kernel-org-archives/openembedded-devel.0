@@ -1,123 +1,82 @@
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
- by mx.groups.io with SMTP id smtpd.web12.4609.1605596186822319736
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com [209.85.160.196])
+ by mx.groups.io with SMTP id smtpd.web11.10720.1605631187919572897
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2020 22:56:27 -0800
+ Tue, 17 Nov 2020 08:39:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: u.oelmann@pengutronix.de)
-Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
-	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <u.oelmann@pengutronix.de>)
-	id 1keuud-0004QC-VD; Tue, 17 Nov 2020 07:56:23 +0100
-Received: from uol by dude.hi.pengutronix.de with local (Exim 4.92)
-	(envelope-from <u.oelmann@pengutronix.de>)
-	id 1keuud-0002uF-MU; Tue, 17 Nov 2020 07:56:23 +0100
-References: <16417565E85E3454.9771@lists.openembedded.org>
- <1645C54B3A3F0288.10479@lists.openembedded.org>
- <6rsg99vg1j.fsf@pengutronix.de>
- <2885ec60-dc02-d0bf-6d52-5e055571b4ea@gmail.com>
-User-agent: mu4e 1.4.13; emacs 28.0.50
-From: "Ulrich ?lmann" <u.oelmann@pengutronix.de>
-To: akuster <akuster808@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-oe][dunfell][PATCH] usb-modeswitch, usb-modeswitch-data: fix usrmerge
-In-reply-to: <2885ec60-dc02-d0bf-6d52-5e055571b4ea@gmail.com>
-Date: Tue, 17 Nov 2020 07:56:23 +0100
-Message-ID: <6rpn4cv5d4.fsf@pengutronix.de>
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
-X-SA-Exim-Mail-From: u.oelmann@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ElU4x43Q;
+ spf=pass (domain: gmail.com, ip: 209.85.160.196, mailfrom: philip.balister@gmail.com)
+Received: by mail-qt1-f196.google.com with SMTP id g20so4227757qtu.4
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Nov 2020 08:39:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=sender:from:to:cc:subject:date:message-id;
+        bh=oGX2SnR7p8HQypUMJ9VUbMuGAQodHVvsNydijHuqM9s=;
+        b=ElU4x43Q+ZER+aF4YupCvX+J82dkZSeidXdEDDgnaDyrleCi0ed5FbCJyXi5Rb/nVf
+         3AtuJroW49FCqLFCyiP+f+HLXpOYUXYQNFw8bIY+x8jThM5/wU8ftatf6Jv4rAac6rxr
+         gwkV/O4XngW/tUS4z0Uh3QnpkM8YU9zl+zEK1VQaW0jtDjjfAh458WwtoLAwQ6xXmFXj
+         AP+U39rPHp+VR+RF9MpBnkV2CFnTHnTKqFnlUxYlygPwQGy3n1oIROHWtxswAfCWlCQ1
+         eV+TAhdZan9tLSUb5X11R/RmKEVn/LrqgYGBG+Y5va82NWuLNzIc5+lqeU+KY9uHiy3Y
+         NA9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+        bh=oGX2SnR7p8HQypUMJ9VUbMuGAQodHVvsNydijHuqM9s=;
+        b=n9KpAu3KHEjrCDNFfO6pBmNoqEjCxUOk/wEIyWvj/n3qnAjwPYo17SfA8OBVNyHzl4
+         8EwfY/i4zPsmlkxOHHC6wgly5+66oy9qY1lVdA7X0UrKK0+YTsRFsZGpdVc/UiM0/CCr
+         Bu8vdTk10K/v+pBGDFmu8+6rozpZNl6jvebqIGZVJZ3eN8u5YzE8daZxYhG6Ae+4kXut
+         Vi2g5u49qMiBMVlxx0uWy2B1FfEYyVXpripOGf7ot3k9dyc15AB2YxLjd0LQQ8FlRQpm
+         abI5nr0eHdeo03b68aSqHXJcetgNylA1QBaRQCjxAaEE3m0IQS+e7EtNpflR5Kz466SD
+         //Eg==
+X-Gm-Message-State: AOAM533fgjxS5pUNQUUPY7QOX+3aWHujRHwPKgtOgbg7nDh/5mlRrYQB
+	fO4w119xBF4Voi5O0DH9wUDYiNtWDfc98g==
+X-Google-Smtp-Source: ABdhPJyrGoyJGQzw2Ob5N4GGMJkxgV19RlofnGtLIsm/XxMY4W1GD0DJNU4I8hNKYFd14rpFTuAmaQ==
+X-Received: by 2002:ac8:5c4e:: with SMTP id j14mr495991qtj.241.1605631186723;
+        Tue, 17 Nov 2020 08:39:46 -0800 (PST)
+Return-Path: <philip.balister@gmail.com>
+Received: from prague.hsd1.va.comcast.net ([2601:5c0:c200:1421:b727:f6cb:1b56:c419])
+        by smtp.gmail.com with ESMTPSA id l79sm14997441qke.1.2020.11.17.08.39.45
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Tue, 17 Nov 2020 08:39:45 -0800 (PST)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: "Philip Balister" <philip@balister.org>
+X-Google-Original-From: Philip Balister <philip@opensdr.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Philip Balister <philip@opensdr.com>
+Subject: [meta-oe][PATCH] spdlog: Fix recipe so other recipes can use spdlog with external fmt.
+Date: Tue, 17 Nov 2020 11:39:42 -0500
+Message-Id: <20201117163942.22157-1-philip@opensdr.com>
+X-Mailer: git-send-email 2.13.6
 
-On Mon, Nov 16 2020 at 16:45 +0100, akuster <akuster808@gmail.com> wrote:
-> On 11/16/20 12:53 AM, Ulrich ?lmann wrote:
->> Ping!
->>
-> Thanks for the reminder,
->
-> Its under test in
-> https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dstable/d=
-unfell-nut
+ * I enabled the shared library option to eliminate linker issues
+   with a package that used spdlog.
+ * Edited the tweak.h file so programs use the external fmt library
+   headers, not the oners in spdlog.
 
-Thanks, Armin!
+Signed-off-by: Philip Balister <philip@opensdr.com>
+---
+ meta-oe/recipes-support/spdlog/spdlog_1.8.1.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-> My build system is under powered so it takes longer.
+diff --git a/meta-oe/recipes-support/spdlog/spdlog_1.8.1.bb b/meta-oe/recipes-support/spdlog/spdlog_1.8.1.bb
+index 7d28fff5e..c5227a5e9 100644
+--- a/meta-oe/recipes-support/spdlog/spdlog_1.8.1.bb
++++ b/meta-oe/recipes-support/spdlog/spdlog_1.8.1.bb
+@@ -12,10 +12,14 @@ S = "${WORKDIR}/git"
+ 
+ BBCLASSEXTEND = "native"
+ # no need to build example&text&benchmarks on pure yocto
+-EXTRA_OECMAKE += "-DSPDLOG_INSTALL=on -DSPDLOG_BUILD_EXAMPLES=off -DSPDLOG_BUILD_TESTS=off -DSPDLOG_BUILD_BENCH=off -DSPDLOG_FMT_EXTERNAL=on"
++EXTRA_OECMAKE += "-DSPDLOG_INSTALL=on -DSPDLOG_BUILD_SHARED=on -DSPDLOG_BUILD_EXAMPLES=off -DSPDLOG_BUILD_TESTS=off -DSPDLOG_BUILD_BENCH=off -DSPDLOG_FMT_EXTERNAL=on"
+ 
+ inherit cmake
+ 
++do_configure_append() {
++	sed -i 's|// #define SPDLOG_FMT_EXTERNAL|#define SPDLOG_FMT_EXTERNAL|' ${S}/include/spdlog/tweakme.h
++}
++
+ # Header-only library
+ RDEPENDS_${PN}-dev = ""
+ RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
+-- 
+2.13.6
 
-Carefully doing this job takes time - no problem.
-
-Best regards
-Ulrich
-
-
-> -armin
->> On Mon, Nov 09 2020 at 08:09 +0100, Ulrich ?lmann <u.oelmann@pengutroni=
-x.de> wrote:
->>> Gentle ping!
->>>
->>> On Mon, Oct 26 2020 at 07:00 +0100, Ulrich ?lmann <u.oelmann@pengutron=
-ix.de> wrote:
->>>> Signed-off-by: Ulrich =C3=96lmann <u.oelmann@pengutronix.de>
->>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>>> (cherry picked from commit 50a487fc0b0123b154db73f79bbb18b23eb234f0)
->>>> Signed-off-by: Ulrich =C3=96lmann <u.oelmann@pengutronix.de>
->>>> ---
->>>>  .../usb-modeswitch/usb-modeswitch-data_20191128.bb            | 4 ++=
---
->>>>  .../recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb    | 2 +-
->>>>  2 files changed, 3 insertions(+), 3 deletions(-)
->>>>
->>>> diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-da=
-ta_20191128.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data=
-_20191128.bb
->>>> index 938c0f9c26bd..ca970e59bb3a 100644
->>>> --- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_2019=
-1128.bb
->>>> +++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_2019=
-1128.bb
->>>> @@ -11,9 +11,9 @@ SRC_URI[md5sum] =3D "e8fce7eb949cbe16c61fb71bade4cc=
-17"
->>>>  SRC_URI[sha256sum] =3D "3f039b60791c21c7cb15c7986cac89650f076dc27479=
-8fa242231b910785eaf9"
->>>>
->>>>  do_install() {
->>>> -    oe_runmake install DESTDIR=3D${D}
->>>> +    oe_runmake install DESTDIR=3D${D} RULESDIR=3D${D}/${nonarch_base=
-_libdir}/udev/rules.d
->>>>  }
->>>>
->>>>  RDEPENDS_${PN} =3D "usb-modeswitch (>=3D 2.4.0)"
->>>> -FILES_${PN} +=3D "${base_libdir}/udev/rules.d/ \
->>>> +FILES_${PN} +=3D "${nonarch_base_libdir}/udev/rules.d/ \
->>>>                  ${datadir}/usb_modeswitch"
->>>> diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.=
-6.0.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
->>>> index baad340908ac..6a5287af4959 100644
->>>> --- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
->>>> +++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
->>>> @@ -19,7 +19,7 @@ RDEPENDS_${PN} =3D "tcl"
->>>>  RRECOMMENDS_${PN} =3D "usb-modeswitch-data"
->>>>
->>>>  do_install() {
->>>> -    oe_runmake DESTDIR=3D${D} install
->>>> +    oe_runmake DESTDIR=3D${D} UDEVDIR=3D${D}/${nonarch_base_libdir}/=
-udev install
->>>>      if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','fals=
-e',d)}; then
->>>>          install -d ${D}/${systemd_unitdir}/system
->>>>          install -m 644 ${S}/usb_modeswitch@.service ${D}/${systemd_u=
-nitdir}/system
->>>>
->>>>
->>>>
->
->
->=20
---=20
-Pengutronix e.K.                           | Ulrich =C3=96lmann           =
-    |
-Industrial Linux Solutions                 | http://www.pengutronix.de/  |
-Peiner Str. 6-8, 31137 Hildesheim, Germany | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
