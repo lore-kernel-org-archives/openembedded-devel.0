@@ -1,71 +1,123 @@
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com [209.85.215.195])
- by mx.groups.io with SMTP id smtpd.web09.3071.1605582859220235806
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
+ by mx.groups.io with SMTP id smtpd.web12.4609.1605596186822319736
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Nov 2020 19:14:19 -0800
+ Mon, 16 Nov 2020 22:56:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=IvCvYMuz;
- spf=pass (domain: gmail.com, ip: 209.85.215.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f195.google.com with SMTP id t21so8749741pgl.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Nov 2020 19:14:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=89EUS4QuFDc07vF5kuGRHR3YS/2p8A5siHatsUOydCY=;
-        b=IvCvYMuzuLqbTgWk601DtEuiWfi0VRXPeTvvcjiVpmvNNza9Br1Zcqn//QCE19e5Eu
-         Is0eSjKM1kTHWqhj/LLG7IB1QO0tAYX2hzlozvhXhT3C1gz6Evu4hIxIef/JBG7zejgq
-         iSWI1YqgpDmOGVz16dWAnsGG9Wnw0w9QBZ2qy46VDzr2Nqz3OOh8IBxn6UMAkXBoDSxp
-         5kEO+clX513Pw+6Py/9DPQcWa9fUGcQbMvaAX0jkwxjvYc8m5hShTQRJct4Xe6ExF/OM
-         13gDfE/NhXrkODfy68q4RwBmQL27T7Hz7O6kLqR3tFMjvlS5emNy51c8Q9QwGPa8iWJz
-         fM1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=89EUS4QuFDc07vF5kuGRHR3YS/2p8A5siHatsUOydCY=;
-        b=m4ytDUJhSKbF0CpdxGzh3LYj+0HVguMY51jh/foTORTh8LhoFa1IsymPU+3TUXYKyS
-         WjbzoEPtLMlTGU+R6h2MZNRCKUcecdYNWjEIZL4rA2M9X7E9UThboGRpWFp0w+hunb5E
-         sy5rhx5a/sVuO3MIKRO/fwxuJT+7u+d0n9E5WipTCJn+jDqdjpaKWSYOigDmDd6V7fpc
-         niyGviFhLIxyXq6tyxGvGa9p82fbH6+1ZEchaGAqq/Q3YS4H2cD9Su/OZos7N3q3QGBD
-         Hskc+i4j8Rp4pNXCaVLLZN/rVrbqmtxwzHne3AmZBW3TCYAfnhh4bGjIwl1O7OC04Ehv
-         51Yg==
-X-Gm-Message-State: AOAM531hYlzXrgKVOVSjQFLDmrM9tZrCvQTaesT/XjSwspkDygGwejxy
-	s4Sm+sqGaowo+kYqZ6n2y2KHN47yAvjx9w==
-X-Google-Smtp-Source: ABdhPJxp4ED4lGkvmLPt4af7m+Wq3SLjJqLVOUekT7yHR/BdkDHBPY8lTaJY7i1QFAfwqQtdP66bew==
-X-Received: by 2002:a17:90a:e658:: with SMTP id ep24mr2277010pjb.171.1605582858326;
-        Mon, 16 Nov 2020 19:14:18 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::4611])
-        by smtp.gmail.com with ESMTPSA id y10sm973852pjm.34.2020.11.16.19.14.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2020 19:14:17 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] fluentbit: Link with libatomic on riscv32
-Date: Mon, 16 Nov 2020 19:14:15 -0800
-Message-Id: <20201117031415.3596312-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.29.2
+ dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: u.oelmann@pengutronix.de)
+Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
+	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <u.oelmann@pengutronix.de>)
+	id 1keuud-0004QC-VD; Tue, 17 Nov 2020 07:56:23 +0100
+Received: from uol by dude.hi.pengutronix.de with local (Exim 4.92)
+	(envelope-from <u.oelmann@pengutronix.de>)
+	id 1keuud-0002uF-MU; Tue, 17 Nov 2020 07:56:23 +0100
+References: <16417565E85E3454.9771@lists.openembedded.org>
+ <1645C54B3A3F0288.10479@lists.openembedded.org>
+ <6rsg99vg1j.fsf@pengutronix.de>
+ <2885ec60-dc02-d0bf-6d52-5e055571b4ea@gmail.com>
+User-agent: mu4e 1.4.13; emacs 28.0.50
+From: "Ulrich ?lmann" <u.oelmann@pengutronix.de>
+To: akuster <akuster808@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [meta-oe][dunfell][PATCH] usb-modeswitch, usb-modeswitch-data: fix usrmerge
+In-reply-to: <2885ec60-dc02-d0bf-6d52-5e055571b4ea@gmail.com>
+Date: Tue, 17 Nov 2020 07:56:23 +0100
+Message-ID: <6rpn4cv5d4.fsf@pengutronix.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
+X-SA-Exim-Mail-From: u.oelmann@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb | 1 +
- 1 file changed, 1 insertion(+)
+On Mon, Nov 16 2020 at 16:45 +0100, akuster <akuster808@gmail.com> wrote:
+> On 11/16/20 12:53 AM, Ulrich ?lmann wrote:
+>> Ping!
+>>
+> Thanks for the reminder,
+>
+> Its under test in
+> https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dstable/d=
+unfell-nut
 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
-index ae5457ae4f..bc4cd0cf9c 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
-@@ -46,6 +46,7 @@ EXTRA_OECMAKE += "-DFLB_SHARED_LIB=Off -DFLB_EXAMPLES=Off "
- EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES','systemd','-DFLB_SYSTEMD=On','',d)}"
- 
- EXTRA_OECMAKE_append_riscv64 = " -DFLB_DEPS='atomic'"
-+EXTRA_OECMAKE_append_riscv32 = " -DFLB_DEPS='atomic'"
- 
- # Kafka Output plugin (disabled by default): note that when
- # enabling Kafka output plugin, the backend library librdkafka
--- 
-2.29.2
+Thanks, Armin!
 
+> My build system is under powered so it takes longer.
+
+Carefully doing this job takes time - no problem.
+
+Best regards
+Ulrich
+
+
+> -armin
+>> On Mon, Nov 09 2020 at 08:09 +0100, Ulrich ?lmann <u.oelmann@pengutroni=
+x.de> wrote:
+>>> Gentle ping!
+>>>
+>>> On Mon, Oct 26 2020 at 07:00 +0100, Ulrich ?lmann <u.oelmann@pengutron=
+ix.de> wrote:
+>>>> Signed-off-by: Ulrich =C3=96lmann <u.oelmann@pengutronix.de>
+>>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>>> (cherry picked from commit 50a487fc0b0123b154db73f79bbb18b23eb234f0)
+>>>> Signed-off-by: Ulrich =C3=96lmann <u.oelmann@pengutronix.de>
+>>>> ---
+>>>>  .../usb-modeswitch/usb-modeswitch-data_20191128.bb            | 4 ++=
+--
+>>>>  .../recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb    | 2 +-
+>>>>  2 files changed, 3 insertions(+), 3 deletions(-)
+>>>>
+>>>> diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-da=
+ta_20191128.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data=
+_20191128.bb
+>>>> index 938c0f9c26bd..ca970e59bb3a 100644
+>>>> --- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_2019=
+1128.bb
+>>>> +++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_2019=
+1128.bb
+>>>> @@ -11,9 +11,9 @@ SRC_URI[md5sum] =3D "e8fce7eb949cbe16c61fb71bade4cc=
+17"
+>>>>  SRC_URI[sha256sum] =3D "3f039b60791c21c7cb15c7986cac89650f076dc27479=
+8fa242231b910785eaf9"
+>>>>
+>>>>  do_install() {
+>>>> -    oe_runmake install DESTDIR=3D${D}
+>>>> +    oe_runmake install DESTDIR=3D${D} RULESDIR=3D${D}/${nonarch_base=
+_libdir}/udev/rules.d
+>>>>  }
+>>>>
+>>>>  RDEPENDS_${PN} =3D "usb-modeswitch (>=3D 2.4.0)"
+>>>> -FILES_${PN} +=3D "${base_libdir}/udev/rules.d/ \
+>>>> +FILES_${PN} +=3D "${nonarch_base_libdir}/udev/rules.d/ \
+>>>>                  ${datadir}/usb_modeswitch"
+>>>> diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.=
+6.0.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
+>>>> index baad340908ac..6a5287af4959 100644
+>>>> --- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
+>>>> +++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
+>>>> @@ -19,7 +19,7 @@ RDEPENDS_${PN} =3D "tcl"
+>>>>  RRECOMMENDS_${PN} =3D "usb-modeswitch-data"
+>>>>
+>>>>  do_install() {
+>>>> -    oe_runmake DESTDIR=3D${D} install
+>>>> +    oe_runmake DESTDIR=3D${D} UDEVDIR=3D${D}/${nonarch_base_libdir}/=
+udev install
+>>>>      if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','fals=
+e',d)}; then
+>>>>          install -d ${D}/${systemd_unitdir}/system
+>>>>          install -m 644 ${S}/usb_modeswitch@.service ${D}/${systemd_u=
+nitdir}/system
+>>>>
+>>>>
+>>>>
+>
+>
+>=20
+--=20
+Pengutronix e.K.                           | Ulrich =C3=96lmann           =
+    |
+Industrial Linux Solutions                 | http://www.pengutronix.de/  |
+Peiner Str. 6-8, 31137 Hildesheim, Germany | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
