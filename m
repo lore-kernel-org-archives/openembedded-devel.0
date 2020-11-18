@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.24368.1605708152547221591
+ by mx.groups.io with SMTP id smtpd.web09.24266.1605708154479063235
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Nov 2020 06:02:32 -0800
+ Wed, 18 Nov 2020 06:02:34 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=38894 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kfO2X-0005MS-GP; Wed, 18 Nov 2020 16:02:31 +0200
+	id 1kfO2a-0005MS-Bs; Wed, 18 Nov 2020 16:02:33 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-diskcache: Upgrade 5.0.3 -> 5.1.0
-Date: Wed, 18 Nov 2020 16:02:17 +0200
-Message-Id: <20201118140220.29364-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-croniter: Upgrade 0.3.35 -> 0.3.36
+Date: Wed, 18 Nov 2020 16:02:18 +0200
+Message-Id: <20201118140220.29364-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201118140220.29364-1-leon.anavi@konsulko.com>
 References: <20201118140220.29364-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=0.0
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,34 +30,35 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 5.1.0:
+Upgrade to release 0.3.36:
 
-- Support transactions in FanoutCache (probably a bad idea)
-- Prevent cache shard attribute access when unsafe
+- Updated docs section regarding max_years_between_matches to
+  be more shorter and hopefully more relevant
+- Don't install tests
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-diskcache_5.0.3.bb => python3-diskcache_5.1.0.bb} | 4 ++--
+ ...{python3-croniter_0.3.35.bb => python3-croniter_0.3.36.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-diskcache_5.0.3.bb => python3-diskcache_5.1.0.bb} (67%)
+ rename meta-python/recipes-devtools/python/{python3-croniter_0.3.35.bb => python3-croniter_0.3.36.bb} (68%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-diskcache_5.0.3.bb b/meta-python/recipes-devtools/python/python3-diskcache_5.1.0.bb
-similarity index 67%
-rename from meta-python/recipes-devtools/python/python3-diskcache_5.0.3.bb
-rename to meta-python/recipes-devtools/python/python3-diskcache_5.1.0.bb
-index 7e89fa68a5..9aaf714034 100644
---- a/meta-python/recipes-devtools/python/python3-diskcache_5.0.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-diskcache_5.1.0.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.grantjenks.com/docs/diskcache/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c985b6a9269e57a1073d5f142d68eb68"
+diff --git a/meta-python/recipes-devtools/python/python3-croniter_0.3.35.bb b/meta-python/recipes-devtools/python/python3-croniter_0.3.36.bb
+similarity index 68%
+rename from meta-python/recipes-devtools/python/python3-croniter_0.3.35.bb
+rename to meta-python/recipes-devtools/python/python3-croniter_0.3.36.bb
+index 388885c158..b2571491b6 100644
+--- a/meta-python/recipes-devtools/python/python3-croniter_0.3.35.bb
++++ b/meta-python/recipes-devtools/python/python3-croniter_0.3.36.bb
+@@ -4,8 +4,8 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=b8ee59850b882cbf623188489ea748e2"
  
--SRC_URI[md5sum] = "86fb97b0ff87cc5f1b31654ee0d341a1"
--SRC_URI[sha256sum] = "5f4bc2018d653a1d7bbdcdecce45ea12061bf8d3b5f0323b7a5402054a285c52"
-+SRC_URI[md5sum] = "9ce87661369752c9ead63243b07eaf19"
-+SRC_URI[sha256sum] = "bc7928df986dbc8a8d6e34c33b0da89d668cfa65e7fcc91298a6959a35076993"
+ PYPI_PACKAGE = "croniter"
+-SRC_URI[md5sum] = "8bb1443b90123f96ad64d7fae26df342"
+-SRC_URI[sha256sum] = "b9075573d9d18fdc4c67ad6741c4bfa4b446b1b1d7f03279757244c8a75abedf"
++SRC_URI[md5sum] = "1be5dd43ca26a66b5f981e41c74fd346"
++SRC_URI[sha256sum] = "9d3098e50f7edc7480470455d42f09c501fa1bb7e2fc113526ec6e90b068f32c"
  
- PYPI_PACKAGE = "diskcache"
+ inherit pypi setuptools3
  
 -- 
 2.17.1
