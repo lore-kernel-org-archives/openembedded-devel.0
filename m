@@ -1,83 +1,76 @@
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.web09.25326.1605712087886017368
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web12.25418.1605712088758922831
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Nov 2020 07:08:07 -0800
+ Wed, 18 Nov 2020 07:08:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Yz27qhmB;
- spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f173.google.com with SMTP id w14so1591274pfd.7
-        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2020 07:08:07 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=i9hwM21D;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id fw15so371639pjb.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2020 07:08:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=f5Nd1ybdL4mnjemDTDARi3OI6tv3g/YwkW0YZvWh2s0=;
-        b=Yz27qhmBUsA+4iFTGcTorV7wm5WyVTfuO3vh9evKcjmLSKpih07UKpdne/0tLvbUTP
-         GmF9umzQZNWSztUlt4qId9fKsFV4wsEZlo2pogvez7085EGKpfdfj/+qMvMPd52AiRHC
-         dxkeafbEWu6qCJYaxMr+mjTQvkwS7PLgZ0qrAB4keoe8uTePfHByk+otkDrGYEeaaCOo
-         SXmOv+QSnKGz4ge+nxJ4Eg7kwsQRYyDcIDDBBMHtTGJ7hKbJbdmRwnNj9GeiIM1c+Vft
-         99d23jNuL3HeHHwY6XlnkwQ4stIdpdYlOvhYNmKiT273sHS8vid57+HwNNUJdbkFSC6S
-         xUsA==
+        bh=LvAb39rIPfF7zF1V/kDEed99rPQs7av/mZVMoObrONk=;
+        b=i9hwM21DvW+koVTyTETb4B0QksaNkBk/62YeVMu+fe0T+/H1LVL8ojycB7jF6tln7O
+         I+amb9Qd+tGJM47caT4BKquGwp6DYCQW7HfPzqYuCS4tVJt/EOsWMzBiinvd613XM4w5
+         +7YamPBaDz1aSz3rIFM2TxqYH/igUHkQJg2b3TS12nalDW/B0Hg3gpUmzch1OrQipNeX
+         bGBmz6gnmg9kw/s8NMvsfa3aOJ67y+4kAsfP5S4ZHNcdzbFIYqZaFG11XwJLLT1ou9gp
+         2R52qECTsShVp/I+poXLeYOiQl5PtRkAKkb5ggotOy/7EOjDxpV+za5hylVA2+SrwzaN
+         m8kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=f5Nd1ybdL4mnjemDTDARi3OI6tv3g/YwkW0YZvWh2s0=;
-        b=g++V8ee38LP5AHCgg8dhPYOxWc6vKxkKWqvjvIpKpF5lGyRTHPb6E03bUegJJMt/PU
-         Rw5Z7TPH1lqK2zRPhcBU7MrZbrX6wYNmuBhjn0Fapw3zilftNTRue21Dd1IQRjcKwJQh
-         lhpRijN5YfevBFp1YY8mhx1gGIXWghhrcVw63+md4KKtfsV0Rwo/mmjcRbgDseFJyKuw
-         H4dEqkt0/IE6ABWpHfgmBa/Wv8zHQJ1y1Fyvs1I3E0T3XaohSWaF53yM2bcfsURAdQLu
-         ul2nc7zjSvccERFugHlbJUbpPBDCvTvu5IGMzn5Jd9nQLR7CR1aKi+xFeMRgiAiNh8ZA
-         hZqw==
-X-Gm-Message-State: AOAM533XsGmHSg04zK1LM4YGHVwYNTIm9XXV7X44bEjqok95O4IbCA92
-	lVm7aj5eITwMIMRSdVQFHG2IS+r/2gU=
-X-Google-Smtp-Source: ABdhPJxDZtv5YYXqBFf0Z1+yWM4rweY5Kdehn42dAQvUwcGu+AhbstANj81UZ7W4QGrymiyDflyEUw==
-X-Received: by 2002:a63:343:: with SMTP id 64mr8653569pgd.14.1605712087224;
-        Wed, 18 Nov 2020 07:08:07 -0800 (PST)
+        bh=LvAb39rIPfF7zF1V/kDEed99rPQs7av/mZVMoObrONk=;
+        b=Pu1n6zToTDlpD0yZYNSzh2sylp5TnsF1QDtL9GIWCEl8JXPRWrD5gIaEekZJbze59l
+         pdq1/baN8RquLHcJUFQ3Id2C59EDiMvGE65/Qh75Xc1ZGWK41I+vwSLi96tq3XM+6euy
+         Q/PrSzqMaWlWqhhuW0+laLy+EWbTiw/d8farA0ql0bsIEibl+DWSsf5ZFZ3pf0FriI1h
+         W67Vctn/BUq0uuL0JIFlggvWwmY4QuZA/JY0EcIDGUbVmmVBtBPbWQILNvPcxrAe7EiU
+         UlCl70aWK+pJbis/03UyQ2zGYpgxI+jdg5UdvOyoRmoIlO+0nUQiuaDW//alylMIBp5e
+         Empg==
+X-Gm-Message-State: AOAM532oP66UvBOyRVR2kPGXLVlQquS0hXeYDQrP8BoYn9KZjJTOMqiv
+	Q5vjI9pbTqmfJZav6JJwUwNKVswFr9s=
+X-Google-Smtp-Source: ABdhPJxlegibPWMaKElf5uBCDwTaw4cwiGwzjfBEIBeKCEucIjbohDtKJZeW5w+jNOGyHzZUcrcUug==
+X-Received: by 2002:a17:902:d906:b029:d9:7dcf:735e with SMTP id c6-20020a170902d906b02900d97dcf735emr1770627plz.80.1605712088188;
+        Wed, 18 Nov 2020 07:08:08 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:98b0:7a07:4094:f249])
-        by smtp.gmail.com with ESMTPSA id g1sm2823005pjt.40.2020.11.18.07.08.06
+        by smtp.gmail.com with ESMTPSA id g1sm2823005pjt.40.2020.11.18.07.08.07
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Nov 2020 07:08:06 -0800 (PST)
+        Wed, 18 Nov 2020 07:08:07 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 04/17] libgphoto2: improve reproducibility
-Date: Wed, 18 Nov 2020 07:07:44 -0800
-Message-Id: <4accb95ac47d44d1ddedf4016bdea4581ec9ef31.1605711982.git.akuster808@gmail.com>
+Subject: [dunfell 05/17] ubi-utils-klibc: Remove trailing slash from S
+Date: Wed, 18 Nov 2020 07:07:45 -0800
+Message-Id: <d77472853730b0d1197f7a874118e9e74b2fdc10.1605711982.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1605711982.git.akuster808@gmail.com>
 References: <cover.1605711982.git.akuster808@gmail.com>
 
-From: Lee Chee Yang <chee.yang.lee@intel.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-remove WORKDIR information from config to improve reproducibility.
-libgphoto2_port recheck config during compile will set the WORKDIR
-info again, so remove this steps after configure.
+This slash is redundant and removing it could help pseudo maintain its database
 
-Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 42c71fae324c9e9fec0677044a5011d63bc60a11)
+(cherry picked from commit fdf7bd0de289927efe5045966608494c4975a2e5)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.25.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.25.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.25.bb
-index 8daf737a5e0..fe7657f54cc 100644
---- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.25.bb
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.25.bb
-@@ -29,6 +29,12 @@ do_configure_append() {
-     cp ${STAGING_DATADIR_NATIVE}/gettext/po/Makefile.in.in ${S}/libgphoto2_port/po/
-     cd ${S}/libgphoto2_port/
-     autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} $acpaths
-+
-+    # remove WORKDIR information from config to improve reproducibility
-+    # libgphoto2_port recheck config will set the WORKDIR info again, so dont do that
-+    sed -i 's/'$(echo ${WORKDIR} | sed 's_/_\\/_g')'/../g' ${B}/config.h
-+    sed -i 's/'$(echo ${WORKDIR} | sed 's_/_\\/_g')'/../g' ${B}/libgphoto2_port/config.status
-+    sed -i '/config\.status/ s/\-\-recheck//' ${B}/libgphoto2_port/Makefile
-     cd ${S}
- }
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb
+index 0475cbeaeef..d3223816210 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb
+@@ -18,7 +18,7 @@ SRC_URI = "git://git.infradead.org/mtd-utils.git \
+              file://0005-common.h-replace-getline-with-fgets.patch \
+              "
+ 
+-S = "${WORKDIR}/git/"
++S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "--disable-tests --without-jffs --without-ubifs"
  
 -- 
 2.17.1
