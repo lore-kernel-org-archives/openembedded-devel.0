@@ -1,17 +1,17 @@
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.43])
- by mx.groups.io with SMTP id smtpd.web10.26378.1605714719231642751
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.89])
+ by mx.groups.io with SMTP id smtpd.web11.26409.1605714729240318366
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Nov 2020 07:51:59 -0800
+ Wed, 18 Nov 2020 07:52:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=gC5JFGdg;
- spf=pass (domain: windriver.com, ip: 40.107.236.43, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=RhYg0t9f;
+ spf=pass (domain: windriver.com, ip: 40.107.236.89, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NjVHBaVsXSibUpWG58LKfm/06iONq2ed+tmtz+VFkKnIV5Uqz2OEOWHto58hPkij9kSwNQEsz2nx/7zIi+kpnUPsZevRTnkP7tG+Uy1AHn1oMMVNRYeYqRwAWpYRQ7PmCYmf1KqvGTPEorAEqWlZSa7zUPX0tkfqur78zHxQyiqZ8RnTLC8R6kvu0C2QilkXJFI8q+wwVcJqoVR7qgpWxCUOWI0ZJ3aLpXYzFJnzUiRziHPTLAoPkQyAcCcPBH4MeGehEI/Djaz4wGXSh3Vcx/4TkLo9mteEidz52cYbHbwCyuA/6MS+OhkIsUMsGH/mXSMu/sf8dPKieTF2XDTnrQ==
+ b=LGCao6UGY+/qtKPFAvF9hcHr2tG+FPsReqyhsK4ARa950VNK/YacaXBGu2aJEW2/8wKL3Be6JOfTaY6uXDBMRMITwaCp3IaWXWnrpKQSmOi2AK9IXu53eJ6vDiDGjmJWwAguGNowBG6EB+gb5VEezUMZayDqBhHY/++y4ZO9S76Bg7bZW7RNEoV6Htr+1CAQM1+MtrkBtkeLp26um9nR4kDKxu0fncQNhYhiEPjY23rf6YatmhlQKDWj/i3Rd5/J/TpPrQ9surcDQEHCnCes/mI9lsQoStJHbSbLrA3UG+Pd27P0jOUD1HIZQxVNX+NwsCguK77j9pYS76vcQhO/tQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7NIgLNgR1ijFSLpX/5hhu/vWIuR54goSiVg6jjZpj8g=;
- b=UVjBi9rBReEKybvGT9q7yXgFlUUJlrxR2aXz8TBZNfVGrzlrt/zc3QYr7G8ntiZENvasefWHl4c7IOjbhAXe6NmOotLIm3D0bZCNKsxNPrh3c0b6N1QkTaDjxZjZ4DIPPAS4GICUQbcPDKohfS/eM6PwbeTAeet7eeKXS0akGjS1hFEhoYlX74of3aLvvY4ewGPJAxBh01XC2fn8SphKF1fapwQ8VmUScDL2TXkvtO9oHXamuxOkV93noTQUmynVt40KWPzKxbuyW8MYKqf/5ELAM9ZJKF1txZ10gfYyrvHA9eKWtYELbiIubHzKugcgUhR2Bnegjy83py+km0j8uQ==
+ bh=7Ak+EuSPjltPO2sDwAjfOeuu8iNgY2vHkLvNouLXiok=;
+ b=VmrqCGJ6kKTtulUrIXlDo9VgY5b1u6Ol9JAHO2dnronmlaDRMO5JK4iqaMrd7jwZUn1NP32spoggRPKucODQ3pN+HjIa+FWEAbLxjKazvZWQI987mLKzafe+HDVItXMrHu0C5I1GV3xXu0a9Z3udiQyQtT6qEL0sXu3rLRGDBC3eMjVZ13GtkMTamkluIS0aVT+5Bt1vtJI3sigl7BpjhlfSsRTLjMK46aaqvIijDeYF3u17dKfVkobRg/pXb8exE8si9WSiH9g6dxwmZFs1gbhCG3wcljfsUk8+XZVqBK8rLxF7CMBuacsflq8PNzi9jqbXSJgBducZTlQd3xaACA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7NIgLNgR1ijFSLpX/5hhu/vWIuR54goSiVg6jjZpj8g=;
- b=gC5JFGdgJPAIvvglLvnNwXyLjr+4zCSnkInigC4MDBNWZychQMnFJGReOmrHNPkkKaCUOYJt8U4R2pVy/GmTklAe7oqoOS3vOELPAJVRssrAw+oPdTrjPrSnno/zkoq+Gc5553d1D6m0+nODa8ycbZM6Xv3I0G8khnJvL+SFEic=
+ bh=7Ak+EuSPjltPO2sDwAjfOeuu8iNgY2vHkLvNouLXiok=;
+ b=RhYg0t9fWIRHLXm2nKs17YS9vKVsNVn1uxZ+GvbycAd4/lz4a3N/UlID1hKuIUFPRhKCuzm8+e7/GdA823n/xdwLrhGHTLWD+41kq2xT5Yue/nekjcgRRJoXoxUcZgBFYOBi5Bi94WqWPfZFnwyHpxTSDy1WGz1Uxm2Ah93zsNw=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,59 +28,60 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB2632.namprd11.prod.outlook.com (2603:10b6:a02:c4::17) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3564.28; Wed, 18 Nov
- 2020 15:51:56 +0000
+ 2020 15:52:08 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::7875:99b3:15ae:5df2]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::7875:99b3:15ae:5df2%7]) with mapi id 15.20.3541.029; Wed, 18 Nov 2020
- 15:51:56 +0000
-Subject: Re: [oe] [meta-python][PATCH 1/5] python3-cmd2: Upgrade 1.3.11 -> 1.4.0
+ 15:52:08 +0000
+Subject: Re: [oe] [meta-python][PATCH 2/5] python3-dill: Upgrade 0.3.2 -> 0.3.3
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20201112105618.23773-1-leon.anavi@konsulko.com>
+ <20201112105618.23773-2-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <5b3f6f4d-16fc-2032-cb4b-62a31f1c9b3d@windriver.com>
-Date: Wed, 18 Nov 2020 10:51:54 -0500
+Message-ID: <3e09a616-442e-0d1f-d9aa-87f5f5719519@windriver.com>
+Date: Wed, 18 Nov 2020 10:52:05 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
-In-Reply-To: <20201112105618.23773-1-leon.anavi@konsulko.com>
+In-Reply-To: <20201112105618.23773-2-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: YT1PR01CA0061.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2e::30) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: YT1PR01CA0039.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2e::8) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0061.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::30) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.20 via Frontend Transport; Wed, 18 Nov 2020 15:51:55 +0000
+Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0039.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::8) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.20 via Frontend Transport; Wed, 18 Nov 2020 15:52:07 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 164eea23-635b-4fad-80ea-08d88bd9e059
+X-MS-Office365-Filtering-Correlation-Id: e1093e65-b822-43af-ee7a-08d88bd9e746
 X-MS-TrafficTypeDiagnostic: BYAPR11MB2632:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB26322743A4B9B90281F2DB949FE10@BYAPR11MB2632.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:454;
+	<BYAPR11MB26322A1E4BAA643403DF4A009FE10@BYAPR11MB2632.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:556;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	mxT0QxBhwOFBXI+FVWagn/Fznj/3KuON/Jn9dLBjEOVZsnmPTNEp+BZHsnbOIhW9alcEvH/QhZDMrINtjvEvmFUF9epKer+fLTsXwffbkicjbRS5eUAlDnpwSt6WwbUbruAEp67JV6j1YHXrjepMiSZz66lpCmjKF+y7LtbkwBkYv4G8kq/eEuJpHt6CdQpEaZs1bxffbVU7IaLbVIuw0TQ0enNv75I2z+Tv0tEcMm3q7Rqsy0u+5Ny0es8X+JhnZD8W7oklA7iHoY4S/FiXsAesTggHImXczKYcw2Kx+XvAOJ/yBgpmyWxqDqQrYIgZ6mKUto9LwzyIla7JZYYWnbFtfJCPFNLV0ynMiUPZXDwVP/5sqZgZdgzGnlkenUk37r3rvBpCHVAvzHbXdySDODWc2htFMlzkaxuTlUga5Cl5NbGh0jDm8e/8DGPXQYIgDyXZQG6ZU2ghRbJp2V+dBA==
+	OL14YWGZ1cbTEYCU7EbPFmbbn2Yvuqb4Kwbf+3lorYFitFzK27D+x6QbU4RJrpS5cPuosdRrqEhGj198UzpmqRx8cTVsHCCMfDvMx5xMdxj2TgrlDp94l2x+hLnuNCRbicsxDzuZ/2vwxqWGkDevpQ9aw5/L54n3I0Jt8Ew+0AdjL6+Rn2Ugb7xq/jhtjIV/lzMsKh9c/kVUQKF+Pr6CGJopQrNtE3PTQKW3HvSQiqXFlaB4aD7S+Rhj7zxWP/M5+gcGu/LIFgT7fW3eVrozpw+69yMWVqJS0gNgTf4wEQQOqN1ST8sJXv3V+q9L4fe+/4YbLVvBQFRoH3e1XroZq0UTvkIjRJRFJ1P4lbmzT88OBPPun/4CAm5qXzfvT1oy85Vln5yieP8WqznmfROfwVZkPKNOQFIlxENXTSgTenI6qxr4O4kzwn4TJTpQZpec0cNM11agtx84077MnQg3VQ==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(366004)(396003)(136003)(39850400004)(346002)(53546011)(44832011)(86362001)(478600001)(966005)(33964004)(16576012)(31686004)(52116002)(316002)(83380400001)(2906002)(36756003)(16526019)(186003)(66946007)(4001150100001)(66556008)(66476007)(166002)(26005)(2616005)(6486002)(8676002)(956004)(31696002)(8936002)(5660300002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	1C2tuacu0pAz7U9Y9vKfWv0U9V8jVPXzAx8GndDSul28VI27fgEFzH24pXfUKo0f1Yuotoc2zQ5GF1s/21mT/z80e5st/ckiQQsmnhJ0h8mJYzBh6MUsLImip65ZcrHKr4VF9ZjzcpgOnuvTpLV1wLAqdzuiarWH/Yn/wJSfHykKM6AzOTsYl3BF6njFfBIsfs8iSF+2TUMaq7DkZMShSWt/uiEiIe9a6XhvCr2Uts3SWQGXhDa91ZT5sCTt2EpHJYWTaaAjG47XKMy2LkWmWQGsPclcsjpBOvAoCqniGxEcOgaiiLn+tEPHPuDc4iDzfnSOxfcCpFzPLW0ZvMYsZqWQi6uwoN7fPZVsOte2a0BhBooh+h/ucdE1ccfpPJsfoNMPYkhWNYj4LemJdt7mUyphQRS7hOY348tDqAhOlg35pEVI88+JmIgs2+tToSGxhS9BcgQuBukn0QI0YVK04GqU1naUBkYA9St3zNy/nL3So0vANGX1ZBc6OCs7IOfFJe7v377zrhnyw2i9ps+Zh9lLRs2uEH8/QQuM+xRZtEBATyO2EXbDR6UjwFZs5Y5bCPr0bMVGCpdXMDbu4BnB6OgmkKHERcHUspv52HODWPNKf11Y2f3tc7xPE/WdZuBoFZcI6S018rRioz00y6pSIA==
+	hnjq1CBGGX+a8TNgI3u0Ggfqt+dcnCvskdA43o3OkmT1eD9xi3671/l/gL3NKEv4G91FqATvZh1xkQ4so9zc1Hkh/CBykDxFD4pzmA2/eP6B16/7NpetdxW7BXzrkFZZDwQH4ahzzG4iPm38gM+9r7xKQTUV9m84FSCWLBvy/gkB2Ofc1Hq1F6ESer2O9FIgkYxH6dl0jyKaWF+s8+Oh0H7EfBXRHqhZ/ANRjRptHLSs4Adcj2Jhm7HB6j52yClAanjc897t6/QGGE9nG7PQU34pFo0ZnmeF+Qov9x7ZD/gXNbIYku7e4UuPyMJAYjOzqdqHUrff//BtbaCCB8K1esz+Vw7VYMHE08cKqc/gnNjd/Wf6qAFExTwHIOgfH6UoWMc+OfrqlhNOsBQQ/mSvFcsHFHfsZZRKHOWTEryfZ1McKXEYnTv5jozYHyXJELijOJ1oOzyu7AAfpZSun6DaBpWoFXuCej6oZq5GcSU9PVRusgOBBfPXisJVzJbeoqURmkyVxby8qvu7BMQ+aJCGrh0xeJ+cizHj45CtCAXeRwA9ZMbV/PQXGoMs2JKNfaOojRIVzaCPsjer4Gpi9JVT6dHItGUWI7bKf7c6HQcIjK7RgTiTreaQZ6Q/PzLyzDk/XxyLscP1wZbOyJPRMS0mcQ==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 164eea23-635b-4fad-80ea-08d88bd9e059
+X-MS-Exchange-CrossTenant-Network-Message-Id: e1093e65-b822-43af-ee7a-08d88bd9e746
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2020 15:51:56.4559
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2020 15:52:07.9293
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vbTLvmA6oldRHX6H8rT+X0VCNqqDiGRgT23Eu0Moq6yp1KVDmAkaGJ0anT85gsFOMkrBTeuwVfHpEQyyiXse9PuUkQV74jV0nyUZPjWraKQ=
+X-MS-Exchange-CrossTenant-UserPrincipalName: PLaAl1iavxIi52cqvDsKbPdvpQYs4/pfsp0sSSqy3lfrzAwOh7WfJLsA16vF+XFLeBGUn/iL94M7vSezqrkGE5BDeFeE3J646ZcJDfoZyjs=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2632
 Content-Type: multipart/alternative;
- boundary="------------EB3C3377E0BEF96A644D6823"
+ boundary="------------6F29B28FD008E144FA0B441C"
 Content-Language: en-US
 
---------------EB3C3377E0BEF96A644D6823
+--------------6F29B28FD008E144FA0B441C
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -88,37 +89,52 @@ Content-Transfer-Encoding: 7bit
 On 2020-11-12 5:56 a.m., Leon Anavi wrote:
 > [Please note this e-mail is from an EXTERNAL e-mail address]
 >
-> Upgrade to release 1.4.0:
+> Upgrade to release 0.3.3:
 >
-> - Fixed tab completion crash on Windows
-> - Changed how multiline doc string help is formatted to match
->    style of other help messages
+> - Treat extension modules as built-in
+> - Fix typo in README.md
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-cmd2_1.3.11.bb => python3-cmd2_1.4.0.bb}  | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.11.bb => python3-cmd2_1.4.0.bb} (75%)
+>   .../recipes-devtools/python/python3-dill_0.3.2.bb     |  9 ---------
+>   .../recipes-devtools/python/python3-dill_0.3.3.bb     | 11 +++++++++++
+>   2 files changed, 11 insertions(+), 9 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python3-dill_0.3.2.bb
+>   create mode 100644 meta-python/recipes-devtools/python/python3-dill_0.3.3.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.11.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.4.0.bb
-> similarity index 75%
-> rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.11.bb
-> rename to meta-python/recipes-devtools/python/python3-cmd2_1.4.0.bb
-> index 3b2aa5b744..dfe493bd2a 100644
-> --- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.11.bb
-> +++ b/meta-python/recipes-devtools/python/python3-cmd2_1.4.0.bb
-> @@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def"
->
->   DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
->
-> -SRC_URI[md5sum] = "7e3dbe0aefa331e80f515d3c41cc3b8c"
-> -SRC_URI[sha256sum] = "826a288ee6d9c4ec1184e64e9566c09d3b73be8f4283c1898fa4332f1daf8dbf"
-> +SRC_URI[md5sum] = "520afccc1d46f833d117a23fab76ed8f"
-> +SRC_URI[sha256sum] = "e59fa932418603af4e046a96c8985812b05af8a73bfd9d7a386cd1b02c6ab687"
->
->   inherit pypi setuptools3
->
+> diff --git a/meta-python/recipes-devtools/python/python3-dill_0.3.2.bb b/meta-python/recipes-devtools/python/python3-dill_0.3.2.bb
+> deleted file mode 100644
+> index b03e032669..0000000000
+> --- a/meta-python/recipes-devtools/python/python3-dill_0.3.2.bb
+> +++ /dev/null
+> @@ -1,9 +0,0 @@
+> -inherit pypi setuptools3
+> -
+> -SUMMARY = "Serialize all of python"
+> -LICENSE = "BSD"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=90fee9f98d11d59df3f8aa813ff9a3de"
+> -
+> -SRC_URI = "https://files.pythonhosted.org/packages/e2/96/518a8ea959a734b70d2e95fef98bcbfdc7adad1c1e5f5dd9148c835205a5/dill-${PV}.zip"
+> -SRC_URI[md5sum] = "543607e0a419f154dca65265e87e4812"
+> -SRC_URI[sha256sum] = "6e12da0d8e49c220e8d6e97ee8882002e624f1160289ce85ec2cc0a5246b3a2e"
+> diff --git a/meta-python/recipes-devtools/python/python3-dill_0.3.3.bb b/meta-python/recipes-devtools/python/python3-dill_0.3.3.bb
+> new file mode 100644
+> index 0000000000..bf26ba30b5
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-dill_0.3.3.bb
+> @@ -0,0 +1,11 @@
+> +SUMMARY = "Serialize all of python"
+> +HOMEPAGE = "https://pypi.org/project/dill/"
+> +LICENSE = "BSD"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=90fee9f98d11d59df3f8aa813ff9a3de"
+> +
+> +SRC_URI[md5sum] = "99c878e2e4e924f3234c0efcbcff6abf"
+> +SRC_URI[sha256sum] = "efb7f6cb65dba7087c1e111bb5390291ba3616741f96840bfc75792a1a9b5ded"
+> +
+> +inherit pypi setuptools3
+> +
+> +PYPI_PACKAGE_EXT = "zip"
 > --
 > 2.17.1
 >
@@ -126,7 +142,7 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
 >
 
---------------EB3C3377E0BEF96A644D6823
+--------------6F29B28FD008E144FA0B441C
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -139,43 +155,58 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2020-11-12 5:56 a.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20201112105618.23773-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20201112105618.23773-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">[Please note this e-mail is from an EXTERNAL e-mail address]
 
-Upgrade to release 1.4.0:
+Upgrade to release 0.3.3:
 
-- Fixed tab completion crash on Windows
-- Changed how multiline doc string help is formatted to match
-  style of other help messages
+- Treat extension modules as built-in
+- Fix typo in README.md
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
-    <blockquote type="cite" cite="mid:20201112105618.23773-1-leon.anavi@konsulko.com">
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
+    <blockquote type="cite" cite="mid:20201112105618.23773-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-cmd2_1.3.11.bb =&gt; python3-cmd2_1.4.0.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cmd2_1.3.11.bb =&gt; python3-cmd2_1.4.0.bb} (75%)
+ .../recipes-devtools/python/python3-dill_0.3.2.bb     |  9 ---------
+ .../recipes-devtools/python/python3-dill_0.3.3.bb     | 11 +++++++++++
+ 2 files changed, 11 insertions(+), 9 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-dill_0.3.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-dill_0.3.3.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.3.11.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.4.0.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-cmd2_1.3.11.bb
-rename to meta-python/recipes-devtools/python/python3-cmd2_1.4.0.bb
-index 3b2aa5b744..dfe493bd2a 100644
---- a/meta-python/recipes-devtools/python/python3-cmd2_1.3.11.bb
-+++ b/meta-python/recipes-devtools/python/python3-cmd2_1.4.0.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def">&quot;file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def&quot;</a>
-
- DEPENDS += &quot;${PYTHON_PN}-setuptools-scm-native&quot;
-
--SRC_URI[md5sum] = &quot;7e3dbe0aefa331e80f515d3c41cc3b8c&quot;
--SRC_URI[sha256sum] = &quot;826a288ee6d9c4ec1184e64e9566c09d3b73be8f4283c1898fa4332f1daf8dbf&quot;
-+SRC_URI[md5sum] = &quot;520afccc1d46f833d117a23fab76ed8f&quot;
-+SRC_URI[sha256sum] = &quot;e59fa932418603af4e046a96c8985812b05af8a73bfd9d7a386cd1b02c6ab687&quot;
-
- inherit pypi setuptools3
-
+diff --git a/meta-python/recipes-devtools/python/python3-dill_0.3.2.bb b/meta-python/recipes-devtools/python/python3-dill_0.3.2.bb
+deleted file mode 100644
+index b03e032669..0000000000
+--- a/meta-python/recipes-devtools/python/python3-dill_0.3.2.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-inherit pypi setuptools3
+-
+-SUMMARY = &quot;Serialize all of python&quot;
+-LICENSE = &quot;BSD&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=90fee9f98d11d59df3f8aa813ff9a3de">&quot;file://LICENSE;md5=90fee9f98d11d59df3f8aa813ff9a3de&quot;</a>
+-
+-SRC_URI = <a class="moz-txt-link-rfc2396E" href="https://files.pythonhosted.org/packages/e2/96/518a8ea959a734b70d2e95fef98bcbfdc7adad1c1e5f5dd9148c835205a5/dill-${PV}.zip">&quot;https://files.pythonhosted.org/packages/e2/96/518a8ea959a734b70d2e95fef98bcbfdc7adad1c1e5f5dd9148c835205a5/dill-${PV}.zip&quot;</a>
+-SRC_URI[md5sum] = &quot;543607e0a419f154dca65265e87e4812&quot;
+-SRC_URI[sha256sum] = &quot;6e12da0d8e49c220e8d6e97ee8882002e624f1160289ce85ec2cc0a5246b3a2e&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-dill_0.3.3.bb b/meta-python/recipes-devtools/python/python3-dill_0.3.3.bb
+new file mode 100644
+index 0000000000..bf26ba30b5
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-dill_0.3.3.bb
+@@ -0,0 +1,11 @@
++SUMMARY = &quot;Serialize all of python&quot;
++HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pypi.org/project/dill/">&quot;https://pypi.org/project/dill/&quot;</a>
++LICENSE = &quot;BSD&quot;
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=90fee9f98d11d59df3f8aa813ff9a3de">&quot;file://LICENSE;md5=90fee9f98d11d59df3f8aa813ff9a3de&quot;</a>
++
++SRC_URI[md5sum] = &quot;99c878e2e4e924f3234c0efcbcff6abf&quot;
++SRC_URI[sha256sum] = &quot;efb7f6cb65dba7087c1e111bb5390291ba3616741f96840bfc75792a1a9b5ded&quot;
++
++inherit pypi setuptools3
++
++PYPI_PACKAGE_EXT = &quot;zip&quot;
 --
 2.17.1
 
@@ -190,4 +221,4 @@ index 3b2aa5b744..dfe493bd2a 100644
   </body>
 </html>
 
---------------EB3C3377E0BEF96A644D6823--
+--------------6F29B28FD008E144FA0B441C--
