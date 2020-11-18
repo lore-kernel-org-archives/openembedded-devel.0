@@ -1,112 +1,80 @@
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
- by mx.groups.io with SMTP id smtpd.web10.25627.1605712098114042671
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
+ by mx.groups.io with SMTP id smtpd.web10.25628.1605712099390368170
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Nov 2020 07:08:18 -0800
+ Wed, 18 Nov 2020 07:08:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=BDP71dff;
- spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f170.google.com with SMTP id v21so1389941pgi.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2020 07:08:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=UTg3Uii7;
+ spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f171.google.com with SMTP id 62so1362478pgg.12
+        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2020 07:08:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=hv76qu2fU79NqpsMtTnTJ066+MoN9oRqUqHJARYtt80=;
-        b=BDP71dffbQI35/LER7szXYYaC4cHutdf/XMLCx6oHgypsRwZqypQbC7q1XBSF0SKNc
-         kgy5wdMiisea3ru6S4By2uw/LbEBKR4T89KD2kGSmeoImcNMvw/d5NM6TaN4J/CzLJsg
-         6P/ieHgHOJ0cs1x+5KA/CBSLD8CClKSdsWwO7VGA3yNzZpoNu3o4uf2PHaUINWkn/gVS
-         9r1g2Btzb/wO4YJLMcthjg8Y5caLoG3oowk6/2gl4vLRgD0q4c0OXVGixb0t+kbSxLkD
-         dsZqUl8S/ZfCMJY+zpBH1vgicCsgJ7potro/ykylhUarJ7la/WFAW1Ua/gdH/y3OtjrL
-         AmgQ==
+        bh=TAU6k5rDufblOrRDhH1+GZp/SXdM84wTftDIT1oa7Dc=;
+        b=UTg3Uii7TBi17fW6BrHT4wt1uCKh1hhlg3TozDA9ty+Cqvo+VNH44P7925Au4Ke3Fu
+         NmvIsyN7J/vcDL5LI2ZAFFIwBec4tsx6CcDyGloePGXb8xCvcjePFVWjOUdC+ERrPbbf
+         Fkx/Dbr562y0d53iIvmQ2BRZglu1/HtpRe3Oh3DsRHrI3td0H0CvA8/2DUi4s+IB/D8S
+         D9ec1ZBTgMX8TPilsCb3jnJFre54gfFeWYUP7RPtYRT0FUH23ghkeTNE/GiU8C6Vo1xp
+         Qj81WJuLBqvCwCogv94ENjlbWVgNWkkJzj+EeKZpUp/iPmeIlIQX29PJ7OQq46vIcJc8
+         0AIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=hv76qu2fU79NqpsMtTnTJ066+MoN9oRqUqHJARYtt80=;
-        b=RKnxYcRWACuCxwnEGX2WRmcTGLOEWGdVMyp3E2UvqqsIm9lDURQNMo/zhB4oLVCZm9
-         wuFNeUahiFCp1ZeiV+oz2tGf2gknuyGnZfn8kyyu3awQKzoW0maF5EXds3VQ6UiWSqa7
-         KRuR72lOfwQ5ukHISial8H3oVHwBYiQpdN3TEvez9nYYPjhaG8R4tqyMLXQBU8izO7SN
-         oFPv4QK9NIjjNeqRag32xYx+z+UZ+aJIE7vbnAFv4TgFGhswm01yx9wIBCUH7DLsLVNA
-         tnc+bPw93AyvGTOR2JbfZoI+NSrkVmvMLqnchHty+s4tUyezAXVci5HQJkrrWM6k5y+X
-         iySw==
-X-Gm-Message-State: AOAM532lfYtIHdZCh09hwwdFDJnj8v6KIdxsTh1czqJngP76LcanESTP
-	yIKGD5oC6qaYZdpuw+ue8ZzLbbLMbko=
-X-Google-Smtp-Source: ABdhPJwZd5doFAYKbw38ppVqsbZ7Vvy0ZOgfvkPF+/TI2eBNxOgZ2+YCCs7ty7/R1djw3motGIyp3w==
-X-Received: by 2002:a63:1758:: with SMTP id 24mr6032049pgx.323.1605712097494;
-        Wed, 18 Nov 2020 07:08:17 -0800 (PST)
+        bh=TAU6k5rDufblOrRDhH1+GZp/SXdM84wTftDIT1oa7Dc=;
+        b=Cdc7eMvl3JD+jGjH6vGiMFe67D77b0hSOtZHxQFfvgHPU7q288FGYTl+CFazm1MSP+
+         EU64RWby68B8WFPhnNnmJqBAvgomO8dTfLkap4EhumuO63ui46WGBt7vseYCSk+nIzVT
+         +8WWl/VGUJcL6xx8ibQnZwlWU0gKgdarsTBf/nthuna6pjfrkRyODdi48n8T2FQJfww4
+         1PnInqZ7YM8KbAoiiK+GQBItm9A/z9KRDYWR39kRA5SIOOLGPGz7aRDEvA1nZasH5ADU
+         mjzOoGxXP2IjfsEKXdEmJEfBd36xBlaWnaIIZFd++nzWOTjle4DeOjyk9YbIM0OOtIWf
+         Tc+w==
+X-Gm-Message-State: AOAM533Edjyq8LGqIZHR8fn90e/8Zzl48qL1xqKqrcbDNvrm6sOiuyLV
+	/7XpH/my7hqWJa/Lik8ximp7tBNWEQ4=
+X-Google-Smtp-Source: ABdhPJwKc6VZ0mTVv/ZpP1M666AB6xIfLoLYdL82MZJt3aTQJIJhjqhD47lCQF1gvJSZSXcAWYmfpg==
+X-Received: by 2002:aa7:854d:0:b029:197:9168:80fb with SMTP id y13-20020aa7854d0000b0290197916880fbmr1892365pfn.38.1605712098670;
+        Wed, 18 Nov 2020 07:08:18 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:98b0:7a07:4094:f249])
-        by smtp.gmail.com with ESMTPSA id g1sm2823005pjt.40.2020.11.18.07.08.16
+        by smtp.gmail.com with ESMTPSA id g1sm2823005pjt.40.2020.11.18.07.08.17
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Wed, 18 Nov 2020 07:08:17 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 14/17] hplip: use libexecdir
-Date: Wed, 18 Nov 2020 07:07:54 -0800
-Message-Id: <636daeba35c5b9ec8e570225353a78c591c98756.1605711982.git.akuster808@gmail.com>
+Subject: [dunfell 15/17] Add missing dependencies for rsnapshot.
+Date: Wed, 18 Nov 2020 07:07:55 -0800
+Message-Id: <e944a811d39040e9fa453b08fc572aafe1e24ccb.1605711982.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1605711982.git.akuster808@gmail.com>
 References: <cover.1605711982.git.akuster808@gmail.com>
 
-From: Diego Rondini <diego.rondini@kynetics.com>
+From: Gianluca Pacchiella <gp@ktln2.org>
 
-In oe-core commit:
-2ce6ef29b9bb4f16ed9d78e166d455b7a6d968bf
-cups crossscripts have been fixed to report the correct serverbin folder, so
-backend, filters, etc, need to go in ${libexecdir} now.
-
-Signed-off-by: Diego Rondini <diego.rondini@kynetics.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit db7fc115e058e2e0e481e284768538f097cfdd90)
+(cherry picked from commit dfd5685ca7fc5688a8b808e6784d1ab22ec12b47)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-extended/hplip/hplip_3.19.12.bb | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/hplip/hplip_3.19.12.bb b/meta-oe/recipes-extended/hplip/hplip_3.19.12.bb
-index 883a6ffe954..457a974534e 100644
---- a/meta-oe/recipes-extended/hplip/hplip_3.19.12.bb
-+++ b/meta-oe/recipes-extended/hplip/hplip_3.19.12.bb
-@@ -39,8 +39,8 @@ EXTRA_OECONF += "\
-         --enable-foomatic-drv-install \
-         --disable-foomatic-ppd-install \
-         --disable-foomatic-rip-hplip-install \
--        --with-cupsbackenddir=${libdir}/cups/backend \
--        --with-cupsfilterdir=${libdir}/cups/filter \
-+        --with-cupsbackenddir=${libexecdir}/cups/backend \
-+        --with-cupsfilterdir=${libexecdir}/cups/filter \
- "
+diff --git a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
+index dcadede0ed2..33f5dccca21 100644
+--- a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
++++ b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
+@@ -13,11 +13,13 @@ RDEPENDS_${PN} = "rsync \
+                   perl-module-getopt-std \
+                   perl-module-file-path \
+                   perl-module-file-stat \
++                  perl-module-file-spec \
+                   perl-module-posix \
+                   perl-module-fcntl \
+                   perl-module-io-file \
+                   perl-module-constant \
+                   perl-module-overloading \
++                  perl-module-ipc-open3 \
+                  "
  
- EXTRA_OEMAKE = "rulessystemdir=${systemd_unitdir}/system/"
-@@ -52,7 +52,7 @@ do_install_append() {
-     sed -i -e "s|/usr/bin/python|/usr/bin/env python3|g" ${D}${datadir}/hplip/*.py
- }
- 
--PACKAGES += "${PN}-ppd ${PN}-cups ${PN}-backend ${PN}-filter ${PN}-hal"
-+PACKAGE_BEFORE_PN += "${PN}-ppd ${PN}-cups ${PN}-backend ${PN}-filter ${PN}-hal"
- 
- RDEPENDS_${PN} += " \
-         python3\
-@@ -70,15 +70,15 @@ RDEPENDS_${PN}-filter += "perl"
- 
- # need to snag the debug file or OE will fail on backend package
- FILES_${PN}-dbg += "\
--        ${libdir}/cups/backend/.debug \
-+        ${libexecdir}/cups/backend/.debug \
-         ${PYTHON_SITEPACKAGES_DIR}/.debug \
--        ${libdir}/cups/filter/.debug "
-+        ${libexecdir}/cups/filter/.debug "
- 
- FILES_${PN}-dev += "${PYTHON_SITEPACKAGES_DIR}/*.la"
- FILES_${PN}-ppd = "${datadir}/ppd"
- FILES_${PN}-cups = "${datadir}/cups"
--FILES_${PN}-backend = "${libdir}/cups/backend"
--FILES_${PN}-filter = "${libdir}/cups/filter"
-+FILES_${PN}-backend = "${libexecdir}/cups/backend"
-+FILES_${PN}-filter = "${libexecdir}/cups/filter"
- FILES_${PN}-hal = "${datadir}/hal"
- 
- FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}/*.so"
+ SRCREV = "a9e29850fc33c503c289e245c7bad350eed746d9"
 -- 
 2.17.1
 
