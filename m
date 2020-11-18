@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.24392.1605708149745625111
+ by mx.groups.io with SMTP id smtpd.web12.24368.1605708152547221591
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Nov 2020 06:02:30 -0800
+ Wed, 18 Nov 2020 06:02:32 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=38894 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kfO2T-0005MS-T4; Wed, 18 Nov 2020 16:02:26 +0200
+	id 1kfO2X-0005MS-GP; Wed, 18 Nov 2020 16:02:31 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-gmqtt: Upgrade 0.6.7 -> 0.6.8
-Date: Wed, 18 Nov 2020 16:02:16 +0200
-Message-Id: <20201118140220.29364-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-diskcache: Upgrade 5.0.3 -> 5.1.0
+Date: Wed, 18 Nov 2020 16:02:17 +0200
+Message-Id: <20201118140220.29364-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20201118140220.29364-1-leon.anavi@konsulko.com>
+References: <20201118140220.29364-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,33 +30,34 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.6.8:
+Upgrade to release 5.1.0:
 
-- Fix encode str to bytes
+- Support transactions in FanoutCache (probably a bad idea)
+- Prevent cache shard attribute access when unsafe
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-gmqtt_0.6.7.bb => python3-gmqtt_0.6.8.bb} | 4 ++--
+ ...{python3-diskcache_5.0.3.bb => python3-diskcache_5.1.0.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-gmqtt_0.6.7.bb => python3-gmqtt_0.6.8.bb} (73%)
+ rename meta-python/recipes-devtools/python/{python3-diskcache_5.0.3.bb => python3-diskcache_5.1.0.bb} (67%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-gmqtt_0.6.7.bb b/meta-python/recipes-devtools/python/python3-gmqtt_0.6.8.bb
-similarity index 73%
-rename from meta-python/recipes-devtools/python/python3-gmqtt_0.6.7.bb
-rename to meta-python/recipes-devtools/python/python3-gmqtt_0.6.8.bb
-index 70527e026c..6219d20093 100644
---- a/meta-python/recipes-devtools/python/python3-gmqtt_0.6.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-gmqtt_0.6.8.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/wialon/gmqtt"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=903f1792621a3b35ee546da75d139177"
+diff --git a/meta-python/recipes-devtools/python/python3-diskcache_5.0.3.bb b/meta-python/recipes-devtools/python/python3-diskcache_5.1.0.bb
+similarity index 67%
+rename from meta-python/recipes-devtools/python/python3-diskcache_5.0.3.bb
+rename to meta-python/recipes-devtools/python/python3-diskcache_5.1.0.bb
+index 7e89fa68a5..9aaf714034 100644
+--- a/meta-python/recipes-devtools/python/python3-diskcache_5.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-diskcache_5.1.0.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.grantjenks.com/docs/diskcache/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c985b6a9269e57a1073d5f142d68eb68"
  
--SRC_URI[md5sum] = "9e26fec7d5b64afab63d6d82faacc208"
--SRC_URI[sha256sum] = "86b3679de400b8068dfadf871ce063a7040ed5052d30cc323aed69430888b422"
-+SRC_URI[md5sum] = "8745f3b576e5247310276f0ef5c32f65"
-+SRC_URI[sha256sum] = "1285c428a5faf4c6aaac1e2ccb876383b4c7e087ef34ff7edb9f549a78cdebf1"
+-SRC_URI[md5sum] = "86fb97b0ff87cc5f1b31654ee0d341a1"
+-SRC_URI[sha256sum] = "5f4bc2018d653a1d7bbdcdecce45ea12061bf8d3b5f0323b7a5402054a285c52"
++SRC_URI[md5sum] = "9ce87661369752c9ead63243b07eaf19"
++SRC_URI[sha256sum] = "bc7928df986dbc8a8d6e34c33b0da89d668cfa65e7fcc91298a6959a35076993"
  
- inherit pypi setuptools3
+ PYPI_PACKAGE = "diskcache"
  
 -- 
 2.17.1
