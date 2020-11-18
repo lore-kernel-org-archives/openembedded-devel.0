@@ -1,80 +1,84 @@
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web10.25628.1605712099390368170
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.web09.25330.1605712100340823404
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Nov 2020 07:08:19 -0800
+ Wed, 18 Nov 2020 07:08:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=UTg3Uii7;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id 62so1362478pgg.12
-        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2020 07:08:19 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=TnoPUMmq;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id ei22so1250129pjb.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2020 07:08:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=TAU6k5rDufblOrRDhH1+GZp/SXdM84wTftDIT1oa7Dc=;
-        b=UTg3Uii7TBi17fW6BrHT4wt1uCKh1hhlg3TozDA9ty+Cqvo+VNH44P7925Au4Ke3Fu
-         NmvIsyN7J/vcDL5LI2ZAFFIwBec4tsx6CcDyGloePGXb8xCvcjePFVWjOUdC+ERrPbbf
-         Fkx/Dbr562y0d53iIvmQ2BRZglu1/HtpRe3Oh3DsRHrI3td0H0CvA8/2DUi4s+IB/D8S
-         D9ec1ZBTgMX8TPilsCb3jnJFre54gfFeWYUP7RPtYRT0FUH23ghkeTNE/GiU8C6Vo1xp
-         Qj81WJuLBqvCwCogv94ENjlbWVgNWkkJzj+EeKZpUp/iPmeIlIQX29PJ7OQq46vIcJc8
-         0AIA==
+        bh=NlTcFensCEU2+8GwwxOvOd5Ca1ReK3MZeKjSyALAdJE=;
+        b=TnoPUMmqlZndDfJNCLrKHuN1lFKezZ7i8Sx/4o9l3KXHHmYqh5IJ55B+YBK+dywBm7
+         dp28vZ+maCdwNxw1GAGwd/E05OdGEVznVe03FZfsI7al4+kasitIQn6D3KkL0WsE1z/9
+         FkFbk7K35a2UCKqOVFWI966o/7PY3chE5/6P3k5tqLSKCtLjEOA2yNhREFCfk7d+Cfrj
+         sHvDvGDp3Uv7kiF4qR0jRyaRyPmDQJpAMq3lDk2MRuuE788m/gDaMT0beV7cJZMadaYe
+         2QhL7+1j1/xGzcjLiMqEBTWAfEBpIHbodRSctGFVkZ+k1K+gxIkhDE2t4J4tK96tF3yz
+         +yXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=TAU6k5rDufblOrRDhH1+GZp/SXdM84wTftDIT1oa7Dc=;
-        b=Cdc7eMvl3JD+jGjH6vGiMFe67D77b0hSOtZHxQFfvgHPU7q288FGYTl+CFazm1MSP+
-         EU64RWby68B8WFPhnNnmJqBAvgomO8dTfLkap4EhumuO63ui46WGBt7vseYCSk+nIzVT
-         +8WWl/VGUJcL6xx8ibQnZwlWU0gKgdarsTBf/nthuna6pjfrkRyODdi48n8T2FQJfww4
-         1PnInqZ7YM8KbAoiiK+GQBItm9A/z9KRDYWR39kRA5SIOOLGPGz7aRDEvA1nZasH5ADU
-         mjzOoGxXP2IjfsEKXdEmJEfBd36xBlaWnaIIZFd++nzWOTjle4DeOjyk9YbIM0OOtIWf
-         Tc+w==
-X-Gm-Message-State: AOAM533Edjyq8LGqIZHR8fn90e/8Zzl48qL1xqKqrcbDNvrm6sOiuyLV
-	/7XpH/my7hqWJa/Lik8ximp7tBNWEQ4=
-X-Google-Smtp-Source: ABdhPJwKc6VZ0mTVv/ZpP1M666AB6xIfLoLYdL82MZJt3aTQJIJhjqhD47lCQF1gvJSZSXcAWYmfpg==
-X-Received: by 2002:aa7:854d:0:b029:197:9168:80fb with SMTP id y13-20020aa7854d0000b0290197916880fbmr1892365pfn.38.1605712098670;
-        Wed, 18 Nov 2020 07:08:18 -0800 (PST)
+        bh=NlTcFensCEU2+8GwwxOvOd5Ca1ReK3MZeKjSyALAdJE=;
+        b=qvp5zvGqKT9hIYagZmlGTlShM6/7Zb8bbmhgSZ2+F/ALTBuxXGWX7N7suoluE4UAuM
+         tCAFFiJQRCx71JXOFZP30i7wvTE/JrhG9RBlAG9+VXTSmYYtghLFUBbz4VPgDnOhCvva
+         QlATTculSqnC5jBiMLDWlbsavXxyZ7c7rcjdvcSOnAzvIvU11kxPuu5cl8g7/nG4cfxV
+         5B0JWR10Sbp4oTQ1tF2xER+JdqY9FkcgoGNbFEv/wmOgAsLnZMQnl+Om87e1/9qC1iBy
+         WfJyFXax+Iq7GI6rllU6PlJ6kWffkiFvGYdNLJo7JuGWuW2e6cayJQRHubeqA8UwlhN2
+         eYmg==
+X-Gm-Message-State: AOAM530vapfNBp2yu2VFksrYxCyG/XAXGdw41GLNP0FfOzugAwHwpfDx
+	CLFivWdkI3ZGmkX9cdANUckZVERG1Ec=
+X-Google-Smtp-Source: ABdhPJzMJungokLknoeDCgmuzHpmXUggyB7seJaYsGJm2PPmDuLrCau6D5LwJIpaM+mgZmPz3P5l4Q==
+X-Received: by 2002:a17:90a:7e0f:: with SMTP id i15mr362647pjl.93.1605712099785;
+        Wed, 18 Nov 2020 07:08:19 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:98b0:7a07:4094:f249])
-        by smtp.gmail.com with ESMTPSA id g1sm2823005pjt.40.2020.11.18.07.08.17
+        by smtp.gmail.com with ESMTPSA id g1sm2823005pjt.40.2020.11.18.07.08.18
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Nov 2020 07:08:17 -0800 (PST)
+        Wed, 18 Nov 2020 07:08:19 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 15/17] Add missing dependencies for rsnapshot.
-Date: Wed, 18 Nov 2020 07:07:55 -0800
-Message-Id: <e944a811d39040e9fa453b08fc572aafe1e24ccb.1605711982.git.akuster808@gmail.com>
+Subject: [dunfell 16/17] remmina: use git fetcher
+Date: Wed, 18 Nov 2020 07:07:56 -0800
+Message-Id: <b69a8990671e60908f9079b0751290fd16fb7776.1605711982.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1605711982.git.akuster808@gmail.com>
 References: <cover.1605711982.git.akuster808@gmail.com>
 
-From: Gianluca Pacchiella <gp@ktln2.org>
+From: Martin Jansa <martin.jansa@gmail.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit dfd5685ca7fc5688a8b808e6784d1ab22ec12b47)
+* fixes QA recently backported to dunfell:
+  WARNING: remmina-1.3.6-r0 do_package_qa: QA Issue: remmina: SRC_URI uses unstable GitHub/GitLab archives, convert recipe to use git protocol [src-uri-bad]
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-support/remmina/remmina_1.3.6.bb | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-index dcadede0ed2..33f5dccca21 100644
---- a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-+++ b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-@@ -13,11 +13,13 @@ RDEPENDS_${PN} = "rsync \
-                   perl-module-getopt-std \
-                   perl-module-file-path \
-                   perl-module-file-stat \
-+                  perl-module-file-spec \
-                   perl-module-posix \
-                   perl-module-fcntl \
-                   perl-module-io-file \
-                   perl-module-constant \
-                   perl-module-overloading \
-+                  perl-module-ipc-open3 \
-                  "
+diff --git a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+index 5b663489f8e..1c2f270e328 100644
+--- a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
++++ b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+@@ -9,12 +9,11 @@ DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi-ui libsodium li
+ DEPENDS_append_libc-musl = " libexecinfo"
+ LDFLAGS_append_libc-musl = " -lexecinfo"
  
- SRCREV = "a9e29850fc33c503c289e245c7bad350eed746d9"
+-SRC_URI = "https://gitlab.com/Remmina/Remmina/-/archive/v${PV}/Remmina-v${PV}.tar.bz2 \
++SRCREV = "cc391370d8b4c07597617e0a771a9732f0802411"
++SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https \
+ "
+-SRC_URI[md5sum] = "6da599c3a5cab2df37a70f8fba2f5438"
+-SRC_URI[sha256sum] = "fbed745438bb0c21467b60cbd67c8148a9289b5ebc7482d06db443bea556af1a"
+ 
+-S = "${WORKDIR}/Remmina-v${PV}"
++S = "${WORKDIR}/git"
+ 
+ inherit cmake features_check mime-xdg
+ REQUIRED_DISTRO_FEATURES = "x11"
 -- 
 2.17.1
 
