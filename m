@@ -1,97 +1,80 @@
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web08.25471.1605712085521002300
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+ by mx.groups.io with SMTP id smtpd.web12.25416.1605712086301917028
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Nov 2020 07:08:05 -0800
+ Wed, 18 Nov 2020 07:08:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=d1TeyGe+;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id gv24so1187819pjb.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2020 07:08:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=tQ7jYckr;
+ spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f179.google.com with SMTP id t37so1299676pga.7
+        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Nov 2020 07:08:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=RrMiz/hVp4OSQZcs1+llyAW09lOC9+vKZzraolJTIJI=;
-        b=d1TeyGe+y4M0UG/xHfizTJfTlxL/JZY1Z8xp7I4hb1Ho5waUHXuW9wD17blDRrkhrj
-         srMCbhOK6KO7WuUPRFhR01eKyOWFhj3HLbf96EJy5qKZTQUwfHkdFTUddy4xS8h+DlUR
-         8MZo21hDyj7lCBq+Xb9t1uQh0vg7aaReejlvcjh2qlfsLVS8u1GwRlOTi/SYDt/leT4W
-         Ohr+DtGNzznN729NJtrOU7DSk+0XwmuJeaTewGZw6wInMqaX0BBHD3S9Z3rm6uSByTbI
-         Ws0TOpSqK0bg8M7pWtAxQlVmjjVIiOD+/7V38v6a4eMMOlbGfKUqK0i+vma+5H4Fecm9
-         MPNw==
+        h=from:to:subject:date:message-id:in-reply-to:references;
+        bh=zT6LhmRxHR4bkwe1mTbbdRhX9BA8CzZ+QwuBXzh0pEs=;
+        b=tQ7jYckrQzKO3DNrAkUEAHJ7gASfwhBonOqxVtBnAqcCc//mEH8breJPG8edW1FLzV
+         d6Phu5v/zckZX4k6b7YdvjKc+F0yf/twT5BgNQbzoL2/2o4he/LYVCHHVTwJsxyWiJXQ
+         2OL9RS4wmHbkT+QtgftJo3sp9URywNMLhkS7ws22TlfGEQhch8PHcsiXRwEb8Xq/F70F
+         3IuQB/LNSWnBzKK83nRVcaCnRu4QudOkCKm1v+NOI5zUWwqSLvueoIXnAV9DY48227rf
+         gRlPq7QrqaNruP1XTOTbbjg5OPH98MeQqrgc8IPaHti0tX9X9So8T2v1VRmAzJq/b7oi
+         MGXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=RrMiz/hVp4OSQZcs1+llyAW09lOC9+vKZzraolJTIJI=;
-        b=NiG72waLSn2ICyD1lGUu2TFzVDtEFkXrd63vjAxTrJtnK7IkORxmbf5cqnK1E0dsPK
-         7ABkFnorzBY8RUCfVg10fswQYe6xSNBdrX9Di2k2HtpmuIObU6SX6o3dKK5wjYahPmiB
-         N7Dn4MXOy6/zDXgdnHvAWayNjuyCNayRkF1qEqGa3W5h6ix5GXja6Ye1a1p/LpzQKon4
-         5JIPab/tADts5Wnv+WDX5/+XXxBkKv80FbTvkHoVBNP3MFyeG3FEqdSGBZZQ23eJeAPS
-         WeunenghVi9xDUQPcuLwUG413gPUU9VtiIa+wmWKGKxLiMYy96OvXWLEKG/v2q079LGF
-         nXqg==
-X-Gm-Message-State: AOAM5304xaeIJPNsKMCuHAOAP/pDAN2bFYbuGjDsRLfKIeDz2SPSnU3d
-	GEt74Cv5HJ4MOYHdNt9f8r3hOh5wsms=
-X-Google-Smtp-Source: ABdhPJyN77tIpCTG/B+eotZXN5Alh6o3PzcG0jJATr1Mcok2TKHsWpULlHZnHZFLjrvmQdiUeD1vzA==
-X-Received: by 2002:a17:90a:f317:: with SMTP id ca23mr355431pjb.141.1605712084700;
-        Wed, 18 Nov 2020 07:08:04 -0800 (PST)
+         :references;
+        bh=zT6LhmRxHR4bkwe1mTbbdRhX9BA8CzZ+QwuBXzh0pEs=;
+        b=p0krQB6USrJrbWiHvEceopCdUeupzvVrD/lLQCOu7DarYKhk001delyxKfHP0tN98X
+         yYdl1w0ZBkJdcViPXgs8oihEidxhlmuESf6Hw8ietjV9V2QZyWEQzwPCf+MYjOApCsog
+         Ma+v+tYS8WgdIghX5llz8fodu5IdbkRDVyRqzu4C0p3AfIQrEeXq6HQyVOL8+ErpmIIV
+         xNYpxezroa1j7025hEZE4nSE/E635ffmWdDkBWk3MzSN3w1i4w930fhrGfaPwbgtFjm0
+         m9lGrc4PKwi/u0l46mXdvdpYBj/ztW5RQ0s1yzMvj6rGfltFgtsAGMHJkNY4p0hHRPWz
+         aaow==
+X-Gm-Message-State: AOAM530MpsveW2uwkxDtHGGOv7Yv8QyBj6F8A4QptzIZ2RcfsJjkKMCp
+	8kI6xXimeS1XCfDWXxePoDqjulJArU8=
+X-Google-Smtp-Source: ABdhPJxNaFqu9AAkobe/0g/HejIda4Rjzi0T+bIwD3rZNUavsgZHjS444cFKGHTXbMzUmqxnzOeQdA==
+X-Received: by 2002:aa7:8801:0:b029:18b:5878:30d6 with SMTP id c1-20020aa788010000b029018b587830d6mr4957844pfo.77.1605712085568;
+        Wed, 18 Nov 2020 07:08:05 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:98b0:7a07:4094:f249])
         by smtp.gmail.com with ESMTPSA id g1sm2823005pjt.40.2020.11.18.07.08.04
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Nov 2020 07:08:04 -0800 (PST)
+        Wed, 18 Nov 2020 07:08:05 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 01/17] usb-modeswitch, usb-modeswitch-data: fix usrmerge
-Date: Wed, 18 Nov 2020 07:07:41 -0800
-Message-Id: <8ce3a09b1341eb795c7c2846c7e19bf8d78277b5.1605711982.git.akuster808@gmail.com>
+Subject: [dunfell 02/17] glog : improve reproducibility
+Date: Wed, 18 Nov 2020 07:07:42 -0800
+Message-Id: <a51c0d9b3a0d7dc5986ce46e7de65ef26cd06373.1605711982.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1605711982.git.akuster808@gmail.com>
 References: <cover.1605711982.git.akuster808@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-From: Ulrich Ölmann <u.oelmann@pengutronix.de>
+From: Lee Chee Yang <chee.yang.lee@intel.com>
 
-Signed-off-by: Ulrich Ölmann <u.oelmann@pengutronix.de>
+remove WORKDIR info from config file to improve reproducibility
+
+Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 50a487fc0b0123b154db73f79bbb18b23eb234f0)
+(cherry picked from commit be95549f2ea5c59c6da6ace852b918cdba3c7822)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../usb-modeswitch/usb-modeswitch-data_20191128.bb            | 4 ++--
- .../recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb    | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/recipes-support/glog/glog_0.3.5.bb | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20191128.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20191128.bb
-index 938c0f9c26b..ca970e59bb3 100644
---- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20191128.bb
-+++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20191128.bb
-@@ -11,9 +11,9 @@ SRC_URI[md5sum] = "e8fce7eb949cbe16c61fb71bade4cc17"
- SRC_URI[sha256sum] = "3f039b60791c21c7cb15c7986cac89650f076dc274798fa242231b910785eaf9"
+diff --git a/meta-oe/recipes-support/glog/glog_0.3.5.bb b/meta-oe/recipes-support/glog/glog_0.3.5.bb
+index 9a8332836b5..56bf5155446 100644
+--- a/meta-oe/recipes-support/glog/glog_0.3.5.bb
++++ b/meta-oe/recipes-support/glog/glog_0.3.5.bb
+@@ -25,3 +25,10 @@ PACKAGECONFIG_remove_riscv32 = "unwind"
  
- do_install() {
--    oe_runmake install DESTDIR=${D}
-+    oe_runmake install DESTDIR=${D} RULESDIR=${D}/${nonarch_base_libdir}/udev/rules.d
- }
- 
- RDEPENDS_${PN} = "usb-modeswitch (>= 2.4.0)"
--FILES_${PN} += "${base_libdir}/udev/rules.d/ \
-+FILES_${PN} += "${nonarch_base_libdir}/udev/rules.d/ \
-                 ${datadir}/usb_modeswitch"
-diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
-index baad340908a..6a5287af495 100644
---- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
-+++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
-@@ -19,7 +19,7 @@ RDEPENDS_${PN} = "tcl"
- RRECOMMENDS_${PN} = "usb-modeswitch-data"
- 
- do_install() {
--    oe_runmake DESTDIR=${D} install
-+    oe_runmake DESTDIR=${D} UDEVDIR=${D}/${nonarch_base_libdir}/udev install
-     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-         install -d ${D}/${systemd_unitdir}/system
-         install -m 644 ${S}/usb_modeswitch@.service ${D}/${systemd_unitdir}/system
+ PACKAGECONFIG[unwind] = "-DWITH_UNWIND=ON,-DWITH_UNWIND=OFF,libunwind,libunwind"
+ PACKAGECONFIG[shared] = "-DBUILD_SHARED_LIBS=ON,-DBUILD_SHARED_LIBS=OFF,,"
++
++do_configure_append() {
++    # remove WORKDIR info to improve reproducibility
++    if [ -f  "${B}/config.h" ] ; then
++        sed -i 's/'$(echo ${WORKDIR} | sed 's_/_\\/_g')'/../g' ${B}/config.h
++    fi
++}
 -- 
 2.17.1
 
