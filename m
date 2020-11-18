@@ -1,17 +1,17 @@
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.67])
- by mx.groups.io with SMTP id smtpd.web10.26409.1605714768300195046
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.60])
+ by mx.groups.io with SMTP id smtpd.web09.26158.1605714789375770589
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Nov 2020 07:52:48 -0800
+ Wed, 18 Nov 2020 07:53:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=aTdmZfmW;
- spf=pass (domain: windriver.com, ip: 40.107.236.67, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=hVJat4Yn;
+ spf=pass (domain: windriver.com, ip: 40.107.94.60, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WrJfjYMeavWFf/5cft3pnq/GbYDQCTq7hRBnUa38UCfn36ZApsFf1RkyE4BWKC44DR2S/gxLddIppdyerSpl6qGZbuolyNfFuwXzUtOZ7rnoZRvaR0jFz9KYsW+MW6xf4POPWdyT8ALd06GlcosGhJpG/pI6SMri6PHRGB4WI3erb1NxdxdIjmzcHZ3BMTr5sYf4LtupZGUMudKvmE60pEkAGH/yQPIUZn/p76NQYE5LyQmHKvQqM1/GJ53eeqbkw6CEUOylnK57JReXCS0jp5lvxVKT+NdvfNdqFBbPMYUUBjdlMwe9a4NlEipHS4ZFxGpByS5AlNtXNI8nH7FvLA==
+ b=GqtSoGodnFgYFTRwky4lT81qMW6hhn59ZwZXNYWhPGEfj3ko9QsXwEX698Ar31DmESKBHzu/cVbtxogCfrkAXUEPjirkKFeNBIasAdfrLB36GCC/8R1SAFKnZXD/FiWcf5Abr4dleSvN2tb43nYU/TZH1dZA9PpSNdFZ6zge/t1P651IT8T2MJ74m7diiM+Zuu3U2colWLCX/tJiKiCevCNeqpwteYnRQ8xwdxwzp97ofKmeBgo67q++v6EOIqFbOWq824y4GU+ne3qjQfK1EcFRRBVOi9jSZrNYYjlD9YOZwp1Dl1YKPQ5RcQM8hhI8HVaJZtm0MVOHmPcaolx8Lw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xUYc1YIo5pI4iUzbWdF4WPYfgnLE3iIy3C+d3kJp2Ds=;
- b=Xcc3T0IX3alBVa58/u342UmDapshzDKyPcg+rzuozkTQMRVBF3lSrXGoIuMnLUWf5uT6gnswCrTGqBQ+GMG4tORDj3UEmkLM+lrTmQGJxDN2AJYwpcGIRxgV7u3D5gwpDdFegEPhrnmuZTNFSr4z3/UQSJjDCNJ7vQd9O8EaEn4ye+YQpnJ9JqgzSJ3gnFKhuDfmzatVIes1nsFIO9GvwyImYRvq6UqQoLSNrwVU0pH7uamS1Aruoph9VhjRYk+PNbsW3n9c21U8sA4mdMqzRAQH/VXnjNe2UurD6uPCrnRuWfRJd4t6nouXBiYoydvYmIwsPNucICx9BLLg4fkzTw==
+ bh=2HSaRq6yM0hJJrvhEueJcq6poh28OmViR4gTm2B5Lcc=;
+ b=ATDSl8bG0X3dnlcQBC6GpcPjHrRzJ0fgQRX9IPreN1bo4iHwEsGS+A4OBcSfUOGuyuXI8xUnljWqwR9cYxY98sk49GfLm9pfi3NaPb91t1j0dMGSbdhEdXs/C/HyAYoYN2fGtRHz2nh0BJY80TpPn73C7yUpYfiHy0Ey57Cuu0rAMz3Efj/HFt68U03NI8HGyKxUezPjIpw7MB0FKVRjCrbiF2U0auJPuYWC6aBnNcq9CvtnCWbGDCm0eI/22s0y/fCk72pA4VGT1j+5D/B7BKuXLd3JSLq0aFpZwvUpuw5HfU4rT3Gtd407uwWKggLRDRT+jnpQhzUp1iEa8Tmr5w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xUYc1YIo5pI4iUzbWdF4WPYfgnLE3iIy3C+d3kJp2Ds=;
- b=aTdmZfmWmlMCnxwE6uMT3hgam5Nv6hhuOdSJJZenrHkczRbTFG/qwGKxokKecRbcT8CZ813wLujmbbOOVXwiZe8AsJele7lfEwMfc4mQ9oN3OzavezjGruhhI4HsExLdulI+0sDCOsgeBr9o1C5J4wbO/j4DtvG/cruzawsltL0=
+ bh=2HSaRq6yM0hJJrvhEueJcq6poh28OmViR4gTm2B5Lcc=;
+ b=hVJat4YnrUPtimRYpEe2gxD3NsYV9GyPgbDN7fMoXttqJLp8Bwowyli7Tt+3S0sR1pStnO3PLZR2yNuMhxLZWDwvT/UJesGIvM/4729o1bXlOvZErUVLyVhS0eBfr77scRu6IKgMcBRyiMH/JGlXqf2V9LMXJq6jvV4Ic+7AjRk=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,116 +28,92 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BY5PR11MB3974.namprd11.prod.outlook.com (2603:10b6:a03:183::29) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3564.28; Wed, 18 Nov
- 2020 15:52:45 +0000
+ 2020 15:53:08 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::7875:99b3:15ae:5df2]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::7875:99b3:15ae:5df2%7]) with mapi id 15.20.3541.029; Wed, 18 Nov 2020
- 15:52:45 +0000
-Subject: Re: [oe] [meta-python][PATCH 5/5] python3-attrs: 20.2.0 -> 20.3.0
-To: Leon Anavi <leon.anavi@konsulko.com>,
- openembedded-devel@lists.openembedded.org
-References: <20201112105618.23773-1-leon.anavi@konsulko.com>
- <20201112105618.23773-5-leon.anavi@konsulko.com>
+ 15:53:08 +0000
+Subject: Re: [oe] [meta-python][PATCH] python-grpcio-tools: Add missing space for append
+To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+References: <20201114161047.1906014-1-raj.khem@gmail.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <420c7358-feb9-268b-f314-09c3288edba8@windriver.com>
-Date: Wed, 18 Nov 2020 10:52:43 -0500
+Message-ID: <c72627ca-fa39-5977-78a9-1eae94af8e6d@windriver.com>
+Date: Wed, 18 Nov 2020 10:53:05 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
-In-Reply-To: <20201112105618.23773-5-leon.anavi@konsulko.com>
+In-Reply-To: <20201114161047.1906014-1-raj.khem@gmail.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: YT1PR01CA0050.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2e::19) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: YT1PR01CA0054.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2e::23) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0050.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::19) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.20 via Frontend Transport; Wed, 18 Nov 2020 15:52:45 +0000
+Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0054.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::23) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.20 via Frontend Transport; Wed, 18 Nov 2020 15:53:07 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a17a871d-880f-4b15-48d2-08d88bd9fdb2
+X-MS-Office365-Filtering-Correlation-Id: 059b5a89-e73c-4311-2141-08d88bda0b2e
 X-MS-TrafficTypeDiagnostic: BY5PR11MB3974:
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB397495B954601ECAF68382A19FE10@BY5PR11MB3974.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1122;
+	<BY5PR11MB397468CBFE69603F87F7B7459FE10@BY5PR11MB3974.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:466;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	lk8XRa4C6+8FdfvNQPIJBL654njq8O2FgNu48gRJlgWEwHaXVfc7MpBs/EokZeKa4DjeI6wrWbEl/GgKU04nUFuafmRmrm/avu8ZFPQyxp9O5rzTw0jzSrQeEFELjb28v+I3HBmu90oh308koGEHVT1yN1fHj4worGc3CS/xbpWJSBTPNti8VNkOE1xD2T6izxZ0DVWFnUoqKAw5LW+xaXi1bb70LPeZh308biyvFGvpaaW3acFzHs4jLimaEoalKv/hRnNVEQcQImMlYUQletBvJ/GLVf0dci8aeesC1hEyVVlPnXJWpnygHPvDFFEyHNX2yyzQJh+VuXKz/8FSdiwCfod8twHJzmlSCWfTdu/SWyDI9gMey+H/REsXxVyjk/LwTBzz8jX4w9YNlPtZO1p3hawQs89G8/3uQ1MY77ZpXO+sjjA2NyU0IF09CHCqWuFmU0PUCSOOYW9ABCuwEQ==
+	7F+prPe6z5CtUP0rsW3Cm5MS29UuJAYhmmeQePzB+U9RclhYAwJJzDeq7tzq4j3UdF07jiflRWKlGdnaOzK6hHaknjdhhWPK00iGKW+ZM69vddKFphW5MyXspdYIdl1D7d9EoCxC3fcxXR9S8dkfwDcgS1AXH4QrDNf+vQB2+riANwAYkaQRcUMVY8IRWjmoKqY+kao3j4LW4zCcTaXhpFjW9AO7tIVOfe1Fee8iiN3eld2spA+vMv2b2lqbhk4V0sXtsr10gcFuWwYcOwK3J0CzPMv7Wzq4NUW8eqQabnmjh41yJevyP4aTdY1fes99JrcZh9a7IhhEC3p4NSuf970/BTRBAUVQWqSfj/ZsGKh+8U6xQmxzlnbuaXCvi1v7s42D6kAvoYrpGwAyJVvPOR9WtbUI9KRN6KKG/dsX34rCUQ7bSnCVDjwScxKP1aefgO0TUVDhoJWohBgOHgiUIw==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(366004)(396003)(39850400004)(376002)(346002)(36756003)(66556008)(8936002)(478600001)(52116002)(33964004)(66946007)(8676002)(166002)(31696002)(186003)(86362001)(316002)(53546011)(83380400001)(16526019)(66476007)(26005)(16576012)(4001150100001)(44832011)(2906002)(6486002)(966005)(2616005)(5660300002)(31686004)(956004)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	bcPCwF1csAVNSNxU8GEmj2riqYogcMqGhyIHBZ/p+dUNA1bLcdQWzHDv/1lH5XJf94HF9dycSAhVytzVrytL2LeulKlVuR/D/iMhqfr9uvAi/x1vGFGrkSrfv5xmi2dYmVsxf+NFroBB0hmMNYhTk2MEOlBwbrIwJlJ4B4YplBvPU8KH/zW2deTsorAsyb241+qw/iiYlmSL/7F/2CYzUYLgEG1lV+KfrzLBT24hpX9tPHi2Su14dAboohkOUCKn1WSf0pytFWqnIQl3GazQYCQL1uD4oD4bUg6tUw2UR+hdV8QauP0h9GBW/Iis4/tSGGd7g26+LGtEw6OOhJsMWYsKko3IzGHJYp8EyXFVhMTzgzaGqDVngjFrKKgBOoobaJrQVEqAqH786gAP+mEOUXfPDnMf/CAa+P+m/bUNne63fhzBVY6CQTO/DOlvFaf7Icc3jiS7QfXLGT7dMwYThBZPjDuBJ5JGuQTz6QHSoEFjD6wEpkjVirXVxzAlvjR8LcPnLW251RpTR6OLPlqFozRWBbekrzaA3MlkmUUZjUVn5CcQvqtfAtNKgIbMWUhO79Q2knKszkiBldpMlG2nGXF2barsSOUhhpySAs0YI8rCDilTIeH8BmlEhKhRiy3byAK61CwVaAfcduelxwX3Ug==
+	9m6PpxBrOSUKXEleLhcEScryOPjChpTnK7vBNOmX9oHwY6xSx6vElNDQhj2sgEBCWmJyZbrgRU7togdbInmxKbJSxLTb968aONnUT7c7QzWzf+utwKPVmUGz87f5loORughWWKAht8f8tCADk+s+GEJEUMtYCEVCNAN4h5CYuoS3gmzoWOrCZCTzbEEl7QM/k8vfPdMVR6r5SUAabdpgur04Ju9ajThI2pY4LhDcrKyqQ/bwAfzM58X2X9iKERCrVMRS7NiWjZV226PIMO/pPE7fh2TWtoEjAP3YMJlnoHXwia8doaXglJQ5eZywZ2IsXx0qlLF8wyJ/jIRKxny0BVv/89xta/L8yeQyPvV8wBKa7PWUJtqRuH/Hc8PTDe5fcjzL2GeKw3pYMrmWudGtDrqcorjvBKuy5hwaBuCk2euXPdJjVCrtQ7oGYy7b+F3oFxgBucbYVRWgQbSY/7EmcfxVnJtHcNmyfqs6Hnf16cAt/MKs2UZwMkO4dmVTLKOIaiZ1EoylrW+jg0j+h9StKJwfUYAFrHoMKnQApjIyIJJbl2bobIQFODTeF35lOEXEV7T0ZryHiBKl/sVWgnexLqolr6jFFpsierB6nVlfXF5JH02Np/I/9hhF5IIdbHU4QB1CG8pAMVwIpAwfg3qPkg==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a17a871d-880f-4b15-48d2-08d88bd9fdb2
+X-MS-Exchange-CrossTenant-Network-Message-Id: 059b5a89-e73c-4311-2141-08d88bda0b2e
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2020 15:52:45.5447
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2020 15:53:08.2207
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Ex+GM1C2X/Jr4ANrNHf1YYKuNUNKm//TRV+iwRjxTcPfWQhQ+ajg0HevBunAl0pl1vrHNU3QROMO7PphHMGG1OKefR/OsfbZV1M0e9J2Ok0=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7TPZ3zIVYS3n2lmpUMuuw9bo8e08ZYrR91ZAWpXRFaZMIyidfTPKBq8bY52GJvv6ObhzyTKgZY3cWtmwcT+gqdR+E0c2SAt7ECUAXVrb/9Y=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB3974
 Content-Type: multipart/alternative;
- boundary="------------862551216525F32208146F4C"
+ boundary="------------16D23C5D011D285EB737F331"
 Content-Language: en-US
 
---------------862551216525F32208146F4C
+--------------16D23C5D011D285EB737F331
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 2020-11-12 5:56 a.m., Leon Anavi wrote:
+On 2020-11-14 11:10 a.m., Khem Raj wrote:
 > [Please note this e-mail is from an EXTERNAL e-mail address]
 >
-> Upgrade to release 20.3.0:
->
-> - attr.define(), attr.frozen(), attr.mutable(), and attr.field()
->    remain provisional.
-> - attr.s() now has a field_transformer hook that is called for all
->    Attributes and returns a (modified or updated) list of Attribute
->    instances. attr.asdict() has a value_serializer hook that can
->    change the way values are converted. Both hooks are meant to
->    help with data (de-)serialization workflows.
-> - kw_only=True now works on Python 2.
-> - raise from now works on frozen classes on PyPy.
-> - attr.asdict() and attr.astuple() now treat frozensets like sets
->    with regards to the retain_collection_types argument.
-> - The type stubs for attr.s() and attr.make_class() are not
->    missing the collect_by_mro argument anymore.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../{python3-attrs_20.2.0.bb => python3-attrs_20.3.0.bb}      | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-attrs_20.2.0.bb => python3-attrs_20.3.0.bb} (74%)
+>   meta-python/recipes-devtools/python/python-grpcio-tools.inc | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-attrs_20.2.0.bb b/meta-python/recipes-devtools/python/python3-attrs_20.3.0.bb
-> similarity index 74%
-> rename from meta-python/recipes-devtools/python/python3-attrs_20.2.0.bb
-> rename to meta-python/recipes-devtools/python/python3-attrs_20.3.0.bb
-> index c2a5b90515..55cfda7180 100644
-> --- a/meta-python/recipes-devtools/python/python3-attrs_20.2.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-attrs_20.3.0.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE = "http://www.attrs.org/"
->   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=d4ab25949a73fe7d4fdee93bcbdbf8ff"
+> diff --git a/meta-python/recipes-devtools/python/python-grpcio-tools.inc b/meta-python/recipes-devtools/python/python-grpcio-tools.inc
+> index 1a15c48de0..6675f904c1 100644
+> --- a/meta-python/recipes-devtools/python/python-grpcio-tools.inc
+> +++ b/meta-python/recipes-devtools/python/python-grpcio-tools.inc
+> @@ -2,7 +2,7 @@ DESCRIPTION = "Google gRPC tools"
+>   HOMEPAGE = "http://www.grpc.io/"
+>   SECTION = "devel/python"
 >
-> -SRC_URI[sha256sum] = "26b54ddbbb9ee1d34d5d3668dd37d6cf74990ab23c828c2888dccdceee395594"
-> -SRC_URI[md5sum] = "7be95e1b35e9385d71a0017a48217efc"
-> +SRC_URI[sha256sum] = "832aa3cde19744e49938b91fea06d69ecb9e649c93ba974535d08ad92164f700"
-> +SRC_URI[md5sum] = "4fe38f89297b2b446d83190fce189f29"
+> -DEPENDS_append = "${PYTHON_PN}-grpcio"
+> +DEPENDS_append = " ${PYTHON_PN}-grpcio"
+>   RDEPENDS_${PN} = "${PYTHON_PN}-grpcio"
 >
->   inherit pypi setuptools3
->
+>   LICENSE = "Apache-2.0"
 > --
-> 2.17.1
+> 2.29.2
 >
 >
 > 
 >
 
---------------862551216525F32208146F4C
+--------------16D23C5D011D285EB737F331
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -147,58 +123,36 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 2020-11-12 5:56 a.m., Leon Anavi
+    <div class="moz-cite-prefix">On 2020-11-14 11:10 a.m., Khem Raj
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20201112105618.23773-5-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20201114161047.1906014-1-raj.khem@gmail.com">
       <pre class="moz-quote-pre" wrap="">[Please note this e-mail is from an EXTERNAL e-mail address]
 
-Upgrade to release 20.3.0:
-
-- attr.define(), attr.frozen(), attr.mutable(), and attr.field()
-  remain provisional.
-- attr.s() now has a field_transformer hook that is called for all
-  Attributes and returns a (modified or updated) list of Attribute
-  instances. attr.asdict() has a value_serializer hook that can
-  change the way values are converted. Both hooks are meant to
-  help with data (de-)serialization workflows.
-- kw_only=True now works on Python 2.
-- raise from now works on frozen classes on PyPy.
-- attr.asdict() and attr.astuple() now treat frozensets like sets
-  with regards to the retain_collection_types argument.
-- The type stubs for attr.s() and attr.make_class() are not
-  missing the collect_by_mro argument anymore.
-
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20201112105618.23773-5-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20201114161047.1906014-1-raj.khem@gmail.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../{python3-attrs_20.2.0.bb =&gt; python3-attrs_20.3.0.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-attrs_20.2.0.bb =&gt; python3-attrs_20.3.0.bb} (74%)
+ meta-python/recipes-devtools/python/python-grpcio-tools.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-attrs_20.2.0.bb b/meta-python/recipes-devtools/python/python3-attrs_20.3.0.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-attrs_20.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-attrs_20.3.0.bb
-index c2a5b90515..55cfda7180 100644
---- a/meta-python/recipes-devtools/python/python3-attrs_20.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-attrs_20.3.0.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://www.attrs.org/">&quot;http://www.attrs.org/&quot;</a>
- LICENSE = &quot;MIT&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=d4ab25949a73fe7d4fdee93bcbdbf8ff">&quot;file://LICENSE;md5=d4ab25949a73fe7d4fdee93bcbdbf8ff&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python-grpcio-tools.inc b/meta-python/recipes-devtools/python/python-grpcio-tools.inc
+index 1a15c48de0..6675f904c1 100644
+--- a/meta-python/recipes-devtools/python/python-grpcio-tools.inc
++++ b/meta-python/recipes-devtools/python/python-grpcio-tools.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = &quot;Google gRPC tools&quot;
+ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://www.grpc.io/">&quot;http://www.grpc.io/&quot;</a>
+ SECTION = &quot;devel/python&quot;
 
--SRC_URI[sha256sum] = &quot;26b54ddbbb9ee1d34d5d3668dd37d6cf74990ab23c828c2888dccdceee395594&quot;
--SRC_URI[md5sum] = &quot;7be95e1b35e9385d71a0017a48217efc&quot;
-+SRC_URI[sha256sum] = &quot;832aa3cde19744e49938b91fea06d69ecb9e649c93ba974535d08ad92164f700&quot;
-+SRC_URI[md5sum] = &quot;4fe38f89297b2b446d83190fce189f29&quot;
+-DEPENDS_append = &quot;${PYTHON_PN}-grpcio&quot;
++DEPENDS_append = &quot; ${PYTHON_PN}-grpcio&quot;
+ RDEPENDS_${PN} = &quot;${PYTHON_PN}-grpcio&quot;
 
- inherit pypi setuptools3
-
+ LICENSE = &quot;Apache-2.0&quot;
 --
-2.17.1
+2.29.2
 
 </pre>
       <br>
@@ -211,4 +165,4 @@ index c2a5b90515..55cfda7180 100644
   </body>
 </html>
 
---------------862551216525F32208146F4C--
+--------------16D23C5D011D285EB737F331--
