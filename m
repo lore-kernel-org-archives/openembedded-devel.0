@@ -1,3706 +1,719 @@
-Received: from mail-ej1-f67.google.com (mail-ej1-f67.google.com [209.85.218.67])
- by mx.groups.io with SMTP id smtpd.web08.7351.1605780908421325093
+Received: from mail.teq.ch (mail.teq.ch [195.65.128.4])
+ by mx.groups.io with SMTP id smtpd.web12.9095.1605792833591173013
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Nov 2020 02:15:09 -0800
+ Thu, 19 Nov 2020 05:33:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=rLPBfrwN;
- spf=pass (domain: gmail.com, ip: 209.85.218.67, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f67.google.com with SMTP id f23so7135586ejk.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Nov 2020 02:15:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=5+2nR1J/Qk4BYd1E5eJMmECwfed6RnganropQXjuZ3M=;
-        b=rLPBfrwN3hvbyRAA6HoPa7ODNrPuv/esX84KAqzCqwxgMwiteyHfIx3sT4YAmSHYZA
-         2bSGK4UCcX/257Hf4BLtKiWVZgOJbqTXz4ShaoeLr1LOKib1fJBFCkSOFxreLPPp/hlC
-         naoUBqZTPgbbch2Af3WlGO+wT9kcY3k5nUwRr/jjmxktCm80pFE6CLzBvKxt1psftsCo
-         zTYBBGZ9YlGPNgwQKkiI3zoW/xQfyl1NUd/gtlef30fZOhxWYnm8ex5ZlZSLFov4GNlc
-         vOoQ0eLzyJIP57bi9ITwwB8l3NChhSKfQon1oXPaWkxCBXB0NZ6J3wKt1W3VZNo04QIb
-         tGIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=5+2nR1J/Qk4BYd1E5eJMmECwfed6RnganropQXjuZ3M=;
-        b=PdgbjOi7tCTJCqeYsi2MYIAkcGKM0/00RGRhxSTFSjqLDAgxK7j8yvBg4HvjDS3Q/v
-         /JSIW+mDFq/9WxRXQ68zykCZCDcQdRvYqLl0k33t69qtSI9e8oYduWZfIjJbgbh6vjK9
-         kH1pZJidUAhJnuLk+vQPlcBl4WvjbvGRS0tr9yy4bz+fEnl0FI3oocKI7yKYRmLyx4FB
-         GV+84v6lGUTu+fcu08cZakzTFaXMXN1wkpRAFUqIx+WTctXbx2PbbiEpoEbZbHL8Hy3g
-         +eux6MK6G1j3mC7JcxuRc2bx2yLGh1e1MMRgrItgUZFsZP/m034rV5MDPj7QDnLBvj3Z
-         ziAg==
-X-Gm-Message-State: AOAM533RQf8yOtvfBhoS6wPBvFJYn7l8OrXwjY0nNdLIdMSI6RJRJ0tz
-	rXsqFXV0PuvAvB8c8KY8uzPUuk31G9h1RdRtMDM=
-X-Google-Smtp-Source: ABdhPJyilib386JPSe3ZWrdEK2/ukq2kS7qiuO33pxI2bxbk4RECB9Dx1f3CsWX+yubBCMz+1Vi1ysB6rqiWae8uag4=
-X-Received: by 2002:a17:906:3c53:: with SMTP id i19mr9856311ejg.392.1605780906630;
- Thu, 19 Nov 2020 02:15:06 -0800 (PST)
+ dkim=missing; spf=pass (domain: teq.ch, ip: 195.65.128.4, mailfrom: e.boccati@teq.ch)
+X-Virus-Scanned: amavisd-new at teq.ch
+X-Sender: e.boccati
+Subject: [meta-java] [zeus] cacao ERROR 404
+References: <3ec4be3d-509d-8325-a2f9-76ab01d4c6da@teq.ch>
+To: openembedded-devel@lists.openembedded.org
+From: e.boccati@teq.ch
+X-Forwarded-Message-Id: <3ec4be3d-509d-8325-a2f9-76ab01d4c6da@teq.ch>
+Message-ID: <0f808cdf-c294-99f7-2f33-814f065fbf6d@teq.ch>
+Date: Thu, 19 Nov 2020 14:33:49 +0100
 MIME-Version: 1.0
-References: <20201117230404.880724-1-raj.khem@gmail.com> <20201117230404.880724-4-raj.khem@gmail.com>
-In-Reply-To: <20201117230404.880724-4-raj.khem@gmail.com>
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-Date: Thu, 19 Nov 2020 11:14:55 +0100
-Message-ID: <CA+chaQcja1Qh+Rfu9e3GZmU1A3ikvSJa81WsFHZRrW0Ohhtjjw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 4/5] thingsboard-gateway: Add recipe for v2.5.2
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	"hasan.men" <hasan.men@bosphorusiss.com>
-Content-Type: multipart/alternative; boundary="00000000000086e3f105b473003b"
+In-Reply-To: <3ec4be3d-509d-8325-a2f9-76ab01d4c6da@teq.ch>
+X-Antivirus: Avast (VPS 201119-0, 11/19/2020), Outbound message
+X-Antivirus-Status: Clean
+X-Groupsio-MsgNum: 88020
+Content-Type: multipart/alternative;
+ boundary="------------572993FFB21099E9E0DB837E"
+Content-Language: it
 
---00000000000086e3f105b473003b
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+--------------572993FFB21099E9E0DB837E
+Content-Type: text/plain; charset=iso-8859-15; format=flowed
+Content-Transfer-Encoding: 7bit
 
-python3-jsonpath-rw dependency was added to meta-python, but meta-oe
-doesn't depend on meta-python, so either python3-jsonpath-rw needs to be
-moved to meta-oe (if it doesn't depend on other stuff from meta-python) or
-thingsboard-gateway needs to be moved to meta-python.
+Hi,
 
-On Wed, Nov 18, 2020 at 12:04 AM Khem Raj <raj.khem@gmail.com> wrote:
+im trying to build jre using your meta-java pulling it from last commit 
+of zeus branch but cacao fetch fail:
 
-> From: "hasan.men" <hasan.men@bosphorusiss.com>
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../thingsboard-gateway/bacnet.json           |  58 ++++++
->  .../thingsboard-gateway/ble.json              |  53 ++++++
->  .../thingsboard-gateway/can.json              |  89 +++++++++
->  .../thingsboard-gateway/custom_serial.json    |  33 ++++
->  .../thingsboard-gateway/logs.conf             |  77 ++++++++
->  .../thingsboard-gateway/modbus.json           | 169 ++++++++++++++++++
->  .../thingsboard-gateway/modbus_serial.json    |  29 +++
->  .../thingsboard-gateway/mqtt.json             | 132 ++++++++++++++
->  .../thingsboard-gateway/odbc.json             |  54 ++++++
->  .../thingsboard-gateway/opcua.json            |  49 +++++
->  .../thingsboard-gateway/request.json          | 146 +++++++++++++++
->  .../thingsboard-gateway/rest.json             | 152 ++++++++++++++++
->  .../thingsboard-gateway/snmp.json             | 138 ++++++++++++++
->  .../thingsboard-gateway/tb_gateway.yaml       |  66 +++++++
->  .../thingsboard-gateway.service               |  13 ++
->  .../thingsboard-gateway_2.5.2.bb              |  68 +++++++
->  16 files changed, 1326 insertions(+)
->  create mode 100644
-> meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/bac=
-net.json
->  create mode 100755
-> meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/ble=
-.json
->  create mode 100644
-> meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/can=
-.json
->  create mode 100755
-> meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/cus=
-tom_serial.json
->  create mode 100755
-> meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/log=
-s.conf
->  create mode 100755
-> meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/mod=
-bus.json
->  create mode 100755
-> meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/mod=
-bus_serial.json
->  create mode 100755
-> meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/mqt=
-t.json
->  create mode 100644
-> meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/odb=
-c.json
->  create mode 100755
-> meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/opc=
-ua.json
->  create mode 100644
-> meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/req=
-uest.json
->  create mode 100644
-> meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/res=
-t.json
->  create mode 100644
-> meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/snm=
-p.json
->  create mode 100755
-> meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/tb_=
-gateway.yaml
->  create mode 100644
-> meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/thi=
-ngsboard-gateway.service
->  create mode 100644 meta-oe/recipes-connectivity/thingsboard-gateway/
-> thingsboard-gateway_2.5.2.bb
->
-> diff --git
-> a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/b=
-acnet.json
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/b=
-acnet.json
-> new file mode 100644
-> index 0000000000..e36a2165d1
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/b=
-acnet.json
-> @@ -0,0 +1,58 @@
-> +{
-> +    "general": {
-> +      "objectName": "TB_gateway",
-> +      "address": "192.168.188.181:1052",
-> +      "objectIdentifier": 599,
-> +      "maxApduLengthAccepted": 1024,
-> +      "segmentationSupported": "segmentedBoth",
-> +      "vendorIdentifier": 15
-> +    },
-> +    "devices": [
-> +      {
-> +        "deviceName": "BACnet Device ${objectName}",
-> +        "deviceType": "default",
-> +        "address": "192.168.188.181:10520",
-> +        "pollPeriod": 10000,
-> +        "attributes": [
-> +          {
-> +            "key": "temperature",
-> +            "type": "string",
-> +            "objectId": "analogOutput:1",
-> +            "propertyId": "presentValue"
-> +          }
-> +        ],
-> +        "timeseries": [
-> +          {
-> +            "key": "state",
-> +            "type": "bool",
-> +            "objectId": "binaryValue:1",
-> +            "propertyId": "presentValue"
-> +          }
-> +        ],
-> +        "attributeUpdates": [
-> +          {
-> +            "key": "brightness",
-> +            "requestType": "writeProperty",
-> +            "objectId": "analogOutput:1",
-> +            "propertyId": "presentValue"
-> +          }
-> +        ],
-> +        "serverSideRpc": [
-> +          {
-> +            "method": "set_state",
-> +            "requestType": "writeProperty",
-> +            "requestTimeout": 10000,
-> +            "objectId": "binaryOutput:1",
-> +            "propertyId": "presentValue"
-> +          },
-> +          {
-> +            "method": "get_state",
-> +            "requestType": "readProperty",
-> +            "requestTimeout": 10000,
-> +            "objectId": "binaryOutput:1",
-> +            "propertyId": "presentValue"
-> +          }
-> +        ]
-> +      }
-> +    ]
-> +  }
-> \ No newline at end of file
-> diff --git
-> a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/b=
-le.json
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/b=
-le.json
-> new file mode 100755
-> index 0000000000..2a5da3f41d
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/b=
-le.json
-> @@ -0,0 +1,53 @@
-> +{
-> +    "name": "BLE Connector",
-> +    "rescanIntervalSeconds": 100,
-> +    "checkIntervalSeconds": 100,
-> +    "scanTimeSeconds": 5,
-> +    "passiveScanMode": true,
-> +    "devices": [
-> +        {
-> +            "name": "Temperature and humidity sensor",
-> +            "MACAddress": "4C:65:A8:DF:85:C0",
-> +            "addrType": "public",
-> +            "telemetry": [
-> +                {
-> +                    "key": "temperature",
-> +                    "method": "notify",
-> +                    "characteristicUUID":
-> "226CAA55-6476-4566-7562-66734470666D",
-> +                    "byteFrom": 2,
-> +                    "byteTo": 6
-> +                },
-> +                {
-> +                    "key": "humidity",
-> +                    "method": "notify",
-> +                    "characteristicUUID":
-> "226CAA55-6476-4566-7562-66734470666D",
-> +                    "byteFrom": 9,
-> +                    "byteTo": 13
-> +                }
-> +            ],
-> +            "attributes": [
-> +                {
-> +                    "key": "name",
-> +                    "characteristicUUID":
-> "00002A00-0000-1000-8000-00805F9B34FB",
-> +                    "method": "read",
-> +                    "byteFrom": 0,
-> +                    "byteTo": -1
-> +                }
-> +            ],
-> +            "attributeUpdates": [
-> +                {
-> +                    "attributeOnThingsBoard": "sharedName",
-> +                    "characteristicUUID":
-> "00002A00-0000-1000-8000-00805F9B34FB"
-> +                }
-> +            ],
-> +            "serverSideRpc": [
-> +                {
-> +                    "methodRPC": "rpcMethod1",
-> +                    "withResponse": true,
-> +                    "characteristicUUID":
-> "00002A00-0000-1000-8000-00805F9B34FB",
-> +                    "methodProcessing": "read"
-> +                }
-> +            ]
-> +        }
-> +    ]
-> +}
-> \ No newline at end of file
-> diff --git
-> a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/c=
-an.json
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/c=
-an.json
-> new file mode 100644
-> index 0000000000..b5cec0045a
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/c=
-an.json
-> @@ -0,0 +1,89 @@
-> +{
-> +    "interface": "socketcan",
-> +    "channel": "vcan0",
-> +    "backend": {
-> +      "fd": true
-> +    },
-> +    "reconnectPeriod": 5,
-> +    "devices": [
-> +      {
-> +        "name": "Car",
-> +        "sendDataOnlyOnChange": false,
-> +        "enableUnknownRpc": true,
-> +        "strictEval": false,
-> +        "attributes": [
-> +          {
-> +            "key": "isDriverDoorOpened",
-> +            "nodeId": 41,
-> +            "command": "2:2:big:8717",
-> +            "value": "4:1:int",
-> +            "expression": "bool(value & 0b00000100)",
-> +            "polling": {
-> +              "type": "once",
-> +              "dataInHex": "AB CD AB CD"
-> +            }
-> +          }
-> +        ],
-> +        "timeseries": [
-> +          {
-> +            "key": "rpm",
-> +            "nodeId": 1918,
-> +            "isExtendedId": true,
-> +            "command": "2:2:big:48059",
-> +            "value": "4:2:big:int",
-> +            "expression": "value / 4",
-> +            "polling": {
-> +              "type": "always",
-> +              "period": 5,
-> +              "dataInHex": "aaaa bbbb aaaa bbbb"
-> +            }
-> +          },
-> +          {
-> +            "key": "milliage",
-> +            "nodeId": 1918,
-> +            "isExtendedId": true,
-> +            "value": "4:2:little:int",
-> +            "expression": "value * 10",
-> +            "polling": {
-> +              "type": "always",
-> +              "period": 30,
-> +              "dataInHex": "aa bb cc dd ee ff aa bb"
-> +            }
-> +          }
-> +        ],
-> +        "attributeUpdates": [
-> +          {
-> +            "attributeOnThingsBoard": "softwareVersion",
-> +            "nodeId": 64,
-> +            "isExtendedId": true,
-> +            "dataLength": 4,
-> +            "dataExpression": "value + 5",
-> +            "dataByteorder": "little"
-> +          }
-> +        ],
-> +        "serverSideRpc": [
-> +          {
-> +            "method": "sendSameData",
-> +            "nodeId": 4,
-> +            "isExtendedId": true,
-> +            "isFd": true,
-> +            "bitrateSwitch": true,
-> +            "dataInHex": "aa bb cc dd ee ff    aa bb aa bb cc d ee ff"
-> +          },
-> +          {
-> +            "method": "setLightLevel",
-> +            "nodeId": 5,
-> +            "dataLength": 2,
-> +            "dataByteorder": "little",
-> +            "dataBefore": "00AA"
-> +          },
-> +          {
-> +            "method": "setSpeed",
-> +            "nodeId": 16,
-> +            "dataAfter": "0102",
-> +            "dataExpression": "userSpeed if maxAllowedSpeed > userSpeed
-> else maxAllowedSpeed"
-> +          }
-> +        ]
-> +      }
-> +    ]
-> +  }
-> \ No newline at end of file
-> diff --git
-> a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/c=
-ustom_serial.json
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/c=
-ustom_serial.json
-> new file mode 100755
-> index 0000000000..0aee5cb765
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/c=
-ustom_serial.json
-> @@ -0,0 +1,33 @@
-> +{
-> +  "name": "Custom serial connector",
-> +  "devices": [
-> +    {
-> +      "name": "CustomSerialDevice1",
-> +      "type": "default",
-> +      "port": "/dev/ttyUSB0",
-> +      "baudrate": 9600,
-> +      "converter": "CustomSerialUplinkConverter",
-> +      "telemetry": [
-> +        {
-> +          "type": "byte",
-> +          "key": "humidity",
-> +          "untilDelimiter": "\r"
-> +        }
-> +      ],
-> +      "attributes":[
-> +        {
-> +          "key": "SerialNumber",
-> +          "type": "string",
-> +          "fromByte": 4,
-> +          "toByte": -1
-> +        }
-> +      ],
-> +      "attributeUpdates": [
-> +        {
-> +          "attributeOnThingsBoard": "attr1",
-> +          "stringToDevice": "value =3D ${attr1}\n"
-> +        }
-> +      ]
-> +    }
-> +  ]
-> +}
-> \ No newline at end of file
-> diff --git
-> a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/l=
-ogs.conf
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/l=
-ogs.conf
-> new file mode 100755
-> index 0000000000..d66c2b84a8
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/l=
-ogs.conf
-> @@ -0,0 +1,77 @@
-> +[loggers]
-> +keys=3Droot, service, connector, converter, tb_connection, storage,
-> extension
-> +[handlers]
-> +keys=3DconsoleHandler, serviceHandler, connectorHandler, converterHandl=
-er,
-> tb_connectionHandler, storageHandler, extensionHandler
-> +[formatters]
-> +keys=3DLogFormatter
-> +[logger_root]
-> +level=3DERROR
-> +handlers=3DconsoleHandler
-> +[logger_connector]
-> +level=3DINFO
-> +handlers=3DconnectorHandler
-> +formatter=3DLogFormatter
-> +qualname=3Dconnector
-> +[logger_storage]
-> +level=3DINFO
-> +handlers=3DstorageHandler
-> +formatter=3DLogFormatter
-> +qualname=3Dstorage
-> +[logger_tb_connection]
-> +level=3DINFO
-> +handlers=3Dtb_connectionHandler
-> +formatter=3DLogFormatter
-> +qualname=3Dtb_connection
-> +[logger_service]
-> +level=3DINFO
-> +handlers=3DserviceHandler
-> +formatter=3DLogFormatter
-> +qualname=3Dservice
-> +[logger_converter]
-> +level=3DINFO
-> +handlers=3DconverterHandler
-> +formatter=3DLogFormatter
-> +qualname=3Dconverter
-> +[logger_extension]
-> +level=3DINFO
-> +handlers=3DconnectorHandler
-> +formatter=3DLogFormatter
-> +qualname=3Dextension
-> +[handler_consoleHandler]
-> +class=3DStreamHandler
-> +level=3DINFO
-> +formatter=3DLogFormatter
-> +args=3D(sys.stdout,)
-> +[handler_connectorHandler]
-> +level=3DINFO
-> +class=3Dlogging.handlers.TimedRotatingFileHandler
-> +formatter=3DLogFormatter
-> +args=3D("./logs/connector.log", "d", 1, 7,)
-> +[handler_storageHandler]
-> +level=3DINFO
-> +class=3Dlogging.handlers.TimedRotatingFileHandler
-> +formatter=3DLogFormatter
-> +args=3D("./logs/storage.log", "d", 1, 7,)
-> +[handler_serviceHandler]
-> +level=3DINFO
-> +class=3Dlogging.handlers.TimedRotatingFileHandler
-> +formatter=3DLogFormatter
-> +args=3D("./logs/service.log", "d", 1, 7,)
-> +[handler_converterHandler]
-> +level=3DINFO
-> +class=3Dlogging.handlers.TimedRotatingFileHandler
-> +formatter=3DLogFormatter
-> +args=3D("./logs/converter.log", "d", 1, 3,)
-> +[handler_extensionHandler]
-> +level=3DINFO
-> +class=3Dlogging.handlers.TimedRotatingFileHandler
-> +formatter=3DLogFormatter
-> +args=3D("./logs/extension.log", "d", 1, 3,)
-> +[handler_tb_connectionHandler]
-> +level=3DINFO
-> +class=3Dlogging.handlers.TimedRotatingFileHandler
-> +formatter=3DLogFormatter
-> +args=3D("./logs/tb_connection.log", "d", 1, 3,)
-> +[formatter_LogFormatter]
-> +format=3D"%(asctime)s - %(levelname)s - [%(filename)s] - %(module)s -
-> %(lineno)d - %(message)s"
-> +datefmt=3D"%Y-%m-%d %H:%M:%S"
-> \ No newline at end of file
-> diff --git
-> a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/m=
-odbus.json
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/m=
-odbus.json
-> new file mode 100755
-> index 0000000000..479d8aa4d0
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/m=
-odbus.json
-> @@ -0,0 +1,169 @@
-> +{
-> +  "server": {
-> +    "type": "tcp",
-> +    "host": "127.0.0.1",
-> +    "port": 5020,
-> +    "timeout": 35,
-> +    "method": "socket",
-> +    "byteOrder": "BIG",
-> +    "devices": [
-> +      {
-> +        "unitId": 1,
-> +        "deviceName": "Temp Sensor",
-> +        "attributesPollPeriod": 5000,
-> +        "timeseriesPollPeriod": 5000,
-> +        "sendDataOnlyOnChange": true,
-> +        "attributes": [
-> +          {
-> +            "tag": "string_read",
-> +            "type": "string",
-> +            "functionCode": 4,
-> +            "objectsCount": 4,
-> +            "address": 1
-> +          },
-> +          {
-> +            "tag": "bits_read",
-> +            "type": "bits",
-> +            "functionCode": 4,
-> +            "objectsCount": 1,
-> +            "address": 5
-> +          },
-> +          {
-> +            "tag": "8int_read",
-> +            "type": "8int",
-> +            "functionCode": 4,
-> +            "objectsCount": 1,
-> +            "address": 6
-> +          },
-> +          {
-> +            "tag": "16int_read",
-> +            "type": "16int",
-> +            "functionCode": 4,
-> +            "objectsCount": 1,
-> +            "address": 7
-> +          },
-> +          {
-> +            "tag": "32int_read_divider",
-> +            "type": "32int",
-> +            "functionCode": 4,
-> +            "objectsCount": 2,
-> +            "address": 8,
-> +            "divider": 10
-> +          },
-> +          {
-> +            "tag": "8int_read_multiplier",
-> +            "type": "8int",
-> +            "functionCode": 4,
-> +            "objectsCount": 1,
-> +            "address": 10,
-> +            "multiplier": 10
-> +          },
-> +          {
-> +            "tag": "32int_read",
-> +            "type": "32int",
-> +            "functionCode": 4,
-> +            "objectsCount": 2,
-> +            "address": 11
-> +          },
-> +          {
-> +            "tag": "64int_read",
-> +            "type": "64int",
-> +            "functionCode": 4,
-> +            "objectsCount": 4,
-> +            "address": 13
-> +          }
-> +      ],
-> +      "timeseries": [
-> +          {
-> +            "tag": "8uint_read",
-> +            "type": "8uint",
-> +            "functionCode": 4,
-> +            "objectsCount": 1,
-> +            "address": 17
-> +          },
-> +          {
-> +            "tag": "16uint_read",
-> +            "type": "16uint",
-> +            "functionCode": 4,
-> +            "objectsCount": 2,
-> +            "address": 18
-> +          },
-> +          {
-> +            "tag": "32uint_read",
-> +            "type": "32uint",
-> +            "functionCode": 4,
-> +            "objectsCount": 4,
-> +            "address": 20
-> +          },
-> +          {
-> +            "tag": "64uint_read",
-> +            "type": "64uint",
-> +            "functionCode": 4,
-> +            "objectsCount": 1,
-> +            "address": 24
-> +          },
-> +          {
-> +            "tag": "16float_read",
-> +            "type": "16float",
-> +            "functionCode": 4,
-> +            "objectsCount": 1,
-> +            "address": 25
-> +          },
-> +          {
-> +            "tag": "32float_read",
-> +            "type": "32float",
-> +            "functionCode": 4,
-> +            "objectsCount": 2,
-> +            "address": 26
-> +          },
-> +          {
-> +            "tag": "64float_read",
-> +            "type": "64float",
-> +            "functionCode": 4,
-> +            "objectsCount": 4,
-> +            "address": 28
-> +          }
-> +        ],
-> +        "attributeUpdates": [
-> +          {
-> +            "tag": "shared_attribute_write",
-> +            "type": "32int",
-> +            "functionCode": 6,
-> +            "objectsCount": 2,
-> +            "address": 29
-> +          }
-> +        ],
-> +        "rpc": [
-> +          {
-> +            "tag": "setValue",
-> +            "type": "bits",
-> +            "functionCode": 5,
-> +            "objectsCount": 1,
-> +            "address": 31
-> +          },
-> +          {
-> +            "tag": "getValue",
-> +            "type": "bits",
-> +            "functionCode": 1,
-> +            "objectsCount": 1,
-> +            "address": 31
-> +          },
-> +          {
-> +            "tag": "setCPUFanSpeed",
-> +            "type": "32int",
-> +            "functionCode": 16,
-> +            "objectsCount": 2,
-> +            "address": 33
-> +          },
-> +          {
-> +            "tag":"getCPULoad",
-> +            "type": "32int",
-> +            "functionCode": 4,
-> +            "objectsCount": 2,
-> +            "address": 35
-> +          }
-> +        ]
-> +      }
-> +    ]
-> +  }
-> +}
-> diff --git
-> a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/m=
-odbus_serial.json
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/m=
-odbus_serial.json
-> new file mode 100755
-> index 0000000000..19b38e3f7b
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/m=
-odbus_serial.json
-> @@ -0,0 +1,29 @@
-> +{
-> +  "server": {
-> +    "name": "Modbus Default Server",
-> +    "type": "serial",
-> +    "method": "rtu",
-> +    "port": "/dev/ttyUSB0",
-> +    "baudrate": 19200,
-> +    "timeout": 35,
-> +    "devices": [
-> +      {
-> +        "unitId": 1,
-> +        "deviceName": "Temp Sensor",
-> +        "attributesPollPeriod": 5000,
-> +        "timeseriesPollPeriod": 5000,
-> +        "sendDataOnlyOnChange": true,
-> +        "attributes": [
-> +          {
-> +            "byteOrder": "BIG",
-> +            "tag": "test",
-> +            "type": "long",
-> +            "functionCode": 4,
-> +            "registerCount": 1,
-> +            "address": 4
-> +          }
-> +        ]
-> +      }
-> +    ]
-> +  }
-> +}
-> \ No newline at end of file
-> diff --git
-> a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/m=
-qtt.json
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/m=
-qtt.json
-> new file mode 100755
-> index 0000000000..6b78a7cec9
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/m=
-qtt.json
-> @@ -0,0 +1,132 @@
-> +{
-> +  "broker": {
-> +    "name":"Default Local Broker",
-> +    "host":"127.0.0.1",
-> +    "port":1883,
-> +    "clientId": "ThingsBoard_gateway",
-> +    "security": {
-> +      "type": "basic",
-> +      "username": "user",
-> +      "password": "password"
-> +    }
-> +  },
-> +  "mapping": [
-> +    {
-> +      "topicFilter": "/sensor/data",
-> +      "converter": {
-> +        "type": "json",
-> +        "deviceNameJsonExpression": "${serialNumber}",
-> +        "deviceTypeJsonExpression": "${sensorType}",
-> +        "timeout": 60000,
-> +        "attributes": [
-> +          {
-> +            "type": "string",
-> +            "key": "model",
-> +            "value": "${sensorModel}"
-> +          },
-> +          {
-> +            "type": "string",
-> +            "key": "${sensorModel}",
-> +            "value": "on"
-> +          }
-> +        ],
-> +        "timeseries": [
-> +          {
-> +            "type": "double",
-> +            "key": "temperature",
-> +            "value": "${temp}"
-> +          },
-> +          {
-> +            "type": "double",
-> +            "key": "humidity",
-> +            "value": "${hum}"
-> +          }
-> +        ]
-> +      }
-> +    },
-> +    {
-> +      "topicFilter": "/sensor/+/data",
-> +      "converter": {
-> +        "type": "json",
-> +        "deviceNameTopicExpression": "(?<=3Dsensor\/)(.*?)(?=3D\/data)"=
-,
-> +        "deviceTypeTopicExpression": "Thermometer",
-> +        "timeout": 60000,
-> +        "attributes": [
-> +          {
-> +            "type": "string",
-> +            "key": "model",
-> +            "value": "${sensorModel}"
-> +          }
-> +        ],
-> +        "timeseries": [
-> +          {
-> +            "type": "double",
-> +            "key": "temperature",
-> +            "value": "${temp}"
-> +          },
-> +          {
-> +            "type": "double",
-> +            "key": "humidity",
-> +            "value": "${hum}"
-> +          }
-> +        ]
-> +      }
-> +    },
-> +    {
-> +      "topicFilter": "/custom/sensors/+",
-> +      "converter": {
-> +        "type": "custom",
-> +        "extension": "CustomMqttUplinkConverter",
-> +        "extension-config": {
-> +            "temperatureBytes" : 2,
-> +            "humidityBytes" :  2,
-> +            "batteryLevelBytes" : 1
-> +        }
-> +      }
-> +    }
-> +  ],
-> +  "connectRequests": [
-> +    {
-> +      "topicFilter": "sensor/connect",
-> +      "deviceNameJsonExpression": "${SerialNumber}"
-> +    },
-> +    {
-> +      "topicFilter": "sensor/+/connect",
-> +      "deviceNameTopicExpression": "(?<=3Dsensor\/)(.*?)(?=3D\/connect)=
-"
-> +    }
-> +  ],
-> +  "disconnectRequests": [
-> +    {
-> +      "topicFilter": "sensor/disconnect",
-> +      "deviceNameJsonExpression": "${SerialNumber}"
-> +    },
-> +    {
-> +      "topicFilter": "sensor/+/disconnect",
-> +      "deviceNameTopicExpression": "(?<=3Dsensor\/)(.*?)(?=3D\/disconne=
-ct)"
-> +    }
-> +  ],
-> +  "attributeUpdates": [
-> +    {
-> +      "deviceNameFilter": "SmartMeter.*",
-> +      "attributeFilter": "uploadFrequency",
-> +      "topicExpression": "sensor/${deviceName}/${attributeKey}",
-> +      "valueExpression": "{\"${attributeKey}\":\"${attributeValue}\"}"
-> +    }
-> +  ],
-> +  "serverSideRpc": [
-> +    {
-> +      "deviceNameFilter": ".*",
-> +      "methodFilter": "echo",
-> +      "requestTopicExpression":
-> "sensor/${deviceName}/request/${methodName}/${requestId}",
-> +      "responseTopicExpression":
-> "sensor/${deviceName}/response/${methodName}/${requestId}",
-> +      "responseTimeout": 10000,
-> +      "valueExpression": "${params}"
-> +    },
-> +    {
-> +      "deviceNameFilter": ".*",
-> +      "methodFilter": "no-reply",
-> +      "requestTopicExpression":
-> "sensor/${deviceName}/request/${methodName}/${requestId}",
-> +      "valueExpression": "${params}"
-> +    }
-> +  ]
-> +}
-> \ No newline at end of file
-> diff --git
-> a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/o=
-dbc.json
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/o=
-dbc.json
-> new file mode 100644
-> index 0000000000..c93992a262
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/o=
-dbc.json
-> @@ -0,0 +1,54 @@
-> +{
-> +    "connection": {
-> +      "str":
-> "Driver=3D{PostgreSQL};Server=3Dlocalhost;Port=3D5432;Database=3Dthingsb=
-oard;Uid=3Dpostgres;Pwd=3Dpostgres;",
-> +      "attributes": {
-> +        "autocommit": true,
-> +        "timeout": 0
-> +      },
-> +      "encoding": "utf-8",
-> +      "decoding": {
-> +        "char": "utf-8",
-> +        "wchar": "utf-8",
-> +        "metadata": "utf-16le"
-> +      },
-> +      "reconnect": true,
-> +      "reconnectPeriod": 60
-> +    },
-> +    "pyodbc": {
-> +      "pooling": false
-> +    },
-> +    "polling": {
-> +      "query": "SELECT bool_v, str_v, dbl_v, long_v, entity_id, ts FROM
-> ts_kv WHERE ts > ? ORDER BY ts ASC LIMIT 10",
-> +      "period": 10,
-> +      "iterator": {
-> +        "column": "ts",
-> +        "query": "SELECT MIN(ts) - 1 FROM ts_kv",
-> +        "persistent": false
-> +      }
-> +    },
-> +    "mapping": {
-> +      "device": {
-> +        "type": "postgres",
-> +        "name": "'ODBC ' + entity_id"
-> +      },
-> +      "sendDataOnlyOnChange": false,
-> +      "attributes": "*",
-> +      "timeseries": [
-> +        {
-> +          "name": "value",
-> +          "value": "[i for i in [str_v, long_v, dbl_v,bool_v] if i is n=
-ot
-> None][0]"
-> +        }
-> +      ]
-> +    },
-> +    "serverSideRpc": {
-> +      "enableUnknownRpc": false,
-> +      "overrideRpcConfig": true,
-> +      "methods": [
-> +        "procedureOne",
-> +        {
-> +          "name": "procedureTwo",
-> +          "args": [ "One", 2, 3.0 ]
-> +        }
-> +      ]
-> +    }
-> +  }
-> \ No newline at end of file
-> diff --git
-> a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/o=
-pcua.json
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/o=
-pcua.json
-> new file mode 100755
-> index 0000000000..1deed7d524
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/o=
-pcua.json
-> @@ -0,0 +1,49 @@
-> +{
-> +  "server": {
-> +    "name": "OPC-UA Default Server",
-> +    "url": "localhost:4840/freeopcua/server/",
-> +    "timeoutInMillis": 5000,
-> +    "scanPeriodInMillis": 5000,
-> +    "disableSubscriptions":false,
-> +    "subCheckPeriodInMillis": 100,
-> +    "showMap": false,
-> +    "security": "Basic128Rsa15",
-> +    "identity": {
-> +      "type": "anonymous"
-> +    },
-> +    "mapping": [
-> +      {
-> +        "deviceNodePattern": "Root\\.Objects\\.Device1",
-> +        "deviceNamePattern": "Device
-> ${Root\\.Objects\\.Device1\\.serialNumber}",
-> +        "attributes": [
-> +          {
-> +            "key": "temperature =C2=B0C",
-> +            "path": "${ns=3D2;i=3D5}"
-> +          }
-> +        ],
-> +        "timeseries": [
-> +          {
-> +            "key": "humidity",
-> +            "path":
-> "${Root\\.Objects\\.Device1\\.TemperatureAndHumiditySensor\\.Humidity}"
-> +          },
-> +          {
-> +            "key": "batteryLevel",
-> +            "path": "${Battery\\.batteryLevel}"
-> +          }
-> +        ],
-> +        "rpc_methods": [
-> +          {
-> +            "method": "multiply",
-> +            "arguments": [2, 4]
-> +          }
-> +        ],
-> +        "attributes_updates": [
-> +          {
-> +            "attributeOnThingsBoard": "deviceName",
-> +            "attributeOnDevice": "Root\\.Objects\\.Device1\\.serialNumb=
-er"
-> +          }
-> +        ]
-> +      }
-> +    ]
-> +  }
-> +}
-> \ No newline at end of file
-> diff --git
-> a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/r=
-equest.json
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/r=
-equest.json
-> new file mode 100644
-> index 0000000000..43237a7dc0
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/r=
-equest.json
-> @@ -0,0 +1,146 @@
-> +"job": "leader"
-> +},
-> +"allowRedirects": true,
-> +"timeout": 0.5,
-> +"scanPeriod": 5,
-> +"converter": {
-> +  "type": "json",
-> +  "deviceNameJsonExpression": "SD8500",
-> +  "deviceTypeJsonExpression": "SD",
-> +  "attributes": [
-> +    {
-> +      "key": "serialNumber",
-> +      "type": "string",
-> +      "value": "${serial}"
-> +    }
-> +  ],
-> +  "telemetry": [
-> +    {
-> +      "key": "Maintainer",
-> +      "type": "string",
-> +      "value": "${Developer}"
-> +    }
-> +  ]
-> +}
-> +},
-> +{
-> +"url": "get_info",
-> +"httpMethod": "GET",
-> +"httpHeaders": {
-> +  "ACCEPT": "application/json"
-> +},
-> +"allowRedirects": true,
-> +"timeout": 0.5,
-> +"scanPeriod": 100,
-> +"converter": {
-> +  "type": "custom",
-> +  "deviceNameJsonExpression": "SD8500",
-> +  "deviceTypeJsonExpression": "SD",
-> +  "extension": "CustomRequestUplinkConverter",
-> +  "extension-config": [
-> +    {
-> +      "key": "Totaliser",
-> +      "type": "float",
-> +      "fromByte": 0,
-> +      "toByte": 4,
-> +      "byteorder": "big",
-> +      "signed": true,
-> +      "multiplier": 1
-> +    },
-> +    {
-> +      "key": "Flow",
-> +      "type": "int",
-> +      "fromByte": 4,
-> +      "toByte": 6,
-> +      "byteorder": "big",
-> +      "signed": true,
-> +      "multiplier": 0.01
-> +    },
-> +    {
-> +      "key": "Temperature",
-> +      "type": "int",
-> +      "fromByte": 8,
-> +      "toByte": 10,
-> +      "byteorder": "big",
-> +      "signed": true,
-> +      "multiplier": 0.01
-> +    },
-> +    {
-> +      "key": "Pressure",
-> +      "type": "int",
-> +      "fromByte": 12,
-> +      "toByte": 14,
-> +      "byteorder": "big",
-> +      "signed": true,
-> +      "multiplier": 0.01
-> +    },
-> +    {
-> +      "key": "deviceStatus",
-> +      "type": "int",
-> +      "byteAddress": 15,
-> +      "fromBit": 4,
-> +      "toBit": 8,
-> +      "byteorder": "big",
-> +      "signed": false
-> +    },
-> +    {
-> +      "key": "OUT2",
-> +      "type": "int",
-> +      "byteAddress": 15,
-> +      "fromBit": 1,
-> +      "toBit": 2,
-> +      "byteorder": "big"
-> +    },
-> +    {
-> +      "key": "OUT1",
-> +      "type": "int",
-> +      "byteAddress": 15,
-> +      "fromBit": 0,
-> +      "toBit": 1,
-> +      "byteorder": "big"
-> +    }
-> +  ]
-> +}
-> +}
-> +],
-> +"attributeUpdates": [
-> +{
-> +  "httpMethod": "POST",
-> +  "httpHeaders": {
-> +    "CONTENT-TYPE": "application/json"
-> +  },
-> +  "timeout": 0.5,
-> +  "tries": 3,
-> +  "allowRedirects": true,
-> +  "deviceNameFilter": "SD.*",
-> +  "attributeFilter": "send_data",
-> +  "requestUrlExpression": "sensor/${deviceName}/${attributeKey}",
-> +  "valueExpression": "{\"${attributeKey}\":\"${attributeValue}\"}"
-> +}
-> +],
-> +"serverSideRpc": [
-> +{
-> +"deviceNameFilter": ".*",
-> +"methodFilter": "echo",
-> +"requestUrlExpression":
-> "sensor/${deviceName}/request/${methodName}/${requestId}",
-> +"responseTimeout": 1,
-> +"httpMethod": "GET",
-> +"valueExpression": "${params}",
-> +"timeout": 0.5,
-> +"tries": 3,
-> +"httpHeaders": {
-> +  "Content-Type": "application/json"
-> +}
-> +},
-> +{
-> +"deviceNameFilter": ".*",
-> +"methodFilter": "no-reply",
-> +"requestUrlExpression":
-> "sensor/${deviceName}/request/${methodName}/${requestId}",
-> +"httpMethod": "POST",
-> +"valueExpression": "${params}",
-> +"httpHeaders": {
-> +  "Content-Type": "application/json"
-> +}
-> +}
-> +]
-> +}
-> \ No newline at end of file
-> diff --git
-> a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/r=
-est.json
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/r=
-est.json
-> new file mode 100644
-> index 0000000000..be6c6ff18e
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/r=
-est.json
-> @@ -0,0 +1,152 @@
-> +{
-> +    "host": "127.0.0.1",
-> +    "port": "5000",
-> +    "mapping":[
-> +      {
-> +        "endpoint": "/device1",
-> +        "HTTPMethods": [
-> +          "POST"
-> +        ],
-> +        "security":
-> +        {
-> +          "type": "basic",
-> +          "username": "user",
-> +          "password": "passwd"
-> +        },
-> +        "converter": {
-> +          "type": "json",
-> +          "deviceNameExpression": "Device ${name}",
-> +          "deviceTypeExpression": "default",
-> +          "attributes": [
-> +            {
-> +              "type": "string",
-> +              "key": "model",
-> +              "value": "${sensorModel}"
-> +            }
-> +          ],
-> +          "timeseries": [
-> +            {
-> +              "type": "double",
-> +              "key": "${sensorModel}",
-> +              "value": "${temp}"
-> +            },
-> +            {
-> +              "type": "double",
-> +              "key": "humidity",
-> +              "value": "${hum}"
-> +            }
-> +          ]
-> +        }
-> +      },
-> +      {
-> +        "endpoint": "/anon1",
-> +        "HTTPMethods": [
-> +          "GET",
-> +          "POST"
-> +        ],
-> +        "security":
-> +        {
-> +          "type": "anonymous"
-> +        },
-> +        "converter": {
-> +          "type": "json",
-> +          "deviceNameExpression": "Device 2",
-> +          "deviceTypeExpression": "default",
-> +          "attributes": [
-> +            {
-> +              "type": "string",
-> +              "key": "model",
-> +              "value": "Model2"
-> +            }
-> +          ],
-> +          "timeseries": [
-> +            {
-> +              "type": "double",
-> +              "key": "temperature",
-> +              "value": "${temp}"
-> +            },
-> +            {
-> +              "type": "double",
-> +              "key": "humidity",
-> +              "value": "${hum}"
-> +            }
-> +          ]
-> +        }
-> +      },
-> +      {
-> +        "endpoint": "/anon2",
-> +        "HTTPMethods": [
-> +          "POST"
-> +        ],
-> +        "security":
-> +        {
-> +          "type": "anonymous"
-> +        },
-> +        "converter": {
-> +          "type": "custom",
-> +          "deviceNameExpression": "SuperAnonDevice",
-> +          "deviceTypeExpression": "default",
-> +          "extension": "CustomRestUplinkConverter",
-> +          "extension-config": [
-> +            {
-> +            "key": "Totaliser",
-> +            "datatype": "float",
-> +            "fromByte": 0,
-> +            "toByte": 4,
-> +            "byteorder": "big",
-> +            "signed": true,
-> +            "multiplier": 1
-> +            }]
-> +        }
-> +      }
-> +    ],
-> +    "attributeUpdates": [
-> +        {
-> +          "HTTPMethod": "POST",
-> +          "SSLVerify": false,
-> +          "httpHeaders": {
-> +            "CONTENT-TYPE": "application/json"
-> +          },
-> +          "security": {
-> +            "type": "basic",
-> +            "username": "user",
-> +            "password": "passwd"
-> +          },
-> +          "timeout": 0.5,
-> +          "tries": 3,
-> +          "allowRedirects": true,
-> +          "deviceNameFilter": ".*REST$",
-> +          "attributeFilter": "data",
-> +          "requestUrlExpression": "sensor/${deviceName}/${attributeKey}=
-",
-> +          "valueExpression": "{\"${attributeKey}\":\"${attributeValue}\=
-"}"
-> +        }
-> +    ],
-> +    "serverSideRpc": [
-> +      {
-> +        "deviceNameFilter": ".*",
-> +        "methodFilter": "echo",
-> +        "requestUrlExpression": "http://127.0.0.1:5001/${deviceName}",
-> +        "responseTimeout": 1,
-> +        "HTTPMethod": "GET",
-> +        "valueExpression": "${params}",
-> +        "timeout": 0.5,
-> +        "tries": 3,
-> +        "httpHeaders": {
-> +          "Content-Type": "application/json"
-> +        },
-> +        "security": {
-> +          "type": "anonymous"
-> +        }
-> +      },
-> +      {
-> +        "deviceNameFilter": ".*",
-> +        "methodFilter": "no-reply",
-> +        "requestUrlExpression":
-> "sensor/${deviceName}/request/${methodName}/${requestId}",
-> +        "HTTPMethod": "POST",
-> +        "valueExpression": "${params}",
-> +        "httpHeaders": {
-> +          "Content-Type": "application/json"
-> +        }
-> +      }
-> +    ]
-> +  }
-> \ No newline at end of file
-> diff --git
-> a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/s=
-nmp.json
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/s=
-nmp.json
-> new file mode 100644
-> index 0000000000..b4ddb42645
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/s=
-nmp.json
-> @@ -0,0 +1,138 @@
-> +{
-> +    "devices": [
-> +      {
-> +        "deviceName": "SNMP router",
-> +        "deviceType": "snmp",
-> +        "ip": "snmp.live.gambitcommunications.com",
-> +        "port": 161,
-> +        "pollPeriod": 5000,
-> +        "community": "public",
-> +        "attributes": [
-> +          {
-> +            "key": "ReceivedFromGet",
-> +            "method": "get",
-> +            "oid": "1.3.6.1.2.1.1.1.0",
-> +            "timeout": 6
-> +          },
-> +          {
-> +            "key": "ReceivedFromMultiGet",
-> +            "method": "multiget",
-> +            "oid": [
-> +              "1.3.6.1.2.1.1.1.0",
-> +              "1.3.6.1.2.1.1.2.0"
-> +            ],
-> +            "timeout": 6
-> +          },
-> +          {
-> +            "key": "ReceivedFromGetNext",
-> +            "method": "getnext",
-> +            "oid": "1.3.6.1.2.1.1.1.0",
-> +            "timeout": 6
-> +          },
-> +          {
-> +            "key": "ReceivedFromMultiWalk",
-> +            "method": "multiwalk",
-> +            "oid": [
-> +              "1.3.6.1.2.1.1.1.0",
-> +              "1.3.6.0.1.2.1"
-> +            ]
-> +          },
-> +          {
-> +            "key": "ReceivedFromBulkWalk",
-> +            "method": "bulkwalk",
-> +            "oid": [
-> +              "1.3.6.1.2.1.1.1.0",
-> +              "1.3.6.1.2.1.1.2.0"
-> +            ]
-> +          },
-> +          {
-> +            "key": "ReceivedFromBulkGet",
-> +            "method": "bulkget",
-> +            "scalarOid": [
-> +              "1.3.6.1.2.1.1.1.0",
-> +              "1.3.6.1.2.1.1.2.0"
-> +            ],
-> +            "repeatingOid": [
-> +              "1.3.6.1.2.1.1.1.0",
-> +              "1.3.6.1.2.1.1.2.0"
-> +            ],
-> +            "maxListSize": 10
-> +          }
-> +        ],
-> +        "telemetry": [
-> +          {
-> +            "key": "ReceivedFromWalk",
-> +            "community": "private",
-> +            "method": "walk",
-> +            "oid": "1.3.6.1.2.1.1.1.0"
-> +          },
-> +          {
-> +            "key": "ReceivedFromTable",
-> +            "method": "table",
-> +            "oid": "1.3.6.1.2.1.1"
-> +          }
-> +        ],
-> +        "attributeUpdateRequests": [
-> +          {
-> +            "attributeFilter": "dataToSet",
-> +            "method": "set",
-> +            "oid": "1.3.6.1.2.1.1.1.0"
-> +          },
-> +          {
-> +            "attributeFilter": "dataToMultiSet",
-> +            "method": "multiset",
-> +            "mappings": {
-> +              "1.2.3": "10",
-> +              "2.3.4": "${attribute}"
-> +            }
-> +          }
-> +        ],
-> +        "serverSideRpcRequests": [
-> +          {
-> +            "requestFilter": "setData",
-> +            "method": "set",
-> +            "oid": "1.3.6.1.2.1.1.1.0"
-> +          },
-> +          {
-> +            "requestFilter": "multiSetData",
-> +            "method": "multiset"
-> +          },
-> +          {
-> +            "requestFilter": "getData",
-> +            "method": "get",
-> +            "oid": "1.3.6.1.2.1.1.1.0"
-> +          },
-> +          {
-> +            "requestFilter": "runBulkWalk",
-> +            "method": "bulkwalk",
-> +            "oid": [
-> +              "1.3.6.1.2.1.1.1.0",
-> +              "1.3.6.1.2.1.1.2.0"
-> +            ]
-> +          }
-> +        ]
-> +      },
-> +      {
-> +        "deviceName": "SNMP router",
-> +        "deviceType": "snmp",
-> +        "ip": "127.0.0.1",
-> +        "pollPeriod": 5000,
-> +        "community": "public",
-> +        "converter": "CustomSNMPConverter",
-> +        "attributes": [
-> +          {
-> +            "key": "ReceivedFromGetWithCustomConverter",
-> +            "method": "get",
-> +            "oid": "1.3.6.1.2.1.1.1.0"
-> +          }
-> +        ],
-> +        "telemetry": [
-> +          {
-> +            "key": "ReceivedFromTableWithCustomConverter",
-> +            "method": "table",
-> +            "oid": "1.3.6.1.2.1.1.1.0"
-> +          }
-> +        ]
-> +      }
-> +    ]
-> +  }
-> \ No newline at end of file
-> diff --git
-> a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/t=
-b_gateway.yaml
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/t=
-b_gateway.yaml
-> new file mode 100755
-> index 0000000000..e3eb8f1fc7
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/t=
-b_gateway.yaml
-> @@ -0,0 +1,66 @@
-> +thingsboard:
-> +  host: demo.thingsboard.io
-> +  port: 1883
-> +  remoteConfiguration: false
-> +  security:
-> +    accessToken: PUT_YOUR_GW_ACCESS_TOKEN_HERE
-> +storage:
-> +  type: memory
-> +  read_records_count: 100
-> +  max_records_count: 100000
-> +#  type: file
-> +#  data_folder_path: ./data/
-> +#  max_file_count: 10
-> +#  max_read_records_count: 10
-> +#  max_records_per_file: 10000
-> +connectors:
-> +  -
-> +    name: MQTT Broker Connector
-> +    type: mqtt
-> +    configuration: mqtt.json
-> +
-> +#  -
-> +#    name: Modbus Connector
-> +#    type: modbus
-> +#    configuration: modbus.json
-> +#
-> +#  -
-> +#    name: Modbus Connector
-> +#    type: modbus
-> +#    configuration: modbus_serial.json
-> +#
-> +#  -
-> +#    name: OPC-UA Connector
-> +#    type: opcua
-> +#    configuration: opcua.json
-> +#
-> +#  -
-> +#    name: BLE Connector
-> +#    type: ble
-> +#    configuration: ble.json
-> +#
-> +#  -
-> +#    name: REQUEST Connector
-> +#    type: request
-> +#    configuration: request.json
-> +#
-> +#  -
-> +#    name: CAN Connector
-> +#    type: can
-> +#    configuration: can.json
-> +#
-> +#  -
-> +#    name: BACnet Connector
-> +#    type: bacnet
-> +#    configuration: bacnet.json
-> +#
-> +#  -
-> +#    name: ODBC Connector
-> +#    type: odbc
-> +#    configuration: odbc.json
-> +#
-> +#  -
-> +#    name: Custom Serial Connector
-> +#    type: serial
-> +#    configuration: custom_serial.json
-> +#    class: CustomSerialConnector
-> diff --git
-> a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/t=
-hingsboard-gateway.service
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/t=
-hingsboard-gateway.service
-> new file mode 100644
-> index 0000000000..5dd352a553
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/t=
-hingsboard-gateway.service
-> @@ -0,0 +1,13 @@
-> +[Unit]
-> +Description =3D Systemd service for Thingsboard Gateway
-> +After       =3D network.target
-> +
-> +[Service]
-> +ExecStart   =3D /usr/bin/python3 /usr/bin/thingsboard-gateway
-> +ExecStop    =3D /bin/kill -INT $MAINPID
-> +ExecReload  =3D /bin/kill -TERM $MAINPID
-> +Restart     =3D always
-> +Type        =3D simple
-> +
-> +[Install]
-> +WantedBy=3Dmulti-user.target
-> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/
-> thingsboard-gateway_2.5.2.bb
-> b/meta-oe/recipes-connectivity/thingsboard-gateway/
-> thingsboard-gateway_2.5.2.bb
-> new file mode 100644
-> index 0000000000..2f0ef16c80
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/thingsboard-gateway/
-> thingsboard-gateway_2.5.2.bb
-> @@ -0,0 +1,68 @@
-> +SUMMARY =3D "Open-source IoT platform for data collection, processing,
-> visualization, and device management"
-> +DESCRIPTION =3D "\
-> +The Thingsboard IoT Gateway is an open-source solution that allows you =
-\
-> +to integrate devices connected to legacy and third-party systems with
-> Thingsboard."
-> +HOMEPAGE =3D "https://thingsboard.io/"
-> +
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D
-> "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=3D89aea4e17d99a7cacdbeed46a=
-0096b10"
-> +
-> +SRC_URI[md5sum] =3D "469c8b5cd1c16c20ef40f0a97a3a0fda"
-> +SRC_URI[sha256sum] =3D
-> "b328f4e315c3541ac80a4931974a34a81afe4d1f382f48e8604669a55816c0d7"
-> +
-> +inherit pypi setuptools3
-> +
-> +PYPI_PACKAGE =3D "thingsboard-gateway"
-> +
-> +RDEPENDS_${PN} +=3D " python3-jsonpath-rw \
-> +                    python3-regex \
-> +                    python3-paho-mqtt \
-> +                    python3-pyyaml \
-> +                    python3-simplejson \
-> +                    python3-requests \
-> +                    python3-pip \
-> +                    python3-pyrsistent \
-> +"
-> +
-> +SRC_URI +=3D "file://bacnet.json \
-> +            file://ble.json \
-> +            file://can.json \
-> +            file://custom_serial.json \
-> +            file://modbus.json \
-> +            file://modbus_serial.json \
-> +            file://mqtt.json \
-> +            file://opcua.json \
-> +            file://odbc.json \
-> +            file://request.json \
-> +            file://rest.json \
-> +            file://snmp.json \
-> +            file://tb_gateway.yaml \
-> +            file://logs.conf \
-> +            file://thingsboard-gateway.service \
-> +            "
-> +
-> +
-> +inherit systemd
-> +
-> +SYSTEMD_PACKAGES =3D "${PN}"
-> +SYSTEMD_SERVICE_${PN} =3D "thingsboard-gateway.service"
-> +
-> +FILES_${PN} +=3D "/etc \
-> +                /lib \
-> +                /usr \
-> +"
-> +
-> +do_install_append(){
-> +
-> +    install -d ${D}${sysconfdir}/thingsboard-gateway/config
-> +
-> +    for file in $(find ${WORKDIR} -maxdepth 1 -type f -name *.json); do
-> +        install -m 0644 "$file"
-> ${D}${sysconfdir}/thingsboard-gateway/config
-> +    done
-> +
-> +    install -m 0644 ${WORKDIR}/tb_gateway.yaml
-> ${D}${sysconfdir}/thingsboard-gateway/config
-> +    install -m 0644 ${WORKDIR}/logs.conf
-> ${D}${sysconfdir}/thingsboard-gateway/config
-> +
-> +    install -d ${D}${systemd_unitdir}/system/
-> +    install -m 0644 ${WORKDIR}/thingsboard-gateway.service
->  ${D}${systemd_system_unitdir}/thingsboard-gateway.service
-> +}
-> \ No newline at end of file
-> --
-> 2.29.2
->
->=20
->
->
+I tried to move recipe from meta-java rocko (our previous/working 
+branch) but it stuck on:
 
---00000000000086e3f105b473003b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr">python3-jsonpath-rw=C2=A0dependency was a=
-dded to meta-python, but meta-oe doesn&#39;t depend on meta-python, so eith=
-er=C2=A0<span style=3D"color:rgb(51,51,51);white-space:pre-wrap">python3-js=
-onpath-rw needs to be moved to meta-oe (if it doesn&#39;t depend on other s=
-tuff from meta-python) or thingsboard-gateway needs to be moved to meta-pyt=
-hon.</span></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"g=
-mail_attr">On Wed, Nov 18, 2020 at 12:04 AM Khem Raj &lt;<a href=3D"mailto:=
-raj.khem@gmail.com">raj.khem@gmail.com</a>&gt; wrote:<br></div><blockquote =
-class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
-id rgb(204,204,204);padding-left:1ex">From: &quot;hasan.men&quot; &lt;<a hr=
-ef=3D"mailto:hasan.men@bosphorusiss.com" target=3D"_blank">hasan.men@bospho=
-rusiss.com</a>&gt;<br>
-<br>
-Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=
-=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
----<br>
-=C2=A0.../thingsboard-gateway/bacnet.json=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0|=C2=A0 58 ++++++<br>
-=C2=A0.../thingsboard-gateway/ble.json=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 |=C2=A0 53 ++++++<br>
-=C2=A0.../thingsboard-gateway/can.json=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 |=C2=A0 89 +++++++++<br>
-=C2=A0.../thingsboard-gateway/custom_serial.json=C2=A0 =C2=A0 |=C2=A0 33 +=
-+++<br>
-=C2=A0.../thingsboard-gateway/logs.conf=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=
-=C2=A0 =C2=A0|=C2=A0 77 ++++++++<br>
-=C2=A0.../thingsboard-gateway/modbus.json=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| 169 ++++++++++++++++++<br>
-=C2=A0.../thingsboard-gateway/modbus_serial.json=C2=A0 =C2=A0 |=C2=A0 29 +=
-++<br>
-=C2=A0.../thingsboard-gateway/mqtt.json=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=
-=C2=A0 =C2=A0| 132 ++++++++++++++<br>
-=C2=A0.../thingsboard-gateway/odbc.json=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=
-=C2=A0 =C2=A0|=C2=A0 54 ++++++<br>
-=C2=A0.../thingsboard-gateway/opcua.json=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 |=C2=A0 49 +++++<br>
-=C2=A0.../thingsboard-gateway/request.json=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 | 146 +++++++++++++++<br>
-=C2=A0.../thingsboard-gateway/rest.json=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=
-=C2=A0 =C2=A0| 152 ++++++++++++++++<br>
-=C2=A0.../thingsboard-gateway/snmp.json=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=
-=C2=A0 =C2=A0| 138 ++++++++++++++<br>
-=C2=A0.../thingsboard-gateway/tb_gateway.yaml=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
-=C2=A0 66 +++++++<br>
-=C2=A0.../thingsboard-gateway.service=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0|=C2=A0 13 ++<br>
-=C2=A0.../<a href=3D"http://thingsboard-gateway_2.5.2.bb" rel=3D"noreferre=
-r" target=3D"_blank">thingsboard-gateway_2.5.2.bb</a>=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 68 +++++++<br>
-=C2=A016 files changed, 1326 insertions(+)<br>
-=C2=A0create mode 100644 meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/bacnet.json<br>
-=C2=A0create mode 100755 meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/ble.json<br>
-=C2=A0create mode 100644 meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/can.json<br>
-=C2=A0create mode 100755 meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/custom_serial.json<br>
-=C2=A0create mode 100755 meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/logs.conf<br>
-=C2=A0create mode 100755 meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/modbus.json<br>
-=C2=A0create mode 100755 meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/modbus_serial.json<br>
-=C2=A0create mode 100755 meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/mqtt.json<br>
-=C2=A0create mode 100644 meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/odbc.json<br>
-=C2=A0create mode 100755 meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/opcua.json<br>
-=C2=A0create mode 100644 meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/request.json<br>
-=C2=A0create mode 100644 meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/rest.json<br>
-=C2=A0create mode 100644 meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/snmp.json<br>
-=C2=A0create mode 100755 meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/tb_gateway.yaml<br>
-=C2=A0create mode 100644 meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/thingsboard-gateway.service<br>
-=C2=A0create mode 100644 meta-oe/recipes-connectivity/thingsboard-gateway/=
-<a href=3D"http://thingsboard-gateway_2.5.2.bb" rel=3D"noreferrer" target=
-=3D"_blank">thingsboard-gateway_2.5.2.bb</a><br>
-<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-=
-gateway/bacnet.json b/meta-oe/recipes-connectivity/thingsboard-gateway/thin=
-gsboard-gateway/bacnet.json<br>
-new file mode 100644<br>
-index 0000000000..e36a2165d1<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway=
-/bacnet.json<br>
-@@ -0,0 +1,58 @@<br>
-+{<br>
-+=C2=A0 =C2=A0 &quot;general&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;objectName&quot;: &quot;TB_gateway&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: &quot;<a href=3D"http://192.168=
-.188.181:1052" rel=3D"noreferrer" target=3D"_blank">192.168.188.181:1052</a=
->&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;objectIdentifier&quot;: 599,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;maxApduLengthAccepted&quot;: 1024,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;segmentationSupported&quot;: &quot;segmentedBo=
-th&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;vendorIdentifier&quot;: 15<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 &quot;devices&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceName&quot;: &quot;BACnet Device $=
-{objectName}&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceType&quot;: &quot;default&quot;,<=
-br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: &quot;<a href=3D"http://=
-192.168.188.181:10520" rel=3D"noreferrer" target=3D"_blank">192.168.188.181=
-:10520</a>&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;pollPeriod&quot;: 10000,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributes&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;temperat=
-ure&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;string&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectId&quot;: &quot;ana=
-logOutput:1&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;propertyId&quot;: &quot;p=
-resentValue&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeseries&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;state&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;bool&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectId&quot;: &quot;bin=
-aryValue:1&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;propertyId&quot;: &quot;p=
-resentValue&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributeUpdates&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;brightne=
-ss&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;requestType&quot;: &quot;=
-writeProperty&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectId&quot;: &quot;ana=
-logOutput:1&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;propertyId&quot;: &quot;p=
-resentValue&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;serverSideRpc&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;set_s=
-tate&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;requestType&quot;: &quot;=
-writeProperty&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;requestTimeout&quot;: 100=
-00,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectId&quot;: &quot;bin=
-aryOutput:1&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;propertyId&quot;: &quot;p=
-resentValue&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;get_s=
-tate&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;requestType&quot;: &quot;=
-readProperty&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;requestTimeout&quot;: 100=
-00,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectId&quot;: &quot;bin=
-aryOutput:1&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;propertyId&quot;: &quot;p=
-resentValue&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 ]<br>
-+=C2=A0 }<br>
-\ No newline at end of file<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-=
-gateway/ble.json b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsb=
-oard-gateway/ble.json<br>
-new file mode 100755<br>
-index 0000000000..2a5da3f41d<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway=
-/ble.json<br>
-@@ -0,0 +1,53 @@<br>
-+{<br>
-+=C2=A0 =C2=A0 &quot;name&quot;: &quot;BLE Connector&quot;,<br>
-+=C2=A0 =C2=A0 &quot;rescanIntervalSeconds&quot;: 100,<br>
-+=C2=A0 =C2=A0 &quot;checkIntervalSeconds&quot;: 100,<br>
-+=C2=A0 =C2=A0 &quot;scanTimeSeconds&quot;: 5,<br>
-+=C2=A0 =C2=A0 &quot;passiveScanMode&quot;: true,<br>
-+=C2=A0 =C2=A0 &quot;devices&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;name&quot;: &quot;Tempera=
-ture and humidity sensor&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;MACAddress&quot;: &quot;4=
-C:65:A8:DF:85:C0&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;addrType&quot;: &quot;pub=
-lic&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;telemetry&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;key&quot;: &quot;temperature&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;method&quot;: &quot;notify&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;characteristicUUID&quot;: &quot;226CAA55-6476-4566-7562-66734470666D&quo=
-t;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;byteFrom&quot;: 2,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;byteTo&quot;: 6<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;key&quot;: &quot;humidity&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;method&quot;: &quot;notify&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;characteristicUUID&quot;: &quot;226CAA55-6476-4566-7562-66734470666D&quo=
-t;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;byteFrom&quot;: 9,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;byteTo&quot;: 13<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributes&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;key&quot;: &quot;name&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;characteristicUUID&quot;: &quot;00002A00-0000-1000-8000-00805F9B34FB&quo=
-t;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;method&quot;: &quot;read&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;byteFrom&quot;: 0,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;byteTo&quot;: -1<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributeUpdates&quot;: [=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;attributeOnThingsBoard&quot;: &quot;sharedName&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;characteristicUUID&quot;: &quot;00002A00-0000-1000-8000-00805F9B34FB&quo=
-t;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;serverSideRpc&quot;: [<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;methodRPC&quot;: &quot;rpcMethod1&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;withResponse&quot;: true,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;characteristicUUID&quot;: &quot;00002A00-0000-1000-8000-00805F9B34FB&quo=
-t;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &qu=
-ot;methodProcessing&quot;: &quot;read&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 ]<br>
-+}<br>
-\ No newline at end of file<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-=
-gateway/can.json b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsb=
-oard-gateway/can.json<br>
-new file mode 100644<br>
-index 0000000000..b5cec0045a<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway=
-/can.json<br>
-@@ -0,0 +1,89 @@<br>
-+{<br>
-+=C2=A0 =C2=A0 &quot;interface&quot;: &quot;socketcan&quot;,<br>
-+=C2=A0 =C2=A0 &quot;channel&quot;: &quot;vcan0&quot;,<br>
-+=C2=A0 =C2=A0 &quot;backend&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;fd&quot;: true<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 &quot;reconnectPeriod&quot;: 5,<br>
-+=C2=A0 =C2=A0 &quot;devices&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;name&quot;: &quot;Car&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;sendDataOnlyOnChange&quot;: false,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;enableUnknownRpc&quot;: true,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;strictEval&quot;: false,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributes&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;isDriver=
-DoorOpened&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;nodeId&quot;: 41,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;command&quot;: &quot;2:2:=
-big:8717&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot;4:1:in=
-t&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;expression&quot;: &quot;b=
-ool(value &amp; 0b00000100)&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;polling&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;=
-once&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;dataInHex&quot;: &=
-quot;AB CD AB CD&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeseries&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;rpm&quot=
-;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;nodeId&quot;: 1918,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;isExtendedId&quot;: true,=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;command&quot;: &quot;2:2:=
-big:48059&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot;4:2:bi=
-g:int&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;expression&quot;: &quot;v=
-alue / 4&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;polling&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;=
-always&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;period&quot;: 5,<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;dataInHex&quot;: &=
-quot;aaaa bbbb aaaa bbbb&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;milliage=
-&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;nodeId&quot;: 1918,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;isExtendedId&quot;: true,=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot;4:2:li=
-ttle:int&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;expression&quot;: &quot;v=
-alue * 10&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;polling&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;=
-always&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;period&quot;: 30,<=
-br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;dataInHex&quot;: &=
-quot;aa bb cc dd ee ff aa bb&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributeUpdates&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributeOnThingsBoard&qu=
-ot;: &quot;softwareVersion&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;nodeId&quot;: 64,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;isExtendedId&quot;: true,=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;dataLength&quot;: 4,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;dataExpression&quot;: &qu=
-ot;value + 5&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;dataByteorder&quot;: &quo=
-t;little&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;serverSideRpc&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;sendS=
-ameData&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;nodeId&quot;: 4,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;isExtendedId&quot;: true,=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;isFd&quot;: true,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;bitrateSwitch&quot;: true=
-,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;dataInHex&quot;: &quot;aa=
- bb cc dd ee ff=C2=A0 =C2=A0 aa bb aa bb cc d ee ff&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;setLi=
-ghtLevel&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;nodeId&quot;: 5,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;dataLength&quot;: 2,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;dataByteorder&quot;: &quo=
-t;little&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;dataBefore&quot;: &quot;0=
-0AA&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;setSp=
-eed&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;nodeId&quot;: 16,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;dataAfter&quot;: &quot;01=
-02&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;dataExpression&quot;: &qu=
-ot;userSpeed if maxAllowedSpeed &gt; userSpeed else maxAllowedSpeed&quot;<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 ]<br>
-+=C2=A0 }<br>
-\ No newline at end of file<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-=
-gateway/custom_serial.json b/meta-oe/recipes-connectivity/thingsboard-gatew=
-ay/thingsboard-gateway/custom_serial.json<br>
-new file mode 100755<br>
-index 0000000000..0aee5cb765<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway=
-/custom_serial.json<br>
-@@ -0,0 +1,33 @@<br>
-+{<br>
-+=C2=A0 &quot;name&quot;: &quot;Custom serial connector&quot;,<br>
-+=C2=A0 &quot;devices&quot;: [<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;name&quot;: &quot;CustomSerialDevice1&quot;,<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;default&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;port&quot;: &quot;/dev/ttyUSB0&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;baudrate&quot;: 9600,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;converter&quot;: &quot;CustomSerialUplinkConve=
-rter&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;telemetry&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;byte&quot;,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;humidity&quot;,=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;untilDelimiter&quot;: &quot;\r&q=
-uot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;attributes&quot;:[<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;SerialNumber&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;string&quot;,<=
-br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;fromByte&quot;: 4,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;toByte&quot;: -1<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;attributeUpdates&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributeOnThingsBoard&quot;: &q=
-uot;attr1&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;stringToDevice&quot;: &quot;valu=
-e =3D ${attr1}\n&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 }<br>
-+=C2=A0 ]<br>
-+}<br>
-\ No newline at end of file<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-=
-gateway/logs.conf b/meta-oe/recipes-connectivity/thingsboard-gateway/things=
-board-gateway/logs.conf<br>
-new file mode 100755<br>
-index 0000000000..d66c2b84a8<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway=
-/logs.conf<br>
-@@ -0,0 +1,77 @@<br>
-+[loggers]<br>
-+keys=3Droot, service, connector, converter, tb_connection, storage, exten=
-sion<br>
-+[handlers]<br>
-+keys=3DconsoleHandler, serviceHandler, connectorHandler, converterHandler=
-, tb_connectionHandler, storageHandler, extensionHandler<br>
-+[formatters]<br>
-+keys=3DLogFormatter<br>
-+[logger_root]<br>
-+level=3DERROR<br>
-+handlers=3DconsoleHandler<br>
-+[logger_connector]<br>
-+level=3DINFO<br>
-+handlers=3DconnectorHandler<br>
-+formatter=3DLogFormatter<br>
-+qualname=3Dconnector<br>
-+[logger_storage]<br>
-+level=3DINFO<br>
-+handlers=3DstorageHandler<br>
-+formatter=3DLogFormatter<br>
-+qualname=3Dstorage<br>
-+[logger_tb_connection]<br>
-+level=3DINFO<br>
-+handlers=3Dtb_connectionHandler<br>
-+formatter=3DLogFormatter<br>
-+qualname=3Dtb_connection<br>
-+[logger_service]<br>
-+level=3DINFO<br>
-+handlers=3DserviceHandler<br>
-+formatter=3DLogFormatter<br>
-+qualname=3Dservice<br>
-+[logger_converter]<br>
-+level=3DINFO<br>
-+handlers=3DconverterHandler<br>
-+formatter=3DLogFormatter<br>
-+qualname=3Dconverter<br>
-+[logger_extension]<br>
-+level=3DINFO<br>
-+handlers=3DconnectorHandler<br>
-+formatter=3DLogFormatter<br>
-+qualname=3Dextension<br>
-+[handler_consoleHandler]<br>
-+class=3DStreamHandler<br>
-+level=3DINFO<br>
-+formatter=3DLogFormatter<br>
-+args=3D(sys.stdout,)<br>
-+[handler_connectorHandler]<br>
-+level=3DINFO<br>
-+class=3Dlogging.handlers.TimedRotatingFileHandler<br>
-+formatter=3DLogFormatter<br>
-+args=3D(&quot;./logs/connector.log&quot;, &quot;d&quot;, 1, 7,)<br>
-+[handler_storageHandler]<br>
-+level=3DINFO<br>
-+class=3Dlogging.handlers.TimedRotatingFileHandler<br>
-+formatter=3DLogFormatter<br>
-+args=3D(&quot;./logs/storage.log&quot;, &quot;d&quot;, 1, 7,)<br>
-+[handler_serviceHandler]<br>
-+level=3DINFO<br>
-+class=3Dlogging.handlers.TimedRotatingFileHandler<br>
-+formatter=3DLogFormatter<br>
-+args=3D(&quot;./logs/service.log&quot;, &quot;d&quot;, 1, 7,)<br>
-+[handler_converterHandler]<br>
-+level=3DINFO<br>
-+class=3Dlogging.handlers.TimedRotatingFileHandler<br>
-+formatter=3DLogFormatter<br>
-+args=3D(&quot;./logs/converter.log&quot;, &quot;d&quot;, 1, 3,)<br>
-+[handler_extensionHandler]<br>
-+level=3DINFO<br>
-+class=3Dlogging.handlers.TimedRotatingFileHandler<br>
-+formatter=3DLogFormatter<br>
-+args=3D(&quot;./logs/extension.log&quot;, &quot;d&quot;, 1, 3,)<br>
-+[handler_tb_connectionHandler]<br>
-+level=3DINFO<br>
-+class=3Dlogging.handlers.TimedRotatingFileHandler<br>
-+formatter=3DLogFormatter<br>
-+args=3D(&quot;./logs/tb_connection.log&quot;, &quot;d&quot;, 1, 3,)<br>
-+[formatter_LogFormatter]<br>
-+format=3D&quot;%(asctime)s - %(levelname)s - [%(filename)s] - %(module)s =
-- %(lineno)d - %(message)s&quot;<br>
-+datefmt=3D&quot;%Y-%m-%d %H:%M:%S&quot;<br>
-\ No newline at end of file<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-=
-gateway/modbus.json b/meta-oe/recipes-connectivity/thingsboard-gateway/thin=
-gsboard-gateway/modbus.json<br>
-new file mode 100755<br>
-index 0000000000..479d8aa4d0<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway=
-/modbus.json<br>
-@@ -0,0 +1,169 @@<br>
-+{<br>
-+=C2=A0 &quot;server&quot;: {<br>
-+=C2=A0 =C2=A0 &quot;type&quot;: &quot;tcp&quot;,<br>
-+=C2=A0 =C2=A0 &quot;host&quot;: &quot;127.0.0.1&quot;,<br>
-+=C2=A0 =C2=A0 &quot;port&quot;: 5020,<br>
-+=C2=A0 =C2=A0 &quot;timeout&quot;: 35,<br>
-+=C2=A0 =C2=A0 &quot;method&quot;: &quot;socket&quot;,<br>
-+=C2=A0 =C2=A0 &quot;byteOrder&quot;: &quot;BIG&quot;,<br>
-+=C2=A0 =C2=A0 &quot;devices&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;unitId&quot;: 1,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceName&quot;: &quot;Temp Sensor&quo=
-t;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributesPollPeriod&quot;: 5000,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeseriesPollPeriod&quot;: 5000,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;sendDataOnlyOnChange&quot;: true,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributes&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;string_r=
-ead&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;string&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 1<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;bits_rea=
-d&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;bits&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 1,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 5<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;8int_rea=
-d&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;8int&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 1,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 6<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;16int_re=
-ad&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;16int&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 1,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 7<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;32int_re=
-ad_divider&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;32int&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 2,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 8,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;divider&quot;: 10<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;8int_rea=
-d_multiplier&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;8int&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 1,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 10,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;multiplier&quot;: 10<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;32int_re=
-ad&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;32int&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 2,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 11<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;64int_re=
-ad&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;64int&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 13<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;timeseries&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;8uint_re=
-ad&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;8uint&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 1,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 17<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;16uint_r=
-ead&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;16uint&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 2,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 18<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;32uint_r=
-ead&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;32uint&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 20<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;64uint_r=
-ead&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;64uint&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 1,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 24<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;16float_=
-read&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;16float=
-&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 1,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 25<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;32float_=
-read&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;32float=
-&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 2,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 26<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;64float_=
-read&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;64float=
-&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 28<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributeUpdates&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;shared_a=
-ttribute_write&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;32int&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 6,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 2,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 29<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;rpc&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;setValue=
-&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;bits&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 5,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 1,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 31<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;getValue=
-&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;bits&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 1,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 1,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 31<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;setCPUFa=
-nSpeed&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;32int&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 16,<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 2,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 33<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;:&quot;getCPULoa=
-d&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;32int&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;objectsCount&quot;: 2,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 35<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 ]<br>
-+=C2=A0 }<br>
-+}<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-=
-gateway/modbus_serial.json b/meta-oe/recipes-connectivity/thingsboard-gatew=
-ay/thingsboard-gateway/modbus_serial.json<br>
-new file mode 100755<br>
-index 0000000000..19b38e3f7b<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway=
-/modbus_serial.json<br>
-@@ -0,0 +1,29 @@<br>
-+{<br>
-+=C2=A0 &quot;server&quot;: {<br>
-+=C2=A0 =C2=A0 &quot;name&quot;: &quot;Modbus Default Server&quot;,<br>
-+=C2=A0 =C2=A0 &quot;type&quot;: &quot;serial&quot;,<br>
-+=C2=A0 =C2=A0 &quot;method&quot;: &quot;rtu&quot;,<br>
-+=C2=A0 =C2=A0 &quot;port&quot;: &quot;/dev/ttyUSB0&quot;,<br>
-+=C2=A0 =C2=A0 &quot;baudrate&quot;: 19200,<br>
-+=C2=A0 =C2=A0 &quot;timeout&quot;: 35,<br>
-+=C2=A0 =C2=A0 &quot;devices&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;unitId&quot;: 1,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceName&quot;: &quot;Temp Sensor&quo=
-t;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributesPollPeriod&quot;: 5000,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeseriesPollPeriod&quot;: 5000,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;sendDataOnlyOnChange&quot;: true,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributes&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;byteOrder&quot;: &quot;BI=
-G&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tag&quot;: &quot;test&quo=
-t;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;long&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;functionCode&quot;: 4,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;registerCount&quot;: 1,<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;address&quot;: 4<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 ]<br>
-+=C2=A0 }<br>
-+}<br>
-\ No newline at end of file<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-=
-gateway/mqtt.json b/meta-oe/recipes-connectivity/thingsboard-gateway/things=
-board-gateway/mqtt.json<br>
-new file mode 100755<br>
-index 0000000000..6b78a7cec9<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway=
-/mqtt.json<br>
-@@ -0,0 +1,132 @@<br>
-+{<br>
-+=C2=A0 &quot;broker&quot;: {<br>
-+=C2=A0 =C2=A0 &quot;name&quot;:&quot;Default Local Broker&quot;,<br>
-+=C2=A0 =C2=A0 &quot;host&quot;:&quot;127.0.0.1&quot;,<br>
-+=C2=A0 =C2=A0 &quot;port&quot;:1883,<br>
-+=C2=A0 =C2=A0 &quot;clientId&quot;: &quot;ThingsBoard_gateway&quot;,<br>
-+=C2=A0 =C2=A0 &quot;security&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;basic&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;username&quot;: &quot;user&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;password&quot;: &quot;password&quot;<br>
-+=C2=A0 =C2=A0 }<br>
-+=C2=A0 },<br>
-+=C2=A0 &quot;mapping&quot;: [<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;topicFilter&quot;: &quot;/sensor/data&quot;,<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0 &quot;converter&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;json&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceNameJsonExpression&quot;: &quot;$=
-{serialNumber}&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceTypeJsonExpression&quot;: &quot;$=
-{sensorType}&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeout&quot;: 60000,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributes&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;string&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;model&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot;${sens=
-orModel}&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;string&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;${sensor=
-Model}&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot;on&quo=
-t;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeseries&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;double&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;temperat=
-ure&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot;${temp=
-}&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;double&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;humidity=
-&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot;${hum}=
-&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;topicFilter&quot;: &quot;/sensor/+/data&quot;,=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;converter&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;json&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceNameTopicExpression&quot;: &quot;=
-(?&lt;=3Dsensor\/)(.*?)(?=3D\/data)&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceTypeTopicExpression&quot;: &quot;=
-Thermometer&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeout&quot;: 60000,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributes&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;string&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;model&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot;${sens=
-orModel}&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeseries&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;double&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;temperat=
-ure&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot;${temp=
-}&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;double&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;humidity=
-&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot;${hum}=
-&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;topicFilter&quot;: &quot;/custom/sensors/+&quo=
-t;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;converter&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;custom&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;extension&quot;: &quot;CustomMqttUplink=
-Converter&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;extension-config&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;temperatureBytes&quot; : =
-2,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;humidityBytes&quot; :=C2=
-=A0 2,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;batteryLevelBytes&quot; :=
- 1<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 }<br>
-+=C2=A0 ],<br>
-+=C2=A0 &quot;connectRequests&quot;: [<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;topicFilter&quot;: &quot;sensor/connect&quot;,=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;deviceNameJsonExpression&quot;: &quot;${Serial=
-Number}&quot;<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;topicFilter&quot;: &quot;sensor/+/connect&quot=
-;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;deviceNameTopicExpression&quot;: &quot;(?&lt;=
-=3Dsensor\/)(.*?)(?=3D\/connect)&quot;<br>
-+=C2=A0 =C2=A0 }<br>
-+=C2=A0 ],<br>
-+=C2=A0 &quot;disconnectRequests&quot;: [<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;topicFilter&quot;: &quot;sensor/disconnect&quo=
-t;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;deviceNameJsonExpression&quot;: &quot;${Serial=
-Number}&quot;<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;topicFilter&quot;: &quot;sensor/+/disconnect&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;deviceNameTopicExpression&quot;: &quot;(?&lt;=
-=3Dsensor\/)(.*?)(?=3D\/disconnect)&quot;<br>
-+=C2=A0 =C2=A0 }<br>
-+=C2=A0 ],<br>
-+=C2=A0 &quot;attributeUpdates&quot;: [<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;deviceNameFilter&quot;: &quot;SmartMeter.*&quo=
-t;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;attributeFilter&quot;: &quot;uploadFrequency&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;topicExpression&quot;: &quot;sensor/${deviceNa=
-me}/${attributeKey}&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;valueExpression&quot;: &quot;{\&quot;${attribu=
-teKey}\&quot;:\&quot;${attributeValue}\&quot;}&quot;<br>
-+=C2=A0 =C2=A0 }<br>
-+=C2=A0 ],<br>
-+=C2=A0 &quot;serverSideRpc&quot;: [<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;deviceNameFilter&quot;: &quot;.*&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;methodFilter&quot;: &quot;echo&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;requestTopicExpression&quot;: &quot;sensor/${d=
-eviceName}/request/${methodName}/${requestId}&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;responseTopicExpression&quot;: &quot;sensor/${=
-deviceName}/response/${methodName}/${requestId}&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;responseTimeout&quot;: 10000,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;valueExpression&quot;: &quot;${params}&quot;<b=
-r>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;deviceNameFilter&quot;: &quot;.*&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;methodFilter&quot;: &quot;no-reply&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;requestTopicExpression&quot;: &quot;sensor/${d=
-eviceName}/request/${methodName}/${requestId}&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;valueExpression&quot;: &quot;${params}&quot;<b=
-r>
-+=C2=A0 =C2=A0 }<br>
-+=C2=A0 ]<br>
-+}<br>
-\ No newline at end of file<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-=
-gateway/odbc.json b/meta-oe/recipes-connectivity/thingsboard-gateway/things=
-board-gateway/odbc.json<br>
-new file mode 100644<br>
-index 0000000000..c93992a262<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway=
-/odbc.json<br>
-@@ -0,0 +1,54 @@<br>
-+{<br>
-+=C2=A0 =C2=A0 &quot;connection&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;str&quot;: &quot;Driver=3D{PostgreSQL};Server=
-=3Dlocalhost;Port=3D5432;Database=3Dthingsboard;Uid=3Dpostgres;Pwd=3Dpostg=
-res;&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;attributes&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;autocommit&quot;: true,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeout&quot;: 0<br>
-+=C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;encoding&quot;: &quot;utf-8&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;decoding&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;char&quot;: &quot;utf-8&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;wchar&quot;: &quot;utf-8&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;metadata&quot;: &quot;utf-16le&quot;<br=
->
-+=C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;reconnect&quot;: true,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;reconnectPeriod&quot;: 60<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 &quot;pyodbc&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;pooling&quot;: false<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 &quot;polling&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;query&quot;: &quot;SELECT bool_v, str_v, dbl_v=
-, long_v, entity_id, ts FROM ts_kv WHERE ts &gt; ? ORDER BY ts ASC LIMIT 10=
-&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;period&quot;: 10,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;iterator&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;column&quot;: &quot;ts&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;query&quot;: &quot;SELECT MIN(ts) - 1 F=
-ROM ts_kv&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;persistent&quot;: false<br>
-+=C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 &quot;mapping&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;device&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;postgres&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;name&quot;: &quot;&#39;ODBC &#39; + ent=
-ity_id&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;sendDataOnlyOnChange&quot;: false,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;attributes&quot;: &quot;*&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;timeseries&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;name&quot;: &quot;value&quot;,<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot;[i for i in [=
-str_v, long_v, dbl_v,bool_v] if i is not None][0]&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 &quot;serverSideRpc&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;enableUnknownRpc&quot;: false,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;overrideRpcConfig&quot;: true,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;methods&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;procedureOne&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;name&quot;: &quot;procedureTwo&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;args&quot;: [ &quot;One&quot;, 2=
-, 3.0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 }<br>
-+=C2=A0 }<br>
-\ No newline at end of file<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-=
-gateway/opcua.json b/meta-oe/recipes-connectivity/thingsboard-gateway/thing=
-sboard-gateway/opcua.json<br>
-new file mode 100755<br>
-index 0000000000..1deed7d524<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway=
-/opcua.json<br>
-@@ -0,0 +1,49 @@<br>
-+{<br>
-+=C2=A0 &quot;server&quot;: {<br>
-+=C2=A0 =C2=A0 &quot;name&quot;: &quot;OPC-UA Default Server&quot;,<br>
-+=C2=A0 =C2=A0 &quot;url&quot;: &quot;localhost:4840/freeopcua/server/&quo=
-t;,<br>
-+=C2=A0 =C2=A0 &quot;timeoutInMillis&quot;: 5000,<br>
-+=C2=A0 =C2=A0 &quot;scanPeriodInMillis&quot;: 5000,<br>
-+=C2=A0 =C2=A0 &quot;disableSubscriptions&quot;:false,<br>
-+=C2=A0 =C2=A0 &quot;subCheckPeriodInMillis&quot;: 100,<br>
-+=C2=A0 =C2=A0 &quot;showMap&quot;: false,<br>
-+=C2=A0 =C2=A0 &quot;security&quot;: &quot;Basic128Rsa15&quot;,<br>
-+=C2=A0 =C2=A0 &quot;identity&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;anonymous&quot;<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 &quot;mapping&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceNodePattern&quot;: &quot;Root\\.O=
-bjects\\.Device1&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceNamePattern&quot;: &quot;Device $=
-{Root\\.Objects\\.Device1\\.serialNumber}&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributes&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;temperat=
-ure =C2=B0C&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;path&quot;: &quot;${ns=3D=
-2;i=3D5}&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeseries&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;humidity=
-&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;path&quot;: &quot;${Root\=
-\.Objects\\.Device1\\.TemperatureAndHumiditySensor\\.Humidity}&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;batteryL=
-evel&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;path&quot;: &quot;${Batte=
-ry\\.batteryLevel}&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;rpc_methods&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;multi=
-ply&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;arguments&quot;: [2, 4]<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributes_updates&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributeOnThingsBoard&qu=
-ot;: &quot;deviceName&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributeOnDevice&quot;: =
-&quot;Root\\.Objects\\.Device1\\.serialNumber&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 ]<br>
-+=C2=A0 }<br>
-+}<br>
-\ No newline at end of file<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-=
-gateway/request.json b/meta-oe/recipes-connectivity/thingsboard-gateway/thi=
-ngsboard-gateway/request.json<br>
-new file mode 100644<br>
-index 0000000000..43237a7dc0<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway=
-/request.json<br>
-@@ -0,0 +1,146 @@<br>
-+&quot;job&quot;: &quot;leader&quot;<br>
-+},<br>
-+&quot;allowRedirects&quot;: true,<br>
-+&quot;timeout&quot;: 0.5,<br>
-+&quot;scanPeriod&quot;: 5,<br>
-+&quot;converter&quot;: {<br>
-+=C2=A0 &quot;type&quot;: &quot;json&quot;,<br>
-+=C2=A0 &quot;deviceNameJsonExpression&quot;: &quot;SD8500&quot;,<br>
-+=C2=A0 &quot;deviceTypeJsonExpression&quot;: &quot;SD&quot;,<br>
-+=C2=A0 &quot;attributes&quot;: [<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;serialNumber&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;string&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot;${serial}&quot;<br>
-+=C2=A0 =C2=A0 }<br>
-+=C2=A0 ],<br>
-+=C2=A0 &quot;telemetry&quot;: [<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Maintainer&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;string&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot;${Developer}&quot;<br>
-+=C2=A0 =C2=A0 }<br>
-+=C2=A0 ]<br>
-+}<br>
-+},<br>
-+{<br>
-+&quot;url&quot;: &quot;get_info&quot;,<br>
-+&quot;httpMethod&quot;: &quot;GET&quot;,<br>
-+&quot;httpHeaders&quot;: {<br>
-+=C2=A0 &quot;ACCEPT&quot;: &quot;application/json&quot;<br>
-+},<br>
-+&quot;allowRedirects&quot;: true,<br>
-+&quot;timeout&quot;: 0.5,<br>
-+&quot;scanPeriod&quot;: 100,<br>
-+&quot;converter&quot;: {<br>
-+=C2=A0 &quot;type&quot;: &quot;custom&quot;,<br>
-+=C2=A0 &quot;deviceNameJsonExpression&quot;: &quot;SD8500&quot;,<br>
-+=C2=A0 &quot;deviceTypeJsonExpression&quot;: &quot;SD&quot;,<br>
-+=C2=A0 &quot;extension&quot;: &quot;CustomRequestUplinkConverter&quot;,<b=
-r>
-+=C2=A0 &quot;extension-config&quot;: [<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Totaliser&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;float&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;fromByte&quot;: 0,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;toByte&quot;: 4,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;byteorder&quot;: &quot;big&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;signed&quot;: true,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;multiplier&quot;: 1<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Flow&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;int&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;fromByte&quot;: 4,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;toByte&quot;: 6,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;byteorder&quot;: &quot;big&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;signed&quot;: true,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;multiplier&quot;: 0.01<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Temperature&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;int&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;fromByte&quot;: 8,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;toByte&quot;: 10,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;byteorder&quot;: &quot;big&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;signed&quot;: true,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;multiplier&quot;: 0.01<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Pressure&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;int&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;fromByte&quot;: 12,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;toByte&quot;: 14,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;byteorder&quot;: &quot;big&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;signed&quot;: true,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;multiplier&quot;: 0.01<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;deviceStatus&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;int&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;byteAddress&quot;: 15,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;fromBit&quot;: 4,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;toBit&quot;: 8,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;byteorder&quot;: &quot;big&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;signed&quot;: false<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;OUT2&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;int&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;byteAddress&quot;: 15,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;fromBit&quot;: 1,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;toBit&quot;: 2,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;byteorder&quot;: &quot;big&quot;<br>
-+=C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;OUT1&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;int&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;byteAddress&quot;: 15,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;fromBit&quot;: 0,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;toBit&quot;: 1,<br>
-+=C2=A0 =C2=A0 =C2=A0 &quot;byteorder&quot;: &quot;big&quot;<br>
-+=C2=A0 =C2=A0 }<br>
-+=C2=A0 ]<br>
-+}<br>
-+}<br>
-+],<br>
-+&quot;attributeUpdates&quot;: [<br>
-+{<br>
-+=C2=A0 &quot;httpMethod&quot;: &quot;POST&quot;,<br>
-+=C2=A0 &quot;httpHeaders&quot;: {<br>
-+=C2=A0 =C2=A0 &quot;CONTENT-TYPE&quot;: &quot;application/json&quot;<br>
-+=C2=A0 },<br>
-+=C2=A0 &quot;timeout&quot;: 0.5,<br>
-+=C2=A0 &quot;tries&quot;: 3,<br>
-+=C2=A0 &quot;allowRedirects&quot;: true,<br>
-+=C2=A0 &quot;deviceNameFilter&quot;: &quot;SD.*&quot;,<br>
-+=C2=A0 &quot;attributeFilter&quot;: &quot;send_data&quot;,<br>
-+=C2=A0 &quot;requestUrlExpression&quot;: &quot;sensor/${deviceName}/${att=
-ributeKey}&quot;,<br>
-+=C2=A0 &quot;valueExpression&quot;: &quot;{\&quot;${attributeKey}\&quot;:=
-\&quot;${attributeValue}\&quot;}&quot;<br>
-+}<br>
-+],<br>
-+&quot;serverSideRpc&quot;: [<br>
-+{<br>
-+&quot;deviceNameFilter&quot;: &quot;.*&quot;,<br>
-+&quot;methodFilter&quot;: &quot;echo&quot;,<br>
-+&quot;requestUrlExpression&quot;: &quot;sensor/${deviceName}/request/${me=
-thodName}/${requestId}&quot;,<br>
-+&quot;responseTimeout&quot;: 1,<br>
-+&quot;httpMethod&quot;: &quot;GET&quot;,<br>
-+&quot;valueExpression&quot;: &quot;${params}&quot;,<br>
-+&quot;timeout&quot;: 0.5,<br>
-+&quot;tries&quot;: 3,<br>
-+&quot;httpHeaders&quot;: {<br>
-+=C2=A0 &quot;Content-Type&quot;: &quot;application/json&quot;<br>
-+}<br>
-+},<br>
-+{<br>
-+&quot;deviceNameFilter&quot;: &quot;.*&quot;,<br>
-+&quot;methodFilter&quot;: &quot;no-reply&quot;,<br>
-+&quot;requestUrlExpression&quot;: &quot;sensor/${deviceName}/request/${me=
-thodName}/${requestId}&quot;,<br>
-+&quot;httpMethod&quot;: &quot;POST&quot;,<br>
-+&quot;valueExpression&quot;: &quot;${params}&quot;,<br>
-+&quot;httpHeaders&quot;: {<br>
-+=C2=A0 &quot;Content-Type&quot;: &quot;application/json&quot;<br>
-+}<br>
-+}<br>
-+]<br>
-+}<br>
-\ No newline at end of file<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-=
-gateway/rest.json b/meta-oe/recipes-connectivity/thingsboard-gateway/things=
-board-gateway/rest.json<br>
-new file mode 100644<br>
-index 0000000000..be6c6ff18e<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway=
-/rest.json<br>
-@@ -0,0 +1,152 @@<br>
-+{<br>
-+=C2=A0 =C2=A0 &quot;host&quot;: &quot;127.0.0.1&quot;,<br>
-+=C2=A0 =C2=A0 &quot;port&quot;: &quot;5000&quot;,<br>
-+=C2=A0 =C2=A0 &quot;mapping&quot;:[<br>
-+=C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;endpoint&quot;: &quot;/device1&quot;,<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;HTTPMethods&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;POST&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;security&quot;:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;basic&quot;,<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;username&quot;: &quot;user&quot;=
-,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;password&quot;: &quot;passwd&quo=
-t;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;converter&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;json&quot;,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceNameExpression&quot;: &quo=
-t;Device ${name}&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceTypeExpression&quot;: &quo=
-t;default&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributes&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;=
-string&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;m=
-odel&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot=
-;${sensorModel}&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeseries&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;=
-double&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;$=
-{sensorModel}&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot=
-;${temp}&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;=
-double&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;h=
-umidity&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot=
-;${hum}&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;endpoint&quot;: &quot;/anon1&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;HTTPMethods&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;GET&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;POST&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;security&quot;:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;anonymous&quot=
-;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;converter&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;json&quot;,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceNameExpression&quot;: &quo=
-t;Device 2&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceTypeExpression&quot;: &quo=
-t;default&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributes&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;=
-string&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;m=
-odel&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot=
-;Model2&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeseries&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;=
-double&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;t=
-emperature&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot=
-;${temp}&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;=
-double&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;h=
-umidity&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;value&quot;: &quot=
-;${hum}&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;endpoint&quot;: &quot;/anon2&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;HTTPMethods&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;POST&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;security&quot;:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;anonymous&quot=
-;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;converter&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;custom&quot;,<=
-br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceNameExpression&quot;: &quo=
-t;SuperAnonDevice&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceTypeExpression&quot;: &quo=
-t;default&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;extension&quot;: &quot;CustomRes=
-tUplinkConverter&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;extension-config&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Totalise=
-r&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;datatype&quot;: &quot;flo=
-at&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;fromByte&quot;: 0,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;toByte&quot;: 4,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;byteorder&quot;: &quot;bi=
-g&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;signed&quot;: true,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;multiplier&quot;: 1<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }]<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 &quot;attributeUpdates&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;HTTPMethod&quot;: &quot;POST&quo=
-t;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;SSLVerify&quot;: false,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;httpHeaders&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;CONTENT-TYPE&quot;: &quot=
-;application/json&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;security&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;basic&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;username&quot;: &quot;use=
-r&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;password&quot;: &quot;pas=
-swd&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeout&quot;: 0.5,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tries&quot;: 3,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;allowRedirects&quot;: true,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceNameFilter&quot;: &quot;.*=
-REST$&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributeFilter&quot;: &quot;dat=
-a&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;requestUrlExpression&quot;: &quo=
-t;sensor/${deviceName}/${attributeKey}&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;valueExpression&quot;: &quot;{\&=
-quot;${attributeKey}\&quot;:\&quot;${attributeValue}\&quot;}&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 &quot;serverSideRpc&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceNameFilter&quot;: &quot;.*&quot;,=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;methodFilter&quot;: &quot;echo&quot;,<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;requestUrlExpression&quot;: &quot;<a hr=
-ef=3D"http://127.0.0.1:5001/$%7BdeviceName%7D" rel=3D"noreferrer" target=3D=
-"_blank">http://127.0.0.1:5001/${deviceName}</a>&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;responseTimeout&quot;: 1,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;HTTPMethod&quot;: &quot;GET&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;valueExpression&quot;: &quot;${params}&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeout&quot;: 0.5,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;tries&quot;: 3,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;httpHeaders&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;Content-Type&quot;: &quot;applic=
-ation/json&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;security&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;type&quot;: &quot;anonymous&quot=
-;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceNameFilter&quot;: &quot;.*&quot;,=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;methodFilter&quot;: &quot;no-reply&quot=
-;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;requestUrlExpression&quot;: &quot;senso=
-r/${deviceName}/request/${methodName}/${requestId}&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;HTTPMethod&quot;: &quot;POST&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;valueExpression&quot;: &quot;${params}&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;httpHeaders&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;Content-Type&quot;: &quot;applic=
-ation/json&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 ]<br>
-+=C2=A0 }<br>
-\ No newline at end of file<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-=
-gateway/snmp.json b/meta-oe/recipes-connectivity/thingsboard-gateway/things=
-board-gateway/snmp.json<br>
-new file mode 100644<br>
-index 0000000000..b4ddb42645<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway=
-/snmp.json<br>
-@@ -0,0 +1,138 @@<br>
-+{<br>
-+=C2=A0 =C2=A0 &quot;devices&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceName&quot;: &quot;SNMP router&quo=
-t;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceType&quot;: &quot;snmp&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;ip&quot;: &quot;<a href=3D"http://snmp.=
-live.gambitcommunications.com" rel=3D"noreferrer" target=3D"_blank">snmp.li=
-ve.gambitcommunications.com</a>&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;port&quot;: 161,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;pollPeriod&quot;: 5000,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;community&quot;: &quot;public&quot;,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributes&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Received=
-FromGet&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;get&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;oid&quot;: &quot;1.3.6.1.=
-2.1.1.1.0&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeout&quot;: 6<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Received=
-FromMultiGet&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;multi=
-get&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;oid&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;1.3.6.1.2.1.1.1.0&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;1.3.6.1.2.1.1.2.0&=
-quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeout&quot;: 6<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Received=
-FromGetNext&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;getne=
-xt&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;oid&quot;: &quot;1.3.6.1.=
-2.1.1.1.0&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;timeout&quot;: 6<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Received=
-FromMultiWalk&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;multi=
-walk&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;oid&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;1.3.6.1.2.1.1.1.0&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;1.3.6.0.1.2.1&quot=
-;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Received=
-FromBulkWalk&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;bulkw=
-alk&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;oid&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;1.3.6.1.2.1.1.1.0&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;1.3.6.1.2.1.1.2.0&=
-quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Received=
-FromBulkGet&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;bulkg=
-et&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;scalarOid&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;1.3.6.1.2.1.1.1.0&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;1.3.6.1.2.1.1.2.0&=
-quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;repeatingOid&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;1.3.6.1.2.1.1.1.0&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;1.3.6.1.2.1.1.2.0&=
-quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;maxListSize&quot;: 10<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;telemetry&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Received=
-FromWalk&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;community&quot;: &quot;pr=
-ivate&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;walk&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;oid&quot;: &quot;1.3.6.1.=
-2.1.1.1.0&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Received=
-FromTable&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;table=
-&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;oid&quot;: &quot;1.3.6.1.=
-2.1.1&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributeUpdateRequests&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributeFilter&quot;: &q=
-uot;dataToSet&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;set&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;oid&quot;: &quot;1.3.6.1.=
-2.1.1.1.0&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributeFilter&quot;: &q=
-uot;dataToMultiSet&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;multi=
-set&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;mappings&quot;: {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;1.2.3&quot;: &quot=
-;10&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;2.3.4&quot;: &quot=
-;${attribute}&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;serverSideRpcRequests&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;requestFilter&quot;: &quo=
-t;setData&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;set&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;oid&quot;: &quot;1.3.6.1.=
-2.1.1.1.0&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;requestFilter&quot;: &quo=
-t;multiSetData&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;multi=
-set&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;requestFilter&quot;: &quo=
-t;getData&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;get&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;oid&quot;: &quot;1.3.6.1.=
-2.1.1.1.0&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;requestFilter&quot;: &quo=
-t;runBulkWalk&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;bulkw=
-alk&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;oid&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;1.3.6.1.2.1.1.1.0&=
-quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;1.3.6.1.2.1.1.2.0&=
-quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceName&quot;: &quot;SNMP router&quo=
-t;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;deviceType&quot;: &quot;snmp&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;ip&quot;: &quot;127.0.0.1&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;pollPeriod&quot;: 5000,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;community&quot;: &quot;public&quot;,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;converter&quot;: &quot;CustomSNMPConver=
-ter&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;attributes&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Received=
-FromGetWithCustomConverter&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;get&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;oid&quot;: &quot;1.3.6.1.=
-2.1.1.1.0&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ],<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;telemetry&quot;: [<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;key&quot;: &quot;Received=
-FromTableWithCustomConverter&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;method&quot;: &quot;table=
-&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;oid&quot;: &quot;1.3.6.1.=
-2.1.1.1.0&quot;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ]<br>
-+=C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 ]<br>
-+=C2=A0 }<br>
-\ No newline at end of file<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-=
-gateway/tb_gateway.yaml b/meta-oe/recipes-connectivity/thingsboard-gateway/=
-thingsboard-gateway/tb_gateway.yaml<br>
-new file mode 100755<br>
-index 0000000000..e3eb8f1fc7<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway=
-/tb_gateway.yaml<br>
-@@ -0,0 +1,66 @@<br>
-+thingsboard:<br>
-+=C2=A0 host: <a href=3D"http://demo.thingsboard.io" rel=3D"noreferrer" ta=
-rget=3D"_blank">demo.thingsboard.io</a><br>
-+=C2=A0 port: 1883<br>
-+=C2=A0 remoteConfiguration: false<br>
-+=C2=A0 security:<br>
-+=C2=A0 =C2=A0 accessToken: PUT_YOUR_GW_ACCESS_TOKEN_HERE<br>
-+storage:<br>
-+=C2=A0 type: memory<br>
-+=C2=A0 read_records_count: 100<br>
-+=C2=A0 max_records_count: 100000<br>
-+#=C2=A0 type: file<br>
-+#=C2=A0 data_folder_path: ./data/<br>
-+#=C2=A0 max_file_count: 10<br>
-+#=C2=A0 max_read_records_count: 10<br>
-+#=C2=A0 max_records_per_file: 10000<br>
-+connectors:<br>
-+=C2=A0 -<br>
-+=C2=A0 =C2=A0 name: MQTT Broker Connector<br>
-+=C2=A0 =C2=A0 type: mqtt<br>
-+=C2=A0 =C2=A0 configuration: mqtt.json<br>
-+<br>
-+#=C2=A0 -<br>
-+#=C2=A0 =C2=A0 name: Modbus Connector<br>
-+#=C2=A0 =C2=A0 type: modbus<br>
-+#=C2=A0 =C2=A0 configuration: modbus.json<br>
-+#<br>
-+#=C2=A0 -<br>
-+#=C2=A0 =C2=A0 name: Modbus Connector<br>
-+#=C2=A0 =C2=A0 type: modbus<br>
-+#=C2=A0 =C2=A0 configuration: modbus_serial.json<br>
-+#<br>
-+#=C2=A0 -<br>
-+#=C2=A0 =C2=A0 name: OPC-UA Connector<br>
-+#=C2=A0 =C2=A0 type: opcua<br>
-+#=C2=A0 =C2=A0 configuration: opcua.json<br>
-+#<br>
-+#=C2=A0 -<br>
-+#=C2=A0 =C2=A0 name: BLE Connector<br>
-+#=C2=A0 =C2=A0 type: ble<br>
-+#=C2=A0 =C2=A0 configuration: ble.json<br>
-+#<br>
-+#=C2=A0 -<br>
-+#=C2=A0 =C2=A0 name: REQUEST Connector<br>
-+#=C2=A0 =C2=A0 type: request<br>
-+#=C2=A0 =C2=A0 configuration: request.json<br>
-+#<br>
-+#=C2=A0 -<br>
-+#=C2=A0 =C2=A0 name: CAN Connector<br>
-+#=C2=A0 =C2=A0 type: can<br>
-+#=C2=A0 =C2=A0 configuration: can.json<br>
-+#<br>
-+#=C2=A0 -<br>
-+#=C2=A0 =C2=A0 name: BACnet Connector<br>
-+#=C2=A0 =C2=A0 type: bacnet<br>
-+#=C2=A0 =C2=A0 configuration: bacnet.json<br>
-+#<br>
-+#=C2=A0 -<br>
-+#=C2=A0 =C2=A0 name: ODBC Connector<br>
-+#=C2=A0 =C2=A0 type: odbc<br>
-+#=C2=A0 =C2=A0 configuration: odbc.json<br>
-+#<br>
-+#=C2=A0 -<br>
-+#=C2=A0 =C2=A0 name: Custom Serial Connector<br>
-+#=C2=A0 =C2=A0 type: serial<br>
-+#=C2=A0 =C2=A0 configuration: custom_serial.json<br>
-+#=C2=A0 =C2=A0 class: CustomSerialConnector<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-=
-gateway/thingsboard-gateway.service b/meta-oe/recipes-connectivity/thingsbo=
-ard-gateway/thingsboard-gateway/thingsboard-gateway.service<br>
-new file mode 100644<br>
-index 0000000000..5dd352a553<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway=
-/thingsboard-gateway.service<br>
-@@ -0,0 +1,13 @@<br>
-+[Unit]<br>
-+Description =3D Systemd service for Thingsboard Gateway<br>
-+After=C2=A0 =C2=A0 =C2=A0 =C2=A0=3D network.target<br>
-+<br>
-+[Service]<br>
-+ExecStart=C2=A0 =C2=A0=3D /usr/bin/python3 /usr/bin/thingsboard-gateway<b=
-r>
-+ExecStop=C2=A0 =C2=A0 =3D /bin/kill -INT $MAINPID<br>
-+ExecReload=C2=A0 =3D /bin/kill -TERM $MAINPID<br>
-+Restart=C2=A0 =C2=A0 =C2=A0=3D always<br>
-+Type=C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D simple<br>
-+<br>
-+[Install]<br>
-+WantedBy=3Dmulti-user.target<br>
-diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/<a href=3D"h=
-ttp://thingsboard-gateway_2.5.2.bb" rel=3D"noreferrer" target=3D"_blank">th=
-ingsboard-gateway_2.5.2.bb</a> b/meta-oe/recipes-connectivity/thingsboard-g=
-ateway/<a href=3D"http://thingsboard-gateway_2.5.2.bb" rel=3D"noreferrer" t=
-arget=3D"_blank">thingsboard-gateway_2.5.2.bb</a><br>
-new file mode 100644<br>
-index 0000000000..2f0ef16c80<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/thingsboard-gateway/<a href=3D"http://t=
-hingsboard-gateway_2.5.2.bb" rel=3D"noreferrer" target=3D"_blank">thingsboa=
-rd-gateway_2.5.2.bb</a><br>
-@@ -0,0 +1,68 @@<br>
-+SUMMARY =3D &quot;Open-source IoT platform for data collection, processin=
-g, visualization, and device management&quot;<br>
-+DESCRIPTION =3D &quot;\<br>
-+The Thingsboard IoT Gateway is an open-source solution that allows you \<=
-br>
-+to integrate devices connected to legacy and third-party systems with Thi=
-ngsboard.&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://thingsboard.io/" rel=3D"noreferrer"=
- target=3D"_blank">https://thingsboard.io/</a>&quot;<br>
-+<br>
-+LICENSE =3D &quot;Apache-2.0&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=3D=
-89aea4e17d99a7cacdbeed46a0096b10&quot;<br>
-+<br>
-+SRC_URI[md5sum] =3D &quot;469c8b5cd1c16c20ef40f0a97a3a0fda&quot;<br>
-+SRC_URI[sha256sum] =3D &quot;b328f4e315c3541ac80a4931974a34a81afe4d1f382f=
-48e8604669a55816c0d7&quot;<br>
-+<br>
-+inherit pypi setuptools3<br>
-+<br>
-+PYPI_PACKAGE =3D &quot;thingsboard-gateway&quot;<br>
-+<br>
-+RDEPENDS_${PN} +=3D &quot; python3-jsonpath-rw \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pyt=
-hon3-regex \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pyt=
-hon3-paho-mqtt \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pyt=
-hon3-pyyaml \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pyt=
-hon3-simplejson \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pyt=
-hon3-requests \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pyt=
-hon3-pip \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pyt=
-hon3-pyrsistent \<br>
-+&quot;<br>
-+<br>
-+SRC_URI +=3D &quot;file://bacnet.json \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://ble.json \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://can.json \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://custom_serial.json \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://modbus.json \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://modbus_serial.json \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://mqtt.json \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://opcua.json \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://odbc.json \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://request.json \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://rest.json \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://snmp.json \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://tb_gateway.yaml \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://logs.conf \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://thingsboard-gateway.serv=
-ice \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
-+<br>
-+<br>
-+inherit systemd<br>
-+<br>
-+SYSTEMD_PACKAGES =3D &quot;${PN}&quot;<br>
-+SYSTEMD_SERVICE_${PN} =3D &quot;thingsboard-gateway.service&quot;<br>
-+<br>
-+FILES_${PN} +=3D &quot;/etc \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /lib \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /usr \<br>
-+&quot;<br>
-+<br>
-+do_install_append(){<br>
-+<br>
-+=C2=A0 =C2=A0 install -d ${D}${sysconfdir}/thingsboard-gateway/config<br>
-+<br>
-+=C2=A0 =C2=A0 for file in $(find ${WORKDIR} -maxdepth 1 -type f -name *.j=
-son); do<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 install -m 0644 &quot;$file&quot; ${D}${sysco=
-nfdir}/thingsboard-gateway/config<br>
-+=C2=A0 =C2=A0 done<br>
-+<br>
-+=C2=A0 =C2=A0 install -m 0644 ${WORKDIR}/tb_gateway.yaml ${D}${sysconfdir=
-}/thingsboard-gateway/config<br>
-+=C2=A0 =C2=A0 install -m 0644 ${WORKDIR}/logs.conf ${D}${sysconfdir}/thin=
-gsboard-gateway/config<br>
-+<br>
-+=C2=A0 =C2=A0 install -d ${D}${systemd_unitdir}/system/<br>
-+=C2=A0 =C2=A0 install -m 0644 ${WORKDIR}/thingsboard-gateway.service=C2=
-=A0 =C2=A0 =C2=A0${D}${systemd_system_unitdir}/thingsboard-gateway.service=
-<br>
-+}<br>
-\ No newline at end of file<br>
---<br>
-2.29.2<br>
-<br>
-<br>
-<br>
-</blockquote></div></div>
 
---00000000000086e3f105b473003b--
+-- 
+
+/Electronics that lead the way/
+
+*Eric BOCCATI*
+Software Designer
+
+Tel +41 91 911 77 00
+
+TEQ SA - Via al Municipio 16 - 6917 Lugano - Barbengo - Switzerland
+www.teq-automotive.com <http://www.teq-automotive.com>
+
+
+*/Multiplex - Dashboards - ITS - Fleet Management - Gas Sensors - 
+Advanced Driver Assistance Systems - Remote Diagnostics/ ***
+
+--------------572993FFB21099E9E0DB837E
+Content-Type: multipart/related;
+ boundary="------------F4CB2BA2243AB55A43653AFA"
+
+--------------F4CB2BA2243AB55A43653AFA
+Content-Type: text/html; charset=iso-8859-15
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-15">
+  </head>
+  <body>
+    Hi,
+    <div class="moz-forward-container">
+      <p>im trying to build jre using your meta-java pulling it from
+        last commit of zeus branch but cacao fetch fail:</p>
+      <p><img src="cid:part1.63208696.EC69CF6F@teq.ch" alt="" class=""></p>
+      <p>I tried to move recipe from meta-java rocko (our
+        previous/working branch) but it stuck on:</p>
+      <p><img src="cid:part2.E58141EA.77286856@teq.ch" alt="" class=""></p>
+      <div class="moz-signature"><br>
+      </div>
+      <div class="moz-signature"><br>
+      </div>
+      <div class="moz-signature">-- <br>
+        <meta http-equiv="content-type" content="text/html;
+          charset=ISO-8859-15">
+        <font style="font-size:1pt" face="Calibri,sans-serif"> <img
+            style="margin:0;padding:0"
+            src="cid:part3.F49602EC.94C3E966@teq.ch" alt="" class=""> <br>
+          <font style="font-size:10pt" face="Calibri,sans-serif"> <i><span
+                style="font-size:8pt">Electronics that lead the way</span></i>
+            <br>
+            <br>
+            <b>Eric BOCCATI</b> <br>
+            Software Designer <br>
+            <br>
+            Tel +41 91 911 77 00 <br>
+            <br>
+            TEQ SA - Via al Municipio 16 - 6917 Lugano - Barbengo -
+            Switzerland <br>
+            <a href="http://www.teq-automotive.com"
+              moz-do-not-send="true">www.teq-automotive.com</a> <br>
+            <br>
+            <img src="cid:part5.520933B9.541B9B9F@teq.ch" alt=""
+              class=""> <br>
+            <b><i><span style="color:rgb(86,168,208)">Multiplex -
+                  Dashboards - ITS - Fleet Management - Gas Sensors -
+                  Advanced Driver Assistance Systems - Remote
+                  Diagnostics</span></i> </b></font><b> </b></font></div>
+    </div>
+  </body>
+</html>
+
+--------------F4CB2BA2243AB55A43653AFA
+Content-Type: image/png;
+ name="ofahnpmgaalcndki.png"
+Content-Transfer-Encoding: base64
+Content-ID: <part1.63208696.EC69CF6F@teq.ch>
+Content-Disposition: inline;
+ filename="ofahnpmgaalcndki.png"
+
+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
+1DgcAAAAAElFTkSuQmCC
+
+--------------F4CB2BA2243AB55A43653AFA
+Content-Type: image/png;
+ name="pfdnlobbkkemidon.png"
+Content-Transfer-Encoding: base64
+Content-ID: <part2.E58141EA.77286856@teq.ch>
+Content-Disposition: inline;
+ filename="pfdnlobbkkemidon.png"
+
+iVBORw0KGgoAAAANSUhEUgAABb0AAABwCAYAAAA69t0YAAAgAElEQVR4nO3dXa6zOBKA4bOS7Av1
+XoZljNQswXsYiXv25LkAgjFV5R8gEPJePFL3lwP4H1M4zt/r9fKtG7xrX/71AnCcxne91reszwAA
+AAAAAADU+nu9CHoD5yDoDQAAAAAAAHza39UJAAAAAAAAAADgKAS9AQAAAAAAAACPQdAbAAAAAAAA
+APAY7OkNAAAAAAAAAHiMQ4LerRt83zWXZyY/nXt/RLD1bhj80He+Cf696Xo/DMPItdVl9unyPPd6
+Y1nnnv9b2tJ1Mttu65a2OPQ3SPdnyuXotpPu0/JY8Lty2mdemX3LWPAt6fzevNPH7l9H1vWOrb+S
+edYZ5SIe96P3WxbLfBLj4OXl0jo/DL3vmnkccr69PP+w/PL8DLJfbhO/nHecaMe98T9uWObP//vX
+/3NiOvcHvZvO9x+48e/uqKt0nhP0njVdXx/0Fsrz1EHq9PorCEZ+S1uqaSuT+Lp2O1iOW9pqflDx
+tx5Izwl6z/Q+zYOoVA+7g94fGgt2E9NZ2ybWY0V+/z26DY51mAwsfqyO6GOSrPvYp/vRof3BljPP
+2l1+Bfk78n57/wfTs+bQ6zEwfHBavewoGCNbV37MPd1nHFyeGVvvpgfdnyiXqgf7uE3H99Tt5659
+RS/S5OeHkmvGzxDvz+Zya902P9O/bY6R5gXRi7+5TcT9rywfx7TV/deTy1N75mjdIJfZnHfq9lL3
+v7+el+5vzbso0Y+s9inNJ1blMsdgwvuK2Y+m/5buQ0I65/lNOp9f0t93Br37//7zkTazO+jddP1H
+OtDejrpO57mrVPYEvaXyPHOQOr/+8oOR39KW6vO+fTiW09L4rg8eJILBJKvtfkvA8KJ2VmNvgOV3
+HDO2fmosOKJdrNI5TSy6ri97CJ8mWMXlVns9Q+vCSdA4ZuXeq/A5OfexT9fRJ693RdBbzN8J99v7
+P5juGOfVMWt7znAsOqRtNZ3vLw/Sfr/WzWXYevdLc82wr2sBjo143h/+vzFvjQMX0xwh3QesuXD8
+2RQAcW1WoCTOwzqAFParxneum9rKtWPZ/uvr5dmI867xRZB5PHV7qV9O97fmXZToR1ZeU/PHcb7R
+CrGYiqD3W2mc4ov6e9W9cfRFQe/oLX+qQcRvLOJCid6G9F0jvo1Zv5lInFNK57vSw2P1VeBh58j5
+aq3cmbZvV7aNZ51OM++t84PrpnP2vmuXt1JL0FTKn349PQA7JMt6PjZMszypm88Rv+FSVowIbaI2
+Lem2pKxwFCYk4xsvJx9nvG2b20Y6LXHZrMtTbrtGPzSl2ou18lOrh9w2WJoW63pKO0uOS2lSn9bH
+AisPxviSbGepsThuT319WpL1rrT5RPvM25qgdCzQ0rLnuJr7Suvd9Hfyw5Cu7h6873rieC0EheZz
+p+pIvwek2pJeR3V9LON65vgT9qFgEmeOIcpxyXKx2pn8Wf69Q5v3ZPb37DzobaK+/qx+K6W9Jn/G
+WKDeh7VxSbq3lY+fdt3a+avvf3q9p/qJOQ+Z2288X1DHLKX9ZAe9pevl1GHOcdtxTioPq27tOrL7
+Q30/0uYFdXnXV6wNDyuXIxmLXayXMLXz1tQ543nCFKwoC5SE8237my71QTZrjllw7xfuHUWs8pQ+
+m8o4zocZ9KZuM8YC4bjqeV3Ovd9uZ2fMd+vmBanrHdwfdswj6+tPkehH9UHvJY+receng96P6e+2
+rwl6bxuNfHMPJ+ziW4l3hegrMKwJlXpONZ1zx4uW7Wc8WOR0GOmz9eo5OT/aOcW8T4Oma5fAWPt+
+w2zlT7+eFaxPlfX7aw/hy4F3AH7dodQ35uKNQWoTtWmxO+66jKJrhGmJBpSmc5vAwvsrbFIALiMt
+a9ugd7zyO+8FkUY/p10uVj3Y58xPS+4YYrUza1yqHetKxpdtmanji9HOLKv8rFYN16fF6g9qm68c
+e+rHAisttcfV3leiz7KD0FMgpgsnwmWr52qC3uIYGY9Z78m5215Puscp42722Jrd/+x2Zl6vqp/b
+Y4jVFvLujXE7S7fB1L2jNChcl4faPp24P+xoE3nj2br8ctqLOF8y7rd146dVtxn5q+h/dSvmc+7v
+dkBVGrOWuexr8+2XQ4Le4kNpWeDXnifbdZsaC1LzpdJ+pM8L6vK+HLNd0fWscjmStNJ7nS5xrJPm
+f1MQpKxvptrumL6iQElYZol5am2gJH+OaT2vHLfSO+9ZVLpeZtCbul3qr2Yeaai792fMMQ+e79bN
+C+zrndUfqueRFfWnSvSj6qC3tmr5opXe397fU74k6L1t+NuKCG7uauNcKsEqTD3wq53TSqfwb+pb
+kAOC3ln7dMvlaeZ96lzL5+ug9yZ/wtvnzd9Eq4be50yUdeuGdWff1G2nBrytOhL/vjotRnlKX9OM
+ymys106tp239y19rLA16r/OT0T6rVnpr5zTKJaNPp/pRVlsouJ7WztRxKbOMagI6ct7T5ZLbztZt
+V3tzW5uWdH+Qy8AaW3PKs3AsyEhL8XHV95XoXLlB6HnvuGhiqpX17uu9jDFyvq+8f1MgfJlq510f
+d622lFdHOX1sOWdZ291cRxk7rTHEOs4sa62dZbRB+96RN+/ZfoutMA8l/aFwjDyiTay/RaPNwXLa
+i5E/8X5bO35adZsR9C7uf3a962rv79Hfm/tfGt8a2LHKb3dw05onJ+o2NU8uf+5I3cO1ecGeMlja
+0+aF/U+Xi1Ve6xdj4vw0/kwdV/JWpEvntMaVsn1gE9/wDryDg8O+Ppg1bz3xN7HEOnrF45j0bJEZ
+9KZul3NW3MdU1fd+O45y5nxXKhe9jo3rndIfaueR9fNyVaIfWe1TWrSw+iw3jnlq0Hub1if099h3
+BL21yo3fkIQTIm0pfsYPAaUCv9tzWukUBrPdkyzjs5yBx+gshwW9U+XSdL7vO9+8Wu+c8y4IfqXK
+Wh9Iww5W8DUNq01Up8Uoz+iHI8OvF23yEte7dOxq5e787863YZ/ISOv2BrIj6L1JZ/6WG2K5mPWQ
+SGdBWt5tN+N6ajvTxiUzLZX9fWfQO7+drctsXbb6HvD5Dw9Gf1DbvDW2ZpRn6VhgpqXyuOr7SpS/
+oqB3KshuE69ntGt13AlWdrdaWpS8q+c021L63p/bx97jRHHb3d6bxeCENYYYx5llbX09MdEGzXtH
+5rxHeqgqykNJf6gOSh1wTmsOlnPvt/KnvqCoGT+t8k4Hvcv7X6LNq84Jeq8CCdNYZM4rK1eo73ro
+t+bJibpNzZOPDe5a84I60kPvPIb+crnY5CC72HbDF+DVq4H1c+qrA5WFTeJiMGnl6gmrAwvmmJ8I
+eot1FLcf4757zErvp9ftvvuYfq2ae78dRzllvlszL7Cud0HQe77GZj5RW3+WU1Z6b/P3Ps9FQe+v
+7+8JatA7IzZTqjronTNJWZ23ZLl97vVSDVBNp/UG75qgt9WYzljpbb4xbJ3vu8a3zvl2msimyjrV
+Hvpu3n5j22iz6yiz3uuD3naHGo9ro0Fru2VLqm3k1vtYXvKqgY+t9LbKpbBPn7LSO7qe3s6UcSnT
+J4PecjuzxQ+jy3F7gt5aG7LafM63TPTyLB4LStOSc1z1fSXKX+n2JmE/PyLonWgv+oTd3qNSO9Y+
+p9aW0vf+3D5mrW6pE7eR3DFkfZz9gkFpZzvbYE3QtCoPJf1hxxi5+5zJB9+ce7/xgkF5aSWfMz1n
+OD7ondsf9C3o6tuSUX+blXLC2KOMg6XX23vcuoyUeXKibj8b3LXmBTuIzx6US6pPpeZEcb+QxpV5
+blvV5lMLVaRxQnsuDtOW2B6mLlBSNq/7aNA7LM+grY1tXh+3U0Fv6vbI+5h9XN69P73S+9j5buW8
+wLreRUFvMU+Hzcuj+jD6UVXQu/AlwmosPzvo/frG/p52/5XeqcbbOj/0/fTWX2j8QuWnvmIpP9Tb
+59TTGXfa8Djpzcf2rXxZEGw96Zm/qpBOp5H3oqB3VE7q9cZJazftK9V0vXduXtFml3VO0Hv+O+kr
+QVLe7a/J1KTFakuJlUObgSH89fqgrIWtCqzrasEqOeAttd2Tg95muVj1cFTQO7xG+npqO3v3mXhc
+ynN00FsdX9R2ZiicZOWlJV3vcpu3xtZEee4YC7T+V3dc7X0l3a/f15FWOMYrJaRvIyht97Cg91zv
+0XZKOXlPntPqPznlafaxsM5qV4HK6d48rCbHkNz7kdXOEm0w2cb0eU9qblOWh4L+UBCU2tMm5PxZ
+c7BEe8mZ7yovWcvHT6tu7fqr7X/JNi+OPTn398I9vYUHrvk+LtdJ/NyS+0OWNcfFf2/Pk7W6/Whw
+NyvIULGnd/Atl/Wz45PK5Ugl26kEfTUeV6b+Xv518rD/p+851nOxlofxJUL0jVSXCA6WlJk5x9S/
+JbR51j7Edjwdx7Jema9nBL2p24PvY/r18u/9dhzl+PnuvnlBzlxD7A+JZwstf+XzyKPm5YFEP6oK
+eqvB5H5bR1JZnBr0/sb+nnb7oHc6eKWtFon2NpMmLurb96myN8fq50x9fUG9Vvimp+98GwcA4zdA
+yc+Wzjj/W7jiN12eQt4zgt5a/pLlMnfaqRzWKzkKvnYjdvI5bX1W3vU2UZOWVFtSyk2YkIwDQy+k
+0flOay85bTEYzHK/cnVu0DvVX7R62Bf01scB+3paO7PHpfy05PX3RN618SXRzizxyqV4UleclkRd
+ZLd54aasjZG1Y4Gelj3HHXNfWfptdG/RJq7aWGEEnszrGe1F7wfr8+bdO8rOKZ5Xabu5/c+cL2T1
+e+F6m7xKY4h9nF0u1pzIni9pbcbsRyVzm8w8FPeHnDGyqk0kxjNjDpYc66z7lnq/rRk/E+OBkb+6
+/pfR5g8NeifGrNV2cMPm5dvymRRcyrve9lmnNPBrz5Otuq0L7tb3I31eUJt3a8Xtk8rlSMJ8XhqT
+kp9lbsFinVNIj/rsuzpuW57jdZa56bpMox//qyjr1BxTHXvMcb5CsjxfRfOz8JmSui0ZC+Qyzarb
+qnu/fa3j57s75gXW9ZL9YT62IGZQOY+srr/s/rDuR1b71OZ11rc17H6k9E9hi9zsPD+kv6fcPOgt
+/VBDzd+c7Q5puCqdQqO+ZbncKS24B6vt7vXQ9qbuCV24P+ClvqVuviWdT8/7mePEt5TBHdJ39/Ig
+f/hRj5gXUC4ArnDVHPPzxG9GAx9y86B32uar2fiw3xms8TTntd3HjksH7g8IfIdr7nGPHUMAPAvz
+AsoFQKUfiKPMK4kJeONCXxv0fi99pwNd7AcGazzU8W33F8al7deOPrlnJfBpn73H/cIYAuBZmBd8
+plzE7QgnZ6T/09d7ujuV553S8tuIo9zB0/vD0/OX4z/h/fh///p/TrzW39WZBQAAAAAAAADgKAS9
+AQAAAAAAAACPQdAbAAAAAAAAAPAYBL0BAAAAAAAAAI/x4aB3u9q0nR8IAAAAAAAAAAAcaRP0bt0n
+fjGUX8UFAAAAAAAAAByPoDcAAAAAAAAA4DGioPcYjH7/f+veW5EMw+D7rpn+pvddE25V4nz7Pl77
+bHsdgt4AAAAAAAAAgCP9vV7j6u4xAD0GrV+v1xTw7n3XxAeNAevws9YNfnBt4rPtOQh6AwAAAAAA
+AACO9NfMPy75Dlr3fg5Kjyu744OEgHXr/NB3ic8S5wAAAAAAAAAAYKe/pum861rf9c63r9a7wfnX
+FAiXg9JKYHtwic8S5wAAAAAAAAAAYKe/tnO+a16+6Xrv2jnobQWlWekNAAAAAAAAALinv76ffmiy
+dX5wbgp6j0HwvB+hHFeFLz9yqX1mnQMAAAAAAAAAgP3+lh+ZnPb2DlZlj4Hv4S0MbG///ZX4LETQ
+GwAAAAAAAABwvL/ygwq3Pik+BwAAAAAAAAAAdQh6AwAAAAAAAAAe48NB72kLlQlBbwAAAAAAAADA
+kSqC3gAAAAAAAAAA3BNBbwAAAAAAAADAYxD0BgAAAAAAAAA8xt/r9fKte/b+2k/PHwAAAAAAAABg
+RND7600/Dtp3vjn7Wq3zw9D7rnn5puv9MDjfXp5/WFo3+L5rLk8H7uOX28Qv5x0n4t4IAAAAALdz
+QdBbC9JO//62PDSOD5HDSkl6a/K3HNN6Nz3MXl1ZZeV5gqoH+7heBz+41vzctfO11v+eH6xSzvl6
++der8V0ffDaXW+u2+Zn+bXPMJg9xepf20rphRz72OybIJ5dn18vnbt0gl9mcd+r2Ut8a+D0i3d+a
+d1GiH1ntU7qnrsql6Xwf31fMfjT9t3QfEtI53+PT+fyS/k7QGwAAAABu57NB7+nBs+v66OF4fBAN
+09C65WG06fpdgYq6oPf8sNt6xwPsqOl8P5eFFuDYGIMWS/mH/9+ogdNN4GIKwqTbgXHOzWdTAMS1
+WYGSOA/rAFL4YqTxnevebe/KINv+6+vl2Wz68Vw2vX08dXupX073t+ZdlOhHVl6brt8Ge6PP+671
+XR+0/dqg95vVf0v//mb9vereCAAAAAA40weD3q1304PgNli2XU0dPpR/NOitrkobktfYpnF8wA7/
+e7MqLTg2XH23BIV73zXhajdlBfwqgGEfJ66+XgUqD673YftCo++aKVCgrKJPBVg0qXPGwYgpWFEW
+KAkDLtv8pdtFDq29pOp2u5JxV5DPKk/ps6mM43yYQW/qNmMsEI4zgpbm9QYhWLg5p93OdqUzGmPV
+tIT3C2lMXqVVu97B/UF4QbsOIMfXM/pmdv0pEv2oPui95HF17/100Psx/R0AAAAAcIVL9vSWVoiO
+Xx2eHlSnFWtzmj6/0jtY3Z25aksOIixB76Zz69Vj/XpFXhgEmctnCZLMD/5y0GB7bfu4cBV9XNbH
+k1Z6r9M1SIENKXAxBUHs6+nnlOtoTF9RoCQsM+m4qO3VtF29vRTU7Y7r55Sn1B6318sMelO3S/2J
+Y0Fct/kBRKtN6OfclnX4t9XpDLaBKCkXq7yt653VH7SgtxVMrq0/VaIfVQe9tVXLF630/vb+DgAA
+AAC4xm2C3q/XK1gBKKz6tvbgTNgT9E59DXyV9iAgtKwckwN54XlbF+2dOq9YS64q1P7NOi4OQh8Q
+fEmWpb3SMqxfc1WhUZ5i+UbnNFfjF+0Dm/jKf9T24hWqNX1tqT+jbsNgVXD9I+pWrKNX3Jel/e8z
+g97U7XJOcSwQtlnarKoXmG3COue2nYXXq0tn2VgTj2tyHRvXO6U/ZAS9xTZTWX+WRD+y2qf1Oxnr
+cg/69MeD3tu0PqG/AwAAAAA+4zZB71UQZQp+W3t5lgS+S/InPdhm/ehW0/m+73zzar1zzrt3gNkt
+nytfz9cDMWcEvaPys75Cfgg5yC7W31xG2r6sWauB9XPqqwP7gtWB0srVE1YHqu3lmqC3WEdx+xGD
+Xkeu9H563RrnlI6ZtgBJX0tpE+Y5laB3ausM85z29hFWuajXtK53QdB7vsbmBVFt/VlOWekt/77G
+8gO0nw96f31/BwAAAABc4h5Bb21vYCXQnL36elKcv+DhPf9Bd1rJ1zrfd41vnfPtFAiPfywrzsNn
+g97bwP65D/JCoMtY4fjeJkEIQMyrKGvbm7kPrBAgU1e9hmlLbA9TFyix2svFQe+wPIO2NrZ5ffVl
+KuhN3eYEvSt+UDcZ9NbOmV7pXZ5O4ZyZ5aJe07reRUFvMU+19WdJ9KOqoHfhS4TVWH520Pv1jf0d
+AAAAAHCVGwW9t6vLxMBoxR7UVUHvIAiVd+wY9O6mfWmbrvfOzeeJAr/RatmPBr3PCL4kyyV3O5Vg
+FXgc0JlW/5e303BleRxYs37EbLu/sZaH1X708+cuERwsKbNVe8nfumbeFuDYQM12pf7Yn3vlGwMZ
+QW/qNnssKP/xQ6tNWOeMy2VdvrXptLf/0MtlaWfyNwmsoLPZH+brZPxug9ie5y25jDJMl3WlRD+q
+CnqrweR+W0dSWZwa9P7G/g4AAAAAuMoHg97xXprR17vf+3kv/96Ix5VvxVGaP2tVbTJ/c7qnYMr8
+kLzeQ9X5bvdKb6U8k4FReQuXT+7p/Q62xHVufpZZ79Y5hfSIAbDNcdpWD8t2HOsyjX78r6Ks9faS
+eBES5n/aBmD/j+VZ5flSAody+1y2SaBuy8YCuUyz6tZsE9o57WvtSWe8n3TOGCmeN6pD8XrJ/jAf
+W/AiMGxLfedba0y20r933E30I6t9akFvc69ssx8p/XP14row6P2Q/g4AAAAAuMYlK70/7en5KyKt
+9K7ZTxnAg5W88Ptumx/lBAAAAAAAX4+g9685cD9lAE/1A0HveSUxAW8AAAAAAB6HoPcP2n5Ne98e
+35vtSwJnpP/T13u6O5XnndLy234g6P0Fnt4fnp4/AAAAAMB1/q5OAAAAAAAAAAAARyHoDQAAAAAA
+AAB4DILeAAAAAAAAAIDHYE9vAAAAAAAAAMBjEPQGAAAAAAAAADwGQe/Dtd4Ngx9ce3m+AQAAAAAA
+AODXEPQ+5VqN7/pnlykAAAAAAAAA3BFB7yM1ne/7zjfzfw/OtzfIPwAAAAAAAAD8CoLeh2m9G3rf
+Ncu/NV3vh767PP8AAAAAAAAA8CsIen/EuN3JMAy+75rg3/qbfXZ9XQEAAAAAAADAHgS9P6F10w9b
+jgHnMdjceje4e312g7oCAAAAAAAAgD0Ien9A0/XBqurWu2FZaX2nz66uJwAAAAAAAADYi6A3AAAA
+AAAAAOAxCHoDAAAAAAAAAB6DoDcAAAAAAAAA4DEIegMAAAAAAAAAHoOgNwAAAAAAAADgMf6uTgAA
+AAAAAAAAAEch6A0AAAAAAAAAeAyC3gAAAAAAAACAx/iJPb0BAAAAAAAAAL/h9KB36wbfd83lGcUP
+ap0fhmHSB5+13g2DH/rON5nnarp+OZdrzb8ta/ON7/r0OZGrtDzHv//8S7/yNvhpJW3+99T22/vX
++/3KDAAAAACAcgS9z9B0vhcDGxUBj/lck1U9WZ/9vLGs5TKpDzw1XU/Qu8AZ/d8+J0Hvo+W0+evr
+/dO+P+h9/74JAAAAAEA9gt6Hm4Jozq0DG63zw+B81/UFAY/Gd33vuyY8x/z/1mcYXwg43x583rOC
+3k/tI1cF1krLnxdGOoLeku/vt/fvmwAAAAAA1CsPerfOD64bV2wNve/aZVXz+DfTaq5gBXLeQ+60
+Am62CgzH5ywIZq62uJjTMgeMw2vO57Q+i9IqBIKaOajdhkHv1rvpvxs16K2fM/4ba/Xy+rOcc8ai
+sg6OnQMa4bYH8/Wsz6y6tY+rzcPr/ZIhbif2lg163lfHp47LbvN2HYTlsLmu2K739FvrnFr96X1l
+Vc6DVKZKWU/fXgjz07rxvOlz7ilrrb9H6TxgXNLbYMbYU1pHZr3njHWZbX76vLrec8srPqfUz6d/
+S+evPC3F42dwPXvsiepvGNZbMv1k3wQAAAAAoF5d0HsKTM4PvO2r9W56QG+dHCi1zxuvAFt/Dbpm
+peGSVmn1c7MEgZpXlG7rs/l4JRDbdL6fj2udGNy+e9B7ndd1vYz1HdXLFDTVP7Pr1jpnTR5ygy9S
+m7Lynn/cESsoE0HvmlX9iX6b6ity/cV9ZVtmWlmYZR2mRQhqHrtC1c5D07mgTOLPKscltS0lyrOm
+jsx6zxnr6vpKVb0nyOfcjnu5Y/metOTXad7frNIyBZffefrZvgkAAAAAQL26oPcUtF0ecKcgirCl
+RNZDsLRabzrX6zUHMku3qrCCGMKWBlO+7M/sa67yWhz0TmtdvNI077N8rXfSqskwsB1eI6gj9bNE
+3Vrn3EVZ6b2qh82LDD3v6nG1bT6j7cpB78rgnNVvrXOa9Zdeka4HKu2yHs/TiVuPnBH0NlfVK/Vf
+Ny5Z16msd6uOMuo9NdbV9JXaerdo9b5O35i3MNAr529fWsw6TbQJuTzDdIZ1/ct9EwAAAACAep8N
+ekc/vPh+YJcCxFHw870iOHvrCGtVtBIMUYIFy2d55SL+/6Q26G0FU/YG39ZlLqySDoLeWtmrnyXq
+9rQgSWnQO5F3+7hPBr2tdp3XPrfBT+OcZv1VBtayylr/0buPBr2ltEb5q93SpizoXVlHNUHvaKyr
+6Sv19a5T6z3sg63brFIW87czLal0Wm1CXeG/anNz4P6X+yYAAAAAAPXuu9JbDTSPQYDcLVOKgt47
+VnqHgY5Y+Hc1Qe8xqC1vZ2F9Vizx44/VQW+jbu8V9E6/OLg+6F35w4ulwc+s+tsTWLPLejyuFVe5
+fi7ovR1r9FXgueOS0ZZq692qozNWemfXX3m9W/R6X/KxvpcZ+Tvph25z2oS6vYm4Z/cv900AAAAA
+AOodG/SOVqXN+yunH4Lj4EB6a5LVZ/PqtCiYrK+AjgMC4fWtz9b/Zu7detCe3vsC3qV7eusr+OZ2
+Uhz0TtRtOkhy7A9ZrsrOWm2ZfVxtm0/Xw3of3Wjf89KAndlvrXNa9ZcOrMntPVHWYd2tVr2m+lB9
+WWetrp7HGTHd5dvOlAW9K+uoKOidG6RN95Wqes8pL63eW+eHvve98EOj1jh/7g8tZv4uQCLQ/Lt9
+EwAAAACAegcHvV9LgG4KDjVdX7QdyXYLgfkHufQfJdSC3q/X9ocNVwEPY2Wd/FmU1uygt5CHzVfG
+pXNGZbI6zvqsIJ0bev7rgt5W3X466K3Ug9HWtPayOq66zRvCbQb6zrdSwMpso4X91jyn3Tft/bCj
+skuVdfDDi2EbGYJ06ueskRNonq/lfBetvDbHpcz+tRybGagsqaOMoHfuOJjXVyrrvWZsEsZKMw3F
+n9e1pdzyCj+Xvim0+YbBz/VNAAAAAADqlQe9H6Fw6xMAeJwnjXXhD1h+Wf6kld7TKurL0wYAAAAA
+wJci6F30GQA8xXPGutZJq4q/JH/Ct1LmLU0uTxsAAAAAAF+KoHfRZ8B9idvdTK5OG+7o+8e697Yg
+4j7S35O/7fYmZ//IJgAAAAAAz/Z3dQIAAAAAAAAAADgKQW8AAAAAAAAAwGMQ9AYAAAAAAAAAPMZP
+7On99PwBAAAAAAAAAEYEvXGgdvwxRfFH5f6Q9EIAAAPgSURBVAAAAAAAAADgfPcLejed78XAaX1A
+9Vb5M9LYd82XX+8+Qe8z8vfpOroTyhMAAAAAAADf4mZB78Z3/eCdc+vAaev8MDjfdT1B7y+93hPK
+8+llRnkCAAAAAADgCW4V9G7moHYbBr1b76b/br466D0G9Idh5nw752kYtlz7TnvfNau/G/MyvSAI
+8tV0/fu41+s1vSxYzhmfR7peTR5ecT4255pWgK/0ZjrF49513/iu733XhJ/nlecmD/O/T98wCIOw
+rRvPW19mdXVknrN1fnDdlIfed+3yzYhnleeUlqx2CQAAAAAAACzuE/RuOt8Pve+a1xi0E4Lb3xz0
+3gQ7hTRKAc8xULgE/+YySAZUWzcGRZuy6+3Jg/Y3rdsGQ9/pVtM55m9J4xRcde3y3+/j4r9NlGcU
+sH3/XZiW6dsF7a4y21dHoimg7doliNy+Wu/mlwiPKU+C3gAAAAAAAKhzm6D3KgD21KB3FPRT8x/9
++yrPTef7wXk7oLoNWuZeb08e1mmY/20MXi7pDNNmpFMIkubl3cpf6118zqmtrc/Tbc5fV2b76kgU
+9I0lPXPQ++nlCQAAAAAAAKTdI+gdB7kfGPSe06FtY2EFveXAoBWojAPNclpqAo5WHtZpWKdzvdJ7
+XlFspFNqA3uDtPOPpMbCrUHi9O4qs311lOor26D308sTAAAAAAAASLtF0DsMpMbCv/v2oPdiDE7m
+bh9RHvTefpZ/3vo8rNOg12+8xYYapJVWEe8O0tor1cfjWnHF9BkrvY8Nej+9PAEAAAAAAIC0WwS9
+Nx660nux3YZCy1sq6L3ePzna+9sISNaWpZWH93nDoHciMKqnMw6qb7dFsYK0cv70VcdLGU5pWa1I
+ry2zfXWU6hvboPeTynPa03tXGwUAAAAAAMAv+oKg9/wje9YWCrbr8yfkYRMojP5m+txcDRtuL9F3
+vpUCleIKa/16dXlQ6ijIQ/zZJuAvfjYFPpXrWUFaPX/btPZds/qByLDdDPMPRFaV2d46svuGFPR+
+TnnGP64JAAAAAAAA5Lln0PtgT8/frUkrvadVv5enDbe2+RFXAAAAAAAAIANBb5xL2Et63oLj8rTh
+nuZtYAh4AwAAAAAAoAJBb3yk/NfbmxTuY/1jVluQGD/sCgAAAAAAAGDr7+oEAAAAAAAAAABwFILe
+AAAAAAAAAIDHIOgNAAAAAAAAAHgM9vQGAAAAAAAAADwGQW8AAAAAAAAAwGMQ9AZO13o3DH5w7Q3S
+AgAAAAAAADwbQW/gZGP7a3zX0w4BAAAAAACAsxH0Bs7UdL7vO9/M/z04316dJgAAAAAAAODB/g98
+uxiFqurgFQAAAABJRU5ErkJggg==
+
+--------------F4CB2BA2243AB55A43653AFA
+Content-Type: image/png;
+ name="cdhoggbbpkiojcoh.png"
+Content-Transfer-Encoding: base64
+Content-ID: <part3.F49602EC.94C3E966@teq.ch>
+Content-Disposition: inline;
+ filename="cdhoggbbpkiojcoh.png"
+
+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
+RK5CYII=
+
+--------------F4CB2BA2243AB55A43653AFA
+Content-Type: image/png;
+ name="bhgbifglpccbhjia.png"
+Content-Transfer-Encoding: base64
+Content-ID: <part5.520933B9.541B9B9F@teq.ch>
+Content-Disposition: inline;
+ filename="bhgbifglpccbhjia.png"
+
+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
+
+--------------F4CB2BA2243AB55A43653AFA--
+
+--------------572993FFB21099E9E0DB837E--
