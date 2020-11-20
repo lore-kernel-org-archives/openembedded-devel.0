@@ -1,59 +1,60 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.21139.1605848838900945259
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web09.22882.1605864562612435889
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Nov 2020 21:07:19 -0800
+ Fri, 20 Nov 2020 01:29:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.78,355,1599494400"; 
-   d="scan'208";a="101574105"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 20 Nov 2020 13:06:55 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 2A95B4CE5450
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Nov 2020 13:06:51 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 20 Nov 2020 13:06:51 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] modemmanager: upgrade 1.14.6 -> 1.14.8
-Date: Fri, 20 Nov 2020 22:47:55 +0800
-Message-ID: <1605883675-36590-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 2A95B4CE5450.A1FD3
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=40904 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kg2jH-0006cP-RB; Fri, 20 Nov 2020 11:29:20 +0200
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-cantools: Upgrade 35.3.0 -> 35.5.0
+Date: Fri, 20 Nov 2020 11:29:08 +0200
+Message-Id: <20201120092910.30736-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Upgrade to release 35.5.0:
+
+- Added support for CAN FD in monitor.py cli tool
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{modemmanager_1.14.6.bb => modemmanager_1.14.8.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.14.6.bb => modemmanager_1.14.8.bb} (95%)
+ .../{python3-cantools_35.3.0.bb => python3-cantools_35.5.0.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cantools_35.3.0.bb => python3-cantools_35.5.0.bb} (64%)
 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.14.6.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.14.8.bb
-similarity index 95%
-rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.14.6.bb
-rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.14.8.bb
-index d0a0ce377..609932ef7 100644
---- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.14.6.bb
-+++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.14.8.bb
-@@ -12,7 +12,7 @@ inherit gnomebase gettext systemd vala gobject-introspection bash-completion
- DEPENDS = "glib-2.0 libgudev intltool-native libxslt-native"
+diff --git a/meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb b/meta-python/recipes-devtools/python/python3-cantools_35.5.0.bb
+similarity index 64%
+rename from meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-cantools_35.5.0.bb
+index c79e51e33a..cb70ed3188 100644
+--- a/meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cantools_35.5.0.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/eerimoq/cantools"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
  
- SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz"
--SRC_URI[sha256sum] = "783d5da925b2ca69f6233fcead691dd0f5cba06aa479d71495efdc07053fc0fd"
-+SRC_URI[sha256sum] = "fe1a26ba51b4bda7abd09ad4dadedd87d8b8154809fc9d88e94f75fdfff19295"
- S = "${WORKDIR}/ModemManager-${PV}"
+-SRC_URI[md5sum] = "068514ac776e03ebaa8b2d02dd16fc77"
+-SRC_URI[sha256sum] = "5e3a6f679ad3dcb31142e388e052187d5fc5bd481c4fc3b2791eaa1e681cca98"
++SRC_URI[sha256sum] = "ce26ab5d54762c314bedc35b407d498b8ae11069ab4d9251f8ac83f2956438f9"
  
- PACKAGECONFIG ??= "mbim qmi \
+ PYPI_PACKAGE = "cantools"
+ 
 -- 
-2.25.1
-
-
+2.17.1
 
