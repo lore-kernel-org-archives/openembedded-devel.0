@@ -1,67 +1,77 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.22871.1605864565970725865
+Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com [209.85.218.68])
+ by mx.groups.io with SMTP id smtpd.web08.324.1605900473225173372
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Nov 2020 01:29:26 -0800
+ Fri, 20 Nov 2020 11:27:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=40904 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kg2jM-0006cP-Rk; Fri, 20 Nov 2020 11:29:25 +0200
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=FFuGVS//;
+ spf=pass (domain: gmail.com, ip: 209.85.218.68, mailfrom: toertel@gmail.com)
+Received: by mail-ej1-f68.google.com with SMTP id y17so14385879ejh.11
+        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Nov 2020 11:27:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GN8s7jn+p2sSdI2rfqkm5Kz1yoZk0ZGLrwlpnVMGuhs=;
+        b=FFuGVS//OXCCGFnuHNTME8KtZo5wo++eagPfTU/abBpq5whfyIv/9hTPPy1FNyjhx7
+         Jcr3z+CLHvoWztr4FAra0/+VyeYBIET+ezPyvmg7hCQ0VKT+aIW2/EN+lttDUy1aMEow
+         KhE+WEl5kON3CbZCuoXHckFUBi7cLpzKsUMivv0YWsvyLN3hiyE+6mjmdQyENbATO+DD
+         bPY30fjnSpIE8ADH5xP7RjC05bncdPLguGL4wMmdDDTf3kTCBjtppn+ZJHv8F85WhZPd
+         G6AmSUFkuj1JL7NaciKvfpFDd4hyiXwbi/P7XaiCo1zQVTVG5zEf9fQiPYdrpKNc1BoK
+         3LrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GN8s7jn+p2sSdI2rfqkm5Kz1yoZk0ZGLrwlpnVMGuhs=;
+        b=ZmqTxRq7BalCVQTjbRer8GCd4vmA9D5U8Ot/adYIuvYczL/t+3D32gqok3giDfBBLH
+         CApPYQHj1eYAk/QX6FcJGXS/PpV1dzoU/IjrcijhUTMN/Gs3ECreDDCEnx1SKut2SXqI
+         jP8y0nnJAR8r4k8PSwmDO7xcr99aYiMIGWYNiafOEpm2oUmvgNDe2f4VtqUGoFW8PYvH
+         UUWlIfW+kBCVNbxqTqM6ZZJvBYWLksYEN0M0xosoOD7KeuInEKkO9nm3/ASEa+ye16R3
+         q5VSYxLLaOatN+yE++pIW/ukRyjSL3lq9X5XsPQzj7HaqA7gw0Gx+eU4u6ZOfyvMVEEI
+         dNOA==
+X-Gm-Message-State: AOAM532ZtMj2O5ufOx3hKzefJCMlbtGtr9hpdhUzQCd2irN7FxB04oCs
+	/dZwAlYVc/ptKV5Eu08t/CW2KJMlRgxfyw==
+X-Google-Smtp-Source: ABdhPJyVVDHT9jRRI1Ru0FMNGyIiK94reS7BOV1Ft0CAv6caC5zUuNjQMPJ7n/6ji95QY+DMeXLThA==
+X-Received: by 2002:a17:906:2932:: with SMTP id v18mr33413331ejd.144.1605900471359;
+        Fri, 20 Nov 2020 11:27:51 -0800 (PST)
+Return-Path: <toertel@gmail.com>
+Received: from gigabyte.fritz.box (p200300cfaf38a20090712d62a3c43517.dip0.t-ipconnect.de. [2003:cf:af38:a200:9071:2d62:a3c4:3517])
+        by smtp.gmail.com with ESMTPSA id cw26sm589584ejb.47.2020.11.20.11.27.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 20 Nov 2020 11:27:50 -0800 (PST)
+From: "Mark Jonas" <toertel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-toml: Upgrade 0.10.1 -> 0.10.2
-Date: Fri, 20 Nov 2020 11:29:10 +0200
-Message-Id: <20201120092910.30736-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201120092910.30736-1-leon.anavi@konsulko.com>
-References: <20201120092910.30736-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Cc: Mark Jonas <toertel@gmail.com>
+Subject: [meta-oe][PATCH] imagemagick: Add NOTICE to collected license texts
+Date: Fri, 20 Nov 2020 20:27:46 +0100
+Message-Id: <20201120192746.101003-1-toertel@gmail.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 0.10.2:
+The ImageMagick license requires that attribution notices contained in
+the NOTICE file are distributed along a derivative work. Thus it makes
+sense to collect the NOTICE file in the deploy/licenses directory.
 
-- Added toml.dump example to Quick Tutorial
-- Skip numpy tests when numpy is not available
-- Bug fix: ids were based on the string, rather than the actual
-  object which causes incorrect detection of circular references
-- Show meaningful error message for wrong case booleans
-- Bug fix: broken quoted section name starts with dot
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Mark Jonas <toertel@gmail.com>
 ---
- .../python/{python3-toml_0.10.1.bb => python3-toml_0.10.2.bb}  | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-toml_0.10.1.bb => python3-toml_0.10.2.bb} (70%)
+ meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-toml_0.10.1.bb b/meta-python/recipes-devtools/python/python3-toml_0.10.2.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-toml_0.10.1.bb
-rename to meta-python/recipes-devtools/python/python3-toml_0.10.2.bb
-index 00f38c6c3b..b46eba6fd1 100644
---- a/meta-python/recipes-devtools/python/python3-toml_0.10.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-toml_0.10.2.bb
-@@ -4,8 +4,7 @@ LICENSE = "MIT"
- SECTION = "devel/python"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=16c77b2b1050d2f03cb9c2ed0edaf4f0"
- 
--SRC_URI[md5sum] = "743131c431419fe42f854cff02ad3abe"
--SRC_URI[sha256sum] = "926b612be1e5ce0634a2ca03470f95169cf16f939018233a670519cb4ac58b0f"
-+SRC_URI[sha256sum] = "b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"
- 
- inherit pypi setuptools3
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+index 70cb237d9..ac81fc75a 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+@@ -4,7 +4,8 @@ HOMEPAGE = "https://www.imagemagick.org/"
+ DESCRIPTION = "ImageMagick is a collection of tools for displaying, converting, and \
+ editing raster and vector image files. It can read and write over 200 image file formats."
+ LICENSE = "ImageMagick"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=41b4fa9af60c88e61484b02c0561181a"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=41b4fa9af60c88e61484b02c0561181a \
++                    file://NOTICE;md5=a2aa6e41f8a40700196a9ce301693e34"
+ # FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
+ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
  
 -- 
-2.17.1
+2.25.1
 
