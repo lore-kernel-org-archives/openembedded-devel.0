@@ -1,60 +1,74 @@
-Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com [209.85.210.196])
- by mx.groups.io with SMTP id smtpd.web09.1010.1605903506220737796
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by mx.groups.io with SMTP id smtpd.web08.665.1605908049686549684
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Nov 2020 12:18:26 -0800
+ Fri, 20 Nov 2020 13:34:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=jyenyFEC;
- spf=pass (domain: gmail.com, ip: 209.85.210.196, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-pf1-f196.google.com with SMTP id 10so8955367pfp.5
-        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Nov 2020 12:18:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=Cis4nAiKgKpAkv/9evjnIJ+neQV9c6MGuJuJtjtpbyE=;
-        b=jyenyFEC9R9xxzKejsSfpYh6rQ48bJUqY84MWNMdaXngYI0MCrhDwaypiH8VtT6IHT
-         DiHI87DNY8XoVksXuSvIvFc3JFzz9AAEqrWkJeM2SgX7ezO6Cw81v538droiuEhNmKu2
-         LnzHJSXFUPUrG3Xyspk4uqNsLxj1WO0y5jOY0IflbemlvTsDzIezyLS4q0vAf+U1c1QX
-         c64gBCpOWZV7uNJk/iYOql6Q5wvTSitRgFBH+Q/Ba8kYiNDVSAaPV/ss0CEIgfS5dskH
-         bLcS1QqGRxNxZ69rzO8GSAXEJmWOsEeQ/EkW+zdGipo+DWevdLDYVEffV9hqPUJYxu+S
-         pj6g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=Cis4nAiKgKpAkv/9evjnIJ+neQV9c6MGuJuJtjtpbyE=;
-        b=MN4Vj6OzN2eIiOBPl3fuFn0KQZEKPQ+i+shX+PoPMQ/KspT6olCvXoLztoS2EuWTkr
-         5vv/QdKMGZjloDdJArqxjYMzZyfYSAcDmUqwNpqXhmI2NoUZ7A61otwRUAExS4J5majg
-         9NeKcdzI8unRlH5P/pzQ9K2CHQmkrZ9U01jLoziQrh7C44xa4YGOayrnYuXek01Vb/kR
-         s+bm1ENyAFWpMWMZlS5fbFuvSxWNyoIYEYITnI+ZViIt7m2awS+x9LcrLyqyik5Lfw4M
-         EKytuB6vYS1derqdLgWbo78mTkLglJD96GzCMyuIp6EIkl3LmKjWWeiH71HmfHVqtY0T
-         DSkg==
-X-Gm-Message-State: AOAM533l0WC7BsX7rZiROD5Q7Hkjh4QtgnzDQBVUQtiACIghtE5z6JSz
-	WAesPaGMd9AYHocWfPmSXvDtUtaV6slCE9/+cak=
-X-Google-Smtp-Source: ABdhPJwkKNGJHFSDOlBBjHAfGgd1ihfA7ROtqIJ+zBYHMCmg4PkDXcV/fA92j8BdkgTW6Y7h6bb66Iu3OT5JmqNtdmg=
-X-Received: by 2002:a17:90a:6042:: with SMTP id h2mr12616551pjm.77.1605903505646;
- Fri, 20 Nov 2020 12:18:25 -0800 (PST)
-MIME-Version: 1.0
-References: <20201119074134.6963-1-kai.kang@windriver.com>
-In-Reply-To: <20201119074134.6963-1-kai.kang@windriver.com>
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-Date: Fri, 20 Nov 2020 21:18:14 +0100
-Message-ID: <CALbNGRRv0h52taHB2zB6ieiprpmPDTPzVvrKJxnMZXiaioUL+A@mail.gmail.com>
-Subject: Re: [meta-xfce][PATCH 0/4] Update 4 recipes in meta-xfce
-To: Kang Kai <kai.kang@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+ dkim=pass header.i=@kernel.org header.s=default header.b=KxVi0/Ap;
+ spf=pass (domain: kernel.org, ip: 198.145.29.99, mailfrom: okaya@kernel.org)
+Received: from sinanubuntu.ckuic5o5zete5ommc4uz5anrqg.bx.internal.cloudapp.net (unknown [23.96.20.205])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id ADEC02237B;
+	Fri, 20 Nov 2020 21:34:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1605908049;
+	bh=fNw1fN2BeMoBrGVFiSZjvWB/6jN/GSceVtd1Khu2kks=;
+	h=From:To:Cc:Subject:Date:From;
+	b=KxVi0/ApyTZRKNGgPTzpr4CRjXgLj1sk8UAj4JOKAW3j1Hl9Ek9WT4px1AbgCHI8p
+	 i6ktwT9WZSIL4Ar52Z9f247ZIQJDIn4iORH9O+C1Tdkizl2g2tMZBkKRR93Je4uacD
+	 leRY2Gf7fMycSnkAUNJP3B5wyAXma172QuCm/6Bc=
+From: "Sinan Kaya" <okaya@kernel.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: Sinan Kaya <okaya@kernel.org>
+Subject: [meta-oe][PATCH] collectd: fix the test condition for dash compatibility
+Date: Fri, 20 Nov 2020 21:33:54 +0000
+Message-Id: <20201120213354.15372-1-okaya@kernel.org>
+X-Mailer: git-send-email 2.17.1
 
-On Thu, Nov 19, 2020 at 8:41 AM <kai.kang@windriver.com> wrote:
->
-> From: Kai Kang <kai.kang@windriver.com>
->
->
-> Kai Kang (4):
->   xfce4-cpufreq-plugin: 1.2.1 -> 1.2.2
->   xfce4-weather-plugin: 0.10.1 -> 0.10.2
->   xfce4-mailwatch-plugin: 1.2.0 -> 1.3.0
->   tumbler: 0.2.9 -> 0.3.1
-Although tumbler is a dev-release, I am fine with the whole series.
+dash doesn't like double equal sign for test. Replace with
+single equal sign.
 
-Andreas
+Signed-off-by: Sinan Kaya <okaya@kernel.org>
+---
+ meta-oe/recipes-extended/collectd/collectd/collectd.init | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/meta-oe/recipes-extended/collectd/collectd/collectd.init b/meta-oe/recipes-extended/collectd/collectd/collectd.init
+index 95f5f73c67..83413463d8 100644
+--- a/meta-oe/recipes-extended/collectd/collectd/collectd.init
++++ b/meta-oe/recipes-extended/collectd/collectd/collectd.init
+@@ -47,11 +47,11 @@ if [ -r /etc/default/$NAME ]; then
+ 	. /etc/default/$NAME
+ fi
+ 
+-if test "$ENABLE_COREFILES" == 1; then
++if test "$ENABLE_COREFILES" = 1; then
+ 	ulimit -c unlimited
+ fi
+ 
+-if test "$USE_COLLECTDMON" == 1; then
++if test "$USE_COLLECTDMON" = 1; then
+ 	_PIDFILE="$COLLECTDMON_PIDFILE"
+ else
+ 	_PIDFILE="$PIDFILE"
+@@ -96,7 +96,7 @@ d_start() {
+ 		return 2
+ 	fi
+ 
+-	if test "$USE_COLLECTDMON" == 1; then
++	if test "$USE_COLLECTDMON" = 1; then
+ 		start-stop-daemon --start --quiet --oknodo --pidfile "$_PIDFILE" \
+ 			--exec $COLLECTDMON_DAEMON -- -P "$_PIDFILE" -- -C "$CONFIGFILE" \
+ 			|| return 2
+@@ -150,7 +150,7 @@ d_stop() {
+ #   0 if the daemon is running
+ #   3 if the daemon is stopped
+ d_status(){
+-	if test "$USE_COLLECTDMON" == 1; then
++	if test "$USE_COLLECTDMON" = 1; then
+ 		status $COLLECTDMON_DAEMON
+ 	else
+ 		status $DAEMON
+-- 
+2.17.1
+
