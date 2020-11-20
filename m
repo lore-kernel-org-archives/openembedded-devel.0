@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.22839.1605864564298734662
+ by mx.groups.io with SMTP id smtpd.web10.22871.1605864565970725865
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Nov 2020 01:29:24 -0800
+ Fri, 20 Nov 2020 01:29:26 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=40904 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kg2jK-0006cP-68; Fri, 20 Nov 2020 11:29:23 +0200
+	id 1kg2jM-0006cP-Rk; Fri, 20 Nov 2020 11:29:25 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-arpeggio: Upgrade 1.9.2 -> 1.10.1
-Date: Fri, 20 Nov 2020 11:29:09 +0200
-Message-Id: <20201120092910.30736-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-toml: Upgrade 0.10.1 -> 0.10.2
+Date: Fri, 20 Nov 2020 11:29:10 +0200
+Message-Id: <20201120092910.30736-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201120092910.30736-1-leon.anavi@konsulko.com>
 References: <20201120092910.30736-1-leon.anavi@konsulko.com>
@@ -30,42 +30,38 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.10.1:
+Upgrade to release 0.10.2:
 
-- Fix packaging, exclude examples from wheel
+- Added toml.dump example to Quick Tutorial
+- Skip numpy tests when numpy is not available
+- Bug fix: ids were based on the string, rather than the actual
+  object which causes incorrect detection of circular references
+- Show meaningful error message for wrong case booleans
+- Bug fix: broken quoted section name starts with dot
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...thon3-arpeggio_1.9.2.bb => python3-arpeggio_1.10.1.bb} | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-arpeggio_1.9.2.bb => python3-arpeggio_1.10.1.bb} (66%)
+ .../python/{python3-toml_0.10.1.bb => python3-toml_0.10.2.bb}  | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-toml_0.10.1.bb => python3-toml_0.10.2.bb} (70%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-arpeggio_1.9.2.bb b/meta-python/recipes-devtools/python/python3-arpeggio_1.10.1.bb
-similarity index 66%
-rename from meta-python/recipes-devtools/python/python3-arpeggio_1.9.2.bb
-rename to meta-python/recipes-devtools/python/python3-arpeggio_1.10.1.bb
-index 802a5b2eaa..38e26623f5 100644
---- a/meta-python/recipes-devtools/python/python3-arpeggio_1.9.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-arpeggio_1.10.1.bb
-@@ -3,13 +3,15 @@ HOMEPAGE = "https://pypi.org/project/Arpeggio/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=33b8d1ba459a2fa4d801acfd1d1b7ceb"
+diff --git a/meta-python/recipes-devtools/python/python3-toml_0.10.1.bb b/meta-python/recipes-devtools/python/python3-toml_0.10.2.bb
+similarity index 70%
+rename from meta-python/recipes-devtools/python/python3-toml_0.10.1.bb
+rename to meta-python/recipes-devtools/python/python3-toml_0.10.2.bb
+index 00f38c6c3b..b46eba6fd1 100644
+--- a/meta-python/recipes-devtools/python/python3-toml_0.10.1.bb
++++ b/meta-python/recipes-devtools/python/python3-toml_0.10.2.bb
+@@ -4,8 +4,7 @@ LICENSE = "MIT"
+ SECTION = "devel/python"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=16c77b2b1050d2f03cb9c2ed0edaf4f0"
  
--SRC_URI[md5sum] = "39667a626217c670bc634444be6e904a"
--SRC_URI[sha256sum] = "948ce06163a48a72c97f4fe79ad3d1c1330b6fec4f22ece182fb60ef60bd022b"
-+SRC_URI[sha256sum] = "920d12cc762edb2eb56daae64a14c93e43dc181b481c88fc79314c0df6ee639e"
+-SRC_URI[md5sum] = "743131c431419fe42f854cff02ad3abe"
+-SRC_URI[sha256sum] = "926b612be1e5ce0634a2ca03470f95169cf16f939018233a670519cb4ac58b0f"
++SRC_URI[sha256sum] = "b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"
  
- PYPI_PACKAGE = "Arpeggio"
  inherit pypi setuptools3
  
- # setup.py of Arpeggio needs this.
--DEPENDS += "${PYTHON_PN}-pytest-runner-native"
-+DEPENDS += "\
-+    ${PYTHON_PN}-pytest-runner-native \
-+    ${PYTHON_PN}-wheel-native \
-+"
- 
- BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
