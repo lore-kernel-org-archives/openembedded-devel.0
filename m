@@ -1,251 +1,132 @@
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web10.4280.1605953062863064828
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.web10.24463.1606077476479399167
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Nov 2020 02:04:23 -0800
+ Sun, 22 Nov 2020 12:37:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gcIeuP39;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: beniaminsandu@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id d12so13337989wrr.13
-        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Nov 2020 02:04:22 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=uqCLqlUP;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id f17so3777344pge.6
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Nov 2020 12:37:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Ueh4yrjKX4NSWfcMi1sj920JB+PUyOXEj1Na+/RtjkE=;
-        b=gcIeuP391wZYMpJTtEVXqwUBalrz79iDG5tH/JS5eprQPQwRhUUxaY2zWMOkQU9FBc
-         BStWbUNsqzWoBGZUOrPoAZKdh9Dzk5JKEJyVJ48SouiNIHnfWn2raBEDtVI6n+igA1my
-         5K5RhJBB5Z7zIKYjcfzpj70d0qzNHmdWhRuMr3YRQjkQh6hccU8lT16y5CgsW5e2lWI9
-         K/6twdonn1pN8hiXDWNPVTsjqlIB01oMyGL7iEpwsS77fyyYEfmpiHVazYgh2SIXAyfJ
-         OsrDpfD2hoP/Cv01DzjMfLM7GqZSstEO1IxqZnnaPHUSfHOD819TSQL3J14d2Vhh911Q
-         7yow==
+        bh=mIqgBR7bjOUTIGZs7mcOVw/Q3xpnL2pQ6m5Rx0b9qCs=;
+        b=uqCLqlUPZlRgJv/UeuvG38soqVfxs5sHVMFzT4htt8X6KoGNYrnd4zcKZC0bsXjE1Z
+         y+2ZNnekYxaMKKD7Puvr0iwm4LZlWeb7NsuSmPTf/d2fIyveHyCGq3yLVvqZ63FT0Dqb
+         v0t0DgmcMJzD0bJ0xZMBY6CNGjIiFGHiUy/fB3ylk+kNSQaoF85Lh8yj9Oy616bsdH9u
+         lPBsoasaR038Y1QlB3Qk+1pwP/zUddfACiGmRQiTnTwfI0ZuSrEj1ypRvswvj2kx0Rlp
+         ClNt7LuNKpnwMSbYNshiQrRQ3HLAZs1qJjvaBLYtssjzdpB1q3vTsB03DW1070QUMdUk
+         arMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Ueh4yrjKX4NSWfcMi1sj920JB+PUyOXEj1Na+/RtjkE=;
-        b=nKF2Io0/lNZUjg/RLqjAoISrdiHTArOMJLXFCMA4rzG7rkRo8nVeWh+Pntaou4aZX8
-         jpna0HD+tLheJEXe/HXCUotTMj98cc3G7TTHGSTci/a2unL5U5U8ayWPkeLaMJllj6fq
-         UeiIdkICu9PliRr8n0IC0KVEapwrwDzMTL2zxJEFFWYZbXVZkn1rO9rpJfAl50xxWaCm
-         a4ysqIq5qlUH0lEaHmaqQ+rhD+sb5xRdHlib2rv554zbVELHILN+nL+btRSo/n+afD2H
-         68nqLV1Cq9f9Bg7IH5sgRzX2gFJZRtcMoxKqJG4ewQexoYjCNY/QbBmGKGTDAR5fi7km
-         9uVw==
-X-Gm-Message-State: AOAM530uXRPoREmaZ6MCocof7BO0EMoJ+GDwkPSkufwjImYlxY+ewfD+
-	WUg5XpMXbVxJkPS1tS2bn9NZ9WT4c04=
-X-Google-Smtp-Source: ABdhPJwRM1H/FWro5q7lhBb8Lw0GdzdtSfBoPQ2zviYDyVKiFIv3dbysXozD3yjMQI27zcCzUYlT8w==
-X-Received: by 2002:adf:f4c7:: with SMTP id h7mr19720107wrp.234.1605953060727;
-        Sat, 21 Nov 2020 02:04:20 -0800 (PST)
-Return-Path: <beniaminsandu@gmail.com>
-Received: from localhost.localdomain (5-13-193-159.residential.rdsnet.ro. [5.13.193.159])
-        by smtp.gmail.com with ESMTPSA id d134sm6930333wmd.8.2020.11.21.02.04.19
+        bh=mIqgBR7bjOUTIGZs7mcOVw/Q3xpnL2pQ6m5Rx0b9qCs=;
+        b=NFePd791BWzWtdGq4B0AB4CLFa+tRfDv7ZxvBpfriQA4LR4W6ej2WPSo5WhVTjC6Ct
+         43N2At5n8w6hVn8nuHp6EMWALSMh27gdra/6R+K/vC839mfqhcFGvm7H+65GY2GE1mZo
+         mGTF5lKLPafzz9vgP89r3V0qbc8zJKytY10/HSG+MxaKUMb6aDJT5AtWq6aaWO0YtLIq
+         gCIyI4WyNgK6mYMYsrkQhW8VkMx9eIcu/n8irJKeJhm1YfBVsqbAaDs8/vJHGbB68C0Z
+         jW2zM3Nrmd+eaAC4a7FJCHbvrXvJC8ReFE5aZZZBOBl90dMcACaGx/cz3Jg/oekDlDIw
+         vvNA==
+X-Gm-Message-State: AOAM532UmekVhzRJ5PFsvUqTVpYm/ZTKbca79rS4C/KBM9RpjN2fPC6h
+	SmwG2Z8koqPklFuXWWYZKYKQIAcA7XSrlg==
+X-Google-Smtp-Source: ABdhPJysvAGyPxTXHc8sHn5XT3MaUBW53XEBzf6TyoWWIs1Rx55ryzaRSLe4q/hwxtxHLBHJyvgDNA==
+X-Received: by 2002:a65:5944:: with SMTP id g4mr24982870pgu.446.1606077475550;
+        Sun, 22 Nov 2020 12:37:55 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::b756])
+        by smtp.gmail.com with ESMTPSA id g4sm8957166pgu.81.2020.11.22.12.37.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Nov 2020 02:04:20 -0800 (PST)
-From: "Beni" <beniaminsandu@gmail.com>
+        Sun, 22 Nov 2020 12:37:54 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Beniamin Sandu <beniaminsandu@gmail.com>
-Subject: [meta-networking][PATCH] unbound: upgrade to 1.12.0
-Date: Sat, 21 Nov 2020 12:03:48 +0200
-Message-Id: <20201121100348.2855285-1-beniaminsandu@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster808@gmail.com>
+Subject: [meta-oe][PATCH 1/2] musl-nscd: Replace -fcommon with code patch
+Date: Sun, 22 Nov 2020 12:37:50 -0800
+Message-Id: <20201122203751.2535670-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
----
- ...rib-add-yocto-compatible-init-script.patch | 78 +++++++++++++++++++
- ...add-yocto-compatible-startup-scripts.patch | 78 -------------------
- .../{unbound_1.9.4.bb => unbound_1.12.0.bb}   |  4 +-
- 3 files changed, 80 insertions(+), 80 deletions(-)
- create mode 100644 meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-init-script.patch
- delete mode 100644 meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-startup-scripts.patch
- rename meta-networking/recipes-support/unbound/{unbound_1.9.4.bb => unbound_1.12.0.bb} (93%)
+The patch fixes the need for -fcommon
 
-diff --git a/meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-init-script.patch b/meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-init-script.patch
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Armin Kuster <akuster808@gmail.com>
+---
+ .../0001-Fix-build-under-GCC-fno-common.patch | 43 +++++++++++++++++++
+ .../recipes-devtools/musl/musl-nscd_git.bb    |  6 +--
+ 2 files changed, 46 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/musl/musl-nscd/0001-Fix-build-under-GCC-fno-common.patch
+
+diff --git a/meta-oe/recipes-devtools/musl/musl-nscd/0001-Fix-build-under-GCC-fno-common.patch b/meta-oe/recipes-devtools/musl/musl-nscd/0001-Fix-build-under-GCC-fno-common.patch
 new file mode 100644
-index 000000000..7168a352f
+index 0000000000..6fee0526d2
 --- /dev/null
-+++ b/meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-init-script.patch
-@@ -0,0 +1,78 @@
-+From 26614b6578056ec30b95013592e308bf24d924c2 Mon Sep 17 00:00:00 2001
-+From: Beniamin Sandu <beniaminsandu@gmail.com>
-+Date: Fri, 20 Nov 2020 23:00:20 +0200
-+Subject: [PATCH] contrib: add yocto compatible init script
++++ b/meta-oe/recipes-devtools/musl/musl-nscd/0001-Fix-build-under-GCC-fno-common.patch
+@@ -0,0 +1,43 @@
++From 8c0e4b7907eb577b1e5214f9a7bc75d5c3263b0a Mon Sep 17 00:00:00 2001
++From: Ariadne Conill <ariadne@dereferenced.org>
++Date: Sat, 14 Nov 2020 22:55:30 -0700
++Subject: [PATCH] Fix build under GCC -fno-common.
 +
-+Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
++Upstream-Status: Submitted [https://github.com/pikhq/musl-nscd/pull/11]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ contrib/unbound.init | 20 ++++++++++----------
-+ 1 file changed, 10 insertions(+), 10 deletions(-)
++ include/modules.h | 4 ++--
++ src/main.c        | 3 +++
++ 2 files changed, 5 insertions(+), 2 deletions(-)
 +
-+diff --git a/contrib/unbound.init b/contrib/unbound.init
-+index c5bb52bb..4eba752b 100644
-+--- a/contrib/unbound.init
-++++ b/contrib/unbound.init
-+@@ -19,11 +19,11 @@
-+ ### END INIT INFO
++diff --git a/include/modules.h b/include/modules.h
++index 70c1960..e77ec58 100644
++--- a/include/modules.h
+++++ b/include/modules.h
++@@ -28,7 +28,7 @@ struct mod_passwd {
++ 	link_t link;
++ };
 + 
-+ # Source function library.
-+-. /etc/rc.d/init.d/functions
-++. /etc/init.d/functions
++-list_t passwd_mods;
++-list_t group_mods;
+++extern list_t passwd_mods;
+++extern list_t group_mods;
 + 
-+ exec="/usr/sbin/unbound"
-+ prog="unbound"
-+-config="/var/unbound/unbound.conf"
-++config="/etc/unbound/unbound.conf"
-+ pidfile="/var/unbound/unbound.pid"
-+ rootdir="/var/unbound"
++ #endif
++diff --git a/src/main.c b/src/main.c
++index c1a78bb..808ef74 100644
++--- a/src/main.c
+++++ b/src/main.c
++@@ -18,6 +18,9 @@
++ #include "parse.h"
++ #include "util.h"
 + 
-+@@ -54,14 +54,14 @@ start() {
-+ 	[ -e ${rootdir}/dev/log ] || touch ${rootdir}/dev/log
-+ 	mount --bind -n /dev/log ${rootdir}/dev/log >/dev/null 2>&1;
-+     fi;
-+-    if ! egrep -q '^/[^[:space:]]+[[:space:]]+'${rootdir}'/dev/urandom' /proc/mounts; then
-++    if ! egrep -q '^/[^[:space:]]+[[:space:]]+'${rootdir}'/dev/random' /proc/mounts; then
-+ 	[ -d ${rootdir}/dev ] || mkdir -p ${rootdir}/dev ;
-+-	[ -e ${rootdir}/dev/urandom ] || touch ${rootdir}/dev/urandom
-+-	mount --bind -n /dev/urandom ${rootdir}/dev/urandom >/dev/null 2>&1;
-++	[ -e ${rootdir}/dev/random ] || touch ${rootdir}/dev/random
-++	mount --bind -n /dev/random ${rootdir}/dev/random >/dev/null 2>&1;
-+     fi;
-+ 
-+     # if not running, start it up here
-+-    daemon $exec
-++    daemonize $exec
-+     retval=$?
-+     echo
-+     [ $retval -eq 0 ] && touch $lockfile
-+@@ -71,15 +71,15 @@ start() {
-+ stop() {
-+     echo -n $"Stopping $prog: "
-+     # stop it here, often "killproc $prog"
-+-    killproc -p $pidfile $prog
-++    killproc $prog
-+     retval=$?
-+     echo
-+     [ $retval -eq 0 ] && rm -f $lockfile
-+     if egrep -q '^/[^[:space:]]+[[:space:]]+'${rootdir}'/dev/log' /proc/mounts; then
-+ 	umount ${rootdir}/dev/log >/dev/null 2>&1
-+     fi;
-+-    if egrep -q '^/[^[:space:]]+[[:space:]]+'${rootdir}'/dev/urandom' /proc/mounts; then
-+-	umount ${rootdir}/dev/urandom >/dev/null 2>&1
-++    if egrep -q '^/[^[:space:]]+[[:space:]]+'${rootdir}'/dev/random' /proc/mounts; then
-++	umount ${rootdir}/dev/random >/dev/null 2>&1
-+     fi;
-+     return $retval
-+ }
-+@@ -99,7 +99,7 @@ force_reload() {
-+ 
-+ rh_status() {
-+     # run checks to determine if the service is running or use generic status
-+-    status -p $pidfile $prog
-++    status $prog
-+ }
-+ 
-+ rh_status_q() {
+++list_t passwd_mods;
+++list_t group_mods;
+++
++ static void *get_dll(const char *service)
++ {
++ 	char *path;
 +-- 
-+2.25.1
++2.29.2
 +
-diff --git a/meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-startup-scripts.patch b/meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-startup-scripts.patch
-deleted file mode 100644
-index 46f6a7b3f..000000000
---- a/meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-startup-scripts.patch
-+++ /dev/null
-@@ -1,78 +0,0 @@
--From 186ac39de8eb9aedcf3d87cdbe389d10cde03d66 Mon Sep 17 00:00:00 2001
--From: Beniamin Sandu <beniaminsandu@gmail.com>
--Date: Tue, 16 Jul 2019 19:59:23 +0300
--Subject: [PATCH] contrib: add yocto compatible startup scripts
--
--Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
-----
-- contrib/unbound.init       | 10 +++++-----
-- contrib/unbound.service.in |  4 ++--
-- 2 files changed, 7 insertions(+), 7 deletions(-)
-- mode change 100644 => 100755 contrib/unbound.init
--
--diff --git a/contrib/unbound.init b/contrib/unbound.init
--old mode 100644
--new mode 100755
--index cccadecc..4eba752b
----- a/contrib/unbound.init
--+++ b/contrib/unbound.init
--@@ -19,11 +19,11 @@
-- ### END INIT INFO
-- 
-- # Source function library.
---. /etc/rc.d/init.d/functions
--+. /etc/init.d/functions
-- 
-- exec="/usr/sbin/unbound"
-- prog="unbound"
---config="/var/unbound/unbound.conf"
--+config="/etc/unbound/unbound.conf"
-- pidfile="/var/unbound/unbound.pid"
-- rootdir="/var/unbound"
-- 
--@@ -61,7 +61,7 @@ start() {
--     fi;
-- 
--     # if not running, start it up here
---    daemon $exec
--+    daemonize $exec
--     retval=$?
--     echo
--     [ $retval -eq 0 ] && touch $lockfile
--@@ -71,7 +71,7 @@ start() {
-- stop() {
--     echo -n $"Stopping $prog: "
--     # stop it here, often "killproc $prog"
---    killproc -p $pidfile $prog
--+    killproc $prog
--     retval=$?
--     echo
--     [ $retval -eq 0 ] && rm -f $lockfile
--@@ -99,7 +99,7 @@ force_reload() {
-- 
-- rh_status() {
--     # run checks to determine if the service is running or use generic status
---    status -p $pidfile $prog
--+    status $prog
-- }
-- 
-- rh_status_q() {
--diff --git a/contrib/unbound.service.in b/contrib/unbound.service.in
--index 95976dd9..0e7f79a9 100644
----- a/contrib/unbound.service.in
--+++ b/contrib/unbound.service.in
--@@ -10,9 +10,9 @@ WantedBy=multi-user.target
-- 
-- [Service]
-- ExecReload=/bin/kill -HUP $MAINPID
---ExecStart=@UNBOUND_SBIN_DIR@/unbound
--+ExecStart=@UNBOUND_SBIN_DIR@/unbound -d
-- NotifyAccess=main
---Type=notify
--+Type=simple
-- CapabilityBoundingSet=CAP_IPC_LOCK CAP_NET_BIND_SERVICE CAP_SETGID CAP_SETUID CAP_SYS_CHROOT CAP_SYS_RESOURCE
-- MemoryDenyWriteExecute=true
-- NoNewPrivileges=true
---- 
--2.17.1
--
-diff --git a/meta-networking/recipes-support/unbound/unbound_1.9.4.bb b/meta-networking/recipes-support/unbound/unbound_1.12.0.bb
-similarity index 93%
-rename from meta-networking/recipes-support/unbound/unbound_1.9.4.bb
-rename to meta-networking/recipes-support/unbound/unbound_1.12.0.bb
-index 6200214ac..6fc163171 100644
---- a/meta-networking/recipes-support/unbound/unbound_1.9.4.bb
-+++ b/meta-networking/recipes-support/unbound/unbound_1.12.0.bb
-@@ -10,9 +10,9 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
+diff --git a/meta-oe/recipes-devtools/musl/musl-nscd_git.bb b/meta-oe/recipes-devtools/musl/musl-nscd_git.bb
+index b03cc868fd..94a506ae71 100644
+--- a/meta-oe/recipes-devtools/musl/musl-nscd_git.bb
++++ b/meta-oe/recipes-devtools/musl/musl-nscd_git.bb
+@@ -9,10 +9,10 @@ SECTION = "utils"
  
- SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=http;branch=master \
--	file://0001-contrib-add-yocto-compatible-startup-scripts.patch \
-+	file://0001-contrib-add-yocto-compatible-init-script.patch \
- "
--SRCREV="b60c4a472c856f0a98120b7259e991b3a6507eb5"
-+SRCREV="52b04806f4236c37acd10179ab465a54adc7e86a"
+ PV = "1.0.2"
  
- inherit autotools pkgconfig systemd update-rc.d
+-CFLAGS += "-fcommon"
+-
+ SRCREV = "af581482a3e1059458f3c8b20a56f82807ca3bd4"
+-SRC_URI = "git://github.com/pikhq/musl-nscd"
++SRC_URI = "git://github.com/pikhq/musl-nscd \
++           file://0001-Fix-build-under-GCC-fno-common.patch \
++          "
+ 
+ UPSTREAM_CHECK_COMMITS = "1"
  
 -- 
-2.25.1
+2.29.2
 
