@@ -1,17 +1,17 @@
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.63])
- by mx.groups.io with SMTP id smtpd.web09.42323.1606164993442973748
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.55])
+ by mx.groups.io with SMTP id smtpd.web11.42347.1606165005472079856
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Nov 2020 12:56:34 -0800
+ Mon, 23 Nov 2020 12:56:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=AxtBralN;
- spf=pass (domain: windriver.com, ip: 40.107.223.63, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=p335io7v;
+ spf=pass (domain: windriver.com, ip: 40.107.237.55, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SY1mkqMVDoh9sMPWgfYzu39uR0mj1CzKfdAXTl4+Zpf7NP92UJeRPDU733NhfNqBHceBNh7FqEmQsFB/tSm/clNc8Mv2iTFcZrX7/qBJmVU+LZapfKUfHJ7YidRLKnXeLWUPTqpu7xRzWhAD2B7sY4ClNUQs3GhbEH+JHYTFUWWFch4t0hff2/zHHf1QdMoCFX2Si8Xeok1I5ay6ochbnZiY3KiQMi9z1UG7oV8DYNslyBgsvUJr2k/iXlFMPIfqPGGBDZ60xCwlPzo666C5n+YxMBq0dTZc8wR8YnIxPGXf2tvR0+SCl6y1BZFXnY9gFILfPuc/7MgOcRYsbOEjbg==
+ b=hxAsCLpNLdFyU8T7zPTDLX5wHKFTDkA3IDDmKThuV+cKi56ujbHtowkwgSFeTEKF1zLki0kSprvuhH5K/0Nqwp4srMuRbgcHNyRCF//XUQ6nVCPzokAruODZEIQjt/unuIR4bxSwwjuE8/LBqTOVMLsm+W2P6YVhjXa/PdpH5SjXZUvwNnSsz3Y6GSlwxMsxrzLcZ7C9qit5gkAlpL2ykSeaJmSDQDMvsO4xS43OZt2876tiUZ8/YIq0C+lKRUoHmycaJI/scazhdvtWf2rhVGI3UQqynU6pG10tjCqUxB93ZBw8U4OJiHDfyqDXxQ6vtzogEBK8C2DXsGIv4wvRCw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=o2Cjz1lG4oio8wYy8giGDcw3liRCIdWKnXFeQ1oCEj4=;
- b=NHQDlPIiiNhE8+2fREpgK4Pzn5LTxBXB45poAg7rLDYseU2v1LKj2qqPBuAmZE/4EHq122vNhra38nxzcVypkIA7ycLIzCu9a4nx42Iz43p0mWNVwUVOV74PphILNhB4cVsv4WxfZrGIbczEI7Lq02GBc2C9J2R6eEwHImzOQ1gDVvzx4fxo64H+xtG29X1I1Vo8vL8bJnqlYHe9JL2tKEsqDE2cM+V9IaXNqjainDn5zAq4HaS/qVa9v5nIbyRkIGWIP/EmOgdEPINHmVBZhPCJ9d541iP4oaVUZy8lNTKagKh2qy6cjHJXXrtlBl9PPketxqViNHG2leSMpswpaA==
+ bh=SyzB+2VnV4FECMc2HtbrBfCJS7feogn64ihAga6sdjc=;
+ b=QGcguOqsnavBR2pwNjntbwAUlQc9tO0ZBKzqBP4zRUVz0n8YhOZ+b66kx/cGSr8H8jd+vw8CFQc2Cgp1NuwaaiggDwB5CQP504l02Bpf5WSUOPEaO3pZj4WBk6woE2VtT8IYsU0UVzW7zxBiGfv26NCUj5xnXkHpgGHVkWeohLTgFelNi+p9z5XYdUlxDMd62s2TceS9TIO6jOsOzNomF5g7hTXQwC8RCHS7BpVypjMH7zIIGHA/FCSvGlhD/FiDwQis2icttjLRjNvZNzJEyAmpr8LRgqxixqYXr4iKYhlH9kdJWpfcu6y7q6jNUcrEXo+bwKI/gGiUEUT6TP8p6A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,110 +19,111 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=o2Cjz1lG4oio8wYy8giGDcw3liRCIdWKnXFeQ1oCEj4=;
- b=AxtBralNlQ48B+A1IhhqAL+vysTi3KEUThQB2gjFFQl/YexT0nUT4tEnHHC/2pnm8ydzms6snB7CSTO7gTPPhpzBsD+nrd/+fU9G72FeJPvo1cwP2MpKU6CtPAJAXaMAXoPH5GHwkMLX2LPvK0AONeDKlQ6wxTGWn6CjWx2niXo=
-Authentication-Results: bosphorusiss.com; dkim=none (message not signed)
- header.d=none;bosphorusiss.com; dmarc=none action=none
+ bh=SyzB+2VnV4FECMc2HtbrBfCJS7feogn64ihAga6sdjc=;
+ b=p335io7viRSS3lEyQqOoClA1l+nhYeHj5vh2RjlGBBOETVUN24mduajkuZz4lVQyiZpOPn0XH0zvszFL1DpEM9at+Yn/Hghk3QlOZOmOpaf2YlBZKvgHsqlQ9rkO9MjMh9FIAK717GDr+XKXmVT/Oa4Pfaf+3IeanYlz8RCLP8Y=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB2678.namprd11.prod.outlook.com (2603:10b6:a02:c1::22) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.29; Mon, 23 Nov
- 2020 20:56:31 +0000
+ 2020 20:56:44 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::3b:680c:aa2f:e498]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::3b:680c:aa2f:e498%4]) with mapi id 15.20.3589.030; Mon, 23 Nov 2020
- 20:56:31 +0000
-Subject: Re: [oe] [meta-python][PATCH 5/5] python3-jsonpath-rw: Add recipe for v1.4.0
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-Cc: "hasan.men" <hasan.men@bosphorusiss.com>
-References: <20201117230404.880724-1-raj.khem@gmail.com>
- <20201117230404.880724-5-raj.khem@gmail.com>
+ 20:56:43 +0000
+Subject: Re: [oe] [meta-python][PATCH 1/5] python3-gmqtt: Upgrade 0.6.7 -> 0.6.8
+To: Leon Anavi <leon.anavi@konsulko.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20201118140220.29364-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <78f98823-3f2a-99ea-6b92-a287c149759c@windriver.com>
-Date: Mon, 23 Nov 2020 15:56:28 -0500
+Message-ID: <04b4cdf7-18a0-beea-349b-feab4530e6b7@windriver.com>
+Date: Mon, 23 Nov 2020 15:56:41 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
-In-Reply-To: <20201117230404.880724-5-raj.khem@gmail.com>
+In-Reply-To: <20201118140220.29364-1-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: YT1PR01CA0035.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::48)
+X-ClientProxiedBy: YT1PR01CA0009.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::22)
  To BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0035.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::48) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.20 via Frontend Transport; Mon, 23 Nov 2020 20:56:30 +0000
+Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0009.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.20 via Frontend Transport; Mon, 23 Nov 2020 20:56:43 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: cc216be3-3b74-453b-2cd8-08d88ff24130
+X-MS-Office365-Filtering-Correlation-Id: 1a22a45f-3614-4b9f-8c09-08d88ff24894
 X-MS-TrafficTypeDiagnostic: BYAPR11MB2678:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB2678DA337C1BF1C649F9FB999FFC0@BYAPR11MB2678.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:517;
+	<BYAPR11MB26785762E98FC2067F311FCA9FFC0@BYAPR11MB2678.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:538;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	rlo9CJT6nkbgvDPxDqwCV+tXpT9S3NU1/lqLbgieet4SRKYqgAtZVXz9PnWFiEWA8tS1pU7YXX3iA7QLHxwUrbrPEM4jQW9omg+BHLBVueq6tmwWy2gkhKfDXixp4CNaPO+6ujYUpMO9HAK5RFJgvwC3cs57ow7jweakb1z+WJxLtxZB4xASwl6RWzfeKdvyit9OYWbQRSAOsEh1xIKIvYrOzu03hSC4EylpavWruE+hulLxodPEYgfpgpLRW3BAdg1sdwxFkbemld1pgIAZH9adjE9OPERvqiIij4rH+HliGje1jqdzEAy70Ko+7+ExPr7+E7l+8KjXnZXOeJOFHWUwph+rvh8Gn7mMwgg6ZC8W5kGZ6sHauVJNdyQap5Gx+XSp62NcIrXLw2zG7PRiRiUgUZrzHZy7rwuHcoIwvu3+y2ExhY1KbmJDu/mvKH82I52iMXVosIE6zAYfTcD18Q==
+	OEQI8xrzcemJ9vyDdrCRan4eunU++q5udCBbphjk713GieuRLh9pCTQINTHBt5hyYXVYQMmUJRt1T5U+ZdjDoUDEk6pvbhWedMMBqf7vg2uE8bqNGL9Oiyd+JsWLVv+yKFa4tu8AnsVnwst4s9e3LY2XKV7/3jizafrKMS5WVbAbrSkLZQN9dJc/nV5rhy1jhlnUJPJEMkYdE9trlWa0Tost6021QNIV5AEj92FUhOTjSBQi/Il7ipjm0MOO8oZzNc5jI6pQNufKBvi51beDWx+84rLmgbt1NhNmYlKsCE0Rvg5L9wFPm982KHsWT9V3wDOGtoQwIkAAhvc5d56a8sA/L2axW3MX9FWvFDjP7P62T9ZQe1AC6C6vwGsQ/uQ9X9c2u1UVEhoOlmbuoqpwBILnY8IGw47gAxStg74Dg1iI8rVmVL5rfCnzJtHQxudYvRqh8zFrvyCL/NOSVU8UsQ==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(366004)(346002)(136003)(39850400004)(396003)(2906002)(8676002)(16576012)(8936002)(83380400001)(186003)(86362001)(36756003)(26005)(66946007)(166002)(53546011)(16526019)(316002)(4326008)(31696002)(6486002)(478600001)(33964004)(31686004)(66556008)(66476007)(44832011)(956004)(2616005)(966005)(5660300002)(4001150100001)(52116002)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(366004)(346002)(136003)(39850400004)(396003)(2906002)(8676002)(16576012)(8936002)(83380400001)(186003)(86362001)(36756003)(26005)(66946007)(166002)(53546011)(16526019)(316002)(31696002)(6486002)(478600001)(33964004)(31686004)(66556008)(66476007)(44832011)(956004)(2616005)(966005)(5660300002)(4001150100001)(52116002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	2D3PunftSgsBnXhM9tVw49JHBXFhpPGAeLJLvIimfeTZC2F2Bmso/cwEPdDQYwCuSBZ/XNSnNmQlLFNgYsM3TKUrcXWcrgiP5iySfK+l7f9nCLJ0qWetzfHQCC+IUkjdoC0BFHk+N8lXwmpU4Ss9EwxApivxC6D9Xo2Ei/eNQrwrgU1rdy7pZ/IdiOvclL7xXolUAEjPSkm2dd/SlURybvUb4ZqRS9t1rf1jyLUSfpIQSRNixbAy539J3Vqn55UwS5y/4iz4au9J4V/ZOH3sk087dSTDpYc2jwN15XRxPaTduWYZDe6cGXN+6ah49kZDtuu7UzC2TZIrWrPwVxGewyS+RE0jOayIKiU3VluhItmtFGppsHd+R5xtlg+xJFrw/wqsqEoAsEIope1bcvJKNCqOLzqoXcdIxSqtOOba8zmXOfdqlIbRD7dcytTEVR39CT7zhRLXOq0l/Db/tp3wyvDt1wdQ+Rzaqf4o4YCbuJVF2kVkZpu/hrMJPK1spAQLQ8mcOtmcwyW4adH3DSGBkzPDc38GZmwB+jAvNhdAIMWOaTN3Tho5zO/viG1abkXfhBi6LiYGf768XJCFKb0IrEfXejat4rKxYxA5nFjzsPM4/bE6HWXIycrRt+el8dbB4znF+VtR8E6H5qljBBfjGao1ozklOfo4tjjMuiNj6s/RSwLr2XdkM62AkhzL7wFMbXW8K3zD+wCGNgnd+jkk2t3ofxwM/2JJr2k0UeRTVDRYVZqRcP4vInznDbn+CeyFidkXWf6McZvsc3x/7TJFZ37yCE/QkOZC/V2D/5BeH3vovUCg5Xj9XXIZkbsAmldINchvDODQy8I86MwoYpT4BZRdvsV8usFeiMzTwX5fvb4o5lszOubezVL3nWQUkjDeHjZsOcqbtuAiOGvtaKc5ow==
+	4+Y+wLnQSDx8nVlTr925bq/jvioutU2PNBE/kKSkf90L1XR0o55fROlBG+aAe1H+d1Ut0g56YNdvw9wEX3Don4LxRFmsYyoMBflNYTZtcLGtoYQKc2OC7tbXiQKcuru+DcebHEcLzoF39YuCK04ly24Xejcj6J2dNAWQwjtK+lz1otzG+TejNQMmU2V4zuXf7eaGvygRFLbOIL2j5uq51/2DtvkbgOqgPteaMz2B3FwvpMALqf2VbmM56rtRi22vig+FPVjWUgTb0GnBopjJ09s9BB4+zG2oUfRqnLK/Cry4HuFP3eDbWnNRsNt2HHzHx6l7BkkfmmSB5pavZNa1XzCoBtpsR8VOnQOWfKgeeWA7c1Ir5z+fzfnPKDXSBHNJJ6GVr7ikMPoD0RSyPSFUYsAfoUIZsWXYq/f7QWhB4h09EBwX6gnq6XW4cwdA8ACadngxvgUIPQtvbOfWEcwxqdXiJRYlGxesnUDO7EmYd8QJRyxIDFemTt3QeypdssS0vSgDSVrE3DMLwccP6TsZO/JpLUa3W6ISbQqh4MdQjmGH8nR8p6+Q5WTnkmumTEsayzpqacGLSbiHZNr0V7jUKuYJ6LpSCX+6EjVXBOwQGGxTDT1/XdJkBtsqczIbxj9A21kUeoA4Ax1qVTHUPCok8FeTXoTigzNfbtvjy52Xc3UI+svh3riUWd6G07OlQEaUsdv0F3Syi4pS0ct5nU+yUDdSEDWU+tXF0ZI/4rmXrXBBrRs/WSWbIenS7IcnYpcOwYXf5QdK1r+RFe1ny+7jjJyABa7lxxIj7J+4hvBs4fCF7d7tztUmL1b7MYV/z63E5rT/QMj90UQ/PMZAQ2AuLOzveobSDCRRGLzQ6AZoXj0xy9vPxnEUz4z0+iAYlHR07KSqA9XfqSerz/Eh/Bv3Sg==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cc216be3-3b74-453b-2cd8-08d88ff24130
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1a22a45f-3614-4b9f-8c09-08d88ff24894
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Nov 2020 20:56:31.3757
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Nov 2020 20:56:43.8086
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 04KVowKLLhFKwQ61uSqLhZYPBa1Y89suY0nH9VoRfikbl/sBSvAQaO5ZRfStRT6Va1+MkLUHXpYLms5oFZUyQTig++1HaZvy9SI8Ezr1ClA=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7+rj2Po9DDGtWRKONdAt//+X/8OMrfMpech2VFn/Bbo5gWe5UJkyJdJJa9XvuD179zDDjW/cNh3A0GTwfyuyDhLx2vM1TDOcUEkAUbLLXi0=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2678
 Content-Type: multipart/alternative;
- boundary="------------07F9494A6164033B37A0A73F"
+ boundary="------------640CBF720685EB109A5FEAA7"
 Content-Language: en-US
 
---------------07F9494A6164033B37A0A73F
+--------------640CBF720685EB109A5FEAA7
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 2020-11-17 6:04 p.m., Khem Raj wrote:
+On 2020-11-18 9:02 a.m., Leon Anavi wrote:
 > [Please note this e-mail is from an EXTERNAL e-mail address]
 >
-> From: "hasan.men" <hasan.men@bosphorusiss.com>
+> Upgrade to release 0.6.8:
 >
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> - Fix encode str to bytes
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python3-jsonpath-rw_1.4.0.bb              | 12 ++++++++++++
->   1 file changed, 12 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-jsonpath-rw_1.4.0.bb
+>   .../python/{python3-gmqtt_0.6.7.bb => python3-gmqtt_0.6.8.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-gmqtt_0.6.7.bb => python3-gmqtt_0.6.8.bb} (73%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-jsonpath-rw_1.4.0.bb b/meta-python/recipes-devtools/python/python3-jsonpath-rw_1.4.0.bb
-> new file mode 100644
-> index 0000000000..54e1b646d5
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-jsonpath-rw_1.4.0.bb
-> @@ -0,0 +1,12 @@
-> +DESCRIPTION = "A robust and significantly extended implementation of JSONPath for Python"
-> +HOMEPAGE = "https://github.com/kennknowles/python-jsonpath-rw"
-> +SECTION = "devel/python"
-> +LICENSE = "BSD+"
-> +LIC_FILES_CHKSUM = "file://README.rst;md5=02384665f821c394981e0dd1faec9a7d"
-> +
-> +SRC_URI[md5sum] = "3a807e05c2c12158fc6bb0a402fd5778"
-> +SRC_URI[sha256sum] = "05c471281c45ae113f6103d1268ec7a4831a2e96aa80de45edc89b11fac4fbec"
-> +
-> +inherit pypi setuptools3
-> +
-> +RDEPENDS_${PN} += " python3-decorator"
+> diff --git a/meta-python/recipes-devtools/python/python3-gmqtt_0.6.7.bb b/meta-python/recipes-devtools/python/python3-gmqtt_0.6.8.bb
+> similarity index 73%
+> rename from meta-python/recipes-devtools/python/python3-gmqtt_0.6.7.bb
+> rename to meta-python/recipes-devtools/python/python3-gmqtt_0.6.8.bb
+> index 70527e026c..6219d20093 100644
+> --- a/meta-python/recipes-devtools/python/python3-gmqtt_0.6.7.bb
+> +++ b/meta-python/recipes-devtools/python/python3-gmqtt_0.6.8.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/wialon/gmqtt"
+>   LICENSE = "MIT"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=903f1792621a3b35ee546da75d139177"
+>
+> -SRC_URI[md5sum] = "9e26fec7d5b64afab63d6d82faacc208"
+> -SRC_URI[sha256sum] = "86b3679de400b8068dfadf871ce063a7040ed5052d30cc323aed69430888b422"
+> +SRC_URI[md5sum] = "8745f3b576e5247310276f0ef5c32f65"
+> +SRC_URI[sha256sum] = "1285c428a5faf4c6aaac1e2ccb876383b4c7e087ef34ff7edb9f549a78cdebf1"
+>
+>   inherit pypi setuptools3
+>
 > --
-> 2.29.2
+> 2.17.1
 >
 >
 > 
 >
 
---------------07F9494A6164033B37A0A73F
+--------------640CBF720685EB109A5FEAA7
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -132,44 +133,46 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 2020-11-17 6:04 p.m., Khem Raj
+    <div class="moz-cite-prefix">On 2020-11-18 9:02 a.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20201117230404.880724-5-raj.khem@gmail.com">
+    <blockquote type="cite" cite="mid:20201118140220.29364-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">[Please note this e-mail is from an EXTERNAL e-mail address]
 
-From: &quot;hasan.men&quot; <a class="moz-txt-link-rfc2396E" href="mailto:hasan.men@bosphorusiss.com">&lt;hasan.men@bosphorusiss.com&gt;</a>
+Upgrade to release 0.6.8:
 
-Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a></pre>
+- Fix encode str to bytes
+
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20201117230404.880724-5-raj.khem@gmail.com">
+    <blockquote type="cite" cite="mid:20201118140220.29364-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python3-jsonpath-rw_1.4.0.bb              | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-jsonpath-rw_1.4.0.bb
+ .../python/{python3-gmqtt_0.6.7.bb =&gt; python3-gmqtt_0.6.8.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-gmqtt_0.6.7.bb =&gt; python3-gmqtt_0.6.8.bb} (73%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-jsonpath-rw_1.4.0.bb b/meta-python/recipes-devtools/python/python3-jsonpath-rw_1.4.0.bb
-new file mode 100644
-index 0000000000..54e1b646d5
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-jsonpath-rw_1.4.0.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = &quot;A robust and significantly extended implementation of JSONPath for Python&quot;
-+HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/kennknowles/python-jsonpath-rw">&quot;https://github.com/kennknowles/python-jsonpath-rw&quot;</a>
-+SECTION = &quot;devel/python&quot;
-+LICENSE = &quot;BSD+&quot;
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://README.rst;md5=02384665f821c394981e0dd1faec9a7d">&quot;file://README.rst;md5=02384665f821c394981e0dd1faec9a7d&quot;</a>
-+
-+SRC_URI[md5sum] = &quot;3a807e05c2c12158fc6bb0a402fd5778&quot;
-+SRC_URI[sha256sum] = &quot;05c471281c45ae113f6103d1268ec7a4831a2e96aa80de45edc89b11fac4fbec&quot;
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS_${PN} += &quot; python3-decorator&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-gmqtt_0.6.7.bb b/meta-python/recipes-devtools/python/python3-gmqtt_0.6.8.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-gmqtt_0.6.7.bb
+rename to meta-python/recipes-devtools/python/python3-gmqtt_0.6.8.bb
+index 70527e026c..6219d20093 100644
+--- a/meta-python/recipes-devtools/python/python3-gmqtt_0.6.7.bb
++++ b/meta-python/recipes-devtools/python/python3-gmqtt_0.6.8.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/wialon/gmqtt">&quot;https://github.com/wialon/gmqtt&quot;</a>
+ LICENSE = &quot;MIT&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=903f1792621a3b35ee546da75d139177">&quot;file://LICENSE;md5=903f1792621a3b35ee546da75d139177&quot;</a>
+
+-SRC_URI[md5sum] = &quot;9e26fec7d5b64afab63d6d82faacc208&quot;
+-SRC_URI[sha256sum] = &quot;86b3679de400b8068dfadf871ce063a7040ed5052d30cc323aed69430888b422&quot;
++SRC_URI[md5sum] = &quot;8745f3b576e5247310276f0ef5c32f65&quot;
++SRC_URI[sha256sum] = &quot;1285c428a5faf4c6aaac1e2ccb876383b4c7e087ef34ff7edb9f549a78cdebf1&quot;
+
+ inherit pypi setuptools3
+
 --
-2.29.2
+2.17.1
 
 </pre>
       <br>
@@ -182,4 +185,4 @@ index 0000000000..54e1b646d5
   </body>
 </html>
 
---------------07F9494A6164033B37A0A73F--
+--------------640CBF720685EB109A5FEAA7--
