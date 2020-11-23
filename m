@@ -1,169 +1,112 @@
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com [209.85.160.193])
- by mx.groups.io with SMTP id smtpd.web08.36529.1606144381952480883
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com [209.85.160.196])
+ by mx.groups.io with SMTP id smtpd.web12.36645.1606145661370755767
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Nov 2020 07:13:02 -0800
+ Mon, 23 Nov 2020 07:34:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=AlQYeJ48;
- spf=pass (domain: gmail.com, ip: 209.85.160.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f193.google.com with SMTP id 7so13582990qtp.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2020 07:13:01 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=VFAc5glT;
+ spf=pass (domain: gmail.com, ip: 209.85.160.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f196.google.com with SMTP id 7so13642365qtp.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2020 07:34:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=Of/bct8T/yLXQJI3ZAZuIsBvnZbepMBa/Rbj+aFHiVI=;
-        b=AlQYeJ48fgxJvKxPXLtdXso0giwVvTc8Ab7VYW6iIXJqCJmY9YXe4r9vxHj36H2HDD
-         tZJqhPeLH656inrDU8qFGMZVDmpoG08fcoKLyjq3TalRy23Hwq1bbu/Dl0s81uCOcOeY
-         TtWs94XTZWxTCOMeEU8wIWqEQFe6cMP75GQ93qqSePyHg2Or26uF6nVgjbbm6QeS130h
-         L+uNjNav9hp65HwEoMmSbmNcY7aiv06rk3ujyO0c1IZlXGUbE6cV5rtTcRjwLX/y1zLe
-         IyUjnBCSnbpgaVfUooeHVofN7g7UtGZsz+fEZDMgBWF6OTE1yGNyTAJ2fQw3jtXlBNgb
-         nbPQ==
+        bh=RR8vg+C1cw1qnCkJogrXoVeNnkryAF2J0SNlgu8NjWI=;
+        b=VFAc5glTeRyG7JAq+51jIYjMYWSNW4gHOA8eNOXEzwU+E3cFtAO5Mm3Q3LDII0W2Hg
+         0HJOMNI4nGON/3PniN67Wb5+ULBeJ4+xCoo5IbcRJA/Med/gry9dRTXbEPRsgiNJLoh1
+         6lfR2NNIsRFuX7rTyF9nFJEvH5HZkoHoA7FC51wOtSw13ah/rqxUeiqvdCUI07ZcejF5
+         u1hkYvRZ7rsk/GCSvjQNIpqreXCNoAhCDgH2TDWIr2rwJem6r31EzjOeIBFAbBCAuNTt
+         LjS61ekkhWJRPt+PbzVGXlDFT6ULsRh78U11vYdA5kFH2hG3NLTyUxlX5BirIZcnFyTb
+         fQCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=Of/bct8T/yLXQJI3ZAZuIsBvnZbepMBa/Rbj+aFHiVI=;
-        b=o+vA8t76D+UjTROz+qQKIzAMS3iH5QHaXa84aST5M8FjE0MSDbALTnAy7GcQS1mJvR
-         1fTung7ZbuyTOeImY1ix8nV0Ej66NvcSykOzf1OraqHQYMx9C/WAjWwaVJ6XSZTD+Ezx
-         m8OtaKmT0ftcjsfzHqEa5xQql3xEI9gWm1L1Z+Z29nvui3jE6ip7rSXQOq8TWJlxWNOO
-         8aLfarLNqEW1MOivbTb9Or5tUi2xIYgIs1YiaQMv42wvnY1AC7FvOq2lGGkxXyheGqQt
-         SxplPWnGV4HMyqDlaV0/VjXSHbF7pj+XV9lgcbTs29q9T/9rH8Lx7sNywjP1meVYY7WH
-         ZFOg==
-X-Gm-Message-State: AOAM5335ucrMLLlCeQG/JZd5q6fRykpBfxo7dWqhK5aNfc3d0RVbx2bf
-	bN9l00zix5zS7Tr1F/wNeQJjzyu2uH+LEWjv5IA=
-X-Google-Smtp-Source: ABdhPJzvPqlf5NqpCkYS/26rpz2dG7JdEVYFvQXkwnKj+UpLpFjz+JSOX1cLo6WEwEncLv9y5ztv9SzTph+9V43TeJ0=
-X-Received: by 2002:ac8:3805:: with SMTP id q5mr7774694qtb.53.1606144380991;
- Mon, 23 Nov 2020 07:13:00 -0800 (PST)
+        bh=RR8vg+C1cw1qnCkJogrXoVeNnkryAF2J0SNlgu8NjWI=;
+        b=eQ0MGkYXBg5puLl66HjUWJc8HfcwYc7bHmrx3yt8YVMdK8WC2lBVhF4G5k8oWOYj3L
+         oJ2sgsozvnOqGVl1CqGMCgfa2zQUE1LfE5kBFnfiI3kdCxx5FkGC0op6a49To/XRUXj2
+         E6oO2O5H/QNjrIcnbWQ516igiZGNVPf4RdOZFOWGwITIyD8Ew1hi70u5yugvJwYOb2VY
+         x0q4VJZy2bYmX69Q1l2fo7r8dGdFCuGpSOWVXMqZe+CLx6+iuOvA/hmn5FJ07nFjI9cn
+         pjccjd0xNP3L764Vrvike4ge7tMpgSU5JROa5p0Rl676QaNnjD/LheiulsnlknQaHNwP
+         FjqQ==
+X-Gm-Message-State: AOAM532q2HFBnCUsHjRTdyxlkLZmTXxgLDp6vys0X+CRM3Ni8/aGW8C0
+	f++Y7QjRWl5WECKYP69Vn4xTeLHS8P7Eglg2oIQ=
+X-Google-Smtp-Source: ABdhPJygrtx7xTjj/LN4RgdkzvxFMqW7wYjFaA8+E7HFbQO8VyQh7AumkhicC1TJRIry+XYXBGtuDQJui4Ncl4CgPsQ=
+X-Received: by 2002:aed:2962:: with SMTP id s89mr15449789qtd.88.1606145660310;
+ Mon, 23 Nov 2020 07:34:20 -0800 (PST)
 MIME-Version: 1.0
-References: <20201119155823.2741395-1-raj.khem@gmail.com> <CA+chaQd27zuYdE4Op9JrRtBFiEWEKCAyQ=o-FcRHi8dWtrYBeA@mail.gmail.com>
-In-Reply-To: <CA+chaQd27zuYdE4Op9JrRtBFiEWEKCAyQ=o-FcRHi8dWtrYBeA@mail.gmail.com>
+References: <20201123141611.7329-1-Joshua.Watt@garmin.com>
+In-Reply-To: <20201123141611.7329-1-Joshua.Watt@garmin.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 23 Nov 2020 07:12:33 -0800
-Message-ID: <CAMKF1sq+ZbL+FFJVCgqCjmftZL+7MzRjecWe9zL1jiyxPWWYHA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2] thingsboard-gateway: Move under dynamic layers
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Mon, 23 Nov 2020 07:33:54 -0800
+Message-ID: <CAMKF1sqKCKCo3h2+z=yhy1PqG1K1s0+DU5-LjKayO0ckL7gf0Q@mail.gmail.com>
+Subject: Re: [oe][meta-oe][PATCH] fcgiwrap: add recipe
+To: Joshua.Watt@garmin.com
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Senthil Selvaganesan <SenthilKumaran.Selvaganesan@garmin.com>
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Nov 23, 2020 at 6:46 AM Martin Jansa <martin.jansa@gmail.com> wrote:
+On Mon, Nov 23, 2020 at 6:17 AM Joshua Watt via lists.openembedded.org
+<Joshua.Watt=garmin.com@lists.openembedded.org> wrote:
 >
-> Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+> From: Senthil Selvaganesan <SenthilKumaran.Selvaganesan@garmin.com>
 >
-> BTW: "python3-jsonpath-rw: Add recipe for v1.4.0" commit is also only in master-next branch (and after this), so thingsboard-gateway_2.5.2.bb is broken in master completely (not only when meta-python layer isn't included).
+> fcgiwrap is a simple server for running CGI applications over FastCGI.
+> It hopes to provide clean CGI support to Nginx and other web servers
+> that may need it. Homepage: https://github.com/gnosek/fcgiwrap.
 >
 
-thanks yeah I am still waiting on Trevor's ack on that but I guess
-this one should fix the error and once
-the  jsonpath-rw gets into master all will be hunky dory
 
-> On Thu, Nov 19, 2020 at 4:58 PM Khem Raj <raj.khem@gmail.com> wrote:
->>
->> Depends on meta-python therefore move it here so it does not impact non
->> meta-python users
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  .../thingsboard-gateway/thingsboard-gateway/bacnet.json           | 0
->>  .../thingsboard-gateway/thingsboard-gateway/ble.json              | 0
->>  .../thingsboard-gateway/thingsboard-gateway/can.json              | 0
->>  .../thingsboard-gateway/thingsboard-gateway/custom_serial.json    | 0
->>  .../thingsboard-gateway/thingsboard-gateway/logs.conf             | 0
->>  .../thingsboard-gateway/thingsboard-gateway/modbus.json           | 0
->>  .../thingsboard-gateway/thingsboard-gateway/modbus_serial.json    | 0
->>  .../thingsboard-gateway/thingsboard-gateway/mqtt.json             | 0
->>  .../thingsboard-gateway/thingsboard-gateway/odbc.json             | 0
->>  .../thingsboard-gateway/thingsboard-gateway/opcua.json            | 0
->>  .../thingsboard-gateway/thingsboard-gateway/request.json          | 0
->>  .../thingsboard-gateway/thingsboard-gateway/rest.json             | 0
->>  .../thingsboard-gateway/thingsboard-gateway/snmp.json             | 0
->>  .../thingsboard-gateway/thingsboard-gateway/tb_gateway.yaml       | 0
->>  .../thingsboard-gateway/thingsboard-gateway.service               | 0
->>  .../thingsboard-gateway/thingsboard-gateway_2.5.2.bb              | 0
->>  16 files changed, 0 insertions(+), 0 deletions(-)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/bacnet.json (100%)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/ble.json (100%)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/can.json (100%)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/custom_serial.json (100%)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/logs.conf (100%)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/modbus.json (100%)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/modbus_serial.json (100%)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/mqtt.json (100%)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/odbc.json (100%)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/opcua.json (100%)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/request.json (100%)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/rest.json (100%)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/snmp.json (100%)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/tb_gateway.yaml (100%)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/thingsboard-gateway.service (100%)
->>  rename meta-oe/{ => dynamic-layers/meta-python}/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_2.5.2.bb (100%)
->>
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/bacnet.json b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/bacnet.json
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/bacnet.json
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/bacnet.json
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/ble.json b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/ble.json
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/ble.json
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/ble.json
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/can.json b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/can.json
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/can.json
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/can.json
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/custom_serial.json b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/custom_serial.json
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/custom_serial.json
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/custom_serial.json
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/logs.conf b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/logs.conf
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/logs.conf
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/logs.conf
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/modbus.json b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/modbus.json
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/modbus.json
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/modbus.json
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/modbus_serial.json b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/modbus_serial.json
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/modbus_serial.json
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/modbus_serial.json
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/mqtt.json b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/mqtt.json
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/mqtt.json
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/mqtt.json
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/odbc.json b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/odbc.json
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/odbc.json
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/odbc.json
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/opcua.json b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/opcua.json
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/opcua.json
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/opcua.json
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/request.json b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/request.json
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/request.json
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/request.json
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/rest.json b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/rest.json
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/rest.json
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/rest.json
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/snmp.json b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/snmp.json
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/snmp.json
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/snmp.json
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/tb_gateway.yaml b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/tb_gateway.yaml
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/tb_gateway.yaml
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/tb_gateway.yaml
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/thingsboard-gateway.service b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/thingsboard-gateway.service
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/thingsboard-gateway.service
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/thingsboard-gateway.service
->> diff --git a/meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_2.5.2.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_2.5.2.bb
->> similarity index 100%
->> rename from meta-oe/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_2.5.2.bb
->> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_2.5.2.bb
->> --
->> 2.29.2
->>
->>
->> 
->>
+lets add it to packagegroup-meta-webserver.bb as well
+
+> Signed-off-by: Senthil Selvaganesan <SenthilKumaran.Selvaganesan@garmin.com>
+> Signed-off-by: Joshua Watt <Joshua.Watt@garmin.com>
+> ---
+>  .../recipes-support/fcgiwrap/fcgiwrap_git.bb  | 22 +++++++++++++++++++
+>  1 file changed, 22 insertions(+)
+>  create mode 100644 meta-webserver/recipes-support/fcgiwrap/fcgiwrap_git.bb
+>
+> diff --git a/meta-webserver/recipes-support/fcgiwrap/fcgiwrap_git.bb b/meta-webserver/recipes-support/fcgiwrap/fcgiwrap_git.bb
+> new file mode 100644
+> index 000000000..f33b066c0
+> --- /dev/null
+> +++ b/meta-webserver/recipes-support/fcgiwrap/fcgiwrap_git.bb
+> @@ -0,0 +1,22 @@
+> +SUMMARY = "FastCGI wrapper for CGI scripts"
+> +DESCRIPTION = "FcgiWrap is a simple server for running CGI applications over FastCGI. Fcgiwrap can be used together with Nginx to serve CGI or Perl scripts"
+> +HOMEPAGE = "https://github.com/gnosek/fcgiwrap"
+> +
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=a95d02d614a3a0232d4e6e51b7963c5b"
+> +
+> +SRCREV = "99c942c90063c73734e56bacaa65f947772d9186"
+> +SRC_URI = "git://github.com/gnosek/fcgiwrap.git;protocol=https"
+> +
+> +DEPENDS = "fcgi"
+> +S = "${WORKDIR}/git"
+> +B = "${S}/../build/"
+
+this seems redundant
+
+> +CFLAGS_prepend = "-I${S}/../build/"
+
+perhaps =+ is fine here without prepend
+
+> +EXTRA_OEMAKE = "VPATH=${S}"
+> +
+> +inherit autotools pkgconfig
+> +
+> +do_install() {
+> +    install -d "${D}/usr/sbin/"
+> +    install -m 755 ${B}/fcgiwrap ${D}/usr/sbin/fcgiwrap
+
+install -Dm 077 ${B}/fcgiwrap ${D}${sbindir}/fcgiwrap
+
+would be a single liner
+> +}
+> --
+> 2.29.2
+>
+>
+> 
+>
