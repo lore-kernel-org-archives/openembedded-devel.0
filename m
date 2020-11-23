@@ -1,76 +1,41 @@
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by mx.groups.io with SMTP id smtpd.web08.29120.1606097367023624878
+ by mx.groups.io with SMTP id smtpd.web12.29049.1606097494681410420
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Nov 2020 18:09:27 -0800
+ Sun, 22 Nov 2020 18:11:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kernel.org header.s=default header.b=Kk5rq4VF;
+ dkim=pass header.i=@kernel.org header.s=default header.b=akSjDjox;
  spf=pass (domain: kernel.org, ip: 198.145.29.99, mailfrom: okaya@kernel.org)
-Received: from sinanubuntu.ckuic5o5zete5ommc4uz5anrqg.bx.internal.cloudapp.net (unknown [23.96.20.205])
+Received: from [192.168.0.113] (75-58-59-55.lightspeed.rlghnc.sbcglobal.net [75.58.59.55])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 2809220936;
-	Mon, 23 Nov 2020 02:09:26 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id B62F020936;
+	Mon, 23 Nov 2020 02:11:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1606097366;
-	bh=SDM4sSyEt+Oq14ftoFeG2bncdz55/6LYB6QGeFu7nqc=;
-	h=From:To:Cc:Subject:Date:From;
-	b=Kk5rq4VFjYMEWdkbfAl6S4iNgH485mol2RYKAAdaMlzXUnnvEav6S5DLWGPdxx5MO
-	 UbiPh1W1wEH7pbiPzmloFjOpVRu/M8bHFxTnzw0KcpeF4L0nj+JHZHyzkT2iyfRBhV
-	 evnj+hN+gp9dbQ2OiU/RsVt/0VV730ZhQqQDxtQo=
+	s=default; t=1606097494;
+	bh=3+HJyxdtrMMP2QNClz0FBgdHsM0vYtlnu9MrftBbIY4=;
+	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+	b=akSjDjoxKIT41wjI7IUor+MDHBfoaXqexRj6iEU8lD35JPJR3iz4n3m+EiW1K6gEo
+	 MvVW/Jv/QrlP8RgzWYuXElqEDqOjT0z7jUt18/kF19ofbZeosSPdPVLWQQNlAAuw2L
+	 3irX0lcN96nV5I7ctOJ2DrZkOKEJ3/G89pTvDnGc=
+Subject: Re: [oe] [meta-oe][PATCH] cpp-netlib: add bitbake recipe
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <20201121032832.21540-1-okaya@kernel.org>
+ <CAMKF1sqydOH5teADQ8f3iDsR-2K96DT4dELN63kD_u7A8rfB9A@mail.gmail.com>
 From: "Sinan Kaya" <okaya@kernel.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: Sinan Kaya <okaya@kernel.org>
-Subject: [meta-oe][PATCH v5] heaptrack: add bitbake recipe
-Date: Mon, 23 Nov 2020 02:09:19 +0000
-Message-Id: <20201123020919.5556-1-okaya@kernel.org>
-X-Mailer: git-send-email 2.17.1
+Message-ID: <be3645d4-58a7-f330-dbf1-d8ae04121f2c@kernel.org>
+Date: Sun, 22 Nov 2020 21:11:31 -0500
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.0
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1sqydOH5teADQ8f3iDsR-2K96DT4dELN63kD_u7A8rfB9A@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Add this useful tool to the devtools list.
+On 11/21/2020 2:20 AM, Khem Raj wrote:
+> can we add it to testing packagegroup too please ?
 
-Reviewed-by: Otavio Salvador <otavio@ossystems.com.br>
-Signed-off-by: Sinan Kaya <okaya@kernel.org>
----
- .../packagegroups/packagegroup-meta-oe.bb      |  1 +
- .../heaptrack/heaptrack_git.bb                 | 18 ++++++++++++++++++
- 2 files changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/heaptrack/heaptrack_git.bb
+hmm, why would this belong to testing group?
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 9ac60b26c8..02ac44d13b 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -227,6 +227,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geany-plugins geany", "", d)} \
-     lemon \
-     flatbuffers \
-+    heaptrack \
-     libubox \
-     ltrace \
-     lua \
-diff --git a/meta-oe/recipes-devtools/heaptrack/heaptrack_git.bb b/meta-oe/recipes-devtools/heaptrack/heaptrack_git.bb
-new file mode 100644
-index 0000000000..30d7b65bd7
---- /dev/null
-+++ b/meta-oe/recipes-devtools/heaptrack/heaptrack_git.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "Heaptrack"
-+HOMEPAGE = "https://phabricator.kde.org/source/heaptrack/"
-+LICENSE = "LGPL-2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
-+
-+DEPENDS = "zlib boost libunwind elfutils"
-+
-+SRC_URI = "git://github.com/KDE/heaptrack.git;protocol=https"
-+
-+SRCREV = "bc9e3744bcc47de978673d1e382f4125a1ab5fa8"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+EXTRA_OECMAKE += "-DHEAPTRACK_BUILD_GUI=OFF"
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.17.1
-
+This is a support library for networking similar to boost.
