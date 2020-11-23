@@ -1,17 +1,17 @@
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com (NAM04-BN8-obe.outbound.protection.outlook.com [40.107.100.87])
- by mx.groups.io with SMTP id smtpd.web12.42095.1606165067789441661
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.52])
+ by mx.groups.io with SMTP id smtpd.web12.42098.1606165076584547534
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Nov 2020 12:57:48 -0800
+ Mon, 23 Nov 2020 12:57:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=OTWn/U1F;
- spf=pass (domain: windriver.com, ip: 40.107.100.87, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=QzP+GmRP;
+ spf=pass (domain: windriver.com, ip: 40.107.223.52, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=aGoxYnElw/+vQV65zoEwhvxPxajDzm9pUI7qOUaXOOBn7960YhTTT1NzlsKTJIYk4HkkjxeX8xc/PjUXi3fFfyuc2xH3pkIAxJQU2AzUk/pu050cS4wJsHpDghqDYB7A+vKoVccfzPov+u2rHbS0KlKCI4n1Y5V6yEt2EZO4lR3hXAD5CODjTwg4z1qESIEbdLKXtLJwZPkF9Dy5EJsVNrIGgisO4t/fqSSRRMyD1XVHUJZMJHS1F6IiidMoIb7PHYGXO2Qzrw9LzfYpb1AlfWkYNe6ntvxY9TAPYZIRYwZjLQPYAxNs60KjinbTuxagRV9XTM5CtMiMq9XQcuurpg==
+ b=Bvj3Z+e4NUaVC1E8jzjEcU5HOLW2Jk+Vof91zyTeR7diDqJW3HBk/4y03wQWeUuK+KS5wg6Kg7YHzQkG25Ds8thRsjzg5EzI+gjlrBoojiwUeOz58egZQM4FIKF8jznY/BEU28Z/q/N8AFU4SkjSVxSWYpqVxW5PK6Wle4igDkwp2TwIHBOuuzOA0rvqRIhcq2YmlRewt4robdnjhRdCsTE/Q1r6S/sn2RX7lKswJFjWy4Y6Uz0nWfL1oAyoCqgUWWv1orCpUkX9AHeZFQebK9tndsd1cIfyK19cC4GqYUcXGcHe2OxvuXMJ6/QxJwQzZbGohM7/538YRXEqjcco3g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kMc2FPcbpBzX0Ar56+vu3vTtum0vnQzcrghifomEQyw=;
- b=XC02knYJcexOYNcurjl1kfI/nwHaWTnpS43GC7+mTvudZ4mw/6jdvyIhDdBIiIWUTIs4H9LJLigbjBHFpDoPaoLMEwQDgs67AbRhAWniXOQTQDeJLvfG8GXfB+Pyn+SbdzmBXL71imqD9r17MU6NNd6Qw+2m2TSkBnUWP5jxpqlU6xbjxP3sc8KNn0TRgMBccYmUZi38qqHezAJtbu1H0bwtNYypLAjyzLIc9N/bsx2mpFBcEc5Rw0jDz6aYFO0U655MVLsU0XOn4eJMudceceN/otdJWUXxfnCq05cG6lEz9n6Pe51EBVEiVKsmXgtcsG6ByIqv20MUvoxHxMS7FA==
+ bh=5tF8G2jfhKciAccI1qOR0JNNOo67sAMmS6M5VjbE/aA=;
+ b=ewryyvT1PMs2Kyl0wMIDJd4P6Un9OAjuHfKxTc7QVwHopIID/7S1pDjpPzlweGx214QRLvlEibkaUFOK9g4BDwDrThw8zHs7FVqfee9D6nUvyMBvXVyuVrhVIMj+SRJik/pemConN4O8/PCbVGgzGprxhD1JQaH34Q/mBnY5c103M/GUlW/Bfnm+DV0exl79+bgTDPADVbpHVRyybMRtK30AN5K4jnxmncipGOsFo6oBKCFElF8efIU/EUGoHRgf2kHhv9ERN90/SZKtePN+Q/TavLIuBDiNiEJPID4sKGjKY3B7ic+h59qOQOzYBdfk3sMO7J6rgeEzySiJGDSs1g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,67 +19,69 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kMc2FPcbpBzX0Ar56+vu3vTtum0vnQzcrghifomEQyw=;
- b=OTWn/U1FyGdf9Lzeka0unMYeAT+QoP633BrNrYDc0y/ufPLjjUArreqKRBnJjMetaqSIOpzuvUDni1cbRYeo/T85+WdydT9FqwGdsBGoPrFc+6lGzGJiK2xQtlqaeJT9BhUrqZ/CclGLFRUpBeQUpEHP3x8M8y7kC/Fno54b/XM=
+ bh=5tF8G2jfhKciAccI1qOR0JNNOo67sAMmS6M5VjbE/aA=;
+ b=QzP+GmRPduW3MQVdMSLEMoA5oB4d+R6F8QHdpnLVGbu95w/r1YMq8mBgXqaAWxiD55xgLJ9THugIAo633hE77dpbvsWufARNyP7eGpvVJynH9jHmxkPmBHPxwr7dnoDdAAtwE9UoZzLjImqepTsZfa6lxGU/j/kVkmt1atS7rDE=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB2727.namprd11.prod.outlook.com (2603:10b6:a02:c7::29) with
+ by BYAPR11MB2600.namprd11.prod.outlook.com (2603:10b6:a02:c8::15) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3499.29; Mon, 23 Nov
- 2020 20:57:45 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.22; Mon, 23 Nov
+ 2020 20:57:54 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::3b:680c:aa2f:e498]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::3b:680c:aa2f:e498%4]) with mapi id 15.20.3589.030; Mon, 23 Nov 2020
- 20:57:45 +0000
-Subject: Re: [oe] [meta-python][PATCH 1/3] python3-cantools: Upgrade 35.3.0 -> 35.5.0
+ 20:57:54 +0000
+Subject: Re: [oe] [meta-python][PATCH 2/3] python3-arpeggio: Upgrade 1.9.2 -> 1.10.1
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20201120092910.30736-1-leon.anavi@konsulko.com>
+ <20201120092910.30736-2-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <3a06e1ca-d684-dde9-2b77-fb77a7547b16@windriver.com>
-Date: Mon, 23 Nov 2020 15:57:42 -0500
+Message-ID: <79377846-20e8-89d2-2ab3-de72db084c47@windriver.com>
+Date: Mon, 23 Nov 2020 15:57:52 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
-In-Reply-To: <20201120092910.30736-1-leon.anavi@konsulko.com>
+In-Reply-To: <20201120092910.30736-2-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: YT1PR01CA0024.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::37)
- To BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
+X-ClientProxiedBy: YT1PR01CA0052.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2e::21) To BY5PR11MB3909.namprd11.prod.outlook.com
+ (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0024.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::37) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.20 via Frontend Transport; Mon, 23 Nov 2020 20:57:44 +0000
+Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0052.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.20 via Frontend Transport; Mon, 23 Nov 2020 20:57:54 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: ca7a2ebc-71aa-4bca-7264-08d88ff26d37
-X-MS-TrafficTypeDiagnostic: BYAPR11MB2727:
+X-MS-Office365-Filtering-Correlation-Id: de5a2467-9b99-4caf-c625-08d88ff272db
+X-MS-TrafficTypeDiagnostic: BYAPR11MB2600:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB2727E5E709FE48BD5BB125079FFC0@BYAPR11MB2727.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1002;
+	<BYAPR11MB2600DB653A3938923A67E08A9FFC0@BYAPR11MB2600.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:400;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	OMJm50ZnhvcSMSxAESDZJPwzuPvGueeoh8gNsnGiYzDbHJa84K+v1++p2fvr+ZCYwg3+X3vffXR5tmc2rMukXDuFUGLxXbVGLT+8FloglozLUucSJesYcG5ZA1RrPNIDnB7vLTZ15wIyWDtik+90BhtiTspu0mX+DQL4j7HDQvPalCt8e7lQTOfcEldSwaCmy4vyhcfPBpr6thpIkqZrsS35za9z/6+r8FepfAdmddvU9TgUrgbUm1U/rXkKYb5T7zuK3v0IibfIB4BaMA2uWoB3+e1LJXiMKUHPSj95WypzZEYSMpvQiffkGIWVdkalhQjbzN2g9Bn0xTUXvoqZexqkWaeh40wE5nGRLwelurLZgeVzEALEudIVtRK8UY6g6ojSaH8mseBl/mKCem9F9eF32fpiVde8WJqdUvz4uZrDYRFCMyDIMb/LQBdNct3Iqp1MkcvRO3TD5ebQ0aE3PQ==
+	Cs+uOmChODdk2mSyuVEzbHEhQTrvlJwRq7BDlhAqTGmHLDImO3qEEDY01O/cpVtelukpro6w5eFOV2Bkw+z9vtHuSJF98/kIs4k0mzhMLcU5D3m4s3H4DFc3DkF7uklDAAghKctcZiRaIm+pEl3kAJ1cmaP5KaC9x9Kjd7IgcFS3u9lo2YolcUEvjU5lfTJNvryxgHPhlOpyPzMQQ6xIrSvPP68CAU+qUJAyKrYOb5EBV3BFaJ6ZQog0VEEpJqHnq3Ea8t2OWHa+9BkgiWcSp0fENeVQXa8mLre3cD+8jCm3w+/cg34XxuPBE76IXNp474U4GVqLgTiKFXEu/EwJA7En1qTkUn28wdaFGor1aNn51I707kfNJQlayxsM/w10L9BRlrFxh7AMXySScpiJUQzVtjnDiVsvpRaWaMCXqc5lSAdGhzCa/rh139+KKYmjAKQ1jpcQzf43DO0/rB0J3A==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(39850400004)(366004)(396003)(136003)(376002)(83380400001)(53546011)(26005)(33964004)(31686004)(52116002)(44832011)(16576012)(166002)(316002)(36756003)(2906002)(966005)(8936002)(8676002)(6486002)(956004)(186003)(16526019)(2616005)(4001150100001)(31696002)(5660300002)(86362001)(66946007)(66476007)(66556008)(478600001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(376002)(136003)(346002)(396003)(39850400004)(2616005)(53546011)(956004)(16576012)(83380400001)(33964004)(52116002)(8676002)(44832011)(8936002)(16526019)(66476007)(66556008)(66946007)(166002)(316002)(186003)(26005)(478600001)(966005)(36756003)(86362001)(31696002)(4001150100001)(5660300002)(6486002)(2906002)(31686004)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	/zp5ebsSnT0Cu4d3/HjAWSX0QNkSFh1Nq578zu4YkUpUIvsW0kpDUbSC0D+bXgJeDoIZ9ieYTGwHFyvom8wML9673Yhp/ornh32oWbCBV4IpUviINBgYS5lXRw6VZJjgw5nGsmoJI+6+1/OpZTkwBB/LQvej9nT+h1FRmVg8rOG+RI1VK2hoGZwHQwYs9mFZon4QcxmjAlPx6ZLybdqWbKxfwYmH/0PQkZdnP/b+bUwuYc96SBEKwcgXWYQjhWooD17z+GMLUf7rvFCmVtw3LLxN1O4X/vs34nXOd3veGyIzh9IzGxqD7QHTQXk+lzziYyYQBAc4zfE2uF04M44aGQn5QgBCrw5DvoWUURp5iIn1IxbnDpeZkLxf1Y7bdqBWyziN3KM+5kIHGD2YG7K0gPdnBLkFiyI0j5UtvuMkBF3PQB3AWqBmmDrBzmysB+7iPtjq+ex8gF5dhjvqnePqupY8jq5246RewO1gJit6NHTny9i0KbZzrvjOY8i07S6GGBL/amH5gj5G8eFuASH0DcUmU51gSHpr9Tyv8SIH55NpKM/oLm7sqSnLjKdzbDyD2AuAUYsX+Qy+zwStLwzChdZ6Y9mlkwB4P0jOFuRarywWQkRBAoyW33odVxt2jG4hLy3LOFdaRHHQdoySfT+sNaK+VgeXEP3gCssSq99QGy27w52X1A3TxgLBp4cmz3UNtLgPIB9s/j6rf2fnkHUW+MWxXlL8cPm45HGKDfHgeng3UOAMs/2C1Yl7qzuBi3SRU1sOZasrCumutTD1a0qt+zCTYiEdbr4amrJd/OFQ0Hym/QZ35IcF925O1QSVs4u1+dm5AHlEcz7gLRJVKA1queyY8mBfDwvna6CFeOUwTpogdJbnHVTBAHm+fsh/3zAycQTQLUnoTz0BpQs2Tzy+FA==
+	B1HMqvvyFRN+I7IDCo/W0ElRO/lJcd+ErRs9dfYWi3YKF0aWEy/JGLSvz+9VeUYW9I1GmKaiW5Ez2mQPPaBSLQkwuIQOFQ6OBgKO89vH2Nqt6h3H9+Yqsdsr94s9dA0JaVqnwbBs/Wu+pQ8n3MLF0yHw9Ts/UvOHTeaS0t4+yoMQCpGEIu0GT7WGaaaNAb/uGV751SAm1c2DjnuoiqgYSBew7aMp0I5uG1+Zn7mU2DBQnV7ENqRR5ua8fccY5jwIYvy8qRbnVGMwyPL+qhpUM9kqSTgrPGuoWqezMNgHHEFvj4tDr8qUxrg91GHROEqUx68XWfc7zLmWHXWoKLrNFWNQy2enV56kYBNh/J9qzGo80fXnd6lBvAP3Mqe32vQIV35AvqrXz03GV3pW4taJUmfm1zC258K00N5fIFy5Fd0g07Q8P+E5wmdYNve1CUTR/xM1OQYfruMqOrLEnHQxd/3ZWQr3JkZ76Nv0REIxIJ3Fale3C9YEGLVfIDXaNlDf83Iqm5P7L5aXwmP2oHcIJiZudaYf0BlEcC7fgOKYhNRZGbgoLh5zF+XQjwZ4Uc3U9iP4M5uf8TJv2EpJnZXGPPXwpHhtCn/E0AQDapoyLLYofMPl8hqi3Q+2Nzbwl+MNECJJ5jp4Fa2SJY1YTFkTYd4x3uutpdTPpODZ+G0v+zfuFOb8VM2WcT/yuG+/x+XS27pc/bEhjQUvioqd0res6s5/SPwHaVLu6mIA7r0dV2eDrBhQF6koGAfweZGdXNcvHz+ePVM58DCV6m7vP1dbBrGLBO+dRv5wGUENKp3FgPfoA6HHFnHPVCCH6C53VoYHMek9oFrridYR+YNKaE/vVI3/tN5MHOMv7n800avoeDvR6NVYGOKkbPyFhlmplSLU+U4oiBoZ8jjDmV5AUf4yCQ==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ca7a2ebc-71aa-4bca-7264-08d88ff26d37
+X-MS-Exchange-CrossTenant-Network-Message-Id: de5a2467-9b99-4caf-c625-08d88ff272db
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Nov 2020 20:57:45.4190
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Nov 2020 20:57:54.7816
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Q4v7qmBOb+T30iJxb9rm+ngFqunKFPIUfXMn30fzSu4s87OWc3OORb4vRR2kSAQh7F3A1bYWXtFd+gnPFpz698aJpBoRFclC6JA6KSppyYU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2727
+X-MS-Exchange-CrossTenant-UserPrincipalName: ccyjDml6tZFV2n4zxMSnRq52aeI2YlWODZy13LG/MlqtoLCDPPrET8OQfM4iKgz+hOxwvqcHwhZz8KSQcQNWUKxSjKXTcs6fAFl3JU6nBQE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2600
 Content-Type: multipart/alternative;
- boundary="------------E377885F66F46B3C1F5D02FA"
+ boundary="------------860CA17A3BCA4165C744BBC5"
 Content-Language: en-US
 
---------------E377885F66F46B3C1F5D02FA
+--------------860CA17A3BCA4165C744BBC5
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -87,34 +89,43 @@ Content-Transfer-Encoding: 7bit
 On 2020-11-20 4:29 a.m., Leon Anavi wrote:
 > [Please note this e-mail is from an EXTERNAL e-mail address]
 >
-> Upgrade to release 35.5.0:
+> Upgrade to release 1.10.1:
 >
-> - Added support for CAN FD in monitor.py cli tool
+> - Fix packaging, exclude examples from wheel
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../{python3-cantools_35.3.0.bb => python3-cantools_35.5.0.bb} | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-cantools_35.3.0.bb => python3-cantools_35.5.0.bb} (64%)
+>   ...thon3-arpeggio_1.9.2.bb => python3-arpeggio_1.10.1.bb} | 8 +++++---
+>   1 file changed, 5 insertions(+), 3 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-arpeggio_1.9.2.bb => python3-arpeggio_1.10.1.bb} (66%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb b/meta-python/recipes-devtools/python/python3-cantools_35.5.0.bb
-> similarity index 64%
-> rename from meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb
-> rename to meta-python/recipes-devtools/python/python3-cantools_35.5.0.bb
-> index c79e51e33a..cb70ed3188 100644
-> --- a/meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-cantools_35.5.0.bb
-> @@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/eerimoq/cantools"
+> diff --git a/meta-python/recipes-devtools/python/python3-arpeggio_1.9.2.bb b/meta-python/recipes-devtools/python/python3-arpeggio_1.10.1.bb
+> similarity index 66%
+> rename from meta-python/recipes-devtools/python/python3-arpeggio_1.9.2.bb
+> rename to meta-python/recipes-devtools/python/python3-arpeggio_1.10.1.bb
+> index 802a5b2eaa..38e26623f5 100644
+> --- a/meta-python/recipes-devtools/python/python3-arpeggio_1.9.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-arpeggio_1.10.1.bb
+> @@ -3,13 +3,15 @@ HOMEPAGE = "https://pypi.org/project/Arpeggio/"
 >   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=33b8d1ba459a2fa4d801acfd1d1b7ceb"
 >
-> -SRC_URI[md5sum] = "068514ac776e03ebaa8b2d02dd16fc77"
-> -SRC_URI[sha256sum] = "5e3a6f679ad3dcb31142e388e052187d5fc5bd481c4fc3b2791eaa1e681cca98"
-> +SRC_URI[sha256sum] = "ce26ab5d54762c314bedc35b407d498b8ae11069ab4d9251f8ac83f2956438f9"
+> -SRC_URI[md5sum] = "39667a626217c670bc634444be6e904a"
+> -SRC_URI[sha256sum] = "948ce06163a48a72c97f4fe79ad3d1c1330b6fec4f22ece182fb60ef60bd022b"
+> +SRC_URI[sha256sum] = "920d12cc762edb2eb56daae64a14c93e43dc181b481c88fc79314c0df6ee639e"
 >
->   PYPI_PACKAGE = "cantools"
+>   PYPI_PACKAGE = "Arpeggio"
+>   inherit pypi setuptools3
 >
+>   # setup.py of Arpeggio needs this.
+> -DEPENDS += "${PYTHON_PN}-pytest-runner-native"
+> +DEPENDS += "\
+> +    ${PYTHON_PN}-pytest-runner-native \
+> +    ${PYTHON_PN}-wheel-native \
+> +"
+>
+>   BBCLASSEXTEND = "native nativesdk"
 > --
 > 2.17.1
 >
@@ -122,7 +133,7 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
 >
 
---------------E377885F66F46B3C1F5D02FA
+--------------860CA17A3BCA4165C744BBC5
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -135,40 +146,49 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2020-11-20 4:29 a.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20201120092910.30736-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20201120092910.30736-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">[Please note this e-mail is from an EXTERNAL e-mail address]
 
-Upgrade to release 35.5.0:
+Upgrade to release 1.10.1:
 
-- Added support for CAN FD in monitor.py cli tool
+- Fix packaging, exclude examples from wheel
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20201120092910.30736-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20201120092910.30736-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../{python3-cantools_35.3.0.bb =&gt; python3-cantools_35.5.0.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cantools_35.3.0.bb =&gt; python3-cantools_35.5.0.bb} (64%)
+ ...thon3-arpeggio_1.9.2.bb =&gt; python3-arpeggio_1.10.1.bb} | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-arpeggio_1.9.2.bb =&gt; python3-arpeggio_1.10.1.bb} (66%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb b/meta-python/recipes-devtools/python/python3-cantools_35.5.0.bb
-similarity index 64%
-rename from meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-cantools_35.5.0.bb
-index c79e51e33a..cb70ed3188 100644
---- a/meta-python/recipes-devtools/python/python3-cantools_35.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-cantools_35.5.0.bb
-@@ -3,8 +3,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/eerimoq/cantools">&quot;https://github.com/eerimoq/cantools&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-arpeggio_1.9.2.bb b/meta-python/recipes-devtools/python/python3-arpeggio_1.10.1.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python3-arpeggio_1.9.2.bb
+rename to meta-python/recipes-devtools/python/python3-arpeggio_1.10.1.bb
+index 802a5b2eaa..38e26623f5 100644
+--- a/meta-python/recipes-devtools/python/python3-arpeggio_1.9.2.bb
++++ b/meta-python/recipes-devtools/python/python3-arpeggio_1.10.1.bb
+@@ -3,13 +3,15 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pypi.org/project/Arpeggio/">&quot;https://pypi.org/project/Arpeggio/&quot;</a>
  LICENSE = &quot;MIT&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd">&quot;file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd&quot;</a>
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=33b8d1ba459a2fa4d801acfd1d1b7ceb">&quot;file://LICENSE;md5=33b8d1ba459a2fa4d801acfd1d1b7ceb&quot;</a>
 
--SRC_URI[md5sum] = &quot;068514ac776e03ebaa8b2d02dd16fc77&quot;
--SRC_URI[sha256sum] = &quot;5e3a6f679ad3dcb31142e388e052187d5fc5bd481c4fc3b2791eaa1e681cca98&quot;
-+SRC_URI[sha256sum] = &quot;ce26ab5d54762c314bedc35b407d498b8ae11069ab4d9251f8ac83f2956438f9&quot;
+-SRC_URI[md5sum] = &quot;39667a626217c670bc634444be6e904a&quot;
+-SRC_URI[sha256sum] = &quot;948ce06163a48a72c97f4fe79ad3d1c1330b6fec4f22ece182fb60ef60bd022b&quot;
++SRC_URI[sha256sum] = &quot;920d12cc762edb2eb56daae64a14c93e43dc181b481c88fc79314c0df6ee639e&quot;
 
- PYPI_PACKAGE = &quot;cantools&quot;
+ PYPI_PACKAGE = &quot;Arpeggio&quot;
+ inherit pypi setuptools3
 
+ # setup.py of Arpeggio needs this.
+-DEPENDS += &quot;${PYTHON_PN}-pytest-runner-native&quot;
++DEPENDS += &quot;\
++    ${PYTHON_PN}-pytest-runner-native \
++    ${PYTHON_PN}-wheel-native \
++&quot;
+
+ BBCLASSEXTEND = &quot;native nativesdk&quot;
 --
 2.17.1
 
@@ -183,4 +203,4 @@ index c79e51e33a..cb70ed3188 100644
   </body>
 </html>
 
---------------E377885F66F46B3C1F5D02FA--
+--------------860CA17A3BCA4165C744BBC5--
