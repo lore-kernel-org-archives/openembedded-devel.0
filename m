@@ -1,73 +1,117 @@
-Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com [209.85.210.196])
- by mx.groups.io with SMTP id smtpd.web12.42251.1606165688698154035
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.49])
+ by mx.groups.io with SMTP id smtpd.web11.42824.1606166796398941118
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Nov 2020 13:08:08 -0800
+ Mon, 23 Nov 2020 13:26:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=C/yZKPfp;
- spf=pass (domain: gmail.com, ip: 209.85.210.196, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f196.google.com with SMTP id c66so16153924pfa.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Nov 2020 13:08:08 -0800 (PST)
+ dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=VTJnOwhO;
+ spf=pass (domain: windriver.com, ip: 40.107.237.49, mailfrom: trevor.gamblin@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=cvRhjxxJAVJHmgEd0eN896N+heuThMuB5hCf09mytujwFCF+zW8XeSfSFQeavIkbIGhGwb5SCwwmpSZJdP78QRCiUcwGqwqOmwZickQ0nQ7e3JDivL/9DEC/50wvO6q6bGjMopl4lV/QWgG9GbedHDjjVMt4JOixPqEsUbYfqdIgbxet+15blMWvAyrjmce/3SewvM41sMrOXlOZlqmiHIWca80LnAvHW99o+OpCk7+8fIrZpO+cTpDPS6iebaNLB44sd6sfxcanRJkoarUzN5AwWuGsBlko6BgEFRmvDEWlaj26O722/mJIvNckiTGVshHr54mEoTSqvAhAg76zJQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QMSHXxdPaIywPlhKPInSkUUWVYbyazM3lnexkh/qUlw=;
+ b=nKcz3UEJ5N9luaqg3/KiZrJQniBbmUpnNU+MA7uqtufpoFyBoj4ht4SXpdjp8FPBBCTrniecRYVXg59fcZgoEEsxz8q9ObEGyIMF5yardeEofz/Vq2DGWeMoM+bXtFVyQ5x2i1DtCJxQXBMIACoySGldgk7NWqvB7dcHm0hJv20KEJVEk7ydCPd7c6VuWYqUmcGvuRIGA8x/c9ozSXesamAmU/V/GzoIoiN9XYxeFL/hPuOxiK6pso5txquG8qANNja4sCytEfRXPiM6fAM6g7aE3HAZSbtiOqPwK/24qI/qwBRaLLfUUcqnruV3JhkqAVsQOH/L23yGqxQ59kCyUw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=2k+YfwokTadMzQEogBvzeqMt/HRreUdjgC+9KkV6w0U=;
-        b=C/yZKPfpG3cNaoVjbV2aBLXarVbL0qep9xnG/GaBovFh77KY9sfzCSuD6iazLffsVf
-         kpaoMa+f4Sxm7KDlhq/wrpaBbhQdgY1lJfD8O8yYzoA5iTP0RhKsBj5Xw/BQW14N8z6K
-         sFUjGbmPKUxDqegX90ViMZ9fB76j7yy8ZrqJ/wTPMhE+8mWrGdCW6X/LV9cgVITNkGj9
-         QQbRXCeDGoIb4E7idJsiw2u+DmcZ75vGuTNVv0Y2D5GHCohICo/UeOqi1h73qI9aB1u/
-         DXp1mRsjqeOJiUGE85jkDBkEZ7m6o6fXC0wnAsoDjGrcNyfvYgQaEyAwYu08dDPB8i+O
-         YLyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=2k+YfwokTadMzQEogBvzeqMt/HRreUdjgC+9KkV6w0U=;
-        b=e0ZfYfIZ42exrtk/L+ObCYt6xEO1zodDQ6SNp6O4lREl/iAU6foQiJ1k8MJ2hmzrYO
-         dW4o2Xz2+W9KKL9PusNIFVl51dnMawmj0/C9LjhJAUe6djf+2nLv33XRslJZYMESgtwU
-         6PsIRadLwKj3RZz+tPFMPX21UfNj2BpSy6ikrMxYTDiH0gJoTShCHkOE9MuTivP+4dUt
-         /6tVZpCQrz8CEdeb2Iy42sE6COqg2MqGtKMyyBH/+3t8ypxAfq4qHvxOQb6bMS+soSgL
-         xgdivU28gq9CeKxYVexLUH9ng91l8sc2/w8l3LYuFk19cbhAS4wwsyk2JemdG5CUZvV8
-         Gl3w==
-X-Gm-Message-State: AOAM530Sbxt01/1QJ3hr27duWeJpMC55qRx26wuxSVpjOP4dnt7Yqvip
-	U4s3TidjKWvSP25/y1U9tk97Y6jZwNW8dQ==
-X-Google-Smtp-Source: ABdhPJwkJJ8J1d01qyYM78qK7l+yZkhU17sZ5wukDVFNRIpaudM1pMPHf6GSw5nnc8M87x68FJaPeg==
-X-Received: by 2002:a65:6547:: with SMTP id a7mr1102251pgw.198.1606165687758;
-        Mon, 23 Nov 2020 13:08:07 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::ed1a])
-        by smtp.gmail.com with ESMTPSA id g8sm11666883pgn.47.2020.11.23.13.08.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Nov 2020 13:08:07 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QMSHXxdPaIywPlhKPInSkUUWVYbyazM3lnexkh/qUlw=;
+ b=VTJnOwhONAjUhIKSpAO6qjmapXshjw/JevBll4yohG0fd4Fw9RpBmqI2PLrQNXvuX35pkBmWjzd+0Dnh+c22MjQmBgWeDEur88xuQ9d/EAYmk6Cct6r6ui9KsreVTvOKak813HVhrT6E9h9d9coG4CIHu4fQNa9pMA02FKqpQKc=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
+ by SJ0PR11MB5053.namprd11.prod.outlook.com (2603:10b6:a03:2af::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.20; Mon, 23 Nov
+ 2020 21:26:34 +0000
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::3b:680c:aa2f:e498]) by BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::3b:680c:aa2f:e498%4]) with mapi id 15.20.3589.030; Mon, 23 Nov 2020
+ 21:26:34 +0000
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] packagegroup-meta-python: Add newly added recipes to packagegroup-meta-python3
-Date: Mon, 23 Nov 2020 13:08:05 -0800
-Message-Id: <20201123210805.8949-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.29.2
+CC: ticotimo@gmail.com
+Subject: [meta-python][PATCH] python3-jinja2: Fix ptest RDEPENDS and file installation
+Date: Mon, 23 Nov 2020 16:26:21 -0500
+Message-ID: <20201123212621.2621358-1-trevor.gamblin@windriver.com>
+X-Mailer: git-send-email 2.26.2
+X-Originating-IP: [128.224.252.2]
+X-ClientProxiedBy: YT1PR01CA0055.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2e::24) To BY5PR11MB3909.namprd11.prod.outlook.com
+ (2603:10b6:a03:191::13)
+Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from yow-tgamblin-fedora2.wrs.com (128.224.252.2) by YT1PR01CA0055.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::24) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.20 via Frontend Transport; Mon, 23 Nov 2020 21:26:33 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 9b551f44-2bdf-4806-c543-08d88ff673b5
+X-MS-TrafficTypeDiagnostic: SJ0PR11MB5053:
+X-Microsoft-Antispam-PRVS: 
+	<SJ0PR11MB505384AFEE27279B2371B5349FFC0@SJ0PR11MB5053.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	FlFHnKRxXCWQCMRnGs9XwcXgm24skb3rUqkD5+hlTuXj1ibz0LJIZ8tUMMcM3W0rYtwVANefjEZ+BId7T/XA1ZhnmEg6CVvfOs2tl7MduXbU1W2wL6/X9QOyIevZoJ7PZMvPKlzWXXf8c6hUlcWQI8i79V7I4TCOUwOlSgeXwpi01skWdt3bYPG6f4RccBk6M59i7TCXbHrWYOwlaLstj86wzL0zEJCKtkUFObUXt8mZsY4D6WZk/hFEIBGO4/bebmOXnnU4hP/7hepuNt7v02BBpQ/+Q3VrDa3DNCGd3g7qFfrQSJLA19gAz/++2cJEaRXawUv8HU1cag1nTI5iww==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(346002)(376002)(396003)(366004)(136003)(26005)(316002)(186003)(8936002)(36756003)(6666004)(6486002)(66946007)(2616005)(956004)(44832011)(66556008)(66476007)(6512007)(52116002)(2906002)(83380400001)(6916009)(8676002)(4326008)(86362001)(6506007)(1076003)(5660300002)(16526019)(478600001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	ywe/z+/iLkDox2Uj5WXciGVUO3wtD0axKsxXx4IlfKl0cMsLdm0W88aMlr24/WZnoHBvpMUClCPr5ZT7bas3gUrZ4vqQq9Twm3zHnEidYpOK+p/5leLS9VenoLIlSFCFzZi8ysJ/csYxcz58J70NExVzzUVGJd7Fu5POLyoi9UpccFS4Za4Zwi3dr7If/eKRKpC1+yVot/hYVpkM4YZvP53NHN5X2cKq3tUvdv6qjxT4cPj5m9bYZzCb3Cf8vuKxqZo597xRGNoJhiZ65/3mHXyGT7JvfJlPFlJg24pghYid8iQQiXhvJzZ/upOgNGJIGRgQPb5fXmR6okGbysy2Nw0mcidqovdoN6C9mC6c+g53HNvZ2XSJEkVOyomkkHe5mhA3qDhWWixt1hyeOPhE+2GGbaKC9q8rCURdUYGtjPrReUw0jbTzB+otx5JHqdOsRaE9YB4eKZ5D3yEQB/zFNfStTzQnLkPAxuEQR4cotbxYFB8kkMzC8M5C9ucAi5nhTwKiJNf+pdnpT5c5DALuKLYqv3qht7j0fDAKSJ3m+pp/XNP0X4Y5qX+MV9/eI+Kf5bKivScHgoNjzgApbEiRH6EY9aW+4hv+pqqd/0MYDUb5OhUZcYBPWUJlMxM28MB0PGxnQNzmd6Laze6TKEX2XqxQxl4ZxmIOIoZGdA0Kf7rR8B2ccENayKyKeJ0EW0MlKyXwnUXin55r1gyn+ZKgJXDChCdMISMch8vAEom8xBA4GVxtevp5fhSxg7wXhYjQjMm6hpq5sviSM8BsXbHZlew9ZbTFNBBUf7mzbrG+NohDiiE5iv8+xWrHz7gnmAczoCazS25eN0D+5FlG6WfvrM73AaC1a2RN5LWKnkpXPkLf3FtEBLL/lB5/g6k6+DzgVJtWk7zFp31T1d9O2ZoZHw==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9b551f44-2bdf-4806-c543-08d88ff673b5
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Nov 2020 21:26:34.1402
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: e9eGIBmbaRJO7rkgbRfB5e1U8/Y00xtU0FXM0vZW8mnX+hE+o3WmjDylbn4qM1lcqkrXlUDFnPFcy8VGrxo3ZOX6oX3z1E23oPs0bdKWcvo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB5053
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+jinja2's ptest is failing when running meta-python-ptest-image. This is
+happening for two reasons:
+
+1) python3-jinja2 is in oe-core, but the ptests are disabled.
+2) python3-toml is required for the ptest;
+
+Because of #1, do_install_ptest doesn't actually run and so no tests are
+installed for ptest-runner to use. This patch adds do_install_ptest to the
+bbappend file for jinja2, and also adds python3-toml to the ptest RDEPENDS =
+so
+that it will install the tests and run correctly.
+
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 ---
- .../recipes-core/packagegroups/packagegroup-meta-python.bb     | 3 +++
- 1 file changed, 3 insertions(+)
+ .../python/python3-jinja2_2.%.bbappend                | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 142687f30f..024503d5da 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -429,6 +429,9 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-dill \
-     python3-cerberus \
-     python3-cvxopt \
-+    python3-sortedcontainers \
-+    python3-hypothesis \
-+    python3-jsonpath-rw \
- "
- 
- RDEPENDS_packagegroup-meta-python3-extended = "\
--- 
-2.29.2
+diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.%.bbappen=
+d b/meta-python/recipes-devtools/python/python3-jinja2_2.%.bbappend
+index 91814e6cd..9fe358427 100644
+--- a/meta-python/recipes-devtools/python/python3-jinja2_2.%.bbappend
++++ b/meta-python/recipes-devtools/python/python3-jinja2_2.%.bbappend
+@@ -1,2 +1,13 @@
+ # Main recipe was moved to oe-core, but with ptest disabled
+ inherit ${@bb.utils.filter('DISTRO_FEATURES', 'ptest', d)}
++
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}/tests
++    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
++}
++
++RDEPENDS_${PN}-ptest +=3D " \
++    ${PYTHON_PN}-pytest \
++    ${PYTHON_PN}-toml \
++    ${PYTHON_PN}-unixadmin \
++"
+--=20
+2.26.2
 
