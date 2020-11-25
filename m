@@ -1,107 +1,55 @@
-Received: from 1.mo69.mail-out.ovh.net (1.mo69.mail-out.ovh.net [178.33.251.173])
- by mx.groups.io with SMTP id smtpd.web08.1221.1606333143909689736
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.1583.1606334555100912660
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Nov 2020 11:39:04 -0800
+ Wed, 25 Nov 2020 12:02:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: 3mdeb.com, ip: 178.33.251.173, mailfrom: maciej.pijanowski@3mdeb.com)
-Received: from player697.ha.ovh.net (unknown [10.108.57.49])
-	by mo69.mail-out.ovh.net (Postfix) with ESMTP id 0537DA2CE3
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2020 20:39:01 +0100 (CET)
-Received: from 3mdeb.com (89-66-159-90.dynamic.chello.pl [89.66.159.90])
-	(Authenticated sender: maciej.pijanowski@3mdeb.com)
-	by player697.ha.ovh.net (Postfix) with ESMTPSA id 7B498188A7EAB
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Nov 2020 19:39:00 +0000 (UTC)
-Authentication-Results: garm.ovh; auth=pass (GARM-101G00484860f07-6d61-4461-b84e-cf254c30dbe9,
-                    75A271BDE3F50F31F0097557F71BA253F37127E0) smtp.auth=maciej.pijanowski@3mdeb.com
-From: "Maciej Pijanowski" <maciej.pijanowski@3mdeb.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v4] cdrkit: split into more packages
-Date: Wed, 25 Nov 2020 20:38:36 +0100
-Message-Id: <20201125193836.586388-1-maciej.pijanowski@3mdeb.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <88102>
-References: <88102>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 06FCA40BD9;
+	Wed, 25 Nov 2020 20:02:34 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id EJVM0oA827pw; Wed, 25 Nov 2020 20:02:33 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A274D40B78;
+	Wed, 25 Nov 2020 20:02:29 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 57F0517432F; Wed, 25 Nov 2020 15:02:29 -0500 (EST)
+Date: Wed, 25 Nov 2020 15:02:29 -0500
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>,
+	openembedded-architecture <openembedded-architecture@lists.openembedded.org>,
+	Yocto Project <yocto@yoctoproject.org>,
+	openembedded-members@lists.openembedded.org
+Subject: Re: [OE-core] OpenEmbedded Happy Hour November 25 9pm/2100 UTC
+Message-ID: <20201125200229.GO19155@denix.org>
+References: <1648FB4A3455E856.13688@lists.openembedded.org>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 12886205910884625992
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedujedrudehtddguddvlecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecunecujfgurhephffvufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpeforggtihgvjhcurfhijhgrnhhofihskhhiuceomhgrtghivghjrdhpihhjrghnohifshhkihesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepveelvdeltdegvedtveettdehuefgjeevieeltddtgfelgeffieeufeevvddugeefnecukfhppedtrddtrddtrddtpdekledrieeirdduheelrdeltdenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhhouggvpehsmhhtphdqohhuthdphhgvlhhopehplhgrhigvrheileejrdhhrgdrohhvhhdrnhgvthdpihhnvghtpedtrddtrddtrddtpdhmrghilhhfrhhomhepmhgrtghivghjrdhpihhjrghnohifshhkihesfehmuggvsgdrtghomhdprhgtphhtthhopehophgvnhgvmhgsvgguuggvugdquggvvhgvlheslhhishhtshdrohhpvghnvghmsggvugguvggurdhorhhg
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <1648FB4A3455E856.13688@lists.openembedded.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Mimic the Debian pacaking scheme to allow for more fine-grained
-installation choice (install the binaries we need). Moreover, dirsplit
-was moved to a separate package, as it pulls in perl interpreter.
+Just a reminder, Happy Hour is in 1 hour.
 
-Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
----
- .../packagegroups/packagegroup-meta-oe.bb     |  5 ++-
- .../cdrkit/cdrkit_1.1.11.bb                   | 32 ++++++++++++++++++-
- 2 files changed, 35 insertions(+), 2 deletions(-)
+9pm UTC, 4pm EST (not EDT) or use time conversion link below for your 
+location. See you there!
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b=
-/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index ccbd01aaf006..e62b1eb4674f 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -615,7 +615,10 @@ RDEPENDS_packagegroup-meta-oe-kernel_remove_riscv32 =
-=3D "crash makedumpfile oprofi
- RDEPENDS_packagegroup-meta-oe-multimedia =3D"\
-     alsa-oss \
-     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "faad2=
-", "", d)} \
--    cdrkit \
-+    dirsplit \
-+    genisoimage \
-+    icedax \
-+    wodim \
-     id3lib \
-     audiofile \
-     a2jmidid \
-diff --git a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb b/meta-oe=
-/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
-index 1c7f4c62e5f4..3344821fa0da 100644
---- a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
-+++ b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
-@@ -18,7 +18,37 @@ SRC_URI[sha256sum] =3D "d1c030756ecc182defee9fe885638c=
-1785d35a2c2a297b4604c0e0dcc7
- inherit cmake
-=20
- DEPENDS =3D "libcap file bzip2"
--RDEPENDS_${PN} =3D "perl"
-+RDEPENDS_dirsplit =3D "perl"
-+
-+PACKAGES =3D+ "dirsplit genisoimage icedax wodim"
-+
-+FILES_dirsplit =3D " \
-+    ${bindir}/dirsplit \
-+"
-+
-+FILES_genisoimage =3D " \
-+    ${bindir}/devdump \
-+    ${bindir}/genisoimage \
-+    ${bindir}/isodebug \
-+    ${bindir}/isodump \
-+    ${bindir}/isoinfo \
-+    ${bindir}/isovfy \
-+    ${bindir}/mkisofs \
-+"
-+
-+FILES_icedax =3D " \
-+    ${bindir}/cdda2mp3 \
-+    ${bindir}/cdda2ogg \
-+    ${bindir}/icedax \
-+    ${bindir}/pitchplay \
-+    ${bindir}/readmult \
-+"
-+
-+FILES_wodim =3D " \
-+    ${bindir}/readom \
-+    ${bindir}/wodim \
-+    ${sbindir}/netscsid \
-+"
-=20
- do_install_append() {
-     ln -sf ${bindir}/genisoimage ${D}${bindir}/mkisofs
---=20
-2.25.1
+-- 
+Denys
 
+
+On Thu, Nov 19, 2020 at 01:12:35PM -0500, Denys Dmytriyenko wrote:
+> Hi,
+> 
+> Just a reminder about our upcoming OpenEmbedded Happy Hour on November 25 for
+> Oceania/Asia timezones @ 2100/9pm UTC (4pm EDT):
+> 
+> https://www.openembedded.org/wiki/Calendar
+> https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+November+25&iso=20201125T21
+> 
+> -- 
+> Denys
