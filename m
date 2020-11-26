@@ -1,55 +1,64 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.1583.1606334555100912660
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web09.3720.1606389744815317650
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Nov 2020 12:02:36 -0800
+ Thu, 26 Nov 2020 03:22:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 06FCA40BD9;
-	Wed, 25 Nov 2020 20:02:34 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id EJVM0oA827pw; Wed, 25 Nov 2020 20:02:33 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A274D40B78;
-	Wed, 25 Nov 2020 20:02:29 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 57F0517432F; Wed, 25 Nov 2020 15:02:29 -0500 (EST)
-Date: Wed, 25 Nov 2020 15:02:29 -0500
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	openembedded-architecture <openembedded-architecture@lists.openembedded.org>,
-	Yocto Project <yocto@yoctoproject.org>,
-	openembedded-members@lists.openembedded.org
-Subject: Re: [OE-core] OpenEmbedded Happy Hour November 25 9pm/2100 UTC
-Message-ID: <20201125200229.GO19155@denix.org>
-References: <1648FB4A3455E856.13688@lists.openembedded.org>
-MIME-Version: 1.0
-In-Reply-To: <1648FB4A3455E856.13688@lists.openembedded.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=52394 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kiFLw-0005Yd-LF; Thu, 26 Nov 2020 13:22:21 +0200
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/7] python3-luma-core: Upgrade 1.17.3 -> 2.0.1
+Date: Thu, 26 Nov 2020 13:22:09 +0200
+Message-Id: <20201126112215.11451-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Just a reminder, Happy Hour is in 1 hour.
+Upgrade to release 2.0.1:
 
-9pm UTC, 4pm EST (not EDT) or use time conversion link below for your 
-location. See you there!
+- Improved diff_to_previous framebuffer performance
+- Add Linux framebuffer pseudo-device
+- Allow a wider range of SPI bus speeds
+- Fix to allow cmdline args to dynamically create a full_frame()
+  instance
 
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ ...{python3-luma-core_1.17.3.bb => python3-luma-core_2.0.1.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-luma-core_1.17.3.bb => python3-luma-core_2.0.1.bb} (75%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-luma-core_1.17.3.bb b/meta-python/recipes-devtools/python/python3-luma-core_2.0.1.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-luma-core_1.17.3.bb
+rename to meta-python/recipes-devtools/python/python3-luma-core_2.0.1.bb
+index 8301d7f77a..fad7432132 100644
+--- a/meta-python/recipes-devtools/python/python3-luma-core_1.17.3.bb
++++ b/meta-python/recipes-devtools/python/python3-luma-core_2.0.1.bb
+@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=db07e3d471938ea7d7fd2135f88ac9a1"
+ 
+ inherit pypi setuptools3
+ 
+-SRC_URI[md5sum] = "c13303a123c32c1a8dc5bc089a920822"
+-SRC_URI[sha256sum] = "1c928ad8e42af5fd395260176f89eb68a8af61911971f94124fabc9c6b550689"
++SRC_URI[sha256sum] = "a0bc18c03cfb293c9c1b1d8883c2ec7c29d167e4af99f795b5698c8a864332df"
+ 
+ CLEANBROKEN = "1"
+ 
 -- 
-Denys
+2.17.1
 
-
-On Thu, Nov 19, 2020 at 01:12:35PM -0500, Denys Dmytriyenko wrote:
-> Hi,
-> 
-> Just a reminder about our upcoming OpenEmbedded Happy Hour on November 25 for
-> Oceania/Asia timezones @ 2100/9pm UTC (4pm EDT):
-> 
-> https://www.openembedded.org/wiki/Calendar
-> https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+November+25&iso=20201125T21
-> 
-> -- 
-> Denys
