@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.3678.1606389753573832060
+ by mx.groups.io with SMTP id smtpd.web11.3680.1606389755059536105
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2020 03:22:33 -0800
+ Thu, 26 Nov 2020 03:22:35 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=52394 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kiFM8-0005Yd-Ht; Thu, 26 Nov 2020 13:22:33 +0200
+	id 1kiFM9-0005Yd-Ne; Thu, 26 Nov 2020 13:22:34 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/7] python3-fastnumbers: Upgrade 3.0.0 -> 3.1.0
-Date: Thu, 26 Nov 2020 13:22:11 +0200
-Message-Id: <20201126112215.11451-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/7] python3-ansi2html: Upgrade 1.5.2 -> 1.6.0
+Date: Thu, 26 Nov 2020 13:22:12 +0200
+Message-Id: <20201126112215.11451-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201126112215.11451-1-leon.anavi@konsulko.com>
 References: <20201126112215.11451-1-leon.anavi@konsulko.com>
@@ -30,54 +30,70 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.1.0:
+Add native setuptools-scm and toml to the dependencies. Upgrade
+to release 1.6.0:
 
-- query_type function to determine what as type fastnumbers will
-  interpret a given input
-- Support for Python 3.9 (eliminate use of private Python C
-  function that is now hidden in 3.9)
-
-License-Update: Update year
+- Add support for vt100 box drawing mode and high-intensity
+  ansi codes
+- Fix undefined behavior with linkify when same url is repeated
+  in same line
+- Prune CSS classes from output that are not used
+- Update style.py
+- Give more useful TaskWarrior example
+- Fix handling cursor move up with unique and empty lines
+- enable python 3 input decoding
+- Fix missing color CSS definitions
+- Prevent IndexError while handling CursorMoveUp
+- added setup.cfg
+- fix long lines
+- Started to implement LaTeX support
+- add option --title for filling in the title
+- add empty title element to head section in html output
+- added 2 color-schemes (solarized, osx). improved optparse
+  handling schemes.
+- added support to select a color-scheme. added schemes 'xterm'
+  and 'xterm...
+- Improve Makefile
+- Add and ship AsciiDoc manpage, improve --help, add --version
+- Fix README example to not produce unwanted spaces
+- Add missing license headers
+- Fix line handling
+- Add support for previously unhandled ANSI codes, improve
+  approach on handling color state
+- Fix italic to be font-style (rather than font-weight)
+- Stop adding unwanted spaces
+- Fix writing to sys.stdout.buffer
+- Add convenience Makefile
+- Fix some bugs
+- add --inline style
+- Fix UnicodeDecodeError exception when Unicode characters appear
+  in input
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python3-fastnumbers_3.0.0.bb                |  9 ---------
- .../python/python3-fastnumbers_3.1.0.bb                | 10 ++++++++++
- 2 files changed, 10 insertions(+), 9 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-fastnumbers_3.0.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-fastnumbers_3.1.0.bb
+ ...{python3-ansi2html_1.5.2.bb => python3-ansi2html_1.6.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-ansi2html_1.5.2.bb => python3-ansi2html_1.6.0.bb} (66%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-fastnumbers_3.0.0.bb b/meta-python/recipes-devtools/python/python3-fastnumbers_3.0.0.bb
-deleted file mode 100644
-index b0ecb9d560..0000000000
---- a/meta-python/recipes-devtools/python/python3-fastnumbers_3.0.0.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--SUMMARY = "Super-fast and clean conversions to numbers."
--SECTION = "devel/python"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=f797665cf3d3e0fdc0d488f5200c6f55"
--
--PYPI_PACKAGE = "fastnumbers"
--SRC_URI[sha256sum] = "93ce2f9516fbf2bbf46c85e4abef783cc569e5fbbc665352efb9cdddbae517ec"
--
--inherit pypi setuptools3
-diff --git a/meta-python/recipes-devtools/python/python3-fastnumbers_3.1.0.bb b/meta-python/recipes-devtools/python/python3-fastnumbers_3.1.0.bb
-new file mode 100644
-index 0000000000..5c913ffef8
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-fastnumbers_3.1.0.bb
-@@ -0,0 +1,10 @@
-+SUMMARY = "Super-fast and clean conversions to numbers."
-+SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=6a96e5ad780a0eea866ecccec4463517"
-+
-+PYPI_PACKAGE = "fastnumbers"
-+
-+SRC_URI[sha256sum] = "7cc4f96981ccd3cf212b6ea7b84ef621620b62da8b454f420aa2e81c8529e68f"
-+
-+inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-ansi2html_1.5.2.bb b/meta-python/recipes-devtools/python/python3-ansi2html_1.6.0.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python3-ansi2html_1.5.2.bb
+rename to meta-python/recipes-devtools/python/python3-ansi2html_1.6.0.bb
+index 8e586ea3e8..d31448d6a8 100644
+--- a/meta-python/recipes-devtools/python/python3-ansi2html_1.5.2.bb
++++ b/meta-python/recipes-devtools/python/python3-ansi2html_1.6.0.bb
+@@ -5,9 +5,9 @@ LICENSE = "GPLv3"
+ 
+ PYPI_PACKAGE = "ansi2html"
+ 
+-SRC_URI[md5sum] = "52d6085ad1c5970082ea5305a26af981"
+-SRC_URI[sha256sum] = "96ae85ae7b26b7da674d87de2870ba4d1964bca733ae4614587080b6358c3ba9"
++SRC_URI[sha256sum] = "0f124ea7efcf3f24f1f9398e527e688c9ae6eab26b0b84e1299ef7f94d92c596"
+ 
+ inherit pypi setuptools3
+ 
++DEPENDS += "${PYTHON_PN}-setuptools-scm-native ${PYTHON_PN}-toml-native"
+ RDEPENDS_${PN} = "${PYTHON_PN}-six"
 -- 
 2.17.1
 
