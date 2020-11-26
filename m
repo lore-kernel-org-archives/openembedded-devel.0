@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.9020.1606413844937120561
+ by mx.groups.io with SMTP id smtpd.web08.8740.1606413844948572148
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 26 Nov 2020 10:04:05 -0800
 Authentication-Results: mx.groups.io;
@@ -8,14 +8,16 @@ Received: from [78.130.197.211] (port=54480 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kiLcd-0008NL-1r; Thu, 26 Nov 2020 20:04:00 +0200
+	id 1kiLcg-0008NL-8Q; Thu, 26 Nov 2020 20:04:03 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/3] python3-pyrad: Upgrade 2.3 -> 2.4
-Date: Thu, 26 Nov 2020 20:03:45 +0200
-Message-Id: <20201126180347.13763-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/3] python3-bitstruct: Upgrade 8.11.0 -> 8.11.1
+Date: Thu, 26 Nov 2020 20:03:46 +0200
+Message-Id: <20201126180347.13763-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20201126180347.13763-1-leon.anavi@konsulko.com>
+References: <20201126180347.13763-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,62 +30,34 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.4:
+Upgrade to release 8.11.1:
 
-- Support poetry for for building this project
-- Use secrets.SysRandom instead of random.SystemRandom if possible
-- .get on Packets has an optional default parameter (to mimic
-  dict.get())
-- Fix: digestmod is not optional in python3.8 anymore
-- Fix: authenticator was refreshed before the packet was generated
-- Fix bug causing Message-Authenticator verification to fail if
-  multiple instances of an attribute do not appear sequentially in
-  the attributes list
-- Fixed VerifyReply broken when multiple instances of same
-  attribute are not adjacent on reply
-- Fixed Missing send_packet for async Client
-- Fixed python3 support for SaltCrypt (was previously broken)
-
-License-Update: Use file PKG-INFO.
+- Fix memory leak in unpack dict C extension
+- Release with python3
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-python/recipes-devtools/python/python3-pyrad_2.3.bb | 9 ---------
- meta-python/recipes-devtools/python/python3-pyrad_2.4.bb | 9 +++++++++
- 2 files changed, 9 insertions(+), 9 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-pyrad_2.3.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-pyrad_2.4.bb
+ ...python3-bitstruct_8.11.0.bb => python3-bitstruct_8.11.1.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-bitstruct_8.11.0.bb => python3-bitstruct_8.11.1.bb} (70%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyrad_2.3.bb b/meta-python/recipes-devtools/python/python3-pyrad_2.3.bb
-deleted file mode 100644
-index 3b38fb3a4b..0000000000
---- a/meta-python/recipes-devtools/python/python3-pyrad_2.3.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--SUMMARY = "RADIUS tools"
--SECTION = "devel/python"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=debd8dc49cd9a7d58c7fffc771efed4f"
--
--PYPI_PACKAGE = "pyrad"
--SRC_URI[sha256sum] = "89c4d9b2cab1746c48dc0d93898d278e34a40acedf6f511aeaa748bcd4490295"
--
--inherit pypi setuptools3
-diff --git a/meta-python/recipes-devtools/python/python3-pyrad_2.4.bb b/meta-python/recipes-devtools/python/python3-pyrad_2.4.bb
-new file mode 100644
-index 0000000000..86a95a4aa4
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyrad_2.4.bb
-@@ -0,0 +1,9 @@
-+SUMMARY = "RADIUS tools"
-+SECTION = "devel/python"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e910b35b0ef4e1f665b9a75d6afb7709"
-+
-+PYPI_PACKAGE = "pyrad"
-+SRC_URI[sha256sum] = "057de4b7e89d8da57ba782c1bde45c63ebee720ae2c0b0a69beaff15c47e30d9"
-+
-+inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-bitstruct_8.11.0.bb b/meta-python/recipes-devtools/python/python3-bitstruct_8.11.1.bb
+similarity index 70%
+rename from meta-python/recipes-devtools/python/python3-bitstruct_8.11.0.bb
+rename to meta-python/recipes-devtools/python/python3-bitstruct_8.11.1.bb
+index a25380418c..49b31971a6 100644
+--- a/meta-python/recipes-devtools/python/python3-bitstruct_8.11.0.bb
++++ b/meta-python/recipes-devtools/python/python3-bitstruct_8.11.1.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/eerimoq/bitstruct"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
+ 
+-SRC_URI[md5sum] = "8eaf853c95e10ca4b6bca2fe5ff307c6"
+-SRC_URI[sha256sum] = "2b13f2c3e76b49e8cd854f7a1da590bb73ecbc6cbfacc2d479eacf2b88282d5d"
++SRC_URI[sha256sum] = "4e7b8769c0f09fee403d0a5f637f8b575b191a79a92e140811aa109ce7461f0c"
+ 
+ PYPI_PACKAGE = "bitstruct"
+ 
 -- 
 2.17.1
 
