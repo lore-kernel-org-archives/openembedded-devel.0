@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.8740.1606413844948572148
+ by mx.groups.io with SMTP id smtpd.web08.8741.1606413845387951627
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 26 Nov 2020 10:04:05 -0800
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=54480 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kiLcg-0008NL-8Q; Thu, 26 Nov 2020 20:04:03 +0200
+	id 1kiLci-0008NL-1O; Thu, 26 Nov 2020 20:04:05 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-bitstruct: Upgrade 8.11.0 -> 8.11.1
-Date: Thu, 26 Nov 2020 20:03:46 +0200
-Message-Id: <20201126180347.13763-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-yarl: Upgrade 1.6.2 -> 1.6.3
+Date: Thu, 26 Nov 2020 20:03:47 +0200
+Message-Id: <20201126180347.13763-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201126180347.13763-1-leon.anavi@konsulko.com>
 References: <20201126180347.13763-1-leon.anavi@konsulko.com>
@@ -30,34 +30,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 8.11.1:
+Upgrade to release 1.6.3:
 
-- Fix memory leak in unpack dict C extension
-- Release with python3
+- No longer loose characters when decoding incorrect
+  percent-sequences (like %e2%82%f8). All non-decodable
+  percent-sequences are now preserved.
+- Provide x86 Windows wheels.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...python3-bitstruct_8.11.0.bb => python3-bitstruct_8.11.1.bb} | 3 +--
+ .../python/{python3-yarl_1.6.2.bb => python3-yarl_1.6.3.bb}    | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-bitstruct_8.11.0.bb => python3-bitstruct_8.11.1.bb} (70%)
+ rename meta-python/recipes-devtools/python/{python3-yarl_1.6.2.bb => python3-yarl_1.6.3.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitstruct_8.11.0.bb b/meta-python/recipes-devtools/python/python3-bitstruct_8.11.1.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-bitstruct_8.11.0.bb
-rename to meta-python/recipes-devtools/python/python3-bitstruct_8.11.1.bb
-index a25380418c..49b31971a6 100644
---- a/meta-python/recipes-devtools/python/python3-bitstruct_8.11.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitstruct_8.11.1.bb
-@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/eerimoq/bitstruct"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
+diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb b/meta-python/recipes-devtools/python/python3-yarl_1.6.3.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
+rename to meta-python/recipes-devtools/python/python3-yarl_1.6.3.bb
+index dbb5d23bd2..01682a46d4 100644
+--- a/meta-python/recipes-devtools/python/python3-yarl_1.6.2.bb
++++ b/meta-python/recipes-devtools/python/python3-yarl_1.6.3.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/aio-libs/yarl/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b334fc90d45983db318f54fd5bf6c90b"
  
--SRC_URI[md5sum] = "8eaf853c95e10ca4b6bca2fe5ff307c6"
--SRC_URI[sha256sum] = "2b13f2c3e76b49e8cd854f7a1da590bb73ecbc6cbfacc2d479eacf2b88282d5d"
-+SRC_URI[sha256sum] = "4e7b8769c0f09fee403d0a5f637f8b575b191a79a92e140811aa109ce7461f0c"
+-SRC_URI[md5sum] = "65c3346f694e37f45045f4e29a60d280"
+-SRC_URI[sha256sum] = "c45b49b59a5724869899798e1bbd447ac486215269511d3b76b4c235a1b766b6"
++SRC_URI[sha256sum] = "8a9066529240171b68893d60dca86a763eae2139dd42f42106b03cf4b426bf10"
  
- PYPI_PACKAGE = "bitstruct"
- 
+ SRC_URI += " \
+     file://run-ptest \
 -- 
 2.17.1
 
