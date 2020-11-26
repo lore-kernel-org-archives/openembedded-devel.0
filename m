@@ -1,24 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.3683.1606389759136033816
+ by mx.groups.io with SMTP id smtpd.web11.3684.1606389762052348664
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Nov 2020 03:22:39 -0800
+ Thu, 26 Nov 2020 03:22:42 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=52394 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kiFMD-0005Yd-Cn; Thu, 26 Nov 2020 13:22:38 +0200
+	id 1kiFMF-0005Yd-HF; Thu, 26 Nov 2020 13:22:41 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 6/7] python3-urllib3: Upgrade 1.25.11 -> 1.26.2
-Date: Thu, 26 Nov 2020 13:22:14 +0200
-Message-Id: <20201126112215.11451-6-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 7/7] python3-transitions: Upgrade 0.8.4 -> 0.8.5
+Date: Thu, 26 Nov 2020 13:22:15 +0200
+Message-Id: <20201126112215.11451-7-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201126112215.11451-1-leon.anavi@konsulko.com>
 References: <20201126112215.11451-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,69 +30,53 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.26.2:
+Upgrade to release 0.8.5:
 
-- NOTE: urllib3 v2.0 will drop support for Python 2.
-- Added support for HTTPS proxies contacting HTTPS servers
-- Deprecated negotiating TLSv1 and TLSv1.1 by default. Users that
-  still wish to use TLS earlier than 1.2 without a deprecation
-  warning should opt-in explicitly by setting
-  ssl_version=ssl.PROTOCOL_TLSv1_1 Starting in urllib3 v2.0:
-  Connections that receive a ``DeprecationWarning`` will fail
-- Deprecated Retry options Retry.DEFAULT_METHOD_WHITELIST,
-  Retry.DEFAULT_REDIRECT_HEADERS_BLACKLIST and
-  Retry(method_whitelist=...) in favor of Retry.DEFAULT_ALLOWED_METHODS,
-  Retry.DEFAULT_REMOVE_HEADERS_ON_REDIRECT, and
-  Retry(allowed_methods=...)
-  Starting in urllib3 v2.0: Deprecated options will be removed
-- Added default User-Agent header to every request
-- Added urllib3.util.SKIP_HEADER for skipping User-Agent,
-  Accept-Encoding, and Host headers from being automatically
-  emitted with requests
-- Collapse transfer-encoding: chunked request data and framing
-  into the same socket.send() call
-- Send http/1.1 ALPN identifier with every TLS handshake by default
-- Properly terminate SecureTransport connections when CA
-  verification fails
-- Don't emit an SNIMissingWarning when passing server_hostname=None
-  to SecureTransport
-- Disabled requesting TLSv1.2 session tickets as they weren't
-  being used by urllib3
-- Suppress BrokenPipeError when writing request body after the
-  server has closed the socket
-- Wrap ssl.SSLError that can be raised from reading a socket
-  (e.g. "bad MAC") into an urllib3.exceptions.SSLError
-- Fixed an issue where two User-Agent headers would be sent if a
-  User-Agent header key is passed as bytes
-
-License-Update: Update copyright date
+- AsyncMachine.switch_model_context is expected to be async now
+  for easier integration of async code during model switch.
+- Bugfix: Initializing a machine with GraphSupport threw an
+  exception when initial was set to a nested or parallel state
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-urllib3_1.25.11.bb => python3-urllib3_1.26.2.bb} | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-urllib3_1.25.11.bb => python3-urllib3_1.26.2.bb} (68%)
+ .../python/python3-transitions_0.8.4.bb               | 11 -----------
+ .../python/python3-transitions_0.8.5.bb               |  9 +++++++++
+ 2 files changed, 9 insertions(+), 11 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-transitions_0.8.4.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-transitions_0.8.5.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.11.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.26.2.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-urllib3_1.25.11.bb
-rename to meta-python/recipes-devtools/python/python3-urllib3_1.26.2.bb
-index 980f4c53d2..fcd6709017 100644
---- a/meta-python/recipes-devtools/python/python3-urllib3_1.25.11.bb
-+++ b/meta-python/recipes-devtools/python/python3-urllib3_1.26.2.bb
-@@ -1,10 +1,9 @@
- SUMMARY = "Python HTTP library with thread-safe connection pooling, file post support, sanity friendly, and more"
- HOMEPAGE = "https://github.com/shazow/urllib3"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=65715c2eb961313d71b297dd5a04f85e"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c2823cb995439c984fd62a973d79815c"
- 
--SRC_URI[md5sum] = "d47dd21a6e66a03c3633cac468ffd010"
--SRC_URI[sha256sum] = "8d7eaa5a82a1cac232164990f04874c594c9453ec55eef02eab885aa02fc17a2"
-+SRC_URI[sha256sum] = "19188f96923873c92ccb987120ec4acaa12f0461fa9ce5d3d0772bc965a39e08"
- 
- inherit pypi setuptools3
- 
+diff --git a/meta-python/recipes-devtools/python/python3-transitions_0.8.4.bb b/meta-python/recipes-devtools/python/python3-transitions_0.8.4.bb
+deleted file mode 100644
+index 3da97ef95e..0000000000
+--- a/meta-python/recipes-devtools/python/python3-transitions_0.8.4.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-inherit pypi setuptools3
+-
+-SUMMARY = "A lightweight, object-oriented Python state machine implementation with many extensions."
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=de0a0876a688a4483bfafa764773ab39"
+-
+-SRC_URI = "https://files.pythonhosted.org/packages/32/32/305845f95f98b505e641aa3fc135b0a9747befcff06223a541d2aa388d47/transitions-${PV}.tar.gz"
+-SRC_URI[md5sum] = "ef07ea90015a296653a4b095837b0354"
+-SRC_URI[sha256sum] = "9a2841b24789dfd345267cb92e26b79da75fd03f6021d1a5222c71b5c9ae3c16"
+-
+-RDEPENDS_${PN} += "python3-six"
+diff --git a/meta-python/recipes-devtools/python/python3-transitions_0.8.5.bb b/meta-python/recipes-devtools/python/python3-transitions_0.8.5.bb
+new file mode 100644
+index 0000000000..7f88bc1d22
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-transitions_0.8.5.bb
+@@ -0,0 +1,9 @@
++SUMMARY = "A lightweight, object-oriented Python state machine implementation with many extensions."
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=de0a0876a688a4483bfafa764773ab39"
++
++inherit pypi setuptools3
++
++SRC_URI[sha256sum] = "e441c66a0c753d56c01c3e5e547f21dbe4a5569c939f12477475c5e81d79769b"
++
++RDEPENDS_${PN} += "python3-six"
 -- 
 2.17.1
 
