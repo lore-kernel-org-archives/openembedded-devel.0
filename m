@@ -1,127 +1,83 @@
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com [209.85.160.193])
- by mx.groups.io with SMTP id smtpd.web10.25654.1606516337082467134
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
+ by mx.groups.io with SMTP id smtpd.web10.26095.1606518649300918186
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Nov 2020 14:32:17 -0800
+ Fri, 27 Nov 2020 15:10:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=YByyrH2x;
- spf=pass (domain: gmail.com, ip: 209.85.160.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f193.google.com with SMTP id f27so4220310qtv.6
-        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2020 14:32:16 -0800 (PST)
+ dkim=pass header.i=@foundries.io header.s=google header.b=MvvY6DD5;
+ spf=pass (domain: foundries.io, ip: 209.85.160.195, mailfrom: ricardo@foundries.io)
+Received: by mail-qt1-f195.google.com with SMTP id 7so4286898qtp.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2020 15:10:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=uAEf2F2AtRceedry3B0XO7D/l/xcluNg6lDkXKf3C/Q=;
-        b=YByyrH2xlvSW8yiEtaPN9HE0xm6baJ94gecZbehBOCojrOi+EAb9KUODXqxOOos0KV
-         QMjMATrZTuyULTSgN72aD+gF09atVO3tsHOHix6hnMs+nmsNInrU70HD2FFRqkCHzmi3
-         DS2L2Sm8spEPZWLIMVpWWYe4z2LxVXeRw5R3lj42RvAi9aSl6iEVMKuPT64O+VMV7jgB
-         L5eX51S8bYOQTzbHcpS4EjcMoKBhO2+M3DAPLakXy+dc7IcHh5V18E9A/0o+ZCb0Te2Y
-         DY1wG/QFddWZkb1Q2ppcIy+t/okLEQdQpRyf6xhK+Xz5tgh8uaEICaB5nrw/4DeIqUok
-         iw7Q==
+        d=foundries.io; s=google;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=cbMmnLWr7Gh+L7vB5eMqjuQAYC4gCUrNr4aHWkVu7aI=;
+        b=MvvY6DD50OWzbg+qdhmHnR3+RYTf+uasBoUzPnkLGugksHxCELTylH9k9p3Zl0eusr
+         lHSsVeY31cfWRRmLvAdjo3SN4q+PRb5QeUUrcVVYonVK/k/UJc+dwaBwoCljaQbOP2DK
+         wsvTTRgIHkW0QGJ1beUmdy/7JL1m7WXPc0SgCzBZN4iKakb9z4HcF7qJ/D2StRm0ARqZ
+         TWHsNI1hs0lAmD371kNrMFjumrvgL4+zkmzvRIo4wmN3hX4AeaGvIwYV7ypRcAap0y8t
+         E18+wfLGA5YO4TM+9YQJHzob1w7HbDzy1cnYr6D1Il9MUuQccm/jwyt6kCJws7Kb2D5U
+         gY7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=uAEf2F2AtRceedry3B0XO7D/l/xcluNg6lDkXKf3C/Q=;
-        b=Qe8Kyonx5JvnFP8h/XFRmW8wom29Eo3xi7gKthhF+7vvEKwpkYcMTNIjizJeE+1JaE
-         fRXxuweDPf6tRXLpnVNpUyyhhqFqcDRjpZzGhfJXM52+fNXDR8+9rdXnS9N3/TSspASB
-         VdNvB81fJ20ytNigB0mQ31HLed4LaF0Wn/GhyrbctH/X+Vd0sl6pQJSgydw9XATPF3oJ
-         6adxt3HClNhy/04yBiRFPV9VCGNqFuhi+0rDFmy0uPn2s72dcTiWP4BOBwxBegBet02B
-         mi3FxxlAZb74o78ZHTS/itx/oHt/VHsAW+V1BjYLFjClM5C/N9S2jt2slj5apIxsHr+9
-         MtTA==
-X-Gm-Message-State: AOAM533M2znrv5SsRGMmHbsfQFPmdFMXR/vhMASbiau3oNIyrIMTZpHX
-	6VbtklynBqdVVRZAlJpg38h9N+WLbO7Ve75xRBE=
-X-Google-Smtp-Source: ABdhPJxe8VK0FtlekZejEjAOXF6Ew73ujqlbyOf6FJ7dJaXsdPGDwTwQ1ptDV5XHPjHgJrs8o/gDLNTDNbv2yzgC1HI=
-X-Received: by 2002:ac8:2ff6:: with SMTP id m51mr10458596qta.194.1606516336186;
- Fri, 27 Nov 2020 14:32:16 -0800 (PST)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=cbMmnLWr7Gh+L7vB5eMqjuQAYC4gCUrNr4aHWkVu7aI=;
+        b=R+DFUkQ1Pp4JTwaoihBrY15en5H0RxLj+010Ilv8Nn0bdplZJqN/Vvy6lJFAZrf7fc
+         ZmWWsigtOlHVSt07ifHExz1Yt1u6aM/vJXMlBayE1FkzRRaiHC8mmglKur6wss2UhPKv
+         XL2ExbjqDsUMc9uoH+Plwk8No7c94YtxDVJ/7bAbUshHny3ifbbkSu82drVz7RWnubMN
+         gryKNts8aC4nr7MM7rwjme3RHGBGxSjbKEhpIpZHLjn5ylWkv4VD9K5pMoxWsMXdQJNk
+         5iGEPcLYc+UzJZ4Hx68OGROHcbwz+m8zAJn7KnDqxmLTQsEPVheVPv1n5V9X4coagqbK
+         OIqw==
+X-Gm-Message-State: AOAM533WvZFkOjur3g8fWFOZ/PCxd259aUGfLNhKKTVk9alt75yd/Y18
+	yFKZhIxdMH89wCimOBEKjKNhq+2N/V/s
+X-Google-Smtp-Source: ABdhPJyJleWD0BR/YlwbwTbVPC21cNiV5yg56EfSkS9hIO8HKKLKqOQP8VRgvAwpIUpbP/DRFYsKVg==
+X-Received: by 2002:ac8:6608:: with SMTP id c8mr10133258qtp.203.1606518647873;
+        Fri, 27 Nov 2020 15:10:47 -0800 (PST)
+Return-Path: <ricardo@foundries.io>
+Received: from localhost.localdomain ([2804:7f5:f480:768e:88c1:b38e:ae63:9ed3])
+        by smtp.gmail.com with ESMTPSA id 5sm8041174qtp.55.2020.11.27.15.10.46
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 27 Nov 2020 15:10:47 -0800 (PST)
+From: "Ricardo Salveti" <ricardo@foundries.io>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] wireguard-module: upgrade 1.0.20200908 -> 1.0.20201112
+Date: Fri, 27 Nov 2020 20:10:31 -0300
+Message-Id: <20201127231031.8899-1-ricardo@foundries.io>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-References: <20201127153734.147135-1-beniaminsandu@gmail.com>
- <CAMKF1sqFj_6HvhgoX64=Zkx_wJRj6593crEJ_dzhTXHVexA2Rg@mail.gmail.com>
- <CABQJdOEPr-5mOcP01PiGX+mzMpfd+4CxFiEeHBkDo1yu7Yr9QQ@mail.gmail.com> <CAMKF1spC2zcn7PABeux8V2dXJwJ=OuJm5Tuq+cckfTsv=y_w+A@mail.gmail.com>
-In-Reply-To: <CAMKF1spC2zcn7PABeux8V2dXJwJ=OuJm5Tuq+cckfTsv=y_w+A@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Fri, 27 Nov 2020 14:31:50 -0800
-Message-ID: <CAMKF1sqeMT6ms-yUVwoj9Sw8YQm+zZAoG+OZkoZ5Xmfx2c5rBg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] trace-cmd: create recipe for version 2.9.1
-To: Beniamin Sandu <beniaminsandu@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-btw. it failed musl build as well
+Relevant changes:
+- fe40226 version: bump
+- d0bf51b qemu: bump default testing version
+- ce8faa3 compat: SYM_FUNC_{START,END} were backported to 5.4
+- da5646f qemu: drop build support for rhel 8.2
+- 99e954f netns: check that route_me_harder packets use the right sk
+- 25320ac noise: take lock when removing handshake entry from table
 
-https://errors.yoctoproject.org/Errors/Details/538865/
+Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
+---
+ ...-module_1.0.20200908.bb => wireguard-module_1.0.20201112.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-kernel/wireguard/{wireguard-module_1.0.20200908.bb => wireguard-module_1.0.20201112.bb} (96%)
 
-It perhaps needs to include sys/types.h somewhere.
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200908.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20201112.bb
+similarity index 96%
+rename from meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200908.bb
+rename to meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20201112.bb
+index 4e3f3deca..c540445d7 100644
+--- a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200908.bb
++++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20201112.bb
+@@ -1,6 +1,6 @@
+ require wireguard.inc
+ 
+-SRCREV = "d97b575a47fb26f27965bdc9e537c85f86165e42"
++SRCREV = "fe402261666821514377d06c2c68ed9bc19e7634"
+ 
+ SRC_URI = "git://git.zx2c4.com/wireguard-linux-compat"
+ 
+-- 
+2.29.2
 
-On Fri, Nov 27, 2020 at 2:24 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Fri, Nov 27, 2020 at 1:01 PM Beniamin Sandu <beniaminsandu@gmail.com>=
- wrote:
-> >
-> >
-> >
-> > =C3=8En vin., 27 nov. 2020 la 21:51, Khem Raj <raj.khem@gmail.com> a s=
-cris:
-> >>
-> >> On Fri, Nov 27, 2020 at 7:37 AM beni <beniaminsandu@gmail.com> wrote:
-> >> >
-> >> > Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
-> >> > ---
-> >> >  .../recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb  | 16 ++++++++++++=
-++++
-> >>
-> >>
-> >> Please add it to packagegroup-meta-oe as well.
-> >
-> >
-> > Okay.
-> >>
-> >>
-> >> >  1 file changed, 16 insertions(+)
-> >> >  create mode 100644 meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.=
-1.bb
-> >> >
-> >> > diff --git a/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb b/=
-meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb
-> >> > new file mode 100644
-> >> > index 000000000..d9599c046
-> >> > --- /dev/null
-> >> > +++ b/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb
-> >> > @@ -0,0 +1,16 @@
-> >> > +SUMMARY =3D "User-space front-end command-line tool for ftrace"
-> >> > +
-> >> > +LICENSE =3D "GPLv2 & LGPLv2.1"
-> >> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D873f48a813bded3de6ebc54=
-e6880c4ac"
-> >> > +
-> >> > +SRC_URI =3D "git://git.kernel.org/pub/scm/linux/kernel/git/rostedt=
-/trace-cmd.git;branch=3Dmaster"
-> >> > +SRCREV =3D "530b1a0caef39466e16bbd49de5afef89656f03f"
-> >> > +
-> >> > +S =3D "${WORKDIR}/git"
-> >> > +
-> >> > +do_install() {
-> >> > +       oe_runmake DESTDIR=3D${D} install
-> >> > +}
-> >> > +
-> >> > +FILES_${PN} +=3D "${prefix}/etc \
-> >>
-> >> user ${sysconfdir}
-> >
-> > IIRC ${sysconfdir} points to /etc and I need /usr/etc, I could not fin=
-d anything to point there at a quick glance so I used this.
->
-> yes that was the question. If the content should be moved to /etc
-> instead of /usr/etc since /usr/etc does not seem to be
-> that common.
->
-> >>
-> >>
-> >> > +       ${libdir}/traceevent/plugins/"
-> >> > --
-> >> > 2.25.1
-> >> >
-> >> >
-> >> >=20
-> >> >
