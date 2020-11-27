@@ -1,17 +1,17 @@
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.87])
- by mx.groups.io with SMTP id smtpd.web11.19069.1606484909945735230
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.85])
+ by mx.groups.io with SMTP id smtpd.web12.19130.1606484921981610248
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Nov 2020 05:48:30 -0800
+ Fri, 27 Nov 2020 05:48:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=iAHwyfu3;
- spf=pass (domain: windriver.com, ip: 40.107.92.87, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=HhcsGsHy;
+ spf=pass (domain: windriver.com, ip: 40.107.92.85, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AWoMVeB1cGrnEOycg+r9m0FcWdDwIewdgOLpfSvvCW8W9kdslnM1OIQ1L2Og6e8yvEybHIWnyjO8h9rJeCL+DZY1xyA1b7TkuNrK744LjRKs4lo4JvKgTmvX24U2CfyAKKS9Gw7fVnHIh4GguQ9EJzo6zrT8HTrpjbcBS8YtHLbp1RcjKYh9pXpxx6QiCYqt6SVXGeYYt7V7J1o3jJ63KAQ6CTPXprWVYdUk3c7n3Z4nAFVRQTmgnzhTni7amuc1RoCfXQYVur1nFtcjJfej0wr3FlloyqjkiSAKocHNnEXMPushK6D2VucTEVRjIdfSLbMYXq0cQ6+huIVDZNfiGQ==
+ b=Jun8+QvjnQIdxWPIGA5Jdtl0aah90YimwI4wYLHx41+MiSXaXScXIWzgJkdNzJJBsQ4ESf/02knNqoHFIckArqAamEx+bGK8kORIGPxoyXbH9QQRXBBxaVfMcSOWEHy+rWIq9mdji03q4Fh28FnLw9g1RhCOmBQt8GlQCXH5KYUsKESkaj0xAGKV7BbifQ+uCSpyDDiWmGShvraQwN8lJtGUU2zjQsoJCsbmrQXwTRWRTDqWocYKlI6mNiioNQC9JLoAlm07FwOrgKkyzXfsrj2PKja+dF5GJ+ah1Li9VREjqrMYu73z+DHoeFQrPxmX0mVJG1/N3tRfgutwDMDMsg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YbHuUaneE1UHVSgxZoeJOOkLjiNU+h2ZVTIWOBvgUdw=;
- b=eh+2aTRGJTu7IUTbqv/pt81hEkVD5v/D2jPMpBaLQ2n2uovsYXXtRNSZ3jXw0iNRT01dyPQNhdet/SicNCRtC6STI9kyWIlN2iXlulkkqHoGyju6JSDKcHOinJEtX//Sr1IAxvrkM6n6f1lD3mztY8PYh5kJToktHBj57hCV34FN0ehCiGm4WQQUtKOwduaZlUiG31EzYkadsRg9tzNe4RrWk0+wfTmLaRolncKPGDMQibV+OAe/owV4ucg+NliaiTyqv383qRjyI5AvgPrOcQe3AVDdJLRIxWdAaTErv5J2Je9bSuTqKVDKU4u/LpR4SweQSCdQbSP84D0oic1KqA==
+ bh=5XqVwv/DGq2BEcYXdbLDs9x1MgE1s6stUiJ94+NB6B4=;
+ b=UazVzLuI8J3Yux0sUClSjxtvrt6KyEMwFwiFgk3bqL5zvWStWHpSnmoHkXvUB91adJedGtY7UAarUnhTsgKSACmtZ0yHEkv4pAsvgTiYl9PTbYqldpfX2o0nfmJlsh26g10fzjqnK4WDQNlJ+HNpfzAY76p8JbfZF5OlCXuGbUXdGhPNa5e7VQCj7X6ke9lrHamOzd3mRSFmYgQKL5CFpXpp1AS5qvu0tiqGWOJ0nXtcbQHC1Ozcf/KTo/TTy4CDKQnHd2LHr+DN1QKLbYGUAdtY/FuML/7QOF+Of1BmII65+ePSYB2qXKbQVbMEyXuky8qCa8F4uBvrKJJ0lmWRMA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YbHuUaneE1UHVSgxZoeJOOkLjiNU+h2ZVTIWOBvgUdw=;
- b=iAHwyfu3s/RL4OtNuaF3k1dDhcQjMhYbHY/0+Gyuvwp+w5ioxgPrH4Sj5KKDejzDCgksQ66ZACrNqafvhK30Pf1K/tYxlr9ZVkPLmUbVo/dk/QzfyYv07Zqq/QVUiP1ZFKmg7aPtoJYS6Schb28+bQ+2wigzFoXZDGVxjZlDMe8=
+ bh=5XqVwv/DGq2BEcYXdbLDs9x1MgE1s6stUiJ94+NB6B4=;
+ b=HhcsGsHySXh3uDr1ZLC9wP/J+DDJAkMalaMRESrwjlFqmGRxSV11fHiyKc8Ju2bqA/MQo6h5GAYTbZzQtaQKzPfGTgzWwSk4aN/czoIl1J01ySLFYkMoTBhgVaq08gwok7YzaXINiiM2mr/d3fH7hxLdCsy34Fk8sHQ89DhiOhM=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,82 +28,82 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB2598.namprd11.prod.outlook.com (2603:10b6:a02:cb::17) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3611.22; Fri, 27 Nov
- 2020 13:48:28 +0000
+ 2020 13:48:40 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::3b:680c:aa2f:e498]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::3b:680c:aa2f:e498%4]) with mapi id 15.20.3589.030; Fri, 27 Nov 2020
- 13:48:28 +0000
-Subject: Re: [oe] [meta-python][PATCH 4/7] python3-ansi2html: Upgrade 1.5.2 -> 1.6.0
+ 13:48:40 +0000
+Subject: Re: [oe] [meta-python][PATCH 3/7] python3-fastnumbers: Upgrade 3.0.0 -> 3.1.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20201126112215.11451-1-leon.anavi@konsulko.com>
- <20201126112215.11451-4-leon.anavi@konsulko.com>
+ <20201126112215.11451-3-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <47456be6-74f3-e68f-a1f1-b30c7ae00f35@windriver.com>
-Date: Fri, 27 Nov 2020 08:48:25 -0500
+Message-ID: <b241f6b9-ac0a-6e02-c253-2bc956b081f3@windriver.com>
+Date: Fri, 27 Nov 2020 08:48:38 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
-In-Reply-To: <20201126112215.11451-4-leon.anavi@konsulko.com>
+In-Reply-To: <20201126112215.11451-3-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: YT1PR01CA0156.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::35) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: YT1PR01CA0153.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2f::32) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0156.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::35) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3611.20 via Frontend Transport; Fri, 27 Nov 2020 13:48:27 +0000
+Received: from [192.168.0.55] (174.115.236.231) by YT1PR01CA0153.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::32) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3611.20 via Frontend Transport; Fri, 27 Nov 2020 13:48:40 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 23688eb5-bf7a-4c86-7eba-08d892db1e8e
+X-MS-Office365-Filtering-Correlation-Id: 5eb433df-2ac7-4fda-4681-08d892db25e7
 X-MS-TrafficTypeDiagnostic: BYAPR11MB2598:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB25982A015F5CB5258FFE57F79FF80@BYAPR11MB2598.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:6430;
+	<BYAPR11MB2598A3A879B87E9BE9AF78E49FF80@BYAPR11MB2598.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:989;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	w0F3985XSlYAR+v3n0TAYFTy+yTHL4Br1zACPlao/wjKSVsOfbxkk/DtUbYkzB8GwJ+1FPO8b866jeiExXt2UXxo/4C2T+aO+4hwOyuWI+bfZfWAcC9L0vsKFiR0ZEwVz7crXIeSsJdtGH97qWs5A44AAWhXuYPdlq3A9Ba2jysv0NlWlTpt+gujS9WWqQPMVkP4F4jvwodE5+A4SnpbFKalKJhL8GjCbBeCQyHN8YKQW4KOFgkDfT2mJq7lfZ9v2RvMtd5R1Q9hMJ/eg7iC4UwO4jEOjojUJqz3DCrDqyeVz56DpuuKHH2eKawclMgPiWyHw8kye8XzbW/4ry+JUHFAkAaLJQhfsVd+dt2hP+XhwPKWAuzMQORuf2V/X5ID7xDQovm3AOaZqdYpZYFFnkXTnhxvr8Fih/LA9sb7PKAqEynUzozrovgLuGqkKk9257GqL9JTfSZVAZRDmg+rYQ==
+	v9fGIHNS8jAxiknEWGtZj4J0opWOCQMtvNeYPIK6XgIONHwRBFKl8mFlhuyaZ3pLwbD1+C1Vinz9RTZKEv6eiZHBtKZbsjHhRqTjFEeL4oRpeb97YX15PT+5Q004FWccqYJFnLuOniQ8IhVW+kpcWqfkAdrUCAz/b00lbXq2mCvBEcjk85DW5KWH7LELgBbBQLw+gBmgLshfN+yJcjbaCNlvp4G3XCp40dSsCWAP/c0XRyPot/SYxt9eRLu+ha/XRVZ/2GrRVGIjbQO4WehtEk4/A3fRx2ZutmacgCyO0t50/lYY/dFpY3rxb6KSZVhr+7r1oUOu025Ryd3z7UhyMrjUZQAZqzqc4yIo7nZMnSY+hVWY8JWQEO3tX3vati5T1RSXGmxuHR/LTbqFzlmQDaSwNaw/vWoGKCX55ZVH+RIa3j2sliIzrIXpharfGTE12734WFN5mwfdAKtXuToFEA==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(39840400004)(136003)(366004)(346002)(396003)(186003)(2906002)(26005)(16526019)(52116002)(6486002)(8936002)(83380400001)(53546011)(478600001)(66946007)(33964004)(86362001)(966005)(5660300002)(2616005)(956004)(166002)(8676002)(316002)(31696002)(16576012)(4001150100001)(36756003)(66556008)(66476007)(31686004)(44832011)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?Qnk1M1RtOTVsdGg2ckR2UzZkTEp3WEwrNXdhaFlhR3QyYW5TelVURUhDcnJP?=
- =?utf-8?B?L09xNFVZS2xtdEVTTVZrRDFRZlZCQ3dYdHdvYlRxeGRUNktWemk3SFc3SFFJ?=
- =?utf-8?B?Rm5yeEFlcVBNYW5mU1d3U3BVL2ZDcDVPQWMrUU1yT09IT2t2dXVQWEp0NmpQ?=
- =?utf-8?B?aTJHV0RNOXM4NDU5aFNCaFdFMzhWR29hT3dCY2RDd1pyWXQyV1krVzkvVGt6?=
- =?utf-8?B?cEdqY3dvRm1aWnF3NEhZQ2pMQU9OWkdnU1dxVmpRWWVERXRrSENmc082a1ZG?=
- =?utf-8?B?clU4WlkzdlhXdmRBaE9DQXdBV3orSWpmRUdKamVBaW4vU1NOUmQ5c3k0eHh5?=
- =?utf-8?B?b1FtS01MVW1pZHBoMDlLQk5heTFyMy9nOEhrNFhHSzFWK0tZU1BNc0hpL2Ix?=
- =?utf-8?B?N2xrb3dXQU5YeVFMREhKT3RHK0J5SUFMUVRRVDlNU1NYS2d4alFxK1g1MFdu?=
- =?utf-8?B?T3hJUFdzK3lXR2t4QnpITVVhUDlOUGFBbzVVamp5NXAybm9odjljSkx4UUp2?=
- =?utf-8?B?Mjdiak9pL0grU3J3eXhta0lIcEkzajB2ZVJoMjN3ZWVKeDNXTUJwa08wM1Nl?=
- =?utf-8?B?NFJiUFJEOEMwVlZrNHpDNkRFUUs2ZHFCWkF1VDd0UVF6R3IxUkRTQ2FiL3Zr?=
- =?utf-8?B?Rmh1R00rSHJQRDA1aDA2MVhRamRvV3dheUJxbmZTVkJqc25ZczRtelc1UjE1?=
- =?utf-8?B?MnZSNHpPT0lCYVNBcFlMcldMdjd6cGVESThEdGZEZ3UyWUloMjVjT2orYkVT?=
- =?utf-8?B?WHhSdUhIUGV5dzJMa0lzRldFZHZLd0dQcGV6eHQyUTl6ejFwb1R5dXBBVGRq?=
- =?utf-8?B?Sk9qSmQ4ckVhZXZ3YVZ3S1E0SXNMY2UyWGdXLzhKY0FUTTg4blNad0U2aHNh?=
- =?utf-8?B?dThZd09Jems2WEhaTjErWjdWKys1WjJyWXlxSVdHYVJENFZ3Szl6RzJza2xK?=
- =?utf-8?B?blBFdnhmOVNwYkhuL0N4VlowY3J4UEZ3M0JuaUczUmdhZXlrMXBvZFpuU3RK?=
- =?utf-8?B?M1JkS0VlZlRTN3FESE9UamREaGV1Wnc4VzdabVNrcFk0emJGODE4eDZnU3Mv?=
- =?utf-8?B?ejQ5NzR4T0lFS3krNWJqbEtFQWJLWW9wVjQ0R28xQ1FsRktMa2o2M05GcHlK?=
- =?utf-8?B?MWlYZzBEaWIyOFJEYzNHSkx3VDVRRTQ5UWZZdGkvcXhwa0QrUlB2NDN4OUx5?=
- =?utf-8?B?OXROOWhydmtaNmZyY05rMGhaQmhhQndRbHdJek9sMGRtUzVsYjl0a3JETmVZ?=
- =?utf-8?B?L25aVWlTYzhTakxTWDEvRC81N1hpQWJkZnlHK2NsSU9lcSsxWkNDS3dSRDJ2?=
- =?utf-8?Q?Jy7quNsTXTMu3U/wiSDfScJ0BHoFfJMEur?=
+	=?utf-8?B?ckpidEtPOCtDVFdiK2Vub1pud01pZzg0L0pqdHRoMjdQQzZNMDY2TEhUZGZq?=
+ =?utf-8?B?blJEUXpodHBRaGNucDNxR3FyNndXUXBycVZJV0NVZ0R1OElMUzRzOThDMVor?=
+ =?utf-8?B?b2cwRmtUcDA1VG9tNU90NFJ6WlVLOHpPSkpMYW92MGY0akZVTytBQUNLak5U?=
+ =?utf-8?B?UUxLTCtkOERpTC95K2hFdFdTQmJnZ2djNGVLYTVNVjN2R0Y3bWsyUUtvdmg5?=
+ =?utf-8?B?R0U0UGM0SllTNmxJY2huU09BY0N2dHRBT05TaTRpNXRSOXpTb0VWNlZzWk1Y?=
+ =?utf-8?B?RHlneEkvMEhSRkoyMmFNbUViSHUwaTZVYlRiK1l0NGc1RVdXMVdBOWFURklj?=
+ =?utf-8?B?ZFZTak9RQ29oeEF2UXNkQmNMeGRYQVd5YUlub2llWGtqQzZuR3J5VEVZY1Zl?=
+ =?utf-8?B?NWQ0V0ttMllCQ21sdXQ4d1VGc1huZVlNQ0dQdC9WdjJVSVl3d281Z1hRa0V0?=
+ =?utf-8?B?ODJZdTR4NUhPZzF2c1g1TVR3SStHRDFmVkI0bStpVng3aVo5NjIrVnEyQVhk?=
+ =?utf-8?B?MVFhZ3liK3k4N0k1eFdVVm4yMEJ6M0ZjYXlYNmNZdG5Zalpac2ppRThEZVRX?=
+ =?utf-8?B?T1VyaDNiNVdMZ0swR0x5czBvZ1dhT1J3NXZSMG1NcjJRYkJHQXVtLzVqU0pP?=
+ =?utf-8?B?K21iRGUrdHR3VjBoNmxMKzVsSXFqYUduREZtWW5zNVRzOU1PSUdxL0w4UHNm?=
+ =?utf-8?B?VVBpS2ZhMzZjeDMzZVpnNDVIdnVlL0k1QzRrTk5GR1BOQjRYQTBucHFjS1N2?=
+ =?utf-8?B?eFVIbXM0ZDFKNWVhc1poVVhEWmZLcmdrbTJ5MUkrbGRsWUY1UDhGQ3ZtT0ty?=
+ =?utf-8?B?L2hlSTVqMWNkQUJzd0t5blloZHUxL0FIQW5YcVc3ZFhkTnJqTTl5cmtQSExI?=
+ =?utf-8?B?aXpkUmpVL3dYSTRaeGlhYlhuM1htWjN3RjY1b24vYWtpRzBYQ2JzSktXOEpJ?=
+ =?utf-8?B?SXIyWm0wdFJHUEExSWV5ZFNYMy9zVnpzVlMyVmVjYzNvcmxsNk9zalcrWHhS?=
+ =?utf-8?B?eFUrNFFJQ0xmL2JYelNrUGM3UGxEQ3R5amVOcjJvWmlOZ1dWdUh3R2hXeVc3?=
+ =?utf-8?B?K0hzR1owMmR1LzJXaFIwYUs2U0hzR2ExUE96VUZ1cW5lUkVtd1JUd0Q4T0Nn?=
+ =?utf-8?B?Qk5oQk1xQ09nQVZTVnBSYUNNYmVCcGlMSW1wazIrR0FUMXBHWFBjbVNjbGg5?=
+ =?utf-8?B?cThrRzFudlIrSEw4TnpzVE1tME9ZWHN4UmhsVjhkVkJocmYzY25FUVBjNUpF?=
+ =?utf-8?B?bEtDUzc5Y254K3NaOGxqLzY4U0ViYTdlb3M4RUZPcXA5R1phdjU5RDhMay94?=
+ =?utf-8?Q?q/C4v4b1lesDDKbpifEnx+I8yAXtaWUmaF?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 23688eb5-bf7a-4c86-7eba-08d892db1e8e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5eb433df-2ac7-4fda-4681-08d892db25e7
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Nov 2020 13:48:28.4471
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Nov 2020 13:48:40.5571
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LDGh49aWEpgiSbz8/y+c7e3H7o9FhJuzRAJOzSN88A7Arh2cOuLRFGdVVMyFCxFF/V1DatJVo5IAp3XrH2Mm1FpV158HREZLX09EQnB11Is=
+X-MS-Exchange-CrossTenant-UserPrincipalName: FU2MC6acgFydS6CNsp+v/vGA9ZwwaZwiMjj/nFlLJScdK7gIwR5tKlk8S4KCN3e+DhljGB6ISMWUTluCdXuxgWOnWp77KgFEG1eb3R9yHpY=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2598
 Content-Type: multipart/alternative;
- boundary="------------FDE913AB299C65423A6AF8DB"
+ boundary="------------B7B4130864DAD8C7953C7518"
 Content-Language: en-US
 
---------------FDE913AB299C65423A6AF8DB
+--------------B7B4130864DAD8C7953C7518
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -111,71 +111,55 @@ Content-Transfer-Encoding: 7bit
 On 2020-11-26 6:22 a.m., Leon Anavi wrote:
 > [Please note this e-mail is from an EXTERNAL e-mail address]
 >
-> Add native setuptools-scm and toml to the dependencies. Upgrade
-> to release 1.6.0:
+> Upgrade to release 3.1.0:
 >
-> - Add support for vt100 box drawing mode and high-intensity
->    ansi codes
-> - Fix undefined behavior with linkify when same url is repeated
->    in same line
-> - Prune CSS classes from output that are not used
-> - Update style.py
-> - Give more useful TaskWarrior example
-> - Fix handling cursor move up with unique and empty lines
-> - enable python 3 input decoding
-> - Fix missing color CSS definitions
-> - Prevent IndexError while handling CursorMoveUp
-> - added setup.cfg
-> - fix long lines
-> - Started to implement LaTeX support
-> - add option --title for filling in the title
-> - add empty title element to head section in html output
-> - added 2 color-schemes (solarized, osx). improved optparse
->    handling schemes.
-> - added support to select a color-scheme. added schemes 'xterm'
->    and 'xterm...
-> - Improve Makefile
-> - Add and ship AsciiDoc manpage, improve --help, add --version
-> - Fix README example to not produce unwanted spaces
-> - Add missing license headers
-> - Fix line handling
-> - Add support for previously unhandled ANSI codes, improve
->    approach on handling color state
-> - Fix italic to be font-style (rather than font-weight)
-> - Stop adding unwanted spaces
-> - Fix writing to sys.stdout.buffer
-> - Add convenience Makefile
-> - Fix some bugs
-> - add --inline style
-> - Fix UnicodeDecodeError exception when Unicode characters appear
->    in input
+> - query_type function to determine what as type fastnumbers will
+>    interpret a given input
+> - Support for Python 3.9 (eliminate use of private Python C
+>    function that is now hidden in 3.9)
+>
+> License-Update: Update year
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...{python3-ansi2html_1.5.2.bb => python3-ansi2html_1.6.0.bb} | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-ansi2html_1.5.2.bb => python3-ansi2html_1.6.0.bb} (66%)
+>   .../python/python3-fastnumbers_3.0.0.bb                |  9 ---------
+>   .../python/python3-fastnumbers_3.1.0.bb                | 10 ++++++++++
+>   2 files changed, 10 insertions(+), 9 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python3-fastnumbers_3.0.0.bb
+>   create mode 100644 meta-python/recipes-devtools/python/python3-fastnumbers_3.1.0.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-ansi2html_1.5.2.bb b/meta-python/recipes-devtools/python/python3-ansi2html_1.6.0.bb
-> similarity index 66%
-> rename from meta-python/recipes-devtools/python/python3-ansi2html_1.5.2.bb
-> rename to meta-python/recipes-devtools/python/python3-ansi2html_1.6.0.bb
-> index 8e586ea3e8..d31448d6a8 100644
-> --- a/meta-python/recipes-devtools/python/python3-ansi2html_1.5.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-ansi2html_1.6.0.bb
-> @@ -5,9 +5,9 @@ LICENSE = "GPLv3"
->
->   PYPI_PACKAGE = "ansi2html"
->
-> -SRC_URI[md5sum] = "52d6085ad1c5970082ea5305a26af981"
-> -SRC_URI[sha256sum] = "96ae85ae7b26b7da674d87de2870ba4d1964bca733ae4614587080b6358c3ba9"
-> +SRC_URI[sha256sum] = "0f124ea7efcf3f24f1f9398e527e688c9ae6eab26b0b84e1299ef7f94d92c596"
->
->   inherit pypi setuptools3
->
-> +DEPENDS += "${PYTHON_PN}-setuptools-scm-native ${PYTHON_PN}-toml-native"
->   RDEPENDS_${PN} = "${PYTHON_PN}-six"
+> diff --git a/meta-python/recipes-devtools/python/python3-fastnumbers_3.0.0.bb b/meta-python/recipes-devtools/python/python3-fastnumbers_3.0.0.bb
+> deleted file mode 100644
+> index b0ecb9d560..0000000000
+> --- a/meta-python/recipes-devtools/python/python3-fastnumbers_3.0.0.bb
+> +++ /dev/null
+> @@ -1,9 +0,0 @@
+> -SUMMARY = "Super-fast and clean conversions to numbers."
+> -SECTION = "devel/python"
+> -LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=f797665cf3d3e0fdc0d488f5200c6f55"
+> -
+> -PYPI_PACKAGE = "fastnumbers"
+> -SRC_URI[sha256sum] = "93ce2f9516fbf2bbf46c85e4abef783cc569e5fbbc665352efb9cdddbae517ec"
+> -
+> -inherit pypi setuptools3
+> diff --git a/meta-python/recipes-devtools/python/python3-fastnumbers_3.1.0.bb b/meta-python/recipes-devtools/python/python3-fastnumbers_3.1.0.bb
+> new file mode 100644
+> index 0000000000..5c913ffef8
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-fastnumbers_3.1.0.bb
+> @@ -0,0 +1,10 @@
+> +SUMMARY = "Super-fast and clean conversions to numbers."
+> +SECTION = "devel/python"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=6a96e5ad780a0eea866ecccec4463517"
+> +
+> +PYPI_PACKAGE = "fastnumbers"
+> +
+> +SRC_URI[sha256sum] = "7cc4f96981ccd3cf212b6ea7b84ef621620b62da8b454f420aa2e81c8529e68f"
+> +
+> +inherit pypi setuptools3
 > --
 > 2.17.1
 >
@@ -183,7 +167,7 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
 >
 
---------------FDE913AB299C65423A6AF8DB
+--------------B7B4130864DAD8C7953C7518
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -196,77 +180,61 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2020-11-26 6:22 a.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20201126112215.11451-4-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20201126112215.11451-3-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">[Please note this e-mail is from an EXTERNAL e-mail address]
 
-Add native setuptools-scm and toml to the dependencies. Upgrade
-to release 1.6.0:
+Upgrade to release 3.1.0:
 
-- Add support for vt100 box drawing mode and high-intensity
-  ansi codes
-- Fix undefined behavior with linkify when same url is repeated
-  in same line
-- Prune CSS classes from output that are not used
-- Update style.py
-- Give more useful TaskWarrior example
-- Fix handling cursor move up with unique and empty lines
-- enable python 3 input decoding
-- Fix missing color CSS definitions
-- Prevent IndexError while handling CursorMoveUp
-- added setup.cfg
-- fix long lines
-- Started to implement LaTeX support
-- add option --title for filling in the title
-- add empty title element to head section in html output
-- added 2 color-schemes (solarized, osx). improved optparse
-  handling schemes.
-- added support to select a color-scheme. added schemes 'xterm'
-  and 'xterm...
-- Improve Makefile
-- Add and ship AsciiDoc manpage, improve --help, add --version
-- Fix README example to not produce unwanted spaces
-- Add missing license headers
-- Fix line handling
-- Add support for previously unhandled ANSI codes, improve
-  approach on handling color state
-- Fix italic to be font-style (rather than font-weight)
-- Stop adding unwanted spaces
-- Fix writing to sys.stdout.buffer
-- Add convenience Makefile
-- Fix some bugs
-- add --inline style
-- Fix UnicodeDecodeError exception when Unicode characters appear
-  in input
+- query_type function to determine what as type fastnumbers will
+  interpret a given input
+- Support for Python 3.9 (eliminate use of private Python C
+  function that is now hidden in 3.9)
+
+License-Update: Update year
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20201126112215.11451-4-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20201126112215.11451-3-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...{python3-ansi2html_1.5.2.bb =&gt; python3-ansi2html_1.6.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-ansi2html_1.5.2.bb =&gt; python3-ansi2html_1.6.0.bb} (66%)
+ .../python/python3-fastnumbers_3.0.0.bb                |  9 ---------
+ .../python/python3-fastnumbers_3.1.0.bb                | 10 ++++++++++
+ 2 files changed, 10 insertions(+), 9 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-fastnumbers_3.0.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-fastnumbers_3.1.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-ansi2html_1.5.2.bb b/meta-python/recipes-devtools/python/python3-ansi2html_1.6.0.bb
-similarity index 66%
-rename from meta-python/recipes-devtools/python/python3-ansi2html_1.5.2.bb
-rename to meta-python/recipes-devtools/python/python3-ansi2html_1.6.0.bb
-index 8e586ea3e8..d31448d6a8 100644
---- a/meta-python/recipes-devtools/python/python3-ansi2html_1.5.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-ansi2html_1.6.0.bb
-@@ -5,9 +5,9 @@ LICENSE = &quot;GPLv3&quot;
-
- PYPI_PACKAGE = &quot;ansi2html&quot;
-
--SRC_URI[md5sum] = &quot;52d6085ad1c5970082ea5305a26af981&quot;
--SRC_URI[sha256sum] = &quot;96ae85ae7b26b7da674d87de2870ba4d1964bca733ae4614587080b6358c3ba9&quot;
-+SRC_URI[sha256sum] = &quot;0f124ea7efcf3f24f1f9398e527e688c9ae6eab26b0b84e1299ef7f94d92c596&quot;
-
- inherit pypi setuptools3
-
-+DEPENDS += &quot;${PYTHON_PN}-setuptools-scm-native ${PYTHON_PN}-toml-native&quot;
- RDEPENDS_${PN} = &quot;${PYTHON_PN}-six&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-fastnumbers_3.0.0.bb b/meta-python/recipes-devtools/python/python3-fastnumbers_3.0.0.bb
+deleted file mode 100644
+index b0ecb9d560..0000000000
+--- a/meta-python/recipes-devtools/python/python3-fastnumbers_3.0.0.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-SUMMARY = &quot;Super-fast and clean conversions to numbers.&quot;
+-SECTION = &quot;devel/python&quot;
+-LICENSE = &quot;MIT&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=f797665cf3d3e0fdc0d488f5200c6f55">&quot;file://LICENSE;md5=f797665cf3d3e0fdc0d488f5200c6f55&quot;</a>
+-
+-PYPI_PACKAGE = &quot;fastnumbers&quot;
+-SRC_URI[sha256sum] = &quot;93ce2f9516fbf2bbf46c85e4abef783cc569e5fbbc665352efb9cdddbae517ec&quot;
+-
+-inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-fastnumbers_3.1.0.bb b/meta-python/recipes-devtools/python/python3-fastnumbers_3.1.0.bb
+new file mode 100644
+index 0000000000..5c913ffef8
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-fastnumbers_3.1.0.bb
+@@ -0,0 +1,10 @@
++SUMMARY = &quot;Super-fast and clean conversions to numbers.&quot;
++SECTION = &quot;devel/python&quot;
++LICENSE = &quot;MIT&quot;
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=6a96e5ad780a0eea866ecccec4463517">&quot;file://LICENSE;md5=6a96e5ad780a0eea866ecccec4463517&quot;</a>
++
++PYPI_PACKAGE = &quot;fastnumbers&quot;
++
++SRC_URI[sha256sum] = &quot;7cc4f96981ccd3cf212b6ea7b84ef621620b62da8b454f420aa2e81c8529e68f&quot;
++
++inherit pypi setuptools3
 --
 2.17.1
 
@@ -281,4 +249,4 @@ index 8e586ea3e8..d31448d6a8 100644
   </body>
 </html>
 
---------------FDE913AB299C65423A6AF8DB--
+--------------B7B4130864DAD8C7953C7518--
