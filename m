@@ -1,83 +1,71 @@
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
- by mx.groups.io with SMTP id smtpd.web10.26095.1606518649300918186
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com [209.85.215.196])
+ by mx.groups.io with SMTP id smtpd.web08.29601.1606544900733931631
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Nov 2020 15:10:49 -0800
+ Fri, 27 Nov 2020 22:28:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@foundries.io header.s=google header.b=MvvY6DD5;
- spf=pass (domain: foundries.io, ip: 209.85.160.195, mailfrom: ricardo@foundries.io)
-Received: by mail-qt1-f195.google.com with SMTP id 7so4286898qtp.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2020 15:10:49 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=WpRqZp4b;
+ spf=pass (domain: gmail.com, ip: 209.85.215.196, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f196.google.com with SMTP id j19so5956190pgg.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Nov 2020 22:28:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=foundries.io; s=google;
-        h=from:to:subject:date:message-id:mime-version
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=cbMmnLWr7Gh+L7vB5eMqjuQAYC4gCUrNr4aHWkVu7aI=;
-        b=MvvY6DD50OWzbg+qdhmHnR3+RYTf+uasBoUzPnkLGugksHxCELTylH9k9p3Zl0eusr
-         lHSsVeY31cfWRRmLvAdjo3SN4q+PRb5QeUUrcVVYonVK/k/UJc+dwaBwoCljaQbOP2DK
-         wsvTTRgIHkW0QGJ1beUmdy/7JL1m7WXPc0SgCzBZN4iKakb9z4HcF7qJ/D2StRm0ARqZ
-         TWHsNI1hs0lAmD371kNrMFjumrvgL4+zkmzvRIo4wmN3hX4AeaGvIwYV7ypRcAap0y8t
-         E18+wfLGA5YO4TM+9YQJHzob1w7HbDzy1cnYr6D1Il9MUuQccm/jwyt6kCJws7Kb2D5U
-         gY7Q==
+        bh=2ExSi05l/16BeZtAAcSPUA5dL4TJpw5v/RSR5aZc3e4=;
+        b=WpRqZp4bAiF//lSd5VqXogT0BsNZ4H7kanRktxm9BplarB5hTiKDnNY6sQqNISRyO5
+         Z7I/fmyNUmiEUFwVzgkxOdqxmphD/YZQA8jO6fxF++9YPlpZL/TNpy83svumzsUbQeGP
+         Wp47xqvoN7fhqI/NO6OC/WqfqdiUSv0FORzZGHMKeHtjJ9BhWK0FyFmAO31UEl3Mky8d
+         BqA6kk1qdZ/rdkKqyblHX1SaBXyEe2XfuD8en1rijvJHkNi4Vy4eWBrAVmucNcCdCiSQ
+         YkyKPncdiIQTIYVD7PvTOwOXa6UU1uvszhwqY5FuWmG7AS1BAlvlsnDeT+Rt4oc0w7jo
+         u3/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=cbMmnLWr7Gh+L7vB5eMqjuQAYC4gCUrNr4aHWkVu7aI=;
-        b=R+DFUkQ1Pp4JTwaoihBrY15en5H0RxLj+010Ilv8Nn0bdplZJqN/Vvy6lJFAZrf7fc
-         ZmWWsigtOlHVSt07ifHExz1Yt1u6aM/vJXMlBayE1FkzRRaiHC8mmglKur6wss2UhPKv
-         XL2ExbjqDsUMc9uoH+Plwk8No7c94YtxDVJ/7bAbUshHny3ifbbkSu82drVz7RWnubMN
-         gryKNts8aC4nr7MM7rwjme3RHGBGxSjbKEhpIpZHLjn5ylWkv4VD9K5pMoxWsMXdQJNk
-         5iGEPcLYc+UzJZ4Hx68OGROHcbwz+m8zAJn7KnDqxmLTQsEPVheVPv1n5V9X4coagqbK
-         OIqw==
-X-Gm-Message-State: AOAM533WvZFkOjur3g8fWFOZ/PCxd259aUGfLNhKKTVk9alt75yd/Y18
-	yFKZhIxdMH89wCimOBEKjKNhq+2N/V/s
-X-Google-Smtp-Source: ABdhPJyJleWD0BR/YlwbwTbVPC21cNiV5yg56EfSkS9hIO8HKKLKqOQP8VRgvAwpIUpbP/DRFYsKVg==
-X-Received: by 2002:ac8:6608:: with SMTP id c8mr10133258qtp.203.1606518647873;
-        Fri, 27 Nov 2020 15:10:47 -0800 (PST)
-Return-Path: <ricardo@foundries.io>
-Received: from localhost.localdomain ([2804:7f5:f480:768e:88c1:b38e:ae63:9ed3])
-        by smtp.gmail.com with ESMTPSA id 5sm8041174qtp.55.2020.11.27.15.10.46
-        for <openembedded-devel@lists.openembedded.org>
+        bh=2ExSi05l/16BeZtAAcSPUA5dL4TJpw5v/RSR5aZc3e4=;
+        b=uKMUrW5fRNc9lbwbLyPN2pTu1uq9GaP4xSKnJN7MjLER91GK1nj3/7ncO72EVIFBx3
+         evCbcIrZkWf455YraWWgMsQ8XR5OVxx5zivVpRRvCZ8xEqdVVRjSnOCBaV7JTqmFpauN
+         V0oStjhNha1/FHkIAAH52VaFxeMpFNp7FTGh5fJPHpXz9UcaKAWMRsUzw/PbiYTNI7yM
+         u5J3yQG4PWXW5MyNqgkXJylI0V8/238OEX+ewO+qhAbZwkIJhisSi/D624C8ymAacuBI
+         dpOBcU/8lioRUTJM0PBlqHQjbjEWZH/llyz+XL5u+19UhRS2+LkL1RgrpPNnt1JIsDNy
+         AoYQ==
+X-Gm-Message-State: AOAM530riQDsl3FHx/yV7fP+aa8NTptnfU7bvsmDKqXgQW5O2MMAz30q
+	bil3klkOclZWcMOJhImeGSyTnSdpTRd6qw==
+X-Google-Smtp-Source: ABdhPJwv5j7RO8iUuTUya7+w5DExsQgL2zocW1redHA0FQlb95P3aT8sBd25+1Lwxbe5A+kWY3vowA==
+X-Received: by 2002:a17:90a:1157:: with SMTP id d23mr14117765pje.1.1606544899842;
+        Fri, 27 Nov 2020 22:28:19 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::49d7])
+        by smtp.gmail.com with ESMTPSA id er23sm3521911pjb.12.2020.11.27.22.28.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Nov 2020 15:10:47 -0800 (PST)
-From: "Ricardo Salveti" <ricardo@foundries.io>
+        Fri, 27 Nov 2020 22:28:19 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] wireguard-module: upgrade 1.0.20200908 -> 1.0.20201112
-Date: Fri, 27 Nov 2020 20:10:31 -0300
-Message-Id: <20201127231031.8899-1-ricardo@foundries.io>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] pipewire: Link with libatomic for riscv32
+Date: Fri, 27 Nov 2020 22:28:17 -0800
+Message-Id: <20201128062817.2036002-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Relevant changes:
-- fe40226 version: bump
-- d0bf51b qemu: bump default testing version
-- ce8faa3 compat: SYM_FUNC_{START,END} were backported to 5.4
-- da5646f qemu: drop build support for rhel 8.2
-- 99e954f netns: check that route_me_harder packets use the right sk
-- 25320ac noise: take lock when removing handshake entry from table
-
-Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-module_1.0.20200908.bb => wireguard-module_1.0.20201112.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-kernel/wireguard/{wireguard-module_1.0.20200908.bb => wireguard-module_1.0.20201112.bb} (96%)
+ meta-oe/recipes-multimedia/pipewire/pipewire_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200908.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20201112.bb
-similarity index 96%
-rename from meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200908.bb
-rename to meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20201112.bb
-index 4e3f3deca..c540445d7 100644
---- a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200908.bb
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20201112.bb
-@@ -1,6 +1,6 @@
- require wireguard.inc
+diff --git a/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb b/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb
+index 1a415c13c3..173b695e1f 100644
+--- a/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb
++++ b/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb
+@@ -33,6 +33,7 @@ PACKAGECONFIG[vulkan] = "-Dvulkan=true,-Dvulkan=false,vulkan-loader"
  
--SRCREV = "d97b575a47fb26f27965bdc9e537c85f86165e42"
-+SRCREV = "fe402261666821514377d06c2c68ed9bc19e7634"
+ LDFLAGS_append_mipsarch = " -latomic"
+ LDFLAGS_append_x86 = " -latomic"
++LDFLAGS_append_riscv32 = " -latomic"
  
- SRC_URI = "git://git.zx2c4.com/wireguard-linux-compat"
- 
+ PACKAGES =+ "\
+     ${PN}-spa-plugins \
 -- 
 2.29.2
 
