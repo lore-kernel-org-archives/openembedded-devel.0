@@ -1,50 +1,50 @@
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com [209.85.215.195])
- by mx.groups.io with SMTP id smtpd.web12.36764.1606592845989904923
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web12.36765.1606592846906422405
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 28 Nov 2020 11:47:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nr1W/wvU;
- spf=pass (domain: gmail.com, ip: 209.85.215.195, mailfrom: ticotimo@gmail.com)
-Received: by mail-pg1-f195.google.com with SMTP id m9so7037250pgb.4
-        for <openembedded-devel@lists.openembedded.org>; Sat, 28 Nov 2020 11:47:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=GHvr0c9N;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: ticotimo@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id w16so7012526pga.9
+        for <openembedded-devel@lists.openembedded.org>; Sat, 28 Nov 2020 11:47:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=qp8t8LeSlVf2qZXXWDol5z9xqpRoTi4hpBg11nLGqMs=;
-        b=nr1W/wvUc5eSCxadBuYEXVLZEVuIAn3ZMG1MbaQVKXey5heSzO6bJVhQDBqijia/mM
-         vdey5cVmw0YmwYf8XUWRbFapsjbihonKSUJeBFiyYhedAykMMUnehzervDWk5h96AmUS
-         yqiI5U0AWhtr8XjNrbqrqL/Lma8iil7Hu6VjQvDsc/xB5h5Mer++QaYUXdWw7+ickXIo
-         PfMO/ue7fc1hAviOrBEmuBYTyRoV+O3LRZ5fjDEnbkZm7ri+lMbE3oTOu53SnNQPdHfw
-         3XepVSR6r5nH/jS5ZiSNuBBwD0VSqsQHa1iueBkXt3R4sdoZVp4UhNYk3IPYicMUfeyM
-         XiNQ==
+        bh=fFmpRB5JJpzzr8O4xwEiD2X5NZ0U3fZsvNifvrlBL24=;
+        b=GHvr0c9N3g4kZr2x0jdIt4dsooE7Wca7APFrwNw0RCeMnFBBlgE+eWBiwyqXTjJZfz
+         wzidX5mVfeKYwQnYhzjAPJREKa6wg3faxxLy2f7qaPLOriy3vPhWK/71h9gCqjcujojA
+         0I7RI0rh4t9W1x/1y/Z07RKUvHwCYXGecFOsd7iO58OQksvzKzmUCi9vdspQQb4S1OGH
+         iZ25oYBWMdeZxwh4a7MDmZQsJEGU7VElGL4GyAk/WZ8MG+OYVFokoKwZL8g5nyzfwrAR
+         gzGpcG5iA/GMHhvvPPL1YTm3vemd9ZOK6C2R02XpdTvwBvn7sAQU2uEHc7Hh16kfbPv2
+         QANA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=qp8t8LeSlVf2qZXXWDol5z9xqpRoTi4hpBg11nLGqMs=;
-        b=tFqfayrOwefiw5H0NTfsq+99N0R36EgeAwqyqJuFuWsyzRoD5IMeKb/RyC+yGN3Oxf
-         BMqhqy1uTjxTBpLnqw0Kl7wyk/1jmUhOtkspjiQShhqu4N+mcc8Kh8I0q0bX22Sys9iA
-         wj2Pa1xiQ8Y+Q+Shv4la3QovBp+9K9fJx21NeKR7bE3XexygADTvYuxqohLI3Yw2Mot9
-         RciSNtafIeL0yINqdEXcCuSt1YbEUsNfNSUFa5xTEQ0qYYeOukJSVrvmDWz7NjnyEQPI
-         JSvQIRmoFOKhNa599XfFoZE0ifvW60SrkCPOZxkr+qYGWs9ZuXKC1RJ8R7E4Io0JKynu
-         BUrA==
-X-Gm-Message-State: AOAM532Pm5w1ks90yqo0TrtRHm0Bj+Gth/4JYIual7nYKJKnjypn9pKu
-	3ur7k2gDuXDRm9Jx7/nwdCfb+cjuLOMF0Q==
-X-Google-Smtp-Source: ABdhPJydpUxANcnZdVXDCyyxezKq2okmmBWb6gdnzjPPEfHrYlO1mnGiA3JKf/GEEP2DggLErJnNbQ==
-X-Received: by 2002:a63:fa0e:: with SMTP id y14mr11572338pgh.225.1606592845367;
-        Sat, 28 Nov 2020 11:47:25 -0800 (PST)
+        bh=fFmpRB5JJpzzr8O4xwEiD2X5NZ0U3fZsvNifvrlBL24=;
+        b=qvHQGUb1gzfDDrGDPm4Y3BNmsdf6vbSkrSdHXtPXaCQGOXlJFiE5lqKHf4wu9n60Up
+         pMamVdJAyZrDzr7MyE/d2SaEqe/87PvF4mFRRlbklfCpcwu5pVQACNWJ9HlGg2tWkZWn
+         MVxpj9gaqymjloN/MGSyuCJqX0NAZH0ReZIuuYTbyzzBhpmPYJOlOM8dXmHoYZfunZfZ
+         Vv4GrIqA43KVCCbchAfyNTzdjWkwNiV4rGNHV1FygE/gCmO2J21/upoIWKSJ48DbCugp
+         pGKhQ/gR8h8aXZjeH1gxIUE+F0j6MWwjEBrweRD+MaxXmlVxicJM/vExP80FTAAHUcSm
+         gblw==
+X-Gm-Message-State: AOAM531jjYxNxmk3vWn6OK9ccN+pUouyRE7wdy368VWvBd1bmqZW0PQU
+	3Cj98mRNXLVSjKVrB+9vUBq5PbZPIfUNkg==
+X-Google-Smtp-Source: ABdhPJyA4QSev/6yyAhXU8bA9Gh03idaIS/D9AOqwIN5gRJYXXuGb6YO7il12weAT14UBCyWJXPuuw==
+X-Received: by 2002:a17:90a:c687:: with SMTP id n7mr17499737pjt.75.1606592846287;
+        Sat, 28 Nov 2020 11:47:26 -0800 (PST)
 Return-Path: <ticotimo@gmail.com>
 Received: from thetis.local ([2601:1c0:6000:9640:58b6:35be:25dc:8a78])
-        by smtp.gmail.com with ESMTPSA id d2sm16084702pji.7.2020.11.28.11.47.24
+        by smtp.gmail.com with ESMTPSA id d2sm16084702pji.7.2020.11.28.11.47.25
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 28 Nov 2020 11:47:24 -0800 (PST)
+        Sat, 28 Nov 2020 11:47:25 -0800 (PST)
 From: "Tim Orling" <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 08/16] python3-setuptools-scm: drop (moved to oe-core)
-Date: Sat, 28 Nov 2020 11:46:48 -0800
-Message-Id: <fe8128df729c4ffb236de0f6644bc2830eb9f431.1606592636.git.ticotimo@gmail.com>
+Subject: [meta-python][PATCH 09/16] python3-packaging: drop (moved to oe-core)
+Date: Sat, 28 Nov 2020 11:46:49 -0800
+Message-Id: <391136f8c90ac16b0d40936f8264427d9def84d7.1606592636.git.ticotimo@gmail.com>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <cover.1606592636.git.ticotimo@gmail.com>
 References: <cover.1606592636.git.ticotimo@gmail.com>
@@ -55,37 +55,30 @@ From: Tim Orling <ticotimo@gmail.com>
 
 Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- .../python/python3-setuptools-scm_4.1.2.bb    | 21 -------------------
- 1 file changed, 21 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-setuptools-scm_4.1.2.bb
+ .../python/python3-packaging_20.4.bb               | 14 --------------
+ 1 file changed, 14 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-packaging_20.4.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-setuptools-scm_4.1.2.bb b/meta-python/recipes-devtools/python/python3-setuptools-scm_4.1.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-packaging_20.4.bb b/meta-python/recipes-devtools/python/python3-packaging_20.4.bb
 deleted file mode 100644
-index 4ebbac6b65..0000000000
---- a/meta-python/recipes-devtools/python/python3-setuptools-scm_4.1.2.bb
+index c75707e69c..0000000000
+--- a/meta-python/recipes-devtools/python/python3-packaging_20.4.bb
 +++ /dev/null
-@@ -1,21 +0,0 @@
--SUMMARY = "the blessed package to manage your versions by scm tags"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
+@@ -1,14 +0,0 @@
+-DESCRIPTION = "Core utilities for Python packages"
+-HOMEPAGE = "https://github.com/pypa/packaging"
+-LICENSE = "Apache-2.0 & BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=faadaedca9251a90b205c9167578ce91"
 -
--SRC_URI[md5sum] = "e6c9fad17c90516d640868eb833d5150"
--SRC_URI[sha256sum] = "a8994582e716ec690f33fec70cca0f85bd23ec974e3f783233e4879090a7faa8"
+-SRC_URI[md5sum] = "3208229da731c5d8e29d4d8941e75005"
+-SRC_URI[sha256sum] = "4357f74f47b9c12db93624a82154e9b120fa8293699949152b22065d556079f8"
 -
--PYPI_PACKAGE = "setuptools_scm"
 -inherit pypi setuptools3
 -
--RDEPENDS_${PN} = "\
--    ${PYTHON_PN}-debugger \
--    ${PYTHON_PN}-json \
--    ${PYTHON_PN}-py \
--    ${PYTHON_PN}-setuptools \
--"
--RDEPENDS_${PN}_class-native = "\
--    ${PYTHON_PN}-setuptools-native \
--"
+-BBCLASSEXTEND = "native"
 -
--BBCLASSEXTEND = "native nativesdk"
+-DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+-RDEPENDS_${PN} += "${PYTHON_PN}-six ${PYTHON_PN}-pyparsing"
 -- 
 2.25.0
 
