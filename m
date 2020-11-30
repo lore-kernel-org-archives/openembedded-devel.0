@@ -1,79 +1,82 @@
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com [209.85.160.193])
- by mx.groups.io with SMTP id smtpd.web12.38006.1606599079214336692
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com [209.85.216.68])
+ by mx.groups.io with SMTP id smtpd.web08.54567.1606703278963125173
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 28 Nov 2020 13:31:19 -0800
+ Sun, 29 Nov 2020 18:27:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Syuk2u4m;
- spf=pass (domain: gmail.com, ip: 209.85.160.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f193.google.com with SMTP id g17so5626936qts.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 28 Nov 2020 13:31:19 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=iqoSvW0i;
+ spf=pass (domain: gmail.com, ip: 209.85.216.68, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f68.google.com with SMTP id r9so370715pjl.5
+        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Nov 2020 18:27:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=M1q7scGGeNFe4bVtWhuWPJHXruGWsbiK56akhBHjw7E=;
-        b=Syuk2u4muvGBB5bMOnSRY+H0OC53i1NTouRq7bEKuNT6EOKlPbJtCBfYzn7RZCehrx
-         vtRxrVJj1gaCkmTQ3KJfYRk3J0Ho3nTST/BILhhUxM0P6aWtC43wWIuvl/1tUDWlbm8P
-         /cLysPhX07Bz8JkaSLdbUhq9Uq0LW/TPCwMTSDwoNiSKJqFcAoxHB5OJdxKWafbW/5bb
-         JqvH3oJ7ER4de+pb77qejZ3KW+cUzZxI9PGYO8Id/FaF+szkzadExf8lYXIQyqK37GP5
-         GShpI0fuAXoL3UiAfc+NDJLxINS7Hg5wp/8mfnyCD8fe7huoC+AEstgW6Y8bUwJIUMXp
-         2+6w==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=lmPRWoiGZzuTUJI9+uK/a7Uq6XKds/gV/ChVS4nz4XU=;
+        b=iqoSvW0iBsJuUBb35oW90ZK5BOoHuHFCPs/S2zMCi7rkY2VtpOWiT8xvqBeJ2Spiwg
+         +pzqRUhsntOWClvBeEZUhK/osx+12qVArDdsg19ETizgulaV1KW3budnQeBDaD+ccQDp
+         ttHBRMYX6lUy1RN7a+OECluZ5SC31jyUbIipMBTYhJlRMhdhrEbZBUNvBURd6wq7IknH
+         u0RZK/gotyBvUgxRUcJuQyrlVvmviHsT0SG62WHmaxIkE2A0L0e+j9BDk05c+l4hmlk5
+         Z7K2dqafx1IU5ECY3A1Vith8D4sHT8nN5qQUWzg4YxTLJduWZxTQlev93Ze0XKiJw3UH
+         qW0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=M1q7scGGeNFe4bVtWhuWPJHXruGWsbiK56akhBHjw7E=;
-        b=YVekSED8s/mTGaB5yivb5SeGbfTRbbkn3XF77k8G473aCdKf5kqziYN434GE+2M5jH
-         6DLAmfgjc7YXMi2MhLtjTT6iPwB907mMLebjFG7Ums3eL7VO5TEvCUPhf50ZRSNSmmBg
-         7VBKyLULqW1T7zT89Ce1iqzH/QyZeaf/Kl21C+8NmbFVCvs1SggznIasgyg3QE/q/Zx3
-         AM5NcxK8khgr4I2dg/hXlAn+QJwVdPjNgIKa+06eCA+Tvt0hSHi/U4+o0eAH5FD1r+vE
-         p2Qq9/try04VCfi2DzMVJSOoVetUTTmsD0hHsLVRisOJz+a6U0deIptIRbi9Dbt1hQ09
-         LiiQ==
-X-Gm-Message-State: AOAM533EWECddFy4drLz5SYxlLd97OVAJK0HPSCHhH8r3NapPUJMlTUA
-	BMUQtZ/QGp7SixLFu7Ver4xQY7khchdHREAFbS8eDBHi+jAKog==
-X-Google-Smtp-Source: ABdhPJxTLuRm3/9EQx0HpUoV07dd9nt1gTjROQvQ7Lqo5/FpfVlfJhQS/qcCwx7uux7cScaY3qi5DmYtmg7AF2po0O4=
-X-Received: by 2002:aed:2962:: with SMTP id s89mr14792333qtd.88.1606599078247;
- Sat, 28 Nov 2020 13:31:18 -0800 (PST)
-MIME-Version: 1.0
-References: <20201116103124.4024903-1-kory.maincent@bootlin.com>
-In-Reply-To: <20201116103124.4024903-1-kory.maincent@bootlin.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=lmPRWoiGZzuTUJI9+uK/a7Uq6XKds/gV/ChVS4nz4XU=;
+        b=RUPyXv0nkdxpqGdpqjStJAYt6+Fb4kF+CZGfw70C4LX/tivFhSHay1aNUyiUlwBwIQ
+         Fsj4Udy0E1ao4qfWZ9cywJfzWocavsYgbiVGm+DgecQM0EUAc7eaPbG7+IOQ1M0iBQya
+         2eXmQlxG3WEumPftNrAHa8xMwXMYHubjabAw0e65z0OTuXvgizkO06D8g7elt1d4bSkW
+         WHwLZKP+cWNFh+BUqTyblVReC71WVcNqy8xbZFZRd/tVw7j5kPJivgS8MKukUhXKMkzQ
+         XYUnG3fHgIEzYice6dYugFYl2yz1XovJpMQVFj8ZOiSp0Z9x6kCJxYoWfybUARqccWDz
+         3/mA==
+X-Gm-Message-State: AOAM531UMiN002aZPcb46OuYUqY5OQLGweuHi/nlpQtN78ojPiK+8mmh
+	eg0oXFCcNXIyDhV+Fsr65f2g20GVLnmNWQ==
+X-Google-Smtp-Source: ABdhPJwEbtwYUSvlHojy1CcjuwoVFJ2IVxCBeTUUi84B2nhx+1t3hp0QA0JCg4v5w700s/zkbpvQ/g==
+X-Received: by 2002:a17:90a:7c4d:: with SMTP id e13mr23948007pjl.146.1606703278328;
+        Sun, 29 Nov 2020 18:27:58 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::49d7])
+        by smtp.gmail.com with ESMTPSA id i14sm8807192pgm.35.2020.11.29.18.27.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 29 Nov 2020 18:27:57 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sat, 28 Nov 2020 13:30:52 -0800
-Message-ID: <CAMKF1spSSNx0BvwEyBcsVnOgNT3O=hPqUcPgUHS8=4ORxLADRQ@mail.gmail.com>
-Subject: Re: [oe] [meta-mono][PATCH] mono: fix build dependencies
-To: Kory Maincent <kory.maincent@bootlin.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-matplotlib: Disable LTO for clang/riscv
+Date: Sun, 29 Nov 2020 18:27:55 -0800
+Message-Id: <20201130022755.3534198-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.29.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Hi Kory
+LTO fails to link on RV32/RV64
 
-I think you should send  a github PR for this see [1]
+| Hard-float 'd' ABI can't be used for a target that doesn't support the D instruction set extension (
+ignoring target-abi)
+| riscv64-yoe-linux-ld.lld: error: lto.tmp: cannot link object files with different floating-point ABI
 
-[1] https://github.com/DynamicDevices/meta-mono#maintainers--patch-policy
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-devtools/python/python3-matplotlib_3.3.2.bb        | 3 +++
+ 1 file changed, 3 insertions(+)
 
-On Mon, Nov 16, 2020 at 2:31 AM Kory Maincent <kory.maincent@bootlin.com> wrote:
->
-> Add libatomic-ops to dependencies to avoid this error:
-> /include/private/gc_atomic_ops.h:105:11: fatal error: atomic_ops.h: No such file or directory
->
-> Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
-> ---
->  recipes-mono/mono/mono-6.10.0.104.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/recipes-mono/mono/mono-6.10.0.104.inc b/recipes-mono/mono/mono-6.10.0.104.inc
-> index 27dff49..a1dd195 100644
-> --- a/recipes-mono/mono/mono-6.10.0.104.inc
-> +++ b/recipes-mono/mono/mono-6.10.0.104.inc
-> @@ -2,4 +2,4 @@ SRC_URI[sha256sum] = "b8d6eb70a252d2efad8384d66b529883dc59e581565d617fa57f8e7931
->
->  S = "${WORKDIR}/mono-${PV}"
->
-> -DEPENDS += " cmake-native"
-> +DEPENDS += " cmake-native libatomic-ops"
-> --
-> 2.25.1
->
->
-> 
->
+diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.3.2.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.3.2.bb
+index a2e7074d78..3cfa3f31f4 100644
+--- a/meta-python/recipes-devtools/python/python3-matplotlib_3.3.2.bb
++++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.3.2.bb
+@@ -38,9 +38,12 @@ RDEPENDS_${PN} = "\
+     python3-pytz \
+ "
+ 
++ENABLELTO_toolchain-clang_riscv64 = "echo enable_lto = False >> ${S}/setup.cfg"
++ENABLELTO_toolchain-clang_riscv32 = "echo enable_lto = False >> ${S}/setup.cfg"
+ do_compile_prepend() {
+     echo [libs] > ${S}/setup.cfg
+     echo system_freetype = true >> ${S}/setup.cfg
++    ${ENABLELTO}
+ }
+ 
+ BBCLASSEXTEND = "native"
+-- 
+2.29.2
+
