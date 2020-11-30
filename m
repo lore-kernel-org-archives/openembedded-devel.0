@@ -1,172 +1,91 @@
-Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com [209.85.215.193])
- by mx.groups.io with SMTP id smtpd.web10.2239.1606765217789412760
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com [209.85.128.68])
+ by mx.groups.io with SMTP id smtpd.web09.2944.1606767797514230764
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Nov 2020 11:40:17 -0800
+ Mon, 30 Nov 2020 12:23:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ie63kwBx;
- spf=pass (domain: gmail.com, ip: 209.85.215.193, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f193.google.com with SMTP id m9so10715544pgb.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Nov 2020 11:40:17 -0800 (PST)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=p1ROnkwF;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.68, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f68.google.com with SMTP id a6so784982wmc.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Nov 2020 12:23:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=IfUqXUqDWwZTzh/kmjIiMlxGsB81esSX3E+Ol/cMlLs=;
-        b=ie63kwBxM6CJoUsqj65Cl8mMPAygFyEs09m+eBDNZ9FU/n2LpnLI9RVxBiXyA2meLU
-         2ezCG6Co/vofJVww3pF7sgCeKqFgyDflpvAUkblqzA008Ko1c1av47I9mz7ocQLLoGb+
-         VrdHV+aN4kDGo9eLHJqV0vv/KU/YT43jpO4AK7Rfg12R9zBC7RUgx9J9WdCmCxEko0v5
-         9X4+Odi9xzPzeWDnO0YjvO4K0mKQzQIQoFn1UEolfybo7V96zaCdWALb/e/yhI4yM9wF
-         k37r9VITRjXdpaomqbI3OGoD5v6e6MLwXDSqBP6dipdVjFr202G6oGirOrnvdmFGYdb9
-         MkNA==
+        bh=LRKLuANylQYQQ+OxeYDsfWNnNkpx+UW5i2rfehqJhNA=;
+        b=p1ROnkwFDUu5tC7Rh1+Xa/7vG1JL0aZhlXu1y59zCQC8BrliDJWaT9wB2dA1rhTRkz
+         u6pp6VOyq1+A0HXu5CYCbkVGe211dcCxWDE4/UnleJegvIypvSqJ+cZnD3N7A2vSoQrJ
+         A75ThAJSXTeoOB55FLfOwDqugKu6Zx9chrj1W1NnWLodvQH+3Urxrx3anYynF+b4BRwP
+         Sd199dfSKm9sFsS4VaFOyInYql33WBmVBABFfK8wI6xpixpXBJoHaW/g+93gQlZAWXwT
+         HJRbC5XJCwh/b4LJLvVQjYzRLZ26jKZqmxFymDrlIadxLBsEMK5OyprZ13Om8BF9uYyE
+         GZzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=IfUqXUqDWwZTzh/kmjIiMlxGsB81esSX3E+Ol/cMlLs=;
-        b=Tw5MD5rPIoHoLrkZdXF/gdoCtdfCYalFFX0HKxuNybjhzCB32sVvD82DiUeo+5uKwB
-         fItchzAelPJ6+gbsStU4kKkqoiZw86f3+Q8xeGW1mgRzEhSsskSmGah7fYojxK2cGE61
-         z1orKyl4whUwvtOXy+cMb2TZrKo1bHbPF3nujMkRHCAXIM8xCMjlHq+hVBMBCCXLgM1v
-         aH2YvBfNKy6RpL57UE6/iXbgODlEOF1IDwDj95HZOFQjdwnmrBXts8rgV4F3HKJIbPBJ
-         JbRxcjiEpqUS6BhjafM6BZY4GJW7brLxLHyF8NOXwDb4anYCdvsRI9Ki8tiQZPfMPC4z
-         HaMA==
-X-Gm-Message-State: AOAM532tw6Vh6C6o3/0MTEbbwVFjP167De+Be1GvfHWSWshi96FdfrJi
-	7aDWs0mgj7r1kTpYGKK7j2Zeyc6bR/oW6A==
-X-Google-Smtp-Source: ABdhPJwY3WbNO6RT8EAOB8aCNslvU9P1UjN/ypiGbGd5UDxUYfa9e1H6Bx2+mVqtMwXF2h86bHdjKw==
-X-Received: by 2002:a63:a62:: with SMTP id z34mr18755302pgk.193.1606765216998;
-        Mon, 30 Nov 2020 11:40:16 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::49d7])
-        by smtp.gmail.com with ESMTPSA id l1sm210811pju.48.2020.11.30.11.40.15
+        bh=LRKLuANylQYQQ+OxeYDsfWNnNkpx+UW5i2rfehqJhNA=;
+        b=hDj5zd9ArNPqJ+CeE7em0XXRgh/8tlQqmkLqOsSAd7Uqy67N0K3guIl/fVo73ExuW4
+         hMulCqh2Jl7LpVZzKk4yZFkeebh/YusvXDUJEwOB5Lj2hRN79AUuvhoPm/pmusdd312S
+         1zJFeuJcvj90AqEKFnVnBFoV05QUGoR7uR/Kw2mE5mTbrNS0tX3Q2W9ce76QOcqHN7kz
+         x/YgDDJVU/FrYcxIj9Xa0XVpW2R8n/WUQ89I9oFLYKP3S9vBLEX7WDA4McaFKKqrQbM+
+         mKSB6Qule/QVe3vcYJ8VURtUrI7iItyDCjU4hL+lVgRNMRB9Rwy7nVxiXEtm/Ax+ovQ+
+         rYAw==
+X-Gm-Message-State: AOAM5319WVw5NqhMtz7dAHHSa69TuriczVQcXpjUsTs2FVBUsfXGyyod
+	2YHRGqlNJqhTXegv61/y+JPFGw==
+X-Google-Smtp-Source: ABdhPJz7D1aG0zW+Y46BPAgWkwBcGiG/CG6/Ya7j7J90nt1htr5SdSeBcugSz7mEIF5kFFZMmd1HCg==
+X-Received: by 2002:a1c:5f8a:: with SMTP id t132mr566749wmb.121.1606767782913;
+        Mon, 30 Nov 2020 12:23:02 -0800 (PST)
+Return-Path: <brgl@bgdev.pl>
+Received: from debian-brgl.home (amarseille-656-1-4-167.w90-8.abo.wanadoo.fr. [90.8.158.167])
+        by smtp.gmail.com with ESMTPSA id g25sm530140wmk.5.2020.11.30.12.23.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 30 Nov 2020 11:40:16 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Tim Orling <ticotimo@gmail.com>
-Subject: [meta-python][PATCH] packagegroup-meta-python: Remove packages moved to core
-Date: Mon, 30 Nov 2020 11:40:13 -0800
-Message-Id: <20201130194013.74677-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.29.2
+        Mon, 30 Nov 2020 12:23:02 -0800 (PST)
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster808@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [meta-oe][PATCH] libgpiod: update v1.4.5 -> v1.6.2
+Date: Mon, 30 Nov 2020 21:23:00 +0100
+Message-Id: <20201130202300.16984-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.29.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-These packages are not in meta-python anymore
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Tim Orling <ticotimo@gmail.com>
+We're now by default on linux v5.8 so the GPIO features supported by
+libgpiod v1.6 are available. Bump the version to v1.6.2 and extend the
+recipe to depend on additional testing packages if tests are being built.
+
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 ---
- .../packagegroups/packagegroup-meta-python.bb    | 16 ----------------
- 1 file changed, 16 deletions(-)
+ .../libgpiod/{libgpiod_1.4.5.bb => libgpiod_1.6.2.bb}       | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/libgpiod/{libgpiod_1.4.5.bb => libgpiod_1.6.2.bb} (87%)
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 024503d5da..bf46896f1c 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -27,7 +27,6 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-asciitree \
-     python3-flask-sqlalchemy \
-     python3-gevent \
--    python3-attrs \
-     python3-aenum \
-     python3-gast \
-     python3-blinker \
-@@ -56,7 +55,6 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-asn1crypto \
-     python3-async-timeout \
-     python3-absl \
--    python3-atomicwrites \
-     python3-attr \
-     python3-flask \
-     python3-autobahn \
-@@ -151,7 +149,6 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-keras-applications \
-     python3-idna \
-     python3-sympy \
--    python3-importlib-metadata \
-     python3-langtable \
-     python3-lockfile \
-     python3-nmap \
-@@ -170,10 +167,8 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-lorem \
-     python3-javaobj-py3 \
-     python3-passlib \
--    python3-pathlib2 \
-     python3-pexpect \
-     python3-luma-oled \
--    python3-pluggy \
-     python3-lxml \
-     python3-precise-runner \
-     python3-padaos \
-@@ -251,7 +246,6 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-natsort \
-     python3-polyline \
-     python3-ordered-set \
--    python3-packaging \
-     python3-parso \
-     python3-pycparser \
-     python3-pycrypto \
-@@ -267,14 +261,12 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-pickleshare \
-     python3-pyopenssl \
-     python3-protobuf \
--    python3-py \
-     python3-pyasn1-modules \
-     python3-pyscaffold \
-     python3-pyserial \
-     python3-pysocks \
-     python3-pytoml \
-     python3-pytest-helpers-namespace \
--    python3-more-itertools \
-     python3-pytest-tempdir \
-     python3-pyflakes \
-     python3-pyrad \
-@@ -301,8 +293,6 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-pocketsphinx \
-     python3-sdnotify \
-     python3-pycodestyle \
--    python3-pytest \
--    python3-iniconfig \
-     python3-speaklater \
-     python3-wtforms \
-     python3-speedtest-cli \
-@@ -326,12 +316,10 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-trafaret \
-     python3-urllib3 \
-     python3-yappi \
--    python3-zipp \
-     python3-texttable \
-     python3-humanize \
-     python3-strict-rfc3339 \
-     python3-supervisor \
--    python3-toml \
-     python3-diskcache \
-     python3-requests-futures \
-     python3-matplotlib \
-@@ -339,7 +327,6 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-xlrd \
-     python3-xstatic \
-     python3-tzlocal \
--    python3-wcwidth \
-     python3-ntplib \
-     python3-u-msgpack-python \
-     python3-python-vlc \
-@@ -383,7 +370,6 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-requests-file \
-     python3-requests-toolbelt \
-     python3-ruamel-yaml \
--    python3-setuptools-scm \
-     python3-socketio \
-     python3-soupsieve \
-     python3-textparser \
-@@ -429,8 +415,6 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-dill \
-     python3-cerberus \
-     python3-cvxopt \
--    python3-sortedcontainers \
--    python3-hypothesis \
-     python3-jsonpath-rw \
- "
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.5.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.2.bb
+similarity index 87%
+rename from meta-oe/recipes-support/libgpiod/libgpiod_1.4.5.bb
+rename to meta-oe/recipes-support/libgpiod/libgpiod_1.6.2.bb
+index aec50e7e6..c0cf54589 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.5.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.2.bb
+@@ -5,12 +5,12 @@ LICENSE = "LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
+ 
+ SRC_URI = "https://www.kernel.org/pub/software/libs/${BPN}/${BP}.tar.xz"
+-SRC_URI[md5sum] = "0da9e11dcb0ac0149967b0c4d3ed9cfd"
+-SRC_URI[sha256sum] = "a041b06907c956dd1c77836cccf4d392af29b9fe09c8ad18449a6da707b5ba2d"
++SRC_URI[md5sum] = "4765470becb619fead3cdaeac61b9a77"
++SRC_URI[sha256sum] = "c601e71846f5ab140c83bc757fdd62a4fda24a9cee39cc5e99c96ec2bf1b06a9"
+ 
+ inherit autotools pkgconfig python3native
+ 
+-PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
++PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev glib-2.0 catch2"
+ PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
+ PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
  
 -- 
-2.29.2
+2.29.1
 
