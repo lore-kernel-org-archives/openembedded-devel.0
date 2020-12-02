@@ -1,262 +1,404 @@
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com [209.85.210.195])
- by mx.groups.io with SMTP id smtpd.web08.365.1606869754368631842
+Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com [209.85.218.68])
+ by mx.groups.io with SMTP id smtpd.web09.961.1606872748968036528
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Dec 2020 16:42:34 -0800
+ Tue, 01 Dec 2020 17:32:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@broadcom.com header.s=google header.b=dPN/6PDI;
- spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: broadcom.com, ip: 209.85.210.195, mailfrom: scott.branden@broadcom.com)
-Received: by mail-pf1-f195.google.com with SMTP id w6so108570pfu.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Dec 2020 16:42:34 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Jswa6va2;
+ spf=pass (domain: gmail.com, ip: 209.85.218.68, mailfrom: bruce.ashfield@gmail.com)
+Received: by mail-ej1-f68.google.com with SMTP id 7so8847280ejm.0;
+        Tue, 01 Dec 2020 17:32:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=broadcom.com; s=google;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to;
-        bh=eX3oemKtQdxdjY1Goph8KjSmCRA6e79pevFzDKEeHiw=;
-        b=dPN/6PDIzDrcts4txEQPD5lUZUyUA05kgdVhjL4K+9FdeTAm9Uq79dBmANXTP1poCF
-         ln/Kkh1LmnSyoe4zkPSPPpaYaPpA5gDobm3ZXfS9s4veiR4JHc8uJ4NICtLgb7LNWl0Q
-         ei2deMMMIlR5NjqZdaHH5yVS70j9IJhbwU2z8=
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=SOuX10nn1w+J+m98wCUzjMJHnGBrFavwPJK1xKywBHQ=;
+        b=Jswa6va2AvOj4p4XlEsKujvN1E/vysbmtkmMK2vmnnCqzOFqNbghF1qg9z6OsLmx9t
+         bFafGrIy+UWueRoKDZSrpB5lUA6qV0rGSCzRIhbI/WNwUKPMxVlD8CEjFK8AyijzLRby
+         vQSOChh/v1fYd+mIYiMZ6NgrpuFklMqmio6uo47oB/w6yj5Oa3zTQioqtVLPL6vsHX9V
+         j2dKLmTz6+jSAXd/wRz4tZDTCfwCpfxuGJK6vj047nsL6cthXk14CJs0cZzJrovv61n7
+         ubjZIpgSZsHtlLx8YlqPZgdJYbq5LBHFKr8W4thHc6drlUkxs8PJ9PJbdf+uxy9bM2J7
+         Ex+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to;
-        bh=eX3oemKtQdxdjY1Goph8KjSmCRA6e79pevFzDKEeHiw=;
-        b=HkQgeNEvcBYO8s+oGFKdtiU0vK3O4k/C1xgb+A2JB3JBy6A7B7a9NAt26lX0445hpg
-         hHqZmdLTwG1WBUK0o3P6pbYo415ubvIVyC9B3sPhls3AsJTx7AxFw6ysBCWFK7fGjnBK
-         nBRO8z8kP1udZS6i+Fps3JcKoWpnx2vn7/BMhfBy6KXIBZBF8WtpySOz+yg/aKa/lpcr
-         9xCjXaYUoFdof8Bq6NTcAL1sZtpHUcCAumOShJNRjkmuwXy05aWqit67Bfbooefw8d5d
-         ZPp8i++mG3eUBr1Vn14gFpXhjwXZcVDuBMEdz6xPa8yR+lBWKsQS5MfYNdOdtkxOpkMe
-         PBTg==
-X-Gm-Message-State: AOAM530WvI1PCKev412/P2MBlxI7gkrrKz/La92RKb0J+xfFwTm1bqRT
-	boZZKF8fX9Cr5dKb2s+yqz9SvA==
-X-Google-Smtp-Source: ABdhPJwGk0kTX/+M1DEpYCf2yzuO2n8Fs1rf6SIXbJPl/NPALCYL7BBC9ow5svpGxDxICrzGAZqtOw==
-X-Received: by 2002:a63:7103:: with SMTP id m3mr190562pgc.369.1606869753577;
-        Tue, 01 Dec 2020 16:42:33 -0800 (PST)
-Return-Path: <scott.branden@broadcom.com>
-Received: from [10.136.13.65] ([192.19.228.250])
-        by smtp.gmail.com with ESMTPSA id 22sm82949pjb.40.2020.12.01.16.42.31
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 01 Dec 2020 16:42:32 -0800 (PST)
-Subject: Re: [PATCH] menuconfig,mconf-cfg: Allow specification of ncurses location
-To: Bruce Ashfield <bruce.ashfield@gmail.com>
-Cc: Masahiro Yamada <masahiroy@kernel.org>,
- Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Broadcom Kernel Feedback List <bcm-kernel-feedback-list@broadcom.com>,
- OE-core <openembedded-core@lists.openembedded.org>,
- openembeded-devel <openembedded-devel@lists.openembedded.org>,
- Michal Marek <mmarek@suse.cz>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=SOuX10nn1w+J+m98wCUzjMJHnGBrFavwPJK1xKywBHQ=;
+        b=H4nkbtkNBQoPiG+FVdPxJ/u71rqYrje2VeLBBIyho2IcQAODBDqmVAlVm3EVo6BWJR
+         vNqAsWqs5fm2om65YkO6RXYeNpxuk0sFZ+r3FMDmXRmOyiMIDQo14WRjhNpObUj/66ZZ
+         jMwouoe0LIeK6ynDL0ncLuorC+tBwKkWFRK3lydkGjCrg4nTGhcXskeKJF8wXspHYpQC
+         gwRunw6aWolK+da7pR4YUYmY10CgGK5nBT/pyGCMLJiv6DMKTZtQVDMnXUCEhswYR9QF
+         MN98fjiv7JZCZQYyPrdYWO/D4mNJ9ZFW911yXVCvZfG9/z7TsxOiXpkgBhsZFNKCTTnV
+         FViw==
+X-Gm-Message-State: AOAM53048EhMAczAljY/wVQ+Y2WeKrdS7atqJMG607V2yk60Q7k6vDKE
+	bulje17pX5bmoyNHaWJvLWfRRQHu/JlezRBZV50=
+X-Google-Smtp-Source: ABdhPJzAwfMs4DSulNAFMo231biTBb0RNC9csdnWvze7jhR8CBAtiQ3yCn3qtfmkcqEgDm1xvkwPsm0G8dBmKjwGxxg=
+X-Received: by 2002:a17:907:d01:: with SMTP id gn1mr101202ejc.357.1606872747038;
+ Tue, 01 Dec 2020 17:32:27 -0800 (PST)
+MIME-Version: 1.0
 References: <20201128004505.27619-1-scott.branden@broadcom.com>
  <CAK7LNATD0J3C_mFrXAju8-WmdCmrPmRFn7Um0yebnfL-_zcu8w@mail.gmail.com>
- <a5ea40a5-17ef-f037-16b3-177f01db6447@broadcom.com>
- <CADkTA4NTPJrvoFqumNjkU-o-ZTt8iVUzQec+=Qvm4J_59FFQqg@mail.gmail.com>
-From: "Scott Branden" <scott.branden@broadcom.com>
-Message-ID: <be7e141b-4c20-c31b-9b74-6a1369569565@broadcom.com>
-Date: Tue, 1 Dec 2020 16:42:30 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <CADkTA4NTPJrvoFqumNjkU-o-ZTt8iVUzQec+=Qvm4J_59FFQqg@mail.gmail.com>
-X-Groupsio-MsgNum: 88192
-Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
-	boundary="000000000000e3548205b57084f6"
+ <a5ea40a5-17ef-f037-16b3-177f01db6447@broadcom.com> <CADkTA4NTPJrvoFqumNjkU-o-ZTt8iVUzQec+=Qvm4J_59FFQqg@mail.gmail.com>
+ <be7e141b-4c20-c31b-9b74-6a1369569565@broadcom.com>
+In-Reply-To: <be7e141b-4c20-c31b-9b74-6a1369569565@broadcom.com>
+From: "Bruce Ashfield" <bruce.ashfield@gmail.com>
+Date: Tue, 1 Dec 2020 20:32:15 -0500
+Message-ID: <CADkTA4OypBD5MyrEOPE_RtNC4DTSL-NPVa8QuDNHKHhRi8-Hzg@mail.gmail.com>
+Subject: Re: [PATCH] menuconfig,mconf-cfg: Allow specification of ncurses location
+To: Scott Branden <scott.branden@broadcom.com>
+Cc: Masahiro Yamada <masahiroy@kernel.org>, 
+	Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>, 
+	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, 
+	Broadcom Kernel Feedback List <bcm-kernel-feedback-list@broadcom.com>, 
+	OE-core <openembedded-core@lists.openembedded.org>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>, Michal Marek <mmarek@suse.cz>
+Content-Type: multipart/alternative; boundary="000000000000495e6a05b5713768"
 
---000000000000e3548205b57084f6
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-CA
+--000000000000495e6a05b5713768
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Bruce,
+On Tue, Dec 1, 2020 at 7:42 PM Scott Branden <scott.branden@broadcom.com>
+wrote:
 
-On 2020-12-01 11:01 a.m., Bruce Ashfield wrote:
-> On Tue, Dec 1, 2020 at 12:19 PM Scott Branden
-> <scott.branden@broadcom.com> wrote:
->> Hi Masahiro,
->>
->> On 2020-12-01 4:25 a.m., Masahiro Yamada wrote:
->>> On Sat, Nov 28, 2020 at 9:45 AM Scott Branden
->>> <scott.branden@broadcom.com> wrote:
->>>> From: Bruce Ashfield <bruce.ashfield@windriver.com>
->>>>
->>>> In some cross build environments such as the Yocto Project build
->>>> environment it provides an ncurses library that is compiled
->>>> differently than the host's version.  This causes display corruption
->>>> problems when the host's curses includes are used instead of the
->>>> includes from the provided compiler are overridden.  There is a second
->>>> case where there is no curses libraries at all on the host system and
->>>> menuconfig will just fail entirely.
->>>>
->>>> The solution is simply to allow an override variable in
->>>> check-lxdialog.sh for environments such as the Yocto Project.  Adding
->>>> a CROSS_CURSES_LIB and CROSS_CURSES_INC solves the issue and allowing
->>>> compiling and linking against the right headers and libraries.
->>>>
->>>> Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
->>>> cc: Michal Marek <mmarek@suse.cz>
->>>> cc: linux-kbuild@vger.kernel.org
->>>> Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
->>>> Signed-off-by: Scott Branden <scott.branden@broadcom.com>
->>>> ---
->>> Some people solve the cross-compiling in Yocto
->>> by using pkg-config.
->>>
->>>
->>> For example,
->>>
->>> commit 067c650c456e758f933aaf87a202f841d34be269
->>> Author: Pavel Modilaynen <pavel.modilaynen@axis.com>
->>> Date:   Fri Jul 12 13:52:19 2019 +0200
->>>
->>>     dtc: Use pkg-config to locate libyaml
->>>
->>>     Using Makefile's wildcard with absolute path to detect
->>>     the presence of libyaml results in false-positive
->>>     detection when cross-compiling e.g. in yocto environment.
->>>
->>>
->>>
->>> mconf-cfg.sh already allows the path flexibility with pkg-config.
->>> Why do you want yet another hook?
->> I hope the yocto community can provide more details on this patch.
->> The yocto environment isolates the build environment from the host tools.
->> Running menuconfig with the upstream kernel does not work on the latest yocto without this patch.
-> Sorry for not commenting on the origin patch, gmail buried it within
-> some other threads, but luckily this one popped up.
+> Hi Bruce,
 >
-> It is true that we've been carrying this for several years to deal with
-> the fact that the native sysroot is not searched by the pkg-config
-> called by mconf-cfg.sh (since it is separate from host and target
-> pkg-config).
->
-> As it turns out, in the past few weeks, we have come up with a way
-> to inject those native sysroot components into pkg-config without
-> the need for any changes to the scripts.
->
-> Scott: if you try again the the latest oe-core, and are still seeing
-> the problem with the mainline kernel, ping me, and we can see if
-> the pkg-config fix isn't holding for you, at that point, yes, we may
-> still need a hook like this to solve the problem.
-Try reverting this kernel patch from linux-yocto and menuconfig will fail.
-
-menuconfig actually did work with the upstream kernel until the yocto change below was introduced:
-"cml1.bbclass: Handle ncurses-native being available via pkg-config"
-https://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?h=master-next&id=ce447d70df386ca55ce1672478b245851556374e
-
-> Cheers,
->
-> Bruce
->
->
->
->>>>  scripts/kconfig/mconf-cfg.sh | 8 ++++++++
->>>>  1 file changed, 8 insertions(+)
->>>>  mode change 100755 => 100644 scripts/kconfig/mconf-cfg.sh
->>>>
->>>> diff --git a/scripts/kconfig/mconf-cfg.sh b/scripts/kconfig/mconf-cfg.sh
->>>> old mode 100755
->>>> new mode 100644
->>>> index aa68ec95620d..32448bc198a5
->>>> --- a/scripts/kconfig/mconf-cfg.sh
->>>> +++ b/scripts/kconfig/mconf-cfg.sh
->>>> @@ -4,6 +4,14 @@
->>>>  PKG="ncursesw"
->>>>  PKG2="ncurses"
->>>>
->>>> +if [ "$CROSS_CURSES_LIB" != "" ]; then
->>>> +    echo libs=\'$CROSS_CURSES_LIB\'
->>>> +    if [ x"$CROSS_CURSES_INC" != x ]; then
->>>> +       echo cflags=\'$CROSS_CURSES_INC\'
->>>> +    fi
->>>> +    exit 0
->>>> +fi
->>>> +
->>>>  if [ -n "$(command -v pkg-config)" ]; then
->>>>         if pkg-config --exists $PKG; then
->>>>                 echo cflags=\"$(pkg-config --cflags $PKG)\"
->>>> --
->>>> 2.17.1
->>>>
+> On 2020-12-01 11:01 a.m., Bruce Ashfield wrote:
+> > On Tue, Dec 1, 2020 at 12:19 PM Scott Branden
+> > <scott.branden@broadcom.com> wrote:
+> >> Hi Masahiro,
+> >>
+> >> On 2020-12-01 4:25 a.m., Masahiro Yamada wrote:
+> >>> On Sat, Nov 28, 2020 at 9:45 AM Scott Branden
+> >>> <scott.branden@broadcom.com> wrote:
+> >>>> From: Bruce Ashfield <bruce.ashfield@windriver.com>
+> >>>>
+> >>>> In some cross build environments such as the Yocto Project build
+> >>>> environment it provides an ncurses library that is compiled
+> >>>> differently than the host's version.  This causes display corruption
+> >>>> problems when the host's curses includes are used instead of the
+> >>>> includes from the provided compiler are overridden.  There is a second
+> >>>> case where there is no curses libraries at all on the host system and
+> >>>> menuconfig will just fail entirely.
+> >>>>
+> >>>> The solution is simply to allow an override variable in
+> >>>> check-lxdialog.sh for environments such as the Yocto Project.  Adding
+> >>>> a CROSS_CURSES_LIB and CROSS_CURSES_INC solves the issue and allowing
+> >>>> compiling and linking against the right headers and libraries.
+> >>>>
+> >>>> Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
+> >>>> cc: Michal Marek <mmarek@suse.cz>
+> >>>> cc: linux-kbuild@vger.kernel.org
+> >>>> Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
+> >>>> Signed-off-by: Scott Branden <scott.branden@broadcom.com>
+> >>>> ---
+> >>> Some people solve the cross-compiling in Yocto
+> >>> by using pkg-config.
+> >>>
+> >>>
+> >>> For example,
+> >>>
+> >>> commit 067c650c456e758f933aaf87a202f841d34be269
+> >>> Author: Pavel Modilaynen <pavel.modilaynen@axis.com>
+> >>> Date:   Fri Jul 12 13:52:19 2019 +0200
+> >>>
+> >>>     dtc: Use pkg-config to locate libyaml
+> >>>
+> >>>     Using Makefile's wildcard with absolute path to detect
+> >>>     the presence of libyaml results in false-positive
+> >>>     detection when cross-compiling e.g. in yocto environment.
+> >>>
+> >>>
+> >>>
+> >>> mconf-cfg.sh already allows the path flexibility with pkg-config.
+> >>> Why do you want yet another hook?
+> >> I hope the yocto community can provide more details on this patch.
+> >> The yocto environment isolates the build environment from the host
+> tools.
+> >> Running menuconfig with the upstream kernel does not work on the latest
+> yocto without this patch.
+> > Sorry for not commenting on the origin patch, gmail buried it within
+> > some other threads, but luckily this one popped up.
+> >
+> > It is true that we've been carrying this for several years to deal with
+> > the fact that the native sysroot is not searched by the pkg-config
+> > called by mconf-cfg.sh (since it is separate from host and target
+> > pkg-config).
+> >
+> > As it turns out, in the past few weeks, we have come up with a way
+> > to inject those native sysroot components into pkg-config without
+> > the need for any changes to the scripts.
+> >
+> > Scott: if you try again the the latest oe-core, and are still seeing
+> > the problem with the mainline kernel, ping me, and we can see if
+> > the pkg-config fix isn't holding for you, at that point, yes, we may
+> > still need a hook like this to solve the problem.
+> Try reverting this kernel patch from linux-yocto and menuconfig will fail.
 >
 
+s/this/your/ ?
 
---000000000000e3548205b57084f6
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+I'm continuing to carry it, since that tree is part of more than just yocto
+builds so
+it is needed for other reasons as well.
 
-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
-I/3RRboOeC9M13VNr5feU91O0iDoMreAgPQJ0Lo7YrodKYug0Tt/fFDjkW3v3VIbEr2liUN69U0C
-AwEAAaOCAdEwggHNMA4GA1UdDwEB/wQEAwIFoDCBngYIKwYBBQUHAQEEgZEwgY4wTQYIKwYBBQUH
-MAKGQWh0dHA6Ly9zZWN1cmUuZ2xvYmFsc2lnbi5jb20vY2FjZXJ0L2dzcGVyc29uYWxzaWduMnNo
-YTJnM29jc3AuY3J0MD0GCCsGAQUFBzABhjFodHRwOi8vb2NzcDIuZ2xvYmFsc2lnbi5jb20vZ3Nw
-ZXJzb25hbHNpZ24yc2hhMmczME0GA1UdIARGMEQwQgYKKwYBBAGgMgEoCjA0MDIGCCsGAQUFBwIB
-FiZodHRwczovL3d3dy5nbG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzAJBgNVHRMEAjAAMEQGA1Ud
-HwQ9MDswOaA3oDWGM2h0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vZ3NwZXJzb25hbHNpZ24yc2hh
-MmczLmNybDAlBgNVHREEHjAcgRpzY290dC5icmFuZGVuQGJyb2FkY29tLmNvbTATBgNVHSUEDDAK
-BggrBgEFBQcDBDAfBgNVHSMEGDAWgBRpcoJiMWeVRIV3kYDEBDZJnXsLYTAdBgNVHQ4EFgQUWOK7
-qiyDSt/IDm/SRcNi/sTEiyswDQYJKoZIhvcNAQELBQADggEBAEe2edd4F9tpp0GPmrFrQ+xp9kY7
-uxBzPdCw588bgVrPemjLwiwV37XTT4iWJtNhPfEpaguM6jeLm58LCvHq5/IBjcyHyf4URQVwAg7B
-pqkH8/M+IBstu4/D+znPHB59X+c+au3Q8D+xoNFd7I30kaE+oJuBuFsGXRBc0Ci+FM86x9k7SF8U
-aui1E7Y9wDfsRSCL2TSwU773f09WkrvVdlKxNqQZj2z7bQUUn+yfXdFfBz0LqlYNfn7xJOpQE3HI
-H4jq6U9+b0Qf+J0n0wyysjXPSeQ7EKXVkT8dM2KSpIN86v5dd9LkAz3C1dmjuPRGEC8ZhI1IjMBt
-0itrn6C23NsxggJvMIICawIBATBtMF0xCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWdu
-IG52LXNhMTMwMQYDVQQDEypHbG9iYWxTaWduIFBlcnNvbmFsU2lnbiAyIENBIC0gU0hBMjU2IC0g
-RzMCDFtD165RQeUC8DvoCDANBglghkgBZQMEAgEFAKCB1DAvBgkqhkiG9w0BCQQxIgQgZQuCjUm0
-4c9uAcJpKY9lj9AXEyaPssyF5QTN/qHRj4YwGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkq
-hkiG9w0BCQUxDxcNMjAxMjAyMDA0MjM0WjBpBgkqhkiG9w0BCQ8xXDBaMAsGCWCGSAFlAwQBKjAL
-BglghkgBZQMEARYwCwYJYIZIAWUDBAECMAoGCCqGSIb3DQMHMAsGCSqGSIb3DQEBCjALBgkqhkiG
-9w0BAQcwCwYJYIZIAWUDBAIBMA0GCSqGSIb3DQEBAQUABIIBAJZWGKzqkmZ7h+iRHSkFUncIolCs
-BdZaKyO+yb65P59ww8/u7qvIDChUKgp6B8trtcUIm23eseFbN6OYeDyTMG67nIfrk+VfKsjT/K23
-h2EQclG7fhGjzAkm+p8ziwRJ3kK5P39sYARMNyWS/7Kh/Z7c+wYWXtVJZFyJCLIyfvPb95kpCK6e
-cHf7bCc7e3ZbnPv91bk7aI6gJtJhFNgCxm2DmL1s2r6dZTDnYhxPZhXo8jGwT3C87KQINW7ogJB2
-2uMnnlNUkB78rH5asq8tjOPJZqwdRbUtfFuBLKK7HLfVkq6yBcTaNrqosMVJ5byTN0riOZMB4nX8
-L0sc/FD0CnQ=
 
---000000000000e3548205b57084f6--
+
+> menuconfig actually did work with the upstream kernel until the yocto
+> change below was introduced:
+> "cml1.bbclass: Handle ncurses-native being available via pkg-config"
+>
+> https://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?h=master-next&id=ce447d70df386ca55ce1672478b245851556374e
+>
+>
+That's the one I was referring to.
+
+You need to take that up with the submitter of that change, since it has
+broken
+your workflow.
+
+My change will indeed fix (mask) it, but considering that commit claims to
+solve
+the same problem, it should be root caused on the oe core mailing list.
+
+Bruce
+
+
+
+> > Cheers,
+> >
+> > Bruce
+> >
+> >
+> >
+> >>>>  scripts/kconfig/mconf-cfg.sh | 8 ++++++++
+> >>>>  1 file changed, 8 insertions(+)
+> >>>>  mode change 100755 => 100644 scripts/kconfig/mconf-cfg.sh
+> >>>>
+> >>>> diff --git a/scripts/kconfig/mconf-cfg.sh
+> b/scripts/kconfig/mconf-cfg.sh
+> >>>> old mode 100755
+> >>>> new mode 100644
+> >>>> index aa68ec95620d..32448bc198a5
+> >>>> --- a/scripts/kconfig/mconf-cfg.sh
+> >>>> +++ b/scripts/kconfig/mconf-cfg.sh
+> >>>> @@ -4,6 +4,14 @@
+> >>>>  PKG="ncursesw"
+> >>>>  PKG2="ncurses"
+> >>>>
+> >>>> +if [ "$CROSS_CURSES_LIB" != "" ]; then
+> >>>> +    echo libs=\'$CROSS_CURSES_LIB\'
+> >>>> +    if [ x"$CROSS_CURSES_INC" != x ]; then
+> >>>> +       echo cflags=\'$CROSS_CURSES_INC\'
+> >>>> +    fi
+> >>>> +    exit 0
+> >>>> +fi
+> >>>> +
+> >>>>  if [ -n "$(command -v pkg-config)" ]; then
+> >>>>         if pkg-config --exists $PKG; then
+> >>>>                 echo cflags=\"$(pkg-config --cflags $PKG)\"
+> >>>> --
+> >>>> 2.17.1
+> >>>>
+> >
+>
+>
+
+-- 
+- Thou shalt not follow the NULL pointer, for chaos and madness await thee
+at its end
+- "Use the force Harry" - Gandalf, Star Trek II
+
+--000000000000495e6a05b5713768
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div class=3D"gmail_default" style=3D"fon=
+t-size:small"><br></div></div><br><div class=3D"gmail_quote"><div dir=3D"lt=
+r" class=3D"gmail_attr">On Tue, Dec 1, 2020 at 7:42 PM Scott Branden &lt;<a=
+ href=3D"mailto:scott.branden@broadcom.com">scott.branden@broadcom.com</a>&=
+gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
+px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi Br=
+uce,<br>
+<br>
+On 2020-12-01 11:01 a.m., Bruce Ashfield wrote:<br>
+&gt; On Tue, Dec 1, 2020 at 12:19 PM Scott Branden<br>
+&gt; &lt;<a href=3D"mailto:scott.branden@broadcom.com" target=3D"_blank">sc=
+ott.branden@broadcom.com</a>&gt; wrote:<br>
+&gt;&gt; Hi Masahiro,<br>
+&gt;&gt;<br>
+&gt;&gt; On 2020-12-01 4:25 a.m., Masahiro Yamada wrote:<br>
+&gt;&gt;&gt; On Sat, Nov 28, 2020 at 9:45 AM Scott Branden<br>
+&gt;&gt;&gt; &lt;<a href=3D"mailto:scott.branden@broadcom.com" target=3D"_b=
+lank">scott.branden@broadcom.com</a>&gt; wrote:<br>
+&gt;&gt;&gt;&gt; From: Bruce Ashfield &lt;<a href=3D"mailto:bruce.ashfield@=
+windriver.com" target=3D"_blank">bruce.ashfield@windriver.com</a>&gt;<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; In some cross build environments such as the Yocto Project=
+ build<br>
+&gt;&gt;&gt;&gt; environment it provides an ncurses library that is compile=
+d<br>
+&gt;&gt;&gt;&gt; differently than the host&#39;s version.=C2=A0 This causes=
+ display corruption<br>
+&gt;&gt;&gt;&gt; problems when the host&#39;s curses includes are used inst=
+ead of the<br>
+&gt;&gt;&gt;&gt; includes from the provided compiler are overridden.=C2=A0 =
+There is a second<br>
+&gt;&gt;&gt;&gt; case where there is no curses libraries at all on the host=
+ system and<br>
+&gt;&gt;&gt;&gt; menuconfig will just fail entirely.<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; The solution is simply to allow an override variable in<br=
+>
+&gt;&gt;&gt;&gt; check-lxdialog.sh for environments such as the Yocto Proje=
+ct.=C2=A0 Adding<br>
+&gt;&gt;&gt;&gt; a CROSS_CURSES_LIB and CROSS_CURSES_INC solves the issue a=
+nd allowing<br>
+&gt;&gt;&gt;&gt; compiling and linking against the right headers and librar=
+ies.<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; Signed-off-by: Jason Wessel &lt;<a href=3D"mailto:jason.we=
+ssel@windriver.com" target=3D"_blank">jason.wessel@windriver.com</a>&gt;<br=
+>
+&gt;&gt;&gt;&gt; cc: Michal Marek &lt;<a href=3D"mailto:mmarek@suse.cz" tar=
+get=3D"_blank">mmarek@suse.cz</a>&gt;<br>
+&gt;&gt;&gt;&gt; cc: <a href=3D"mailto:linux-kbuild@vger.kernel.org" target=
+=3D"_blank">linux-kbuild@vger.kernel.org</a><br>
+&gt;&gt;&gt;&gt; Signed-off-by: Bruce Ashfield &lt;<a href=3D"mailto:bruce.=
+ashfield@windriver.com" target=3D"_blank">bruce.ashfield@windriver.com</a>&=
+gt;<br>
+&gt;&gt;&gt;&gt; Signed-off-by: Scott Branden &lt;<a href=3D"mailto:scott.b=
+randen@broadcom.com" target=3D"_blank">scott.branden@broadcom.com</a>&gt;<b=
+r>
+&gt;&gt;&gt;&gt; ---<br>
+&gt;&gt;&gt; Some people solve the cross-compiling in Yocto<br>
+&gt;&gt;&gt; by using pkg-config.<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; For example,<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; commit 067c650c456e758f933aaf87a202f841d34be269<br>
+&gt;&gt;&gt; Author: Pavel Modilaynen &lt;<a href=3D"mailto:pavel.modilayne=
+n@axis.com" target=3D"_blank">pavel.modilaynen@axis.com</a>&gt;<br>
+&gt;&gt;&gt; Date:=C2=A0 =C2=A0Fri Jul 12 13:52:19 2019 +0200<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0dtc: Use pkg-config to locate libyaml<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0Using Makefile&#39;s wildcard with absolute=
+ path to detect<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0the presence of libyaml results in false-po=
+sitive<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0detection when cross-compiling e.g. in yoct=
+o environment.<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; mconf-cfg.sh already allows the path flexibility with pkg-conf=
+ig.<br>
+&gt;&gt;&gt; Why do you want yet another hook?<br>
+&gt;&gt; I hope the yocto community can provide more details on this patch.=
+<br>
+&gt;&gt; The yocto environment isolates the build environment from the host=
+ tools.<br>
+&gt;&gt; Running menuconfig with the upstream kernel does not work on the l=
+atest yocto without this patch.<br>
+&gt; Sorry for not commenting on the origin patch, gmail buried it within<b=
+r>
+&gt; some other threads, but luckily this one popped up.<br>
+&gt;<br>
+&gt; It is true that we&#39;ve been carrying this for several years to deal=
+ with<br>
+&gt; the fact that the native sysroot is not searched by the pkg-config<br>
+&gt; called by mconf-cfg.sh (since it is separate from host and target<br>
+&gt; pkg-config).<br>
+&gt;<br>
+&gt; As it turns out, in the past few weeks, we have come up with a way<br>
+&gt; to inject those native sysroot components into pkg-config without<br>
+&gt; the need for any changes to the scripts.<br>
+&gt;<br>
+&gt; Scott: if you try again the the latest oe-core, and are still seeing<b=
+r>
+&gt; the problem with the mainline kernel, ping me, and we can see if<br>
+&gt; the pkg-config fix isn&#39;t holding for you, at that point, yes, we m=
+ay<br>
+&gt; still need a hook like this to solve the problem.<br>
+Try reverting this kernel patch from linux-yocto and menuconfig will fail.<=
+br></blockquote><div><br></div><div><div class=3D"gmail_default" style=3D"f=
+ont-size:small">s/this/your/ ?</div><div class=3D"gmail_default" style=3D"f=
+ont-size:small"><br></div><div class=3D"gmail_default" style=3D"font-size:s=
+mall">I&#39;m continuing to carry it, since that tree is part of more than =
+just yocto builds so</div><div class=3D"gmail_default" style=3D"font-size:s=
+mall">it is needed for other reasons as well.</div><br></div><div>=C2=A0</d=
+iv><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bord=
+er-left:1px solid rgb(204,204,204);padding-left:1ex">
+menuconfig actually did work with the upstream kernel until the yocto chang=
+e below was introduced:<br>
+&quot;cml1.bbclass: Handle ncurses-native being available via pkg-config&qu=
+ot;<br>
+<a href=3D"https://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?h=3Dmast=
+er-next&amp;id=3Dce447d70df386ca55ce1672478b245851556374e" rel=3D"noreferre=
+r" target=3D"_blank">https://git.yoctoproject.org/cgit/cgit.cgi/poky/commit=
+/?h=3Dmaster-next&amp;id=3Dce447d70df386ca55ce1672478b245851556374e</a><br>
+<br></blockquote><div><br></div><div><div class=3D"gmail_default" style=3D"=
+font-size:small">That&#39;s the one I was referring to.=C2=A0</div><div cla=
+ss=3D"gmail_default" style=3D"font-size:small"><br></div><div class=3D"gmai=
+l_default" style=3D"font-size:small">You need to take that up with the subm=
+itter of that change, since it has broken</div><div class=3D"gmail_default"=
+ style=3D"font-size:small">your workflow.=C2=A0</div><div class=3D"gmail_de=
+fault" style=3D"font-size:small"><br></div><div class=3D"gmail_default" sty=
+le=3D"font-size:small">My change will indeed fix (mask) it, but considering=
+ that commit claims to solve</div><div class=3D"gmail_default" style=3D"fon=
+t-size:small">the same problem, it should be root caused on the oe core mai=
+ling list.</div><div class=3D"gmail_default" style=3D"font-size:small"><br>=
+</div><div class=3D"gmail_default" style=3D"font-size:small">Bruce</div><br=
+></div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0=
+px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+&gt; Cheers,<br>
+&gt;<br>
+&gt; Bruce<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+&gt;&gt;&gt;&gt;=C2=A0 scripts/kconfig/mconf-cfg.sh | 8 ++++++++<br>
+&gt;&gt;&gt;&gt;=C2=A0 1 file changed, 8 insertions(+)<br>
+&gt;&gt;&gt;&gt;=C2=A0 mode change 100755 =3D&gt; 100644 scripts/kconfig/mc=
+onf-cfg.sh<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; diff --git a/scripts/kconfig/mconf-cfg.sh b/scripts/kconfi=
+g/mconf-cfg.sh<br>
+&gt;&gt;&gt;&gt; old mode 100755<br>
+&gt;&gt;&gt;&gt; new mode 100644<br>
+&gt;&gt;&gt;&gt; index aa68ec95620d..32448bc198a5<br>
+&gt;&gt;&gt;&gt; --- a/scripts/kconfig/mconf-cfg.sh<br>
+&gt;&gt;&gt;&gt; +++ b/scripts/kconfig/mconf-cfg.sh<br>
+&gt;&gt;&gt;&gt; @@ -4,6 +4,14 @@<br>
+&gt;&gt;&gt;&gt;=C2=A0 PKG=3D&quot;ncursesw&quot;<br>
+&gt;&gt;&gt;&gt;=C2=A0 PKG2=3D&quot;ncurses&quot;<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; +if [ &quot;$CROSS_CURSES_LIB&quot; !=3D &quot;&quot; ]; t=
+hen<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 echo libs=3D\&#39;$CROSS_CURSES_LIB\&#39;<b=
+r>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 if [ x&quot;$CROSS_CURSES_INC&quot; !=3D x =
+]; then<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0echo cflags=3D\&#39;$CROSS_CUR=
+SES_INC\&#39;<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 fi<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 exit 0<br>
+&gt;&gt;&gt;&gt; +fi<br>
+&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt;=C2=A0 if [ -n &quot;$(command -v pkg-config)&quot; ]; then=
+<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if pkg-config --exists $P=
+KG; then<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0echo cflags=3D\&quot;$(pkg-config --cflags $PKG)\&quot;<br>
+&gt;&gt;&gt;&gt; --<br>
+&gt;&gt;&gt;&gt; 2.17.1<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;<br>
+<br>
+</blockquote></div><br clear=3D"all"><div><br></div>-- <br><div dir=3D"ltr"=
+ class=3D"gmail_signature">- Thou shalt not follow the NULL pointer, for ch=
+aos and madness await thee at its end<br>- &quot;Use the force Harry&quot; =
+- Gandalf, Star Trek II<br><br></div></div>
+
+--000000000000495e6a05b5713768--
