@@ -1,17 +1,17 @@
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com (NAM04-DM6-obe.outbound.protection.outlook.com [40.107.102.47])
- by mx.groups.io with SMTP id smtpd.web11.5465.1606918286998496304
+Received: from NAM04-CO1-obe.outbound.protection.outlook.com (NAM04-CO1-obe.outbound.protection.outlook.com [40.107.69.67])
+ by mx.groups.io with SMTP id smtpd.web10.5265.1606918300022675690
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Dec 2020 06:11:27 -0800
+ Wed, 02 Dec 2020 06:11:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=E+EQJHjt;
- spf=pass (domain: windriver.com, ip: 40.107.102.47, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Utpw/cYs;
+ spf=pass (domain: windriver.com, ip: 40.107.69.67, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=MHfC3wICevk1XElXYnPGfN4ayp/3Q7m28t/0/17jNr+/07fl45NvwZ9y+c1SboU8oYMra4JEw5NPV0rj3YryuA6FGw6lgyIrW/8hzvZNFlJz/SThYR7yW33q+Vg1q1BS7XfZ5jSj83XLSTPdtbASuM++8G5yX9ZMBhcBs2BOYe5jjtsY+AcHsvDKX896AcxPphY+N5mTx7H+GP3kkJvzPbYpMrzNt64DyvBtNBGP7fGgDFbLl8mFnvaMY+e3waaEZAz8dBaTVlqLiRaDwlRus27UyJYUOpvJojJ7dCfH/eB7smR9sGQ20JI19JNEHNoud8sfTHrfXU9vKzibisBi8g==
+ b=SnnLEVzi1KbZshgZ5JeX3MiKMOB/wtCnegNCMVd2sb89EPQ32uMxVNBD62M988HWQDfAT/2OsWPK7hIJOysBA+5EFnvpI4dej8ZW6hU0faGjkY5R3NSvNSKJI3Js/61focQ+EEugr4SUceatl5RR/z7R0XqIiTdm5AKG/BuNYrBug8RAG5MHJPYMEe9Lyq/EfcDeQxckLJM2MWlUnLciUY9FwM+E/1u8l+8bELoVHauX4HrKfQXN4b7Fwb5kan6r8EzZRTTv9q6Omrs8tHZ2/y9UYSsPAxAmb19OFNFZJVE7lhDaOiS+1ioaP+kv2dbR2vDnWEKVm/mqsnJAT4A8rA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XxK739qVFH0FTFYX3PyoinTVORW8/AE+4e3b6sLYOAQ=;
- b=oCqsHATlvv6jUtxZKE0foxaOqUjBo8WaZjIj3dHMQ1otQVxd95panE3yUq2QMshErdu4wpT0R58BaqoUsT6osZ4iQgoLz8uLnhU8zAbR9GlEAyBNYzcGdi6bZMI9o0JA1OsbQI/KyFUd6/1LtLry+0LlVv/mDrl7N0lkXKf8zpgw26IrWcJd20+68ZEbpt2Qjydgxpu43hOwZujoOvvQKpwi7LWNQZdGiOfgNbz6vDFjbVwpQTJJAzZ/U8GMxjyXyixSOZ1clLAgPRoQ1PKQ1HqYsdMeUdV3bYtUuKkRdTbTYHoJHkzaOcNttawxqJrnFYX0vUBjtJxoAWrF08sAYw==
+ bh=9vpiONXmLhYF9+FyhGfmIEjdJikG/S0OuK0M8jXpnjM=;
+ b=VqNIjVnUVv52KGOYrAf4YwM9cA8ckExAp89sPQBvCq98K1bWWJ9AIIaN4Lh3sP3vhO6jKPSDiTQMU1wW+0gVb8j/jWNs8lPIbbRDYJoSS1wewdBZO4mPpZCJGPOCMvTSAbwl5LqLK3e7qqnRzihJ0QSqoou3bldeMLGwOc1/rcr44NkNX20JXHGYw1oz1DiOLA6y9YhobinI/qF/8nGATqgUejVeAsXcIeJy5x+mmNkc7d5EpMmCkSggJep8ag9m+dUJd6rfBxiv05DH4TNkbt7t6ve4v/zQqosDfRRKGdLNiRN7E569Xoyb6zSheN/5Z9U7pAPGi8fiaB3YpQkb4w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XxK739qVFH0FTFYX3PyoinTVORW8/AE+4e3b6sLYOAQ=;
- b=E+EQJHjt8hA3oa6z2cCL3JDuEeMpYQk/dXsI3VTmfJGwB0jTZiOto0+M16Cc/EmG4rJC2EGtgKSkx54rRnh8Ns/EtZNYb9aXM2ophf2D5QjGSNT5GoYlnmRPB/2P66c275lkLaf3BGIdQbqr1Y449wb1qW6vMzMTW/1XQLscz2g=
+ bh=9vpiONXmLhYF9+FyhGfmIEjdJikG/S0OuK0M8jXpnjM=;
+ b=Utpw/cYs+9PQhgaM0m63SZN+ZOfU3wzsMQGLyMLsTVlLg02Pmn60KPGRU6RGSNVsrTSZEstbz87fT9M4z9pOeO+DyKwtTgAj0FGom39yB0k6Fuk6KmPslNTXEFvXRD0pqcfO3YMR+h78RQ0xfQCPmEEcqytHJPl/iUAwX7bcXjM=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,81 +28,81 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by SJ0PR11MB4864.namprd11.prod.outlook.com (2603:10b6:a03:2d4::21) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3611.24; Wed, 2 Dec
- 2020 14:11:26 +0000
+ 2020 14:11:38 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::3b:680c:aa2f:e498]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::3b:680c:aa2f:e498%4]) with mapi id 15.20.3632.017; Wed, 2 Dec 2020
- 14:11:26 +0000
-Subject: Re: [oe] [meta-python][PATCH 13/16] python3-pluggy: drop (moved to oe-core)
+ 14:11:37 +0000
+Subject: Re: [oe] [meta-python][PATCH 14/16] python3-pytest: drop (moved to oe-core)
 To: Tim Orling <ticotimo@gmail.com>, openembedded-devel@lists.openembedded.org
 References: <cover.1606592636.git.ticotimo@gmail.com>
- <a54682b5e4bbb4d9ffe39c25431804f4c526d605.1606592636.git.ticotimo@gmail.com>
+ <3b068dbee56cd4fa70fabc89f2fd860a57c0163d.1606592636.git.ticotimo@gmail.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <50a85df0-af23-8ac0-ff5b-e984a001dd5d@windriver.com>
-Date: Wed, 2 Dec 2020 09:11:23 -0500
+Message-ID: <eda9af08-f639-ca6f-0eca-592d44e5f1ce@windriver.com>
+Date: Wed, 2 Dec 2020 09:11:34 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
-In-Reply-To: <a54682b5e4bbb4d9ffe39c25431804f4c526d605.1606592636.git.ticotimo@gmail.com>
+In-Reply-To: <3b068dbee56cd4fa70fabc89f2fd860a57c0163d.1606592636.git.ticotimo@gmail.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: YTXPR0101CA0057.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:1::34) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: YTXPR0101CA0045.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:1::22) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by YTXPR0101CA0057.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:1::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3632.17 via Frontend Transport; Wed, 2 Dec 2020 14:11:25 +0000
+Received: from [192.168.0.55] (174.115.236.231) by YTXPR0101CA0045.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:1::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3632.17 via Frontend Transport; Wed, 2 Dec 2020 14:11:36 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 76579a35-5bdf-4e88-0cfa-08d896cc27b4
+X-MS-Office365-Filtering-Correlation-Id: cfe118a7-0764-4d29-05f5-08d896cc2e7d
 X-MS-TrafficTypeDiagnostic: SJ0PR11MB4864:
 X-Microsoft-Antispam-PRVS: 
-	<SJ0PR11MB4864E65588150699E55D6BBC9FF30@SJ0PR11MB4864.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:409;
+	<SJ0PR11MB4864227EEEA972A6890BD33D9FF30@SJ0PR11MB4864.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:5516;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	i4zMFf8B/31ID3R9TWaCR28hg5mPlpjGvknvHEZLr5NNMs2qz213LsxwmJ3IsOThJwJfOGlMl/JKlLlNi7gBZ1A3leyG5cWZqCJ6C1EGldaDGwqf0GlIovWSbFD4BBv+r6zbLy4sn7oIdBZ3TcjZZYCoK2Iib4wG7FcfU5TmwhtfKXvaGYft6IKYpKzuRr/3uQJ4L6+hzc2RmBYrjXRoJCYdl4rrzbU+9MNkESyTHrN3Iv3Duk7HHyPqWSVcYu1Rtf7r1u0KAKKoYEZoCfpJ9Ulifa6uGZaFxXTlp4FM8k7To3RVeoNGoBTDYcOKftDstIOisH4eF2NEcbrfAZAtfFV5znr9jG0Ff14yC69Vk/EkyXB5cte5Y3KHGUcYja7B2H5vO/nYAep6eUAGs6qafIo4wya84hHwxkn2Pvi90CujZenXgwEfQOka9VMv1U5zsiIFZx3f6xEgBr97V3uSzSoOaigeELkUXMgUqm1zU68=
+	efNG/SiDmRI5FP/VxvTGKpQzsAqnCa9hCbm/on/OjGzg3hDGfX0q8am1YlC+FZDntYhXlF5GBxgGbg7KcK9bvxw5fOIuMcsGv9UPg5F48YpPrXbyes3rVQzRaMHnOCdSvP3OUv77NAtUAZegeICKN3vKCgM/692tY7kQQLvrY3bcRgtco0CvJkNJeObGqlxqATKG5vMso3rKMGFguGVVKDzLatLlhTf78l+n6O7IBimWSpX9LXPLiN+j8Zz6e8JFqUdbJCKjj/Zz7wLy/3q126PcVnqA1QTNcQGWWlDvr/nxhKnRv7ly+Mnltvdz9lioagNSYe8folUqvRUJn1rBO3jX7N30VJgARczzDJho6wwNJUaQQau8x4O9/ExK7b4wdAeDmCYd0tNwNfw+mzpAJrSikCUIP4vCHwHzYHPEi79zQCpucDhGhm5FQQmlHOcJRNU1enXzK+QjH+FDAmjK0PZiUv1lu5lN9HGqywl/mUiaVpH8rXAABwN5qH7KhdWv
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(39850400004)(396003)(346002)(376002)(136003)(956004)(8676002)(53546011)(4001150100001)(33964004)(52116002)(44832011)(6486002)(16576012)(316002)(86362001)(166002)(36756003)(26005)(83380400001)(2616005)(2906002)(66476007)(5660300002)(186003)(8936002)(966005)(478600001)(66946007)(31686004)(31696002)(66556008)(16526019)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?K29OZW8wSm5OdzZvY21PNFdiME1ob21leHRzekpzRUJvUGUrZm1mekMzK3ha?=
- =?utf-8?B?VTFQdXhNeW5YNUVLNkhCeFhHcExOWnZDRHZGNnIxaGR1VGQwdTZtNUptZEhx?=
- =?utf-8?B?UUpoekZGcFp4VW1IS1labmdoL3B4NklJb0pMZzhKRVVwZTh6SGFZbWJkNElY?=
- =?utf-8?B?Q3JyZXh3ZDQ2dE1QbG5Sd3NGMnhHNjA4MFBXZHNJTG11SEFDcU5YMTdiZUll?=
- =?utf-8?B?NDFtdE9WeGVWbmdRTFR4bWVtZmk5bnVXdHY1SkNBaCtPWitxcGNJS2tVRTRM?=
- =?utf-8?B?R2ZDUTJVMmUxSWFJREE0dEhoa1FVUGFDbEVjc09waS83ZElvOHNTOG9wK01O?=
- =?utf-8?B?MTRDcFlGZjFTaDA0R0FjdlNQQS9kL3ZZNDBTQnJ2NkNFeHo1QUU4b0JjUk1I?=
- =?utf-8?B?MVo4WWdkOTlXRHNyeHNocFNyeVBFdWxSWGpUNElMUWJSb09kTU9Va2RkN2h2?=
- =?utf-8?B?MmFocFMrN2RCaWlyVDAvd2RkZnRIQWJ1MFNBVExwY2JjSC92MVpQR1pRWTdL?=
- =?utf-8?B?cG5OdDdFWlhiY0pNZFpUQlhXSXJ2YTl4b2tMbDFJSklaQWloR0ZaUC9jajVV?=
- =?utf-8?B?UitjU3RHQjlYV1U0K1hEYklRTmdXMXkwcEtQWk56Vk5DU3RlS0NjZmpIT3cv?=
- =?utf-8?B?anJPS25CNmFOSGNCU2t4MngrWStsaXM1ZGpKNVVUYWZoOE5hNDhDMkRLTTMv?=
- =?utf-8?B?RHVlVGpFTnpteDFzb2g2TmhsU0NTbzA0UUMwSG5VNjExK2hQV0JBZXZqdEVP?=
- =?utf-8?B?VlFJVTd3WVhSbS9YR0RoTFJsQnJrS25IWURLY1ljL2tGYTlLYzlhTzR4YndL?=
- =?utf-8?B?WlNPTVkwYmJ1M2ZjMGVscEtnblNsMHRoZWpuRVBFMElaWEsxVUkzNGlNKzFX?=
- =?utf-8?B?Y1hFRVl5M2t2R2tOcUdKYmkydGJsenFKZVpuWVFZLzJOb0pSaFowbDNGQWs5?=
- =?utf-8?B?aFhvNXY0eTZyd05sRWxFcFN0bFg1OWJ3bXRMc0RkclJIcUV0RFgyb1U1V2wz?=
- =?utf-8?B?SEVCVFBHSnJWTTFZWFBTY0s0SUE2dU1mUi9iK2p4eCtlRHJSMjArVzhZMVlC?=
- =?utf-8?B?YlJsdXlFUEJjS3BnR20va1B4S2h0UTJqaGhWdHpGZzVIditPSytmTWkyOHN0?=
- =?utf-8?B?c0xzdUljWVpEUHhjbDgxUXpsTHpxOUd4dWJlODQ4WC9NLzdoVzNGWEM2WSta?=
- =?utf-8?B?Y2lON0gvOU45dDZZQnMwTndQNHU1Ull3c0RVT0w1eUtiU2I4cVFBMElnVHBZ?=
- =?utf-8?B?RUptNTVFRTRJOGRWL0FhT1hoOFNTYWlPbWwxYXl6KzNkVjR2L0hCcmtDZUln?=
- =?utf-8?Q?gEY98bJRvZ50wnDW2PU5/hlRoOgo50Be4l?=
+	=?utf-8?B?b3BqbEZOMjNJczB4eWR1dzYwdFR3WWVKNzFpLzN0b01iL2pOL2xORzk2aU5s?=
+ =?utf-8?B?Rzdta1ladVFXUDRuS3pTQXRJVVBMQnlqQk9EZ1FvWFNSNUtFaFJzdUpSZmht?=
+ =?utf-8?B?RzM4b2NJcGdFNFgweTVvaDBsL3ExdXVxNmp0OHNMNXpqbGhvMmlIWkV2bFNh?=
+ =?utf-8?B?TUU3a3hnQlAyeGNSakNyck5VZWhkV1dob1ZiY3hzbmhDUUY4MHdqa205TWRJ?=
+ =?utf-8?B?VTF5aWhzV2lqWXJEZWlLVkQwTmgxcGVkcCttekFQenVJK0EyWFdDUWwyT3Rw?=
+ =?utf-8?B?dlBRRHZGMitCK3czZDNsZlFHTmhCdnpRYkVkUGwwajhlZ2RaQ29EbzN0bmF1?=
+ =?utf-8?B?bkd2cHI1bERoRkpZcXFXOUo5d2t2eThJMTF2NWd5UzQ0anAzSWlQT2tyRno3?=
+ =?utf-8?B?ZGh3bTV1NU1rRFY4SmNBRVQ1OHB2T1hSRlh2QXVBQzRXeVBwMUJ4Q1pQREtr?=
+ =?utf-8?B?dGRmSWFKR0gzelRqNG1RdHNidEI4LzhlY0dSc0VPVXVYc3lXaFdROGVYNkhs?=
+ =?utf-8?B?WmVRQTFKUmxleG56SmJHaExNTk1RVHk5Wm5mVkRpN21BeDRyZXo1WGQ5N08w?=
+ =?utf-8?B?aVl6c29hL1NQc3k3d0F5eE8wTk1wRXJlMDVuTldjS2ZkdW9ISmF0QXoyRjlR?=
+ =?utf-8?B?OXhFWWZLckdOc3NVdjBTREtuZUR6STZQNzI4QUh3N2pPck9GcmloK3p2QWNO?=
+ =?utf-8?B?WTh2dDJEdk9kV2lEVW1CMDh0c2ZNWVBFVGFFQ29Fb2hDSWJrVlFpMTZQNnR4?=
+ =?utf-8?B?OG5lemFUZjhIa3VZREpRMlFkZWZuMmNXQUVYcWd1emxjWThOVUdyeWFscktM?=
+ =?utf-8?B?eDEraWRwMHJZcWVlV3cvaithdGJpWGczVnlQZlJacFEvQjM0cklodXFXbUZ5?=
+ =?utf-8?B?SCsxNVFkTGRON0ZPMTlWVVV0d0RjTTBrMXZHQ3pWWHE4T28zZUN5eE9iQ092?=
+ =?utf-8?B?bndLL3Y1SlhLZ216YTgrR0JHdjUrNDB1VVdPbVFnclphZDF6czJOVHEvcGVm?=
+ =?utf-8?B?QTFXMy9WVHBDODIrYzlXOWE3RnNhTmp4NThwY1g0dnllbWV0dFQzVXFYaG0x?=
+ =?utf-8?B?eUo3UlYrcnROcUtGdkVyMzg2d09UZHh5UU5qQ21kdmQxdmpGOVgzamtHZHJL?=
+ =?utf-8?B?TjkxbG5VNjVlcUE4QUJFeVpiSnNMVFd5cmVmYTlRWWRBTk1JUzk2OGpzUnJC?=
+ =?utf-8?B?MXdCQkxXSHhGQ09DampPVHlJTU91UXhiRHBzQU8xVUhzT3ZwSFVaT2dtd0dm?=
+ =?utf-8?B?cHZNTHEvV054QXhuTUh6ZUppbm9iUjZmbXNWU0VrQmgvK1Q3ZFg5ZzRlcEtT?=
+ =?utf-8?Q?sAzGqjRoniqUc5pKdaZ69C/755blF/WqY7?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 76579a35-5bdf-4e88-0cfa-08d896cc27b4
+X-MS-Exchange-CrossTenant-Network-Message-Id: cfe118a7-0764-4d29-05f5-08d896cc2e7d
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Dec 2020 14:11:25.9479
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Dec 2020 14:11:37.3363
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qzbg+XhCkiSUNdSvKwcM7TBbGdSsgf5TPk4h9YCRf8gDOEvgkrgQUv4haIUFJP8V1L/5dSWwZb2WznfmdNuLg4mQszwPaYSnlXvWG54s1sY=
+X-MS-Exchange-CrossTenant-UserPrincipalName: QLaLqKHBLww3KiUzoVPvOa0dRj4b7WZnel//VyVlOTcvK293Ny/w4ldymM+Tu/myOFQUnx81MIxKWuGcY2Yklo4lqWAZJrTY3aAWleOSA+M=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB4864
 Content-Type: multipart/alternative;
- boundary="------------CC1963E39D9BDAD69C15E262"
+ boundary="------------76FE48921F8F26E4B17FCFC9"
 Content-Language: en-US
 
---------------CC1963E39D9BDAD69C15E262
+--------------76FE48921F8F26E4B17FCFC9
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -115,54 +115,101 @@ On 2020-11-28 2:46 p.m., Tim Orling wrote:
 > Signed-off-by: Tim Orling <ticotimo@gmail.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python3-pluggy/run-ptest           |  3 ---
->   .../python/python3-pluggy_0.13.1.bb           | 27 -------------------
->   2 files changed, 30 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python3-pluggy/run-ptest
->   delete mode 100644 meta-python/recipes-devtools/python/python3-pluggy_0.13.1.bb
+>   ...he-setup_requires-for-setuptools-scm.patch | 39 -------------------
+>   .../python/python3-pytest_6.1.2.bb            | 38 ------------------
+>   2 files changed, 77 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
+>   delete mode 100644 meta-python/recipes-devtools/python/python3-pytest_6.1.2.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pluggy/run-ptest b/meta-python/recipes-devtools/python/python3-pluggy/run-ptest
+> diff --git a/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch b/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
 > deleted file mode 100644
-> index b63c4de0d9..0000000000
-> --- a/meta-python/recipes-devtools/python/python3-pluggy/run-ptest
+> index 8c5c17247e..0000000000
+> --- a/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
 > +++ /dev/null
-> @@ -1,3 +0,0 @@
-> -#!/bin/sh
+> @@ -1,39 +0,0 @@
+> -From ff784f4803ab33f5e3389e40d038d52d1e211843 Mon Sep 17 00:00:00 2001
+> -From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+> -Date: Wed, 28 Aug 2019 16:12:27 +0900
+> -Subject: [PATCH] [PATCH] setup.py: remove the setup_requires for
+> - setuptools-scm
 > -
-> -pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-> diff --git a/meta-python/recipes-devtools/python/python3-pluggy_0.13.1.bb b/meta-python/recipes-devtools/python/python3-pluggy_0.13.1.bb
+> -The setup_requires argument forces the download of the egg file for setuptools-scm
+> -during the do_compile phase.  This download is incompatible with the typical fetch
+> -and mirror structure.  The only usage of scm is the generation of the _version.py
+> -file and in the release tarball it is already correctly created
+> -
+> -Upstream-Status: Inappropriate [oe specific]
+> -
+> -Signed-off-by: Derek Straka <derek@asterius.io>
+> -
+> -Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+> -
+> -Rebase for pytest 6.1.0.
+> -
+> -Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> ----
+> - setup.cfg | 1 -
+> - 1 file changed, 1 deletion(-)
+> -
+> -diff --git a/setup.cfg b/setup.cfg
+> -index 60f6564..c4d1471 100644
+> ---- a/setup.cfg
+> -+++ b/setup.cfg
+> -@@ -55,7 +55,6 @@ package_dir =
+> -       =src
+> - setup_requires =
+> -       setuptools>=40.0
+> --      setuptools-scm
+> - zip_safe = no
+> -
+> - [options.entry_points]
+> ---
+> -2.17.1
+> -
+> diff --git a/meta-python/recipes-devtools/python/python3-pytest_6.1.2.bb b/meta-python/recipes-devtools/python/python3-pytest_6.1.2.bb
 > deleted file mode 100644
-> index d3e0365ca1..0000000000
-> --- a/meta-python/recipes-devtools/python/python3-pluggy_0.13.1.bb
+> index 6872da5cfa..0000000000
+> --- a/meta-python/recipes-devtools/python/python3-pytest_6.1.2.bb
 > +++ /dev/null
-> @@ -1,27 +0,0 @@
-> -SUMMARY = "Plugin and hook calling mechanisms for python"
-> -HOMEPAGE = "https://github.com/pytest-dev/pluggy"
+> @@ -1,38 +0,0 @@
+> -SUMMARY = "Simple powerful testing with python"
+> -
 > -LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=1c8206d16fd5cc02fa9b0bb98955e5c2"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=81eb9f71d006c6b268cf4388e3c98f7b"
 > -
-> -SRC_URI[md5sum] = "7f610e28b8b34487336b585a3dfb803d"
-> -SRC_URI[sha256sum] = "15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0"
+> -SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch "
 > -
-> -DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
-> -RDEPENDS_${PN} += "${PYTHON_PN}-importlib-metadata \
-> -                   ${PYTHON_PN}-more-itertools \
+> -SRC_URI[sha256sum] = "c0a7e94a8cdbc5422a51ccdad8e6f1024795939cc89159a0ae7f0b316ad3823e"
+> -
+> -inherit update-alternatives pypi setuptools3
+> -
+> -RDEPENDS_${PN}_class-target += " \
+> -    ${PYTHON_PN}-attrs \
+> -    ${PYTHON_PN}-debugger \
+> -    ${PYTHON_PN}-doctest \
+> -    ${PYTHON_PN}-iniconfig \
+> -    ${PYTHON_PN}-json \
+> -    ${PYTHON_PN}-pluggy \
+> -    ${PYTHON_PN}-py \
+> -    ${PYTHON_PN}-setuptools \
+> -    ${PYTHON_PN}-six \
+> -    ${PYTHON_PN}-atomicwrites \
+> -    ${PYTHON_PN}-importlib-metadata \
+> -    ${PYTHON_PN}-pathlib2 \
+> -    ${PYTHON_PN}-wcwidth \
+> -    ${PYTHON_PN}-more-itertools \
+> -    ${PYTHON_PN}-packaging \
 > -"
 > -
-> -inherit pypi ptest setuptools3
+> -ALTERNATIVE_${PN} += "py.test pytest"
 > -
-> -SRC_URI += " \
-> -       file://run-ptest \
-> -"
+> -NATIVE_LINK_NAME[pytest] = "${bindir}/pytest"
+> -ALTERNATIVE_TARGET[pytest] = "${bindir}/pytest"
 > -
-> -RDEPENDS_${PN}-ptest += " \
-> -       ${PYTHON_PN}-pytest \
-> -"
+> -ALTERNATIVE_LINK_NAME[py.test] = "${bindir}/py.test"
+> -ALTERNATIVE_TARGET[py.test] = "${bindir}/py.test"
 > -
-> -do_install_ptest() {
-> -       install -d ${D}${PTEST_PATH}/testing
-> -       cp -rf ${S}/testing/* ${D}${PTEST_PATH}/testing/
-> -}
+> -BBCLASSEXTEND = "native nativesdk"
 > --
 > 2.25.0
 >
@@ -170,7 +217,7 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
 >
 
---------------CC1963E39D9BDAD69C15E262
+--------------76FE48921F8F26E4B17FCFC9
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -183,7 +230,7 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2020-11-28 2:46 p.m., Tim Orling
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:a54682b5e4bbb4d9ffe39c25431804f4c526d605.1606592636.git.ticotimo@gmail.com">
+    <blockquote type="cite" cite="mid:3b068dbee56cd4fa70fabc89f2fd860a57c0163d.1606592636.git.ticotimo@gmail.com">
       <pre class="moz-quote-pre" wrap="">[Please note this e-mail is from an EXTERNAL e-mail address]
 
 From: Tim Orling <a class="moz-txt-link-rfc2396E" href="mailto:ticotimo@gmail.com">&lt;ticotimo@gmail.com&gt;</a>
@@ -191,57 +238,104 @@ From: Tim Orling <a class="moz-txt-link-rfc2396E" href="mailto:ticotimo@gmail.co
 Signed-off-by: Tim Orling <a class="moz-txt-link-rfc2396E" href="mailto:ticotimo@gmail.com">&lt;ticotimo@gmail.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:a54682b5e4bbb4d9ffe39c25431804f4c526d605.1606592636.git.ticotimo@gmail.com">
+    <blockquote type="cite" cite="mid:3b068dbee56cd4fa70fabc89f2fd860a57c0163d.1606592636.git.ticotimo@gmail.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python3-pluggy/run-ptest           |  3 ---
- .../python/python3-pluggy_0.13.1.bb           | 27 -------------------
- 2 files changed, 30 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-pluggy/run-ptest
- delete mode 100644 meta-python/recipes-devtools/python/python3-pluggy_0.13.1.bb
+ ...he-setup_requires-for-setuptools-scm.patch | 39 -------------------
+ .../python/python3-pytest_6.1.2.bb            | 38 ------------------
+ 2 files changed, 77 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pytest_6.1.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-pluggy/run-ptest b/meta-python/recipes-devtools/python/python3-pluggy/run-ptest
+diff --git a/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch b/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
 deleted file mode 100644
-index b63c4de0d9..0000000000
---- a/meta-python/recipes-devtools/python/python3-pluggy/run-ptest
+index 8c5c17247e..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
 +++ /dev/null
-@@ -1,3 +0,0 @@
--#!/bin/sh
+@@ -1,39 +0,0 @@
+-From ff784f4803ab33f5e3389e40d038d52d1e211843 Mon Sep 17 00:00:00 2001
+-From: Yuan Chao <a class="moz-txt-link-rfc2396E" href="mailto:yuanc.fnst@cn.fujitsu.com">&lt;yuanc.fnst@cn.fujitsu.com&gt;</a>
+-Date: Wed, 28 Aug 2019 16:12:27 +0900
+-Subject: [PATCH] [PATCH] setup.py: remove the setup_requires for
+- setuptools-scm
 -
--pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;){printf &quot;%s: %s\n&quot;, $NF, $0}else{print}}'| awk '{if ($NF==&quot;PASS&quot; || $NF==&quot;FAIL&quot; || $NF==&quot;SKIP&quot; || $NF==&quot;XFAIL&quot; || $NF==&quot;XPASS&quot;) {$NF=&quot;&quot;;print $0}else{print}}'
-diff --git a/meta-python/recipes-devtools/python/python3-pluggy_0.13.1.bb b/meta-python/recipes-devtools/python/python3-pluggy_0.13.1.bb
+-The setup_requires argument forces the download of the egg file for setuptools-scm
+-during the do_compile phase.  This download is incompatible with the typical fetch
+-and mirror structure.  The only usage of scm is the generation of the _version.py
+-file and in the release tarball it is already correctly created
+-
+-Upstream-Status: Inappropriate [oe specific]
+-
+-Signed-off-by: Derek Straka <a class="moz-txt-link-rfc2396E" href="mailto:derek@asterius.io">&lt;derek@asterius.io&gt;</a>
+-
+-Signed-off-by: Yuan Chao <a class="moz-txt-link-rfc2396E" href="mailto:yuanc.fnst@cn.fujitsu.com">&lt;yuanc.fnst@cn.fujitsu.com&gt;</a>
+-
+-Rebase for pytest 6.1.0.
+-
+-Signed-off-by: Kai Kang <a class="moz-txt-link-rfc2396E" href="mailto:kai.kang@windriver.com">&lt;kai.kang@windriver.com&gt;</a>
+----
+- setup.cfg | 1 -
+- 1 file changed, 1 deletion(-)
+-
+-diff --git a/setup.cfg b/setup.cfg
+-index 60f6564..c4d1471 100644
+---- a/setup.cfg
+-+++ b/setup.cfg
+-@@ -55,7 +55,6 @@ package_dir =
+-       =src
+- setup_requires =
+-       setuptools&gt;=40.0
+--      setuptools-scm
+- zip_safe = no
+-
+- [options.entry_points]
+---
+-2.17.1
+-
+diff --git a/meta-python/recipes-devtools/python/python3-pytest_6.1.2.bb b/meta-python/recipes-devtools/python/python3-pytest_6.1.2.bb
 deleted file mode 100644
-index d3e0365ca1..0000000000
---- a/meta-python/recipes-devtools/python/python3-pluggy_0.13.1.bb
+index 6872da5cfa..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pytest_6.1.2.bb
 +++ /dev/null
-@@ -1,27 +0,0 @@
--SUMMARY = &quot;Plugin and hook calling mechanisms for python&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/pytest-dev/pluggy">&quot;https://github.com/pytest-dev/pluggy&quot;</a>
+@@ -1,38 +0,0 @@
+-SUMMARY = &quot;Simple powerful testing with python&quot;
+-
 -LICENSE = &quot;MIT&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=1c8206d16fd5cc02fa9b0bb98955e5c2">&quot;file://LICENSE;md5=1c8206d16fd5cc02fa9b0bb98955e5c2&quot;</a>
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=81eb9f71d006c6b268cf4388e3c98f7b">&quot;file://LICENSE;md5=81eb9f71d006c6b268cf4388e3c98f7b&quot;</a>
 -
--SRC_URI[md5sum] = &quot;7f610e28b8b34487336b585a3dfb803d&quot;
--SRC_URI[sha256sum] = &quot;15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0&quot;
+-SRC_URI_append = <a class="moz-txt-link-rfc2396E" href="file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch">&quot; file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch &quot;</a>
 -
--DEPENDS += &quot;${PYTHON_PN}-setuptools-scm-native&quot;
--RDEPENDS_${PN} += &quot;${PYTHON_PN}-importlib-metadata \
--                   ${PYTHON_PN}-more-itertools \
+-SRC_URI[sha256sum] = &quot;c0a7e94a8cdbc5422a51ccdad8e6f1024795939cc89159a0ae7f0b316ad3823e&quot;
+-
+-inherit update-alternatives pypi setuptools3
+-
+-RDEPENDS_${PN}_class-target += &quot; \
+-    ${PYTHON_PN}-attrs \
+-    ${PYTHON_PN}-debugger \
+-    ${PYTHON_PN}-doctest \
+-    ${PYTHON_PN}-iniconfig \
+-    ${PYTHON_PN}-json \
+-    ${PYTHON_PN}-pluggy \
+-    ${PYTHON_PN}-py \
+-    ${PYTHON_PN}-setuptools \
+-    ${PYTHON_PN}-six \
+-    ${PYTHON_PN}-atomicwrites \
+-    ${PYTHON_PN}-importlib-metadata \
+-    ${PYTHON_PN}-pathlib2 \
+-    ${PYTHON_PN}-wcwidth \
+-    ${PYTHON_PN}-more-itertools \
+-    ${PYTHON_PN}-packaging \
 -&quot;
 -
--inherit pypi ptest setuptools3
+-ALTERNATIVE_${PN} += &quot;py.test pytest&quot;
 -
--SRC_URI += &quot; \
--       <a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
--&quot;
+-NATIVE_LINK_NAME[pytest] = &quot;${bindir}/pytest&quot;
+-ALTERNATIVE_TARGET[pytest] = &quot;${bindir}/pytest&quot;
 -
--RDEPENDS_${PN}-ptest += &quot; \
--       ${PYTHON_PN}-pytest \
--&quot;
+-ALTERNATIVE_LINK_NAME[py.test] = &quot;${bindir}/py.test&quot;
+-ALTERNATIVE_TARGET[py.test] = &quot;${bindir}/py.test&quot;
 -
--do_install_ptest() {
--       install -d ${D}${PTEST_PATH}/testing
--       cp -rf ${S}/testing/* ${D}${PTEST_PATH}/testing/
--}
+-BBCLASSEXTEND = &quot;native nativesdk&quot;
 --
 2.25.0
 
@@ -256,4 +350,4 @@ index d3e0365ca1..0000000000
   </body>
 </html>
 
---------------CC1963E39D9BDAD69C15E262--
+--------------76FE48921F8F26E4B17FCFC9--
