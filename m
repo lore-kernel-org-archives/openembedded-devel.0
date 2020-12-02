@@ -1,124 +1,262 @@
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web08.30.1606856460593500957
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com [209.85.210.195])
+ by mx.groups.io with SMTP id smtpd.web08.365.1606869754368631842
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Dec 2020 13:01:00 -0800
+ Tue, 01 Dec 2020 16:42:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=DiXkSJBi;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id c198so7175595wmd.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Dec 2020 13:01:00 -0800 (PST)
+ dkim=pass header.i=@broadcom.com header.s=google header.b=dPN/6PDI;
+ spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: broadcom.com, ip: 209.85.210.195, mailfrom: scott.branden@broadcom.com)
+Received: by mail-pf1-f195.google.com with SMTP id w6so108570pfu.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Dec 2020 16:42:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=BRxBXXxXFtilRsh189hbSxdNQBn3zb+e3toWSD9WQFU=;
-        b=DiXkSJBiOhVTqkNAY7QLXl4IFpvroa8D/8I5ESMkzhKw/VbFisrA4jgLvPh67zX+Dr
-         39aWpGW0jU+s3BiIl0wTDgO+AzfYZJ2mHSGlJhC/GGPPwXf4WyBlu2W0DK/gEioyrXdf
-         YKmON6JAXGXkEv6ZK99iNxi6Y4jSRen6Eh02z4FPooipe2Uw81KMy1buI3MS0tfhYARl
-         73MGpX+88n37xGnd+aNpwZSCJEOAEeSRrm5nLwAXZeC0mKh7FHmr/w9p9gh63pbN+943
-         uDLNAV6dFELWgNs3MEX9mBhroER1NuJlCZ1iFHRJEDK8nOJA0XrVyc0QgVQ8zbyaGhMH
-         r+pA==
+        d=broadcom.com; s=google;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to;
+        bh=eX3oemKtQdxdjY1Goph8KjSmCRA6e79pevFzDKEeHiw=;
+        b=dPN/6PDIzDrcts4txEQPD5lUZUyUA05kgdVhjL4K+9FdeTAm9Uq79dBmANXTP1poCF
+         ln/Kkh1LmnSyoe4zkPSPPpaYaPpA5gDobm3ZXfS9s4veiR4JHc8uJ4NICtLgb7LNWl0Q
+         ei2deMMMIlR5NjqZdaHH5yVS70j9IJhbwU2z8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=BRxBXXxXFtilRsh189hbSxdNQBn3zb+e3toWSD9WQFU=;
-        b=UDlIS5wc+smBrU9OVlNWgODDNK+Y8RzwO8qFDR5vkM19wvgz9Y8JTiWQNoJXBW6h6w
-         FzKcLp8+NWyE7/8Qw5nmN/9j7JmqNjOFOS5v7MGcsOv6qIkB5k2CDiXKdEtha57X1c0i
-         yz3Jk3PYziYAlt4W60t8T/eHHHrbz8ulfYPzSS+3qG3toaSfn+fKL8eknTiFAU2nbhw7
-         5lm/9x/2l4jh6R+ExwvJtFuLLcCYReeJK28iD5qkMYzPLxRGuovuJ1XBchp67i4UElYh
-         VTslk7iYBTMakw4XlgKD4RSQeTxaYbGyF9qcNJEAURCcOhcU7s3XuWmUuKq3W5o2pBJl
-         eHiQ==
-X-Gm-Message-State: AOAM533gMImpb7VZYbtLmlG+iPARlS1GQVho4I1CiNxcPGWst+qEfhpu
-	JkrLzVPPViUJiDn8yKTHQjf1YS289EU=
-X-Google-Smtp-Source: ABdhPJzeiwHB4Z6v7JCrZ48bLfoi0XkF73G/ohV9AyY34GIzh2ELaIwwy/iIag2Pd+KTjDKVySnx0w==
-X-Received: by 2002:a1c:bc41:: with SMTP id m62mr2456067wmf.46.1606856458575;
-        Tue, 01 Dec 2020 13:00:58 -0800 (PST)
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from Unimatrix08-Focal.lan (mob-109-113-138-119.net.vodafone.it. [109.113.138.119])
-        by smtp.gmail.com with ESMTPSA id c9sm1142628wrp.73.2020.12.01.13.00.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Dec 2020 13:00:57 -0800 (PST)
-From: "Gianfranco" <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH] dlt-daemon: add upstream patch to fix CVE-2020-29394
-Date: Tue,  1 Dec 2020 22:00:55 +0100
-Message-Id: <20201201210055.979056-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.25.1
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to;
+        bh=eX3oemKtQdxdjY1Goph8KjSmCRA6e79pevFzDKEeHiw=;
+        b=HkQgeNEvcBYO8s+oGFKdtiU0vK3O4k/C1xgb+A2JB3JBy6A7B7a9NAt26lX0445hpg
+         hHqZmdLTwG1WBUK0o3P6pbYo415ubvIVyC9B3sPhls3AsJTx7AxFw6ysBCWFK7fGjnBK
+         nBRO8z8kP1udZS6i+Fps3JcKoWpnx2vn7/BMhfBy6KXIBZBF8WtpySOz+yg/aKa/lpcr
+         9xCjXaYUoFdof8Bq6NTcAL1sZtpHUcCAumOShJNRjkmuwXy05aWqit67Bfbooefw8d5d
+         ZPp8i++mG3eUBr1Vn14gFpXhjwXZcVDuBMEdz6xPa8yR+lBWKsQS5MfYNdOdtkxOpkMe
+         PBTg==
+X-Gm-Message-State: AOAM530WvI1PCKev412/P2MBlxI7gkrrKz/La92RKb0J+xfFwTm1bqRT
+	boZZKF8fX9Cr5dKb2s+yqz9SvA==
+X-Google-Smtp-Source: ABdhPJwGk0kTX/+M1DEpYCf2yzuO2n8Fs1rf6SIXbJPl/NPALCYL7BBC9ow5svpGxDxICrzGAZqtOw==
+X-Received: by 2002:a63:7103:: with SMTP id m3mr190562pgc.369.1606869753577;
+        Tue, 01 Dec 2020 16:42:33 -0800 (PST)
+Return-Path: <scott.branden@broadcom.com>
+Received: from [10.136.13.65] ([192.19.228.250])
+        by smtp.gmail.com with ESMTPSA id 22sm82949pjb.40.2020.12.01.16.42.31
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 01 Dec 2020 16:42:32 -0800 (PST)
+Subject: Re: [PATCH] menuconfig,mconf-cfg: Allow specification of ncurses location
+To: Bruce Ashfield <bruce.ashfield@gmail.com>
+Cc: Masahiro Yamada <masahiroy@kernel.org>,
+ Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Broadcom Kernel Feedback List <bcm-kernel-feedback-list@broadcom.com>,
+ OE-core <openembedded-core@lists.openembedded.org>,
+ openembeded-devel <openembedded-devel@lists.openembedded.org>,
+ Michal Marek <mmarek@suse.cz>
+References: <20201128004505.27619-1-scott.branden@broadcom.com>
+ <CAK7LNATD0J3C_mFrXAju8-WmdCmrPmRFn7Um0yebnfL-_zcu8w@mail.gmail.com>
+ <a5ea40a5-17ef-f037-16b3-177f01db6447@broadcom.com>
+ <CADkTA4NTPJrvoFqumNjkU-o-ZTt8iVUzQec+=Qvm4J_59FFQqg@mail.gmail.com>
+From: "Scott Branden" <scott.branden@broadcom.com>
+Message-ID: <be7e141b-4c20-c31b-9b74-6a1369569565@broadcom.com>
+Date: Tue, 1 Dec 2020 16:42:30 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <CADkTA4NTPJrvoFqumNjkU-o-ZTt8iVUzQec+=Qvm4J_59FFQqg@mail.gmail.com>
+X-Groupsio-MsgNum: 88192
+Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
+	boundary="000000000000e3548205b57084f6"
 
-More information on: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=976228
-| A buffer overflow in the dlt_filter_load function in dlt_common.c in
-| dlt-daemon 2.8.5 (GENIVI Diagnostic Log and Trace) allows arbitrary
-| code execution because fscanf is misused (no limit on the number of
-| characters to be read in a format argument).
+--000000000000e3548205b57084f6
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-CA
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
----
- .../dlt-daemon/dlt-daemon/275.patch           | 36 +++++++++++++++++++
- .../dlt-daemon/dlt-daemon_2.18.5.bb           |  1 +
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch
+Hi Bruce,
 
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch
-new file mode 100644
-index 000000000..4edb62b30
---- /dev/null
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch
-@@ -0,0 +1,36 @@
-+From 7f5cd5404a03fa330e192084f6bdafb2dc9bdcb7 Mon Sep 17 00:00:00 2001
-+From: GwanYeong Kim <gy741.kim@gmail.com>
-+Date: Sat, 28 Nov 2020 12:24:46 +0900
-+Subject: [PATCH] dlt_common: Fix buffer overflow in dlt_filter_load
-+
-+A buffer overflow in the dlt_filter_load function in dlt_common.c in dlt-daemon allows arbitrary code execution via an unsafe usage of fscanf, because it does not limit the number of characters to be read in a format argument.
-+
-+Fixed: #274
-+
-+Signed-off-by: GwanYeong Kim <gy741.kim@gmail.com>
-+---
-+ src/shared/dlt_common.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/shared/dlt_common.c b/src/shared/dlt_common.c
-+index 254f4ce4..d15b1cec 100644
-+--- a/src/shared/dlt_common.c
-++++ b/src/shared/dlt_common.c
-+@@ -404,7 +404,7 @@ DltReturnValue dlt_filter_load(DltFilter *filter, const char *filename, int verb
-+     while (!feof(handle)) {
-+         str1[0] = 0;
-+ 
-+-        if (fscanf(handle, "%s", str1) != 1)
-++        if (fscanf(handle, "%254s", str1) != 1)
-+             break;
-+ 
-+         if (str1[0] == 0)
-+@@ -419,7 +419,7 @@ DltReturnValue dlt_filter_load(DltFilter *filter, const char *filename, int verb
-+ 
-+         str1[0] = 0;
-+ 
-+-        if (fscanf(handle, "%s", str1) != 1)
-++        if (fscanf(handle, "%254s", str1) != 1)
-+             break;
-+ 
-+         if (str1[0] == 0)
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
-index f3fcee4d2..5066e76d3 100644
---- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
-@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=https \
-     file://0004-Modify-systemd-config-directory.patch \
-     file://241.patch \
-     file://245.patch \
-+    file://275.patch \
- "
- SRCREV = "f1ac087c766827b1d0ed9c3a814b3cc052e948f2"
- 
--- 
-2.25.1
+On 2020-12-01 11:01 a.m., Bruce Ashfield wrote:
+> On Tue, Dec 1, 2020 at 12:19 PM Scott Branden
+> <scott.branden@broadcom.com> wrote:
+>> Hi Masahiro,
+>>
+>> On 2020-12-01 4:25 a.m., Masahiro Yamada wrote:
+>>> On Sat, Nov 28, 2020 at 9:45 AM Scott Branden
+>>> <scott.branden@broadcom.com> wrote:
+>>>> From: Bruce Ashfield <bruce.ashfield@windriver.com>
+>>>>
+>>>> In some cross build environments such as the Yocto Project build
+>>>> environment it provides an ncurses library that is compiled
+>>>> differently than the host's version.  This causes display corruption
+>>>> problems when the host's curses includes are used instead of the
+>>>> includes from the provided compiler are overridden.  There is a second
+>>>> case where there is no curses libraries at all on the host system and
+>>>> menuconfig will just fail entirely.
+>>>>
+>>>> The solution is simply to allow an override variable in
+>>>> check-lxdialog.sh for environments such as the Yocto Project.  Adding
+>>>> a CROSS_CURSES_LIB and CROSS_CURSES_INC solves the issue and allowing
+>>>> compiling and linking against the right headers and libraries.
+>>>>
+>>>> Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
+>>>> cc: Michal Marek <mmarek@suse.cz>
+>>>> cc: linux-kbuild@vger.kernel.org
+>>>> Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
+>>>> Signed-off-by: Scott Branden <scott.branden@broadcom.com>
+>>>> ---
+>>> Some people solve the cross-compiling in Yocto
+>>> by using pkg-config.
+>>>
+>>>
+>>> For example,
+>>>
+>>> commit 067c650c456e758f933aaf87a202f841d34be269
+>>> Author: Pavel Modilaynen <pavel.modilaynen@axis.com>
+>>> Date:   Fri Jul 12 13:52:19 2019 +0200
+>>>
+>>>     dtc: Use pkg-config to locate libyaml
+>>>
+>>>     Using Makefile's wildcard with absolute path to detect
+>>>     the presence of libyaml results in false-positive
+>>>     detection when cross-compiling e.g. in yocto environment.
+>>>
+>>>
+>>>
+>>> mconf-cfg.sh already allows the path flexibility with pkg-config.
+>>> Why do you want yet another hook?
+>> I hope the yocto community can provide more details on this patch.
+>> The yocto environment isolates the build environment from the host tools.
+>> Running menuconfig with the upstream kernel does not work on the latest yocto without this patch.
+> Sorry for not commenting on the origin patch, gmail buried it within
+> some other threads, but luckily this one popped up.
+>
+> It is true that we've been carrying this for several years to deal with
+> the fact that the native sysroot is not searched by the pkg-config
+> called by mconf-cfg.sh (since it is separate from host and target
+> pkg-config).
+>
+> As it turns out, in the past few weeks, we have come up with a way
+> to inject those native sysroot components into pkg-config without
+> the need for any changes to the scripts.
+>
+> Scott: if you try again the the latest oe-core, and are still seeing
+> the problem with the mainline kernel, ping me, and we can see if
+> the pkg-config fix isn't holding for you, at that point, yes, we may
+> still need a hook like this to solve the problem.
+Try reverting this kernel patch from linux-yocto and menuconfig will fail.
 
+menuconfig actually did work with the upstream kernel until the yocto change below was introduced:
+"cml1.bbclass: Handle ncurses-native being available via pkg-config"
+https://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?h=master-next&id=ce447d70df386ca55ce1672478b245851556374e
+
+> Cheers,
+>
+> Bruce
+>
+>
+>
+>>>>  scripts/kconfig/mconf-cfg.sh | 8 ++++++++
+>>>>  1 file changed, 8 insertions(+)
+>>>>  mode change 100755 => 100644 scripts/kconfig/mconf-cfg.sh
+>>>>
+>>>> diff --git a/scripts/kconfig/mconf-cfg.sh b/scripts/kconfig/mconf-cfg.sh
+>>>> old mode 100755
+>>>> new mode 100644
+>>>> index aa68ec95620d..32448bc198a5
+>>>> --- a/scripts/kconfig/mconf-cfg.sh
+>>>> +++ b/scripts/kconfig/mconf-cfg.sh
+>>>> @@ -4,6 +4,14 @@
+>>>>  PKG="ncursesw"
+>>>>  PKG2="ncurses"
+>>>>
+>>>> +if [ "$CROSS_CURSES_LIB" != "" ]; then
+>>>> +    echo libs=\'$CROSS_CURSES_LIB\'
+>>>> +    if [ x"$CROSS_CURSES_INC" != x ]; then
+>>>> +       echo cflags=\'$CROSS_CURSES_INC\'
+>>>> +    fi
+>>>> +    exit 0
+>>>> +fi
+>>>> +
+>>>>  if [ -n "$(command -v pkg-config)" ]; then
+>>>>         if pkg-config --exists $PKG; then
+>>>>                 echo cflags=\"$(pkg-config --cflags $PKG)\"
+>>>> --
+>>>> 2.17.1
+>>>>
+>
+
+
+--000000000000e3548205b57084f6
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+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
+I/3RRboOeC9M13VNr5feU91O0iDoMreAgPQJ0Lo7YrodKYug0Tt/fFDjkW3v3VIbEr2liUN69U0C
+AwEAAaOCAdEwggHNMA4GA1UdDwEB/wQEAwIFoDCBngYIKwYBBQUHAQEEgZEwgY4wTQYIKwYBBQUH
+MAKGQWh0dHA6Ly9zZWN1cmUuZ2xvYmFsc2lnbi5jb20vY2FjZXJ0L2dzcGVyc29uYWxzaWduMnNo
+YTJnM29jc3AuY3J0MD0GCCsGAQUFBzABhjFodHRwOi8vb2NzcDIuZ2xvYmFsc2lnbi5jb20vZ3Nw
+ZXJzb25hbHNpZ24yc2hhMmczME0GA1UdIARGMEQwQgYKKwYBBAGgMgEoCjA0MDIGCCsGAQUFBwIB
+FiZodHRwczovL3d3dy5nbG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzAJBgNVHRMEAjAAMEQGA1Ud
+HwQ9MDswOaA3oDWGM2h0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vZ3NwZXJzb25hbHNpZ24yc2hh
+MmczLmNybDAlBgNVHREEHjAcgRpzY290dC5icmFuZGVuQGJyb2FkY29tLmNvbTATBgNVHSUEDDAK
+BggrBgEFBQcDBDAfBgNVHSMEGDAWgBRpcoJiMWeVRIV3kYDEBDZJnXsLYTAdBgNVHQ4EFgQUWOK7
+qiyDSt/IDm/SRcNi/sTEiyswDQYJKoZIhvcNAQELBQADggEBAEe2edd4F9tpp0GPmrFrQ+xp9kY7
+uxBzPdCw588bgVrPemjLwiwV37XTT4iWJtNhPfEpaguM6jeLm58LCvHq5/IBjcyHyf4URQVwAg7B
+pqkH8/M+IBstu4/D+znPHB59X+c+au3Q8D+xoNFd7I30kaE+oJuBuFsGXRBc0Ci+FM86x9k7SF8U
+aui1E7Y9wDfsRSCL2TSwU773f09WkrvVdlKxNqQZj2z7bQUUn+yfXdFfBz0LqlYNfn7xJOpQE3HI
+H4jq6U9+b0Qf+J0n0wyysjXPSeQ7EKXVkT8dM2KSpIN86v5dd9LkAz3C1dmjuPRGEC8ZhI1IjMBt
+0itrn6C23NsxggJvMIICawIBATBtMF0xCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWdu
+IG52LXNhMTMwMQYDVQQDEypHbG9iYWxTaWduIFBlcnNvbmFsU2lnbiAyIENBIC0gU0hBMjU2IC0g
+RzMCDFtD165RQeUC8DvoCDANBglghkgBZQMEAgEFAKCB1DAvBgkqhkiG9w0BCQQxIgQgZQuCjUm0
+4c9uAcJpKY9lj9AXEyaPssyF5QTN/qHRj4YwGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkq
+hkiG9w0BCQUxDxcNMjAxMjAyMDA0MjM0WjBpBgkqhkiG9w0BCQ8xXDBaMAsGCWCGSAFlAwQBKjAL
+BglghkgBZQMEARYwCwYJYIZIAWUDBAECMAoGCCqGSIb3DQMHMAsGCSqGSIb3DQEBCjALBgkqhkiG
+9w0BAQcwCwYJYIZIAWUDBAIBMA0GCSqGSIb3DQEBAQUABIIBAJZWGKzqkmZ7h+iRHSkFUncIolCs
+BdZaKyO+yb65P59ww8/u7qvIDChUKgp6B8trtcUIm23eseFbN6OYeDyTMG67nIfrk+VfKsjT/K23
+h2EQclG7fhGjzAkm+p8ziwRJ3kK5P39sYARMNyWS/7Kh/Z7c+wYWXtVJZFyJCLIyfvPb95kpCK6e
+cHf7bCc7e3ZbnPv91bk7aI6gJtJhFNgCxm2DmL1s2r6dZTDnYhxPZhXo8jGwT3C87KQINW7ogJB2
+2uMnnlNUkB78rH5asq8tjOPJZqwdRbUtfFuBLKK7HLfVkq6yBcTaNrqosMVJ5byTN0riOZMB4nX8
+L0sc/FD0CnQ=
+
+--000000000000e3548205b57084f6--
