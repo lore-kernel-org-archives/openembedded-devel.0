@@ -1,67 +1,59 @@
 Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web11.8799.1607049807900831471
+ by mx.groups.io with SMTP id smtpd.web12.8879.1607049871951720401
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Dec 2020 18:43:28 -0800
+ Thu, 03 Dec 2020 18:44:32 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.78,391,1599494400"; 
-   d="scan'208";a="102047679"
+   d="scan'208";a="102047746"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 04 Dec 2020 10:43:03 +0800
+  by heian.cn.fujitsu.com with ESMTP; 04 Dec 2020 10:44:30 +0800
 Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 352B74CE5CF9
-	for <openembedded-devel@lists.openembedded.org>; Fri,  4 Dec 2020 10:43:00 +0800 (CST)
+	by cn.fujitsu.com (Postfix) with ESMTP id A84244CE5CF8
+	for <openembedded-devel@lists.openembedded.org>; Fri,  4 Dec 2020 10:44:26 +0800 (CST)
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 4 Dec 2020 10:43:00 +0800
+ (TLS) id 15.0.1497.2; Fri, 4 Dec 2020 10:44:26 +0800
 From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] opensc: upgrade 0.20.0 -> 0.20.1
-Date: Fri, 4 Dec 2020 10:42:52 +0800
-Message-ID: <1607049772-63330-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] pugixml: upgrade 1.10 -> 1.11
+Date: Fri, 4 Dec 2020 10:44:25 +0800
+Message-ID: <1607049865-63397-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
 X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 352B74CE5CF9.A3D9B
+X-yoursite-MailScanner-ID: A84244CE5CF8.A4D77
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
 Content-Type: text/plain
 
--License-Update: The address is updated as follows
-You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../opensc/{opensc_0.20.0.bb => opensc_0.20.1.bb}           | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/opensc/{opensc_0.20.0.bb => opensc_0.20.1.bb} (90%)
+ .../pugixml/{pugixml_1.10.bb => pugixml_1.11.bb}              | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/pugixml/{pugixml_1.10.bb => pugixml_1.11.bb} (85%)
 
-diff --git a/meta-oe/recipes-support/opensc/opensc_0.20.0.bb b/meta-oe/recipes-support/opensc/opensc_0.20.1.bb
-similarity index 90%
-rename from meta-oe/recipes-support/opensc/opensc_0.20.0.bb
-rename to meta-oe/recipes-support/opensc/opensc_0.20.1.bb
-index a815980c4..2fbf60c14 100644
---- a/meta-oe/recipes-support/opensc/opensc_0.20.0.bb
-+++ b/meta-oe/recipes-support/opensc/opensc_0.20.1.bb
-@@ -9,10 +9,10 @@ eID cards have also been confirmed to work."
- HOMEPAGE = "http://www.opensc-project.org/opensc/"
- SECTION = "System Environment/Libraries"
- LICENSE = "LGPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=cb8aedd3bced19bd8026d96a8b6876d7"
+diff --git a/meta-oe/recipes-devtools/pugixml/pugixml_1.10.bb b/meta-oe/recipes-devtools/pugixml/pugixml_1.11.bb
+similarity index 85%
+rename from meta-oe/recipes-devtools/pugixml/pugixml_1.10.bb
+rename to meta-oe/recipes-devtools/pugixml/pugixml_1.11.bb
+index 6f624910b..b5e63cd35 100644
+--- a/meta-oe/recipes-devtools/pugixml/pugixml_1.10.bb
++++ b/meta-oe/recipes-devtools/pugixml/pugixml_1.11.bb
+@@ -10,8 +10,8 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://readme.txt;beginline=29;endline=52;md5=d5ee91fb74cbb64223b3693fd64eb169"
  
--#v0.19.0
--SRCREV = "45e29056ccde422e70ed3585084a7f150c632515"
-+#v0.21.0
-+SRCREV = "30180986a08cf71fe4af4b50251a8bb5b1ab95af"
- SRC_URI = "git://github.com/OpenSC/OpenSC \
-           "
- DEPENDS = "virtual/libiconv openssl"
+ SRC_URI = "https://github.com/zeux/${BPN}/releases/download/v${PV}/${BP}.tar.gz"
+-SRC_URI[md5sum] = "f97237e9908201c6d8536210747b66af"
+-SRC_URI[sha256sum] = "55f399fbb470942410d348584dc953bcaec926415d3462f471ef350f29b5870a"
++SRC_URI[md5sum] = "93540f4644fd4e4b02049554ef37fb90"
++SRC_URI[sha256sum] = "26913d3e63b9c07431401cf826df17ed832a20d19333d043991e611d23beaa2c"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/zeux/${BPN}/releases"
+ 
 -- 
 2.25.1
 
