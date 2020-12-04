@@ -1,85 +1,61 @@
-Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com [209.85.219.67])
- by mx.groups.io with SMTP id smtpd.web08.5577.1607035680392617274
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web11.8264.1607047274014461068
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Dec 2020 14:48:00 -0800
+ Thu, 03 Dec 2020 18:01:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=r1lEz1Bl;
- spf=pass (domain: gmail.com, ip: 209.85.219.67, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f67.google.com with SMTP id n9so1874981qvp.5
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Dec 2020 14:48:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=93DfW4AvuFQoNhFlme3UE09Z1of0BB0/KoabHGeWf5k=;
-        b=r1lEz1BlRItQh8G7qWWhwnXHaknFkLZRaak9+GXICV8OetTFpwI8h8EyOGZ7Z1s4G5
-         X1EJXwdrxmmKnMW+OstnU7oV5YbaoQ7of/coaq/0xpJ46n09FEE0ikeQhGbCnALWqPbo
-         W0MovjkXmFqov4+cvw0aT4c72O+zMLC/japkWKcI5CwXDqeRHWvP5E6955QsUtx6HMdI
-         GdJpZwBLsi3dFG6IApXmoBPcr7un36VuH0m3oe6i2lz4U6qi2L8BPYnAQuIIymdj34aO
-         dWZJZoJLKNX4ofyDE/2OBImzK84QWvfv8kicxV7lfn3mZdjjdgd2lso/DUda0N7ShTEa
-         olIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=93DfW4AvuFQoNhFlme3UE09Z1of0BB0/KoabHGeWf5k=;
-        b=Nf8WJfpU4wDrPX5te0dz34NwU/UHN/0hHptSi+IK56thUnO5H3X2T2Qdsu5mdqabVG
-         5hCPgTq0ZY47d1Jj6wymRqUoXgcY8LbGbF77ojBkT43C+RmCoIszG1i0Y8pd0z4g671U
-         M5hYiLez/xpaq3NKPjyuynPkVMmaAO70eYyfpQwJlIRntsLLDob/TSynbKw4yeiayqMB
-         L5FRjhiIYvM+1kKsUfFJh5qRhjLTK6up6MO4KValza45izcDytJ3Smhc/X3REnUzE5qj
-         mdLJhi64+54Qa0CQdaz4DwHKzSAea1lu4R2doU7CYPQPdwxi7VuPpn11qHwHzKH08GEq
-         MZ4A==
-X-Gm-Message-State: AOAM530Xp5MAfL54vPVhA263O32XN146QfrOWr8csRPX/7covBUDKqnN
-	/GRB2ZZCSl9WcOvB3GaPjThS0ppWnN7ml4/z31s=
-X-Google-Smtp-Source: ABdhPJyEN3EUJ/RnkmEkpG32fugYuuKX5ER41KwKI30/oS0mEFm+ctO0Wo0TqgaQsD+dUXPtx8UEeStVz8nmaNvb1gk=
-X-Received: by 2002:ad4:4052:: with SMTP id r18mr1543098qvp.38.1607035679440;
- Thu, 03 Dec 2020 14:47:59 -0800 (PST)
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.78,390,1599494400"; 
+   d="scan'208";a="102046034"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 04 Dec 2020 10:01:11 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id DB88D4CE6011
+	for <openembedded-devel@lists.openembedded.org>; Fri,  4 Dec 2020 10:01:10 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Fri, 4 Dec 2020 10:01:10 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-oe] [PATCH] dialog: upgrade 1.3-20200327 -> 1.3-20201126
+Date: Fri, 4 Dec 2020 10:01:08 +0800
+Message-ID: <1607047268-62331-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <20201203142407.4865-1-twoerner@gmail.com> <20201203142407.4865-2-twoerner@gmail.com>
-In-Reply-To: <20201203142407.4865-2-twoerner@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 3 Dec 2020 14:47:33 -0800
-Message-ID: <CAMKF1so4Kr1v5mXQ0S0JdeX29JNPC2bxvqWQo_h32HbknQnD+g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2 2/3] glmark2: update to latest
-To: Trevor Woerner <twoerner@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: DB88D4CE6011.A2854
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-I am seeing this error
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ .../dialog/{dialog_1.3-20200327.bb => dialog_1.3-20201126.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/dialog/{dialog_1.3-20200327.bb => dialog_1.3-20201126.bb} (88%)
 
-https://errors.yoctoproject.org/Errors/Details/539076/
+diff --git a/meta-oe/recipes-extended/dialog/dialog_1.3-20200327.bb b/meta-oe/recipes-extended/dialog/dialog_1.3-20201126.bb
+similarity index 88%
+rename from meta-oe/recipes-extended/dialog/dialog_1.3-20200327.bb
+rename to meta-oe/recipes-extended/dialog/dialog_1.3-20201126.bb
+index 4c3177c05..5097788ed 100644
+--- a/meta-oe/recipes-extended/dialog/dialog_1.3-20200327.bb
++++ b/meta-oe/recipes-extended/dialog/dialog_1.3-20201126.bb
+@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
+ 
+ SRC_URI = "ftp://ftp.invisible-island.net/${BPN}/${BP}.tgz \
+           "
+-SRC_URI[md5sum] = "f7a3c240af305b5282af590541e8f4b7"
+-SRC_URI[sha256sum] = "466163e8b97c2b7709d00389199add3156bd813f60ccb0335d0a30f2d4a17f99"
++SRC_URI[md5sum] = "14bf3b33de348838ff30aff0aa9d1c2e"
++SRC_URI[sha256sum] = "c9233a6c8ea33a59e2378e5146ae2bd13b519744cfdb647af7420adac5ad3866"
+ 
+ # hardcoded here for use in dialog-static recipe
+ S = "${WORKDIR}/dialog-${PV}"
+-- 
+2.25.1
 
-all across machines. Perhaps it needs to depend on wayland-scanner
 
-On Thu, Dec 3, 2020 at 6:24 AM Trevor Woerner <twoerner@gmail.com> wrote:
->
-> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
-> ---
->  meta-oe/recipes-benchmark/glmark2/glmark2_git.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-> index 320d07dfc..da8ca9e2b 100644
-> --- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-> +++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-> @@ -10,12 +10,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
->
->  DEPENDS = "libpng jpeg udev"
->
-> -PV = "20191226+${SRCPV}"
-> +PV = "2020.11+${SRCPV}"
->
->  COMPATIBLE_HOST_rpi  = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', '.*-linux*', 'null', d)}"
->
->  SRC_URI = "git://github.com/glmark2/glmark2.git;protocol=https"
-> -SRCREV = "72dabc5d72b49c6d45badeb8a941ba4d829b0bd6"
-> +SRCREV = "784aca755a469b144acf3cae180b6e613b7b057a"
->
->  S = "${WORKDIR}/git"
->
-> --
-> 2.28.0.497.g54e85e7af1
->
->
-> 
->
+
