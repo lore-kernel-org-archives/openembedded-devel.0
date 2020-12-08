@@ -1,326 +1,338 @@
-Received: from mail-ej1-f67.google.com (mail-ej1-f67.google.com [209.85.218.67])
- by mx.groups.io with SMTP id smtpd.web08.12146.1607448512260376376
+Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com [209.85.222.179])
+ by mx.groups.io with SMTP id smtpd.web10.13599.1607451997010265665
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Dec 2020 09:28:32 -0800
+ Tue, 08 Dec 2020 10:26:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=amRgLKLP;
- spf=pass (domain: gmail.com, ip: 209.85.218.67, mailfrom: quaresma.jose@gmail.com)
-Received: by mail-ej1-f67.google.com with SMTP id n26so25685533eju.6
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Dec 2020 09:28:32 -0800 (PST)
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=ufhHiIZT;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.222.179, mailfrom: fabio.berton@ossystems.com.br)
+Received: by mail-qk1-f179.google.com with SMTP id c7so8580006qke.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Dec 2020 10:26:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=A8UiMg/dyd1CsGS22JA8GdM0SuVLFeHNRSDhnUuw/CE=;
-        b=amRgLKLP4n+X7GyOZ611mdezlAi+uudYlaCKSB7glwo5qThWGpmFw/Hs7VmfJ6ueXo
-         SdTf6ZXL2OviZNA6BeloCIzVbsS+Gdfsdc4SGAah1tNL3Q0HBGuy2/xfapqMHF43fUU0
-         ajhP9iCrziPTuE2dI5+6uUxTEb7uHC+5kUtMsOYgq0BO0IHOvFMNqlXtqiZ62UgYY2SL
-         yRjZljLxJs68pjq+MUyh85UNfMkSQ7j+gTBGGAe0tZKMC+DKnRjFYzNyUWBwk5zIsSgZ
-         t5qOEs9qA74QrRZpKjRmPyu1TemrTdL++taHN3/t82m1QK/xsT971fFDBda/Zn2vn+dR
-         fn0w==
+        d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+        h=from:to:subject:date:message-id:mime-version:organization
+         :content-transfer-encoding;
+        bh=fvFd2bRakKBjsrBKegL5skv7HmKzwvkkODVtMGkbFfM=;
+        b=ufhHiIZTaHjJaTQL2SJxVlSO6NTyOJDl35kMLRHXABy1+su/jZaC2da51jlMiqRsmw
+         wJ/Fqpltr0be0n7UA5OEnDoorAinycjqcXlo8Z9NtLzjsQn/XskKJwk927vCnmmPMCCX
+         GVOmitKLWnjTscFoGyGm3zvRXS7I0cCCqjBCxu1nwOumuhxiPoaRd1ZVnMvKmmrvnxx/
+         wm+cQSXbwEcGl8vNFQZjBnebR1RUdOTaE9ha7cUkb6Z/al+TJ7v5aJsiAqeJ4iv0pGOH
+         6rxUBnvUAdy5tr1G2Gj1f9YS3yHy0mvhBhlaGbzQT/4eT5tfBrFO7hIkVuOFzOoejdHX
+         BWxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=A8UiMg/dyd1CsGS22JA8GdM0SuVLFeHNRSDhnUuw/CE=;
-        b=ijDa7/RXdn1SNkyEbfscXnO30xJ0oYgVV5FDSLjHq9ASE/One6ZrP71qFkKinfOM3E
-         6l2Wyx/N28r7xgyz77m2kk+LZYLO3MWbE+CVRmNSXevWQ25RDxB5znGeLtnOCVqvmiv1
-         PdTHwMUCYCvAXHWbyhYqAiMwTHRgy6pEAA79c0Pk1JFN2QNtsxkv631Y4p1NwpFQAUvd
-         oIqI2z807987KiTJp6C6idy9BFzve4WoclabFwrLrsEdkCMRNSz9474kqtxjV9GrfRYQ
-         DHIxxtkhXgCv8JyczxiaOY7ffU96foAjfCbCr7PIG09pd6v9n5p5D604evctXZNPhJLA
-         joBQ==
-X-Gm-Message-State: AOAM530OVX98DqjnQKr28fdf5j2ZHEAT+c8wW8qJxFSR1RbQhyn0uHcK
-	d3zV/8stVd1+qqKt3I5dR9/AimPw+w/5pExiDbY=
-X-Google-Smtp-Source: ABdhPJz4Im/b4FDgAX5WgR0HmYt5JsFyCEpfrD3jR+uOpZFpFhY1i7sm6vTX+70hDcUVSnuICAxk1Ds0OfnL2/J9qlk=
-X-Received: by 2002:a17:906:7e43:: with SMTP id z3mr23911268ejr.67.1607448510617;
- Tue, 08 Dec 2020 09:28:30 -0800 (PST)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :organization:content-transfer-encoding;
+        bh=fvFd2bRakKBjsrBKegL5skv7HmKzwvkkODVtMGkbFfM=;
+        b=JBYAABW+N0noZllGd5bwdVAwB5Zh+m58Azr2eMPaBOs7OcJ/tFOf3MlIrnJIuKX21c
+         a9KMdZjiqazfrBE+BxVcDKc8ie56xXjPtZYaI6eyVVldiX9woKyrpUx8ctKYpD1wp7ul
+         sCLq0HtD4vc+A8nLF+3oIw5DkTpmpJeCiFg65mbCf5hKy14hsp98Fmb1TMtHpAx1Dj3h
+         g0R4gMvS2n/kPW0Vdz4hOTLRS+PhXD4AeL/Z5Pyp6uxUyzn8bNReuT2dBISivHFZH5Vm
+         QNKGpK1TkEURHNWjzvhcMkosZedrmiPFw50YVPSvv7MIT50JDn/rIMYyaP//U55cJHB1
+         FOCQ==
+X-Gm-Message-State: AOAM530azJN7yMSUrj/tCeVWqxBT7rFjjXLSzXPTkcMKypIaxP1pIOyA
+	6pHlPGNjfrKUEnWh7UN76Udk0Y1CQj+CYg==
+X-Google-Smtp-Source: ABdhPJynrQs0HN/jwdg60p54oaGBLc+keNcf8f/LFnd5s5uGRHS1ByUYoCSwPWw4Gk+KBYPIH5+iBw==
+X-Received: by 2002:a37:4d93:: with SMTP id a141mr17237566qkb.150.1607451995290;
+        Tue, 08 Dec 2020 10:26:35 -0800 (PST)
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from pikachu.lab.ossystems (200-180-244-15.user3p.brasiltelecom.net.br. [200.180.244.15])
+        by smtp.gmail.com with ESMTPSA id p128sm6098388qka.56.2020.12.08.10.26.32
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Dec 2020 10:26:34 -0800 (PST)
+From: "Fabio Berton" <fabio.berton@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] linuxconsole: Add recipe for version 1.7.0
+Date: Tue,  8 Dec 2020 15:26:29 -0300
+Message-Id: <20201208182629.3651761-1-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-References: <1607447060-235494-1-git-send-email-r.karszniewicz@phytec.de>
-In-Reply-To: <1607447060-235494-1-git-send-email-r.karszniewicz@phytec.de>
-From: "Jose Quaresma" <quaresma.jose@gmail.com>
-Date: Tue, 8 Dec 2020 17:28:18 +0000
-Message-ID: <CANPvuR=BTuOVExv62GCNpFGagz9nxo_znNg=GrMxTZbFbJgXgg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2] firmwared: add recipe
-To: Robert Karszniewicz <r.karszniewicz@phytec.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000785e7a05b5f745ca"
+Organization: O.S. Systems Software LTDA.
+Content-Transfer-Encoding: 8bit
 
---000000000000785e7a05b5f745ca
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Add linuxconsole and inputattach-config recipes. The inputattach-config
+recipe is intend to use as machine configuration file for inputattach.
 
-A ter=C3=A7a, 8/12/2020, 17:04, Robert Karszniewicz <r.karszniewicz@phytec.=
-de>
-escreveu:
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+---
+ .../inputattach-config/inputattach-config.bb  | 12 +++
+ .../inputattach-config/inputattach.conf       |  8 ++
+ .../51-these-are-not-joysticks-rm.rules       | 83 +++++++++++++++++++
+ .../linuxconsole/60-joystick.rules            |  7 ++
+ .../linuxconsole/inputattach.service          | 11 +++
+ .../linuxconsole/linuxconsole/inputattachctl  | 16 ++++
+ .../linuxconsole/linuxconsole_1.7.0.bb        | 83 +++++++++++++++++++
+ 7 files changed, 220 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/inputattach-config/inputattach-config.bb
+ create mode 100644 meta-oe/recipes-extended/inputattach-config/inputattach-config/inputattach.conf
+ create mode 100644 meta-oe/recipes-extended/linuxconsole/linuxconsole/51-these-are-not-joysticks-rm.rules
+ create mode 100644 meta-oe/recipes-extended/linuxconsole/linuxconsole/60-joystick.rules
+ create mode 100644 meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattach.service
+ create mode 100644 meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattachctl
+ create mode 100644 meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.0.bb
 
-> This program is needed for loading external firmware via Linux' fallback
-> mechanism.
->
-> Signed-off-by: Robert Karszniewicz <r.karszniewicz@phytec.de>
-> ---
-> Changes from v1:
-> - remove PR setting
-> - set PV to 0, not 1
-> - inherit features_check and require systemd
-> - use ${systemd_system_unitdir} instead of ${systemd_unitdir}/system
-> - add firmwared to packagegroup-meta-oe
-> - add do_configure_prepend() (I had made a mistake in testing earlier)
->
-> Thank you all for your reviews earlier.
->
->  .../firmwared/firmwared/firmwared.service          |  9 ++++++
->  meta-oe/recipes-bsp/firmwared/firmwared_git.bb     | 34
-> ++++++++++++++++++++++
->  .../packagegroups/packagegroup-meta-oe.bb          |  1 +
->  3 files changed, 44 insertions(+)
->  create mode 100644
-> meta-oe/recipes-bsp/firmwared/firmwared/firmwared.service
->  create mode 100644 meta-oe/recipes-bsp/firmwared/firmwared_git.bb
->
-> diff --git a/meta-oe/recipes-bsp/firmwared/firmwared/firmwared.service
-> b/meta-oe/recipes-bsp/firmwared/firmwared/firmwared.service
-> new file mode 100644
-> index 000000000000..c2106a25168c
-> --- /dev/null
-> +++ b/meta-oe/recipes-bsp/firmwared/firmwared/firmwared.service
-> @@ -0,0 +1,9 @@
-> +[Unit]
-> +Description=3DLinux Firmware Loader Daemon
-> +
-> +[Service]
-> +Type=3Dsimple
-> +ExecStart=3D@BINDIR@/firmwared -d /lib/firmware
-> +
-> +[Install]
-> +WantedBy=3Dmulti-user.target
-> diff --git a/meta-oe/recipes-bsp/firmwared/firmwared_git.bb
-> b/meta-oe/recipes-bsp/firmwared/firmwared_git.bb
-> new file mode 100644
-> index 000000000000..74341d80d38d
-> --- /dev/null
-> +++ b/meta-oe/recipes-bsp/firmwared/firmwared_git.bb
-> @@ -0,0 +1,34 @@
-> +SUMMARY =3D "Linux Firmware Loader Daemon"
-> +DESCRIPTION =3D "The Linux Firmware Loader Daemon monitors the kernel f=
-or \
-> +firmware requests and uploads the firmware blobs it has via the sysfs \
-> +interface."
-> +HOMEPAGE =3D "https://github.com/teg/firmwared"
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D
-> "file://LICENSE-APACHE;md5=3D7b486c2338d225a1405d979ed2c15ce8 \
-> +                    file://COPYING;md5=3Ddaa868b8e1ae17d03228a1145b4060=
-da"
-> +
-> +SRC_URI =3D "git://github.com/teg/firmwared.git \
-> +           file://firmwared.service"
-> +
-> +PV =3D "0+git${SRCPV}"
-> +SRCREV =3D "2e6b5db43d63a5c0283a4cae9a6a20b7ad107a04"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +DEPENDS =3D "glib-2.0 systemd"
-> +
-> +inherit pkgconfig autotools systemd features_check
-> +
-> +REQUIRED_DISTRO_FEATURES =3D "systemd"
-> +
-> +SYSTEMD_SERVICE_${PN} =3D "firmwared.service"
-> +
-> +do_configure_prepend() {
-> +    ${S}/autogen.sh
-> +}
-> +
-> +do_install_append() {
-> +    install -d ${D}${systemd_unitdir}/system
-
-
-> systemd_system_unitdir can be used here
-
-
-> +    install -m 0644 ${WORKDIR}/firmwared.service
-> ${D}${systemd_system_unitdir}
-> +    sed -i -e 's,@BINDIR@,${bindir},g'
-> ${D}${systemd_unitdir}/system/firmwared.service
->
-
-systemd_system_unitdir can be used here
-
+diff --git a/meta-oe/recipes-extended/inputattach-config/inputattach-config.bb b/meta-oe/recipes-extended/inputattach-config/inputattach-config.bb
+new file mode 100644
+index 000000000..68beec670
+--- /dev/null
++++ b/meta-oe/recipes-extended/inputattach-config/inputattach-config.bb
+@@ -0,0 +1,12 @@
++SUMMARY = "inputattach configuration file"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
++
++SRC_URI = "file://inputattach.conf"
++
++do_configure[noexec] = "1"
++do_compile[noexec] = "1"
++
++do_install() {
++    install -Dm 0644 ${WORKDIR}/inputattach.conf ${D}${sysconfdir}/inputattach.conf
 +}
-> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> index 841e1cd1b3ab..2c46d21b705f 100644
-> --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> @@ -87,6 +87,7 @@ RDEPENDS_packagegroup-meta-oe-bsp =3D"\
->      acpitool \
->      cpufrequtils \
->      edac-utils \
-> +    firmwared \
->      flashrom \
->      irda-utils \
->      lmsensors-config-cgi \
-> --
-> 2.7.4
->
->
->=20
->
->
+diff --git a/meta-oe/recipes-extended/inputattach-config/inputattach-config/inputattach.conf b/meta-oe/recipes-extended/inputattach-config/inputattach-config/inputattach.conf
+new file mode 100644
+index 000000000..86c421012
+--- /dev/null
++++ b/meta-oe/recipes-extended/inputattach-config/inputattach-config/inputattach.conf
+@@ -0,0 +1,8 @@
++#
++# Configuration for inputattach
++#
++# Every line of this file are inputattach arguments, see 'inputattach --help'.
++# An inputattach instance will be started for each element.
++#
++# --microsoft /dev/ttyS0
++# --baud 9600 --w8001 /dev/ttyS1
+diff --git a/meta-oe/recipes-extended/linuxconsole/linuxconsole/51-these-are-not-joysticks-rm.rules b/meta-oe/recipes-extended/linuxconsole/linuxconsole/51-these-are-not-joysticks-rm.rules
+new file mode 100644
+index 000000000..3e0ab4018
+--- /dev/null
++++ b/meta-oe/recipes-extended/linuxconsole/linuxconsole/51-these-are-not-joysticks-rm.rules
+@@ -0,0 +1,83 @@
++# /etc/udev/rules.d/51-these-are-not-joysticks-rm.rules
++#
++# This file is auto-generated. For more information:
++# https://github.com/denilsonsa/udev-joystick-blacklist
++
++SUBSYSTEM=="input", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c30a", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c30a", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a0df", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a0df", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0010", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0010", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0011", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0011", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0012", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0012", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0013", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0013", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0014", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0014", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0015", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0015", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0016", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0016", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0017", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0017", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0018", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0018", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0019", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0019", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="00d1", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="00d1", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="030e", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="030e", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="054f", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="054f", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="1410", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="1410", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="3043", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="3043", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="31b5", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="31b5", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="3997", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="3997", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="3f8b", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="3f8b", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="51f4", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="51f4", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="5589", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="5589", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="7b22", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="7b22", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="7f2d", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="7f2d", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="8090", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="8090", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="9033", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="9033", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="9066", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="9066", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="9090", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="9090", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="90c0", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="90c0", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f012", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f012", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f32a", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f32a", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f613", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f613", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f624", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f624", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="1b1c", ATTRS{idProduct}=="1b3c", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="1b1c", ATTRS{idProduct}=="1b3c", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="1d57", ATTRS{idProduct}=="ad03", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="1d57", ATTRS{idProduct}=="ad03", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2e4a", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2e4a", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="20a0", ATTRS{idProduct}=="422d", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="20a0", ATTRS{idProduct}=="422d", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="2516", ATTRS{idProduct}=="001f", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="2516", ATTRS{idProduct}=="001f", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="2516", ATTRS{idProduct}=="0028", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
++SUBSYSTEM=="input", ATTRS{idVendor}=="2516", ATTRS{idProduct}=="0028", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
+diff --git a/meta-oe/recipes-extended/linuxconsole/linuxconsole/60-joystick.rules b/meta-oe/recipes-extended/linuxconsole/linuxconsole/60-joystick.rules
+new file mode 100644
+index 000000000..24b009be2
+--- /dev/null
++++ b/meta-oe/recipes-extended/linuxconsole/linuxconsole/60-joystick.rules
+@@ -0,0 +1,7 @@
++# Restore any stored calibration for the device
++ACTION=="add", KERNEL=="js*", RUN+="/usr/bin/jscal-restore %E{DEVNAME}"
++
++# Set PS3 controller leds to the same value bluez will choose for it.
++# IMPORT{parent} used because $parent did not appear to be working; we
++# don't need the devpath of the js device for this so it is OK to overwrite.
++ACTION=="add", KERNEL=="js*", IMPORT{parent}="DEVPATH", ATTRS{name}=="Sony PLAYSTATION(R)3 Controller", RUN+="/lib/udev/js-set-enum-leds /sys/%E{DEVPATH}/device/leds/ $number"
+diff --git a/meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattach.service b/meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattach.service
+new file mode 100644
+index 000000000..2ec902c09
+--- /dev/null
++++ b/meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattach.service
+@@ -0,0 +1,11 @@
++[Unit]
++Description=Attach serial input devices to kernel input subsystem
++After=syslog.target
++
++[Service]
++Type=forking
++ExecStart=/usr/bin/inputattachctl start
++ExecStop=/usr/bin/inputattachctl stop
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattachctl b/meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattachctl
+new file mode 100644
+index 000000000..c6da4e68f
+--- /dev/null
++++ b/meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattachctl
+@@ -0,0 +1,16 @@
++#!/bin/sh
++
++do_start() {
++    grep -v '^#' /etc/inputattach.conf | while read -r line; do
++        inputattach --daemon $line || exit 1
++    done
++}
++
++case "$1" in
++    start)
++        do_start
++        ;;
++    stop)
++        killall -9 inputattach || true
++        ;;
++esac
+diff --git a/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.0.bb b/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.0.bb
+new file mode 100644
+index 000000000..c4cd1d609
+--- /dev/null
++++ b/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.0.bb
+@@ -0,0 +1,83 @@
++SUMMARY = "Linux Console Project"
++DESCRIPTION = "This project maintains the Linux Console tools, which include \
++utilities to test and configure joysticks, connect legacy devices to the kernel's \
++input subsystem (providing support for serial mice, touchscreens etc.), and test \
++the input event layer."
++HOMEPAGE = "https://sourceforge.net/projects/linuxconsole"
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++DEPENDS = "libsdl2"
++DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
++
++SRC_URI = "\
++    ${SOURCEFORGE_MIRROR}/linuxconsole/linuxconsoletools-${PV}.tar.bz2 \
++    file://51-these-are-not-joysticks-rm.rules \
++    file://60-joystick.rules \
++    file://inputattachctl \
++    file://inputattach.service \
++"
++
++SRC_URI[sha256sum] = "95d112f06393806116341d593bda002c8bc44119c1538407623268fed90d8c34"
++
++S = "${WORKDIR}/linuxconsoletools-${PV}"
++
++inherit systemd pkgconfig
++
++EXTRA_OEMAKE = "DESTDIR=${D} PREFIX=${prefix} -C utils"
++EXTRA_OEMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'SYSTEMD_SUPPORT=1', '', d)}"
++
++SYSTEMD_PACKAGES += "inputattach"
++SYSTEMD_SERVICE_inputattach = "inputattach.service"
++SYSTEMD_AUTO_ENABLE_inputattach = "enable"
++
++do_compile() {
++    oe_runmake
++}
++
++do_install() {
++    oe_runmake install
++
++    install -Dm 0644 ${WORKDIR}/51-these-are-not-joysticks-rm.rules ${D}${base_libdir}/udev/rules.d/51-these-are-not-joysticks-rm.rules
++    install -Dm 0644 ${WORKDIR}/60-joystick.rules ${D}${base_libdir}/udev/rules.d/60-joystick.rules
++
++    install -Dm 0644 ${WORKDIR}/inputattach.service ${D}${systemd_system_unitdir}/inputattach.service
++    install -Dm 0755 ${WORKDIR}/inputattachctl ${D}${bindir}/inputattachctl
++}
++
++PACKAGES += "inputattach joystick"
++
++# We won't package any file here as we are following the same packaging schema
++# Debian does and we are splitting it in 'inputattach' and 'joystick' packages.
++FILES_${PN} = ""
++
++FILES_inputattach += "\
++    ${bindir}/inputattach \
++    ${bindir}/inputattachctl \
++    ${systemd_system_unitdir}/inputattach.service \
++"
++
++FILES_joystick += "\
++    ${bindir}/evdev-joystick \
++    ${bindir}/ffcfstress \
++    ${bindir}/ffmvforce \
++    ${bindir}/ffset \
++    ${bindir}/fftest \
++    ${bindir}/jscal \
++    ${bindir}/jscal-restore \
++    ${bindir}/jscal-store \
++    ${bindir}/jstest \
++    ${datadir}/joystick \
++    ${base_libdir}/udev/rules.d/51-these-are-not-joysticks-rm.rules \
++    ${base_libdir}/udev/js-set-enum-leds \
++    ${base_libdir}/udev/rules.d/60-joystick.rules \
++    ${base_libdir}/udev/rules.d/80-stelladaptor-joystick.rules \
++"
++
++RDEPENDS_inputattach += "inputattach-config"
++
++RDEPENDS_joystick += "\
++    bash \
++    gawk \
++"
+-- 
+2.29.2
 
---000000000000785e7a05b5f745ca
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
-class=3D"gmail_attr">A ter=C3=A7a, 8/12/2020, 17:04, Robert Karszniewicz &l=
-t;<a href=3D"mailto:r.karszniewicz@phytec.de">r.karszniewicz@phytec.de</a>&=
-gt; escreveu:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 =
-0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">This program is neede=
-d for loading external firmware via Linux&#39; fallback<br>
-mechanism.<br>
-<br>
-Signed-off-by: Robert Karszniewicz &lt;<a href=3D"mailto:r.karszniewicz@ph=
-ytec.de" target=3D"_blank" rel=3D"noreferrer">r.karszniewicz@phytec.de</a>&=
-gt;<br>
----<br>
-Changes from v1:<br>
-- remove PR setting<br>
-- set PV to 0, not 1<br>
-- inherit features_check and require systemd<br>
-- use ${systemd_system_unitdir} instead of ${systemd_unitdir}/system<br>
-- add firmwared to packagegroup-meta-oe<br>
-- add do_configure_prepend() (I had made a mistake in testing earlier)<br>
-<br>
-Thank you all for your reviews earlier.<br>
-<br>
-=C2=A0.../firmwared/firmwared/firmwared.service=C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 |=C2=A0 9 ++++++<br>
-=C2=A0meta-oe/recipes-bsp/firmwared/<a href=3D"http://firmwared_git.bb" re=
-l=3D"noreferrer noreferrer" target=3D"_blank">firmwared_git.bb</a>=C2=A0 =
-=C2=A0 =C2=A0| 34 ++++++++++++++++++++++<br>
-=C2=A0.../packagegroups/<a href=3D"http://packagegroup-meta-oe.bb" rel=3D"=
-noreferrer noreferrer" target=3D"_blank">packagegroup-meta-oe.bb</a>=C2=A0 =
-=
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 1 +<br>
-=C2=A03 files changed, 44 insertions(+)<br>
-=C2=A0create mode 100644 meta-oe/recipes-bsp/firmwared/firmwared/firmwared=
-.service<br>
-=C2=A0create mode 100644 meta-oe/recipes-bsp/firmwared/<a href=3D"http://f=
-irmwared_git.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">firmwared_=
-git.bb</a><br>
-<br>
-diff --git a/meta-oe/recipes-bsp/firmwared/firmwared/firmwared.service b/m=
-eta-oe/recipes-bsp/firmwared/firmwared/firmwared.service<br>
-new file mode 100644<br>
-index 000000000000..c2106a25168c<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-bsp/firmwared/firmwared/firmwared.service<br>
-@@ -0,0 +1,9 @@<br>
-+[Unit]<br>
-+Description=3DLinux Firmware Loader Daemon<br>
-+<br>
-+[Service]<br>
-+Type=3Dsimple<br>
-+ExecStart=3D@BINDIR@/firmwared -d /lib/firmware<br>
-+<br>
-+[Install]<br>
-+WantedBy=3Dmulti-user.target<br>
-diff --git a/meta-oe/recipes-bsp/firmwared/<a href=3D"http://firmwared_git=
-.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">firmwared_git.bb</a> b=
-/meta-oe/recipes-bsp/firmwared/<a href=3D"http://firmwared_git.bb" rel=3D"n=
-oreferrer noreferrer" target=3D"_blank">firmwared_git.bb</a><br>
-new file mode 100644<br>
-index 000000000000..74341d80d38d<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-bsp/firmwared/<a href=3D"http://firmwared_git.bb" re=
-l=3D"noreferrer noreferrer" target=3D"_blank">firmwared_git.bb</a><br>
-@@ -0,0 +1,34 @@<br>
-+SUMMARY =3D &quot;Linux Firmware Loader Daemon&quot;<br>
-+DESCRIPTION =3D &quot;The Linux Firmware Loader Daemon monitors the kerne=
-l for \<br>
-+firmware requests and uploads the firmware blobs it has via the sysfs \<b=
-r>
-+interface.&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://github.com/teg/firmwared" rel=3D"no=
-referrer noreferrer" target=3D"_blank">https://github.com/teg/firmwared</a>=
-&quot;<br>
-+LICENSE =3D &quot;Apache-2.0&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE-APACHE;md5=3D7b486c2338d225a140=
-5d979ed2c15ce8 \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 fil=
-e://COPYING;md5=3Ddaa868b8e1ae17d03228a1145b4060da&quot;<br>
-+<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://github.com/teg/firmwared.git" r=
-el=3D"noreferrer noreferrer" target=3D"_blank">github.com/teg/firmwared.git=
-</a> \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://firmwared.service&quot;<b=
-r>
-+<br>
-+PV =3D &quot;0+git${SRCPV}&quot;<br>
-+SRCREV =3D &quot;2e6b5db43d63a5c0283a4cae9a6a20b7ad107a04&quot;<br>
-+<br>
-+S =3D &quot;${WORKDIR}/git&quot;<br>
-+<br>
-+DEPENDS =3D &quot;glib-2.0 systemd&quot;<br>
-+<br>
-+inherit pkgconfig autotools systemd features_check<br>
-+<br>
-+REQUIRED_DISTRO_FEATURES =3D &quot;systemd&quot;<br>
-+<br>
-+SYSTEMD_SERVICE_${PN} =3D &quot;firmwared.service&quot;<br>
-+<br>
-+do_configure_prepend() {<br>
-+=C2=A0 =C2=A0 ${S}/autogen.sh<br>
-+}<br>
-+<br>
-+do_install_append() {<br>
-+=C2=A0 =C2=A0 install -d ${D}${systemd_unitdir}/system</blockquote><block=
-quote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc=
- solid;padding-left:1ex"><br></blockquote></div></div><div dir=3D"auto"><sp=
-an style=3D"font-family:sans-serif">systemd_system_unitdir can be used here=
-</span><br></div><div dir=3D"auto"><span style=3D"font-family:sans-serif"><=
-br></span></div><div dir=3D"auto"></div><div dir=3D"auto"><div class=3D"gma=
-il_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bord=
-er-left:1px #ccc solid;padding-left:1ex"><br>
-+=C2=A0 =C2=A0 install -m 0644 ${WORKDIR}/firmwared.service ${D}${systemd_=
-system_unitdir}<br>
-+=C2=A0 =C2=A0 sed -i -e &#39;s,@BINDIR@,${bindir},g&#39; ${D}${systemd_un=
-itdir}/system/firmwared.service<br></blockquote></div></div><div dir=3D"aut=
-o"><span style=3D"font-family:sans-serif"><br></span></div><div dir=3D"auto=
-"><span style=3D"font-family:sans-serif">systemd_system_unitdir can be used=
- here</span><br></div><div dir=3D"auto"><span style=3D"font-family:sans-ser=
-if"><br></span></div><div dir=3D"auto"><div class=3D"gmail_quote"><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc so=
-lid;padding-left:1ex">
-+}<br>
-diff --git a/meta-oe/recipes-core/packagegroups/<a href=3D"http://packageg=
-roup-meta-oe.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">packagegro=
-up-meta-oe.bb</a> b/meta-oe/recipes-core/packagegroups/<a href=3D"http://pa=
-ckagegroup-meta-oe.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">pack=
-agegroup-meta-oe.bb</a><br>
-index 841e1cd1b3ab..2c46d21b705f 100644<br>
---- a/meta-oe/recipes-core/packagegroups/<a href=3D"http://packagegroup-me=
-ta-oe.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">packagegroup-meta=
--oe.bb</a><br>
-+++ b/meta-oe/recipes-core/packagegroups/<a href=3D"http://packagegroup-me=
-ta-oe.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">packagegroup-meta=
--oe.bb</a><br>
-@@ -87,6 +87,7 @@ RDEPENDS_packagegroup-meta-oe-bsp =3D&quot;\<br>
-=C2=A0 =C2=A0 =C2=A0acpitool \<br>
-=C2=A0 =C2=A0 =C2=A0cpufrequtils \<br>
-=C2=A0 =C2=A0 =C2=A0edac-utils \<br>
-+=C2=A0 =C2=A0 firmwared \<br>
-=C2=A0 =C2=A0 =C2=A0flashrom \<br>
-=C2=A0 =C2=A0 =C2=A0irda-utils \<br>
-=C2=A0 =C2=A0 =C2=A0lmsensors-config-cgi \<br>
--- <br>
-2.7.4<br>
-<br>
-<br>
-<br>
-<br>
-</blockquote></div></div></div>
-
---000000000000785e7a05b5f745ca--
