@@ -1,126 +1,76 @@
-Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
- by mx.groups.io with SMTP id smtpd.web11.4676.1607406853144490241
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web08.4770.1607406929335421764
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Dec 2020 21:54:13 -0800
+ Mon, 07 Dec 2020 21:55:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZJZ8Vfg3;
- spf=pass (domain: gmail.com, ip: 209.85.160.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f178.google.com with SMTP id 7so11294086qtp.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Dec 2020 21:54:13 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=kjeIult/;
+ spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f182.google.com with SMTP id e23so11191205pgk.12
+        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Dec 2020 21:55:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=nAWAGX8ZxnpcVMUoH0k+d22RE4CTH9rdBfkXOgZ93kc=;
-        b=ZJZ8Vfg3MsWGYos5ScQbu/7Ht2x3YOzN7tQe2DZ1w8CgdFfJ+HeOaSz+jYbyCS+fkf
-         Dn3CRJ0cWX/k64aU31ytWQGFb/YPj9ITAyQfsXEGuhhYApWd0DrqmHZq6BtqtQbTY9M0
-         hKc09n6aZlor9ZnWWpmHPfgDAdTu6d3DVBwVxWUp9KrwZyqU0iUyvC+d7dhgmiZS5sdc
-         TFHU39+kSbMaht7a+oGmejYRnn9eCxWCRF317heP5eYa5dCYdU6jjpI11URYuVPpOaWM
-         NjN3DJN1jW9n3B/yn78tx7mNq+1Om2ACSqBKxJ1ZMHZ1x9ytCE3w0oAtjNB5vXLKfkDX
-         He5Q==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=gXkrcocrVOqV12IgH8W4qPaSOfZJfu+UzC4aUjit6S0=;
+        b=kjeIult/JcQMVz+f2fjV9wfw2Y65FTb9xRM3Q/4uv+1L8k/TW6SGqhAeu6ubnc8NG3
+         trO+W4HVEfMrxiXr95eZrD79xQ+OqPig3q1expTtrZa9N22lHtK404OA+8Dw/PLmS6iD
+         gOL0hms3w2/Avk777j6n71MdFe53Bx/UZYMhDMsqJZ+S54W5thm6j0hAQH+HfTr/jqxU
+         r2Wxm7XF5w1HvrKyEKYMdvY9Z/j5evcY4V1h83B1JJcuFXhQxjx6aQY2A8xU74HJ919h
+         32biVBbIpII8iKbwytqyclytY9CWiBDavkupw72XvAlpx9jPyaDLN+sDnzCSks6YqOJh
+         DBUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=nAWAGX8ZxnpcVMUoH0k+d22RE4CTH9rdBfkXOgZ93kc=;
-        b=Eu81fl7HLTptU5o95CWNdnBjgRcFdRC4rRzayBl7MvimbEdGfCh+FgqGeB6aaDvfEA
-         VmTawk27oDyKKb8WYB2S5fELc7aN1+ZrdO1jTfY/Wt+rx/d8Pe4wa7NC6ZBIuWqJ3jfi
-         iSq8gaRVBJ19QLJFZkDJAeCanoEbM+nRYobz7BflRphBi/0fpeeYRfArIs+R1NNFj/FQ
-         9hGE8R8BQJlZbjYxwypU/8k5dGTfKPxa0vxrkw+UIn1LDYjvewxovihB4m7UWSpigGk+
-         kq/3gOy+/UCToVKfQCcPNJvXTGbYqYiVU5N4qDQy5VG/k690Ss5uhFTfk4Q3TXcoTGmx
-         EnGQ==
-X-Gm-Message-State: AOAM531PY1/fOkYlCMtfXwZpc1qvGyVcoAifbt/SfRvnfb9QgjkbtECP
-	2QWqgm/0gWKGWAuT8DgH6L9ArRELGrezrpNZ1OE=
-X-Google-Smtp-Source: ABdhPJzk7MoulQtxr/pVg0I2ilFyC7C42vUDnelnVE7Bl2y2f/OKETbzKS45wxtCkacmGGvJ15pini4DMJCC0HImhOE=
-X-Received: by 2002:aed:2ec6:: with SMTP id k64mr2956309qtd.194.1607406851963;
- Mon, 07 Dec 2020 21:54:11 -0800 (PST)
-MIME-Version: 1.0
-References: <20201207171423.16180-1-wickbergster@gmail.com>
-In-Reply-To: <20201207171423.16180-1-wickbergster@gmail.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=gXkrcocrVOqV12IgH8W4qPaSOfZJfu+UzC4aUjit6S0=;
+        b=TWJGsF3VYs/uuITRpMVKHlgq0a+T1qO8MHBmrSp61Mt9g4UUbjwf5jK9a3aEl6xFno
+         9k3S6ayIl/evxLgzdSotzwtzuwUmum6E43V4Nawd8ypl9MDYpED9UF+c7aMrv4UQwhdh
+         RRwqtr6O+ERXLFELps4VGy6djt5dAr7xej0E3LJPHqY57jNX1u9u32fN+1LWNpGc9N5V
+         e8N7mEPb6FOxDR6NJVxf8v1OazENL8zDq9Re5rmvJUg+9P7bDuhi3649AiLerT0/dzLa
+         WZNDwmosT8NPtwzQnrcXgfvk+q0A2CxjBaUWjjqxyqj1B9/vgiRqeLHAZcvm9YaY7AY2
+         rK0g==
+X-Gm-Message-State: AOAM5324tzXMmAnixnFsn7Umd/0auJARZse6XORp/wQFVkh8t+htm9Bn
+	wC9ssuDLnJq2gMbQGakYV9m2LU21KBujVA==
+X-Google-Smtp-Source: ABdhPJxEM0RgY73zUiYyw2cVKsJMQBphOaIhvmJXYMuO1KosQs8qGdPq+IDkh9rGhaNuE81O0kWH3A==
+X-Received: by 2002:a65:44c2:: with SMTP id g2mr21529308pgs.256.1607406928592;
+        Mon, 07 Dec 2020 21:55:28 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::23fd])
+        by smtp.gmail.com with ESMTPSA id a10sm16182009pfi.168.2020.12.07.21.55.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 07 Dec 2020 21:55:27 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 7 Dec 2020 21:53:43 -0800
-Message-ID: <CAMKF1sofh-GUd6FCv4C2iE-Tsd-COT06YXZZn75GugF0qH6asA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] libwebsockets: upgrade to 4.1.6
-To: Alexander Vickberg <wickbergster@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Roland Hieber <rhi@pengutronix.de>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][ 1/4] lockfile-progs: use DEBIAN_MIRROR in SRC_URI
+Date: Mon,  7 Dec 2020 21:55:22 -0800
+Message-Id: <20201208055525.877400-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.29.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-fails packaging.
+From: Roland Hieber <rhi@pengutronix.de>
 
-https://errors.yoctoproject.org/Errors/Details/539130/
+Signed-off-by: Roland Hieber <rhi@pengutronix.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-extended/lockfile-progs/lockfile-progs_0.1.18.bb    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Mon, Dec 7, 2020 at 9:15 AM Alexander Vickberg
-<wickbergster@gmail.com> wrote:
->
-> Event lib support is now built into dynamically loaded plugins so
-> package them separately and include them in RDEPENDS if enabled.
->
-> Building minimal-examples with generated SDK failed due to cmake
-> configuration had static enabled but not included into SDK. Solve
-> this by adding static as PACKAGECONFIG option and adding
-> ${PN}-staticdev to RDEPENDS_${PN}-dev if enabled.
->
-> Remove CFLAGS_append with -Wno-error for fixing building with Os.
-> This looks like it's fixed in upstream.
->
-> Signed-off-by: Alexander Vickberg <wickbergster@gmail.com>
-> ---
->  ...ckets_4.0.20.bb => libwebsockets_4.1.6.bb} | 20 +++++++++++++------
->  1 file changed, 14 insertions(+), 6 deletions(-)
->  rename meta-oe/recipes-connectivity/libwebsockets/{libwebsockets_4.0.20.bb => libwebsockets_4.1.6.bb} (51%)
->
-> diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.20.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.1.6.bb
-> similarity index 51%
-> rename from meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.20.bb
-> rename to meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.1.6.bb
-> index 5427daac4..e922d681f 100644
-> --- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.0.20.bb
-> +++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.1.6.bb
-> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8c47b078124308a4e1354e8d59f606b7"
->  DEPENDS = "zlib"
->
->  S = "${WORKDIR}/git"
-> -SRCREV = "ec9e8ab892f2dc569ae09336c80c2796fd14a6ff"
-> -SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.0-stable"
-> +SRCREV = "736f0739ed8c75db0e29c7678b5a9194e957c347"
-> +SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.1-stable"
->
->  UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
->  UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
-> @@ -18,18 +18,26 @@ PACKAGECONFIG ?= "libuv client server http2 ssl"
->  PACKAGECONFIG[client] = "-DLWS_WITHOUT_CLIENT=OFF,-DLWS_WITHOUT_CLIENT=ON,"
->  PACKAGECONFIG[http2] = "-DLWS_WITH_HTTP2=ON,-DLWS_WITH_HTTP2=OFF,"
->  PACKAGECONFIG[ipv6] = "-DLWS_IPV6=ON,-DLWS_IPV6=OFF,"
-> +PACKAGECONFIG[libevent] = "-DLWS_WITH_LIBEVENT=ON,-DLWS_WITH_LIBEVENT=OFF,libevent"
->  PACKAGECONFIG[libev] = "-DLWS_WITH_LIBEV=ON,-DLWS_WITH_LIBEV=OFF,libev"
->  PACKAGECONFIG[libuv] = "-DLWS_WITH_LIBUV=ON,-DLWS_WITH_LIBUV=OFF,libuv"
->  PACKAGECONFIG[server] = "-DLWS_WITHOUT_SERVER=OFF,-DLWS_WITHOUT_SERVER=ON,"
->  PACKAGECONFIG[ssl] = "-DLWS_WITH_SSL=ON,-DLWS_WITH_SSL=OFF,openssl"
-> -PACKAGECONFIG[testapps] = "-DLWS_WITHOUT_TESTAPPS=OFF,-DLWS_WITHOUT_TESTAPPS=ON,"
-> +PACKAGECONFIG[static] = "-DLWS_WITH_STATIC=ON,-DLWS_WITH_STATIC=OFF -DLWS_LINK_TESTAPPS_DYNAMIC=ON,"
->
->  EXTRA_OECMAKE += " \
->      -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
->  "
->
-> -PACKAGES =+ "${PN}-testapps"
-> +PACKAGES =+ "${PN}-testapps ${PN}-evlib_event ${PN}-evlib_uv ${PN}-evlib_ev"
->
-> -FILES_${PN}-testapps += "${datadir}/libwebsockets-test-server/*"
-> +FILES_${PN}-testapps += "${datadir}/libwebsockets-test-server/* ${bindir}/libwebsockets-test-*"
-> +FILES_${PN}-evlib_event += "${libdir}/libwebsockets-evlib_event.so"
-> +FILES_${PN}-evlib_uv += "${libdir}/libwebsockets-evlib_uv.so"
-> +FILES_${PN}-evlib_ev += "${libdir}/libwebsockets-evlib_ev.so"
->
-> -CFLAGS_append = " -Wno-error"
-> +RDEPENDS_${PN} += " ${@bb.utils.contains('PACKAGECONFIG', 'libevent', '${PN}-evlib_event', '', d)}"
-> +RDEPENDS_${PN} += " ${@bb.utils.contains('PACKAGECONFIG', 'libuv', '${PN}-evlib_uv', '', d)}"
-> +RDEPENDS_${PN} += " ${@bb.utils.contains('PACKAGECONFIG', 'libev', '${PN}-evlib_ev', '', d)}"
-> +
-> +RDEPENDS_${PN}-dev += " ${@bb.utils.contains('PACKAGECONFIG', 'static', '${PN}-staticdev', '', d)}"
-> --
-> 2.25.1
->
->
-> 
->
+diff --git a/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.18.bb b/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.18.bb
+index c76e0f69e0..a82f10b919 100644
+--- a/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.18.bb
++++ b/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.18.bb
+@@ -8,7 +8,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ DEPENDS = "liblockfile"
+ 
+-SRC_URI = "http://ftp.de.debian.org/debian/pool/main/l/${BPN}/${BPN}_${PV}.tar.gz"
++SRC_URI = "${DEBIAN_MIRROR}/main/l/${BPN}/${BPN}_${PV}.tar.gz"
+ SRC_URI[md5sum] = "4eb83bdf88016db836b7cc09591fb0f3"
+ SRC_URI[sha256sum] = "a42995a4b97e6188efc90fcc1a761163c4b2cff5c81b936f85c84301ddb05ce6"
+ 
+-- 
+2.29.2
+
