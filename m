@@ -1,83 +1,62 @@
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web10.4637.1607406932501247811
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web11.4810.1607407891932472706
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Dec 2020 21:55:32 -0800
+ Mon, 07 Dec 2020 22:11:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=lEMjb03h;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id y10so4963934plr.10
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Dec 2020 21:55:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=CCzEsmsmx15egFTGlD19DCo5aWu1gxm2weSzLVvlgro=;
-        b=lEMjb03hSCJZOD67kLn3Z7znF3SXM3vYJy3peIzNRBHClwGPEqSJCv10khcC2TP4uL
-         5mJ31cp9LC+9g7tjectAxCTvS8b0PaUKpr4FYMJjaRtwU+2Vpow8ftfADKw5exOTEdys
-         6pwt2sFpO75YujG5fWRivMDBcDuHKS/kRKcr3GXUc/EGgvkDN93qejEi+tV81gjChnfK
-         z70qx9No2IDUcmL+dnuXm73k2hEPD0QJBoOvs9EpKq7YiQK6xKWP7iBpEvTmA1N3vRir
-         T9kpu0RFvh8wFFEJE5dfScJ4mOV0X6S7InpyU5qihSCqblU0ODGf5/wZo2QqmdGFlWhV
-         /Rlg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=CCzEsmsmx15egFTGlD19DCo5aWu1gxm2weSzLVvlgro=;
-        b=qOD5DrW6OWKVWPgCzxcEHsE07CejM8gxiOLd2s3WsL3NdggVn8K5Kx3grfuD0r/61E
-         ObFdcjLPcnLmaQKGCNzEZPQGVZJ8N5l7ZpgJ3FTEFxGUXyju6Az50mgRKDiajjzXigss
-         2iSu2A5KUYMhjjHC5YZ0Og0FR5LFNlQx6kz94CKcryrKdSPNBRyPTxBn+JmEPqsm64Xp
-         Vy18/pV60GM4WZ4P2GqDGXqgjNeW3L2kgpXka8l8us5DYyKAHaNJyckmk5iCrbKSlOR8
-         YQCBDG7lhKza/nB8+S12YWJGw60R1pvkv+nXIXnczBd/2Mt72OjFWSKOykesNVvAGFLd
-         i9Pw==
-X-Gm-Message-State: AOAM531FtW1K+QnnZuhFQwKovDWcn3f/BsGVzd5nNHB0So91Q72PyOSZ
-	6pv8Bew3oHObbfjTWTA9b0aE1WQ4HI0lgQ==
-X-Google-Smtp-Source: ABdhPJwC8ZHKo9JYWwVnK6oCzSlmuI7gyp6O1SfynxAh9TDh8yFmX9xh39vGCVpg/a+QVpP7dw5eOA==
-X-Received: by 2002:a17:902:6b02:b029:da:c6c0:d650 with SMTP id o2-20020a1709026b02b02900dac6c0d650mr20176281plk.74.1607406931680;
-        Mon, 07 Dec 2020 21:55:31 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::23fd])
-        by smtp.gmail.com with ESMTPSA id a10sm16182009pfi.168.2020.12.07.21.55.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Dec 2020 21:55:31 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Roland Hieber <rhi@pengutronix.de>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][ 4/4] openct: use upstream SRC_URI
-Date: Mon,  7 Dec 2020 21:55:25 -0800
-Message-Id: <20201208055525.877400-4-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201208055525.877400-1-raj.khem@gmail.com>
-References: <20201208055525.877400-1-raj.khem@gmail.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.78,401,1599494400"; 
+   d="scan'208";a="102166332"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 08 Dec 2020 14:11:20 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id 6ED884CE6014
+	for <openembedded-devel@lists.openembedded.org>; Tue,  8 Dec 2020 14:11:18 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Tue, 8 Dec 2020 14:11:17 +0800
+From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@cn.fujitsu.com>
+Subject: [oe] [meta-oe][PATCH] ser2net: 4.2.0 -> 3.3.0
+Date: Tue, 8 Dec 2020 14:11:12 +0800
+Message-ID: <1607407872-2317-2-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1607407872-2317-1-git-send-email-wangmy@cn.fujitsu.com>
+References: <1607407872-2317-1-git-send-email-wangmy@cn.fujitsu.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
+ G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
+X-yoursite-MailScanner-ID: 6ED884CE6014.A2F0E
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-From: Roland Hieber <rhi@pengutronix.de>
-
-The Debian pool URLs are not permanent, and the package is no longer
-included in any active Debian release. It is also not available through
-any of the default Debian snapshot mirrors. Instead of adding a new
-Debian snapshot mirror, use the upstream URL directly.
-
-Signed-off-by: Roland Hieber <rhi@pengutronix.de>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- meta-oe/recipes-support/openct/openct_0.6.20.bb | 2 +-
+ .../ser2net/{ser2net_4.2.0.bb => ser2net_4.3.0.bb}              | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/ser2net/{ser2net_4.2.0.bb => ser2net_4.3.0.bb} (84%)
 
-diff --git a/meta-oe/recipes-support/openct/openct_0.6.20.bb b/meta-oe/recipes-support/openct/openct_0.6.20.bb
-index 08b2e3c232..1514c7a958 100644
---- a/meta-oe/recipes-support/openct/openct_0.6.20.bb
-+++ b/meta-oe/recipes-support/openct/openct_0.6.20.bb
-@@ -11,7 +11,7 @@ readers to remote machines via TCP/IP."
- DEPENDS += "libtool pcsc-lite libusb-compat"
+diff --git a/meta-oe/recipes-connectivity/ser2net/ser2net_4.2.0.bb b/meta-oe/recipes-connectivity/ser2net/ser2net_4.3.0.bb
+similarity index 84%
+rename from meta-oe/recipes-connectivity/ser2net/ser2net_4.2.0.bb
+rename to meta-oe/recipes-connectivity/ser2net/ser2net_4.3.0.bb
+index 13794ad9d..6293d1229 100644
+--- a/meta-oe/recipes-connectivity/ser2net/ser2net_4.2.0.bb
++++ b/meta-oe/recipes-connectivity/ser2net/ser2net_4.3.0.bb
+@@ -9,7 +9,7 @@ DEPENDS = "gensio libyaml"
  
- SRC_URI = " \
--    ${DEBIAN_MIRROR}/main/o/${BPN}/${BPN}_${PV}.orig.tar.gz \
-+    https://downloads.sourceforge.net/project/opensc/${BPN}/${BPN}-${PV}.tar.gz \
-     file://etc-openct.udev.in-disablePROGRAM.patch \
-     file://etc-openct_usb.in-modify-UDEVINFO.patch \
-     file://openct.init \
+ SRC_URI = "${SOURCEFORGE_MIRROR}/project/ser2net/ser2net/ser2net-${PV}.tar.gz"
+ 
+-SRC_URI[sha256sum] = "1d895f005896e8c5bcff4fe573e2fec3611bf4feee1247857e476b74323d916c"
++SRC_URI[sha256sum] = "5e407d684d0aa0919ddd15af368f890c5940cddd6034b7efc363823f38f6ff0c"
+ 
+ UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/ser2net/files/ser2net"
+ 
 -- 
-2.29.2
+2.25.1
+
+
 
