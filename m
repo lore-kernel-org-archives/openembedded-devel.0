@@ -1,338 +1,258 @@
-Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com [209.85.222.179])
- by mx.groups.io with SMTP id smtpd.web10.13599.1607451997010265665
+Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
+ by mx.groups.io with SMTP id smtpd.web10.13657.1607452102356629783
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Dec 2020 10:26:37 -0800
+ Tue, 08 Dec 2020 10:28:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=ufhHiIZT;
- spf=pass (domain: ossystems.com.br, ip: 209.85.222.179, mailfrom: fabio.berton@ossystems.com.br)
-Received: by mail-qk1-f179.google.com with SMTP id c7so8580006qke.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Dec 2020 10:26:36 -0800 (PST)
+ dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=g9PP7zMa;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.160.178, mailfrom: fabio.berton@ossystems.com.br)
+Received: by mail-qt1-f178.google.com with SMTP id c14so3017565qtn.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Dec 2020 10:28:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
         h=from:to:subject:date:message-id:mime-version:organization
          :content-transfer-encoding;
-        bh=fvFd2bRakKBjsrBKegL5skv7HmKzwvkkODVtMGkbFfM=;
-        b=ufhHiIZTaHjJaTQL2SJxVlSO6NTyOJDl35kMLRHXABy1+su/jZaC2da51jlMiqRsmw
-         wJ/Fqpltr0be0n7UA5OEnDoorAinycjqcXlo8Z9NtLzjsQn/XskKJwk927vCnmmPMCCX
-         GVOmitKLWnjTscFoGyGm3zvRXS7I0cCCqjBCxu1nwOumuhxiPoaRd1ZVnMvKmmrvnxx/
-         wm+cQSXbwEcGl8vNFQZjBnebR1RUdOTaE9ha7cUkb6Z/al+TJ7v5aJsiAqeJ4iv0pGOH
-         6rxUBnvUAdy5tr1G2Gj1f9YS3yHy0mvhBhlaGbzQT/4eT5tfBrFO7hIkVuOFzOoejdHX
-         BWxQ==
+        bh=P5cTrlO7HtJj0Mt8uAgh4o5dLBQF5fqo7kQXlQcEyqE=;
+        b=g9PP7zMa0Dls6eaNdne2ppdVfiwPOtzb1mTRgZvLytkXhZEAIpDnovFY2OSyIvG32U
+         dE2zkLrQq3rtjYLvB36JtYijHrZ0Q0u3m/gG3MR0HFGZ+JZ8Tt6sEei8Pu9kgodiq6ae
+         iTl30EV6xglazGSVEqSwgkMZz6deQagKtX5NzROY8TLceCjsZoM+gJWUShmMbM6gttm1
+         n9umvIdnruf2xlH6zTf2cw3YawugM2MgNVAz4xujtPIXQ4VwKfYXCXV9iGKdXZvcYMzJ
+         +0vO+3VyNnh0yq0onTXNL6ihE29Qw5Qjo8XbTM6xHCOjEBwmj7ZGNj6fQrxJ7kYVinZz
+         H1TQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :organization:content-transfer-encoding;
-        bh=fvFd2bRakKBjsrBKegL5skv7HmKzwvkkODVtMGkbFfM=;
-        b=JBYAABW+N0noZllGd5bwdVAwB5Zh+m58Azr2eMPaBOs7OcJ/tFOf3MlIrnJIuKX21c
-         a9KMdZjiqazfrBE+BxVcDKc8ie56xXjPtZYaI6eyVVldiX9woKyrpUx8ctKYpD1wp7ul
-         sCLq0HtD4vc+A8nLF+3oIw5DkTpmpJeCiFg65mbCf5hKy14hsp98Fmb1TMtHpAx1Dj3h
-         g0R4gMvS2n/kPW0Vdz4hOTLRS+PhXD4AeL/Z5Pyp6uxUyzn8bNReuT2dBISivHFZH5Vm
-         QNKGpK1TkEURHNWjzvhcMkosZedrmiPFw50YVPSvv7MIT50JDn/rIMYyaP//U55cJHB1
-         FOCQ==
-X-Gm-Message-State: AOAM530azJN7yMSUrj/tCeVWqxBT7rFjjXLSzXPTkcMKypIaxP1pIOyA
-	6pHlPGNjfrKUEnWh7UN76Udk0Y1CQj+CYg==
-X-Google-Smtp-Source: ABdhPJynrQs0HN/jwdg60p54oaGBLc+keNcf8f/LFnd5s5uGRHS1ByUYoCSwPWw4Gk+KBYPIH5+iBw==
-X-Received: by 2002:a37:4d93:: with SMTP id a141mr17237566qkb.150.1607451995290;
-        Tue, 08 Dec 2020 10:26:35 -0800 (PST)
+        bh=P5cTrlO7HtJj0Mt8uAgh4o5dLBQF5fqo7kQXlQcEyqE=;
+        b=NGCr2XLRi4lHDzbR+rwMCNkLwbBuzTfvo2r6KmfPSwrPmb+3s5S+R9VgSL29nTQW6x
+         Q9QLA3YVTPwGhjAOG7nqW8gS9qz/o1WByAE3RteR0aVphiFRKbUlbBuSi0LvGrqUz5t7
+         bP6o2XN8b5HIq6JZZv06SQaOzVldazUO447ABnQDWc5humlGgIGorLtndd1AMmmFU6mg
+         KKIJRfhr5nh9h/NB72IjIGN+8HGS98KzzH79IhvD+tlN8yngcehiaIFy0h5GBC690PvY
+         K9LgH9XKO8Cby0n30Sty8QIrJAgdNkoGih3VVeimcqRW8Uh1fcJbmsG+WCZpB+6PRhVR
+         clyg==
+X-Gm-Message-State: AOAM531rxO+DXMJZE46d92sYL2JZfim/zSxpglw/gExr7v30lzfxWlEN
+	AyKQtydNuXuPaCxCwZAN1/iqAT1Lskc9dg==
+X-Google-Smtp-Source: ABdhPJxrT+IHaf3X8X//DofCTOILu8XBX7wXJIvtG2q0vQW/wJLQ/HDQhTkovPVvxhOVRZiZb+CWWw==
+X-Received: by 2002:ac8:5c47:: with SMTP id j7mr30838764qtj.160.1607452100807;
+        Tue, 08 Dec 2020 10:28:20 -0800 (PST)
 Return-Path: <fabio.berton@ossystems.com.br>
 Received: from pikachu.lab.ossystems (200-180-244-15.user3p.brasiltelecom.net.br. [200.180.244.15])
-        by smtp.gmail.com with ESMTPSA id p128sm6098388qka.56.2020.12.08.10.26.32
+        by smtp.gmail.com with ESMTPSA id d11sm15271702qta.64.2020.12.08.10.28.19
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Dec 2020 10:26:34 -0800 (PST)
+        Tue, 08 Dec 2020 10:28:20 -0800 (PST)
 From: "Fabio Berton" <fabio.berton@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] linuxconsole: Add recipe for version 1.7.0
-Date: Tue,  8 Dec 2020 15:26:29 -0300
-Message-Id: <20201208182629.3651761-1-fabio.berton@ossystems.com.br>
+Subject: [meta-oe][PATCH] beep: Add recipe for version 1.2.2
+Date: Tue,  8 Dec 2020 15:28:16 -0300
+Message-Id: <20201208182816.3652210-1-fabio.berton@ossystems.com.br>
 X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
 Organization: O.S. Systems Software LTDA.
 Content-Transfer-Encoding: 8bit
 
-Add linuxconsole and inputattach-config recipes. The inputattach-config
-recipe is intend to use as machine configuration file for inputattach.
+Based on this recipe:
+https://github.com/kraj/meta-slugos/blob/master/recipes-slugos/beep/beep_1.2.2.bb
 
 Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 ---
- .../inputattach-config/inputattach-config.bb  | 12 +++
- .../inputattach-config/inputattach.conf       |  8 ++
- .../51-these-are-not-joysticks-rm.rules       | 83 +++++++++++++++++++
- .../linuxconsole/60-joystick.rules            |  7 ++
- .../linuxconsole/inputattach.service          | 11 +++
- .../linuxconsole/linuxconsole/inputattachctl  | 16 ++++
- .../linuxconsole/linuxconsole_1.7.0.bb        | 83 +++++++++++++++++++
- 7 files changed, 220 insertions(+)
- create mode 100644 meta-oe/recipes-extended/inputattach-config/inputattach-config.bb
- create mode 100644 meta-oe/recipes-extended/inputattach-config/inputattach-config/inputattach.conf
- create mode 100644 meta-oe/recipes-extended/linuxconsole/linuxconsole/51-these-are-not-joysticks-rm.rules
- create mode 100644 meta-oe/recipes-extended/linuxconsole/linuxconsole/60-joystick.rules
- create mode 100644 meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattach.service
- create mode 100644 meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattachctl
- create mode 100644 meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.0.bb
+ meta-oe/recipes-extended/beep/beep_1.2.2.bb   |  25 +++
+ .../beep/files/linux-input.patch              | 155 ++++++++++++++++++
+ 2 files changed, 180 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/beep/beep_1.2.2.bb
+ create mode 100644 meta-oe/recipes-extended/beep/files/linux-input.patch
 
-diff --git a/meta-oe/recipes-extended/inputattach-config/inputattach-config.bb b/meta-oe/recipes-extended/inputattach-config/inputattach-config.bb
+diff --git a/meta-oe/recipes-extended/beep/beep_1.2.2.bb b/meta-oe/recipes-extended/beep/beep_1.2.2.bb
 new file mode 100644
-index 000000000..68beec670
+index 000000000..cafc86964
 --- /dev/null
-+++ b/meta-oe/recipes-extended/inputattach-config/inputattach-config.bb
-@@ -0,0 +1,12 @@
-+SUMMARY = "inputattach configuration file"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
-+
-+SRC_URI = "file://inputattach.conf"
-+
-+do_configure[noexec] = "1"
-+do_compile[noexec] = "1"
-+
-+do_install() {
-+    install -Dm 0644 ${WORKDIR}/inputattach.conf ${D}${sysconfdir}/inputattach.conf
-+}
-diff --git a/meta-oe/recipes-extended/inputattach-config/inputattach-config/inputattach.conf b/meta-oe/recipes-extended/inputattach-config/inputattach-config/inputattach.conf
-new file mode 100644
-index 000000000..86c421012
---- /dev/null
-+++ b/meta-oe/recipes-extended/inputattach-config/inputattach-config/inputattach.conf
-@@ -0,0 +1,8 @@
-+#
-+# Configuration for inputattach
-+#
-+# Every line of this file are inputattach arguments, see 'inputattach --help'.
-+# An inputattach instance will be started for each element.
-+#
-+# --microsoft /dev/ttyS0
-+# --baud 9600 --w8001 /dev/ttyS1
-diff --git a/meta-oe/recipes-extended/linuxconsole/linuxconsole/51-these-are-not-joysticks-rm.rules b/meta-oe/recipes-extended/linuxconsole/linuxconsole/51-these-are-not-joysticks-rm.rules
-new file mode 100644
-index 000000000..3e0ab4018
---- /dev/null
-+++ b/meta-oe/recipes-extended/linuxconsole/linuxconsole/51-these-are-not-joysticks-rm.rules
-@@ -0,0 +1,83 @@
-+# /etc/udev/rules.d/51-these-are-not-joysticks-rm.rules
-+#
-+# This file is auto-generated. For more information:
-+# https://github.com/denilsonsa/udev-joystick-blacklist
-+
-+SUBSYSTEM=="input", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c30a", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c30a", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a0df", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a0df", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0010", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0010", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0011", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0011", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0012", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0012", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0013", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0013", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0014", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0014", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0015", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0015", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0016", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0016", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0017", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0017", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0018", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0018", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0019", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0019", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="00d1", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="00d1", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="030e", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="030e", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="054f", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="054f", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="1410", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="1410", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="3043", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="3043", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="31b5", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="31b5", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="3997", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="3997", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="3f8b", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="3f8b", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="51f4", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="51f4", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="5589", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="5589", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="7b22", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="7b22", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="7f2d", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="7f2d", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="8090", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="8090", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="9033", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="9033", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="9066", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="9066", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="9090", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="9090", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="90c0", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="90c0", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f012", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f012", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f32a", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f32a", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f613", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f613", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f624", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="09da", ATTRS{idProduct}=="f624", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="1b1c", ATTRS{idProduct}=="1b3c", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="1b1c", ATTRS{idProduct}=="1b3c", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="1d57", ATTRS{idProduct}=="ad03", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="1d57", ATTRS{idProduct}=="ad03", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2e4a", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2e4a", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="20a0", ATTRS{idProduct}=="422d", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="20a0", ATTRS{idProduct}=="422d", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="2516", ATTRS{idProduct}=="001f", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="2516", ATTRS{idProduct}=="001f", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="2516", ATTRS{idProduct}=="0028", ENV{ID_INPUT_JOYSTICK}=="?*", ENV{ID_INPUT_JOYSTICK}=""
-+SUBSYSTEM=="input", ATTRS{idVendor}=="2516", ATTRS{idProduct}=="0028", KERNEL=="js[0-9]*", RUN+="/bin/rm %E{DEVNAME}", ENV{ID_INPUT_JOYSTICK}=""
-diff --git a/meta-oe/recipes-extended/linuxconsole/linuxconsole/60-joystick.rules b/meta-oe/recipes-extended/linuxconsole/linuxconsole/60-joystick.rules
-new file mode 100644
-index 000000000..24b009be2
---- /dev/null
-+++ b/meta-oe/recipes-extended/linuxconsole/linuxconsole/60-joystick.rules
-@@ -0,0 +1,7 @@
-+# Restore any stored calibration for the device
-+ACTION=="add", KERNEL=="js*", RUN+="/usr/bin/jscal-restore %E{DEVNAME}"
-+
-+# Set PS3 controller leds to the same value bluez will choose for it.
-+# IMPORT{parent} used because $parent did not appear to be working; we
-+# don't need the devpath of the js device for this so it is OK to overwrite.
-+ACTION=="add", KERNEL=="js*", IMPORT{parent}="DEVPATH", ATTRS{name}=="Sony PLAYSTATION(R)3 Controller", RUN+="/lib/udev/js-set-enum-leds /sys/%E{DEVPATH}/device/leds/ $number"
-diff --git a/meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattach.service b/meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattach.service
-new file mode 100644
-index 000000000..2ec902c09
---- /dev/null
-+++ b/meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattach.service
-@@ -0,0 +1,11 @@
-+[Unit]
-+Description=Attach serial input devices to kernel input subsystem
-+After=syslog.target
-+
-+[Service]
-+Type=forking
-+ExecStart=/usr/bin/inputattachctl start
-+ExecStop=/usr/bin/inputattachctl stop
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattachctl b/meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattachctl
-new file mode 100644
-index 000000000..c6da4e68f
---- /dev/null
-+++ b/meta-oe/recipes-extended/linuxconsole/linuxconsole/inputattachctl
-@@ -0,0 +1,16 @@
-+#!/bin/sh
-+
-+do_start() {
-+    grep -v '^#' /etc/inputattach.conf | while read -r line; do
-+        inputattach --daemon $line || exit 1
-+    done
-+}
-+
-+case "$1" in
-+    start)
-+        do_start
-+        ;;
-+    stop)
-+        killall -9 inputattach || true
-+        ;;
-+esac
-diff --git a/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.0.bb b/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.0.bb
-new file mode 100644
-index 000000000..c4cd1d609
---- /dev/null
-+++ b/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.0.bb
-@@ -0,0 +1,83 @@
-+SUMMARY = "Linux Console Project"
-+DESCRIPTION = "This project maintains the Linux Console tools, which include \
-+utilities to test and configure joysticks, connect legacy devices to the kernel's \
-+input subsystem (providing support for serial mice, touchscreens etc.), and test \
-+the input event layer."
-+HOMEPAGE = "https://sourceforge.net/projects/linuxconsole"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+DEPENDS = "libsdl2"
-+DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
++++ b/meta-oe/recipes-extended/beep/beep_1.2.2.bb
+@@ -0,0 +1,25 @@
++DESCRIPTION = "beep is a command line tool for linux that beeps the PC speaker"
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 +
 +SRC_URI = "\
-+    ${SOURCEFORGE_MIRROR}/linuxconsole/linuxconsoletools-${PV}.tar.bz2 \
-+    file://51-these-are-not-joysticks-rm.rules \
-+    file://60-joystick.rules \
-+    file://inputattachctl \
-+    file://inputattach.service \
++    http://johnath.com/beep/beep-${PV}.tar.gz \
++    file://linux-input.patch \
 +"
 +
-+SRC_URI[sha256sum] = "95d112f06393806116341d593bda002c8bc44119c1538407623268fed90d8c34"
++SRC_URI[sha256sum] = "5c0445dac43950b7c7c3f235c6fb21f620ab3fd2f3aafaf09896e5730fcf49a1"
 +
-+S = "${WORKDIR}/linuxconsoletools-${PV}"
++S = "${WORKDIR}/${BPN}-${PV}"
 +
-+inherit systemd pkgconfig
++EXTRA_OEMAKE += 'CC="${CC}"'
++EXTRA_OEMAKE += 'FLAGS="${CFLAGS} ${LDFLAGS}"'
 +
-+EXTRA_OEMAKE = "DESTDIR=${D} PREFIX=${prefix} -C utils"
-+EXTRA_OEMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'SYSTEMD_SUPPORT=1', '', d)}"
-+
-+SYSTEMD_PACKAGES += "inputattach"
-+SYSTEMD_SERVICE_inputattach = "inputattach.service"
-+SYSTEMD_AUTO_ENABLE_inputattach = "enable"
++do_configure[noexec] = "1"
 +
 +do_compile() {
-+    oe_runmake
++   oe_runmake
 +}
 +
 +do_install() {
-+    oe_runmake install
-+
-+    install -Dm 0644 ${WORKDIR}/51-these-are-not-joysticks-rm.rules ${D}${base_libdir}/udev/rules.d/51-these-are-not-joysticks-rm.rules
-+    install -Dm 0644 ${WORKDIR}/60-joystick.rules ${D}${base_libdir}/udev/rules.d/60-joystick.rules
-+
-+    install -Dm 0644 ${WORKDIR}/inputattach.service ${D}${systemd_system_unitdir}/inputattach.service
-+    install -Dm 0755 ${WORKDIR}/inputattachctl ${D}${bindir}/inputattachctl
++	install -Dm 0755 ${B}/${PN} ${D}${bindir}/${PN}
 +}
+diff --git a/meta-oe/recipes-extended/beep/files/linux-input.patch b/meta-oe/recipes-extended/beep/files/linux-input.patch
+new file mode 100644
+index 000000000..1b38ba72a
+--- /dev/null
++++ b/meta-oe/recipes-extended/beep/files/linux-input.patch
+@@ -0,0 +1,155 @@
++# the diff between Alessandro Zummo's copy of beep.c and the original
++# one...
 +
-+PACKAGES += "inputattach joystick"
-+
-+# We won't package any file here as we are following the same packaging schema
-+# Debian does and we are splitting it in 'inputattach' and 'joystick' packages.
-+FILES_${PN} = ""
-+
-+FILES_inputattach += "\
-+    ${bindir}/inputattach \
-+    ${bindir}/inputattachctl \
-+    ${systemd_system_unitdir}/inputattach.service \
-+"
-+
-+FILES_joystick += "\
-+    ${bindir}/evdev-joystick \
-+    ${bindir}/ffcfstress \
-+    ${bindir}/ffmvforce \
-+    ${bindir}/ffset \
-+    ${bindir}/fftest \
-+    ${bindir}/jscal \
-+    ${bindir}/jscal-restore \
-+    ${bindir}/jscal-store \
-+    ${bindir}/jstest \
-+    ${datadir}/joystick \
-+    ${base_libdir}/udev/rules.d/51-these-are-not-joysticks-rm.rules \
-+    ${base_libdir}/udev/js-set-enum-leds \
-+    ${base_libdir}/udev/rules.d/60-joystick.rules \
-+    ${base_libdir}/udev/rules.d/80-stelladaptor-joystick.rules \
-+"
-+
-+RDEPENDS_inputattach += "inputattach-config"
-+
-+RDEPENDS_joystick += "\
-+    bash \
-+    gawk \
-+"
++--- beep-1.2.2/beep.c.orig	2006-01-29 12:13:36.994560551 -0800
+++++ beep-1.2.2/beep.c	2006-01-29 12:35:02.950558713 -0800
++@@ -26,6 +26,7 @@
++ #include <sys/ioctl.h>
++ #include <sys/types.h>
++ #include <linux/kd.h>
+++#include <linux/input.h>
++ 
++ /* I don't know where this number comes from, I admit that freely.  A 
++    wonderful human named Raine M. Ekman used it in a program that played
++@@ -86,18 +87,28 @@ typedef struct beep_parms_t {
++   struct beep_parms_t *next;  /* in case -n/--new is used. */
++ } beep_parms_t;
++ 
+++enum { BEEP_TYPE_CONSOLE, BEEP_TYPE_EVDEV };
+++
++ /* Momma taught me never to use globals, but we need something the signal 
++    handlers can get at.*/
++ int console_fd = -1;
+++int console_type = BEEP_TYPE_CONSOLE;
+++char *console_device = NULL;
+++
+++void do_beep(int freq);
++ 
++ /* If we get interrupted, it would be nice to not leave the speaker beeping in
++    perpetuity. */
++ void handle_signal(int signum) {
+++  
+++  if(console_device)
+++    free(console_device);
+++    
++   switch(signum) {
++   case SIGINT:
++     if(console_fd >= 0) {
++       /* Kill the sound, quit gracefully */
++-      ioctl(console_fd, KIOCSOUND, 0);
+++      do_beep(0);
++       close(console_fd);
++       exit(signum);
++     } else {
++@@ -110,7 +121,7 @@ void handle_signal(int signum) {
++ /* print usage and exit */
++ void usage_bail(const char *executable_name) {
++   printf("Usage:\n%s [-f freq] [-l length] [-r reps] [-d delay] "
++-	 "[-D delay] [-s] [-c]\n",
+++	 "[-D delay] [-s] [-c] [-e device]\n",
++ 	 executable_name);
++   printf("%s [Options...] [-n] [--new] [Options...] ... \n", executable_name);
++   printf("%s [-h] [--help]\n", executable_name);
++@@ -141,11 +152,12 @@ void usage_bail(const char *executable_n
++ void parse_command_line(int argc, char **argv, beep_parms_t *result) {
++   int c;
++ 
++-  struct option opt_list[4] = {{"help", 0, NULL, 'h'},
+++  struct option opt_list[] = {{"help", 0, NULL, 'h'},
++ 			       {"version", 0, NULL, 'V'},
++ 			       {"new", 0, NULL, 'n'},
+++			       {"device", 1, NULL, 'e'},
++ 			       {0,0,0,0}};
++-  while((c = getopt_long(argc, argv, "f:l:r:d:D:schvVn", opt_list, NULL))
+++  while((c = getopt_long(argc, argv, "f:l:r:d:D:schvVne:", opt_list, NULL))
++ 	!= EOF) {
++     int argval = -1;    /* handle parsed numbers for various arguments */
++     float argfreq = -1; 
++@@ -207,6 +219,9 @@ void parse_command_line(int argc, char *
++       result->next->next       = NULL;
++       result = result->next; /* yes, I meant to do that. */
++       break;
+++    case 'e' : /* also --device */
+++      console_device = strdup(optarg);
+++      break;
++     case 'h' : /* notice that this is also --help */
++     default :
++       usage_bail(argv[0]);
++@@ -214,26 +229,61 @@ void parse_command_line(int argc, char *
++   }
++ }  
++ 
+++void do_beep(int freq)
+++{
+++  if (console_type == BEEP_TYPE_CONSOLE)
+++  {
+++    if(ioctl(console_fd, KIOCSOUND, freq != 0
+++      ? (int)(CLOCK_TICK_RATE/freq)
+++      : freq) < 0) {
+++      printf("\a");  /* Output the only beep we can, in an effort to fall back on usefulness */
+++      perror("ioctl");
+++    }
+++  }
+++  else
+++  {
+++     /* BEEP_TYPE_EVDEV */
+++     struct input_event e;
+++ 
+++     e.type = EV_SND;
+++     e.code = SND_TONE;
+++     e.value = freq;
+++  
+++     write(console_fd, &e, sizeof(struct input_event));
+++  }
+++}
+++
++ void play_beep(beep_parms_t parms) {
++   int i; /* loop counter */
++ 
++   /* try to snag the console */
++-  if((console_fd = open("/dev/console", O_WRONLY)) == -1) {
++-    fprintf(stderr, "Could not open /dev/console for writing.\n");
+++
+++  if(console_device)
+++    console_fd = open(console_device, O_WRONLY);
+++  else
+++    if((console_fd = open("/dev/input/event0", O_WRONLY)) == -1)
+++      if((console_fd = open("/dev/tty0", O_WRONLY)) == -1)
+++        console_fd = open("/dev/vc/0", O_WRONLY);
+++      
+++  if(console_fd == -1) {
+++    fprintf(stderr, "Could not open %s for writing\n",
+++      console_device != NULL ? console_device : "/dev/tty0 or /dev/vc/0");
++     printf("\a");  /* Output the only beep we can, in an effort to fall back on usefulness */
++     perror("open");
++     exit(1);
++   }
++   
+++  if (ioctl(console_fd, EVIOCGSND(0)) != -1)
+++    console_type = BEEP_TYPE_EVDEV;
+++  else
+++    console_type = BEEP_TYPE_CONSOLE;
+++  
++   /* Beep */
++   for (i = 0; i < parms.reps; i++) {                    /* start beep */
++-    if(ioctl(console_fd, KIOCSOUND, (int)(CLOCK_TICK_RATE/parms.freq)) < 0) {
++-      printf("\a");  /* Output the only beep we can, in an effort to fall back on usefulness */
++-      perror("ioctl");
++-    }
+++    do_beep(parms.freq);
++     /* Look ma, I'm not ansi C compatible! */
++     usleep(1000*parms.length);                          /* wait...    */
++-    ioctl(console_fd, KIOCSOUND, 0);                    /* stop beep  */
+++    do_beep(0);
++     if(parms.end_delay || (i+1 < parms.reps))
++        usleep(1000*parms.delay);                        /* wait...    */
++   }                                                     /* repeat.    */
++@@ -295,5 +345,8 @@ int main(int argc, char **argv) {
++     parms = next;
++   }
++ 
+++  if(console_device)
+++    free(console_device);
+++    
++   return EXIT_SUCCESS;
++ }
 -- 
 2.29.2
 
