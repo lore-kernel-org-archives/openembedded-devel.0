@@ -1,101 +1,139 @@
-Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com [209.85.219.65])
- by mx.groups.io with SMTP id smtpd.web12.507.1607471754440141890
+Received: from mickerik.phytec.de (mickerik.phytec.de [195.145.39.210])
+ by mx.groups.io with SMTP id smtpd.web11.7830.1607526206151479645
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Dec 2020 15:55:54 -0800
+ Wed, 09 Dec 2020 07:03:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=uCxj6JUU;
- spf=pass (domain: gmail.com, ip: 209.85.219.65, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f65.google.com with SMTP id bd6so114029qvb.9
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Dec 2020 15:55:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=yAIPpqIXVshftaXbvRGxeIO56MQo/FweDwITqPWyR28=;
-        b=uCxj6JUU8z7JWQ3/G67eDVwfczNbOvLklD/lI8irpIt6u3RN+5ITMyu+aEV0PlO77t
-         ex4NkZKtOYbernQZjUU2g2+GyUiHpTICYTIn1kUDtH9uuOX6I1yntXQ8aq2mt+zf90tS
-         w8kvgF0ZmWW5MjNF5PKvx84cQpBozScQrt63oh0T/7prA5a1g+/PuMW1zMsXWM3nI2i4
-         VeSfmRj5n08AoR6w1SVnYYRrMQtEHnNSMCsbMhCbK121GmdYzdKrK6IDX4cVXBPLyJ0S
-         PBeLp0pteclW1tt8Jzyf6ELdQkbVdIMx8l1YADzc95sAAq+h31JoF8HUddncwB+a2OC9
-         ScxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=yAIPpqIXVshftaXbvRGxeIO56MQo/FweDwITqPWyR28=;
-        b=Qt0Ak8d90Pj547Eb6zgQAuqThmblL/zRkv6CEmJP9RZU2Xt73k0O6ZSMbMa+E+d/O8
-         jlnQf6W2H1oC9mbo4NE9kRUgVNcNA1FV8P9acrBist5AHhvkYvOhdIni8yUrJIK/u/Vy
-         nZC2B/kJx1eW1TzOajU94dv0xuJopxZKJfdhVKE9JBIg6lblcMITph94KiLrFn/+J1oV
-         bTMtHis3DVzQC2e8JDQyTKUU50Rz85xlgxoYq5hDTefjgkXhM4UCKzPHhEulQduKXeNG
-         7iwyFKM0Kvxg6sEWaVrSQC1Ldpajg8wCQ5PPcP/bljViAy/wYR/mxPiGNXXad73OyIgP
-         Bt2A==
-X-Gm-Message-State: AOAM530Cp9z2YY9FLdym0MIFn0cESl20b59oWGggATQtgPgGnN5UVhAY
-	ZRiSLshARMjyWlWsBDcn0tQmDrRGq9/sexoNMCg=
-X-Google-Smtp-Source: ABdhPJwvmYNYabVlFy/s2maKpyvEyuWAPJcOpFHBYujfMc6LEfn+65WGFjQVJJKnI003l1CvcuYuWwWAJvou0qIbAeU=
-X-Received: by 2002:ad4:4052:: with SMTP id r18mr710067qvp.38.1607471753451;
- Tue, 08 Dec 2020 15:55:53 -0800 (PST)
-MIME-Version: 1.0
-References: <20201204040829.38707-1-twoerner@gmail.com> <20201204040829.38707-2-twoerner@gmail.com>
- <CAMKF1srUKMu4BKER5xBhc5Kw5tOoqPE3PgGHYWAiLx7u0yEHig@mail.gmail.com>
-In-Reply-To: <CAMKF1srUKMu4BKER5xBhc5Kw5tOoqPE3PgGHYWAiLx7u0yEHig@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Tue, 8 Dec 2020 15:55:26 -0800
-Message-ID: <CAMKF1sq4bSW23uEmcuD8+W_+yvi0dKKpTh_-aApasRPb=heHGA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v3 2/3] glmark2: update to latest
-To: Trevor Woerner <twoerner@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+ dkim=fail reason="unable to parse pub key" header.i=@phytec.de header.s=a1 header.b=AYbnG+6z;
+ spf=pass (domain: phytec.de, ip: 195.145.39.210, mailfrom: r.karszniewicz@phytec.de)
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a1; c=relaxed/simple;
+	q=dns/txt; i=@phytec.de; t=1607526204; x=1610118204;
+	h=From:Sender:Reply-To:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:
+	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=GR/HTaRrHMZY5qQewiLbVcrR+2s6XE/CcPlOBAXCl5o=;
+	b=AYbnG+6zv9uWw0XzLZDXzvobxoCQ+D7c/6CG5idTb3xOMGsKu8hxY3yeHYQgJeM4
+	Fy5WTCA6/C3eJIstLNN/uPz7S41smiKm2Kg1k4/Qq4xjxl4J8mn7nQEM/gM8/R1g
+	LA/pKEAfKrW1VAuDo0U84t9K690erXdMlWckfNXr+B0=;
+X-AuditID: c39127d2-96bff70000006435-c6-5fd0e73bd5eb
+Received: from idefix.phytec.de (Unknown_Domain [172.16.0.10])
+	by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id D1.58.25653.B37E0DF5; Wed,  9 Dec 2020 16:03:23 +0100 (CET)
+Received: from augenblix2.phytec.de ([172.16.0.56])
+          by idefix.phytec.de (IBM Domino Release 9.0.1FP7)
+          with ESMTP id 2020120916032358-947468 ;
+          Wed, 9 Dec 2020 16:03:23 +0100 
+From: "Robert Karszniewicz" <r.karszniewicz@phytec.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH v3] firmwared: add recipe
+Date: Wed, 9 Dec 2020 16:03:23 +0100
+Message-Id: <1607526203-308344-1-git-send-email-r.karszniewicz@phytec.de>
+X-Mailer: git-send-email 2.7.4
+X-MIMETrack: Itemize by SMTP Server on Idefix/Phytec(Release 9.0.1FP7|August  17, 2016) at
+ 09.12.2020 16:03:23,
+	Serialize by Router on Idefix/Phytec(Release 9.0.1FP7|August  17, 2016) at
+ 09.12.2020 16:03:23,
+	Serialize complete at 09.12.2020 16:03:23
+X-TNEFEvaluated: 1
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrBJMWRmVeSWpSXmKPExsWyRoCBS9f6+YV4g0tfrSwuHl7K7MDocW7j
+	CsYAxigum5TUnMyy1CJ9uwSujCOP/jAWnJKs2L/uL3sD4yPRLkYODgkBE4lj3axdjFwcQgJb
+	GSU2HtnP0sXICeScY5Q4cl8FxGYDqtndfIsZxBYR0JX4+GEuI4gtLGAk8X/CBDYQm0VAReLV
+	nnfMIDN5BTwl9nzSBglLCMhJ3DzXyQwyX0KgkUli6slDrBAJIYnTi88yT2DkXsDIsIpRKDcz
+	OTu1KDNbryCjsiQ1WS8ldRMj0HeHJ6pf2sHYN8fjECMTB+MhRgkOZiURXjWps/FCvCmJlVWp
+	RfnxRaU5qcWHGKU5WJTEeTfwloQJCaQnlqRmp6YWpBbBZJk4OKUaGMMaoqZ23frDe81+8n8e
+	xm7bws1V/+aGPayyOn6qneVJigU/s7CrcxSj+5+21dkLJDkMhN9GVgv+2KAbN3930Z4/h07n
+	TbnxQ7zI0jtm3uTclk3WV/YttDN8yVh9NZu7ZUrTTVZu+6IXy1bahwht2Hd/nt4B3gbtV5x9
+	HdtcWA821Pzhr551U4mlOCPRUIu5qDgRAA+vAhrLAQAA
 
-while I have applied v3, please send a v4 addressing this change.
+This program is needed for loading external firmware via Linux' fallback
+mechanism.
 
-On Sat, Dec 5, 2020 at 10:45 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Thu, Dec 3, 2020 at 8:08 PM Trevor Woerner <twoerner@gmail.com> wrote:
-> >
-> > Signed-off-by: Trevor Woerner <twoerner@gmail.com>
-> > ---
-> > changes from v1 to v2:
-> > - Added. I had forgotten to submit this the first time.
-> >
-> > changes from v2 to v3:
-> > - Fixed do_compile for wayland.
-> > ---
-> >  meta-oe/recipes-benchmark/glmark2/glmark2_git.bb | 5 +++--
-> >  1 file changed, 3 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-> > index 320d07dfc..209230572 100644
-> > --- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-> > +++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-> > @@ -9,13 +9,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-> >                      file://COPYING.SGI;beginline=5;md5=269cdab4af6748677acce51d9aa13552"
-> >
-> >  DEPENDS = "libpng jpeg udev"
-> > +DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland-native', '', d)}"
-> >
-> > -PV = "20191226+${SRCPV}"
-> > +PV = "2020.11+${SRCPV}"
->
-> this version change is not upgradable i am seeing
->
-> glmark2-2020.11+AUTOINC+784aca755a: Package version for package
-> glmark2-src went backwards which would break package feeds (from
-> 0:20191226+0+72dabc5d72-r0.0 to 0:2020.11+0+784aca755a-r0.0)
-> [version-going-backwards]
->
->
-> >
-> >  COMPATIBLE_HOST_rpi  = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', '.*-linux*', 'null', d)}"
-> >
-> >  SRC_URI = "git://github.com/glmark2/glmark2.git;protocol=https"
-> > -SRCREV = "72dabc5d72b49c6d45badeb8a941ba4d829b0bd6"
-> > +SRCREV = "784aca755a469b144acf3cae180b6e613b7b057a"
-> >
-> >  S = "${WORKDIR}/git"
-> >
-> > --
-> > 2.28.0.497.g54e85e7af1
-> >
-> >
-> > 
-> >
+Signed-off-by: Robert Karszniewicz <r.karszniewicz@phytec.de>
+---
+Changes from v2:
+- replace *all* systemd_unitdir with systemd_system_unitdir now
+
+Changes from v1:
+- remove PR setting
+- set PV to 0, not 1
+- inherit features_check and require systemd
+- use ${systemd_system_unitdir} instead of ${systemd_unitdir}/system
+- add firmwared to packagegroup-meta-oe
+- add do_configure_prepend() (I had made a mistake in testing earlier)
+
+ .../firmwared/firmwared/firmwared.service          |  9 ++++++
+ meta-oe/recipes-bsp/firmwared/firmwared_git.bb     | 34 ++++++++++++++++++++++
+ .../packagegroups/packagegroup-meta-oe.bb          |  1 +
+ 3 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-bsp/firmwared/firmwared/firmwared.service
+ create mode 100644 meta-oe/recipes-bsp/firmwared/firmwared_git.bb
+
+diff --git a/meta-oe/recipes-bsp/firmwared/firmwared/firmwared.service b/meta-oe/recipes-bsp/firmwared/firmwared/firmwared.service
+new file mode 100644
+index 000000000000..c2106a25168c
+--- /dev/null
++++ b/meta-oe/recipes-bsp/firmwared/firmwared/firmwared.service
+@@ -0,0 +1,9 @@
++[Unit]
++Description=Linux Firmware Loader Daemon
++
++[Service]
++Type=simple
++ExecStart=@BINDIR@/firmwared -d /lib/firmware
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-bsp/firmwared/firmwared_git.bb b/meta-oe/recipes-bsp/firmwared/firmwared_git.bb
+new file mode 100644
+index 000000000000..43fc59815471
+--- /dev/null
++++ b/meta-oe/recipes-bsp/firmwared/firmwared_git.bb
+@@ -0,0 +1,34 @@
++SUMMARY = "Linux Firmware Loader Daemon"
++DESCRIPTION = "The Linux Firmware Loader Daemon monitors the kernel for \
++firmware requests and uploads the firmware blobs it has via the sysfs \
++interface."
++HOMEPAGE = "https://github.com/teg/firmwared"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE-APACHE;md5=7b486c2338d225a1405d979ed2c15ce8 \
++                    file://COPYING;md5=daa868b8e1ae17d03228a1145b4060da"
++
++SRC_URI = "git://github.com/teg/firmwared.git \
++           file://firmwared.service"
++
++PV = "0+git${SRCPV}"
++SRCREV = "2e6b5db43d63a5c0283a4cae9a6a20b7ad107a04"
++
++S = "${WORKDIR}/git"
++
++DEPENDS = "glib-2.0 systemd"
++
++inherit pkgconfig autotools systemd features_check
++
++REQUIRED_DISTRO_FEATURES = "systemd"
++
++SYSTEMD_SERVICE_${PN} = "firmwared.service"
++
++do_configure_prepend() {
++    ${S}/autogen.sh
++}
++
++do_install_append() {
++    install -d ${D}${systemd_system_unitdir}
++    install -m 0644 ${WORKDIR}/firmwared.service ${D}${systemd_system_unitdir}
++    sed -i -e 's,@BINDIR@,${bindir},g' ${D}${systemd_system_unitdir}/firmwared.service
++}
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 841e1cd1b3ab..2c46d21b705f 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -87,6 +87,7 @@ RDEPENDS_packagegroup-meta-oe-bsp ="\
+     acpitool \
+     cpufrequtils \
+     edac-utils \
++    firmwared \
+     flashrom \
+     irda-utils \
+     lmsensors-config-cgi \
+-- 
+2.7.4
+
