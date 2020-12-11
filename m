@@ -1,79 +1,90 @@
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com [209.85.222.194])
- by mx.groups.io with SMTP id smtpd.web11.1434.1607655716826973620
+Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com [209.85.219.45])
+ by mx.groups.io with SMTP id smtpd.web12.2592.1607663618376123191
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Dec 2020 19:01:57 -0800
+ Thu, 10 Dec 2020 21:13:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=niWfzfWM;
- spf=pass (domain: gmail.com, ip: 209.85.222.194, mailfrom: twoerner@gmail.com)
-Received: by mail-qk1-f194.google.com with SMTP id b64so3201873qkc.12
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Dec 2020 19:01:56 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=cjaxONqi;
+ spf=pass (domain: gmail.com, ip: 209.85.219.45, mailfrom: twoerner@gmail.com)
+Received: by mail-qv1-f45.google.com with SMTP id s6so3677260qvn.6
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Dec 2020 21:13:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=date:from:to:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to:user-agent;
-        bh=t5L5/jJSxg47Gcu7o/HGwehehBI4lqvPigCDTjRgzwI=;
-        b=niWfzfWMXHYlKHE68jqcBRQA1WTAbTvz/zCJw+0qKoUegWu457dTmL71fS/VhnGO6c
-         hctehUptqrz8u+Pjfi8zHY+oAzpb+qb8DQCH+rdI+SKikz09Wi2g07ZVNHH1ssFjWSg4
-         bVJMb9d2gojEVFWq9jR/vwnX11p8jZRs1/3lEvLcGrk7ceqZpmyip9YUSajSMs2jraK2
-         kgRp+5Lk/DRnc4GHrjXApv+yuu2Rz3bYB8x7LGSYsCwv65tQqOpK2YUhu7h466yAPNLp
-         QmPuQG/PVN+ukWN9z6dbRIIfVL7xGSJNNbx8S4fA3kVKvv1vxNwvWPKARqVZSeAFcWGZ
-         pPGA==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=HzlQRkhDKwU/Ld55J6kYkieaxjqURV6VJF+AHa8BcEI=;
+        b=cjaxONqi2G10O0lL4oBxfkq+mD2/MWOfov+wAhlvb2N+bO/MVmLfpah9zwQItre2eX
+         RVJN1C4+8cXSdOygokCAig3W44XZsV7Xshg6znLAQbK/1HB9sYEwNfl9eaxHCNxQOcH0
+         9Nz7AwSxz80fbpGFPPhjLnCb1zguIDm9fXVuVpPvZVfuXV/yZ+I4/mjJ3CN7XFwj28C6
+         kfA2i2uwNC0EdMWvtLZXJ5DkFyRrTwaIv28nwK+kpa8i6KTtKoIlKkQ41ti64qp/ipqg
+         14kq8pAZvrxIaRdgK/xrQAhaCcQXwfl+lfe80TiohirE+m2Dl6qBm1qIvj2gndokRvB/
+         bw6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=t5L5/jJSxg47Gcu7o/HGwehehBI4lqvPigCDTjRgzwI=;
-        b=PV93k7yBSH1B0bADn9xcwU3sVem3Mx0qsOnm4wFxgG5EMbF5y11YgyGhsnUv8IT1oD
-         C6RrKDAg1MmLLcfWnZZea+QwM+8zhSp3CYD+3JXtQcf01MVP7oI6O7kYVwFHjH1cjgLi
-         tsVdG+UW+KBFqMRpOmNTYNv7JTrbA1K0GHAghqtUm/ypZFHfY/rzv8Xz7IWTx6hJ5+qv
-         Xp/pW2b9tdwYfwxy+u5OFlWfb2xf9pCX8qJNRY/6yj0/KiOk/Romx3VDGmXFo2vSPw56
-         tBGkVjz5ooaoXNItqqMknkEBpR+Ela2T5T6N5cNvtY8ceVFbiTF2TO2NVlj6bHlyakp7
-         sFZg==
-X-Gm-Message-State: AOAM530gojUAnEfH7YbTT42sbOY8NKRt727FPCGZuM43vvfnXK+9Adv0
-	GxI/FNFDGgRSPJAz7cghuII=
-X-Google-Smtp-Source: ABdhPJxOTyw8ZS8SBeFWfQK3E/tLli/GXZZTdv9kMc4g3tJLjicnXPAl59NEehvtftaaNpg6qXfJxg==
-X-Received: by 2002:a05:620a:12b9:: with SMTP id x25mr13496622qki.421.1607655715967;
-        Thu, 10 Dec 2020 19:01:55 -0800 (PST)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=HzlQRkhDKwU/Ld55J6kYkieaxjqURV6VJF+AHa8BcEI=;
+        b=jkAbidD7Y7hzlWCCZpeXuDTw1z4/uI1kKwSJkyztfaH+R9ljWoHS8GhDQMgAp2XInh
+         GQCGBw70w1zp7mvnuKhqkCsvWyYfNZW9oRxxrzlkd2EQlQPmYcp0CBSnGXVJ3DXzdTTC
+         BcADP4KrS1skP87e2bO3LCO3miHYAEpu+Jy/HtCWZd/rmLja4TkyvozvevjKnjg4BDO+
+         5DijUUYV4v70X09IMqYoNpZqVWbAFMV1WkTDkM78ZpRP0FXLzY21rMIQSER+w2UFqi8a
+         xvfd5MDpK55r7KnhIkRcBLg02TDK3XiwB8AfeJpdOADBUgTPBG7zmJk2z8iIpw+eC13h
+         IfIQ==
+X-Gm-Message-State: AOAM531e/urMtN0ji9IRBUvo/ww04LplY3cb9mzdhmWf9KUgjirtMd/+
+	wwD/PMnAd//3iKFShXihdBgwLIqK/oeT2Q==
+X-Google-Smtp-Source: ABdhPJzak9YnYunl64NlV+i0WFv6g8qIytod+bWl3vo+kAbHqkm6/ywCNQLR1MR74bq9bWrRIXJjzQ==
+X-Received: by 2002:ad4:4426:: with SMTP id e6mr13732259qvt.51.1607663617097;
+        Thu, 10 Dec 2020 21:13:37 -0800 (PST)
 Return-Path: <twoerner@gmail.com>
-Received: from localhost ([206.248.190.95])
-        by smtp.gmail.com with ESMTPSA id b6sm5618033qkc.128.2020.12.10.19.01.54
+Received: from localhost.localdomain ([206.248.190.95])
+        by smtp.gmail.com with ESMTPSA id x189sm5986855qka.26.2020.12.10.21.13.35
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Dec 2020 19:01:55 -0800 (PST)
-Date: Thu, 10 Dec 2020 22:01:52 -0500
+        Thu, 10 Dec 2020 21:13:36 -0800 (PST)
 From: "Trevor Woerner" <twoerner@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][PATCH v3 2/3] glmark2: update to latest
-Message-ID: <20201211030152.GA28190@localhost>
-References: <20201204040829.38707-1-twoerner@gmail.com>
- <20201204040829.38707-2-twoerner@gmail.com>
- <CAMKF1srUKMu4BKER5xBhc5Kw5tOoqPE3PgGHYWAiLx7u0yEHig@mail.gmail.com>
- <CAMKF1sq4bSW23uEmcuD8+W_+yvi0dKKpTh_-aApasRPb=heHGA@mail.gmail.com>
- <CAHUNapQMNV5Ei_2MKYyaWKyD6xQ6_U_sZbwRdaGCwBcWWnc-tw@mail.gmail.com>
- <CAMKF1spwyen8hwQ7iwJ36kS=WGRZUy6sOS0EDvUX29GCH2uTPA@mail.gmail.com>
- <164F89DE82BCA6CD.23621@lists.openembedded.org>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] glmark2: revert to previous behaviour
+Date: Fri, 11 Dec 2020 00:13:26 -0500
+Message-Id: <20201211051326.16132-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.28.0.497.g54e85e7af1
 MIME-Version: 1.0
-In-Reply-To: <164F89DE82BCA6CD.23621@lists.openembedded.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Thu 2020-12-10 @ 09:52:56 PM, Trevor Woerner via lists.openembedded.org wrote:
-> On Thu 2020-12-10 @ 12:34:17 PM, Khem Raj wrote:
-> > On Thu, Dec 10, 2020 at 11:39 AM Trevor Woerner <twoerner@gmail.com> wrote:
-> > >
-> > > On Tue, Dec 8, 2020 at 6:55 PM Khem Raj <raj.khem@gmail.com> wrote:
-> > >>
-> > >> while I have applied v3, please send a v4 addressing this change.
-> > >
-> > >
-> > > I had wanted to try going in a different direction, one that didn't need the DISTRO_FEATURE thing.
-> > 
-> > all I wanted was to fix PV as a followup
-> 
-> Ah sorry, an update to 2/3. Okay, coming shortly.
-> 
-> Can we drop 3/3? I'd like to give it another go without the "dispmanx"
-> DISTRO_FEATURES.
+- use "drm-gles2" as the default PACKAGECONFIG outside of any defined
+  DISTRO_FEATURES
+- use a version string that includes the full date of the latest git change
+  (not just: <year>.<month>)
 
-Oops, too late. Okay, I'll submit a new patch.
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+---
+ meta-oe/recipes-benchmark/glmark2/glmark2_git.bb | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+index 46634634d..44bce9fb5 100644
+--- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
++++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+ DEPENDS = "libpng jpeg udev"
+ DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland-native', '', d)}"
+ 
+-PV = "2020.11+${SRCPV}"
++PV = "20201114+${SRCPV}"
+ 
+ SRC_URI = " \
+     git://github.com/glmark2/glmark2.git;protocol=https \
+@@ -26,9 +26,10 @@ inherit waf pkgconfig features_check
+ 
+ ANY_OF_DISTRO_FEATURES = "opengl dispmanx"
+ 
+-PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'x11-gles2 drm-gles2', '', d)} \
+-                  ${@bb.utils.contains('DISTRO_FEATURES', 'wayland opengl', 'wayland-gles2 drm-gles2', '', d)} \
++PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'x11-gles2', '', d)} \
++                  ${@bb.utils.contains('DISTRO_FEATURES', 'wayland opengl', 'wayland-gles2', '', d)} \
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'dispmanx', 'dispmanx', '', d)} \
++                  drm-gles2 \
+                  "
+ 
+ PACKAGECONFIG[x11-gl] = ",,virtual/libgl virtual/libx11"
+-- 
+2.28.0.497.g54e85e7af1
+
