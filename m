@@ -1,337 +1,127 @@
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web11.1084.1607733191905919146
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com [209.85.215.195])
+ by mx.groups.io with SMTP id smtpd.web08.10660.1607812245885357492
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Dec 2020 16:33:12 -0800
+ Sat, 12 Dec 2020 14:30:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=SrP2sSaz;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id t18so5470344plo.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Dec 2020 16:33:11 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=O/bYiInc;
+ spf=pass (domain: gmail.com, ip: 209.85.215.195, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f195.google.com with SMTP id n10so1792805pgl.10
+        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Dec 2020 14:30:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=L+j2syjTEy6IPcFw5/vlPrnpSysDu+PbCzFWm6LiVjI=;
-        b=SrP2sSaznJTFCWTjSk662JEDR589ZX7s2zzgOPe+xjdUzH35IF3bqOHNgndjhw0tFr
-         Zo+3rqiQT8rftcQKLqsvb3We99QFjUOmPvQtvFuwPLibO8hwFg1L23SgrLyNJPgFgcS0
-         Tx1evLOnJP11huuchl4izi6nzNSCm78t6iFhfP208LMSjH5s25mJ8B24gx3SoNAZsQvh
-         B4I5oKkC13TdskvNegz+LQIhHB6tCOr+mFSpUsmMdgmYT3KIMAUIOv9q/AqAdVMqWYJg
-         kfhTAieOp9ZTxzdSvOXIjooLQQ5JomAyRvjEZEFGT+9bS6VR0sWkvzcZzDcKvniCkyj+
-         5OoA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=WbgMEp5DbCjAJbl/tmhuIVczhah3c6iPdc8IJnqIxoQ=;
+        b=O/bYiIncNXSpS+04M3dF0+ftI4cZR0oK9763D3TrxPuGKUoUwS1FQbfONDC8APBna3
+         +WmMKla/0X/zGs0X5QZelqt3tLIYIgSFm76D6Y9KLRUfBTr1q1pDIHYKkMkhojcBw+Rq
+         fwnRbpnJYrzHNwmzR0NgAO6yr9Vtod9VME1Ai0itAewYRBSWaXWr2lGtwxVVn6q5NRr2
+         dIw7lCgwTBsUZEBqP0/k+QdAXAY4kqN0wX2ilhm/d02If1jDfSi7RDDyYlb8GoZbdqin
+         zpTdUfgKQxnbFrCTt1vXhNgaKXGPJl3i7DtoOTu0xFFk0kTFHfGizeARSuusl5tWjHA/
+         KL4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=L+j2syjTEy6IPcFw5/vlPrnpSysDu+PbCzFWm6LiVjI=;
-        b=hsn6XYrz+agbTru1zV0eFcQXpqLGM/WKndlcDi7dr8CJf7Qz8VIxfkHUTam/vA86Gl
-         RDIwxIO3Mjsm8aqKj6EJPudAaBwkxruTIL9ahycHWZlB2ze5N3EtkJsKo+b+IpZ0XsDF
-         1S3vkfAmPJDuCSHQcq+IRK8lRkzok3oRhUyJEvTXAwm+sUoON2xJBWl0qxThLlNlez7S
-         2LXMeTTrKgiZ/079IpitVgPvPxCFYzK5a1cCS8bRkdlgOaWvs8rthqiCo+mZb6rWsBQc
-         COkRUZh9xzOz8nvO/mtLZfWaLCRkxXUe5hFY1Rec7DWY9FOm0EyyXFw9a2g5VYCA7fVm
-         8APw==
-X-Gm-Message-State: AOAM5300aOlEeBFr5s8ca/dGOdS8QmaAYBQDprNQJmPUPdVXYhCWGVTh
-	pDUxxbV7tn60HwY3jzztk+Culwe/pUPVBw==
-X-Google-Smtp-Source: ABdhPJwlaojyOfrfyeZatpwlbiiaoDRvZesnkT+tRNTVWJhc/TA+1zpTKAg6jintLYV1V91WF58qNA==
-X-Received: by 2002:a17:902:8e87:b029:d8:e26a:77ea with SMTP id bg7-20020a1709028e87b02900d8e26a77eamr13462954plb.18.1607733190976;
-        Fri, 11 Dec 2020 16:33:10 -0800 (PST)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:159e:b7b3:814a:a500])
-        by smtp.gmail.com with ESMTPSA id 3sm11671295pfv.92.2020.12.11.16.33.10
-        for <openembedded-devel@lists.openembedded.org>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=WbgMEp5DbCjAJbl/tmhuIVczhah3c6iPdc8IJnqIxoQ=;
+        b=MgEtme3Dmv7e9KA6wfA5yDcq0jyXBz8Z/FxkvMbp8vQrBJCBb9wpG7gFpm0JUDTWGn
+         KbI2sZzbOPoJq2Ot1AQ4z1TlEGx9pjOxAmbZA5HrC2tiAIQsb4yBC4VzzASvbaQj4g1e
+         II/9TjuarwX23yV2KNC2ZW6lAoeTLOEnk4nes5iQWHG8o8907+BdzxR09+iTsah6oa8i
+         e2xctvl9PqtryLK59+Oh2cEc006XXlunFxNIa4aeYEdWtMmG82gTh3P+xFD6BGgzlRHg
+         g/5kuTYtbProFaRECWoWAAcqepVEeNLAs60YYxbLLl+9jkUAgG53sbj0saz8JIOb4zhJ
+         6ouw==
+X-Gm-Message-State: AOAM530CCq/qDm/yHH/z6ljoh/5mWqpA0tolIu1t+PznaZzyiIPX7AwD
+	sBB7saHXPASPBG+iT7oTdChFolPcFNpglA==
+X-Google-Smtp-Source: ABdhPJz3sUsl4B4vlXe8LXKN7eL0vkAe4c1L2pQJy/icKOTf7XUsRUwL0Vp3gF31XoH0rbOo6BHGWA==
+X-Received: by 2002:a63:491b:: with SMTP id w27mr17807131pga.284.1607812245067;
+        Sat, 12 Dec 2020 14:30:45 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::5bf5])
+        by smtp.gmail.com with ESMTPSA id 77sm14471345pfx.156.2020.12.12.14.30.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Dec 2020 16:33:10 -0800 (PST)
-From: "akuster" <akuster808@gmail.com>
+        Sat, 12 Dec 2020 14:30:44 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][gatesgarth][PATCH 1/1] Revert "gnome-calendar: update to 3.38.1, add libhandy 1.x support"
-Date: Fri, 11 Dec 2020 16:33:08 -0800
-Message-Id: <20201212003308.10862-2-akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201212003308.10862-1-akuster808@gmail.com>
-References: <20201212003308.10862-1-akuster808@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] pidgin-sipe: Do not add native libdir to pkgconfig search path
+Date: Sat, 12 Dec 2020 14:30:42 -0800
+Message-Id: <20201212223042.2148369-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.29.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-This change causes build failure:
+This works fine until valgrind is installed on build host but its not
+selected as option to build in recipe, configure wrongly pokes at
+/usr/lib and sees valgrind there and enables it but only to fail in
+compile time where it does not find valgrind.h in recipe sysroot, since
+OE's build environment add right guardrails to pkgconfig, there is no
+need to add build staging area to pkgconfig search path which turns out
+to be wrong for cross builds anyway
 
- Found CMake: NO
- | Run-time dependency libhandy-1 found: NO (tried pkgconfig)
- |
- | ../gnome-calendar-3.38.1/meson.build:166:0: ERROR: Dependency "libhandy-1" not found, tried pkgconfig
+Fixes
+../../../pidgin-sipe-1.25.0/src/core/sipe-cert-crypto-nss.c:34:10: fatal error: 'valgrind.h' file not found
+         ^~~~~~~~~~~~
 
- Gategarth Core version of libandy is 0.0.13 so this patch is puzzling
-
-This reverts commit 46ac17595bbd74a3dbcfbc7b5e1456ff78f5dca7.
-
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...61b6ce8f0f8053e1609decbdbdc164ec8448.patch | 242 ------------------
- ...dar_3.38.1.bb => gnome-calendar_3.36.2.bb} |   3 +-
- 2 files changed, 1 insertion(+), 244 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gnome-calendar/files/8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch
- rename meta-gnome/recipes-gnome/gnome-calendar/{gnome-calendar_3.38.1.bb => gnome-calendar_3.36.2.bb} (78%)
+ ...-add-native-paths-to-pkgconfig-searc.patch | 36 +++++++++++++++++++
+ .../pidgin/pidgin-sipe_1.25.0.bb              |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-oe/recipes-support/pidgin/pidgin-sipe/0001-configure-Do-not-add-native-paths-to-pkgconfig-searc.patch
 
-diff --git a/meta-gnome/recipes-gnome/gnome-calendar/files/8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch b/meta-gnome/recipes-gnome/gnome-calendar/files/8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch
-deleted file mode 100644
-index eabf61aa5fc..00000000000
---- a/meta-gnome/recipes-gnome/gnome-calendar/files/8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch
-+++ /dev/null
-@@ -1,242 +0,0 @@
--From 8be361b6ce8f0f8053e1609decbdbdc164ec8448 Mon Sep 17 00:00:00 2001
--From: Evangelos Ribeiro Tzaras <devrtz@fortysixandtwo.eu>
--Date: Sat, 5 Sep 2020 02:06:34 +0200
--Subject: [PATCH] project: Switch to libhandy-1
--
--This commit updates the dependencies for libhandy to the tagged 1.0
--release and changes the code to accomodate the changes from
--libhandy-0 to libhandy-1.
--
--Notable changes:
--edit-dialog: HdyDialog has been dropped in [1]
--alarm-row: action child type in HdyActionRow has been removed.
--
--[1] https://gitlab.gnome.org/GNOME/libhandy/-/merge_requests/434
--Upstream-Status: Backport
--Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-----
-- build-aux/flatpak/org.gnome.Calendar.json |  4 ++--
-- meson.build                               |  2 +-
-- src/gui/gcal-alarm-row.c                  |  2 +-
-- src/gui/gcal-alarm-row.ui                 |  2 +-
-- src/gui/gcal-application.c                |  4 ++++
-- src/gui/gcal-edit-dialog.c                |  4 ++--
-- src/gui/gcal-edit-dialog.h                |  3 +--
-- src/gui/gcal-edit-dialog.ui               | 20 ++++++++++----------
-- 8 files changed, 22 insertions(+), 19 deletions(-)
--
--diff --git a/build-aux/flatpak/org.gnome.Calendar.json b/build-aux/flatpak/org.gnome.Calendar.json
--index 18893ad6..0772ca8d 100644
----- a/build-aux/flatpak/org.gnome.Calendar.json
--+++ b/build-aux/flatpak/org.gnome.Calendar.json
--@@ -174,8 +174,8 @@
--             "sources" : [
--                 {
--                     "type" : "git",
---                    "url" : "https://source.puri.sm/Librem5/libhandy.git",
---                    "branch" : "libhandy-0-0"
--+                    "url" : "https://gitlab.gnome.org/GNOME/libhandy.git",
--+                    "tag" : "1.0.0"
--                 }
--             ]
--         },
--diff --git a/meson.build b/meson.build
--index 2a546252..b81b95c9 100644
----- a/meson.build
--+++ b/meson.build
--@@ -165,7 +165,7 @@ libedataserver_dep = dependency('libedataserver-1.2', version: '>= 3.17.1')
-- libecal_dep = dependency('libecal-2.0', version: '>= 3.33.2')
-- libsoup_dep = dependency('libsoup-2.4')
-- libdazzle_dep = dependency('libdazzle-1.0', version: '>= 3.33.1')
---libhandy_dep = dependency('libhandy-0.0', version: '>= 0.0.9')
--+libhandy_dep = dependency('libhandy-1', version: '>= 1.0.0')
-- glib_dep = dependency('glib-2.0', version: '>= 2.58.0')
-- gtk_dep = dependency('gtk+-3.0', version: '>= 3.22.20')
-- gio_dep = dependency('gio-2.0', version: '>= 2.58.0')
--diff --git a/src/gui/gcal-alarm-row.c b/src/gui/gcal-alarm-row.c
--index 1f95426c..1ada82f4 100644
----- a/src/gui/gcal-alarm-row.c
--+++ b/src/gui/gcal-alarm-row.c
--@@ -214,7 +214,7 @@ setup_alarm (GcalAlarmRow *self)
--   duration = e_cal_component_alarm_trigger_get_duration (trigger);
--   formatted_duration = format_alarm_duration (duration);
-- 
---  hdy_action_row_set_title (HDY_ACTION_ROW (self), formatted_duration);
--+  hdy_preferences_row_set_title (HDY_PREFERENCES_ROW (self), formatted_duration);
-- 
--   action = e_cal_component_alarm_get_action (self->alarm);
--   gtk_toggle_button_set_active (self->volume_button, action == E_CAL_COMPONENT_ALARM_AUDIO);
--diff --git a/src/gui/gcal-alarm-row.ui b/src/gui/gcal-alarm-row.ui
--index 7d416c4c..bca8af50 100644
----- a/src/gui/gcal-alarm-row.ui
--+++ b/src/gui/gcal-alarm-row.ui
--@@ -3,7 +3,7 @@
--   <template class="GcalAlarmRow" parent="HdyActionRow">
--     <property name="visible">True</property>
--     <property name="can_focus">False</property>
---    <child type="action">
--+    <child>
--       <object class="GtkBox">
--         <property name="visible">True</property>
--         <property name="can_focus">False</property>
--diff --git a/src/gui/gcal-application.c b/src/gui/gcal-application.c
--index b9d46cec..591b95c8 100644
----- a/src/gui/gcal-application.c
--+++ b/src/gui/gcal-application.c
--@@ -34,6 +34,7 @@
-- #include <glib-object.h>
-- #include <gio/gio.h>
-- #include <glib/gi18n.h>
--+#include <handy.h>
-- 
-- struct _GcalApplication
-- {
--@@ -446,6 +447,9 @@ gcal_application_startup (GApplication *app)
--   if ((g_application_get_flags (app) & G_APPLICATION_IS_SERVICE) != 0)
--     g_application_set_inactivity_timeout (app, 3 * 60 * 1000);
-- 
--+  /*  initialize libhandy */
--+  hdy_init();
--+
--   GCAL_EXIT;
-- }
-- 
--diff --git a/src/gui/gcal-edit-dialog.c b/src/gui/gcal-edit-dialog.c
--index ae2b6714..5494a700 100644
----- a/src/gui/gcal-edit-dialog.c
--+++ b/src/gui/gcal-edit-dialog.c
--@@ -47,7 +47,7 @@
-- 
-- struct _GcalEditDialog
-- {
---  HdyDialog         parent;
--+  GtkDialog         parent;
-- 
--   gboolean          writable;
-- 
--@@ -133,7 +133,7 @@ static void          on_location_entry_changed_cb                (GtkEntry
-- static void          on_add_alarm_button_clicked_cb              (GtkWidget          *button,
--                                                                   GcalEditDialog     *self);
-- 
---G_DEFINE_TYPE (GcalEditDialog, gcal_edit_dialog, HDY_TYPE_DIALOG)
--+G_DEFINE_TYPE (GcalEditDialog, gcal_edit_dialog, GTK_TYPE_DIALOG)
-- 
-- enum
-- {
--diff --git a/src/gui/gcal-edit-dialog.h b/src/gui/gcal-edit-dialog.h
--index e4f44ec5..a557916b 100644
----- a/src/gui/gcal-edit-dialog.h
--+++ b/src/gui/gcal-edit-dialog.h
--@@ -22,7 +22,6 @@
-- #include "gcal-event.h"
-- #include "gcal-manager.h"
-- 
---#include <handy.h>
-- 
-- G_BEGIN_DECLS
-- 
--@@ -32,7 +31,7 @@ G_BEGIN_DECLS
-- 
-- #define GCAL_TYPE_EDIT_DIALOG                (gcal_edit_dialog_get_type ())
-- 
---G_DECLARE_FINAL_TYPE (GcalEditDialog, gcal_edit_dialog, GCAL, EDIT_DIALOG, HdyDialog);
--+G_DECLARE_FINAL_TYPE (GcalEditDialog, gcal_edit_dialog, GCAL, EDIT_DIALOG, GtkDialog);
-- 
-- GtkWidget*           gcal_edit_dialog_new                     (void);
-- 
--diff --git a/src/gui/gcal-edit-dialog.ui b/src/gui/gcal-edit-dialog.ui
--index a36d8ae6..c28c22bb 100644
----- a/src/gui/gcal-edit-dialog.ui
--+++ b/src/gui/gcal-edit-dialog.ui
--@@ -1,6 +1,6 @@
-- <?xml version="1.0" encoding="UTF-8"?>
-- <interface>
---  <template class="GcalEditDialog" parent="HdyDialog">
--+  <template class="GcalEditDialog" parent="GtkDialog">
--     <property name="can_focus">False</property>
--     <property name="resizable">False</property>
--     <property name="modal">True</property>
--@@ -156,7 +156,7 @@
--                         <property name="title" translatable="yes">Title</property>
--                         <property name="activatable-widget">summary_entry</property>
-- 
---                        <child type="action">
--+                        <child>
--                           <object class="GtkEntry" id="summary_entry">
--                             <property name="visible">True</property>
--                             <property name="valign">center</property>
--@@ -177,7 +177,7 @@
--                         <property name="title" translatable="yes">Location</property>
--                         <property name="activatable-widget">location_entry</property>
-- 
---                        <child type="action">
--+                        <child>
--                           <object class="GtkEntry" id="location_entry">
--                             <property name="visible">True</property>
--                             <property name="valign">center</property>
--@@ -226,7 +226,7 @@
--                         <property name="title" translatable="yes">All Day</property>
--                         <property name="activatable-widget">all_day_switch</property>
-- 
---                        <child type="action">
--+                        <child>
--                           <object class="GtkSwitch" id="all_day_switch">
--                             <property name="visible">True</property>
--                             <property name="can_focus">True</property>
--@@ -246,7 +246,7 @@
--                         <property name="visible">True</property>
--                         <property name="title" translatable="yes">Starts</property>
-- 
---                        <child type="action">
--+                        <child>
--                           <object class="GtkLabel" id="event_start_label">
--                             <property name="visible">True</property>
--                             <property name="can_focus">False</property>
--@@ -294,7 +294,7 @@
--                         <property name="visible">True</property>
--                         <property name="title" translatable="yes">Ends</property>
-- 
---                        <child type="action">
--+                        <child>
--                           <object class="GtkLabel" id="event_end_label">
--                             <property name="visible">True</property>
--                             <property name="can_focus">False</property>
--@@ -343,7 +343,7 @@
--                         <property name="title" translatable="yes">Repeat</property>
--                         <property name="activatable-widget">repeat_combo</property>
-- 
---                        <child type="action">
--+                        <child>
--                           <object class="GtkComboBoxText" id="repeat_combo">
--                             <property name="visible">True</property>
--                             <property name="can_focus">False</property>
--@@ -372,7 +372,7 @@
--                         <property name="title" translatable="yes">End Repeat</property>
--                         <property name="activatable-widget">repeat_combo</property>
-- 
---                        <child type="action">
--+                        <child>
--                           <object class="GtkComboBoxText" id="repeat_duration_combo">
--                             <property name="visible">True</property>
--                             <property name="can_focus">False</property>
--@@ -397,7 +397,7 @@
--                         <property name="title" translatable="yes">Number of Occurrences</property>
--                         <property name="activatable-widget">number_of_occurrences_spin</property>
-- 
---                        <child type="action">
--+                        <child>
--                           <object class = "GtkSpinButton" id="number_of_occurrences_spin">
--                             <property name="input_purpose">number</property>
--                             <property name="input-hints">no-emoji</property>
--@@ -415,7 +415,7 @@
--                         <property name="title" translatable="yes">End Repeat Date</property>
--                         <property name="activatable-widget">until_date_selector</property>
-- 
---                        <child type="action">
--+                        <child>
--                           <object class = "GcalDateSelector" id="until_date_selector">
--                             <property name="valign">center</property>
--                           </object>
---- 
--GitLab
--
-diff --git a/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.38.1.bb b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.36.2.bb
-similarity index 78%
-rename from meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.38.1.bb
-rename to meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.36.2.bb
-index 67e251e16d5..4605857f500 100644
---- a/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.38.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.36.2.bb
-@@ -22,8 +22,7 @@ inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-versi
+diff --git a/meta-oe/recipes-support/pidgin/pidgin-sipe/0001-configure-Do-not-add-native-paths-to-pkgconfig-searc.patch b/meta-oe/recipes-support/pidgin/pidgin-sipe/0001-configure-Do-not-add-native-paths-to-pkgconfig-searc.patch
+new file mode 100644
+index 0000000000..1dc7ca3f17
+--- /dev/null
++++ b/meta-oe/recipes-support/pidgin/pidgin-sipe/0001-configure-Do-not-add-native-paths-to-pkgconfig-searc.patch
+@@ -0,0 +1,36 @@
++From fedef3c0b1772cee97d7288bee7d5d50805a5964 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 12 Dec 2020 08:56:04 -0800
++Subject: [PATCH] configure: Do not add native paths to pkgconfig search
++
++This does not work in cross environments, secondly in OE we already
++point pkkconfig into recipe sysroot where it will find all the
++dependencies therefore this setting is not needed
++
++Upstream-Status: Inappropriate [ OE-Specific ]
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ configure.ac | 6 ------
++ 1 file changed, 6 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 0df85b0..2481153 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -70,12 +70,6 @@ AC_CHECK_HEADERS([])
++ dnl checks for library functions
++ AC_CHECK_FUNCS([])
++ 
++-dnl tell pkgconfig to look in the same prefix where we're installing this to,
++-dnl as that is likely where libpurple will be found if it is not in the default
++-dnl pkgconfig path
++-PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:${libdir}/pkgconfig"
++-export PKG_CONFIG_PATH
++-
++ dnl debug mode
++ AC_ARG_ENABLE(debug,
++ 	[AS_HELP_STRING([--enable-debug],
++-- 
++2.29.2
++
+diff --git a/meta-oe/recipes-support/pidgin/pidgin-sipe_1.25.0.bb b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.25.0.bb
+index 99fcf3c6d0..f6b4c7cee1 100644
+--- a/meta-oe/recipes-support/pidgin/pidgin-sipe_1.25.0.bb
++++ b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.25.0.bb
+@@ -10,6 +10,7 @@ inherit autotools gettext pkgconfig
+ SRC_URI = "${SOURCEFORGE_MIRROR}/sipe/pidgin-sipe-${PV}.tar.xz \
+            file://0001-sipe-consider-64bit-time_t-when-printing.patch \
+            file://0001-Align-structs-casts-with-time_t-elements-to-8byte-bo.patch \
++           file://0001-configure-Do-not-add-native-paths-to-pkgconfig-searc.patch \
+ "
  
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI += "file://8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch"
--SRC_URI[archive.sha256sum] = "7280880a082d631624d02a102dd547ceb59498da368311f3e49a06cff897f512"
-+SRC_URI[archive.sha256sum] = "d0b05345c0555a085e6e5426eab49494aba2826c856eb06fd7fdb762ec0c4c1f"
- 
- FILES_${PN} += " \
-     ${datadir}/gnome-shell \
+ SRC_URI[md5sum] = "0e742f021dc8c3f17435aea05c3e0314"
 -- 
-2.17.1
+2.29.2
 
