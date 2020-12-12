@@ -1,90 +1,61 @@
-Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com [209.85.219.45])
- by mx.groups.io with SMTP id smtpd.web12.2592.1607663618376123191
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web10.1067.1607733190947680558
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Dec 2020 21:13:38 -0800
+ Fri, 11 Dec 2020 16:33:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=cjaxONqi;
- spf=pass (domain: gmail.com, ip: 209.85.219.45, mailfrom: twoerner@gmail.com)
-Received: by mail-qv1-f45.google.com with SMTP id s6so3677260qvn.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Dec 2020 21:13:38 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=XjnWLzlf;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id n10so280638pgl.10
+        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Dec 2020 16:33:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=HzlQRkhDKwU/Ld55J6kYkieaxjqURV6VJF+AHa8BcEI=;
-        b=cjaxONqi2G10O0lL4oBxfkq+mD2/MWOfov+wAhlvb2N+bO/MVmLfpah9zwQItre2eX
-         RVJN1C4+8cXSdOygokCAig3W44XZsV7Xshg6znLAQbK/1HB9sYEwNfl9eaxHCNxQOcH0
-         9Nz7AwSxz80fbpGFPPhjLnCb1zguIDm9fXVuVpPvZVfuXV/yZ+I4/mjJ3CN7XFwj28C6
-         kfA2i2uwNC0EdMWvtLZXJ5DkFyRrTwaIv28nwK+kpa8i6KTtKoIlKkQ41ti64qp/ipqg
-         14kq8pAZvrxIaRdgK/xrQAhaCcQXwfl+lfe80TiohirE+m2Dl6qBm1qIvj2gndokRvB/
-         bw6g==
+        h=from:to:subject:date:message-id;
+        bh=PzIclK7RYi5ETFV+Ifgu610FLq/djzMLl8RqjhQptw8=;
+        b=XjnWLzlfFVCkpJg/Ldmm3r/H17wkXXR5H7KqlBNvYyBiS2UZeEWTv50J+i/ecIrGzz
+         4vjZg6KjYJoAP5BSBSgW4nYhItXutKwyTx4NTisx1UiV+EXM/75COlO6aDAPbeqMFEZ9
+         0PebnDcvy/5InfBl7Qc0voZDe6tAqzPP8rI9iN5M7IMgWe2utm+hpg0DOUgNoFLkz212
+         qBENaRJESmDrL30t3yfqAjGoMx2gNB73bQtW/lwb3OmWgi3MH0k4z9zhaBcB3W1r9K5a
+         JuRaJlr/cSN+4oW5rAq0ZbmHlPdKp2xLsIQ3mQWmYOH9EWNJoMiGv634S4DvVepbBYDH
+         1Oaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=HzlQRkhDKwU/Ld55J6kYkieaxjqURV6VJF+AHa8BcEI=;
-        b=jkAbidD7Y7hzlWCCZpeXuDTw1z4/uI1kKwSJkyztfaH+R9ljWoHS8GhDQMgAp2XInh
-         GQCGBw70w1zp7mvnuKhqkCsvWyYfNZW9oRxxrzlkd2EQlQPmYcp0CBSnGXVJ3DXzdTTC
-         BcADP4KrS1skP87e2bO3LCO3miHYAEpu+Jy/HtCWZd/rmLja4TkyvozvevjKnjg4BDO+
-         5DijUUYV4v70X09IMqYoNpZqVWbAFMV1WkTDkM78ZpRP0FXLzY21rMIQSER+w2UFqi8a
-         xvfd5MDpK55r7KnhIkRcBLg02TDK3XiwB8AfeJpdOADBUgTPBG7zmJk2z8iIpw+eC13h
-         IfIQ==
-X-Gm-Message-State: AOAM531e/urMtN0ji9IRBUvo/ww04LplY3cb9mzdhmWf9KUgjirtMd/+
-	wwD/PMnAd//3iKFShXihdBgwLIqK/oeT2Q==
-X-Google-Smtp-Source: ABdhPJzak9YnYunl64NlV+i0WFv6g8qIytod+bWl3vo+kAbHqkm6/ywCNQLR1MR74bq9bWrRIXJjzQ==
-X-Received: by 2002:ad4:4426:: with SMTP id e6mr13732259qvt.51.1607663617097;
-        Thu, 10 Dec 2020 21:13:37 -0800 (PST)
-Return-Path: <twoerner@gmail.com>
-Received: from localhost.localdomain ([206.248.190.95])
-        by smtp.gmail.com with ESMTPSA id x189sm5986855qka.26.2020.12.10.21.13.35
+        h=x-gm-message-state:from:to:subject:date:message-id;
+        bh=PzIclK7RYi5ETFV+Ifgu610FLq/djzMLl8RqjhQptw8=;
+        b=baIs2uMJEeF4rA4CgJd4s14+QdFc761iLU9GWBfRet4Im28I9iz8UwQcs9Q/X+NTUf
+         WF7drkMlv9VKf1g5ILNqk7iVhqXzwmDNAtoqVhUbr9HR4rmKX+v7nZ8icysbRDaAd7h5
+         hMptaNLfHgptrAiqWsPtiR83chGOmZm5rgJE79pU+AmsR7usu82NacooYWZXg8SOOU2a
+         B8HaL1hws4VuJ5rfiaaAiuy/ff4nEXek1dahdcPj6OgsRCn70u1grhfg1LWbLOAC2KgE
+         MTyb248GaryjCg0OFNz6JQcVQn8eckN4+CpZrraEX5/kNN8qGSaumRTYGpa/VpNYKAJ5
+         b6sQ==
+X-Gm-Message-State: AOAM530VGOPs9HzbD3PPiwbZuBd4vfRaUFAheUpHx6besncigtsymKnQ
+	a1I8dwjlnROxIL7hVj7ypIso1xogKnG4SA==
+X-Google-Smtp-Source: ABdhPJyXY7FbZ0/oJTk8UgS4r2fqyYMqTKmtKs7noO35gwt+m1Ng2hyoSA/iQ/g9RNcsdnkaK1OawQ==
+X-Received: by 2002:a62:3582:0:b029:19e:4935:bea2 with SMTP id c124-20020a6235820000b029019e4935bea2mr13783795pfa.34.1607733190198;
+        Fri, 11 Dec 2020 16:33:10 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:159e:b7b3:814a:a500])
+        by smtp.gmail.com with ESMTPSA id 3sm11671295pfv.92.2020.12.11.16.33.09
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Dec 2020 21:13:36 -0800 (PST)
-From: "Trevor Woerner" <twoerner@gmail.com>
+        Fri, 11 Dec 2020 16:33:09 -0800 (PST)
+From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] glmark2: revert to previous behaviour
-Date: Fri, 11 Dec 2020 00:13:26 -0500
-Message-Id: <20201211051326.16132-1-twoerner@gmail.com>
-X-Mailer: git-send-email 2.28.0.497.g54e85e7af1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: [meta-gnome][gatesgarth][PATCH 0/1] Fix build failure
+Date: Fri, 11 Dec 2020 16:33:07 -0800
+Message-Id: <20201212003308.10862-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
-- use "drm-gles2" as the default PACKAGECONFIG outside of any defined
-  DISTRO_FEATURES
-- use a version string that includes the full date of the latest git change
-  (not just: <year>.<month>)
+I am seeing a world build failure on meta-openembedded. Reverting the below patch made early corrects the issue.  I am a bit confuse on how this worked in Gatesgarth so if someone can point out how to build the gnome-calendar recipe  out-of-the-box with core, please let me know.  I plan on reverting this change unless otherwise informed on how to get this building.
 
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
----
- meta-oe/recipes-benchmark/glmark2/glmark2_git.bb | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+Armin Kuster (1):
+  Revert "gnome-calendar: update to 3.38.1, add libhandy 1.x support"
 
-diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-index 46634634d..44bce9fb5 100644
---- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-+++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
- DEPENDS = "libpng jpeg udev"
- DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland-native', '', d)}"
- 
--PV = "2020.11+${SRCPV}"
-+PV = "20201114+${SRCPV}"
- 
- SRC_URI = " \
-     git://github.com/glmark2/glmark2.git;protocol=https \
-@@ -26,9 +26,10 @@ inherit waf pkgconfig features_check
- 
- ANY_OF_DISTRO_FEATURES = "opengl dispmanx"
- 
--PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'x11-gles2 drm-gles2', '', d)} \
--                  ${@bb.utils.contains('DISTRO_FEATURES', 'wayland opengl', 'wayland-gles2 drm-gles2', '', d)} \
-+PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'x11-gles2', '', d)} \
-+                  ${@bb.utils.contains('DISTRO_FEATURES', 'wayland opengl', 'wayland-gles2', '', d)} \
-                   ${@bb.utils.contains('DISTRO_FEATURES', 'dispmanx', 'dispmanx', '', d)} \
-+                  drm-gles2 \
-                  "
- 
- PACKAGECONFIG[x11-gl] = ",,virtual/libgl virtual/libx11"
+ ...61b6ce8f0f8053e1609decbdbdc164ec8448.patch | 242 ------------------
+ ...dar_3.38.1.bb => gnome-calendar_3.36.2.bb} |   3 +-
+ 2 files changed, 1 insertion(+), 244 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/gnome-calendar/files/8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch
+ rename meta-gnome/recipes-gnome/gnome-calendar/{gnome-calendar_3.38.1.bb => gnome-calendar_3.36.2.bb} (78%)
+
 -- 
-2.28.0.497.g54e85e7af1
+2.17.1
 
