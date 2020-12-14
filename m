@@ -1,92 +1,135 @@
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com [209.85.210.194])
- by mx.groups.io with SMTP id smtpd.web08.30576.1607925872292819544
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com [209.85.216.68])
+ by mx.groups.io with SMTP id smtpd.web12.30869.1607925876445270868
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 13 Dec 2020 22:04:32 -0800
+ Sun, 13 Dec 2020 22:04:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ge21mYNw;
- spf=pass (domain: gmail.com, ip: 209.85.210.194, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f194.google.com with SMTP id t8so11395570pfg.8
-        for <openembedded-devel@lists.openembedded.org>; Sun, 13 Dec 2020 22:04:32 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=aDw9Finr;
+ spf=pass (domain: gmail.com, ip: 209.85.216.68, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f68.google.com with SMTP id b5so4477765pjk.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 13 Dec 2020 22:04:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3iqvLs4ernPtvDo7uSdG68fuhdYnrciBZMSCyrp8JZI=;
-        b=ge21mYNwXtgDYLkPHvRBfwu6/ojsURyzvpG23WeZE2UkEzd1H/45msAiYzeUpw5eym
-         ftPAfQoOUl+O+xmwQJ27JipAHFYy/ldoxjwMfo2eheLi1JASQFTwTaVGOgw4QB59eG/p
-         DJblTOqmtnlnNzDdxhDfGkdtnysf/7PGtIGTQ/nZAyG0We0IGoIeRhjG4hmYus3k7WMk
-         4iuUDEo+N+cl0hY1ARPvFpvUW8yKxAOkLT/SUw7XLjir3P4h11w7bJB/1erCiw4ANCWx
-         WzkMOGMyE7k/fFX/m8DyTPNGF7V3kaHvwj5LSJjJd9BiNcfMUkIvhhIp+pfd3Tkon7JN
-         k0Ng==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=WJN6N+X9NA3G4PXruzwa6NjxwjYZcMLrkeGS3XWoyNY=;
+        b=aDw9Finr2U5jwwNRqs5Uh9wkQdTUpQwwxuQrKY1iWF7brx0eOHwD0h3DrXHqOGB9l+
+         ywg9AJA0rQ3QTj77f4azeXnOY62Ul72XPvlY9Ude54r2tPzFM5Eip66IUrwuivvR4j5P
+         PhwEeS7WoS8442xeIV/HispggdDPOAOYG3CbXT1DWKWZyLBTCMtkgIqfaXNrvoSveVEG
+         qvDpCW1AiCPL2DTBFTof76iS5MRBSSHB7qJKlJeY1hZuG4m0rxk0CqL2iV/dKrfg1uUw
+         svbbYgKIhlMPwZJCBq8G57RKpBzRbaQzDXBl5K9uCuDApK8a9EB8823wfj91Z5TEgLDC
+         60dA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3iqvLs4ernPtvDo7uSdG68fuhdYnrciBZMSCyrp8JZI=;
-        b=E399YSAeFp4XiK+KWaEC59Of2Wsh3wwwk/bgd9tISZZs4DQHnoYl6e1/YQHlfLbc82
-         BtR0dMsIF8TShKofLBoGHA8WEdqZE+UGxXi12lqmHQJmbq6k10lDS/pex/NP2ZacMIwS
-         6hBlp0OEwwMb9gsZNGhFbKGKxW1E+AD7KvRj/4cKI92dc7J6gGtuM0QimjpUNBCV7KMU
-         262PW0C+N2EtBDkB1QZELN24GDzvfdM7PdRG8AgPxH02QDm4mphnTtTy4nsOv4wGtCNo
-         SYntfPmowyDRFBJEy02S4MPrDOAly2XSDGCmJE2/WvBwXWE/UZpygfnXT5o2kwM9Mf2B
-         5KgA==
-X-Gm-Message-State: AOAM533SrsI3V8L7yWfD/5kRmoVilw7F0KD7i5wq/teYY8g8YXvgXJVZ
-	v1m2pmaVOZSMAvAhItZvwALmvODAi4UNiw==
-X-Google-Smtp-Source: ABdhPJw/o/Bc65U6GA0TnnHWM2IA5o/6E9+LzFULatKxL9fY29PS5NNxfp6YskUShT6yJwDh/PdFHg==
-X-Received: by 2002:a63:f64c:: with SMTP id u12mr22667151pgj.325.1607925871547;
-        Sun, 13 Dec 2020 22:04:31 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=WJN6N+X9NA3G4PXruzwa6NjxwjYZcMLrkeGS3XWoyNY=;
+        b=iAVlR4d+NVi5CygEevKtVdSU8Unbunfh6LsHl4dH9WpY9xR+/CUCaRRorH35j5ltrz
+         7ioikrjYsJtZhBwltFB00fMCBPeqgDgAU8J9H1DlS/fIqFzGZ4J8nvjgYDuedCzyQbWR
+         7fcD+eE4ioydnXyqKPWjq5OBvUAaRy0wGpDMDq1CWg1UzySbW74aUYUXeHa6YqxRZH/h
+         v2LhzMXj30C5Xs1wA7jvqPvij+R5ooAcmLPoSw797X3NktW2iqFYmkPAiLIfJ+jj8VAz
+         fyM1HLj7fOUDqGOhhQvjEkDJgT4YrSUSxnStXJDJhO8D/tHDAjnm0VKrUYdKsKXCSu9Q
+         TnWg==
+X-Gm-Message-State: AOAM531t5IHQB+kD2jlNs721RfwQXlvYEGhFEdMSu3rZZlScCxQbBfUA
+	Vww60XVsKB42cFX9N4H1rdNDTGgjP40wfQ==
+X-Google-Smtp-Source: ABdhPJwuIFHwHyW6c8rFWCD9EjEe3tzcjq2SATqhmuIKh4MlkCaEJOi+pACt8ngWQG/IYmS9ohYa8A==
+X-Received: by 2002:a17:902:ee52:b029:da:4dee:1a54 with SMTP id 18-20020a170902ee52b02900da4dee1a54mr21584918plo.29.1607925875638;
+        Sun, 13 Dec 2020 22:04:35 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::64a3])
-        by smtp.gmail.com with ESMTPSA id e29sm18071084pfj.174.2020.12.13.22.04.30
+        by smtp.gmail.com with ESMTPSA id e29sm18071084pfj.174.2020.12.13.22.04.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 13 Dec 2020 22:04:30 -0800 (PST)
+        Sun, 13 Dec 2020 22:04:35 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Roland Hieber <rhi@pengutronix.de>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/3] openct: remove lines that resulted in a no-op
-Date: Sun, 13 Dec 2020 22:04:26 -0800
-Message-Id: <20201214060428.2133-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/3] openct: clean up do_install
+Date: Sun, 13 Dec 2020 22:04:27 -0800
+Message-Id: <20201214060428.2133-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.29.2
+In-Reply-To: <20201214060428.2133-1-raj.khem@gmail.com>
+References: <20201214060428.2133-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Roland Hieber <rhi@pengutronix.de>
 
-Also remove /run/openct/status from FILES_${PN}, which isn't being
-created at all by the recipe – even openct's configure script references
-it as /var/run/openct/.
+* Use sysconfdir and nonarch_libdir instead of hard-coded paths, and be
+  consistent with the slashes after ${D}
+* Install udev rules into /usr/lib/udev instead of /etc/udev so they can
+  be overwritten in /etc, which has higher priority. Also use /usr/lib
+  instead of /lib, latter of which isn't searched by udev [1].
+* Don't create /usr/lib/udev, it is already created by install -D later
+  with the default umask, which is fine
+* Make use of do_install[cleandirs]
 
-Fixes: 387824f1763c573fd05c (2016-02-28, "openct: Fix rootfs creation errors")
-Fixes: 8e61ff98e9fd83aad1a5 (2019-11-21, "openct: merge do_install and do_install_append")
+[1]: https://www.freedesktop.org/software/systemd/man/udev.html
+
 Signed-off-by: Roland Hieber <rhi@pengutronix.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/openct/openct_0.6.20.bb | 7 -------
- 1 file changed, 7 deletions(-)
+ .../recipes-support/openct/openct_0.6.20.bb   | 24 +++++++++----------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
 diff --git a/meta-oe/recipes-support/openct/openct_0.6.20.bb b/meta-oe/recipes-support/openct/openct_0.6.20.bb
-index 1514c7a958..f647786e2b 100644
+index f647786e2b..7ea0d4174f 100644
 --- a/meta-oe/recipes-support/openct/openct_0.6.20.bb
 +++ b/meta-oe/recipes-support/openct/openct_0.6.20.bb
-@@ -46,7 +46,6 @@ FILES_${PN} += " \
-     ${nonarch_base_libdir}/udev \
-     ${libdir}/openct-ifd.so \
-     ${libdir}/pcsc \
--    /run/openct/status \
+@@ -35,7 +35,7 @@ EXTRA_OECONF=" \
+     --enable-pcsc \
+     --enable-doc \
+     --enable-api-doc \
+-    --with-udev=${nonarch_base_libdir}/udev \
++    --with-udev=${nonarch_libdir}/udev \
+     --with-bundle=${libdir}/pcsc/drivers \
  "
  
- FILES_${PN}-dbg += " \
-@@ -79,10 +78,4 @@ do_install () {
+@@ -43,7 +43,7 @@ inherit autotools pkgconfig
+ 
+ FILES_${PN} += " \
+     ${libdir}/ctapi \
+-    ${nonarch_base_libdir}/udev \
++    ${nonarch_libdir}/udev \
+     ${libdir}/openct-ifd.so \
+     ${libdir}/pcsc \
+ "
+@@ -55,10 +55,10 @@ FILES_${PN}-dbg += " \
+ 
+ INSANE_SKIP_${PN} += "dev-deps"
+ 
++do_install[cleandirs] += "${D}"
++
+ do_install () {
+-    rm -rf ${D}
+-    install -d ${D}/etc
+-    install -dm 755 ${D}${nonarch_base_libdir}/udev
++    install -d ${D}${sysconfdir}
+     # fix up hardcoded paths
+     sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir}/,' \
+         ${WORKDIR}/openct.service ${WORKDIR}/openct.init
+@@ -66,16 +66,16 @@ do_install () {
+     oe_runmake install DESTDIR=${D}
+     install -dm 755 ${D}${libdir}/ctapi/
+     mv ${D}${libdir}/libopenctapi.so ${D}${libdir}/ctapi/
+-    install -Dpm 644 etc/openct.udev ${D}/etc/udev/rules.d/60-openct.rules
+-    install -pm 644 etc/openct.conf ${D}/etc/openct.conf
++    install -Dpm 644 etc/openct.udev ${D}${nonarch_libdir}/udev/rules.d/60-openct.rules
++    install -pm 644 etc/openct.conf ${D}${sysconfdir}/openct.conf
+ 
+-    install -Dpm 755 ${WORKDIR}/openct.init ${D}/etc/init.d/openct
+-    install -Dpm 644 ${WORKDIR}/openct.sysconfig ${D}/etc/sysconfig/openct
++    install -Dpm 755 ${WORKDIR}/openct.init ${D}${sysconfdir}/init.d/openct
++    install -Dpm 644 ${WORKDIR}/openct.sysconfig ${D}${sysconfdir}/sysconfig/openct
+ 
+-    install -d ${D}/${systemd_unitdir}/system
+-    install -m 644 ${WORKDIR}/openct.service ${D}/${systemd_unitdir}/system
++    install -d ${D}${systemd_unitdir}/system
++    install -m 644 ${WORKDIR}/openct.service ${D}${systemd_unitdir}/system
+ 
      so=$(find ${D} -name \*.so | sed "s|^${D}||")
      sed -i -e 's|\\(LIBPATH\\s*\\).*|\\1$so|' etc/reader.conf
-     install -Dpm 644 etc/reader.conf ${D}/etc/reader.conf.d/openct.conf
--
--    install -dm 755 ${D}${localstatedir}/run/openct
--    touch ${D}${localstatedir}/run/openct/status
--    chmod 644 ${D}${localstatedir}/run/openct/status
--
--    rm -r ${D}/${localstatedir}/run
+-    install -Dpm 644 etc/reader.conf ${D}/etc/reader.conf.d/openct.conf
++    install -Dpm 644 etc/reader.conf ${D}${sysconfdir}/reader.conf.d/openct.conf
  }
 -- 
 2.29.2
