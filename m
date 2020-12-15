@@ -1,100 +1,224 @@
 Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.7820.1608016943545937835
+ by mx.groups.io with SMTP id smtpd.web10.7823.1608016974141745035
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Dec 2020 23:22:23 -0800
+ Mon, 14 Dec 2020 23:22:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.78,420,1599494400"; 
-   d="scan'208";a="102408290"
+   d="scan'208";a="102408341"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 15 Dec 2020 15:22:09 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id D2DF14CE601C
-	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Dec 2020 15:22:07 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Tue, 15 Dec 2020 15:22:06 +0800
-From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
+  by heian.cn.fujitsu.com with ESMTP; 15 Dec 2020 15:22:53 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id D5C534CE546D
+	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Dec 2020 15:22:47 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Tue, 15 Dec 2020 15:22:46 +0800
+From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@cn.fujitsu.com>
-Subject: [oe] [meta-oe][PATCH] zabbix: CVE-2020-15803 Security Advisory
-Date: Tue, 15 Dec 2020 15:22:03 +0800
-Message-ID: <1608016923-21617-1-git-send-email-wangmy@cn.fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] php: CVE-2020-7069
+Date: Tue, 15 Dec 2020 15:22:48 +0800
+Message-ID: <1608016968-55912-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
-X-yoursite-MailScanner-ID: D2DF14CE601C.A43FF
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
+X-yoursite-MailScanner-ID: D5C534CE546D.A9C57
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
 Content-Type: text/plain
 
+Security Advisory
+
 References
-https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15803
+https://nvd.nist.gov/vuln/detail/CVE-2020-7069
+https://bugs.php.net/patch-display.php?bug_id=79601&patch=openssl_aes_ccm_iv_fix&revision=latest
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- .../zabbix/zabbix/CVE-2020-15803.patch        | 36 +++++++++++++++++++
- .../zabbix/zabbix_4.4.6.bb                    |  1 +
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-15803.patch
+ .../php/php/CVE-2020-7069.patch               | 158 ++++++++++++++++++
+ meta-oe/recipes-devtools/php/php_7.4.9.bb     |   1 +
+ 2 files changed, 159 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-7069.patch
 
-diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-15803.patch b/meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-15803.patch
+diff --git a/meta-oe/recipes-devtools/php/php/CVE-2020-7069.patch b/meta-oe/recipes-devtools/php/php/CVE-2020-7069.patch
 new file mode 100644
-index 000000000..2eec4bf32
+index 000000000..0cf4d5ed6
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-15803.patch
-@@ -0,0 +1,36 @@
-+From 4943334fd9bf7dffd49f9e86251ad40b3efe2135 Mon Sep 17 00:00:00 2001
-+From: Wang Mingyu <wangmy@cn.fujitsu.com>
-+Date: Fri, 11 Dec 2020 17:02:20 +0900
-+Subject: [PATCH] Fix bug for CVE-2020-15803
++++ b/meta-oe/recipes-devtools/php/php/CVE-2020-7069.patch
+@@ -0,0 +1,158 @@
++Subject: Fix bug #79601 (Wrong ciphertext/tag in AES-CCM encryption
++ for a 12 bytes IV)
 +
-+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 +---
-+ frontends/php/include/classes/html/CIFrame.php | 7 +++++++
-+ 1 file changed, 7 insertions(+)
++ ext/openssl/openssl.c                      | 10 ++++-----
++ ext/openssl/tests/cipher_tests.inc         | 21 +++++++++++++++++
++ ext/openssl/tests/openssl_decrypt_ccm.phpt | 22 +++++++++++-------
++ ext/openssl/tests/openssl_encrypt_ccm.phpt | 26 ++++++++++++++--------
++ 4 files changed, 57 insertions(+), 22 deletions(-)
 +
-+diff --git a/frontends/php/include/classes/html/CIFrame.php b/frontends/php/include/classes/html/CIFrame.php
-+index 32220cd..70f2ab5 100644
-+--- a/frontends/php/include/classes/html/CIFrame.php
-++++ b/frontends/php/include/classes/html/CIFrame.php
-+@@ -29,6 +29,7 @@ class CIFrame extends CTag {
-+ 		$this->setHeight($height);
-+ 		$this->setScrolling($scrolling);
-+ 		$this->setId($id);
-++		$this->setSandbox();
++diff --git a/ext/openssl/openssl.c b/ext/openssl/openssl.c
++index 04cb9b0f..fdad2c3b 100644
++--- a/ext/openssl/openssl.c
+++++ b/ext/openssl/openssl.c
++@@ -6521,11 +6521,6 @@ static int php_openssl_validate_iv(char **piv, size_t *piv_len, size_t iv_requir
++ {
++ 	char *iv_new;
++ 
++-	/* Best case scenario, user behaved */
++-	if (*piv_len == iv_required_len) {
++-		return SUCCESS;
++-	}
++-
++ 	if (mode->is_aead) {
++ 		if (EVP_CIPHER_CTX_ctrl(cipher_ctx, mode->aead_ivlen_flag, *piv_len, NULL) != 1) {
++ 			php_error_docref(NULL, E_WARNING, "Setting of IV length for AEAD mode failed");
++@@ -6534,6 +6529,11 @@ static int php_openssl_validate_iv(char **piv, size_t *piv_len, size_t iv_requir
++ 		return SUCCESS;
 + 	}
 + 
-+ 	public function setSrc($value = null) {
-+@@ -69,4 +70,10 @@ class CIFrame extends CTag {
-+ 		$this->setAttribute('scrolling', $value);
-+ 		return $this;
-+ 	}
-++
-++	private function setSandbox() {
-++		if (ZBX_IFRAME_SANDBOX !== false) {
-++			$this->setAttribute('sandbox', ZBX_IFRAME_SANDBOX);
-++		}
+++	/* Best case scenario, user behaved */
+++	if (*piv_len == iv_required_len) {
+++		return SUCCESS;
 ++	}
+++
++ 	iv_new = ecalloc(1, iv_required_len + 1);
++ 
++ 	if (*piv_len == 0) {
++diff --git a/ext/openssl/tests/cipher_tests.inc b/ext/openssl/tests/cipher_tests.inc
++index b1e46b41..779bfa85 100644
++--- a/ext/openssl/tests/cipher_tests.inc
+++++ b/ext/openssl/tests/cipher_tests.inc
++@@ -1,5 +1,26 @@
++ <?php
++ $php_openssl_cipher_tests = array(
+++    'aes-128-ccm' => array(
+++        array(
+++            'key' => '404142434445464748494a4b4c4d4e4f',
+++            'iv'  => '1011121314151617',
+++            'aad' => '000102030405060708090a0b0c0d0e0f',
+++            'tag' => '1fc64fbfaccd',
+++            'pt'  => '202122232425262728292a2b2c2d2e2f',
+++            'ct'  => 'd2a1f0e051ea5f62081a7792073d593d',
+++        ),
+++        array(
+++            'key' => '404142434445464748494a4b4c4d4e4f',
+++            'iv'  => '101112131415161718191a1b',
+++            'aad' => '000102030405060708090a0b0c0d0e0f' .
+++                     '10111213',
+++            'tag' => '484392fbc1b09951',
+++            'pt'  => '202122232425262728292a2b2c2d2e2f' .
+++                     '3031323334353637',
+++            'ct'  => 'e3b201a9f5b71a7a9b1ceaeccd97e70b' .
+++                     '6176aad9a4428aa5',
+++        ),
+++    ),
++     'aes-256-ccm' => array(
++         array(
++             'key' => '1bde3251d41a8b5ea013c195ae128b21' .
++diff --git a/ext/openssl/tests/openssl_decrypt_ccm.phpt b/ext/openssl/tests/openssl_decrypt_ccm.phpt
++index a5f01b87..08ef5bb7 100644
++--- a/ext/openssl/tests/openssl_decrypt_ccm.phpt
+++++ b/ext/openssl/tests/openssl_decrypt_ccm.phpt
++@@ -10,14 +10,16 @@ if (!in_array('aes-256-ccm', openssl_get_cipher_methods()))
++ --FILE--
++ <?php
++ require_once __DIR__ . "/cipher_tests.inc";
++-$method = 'aes-256-ccm';
++-$tests = openssl_get_cipher_tests($method);
+++$methods = ['aes-128-ccm', 'aes-256-ccm'];
++ 
++-foreach ($tests as $idx => $test) {
++-    echo "TEST $idx\n";
++-    $pt = openssl_decrypt($test['ct'], $method, $test['key'], OPENSSL_RAW_DATA,
++-        $test['iv'], $test['tag'], $test['aad']);
++-    var_dump($test['pt'] === $pt);
+++foreach ($methods as $method) {
+++    $tests = openssl_get_cipher_tests($method);
+++    foreach ($tests as $idx => $test) {
+++        echo "$method - TEST $idx\n";
+++        $pt = openssl_decrypt($test['ct'], $method, $test['key'], OPENSSL_RAW_DATA,
+++            $test['iv'], $test['tag'], $test['aad']);
+++        var_dump($test['pt'] === $pt);
+++    }
 + }
++ 
++ // no IV
++@@ -32,7 +34,11 @@ var_dump(openssl_decrypt($test['ct'], $method, $test['key'], OPENSSL_RAW_DATA,
++ 
++ ?>
++ --EXPECTF--
++-TEST 0
+++aes-128-ccm - TEST 0
+++bool(true)
+++aes-128-ccm - TEST 1
+++bool(true)
+++aes-256-ccm - TEST 0
++ bool(true)
++ 
++ Warning: openssl_decrypt(): Setting of IV length for AEAD mode failed in %s on line %d
++diff --git a/ext/openssl/tests/openssl_encrypt_ccm.phpt b/ext/openssl/tests/openssl_encrypt_ccm.phpt
++index fb5dbbc8..8c4c41f8 100644
++--- a/ext/openssl/tests/openssl_encrypt_ccm.phpt
+++++ b/ext/openssl/tests/openssl_encrypt_ccm.phpt
++@@ -10,15 +10,17 @@ if (!in_array('aes-256-ccm', openssl_get_cipher_methods()))
++ --FILE--
++ <?php
++ require_once __DIR__ . "/cipher_tests.inc";
++-$method = 'aes-256-ccm';
++-$tests = openssl_get_cipher_tests($method);
+++$methods = ['aes-128-ccm', 'aes-256-ccm'];
++ 
++-foreach ($tests as $idx => $test) {
++-    echo "TEST $idx\n";
++-    $ct = openssl_encrypt($test['pt'], $method, $test['key'], OPENSSL_RAW_DATA,
++-        $test['iv'], $tag, $test['aad'], strlen($test['tag']));
++-    var_dump($test['ct'] === $ct);
++-    var_dump($test['tag'] === $tag);
+++foreach ($methods as $method) {
+++    $tests = openssl_get_cipher_tests($method);
+++    foreach ($tests as $idx => $test) {
+++        echo "$method - TEST $idx\n";
+++        $ct = openssl_encrypt($test['pt'], $method, $test['key'], OPENSSL_RAW_DATA,
+++            $test['iv'], $tag, $test['aad'], strlen($test['tag']));
+++        var_dump($test['ct'] === $ct);
+++        var_dump($test['tag'] === $tag);
+++    }
++ }
++ 
++ // Empty IV error
++@@ -32,7 +34,13 @@ var_dump(strlen($tag));
++ var_dump(openssl_encrypt('data', $method, 'password', 0, str_repeat('x', 16), $tag, '', 1024));
++ ?>
++ --EXPECTF--
++-TEST 0
+++aes-128-ccm - TEST 0
+++bool(true)
+++bool(true)
+++aes-128-ccm - TEST 1
+++bool(true)
+++bool(true)
+++aes-256-ccm - TEST 0
++ bool(true)
++ bool(true)
++ 
 +-- 
 +2.25.1
 +
-diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_4.4.6.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_4.4.6.bb
-index 0e0ddd577..98a31879c 100644
---- a/meta-oe/recipes-connectivity/zabbix/zabbix_4.4.6.bb
-+++ b/meta-oe/recipes-connectivity/zabbix/zabbix_4.4.6.bb
-@@ -26,6 +26,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- SRC_URI = "http://jaist.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/${PV}/${BPN}-${PV}.tar.gz \
-     file://0001-Fix-configure.ac.patch \
-     file://zabbix-agent.service \
-+    file://CVE-2020-15803.patch \
- "
+diff --git a/meta-oe/recipes-devtools/php/php_7.4.9.bb b/meta-oe/recipes-devtools/php/php_7.4.9.bb
+index bc58b5792..25b813792 100644
+--- a/meta-oe/recipes-devtools/php/php_7.4.9.bb
++++ b/meta-oe/recipes-devtools/php/php_7.4.9.bb
+@@ -31,6 +31,7 @@ SRC_URI_append_class-target = " \
+             file://0001-opcache-config.m4-enable-opcache.patch \
+             file://xfail_two_bug_tests.patch \
+             file://CVE-2020-7070.patch \
++            file://CVE-2020-7069.patch \
+           "
  
- SRC_URI[md5sum] = "e666539220be93b1af38e40f5fbb1f79"
+ S = "${WORKDIR}/php-${PV}"
 -- 
 2.25.1
 
