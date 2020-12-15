@@ -1,178 +1,148 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [])
- by mx.groups.io with SMTP id smtpd.web12.7737.1608017507135328391
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com [209.85.215.194])
+ by mx.groups.io with SMTP id smtpd.web11.7941.1608018294948972634
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Dec 2020 23:31:54 -0800
+ Mon, 14 Dec 2020 23:44:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: <nil>, mailfrom: zhengrq.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.78,420,1599494400"; 
-   d="scan'208";a="102408739"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 15 Dec 2020 15:31:53 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id A672E4CE600B
-	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Dec 2020 15:31:51 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Tue, 15 Dec 2020 15:31:50 +0800
-From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe][PATCH 2/2] samba: CVE-2020-14383 Security Advisory
-Date: Tue, 15 Dec 2020 15:31:50 +0800
-Message-ID: <1608017510-56252-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=j7xNiXA/;
+ spf=pass (domain: gmail.com, ip: 209.85.215.194, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f194.google.com with SMTP id t37so14670956pga.7
+        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Dec 2020 23:44:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:organization:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=lb4GZUN5cYgTHuSmCOkpozbcSmzXbpN2Hr3dVjfj4V8=;
+        b=j7xNiXA/rQf+JOz95wCXpgELxEV+mAvQ2V5Bebp7dG1AatEZPxIwjFyXh+C0CdP4sa
+         vgzCcp5gfMIWjlcgZzghstre7fXOj6kCZceaAaZUGkXwHwBeEfi+3q26WTpJ2DVJw+vC
+         nBhMzHx9UELYAT9q4KpK5sJJM7pcQgTpQL3+EgJPVdv9vngiHzQ7One9hYDR/L0iBKwk
+         cwNkQWM7oSzp+RunX6gjRSiDDInvMv100KEK5SyvW1AmqRAYVF6FhxphjJtsgLvz8txo
+         M6vPk9w9ip8ELeDDLDhvFixcmDrtbIxGumiC/wesebRCyCDHkY2LYAuOwsV0TRaa+bY9
+         2/eA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=lb4GZUN5cYgTHuSmCOkpozbcSmzXbpN2Hr3dVjfj4V8=;
+        b=RloPcDq/37OnGhh4OCSQWozJc7+odqexNaJUiKaNpihBPEOcswt9P6CND2dPm5jbn6
+         GCsOYyfbyr/SpORxaEsEnw5elQGWpPOyr3W1nKrSLOt8nGLr3YpfQfRKBD9h+CGEqeWL
+         nOljQO5XxyAnULp/I6FscwNfDUak7ZZAWfgD11XT03JFj3D4W7KjviWndkMoT36WlV5S
+         ZnsHVHSDKQDRWiq9JoAgJJNMlHsTc+EPie+l+Rg+GaR/VUZsWchge2Co25BfONivCYtj
+         4yRTQhj8syONWW7dBR9Hp69XUlm4DpDBRNKMAI/fKgcMSUa+X0Tmjc+Qi87GF9EXg4ZZ
+         DvBw==
+X-Gm-Message-State: AOAM532p0Omo9weHtFCkU7WVsVri6TTqkyxb11aZDgu4PNsvwP4+tSu/
+	HYZm96KOpcs1byS8dZHsllIXfphD/LUP7w==
+X-Google-Smtp-Source: ABdhPJzubuYI5FUNTMgZpq5DfEWjQ2ha5achoenUW7exWhC7ETqs+bbu58/O8LN6ObkTa4IUc9NsKg==
+X-Received: by 2002:a63:d354:: with SMTP id u20mr26216235pgi.344.1608018294143;
+        Mon, 14 Dec 2020 23:44:54 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:4e0:d4b8:2f3a:109e:b8c6? ([2601:646:9200:4e0:d4b8:2f3a:109e:b8c6])
+        by smtp.gmail.com with ESMTPSA id e5sm2168892pjs.0.2020.12.14.23.44.52
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 14 Dec 2020 23:44:53 -0800 (PST)
+Subject: Re: [oe] [PATCH v2] bitwise: add new recipe
+To: Ramon Fried <rfried.dev@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+References: <20201215055226.1395-1-rfried.dev@gmail.com>
+ <ded0788f-0501-f733-7d3f-267ceb9455f9@gmail.com>
+ <CAGi-RULy-qSqH8XTgP9sv+XKaVOeOH38bnLizOb-6DWjy+P7Bw@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <39d99e3a-b05c-6745-1375-2476da01396a@gmail.com>
+Date: Mon, 14 Dec 2020 23:44:52 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
+ Gecko/20100101 Thunderbird/78.5.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
-X-yoursite-MailScanner-ID: A672E4CE600B.A9BCC
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain; charset="y"
-Content-Transfer-Encoding: 8bit
-
-References
-https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14383
-
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
----
- .../samba/samba/CVE-2020-14383.patch          | 112 ++++++++++++++++++
- .../samba/samba_4.10.18.bb                    |   1 +
- 2 files changed, 113 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/samba/samba/CVE-2020-14383.patch
-
-diff --git a/meta-networking/recipes-connectivity/samba/samba/CVE-2020-14383.patch b/meta-networking/recipes-connectivity/samba/samba/CVE-2020-14383.patch
-new file mode 100644
-index 000000000..c4e79b566
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/samba/samba/CVE-2020-14383.patch
-@@ -0,0 +1,112 @@
-+From ff17443fe761eda864d13957bec45f5bac478fe3 Mon Sep 17 00:00:00 2001
-+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-+Date: Fri, 11 Dec 2020 14:34:31 +0900
-+Subject: [PATCH] CVE-2020-14383: s4/dns: Ensure variable initialization with 
-+ NULL. do not crash when additional data not found
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Found by Francis Brosnan BlÃ¡zquez <francis@aspl.es>.
-+Based on patches from Francis Brosnan BlÃ¡zquez <francis@aspl.es>
-+and Jeremy Allison <jra@samba.org>
-+
-+BUG: https://bugzilla.samba.org/show_bug.cgi?id=14472
-+BUG: https://bugzilla.samba.org/show_bug.cgi?id=12795
-+
-+Signed-off-by: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-+Reviewed-by: Jeremy Allison <jra@samba.org>
-+
-+Autobuild-User(master): Douglas Bagnall <dbagnall@samba.org>
-+Autobuild-Date(master): Mon Aug 24 00:21:41 UTC 2020 on sn-devel-184
-+
-+(based on commit df98e7db04c901259dd089e20cd557bdbdeaf379)
-+(based on commit 7afe449e7201be92bed8e53cbb37b74af720ef4e
-+
-+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-+---
-+ .../rpc_server/dnsserver/dcerpc_dnsserver.c   | 31 ++++++++++---------
-+ 1 file changed, 17 insertions(+), 14 deletions(-)
-+
-+diff --git a/source4/rpc_server/dnsserver/dcerpc_dnsserver.c b/source4/rpc_server/dnsserver/dcerpc_dnsserver.c
-+index 910de9a1..618c7096 100644
-+--- a/source4/rpc_server/dnsserver/dcerpc_dnsserver.c
-++++ b/source4/rpc_server/dnsserver/dcerpc_dnsserver.c
-+@@ -1754,15 +1754,17 @@ static WERROR dnsserver_enumerate_records(struct dnsserver_state *dsstate,
-+ 	TALLOC_CTX *tmp_ctx;
-+ 	char *name;
-+ 	const char * const attrs[] = { "name", "dnsRecord", NULL };
-+-	struct ldb_result *res;
-+-	struct DNS_RPC_RECORDS_ARRAY *recs;
-++	struct ldb_result *res = NULL;
-++	struct DNS_RPC_RECORDS_ARRAY *recs = NULL;
-+ 	char **add_names = NULL;
-+-	char *rname;
-++	char *rname = NULL;
-+ 	const char *preference_name = NULL;
-+ 	int add_count = 0;
-+ 	int i, ret, len;
-+ 	WERROR status;
-+-	struct dns_tree *tree, *base, *node;
-++	struct dns_tree *tree = NULL;
-++	struct dns_tree *base = NULL;
-++	struct dns_tree *node = NULL;
-+ 
-+ 	tmp_ctx = talloc_new(mem_ctx);
-+ 	W_ERROR_HAVE_NO_MEMORY(tmp_ctx);
-+@@ -1845,15 +1847,15 @@ static WERROR dnsserver_enumerate_records(struct dnsserver_state *dsstate,
-+ 		}
-+ 	}
-+ 
-+-	talloc_free(res);
-+-	talloc_free(tree);
-+-	talloc_free(name);
-++	TALLOC_FREE(res);
-++	TALLOC_FREE(tree);
-++	TALLOC_FREE(name);
-+ 
-+ 	/* Add any additional records */
-+ 	if (select_flag & DNS_RPC_VIEW_ADDITIONAL_DATA) {
-+ 		for (i=0; i<add_count; i++) {
-+-			struct dnsserver_zone *z2;
-+-
-++			struct dnsserver_zone *z2 = NULL;
-++			struct ldb_message *msg = NULL;
-+ 			/* Search all the available zones for additional name */
-+ 			for (z2 = dsstate->zones; z2; z2 = z2->next) {
-+ 				char *encoded_name;
-+@@ -1865,14 +1867,15 @@ static WERROR dnsserver_enumerate_records(struct dnsserver_state *dsstate,
-+ 						LDB_SCOPE_ONELEVEL, attrs,
-+ 						"(&(objectClass=dnsNode)(name=%s)(!(dNSTombstoned=TRUE)))",
-+ 						encoded_name);
-+-				talloc_free(name);
-++				TALLOC_FREE(name);
-+ 				if (ret != LDB_SUCCESS) {
-+ 					continue;
-+ 				}
-+ 				if (res->count == 1) {
-++					msg = res->msgs[0];
-+ 					break;
-+ 				} else {
-+-					talloc_free(res);
-++					TALLOC_FREE(res);
-+ 					continue;
-+ 				}
-+ 			}
-+@@ -1885,10 +1888,10 @@ static WERROR dnsserver_enumerate_records(struct dnsserver_state *dsstate,
-+ 			}
-+ 			status = dns_fill_records_array(tmp_ctx, NULL, DNS_TYPE_A,
-+ 							select_flag, rname,
-+-							res->msgs[0], 0, recs,
-++							msg, 0, recs,
-+ 							NULL, NULL);
-+-			talloc_free(rname);
-+-			talloc_free(res);
-++			TALLOC_FREE(rname);
-++			TALLOC_FREE(res);
-+ 		}
-+ 	}
-+ 
-+-- 
-+2.25.1
-+
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb b/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb
-index 923b2ddf1..1a982368e 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb
-@@ -29,6 +29,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
-            file://0001-Add-options-to-configure-the-use-of-libbsd.patch \
-            file://0001-nsswitch-nsstest.c-Avoid-nss-function-conflicts-with.patch \
-            file://CVE-2020-14318.patch \
-+           file://CVE-2020-14383.patch \
-            "
- SRC_URI_append_libc-musl = " \
-            file://samba-pam.patch \
--- 
-2.25.1
+In-Reply-To: <CAGi-RULy-qSqH8XTgP9sv+XKaVOeOH38bnLizOb-6DWjy+P7Bw@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
 
 
+On 12/14/20 11:02 PM, Ramon Fried wrote:
+> On Tue, Dec 15, 2020 at 8:20 AM Khem Raj <raj.khem@gmail.com> wrote:
+>>
+>>
+>>
+>> On 12/14/20 9:52 PM, Ramon Fried wrote:
+>>> Bitwise is multi base interactive calculator supporting
+>>> dynamic base conversion and bit manipulation.
+>>> It's a handy tool for low level hackers, kernel developers and
+>>> device drivers developers.
+>>>
+>>> Signed-off-by: Ramon Fried <rfried.dev@gmail.com>
+>>> ---
+>>>    .../packagegroups/packagegroup-meta-oe.bb     |  1 +
+>>>    .../recipes-extended/bitwise/bitwise_0.41.bb  | 28 +++++++++++++++++++
+>>>    2 files changed, 29 insertions(+)
+>>>    create mode 100644 meta-oe/recipes-extended/bitwise/bitwise_0.41.bb
+>>>
+>>> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+>>> index 2c46d21b7..577f2e788 100644
+>>> --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+>>> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+>>> @@ -307,6 +307,7 @@ RDEPENDS_packagegroup-meta-oe-devtools_remove_x86-64 = "${@bb.utils.contains("TU
+>>>    RDEPENDS_packagegroup-meta-oe-devtools_remove_x86 = "ply"
+>>>
+>>>    RDEPENDS_packagegroup-meta-oe-extended ="\
+>>> +     bitwise \
+>>>        ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland opengl", "boinc-client", "", d)} \
+>>>         brotli \
+>>>         byacc \
+>>> diff --git a/meta-oe/recipes-extended/bitwise/bitwise_0.41.bb b/meta-oe/recipes-extended/bitwise/bitwise_0.41.bb
+>>> new file mode 100644
+>>> index 000000000..2c4ffb1eb
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-extended/bitwise/bitwise_0.41.bb
+>>> @@ -0,0 +1,28 @@
+>>> +SUMMARY = "Bitwise terminal calculator"
+>>> +DESCRIPTION = "Bitwise is multi base interactive calculator \
+>>> +supporting dynamic base conversion and bit manipulation.\
+>>> +It's a handy tool for low level hackers, \
+>>> +kernel developers and device drivers developers."
+>>> +
+>>> +HOMEPAGE = "https://github.com/mellowcandle/bitwise"
+>>> +SECTION = "console/utils"
+>>> +
+>>> +LICENSE = "GPLv3"
+>>> +LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
+>>> +
+>>> +SRC_URI = "https://github.com/mellowcandle/bitwise/releases/download/v${PV}/bitwise-v${PV}.tar.gz"
+>>> +SRC_URI[md5sum] = "62514cb4d26771eec56a54901299b09e"
+>>> +SRC_URI[sha1sum] = "753662205db576f86de7ab89b303b6e411dcf04a"
+>>> +SRC_URI[sha256sum] = "33ce934fb99dadf7652224152cc135a0abf6a211adde53d96e9be7067567749c"
+>>> +SRC_URI[sha384sum] = "ff15c72b60e71b2029d316688350ec07119b1b56e3c911d9bf3f23e3939d9f86d43853b9e812ad7ae7a002a71a559fb2"
+>>> +SRC_URI[sha512sum] = "fc4a612d73bd34a20a87181420ca46549815a86c2861ad918a6539e3bf15230af5e534724f368080a2de0874deac7052e58075683fd32bce1ee070b777d24a9b"
+>>
+>> we only need SRC_URI[sha256sum] please delete rest of them.
+> Sure.
+>>
+>>> +
+>>> +UPSTREAM_CHECK_URI = "https://github.com/mellowcandle/bitwise/releases"
+>>> +
+>>> +S = "${WORKDIR}/${BPN}-v${PV}"
+>>> +
+>>> +DEPENDS = "ncurses readline"
+>>> +
+>>> +CFLAGS_prepend = "-I${S}/inc "
+>>
+>> I meant that you can avoid this by fixing the code with a patch like
+>>
+>> https://gist.github.com/kraj/1e5f8fb76705159afa4bb78a5a8f0311
+> I don't mind, I can do both, whatever you prefer.
+
+thanks then lets go with this patch
+
+>>
+>> this patch can be upstreamed as well, if you want to take it forward
+>> feel free.
+>>
+>>> +
+>>> +inherit autotools
+>>>
+>>>
+>>>
+>>> 
+>>>
