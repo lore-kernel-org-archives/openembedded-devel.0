@@ -1,141 +1,108 @@
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.83])
- by mx.groups.io with SMTP id smtpd.web10.5288.1608001121692869016
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.web09.6915.1608011448512334171
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Dec 2020 18:58:41 -0800
+ Mon, 14 Dec 2020 21:50:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=RjVXWd2h;
- spf=pass (domain: windriver.com, ip: 40.107.236.83, mailfrom: kai.kang@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=U1TjyVEQCMt8tq7hh3LB0wLWsDmWIwmi/PPcGVzAjJrXDwUyiiAttGq0wbKCxb39QxvJQD4qxTz2p1b+N6O1zByClKw/ZntBXrFBhSAxaoxY2KGfsyNEo+7DG45/7x1LCBcb0HRNvNOUvMrZJ8Vulx3khad2YdxGocsI8YiProsw6ndL0F5qVwlaGAQGtjSslTGfnVlYDTi76gwdUATcYvxc2EV+wyEX9wtyPWoXtdBm7lS1RIh12TwTkOV4rK2ZVTAx0Um/o2bfQe9xFTclV5rvZhmj1REX2P2yH+d6s6lwROmGWkPYXGTsDTLXr+wwlYC+4qe4yRK37Yv0tXO2UQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fUDpoMxFXm4M8iinf7OuBTEZlDG3y+r5D4glHRt+Jkg=;
- b=ewXbdLDj1IdkClzXXENQ7UjpeVE5xrjEdNdwBUqh/TRmA5zgCRFyIN0I0BDkhWY9RT4wV0bR4LMm/AnX7r399wIjmmMPrLS3w37rldGDZzyaq8W9g8vHhw7TpMDQDSF20ChbTs74ZL3X896fbmN7xyci5FtRvoSDBXRYofoi6yHjtPlsJArMo6viOmoi2GNgC1neFLcN1OmDpdyTSahy6DDcK5GSMys8Q3r9gZrDD/WdeqieGVrcwxt0DHU03edTdOlXYWhZpQWPFE95qnyVWTi0OZj2Y8kbfY42CpIdFMTq2+YW2SyLwamyyx4lQYIYpNcmpZtBeUAh6gXRq39NuQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=qRkA9TRL;
+ spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: rfried.dev@gmail.com)
+Received: by mail-wr1-f50.google.com with SMTP id w5so14850159wrm.11
+        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Dec 2020 21:50:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fUDpoMxFXm4M8iinf7OuBTEZlDG3y+r5D4glHRt+Jkg=;
- b=RjVXWd2hqRT+JGjEMQ6xFCm+Iw25WI0KblcVO0WT2QRc/xGM6abv7ZwJImaUDgCCQ4ce8V5Z+KrWGQrOK4GaThQpcwBqViC0mSw+PDNUYpV1hADcGX2b603RSdLnHIn6ktY+0ojByXZsTSPi7KLlUBzOlX3NvSI1rIQ0N59Jp/4=
-Authentication-Results: windriver.com; dkim=none (message not signed)
- header.d=none;windriver.com; dmarc=none action=none
- header.from=windriver.com;
-Received: from SN6PR11MB3294.namprd11.prod.outlook.com (2603:10b6:805:c4::33)
- by SA0PR11MB4607.namprd11.prod.outlook.com (2603:10b6:806:9b::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3654.12; Tue, 15 Dec
- 2020 02:58:39 +0000
-Received: from SN6PR11MB3294.namprd11.prod.outlook.com
- ([fe80::b4b5:fc79:127b:66f4]) by SN6PR11MB3294.namprd11.prod.outlook.com
- ([fe80::b4b5:fc79:127b:66f4%6]) with mapi id 15.20.3654.024; Tue, 15 Dec 2020
- 02:58:39 +0000
-To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-From: "kai" <kai.kang@windriver.com>
-Subject: Fail to start gdm
-Message-ID: <5674ee97-bd13-1bae-a3f3-83c1c403f20f@windriver.com>
-Date: Tue, 15 Dec 2020 10:58:32 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: YT1PR01CA0058.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2e::27) To SN6PR11MB3294.namprd11.prod.outlook.com
- (2603:10b6:805:c4::33)
-Return-Path: kai.kang@windriver.com
-MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [128.224.162.141] (60.247.85.82) by YT1PR01CA0058.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2e::27) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3654.12 via Frontend Transport; Tue, 15 Dec 2020 02:58:37 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3a759a75-9f93-4e06-4404-08d8a0a552d6
-X-MS-TrafficTypeDiagnostic: SA0PR11MB4607:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<SA0PR11MB4607D117738A61C2037E2C3595C60@SA0PR11MB4607.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	bgIn8NPnX/xsQO+uNdUiMhmQWaNYK/nMZwDvGSWnaUgjHAO7TUT3FXap0tOdmKS6WaJLS0wodtZeiMjVu+0E4EyZmOKHtnZr23XUE4z1Kk9HTK4h9ocVCeQ5aWqZovJUbcMCQtE3sEHHDFG5UTuCOOpLPDR4EbSszVKR1oAeUFTD+Tj/FvsVyL0byxKP+2JcxKu1V5vr9Ju4Z84xsaU0Ocn04kWg6k+szGbAh5vBgRhC7IxUZqxlvxjITVaUwpu3Xt9z4yQYvvcj25nMp5W0Cf4L2lnRmshjWstlQLAjRMgYkzVJ8SzqlniHc6M+ZxaY1Yp7Jd8plzdWF/eFoObW2owbfvpec+6XDaPvNbrRe7Twti1/CW5HkQvKCTJw6On8YGHE7pJtEBg6/cSLGLOM7JUWedyLCAjcK8NGlgjHvppV0KjXpFGBwU1C9J/qSg5Shw2SCg9AtPoeZ197MShfSg==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN6PR11MB3294.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(376002)(366004)(136003)(6916009)(6486002)(36756003)(66556008)(2616005)(5660300002)(16576012)(6706004)(66946007)(4326008)(956004)(3480700007)(31696002)(8676002)(4744005)(16526019)(2906002)(34490700003)(8936002)(66476007)(83380400001)(31686004)(186003)(6666004)(86362001)(26005)(52116002)(508600001)(78286007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?Z1docG00amVlSUpsQUJ6VTM0azl1UUhaaUo0ZndpL1dxUSt0LzlkSUtWQmNQ?=
- =?utf-8?B?cnhlazZ6WHVtMit0R0JYNk9CdkY3MThYTWFlOFpvRDZuM3dXUkg5Y2dQdDdP?=
- =?utf-8?B?NlE1bS82bnU3eWRWcnZmTjlXVlRkNG1qdTE2OHluV1d5akJqK05TbmF0dGxQ?=
- =?utf-8?B?K1RMbXhwS3Q5V1RVbk53VTZzTFFNQVVDbHg5aHcyRm1tN2J3aDFCd0xDZjU4?=
- =?utf-8?B?R1JLTTVQNFZyM29wdCtVaUdPYVNOaHV2K3ZqNStBdGVycmZRRWxGYTY4bGMy?=
- =?utf-8?B?ZmI4L2l3T3ZvL3BOUlk1SnRXVnBWTWRZaVBpc3pveXhTc1BKMlZpQUo3THhQ?=
- =?utf-8?B?QUtETGV3azVDYlZ5SExidVZNeUNPVGVZdU8yWE5vbWZWanhCSTJUb3cvK0RD?=
- =?utf-8?B?ckdINGNGOGJPa1VKNW94T3YyTzBLbmRURHBrbTFkL0toZkRzNlVQQ0lQd2k2?=
- =?utf-8?B?TTRqbC8zYWZhd3NGQ1I1WndrTUI3MVlhOEs3MGZnRTRJSDdNQjlyTWRjQkw4?=
- =?utf-8?B?a2pmU0NNd2h6MFlEQmdsQSt5K3BtbjNXNUdwa0tHZ1V5ajJhSW5qM1FoNzFv?=
- =?utf-8?B?RzhZZ3gwV0pjUHhCcUxoK3pXSmJ1NW1GbjU1dUFzeFlDWVZUUHU0VzlSWHdV?=
- =?utf-8?B?TW9tRHR1MUh4dkt1cy9pME5Nc3BHbEllZVQ0My9tdFdibDNHamM4RUpIUWgx?=
- =?utf-8?B?K1MyYi9LTncwZThCbnFwTzhOSGNaZ0Nacm5LVWJld3FmbGJkMEpHVTFwdUVy?=
- =?utf-8?B?MHVmb0VSUXl2dWpuY3dRVDZkUlY0ZkFPQVFjN3BwaThTdjZYL3VvSW1uYzhq?=
- =?utf-8?B?K0g0ZVhhWnlKWktVdlVOdkl1SUJzd2RpS3lQZ3Z1TXd5NWZMVzV5aVZjYjR0?=
- =?utf-8?B?Kzk2dlRJQVl1SER5UHdncU9HUjVvQlp5MnJkOHFPSDkwTHVOVEY3NlFwOGNt?=
- =?utf-8?B?VEc0NmU1TzBjZHplUzNYZzlFRkFMSGp2Z0xuVmRqcFV5aFhhZ0RwSkw1NzZP?=
- =?utf-8?B?ZnlEVCt3bkxjdnl2ZlNmQzdiZExXOUNwV3hjWXlRNWgxUkYyd05BS0VVa3hz?=
- =?utf-8?B?YjNNMmF3dWNDSTN3aER0SkwyYW91MUxpazJvNjJ2bnpMSHowUkphL2dGVUY3?=
- =?utf-8?B?Lys5MmFVcnBtZ01iQUhlekdhWnp0RXhiUW1xZFZKb2VJbE9aYVZnVnVtZVRw?=
- =?utf-8?B?UDl0dmJXeW5hZUNSbFdiZUFOVDJNdHh4U2VRZ1BXb3hpYW9zbVY1RXhSSmw1?=
- =?utf-8?B?MnVLU1lTSENrVjRKZzRPWmtpaE1xSHpyekJ5V2NZeG5pUEs5K0loSTVXMnAw?=
- =?utf-8?Q?zyxrE9UIuUXlfRghu3dOOiyJNV8/YFePSO?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-AuthSource: SN6PR11MB3294.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Dec 2020 02:58:39.1277
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3a759a75-9f93-4e06-4404-08d8a0a552d6
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: S2M4ZK6GBTxsD1VeQpZ0ff8los7ZSmw6g2z/IDwR7dQnThqA2yTVJv3MZ9vd/AL06dZcmPASNLqMWJm0i9rflw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR11MB4607
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=fJJHuq9OkUzRB05hZzAxzd0b+xsbJqQ4cBu4nt62Koo=;
+        b=qRkA9TRLinc6Ll12fjxrPtkOWC0kEcN9kAe2d9ZNJJ0h/pzFQckO26zLLkP/MT6t5L
+         S0rMoTscSOZ0QbEOFDk6w9Jn0vWq/Smc4Xe04CX0fXMMpYbu0t7p6cOVvzhUg0Y4M1Lo
+         qzpaTXodfDhc3AqwUYqY/E04btMz9UguJr8xAJOLlHq6Ta/dosXbDn0c70jAk1kjEYHu
+         R6LSgYdgG3RBZMjzJc1AAPDHVoAvGAOtLReFsQ4ElVxGSJT4YbT6L2s2wrkj4HZ/Y0Jx
+         Gx5ZpHONXR17KQU2cwkNXCJJKZ1mPjhLB1tUQ5hR2NN/y6xq6HKXL43xpIgvCNjuEa62
+         ckvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=fJJHuq9OkUzRB05hZzAxzd0b+xsbJqQ4cBu4nt62Koo=;
+        b=BR6lC3nODt7wENKATzPvvzJdE7Plodr6d7VyKpvCXo+SeA6jr2Cua+0p8xhJU24FgY
+         k5p3WYnoJTUWgz8vMTj/RDd4GM1NJK0XYJ2vxLCHZzeuh6ZJnA9GbQ2CQeGxOoDAj2jK
+         fsn9s5li/NQnVxvh5QAzG8KUuE87m9whJ9bQqXE8SuzrcTshcLAm4tf2jewW6T8JXomi
+         fvQ/8vSKWB4lO8byfT33EPR4b0NKrCKwOJ0DoqR49X8bjxE9wZSvaH4kHHDCqwfDVRsI
+         ORsERXcm4+ckVfTDlu1hl0pzWtNErkOin4TRygsxKFrSHMbznd9i0daTY5O6o9g5gYet
+         CdQw==
+X-Gm-Message-State: AOAM531vaCYC9xwLRwv35lJpBBbTSDN4RnxYwNAG3zdF6x7NOKvyKE/P
+	NfSpj+CYpUwqalN9To4Y1OGMh5FMeqLZCw==
+X-Google-Smtp-Source: ABdhPJyIyhDm8nY796QlMMX41InFQg1/FqX4IvZPnNngNC/ExmEUTn9oXeoO18pJ+DCw3Iek61FiSQ==
+X-Received: by 2002:adf:902d:: with SMTP id h42mr31478400wrh.175.1608011446408;
+        Mon, 14 Dec 2020 21:50:46 -0800 (PST)
+Return-Path: <rfried.dev@gmail.com>
+Received: from lotus.nr.ent (82.166.25.98.fix.netvision.net.il. [82.166.25.98])
+        by smtp.gmail.com with ESMTPSA id l7sm34251399wme.4.2020.12.14.21.50.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 14 Dec 2020 21:50:45 -0800 (PST)
+From: "Ramon Fried" <rfried.dev@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Subject: [PATCH v2] bitwise: add new recipe
+Date: Tue, 15 Dec 2020 07:52:26 +0200
+Message-Id: <20201215055226.1395-1-rfried.dev@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
-Hi Andreas,
+Bitwise is multi base interactive calculator supporting
+dynamic base conversion and bit manipulation.
+It's a handy tool for low level hackers, kernel developers and
+device drivers developers.
 
-I am trying to use gdm as graphical_init_manager. But it fails to start 
-gdm with core-image-minimal-xfce.
+Signed-off-by: Ramon Fried <rfried.dev@gmail.com>
+---
+ .../packagegroups/packagegroup-meta-oe.bb     |  1 +
+ .../recipes-extended/bitwise/bitwise_0.41.bb  | 28 +++++++++++++++++++
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/bitwise/bitwise_0.41.bb
 
-My config in local.conf:
-
-IMAGE_INSTALL_append = ' gdm rsyslog'
-VIRTUAL-RUNTIME_graphical_init_manager = "gdm"
-DISTRO_FEATURES_append = ' pam polkit'
-
-#
-# Use systemd for system initialization
-#
-DISTRO_FEATURES_append = " systemd"
-DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
-VIRTUAL-RUNTIME_login_manager = "shadow-base"
-VIRTUAL-RUNTIME_init_manager = "systemd"
-VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
-
-
-When I boot the image and run gdm, it shows error:
-
-gdm-x-session: X server did not write display string
-
-I have tried to enable configure option '--enable-suid-wrapper' of 
-xserver-xorg, it fails with other error looks like:
-
-GdmManager: uid for sender and uid for session don't match
-
-
-Did you meet such error when you upgraded gdm, please? And what's you 
-config when you validate it?
-
-Thanks a lot.
-
-Kai
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 2c46d21b7..577f2e788 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -307,6 +307,7 @@ RDEPENDS_packagegroup-meta-oe-devtools_remove_x86-64 = "${@bb.utils.contains("TU
+ RDEPENDS_packagegroup-meta-oe-devtools_remove_x86 = "ply"
+ 
+ RDEPENDS_packagegroup-meta-oe-extended ="\
++     bitwise \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland opengl", "boinc-client", "", d)} \
+      brotli \
+      byacc \
+diff --git a/meta-oe/recipes-extended/bitwise/bitwise_0.41.bb b/meta-oe/recipes-extended/bitwise/bitwise_0.41.bb
+new file mode 100644
+index 000000000..2c4ffb1eb
+--- /dev/null
++++ b/meta-oe/recipes-extended/bitwise/bitwise_0.41.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "Bitwise terminal calculator"
++DESCRIPTION = "Bitwise is multi base interactive calculator \
++supporting dynamic base conversion and bit manipulation.\
++It's a handy tool for low level hackers, \
++kernel developers and device drivers developers."
++
++HOMEPAGE = "https://github.com/mellowcandle/bitwise"
++SECTION = "console/utils"
++
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
++
++SRC_URI = "https://github.com/mellowcandle/bitwise/releases/download/v${PV}/bitwise-v${PV}.tar.gz"
++SRC_URI[md5sum] = "62514cb4d26771eec56a54901299b09e"
++SRC_URI[sha1sum] = "753662205db576f86de7ab89b303b6e411dcf04a"
++SRC_URI[sha256sum] = "33ce934fb99dadf7652224152cc135a0abf6a211adde53d96e9be7067567749c"
++SRC_URI[sha384sum] = "ff15c72b60e71b2029d316688350ec07119b1b56e3c911d9bf3f23e3939d9f86d43853b9e812ad7ae7a002a71a559fb2"
++SRC_URI[sha512sum] = "fc4a612d73bd34a20a87181420ca46549815a86c2861ad918a6539e3bf15230af5e534724f368080a2de0874deac7052e58075683fd32bce1ee070b777d24a9b"
++
++UPSTREAM_CHECK_URI = "https://github.com/mellowcandle/bitwise/releases"
++
++S = "${WORKDIR}/${BPN}-v${PV}"
++
++DEPENDS = "ncurses readline"
++
++CFLAGS_prepend = "-I${S}/inc "
++
++inherit autotools
+-- 
+2.17.1
 
