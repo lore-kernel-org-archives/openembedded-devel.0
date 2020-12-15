@@ -1,128 +1,102 @@
-Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com [209.85.167.194])
- by mx.groups.io with SMTP id smtpd.web09.7706.1608015764833718929
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web10.7820.1608016943545937835
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Dec 2020 23:02:44 -0800
+ Mon, 14 Dec 2020 23:22:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=lJqrdsPr;
- spf=pass (domain: gmail.com, ip: 209.85.167.194, mailfrom: rfried.dev@gmail.com)
-Received: by mail-oi1-f194.google.com with SMTP id 15so22280622oix.8
-        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Dec 2020 23:02:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=Hm7gEF1YBhFyFUCBRO5nkmJ7uxPc1cIdWuY2X3/I6fo=;
-        b=lJqrdsPrYMlFTgPXt4RuOy2G5VRCasQXDJi+R9hPvP3LCWj67wYCCe+cEA6UIgor20
-         sQyz6lWdgUmw57xZHvCMl1TSISN5LUndXdAsgW5CToa7BVv6Bp3/+jzS2t4RrhROz+Gy
-         ylXpEE2nhbV5Y2PhUinRqaLJSW//XVh2+/TvzYWYLSPJySiSBMnG8iNJwrn50DLzGRiF
-         Psydj690OCBWPkIBnqtt6YxMfQAqDq459dBBw8roZtZPh/QBwgeNLtFXx+q2TZEZpTsX
-         QhtJcAxn8S+tJmn/DDTGDIEg7OX6byaQE5D0yg3U6ywzKaaUDBvQ9U+Xgvvi5pxzDLSf
-         ZHXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=Hm7gEF1YBhFyFUCBRO5nkmJ7uxPc1cIdWuY2X3/I6fo=;
-        b=QfhmXmlgWtNQZMqZV3mnylwuc18D50tOOeXsRW+ChspYx5a4VkuqaKkmPvu9AzyOzb
-         oBwcKuDqvmXDOmT+Ed8Y3QvjSIsrT7BaZx2TCAdFA87s9EafuFi+k5+1K4nmRAhKBymQ
-         FGlRkNKQhnFexT+7MCM6CbtD5UgcAjb1cx0vdrQwXvsMZECVo11txCQpzRHeIsM/DkqG
-         edXUp+bYk5prtloV8S98fO8JY1qvMrIl4E8Ykum/+xRoqA1jURWzPy8RT3koTv8mEGGh
-         S+/G5u/C5il13B6G24YjyaB9X2SrF3snUCoZQ4QDAa3A6UWNBcGM6/7swkbN53QkZ2X3
-         +Tcw==
-X-Gm-Message-State: AOAM5310us4gRlsryDbJNhccP/MwnaAYucIdhVLZD24dUHDmlzcADHx3
-	Ntuy04QNnzFvm8k6JswSKXZbXqy5nHYigRpCAoc=
-X-Google-Smtp-Source: ABdhPJyFTTixMs1YLSvpGpTicwSmNXGnudYnb9HFHm1biMKiygNyH7o78f2nHDKIpO/E51c0RVKMnBdlJRbwgNEzdO8=
-X-Received: by 2002:aca:d484:: with SMTP id l126mr20182095oig.151.1608015764133;
- Mon, 14 Dec 2020 23:02:44 -0800 (PST)
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.78,420,1599494400"; 
+   d="scan'208";a="102408290"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 15 Dec 2020 15:22:09 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id D2DF14CE601C
+	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Dec 2020 15:22:07 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Tue, 15 Dec 2020 15:22:06 +0800
+From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@cn.fujitsu.com>
+Subject: [oe] [meta-oe][PATCH] zabbix: CVE-2020-15803 Security Advisory
+Date: Tue, 15 Dec 2020 15:22:03 +0800
+Message-ID: <1608016923-21617-1-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <20201215055226.1395-1-rfried.dev@gmail.com> <ded0788f-0501-f733-7d3f-267ceb9455f9@gmail.com>
-In-Reply-To: <ded0788f-0501-f733-7d3f-267ceb9455f9@gmail.com>
-From: "Ramon Fried" <rfried.dev@gmail.com>
-Date: Tue, 15 Dec 2020 09:02:33 +0200
-Message-ID: <CAGi-RULy-qSqH8XTgP9sv+XKaVOeOH38bnLizOb-6DWjy+P7Bw@mail.gmail.com>
-Subject: Re: [oe] [PATCH v2] bitwise: add new recipe
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
+ G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
+X-yoursite-MailScanner-ID: D2DF14CE601C.A43FF
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-On Tue, Dec 15, 2020 at 8:20 AM Khem Raj <raj.khem@gmail.com> wrote:
->
->
->
-> On 12/14/20 9:52 PM, Ramon Fried wrote:
-> > Bitwise is multi base interactive calculator supporting
-> > dynamic base conversion and bit manipulation.
-> > It's a handy tool for low level hackers, kernel developers and
-> > device drivers developers.
-> >
-> > Signed-off-by: Ramon Fried <rfried.dev@gmail.com>
-> > ---
-> >   .../packagegroups/packagegroup-meta-oe.bb     |  1 +
-> >   .../recipes-extended/bitwise/bitwise_0.41.bb  | 28 +++++++++++++++++++
-> >   2 files changed, 29 insertions(+)
-> >   create mode 100644 meta-oe/recipes-extended/bitwise/bitwise_0.41.bb
-> >
-> > diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > index 2c46d21b7..577f2e788 100644
-> > --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > @@ -307,6 +307,7 @@ RDEPENDS_packagegroup-meta-oe-devtools_remove_x86-64 = "${@bb.utils.contains("TU
-> >   RDEPENDS_packagegroup-meta-oe-devtools_remove_x86 = "ply"
-> >
-> >   RDEPENDS_packagegroup-meta-oe-extended ="\
-> > +     bitwise \
-> >       ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland opengl", "boinc-client", "", d)} \
-> >        brotli \
-> >        byacc \
-> > diff --git a/meta-oe/recipes-extended/bitwise/bitwise_0.41.bb b/meta-oe/recipes-extended/bitwise/bitwise_0.41.bb
-> > new file mode 100644
-> > index 000000000..2c4ffb1eb
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-extended/bitwise/bitwise_0.41.bb
-> > @@ -0,0 +1,28 @@
-> > +SUMMARY = "Bitwise terminal calculator"
-> > +DESCRIPTION = "Bitwise is multi base interactive calculator \
-> > +supporting dynamic base conversion and bit manipulation.\
-> > +It's a handy tool for low level hackers, \
-> > +kernel developers and device drivers developers."
-> > +
-> > +HOMEPAGE = "https://github.com/mellowcandle/bitwise"
-> > +SECTION = "console/utils"
-> > +
-> > +LICENSE = "GPLv3"
-> > +LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
-> > +
-> > +SRC_URI = "https://github.com/mellowcandle/bitwise/releases/download/v${PV}/bitwise-v${PV}.tar.gz"
-> > +SRC_URI[md5sum] = "62514cb4d26771eec56a54901299b09e"
-> > +SRC_URI[sha1sum] = "753662205db576f86de7ab89b303b6e411dcf04a"
-> > +SRC_URI[sha256sum] = "33ce934fb99dadf7652224152cc135a0abf6a211adde53d96e9be7067567749c"
-> > +SRC_URI[sha384sum] = "ff15c72b60e71b2029d316688350ec07119b1b56e3c911d9bf3f23e3939d9f86d43853b9e812ad7ae7a002a71a559fb2"
-> > +SRC_URI[sha512sum] = "fc4a612d73bd34a20a87181420ca46549815a86c2861ad918a6539e3bf15230af5e534724f368080a2de0874deac7052e58075683fd32bce1ee070b777d24a9b"
->
-> we only need SRC_URI[sha256sum] please delete rest of them.
-Sure.
->
-> > +
-> > +UPSTREAM_CHECK_URI = "https://github.com/mellowcandle/bitwise/releases"
-> > +
-> > +S = "${WORKDIR}/${BPN}-v${PV}"
-> > +
-> > +DEPENDS = "ncurses readline"
-> > +
-> > +CFLAGS_prepend = "-I${S}/inc "
->
-> I meant that you can avoid this by fixing the code with a patch like
->
-> https://gist.github.com/kraj/1e5f8fb76705159afa4bb78a5a8f0311
-I don't mind, I can do both, whatever you prefer.
->
-> this patch can be upstreamed as well, if you want to take it forward
-> feel free.
->
-> > +
-> > +inherit autotools
-> >
-> >
-> >
-> > 
-> >
+References
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15803
+
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+---
+ .../zabbix/zabbix/CVE-2020-15803.patch        | 36 +++++++++++++++++++
+ .../zabbix/zabbix_4.4.6.bb                    |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-15803.patch
+
+diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-15803.patch b/meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-15803.patch
+new file mode 100644
+index 000000000..2eec4bf32
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-15803.patch
+@@ -0,0 +1,36 @@
++From 4943334fd9bf7dffd49f9e86251ad40b3efe2135 Mon Sep 17 00:00:00 2001
++From: Wang Mingyu <wangmy@cn.fujitsu.com>
++Date: Fri, 11 Dec 2020 17:02:20 +0900
++Subject: [PATCH] Fix bug for CVE-2020-15803
++
++Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
++---
++ frontends/php/include/classes/html/CIFrame.php | 7 +++++++
++ 1 file changed, 7 insertions(+)
++
++diff --git a/frontends/php/include/classes/html/CIFrame.php b/frontends/php/include/classes/html/CIFrame.php
++index 32220cd..70f2ab5 100644
++--- a/frontends/php/include/classes/html/CIFrame.php
+++++ b/frontends/php/include/classes/html/CIFrame.php
++@@ -29,6 +29,7 @@ class CIFrame extends CTag {
++ 		$this->setHeight($height);
++ 		$this->setScrolling($scrolling);
++ 		$this->setId($id);
+++		$this->setSandbox();
++ 	}
++ 
++ 	public function setSrc($value = null) {
++@@ -69,4 +70,10 @@ class CIFrame extends CTag {
++ 		$this->setAttribute('scrolling', $value);
++ 		return $this;
++ 	}
+++
+++	private function setSandbox() {
+++		if (ZBX_IFRAME_SANDBOX !== false) {
+++			$this->setAttribute('sandbox', ZBX_IFRAME_SANDBOX);
+++		}
+++	}
++ }
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_4.4.6.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_4.4.6.bb
+index 0e0ddd577..98a31879c 100644
+--- a/meta-oe/recipes-connectivity/zabbix/zabbix_4.4.6.bb
++++ b/meta-oe/recipes-connectivity/zabbix/zabbix_4.4.6.bb
+@@ -26,6 +26,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ SRC_URI = "http://jaist.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/${PV}/${BPN}-${PV}.tar.gz \
+     file://0001-Fix-configure.ac.patch \
+     file://zabbix-agent.service \
++    file://CVE-2020-15803.patch \
+ "
+ 
+ SRC_URI[md5sum] = "e666539220be93b1af38e40f5fbb1f79"
+-- 
+2.25.1
+
+
+
