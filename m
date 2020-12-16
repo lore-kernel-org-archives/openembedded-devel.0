@@ -1,17 +1,17 @@
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com (NAM11-CO1-obe.outbound.protection.outlook.com [40.107.220.55])
- by mx.groups.io with SMTP id smtpd.web08.4313.1608105821798642509
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.57])
+ by mx.groups.io with SMTP id smtpd.web11.4404.1608107367513565638
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Dec 2020 00:03:41 -0800
+ Wed, 16 Dec 2020 00:29:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=VJdC0gXv;
- spf=pass (domain: windriver.com, ip: 40.107.220.55, mailfrom: hongxu.jia@windriver.com)
+ dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=mHRC0gWm;
+ spf=pass (domain: windriver.com, ip: 40.107.223.57, mailfrom: yi.zhao@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Xl9PMMKrfcwKOodKZrB+aepqgs0/LiE5D2e30dNr7PfjW3XFdgKydsFKTzcdJ4XD/cswM1rux5j1wkSDf+koIGkgRne2B+f5a55XOUkqivi2Rn/IucBpJMClsGFlKWhP7IoHehar8ASA+ZrV7WBqw802c35dkrkKpfx3YdiH9N9ZUd01lDTdyjZo/9tdj+vg4sQvMC6IlytOrMhd4x146B+KjqUm6Uzins0dq0ZLH6U7qz/stIA5ETaX+HHMC7URLwoEQ6+DaBvn/IvfXfuzQZPxK3cv85Ed+6b6r2SLvvqQcM7ggkCgGURMG7vMoFQAa8ZtdbmkaaN1eyuwKJmNpw==
+ b=R/vZyVFV2pef7XdzilDv/o6iudt2CsKDdJMU1+d0MyOG80K0M8jlJ0YANrlXnH9mNOZlpXtgo0ekFTHf28R2G05B/ZfhfYk0b4rkH9ZY2psV+6xwP3nfdXzUOdKalKNL2W9wOaumQQHmvYdxgtF3UNy244e/Acnm9ZcQJLF885Hj5ysf/1/TF9h4iaiqdUv//szJSgMciEFadhWIcLeGt3xOAveBbFYuj07N/rwOITXX1K5Ru45mabpN/+Aa0/K5el5I0gTY0f7Ft8/QDUkhCbv7cfkhIE0K1/h+veBEQMqmM52YC1AxE4PzyBeUVzh52hZR27u/XTWGa70bP8Z6rA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YNSmere/0gVr9FIliAVKll5IsNh/ZTfIyRAHPc4+PTI=;
- b=EGQeuo0Msb5A3E35tnz+Wknxb+E1y2iB4OIK0iAM34+rzDtbtY4m448aemEpk13lkZ6BEnHhFqjI2IW+2TDaXhn6AKvch4NRhqVeuU1ecy272h2qsWuaNNuy30fuVNM9ekLn1U/P2X3nlDZrAmX+b+8dh2i+o0RKAEjfvZ1XDpltxx/PxADIa50WGK/adSdzTPgqosTz8LRIiSMUOKU5j1MV/MwVqsj0YCIiehXelvq7lrJGcfWMdgRn+cr/NRfC4tMDhDfeQFXsYxOZ5MC5NuvaP2GnXBKc3+7U9UozdFMVqM+5LT2cZ5e01hMY09GVyB1tTy9N9/k1KeP1ppEdyw==
+ bh=TTRPE3fg9seKCFFcH1Zu6cQ/9JyggRUEczYRi4X05KM=;
+ b=UhuY07INK2exBKrultcGELdbUtq2j77d/O/kTtG2RctS8FHXQbYJoT2n57vAtUvUpNeHhBO5udS4VPemYcxRKAMd4YctpxkLOPraTcg5kbyj3Ovl4HltggluGrod1F1NJlqelO4WnvQfGXAkl/7kf3VpROPgLwmx/PdINZxfnRBswWflfENpYQH4psolsc49a7MSlGFH1XZVprE2lzrv1ePSp2eW9jUqOO0nkd1C4dcENzIQrp6+AbmmRaT0M5uA8+ZA7yCpi8YYb4HSFiSNtwaOhU5pIttXoTD8yGPBvXJMqMkbVIACezrvzMhbUQuqMbAGpQd9mIB43djoajNLxg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,119 +19,170 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YNSmere/0gVr9FIliAVKll5IsNh/ZTfIyRAHPc4+PTI=;
- b=VJdC0gXv3Q3lsV0GcvoFke7FQv9vIQbdKQRVkC9NhqQMMpVBDcvBlT3Qy9tJ9Qw6Cq9lQaJOA2GvCGQ0VdyT3v3Czdq85MJsdN8ZBif3y6eKCf5W4xzxznXnLVWzBKLgiQ8s9BvMobihSx2FzDoYAFy2U9z/QVArv9z/sw86WR8=
-Authentication-Results: gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
-Received: from DM6PR11MB4380.namprd11.prod.outlook.com (2603:10b6:5:14e::20)
- by DM5PR1101MB2074.namprd11.prod.outlook.com (2603:10b6:4:50::8) with
+ bh=TTRPE3fg9seKCFFcH1Zu6cQ/9JyggRUEczYRi4X05KM=;
+ b=mHRC0gWm816Pi2UatOAynogxRuotgAuRxAxv770jC+hGxXA8GvANr8DmZzo7yn/d9kjEfV88qiAq5e5/ocJZxrCQVzLTVaq5qb9aiOI4W7Ic8AfcvFtP0fs+xNu9+NYOFD7yluSHzlxF0pkbRUJhog5CTeYpJpl+JcCtvKZSgnA=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
+ by MW3PR11MB4713.namprd11.prod.outlook.com (2603:10b6:303:2f::18) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3654.20; Wed, 16 Dec
- 2020 08:03:40 +0000
-Received: from DM6PR11MB4380.namprd11.prod.outlook.com
- ([fe80::15ab:1cac:c06:c1f8]) by DM6PR11MB4380.namprd11.prod.outlook.com
- ([fe80::15ab:1cac:c06:c1f8%7]) with mapi id 15.20.3654.017; Wed, 16 Dec 2020
- 08:03:40 +0000
-From: "hongxu" <hongxu.jia@windriver.com>
-To: raj.khem@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] flatbuffers: add python3 support
-Date: Wed, 16 Dec 2020 16:03:24 +0800
-Message-Id: <20201216080324.14442-2-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.18.2
-In-Reply-To: <20201216080324.14442-1-hongxu.jia@windriver.com>
-References: <20201216080324.14442-1-hongxu.jia@windriver.com>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3654.19; Wed, 16 Dec
+ 2020 08:29:26 +0000
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::21b9:29b6:fd3:bca5]) by CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::21b9:29b6:fd3:bca5%7]) with mapi id 15.20.3654.025; Wed, 16 Dec 2020
+ 08:29:26 +0000
+From: "Yi Zhao" <yi.zhao@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH] ebtables: do not install /etc/ethertypes
+Date: Wed, 16 Dec 2020 16:29:16 +0800
+Message-ID: <20201216082916.81045-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
 X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: HK0PR01CA0069.apcprd01.prod.exchangelabs.com
- (2603:1096:203:a6::33) To DM6PR11MB4380.namprd11.prod.outlook.com
- (2603:10b6:5:14e::20)
-Return-Path: hongxu.jia@windriver.com
+X-ClientProxiedBy: SJ0PR13CA0097.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c5::12) To CO1PR11MB4867.namprd11.prod.outlook.com
+ (2603:10b6:303:9a::13)
+Return-Path: yi.zhao@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from pek-lpggp1.wrs.com (60.247.85.82) by HK0PR01CA0069.apcprd01.prod.exchangelabs.com (2603:1096:203:a6::33) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3654.12 via Frontend Transport; Wed, 16 Dec 2020 08:03:39 +0000
+Received: from pek-yzhao1-d1.wrs.com (60.247.85.82) by SJ0PR13CA0097.namprd13.prod.outlook.com (2603:10b6:a03:2c5::12) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3676.9 via Frontend Transport; Wed, 16 Dec 2020 08:29:25 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 88c6a6ef-771a-410e-53f4-08d8a19919c7
-X-MS-TrafficTypeDiagnostic: DM5PR1101MB2074:
+X-MS-Office365-Filtering-Correlation-Id: e91ce908-3c6b-4a97-1000-08d8a19cb31e
+X-MS-TrafficTypeDiagnostic: MW3PR11MB4713:
 X-Microsoft-Antispam-PRVS: 
-	<DM5PR1101MB20745412C8C8D0551D18CDC794C50@DM5PR1101MB2074.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:361;
+	<MW3PR11MB47138BD529DA4C1A905F0CD3F9C50@MW3PR11MB4713.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6790;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	BmVJnrXqHbriw14kkndRyVRH6Hx+gr73e6z4Y/Ig6iSDbOeTVQu93eKGVmlcdoTF5qN3R46JjjhK/482W4bB8cc3tO+V3Uvu5I1K6t8YEmfterdt6NbiCLjEAGsdQTYZvI4GhPITzg/zY1XeiluQxMRK00M8THXLVQsyu9O5JTMnLXXZrmbzKgiW2r8Nhh2Jpif6k6iuFeOMQwMWQzm57ljkOY1WJHNUYeQZ9sw6RQLP/rCs33xOsIrc/xukRlJ8yrQwckJpRmi4kuBqFsLOlJ//K6eOzZcRjmebjg8VSlAIyvVuImlNl1jYqt7utgcSeU3Z6p7BR7KvOpQdCKSuR7E6PZgt7PTGYWegz8AI2ryL9C3fJOFZO05TgznGNIGlQPe68eh2QEdmIiCrXQw2pA==
+	xEEwAUw1gR+vn5Rypbq9CQctnJsFYDn9q3bjBBTpRRyteDMIUjv30k4Q6/fTZeZpHiQuZ8FYNlGP+ifgrOOUqeFLtggPq9D82h3AlQJ2mpZ16d/f1zTM7Ntq+YT4HFi8LvOv7ReTWYHHYGuqrTMZXLcx5UFqEYaHsiqk0bZMN5tvcYwGJFPc30UdvXX9ZnSRJ2EAQUgGpa5RXfeFAwdLh+qgMuWzQT44rQgL9gUPlHcYEGIj+YwobL1IOBfXjlvY6Hx83Vx30mvaA6GCBIcsf0odKoHWGIkMP+iCJbVq5Bw/HRAPaTCEbXmpuxSNCKgqvsSUFwYs9t6YIL8MPt9z9eD5w2PEpqwC2VWv8hFScIUASSV3ujLW+PM/HqflRhjLByaWPmMKeA8L5ye+0S4aLw==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB4380.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(39850400004)(366004)(346002)(396003)(376002)(6486002)(2616005)(316002)(1076003)(86362001)(2906002)(478600001)(44832011)(186003)(6666004)(6512007)(956004)(52116002)(66556008)(16526019)(8936002)(6506007)(8676002)(5660300002)(83380400001)(26005)(36756003)(66946007)(66476007)(6916009)(4326008);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(136003)(366004)(346002)(396003)(376002)(83380400001)(956004)(8936002)(2616005)(2906002)(16526019)(5660300002)(186003)(52116002)(26005)(66946007)(6916009)(66556008)(66476007)(86362001)(6506007)(478600001)(44832011)(1076003)(36756003)(8676002)(6666004)(6486002)(316002)(6512007)(966005);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?d9Vgmhnf/AyX7MpoOj/y43Zw62sIVNDzU7CvRow9SOngplKEjAVL9AP2aYGa?=
- =?us-ascii?Q?8uRAHcxp1+7rqP0af2lf3wrLv5ktExYf5gLYn1y7Fzk6a50Db2J1oZkBQP7p?=
- =?us-ascii?Q?yvstZ5j4sHULy4q78ja4HGN/CoH9AzN5E67px2moZM+GALS0bDqwEI0DOzfP?=
- =?us-ascii?Q?Dxn/idS+Uez8GKu6Nc+zEvuD62Yka/V6APKZ9jYc3YrA5sdnsP2xbgZsNVoK?=
- =?us-ascii?Q?XUwbqa1KqvcteqLP3I+GI6m1ZU+gFXnpMFXwPfUDO1Wn9Pij3w7OyJCUUwCT?=
- =?us-ascii?Q?0Ax7LdxUtf7Wu2cLolrJ4Vc4zgURldiNCF4a0xkyOM/a8JON2p5HK2EjdEtf?=
- =?us-ascii?Q?ZluhxP2hxExDzMgKiFxfGHi08UtceBrzF5DyHV9L9XjnMxScANAqsVfjvRqj?=
- =?us-ascii?Q?/9nbz0pNe3dH6cIna/+RKpSdkgpmPPIahAF+M9wtQbUiSp2tz4heIwkQxcOr?=
- =?us-ascii?Q?81IaDnTngN3bIgDfb/1Ib3qEp7E4TTjGkfBwnkRhVguCHOLOzteuGXpAHiPL?=
- =?us-ascii?Q?elY9RduUemIi1NgmGMdDpULkcAVF0NnRs7rSI7kw7YSJj5eA4PpaPYXG1LG0?=
- =?us-ascii?Q?XRuA/z+Kcspsmh+JOC/XpZIt006f8AP8zNVtO6ttRm08EkvpXSI4C9mKk3RD?=
- =?us-ascii?Q?N2nfErYJgxv1l1PM+MaYn/ZJMLxSCOF9+wxWPD746x3WCL9Ao8pAtFSLRPOi?=
- =?us-ascii?Q?/4C40Hgfvw+hzzcStcCDMyLq1iANOGqTcdLlQQOC6iB6grZjyTOlu4OyarWI?=
- =?us-ascii?Q?1Xh7XrRq/dj0S87bMKYg3pjb8WbLP6zj3N+r3UbV3VzJFYQFpwWspXpyhlZ5?=
- =?us-ascii?Q?84H1CL0B7+oZlSdL988GmQDcTcnEEsgM6piERnjc7LS+nOgMlCNsAnTWrFzZ?=
- =?us-ascii?Q?QvJso/PLb9vbp5i3gE8VuxuU8zKZZgnv9WDg2/GfNy8G3wQ24qVUlSOvAxHU?=
- =?us-ascii?Q?d5Zlv3FAC+TtcXyKDf5FiPfUUOhCVsU8SrKd2Mj4eZ3b0uwIDQ/UBW2Z/w3J?=
- =?us-ascii?Q?WIbs?=
+	=?us-ascii?Q?Q3N+5bKoq+uqDYEeBDL9d3/IvzhaephyFt8lR5RBr30sTU7Tol4f+EbWDiwI?=
+ =?us-ascii?Q?yerXxVqUL++2biINAThEHRS2MNSy4c0zC4pbzRXWkulQxBKHb6O3ShzRyOzM?=
+ =?us-ascii?Q?YWfOJciRrmDGbw7ZbhDP8r+vN90PZpegXsX4anhGq9EP22k27FSTb5GhckzD?=
+ =?us-ascii?Q?c/ega6TAhG7Mya9C1fyAzh82ylNCmY1kpHPZX9nw7OSQkSv+p2EfjNThhkX8?=
+ =?us-ascii?Q?qUWnAdq67EFhT2E4VGOVTMK/CQnPbzclszSZfQ1Bn231xDsEEg8wrnCDnFt3?=
+ =?us-ascii?Q?4cM7XJqHo5xybLeLVCSOx+dc+HkE0TC68iWd4dFA4/c8xtHmkRECGqcJ8QZv?=
+ =?us-ascii?Q?FqCuSsnhIzrv+nOa2m7m3/TYl59QHnbFcgNxCPVUQUOc3k3tKCuO2xqlc53h?=
+ =?us-ascii?Q?J8LXbOyejT/jtoZkNIoDtkX03U1zMmCJS/XZ0wKs7TXbvNw9IMGcNaVkQ5pf?=
+ =?us-ascii?Q?faMhovMDVfE/KmX3a/gbaXOWNkxrSLwZHvQvuvmHXti5kBugREGuRlcwc1NN?=
+ =?us-ascii?Q?88hdhtTXZjX/4+JLTe/VqZ2YkRWvs4yo9mhEC0HMFk8EIad50752F4A7lf4S?=
+ =?us-ascii?Q?0cBlydL0Ril2jiElWKd8Ho4YM50R7W4/hISOjCDX68NxpT8/ePj6FJwjxzs1?=
+ =?us-ascii?Q?DLFpmGFqd+Xa2CBMv2LL9YuGPFA8Vcjc674IwlDB8XeejaT+BJM18X6tY2BV?=
+ =?us-ascii?Q?S6S6Dmohk8TzdYKGAXv5qfZFjgi4sESiQgYzLAQNwvKzc85bZ+xPftjXVTwp?=
+ =?us-ascii?Q?VolZMmFEGvVmjtYXFXbhwZNhatavR2HAGiBV178uI5szocqWeZKN4cqaTP/X?=
+ =?us-ascii?Q?wNIQ6lsCdNyNovMJspzw9C97/6jjZfciDbdQUYXPbzWEQBnabKEkMTAwX0nx?=
+ =?us-ascii?Q?39hbDXvc5ZRrv2nGV1v7FrQ8MlYoIfaIZqOBLMQMufY9Q2wHJsTAweRL76N4?=
+ =?us-ascii?Q?WtTJiRtV4BYhEDKWzHTTW4779k2Lum2GVUV2VIpIdAw=3D?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB4380.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2020 08:03:40.6727
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2020 08:29:26.3822
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-Network-Message-Id: 88c6a6ef-771a-410e-53f4-08d8a19919c7
+X-MS-Exchange-CrossTenant-Network-Message-Id: e91ce908-3c6b-4a97-1000-08d8a19cb31e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: jb98dgf9htz9ovwOoMGuHHZZd5zFPoqBRWiO7w0/u4gT17V4UX12h04L69zarMayFDXgUYaZWYTdQ8baDq6SBUOLczmcH4aCrV5gVoO95X4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR1101MB2074
+X-MS-Exchange-CrossTenant-UserPrincipalName: tPD9kcBIOgyKZ4DTS9i/dIlfZIr97lcaPH2Itw71vtivmpKWutV50TxCG01nBADxAw5kZlhMc7Lr1A8X55Zf0Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR11MB4713
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 
-Add package flatbuffers-python3 to install python3 scripts
+The /etc/ethertypes is provided by netbase since 6.0[1].
+Do not instal the file in ebtables, otherwise there would be a conflict:
+Error: Transaction test error:
+  file /etc/ethertypes conflicts between attempted installs of netbase-1:6.=
+2-r0.corei7_64 and ebtables-2.0.10+4-r4.corei7_64
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+[1] https://salsa.debian.org/md/netbase/-/commit/316680c6a2c3641b6abc76b3ee=
+bf88781f609d35
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../flatbuffers/flatbuffers_1.12.0.bb                | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+ ...kefile-do-not-install-etc-ethertypes.patch | 35 +++++++++++++++++++
+ .../ebtables/ebtables_2.0.10-4.bb             |  3 +-
+ 2 files changed, 37 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10=
+-4/0001-Makefile-do-not-install-etc-ethertypes.patch
 
-diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
-index 1abfc8819..fb4be0f16 100644
---- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
-+++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
-@@ -3,9 +3,12 @@ HOMEPAGE = "https://github.com/google/flatbuffers"
- SECTION = "console/tools"
- LICENSE = "Apache-2.0"
- 
--PACKAGE_BEFORE_PN = "${PN}-compiler"
-+inherit python3-dir
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0001=
+-Makefile-do-not-install-etc-ethertypes.patch b/meta-networking/recipes-fil=
+ter/ebtables/ebtables-2.0.10-4/0001-Makefile-do-not-install-etc-ethertypes.=
+patch
+new file mode 100644
+index 000000000..65f593880
+--- /dev/null
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0001-Makefi=
+le-do-not-install-etc-ethertypes.patch
+@@ -0,0 +1,35 @@
++From d3d72c9ca6a0ce2597adb02c786de28268973ccd Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Wed, 16 Dec 2020 15:49:24 +0800
++Subject: [PATCH] Makefile: do not install /etc/ethertypes
 +
-+PACKAGE_BEFORE_PN = "${PN}-compiler ${PN}-${PYTHON_PN}"
- 
- RDEPENDS_${PN}-compiler = "${PN}"
-+RDEPENDS_${PN}-${PYTHON_PN} = "${PN}"
- RDEPENDS_${PN}-dev += "${PN}-compiler"
- 
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
-@@ -28,6 +31,13 @@ inherit cmake
- 
- S = "${WORKDIR}/git"
- 
-+do_install_append() {
-+    install -d ${D}${PYTHON_SITEPACKAGES_DIR}
-+    cp -rf ${S}/python/flatbuffers ${D}${PYTHON_SITEPACKAGES_DIR}
-+}
++The /etc/ethertypes is provided by netbase since 6.0[1].
++Do not instal the file in ebtables, otherwise there would be a conflict:
++Error: Transaction test error:
++  file /etc/ethertypes conflicts between attempted installs of netbase-1:6=
+.2-r0.corei7_64 and ebtables-2.0.10+4-r4.corei7_64
 +
- FILES_${PN}-compiler = "${bindir}"
- 
-+FILES_${PN}-${PYTHON_PN} = "${PYTHON_SITEPACKAGES_DIR}"
++[1] https://salsa.debian.org/md/netbase/-/commit/316680c6a2c3641b6abc76b3e=
+ebf88781f609d35)
 +
- BBCLASSEXTEND = "native nativesdk"
--- 
-2.18.2
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile b/Makefile
++index 95651b6..85c5f98 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -184,7 +184,7 @@ exec: ebtables ebtables-restore
++ 	install -m 0755 ebtables-restore $(DESTDIR)$(BINDIR)/ebtables-restore
++=20
++ .PHONY: install
++-install: $(MANDIR)/man8/ebtables.8 $(DESTDIR)$(ETHERTYPESFILE) exec scrip=
+ts
+++install: $(MANDIR)/man8/ebtables.8 exec scripts
++ 	mkdir -p $(DESTDIR)$(LIBDIR)
++ 	install -m 0755 extensions/*.so $(DESTDIR)$(LIBDIR)
++ 	install -m 0755 *.so $(DESTDIR)$(LIBDIR)
++--=20
++2.17.1
++
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb b=
+/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+index 276784009..bf523502e 100644
+--- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
++++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D53b4a999993871a2=
+8ab1488fdbd2e73e"
+ SECTION =3D "net"
+ PR =3D "r4"
+=20
+-RDEPENDS_${PN} +=3D "bash"
++RDEPENDS_${PN} +=3D "bash netbase"
+=20
+ RRECOMMENDS_${PN} +=3D "kernel-module-ebtables \
+     "
+@@ -31,6 +31,7 @@ SRC_URI =3D "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${P=
+V}.tar.gz \
+            file://0007-extensions-Use-stdint-types.patch \
+            file://0008-ethernetdb.h-Remove-C-specific-compiler-hint-macro-=
+_.patch \
+            file://0009-ebtables-Allow-RETURN-target-rules-in-user-defined-=
+c.patch \
++           file://0001-Makefile-do-not-install-etc-ethertypes.patch \
+            "
+=20
+ SRC_URI_append_libc-musl =3D " file://0010-Adjust-header-include-sequence.=
+patch"
+--=20
+2.25.1
 
