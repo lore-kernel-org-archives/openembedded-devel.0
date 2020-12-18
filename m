@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.663.1608328081887344632
+ by mx.groups.io with SMTP id smtpd.web09.664.1608328084876301006
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Dec 2020 13:48:02 -0800
+ Fri, 18 Dec 2020 13:48:05 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=45218 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kqNbR-00048f-3d; Fri, 18 Dec 2020 23:47:59 +0200
+	id 1kqNbU-00048f-57; Fri, 18 Dec 2020 23:48:02 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-pychromecast: Upgrade 7.5.1 -> 7.6.0
-Date: Fri, 18 Dec 2020 23:47:45 +0200
-Message-Id: <20201218214748.14563-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-humanize: Upgrade 3.1.0 -> 3.2.0
+Date: Fri, 18 Dec 2020 23:47:46 +0200
+Message-Id: <20201218214748.14563-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201218214748.14563-1-leon.anavi@konsulko.com>
 References: <20201218214748.14563-1-leon.anavi@konsulko.com>
@@ -30,34 +30,35 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 7.6.0:
+Upgrade to release 3.2.0:
 
-- Spotify quick play (again)
-- Fix next/previous track
-- Add support for BubbleUPNP
+- Internationalise intcomma and add fr_FR
+- Apply setup-py-upgrade
+- Test Python 3.9 final on Travis CI
+- Fix grammar mistake in the Dutch translations
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...on3-pychromecast_7.5.1.bb => python3-pychromecast_7.6.0.bb} | 3 +--
+ .../{python3-humanize_3.1.0.bb => python3-humanize_3.2.0.bb}   | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pychromecast_7.5.1.bb => python3-pychromecast_7.6.0.bb} (66%)
+ rename meta-python/recipes-devtools/python/{python3-humanize_3.1.0.bb => python3-humanize_3.2.0.bb} (71%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.5.1.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.6.0.bb
-similarity index 66%
-rename from meta-python/recipes-devtools/python/python3-pychromecast_7.5.1.bb
-rename to meta-python/recipes-devtools/python/python3-pychromecast_7.6.0.bb
-index b7796251ec..52803744f9 100644
---- a/meta-python/recipes-devtools/python/python3-pychromecast_7.5.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pychromecast_7.6.0.bb
-@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
+diff --git a/meta-python/recipes-devtools/python/python3-humanize_3.1.0.bb b/meta-python/recipes-devtools/python/python3-humanize_3.2.0.bb
+similarity index 71%
+rename from meta-python/recipes-devtools/python/python3-humanize_3.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-humanize_3.2.0.bb
+index 43b882cb84..646e20f7d8 100644
+--- a/meta-python/recipes-devtools/python/python3-humanize_3.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-humanize_3.2.0.bb
+@@ -4,8 +4,7 @@ HOMEPAGE = "http://github.com/jmoiron/humanize"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
  
--SRC_URI[md5sum] = "9dee7207b7a5c73ebf8fad64be137f27"
--SRC_URI[sha256sum] = "cf2e9fa795ea1e9d0d180adfbdccefd6b4f532eae56f41f15d1a75b323096f51"
-+SRC_URI[sha256sum] = "998851e615e41ff436780867de84adea0f1720b7a73822451bd9ff9a00c0e255"
+-SRC_URI[md5sum] = "bde0a033cf200f2874e6e3fc860bed48"
+-SRC_URI[sha256sum] = "fd3eb915310335c63a54d4507289ecc7b3a7454cd2c22ac5086d061a3cbfd592"
++SRC_URI[sha256sum] = "ab69004895689951b79f2ae4fdd6b8127ff0c180aff107856d5d98119a33f026"
  
- PYPI_PACKAGE = "PyChromecast"
+ inherit pypi setuptools3
  
 -- 
 2.17.1
