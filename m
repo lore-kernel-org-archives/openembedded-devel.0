@@ -1,100 +1,80 @@
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web08.25937.1608483250728069535
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
+ by mx.groups.io with SMTP id smtpd.web11.31777.1608506826003077942
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Dec 2020 08:54:10 -0800
+ Sun, 20 Dec 2020 15:27:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dR1m1iC3;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id hk16so5079188pjb.4
-        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Dec 2020 08:54:10 -0800 (PST)
+ dkim=pass header.i=@linaro.org header.s=google header.b=y10PMTxu;
+ spf=pass (domain: linaro.org, ip: 209.85.167.53, mailfrom: dmitry.baryshkov@linaro.org)
+Received: by mail-lf1-f53.google.com with SMTP id h205so19406125lfd.5
+        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Dec 2020 15:27:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+        d=linaro.org; s=google;
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=KOMQNctUJrz+W1KrHG14qo80EhIf6F6ljHIkKWT9ccw=;
-        b=dR1m1iC3YyLpqAaOgVZJAoZSOA/83aDCcds0OOajoeL/bYpRFSqioaWu5SuibEOQzj
-         mgseFwaeHvUlThW7SamAsrsn3ajK92zc4VubkSYupd6kgxHp/8G08lTKJwXQYBMeOzGK
-         ghpTqp1y5mWlBiLzYjagOK5pLt5ylGSgUhzl2ECRnYdpPYRtY5VYTpxOMYbeZuElwayF
-         4o1PbO6676VTsWO0UhghsY5CpcDMe5+odHGHevZqwet2fmMuz+bezJMpfIp25o+bBtbP
-         PlURsYTlF/8FIMH7OfcgzV5Bq2CLWGC6tlkT1BCSEjQDjEO0joIrSyGZbN6NQnD01UzS
-         BF4g==
+        bh=fGWqO3PJGdDhy/rjq5BHwXBa48ELV9ZuzqQkxmKeMwE=;
+        b=y10PMTxuLtV8Max+FKEsU6Ildo602xFdqzDYxsQHB0dfpAFoy+XFeY3zmGl7MVfA+D
+         S/pSMNiBK5GCXRKUFAF/kdJN0MJBnfYBgWf9mr6Xpx7XLrUXo2lHwwvLuVUHvRLe9Wxb
+         JbWePbjaa73YIjXHoaQQ5IcvG5I8LhL+43y7V6zFIF+J3Ji+BSqBldEF7smnvsldJwoA
+         Wd1s0Y+gcFN7fTXUZbBLSEBJl75XjNstBJCh9zn/YKHdHgzCHLv9//xvkSigMohwPLlq
+         p8+Dg7Vi4wHFFKMY+WdGoTxMy8h4XVXHaIrOTA/Nw6NI5JlciSuXHwxFT/OrZTo6ERdi
+         ovzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=KOMQNctUJrz+W1KrHG14qo80EhIf6F6ljHIkKWT9ccw=;
-        b=qyO0wSzoasTc9tVN6oW0G0oEtLAlWgRZbHgCz52UNp7QWbEatcEmRssViYxb1GLEij
-         x0/5u5Ceca6l/T1ngqTn0b+b22Z5Y6NyWyU1DdMHmmSdyXct90vsORBDIRbIQcmoeu3J
-         jgA87Ep8DlNDCCkeM48ja6dc3doMXRkZtMUaWb4zWouZ9Rx6IHV9HgEN0enm4HrF7Vzp
-         pS4uXp5T3pmLjGK3skw3cLk5bYl9vT63/XLQu7ufagQGerCkn21wAWJIIvLUhMmKkczH
-         1WCBoXPMiLZbuuKzSER/ZSiuTWl+2s5Qz78NWi+/deU63YTs9nAsseSSQFGFPYq6en+E
-         3CAA==
-X-Gm-Message-State: AOAM530qSKHRk8eZLwsvR5zEYg0b9zHqu1ohIF8/XhPwFRHnvdBULCyc
-	uuBRQKIDGLQOxqzRywKoFWZRoMv9dw7SgA==
-X-Google-Smtp-Source: ABdhPJyCCEVw0e209gmOUP0V8klWNXzLR0AUoZGWRDD1Q29D69yRCH85Mx4Z+cGDJHy2kNaCgUUQSQ==
-X-Received: by 2002:a17:90a:4cc5:: with SMTP id k63mr13445813pjh.202.1608483250145;
-        Sun, 20 Dec 2020 08:54:10 -0800 (PST)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:81b4:28ec:120:f083])
-        by smtp.gmail.com with ESMTPSA id j15sm14192234pfn.180.2020.12.20.08.54.09
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=fGWqO3PJGdDhy/rjq5BHwXBa48ELV9ZuzqQkxmKeMwE=;
+        b=jHFau6y1xvcenK88Jm0oVxfjS4UZI2/zey1HbRpZlk//hib3j0HAe+IWWYVTz6zNqJ
+         ggqdNVvHYiQm4xrfeSafdEX5wFVWWJrBGifP4Nk+e9QTtSN0QvWwgAMkdfTZS/NYJjzL
+         xLTPT48spc5ZrKEuN04ukpqcIxGIhS/BpMH2eGW3TjS0VcE+ImCsieUPz4nOFXk/9EBw
+         LZMoVsKC2QBoPBZADVjdzZ4dCodz6PHxJFojNKVSQ7rSV3BpBeCt6nK7ba+EPmEMqLrC
+         rrRHUZu7gkBqpXtie6fb5aCu6LT/6FHf+tAucOTpnL5u+hUPAbwvvheL4GRJwdbjZTbf
+         ptQA==
+X-Gm-Message-State: AOAM531PjTGfDSuzCA4y0BNZMAPhMZ8rRZocnd1KK+lboYpT/cHFSuNn
+	YZOAJavU6q39zNspRX5/o5i0qO+kK+nBgw==
+X-Google-Smtp-Source: ABdhPJyVYSc0TvWfQXse96/f30YWNas1vvyPaDpon6cOGrl33W/r619P7l2cpVmoop1FaoRjRe6ptg==
+X-Received: by 2002:a19:4c02:: with SMTP id z2mr5346320lfa.198.1608506823755;
+        Sun, 20 Dec 2020 15:27:03 -0800 (PST)
+Return-Path: <dmitry.baryshkov@linaro.org>
+Received: from umbar.lan ([188.162.64.15])
+        by smtp.gmail.com with ESMTPSA id v28sm1797784lfd.57.2020.12.20.15.27.02
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Dec 2020 08:54:09 -0800 (PST)
-From: "akuster" <akuster808@gmail.com>
+        Sun, 20 Dec 2020 15:27:03 -0800 (PST)
+From: "Dmitry Baryshkov" <dbaryshkov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 6/6] pcsc-lite: provide pcsc-lite-lib-native explicitly for native build
-Date: Sun, 20 Dec 2020 08:54:00 -0800
-Message-Id: <1f4b2a1af58702914989e10744a5ad1409a4e23f.1608483161.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1608483161.git.akuster808@gmail.com>
-References: <cover.1608483161.git.akuster808@gmail.com>
+Subject: [meta-oe][PATCH 1/2] android-tools: fix package split
+Date: Mon, 21 Dec 2020 02:27:00 +0300
+Message-Id: <20201220232701.2641845-1-dmitry.baryshkov@linaro.org>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Roland Hieber <rhi@pengutronix.de>
+"${PN}-fstools" was added to the end of PACKAGES list, so it received no
+files. Move the package name to the beginning of PACKAGES list to fix
+packages split ending up with non-empty android-tools-fstools package.
 
-Commits e2180b00b3b8fcf776c3 and 8edd760e66b48e411d2a added support for
-native builds for the opensc and pcsc-lite recipes, but building
-opensc-native fails after commit 40b3a5123120da0e4586 (2019-12-04,
-"opensc: fix RDEPENDS in pcsc PACKAGECONFIG") with:
-
-    ERROR: Required build target 'opensc-native' has no buildable providers.
-    Missing or unbuildable dependency chain was: ['opensc-native', 'pcsc-lite-lib-native']
-
-The commit in question is correct for target builds, but native builds
-don't have packages, therefore there is no pcsc-lite-lib-native package
-to depend on – the -lib part is also provided in pcsc-lite-native.
-
-Ideally we would fix this in the opensc recipe. However, using syntax
-like "PACKAGECONFIG_class-native[pcsc]" in the opensc recipe is
-apparently not possible to overwrite the dependency for a native build,
-and using RDEPENDS_remove has no effect either – apparently dependencies
-from PACKAGECONFIG are added after RDEPENDS_remove is evaluated.
-Therefore let pcsc-lite provide the missing package name for native
-builds, even if fixing this unrelated package is not the most elegant
-solution.
-
-Fixes: 40b3a5123120da0e4586 (2019-12-04, "opensc: fix RDEPENDS in pcsc PACKAGECONFIG")
-Signed-off-by: Roland Hieber <rhi@pengutronix.de>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 ---
- meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.9.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../android-tools/android-tools_5.1.1.r37.bb                 | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.9.0.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.9.0.bb
-index 6f38d65e05d..c1b793960f5 100644
---- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.9.0.bb
-+++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.9.0.bb
-@@ -36,6 +36,7 @@ PACKAGES = "${PN} ${PN}-dbg ${PN}-dev ${PN}-lib ${PN}-doc ${PN}-spy ${PN}-spy-de
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+index fb6125e2a5df..fea4f7eba11d 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
++++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+@@ -157,9 +157,10 @@ do_install() {
+     fi
+ }
  
- RRECOMMENDS_${PN} = "ccid"
- RRECOMMENDS_${PN}_class-native = ""
-+RPROVIDES_${PN}_class-native += "pcsc-lite-lib-native"
+-PACKAGES += "${PN}-fstools"
++PACKAGES =+ "${PN}-fstools"
  
- FILES_${PN} = "${sbindir}/pcscd"
- FILES_${PN}-lib = "${libdir}/libpcsclite*${SOLIBS}"
+-RDEPENDS_${BPN} = "${BPN}-conf bash"
++RDEPENDS_${BPN} = "${BPN}-conf"
++RDEPENDS_${BPN}-fstools = "bash"
+ 
+ FILES_${PN}-fstools = "\
+     ${bindir}/ext2simg \
 -- 
-2.17.1
+2.29.2
 
