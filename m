@@ -1,127 +1,100 @@
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
- by mx.groups.io with SMTP id smtpd.web10.26294.1608483250067606384
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web08.25937.1608483250728069535
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 20 Dec 2020 08:54:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nQ5tYvlY;
- spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f177.google.com with SMTP id c12so5046885pfo.10
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=dR1m1iC3;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id hk16so5079188pjb.4
         for <openembedded-devel@lists.openembedded.org>; Sun, 20 Dec 2020 08:54:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=7D31o3l0LzZK1a1bkjDlrYTx5Y+zZAK955s17X5bUYE=;
-        b=nQ5tYvlYThSzLymlIYXCQ/uQYinP8Oy6D/Rf8kgsoOYo6HkCM+fRV6BifUiniwdohN
-         /9Y9o56UU/yC56NGoWSkVgczTJxSjbBe0PxeEvwEydQMBlLXJE75vkXFFMce0YCi9nd4
-         XJKWHrJfUOxVJvWEbigcDWo0lUP0bHH+pUGdvX+EfckG53CaqLwUru7a6gST/r0GVdho
-         UuKJATtkQfbgp/QNn2K2XDODQUL17fm1Oy0INQkUNh4Uon7UTBIKRvejNkxx71vftb+G
-         u3a6PMRfiQ3PzmyKNVlru4GTeR+wfCc0qVNRocPWKZ8RkYxf+tTLHU9vTFvlWm22+lGE
-         Ialw==
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+         :content-transfer-encoding;
+        bh=KOMQNctUJrz+W1KrHG14qo80EhIf6F6ljHIkKWT9ccw=;
+        b=dR1m1iC3YyLpqAaOgVZJAoZSOA/83aDCcds0OOajoeL/bYpRFSqioaWu5SuibEOQzj
+         mgseFwaeHvUlThW7SamAsrsn3ajK92zc4VubkSYupd6kgxHp/8G08lTKJwXQYBMeOzGK
+         ghpTqp1y5mWlBiLzYjagOK5pLt5ylGSgUhzl2ECRnYdpPYRtY5VYTpxOMYbeZuElwayF
+         4o1PbO6676VTsWO0UhghsY5CpcDMe5+odHGHevZqwet2fmMuz+bezJMpfIp25o+bBtbP
+         PlURsYTlF/8FIMH7OfcgzV5Bq2CLWGC6tlkT1BCSEjQDjEO0joIrSyGZbN6NQnD01UzS
+         BF4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=7D31o3l0LzZK1a1bkjDlrYTx5Y+zZAK955s17X5bUYE=;
-        b=rl2BTkxlZt+WInGRIBDlg/yltiOS97/8CiWA9Ctx5VtRTEKr+V8edkAIDz3MXDyTye
-         49yHftRWd8V0uDiANxC/6k3DPo+28BL0lfL9ab0mY/CHkDIeitdYwko0xd9cKp0h/fBD
-         q/XnC9IPlo32X2oqFhHQtjL6w9SKVlOt7DMBwXuTbTEdHUKMzcfgaNyisqQjAtXLDdnP
-         ksH5IgUBbv2Q2gNEAJfqNR1rRB47JzTH+YnjH643Ecscli4+Uw+yp5tXqITq54mROP6c
-         CJdDJxtgOsozByzu54cc6qL3Twf0ybgaS99aOvcsiyTuljLSoXKkmHmxLMD0LvbtF2ne
-         Y6Xg==
-X-Gm-Message-State: AOAM530u100lFZ6sPlPca5aAcGc8c5EP66uY7s1dlhUoiK/tKNd6R3mh
-	C/fjcjm66hBodprQ8M6jVtaCMt+O3cYtGQ==
-X-Google-Smtp-Source: ABdhPJyYQLCgSisYSWybpdtMkbAi6/HcAjKQq7Ke0t3SIyaQNLwzmeqWrSOPFRxZdqin/R5blBJhrQ==
-X-Received: by 2002:aa7:8701:0:b029:19e:561:d476 with SMTP id b1-20020aa787010000b029019e0561d476mr12513173pfo.2.1608483249378;
-        Sun, 20 Dec 2020 08:54:09 -0800 (PST)
+         :references:mime-version:content-transfer-encoding;
+        bh=KOMQNctUJrz+W1KrHG14qo80EhIf6F6ljHIkKWT9ccw=;
+        b=qyO0wSzoasTc9tVN6oW0G0oEtLAlWgRZbHgCz52UNp7QWbEatcEmRssViYxb1GLEij
+         x0/5u5Ceca6l/T1ngqTn0b+b22Z5Y6NyWyU1DdMHmmSdyXct90vsORBDIRbIQcmoeu3J
+         jgA87Ep8DlNDCCkeM48ja6dc3doMXRkZtMUaWb4zWouZ9Rx6IHV9HgEN0enm4HrF7Vzp
+         pS4uXp5T3pmLjGK3skw3cLk5bYl9vT63/XLQu7ufagQGerCkn21wAWJIIvLUhMmKkczH
+         1WCBoXPMiLZbuuKzSER/ZSiuTWl+2s5Qz78NWi+/deU63YTs9nAsseSSQFGFPYq6en+E
+         3CAA==
+X-Gm-Message-State: AOAM530qSKHRk8eZLwsvR5zEYg0b9zHqu1ohIF8/XhPwFRHnvdBULCyc
+	uuBRQKIDGLQOxqzRywKoFWZRoMv9dw7SgA==
+X-Google-Smtp-Source: ABdhPJyCCEVw0e209gmOUP0V8klWNXzLR0AUoZGWRDD1Q29D69yRCH85Mx4Z+cGDJHy2kNaCgUUQSQ==
+X-Received: by 2002:a17:90a:4cc5:: with SMTP id k63mr13445813pjh.202.1608483250145;
+        Sun, 20 Dec 2020 08:54:10 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:81b4:28ec:120:f083])
-        by smtp.gmail.com with ESMTPSA id j15sm14192234pfn.180.2020.12.20.08.54.08
+        by smtp.gmail.com with ESMTPSA id j15sm14192234pfn.180.2020.12.20.08.54.09
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sun, 20 Dec 2020 08:54:09 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 5/6] dlt-daemon: add upstream patch to fix CVE-2020-29394
-Date: Sun, 20 Dec 2020 08:53:59 -0800
-Message-Id: <a82e2fbdfa72173577730bb34ed6c59f348caa35.1608483161.git.akuster808@gmail.com>
+Subject: [gatesgarth 6/6] pcsc-lite: provide pcsc-lite-lib-native explicitly for native build
+Date: Sun, 20 Dec 2020 08:54:00 -0800
+Message-Id: <1f4b2a1af58702914989e10744a5ad1409a4e23f.1608483161.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1608483161.git.akuster808@gmail.com>
 References: <cover.1608483161.git.akuster808@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Gianfranco <costamagna.gianfranco@gmail.com>
+From: Roland Hieber <rhi@pengutronix.de>
 
-More information on: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=976228
-| A buffer overflow in the dlt_filter_load function in dlt_common.c in
-| dlt-daemon 2.8.5 (GENIVI Diagnostic Log and Trace) allows arbitrary
-| code execution because fscanf is misused (no limit on the number of
-| characters to be read in a format argument).
+Commits e2180b00b3b8fcf776c3 and 8edd760e66b48e411d2a added support for
+native builds for the opensc and pcsc-lite recipes, but building
+opensc-native fails after commit 40b3a5123120da0e4586 (2019-12-04,
+"opensc: fix RDEPENDS in pcsc PACKAGECONFIG") with:
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+    ERROR: Required build target 'opensc-native' has no buildable providers.
+    Missing or unbuildable dependency chain was: ['opensc-native', 'pcsc-lite-lib-native']
+
+The commit in question is correct for target builds, but native builds
+don't have packages, therefore there is no pcsc-lite-lib-native package
+to depend on – the -lib part is also provided in pcsc-lite-native.
+
+Ideally we would fix this in the opensc recipe. However, using syntax
+like "PACKAGECONFIG_class-native[pcsc]" in the opensc recipe is
+apparently not possible to overwrite the dependency for a native build,
+and using RDEPENDS_remove has no effect either – apparently dependencies
+from PACKAGECONFIG are added after RDEPENDS_remove is evaluated.
+Therefore let pcsc-lite provide the missing package name for native
+builds, even if fixing this unrelated package is not the most elegant
+solution.
+
+Fixes: 40b3a5123120da0e4586 (2019-12-04, "opensc: fix RDEPENDS in pcsc PACKAGECONFIG")
+Signed-off-by: Roland Hieber <rhi@pengutronix.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../dlt-daemon/dlt-daemon/275.patch           | 38 +++++++++++++++++++
- .../dlt-daemon/dlt-daemon_2.18.5.bb           |  1 +
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch
+ meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.9.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch
-new file mode 100644
-index 00000000000..75065eb0549
---- /dev/null
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch
-@@ -0,0 +1,38 @@
-+Upstream-status: Backport
-+CVE: CVE-2020-29394
-+From 7f5cd5404a03fa330e192084f6bdafb2dc9bdcb7 Mon Sep 17 00:00:00 2001
-+From: GwanYeong Kim <gy741.kim@gmail.com>
-+Date: Sat, 28 Nov 2020 12:24:46 +0900
-+Subject: [PATCH] dlt_common: Fix buffer overflow in dlt_filter_load
-+
-+A buffer overflow in the dlt_filter_load function in dlt_common.c in dlt-daemon allows arbitrary code execution via an unsafe usage of fscanf, because it does not limit the number of characters to be read in a format argument.
-+
-+Fixed: #274
-+
-+Signed-off-by: GwanYeong Kim <gy741.kim@gmail.com>
-+---
-+ src/shared/dlt_common.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/shared/dlt_common.c b/src/shared/dlt_common.c
-+index 254f4ce4..d15b1cec 100644
-+--- a/src/shared/dlt_common.c
-++++ b/src/shared/dlt_common.c
-+@@ -404,7 +404,7 @@ DltReturnValue dlt_filter_load(DltFilter *filter, const char *filename, int verb
-+     while (!feof(handle)) {
-+         str1[0] = 0;
-+ 
-+-        if (fscanf(handle, "%s", str1) != 1)
-++        if (fscanf(handle, "%254s", str1) != 1)
-+             break;
-+ 
-+         if (str1[0] == 0)
-+@@ -419,7 +419,7 @@ DltReturnValue dlt_filter_load(DltFilter *filter, const char *filename, int verb
-+ 
-+         str1[0] = 0;
-+ 
-+-        if (fscanf(handle, "%s", str1) != 1)
-++        if (fscanf(handle, "%254s", str1) != 1)
-+             break;
-+ 
-+         if (str1[0] == 0)
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
-index f3fcee4d201..5066e76d348 100644
---- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
-@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=https \
-     file://0004-Modify-systemd-config-directory.patch \
-     file://241.patch \
-     file://245.patch \
-+    file://275.patch \
- "
- SRCREV = "f1ac087c766827b1d0ed9c3a814b3cc052e948f2"
+diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.9.0.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.9.0.bb
+index 6f38d65e05d..c1b793960f5 100644
+--- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.9.0.bb
++++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.9.0.bb
+@@ -36,6 +36,7 @@ PACKAGES = "${PN} ${PN}-dbg ${PN}-dev ${PN}-lib ${PN}-doc ${PN}-spy ${PN}-spy-de
  
+ RRECOMMENDS_${PN} = "ccid"
+ RRECOMMENDS_${PN}_class-native = ""
++RPROVIDES_${PN}_class-native += "pcsc-lite-lib-native"
+ 
+ FILES_${PN} = "${sbindir}/pcscd"
+ FILES_${PN}-lib = "${libdir}/libpcsclite*${SOLIBS}"
 -- 
 2.17.1
 
