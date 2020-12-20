@@ -1,78 +1,94 @@
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web09.26352.1608483247438173568
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web12.25760.1608483248259591041
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Dec 2020 08:54:07 -0800
+ Sun, 20 Dec 2020 08:54:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=WmTjrbub;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id z12so4833319pjn.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Dec 2020 08:54:07 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=dZKejToT;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id x12so4353201plr.10
+        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Dec 2020 08:54:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=46RI4DLGKtM0l0nw2NbAjo67iW7YWq1jtUqJxbTlBPo=;
-        b=WmTjrbubr2bsRd46ttNWiIwwLfrVLVjsz1RoVqSt2KG91RbZXM92UfukzsCAFoiuqM
-         BnKxgFhoU+m8BUvur4IXA9rVm/FVuwWdx4LP7agSCFhzLQ529gq1bSWdJAqtMUQP4VRm
-         srb7zOJFjiIN8Eo+YTUk8RikltcKHGkVLY56h/iU5B4ZBP12gN2+D8HLK4V7rLMGA27O
-         tOqVjt02VkMZ+GMhUJ6PZyjrIsx/cSiHcg3cQjm/WIHgfrCGMvdkKh1OMfzMCSFjpqjw
-         KNg3/OUIKhwN0jfBOp5DccWLJRAeVimol67WqYevFK96KB9BXq4WELeGTwuDV+Ddb0Bw
-         bTtg==
+        bh=1UBC245Dq3sb/tASk6MsPf475HWArjaoeiUhCRYxJRA=;
+        b=dZKejToTWfQoal4YHQ3h9gkaj7ue8Nl6s3YSCWRtbZzYbn5wNCv+vLjayDczAM8Vga
+         +PLJoGeF/xR8kcJmpCM9Omvs+5OqH8S3YSMvJgjQl3k1qNBzysPtavVp3N3ihV6PChoJ
+         oIzLdmjZlXR/Lgar8/sNaaDxrbufuH0HC7P26eph5GZSsrRk1RQhWpxmanXJBF11UaST
+         mMEq+WNXLE/N9UpLiPvcx7LcmAsTqn6/t2jjJ/XY+w5z/RryHllE701yrU8oLTOqw3hX
+         TSIEcpznSNmX6Klp5OpzFCtxmd38GdQcPBbfLJ/iICTY8B1Z9eSU9Hl1Do0+7R9pIQDC
+         Qvtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=46RI4DLGKtM0l0nw2NbAjo67iW7YWq1jtUqJxbTlBPo=;
-        b=OVmkDEUgz13iap2YcRF4RORjHdL20DthzYz9Rqq5sHWzWLNeaF7alKGdisJ/rUEh8c
-         /rfjEBbaoSNAmXAC2wh2hkqI0cTGhh1V7afKyimIZjXG10C3rha1ssvJiRm1jV1SmRv9
-         vNhYgsFJEZwi4gH9xjEbwfski5I2F9shSFyC1WxDXsiow7bKSm9ykpxbrZkqVrnIgOWG
-         mwpeB7fJVHpCb4ZyyY832rSpAKaLOuiv4W/JZkcGj2LpcIRVfnmPK7l0gvXfTj1nTHwg
-         /2kc26yFjty2WG6Yi4DtH6P/Z1ftV1+ni5Zbpr++YNx9SLVryPJUYaJB0oqQx3/VXXWL
-         ha0A==
-X-Gm-Message-State: AOAM530q0gkwAGjibzyQ6xH4G7KsE96BUg1QC+dLQ19jrlqO41CmBAl4
-	RoGtN9kMPUtEQ+2OgvEjLn3VDNa6vlRvjw==
-X-Google-Smtp-Source: ABdhPJxqfGFLGo024L0E7V9PM50LFCq7RsSmuWlNHAhTBQTztryFMqCNc0KGymSXA5QnrUZuPBCBxw==
-X-Received: by 2002:a17:90a:12c4:: with SMTP id b4mr13575224pjg.234.1608483246657;
-        Sun, 20 Dec 2020 08:54:06 -0800 (PST)
+        bh=1UBC245Dq3sb/tASk6MsPf475HWArjaoeiUhCRYxJRA=;
+        b=DrZoe1aqh8w4wmUkSptTalf3bWKEtRGhGJOrkUVou6CHN8zNZUec/jY3+X4IWcEfzD
+         X8OnJfy9rFHnziVyJCd891W7gNc76PI9fhVT5U2X/aFyQT8jM3eUK6ahNbZcTCttfUil
+         CnaaZq7rBUEjTq8cY7PuTMgP8yjm71mBRITxMx9TMVLrRBOBmPxZBX7nsKOUV+toCokW
+         ow3OoP8MsiTi3Tx8iMXh1dANVk3nqRP/ft5PuwUW8lxFnAjAv3pm+FNX9b9+CNYeVpJm
+         XTDZWwRfMgbgMz8LEnYo2ypRMkvDPCH27SNWPYcDMkMH1OUtVz5IC8WXa6GMuBg++0ks
+         CI3g==
+X-Gm-Message-State: AOAM533PhLQjpOZdBusz9cA8MvswaeBhWBqN59HICNNxvYzA0D9Zz/+g
+	PKyTfoIW63N4NEI5p8OrDflxCSPAxQlalg==
+X-Google-Smtp-Source: ABdhPJxm4RscjGSzaLQeRJ/dRdTXnR5tMf7RWnRVJlcnwUevGejEEx9JORAvyNs8JGju+pizTnG0Hw==
+X-Received: by 2002:a17:902:a511:b029:dc:103:db16 with SMTP id s17-20020a170902a511b02900dc0103db16mr12753120plq.80.1608483247503;
+        Sun, 20 Dec 2020 08:54:07 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:81b4:28ec:120:f083])
-        by smtp.gmail.com with ESMTPSA id j15sm14192234pfn.180.2020.12.20.08.54.05
+        by smtp.gmail.com with ESMTPSA id j15sm14192234pfn.180.2020.12.20.08.54.06
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Dec 2020 08:54:06 -0800 (PST)
+        Sun, 20 Dec 2020 08:54:07 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 2/6] minifi-cpp: depend on nettle and lz4
-Date: Sun, 20 Dec 2020 08:53:56 -0800
-Message-Id: <f7984364181f9bb4e20d15af9431bad54ebe861d.1608483161.git.akuster808@gmail.com>
+Subject: [gatesgarth 3/6] php: remove the failing ${D}/${TMPDIR} code
+Date: Sun, 20 Dec 2020 08:53:57 -0800
+Message-Id: <f6338892d9c57c51ed48b04f587b468f7718a8ba.1608483161.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1608483161.git.akuster808@gmail.com>
 References: <cover.1608483161.git.akuster808@gmail.com>
 
-From: Yi Zhao <yi.zhao@windriver.com>
+From: Max Kellermann <max.kellermann@gmail.com>
 
-Add nettle and lz4 to DEPENDS to make the minifi extension archive
-support crypto and lz4.
+Appending ${TMPDIR} to ${D} doesn't make any sense, because both are
+absolute paths.  And additionally, the code fails:
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+ rmdir: failed to remove '/usr/src/oe/tmp-musl/work/core2-64-oe-linux-musl/php/7.1.9-r0/image//usr': Directory not empty
+
+Signed-off-by: Max Kellermann <max.kellermann@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-devtools/php/php_7.4.9.bb | 9 ---------
+ 1 file changed, 9 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-index 3815220cb30..2b884e3a1b0 100644
---- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-+++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-@@ -7,7 +7,7 @@ SECTION = "console/network"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f9534eb5f4ab800b573a37bffc62f3a7"
+diff --git a/meta-oe/recipes-devtools/php/php_7.4.9.bb b/meta-oe/recipes-devtools/php/php_7.4.9.bb
+index abd8b167237..1da56078350 100644
+--- a/meta-oe/recipes-devtools/php/php_7.4.9.bb
++++ b/meta-oe/recipes-devtools/php/php_7.4.9.bb
+@@ -155,7 +155,6 @@ do_install_prepend_class-target() {
+ # fixme
+ do_install_append_class-target() {
+     install -d ${D}${sysconfdir}/
+-    rm -rf ${D}/${TMPDIR}
+     rm -rf ${D}/.registry
+     rm -rf ${D}/.channels
+     rm -rf ${D}/.[a-z]*
+@@ -179,14 +178,6 @@ do_install_append_class-target() {
+             ${D}${systemd_unitdir}/system/php-fpm.service
+     fi
  
--DEPENDS = "virtual/crypt expat flex python3 bison-native libxml2"
-+DEPENDS = "virtual/crypt expat flex python3 bison-native libxml2 nettle lz4"
- RDEPENDS_${PN} = "python3-core"
- 
- SRCREV = "aa42957a2e227df41510047cece3cd606dc1cb6a"
+-    TMP=`dirname ${D}/${TMPDIR}`
+-    while test ${TMP} != ${D}; do
+-        if [ -d ${TMP} ]; then
+-            rmdir ${TMP}
+-        fi
+-        TMP=`dirname ${TMP}`;
+-    done
+-
+     if ${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'true', 'false', d)}; then
+         install -d ${D}${sysconfdir}/apache2/modules.d
+         install -d ${D}${sysconfdir}/php/apache2-php${PHP_MAJOR_VERSION}
 -- 
 2.17.1
 
