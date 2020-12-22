@@ -1,68 +1,61 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.5565.1608599711708419323
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web10.7898.1608613381898171895
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Dec 2020 17:15:12 -0800
+ Mon, 21 Dec 2020 21:03:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=46704 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1krWGY-0002Fg-5s; Tue, 22 Dec 2020 03:15:07 +0200
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/2] python3-chardet: Upgrade 3.0.4 -> 4.0.0
-Date: Tue, 22 Dec 2020 03:14:58 +0200
-Message-Id: <20201222011459.14452-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.78,438,1599494400"; 
+   d="scan'208";a="102806890"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 22 Dec 2020 13:02:31 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 138A34CE601B
+	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Dec 2020 13:02:30 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Tue, 22 Dec 2020 13:02:29 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-python] [PATCH] python3-aenum: upgrade 2.2.4 -> 2.2.6
+Date: Tue, 22 Dec 2020 13:02:28 +0800
+Message-ID: <1608613348-66835-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: 138A34CE601B.AFF03
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-Upgrade to release 4.0.0:
-
-- Single-byte charset probers now use nested dictionaries under
-  the hood, so they are usually a little faster than before.
-- The CharsetGroupProber class now properly short-circuits when
-  one of the probers in the group is considered a definite match.
-  This lead to a substantial speedup.
-- There is now a chardet.detect_all function that returns a list
-  of possible encodings for the input with associated confidences.
-- Support for Python 2.6, 3.4, and 3.5 was dropped as they are all
-  past end-of-life.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../{python3-chardet_3.0.4.bb => python3-chardet_4.0.0.bb}     | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-chardet_3.0.4.bb => python3-chardet_4.0.0.bb} (77%)
+ .../python/{python3-aenum_2.2.4.bb => python3-aenum_2.2.6.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-aenum_2.2.4.bb => python3-aenum_2.2.6.bb} (63%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-chardet_3.0.4.bb b/meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-chardet_3.0.4.bb
-rename to meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb
-index 80785b8d4e..4caf33cb25 100644
---- a/meta-python/recipes-devtools/python/python3-chardet_3.0.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb
-@@ -2,8 +2,7 @@ SUMMARY = "Universal encoding detector for Python 2 and 3"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a6f89e2100d9b6cdffcea4f398e37343"
+diff --git a/meta-python/recipes-devtools/python/python3-aenum_2.2.4.bb b/meta-python/recipes-devtools/python/python3-aenum_2.2.6.bb
+similarity index 63%
+rename from meta-python/recipes-devtools/python/python3-aenum_2.2.4.bb
+rename to meta-python/recipes-devtools/python/python3-aenum_2.2.6.bb
+index da77a5c75..061770a93 100644
+--- a/meta-python/recipes-devtools/python/python3-aenum_2.2.4.bb
++++ b/meta-python/recipes-devtools/python/python3-aenum_2.2.6.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://pypi.org/project/aenum/"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://aenum/LICENSE;md5=c6a85477543f8b8591b9c1f82abebbe9"
  
--SRC_URI[md5sum] = "7dd1ba7f9c77e32351b0a0cfacf4055c"
--SRC_URI[sha256sum] = "84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae"
-+SRC_URI[sha256sum] = "0d6f53a15db4120f2b08c94f11e7d93d2c911ee118b6b30a04ec3ee8310179fa"
+-SRC_URI[md5sum] = "8983562361efe5be865617341dadbb9b"
+-SRC_URI[sha256sum] = "81828d1fbe20b6b188d75b21a0fa936d7d929d839ef843ef385d9c2a97082864"
++SRC_URI[md5sum] = "52ec17f5efdfa13952657fe954cd6d99"
++SRC_URI[sha256sum] = "260225470b49429f5893a195a8b99c73a8d182be42bf90c37c93e7b20e44eaae"
  
- # setup.py of chardet needs this.
- DEPENDS += "${PYTHON_PN}-pytest-runner-native"
+ inherit pypi setuptools3
+ 
 -- 
-2.17.1
+2.25.1
+
+
 
