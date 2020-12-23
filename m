@@ -1,84 +1,77 @@
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
- by mx.groups.io with SMTP id smtpd.web09.4213.1608693052250409833
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.web11.5524.1608703265560829400
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Dec 2020 19:10:52 -0800
+ Tue, 22 Dec 2020 22:01:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=Oxghps6Z;
- spf=pass (domain: linaro.org, ip: 209.85.167.53, mailfrom: dmitry.baryshkov@linaro.org)
-Received: by mail-lf1-f53.google.com with SMTP id m25so36720054lfc.11
-        for <openembedded-devel@lists.openembedded.org>; Tue, 22 Dec 2020 19:10:51 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=q1z18e4E;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id m5so2606985pjv.5
+        for <openembedded-devel@lists.openembedded.org>; Tue, 22 Dec 2020 22:01:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=WJzVd1yPkFfY0dHWI4/9R6im1SXcOccfjLmzfufmVns=;
-        b=Oxghps6ZWs3MxEjrcA1DRBae9xwD5z7q4LTqLL2WdDTvaJQxhMV+Hy9/qSWopAq5Rf
-         zSoBVyEdQSi9XCDfyRc+Nt+V05Mh+JQBuzA9Ca45BbBqP7wsOpm3jjAMUHWGvPpkGvo6
-         7HgAji99JrskZgq54+j5ZgNM0ofsR4YWZANSFaQFsAQ0PKmFGdWmyPrL60A9Q3PrWfIR
-         dmRFs1Wg2T00zzNjpzwbms/CgfMqIQ0DhTczBht39htdUSpAmPdFB2kxFywGf3m0CTIC
-         3/OCOjSiHKcFKnkiv1HnPK1CgPVBHo2T8oKS0Fvldre//urfQGLTsft6pYdc8O8D6/GU
-         c4Vg==
+        bh=3bYais0Zm0bETVIyQNZ7iLMFqoVMiR10dthqLVD750A=;
+        b=q1z18e4EzQCkH9WWxUiYt7wS+IID21WFbZD0wscjFhUedtF3T1PAOBIn6EV4d3dW6L
+         BEU2YX3RmkjFQEjbyvLRpv8bs/YK8CcWgl2Ni6vz8CC9RUZp2ta4Mi7a2dxWAu/vuEYQ
+         9PuvHq8XDSgumCl3WDof3FZws9ZWUbq0Rd6/lhN2Jk9RcWItUJpvbm6IGWPP3wQb535M
+         Ipj4JojyPESrEzjexSUiodSn6dwlZJPqVk4vyURqmb51uteaOMREx1J3Q59vbv7SLnE+
+         CP+cfNfnYC4Cp/BCQSgtZy97wVsihQJCo4zrlq/fZITv8ZhkW3+7WqsM9254e0l4PHcI
+         wOww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=WJzVd1yPkFfY0dHWI4/9R6im1SXcOccfjLmzfufmVns=;
-        b=KUdtUmwIqpIbg+nl4ufIjGgVqEHm2UHtz2GfBBOHXpkAOnZBgNeymsrgzAZgoe/dm1
-         OZti1pR/GLKtvaPZOo1x7ftHktBrT/10GSKsomD/K3xQiBE9Dl4WZHbNGDL3EcCWHSjG
-         DDeAKtVChechtH+r4w6xMXfadUvLRaePjAv1rOlq7q25DWyQh94VtMZb7vRMSNyJRJu1
-         mt4F6jIjWv4Cyu0Aq/ah+CtOOri5/Sweof+OzEtL0YYqYpc/zfDIJm8qMX5+W1GhVXz/
-         zuvLZdDHFB/JHe6/dDIE7SnGk9gGHyAvpVE8bGpsBVPg4IY7vx8plCE9fcbBiMGKkn76
-         F9aQ==
-X-Gm-Message-State: AOAM530dLBck/jQT+4JMXU0vQ++76ZfUL/sGSTaVKvGBC7ecxAXiEzkA
-	gk6sJ1qN0t+8KOzHmbxZxam/ryXf9V4cWA==
-X-Google-Smtp-Source: ABdhPJzqPqySJynaBFI6gJoOz7URSXFopmruK/2xi2CoGiItbrmYaDAI16jBy6aSqvg/F9pwPG5Qog==
-X-Received: by 2002:ac2:5547:: with SMTP id l7mr9995446lfk.313.1608693050178;
-        Tue, 22 Dec 2020 19:10:50 -0800 (PST)
-Return-Path: <dmitry.baryshkov@linaro.org>
-Received: from umbar.lan ([94.25.228.224])
-        by smtp.gmail.com with ESMTPSA id x2sm2963035lff.207.2020.12.22.19.10.48
-        for <openembedded-devel@lists.openembedded.org>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=3bYais0Zm0bETVIyQNZ7iLMFqoVMiR10dthqLVD750A=;
+        b=qlsbv8vwjTF87bCYsAo76oH86a2cdyrN4bmmu4s1O1rOLY7WnngEw9Vs6eiPhjR/xX
+         N2vXU3mbwPG8pW+v240FmY4/SwnCer9V00s+1I70FqHRm0HEPBIa6V969XH4wv5zeQ4r
+         4bUHMHbVcoZzvgBfQGxmy5QHYAcny9AUbHH2Sg5ByPrNPdWj/cMu+DCGfFIpl6N4AzNv
+         8D215P0PTuK9tN1mCg5iF16U7h/7+Y5uCvmf4IivhJBpvUS7NUZFhwFIe/vTAUbH3888
+         DTK/MMdMc7qJ5eUhSrF4jep5AyyeDICAv4TQERv/ekPbLPmVn4hUz521RciVY3XyJ4wI
+         KdPw==
+X-Gm-Message-State: AOAM533V0dRSBovjkIT5GnfgndGVL+IqXXMqdG7iiq6Pw3GU2pqH7di4
+	p38q9rSqwm/UIPTM7K75NncOBfjUCvEqtA==
+X-Google-Smtp-Source: ABdhPJzeg7E463qHv5gCp+n7U+0wDBMN+HRUa/XzuAmeh5DqX/w8gMrfeRxsOUXazdujF/tMy68D2A==
+X-Received: by 2002:a17:90b:11d7:: with SMTP id gv23mr25241789pjb.2.1608703264723;
+        Tue, 22 Dec 2020 22:01:04 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a8e7])
+        by smtp.gmail.com with ESMTPSA id k11sm23325675pgt.83.2020.12.22.22.01.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Dec 2020 19:10:48 -0800 (PST)
-From: "Dmitry Baryshkov" <dbaryshkov@gmail.com>
+        Tue, 22 Dec 2020 22:01:04 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] android-tools-conf: fix android-tools build-deps warning
-Date: Wed, 23 Dec 2020 06:10:46 +0300
-Message-Id: <20201223031046.513846-2-dmitry.baryshkov@linaro.org>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 1/3] cyrus-sasl: Disable ntlm plugin by default
+Date: Tue, 22 Dec 2020 22:01:00 -0800
+Message-Id: <20201223060102.3211143-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201223031046.513846-1-dmitry.baryshkov@linaro.org>
-References: <20201223031046.513846-1-dmitry.baryshkov@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-If PREFERRED_PROVIDER_android-tool-conf is set, build-deps checker will
-incorrectly resolve android-tools-conf runtime dependency to
-android-tools-conf recipe rather than the selected recipe. To fix the
-following warning, make android-tools-conf recipe raise SkipRecipe if it
-is not the preferred android-tools-conf provider.
+ntlm requires md4 algorith defines which is now disabled in openssl
+recipe by default also see [1]
 
-WARNING: android-tools-5.1.1.r37-r0 do_package_qa: QA Issue: android-tools-adbd rdepends on android-tools-conf, but it isn't a build dependency, missing android-tools-conf in DEPENDS or PACKAGECONFIG? [build-deps]
+[1] https://github.com/cyrusimap/cyrus-sasl/issues/632
 
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../android-tools/android-tools-conf_1.0.bb                | 7 +++++++
- 1 file changed, 7 insertions(+)
+ meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb b/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb
-index af98f92f05e2..34b1a9bdd289 100644
---- a/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb
-@@ -11,3 +11,10 @@ do_install() {
-     install -d ${D}${bindir}
-     install -m 0755 ${WORKDIR}/android-gadget-setup ${D}${bindir}
- }
-+
-+python () {
-+    pn = d.getVar('PN')
-+    profprov = d.getVar("PREFERRED_PROVIDER_" + pn)
-+    if profprov and pn != profprov:
-+        raise bb.parse.SkipRecipe("PREFERRED_PROVIDER_%s set to %s, not %s" % (pn, profprov, pn))
-+}
+diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
+index d55dc4ab7e..33de8ca7e2 100644
+--- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
++++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
+@@ -29,7 +29,7 @@ EXTRA_OECONF += "--with-dblib=berkeley \
+                  --with-plugindir='${libdir}/sasl2' \
+                  andrew_cv_runpath_switch=none"
+ 
+-PACKAGECONFIG ??= "ntlm \
++PACKAGECONFIG ??= "\
+     ${@bb.utils.filter('DISTRO_FEATURES', 'ldap pam', d)} \
+ "
+ PACKAGECONFIG[gssapi] = "--enable-gssapi=yes,--enable-gssapi=no,krb5,"
 -- 
 2.29.2
 
