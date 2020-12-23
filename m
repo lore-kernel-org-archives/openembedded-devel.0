@@ -1,202 +1,125 @@
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web11.6025.1608708216390721197
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.58])
+ by mx.groups.io with SMTP id smtpd.web10.6788.1608715305252109437
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Dec 2020 23:23:36 -0800
+ Wed, 23 Dec 2020 01:21:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=D5fF4Yt9;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id lb18so2566305pjb.5
-        for <openembedded-devel@lists.openembedded.org>; Tue, 22 Dec 2020 23:23:36 -0800 (PST)
+ dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=FsSSxZJf;
+ spf=pass (domain: windriver.com, ip: 40.107.92.58, mailfrom: mingli.yu@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=hJ3JvDbJ02ReUQ7iZE7yMeos6Ku0XAkdY33ntaAPda8SycXVCGDUiBrbpHhbm32mkIkRE3vRvASs8uBiZgQFxoZtPmoOV6jJAFbj/CY9dI4rE+eXxcPgnG69g09SVih8/x18g0IwbGXN7QaHmLEX5PNCiStvPtg5GFbXCm7CuMUPJ47JmmduQPYptHsW6rDMbwY4GSQVCVFcBwMhO6d9Sn92JdcDBB98WB1DKa5JZvSh806k9mnTrzflod249VU6D0kdmTu/TWI7db5KVO+zKj1frEyM4i3QUQhO4kuBizkjjhnV8OnptQVkedB8YfrAMPOXAxM4hYpr+1Ws4HWTtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TNNjQJRRWxc/8NGetYewa3Y00hmKDx968OWIz2m5O1Y=;
+ b=ZR0xuLT0W0oSloJCz0sHaIdPNboySlC1Fm7EtL6ZKIV7QY5MDTSP+sNWEGAfal8zQoT76CfJAjj0jEU8BHFZIE4IJjC/sK3XBAANnwlDDc6h5XjVhcKT85VU16EcGP3qW0tMSfyrvVYsm7p9k4LEISOArYnNhju7dTh9+jTdog5TFRJiFRbVDG0xaGMSFGcS0+bCMTzwIFdIsaBYe5+eAxCJqelkdqxad3FDc02rWChq3SxkWDBQnlkwL5yDWQQSR4w/KDj9ZJ5eAUk1qmagkrY4dp/i2SozSEyXYtyUCZfJmKTjpZV8BtkaY9aWUh7aFsGseKBoNTeGghEwbMj/ww==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=I5aVJmJjDu36qwsaESaSmuXgV1QTA2zBGoOUKPOOr+c=;
-        b=D5fF4Yt9I/4bF5Ejf+W435Rw1KKgu0i4Tmyh4QNRuGo0xFtgaPf2DfjFaJsXKjMQxw
-         YlqFPReK43RVWjSu5LbChgz0fXj+0mXDb/JmYGeuGIQ/59YnhudpAaG/6F1qvypx+cjp
-         K2bYyFZon0cdLu7Fuf+XfF9IcdBOFTGbuaxpJv+JadhmQRphHAvDdLYuVysZtTqwj2Db
-         vp0m45EroEiICmw8V9aKpHuF1YaV7ukWRCzwR6aTIc4KXgeoDxaXA4qJO/gieJsjPakz
-         ze2quIGa4MdrE2J4yoAtD/3kq0SgcvthfFVHP4h1gQbtNBAdhkaDz5/ge4tgzF9F2poa
-         4GsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=I5aVJmJjDu36qwsaESaSmuXgV1QTA2zBGoOUKPOOr+c=;
-        b=DyUgxU0jVKV6AKagg0rrmuFwybyuttKcCaRlmYgdqTV67pP7jYFNRsxDeAonQRE/aR
-         fJfuEeOkCFgJnRv0ckjS6Ux6ECCDIr837ZIadmDOp016i6UIJ/A1pjKqT3cKCqPMzhHW
-         pa558VsFy6Dbf8Vi6lVp3218ePqKqkjzcGs/TGq+gZO//mhKvc2NE8DtU2ptVfbANx4/
-         H+j+RZUHtOtrN8mgETFXHgqH5uXv9DB9Coi4i+RDayjL2hBLRB406+oJBRiMMhpOt78L
-         U03sRZUI5QA0Me6Xi6RuKhyZHkez3EMO273xdw2KBxeEbuZPQf2I9XXvQalNGKOzB8a0
-         1C0g==
-X-Gm-Message-State: AOAM530FP151D5ku6ZiTt4N9QC2uVUSfNeLtxczsmtVrrn83VKiiir63
-	Zu4iocQUIwXlhUZf47oqykMsllJuI4rK4Q==
-X-Google-Smtp-Source: ABdhPJxdt2ylxS6Jzzy0ilnf8GdPiuqpgaM8jVu+T36eRYSmAxXFbzlUxFtnbev2maWCS5jb1ab+Eg==
-X-Received: by 2002:a17:90b:2355:: with SMTP id ms21mr25479348pjb.125.1608708215527;
-        Tue, 22 Dec 2020 23:23:35 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a8e7])
-        by smtp.gmail.com with ESMTPSA id u189sm22162517pfb.51.2020.12.22.23.23.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Dec 2020 23:23:35 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TNNjQJRRWxc/8NGetYewa3Y00hmKDx968OWIz2m5O1Y=;
+ b=FsSSxZJfLwp0c6F6gjWOxpyDbUQUWeQSvIXZLgRWevXygCH3nFt58psPifoOv2W6+m2IGatKg8SNoGWpmYDuNiXKmX4Z5+KRBOtkRyDHv/u+BfGEhp7SqE6Fzt66ln0Vt4fyfRcgGu2KwGHxq6G6LOUnp3ow6thpzgl1r/Cf7ps=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from CO1PR11MB5009.namprd11.prod.outlook.com (2603:10b6:303:9e::11)
+ by MWHPR1101MB2239.namprd11.prod.outlook.com (2603:10b6:301:5b::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3676.33; Wed, 23 Dec
+ 2020 09:21:43 +0000
+Received: from CO1PR11MB5009.namprd11.prod.outlook.com
+ ([fe80::80fa:a14:ee1b:c46f]) by CO1PR11MB5009.namprd11.prod.outlook.com
+ ([fe80::80fa:a14:ee1b:c46f%7]) with mapi id 15.20.3676.033; Wed, 23 Dec 2020
+ 09:21:43 +0000
+From: "Yu, Mingli" <mingli.yu@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH v2] xrdp: Upgrade to 0.9.14
-Date: Tue, 22 Dec 2020 23:23:32 -0800
-Message-Id: <20201223072332.1132821-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.29.2
+Subject: [meta-networking][PATCH] traceroute: change the ALTERNATIVE_PRIORITY
+Date: Wed, 23 Dec 2020 17:20:33 +0800
+Message-ID: <20201223092033.37029-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.26.2
+X-Originating-IP: [60.247.85.82]
+X-ClientProxiedBy: HKAPR03CA0014.apcprd03.prod.outlook.com
+ (2603:1096:203:c8::19) To CO1PR11MB5009.namprd11.prod.outlook.com
+ (2603:10b6:303:9e::11)
+Return-Path: mingli.yu@windriver.com
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from pek-lpg-core2.corp.ad.wrs.com (60.247.85.82) by HKAPR03CA0014.apcprd03.prod.outlook.com (2603:1096:203:c8::19) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3700.19 via Frontend Transport; Wed, 23 Dec 2020 09:21:42 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 3be1b1ae-1e65-4d83-273d-08d8a72429cd
+X-MS-TrafficTypeDiagnostic: MWHPR1101MB2239:
+X-Microsoft-Antispam-PRVS: 
+	<MWHPR1101MB22390F3B7389BE94FAD358EDF1DE0@MWHPR1101MB2239.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1443;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	9XbjVo3dUguPLdbuVtzgoIXyS0wjFOw7uEGQB5HlMuV6mlibZzw5HO4WBuh99q3WTDZXZPb9pjY3BRmX2usu/vn2oBBOkw1RmBOg8S87DOsrq2WvWr8M2236arp4o6wiZ5JNsRL+i3HQSCRX45qkmlIXVJvkrOGzx5pVkcFG2gxfNwosaoQEJXYsbbqezxgwOKpnL1IQjagIBBHHkce2XjDr7G/pqqDVS9tedRjmtYFWYtxCKKt6Wgx0TZEVGFDMboM6FEXUocqdUxjBUc3bgzudKAUh4uQ2ldzweYYeBL24ymmpCcALLvA/rM++hA4jtaBwYB9G7wInMoqo507tO1p2T723c847wjHViiJ/LENBqsgxLhoOTS3Kgse9bgtw+kP2XGibycqZwfAQB3XUqg==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB5009.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(39850400004)(376002)(346002)(366004)(26005)(83380400001)(86362001)(16526019)(52116002)(6512007)(8676002)(186003)(8936002)(2906002)(1076003)(6486002)(9686003)(2616005)(6506007)(6916009)(36756003)(66946007)(5660300002)(478600001)(66556008)(956004)(316002)(66476007)(6666004);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	=?us-ascii?Q?K7SIqA7lAlud4wo5NFQNc0eBMIJhwqdS0yZRzACjgyXrazlCH3uPNj9ASqTq?=
+ =?us-ascii?Q?ADqDhaMnIqJfw5r4EIGJdfeI5JXZ/X5ncsQLhyolTXE5TVM1BtKlUPdQ79ss?=
+ =?us-ascii?Q?oP8H5FtPD/3b9tTCePnCqrcgmmBLsLW/mvgDRaOpkE0057iQSulsawtN3FIo?=
+ =?us-ascii?Q?I0zlDszjt/NTr3aW9mPWpo0EB+awpOEr3vAbRoIg0Nxa+cYF+exN8Q2MOdYL?=
+ =?us-ascii?Q?bJN0DFS1ON3FZ/csOdClzXPQn/NtUj6z9pOc1/GWDd9ZqCrbcjV/OdZP4hNV?=
+ =?us-ascii?Q?D22OvzH3KwJy8GI8CNgvuxD+DQr4zm9Z+hmmZKmH4aP7gAGm0jCnBg3WwIBO?=
+ =?us-ascii?Q?ry8VHmx8NHd/c0AlIkTmI32VAMWZ7eYWBpggTDbUtxERuytuoEfihCZ8JUKA?=
+ =?us-ascii?Q?Ifjl1fq2jg+MFNzKDWXcmiwn2nrF12jEL1NjmDaG0zqptHBVBhJ9FBz2xtGT?=
+ =?us-ascii?Q?NYffVFNOBDcR7bvUhc9FA8k2SOX7qIWLSTYI39SjTH3RjtooY/VkhDsvNO/T?=
+ =?us-ascii?Q?/4D8FoxhF0egBluMTiu0FHEGHjty0xJe1XyrkRQa18Dx5k43q7TSUVw1XN63?=
+ =?us-ascii?Q?VE8EgnYcyuh6KRAsUQjXLBmGZgZZTDs6IXLgP1nnbrzHGJmIruHD9jHDDWT4?=
+ =?us-ascii?Q?aI8CgjyTPIOlKof0u0SGtFxhD9pLU2gADQUErssmfqhD9n7uGdNO3v/rcCs7?=
+ =?us-ascii?Q?j9faC/a1uxv0uUXKGY8qfLexm5HrUrpCJKad9rJquY5omU0lp49qLaLbWeTi?=
+ =?us-ascii?Q?iSw+bZQIoQb7umGKufwNL0cK5xMa32Nm+04Oyr4//KLrfRUGE0CwHK8qvwXE?=
+ =?us-ascii?Q?d05MPZdMK8g29LqyZ37n3spYZojFOofUA7aglJnG6Sdc8dqBX1HriNzsXeqb?=
+ =?us-ascii?Q?BObVPJprX5++nphDYhLJTZxumBz6XgtkuDfU7/0Qha/zpuLVYvqTR5SbhA2I?=
+ =?us-ascii?Q?pFGZ9pEYrKsPWBBwkgPLTbquPDX7DIRjKT3hrttUtUa0NPjld3PC2zcpXFrf?=
+ =?us-ascii?Q?MYUf?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5009.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Dec 2020 09:21:43.3194
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3be1b1ae-1e65-4d83-273d-08d8a72429cd
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: vQn/w5G6i8jsHLDzY8xeQpCUYna1Bey6sc/MVcGkF/+D+EJM/zwC//bfpqgjzDzvm7gUAdm8LwT8e7GFTRCD2w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR1101MB2239
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-Drop redundant setting of PV in recipe
-Fix build on riscv and musl
-Do not install xrdp.sh, it does not exist anymore
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Both inetutils-traceroute and traceroute provide the traceroute
+command and the ALTERNATIVE_PRIORITY of inetutils-traceroute is
+79 until now.
+
+Increase the ALTERNATIVE_PRIORITY of traceroute to 100 to guarantee
+the traceroute command provided by traceroute when both of the
+packages installed.
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
-v2: Fix build with riscv/musl
+ meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- ...0001-correct-the-location-of-errno.h.patch | 30 +++++++++++++++++++
- ...esn-t-require-pointers-to-be-aligned.patch | 28 +++++++++++++++++
- .../xrdp/{xrdp_0.9.11.bb => xrdp_0.9.14.bb}   | 18 +++++------
- 3 files changed, 66 insertions(+), 10 deletions(-)
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/0001-correct-the-location-of-errno.h.patch
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/0001-riscv-doesn-t-require-pointers-to-be-aligned.patch
- rename meta-oe/recipes-support/xrdp/{xrdp_0.9.11.bb => xrdp_0.9.14.bb} (90%)
-
-diff --git a/meta-oe/recipes-support/xrdp/xrdp/0001-correct-the-location-of-errno.h.patch b/meta-oe/recipes-support/xrdp/xrdp/0001-correct-the-location-of-errno.h.patch
-new file mode 100644
-index 0000000000..b06077bf02
---- /dev/null
-+++ b/meta-oe/recipes-support/xrdp/xrdp/0001-correct-the-location-of-errno.h.patch
-@@ -0,0 +1,30 @@
-+From c8d3df40ece7d659ccc8212b18de916d28f4398a Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 22 Dec 2020 23:10:52 -0800
-+Subject: [PATCH] correct the location of errno.h
-+
-+Fixes build on musl
-+
-+Upstream-Status: Submitted [https://github.com/neutrinolabs/xrdp/pull/1761]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ sesman/chansrv/sound.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/sesman/chansrv/sound.c b/sesman/chansrv/sound.c
-+index b0480d33..45e17307 100644
-+--- a/sesman/chansrv/sound.c
-++++ b/sesman/chansrv/sound.c
-+@@ -23,7 +23,7 @@
-+ #include <stdio.h>
-+ #include <sys/types.h>
-+ #include <sys/socket.h>
-+-#include <sys/errno.h>
-++#include <errno.h>
-+ #include <signal.h>
-+ #include <sys/un.h>
-+ 
-+-- 
-+2.29.2
-+
-diff --git a/meta-oe/recipes-support/xrdp/xrdp/0001-riscv-doesn-t-require-pointers-to-be-aligned.patch b/meta-oe/recipes-support/xrdp/xrdp/0001-riscv-doesn-t-require-pointers-to-be-aligned.patch
-new file mode 100644
-index 0000000000..4cd26df04c
---- /dev/null
-+++ b/meta-oe/recipes-support/xrdp/xrdp/0001-riscv-doesn-t-require-pointers-to-be-aligned.patch
-@@ -0,0 +1,28 @@
-+From 229206aa5e55a6e26a074a54a1b50139ab794b36 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 22 Dec 2020 23:01:13 -0800
-+Subject: [PATCH] riscv doesn't require pointers to be aligned
-+
-+Upstream-Status: Submitted [https://github.com/neutrinolabs/xrdp/pull/1761]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ common/arch.h | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/common/arch.h b/common/arch.h
-+index ccccfa5a..8c2ac1a4 100644
-+--- a/common/arch.h
-++++ b/common/arch.h
-+@@ -84,7 +84,8 @@ typedef int bool_t;
-+ #define NEED_ALIGN
-+ #elif defined(__x86__) || defined(__x86_64__) || \
-+       defined(__AMD64__) || defined(_M_IX86) || defined (_M_AMD64) || \
-+-      defined(__i386__) || defined(__aarch64__)
-++      defined(__i386__) || defined(__aarch64__) || \
-++      defined(__riscv)
-+ #define NO_NEED_ALIGN
-+ #else
-+ #warning unknown arch
-+-- 
-+2.29.2
-+
-diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.11.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.14.bb
-similarity index 90%
-rename from meta-oe/recipes-support/xrdp/xrdp_0.9.11.bb
-rename to meta-oe/recipes-support/xrdp/xrdp_0.9.14.bb
-index deda0fd1b5..955c3007e4 100644
---- a/meta-oe/recipes-support/xrdp/xrdp_0.9.11.bb
-+++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.14.bb
-@@ -10,15 +10,14 @@ DEPENDS = "openssl virtual/libx11 libxfixes libxrandr libpam nasm-native"
- 
- REQUIRED_DISTRO_FEATURES = "x11 pam"
- 
--SRC_URI = "git://github.com/neutrinolabs/xrdp.git \
-+SRC_URI = "git://github.com/neutrinolabs/xrdp.git;branch=devel \
-            file://xrdp.sysconfig \
-            file://0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch \
-            file://0001-Fix-the-compile-error.patch \
-+           file://0001-riscv-doesn-t-require-pointers-to-be-aligned.patch \
-+           file://0001-correct-the-location-of-errno.h.patch \
-            "
--
--SRCREV = "1e4b03eb3c9aa7173de251a328c93c073dcc0fca"
--
--PV = "0.9.11"
-+SRCREV = "1469d659dbccd6d042ac44f0afc4e1309788dc9d"
- 
- S = "${WORKDIR}/git"
- 
-@@ -52,15 +51,15 @@ do_compile_prepend() {
- 
- 
- do_install_append() {
--	install -d ${D}${sysconfdir} 
-+	install -d ${D}${sysconfdir}
- 	install -d ${D}${sysconfdir}/xrdp
- 	install -d ${D}${sysconfdir}/xrdp/pam.d
- 	install -d ${D}${sysconfdir}/sysconfig/xrdp
--   
-+
- 	# deal with systemd unit files
- 	install -d ${D}${systemd_unitdir}/system
- 	install -m 0644 ${S}/instfiles/xrdp.service.in ${D}${systemd_unitdir}/system/xrdp.service
--	install -m 0644 ${S}/instfiles/xrdp-sesman.service.in ${D}${systemd_unitdir}/system/xrdp-sesman.service 
-+	install -m 0644 ${S}/instfiles/xrdp-sesman.service.in ${D}${systemd_unitdir}/system/xrdp-sesman.service
- 	sed -i -e 's,@localstatedir@,${localstatedir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
- 	sed -i -e 's,@sysconfdir@,${sysconfdir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
- 	sed -i -e 's,@sbindir@,${sbindir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
-@@ -70,7 +69,6 @@ do_install_append() {
- 	install -m 0644 ${S}/sesman/startwm.sh ${D}${sysconfdir}/xrdp/
- 	install -m 0644 ${S}/xrdp/xrdp.ini.in ${D}${sysconfdir}/xrdp/
- 	install -m 0644 ${S}/xrdp/xrdp_keyboard.ini ${D}${sysconfdir}/xrdp/
--	install -m 0644 ${S}/instfiles/xrdp.sh ${D}${sysconfdir}/xrdp/
- 	install -m 0644 ${S}/keygen/openssl.conf ${D}${sysconfdir}/xrdp/
- 	install -m 0644 ${WORKDIR}/xrdp.sysconfig ${D}${sysconfdir}/sysconfig/xrdp/
- 	chown xrdp:xrdp ${D}${sysconfdir}/xrdp
-@@ -92,6 +90,6 @@ pkg_postinst_${PN}() {
- 			-out ${sysconfdir}/xrdp/cert.pem \
- 			-config ${sysconfdir}/xrdp/openssl.conf >/dev/null 2>&1
- 			chmod 400 ${sysconfdir}/xrdp/key.pem
--		fi			
-+		fi
-         fi
+diff --git a/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb=
+ b/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb
+index 993794492..c673ed009 100644
+--- a/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb
++++ b/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb
+@@ -40,6 +40,6 @@ do_install() {
+=20
  }
--- 
-2.29.2
+=20
+-ALTERNATIVE_PRIORITY =3D "60"
++ALTERNATIVE_PRIORITY =3D "100"
+ ALTERNATIVE_${PN} =3D "traceroute"
+ ALTERNATIVE_LINK_NAME[traceroute] =3D "${bindir}/traceroute"
+--=20
+2.26.2
 
