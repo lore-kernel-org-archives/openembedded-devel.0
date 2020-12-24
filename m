@@ -1,85 +1,120 @@
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web08.3467.1608847387240033803
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web08.3572.1608847960840725126
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Dec 2020 14:03:07 -0800
+ Thu, 24 Dec 2020 14:12:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=AzRmFhON;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id q4so1781074plr.7
-        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Dec 2020 14:03:07 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=DhpvKpIq;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id l23so1772779pjg.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Dec 2020 14:12:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=887vp2Yi4ocHE+Iye7k/R9zSsUbJWlGy9AMCJcXOTIA=;
-        b=AzRmFhONDB+ba/JsNy6AVt0FDH4/nnm7tg6pls8PyJoiysjQYoFEiMn41mlg+qDlkk
-         cOZW0I1QKtBpD5mEMgkrPVosyiCrA4EPL+5Wv7+MmDM3SfUmkK+9RCe62ZLtlNhiWNuV
-         J8Hdrnk6+CIhO7IzUExAh9EsoDeGJwIUJbhd7ucIVu17zNPHzimVLRwdRRSvw2dqEL3k
-         mVAQz9Bu3y2UqRzrtDA1pwe+jtKyj8TAR0f1sIkibDNgEh7zVXL8lBdYdld9welEswES
-         yhlDTlPYtUsslycz4UE2aDCEf8bgwJAN+QCnTL6GsFqO5/4W7Wm+kmFCHO8FynW6aODV
-         S1gA==
+        h=from:to:subject:date:message-id;
+        bh=PdkrB6lL4ltmr5OUb91oj05qMCMPw8U5taqBAthZEqw=;
+        b=DhpvKpIqmgGXjbW2EWCZUaHrSwmnlzU/V4MU7WTOwPUuWezMs0InP7zY9+UdJTokss
+         S/jVtT85lWrXjNBsdy4uswhAien42Q9+957V36IsSwx6pZWdKvyIqzajuz++rQ/MNeMf
+         rZqjxlZ7OtnvA3un1s0E4kkNNCh9W84ehM3qjrAZ/2gkP9NHocKuznGzPi1cN9pPYkN1
+         9oZ1iBhdhO2OXCrgJQoWrz1iAaVTfoROOf6lPF0KPV1h4eRyj1GNZdKlrW7p8FrHj+qD
+         YJ1Pv1PoZTKQw14tvYtDlsSmRD5yQnRj6fCj+N2pojvbVDrWkItQA1PW4tc7PICGIvBT
+         y13A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=887vp2Yi4ocHE+Iye7k/R9zSsUbJWlGy9AMCJcXOTIA=;
-        b=d03Sb3fAY65HWoPUsFsQdN4PA4lir6jVQ0lBdC6JkCDYrGwfnmiuclC3vTTtAt9U7S
-         e+isqJAQplWquxjbQOtksp4ciuQTZAaQtXvzyT5p+hO+QMXqWXjoX3dJCJIxi7GvyadD
-         uN3OZS8hGVC6vfHmd/2u6ebwflizRcKX2v5Mw+D9WHIQ5X/lphfgGdKUNKGFeskjyP9w
-         WEMv48l9WkVZdtIj/stOAi8xn+gRZzJoNARiZV13VXuxhj4c7rdBroWCAeM42SMsGHFq
-         wrdathsJutF5RDwgBr8RXHrWKanJh3vq0GK+7XY3EPuvj3fmvEV6mDXvJEhuHE5VmtfR
-         vaaw==
-X-Gm-Message-State: AOAM533N2WDCEUaRPQmwLG0+uaR48Bdc8ox1OKO+31geJbTa24PrM8oR
-	8raafm9tL0R2CxvzAkpWcfb0+8rnGpUFfg==
-X-Google-Smtp-Source: ABdhPJxRl+hhH1aI++VBp5xdMtwFqaZCr8FnEafOG0IhX41g+qGbdB395FDFvG3pRXS+iqdw7nKTlQ==
-X-Received: by 2002:a17:90a:2b88:: with SMTP id u8mr6088400pjd.161.1608847386511;
-        Thu, 24 Dec 2020 14:03:06 -0800 (PST)
+        h=x-gm-message-state:from:to:subject:date:message-id;
+        bh=PdkrB6lL4ltmr5OUb91oj05qMCMPw8U5taqBAthZEqw=;
+        b=VnPVS2Z8uQw/Aqy5Dtp4A8WUpOAACUOnB5iCT1e2SOhMLmU0KqYjqDpt29MbH1w0Hn
+         AqM5R2Sqokk6bpwaFBXnlevp+B/qM+uDZjzRKS4/hfTmdHYcxi912UiSl2hL2suJbDXc
+         jz2kgmGGnypcLCv10/ncAbBLyo/oUb5cCNVuOD9J2lO92DGDeoRfnOXNSIxO3zn6TVeL
+         uKBZIN0rBZ1gLSPdZtL2PHEHABV0aD+rWKbHspdEAciSY2dPv+pnYXP5BcnpL/T/dJlo
+         LjhgP41cRDflBqqi3V3EhYUvcAN825ZMxiWujTDW+HB+Ac9DiurKdjOM7jzy9lVj9PYS
+         ZUVg==
+X-Gm-Message-State: AOAM531jPLJDBcgB1F2O34MZBj4B/PmmA40lkaA47na/WcECnBi7ABMV
+	VIs7sl5158s3PHz9hvu7ncrRA8evKiz73Q==
+X-Google-Smtp-Source: ABdhPJz3KBTdU4KEQsYfR3GupnRhBUHFiYjemlk7xR5fhuv3J3hI75Vo73F4KYk/9LDm6lwK3uMf4Q==
+X-Received: by 2002:a17:90a:ce0c:: with SMTP id f12mr6160270pju.89.1608847960157;
+        Thu, 24 Dec 2020 14:12:40 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:164:fbbe:2531:3c5b])
-        by smtp.gmail.com with ESMTPSA id r14sm22256953pgi.27.2020.12.24.14.03.05
+        by smtp.gmail.com with ESMTPSA id 68sm1198392pfe.33.2020.12.24.14.12.39
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Dec 2020 14:03:06 -0800 (PST)
+        Thu, 24 Dec 2020 14:12:39 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ricardo Salveti <ricardo@foundries.io>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [Gatesgarth][meta-networking] wireguard-module: upgrade 1.0.20200908 -> 1.0.20201112
-Date: Thu, 24 Dec 2020 14:03:04 -0800
-Message-Id: <20201224220304.26603-1-akuster808@gmail.com>
+Subject: [dunfell][meta-networking] wireguard-module: fix build issue with 5.4 kernel
+Date: Thu, 24 Dec 2020 14:12:38 -0800
+Message-Id: <20201224221238.26810-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 
-From: Ricardo Salveti <ricardo@foundries.io>
+ /tmp/work/qemux86_64-poky-linux/wireguard-module/1.0.20200401-r0/git/src/compat/compat-asm.h:44: warning: "SYM_FUNC_START" redefined
+|    44 | #define SYM_FUNC_START ENTRY
+|       |
+| In file included from /tmp/work/qemux86_64-poky-linux/wireguard-module/1.0.20200401-r0/git/src/compat/compat-asm.h:9,
+|                  from <command-line>:
+| /tmp/work-shared/qemux86-64/kernel-source/include/linux/linkage.h:218: note: this is the location of the previous definition
+|   218 | #define SYM_FUNC_START(name)    \
+|       |
+| In file included from <command-line>:
+| /tmp/work/qemux86_64-poky-linux/wireguard-module/1.0.20200401-r0/git/src/compat/compat-asm.h:45: warning: "SYM_FUNC_END" redefined
+|    45 | #define SYM_FUNC_END ENDPROC
+|       |
 
-Relevant changes:
-- fe40226 version: bump
-- d0bf51b qemu: bump default testing version
-- ce8faa3 compat: SYM_FUNC_{START,END} were backported to 5.4
-- da5646f qemu: drop build support for rhel 8.2
-- 99e954f netns: check that route_me_harder packets use the right sk
-- 25320ac noise: take lock when removing handshake entry from table
+Backporit fix from upstream
 
-Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 666a8b94a34c0248b02f37136ae052ca36e6b428)
-[Bug fix only for operational code]
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...-module_1.0.20200908.bb => wireguard-module_1.0.20201112.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-kernel/wireguard/{wireguard-module_1.0.20200908.bb => wireguard-module_1.0.20201112.bb} (96%)
+ ...NC_-START-END-were-backported-to-5.4.patch | 29 +++++++++++++++++++
+ .../wireguard-module_1.0.20200401.bb          |  3 +-
+ 2 files changed, 31 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-kernel/wireguard/files/0001-compat-SYM_FUNC_-START-END-were-backported-to-5.4.patch
 
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200908.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20201112.bb
-similarity index 96%
-rename from meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200908.bb
-rename to meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20201112.bb
-index 4e3f3deca3b..c540445d7e7 100644
---- a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200908.bb
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20201112.bb
-@@ -1,6 +1,6 @@
- require wireguard.inc
+diff --git a/meta-networking/recipes-kernel/wireguard/files/0001-compat-SYM_FUNC_-START-END-were-backported-to-5.4.patch b/meta-networking/recipes-kernel/wireguard/files/0001-compat-SYM_FUNC_-START-END-were-backported-to-5.4.patch
+new file mode 100644
+index 00000000000..a9dc9dc2b7f
+--- /dev/null
++++ b/meta-networking/recipes-kernel/wireguard/files/0001-compat-SYM_FUNC_-START-END-were-backported-to-5.4.patch
+@@ -0,0 +1,29 @@
++From ce8faa3ee266ea69431805e6ed4bd7102d982508 Mon Sep 17 00:00:00 2001
++From: "Jason A. Donenfeld" <Jason@zx2c4.com>
++Date: Thu, 12 Nov 2020 09:43:38 +0100
++Subject: [PATCH] compat: SYM_FUNC_{START,END} were backported to 5.4
++
++Signed-off-by: Jason A. Donenfeld <Jason@zx2c4.com>
++
++Upstream-Status: Backport
++Fixes build failure in Dunfell.
++
++Signed-off-by: Armin Kuster <akuster808@gmail.com>
++
++---
++ compat/compat-asm.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++Index: src/compat/compat-asm.h
++===================================================================
++--- src.orig/compat/compat-asm.h
+++++ src/compat/compat-asm.h
++@@ -40,7 +40,7 @@
++ #undef pull
++ #endif
++ 
++-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 5, 0)
+++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 76)
++ #define SYM_FUNC_START ENTRY
++ #define SYM_FUNC_END ENDPROC
++ #endif
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
+index 73199592c88..45324c02a16 100644
+--- a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
++++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
+@@ -2,7 +2,8 @@ require wireguard.inc
  
--SRCREV = "d97b575a47fb26f27965bdc9e537c85f86165e42"
-+SRCREV = "fe402261666821514377d06c2c68ed9bc19e7634"
+ SRCREV = "43f57dac7b8305024f83addc533c9eede6509129"
  
- SRC_URI = "git://git.zx2c4.com/wireguard-linux-compat"
+-SRC_URI = "git://git.zx2c4.com/wireguard-linux-compat"
++SRC_URI = "git://git.zx2c4.com/wireguard-linux-compat \
++           file://0001-compat-SYM_FUNC_-START-END-were-backported-to-5.4.patch"
+ 
+ inherit module kernel-module-split
  
 -- 
 2.17.1
