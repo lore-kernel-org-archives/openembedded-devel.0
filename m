@@ -1,227 +1,243 @@
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web11.7832.1608793199842485198
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web08.7797.1608793200638576831
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Dec 2020 22:59:59 -0800
+ Wed, 23 Dec 2020 23:00:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=czzMxG+l;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id x18so884346pln.6
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Dec 2020 22:59:59 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=PLmLunag;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id q4so881697plr.7
+        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Dec 2020 23:00:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=fihJTB3qmzG8AwHB/U9ZuxIwpEJBs52QE5bGRJy62UY=;
-        b=czzMxG+lx+jkfGuCer0hK8oI8wEkZzHiBJGOIenWc0VGhuHviCAC67tBq5gYzQTyV/
-         BlQdHYxaF9Z0nsf7X0gba9arDmn9bgD31JxAOR4c4l/51odLYARlhvHUm+rB2A1Skiq0
-         A7qSyBEDJLIZUyg7T3QKHpvD5g4IUbE3ICNVvEsO/zWsMABGw1dxRHhrOevq1Bc88Yzs
-         QGz7+cabFFDu3mItbTYSRDXy9Is79dEzrXmeEMmnJBbdQDXTcOYNE5nab5Ak55+TjDs+
-         bxkNoYP4HpfvgaOgQxyy7vku2uoWOeRUHrGsRmkUr08Ows+Gb31NNhOe6UkXKbf1yhNK
-         bKcQ==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=lcxhU+fhI2aBvuIzxxrM1tUIOupk2lPgQTb7FbX9oKk=;
+        b=PLmLunagGBFsquTcPJI5086tAirYfXWALd+paV1FI7FVl2wcPQQ6hYzUf12sf1s2Nr
+         Tz8q6VdXFv3uq3nA4NsVbmaszxtH7rSv22ArYAD/J/fGWc/HF0h907XNrJ20UTkG9Er7
+         j5Ae+8p3skkARD+baQyBOJxK0zC+DdZODHTS0LBQEmgwYq/ouhgNj7XKJT2KFx7Gvnzz
+         Kc6LqObPM32jpDQ1DVwyJZUn2nj7vwJ4KLylCUn7qLupF2VDvbCXgX7DVq8hr1dndLT5
+         bj8FqipRujVPEJgWSK+lwLsNSKouopD+vZA9F9aoxNXlNFHNx23ncj+hnQMWlH8hjGd4
+         kAEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=fihJTB3qmzG8AwHB/U9ZuxIwpEJBs52QE5bGRJy62UY=;
-        b=j6S2pwGkB369xphK09zhh1uLb0dWZpMQbp567voF/6oZ8VxyF0IZTQy0ZHcx4dhNVU
-         rgvUPy8Hfa8yCECOYQGsqs0Ief+KUR5R6eiwMlQUedATqFWEwKodue0JQklkx+MxwyoD
-         8ApaxA0Ku5VxR9pYdM+Xrh0ZqVlUDa1e/gdxZ8Np6Tsz9k50vPCdumuOC8Jx1SWzEh7q
-         rRhaYGnOS0gk7T5WavyM/WvpwU5l4ul1ULaKn3iVe7b3fQXNEfWT4CKfV/sa+yEysQT4
-         +bLsGZUE6MiK3lX2/rK3f/ZQgZXzlMzmUEcIjph2MjP7KvDHGo8ekh9LHkBqt3UQsO/J
-         m6xw==
-X-Gm-Message-State: AOAM533G69SmlRLItG94JhlO5wCfsHudDeObxt7thzfqjqGUMMeibSpI
-	h2Nbxd/14cvO5QNDZ5yLvpVykOooSwMJ3w==
-X-Google-Smtp-Source: ABdhPJwD0ebTo1tLnbzrpMNkrnjEILSCHSsVgSxps2v+CDQHfbBqRfZbRyPN84sJnI7hON0/CYU7bw==
-X-Received: by 2002:a17:90a:d90e:: with SMTP id c14mr3119509pjv.85.1608793198969;
-        Wed, 23 Dec 2020 22:59:58 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=lcxhU+fhI2aBvuIzxxrM1tUIOupk2lPgQTb7FbX9oKk=;
+        b=DFhm3JToND/iWfoWxNrRIwfvN+5Iwg2IiEMFaalWYdhsBzcKZ8VwqzMYlNe/XvbS2b
+         zEiO3Ad4CitJiA2BEXch5seV72Z8JmAES76/dLKKJXQPEHsXo03jCUyUFr4w++FBW8oE
+         Gn1nGaG/80xNqr53aGdRayltvDgmifEfNZZERKiHICa62+of/aTLZS6HB5OWjctb4Azb
+         +aoCLKseTbo2X3kZOoUi3qutHHrJ3ZfptSaxnFCdo70SpBA6IBsB6RBlThogUQy1W4Mn
+         1PUwPQZ+H07e7StQKauEag7Avv1aQ7Gai+7Ud7Dy0A7c/IWUxi9BxOh4RO18ANmHUm8y
+         6JHA==
+X-Gm-Message-State: AOAM533713XFbJ6OYjZV1ps3H/3jToy1y4d7eRn847m06kU4kjl+OLha
+	jAd6P0/3Xx5i2m8OIZsvU5PDTJId9ASs5Q==
+X-Google-Smtp-Source: ABdhPJxvgHKHG3Ym7AIiNVe14QRIjCuOXnoxkegmSXWu9WgTJkUz47KogYz9BWJoOjIci09GViNODw==
+X-Received: by 2002:a17:90a:e60d:: with SMTP id j13mr3224155pjy.52.1608793199864;
+        Wed, 23 Dec 2020 22:59:59 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a8e7])
-        by smtp.gmail.com with ESMTPSA id r20sm18840034pgb.3.2020.12.23.22.59.58
+        by smtp.gmail.com with ESMTPSA id r20sm18840034pgb.3.2020.12.23.22.59.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Dec 2020 22:59:58 -0800 (PST)
+        Wed, 23 Dec 2020 22:59:59 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Mark Jonas <toertel@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH v3] beep: Update to 1.4.9 in new repository
-Date: Wed, 23 Dec 2020 22:59:51 -0800
-Message-Id: <20201224065952.3714857-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH v3] xrdp: Upgrade to 0.9.14
+Date: Wed, 23 Dec 2020 22:59:52 -0800
+Message-Id: <20201224065952.3714857-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.29.2
+In-Reply-To: <20201224065952.3714857-1-raj.khem@gmail.com>
+References: <20201224065952.3714857-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Mark Jonas <toertel@gmail.com>
+Drop redundant setting of PV in recipe
+Fix build on riscv and musl
+Do not install xrdp.sh, it does not exist anymore
+Fix build with gcc 9+
 
-The previous version 1.2.2 of beep was provided by
-http://johnath.com/beep and was released in 2002. The latest version 1.3
-was released 2010-07-13. On https://github.com/johnath/beep the
-development stopped 2013-02-07.
-
-In 2018 a developer worked on fixing CVE-2018-1000532 and realized that
-fixing this would be more than just a simple patch. Because the original
-repository was unmaintained for several years he created
-https://github.com/spkr-beep/beep as the new home for beep.
-
-Debian switched to the new beep with Buster.
-    https://packages.debian.org/buster/beep
-
-Alpine 3.11, Arch Linux, Fedora, and Ubuntu 20.04 also switched to the
-same new beep.
-
-Fix build with clang
-
-Signed-off-by: Mark Jonas <toertel@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-v2: Fix build with clang
-v3: Do not build with both clang and gcc
+v2: Fix build with riscv/musl
+v3: Fix build with gcc9+
 
- meta-oe/recipes-extended/beep/beep_1.2.2.bb   | 25 --------
- meta-oe/recipes-extended/beep/beep_1.4.9.bb   | 32 ++++++++++
- ...rror-as-it-fails-with-newer-clang-11.patch | 63 +++++++++++++++++++
- 3 files changed, 95 insertions(+), 25 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/beep/beep_1.2.2.bb
- create mode 100644 meta-oe/recipes-extended/beep/beep_1.4.9.bb
- create mode 100644 meta-oe/recipes-extended/beep/files/0001-Do-not-use-Werror-as-it-fails-with-newer-clang-11.patch
+ ...-warnings-about-snprintf-truncations.patch | 28 +++++++++++++++++
+ ...0001-correct-the-location-of-errno.h.patch | 30 +++++++++++++++++++
+ ...esn-t-require-pointers-to-be-aligned.patch | 28 +++++++++++++++++
+ .../xrdp/{xrdp_0.9.11.bb => xrdp_0.9.14.bb}   | 19 ++++++------
+ 4 files changed, 95 insertions(+), 10 deletions(-)
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/0001-Fixed-compiler-warnings-about-snprintf-truncations.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/0001-correct-the-location-of-errno.h.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/0001-riscv-doesn-t-require-pointers-to-be-aligned.patch
+ rename meta-oe/recipes-support/xrdp/{xrdp_0.9.11.bb => xrdp_0.9.14.bb} (88%)
 
-diff --git a/meta-oe/recipes-extended/beep/beep_1.2.2.bb b/meta-oe/recipes-extended/beep/beep_1.2.2.bb
-deleted file mode 100644
-index cafc869645..0000000000
---- a/meta-oe/recipes-extended/beep/beep_1.2.2.bb
-+++ /dev/null
-@@ -1,25 +0,0 @@
--DESCRIPTION = "beep is a command line tool for linux that beeps the PC speaker"
--LICENSE = "GPL-2.0"
--LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
--
--SRC_URI = "\
--    http://johnath.com/beep/beep-${PV}.tar.gz \
--    file://linux-input.patch \
--"
--
--SRC_URI[sha256sum] = "5c0445dac43950b7c7c3f235c6fb21f620ab3fd2f3aafaf09896e5730fcf49a1"
--
--S = "${WORKDIR}/${BPN}-${PV}"
--
--EXTRA_OEMAKE += 'CC="${CC}"'
--EXTRA_OEMAKE += 'FLAGS="${CFLAGS} ${LDFLAGS}"'
--
--do_configure[noexec] = "1"
--
--do_compile() {
--   oe_runmake
--}
--
--do_install() {
--	install -Dm 0755 ${B}/${PN} ${D}${bindir}/${PN}
--}
-diff --git a/meta-oe/recipes-extended/beep/beep_1.4.9.bb b/meta-oe/recipes-extended/beep/beep_1.4.9.bb
+diff --git a/meta-oe/recipes-support/xrdp/xrdp/0001-Fixed-compiler-warnings-about-snprintf-truncations.patch b/meta-oe/recipes-support/xrdp/xrdp/0001-Fixed-compiler-warnings-about-snprintf-truncations.patch
 new file mode 100644
-index 0000000000..8d332b2faf
+index 0000000000..5b9315cfb4
 --- /dev/null
-+++ b/meta-oe/recipes-extended/beep/beep_1.4.9.bb
-@@ -0,0 +1,32 @@
-+SUMMARY = "beep allows you to have the PC speaker issue beeps and beep patterns"
-+DESCRIPTION = "beep allows you to have the PC speaker issue beeps and beep \
-+patterns with given frequencies, durations, and spacing."
-+HOMEPAGE = "https://github.com/spkr-beep/beep"
-+BUGTRACKER = "https://github.com/spkr-beep/beep/issues"
++++ b/meta-oe/recipes-support/xrdp/xrdp/0001-Fixed-compiler-warnings-about-snprintf-truncations.patch
+@@ -0,0 +1,28 @@
++From 9de23a9199d26e64ab6b5be2bb74f260200b2dc5 Mon Sep 17 00:00:00 2001
++From: matt335672 <30179339+matt335672@users.noreply.github.com>
++Date: Fri, 21 Aug 2020 12:20:31 +0100
++Subject: [PATCH] Fixed compiler warnings about snprintf truncations
 +
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++Upstream-Status: Backport [https://github.com/neutrinolabs/xrdp/pull/1659]
++---
++ common/log.c | 4 +---
++ 1 file changed, 1 insertion(+), 3 deletions(-)
 +
-+SRC_URI = "git://github.com/spkr-beep/beep.git;protocol=https \
-+           file://0001-Do-not-use-Werror-as-it-fails-with-newer-clang-11.patch \
-+"
-+SRCREV = "8b85ddd09f73b9fd7caa5679298781a57af194ac"
-+S = "${WORKDIR}/git"
++diff --git a/common/log.c b/common/log.c
++index 4a0bd2f3..8686789d 100644
++--- a/common/log.c
+++++ b/common/log.c
++@@ -555,9 +555,7 @@ log_message(const enum logLevels lvl, const char *msg, ...)
++     now_t = time(&now_t);
++     now = localtime(&now_t);
++ 
++-    snprintf(buff, 21, "[%.4d%.2d%.2d-%.2d:%.2d:%.2d] ", now->tm_year + 1900,
++-             now->tm_mon + 1, now->tm_mday, now->tm_hour, now->tm_min,
++-             now->tm_sec);
+++    strftime(buff, 21, "[%Y%m%d-%H:%M:%S] ", now);
++ 
++     internal_log_lvl2str(lvl, buff + 20);
++ 
++-- 
++2.29.2
 +
-+EXTRA_OEMAKE = " \
-+    COMPILER_gcc='${CC}' \
-+    LINKER_gcc='${CC}' \
-+    COMPILER_clang=no \
-+    LINKER_clang=no \
-+"
-+
-+EXTRA_OEMAKE_toolchain-clang = " \
-+    COMPILER_clang='${CC}' \
-+    LINKER_clang='${CC}' \
-+    COMPILER_gcc=no \
-+    LINKER_gcc=no \
-+"
-+
-+do_install() {
-+    oe_runmake install DESTDIR='${D}'
-+}
-diff --git a/meta-oe/recipes-extended/beep/files/0001-Do-not-use-Werror-as-it-fails-with-newer-clang-11.patch b/meta-oe/recipes-extended/beep/files/0001-Do-not-use-Werror-as-it-fails-with-newer-clang-11.patch
+diff --git a/meta-oe/recipes-support/xrdp/xrdp/0001-correct-the-location-of-errno.h.patch b/meta-oe/recipes-support/xrdp/xrdp/0001-correct-the-location-of-errno.h.patch
 new file mode 100644
-index 0000000000..ba7681b983
+index 0000000000..b06077bf02
 --- /dev/null
-+++ b/meta-oe/recipes-extended/beep/files/0001-Do-not-use-Werror-as-it-fails-with-newer-clang-11.patch
-@@ -0,0 +1,63 @@
-+From 6b33adfa438e35b6a37cfb0364274370ef4f9fc1 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/xrdp/xrdp/0001-correct-the-location-of-errno.h.patch
+@@ -0,0 +1,30 @@
++From c8d3df40ece7d659ccc8212b18de916d28f4398a Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 23 Dec 2020 18:00:59 +0000
-+Subject: [PATCH] Do not use -Werror as it fails with newer clang 11+
++Date: Tue, 22 Dec 2020 23:10:52 -0800
++Subject: [PATCH] correct the location of errno.h
 +
-+Upstream-Status: Pending
++Fixes build on musl
++
++Upstream-Status: Submitted [https://github.com/neutrinolabs/xrdp/pull/1761]
++
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ GNUmakefile | 1 -
-+ 1 file changed, 1 deletion(-)
++ sesman/chansrv/sound.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+--- a/GNUmakefile
-++++ b/GNUmakefile
-+@@ -91,12 +91,13 @@ comma := ,
-+ # If supported by COMPILER_gcc, add given flags to CFLAGS_gcc.
-+ # Example usage:
-+ #   $(eval $(call CHECK_CFLAGS_gcc,-fasynchronous-unwind-tables))
-+-define CHECK_CFLAGS_gcc
-+-CFLAGS_gcc += $$(if $$(shell if $$(COMPILER_gcc) $(1) -x c -o compile-check.gcc-o -c - < /dev/null > /dev/null 2>&1; then echo yes; else :; fi; rm -f compile-check.gcc-o > /dev/null 2>&1),$(1))
-+-endef
++diff --git a/sesman/chansrv/sound.c b/sesman/chansrv/sound.c
++index b0480d33..45e17307 100644
++--- a/sesman/chansrv/sound.c
+++++ b/sesman/chansrv/sound.c
++@@ -23,7 +23,7 @@
++ #include <stdio.h>
++ #include <sys/types.h>
++ #include <sys/socket.h>
++-#include <sys/errno.h>
+++#include <errno.h>
++ #include <signal.h>
++ #include <sys/un.h>
 + 
-+ COMPILER_gcc = gcc
-+ LINKER_gcc = gcc
-++ifneq ($(COMPILER_gcc),no)
-++define CHECK_CFLAGS_gcc
-++CFLAGS_gcc += $$(if $$(shell if $$(COMPILER_gcc) $(1) -x c -o compile-check.gcc-o -c - < /dev/null > /dev/null 2>&1; then echo yes; else :; fi; rm -f compile-check.gcc-o > /dev/null 2>&1),$(1))
-++endef
-+ CPPFLAGS_gcc =
-+ CFLAGS_gcc =
-+ CFLAGS_gcc += -std=gnu99 -pedantic
-+@@ -113,30 +114,24 @@ CFLAGS_gcc += -save-temps=obj
-+ LDFLAGS_gcc =
-+ LIBS_gcc =
-+ 
-+-ifneq ($(call pathsearch,$(COMPILER_gcc)),)
-+-ifneq ($(COMPILER_gcc)),no)
-+ COMPILERS += gcc
-+ endif
-+-endif
-+ 
-+ COMPILER_clang = clang
-+ LINKER_clang = clang
-++
-++ifneq ($(COMPILER_clang),no)
-+ CPPFLAGS_clang =
-+ CFLAGS_clang += -Wall -Wextra
-+ CFLAGS_clang += -Weverything
-+ CFLAGS_clang += -Wno-padded
-+ CFLAGS_clang += -std=gnu99 -pedantic
-+-CFLAGS_clang += -Werror
-+-CFLAGS_clang += -fsanitize=undefined
-+ CFLAGS_clang += -O -g
-+ LDFLAGS_clang =
-+ LIBS_clang =
-+ 
-+-ifneq ($(call pathsearch,$(COMPILER_clang)),)
-+-ifneq ($(COMPILER_clang),no)
-+ COMPILERS += clang
-+ endif
-+-endif
-+ 
-+ 
-+ ########################################################################
++-- 
++2.29.2
++
+diff --git a/meta-oe/recipes-support/xrdp/xrdp/0001-riscv-doesn-t-require-pointers-to-be-aligned.patch b/meta-oe/recipes-support/xrdp/xrdp/0001-riscv-doesn-t-require-pointers-to-be-aligned.patch
+new file mode 100644
+index 0000000000..4cd26df04c
+--- /dev/null
++++ b/meta-oe/recipes-support/xrdp/xrdp/0001-riscv-doesn-t-require-pointers-to-be-aligned.patch
+@@ -0,0 +1,28 @@
++From 229206aa5e55a6e26a074a54a1b50139ab794b36 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 22 Dec 2020 23:01:13 -0800
++Subject: [PATCH] riscv doesn't require pointers to be aligned
++
++Upstream-Status: Submitted [https://github.com/neutrinolabs/xrdp/pull/1761]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ common/arch.h | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/common/arch.h b/common/arch.h
++index ccccfa5a..8c2ac1a4 100644
++--- a/common/arch.h
+++++ b/common/arch.h
++@@ -84,7 +84,8 @@ typedef int bool_t;
++ #define NEED_ALIGN
++ #elif defined(__x86__) || defined(__x86_64__) || \
++       defined(__AMD64__) || defined(_M_IX86) || defined (_M_AMD64) || \
++-      defined(__i386__) || defined(__aarch64__)
+++      defined(__i386__) || defined(__aarch64__) || \
+++      defined(__riscv)
++ #define NO_NEED_ALIGN
++ #else
++ #warning unknown arch
++-- 
++2.29.2
++
+diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.11.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.14.bb
+similarity index 88%
+rename from meta-oe/recipes-support/xrdp/xrdp_0.9.11.bb
+rename to meta-oe/recipes-support/xrdp/xrdp_0.9.14.bb
+index deda0fd1b5..078e23c6ed 100644
+--- a/meta-oe/recipes-support/xrdp/xrdp_0.9.11.bb
++++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.14.bb
+@@ -10,15 +10,15 @@ DEPENDS = "openssl virtual/libx11 libxfixes libxrandr libpam nasm-native"
+ 
+ REQUIRED_DISTRO_FEATURES = "x11 pam"
+ 
+-SRC_URI = "git://github.com/neutrinolabs/xrdp.git \
++SRC_URI = "git://github.com/neutrinolabs/xrdp.git;branch=devel \
+            file://xrdp.sysconfig \
+            file://0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch \
+            file://0001-Fix-the-compile-error.patch \
++           file://0001-riscv-doesn-t-require-pointers-to-be-aligned.patch \
++           file://0001-correct-the-location-of-errno.h.patch \
++           file://0001-Fixed-compiler-warnings-about-snprintf-truncations.patch \
+            "
+-
+-SRCREV = "1e4b03eb3c9aa7173de251a328c93c073dcc0fca"
+-
+-PV = "0.9.11"
++SRCREV = "1469d659dbccd6d042ac44f0afc4e1309788dc9d"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -52,15 +52,15 @@ do_compile_prepend() {
+ 
+ 
+ do_install_append() {
+-	install -d ${D}${sysconfdir} 
++	install -d ${D}${sysconfdir}
+ 	install -d ${D}${sysconfdir}/xrdp
+ 	install -d ${D}${sysconfdir}/xrdp/pam.d
+ 	install -d ${D}${sysconfdir}/sysconfig/xrdp
+-   
++
+ 	# deal with systemd unit files
+ 	install -d ${D}${systemd_unitdir}/system
+ 	install -m 0644 ${S}/instfiles/xrdp.service.in ${D}${systemd_unitdir}/system/xrdp.service
+-	install -m 0644 ${S}/instfiles/xrdp-sesman.service.in ${D}${systemd_unitdir}/system/xrdp-sesman.service 
++	install -m 0644 ${S}/instfiles/xrdp-sesman.service.in ${D}${systemd_unitdir}/system/xrdp-sesman.service
+ 	sed -i -e 's,@localstatedir@,${localstatedir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
+ 	sed -i -e 's,@sysconfdir@,${sysconfdir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
+ 	sed -i -e 's,@sbindir@,${sbindir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
+@@ -70,7 +70,6 @@ do_install_append() {
+ 	install -m 0644 ${S}/sesman/startwm.sh ${D}${sysconfdir}/xrdp/
+ 	install -m 0644 ${S}/xrdp/xrdp.ini.in ${D}${sysconfdir}/xrdp/
+ 	install -m 0644 ${S}/xrdp/xrdp_keyboard.ini ${D}${sysconfdir}/xrdp/
+-	install -m 0644 ${S}/instfiles/xrdp.sh ${D}${sysconfdir}/xrdp/
+ 	install -m 0644 ${S}/keygen/openssl.conf ${D}${sysconfdir}/xrdp/
+ 	install -m 0644 ${WORKDIR}/xrdp.sysconfig ${D}${sysconfdir}/sysconfig/xrdp/
+ 	chown xrdp:xrdp ${D}${sysconfdir}/xrdp
+@@ -92,6 +91,6 @@ pkg_postinst_${PN}() {
+ 			-out ${sysconfdir}/xrdp/cert.pem \
+ 			-config ${sysconfdir}/xrdp/openssl.conf >/dev/null 2>&1
+ 			chmod 400 ${sysconfdir}/xrdp/key.pem
+-		fi			
++		fi
+         fi
+ }
 -- 
 2.29.2
 
