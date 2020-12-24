@@ -1,67 +1,86 @@
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web08.9241.1608806723949522388
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web08.3467.1608847387240033803
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Dec 2020 02:45:24 -0800
+ Thu, 24 Dec 2020 14:03:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ik4mR1rJ;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: dbaryshkov@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id qw4so2805820ejb.12
-        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Dec 2020 02:45:23 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=AzRmFhON;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id q4so1781074plr.7
+        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Dec 2020 14:03:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=6GfiYK3XsIDFicQu8HWsuVPNSPersP+i75lHWh3MHS4=;
-        b=ik4mR1rJpsoZstVwgTSTR3fAXSROKzI4ncT4WR+6h32/TkfPzQPQ0N0uj+RaXLPAPc
-         9LDy11OriUrHzUm/RtoT+3c0wBYBBM5rx4arVg9Q2ehfraMhuJIykjr8ITpecxBPGzFl
-         lYiIJ2etk7ahiCPiTffCBTq8qwbJAWQqimmCRW1KY9epziSsrBJrH4P4mtJ1C8cU9RNR
-         DRvjq9EFdY+xBrzHEjF1X2NzT6AQO/vU1EQyhbvAVdPMqry4thlJ0qYzX/zDJRDZt/N4
-         KaJd+5OpZkLp4UhKqMcHQXs6SG6WNi1oyP9rl1nOhM6OkjML2xRKnKzZleD+1vyrqIFL
-         TAdQ==
+        h=from:to:cc:subject:date:message-id;
+        bh=887vp2Yi4ocHE+Iye7k/R9zSsUbJWlGy9AMCJcXOTIA=;
+        b=AzRmFhONDB+ba/JsNy6AVt0FDH4/nnm7tg6pls8PyJoiysjQYoFEiMn41mlg+qDlkk
+         cOZW0I1QKtBpD5mEMgkrPVosyiCrA4EPL+5Wv7+MmDM3SfUmkK+9RCe62ZLtlNhiWNuV
+         J8Hdrnk6+CIhO7IzUExAh9EsoDeGJwIUJbhd7ucIVu17zNPHzimVLRwdRRSvw2dqEL3k
+         mVAQz9Bu3y2UqRzrtDA1pwe+jtKyj8TAR0f1sIkibDNgEh7zVXL8lBdYdld9welEswES
+         yhlDTlPYtUsslycz4UE2aDCEf8bgwJAN+QCnTL6GsFqO5/4W7Wm+kmFCHO8FynW6aODV
+         S1gA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=6GfiYK3XsIDFicQu8HWsuVPNSPersP+i75lHWh3MHS4=;
-        b=cV4k1lpgzyIl7QwRVYMBWeQtkNLiUHVgYY+Qu0iWvL5hRqVSgcUYOWMzsEWXWDi6et
-         yoXCnmHnXQ8QZQCKwYp7GUCeciPHkAYWDNQWmb/4WDk/ceCs+1n0bdw5WqPAXbQ5wJyn
-         NruPxFOtf33Mlt7o4DtCPLdGnR3fHkgdIW5+LuFXmyfvUWuhu0DwYDNKTVVSEOB+dPcb
-         uLOKv+KFRrqV2s46aRNkWJAo/eMILZ0hDVXCqBAdYNtiH96Q3q9PuABaweotHye9dB1Q
-         /kLY70kZdpTZy7TFa+Xyvethimq5/sftpA1CzBVFHj0h+k8A6YaaMzO58VIrD9CFaflH
-         SR4A==
-X-Gm-Message-State: AOAM530DF+Jjbp3lhNoZ7EIO14Auek3GSOCB9/Vsygq5Vq7v3oe5HfwM
-	Zadubt3+0M69kHtnbYdlpk+AXtsbdoKSmz/QheU=
-X-Google-Smtp-Source: ABdhPJyh+63R9J8iw7/XfKSqLVDnqRqGbkQgAIvewdCrv5w+qAGNoMzMrxe4wUjYbTuiOXUPVEcXJ58/rXPJ++I3Ums=
-X-Received: by 2002:a17:906:5293:: with SMTP id c19mr27936776ejm.72.1608806722272;
- Thu, 24 Dec 2020 02:45:22 -0800 (PST)
-MIME-Version: 1.0
-References: <20201223031046.513846-1-dmitry.baryshkov@linaro.org> <CAMKF1srVQdu6RfOcROq6ca4ppUGpr5BOSZBDPTNKSGTLGnj8HA@mail.gmail.com>
-In-Reply-To: <CAMKF1srVQdu6RfOcROq6ca4ppUGpr5BOSZBDPTNKSGTLGnj8HA@mail.gmail.com>
-From: "Dmitry Baryshkov" <dbaryshkov@gmail.com>
-Date: Thu, 24 Dec 2020 13:45:11 +0300
-Message-ID: <CALT56yNSY9kx=B1YMtzz9HUw48D8ujgnVRmjWEn0V-oQZ7+KAQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/2] android-tools-conf-configfs: add an alternative to anrdoid-tools-conf
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=887vp2Yi4ocHE+Iye7k/R9zSsUbJWlGy9AMCJcXOTIA=;
+        b=d03Sb3fAY65HWoPUsFsQdN4PA4lir6jVQ0lBdC6JkCDYrGwfnmiuclC3vTTtAt9U7S
+         e+isqJAQplWquxjbQOtksp4ciuQTZAaQtXvzyT5p+hO+QMXqWXjoX3dJCJIxi7GvyadD
+         uN3OZS8hGVC6vfHmd/2u6ebwflizRcKX2v5Mw+D9WHIQ5X/lphfgGdKUNKGFeskjyP9w
+         WEMv48l9WkVZdtIj/stOAi8xn+gRZzJoNARiZV13VXuxhj4c7rdBroWCAeM42SMsGHFq
+         wrdathsJutF5RDwgBr8RXHrWKanJh3vq0GK+7XY3EPuvj3fmvEV6mDXvJEhuHE5VmtfR
+         vaaw==
+X-Gm-Message-State: AOAM533N2WDCEUaRPQmwLG0+uaR48Bdc8ox1OKO+31geJbTa24PrM8oR
+	8raafm9tL0R2CxvzAkpWcfb0+8rnGpUFfg==
+X-Google-Smtp-Source: ABdhPJxRl+hhH1aI++VBp5xdMtwFqaZCr8FnEafOG0IhX41g+qGbdB395FDFvG3pRXS+iqdw7nKTlQ==
+X-Received: by 2002:a17:90a:2b88:: with SMTP id u8mr6088400pjd.161.1608847386511;
+        Thu, 24 Dec 2020 14:03:06 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:164:fbbe:2531:3c5b])
+        by smtp.gmail.com with ESMTPSA id r14sm22256953pgi.27.2020.12.24.14.03.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Dec 2020 14:03:06 -0800 (PST)
+From: "akuster" <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Ricardo Salveti <ricardo@foundries.io>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [Gatesgarth][meta-networking] wireguard-module: upgrade 1.0.20200908 -> 1.0.20201112
+Date: Thu, 24 Dec 2020 14:03:04 -0800
+Message-Id: <20201224220304.26603-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
-=D1=87=D1=82, 24 =D0=B4=D0=B5=D0=BA. 2020 =D0=B3. =D0=B2 09:34, Khem Raj <r=
-aj.khem@gmail.com>:
->
-> I am seeing this warning
->
-> WARNING: /mnt/b/yoe/master/sources/meta-openembedded/meta-oe/recipes-devt=
-ools/android-tools/android-to
-> ols-conf-configfs_1.0.bb: Unable to get checksum for
-> android-tools-conf-configfs SRC_URI entry android
-> -gadget-setup.machine: file could not be found
+From: Ricardo Salveti <ricardo@foundries.io>
 
-Oops. Should be fixed in v2
+Relevant changes:
+- fe40226 version: bump
+- d0bf51b qemu: bump default testing version
+- ce8faa3 compat: SYM_FUNC_{START,END} were backported to 5.4
+- da5646f qemu: drop build support for rhel 8.2
+- 99e954f netns: check that route_me_harder packets use the right sk
+- 25320ac noise: take lock when removing handshake entry from table
 
->
-> while building for qemuriscv32
+Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 666a8b94a34c0248b02f37136ae052ca36e6b428)
+[Bug fix only for operational code]
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ ...-module_1.0.20200908.bb => wireguard-module_1.0.20201112.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-kernel/wireguard/{wireguard-module_1.0.20200908.bb => wireguard-module_1.0.20201112.bb} (96%)
 
---=20
-With best wishes
-Dmitry
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200908.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20201112.bb
+similarity index 96%
+rename from meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200908.bb
+rename to meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20201112.bb
+index 4e3f3deca3b..c540445d7e7 100644
+--- a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200908.bb
++++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20201112.bb
+@@ -1,6 +1,6 @@
+ require wireguard.inc
+ 
+-SRCREV = "d97b575a47fb26f27965bdc9e537c85f86165e42"
++SRCREV = "fe402261666821514377d06c2c68ed9bc19e7634"
+ 
+ SRC_URI = "git://git.zx2c4.com/wireguard-linux-compat"
+ 
+-- 
+2.17.1
+
