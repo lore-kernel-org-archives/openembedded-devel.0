@@ -1,84 +1,67 @@
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
- by mx.groups.io with SMTP id smtpd.web09.9157.1608805890751472676
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web08.9241.1608806723949522388
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Dec 2020 02:31:31 -0800
+ Thu, 24 Dec 2020 02:45:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=Bv4t9eDJ;
- spf=pass (domain: linaro.org, ip: 209.85.167.50, mailfrom: dmitry.baryshkov@linaro.org)
-Received: by mail-lf1-f50.google.com with SMTP id m12so3830924lfo.7
-        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Dec 2020 02:31:30 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ik4mR1rJ;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: dbaryshkov@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id qw4so2805820ejb.12
+        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Dec 2020 02:45:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=WJzVd1yPkFfY0dHWI4/9R6im1SXcOccfjLmzfufmVns=;
-        b=Bv4t9eDJJ0JskvVUj50JddVdNR+awxSerNyXVsEoJHy3e+DVB9/YK9vUDY+/7id1T+
-         d0XRGirhCv8yJgp+CtcBTZGkO/ZvFQ3wtahTQZd0XD+nlaCYGNiFD3KekPZj+KtydlUV
-         GBHe4VDrc0TkJAINjbUkU1oRIpaUuFUYuMn7ucNbaJCshqNDSMgD/84eB1Wl+/Ii08XY
-         oyaEFK3SrTXpqD3v83nluFlt3144W39DThVK/lFCn+F9b1Uwx7xLD4MMhyeQqh+ZpdxI
-         bgM4m5qoV1fseonaD7RWvJZ0LLUslgW2b6y5tIWfnTegsxYEl2ehzkOLvkldWJryQCbc
-         1eBg==
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=6GfiYK3XsIDFicQu8HWsuVPNSPersP+i75lHWh3MHS4=;
+        b=ik4mR1rJpsoZstVwgTSTR3fAXSROKzI4ncT4WR+6h32/TkfPzQPQ0N0uj+RaXLPAPc
+         9LDy11OriUrHzUm/RtoT+3c0wBYBBM5rx4arVg9Q2ehfraMhuJIykjr8ITpecxBPGzFl
+         lYiIJ2etk7ahiCPiTffCBTq8qwbJAWQqimmCRW1KY9epziSsrBJrH4P4mtJ1C8cU9RNR
+         DRvjq9EFdY+xBrzHEjF1X2NzT6AQO/vU1EQyhbvAVdPMqry4thlJ0qYzX/zDJRDZt/N4
+         KaJd+5OpZkLp4UhKqMcHQXs6SG6WNi1oyP9rl1nOhM6OkjML2xRKnKzZleD+1vyrqIFL
+         TAdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=WJzVd1yPkFfY0dHWI4/9R6im1SXcOccfjLmzfufmVns=;
-        b=KDrcfXFHNCZmRYiJFPODvQdS5hyGdp3m7YgWkNm2OuwHPJlIQOpC2CYk7s98rvQHHu
-         d73Ket5f3+ZUNotRaI5KmzCwsha+3mSYCre5BIfZuSXXUejwR7J6JCQ79jWOtaNikXr3
-         KuaS64Zpxql2C/Wt9PCf2Bcj+kFMXkQ2OKf6yG89gPt+iVMOyX4/LQlqaROL/x3OK2Vk
-         2KQmEgpwBHQ681tdIyu7Kvw1pf168rbBMl+RCGKYe+woP/BowplRsocHXz0641mClVRH
-         OcPtEQY5Ihg4zSk5NyXo8eJKe15hLIjbkD3BsrYDxo35T/SnOSnKwJHsyXAIMIQWf8/u
-         nzpQ==
-X-Gm-Message-State: AOAM532xDwgIpjdUICzoDxgDy9cerTsFn9K6j3Wl8VfgqwJjnNS0nmXp
-	B3vLsSEAuLN2kWinzi4uC1wnvOOv54snVQ==
-X-Google-Smtp-Source: ABdhPJxLk2tYHHANpcd6fQ/QiecdiQ224VTzX8IbeOqbotGPzfuOAcx0/f3WVl7n74tqFzl9bL6+Sg==
-X-Received: by 2002:a05:651c:11c9:: with SMTP id z9mr13184401ljo.96.1608805888712;
-        Thu, 24 Dec 2020 02:31:28 -0800 (PST)
-Return-Path: <dmitry.baryshkov@linaro.org>
-Received: from umbar.lan ([94.25.228.59])
-        by smtp.gmail.com with ESMTPSA id l84sm3552553lfd.75.2020.12.24.02.31.27
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Dec 2020 02:31:27 -0800 (PST)
-From: "Dmitry Baryshkov" <dbaryshkov@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v2 2/2] android-tools-conf: fix android-tools build-deps warning
-Date: Thu, 24 Dec 2020 13:31:24 +0300
-Message-Id: <20201224103124.3387695-2-dmitry.baryshkov@linaro.org>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201224103124.3387695-1-dmitry.baryshkov@linaro.org>
-References: <20201224103124.3387695-1-dmitry.baryshkov@linaro.org>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=6GfiYK3XsIDFicQu8HWsuVPNSPersP+i75lHWh3MHS4=;
+        b=cV4k1lpgzyIl7QwRVYMBWeQtkNLiUHVgYY+Qu0iWvL5hRqVSgcUYOWMzsEWXWDi6et
+         yoXCnmHnXQ8QZQCKwYp7GUCeciPHkAYWDNQWmb/4WDk/ceCs+1n0bdw5WqPAXbQ5wJyn
+         NruPxFOtf33Mlt7o4DtCPLdGnR3fHkgdIW5+LuFXmyfvUWuhu0DwYDNKTVVSEOB+dPcb
+         uLOKv+KFRrqV2s46aRNkWJAo/eMILZ0hDVXCqBAdYNtiH96Q3q9PuABaweotHye9dB1Q
+         /kLY70kZdpTZy7TFa+Xyvethimq5/sftpA1CzBVFHj0h+k8A6YaaMzO58VIrD9CFaflH
+         SR4A==
+X-Gm-Message-State: AOAM530DF+Jjbp3lhNoZ7EIO14Auek3GSOCB9/Vsygq5Vq7v3oe5HfwM
+	Zadubt3+0M69kHtnbYdlpk+AXtsbdoKSmz/QheU=
+X-Google-Smtp-Source: ABdhPJyh+63R9J8iw7/XfKSqLVDnqRqGbkQgAIvewdCrv5w+qAGNoMzMrxe4wUjYbTuiOXUPVEcXJ58/rXPJ++I3Ums=
+X-Received: by 2002:a17:906:5293:: with SMTP id c19mr27936776ejm.72.1608806722272;
+ Thu, 24 Dec 2020 02:45:22 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20201223031046.513846-1-dmitry.baryshkov@linaro.org> <CAMKF1srVQdu6RfOcROq6ca4ppUGpr5BOSZBDPTNKSGTLGnj8HA@mail.gmail.com>
+In-Reply-To: <CAMKF1srVQdu6RfOcROq6ca4ppUGpr5BOSZBDPTNKSGTLGnj8HA@mail.gmail.com>
+From: "Dmitry Baryshkov" <dbaryshkov@gmail.com>
+Date: Thu, 24 Dec 2020 13:45:11 +0300
+Message-ID: <CALT56yNSY9kx=B1YMtzz9HUw48D8ujgnVRmjWEn0V-oQZ7+KAQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/2] android-tools-conf-configfs: add an alternative to anrdoid-tools-conf
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-If PREFERRED_PROVIDER_android-tool-conf is set, build-deps checker will
-incorrectly resolve android-tools-conf runtime dependency to
-android-tools-conf recipe rather than the selected recipe. To fix the
-following warning, make android-tools-conf recipe raise SkipRecipe if it
-is not the preferred android-tools-conf provider.
+=D1=87=D1=82, 24 =D0=B4=D0=B5=D0=BA. 2020 =D0=B3. =D0=B2 09:34, Khem Raj <r=
+aj.khem@gmail.com>:
+>
+> I am seeing this warning
+>
+> WARNING: /mnt/b/yoe/master/sources/meta-openembedded/meta-oe/recipes-devt=
+ools/android-tools/android-to
+> ols-conf-configfs_1.0.bb: Unable to get checksum for
+> android-tools-conf-configfs SRC_URI entry android
+> -gadget-setup.machine: file could not be found
 
-WARNING: android-tools-5.1.1.r37-r0 do_package_qa: QA Issue: android-tools-adbd rdepends on android-tools-conf, but it isn't a build dependency, missing android-tools-conf in DEPENDS or PACKAGECONFIG? [build-deps]
+Oops. Should be fixed in v2
 
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
----
- .../android-tools/android-tools-conf_1.0.bb                | 7 +++++++
- 1 file changed, 7 insertions(+)
+>
+> while building for qemuriscv32
 
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb b/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb
-index af98f92f05e2..34b1a9bdd289 100644
---- a/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb
-@@ -11,3 +11,10 @@ do_install() {
-     install -d ${D}${bindir}
-     install -m 0755 ${WORKDIR}/android-gadget-setup ${D}${bindir}
- }
-+
-+python () {
-+    pn = d.getVar('PN')
-+    profprov = d.getVar("PREFERRED_PROVIDER_" + pn)
-+    if profprov and pn != profprov:
-+        raise bb.parse.SkipRecipe("PREFERRED_PROVIDER_%s set to %s, not %s" % (pn, profprov, pn))
-+}
--- 
-2.29.2
-
+--=20
+With best wishes
+Dmitry
