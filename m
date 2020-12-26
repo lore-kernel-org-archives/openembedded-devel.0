@@ -1,84 +1,107 @@
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.web12.14580.1608931069958531817
+Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
+ by mx.groups.io with SMTP id smtpd.web12.16645.1608945658993761648
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Dec 2020 13:17:50 -0800
+ Fri, 25 Dec 2020 17:20:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=oJy7cysj;
- spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: rfried.dev@gmail.com)
-Received: by mail-wm1-f41.google.com with SMTP id c124so4142421wma.5
-        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Dec 2020 13:17:49 -0800 (PST)
+ dkim=pass header.i=@linaro.org header.s=google header.b=Xtb5S3xi;
+ spf=pass (domain: linaro.org, ip: 209.85.167.42, mailfrom: dmitry.baryshkov@linaro.org)
+Received: by mail-lf1-f42.google.com with SMTP id x20so12209800lfe.12
+        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Dec 2020 17:20:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=TakUp7nSOizyDSaqsTMZF0GFIq/LbST1wzUE8tBLt08=;
-        b=oJy7cysjPhxSCLnZ62W8dNEGUZmBm878zVCCErGrWMim5A0I9jjEOXrKHeLcCq3v1B
-         G17/eJrqW/ZRtNfvQ6ZlfN6i0r5rllw8cSlgGkAIakXVelQaxDeO3dresFPaYNhFshAS
-         Ab+vUnxvDU1PctZBqhH2x36IQb8aNE88y4AKG9Wp2XhIu/UHG2df2XY7P0HdaslcjqhX
-         5SboGYVWEDFBM5ZZ92SV+eNWQOqBiLUegOwvdKH/W5TmxXK82mfwxj3KG70zEEuAH0wR
-         zw6Q5Gtn1U9gAHzUp7YT1v1wv4/m2FwpJgD439LwGb785xAKnD6XehGoDAVHBwNr/iGK
-         YOEA==
+        d=linaro.org; s=google;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=+mGiCMwaatqGJunCpEh3OEOFFhquyAzzOjn0Mn5Cbl0=;
+        b=Xtb5S3xiAYG7jjjGxKNdy+UafXLtvEnyPCVaAZ1dvHHVw1St3+s82RAFvnvOK5kalG
+         nwVko/rx7byAh+fjRc0opswS+kPnwKUO1Pb/6ZxGnMk8EyJyyRbJgJFdjhkwwlDjCk9H
+         yoeBtzyo2Q8M0qLWN/oiwR20dJYWzd2OGrFF75VmmP05kOAiGqB40XU1D7rUoPvShtyX
+         ZukVBRgQwWDrbaJq9i1tLzRZiTnbF4p8KphtSppH8YGLdJqulnAcSwKQts5eMLLoIAPO
+         jeVZR2TeBEl0Ih4a9VF4VPoT6Eh8RrtLyQz5mOrAGNVFe8osnJMSimcopxYsBxXpCYkZ
+         E+dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=TakUp7nSOizyDSaqsTMZF0GFIq/LbST1wzUE8tBLt08=;
-        b=ECQLe+BtGZ44Vm5jZrNU3y7v1r1GQ+qG2lB7v2rbYLW9lkjL0yHtIQyWWfLbziRttD
-         ynbBfIOaDlNsOErS8T/2KANluZlEu6pQyahE5tgWTqhRjbVWuvpbtO8yj4+hzS+gm9mF
-         gO2hlzVeXsW1bjBm1vcKaqaaF2n2MHC0qBu4vltldwnEhg+NTqnhrvZJc2NCEYM013NY
-         oSvOMHTVdbYAjoWSqK5pEkjBZcaM2cwoOw5LaP1RjiuOtTqyK08MXe/Ns7oCbDzvyPmc
-         tP+ZTH/KK1++UXS14K1bkgmRKIgpFUZInFj0QdXrnfL6OY2AboW+pQbKkniV1Eh0cDkM
-         5ZnA==
-X-Gm-Message-State: AOAM530wJRYjKMP6k7avWjWr85D3XTmN/R3484Ve8dKbI5bYPAASH2z3
-	krs07D9/KCyJ6PJXvMaeZq8iqUZHdcswKg==
-X-Google-Smtp-Source: ABdhPJwx93eoz436EXu+79fOWCKBRhnajsx8j6Z4lj3rahiXlMGmXshBY1eHuDa6oNdOtr1BaaY16w==
-X-Received: by 2002:a1c:4107:: with SMTP id o7mr9916545wma.69.1608931067964;
-        Fri, 25 Dec 2020 13:17:47 -0800 (PST)
-Return-Path: <rfried.dev@gmail.com>
-Received: from lotus.nr.ent (82.166.25.98.fix.netvision.net.il. [82.166.25.98])
-        by smtp.gmail.com with ESMTPSA id o7sm45916327wrw.62.2020.12.25.13.17.46
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=+mGiCMwaatqGJunCpEh3OEOFFhquyAzzOjn0Mn5Cbl0=;
+        b=XIhJC++KCmYGkzKIjva3av6mAIx9DVVNeVjvkdz0saDHqyriINX7Q1W+SzzYsKtfW6
+         i9QpCR9RcIXcIlv/ky/356T43SpiX62ItGhbglO9zqeFzd6/WOzeymIbsk/ume3pbiRd
+         86ZJr6Yn1ZKnexHu+v4IjbF2CKnT4Q5kxnuJYXSMoKCVzVO7wUONE508nutATn48z6ZY
+         MmrCXDgAlDsLwe8mO322zfQehrQFnv5h3yB8hSpUeSVGhfN/Tfl7uabqpXU7nGYUYQUu
+         5mEDaqHzH+B6a7PyXhtAyAcsJKuM2DezRGR2nGTKPjDRmt3hkCMAa5L12AT9TQMPmFZl
+         odtg==
+X-Gm-Message-State: AOAM532fha0Znp/iptrJJRcEXXcfhejs6RblTYM3/u8Z8wyX5v+iqUJo
+	VyfF3LteQ327W2SF+lEGH6IO4yoXzvxGSA==
+X-Google-Smtp-Source: ABdhPJxdDd5gcMRnJHC+aOW+hECdHyoL14S/jsUUtPdiJ21IAGoQvtuW93pz+Od1lUqnDpeJo7Dakg==
+X-Received: by 2002:a2e:8709:: with SMTP id m9mr18212710lji.307.1608945656494;
+        Fri, 25 Dec 2020 17:20:56 -0800 (PST)
+Return-Path: <dmitry.baryshkov@linaro.org>
+Received: from umbar.lan ([94.25.228.59])
+        by smtp.gmail.com with ESMTPSA id a15sm4306317lfg.27.2020.12.25.17.20.55
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Dec 2020 13:17:47 -0800 (PST)
-From: "Ramon Fried" <rfried.dev@gmail.com>
+        Fri, 25 Dec 2020 17:20:55 -0800 (PST)
+From: "Dmitry Baryshkov" <dbaryshkov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ramon Fried <rfried.dev@gmail.com>
-Subject: [meta-oe][PATCH v2] yaml-cpp: add new recipe
-Date: Fri, 25 Dec 2020 23:19:08 +0200
-Message-Id: <20201225211908.39571-1-rfried.dev@gmail.com>
-X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH 1/7] imlib2: add image manipulation libray from englightenment project
+Date: Sat, 26 Dec 2020 04:20:48 +0300
+Message-Id: <20201226012054.3689086-1-dmitry.baryshkov@linaro.org>
+X-Mailer: git-send-email 2.29.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-yaml-cpp is a YAML parser and emitter in C++
-matching the YAML 1.2 spec.
+Restore and update old imlib2 recipe from meta-efl.
 
-Signed-off-by: Ramon Fried <rfried.dev@gmail.com>
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 ---
-v2: Remove redundant FILES_${PN},do_install_append() and PV.
+ meta-oe/recipes-graphics/imlib2/imlib2_git.bb | 39 +++++++++++++++++++
+ 1 file changed, 39 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/imlib2/imlib2_git.bb
 
- .../recipes-support/yaml-cpp/yaml-cpp_0.6.3.bb  | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-oe/recipes-support/yaml-cpp/yaml-cpp_0.6.3.bb
-
-diff --git a/meta-oe/recipes-support/yaml-cpp/yaml-cpp_0.6.3.bb b/meta-oe/recipes-support/yaml-cpp/yaml-cpp_0.6.3.bb
+diff --git a/meta-oe/recipes-graphics/imlib2/imlib2_git.bb b/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
 new file mode 100644
-index 000000000..9d359d624
+index 000000000000..b44b03ce8e78
 --- /dev/null
-+++ b/meta-oe/recipes-support/yaml-cpp/yaml-cpp_0.6.3.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "yaml-cpp parser and emitter library"
-+DESCRIPTION = "yaml-cpp is a YAML parser and emitter in C++ matching the YAML 1.2 spec."
-+HOMEPAGE = "https://github.com/jbeder/yaml-cpp"
-+SECTION = "devel"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=6a8aaf0595c2efc1a9c2e0913e9c1a2c"
++++ b/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
+@@ -0,0 +1,39 @@
++SUMMARY = "A graphic library for file loading, saving, rendering, and manipulation"
 +
-+# yaml-cpp releases are stored as archive files in github.
-+# download the exact revision of release
-+SRC_URI = "git://github.com/jbeder/yaml-cpp.git"
-+SRCREV = "9a3624205e8774953ef18f57067b3426c1c5ada6"
++HOMEPAGE = "https://sourceforge.net/projects/enlightenment/"
++SECTION = "libs"
++LICENSE = "MIT & BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
 +
++DEPENDS = "freetype "
++PROVIDES = "virtual/imlib2"
++PV = "1.7.1"
++SRCREV = "v1.7.1"
++
++inherit autotools pkgconfig lib_package
++
++AUTO_LIBNAME_PKGS = ""
++
++SRC_URI = "git://git.enlightenment.org/legacy/${BPN}.git;protocol=https"
 +S = "${WORKDIR}/git"
 +
-+inherit cmake
++PACKAGECONFIG ??= "jpeg png zlib ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 +
-+EXTRA_OECMAKE = "-DYAML_CPP_BUILD_TESTS=OFF -DYAML_BUILD_SHARED_LIBS=ON -DYAML_CPP_BUILD_TOOLS=OFF"
++X11_DEPS = "virtual/libx11 libxext libice"
++PACKAGECONFIG[x11] = "--with-x,--without-x,${X11_DEPS}"
++
++PACKAGECONFIG[gif] = "--with-gif,--without-gif,giflib"
++PACKAGECONFIG[jpeg] = "--with-jpeg,--without-jpeg,jpeg"
++PACKAGECONFIG[png] = "--with-png,--without-png,libpng"
++PACKAGECONFIG[tiff] = "--with-tiff,--without-tiff,tiff"
++PACKAGECONFIG[webp] = "--with-webp,--without-webp,libwebp"
++
++PACKAGECONFIG[bzip2] = "--with-bzip2,--without-bzip2,bzip2"
++PACKAGECONFIG[zlib] = "--with-zlib,--without-zlib,zlib"
++
++PACKAGECONFIG[id3] = "--with-id3,--without-id3,libid3tag"
++
++PACKAGES =+ "${BPN}-loaders ${BPN}-filters ${BPN}-data"
++FILES_${PN}-data = "${datadir}"
++FILES_imlib2-loaders = "${libdir}/imlib2/loaders/*.so"
++FILES_imlib2-filters = "${libdir}/imlib2/filters/*.so"
 -- 
-2.17.1
+2.29.2
 
