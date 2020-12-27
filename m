@@ -1,93 +1,77 @@
-Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
- by mx.groups.io with SMTP id smtpd.web11.17023.1608947418196026586
+Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com [209.85.222.173])
+ by mx.groups.io with SMTP id smtpd.web08.28124.1609035223670066696
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Dec 2020 17:50:18 -0800
+ Sat, 26 Dec 2020 18:13:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=tpGQeix8;
- spf=pass (domain: linaro.org, ip: 209.85.167.41, mailfrom: dmitry.baryshkov@linaro.org)
-Received: by mail-lf1-f41.google.com with SMTP id y19so12239799lfa.13
-        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Dec 2020 17:50:17 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=q1U+YZPD;
+ spf=pass (domain: gmail.com, ip: 209.85.222.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f173.google.com with SMTP id z11so6434165qkj.7
+        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Dec 2020 18:13:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=BBVNghdQum7YqWAcUhLXj+UfI3OJVQN9ohGcxVitQbM=;
-        b=tpGQeix8W99M2GXEkTrrFpJ3AHQTBfbWFK/vFqDyE8qOApd+ukVm/5l6OXGTbVO+pV
-         /MV6RjNtCDHjGa18fulYVOxGKjX8BEbBvuyZrpppiicTjQbpK+zie8l7CAg/QQowv617
-         eZNU/Jnjr1S0w7sU1QOWx/d9A+0Nf7e6ilyC2Y8BqlydlNkWTob18Z1gEh5cnPG3vo8Q
-         ERawA7NHGMrGsSBOvs5mHGFiRP7xUKOfM60Bswi9p3FRi7Qw0sM9WfBqrMduUHCsiTOJ
-         7HoYhe1ZCAWSUXHRNRal4sf5FLdLYa+BHSMcGiX51NFHLlpPAI+hLUp5ClIGsd9g0HFD
-         7tAQ==
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=7xciG7/REwx/qaxUvFbcj7UbB3f0KxaN04fJ8fp2jdc=;
+        b=q1U+YZPDb7VzBVFSNu3jD4mgOJglIV5ofZ4wOZIRdTv50kvuwwBCnDyaLPnSG3gotQ
+         Ykf7l3h633Sw2OaqMefer25DKZlCPz0IkWxDdWp2azwwgGkY6ZNfRAdXqzXn3cvrX1fW
+         +futMn5snv+JOz6aaZ2Jxh37Fyko6HCND2jeReVZqjI0AAc9JPuPdhoYgw8wbeQOJhSa
+         xYhtTCb3NcNA7uos8auK8MNmuBPMT1ZbbaYmZtxjmgQiC0+gqX0nh2hTMOBRxZLo/TXO
+         IPWswWWwyFK3rcxH0Ia+vwcN1u2wunwNzCK/NX9sYeMBI0dYsYmYLtEYX4essLaHLzD/
+         EoyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=BBVNghdQum7YqWAcUhLXj+UfI3OJVQN9ohGcxVitQbM=;
-        b=pyDT231URPa7OhzQiJMAe8+jryqM9oz9ntGlj0kMs+Iil2Ufl943GeISXde5ivtpXA
-         lb2oVDuNB48YM6y6h/2ccDWpvNWIPEsZp0r1CyqNu4ZysIuKBhas5Je1FvPtUIHYzcCR
-         jzczogei5973IFD8RsBx3wpXEFYPFTZVSlvqqcYe8b3nZ1X/OIBjKPSlT8c0way429B1
-         cqWVreDJp63DUSmqMdUGtjaw4Al93GCHnofYGrYMChMMK8pBS1lV8y4qhwT2HcFMfZau
-         fBDa211w72qXqX92I4iRsA4WVJwBvpONr/43PJ6s2HDCqfw6Mb7v7l5Iznjta1s1rc+s
-         VafA==
-X-Gm-Message-State: AOAM532hPTjlGwcs4grcprQ85LYwGrjoRhL/V5EunLawjh/urAMcfrYi
-	4/WKbfGVXJ0GlSWiBcQSvYFtlvRphu+r3g==
-X-Google-Smtp-Source: ABdhPJx6lEGb/I512G7QgOf/OqgpTbCd32qIgE0/opGXe854DvJKtL6Zmyvbpf4HTbrm7ugEmADCtg==
-X-Received: by 2002:a19:3d5:: with SMTP id 204mr14072288lfd.21.1608947416095;
-        Fri, 25 Dec 2020 17:50:16 -0800 (PST)
-Return-Path: <dmitry.baryshkov@linaro.org>
-Received: from umbar.lan ([94.25.228.59])
-        by smtp.gmail.com with ESMTPSA id f21sm4338902lfe.6.2020.12.25.17.50.14
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Dec 2020 17:50:15 -0800 (PST)
-From: "Dmitry Baryshkov" <dbaryshkov@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] packagegroup-meta-oe: add new packages
-Date: Sat, 26 Dec 2020 04:50:13 +0300
-Message-Id: <20201226015013.3809622-1-dmitry.baryshkov@linaro.org>
-X-Mailer: git-send-email 2.29.2
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=7xciG7/REwx/qaxUvFbcj7UbB3f0KxaN04fJ8fp2jdc=;
+        b=C1ZGIJsWf4YTy1lDhTAaPFeXEoadcdWvg5Gs5v03La/x1Z7SxXNCoyDRRRkO9F1tcX
+         aM7m6knkac2fEWn8tCRwV4lB9ikLCQAVXbVxf8bFo/NWYp0lXYH88ND9w9C15UalBZM5
+         Tml2rloSs1IMWPQJBZHejxFsBHg8XrfuGwgejevx5bt6MBjaAvgKMEN2hOb+D5t0HVtS
+         6rLu7ykhJVbDhLm5Cn4/ae+4OZIE1x5VsbDY4o71fCtMVHYV6XMgSPdw5WvMOMJCb0fZ
+         TX+PLzRaOAw34DmMhWTVdjpwNpCkFYMCGLNRS/77e1QYaCWGpi6qbCu1GISg5Pwjv+LW
+         rAHw==
+X-Gm-Message-State: AOAM532XsgNZ1aeR0TCMKr+0lZ04T42cz5guctPqpS7AhyEZFarWvAIQ
+	KMSQLFG9xsmW6LmXF7NpRsojsaeRI7UeZjcaolM=
+X-Google-Smtp-Source: ABdhPJzRik0QynTgvthNgdlImwjZusQjAylFGoo+Khk6zDoiI9b2NhCF7FnoIuG3F2i+AfJ486zlIDexnwZctXt+D5E=
+X-Received: by 2002:a37:744:: with SMTP id 65mr37522199qkh.71.1609035222775;
+ Sat, 26 Dec 2020 18:13:42 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20201223031046.513846-1-dmitry.baryshkov@linaro.org>
+ <CAMKF1srVQdu6RfOcROq6ca4ppUGpr5BOSZBDPTNKSGTLGnj8HA@mail.gmail.com> <CALT56yNSY9kx=B1YMtzz9HUw48D8ujgnVRmjWEn0V-oQZ7+KAQ@mail.gmail.com>
+In-Reply-To: <CALT56yNSY9kx=B1YMtzz9HUw48D8ujgnVRmjWEn0V-oQZ7+KAQ@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Sat, 26 Dec 2020 18:13:16 -0800
+Message-ID: <CAMKF1sp0S2fMwNQk6ntoVmswh1DmzdjbYzmOaASf83qBG=H1kQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/2] android-tools-conf-configfs: add an alternative to anrdoid-tools-conf
+To: Dmitry Baryshkov <dbaryshkov@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add several new packages to packagegroup-meta-oe:
- - feh
- - imlib2
- - obconf
- - openbox-xdgmenu
+I am seeing another error on rpi4-64
 
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
----
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+NOTE: Multiple providers are available for runtime android-tools-conf
+(android-tools-conf, android-tools-conf-configfs)
+Consider defining a PREFERRED_RPROVIDER entry to match android-tools-conf
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 5023e495102d..88669625d9a7 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -448,11 +448,13 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
-     ${@bb.utils.contains("PACKAGE_CLASSES", "package_rpm", "dnfdragora", "", d)} \
-     fontforge \
-     fbida \
-+    feh \
-     ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "freeglut", "", d)} \
-     ftgl \
-     fvwm \
-     gtkperf \
-     gphoto2 \
-+    imlib2 \
-     libgphoto2 \
-     graphviz \
-     gtkwave \
-@@ -460,7 +462,9 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
-     libforms \
-     lxdm \
-     numlockx \
-+    obconf \
-     openbox \
-+    openbox-xdgmenu \
-     packagegroup-fonts-truetype \
-     qrencode \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "st", "", d)} \
--- 
-2.29.2
-
+On Thu, Dec 24, 2020 at 2:45 AM Dmitry Baryshkov <dbaryshkov@gmail.com> wro=
+te:
+>
+> =D1=87=D1=82, 24 =D0=B4=D0=B5=D0=BA. 2020 =D0=B3. =D0=B2 09:34, Khem Raj =
+<raj.khem@gmail.com>:
+> >
+> > I am seeing this warning
+> >
+> > WARNING: /mnt/b/yoe/master/sources/meta-openembedded/meta-oe/recipes-de=
+vtools/android-tools/android-to
+> > ols-conf-configfs_1.0.bb: Unable to get checksum for
+> > android-tools-conf-configfs SRC_URI entry android
+> > -gadget-setup.machine: file could not be found
+>
+> Oops. Should be fixed in v2
+>
+> >
+> > while building for qemuriscv32
+>
+> --
+> With best wishes
+> Dmitry
