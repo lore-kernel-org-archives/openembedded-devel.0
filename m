@@ -1,173 +1,251 @@
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
- by mx.groups.io with SMTP id smtpd.web10.34189.1609084244525943169
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web12.40970.1609121795045578228
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Dec 2020 07:50:44 -0800
+ Sun, 27 Dec 2020 18:16:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=PNDcZKS8;
- spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f42.google.com with SMTP id c7so7734267edv.6
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Dec 2020 07:50:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=jLOy4NKs+0uZYLw9+IX4AI1W0dBRqhQfw6iicDU4468=;
-        b=PNDcZKS8WyphMNMqvVfXYY26NSwfxgup1JgJoZXg4lp2MGel50n+jd8cKE8IqLQ49U
-         A2TZkjEWqy95jozj3hBdFX1qk/hRxJeIwyzYdhCSXEPl6DNs8pBBCxYvhwdwr5U680hP
-         fXyYji3DKpgQ0zppz7mjtFGXxeVCQ47NJ9A7vgpQuvl6htzYZQ4mp3eYWCBg6kxkRndM
-         QXNcCVCQsRxl8VycYXf48PyqilQLU1r8ClhgPf5XBXLEAJa3vycqgxDEEjVrl8PfzLwa
-         6qEFyFOI6rYBTbTFFy2Qhnxuz15CUwL4iJOg90nkWe1f+JKRueR7gR7IrDglqBSaLTgl
-         K12w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=jLOy4NKs+0uZYLw9+IX4AI1W0dBRqhQfw6iicDU4468=;
-        b=FcBDpp4LNjpsz6K58kMyCSXxDhu0uxG6sh4Vfo4ZeH9fCuHQgTyNiKMACcDmJQXZ92
-         HO145z5dEfM4BjWOdzQZM8ReBsvuDoxygNZILnGp0DMHW+SJpYZINWlqYa/BOemYpqoc
-         gwHZfTV81JkDXbbS6t7aqasCSQC5fQK8y2zbGIOfrs6BR6JoTnbR/LXYRwSMdiyo57To
-         baiMiB0f67mgwZIVznX8ompuOTy+cWgRGu9+AyHnoAf/0Kr/yYY0eiz+J7V32bw8V+zb
-         kRi8f9dQrPq7sJ3J8mXNP9hu/K2VQXVxxEfBWkw8L9HaKzPphdXcttYGX16YBmDOehAg
-         H9dw==
-X-Gm-Message-State: AOAM532fXLyHRY4TeXxb2C93TXGD3vTPs9QdcwzuWhUqubinw5M0kAii
-	WCaT5gA98rfG+RsLwCa7lqaFUgqGt8o=
-X-Google-Smtp-Source: ABdhPJyhGVmOKhCgO16Pt9EccLU+KUzyIhZuZvN/rI/z244JpX/j2V8HnVgmAtIFGWUEjNqFesu77Q==
-X-Received: by 2002:a05:6402:b4d:: with SMTP id bx13mr39237895edb.93.1609084242963;
-        Sun, 27 Dec 2020 07:50:42 -0800 (PST)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id m7sm35897783eds.73.2020.12.27.07.50.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Dec 2020 07:50:42 -0800 (PST)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] linuxconsole: move jscal to separate package, add to packagegroup
-Date: Sun, 27 Dec 2020 16:50:40 +0100
-Message-Id: <20201227155040.2397149-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.27.0
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.78,453,1599494400"; 
+   d="scan'208";a="102972892"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 28 Dec 2020 10:16:16 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id B718D48990D2
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Dec 2020 10:16:13 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Mon, 28 Dec 2020 10:16:15 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-networking] [PATCH 1/2] libtalloc: upgrade 2.3.0 -> 2.3.1
+Date: Mon, 28 Dec 2020 10:16:13 +0800
+Message-ID: <1609121773-5530-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: B718D48990D2.A41D8
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-* migrate the changes from 'joystick' recipe in meta-ros:
-  https://github.com/ros/meta-ros/commit/ee3a3f6051594bdf39322d43ec08cce0df8f172c
-* add 'joystick' in PROVIDES
-* provide separate joystick-jscal package
-* add PACKAGECONFIG for sdl use only to build ffmvforce
-* respect nonarch_base_libdir to fix QA issue with usrmerge:
-  ERROR: QA Issue: joystick package is not obeying usrmerge distro feature. /lib should be relocated to /usr. [usrmerge]
-  and
-  ERROR: linuxconsole-1.7.0-r0 do_package: QA Issue: linuxconsole: Files/directories were installed but not shipped in any package:
-  /lib
-  /lib/udev
-  /lib/udev/js-set-enum-leds
-  /lib/udev/rules.d
-  /lib/udev/rules.d/80-stelladaptor-joystick.rules
-  Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-  linuxconsole: 5 installed and not shipped files. [installed-vs-shipped]
-  as in:
-  https://github.com/ros/meta-ros/commit/9fbfe41ac55a423afd57d9e24173a5655448acd5
+0001-waf-add-support-of-cross_compile.patch
+Removed since this is included in 2.3.1.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Refresh the following patch:
+avoid-attr-unless-wanted.patch
+options-2.2.0.patch
+
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../packagegroups/packagegroup-meta-oe.bb     |  1 +
- .../linuxconsole/linuxconsole_1.7.0.bb        | 37 +++++++++++++------
- 2 files changed, 26 insertions(+), 12 deletions(-)
+ ...001-waf-add-support-of-cross_compile.patch | 62 -------------------
+ .../libtalloc/avoid-attr-unless-wanted.patch  | 15 ++---
+ .../libtalloc/libtalloc/options-2.2.0.patch   | 25 ++++----
+ ...{libtalloc_2.3.0.bb => libtalloc_2.3.1.bb} |  5 +-
+ 4 files changed, 22 insertions(+), 85 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/libtalloc/libtalloc/0001-waf-add-support-of-cross_compile.patch
+ rename meta-networking/recipes-support/libtalloc/{libtalloc_2.3.0.bb => libtalloc_2.3.1.bb} (90%)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 5023e49510..38e7130075 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -367,6 +367,7 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
-      canutils \
-      libsocketcan \
-      libconfig \
-+     linuxconsole \
-      uml-utilities \
-      libidn \
-      libqb \
-diff --git a/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.0.bb b/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.0.bb
-index c4cd1d609b..fb161b6583 100644
---- a/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.0.bb
-+++ b/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.0.bb
-@@ -8,8 +8,7 @@ HOMEPAGE = "https://sourceforge.net/projects/linuxconsole"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
--DEPENDS = "libsdl2"
--DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-+DEPENDS = "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
- 
- SRC_URI = "\
-     ${SOURCEFORGE_MIRROR}/linuxconsole/linuxconsoletools-${PV}.tar.bz2 \
-@@ -32,21 +31,32 @@ SYSTEMD_PACKAGES += "inputattach"
- SYSTEMD_SERVICE_inputattach = "inputattach.service"
- SYSTEMD_AUTO_ENABLE_inputattach = "enable"
- 
-+PROVIDES += "joystick"
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc/0001-waf-add-support-of-cross_compile.patch b/meta-networking/recipes-support/libtalloc/libtalloc/0001-waf-add-support-of-cross_compile.patch
+deleted file mode 100644
+index e58339afb..000000000
+--- a/meta-networking/recipes-support/libtalloc/libtalloc/0001-waf-add-support-of-cross_compile.patch
++++ /dev/null
+@@ -1,62 +0,0 @@
+-From 4b8463ff43f8983a706b181c5292491f9f954be1 Mon Sep 17 00:00:00 2001
+-From: Changqing Li <changqing.li@windriver.com>
+-Date: Fri, 25 Jan 2019 15:00:59 +0800
+-Subject: [PATCH] waf: add support of cross_compile
+-
+-After upgrade, waf also upgraded
+-
+-on 1.5.19, for cross_compile, subprocess.Popen is set to be
+-samba_cross.cross_Popen, which will not execute testprog on
+-host, but only read result from cross-answers.txt which is
+-passed by option --cross-answer
+-
+-part of old code:
+-    args = Utils.to_list(kw.get('exec_args', []))
+-    proc = Utils.pproc.Popen([lastprog] + args, stdout=Utils.pproc.PIPE, stderr=Utils.pproc.PIPE)
+-
+-but on new version, exec_args is not used and cause do_configure
+-failed with Exec format error
+-
+-fixed by append cross anser related args to cmd
+-
+-Upstream-Status: Submitted [https://gitlab.com/samba-team/samba/merge_requests/211]
+-
+-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+----
+- third_party/waf/waflib/Tools/c_config.py | 11 ++++++-----
+- 1 file changed, 6 insertions(+), 5 deletions(-)
+-
+-diff --git a/third_party/waf/waflib/Tools/c_config.py b/third_party/waf/waflib/Tools/c_config.py
+-index 7608215..767cf33 100644
+---- a/third_party/waf/waflib/Tools/c_config.py
+-+++ b/third_party/waf/waflib/Tools/c_config.py
+-@@ -660,20 +660,21 @@ class test_exec(Task.Task):
+- 	"""
+- 	color = 'PINK'
+- 	def run(self):
+-+		args = self.generator.bld.kw.get('exec_args', [])
+- 		if getattr(self.generator, 'rpath', None):
+- 			if getattr(self.generator, 'define_ret', False):
+--				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()])
+--			else:
+--				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()])
+-+				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()] + args)
+-+			else: 
+-+				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()] + args)
+- 		else:
+- 			env = self.env.env or {}
+- 			env.update(dict(os.environ))
+- 			for var in ('LD_LIBRARY_PATH', 'DYLD_LIBRARY_PATH', 'PATH'):
+- 				env[var] = self.inputs[0].parent.abspath() + os.path.pathsep + env.get(var, '')
+- 			if getattr(self.generator, 'define_ret', False):
+--				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()], env=env)
+-+				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()] + args, env=env)
+- 			else:
+--				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()], env=env)
+-+				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()] + args, env=env)
+- 
+- @feature('test_exec')
+- @after_method('apply_link')
+--- 
+-2.7.4
+-
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch b/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch
+index db3ddce2c..5b7f69ec0 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch
++++ b/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch
+@@ -1,6 +1,6 @@
+---- a/lib/replace/wscript	2015-11-13 16:04:04.000000000 +0100
+-+++ b/lib/replace/wscript	2015-11-13 16:23:20.000000000 +0100
+-@@ -837,8 +837,6 @@ def build(bld):
++--- a/lib/replace/wscript
+++++ b/lib/replace/wscript
++@@ -947,8 +947,6 @@ def build(bld):
+      if not bld.CONFIG_SET('HAVE_INET_ATON'):     REPLACE_SOURCE += ' inet_aton.c'
+      if not bld.CONFIG_SET('HAVE_INET_NTOP'):     REPLACE_SOURCE += ' inet_ntop.c'
+      if not bld.CONFIG_SET('HAVE_INET_PTON'):     REPLACE_SOURCE += ' inet_pton.c'
+@@ -9,12 +9,13 @@
+  
+      if not bld.CONFIG_SET('HAVE_CLOSEFROM'):
+          REPLACE_SOURCE += ' closefrom.c'
+-@@ -852,7 +850,7 @@ def build(bld):
++@@ -962,7 +960,7 @@ def build(bld):
+                        # at the moment:
+                        # hide_symbols=bld.BUILTIN_LIBRARY('replace'),
+                        private_library=True,
+--                      deps='crypt dl nsl socket rt attr' + extra_libs)
+-+                      deps='crypt dl nsl socket rt ' + extra_libs)
++-                      deps='dl attr' + extra_libs)
+++                      deps='dl' + extra_libs)
+  
+-     replace_test_cflags="-Wno-format-zero-length"
++     replace_test_cflags = ''
+      if bld.CONFIG_SET('HAVE_WNO_FORMAT_TRUNCATION'):
 +
-+PACKAGECONFIG ??= "sdl"
-+PACKAGECONFIG[sdl] = ",,libsdl2"
-+
- do_compile() {
-+    if ! ${@bb.utils.contains('PACKAGECONFIG', 'sdl', 'true', 'false', d)}; then
-+        # drop ffmvforce so that we don't need libsdl2
-+        sed '/^PROGRAMS/s/ffmvforce *//g' -i ${S}/utils/Makefile
-+    fi
-+    # respect nonarch_base_libdir path to keep QA check happy
-+    sed 's#DESTDIR)/lib/udev#DESTDIR)/${nonarch_base_libdir}/udev#g' -i ${S}/utils/Makefile
-     oe_runmake
- }
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc/options-2.2.0.patch b/meta-networking/recipes-support/libtalloc/libtalloc/options-2.2.0.patch
+index 3847b013e..46fef1096 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc/options-2.2.0.patch
++++ b/meta-networking/recipes-support/libtalloc/libtalloc/options-2.2.0.patch
+@@ -1,6 +1,6 @@
+-From c6d76c8ade57b996a8123b1c1a3a28ba4666e9c6 Mon Sep 17 00:00:00 2001
+-From: Changqing Li <changqing.li@windriver.com>
+-Date: Thu, 20 Jun 2019 10:57:06 +0800
++From 8a82056ba2f70137714f225d82993aa4b11042da Mon Sep 17 00:00:00 2001
++From: Wang Mingyu <wangmy@cn.fujitsu.com>
++Date: Fri, 25 Dec 2020 14:14:08 +0900
+ Subject: [PATCH] talloc: Add configure options for packages
  
- do_install() {
-     oe_runmake install
+ Add configure options for the following packages:
+@@ -22,12 +22,12 @@ Signed-off-by: Joe Slater <joe.slater@windriver.com>
+ Modified tp apply to version 2.2.0
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ ---
+- lib/replace/wscript | 91 ++++++++++++++++++++++++++++++++++++++++-------------
+- wscript             |  7 ++++-
+- 2 files changed, 76 insertions(+), 22 deletions(-)
++ lib/replace/wscript | 89 +++++++++++++++++++++++++++++++++++----------
++ wscript             |  7 +++-
++ 2 files changed, 75 insertions(+), 21 deletions(-)
  
--    install -Dm 0644 ${WORKDIR}/51-these-are-not-joysticks-rm.rules ${D}${base_libdir}/udev/rules.d/51-these-are-not-joysticks-rm.rules
--    install -Dm 0644 ${WORKDIR}/60-joystick.rules ${D}${base_libdir}/udev/rules.d/60-joystick.rules
-+    install -Dm 0644 ${WORKDIR}/51-these-are-not-joysticks-rm.rules ${D}${nonarch_base_libdir}/udev/rules.d/51-these-are-not-joysticks-rm.rules
-+    install -Dm 0644 ${WORKDIR}/60-joystick.rules ${D}${nonarch_base_libdir}/udev/rules.d/60-joystick.rules
+ diff --git a/lib/replace/wscript b/lib/replace/wscript
+-index 1d01e1e..7bc7666 100644
++index a2bc604..2e2e7bf 100644
+ --- a/lib/replace/wscript
+ +++ b/lib/replace/wscript
+ @@ -25,6 +25,41 @@ def options(opt):
+@@ -81,10 +81,9 @@ index 1d01e1e..7bc7666 100644
+ +    conf.CHECK_HEADERS('linux/types.h crypt.h locale.h compat.h')
+ +    conf.CHECK_HEADERS('attr/xattr.h compat.h ctype.h dustat.h')
+      conf.CHECK_HEADERS('fcntl.h fnmatch.h glob.h history.h krb5.h langinfo.h')
+--    conf.CHECK_HEADERS('libaio.h locale.h ndir.h pwd.h')
++     conf.CHECK_HEADERS('locale.h ndir.h pwd.h')
+ -    conf.CHECK_HEADERS('shadow.h sys/acl.h')
+ -    conf.CHECK_HEADERS('sys/attributes.h attr/attributes.h sys/capability.h sys/dir.h sys/epoll.h')
+-+    conf.CHECK_HEADERS('locale.h ndir.h pwd.h')
+ +    conf.CHECK_HEADERS('shadow.h')
+ +    conf.CHECK_HEADERS('sys/attributes.h sys/dir.h sys/epoll.h')
+ +
+@@ -103,7 +102,7 @@ index 1d01e1e..7bc7666 100644
+      conf.CHECK_HEADERS('port.h')
+      conf.CHECK_HEADERS('sys/fcntl.h sys/filio.h sys/filsys.h sys/fs/s5param.h')
+      conf.CHECK_HEADERS('sys/id.h sys/ioctl.h sys/ipc.h sys/mman.h sys/mode.h sys/ndir.h sys/priv.h')
+-@@ -110,8 +158,9 @@ def configure(conf):
++@@ -121,8 +169,9 @@ def configure(conf):
+      conf.CHECK_HEADERS('sys/fileio.h sys/filesys.h sys/dustat.h sys/sysmacros.h')
+      conf.CHECK_HEADERS('xfs/libxfs.h netgroup.h')
+  
+@@ -115,7 +114,7 @@ index 1d01e1e..7bc7666 100644
+      conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
+      conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs.h')
+      conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
+-@@ -380,20 +429,20 @@ def configure(conf):
++@@ -418,20 +467,20 @@ def configure(conf):
+  
+      strlcpy_in_bsd = False
+  
+@@ -151,7 +150,7 @@ index 1d01e1e..7bc7666 100644
+      conf.CHECK_CODE('''
+                  struct ucred cred;
+ diff --git a/wscript b/wscript
+-index e402069..9976f4c 100644
++index b955d21..4ac6e1e 100644
+ --- a/wscript
+ +++ b/wscript
+ @@ -31,7 +31,12 @@ def options(opt):
+@@ -169,5 +168,5 @@ index e402069..9976f4c 100644
+  def configure(conf):
+      conf.RECURSE('lib/replace')
+ -- 
+-2.7.4
++2.25.1
  
-     install -Dm 0644 ${WORKDIR}/inputattach.service ${D}${systemd_system_unitdir}/inputattach.service
-     install -Dm 0755 ${WORKDIR}/inputattachctl ${D}${bindir}/inputattachctl
- }
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.3.0.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.3.1.bb
+similarity index 90%
+rename from meta-networking/recipes-support/libtalloc/libtalloc_2.3.0.bb
+rename to meta-networking/recipes-support/libtalloc/libtalloc_2.3.1.bb
+index 59deb15b6..07d54b71f 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc_2.3.0.bb
++++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.3.1.bb
+@@ -8,10 +8,9 @@ LIC_FILES_CHKSUM = "file://talloc.h;beginline=3;endline=27;md5=a301712782cad6dd6
  
--PACKAGES += "inputattach joystick"
-+PACKAGES += "inputattach joystick-jscal joystick"
- 
- # We won't package any file here as we are following the same packaging schema
- # Debian does and we are splitting it in 'inputattach' and 'joystick' packages.
-@@ -64,20 +74,23 @@ FILES_joystick += "\
-     ${bindir}/ffmvforce \
-     ${bindir}/ffset \
-     ${bindir}/fftest \
-+    ${bindir}/jstest \
-+    ${nonarch_base_libdir}/udev/rules.d/51-these-are-not-joysticks-rm.rules \
-+    ${nonarch_base_libdir}/udev/js-set-enum-leds \
-+    ${nonarch_base_libdir}/udev/rules.d/60-joystick.rules \
-+    ${nonarch_base_libdir}/udev/rules.d/80-stelladaptor-joystick.rules \
-+"
-+
-+FILES_joystick-jscal = " \
-+    ${datadir}/joystick \
-     ${bindir}/jscal \
-     ${bindir}/jscal-restore \
-     ${bindir}/jscal-store \
--    ${bindir}/jstest \
--    ${datadir}/joystick \
--    ${base_libdir}/udev/rules.d/51-these-are-not-joysticks-rm.rules \
--    ${base_libdir}/udev/js-set-enum-leds \
--    ${base_libdir}/udev/rules.d/60-joystick.rules \
--    ${base_libdir}/udev/rules.d/80-stelladaptor-joystick.rules \
+ SRC_URI = "https://www.samba.org/ftp/talloc/talloc-${PV}.tar.gz \
+            file://options-2.2.0.patch \
+-           file://0001-waf-add-support-of-cross_compile.patch \
  "
+-SRC_URI[md5sum] = "8416b153547add81cd1a4d24e598c890"
+-SRC_URI[sha256sum] = "75d5bcb34482545a82ffb06da8f6c797f963a0da450d0830c669267b14992fc6"
++SRC_URI[md5sum] = "ce40593428c0de6b85946189dcc37b5e"
++SRC_URI[sha256sum] = "ef4822d2fdafd2be8e0cabc3ec3c806ae29b8268e932c5e9a4cd5585f37f9f77"
  
- RDEPENDS_inputattach += "inputattach-config"
+ inherit waf-samba
  
--RDEPENDS_joystick += "\
-+RDEPENDS_joystick-jscal += "\
-     bash \
-     gawk \
- "
 -- 
-2.27.0
+2.25.1
+
+
 
