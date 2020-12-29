@@ -1,76 +1,97 @@
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web12.8895.1609223290160253025
+Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com [209.85.219.54])
+ by mx.groups.io with SMTP id smtpd.web08.110.1609285856261180947
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Dec 2020 22:28:10 -0800
+ Tue, 29 Dec 2020 15:50:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=XB1OwDpB;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id hk16so1005103pjb.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Dec 2020 22:28:10 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=hMKyjk9c;
+ spf=pass (domain: gmail.com, ip: 209.85.219.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f54.google.com with SMTP id h16so7078592qvu.8
+        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Dec 2020 15:50:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=7slEZXeNV69Xl0N00isfDho1nwFQMZA0TbaS4ZlL/jU=;
-        b=XB1OwDpBwVmWqT22lM8N02kVTp6Fcp5cJVCZdOYiSBpTIaHxZTEG2AQIpmrPJY6xRc
-         YB4Jng5dVJdduKIxHdxoglWEg84RV6NtOPJLb5t4h6gpsfxa7xIzOpyEwTx1LynpwvuQ
-         hp+Z8tktv49AMvTNPgtTB80ih/ItBncMaGkwG1CWQVgV3BJCj8+C8vCiEqizWmEIihQA
-         jHzcLMPNLXrhNiu+WUzDzBOKSinGvwJn+FxFwm/wHDEvzusZ3kiBRd3pJLqf6p3XEUtu
-         J7+RErC/1tI+lHmxp/haY3/fL97gdN2u1+MuQXHigT/agzKaWPC3gYFPrjZM/wVExG/g
-         rTkA==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Rqgc05jwuKkWw+ZdHorWMWGxWqvvQVqWKiGK7REwUH0=;
+        b=hMKyjk9cwlTd8zaCV4xVWvkY+53uVNkwX/L2fWMwGT7vvwMI4reMHeAOSHbMKQahW1
+         P2HFv3g5c69v6RCyqwWF7YRn4BBBCQonrREonc9KgjAMD1z9FNPhks8gEJjONmP9N/yB
+         2yf8k+zxoVF1uu3geIrq4ujBn9SC6vl2MsWv04VNdESEAn6Akl2B35MD71fRQS8Yxf6V
+         h08MdCJWoLvfkawrPd3FUVwGjl4UrcmSzr8WK6DudRQwpMi/tTMMZKnLMjyecqmen9Lt
+         Bg8riZd9gQkXA0UuSls8l2XBNjahmJnsFnUJnFZsYet+I12diQWS69MicbZAz2pqkFoG
+         a+vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=7slEZXeNV69Xl0N00isfDho1nwFQMZA0TbaS4ZlL/jU=;
-        b=g2pAxFzxf6qdwK4oUCVqZTGDSFonzGvApvCsSjGdhHPf4zneCrGhfa2CkvRlSJxkWi
-         xqsGYfsvKvyg/A6zfFxJZ1KXT7qnp9GmkFg3S3/HuvkxZsI/Bab2L/4TOctK95XTFnQ6
-         lCf46t7DH+/3BI6yFS070NUsws5GgyOqc8MQxN542/5qWZmheCRqRykgwyxkvxkE6zGT
-         ojyT0OXDiNydUhNAwaAJKEiXQQW/nHRPcxA4k6RjhE7/CNq8cL17JhcV7Fe/2OMut0q1
-         j4Lao6Xo8bAbv0rarWdzVFXXQOL3d5UbN7fH7S3fQO3ZXthzzh5MUUBDbMXUVl4s0zRa
-         ahrg==
-X-Gm-Message-State: AOAM532gq71mkAupPPm/IeDegZOyF3q//xrXIOjRXqdqeuSGf1FbDnnS
-	pHfNzn9aEziZW3Sgqb2zLZ3vvjs23OG+XA==
-X-Google-Smtp-Source: ABdhPJxLEXtwlHzdBUZiVADkZjwpbC4XprBi/YjB0jfGY4vsgdTFXItdiCv4omcsUeGSsTCZO0BVWw==
-X-Received: by 2002:a17:90a:5891:: with SMTP id j17mr2639585pji.166.1609223289523;
-        Mon, 28 Dec 2020 22:28:09 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::92e8])
-        by smtp.gmail.com with ESMTPSA id j23sm22117591pgj.34.2020.12.28.22.28.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Dec 2020 22:28:08 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] iwd: Upgrade to 1.10
-Date: Mon, 28 Dec 2020 22:28:06 -0800
-Message-Id: <20201229062806.1158419-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.29.2
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Rqgc05jwuKkWw+ZdHorWMWGxWqvvQVqWKiGK7REwUH0=;
+        b=Tjy8pvVoViPtiPdoAHlBbTbto6v0e1cFiQeRGDXmQAnuW+kNG5G9h9rpeMR3V2mFiK
+         jzIsBytrMrkoWeqelvbpBMRDxtZEYIm0I4b+rJELeAGYZDKH/Yhe2XckEWxg9fYdGJgD
+         PQZcQ8BNq/uq2dkAyiLSspIIdd4u5P15Ao3vu4QslLzi/sq8Oftdc6ObC5c/rGfJgDw+
+         afiHtKPEqSD5WWlyzzip032yQfAouX4vspRUAfqG1O+FQ698pwHdu5kpPGx0yFDoulpt
+         PfltEhXUED6MLWE3O+ORn1BLXzORC7TCBJURwKEEmEG004C+nUtgA8AOAqiz5Polx3OM
+         toYg==
+X-Gm-Message-State: AOAM530fdVcuHBWyDczeBYEHsyf0CfU00gJ2U4GmqLTWPzL0spOhz1en
+	nj9UnEeMm37vA95Ezh+ISqUHo/a6kNBc1lhAvrGv3a6S2O3XgA==
+X-Google-Smtp-Source: ABdhPJyakbd3GBmB630iERMplxQfXX415NU9eEo6mIRoNkHtZgNMLkvQ5V8BPtyjRvViNh0+i7iVl+IumekYxk7iMpw=
+X-Received: by 2002:a05:6214:28f:: with SMTP id l15mr53619404qvv.38.1609285855321;
+ Tue, 29 Dec 2020 15:50:55 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1609134891-90011-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+In-Reply-To: <1609134891-90011-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Tue, 29 Dec 2020 15:50:29 -0800
+Message-ID: <CAMKF1soLyHNXsN41=6fRB5dRVVWhaxDtiHZT85vOivHOBs3=vA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] giflib: upgrade 5.1.4 -> 5.2.1
+To: zhengruoqin <zhengrq.fnst@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-connectivity/iwd/{iwd_1.9.bb => iwd_1.10.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/iwd/{iwd_1.9.bb => iwd_1.10.bb} (96%)
+I think this is failing leptonica see
 
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.9.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.10.bb
-similarity index 96%
-rename from meta-oe/recipes-connectivity/iwd/iwd_1.9.bb
-rename to meta-oe/recipes-connectivity/iwd/iwd_1.10.bb
-index 25500e6501..b2495348ff 100644
---- a/meta-oe/recipes-connectivity/iwd/iwd_1.9.bb
-+++ b/meta-oe/recipes-connectivity/iwd/iwd_1.10.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
- DEPENDS = "ell"
- 
- SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
--SRCREV = "aa3dc1b95348dea177e9d8c2c3063b29e20fe2e9"
-+SRCREV = "d8dc5a9bd19c5b98d8692801d3cf4e8af495930a"
- S = "${WORKDIR}/git"
- 
- inherit autotools manpages pkgconfig python3native systemd
--- 
-2.29.2
+https://errors.yoctoproject.org/Errors/Details/540373/
+https://errors.yoctoproject.org/Errors/Details/540378/
 
+On Sun, Dec 27, 2020 at 9:55 PM zhengruoqin <zhengrq.fnst@cn.fujitsu.com> wrote:
+>
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> ---
+>  .../giflib/{giflib_5.1.4.bb => giflib_5.2.1.bb}          | 9 ++++-----
+>  1 file changed, 4 insertions(+), 5 deletions(-)
+>  rename meta-oe/recipes-devtools/giflib/{giflib_5.1.4.bb => giflib_5.2.1.bb} (58%)
+>
+> diff --git a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb b/meta-oe/recipes-devtools/giflib/giflib_5.2.1.bb
+> similarity index 58%
+> rename from meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
+> rename to meta-oe/recipes-devtools/giflib/giflib_5.2.1.bb
+> index 21fa352cd..8d3f3f1c9 100644
+> --- a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
+> +++ b/meta-oe/recipes-devtools/giflib/giflib_5.2.1.bb
+> @@ -3,9 +3,7 @@ SECTION = "libs"
+>  LICENSE = "MIT"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
+>
+> -SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
+> -
+> -inherit autotools
+> +SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.gz"
+>
+>  PACKAGES += "${PN}-utils"
+>  FILES_${PN} = "${libdir}/libgif.so.*"
+> @@ -13,7 +11,8 @@ FILES_${PN}-utils = "${bindir}"
+>
+>  BBCLASSEXTEND = "native"
+>
+> +DEPENDS = "xmlto-native"
+>  RDEPENDS_${PN}-utils = "perl"
+>
+> -SRC_URI[md5sum] = "2c171ced93c0e83bb09e6ccad8e3ba2b"
+> -SRC_URI[sha256sum] = "df27ec3ff24671f80b29e6ab1c4971059c14ac3db95406884fc26574631ba8d5"
+> +SRC_URI[md5sum] = "6f03aee4ebe54ac2cc1ab3e4b0a049e5"
+> +SRC_URI[sha256sum] = "31da5562f44c5f15d63340a09a4fd62b48c45620cd302f77a6d9acf0077879bd"
+> --
+> 2.25.1
+>
+>
+>
+>
+> 
+>
