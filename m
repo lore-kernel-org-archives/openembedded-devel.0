@@ -1,114 +1,148 @@
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
- by mx.groups.io with SMTP id smtpd.web10.25310.1609683181219829903
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.web11.25274.1609683181908030968
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 Jan 2021 06:13:01 -0800
+ Sun, 03 Jan 2021 06:13:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=upMcXUCU;
- spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f42.google.com with SMTP id u19so24543837edx.2
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ti+Uc/8Z;
+ spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f52.google.com with SMTP id d17so33382610ejy.9
         for <openembedded-devel@lists.openembedded.org>; Sun, 03 Jan 2021 06:13:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=tpsMPQmR8r9TbehSr2qaRNIKnoBquT12GgPR/bXh5ME=;
-        b=upMcXUCU9rvfH1CqG8HpxbIgz99h+pXnuGMne1JOvB5N/AvMaZghiDMppk4hGsOAvB
-         +F+KYvzVTgh28mxo/97XQu5r1k+6WCPc8Is3Vf8Cdmep/c/xbN70gUhIxftC1Z6Db0Dp
-         Rk3unbpcPqwsIHo8me/Cc1Cg7+pVtPRcPHrGFdUY+C9HZvebud34d3Wma7JI394hmgcG
-         8+85Db8Fj89XjR7D0m4miHOJEtIN7PlOR4dph53FxYFcS/9S6OVj3ebjgKtzoLS+hqbf
-         u+hV+GTI0PSMOrWOAHfBv0XBTAvScgFprEup0H5Y3KOuvWSOkLlRF0axCsxF254zVQ00
-         9ngQ==
+        bh=1CeKjLUgt9j3NgAznKlJdgejtFmBfopWElwa/70vlk0=;
+        b=Ti+Uc/8Z3SZgDn08J93kwoXXJSwenGDZbpVe7HfPXJOcyvtmcjH7RebgbXLL7SeN4d
+         uAf2SqC1h9DiUS5vjI5EneKgDPN9TfBHC/WChO9f61SzACk55doGMWX5z7TDGYv2Cucq
+         w98bbu3KpZWYW5cjmzw1GDl4CqYTrRuo/pqzOapZeR62LzwyxMAQbLB5B3u8xzhMeL5j
+         K/U8uDj2BCKLU1eKCiG0q1mzof6r/j2yfiy9z66c+4Ph586Fuj9xQ+Kua6hWPrg2/hLm
+         qrWsie0WcwAxUiqYgFoanrpWYuh6TyZ2Zijfn44gM+G0nEY7AKSLD0awAke6p0CZxHEf
+         +uig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=tpsMPQmR8r9TbehSr2qaRNIKnoBquT12GgPR/bXh5ME=;
-        b=bgI/GwKVQke+TiDQXe5LXK8m07NWlbqawt8S4eXAjOwJivUU7BHy/SNPAJL5OddZZp
-         p5ucTO912pqL99pM4NPtWgsHt34LDxPGe5C2EXVBrgeJ+ykMSi0tTIMJwgwJ/hVa6Yj5
-         d8gSt7sr5QZgHE4saQqiZGNmxo0OXd7C7rL95jE0SUtXKl1uUy1vdSWweClmVvb8bHem
-         +ltfwf9rgOBImWdboD4aDdupwevbxVR1pjsZRBUBacwI4aIT78bTkKb1+RVUlmnzuxPR
-         siAmlgEjYJniGnKYXYJ2Ls+y5aF75Z3PwGomxsEYsb37mAoxbKxiiOiYZN1OHZ6nizpO
-         iOoA==
-X-Gm-Message-State: AOAM530kutA237ZdOgTZa4BhAp9Y5rUl+Oo5ENEXowa1XGEvdMuda/Aa
-	lvDsy0DDRgDENAYgzFo78LYtjDhmt5o=
-X-Google-Smtp-Source: ABdhPJzJliPz4PUCVMhLhse6TSCvBknyyO4LGHAIFp6z2VCpig/G3pCEIO2/sxmzGlT3VCV7+qjrMg==
-X-Received: by 2002:a50:c209:: with SMTP id n9mr66573290edf.123.1609683179600;
-        Sun, 03 Jan 2021 06:12:59 -0800 (PST)
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=1CeKjLUgt9j3NgAznKlJdgejtFmBfopWElwa/70vlk0=;
+        b=FQk/PUizOCTI3W568TdijDZCQ5MRVsvAqYkidu+UxXN629pF8qZQeJSg7Fq4rvmFwW
+         wXILm4RXl7PGEmAL3eVOnvj+rZTF2t1gsehHeLpkavkYEbSqyq2FvFnUsWCJevQD5Qmi
+         r4/03dFrG56u2sPn8rLkMJK+q7WONpn5dJUj1v2SwofGZSbIGP3RrsuaTnLzXhtBIbTB
+         Ig2z2KgoWhJWWciqFkwtJPY1l1k/oUbydE6YEojfWHTOntj8cWHaMeAgIGQxQYoSR8J6
+         5Kp21k7gsFd7z/AHUuBIxabh+2fNyZItlTVEK5+GQ36C34/OpA/3Es2DuerfGVA9tCDi
+         DNdg==
+X-Gm-Message-State: AOAM53312ZHCf4Z2mPTWsB1ioZar64pjNGgdmTYKwZjcTTEDTFDrzDQ3
+	fDaX2EptRG+LHv1+TYQ9WTnMmyfVdXA=
+X-Google-Smtp-Source: ABdhPJzdPW1sO3YbfZPwFI0mvpgUysqnImYHe+IJ1g4Xg7NGN+ZpQUjKlwJHf7jPaCaFmnfVUEoYTA==
+X-Received: by 2002:a17:907:961b:: with SMTP id gb27mr45257843ejc.313.1609683180513;
+        Sun, 03 Jan 2021 06:13:00 -0800 (PST)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f47430798383ab6418f4c8a.dip0.t-ipconnect.de. [2003:f0:7f47:4307:9838:3ab6:418f:4c8a])
-        by smtp.gmail.com with ESMTPSA id r16sm42385370edp.43.2021.01.03.06.12.58
+        by smtp.gmail.com with ESMTPSA id r16sm42385370edp.43.2021.01.03.06.12.59
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 03 Jan 2021 06:12:58 -0800 (PST)
+        Sun, 03 Jan 2021 06:12:59 -0800 (PST)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH][V2 00/16] xfce pre 4.16 batch
-Date: Sun,  3 Jan 2021 15:12:31 +0100
-Message-Id: <20210103141247.1637618-1-schnitzeltony@gmail.com>
+Subject: [PATCH][V2 01/16] xfce4-panel-profiles: upgrade 1.0.10 -> 1.0.12
+Date: Sun,  3 Jan 2021 15:12:32 +0100
+Message-Id: <20210103141247.1637618-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210103141247.1637618-1-schnitzeltony@gmail.com>
+References: <20210103141247.1637618-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Upgrade apps and panel-plugins / tested before upgrading XFCE core components to
-4.16
+Release notes for 1.0.12
+========================
+New Features:
+- New build option `--docdir` for documentation install path
+- New build option `--mandir` for manpage install path
 
-V1 -> V2: Remove md5 checksums
+General:
+- Manpage `xfce4-panel-profiles.1` is no longer gzipped (#5)
 
-Andreas Müller (16):
-  xfce4-panel-profiles: upgrade 1.0.10 -> 1.0.12
-  xfce4-mount-plugin: upgrade 1.1.3 -> 1.1.5
-  mousepad: upgrade 0.4.2 -> 0.5.2
-  xfce4-screenshooter: upgrade 1.9.7 -> 1.9.8
-  xfce4-taskmanager: upgrade 1.2.3 -> 1.4.0
-  xfce4-calculator-plugin: upgrade 0.7.0 -> 0.7.1
-  xfce4-cpugraph-plugin: upgrade 1.1.0 -> 1.2.0
-  xfce4-datetime-plugin: upgrade 0.8.0 -> 0.8.1
-  xfce4-diskperf-plugin: upgrade 2.6.2 -> 2.6.3
-  xfce4-fsguard-plugin: upgrade 1.1.1 -> 1.1.2
-  xfce4-smartbookmark-plugin: upgrade 0.5.1 -> 0.5.2
-  xfce4-systemload-plugin: upgrade 1.2.3 -> 1.2.4
-  xfce4-verve-plugin: upgrade 2.0.0 -> 2.0.1
-  xfce4-wavelan-plugin: upgrade 0.6.1 -> 0.6.2
-  xfce4-whiskermenu-plugin: upgrade 2.4.6 -> 2.5.1
-  xfce4-xkb-plugin: upgrade 0.8.1 -> 0.8.2
+Bugs Fixed:
+- Release install error: incorrect README filename (#24)
 
- .../{mousepad_0.4.2.bb => mousepad_0.5.1.bb}  |  4 +--
- .../not-create-link-to-locale.patch           |  6 ++--
- ...0.10.bb => xfce4-panel-profiles_1.0.12.bb} |  5 ++--
- ..._1.9.7.bb => xfce4-screenshooter_1.9.8.bb} |  3 +-
- ...er_1.2.3.bb => xfce4-taskmanager_1.4.0.bb} |  3 +-
- ....0.bb => xfce4-calculator-plugin_0.7.1.bb} |  3 +-
- ....1.0.bb => xfce4-cpugraph-plugin_1.2.0.bb} |  3 +-
- ....8.0.bb => xfce4-datetime-plugin_0.8.1.bb} |  3 +-
- ....6.2.bb => xfce4-diskperf-plugin_2.6.3.bb} |  3 +-
- ...1.1.1.bb => xfce4-fsguard-plugin_1.1.2.bb} |  3 +-
- ...1-check-for-fstab.h-during-configure.patch | 30 +++++++++----------
- ...n_1.1.3.bb => xfce4-mount-plugin_1.1.5.bb} |  4 +--
- ...bb => xfce4-smartbookmark-plugin_0.5.2.bb} |  3 +-
- ....3.bb => xfce4-systemload-plugin_1.2.4.bb} |  3 +-
- ...n_2.0.0.bb => xfce4-verve-plugin_2.0.1.bb} |  3 +-
- ...0.6.1.bb => xfce4-wavelan-plugin_0.6.2.bb} |  3 +-
- ...6.bb => xfce4-whiskermenu-plugin_2.5.1.bb} |  3 +-
- ...gin_0.8.1.bb => xfce4-xkb-plugin_0.8.2.bb} |  3 +-
- 18 files changed, 36 insertions(+), 52 deletions(-)
- rename meta-xfce/recipes-apps/mousepad/{mousepad_0.4.2.bb => mousepad_0.5.1.bb} (70%)
+Release notes for 1.0.11
+========================
+* New Features
+      - Add support for saving xfce4-whiskermenu's configuration file
+      - Prefer CSD in XfceTitledDialog
+      - Use XfceTitledDialog from libxfce4ui
+      - Use Xfce's about dialog via libxfce4ui
+      - Add new icons and use reverse DNS for icons and files
+      - Open xfce4-panel on close button (bug #16505)
+    * General
+      - Add new README.md over old README
+      - Try the new and old libxfce4ui gir file name
+      - Add basic GitLab pipeline
+      - Make tarball creation reproducible
+    * Bugs Fixed
+      - Update openSUSE profile and fix build
+      - Removed check for if the menu is installed. This would probably
+        get in the way.
+      - Use current branch in 'make distcheck'
+      - Use configured appname instead of argv[0]
+      - Fix typos in comments.
+    * Updated translations: Albanian, Armenian (Armenia), Belarusian,
+      Chinese (China), Chinese (Hong Kong), Chinese (Taiwan), Czech,
+      Eastern Armenian, Estonian, Hebrew, Hungarian, Indonesian,
+      Interlingue, Persian (Iran), Portuguese, Slovak, Spanish,
+      Turkish
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ .../xfce4-panel-profiles/not-create-link-to-locale.patch    | 6 +++---
+ ...el-profiles_1.0.10.bb => xfce4-panel-profiles_1.0.12.bb} | 5 ++---
+ 2 files changed, 5 insertions(+), 6 deletions(-)
  rename meta-xfce/recipes-apps/xfce4-panel-profiles/{xfce4-panel-profiles_1.0.10.bb => xfce4-panel-profiles_1.0.12.bb} (78%)
- rename meta-xfce/recipes-apps/xfce4-screenshooter/{xfce4-screenshooter_1.9.7.bb => xfce4-screenshooter_1.9.8.bb} (80%)
- rename meta-xfce/recipes-apps/xfce4-taskmanager/{xfce4-taskmanager_1.2.3.bb => xfce4-taskmanager_1.4.0.bb} (61%)
- rename meta-xfce/recipes-panel-plugins/calculator/{xfce4-calculator-plugin_0.7.0.bb => xfce4-calculator-plugin_0.7.1.bb} (65%)
- rename meta-xfce/recipes-panel-plugins/cpugraph/{xfce4-cpugraph-plugin_1.1.0.bb => xfce4-cpugraph-plugin_1.2.0.bb} (66%)
- rename meta-xfce/recipes-panel-plugins/datetime/{xfce4-datetime-plugin_0.8.0.bb => xfce4-datetime-plugin_0.8.1.bb} (66%)
- rename meta-xfce/recipes-panel-plugins/diskperf/{xfce4-diskperf-plugin_2.6.2.bb => xfce4-diskperf-plugin_2.6.3.bb} (72%)
- rename meta-xfce/recipes-panel-plugins/fsguard/{xfce4-fsguard-plugin_1.1.1.bb => xfce4-fsguard-plugin_1.1.2.bb} (71%)
- rename meta-xfce/recipes-panel-plugins/mount/{xfce4-mount-plugin_1.1.3.bb => xfce4-mount-plugin_1.1.5.bb} (57%)
- rename meta-xfce/recipes-panel-plugins/smartbookmark/{xfce4-smartbookmark-plugin_0.5.1.bb => xfce4-smartbookmark-plugin_0.5.2.bb} (66%)
- rename meta-xfce/recipes-panel-plugins/systemload/{xfce4-systemload-plugin_1.2.3.bb => xfce4-systemload-plugin_1.2.4.bb} (71%)
- rename meta-xfce/recipes-panel-plugins/verve/{xfce4-verve-plugin_2.0.0.bb => xfce4-verve-plugin_2.0.1.bb} (66%)
- rename meta-xfce/recipes-panel-plugins/wavelan/{xfce4-wavelan-plugin_0.6.1.bb => xfce4-wavelan-plugin_0.6.2.bb} (66%)
- rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_2.4.6.bb => xfce4-whiskermenu-plugin_2.5.1.bb} (66%)
- rename meta-xfce/recipes-panel-plugins/xkb/{xfce4-xkb-plugin_0.8.1.bb => xfce4-xkb-plugin_0.8.2.bb} (75%)
 
+diff --git a/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles/not-create-link-to-locale.patch b/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles/not-create-link-to-locale.patch
+index 80cdfb903..b5421f6f7 100644
+--- a/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles/not-create-link-to-locale.patch
++++ b/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles/not-create-link-to-locale.patch
+@@ -12,11 +12,11 @@ diff --git a/Makefile.in.in b/Makefile.in.in
+ index c0ce866..c2f26fe 100644
+ --- a/Makefile.in.in
+ +++ b/Makefile.in.in
+-@@ -61,7 +61,6 @@ install: all xfce4-panel-profiles.1.gz
++@@ -70,7 +70,6 @@ install: all xfce4-panel-profiles.1
+  	install data/metainfo/*.xml $(DESTDIR)/$(PREFIX)/share/metainfo
+  
+  	cp -rf locale $(DESTDIR)/$(PREFIX)/share
+ -	ln -sf $(PREFIX)/share/locale $(DESTDIR)/$(PREFIX)/share/$(APPNAME)/locale
+  
+- 	install -d $(DESTDIR)/$(PREFIX)/share/man/man1
+- 	install xfce4-panel-profiles.1.gz $(DESTDIR)/$(PREFIX)/share/man/man1
++ 	install -d $(DESTDIR)/$(MANDIR)/man1
++ 	install xfce4-panel-profiles.1 $(DESTDIR)/$(MANDIR)/man1
+diff --git a/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.10.bb b/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.12.bb
+similarity index 78%
+rename from meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.10.bb
+rename to meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.12.bb
+index 7226b1a03..1fcb7edc0 100644
+--- a/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.10.bb
++++ b/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.12.bb
+@@ -3,7 +3,7 @@ SECTION = "x11/application"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+-inherit python3native gettext features_check
++inherit python3native gettext gtk-icon-cache features_check
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+@@ -12,8 +12,7 @@ DEPENDS += "intltool-native"
+ SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/1.0/${BP}.tar.bz2 \
+            file://not-create-link-to-locale.patch \
+            "
+-SRC_URI[md5sum] = "6190678bc701c197babcb2389ba46182"
+-SRC_URI[sha256sum] = "a84d5e748d53bc5da269954cc3ad7f5ac0c4f5813acfd3892ea6f9064f17fb68"
++SRC_URI[sha256sum] = "246e459d2d2f3f524968440ed7fddb2a891567ebc05f10a800f7f5821b3452a7"
+ 
+ do_configure() {
+     # special configure - no autotools...
 -- 
 2.26.2
 
