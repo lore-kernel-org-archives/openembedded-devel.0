@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.1363.1609787965879685434
+ by mx.groups.io with SMTP id smtpd.web09.1345.1609787968061381697
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Jan 2021 11:19:26 -0800
+ Mon, 04 Jan 2021 11:19:28 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=39382 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kwVO0-0007Kw-8z; Mon, 04 Jan 2021 21:19:25 +0200
+	id 1kwVO2-0007Kw-Fy; Mon, 04 Jan 2021 21:19:27 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-nocasedict: Upgrade 1.0.1 -> 1.0.2
-Date: Mon,  4 Jan 2021 21:19:15 +0200
-Message-Id: <20210104191916.7071-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-soupsieve: Upgrade 2.0.1 -> 2.1
+Date: Mon,  4 Jan 2021 21:19:16 +0200
+Message-Id: <20210104191916.7071-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210104191916.7071-1-leon.anavi@konsulko.com>
 References: <20210104191916.7071-1-leon.anavi@konsulko.com>
@@ -30,52 +30,50 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.0.2:
+Upgrade to release 2.1:
 
-- Migrated from Travis and Appveyor to GitHub Actions. This
-  required changes in several areas including dependent packages
-  used for testing and coverage. This did not cause any changes
-  on dependent packages used for the installation of the package.
-
-License-Update: File changed but the licence remains the same.
+- Officially support Python 3.9.
+- Drop official support for Python 3.5.
+- In order to avoid conflicts with future CSS specification
+  changes, non-standard pseudo classes will now start with the
+  :-soup- prefix. As a consequence, :contains() will now be known
+  as :-soup-contains(), though for a time the deprecated form of
+  :contains() will still be allowed with a warning that users
+  should migrate over to :-soup-contains().
+- Added new non-standard pseudo class :-soup-contains-own() which
+  operates similar to :-soup-contains() except that it only looks
+  at text nodes directly associated with the currently scoped
+  element and not its descendants.
+- Import bs4 globally instead of in local functions as it appears
+  there are no adverse affects due to circular imports as bs4 does
+  not immediately reference soupsieve functions and soupsieve does
+  not immediately reference bs4 functions. This should give a
+  performance boost to functions that had previously included bs4
+  locally.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python3-nocasedict_1.0.1.bb  | 9 ---------
- .../recipes-devtools/python/python3-nocasedict_1.0.2.bb  | 8 ++++++++
- 2 files changed, 8 insertions(+), 9 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-nocasedict_1.0.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb
+ .../{python3-soupsieve_2.0.1.bb => python3-soupsieve_2.1.bb}   | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-soupsieve_2.0.1.bb => python3-soupsieve_2.1.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-nocasedict_1.0.1.bb b/meta-python/recipes-devtools/python/python3-nocasedict_1.0.1.bb
-deleted file mode 100644
-index af5da52f68..0000000000
---- a/meta-python/recipes-devtools/python/python3-nocasedict_1.0.1.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--SUMMARY = "A case-insensitive ordered dictionary for Python"
--HOMEPAGE = "https://github.com/pywbem/nocasedict"
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742"
--
--SRC_URI[md5sum] = "93e7f19f73c7cd56c36cd7535b6b9ab1"
--SRC_URI[sha256sum] = "6e5d5bd11de33f93d22545d9ed23a0b98f840f2cdac0d749d2faa4617adc7772"
--
--inherit pypi setuptools3
-diff --git a/meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb b/meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb
-new file mode 100644
-index 0000000000..952286d37c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb
-@@ -0,0 +1,8 @@
-+SUMMARY = "A case-insensitive ordered dictionary for Python"
-+HOMEPAGE = "https://github.com/pywbem/nocasedict"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a87a7059d580c45495c1218f53e3610d"
-+
-+SRC_URI[sha256sum] = "86e2dae49e34de7c31b65b486c8f9aa58b66dc2e8ee9b34c390c6c58885c85a0"
-+
-+inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-soupsieve_2.0.1.bb b/meta-python/recipes-devtools/python/python3-soupsieve_2.1.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-soupsieve_2.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-soupsieve_2.1.bb
+index ae242af562..7cb0efbf97 100644
+--- a/meta-python/recipes-devtools/python/python3-soupsieve_2.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-soupsieve_2.1.bb
+@@ -4,8 +4,7 @@ HOMEPAGE = "https://github.com/facelessuser/soupsieve"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5a6fd3b0c24fc5a041a3d1bbb22c81b5"
+ 
+-SRC_URI[md5sum] = "62a7481c7dbf6d8cc21e4e3a79c72034"
+-SRC_URI[sha256sum] = "a59dc181727e95d25f781f0eb4fd1825ff45590ec8ff49eadfd7f1a537cc0232"
++SRC_URI[sha256sum] = "6dc52924dc0bc710a5d16794e6b3480b2c7c08b07729505feab2b2c16661ff6e"
+ 
+ inherit pypi setuptools3 ptest
+ 
 -- 
 2.17.1
 
