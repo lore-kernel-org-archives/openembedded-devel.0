@@ -1,66 +1,58 @@
 Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.8381.1609726761082309373
+ by mx.groups.io with SMTP id smtpd.web10.8393.1609726803905258125
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 Jan 2021 18:19:21 -0800
+ Sun, 03 Jan 2021 18:20:04 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.78,472,1599494400"; 
-   d="scan'208";a="103150967"
+   d="scan'208";a="103150984"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 04 Jan 2021 10:19:20 +0800
+  by heian.cn.fujitsu.com with ESMTP; 04 Jan 2021 10:20:02 +0800
 Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id DF3314CE6025
-	for <openembedded-devel@lists.openembedded.org>; Mon,  4 Jan 2021 10:19:18 +0800 (CST)
+	by cn.fujitsu.com (Postfix) with ESMTP id 448344CE546D
+	for <openembedded-devel@lists.openembedded.org>; Mon,  4 Jan 2021 10:20:01 +0800 (CST)
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Mon, 4 Jan 2021 10:19:20 +0800
+ (TLS) id 15.0.1497.2; Mon, 4 Jan 2021 10:20:02 +0800
 From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] terminus-font: upgrade 4.48 -> 4.49.1
-Date: Mon, 4 Jan 2021 22:19:17 +0800
-Message-ID: <1609769957-7663-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+Subject: [oe] [meta-perl] [PATCH] libnet-ldap-perl: upgrade 0.66 -> 0.67
+Date: Mon, 4 Jan 2021 22:19:59 +0800
+Message-ID: <1609769999-7742-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
 X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: DF3314CE6025.A2EFD
+X-yoursite-MailScanner-ID: 448344CE546D.A1AD1
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
 Content-Type: text/plain
 
--License-Update: Copyright year updated to 2020.
-
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../{terminus-font_4.48.bb => terminus-font_4.49.1.bb}      | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-graphics/terminus-font/{terminus-font_4.48.bb => terminus-font_4.49.1.bb} (87%)
+ .../{libnet-ldap-perl_0.66.bb => libnet-ldap-perl_0.67.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/libnet/{libnet-ldap-perl_0.66.bb => libnet-ldap-perl_0.67.bb} (88%)
 
-diff --git a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.48.bb b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.49.1.bb
-similarity index 87%
-rename from meta-oe/recipes-graphics/terminus-font/terminus-font_4.48.bb
-rename to meta-oe/recipes-graphics/terminus-font/terminus-font_4.49.1.bb
-index dc263fda4..789e7eb99 100644
---- a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.48.bb
-+++ b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.49.1.bb
-@@ -6,13 +6,13 @@ AUTHOR = "Dimitar Zhekov"
- SECTION = "fonts"
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.66.bb b/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.67.bb
+similarity index 88%
+rename from meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.66.bb
+rename to meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.67.bb
+index 26c7c389d..57b5fbf89 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.66.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.67.bb
+@@ -11,8 +11,8 @@ LIC_FILES_CHKSUM = "file://README;beginline=3;endline=5;md5=4d6588c2fa0d38ae162f
  
- LICENSE = "OFL-1.1"
--LIC_FILES_CHKSUM = "file://OFL.TXT;md5=9b226721636fde0db38ea656c2aae4bf"
-+LIC_FILES_CHKSUM = "file://OFL.TXT;md5=f57e6cca943dbc6ef83dc14f1855bdcc"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/M/MA/MARSCHAP/perl-ldap-${PV}.tar.gz"
  
- DEPENDS = "hostperl-runtime-native gzip-native bdftopcf-native"
+-SRC_URI[md5sum] = "c4c1ae9299cd488e75c1b82904458bef"
+-SRC_URI[sha256sum] = "09263ce6166e80c98d689d41d09995b813389fd069b784601f6dc57f8e2b4102"
++SRC_URI[md5sum] = "a949a2bab07b44cc043b965485fe493a"
++SRC_URI[sha256sum] = "19a2f7f7959fe23d16367475772c325109f8604d2949e34b96dddb2dfa031170"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
--SRC_URI[md5sum] = "a2cb88f6cf174f3d07de93b91e115a8d"
--SRC_URI[sha256sum] = "34799c8dd5cec7db8016b4a615820dfb43b395575afbb24fc17ee19c869c94af"
-+SRC_URI[md5sum] = "1b6acbd221957e33c8a792ebfaf3a659"
-+SRC_URI[sha256sum] = "d961c1b781627bf417f9b340693d64fc219e0113ad3a3af1a3424c7aa373ef79"
- 
- inherit allarch fontcache
+ S = "${WORKDIR}/perl-ldap-${PV}"
  
 -- 
 2.25.1
