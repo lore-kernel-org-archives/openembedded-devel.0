@@ -1,100 +1,104 @@
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
- by mx.groups.io with SMTP id smtpd.web10.25320.1609683199835607688
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web09.8077.1609725839626266836
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 Jan 2021 06:13:25 -0800
+ Sun, 03 Jan 2021 18:04:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nxPxobjt;
- spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f41.google.com with SMTP id h16so24503363edt.7
-        for <openembedded-devel@lists.openembedded.org>; Sun, 03 Jan 2021 06:13:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=w0xOtl380XzbywD0fjRovTBRzF8TwEW4/RQdpjgq99I=;
-        b=nxPxobjtoMPisG53NbLLdNfFzjY5klrzgpZvcbIZowxDyHhYjRghERaAa/m2x1/ffu
-         QePoNQxZP9bBX+2pf9n8uavWJ0pAMR93zdlfKJz77X9PgC2BpjM5JJLjtmzxzKIwG4LU
-         nQ8kUZLqFpY/Hf7hJVJnIzSJ6MOAJmjCpqh8nx83TwechfvkgyFm6Y8zADw30l7eCq+P
-         bGhss9H0iPiIwx+hsZkmPuiPvMNEyoe0xVAFWf4H16yhDz4YzP0e/3S276CUoEraoaRT
-         tZL3BGku3rG+sX2Ouz0PsWAucWPhdoVOOyth2ijEvb4pzh9FF9vSyP6LFdNtpugIJpFk
-         vUxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=w0xOtl380XzbywD0fjRovTBRzF8TwEW4/RQdpjgq99I=;
-        b=PFi5d75Vxm/vNRGdfRy0X7EZwLcNuTuV1f03ChD0pU2O6PFyzCWFdIr1aysWPLOPub
-         yy2wCCyd3fA8h1YvEDzUSlbh2jqByRoXIPRQNzL8Wyd8B1LVljI1rwWpwNI9UR412elG
-         bQnGiymD4Zv3rp+KxhabkTgo1jXrD5JX5NvzSQNY9AU7pzoKjZ/Ws0Cvv3PN/b1l+jmE
-         /Nmda9ZKkXfTPvofah4gcIs0wR19nf1JsVMeAVoZUUprVwSbZp/d301vcfb028FTzhDO
-         okB8LKHGKyeqok96gGDabKOB1YdxG7yfIAoi+ktAg8sTi0WU1ge0NZGj2eszFzuWoaZO
-         UZlw==
-X-Gm-Message-State: AOAM532yL93zcGlOaJoHg7nASscYkhuk2mfAp9yPaZEfw5YvASLzPrSo
-	qTvkIqkbgFhlLp7YWw5vemXFtOFWRp0=
-X-Google-Smtp-Source: ABdhPJzimWlW2NZ2EK/lv1YWtIxP1mSHOkbOh3FxnQqE79dT7X+t0ukyCbUxv7n/CvQYaqr6EWkq5A==
-X-Received: by 2002:a50:955b:: with SMTP id v27mr66217995eda.324.1609683193430;
-        Sun, 03 Jan 2021 06:13:13 -0800 (PST)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300f07f47430798383ab6418f4c8a.dip0.t-ipconnect.de. [2003:f0:7f47:4307:9838:3ab6:418f:4c8a])
-        by smtp.gmail.com with ESMTPSA id r16sm42385370edp.43.2021.01.03.06.13.12
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 03 Jan 2021 06:13:12 -0800 (PST)
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH][V2 15/16] xfce4-whiskermenu-plugin: upgrade 2.4.6 -> 2.5.1
-Date: Sun,  3 Jan 2021 15:12:46 +0100
-Message-Id: <20210103141247.1637618-16-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210103141247.1637618-1-schnitzeltony@gmail.com>
-References: <20210103141247.1637618-1-schnitzeltony@gmail.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.78,472,1599494400"; 
+   d="scan'208";a="103150290"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 04 Jan 2021 10:03:37 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id DA28148990D2
+	for <openembedded-devel@lists.openembedded.org>; Mon,  4 Jan 2021 10:03:30 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Mon, 4 Jan 2021 10:03:28 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-networking] [PATCH] wolfssl: upgrade 4.5.0 -> 4.6.0
+Date: Mon, 4 Jan 2021 22:03:25 +0800
+Message-ID: <1609769005-7036-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: DA28148990D2.A09D2
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-Release notes for 2.5.1
-=======================
-- Fix not always using new action icons. (Issue #33)
+0001-Make-ByteReverseWords-available-for-big-and-little-e.patch
+Removed since this is included in 4.6.0
 
-Release notes for 2.5.0
-=======================
-- Add option to show all applications by default. (Issue #4)
-- Rearrange sidebar buttons to match default category. (Issue #9)
-- Show panel button title as tooltip in icon-only mode. (Issue #12)
-- Always sort top-level categories.
-- Vertically center contents of header.
-- Use new Xfce action icons.
-- Use new desktop ids for default programs.
-- Rewrite to hide menu on focus out.
-- Refactor code to use new Xfce functions.
-- Refactor building translations.
-- Translation updates: Bulgarian, Chinese (China), Chinese (Taiwan),
-  Croatian, Czech, Danish, Dutch, Esperanto, French, Galician,
-  German, Italian, Korean, Lithuanian, Malay, Polish, Portuguese,
-  Portuguese (Brazil), Slovak, Spanish, Swedish, Turkish.
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- ...rmenu-plugin_2.4.6.bb => xfce4-whiskermenu-plugin_2.5.1.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_2.4.6.bb => xfce4-whiskermenu-plugin_2.5.1.bb} (66%)
+ ...Words-available-for-big-and-little-e.patch | 32 -------------------
+ .../{wolfssl_4.5.0.bb => wolfssl_4.6.0.bb}    |  3 +-
+ 2 files changed, 1 insertion(+), 34 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/wolfssl/wolfssl/0001-Make-ByteReverseWords-available-for-big-and-little-e.patch
+ rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_4.5.0.bb => wolfssl_4.6.0.bb} (84%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.4.6.bb b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.5.1.bb
-similarity index 66%
-rename from meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.4.6.bb
-rename to meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.5.1.bb
-index bbb274ed9..6077fdfc6 100644
---- a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.4.6.bb
-+++ b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.5.1.bb
-@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl/0001-Make-ByteReverseWords-available-for-big-and-little-e.patch b/meta-networking/recipes-connectivity/wolfssl/wolfssl/0001-Make-ByteReverseWords-available-for-big-and-little-e.patch
+deleted file mode 100644
+index 4676769a4..000000000
+--- a/meta-networking/recipes-connectivity/wolfssl/wolfssl/0001-Make-ByteReverseWords-available-for-big-and-little-e.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From b90acc91d0cd276befe7f08f87ba2dc5ee7122ff Mon Sep 17 00:00:00 2001
+-From: Tesfa Mael <tesfa@wolfssl.com>
+-Date: Wed, 26 Aug 2020 10:13:06 -0700
+-Subject: [PATCH] Make ByteReverseWords available for big and little endian
+-
+----
+- wolfcrypt/src/misc.c | 2 --
+- 1 file changed, 2 deletions(-)
+-
+-diff --git a/wolfcrypt/src/misc.c b/wolfcrypt/src/misc.c
+-index fe66ee0a1..23bfa1adc 100644
+---- a/wolfcrypt/src/misc.c
+-+++ b/wolfcrypt/src/misc.c
+-@@ -120,7 +120,6 @@ WC_STATIC WC_INLINE word32 ByteReverseWord32(word32 value)
+-     return rotlFixed(value, 16U);
+- #endif
+- }
+--#if defined(LITTLE_ENDIAN_ORDER)
+- /* This routine performs a byte swap of words array of a given count. */
+- WC_STATIC WC_INLINE void ByteReverseWords(word32* out, const word32* in,
+-                                     word32 byteCount)
+-@@ -131,7 +130,6 @@ WC_STATIC WC_INLINE void ByteReverseWords(word32* out, const word32* in,
+-         out[i] = ByteReverseWord32(in[i]);
+- 
+- }
+--#endif /* LITTLE_ENDIAN_ORDER */
+- 
+- #if defined(WORD64_AVAILABLE) && !defined(WOLFSSL_NO_WORD64_OPS)
+- 
+--- 
+-2.25.1
+-
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_4.5.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_4.6.0.bb
+similarity index 84%
+rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_4.5.0.bb
+rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_4.6.0.bb
+index 61cf1cc62..ad7e92341 100644
+--- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_4.5.0.bb
++++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_4.6.0.bb
+@@ -13,9 +13,8 @@ PROVIDES += "cyassl"
+ RPROVIDES_${PN} = "cyassl"
  
- inherit xfce-panel-plugin cmake
+ SRC_URI = "git://github.com/wolfSSL/wolfssl.git;protocol=https \
+-           file://0001-Make-ByteReverseWords-available-for-big-and-little-e.patch \
+ "
+-SRCREV = "0fa5af9929ce2ee99e8789996a3048f41a99830e"
++SRCREV = "9c87f979a7f1d3a6d786b260653d566c1d31a1c4"
+ S = "${WORKDIR}/git"
  
--SRC_URI[md5sum] = "81a4a4c7635273485fac5c2d98e48d02"
--SRC_URI[sha256sum] = "8974d38cc87df528693efe4b6e14bcd233cdb49d2018a23ddddf745110b25744"
-+SRC_URI[sha256sum] = "b2074f8a9caa766e2d97f0b960ef2f4d1e20dd804497229bc1f0157791896925"
- 
- RRECOMMENDS_${PN} += "menulibre"
+ inherit autotools
 -- 
-2.26.2
+2.25.1
+
+
 
