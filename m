@@ -1,30 +1,31 @@
 Received: from mail.desaster-games.net (mail.desaster-games.net [176.9.84.136])
- by mx.groups.io with SMTP id smtpd.web09.11285.1609753065790772649
+ by mx.groups.io with SMTP id smtpd.web11.11379.1609753065792198183
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 04 Jan 2021 01:37:46 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: iodoru.org, ip: 176.9.84.136, mailfrom: jubalh@iodoru.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mail.desaster-games.net (Postfix) with ESMTP id CAF662000D;
-	Mon,  4 Jan 2021 10:37:40 +0100 (CET)
+	by mail.desaster-games.net (Postfix) with ESMTP id F07E220007;
+	Mon,  4 Jan 2021 10:37:41 +0100 (CET)
 X-Virus-Scanned: Amavis at mail.desaster-games.com
 Received: from mail.desaster-games.net ([127.0.0.1])
 	by localhost (mail.desaster-games.net [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0lXi1-jXMaz9; Mon,  4 Jan 2021 10:37:27 +0100 (CET)
+	with ESMTP id xZ3LxLBdrOd5; Mon,  4 Jan 2021 10:37:28 +0100 (CET)
 Received: from ymir.suse.de (unknown [195.135.221.27])
-	by mail.desaster-games.net (Postfix) with ESMTPSA id 5C46720007;
-	Mon,  4 Jan 2021 10:37:27 +0100 (CET)
+	by mail.desaster-games.net (Postfix) with ESMTPSA id 8BB172000A;
+	Mon,  4 Jan 2021 10:37:28 +0100 (CET)
 From: "Michael Vetter" <jubalh@iodoru.org>
 To: openembedded-devel@lists.openembedded.org
 Cc: Michael Vetter <jubalh@iodoru.org>
-Subject: [PATCH 1/1] jasper: upgrade 2.0.23 -> 2.0.24
-Date: Mon,  4 Jan 2021 10:37:26 +0100
-Message-Id: <20210104093727.763-1-jubalh@iodoru.org>
+Subject: [meta-oe][PATCH] jasper: upgrade 2.0.23 -> 2.0.24
+Date: Mon,  4 Jan 2021 10:37:27 +0100
+Message-Id: <20210104093727.763-2-jubalh@iodoru.org>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210104093727.763-1-jubalh@iodoru.org>
+References: <20210104093727.763-1-jubalh@iodoru.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Michael Vetter <jubalh@iodoru.org>
 ---
  .../jasper/{jasper_2.0.23.bb =3D> jasper_2.0.24.bb}               | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
