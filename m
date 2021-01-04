@@ -1,60 +1,72 @@
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.web08.1726.1609789330442431647
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web08.2649.1609792888400030179
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Jan 2021 11:42:10 -0800
+ Mon, 04 Jan 2021 12:41:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=N4HSRDkr;
- spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-pj1-f50.google.com with SMTP id lj6so249143pjb.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Jan 2021 11:42:10 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZL7Ycn0p;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id lb18so331518pjb.5
+        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Jan 2021 12:41:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=rfMqdH1KefHSSyWSVi/f8d3EJuxzi4Kb+aOYa3SkdGI=;
-        b=N4HSRDkr+He7YmpFdd29l33A6XkDuePnmz0c0QPJuhAPUKY1FLU0hm9ZYA0mahJysZ
-         3PfRI2kxiLj+rXNUGn+486liPjgwVb13WyHWjvFTt9wM0R4gtseU5VhcYPNPi7in8QoH
-         aM4h7xKnPQYnLpaxBpoAY5dUcKARSy5gxJPuE5gKXmuTaJeDRXwrJn+mPI2g/gTxGq55
-         dNzwV1JR2Q6Fiz+9V7FnUeyVBMzszYhzMQQbEFPvObRHnPWYwetjxz4SyDAeRQgrQZCJ
-         1ZXLJUQ09kGZa/z1JmP1CyfPREG2UhfHNEEWreNjpLVKciUwOKdvmo0lmjqV9q5ovNX3
-         ztIw==
+         :cc:content-transfer-encoding;
+        bh=+EUcgV7Ag1kpV7JgqOo2JzCHEsQefPM7ritXVy7Txo0=;
+        b=ZL7Ycn0pkBVak+c+zdXzFmE7g7lZR4fmhAsu9cv5l2P5wQqTL/5ts/W9kICZ/VQmer
+         XEI56UNQwuRgaeYr52A5JKa+WmO+Gf7zd1J39W+tNnAAjNF6FB6DVvPTzLPWGUH2bSdy
+         1ZZWg9cgYq3Ccxky6OYHG3n5Rsydg+wCj8bRAI/BoJT/tmPY0ZiAbbT8m/I4SvqZbeYZ
+         YHaFnGG6aYPcZFqbB7uQv5p1hGtPG9gRfT41y+1i3GwCoe+peB+G7zbjdUhpwmXNh6M7
+         qOlA6eQPqFtIlPF608JUDsmpIJ7TdChx3TlnEv0yI2p9UeAkShQGPH/UzPHeEpSz109+
+         +dOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=rfMqdH1KefHSSyWSVi/f8d3EJuxzi4Kb+aOYa3SkdGI=;
-        b=BvYST743+6tgBxBpX6ahNrQDLiP0AHV9D9XgEX/iH1hUvbf+k28ZXFoL/qGTB57N+Q
-         av8tFX1BKtDIF8AmObfYxlIJPI1K/j5eSg+pAYo96RK3/YmFnPBc4zWQvGtJF2yJ4pDP
-         cHlKEdpCVRxQ8rQ27nMT4APJjUuo75B7j0KGU5qzdN9Ny5HNNTGYQhJLb6Lq8A8TRyDg
-         KVmsIEJXPSirDytjXWullbm2AEDF6MD9rO1yZbWD6P/g/G6wA1e3qbLg/JwaZdT5FCSs
-         LCmIoxBaM5or001slnWUgc/ytvgablbjshOiH+hgG/CgNaM0a6S63HT6++YN38PSrNyh
-         RTOg==
-X-Gm-Message-State: AOAM532Wso/X0lyuu4spFLWJ2yelgJ84fkQxGQUxR1n8TtxyBqI8L43K
-	0Bk3gmhUPzjNDb5zzeRaFSikhgLC3m0czU8jy+M=
-X-Google-Smtp-Source: ABdhPJw2GXRyDVdHRa3WKYAgKJimeB1kcOB/V+ekeDs7YIHbGOPSdRMj0DeUQg9SOLIZjzIJB2S5PU4+BSDqAvJGLxc=
-X-Received: by 2002:a17:90b:2282:: with SMTP id kx2mr406227pjb.77.1609789329930;
- Mon, 04 Jan 2021 11:42:09 -0800 (PST)
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=+EUcgV7Ag1kpV7JgqOo2JzCHEsQefPM7ritXVy7Txo0=;
+        b=Zzlor245m2ULmq/HfBANEvZ1/mLmXRrly7bZEXlAf3ncAhed2DhxWH/obUMyy+MqrX
+         UThnaYHNVwFR8JpzOl2jbHeTzxr9e4rZk/URIF4oDcQvP6MJy0S4J9y8b9gBqbjOZB5Y
+         14SmqxJZe7KhdUY/X+Z6tVttq0C3Z+KdowR/0Sto0nIF3Hs6yggvf+kMYxfOVARpM2cS
+         1wiKFcOvp0rpIWcdPsIVF6ncWkfwbl+9P9sAvXlrKSeDBJB272YoXaF9Cukm9RTD82/+
+         TfceT9kk9Lj4U/+48YqqrMM1cjFTlGypECyapY8Dz1BqzZTo30V5ttOPY0S363FdheIk
+         r+vw==
+X-Gm-Message-State: AOAM532+M5Wm8m1eYZdhI2d6FTsd+hJYUpX1muPvMKhnprVwG4qdvBHB
+	a2GA3e/CN+fRbG6NPSZURNeNqe3FEpT2p0gof8E=
+X-Google-Smtp-Source: ABdhPJwMKRp7dfJhRLRZXFNdcieDlPzkdMU14ml38ocbT+LdPBatGrNxYMsBXDFC0uTAQJWuP7kwPstaCPwDX1TR4dU=
+X-Received: by 2002:a17:902:d70d:b029:db:fc74:67fa with SMTP id
+ w13-20020a170902d70db02900dbfc7467famr74480417ply.65.1609792887845; Mon, 04
+ Jan 2021 12:41:27 -0800 (PST)
 MIME-Version: 1.0
 References: <20210103141247.1637618-1-schnitzeltony@gmail.com>
  <20210103141247.1637618-3-schnitzeltony@gmail.com> <615e622d-7e4e-561a-ae75-a5c0d3186b69@gmail.com>
-In-Reply-To: <615e622d-7e4e-561a-ae75-a5c0d3186b69@gmail.com>
+ <16571EDE005A7F88.23355@lists.openembedded.org>
+In-Reply-To: <16571EDE005A7F88.23355@lists.openembedded.org>
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-Date: Mon, 4 Jan 2021 20:41:58 +0100
-Message-ID: <CALbNGRRACokX9qvatUo0izaoo=BmL_qhdbWatzoxT4Ombeb=xQ@mail.gmail.com>
+Date: Mon, 4 Jan 2021 21:41:16 +0100
+Message-ID: <CALbNGRTwOY0c_C65czxV2N+3vnB+zg0fF5U-DP4dxNEWr1mXZw@mail.gmail.com>
 Subject: Re: [oe] [PATCH][V2 02/16] xfce4-mount-plugin: upgrade 1.1.3 -> 1.1.5
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 4, 2021 at 8:21 PM Khem Raj <raj.khem@gmail.com> wrote:
+On Mon, Jan 4, 2021 at 8:42 PM Andreas M=C3=BCller via
+lists.openembedded.org
+<schnitzeltony=3Dgmail.com@lists.openembedded.org> wrote:
 >
-> it seems fstab.h header check needs some extra checks its failing on musl
+> On Mon, Jan 4, 2021 at 8:21 PM Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > it seems fstab.h header check needs some extra checks its failing on mu=
+sl
+> >
+> > https://errors.yoctoproject.org/Errors/Details/540467/
+> > https://errors.yoctoproject.org/Errors/Details/540468/
+> >
+> Hoped musl builds not necessary for me this time...
 >
-> https://errors.yoctoproject.org/Errors/Details/540467/
-> https://errors.yoctoproject.org/Errors/Details/540468/
->
-Hoped musl builds not necessary for me this time...
+> OK - Will look into and come back
 
-OK - Will look into and come back
+I accidentally removed fstab patch from SRC_URI - congratulations ->
+V3 is coming.
 
 Andreas
