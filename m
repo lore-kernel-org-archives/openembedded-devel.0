@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.6811.1609859819062187284
+ by mx.groups.io with SMTP id smtpd.web08.6812.1609859819517976164
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 05 Jan 2021 07:16:59 -0800
 Authentication-Results: mx.groups.io;
@@ -8,16 +8,14 @@ Received: from [78.130.197.211] (port=41868 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kwo4r-0007qz-4I; Tue, 05 Jan 2021 17:16:53 +0200
+	id 1kwo4l-0007qz-Ic; Tue, 05 Jan 2021 17:16:48 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 08/10] python3-txaio: Upgrade 20.4.1 -> 20.12.1
-Date: Tue,  5 Jan 2021 17:16:36 +0200
-Message-Id: <20210105151638.15700-8-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 01/10] python3-jsonpatch: Upgrade 1.26 -> 1.28
+Date: Tue,  5 Jan 2021 17:16:29 +0200
+Message-Id: <20210105151638.15700-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210105151638.15700-1-leon.anavi@konsulko.com>
-References: <20210105151638.15700-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -30,34 +28,32 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 20.12.1:
+Upgrade to release 1.28:
 
-- CI/CD migrated to GitHub Actions
-- support Python 3.9 (CI / testing added)
-- minimum Python version is now 3.6
+- Declare json-patch operations as a class-based attribute
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-txaio_20.4.1.bb => python3-txaio_20.12.1.bb}       | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-txaio_20.4.1.bb => python3-txaio_20.12.1.bb} (75%)
+ .../{python3-jsonpatch_1.26.bb => python3-jsonpatch_1.28.bb}   | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-jsonpatch_1.26.bb => python3-jsonpatch_1.28.bb} (71%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-txaio_20.4.1.bb b/meta-python/recipes-devtools/python/python3-txaio_20.12.1.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-txaio_20.4.1.bb
-rename to meta-python/recipes-devtools/python/python3-txaio_20.12.1.bb
-index 75a9395a25..f4baeb10fe 100644
---- a/meta-python/recipes-devtools/python/python3-txaio_20.4.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-txaio_20.12.1.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "Compatibility API between asyncio/Twisted/Trollius"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98"
- 
--SRC_URI[sha256sum] = "17938f2bca4a9cabce61346758e482ca4e600160cbc28e861493eac74a19539d"
-+SRC_URI[sha256sum] = "1488d31d564a116538cc1265ac3f7979fb6223bb5a9e9f1479436ee2c17d8549"
+diff --git a/meta-python/recipes-devtools/python/python3-jsonpatch_1.26.bb b/meta-python/recipes-devtools/python/python3-jsonpatch_1.28.bb
+similarity index 71%
+rename from meta-python/recipes-devtools/python/python3-jsonpatch_1.26.bb
+rename to meta-python/recipes-devtools/python/python3-jsonpatch_1.28.bb
+index b1217cfac1..cef20495b6 100644
+--- a/meta-python/recipes-devtools/python/python3-jsonpatch_1.26.bb
++++ b/meta-python/recipes-devtools/python/python3-jsonpatch_1.28.bb
+@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
  
  inherit pypi setuptools3
  
+-SRC_URI[md5sum] = "3aa7e75ad472c51a6de0123137dbfdf2"
+-SRC_URI[sha256sum] = "e45df18b0ab7df1925f20671bbc3f6bd0b4b556fb4b9c5d97684b0a7eac01744"
++SRC_URI[sha256sum] = "e930adc932e4d36087dbbf0f22e1ded32185dfb20662f2e3dd848677a5295a14"
+ 
+ RDEPENDS_${PN} += "${PYTHON_PN}-json ${PYTHON_PN}-jsonpointer ${PYTHON_PN}-netclient ${PYTHON_PN}-stringold"
 -- 
 2.17.1
 
