@@ -1,161 +1,252 @@
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com [209.85.222.181])
- by mx.groups.io with SMTP id smtpd.web11.2385.1609812447522759462
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com [209.85.160.180])
+ by mx.groups.io with SMTP id smtpd.web10.2540.1609812992695981074
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Jan 2021 18:07:27 -0800
+ Mon, 04 Jan 2021 18:16:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=G6bICbFX;
- spf=pass (domain: gmail.com, ip: 209.85.222.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f181.google.com with SMTP id v126so25289333qkd.11
-        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Jan 2021 18:07:27 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=YEeB4p7i;
+ spf=pass (domain: gmail.com, ip: 209.85.160.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f180.google.com with SMTP id j26so19956990qtq.8
+        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Jan 2021 18:16:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=Y5fFG4uVOSsVIG+2hxhnYGSBsnqBTbXF/cWHHqURIQ8=;
-        b=G6bICbFXnQOF+IYnWuV0vpRI5pqjYI8oAVPLVGZeOwn/W86485KWu8Z8oRNwT+AnY2
-         FvNHPlsQnK5eaHP6XsJMJJQoG1VOX6KsswQI3XiNi3R+Su+YkoPiy2mpurAP2FLheMuQ
-         DqzDbY2iZ9E0yIfoWqGrVwUmNr32DVVvlA+K5e5IfEw1JKlSztSFebkwHDxl9Oakc1sX
-         nON0VeNb+NrlxqZwYjTp0VFpwhi6SMCte/hulgLhrVWhWe/mSw5pNB2dQv8xV28+RT39
-         Urj0b6ntJAtwc4sNM8qGIkLNn5HN7DGlMZKLbZZIkqkGMHtaeI2t7SJ6xL0vqWzLt98+
-         3lMw==
+         :cc;
+        bh=sD3AhnoNP/AxgKLDEcgxgevpq1si9UcTmj8zZB4aTiU=;
+        b=YEeB4p7iGbu3G2Cj0SDynznkr06tdSiSkFY140s/4sbGaQtTFVQRh5mdPIQ8e63mxg
+         tNN4n0WgWyrkPKoRDwa1VLkD78Hn197naQkI/b/+txcTs8pWut+QPkefUtvyxYOyPoEY
+         oCBQaNOnCRqCM5diDJobRpwMS8kw5Kawb6eFH+rWW7PwvD1oHrDgO/T6AM6YDu/+i0pT
+         sEi1epoCKVqtdwKFEW6wBPC31NlQN+EbHs8Gwbvu7U2u/dM3u7G44k79WyXoIgP2ADH/
+         B5zf2MgmeSeVjVk9tqLGRaEJ3DimpKwRglMBPGqZu8I6H29AFR9n9xZB4g/6gm0Y0dSz
+         FJdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=Y5fFG4uVOSsVIG+2hxhnYGSBsnqBTbXF/cWHHqURIQ8=;
-        b=c+ENSWkocB1L8XE3e+ch8kj0V01QkJk1N7Y1BEyRUamsVZdK4m6Fm50EgGfQb1Ig2Z
-         cSZJMojQit0PU68hHLs8D1A06o//PbPaRalF18qt7dNf4WqRZOQ7u4MvVKRGTGzr8nV8
-         zvr/iCOpI/1qakYeq639eiNbY9lGnuDp8YU73jPUrZYOsByHW/Tta4APNCDugRXuL+2o
-         Mc0wQmkY7rbTNqzfSYdJEIiHYBDQOFIJPYwldVo0qNSIKGv+XwewYBXtA1uDZ9RuFlrL
-         GIkz3EkzBra1SL/6+92VJvAWddSnAiFfIZYdiSnm4KO0lBcCpg2/t7aFua41B3fUjydq
-         amlA==
-X-Gm-Message-State: AOAM533Tj1KLOTOz8/jGcXaj1EvQuE9+z1H+k+wHvtp8dbPsK44DHsA8
-	A0n9YxoCzJBA+sAcp3K/XwLC+H+W7tU+CqiQ4Uw=
-X-Google-Smtp-Source: ABdhPJyUuTs8vNwXO87qNA+KQPhhTAlejl+c3VCHFXV/ps7Dw/wlG8J3TqWVDSUtU4iZ4TLuCH/CLhPdmMQFaBBfPx0=
-X-Received: by 2002:a37:88c2:: with SMTP id k185mr59647484qkd.474.1609812446595;
- Mon, 04 Jan 2021 18:07:26 -0800 (PST)
+         :message-id:subject:to:cc;
+        bh=sD3AhnoNP/AxgKLDEcgxgevpq1si9UcTmj8zZB4aTiU=;
+        b=j/C6o1B37Ko+DcLBmshB5SEmtSlKA9jxpw0jEVjSje+ip+Sm211yi2Vko0V712MISQ
+         Gyt9oDhx2hZpKUc9eX08PlDFlFEYo3goxF5kR3z1VzBSIIH1Z/qjbO6x7gExLcYX6Ral
+         iq5hj5WjhNH/TPgAsscua4gvDtjfR1FhcufsPti5tHJXBRPkrg6+kd6JszDJIxVej2Nn
+         YZyiT9wSe4zV2HvXV2sz9Hmw5hNLsgbKg/B76O69R4FewwQOCTG8q7gDj7oZmbbbROH8
+         A9AWAVWskJICP4FZvJvATIEUnxybApaKPH7Y6dTRToDRnvKHHJYb0lGvWzRNWQUkIiLr
+         wC8w==
+X-Gm-Message-State: AOAM5338W25ucY9337OQoignFFNDrvUJgcrxISVsar9PpQV+wLrhBM4P
+	7klKPckODTvW2a/mYmD699Fkm8Vyk7rMEMJEZfs=
+X-Google-Smtp-Source: ABdhPJzOkuG1+lgv28SZ+joiqtgkNrAyG9WUoffaZRO3pRfOep/V6VK4B3rCFdETQGHDxDEHnaB3ziceKsCyBoLKBGs=
+X-Received: by 2002:ac8:729a:: with SMTP id v26mr73820091qto.53.1609812991696;
+ Mon, 04 Jan 2021 18:16:31 -0800 (PST)
 MIME-Version: 1.0
-References: <1608278860-111600-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-In-Reply-To: <1608278860-111600-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+References: <1609769901-7544-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+In-Reply-To: <1609769901-7544-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 4 Jan 2021 18:07:01 -0800
-Message-ID: <CAMKF1sr+JqTfqs2KvSvfzQahPHmCA0JBySkGvNebxJQyHuqKjA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH] poppler: upgrade 20.11.0 -> 20.12.1
-To: zhengruoqin <zhengrq.fnst@cn.fujitsu.com>
+Date: Mon, 4 Jan 2021 18:16:06 -0800
+Message-ID: <CAMKF1spXF6GRKwEJYSouPXz+CUqHKT51HexWUNiC9TW9WQGeog@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] openjpeg: upgrade 2.3.1 -> 2.4.0
+To: zangrc <zangrc.fnst@cn.fujitsu.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Seeing this error
+This causes poppler to fail see
+https://errors.yoctoproject.org/Errors/Details/540476/
 
-https://errors.yoctoproject.org/Errors/Details/540475/
-
-On Fri, Dec 18, 2020 at 12:09 AM zhengruoqin
-<zhengrq.fnst@cn.fujitsu.com> wrote:
+On Sun, Jan 3, 2021 at 6:18 PM zangrc <zangrc.fnst@cn.fujitsu.com> wrote:
 >
-> Refresh the following patch:
-> 0001-Do-not-overwrite-all-our-build-flags.patch
+> CVE-2020-15389.patch
+> CVE-2020-6851.patch
+> CVE-2020-8112.patch
+> Removed since these are included in 2.4.0
 >
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 > ---
->  ...1-Do-not-overwrite-all-our-build-flags.patch | 17 ++++++++++-------
->  .../{poppler_20.11.0.bb =3D> poppler_20.12.1.bb}  |  2 +-
->  2 files changed, 11 insertions(+), 8 deletions(-)
->  rename meta-oe/recipes-support/poppler/{poppler_20.11.0.bb =3D> poppler=
-_20.12.1.bb} (96%)
+>  .../openjpeg/openjpeg/CVE-2020-15389.patch    | 51 -------------------
+>  .../openjpeg/openjpeg/CVE-2020-6851.patch     | 36 -------------
+>  .../openjpeg/openjpeg/CVE-2020-8112.patch     | 50 ------------------
+>  .../{openjpeg_2.3.1.bb => openjpeg_2.4.0.bb}  |  5 +-
+>  4 files changed, 1 insertion(+), 141 deletions(-)
+>  delete mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-15389.patch
+>  delete mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch
+>  delete mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-8112.patch
+>  rename meta-oe/recipes-graphics/openjpeg/{openjpeg_2.3.1.bb => openjpeg_2.4.0.bb} (78%)
 >
-> diff --git a/meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwri=
-te-all-our-build-flags.patch b/meta-oe/recipes-support/poppler/poppler/0001=
--Do-not-overwrite-all-our-build-flags.patch
-> index 05e0abede..afb0b5df0 100644
-> --- a/meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwrite-all-=
-our-build-flags.patch
-> +++ b/meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwrite-all-=
-our-build-flags.patch
-> @@ -15,12 +15,12 @@ Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gm=
-ail.com>
->
->  --- a/cmake/modules/PopplerMacros.cmake
->  +++ b/cmake/modules/PopplerMacros.cmake
-> -@@ -123,14 +123,14 @@ if(CMAKE_COMPILER_IS_GNUCXX)
-> +@@ -104,14 +104,14 @@ if(CMAKE_COMPILER_IS_GNUCXX)
->     set(DEFAULT_COMPILE_WARNINGS_EXTRA "${_warn} ${_warnx}")
+> diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-15389.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-15389.patch
+> deleted file mode 100644
+> index f5ce11a27..000000000
+> --- a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-15389.patch
+> +++ /dev/null
+> @@ -1,51 +0,0 @@
+> -From e8e258ab049240c2dd1f1051b4e773b21e2d3dc0 Mon Sep 17 00:00:00 2001
+> -From: Even Rouault <even.rouault@spatialys.com>
+> -Date: Sun, 28 Jun 2020 14:19:59 +0200
+> -Subject: [PATCH] opj_decompress: fix double-free on input directory with mix
+> - of valid and invalid images (CVE-2020-15389)
 > -
-> +
->     set(_save_cxxflags "${CMAKE_CXX_FLAGS}")
-> --  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -=
-fno-common -D_DEFAULT_SOURCE")
-> -+  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -=
-fno-common -D_DEFAULT_SOURCE ${_save_cxxflags}")
-> +-  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -=
-fno-common -fno-operator-names -D_DEFAULT_SOURCE")
-> ++  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -=
-fno-common -fno-operator-names -D_DEFAULT_SOURCE ${_save_cxxflags}")
->     set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g ${_save_cxxflags}")
->     set(CMAKE_CXX_FLAGS_RELEASE        "-O2 -DNDEBUG ${_save_cxxflags}")
->     set(CMAKE_CXX_FLAGS_DEBUG          "-g -O2 -fno-reorder-blocks -fno-=
-schedule-insns -fno-inline ${_save_cxxflags}")
-> @@ -32,16 +32,16 @@ Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gm=
-ail.com>
->     set(CMAKE_C_FLAGS_RELWITHDEBINFO   "-O2 -g ${_save_cflags}")
->     set(CMAKE_C_FLAGS_RELEASE          "-O2 -DNDEBUG ${_save_cflags}")
->     set(CMAKE_C_FLAGS_DEBUG            "-g -O2 -fno-reorder-blocks -fno-=
-schedule-insns -fno-inline ${_save_cflags}")
-> -@@ -167,7 +167,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL
-> +@@ -149,7 +149,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
->     set(DEFAULT_COMPILE_WARNINGS_EXTRA "${_warn} ${_warnx}")
+> -Fixes #1261
 > -
-> +
->     set(_save_cxxflags "${CMAKE_CXX_FLAGS}")
->  -  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -=
-fno-common -D_DEFAULT_SOURCE")
->  +  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -=
-fno-common -D_DEFAULT_SOURCE ${_save_cxxflags}")
->     set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g ${_save_cxxflags}")
->     set(CMAKE_CXX_FLAGS_RELEASE        "-O2 -DNDEBUG ${_save_cxxflags}")
->     # clang does not support -fno-reorder-blocks -fno-schedule-insns, so=
- do not use -O2
-> -@@ -175,7 +175,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL
-> +@@ -157,7 +157,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
->     set(CMAKE_CXX_FLAGS_DEBUGFULL      "-g3 -fno-inline ${_save_cxxflags=
-}")
->     set(CMAKE_CXX_FLAGS_PROFILE        "-g3 -fno-inline -ftest-coverage =
--fprofile-arcs ${_save_cxxflags}")
->     set(_save_cflags "${CMAKE_C_FLAGS}")
-> @@ -50,3 +50,6 @@ Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmai=
-l.com>
->     set(CMAKE_C_FLAGS_RELWITHDEBINFO   "-O2 -g ${_save_cflags}")
->     set(CMAKE_C_FLAGS_RELEASE          "-O2 -DNDEBUG ${_save_cflags}")
->     # clang does not support -fno-reorder-blocks -fno-schedule-insns, so=
- do not use -O2
-> +--
-> +2.25.1
-> +
-> diff --git a/meta-oe/recipes-support/poppler/poppler_20.11.0.bb b/meta-o=
-e/recipes-support/poppler/poppler_20.12.1.bb
-> similarity index 96%
-> rename from meta-oe/recipes-support/poppler/poppler_20.11.0.bb
-> rename to meta-oe/recipes-support/poppler/poppler_20.12.1.bb
-> index 729923d40..87a57523f 100644
-> --- a/meta-oe/recipes-support/poppler/poppler_20.11.0.bb
-> +++ b/meta-oe/recipes-support/poppler/poppler_20.12.1.bb
-> @@ -7,7 +7,7 @@ SRC_URI =3D "http://poppler.freedesktop.org/${BP}.tar.xz=
- \
->             file://0001-Do-not-overwrite-all-our-build-flags.patch \
->             file://basename-include.patch \
->             "
-> -SRC_URI[sha256sum] =3D "021557074516492375c2bb4226a413aad431159e9177f9f=
-14dff4159d2723b14"
-> +SRC_URI[sha256sum] =3D "d0aa2586c0a4296c775f0d2045f28bb95a694113fc995f9=
-5350faa12930f7b35"
+> -Credits to @Ruia-ruia for reporting and analysis.
+> ----
+> - src/bin/jp2/opj_decompress.c | 8 ++++----
+> - 1 file changed, 4 insertions(+), 4 deletions(-)
+> -
+> ---- end of original header ---
+> -
+> -CVE: CVE-2020-15389
+> -
+> -Upstream-Status: Backport [git://github.com/uclouvain/openjpeg.git]
+> -
+> -Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> -
+> ----
+> -diff --git a/src/bin/jp2/opj_decompress.c b/src/bin/jp2/opj_decompress.c
+> -index 7eeb0952..2634907f 100644
+> ---- a/src/bin/jp2/opj_decompress.c
+> -+++ b/src/bin/jp2/opj_decompress.c
+> -@@ -1316,10 +1316,6 @@ static opj_image_t* upsample_image_components(opj_image_t* original)
+> - int main(int argc, char **argv)
+> - {
+> -     opj_decompress_parameters parameters;           /* decompression parameters */
+> --    opj_image_t* image = NULL;
+> --    opj_stream_t *l_stream = NULL;              /* Stream */
+> --    opj_codec_t* l_codec = NULL;                /* Handle to a decompressor */
+> --    opj_codestream_index_t* cstr_index = NULL;
+> -
+> -     OPJ_INT32 num_images, imageno;
+> -     img_fol_t img_fol;
+> -@@ -1393,6 +1389,10 @@ int main(int argc, char **argv)
+> -
+> -     /*Decoding image one by one*/
+> -     for (imageno = 0; imageno < num_images ; imageno++)  {
+> -+        opj_image_t* image = NULL;
+> -+        opj_stream_t *l_stream = NULL;              /* Stream */
+> -+        opj_codec_t* l_codec = NULL;                /* Handle to a decompressor */
+> -+        opj_codestream_index_t* cstr_index = NULL;
+> -
+> -         if (!parameters.quiet) {
+> -             fprintf(stderr, "\n");
+> ---
+> -2.17.1
+> -
+> diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch
+> deleted file mode 100644
+> index 1e14149c8..000000000
+> --- a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch
+> +++ /dev/null
+> @@ -1,36 +0,0 @@
+> -From 024b8407392cb0b82b04b58ed256094ed5799e04 Mon Sep 17 00:00:00 2001
+> -From: Even Rouault <even.rouault@spatialys.com>
+> -Date: Sat, 11 Jan 2020 01:51:19 +0100
+> -Subject: [PATCH] opj_j2k_update_image_dimensions(): reject images whose
+> - coordinates are beyond INT_MAX (fixes #1228)
+> -
+> -CVE: CVE-2020-6851
+> -
+> -Signed-off-by: Mingde (Matthew) Zeng <matthew.zeng@windriver.com>
+> -
+> ----
+> - src/lib/openjp2/j2k.c | 8 ++++++++
+> - 1 file changed, 8 insertions(+)
+> -
+> -diff --git a/src/lib/openjp2/j2k.c b/src/lib/openjp2/j2k.c
+> -index 14f6ff41..922550eb 100644
+> ---- a/src/lib/openjp2/j2k.c
+> -+++ b/src/lib/openjp2/j2k.c
+> -@@ -9236,6 +9236,14 @@ static OPJ_BOOL opj_j2k_update_image_dim
+> -     l_img_comp = p_image->comps;
+> -     for (it_comp = 0; it_comp < p_image->numcomps; ++it_comp) {
+> -         OPJ_INT32 l_h, l_w;
+> -+        if (p_image->x0 > (OPJ_UINT32)INT_MAX ||
+> -+                p_image->y0 > (OPJ_UINT32)INT_MAX ||
+> -+                p_image->x1 > (OPJ_UINT32)INT_MAX ||
+> -+                p_image->y1 > (OPJ_UINT32)INT_MAX) {
+> -+            opj_event_msg(p_manager, EVT_ERROR,
+> -+                          "Image coordinates above INT_MAX are not supported\n");
+> -+            return OPJ_FALSE;
+> -+        }
+> -
+> -         l_img_comp->x0 = (OPJ_UINT32)opj_int_ceildiv((OPJ_INT32)p_image->x0,
+> -                          (OPJ_INT32)l_img_comp->dx);
+> ---
+> -2.17.1
+> -
+> diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-8112.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-8112.patch
+> deleted file mode 100644
+> index 6158601af..000000000
+> --- a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-8112.patch
+> +++ /dev/null
+> @@ -1,50 +0,0 @@
+> -From 05f9b91e60debda0e83977e5e63b2e66486f7074 Mon Sep 17 00:00:00 2001
+> -From: Even Rouault <even.rouault@spatialys.com>
+> -Date: Thu, 30 Jan 2020 00:59:57 +0100
+> -Subject: [PATCH] opj_tcd_init_tile(): avoid integer overflow
+> -
+> -That could lead to later assertion failures.
+> -
+> -Fixes #1231 / CVE-2020-8112
+> -
+> -CVE: CVE-2020-8112
+> -
+> -Signed-off-by: Mingde (Matthew) Zeng <matthew.zeng@windriver.com>
+> ----
+> - src/lib/openjp2/tcd.c | 20 ++++++++++++++++++--
+> - 1 file changed, 18 insertions(+), 2 deletions(-)
+> -
+> -diff --git a/src/lib/openjp2/tcd.c b/src/lib/openjp2/tcd.c
+> -index deecc4df..aa419030 100644
+> ---- a/src/lib/openjp2/tcd.c
+> -+++ b/src/lib/openjp2/tcd.c
+> -@@ -905,8 +905,24 @@ static INLINE OPJ_BOOL opj_tcd_init_tile(opj_tcd_t *p_tcd, OPJ_UINT32 p_tile_no,
+> -             /* p. 64, B.6, ISO/IEC FDIS15444-1 : 2000 (18 august 2000)  */
+> -             l_tl_prc_x_start = opj_int_floordivpow2(l_res->x0, (OPJ_INT32)l_pdx) << l_pdx;
+> -             l_tl_prc_y_start = opj_int_floordivpow2(l_res->y0, (OPJ_INT32)l_pdy) << l_pdy;
+> --            l_br_prc_x_end = opj_int_ceildivpow2(l_res->x1, (OPJ_INT32)l_pdx) << l_pdx;
+> --            l_br_prc_y_end = opj_int_ceildivpow2(l_res->y1, (OPJ_INT32)l_pdy) << l_pdy;
+> -+            {
+> -+                OPJ_UINT32 tmp = ((OPJ_UINT32)opj_int_ceildivpow2(l_res->x1,
+> -+                                  (OPJ_INT32)l_pdx)) << l_pdx;
+> -+                if (tmp > (OPJ_UINT32)INT_MAX) {
+> -+                    opj_event_msg(manager, EVT_ERROR, "Integer overflow\n");
+> -+                    return OPJ_FALSE;
+> -+                }
+> -+                l_br_prc_x_end = (OPJ_INT32)tmp;
+> -+            }
+> -+            {
+> -+                OPJ_UINT32 tmp = ((OPJ_UINT32)opj_int_ceildivpow2(l_res->y1,
+> -+                                  (OPJ_INT32)l_pdy)) << l_pdy;
+> -+                if (tmp > (OPJ_UINT32)INT_MAX) {
+> -+                    opj_event_msg(manager, EVT_ERROR, "Integer overflow\n");
+> -+                    return OPJ_FALSE;
+> -+                }
+> -+                l_br_prc_y_end = (OPJ_INT32)tmp;
+> -+            }
+> -             /*fprintf(stderr, "\t\t\tprc_x_start=%d, prc_y_start=%d, br_prc_x_end=%d, br_prc_y_end=%d \n", l_tl_prc_x_start, l_tl_prc_y_start, l_br_prc_x_end ,l_br_prc_y_end );*/
+> -
+> -             l_res->pw = (l_res->x0 == l_res->x1) ? 0U : (OPJ_UINT32)((
+> ---
+> -2.20.1
+> -
+> diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb
+> similarity index 78%
+> rename from meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
+> rename to meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb
+> index a0740a274..82d17e669 100644
+> --- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
+> +++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb
+> @@ -8,11 +8,8 @@ DEPENDS = "libpng tiff lcms zlib"
+>  SRC_URI = " \
+>      git://github.com/uclouvain/openjpeg.git \
+>      file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
+> -    file://CVE-2020-6851.patch \
+> -    file://CVE-2020-8112.patch \
+> -    file://CVE-2020-15389.patch \
+>  "
+> -SRCREV = "57096325457f96d8cd07bd3af04fe81d7a2ba788"
+> +SRCREV = "37ac30ceff6640bbab502388c5e0fa0bff23f505"
+>  S = "${WORKDIR}/git"
 >
->  DEPENDS =3D "fontconfig zlib cairo lcms glib-2.0"
->
+>  inherit cmake
 > --
 > 2.25.1
 >
 >
 >
 >
->=20
+> 
 >
