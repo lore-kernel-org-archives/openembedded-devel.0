@@ -1,177 +1,161 @@
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.web11.137.1609794350052909286
+Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com [209.85.222.181])
+ by mx.groups.io with SMTP id smtpd.web11.2385.1609812447522759462
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Jan 2021 13:05:50 -0800
+ Mon, 04 Jan 2021 18:07:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ipR7JrUv;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id r3so33547568wrt.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Jan 2021 13:05:49 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=G6bICbFX;
+ spf=pass (domain: gmail.com, ip: 209.85.222.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f181.google.com with SMTP id v126so25289333qkd.11
+        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Jan 2021 18:07:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=xqwUCEwnQMXB07QU21qgrsGscK5+t7tdCU+bsuo/WHs=;
-        b=ipR7JrUvGmDqt2m3MXb/A37k48YBAxGTK4SXMEPJbWuLBAMT82xF7RwHXnWSyb/VUj
-         S+r2EazfBv1FE8hhXYNX8tuiN+2wYxtfGyw/eJsERsGdnH4IqydGEjyzTeizvxaC4bkT
-         ZIYC8JXTApSY9KbIaYNrUquBlUA8nBSycqPxT3E07KFfYLVb0Pnzh3dKcO5CwwmqCsxU
-         SlE7WIfG0CQcmFhqw4Bw1O2buBjGTHPKdvSVOGZYX71+t5n/fNrU6UPdVGEBexj4I20g
-         2nmHTXYs3f49aauT29UExCpM1STU3vHtVJMCQnSZ/wCIn3V6V+9Jewzs5zzyMffBqZrz
-         v3bw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=Y5fFG4uVOSsVIG+2hxhnYGSBsnqBTbXF/cWHHqURIQ8=;
+        b=G6bICbFXnQOF+IYnWuV0vpRI5pqjYI8oAVPLVGZeOwn/W86485KWu8Z8oRNwT+AnY2
+         FvNHPlsQnK5eaHP6XsJMJJQoG1VOX6KsswQI3XiNi3R+Su+YkoPiy2mpurAP2FLheMuQ
+         DqzDbY2iZ9E0yIfoWqGrVwUmNr32DVVvlA+K5e5IfEw1JKlSztSFebkwHDxl9Oakc1sX
+         nON0VeNb+NrlxqZwYjTp0VFpwhi6SMCte/hulgLhrVWhWe/mSw5pNB2dQv8xV28+RT39
+         Urj0b6ntJAtwc4sNM8qGIkLNn5HN7DGlMZKLbZZIkqkGMHtaeI2t7SJ6xL0vqWzLt98+
+         3lMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=xqwUCEwnQMXB07QU21qgrsGscK5+t7tdCU+bsuo/WHs=;
-        b=XETjUy43cKx3lD0R2RDGSOqru3HNxau9WXaATXqxAjykaWS2ummTk9FJdan/QJPW1b
-         y6rJH1U/bCPD4+nUnciKmFUefgNor2E6C2jF9xV/izRxxG5sLKR9xtGQMjWRM8F8l9Yy
-         UWSd/vxNg+tgSlm7idFT+beQIOGArQ18yQ6cvky2goA2we+o9qyH9K7sjiAaUqQFKbby
-         mRtEoWw5o+Q+TeU2cUPPGwUgESA8+1jkB9e/Rwlb5zTjuwVCgUe19RMO3ORwTQoTUmuF
-         Fcb1rLKNygv8ZBrjJpipw9qR7678uv3WSJVJAYp+P71jwwPSuLcYZv+4raHa5MVpCOmm
-         Ut/w==
-X-Gm-Message-State: AOAM531R+s9uVoBCyW5LKh5nqSSZfdkxcWkKRjF4Ev9MyKLAd4Xt9qX3
-	cfHylP4L0jE57W5iFH44vLurOJYEtDI9BQ==
-X-Google-Smtp-Source: ABdhPJykIfir/1Lcj/qKAVXgswexca+EFiVEqwLlUSElLmbNOWKWPL5cRbPHiJNm3sMsVXcJNoIPVw==
-X-Received: by 2002:adf:df08:: with SMTP id y8mr79744952wrl.278.1609794348596;
-        Mon, 04 Jan 2021 13:05:48 -0800 (PST)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300f07f47434572962737cd97020b.dip0.t-ipconnect.de. [2003:f0:7f47:4345:7296:2737:cd97:20b])
-        by smtp.gmail.com with ESMTPSA id h29sm104399724wrc.68.2021.01.04.13.05.47
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 Jan 2021 13:05:47 -0800 (PST)
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH][V3 02/16] xfce4-mount-plugin: upgrade 1.1.3 -> 1.1.5
-Date: Mon,  4 Jan 2021 22:05:39 +0100
-Message-Id: <20210104210539.86557-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.26.2
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=Y5fFG4uVOSsVIG+2hxhnYGSBsnqBTbXF/cWHHqURIQ8=;
+        b=c+ENSWkocB1L8XE3e+ch8kj0V01QkJk1N7Y1BEyRUamsVZdK4m6Fm50EgGfQb1Ig2Z
+         cSZJMojQit0PU68hHLs8D1A06o//PbPaRalF18qt7dNf4WqRZOQ7u4MvVKRGTGzr8nV8
+         zvr/iCOpI/1qakYeq639eiNbY9lGnuDp8YU73jPUrZYOsByHW/Tta4APNCDugRXuL+2o
+         Mc0wQmkY7rbTNqzfSYdJEIiHYBDQOFIJPYwldVo0qNSIKGv+XwewYBXtA1uDZ9RuFlrL
+         GIkz3EkzBra1SL/6+92VJvAWddSnAiFfIZYdiSnm4KO0lBcCpg2/t7aFua41B3fUjydq
+         amlA==
+X-Gm-Message-State: AOAM533Tj1KLOTOz8/jGcXaj1EvQuE9+z1H+k+wHvtp8dbPsK44DHsA8
+	A0n9YxoCzJBA+sAcp3K/XwLC+H+W7tU+CqiQ4Uw=
+X-Google-Smtp-Source: ABdhPJyUuTs8vNwXO87qNA+KQPhhTAlejl+c3VCHFXV/ps7Dw/wlG8J3TqWVDSUtU4iZ4TLuCH/CLhPdmMQFaBBfPx0=
+X-Received: by 2002:a37:88c2:: with SMTP id k185mr59647484qkd.474.1609812446595;
+ Mon, 04 Jan 2021 18:07:26 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <1608278860-111600-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+In-Reply-To: <1608278860-111600-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Mon, 4 Jan 2021 18:07:01 -0800
+Message-ID: <CAMKF1sr+JqTfqs2KvSvfzQahPHmCA0JBySkGvNebxJQyHuqKjA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] poppler: upgrade 20.11.0 -> 20.12.1
+To: zhengruoqin <zhengrq.fnst@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Release notes for 1.1.5
-=======================
-Updated and revised German translation;
-further enhanced autotools setup;
-checked compilation and functionality on FreeBSD 12.2.
+Seeing this error
 
-Release notes for 1.1.4
-=======================
-- Remove unused variable exclude_devicenames
-- Remove obsolete panel version 4.9 check
-- Remove checks for unused functions from configure.ac
-- Include stdlib because malloc is used
-- Spellfix. Add missing "e" to siz (size)
-- Update URLs from goodies.x.o to docs.x.o (Bug #16168)
-- Fix build with panel 4.15
-- Make build less verbose
-- Another change to the SVG icon file canvas size
-- Updated svg image to have a larger canvas so that the panel can be
-  resized up to 192 pixels size
-- Added title to popup menu; even if it is not empty (Bug #14478)
-- https URL instead of http
-- Renamed improperly named member variable of main mountpoint display
-  structure
-- Display percentage on progress bar again (regression from port to
-  Gtk3)
-- Reformatted popup information with more columns and nicer alignment.
-  (Bug #14670)
-- Fix bug 13624 by not trying to save when closing the plugin, but
-  already and only when closing the settings dialog
-- Translation Updates:
-  Albanian, Arabic, Asturian, Basque, Belarusian, Bulgarian,
-  Catalan, Chinese (China), Chinese (Taiwan), Croatian, Czech, Danish,
-  Dutch, Eastern Armenian, English (Australia), English (United
-  Kingdom), Finnish, French, Galician, German, Greek, Hebrew,
-  Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
-  Korean, Latvian, Lithuanian, Malay, Norwegian Bokmål, Occitan (post
-  1500), Panjabi (Punjabi), Polish, Portuguese, Portuguese (Brazil),
-  Russian, Serbian, Slovak, Spanish, Swedish, Thai, Turkish, Ukrainian,
-  Urdu, Urdu (Pakistan), Uyghur
+https://errors.yoctoproject.org/Errors/Details/540475/
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
-
-V2 -> V3: Re-add fstab.h-patch to SRC_URI
-
- ...1-check-for-fstab.h-during-configure.patch | 30 +++++++++----------
- ...n_1.1.3.bb => xfce4-mount-plugin_1.1.5.bb} |  3 +-
- 2 files changed, 16 insertions(+), 17 deletions(-)
- rename meta-xfce/recipes-panel-plugins/mount/{xfce4-mount-plugin_1.1.3.bb => xfce4-mount-plugin_1.1.5.bb} (70%)
-
-diff --git a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch
-index e2165c2fa..d81f70289 100644
---- a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch
-+++ b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch
-@@ -14,38 +14,38 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- Patch Reworked for xfce4-mount-plugin 0.6.4->1.1.2
- Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
- ---
-- configure.ac           |  1 +
-+ configure.ac           |  2 +
-  panel-plugin/devices.c | 22 +++++++++++++++++++---
-- 2 files changed, 20 insertions(+), 3 deletions(-)
-+ 2 files changed, 21 insertions(+), 3 deletions(-)
- 
- diff --git a/configure.ac b/configure.ac
--index b131117..c633fef 100644
-+index 375e64a..590b7ad 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -69,6 +69,7 @@ AC_CHECK_HEADERS([sys/socket.h])
-- AC_CHECK_HEADERS([sys/time.h])
-- AC_CHECK_HEADERS([unistd.h])
-- AC_CHECK_HEADERS([sys/sockio.h])
-+@@ -65,6 +65,9 @@ dnl param.h is part of libc6 on Linux, but important for old-style Unix and espe
-+ AC_CHECK_HEADERS([sys/param.h])
-+ AC_CHECK_HEADERS([sys/mount.h])
-+ 
-++dnl make musl happy
- +AC_CHECK_HEADERS([fstab.h])
-- AC_HEADER_SYS_WAIT
-- AC_PROG_GCC_TRADITIONAL
-- AC_TYPE_SIZE_T
-++
-+ dnl Add -traditional to output variable CC if using the GNU C compiler and ioctl does not work properly without -traditional. That usually happens when the fixed header files have not been installed on an old system. Leave here commented out to comment in if some older *NIX systems might require it as was recently written on the ML.
-+ dnl AC_PROG_GCC_TRADITIONAL
-+ 
- diff --git a/panel-plugin/devices.c b/panel-plugin/devices.c
- index 797b079..d29df56 100644
- --- a/panel-plugin/devices.c
- +++ b/panel-plugin/devices.c
--@@ -24,8 +24,10 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-- #ifdef HAVE_CONFIG_H
-+@@ -25,7 +25,9 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-  #include <config.h>
-  #endif
---
-+ 
- +#if HAVE_FSTAB_H
-  #include <fstab.h>
- +#endif
--+
-  #include <glib.h>
-  #include <stdio.h>
-- #include <string.h>
-+ #include <stdlib.h>
- @@ -468,11 +470,12 @@ disks_new (gboolean include_NFSs, gboolean *showed_fstab_dialog, gint length)
-  {
-      GPtrArray * pdisks; /* to be returned */
-diff --git a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.3.bb b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb
-similarity index 70%
-rename from meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.3.bb
-rename to meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb
-index 4600104ad..ba3a12bd2 100644
---- a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.3.bb
-+++ b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb
-@@ -7,5 +7,4 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- inherit xfce-panel-plugin
- 
- SRC_URI += "file://0001-check-for-fstab.h-during-configure.patch"
--SRC_URI[md5sum] = "2f1f903d0bdf6ee6776afd8af73497ac"
--SRC_URI[sha256sum] = "aae5bd6b984bc78daf6b5fb9d15817a27253674a4264ad60f62ccb1aa194911e"
-+SRC_URI[sha256sum] = "584cd954929e542b3da0ff8d69e0325d8838dc39e7b32a509d1074ce3bb58ec2"
--- 
-2.26.2
-
+On Fri, Dec 18, 2020 at 12:09 AM zhengruoqin
+<zhengrq.fnst@cn.fujitsu.com> wrote:
+>
+> Refresh the following patch:
+> 0001-Do-not-overwrite-all-our-build-flags.patch
+>
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> ---
+>  ...1-Do-not-overwrite-all-our-build-flags.patch | 17 ++++++++++-------
+>  .../{poppler_20.11.0.bb =3D> poppler_20.12.1.bb}  |  2 +-
+>  2 files changed, 11 insertions(+), 8 deletions(-)
+>  rename meta-oe/recipes-support/poppler/{poppler_20.11.0.bb =3D> poppler=
+_20.12.1.bb} (96%)
+>
+> diff --git a/meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwri=
+te-all-our-build-flags.patch b/meta-oe/recipes-support/poppler/poppler/0001=
+-Do-not-overwrite-all-our-build-flags.patch
+> index 05e0abede..afb0b5df0 100644
+> --- a/meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwrite-all-=
+our-build-flags.patch
+> +++ b/meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwrite-all-=
+our-build-flags.patch
+> @@ -15,12 +15,12 @@ Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gm=
+ail.com>
+>
+>  --- a/cmake/modules/PopplerMacros.cmake
+>  +++ b/cmake/modules/PopplerMacros.cmake
+> -@@ -123,14 +123,14 @@ if(CMAKE_COMPILER_IS_GNUCXX)
+> +@@ -104,14 +104,14 @@ if(CMAKE_COMPILER_IS_GNUCXX)
+>     set(DEFAULT_COMPILE_WARNINGS_EXTRA "${_warn} ${_warnx}")
+> -
+> +
+>     set(_save_cxxflags "${CMAKE_CXX_FLAGS}")
+> --  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -=
+fno-common -D_DEFAULT_SOURCE")
+> -+  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -=
+fno-common -D_DEFAULT_SOURCE ${_save_cxxflags}")
+> +-  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -=
+fno-common -fno-operator-names -D_DEFAULT_SOURCE")
+> ++  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -=
+fno-common -fno-operator-names -D_DEFAULT_SOURCE ${_save_cxxflags}")
+>     set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g ${_save_cxxflags}")
+>     set(CMAKE_CXX_FLAGS_RELEASE        "-O2 -DNDEBUG ${_save_cxxflags}")
+>     set(CMAKE_CXX_FLAGS_DEBUG          "-g -O2 -fno-reorder-blocks -fno-=
+schedule-insns -fno-inline ${_save_cxxflags}")
+> @@ -32,16 +32,16 @@ Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gm=
+ail.com>
+>     set(CMAKE_C_FLAGS_RELWITHDEBINFO   "-O2 -g ${_save_cflags}")
+>     set(CMAKE_C_FLAGS_RELEASE          "-O2 -DNDEBUG ${_save_cflags}")
+>     set(CMAKE_C_FLAGS_DEBUG            "-g -O2 -fno-reorder-blocks -fno-=
+schedule-insns -fno-inline ${_save_cflags}")
+> -@@ -167,7 +167,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL
+> +@@ -149,7 +149,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+>     set(DEFAULT_COMPILE_WARNINGS_EXTRA "${_warn} ${_warnx}")
+> -
+> +
+>     set(_save_cxxflags "${CMAKE_CXX_FLAGS}")
+>  -  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -=
+fno-common -D_DEFAULT_SOURCE")
+>  +  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -=
+fno-common -D_DEFAULT_SOURCE ${_save_cxxflags}")
+>     set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g ${_save_cxxflags}")
+>     set(CMAKE_CXX_FLAGS_RELEASE        "-O2 -DNDEBUG ${_save_cxxflags}")
+>     # clang does not support -fno-reorder-blocks -fno-schedule-insns, so=
+ do not use -O2
+> -@@ -175,7 +175,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL
+> +@@ -157,7 +157,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+>     set(CMAKE_CXX_FLAGS_DEBUGFULL      "-g3 -fno-inline ${_save_cxxflags=
+}")
+>     set(CMAKE_CXX_FLAGS_PROFILE        "-g3 -fno-inline -ftest-coverage =
+-fprofile-arcs ${_save_cxxflags}")
+>     set(_save_cflags "${CMAKE_C_FLAGS}")
+> @@ -50,3 +50,6 @@ Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmai=
+l.com>
+>     set(CMAKE_C_FLAGS_RELWITHDEBINFO   "-O2 -g ${_save_cflags}")
+>     set(CMAKE_C_FLAGS_RELEASE          "-O2 -DNDEBUG ${_save_cflags}")
+>     # clang does not support -fno-reorder-blocks -fno-schedule-insns, so=
+ do not use -O2
+> +--
+> +2.25.1
+> +
+> diff --git a/meta-oe/recipes-support/poppler/poppler_20.11.0.bb b/meta-o=
+e/recipes-support/poppler/poppler_20.12.1.bb
+> similarity index 96%
+> rename from meta-oe/recipes-support/poppler/poppler_20.11.0.bb
+> rename to meta-oe/recipes-support/poppler/poppler_20.12.1.bb
+> index 729923d40..87a57523f 100644
+> --- a/meta-oe/recipes-support/poppler/poppler_20.11.0.bb
+> +++ b/meta-oe/recipes-support/poppler/poppler_20.12.1.bb
+> @@ -7,7 +7,7 @@ SRC_URI =3D "http://poppler.freedesktop.org/${BP}.tar.xz=
+ \
+>             file://0001-Do-not-overwrite-all-our-build-flags.patch \
+>             file://basename-include.patch \
+>             "
+> -SRC_URI[sha256sum] =3D "021557074516492375c2bb4226a413aad431159e9177f9f=
+14dff4159d2723b14"
+> +SRC_URI[sha256sum] =3D "d0aa2586c0a4296c775f0d2045f28bb95a694113fc995f9=
+5350faa12930f7b35"
+>
+>  DEPENDS =3D "fontconfig zlib cairo lcms glib-2.0"
+>
+> --
+> 2.25.1
+>
+>
+>
+>
+>=20
+>
