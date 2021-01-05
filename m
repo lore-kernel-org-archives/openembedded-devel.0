@@ -1,59 +1,64 @@
-Received: from first.geanix.com (first.geanix.com [116.203.34.67])
- by mx.groups.io with SMTP id smtpd.web08.5207.1609853533863369933
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.6671.1609859816067642863
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Jan 2021 05:32:15 -0800
+ Tue, 05 Jan 2021 07:16:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@geanix.com header.s=first header.b=SyEp/lv6;
- spf=pass (domain: geanix.com, ip: 116.203.34.67, mailfrom: sean@geanix.com)
-Received: from [IPv6:2a06:4004:10df:1:da27:a6d2:5305:fd0a] (_gateway [172.21.0.1])
-	by first.geanix.com (Postfix) with ESMTPSA id 47B984E0B11;
-	Tue,  5 Jan 2021 13:32:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=geanix.com; s=first;
-	t=1609853520; bh=QLeMpx8gqy5IqaHVT3qyNJx5XpDo26FjqwyWCr386fE=;
-	h=Subject:To:Cc:References:From:Date:In-Reply-To;
-	b=SyEp/lv6KT+GTMTpkfeg6KyYSYoNUcXDx814d6kNQ3cSpOumHqcsKIU2L+gdxrLLg
-	 ZMyOUzZQL9Td7bHsHoQDNyAK9Qta7RLJKdHEp6IE8VHyXxx1Dh/kTAKrxuSF5w6uxG
-	 jCCE5KAAUTSWm+RvYBpDUZSIw11wLSqpZA3Eckiyfnqnh/lQdVbnbLFz4Lws3kfFYF
-	 ZUv9Ztbi1amxgmnv9xucMZDZX/sBe6X4vem5nl6Y89saqTVv9f9cy0FTyhMHvCOWPm
-	 QLG/+zszuqc6xT1AXFzS5aQ4wn7So9V188l0auYdAkWhpqcvYCqnjmn+1IYgnELhej
-	 scUJPQ2djpirw==
-Subject: Re: [oe] [meta-oe][PATCH 1/3] nodejs: 12.19.0 -> 12.19.1
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-Cc: Stacy Gaikovaia <Stacy.Gaikovaia@windriver.com>
-References: <20201216053013.1661310-1-raj.khem@gmail.com>
-From: "Sean Nyekjaer" <sean@geanix.com>
-Message-ID: <dce6c45a-90c6-c69b-3e61-41174892c91b@geanix.com>
-Date: Tue, 5 Jan 2021 14:31:59 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
-MIME-Version: 1.0
-In-Reply-To: <20201216053013.1661310-1-raj.khem@gmail.com>
-X-Spam-Status: No, score=-3.1 required=4.0 tests=ALL_TRUSTED,BAYES_00,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A,
-	URIBL_BLOCKED autolearn=disabled version=3.4.4
-X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on ff3d05386fc5
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=41868 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kwo4n-0007qz-KR; Tue, 05 Jan 2021 17:16:50 +0200
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 04/10] python3-multidict: Upgrade 5.0.0 -> 5.1.0
+Date: Tue,  5 Jan 2021 17:16:32 +0200
+Message-Id: <20210105151638.15700-4-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210105151638.15700-1-leon.anavi@konsulko.com>
+References: <20210105151638.15700-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
+Upgrade to release 5.1.0:
 
+- Support GenericAliases (MultiDict[str]) for Python 3.9+
+- Synchronize the declared supported Python versions in setup.py
+  with actually supported and tested ones.
 
-On 16/12/2020 06.30, Khem Raj wrote:
-> From: Stacy Gaikovaia <Stacy.Gaikovaia@windriver.com>
->
-> Uprev nodejs in order to fix CVE-2020-8277.
-> This CVE allows an attacker to trigger a DNS request for a host
-> of their choice, which could trigger a Denial of Service in
-> nodejs versions < 12.19.1.
->
-> See https://nvd.nist.gov/vuln/detail/CVE-2020-8277 for details.
->
-> CVE: CVE-2020-8277
-> Signed-off-by: Stacy Gaikovaia <Stacy.Gaikovaia@windriver.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->
-Hi Khem,
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../{python3-multidict_5.0.0.bb => python3-multidict_5.1.0.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-multidict_5.0.0.bb => python3-multidict_5.1.0.bb} (78%)
 
-Will you please backport this to gatesgarth :)
+diff --git a/meta-python/recipes-devtools/python/python3-multidict_5.0.0.bb b/meta-python/recipes-devtools/python/python3-multidict_5.1.0.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-multidict_5.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-multidict_5.1.0.bb
+index 676fbae7ed..b960affac4 100644
+--- a/meta-python/recipes-devtools/python/python3-multidict_5.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-multidict_5.1.0.bb
+@@ -4,8 +4,7 @@ HOMEPAGE = "https://github.com/aio-libs/multidict/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a"
+ 
+-SRC_URI[md5sum] = "c2c3311e25636a6f213e998cd1e80d72"
+-SRC_URI[sha256sum] = "1b324444299c3a49b601b1bf621fc21704e29066f6ac2b7d7e4034a4a18662a1"
++SRC_URI[sha256sum] = "25b4e5f22d3a37ddf3effc0710ba692cfc792c2b9edfb9c05aefe823256e84d5"
+ 
+ inherit pypi setuptools3 ptest
+ 
+-- 
+2.17.1
 
-/Sean
