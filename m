@@ -1,64 +1,59 @@
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web10.2116.1609830385553419056
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web09.2380.1609832419178500403
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Jan 2021 23:06:25 -0800
+ Mon, 04 Jan 2021 23:40:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=mRC6qOQu;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id be12so15882426plb.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Jan 2021 23:06:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=WppMMDCcREVRIILcSTV+vM99CypVG2MxFDwXb3t0i2k=;
-        b=mRC6qOQuyMWmDryokTGiY5WvbmMIk8YDUUWMy54rQDzxLuK+DZDLo5wDZpjsJ8vt6b
-         7uPDLQXXnbX0GY9BaXRfxNAsuSGdG7OL8P6dWkMNpK0MLDcMPvJDqa3vTNAPW/klFUwT
-         2UafW/4iDeRzqD5a9uvy2YPAW62KS8TSe+OZPnxcsmQY0Tja0HXlELNB1DtEfUN4OKQi
-         1DHumKq2IKs/AXQb09R6FT3ae7QYTs/iSH1dDDjO42OqtmmyW0IRPGD1//YmsBNSOOzZ
-         hFrqWLe74e8Q7fQ1pMIIRdezPj1MxQzInE6YSUf2joISlodIZcCz0gEkd3NT7z1XzGVV
-         Mhfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=WppMMDCcREVRIILcSTV+vM99CypVG2MxFDwXb3t0i2k=;
-        b=q6tk6QcpSpxHxSy5Z6CwIPdPdUneN5qqCRxFMqC5VOZdpFJ4AF1rhxMUb8SrpbO5cy
-         d4hBqFU73+39CYrtbW1I9xTnUzlzfkrjOukpAbuefbY6TMh+R0kkfm0eNpfbToEmiESU
-         Qtdqi+H0nprIlWuvPQJoIPh7ns5pAVEh4J4JWs3Y+8IT5rh3ul5v+U1xLyO5tRGFeO05
-         TGDnyYO/zSt4suhdHMXk8nEevMzIqQ04dZD6BgcB6MXpiK2/Ajmfabp8Dnr0cry+4wog
-         ZX8w+7+afKKhJdHfwaYmFtTPcatjdtv92pCDPJrBXYtT87pIclN0745pSkD39b1y8Y2R
-         XaZw==
-X-Gm-Message-State: AOAM531LtkERJM+enMjHAXYEY7E2mwt+XiTMZnwOuF8vsOnhpjmfGfxK
-	xHjQDqjbWDieoN/qDranow5WsBwYvPZkGLiME3A=
-X-Google-Smtp-Source: ABdhPJzcDujBwBV8W8M4Zwg/VX1IqJ/mi65/uuV+bUbX/GOK1y/JB91uh0OJyHbcbGHXwStlLScecqT5U0E/K+63wUE=
-X-Received: by 2002:a17:90b:2282:: with SMTP id kx2mr2710561pjb.77.1609830385156;
- Mon, 04 Jan 2021 23:06:25 -0800 (PST)
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.78,476,1599494400"; 
+   d="scan'208";a="103193273"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 05 Jan 2021 15:40:10 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id 071FB4CE6031
+	for <openembedded-devel@lists.openembedded.org>; Tue,  5 Jan 2021 15:40:10 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Tue, 5 Jan 2021 15:40:10 +0800
+From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-oe] [PATCH] thin-provisioning-tools: upgrade 0.8.5 -> 0.9.0
+Date: Tue, 5 Jan 2021 15:40:08 +0800
+Message-ID: <1609832408-108263-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <1608278860-111600-1-git-send-email-zhengrq.fnst@cn.fujitsu.com> <CAMKF1sr+JqTfqs2KvSvfzQahPHmCA0JBySkGvNebxJQyHuqKjA@mail.gmail.com>
-In-Reply-To: <CAMKF1sr+JqTfqs2KvSvfzQahPHmCA0JBySkGvNebxJQyHuqKjA@mail.gmail.com>
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-Date: Tue, 5 Jan 2021 08:06:13 +0100
-Message-ID: <CALbNGRQmNWsu7Sf5O2k85bEw7R+5jzGGzmMVf4tKE=O5V78iJQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH] poppler: upgrade 20.11.0 -> 20.12.1
-To: Khem Raj <raj.khem@gmail.com>
-Cc: zhengruoqin <zhengrq.fnst@cn.fujitsu.com>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
+X-yoursite-MailScanner-ID: 071FB4CE6031.A389E
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-On Tue, Jan 5, 2021 at 3:07 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> Seeing this error
->
-> https://errors.yoctoproject.org/Errors/Details/540475/
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ ...isioning-tools_0.8.5.bb => thin-provisioning-tools_0.9.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/thin-provisioning-tools/{thin-provisioning-tools_0.8.5.bb => thin-provisioning-tools_0.9.0.bb} (92%)
 
-FWIW: poppler 21.01.0 has been released and from announcement it seems
-they have been working on jpeg. Maybe it is worth to continue with
-21.01.0:
+diff --git a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.9.0.bb
+similarity index 92%
+rename from meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb
+rename to meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.9.0.bb
+index 3f82734ac..9a05e05f3 100644
+--- a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb
++++ b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.9.0.bb
+@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/jthornber/thin-provisioning-tools;branch=main \
+            file://use-sh-on-path.patch \
+ "
+ 
+-SRCREV = "5e5409f48b5403d2c6dffd9919b35ad77d6fb7b4"
++SRCREV = "d6d93c3157631b242a13a81d30f75453e576c55a"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ 
+-- 
+2.25.1
 
-* Maybe the error was fixed upstream
-* Chances that patches do not apply on upgrade are fewer
 
-Cheers
 
-Andreas
