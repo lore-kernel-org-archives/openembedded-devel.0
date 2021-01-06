@@ -1,50 +1,50 @@
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.web08.9418.1609946275071995433
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+ by mx.groups.io with SMTP id smtpd.web08.9420.1609946276506449820
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Jan 2021 07:17:55 -0800
+ Wed, 06 Jan 2021 07:17:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Kbe31cfa;
- spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f43.google.com with SMTP id d17so5454114ejy.9
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:17:54 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pCCeXEpB;
+ spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f45.google.com with SMTP id ga15so5530107ejb.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:17:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=ZuqumnXd8Qlizyu4QSkOlH9ocxbxRzubmre/r0M+4Fs=;
-        b=Kbe31cfatcu/I8HgIjeP+cvMY3ZD+LettVOVeZn7qHLgfHN5JFAggYz3w1gAbKiUqv
-         kuZtYYzDQmZGb1hkwdGLgEhbPNNi0jiKAu2WMjMQPXh2HKT3mfEtHbFpQhynpzYWRT/m
-         2F02ZxvaOf6gZulklE1kY02+9D4y2HKof4e3wx9cWIuvwtGfd7uveEirN9sV5N6bqZx2
-         Z7+MdxtsMF5TMIq8JPlGY9WO24fqKr4jLyQGnXmNMxF5Av5iuNpoBOygvx4b7Q+Xqq+7
-         898mJGrqMTNcQks6W+p4m+ak6TnTYbbGR0j88Fp4/zIHQip6eANoHXAVXkJAZAxKCxo7
-         Dwow==
+        bh=IbcEraYr6JpzfSknwQ6qe9lKwfCRC8QopfuAwwusRUY=;
+        b=pCCeXEpB3pnSQ9dE2WvCzYRm0/cEDXdFvZP3EgG0ybOBjfzsbIs7/jrE3tVq/rZ8qu
+         1AIEEG4W/K5RfjKt9UnACPiWBcbznewcZtq8nXzJIhUApPEz7b06BMFZoBhDnPljOxXL
+         4nfp9Oe0NF206SgJR9ND6Cwr0zGfqAXxOHBxLS+LxrvtDHgZqbtbjfnH2msbnZ+Ibz3r
+         pbeonyM8Hr+hENGqDEH0B38UcSFyM3aw2u7cE9T4R68P1+jCt77rh1R3u/Kzv6D4ZMHy
+         mZtuKH1jRO1bdhyQ7iALYa0PoqObMx+l+cUxbdqiAweXCNVu/MHxa60sgtXDAjhY6xL6
+         35Eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=ZuqumnXd8Qlizyu4QSkOlH9ocxbxRzubmre/r0M+4Fs=;
-        b=eqGNCSydZmFyQS3XJQaFHO6xLKInr9TCdXHrWTkpt4ebeXCCUGaCgK6HYmbB32urvZ
-         zZxToLH0DsYgPo91EoolYF/I+r4L4cLTkfwM9cTwQhWt2QK9sYAO0034voCPZx2Z69t+
-         ZSjTOM4GuVk74Mesx+4zr4x7kqR2VuHGVSoM6Ge2K4NRRyi3wjDgfjCST0moU/TylVIb
-         dt9Ogi7nhQKUNboR7ZiXLq02gJYjapMv4pWqcdauEEt4ZP6yjd+X3cC5IHLI4/iHgSH4
-         xtVZv6vP3Kjhhqitik+KhZ9hBKWbP4cZVMl6k8rSNThJWN/haOU0JOEwj3QAvaRlJZtB
-         HuzQ==
-X-Gm-Message-State: AOAM533z0aZNye9Jilv2IGPrp6sxX7tqvr9mjRmlqa1GSTk31mSEH02d
-	PzTMTwZ2zywyPK3QR8zXbdyD+trAFvCZVg==
-X-Google-Smtp-Source: ABdhPJwYTG0sQohf89N2fGk65WQo34eDALG5E6TexTu08uvoHhYVzcoGWCwViSLKdJcX4m586pGJyA==
-X-Received: by 2002:a17:906:c7d9:: with SMTP id dc25mr3336246ejb.138.1609946273683;
-        Wed, 06 Jan 2021 07:17:53 -0800 (PST)
+        bh=IbcEraYr6JpzfSknwQ6qe9lKwfCRC8QopfuAwwusRUY=;
+        b=Mtovp7FHXEyUBRJsxUFutGue91PVXqkeuVb4pVN5VuROkSrpCHuspBE2CSxGDTKvvk
+         fmcu1OUktZtqxJQwptouUfpirNLqrDpvy3cwr4/o6gzkNl2lmC4Pe4ChNqSXxts1cCnY
+         ZyEgNFBNlZ+peaOBetv1+40PVTvtK4IqVYsgz0bEyzIQARMLV5gZgn/fuunRubK0ZppQ
+         0/BJXMN6xXNEqLxNUVk+K1F36pQ1MxAkd7ppGhZkr5VvJqHzn0f9dWrIBfdxUzSZowtU
+         Oh95SE/3dfg4bao+cXUQAocbr8dHlzshMUdO3Hhi8onmrFDKMlZo52QSvMvHrgrhyk70
+         eVKw==
+X-Gm-Message-State: AOAM533fSK2wLhXMJ96fgINdnQCVH7aUHml0A3j9ItOVH/BAN3Nn+UKK
+	ZondlQkUkl/F+QKeICndSx1/ayTShArZ+w==
+X-Google-Smtp-Source: ABdhPJytXT50y5x0ymjRZ+uEjCjt1dyOkPNBGcaFoJFJ5JbI6BdNXvaDrXVg5xxeU/lJ1a/HyX2/Zg==
+X-Received: by 2002:a17:907:1009:: with SMTP id ox9mr3183183ejb.37.1609946275182;
+        Wed, 06 Jan 2021 07:17:55 -0800 (PST)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f47431850a04677ec24921a.dip0.t-ipconnect.de. [2003:f0:7f47:4318:50a0:4677:ec24:921a])
-        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.17.52
+        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.17.53
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 Jan 2021 07:17:53 -0800 (PST)
+        Wed, 06 Jan 2021 07:17:54 -0800 (PST)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 19/28] xfce4-taskmanager: remove exo-native from DEPENDS
-Date: Wed,  6 Jan 2021 16:17:08 +0100
-Message-Id: <20210106151717.1779543-19-schnitzeltony@gmail.com>
+Subject: [PATCH 20/28] xfce4-closebutton-plugin: upgrade 0.1.0+ -> 4.16.0
+Date: Wed,  6 Jan 2021 16:17:09 +0100
+Message-Id: <20210106151717.1779543-20-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210106151717.1779543-1-schnitzeltony@gmail.com>
 References: <20210106151717.1779543-1-schnitzeltony@gmail.com>
@@ -52,25 +52,34 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-With xfce 4.16 exo-native is gone
+Minor adjustments for xfce 4.16 / follow release scheme
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.4.0.bb   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../closebutton/xfce4-closebutton-plugin_git.bb           | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.4.0.bb b/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.4.0.bb
-index 1f84c2b01..d41ee894a 100644
---- a/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.4.0.bb
-+++ b/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.4.0.bb
-@@ -4,6 +4,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git.bb b/meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git.bb
+index 8dfb2e626..1cb489f7e 100644
+--- a/meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git.bb
++++ b/meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git.bb
+@@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b6952d9a47fc2ad0f315510e1290455f"
  
- inherit xfce-app
+ inherit xfce-panel-plugin xfce-git gtk-icon-cache perlnative
  
--DEPENDS += "gtk+3 cairo libwnck libxmu xfce4-dev-tools-native exo-native"
-+DEPENDS += "gtk+3 cairo libwnck libxmu xfce4-dev-tools-native"
+-DEPENDS += "exo-native libwnck3 xfconf"
++DEPENDS += "xfce4-dev-tools-native libwnck3 xfconf"
  
- SRC_URI[sha256sum] = "655684ddfc15fc09071f78f9fce5439d20bbd2d80ecfc5ba0a08fb38313e7d43"
+-PV = "0.1.0+gitr${SRCPV}"
++PV = "4.16.0"
+ 
+-SRC_URI = "git://github.com/schnitzeltony/xfce4-closebutton-plugin.git;branch=master"
+-SRCREV = "6ed5c3ee1ba7103ca854c5e81fb2c1220b913a40"
++SRC_URI = "git://github.com/schnitzeltony/xfce4-closebutton-plugin.git"
++SRCREV = "538f9acfc5d5019f5cde734d056bcc0c95da9b4c"
+ S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "--enable-maintainer-mode"
 -- 
 2.26.2
 
