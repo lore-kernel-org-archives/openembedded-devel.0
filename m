@@ -1,50 +1,50 @@
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
- by mx.groups.io with SMTP id smtpd.web10.9402.1609946253889414661
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+ by mx.groups.io with SMTP id smtpd.web09.9382.1609946255692408497
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Jan 2021 07:17:34 -0800
+ Wed, 06 Jan 2021 07:17:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=VOmrE22G;
- spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f51.google.com with SMTP id b73so4627686edf.13
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:17:33 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=BMffnPXU;
+ spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f49.google.com with SMTP id p22so4649944edu.11
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:17:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=qXV7RIPsIhQN0SZv2Ls4TLD/qVcqmYbmubKt0/EJW30=;
-        b=VOmrE22G/VlUEb+j+QmEFQ2yzUFOevP9ILrwerTHof+mxhiHdKv15GYwgnw0InYm9V
-         F4uCLWMbsa4NeFjzhsHz/9pIxTXSNFvV2uf2+VESYgCYYC/vG4kWbxFAM7Zc5oIhq88y
-         PlAhMqJQ9icLp8lgZz+WH+pZnKCb6KbnZRgPYTF64IqQmdJpOTQN7eZwCaNSn0XsB2Ny
-         Dzhdh+ImwmEYqt06k4xSTkWi0jhRRYHd9JuEweLJbh3eVbevT5m5nh+18l4K8BwLv9tD
-         ZL8LBW59hgIETdRH6KHKZBxaQtIvjsU/ftdHfQGhFRpeUEeZMtEx3eKBdUCBUIe5Z6Pd
-         l8NQ==
+        bh=/Xy4RK9ZeD6DF91IePUGkfOFZwTwm87SDr63IYsybtM=;
+        b=BMffnPXUoPhOoHen6A4CZHUl/mz5L3RpQrr7xuMTacX9H+Yx29wMUqZajKcYjYHyVA
+         Xz+VxcaLyPVijbkhQy/qi1Q7eTl0Nbi5zqk0M4DZx3fCcxC6Qf4g6GKCeeCUVpHPPHVC
+         1sPoiwRP2/grMTxqSa5EuK4fRiSrWLctpp6CcIAW007mJpPEuJqmXGNK4Ec/TUTjGAsa
+         achNp1TQosQ63K1gTdemi3d9jNKhr97Qdc6LQybcgxjZL7ZgsXtLbej4Fjod/bvMHtO0
+         vRM8C4e9UovqU1MjJEoBvNxP7MpJtd/UBYaK6uK9Ds8JsTh/ayeJ7TjpMAly3pnpRsSA
+         mICA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=qXV7RIPsIhQN0SZv2Ls4TLD/qVcqmYbmubKt0/EJW30=;
-        b=MH/sY87ovEkdUnYJoXCPII5iFCy6GdLXMg7TcyfrMj6Gjfkxl+MDT4IIUOwazzJamX
-         xNJLaFrMORIxna0lcMG5lvm6GSRtCtIRLTMq9LuwMi+GMUbc/dGndEmojWChA3yeevk1
-         Vs9Fg4oV30bAFaSellXWCBcGteNKa7LhNcJc9477EJlReO0nZSL4FHFHKrAmNrFHYMIY
-         69I0qA/eeV5CcTnHOYHROzZGLVltrTx2ugh2G7eN3+uJ4op1FWAPhMw3lhGJ+ajUo6xf
-         l/UVBIOYr9+7RhqODDvy6eZElxciR0ICiatxlxpcSmy76TYlhIx53XnA/AlDoM3KJDhE
-         zrVg==
-X-Gm-Message-State: AOAM533sx67bNsgS5KGu5tF441RakF546CxzULLxxX0Tmvb4xVpovsYR
-	mtCmMg/PI6dtugsqdewY3w69kVFPvXkzhw==
-X-Google-Smtp-Source: ABdhPJyF/xTYHqfv1iGYxyt/Gn4gKw8zr9dOrpSrKd+FUTslSQI2oj9QVI13xAgxh3N/21NGyAZD/w==
-X-Received: by 2002:a50:9f4a:: with SMTP id b68mr4265080edf.296.1609946252470;
-        Wed, 06 Jan 2021 07:17:32 -0800 (PST)
+        bh=/Xy4RK9ZeD6DF91IePUGkfOFZwTwm87SDr63IYsybtM=;
+        b=jHeBsr7/mc/fmyGcEnZlFnL96WuTGVclNBE82Gl3NEly+hTxz77HnCIwTNNuNWIpIG
+         xpqC2sHDx+zSdXCoHSgorkEfOZ+06MMLq3P0BNFgPDK917n/CuHAt952EMD0ZMgzcUB5
+         6E3PdcUHGOGd61qwHPpq7G/V+jsVdf51s1tdUUuthlTytqAepaq2BkWyWPeqcdy2SK1O
+         SUqkJ9vza3RL34tZ4KgSu28E+VbBCvrfPmHr2n2cUBa9wl6QmISHIgl0XrgefHIYgL3G
+         Hc0a7G1IuzKhiPzrlFxl8ww8SNV9dLCJD9/F2kbb/nDEyaNyOuwoFZu0jdW+7XGqOZi6
+         hZIg==
+X-Gm-Message-State: AOAM5309+VSW5IWvhfM73+pAbK0HSwt9kMDV//cRXExIK0AwUoRPyjAk
+	pSH5lBAZWMK+qoO+bUBRA4ZpTPcKT3OEIQ==
+X-Google-Smtp-Source: ABdhPJz2sFBFuImhu35dR46FpntVO5AU9YGU3OgYYUEuvUsZNOkQXnn6WESMF8Nu5JrkMz/igEoTiw==
+X-Received: by 2002:a05:6402:104e:: with SMTP id e14mr4376732edu.316.1609946253943;
+        Wed, 06 Jan 2021 07:17:33 -0800 (PST)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f47431850a04677ec24921a.dip0.t-ipconnect.de. [2003:f0:7f47:4318:50a0:4677:ec24:921a])
-        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.17.31
+        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.17.32
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 Jan 2021 07:17:31 -0800 (PST)
+        Wed, 06 Jan 2021 07:17:32 -0800 (PST)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 03/28] xfconf: upgrade 4.14.3 -> 4.16.0
-Date: Wed,  6 Jan 2021 16:16:52 +0100
-Message-Id: <20210106151717.1779543-3-schnitzeltony@gmail.com>
+Subject: [PATCH 04/28] libxfce4ui: upgrade 4.14.1 -> 4.16.0
+Date: Wed,  6 Jan 2021 16:16:53 +0100
+Message-Id: <20210106151717.1779543-4-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210106151717.1779543-1-schnitzeltony@gmail.com>
 References: <20210106151717.1779543-1-schnitzeltony@gmail.com>
@@ -52,53 +52,308 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+GTK2 libs are gone so extra GRK2/GTK3 packages can go
+
 Release notes for 4.16.0
 ========================
-- Don't use shebang for bash completion file
-- Remove GLIB_CHECK_VERSION IFDEFs which are obsolete after glib bump
-- bump glib (and gio, gthread, etc) minimum to 2.50.0
-- remove last traces of xfconf-perl
-- Fix make distcheck and enable it on gitlab CI
-- Add README.md to EXTRA_DIST
+- about: Harmonize capitalisation
+- Update credits for Xfce 4.16
+- Translation Updates:
+  Basque, Bulgarian, Catalan, Chinese (Taiwan), Dutch, Galician,
+  Japanese, Lithuanian, Norwegian Bokmål, Portuguese, Portuguese
+  (Brazil), Serbian
 
-Release notes for 4.15.1
+Release notes for 4.15.7
+========================
+[Please note that this is a development release.]
+- libxfce4ui now needs libxfce4util >= 4.15.6
+- Update configure.ac.in syntax
+- Namespace of the gir needs capital first letter
+- Remove hardcoded translators list
+- Bump libepoxy version to 1.2
+- Translation Updates:
+  Portuguese (Brazil), Slovenian, Swedish
+
+Release notes for 4.15.6
+========================
+[Please note that this is a development release.]
+- Introduce xfce_spawn and xfce_spawn_command_line
+  in favor and instead of xfce_spawn_no_child
+- Bump GLib (and gio, gthread, etc) minimum to 2.50.0
+- about: Support multiple GPUs and print GPU memory size
+- about: Drop window subtitle
+- Always perform sanity check
+- Avoid checking for epoxy if libgtop is disabled
+- XfceTitledDialog: Fix erroneous check (Fixes #30)
+- No startup notification in Wayland to prevent crash (Issue #17)
+- Translation Updates:
+  Chinese (China), Chinese (Taiwan), Estonian, French, German, Hebrew,
+  Indonesian, Italian, Japanese, Lithuanian, Norwegian Bokmål,
+  Portuguese, Portuguese (Brazil), Russian, Serbian, Spanish, Swedish,
+  Turkish
+
+Release notes for 4.15.5
+========================
+[Please note that this is a development release.]
+- Add new API xfce_spawn_no_child (!8):
+  Launch processes re-parenting them to init vs. as children
+- about: Fix icon names
+- about: Display userspace bitness if it differs from OS kernel bitness
+- about: Print GPU name in system info
+- about: Use more understandable arch labels (Issue #27)
+- Improve xfce_icon_name API
+- No startup notification in wayland to prevent crash (Issue #17)
+- Add missing docstring
+- Fix typos
+- Add README.md to EXTRA_DIST
+- Translation Updates:
+  Catalan, Chinese (China), Danish, Galician, German, Italian,
+  Lithuanian, Turkish
+
+Release notes for 4.15.4
+========================
+This is a development release of libxfce4ui aiming the upcoming release
+of Xfce 4.16.
+
+- Avoid redundant key re-grabbing
+- Adds new README.md and updates AM_INIT_AUTOMAKE
+- Silence compiler warnings (Fixes #25)
+- AC_CONFIG_MACRO_DIR → AC_CONFIG_MACRO_DIRS
+- Add default shortcuts for tiling (Fixes #4)
+- Avoid shortening the keycodes GArray while walking it.
+- about: Revamp About Xfce tab
+- about: More icon name fixes
+- Add more logo icons and new about icon
+- Update deprecated icon names
+- keyboard-shortcuts: Improve UI for setting shortcuts
+- shortcut-dialog: Add label to clear button
+- shortcut-dialog: Port to new XfceTitledDialog API
+- shortcut-dialog: Only grab keyboard
+- Always return GTK_RESPONSE_OK for accepted shortcut keys (fixes #20)
+- Translation Updates:
+  Albanian, Amharic, Arabic, Armenian, Armenian (Armenia), Basque,
+  Belarusian, Bengali, Bulgarian, Catalan, Chinese (China), Chinese
+  (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
+  Eastern Armenian, English (Australia), English (United Kingdom),
+  Estonian, Finnish, French, Galician, Georgian, German, Greek, Hebrew,
+  Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+  Kazakh, Korean, Latvian, Lithuanian, Malay, Norwegian Bokmål,
+  Norwegian Nynorsk, Occitan (post 1500), Polish, Portuguese,
+  Portuguese (Brazil), Romanian, Russian, Serbian, Slovak, Slovenian,
+  Spanish, Swedish, Telugu, Thai, Turkish, Ukrainian, Uyghur, Welsh
+
+Release notes for 4.15.3
 ========================
 [Please note that this is a development release.]
 
-- Fix stray double-quote in bash-completion PKG_CONFIG invocation
-- Disable parallelism on all tests
-- Adds new README.md and updates AM_INIT_AUTOMAKE
-- xfconf-cache: Fix access to freed data (#16)
-- Translation Updates: oc, he, hu, hy_AM, lt, sk, sq, ug, tr.
+- Update bug URLs to point to gitlab.xfce
+- xfce-about: Hide empty email address tags (Fixes #12)
+- Remove translator email address as per request (Fixes #11)
+- Add missing translator "Hugo Carvalho" to xfce4-about (issue #18)
+- Replace deprecated 'gdk_keyboard_ungrab' function (Fixes #15)
+- shortcuts-grabber: Correctly ungrab keys on updating shortcuts (Fixes
+  #16)
+- Add basic GitLab pipeline
+- Allow more granular control over menu item accelerators.
+  - No automatic accelerator activation formenu items
+  - Added 'gtk_menu_item_set_accel_label'
+  - Added 'xfce_gtk_accel_group_connect_action_entries'
+- renamed 'xfce_gtk_accel_group_append' to
+  'xfce_gtk_accel_map_add_entries' and modified internals accordingly.
+  No automatic add to an accel_group any more, since this may lead to
+  double-activation in some cases.
+- Add "xfce_gtk_accel_group_disconnect_action_entries" to be able to
+  revert "xfce_gtk_accel_group_connect_action_entries"
+- Add title to xfce_dialog_confirm_close_tabs
+- Add new methods to libxfce4ui.symbols. Followup of
+  231e57daccb5946379f413ed440629c32025f6f3
+- Translation Updates:
+  Albanian, Amharic, Arabic, Armenian, Armenian (Armenia), Basque,
+  Belarusian, Bengali, Bulgarian, Catalan, Chinese (China), Chinese
+  (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
+  Eastern Armenian, English (Australia), English (United Kingdom),
+  Estonian, Finnish, French, Galician, German, Greek, Hebrew,
+  Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+  Kazakh, Korean, Latvian, Lithuanian, Malay, Norwegian Bokmål,
+  Norwegian Nynorsk, Occitan (post 1500), Polish, Portuguese,
+  Portuguese (Brazil), Romanian, Russian, Serbian, Slovak,
+  Slovenian, Spanish, Swedish, Telugu, Thai, Turkish,
+  Uighur, Ukrainian, Welsh
+
+Release notes for 4.15.2
+========================
+[Please note that this is a development release.]
+
+- Introduced 'XfceGtkActionEntry' as replacement for the deprecated
+  'GtkAction', 'GtkActionEntry' in order to keep simple menu creation.
+  This includes various support methods, like:
+  'xfce_gtk_translate_action_entries' to to translate a list of
+     XfceGtkActionEntrys
+  'xfce_gtk_accel_group_append' to register the provided
+     accelerators of the entries
+  'xfce_gtk_get_action_entry_by_id' to find a single
+     XfceGtkActionEntry, e.g. by using a enumeration
+  'xfce_gtk_***_new_from_action_entry' to create the specific
+     menu- or tool-items from an XfceGtkActionEntry
+- Add a widget for filename input (Bug #16542)
+- Enabled doc generation for XfceGtkActionEntry and related
+  methods
+- Enabled doc generation for new widget 'xfce-filename-input'
+- Switch Ctrl+Alt+Del to xfce4-session-logout (Bug #11979)
+- Add more default keyboard shortcuts (Bug #16470)
+- shortcuts: Replace xfrun4 by xfce4-appfinder
+- shortcuts: Also map Homepage to browser
+- shortcuts: Remove calculator shortcut
+- Update gitignore
+- Translation Updates:
+  Albanian, Basque, Belarusian, Chinese (China), Chinese (Taiwan),
+  Croatian, Danish, Dutch, French, Galician, German, Hebrew, Hungarian,
+  Kazakh, Malay, Norwegian Bokmål, Portuguese, Portuguese (Brazil),
+  Russian, Serbian, Slovenian, Swedish, Ukrainian
+
+Release notes for 4.15.1
+========================
+This release introduces the following features:
+- Switch XfceTitledDialog to headerbar/CSD layout
+- Use GtkMessageDialog as base class for Xfce Dialogs
+- Add two new functions to search for app icons
+- Improve Tests and Docs
+
+Full changelog:
+- Switch XfceTitledDialog to headerbar layout
+- XfceTitledDialog: Keep buttons in the action area
+- XfceTitledDialog: Also repack xfce_titled_dialog_new
+- XfceTitledDialog: Make sure windows can be dragged
+- XfceTitledDialog: Add _create_action_area, _add_button
+  and _add_action_widget
+- Introduce xfce_titled_dialog_set_default_response
+- Mark xfce_titled_dialog_new_with_buttons as deprecated
+- Add two new functions to search for app icons
+- xfce-about: Fix Makefile
+- shortcut-dialog: Show dialog content (Bug #16338)
+- xfce-dialogs: Use GtkMessageDialog as base class
+- xfce-dialogs: Improve layout of confirm_close_tabs
+- xfce-dialogs: Improve alignment and layout of dialogs
+- xfce-dialogs: Add right margin back to labels
+- xfce-dialogs: Drop default window titles
+- docs: Add xfce_dialog_confirm_close_tabs
+- tests: Add xfce_dialog_confirm_close_tabs
+- tests: Improve UI
+- tests: Add icons to dialog buttons
+- tests: Simplify code by using XfceTitledDialog
+- tests: Re-order buttons
+- tests: Fix typo in test-ui.c (Bug #16253)
+- Rename test-ui-gtk3 to test-ui
+- Improve docstrings
+- Fix typos
+- Drop gladeui Gtk2 from distcheck options
+- Drop unused declaration
+- Fix compiler warnings
+- Remove trailing whitespace
+- Always provides needed files for vala binding in dist tarball
+- Add recents functions to libxfce4ui.symbols
+- Drop xfce-header from pot files
+- Update docstrings
+- Fix license text box too small (Bug #16259)
+- .gitignore: ignore all .o files
+- Make autogen output friendlier
+- Translation Updates:
+  Albanian, Bulgarian, Catalan, Chinese (China), Croatian, Danish,
+  Dutch, French, Galician, German, Hungarian, Italian, Japanese,
+  Lithuanian, Norwegian Bokmål, Polish, Portuguese, Portuguese
+  (Brazil), Russian, Serbian, Slovak, Slovenian, Spanish, Swedish,
+  Turkish, Ukrainian
+
+Release notes for 4.15.0
+========================
+- Drop support for Gtk2
+- Make glibtop an optional dependency ("About System" tab)
+- about: Add system info tab
+- about: Hide system tab conditionally
+- dialogs: Use symbolic window-close icon
+- Fix Window not visible when grabbing keyboard (Bug #16054)
+- Bump Gtk3 to 3.22 (Bug #15781)
+- Do not use gdk_screen_get_monitor_at_point (Bug #15781)
+- Replace gtk_show_uri (Bug #15781)
+- Replace gdk_display_get_screen (Bug #15781)
+- Replace gdk_keymap_get_default (Bug #15781)
+- Replace deprecated device functions (Bug #15781)
+- Replace gdk_error_trap_* and gdk_flush (Bug #15781)
+- Ignore what is hard to replace (Bug #15781)
+- Add a dialog to confirm closure of multiple tabs (bug #15873)
+- Translation Updates:
+  Bulgarian, Chinese (China), Chinese (Taiwan), Croatian, Czech,
+  Danish, Dutch, English (United Kingdom), Finnish, French,
+  Galician, German, Hungarian, Interlingue, Italian, Japanese,
+  Korean, Norwegian Bokmål, Norwegian Nynorsk, Polish, Portuguese,
+  Portuguese (Brazil), Russian, Serbian, Slovak, Slovenian,
+  Spanish, Turkish
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../xfconf/{xfconf_4.14.3.bb => xfconf_4.16.0.bb}            | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.14.3.bb => xfconf_4.16.0.bb} (77%)
+ ...ivate-xfce4-keyboard-shortcuts.xml-fix.patch |  2 +-
+ ...ibxfce4ui_4.14.1.bb => libxfce4ui_4.16.0.bb} | 17 ++++-------------
+ 2 files changed, 5 insertions(+), 14 deletions(-)
+ rename meta-xfce/recipes-xfce/libxfce4ui/{libxfce4ui_4.14.1.bb => libxfce4ui_4.16.0.bb} (50%)
 
-diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.14.3.bb b/meta-xfce/recipes-xfce/xfconf/xfconf_4.16.0.bb
-similarity index 77%
-rename from meta-xfce/recipes-xfce/xfconf/xfconf_4.14.3.bb
-rename to meta-xfce/recipes-xfce/xfconf/xfconf_4.16.0.bb
-index 792f8b160..9b341bb27 100644
---- a/meta-xfce/recipes-xfce/xfconf/xfconf_4.14.3.bb
-+++ b/meta-xfce/recipes-xfce/xfconf/xfconf_4.16.0.bb
-@@ -4,12 +4,11 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- DEPENDS = "libxfce4util perl intltool-native xfce4-dev-tools-native"
+diff --git a/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch b/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch
+index 6d107b1b6..616142761 100644
+--- a/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch
++++ b/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch
+@@ -19,7 +19,7 @@ index 723a10d..e6502f3 100644
+ --- a/libxfce4kbd-private/xfce4-keyboard-shortcuts.xml
+ +++ b/libxfce4kbd-private/xfce4-keyboard-shortcuts.xml
+ @@ -75,4 +75,8 @@
+-       <property name="&lt;Primary&gt;F12" type="string" value="workspace_12_key"/>
++       <property name="<Super>KP_Next" type="string" value="tile_down_right_key"/>
+      </property>
+    </property>
+ +  <property name="providers" type="array">
+diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.16.0.bb
+similarity index 50%
+rename from meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb
+rename to meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.16.0.bb
+index 348b685be..7a269ad66 100644
+--- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb
++++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.16.0.bb
+@@ -2,17 +2,15 @@ SUMMARY = "Xfce4 Widget library and X Window System interaction"
+ SECTION = "x11/libs"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"
+-DEPENDS = "intltool-native perl-native gtk+ gtk+3 libice libsm libxfce4util xfce4-dev-tools xfconf virtual/libx11"
++DEPENDS = "intltool-native perl-native gtk+3 libice libsm libxfce4util xfce4-dev-tools xfconf virtual/libx11"
  
--inherit xfce gtk-doc gobject-introspection
-+inherit xfce gtk-doc gobject-introspection bash-completion
+ inherit xfce gtk-doc gobject-introspection features_check
  
- EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
+ REQUIRED_DISTRO_FEATURES = "x11"
  
--SRC_URI[md5sum] = "25c32ed08a43e81f7900c03601dffc02"
--SRC_URI[sha256sum] = "589052a0efc6151c5fb5f438da463502a4fd91848cae7b9376d417be4c5a0c02"
-+SRC_URI[sha256sum] = "652a119007c67d9ba6c0bc7a740c923d33f32d03dc76dfc7ba682584e72a5425"
+-SRC_URI += " \
+-    file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch \
+-"
+-SRC_URI[md5sum] = "50eae4bab5eeced186bce16fb5f802ac"
+-SRC_URI[sha256sum] = "c449075eaeae4d1138d22eeed3d2ad7032b87fb8878eada9b770325bed87f2da"
++# TODO: Check if this can go
++SRC_URI += "file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch"
++SRC_URI[sha256sum] = "8b06c9e94f4be88a9d87c47592411b6cbc32073e7af9cbd64c7b2924ec90ceaa"
  
- FILES_${PN} += "${libdir}/xfce4/xfconf/xfconfd \
-                 ${libdir}/gio/modules/libxfconfgsettingsbackend.so \
+ EXTRA_OECONF += "--with-vendor-info=${DISTRO}"
+ 
+@@ -20,15 +18,8 @@ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[gladeui2] = "--enable-gladeui2,--disable-gladeui2,glade"
+ PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
+ 
+-PACKAGES =+ "${PN}-gtk2 ${PN}-gtk3"
+-FILES_${PN}-gtk2 += "${libdir}/libxfce4ui-1.so.* ${libdir}/libxfce4kbd-private-2.so.*"
+-FILES_${PN}-gtk3 += "${libdir}/libxfce4ui-2.so.* ${libdir}/libxfce4kbd-private-3.so.*"
+-
+ PACKAGES += "${PN}-glade"
+ FILES_${PN}-glade = " \
+     ${libdir}/glade \
+     ${datadir}/glade \
+ "
+-
+-RDEPENDS_${PN}-gtk2 = "${PN}"
+-RDEPENDS_${PN}-gtk3 = "${PN}"
 -- 
 2.26.2
 
