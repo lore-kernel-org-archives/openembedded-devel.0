@@ -1,50 +1,50 @@
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
- by mx.groups.io with SMTP id smtpd.web10.9401.1609946252710596407
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web10.9402.1609946253889414661
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Jan 2021 07:17:33 -0800
+ Wed, 06 Jan 2021 07:17:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=q7bSYnIB;
- spf=pass (domain: gmail.com, ip: 209.85.208.45, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f45.google.com with SMTP id dk8so4772856edb.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:17:32 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=VOmrE22G;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id b73so4627686edf.13
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:17:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=PPACYAtwDEVuJ0xnN54h7nuAwyLzDs6kMNICk3cPo+w=;
-        b=q7bSYnIBfyWL7+vsDTSniNdTNx4a5Dde5Msxh7dRXPDI4pHJo+AmHM12GUJiaFyVDe
-         ECbHLI23lfG0s6XXWluzdxvI5n0txVwPFGnG1Z6nCaHBOU5L5cvAgQVZ2LgLZtrtR0Ae
-         RkeH+V1Nv1nsqklphXAX48wsNQq9DqqpxgGLHeNJk1GEPxvKgFTCKFHjZpT0GywwLwld
-         5yc1opSmFpRXJMC3aBMYZ07LMba0GeEXMOIDRJ+AsZZ/Y+zOn11SJKfuTckfs1jygdWG
-         hQeKeAjt2XUwdz9yspa55pVuQxMXc2cPV+PoIf2tdayURnnXci7bRZT04xLZN7KHU39e
-         fL7Q==
+        bh=qXV7RIPsIhQN0SZv2Ls4TLD/qVcqmYbmubKt0/EJW30=;
+        b=VOmrE22G/VlUEb+j+QmEFQ2yzUFOevP9ILrwerTHof+mxhiHdKv15GYwgnw0InYm9V
+         F4uCLWMbsa4NeFjzhsHz/9pIxTXSNFvV2uf2+VESYgCYYC/vG4kWbxFAM7Zc5oIhq88y
+         PlAhMqJQ9icLp8lgZz+WH+pZnKCb6KbnZRgPYTF64IqQmdJpOTQN7eZwCaNSn0XsB2Ny
+         Dzhdh+ImwmEYqt06k4xSTkWi0jhRRYHd9JuEweLJbh3eVbevT5m5nh+18l4K8BwLv9tD
+         ZL8LBW59hgIETdRH6KHKZBxaQtIvjsU/ftdHfQGhFRpeUEeZMtEx3eKBdUCBUIe5Z6Pd
+         l8NQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=PPACYAtwDEVuJ0xnN54h7nuAwyLzDs6kMNICk3cPo+w=;
-        b=R3U9/EFkRq2AEbONtp+FF1VLALX2rBzDTvHg3+HKSl2SQ9FWKWTHAHkUAdODhjGT8Y
-         gEMZW6Btq1J5mytwuUU8RREIIrQHKiYRPm9V1O7zZPytF+G0SmILkR6yDrPALZWuSnee
-         VjByv6sfP5KibIqQeIhvZTHJO7olTYSSJVhPGdP1LqUEvdwRrPibfWyu11d3sTeAZpjE
-         jdSmk7R1rlPHW9r+v76Rc4xAdndAWE88OjJzzriCyd9NxxhtBvAX0orfloReOsc/tur9
-         z6N6uqioDL8xWFV9PHopo2zYMl7fOyzYuuvI4pTOhG/HCasH6wlYf8eTw3Us97vXceYy
-         LQEA==
-X-Gm-Message-State: AOAM530bOhF4iQZjANs8ySTq6Otvy+8BqHn6Fdvfd+KfcdCpjtIikhOH
-	JzqgaVo4BpRhKtmDGLCi5dBzfAG7Mfdt0g==
-X-Google-Smtp-Source: ABdhPJzYaxKoZM+IchvhhiClhT6uXqTwQEsuxHG66TWU76zT77V59uQWr0LGBFFifJP8KntxdqThSQ==
-X-Received: by 2002:a05:6402:1386:: with SMTP id b6mr4296358edv.42.1609946251237;
-        Wed, 06 Jan 2021 07:17:31 -0800 (PST)
+        bh=qXV7RIPsIhQN0SZv2Ls4TLD/qVcqmYbmubKt0/EJW30=;
+        b=MH/sY87ovEkdUnYJoXCPII5iFCy6GdLXMg7TcyfrMj6Gjfkxl+MDT4IIUOwazzJamX
+         xNJLaFrMORIxna0lcMG5lvm6GSRtCtIRLTMq9LuwMi+GMUbc/dGndEmojWChA3yeevk1
+         Vs9Fg4oV30bAFaSellXWCBcGteNKa7LhNcJc9477EJlReO0nZSL4FHFHKrAmNrFHYMIY
+         69I0qA/eeV5CcTnHOYHROzZGLVltrTx2ugh2G7eN3+uJ4op1FWAPhMw3lhGJ+ajUo6xf
+         l/UVBIOYr9+7RhqODDvy6eZElxciR0ICiatxlxpcSmy76TYlhIx53XnA/AlDoM3KJDhE
+         zrVg==
+X-Gm-Message-State: AOAM533sx67bNsgS5KGu5tF441RakF546CxzULLxxX0Tmvb4xVpovsYR
+	mtCmMg/PI6dtugsqdewY3w69kVFPvXkzhw==
+X-Google-Smtp-Source: ABdhPJyF/xTYHqfv1iGYxyt/Gn4gKw8zr9dOrpSrKd+FUTslSQI2oj9QVI13xAgxh3N/21NGyAZD/w==
+X-Received: by 2002:a50:9f4a:: with SMTP id b68mr4265080edf.296.1609946252470;
+        Wed, 06 Jan 2021 07:17:32 -0800 (PST)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f47431850a04677ec24921a.dip0.t-ipconnect.de. [2003:f0:7f47:4318:50a0:4677:ec24:921a])
-        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.17.30
+        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.17.31
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 Jan 2021 07:17:30 -0800 (PST)
+        Wed, 06 Jan 2021 07:17:31 -0800 (PST)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 02/28] libxfce4util: upgrade 4.14.0 -> 4.16.0
-Date: Wed,  6 Jan 2021 16:16:51 +0100
-Message-Id: <20210106151717.1779543-2-schnitzeltony@gmail.com>
+Subject: [PATCH 03/28] xfconf: upgrade 4.14.3 -> 4.16.0
+Date: Wed,  6 Jan 2021 16:16:52 +0100
+Message-Id: <20210106151717.1779543-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210106151717.1779543-1-schnitzeltony@gmail.com>
 References: <20210106151717.1779543-1-schnitzeltony@gmail.com>
@@ -54,86 +54,51 @@ Content-Transfer-Encoding: 8bit
 
 Release notes for 4.16.0
 ========================
-- Bump xfce_version_string to 4.16
-- Properly handle URI schemes other than "file"
-
-Release notes for 4.15.6
-========================
-[Please note that this is a development release.]
-- Update configure.ac.in syntax
-- Namespace of the gir needs capital first letter
-- Bump GLib (and gio, gthread, etc) minimum to 2.50.0
-- Remove typedef already defined by G_DECLARE_FINAL_TYPE macro
-  (Fixes #4)
-
-Release notes for 4.15.5
-========================
-[Please note that this is a development release.]
-This is an emergency release to account for the lack of version bump to
-4.16pre2 in 4.15.4.
-
-- Bump Xfce version to 4.16pre2
+- Don't use shebang for bash completion file
+- Remove GLIB_CHECK_VERSION IFDEFs which are obsolete after glib bump
+- bump glib (and gio, gthread, etc) minimum to 2.50.0
+- remove last traces of xfconf-perl
+- Fix make distcheck and enable it on gitlab CI
 - Add README.md to EXTRA_DIST
-
-Release notes for 4.15.4
-========================
-This is a development release of libxfce4util aiming the upcoming
-release of Xfce 4.16.
-
-- Create README.md
-- Translation Updates:
-  Albanian, Armenian, Hebrew, Slovak, Uyghur
-
-Release notes for 4.15.3
-========================
-[Please note that this is a development release.]
-
-- Version bump in preparation of 4.16pre1
-
-Release notes for 4.15.2
-========================
-[Please note that this is a development release.]
-
-- Complete the field codes expansion
 
 Release notes for 4.15.1
 ========================
 [Please note that this is a development release.]
 
-- Add field codes expansion and related utilities (code moved from
-  garcon)
-- docs: Show the "Miscellaneous Utilities" section
-- Add basic GitLab pipeline
-- Translation Updates:
-  Albanian, Armenian (Armenia), Asturian, Belarusian, Hindi, Italian,
-  Spanish, Uzbek
-
-Release notes for 4.15.0
-========================
-- Bump the Xfce version to 4.15
-- Translation Updates:
-  Albanian, Galician, Spanish
+- Fix stray double-quote in bash-completion PKG_CONFIG invocation
+- Disable parallelism on all tests
+- Adds new README.md and updates AM_INIT_AUTOMAKE
+- xfconf-cache: Fix access to freed data (#16)
+- Translation Updates: oc, he, hu, hy_AM, lt, sk, sq, ug, tr.
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{libxfce4util_4.14.0.bb => libxfce4util_4.16.0.bb}         | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/libxfce4util/{libxfce4util_4.14.0.bb => libxfce4util_4.16.0.bb} (64%)
+ .../xfconf/{xfconf_4.14.3.bb => xfconf_4.16.0.bb}            | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.14.3.bb => xfconf_4.16.0.bb} (77%)
 
-diff --git a/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.14.0.bb b/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.16.0.bb
-similarity index 64%
-rename from meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.14.0.bb
-rename to meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.16.0.bb
-index 1bb5007fd..1a0b7183e 100644
---- a/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.14.0.bb
-+++ b/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.16.0.bb
-@@ -6,5 +6,4 @@ DEPENDS = "intltool-native xfce4-dev-tools-native glib-2.0"
+diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.14.3.bb b/meta-xfce/recipes-xfce/xfconf/xfconf_4.16.0.bb
+similarity index 77%
+rename from meta-xfce/recipes-xfce/xfconf/xfconf_4.14.3.bb
+rename to meta-xfce/recipes-xfce/xfconf/xfconf_4.16.0.bb
+index 792f8b160..9b341bb27 100644
+--- a/meta-xfce/recipes-xfce/xfconf/xfconf_4.14.3.bb
++++ b/meta-xfce/recipes-xfce/xfconf/xfconf_4.16.0.bb
+@@ -4,12 +4,11 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ DEPENDS = "libxfce4util perl intltool-native xfce4-dev-tools-native"
  
- inherit xfce gtk-doc gobject-introspection
+-inherit xfce gtk-doc gobject-introspection
++inherit xfce gtk-doc gobject-introspection bash-completion
  
--SRC_URI[md5sum] = "46f44e36acc3abf1a5ba814c22a773cb"
--SRC_URI[sha256sum] = "32ad79b7992ec3fd863e8ff2f03eebda8740363ef9d7d910a35963ac1c1a6324"
-+SRC_URI[sha256sum] = "60598d745d1fc81ff5ad3cecc3a8d1b85990dd22023e7743f55abd87d8b55b83"
+ EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
+ 
+-SRC_URI[md5sum] = "25c32ed08a43e81f7900c03601dffc02"
+-SRC_URI[sha256sum] = "589052a0efc6151c5fb5f438da463502a4fd91848cae7b9376d417be4c5a0c02"
++SRC_URI[sha256sum] = "652a119007c67d9ba6c0bc7a740c923d33f32d03dc76dfc7ba682584e72a5425"
+ 
+ FILES_${PN} += "${libdir}/xfce4/xfconf/xfconfd \
+                 ${libdir}/gio/modules/libxfconfgsettingsbackend.so \
 -- 
 2.26.2
 
