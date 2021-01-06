@@ -1,50 +1,50 @@
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
- by mx.groups.io with SMTP id smtpd.web09.9388.1609946262459948626
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
+ by mx.groups.io with SMTP id smtpd.web09.9389.1609946263673634532
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Jan 2021 07:17:42 -0800
+ Wed, 06 Jan 2021 07:17:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=tlEp++R7;
- spf=pass (domain: gmail.com, ip: 209.85.208.45, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f45.google.com with SMTP id cw27so4715071edb.5
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:17:42 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=lW38YUQZ;
+ spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f54.google.com with SMTP id b2so4752714edm.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:17:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=BbrnUMemhlHRP69+woFIZ4W2S7c/sX1Mpw/2GLFZIwU=;
-        b=tlEp++R7FOJbupVA5lNZPM8KwmFYbQqfgC2bQD3UDMY+c3cBDN+UZRdLC0RH1+6B16
-         SB20MTsiC0Rp4yqgmuy07rinK5rMn8fglTICAwsH6pykQ6BkGjchUCo63SsWb0J4U7ta
-         Rv9A1IF04eFty0ozUyHPh0f08JCGPQAK8Z8mz4xVf0MImD1xGuDS+8pc0+R+h4uy8waN
-         HCa6RFXiwIgp+edL2fdyjFNU8mfg8iSkiCtoSXKc5qcUyTvhUXtF1GJL3pm2KLw5G/cV
-         qsRKkx5yt121vld/n62r2ksLDLLFajJicEbJ+ui1UQ32c3Sx9X+SthgZxOnxdVop+cpo
-         jd/w==
+        bh=Xmu87FQ2auZhYodK2nk96h2McTLF6nWUOC3TCjNGvRQ=;
+        b=lW38YUQZySaFrfHdC+UE+EBW7PUiQhPedKqfmjtR0qlCPJWZ92h4k5cfux+ungZxcP
+         PF6nUU7DZzqyrdX8SYpWV0rvu3kA9ZgCsrDtHOmcBD1mgm5wIl/N2+uRx9vGNTwe1EcC
+         CqU4RoiIEepiZdBAhaWS/n4Pw7l4WKDOqhpIfdUWVHGj6cTrBF2recTX9JEEl3CP70Yq
+         5LArB12xLYR5dS8Af01edbvMvi0YSnIccunHmFxL22FW0VhwlM8sJFjPuby2MTN7c4vl
+         NXgaVjvtRGDUP+Y/Ke5Ec1Oy1Z1GOeEm/wppkU/QxwIRyqNcMK03+DHf2Qg9CaGE3PtH
+         BbdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=BbrnUMemhlHRP69+woFIZ4W2S7c/sX1Mpw/2GLFZIwU=;
-        b=LDAgCS2Ia5I7EFrGch+35cLwmCAtC/gONHfzNib+dARc1+2hd4J9DGPUYqgxsd8iLu
-         IpSQRi0ytI126RkPHz/571k2+501bUg9+0rxPNH6MVgxBGwFzuOsP6XAveC9FLAcu97g
-         Cy8y00hybL/S6Z/20bNrn4v6ElgZkZNq0yy9yFWMfr0shoAlwNSRZmLBw+3ha1L84SZn
-         QHpfqV8j+js4UZohf2oDrsUYMoQ9azMro9Ix8BiTrCuFpovF6J6uv37RVp3TH+663wjg
-         c4tj/3ToWLKVOjmDwxZ7N+cCxaULqLI80cH12MKoAglhZW/8Ols5qSAHla0VdZh9dA1H
-         SJgg==
-X-Gm-Message-State: AOAM532PpcFfrlkFn3wMb6oxe6KOxomwhdb1VQxx1LK+5R9cw4MeBWiq
-	nwqb7D2tPr9E+vUSqaWY6dZHshW68uTrVA==
-X-Google-Smtp-Source: ABdhPJxZ1wXJnjkB8coakMzVRgtMPP/3euk+LxQ46BaU1hkHwk33xggR+CDijOhOR3bA3AUsWBEwSw==
-X-Received: by 2002:aa7:d297:: with SMTP id w23mr4290832edq.374.1609946261050;
-        Wed, 06 Jan 2021 07:17:41 -0800 (PST)
+        bh=Xmu87FQ2auZhYodK2nk96h2McTLF6nWUOC3TCjNGvRQ=;
+        b=shCNvD9VdYcDEoUZC4Igsv4SGRYc8FyvmhvJV56F2RmX2VCmJveqjzPlAKYoFFFhMu
+         2HgbVCEXxcVzbySGPj+ZRhJulzjUV7G9Xs1nJw+TWoaw3NM/oFi+v5pK3tr6xoliITdN
+         t/ZoOC2A48ndk0Tba9QpThgzuTKhXOCoGjpptjgJkoO5QMx9CTm8z/j+z6qIgIHXy2L1
+         B7YfbxDJgs7Fdn8/GVZGrZEo9useDh4YdMI58EOtsuDpm9iDK30LFYby0Us3ceOTDizK
+         NZoJRvuSFZ5VW6CVReX5jyYZsZJmbCOGDC9udvdGvMGFhT0qIzsD9EoRzEi7Q7xVsUT7
+         FV1w==
+X-Gm-Message-State: AOAM533F+jPYImYNd8w9z1ugg0E3jeLZ2eEFJit9XlnJ1Y97pcdWOXJJ
+	cO+PiI3oDSyHOIJTBCQAOgX2K+30LmPl/g==
+X-Google-Smtp-Source: ABdhPJxLph9I8UMh8hQ6dgMZh9DMTnNwvlIQwMpFSB0MJDB0ZCX8lm4NtMIzyxK+Bzu5bZr61avqrQ==
+X-Received: by 2002:a50:b246:: with SMTP id o64mr4061537edd.132.1609946262314;
+        Wed, 06 Jan 2021 07:17:42 -0800 (PST)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f47431850a04677ec24921a.dip0.t-ipconnect.de. [2003:f0:7f47:4318:50a0:4677:ec24:921a])
-        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.17.40
+        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.17.41
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 Jan 2021 07:17:40 -0800 (PST)
+        Wed, 06 Jan 2021 07:17:41 -0800 (PST)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 10/28] xfce4-session: upgrade 4.14.2 -> 4.16.0
-Date: Wed,  6 Jan 2021 16:16:59 +0100
-Message-Id: <20210106151717.1779543-10-schnitzeltony@gmail.com>
+Subject: [PATCH 11/28] xfdesktop: upgrade 4.14.2 -> 4.16.0
+Date: Wed,  6 Jan 2021 16:17:00 +0100
+Message-Id: <20210106151717.1779543-11-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210106151717.1779543-1-schnitzeltony@gmail.com>
 References: <20210106151717.1779543-1-schnitzeltony@gmail.com>
@@ -54,114 +54,95 @@ Content-Transfer-Encoding: 8bit
 
 Release notes for 4.16.0
 ========================
-- settings: Accept all types of GIcon
-- settings: Adjust inline toolbar
-- Fix compilation with -Wmissing-prototypes
-- Don't warn when there are no saved sessions
+- Set new wallpaper as default
+- Add wallpaper for 4.16
+- settings: Drop subtitle
+- Drop autogenerated xfce-backdrop-settings.desktop.in from git
+- Remove GLIB_CHECK_VERSION IFDEFs which are obsolete after glib bump
 - bump glib (and gio, gthread, etc) minimum to 2.50.0
 - Remove GSourceFunc casts
-- Update .gitignore
-- Add README.md to EXTRA_DIST
+- Avoid warning, pointer target in assignment differ in signedness
 - Translation Updates:
-  Basque, Chinese (China), Czech, Danish, Estonian, French, Galician,
-  Hebrew, Hindi, Indonesian, Italian, Lithuanian, Norwegian Bokmål,
-  Portuguese, Portuguese (Brazil), Russian, Serbian, Slovenian,
-  Turkish, Vietnamese
+  Chinese (China), Danish, Greek, Norwegian Nynorsk, Slovenian
 
 Release notes for 4.15.1
 ========================
-[Please note that this is a development release.]
-- Fix potential crash in suspend and shutdown (Fixes #65)
-- Avoid potential format-string vulns (Issue #65)
-- settings: Tweak 'Current Session' tab
-- settings: Make 'App Autostart' columns sortable
-- settings: Fix 'Current session' column width (!10)
-- Add lock icon, 24px and 32px icons
-- Add more guards around GErrors
-- Update copyright year
-- Fix ifdef
-- Add README.md
+This is a development release of Xfdesktop aiming the upcoming release
+of Xfce 4.16.
+
+- Add keywords to .desktop files in xfdesktop
+- Add 24px and 32px icons
+- Remove extra separator from context menu
+- Move 'Open in New Window' of root window context menu (#59)
+- Remove "Properties..." entry from desktop context menu (#59)
 - Translation Updates:
-  Armenian (Armenia), Basque, Belarusian (Tarask), Chinese (China),
-  Czech, Danish, Eastern Armenian, Estonian, French, Hebrew, Hungarian,
-  Indonesian, Norwegian Bokmål, Portuguese (Brazil), Russian, Slovak,
-  Slovenian, Swedish, Turkish, Uyghur
+  Albanian, Amharic, Arabic, Armenian (Armenia), Basque, Belarusian,
+  Belarusian (Tarask), Bulgarian, Catalan, Chinese (China), Chinese
+  (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
+  Eastern Armenian, English (Australia), English (Canada), English
+  (United Kingdom), Estonian, Finnish, French, Galician, Georgian,
+  German, Greek, Hebrew, Hungarian, Icelandic, Indonesian, Interlingue,
+  Italian, Japanese, Kazakh, Korean, Lithuanian, Malay, Norwegian
+  Bokmål, Norwegian Nynorsk, Occitan (post 1500), Persian (Iran),
+  Polish, Portuguese, Portuguese (Brazil), Romanian, Russian, Serbian,
+  Slovak, Slovenian, Spanish, Swedish, Thai, Turkish, Ukrainian,
+  Uyghur, Uzbek
 
 Release notes for 4.15.0
 ========================
-[Please note that this is a development release.]
+This is a development release of Xfdesktop aiming the upcoming release
+of Xfce 4.16.
 
-- Use new icon in settings dialog (Bug #16885)
-- Add new application icon and rDNS icon name
-- logout-dialog: Add new icons
-- logout-dialog: Bump icon size to 48px
-- Switch to symbolic window-close icons
-- Drop GDM compatibility code to avoid invalid session locale
-- Segfault when suspending without pm-suspend installed (Bug #16632)
-- Expand field codes
-- Add a GnuPG 2.1+ mode
-- Fix session crash at logout (Bug #16105)
-- Free the intermediate "cmd" variable in xfsm_startup_init()
-- Re-add xfsm_startup_shutdown() call to xfce4-session main()
-- Remove sys/sysctl.h on linux platform
+- Pull in new fallback icon from Adwaita
+- Add new app icon and switch to rDNS icon name
+- Avoid redundant calls to backdrop_changed_cb (Bug #16773)
 - Move from exo-csource to xdt-csource (Bug #16717)
-- Try xfce screensaver before cinnamon (Bug #16223)
-- Add support for xfce4-screensaver (Bug #16522)
-- Silence runtime warning (Bug #15731)
-- settings: Don't warn when there are no saved sessions (Fixes #62)
-- settings: Add sort-on-click to columns in "Current Session" tab (!3)
-- settings: Add keywords for discoverability (Bug #10694)
-- settings: Add tooltips to image-buttons
-- settings: Better app icon lookup
-- settings: Be more precise in infobar wording
-- settings: Drop inline-toolbar button labels
-- settings: Move autostart info to docs.xfce
-- settings: Don't make 'saved sessions' tab reorderable
-- settings: Sort saved sessions by most recently used (Bug #15338)
-- Add basic GitLab pipeline
-- Drop unused var
-- Bump copyright years
-- Only clean generated sources when in maintainer mode
-- Do not show translation info on --help output
-- Translation Updates:
-  Albanian, Arabic, Armenian (Armenia), Basque, Belarusian, Belarusian
-  (Tarask), Bengali, Bulgarian, Catalan, Chinese (China), Chinese (Hong
-  Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch, Eastern
-  Armenian, English (Australia), English (Canada), English (United
-  Kingdom), Estonian, Finnish, French, Galician, German, Greek, Hebrew,
+- Increase minimum desktop icon size to 16 (Bug #16667)
+- Correct spelling of file system (Bug #16543)
+- Increase desktop icon increments to 2 (Bug #16668)
+- Unselect all items after single click activation
+- Fix memory leak when reconnecting DP monitor (Bug #16314)
+- Fix regression caused by (Bug #16342)
+- Fix transparent background color (Bug #16380)
+- Add Shift+Ctrl+N keybinding for Create Folder (Bug #15660)
+- Ignore modifier key events in type-ahead find (Bug #11149)
+- Added type-ahead find for Desktop icons (Bug #11149)
+- Do not insert hyphens at intra-word line breaks (Bug #16339)
+- Replace deprecated G_FILE_MONITOR_EVENT_MOVED (Bug #16342)
+- Translation Updates: Albanian, Amharic, Arabic, Armenian (Armenia),
+  Basque, Belarusian, Belarusian (Tarask), Bulgarian, Catalan, Chinese
+  (China), Chinese (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish,
+  Dutch, English (Australia), English (Canada), English (United Kingdom),
+  Estonian, Finnish, French, Galician, Georgian, German, Greek, Hebrew,
   Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
-  Kazakh, Korean, Lithuanian, Malay, Norwegian Bokmål, Norwegian
-  Nynorsk, Occitan (post 1500), Polish, Portuguese, Portuguese
-  (Brazil), Romanian, Russian, Serbian, Slovak, Slovenian,
-  Spanish, Swedish, Thai, Turkish, Uighur, Ukrainian, Vietnamese
+  Kazakh, Korean, Lithuanian, Malay, Norwegian Bokmål, Norwegian Nynorsk,
+  Occitan (post 1500), Persian (Iran), Polish, Portuguese, Portuguese
+  (Brazil), Romanian, Russian, Serbian, Slovak, Slovenian, Spanish,
+  Swedish, Thai, Turkish, Uighur, Ukrainian, Uzbek
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{xfce4-session_4.14.2.bb => xfce4-session_4.16.0.bb}   | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
- rename meta-xfce/recipes-xfce/xfce4-session/{xfce4-session_4.14.2.bb => xfce4-session_4.16.0.bb} (80%)
+ .../xfdesktop/{xfdesktop_4.14.2.bb => xfdesktop_4.16.0.bb}     | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-xfce/recipes-xfce/xfdesktop/{xfdesktop_4.14.2.bb => xfdesktop_4.16.0.bb} (74%)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.14.2.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.16.0.bb
-similarity index 80%
-rename from meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.14.2.bb
-rename to meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.16.0.bb
-index f497b7666..36b5bc2d0 100644
---- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.14.2.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.16.0.bb
-@@ -12,11 +12,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
- PACKAGECONFIG[polkit] = "--enable-polkit, --disable-polkit, polkit"
+diff --git a/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.14.2.bb b/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.16.0.bb
+similarity index 74%
+rename from meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.14.2.bb
+rename to meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.16.0.bb
+index a512a62ff..e8b2b72b6 100644
+--- a/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.14.2.bb
++++ b/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.16.0.bb
+@@ -8,8 +8,7 @@ inherit xfce features_check
  
--SRC_URI += " \
--    file://0001-configure.in-hard-code-path-to-iceauth.patch \
--"
--SRC_URI[md5sum] = "5ad23062fd08ef5f5ad9b4389c7b54c6"
--SRC_URI[sha256sum] = "fbe3a4a60c91589a2024ce12b2d2667625a8fedcbc90ef031831f56319f597af"
-+SRC_URI += "file://0001-configure.in-hard-code-path-to-iceauth.patch"
-+SRC_URI[sha256sum] = "22f273f212481d71e0b5618c62710cd85f69aea74f5ea5c0093f7918b07d17b7"
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- ALTERNATIVE_${PN} = "x-session-manager"
- ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
+-SRC_URI[md5sum] = "5db09df39b0808f25bd3a3128f8c9e77"
+-SRC_URI[sha256sum] = "a30534461fea907f969f608a11c84be0b1aaad687c591c32cd56a9d274ea3e74"
++SRC_URI[sha256sum] = "934ba5affecff21e62d9fac1dd50c50cd94b3a807fefa5f5bff59f3d6f155bae"
+ 
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
 -- 
 2.26.2
 
