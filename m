@@ -1,50 +1,50 @@
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
- by mx.groups.io with SMTP id smtpd.web10.9420.1609946284871568753
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+ by mx.groups.io with SMTP id smtpd.web10.9421.1609946286436608732
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Jan 2021 07:18:05 -0800
+ Wed, 06 Jan 2021 07:18:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=EQdgx1t4;
- spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f48.google.com with SMTP id c7so4711308edv.6
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:18:04 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=JA13bxdT;
+ spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f47.google.com with SMTP id p22so4651493edu.11
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:18:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=VFv12tfkXCXOSNc0GW0haFEGhR+tWP2FA8MPGk9tIYc=;
-        b=EQdgx1t4KGugdZvOBVBMcjYu1mQLMCvYA7xCc4XA4EVcAxmLeZW8HRY72D8I531nEX
-         ZvK0OOPCjg2guWsh3n04yDVl4PUPGOgFRQMNkEsfLIyv3sEbw8rRiicp0SyuVtB5gGt0
-         2dQzVf6CafGK6m1Na8BiXDVzNH6CPYtX0c/p97zdbWJIJNyd8otFcK9mVSvK6gtZ0a04
-         XT0/HKrt81xlSGXStIdt74dqv/nIGCWKvnG7JcjVAe2lgttPnQdmlSEK7S5QhcfaJV8L
-         GHtxLhUVffR1vPm5gEaCIBUvXf19rVOL8XB6qUk+k4zDEpXH8ztoYfomnLgcnPZ4niEw
-         AwCQ==
+        bh=pRnx9eWeASKfw8W7GczdmK9qBYpJq6JZg9sCXPTvw5w=;
+        b=JA13bxdTRgU5hobrU0u0sXa5VnBY5v9AX5jAiNvzYRq2OyjtDfhnx+Z2oiWYGMeEg8
+         IEi1FNWyc8gs6yLi8W0fcIxqxicb6/TlztQJpqq6t8Inlyvj1qe5yphoV5r0PpdLGqdw
+         rA+wmUsxwS1DN0MisipTjFSRgTxgVNj98YADGZil6WFLm/BMpH1TquKTnNaAWCNOYl62
+         nlKgQqP+9pBmVofDNjNb/faj6aZGGJrVeh/jdA6EBf5IZCPLtqjaRbBvQc8Z4s520B+r
+         +ar7vIjSIgYF5ep4n9qDqedWMo/mneq22njhNpHNzKpKQWcmqAoJJbc3hz+YDg08FvLS
+         q2Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=VFv12tfkXCXOSNc0GW0haFEGhR+tWP2FA8MPGk9tIYc=;
-        b=IdyRWXYajhVe+twp/5wHxC1AWr3kyn8GvKEstOCa4Q0JWj1nPIDdwkQSVVlCD2MmML
-         mSm5/ch0XbQLjFTBENpTMXKNtZK3JQp0Dgh+An/+uML28WuwPq0wuRkt5jmX46spcVgI
-         8guNKFQikqIB5iX9YIwXcvhUTU+0VrYOhsk6P7q+x/ZnuCzqesvnTqgeuPpVexu32ye7
-         uRRD147A2swlCbemg5QhRLT7g6owOh3qCyLEX1qAtcDUIoxAb3m8hKHI6rjZmCQLJ748
-         +Cf6ODWd4bcll52BVvtCNirLRz7aL2WU60ZXjQ6EZn3MpaPwjj9fTAdc7hokMbY7G2fa
-         d9aQ==
-X-Gm-Message-State: AOAM5310Ip0+LymbTvhUeVKt9GQzKb+OHgAYfzK7AJwlWje6o3j55aur
-	kdrpw/qPZCd4greXn/EKNFbj6eGoeKTujg==
-X-Google-Smtp-Source: ABdhPJzaNsS7t5paY52Ezj/OqSSOg8gHEWL6Zcsnfr+u712bIAI893Dmru7ZiiLxcJkXGDud4dY6/w==
-X-Received: by 2002:a50:9f4a:: with SMTP id b68mr4266434edf.296.1609946283512;
-        Wed, 06 Jan 2021 07:18:03 -0800 (PST)
+        bh=pRnx9eWeASKfw8W7GczdmK9qBYpJq6JZg9sCXPTvw5w=;
+        b=O4sdLNiLqcgAVjb27dJ83SlIV9gYw9qzeTPSkJJlfFVO+RSYM2S7yxIhpzJhBsO3EB
+         6D2URyaFXP3OuDJv/aOWlRNRyNu9pAu/keAnXQ8pO4OiU3OEznC0T+TAqMcwAeMy8Yhm
+         vlKEaUQZJxIr6BlhOLZh5uOKDEiGRRXo8kI4tJfUHh7xjNSbrJlSlbQ2qOjOSoP1KF9D
+         OeLABzKK6TlCxOk2n5GtDqC0Pk4/Ifp2Cqrnx27VnqIXGELyxYEQy5TeTHXPhckoO/df
+         67x7NMUbnuPSSucY46ytEm9/phzZt9Per+p3sol1b5Rjn9WaD8QFNdE9faH+snCs7fTO
+         lTZA==
+X-Gm-Message-State: AOAM532GyLDpkaGh4ZLzaMpYaEGM4aEadTsz5xkXBaD/gYZ9gBsViGeQ
+	3+En34IxrSPJTt7Qscq5A04cWRTfAS0CXA==
+X-Google-Smtp-Source: ABdhPJzLX1GQzyRP3FmbQtbnQ9knFE+1pgVxQljbuUJLguJXnlQy3/Tepwqxk6iY2N7xCIjas/EcdA==
+X-Received: by 2002:a50:cdc8:: with SMTP id h8mr4333162edj.293.1609946285111;
+        Wed, 06 Jan 2021 07:18:05 -0800 (PST)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f47431850a04677ec24921a.dip0.t-ipconnect.de. [2003:f0:7f47:4318:50a0:4677:ec24:921a])
-        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.18.01
+        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.18.03
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 Jan 2021 07:18:02 -0800 (PST)
+        Wed, 06 Jan 2021 07:18:04 -0800 (PST)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 26/28] xfce4-notes-plugin: remove for now
-Date: Wed,  6 Jan 2021 16:17:15 +0100
-Message-Id: <20210106151717.1779543-26-schnitzeltony@gmail.com>
+Subject: [PATCH 27/28] fluidsynth: upgrade 2.1.5 -> 2.1.6
+Date: Wed,  6 Jan 2021 16:17:16 +0100
+Message-Id: <20210106151717.1779543-27-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210106151717.1779543-1-schnitzeltony@gmail.com>
 References: <20210106151717.1779543-1-schnitzeltony@gmail.com>
@@ -52,159 +52,36 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* It is broken since xfce 4.16
-* GTK3 support was merged to master. Tried to build from git but that requires
-  vala support all over the place causing build failures and is beyond worth it
-* As soon as a working version is released it will be re-added
+Release notes:
 
-[1] https://gitlab.xfce.org/panel-plugins/xfce4-notes-plugin/-/merge_requests/2
+  SoundFonts may never be unloaded correctly, if
+    polyphony is ever exceeded (#727), or
+    voices are still playing while their SoundFont is being unloaded.
+  Calling delete_fluid_synth() does not free those SoundFonts either. Affected are versions from 1.1.4 to 2.1.5 .
+
+  Other bug-fixes:
+    fix a heap-based use-after-free (#733)
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...icon.c-remove-deprecated-g_type_init.patch | 32 -----------
- .../notes/files/01_fix_format-string.patch    | 53 -------------------
- .../notes/xfce4-notes-plugin_1.8.1.bb         | 20 -------
- .../packagegroup-xfce-extended.bb             |  1 -
- 4 files changed, 106 deletions(-)
- delete mode 100644 meta-xfce/recipes-panel-plugins/notes/files/0001-main-status-icon.c-remove-deprecated-g_type_init.patch
- delete mode 100644 meta-xfce/recipes-panel-plugins/notes/files/01_fix_format-string.patch
- delete mode 100644 meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.8.1.bb
+ meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-xfce/recipes-panel-plugins/notes/files/0001-main-status-icon.c-remove-deprecated-g_type_init.patch b/meta-xfce/recipes-panel-plugins/notes/files/0001-main-status-icon.c-remove-deprecated-g_type_init.patch
-deleted file mode 100644
-index e1ede27c4..000000000
---- a/meta-xfce/recipes-panel-plugins/notes/files/0001-main-status-icon.c-remove-deprecated-g_type_init.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From 0218e5ebf38f94d58b908fca451ba3789efa8899 Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
--Date: Fri, 20 Sep 2013 23:09:25 +0200
--Subject: [PATCH] main-status-icon.c remove deprecated g_type_init
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--this file was auto created by valac and xfce-vala when creating tarball. So
--
--Upstream-Status: Inappropriate [other]
--
--Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-----
-- src/main-status-icon.c | 1 -
-- 1 file changed, 1 deletion(-)
--
--diff --git a/src/main-status-icon.c b/src/main-status-icon.c
--index c6d73f8..f7db773 100644
----- a/src/main-status-icon.c
--+++ b/src/main-status-icon.c
--@@ -290,7 +290,6 @@ gint _vala_main (char** args, int args_length1) {
-- 
-- 
-- int main (int argc, char ** argv) {
---	g_type_init ();
-- 	return _vala_main (argv, argc);
-- }
-- 
---- 
--1.8.3.1
--
-diff --git a/meta-xfce/recipes-panel-plugins/notes/files/01_fix_format-string.patch b/meta-xfce/recipes-panel-plugins/notes/files/01_fix_format-string.patch
-deleted file mode 100644
-index 8066df004..000000000
---- a/meta-xfce/recipes-panel-plugins/notes/files/01_fix_format-string.patch
-+++ /dev/null
-@@ -1,53 +0,0 @@
--Fix formatting strings when compiling with Wformat options
--
--Imported from debian
--
----- a/lib/application.c
--+++ b/lib/application.c
--@@ -352,7 +352,7 @@ static void xnp_application_update_notes
-- 			XfconfChannel* _tmp16_;
-- 			const gchar* _tmp17_;
-- 			_tmp9_ = _ ("Select notes path");
---			_tmp10_ = (GtkMessageDialog*) gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, _tmp9_);
--+			_tmp10_ = (GtkMessageDialog*) gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, "%s", _tmp9_);
-- 			g_object_ref_sink (_tmp10_);
-- 			error_dialog = _tmp10_;
-- 			_tmp11_ = error_dialog;
--@@ -419,7 +419,7 @@ static void xnp_application_update_notes
-- 		XfconfChannel* _tmp35_;
-- 		const gchar* _tmp36_;
-- 		_tmp27_ = _ ("Select notes path");
---		_tmp28_ = (GtkMessageDialog*) gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, _tmp27_);
--+		_tmp28_ = (GtkMessageDialog*) gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, "%s", _tmp27_);
-- 		g_object_ref_sink (_tmp28_);
-- 		error_dialog = _tmp28_;
-- 		_tmp29_ = error_dialog;
--@@ -2082,7 +2082,7 @@ static void xnp_application_delete_windo
-- 		gint _tmp9_;
-- 		_tmp3_ = window;
-- 		_tmp4_ = _ ("Are you sure you want to delete this group?");
---		_tmp5_ = (GtkMessageDialog*) gtk_message_dialog_new ((GtkWindow*) _tmp3_, GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, _tmp4_);
--+		_tmp5_ = (GtkMessageDialog*) gtk_message_dialog_new ((GtkWindow*) _tmp3_, GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, "%s", _tmp4_);
-- 		g_object_ref_sink (_tmp5_);
-- 		dialog = _tmp5_;
-- 		_tmp6_ = dialog;
--@@ -2721,7 +2721,7 @@ void xnp_application_open_settings_dialo
-- 		e = _inner_error_;
-- 		_inner_error_ = NULL;
-- 		_tmp0_ = _ ("Unable to open the settings dialog");
---		_tmp1_ = (GtkMessageDialog*) gtk_message_dialog_new (NULL, GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, _tmp0_);
--+		_tmp1_ = (GtkMessageDialog*) gtk_message_dialog_new (NULL, GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, "%s", _tmp0_);
-- 		g_object_ref_sink (_tmp1_);
-- 		error_dialog = _tmp1_;
-- 		_tmp2_ = error_dialog;
----- a/lib/window.c
--+++ b/lib/window.c
--@@ -3542,7 +3542,7 @@ void xnp_window_delete_note (XnpWindow*
-- 		GtkMessageDialog* _tmp13_;
-- 		gint _tmp14_;
-- 		_tmp9_ = _ ("Are you sure you want to delete this note?");
---		_tmp10_ = (GtkMessageDialog*) gtk_message_dialog_new ((GtkWindow*) self, GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, _tmp9_);
--+		_tmp10_ = (GtkMessageDialog*) gtk_message_dialog_new ((GtkWindow*) self, GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, "%s", _tmp9_);
-- 		g_object_ref_sink (_tmp10_);
-- 		dialog = _tmp10_;
-- 		_tmp11_ = dialog;
-diff --git a/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.8.1.bb b/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.8.1.bb
-deleted file mode 100644
-index fcf98c181..000000000
---- a/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.8.1.bb
-+++ /dev/null
-@@ -1,20 +0,0 @@
--SUMMARY = "Notes plugin for the Xfce Panel"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-notes-plugin"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
--
--inherit xfce-panel-plugin
--
--DEPENDS += "gtk+ libxfce4ui xfce4-panel xfconf libunique"
--
--SRC_URI += " \
--    file://0001-main-status-icon.c-remove-deprecated-g_type_init.patch \
--    file://01_fix_format-string.patch \
--"
--SRC_URI[md5sum] = "31cb9520b01512a94344770b4befdb3b"
--SRC_URI[sha256sum] = "07a4c3e71431c24f97d2e270452dd0fa51ff0bdb6219a13a20d0bfa8d9de54b2"
--
--FILES_${PN} += "${libdir}/xfce4/panel-plugins/*.so.*"
--
--# *.so are required for plugin detection
--INSANE_SKIP_${PN} = "dev-so"
-diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-index 7f1c17261..cd3fa26aa 100644
---- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-+++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-@@ -40,7 +40,6 @@ RRECOMMENDS_${PN} = " \
-     xfce4-mount-plugin \
-     xfce4-powermanager-plugin \
-     xfce4-closebutton-plugin \
--    xfce4-notes-plugin \
-     xfce4-whiskermenu-plugin \
-     xfce4-mailwatch-plugin \
-     xfce4-smartbookmark-plugin \
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
+index 73c1d0db6..847a22311 100644
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
++++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
+@@ -5,8 +5,8 @@ LICENSE = "LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
+ 
+ SRC_URI = "git://github.com/FluidSynth/fluidsynth.git;branch=2.1.x"
+-SRCREV = "6776569abe9a885bcec14141692fa93c0568d51c"
++SRCREV = "fd9bf6a6b0d10a984d2eb0e0e549700b7aa590ec"
+ S = "${WORKDIR}/git"
+-PV = "2.1.5"
++PV = "2.1.6"
+ 
+ inherit cmake pkgconfig lib_package
 -- 
 2.26.2
 
