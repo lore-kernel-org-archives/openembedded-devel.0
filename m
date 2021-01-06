@@ -1,126 +1,330 @@
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com (EUR01-DB5-obe.outbound.protection.outlook.com [])
- by mx.groups.io with SMTP id smtpd.web09.11967.1609956219729095706
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web10.12860.1609959320013912007
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Jan 2021 10:03:41 -0800
+ Wed, 06 Jan 2021 10:55:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@spinetix.com header.s=selector2 header.b=Zxooqefg;
- spf=permerror, err=parse error for token &{10 18 spf.infomaniak.ch}: parse error for token &{10 18 app.mail.infomaniak.ch}: limit exceeded (domain: spinetix.com, ip: <nil>, mailfrom: diego.santacruz@spinetix.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GFQfpjM+Wcfuh6mN+lBq2lD1eNZJaCjK+Xe8G9x3yzL8YKl1t3mfVvD6u1QJ1fDDSwFRMHnBXk3CzR80zPv+UAFWrJwKX69sC5iGzcqML38OIW3/v5ihUxGbl7x1pUg4KmClSj2xtzBuzDK/GMbT3A5uUW4Qjv6+0PNtZm9WnuD/wgihs2B/BivwFdQ9YCsB/A8ogWXSQg3Blzt+DDH6kP5UdcUjpbxEPy88qfTCeUdudhBWAxiBoyfiw5W2Hea69E9twxRQPiwQiqPJQmtuncfZczmlRk/NLaAH7Tv+ngPGNWAyyIXwBL3yKBGn0iLNEw6MzeV1zfB++W5hg8L46Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bkxOT03NsYbIfgldP43cLNHHkhFek2rAOHtVDgz+RW0=;
- b=EZCt1nMNAmQC08wGNyEizDtuGOnhlxh+xsgkk18jNBG0S6ZSgVH1ENJ6vaAUmhzKPZ7ary4eTI9OpKlPqbbkj51qXnv74QS6iiw4aWfrU9sRObcuNLwYXZ58qqsotkj8FG00RBauUy5JhVLk7+FjTguNc+SSeXYKdBD3FH/jzUDB78bJB4Mr6Opik02n2SF3FL0ane8ALyZnwmhkCCyDYdReXvEt0COBF2k8G/CZBoIiUkaRUuxt/M8sdJgEhLgTgPnc5dLmxVriq1C9e2LSleUsDe15TsK/Hus1j/1IwQuqmUys1mwLdBQ2z0hMWEpg92948vruxntAcOv5VOumGQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=spinetix.com; dmarc=pass action=none header.from=spinetix.com;
- dkim=pass header.d=spinetix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=spinetix.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bkxOT03NsYbIfgldP43cLNHHkhFek2rAOHtVDgz+RW0=;
- b=ZxooqefgORkc9TSzQRlPXeywiav2qM8F5ACQErgMljghK15LzAmjHCKh7WPovsEDRMN/AJog8lSl1VpKe2Ss/09yle8qpK7HBm1q1m/HIgFRrl7SD2bKU2kd1aULxz/5KEkfFuYP+OXWtvLst0bleycOAKK8eo+PSlG2s6RHLoA=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=spinetix.com;
-Received: from DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
- (2603:10a6:6:e::19) by DB8PR01MB5674.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:10a::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3721.19; Wed, 6 Jan
- 2021 18:03:39 +0000
-Received: from DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
- ([fe80::c880:793c:c5b1:c7a8]) by
- DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
- ([fe80::c880:793c:c5b1:c7a8%5]) with mapi id 15.20.3742.006; Wed, 6 Jan 2021
- 18:03:39 +0000
-From: "Diego Santa Cruz" <diego.santacruz@spinetix.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Diego Santa Cruz <Diego.SantaCruz@spinetix.com>
-Subject: [meta-multimedia][PATCH 2/2] gupnp: Upgrade to 1.2.2 -> 1.2.4
-Date: Wed,  6 Jan 2021 18:59:42 +0100
-Message-Id: <20210106175942.18488-2-Diego.SantaCruz@spinetix.com>
-X-Mailer: git-send-email 2.18.4
-In-Reply-To: <20210106175942.18488-1-Diego.SantaCruz@spinetix.com>
-References: <20210106175942.18488-1-Diego.SantaCruz@spinetix.com>
-X-Originating-IP: [46.14.255.78]
-X-ClientProxiedBy: ZR0P278CA0103.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:23::18) To DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
- (2603:10a6:6:e::19)
-Return-Path: Diego.SantaCruz@spinetix.com
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=UGtDwdZJ;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id n10so2835785pgl.10
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 10:55:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:references:from:organization:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=o1Qynt7xopSRpOmOxAfsqHuz7WdSejTtTmmj3qS95LI=;
+        b=UGtDwdZJkAMtXqC5n5c5quVzpkGtBSaeapeAEQh+THDxw11fLcWSUs42NP7RqgfegA
+         gZ3+Ou0To8ECCbK67VMQh4mTHv+fJxoeERXbSk4Ho80++/gd1m5XqCjVE94LjU0MhviA
+         QC5mHoTbQGLblH+gFODrGUJurlS3b32XJOwy9kXv9qjXzZoHtHXMDopmcwh1SXzIMDK7
+         N4zD7yIviLKkAlDQEz7SG9fSX8VKltjB+/eHT3w/153WtsoNzXBE3CGLOy2orfrG568r
+         R7E+/LWMe77mXcaE4rLC5pD6jzlWisf/K6mX1kyMA9Vv+KXAP9LGPW6aQpExy0I58+in
+         txEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=o1Qynt7xopSRpOmOxAfsqHuz7WdSejTtTmmj3qS95LI=;
+        b=H71dv5OBua/lWmEkHfSzmmYyCtKtseQz6p4f1hppcRKo9WduZdvnqFGEQfulu1Aee7
+         60FNSmGvxp5srLzCE8BLcRcZ+FppDbwutKHyGRlMeamV6798iXrlSp1yFPNQeYE2vQB1
+         jcJQpSE2tyXIhAViZXHbRSrJaEc6B+hdA1gtR6FSLseN+KHSoJHXGLlTcDoDRcw8LfsH
+         djWZlAwp2t0gIuC3FxI5m6gy4BvzHXNZ/AgnEx9v5YXOED7Bzn58Fvs6+dgSkk27lLU7
+         vvy59zyEivI9J4aZaB71SuooJ2HlGdVhxf4U6WRIQ+ySpoBzAgRMtbHX4grTFIXbCv8b
+         bAqg==
+X-Gm-Message-State: AOAM530zlNpnkqZt6GdVC5Gctzb79KhACmdDojYF/mQId2CHpuKuOyb8
+	BhCm7yC1tSCaBnKaiEHpBy8=
+X-Google-Smtp-Source: ABdhPJySTQfsnqfO1Db9oI42ZaNBo2hOVBEkU4YetMjJqHA1IE6YSyBMBc1KlAkXufEKEkbvRIgyKQ==
+X-Received: by 2002:a62:7651:0:b029:1a5:929b:1681 with SMTP id r78-20020a6276510000b02901a5929b1681mr5074566pfc.27.1609959319435;
+        Wed, 06 Jan 2021 10:55:19 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:a0f0:30c0:6d17:4149:dc18? ([2601:646:9200:a0f0:30c0:6d17:4149:dc18])
+        by smtp.gmail.com with ESMTPSA id w90sm3018662pjw.10.2021.01.06.10.55.18
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 06 Jan 2021 10:55:18 -0800 (PST)
+Subject: Re: [oe] [PATCH 07/28] xfwm4: upgrade 4.14.5 -> 4.16.0
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
+ openembedded-devel@lists.openembedded.org,
+ "Mittal, Anuj" <anuj.mittal@intel.com>,
+ Randy MacLeod <randy.macleod@windriver.com>
+References: <20210106151717.1779543-1-schnitzeltony@gmail.com>
+ <20210106151717.1779543-7-schnitzeltony@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <d1bd0b10-bdd2-6820-61c1-38b7c8e5dc7e@gmail.com>
+Date: Wed, 6 Jan 2021 10:55:17 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
+ Gecko/20100101 Thunderbird/78.6.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from prefix.spinetix.local (46.14.255.78) by ZR0P278CA0103.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:23::18) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6 via Frontend Transport; Wed, 6 Jan 2021 18:03:39 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a59045aa-b929-4921-9fec-08d8b26d65a1
-X-MS-TrafficTypeDiagnostic: DB8PR01MB5674:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<DB8PR01MB56746FFE7420BDDD2D420F9288D00@DB8PR01MB5674.eurprd01.prod.exchangelabs.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1923;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	KGwleJjjgp8hhkzBSI8yM5y9g6rfIV8UiyGC+zweHwNyiCwqkndGrAnoFMors+OGe1aRWBvB0KSdF6LTNfUlWBVPtFy1GgtqhfmORGqMfgni6lyA4qjRfj/fnuID9W4HcfNRPbGoUcZNerORzofSCs3QeOHER43QpO1GQyLM7E9XkwzPiL5WMKKGOOq2CoHfFQHPaBD7y6shRT5T5vpqef6eAroXQx4KP9GnSxos+Vn0AiVmyETuzR9zlkhg8p9+ObtlW24+OHVcgq9BoTQZNXtE782PHlNzNoo0Sgm6BoVEXs6TYITLXWrJN21dfnRW03+8azt20FndI1BKepa+YTLxRIxlNJrvyAwvNQoNELKFCMrWJ6eU9iT7LkN5B8Y0PKwqHudI/2OYx9GAro7wTw==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB6PR0102MB2630.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(136003)(346002)(39830400003)(376002)(396003)(8676002)(6486002)(316002)(86362001)(83380400001)(6506007)(52116002)(66946007)(6666004)(66476007)(5660300002)(1076003)(107886003)(2906002)(66556008)(4326008)(956004)(36756003)(8936002)(2616005)(478600001)(6916009)(26005)(16526019)(186003)(6512007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?2sZ0kgLmqHn/aVJ/uohlXhW7rTt8HwUBijxz2n/ZG6afGtgpsWi0JloPO0ZC?=
- =?us-ascii?Q?uax1rKLVy3e1Pxnm4UOVk/Ei5YUlKnEr0JmUXc/o7gWnuhjIU28Ng/UK7/zL?=
- =?us-ascii?Q?BQLp+kENcnTEiF4sh3L7X3wtR75SZNqM2tCgTzT3onaHYkaxPM/2ccy7cd3N?=
- =?us-ascii?Q?vOfncx/8lt9pVaQmsZsnXNg0qFbYxnBNmYO1jUfSPae93SUCxb25CZhJZLRy?=
- =?us-ascii?Q?yJrgqmSlWF4BarS6NEzONI/aAHLDMbdVxjeugLYwzfbSqs0zHbTWO0uxlC9s?=
- =?us-ascii?Q?XQeRcr9o7ftbiQ++K9easKn0rszWxj23+o5NB2Lk2k2Z8yKA4Bp132Kc82Rj?=
- =?us-ascii?Q?XDE3Emh32xVSiKUctquUPEaDX+68FnMurGcg5ZPkp1WyR0vyDojmz16GxTqt?=
- =?us-ascii?Q?JGVChg1/EbhsnAO9PTxLqqN+hIZ5vPW335ajYK7VoPEX0lVzsebToKADs+BN?=
- =?us-ascii?Q?DoZKw3AFUBx+x+lhgZCojxDlI41F9jiuQ6YVem4mqpLyHz4ZBs9Qtu/Irr+4?=
- =?us-ascii?Q?Yq3OuLxsGiUDuG0l7VFdQ9tuk0x85NH3AGKppFV1OPsWSVpW0ShzipSkeryQ?=
- =?us-ascii?Q?YZ7rSeR3tzCSyhELLL88IVWYGh4N1P/WksdYGyahocGePL8NDM6ltw75zsw4?=
- =?us-ascii?Q?0IYrjcCRu3Z/VggXvXjFkZirBcMu0L7eUzkehrF+y1sF8l5fjA5aycbS+O+Y?=
- =?us-ascii?Q?zgI51a1adiwbj7HMeyednu4ZVa3rdqUd64GLuSLMBzBm796Iywo91RvSWyJG?=
- =?us-ascii?Q?f3F9KbflZPS+g0orThsczPAVvJ2BWYHkQTZRNX1/kNcx5chLg3iPZhj00sAl?=
- =?us-ascii?Q?0N7foi7cZ9Xnu5bd+v2zPWh4Vd5UiQz4XZCdVCn5XNqE8Z3tLWktaoS574Dg?=
- =?us-ascii?Q?Ju0PEvkutopVbalMbpg2OdJos4VBRwV5F8WiK2lrgtSAoUob3pKGW17bokKm?=
- =?us-ascii?Q?POFPQMjcffiWqcBDolDRmC8CJG2nMXDgEgWKop8sAsmbVHUVteCVRCsbYHug?=
- =?us-ascii?Q?WpWm?=
-X-OriginatorOrg: spinetix.com
-X-MS-Exchange-CrossTenant-AuthSource: DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2021 18:03:39.8645
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5f4034fa-ed2d-4840-a93f-acb1e9633b93
-X-MS-Exchange-CrossTenant-Network-Message-Id: a59045aa-b929-4921-9fec-08d8b26d65a1
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: NLW/KMT39mlkbrcnQ6puyPAHD47Gs0Yaj/k1pH+lgkmc671Zmjr0ycGAiZTpoCi348roHr0y3lfYJLzlpninHrrjttThOoetV7kWq52lO3k=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR01MB5674
-Content-Type: text/plain
+In-Reply-To: <20210106151717.1779543-7-schnitzeltony@gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 
-gupnp 1.2.3 adds mitigation for CVE-2020-12695 (CallStranger)
+Anuj and Randy FYI
 
-Signed-off-by: Diego Santa Cruz <Diego.SantaCruz@spinetix.com>
----
- .../gupnp/{gupnp_1.2.2.bb => gupnp_1.2.4.bb}                  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-connectivity/gupnp/{gupnp_1.2.2.bb => gupnp_1.2.4.bb} (64%)
-
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.2.2.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.2.4.bb
-similarity index 64%
-rename from meta-multimedia/recipes-connectivity/gupnp/gupnp_1.2.2.bb
-rename to meta-multimedia/recipes-connectivity/gupnp/gupnp_1.2.4.bb
-index e60349716..c7b330fa0 100644
---- a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.2.2.bb
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.2.4.bb
-@@ -1,8 +1,8 @@
- require gupnp.inc
- 
- SRC_URI = "${GNOME_MIRROR}/${BPN}/1.2/${BPN}-${PV}.tar.xz"
--SRC_URI[md5sum] = "2ade3d29c624ad98d70113e6e93908a5"
--SRC_URI[sha256sum] = "9a80bd953e5c8772ad26b72f8da01cbe7241a113edd6084903f413ce751c9989"
-+SRC_URI[md5sum] = "7c9c7cd80e36d9fb1e5b0267571fc17d"
-+SRC_URI[sha256sum] = "f7a0307ea51f5e44d1b832f493dd9045444a3a4e211ef85dfd9aa5dd6eaea7d1"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
-                     file://libgupnp/gupnp.h;beginline=1;endline=20;md5=d78a69d9b6e63ee2dc72e7b674d97520"
--- 
-2.18.4
-
+On 1/6/21 7:16 AM, Andreas Müller wrote:
+> Compositor patch does not apply anymore and testing x86-64 excceeds my
+> resources. Looked into Fedora sources: They build xfwm4 un-patched either.
+> 
+> Release notes for 4.16.0
+> ========================
+> - common: Avoid zero refresh rate for monitor
+> - hints: Protect against XError from XGetTransientFor()
+> - netwm: Allow above/below only for regular windows
+> - netwm: Mark splashscreen as transient for groups
+> - client: Complete client state even on different workspaces
+> - build: Increase GTK+ requirement to 3.22
+> - Add `cycle_minimized` option
+> - compositor: Release overlay window last
+> - compositor: Free GLX data when really using GLX
+> - compositor: Remove useless trace message
+> - compositor: Release current GLX context on teardown
+> - display: Remove custom XError handler
+> - compositor: Check for XError when adding windows
+> - compositor: Trap XErrors when disabling compositor
+> - main: Enable compositor by default
+> - compositor: Remove automatic redirect support
+> - main: Add short command line options
+> - main: Add debug command line option
+> - pixmap: Use a safer strncpy()
+> - settings: Fix compiler warning
+> - Remove useless autotools macros and Makefile targets
+> - Use --enable-debug=yes when compiling from git
+> - Revert "compositor: Do not damage on opaque region update"
+> - themes: Use smaller, lighter shadows
+> - compositor: Check if compositor is enabled
+> - compositor: Avoid XError when disabling compositor
+> - compositor: Warn for missing epoxy GL function
+> - netwm: Do not raise window if activate is set to none
+> - Remove GSourceFunc casts
+> - compositor: Fix build with older epoxy versions
+> - settings: Add 'Always on top' to the double click action
+> - Settings: Remove default alphabetical sorting of keyboard shortcuts
+>    Closes: #451 (Disable initial sorting of keyboard shortcuts)
+> - compositor: Handle XFixes XError
+> - compositor: Add support for GL_ARB_sync
+> - compositor: Return early if a Present swap is pending
+> - debug: Fix build in debug mode
+> - compositor: Fix compilation issue with Xpresent
+> - compositor: Log fence and GLX swap time in debug mode
+> - compositor: Move fence sync to redraw_glx
+> - compositor: Move fence triggered to its own function
+> - compositor: Set swap control if possible
+> - compositor: Adjust to the actual number of buffers
+> - compositor: Use a GLX drawable per buffer
+> - client: Allow transients for group to be minimized
+> - settings: Add a UI option for desktop zooming
+> - themes: Remove title shadow
+> - themes: Adjust shadows size/opacity
+> - client: Make above/below consistent
+> - compositor: Limit damage region to the screen
+> - compositor: Optimize repaint without vblank
+> - compositor: Only accumulate damage with multiple buffers
+> - compositor: Copy entire content for GLX buffers
+> - xsync: Handle XError
+> - compositor: Ignore opaque region for shaded windows
+> - compositor: Clip opaque region against window shape
+> - client: Protect against XError in XKillClient()
+> - compositor: Do not damage on opaque region update
+> - compositor: Opaque region applies to client window
+> - compositor: Reuse client size
+> - client: Toggle tiling on key shortcut
+> - client: Small cleanup
+> - Add README.md to EXTRA_DIST
+> - client: Keep tiled size of windows
+> - compositor: No need to update compositor window on configure
+> - compositor: Limit opaque region clipping to window extents
+> - compositor: Damage on opaque region update only if visible
+> - client: Send synthetic configure on force redraw
+> - Post release tag bump
+> - Translation Updates:
+>    Albanian, Arabic, Armenian (Armenia), Basque, Belarusian, Belarusian
+>    (Tarask), Bengali, Bulgarian, Catalan, Chinese (China), Chinese (Hong
+>    Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch, Eastern
+>    Armenian, English (Australia), English (Canada), English (United
+>    Kingdom), Estonian, Finnish, French, Galician, Georgian, German,
+>    Greek, Hebrew, Hungarian, Icelandic, Indonesian, Interlingue,
+>    Italian, Japanese, Kazakh, Korean, Latvian, Lithuanian, Malay,
+>    Norwegian Bokmål, Norwegian Nynorsk, Occitan (post 1500), Persian
+>    (Iran), Polish, Portuguese, Portuguese (Brazil), Romanian, Russian,
+>    Serbian, Slovak, Slovenian, Spanish, Swedish, Thai, Turkish,
+>    Ukrainian, Urdu, Urdu (Pakistan), Uyghur
+> 
+> Release notes for 4.15.3
+> ========================
+> [Please note that this is a development release.]
+> 
+> - Quick release after 4.15.2 to fix a regression with opaque
+>    regions leaving trails of unpainted areas on resize.
+> 
+> Release notes for 4.15.2
+> ========================
+> [Please note this is a preview release of a development version]
+> 
+> - Add support for opaque regions in the compositor
+> - Make cursor zoom optional (xfce/xfwm4#439)
+> - Remove the deprecated options "--daemon" (Pablo Mazzini)
+> - Disable Xi2 support by default
+> - Add column sorting in settings
+> - Optimize window matching in the compositor with a hash table
+>    (Michael Banack)
+> - Add more XErrors traps
+> - I18n: Updated translations: ar, ast, be, be@tarask, bg, bn, ca,
+>    cs, da, de, el, en_AU, en_CA, en_GB, es, et, eu, fa_IR, fi, fr,
+>    gl, he, hr, hu, hy_AM, hye, id, ie, is, it, ja, ka, kk, ko, lt,
+>    lv, ms, nb, nl, nn, oc, pl, pt, pt_BR, ro, ru, sk, sl, sq, sr,
+>    sv, th, tr, ug, uk, ur, ur_PK,
+>    vi, zh_CN, zh_HK, zh_TW
+>    New translations: be@tarask, fa_IR, hye, ka
+> 
+> Release notes for 4.15.1
+> ========================
+> [Please note that this is a development release.]
+> 
+> - Fix an error leak in compositor (xfce/xfwm4#351)
+> - Fix compositor selection atom misuse
+> - Prefer zero initialized memory allocation functions
+> - Use g_slice allocator for compositor windows
+> 
+> Release notes for 4.15.0
+> ========================
+> [Please note that this is a development release.]
+> 
+> - First 4.15.x development release
+> - Show tabwin only on primary monitor if set
+> - All fixes and i18n as found in 4.14.4
+> 
+> Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+> ---
+>   ...r-Revert-to-GLX-as-default-vblank-me.patch | 92 -------------------
+>   .../{xfwm4_4.14.5.bb => xfwm4_4.16.0.bb}      |  5 +-
+>   2 files changed, 2 insertions(+), 95 deletions(-)
+>   delete mode 100644 meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch
+>   rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.14.5.bb => xfwm4_4.16.0.bb} (82%)
+> 
+> diff --git a/meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch b/meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch
+> deleted file mode 100644
+> index 04fd623e8..000000000
+> --- a/meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch
+> +++ /dev/null
+> @@ -1,92 +0,0 @@
+> -From acdceb0b28d86199b8c2233880fa8a04cb24d4d4 Mon Sep 17 00:00:00 2001
+> -From: Kai Kang <kai.kang@windriver.com>
+> -Date: Wed, 24 Jul 2019 09:48:04 +0800
+> -Subject: [PATCH] Revert "compositor: Revert to GLX as default vblank method
+> - (again)"
+> -
+> -This reverts commit e07574d6e7a2dbaa08c3ba4765c6306073d9493e.
+> -
+> -It sets the default vblank method (auto) to GLX from 4.13.2. But it
+> -fails to start xfwm4 on intel-x86-64 boards with error:
+> -
+> -| xfwm4: ../mesa-19.1.1/src/mesa/drivers/dri/i965/intel_mipmap_tree.c:1293:
+> -| intel_miptree_match_image: Assertion `image->TexObject->Target == mt->target' failed.
+> -| Aborted
+> -
+> -There is also a RHEL defect:
+> -https://bugzilla.redhat.com/show_bug.cgi?id=1678334
+> -
+> -Revert the commit to fix the issue.
+> -
+> -Upstream-Status: Inappropriate [workaround]
+> -
+> -Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> ----
+> - src/compositor.c | 41 +++++++++++++++++++----------------------
+> - 1 file changed, 19 insertions(+), 22 deletions(-)
+> -
+> -diff --git a/src/compositor.c b/src/compositor.c
+> -index 25615282..daced607 100644
+> ---- a/src/compositor.c
+> -+++ b/src/compositor.c
+> -@@ -4483,13 +4483,28 @@ compositorManageScreen (ScreenInfo *screen_info)
+> -     XClearArea (display_info->dpy, screen_info->output, 0, 0, 0, 0, TRUE);
+> -     TRACE ("manual compositing enabled");
+> -
+> -+#ifdef HAVE_PRESENT_EXTENSION
+> -+    screen_info->use_present = display_info->have_present &&
+> -+                               (screen_info->vblank_mode == VBLANK_AUTO ||
+> -+                                screen_info->vblank_mode == VBLANK_XPRESENT);
+> -+    if (screen_info->use_present)
+> -+    {
+> -+        screen_info->present_pending = FALSE;
+> -+        XPresentSelectInput (display_info->dpy,
+> -+                             screen_info->output,
+> -+                             PresentCompleteNotifyMask);
+> -+    }
+> -+#else /* HAVE_PRESENT_EXTENSION */
+> -+    screen_info->use_present = FALSE;
+> -+#endif /* HAVE_PRESENT_EXTENSION */
+> -+
+> - #ifdef HAVE_EPOXY
+> --    screen_info->use_glx = (screen_info->vblank_mode == VBLANK_AUTO ||
+> --                            screen_info->vblank_mode == VBLANK_GLX);
+> -+    screen_info->use_glx = !screen_info->use_present &&
+> - #ifdef HAVE_XSYNC
+> --    screen_info->use_glx &= display_info->have_xsync;
+> -+                            display_info->have_xsync &&
+> - #endif /* HAVE_XSYNC */
+> --
+> -+                            (screen_info->vblank_mode == VBLANK_AUTO ||
+> -+                             screen_info->vblank_mode == VBLANK_GLX);
+> -     if (screen_info->use_glx)
+> -     {
+> -         screen_info->glx_context = None;
+> -@@ -4503,24 +4518,6 @@ compositorManageScreen (ScreenInfo *screen_info)
+> -     screen_info->use_glx = FALSE;
+> - #endif /* HAVE_EPOXY */
+> -
+> --#ifdef HAVE_PRESENT_EXTENSION
+> --    screen_info->use_present = display_info->have_present &&
+> --#ifdef HAVE_EPOXY
+> --                               !screen_info->use_glx &&
+> --#endif /* HAVE_EPOXY */
+> --                               (screen_info->vblank_mode == VBLANK_AUTO ||
+> --                                screen_info->vblank_mode == VBLANK_XPRESENT);
+> --    if (screen_info->use_present)
+> --    {
+> --        screen_info->present_pending = FALSE;
+> --        XPresentSelectInput (display_info->dpy,
+> --                             screen_info->output,
+> --                             PresentCompleteNotifyMask);
+> --    }
+> --#else /* HAVE_PRESENT_EXTENSION */
+> --    screen_info->use_present = FALSE;
+> --#endif /* HAVE_PRESENT_EXTENSION */
+> --
+> -     if (screen_info->use_present)
+> -     {
+> -         g_info ("Compositor using XPresent for vsync");
+> ---
+> -2.20.1
+> -
+> diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.5.bb b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.0.bb
+> similarity index 82%
+> rename from meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.5.bb
+> rename to meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.0.bb
+> index f8febe804..3f64365f0 100644
+> --- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.5.bb
+> +++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.0.bb
+> @@ -2,14 +2,13 @@ DESCRIPTION = "Xfce4 Window Manager"
+>   SECTION = "x11/wm"
+>   LICENSE = "GPLv2"
+>   LIC_FILES_CHKSUM = "file://COPYING;md5=d791728a073bc009b4ffaf00b7599855"
+> -DEPENDS = "virtual/libx11 libxfce4ui libwnck3 libxinerama exo-native"
+> +DEPENDS = "virtual/libx11 libxfce4ui libwnck3 libxinerama"
+>   
+>   inherit xfce update-alternatives features_check
+>   
+>   REQUIRED_DISTRO_FEATURES = "x11"
+>   
+> -SRC_URI += "file://0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch"
+> -SRC_URI[sha256sum] = "d7a7c63fa42ec6d7cb3caab130d6f496be5bd7689b775d20e8786b7f3e282930"
+> +SRC_URI[sha256sum] = "1e22eae1bbb66cebfd1753b0a5606e76ecbf6b09ce4cdfd732d093c936f1feb3"
+>   
+>   PACKAGECONFIG ?= " \
+>       ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'epoxy', '', d)} \
+> 
+> 
+> 
+> 
+> 
