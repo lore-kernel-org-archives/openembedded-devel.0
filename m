@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.1118.1609970843169157839
+ by mx.groups.io with SMTP id smtpd.web11.1121.1609970847768415096
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Jan 2021 14:07:23 -0800
+ Wed, 06 Jan 2021 14:07:28 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=51612 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kxGxY-0004lA-VT; Thu, 07 Jan 2021 00:07:21 +0200
+	id 1kxGxd-0004lA-Ge; Thu, 07 Jan 2021 00:07:26 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 04/10] python3-sqlalchemy: Upgrade 1.3.20 -> 1.3.22
-Date: Thu,  7 Jan 2021 00:06:56 +0200
-Message-Id: <20210106220702.10483-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 05/10] python3-transitions: Upgrade 0.8.5 -> 0.8.6
+Date: Thu,  7 Jan 2021 00:06:57 +0200
+Message-Id: <20210106220702.10483-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210106220702.10483-1-leon.anavi@konsulko.com>
 References: <20210106220702.10483-1-leon.anavi@konsulko.com>
@@ -30,43 +30,51 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.3.22:
+Upgrade to release 0.8.6:
 
-- Fixed regression which occured due to #5755 which implemented
-  isolation level support for Oracle. It has been reported that
-  many Oracle accounts don't actually have permission to query
-  the v$transaction view so this feature has been altered to
-  gracefully fallback when it fails upon database connect, where
-  the dialect will assume "READ COMMITTED" is the default
-  isolation level as was the case prior to SQLAlchemy 1.3.21.
-  However, explicit use of the Connection.get_isolation_level()
-  method must now necessarily raise an exception, as Oracle
-  databases with this restriction explicitly disallow the user
-  from reading the current isolation level.
+- HierarchicalMachine.add_states will raise a ValueError when an
+  Enum name contains the currently used NestedState.separator.
+- Bugfix: Reset NestedState._scope when enter/exit callbacks raise
+  an exception
+- Bugfix: Let HierarchicalMachine._get_trigger which is bound to
+  model.trigger raise a MachineError for invalid events and
+  AttributeError for unknown events
+- Introduced HierarchicalMachine.has_trigger to determine whether
+  an event is valid for an HSM
+- Feature: AsyncMachine features an event queue dictionary for
+  individual models when queued='model'
+- Feature: Machine.remove_model will now also remove model events
+  from the event queue when queued=True
+- Feature: Machine.get_transitions and its HSM counterpart now
+  accept Enum and State for source and dest
+
+License-Update: Update year
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...thon3-sqlalchemy_1.3.20.bb => python3-sqlalchemy_1.3.22.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.3.20.bb => python3-sqlalchemy_1.3.22.bb} (78%)
+ ...hon3-transitions_0.8.5.bb => python3-transitions_0.8.6.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-transitions_0.8.5.bb => python3-transitions_0.8.6.bb} (52%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.20.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.22.bb
-similarity index 78%
-rename from meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.20.bb
-rename to meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.22.bb
-index e8f598ada3..cf127241db 100644
---- a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.20.bb
-+++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.22.bb
-@@ -4,8 +4,7 @@ HOMEPAGE = "http://www.sqlalchemy.org/"
+diff --git a/meta-python/recipes-devtools/python/python3-transitions_0.8.5.bb b/meta-python/recipes-devtools/python/python3-transitions_0.8.6.bb
+similarity index 52%
+rename from meta-python/recipes-devtools/python/python3-transitions_0.8.5.bb
+rename to meta-python/recipes-devtools/python/python3-transitions_0.8.6.bb
+index 7f88bc1d22..701c82cda8 100644
+--- a/meta-python/recipes-devtools/python/python3-transitions_0.8.5.bb
++++ b/meta-python/recipes-devtools/python/python3-transitions_0.8.6.bb
+@@ -1,9 +1,9 @@
+ SUMMARY = "A lightweight, object-oriented Python state machine implementation with many extensions."
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c19467890539ff718c00a019c9c7a7b2"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=de0a0876a688a4483bfafa764773ab39"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=baac7be1f4c17620df74188e23da6d47"
  
--SRC_URI[md5sum] = "40200b570274446a05959abd3fa81778"
--SRC_URI[sha256sum] = "d2f25c7f410338d31666d7ddedfa67570900e248b940d186b48461bd4e5569a1"
-+SRC_URI[sha256sum] = "758fc8c4d6c0336e617f9f6919f9daea3ab6bb9b07005eda9a1a682e24a6cacc"
- 
- PYPI_PACKAGE = "SQLAlchemy"
  inherit pypi setuptools3
+ 
+-SRC_URI[sha256sum] = "e441c66a0c753d56c01c3e5e547f21dbe4a5569c939f12477475c5e81d79769b"
++SRC_URI[sha256sum] = "032e10113139852ffb3ecfa4c2a5138f87441d85c3d6ad9122bb4b0978180a8d"
+ 
+ RDEPENDS_${PN} += "python3-six"
 -- 
 2.17.1
 
