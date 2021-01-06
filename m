@@ -1,50 +1,50 @@
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.web10.9407.1609946266453107521
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web09.9391.1609946268319849908
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Jan 2021 07:17:46 -0800
+ Wed, 06 Jan 2021 07:17:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ifvlg5y2;
- spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f47.google.com with SMTP id qw4so5414872ejb.12
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:17:46 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=D26FtQPH;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id g20so5581173ejb.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:17:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=2/Gzv9bmcxPVso/Jja0cQvZwmR6wYfQSlcuZ9JyqoSc=;
-        b=Ifvlg5y2Ax40M1YzXGiWmsV0jtccpHOZJd7cfWP+ivUGoVAjuTWVtDkG67EHs8A8gc
-         S7eHgDBzvipPtz3XXcesHW7sjJp4334JCyRNOWzjvAVO8J4M9CglhJICoRomvdC0olJp
-         CIewq96f4rrkoP9amaR9qiBISQDJ1JvOa1NP3Y9/kGtHXdx/3XL8hQI5AIVPlMAfmx8s
-         /Bg27ns5gpqq8+J08syMU0S9pbBFaH/j66A47VWQsOcV3h0DnuVIWG5mJ559DPEX+9gK
-         Njg9BQOj9lyzh7PgP2gLONpVaYAbKGA8dDUMOZJ7hKv4LuIyBFHSkxXMRmAUUCiPf7dK
-         7rXg==
+        bh=QS7ZKdoOVFhPs/s8D9W9uBwFRtNA5JJMayXBE0ykqgE=;
+        b=D26FtQPHhv3ISmdTZNQbIaM+05t3mX0MHN3UpnfK5suG8rft/oW/krakZKcRI8Ti1n
+         vWAD4ULdfrQuZorXfUNv/5L9QwdUyjgHyh7Zu8d122pVvaRH4i9K5wSQaepv17YJdpS/
+         UUAkuocj230w4sXjUAxrzttCVvev9Y0+6zhDHfg5qX2bTaz4NpLkLJfPqO4191jBl5F5
+         1FZ3mwKc0jsaZB9MhpgyRExvz4zdlCY1DkCFoNXUucHVG/cSQJSpHWRMcoJM91JQlq8/
+         ZiM/27JkG1S/kPBP7jXV2K+v41MtMQNnAzqtSVyZ6Ij00TYdmmh59YgwQGJf3sVJlZ46
+         tJQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=2/Gzv9bmcxPVso/Jja0cQvZwmR6wYfQSlcuZ9JyqoSc=;
-        b=WXyZgtOJ5fgaU05txqv3P3rftWW3KXEYMG8+hlfIQIZ8iwPYoFvxLxfGpCR7Evqj9Q
-         OK51zXbvKxV2c4kxPwVRAftAF7KKfWwT2kgx+yA3xCEyoaApTDfZD06wgQeAZDMuhUKr
-         vQGv1nmBq3qHKKtRH0NnpJO1eqESSR33NYp6GXtYxyhOKORj8WnaXc7N6mEGOXKFR+78
-         iRUm7HCpvo618prsSv6uiOI/qJcCWy6lNWqvQ+my1JZqCjdiBpoabt1cHYY89T1WH9GD
-         LSqvzBF7WMWhWmqagd+lA/YK9gTLYRW/lT/gzSN2fuk3QWhFQiZwpp35OpAehmz5tLKH
-         49kg==
-X-Gm-Message-State: AOAM533a7IBODFQLywGDG4pYJkAk7SUE+Rz7igMDCFaD05KqeFMe1eKf
-	5oJhywpzdWcyOxwxiflzHP6S0dOGE/HMvw==
-X-Google-Smtp-Source: ABdhPJy540srml9If/LuZZ2uPgiCHw9esigaY4mOMYr7P+vZ5AZOUmlYNGFSNfEtqKC/ywTG0rvm6w==
-X-Received: by 2002:a17:906:934c:: with SMTP id p12mr3263538ejw.361.1609946265077;
-        Wed, 06 Jan 2021 07:17:45 -0800 (PST)
+        bh=QS7ZKdoOVFhPs/s8D9W9uBwFRtNA5JJMayXBE0ykqgE=;
+        b=lGf0FxnFGAxPmK2OqN1vFi70EZAiNr3/Tp8lQGoNGRCXfJ5ApstGUx7Cp4WhCZCpCE
+         g18ZiuqUnvNg6+PUMewxY7bFqabyaTAKSlrCy8k2fv/fdYLF/QQXZp+6Yb4IwJIcLeti
+         JxQ4PGrPZYyunThmK5+PhM96nmgtEIp0OdhHZDJdYPfg2YnZouqtCTv9bSbMLCD49wnV
+         vnLjNwh8Cjf9nYTG5fo+V0EzRzwfqzyf4hXVH+aOOSTeYC8Z/p6I8HbRCjbeuOCcACrx
+         zPGNkprLLp1unNqp8wddKxRiHTumO6lS9954NrQFH3TW+ZwW1R80m05QiXnLvN6o/VU4
+         57ZQ==
+X-Gm-Message-State: AOAM530xkOn5QQGf1toS0piK2NBJlWYbCzEZBsbtMgprkLOudN0ujUKz
+	XhQNeDOMF751bWXbxNR8K5YsYp/YZVdWqw==
+X-Google-Smtp-Source: ABdhPJy4vllh/0sy5M10IQ3NnkKroBnzu2+LUVhXoeThXAlXRyBR1uhqKA7X+V0aNC1c8d6u+4CKaA==
+X-Received: by 2002:a17:906:2681:: with SMTP id t1mr3182500ejc.29.1609946266946;
+        Wed, 06 Jan 2021 07:17:46 -0800 (PST)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f47431850a04677ec24921a.dip0.t-ipconnect.de. [2003:f0:7f47:4318:50a0:4677:ec24:921a])
-        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.17.43
+        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.17.45
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 Jan 2021 07:17:44 -0800 (PST)
+        Wed, 06 Jan 2021 07:17:45 -0800 (PST)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 13/28] tumbler: upgrade 0.3.1 -> 4.16.0
-Date: Wed,  6 Jan 2021 16:17:02 +0100
-Message-Id: <20210106151717.1779543-13-schnitzeltony@gmail.com>
+Subject: [PATCH 14/28] thunar-volman: upgrade 0.9.5 -> 4.16.0
+Date: Wed,  6 Jan 2021 16:17:03 +0100
+Message-Id: <20210106151717.1779543-14-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210106151717.1779543-1-schnitzeltony@gmail.com>
 References: <20210106151717.1779543-1-schnitzeltony@gmail.com>
@@ -56,32 +56,68 @@ Release notes for 4.16.0
 ========================
 - Remove GLIB_CHECK_VERSION IFDEFs which are obsolete after glib bump
 - bump glib (and gio, gthread, etc) minimum to 2.50.0
-- Adjust bug report URL
+- Add README.md to EXTRA_DIST
 - Translation Updates:
-  Estonian, Turkish
+  Turkish, Vietnamese
+
+Release notes for 4.15.1
+========================
+This is a development release of Thunar-volman aiming the upcoming
+release of Xfce 4.16.
+
+- Fix typo in README
+- Adds new README.md updates AM_INIT_AUTOMAKE
+- Translation Updates:
+  Albanian, Amharic, Arabic, Armenian (Armenia), Basque, Belarusian,
+  Bulgarian, Catalan, Chinese (China), Chinese (Hong Kong), Chinese
+  (Taiwan), Croatian, Czech, Danish, Dutch, Eastern Armenian, English
+  (Australia), English (United Kingdom), Estonian, Finnish, French,
+  Galician, German, Greek, Hebrew, Hungarian, Icelandic, Indonesian,
+  Interlingue, Italian, Japanese, Kazakh, Korean, Latvian, Malay,
+  Norwegian Bokmål, Norwegian Nynorsk, Occitan (post 1500), Polish,
+  Portuguese, Portuguese (Brazil), Romanian, Russian, Serbian, Slovak,
+  Slovenian, Spanish, Swedish, Telugu, Thai, Turkish, Ukrainian, Urdu,
+  Urdu (Pakistan), Uyghur, Vietnamese
+
+Release notes for 4.15.0
+========================
+[Please note that this is a development release.]
+
+- Use icons from icon theme in the dialog (!3)
+- Add new app icon and switch to rDNS
+- Remove PDA tab (!1)
+- Avoid critical error when closing preferences dialog
+- Support libxfce4ui XfceTitledDialog new API
+- Translation Updates:
+  Albanian, Belarusian, Bulgarian, Chinese (China), Chinese (Taiwan),
+  Croatian, Danish, Dutch, Eastern Armenian, English (United Kingdom),
+  Estonian, Galician, Greek, Hebrew, Hungarian, Indonesian,
+  Interlingue, Italian, Japanese, Lithuanian, Portuguese, Russian,
+  Slovenian, Spanish
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../tumbler/{tumbler_0.3.1.bb => tumbler_4.16.0.bb}             | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/tumbler/{tumbler_0.3.1.bb => tumbler_4.16.0.bb} (92%)
+ .../{thunar-volman_0.9.5.bb => thunar-volman_4.16.0.bb}        | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-xfce/recipes-xfce/thunar-volman/{thunar-volman_0.9.5.bb => thunar-volman_4.16.0.bb} (74%)
 
-diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.3.1.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_4.16.0.bb
-similarity index 92%
-rename from meta-xfce/recipes-xfce/tumbler/tumbler_0.3.1.bb
-rename to meta-xfce/recipes-xfce/tumbler/tumbler_4.16.0.bb
-index c9f2ddc8b..fcc39fd7d 100644
---- a/meta-xfce/recipes-xfce/tumbler/tumbler_0.3.1.bb
-+++ b/meta-xfce/recipes-xfce/tumbler/tumbler_4.16.0.bb
-@@ -6,7 +6,7 @@ DEPENDS = "freetype gdk-pixbuf poppler curl xfce4-dev-tools-native libxml2 libgs
+diff --git a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.9.5.bb b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_4.16.0.bb
+similarity index 74%
+rename from meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.9.5.bb
+rename to meta-xfce/recipes-xfce/thunar-volman/thunar-volman_4.16.0.bb
+index d499e22ea..138796e6c 100644
+--- a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.9.5.bb
++++ b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_4.16.0.bb
+@@ -8,8 +8,7 @@ inherit xfce features_check
  
- inherit xfce gtk-doc
+ REQUIRED_DISTRO_FEATURES = "x11"
  
--SRC_URI[sha256sum] = "e4a30f3c0656b5b29fcd4a2450293f20f283a95b7fb0754a947c55427784c454"
-+SRC_URI[sha256sum] = "9b0b7fed0c64041733d490b1b307297984629d0dd85369749617a8766850af66"
+-SRC_URI[md5sum] = "f9ef39ed4bbff05eb74058dfff24dd84"
+-SRC_URI[sha256sum] = "7ea7c6693334f2248cf399586af8974dfb7db9aad685ee31ac100e62e19a1837"
++SRC_URI[sha256sum] = "d2c0e719b242b7fd3db70bc6678a2df1abf2cfaa899b775a1591a5efa08a547d"
  
- INSANE_SKIP_${PN} = "dev-so"
- 
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
 -- 
 2.26.2
 
