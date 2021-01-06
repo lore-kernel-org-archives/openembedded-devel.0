@@ -1,17 +1,17 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.41])
- by mx.groups.io with SMTP id smtpd.web11.1483.1609894683714950403
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.47])
+ by mx.groups.io with SMTP id smtpd.web08.1547.1609894997392302353
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Jan 2021 16:58:04 -0800
+ Tue, 05 Jan 2021 17:03:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=J9Zz69Yv;
- spf=pass (domain: windriver.com, ip: 40.107.237.41, mailfrom: wenlin.kang@windriver.com)
+ dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=XCyk76ZR;
+ spf=pass (domain: windriver.com, ip: 40.107.92.47, mailfrom: yi.zhao@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AxxkQUxMDttQmL9Oe9JxfDyD8/6VaaSHrGxhztA2M7Fa8SFR1mXgoWwXXFJHUNq4pV5orLH8+DqYXKUkkV7uxFk5mqJIT4mVlUzUkz9+HLeeYBPZoMcmgliX7AM59S51mFcJogZfmHycO8DX1VEjAvXXaO6kHDIYfM16wWcr8dbEYGuhkZWhyZ9QtXaeTwzFLaQrO5tyBa9zCKzA1SBVWdr6ZRa6U1KPiiwEtxXc59kiC48A7r71psOprx2Uhc7N2vn1qh40gj0/dpA4n5wpRgezf8mUZ+sJqFxyPuhzk3vkLaRgH+2Vx5HsQ4BVlRUFgiFs/pWFk9cdvq9MsLl/EQ==
+ b=GFNSa07sWf5cCb31bIbUDo4ouMXCaC9Bv7mrs8uHW7avVGgiPLr/1TJTNQn1KM4fUsvqcLfKWq9JcxcRBiAucb3pjM+2H4csnLjBv1oDVnhgdkKTjVOafiFU2QZaQxiLS3KDTOoiWaQ6L9mUrK35WnnTAMeQyG853RGw9Fm+8n9TWAUvh10OTnX7l0RaRjFS1uTYA3ruVkESPSbPoFkBBq6cpVbqWdTf/I8qaZ1iyr4jPqAJnZ7IH/YP37l7XIu9l+hcsbvF0rkkYfBf+uKh7fxn9JcHu3f11a1SNzmy7z0sm3O+kkvAoXz7Yo+Z80tS8l4/7ctdFA+8zo8iuyBn/g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dlaASzlBRfSdzOY3VwUOEwkgOxJ3QUcPJbhs8x4+xkY=;
- b=ZzFc0DhCYrOYRKHxjbkAvh16ZtIFUTzQFghkjmH/rIDUOvlCJ2qoo6gMOk3qgbLUf7Ri+WZV3xF1SV5IlsGRVbUrd37LUu1WfIVK8/5qkL08LxE8SmawKix/XiRr3agetzSDL3qz9b5/qKiN5JCVZwiQEMsR1y4JDS48H/4Um8G/9cadU+NHNKbZnQBqONcEDH4O76JqB47u0OHSgheotuwS7KFhzF24jafqquOjzooGbbEn7UL8rH8MXTZ8A1cFbk10Tp3jlZjuYrGjUCCtU+IoFuJBAh+wGTuQD9M2fZkRKdRdkF/Y71r3/lCsH8Cak9ngY9wxRX9XFk8ISdKApw==
+ bh=nSqkToo0AnV7cxBdTwjdYhAih6W+qoNB8olxT0mrIbs=;
+ b=a/6deuHfiLyMv47PrafKUQnnitYMuBlNXMwv9Y5RzQnHH4jEmhgBMnsItpk29QuKfgojZqkxA1uRrGiXTQZVJZVomgTNaF/RZNZEGTjJKzS6i0CjrFhB90dS/cM/tekfo6nvyd2faRrGZsU/Eo4Tc+ZtmDeJ9mFVpZhMySniIUTXmLivx5h64dXXfDe9bxaukPGha3G+KQuf4SjReEXaeKk5PEwceuGcFKSA3mQ/tLJLtNihbD58y7pAWAZdJMrS/DQ3leG5+ObEmJjtz7ou2Ki7pN7EB1xUEC3ag6lqR3Bvrk0FQdlusrGCXt3LsGLyEwCb7UVWzXjjQL2wrQpsRQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,102 +19,215 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dlaASzlBRfSdzOY3VwUOEwkgOxJ3QUcPJbhs8x4+xkY=;
- b=J9Zz69YvKLXcI7MoE0qvvdHtlj3bRMw8WwK9p9Nqcc6GJbxkegI9J60j//2OFbVtjXP/BAytX92krKzEpsTXYej03pnir1Gm710iRfLRqCZFCDQM9HBAjhokPMkdvzZ8y/8SdWZrzBMm19MeMW15s4qKATMRYZ+7o6GpJ6yRdiQ=
+ bh=nSqkToo0AnV7cxBdTwjdYhAih6W+qoNB8olxT0mrIbs=;
+ b=XCyk76ZRS2E2L4FMiLFUHbc3v4MxEmEpYUoYk26eRmuctGy07r4eX7I4AYfyOO4Kh5xGHBn/4t3mDEVLOQpEcjU74nYjn4U7YbGlJWKSACINhlsD9z98doSz/A7kjsKRCMZXrdme8V/Ig19DtZTZefBu0Bzb+RrkKDEJbNG8pcg=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
-Received: from BN7PR11MB2658.namprd11.prod.outlook.com (2603:10b6:406:ae::16)
- by BN6PR11MB2036.namprd11.prod.outlook.com (2603:10b6:404:4a::12) with
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
+ by MW3PR11MB4540.namprd11.prod.outlook.com (2603:10b6:303:56::18) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3721.22; Wed, 6 Jan
- 2021 00:58:02 +0000
-Received: from BN7PR11MB2658.namprd11.prod.outlook.com
- ([fe80::e550:890f:1479:e68f]) by BN7PR11MB2658.namprd11.prod.outlook.com
- ([fe80::e550:890f:1479:e68f%5]) with mapi id 15.20.3721.024; Wed, 6 Jan 2021
- 00:58:02 +0000
-From: "wenlin.kang@windriver.com" <wenlin.kang@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][PATCH] syslog-ng: add bison-native to dependencies
-Date: Tue,  5 Jan 2021 16:57:49 -0800
-Message-Id: <20210106005749.82659-1-wenlin.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
-X-Originating-IP: [147.11.105.123]
-X-ClientProxiedBy: YTOPR0101CA0059.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:14::36) To BN7PR11MB2658.namprd11.prod.outlook.com
- (2603:10b6:406:ae::16)
-Return-Path: wenlin.kang@windriver.com
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6; Wed, 6 Jan
+ 2021 01:03:14 +0000
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::21b9:29b6:fd3:bca5]) by CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::21b9:29b6:fd3:bca5%7]) with mapi id 15.20.3721.024; Wed, 6 Jan 2021
+ 01:03:14 +0000
+Subject: Re: [oe] [meta-networking][PATCH 2/3] etbales: remove upstream ebtables-legacy-save
+To: Khem Raj <raj.khem@gmail.com>, Jose Quaresma <quaresma.jose@gmail.com>
+CC: openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <20201231090331.223784-1-yi.zhao@windriver.com>
+ <20201231090331.223784-2-yi.zhao@windriver.com>
+ <CANPvuRm7giL_om_Pdhus8Qe5teOSKmJgDxcEu8qoyGusqX55uA@mail.gmail.com>
+ <2a98d116-830e-e479-e75d-b2aa285f1743@gmail.com>
+From: "Yi Zhao" <yi.zhao@windriver.com>
+Message-ID: <967b10c8-6de1-1b6b-dfce-791007fd2a7a@windriver.com>
+Date: Wed, 6 Jan 2021 09:03:06 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+In-Reply-To: <2a98d116-830e-e479-e75d-b2aa285f1743@gmail.com>
+X-Originating-IP: [60.247.85.82]
+X-ClientProxiedBy: HK2PR0302CA0020.apcprd03.prod.outlook.com
+ (2603:1096:202::30) To CO1PR11MB4867.namprd11.prod.outlook.com
+ (2603:10b6:303:9a::13)
+Return-Path: yi.zhao@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by YTOPR0101CA0059.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:14::36) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6 via Frontend Transport; Wed, 6 Jan 2021 00:58:01 +0000
+Received: from [128.224.162.174] (60.247.85.82) by HK2PR0302CA0020.apcprd03.prod.outlook.com (2603:1096:202::30) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.2 via Frontend Transport; Wed, 6 Jan 2021 01:03:13 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 0bc172c2-d161-4348-ce87-08d8b1de1e88
-X-MS-TrafficTypeDiagnostic: BN6PR11MB2036:
+X-MS-Office365-Filtering-Correlation-Id: 7cd2c5c2-c981-45fe-3898-08d8b1ded86c
+X-MS-TrafficTypeDiagnostic: MW3PR11MB4540:
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR11MB20366B44BD2F24D8EE9FA5D2E1D00@BN6PR11MB2036.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5236;
+	<MW3PR11MB4540812419CCD094F8DAC3A4F9D00@MW3PR11MB4540.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:235;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	g9RuF8S6yBmj8fF7w4pp8/+cFYNBRcTr7lTRuMRAQ4hfD4f+bmLnqCO4P8caBIBvz064Q9/2xEsDJnkL7DbiI+pVd5hMxjcroW8Q/SWmhGCJDa/WQlk/nhipPPRT+ULYiLzIGmX9HOF0kw+VQw9whi+DC9qMJQL0EjoG1uLYA8JWp7hGsf3rWKvt7E5hyJwTeFPE3Miua9Z9ty3gH3dnCvZWGpklYzLp7N72BfDpKz/DtX4zMM3OD9hiIqk/SRzBRgxFCtJoTyNcGKvVQ7oQmey3AWVdKmJKUseXWjLmv2eT9SUfhSpaWwXHuwLdxVSQKJDu6Ux5LVRvwh2kMDN7K6VlQ9SM7ttJm+wYNwgL9pKjrxX6HIVPGjVJJyjvm3mHw+zz7N+/xJQrMNE+TNb3EjYz6Qalz6sFQ7KN8Xn5ZykUamU9hGKxdJOoLMv6s5VhHeNSObD0MNJuW+lAHNYaaA==
+	WO0F2ukv8LNFSunYqx3bHDdPtoHEMqcKchtgUEJiccQH1xd7PQPVI9XaakxJifkAgIG1gM/w0oXRIoaV0vEAybhXLCHlmBavNSXn1K6mDTyIBdKHg1bcleO/AQaOPh6eXH62rUS6Ei9q0iOvD2wrErpj8kOjkauTKi+BB3x/0HnFMThmd0jGEOz57Ow9d/mDxDXYszHrhe4jLrERAu5m59JAzxJ9dpQ1aLKLM1oEJEJj+oi34auvs6Fo6jHSJftPUfW2ZfpNLh4phO4Yyt4RFUDaVZjWhUYpDwq/AO/D1NprI0U9Nq9hwqRDCWS5yKV5Cwf4lvor4ERrhurtErCJrTFWT6yNYHgK+HV2JhGxa0ka4poa97vtlsx3Y93RAO/x4yJy2tRZgEf2zOBFnCVntDAa50tgGUiEixj0w+y3eKga4NdWOVFOmL1BuDh0BuslF0OxD0ajyvZxRslRD6EvIQ+A5Vs4ywXCPosQJWC9MR+R2qJ5TpVET8f1cwYgna9on+ZeRPZKwjxfvo4upPSuubJ6LZG1f/5P1zvdHRT1NTWnJd5otfyowc/3QbKtr7knP7qKc1AM46ro4NV6lB8e3A==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN7PR11MB2658.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(376002)(39840400004)(346002)(366004)(2906002)(86362001)(316002)(956004)(8676002)(36756003)(6916009)(478600001)(6666004)(2616005)(6506007)(52116002)(66946007)(6486002)(5660300002)(8936002)(26005)(16526019)(1076003)(66476007)(6512007)(186003)(83380400001)(66556008);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39840400004)(396003)(136003)(376002)(346002)(366004)(26005)(186003)(6486002)(83380400001)(16576012)(16526019)(6706004)(110136005)(53546011)(36756003)(316002)(4326008)(966005)(8936002)(52116002)(44832011)(6666004)(31686004)(86362001)(31696002)(2906002)(2616005)(66946007)(956004)(66556008)(66476007)(8676002)(478600001)(5660300002)(78286007)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?WDbIDJOZfVH1V9NbLmTxQULhjSdCF1j+icGrlbcc28WBLz9Y74ookVziwP8x?=
- =?us-ascii?Q?OJbs7D/xT3utF5sdFN897dEug1FdeQnvhpmRRFyjAnFaoh8oJZcizy+/HOsx?=
- =?us-ascii?Q?VD8XENuXU30GkRaaUUj1g9223f4Sx8zkcrES4id7DPdPS2W4MBYhRgmkr9LE?=
- =?us-ascii?Q?4hJtTC7rtAlzpxUkwenv8CMPA3FxmTCugnUGbOG0QlkivvB6yC/rmZRlilv/?=
- =?us-ascii?Q?lSJGibjTIi91BRrw7UreLQQqg3Yrpb8Vy2n9N5VyvLZFE7mB9TWcBzfypxRm?=
- =?us-ascii?Q?2gLUObNMiBlZ0bTF4rxmf3fHmlM1cdniSiV3TlpQ6IMpgWXQCbwcaPnU6vFY?=
- =?us-ascii?Q?NAwc+CimR+tQzbZ3peNK4gexdTrzUL5D0y/qr3qczUdBlFvaWVjJughu7THW?=
- =?us-ascii?Q?SzeZ1RIcOsjDAxHeQe3mARsIaozfZ9CibrbG9UfWxs0jiBDAOogxLgVzTwBZ?=
- =?us-ascii?Q?/QKRIWHXdmI7Glkx8SMSuL0rvDfiYyreGN351M3A4/xhag0cBweUcl7H/R/z?=
- =?us-ascii?Q?OfI2AnhyjpzkvrHXM3ycspH+aaq1iHUnl6crJIpVlHuTDTwLYX3ulIOr32PZ?=
- =?us-ascii?Q?9Wb8p3aMcqvsbPljZVTjYXTm1luhzoYk381vzsMVGx5dsv5YC1K6qX7RyTYa?=
- =?us-ascii?Q?xoi8L5t9cglZ89dykYk5RPy27C+JGeHBfQoajg1gTPofc2UkPWkTXM3kQKtC?=
- =?us-ascii?Q?gWDG83nfjOx5ChG0mW3QYlkyfRSTyR7EL55FEkQKbV/Ca7f1rTe2mI97LEax?=
- =?us-ascii?Q?pA67m66R0JzsKNa2boFw+Cqld7MsMe9ee9ahPVd8AJ0ZMMD4/T9djgzAH+W/?=
- =?us-ascii?Q?AJE5APpm4/USiPdbnnqgtnatzRr5JIvsl7wmLwlccYHTcf9DIH1uQkXKercj?=
- =?us-ascii?Q?pKo/6Hw6V76H16E8+LgQkmkwdmrp1FIFev87qBCf1ZSuaeEnbvCz7PkYok7N?=
- =?us-ascii?Q?Sd9GEEx1/E9PLXM+jHOxNXMlFgYBvsnjp7IMUDjC6tsV7ft6mlqMgf89D63b?=
- =?us-ascii?Q?Ei8M?=
+	=?us-ascii?Q?O+JXiv9N4ptwPWTIM0y2iyUXIHOhZI9/E4S7QTNUi9U42/JRH8GMW9PSItbU?=
+ =?us-ascii?Q?wG42CEEUMcPY1zdenJ/sJlMScfMcjH8jOcD4pzqqg+osj59VJVp4pRyj0lqe?=
+ =?us-ascii?Q?AdW0ISFL3kR7FYSQCRFI83MOtFIsy8sxNHgY7SSfxQDPQWgaKuBFvfOH8zIM?=
+ =?us-ascii?Q?z540m9h4b12vK1G1wUBedbRM1IfqfVYWL6R5E0vuI3mK5UJSfz8/cOxF79gi?=
+ =?us-ascii?Q?0JXqmU1Tn5juqaatfn47a5DdZmM9dM63rXXFVm4Vj94KUOvj+3uFlBJhnkTw?=
+ =?us-ascii?Q?yUJegp2KXhmc+3qAjljHjT+/6upg+/NDdSooFYrNCV085++co0sz8SClgfk3?=
+ =?us-ascii?Q?hBnFYxPb/Bt3dTqEAU1mlVeXQJnZTfv9TsZpMCHHEsjxVIh/izAvWDkSM6vn?=
+ =?us-ascii?Q?WsHLwGcGQECfYOL6Fjs4rqskGv8T5cKG90J5izbW4EhDg6uoSkTTgJ9psjRY?=
+ =?us-ascii?Q?wpqS+LCYVeN63cqN6K3djHeDIg5qo+BgVrOErfQycNUy2VuE8nTsCD/y/xcO?=
+ =?us-ascii?Q?AiqmEgIjYXDeSgtCoKyARLAewLUAO7eeLVeHWOTAfB0ZO13GV6EvGY3daWY4?=
+ =?us-ascii?Q?JBZHp+ff+iI2lcVI/u/OveAI10Vou1DFjq/CUIv3pEmDT1MSr211VYXT6tme?=
+ =?us-ascii?Q?q0/ZoDdAML1ZJXmHglo8FfmdEshACCASfXUfl/El8adyq/3H8UnTqzzM/lbE?=
+ =?us-ascii?Q?9zvEq4CHaheF/eBZYhkNq3WrnOBYJpnXAMe0r9Jnso/AQgiocn2QU8ifBpcm?=
+ =?us-ascii?Q?F69Sjzx9m8JI6sRvZaCJOWoawEqLK0PaPaxTNTCI20ZAJc6x/IfUsqEUQxdO?=
+ =?us-ascii?Q?VIQ5S/20oBu1NpvojV/rKAVGa9wLXdESASfyZnbFgkETqB6wr7T9Utgp7m9X?=
+ =?us-ascii?Q?jG63BJF8Az0JNp3+mm/dEon4661ybfLg5iZJ7lQcejhJDDrLt3RWwXJZ9mDA?=
+ =?us-ascii?Q?aWJVA4ZoNHVm3u/+7BULrx/pZ7fdIPtpOkAsohwiVus=3D?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-AuthSource: BN7PR11MB2658.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2021 00:58:02.5203
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2021 01:03:14.4204
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0bc172c2-d161-4348-ce87-08d8b1de1e88
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7cd2c5c2-c981-45fe-3898-08d8b1ded86c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: XL0CkZ43g025BvtNZzzrVnQChq9wrIddQj8KflzW4/1FAu+jpaPitmDd6qMtLqlAMHx+R0DWhI8JYduDshOBZBj3BZjdXvuwhx3iSMAkacQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR11MB2036
-Content-Type: text/plain
+X-MS-Exchange-CrossTenant-UserPrincipalName: u+W4XvtIgp6ckrAQkHD269J31mGG6nYXKFf981KzbZGqxI1/Hd+ULEUVuIvBhpQoDRmMHNWKIBqpST5zTii/vQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR11MB4540
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+Content-Language: en-US
 
-From: Wenlin Kang <wenlin.kang@windriver.com>
 
-Add bison-native in dependencies, this is required by the syslog-ng
-Open Source documentation(https://www.syslog-ng.com/technical-documents
-/list/syslog-ng-open-source-edition)
+On 1/6/21 1:17 AM, Khem Raj wrote:
+>
+>
+> On 1/5/21 2:58 AM, Jose Quaresma wrote:
+>> Hi,
+>>
+>> Fix typo in commit message:
+>>
+>> -[oe] [meta-networking][PATCH 2/3] etbales: remove upstream=20
+>> ebtables-legacy-save
+>> +[oe] [meta-networking][PATCH 2/3] ebtables: remove upstream=20
+>> ebtables-legacy-save
+>
+> I gave edited in master-next
 
-Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
----
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-index 2b38f4d69..818cad5bc 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -13,7 +13,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=24c0c5cb2c83d9f2ab725481e4df5240"
- 
- # util-linux added to get libuuid
--DEPENDS = "libpcre flex glib-2.0 openssl util-linux"
-+DEPENDS = "libpcre flex glib-2.0 openssl util-linux bison-native"
- 
- # We expect the recipe to add anything specific for that version to these defaults.
- #
--- 
-2.17.1
+Thanks, Jose and Khem.
 
+
+//Yi
+
+
+>
+>>
+>>
+>> Yi Zhao <yi.zhao@windriver.com <mailto:yi.zhao@windriver.com>>=20
+>> escreveu no dia quinta, 31/12/2020 =C3=A0(s) 09:03:
+>>
+>> =C2=A0=C2=A0=C2=A0 Remove the upstream ebtables-legacy-save before we i=
+nstall the local
+>> =C2=A0=C2=A0=C2=A0 ones. And install it to ${sbindir} rather than ${bas=
+e_sbindir}.
+>>
+>> =C2=A0=C2=A0=C2=A0 Signed-off-by: Yi Zhao <yi.zhao@windriver.com
+>> =C2=A0=C2=A0=C2=A0 <mailto:yi.zhao@windriver.com>>
+>> =C2=A0=C2=A0=C2=A0 ---
+>> =C2=A0=C2=A0=C2=A0=C2=A0 =C2=A0.../ebtables/ebtables-2.0.11/ebtables-le=
+gacy-save =C2=A0| 2 +-
+>> =C2=A0=C2=A0=C2=A0=C2=A0 =C2=A0meta-networking/recipes-filter/ebtables/=
+ebtables_2.0.11.bb
+>> =C2=A0=C2=A0=C2=A0 <http://ebtables_2.0.11.bb>=C2=A0 | 6 +++---
+>> =C2=A0=C2=A0=C2=A0=C2=A0 =C2=A02 files changed, 4 insertions(+), 4 dele=
+tions(-)
+>> =C2=A0=C2=A0=C2=A0=C2=A0 =C2=A0mode change 100755 =3D> 100644
+>> meta-networking/recipes-filter/ebtables/ebtables-2.0.11/ebtables-legacy=
+-save
+>>
+>> =C2=A0=C2=A0=C2=A0 diff --git
+>> a/meta-networking/recipes-filter/ebtables/ebtables-2.0.11/ebtables-lega=
+cy-save
+>> b/meta-networking/recipes-filter/ebtables/ebtables-2.0.11/ebtables-lega=
+cy-save
+>> =C2=A0=C2=A0=C2=A0 old mode 100755
+>> =C2=A0=C2=A0=C2=A0 new mode 100644
+>> =C2=A0=C2=A0=C2=A0 index 2d7fc4ed7..2133600f7
+>> =C2=A0=C2=A0=C2=A0 ---
+>> a/meta-networking/recipes-filter/ebtables/ebtables-2.0.11/ebtables-lega=
+cy-save
+>> =C2=A0=C2=A0=C2=A0 +++
+>> b/meta-networking/recipes-filter/ebtables/ebtables-2.0.11/ebtables-lega=
+cy-save
+>> =C2=A0=C2=A0=C2=A0 @@ -1,6 +1,6 @@
+>> =C2=A0=C2=A0=C2=A0=C2=A0 =C2=A0#!/bin/bash
+>>
+>> =C2=A0=C2=A0=C2=A0 -EBTABLES=3D"/sbin/ebtables"
+>> =C2=A0=C2=A0=C2=A0 +EBTABLES=3D"/usr/sbin/ebtables-legacy"
+>>
+>> =C2=A0=C2=A0=C2=A0=C2=A0 =C2=A0[ -x "$EBTABLES" ] || exit 1
+>>
+>> =C2=A0=C2=A0=C2=A0 diff --git
+>> =C2=A0=C2=A0=C2=A0 a/meta-networking/recipes-filter/ebtables/ebtables_2=
+.0.11.bb
+>> =C2=A0=C2=A0=C2=A0 <http://ebtables_2.0.11.bb>
+>> =C2=A0=C2=A0=C2=A0 b/meta-networking/recipes-filter/ebtables/ebtables_2=
+.0.11.bb
+>> =C2=A0=C2=A0=C2=A0 <http://ebtables_2.0.11.bb>
+>> =C2=A0=C2=A0=C2=A0 index 08d4d661d..be21c372d 100644
+>> =C2=A0=C2=A0=C2=A0 --- a/meta-networking/recipes-filter/ebtables/ebtabl=
+es_2.0.11.bb
+>> =C2=A0=C2=A0=C2=A0 <http://ebtables_2.0.11.bb>
+>> =C2=A0=C2=A0=C2=A0 +++ b/meta-networking/recipes-filter/ebtables/ebtabl=
+es_2.0.11.bb
+>> =C2=A0=C2=A0=C2=A0 <http://ebtables_2.0.11.bb>
+>> =C2=A0=C2=A0=C2=A0 @@ -28,11 +28,11 @@ do_install_append () {
+>> =C2=A0=C2=A0=C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 #This file has bee=
+n provided by netbase
+>> =C2=A0=C2=A0=C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 rm -f ${D}${syscon=
+fdir}/ethertypes
+>>
+>> =C2=A0=C2=A0=C2=A0 -=C2=A0 =C2=A0 =C2=A0 =C2=A0install -d ${D}${base_sb=
+indir}
+>> =C2=A0=C2=A0=C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 # Replace upstream=
+ ebtables-save perl script with Fedora
+>> =C2=A0=C2=A0=C2=A0 bash based rewrite
+>> =C2=A0=C2=A0=C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 #
+>> http://pkgs.fedoraproject.org/cgit/rpms/ebtables.git/tree/ebtables-save
+>> <http://pkgs.fedoraproject.org/cgit/rpms/ebtables.git/tree/ebtables-sav=
+e>
+>> =C2=A0=C2=A0=C2=A0 -=C2=A0 =C2=A0 =C2=A0 =C2=A0install -m 0755 ${WORKDI=
+R}/ebtables-legacy-save
+>> =C2=A0=C2=A0=C2=A0 ${D}${base_sbindir}/ebtables-legacy-save
+>> =C2=A0=C2=A0=C2=A0 -=C2=A0 =C2=A0 =C2=A0 =C2=A0sed -i 's!/sbin/!${base_=
+sbindir}/!g'
+>> =C2=A0=C2=A0=C2=A0 ${D}${base_sbindir}/ebtables-legacy-save
+>> =C2=A0=C2=A0=C2=A0 +=C2=A0 =C2=A0 =C2=A0 =C2=A0rm -f ${D}${sbindir}/ebt=
+ables-legacy-save
+>> =C2=A0=C2=A0=C2=A0 +=C2=A0 =C2=A0 =C2=A0 =C2=A0install -m 0755 ${WORKDI=
+R}/ebtables-legacy-save
+>> =C2=A0=C2=A0=C2=A0 ${D}${sbindir}/ebtables-legacy-save
+>> =C2=A0=C2=A0=C2=A0 +
+>> =C2=A0=C2=A0=C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 # Install systemd =
+service files
+>> =C2=A0=C2=A0=C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if ${@bb.utils.con=
+tains('DISTRO_FEATURES', 'systemd',
+>> =C2=A0=C2=A0=C2=A0 'true', 'false', d)}; then
+>> =C2=A0=C2=A0=C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 install -d ${D}${systemd_unitdir}/system
+>> =C2=A0=C2=A0=C2=A0 -- =C2=A0=C2=A0=C2=A0 2.25.1
+>>
+>>
+>>
+>>
+>>
+>>
+>> --=20
+>> best regards,
+>> Jos=C3=A9 Quaresma
+>>
+>>
+>>=20
+>>
