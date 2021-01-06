@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.1121.1609970847768415096
+ by mx.groups.io with SMTP id smtpd.web08.1145.1609970848288792710
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 06 Jan 2021 14:07:28 -0800
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=51612 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kxGxd-0004lA-Ge; Thu, 07 Jan 2021 00:07:26 +0200
+	id 1kxGxi-0004lA-3M; Thu, 07 Jan 2021 00:07:26 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 05/10] python3-transitions: Upgrade 0.8.5 -> 0.8.6
-Date: Thu,  7 Jan 2021 00:06:57 +0200
-Message-Id: <20210106220702.10483-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 06/10] python3-pytest-metadata: Upgrade 1.10.0 -> 1.11.0
+Date: Thu,  7 Jan 2021 00:06:58 +0200
+Message-Id: <20210106220702.10483-6-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210106220702.10483-1-leon.anavi@konsulko.com>
 References: <20210106220702.10483-1-leon.anavi@konsulko.com>
@@ -30,51 +30,34 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.8.6:
+Upgrade to release 1.11.0:
 
-- HierarchicalMachine.add_states will raise a ValueError when an
-  Enum name contains the currently used NestedState.separator.
-- Bugfix: Reset NestedState._scope when enter/exit callbacks raise
-  an exception
-- Bugfix: Let HierarchicalMachine._get_trigger which is bound to
-  model.trigger raise a MachineError for invalid events and
-  AttributeError for unknown events
-- Introduced HierarchicalMachine.has_trigger to determine whether
-  an event is valid for an HSM
-- Feature: AsyncMachine features an event queue dictionary for
-  individual models when queued='model'
-- Feature: Machine.remove_model will now also remove model events
-  from the event queue when queued=True
-- Feature: Machine.get_transitions and its HSM counterpart now
-  accept Enum and State for source and dest
-
-License-Update: Update year
+- Provide a session fixture to include metadata in Junit XMLs
+  as property tags
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...hon3-transitions_0.8.5.bb => python3-transitions_0.8.6.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-transitions_0.8.5.bb => python3-transitions_0.8.6.bb} (52%)
+ ...st-metadata_1.10.0.bb => python3-pytest-metadata_1.11.0.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pytest-metadata_1.10.0.bb => python3-pytest-metadata_1.11.0.bb} (72%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-transitions_0.8.5.bb b/meta-python/recipes-devtools/python/python3-transitions_0.8.6.bb
-similarity index 52%
-rename from meta-python/recipes-devtools/python/python3-transitions_0.8.5.bb
-rename to meta-python/recipes-devtools/python/python3-transitions_0.8.6.bb
-index 7f88bc1d22..701c82cda8 100644
---- a/meta-python/recipes-devtools/python/python3-transitions_0.8.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-transitions_0.8.6.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "A lightweight, object-oriented Python state machine implementation with many extensions."
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=de0a0876a688a4483bfafa764773ab39"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=baac7be1f4c17620df74188e23da6d47"
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-metadata_1.10.0.bb b/meta-python/recipes-devtools/python/python3-pytest-metadata_1.11.0.bb
+similarity index 72%
+rename from meta-python/recipes-devtools/python/python3-pytest-metadata_1.10.0.bb
+rename to meta-python/recipes-devtools/python/python3-pytest-metadata_1.11.0.bb
+index 70cc98f294..a1b62d16e4 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest-metadata_1.10.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest-metadata_1.11.0.bb
+@@ -4,8 +4,7 @@ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d425c8f3157dbf212db2ec53d9e5132"
  
- inherit pypi setuptools3
+-SRC_URI[sha256sum] = "b7e6e0a45adacb17a03a97bf7a2ef60cc1f4e172bcce9732ce5e814191932315"
+-SRC_URI[md5sum] = "4fcf9764e6210c4555411fce8109e7cd"
++SRC_URI[sha256sum] = "71b506d49d34e539cc3cfdb7ce2c5f072bea5c953320002c95968e0238f8ecf1"
  
--SRC_URI[sha256sum] = "e441c66a0c753d56c01c3e5e547f21dbe4a5569c939f12477475c5e81d79769b"
-+SRC_URI[sha256sum] = "032e10113139852ffb3ecfa4c2a5138f87441d85c3d6ad9122bb4b0978180a8d"
+ PYPI_PACKAGE = "pytest-metadata"
  
- RDEPENDS_${PN} += "python3-six"
 -- 
 2.17.1
 
