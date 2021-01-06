@@ -1,50 +1,50 @@
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web08.9422.1609946279955189925
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+ by mx.groups.io with SMTP id smtpd.web09.9395.1609946281048539424
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Jan 2021 07:18:00 -0800
+ Wed, 06 Jan 2021 07:18:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Onyp/jR5;
- spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id g24so4675579edw.9
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:17:59 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=mQhlto84;
+ spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f45.google.com with SMTP id n26so5501985eju.6
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:18:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=zlm3sUIz0gcIMR+JMgtlulKopTa8ZLkhz+3f5InUYTo=;
-        b=Onyp/jR5wqrHIwSvn6QtPs3qznLf5vIGZxLhw/cZO0NTA/u4gO9kcsUkuKGXfnKx57
-         l6OGZdfIUf1voFWjvi9MrQ38RRZ8pRKII9SrQPHu6XXXCMHyaJsrH5zYA3zBMwMFNKS3
-         37Vp+UHcV+YGlCnYv0u5IO2WPSrIF4df/bx/FnqRuLS0FsmF8lwYYhQhcaovwaKjuy+A
-         AVQrvXv+TOzz+xCKXdHpvp7YSda6eayQwI+QdFg3V1sKNoLKm49cBX+OjPr4rOEQYiQY
-         iTJDCVuvaMKrn1Doh0dRUHfG1UfUm2dmhga8t3Jl6mKUo2uDkm0sANAbNKq3e+h2PoWL
-         ZcSQ==
+        bh=w/7CsDpHxtJcXOJXT/czsGjRVlm65jMTgVjWQk8CvTA=;
+        b=mQhlto84PtRXUgm2LVfP7Tdq/YATGx4a1NErbYYzFk8ORB0/AE4IVICoRlb6WxYq9y
+         LOo4Tf9W/7wotGvL8AXZh8EMkO8Y/wpzZ6e2uOm2UjGk/6TMiDlwc6VAaFmjRn4OhAwa
+         jUSm09rAKzSwbpobAX++KYHWTOmopP+Qi2fZcXVoQ9ae9MEHTjNQ0pSlKqT94sv972rK
+         I60wJ24LJkVNNi7GymQLy5VjpwiaFHfyD4X3m3a4rzQduaziZIZj0jVRvitzRUw3T9zu
+         208TEsKrxDGbQ/88FFj+1a7WetdcZE5DllACNKNzvlPmziKR/CfMyReWuxDNc8v+XHkY
+         IUyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=zlm3sUIz0gcIMR+JMgtlulKopTa8ZLkhz+3f5InUYTo=;
-        b=X5Ip78ZwuLuY1OuEJj/8w7+xrxigyRA0mn2NOw4uP7IFPNIhBkfRhDjUiD3QTGuER3
-         DXFcUc9k297CuiWSTk3gbmIrLtROhIn4h/OQtOZ1tj+aV7z8ISpVjB5QGQur2pX1BuTV
-         P71vKiLtOwPIuQotRjiQKwetEa8ykDH3jqSk1ePEkB3RO9vBBnlr5BCwWE7js6R6QH6v
-         3xKOYELJTTeBXygDAGuU3h7ba7BSQLyJO288tv+vkzmc7QLF8+5TyXSVh4X7uCOaFcll
-         J7kzRg9OeITyJgrObXFZIk7qsfy/wxB9toB1Py869ktvPuL8qxLCv8E+ISXksYK7J3od
-         SrIw==
-X-Gm-Message-State: AOAM532Mmg/Cd1e2kSwHnNLE5w5dZ5Sj7TLZKHM8GSzeIKf3dqLEJvg2
-	KMMcy6XdSv/Jg2UEiNfqY34LFf+Mu+ua9g==
-X-Google-Smtp-Source: ABdhPJxsNr820J3wWsR95EEREQ6SdGfu5E/+L1dRxIyNQ/z3HRFS7XutuGVFkaFlvfRPz6DXX0ea0g==
-X-Received: by 2002:a50:c053:: with SMTP id u19mr4278898edd.109.1609946278594;
-        Wed, 06 Jan 2021 07:17:58 -0800 (PST)
+        bh=w/7CsDpHxtJcXOJXT/czsGjRVlm65jMTgVjWQk8CvTA=;
+        b=suDoj6ur0PuKcWZj+6jEZCtDa3oLpjyzUqfRoru0CYVy++1DKn3w09+McFLlYuFMAP
+         3La8dyXcp4fqSgadp2UgouN1KyWCwBElLA08xY5jB5ivXFEGc23Z1GJhGaRU0fZ7477P
+         03fvgJ0ndl80eK4axBvwt9NzY/stcCt/TyqAH1Koahc82MsU7YSplJx7GXrkiPGvtPJ4
+         tA80KaN8EG0Rlu+4XmuESIfdfjopPq/clnsPDRhi2j/I2x88wefxOXELgnahdUnFekPa
+         Y6Ntfd+eRtKaydxD5Lslq+7kI6EectPbPMWswV0p98KaQZLt3cZQtC5f8S7N5tj/HmbZ
+         v/7Q==
+X-Gm-Message-State: AOAM533t2vGivXzsYiQ/nMcXrwF6vl9fr6WEfL0a1/p7RPr2EiCA0A2X
+	4QDW401Wy51qJJzgivN+QG/mUY254VUPvg==
+X-Google-Smtp-Source: ABdhPJzNBZ105Pzf41N2Ce2/zvKNZ0Ki5Jvj55C2qSGzyHXUj2WOcIMUVsgc79iaVPEAxLivpI+Xbg==
+X-Received: by 2002:a17:906:9a07:: with SMTP id ai7mr3257611ejc.216.1609946279614;
+        Wed, 06 Jan 2021 07:17:59 -0800 (PST)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f47431850a04677ec24921a.dip0.t-ipconnect.de. [2003:f0:7f47:4318:50a0:4677:ec24:921a])
-        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.17.56
+        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.17.58
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 Jan 2021 07:17:57 -0800 (PST)
+        Wed, 06 Jan 2021 07:17:58 -0800 (PST)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 22/28] xfce4-genmon-plugin: upgrade 4.0.2 -> 4.1.0
-Date: Wed,  6 Jan 2021 16:17:11 +0100
-Message-Id: <20210106151717.1779543-22-schnitzeltony@gmail.com>
+Subject: [PATCH 23/28] xfce4-hotcorner-plugin: remove
+Date: Wed,  6 Jan 2021 16:17:12 +0100
+Message-Id: <20210106151717.1779543-23-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210106151717.1779543-1-schnitzeltony@gmail.com>
 References: <20210106151717.1779543-1-schnitzeltony@gmail.com>
@@ -52,66 +52,97 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-First version that builds with xfce 4.16
+* it broke by xfce 4.16
+* the develeoper will not continue it [1]
 
-4.1.0 (2020/12/22)
-==================
-- Add basic GitLab pipeline
-- Updated README file
-- Add DBG anchors
-- Add <icon> amd <iconclick> elements
-- Make Save translatable
-- Fix config values sometimes going to default
-- Fix label sometimes re-appearing
-- Enable multi-row support
-- Remove unused variables and code
-- Fix indentation
-- Catch some edge cases
-- Set tmp variable default values
-- Fix period spinner display when cancelled
-- Fix label toggle display when cancelled
-- Fix font display when cancelled
-- Support new libxfce4ui API
-- Change close to save
-- Closing config window cancels changes
-- Change layout of config dialog
-- Make tooltips translatable
-- Update support URLs to docs.xfce.org
-- Allow compilation with panel 4.15
-- Replace deprecated xfce_create_panel_button
-======
-- Translation Updates:
-  Albanian, Amharic, Arabic, Armenian (Armenia), Basque, Belarusian,
-  Bulgarian, Catalan, Chinese (China), Chinese (Taiwan), Croatian,
-  Czech, Danish, Dutch, Eastern Armenian, English (Australia), English
-  (Canada), English (United Kingdom), Estonian, Finnish, French,
-  Galician, German, Greek, Hebrew, Hindi, Hungarian, Icelandic,
-  Indonesian, Interlingue, Italian, Japanese, Kazakh, Korean, Latvian,
-  Lithuanian, Malay, Norwegian Bokmål, Occitan (post 1500), Polish,
-  Portuguese, Portuguese (Brazil), Russian, Serbian, Slovak, Slovenian,
-  Spanish, Swedish, Thai, Turkish, Ukrainian, Urdu, Urdu (Pakistan),
-  Uyghur
+[1] https://github.com/brianhsu/xfce4-hotcorner-plugin/issues/11
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...ce4-genmon-plugin_4.0.2.bb => xfce4-genmon-plugin_4.1.0.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/genmon/{xfce4-genmon-plugin_4.0.2.bb => xfce4-genmon-plugin_4.1.0.bb} (71%)
+ ...keLists.txt-fix-library-install-path.patch | 39 -------------------
+ .../hotcorner/xfce4-hotcorner-plugin_0.0.2.bb | 14 -------
+ .../packagegroup-xfce-extended.bb             |  1 -
+ 3 files changed, 54 deletions(-)
+ delete mode 100644 meta-xfce/recipes-panel-plugins/hotcorner/xfce4-hotcorner-plugin/0001-CMakeLists.txt-fix-library-install-path.patch
+ delete mode 100644 meta-xfce/recipes-panel-plugins/hotcorner/xfce4-hotcorner-plugin_0.0.2.bb
 
-diff --git a/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.0.2.bb b/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.1.0.bb
-similarity index 71%
-rename from meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.0.2.bb
-rename to meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.1.0.bb
-index 3108a7760..a51c52f23 100644
---- a/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.0.2.bb
-+++ b/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.1.0.bb
-@@ -5,5 +5,4 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=68ad62c64cc6c620126241fd429e68fe"
- 
- inherit xfce-panel-plugin
- 
--SRC_URI[md5sum] = "d808fe77a438c95b97ec6feda6162d22"
--SRC_URI[sha256sum] = "256c22526f61aabf43b91b903b976c13e56198657667df443cdb06b31fbf23aa"
-+SRC_URI[sha256sum] = "d1256b4b47545c7bdb16842b21eaf3ac167be443e8f2f1093cf4209e65c84e7d"
+diff --git a/meta-xfce/recipes-panel-plugins/hotcorner/xfce4-hotcorner-plugin/0001-CMakeLists.txt-fix-library-install-path.patch b/meta-xfce/recipes-panel-plugins/hotcorner/xfce4-hotcorner-plugin/0001-CMakeLists.txt-fix-library-install-path.patch
+deleted file mode 100644
+index df348dc85..000000000
+--- a/meta-xfce/recipes-panel-plugins/hotcorner/xfce4-hotcorner-plugin/0001-CMakeLists.txt-fix-library-install-path.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-Upstream-Status: Submitted [https://github.com/brianhsu/xfce4-hotcorner-plugin/pull/8]
+-
+-The library install path may be ${CMAKE_INSTALL_PREFIX}/lib64 rather
+-than fixed ${CMAKE_INSTALL_PREFIX}/lib. Provide a variable to make it
+-could override by cmake command line.
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+----
+- CMakeLists.txt | 7 ++++---
+- 1 file changed, 4 insertions(+), 3 deletions(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index e193787..84cb52d 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -10,8 +10,9 @@ include(GNUInstallDirs)
+- 
+- PKG_CHECK_MODULES(GTK REQUIRED libxfce4panel-1.0 libxfce4ui-1 libwnck-3.0)
+- 
+--set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+--set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+-+set(BASE_LIB_PATH "lib" CACHE STRING "base library install path")
+-+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${BASE_LIB_PATH})
+-+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${BASE_LIB_PATH})
+- set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+-  
+- INCLUDE_DIRECTORIES(${GTK_INCLUDE_DIRS})
+-@@ -28,7 +29,7 @@ ADD_LIBRARY(hotcorner SHARED src/hotcorner.c src/util.c)
+-  
+- TARGET_LINK_LIBRARIES(hotcorner ${GTK_LIBRARIES})
+- 
+--INSTALL(TARGETS hotcorner  LIBRARY DESTINATION lib/xfce4/panel/plugins/)
+-+INSTALL(TARGETS hotcorner  LIBRARY DESTINATION ${BASE_LIB_PATH}/xfce4/panel/plugins/)
+- INSTALL(FILES hotcorner.desktop DESTINATION share/xfce4/panel/plugins/)
+- GETTEXT_CREATE_TRANSLATIONS(po/xfce4-hotcorner-plugin.pot ALL po/zh_TW.po)
+- 
+--- 
+-2.11.0
+-
+diff --git a/meta-xfce/recipes-panel-plugins/hotcorner/xfce4-hotcorner-plugin_0.0.2.bb b/meta-xfce/recipes-panel-plugins/hotcorner/xfce4-hotcorner-plugin_0.0.2.bb
+deleted file mode 100644
+index 57a815b1b..000000000
+--- a/meta-xfce/recipes-panel-plugins/hotcorner/xfce4-hotcorner-plugin_0.0.2.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-SUMMARY = "Plugin providing hotcorners"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://README.md;beginline=48;endline=53;md5=2c694b8e0f73274b13465b509e4f5427"
+-
+-inherit xfce-panel-plugin cmake
+-
+-DEPENDS += "libwnck3"
+-
+-SRC_URI = "https://github.com/brianhsu/${BPN}/releases/download/${PV}/${BPN}-${PV}.tar.gz \
+-           file://0001-CMakeLists.txt-fix-library-install-path.patch"
+-SRC_URI[md5sum] = "ac31b45cda1867cb6bd69bb285638263"
+-SRC_URI[sha256sum] = "942684c92f96a158e1417e597947f822769ac56aa1993a8c9f166ee633ef2b8d"
+-
+-EXTRA_OECMAKE = "-DBASE_LIB_PATH=${baselib}"
+diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
+index 255d2b5eb..f8a4b2f68 100644
+--- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
++++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
+@@ -46,7 +46,6 @@ RRECOMMENDS_${PN} = " \
+     xfce4-whiskermenu-plugin \
+     xfce4-mailwatch-plugin \
+     xfce4-smartbookmark-plugin \
+-    xfce4-hotcorner-plugin \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'xfce4-pulseaudio-plugin', '', d)} \
+     xfce4-sensors-plugin \
+     xfce4-calculator-plugin \
 -- 
 2.26.2
 
