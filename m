@@ -1,50 +1,50 @@
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
- by mx.groups.io with SMTP id smtpd.web10.9421.1609946286436608732
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.web08.9425.1609946288432739585
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Jan 2021 07:18:06 -0800
+ Wed, 06 Jan 2021 07:18:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=JA13bxdT;
- spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f47.google.com with SMTP id p22so4651493edu.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:18:06 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=hv3ScnXk;
+ spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f54.google.com with SMTP id lt17so5552027ejb.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 07:18:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=pRnx9eWeASKfw8W7GczdmK9qBYpJq6JZg9sCXPTvw5w=;
-        b=JA13bxdTRgU5hobrU0u0sXa5VnBY5v9AX5jAiNvzYRq2OyjtDfhnx+Z2oiWYGMeEg8
-         IEi1FNWyc8gs6yLi8W0fcIxqxicb6/TlztQJpqq6t8Inlyvj1qe5yphoV5r0PpdLGqdw
-         rA+wmUsxwS1DN0MisipTjFSRgTxgVNj98YADGZil6WFLm/BMpH1TquKTnNaAWCNOYl62
-         nlKgQqP+9pBmVofDNjNb/faj6aZGGJrVeh/jdA6EBf5IZCPLtqjaRbBvQc8Z4s520B+r
-         +ar7vIjSIgYF5ep4n9qDqedWMo/mneq22njhNpHNzKpKQWcmqAoJJbc3hz+YDg08FvLS
-         q2Rw==
+        bh=FiaEhXMxTnolmAqiD1JE9FHJu8eoaB+Y8Xjn94lmqwU=;
+        b=hv3ScnXkSTrhBTB+hX+PpFyODQSFBCkDucdCjaarsGget4hx1sB0F+E+U38PpTwEvl
+         /pr/bP9zT3kmZ+ax86P8xvofXaNmqDaamd2PoWrHlFotOZnwBvWUSPgf+x8K44cDYFd0
+         ka8aa5xv1fJ4s7RBfpZEcMyW6lOdieUwvBEqfXCaX1p/5ZYEBO8XuEvESBbgEyMSyZ/J
+         715DGzPL+WcnaP11d7oeh/Ac3DfsrcAnJJuWiwZqiI3oLGZlRPUoRqMTNnlJkeGJvtQc
+         0aDbSUFT5V3cNdT56FULaIIikCHWstJhaPfIwb4UECBBOKAykWC7I/lOPHpgvcKH7nPd
+         E/+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=pRnx9eWeASKfw8W7GczdmK9qBYpJq6JZg9sCXPTvw5w=;
-        b=O4sdLNiLqcgAVjb27dJ83SlIV9gYw9qzeTPSkJJlfFVO+RSYM2S7yxIhpzJhBsO3EB
-         6D2URyaFXP3OuDJv/aOWlRNRyNu9pAu/keAnXQ8pO4OiU3OEznC0T+TAqMcwAeMy8Yhm
-         vlKEaUQZJxIr6BlhOLZh5uOKDEiGRRXo8kI4tJfUHh7xjNSbrJlSlbQ2qOjOSoP1KF9D
-         OeLABzKK6TlCxOk2n5GtDqC0Pk4/Ifp2Cqrnx27VnqIXGELyxYEQy5TeTHXPhckoO/df
-         67x7NMUbnuPSSucY46ytEm9/phzZt9Per+p3sol1b5Rjn9WaD8QFNdE9faH+snCs7fTO
-         lTZA==
-X-Gm-Message-State: AOAM532GyLDpkaGh4ZLzaMpYaEGM4aEadTsz5xkXBaD/gYZ9gBsViGeQ
-	3+En34IxrSPJTt7Qscq5A04cWRTfAS0CXA==
-X-Google-Smtp-Source: ABdhPJzLX1GQzyRP3FmbQtbnQ9knFE+1pgVxQljbuUJLguJXnlQy3/Tepwqxk6iY2N7xCIjas/EcdA==
-X-Received: by 2002:a50:cdc8:: with SMTP id h8mr4333162edj.293.1609946285111;
-        Wed, 06 Jan 2021 07:18:05 -0800 (PST)
+        bh=FiaEhXMxTnolmAqiD1JE9FHJu8eoaB+Y8Xjn94lmqwU=;
+        b=moJbaGMKW4mTJBOc3gIV1QDViOXQpcDT451eeGc5TMSm/I2pZqZT+uMZgDsouxHSVU
+         dEr5Wc3ox4qAQBOE3bMXkkqcBaGm9bYbOTzjY5yP2HEc+GlUlcCHvWJ3mfgkiXrzwFYz
+         71rEox8hVieMX3fZPAbijxUwPNg7pYgpDGI7HREhYzZFJ8OVM+lFr0rE3T4f/o/mMZZ0
+         UQz+BJNiTSK/elrDJonxYd+vV/e08JKc+Ia5W3/eTTCod9GTHFwKTMMOPpuMtSCb/1Yk
+         bGdkV8DOcpPqv+mPt1grrWJsNVDFRiYB4mTSPRsl4GubXbdO5ftehmrKbOYvv3bZMD3A
+         d69Q==
+X-Gm-Message-State: AOAM533Zl5ggy4nirbFELNYA81ksVsSuN8SVaaWTqSJ5OpGBK303G7Sp
+	E+EQA4bwh1JVxkoVFrLM6u4h5aQ/10t/1A==
+X-Google-Smtp-Source: ABdhPJzMep3k3USIwaoQ35QaSOVLkzACwNh7dn2s1r1GgDkq65jCSCTo0Vvxl+nCBfnwRbr9YGWLTQ==
+X-Received: by 2002:a17:906:144e:: with SMTP id q14mr3132414ejc.150.1609946287090;
+        Wed, 06 Jan 2021 07:18:07 -0800 (PST)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f47431850a04677ec24921a.dip0.t-ipconnect.de. [2003:f0:7f47:4318:50a0:4677:ec24:921a])
-        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.18.03
+        by smtp.gmail.com with ESMTPSA id lc18sm1366899ejb.77.2021.01.06.07.18.05
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 Jan 2021 07:18:04 -0800 (PST)
+        Wed, 06 Jan 2021 07:18:05 -0800 (PST)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 27/28] fluidsynth: upgrade 2.1.5 -> 2.1.6
-Date: Wed,  6 Jan 2021 16:17:16 +0100
-Message-Id: <20210106151717.1779543-27-schnitzeltony@gmail.com>
+Subject: [PATCH 28/28] blueman: upgrade 2.1.3 -> 2.1.4
+Date: Wed,  6 Jan 2021 16:17:17 +0100
+Message-Id: <20210106151717.1779543-28-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210106151717.1779543-1-schnitzeltony@gmail.com>
 References: <20210106151717.1779543-1-schnitzeltony@gmail.com>
@@ -52,36 +52,43 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes:
+Security release, see GHSA-jpc9-mgw6-2xwx/CVE-2020-15238 [1]
 
-  SoundFonts may never be unloaded correctly, if
-    polyphony is ever exceeded (#727), or
-    voices are still playing while their SoundFont is being unloaded.
-  Calling delete_fluid_synth() does not free those SoundFonts either. Affected are versions from 1.1.4 to 2.1.5 .
+Changes
+    Force cython to use python language version 3
+    Do not use exitcode 1 when we expect to fail
+    Mark more strings translatable (@cwendling)
+Bugs fixed
+    Unstranslated strings
+    Searching (with Ctrl+F in manager device list) did not work
+    Default PIN lookup
+    Fix device removal handling (@Yannik)
+    Only use LaunchContext when we have proper event time
 
-  Other bug-fixes:
-    fix a heap-based use-after-free (#733)
+[1] https://github.com/blueman-project/blueman/security/advisories/GHSA-jpc9-mgw6-2xwx
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../blueman/{blueman_2.1.3.bb => blueman_2.1.4.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-connectivity/blueman/{blueman_2.1.3.bb => blueman_2.1.4.bb} (96%)
 
-diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
-index 73c1d0db6..847a22311 100644
---- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
-+++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
-@@ -5,8 +5,8 @@ LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
+diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.1.3.bb b/meta-networking/recipes-connectivity/blueman/blueman_2.1.4.bb
+similarity index 96%
+rename from meta-networking/recipes-connectivity/blueman/blueman_2.1.3.bb
+rename to meta-networking/recipes-connectivity/blueman/blueman_2.1.4.bb
+index 9143a67ae..29bef230e 100644
+--- a/meta-networking/recipes-connectivity/blueman/blueman_2.1.3.bb
++++ b/meta-networking/recipes-connectivity/blueman/blueman_2.1.4.bb
+@@ -11,7 +11,7 @@ SRC_URI = " \
+     file://0001-Search-for-cython3.patch \
+     file://0002-fix-fail-to-enable-bluetooth.patch \
+ "
+-SRC_URI[sha256sum] = "3bd02e0cc9e2c1424df1fc2015da710a280ef4c657515727e47eafabf8c2cfde"
++SRC_URI[sha256sum] = "1d9c3d39a564d88851aa8de509f16bfa586b0b50f4307dc6c6347ba4833664da"
  
- SRC_URI = "git://github.com/FluidSynth/fluidsynth.git;branch=2.1.x"
--SRCREV = "6776569abe9a885bcec14141692fa93c0568d51c"
-+SRCREV = "fd9bf6a6b0d10a984d2eb0e0e549700b7aa590ec"
- S = "${WORKDIR}/git"
--PV = "2.1.5"
-+PV = "2.1.6"
- 
- inherit cmake pkgconfig lib_package
+ EXTRA_OECONF = " \
+     --disable-appindicator \
 -- 
 2.26.2
 
