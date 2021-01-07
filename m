@@ -1,25 +1,25 @@
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com (EUR03-VE1-obe.outbound.protection.outlook.com [40.107.5.70])
- by mx.groups.io with SMTP id smtpd.web10.955.1610044713802248329
+Received: from EUR02-HE1-obe.outbound.protection.outlook.com (EUR02-HE1-obe.outbound.protection.outlook.com [40.107.1.84])
+ by mx.groups.io with SMTP id smtpd.web10.984.1610044824416483280
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Jan 2021 10:38:34 -0800
+ Thu, 07 Jan 2021 10:40:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@spinetix.com header.s=selector2 header.b=a2Wkt+RN;
- spf=pass (domain: spinetix.com, ip: 40.107.5.70, mailfrom: diego.santacruz@spinetix.com)
+ dkim=pass header.i=@spinetix.com header.s=selector2 header.b=dWHD3umM;
+ spf=pass (domain: spinetix.com, ip: 40.107.1.84, mailfrom: diego.santacruz@spinetix.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fmZcniuSehsT9/UUqOEpVUS5fdapjBhgADm5tj+QxdqEBebdiOZ3wqGJ288N9AWn4VqrYIhvep05GxenZwiebd1M0+pkZQpidRIeTN8+S7GVG5KRA/cSWKu+FC0ejzRlCkXL6Pvv2UXwRgZ54AwKMJem7hZfvo1pcw20skNpOFxRTMzoHwy+6qzdnhnh9xA66E8hvqQkfWYRdQpXxiIQMyR2ndw02cMiskzXg9xHDEdbSVcYuXcRP5Ht50eoLIFcS3Ltg3Xq1r5i+n786En9x7OJ/JfHIOvZtFOphqTPDFISc4+ihd3xJo3XCl3e+yQZwzA0AVS5Yv/phn5FH5KizA==
+ b=S2rU4MpfOC2DUCQW5EljLalSQ7FGNRl1NXDCmb1/Q8Rak2vQDZNagkNpE62tJiY920PntWFY/acmjU+n8uTtvSRZFR8DvR1EsWF2OxkVsZjrQu8LIoZ3tFKaGjg/o2TOc5QqEzG53tGwi7t9OQuQJE56yFYMtwzxLVPQ40SumVBpF5nvkIEBjQPkL8kacCM5SHccWzONVf+tI8dfHDlKz+wF7nyvx3TlQ3xRBW+63w5UYChSCSA7PUfpihW1wFbiLi4m183eu6gpTT3Y/CHp2gdAaSHwWy6pXZtHtG1PfRQwoo0edir0j1cJCTkcl2ywimOS4L/2oGeugXa/as+OQA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bkxOT03NsYbIfgldP43cLNHHkhFek2rAOHtVDgz+RW0=;
- b=mkffopuj+NfG1qbHdOf0Euw1tJ70Y4ZUglHEUtLW+N1HzI/8BW2NGRYbhQOpEdFw2wyo8VtB6tHVA3+X/UCRKX+xP789jgwDxiBzw2GOi43epbGInkMG7MwyW8iQXIIVWCMnPq3GLrKwEu46I5OaytQ3HjUvvpq40zaZB/DD/AnKh65gv/aJZ+1FDaBHc3aLZbTqOwQdVm6UPJlP94r0oVvnKeDvRQVETIP3MyZvLwUCA7N3eyE9yDxfN6I9nbGh/cZARfhAeqnEwh+hkdnyyIms6mP9nZ9ZTcGF0WP9ouom+oymSn0EWg31SqY5ngybU5VGfwGjU5kjYNBwiaPnFg==
+ bh=ec0+/4BuSSU7xciuc148ZqBxTNxH6REDr3NTRaTmNpQ=;
+ b=NxTc2XY35wVYHoFWXlyJR0TQomDW8oNjHFpNYhmC3NA005v2gEd8xMQY9MFNbehqLMtsxZGgtDNrCX3pBodYytTHSaZIxJ0pwYgod31ryIeluAb3DtJCA1TAy0ZMOC+shM8yU6k4oTOT1G8/PVXBu6BUDZnFIA1d35qPhM4WdfN+KMRjtL7lF5TRHXOQzHqGt69mAkafMXM65Es5M238VfnrYApnSgRd8Un8MJ9ixol9YZk9ctHayl6cmBlc3tIENgI4ZWxEVWVDmlKD1Y1nGcuoE9q5od3SOQW1UsIG4sI9PDuPgxcuMk6i9C4a8BV2yNAGdCGtxKDJMHe8DIYE9A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=spinetix.com; dmarc=pass action=none header.from=spinetix.com;
  dkim=pass header.d=spinetix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=spinetix.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bkxOT03NsYbIfgldP43cLNHHkhFek2rAOHtVDgz+RW0=;
- b=a2Wkt+RNGjZHZjEU69X/Dx7Q15hc5UGVWB24d6GiyFmW3j13dSBaayZNmzMS1piUz1rMXF0fGptrVUThArH0zOl98OZDOnnOWmCxGb1gR1ZxLMe031ltThrIcxzDzWX9Nf401NHYddP1MxKMRAqZZZ/Ehf4poaqvMcvgRIVZDx0=
+ bh=ec0+/4BuSSU7xciuc148ZqBxTNxH6REDr3NTRaTmNpQ=;
+ b=dWHD3umMjCM9ZSjiHPimTcM8iohqeNHSbhlI9/FZI3br5E4fNULJDZnJ76jxD0xZaOELW6hPQJDZ4txIoyXcK3r7F3evLnUItH426uXem0G0/BhlK9kJgYSA1iMvbGrbizEBRrIoQgNWQfzkzSCOAuRcDom/JxB2NYs+bIGGpsc=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=spinetix.com;
@@ -27,100 +27,98 @@ Received: from DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
  (2603:10a6:6:e::19) by DBAPR01MB6677.eurprd01.prod.exchangelabs.com
  (2603:10a6:10:181::7) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6; Thu, 7 Jan
- 2021 18:38:29 +0000
+ 2021 18:40:22 +0000
 Received: from DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
  ([fe80::c880:793c:c5b1:c7a8]) by
  DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
  ([fe80::c880:793c:c5b1:c7a8%5]) with mapi id 15.20.3742.006; Thu, 7 Jan 2021
- 18:38:29 +0000
+ 18:40:22 +0000
 From: "Diego Santa Cruz" <diego.santacruz@spinetix.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Diego Santa Cruz <Diego.SantaCruz@spinetix.com>
-Subject: [gatesgarth][meta-multimedia][PATCH 2/2] gupnp: Upgrade to 1.2.2 -> 1.2.4
-Date: Thu,  7 Jan 2021 19:37:43 +0100
-Message-Id: <20210107183743.28823-2-Diego.SantaCruz@spinetix.com>
+Subject: [dunfell][meta-multimedia][PATCH 1/2] gssdp: Upgrade to 1.2.2 -> 1.2.3
+Date: Thu,  7 Jan 2021 19:39:57 +0100
+Message-Id: <20210107183958.29151-1-Diego.SantaCruz@spinetix.com>
 X-Mailer: git-send-email 2.18.4
-In-Reply-To: <20210107183743.28823-1-Diego.SantaCruz@spinetix.com>
-References: <20210107183743.28823-1-Diego.SantaCruz@spinetix.com>
 X-Originating-IP: [46.14.255.78]
-X-ClientProxiedBy: ZR0P278CA0021.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:1c::8) To DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
+X-ClientProxiedBy: ZR0P278CA0073.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:22::6) To DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
  (2603:10a6:6:e::19)
 Return-Path: Diego.SantaCruz@spinetix.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from prefix.spinetix.local (46.14.255.78) by ZR0P278CA0021.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:1c::8) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6 via Frontend Transport; Thu, 7 Jan 2021 18:38:29 +0000
+Received: from prefix.spinetix.local (46.14.255.78) by ZR0P278CA0073.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:22::6) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6 via Frontend Transport; Thu, 7 Jan 2021 18:40:21 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2ba54137-32ec-49b8-1771-08d8b33b6da6
+X-MS-Office365-Filtering-Correlation-Id: a0dfda24-1556-4494-b98a-08d8b33bb0a7
 X-MS-TrafficTypeDiagnostic: DBAPR01MB6677:
 X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<DBAPR01MB667736C226396AF581DAB03988AF0@DBAPR01MB6677.eurprd01.prod.exchangelabs.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1923;
+	<DBAPR01MB6677DD92CDF9889DFCA293F288AF0@DBAPR01MB6677.eurprd01.prod.exchangelabs.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:462;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	2Pvg/04wI9OyjTEpJOhUZ1cPTfca3CgYqWoz7laeo/xjDgO6Edhjyj6HZLCz4gyniu2v3HVVV0tBn27ZG22Gt+3vf3tyA8k7jfMu87FcgjZsnEvDDzl8w4UylmLxKEgDdGlB12VzOCaa7X1CV2yoOXLnhyyW7IKoFfmO8I0DXjpYc1B0mLMYR2ryE3Okxgm1xA4gSYQ4cDvEJqLWJCTx3HN0BwQd/rVpSLs8yaSnO3gmXNFT0Gz9343kSrNhsRpDjxJWZQ5LJ6D5dDobgCLIllxWvrNA/3N1xHvScHABv7JKQhD98wBOLYnhr0GFtHQHl1iH4J8CKTTdA4vWPBk3wYK+pgN3F0dc0dlRtKExJTiGKFO6/hPC6cRCMFQrxH3XESwsJNk2SWZAaxVXF13Y3g==
+	TjLEitqRS2KT3gXSZfccy3otiOSET4aGQ7y7BO9nazsiKqMphrgTU23w1FVryRrx711ndrMS8nasLbl7ox+OyO+5KhoGBj7OLak5iU9ZUrLtCTT3RxabheAF+2cN1yEX27dfT/RiKjIbutxJi6p9a2/9gnODfNgqR51rPw6d+claLlKiTRj+XO9wkUb/HZiJDpOrURdi0er842hgxt+leJO/2uMqyuURVBzE+bg0uyIZm+ufCTX6CoJ+GDpqDZeZaSPkd5xGtDVEMpKJp4CIGtn/07DaexDyxnB+igroONKe/Gsojbr3kj0b5ZRYtqO/wBfY6t5Zo8yywOjGpmlPZT/Qey87AGAMzs83AEka7BLZ2IMNum+3z2zY3SXE1BtXRXftxrcANIAFMOSYllKYhw==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB6PR0102MB2630.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(376002)(39830400003)(136003)(366004)(346002)(8936002)(36756003)(52116002)(956004)(316002)(5660300002)(66476007)(66556008)(66946007)(6666004)(1076003)(478600001)(2906002)(6916009)(8676002)(83380400001)(16526019)(4326008)(6512007)(107886003)(6486002)(186003)(6506007)(86362001)(2616005)(26005);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?2fHgET+paKaa4CpuvzZlnyfwEaqAuuocdemcIsWx/JaeNECN89XCEhl/5Kvq?=
- =?us-ascii?Q?qWbJbD94K5FYBdJlbFq2SYTMGV0aPXO10WFwM8XkrujVuYMh3HP6NUgZrhwU?=
- =?us-ascii?Q?l80XmeweJDtMia0MTLcKsLmgh+uFs0vMJAggBcv7XJiD391mmT0j1Qy9Tq3e?=
- =?us-ascii?Q?4dxcYCH9jgdKX2M8yuu+XCmzXGeW4J8PIxalS0YJoxomgIhOQjbxszDGdeEh?=
- =?us-ascii?Q?mSSFAi9bcKoATVMqTIcf4C9tQmUay9wtAVZ1PTWzAfPICuddKsSStQ9t4diR?=
- =?us-ascii?Q?mZpqH4xQZevMag/OKxH8mJRoO8BG81bPMlFnmxkFR63e2cXq+wXLCnnKCR2G?=
- =?us-ascii?Q?jzXJ8kaVR0ThSCIXc02V5topVamNOHSfJ/9N30Ezi6sbzjfNOTdUXn8duJS8?=
- =?us-ascii?Q?HGKP4DCjXa6gYzK0uVH7fxQQtlyD6blWf0cO9lxrXemI0o/FcqSe0/TkyoyZ?=
- =?us-ascii?Q?UR78MbDiYiQyeGIEI40znrJcro/NACsvLwh+ihDiwCc3aArCgPCko0d/WN0w?=
- =?us-ascii?Q?PHaAgR1bUrRH/gxGP7Yy9e66a2bs7IjQ2vbrt73L95rV0uib/Mc8RtAQis5j?=
- =?us-ascii?Q?K/2LA7dVFXg4MANgoWseODv/4xSqXPraqL/xNVyo1qsSJ3DbiFFMQw+YEa/F?=
- =?us-ascii?Q?SoqkWfdMGbZJDSj5Pe9C1m+nQAsvv4LPSBVgR9nAfA3INYMkwwXEVE2pINOW?=
- =?us-ascii?Q?HnxlDk5iPSwy0JXz/homIulHExQy9K28I9eQiwJx9wVvnoUdzmVFuJZ1+UhR?=
- =?us-ascii?Q?8HSVyatFJn9kjrQMS3eFb3vuLnYf7DS5zUytnBtccvoYfxQ1Swuv/ep/afna?=
- =?us-ascii?Q?BuzwFdQ0pN1yqZgW568u5XTd6fKXEMt6Yg1/W5GKI4HOIICnToa+u0mr6E6u?=
- =?us-ascii?Q?llKcYUgZ6sgtghke579adlsAEdTJpNcWlq2HzDx7C0e3gknovH8sQueIK02n?=
- =?us-ascii?Q?ormBaw0mvBVnd5ub7YQAT9p7huHAz4Dazp8oRY9InnJsLmQ/qFcun0NhmVmt?=
- =?us-ascii?Q?jyL8?=
+	=?us-ascii?Q?bn9FiW/N9yAF30Rqb5sM2K1IKkIei4DxIDK86sNP17xtLVd/1+TNumwgTK3j?=
+ =?us-ascii?Q?kYaFx4KQciCEUlUVSPSiQACGSUi5ToaOeMZnQh/G6fhvzE9ep96rnj6DN907?=
+ =?us-ascii?Q?npQ4q1N61t1X94aobwX4y6nRiVGCOeZCVI/+zNukyzTzD+ZropRaJ3bKmCNf?=
+ =?us-ascii?Q?C0vIvrqsQmIEPLXReb2dVNdrZKcazEpeTGiXehUIBr/97ukCAQOphPKzKdH+?=
+ =?us-ascii?Q?1p2GVcxxyQc8eksKZBNTpeuZkKEcRWjG5FY9D4ipzTGUDIc2uvr6rMvjpDx5?=
+ =?us-ascii?Q?huc7ZthFxjZV3KtRfN4HNghcuAounof8me4qDEndwLNAFTRpz/qQP/mgFlH1?=
+ =?us-ascii?Q?pz1Dk1xIHZM0tW1SEwU8aCeGqVkHe3Pa5eTZeXjiGMPj4KQImsjUz1fTmUNs?=
+ =?us-ascii?Q?TELX43yRAAk6T+Gz/uKzozFY1EBCAUtxKAhGZO5DaV6xpk1Bc8bbOHPBrb6b?=
+ =?us-ascii?Q?cjSzIn6i3ElELjxzyCOh29SwfDyKGcGmtdgHmZuTWTnG1TmMGZiqBjISGDgz?=
+ =?us-ascii?Q?OjcETYf23l5S4IR+GHhAlcVqAPDoS4D9zKv4DZK9FJ9pq8Rb5tPr/f6X7kYV?=
+ =?us-ascii?Q?vfiW3vBVbZ9/FHVEwYVFLLGfGpKV5mq0qtNvCKNcFvcqMDGMbWHR6HTVG4og?=
+ =?us-ascii?Q?yJzHSg6OUJyWrKV/ov4rSmdnTkf+l/xCmP+ajEzO/IOLhWdFPhEySWZuhxGU?=
+ =?us-ascii?Q?LsDH3r7uYC9rSej1pnUurhH4f/gw8mI79aB8UDU2oZU27DNCTDHz03qLBexm?=
+ =?us-ascii?Q?CGe8yyJcED4WQ2XkyakTijlbb8Jxr/eIM7gD7/HoMGV4r61NNolZSBB2ebAM?=
+ =?us-ascii?Q?Y1f31ENwchnPSbQaQYpyhc5Sia/e5qPqr+KvduYmo7vUeuwODNfl3twwhV9p?=
+ =?us-ascii?Q?ndwJSHa+DA2n1DHnU1BYzkjI9S5HSwEyr/zzMgngIRmnrel7G4FnsO2t44h0?=
+ =?us-ascii?Q?9v9sTcJGX4sUqFqB2yH50GQ1AjCyNhXSOxBu1cL2dMGDIJ0ms0H473DO1ELH?=
+ =?us-ascii?Q?+lkD?=
 X-OriginatorOrg: spinetix.com
 X-MS-Exchange-CrossTenant-AuthSource: DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jan 2021 18:38:29.6309
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jan 2021 18:40:22.0120
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5f4034fa-ed2d-4840-a93f-acb1e9633b93
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2ba54137-32ec-49b8-1771-08d8b33b6da6
+X-MS-Exchange-CrossTenant-Network-Message-Id: a0dfda24-1556-4494-b98a-08d8b33bb0a7
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PKgzr/8hOJPOv+IsxJZSYLmkptdfNEjWR1VEXCeKtjuNJ7kGSxx/R5+Uesm872pK5d0e42+G8X2HBMAXAN8XM4Yftlx09Tw2IuwPyjnnthc=
+X-MS-Exchange-CrossTenant-UserPrincipalName: mffGQ9RU+K2jELk7aOb7PLSkRm12jfYOtJ8b6Atqzaomy4/OlbisruiU0Gg1LagfOh5qgSvLv06cQ1XZh7BIaV82Hf6zCGiC9oouMdLA41w=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR01MB6677
 Content-Type: text/plain
 
-gupnp 1.2.3 adds mitigation for CVE-2020-12695 (CallStranger)
+Dependency of gupnp 1.2.3
 
 Signed-off-by: Diego Santa Cruz <Diego.SantaCruz@spinetix.com>
 ---
- .../gupnp/{gupnp_1.2.2.bb => gupnp_1.2.4.bb}                  | 4 ++--
+ .../gupnp/{gssdp_1.2.2.bb => gssdp_1.2.3.bb}                  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-connectivity/gupnp/{gupnp_1.2.2.bb => gupnp_1.2.4.bb} (64%)
+ rename meta-multimedia/recipes-connectivity/gupnp/{gssdp_1.2.2.bb => gssdp_1.2.3.bb} (83%)
 
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.2.2.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.2.4.bb
-similarity index 64%
-rename from meta-multimedia/recipes-connectivity/gupnp/gupnp_1.2.2.bb
-rename to meta-multimedia/recipes-connectivity/gupnp/gupnp_1.2.4.bb
-index e60349716..c7b330fa0 100644
---- a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.2.2.bb
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.2.4.bb
-@@ -1,8 +1,8 @@
- require gupnp.inc
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.2.bb b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.3.bb
+similarity index 83%
+rename from meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.2.bb
+rename to meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.3.bb
+index ddaddd209..7d82c3e2e 100644
+--- a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.2.bb
++++ b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.3.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
+ DEPENDS = "glib-2.0 libsoup-2.4"
  
  SRC_URI = "${GNOME_MIRROR}/${BPN}/1.2/${BPN}-${PV}.tar.xz"
--SRC_URI[md5sum] = "2ade3d29c624ad98d70113e6e93908a5"
--SRC_URI[sha256sum] = "9a80bd953e5c8772ad26b72f8da01cbe7241a113edd6084903f413ce751c9989"
-+SRC_URI[md5sum] = "7c9c7cd80e36d9fb1e5b0267571fc17d"
-+SRC_URI[sha256sum] = "f7a0307ea51f5e44d1b832f493dd9045444a3a4e211ef85dfd9aa5dd6eaea7d1"
+-SRC_URI[md5sum] = "f00a470ebcba96f34def8f83ac5891ed"
+-SRC_URI[sha256sum] = "cabb9e3b456b8354a55e23eb0207545d974643cda6d623523470ebbc4188b0a4"
++SRC_URI[md5sum] = "ef3295a965c06ce0f683522391fbb910"
++SRC_URI[sha256sum] = "a263dcb6730e3b3dc4bbbff80cf3fab4cd364021981d419db6dd5a8e148aa7e8"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
-                     file://libgupnp/gupnp.h;beginline=1;endline=20;md5=d78a69d9b6e63ee2dc72e7b674d97520"
+ GTKDOC_MESON_OPTION = 'gtk_doc'
+ 
 -- 
 2.18.4
 
