@@ -1,74 +1,67 @@
-Received: from first.geanix.com (first.geanix.com [116.203.34.67])
- by mx.groups.io with SMTP id smtpd.web08.5983.1610011751921457740
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.web12.405.1610042569332413017
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Jan 2021 01:29:12 -0800
+ Thu, 07 Jan 2021 10:02:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@geanix.com header.s=first header.b=llZiZ9iC;
- spf=pass (domain: geanix.com, ip: 116.203.34.67, mailfrom: sean@geanix.com)
-Received: from zen.. (unknown [185.17.218.86])
-	by first.geanix.com (Postfix) with ESMTPSA id D56F44E1532;
-	Thu,  7 Jan 2021 09:29:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=geanix.com; s=first;
-	t=1610011747; bh=Bxy0S47cZ+7TXNdMfIpxQTcVPkf9on8NYofyS6Saw/o=;
-	h=From:To:Cc:Subject:Date;
-	b=llZiZ9iC7x/QaNpER/gHLiylUQIU92mmLQStcYwu9yojrCHpluDWd5d1oRiZ0a0z0
-	 cxglOmUhVoUy69b4c6ZCoJuKetJYQ7szAuZXUfm9x6aZgt9+cSKgnuocxg0vIcOIys
-	 O7dchQezLGaHnMjrZY3AoB1Aof1InZIo2T+pnc6LW3h+gwMf1C8XG7zmRkE/v9fZU9
-	 bychhuyxQ5M4wMnNTBL8KLefh87syJBeZ3yQjU7n4kIYzRM67MH9H9mnh1vOEt8a0Z
-	 0odDe8Ye60vwdDRwcV7jcwWiph/r8iv4zdgt5qr+LSOyfLkLl9HLd/fvtrnPhiraR+
-	 1F0FLpnbZ6dbQ==
-From: "Sean Nyekjaer" <sean@geanix.com>
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: vomegaz@gmail.com)
+Received: by mail-wr1-f41.google.com with SMTP id d26so6491821wrb.12
+        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Jan 2021 10:02:49 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=sS2wIbmmEv88nPHsSZFZgqA/1phNi+625YNwGIfO9Cw=;
+        b=XUD4T6htCiTsW370kc9Nd1/ULt5ByLV1GRc3aKHh0J7hWct1VhglhJ8QTqstce3gqL
+         DF3+gU8A6J702ayvYtAaB/uxFTT4nursNienAmf9IpELktogsq+Oy9AM26KI81vlvKMP
+         46C7pFBXiL0OTMQ3bhcNQgfIcOPiTSE1S5iTfNPbAYZHBwgx4MpDwmbDd2Jtng3JHXS1
+         wFIvEgm9YnxGdtUbhJsmbPPLsQ/H/cbcTG5ioEe6UMLxtYo8KUHdO58dvqI8PfhGn6cC
+         4Y8+rO0vQMp8GmgZ9kwoTN4+Pt0DzCRLJ59e1cnJ7LyREJZXPgceGXK87EaRzlUdG7H9
+         38yA==
+X-Gm-Message-State: AOAM532GGgOuq06XYm4YCUeIX/kVeJ5UuHHwqUKvKVAHyajMTvEaP6U5
+	ap1B77lGDjuQncBwh5igVnsFtiuJUgc2aQ==
+X-Google-Smtp-Source: ABdhPJwVmXFMRQKZYKa5gofT1C4GVXeJHvBqwUFbJZe24S7yFOuYCbme5XrT5AD2yBR6pRKccJb1rA==
+X-Received: by 2002:adf:a50a:: with SMTP id i10mr10076900wrb.123.1610042567568;
+        Thu, 07 Jan 2021 10:02:47 -0800 (PST)
+Return-Path: <vomegaz@gmail.com>
+Received: from localhost.localdomain ([2a01:e0a:8a5:e0c0:c575:ed36:206c:6670])
+        by smtp.gmail.com with ESMTPSA id b200sm9058468wmb.10.2021.01.07.10.02.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 07 Jan 2021 10:02:46 -0800 (PST)
+From: "tperrot" <thomas.perrot@tupi.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Sean Nyekjaer <sean@geanix.com>
-Subject: [oe][meta-oe][PATCH] nodejs: 12.19.1 -> 12.20.1
-Date: Thu,  7 Jan 2021 10:28:54 +0100
-Message-Id: <20210107092854.2040757-1-sean@geanix.com>
+Cc: Thomas Perrot <thomas.perrot@bootlin.com>
+Subject: [OE-core][PATCH] go.bbclass: don't stage test data with sources of dependencies
+Date: Thu,  7 Jan 2021 19:02:38 +0100
+Message-Id: <20210107180238.1866108-1-thomas.perrot@tupi.fr>
 X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-X-Spam-Status: No, score=-3.1 required=4.0 tests=ALL_TRUSTED,BAYES_00,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,URIBL_BLOCKED
-	autolearn=disabled version=3.4.4
-X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on ff3d05386fc5
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Sean Nyekjaer <sean@geanix.com>
+From: Thomas Perrot <thomas.perrot@bootlin.com>
+
+As for the sources the dependencies contain test data, ELF files and other
+binaries which aren't necessary for building and which lead to unnecessary QA
+warnings.
+
+Signed-off-by: Thomas Perrot <thomas.perrot@bootlin.com>
 ---
- .../nodejs/{nodejs_12.19.1.bb =3D> nodejs_12.20.1.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_12.19.1.bb =3D> nodejs_12=
-.20.1.bb} (97%)
+ meta/classes/go.bbclass | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.19.1.bb b/meta-oe/=
-recipes-devtools/nodejs/nodejs_12.20.1.bb
-similarity index 97%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_12.19.1.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_12.20.1.bb
-index 8021fedf4..0673a3202 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_12.19.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.20.1.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION =3D "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE =3D "http://nodejs.org"
- LICENSE =3D "MIT & BSD & Artistic-2.0"
--LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D30e27bd6830002d9415e4a5da7901=
-f03"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D8c66ff8861d9f96076a7cb61e3d75=
-f54"
-=20
- DEPENDS =3D "openssl"
- DEPENDS_append_class-target =3D " nodejs-native"
-@@ -26,7 +26,7 @@ SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.=
-tar.xz \
- SRC_URI_append_class-target =3D " \
-            file://0002-Using-native-binaries.patch \
-            "
--SRC_URI[sha256sum] =3D "74077e0cc3db000a6f3cc685b220e609807b61adc8e7d824=
-3e8511d478d1b17d"
-+SRC_URI[sha256sum] =3D "e00eee325d705b2bfa9929b7d061eb2315402d7e8548945e=
-ac9870bf84321853"
-=20
- S =3D "${WORKDIR}/node-v${PV}"
-=20
---=20
+diff --git a/meta/classes/go.bbclass b/meta/classes/go.bbclass
+index 5b26378a4e..fa147892b0 100644
+--- a/meta/classes/go.bbclass
++++ b/meta/classes/go.bbclass
+@@ -116,7 +116,8 @@ go_do_install() {
+ 	install -d ${D}${libdir}/go/src/${GO_IMPORT}
+ 	tar -C ${S}/src/${GO_IMPORT} -cf - --exclude-vcs --exclude '*.test' --exclude 'testdata' . | \
+ 		tar -C ${D}${libdir}/go/src/${GO_IMPORT} --no-same-owner -xf -
+-	tar -C ${B} -cf - --exclude-vcs pkg | tar -C ${D}${libdir}/go --no-same-owner -xf -
++	tar -C ${B} -cf - --exclude-vcs --exclude '*.test' --exclude 'testdata' pkg | \
++		tar -C ${D}${libdir}/go --no-same-owner -xf -
+ 
+ 	if [ -n "`ls ${B}/${GO_BUILD_BINDIR}/`" ]; then
+ 		install -d ${D}${bindir}
+-- 
 2.29.2
 
