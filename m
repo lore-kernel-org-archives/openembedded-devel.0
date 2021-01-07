@@ -1,99 +1,84 @@
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
- by mx.groups.io with SMTP id smtpd.web11.1912.1609980862703585847
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
+ by mx.groups.io with SMTP id smtpd.web12.1995.1609980863311596825
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 06 Jan 2021 16:54:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=lmGcWfOx;
- spf=pass (domain: linaro.org, ip: 209.85.167.44, mailfrom: dmitry.baryshkov@linaro.org)
-Received: by mail-lf1-f44.google.com with SMTP id m25so10719457lfc.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 16:54:22 -0800 (PST)
+ dkim=pass header.i=@linaro.org header.s=google header.b=rPj4K4ly;
+ spf=pass (domain: linaro.org, ip: 209.85.167.48, mailfrom: dmitry.baryshkov@linaro.org)
+Received: by mail-lf1-f48.google.com with SMTP id x20so10716334lfe.12
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Jan 2021 16:54:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=V/oElN4Wf+SqRgHPKI3YxnGbpmIMxuZxlfYi0ZmGfxs=;
-        b=lmGcWfOxQerZ06VVbXU+FT5bdXjorJjJvMJ58Pvw1Fztph4H78HV31gG+wJrm2FNEp
-         ccC5rJBiGzwv3wALV2aGuOZQPQB3C7af6+eC0UFdWefHdd0ApfEXg00UvmTKu2zc8/Wx
-         rh2S89EIj4vcwml59D1SF0V3T6c4tM1fHHILIqm+Q8CVioF93bvpXieRYJkuJEWnngLT
-         ORbsO/DyIemxEEaTF97u6XWqBK/h7FLDkkt+rbTRv0bf3SBXQEw3GlXWPMqHWBmngY3I
-         2KPECc0IEc1fqIBj8Ak62dqstg9xtVTobIJE5Y8xcVvc9k0ajX1LvqO760N2MxVzcRlx
-         US2A==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=ROzxIfnYSdwzuM7scmTfO0zmRYbhn8AxmcKbYh+UYgQ=;
+        b=rPj4K4lyA8J/K0IR//vwZURVTtrGXjbKG5SrODXQv86H8y+Ib4+CO8dyQbNkYcbyiN
+         lNepOx3UjmvGpZb+KQqsr/BvaxFBq8XqajDm4xCbsiDfm/IuQTgjj18I8/1FdsaLzir+
+         SDrXnf5BmcA+NO72dMb/iX0O89utMvN4BJPPuq+XEgKQv3mFEAJpYUR+7XmFYzSoXuJR
+         lKf/dSe6KeRxZ0NsSODdccIXBIcuooUth/DbPe7dX5P1Hqiud156Tgd1ZejIrDp3+PW6
+         LJIEFhCSZEsroLH5Bb9Q7YPN6njDSiLJz6XqLc3yEiv3BeulIdSr7cbiJR7CmSdSf2Qa
+         /aog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=V/oElN4Wf+SqRgHPKI3YxnGbpmIMxuZxlfYi0ZmGfxs=;
-        b=cJFKar4PP84cLyn/n/efETDCP1yd/viY1GBJfboGkw1865JJ0j4nvQoPw+viG356O+
-         Kfps0c6aljURuXjupD5+MLMBB7yIr+B6MK8rvzzL7sFbVZIOeomZ+WSDiM3POYgTkc+k
-         jvV1uImgrRYBgktFl7YX7/PmRH1tr/MQSHWmgt9f40ZLw5SczIA/lQPJyaMtZX9T4hfv
-         st/z5jIZI5f/y0AVetQaU3u6DdJshp+qZxKp4Qdb6l0BLfysbd5asdxlpCRXbEwDe97K
-         8vqeEKhNFv42slvVEQjXMWslFCj6CQ2DqmqeKUrO/Lbc1YFF74wlA6GxV5KIMIS4hSdw
-         5Rtw==
-X-Gm-Message-State: AOAM531wiP0kFMwGaRRfn13AsFoHmP+rNZP7Eo3Zdi6XLzdAqog6UUTh
-	qACtHaX+i3CU6z0gxVSTKK7iknuf3SAORQ==
-X-Google-Smtp-Source: ABdhPJw+h/r+QJXXfDMDdT4vBPCi/L7/zrmQuayuqMANKQLc1XVo80HHRmlN93qZRriYfPRFYeHHHg==
-X-Received: by 2002:a2e:574c:: with SMTP id r12mr3197457ljd.139.1609980860154;
-        Wed, 06 Jan 2021 16:54:20 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=ROzxIfnYSdwzuM7scmTfO0zmRYbhn8AxmcKbYh+UYgQ=;
+        b=hyte/bg+iiTNJyod/vAO42Uc5jWTZ7n7/fJPS0wY21gjzLVw03lQxIt5uOsciDBEvD
+         YRRj43UfICUDr1gA2RMdK5CLc4/DTjWA2cmEoo+HdC1fV+XfgnLQkosu7tmI/tBtnbnX
+         pAujr/3Pi1xWWSdXuebpzCEv5K2F5mCb+bMh+2jo36DVqrdcWVJFirDjGoyPmHt2WspT
+         IXDQcylJBO2Hv35+ogOXlOt/bOaH6Ql6lYdXSFyZJs0kv4PyX2O/EuUKcZzCL4bENyo8
+         JrP+9T2HGcgWDQM8WrIBiNzpSjzHW17y1YD0Bbq+8q9OzslTxlr7fmZNwLETbsjxR7Nn
+         uN2g==
+X-Gm-Message-State: AOAM531xQK1ey7vggxbJeIkF/vOZElYmybE2oYXM0+JMJY7lAKcXC4Cp
+	1UAyPUYrAQ/+oBEa6rdpKaOe4i/9Qg9IWg==
+X-Google-Smtp-Source: ABdhPJxtgguMzPCR7UpIWBkbjPBquxE8P9fk7nzsleBiidQohbZRQBRUR1AXSozYYbLQiLwwJa+uEQ==
+X-Received: by 2002:a2e:90d2:: with SMTP id o18mr2885566ljg.395.1609980861352;
+        Wed, 06 Jan 2021 16:54:21 -0800 (PST)
 Return-Path: <dmitry.baryshkov@linaro.org>
 Received: from umbar.lan ([188.162.64.122])
-        by smtp.gmail.com with ESMTPSA id v11sm791357ljg.128.2021.01.06.16.54.18
+        by smtp.gmail.com with ESMTPSA id v11sm791357ljg.128.2021.01.06.16.54.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 Jan 2021 16:54:19 -0800 (PST)
+        Wed, 06 Jan 2021 16:54:20 -0800 (PST)
 From: "Dmitry Baryshkov" <dbaryshkov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Dmitry Baryshkov <dbaryshkov@gmail.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][dunfell][PATCH 1/2] xterm: install xterm and uxterm desktop files
-Date: Thu,  7 Jan 2021 03:54:17 +0300
-Message-Id: <20210107005418.779965-1-dmitry.baryshkov@linaro.org>
+Subject: [meta-oe][dunfell][PATCH 2/2] xterm: provide virtual/x-terminal-emulator
+Date: Thu,  7 Jan 2021 03:54:18 +0300
+Message-Id: <20210107005418.779965-2-dmitry.baryshkov@linaro.org>
 X-Mailer: git-send-email 2.29.2
+In-Reply-To: <20210107005418.779965-1-dmitry.baryshkov@linaro.org>
+References: <20210107005418.779965-1-dmitry.baryshkov@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Dmitry Baryshkov <dbaryshkov@gmail.com>
 
-Modify recipe to install application desktop files for xterm.
-
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 593f21eda5b119f6408975c6b15e94fb168cc9dc)
+(cherry picked from commit 8826791d795e65851ad20bbc0f34e74b2bf72e07)
 ---
- meta-oe/recipes-graphics/xorg-app/xterm_353.bb | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ meta-oe/recipes-graphics/xorg-app/xterm_353.bb | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_353.bb b/meta-oe/recipes-graphics/xorg-app/xterm_353.bb
-index 6de704d0b7a8..6376388c2757 100644
+index 6376388c2757..06c285924d65 100644
 --- a/meta-oe/recipes-graphics/xorg-app/xterm_353.bb
 +++ b/meta-oe/recipes-graphics/xorg-app/xterm_353.bb
-@@ -1,6 +1,6 @@
- require recipes-graphics/xorg-app/xorg-app-common.inc
- SUMMARY = "xterm is the standard terminal emulator for the X Window System"
--DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses"
-+DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses desktop-file-utils-native"
- 
- LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=996b1ce0584c0747b17b57654cc81e8e"
- 
-@@ -13,6 +13,9 @@ SRC_URI[sha256sum] = "e521d3ee9def61f5d5c911afc74dd5c3a56ce147c7071c74023ea24cac
- PACKAGECONFIG ?= ""
- PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
- 
-+# Let xterm install .desktop files
-+inherit mime-xdg
-+
- EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
-                  --x-libraries=${STAGING_LIBDIR} \
-                  FREETYPE_CONFIG=${STAGING_BINDIR_CROSS}/freetype-config \
-@@ -30,6 +33,10 @@ do_configure() {
-     oe_runconf
+@@ -37,7 +37,12 @@ do_install_append() {
+     oe_runmake install-desktop DESTDIR="${D}" DESKTOP_FLAGS="--dir=${D}${DESKTOPDIR}"
  }
  
-+do_install_append() {
-+    oe_runmake install-desktop DESTDIR="${D}" DESKTOP_FLAGS="--dir=${D}${DESKTOPDIR}"
-+}
++RPROVIDES_${PN} = "virtual/x-terminal-emulator"
 +
  # busybox can supply resize too
  inherit update-alternatives
  
+-ALTERNATIVE_${PN} = "resize"
++ALTERNATIVE_${PN} = "resize x-terminal-emulator"
++ALTERNATIVE_TARGET[x-terminal-emulator] = "${bindir}/xterm"
++# rxvt-unicode defaults to priority 10. Let's be one point lower to let it override xterm.
++ALTERNATIVE_PRIORITY[x-terminal-emulator] = "9"
 -- 
 2.29.2
 
