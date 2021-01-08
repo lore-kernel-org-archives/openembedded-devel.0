@@ -1,17 +1,17 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.66])
- by mx.groups.io with SMTP id smtpd.web12.1889.1610121796078457477
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.54])
+ by mx.groups.io with SMTP id smtpd.web09.1920.1610121848409726906
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 08 Jan 2021 08:03:16 -0800
+ Fri, 08 Jan 2021 08:04:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=kw5jI68a;
- spf=pass (domain: windriver.com, ip: 40.107.243.66, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=osg6JoNf;
+ spf=pass (domain: windriver.com, ip: 40.107.243.54, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=aIbVjCa450nOzl+yV4rFQEPwzDGLzC+fjoxl14GfGXHsI1D3GQEr0lL/DBwDdZ+XtQR3rPwhNDfnnUWd9CJx7HAbrQMo/aXldfF4yr2KR+2n6GVK7iq9VUgiiXlWLRORvHYw2VNPH6va/wkhn4RSpwZAidkKHGMk3+Kf7odP+irv0n6jVIviRsts/nIJC/f8ogOoEHUWLFNAeJqjvrFnonIr1STkPh0dh7IWtbBwkhuLwa1R5xyTpcHQLoZ97Y93ZRvvonVb0eYrnkfnSpdRybhGw3M8PuULdTs3iLJMewhFbPnY3MPZaPQ8ES191+/5i0E/IWZCWHbFrLCRdwjV6Q==
+ b=KremhcZEIzWbNrHLpbMmUb+Ted+KLU4UB5/jZ/33qmSto1frYsgcM0P5W9fd+e9gbL8RmosZaKU2fvbPIwzw2MRNi79uUbTv6CbsYc92IGFN4PQJrhx4HKXSElQNX/Go3IEPGDZQKFuBhoABCIwxmFKvy6pNUrvxgKdYpElKciSKcsGhTAss1/RTwKSHZ2cl/OnZcjZmhobR0927pa8aLo0QG61PaQMOWkQnNZn8cxzfkf82EGkzzqivEn3JMWWJxXGXPBoi9dXN223P/Tq79HiNf8as3ygLYcEPJ7vPVS5hl9obZxTkXR9KWasNfotCrw+6MLhu0Xo9IisBv738Ug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=U0+F+OIusnpfRrcBbiQUm2HKXmQzWBK4UKROw42qclo=;
- b=PLNrDWaj++MdUgBX99F2ISvV7a5Qe+QydOCb/+oEAQUCxNbldMLKr5ElwbeOvyVDlVEXMfCBsjWmmvPG3YEvgn8oDv4OBTfNUuZI7OeceuGUII8W4OMyPHlL/eOjtVY34BCnFG8xBGwkOH4JMJhOoVkqGMGfeHIyQpIB/jPvd0RCTUMSHNAuI4uNKhUzYzvKIE8jXFTEO3S0xtKYqTZXlrWUU+Er/fWse+OKRJJM+bhsiSIzGOvsPDTk4ktvueSV7zvJ3jc0IltZSEhxDJXFfy0ZcAmqTG2IBo8ZvgP/sPOR/MWx0GwbYQNfs206mCUxygTz3erqiLFjLxmVX7y6Ug==
+ bh=xqxWC8r1NShH4cg37mc3wySkM7TCShEeRbUZc41zick=;
+ b=DCHiZst7yi5LQiWOJcvS65LZiyvz+Xi6rtMjM8eiF3iiCtpWR5HB6EK71h9Ypg05Ilrhc2nP9YIoJPQF3kHMjRhYjCoMG2Q4Lpz0hdYdtOX+rKFFxnkrtbOMGC1Jb/Brtnbh3oDrPmXfL0f6pQdrq9w3dF+Ff9H5MnnU1HoWLE2YBEervDVzmKwuvNgYyoQC0Jm5dPoQ+toMzqmc6RPPijPTk1mvnPZbXY5Wu/F0059e/RmAC+LOnd5WKesDh1PZqEe7sZw+fQGliqu/28h76TKdwr13muW0pPzATyl+Yy+TI5tLH8dH7A+0MIELKEqtP8RGQorhFYPrIuaSROASUg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=U0+F+OIusnpfRrcBbiQUm2HKXmQzWBK4UKROw42qclo=;
- b=kw5jI68a8imQv6ox1O5o0IIz9n4tvrKhPldzuDWy8IzcAIyOGLi6aL91kahcPulYXiG0yo3UraaAoeiZYHfL/DtNpUcFIo99J/V9jjGJioPxEf9e8xi1vIVwFazH6q+guoWGhS0eq5rPVN7wg1Ham7y5742czIEB5RVSTTu3fVU=
+ bh=xqxWC8r1NShH4cg37mc3wySkM7TCShEeRbUZc41zick=;
+ b=osg6JoNfXUkQaFRJMtSZ59nsW51pQ1n4PCYWDDqkg0RVEIZ1VvfjLYpdADi9+l1oj+gCleXHhuw+S34naBDVxONASiMCBpGqgOOyFySKzII9dWZqTN6EhCOyVE78fAokb6Tmavh91W0fqXEhT54AxANSiHUM78Pr73q3OO03aDQ=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,137 +28,123 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by SJ0PR11MB4896.namprd11.prod.outlook.com (2603:10b6:a03:2dd::20) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6; Fri, 8 Jan
- 2021 16:03:15 +0000
+ 2021 16:04:07 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::6806:275a:a0b:55f6]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::6806:275a:a0b:55f6%7]) with mapi id 15.20.3742.009; Fri, 8 Jan 2021
- 16:03:15 +0000
-Subject: Re: [oe] [meta-python][PATCH 05/10] python3-nocaselist: Upgrade 1.0.3 -> 1.0.4
+ 16:04:07 +0000
+Subject: Re: [oe] [meta-python][PATCH 06/10] python3-prompt-toolkit: Upgrade 3.0.8 -> 3.0.9
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20210105151638.15700-1-leon.anavi@konsulko.com>
- <20210105151638.15700-5-leon.anavi@konsulko.com>
+ <20210105151638.15700-6-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <64cf0372-07f8-56c4-c8fc-3a9a6421c33e@windriver.com>
-Date: Fri, 8 Jan 2021 11:03:12 -0500
+Message-ID: <1d2e2d23-4ca0-6fde-a135-7b7d3a8d54c5@windriver.com>
+Date: Fri, 8 Jan 2021 11:04:04 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.5.0
-In-Reply-To: <20210105151638.15700-5-leon.anavi@konsulko.com>
+In-Reply-To: <20210105151638.15700-6-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: MN2PR18CA0030.namprd18.prod.outlook.com
- (2603:10b6:208:23c::35) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: MN2PR18CA0012.namprd18.prod.outlook.com
+ (2603:10b6:208:23c::17) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by MN2PR18CA0030.namprd18.prod.outlook.com (2603:10b6:208:23c::35) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6 via Frontend Transport; Fri, 8 Jan 2021 16:03:14 +0000
+Received: from [192.168.0.55] (174.115.236.231) by MN2PR18CA0012.namprd18.prod.outlook.com (2603:10b6:208:23c::17) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6 via Frontend Transport; Fri, 8 Jan 2021 16:04:06 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b9faccbb-75c2-4be7-e54e-08d8b3eee822
+X-MS-Office365-Filtering-Correlation-Id: f70391d4-2b3d-4150-ff95-08d8b3ef0722
 X-MS-TrafficTypeDiagnostic: SJ0PR11MB4896:
 X-Microsoft-Antispam-PRVS: 
-	<SJ0PR11MB489673C249D141A0203040579FAE0@SJ0PR11MB4896.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
+	<SJ0PR11MB4896E02337DD5BC46B2B48A89FAE0@SJ0PR11MB4896.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:820;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	LlewHlwMh66sm041ox3BwEjVZCD9F776nItobD8ckL4qVBeRxtjPZyKIA8FX1kbdpUeCaF8Msupm08ZGdSfTh4ibMT9xBmJJj15LaG9acJapMODTe1wwYa6Z0VHzms2wzcFu/aHOhg2p1I2QiGi+SrUGX4pd0lv6gFdXJBclJWxdrlX81dAcPy3OxBgDVVZ0xh5/r9Z3fBcK84jZsgrdRPfqgD821yD7mfXlUa7s1islvuZOvqA0ezFWymocmsUBRl46zOgsUo6kUH8Zm1gKoM3JJH4Ae/JHeRUrCyrssT49kyGIqqw0O8rs3rIDKjECgIySgKteNTcl0wYmgBVWxEGvnn43JwVrlMI8HF9HTq+wu7SJuqsj1IK1PE44ivGkP5FRpsMtR1/v79BP4mMq6j1PDrfSlPYRdB51zeIILlZu8GfgP24S2M3UjwrtEKsqQj1Fy/97qwQsQ3ABO/SDGPR99MXoImgHnZBxGvjGl4Y4sz9vAyjNNZbXbDA8a/dKjdZuW/ySN1IPpDeLgJKVjEK8D9AWe1oBYNprtPHMqk0=
+	ncdOM/Zj1Z1nHZqV39V2lJzzQMzr4HpPz06L0yKux5VrxbJxjM2TWa+/+mfcwohG+6X7AkxwXz97BUUVts2enrQIc9YWmgnpijBpZiEZEt3Zme7mN3/vb/K9ExqLCyTuxsnqV/ZsPr/dL8M5WOxtG0Gu3+VhQ34/UP3djt83cuSjj8PlybIeCVOyjyP5+SzcwN4ULMT/nte3FveJmf38I+nxaN7dV8PbtfK2WbPxji7EMBwkMcYBlMVCZa3UVmAgoAMFlfNi+KYhHBC/ncP6PwNdfUYGXU8PQa+pk15O1cfJKdIaP55rtaIgK5jshATngN7xHOzPvx5dq0UAVT3HdmVNtTLHnAB/ejzIIkcajhwK2H18WVNU4Q02K2eOZuQHZTqOMIGllX08w2ZN3/Rglahi0PKQrn5koT3/jpp5PtjnmBYf7KAcsSyArB8fgJLiSmNS8NMtY6jmU4C4z+vR2+nEBsV60eH05mfLyAS7cRGI3d24me1xae9qFv9d+UdJ6bW4A4isNqvBUJzG/xZQo0PDA5+vegofOhe60VExnoA=
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(346002)(136003)(396003)(376002)(366004)(478600001)(186003)(16526019)(31696002)(16576012)(316002)(86362001)(36756003)(26005)(2616005)(52116002)(966005)(956004)(83380400001)(2906002)(31686004)(53546011)(8676002)(33964004)(66556008)(8936002)(5660300002)(166002)(66476007)(44832011)(66946007)(6486002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?SWZtUmhCR0ZxbVFWNjM0c2IxSGJjMjg1K2RMcEV2OEFvQk5JTDNSVm4zLzFD?=
- =?utf-8?B?bk4zV3RkeEk5YndlWkx6VXd6aU1MY1NrRCtaZm1KUWxyai93cnNmRTZ3Ujkx?=
- =?utf-8?B?UWlYZS9VeGNpU3ZSaGdLdW9GNmJRNEpHUkRVMy8yQnFqSDBLeWZIbUhMZFV1?=
- =?utf-8?B?VytGZUV1UTUvbjgxYWdQM2JMbEFncGlvdUQ0bWRYclJiT1BKaXMzSWZ1eTdt?=
- =?utf-8?B?WEIwSlRVNHVqVmRGd2xWY2FvZWRKZWdFbEErKzJJd2pZVEc1a2ZrUll2MGFu?=
- =?utf-8?B?eWJCT1RicTY4blNmSVYxeUlONUhIOFE3WnV6bkw2ZUdkN0xjaENRU2FQYUpV?=
- =?utf-8?B?eHYybkRaUmNlampGeUp6UUNBZVF3eEpvK3lyNFR3TmdOZ283dVdQOGwreXYy?=
- =?utf-8?B?YmhwZGxnUGJsZDM3T2RVRUJ5SGhIeG1MUjZCS2g1Q0I2QXFjeWlEWE9CUWNE?=
- =?utf-8?B?V2tUMkd1N3hOS1NmV1UyNllteG91WUEzaGgzNkxsOHZZSGI3TEpoenREeXE4?=
- =?utf-8?B?Tzg1QnhhNXJxWUtKSzNzOXRXeHhUcXlBMnovRUl6Vk1qblZ4TVdKdHM0dHZk?=
- =?utf-8?B?NEhaRUZlTFJSSGxlbW5tTXNVMWs5M1dRekZ1RjhPdzVhaEU2cGRQOHc4WWtO?=
- =?utf-8?B?bndhVjg4anhicld1dnAxWFhSbU44ZEVOcko5WHRIWXd6OVZWeWZrREJVV1M2?=
- =?utf-8?B?a3pCS2ZoZ2d2NTJhM2FWQWMrd0U5UXlySzcxWGRYL0E5NklkNStOeDNtS1FZ?=
- =?utf-8?B?T3Z5SDBibUxDYitMNUVjckJjL04zckVJTnFSQVRINWlCdzFFWEN5ZlJWWi85?=
- =?utf-8?B?SzRvZlZ2WDFSR2QzOGw4Z1NIUHk1dHN3OUFtZkJqYkJaR0dmTGZoNVpMYkh5?=
- =?utf-8?B?dzA3UTJqcDc2bVB5eE9CK2Q1OCtsQkFkRTlKWUx5bWduREN4eUEvL3NDeHgx?=
- =?utf-8?B?dnNUby9mc2VRb0dLVE1JL1ZYWjV2cU1qeDBYaEJtMXFHMHNia3JMQkJoOGtt?=
- =?utf-8?B?MTdCT1BwQVMzdmNXc3JOd2pMRGNoVkJsZk9XaUwveDBuVzNXcThiRG9kNXpx?=
- =?utf-8?B?OXBHSVZudVhQZS9GVnRmdFA3N1F1NW11NmZxSVdaWXFkYmpMd3kzOTlIME5W?=
- =?utf-8?B?Qm5kbTNLU2wwZlVyd0czbGl5UHhmbS9oREEzYkxINmQ4b2JIb2RxMnlsZ3dH?=
- =?utf-8?B?Um10bDNCZEd2N3RncVBlamlnbGJ3STI5ME4ydC91WnMrK3N1a0w0em5BL0Q3?=
- =?utf-8?B?YTkrenE0OVJJWEpPK3c4bisxWUkxL2NEaU5ZR3JJOThSNjErSUhnOHphL0FO?=
- =?utf-8?Q?05MtNrJBzDL+CCiRnRUy/L/TVNkV7W+pxP?=
+	=?utf-8?B?eUdmcFM3RDBjRWF0cVJQSDZsU05zQy9TdXMvRjNJZy9rMm5EUkhQUDRQS0xY?=
+ =?utf-8?B?cnVoRVJGYllwZS9ZKzZqUVBnZkp6MjVZT0d5aXVNMmp1OFBUMHZOSk9sNFZj?=
+ =?utf-8?B?dXdKUFRTS0lUZkFJYmpHOFZXSVl3NzcwU2FkQ1hmUDNKNEs5U1kyN2gwK21K?=
+ =?utf-8?B?eGhwcE1HQnN4WURMc0UxT01sSlM0Q0JkWndRczZWY0pLY1BrMW90OWR3dG16?=
+ =?utf-8?B?c3NqSUw3Z1Vxb1hyRlVGSnd2SVMyQnFPeVNJQ01pOVJCeGExTFB4WlNCZ1Bs?=
+ =?utf-8?B?ZGVqMEorelFTYVhsZ05UQmpaQUtEZTh2Z1dORk1OSkc1QlhveWtrdXEyZ2N4?=
+ =?utf-8?B?S3hVc1ZLZmVnTU4vM21ncG81OVBwancvTUd6MVRka21yekZEaVo3WHlxT0s0?=
+ =?utf-8?B?cENBQUdqLzlyWmtZUVRqd0J2OUt0RTdTbmlONXFiUTFLWDNBTEhqbTdoU3Zq?=
+ =?utf-8?B?MGl5THNWTEpOWVl2bDliejRoWlJOQXRmblI3aStWNjZaN0RtVUhhQ1o2aUts?=
+ =?utf-8?B?SngzM1NYNkh5Q3kyVkNKMTVLYmlXdkE2Sm1tZGFxRFppM0Jaa0VyRVNFSXhr?=
+ =?utf-8?B?bDJOaW9xSm5rZW1obk1MSmF2WWJIZFdiWmVaMHBMTkZHVXFEVFJPcDVPakZT?=
+ =?utf-8?B?b2pjeER4SzFXRXpZMnlqMkFuVnVnTVJnd0MvSEFrSG5YZlZDaWtVbDNJTjJO?=
+ =?utf-8?B?TENpRGxQRlo1M3JjUG1tZmZwNlorK2ltZTNUQkd6Ni9hbkw3TDc3MlZnQjI0?=
+ =?utf-8?B?KzhzYW12TXM3aENPN1poQmhGeHprSGE2elp6RXo4VWN6alAzekRXWlZ3YUdR?=
+ =?utf-8?B?Z0FSUGxXU2ZxajRVbkRLQStNTGk4SDgvektZTlNVSTNQbWI3eWxyTEhSZWE3?=
+ =?utf-8?B?TVNxQjR0MVhvSmNNemtGWGlrUm1uTnRaSFBIUzF2T014QjkxMUZKWDBkZjQy?=
+ =?utf-8?B?RUVqdVNST0VabUtHbnpXWDlHZXV1dzBwZXNzNzdOd3JqMzJpWk9yZzcxeVhY?=
+ =?utf-8?B?ZUdWbXJqOWZyK3JqQmJVaGRqL0g0RTc4Q3dFTHdYWHluUHpLUVgybFpjZFFP?=
+ =?utf-8?B?RzFBQ2FEeUcyaEdoLzY3bjYrZFpXd2ZQVG9oWnM2L0dLV2Y3YVBaV3VrS2pG?=
+ =?utf-8?B?Vlk3VXA1SVEybkl6WDhPUWtCR2dQOG9wUU9zeFVJWFd6b0JseU1UQUlLZUgy?=
+ =?utf-8?B?N0ZPdmJrT2lMejY1S1daems5RnFkazZORlNydUUzOXh6L3E4QWtzUmJZTERx?=
+ =?utf-8?B?WFVoK0FrZjhrNVM2NDZuS2tSclpLS0RTeG54d2pCaDQ3b2xPbVdhWVdNWjNr?=
+ =?utf-8?Q?wryUL9T8XrhOo2NaLFn8z5+w4IryzOheX4?=
 X-OriginatorOrg: windriver.com
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2021 16:03:15.0205
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2021 16:04:07.0135
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-Network-Message-Id: b9faccbb-75c2-4be7-e54e-08d8b3eee822
+X-MS-Exchange-CrossTenant-Network-Message-Id: f70391d4-2b3d-4150-ff95-08d8b3ef0722
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3kWEz6aHqUXZEmRb8M8PqZmNtpFdxaOXXFBv3pnDOWx+UGvmQ0nhvI6j6VUYSWVfc62f3IZ+rK040P+e9fjmWdS9QGGov45hcdhaxd9GEoA=
+X-MS-Exchange-CrossTenant-UserPrincipalName: NdfX8VYc8dyUgEVJ9S9WP11oZ/6PrhTEM6qZRnmRmFkKGGZJiQ5MCH4v6xYw6wgAevEDJtG8jou0/7Bf69gVGDfM+FOiHznyqiDQueMFx/U=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB4896
 Content-Type: multipart/alternative;
- boundary="------------DF5C3143C76D0116F90EE2FB"
+ boundary="------------CA7026E7EA50343AF8CF4C39"
 Content-Language: en-US
 
---------------DF5C3143C76D0116F90EE2FB
+--------------CA7026E7EA50343AF8CF4C39
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 2021-01-05 10:16 a.m., Leon Anavi wrote:
-> - Migrated from Travis and Appveyor to GitHub Actions. This
->    required changes in several areas including dependent packages
->    used for testing and coverage. This did not cause any changes
->    on dependent packages used for the installation of the package.
->
-> License-Update: File changed but the licence remains the same.
+> - Handle c-tab for TERM=linux.
+> - Improve rendering speed of `print_formatted_text`. (Don't render
+>    styling attributes to output between fragments that have
+>    identical styling.)
+> - Gracefully handle `FileHistory` decoding errors.
+> - Prevent asyncio deprecation warnings.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-devtools/python/python3-nocaselist_1.0.3.bb  | 9 ---------
->   .../recipes-devtools/python/python3-nocaselist_1.0.4.bb  | 8 ++++++++
->   2 files changed, 8 insertions(+), 9 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python3-nocaselist_1.0.3.bb
->   create mode 100644 meta-python/recipes-devtools/python/python3-nocaselist_1.0.4.bb
+>   ...prompt-toolkit_3.0.8.bb => python3-prompt-toolkit_3.0.9.bb} | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_3.0.8.bb => python3-prompt-toolkit_3.0.9.bb} (80%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-nocaselist_1.0.3.bb b/meta-python/recipes-devtools/python/python3-nocaselist_1.0.3.bb
-> deleted file mode 100644
-> index 1119c7f38e..0000000000
-> --- a/meta-python/recipes-devtools/python/python3-nocaselist_1.0.3.bb
-> +++ /dev/null
-> @@ -1,9 +0,0 @@
-> -SUMMARY = "A case-insensitive list for Python"
-> -HOMEPAGE = "https://nocaselist.readthedocs.io/en/latest/"
-> -LICENSE = "Apache-2.0"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
-> -
-> -SRC_URI[md5sum] = "42ba878fd70611cf345c61edd83f5fb0"
-> -SRC_URI[sha256sum] = "7e6decb7d85563b9044913c9087ef4b691bc3da4d7ad1d88968cdea409553326"
-> -
-> -inherit pypi setuptools3
-> diff --git a/meta-python/recipes-devtools/python/python3-nocaselist_1.0.4.bb b/meta-python/recipes-devtools/python/python3-nocaselist_1.0.4.bb
-> new file mode 100644
-> index 0000000000..60c79c22a8
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-nocaselist_1.0.4.bb
-> @@ -0,0 +1,8 @@
-> +SUMMARY = "A case-insensitive list for Python"
-> +HOMEPAGE = "https://nocaselist.readthedocs.io/en/latest/"
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=d229da563da18fe5d58cd95a6467d584"
-> +
-> +SRC_URI[sha256sum] = "73a9c0659e7135c66e46a6ab06e2cb637ce9248d73c690ebd31afb72a4e03ac0"
-> +
-> +inherit pypi setuptools3
+> diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.8.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.9.bb
+> similarity index 80%
+> rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.8.bb
+> rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.9.bb
+> index 0debba48d2..589d9398d0 100644
+> --- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.8.bb
+> +++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.9.bb
+> @@ -3,8 +3,7 @@ HOMEPAGE = "https://python-prompt-toolkit.readthedocs.io/"
+>   LICENSE = "BSD-3-Clause"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
+>   
+> -SRC_URI[md5sum] = "cf3ca19873fa9e7f6162296cf6bae419"
+> -SRC_URI[sha256sum] = "25c95d2ac813909f813c93fde734b6e44406d1477a9faef7c915ff37d39c0a8c"
+> +SRC_URI[sha256sum] = "c5eeab58dd31b541442825d7870777f2a2f764eb5fda03334d5219cd84b9722f"
+>   
+>   inherit pypi setuptools3
+>   
 >
 > 
 >
 
---------------DF5C3143C76D0116F90EE2FB
+--------------CA7026E7EA50343AF8CF4C39
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -171,55 +157,41 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2021-01-05 10:16 a.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210105151638.15700-5-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Migrated from Travis and Appveyor to GitHub Actions. This
-  required changes in several areas including dependent packages
-  used for testing and coverage. This did not cause any changes
-  on dependent packages used for the installation of the package.
-
-License-Update: File changed but the licence remains the same.
+    <blockquote type="cite" cite="mid:20210105151638.15700-6-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">- Handle c-tab for TERM=linux.
+- Improve rendering speed of `print_formatted_text`. (Don't render
+  styling attributes to output between fragments that have
+  identical styling.)
+- Gracefully handle `FileHistory` decoding errors.
+- Prevent asyncio deprecation warnings.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210105151638.15700-5-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210105151638.15700-6-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python3-nocaselist_1.0.3.bb  | 9 ---------
- .../recipes-devtools/python/python3-nocaselist_1.0.4.bb  | 8 ++++++++
- 2 files changed, 8 insertions(+), 9 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-nocaselist_1.0.3.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-nocaselist_1.0.4.bb
+ ...prompt-toolkit_3.0.8.bb =&gt; python3-prompt-toolkit_3.0.9.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_3.0.8.bb =&gt; python3-prompt-toolkit_3.0.9.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-nocaselist_1.0.3.bb b/meta-python/recipes-devtools/python/python3-nocaselist_1.0.3.bb
-deleted file mode 100644
-index 1119c7f38e..0000000000
---- a/meta-python/recipes-devtools/python/python3-nocaselist_1.0.3.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--SUMMARY = &quot;A case-insensitive list for Python&quot;
--HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://nocaselist.readthedocs.io/en/latest/">&quot;https://nocaselist.readthedocs.io/en/latest/&quot;</a>
--LICENSE = &quot;Apache-2.0&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327">&quot;file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327&quot;</a>
--
--SRC_URI[md5sum] = &quot;42ba878fd70611cf345c61edd83f5fb0&quot;
--SRC_URI[sha256sum] = &quot;7e6decb7d85563b9044913c9087ef4b691bc3da4d7ad1d88968cdea409553326&quot;
--
--inherit pypi setuptools3
-diff --git a/meta-python/recipes-devtools/python/python3-nocaselist_1.0.4.bb b/meta-python/recipes-devtools/python/python3-nocaselist_1.0.4.bb
-new file mode 100644
-index 0000000000..60c79c22a8
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-nocaselist_1.0.4.bb
-@@ -0,0 +1,8 @@
-+SUMMARY = &quot;A case-insensitive list for Python&quot;
-+HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://nocaselist.readthedocs.io/en/latest/">&quot;https://nocaselist.readthedocs.io/en/latest/&quot;</a>
-+LICENSE = &quot;Apache-2.0&quot;
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=d229da563da18fe5d58cd95a6467d584">&quot;file://LICENSE;md5=d229da563da18fe5d58cd95a6467d584&quot;</a>
-+
-+SRC_URI[sha256sum] = &quot;73a9c0659e7135c66e46a6ab06e2cb637ce9248d73c690ebd31afb72a4e03ac0&quot;
-+
-+inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.8.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.9.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.8.bb
+rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.9.bb
+index 0debba48d2..589d9398d0 100644
+--- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.8.bb
++++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.9.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://python-prompt-toolkit.readthedocs.io/">&quot;https://python-prompt-toolkit.readthedocs.io/&quot;</a>
+ LICENSE = &quot;BSD-3-Clause&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f">&quot;file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f&quot;</a>
+ 
+-SRC_URI[md5sum] = &quot;cf3ca19873fa9e7f6162296cf6bae419&quot;
+-SRC_URI[sha256sum] = &quot;25c95d2ac813909f813c93fde734b6e44406d1477a9faef7c915ff37d39c0a8c&quot;
++SRC_URI[sha256sum] = &quot;c5eeab58dd31b541442825d7870777f2a2f764eb5fda03334d5219cd84b9722f&quot;
+ 
+ inherit pypi setuptools3
+ 
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -231,4 +203,4 @@ index 0000000000..60c79c22a8
   </body>
 </html>
 
---------------DF5C3143C76D0116F90EE2FB--
+--------------CA7026E7EA50343AF8CF4C39--
